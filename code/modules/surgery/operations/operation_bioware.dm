@@ -17,7 +17,7 @@
 	return image('icons/hud/implants.dmi', "lighting_bolt")
 
 /datum/surgery_operation/limb/bioware/all_required_strings()
-	return list("operate on [parse_zone(required_zone)] (target [parse_zone(required_zone)])") + ..()
+	return list("операция на [parse_zone(required_zone)] (цель [parse_zone(required_zone)])") + ..()
 
 /datum/surgery_operation/limb/bioware/all_blocked_strings()
 	var/list/incompatible_surgeries = list()
@@ -28,7 +28,7 @@
 			continue
 		incompatible_surgeries += (other_bioware.rnd_name || other_bioware.name)
 
-	return ..() + list("the patient must not have undergone [english_list(incompatible_surgeries, and_text = " OR ")] prior")
+	return ..() + list("пациент ранее не должен был проходить [english_list(incompatible_surgeries, and_text = " OR ")]")
 
 /datum/surgery_operation/limb/bioware/state_check(obj/item/bodypart/limb)
 	if(limb.body_zone != required_zone)
@@ -43,64 +43,64 @@
 		SSblackbox.record_feedback("tally", "bioware", 1, status_effect_gained)
 
 /datum/surgery_operation/limb/bioware/vein_threading
-	name = "thread veins"
-	rnd_name = "Symvasculodesis (Vein Threading)" // "together vessel fusion"
-	desc = "Weave a patient's veins into a reinforced mesh, reducing blood loss from injuries."
+	name = "Венозная нить"
+	rnd_name = "Симваскулодез (венозная нить)" // "together vessel fusion"
+	desc = "Сплетите вены пациента в усиленную сетку, уменьшая кровопотерю при травмах."
 	status_effect_gained = /datum/status_effect/bioware/heart/threaded_veins
 
 /datum/surgery_operation/limb/bioware/vein_threading/on_preop(obj/item/bodypart/limb, mob/living/surgeon, tool)
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You start weaving [limb.owner]'s blood vessels."),
-		span_notice("[surgeon] starts weaving [limb.owner]'s blood vessels."),
-		span_notice("[surgeon] starts manipulating [limb.owner]'s blood vessels."),
+		span_notice("Вы начинаете плести кровеносную систему [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает плести кровеносную систему [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает манипулировать кровеносной системой [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your entire body burns in agony!")
+	display_pain(limb.owner, "Всё ваше тело горит в агонии!")
 
 /datum/surgery_operation/limb/bioware/vein_threading/on_success(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	. = ..()
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You weave [limb.owner]'s blood vessels into a resistant mesh!"),
-		span_notice("[surgeon] weaves [limb.owner]'s blood vessels into a resistant mesh!"),
-		span_notice("[surgeon] finishes manipulating [limb.owner]'s blood vessels."),
+		span_notice("Вы сплетаете кровеносную систему [limb.owner.declent_ru(GENITIVE)] в прочную сеть!"),
+		span_notice("[surgeon] сплетает кровеносную систему [limb.owner.declent_ru(GENITIVE)] в прочную сеть!"),
+		span_notice("[surgeon] завершает манипуляцию кровеносной системой [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You can feel your blood pumping through reinforced veins!")
+	display_pain(limb.owner, "Вы можете почувствовать, как кровь движется по усиленным венам!")
 
 /datum/surgery_operation/limb/bioware/vein_threading/mechanic
-	rnd_name = "Hydraulics Routing Optimization (Threaded Veins)"
-	desc = "Optimize the routing of a robotic patient's hydraulic system, reducing fluid loss from leaks."
+	rnd_name = "Оптимизация маршрутизации гидравлики (венозная нить)"
+	desc = "Оптимизируйте работу гидравлической системы роботизированного пациента, снижая потери жидкости из-за утечек."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/muscled_veins
-	name = "muscled veins"
-	rnd_name = "Myovasculoplasty (Muscled Veins)" // "muscle vessel reshaping"
-	desc = "Add a muscled membrane to a patient's veins, allowing them to pump blood without a heart."
+	name = "Мышечная мембрана вены"
+	rnd_name = "Миоваскулопластика (мышечная мембрана вены)" // "muscle vessel reshaping"
+	desc = "Добавьте мышечную оболочку к венам пациента, что позволит ему перекачивать кровь без участия сердца."
 	status_effect_gained = /datum/status_effect/bioware/heart/muscled_veins
 
 /datum/surgery_operation/limb/bioware/muscled_veins/on_preop(obj/item/bodypart/limb, mob/living/surgeon, tool)
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You start wrapping muscles around [limb.owner]'s blood vessels."),
-		span_notice("[surgeon] starts wrapping muscles around [limb.owner]'s blood vessels."),
-		span_notice("[surgeon] starts manipulating [limb.owner]'s blood vessels."),
+		span_notice("Вы начинаете обматывать мышцами кровеносные сосуды [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает обматывать мышцами кровеносные сосуды [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает манипулировать кровеносной системой [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your entire body burns in agony!")
+	display_pain(limb.owner, "Всё ваше тело горит в агонии!")
 
 /datum/surgery_operation/limb/bioware/muscled_veins/on_success(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	. = ..()
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You reshape [limb.owner]'s blood vessels, adding a muscled membrane!"),
-		span_notice("[surgeon] reshapes [limb.owner]'s blood vessels, adding a muscled membrane!"),
-		span_notice("[surgeon] finishes manipulating [limb.owner]'s blood vessels."),
+		span_notice("Вы изменяете форму кровеносных сосудов [limb.owner.declent_ru(GENITIVE)], добавляя мышечную оболочку!"),
+		span_notice("[surgeon] изменяет форму кровеносных сосудов  [limb.owner.declent_ru(GENITIVE)], добавляя мышечную оболочку!"),
+		span_notice("[surgeon] завершает манипуляцию кровеносной системой [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You can feel your heartbeat's powerful pulses ripple through your body!")
+	display_pain(limb.owner, "Вы можете чувствовать, как мощные удары вашего сердца разносятся по всему телу!")
 
 /datum/surgery_operation/limb/bioware/muscled_veins/mechanic
 	rnd_name = "Hydraulics Redundancy Subroutine (Muscled Veins)"
@@ -109,9 +109,9 @@
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/nerve_splicing
-	name = "splice nerves"
-	rnd_name = "Symneurodesis (Spliced Nerves)" // "together nerve fusion"
-	desc = "Splice a patient's nerves together to make them more resistant to stuns."
+	name = "Сращивание нервов"
+	rnd_name = "Симневродез (сращивание нервов)" // "together nerve fusion"
+	desc = "Соедините нервы пациента вместе, чтобы сделать их более устойчивыми к оглушению."
 	time = 15.5 SECONDS
 	status_effect_gained = /datum/status_effect/bioware/nerves/spliced
 
@@ -119,32 +119,32 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You start splicing together [limb.owner]'s nerves."),
-		span_notice("[surgeon] starts splicing together [limb.owner]'s nerves."),
-		span_notice("[surgeon] starts manipulating [limb.owner]'s nervous system."),
+		span_notice("Вы начинаете соединять нервы  [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает соединять нервы [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает манипулировать нервной системой [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your entire body goes numb!")
+	display_pain(limb.owner, "Все ваше тело немеет!")
 
 /datum/surgery_operation/limb/bioware/nerve_splicing/on_success(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	. = ..()
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You successfully splice [limb.owner]'s nervous system!"),
-		span_notice("[surgeon] successfully splices [limb.owner]'s nervous system!"),
-		span_notice("[surgeon] finishes manipulating [limb.owner]'s nervous system."),
+		span_notice("Вы успешно сращиваете нервную систему [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] успешно сращивает нервную систему [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] завершает манипулирование нервной системой[limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You regain feeling in your body; It feels like everything's happening around you in slow motion!")
+	display_pain(limb.owner, "Вы вновь обретаете чувствительность в своем теле; вам кажется, что всё происходит вокруг вас в замедлении!")
 
 /datum/surgery_operation/limb/bioware/nerve_splicing/mechanic
-	rnd_name = "System Automatic Reset Subroutine (Spliced Nerves)"
-	desc = "Upgrade a robotic patient's automatic systems, allowing it to better resist stuns."
+	rnd_name = "Подпрограмма автоматического сброса системы (сращивание нервов)"
+	desc = "Модернизируйте автоматические системы роботизированного пациента, чтобы он мог лучше противостоять оглушению."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/nerve_grounding
-	name = "ground nerves"
-	rnd_name = "Xanthoneuroplasty (Grounded Nerves)" // "yellow nerve reshaping". see: yellow gloves
+	name = "Заземление нервов"
+	rnd_name = "Ксантоневропластика (заземление нервов)" // "yellow nerve reshaping". see: yellow gloves
 	desc = "Reroute a patient's nerves to act as grounding rods, protecting them from electrical shocks."
 	time = 15.5 SECONDS
 	status_effect_gained = /datum/status_effect/bioware/nerves/grounded
