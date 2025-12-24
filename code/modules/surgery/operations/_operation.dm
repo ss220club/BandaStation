@@ -10,7 +10,7 @@
  */
 /mob/living/proc/perform_surgery(mob/living/patient, potential_tool = IMPLEMENT_HAND, intentionally_fail = FALSE)
 	if(DOING_INTERACTION(src, (HAS_TRAIT(src, TRAIT_HIPPOCRATIC_OATH) ? patient : DOAFTER_SOURCE_SURGERY)))
-		patient.balloon_alert(src, "уже проводится операция!")
+		patient.balloon_alert(src, "операция уже проводится!")
 		return ITEM_INTERACT_BLOCKING
 
 	// allow cyborgs to use "hands"
@@ -43,7 +43,7 @@
 		else if(!IS_LYING_OR_CANNOT_LIE(patient))
 			patient.balloon_alert(src, "не лежит!")
 		else
-			patient.balloon_alert(src, "ничего общего с [realtool.name]!")
+			patient.balloon_alert(src, "ничего не сделать с данным инструментом!")
 		//  ...then, block attacking. prevents the surgeon from viciously stabbing the patient on a mistake
 		return ITEM_INTERACT_BLOCKING
 
@@ -103,7 +103,7 @@
 			potential_options = list(potential_options)
 		for(var/datum/radial_menu_choice/radial_slice as anything in potential_options)
 			if(operations[radial_slice])
-				stack_trace("Обнаружена дублирующаяся опция радиальной хирургии '[radial_slice.name]'  для операции типа '[operation.type]'.")
+				stack_trace("Duplicate radial surgery option '[radial_slice.name]' detected for operation '[operation.type]'.")
 				continue
 			var/option_specific_info = potential_options[radial_slice] || list("[OPERATION_ACTION]" = "default")
 			operations[radial_slice] = list(operation, operate_on, option_specific_info)
@@ -131,9 +131,9 @@
 		return ITEM_INTERACT_BLOCKING
 
 	visible_message(
-		span_notice("[declent_ru(NOMINATIVE)] пытается закрыть [p_their()] свою [limb.plaintext_zone] с помощью [tool.declent_ru(GENITIVE)]..."),
+		span_notice("[declent_ru(NOMINATIVE)] пытается закрыть [ru_p_theirs()] [limb.plaintext_zone] с помощью [tool.declent_ru(GENITIVE)]..."),
 		span_notice("Вы пытаетесь закрыть свою [limb.plaintext_zone] с помощью [tool.declent_ru(GENITIVE)]..."),
-		span_hear("Вы слышите звуки."),
+		span_hear("Вы слышите пение."),
 		vision_distance = 5,
 		visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 	)
@@ -147,9 +147,9 @@
 		return ITEM_INTERACT_BLOCKING
 
 	visible_message(
-		span_notice("[declent_ru(NOMINATIVE)] закрывает [p_their()] свою [limb.plaintext_zone] с помощью [tool.declent_ru(GENITIVE)]."),
+		span_notice("[declent_ru(NOMINATIVE)] закрывает [ru_p_theirs()] [limb.plaintext_zone] с помощью [tool.declent_ru(GENITIVE)]."),
 		span_notice("Вы закрываете свою [limb.plaintext_zone] с помощью [tool.declent_ru(GENITIVE)]."),
-		span_hear("Вы слышите звуки."),
+		span_hear("Вы слышите пение."),
 		vision_distance = 5,
 		visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 	)
