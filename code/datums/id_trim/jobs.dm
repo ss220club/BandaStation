@@ -249,9 +249,9 @@
 		ACCESS_WEAPONS,
 	)
 	extra_access = list()
-	/// SS220 remove some jobs from id card console start
+	/// BANDASTATION REMOVAL START remove jobs from id card console
 	template_access = null
-	/// SS220 remove some jobs from id card console end
+	/// BANDASTATION REMOVAL END remove jobs from id card console
 	job = /datum/job/bridge_assistant
 	honorifics = list("Подчинённый", "Ассистент", "Помощник")
 	honorific_positions = HONORIFIC_POSITION_FIRST | HONORIFIC_POSITION_LAST | HONORIFIC_POSITION_FIRST_FULL | HONORIFIC_POSITION_NONE
@@ -1310,9 +1310,9 @@
 		ACCESS_WEAPONS,
 	)
 	extra_access = list()
-	/// SS220 remove some jobs from id card console start
+	/// BANDASTATION REMOVAL START remove jobs from id card console
 	template_access = null
-	/// SS220 remove some jobs from id card console end
+	/// BANDASTATION REMOVAL END remove jobs from id card console
 	job = /datum/job/veteran_advisor
 	big_pointer = TRUE
 	honorifics = list("Генерал", "Ген.")
