@@ -11,32 +11,32 @@
 		"moving" = FALSE,
 	)
 	description = list(
-		"The Path of Rust revolves around durability, corruption and brute forcing your way through obstacles.",
-		"Pick this path if you enjoy a standing your ground and letting the fight come to you.",
+		"Путь ржавчины посвящен стойкости, разложению и преодолению препятствий с помощью грубой силы.",
+		"Выбирайте этот путь, если вам нравится находиться на своей территории и позволять сражению прийти к вам самим.",
 	)
 	pros = list(
-		"Standing on rusted tiles makes you highly durable; regenerating wounds and removing stuns.",
-		"Rusted tiles harm your foes and slow them down.",
-		"You are able to destroy walls, objects, mechs, structures and airlocks with ease.",
-		"You can instantly obliterate silicons or synthetic crew members with your Mansus Grasp.",
-		"You have a high amount of disruption abilities to make it easier to fight in your territory.",
+		"Стоя на ржавом полу, вы становитесь очень стойким, регенерируете раны и снимаете оглушение.",
+		"Ржавый пол наносит урон вашим врагам и замедляют их.",
+		"Вы можете с легкостью разрушать стены, предметы, мехов, сооружения и шлюзы.",
+		"Вы можете мгновенно уничтожить силиконов или синтетических членов экипажа с помощью Mansus Grasp.",
+		"У вас есть множество способностей, позволяющих с легкостью сражаться на своей территории.",
 	)
 	cons = list(
-		"Extremely overt; throws stealth completely out as an option.",
-		"If you are not on rusted tiles, you become significantly more vulnerable.",
-		"Being locked to a territorial conflict makes it much easier to use destructive tools (like bombs) against you.",
-		"Your high amount of defensive power is at the cost of offensive power.",
+		"Чрезвычайно открытый; полностью исключает возможность скрытности.",
+		"Если вы не стоите на ржавых плитках, вы становитесь гораздо более уязвимыми.",
+		"Будучи запертым в рамках своей территории, гораздо проще использовать против вас разрушительные средства (такие как бомбы).",
+		"Ваша высокая защитная способность достигается за счет снижения атакующей силы.",
 	)
 	tips = list(
-		"Your Mansus Grasp will instantly destroy mechs, silicons and androids. Hitting a marked target with your blade will cause heavy disgust and make them vomit, knocking them down briefly.",
-		"Your Mansus Grasp and your spells are capable of rusting walls and floors, making them beneficial to you and harmful to the crew and silicons. Spread rust as much as possible.",
-		"Rusted turfs will heal you, regulate your blood temperature, make you resistant to batons knockdown, regenerate your stamina and blood and heal your wound and limbs once you level up your passive.",
-		"Always fight on your turf. Your opponent entering your turf are at a significant disadvantage.",
-		"Your Reassembled Raiment is only empowered while you are on your rusted tiles. If you want the most out of its power, stay on your rusted tiles.",
-		"Your ability to destroy objects and walls improves as your passive ugprade increases; eventually you will be able to melt through airlocks, reinforced walls and even titanium walls.",
-		"Spreading rust can be fairly slow, especially early on. Consider summoning a few rust walkers to help you expand your domain.",
-		"Rusted Construction allows you to produce barriers for cover or escape, or even block off someone else's escape in a pinch. Make the most of it to manipulate the environment to your needs.",
-	)
+		"Ваш Mansus Grasp мгновенно уничтожает мехов, силиконов и андроидов. Попадание вашим клинком по помеченной цели вызывает сильное отвращение и рвоту, на короткое время сбивая их с ног.",
+		"Ваш Mansus Grasp и ваши заклинания способны вызывать ржавчину на стенах и полах, что приносит вам пользу и наносит вред экипажу и силиконам. Распространяйте ржавчину как можно больше.",
+		"Ржавые покрытия исцеляют вас, регулируют температуру крови, делают вас устойчивыми к ударам дубинками, восстанавливают вашу выносливость и кровь, а также исцеляют ваши раны и конечности, как только вы повысите уровень своей пассивной способности.",
+		"Всегда сражайтесь на своей территории. Ваш противник, вторгшийся на вашу территорию, находится в крайне невыгодном положении.",
+		"Reassembled Raiment получает усиление только тогда, когда вы находитесь на ржавых плитах. Если вы хотите максимально использовать его силу, оставайтесь на ржавых плитах.",
+		"Ваша способность разрушать объекты и стены улучшается по мере улучшения пассивного умения; в конечном итоге вы сможете расплавлять шлюзы, укрепленные стены и даже титановые стены.",
+		"Распространение ржавчины может быть довольно медленным, особенно на ранних этапах. Подумайте о том, чтобы вызвать несколько ржавых ходоков, которые помогут вам расширить ваши владения.",
+		"Rusted Construction позволяет создавать барьеры для укрытия или побега, а в крайнем случае даже блокировать путь к спасению для других. Используйте эту возможность, чтобы манипулировать окружающей средой в своих интересах.",
+)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_rust
 	knowledge_tier1 = /datum/heretic_knowledge/spell/area_conversion
@@ -104,8 +104,7 @@
 
 /datum/heretic_knowledge/spell/rust_charge
 	name = "Rust Charge"
-	desc = "A charge that must be started on a rusted tile and will destroy any rusted objects you come into contact with, will deal high damage to others and rust around you during the charge."
-	gain_text = "The hills sparkled now, as I neared them my mind began to wander. I quickly regained my resolve and pushed forward, this last leg would be the most treacherous."
+	desc = "Заряд, который необходимо начать на ржавой плитке и который уничтожит все ржавые объекты, с которыми вы соприкоснетесь, нанесет большой урон другим и разносит ржавчину вокруг вас на время действия."
 
 	action_to_add = /datum/action/cooldown/mob_cooldown/charge/rust
 	cost = 2
@@ -121,11 +120,11 @@
 	cost = 2
 
 /datum/heretic_knowledge/armor/rust
-	desc = "Allows you to transmute a table (or a suit), a mask and any trash item to create a Salvaged Remains. \
-			Has extra armor, tackle resistance and syringe immunity while standing on rust. \
-			Acts as a focus while hooded."
-	gain_text = "From beneath warped scrap, the Blacksmith pulls forth an ancient fabric. \
-				\"Whatever this once stood for is lost. So now, we give it new purpose.\""
+	desc = Позволяет трансмутировать стол (или костюм), маску и любой мусор, чтобы создать Salvaged Remains. \
+			Дает дополнительную броню, сопротивление захвату и иммунитет к шприцам, когда находится на ржавчине. \
+			Позволяет сфокусироваться при надетом капюшоне."
+	gain_text = ""Из-под искореженного металлолома кузнец извлекает древнюю ткань. \
+				\"Все, что когда-то символизировало это - утрачено. Поэтому сейчас мы придаем ему новое значение.\""
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/rust)
 	research_tree_icon_state = "rust_armor"
 	required_atoms = list(
