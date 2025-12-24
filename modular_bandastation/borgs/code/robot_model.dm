@@ -26,7 +26,7 @@
 	borg_skins = list(
 		"Mopgearrex" = list(SKIN_ICON_STATE = "janitor", SKIN_ICON = CYBORG_ICON, SKIN_HAT_OFFSET = list("north" = list(0, -1), "south" = list(0, -1), "east" = list(-4, -1), "west" = list(4, -1))),
 		"Can" = list(SKIN_ICON_STATE = "canjan", SKIN_ICON = CYBORG_ICON, SKIN_HAT_OFFSET = list("north" = list(0, 3), "south" = list(0, 3), "east" = list(0, 3), "west" = list(0, 3))),
-		"Spider" = list(SKIN_ICON_STATE = "spidersci", SKIN_ICON = CYBORG_ICON),
+		"Spider" = list(SKIN_ICON_STATE = "spiderjan", SKIN_ICON = CYBORG_ICON),
 		"JanBot" = list(SKIN_ICON_STATE = "janbot", SKIN_ICON = CYBORG_ICON, SKIN_HAT_OFFSET = list("north" = list(0, -1), "south" = list(0, -1), "east" = list(0, -1), "west" = list(0, -1)))
 	)
 
