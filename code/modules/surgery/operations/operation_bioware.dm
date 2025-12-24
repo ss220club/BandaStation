@@ -153,100 +153,100 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You start rerouting [limb.owner]'s nerves."),
-		span_notice("[surgeon] starts rerouting [limb.owner]'s nerves."),
-		span_notice("[surgeon] starts manipulating [limb.owner]'s nervous system."),
+		span_notice("Вы начинаете перенаправлять нервы [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает перенаправлять нервы [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает манипулировать нервной системой [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your entire body goes numb!")
+	display_pain(limb.owner, "Все ваше тело немеет!")
 
 /datum/surgery_operation/limb/bioware/nerve_grounding/on_success(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	. = ..()
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You successfully reroute [limb.owner]'s nervous system!"),
-		span_notice("[surgeon] successfully reroutes [limb.owner]'s nervous system!"),
-		span_notice("[surgeon] finishes manipulating [limb.owner]'s nervous system."),
+		span_notice("Вы успешно перенаправляете нервную систему [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] успешно перенаправляет нервы [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] завершает манипулирование нервной системой [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You regain feeling in your body! You feel energized!")
+	display_pain(limb.owner, "Вы возвращаете своему телу ощущение свежести! Вы чувствуете прилив сил!")
 
 /datum/surgery_operation/limb/bioware/nerve_grounding/mechanic
-	rnd_name = "System Shock Dampening (Grounded Nerves)"
-	desc = "Install grounding rods into a robotic patient's nervous system, protecting it from electrical shocks."
+	rnd_name = "Система гашения ударов (заземление нервов)"
+	desc = "Установите заземляющие стержни в нервную систему роботизированного пациента, защищая её от поражения электрическим током."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/ligament_hook
-	name = "reshape ligaments"
-	rnd_name = "Arthroplasty (Ligament Hooks)" // "joint reshaping"
-	desc = "Reshape a patient's ligaments to allow limbs to be manually reattached if severed - at the cost of making them easier to detach."
+	name = "Изменение формы связок"
+	rnd_name = "Артропластика (крюк для связок)" // "joint reshaping"
+	desc = "Измените форму связок пациента, чтобы в случае отсоединения конечности её можно было прикрепить вручную, за счет облегчения отсоединения конечностей."
 	status_effect_gained = /datum/status_effect/bioware/ligaments/hooked
 
 /datum/surgery_operation/limb/bioware/ligament_hook/on_preop(obj/item/bodypart/limb, mob/living/surgeon, tool)
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You start reshaping [limb.owner]'s ligaments into a hook-like shape."),
-		span_notice("[surgeon] starts reshaping [limb.owner]'s ligaments into a hook-like shape."),
-		span_notice("[surgeon] starts manipulating [limb.owner]'s ligaments."),
+		span_notice("Вы начинаете придавать связкам [limb.owner.declent_ru(GENITIVE)] форму крючка."),
+		span_notice("[surgeon] начинает перестраивать связки [limb.owner.declent_ru(GENITIVE)], придавая им форму крючка."),
+		span_notice("[surgeon] начинает манипулировать связками [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your limbs burn with severe pain!")
+	display_pain(limb.owner, "Ваши конечности горят от сильной боли!")
 
 /datum/surgery_operation/limb/bioware/ligament_hook/on_success(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	. = ..()
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You reshape [limb.owner]'s ligaments into a connective hook!"),
-		span_notice("[surgeon] reshapes [limb.owner]'s ligaments into a connective hook!"),
-		span_notice("[surgeon] finishes manipulating [limb.owner]'s ligaments."),
+		span_notice("Вы придаете связкам [limb.owner.declent_ru(GENITIVE)] форму крючка!"),
+		span_notice("[surgeon] придает связкам [limb.owner.declent_ru(GENITIVE)] форму крючка!"),
+		span_notice("[surgeon] заканчивает манипулирование связками [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your limbs feel... strangely loose.")
+	display_pain(limb.owner, "Ваши конечности кажутся... странно свободными.")
 
 /datum/surgery_operation/limb/bioware/ligament_hook/mechanic
-	rnd_name = "Anchor Point Snaplocks (Ligament Hooks)"
-	desc = "Refactor a robotic patient's limb joints to allow for rapid deatchment, allowing limbs to be manually reattached if severed - \
-		at the cost of making them easier to detach as well."
+	rnd_name = "Защелкивающиеся точки крепления (крюк для связок)"
+	desc = "Преобразуйте суставы конечностей роботизированного пациента таким образом, чтобы обеспечить быструю фиксацию и возможность повторного прикрепления конечностей вручную в случае их отсоединения - \
+		за счет того, что конечности легче отсоединить."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/ligament_reinforcement
-	name = "strengthen ligaments"
-	rnd_name = "Arthrorrhaphy (Ligament Reinforcement)" // "joint strengthening" / "joint stitching"
-	desc = "Strengthen a patient's ligaments to make dismemberment more difficult, at the cost of making nerve connections easier to interrupt."
+	name = "Укрепление связок"
+	rnd_name = "Артрорафия (укрепление связок)" // "joint strengthening" / "joint stitching"
+	desc = "Укрепляет связки пациента, чтобы затруднить расчленение за счет облегчения прерывания нервных связей."
 	status_effect_gained = /datum/status_effect/bioware/ligaments/reinforced
 
 /datum/surgery_operation/limb/bioware/ligament_reinforcement/on_preop(obj/item/bodypart/limb, mob/living/surgeon, tool)
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You start reinforcing [limb.owner]'s ligaments."),
-		span_notice("[surgeon] starts reinforcing [limb.owner]'s ligaments."),
-		span_notice("[surgeon] starts manipulating [limb.owner]'s ligaments."),
+		span_notice("Вы начинаете укреплять связки [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает укреплять связки [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает манипулировать связками [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your limbs burn with severe pain!")
+	display_pain(limb.owner, "Ваши конечности горят от сильной боли!")
 
 /datum/surgery_operation/limb/bioware/ligament_reinforcement/on_success(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	. = ..()
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You reinforce [limb.owner]'s ligaments!"),
-		span_notice("[surgeon] reinforces [limb.owner]'s ligaments!"),
-		span_notice("[surgeon] finishes manipulating [limb.owner]'s ligaments."),
+		span_notice("Вы укрепляете связки [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] укрепляет связки [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] заканчивает манипулирование связками [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your limbs feel more secure, but also more frail.")
+	display_pain(limb.owner, "Ваши конечности чувствуют себя более защищенными, но также более хрупкими.")
 
 /datum/surgery_operation/limb/bioware/ligament_reinforcement/mechanic
-	rnd_name = "Anchor Point Reinforcement (Ligament Reinforcement)"
-	desc = "Reinforce a robotic patient's limb joints to prevent dismemberment, at the cost of making nerve connections easier to interrupt."
+	rnd_name = "Укрепление опорной точки (укрепление связок)"
+	desc = "Укрепите суставы конечностей роботизированного пациента, чтобы предотвратить расчленение, за счет облегчения разрыва нервных связей."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/cortex_folding
-	name = "cortex folding"
-	rnd_name = "Encephalofractoplasty (Cortex Folding)" // it's a stretch - "brain fractal reshaping"
-	desc = "A biological upgrade which folds a patient's cerebral cortex into a fractal pattern, increasing neural density and flexibility."
+	name = "Складывание коры"
+	rnd_name = "Энцефалофрактопластика (складывание коры)" // it's a stretch - "brain fractal reshaping"
+	desc = "Биологическая модернизация, которая преобразует кору головного мозга пациента во фрактальный узор, повышая плотность и гибкость нейронов."
 	status_effect_gained = /datum/status_effect/bioware/cortex/folded
 	required_zone = BODY_ZONE_HEAD
 
@@ -254,22 +254,22 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You start folding [limb.owner]'s cerebral cortex."),
-		span_notice("[surgeon] starts folding [limb.owner]'s cerebral cortex."),
-		span_notice("[surgeon] starts performing surgery on [limb.owner]'s brain."),
+		span_notice("Вы начинаете складывать внешнюю кору головного мозга у [limb.owner.declent_ru(NOMINATIVE)] во фрактальный узор."),
+		span_notice("[surgeon] начинает складывать внешнюю кору головного мозга у [limb.owner.declent_ru(NOMINATIVE)] во фрактальный узор."),
+		span_notice("[surgeon] начинает проводить операцию на мозге у [limb.owner.declent_ru(NOMINATIVE)]."),
 	)
-	display_pain(limb.owner, "Your head throbs with gruesome pain, it's nearly too much to handle!")
+	display_pain(limb.owner, "Ваша голова раскалывается от ужасной боли, с ней почти невозможно справиться!")
 
 /datum/surgery_operation/limb/bioware/cortex_folding/on_success(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	. = ..()
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You fold [limb.owner]'s cerebral cortex into a fractal pattern!"),
-		span_notice("[surgeon] folds [limb.owner]'s cerebral cortex into a fractal pattern!"),
-		span_notice("[surgeon] completes the surgery on [limb.owner]'s brain."),
+		span_notice("Вы складываете внешнюю кору головного мозга у [limb.owner.declent_ru(NOMINATIVE)] во фрактальный узор!"),
+		span_notice("[surgeon] складывает внешнюю кору головного мозга у [limb.owner.declent_ru(NOMINATIVE)] во фрактальный узор!"),
+		span_notice("[surgeon] завершает операцию на мозге у [limb.owner.declent_ru(NOMINATIVE)]."),
 	)
-	display_pain(limb.owner, "Your brain feels stronger... and more flexible!")
+	display_pain(limb.owner, "Ваш мозг становится сильнее... более гибким!")
 
 /datum/surgery_operation/limb/bioware/cortex_folding/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool)
 	if(!limb.owner.get_organ_slot(ORGAN_SLOT_BRAIN))
@@ -277,24 +277,24 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_warning("You screw up, damaging the brain!"),
-		span_warning("[surgeon] screws up, damaging the brain!"),
-		span_notice("[surgeon] completes the surgery on [limb.owner]'s brain."),
+		span_warning("Вы ошибаетесь, повреждая мозг!"),
+		span_warning("[surgeon] ошибается, нанеся повреждения мозгу!"),
+		span_notice("[surgeon] завершает операцию на мозге у [limb.owner.declent_ru(NOMINATIVE)]."),
 	)
-	display_pain(limb.owner, "Your head throbs with excruciating pain!")
+	display_pain(limb.owner, "Ваша голова раскалывается от мучительной боли!")
 	limb.owner.adjust_organ_loss(ORGAN_SLOT_BRAIN, 60)
 	limb.owner.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_LOBOTOMY)
 
 /datum/surgery_operation/limb/bioware/cortex_folding/mechanic
-	rnd_name = "Wetware OS Labyrinthian Programming (Cortex Folding)"
-	desc = "Reprogram a robotic patient's neural network in a downright eldritch programming language, giving space to non-standard neural patterns."
+	rnd_name = "Лабиринтное программирование Wetware OS (складывание коры)"
+	desc = "Перепрограммируйте нейронную сеть роботизированного пациента на совершенно необычном языке программирования, предоставив пространство для нестандартных нейронных паттернов."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 /datum/surgery_operation/limb/bioware/cortex_imprint
-	name = "cortex imprinting"
-	rnd_name = "Encephalopremoplasty (Cortex Imprinting)" // it's a stretch - "brain print reshaping"
-	desc = "A biological upgrade which carves a patient's cerebral cortex into a self-imprinting pattern, increasing neural density and resilience."
+	name = "Отпечаток коры"
+	rnd_name = "Энцефалопластика (отпечаток коры)" // it's a stretch - "brain print reshaping"
+	desc = "Биологическая модернизация, которая формирует самозапечатлевающийся узор на коре головного мозга пациента, увеличивая плотность и устойчивость нервных клеток."
 	status_effect_gained = /datum/status_effect/bioware/cortex/imprinted
 	required_zone = BODY_ZONE_HEAD
 
@@ -302,22 +302,22 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You start carving [limb.owner]'s outer cerebral cortex into a self-imprinting pattern."),
-		span_notice("[surgeon] starts carving [limb.owner]'s outer cerebral cortex into a self-imprinting pattern."),
-		span_notice("[surgeon] starts performing surgery on [limb.owner]'s brain."),
+		span_notice("Вы начинаете вырезать на внешней коре головного мозга [limb.owner.declent_ru(GENITIVE)] самопечатающийся шаблон."),
+		span_notice("[surgeon] начинает вырезать на внешней коре головного мозга [limb.owner.declent_ru(GENITIVE)] самопечатающийся шаблон."),
+		span_notice("[surgeon]  начинает проводить операцию на мозге [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your head throbs with gruesome pain, it's nearly too much to handle!")
+	display_pain(limb.owner, "Ваша голова раскалывается от ужасной боли, с ней почти невозможно справиться!")
 
 /datum/surgery_operation/limb/bioware/cortex_imprint/on_success(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	. = ..()
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You reshape [limb.owner]'s outer cerebral cortex into a self-imprinting pattern!"),
-		span_notice("[surgeon] reshapes [limb.owner]'s outer cerebral cortex into a self-imprinting pattern!"),
-		span_notice("[surgeon] completes the surgery on [limb.owner]'s brain."),
+		span_notice("Вы преобразуете внешнюю кору головного мозга [limb.owner.declent_ru(GENITIVE)] в самопечатающийся шаблон!"),
+		span_notice("[surgeon] перестраивает внешнюю кору головного мозга [limb.owner.declent_ru(GENITIVE)] в самопечатающийся шаблон!"),
+		span_notice("[surgeon] завершает операцию на мозге у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your brain feels stronger... and more resilient!")
+	display_pain(limb.owner, "Ваш мозг становится сильнее... более устойчивым!")
 
 /datum/surgery_operation/limb/bioware/cortex_imprint/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool)
 	if(!limb.owner.get_organ_slot(ORGAN_SLOT_BRAIN))
@@ -325,17 +325,17 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_warning("You screw up, damaging the brain!"),
-		span_warning("[surgeon] screws up, damaging the brain!"),
-		span_notice("[surgeon] completes the surgery on [limb.owner]'s brain."),
+		span_warning("Вы ошибаетесь, повреждая мозг!"),
+		span_warning("[surgeon] ошибается, нанеся повреждения мозгу!"),
+		span_notice("[surgeon] завершает операцию на мозге [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your brain throbs with intense pain; Thinking hurts!")
+	display_pain(limb.owner, "Голова раскалывается от ужасной боли; от одной мысли об этом уже начинает болеть голова!")
 	limb.owner.adjust_organ_loss(ORGAN_SLOT_BRAIN, 60)
 	limb.owner.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_LOBOTOMY)
 
 /datum/surgery_operation/limb/bioware/cortex_imprint/mechanic
-	rnd_name = "Wetware OS Ver 2.0 (Cortex Imprinting)"
-	desc = "Update a robotic patient's operating system to a \"newer version\", improving overall performance and resilience. \
-		Shame about all the adware."
+	rnd_name = "Wetware OS Версия 2.0 (отпечаток коры)"
+	desc = "Обновите операционную систему роботизированного пациента до 'новой версии', повысив общую производительность и надежность. \
+		Жаль, что все это рекламное ПО."
 	required_bodytype = BODYTYPE_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
