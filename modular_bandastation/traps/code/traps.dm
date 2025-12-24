@@ -1,32 +1,41 @@
+// MARK: Traps
+// Ez-Briz изобрел трапов
 #define IS_OPEN(parent) isgroundlessturf(parent)
 
 /obj/structure/trap/punji
-	name = "punji trap"
-	desc = "Буэбээбэбэ?"
-	icon_state = "trap-shock"
+	name = ""
+	desc = ""
+	icon = 'modular_bandastation/events/avangarde17/icons/obj.dmi'
+	icon_state = "spike_trap"
 	time_between_triggers = 1 SECONDS
-	alpha = 10
-	var/damage_for_each_leg = 10
+	var/damage_for_each_leg = 15
 
 /obj/structure/trap/punji/trap_effect(mob/living/victim)
-	to_chat(victim, span_bolddanger("ЛОВУШКА!!!! УААААААА!!!!"))
+	to_chat(victim, span_bolddanger("Ловушка!"))
 	victim.apply_damage(damage_for_each_leg, BRUTE, BODY_ZONE_L_LEG)
 	victim.apply_damage(damage_for_each_leg, BRUTE, BODY_ZONE_R_LEG)
-	victim.apply_damage(100, STAMINA)
-	playsound(loc, 'sound/items/airhorn/airhorn.ogg', 100)
-	new /obj/structure/punji_sticks(loc)
+	victim.apply_damage(40, STAMINA)
+	playsound(loc, 'modular_bandastation/events/avangarde17/audio/spike.ogg', 100)
+	new /obj/structure/punji_sticks/steel(loc)
 
 	QDEL_IN(src, 1 SECONDS)
 
 /obj/structure/trap/punji/flare()
 	return
 
+/obj/structure/punji_sticks/steel
+	name = "steel spikes"
+	desc = "Don't step on this."
+	icon = 'modular_bandastation/events/avangarde17/icons/obj.dmi'
+	icon_state = "steel_punji"
+
+// Trap door
 /obj/structure/trap/trapdoor
-	name = "trapdoor trap"
-	desc = "Буабаабаба?"
+	name = ""
+	desc = ""
 	icon_state = "trap-shock"
 	time_between_triggers = 6 SECONDS
-	alpha = 10
+	alpha = 0
 	var/disappear_time = 5 SECONDS
 	var/trapdoor_baseturfs = list()
 	var/trapdoor_turf_path
@@ -40,10 +49,10 @@
 	trapdoor_baseturfs += /turf/baseturf_skipover/trapdoor
 
 /obj/structure/trap/trapdoor/trap_effect(mob/living/victim)
-	to_chat(victim, span_bolddanger("ВОВУШКА!!!! УЭЭЭЭЭЭЭ!!!!"))
+	to_chat(victim, span_bolddanger("Ловушка!"))
 	toggle_trapdoor()
-	addtimer(CALLBACK(src, PROC_REF(toggle_trapdoor)), disappear_time) // Убрать если оставляем открытым
-	// QDEL_IN(src, 1 SECONDS) // Раскоментить, если хотим одноразку
+	//addtimer(CALLBACK(src, PROC_REF(toggle_trapdoor)), disappear_time) // Убрать если оставляем открытым
+	QDEL_IN(src, 1 SECONDS) // Раскоментить, если хотим одноразку
 
 /obj/structure/trap/trapdoor/proc/toggle_trapdoor()
 	SIGNAL_HANDLER

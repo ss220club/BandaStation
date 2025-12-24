@@ -114,6 +114,27 @@
 	phone_icon = "bell-concierge"
 	was_renamed = TRUE
 
+/obj/structure/transmitter/ussp
+	phone_category = PHONE_NET_PUBLIC
+	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE)
+	greyscale_colors = "#b10a0a"
+	phone_icon = "shield-halved"
+	was_renamed = TRUE
+
+/obj/structure/transmitter/ussp_militsia
+	phone_category = PHONE_NET_BRIDGE
+	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE)
+	greyscale_colors = "#b10a0a"
+	phone_icon = "shield-halved"
+	was_renamed = TRUE
+
+/obj/structure/transmitter/ussp_army
+	phone_category = PHONE_NET_BRIDGE
+	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE)
+	greyscale_colors = "#283803"
+	phone_icon = "shield-halved"
+	was_renamed = TRUE
+
 // The CentCom line. Call anyone anytime.
 /obj/structure/transmitter/centcom
 	phone_category = PHONE_NET_CENTCOM
