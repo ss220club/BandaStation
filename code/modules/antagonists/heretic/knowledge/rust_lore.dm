@@ -105,7 +105,7 @@
 /datum/heretic_knowledge/spell/rust_charge
 	name = "Rust Charge"
 	desc = "Заряд, который необходимо начать на ржавой плитке и который уничтожит все ржавые объекты, с которыми вы соприкоснетесь, нанесет большой урон другим и разносит ржавчину вокруг вас на время действия."
-
+	gain_text = "The hills sparkled now, as I neared them my mind began to wander. I quickly regained my resolve and pushed forward, this last leg would be the most treacherous."
 	action_to_add = /datum/action/cooldown/mob_cooldown/charge/rust
 	cost = 2
 	is_final_knowledge = TRUE
