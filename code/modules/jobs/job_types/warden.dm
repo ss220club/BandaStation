@@ -4,7 +4,6 @@
 		когда их время подходит к концу, следите за арсеналом, выступайте в роли сотрудника безопасности \
 		после того, как они все умрут."
 	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
-	department_head = list(JOB_HEAD_OF_SECURITY)
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1

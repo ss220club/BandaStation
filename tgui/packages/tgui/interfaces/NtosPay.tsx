@@ -75,7 +75,7 @@ const Introduction = (props) => {
       <Table>
         <Table.Row>Привет, {name}.</Table.Row>
         <Table.Row>Ваш платежный токен {owner_token}.</Table.Row>
-        <Table.Row>Баланс: {money} кр.</Table.Row>
+        <Table.Row>Баланс: {money}¢</Table.Row>
       </Table>
     </Section>
   );

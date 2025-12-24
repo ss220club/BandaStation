@@ -50,20 +50,30 @@
 		return NONE
 	if(attack_type == PROJECTILE_ATTACK)
 		return NONE
-	if(!prob(block_chance))
+
+	var/blocking_text = "блокируете"
+	var/blocking_text_s = "блокирует"
+	var/potential_block_chance = block_chance
+
+	if(attack_type == OVERWHELMING_ATTACK)
+		blocking_text = "уклоняетесь"
+		blocking_text_s = "уклоняется"
+		potential_block_chance = clamp(round(potential_block_chance / (attack_type == OVERWHELMING_ATTACK ? 2 : 1), 1), 0, 100)
+
+	if(!prob(potential_block_chance))
 		return NONE
 
 	var/mob/living/attacker = GET_ASSAILANT(hitby)
 	if(istype(attacker) && cqc_user.Adjacent(attacker))
 		cqc_user.visible_message(
-			span_danger("[capitalize(cqc_user.declent_ru(NOMINATIVE))] блокирует [attack_text] и выкручивает руку [attacker.declent_ru(GENITIVE)] за [attacker.ru_p_them()] спиной!"),
-			span_userdanger("Вы блокируете [attack_text]!"),
+			span_danger("[capitalize(cqc_user.declent_ru(NOMINATIVE))] [blocking_text_s] [attacker] и выкручивает руку [attacker.declent_ru(GENITIVE)] за [attacker.ru_p_them()] спиной!"),
+			span_userdanger("Вы [blocking_text] [attack_text]!"),
 		)
 		attacker.Stun(4 SECONDS)
 	else
 		cqc_user.visible_message(
-			span_danger("[capitalize(cqc_user.declent_ru(NOMINATIVE))] блокирует [attack_text]!"),
-			span_userdanger("Вы блокируете [attack_text]!"),
+			span_danger("[capitalize(cqc_user.declent_ru(NOMINATIVE))] [blocking_text_s] [attack_text]!"),
+			span_userdanger("Вы [blocking_text] [attack_text]!"),
 		)
 	return SUCCESSFUL_BLOCK
 

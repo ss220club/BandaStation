@@ -423,7 +423,7 @@ ADMIN_VERB(lag_switch_panel, R_ADMIN, "Show Lag Switches", "Display the controls
 	dat += "</body></html>"
 	user << browse(dat.Join(), "window=lag_switch_panel;size=420x480")
 
-ADMIN_VERB(spawn_panel, R_SPAWN, "Spawn Panel", "Spawn Panel (TGUI).", ADMIN_CATEGORY_GAME)
+ADMIN_VERB(spawn_panel, R_SPAWN, "Game Panel", "Game Panel (TGUI).", ADMIN_CATEGORY_GAME) // BANDASTATION EDIT: More handy verb
 	var/datum/spawnpanel/panel = user.holder.spawn_panel
 	if(!panel)
 		panel = new()
