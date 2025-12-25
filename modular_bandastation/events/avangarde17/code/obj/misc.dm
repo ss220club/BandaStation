@@ -6,12 +6,6 @@
 	icon = 'modular_bandastation/events/avangarde17/icons/crates.dmi'
 	icon_state = "crates"
 
-/obj/structure/guncase/akm
-	name = "AKM locker"
-	desc = "A locker that holds modern Sable AKM."
-	case_type = "AKM"
-	gun_category = /obj/item/gun/ballistic/automatic/sabel/auto/modern/no_mag
-
 /obj/structure/lep
 	name = "вышка ЛЭП"
 	desc = "Молчат..."
@@ -34,6 +28,9 @@
 	density = TRUE
 	bound_width = 64
 	bound_height = 96
+
+/obj/structure/btr/wrench_act(mob/living/user, obj/item/tool)
+	return TRUE
 
 // Колонны, обелиски и прочее из Вторжения 2
 /obj/structure/tomb
@@ -343,3 +340,49 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/calendar/ussp, 32)
 	icon_state = "wise_tree"
 	pixel_x = -48
 	pixel_y = -20
+
+//LAMPPOST
+/obj/structure/lamppost
+	name = "фонарный столб"
+	desc = "Типовое уличное освещение - залог безопасных дворов!"
+	icon = 'modular_bandastation/events/avangarde17/icons/32x96_statue.dmi'
+	anchored = TRUE
+	density = TRUE
+	icon_state = "lamppost"
+	base_icon_state = "lamppost"
+	light_range = 8
+	light_power = 1.5
+	light_color = "#e2d225"
+	layer = ABOVE_MOB_LAYER
+
+/obj/structure/lamppost/wrench_act(mob/living/user, obj/item/tool)
+	return TRUE
+
+//CIGPACK RENAME
+/obj/item/storage/fancy/cigarettes/cigpack_robust
+	name = "сигареты ''Прима''"
+	desc = "Как в детстве."
+
+/obj/item/cigarette/robust
+	desc = "Сигарета ''Прима''."
+
+/obj/item/storage/fancy/cigarettes/cigpack_uplift
+	name = "папиросы ''Беломорканал''"
+	desc = "Острожно! От одной затяжки можно выплевать лёгкие."
+
+/obj/item/cigarette/uplift
+	desc = "Папироска ''Беломорканал''."
+
+/obj/machinery/vending/cigarette/ussp
+	name = "сигаретный автомат"
+	product_slogans = "Космосигареты хороши на вкус, какими они и должны быть.;Курение убивает, но не сегодня!;Курите!;Не верьте исследованиям - курите сегодня!"
+	product_ads = "Наверняка не вредно!;Не верьте ученым!;На здоровье!;Не бросайте курить, купите ещё!;Курите!;Никотиновый рай.;Лучшие сигареты с 2150 года.;Сигареты с множеством наград."
+	products = list(
+		/obj/item/storage/fancy/cigarettes/cigpack_uplift = 15,
+		/obj/item/storage/fancy/cigarettes/cigpack_robust = 15,
+	)
+	premium = list(
+		/obj/item/storage/box/matches = 10,
+		/obj/item/lighter = 3,
+	)
+	refill_canister = /obj/item/vending_refill/cigarette/syndicate

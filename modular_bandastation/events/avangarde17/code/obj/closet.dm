@@ -27,3 +27,24 @@
 	new /obj/item/storage/belt/military/army/ussp(src)
 	for(var/i in 1 to 3)
 		new /obj/item/restraints/handcuffs(src)
+
+//Ганкейсы
+/obj/item/storage/toolbox/guncase/akm
+	name = "ящик с АКМ"
+	desc = "Металлический ящик с оружием внутри."
+	icon_state = "sakhno_case"
+	inhand_icon_state = "sakhno_case"
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/sabel/auto/army/alt
+	extra_to_spawn = /obj/item/ammo_box/magazine/c762x39mm
+
+/obj/item/storage/toolbox/guncase/akm/PopulateContents()
+	new weapon_to_spawn (src)
+	for(var/i in 1 to 3)
+		new extra_to_spawn (src)
+	new /obj/item/gun/ballistic/automatic/pistol/zashch(src)
+	for(var/i in 1 to 2)
+		new /obj/item/ammo_box/magazine/zashch(src)
+
+/obj/structure/closet/secure_closet/army
+	name = "армейский шкаф"
+	icon_state = "armory"

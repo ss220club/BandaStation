@@ -204,6 +204,83 @@
 	name = "Старый Ангар - Общага"
 	icon_state = "awaycontent5"
 
+// MARK: Военная база
+/area/awaymission/avangarde17/inside/base
+	name = "ГРК-4 - Военная База"
+	icon_state = "awaycontent1"
+
+/area/awaymission/avangarde17/inside/base_zampolit
+	name = "ГРК-4 - Кабинет Замполита"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/base_comendant
+	name = "ГРК-4 - Кабинет Коменданта"
+	icon_state = "awaycontent3"
+
+/area/awaymission/avangarde17/inside/base_briefroom
+	name = "ГРК-4 - Зал Собраний"
+	icon_state = "awaycontent4"
+
+/area/awaymission/avangarde17/inside/base_prapor
+	name = "ГРК-4 - Коморка Прапора"
+	icon_state = "awaycontent5"
+
+/area/awaymission/avangarde17/inside/base_barracs
+	name = "ГРК-4 - Казармы"
+	icon_state = "awaycontent6"
+
+/area/awaymission/avangarde17/inside/base_smokeroom
+	name = "ГРК-4 - Курилка"
+	icon_state = "awaycontent7"
+
+/area/awaymission/avangarde17/inside/base_kitchen
+	name = "ГРК-4 - Столовая"
+	icon_state = "awaycontent8"
+
+/area/awaymission/avangarde17/inside/base_hospital
+	name = "ГРК-4 - Лазарет"
+	icon_state = "awaycontent9"
+
+/area/awaymission/avangarde17/inside/base_surgery
+	name = "ГРК-4 - Операционная"
+	icon_state = "awaycontent10"
+
+/area/awaymission/avangarde17/inside/base_research
+	name = "ГРК-4 - Научный Блок"
+	icon_state = "awaycontent11"
+
+/area/awaymission/avangarde17/inside/base_cargo
+	name = "ГРК-4 - Пункт Досмотра"
+	icon_state = "awaycontent12"
+
+/area/awaymission/avangarde17/inside/base_hangar
+	name = "ГРК-4 - Ангар"
+	icon_state = "awaycontent13"
+
+/area/awaymission/avangarde17/inside/base_controlroom
+	name = "ГРК-4 - Диспетчерская"
+	icon_state = "awaycontent14"
+
+/area/awaymission/avangarde17/inside/base_mining
+	name = "ГРК-4 - Шахтерский Ангар"
+	icon_state = "awaycontent15"
+
+/area/awaymission/avangarde17/inside/base_eng
+	name = "ГРК-4 - Трансформаторная будка"
+	icon_state = "awaycontent16"
+
+/area/awaymission/avangarde17/inside/base_post1
+	name = "ГРК-4 - Будка"
+	icon_state = "awaycontent17"
+
+/area/awaymission/avangarde17/inside/base_post2
+	name = "ГРК-4 - Будка Досмотра"
+	icon_state = "awaycontent18"
+
+/area/awaymission/avangarde17/inside/base_garage
+	name = "ГРК-4 - Гараж"
+	icon_state = "awaycontent19"
+
 // MARK: Дом 1 - Подъезд 1
 /area/awaymission/avangarde17/inside/house_1
 	name = "Советская 2 - Подъезд 1"
