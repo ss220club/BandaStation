@@ -100,7 +100,7 @@
 	var/projectile_origin_z = 0
 	var/projectile_type = /obj/projectile/bullet/arrow
 	var/projectile_fire_sound = 'sound/items/weapons/fwoosh.ogg'
-	var/projectile_origin_radius = 5
+	var/projectile_origin_radius = 1
 
 /obj/structure/trap/projectile_trap/Initialize(mapload)
 	. = ..()
