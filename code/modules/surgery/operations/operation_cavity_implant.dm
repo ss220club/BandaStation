@@ -143,7 +143,7 @@
 /datum/surgery_operation/limb/undo_cavity_implant/get_radial_options(obj/item/bodypart/chest/limb, obj/item/tool, operating_zone)
 	// Not bothering to cache this as the chance of hitting the same cavity item in the same round is rather low
 	var/datum/radial_menu_choice/option = new()
-	option.name = "Извлечить [declent_ru(limb.cavity_item, ACCUSATIVE)]"
+	option.name = "Извлечь [declent_ru(limb.cavity_item, ACCUSATIVE)]"
 	option.info = "Заменить [limb.cavity_item.declent_ru(ACCUSATIVE)] имплантированный в грудной полости пациента."
 	option.image = get_generic_limb_radial_image(BODY_ZONE_CHEST)
 	option.image.overlays += add_radial_overlays(limb.cavity_item)

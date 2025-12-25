@@ -1,6 +1,6 @@
 /datum/surgery_operation/limb/add_dental_implant
-	name = "add dental implant"
-	desc = "Implant a pill into a patient's teeth."
+	name = "Добавление зубного импланта"
+	desc = "Имплантация таблетки в зубы пациента."
 	implements = list(
 		/obj/item/reagent_containers/applicator/pill = 1,
 	)
@@ -9,9 +9,9 @@
 
 /datum/surgery_operation/limb/add_dental_implant/all_required_strings()
 	. = list()
-	. += "operate on mouth (target mouth)"
+	. += "операция на рту (цель рот)"
 	. += ..()
-	. += "the mouth must have teeth"
+	. += "во рту должны быть зубы"
 
 /datum/surgery_operation/limb/add_dental_implant/get_default_radial_image()
 	return image('icons/hud/implants.dmi', "reagents")
@@ -36,9 +36,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to wedge [tool] in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
-		span_notice("[surgeon] begins to wedge \the [tool] in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
-		span_notice("[surgeon] begins to wedge something in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("Вы начинаете вставлять [tool] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает вставлять [tool] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает что-то вставлять в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Something's being jammed into your [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
@@ -54,14 +54,14 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You wedge [tool] into [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
-		span_notice("[surgeon] wedges [tool] into [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]!"),
-		span_notice("[surgeon] wedges something into [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]!"),
+		span_notice("Вы запихиваете [tool] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] запихивает [tool] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] запихивает что-то в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
 /datum/surgery_operation/limb/remove_dental_implant
-	name = "remove dental implant"
-	desc = "Remove a dental implant from a patient's teeth."
+	name = "Уаление зубного импланта"
+	desc = "Удаление зубного имплантата из зубов пациента."
 	implements = list(
 		TOOL_HEMOSTAT = 1,
 		IMPLEMENT_HAND = 1,
@@ -85,11 +85,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin looking in [limb.owner.declent_ru(GENITIVE)]'s mouth for dental implants..."),
-		span_notice("[surgeon] begins to look in [limb.owner.declent_ru(GENITIVE)]'s mouth."),
-		span_notice("[surgeon] begins to examine [limb.owner.declent_ru(GENITIVE)]'s teeth."),
+		span_notice("Вы начинаете искать во рту у [limb.owner.declent_ru(GENITIVE)] зубные импланты..."),
+		span_notice("[surgeon] начинает заглядывать в рот [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает осматривать зубы [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel fingers poke around at your teeth.")
+	display_pain(limb.owner, "Вы чувствуете, как пальцы ощупывают ваши зубы.")
 
 /datum/surgery_operation/limb/remove_dental_implant/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	var/list/pills = list()
@@ -99,9 +99,9 @@
 		display_results(
 			surgeon,
 			limb.owner,
-			span_notice("You don't find any dental implants in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
-			span_notice("[surgeon] doesn't find any dental implants in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
-			span_notice("[surgeon] finishes examining [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+			span_notice("Вы не нашли никаких зубных имплантатов в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+			span_notice("[surgeon] не нашел никаких зубных имплантатов в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+			span_notice("[surgeon] заканчивает изучение [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 		)
 		return
 
@@ -114,14 +114,14 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You carefully remove [yoinked] from [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
-		span_notice("[surgeon] carefully removes [yoinked] from [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
-		span_notice("[surgeon] carefully removes something from [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("Вы аккуратно извлекаете [yoinked] из [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] аккуратно извлекает [yoinked] из [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] аккуратно извлекает что-то из [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 
 // Teeth pill code
 /datum/action/item_action/activate_pill
-	name = "Activate Pill"
+	name = "Активация таблетки"
 	check_flags = NONE
 
 /datum/action/item_action/activate_pill/IsAvailable(feedback)
@@ -130,11 +130,11 @@
 	return ..()
 
 /datum/action/item_action/activate_pill/do_effect(trigger_flags)
-	owner.balloon_alert_to_viewers("[owner] grinds their teeth!", "you grit your teeth")
+	owner.balloon_alert_to_viewers("[owner] скрипит зубами!", "вы стискиваете зубы")
 	if(!do_after(owner, owner.stat * (2.5 SECONDS), owner,  IGNORE_USER_LOC_CHANGE | IGNORE_INCAPACITATED))
 		return FALSE
 	var/obj/item/pill = target
-	to_chat(owner, span_notice("You grit your teeth and burst the implanted [pill.name]!"))
+	to_chat(owner, span_notice("Вы стискиваете зубы и раздавливаете имплантированную [pill.name]!"))
 	owner.log_message("swallowed an implanted pill, [pill]", LOG_ATTACK)
 	pill.reagents.trans_to(owner, pill.reagents.total_volume, transferred_by = owner, methods = INGEST)
 	qdel(pill)
