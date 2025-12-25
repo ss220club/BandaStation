@@ -175,7 +175,7 @@
 
 	if(prob(KILL_PROB))
 		var/list/active_ais = active_ais(skip_syndicate = TRUE)
-		if(active_ais.len && GLOB.joined_player_list.len && prob(DESTROY_AI_PROB(GLOB.joined_player_list.len))) // BANDASTATION EDIT: null reference check
+		if(active_ais.len && GLOB.joined_player_list.len && prob(DESTROY_AI_PROB(GLOB.joined_player_list.len))) // BANDASTATION EDIT: div by zero check
 			var/datum/objective/destroy/destroy_objective = new()
 			destroy_objective.owner = owner
 			destroy_objective.find_target()
