@@ -43,6 +43,10 @@
 	density = TRUE
 	layer = ABOVE_ALL_MOB_LAYER
 
+/obj/structure/tomb/wrench_act(mob/living/user, obj/item/tool)
+	to_chat(user, span_warning("Серьезно?"))
+	return TRUE
+
 /obj/structure/tomb/tomb_2
 	name = "разрушенная колонна из черного камня"
 	desc = "Полуразрушенная колонна из черного камня... Прямо как из ваших снов!"
@@ -352,7 +356,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/calendar/ussp, 32)
 	base_icon_state = "lamppost"
 	light_range = 8
 	light_power = 1.5
-	light_color = "#e2d225"
+	light_color = "#cbcbc3"
 	layer = ABOVE_MOB_LAYER
 
 /obj/structure/lamppost/wrench_act(mob/living/user, obj/item/tool)

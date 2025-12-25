@@ -8,7 +8,7 @@
 
 /obj/structure/closet/secure_closet/armory4/PopulateContents()
 	..()
-	new /obj/item/gun/ballistic/automatic/sabel/auto(src)
+	new /obj/item/gun/ballistic/automatic/sabel/auto/short(src)
 	for(var/i in 1 to 4)
 		new /obj/item/ammo_box/magazine/c762x39mm/small(src)
 
@@ -48,3 +48,9 @@
 /obj/structure/closet/secure_closet/army
 	name = "армейский шкаф"
 	icon_state = "armory"
+
+/obj/structure/guncase/akm
+	name = "AKM gun locker"
+	desc = "A locker that holds AKM rifles."
+	case_type = "wt550"
+	gun_category = /obj/item/gun/ballistic/automatic/sabel/auto/army/alt

@@ -14,41 +14,35 @@
 	icon_state = "awaycontent2"
 	base_lighting_alpha = 120
 	requires_power = FALSE
-	static_lighting = FALSE
 
 /area/awaymission/avangarde17/outside/mountains
 	name = "Горы"
 	icon_state = "awaycontent3"
 	requires_power = FALSE
-	static_lighting = FALSE
 	base_lighting_alpha = 120
 
 /area/awaymission/avangarde17/outside/city
 	name = "ПГТ \"Зорька\""
 	icon_state = "awaycontent4"
 	requires_power = FALSE
-	static_lighting = FALSE
 	base_lighting_alpha = 120
 
 /area/awaymission/avangarde17/outside/base
 	name = "Военная База \"ГРК-4\""
 	icon_state = "awaycontent5"
 	requires_power = FALSE
-	static_lighting = FALSE
 	base_lighting_alpha = 120
 
 /area/awaymission/avangarde17/outside/ruin
 	name = "Руины"
 	icon_state = "awaycontent6"
 	requires_power = FALSE
-	static_lighting = FALSE
 	base_lighting_alpha = 120
 
 /area/awaymission/avangarde17/outside/roofs
 	name = "Крыша"
 	icon_state = "awaycontent7"
 	requires_power = FALSE
-	static_lighting = FALSE
 	base_lighting_alpha = 120
 
 // Зоны пещер и помещений

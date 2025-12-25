@@ -34,12 +34,16 @@
 	desc = "Проклятые чёрные врата забытого храма. Кажется, вы видели их во снах..."
 	icon = 'modular_bandastation/events/avangarde17/icons/gate_part.dmi'
 	icon_state = "left"
-	max_integrity = 1000
+	max_integrity = 9999
 	anchored = TRUE
 	density = TRUE
 	opacity = FALSE
 	layer = BELOW_MOB_LAYER
 	color = "#adadad"
+
+/obj/structure/gate_part/wrench_act(mob/living/user, obj/item/tool)
+	to_chat(user, span_warning("Серьезно?"))
+	return TRUE
 
 /obj/structure/gate_part/right
 	icon_state = "right"

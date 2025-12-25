@@ -41,6 +41,10 @@
 	to_chat(viewer, span_hypnophrase(msg))
 	INVOKE_ASYNC(viewer, TYPE_PROC_REF(/mob, emote), "tremble")
 
+/obj/structure/statue/forgoten/wrench_act(mob/living/user, obj/item/tool)
+	to_chat(user, span_warning("Серьезно?"))
+	return TRUE
+
 /obj/structure/statue/forgoten/broke
 	name = "разрушенная статуя забытой твари"
 	desc = "Даже руины этой статуи наводят неистовый страх... Прямо как в ваших снах."
