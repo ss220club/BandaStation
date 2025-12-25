@@ -10069,6 +10069,10 @@
 /area/awaymission/avangarde17/outside/base)
 "fAK" = (
 /obj/structure/table/wood,
+/obj/machinery/ticket_machine/talon{
+	pixel_x = 0;
+	pixel_y = 17
+	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/gov/second_floor)
 "fAL" = (
