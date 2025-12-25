@@ -46,6 +46,11 @@ GLOBAL_VAR(antag_prototypes)
 	else
 		var/obj_count = 1
 		for(var/datum/objective/objective as anything in objectives)
+			// BANDASTATION EDIT START: null reference removal
+			if(!objective)
+				objectives -= null
+				continue
+			// BANDASTATION EDIT END: null reference removal
 			result += "<B>[obj_count]</B>: [objective.explanation_text] \
 				<a href='byond://?src=[REF(owner)];obj_edit=[REF(objective)]'>Edit</a> \
 				<a href='byond://?src=[REF(owner)];obj_delete=[REF(objective)]'>Delete</a> \
