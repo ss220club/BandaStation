@@ -27,7 +27,7 @@
 /obj/structure/holopay/examine(mob/user)
 	. = ..()
 	if(force_fee)
-		. += span_boldnotice("This holopay forces a payment of <b>[force_fee]</b> credit\s per swipe instead of a variable amount.")
+		. += span_boldnotice("This holopay forces a payment of <b>[force_fee]</b> [MONEY_NAME_AUTOPURAL(force_fee)] per swipe instead of a variable amount.")
 
 /obj/structure/holopay/Initialize(mapload)
 	. = ..()
@@ -80,7 +80,7 @@
 		return ..()
 	/// Users can pay with an ID to skip the UI
 	if(isidcard(held_item))
-		if(force_fee && tgui_alert(item_holder, "This holopay has a [force_fee] cr fee. Confirm?", "Holopay Fee", list("Pay", "Cancel")) != "Pay")
+		if(force_fee && tgui_alert(item_holder, "This holopay has a [force_fee][MONEY_SYMBOL] fee. Confirm?", "Holopay Fee", list("Pay", "Cancel")) != "Pay")
 			return TRUE
 		process_payment(user)
 		return TRUE
@@ -290,10 +290,10 @@
 	/// Pay the owner
 	linked_card.registered_account.adjust_money(amount, "Holopay: [name]")
 	/// Make alerts
-	linked_card.registered_account.bank_card_talk("[payee] has deposited [amount] cr at your holographic pay stand.")
+	linked_card.registered_account.bank_card_talk("[payee] has deposited [amount][MONEY_SYMBOL] at your holographic pay stand.")
 	say("Thank you for your patronage, [payee]!")
 	playsound(src, 'sound/effects/cashregister.ogg', 20, TRUE)
 	/// Log the event
-	log_econ("[amount] credits were transferred from [payee]'s transaction to [linked_card.registered_account.account_holder]")
+	log_econ("[amount][MONEY_NAME] were transferred from [payee]'s transaction to [linked_card.registered_account.account_holder]")
 	SSblackbox.record_feedback("amount", "credits_transferred", amount)
 	return TRUE
