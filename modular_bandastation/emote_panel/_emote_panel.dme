@@ -10,3 +10,4 @@
 #include "code/skrell.dm"
 #include "code/tajaran.dm"
 #include "code/vulpkanin.dm"
+#include "code/kidan.dm"

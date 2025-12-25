@@ -52,6 +52,7 @@
 		/datum/species/jelly = /obj/item/reagent_containers/blood/toxin,
 		/// BANDASTATION ADDITION START - Species
 		/datum/species/skrell = /obj/item/reagent_containers/blood/skrell,
+		/datum/species/kidan = /obj/item/reagent_containers/blood/kidan,
 		/datum/species/moth = /obj/item/reagent_containers/blood/moth,
 		/// BANDASTATION ADDITION END - Species
 	)

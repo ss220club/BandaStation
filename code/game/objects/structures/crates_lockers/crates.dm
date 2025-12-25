@@ -288,6 +288,7 @@
 	new /obj/item/reagent_containers/blood/ethereal(src)
 	/// BANDASTATION ADDITION START - Species
 	new /obj/item/reagent_containers/blood/skrell(src)
+	new /obj/item/reagent_containers/blood/kidan(src)
 	new /obj/item/reagent_containers/blood/moth(src)
 	/// BANDASTATION ADDITION END - Species
 	for(var/i in 1 to 3)

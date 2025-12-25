@@ -19,6 +19,7 @@
 		/obj/item/reagent_containers/blood/ethereal,
 		/// BANDASTATION ADDITION START - Species
 		/obj/item/reagent_containers/blood/skrell,
+		/obj/item/reagent_containers/blood/kidan,
 		/obj/item/reagent_containers/blood/moth,
 		/// BANDASTATION ADDITION END - Species
 		/obj/item/paper/fluff/jobs/medical/blood_types,
