@@ -140,6 +140,7 @@
 		if(generated == job_objective)
 			job_objective = null
 		objectives += generated
+	list_clear_nulls(objectives) // BANDASTATION EDIT: Safety for uplink and TP
 
 /**
  * ## forge_ending_objective
