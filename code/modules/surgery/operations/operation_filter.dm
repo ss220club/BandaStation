@@ -38,8 +38,8 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("[tool] completes a cycle filtering [limb.owner]'s blood."),
-		span_notice("[tool] whirrs as it filters [limb.owner]'s blood."),
+		span_notice("[tool] completes a cycle filtering [limb.owner.declent_ru(GENITIVE)]'s blood."),
+		span_notice("[tool] whirrs as it filters [limb.owner.declent_ru(GENITIVE)]'s blood."),
 		span_notice("[tool] whirrs as it pumps."),
 	)
 
@@ -50,8 +50,8 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_warning("You screw up, bruising [limb.owner]'s chest!"),
-		span_warning("[surgeon] screws up, bruising [limb.owner]'s chest!"),
+		span_warning("You screw up, bruising [limb.owner.declent_ru(GENITIVE)]'s chest!"),
+		span_warning("[surgeon] screws up, bruising [limb.owner.declent_ru(GENITIVE)]'s chest!"),
 		span_warning("[surgeon] screws up!"),
 	)
 	limb.receive_damage(5, damage_source = tool)

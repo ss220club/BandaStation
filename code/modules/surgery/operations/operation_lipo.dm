@@ -48,19 +48,19 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to cut away [limb.owner]'s excess fat..."),
-		span_notice("[surgeon] begins to cut away [limb.owner]'s excess fat."),
-		span_notice("[surgeon] begins to cut [limb.owner]'s [limb.plaintext_zone] with [tool]."),
+		span_notice("You begin to cut away [limb.owner.declent_ru(GENITIVE)]'s excess fat..."),
+		span_notice("[surgeon] begins to cut away [limb.owner.declent_ru(GENITIVE)]'s excess fat."),
+		span_notice("[surgeon] begins to cut [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [tool]."),
 	)
-	display_pain(limb.owner, "You feel a stabbing in your [limb.plaintext_zone]!")
+	display_pain(limb.owner, "You feel a stabbing in your [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/lipoplasty/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You successfully remove excess fat from [limb.owner]'s body!"),
-		span_notice("[surgeon] successfully removes excess fat from [limb.owner]'s body!"),
-		span_notice("[surgeon] finishes cutting away excess fat from [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You successfully remove excess fat from [limb.owner.declent_ru(GENITIVE)]'s body!"),
+		span_notice("[surgeon] successfully removes excess fat from [limb.owner.declent_ru(GENITIVE)]'s body!"),
+		span_notice("[surgeon] finishes cutting away excess fat from [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
 	limb.owner.overeatduration = 0 //patient is unfatted
 	var/removednutriment = limb.owner.nutrition

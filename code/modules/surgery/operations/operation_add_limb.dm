@@ -179,9 +179,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете прикреплять [tool.singular_name] [limb] к телу [limb.owner]."),
-		span_notice("[surgeon] начинает прикреплять [tool.singular_name] [limb] к телу [limb.owner]."),
-		span_notice("[surgeon] начинает прикреплять [tool.singular_name] к телу [limb.owner]."),
+		span_notice("Вы начинаете прикреплять [tool.singular_name] [limb] к телу [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает прикреплять [tool.singular_name] [limb] к телу [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает прикреплять [tool.singular_name] к телу [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	var/obj/item/bodypart/chest = limb.owner.get_bodypart(BODY_ZONE_CHEST)
 	display_pain(limb.owner, "[surgeon] прикрепляет [tool.singular_name] [limb] к вашему телу!", IS_ROBOTIC_LIMB(chest))
@@ -190,8 +190,8 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы заканчиваете прикреплять [tool.apply_verb] [limb]  к телу [limb.owner]."),
-		span_notice("[surgeon] заканчивает прикреплять [tool.apply_verb] [limb] к телу [limb.owner]."),
+		span_notice("Вы заканчиваете прикреплять [tool.apply_verb] [limb]  к телу [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] заканчивает прикреплять [tool.apply_verb] [limb] к телу [limb.owner.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] завершает процедуру [tool.apply_verb]!"),
 	)
 	var/obj/item/bodypart/chest = limb.owner.get_bodypart(BODY_ZONE_CHEST)

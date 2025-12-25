@@ -55,11 +55,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете аугментировать [limb.name] [limb.owner] с помощью [tool]..."),
-		span_notice("[surgeon] начинает аугментировать [limb.name] [limb.owner] с помощью [tool]."),
-		span_notice("[surgeon] начинает аугментировать [limb.name] [limb.owner]."),
+		span_notice("Вы начинаете аугментировать [limb.name] [limb.owner.declent_ru(GENITIVE)] с помощью [tool]..."),
+		span_notice("[surgeon] начинает аугментировать [limb.name] [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает аугментировать [limb.name] [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Вы чувствуете ужасную боль в своей [limb.plaintext_zone]!")
+	display_pain(limb.owner, "Вы чувствуете ужасную боль в своей [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/replace_limb/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/bodypart/tool, list/operation_args)
 	if(!surgeon.temporarilyRemoveItemFromInventory(tool))
@@ -83,9 +83,9 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("Вы успешно аугментируете [limb.plaintext_zone] [patient] с помощью [tool]!"),
-		span_notice("[surgeon] успешно аугментирует [limb.plaintext_zone] [patient] с помощью [tool]!"),
-		span_notice("[surgeon] завершает аугментацию [limb.plaintext_zone] [patient]."),
+		span_notice("Вы успешно аугментируете [limb.ru_plaintext_zone[PREPOSITIONAL]] [patient] с помощью [tool]!"),
+		span_notice("[surgeon] успешно аугментирует [limb.ru_plaintext_zone[PREPOSITIONAL]] [patient] с помощью [tool]!"),
+		span_notice("[surgeon] завершает аугментацию [limb.ru_plaintext_zone[PREPOSITIONAL]] [patient]."),
 	)
-	display_pain(patient, "Ваша [limb.plaintext_zone] наполняется непривычными синтетическими ощущениями!", TRUE)
+	display_pain(patient, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] наполняется непривычными синтетическими ощущениями!", TRUE)
 	log_combat(surgeon, patient, "augmented", addition = "выдал новую [tool]")

@@ -36,11 +36,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to wedge [tool] in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to wedge \the [tool] in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to wedge something in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to wedge [tool] in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
+		span_notice("[surgeon] begins to wedge \the [tool] in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] begins to wedge something in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
-	display_pain(limb.owner, "Something's being jammed into your [limb.plaintext_zone]!")
+	display_pain(limb.owner, "Something's being jammed into your [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/add_dental_implant/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	// Pills go into head
@@ -54,9 +54,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You wedge [tool] into [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] wedges [tool] into [limb.owner]'s [limb.plaintext_zone]!"),
-		span_notice("[surgeon] wedges something into [limb.owner]'s [limb.plaintext_zone]!"),
+		span_notice("You wedge [tool] into [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] wedges [tool] into [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]!"),
+		span_notice("[surgeon] wedges something into [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]!"),
 	)
 
 /datum/surgery_operation/limb/remove_dental_implant
@@ -85,9 +85,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin looking in [limb.owner]'s mouth for dental implants..."),
-		span_notice("[surgeon] begins to look in [limb.owner]'s mouth."),
-		span_notice("[surgeon] begins to examine [limb.owner]'s teeth."),
+		span_notice("You begin looking in [limb.owner.declent_ru(GENITIVE)]'s mouth for dental implants..."),
+		span_notice("[surgeon] begins to look in [limb.owner.declent_ru(GENITIVE)]'s mouth."),
+		span_notice("[surgeon] begins to examine [limb.owner.declent_ru(GENITIVE)]'s teeth."),
 	)
 	display_pain(limb.owner, "You feel fingers poke around at your teeth.")
 
@@ -99,9 +99,9 @@
 		display_results(
 			surgeon,
 			limb.owner,
-			span_notice("You don't find any dental implants in [limb.owner]'s [limb.plaintext_zone]."),
-			span_notice("[surgeon] doesn't find any dental implants in [limb.owner]'s [limb.plaintext_zone]."),
-			span_notice("[surgeon] finishes examining [limb.owner]'s [limb.plaintext_zone]."),
+			span_notice("You don't find any dental implants in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+			span_notice("[surgeon] doesn't find any dental implants in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+			span_notice("[surgeon] finishes examining [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 		)
 		return
 
@@ -114,9 +114,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You carefully remove [yoinked] from [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] carefully removes [yoinked] from [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] carefully removes something from [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You carefully remove [yoinked] from [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] carefully removes [yoinked] from [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] carefully removes something from [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
 
 // Teeth pill code

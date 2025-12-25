@@ -41,21 +41,21 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете отсекать [limb.plaintext_zone] у [limb.owner] ..."),
-		span_notice("[surgeon] начинает отсекать [limb.plaintext_zone] у [limb.owner]."),
-		span_notice("[surgeon] начинает отсекать [limb.plaintext_zone] у [limb.owner] с помощью [tool]."),
+		span_notice("Вы начинаете отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] ..."),
+		span_notice("[surgeon] начинает отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
 	)
-	display_pain(limb.owner, "Вы чувствуете ужасную боль в вашей [limb.plaintext_zone]!")
+	display_pain(limb.owner, "Вы чувствуете ужасную боль в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/amputate/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно ампутировали [limb.plaintext_zone] у [limb.owner]!"),
-		span_notice("[surgeon] успешно ампутировал [limb.plaintext_zone] у [limb.owner]!"),
-		span_notice("[surgeon] заканчивает разъединение [limb.plaintext_zone] у [limb.owner]."),
+		span_notice("Вы успешно ампутировали [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] успешно ампутировал [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] заканчивает разъединение [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Вы больше не чувствуете свою [limb.plaintext_zone]!")
+	display_pain(limb.owner, "Вы больше не чувствуете свою [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 	if(HAS_MIND_TRAIT(surgeon, TRAIT_MORBID))
 		surgeon.add_mood_event("morbid_dissection_success", /datum/mood_event/morbid_dissection_success)
 	limb.drop_limb()

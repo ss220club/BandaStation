@@ -27,11 +27,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to realign the torn blood vessels in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to realign the torn blood vessels in [limb.owner]'s [limb.plaintext_zone] with [tool]."),
-		span_notice("[surgeon] begins to realign the torn blood vessels in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to realign the torn blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
+		span_notice("[surgeon] begins to realign the torn blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [tool]."),
+		span_notice("[surgeon] begins to realign the torn blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
-	display_pain(limb.owner, "You feel a horrible stabbing pain in your [limb.plaintext_zone]!")
+	display_pain(limb.owner, "You feel a horrible stabbing pain in your [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/repair_puncture/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	var/datum/wound/pierce/bleed/pierce_wound = locate() in limb.wounds
@@ -42,9 +42,9 @@
 		display_results(
 			surgeon,
 			limb.owner,
-			span_notice("You successfully realign the last of the torn blood vessels in [limb.owner]'s [limb.plaintext_zone]."),
-			span_notice("[surgeon] successfully realigns the last of the torn blood vessels in [limb.owner]'s [limb.plaintext_zone] with [tool]!"),
-			span_notice("[surgeon] successfully realigns the last of the torn blood vessels in  [limb.owner]'s [limb.plaintext_zone]!"),
+			span_notice("You successfully realign the last of the torn blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+			span_notice("[surgeon] successfully realigns the last of the torn blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [tool]!"),
+			span_notice("[surgeon] successfully realigns the last of the torn blood vessels in  [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]!"),
 		)
 		return
 
@@ -52,18 +52,18 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You successfully realign some of the blood vessels in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] successfully realigns some of the blood vessels in [limb.owner]'s [limb.plaintext_zone] with [tool]!"),
-		span_notice("[surgeon] successfully realigns some of the blood vessels in  [limb.owner]'s [limb.plaintext_zone]!"),
+		span_notice("You successfully realign some of the blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] successfully realigns some of the blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [tool]!"),
+		span_notice("[surgeon] successfully realigns some of the blood vessels in  [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]!"),
 	)
 
 /datum/surgery_operation/limb/repair_puncture/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You jerk apart some of the blood vessels in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] jerks apart some of the blood vessels in [limb.owner]'s [limb.plaintext_zone] with [tool]!"),
-		span_notice("[surgeon] jerks apart some of the blood vessels in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You jerk apart some of the blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] jerks apart some of the blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [tool]!"),
+		span_notice("[surgeon] jerks apart some of the blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
 	limb.receive_damage(rand(4, 8), wound_bonus = 10, sharpness = SHARP_EDGED, damage_source = tool)
 
@@ -108,11 +108,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to seal the realigned blood vessels in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to seal the realigned blood vessels in [limb.owner]'s [limb.plaintext_zone] with [tool]."),
-		span_notice("[surgeon] begins to seal the realigned blood vessels in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to seal the realigned blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
+		span_notice("[surgeon] begins to seal the realigned blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [tool]."),
+		span_notice("[surgeon] begins to seal the realigned blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
-	display_pain(limb.owner, "You feel a burning sensation in your [limb.plaintext_zone]!")
+	display_pain(limb.owner, "You feel a burning sensation in your [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/seal_veins/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	var/datum/wound/pierce/bleed/pierce_wound = locate() in limb.wounds
@@ -122,9 +122,9 @@
 		display_results(
 			surgeon,
 			limb.owner,
-			span_notice("You successfully seal the last of the ruptured blood vessels in [limb.owner]'s [limb.plaintext_zone]."),
-			span_notice("[surgeon] successfully seals the last of the ruptured blood vessels in [limb.owner]'s [limb.plaintext_zone] with [tool]!"),
-			span_notice("[surgeon] successfully seals the last of the ruptured blood vessels in  [limb.owner]'s [limb.plaintext_zone]!"),
+			span_notice("You successfully seal the last of the ruptured blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+			span_notice("[surgeon] successfully seals the last of the ruptured blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [tool]!"),
+			span_notice("[surgeon] successfully seals the last of the ruptured blood vessels in  [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]!"),
 		)
 		return
 
@@ -132,7 +132,7 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You successfully seal some of the blood vessels in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] successfully seals some of the blood vessels in [limb.owner]'s [limb.plaintext_zone] with [tool]!"),
-		span_notice("[surgeon] successfully seals some of the blood vessels in  [limb.owner]'s [limb.plaintext_zone]!"),
+		span_notice("You successfully seal some of the blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] successfully seals some of the blood vessels in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [tool]!"),
+		span_notice("[surgeon] successfully seals some of the blood vessels in  [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]!"),
 	)

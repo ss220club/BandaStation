@@ -40,7 +40,7 @@
 
 /datum/surgery_operation/organ/brainwash/on_success(obj/item/organ/brain/organ, mob/living/surgeon, obj/item/tool, list/operation_args)
 	if(!organ.owner.mind)
-		to_chat(surgeon, span_warning("[organ.owner.declent_ru(NOMINATIVE)] не реагирует на промывание мозгов, как будто [ru_p_they(organ.owner)] нет разума..."))
+		to_chat(surgeon, span_warning("[organ.owner.declent_ru(NOMINATIVE)] не реагирует на промывание мозгов, как будто [ru_p_they()] нет разума..."))
 		return ..()
 	if(HAS_MIND_TRAIT(organ.owner, TRAIT_UNCONVERTABLE))
 		to_chat(surgeon, span_warning("[organ.owner.declent_ru(GENITIVE)], похоже, не поддается промыванию мозгов..."))

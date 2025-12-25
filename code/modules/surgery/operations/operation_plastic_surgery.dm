@@ -54,9 +54,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to alter [limb.owner]'s appearance..."),
-		span_notice("[surgeon] begins to alter [limb.owner]'s appearance."),
-		span_notice("[surgeon] begins to make an incision in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to alter [limb.owner.declent_ru(GENITIVE)]'s appearance..."),
+		span_notice("[surgeon] begins to alter [limb.owner.declent_ru(GENITIVE)]'s appearance."),
+		span_notice("[surgeon] begins to make an incision in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
 	display_pain(limb.owner, "You feel a slicing pain across your face!")
 
@@ -66,9 +66,9 @@
 		display_results(
 			surgeon,
 			limb.owner,
-			span_notice("You successfully restore [limb.owner]'s appearance."),
-			span_notice("[surgeon] successfully restores [limb.owner]'s appearance!"),
-			span_notice("[surgeon] finishes the operation on [limb.owner]'s face."),
+			span_notice("You successfully restore [limb.owner.declent_ru(GENITIVE)]'s appearance."),
+			span_notice("[surgeon] successfully restores [limb.owner.declent_ru(GENITIVE)]'s appearance!"),
+			span_notice("[surgeon] finishes the operation on [limb.owner.declent_ru(GENITIVE)]'s face."),
 		)
 		display_pain(limb.owner, "The pain fades, your face feels normal again!")
 		return
@@ -81,7 +81,7 @@
 		limb.owner,
 		span_notice("You alter [oldname]'s appearance completely, [limb.owner.p_they()] is now [newname]."),
 		span_notice("[surgeon] alters [oldname]'s appearance completely, [limb.owner.p_they()] is now [newname]!"),
-		span_notice("[surgeon] finishes the operation on [limb.owner]'s face."),
+		span_notice("[surgeon] finishes the operation on [limb.owner.declent_ru(GENITIVE)]'s face."),
 	)
 	display_pain(limb.owner, "The pain fades, your face feels new and unfamiliar!")
 	if(ishuman(limb.owner))
@@ -95,9 +95,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_warning("Your screw up, leaving [limb.owner]'s appearance disfigured!"),
-		span_warning("[surgeon] screws up, disfiguring [limb.owner]'s appearance!"),
-		span_notice("[surgeon] finishes the operation on [limb.owner]'s face."),
+		span_warning("Your screw up, leaving [limb.owner.declent_ru(GENITIVE)]'s appearance disfigured!"),
+		span_warning("[surgeon] screws up, disfiguring [limb.owner.declent_ru(GENITIVE)]'s appearance!"),
+		span_notice("[surgeon] finishes the operation on [limb.owner.declent_ru(GENITIVE)]'s face."),
 	)
 	display_pain(limb.owner, "Your face feels horribly scarred and deformed!")
 	ADD_TRAIT(limb.owner, TRAIT_DISFIGURED, TRAIT_GENERIC)
@@ -128,9 +128,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to apply plastic to [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to apply plastic to [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to perform surgery on [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to apply plastic to [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
+		span_notice("[surgeon] begins to apply plastic to [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] begins to perform surgery on [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
 	display_pain(limb.owner, "You feel a strange sensation as something is applied to your face!")
 

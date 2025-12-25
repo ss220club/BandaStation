@@ -131,8 +131,8 @@
 		return ITEM_INTERACT_BLOCKING
 
 	visible_message(
-		span_notice("[declent_ru(NOMINATIVE)] пытается закрыть [ru_p_theirs()] [limb.plaintext_zone] с помощью [tool.declent_ru(GENITIVE)]..."),
-		span_notice("Вы пытаетесь закрыть свою [limb.plaintext_zone] с помощью [tool.declent_ru(GENITIVE)]..."),
+		span_notice("[declent_ru(NOMINATIVE)] пытается закрыть [ru_p_theirs()] [limb.ru_plaintext_zone[PREPOSITIONAL]] с помощью [tool.declent_ru(GENITIVE)]..."),
+		span_notice("Вы пытаетесь закрыть свою [limb.ru_plaintext_zone[PREPOSITIONAL]] с помощью [tool.declent_ru(GENITIVE)]..."),
 		span_hear("Вы слышите пение."),
 		vision_distance = 5,
 		visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
@@ -147,8 +147,8 @@
 		return ITEM_INTERACT_BLOCKING
 
 	visible_message(
-		span_notice("[declent_ru(NOMINATIVE)] закрывает [ru_p_theirs()] [limb.plaintext_zone] с помощью [tool.declent_ru(GENITIVE)]."),
-		span_notice("Вы закрываете свою [limb.plaintext_zone] с помощью [tool.declent_ru(GENITIVE)]."),
+		span_notice("[declent_ru(NOMINATIVE)] закрывает [ru_p_theirs()] [limb.ru_plaintext_zone[PREPOSITIONAL]] с помощью [tool.declent_ru(GENITIVE)]."),
+		span_notice("Вы закрываете свою [limb.ru_plaintext_zone[PREPOSITIONAL]] с помощью [tool.declent_ru(GENITIVE)]."),
 		span_hear("Вы слышите пение."),
 		vision_distance = 5,
 		visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,

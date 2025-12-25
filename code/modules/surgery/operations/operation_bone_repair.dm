@@ -27,11 +27,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете устаранять трещину в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает устаранять трещину в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
-		span_notice("[surgeon] начинает устаранять трещину в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете устаранять трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает устаранять трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает устаранять трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Ваша [limb.plaintext_zone] ноет от боли!")
+	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] ноет от боли!")
 
 /datum/surgery_operation/limb/repair_hairline/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	var/datum/wound/blunt/bone/fracture = locate() in limb.wounds
@@ -40,9 +40,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно устаранили трещину в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно устаранил трещину в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
-		span_notice("[surgeon] успешно устаранил трещину в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("Вы успешно устаранили трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно устаранил трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] успешно устаранил трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
 /datum/surgery_operation/limb/reset_compound
@@ -74,11 +74,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете вправлять кость в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает вправлять кость в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
-		span_notice("[surgeon] начинает вправлять кость в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете вправлять кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает вправлять кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает вправлять кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Ноющая боль в вашей [limb.plaintext_zone] невыносима!")
+	display_pain(limb.owner, "Ноющая боль в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]] невыносима!")
 
 /datum/surgery_operation/limb/reset_compound/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	var/datum/wound/blunt/bone/critical/fracture = locate() in limb.wounds
@@ -87,9 +87,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно вправляете кость в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно вправляет кость в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
-		span_notice("[surgeon] успешно вправляет кость в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("Вы успешно вправляете кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно вправляет кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] успешно вправляет кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
 /datum/surgery_operation/limb/repair_compound
@@ -121,11 +121,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете устранять перелом в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает устранять перелом в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
-		span_notice("[surgeon] начинает устранять перелом в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете устранять перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает устранять перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает устранять перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Ноющая боль в вашей [limb.plaintext_zone] невыносима!")
+	display_pain(limb.owner, "Ноющая боль в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]] невыносима!")
 
 /datum/surgery_operation/limb/repair_compound/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	var/datum/wound/blunt/bone/critical/fracture = locate() in limb.wounds
@@ -133,9 +133,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно устраняете перелом в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно устраняет перелом в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
-		span_notice("[surgeon] успешно устраняет перелом в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("Вы успешно устраняете перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно устраняет перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] успешно устраняет перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
 /datum/surgery_operation/limb/prepare_cranium_repair
@@ -166,9 +166,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете удалять мелкие осколки черепа в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает удалять мелкие осколки черепа в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает копошиться в [limb.plaintext_zone] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("Вы начинаете удалять мелкие осколки черепа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает удалять мелкие осколки черепа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает копошиться в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
 	)
 	display_pain(limb.owner, "Ваш мозг словно пронзают маленькие осколки стекла!")
 

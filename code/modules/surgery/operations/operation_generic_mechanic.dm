@@ -31,11 +31,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to unscrew the shell of [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to unscrew the shell of [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to unscrew the shell of [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to unscrew the shell of [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
+		span_notice("[surgeon] begins to unscrew the shell of [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] begins to unscrew the shell of [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
-	display_pain(limb.owner, "You feel your [limb.plaintext_zone] grow numb as the shell is unscrewed.", TRUE)
+	display_pain(limb.owner, "You feel your [limb.ru_plaintext_zone[PREPOSITIONAL]] grow numb as the shell is unscrewed.", TRUE)
 
 /datum/surgery_operation/limb/mechanical_incision/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -64,11 +64,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to open the hatch holders in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to open the hatch holders in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to open the hatch holders in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to open the hatch holders in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
+		span_notice("[surgeon] begins to open the hatch holders in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] begins to open the hatch holders in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
-	display_pain(limb.owner, "The last faint pricks of tactile sensation fade from your [limb.plaintext_zone] as the hatch is opened.", TRUE)
+	display_pain(limb.owner, "The last faint pricks of tactile sensation fade from your [limb.ru_plaintext_zone[PREPOSITIONAL]] as the hatch is opened.", TRUE)
 
 /datum/surgery_operation/limb/mechanical_open/on_success(obj/item/bodypart/limb)
 	. = ..()
@@ -111,11 +111,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to screw the shell of [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to screw the shell of [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to screw the shell of [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to screw the shell of [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
+		span_notice("[surgeon] begins to screw the shell of [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] begins to screw the shell of [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
-	display_pain(limb.owner, "You feel the faint pricks of sensation return as your [limb.plaintext_zone]'s shell is screwed in.", TRUE)
+	display_pain(limb.owner, "You feel the faint pricks of sensation return as your [limb.ru_plaintext_zone[PREPOSITIONAL]]'s shell is screwed in.", TRUE)
 
 /datum/surgery_operation/limb/mechanical_close/on_success(obj/item/bodypart/limb)
 	. = ..()
@@ -145,11 +145,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to prepare electronics in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to prepare electronics in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to prepare electronics in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to prepare electronics in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
+		span_notice("[surgeon] begins to prepare electronics in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] begins to prepare electronics in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
-	display_pain(limb.owner, "You can feel a faint buzz in your [limb.plaintext_zone] as the electronics reboot.", TRUE)
+	display_pain(limb.owner, "You can feel a faint buzz in your [limb.ru_plaintext_zone[PREPOSITIONAL]] as the electronics reboot.", TRUE)
 
 /datum/surgery_operation/limb/prepare_electronics/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -178,11 +178,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to unwrench some bolts in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to unwrench some bolts in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to unwrench some bolts in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to unwrench some bolts in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
+		span_notice("[surgeon] begins to unwrench some bolts in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] begins to unwrench some bolts in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
-	display_pain(limb.owner, "You feel a jostle in your [limb.plaintext_zone] as the bolts begin to loosen.", TRUE)
+	display_pain(limb.owner, "You feel a jostle in your [limb.ru_plaintext_zone[PREPOSITIONAL]] as the bolts begin to loosen.", TRUE)
 
 /datum/surgery_operation/limb/mechanic_unwrench/on_success(obj/item/bodypart/limb)
 	. = ..()
@@ -216,11 +216,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to wrench some bolts in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to wrench some bolts in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to wrench some bolts in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("You begin to wrench some bolts in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]..."),
+		span_notice("[surgeon] begins to wrench some bolts in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+		span_notice("[surgeon] begins to wrench some bolts in [limb.owner.declent_ru(GENITIVE)]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 	)
-	display_pain(limb.owner, "You feel a jostle in your [limb.plaintext_zone] as the bolts begin to tighten.", TRUE)
+	display_pain(limb.owner, "You feel a jostle in your [limb.ru_plaintext_zone[PREPOSITIONAL]] as the bolts begin to tighten.", TRUE)
 
 /datum/surgery_operation/limb/mechanic_wrench/on_success(obj/item/bodypart/limb)
 	. = ..()
