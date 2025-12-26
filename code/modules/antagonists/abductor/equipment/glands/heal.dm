@@ -85,7 +85,7 @@
 	qdel(implant)
 
 /obj/item/organ/heart/gland/heal/proc/reject_cyberimp(obj/item/organ/cyberimp/implant)
-	owner.visible_message(span_warning("[owner] vomits up his [implant.name]!"), span_userdanger("You suddenly vomit up your [implant.name]!"))
+	owner.visible_message(span_warning("[owner] vomits up his [declent_ru(implant.name, ACCUSATIVE)]!"), span_userdanger("You suddenly vomit up your [declent_ru(implant.name, ACCUSATIVE)]!"))
 	owner.vomit(REJECTION_VOMIT_FLAGS, lost_nutrition = 0)
 	implant.Remove(owner)
 	implant.forceMove(owner.drop_location())

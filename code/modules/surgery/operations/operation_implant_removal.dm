@@ -44,11 +44,11 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("Вы успешно извлекаете [implant] из [patient.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно извлекает [implant] из [patient.declent_ru(GENITIVE)]!"),
+		span_notice("Вы успешно извлекаете [declent_ru(implant, ACCUSATIVE)] из [patient.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно извлекает [declent_ru(implant, ACCUSATIVE)] из [patient.declent_ru(GENITIVE)]!"),
 		span_notice("[surgeon] успешно извлекает что-то из [patient.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(patient, "Вы чувствуете, как ваш [implant.name] вытаскивают из вас!")
+	display_pain(patient, "Вы чувствуете, как ваш [declent_ru(implant.name, ACCUSATIVE)] вытаскивают из вас!")
 	implant.removed(patient)
 
 	if(QDELETED(implant))
@@ -64,9 +64,9 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("Вы помещаете [implant] в [case]."),
-		span_notice("[surgeon] помещает [implant] в [case]."),
-		span_notice("[surgeon] помещает что-то в [case]."),
+		span_notice("Вы помещаете [declent_ru(implant, ACCUSATIVE)] в [case]."),
+		span_notice("[surgeon] помещает [declent_ru(implant, ACCUSATIVE)] в [case]."),
+		span_notice("[surgeon] помещает что-то в [declent_ru(implant, ACCUSATIVE)]."),
 	)
 
 /datum/surgery_operation/basic/implant_removal/proc/get_case(mob/living/surgeon, mob/living/target)
