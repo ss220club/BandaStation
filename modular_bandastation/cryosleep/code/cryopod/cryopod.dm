@@ -273,7 +273,7 @@ GLOBAL_LIST_EMPTY(objectives)
 	var/obj/machinery/computer/cryopod/control_computer = get_linked_control_computer()
 	var/mob/mob_occupant = occupant
 
-	if(issilicon(mob_occupant))
+	if(!mob_occupant || issilicon(mob_occupant))
 		return
 
 	var/atom/drop_location = drop_location()
