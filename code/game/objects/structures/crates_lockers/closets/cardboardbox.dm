@@ -9,6 +9,8 @@
 	can_weld_shut = 0
 	cutting_tool = /obj/item/wirecutters
 	material_drop = /obj/item/stack/sheet/cardboard
+	material_drop_amount = 4
+	custom_materials = list(/datum/material/cardboard = SHEET_MATERIAL_AMOUNT * 4)
 	delivery_icon = "deliverybox"
 	anchorable = FALSE
 	open_sound = 'sound/machines/cardboard_box.ogg'
@@ -19,7 +21,6 @@
 	door_anim_time = 0 // no animation
 	can_install_electronics = FALSE
 	paint_jobs = null
-	custom_materials = list(/datum/material/cardboard = SHEET_MATERIAL_AMOUNT * 4)
 	/// Cooldown controlling when the box can trigger the Metal Gear Solid-style '!' alert.
 	COOLDOWN_DECLARE(alert_cooldown)
 
@@ -119,4 +120,5 @@
 	close_sound = 'sound/machines/crate/crate_close.ogg'
 	open_sound_volume = 35
 	close_sound_volume = 50
+	custom_materials = list(/datum/material/alloy/plasteel = SHEET_MATERIAL_AMOUNT * 4)
 	material_drop = /obj/item/stack/sheet/plasteel
