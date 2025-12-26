@@ -1,4 +1,4 @@
-/datum/action/cooldown/spell/luzha
+/datum/action/cooldown/spell/conjure/luzha
 	name = "Я ЛУЖА БУБУБУБУ"
 	desc = "Срёт лужей"
 	check_flags = AB_CHECK_CONSCIOUS | AB_CHECK_INCAPACITATED | AB_CHECK_HANDS_BLOCKED
@@ -6,6 +6,11 @@
 	button_icon = 'icons/mob/actions/actions_cult.dmi'
 	button_icon_state = "draw"
 	cooldown_time = 15 MINUTES
+
+	spell_requirements = NONE
+	create_summon_timer = 4 SECONDS
+	summon_radius = 0
+	summon_type = list(/obj/effect/decal/cleanable/luzha)
 
 	/// The base icon state of the spell's button icon, used for editing the icon "off"
 	// button_icon = 'icons/mob/actions/actions_spells.dmi'
@@ -18,28 +23,14 @@
 	/// The typepath of the smoke to create on cast.
 	// smoke_type = ???
 
-/datum/action/cooldown/spell/luzha/IsAvailable(feedback)
+/datum/action/cooldown/spell/conjure/luzha/IsAvailable(feedback)
 	. = ..()
-	if (!.)
-		return
-
-	if(!isturf(owner.loc))
-		if (feedback)
-			owner.balloon_alert(owner, "не достает до пола!")
+	if(!.)
+		return FALSE
+	var/turf/owner_turf = get_turf(owner)
+	if(owner_turf.is_blocked_turf(exclude_mobs = TRUE))
 		return FALSE
 	return TRUE
-
-/datum/action/cooldown/spell/luzha/Activate(trigger_flags)
-	. = ..()
-	if(!do_after(owner, 4 SECONDS, owner.loc))
-		owner.loc.balloon_alert(owner, "прервано!")
-		// Можно переделать под before_cast() и другую ересь, чтобы не ресетить
-		ResetCooldown()
-		return
-	create_pool()
-
-/datum/action/cooldown/spell/luzha/proc/create_pool()
-	new /obj/effect/decal/cleanable/luzha(owner.loc)
 
 /obj/effect/decal/cleanable/luzha
 	icon = 'icons/effects/96x96.dmi'
