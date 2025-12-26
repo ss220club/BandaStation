@@ -5,8 +5,8 @@
 		Большая часть смыслов языка недоступна другим расам, поскольку требует восприятия химических и тактильных компонентов физиологически невозможных для нечленов киданской расы."
 	key = "3"
 	syllables = list(
+)
 
-	)
 	icon = 'icons/bandastation/mob/species/kidan/lang.dmi'
 	icon_state = "kidan_face"
 	default_priority = 90

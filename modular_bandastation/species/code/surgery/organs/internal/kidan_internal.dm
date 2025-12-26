@@ -36,7 +36,8 @@
 	)
 
 
-/obj/item/organ/tongue/get_possible_languages()
+/obj/item/organ/tongue/kidan/get_possible_languages()
+	get_possible_languages()
 	return ..() + /datum/language/chittin
 
 /obj/item/organ/heart/kidan
