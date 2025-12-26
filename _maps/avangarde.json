@@ -4,7 +4,7 @@
 	"map_path": "bandastation",
 	"map_file": "avangarde.dmm",
 	"fluff_name": "Авангард 17",
-	"welcome_sound_override": "modular_bandastation/aesthetics_sounds/sound/welcome_sounds/welcome_cyberiad.ogg",
+	"welcome_sound_override": "modular_bandastation/events/avangarde17/audio/avantgarde_17.ogg",
 	"main_floor": 1,
 	"planetary": 1,
 	"ignored_unit_tests": [
