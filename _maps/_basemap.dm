@@ -27,6 +27,7 @@
 		// BANDASTATION - ADDITION STAT
 		#include "map_files\Cyberiad\Cyberiad.dmm"
 		#include "map_files\KiloStation\KiloStation.dmm"
+		#include "bandastation\avangarde.dmm"
 		// BANDASTATION - ADDITION END
 	#endif
 	#ifdef ALL_TEMPLATES

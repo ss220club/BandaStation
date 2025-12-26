@@ -7,7 +7,7 @@
 /obj/item/keycard/meatderelict/engpost
 	name = "post keycard"
 	desc = "A fancy keycard. Has the engineering insignia on it."
-	color = "#f0da12"
+	color = "#273221"
 	puzzle_id = "md_engpost"
 
 /obj/item/keycard/meatderelict/armory

@@ -73,6 +73,10 @@
 		\[dry\]\[wet\]amix=weights='1 0.1',acrusher=mix=0.1:mode=lin:aa=1:samples=250,highpass=f=200,lowpass=f=10000,alimiter=limit=-1dB:level=false:asc=true"\
 	"}
 
+/datum/singleton/sound_effect/muffled
+	suffix = "_muffled"
+	ffmpeg_arguments = "lowpass=f=900, highpass=f=150, volume=volume=0.25"
+
 #undef SHELLEO_ERRORLEVEL
 #undef SHELLEO_STDOUT
 #undef SHELLEO_STDERR

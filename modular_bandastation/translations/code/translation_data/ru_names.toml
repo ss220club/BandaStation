@@ -3783,7 +3783,7 @@ instrumental = "пистолетом \"Оса\""
 prepositional = "пистолете \"Оса\""
 gender = "male"
 
-["Carwo-Cawil Battle Rifle"]
+["Carwo-Cawil battle rifle"]
 nominative = "боевая винтовка \"Карво-Кэвил\""
 genitive = "боевой винтовки \"Карво-Кэвил\""
 dative = "боевой винтовке \"Карво-Кэвил\""
@@ -3792,7 +3792,7 @@ instrumental = "боевой винтовкой \"Карво-Кэвил\""
 prepositional = "боевой винтовке \"Карво-Кэвил\""
 gender = "female"
 
-["Cawil Marksman Rifle"]
+["Cawil marksman rifle"]
 nominative = "марксманская винтовка \"Кэвил\""
 genitive = "марксманской винтовки \"Кэвил\""
 dative = "марксманской винтовке \"Кэвил\""
@@ -3801,7 +3801,7 @@ instrumental = "марксманской винтовкой \"Кэвил\""
 prepositional = "марксманской винтовке \"Кэвил\""
 gender = "female"
 
-["Qarad Light Machinegun"]
+["Qarad light machinegun"]
 nominative = "лёгкий пулемёт \"Кварад\""
 genitive = "лёгкого пулемёта \"Кварад\""
 dative = "лёгкому пулемёту \"Кварад\""
@@ -3810,7 +3810,7 @@ instrumental = "лёгким пулемётом \"Кварад\""
 prepositional = "лёгком пулемёте \"Кварад\""
 gender = "male"
 
-["Daraq Light Machinegun"]
+["Daraq light machinegun"]
 nominative = "лёгкий пулемёт \"Дарак\""
 genitive = "лёгкого пулемёта \"Дарак\""
 dative = "лёгкому пулемёту \"Дарак\""
@@ -29459,4 +29459,91 @@ dative = "резиновой печати ОТКАЗАНО"
 accusative = "резиновую печать ОТКАЗАНО"
 instrumental = "резиновой печатью ОТКАЗАНО"
 prepositional = "резиновой печати ОТКАЗАНО"
+["rotary telephone"]
+nominative = "телефон"
+genitive = "телефона"
+dative = "телефону"
+accusative = "телефон"
+instrumental = "телефоном"
+prepositional = "телефоне"
+gender = "male"
+
+["wallmount telephone"]
+nominative = "настенный телефон"
+genitive = "настенного телефона"
+dative = "настенному телефону"
+accusative = "настенный телефон"
+instrumental = "настенным телефоном"
+prepositional = "настенном телефоне"
+gender = "male"
+
+["handset"]
+nominative = "трубка"
+genitive = "трубки"
+dative = "трубке"
+accusative = "трубку"
+instrumental = "трубкой"
+prepositional = "трубке"
+[" centcom combat implant"]
+["centcom combat implant"]
+nominative = "боевой имплант центрального командования"
+genitive = "боевого импланта центрального командования"
+dative = "боевому импланту центрального командования"
+accusative = "боевой имплант центрального командования"
+instrumental = "боевым имплантом центрального командования"
+prepositional = "боевом импланте центрального командования"
+gender = "male"
+
+["custom arm implant"]
+nominative = "настраиваемый имплант руки"
+genitive = "настраиваемого импланта руки"
+dative = "настраиваемому импланту руки"
+accusative = "настраиваемый имплант руки"
+instrumental = "настраиваемым имплантом руки"
+prepositional = "настраиваемом импланте руки"
+gender = "male"
+
+["shielded security HUD implant"]
+nominative = "защищенный имплант охранного HUD"
+genitive = "защищенного импланта охранного HUD"
+dative = "защищенному импланту охранного HUD"
+accusative = "защищенный имплант охранного HUD"
+instrumental = "защищенным имплантом охранного HUD"
+prepositional = "защищенном импланте охранного HUD"
+gender = "male"
+
+["EMP absorber"]
+nominative = "поглотитель ЭМИ"
+genitive = "поглотителя ЭМИ"
+dative = "поглотителю ЭМИ"
+accusative = "поглотитель ЭМИ"
+instrumental = "поглотителем ЭМИ"
+prepositional = "поглотителе ЭМИ"
+gender = "male"
+
+["EMP absorber implant case"]
+nominative = "кейс для поглотителя ЭМИ"
+genitive = "кейса для поглотителя ЭМИ"
+dative = "кейсу для поглотителя ЭМИ"
+accusative = "кейс для поглотителя ЭМИ"
+instrumental = "кейсом для поглотителя ЭМИ"
+prepositional = "кейсе для поглотителя ЭМИ"
+gender = "male"
+
+["pump "]
+nominative = "помпа"
+genitive = "помпы"
+dative = "помпе"
+accusative = "помпу"
+instrumental = "помпой"
+prepositional = "помпе"
+gender = "female"
+
+["combat medicine pump"]
+nominative = "боевая помпа для лекарств"
+genitive = "боевой помпы для лекарств"
+dative = "боевой помпе для лекарств"
+accusative = "боевую помпу для лекарств"
+instrumental = "боевой помпой для лекарств"
+prepositional = "боевой помпе для лекарств"
 gender = "female"

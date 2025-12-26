@@ -1136,3 +1136,24 @@
 		'sound/items/hard_hat/hard_hat_equip2.ogg',
 		'sound/items/hard_hat/hard_hat_equip3.ogg',
 	)
+/datum/sound_effect/telephone_handset
+	key = SFX_TELEPHONE_HANDSET
+	file_paths = list(
+		'sound/machines/telephone/rtb_handset_1.ogg',
+		'sound/machines/telephone/rtb_handset_2.ogg',
+		'sound/machines/telephone/rtb_handset_3.ogg',
+		'sound/machines/telephone/rtb_handset_4.ogg',
+		'sound/machines/telephone/rtb_handset_5.ogg',
+	)
+
+/datum/sound_effect/telephone_speaking
+	key = SFX_TELEPHONE_SPEAKING
+	file_paths = list(
+		'sound/machines/telephone/talk_phone1.ogg',
+		'sound/machines/telephone/talk_phone2.ogg',
+		'sound/machines/telephone/talk_phone3.ogg',
+		'sound/machines/telephone/talk_phone4.ogg',
+		'sound/machines/telephone/talk_phone5.ogg',
+		'sound/machines/telephone/talk_phone6.ogg',
+		'sound/machines/telephone/talk_phone7.ogg',
+	)

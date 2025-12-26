@@ -19,3 +19,13 @@
 	soft_type = "corpsoft"
 	soft_suffix = null
 	dog_fashion = null
+
+/obj/item/clothing/head/soft/ussp/gopnik
+	name = "patsan keparik"
+	desc = "Реальная пацанская кепка от фирмы Айбибас."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/cap.dmi'
+	icon_state = "ussp_gopnik"
+	soft_type = "ussp_gopnik"
+	soft_suffix = null
+	dog_fashion = null
