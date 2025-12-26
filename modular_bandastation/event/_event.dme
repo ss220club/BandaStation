@@ -1,0 +1,6 @@
+#include "_event.dm"
+
+#include "code/vanilla_jobs_disabler.dm"
+#include "code/jobs_fixes.dm"
+//#include "code/department_renaming.dm"
+#include "code/jobs/event_jobs.dme"
