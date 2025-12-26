@@ -151,9 +151,6 @@
 		if(1 to 3)
 			progress_text += ", заканчиваю работу над последними [CONDITIONAL_DAMAGE_MESSAGE(brute_healed, burn_healed, "признаками повреждения", "ссадинами", "ожогами")]"
 		if(3 to 6)
-		if(1 to 3)
-			progress_text += ", долечиваю последние [CONDITIONAL_DAMAGE_MESSAGE(brute_healed, burn_healed, "участки травмы", "синяки", "волдыри")]"
-		if(3 to 6)
 			progress_text += ", считаю последние [CONDITIONAL_DAMAGE_MESSAGE(brute_healed, burn_healed, "очаги повреждений", "гематомы", "ожоговые пузыри")]"
 		if(6 to 9)
 			progress_text += ", продолжаю методично обрабатывать [patient.p_their()] обширные [CONDITIONAL_DAMAGE_MESSAGE(brute_healed, burn_healed, "травмы", "разрывы", "ожоги")]"
