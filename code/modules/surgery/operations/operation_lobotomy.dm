@@ -1,8 +1,8 @@
 /datum/surgery_operation/organ/lobotomy
-	name = "lobotomize"
-	rnd_name = "Lobotomy (Lobotomy)"
-	desc = "Repair most of a patient's brain traumas, with the risk of causing new permanent traumas."
-	rnd_desc = "An invasive surgical procedure which guarantees removal of almost all brain traumas, but might cause another permanent trauma in return."
+	name = "Лоботомировать"
+	rnd_name = "Лоботомия (Лоботомия)"
+	desc = "Исправление большинства травм мозга пациента с риском вызвать новые постоянные травмы."
+	rnd_desc = "Инвазивная хирургическая процедура, которая гарантирует удаление почти всех травм мозга, но может вызвать другую постоянную травму взамен."
 	operation_flags = OPERATION_MORBID | OPERATION_AFFECTS_MOOD | OPERATION_LOCKED | OPERATION_NOTABLE
 	implements = list(
 		TOOL_SCALPEL = 1.15,
@@ -19,7 +19,7 @@
 	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED|SURGERY_BONE_SAWED
 
 /datum/surgery_operation/organ/lobotomy/get_any_tool()
-	return "Any sharp edged item"
+	return "Любой предмет с острым краем"
 
 /datum/surgery_operation/organ/lobotomy/tool_check(obj/item/tool)
 	// Require edged sharpness OR a tool behavior match
@@ -29,21 +29,21 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_notice("You begin to perform a lobotomy on [organ.owner]'s brain..."),
-		span_notice("[surgeon] begins to perform a lobotomy on [organ.owner]'s brain."),
-		span_notice("[surgeon] begins to perform surgery on [organ.owner]'s brain."),
+		span_notice("Вы начинаете проводить лоботомию мозга [organ.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает проводить лоботомию мозга [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает операцию на мозге [organ.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(organ.owner, "Your head pounds with unimaginable pain!")
+	display_pain(organ.owner, "Ваша голова пульсирует от невообразимой боли!")
 
 /datum/surgery_operation/organ/lobotomy/on_success(obj/item/organ/brain/organ, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(
 		surgeon,
 		organ.owner,
-		span_notice("You successfully perform a lobotomy on [organ.owner]!"),
-		span_notice("[surgeon] successfully lobotomizes [organ.owner]!"),
-		span_notice("[surgeon] finishes performing surgery on [organ.owner]'s brain."),
+		span_notice("Вы успешно провели лоботомию [organ.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] успешно проводит лоботомию [organ.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] завершает операцию на мозге [organ.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(organ.owner, "Your head goes totally numb for a moment, the pain is overwhelming!")
+	display_pain(organ.owner, "Ваша голова на мгновение полностью немеет, боль просто невыносима!")
 
 	organ.cure_all_traumas(TRAUMA_RESILIENCE_LOBOTOMY)
 	organ.owner.mind?.remove_antag_datum(/datum/antagonist/brainwashed)
@@ -64,11 +64,11 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_warning("You remove the wrong part, causing more damage!"),
-		span_notice("[surgeon] unsuccessfully attempts to lobotomize [organ.owner]!"),
-		span_notice("[surgeon] completes the surgery on [organ.owner]'s brain."),
+		span_warning("Вы удалили не ту часть, нанеся еще больше повреждений!"),
+		span_notice("[surgeon] безуспешно пытается провести лоботомию [organ.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] завершает операцию на мозге [organ.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(organ.owner, "The pain in your head only seems to get worse!")
+	display_pain(organ.owner, "Боль в вашей голове, кажется, только усиливается!")
 	organ.apply_organ_damage(80)
 	switch(rand(1, 3))
 		if(1)
@@ -82,8 +82,8 @@
 			organ.owner.gain_trauma_type(BRAIN_TRAUMA_SPECIAL, TRAUMA_RESILIENCE_MAGIC)
 
 /datum/surgery_operation/organ/lobotomy/mechanic
-	name = "execute neural defragging"
-	rnd_name = "Wetware OS Destructive Defragmentation (Lobotomy)"
+	name = "Провести нейронную дефрагментацию"
+	rnd_name = "WetWire ОС Деструктивная Дефрагментация (Лоботомия)"
 	implements = list(
 		TOOL_MULTITOOL = 1.15,
 		/obj/item/melee/energy/sword = 1.85,
