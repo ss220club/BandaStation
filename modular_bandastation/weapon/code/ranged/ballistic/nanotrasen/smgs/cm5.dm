@@ -65,6 +65,7 @@
 	icon_state = "cm5c"
 	inhand_icon_state = "cm5c"
 	worn_icon_state = "cm5c"
+	w_class = WEIGHT_CLASS_NORMAL
 	weapon_weight = WEAPON_LIGHT
 	spread = 7
 	recoil = 0.3
