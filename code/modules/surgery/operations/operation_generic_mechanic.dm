@@ -159,7 +159,7 @@
 /datum/surgery_operation/limb/mechanic_unwrench
 	name = "Открутить эндоскелет"
 	desc = "Открутите эндоскелет механического пациента, чтобы получить доступ к его внутренним элементам. \
-		Вызывает хирургическое состояние \"кость распилена"."
+		Вызывает хирургическое состояние \"кость распилена\"."
 	required_bodytype = BODYTYPE_ROBOTIC
 	implements = list(
 		TOOL_WRENCH = 1,
