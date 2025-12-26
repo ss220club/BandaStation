@@ -213,7 +213,7 @@ SUBSYSTEM_DEF(ticker)
 	if(GLOB.station_was_nuked)
 		return TRUE
 	if(GLOB.revolution_handler?.result == REVOLUTION_VICTORY)
-		return TRUE
+		return FALSE // SS220 BandaStation EDIT - No roundend for Revs win
 	return FALSE
 
 /// Gets a list of players with their readied state so we can post it as a log
