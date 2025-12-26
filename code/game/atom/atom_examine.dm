@@ -75,33 +75,42 @@
  *
  * where "item" is pulled from [/atom/proc/examine_descriptor]
  */
+// BANDASTATION EDIT START — род тегов
 /atom/proc/examine_tags(mob/user)
-	. = list()
-	if(abstract_type == type)
-		.[span_hypnophrase("abstract")] = "This is an abstract concept, you should report this to a strange entity called GITHUB!"
+    . = list()
+    if(abstract_type == type)
+        .[span_hypnophrase("abstract")] = "This is an abstract concept, you should report this to a strange entity called GITHUB!"
 
-	if(resistance_flags & INDESTRUCTIBLE)
-		.["неразрушаемый"] = "Предмет очень прочный! Он выдержит всё, что с ним может случиться!"
-	else
-		if(resistance_flags & LAVA_PROOF)
-			.["лавастойкий"] = "Предмет сделан из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
-		if(resistance_flags & (ACID_PROOF | UNACIDABLE))
-			.["кислотостойкий"] = "Предмет выглядит довольно прочным! Возможно, он выдержит воздействие кислоты!"
-		if(resistance_flags & FREEZE_PROOF)
-			.["морозостойкий"] = "Предмет изготовлен из моростойких материалов."
-		if(resistance_flags & FIRE_PROOF)
-			.["огнестойкий"] = "Предмет изготовлен из огнестойких материалов."
-		if(resistance_flags & SHUTTLE_CRUSH_PROOF)
-			.["очень прочный"] = "Предмет невероятно прочный. Должен выдержать даже наезд шаттла!"
-		if(resistance_flags & BOMB_PROOF)
-			.["взрывоустойчивый"] = "Предмет способен пережить взрыв!"
-		if(resistance_flags & FLAMMABLE)
-			.["легковоспламеняющийся"] = "Предмет может легко загореться."
+    var/is_female = ((examine_descriptor()) in list("структура", "машина") )
+    var/he_she_it = is_female ? "Она" : "Он"
+    var/he_she_it_low = is_female ? "она" : "он"
+    var/adj_very = is_female ? "прочная" : "прочный"
+    var/verb_made = is_female ? "сделана" : "сделан"
+    var/verb_looks = is_female ? "выглядит довольно прочной" : "выглядит довольно прочным"
 
-	if(flags_1 & HOLOGRAM_1)
-		.["голографический"] = "Похоже на голограмму."
+    if(resistance_flags & INDESTRUCTIBLE)
+        .[is_female ? "неразрушаемая" : "неразрушаемый"] = "[he_she_it] очень [adj_very]! [he_she_it] выдержит всё, что с [is_female ? "ней" : "ним"] может случиться!"
+    else
+        if(resistance_flags & LAVA_PROOF)
+            .[is_female ? "лавастойкая" : "лавастойкий"] = "[he_she_it] [verb_made] из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
+        if(resistance_flags & (ACID_PROOF | UNACIDABLE))
+            .[is_female ? "кислотостойкая" : "кислотостойкий"] = "[he_she_it] [verb_looks]! Возможно, [he_she_it_low] выдержит воздействие кислоты!"
+        if(resistance_flags & FREEZE_PROOF)
+            .[is_female ? "морозостойкая" : "морозостойкий"] = "[he_she_it] изготовлена из моростойких материалов."
+        if(resistance_flags & FIRE_PROOF)
+            .[is_female ? "огнестойкая" : "огнестойкий"] = "[he_she_it] изготовлена из огнестойких материалов."
+        if(resistance_flags & SHUTTLE_CRUSH_PROOF)
+            .[is_female ? "очень прочная" : "очень прочный"] = "[he_she_it] невероятно [adj_very]. Должен выдержать даже наезд шаттла!"
+        if(resistance_flags & BOMB_PROOF)
+            .[is_female ? "взрывоустойчивая" : "взрывоустойчивый"] = "[he_she_it] способна пережить взрыв!"
+        if(resistance_flags & FLAMMABLE)
+            .[is_female ? "легковоспламеняющаяся" : "легковоспламеняющийся"] = "[he_she_it] может легко загореться."
 
-	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE_TAGS, user, .)
+    if(flags_1 & HOLOGRAM_1)
+        .["голографический"] = "Похоже на голограмму."
+
+    SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE_TAGS, user, .)
+// BANDASTATION EDIT END
 
 /// What this atom should be called in examine tags
 /atom/proc/examine_descriptor(mob/user)
@@ -116,7 +125,7 @@
 	for(var/custom_material in custom_materials)
 		var/datum/material/current_material = GET_MATERIAL_REF(custom_material)
 		mats_list += span_tooltip("Объект сделан из [current_material.declent_ru(GENITIVE)].", current_material.declent_ru(GENITIVE))
-	. += "из: [english_list(mats_list)]"
+	. += "из [english_list(mats_list)]"
 
 /**
  * Called when a mob examines (shift click or verb) this atom twice (or more) within EXAMINE_MORE_WINDOW (default 1 second)
