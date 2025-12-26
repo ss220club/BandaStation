@@ -123,7 +123,7 @@
 		span_notice("Вы пытаетесь наложить швы на [woundtype] у [patient.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] пытается наложить швы на [woundtype] у [patient.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] пытается наложить швы на [woundtype] у [patient.declent_ru(GENITIVE)]."),
-	)s
+	)
 	display_pain(patient, "Ваши [woundtype] адски болят!")
 
 #define CONDITIONAL_DAMAGE_MESSAGE(brute, burn, combo_msg, brute_msg, burn_msg) "[(brute > 0 && burn > 0) ? combo_msg : (brute > 0 ? brute_msg : burn_msg)]"
