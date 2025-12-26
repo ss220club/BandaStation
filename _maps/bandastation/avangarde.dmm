@@ -14897,10 +14897,7 @@
 /area/awaymission/avangarde17/inside/house_2/second_apartment)
 "ihK" = (
 /obj/structure/trap/trapdoor,
-/turf/open/floor/plating{
-	icon_state = "cult";
-	color = "#4b4b4b"
-	},
+/turf/open/floor/plating/temple,
 /area/awaymission/avangarde17/inside/temple)
 "iil" = (
 /obj/effect/decal/cleanable/generic,
@@ -23366,6 +23363,15 @@
 	dir = 10
 	},
 /turf/open/misc/asteroid/moon,
+/area/awaymission/avangarde17/inside/temple)
+"nau" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/marker_beacon/burgundy,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
 /area/awaymission/avangarde17/inside/temple)
 "nax" = (
 /obj/effect/turf_decal/siding/thinplating{
@@ -133673,7 +133679,7 @@ dky
 dky
 dky
 dky
-rlr
+nau
 dky
 dky
 dky
@@ -134187,12 +134193,12 @@ dky
 dky
 dky
 ihK
-rlr
+nau
 rlr
 sgf
 sgf
 rlr
-rlr
+nau
 xpJ
 ihK
 dky
@@ -134964,7 +134970,7 @@ rlr
 ihK
 ihK
 ihK
-rlr
+nau
 ihK
 rlr
 rlr
@@ -135219,7 +135225,7 @@ rlr
 rlr
 rlr
 yfX
-rlr
+nau
 rlr
 rlr
 rlr
@@ -135732,7 +135738,7 @@ rlr
 rlr
 rlr
 ihK
-rlr
+nau
 ihK
 rlr
 ihK
@@ -136248,7 +136254,7 @@ rlr
 rlr
 ihK
 ihK
-rlr
+nau
 ihK
 rlr
 rlr
@@ -136503,7 +136509,7 @@ rlr
 rlr
 rlr
 ihK
-rlr
+nau
 sgf
 rwY
 rlr
@@ -137276,7 +137282,7 @@ rwY
 rlr
 ihK
 rwY
-rlr
+nau
 rwY
 rlr
 rlr
@@ -137791,7 +137797,7 @@ dky
 dky
 dky
 dky
-rlr
+nau
 dky
 dky
 dky

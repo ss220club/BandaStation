@@ -61,12 +61,22 @@
 	density = FALSE
 	opacity = TRUE
 
+/obj/structure/gate_part/bottom/examine(mob/user)
+	. = ..()
+	. += span_notice("На плитке пред вратами вы замечаете небольшую надпись, выгравированную на общегалактическом...")
+	. += span_cult_italic("Не стена я, но опора.")
+	. += span_cult_italic("И не клятва, но основа.")
+	. += span_cult_italic("Не \"возможно\" и не \"может быть\",")
+	. += span_cult_italic("Что дано, не изменить.")
+	. += span_cult_italic("Всё моё - есть в этой фразе,")
+	. += span_cult_italic("Угадай её, сейчас же!")
+
 /obj/machinery/door/password/voice/temple
 	name = "храмовые врата"
 	desc = "Проклятые чёрные врата забытого храма. Кажется, вы видели их во снах..."
 	icon = 'modular_bandastation/events/avangarde17/icons/gate_door.dmi'
 	icon_state = "closed"
-	password = "куб"
+	password = "история"
 	opacity = FALSE
 	door_open = 'sound/effects/stonedoor_openclose.ogg'
 	door_close = 'sound/effects/stonedoor_openclose.ogg'
