@@ -190,5 +190,5 @@
 		span_notice("[surgeon] извлекает [implant.declent_ru(ACCUSATIVE)] из груди у [limb.owner.declent_ru(GENITIVE)]!"),
 		span_notice("[surgeon] извлекает что-то из груди у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(limb.owner, "Вы чувствуете, как достают [declent_ru(implant.name = ACCUSATIVE)] из вас!")
+	display_pain(limb.owner, "Вы чувствуете, как из вас достают [implant.declent_ru(ACCUSATIVE)]!")
 	surgeon.put_in_hands(implant)
