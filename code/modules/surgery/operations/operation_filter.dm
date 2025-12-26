@@ -38,9 +38,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("[tool] завершает цикл фильтрации крови у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[tool] гудит, фильтруя кровь у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[tool] гудит, пока работает насос."),
+		span_notice("[capitalize(tool.declent_ru(ACCUSATIVE))] завершает цикл фильтрации крови у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(tool.declent_ru(ACCUSATIVE))] гудит, фильтруя кровь у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(tool.declent_ru(ACCUSATIVE))] гудит, пока работает насос."),
 	)
 
 	if(surgeon.is_holding_item_of_type(/obj/item/healthanalyzer))
@@ -58,7 +58,7 @@
 
 /datum/surgery_operation/limb/filter_blood/proc/has_filterable_chems(mob/living/carbon/target, obj/item/blood_filter/bloodfilter)
 	if(!length(target.reagents?.reagent_list))
-		bloodfilter.audible_message(span_notice("[bloodfilter] сигнализирует о том, что в крови у [target.declent_ru(GENITIVE)] не обнаружено химических веществ."))
+		bloodfilter.audible_message(span_notice("[capitalize(bloodfilter.declent_ru(ACCUSATIVE))] сигнализирует о том, что в крови у [target.declent_ru(GENITIVE)] не обнаружено химических веществ."))
 		playsound(target, 'sound/machines/ping.ogg', 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
 		return FALSE
 

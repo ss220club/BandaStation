@@ -9,7 +9,7 @@
 
 /datum/surgery_operation/limb/add_dental_implant/all_required_strings()
 	. = list()
-	. += "операция на рту (цель рот)"
+	. += "операция на рту (цель: рот)"
 	. += ..()
 	. += "во рту должны быть зубы"
 
@@ -36,8 +36,8 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете вставлять [tool] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает вставлять [tool] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете вставлять [tool.declent_ru(ACCUSATIVE)] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает вставлять [tool.declent_ru(ACCUSATIVE)] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] начинает что-то вставлять в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Something's being jammed into your [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
@@ -47,15 +47,15 @@
 	surgeon.transferItemToLoc(tool, limb, TRUE)
 
 	var/datum/action/item_action/activate_pill/pill_action = new(tool)
-	pill_action.name = "Activate [tool.name]"
+	pill_action.name = "Активировать [declent_ru(tool.name, NOMINATIVE)]"
 	pill_action.build_all_button_icons()
 	pill_action.Grant(limb.owner) //The pill never actually goes in an inventory slot, so the owner doesn't inherit actions from it
 
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы запихиваете [tool] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] запихивает [tool] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("Вы запихиваете [tool.declent_ru(ACCUSATIVE)] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] запихивает [tool.declent_ru(ACCUSATIVE)] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 		span_notice("[surgeon] запихивает что-то в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
@@ -114,8 +114,8 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы аккуратно извлекаете [yoinked] из [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] аккуратно извлекает [yoinked] из [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы аккуратно извлекаете [yoinked.declent_ru(ACCUSATIVE)] из [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] аккуратно извлекает [yoinked.declent_ru(ACCUSATIVE)] из [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] аккуратно извлекает что-то из [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 

@@ -19,7 +19,7 @@
 	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED|SURGERY_BONE_SAWED
 
 /datum/surgery_operation/organ/lobotomy/get_any_tool()
-	return "Любой предмет с острым краем"
+	return "Любой острый предмет"
 
 /datum/surgery_operation/organ/lobotomy/tool_check(obj/item/tool)
 	// Require edged sharpness OR a tool behavior match
@@ -83,7 +83,7 @@
 
 /datum/surgery_operation/organ/lobotomy/mechanic
 	name = "Провести нейронную дефрагментацию"
-	rnd_name = "WetWire ОС Деструктивная Дефрагментация (Лоботомия)"
+	rnd_name = "WetWire ОС Деструктивная дефрагментация (Лоботомия)"
 	implements = list(
 		TOOL_MULTITOOL = 1.15,
 		/obj/item/melee/energy/sword = 1.85,

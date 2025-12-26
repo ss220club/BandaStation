@@ -108,7 +108,7 @@
 			option = new()
 			option.image = get_generic_limb_radial_image(limb.body_zone)
 			option.image.overlays += add_radial_overlays(organ.type)
-			option.name = "извлечь [initial(organ.name)]"
+			option.name = "Извлечь [initial(organ.name)]"
 			option.info = "Извлечь [initial(organ.name)] из пациента."
 			LAZYSET(cached_organ_manipulation_options, "[organ.type]_remove", option)
 
@@ -122,7 +122,7 @@
 		option = new()
 		option.image = get_generic_limb_radial_image(limb.body_zone)
 		option.image.overlays += add_radial_overlays(list(image('icons/hud/screen_gen.dmi', "arrow_large_still"), organ.type))
-		option.name = "вставить [initial(organ.name)]"
+		option.name = "Вставить [initial(organ.name)]"
 		option.info = "Вставить [initial(organ.name)] в пациента."
 		LAZYSET(cached_organ_manipulation_options, "[organ.type]_insert", option)
 
@@ -155,8 +155,8 @@
 			display_results(
 				surgeon,
 				limb.owner,
-				span_notice("Вы начинаете извлекать [organ.name] из [limb.ru_plaintext_zone[GENITIVE]] [limb.owner.declent_ru(GENITIVE)]..."),
-				span_notice("[surgeon] начинает извлекать [organ.name] у [limb.owner.declent_ru(GENITIVE)]."),
+				span_notice("Вы начинаете извлекать [declent_ru(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] [limb.owner.declent_ru(GENITIVE)]..."),
+				span_notice("[surgeon] начинает извлекать [declent_ru(organ.name, ACCUSATIVE)] у [limb.owner.declent_ru(GENITIVE)]."),
 				span_notice("[surgeon] начинает извлекать что-то у [limb.owner.declent_ru(GENITIVE)]."),
 			)
 			display_pain(limb.owner, "Вы чувствуете тянущее ощущение в [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
@@ -165,9 +165,9 @@
 			display_results(
 				surgeon,
 				limb.owner,
-				span_notice("Вы начинаете вставлять [tool.name] в [limb.ru_plaintext_zone[ACCUSATIVE]] [limb.owner.declent_ru(GENITIVE)]..."),
-				span_notice("[surgeon] начинает вставлять [tool.name] в [limb.ru_plaintext_zone[ACCUSATIVE]] [limb.owner.declent_ru(GENITIVE)]."),
-				span_notice("[surgeon] начинает вставлять что-то в [limb.ru_plaintext_zone[ACCUSATIVE]] [limb.owner.declent_ru(GENITIVE)]."),
+				span_notice("Вы начинаете вставлять [declent_ru(tool.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]..."),
+				span_notice("[surgeon] начинает вставлять [declent_ru(tool.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+				span_notice("[surgeon] начинает вставлять что-то в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 			)
 			display_pain(limb.owner, "Вы чувствуете, как что-то помещают в вашу [limb.ru_plaintext_zone[ACCUSATIVE]]!")
 
@@ -186,12 +186,12 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно извлекаете [organ.name] из [limb.ru_plaintext_zone[GENITIVE]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно извлекает [organ.name] из [limb.ru_plaintext_zone[GENITIVE]] [limb.owner.declent_ru(GENITIVE)]!"),
-		span_notice("[surgeon] успешно извлекает что-то из [limb.ru_plaintext_zone[GENITIVE]] [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("Вы успешно извлекаете [declent_ru(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно извлекает [declent_ru(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] успешно извлекает что-то из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, вы больше не чувствуете свой [organ.name]!")
-	log_combat(surgeon, limb.owner, "surgically removed [organ.name] from")
+	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, вы больше не чувствуете свой [declent_ru(organ.name, ACCUSATIVE)]!")
+	log_combat(surgeon, limb.owner, "surgically removed [declent_ru(organ.name, ACCUSATIVE)] from")
 	organ.Remove(limb.owner)
 	organ.forceMove(limb.owner.drop_location())
 	organ.on_surgical_removal(surgeon, limb, tool)
@@ -204,11 +204,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно вставляете [organ.name] в [limb.ru_plaintext_zone[ACCUSATIVE]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно вставляет [organ.name] в [limb.ru_plaintext_zone[ACCUSATIVE]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно вставляет что-то в [limb.ru_plaintext_zone[ACCUSATIVE]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы успешно вставляете [declent_ru(organ.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно вставляет [declent_ru(organ.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно вставляет что-то в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, пока ваш новый [organ.name] оживает!")
+	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, пока ваш новый [declent_ru(organ.name, ACCUSATIVE)] оживает!")
 
 /datum/surgery_operation/limb/organ_manipulation/internal
 	name = "Манипуляции с внутренними органами"

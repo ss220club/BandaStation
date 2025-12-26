@@ -50,9 +50,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете выращивать Ромерол-опухоль в мозге [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает копаться в мозге [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает операцию на мозге [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете выращивать Ромерол-опухоль в мозге у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает копаться в мозге у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает операцию на мозге у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Ваша голова разрывается от невообразимой боли!") // Same message as other brain surgeries
 
@@ -60,9 +60,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вам удаётся вырастить Ромерол-опухоль в мозге [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно выращивает Ромерол-опухоль в мозге [limb.owner.declent_ru(GENITIVE)]!"),
-		span_notice("[surgeon] завершает операцию на мозге [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вам удаётся вырастить Ромерол-опухоль в мозге у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно выращивает Ромерол-опухоль в мозге у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] завершает операцию на мозге у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "На мгновение голова полностью немеет, боль становится невыносимой!")
 	if(locate(/obj/item/organ/zombie_infection) in limb) // they got another one mid surgery? whatever

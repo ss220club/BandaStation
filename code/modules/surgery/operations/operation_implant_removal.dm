@@ -1,7 +1,7 @@
 /datum/surgery_operation/basic/implant_removal
-	name = "implant removal"
-	desc = "Attempt to find and remove an implant from a patient. \
-		Any implant found will be destroyed unless an implant case is held or nearby."
+	name = "Удаление"
+	desc = "Попытка найти и удалить имплант из пациента. \
+		Любой найденный имплант будет уничтожен, если нет кейса для имплантов рядом."
 	operation_flags = OPERATION_NOTABLE
 	implements = list(
 		TOOL_HEMOSTAT = 1,
@@ -22,9 +22,9 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("You search for implants in [patient]..."),
-		span_notice("[surgeon] searches for implants in [patient]."),
-		span_notice("[surgeon] searches for something in [patient]."),
+		span_notice("You search for implants in [patient.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] searches for implants in [patient.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] searches for something in [patient.declent_ru(GENITIVE)]."),
 	)
 	if(LAZYLEN(patient.implants))
 		display_pain(patient, "You feel a serious pain as [surgeon] digs around inside you!")
@@ -35,18 +35,18 @@
 		display_results(
 			surgeon,
 			patient,
-			span_warning("You find no implant to remove from [patient]."),
-			span_warning("[surgeon] finds no implant to remove from [patient]."),
-			span_warning("[surgeon] finds nothing to remove from [patient]."),
+			span_warning("You find no implant to remove from [patient.declent_ru(GENITIVE)]."),
+			span_warning("[surgeon] finds no implant to remove from [patient.declent_ru(GENITIVE)]."),
+			span_warning("[surgeon] finds nothing to remove from [patient.declent_ru(GENITIVE)]."),
 		)
 		return
 
 	display_results(
 		surgeon,
 		patient,
-		span_notice("You successfully remove [implant] from [patient]."),
-		span_notice("[surgeon] successfully removes [implant] from [patient]!"),
-		span_notice("[surgeon] successfully removes something from [patient]!"),
+		span_notice("You successfully remove [implant] from [patient.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] successfully removes [implant] from [patient].declent_ru(GENITIVE)!"),
+		span_notice("[surgeon] successfully removes something from [patient.declent_ru(GENITIVE)]!"),
 	)
 	display_pain(patient, "You can feel your [implant.name] pulled out of you!")
 	implant.removed(patient)

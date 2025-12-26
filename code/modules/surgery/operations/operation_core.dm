@@ -35,9 +35,9 @@
 		display_results(
 			surgeon,
 			patient,
-			span_notice("Вы успешно извлекли [core_count] ядро из [patient.declent_ru(GENITIVE)]."),
-			span_notice("[surgeon] успешно извлек [core_count] ядро из [patient.declent_ru(GENITIVE)]!"),
-			span_notice("[surgeon] успешно извлек [core_count] ядро из [patient.declent_ru(GENITIVE)]!"),
+			span_notice("Вы успешно извлекли [declent_ru(core_count, ACCUSATIVE)] ядро из [patient.declent_ru(GENITIVE)]."),
+			span_notice("[surgeon] успешно извлек [declent_ru(core_count, ACCUSATIVE)] ядро из [patient.declent_ru(GENITIVE)]!"),
+			span_notice("[surgeon] успешно извлек [declent_ru(core_count, ACCUSATIVE)] ядро из [patient.declent_ru(GENITIVE)]!"),
 		)
 	else
 		to_chat(surgeon, span_warning("Не осталось ни одного ядра в [patient.declent_ru(GENITIVE)]!"))

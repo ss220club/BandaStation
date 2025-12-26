@@ -258,7 +258,7 @@
 	failure_damage_percent = 0.15
 
 /datum/surgery_operation/organ/repair/gastrectomy/get_any_tool()
-	return "Любой предмет с острым краем"
+	return "Любой острый предмет"
 
 /datum/surgery_operation/organ/repair/gastrectomy/tool_check(obj/item/tool)
 	// Require edged sharpness OR a tool behavior match

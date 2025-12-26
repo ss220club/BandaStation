@@ -205,9 +205,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете восстанавливать череп [limb.owner.declent_ru(GENITIVE)], насколько это возможно..."),
-		span_notice("[surgeon] начинает восстанавливать череп [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
-		span_notice("[surgeon] начинает восстанавливать череп [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете восстанавливать череп у [limb.owner.declent_ru(GENITIVE)], насколько это возможно..."),
+		span_notice("[surgeon] начинает восстанавливать череп у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает восстанавливать череп у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 
 	display_pain(limb.owner, "Вы можете почувствовать, как осколки вашего черепа трутся о ваш мозг!")
@@ -219,7 +219,7 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно восстанавливаете череп [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно восстанавливает череп [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
-		span_notice("[surgeon] успешно восстанавливает череп [limb.owner.declent_ru(GENITIVE)].")
+		span_notice("Вы успешно восстанавливаете череп у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно восстанавливает череп у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] успешно восстанавливает череп у [limb.owner.declent_ru(GENITIVE)].")
 	)

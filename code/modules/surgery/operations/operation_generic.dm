@@ -46,9 +46,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете делать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает делать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает делать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете делать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает делать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает делать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете покалывание на [limb.ru_plaintext_zone[PREPOSITIONAL]].")
 
@@ -58,13 +58,13 @@
 	if(!limb.can_bleed())
 		return
 
-	var/blood_name = limb.owner.get_bloodtype()?.get_blood_name() || "Blood"
+	//var/blood_name = limb.owner.get_bloodtype()?.get_blood_name() || "Blood" // BANDASTATION REMOVAL
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 
 /// Subtype for thick skinned creatures (Xenomorphs)
@@ -115,9 +115,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете раздвигать кожу на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает раздвигать кожу на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает раздвигать кожу на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете раздвигать кожу на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает раздвигать кожу на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает раздвигать кожу на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете жгучую боль, распространяющуюся по всей вашей [limb.ru_plaintext_zone[PREPOSITIONAL]], когда кожа раздвигается.")
 
@@ -181,9 +181,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете прижигать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает прижигать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает прижигать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете прижигать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает прижигать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает прижигать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вашу [limb.ru_plaintext_zone[PREPOSITIONAL]] начинают [istype(tool, /obj/item/stack/medical/suture) ? "сшивать" : "прижигать"]!")
 
@@ -222,9 +222,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете зажимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает зажимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает зажимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете зажимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает зажимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает зажимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете покалывание, когда кровотечение в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]] замедляется.")
 
@@ -270,9 +270,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете разжимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает разжимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает разжимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете разжимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает разжимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает разжимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете, как снижается давление, когда в [limb.ru_plaintext_zone[PREPOSITIONAL]] начинает течь кровь.")
 
@@ -328,9 +328,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете пилить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает пилить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает пилить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете пилить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает пилить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает пилить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете, как ужасная боль распространяется по [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
@@ -342,8 +342,8 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы распилили кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(PREPOSITIONAL)]."),
-		span_notice("[surgeon] распилил кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]!"),
-		span_notice("[surgeon] распилил кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] распилил кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] распилил кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 	display_pain(limb.owner, "Вы чувствуете, как будто что-то сломалось в [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
@@ -382,9 +382,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете лечить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает лечить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает лечить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете лечить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает лечить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает лечить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете скрежещущее ощущение в своей [limb.ru_plaintext_zone[PREPOSITIONAL]], когда кости встают на место.")
 
@@ -426,9 +426,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете просверливать кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает просверливать кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает просверливать кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете просверливать кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает просверливать кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает просверливать кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете ужасную колющую боль в [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
@@ -438,9 +438,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы просверлили кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] просверлил кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]!"),
-		span_notice("[surgeon] просверлил кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("Вы просверлили кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] просверлил кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] просверлил кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
 /datum/surgery_operation/limb/incise_organs
@@ -477,9 +477,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете делать разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает делать разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает делать разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы начинаете делать разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает делать разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает делать разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете покалывание в [limb.ru_plaintext_zone[PREPOSITIONAL]].")
 
@@ -490,9 +490,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы сделали разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] сделал надрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]!"),
-		span_notice("[surgeon] сделал надрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("Вы сделали разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] сделал надрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] сделал надрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 	display_pain(limb.owner, "Вы чувствуете острую боль внутри [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 

@@ -117,9 +117,9 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("Вы распилили кости [patient]."),
-		span_notice("[surgeon] распилил кости [patient]!"),
-		span_notice("[surgeon] распилил кости [patient]!"),
+		span_notice("Вы распилили кости [patient.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] распилил кости [patient.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] распилил кости [patient.declent_ru(GENITIVE)]!"),
 	)
 	display_pain(patient, "Вы чувстуете, будто что-то сломалось!")
 
