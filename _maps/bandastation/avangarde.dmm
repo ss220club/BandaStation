@@ -387,6 +387,20 @@
 	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/base)
+"amJ" = (
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 9
+	},
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "amY" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Этаж 1 - Квартира 3"
@@ -3598,13 +3612,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_3)
-"bTz" = (
-/obj/structure/cable,
-/obj/machinery/power/terminal{
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/awaymission/avangarde17/inside/base_eng)
 "bTA" = (
 /obj/structure/showcase/mecha/ripley{
 	name = "ТШК ''Победа''";
@@ -5039,16 +5046,6 @@
 /obj/structure/tomb,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/temple)
-"cNq" = (
-/obj/structure/stone_tile/cracked{
-	color = "#464646";
-	dir = 8
-	},
-/obj/structure/spider/stickyweb,
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple)
 "cNA" = (
 /obj/item/stack/sheet/mineral/wood{
 	pixel_x = 11;
@@ -5057,17 +5054,10 @@
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "cOc" = (
-/obj/structure/stone_tile/cracked{
-	color = "#464646";
-	dir = 8
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	color = "#464646"
-	},
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple)
+/obj/structure/flora/grass/brown/style_3,
+/obj/structure/light_fake/floodlight,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside/base)
 "cOt" = (
 /obj/machinery/power/port_gen/pacman/pre_loaded{
 	sheets = 50;
@@ -6895,7 +6885,6 @@
 /obj/item/clothing/neck/scarf,
 /obj/item/clothing/neck/scarf,
 /obj/item/clothing/neck/scarf,
-/obj/item/clothing/under/rank/medical/scrubs/purple,
 /obj/item/clothing/mask/surgical,
 /obj/item/clothing/mask/surgical,
 /obj/item/clothing/mask/surgical,
@@ -11331,22 +11320,6 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
-"giK" = (
-/obj/structure/stone_tile/slab{
-	color = "#464646"
-	},
-/obj/item/flashlight/lantern{
-	pixel_x = -2;
-	pixel_y = 13
-	},
-/obj/item/flashlight/lantern{
-	pixel_x = -8;
-	pixel_y = -5
-	},
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple)
 "giL" = (
 /obj/machinery/space_heater,
 /obj/effect/decal/cleanable/dirt,
@@ -17006,6 +16979,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
+"jux" = (
+/obj/structure/cable,
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/inside/base_eng)
 "jvJ" = (
 /obj/structure/tomb/tomb_2,
 /obj/structure/stone_tile/surrounding_tile{
@@ -19419,11 +19399,6 @@
 	},
 /turf/open/floor/iron/grimy,
 /area/awaymission/avangarde17/inside/house_1)
-"kJC" = (
-/obj/structure/cable,
-/obj/machinery/light/small/directional/east,
-/turf/open/floor/catwalk_floor/iron_dark,
-/area/awaymission/avangarde17/inside/base_eng)
 "kJL" = (
 /obj/item/wrench{
 	pixel_x = 5;
@@ -23035,6 +23010,15 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"mQk" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/item/flashlight/flare/torch,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "mQs" = (
 /obj/structure/stone_tile/slab{
 	color = "#464646"
@@ -23320,22 +23304,6 @@
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
-"mYw" = (
-/obj/structure/shelves/style2,
-/obj/item/storage/toolbox/mechanical{
-	pixel_x = 0;
-	pixel_y = 14
-	},
-/obj/item/storage/toolbox/electrical{
-	pixel_x = 0;
-	pixel_y = 4
-	},
-/obj/item/storage/toolbox/emergency{
-	pixel_x = 0;
-	pixel_y = -6
-	},
-/turf/open/floor/plating,
-/area/awaymission/avangarde17/inside/base_eng)
 "mYN" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lantern/on{
@@ -23820,6 +23788,11 @@
 "nma" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_2/second_apartment/bathroom)
+"nmm" = (
+/obj/structure/cable,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/awaymission/avangarde17/inside/base_eng)
 "nmq" = (
 /obj/effect/turf_decal/arrows{
 	dir = 8
@@ -25550,12 +25523,15 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
 "onj" = (
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 6
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
+	dir = 8
 	},
-/obj/structure/light_fake/floodlight,
-/turf/open/misc/asteroid/moon,
-/area/awaymission/avangarde17/outside/base)
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "onl" = (
 /obj/machinery/door/airlock/hatch,
 /obj/effect/turf_decal/tile/blue/full,
@@ -26265,6 +26241,23 @@
 	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/base)
+"oIO" = (
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 4
+	},
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/obj/item/flashlight/flare/torch,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "oIP" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Советская 2- Подъезд 2"
@@ -32462,18 +32455,6 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/base)
-"shw" = (
-/obj/structure/stone_tile{
-	color = "#464646";
-	dir = 8
-	},
-/obj/structure/stone_tile{
-	color = "#464646"
-	},
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple)
 "shB" = (
 /obj/structure/bed{
 	dir = 4
@@ -33751,14 +33732,21 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "sTr" = (
-/obj/structure/stone_tile/slab{
-	color = "#464646"
+/obj/structure/shelves/style2,
+/obj/item/storage/toolbox/mechanical{
+	pixel_x = 0;
+	pixel_y = 14
 	},
-/obj/item/flashlight/flare/torch,
-/turf/open/floor/cult{
-	color = "#4b4b4b"
+/obj/item/storage/toolbox/electrical{
+	pixel_x = 0;
+	pixel_y = 4
 	},
-/area/awaymission/avangarde17/inside/temple)
+/obj/item/storage/toolbox/emergency{
+	pixel_x = 0;
+	pixel_y = -6
+	},
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/inside/base_eng)
 "sTK" = (
 /obj/structure/platform/iron,
 /obj/structure/toilet,
@@ -35938,10 +35926,17 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_2/second_apartment/first_bedroom)
 "uiR" = (
-/obj/structure/flora/grass/brown/style_3,
-/obj/structure/light_fake/floodlight,
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/base)
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "ujb" = (
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/roofs)
@@ -37553,15 +37548,13 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_1/first_apartment/bedroom)
 "vdt" = (
-/obj/structure/stone_tile/block/cracked{
-	color = "#464646";
-	dir = 9
-	},
 /obj/structure/stone_tile/cracked{
 	color = "#464646";
 	dir = 8
 	},
-/obj/structure/spider/stickyweb,
+/obj/structure/stone_tile/surrounding_tile{
+	color = "#464646"
+	},
 /turf/open/floor/cult{
 	color = "#4b4b4b"
 	},
@@ -40736,22 +40729,12 @@
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_2/third_apartment/bedroom)
 "wGZ" = (
-/obj/structure/stone_tile/block{
-	color = "#464646";
-	dir = 8
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
 	},
-/obj/structure/stone_tile/block{
-	color = "#464646";
-	dir = 4
-	},
-/obj/structure/flora/rock/pile{
-	color = "#292929"
-	},
-/obj/item/flashlight/flare/torch,
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple)
+/obj/structure/light_fake/floodlight,
+/turf/open/misc/asteroid/moon,
+/area/awaymission/avangarde17/outside/base)
 "wHb" = (
 /obj/structure/railing,
 /obj/effect/turf_decal/weather/snow{
@@ -43430,6 +43413,22 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/roofs)
+"xXb" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/item/flashlight/lantern{
+	pixel_x = -2;
+	pixel_y = 13
+	},
+/obj/item/flashlight/lantern{
+	pixel_x = -8;
+	pixel_y = -5
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "xXd" = (
 /obj/structure/flora/grass/brown/style_random,
 /obj/structure/flora/tree/pine/style_random,
@@ -49232,7 +49231,7 @@ loM
 loM
 loM
 loM
-uiR
+cOc
 vgF
 hUY
 tCQ
@@ -53070,7 +53069,7 @@ tCQ
 gvr
 wxq
 rwF
-bTz
+jux
 aso
 hKC
 rwF
@@ -53584,8 +53583,8 @@ tCQ
 gvr
 lQy
 rwF
-mYw
-kJC
+sTr
+nmm
 cOt
 rwF
 rxx
@@ -53637,7 +53636,7 @@ teh
 rzE
 cTB
 tCQ
-onj
+wGZ
 wIF
 aIK
 weN
@@ -75387,7 +75386,7 @@ eTR
 lgi
 oXy
 qoo
-giK
+xXb
 tRq
 akV
 rlr
@@ -136267,7 +136266,7 @@ hra
 vkL
 vkL
 rKo
-cNq
+onj
 dky
 weS
 dky
@@ -136523,7 +136522,7 @@ dky
 uPM
 dky
 vMv
-cOc
+vdt
 oXH
 dky
 sAy
@@ -137028,7 +137027,7 @@ rwY
 dky
 dky
 dky
-vdt
+amJ
 mQZ
 weS
 dky
@@ -137296,7 +137295,7 @@ rlr
 dky
 dky
 weS
-cOc
+vdt
 skE
 dky
 dky
@@ -138063,7 +138062,7 @@ dky
 mZx
 nbL
 weS
-shw
+uiR
 skE
 dky
 dky
@@ -140911,13 +140910,13 @@ dog
 dky
 eTR
 wQM
-wGZ
+oIO
 rBB
 qoo
 rlr
 tRq
 akV
-sTr
+mQk
 rlr
 rlr
 rlr
@@ -141432,7 +141431,7 @@ akV
 akV
 hDt
 dUA
-sTr
+mQk
 tRq
 rlr
 rlr
