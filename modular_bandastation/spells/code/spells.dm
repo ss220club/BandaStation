@@ -20,8 +20,7 @@
 	// invocation = "YA BYBYBYBY"
 	/// Can be "none", "whisper", "shout", "emote"
 	// invocation_type = "shout"
-	/// The typepath of the smoke to create on cast.
-	// smoke_type = ???
+
 
 /datum/action/cooldown/spell/conjure/luzha/IsAvailable(feedback)
 	. = ..()
