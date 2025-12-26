@@ -2,6 +2,8 @@
 /obj/effect/decal/cleanable/obama
 	name = "желтая лужа"
 	desc = "Явно дело рук Трейзена..."
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "floor3"
 	color = COLOR_YELLOW
 
 /obj/effect/decal/cleanable/obama/snow

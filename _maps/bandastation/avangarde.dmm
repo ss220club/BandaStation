@@ -1660,7 +1660,7 @@
 /area/awaymission/avangarde17/outside/base)
 "bbB" = (
 /obj/structure/closet/crate/trashcart/soviet/fieled,
-/obj/effect/decal/cleanable/blood/obama/snow,
+/obj/effect/decal/cleanable/obama/snow,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "bbD" = (
@@ -2030,7 +2030,7 @@
 	pixel_y = 24
 	},
 /obj/effect/mob_spawn/corpse/human/damaged,
-/obj/effect/decal/cleanable/blood/obama,
+/obj/effect/decal/cleanable/obama,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/ruin)
 "bhM" = (
@@ -2411,7 +2411,7 @@
 /area/awaymission/avangarde17/inside/house_3/six_apartment/bedroom)
 "bqS" = (
 /obj/structure/flora/grass/green/style_random,
-/obj/effect/decal/cleanable/blood/obama/snow,
+/obj/effect/decal/cleanable/obama/snow,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "brk" = (
@@ -3689,6 +3689,7 @@
 	pixel_y = -20
 	},
 /obj/effect/decal/cleanable/cobweb,
+/obj/effect/decal/cleanable/obama,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/ruin)
 "bZo" = (
@@ -4258,7 +4259,6 @@
 /obj/effect/turf_decal/siding/dark{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/blood/obama,
 /turf/open/floor/iron/herringbone,
 /area/awaymission/avangarde17/inside/house_2)
 "cre" = (
@@ -5306,7 +5306,7 @@
 	},
 /obj/effect/turf_decal/tile/brown/opposingcorners,
 /obj/machinery/space_heater,
-/obj/effect/decal/cleanable/blood/obama,
+/obj/effect/decal/cleanable/obama,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_4)
 "cXq" = (
@@ -6852,6 +6852,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
 	},
+/obj/effect/decal/cleanable/obama/snow,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "dHJ" = (
@@ -7492,6 +7493,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/blood/gibs/old,
 /obj/effect/decal/cleanable/ash,
+/obj/item/flashlight/lantern/on{
+	pixel_x = -7;
+	pixel_y = 10
+	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/garage)
 "dWD" = (
@@ -9582,8 +9587,8 @@
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/base_barracs)
 "fke" = (
-/obj/effect/decal/cleanable/blood/obama,
 /obj/structure/flora/rock/pile/icy/style_random,
+/obj/effect/decal/cleanable/obama,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "fky" = (
@@ -12260,8 +12265,8 @@
 	desc = "Сельский туалет! - И лучше кайфа нет"
 	},
 /obj/effect/decal/cleanable/cobweb/cobweb2,
-/obj/effect/decal/cleanable/blood/obama,
 /obj/machinery/light/small/directional/east,
+/obj/effect/decal/cleanable/obama,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "gOa" = (
@@ -13433,7 +13438,7 @@
 /area/awaymission/avangarde17/inside/house_4/fourth_apartment)
 "hAr" = (
 /obj/structure/flora/tree/pine/style_random,
-/obj/effect/decal/cleanable/blood/obama,
+/obj/effect/decal/cleanable/obama/snow,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "hBa" = (
@@ -13667,7 +13672,6 @@
 	anchored = 1;
 	color = "gray"
 	},
-/obj/effect/decal/cleanable/blood/obama/snow,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "hJa" = (
@@ -17868,8 +17872,8 @@
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "jZY" = (
-/obj/effect/decal/cleanable/blood/obama/snow,
-/turf/open/misc/snow/avangarde,
+/obj/effect/decal/cleanable/obama,
+/turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
 "kae" = (
 /obj/structure/chair/comfy/brown,
@@ -18106,7 +18110,6 @@
 	pixel_y = -8
 	},
 /obj/effect/turf_decal/weather/snow/corner,
-/obj/effect/decal/cleanable/blood/obama/snow,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "kgS" = (
@@ -23186,6 +23189,7 @@
 /obj/effect/turf_decal/tile/brown/opposingcorners{
 	dir = 8
 	},
+/obj/effect/decal/cleanable/obama,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_3)
 "ndw" = (
@@ -23771,10 +23775,17 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_1/fifth_apartment)
 "ntm" = (
-/obj/structure/flora/grass/both/style_random,
-/obj/effect/decal/cleanable/blood/obama/snow,
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/obj/effect/turf_decal/tile/bar/half/contrasted{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/bar,
+/obj/effect/turf_decal/tile/brown{
+	dir = 8
+	},
+/obj/structure/cable,
+/obj/effect/decal/cleanable/obama,
+/turf/open/floor/iron,
+/area/awaymission/avangarde17/inside/house_2)
 "nud" = (
 /obj/structure/railing{
 	dir = 8
@@ -25385,18 +25396,6 @@
 /obj/structure/cable,
 /turf/open/floor/carpet/red,
 /area/awaymission/avangarde17/inside/gov/radio)
-"org" = (
-/obj/structure{
-	name = "теплотрасса";
-	icon = 'icons/obj/pipes_n_cables/disposal.dmi';
-	icon_state = "pipe";
-	dir = 1;
-	density = 1;
-	anchored = 1
-	},
-/obj/effect/decal/cleanable/blood/obama/snow,
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/city)
 "orz" = (
 /obj/structure/rack,
 /obj/item/pickaxe/mini/avangarde{
@@ -25854,6 +25853,7 @@
 /obj/effect/turf_decal/siding/dark{
 	dir = 1
 	},
+/obj/effect/decal/cleanable/obama,
 /turf/open/floor/iron/herringbone,
 /area/awaymission/avangarde17/inside/house_1)
 "oIf" = (
@@ -27269,6 +27269,7 @@
 	icon_state = "u1081";
 	pixel_x = 32
 	},
+/obj/effect/decal/cleanable/obama/snow,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "pxj" = (
@@ -30929,7 +30930,7 @@
 /turf/open/floor/iron/grimy,
 /area/awaymission/avangarde17/inside/house_4)
 "rAN" = (
-/obj/effect/decal/cleanable/blood/obama/snow,
+/obj/effect/decal/cleanable/obama/snow,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "rAR" = (
@@ -31805,7 +31806,7 @@
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_1)
 "rYM" = (
-/obj/effect/decal/cleanable/blood/obama/snow,
+/obj/effect/decal/cleanable/obama/snow,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "rZg" = (
@@ -34087,8 +34088,8 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "tty" = (
-/obj/structure/flora/tree/dead/style_random,
-/obj/effect/decal/cleanable/blood/obama/snow,
+/obj/structure/flora/tree/stump,
+/obj/effect/decal/cleanable/obama/snow,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "ttz" = (
@@ -35452,18 +35453,6 @@
 /obj/machinery/light_switch/directional/west,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_2/second_apartment/first_bedroom)
-"uiP" = (
-/obj/structure{
-	name = "теплотрасса";
-	icon = 'icons/obj/pipes_n_cables/disposal.dmi';
-	icon_state = "pipe";
-	dir = 8;
-	density = 1;
-	anchored = 1
-	},
-/obj/effect/decal/cleanable/blood/obama/snow,
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/city)
 "uiR" = (
 /obj/machinery/power/port_gen/pacman/pre_loaded{
 	sheets = 50;
@@ -35594,7 +35583,6 @@
 	pixel_y = 27
 	},
 /obj/effect/decal/cleanable/glass,
-/obj/effect/decal/cleanable/blood/obama,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/ruin)
 "umR" = (
@@ -40342,9 +40330,11 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/temple)
 "wKp" = (
-/obj/structure/closet/crate/trashcart/soviet/fieled,
-/obj/effect/decal/cleanable/blood/obama,
-/turf/open/indestructible/rockyground,
+/obj/structure/railing/platform{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/obama/snow,
+/turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "wKE" = (
 /obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
@@ -41606,7 +41596,7 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/blood/obama,
+/obj/effect/decal/cleanable/obama,
 /turf/open/floor/iron/grimy,
 /area/awaymission/avangarde17/inside/house_1)
 "xno" = (
@@ -84332,7 +84322,7 @@ cgR
 iru
 ocX
 qPg
-jZY
+tIU
 qPg
 mfH
 oTu
@@ -84849,7 +84839,7 @@ qPg
 tXk
 kvg
 iTy
-vUD
+jZY
 byx
 sJy
 gVl
@@ -85627,7 +85617,7 @@ hsV
 eBY
 wCw
 oXc
-oXc
+rAN
 wzS
 wzS
 jwa
@@ -87419,7 +87409,7 @@ eQO
 rdQ
 qPg
 noT
-ntm
+dex
 lPU
 gaQ
 oul
@@ -88734,7 +88724,7 @@ bWG
 oXc
 dex
 oXc
-ocX
+tty
 eoI
 fXm
 qlS
@@ -92329,7 +92319,7 @@ ylV
 aAK
 aAK
 fsP
-uiP
+tQI
 lUe
 eoI
 xhm
@@ -94605,7 +94595,7 @@ oXc
 oXc
 oXc
 cHn
-tty
+lpc
 dIJ
 dIJ
 ouv
@@ -95664,7 +95654,7 @@ oeF
 fzf
 hNA
 hNA
-org
+hNA
 hNA
 dHM
 kbS
@@ -97207,7 +97197,7 @@ gVl
 gVl
 rqq
 pco
-wKp
+suN
 rqq
 lpc
 oXc
@@ -99501,7 +99491,7 @@ iqM
 ydH
 oRb
 aaI
-iqM
+wKp
 eUi
 cVD
 kLt
@@ -101019,7 +101009,7 @@ oIg
 iru
 wCE
 oXc
-rAN
+oXc
 rVy
 oXc
 ltK
@@ -103347,7 +103337,7 @@ byx
 iEc
 dla
 kKq
-rAN
+oXc
 oIf
 rgL
 rBl
@@ -156821,7 +156811,7 @@ kFm
 uPc
 unt
 bCi
-dGO
+ntm
 eGZ
 hdw
 hdw
