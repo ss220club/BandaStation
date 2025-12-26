@@ -980,7 +980,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 
 	if(target.stat >= UNCONSCIOUS || HAS_TRAIT(target, TRAIT_KNOCKEDOUT))
 		return
-	if(HAS_TRAIT(patient, TRAIT_ANALGESIA) || HAS_TRAIT(patient, TRAIT_STASIS) || drunken_patient && prob(drunken_ignorance_probability)) // BANDASTATION EDIT - Боль и свет
+	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || HAS_TRAIT(target, TRAIT_STASIS) || drunken_patient && prob(drunken_ignorance_probability)) // BANDASTATION EDIT - Боль и свет
 		to_chat(target, span_notice("You feel a dull, numb sensation as your body is surgically operated on."))
 		return
 	to_chat(target, span_userdanger(pain_message))
