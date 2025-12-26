@@ -60,11 +60,16 @@
 				for(var/job_id in prefs_jobs)
 					if(job_id in job_restrictions)
 						to_chat(usr, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
-						ready = FALSE
-						SStitle.title_output(client, FALSE, "toggleReady")
+						ready = PLAYER_NOT_READY
+						SStitle.title_output(client, ready, "toggleReady")
 						return
 
-		ready = !ready
+		if(ready == PLAYER_NOT_READY)
+			auto_deadmin_on_ready_or_latejoin()
+			ready = PLAYER_READY_TO_PLAY
+		else
+			ready = PLAYER_NOT_READY
+		var/is_ready = (ready == PLAYER_READY_TO_PLAY)
 		SStitle.title_output(client, ready, "toggleReady")
 
 	else if(href_list["late_join"])
