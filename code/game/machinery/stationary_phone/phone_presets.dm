@@ -1,7 +1,7 @@
-#define PHONE_NET_PUBLIC	     			"Общий"
-#define PHONE_NET_COMMAND	     			"Командный"
+#define PHONE_NET_PUBLIC	     			"Местные номера"
+#define PHONE_NET_COMMAND	     			"Номера спецслужб"
 #define PHONE_NET_CENTCOM	   			  "ЦентКом"
-#define PHONE_NET_BRIDGE	     			"Мостик"
+#define PHONE_NET_BRIDGE	     			"Междугородние номера"
 #define PHONE_NET_SYNDIE	     			"Синдикат"
 
 #define PHONE_DND_ON                "On"
@@ -56,33 +56,46 @@
 	dir = EAST
 	pixel_x = -16
 
-/obj/structure/transmitter/mounted/free
+/obj/structure/transmitter/free
 	name = "таксофон"
 	desc = "Настенный таксофон. БЕСПЛАТНЫЙ!!!"
 	icon_state = "wall_phone"
 	post_init_icon_state = "wall_phone"
+	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND, PHONE_NET_BRIDGE)
 	is_advanced = FALSE
 	greyscale_colors = "#6e7766"
 	phone_category = null // эта штобы нельзя было звонить на таксофоны
 
-/obj/structure/transmitter/mounted/free/examine(mob/user)
+/obj/structure/transmitter/free/examine(mob/user)
 	. = ..()
 	. += span_notice("Мелким шрифтом на металлической табличке выгравировано:")
 	. += span_notice("«Все звонки - бесплатно! Жалобы на качество обслуживания принимаются по... \[нечитаемо\]»")
 
-/obj/structure/transmitter/mounted/free/directional/north
+/obj/structure/transmitter/free/update_icon()
+	. = ..()
+
+	apply_transmitter_overlays(
+		/*handset_state=*/ "wall_handset",
+		/*handset_ring_state=*/ null,
+		/*status_red=*/ "wall_red",
+		/*status_yellow=*/ "wall_yellow",
+		/*status_green=*/ "wall_green",
+		/*light_state=*/ "wall_light"
+	)
+
+/obj/structure/transmitter/free/directional/north
 	dir = NORTH
 	pixel_y = 24
 
-/obj/structure/transmitter/mounted/free/directional/south
+/obj/structure/transmitter/free/directional/south
 	dir = SOUTH
 	pixel_y = -26
 
-/obj/structure/transmitter/mounted/free/directional/west
+/obj/structure/transmitter/free/directional/west
 	dir = WEST
 	pixel_x = 16
 
-/obj/structure/transmitter/mounted/free/directional/east
+/obj/structure/transmitter/free/directional/east
 	dir = EAST
 	pixel_x = -16
 
@@ -148,7 +161,7 @@
 	name = "телефон"
 	desc = "Простое и надежное устройство связи. Надежное до тех пор, пока провода не сдали на цветмет..."
 	phone_category = PHONE_NET_PUBLIC
-	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE)
+	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_COMMAND)
 	greyscale_colors = "#b10a0a"
 	phone_icon = "shield-halved"
 	was_renamed = TRUE
@@ -156,8 +169,17 @@
 /obj/structure/transmitter/ussp_militsia
 	name = "телефон"
 	desc = "Простое и надежное устройство связи. Надежное до тех пор, пока провода не сдали на цветмет..."
-	phone_category = PHONE_NET_BRIDGE
-	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE)
+	phone_category = PHONE_NET_COMMAND
+	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE, PHONE_NET_COMMAND)
+	greyscale_colors = "#b10a0a"
+	phone_icon = "shield-halved"
+	was_renamed = TRUE
+
+/obj/structure/transmitter/ussp_hospital
+	name = "телефон"
+	desc = "Простое и надежное устройство связи. Надежное до тех пор, пока провода не сдали на цветмет..."
+	phone_category = PHONE_NET_COMMAND
+	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE, PHONE_NET_COMMAND)
 	greyscale_colors = "#b10a0a"
 	phone_icon = "shield-halved"
 	was_renamed = TRUE
@@ -166,7 +188,7 @@
 	name = "телефон"
 	desc = "Простое и надежное устройство связи. Надежное до тех пор, пока провода не сдали на цветмет..."
 	phone_category = PHONE_NET_BRIDGE
-	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE)
+	networks_transmit = list(PHONE_NET_PUBLIC, PHONE_NET_BRIDGE, PHONE_NET_COMMAND)
 	greyscale_colors = "#283803"
 	phone_icon = "shield-halved"
 	was_renamed = TRUE

@@ -1,6 +1,6 @@
 /obj/item/ticket_machine_ticket/talon
 	name = "талон на услугу"
-	desc = "Талон, который печатает автомат с талонами."
+	desc = "Талон, который печатает автомат с талонами. Вы можете обменять его на один товар."
 	icon_state = "paperslip_words"
 
 /obj/machinery/ticket_machine/talon

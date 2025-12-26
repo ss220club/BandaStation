@@ -329,8 +329,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/calendar/ussp, 32)
 	icon = 'modular_bandastation/events/avangarde17/icons/64x32_statue.dmi'
 	icon_state = "kacheli"
 	layer = LOW_ITEM_LAYER
+	buckle_dir = 4
 
 /obj/structure/swings/style_3
+	name = "адская горка"
+	desc = "Кататься без каски и специального костюма - ВОСПРЕЩЕНО!"
 	icon = 'modular_bandastation/events/avangarde17/icons/64x64_statue.dmi'
 	icon_state = "gorka"
 	layer = ABOVE_MOB_LAYER
@@ -363,18 +366,20 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/calendar/ussp, 32)
 	return TRUE
 
 //CIGPACK RENAME
-/obj/item/storage/fancy/cigarettes/cigpack_robust
+/obj/item/storage/fancy/cigarettes/cigpack_robust/ussp
 	name = "сигареты ''Прима''"
 	desc = "Как в детстве."
+	spawn_type = /obj/item/cigarette/robust/ussp
 
-/obj/item/cigarette/robust
+/obj/item/cigarette/robust/ussp
 	desc = "Сигарета ''Прима''."
 
-/obj/item/storage/fancy/cigarettes/cigpack_uplift
+/obj/item/storage/fancy/cigarettes/cigpack_uplift/ussp
 	name = "папиросы ''Беломорканал''"
 	desc = "Острожно! От одной затяжки можно выплевать лёгкие."
+	spawn_type = /obj/item/cigarette/robust/ussp
 
-/obj/item/cigarette/uplift
+/obj/item/cigarette/uplift/ussp
 	desc = "Папироска ''Беломорканал''."
 
 /obj/machinery/vending/cigarette/ussp
@@ -382,8 +387,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/calendar/ussp, 32)
 	product_slogans = "Космосигареты хороши на вкус, какими они и должны быть.;Курение убивает, но не сегодня!;Курите!;Не верьте исследованиям - курите сегодня!"
 	product_ads = "Наверняка не вредно!;Не верьте ученым!;На здоровье!;Не бросайте курить, купите ещё!;Курите!;Никотиновый рай.;Лучшие сигареты с 2150 года.;Сигареты с множеством наград."
 	products = list(
-		/obj/item/storage/fancy/cigarettes/cigpack_uplift = 15,
-		/obj/item/storage/fancy/cigarettes/cigpack_robust = 15,
+		/obj/item/storage/fancy/cigarettes/cigpack_uplift/ussp = 15,
+		/obj/item/storage/fancy/cigarettes/cigpack_robust/ussp = 15,
 	)
 	premium = list(
 		/obj/item/storage/box/matches = 10,
