@@ -62,9 +62,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[blood_name] скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[blood_name] скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[blood_name] скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(GENITIVE)]."),
 	)
 
 /// Subtype for thick skinned creatures (Xenomorphs)
