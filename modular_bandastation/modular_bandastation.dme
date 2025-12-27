@@ -21,6 +21,7 @@
 #include "balance/_balance.dme"
 #include "bar_hookahs/_bar_hookahs.dme"
 #include "barsigns/_barsigns.dme"
+#include "borgs/_borgs.dme"
 #include "changelog/_changelog.dme"
 #include "chat/_chat.dme"
 #include "chemistry/_chemistry.dme"

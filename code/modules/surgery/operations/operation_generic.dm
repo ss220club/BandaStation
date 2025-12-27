@@ -1,10 +1,10 @@
 // Basic operations for moving back and forth between surgery states
 /// First step of every surgery, makes an incision in the skin
 /datum/surgery_operation/limb/incise_skin
-	name = "make skin incision"
+	name = "Сделать разрез кожи"
 	// rnd_name = "Laparotomy / Craniotomy / Myotomy (Make Incision)" // Maybe we keep this one simple
-	desc = "Make an incision in the patient's skin to access internal organs. \
-		Causes \"cut skin\" surgical state."
+	desc = "Сделайте разрез на коже пациента, чтобы получить доступ к внутренним органам. \
+		Вызывает хирургическое состояние \"кожа разрезана\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	replaced_by = /datum/surgery_operation/limb/incise_skin/abductor
 	implements = list(
@@ -25,7 +25,7 @@
 	var/biostate_blacklist = BIO_CHITIN
 
 /datum/surgery_operation/limb/incise_skin/get_any_tool()
-	return "Any sharp edged item"
+	return "Любой острый предмет"
 
 /datum/surgery_operation/limb/incise_skin/get_default_radial_image()
 	return image(/obj/item/scalpel)
@@ -46,11 +46,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to make an incision in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to make an incision in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to make an incision in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете делать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает делать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает делать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel a stabbing in your [limb.plaintext_zone].")
+	display_pain(limb.owner, "Вы чувствуете покалывание на [limb.ru_plaintext_zone[PREPOSITIONAL]].")
 
 /datum/surgery_operation/limb/incise_skin/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..() // default success message
@@ -58,18 +58,18 @@
 	if(!limb.can_bleed())
 		return
 
-	var/blood_name = limb.owner.get_bloodtype()?.get_blood_name() || "Blood"
+	//var/blood_name = limb.owner.get_bloodtype()?.get_blood_name() || "Blood" // BANDASTATION REMOVAL
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("[blood_name] pools around the incision in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[blood_name] pools around the incision in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[blood_name] pools around the incision in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Кровь скапливается у разреза на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 
 /// Subtype for thick skinned creatures (Xenomorphs)
 /datum/surgery_operation/limb/incise_skin/thick
-	name = "make thick skin incision"
+	name = "Сделать разрез на толстой коже"
 	implements = list(
 		TOOL_SAW = 1,
 		/obj/item/melee/energy/sword = 1.25,
@@ -80,7 +80,7 @@
 	biostate_blacklist = BIO_FLESH|BIO_METAL
 
 /datum/surgery_operation/limb/incise_skin/thick/get_any_tool()
-	return "Any sharp edged item with decent force"
+	return "Любой острый предмет, требующий усилия"
 
 /datum/surgery_operation/limb/incise_skin/thick/tool_check(obj/item/tool)
 	return ..() && tool.force >= 10
@@ -92,9 +92,9 @@
 
 /// Pulls the skin back to access internals
 /datum/surgery_operation/limb/retract_skin
-	name = "retract skin"
-	desc = "Retract the patient's skin to access their internal organs. \
-		Causes \"skin open\" surgical state."
+	name = "Раздвинуть кожу"
+	desc = "Раздвигает кожу пациента, чтобы получить доступ к внутренним органам. \
+		Вызывает хирургическое состояние \"кожа раздвинута\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	replaced_by = /datum/surgery_operation/limb/retract_skin/abductor
 	implements = list(
@@ -115,11 +115,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to retract the skin in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to retract the skin in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to retract the skin in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете раздвигать кожу на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает раздвигать кожу на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает раздвигать кожу на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel a severe stinging pain spreading across your [limb.plaintext_zone] as the skin is pulled back.")
+	display_pain(limb.owner, "Вы чувствуете жгучую боль, распространяющуюся по всей вашей [limb.ru_plaintext_zone[PREPOSITIONAL]], когда кожа раздвигается.")
 
 /datum/surgery_operation/limb/retract_skin/on_success(obj/item/bodypart/limb)
 	. = ..()
@@ -132,9 +132,9 @@
 
 /// Closes the skin
 /datum/surgery_operation/limb/close_skin
-	name = "mend skin incision"
-	desc = "Mend the incision in the patient's skin, closing it up. \
-		Clears most surgical states."
+	name = "Прижечь разрез кожи"
+	desc = "Прижечь разрез на коже пациента, закрывая его. \
+		Устраняет большинство хирургических состояний."
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	replaced_by = /datum/surgery_operation/limb/close_skin/abductor
 	implements = list(
@@ -156,13 +156,13 @@
 	any_surgery_states_required = ALL_SURGERY_SKIN_STATES
 
 /datum/surgery_operation/limb/close_skin/get_any_tool()
-	return "Any heat source"
+	return "Любой источник тепла"
 
 /datum/surgery_operation/limb/close_skin/get_default_radial_image()
 	return image(/obj/item/cautery)
 
 /datum/surgery_operation/limb/close_skin/all_required_strings()
-	return ..() + list("the limb must have skin")
+	return ..() + list("конечность должна иметь кожу")
 
 /datum/surgery_operation/limb/close_skin/state_check(obj/item/bodypart/limb)
 	return LIMB_HAS_SKIN(limb)
@@ -181,11 +181,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to mend the incision in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to mend the incision in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to mend the incision in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете прижигать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает прижигать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает прижигать разрез на [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Your [limb.plaintext_zone] is being [istype(tool, /obj/item/stack/medical/suture) ? "pinched" : "burned"]!")
+	display_pain(limb.owner, "Вашу [limb.ru_plaintext_zone[PREPOSITIONAL]] начинают [istype(tool, /obj/item/stack/medical/suture) ? "сшивать" : "прижигать"]!")
 
 /datum/surgery_operation/limb/close_skin/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -199,9 +199,9 @@
 
 /// Clamps bleeding blood vessels to prevent blood loss
 /datum/surgery_operation/limb/clamp_bleeders
-	name = "clamp bleeders"
-	desc = "Clamp bleeding blood vessels in the patient's body to prevent blood loss. \
-		Causes \"vessels clamped\" surgical state."
+	name = "Зажать сосуды"
+	desc = "Накладывает зажим на кровеносных сосудах пациента, чтобы предотвратить потерю крови. \
+		Вызывает хирургическое состояние \"сосуды зажаты\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	operation_flags = OPERATION_PRIORITY_NEXT_STEP
 	replaced_by = /datum/surgery_operation/limb/clamp_bleeders/abductor
@@ -222,11 +222,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to clamp bleeders in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to clamp bleeders in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to clamp bleeders in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете зажимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает зажимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает зажимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel a pinch as the bleeding in your [limb.plaintext_zone] is slowed.")
+	display_pain(limb.owner, "Вы чувствуете покалывание, когда кровотечение в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]] замедляется.")
 
 /datum/surgery_operation/limb/clamp_bleeders/on_success(obj/item/bodypart/limb)
 	. = ..()
@@ -242,9 +242,9 @@
 
 /// Unclamps blood vessels to allow blood flow again
 /datum/surgery_operation/limb/unclamp_bleeders
-	name = "unclamp bleeders"
-	desc = "Unclamp blood vessels in the patient's body to allow blood flow again. \
-		Clears \"vessels clamped\" surgical state."
+	name = "Разжать сосуды"
+	desc = "Снять зажимы с кровеносных сосудов в теле пациента, чтобы восстановить кровоток. \
+		Убирает хирургическое состояние \"сосуды зажаты\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	replaced_by = /datum/surgery_operation/limb/unclamp_bleeders/abductor
 	implements = list(
@@ -261,7 +261,7 @@
 	return image(/obj/item/hemostat)
 
 /datum/surgery_operation/limb/unclamp_bleeders/all_required_strings()
-	return ..() + list("the limb must have blood vessels")
+	return ..() + list("конечность должна иметь кровеносные сосуды")
 
 /datum/surgery_operation/limb/unclamp_bleeders/state_check(obj/item/bodypart/limb)
 	return LIMB_HAS_VESSELS(limb)
@@ -270,11 +270,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to unclamp bleeders in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to unclamp bleeders in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to unclamp bleeders in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете разжимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает разжимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает разжимать кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel a pressure release as blood starts flowing in your [limb.plaintext_zone] again.")
+	display_pain(limb.owner, "Вы чувствуете, как снижается давление, когда в [limb.ru_plaintext_zone[PREPOSITIONAL]] начинает течь кровь.")
 
 /datum/surgery_operation/limb/unclamp_bleeders/on_success(obj/item/bodypart/limb)
 	. = ..()
@@ -287,9 +287,9 @@
 
 /// Saws through bones to access organs
 /datum/surgery_operation/limb/saw_bones
-	name = "saw limb bone"
-	desc = "Saw through the patient's bones to access their internal organs. \
-		Causes \"bone sawed\" surgical state."
+	name = "Распилить кость"
+	desc = "Пропилите кость пациента, чтобы получить доступ к внутренним органам. \
+		Вызывает хирургическое состояние \"кость распилена\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	implements = list(
 		TOOL_SAW = 1,
@@ -315,7 +315,7 @@
 	any_surgery_states_blocked = SURGERY_BONE_SAWED|SURGERY_BONE_DRILLED
 
 /datum/surgery_operation/limb/saw_bones/get_any_tool()
-	return "Any sharp edged item with decent force"
+	return "Любой острый предмет, требующий усилия"
 
 /datum/surgery_operation/limb/saw_bones/get_default_radial_image()
 	return image(/obj/item/circular_saw)
@@ -328,11 +328,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to saw through the bone in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to saw through the bone in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to saw through the bone in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете пилить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает пилить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает пилить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel a horrid ache spread through the inside of your [limb.plaintext_zone]!")
+	display_pain(limb.owner, "Вы чувствуете, как ужасная боль распространяется по [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/saw_bones/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -341,17 +341,17 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You saw [limb.owner]'s [limb.plaintext_zone] open."),
-		span_notice("[surgeon] saws [limb.owner]'s [limb.plaintext_zone] open!"),
-		span_notice("[surgeon] saws [limb.owner]'s [limb.plaintext_zone] open!"),
+		span_notice("Вы распилили кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] [limb.owner.declent_ru(PREPOSITIONAL)]."),
+		span_notice("[surgeon] распилил кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] распилил кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(limb.owner, "It feels like something just broke in your [limb.plaintext_zone]!")
+	display_pain(limb.owner, "Вы чувствуете, как будто что-то сломалось в [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /// Fixes sawed bones back together
 /datum/surgery_operation/limb/fix_bones
-	name = "fix limb bone"
-	desc = "Repair a patient's cut or broken bones. \
-		Clears \"bone sawed\" and \"bone drilled\" surgical states."
+	name = "Фиксация сломанной кости"
+	desc = "Соединить рассечённые или зафиксировать сломанные кости. \
+		Убирает хирургические состояния \"кость распилена\" и \"кость просверлена\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	implements = list(
 		/obj/item/stack/medical/bone_gel = 1,
@@ -373,7 +373,7 @@
 	return image(/obj/item/stack/medical/bone_gel)
 
 /datum/surgery_operation/limb/fix_bones/all_required_strings()
-	return ..() + list("the limb must have bones")
+	return ..() + list("конечность должна иметь кости")
 
 /datum/surgery_operation/limb/fix_bones/state_check(obj/item/bodypart/limb)
 	return LIMB_HAS_BONES(limb)
@@ -382,11 +382,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to fix the bones in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to fix the bones in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to fix the bones in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете лечить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает лечить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает лечить кости в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel a grinding sensation in your [limb.plaintext_zone] as the bones are set back in place.")
+	display_pain(limb.owner, "Вы чувствуете скрежещущее ощущение в своей [limb.ru_plaintext_zone[PREPOSITIONAL]], когда кости встают на место.")
 
 /datum/surgery_operation/limb/fix_bones/on_success(obj/item/bodypart/limb)
 	. = ..()
@@ -394,9 +394,9 @@
 	limb.heal_damage(40)
 
 /datum/surgery_operation/limb/drill_bones
-	name = "drill limb bone"
-	desc = "Drill through a patient's bones. \
-		Causes \"bone drilled\" surgical state."
+	name = "Сверление кости"
+	desc = "Просверливание кости пациента. \
+		Вызывает хирургическое состояние \"кость просверлена\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	implements = list(
 		TOOL_DRILL = 1,
@@ -413,7 +413,7 @@
 	any_surgery_states_blocked = SURGERY_BONE_SAWED|SURGERY_BONE_DRILLED
 
 /datum/surgery_operation/limb/drill_bones/get_any_tool()
-	return "Any sharp pointed item with decent force"
+	return "Любой предмет с острым концом, применяемое с усилием"
 
 /datum/surgery_operation/limb/drill_bones/get_default_radial_image()
 	return image(/obj/item/surgicaldrill)
@@ -426,11 +426,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to drill into the bone in [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to drill into the bone in [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to drill into the bone in [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете просверливать кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает просверливать кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает просверливать кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel a horrible piercing pain in your [limb.plaintext_zone]!")
+	display_pain(limb.owner, "Вы чувствуете ужасную колющую боль в [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/drill_bones/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -438,15 +438,15 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You drill into [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] drills into [limb.owner]'s [limb.plaintext_zone]!"),
-		span_notice("[surgeon] drills into [limb.owner]'s [limb.plaintext_zone]!"),
+		span_notice("Вы просверлили кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] просверлил кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] просверлил кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
 /datum/surgery_operation/limb/incise_organs
-	name = "incise organs"
-	desc = "Make an incision in patient's internal organ tissue to allow for manipulation or repair. \
-		Causes \"organs cut\" surgical state."
+	name = "Сделать разрез органа"
+	desc = "Сделайте разрез на тканях внутренних органов, что позволит вылечить или манипулировать с органом. \
+		Вызывает хирургическое состояние \"орган разрезан\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	replaced_by = /datum/surgery_operation/limb/incise_organs/abductor
 	implements = list(
@@ -464,7 +464,7 @@
 	any_surgery_states_blocked = SURGERY_ORGANS_CUT
 
 /datum/surgery_operation/limb/incise_organs/get_any_tool()
-	return "Any sharp edged item"
+	return "Любой острый предмет"
 
 /datum/surgery_operation/limb/incise_organs/get_default_radial_image()
 	return image(/obj/item/scalpel)
@@ -477,11 +477,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to make an incision in the organs within [limb.owner]'s [limb.plaintext_zone]..."),
-		span_notice("[surgeon] begins to make an incision in the organs within [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] begins to make an incision in the organs within [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы начинаете делать разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает делать разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает делать разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel a stabbing in your [limb.plaintext_zone].")
+	display_pain(limb.owner, "Вы чувствуете покалывание в [limb.ru_plaintext_zone[PREPOSITIONAL]].")
 
 /datum/surgery_operation/limb/incise_organs/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -490,11 +490,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You make an incision in the organs within [limb.owner]'s [limb.plaintext_zone]."),
-		span_notice("[surgeon] makes an incision in the organs within [limb.owner]'s [limb.plaintext_zone]!"),
-		span_notice("[surgeon] makes an incision in the organs within [limb.owner]'s [limb.plaintext_zone]!"),
+		span_notice("Вы сделали разрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] сделал надрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] сделал надрез органа в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(limb.owner, "You feel a sharp pain from inside your [limb.plaintext_zone]!")
+	display_pain(limb.owner, "Вы чувствуете острую боль внутри [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/incise_organs/abductor
 	operation_flags = parent_type::operation_flags | OPERATION_IGNORE_CLOTHES | OPERATION_LOCKED  | OPERATION_NO_WIKI

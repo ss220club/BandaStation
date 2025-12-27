@@ -65,7 +65,6 @@
 					to_chat(usr, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
 					return
 
-		auto_deadmin_on_ready_or_latejoin()
 		ready = PLAYER_READY_TO_PLAY
 		SStitle.title_output(client, TRUE, "toggleReady")
 
