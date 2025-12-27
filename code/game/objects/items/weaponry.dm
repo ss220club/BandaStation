@@ -587,7 +587,11 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/switchblade/extended
 	start_extended = TRUE
-
+// BANDASTATION ADDITION START: BACKSTABS
+/obj/item/switchblade/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/backstabs, 2, 2 SECONDS) // 40 damage, 2s CD
+// BANDASTATION ADDITION END: BACKSTABS
 /obj/item/phone
 	name = "red phone"
 	desc = "Should anything ever go wrong..."
