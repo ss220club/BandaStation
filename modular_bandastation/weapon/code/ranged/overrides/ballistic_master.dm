@@ -84,3 +84,16 @@
 	light_range = 2
 	light_power = 1
 	light_color = LIGHT_COLOR_FIRE
+
+/obj/item/firing_pin/alert_level
+	name = "alert level firing pin"
+	var/desired_minimium_alert = SEC_LEVEL_GREEN
+
+/obj/item/firing_pin/alert_level/blue
+	name = "alert level firing pin"
+	desired_minimium_alert = SEC_LEVEL_BLUE
+	desc = "Небольшое устройство аутентификации, которое вставляется в спусковой механизм оружия для обеспечения его работоспособности. Данное устройство настроено на стрельбу только при синем уровне тревоги или выше."
+	fail_message = "низкий уровень тревоги!"
+
+/obj/item/firing_pin/alert_level/pin_auth(mob/living/user)
+	return (SSsecurity_level.current_security_level.number_level >= desired_minimium_alert)
