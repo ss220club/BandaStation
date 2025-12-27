@@ -454,6 +454,8 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	/// Lasts muuuuuch longer.
 	var/datum/mood_event/surgery/surgery_failure_mood_event = /datum/mood_event/surgery/failure
 
+	var/failure_prob_mod = 0 // BANDASTATION ADDITION
+
 /**
  * Checks to see if this operation can be performed
  * This is the main entry point for checking availability
@@ -726,10 +728,58 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 		total_mod *= get_location_modifier(get_turf(patient))
 		total_mod *= get_morbid_modifier(surgeon, tool)
 		total_mod *= get_mob_surgery_speed_mod(patient)
+		// BANDASTATION ADDITION START - Боль и свет
+		total_mod *= get_light_modifier(get_turf(patient))
+		total_mod *= get_pain_modifier(patient)
+		failure_prob_mod += get_tool_fail_prob(tool)
+		// BANDASTATION ADDITION END
 		// Using TRAIT_SELF_SURGERY on a surgery which doesn't normally allow self surgery imparts a penalty
 		if(patient == surgeon && HAS_TRAIT(surgeon, TRAIT_SELF_SURGERY) && !(operation_flags & OPERATION_SELF_OPERABLE))
 			total_mod *= 1.5
 	return round(total_mod, 0.01)
+
+// BANDASTATION ADDITION START - Боль, свет и инструменты
+/datum/surgery_operation/proc/get_tool_fail_prob(tool = IMPLEMENT_HAND)
+	if(!length(implements))
+		return 0
+	if(!isitem(tool))
+		return 0
+	if(!tool_check(tool))
+		return 0
+
+	var/obj/item/realtool = tool
+	var/tool_type = realtool.type
+
+	if(implements[tool] > 1.15) // чек на гетто инструмент
+		return 5
+	else
+		if(findtext("[tool_type]", "/advanced"))
+			return 0
+		if(findtext("[tool_type]", "/alien"))
+			return 1
+		if(findtext("[tool_type]", "/augment"))
+			return 0
+		else
+			return 3
+
+/// Returns a time modifier based on light
+/datum/surgery_operation/proc/get_light_modifier(turf/operation_turf)
+	var/light_amount = operation_turf.get_lumcount() // минимальное кол-во света - 0.6
+	if(light_amount < 0.6)
+		failure_prob_mod += (1.0 - (light_amount / 0.6))**1.5 * 60.0
+		return 1.0 + ((1 - (light_amount / 0.6)) / 0.6)**1.5 // степенная функция от 1 до 2
+
+	return 1.0
+
+/// Returns a time modifier based on pain
+/datum/surgery_operation/proc/get_pain_modifier(mob/living/patient)
+	if(!(HAS_TRAIT(patient, TRAIT_ANALGESIA)) || HAS_TRAIT(patient, TRAIT_STASIS))
+		failure_prob_mod += 40
+		return 2.0
+
+	return 1.0
+
+// BANDASTATION ADDITION END
 
 /// Returns a time modifier for morbid operations
 /datum/surgery_operation/proc/get_morbid_modifier(mob/living/surgeon, obj/item/tool)
@@ -751,7 +801,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 		basemod *= mod_amt
 	if(HAS_TRAIT(patient, TRAIT_SURGICALLY_ANALYZED))
 		basemod *= 0.8
-	if(HAS_TRAIT(patient, TRAIT_ANALGESIA))
+	if(HAS_TRAIT(patient, TRAIT_ANALGESIA) || HAS_TRAIT(patient, TRAIT_STASIS)) // BANDASTATION EDIT - Боль и свет
 		basemod *= 0.8
 	return basemod
 
@@ -830,6 +880,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 			// You can only operate on one mob at a time without a hippocratic oath
 			interaction_key = HAS_TRAIT(surgeon, TRAIT_HIPPOCRATIC_OATH) ? patient : DOAFTER_SOURCE_SURGERY,
 		))
+			failure_prob_mod = 0 // BANDASTATION EDIT
 			result |= ITEM_INTERACT_BLOCKING
 			update_surgery_mood(patient, SURGERY_STATE_FAILURE)
 			break
@@ -857,11 +908,13 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 		if(HAS_TRAIT(surgeon, TRAIT_IGNORE_SURGERY_MODIFIERS) && !(operation_flags & OPERATION_ALWAYS_FAILABLE))
 			operation_args[OPERATION_SPEED] = 0
 
-		if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(GET_FAILURE_CHANCE(time, operation_args[OPERATION_SPEED]), 0, 99)))
+		if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(GET_FAILURE_CHANCE(time, operation_args[OPERATION_SPEED]) + failure_prob_mod, 0, 99))) // BANDASTATION EDIT original - if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(GET_FAILURE_CHANCE(time, operation_args[OPERATION_SPEED]), 0, 99)))
+			failure_prob_mod = 0 // BANDASTATION EDIT
 			failure(operating_on, surgeon, tool, operation_args)
 			result |= ITEM_INTERACT_FAILURE
 			update_surgery_mood(patient, SURGERY_STATE_FAILURE)
 		else
+			failure_prob_mod = 0 // BANDASTATION EDIT
 			success(operating_on, surgeon, tool, operation_args)
 			result |= ITEM_INTERACT_SUCCESS
 			update_surgery_mood(patient, SURGERY_STATE_SUCCESS)
@@ -954,7 +1007,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 
 	if(target.stat >= UNCONSCIOUS || HAS_TRAIT(target, TRAIT_KNOCKEDOUT))
 		return
-	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || drunken_patient && prob(drunken_ignorance_probability))
+	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || HAS_TRAIT(target, TRAIT_STASIS) || drunken_patient && prob(drunken_ignorance_probability)) // BANDASTATION EDIT - Боль и свет
 		to_chat(target, span_notice("Вы испытываете тупое, онемевшее ощущение, когда на вашем теле делают хирургическую операцию."))
 		return
 	to_chat(target, span_userdanger(pain_message))
