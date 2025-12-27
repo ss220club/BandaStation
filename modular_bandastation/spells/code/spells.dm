@@ -10,7 +10,7 @@
 	spell_requirements = NONE
 	create_summon_timer = 4 SECONDS
 	summon_radius = 0
-	summon_type = list(/obj/effect/decal/cleanable/luzha)
+	summon_type = list(/obj/effect/decal/cleanable/obama)
 
 	/// The base icon state of the spell's button icon, used for editing the icon "off"
 	// button_icon = 'icons/mob/actions/actions_spells.dmi'
