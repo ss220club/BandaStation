@@ -1,4 +1,0 @@
-author: "ReeZii"
-delete-after: True
-changes:
-  - rscdel: "Адъютант, Ветеран, БЩ и НТР убраны из списка выбора должностей в консоли ID Карт"
