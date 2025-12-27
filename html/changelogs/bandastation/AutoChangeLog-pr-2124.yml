@@ -1,0 +1,4 @@
+author: "ReeZii"
+delete-after: True
+changes:
+  - bugfix: "Теперь вещи силиконов не будут появляться в консоли криокапсул"

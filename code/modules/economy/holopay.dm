@@ -80,6 +80,10 @@
 		return ..()
 	/// Users can pay with an ID to skip the UI
 	if(isidcard(held_item))
+		if(istype(held_item, /obj/item/card/id/departmental_budget))
+			balloon_alert(user, "invalid payment card")
+			to_chat(user, span_warning("You cannot use a departamental card for this."))
+			return FALSE
 		if(force_fee && tgui_alert(item_holder, "This holopay has a [force_fee] [MONEY_SYMBOL] fee. Confirm?", "Holopay Fee", list("Pay", "Cancel")) != "Pay")
 			return TRUE
 		process_payment(user)
@@ -90,7 +94,7 @@
 		var/obj/item/holochip/chip = held_item
 		if(!chip.credits)
 			balloon_alert(user, "holochip is empty")
-			to_chat(user, span_warning("There doesn't seem to be any [MONEY_NAME] here."))
+			to_chat(user, span_warning("There doesn't seem to be any credits here."))
 			return FALSE
 		/// Charges force fee or uses pay what you want
 		var/cash_deposit = force_fee || tgui_input_number(user, "How much? (Max: [chip.credits])", "Patronage", max_value = chip.credits)
@@ -100,8 +104,8 @@
 		if(QDELETED(held_item) || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 			return FALSE
 		if(!chip.spend(cash_deposit, FALSE))
-			balloon_alert(user, "insufficient [MONEY_NAME]")
-			to_chat(user, span_warning("You don't have enough [MONEY_NAME] to pay with this chip."))
+			balloon_alert(user, "insufficient credits")
+			to_chat(user, span_warning("You don't have enough credits to pay with this chip."))
 			return FALSE
 		/// Success: Alert buyer
 		alert_buyer(user, cash_deposit)
@@ -264,13 +268,17 @@
 		balloon_alert(user, "invalid transaction")
 		to_chat(user, span_warning("You can't pay yourself."))
 		return FALSE
+	if(istype(id_card, /obj/item/card/id/departmental_budget))
+		balloon_alert(user, "invalid payment card")
+		to_chat(user, span_warning("You cannot use a departamental card for this."))
+		return FALSE
 	/// If the user has enough money, ask them the amount or charge the force fee
 	var/amount = force_fee || tgui_input_number(user, "How much? (Max: [payee.account_balance])", "Patronage", max_value = payee.account_balance)
 	/// Exit checks in case the user cancelled or entered an invalid amount
 	if(!amount || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		return FALSE
 	if(!payee.adjust_money(-amount, "Holopay: [capitalize(name)]"))
-		balloon_alert(user, "insufficient [MONEY_NAME]")
+		balloon_alert(user, "insufficient credits")
 		to_chat(user, span_warning("You don't have the money to pay for this."))
 		return FALSE
 	/// Success: Alert the buyer
@@ -290,10 +298,10 @@
 	/// Pay the owner
 	linked_card.registered_account.adjust_money(amount, "Holopay: [name]")
 	/// Make alerts
-	linked_card.registered_account.bank_card_talk("[payee] has deposited [amount] [MONEY_SYMBOL] at your holographic pay stand.")
+	linked_card.registered_account.bank_card_talk("[payee] has deposited [amount][MONEY_SYMBOL] at your holographic pay stand.")
 	say("Thank you for your patronage, [payee]!")
 	playsound(src, 'sound/effects/cashregister.ogg', 20, TRUE)
 	/// Log the event
-	log_econ("[amount] [MONEY_NAME] were transferred from [payee]'s transaction to [linked_card.registered_account.account_holder]")
+	log_econ("[amount][MONEY_NAME] were transferred from [payee]'s transaction to [linked_card.registered_account.account_holder]")
 	SSblackbox.record_feedback("amount", "credits_transferred", amount)
 	return TRUE
