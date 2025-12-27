@@ -23,7 +23,7 @@
 /obj/item/stack/spacecash/update_desc()
 	. = ..()
 	var/total_worth = get_item_credit_value()
-	desc = "Стоит [total_worth] [MONEY_SYMBOL]. в общей сумме."
+	desc = "Стоит [total_worth][MONEY_SYMBOL]. в общей сумме."
 
 /obj/item/stack/spacecash/get_item_credit_value()
 	return (amount*value)

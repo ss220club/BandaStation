@@ -105,7 +105,7 @@
 		return FALSE
 
 	var/amount = params["amount"]
-	if(!amount || !isnum(amount) || amount > warrant.fine || !account.adjust_money(-amount, "Paid fine for [target.name]"))
+	if(!amount || !isnum(amount) || amount <= 0 || amount > warrant.fine || !account.adjust_money(-amount, "Paid fine for [target.name]"))
 		to_chat(user, span_warning("ACCESS DENIED: Invalid amount."))
 		playsound(src, 'sound/machines/terminal/terminal_error.ogg', 100, TRUE)
 		return FALSE
@@ -166,7 +166,7 @@
 	bounty_text += "<b>Issued to:</b><br>[usr]<br>"
 	bounty_text += "<b>Issued on:</b><br>[warrant.time]<br>"
 	bounty_text += "<b>Comments:</b><br>[!target.security_note ? "None." : target.security_note]<br><br>"
-	bounty_text += "<center><b>FINE:</b> [warrant.fine] [MONEY_NAME]</center>"
+	bounty_text += "<center><b>FINE:</b> [warrant.fine][MONEY_NAME]</center>"
 
 	printing = TRUE
 	balloon_alert(user, "printing")

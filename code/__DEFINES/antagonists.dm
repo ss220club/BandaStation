@@ -215,17 +215,17 @@ GLOBAL_LIST_INIT(syndicate_employers, list(
 	"Donk Corporation",
 	"Gorlex Marauders",
 	"MI13",
-	"Tiger Cooperative Fanatic",
+	//"Tiger Cooperative Fanatic", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Waffle Corporation Terrorist",
 	"Waffle Corporation",
 ))
 ///employers that are from Nanotrasen
 GLOBAL_LIST_INIT(nanotrasen_employers, list(
-	"Champions of Evil",
+	//"Champions of Evil", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Corporate Climber",
 	"Gone Postal",
 	"Internal Affairs Agent",
-	"Legal Trouble",
+	//"Legal Trouble", BANDASTATION REMOVAL - Syndicate Faction removal
 ))
 
 ///employers who hire agents to do the hijack
@@ -233,19 +233,19 @@ GLOBAL_LIST_INIT(hijack_employers, list(
 	"Animal Rights Consortium",
 	"Bee Liberation Front",
 	"Gone Postal",
-	"Tiger Cooperative Fanatic",
+	//"Tiger Cooperative Fanatic", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Waffle Corporation Terrorist",
 ))
 
 ///employers who hire agents to do a task and escape... or martyrdom. whatever
 GLOBAL_LIST_INIT(normal_employers, list(
-	"Champions of Evil",
+	//"Champions of Evil", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Corporate Climber",
 	"Cybersun Industries",
 	"Donk Corporation",
 	"Gorlex Marauders",
 	"Internal Affairs Agent",
-	"Legal Trouble",
+	//"Legal Trouble", BANDASTATION REMOVAL - Syndicate Faction removal
 	"MI13",
 	"Waffle Corporation",
 ))
