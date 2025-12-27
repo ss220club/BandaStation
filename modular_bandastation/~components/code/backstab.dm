@@ -1,6 +1,6 @@
 /datum/component/backstabs
 	var/backstab_multiplier = 2 // 2x damage by default
-	var/stored_ap = 0
+	var/next_attack_is_backstab = FALSE
 	var/cooldown_time = 0 SECONDS
 	COOLDOWN_DECLARE(backstab_cooldown)
 
@@ -16,7 +16,7 @@
 	if(!isliving(target))
 		return FALSE
 	if(!COOLDOWN_FINISHED(src, backstab_cooldown))
-		return
+	return FALSE
 	var/mob/living/living_target = target
 	// No bypassing pacifism nerd
 	if(source.force > 0 && HAS_TRAIT(user, TRAIT_PACIFISM) && (source.damtype != STAMINA))
@@ -29,21 +29,29 @@
 	return TRUE
 
 /datum/component/backstabs/proc/pre_attack(obj/item/source, atom/target, mob/living/user)
-	SIGNAL_HANDLER
-	if(!can_backstab(source, target, user))
-		return
-	stored_ap = source.armour_penetration
-	source.armour_penetration = 100
+    SIGNAL_HANDLER
+    next_attack_is_backstab = can_backstab(source, target, user)
+    if(!next_attack_is_backstab)
+        return
+
+    var/original_ap = source.armour_penetration
+    source.armour_penetration = 100
+    addtimer(CALLBACK(src, PROC_REF(restore_ap), source, original_ap), 1, TIMER_UNIQUE)
+
+/datum/component/backstabs/proc/restore_ap(obj/item/source, original_ap)
+    if(source)
+        source.armour_penetration = original_ap
 
 /datum/component/backstabs/proc/on_attack(obj/item/source, mob/living/target, mob/living/user)
-	// SIGNAL_HANDLER // screaming doesn't sleep!!
-	if(!can_backstab(source, target, user))
-		return
-	var/multi = backstab_multiplier - 1
-	var/dmg = source.force * multi
-	if(dmg) // Truthy because backstabs can heal lol
-		target.apply_damage(dmg, source.damtype, BODY_ZONE_CHEST, 0, source.wound_bonus*multi, source.exposed_wound_bonus*multi, source.sharpness*multi)
-		log_combat(user, target, "scored a backstab", source.name, "(COMBAT MODE: [user.combat_mode ? "ON" : "OFF"]) (DAMTYPE: [uppertext(source.damtype)])")
-	source.armour_penetration = stored_ap
-	if(cooldown_time > 0)
-		COOLDOWN_START(src, backstab_cooldown, cooldown_time)
+    if(!next_attack_is_backstab)
+        return
+    next_attack_is_backstab = FALSE
+
+    var/multi = backstab_multiplier - 1
+    var/dmg = source.force * multi
+    if(dmg) // Truthy because backstabs can heal lol
+        target.apply_damage(dmg, source.damtype, BODY_ZONE_CHEST, 0, source.wound_bonus*multi, source.exposed_wound_bonus*multi, source.sharpness*multi)
+        log_combat(user, target, "scored a backstab", source.name, "(COMBAT MODE: [user.combat_mode ? "ON" : "OFF"]) (DAMTYPE: [uppertext(source.damtype)])")
+
+    if(cooldown_time > 0)
+        COOLDOWN_START(src, backstab_cooldown, cooldown_time)
