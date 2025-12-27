@@ -1,13 +1,11 @@
 /datum/supply_pack/security/gp9_pistols
 	name = "GP-9 Pistols Crate"
-	desc = "В этом ящике находятся два пистолета GP-9 калибра 9x25мм НТ с двумя магазинами заряженными резиной, а также по одной коробке соответствующих летальных и нелетальных боеприпасов."
+	desc = "В этом ящике находятся два пистолета GP-9 калибра 9x25мм, а также четыре нелетальных магазина калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 10
 	access_view = ACCESS_SECURITY
 	contains = list(
-		/obj/item/gun/ballistic/automatic/pistol/gp9 = 2,
-		/obj/item/ammo_box/magazine/c9x25mm_pistol/rubber = 2,
-		/obj/item/ammo_box/c9x25mm = 1,
-		/obj/item/ammo_box/c9x25mm/rubber = 1,
+		/obj/item/gun/ballistic/automatic/pistol/gp9/no_mag = 2,
+		/obj/item/ammo_box/magazine/c9x25mm_pistol/rubber = 4,
 	)
 	crate_name = "GP-9 handguns crate"
 
