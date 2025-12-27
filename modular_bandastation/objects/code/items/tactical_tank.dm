@@ -1,6 +1,6 @@
 /obj/item/tank/internals/tactical
-	name = "Тактический баллон"
-	desc = "Улучшенный баллон с воздухом, оснащенный универсальным магнитным захватом повышенной мощности. Позволяет закрепить за спиной практически любой образец вооружения."
+	name = "Tactical tank"
+	desc = "An improved air tank, equipped with a universal high-power magnetic clamp. Allows you to secure almost any weapon on your back."
 	icon = 'modular_bandastation/objects/icons/obj/items/tank_tactical.dmi'
 	icon_state = "tank"
 
@@ -16,25 +16,35 @@
 	var/datum/gas_mixture/air = return_air()
 	if(air)
 		air.assert_gas(/datum/gas/oxygen)
-		air.gases[/datum/gas/oxygen][1] = (10 * 101.325) * volume / (8.31 * 293.15)
+		air.gases[/datum/gas/oxygen][MOLES] = (10 * ONE_ATMOSPHERE) * volume / (R_IDEAL_GAS_EQUATION * T20C)
+
+/obj/item/tank/internals/tactical/Destroy()
+	if(stored_weapon)
+		if(!QDELETED(stored_weapon))
+			stored_weapon.forceMove(drop_location())
+		stored_weapon = null
+	return ..()
+
+/obj/item/tank/internals/tactical/examine(mob/user)
+	. = ..()
+	if(stored_weapon)
+		. += span_notice("К магнитному захвату прикреплен: <b>[stored_weapon.name]</b>.")
+		. += span_info("Используйте <b>Alt+Клик</b>, чтобы быстро снять оружие.")
+	else
+		. += span_info("Магнитный захват пуст.")
 
 /obj/item/tank/internals/tactical/attackby(obj/item/W, mob/user, params)
-	if(istype(W, /obj/item/analyzer) || istype(W, /obj/item/wrench))
-		return ..()
-
-	if(stored_weapon)
-		to_chat(user, span_warning("Магнитный захват уже занят [stored_weapon.name]!"))
-		return
-
 	if(istype(W, /obj/item/gun) || istype(W, /obj/item/melee))
-		if(!user.transferItemToLoc(W, src))
+		if(stored_weapon)
+			to_chat(user, span_warning("Магнитный захват уже занят [stored_weapon.name]!"))
 			return
 
-		stored_weapon = W
-		to_chat(user, span_notice("Вы закрепили [W.name] на магнитном захвате баллона."))
-		playsound(src, 'sound/items/weapons/magin.ogg', 40, TRUE)
-		update_icon()
-		return
+		if(user.transferItemToLoc(W, src))
+			stored_weapon = W
+			to_chat(user, span_notice("Вы закрепили [W.name] на магнитном захвате баллона."))
+			playsound(src, 'sound/items/weapons/magin.ogg', 40, TRUE)
+			update_appearance()
+			return
 
 	return ..()
 
@@ -58,29 +68,31 @@
 
 	to_chat(user, span_notice("Вы отсоединили [W.name] от баллона."))
 
-	if(user && !user.put_in_hands(W))
-		W.forceMove(get_turf(src))
-	else if(!user)
-		W.forceMove(get_turf(src))
+	if(!user || !user.put_in_hands(W))
+		W.forceMove(drop_location())
 
-	update_icon()
-
-/obj/item/tank/internals/tactical/examine(mob/user)
-	. = ..()
-	if(stored_weapon)
-		. += span_notice("К магнитному захвату прикреплен: <b>[stored_weapon.name]</b>.")
-		. += span_info("Используйте <b>Alt+Клик</b>, чтобы быстро снять оружие.")
-	else
-		. += span_info("Магнитный захват пуст.")
-
-/obj/item/tank/internals/tactical/Destroy()
-	if(stored_weapon)
-		stored_weapon.forceMove(get_turf(src))
-		stored_weapon = null
-	return ..()
+	update_appearance()
 
 /obj/item/tank/internals/tactical/Exited(atom/movable/AM, atom/newloc)
 	. = ..()
 	if(AM == stored_weapon)
 		stored_weapon = null
-		update_icon()
+		update_appearance()
+
+/obj/item/tank/internals/tactical/update_overlays()
+	. = ..()
+	if(!stored_weapon)
+		return
+
+	var/mutable_appearance/weapon_overlay = mutable_appearance(stored_weapon.icon, stored_weapon.icon_state)
+
+	var/matrix/M = matrix()
+	M.Turn(90)
+	weapon_overlay.transform = M
+
+	weapon_overlay.layer = OBJ_LAYER + 0.1
+
+	weapon_overlay.pixel_y = 4
+	weapon_overlay.pixel_x = 0
+
+	. += weapon_overlay
