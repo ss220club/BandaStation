@@ -880,6 +880,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 			// You can only operate on one mob at a time without a hippocratic oath
 			interaction_key = HAS_TRAIT(surgeon, TRAIT_HIPPOCRATIC_OATH) ? patient : DOAFTER_SOURCE_SURGERY,
 		))
+			failure_prob_mod = 0 // BANDASTATION EDIT
 			result |= ITEM_INTERACT_BLOCKING
 			update_surgery_mood(patient, SURGERY_STATE_FAILURE)
 			break
@@ -908,10 +909,12 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 			operation_args[OPERATION_SPEED] = 0
 
 		if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(GET_FAILURE_CHANCE(time, operation_args[OPERATION_SPEED]) + failure_prob_mod, 0, 99))) // BANDASTATION EDIT original - if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(GET_FAILURE_CHANCE(time, operation_args[OPERATION_SPEED]), 0, 99)))
+			failure_prob_mod = 0 // BANDASTATION EDIT
 			failure(operating_on, surgeon, tool, operation_args)
 			result |= ITEM_INTERACT_FAILURE
 			update_surgery_mood(patient, SURGERY_STATE_FAILURE)
 		else
+			failure_prob_mod = 0 // BANDASTATION EDIT
 			success(operating_on, surgeon, tool, operation_args)
 			result |= ITEM_INTERACT_SUCCESS
 			update_surgery_mood(patient, SURGERY_STATE_SUCCESS)
