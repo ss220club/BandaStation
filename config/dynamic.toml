@@ -323,9 +323,9 @@ minimum_required_age = 0
 
 ["Space Ninja"]
 weight.1 = 0
-weight.2 = 0
-weight.3 = 1
-weight.4 = 2
+weight.2 = 1
+weight.3 = 2
+weight.4 = 3
 min_pop = 30
 blacklisted_roles = []
 min_antag_cap = 1
