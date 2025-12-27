@@ -1,6 +1,0 @@
-author: "PetyaFX"
-delete-after: True
-changes:
-  - code_imp: "Добавлен оверрайд и слои валидации для ксено-персонажей на старте и лейт-джоине."
-  - config: "Добавлен новый конфиг для ограничения ролей, включен HUMAN_AUTHORITY в game_options"
-  - server: "Частично изменены конфиги"
