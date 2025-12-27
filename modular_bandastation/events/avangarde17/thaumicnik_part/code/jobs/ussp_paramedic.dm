@@ -1,12 +1,13 @@
-/datum/outfit/job/ussp_medic
-	name = "Врач"
-	id = /obj/item/card/id/advanced/ussp
-	id_trim = /datum/id_trim/job/ussp_medic
+/datum/outfit/job/ussp_paramedic
+	name = "Фельдшер"
+	id = /obj/item/card/id/advanced/ussp/passport
+	id_trim = /datum/id_trim/job/ussp_paramedic
 	uniform = /obj/item/clothing/under/costume/buttondown/slacks
 	suit = /obj/item/clothing/suit/toggle/labcoat
 	ears = /obj/item/radio/headset
 	shoes = /obj/item/clothing/shoes/laceup
 	gloves = /obj/item/clothing/gloves/latex
+	head = /obj/item/clothing/mask/bandana/white
 	belt = null
 	pda_slot = null
 
@@ -15,14 +16,14 @@
 	duffelbag = /obj/item/storage/backpack/duffelbag
 	messenger = /obj/item/storage/backpack/messenger
 
-/datum/job/ussp_medic
-	title = "Врач"
+/datum/job/ussp_paramedic
+	title = "Фельдшер"
 	supervisors = "правительством СССП"
-	description = "Лечите сограждан, импровизируйте при нехватке медикаментов, старайтесь не быть фигурантом уголовного дела."
+	description = "Выезжайте на вызовы, приторговывайте опиатами и промышляйте мелкими кражами."
 	departments_list = list(
 		/datum/job_department/medical,
 	)
-	outfit = /datum/outfit/job/ussp_medic
+	outfit = /datum/outfit/job/ussp_paramedic
 	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2
@@ -35,9 +36,9 @@
 	mind_traits = list(MEDICAL_MIND_TRAITS)
 	liver_traits = list(TRAIT_MEDICAL_METABOLISM)
 
-/datum/id_trim/job/ussp_medic
-	assignment = "Врач"
-	trim_state = "trim_medicaldoctor"
+/datum/id_trim/job/ussp_paramedic
+	assignment = "Фельдшер"
+	trim_state = "trim_paramedic"
 	department_color = COLOR_MEDICAL_BLUE
 	subdepartment_color = COLOR_MEDICAL_BLUE
 	sechud_icon_state = SECHUD_USSP
@@ -52,4 +53,4 @@
 		ACCESS_PARAMEDIC,
 		ACCESS_PLUMBING,
 		)
-	job = /datum/job/ussp_medic
+	job = /datum/job/ussp_paramedic

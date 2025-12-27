@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_quartermaster
 	name = "Заведующий складом"
-	id = /obj/item/card/id/advanced/ussp
+	id = /obj/item/card/id/advanced/ussp/passport
 	id_trim = /datum/id_trim/job/ussp_quartermaster
 	uniform = /obj/item/clothing/under/suit/navy
 	ears = /obj/item/radio/headset

@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_miner
 	name = "Шахтёр"
-	id = /obj/item/card/id/advanced/ussp
+	id = /obj/item/card/id/advanced/ussp/passport
 	id_trim = /datum/id_trim/job/ussp_miner
 	uniform = /obj/item/clothing/under/misc/overalls
 	ears = /obj/item/radio/headset

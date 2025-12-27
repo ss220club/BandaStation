@@ -1,10 +1,15 @@
 /datum/outfit/job/ussp_punk
 	name = "Шпана"
-	uniform = /obj/item/clothing/under/costume/buttondown/slacks
-	suit = /obj/item/clothing/suit/toggle/jacket/trenchcoat
+	id = /obj/item/card/id/advanced/ussp/passport
+	id_trim = /datum/id_trim/job/ussp_punk
+	uniform = /obj/item/clothing/under/rank/ussp/gopnik
 	mask = /obj/item/clothing/mask/bandana/skull
 	ears = /obj/item/radio/headset
 	shoes = /obj/item/clothing/shoes/sneakers/black
+	head = /obj/item/clothing/head/soft/ussp/gopnik
+	backpack_contents = list(
+		/obj/item/food/semki,
+	)
 	belt = null
 	pda_slot = null
 
@@ -15,7 +20,7 @@
 
 /datum/job/ussp_punk
 	title = "Шпана"
-	supervisors = "своей личной совестью"
+	supervisors = "понятиями"
 	description = "Бухайте, деритесь, занимайтесь разбоем. В перерывах сидите в обезьяннике."
 	departments_list = list(
 		/datum/job_department/assistant,

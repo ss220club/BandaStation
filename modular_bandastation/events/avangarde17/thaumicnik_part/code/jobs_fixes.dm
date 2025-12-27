@@ -1,4 +1,5 @@
-// Some crude fixes to disable runtimes and unnecessary behavior in various cases while using this event module
+// Some crude fixes to disable runtimes and unnecessary behavior in various cases while using this event module.
+// Also some addition to existing procs for event purposes.
 
 // We don't have heads in this event, so console is unable to get access from them.
 /datum/computer_file/program/department_order/set_linked_department(datum/job_department/department)
@@ -38,3 +39,12 @@
 		//load_jobs_from_config()
 	overflow_role = /datum/job/assistant
 	set_overflow_role(overflow_role)
+
+// Granting neo_ruskiy to all jobs
+/datum/outfit/job/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
+	..()
+	if(visuals_only)
+		return
+	translator.grant_language(/datum/language/spinwarder)
+	translator.remove_blocked_language(/datum/language/spinwarder)
+	translator.set_active_language(/datum/language/spinwarder)

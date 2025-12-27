@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_cook
 	name = "Повар рюмочной"
-	id = /obj/item/card/id/advanced/ussp
+	id = /obj/item/card/id/advanced/ussp/passport
 	id_trim = /datum/id_trim/job/ussp_cook
 	uniform = /obj/item/clothing/under/costume/buttondown/slacks/service
 	suit = /obj/item/clothing/suit/apron/chef

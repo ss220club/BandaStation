@@ -6,7 +6,6 @@
 #include "ussp_cook.dm"
 #include "ussp_homeless.dm"
 #include "ussp_medic.dm"
-#include "ussp_militia_registator.dm"
 #include "ussp_militiaman.dm"
 #include "ussp_miner.dm"
 #include "ussp_paramedic.dm"

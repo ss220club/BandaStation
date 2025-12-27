@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_homeless
 	name = "Бездомный"
-	id = /obj/item/card/id/advanced/ussp
+	id = /obj/item/card/id/advanced/ussp/passport
 	id_trim = /datum/id_trim/job/ussp_homeless
 	uniform = /obj/item/clothing/under/pants/slacks
 	suit = /obj/item/clothing/suit/toggle/jacket/sweater

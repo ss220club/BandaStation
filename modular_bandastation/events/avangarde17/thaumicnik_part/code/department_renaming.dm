@@ -4,7 +4,7 @@
 /datum/job_department/service
 	department_name = "Услуги"
 
-/datum/job_department/cargo
+/datum/job_department/command
 	department_name = "Милиция"
 
 /datum/job_department/medical
@@ -12,3 +12,6 @@
 
 /datum/job_department/assistant
 	department_name = "Гражданские"
+
+/datum/job_department/cargo
+	department_name = "Трудовые"
