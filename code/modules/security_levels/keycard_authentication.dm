@@ -98,7 +98,7 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 				return TRUE
 			for(var/access_as_text in SSid_access.sub_department_managers_tgui)
 				var/list/info = SSid_access.sub_department_managers_tgui[access_as_text]
-				if(card.trim.assignment != info["head"])
+				if(card.trim.assignment != job_title_ru(info["head"])) // BANDASTATION FIX: janitor keycard
 					continue
 				COOLDOWN_START(src, access_grant_cooldown, ACCESS_GRANTING_COOLDOWN)
 				SEND_GLOBAL_SIGNAL(COMSIG_ON_DEPARTMENT_ACCESS, info["regions"])
