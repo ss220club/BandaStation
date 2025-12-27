@@ -1184,10 +1184,6 @@
 /obj/structure/chair/stool/directional/south,
 /turf/open/floor/iron/dark/diagonal,
 /area/awaymission/avangarde17/outside/roofs)
-"aNj" = (
-/obj/machinery/light/small/directional/south,
-/turf/closed/wall/mineral/iron,
-/area/awaymission/avangarde17/inside/shop_2)
 "aNl" = (
 /obj/structure/table/reinforced,
 /obj/machinery/button/door/directional/north{
@@ -23794,11 +23790,6 @@
 "nma" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_2/second_apartment/bathroom)
-"nmm" = (
-/obj/structure/cable,
-/obj/machinery/light/small/directional/east,
-/turf/open/floor/catwalk_floor/iron_dark,
-/area/awaymission/avangarde17/inside/base_eng)
 "nmq" = (
 /obj/effect/turf_decal/arrows{
 	dir = 8
@@ -28457,10 +28448,6 @@
 "pVF" = (
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/gov/second_floor)
-"pWN" = (
-/obj/machinery/power/apc/auto_name/directional/east,
-/turf/open/openspace,
-/area/awaymission/avangarde17/outside/city)
 "pWZ" = (
 /obj/effect/turf_decal/tile/brown/opposingcorners{
 	dir = 8
@@ -33654,6 +33641,7 @@
 	pixel_x = 8;
 	pixel_y = 10
 	},
+/obj/machinery/light/small/directional/south,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/shop_2)
 "sQS" = (
@@ -53590,7 +53578,7 @@ gvr
 lQy
 rwF
 sTr
-nmm
+aso
 cOt
 rwF
 rxx
@@ -98359,9 +98347,9 @@ yjE
 iXl
 lUm
 sQR
-aNj
+iXl
 iru
-gzt
+oXc
 koe
 gVl
 gVl
@@ -163054,7 +163042,7 @@ wFa
 jUS
 bkv
 bkv
-pWN
+bkv
 qta
 vdy
 vdy
