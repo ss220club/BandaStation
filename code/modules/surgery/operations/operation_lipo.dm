@@ -1,7 +1,7 @@
 /datum/surgery_operation/limb/lipoplasty
-	name = "excise excess fat"
-	rnd_name = "Lipoplasty (Excise Fat)"
-	desc = "Remove excess fat from a patient's body."
+	name = "Липопластика"
+	rnd_name = "Липопластика (Удаление жира)"
+	desc = "Удаление лишнего жира из тела пациента."
 	operation_flags = OPERATION_NOTABLE | OPERATION_AFFECTS_MOOD
 	implements = list(
 		TOOL_SAW = 1,
@@ -22,16 +22,16 @@
 	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
 
 /datum/surgery_operation/limb/lipoplasty/get_any_tool()
-	return "Any sharp edged item"
+	return "Любой острый предмет"
 
 /datum/surgery_operation/limb/lipoplasty/get_default_radial_image()
 	return image(/obj/item/food/meat/slab/human)
 
 /datum/surgery_operation/limb/lipoplasty/all_required_strings()
 	. = list()
-	. += "operate on chest (target chest)"
+	. += "Операция на груди"
 	. += ..()
-	. += "the patient must have excess fat to remove"
+	. += "Пациент должен иметь лишний жир для удаления"
 
 /datum/surgery_operation/limb/lipoplasty/tool_check(obj/item/tool)
 	// Require edged sharpness OR a tool behavior match
@@ -48,19 +48,19 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to cut away [limb.owner]'s excess fat..."),
-		span_notice("[surgeon] begins to cut away [limb.owner]'s excess fat."),
-		span_notice("[surgeon] begins to cut [limb.owner]'s [limb.plaintext_zone] with [tool]."),
+		span_notice("Вы начинаете срезать лишний жир у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает срезать лишний жир у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает резать [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "You feel a stabbing in your [limb.plaintext_zone]!")
+	display_pain(limb.owner, "Вы чувствуете колющую боль в [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/lipoplasty/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You successfully remove excess fat from [limb.owner]'s body!"),
-		span_notice("[surgeon] successfully removes excess fat from [limb.owner]'s body!"),
-		span_notice("[surgeon] finishes cutting away excess fat from [limb.owner]'s [limb.plaintext_zone]."),
+		span_notice("Вы успешно удалили лишний жир из тела [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] успешно удаляет лишний жир из тела [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] заканчивает срезать лишний жир из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	limb.owner.overeatduration = 0 //patient is unfatted
 	var/removednutriment = limb.owner.nutrition
@@ -77,16 +77,16 @@
 		return
 
 	var/obj/item/food/meat/slab/newmeat = new typeofmeat()
-	newmeat.name = "fatty meat"
-	newmeat.desc = "Extremely fatty tissue taken from a patient."
+	newmeat.name = "жирное мясо"
+	newmeat.desc = "Чрезвычайно жирная ткань, извлеченная из пациента."
 	newmeat.subjectname = limb.owner.real_name
 	newmeat.subjectjob = limb.owner.job
 	newmeat.reagents.add_reagent(/datum/reagent/consumable/nutriment, (removednutriment / 15)) //To balance with nutriment_factor of nutriment
 	newmeat.forceMove(limb.owner.drop_location())
 
 /datum/surgery_operation/limb/lipoplasty/mechanic
-	name = "engage expulsion valve" //gross
-	rnd_name = "Nutrient Reserve Expulsion (Excise Fat)"
+	name = "Задействовать выпускной клапан" //gross
+	rnd_name = "Выброс питательных резервов (Удаление жира)"
 	implements = list(
 		TOOL_WRENCH = 1.05,
 		TOOL_CROWBAR = 1.05,
