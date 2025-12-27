@@ -1,7 +1,7 @@
 /obj/projectile/energy/snare
 	name = "energy snare"
 	icon_state = "e_netting"
-	damage = 30
+	damage = 25 // BANDASTATION EDIT DRAGNET REBALANCE ORIG: 30
 	damage_type = STAMINA
 	hitsound = 'sound/items/weapons/taserhit.ogg'
 	range = 10
@@ -46,7 +46,7 @@
 /obj/effect/nettingportal/proc/pop(teletarget)
 	if(teletarget)
 		for(var/mob/living/living_mob in get_turf(src))
-			do_teleport(living_mob, get_turf(teletarget), 1, channel = TELEPORT_CHANNEL_BLUESPACE) //Teleport what's in the tile to the beacon
+			do_teleport(living_mob, get_turf(teletarget), 0.5, channel = TELEPORT_CHANNEL_BLUESPACE) //Teleport what's in the tile to the beacon // BANDASTATION EDIT DRAGNET REBALANCE BOUNTY ORIG: 1, channel
 	else
 		for(var/mob/living/living_mob in get_turf(src))
 			do_teleport(living_mob, get_turf(living_mob), 15, channel = TELEPORT_CHANNEL_BLUESPACE) //Otherwise it just warps you off somewhere.
