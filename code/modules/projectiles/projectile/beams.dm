@@ -188,7 +188,7 @@
 /obj/projectile/beam/disabler/scatter
 	name = "scatter disabler"
 	icon_state = "scatterdisabler"
-	damage = 3.5 // BANDASTATION EDIT: DRAGNET REBALANCE ORIG: 5.5
+	damage = 2.6 // BANDASTATION EDIT: DRAGNET REBALANCE ORIG: 5.5
 	damage_falloff_tile = -0.5
 	speed = 1.2
 	impact_effect_type = /obj/effect/temp_visual/impact_effect/green_laser
