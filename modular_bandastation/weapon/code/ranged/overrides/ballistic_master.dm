@@ -87,13 +87,12 @@
 
 /obj/item/firing_pin/alert_level
 	name = "alert level firing pin"
-	var/desired_minimium_alert = SEC_LEVEL_GREEN
+	var/desired_minimum_alert = SEC_LEVEL_GREEN
 
 /obj/item/firing_pin/alert_level/blue
-	name = "alert level firing pin"
-	desired_minimium_alert = SEC_LEVEL_BLUE
+	desired_minimum_alert = SEC_LEVEL_BLUE
 	desc = "Небольшое устройство аутентификации, которое вставляется в спусковой механизм оружия для обеспечения его работоспособности. Данное устройство настроено на стрельбу только при синем уровне тревоги или выше."
 	fail_message = "низкий уровень тревоги!"
 
 /obj/item/firing_pin/alert_level/pin_auth(mob/living/user)
-	return (SSsecurity_level.current_security_level.number_level >= desired_minimium_alert)
+	return (SSsecurity_level.current_security_level.number_level >= desired_minimum_alert)

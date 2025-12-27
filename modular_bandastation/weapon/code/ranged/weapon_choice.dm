@@ -1,7 +1,6 @@
 /obj/item/choice_beacon/security_pistol
 	name = "sidearm weapon beacon"
 	desc = "Одноразовый маяк для доставки оружия по вашему выбору. Пожалуйста, используйте его только в своем офисе."
-	company_source = "NanoTrasen"
 
 /obj/item/choice_beacon/security_pistol/generate_display_names()
 	var/static/list/selectable_gun_types = list(
