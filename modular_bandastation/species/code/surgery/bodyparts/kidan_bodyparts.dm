@@ -1,11 +1,6 @@
 /obj/item/bodypart/head/kidan
 	icon_greyscale = 'icons/bandastation/mob/species/kidan/bodyparts.dmi'
 	limb_id = SPECIES_KIDAN
-	unarmed_attack_verbs = list("slash")
-	grappled_attack_verb = "lacerate"
-	unarmed_attack_effect = ATTACK_EFFECT_CLAW
-	unarmed_attack_sound = 'sound/items/weapons/slice.ogg'
-	unarmed_miss_sound = 'sound/items/weapons/slashmiss.ogg'
 	is_dimorphic = FALSE
 	brute_modifier = 0.8
 	head_flags = HEAD_LIPS|HEAD_EYESPRITES|HEAD_EYEHOLES|HEAD_DEBRAIN
@@ -13,11 +8,6 @@
 /obj/item/bodypart/chest/kidan
 	icon_greyscale = 'icons/bandastation/mob/species/kidan/bodyparts.dmi'
 	limb_id = SPECIES_KIDAN
-	unarmed_attack_verbs = list("slash")
-	grappled_attack_verb = "lacerate"
-	unarmed_attack_effect = ATTACK_EFFECT_CLAW
-	unarmed_attack_sound = 'sound/items/weapons/slice.ogg'
-	unarmed_miss_sound = 'sound/items/weapons/slashmiss.ogg'
 	is_dimorphic = FALSE
 	brute_modifier = 0.7
 
@@ -49,9 +39,4 @@
 /obj/item/bodypart/leg/right/kidan
 	icon_greyscale = 'icons/bandastation/mob/species/kidan/bodyparts.dmi'
 	limb_id = SPECIES_KIDAN
-	unarmed_attack_verbs = list("slash")
-	grappled_attack_verb = "lacerate"
-	unarmed_attack_effect = ATTACK_EFFECT_CLAW
-	unarmed_attack_sound = 'sound/items/weapons/slice.ogg'
-	unarmed_miss_sound = 'sound/items/weapons/slashmiss.ogg'
 	brute_modifier = 0.8
