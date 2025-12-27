@@ -16,7 +16,6 @@
 #include "code/headslug.dm"
 #include "code/heretic_knife.dm"
 #include "code/human_stripping.dm"
-#include "code/materials_market.dm"
 #include "code/mobs/shade.dm"
 #include "code/religion.dm"
 #include "code/speed/base_speed.dm"

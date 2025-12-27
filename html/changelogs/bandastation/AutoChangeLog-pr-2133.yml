@@ -1,0 +1,4 @@
+author: "PetyaFX"
+delete-after: True
+changes:
+  - config: "Для Кибериады был добавлен нижний порог в 50 человек для выбора карты"
