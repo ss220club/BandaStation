@@ -273,7 +273,7 @@
 				// now move the actual emergency shuttle to centcom
 				// unless the shuttle is "hijacked"
 				var/destination_dock = "emergency_away"
-				if(is_hijacked() || elimination_hijack())
+				if(GLOB.revolution_handler?.result == REVOLUTION_VICTORY || is_hijacked() || elimination_hijack())  // SS220 BandaStation EDIT - Shuttle goes to SyndieBase if Revs win
 					// just double check
 					SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_NUKIEBASE)
 					destination_dock = "emergency_syndicate"

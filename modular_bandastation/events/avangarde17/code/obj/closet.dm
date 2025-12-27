@@ -27,6 +27,8 @@
 	new /obj/item/storage/belt/military/army/ussp(src)
 	for(var/i in 1 to 3)
 		new /obj/item/restraints/handcuffs(src)
+	new /obj/item/clothing/gloves/combat(src)
+	new /obj/item/flashlight/seclite(src)
 
 //Ганкейсы
 /obj/item/storage/toolbox/guncase/akm

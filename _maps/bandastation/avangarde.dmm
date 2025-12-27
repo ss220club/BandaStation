@@ -374,7 +374,9 @@
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/miner)
 "amC" = (
-/obj/structure/statue/snow/snowman,
+/obj/structure/statue/snow/snowman{
+	anchored = 1
+	},
 /obj/item/clothing/head/hats/ussp_officer{
 	pixel_x = 0;
 	pixel_y = 11
@@ -385,6 +387,20 @@
 	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/base)
+"amJ" = (
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 9
+	},
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "amY" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Этаж 1 - Квартира 3"
@@ -598,6 +614,54 @@
 	name = "Столичная";
 	pixel_x = -8;
 	pixel_y = 17
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	name = "Бояринъ";
+	pixel_x = -11;
+	pixel_y = 13;
+	desc = "Пить только с тазиком."
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	name = "Бояринъ";
+	pixel_x = -11;
+	pixel_y = 13;
+	desc = "Пить только с тазиком."
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	name = "Бояринъ";
+	pixel_x = -11;
+	pixel_y = 13;
+	desc = "Пить только с тазиком."
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/ruin)
@@ -1481,6 +1545,11 @@
 	pixel_x = -8;
 	pixel_y = -7
 	},
+/obj/item/storage/box/drinkingglasses,
+/obj/item/storage/box/drinkingglasses,
+/obj/item/storage/box/drinkingglasses,
+/obj/item/storage/box/drinkingglasses,
+/obj/item/storage/box/drinkingglasses,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/hangar)
 "aWy" = (
@@ -2002,13 +2071,16 @@
 "bhv" = (
 /obj/structure/closet/crate/cardboard,
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/pod/dark,
@@ -2293,10 +2365,7 @@
 "bmU" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
-/obj/structure/sink/shell_only/directional/north{
-	pixel_x = 0;
-	pixel_y = -30
-	},
+/obj/structure/sink/directional/north,
 /obj/structure/mirror{
 	pixel_x = 0;
 	pixel_y = -36
@@ -3198,6 +3267,15 @@
 	name = "greatcoat"
 	},
 /obj/item/clothing/suit/armor/vest/caftan,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/fourth_apartment)
 "bLe" = (
@@ -3989,9 +4067,10 @@
 	pixel_y = 15
 	},
 /obj/structure/sign/flag/ussp/directional/east,
-/obj/item/phone{
-	pixel_x = -8;
-	pixel_y = -2
+/obj/structure/transmitter/ussp_militsia{
+	pixel_x = -6;
+	pixel_y = 3;
+	name = "МИЛИЦИЯ - Старший Оперуполномоченный"
 	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/police/chief)
@@ -4112,7 +4191,9 @@
 /turf/open/floor/iron/diagonal,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment/bathroom)
 "cmu" = (
-/obj/structure/statue/snow/snowman,
+/obj/structure/statue/snow/snowman{
+	anchored = 1
+	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "cmv" = (
@@ -4157,7 +4238,9 @@
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar/second_floor)
 "coa" = (
-/obj/structure/closet/secure_closet/omon,
+/obj/structure/closet/secure_closet/omon{
+	req_access = null
+	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
@@ -4971,17 +5054,10 @@
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "cOc" = (
-/obj/structure/spider/stickyweb,
-/obj/structure/stone_tile/slab{
-	color = "#464646"
-	},
-/obj/structure/flora/rock/pile{
-	color = "#292929"
-	},
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple)
+/obj/structure/flora/grass/brown/style_3,
+/obj/structure/light_fake/floodlight,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside/base)
 "cOt" = (
 /obj/machinery/power/port_gen/pacman/pre_loaded{
 	sheets = 50;
@@ -5108,10 +5184,7 @@
 "cSx" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
-/obj/structure/sink/shell_only/directional/north{
-	pixel_x = 0;
-	pixel_y = -30
-	},
+/obj/structure/sink/directional/north,
 /obj/structure/mirror{
 	pixel_x = 0;
 	pixel_y = -36
@@ -6307,6 +6380,15 @@
 	name = "greatcoat"
 	},
 /obj/item/clothing/suit/armor/vest/caftan,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/fourth_apartment)
 "dud" = (
@@ -6573,6 +6655,18 @@
 /obj/item/clothing/head/costume/ushanka,
 /obj/item/clothing/head/costume/ushanka,
 /obj/item/instrument/guitar,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_1/fourth_apartment)
 "dyr" = (
@@ -6730,7 +6824,7 @@
 /obj/structure/window/reinforced/spawner/directional/north,
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/machinery/door/window/left/directional/east,
-/obj/structure/transmitter/mounted/free/directional/east,
+/obj/structure/transmitter/free/directional/east,
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
 "dDv" = (
@@ -6751,7 +6845,7 @@
 /obj/item/stack/sheet/mineral/plasma/fifty,
 /obj/structure/cable,
 /turf/open/floor/plating,
-/area/awaymission/avangarde17/inside/old_hangar/eng)
+/area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "dEm" = (
 /obj/structure/chair/comfy,
 /obj/structure/sign/calendar/ussp/directional/north,
@@ -6791,7 +6885,6 @@
 /obj/item/clothing/neck/scarf,
 /obj/item/clothing/neck/scarf,
 /obj/item/clothing/neck/scarf,
-/obj/item/clothing/under/rank/medical/scrubs/purple,
 /obj/item/clothing/mask/surgical,
 /obj/item/clothing/mask/surgical,
 /obj/item/clothing/mask/surgical,
@@ -7384,7 +7477,9 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "dTE" = (
-/obj/structure/closet/secure_closet/omon,
+/obj/structure/closet/secure_closet/omon{
+	req_access = null
+	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
@@ -7846,11 +7941,39 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "eca" = (
-/obj/effect/turf_decal/weather/snow/corner,
-/obj/structure/cable,
-/obj/structure/light_fake/small/directional,
-/turf/open/floor/iron/small,
-/area/awaymission/avangarde17/outside/city)
+/obj/structure/shelves,
+/obj/item/reagent_containers/cup/glass/bottle/vodka{
+	desc = "Лучшая водка в Галактике, разлита прямиком на Лазаре.";
+	name = "Столичная";
+	pixel_x = -7;
+	pixel_y = 18
+	},
+/obj/item/reagent_containers/cup/glass/bottle/vodka{
+	desc = "Разлит на Лазаре.";
+	name = "Столичная";
+	pixel_x = 0;
+	pixel_y = 18
+	},
+/obj/item/reagent_containers/cup/glass/bottle/vodka{
+	desc = "Разлит на Лазаре.";
+	name = "Столичная";
+	pixel_x = 7;
+	pixel_y = 18
+	},
+/obj/item/reagent_containers/cup/glass/bottle/vodka{
+	desc = "Разлит на Лазаре.";
+	name = "Столичная";
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/vodka{
+	desc = "Разлит на Лазаре.";
+	name = "Столичная";
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/inside/bar)
 "ecG" = (
 /obj/structure/railing{
 	dir = 1;
@@ -8243,7 +8366,6 @@
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "erS" = (
-/obj/machinery/griddle,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment)
 "ese" = (
@@ -8407,8 +8529,8 @@
 	pixel_y = 22;
 	anchored = 1;
 	label = "Шашлычная ''Братские Народы''";
-	name = "Шашлычная ''Братские Народы''";
-	desc = "Самые быстрые шашлыки в Галактике."
+	name = "Шашлычная ''У Ашота''";
+	desc = "Самые быстрые шашлыки в Галактике. P.S. Ашот отошел."
 	},
 /obj/item/food/kebab/rat/double{
 	pixel_x = 3;
@@ -8500,6 +8622,22 @@
 /obj/item/storage/toolbox/mechanical/old{
 	pixel_x = 0;
 	pixel_y = 14
+	},
+/obj/item/key/bobik{
+	pixel_x = -7;
+	pixel_y = 0
+	},
+/obj/item/key/bobik{
+	pixel_x = 1;
+	pixel_y = 0
+	},
+/obj/item/key/bobik{
+	pixel_x = 6;
+	pixel_y = 0
+	},
+/obj/item/key/bobik{
+	pixel_x = -3;
+	pixel_y = 0
 	},
 /turf/open/floor/iron/smooth,
 /area/awaymission/avangarde17/inside/police/car)
@@ -8696,6 +8834,30 @@
 	name = "greatcoat"
 	},
 /obj/item/instrument/guitar,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_1/second_apartment)
 "eHp" = (
@@ -10053,9 +10215,9 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_4/third_apartment)
 "fAq" = (
-/obj/structure/statue/snow/snowman,
+/obj/structure/light_fake/small/directional/south,
 /turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/base)
+/area/awaymission/avangarde17/outside)
 "fAH" = (
 /turf/open/floor/iron/smooth_corner,
 /area/awaymission/avangarde17/outside/base)
@@ -10205,10 +10367,7 @@
 	pixel_x = 4;
 	pixel_y = 9
 	},
-/obj/item/storage/fancy/cigarettes/cigpack_robust{
-	pixel_x = -8;
-	pixel_y = 0
-	},
+/obj/item/storage/fancy/cigarettes/cigpack_robust/ussp,
 /obj/item/lighter/greyscale{
 	pixel_x = 0;
 	pixel_y = -4
@@ -10333,20 +10492,13 @@
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "fGA" = (
-/obj/structure/shelves/style2,
-/obj/item/storage/toolbox/mechanical{
-	pixel_x = 0;
-	pixel_y = 14
+/obj/machinery/power/smes/magical{
+	name = "коммунистический трансформатор";
+	desc = "Работает на вере в учение Маркса-Энгельса-Ленина!";
+	output_used = 400000
 	},
-/obj/item/storage/toolbox/electrical{
-	pixel_x = 0;
-	pixel_y = 4
-	},
-/obj/item/storage/toolbox/emergency{
-	pixel_x = 0;
-	pixel_y = -6
-	},
-/turf/open/floor/catwalk_floor/iron_dark,
+/obj/structure/cable,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/base_eng)
 "fGH" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -10465,6 +10617,18 @@
 /obj/item/clothing/neck/large_scarf/green,
 /obj/item/clothing/suit/jacket/fancy,
 /obj/item/clothing/suit/armor/vest/russian_coat,
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/neck/tie/red,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_1/first_apartment/bedroom)
 "fJp" = (
@@ -10486,6 +10650,15 @@
 	dir = 4
 	},
 /obj/machinery/light/small/directional/west,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/second_apartment)
 "fJE" = (
@@ -10528,6 +10701,13 @@
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 4
 	},
+/obj/item/storage/toolbox/guncase/akm,
+/obj/item/storage/toolbox/guncase/akm,
+/obj/item/storage/toolbox/guncase/akm,
+/obj/item/storage/toolbox/guncase/akm,
+/obj/item/storage/toolbox/guncase/akm,
+/obj/item/storage/toolbox/guncase/akm,
+/obj/item/storage/toolbox/guncase/akm,
 /turf/open/floor/wood/large/oak,
 /area/awaymission/avangarde17/inside/base_prapor)
 "fMf" = (
@@ -11667,12 +11847,14 @@
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
 	name = "Бояринъ";
 	pixel_x = -7;
-	pixel_y = 15
+	pixel_y = 15;
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
 	name = "Бояринъ";
 	pixel_x = -6;
-	pixel_y = 6
+	pixel_y = 6;
+	desc = "Пить только с тазиком."
 	},
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
@@ -11997,7 +12179,6 @@
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_2/fourth_apartment)
 "gDJ" = (
-/obj/machinery/griddle,
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
 	},
@@ -12399,8 +12580,9 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
 "gUb" = (
-/obj/structure/cable,
-/obj/machinery/power/apc/auto_name/directional/north,
+/obj/machinery/light/small/directional/north,
+/obj/structure/table/reinforced,
+/obj/item/multitool,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/base_eng)
 "gUo" = (
@@ -12532,10 +12714,7 @@
 "gZH" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
-/obj/structure/sink/shell_only/directional/north{
-	pixel_x = 0;
-	pixel_y = -30
-	},
+/obj/structure/sink/directional/north,
 /obj/structure/mirror{
 	pixel_x = 0;
 	pixel_y = -36
@@ -12820,12 +12999,14 @@
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
 	name = "Бояринъ";
 	pixel_x = -11;
-	pixel_y = 13
+	pixel_y = 13;
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
 	name = "Бояринъ";
 	pixel_x = -6;
-	pixel_y = 4
+	pixel_y = 4;
+	desc = "Пить только с тазиком."
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/gov/radio)
@@ -13037,10 +13218,12 @@
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/base)
 "hrt" = (
-/obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
+/obj/machinery/power/terminal{
+	dir = 8
+	},
 /turf/open/floor/plating,
-/area/awaymission/avangarde17/inside/old_hangar/eng)
+/area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "hry" = (
 /obj/item/stack/sheet/mineral/wood{
 	pixel_x = -15;
@@ -13334,6 +13517,30 @@
 /obj/item/clothing/head/costume/ushanka,
 /obj/item/clothing/head/costume/ushanka,
 /obj/item/instrument/guitar,
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_2/second_apartment)
 "hzh" = (
@@ -13761,7 +13968,7 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/temple)
 "hKC" = (
-/turf/open/floor/catwalk_floor/iron_dark,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/base_eng)
 "hKP" = (
 /obj/structure/closet/cardboard,
@@ -14690,10 +14897,7 @@
 /area/awaymission/avangarde17/inside/house_2/second_apartment)
 "ihK" = (
 /obj/structure/trap/trapdoor,
-/turf/open/floor/plating{
-	icon_state = "cult";
-	color = "#4b4b4b"
-	},
+/turf/open/floor/plating/temple,
 /area/awaymission/avangarde17/inside/temple)
 "iil" = (
 /obj/effect/decal/cleanable/generic,
@@ -15129,7 +15333,9 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/base)
 "iyT" = (
-/obj/effect/decal/fakelattice,
+/obj/effect/decal/fakelattice{
+	density = 0
+	},
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/old_hangar/first_floor)
@@ -15170,6 +15376,10 @@
 /obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/police/cabinet)
+"iAm" = (
+/obj/structure/light_fake/small/directional/west,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
 "iAt" = (
 /turf/open/openspace,
 /area/awaymission/avangarde17/inside/house_4)
@@ -16074,16 +16284,9 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_4/eighth_apartment)
 "jbi" = (
-/obj/structure/platform/iron,
-/obj/structure/window/reinforced/survival_pod/spawner/directional/south,
-/obj/structure/statue/bronze/marx{
-	pixel_x = 1;
-	pixel_y = 14;
-	anchored = 1
-	},
-/obj/structure/curtain/bounty/start_closed,
-/turf/open/floor/iron,
-/area/awaymission/avangarde17/inside/hangar/cabinet)
+/obj/structure/light_fake/small/directional/north,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
 "jbl" = (
 /obj/effect/spawner/structure/window/ice,
 /obj/structure/curtain/bounty,
@@ -16383,7 +16586,7 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/plating,
-/area/awaymission/avangarde17/inside/old_hangar/eng)
+/area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "jmw" = (
 /obj/structure/railing{
 	dir = 4;
@@ -16773,6 +16976,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
+"jux" = (
+/obj/structure/cable,
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/inside/base_eng)
 "jvJ" = (
 /obj/structure/tomb/tomb_2,
 /obj/structure/stone_tile/surrounding_tile{
@@ -16809,6 +17019,24 @@
 /area/awaymission/avangarde17/inside/hangar/second_floor)
 "jyz" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = 7;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -3;
+	pixel_y = 17
+	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/ruin)
 "jyH" = (
@@ -16957,34 +17185,44 @@
 	name = "Жигулевское"
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/plating,
@@ -17092,6 +17330,15 @@
 /obj/item/clothing/suit/jacket/fancy,
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 6
+	},
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/third_apartment)
@@ -17308,6 +17555,14 @@
 /obj/item/instrument/guitar,
 /obj/item/clothing/suit/armor/vest/russian_coat,
 /obj/item/clothing/suit/armor/vest/caftan,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/eighth_apartment/bedroom)
 "jJf" = (
@@ -17491,7 +17746,9 @@
 /area/awaymission/avangarde17/inside/base)
 "jPZ" = (
 /obj/effect/mapping_helpers/burnt_floor,
-/obj/effect/decal/fakelattice,
+/obj/effect/decal/fakelattice{
+	density = 0
+	},
 /obj/structure/bed/maint,
 /obj/item/reagent_containers/cup/glass/bottle/vodka{
 	desc = "Разлит на Лазаре.";
@@ -17930,7 +18187,9 @@
 /turf/open/floor/asphalt,
 /area/awaymission/avangarde17/outside/city)
 "kaX" = (
-/obj/effect/decal/fakelattice,
+/obj/effect/decal/fakelattice{
+	density = 0
+	},
 /obj/machinery/light_switch/directional/north,
 /obj/structure/cable,
 /turf/open/floor/plating,
@@ -18493,6 +18752,18 @@
 /obj/item/clothing/head/costume/ushanka/polar,
 /obj/item/clothing/head/costume/ushanka,
 /obj/machinery/light/small/directional/south,
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/neck/tie/red,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_2/fifth_apartment)
 "kqy" = (
@@ -19403,7 +19674,7 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/hospital/hall)
 "kPX" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/secure_closet/freezer/empty,
 /obj/item/reagent_containers/condiment/rice,
 /obj/item/reagent_containers/condiment/rice,
 /obj/item/reagent_containers/condiment/rice,
@@ -19528,6 +19799,10 @@
 /obj/item/clothing/shoes/workboots,
 /obj/item/clothing/neck/large_scarf/blue,
 /obj/item/clothing/neck/large_scarf/green,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/house_3/eighth_apartment)
 "kTh" = (
@@ -19859,7 +20134,7 @@
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar)
 "lfl" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/secure_closet/freezer/empty,
 /obj/item/reagent_containers/condiment/enzyme{
 	pixel_y = 5
 	},
@@ -20081,6 +20356,18 @@
 	},
 /obj/machinery/light/small/directional/south,
 /obj/item/instrument/guitar,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_1/fifth_apartment)
 "lmA" = (
@@ -20400,7 +20687,9 @@
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/shop_1)
 "luK" = (
-/obj/structure/closet/secure_closet/armory4,
+/obj/structure/closet/secure_closet/armory4{
+	req_access = null
+	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
 	},
@@ -20449,6 +20738,18 @@
 /obj/item/clothing/head/costume/ushanka/polar,
 /obj/item/clothing/head/costume/ushanka,
 /obj/item/instrument/guitar,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/neck/tie/red,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_2/fourth_apartment)
 "lwS" = (
@@ -21120,7 +21421,6 @@
 /turf/open/floor/iron/white,
 /area/awaymission/avangarde17/inside/hospital)
 "lTn" = (
-/obj/machinery/griddle,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/house_4/seven_apartment)
 "lTq" = (
@@ -21550,6 +21850,7 @@
 "mhe" = (
 /obj/machinery/light/small/directional/south,
 /obj/effect/mapping_helpers/broken_floor,
+/obj/structure/sign/calendar/ussp/directional/south,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/hangar/cabinet)
 "mhq" = (
@@ -21572,7 +21873,9 @@
 	color = "#464646";
 	dir = 4
 	},
-/obj/machinery/door/password/voice/temple,
+/obj/machinery/door/password/voice/temple{
+	password = "На том стою и здесь останусь"
+	},
 /obj/structure/temple_arch{
 	pixel_y = -43
 	},
@@ -22468,34 +22771,44 @@
 	name = "Жигулевское"
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /obj/item/reagent_containers/cup/glass/bottle/beer/light{
-	name = "Бояринъ"
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
 	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/hangar)
@@ -22694,6 +23007,15 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"mQk" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/item/flashlight/flare/torch,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "mQs" = (
 /obj/structure/stone_tile/slab{
 	color = "#464646"
@@ -23042,6 +23364,15 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/temple)
+"nau" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/structure/marker_beacon/burgundy,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "nax" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 8
@@ -23107,10 +23438,7 @@
 "ncl" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
-/obj/structure/sink/shell_only/directional/north{
-	pixel_x = 0;
-	pixel_y = -30
-	},
+/obj/structure/sink/directional/north,
 /obj/structure/mirror{
 	pixel_x = 0;
 	pixel_y = -36
@@ -23466,6 +23794,11 @@
 "nma" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_2/second_apartment/bathroom)
+"nmm" = (
+/obj/structure/cable,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/awaymission/avangarde17/inside/base_eng)
 "nmq" = (
 /obj/effect/turf_decal/arrows{
 	dir = 8
@@ -23531,6 +23864,18 @@
 /obj/item/clothing/head/beanie/black,
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
+	},
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/six_apartment)
@@ -24577,6 +24922,13 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/temple)
+"nVb" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/structure/light_fake/small/directional/east,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
 "nVR" = (
 /obj/structure/flora/bush/lavendergrass/style_random,
 /turf/open/misc/dirt/dark/station,
@@ -24913,6 +25265,18 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
 	},
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/six_apartment)
 "ofE" = (
@@ -25108,7 +25472,8 @@
 /obj/structure/statue/bronze/marx{
 	pixel_x = -2;
 	pixel_y = 25;
-	anchored = 1
+	anchored = 1;
+	layer = 2.91
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/gov/second_floor)
@@ -25164,15 +25529,9 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
 "onj" = (
-/obj/structure/stone_tile/block/cracked{
+/obj/structure/stone_tile/cracked{
 	color = "#464646";
-	dir = 9
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	color = "#464646"
-	},
-/obj/structure/flora/rock/pile{
-	color = "#292929"
+	dir = 8
 	},
 /obj/structure/spider/stickyweb,
 /turf/open/floor/cult{
@@ -25827,6 +26186,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
+/obj/structure/light_fake/small/directional/west,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "oGx" = (
@@ -25887,6 +26247,23 @@
 	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/base)
+"oIO" = (
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 4
+	},
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/obj/item/flashlight/flare/torch,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "oIP" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Советская 2- Подъезд 2"
@@ -25999,7 +26376,7 @@
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 4
 	},
-/obj/item/storage/fancy/cigarettes/cigpack_robust,
+/obj/item/storage/fancy/cigarettes/cigpack_robust/ussp,
 /turf/open/floor/iron/grimy,
 /area/awaymission/avangarde17/inside/base_smokeroom)
 "oQN" = (
@@ -26230,6 +26607,10 @@
 	dir = 5
 	},
 /obj/machinery/light_switch/directional/west,
+/obj/item/multitool,
+/obj/item/multitool,
+/obj/item/clothing/gloves/color/yellow,
+/obj/item/clothing/gloves/color/yellow,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/shop_2)
 "oWQ" = (
@@ -26319,7 +26700,6 @@
 /obj/item/storage/bag/ore,
 /obj/item/mining_scanner,
 /obj/item/flashlight/seclite,
-/obj/item/clothing/glasses/meson,
 /obj/structure/closet/secure_closet,
 /obj/item/pickaxe/drill/avangarde,
 /turf/open/floor/pod/dark,
@@ -26707,9 +27087,7 @@
 	},
 /obj/machinery/power/apc/auto_name/directional/east,
 /obj/structure/cable,
-/obj/structure/transmitter/ussp{
-	pixel_x = -5;
-	pixel_y = 0;
+/obj/structure/transmitter/ussp_hospital{
 	name = "Фельдшерско-Акушерский Пункт"
 	},
 /turf/open/floor/wood/parquet/cherry,
@@ -27126,7 +27504,6 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/ruin)
 "ptr" = (
-/obj/machinery/griddle,
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
 	},
@@ -27433,6 +27810,18 @@
 	},
 /obj/item/clothing/head/costume/ushanka,
 /obj/item/clothing/head/costume/ushanka/polar,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/fifth_apartment)
 "pAD" = (
@@ -27546,7 +27935,7 @@
 /obj/structure/cable,
 /obj/structure/mineral_door/wood,
 /turf/open/floor/plating,
-/area/awaymission/avangarde17/inside/old_hangar/eng)
+/area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "pGY" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
@@ -28208,6 +28597,18 @@
 	},
 /obj/item/clothing/head/costume/ushanka,
 /obj/item/clothing/head/costume/ushanka/polar,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/fifth_apartment)
 "pYG" = (
@@ -28271,6 +28672,18 @@
 /obj/item/clothing/neck/large_scarf/red,
 /obj/item/clothing/head/costume/ushanka/polar,
 /obj/machinery/light/small/directional/east,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/house_4/seven_apartment)
 "pZG" = (
@@ -28673,6 +29086,18 @@
 /obj/item/clothing/head/beanie/red,
 /obj/item/clothing/head/costume/ushanka/polar,
 /obj/item/clothing/head/costume/ushanka,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_2/first_apartment/bedroom)
 "qkc" = (
@@ -29988,8 +30413,9 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_3/third_apartment/bedroom)
 "qVu" = (
-/turf/closed/wall/mineral/iron,
-/area/awaymission/avangarde17/inside/old_hangar/eng)
+/obj/effect/light_emitter/fake_outdoors,
+/turf/open/openspace,
+/area/awaymission/avangarde17/outside)
 "qVx" = (
 /obj/structure/flora/tree/dead/style_random,
 /obj/structure/flora/grass/both/style_random,
@@ -30667,6 +31093,7 @@
 /obj/structure/chair/wood{
 	dir = 4
 	},
+/obj/machinery/light/small/directional/west,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_2/third_apartment)
 "rtV" = (
@@ -30867,7 +31294,9 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/police)
 "rzv" = (
-/obj/structure/closet/secure_closet/omon,
+/obj/structure/closet/secure_closet/omon{
+	req_access = null
+	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
@@ -30979,7 +31408,9 @@
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside/city)
 "rBL" = (
-/obj/structure/statue/snow/snowman,
+/obj/structure/statue/snow/snowman{
+	anchored = 1
+	},
 /obj/structure/cable,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
@@ -31128,7 +31559,6 @@
 /obj/item/storage/bag/ore,
 /obj/item/mining_scanner,
 /obj/item/flashlight/seclite,
-/obj/item/clothing/glasses/meson,
 /obj/structure/closet/secure_closet,
 /obj/item/pickaxe/drill/avangarde,
 /obj/machinery/light/small/directional/south,
@@ -31326,6 +31756,18 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
 	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	pixel_x = 0;
+	pixel_y = 14;
+	desc = "То самое.";
+	name = "Жигулевское"
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -11;
+	pixel_y = 15
+	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/police/cabinet)
 "rKo" = (
@@ -31338,7 +31780,7 @@
 	},
 /area/awaymission/avangarde17/inside/temple)
 "rKL" = (
-/obj/structure/closet/crate/large,
+/obj/structure/closet/cardboard,
 /obj/item/reagent_containers/cup/glass/drinkingglass/shotglass,
 /obj/item/reagent_containers/cup/glass/drinkingglass/shotglass,
 /obj/item/reagent_containers/cup/glass/drinkingglass/shotglass,
@@ -32239,7 +32681,9 @@
 /area/awaymission/avangarde17/inside/hangar/second_floor)
 "snK" = (
 /obj/structure/railing,
-/obj/structure/statue/snow/snowman,
+/obj/structure/statue/snow/snowman{
+	anchored = 1
+	},
 /obj/item/clothing/head/hats/ussp_officer{
 	pixel_x = 0;
 	pixel_y = 11
@@ -33051,12 +33495,14 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/shop_2)
 "sLV" = (
-/obj/effect/turf_decal/tile/bar/opposingcorners,
-/obj/effect/turf_decal/tile/brown/opposingcorners{
-	dir = 8
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
 	},
-/turf/closed/wall/mineral/iron,
-/area/awaymission/avangarde17/inside/house_1/fifth_apartment)
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside/ruin)
 "sMj" = (
 /obj/structure/closet/crate/freezer/food{
 	name = "ОВОЩИ"
@@ -33292,7 +33738,19 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "sTr" = (
-/obj/structure/cable,
+/obj/structure/shelves/style2,
+/obj/item/storage/toolbox/mechanical{
+	pixel_x = 0;
+	pixel_y = 14
+	},
+/obj/item/storage/toolbox/electrical{
+	pixel_x = 0;
+	pixel_y = 4
+	},
+/obj/item/storage/toolbox/emergency{
+	pixel_x = 0;
+	pixel_y = -6
+	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/base_eng)
 "sTK" = (
@@ -33477,7 +33935,9 @@
 	pixel_x = 1;
 	pixel_y = 16
 	},
-/obj/effect/decal/fakelattice,
+/obj/effect/decal/fakelattice{
+	density = 0
+	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/ruin)
 "sXC" = (
@@ -34110,7 +34570,6 @@
 /obj/item/bedsheet/black{
 	dir = 1
 	},
-/obj/machinery/light/small/directional/north,
 /obj/structure/sign/poster/contraband/random/directional/south,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_2/fourth_apartment/bedroom)
@@ -34308,7 +34767,9 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_4/fourth_apartment)
 "txP" = (
-/obj/structure/closet/secure_closet/armory4,
+/obj/structure/closet/secure_closet/armory4{
+	req_access = null
+	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
 	},
@@ -34326,6 +34787,8 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
 	},
+/obj/item/storage/box/drinkingglasses,
+/obj/item/storage/box/drinkingglasses,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/shop_2)
 "txY" = (
@@ -34475,6 +34938,10 @@
 /obj/item/clothing/shoes/workboots,
 /obj/item/clothing/neck/large_scarf/blue,
 /obj/item/clothing/neck/large_scarf/green,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/house_4/eighth_apartment)
 "tCz" = (
@@ -34744,6 +35211,10 @@
 	dir = 8;
 	color = "#6e6e6e"
 	},
+/obj/item/flashlight/lantern{
+	pixel_x = 11;
+	pixel_y = 8
+	},
 /turf/open/floor/cult{
 	color = "#4b4b4b"
 	},
@@ -34895,7 +35366,7 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/mine)
 "tON" = (
-/obj/structure/transmitter/mounted/free/directional/north,
+/obj/structure/transmitter/free/directional/north,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "tOP" = (
@@ -35029,6 +35500,14 @@
 /obj/item/instrument/guitar,
 /obj/item/clothing/suit/armor/vest/russian_coat,
 /obj/item/clothing/suit/armor/vest/caftan,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/eighth_apartment/bedroom)
 "tSV" = (
@@ -35443,10 +35922,9 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_2/first_apartment)
 "uir" = (
-/obj/structure/table/reinforced,
-/obj/machinery/light/small/directional/south,
-/obj/item/multitool,
-/turf/open/floor/catwalk_floor/iron_dark,
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/south,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/base_eng)
 "uiI" = (
 /obj/machinery/light/small/directional/south,
@@ -35454,14 +35932,17 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_2/second_apartment/first_bedroom)
 "uiR" = (
-/obj/machinery/power/port_gen/pacman/pre_loaded{
-	sheets = 50;
-	time_per_sheet = 300
+/obj/structure/stone_tile{
+	color = "#464646";
+	dir = 8
 	},
-/obj/structure/cable,
-/obj/machinery/light/small/directional/south,
-/turf/open/floor/plating,
-/area/awaymission/avangarde17/inside/base_eng)
+/obj/structure/stone_tile{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "ujb" = (
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/roofs)
@@ -35504,7 +35985,9 @@
 /area/awaymission/avangarde17/inside/temple)
 "ukm" = (
 /obj/effect/mapping_helpers/broken_floor,
-/obj/effect/decal/fakelattice,
+/obj/effect/decal/fakelattice{
+	density = 0
+	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "ukA" = (
@@ -35732,11 +36215,8 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/machinery/button{
-	pixel_y = 28;
-	name = "Ворота";
-	id = "avangarde_city_hang_inside";
-	pixel_x = 0
+/obj/machinery/button/door/directional/north{
+	id = "avangarde_city_hang_inside"
 	},
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar)
@@ -35866,6 +36346,15 @@
 /obj/item/clothing/suit/hooded/wintercoat/custom,
 /obj/item/clothing/suit/hooded/wintercoat,
 /obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_4/first_apartment)
 "uxw" = (
@@ -36286,10 +36775,7 @@
 "uGo" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
-/obj/structure/sink/shell_only/directional/north{
-	pixel_x = 0;
-	pixel_y = -30
-	},
+/obj/structure/sink/directional/north,
 /obj/structure/mirror{
 	pixel_x = 0;
 	pixel_y = -36
@@ -36999,6 +37485,7 @@
 /obj/effect/turf_decal/siding/wood/cherry,
 /obj/effect/turf_decal/siding/wood/cherry,
 /obj/machinery/power/apc/auto_name/directional/west,
+/obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_1/second_apartment/second_bedroom)
 "vap" = (
@@ -37067,12 +37554,17 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_1/first_apartment/bedroom)
 "vdt" = (
-/obj/machinery/power/terminal{
+/obj/structure/stone_tile/cracked{
+	color = "#464646";
 	dir = 8
 	},
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/awaymission/avangarde17/inside/base_eng)
+/obj/structure/stone_tile/surrounding_tile{
+	color = "#464646"
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "vdy" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/gov/radio)
@@ -38266,6 +38758,7 @@
 	dir = 4
 	},
 /obj/machinery/power/apc/auto_name/directional/west,
+/obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment)
 "vOp" = (
@@ -38430,6 +38923,15 @@
 /obj/item/clothing/suit/hooded/wintercoat/custom,
 /obj/item/clothing/suit/hooded/wintercoat,
 /obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_3/first_apartment)
 "vRF" = (
@@ -38908,7 +39410,9 @@
 	pixel_x = -18;
 	pixel_y = 7
 	},
-/obj/effect/decal/fakelattice,
+/obj/effect/decal/fakelattice{
+	density = 0
+	},
 /obj/item/crowbar/hammer{
 	pixel_x = -14;
 	pixel_y = -18
@@ -40216,20 +40720,27 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 6
 	},
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/third_apartment)
 "wGN" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_2/third_apartment/bedroom)
 "wGZ" = (
-/obj/structure/spider/stickyweb,
-/obj/structure/stone_tile/slab{
-	color = "#464646"
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
 	},
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple)
+/obj/structure/light_fake/floodlight,
+/turf/open/misc/asteroid/moon,
+/area/awaymission/avangarde17/outside/base)
 "wHb" = (
 /obj/structure/railing,
 /obj/effect/turf_decal/weather/snow{
@@ -40447,6 +40958,18 @@
 	},
 /obj/item/clothing/head/costume/ushanka,
 /obj/item/clothing/head/costume/ushanka/polar,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_1/third_apartment)
 "wLl" = (
@@ -40641,7 +41164,7 @@
 /obj/structure/window/reinforced/spawner/directional/west,
 /obj/structure/window/reinforced/spawner/directional/east,
 /obj/machinery/door/window/left/directional/south,
-/obj/structure/transmitter/mounted/free/directional/north,
+/obj/structure/transmitter/free/directional/north,
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
 "wQd" = (
@@ -40889,6 +41412,54 @@
 	name = "Столичная";
 	pixel_x = -8;
 	pixel_y = 17
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское";
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	name = "Бояринъ";
+	pixel_x = -11;
+	pixel_y = 13;
+	desc = "Пить только с тазиком."
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	name = "Бояринъ";
+	pixel_x = -11;
+	pixel_y = 13;
+	desc = "Пить только с тазиком."
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	name = "Бояринъ";
+	pixel_x = -11;
+	pixel_y = 13;
+	desc = "Пить только с тазиком."
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	name = "Бояринъ";
+	pixel_x = -11;
+	pixel_y = 13;
+	desc = "Пить только с тазиком."
 	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/ruin)
@@ -41452,6 +42023,18 @@
 /obj/item/clothing/neck/large_scarf/red,
 /obj/item/clothing/head/costume/ushanka/polar,
 /obj/machinery/light/small/directional/east,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment)
 "xiS" = (
@@ -42229,12 +42812,9 @@
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "xGD" = (
-/obj/machinery/power/smes/magical{
-	name = "коммунистический трансформатор";
-	desc = "Работает на вере в учение Маркса-Энгельса-Ленина!";
-	output_used = 400000
-	},
-/turf/open/floor/plating,
+/obj/structure/cable,
+/obj/machinery/light/small/directional/west,
+/turf/open/floor/catwalk_floor/iron_dark,
 /area/awaymission/avangarde17/inside/base_eng)
 "xGK" = (
 /obj/structure/fence,
@@ -42422,6 +43002,15 @@
 	dir = 4
 	},
 /obj/machinery/light/small/directional/west,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/second_apartment)
 "xMc" = (
@@ -42718,6 +43307,18 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 5
 	},
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret{
+	name = "пионерский берет";
+	desc = "Берет истинных Январят!"
+	},
+/obj/item/clothing/under/rank/blueshield/casual/skirt{
+	name = "пионерская юбка"
+	},
+/obj/item/clothing/under/rank/blueshield/casual{
+	name = "пионерская форма";
+	desc = "Форма истинных Январят!"
+	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_2/third_apartment)
 "xTQ" = (
@@ -42818,6 +43419,22 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/roofs)
+"xXb" = (
+/obj/structure/stone_tile/slab{
+	color = "#464646"
+	},
+/obj/item/flashlight/lantern{
+	pixel_x = -2;
+	pixel_y = 13
+	},
+/obj/item/flashlight/lantern{
+	pixel_x = -8;
+	pixel_y = -5
+	},
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple)
 "xXd" = (
 /obj/structure/flora/grass/brown/style_random,
 /obj/structure/flora/tree/pine/style_random,
@@ -43133,10 +43750,7 @@
 "ygL" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
-/obj/structure/sink/shell_only/directional/north{
-	pixel_x = 0;
-	pixel_y = -30
-	},
+/obj/structure/sink/directional/north,
 /obj/structure/mirror{
 	pixel_x = 0;
 	pixel_y = -36
@@ -48623,7 +49237,7 @@ loM
 loM
 loM
 loM
-iAL
+cOc
 vgF
 hUY
 tCQ
@@ -50924,7 +51538,7 @@ lQy
 lQy
 vgF
 lQy
-vgF
+wod
 eAC
 vgF
 mjO
@@ -52461,8 +53075,8 @@ tCQ
 gvr
 wxq
 rwF
-hKC
-vdt
+jux
+aso
 hKC
 rwF
 gpX
@@ -52719,8 +53333,8 @@ gvr
 vgF
 rwF
 gUb
-sTr
-hKC
+aso
+cOt
 rwF
 iRf
 fBO
@@ -52975,9 +53589,9 @@ tCQ
 gvr
 lQy
 rwF
+sTr
+nmm
 cOt
-aso
-uiR
 rwF
 rxx
 fBO
@@ -53028,7 +53642,7 @@ teh
 rzE
 cTB
 tCQ
-kOF
+wGZ
 wIF
 aIK
 weN
@@ -57634,7 +58248,7 @@ ksL
 ksL
 ksL
 kIk
-vgF
+wod
 rHM
 emh
 cTB
@@ -57913,7 +58527,7 @@ xGc
 bWS
 nIb
 tCQ
-tCQ
+mqf
 fot
 fot
 qMo
@@ -60993,7 +61607,7 @@ iyK
 vgF
 vgF
 vgF
-fAq
+vgF
 hHw
 kKh
 kOF
@@ -62191,7 +62805,7 @@ lfm
 lfm
 lfm
 hFO
-lfm
+hFO
 lfm
 lfm
 lfm
@@ -62436,20 +63050,20 @@ hFO
 hFO
 hFO
 hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
+dog
+dog
 lfm
 lfm
+lfm
+lfm
+lfm
+lfm
+lfm
+lfm
+lfm
+hFO
+hFO
+hFO
 lfm
 lfm
 lfm
@@ -62693,20 +63307,20 @@ hFO
 hFO
 hFO
 hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
-hFO
+dog
+dog
 lfm
 lfm
+lfm
+lfm
+lfm
+lfm
+lfm
+lfm
+lfm
+hFO
+vzg
+hFO
 lfm
 lfm
 lfm
@@ -62948,22 +63562,22 @@ dog
 dog
 dog
 dog
-dog
-dog
-dog
-dog
-lfm
-lfm
-lfm
-lfm
-lfm
-lfm
-lfm
-lfm
-lfm
 hFO
-ttS
-ttS
+hFO
+dog
+dog
+lfm
+lfm
+lfm
+lfm
+lfm
+lfm
+lfm
+lfm
+lfm
+vzg
+vzg
+qRu
 lfm
 lfm
 lfm
@@ -63205,23 +63819,23 @@ dog
 dog
 dog
 dog
-dog
-dog
-dog
-dog
-lfm
-lfm
-lfm
-lfm
-lfm
-ttS
-ttS
-ttS
-lfm
 hFO
-ttS
-ttS
-ttS
+hFO
+hFO
+hFO
+hFO
+hFO
+hFO
+hFO
+hFO
+hFO
+hFO
+vzg
+vzg
+luj
+vzg
+vzg
+luj
 lfm
 lfm
 lfm
@@ -63463,21 +64077,21 @@ dog
 dog
 dog
 dog
-dog
-dog
-dog
-lfm
-lfm
-lfm
-lfm
-lfm
-ttS
-ttS
-ttS
-ttS
 hFO
-ttS
-ttS
+hFO
+hFO
+hFO
+hFO
+hFO
+hFO
+hFO
+hFO
+hFO
+hFO
+qRu
+vzg
+vzg
+vzg
 lfm
 lfm
 lfm
@@ -63728,14 +64342,14 @@ lfm
 lfm
 lfm
 lfm
-ttS
-ttS
-ttS
-ttS
-hFO
-ttS
-ttS
-ttS
+lfm
+lfm
+lfm
+lfm
+vzg
+vzg
+luj
+vzg
 ttS
 ttS
 lfm
@@ -63985,10 +64599,10 @@ lfm
 lfm
 lfm
 lfm
+ttS
+ttS
+ttS
 lfm
-ttS
-ttS
-ttS
 vzg
 qRu
 vzg
@@ -64242,11 +64856,11 @@ lfm
 lfm
 lfm
 lfm
-lfm
-lfm
 ttS
 ttS
 ttS
+ttS
+qRu
 ttS
 ttS
 luj
@@ -64503,7 +65117,7 @@ ttS
 ttS
 ttS
 ttS
-ttS
+vzg
 ttS
 ttS
 ttS
@@ -64757,10 +65371,10 @@ lfm
 lfm
 lfm
 lfm
-lfm
-lfm
 ttS
 ttS
+ttS
+vzg
 lfm
 lfm
 luj
@@ -74778,7 +75392,7 @@ eTR
 lgi
 oXy
 qoo
-rlr
+xXb
 tRq
 akV
 rlr
@@ -87161,7 +87775,7 @@ lPU
 sOd
 nic
 wzS
-eKa
+eca
 bcl
 uMv
 duz
@@ -93343,7 +93957,7 @@ pTD
 aAK
 xVv
 jcp
-eca
+eFA
 wUw
 nrq
 xJO
@@ -97593,9 +98207,9 @@ oEz
 wrS
 xHx
 xHx
+nVb
 uLd
-uLd
-uLd
+nVb
 xHx
 xHx
 xHx
@@ -97850,7 +98464,7 @@ wIz
 xHx
 rac
 rYM
-qVu
+pxF
 mqC
 pxF
 wTA
@@ -98106,9 +98720,6 @@ xHx
 oEz
 xHx
 rac
-qVu
-qVu
-qVu
 pxF
 pxF
 pxF
@@ -98116,7 +98727,10 @@ pxF
 pxF
 pxF
 pxF
-xHx
+pxF
+pxF
+pxF
+jbi
 xHx
 omZ
 xHx
@@ -98363,9 +98977,9 @@ xHx
 wIz
 rac
 xHx
-qVu
+pxF
 jkT
-qVu
+pxF
 usA
 ahn
 ukm
@@ -98620,7 +99234,7 @@ rmR
 bmp
 xHx
 xHx
-qVu
+pxF
 hrt
 pGl
 uVk
@@ -98877,9 +99491,9 @@ xHx
 oEz
 xHx
 xHx
-qVu
+pxF
 dEf
-qVu
+pxF
 tda
 tda
 suL
@@ -99133,7 +99747,7 @@ lKW
 xHx
 oEz
 xHx
-xHx
+fAq
 nYq
 nYq
 nYq
@@ -99916,7 +100530,7 @@ neB
 krj
 pxF
 pxF
-xHx
+jbi
 bmp
 tPM
 tPM
@@ -100418,7 +101032,7 @@ xHx
 xHx
 oEz
 xHx
-xHx
+fAq
 nYq
 lSR
 kWP
@@ -100944,7 +101558,7 @@ oIP
 pxF
 pxF
 pxF
-xHx
+jbi
 ahW
 gTo
 tPM
@@ -101962,10 +102576,10 @@ iOT
 xHx
 xHx
 xHx
-xHx
+iAm
 mov
 ifB
-xHx
+iAm
 xHx
 xHx
 xHx
@@ -133065,7 +133679,7 @@ dky
 dky
 dky
 dky
-rlr
+nau
 dky
 dky
 dky
@@ -133579,12 +134193,12 @@ dky
 dky
 dky
 ihK
-rlr
+nau
 rlr
 sgf
 sgf
 rlr
-rlr
+nau
 xpJ
 ihK
 dky
@@ -134356,7 +134970,7 @@ rlr
 ihK
 ihK
 ihK
-rlr
+nau
 ihK
 rlr
 rlr
@@ -134611,7 +135225,7 @@ rlr
 rlr
 rlr
 yfX
-rlr
+nau
 rlr
 rlr
 rlr
@@ -135124,7 +135738,7 @@ rlr
 rlr
 rlr
 ihK
-rlr
+nau
 ihK
 rlr
 ihK
@@ -135640,7 +136254,7 @@ rlr
 rlr
 ihK
 ihK
-rlr
+nau
 ihK
 rlr
 rlr
@@ -135657,8 +136271,8 @@ xrL
 hra
 vkL
 vkL
-hra
-hPC
+rKo
+onj
 dky
 weS
 dky
@@ -135895,7 +136509,7 @@ rlr
 rlr
 rlr
 ihK
-rlr
+nau
 sgf
 rwY
 rlr
@@ -135914,8 +136528,8 @@ dky
 uPM
 dky
 vMv
-nbL
-onj
+vdt
+oXH
 dky
 sAy
 dky
@@ -136419,7 +137033,7 @@ rwY
 dky
 dky
 dky
-hPC
+amJ
 mQZ
 weS
 dky
@@ -136668,7 +137282,7 @@ rwY
 rlr
 ihK
 rwY
-rlr
+nau
 rwY
 rlr
 rlr
@@ -136676,7 +137290,7 @@ dky
 dky
 dky
 dky
-cMT
+skE
 hPC
 weS
 dky
@@ -136687,8 +137301,8 @@ rlr
 dky
 dky
 weS
-nbL
-cMT
+vdt
+skE
 dky
 dky
 dog
@@ -137183,7 +137797,7 @@ dky
 dky
 dky
 dky
-rlr
+nau
 dky
 dky
 dky
@@ -137454,8 +138068,8 @@ dky
 mZx
 nbL
 weS
-tup
-vHb
+uiR
+skE
 dky
 dky
 dky
@@ -140018,7 +140632,7 @@ dky
 oXH
 oWn
 ctO
-wGZ
+skE
 dky
 rlr
 wVP
@@ -140276,8 +140890,8 @@ iJz
 skE
 ctO
 skE
-wGZ
-cOc
+skE
+tzm
 xrL
 rwY
 ePJ
@@ -140302,13 +140916,13 @@ dog
 dky
 eTR
 wQM
-oBG
+oIO
 rBB
 qoo
 rlr
 tRq
 akV
-rlr
+mQk
 rlr
 rlr
 rlr
@@ -140532,9 +141146,9 @@ dky
 tzm
 oWn
 rlr
-oWn
+iJz
 dky
-rlr
+gyX
 wVP
 rlr
 rlr
@@ -140823,7 +141437,7 @@ akV
 akV
 hDt
 dUA
-rlr
+mQk
 tRq
 rlr
 rlr
@@ -156532,7 +157146,7 @@ bkv
 qPg
 gdp
 gdp
-vUD
+sLV
 vCy
 uRq
 whD
@@ -157331,7 +157945,7 @@ nQF
 kTM
 gfz
 pvk
-sLV
+hoh
 aNS
 hoh
 hoh
@@ -160472,7 +161086,7 @@ mKN
 vOp
 vOp
 ryz
-jbi
+bOK
 eSf
 grW
 bkv
@@ -162876,7 +163490,7 @@ bQx
 bQx
 bQx
 bQx
-bQx
+qVu
 bQx
 bQx
 bQx
@@ -163653,7 +164267,7 @@ mti
 mZr
 mZr
 bQx
-bQx
+qVu
 bQx
 bQx
 bQx
@@ -164667,7 +165281,7 @@ bQx
 bQx
 bQx
 bQx
-bQx
+qVu
 bQx
 bQx
 mZr
@@ -166724,7 +167338,7 @@ bQx
 bQx
 bQx
 bQx
-bQx
+qVu
 bQx
 bQx
 bQx
@@ -167244,7 +167858,7 @@ bQx
 bQx
 bQx
 bQx
-bQx
+qVu
 bQx
 bQx
 bQx

@@ -23,3 +23,8 @@
 
 /turf/closed/indestructible/rock/avangarde
 	color = "#292929"
+
+/turf/open/floor/plating/temple
+	name = "temple floor"
+	icon_state = "cult"
+	color = "#4b4b4b"
