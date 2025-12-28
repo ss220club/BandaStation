@@ -48,3 +48,12 @@
 	translator.grant_language(/datum/language/spinwarder)
 	translator.remove_blocked_language(/datum/language/spinwarder)
 	translator.set_active_language(/datum/language/spinwarder)
+
+/datum/job
+	var/event_description
+
+/datum/job/get_spawn_message_information()
+	. = ..()
+	if(event_description)
+		. += event_description
+

@@ -33,6 +33,7 @@
 	department_for_prefs = /datum/job_department/medical
 	family_heirlooms = list(/obj/item/storage/medkit/ancient/heirloom, /obj/item/scalpel, /obj/item/hemostat, /obj/item/circular_saw, /obj/item/retractor, /obj/item/cautery, /obj/item/statuebust/hippocratic)
 	job_flags = STATION_JOB_FLAGS
+	event_description = "Будучи средним медперсоналом, вы, скорее всего, попали под распределение после окончания медицинского колледжа! В ваши обязанности входит помощь гражданам ПГТ, профилактика болезней и пропагандирование ЗОЖ! Не дайте поселку спиться, лечите словом и доступными вам лекарствами. Все необходимые товары вы можете получить в гастрономе или промтоварах по талонам, которые выдаются специальным автоматом на втором этаже райкома по курсу один талон - один товар.Обязательно посетите собрание в местном райкоме на площади Революции."
 
 	mind_traits = list(MEDICAL_MIND_TRAITS)
 	liver_traits = list(TRAIT_MEDICAL_METABOLISM)

@@ -3,6 +3,7 @@ GLOBAL_VAR_INIT(arp_seventeen_max_stage, 2)
 /datum/disease/arp_seventeen
 	name = "Белок АРП-17"
 	max_stages = 5
+	stage_prob = 5
 	spread_flags = DISEASE_SPREAD_BLOOD | DISEASE_SPREAD_CONTACT_FLUIDS
 	spread_text = "Неизвестно"
 	cure_text = "Неизвестно"
@@ -48,6 +49,19 @@ GLOBAL_VAR_INIT(arp_seventeen_max_stage, 2)
 				to_chat(affected_mob, span_danger("Вам хорошо. Вы спокойны. Вы здоровы."))
 		if(5)
 			if(SPT_PROB(30, seconds_per_tick))
+				for(var/obj/item/W in affected_mob.get_equipped_items(INCLUDE_POCKETS))
+					affected_mob.dropItemToGround(W)
+				for(var/obj/item/I in affected_mob.held_items)
+					affected_mob.dropItemToGround(I)
+				var/mob/living/new_mob = new /mob/living/basic/faithless/ussp(affected_mob.loc)
+				new_mob.set_combat_mode(TRUE)
+				if(affected_mob.mind)
+					affected_mob.mind.transfer_to(new_mob)
+				else
+					new_mob.PossessByPlayer(affected_mob.ckey)
+				new_mob.name = affected_mob.real_name
+				new_mob.real_name = new_mob.name
+				to_chat(new_mob, span_cult_large("УБИВАЙТЕ ВСЕХ ИНЫХ. ЗАЩИЩАЙТЕ ХРАМ."))
 				affected_mob.investigate_log("has been gibbed by GBS.", INVESTIGATE_DEATHS)
 				affected_mob.gib(DROP_ALL_REMAINS)
 				return FALSE
@@ -56,3 +70,13 @@ GLOBAL_VAR_INIT(arp_seventeen_max_stage, 2)
 	var/old_max_stage = GLOB.arp_seventeen_max_stage
 	GLOB.arp_seventeen_max_stage = new_max_stage
 	return "Max stage updated [old_max_stage] -> [new_max_stage]"
+
+/mob/living/basic/faithless/ussp
+	name = "The Faithless"
+	desc = "Обращённый в отвратительную тварь человек. Этот выглядит более свежим, в сравнении с остальными."
+	speed = 1
+	maxHealth = 200
+	health = 200
+	obj_damage = 80
+	melee_damage_lower = 35
+	melee_damage_upper = 35
