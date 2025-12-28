@@ -19,7 +19,7 @@
 	if(isliving(target))
 		var/mob/living/living_target = target
 		living_target.adjust_staggered_up_to(STAGGERED_SLOWDOWN_LENGTH * 0.5, 5 SECONDS)
-		for(var/turf/trapped_turf in range(1, get_turf(living_target)))
+		for(var/turf/trapped_turf in range(0.5, get_turf(living_target))) // BANDASTATION EDIT DRAGNET REBALANCE BOUNTY ORIG: 1, channel
 			if(trapped_turf.density)
 				continue
 			new /obj/effect/nettingportal(trapped_turf, destination_beacon)
@@ -46,7 +46,7 @@
 /obj/effect/nettingportal/proc/pop(teletarget)
 	if(teletarget)
 		for(var/mob/living/living_mob in get_turf(src))
-			do_teleport(living_mob, get_turf(teletarget), 0.5, channel = TELEPORT_CHANNEL_BLUESPACE) //Teleport what's in the tile to the beacon // BANDASTATION EDIT DRAGNET REBALANCE BOUNTY ORIG: 1, channel
+			do_teleport(living_mob, get_turf(teletarget), 1, channel = TELEPORT_CHANNEL_BLUESPACE) //Teleport what's in the tile to the beacon
 	else
 		for(var/mob/living/living_mob in get_turf(src))
 			do_teleport(living_mob, get_turf(living_mob), 15, channel = TELEPORT_CHANNEL_BLUESPACE) //Otherwise it just warps you off somewhere.
