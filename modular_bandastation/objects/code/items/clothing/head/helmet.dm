@@ -68,6 +68,8 @@
 // MARK: USSP
 /obj/item/clothing/head/helmet/marine/ussp_officer_kaska
 	name = "komandir kaska"
+	desc = "Солдатская пласталевая каска бойцов армии СССП, но с чёткими опознавательными знаками командира отряда. \
+		Защищает так, как должна по ГОСТу, главное верить и не задавать вопросов."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	icon_state = "ussp_command"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
@@ -75,17 +77,43 @@
 
 /obj/item/clothing/head/helmet/marine/security/ussp_kaska
 	name = "heavy kaska"
+	desc = "Солдатская пласталевая каска бойцов армии СССП, но чуть тяжелее чем другие. \
+		Защищает так, как должна по ГОСТу, но возможно чуть лучше так как общита дополнительным слоем стали, главное верить."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	icon_state = "ussp_security"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	base_icon_state = "ussp_security"
 
 /obj/item/clothing/head/helmet/marine/security/ussp_kaska/medic
+	desc = "Солдатская пласталевая каска бойцов армии СССП, но с чёткими опознавательными знаками медика. \
+		Защищает так, как должна по ГОСТу, но защиту от военных преступлений не предоставляет."
 	icon_state = "ussp_medic"
 	base_icon_state = "ussp_medic"
 
 /obj/item/clothing/head/helmet/toggleable/riot/ussp_riot
 	name = "OMON helmet"
+	desc = "Тяжелый шлем с забралом для групп быстрого реагирования \"ОМОН\", состоит из многослойного арамида и пластали. \
+		Отлично защищает от колюще-режущих и ударных повреждений."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	icon_state = "ussp_riot"
+	base_icon_state = "ussp_riot"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+
+/obj/item/clothing/head/helmet/toggleable/riot/ussp_heavy
+	name = "'Altyn' helmet"
+	desc = "Тяжелый шлем \"Алтын\" с забралом советского производства, состоит из усиленных сплавов титана и пластали. \
+		Отлично защищает от любых повреждений, особенно от пуль. Вам кажется, что будет очень стильно если его покрасить в черный с тремя белыми полосками."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	icon_state = "ussp_altyn"
+	base_icon_state = "ussp_altyn"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	armor_type = /datum/armor/armor_heavy
+
+/obj/item/clothing/head/helmet/space/ussp_expedition
+	name = "'Voskhod' EVA suit helmet"
+	desc = "Гермошлем экспедиционного скафандра \"Восход\", создан для использования в космических экспедицях СССП. \
+		Имеет небольшое бронепокрытие для обеспечения защиты в потенциально враждебных сценариях."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	icon_state = "voskhod_helmet"
+	armor_type = /datum/armor/head_helmet

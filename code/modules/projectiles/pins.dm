@@ -255,7 +255,7 @@
 /obj/item/firing_pin/paywall/gun_insert(mob/living/user, obj/item/gun/new_gun, starting = FALSE)
 	if(pin_owner || starting)
 		. = ..()
-		gun.desc += span_notice("This [gun.name] has a [multi_payment ? "per-shot" : "license permit"] cost of [payment_amount] credit[payment_amount > 1 ? "s" : ""].")
+		gun.desc += span_notice("This [gun.name] has a [multi_payment ? "per-shot" : "license permit"] cost of [payment_amount] [MONEY_NAME_AUTOPURAL(payment_amount)].")
 		return
 
 	if(isnull(user))
@@ -314,7 +314,7 @@
 	if(active_prompt_user == user)
 		return FALSE
 	active_prompt_user = user
-	var/license_request = tgui_alert(user, "Вы готовы к оплате [payment_amount] кредит[declension_ru(payment_amount, "", "а", "ов")] за [( multi_payment ) ? "каждый выстрел из [gun.declent_ru(GENITIVE)]" : "лицензию [gun.declent_ru(GENITIVE)]"]?", "Покупка оружия", list("Да", "Нет"), 15 SECONDS)
+	var/license_request = tgui_alert(user, "Вы готовы к оплате [payment_amount][MONEY_NAME] за [( multi_payment ) ? "каждый выстрел из [gun.declent_ru(GENITIVE)]" : "лицензию [gun.declent_ru(GENITIVE)]"]?", "Покупка оружия", list("Да", "Нет"), 15 SECONDS)
 	if(!user.can_perform_action(src))
 		active_prompt_user = null
 		return FALSE

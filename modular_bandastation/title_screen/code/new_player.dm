@@ -46,8 +46,27 @@
 			to_chat(usr, span_warning("Игра уже начинается!"))
 			return
 
-		ready = !ready
-		SStitle.title_output(client, ready, "toggleReady")
+		if(ready != PLAYER_NOT_READY)
+			ready = PLAYER_NOT_READY
+			SStitle.title_output(client, FALSE, "toggleReady")
+			return
+
+		var/prefs_specie = client.prefs.read_preference(/datum/preference/choiced/species)
+		var/list/prefs_jobs = client.prefs.job_preferences
+		if(!prefs_specie || !islist(prefs_jobs) || !length(prefs_jobs))
+			to_chat(usr, span_boldwarning("Ошибка настроек персонажа. Выберите предпочитаемую должность."))
+			return
+
+		var/list/allowed_species = CONFIG_GET(str_list/allowed_species)
+		var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
+		if(length(allowed_species) && !("[prefs_specie]" in allowed_species))
+			for(var/job_id in prefs_jobs)
+				if(job_id in job_restrictions)
+					to_chat(usr, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
+					return
+
+		ready = PLAYER_READY_TO_PLAY
+		SStitle.title_output(client, TRUE, "toggleReady")
 
 	else if(href_list["late_join"])
 		if(SSticker.current_state == GAME_STATE_FINISHED)
