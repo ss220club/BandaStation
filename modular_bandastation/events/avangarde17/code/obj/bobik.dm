@@ -230,3 +230,8 @@
 
 	var/mob/driver = pick(drivers)
 	owner.say("[driver.name], у нас труп, возможно криминал. По коням!")
+
+//SIREN
+/datum/looping_sound/siren_high_volume
+	mid_sounds = list('modular_bandastation/events/avangarde17/audio/angry_communist_speach.ogg' = 1)
+	volume = 50
