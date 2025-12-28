@@ -7,8 +7,9 @@
 	ears = null
 	shoes = /obj/item/clothing/shoes/jackboots
 	head = /obj/item/clothing/head/hats/ussp_militsia
-	belt = null
+	belt = /obj/item/storage/belt/military/army/militsia
 	pda_slot = null
+	l_pocket = /obj/item/radio
 
 	backpack = /obj/item/storage/backpack
 	satchel = /obj/item/storage/backpack/satchel

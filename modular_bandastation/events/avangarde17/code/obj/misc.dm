@@ -395,3 +395,21 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/calendar/ussp, 32)
 		/obj/item/lighter = 3,
 	)
 	refill_canister = /obj/item/vending_refill/cigarette/syndicate
+
+// BELT
+/obj/item/storage/belt/military/army/militsia
+	icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi'
+	icon_state = "military_holster"
+	storage_type = /datum/storage/military_belt/militsia
+
+/datum/storage/military_belt/militsia
+	max_specific_storage = WEIGHT_CLASS_NORMAL
+	max_total_storage = WEIGHT_CLASS_SMALL * 8
+	max_slots = 10
+
+/obj/item/storage/belt/military/army/tsf/full/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol(src)
+	new /obj/item/ammo_box/magazine/m9mm(src)
+	new /obj/item/ammo_box/magazine/m9mm(src)
+	new /obj/item/restraints/handcuffs(src)
+	new /obj/item/melee/baton(src)
