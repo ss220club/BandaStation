@@ -26,6 +26,9 @@
 	var/obj/effect/bobik_blocker/front_blocker
 	var/obj/effect/bobik_blocker/back_blocker
 
+	var/datum/looping_sound/siren/weewooloop
+	var/siren_is_on = FALSE
+
 /obj/vehicle/sealed/car/bobik/Initialize(mapload)
 	. = ..()
 	create_headlights()
@@ -33,12 +36,14 @@
 	update_headlight_positions()
 	update_headlights()
 	update_blockers()
+	weewooloop = new(src, FALSE, FALSE)
 
 /obj/vehicle/sealed/car/bobik/Destroy()
 	QDEL_NULL(headlight_left)
 	QDEL_NULL(headlight_right)
 	QDEL_NULL(front_blocker)
 	QDEL_NULL(back_blocker)
+	QDEL_NULL(weewooloop)
 	return ..()
 
 // HEADLIGHTS
@@ -158,6 +163,7 @@
 	initialize_controller_action_type(/datum/action/vehicle/sealed/horn, VEHICLE_CONTROL_DRIVE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/bobik_headlights, VEHICLE_CONTROL_DRIVE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/lets_ride, VEHICLE_CONTROL_DRIVE)
+	initialize_controller_action_type(/datum/action/vehicle/sealed/bobik_siren, VEHICLE_CONTROL_DRIVE)
 
 // KEY
 
@@ -206,6 +212,29 @@
 		return
 	B.headlights_toggle = !B.headlights_toggle
 	B.update_headlights()
+	B.update_appearance()
+	playsound(owner, B.headlights_toggle ? 'sound/items/weapons/magin.ogg' : 'sound/items/weapons/magout.ogg', 40, TRUE)
+
+// MILITIA SIREN ACTION
+
+/datum/action/vehicle/sealed/bobik_siren
+	name = "Toggle Siren"
+	desc = "Turn on your WEEEEOOO-WEEEEOOO!"
+	button_icon = 'icons/obj/clothing/head/helmet.dmi'
+	button_icon_state = "justice"
+
+/datum/action/vehicle/sealed/bobik_siren/Trigger(mob/clicker, trigger_flags)
+	var/obj/vehicle/sealed/car/bobik/B = vehicle_entered_target
+	if(!istype(B))
+		return
+	if(B.siren_is_on)
+		B.weewooloop.stop()
+		B.icon_state = "bobik"
+		B.siren_is_on = FALSE
+	else
+		B.weewooloop.start()
+		B.icon_state = "bobik_siren"
+		B.siren_is_on = TRUE
 	B.update_appearance()
 	playsound(owner, B.headlights_toggle ? 'sound/items/weapons/magin.ogg' : 'sound/items/weapons/magout.ogg', 40, TRUE)
 
