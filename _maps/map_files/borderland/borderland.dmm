@@ -1257,17 +1257,6 @@
 	},
 /turf/open/floor/wood/large/oak,
 /area/altam/main_zones/caves)
-"bbD" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 1
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "bcp" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lantern,
@@ -1303,20 +1292,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
-"bdS" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 5
-	},
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "bfa" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/weather/snow/corner,
@@ -1846,19 +1821,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"bEx" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 10
-	},
-/obj/effect/turf_decal/siding/wideplating_new/dark{
-	dir = 4
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "bEU" = (
 /turf/open/openspace/airless/planetary{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
@@ -2347,7 +2309,6 @@
 "cab" = (
 /obj/structure/guncase/shotgun,
 /obj/item/gun/ballistic/rifle/sks,
-/obj/item/ammo_box/a762x39,
 /obj/item/knife/combat,
 /obj/item/storage/box/donkpockets/donkpocketpizza,
 /turf/open/floor/iron/dark,
@@ -3373,19 +3334,6 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/main)
-"cNB" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 5
-	},
-/obj/effect/turf_decal/trimline/yellow/line{
-	dir = 8
-	},
-/turf/open/floor/asphalt{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "cNU" = (
 /obj/machinery/telecomms/allinone,
 /turf/open/floor,
@@ -3658,11 +3606,10 @@
 /obj/item/grenade/frag,
 /obj/item/grenade/frag,
 /obj/item/grenade/frag,
-/obj/item/ammo_box/a762x39,
-/obj/item/ammo_box/a762x39,
-/obj/item/ammo_box/a762x39,
-/obj/item/ammo_box/a762x39,
-/obj/item/ammo_box/a762x39,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -4041,9 +3988,6 @@
 /obj/effect/decal/cleanable/blood/gibs/old{
 	icon_state = "gib3"
 	},
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 9
-	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -4355,19 +4299,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
-"dDQ" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 4
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "dDU" = (
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 1
@@ -5662,10 +5593,6 @@
 /obj/item/grenade/frag,
 /obj/item/grenade/frag,
 /obj/item/grenade/frag,
-/obj/item/ammo_box/a762x39,
-/obj/item/ammo_box/a762x39,
-/obj/item/ammo_box/a762x39,
-/obj/item/ammo_box/a762x39,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -5758,19 +5685,6 @@
 	dir = 4
 	},
 /turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
-"eMY" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 9
-	},
-/obj/effect/turf_decal/trimline/yellow/line{
-	dir = 4
-	},
-/turf/open/floor/asphalt{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -6168,9 +6082,9 @@
 /obj/structure/closet/crate/secure/weapon,
 /obj/item/gun/ballistic/automatic/sabel/auto,
 /obj/item/gun/ballistic/automatic/sabel/auto,
-/obj/item/ammo_box/a762x39,
-/obj/item/ammo_box/a762x39,
-/obj/item/ammo_box/a762x39,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -7822,19 +7736,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
-"gsq" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 10
-	},
-/obj/effect/turf_decal/trimline/yellow/line{
-	dir = 4
-	},
-/turf/open/floor/asphalt{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "gsP" = (
 /obj/structure/bookcase,
 /turf/open/floor/wood/parquet{
@@ -8392,20 +8293,6 @@
 /turf/open/floor/wood/parquet{
 	max_integrity = 10000;
 	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
-"gQR" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 10
-	},
-/turf/open/misc/asteroid/moon{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
 "gRi" = (
@@ -10659,19 +10546,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"iWi" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "iWk" = (
 /obj/effect/turf_decal/siding/thinplating_new/corner{
 	dir = 8
@@ -10928,10 +10802,10 @@
 /area/altam/main_zones/main)
 "jjW" = (
 /obj/structure/closet/crate/secure/weapon,
-/obj/item/gun/ballistic/automatic/sabel/auto/upp,
-/obj/item/gun/ballistic/automatic/sabel/auto/upp,
-/obj/item/gun/ballistic/automatic/sabel/auto/upp,
-/obj/item/gun/ballistic/automatic/sabel/auto/upp,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -11750,16 +11624,6 @@
 /obj/structure/bookcase/random/adult,
 /turf/open/floor/iron/dark/side,
 /area/altam/embassy/main)
-"jUo" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 4
-	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "jUu" = (
 /obj/structure/mineral_door/iron,
 /obj/effect/light_emitter{
@@ -11952,16 +11816,6 @@
 	},
 /turf/open/floor/engine/hull/reinforced{
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
-	},
-/area/altam/main_zones/main)
-"keB" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 8
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
 "kfi" = (
@@ -12974,22 +12828,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"kUA" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 9
-	},
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "kUJ" = (
 /obj/structure/table,
 /obj/item/camera_film,
@@ -13657,6 +13495,9 @@
 /obj/item/storage/belt/military/army/ussp/full,
 /obj/item/storage/belt/military/army/ussp/full,
 /obj/item/storage/belt/military/army/ussp/full,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
 /turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -13813,24 +13654,6 @@
 "lFx" = (
 /obj/item/storage/toolbox/electrical,
 /turf/open/floor/wood/parquet{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
-"lGd" = (
-/obj/item/ammo_box/a762x39{
-	pixel_x = 2;
-	pixel_y = 2
-	},
-/obj/item/ammo_box/a762x39{
-	pixel_y = 2;
-	pixel_x = 3
-	},
-/obj/item/ammo_box/a762x39{
-	pixel_y = 5
-	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -14779,16 +14602,6 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/caves)
-"mqm" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 6
-	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "mrn" = (
 /obj/structure/railing{
 	dir = 8
@@ -15421,16 +15234,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"mQm" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 9
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "mRq" = (
 /turf/closed/wall/ice{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
@@ -15594,16 +15397,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/altam/main_zones/caves)
-"mYq" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 10
-	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "mYr" = (
 /obj/structure/chair/wood,
 /obj/effect/decal/cleanable/dirt,
@@ -15618,16 +15411,6 @@
 /obj/item/pen/blue,
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
-"mZo" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 5
-	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "mZV" = (
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 1
@@ -16726,16 +16509,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/caves)
-"ocd" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 5
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "odj" = (
 /obj/effect/turf_decal/trimline/dark_blue/corner{
 	dir = 8
@@ -17011,11 +16784,15 @@
 	},
 /area/altam/main_zones/main)
 "omY" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 8
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
+/obj/structure/closet/crate/secure/weapon,
+/obj/item/storage/belt/military/army/ussp/full_autorifle,
+/obj/item/storage/belt/military/army/ussp/full_autorifle,
+/obj/item/storage/belt/military/army/ussp/full_autorifle,
+/obj/item/storage/belt/military/army/ussp/full_autorifle,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
+/obj/item/ammo_box/c762x39,
+/turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -17885,19 +17662,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"pds" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 6
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "pdO" = (
 /obj/structure/table,
 /obj/structure/showcase/machinery/microwave{
@@ -17984,17 +17748,6 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 10
 	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
-"phz" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt,
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -19272,16 +19025,6 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
-"qly" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 1
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "qmz" = (
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 4
@@ -19443,16 +19186,6 @@
 	},
 /obj/structure/barricade/sandbags,
 /turf/open/floor/vault,
-/area/altam/main_zones/main)
-"qvm" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 4
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
 /area/altam/main_zones/main)
 "qvw" = (
 /obj/machinery/smartfridge/drying,
@@ -19948,9 +19681,6 @@
 /area/altam/embassy/main)
 "qSW" = (
 /obj/effect/decal/cleanable/blood/gibs/old,
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 8
-	},
 /mob/living/carbon/human/species/vulpkanin,
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
@@ -20114,17 +19844,6 @@
 "rbp" = (
 /obj/structure/statue/vulp_sword,
 /turf/open/floor/stone/icemoon{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
-"rdf" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 5
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -23566,19 +23285,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"ugF" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "ugI" = (
 /obj/structure/railing{
 	dir = 1
@@ -25237,14 +24943,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/altam/main_zones/premises)
-"vBe" = (
-/obj/item/ammo_casing/a762x39/hunting,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "vBh" = (
 /mob/living/basic/mining/ice_demon,
 /obj/effect/turf_decal/weather/dirt{
@@ -25664,19 +25362,6 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/caves)
-"vVd" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 9
-	},
-/obj/effect/turf_decal/trimline/yellow/line{
-	dir = 8
-	},
-/turf/open/floor/asphalt{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "vWa" = (
 /obj/structure/railing,
 /obj/structure/cable,
@@ -25712,16 +25397,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
-"vWB" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 9
-	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "vWC" = (
 /mob/living/basic/mining/basilisk{
 	dir = 8
@@ -26602,16 +26277,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"wKx" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 10
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "wKA" = (
 /obj/structure/railing,
 /obj/machinery/computer/security{
@@ -27310,16 +26975,6 @@
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
-"xon" = (
-/obj/item/ammo_casing/a762x39/hunting{
-	dir = 6
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "xos" = (
 /obj/item/restraints/handcuffs,
 /obj/item/restraints/handcuffs,
@@ -37152,15 +36807,15 @@ taz
 kdo
 dwZ
 sFz
-xon
+wiB
 aaF
-rdf
-qvm
+aaF
+wiB
 dwZ
 wiB
 mgl
 pJJ
-mQm
+wiB
 aaF
 kiQ
 wiB
@@ -37418,7 +37073,7 @@ aaF
 eDJ
 wiB
 wiB
-xon
+wiB
 idh
 wiB
 rXG
@@ -37433,8 +37088,8 @@ dwZ
 wiB
 aaF
 aaF
-wKx
-mQm
+wiB
+wiB
 wiB
 aaF
 rSF
@@ -37667,10 +37322,10 @@ bHu
 wiB
 pJJ
 aaF
-omY
+aaF
 nxk
 wiB
-qly
+wiB
 pvD
 wiB
 wiB
@@ -37685,17 +37340,17 @@ jCM
 bth
 rSF
 eYU
-ocd
-mQm
+wiB
+wiB
 wiB
 wiB
 rSF
-keB
-ocd
+wiB
+wiB
 dwZ
 ctg
 lUb
-mYq
+dPH
 dPH
 dPH
 xmN
@@ -37927,7 +37582,7 @@ wiB
 dwZ
 pvD
 wiB
-ocd
+wiB
 dtU
 kiQ
 aaF
@@ -37935,19 +37590,19 @@ rSF
 xFJ
 wiB
 veT
-gQR
-phz
+rSF
+tdD
 uSo
 fKV
 dPH
-dDQ
+ylz
 rXG
 qSW
 kiQ
 wiB
 pJJ
-wKx
-xon
+wiB
+wiB
 wiB
 lUb
 soc
@@ -38184,7 +37839,7 @@ wiB
 wiB
 dLH
 wiB
-keB
+wiB
 wiB
 wiB
 cxG
@@ -38192,23 +37847,23 @@ aaF
 rzW
 wiB
 aaF
-omY
-wKx
+aaF
+wiB
 gXx
 dPH
 ddE
 bth
-vBe
-xon
+wiB
+wiB
 sFz
 wiB
 dOl
 wiB
 wiB
 lUb
-mZo
 dPH
-vWB
+dPH
+dPH
 dPH
 iAZ
 wiB
@@ -38442,14 +38097,14 @@ wiB
 wiB
 pJJ
 kiQ
-ocd
-keB
+wiB
+wiB
 cvJ
 rXG
 wiB
 wiB
 wiB
-ocd
+wiB
 wiB
 jVT
 dPH
@@ -38698,7 +38353,7 @@ wiB
 wiB
 kiQ
 aaF
-bbD
+aaF
 dwZ
 wiB
 wiB
@@ -38717,8 +38372,8 @@ ctg
 ctg
 aZz
 lUb
-jUo
-mqm
+dPH
+dPH
 bUD
 dPH
 iAZ
@@ -38956,14 +38611,14 @@ wiB
 cxG
 aaF
 iBm
-mQm
-ocd
+wiB
+wiB
 rXG
 pJJ
 wiB
 xZD
-mQm
-ocd
+wiB
+wiB
 wiB
 wiB
 wiB
@@ -38973,9 +38628,9 @@ dPH
 dPH
 ixn
 dPH
-mZo
-mYq
-vWB
+dPH
+dPH
+dPH
 dPH
 dPH
 bth
@@ -39214,14 +38869,14 @@ sFz
 wiB
 aaF
 rzW
-wKx
+wiB
 wiB
 wiB
 wiB
 wiB
 pvD
-keB
-bbD
+wiB
+aaF
 wiB
 wiB
 tdD
@@ -39470,15 +39125,15 @@ wiB
 wiB
 rXG
 wiB
-qvm
 wiB
-xon
+wiB
+wiB
 wiB
 aaF
 aaF
 cso
-xon
-ocd
+wiB
+wiB
 cxG
 wiB
 pai
@@ -39493,7 +39148,7 @@ wiB
 gxx
 dPH
 dPH
-iWi
+bth
 wiB
 dwZ
 aaF
@@ -39734,7 +39389,7 @@ aaF
 wiB
 wiB
 wiB
-mQm
+wiB
 wiB
 sFz
 tdD
@@ -39749,9 +39404,9 @@ kiQ
 dwZ
 wiB
 mJi
-mZo
-mZo
-ugF
+dPH
+dPH
+bth
 wiB
 wiB
 wiB
@@ -39996,7 +39651,7 @@ wiB
 wiB
 tdD
 dPH
-mZo
+dPH
 fWq
 wiB
 wiB
@@ -40006,7 +39661,7 @@ wiB
 wiB
 cxG
 wiB
-kUA
+mJi
 dPH
 dPH
 ntm
@@ -40508,7 +40163,7 @@ wiB
 wiB
 wiB
 tdD
-vWB
+dPH
 dPH
 dPH
 ylz
@@ -41024,7 +40679,7 @@ wiB
 tdD
 dPH
 dPH
-pds
+ylz
 qTX
 aaF
 aaF
@@ -63826,8 +63481,8 @@ sFz
 wiB
 wiB
 pJJ
-ocd
-keB
+wiB
+wiB
 wiB
 wiB
 wiB
@@ -64082,8 +63737,8 @@ wiB
 wiB
 wiB
 sFz
-keB
-xon
+wiB
+wiB
 dwZ
 sFz
 wiB
@@ -64341,7 +63996,7 @@ wiB
 whu
 wiB
 jTQ
-ocd
+wiB
 wiB
 wiB
 wiB
@@ -64597,9 +64252,9 @@ wiB
 lkp
 wiB
 wiB
-ocd
 wiB
-vBe
+wiB
+wiB
 sFz
 wiB
 wiB
@@ -65883,7 +65538,7 @@ aoO
 aoO
 aoO
 eNR
-bEx
+aoO
 aoO
 aoO
 aoO
@@ -66141,8 +65796,8 @@ krz
 krz
 tYE
 krz
-eMY
-gsq
+krz
+krz
 krz
 krz
 tYE
@@ -66397,10 +66052,10 @@ xWw
 aSS
 xWw
 kvx
-vVd
+aSS
 xWw
 aSS
-cNB
+aSS
 aSS
 aSS
 xWw
@@ -67170,8 +66825,8 @@ qFc
 cxG
 qYR
 wiB
-ocd
-xon
+wiB
+wiB
 iBm
 tdD
 dPH
@@ -67427,8 +67082,8 @@ jTQ
 wiB
 xXu
 wiB
-bdS
-mQm
+aaF
+wiB
 wiB
 lbX
 dPH
@@ -67943,7 +67598,7 @@ wiB
 jTQ
 lkp
 qYR
-qvm
+wiB
 tdD
 dPH
 bth
@@ -72039,7 +71694,7 @@ uJn
 dJV
 agc
 tdD
-lGd
+dPH
 kbT
 wFo
 tnP
@@ -72296,7 +71951,7 @@ jjW
 tgp
 aev
 tdD
-opL
+omY
 kbT
 xOk
 ofq
