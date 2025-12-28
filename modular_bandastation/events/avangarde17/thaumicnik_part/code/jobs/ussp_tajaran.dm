@@ -36,9 +36,10 @@
 	department_for_prefs = /datum/job_department/assistant
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
+	event_description = "Вы слушаетесь своего пахана и уважаете своих братков. Недавно вы бежали из соседнего городка и решили залечь на дно после неудачной облавы. Теперь ваше временное прибежище - заброшенная будка вахтовиков на севере от ПГТ 'Зорька'! Добраться до поселка можно напрямую по лесу или по склону восточной горы. Ваша основная задача - крышевать местные заведения и магазины. Опасайтесь мусоров - они не побрезгуют использовать все средства, чтобы остановить вас! Самый лакомый кусочек для вас - большой склад на севере ПГТ. Как только вы наберетесь достаточной смелости и обзаведетесь всеми необходимыми инструментами, попробуйте вскрыть его!"
 
 /datum/id_trim/job/ussp_tajaran
-	assignment = "Безработный"
+	assignment = "Житель ПГТ \"Зорька\""
 	trim_state = "trim_mime"
 	department_color = COLOR_ASSISTANT_GRAY
 	subdepartment_color = COLOR_ASSISTANT_GRAY

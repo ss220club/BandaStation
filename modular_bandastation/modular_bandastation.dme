@@ -36,7 +36,6 @@
 #include "database220/_database220.dme"
 #include "discord/_discord.dme"
 #include "emote_panel/_emote_panel.dme"
-#include "events/_events.dme"
 #include "ert/_ert.dme"
 #include "examine_panel/_examine_panel.dme"
 #include "food_and_drinks/_food_and_drinks.dme"
@@ -96,4 +95,5 @@
 #include "prime_only/_prime_only.dme"
 #include "traps/_traps.dme"
 #include "spells/_spells.dme"
+#include "events/_events.dme"
 #endif

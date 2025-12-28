@@ -21,7 +21,7 @@
 	supervisors = "оперуполномоченным"
 	description = "Боритесь с преступностью, берите взятки, являйтесь героем 90% отечественных сериалов."
 	departments_list = list(
-		/datum/job_department/command,
+		/datum/job_department/justice,
 	)
 	outfit = /datum/outfit/job/ussp_militiaman
 	faction = FACTION_STATION
@@ -29,9 +29,10 @@
 	spawn_positions = 5
 	paycheck = PAYCHECK_ZERO
 	bounty_types = CIV_JOB_BASIC
-	department_for_prefs = /datum/job_department/command
+	department_for_prefs = /datum/job_department/justice
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
+	event_description = "Вы подчиняетесь старшему оперуполномоченному. Будьте всегда бдительны и начеку - бандиты, гопники и прочие криминальные элементы никогда не дремлют! Ваша основная задача - защита спокойствия граждан и патрулирование улиц. В гараже вашего участка вы найдете служебный Бобик - берегите его и ключи как зеницу ока. Обязательно посетите собрание в райкоме, а после - военную базу для получения папки с актуальными делами от коменданта. При чрезвычайных ситуациях или тяжелых случаях в ваше"
 
 /datum/id_trim/job/ussp_militiaman
 	assignment = "Милиционер"
