@@ -573,7 +573,6 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	alt_continuous = string_list(alt_continuous)
 	alt_simple = string_list(alt_simple)
 	AddComponent(/datum/component/alternative_sharpness, SHARP_POINTY, alt_continuous, alt_simple, -5, TRAIT_TRANSFORM_ACTIVE)
-	AddComponent(/datum/component/backstabs, 2, 2 SECONDS) // 40 damage, 2s CD // BANDASTATION ADDITION: BACKSTABS PORT
 
 	RegisterSignal(src, COMSIG_TRANSFORMING_ON_TRANSFORM, PROC_REF(on_transform))
 
@@ -588,7 +587,11 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/switchblade/extended
 	start_extended = TRUE
-
+// BANDASTATION ADDITION START: BACKSTABS
+/obj/item/switchblade/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/backstabs, 2, 2 SECONDS) // 40 damage, 2s CD
+// BANDASTATION ADDITION END: BACKSTABS
 /obj/item/phone
 	name = "red phone"
 	desc = "Should anything ever go wrong..."
