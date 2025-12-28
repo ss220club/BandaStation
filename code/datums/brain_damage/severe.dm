@@ -204,7 +204,6 @@
 	scan_desc = "монофобия"
 	gain_text = span_warning("Вы чувствуете себя по-настоящему одиноким...")
 	lose_text = span_notice("Вам кажется, что вы могли бы чувствовать себя в безопасности в одиночестве.")
-	var/stress = 0
 
 /datum/brain_trauma/severe/monophobia/on_gain()
 	. = ..()

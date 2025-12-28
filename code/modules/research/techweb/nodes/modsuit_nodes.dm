@@ -31,14 +31,15 @@
 		"mod_longfall",
 		"mod_thermal_regulator",
 		"mod_sign_radio",
+		"mod_storage_expanded",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mod_service
 	id = TECHWEB_NODE_MOD_SERVICE
-	display_name = "Civilian Modular Suits"
-	description = "Civilian MODsuits for dignified living."
+	display_name = "Гражданские МОДули"
+	description = "Гражданские модульные костюмы для достойной жизни."
 	prereq_ids = list(TECHWEB_NODE_MOD_SUIT)
 	design_ids = list(
 		"mod_clamp",
@@ -136,7 +137,6 @@
 		"mod_jetpack",
 		"mod_rad_protection",
 		"mod_emp_shield",
-		"mod_storage_expanded",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_3_POINTS)
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_ENGINEERING)

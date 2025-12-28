@@ -16,8 +16,8 @@
 	description = "Проведённые исследования демонстрируют, что использование щадящих манипуляций гемостатическим зажимом способствует значительному снижению боли у пациента."
 	prereq_ids = list(TECHWEB_NODE_MEDBAY_EQUIP)
 	design_ids = list(
-		"surgery_heal_brute_upgrade",
-		"surgery_heal_burn_upgrade",
+		"surgery_heal_upgrade",
+		"medibot_upgrade",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
 	announce_channels = list(RADIO_CHANNEL_MEDICAL)
@@ -29,9 +29,9 @@
 	prereq_ids = list(TECHWEB_NODE_SURGERY)
 	design_ids = list(
 		"harvester",
-		"surgery_heal_brute_upgrade_femto",
-		"surgery_heal_burn_upgrade_femto",
+		"medibot_upgrade_two",
 		"surgery_heal_combo",
+		"surgery_heal_upgrade_femto",
 		"surgery_lobotomy",
 		"surgery_lobotomy_mechanic",
 		"surgery_wing_reconstruction",
@@ -46,6 +46,7 @@
 	description = "Отрасль хирургии, тестирующая радикальные и нестандартные методики оперативного вмешательства. Процедуры направлены на модификацию глубоких структур организма для достижения специфических и зачастую уникальных функциональных изменений."
 	prereq_ids = list(TECHWEB_NODE_SURGERY_ADV)
 	design_ids = list(
+		"medibot_upgrade_three",
 		"surgery_cortex_folding",
 		"surgery_cortex_folding_mechanic",
 		"surgery_cortex_imprint",
