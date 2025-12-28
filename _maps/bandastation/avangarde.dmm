@@ -707,6 +707,12 @@
 	pixel_y = 13;
 	desc = "Пить только с тазиком."
 	},
+/obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/head/beanie/black,
+/obj/item/clothing/head/beanie/black,
+/obj/item/clothing/head/beanie/black,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/ruin_second)
 "auK" = (
@@ -17550,6 +17556,8 @@
 	pixel_x = 3;
 	pixel_y = 7
 	},
+/obj/item/clothing/under/rank/ussp/gopnik,
+/obj/item/clothing/head/soft/ussp/gopnik,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
 "jBU" = (
@@ -27397,6 +27405,7 @@
 	pixel_y = 11
 	},
 /obj/effect/decal/cleanable/cobweb,
+/obj/item/clothing/under/rank/ussp/gopnik,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
 "oXS" = (
@@ -34643,6 +34652,7 @@
 	pixel_x = 1;
 	pixel_y = 1
 	},
+/obj/item/clothing/under/rank/ussp/gopnik,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
 "sSx" = (
@@ -42594,6 +42604,12 @@
 	pixel_y = 13;
 	desc = "Пить только с тазиком."
 	},
+/obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/head/beanie/black,
+/obj/item/clothing/head/beanie/black,
+/obj/item/clothing/head/beanie/black,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/ruin_second)
 "wVP" = (
