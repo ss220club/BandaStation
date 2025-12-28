@@ -325,7 +325,7 @@
 /area/awaymission/avangarde17/inside/house_4/six_apartment/bedroom)
 "akL" = (
 /obj/structure/steps/directional/north,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "akV" = (
 /obj/structure/stone_tile/slab{
@@ -638,7 +638,7 @@
 	dir = 5
 	},
 /obj/structure/light_fake/small/directional/north,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "aul" = (
 /obj/structure/flora/tree/stump,
@@ -976,7 +976,7 @@
 "aFu" = (
 /obj/effect/decal/cleanable/blood/gibs/old,
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "aFx" = (
 /obj/structure/flora/grass/both/style_random,
@@ -1001,7 +1001,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "aHR" = (
 /obj/effect/mapping_helpers/burnt_floor,
@@ -1626,7 +1626,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "aWX" = (
 /obj/effect/turf_decal/siding/wood/cherry/corner{
@@ -2153,7 +2153,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/weather/snow/corner,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "bhF" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -3745,7 +3745,7 @@
 /obj/structure/railing/platform/corner{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "bUd" = (
 /obj/structure/chair/pew/right,
@@ -3812,7 +3812,7 @@
 "bWG" = (
 /obj/effect/turf_decal/weather/snow/corner,
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "bWS" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/general/hidden,
@@ -3936,7 +3936,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "cbc" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -4024,7 +4024,7 @@
 	dir = 10
 	},
 /obj/structure/light_fake/small/directional,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "ccW" = (
 /obj/structure/stone_tile/slab{
@@ -4104,7 +4104,7 @@
 /area/awaymission/avangarde17/inside/police)
 "ceq" = (
 /obj/effect/turf_decal/stripes/red/full,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "cfh" = (
 /obj/machinery/computer/records/medical/syndie{
@@ -4154,7 +4154,7 @@
 	dir = 8
 	},
 /obj/structure/light_fake/small/directional/west,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "chr" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -4526,7 +4526,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "csA" = (
 /turf/open/misc/snow/avangarde,
@@ -4601,7 +4601,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "cuL" = (
 /obj/effect/turf_decal/weather/snow/corner,
@@ -4809,7 +4809,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "cAq" = (
 /obj/structure/mineral_door/wood,
@@ -5597,7 +5597,7 @@
 /area/awaymission/avangarde17/inside/ruin_second)
 "cYq" = (
 /obj/effect/turf_decal/weather/snow/corner,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "cYK" = (
 /turf/closed/wall/mineral/iron,
@@ -5962,7 +5962,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/generic,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "dgH" = (
 /obj/structure/shelves,
@@ -6087,7 +6087,7 @@
 "djk" = (
 /obj/structure/flora/rock/pile/icy/style_random,
 /obj/item/stack/rods,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
 "djD" = (
 /obj/effect/turf_decal/siding/wood/cherry/corner{
@@ -6406,7 +6406,7 @@
 /obj/effect/turf_decal/siding/thinplating/corner{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "dqi" = (
 /turf/open/floor/wood/tile/cherry,
@@ -6893,7 +6893,7 @@
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "dzP" = (
 /obj/effect/turf_decal/weather/snow/corner,
@@ -7442,7 +7442,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 10
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "dPQ" = (
 /obj/structure/table/wood,
@@ -7680,7 +7680,7 @@
 	pixel_x = -14;
 	pixel_y = 0
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "dUb" = (
 /obj/effect/baseturf_helper{
@@ -8195,7 +8195,7 @@
 	dir = 10
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "eez" = (
 /obj/structure/chair/comfy/black{
@@ -8222,7 +8222,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "efL" = (
 /obj/structure/railing/platform{
@@ -8234,7 +8234,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "ehz" = (
 /obj/effect/turf_decal/stripes/line{
@@ -8636,7 +8636,7 @@
 	},
 /obj/structure/cable,
 /obj/structure/light_fake/small/directional/west,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "evr" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -9981,7 +9981,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "fjB" = (
 /obj/effect/turf_decal/siding/dark{
@@ -10314,7 +10314,7 @@
 /area/awaymission/avangarde17/inside/temple_second)
 "fwj" = (
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "fwo" = (
 /obj/structure/bed,
@@ -10407,7 +10407,7 @@
 /area/awaymission/avangarde17/inside/hospital/dr)
 "fyb" = (
 /obj/machinery/door/poddoor/ert,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
 "fyi" = (
 /obj/structure/cable,
@@ -11448,7 +11448,7 @@
 	pixel_y = -7
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "gcY" = (
 /obj/machinery/oven/range,
@@ -11781,7 +11781,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "gom" = (
 /obj/effect/baseturf_helper{
@@ -12829,7 +12829,7 @@
 	pixel_x = 12;
 	pixel_y = 0
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "gOK" = (
 /obj/structure/tomb/tomb_2,
@@ -13039,7 +13039,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "gXc" = (
 /obj/structure/sign/plaques/kiddie/badger{
@@ -13675,7 +13675,7 @@
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 9
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "huz" = (
 /obj/structure/stone_tile/slab{
@@ -13941,7 +13941,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "hzq" = (
 /obj/structure/stone_tile/block{
@@ -14441,7 +14441,7 @@
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 6
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "hLq" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -14555,7 +14555,7 @@
 	},
 /obj/structure/cable,
 /obj/structure/light_fake/small/directional/north,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "hOA" = (
 /obj/structure/platform/iron,
@@ -15297,7 +15297,7 @@
 "iil" = (
 /obj/effect/decal/cleanable/generic,
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "iin" = (
 /obj/structure/flora/bush/pointy/style_random,
@@ -15956,7 +15956,7 @@
 /obj/effect/turf_decal/siding/thinplating/corner{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "iFR" = (
 /obj/machinery/shower/directional/south,
@@ -16388,7 +16388,7 @@
 	dir = 1
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "iSy" = (
 /obj/structure/fence/corner{
@@ -16582,7 +16582,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "iXM" = (
 /obj/machinery/light/small/directional/south,
@@ -16771,7 +16771,7 @@
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "jba" = (
 /obj/structure/table/wood,
@@ -16938,7 +16938,7 @@
 	pixel_y = -18
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "jhC" = (
 /obj/effect/turf_decal/siding/wood/cherry,
@@ -17304,7 +17304,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "jqj" = (
 /obj/effect/turf_decal/siding/thinplating{
@@ -17431,7 +17431,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "jsu" = (
 /obj/effect/turf_decal/siding/thinplating{
@@ -17440,7 +17440,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "jsw" = (
 /obj/machinery/griddle{
@@ -17476,7 +17476,7 @@
 	pixel_y = 0
 	},
 /obj/effect/turf_decal/siding/thinplating/corner,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "jtX" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -17973,7 +17973,7 @@
 "jFJ" = (
 /obj/machinery/door/poddoor/preopen,
 /obj/item/stack/ore/glass/basalt,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
 "jFS" = (
 /obj/structure/sign/poster/contraband/vodka/directional/west,
@@ -18486,7 +18486,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "jVU" = (
 /obj/structure/platform/iron,
@@ -18743,7 +18743,7 @@
 	desc = "Постовой знак.";
 	pixel_x = -32
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "kaX" = (
 /obj/effect/decal/fakelattice{
@@ -19500,7 +19500,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "kwZ" = (
 /turf/closed/indestructible/rock/snow,
@@ -20003,7 +20003,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "kKf" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -20731,7 +20731,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "lel" = (
 /obj/effect/spawner/structure/window/reinforced,
@@ -21191,13 +21191,13 @@
 	dir = 4;
 	alpha = 200
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "lqI" = (
 /obj/structure/railing/platform{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "lre" = (
 /obj/structure/flora/grass/both/style_random,
@@ -21352,7 +21352,7 @@
 /obj/machinery/door/poddoor/shutters{
 	id = "avangarde_city_hang_gate"
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "lwD" = (
 /obj/structure/closet/cabinet,
@@ -21477,7 +21477,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "lyt" = (
 /obj/structure/window/reinforced/spawner/directional/south,
@@ -21606,7 +21606,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "lDZ" = (
 /obj/structure/stone_tile/block/cracked{
@@ -22110,7 +22110,7 @@
 	dir = 1
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "lUh" = (
 /obj/structure/spider/stickyweb,
@@ -23612,7 +23612,7 @@
 	pixel_x = -6;
 	pixel_y = 15
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "mNz" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -23834,7 +23834,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "mSc" = (
 /obj/structure/platform/wood{
@@ -23882,7 +23882,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "mSJ" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -24118,7 +24118,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "naC" = (
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -24200,7 +24200,7 @@
 	dir = 6
 	},
 /obj/structure/light_fake/small/directional,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "ncF" = (
 /obj/structure/fans/tiny,
@@ -25283,7 +25283,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "nGz" = (
 /obj/structure/sign/calendar/ussp/directional/north,
@@ -25832,7 +25832,7 @@
 	dir = 8
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "nZU" = (
 /obj/structure/table/bronze,
@@ -26143,7 +26143,7 @@
 	dir = 1
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "ojc" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -26642,7 +26642,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "otg" = (
 /obj/effect/turf_decal/stripes/red/line{
@@ -26880,7 +26880,7 @@
 	dir = 8
 	},
 /obj/structure/light_fake/small/directional/east,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "oBM" = (
 /obj/structure/stone_tile/surrounding_tile/cracked{
@@ -26919,7 +26919,7 @@
 	dir = 9
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "oCJ" = (
 /obj/structure/platform/iron,
@@ -27056,7 +27056,7 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "oIg" = (
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "oIn" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -27647,7 +27647,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "pbD" = (
 /obj/structure/shelves/style2,
@@ -27877,7 +27877,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "phZ" = (
 /obj/structure/toilet{
@@ -28308,7 +28308,7 @@
 	dir = 5
 	},
 /obj/structure/light_fake/small/directional/east,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "prU" = (
 /obj/structure/stone_tile/slab/cracked{
@@ -28822,7 +28822,7 @@
 	dir = 1
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "pFT" = (
 /obj/structure/chair/pew/right,
@@ -28987,7 +28987,7 @@
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 10
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "pLg" = (
 /obj/structure/table/wood,
@@ -29315,7 +29315,7 @@
 /area/awaymission/avangarde17/inside/hangar)
 "pTa" = (
 /obj/structure/flora/rock/icy/style_random,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
 "pTc" = (
 /obj/effect/turf_decal/siding/thinplating{
@@ -29332,7 +29332,7 @@
 	},
 /obj/structure/cable,
 /obj/structure/light_fake/small/directional,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "pTR" = (
 /obj/structure/table/wood,
@@ -29775,7 +29775,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/weather/snow/corner,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "qcH" = (
 /obj/structure/flora/grass/brown/style_random,
@@ -31036,7 +31036,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 9
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "qKS" = (
 /obj/machinery/oven/range,
@@ -31353,7 +31353,7 @@
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 5
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "qUJ" = (
 /obj/structure/cable,
@@ -31703,7 +31703,7 @@
 	},
 /obj/structure/cable,
 /obj/structure/light_fake/small/directional/west,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "rgL" = (
 /turf/open/misc/dirt/dark/station,
@@ -31891,7 +31891,7 @@
 "rmB" = (
 /obj/structure/flora/rock/pile/icy/style_random,
 /obj/item/stack/sheet/mineral/plastitanium,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
 "rmI" = (
 /obj/structure/railing/platform/corner{
@@ -31955,7 +31955,7 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_3/third_apartment/bedroom)
 "rot" = (
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
 "rox" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -32937,7 +32937,7 @@
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "rPw" = (
 /obj/effect/turf_decal/weather/snow/corner,
@@ -33914,7 +33914,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "srY" = (
 /obj/structure/platform/iron,
@@ -34109,7 +34109,7 @@
 	pixel_x = 10;
 	pixel_y = 27
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "sxj" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -34318,7 +34318,7 @@
 /obj/structure/railing/platform{
 	dir = 6
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "sCP" = (
 /obj/structure/chair/sofa/right/brown{
@@ -34436,7 +34436,7 @@
 "sFL" = (
 /obj/structure/cable,
 /obj/structure/light_fake/small/directional,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "sFU" = (
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -34469,7 +34469,7 @@
 /obj/machinery/door/poddoor/shutters{
 	id = "avangarde_city_hangar"
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/inside/hangar)
 "sHs" = (
 /obj/structure/closet/crate/freezer,
@@ -36405,7 +36405,7 @@
 /area/awaymission/avangarde17/outside)
 "tJT" = (
 /obj/item/stack/ore/glass/basalt,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
 "tJU" = (
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -36490,7 +36490,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "tNm" = (
 /obj/structure/chair/wood{
@@ -36782,7 +36782,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "tXk" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -37108,7 +37108,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "uhz" = (
 /obj/structure/flora/rock{
@@ -37531,7 +37531,7 @@
 	pixel_y = -12
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "uuk" = (
 /obj/structure/mineral_door/wood,
@@ -37740,7 +37740,7 @@
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 4
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "uzq" = (
 /obj/structure/flora/ash/tall_shroom,
@@ -37767,7 +37767,7 @@
 	id = "avangarde_city_hang_gate"
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "uBo" = (
 /obj/structure/table/wood,
@@ -37921,7 +37921,7 @@
 /obj/effect/turf_decal/siding/thinplating/corner{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "uER" = (
 /obj/structure/stone_tile/surrounding_tile/cracked{
@@ -37942,7 +37942,7 @@
 	dir = 4
 	},
 /obj/structure/light_fake/small/directional/east,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "uFj" = (
 /obj/structure/table/wood,
@@ -38713,7 +38713,7 @@
 	dir = 1
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "vaa" = (
 /obj/structure/dresser,
@@ -38918,7 +38918,7 @@
 	dir = 5
 	},
 /obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "vgn" = (
 /obj/structure/sign/clock/directional/east,
@@ -38943,7 +38943,7 @@
 /obj/structure/railing/platform{
 	dir = 10
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "vgS" = (
 /obj/structure/dresser,
@@ -39329,7 +39329,7 @@
 /area/awaymission/avangarde17/outside/city)
 "vsp" = (
 /obj/structure/bus,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "vsq" = (
 /obj/structure/flora/bush/flowers_pp/style_random,
@@ -39564,7 +39564,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "vAi" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
@@ -39716,7 +39716,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "vEd" = (
 /obj/structure/stone_tile/block{
@@ -39836,7 +39836,7 @@
 /area/awaymission/avangarde17/inside/base_hospital)
 "vHL" = (
 /obj/structure/flora/rock/pile/icy/style_random,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
 "vIv" = (
 /obj/structure/table/reinforced,
@@ -40044,7 +40044,7 @@
 	},
 /obj/effect/turf_decal/weather/snow/corner,
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "vNX" = (
 /obj/structure/platform/iron,
@@ -40602,7 +40602,7 @@
 	dir = 8
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "wer" = (
 /obj/structure/sign/flag/ussp/directional/north,
@@ -41677,7 +41677,7 @@
 /area/awaymission/avangarde17/inside/gov/second_floor)
 "wyB" = (
 /obj/structure/railing/platform/corner,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "wyK" = (
 /obj/structure/bed,
@@ -42076,7 +42076,7 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 6
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "wHG" = (
 /obj/effect/baseturf_helper{
@@ -42215,7 +42215,7 @@
 /area/awaymission/avangarde17/outside/ruin)
 "wKO" = (
 /obj/effect/decal/cleanable/generic,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "wKP" = (
 /obj/structure/fence{
@@ -42419,7 +42419,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "wNG" = (
 /obj/structure/stone_tile/slab/burnt{
@@ -43037,7 +43037,7 @@
 "xbZ" = (
 /obj/effect/turf_decal/siding/thinplating/corner,
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "xcf" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -43750,7 +43750,7 @@
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 8
 	},
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "xsi" = (
 /obj/structure/chair/wood{
@@ -43904,7 +43904,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "xvj" = (
 /obj/effect/turf_decal/tile/dark_blue/opposingcorners,
@@ -44314,7 +44314,7 @@
 	dir = 8
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "xKE" = (
 /obj/effect/decal/cleanable/dirt,
@@ -44508,7 +44508,7 @@
 /area/awaymission/avangarde17/inside/old_hangar)
 "xOk" = (
 /obj/structure/sign/poster/contraband/communist_state/directional/east,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "xOo" = (
 /obj/structure/flora/bush/pointy/style_random,
@@ -44630,7 +44630,7 @@
 	dir = 5
 	},
 /obj/structure/cable,
-/turf/open/floor/asphalt,
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "xRn" = (
 /obj/structure/sign/warning/docking/directional/south,
