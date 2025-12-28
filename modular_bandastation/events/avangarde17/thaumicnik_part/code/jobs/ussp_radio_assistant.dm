@@ -8,6 +8,7 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	belt = null
 	pda_slot = null
+	ears = null
 
 	backpack = /obj/item/storage/backpack
 	satchel = /obj/item/storage/backpack/satchel

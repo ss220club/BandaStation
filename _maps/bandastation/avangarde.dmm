@@ -323,9 +323,6 @@
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/six_apartment/bedroom)
-"akB" = (
-/turf/open/floor/plating,
-/area/awaymission/avangarde17/outside/ruin/second)
 "akL" = (
 /obj/structure/steps/directional/north,
 /turf/open/floor/asphalt,
@@ -1607,10 +1604,6 @@
 /obj/item/storage/box/drinkingglasses,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/hangar)
-"aWv" = (
-/obj/effect/turf_decal/weather/snow,
-/turf/open/floor/plating,
-/area/awaymission/avangarde17/outside/ruin/second)
 "aWy" = (
 /obj/machinery/power/port_gen/pacman/pre_loaded{
 	sheets = 50;
@@ -2742,6 +2735,7 @@
 "bul" = (
 /obj/machinery/door/airlock/hatch,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/hospital/morgue)
 "bum" = (
@@ -3687,6 +3681,7 @@
 /obj/effect/baseturf_helper{
 	baseturf = /turf/open/floor/plating
 	},
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/police/car)
 "bSX" = (
@@ -4519,6 +4514,9 @@
 	},
 /turf/open/floor/asphalt,
 /area/awaymission/avangarde17/outside/city)
+"csA" = (
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside/ruin/second)
 "csU" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -4847,6 +4845,9 @@
 /obj/effect/turf_decal/siding/wood/cherry,
 /turf/open/openspace,
 /area/awaymission/avangarde17/inside/police/second_floor)
+"cBh" = (
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside/ruin/second)
 "cBD" = (
 /obj/structure/flora/rock/pile/icy/style_random,
 /obj/effect/turf_decal/weather/snow/corner{
@@ -4859,7 +4860,9 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
 "cBJ" = (
-/obj/machinery/vending/cigarette/ussp,
+/obj/machinery/vending/cigarette/ussp{
+	all_products_free = 1
+	},
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
 	},
@@ -6458,6 +6461,7 @@
 /area/awaymission/avangarde17/inside/hangar/cabinet)
 "dsv" = (
 /obj/machinery/door/airlock/hatch,
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /turf/open/floor/iron/white/small,
 /area/awaymission/avangarde17/inside/hospital)
 "dsy" = (
@@ -7722,7 +7726,9 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/mine)
 "dVL" = (
-/obj/machinery/vending/sovietsoda,
+/obj/machinery/vending/sovietsoda{
+	all_products_free = 1
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/gov/second_floor)
 "dWg" = (
@@ -8101,9 +8107,6 @@
 	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/base)
-"ebh" = (
-/turf/closed/wall/mineral/wood/nonmetal,
-/area/awaymission/avangarde17/outside/ruin/second)
 "ebU" = (
 /obj/effect/baseturf_helper{
 	baseturf = /turf/open/openspace
@@ -8797,6 +8800,22 @@
 /area/awaymission/avangarde17/inside/house_4/seven_apartment)
 "ezY" = (
 /obj/structure/closet/cabinet,
+/obj/item/clothing/neck/large_scarf/blue,
+/obj/item/clothing/neck/large_scarf/green,
+/obj/item/clothing/neck/large_scarf/red,
+/obj/item/clothing/neck/large_scarf,
+/obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/suit/hooded/wintercoat,
+/obj/item/clothing/suit/hooded/wintercoat/custom,
+/obj/item/clothing/suit/hooded/wintercoat/custom,
+/obj/item/clothing/head/beanie/black,
+/obj/item/clothing/head/beanie/darkblue,
+/obj/item/clothing/head/beanie/orange,
+/obj/item/clothing/head/beanie/red,
+/obj/item/clothing/head/beanie/yellow,
+/obj/item/clothing/suit/armor/vest/ussp,
+/obj/item/clothing/suit/armor/vest/russian_coat,
+/obj/item/clothing/suit/jacket/fancy,
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 6
 	},
@@ -8961,10 +8980,6 @@
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/iron/white/small,
 /area/awaymission/avangarde17/inside/base_hospital)
-"eEV" = (
-/obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/wood/cherry,
-/area/awaymission/avangarde17/outside/ruin/second)
 "eFi" = (
 /obj/effect/turf_decal/siding/wood/cherry/corner,
 /obj/machinery/light/small/directional/north,
@@ -9386,6 +9401,7 @@
 	id = "avangarde_city_mil_door"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/police)
 "eQO" = (
@@ -11867,7 +11883,8 @@
 	id = "avangarde_city_miner_gate"
 	},
 /obj/machinery/button/door/directional/south{
-	id = "avangarde_city_miner_gate"
+	id = "avangarde_city_miner_gate";
+	req_access = list("mineral_storeroom")
 	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/miner/mine)
@@ -11899,7 +11916,9 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
 "gsL" = (
-/obj/machinery/vending/coffee,
+/obj/machinery/vending/coffee{
+	all_products_free = 1
+	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/gov)
 "gtf" = (
@@ -12176,6 +12195,7 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
 	},
+/obj/effect/landmark/start/ussp/town/tajaran,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "gxn" = (
@@ -14526,6 +14546,7 @@
 /obj/machinery/door/airlock/hatch,
 /obj/effect/turf_decal/tile/blue/full,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/base_kitchen)
 "hPC" = (
@@ -15602,10 +15623,6 @@
 	color = "#4b4b4b"
 	},
 /area/awaymission/avangarde17/inside/temple_second)
-"ixf" = (
-/obj/structure/barricade/wooden/snowed,
-/turf/open/floor/wood/cherry,
-/area/awaymission/avangarde17/outside/ruin/second)
 "ixH" = (
 /obj/machinery/oven/range,
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -17494,6 +17511,7 @@
 "jzC" = (
 /obj/machinery/door/airlock/hatch,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/base_cargo)
 "jAf" = (
@@ -18919,6 +18937,10 @@
 /obj/structure/flora/rock/icy/style_random,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
+"kjb" = (
+/obj/structure/barricade/wooden/snowed,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside/ruin/second)
 "kjh" = (
 /obj/structure/platform/iron,
 /obj/structure/window/reinforced/survival_pod/spawner/directional/east,
@@ -19451,9 +19473,6 @@
 	},
 /turf/open/floor/carpet/green,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
-"kAT" = (
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/ruin/second)
 "kBd" = (
 /obj/structure/stone_tile/slab{
 	color = "#464646"
@@ -20408,6 +20427,7 @@
 /area/awaymission/avangarde17/inside/temple_second)
 "kWd" = (
 /obj/machinery/door/airlock/hatch,
+/obj/effect/mapping_helpers/airlock/access/all/supply/mineral_storage,
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar)
 "kWI" = (
@@ -20765,7 +20785,9 @@
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside/city)
 "liB" = (
-/obj/machinery/vending/sovietsoda,
+/obj/machinery/vending/sovietsoda{
+	all_products_free = 1
+	},
 /turf/open/floor/wood/oak,
 /area/awaymission/avangarde17/inside/base)
 "liI" = (
@@ -21764,6 +21786,7 @@
 "lMc" = (
 /obj/structure/fans/tiny,
 /obj/machinery/door/airlock/hatch,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/wood/tile/oak,
 /area/awaymission/avangarde17/inside/base)
 "lNm" = (
@@ -21837,9 +21860,6 @@
 /obj/structure/btr,
 /turf/open/floor/plating/reinforced,
 /area/awaymission/avangarde17/inside/base_garage)
-"lPx" = (
-/turf/open/floor/wood/cherry,
-/area/awaymission/avangarde17/outside/ruin/second)
 "lPO" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
@@ -22334,6 +22354,7 @@
 /obj/structure/chair/wood,
 /obj/effect/turf_decal/siding/wood/cherry,
 /obj/effect/mapping_helpers/broken_floor,
+/obj/effect/landmark/start/ussp/town/tajaran,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "mgu" = (
@@ -23451,7 +23472,9 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_4/fifth_apartment/bedroom)
 "mMJ" = (
-/obj/machinery/vending/coffee,
+/obj/machinery/vending/coffee{
+	all_products_free = 1
+	},
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
 	},
@@ -24041,6 +24064,7 @@
 "nbO" = (
 /obj/machinery/door/airlock/hatch,
 /obj/effect/turf_decal/tile/blue/full,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron/white/smooth_large,
 /area/awaymission/avangarde17/inside/base_hospital)
 "ncl" = (
@@ -24069,6 +24093,7 @@
 /obj/structure/fans/tiny,
 /obj/machinery/door/airlock/hatch,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/plating/reinforced,
 /area/awaymission/avangarde17/inside/base_post1)
 "ndf" = (
@@ -24832,6 +24857,7 @@
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/general/hidden,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/base_cargo)
 "nxm" = (
@@ -25271,7 +25297,8 @@
 /obj/structure/cable,
 /obj/machinery/button/door/directional/west{
 	id = "avangarde_city_mil_garage";
-	name = "Гараж"
+	name = "Гараж";
+	req_access = list("brig")
 	},
 /turf/open/floor/iron/dark/smooth_half{
 	dir = 1
@@ -26180,6 +26207,7 @@
 /obj/machinery/door/airlock/hatch,
 /obj/effect/turf_decal/tile/blue/full,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron/white/smooth_large,
 /area/awaymission/avangarde17/inside/base_hospital)
 "ono" = (
@@ -27248,6 +27276,7 @@
 "oVP" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/any/security/brig,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/police)
 "oVU" = (
@@ -27519,6 +27548,7 @@
 "pbI" = (
 /obj/machinery/door/airlock/hatch,
 /obj/effect/turf_decal/tile/blue/full,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/base_kitchen)
 "pbJ" = (
@@ -28067,6 +28097,9 @@
 /obj/structure/flora/grass/both/style_random,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/base)
+"ppa" = (
+/turf/closed/wall/mineral/wood/nonmetal,
+/area/awaymission/avangarde17/outside/ruin/second)
 "ppf" = (
 /obj/structure/barricade/sandbags,
 /obj/effect/turf_decal/weather/snow/corner{
@@ -28405,6 +28438,7 @@
 "pyk" = (
 /obj/machinery/door/airlock/hatch,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/hospital/hall)
 "pym" = (
@@ -28440,6 +28474,7 @@
 /obj/structure/fans/tiny,
 /obj/machinery/door/airlock/hatch,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/base_barracs)
 "pzh" = (
@@ -28897,7 +28932,9 @@
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/base_cargo)
 "pNW" = (
-/obj/machinery/vending/cigarette/ussp,
+/obj/machinery/vending/cigarette/ussp{
+	all_products_free = 1
+	},
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
 	},
@@ -29549,6 +29586,7 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
 	},
+/obj/effect/landmark/start/ussp/town/tajaran,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "qbZ" = (
@@ -29780,7 +29818,9 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/garage)
 "qiC" = (
-/obj/machinery/vending/sovietsoda,
+/obj/machinery/vending/sovietsoda{
+	all_products_free = 1
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/shop_1)
 "qji" = (
@@ -35211,6 +35251,10 @@
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/second_apartment/bedroom)
+"tln" = (
+/obj/effect/turf_decal/weather/snow,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside/ruin/second)
 "tlE" = (
 /obj/structure/sign/flag/ussp/directional/south,
 /turf/open/floor/iron/dark/small,
@@ -35246,7 +35290,8 @@
 	},
 /obj/structure/cable,
 /obj/machinery/button/door/directional/west{
-	id = "avangarde_city_mil_prison"
+	id = "avangarde_city_mil_prison";
+	req_access = list("brig")
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/police/cabinet)
@@ -35890,10 +35935,6 @@
 /obj/structure/flora/rock/icy/style_random,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
-"tCD" = (
-/obj/effect/mapping_helpers/burnt_floor,
-/turf/open/floor/wood/cherry,
-/area/awaymission/avangarde17/outside/ruin/second)
 "tCQ" = (
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/base)
@@ -36619,6 +36660,10 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/base)
+"uau" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside/ruin/second)
 "uaD" = (
 /obj/structure/stairs/north{
 	color = "gray"
@@ -37218,6 +37263,7 @@
 /obj/structure/fans/tiny,
 /obj/machinery/door/airlock/hatch,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/wood/tile/oak,
 /area/awaymission/avangarde17/inside/base)
 "ush" = (
@@ -38104,6 +38150,7 @@
 /obj/structure/fans/tiny,
 /obj/machinery/door/airlock/hatch,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/plating/reinforced,
 /area/awaymission/avangarde17/inside/base_post2)
 "uQF" = (
@@ -38328,6 +38375,7 @@
 "uWL" = (
 /obj/machinery/door/airlock/hatch,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /turf/open/floor/iron/white/small,
 /area/awaymission/avangarde17/inside/hospital)
 "uWV" = (
@@ -38672,6 +38720,7 @@
 "vgy" = (
 /obj/machinery/door/airlock/hatch,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/supply/mineral_storage,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/miner/mine)
 "vgD" = (
@@ -39056,6 +39105,9 @@
 /obj/structure/flora/rock/pile/icy/style_random,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
+"vqS" = (
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside/ruin/second)
 "vrH" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 8
@@ -39446,6 +39498,7 @@
 /area/awaymission/avangarde17/outside/city)
 "vDW" = (
 /obj/machinery/door/airlock/hatch,
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/hospital/dr)
 "vEa" = (
@@ -41122,6 +41175,7 @@
 	name = "Участковый Пункт Милиции"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/entrance,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/police)
 "wuB" = (
@@ -41812,6 +41866,10 @@
 	},
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/gov/second_floor)
+"wHN" = (
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside/ruin/second)
 "wHO" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood/oak,
@@ -43542,7 +43600,9 @@
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/base)
 "xtG" = (
-/obj/machinery/vending/cigarette/ussp,
+/obj/machinery/vending/cigarette/ussp{
+	all_products_free = 1
+	},
 /turf/open/floor/wood/oak,
 /area/awaymission/avangarde17/inside/base)
 "xtO" = (
@@ -43580,6 +43640,7 @@
 "xuc" = (
 /obj/machinery/door/airlock/highsecurity,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/supply/mineral_storage,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/hangar)
 "xuj" = (
@@ -44657,6 +44718,7 @@
 	id = "avangarde_city_mil_armory"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/avangarde17/inside/police/armory)
 "ybq" = (
@@ -151333,9 +151395,9 @@ uym
 uym
 uym
 uym
-ebh
-ebh
-ebh
+ppa
+ppa
+ppa
 bkv
 bkv
 bkv
@@ -151587,12 +151649,12 @@ bkv
 bkv
 bkv
 nTb
-kAT
+csA
 qQr
 uym
 uIY
 wJR
-ebh
+ppa
 bkv
 bkv
 bkv
@@ -151845,11 +151907,11 @@ bkv
 bkv
 nTb
 qhs
-kAT
+csA
 asy
 whO
 tNp
-ebh
+ppa
 bkv
 bkv
 bkv
@@ -152100,13 +152162,13 @@ bkv
 bkv
 bkv
 bkv
-aWv
+tln
 pPQ
 eol
-ixf
-eEV
-tCD
-ebh
+kjb
+uau
+wHN
+ppa
 bkv
 bkv
 bkv
@@ -152360,10 +152422,10 @@ bkv
 uym
 uym
 uym
-ixf
+kjb
 wqQ
 iRv
-ebh
+ppa
 bkv
 bkv
 bkv
@@ -152620,7 +152682,7 @@ uym
 uym
 uym
 pdy
-ebh
+ppa
 bkv
 bkv
 bkv
@@ -152874,10 +152936,10 @@ bkv
 uym
 uym
 uym
-ebh
-ebh
-ebh
-ebh
+ppa
+ppa
+ppa
+ppa
 bkv
 bkv
 bkv
@@ -157491,9 +157553,9 @@ uym
 uym
 uym
 uym
-ebh
-ebh
-ebh
+ppa
+ppa
+ppa
 bkv
 bkv
 bkv
@@ -157744,13 +157806,13 @@ bkv
 bkv
 bkv
 bkv
-ebh
+ppa
 izp
 izp
 caA
 iRb
 uym
-ebh
+ppa
 bkv
 bkv
 bkv
@@ -158001,13 +158063,13 @@ bkv
 bkv
 bkv
 bkv
-ebh
+ppa
 wqa
-eEV
+uau
 dnX
-lPx
+vqS
 uym
-ebh
+ppa
 bkv
 bkv
 bkv
@@ -158258,9 +158320,9 @@ bkv
 bkv
 bkv
 bkv
-ebh
-akB
-akB
+ppa
+cBh
+cBh
 sLV
 vCy
 uRq
@@ -159032,7 +159094,7 @@ bkv
 uym
 uym
 uym
-ebh
+ppa
 uFl
 uFl
 uFl

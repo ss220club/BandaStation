@@ -1,7 +1,5 @@
 /datum/outfit/job/ussp_homeless
 	name = "Бездомный"
-	id = /obj/item/card/id/advanced/ussp/passport
-	id_trim = /datum/id_trim/job/ussp_homeless
 	uniform = /obj/item/clothing/under/pants/slacks
 	suit = /obj/item/clothing/suit/toggle/jacket/sweater
 	ears = /obj/item/radio/headset
@@ -9,6 +7,7 @@
 	head = /obj/item/clothing/head/costume/ushanka
 	belt = null
 	pda_slot = null
+	ears = null
 
 	backpack = /obj/item/storage/backpack
 	satchel = /obj/item/storage/backpack/satchel

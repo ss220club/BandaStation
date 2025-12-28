@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/conjure/luzha
-	name = "Я ЛУЖА БУБУБУБУ"
-	desc = "Срёт лужей"
+	name = "Сделать подлость."
+	desc = "Отомсти им!"
 	check_flags = AB_CHECK_CONSCIOUS | AB_CHECK_INCAPACITATED | AB_CHECK_HANDS_BLOCKED
 	background_icon_state = "bg_spell"
 	button_icon = 'icons/mob/actions/actions_cult.dmi'

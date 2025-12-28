@@ -10,6 +10,7 @@
 	head = /obj/item/clothing/head/utility/hardhat
 	belt = null
 	pda_slot = null
+	ears = null
 
 	backpack = /obj/item/storage/backpack
 	satchel = /obj/item/storage/backpack/satchel

@@ -4,7 +4,7 @@
 	id_trim = /datum/id_trim/job/ussp_militiaman
 	uniform = /obj/item/clothing/under/rank/ussp/militsioner
 	suit = /obj/item/clothing/suit/armor/vest/ussp/militsia
-	ears = /obj/item/radio/headset
+	ears = null
 	shoes = /obj/item/clothing/shoes/jackboots
 	head = /obj/item/clothing/head/hats/ussp_militsia
 	belt = null
