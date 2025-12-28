@@ -17,8 +17,8 @@
 		if(!linked_airlock.opacity)
 			return ITEM_INTERACT_BLOCKING
 		if(linked_airlock.locked)
-			locked = FALSE
-			update_appearance()
+			linked_airlock.locked = FALSE
+			linked_airlock.update_appearance()
 		else
 			linked_airlock.secure_close()
 	else
