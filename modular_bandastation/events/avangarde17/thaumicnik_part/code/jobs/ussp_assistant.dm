@@ -4,6 +4,7 @@
 	id = /obj/item/card/id/advanced/ussp/passport
 	id_trim = /datum/id_trim/job/ussp_assistant
 	pda_slot = null
+	belt = null
 	ears = null
 
 /datum/job/assistant
