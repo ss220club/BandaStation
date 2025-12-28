@@ -3278,6 +3278,11 @@
 	},
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar)
+"bHn" = (
+/obj/structure/flora/rock/pile/icy/style_random,
+/mob/living/basic/spider/giant/nurse/ice,
+/turf/open/misc/asteroid/moon,
+/area/awaymission/avangarde17/inside/mine)
 "bHt" = (
 /obj/effect/decal/cleanable/vomit,
 /obj/machinery/light/small/burned/directional/west,
@@ -7689,7 +7694,7 @@
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_4/fourth_apartment/bedroom)
 "dUt" = (
-/mob/living/simple_animal/hostile/asteroid/polarbear,
+/mob/living/basic/spider/giant/nurse/ice,
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/inside/mine)
 "dUA" = (
@@ -25445,7 +25450,7 @@
 /area/awaymission/avangarde17/outside/base)
 "nMn" = (
 /obj/effect/decal/cleanable/blood/old,
-/mob/living/simple_animal/hostile/asteroid/polarbear,
+/mob/living/basic/spider/giant/nurse/ice,
 /obj/item/climbing_hook,
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/inside)
@@ -31738,7 +31743,7 @@
 /area/awaymission/avangarde17/inside/shop_1)
 "rhT" = (
 /obj/item/stack/ore/glass/basalt,
-/mob/living/simple_animal/hostile/asteroid/polarbear,
+/mob/living/basic/spider/giant/nurse/ice,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/mine)
 "rij" = (
@@ -36537,7 +36542,7 @@
 	},
 /area/awaymission/avangarde17/inside/temple_second)
 "tOm" = (
-/mob/living/simple_animal/hostile/asteroid/polarbear,
+/mob/living/basic/spider/giant/nurse/ice,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/mine)
 "tOD" = (
@@ -59353,7 +59358,7 @@ ttS
 hFO
 hFO
 afm
-tOD
+bHn
 hFO
 hFO
 hFO
@@ -59865,8 +59870,8 @@ ttS
 ttS
 hFO
 hFO
-tOD
-sSM
+bHn
+tOm
 hFO
 hFO
 hFO
