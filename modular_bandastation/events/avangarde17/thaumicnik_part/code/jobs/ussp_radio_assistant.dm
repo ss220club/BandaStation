@@ -31,7 +31,7 @@
 	department_for_prefs = /datum/job_department/service
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
-
+	event_description = "Помогайте вашему товарищу принимать звонки радиослушателей, готовьте программы, анекдоты и истории, а также следите за исправностью оборудования! Обязательно посетите собрание в местном райкоме на площади Революции. Все необходимые товары вы можете получить в гастрономе или промтоварах по талонам, которые выдаются специальным автоматом на втором этаже райкома по курсу один талон - один товар."
 /datum/id_trim/job/ussp_radio_assistant
 	assignment = "Ассистент радиоведущего"
 	trim_state = "trim_psychologist"

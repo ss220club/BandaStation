@@ -35,9 +35,10 @@
 	department_for_prefs = /datum/job_department/assistant
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
+	event_description = "Ваш удел - разводить лохов на талоны, мобилы и все, что можно сдать в ломбард или толкнуть в магазине. Реальные пацаны всегда слушаются своего пахана, который в свою очередь выбирается на особом пацанском совете. Помните, что мусорнуться - значит предать саму идею свободной пацанской житухи. Бойтесь ментов, уважайте четких ребят и щелкайте семки."
 
 /datum/id_trim/job/ussp_punk
-	assignment = "Безработный"
+	assignment = "Житель ПГТ \"Зорька\""
 	trim_state = "trim_mime"
 	department_color = COLOR_ASSISTANT_GRAY
 	subdepartment_color = COLOR_ASSISTANT_GRAY

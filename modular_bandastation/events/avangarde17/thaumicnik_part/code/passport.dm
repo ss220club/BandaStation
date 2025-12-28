@@ -91,3 +91,14 @@
 
 	return .
 
+/obj/item/card/id/advanced/ussp/passport/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change)
+	. = ..()
+	if(istype(loc, /obj/item/storage/wallet) || istype(loc, /obj/item/modular_computer))
+		icon_state = "card_ussp"
+	else
+		icon_state = "ussp_passport"
+
+/obj/item/card/id/advanced/ussp/passport/Initialize(mapload)
+	. = ..()
+	if(istype(loc, /obj/item/storage/wallet) || istype(loc, /obj/item/modular_computer))
+		icon_state = "card_ussp"

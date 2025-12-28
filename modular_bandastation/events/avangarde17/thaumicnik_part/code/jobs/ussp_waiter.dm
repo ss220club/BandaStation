@@ -30,6 +30,7 @@
 	department_for_prefs = /datum/job_department/service
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
+	event_description = " В вашем распоряжении самые популярные напитки и закуски, которые готовятся на кухне. Разливайте посетителям, травите байки и следите за порядком в заведении. Не допускайте расхищения общественной собственности. Все необходимые продукты, расходники и напитки вы можете запросить в гастрономе - вам выдадут их без талонов. Обязательно посетите собрание в местном райкоме на площади Революции."
 
 /datum/id_trim/job/ussp_waiter
 	assignment = "Буфетчик рюмочной"
