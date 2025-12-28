@@ -407,7 +407,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/calendar/ussp, 32)
 	max_total_storage = WEIGHT_CLASS_SMALL * 8
 	max_slots = 10
 
-/obj/item/storage/belt/military/army/tsf/full/PopulateContents()
+/datum/storage/military_belt/militsia/full/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol(src)
 	new /obj/item/ammo_box/magazine/m9mm(src)
 	new /obj/item/ammo_box/magazine/m9mm(src)

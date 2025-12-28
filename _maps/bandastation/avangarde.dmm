@@ -713,6 +713,9 @@
 /obj/item/clothing/head/beanie/black,
 /obj/item/clothing/head/beanie/black,
 /obj/item/clothing/head/beanie/black,
+/obj/item/food/semki,
+/obj/item/food/semki,
+/obj/item/food/semki,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/ruin_second)
 "auK" = (
@@ -3321,6 +3324,10 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/temple)
+"bJR" = (
+/obj/item/trash/semki,
+/turf/open/misc/dirt/dark/station,
+/area/awaymission/avangarde17/outside/city)
 "bKj" = (
 /obj/effect/turf_decal/tile/bar/half/contrasted{
 	dir = 8
@@ -7717,24 +7724,6 @@
 /obj/structure/flora/bush/flowers_br/style_random,
 /turf/open/floor/grass/fairy,
 /area/awaymission/avangarde17/inside)
-"dVl" = (
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	color = "#464646";
-	dir = 5
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	color = "#464646";
-	dir = 10
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	color = "#464646";
-	dir = 8
-	},
-/mob/living/basic/faithless,
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple_second)
 "dVF" = (
 /obj/structure/curtain,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
@@ -8897,6 +8886,22 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_2)
+"eAV" = (
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 9
+	},
+/obj/structure/stone_tile/surrounding_tile{
+	color = "#464646"
+	},
+/obj/structure/flora/rock/pile{
+	color = "#292929"
+	},
+/mob/living/basic/faithless,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple_second)
 "eAY" = (
 /obj/structure/shelves,
 /obj/item/reagent_containers/cup/bowl{
@@ -11928,6 +11933,10 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/awaymission/avangarde17/outside/roofs)
+"grZ" = (
+/obj/item/trash/semki,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside/ruin)
 "gsa" = (
 /obj/structure/glowshroom/single,
 /turf/open/misc/dirt/dark/station,
@@ -13129,6 +13138,7 @@
 	pixel_y = 8
 	},
 /obj/effect/mapping_helpers/burnt_floor,
+/obj/item/trash/semki,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/ruin)
 "hck" = (
@@ -14173,20 +14183,6 @@
 "hFO" = (
 /turf/closed/mineral/snowmountain/cavern/avangarde,
 /area/awaymission/avangarde17/inside/mine)
-"hGc" = (
-/obj/structure/stone_tile/block/cracked{
-	color = "#464646";
-	dir = 8
-	},
-/obj/structure/stone_tile/block{
-	color = "#464646";
-	dir = 4
-	},
-/mob/living/basic/faithless,
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple_second)
 "hGh" = (
 /obj/structure/closet/cardboard,
 /obj/effect/turf_decal/delivery,
@@ -14201,16 +14197,6 @@
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/hangar/second_floor)
-"hGl" = (
-/obj/structure/table/reinforced,
-/obj/item/storage/box/emptysandbags,
-/obj/item/storage/box/emptysandbags,
-/obj/item/storage/box/emptysandbags,
-/obj/item/storage/box/emptysandbags,
-/obj/item/storage/box/emptysandbags,
-/obj/item/storage/box/emptysandbags,
-/turf/open/floor/iron/dark/smooth_large,
-/area/awaymission/avangarde17/inside/base_hangar)
 "hGQ" = (
 /obj/structure/cable,
 /turf/open/floor/iron/dark/smooth_large,
@@ -16283,6 +16269,14 @@
 	},
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/awaymission/avangarde17/inside/base_cargo)
+"iQn" = (
+/obj/structure/chair/pew/left,
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 9
+	},
+/obj/item/cane,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "iQR" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
@@ -16599,6 +16593,28 @@
 /obj/structure/window/reinforced/survival_pod/spawner/directional/east,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_3/third_apartment/bedroom)
+"iYv" = (
+/obj/structure/bed/medical,
+/obj/effect/turf_decal/tile/dark_blue/opposingcorners,
+/obj/item/wheelchair,
+/obj/item/wheelchair{
+	pixel_x = 0;
+	pixel_y = 5
+	},
+/obj/item/cane/crutch/wood{
+	pixel_x = 1;
+	pixel_y = 0
+	},
+/obj/item/cane/crutch/wood{
+	pixel_x = 4;
+	pixel_y = 0
+	},
+/obj/item/cane/crutch/wood{
+	pixel_x = -3;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/white,
+/area/awaymission/avangarde17/inside/hospital)
 "iYL" = (
 /obj/vehicle/ridden/wheelchair,
 /turf/open/floor/carpet,
@@ -16640,6 +16656,26 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/base_cargo)
+"iZE" = (
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 10
+	},
+/obj/structure/stone_tile/cracked{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/center/cracked{
+	color = "#464646"
+	},
+/mob/living/basic/faithless,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple_second)
 "iZR" = (
 /obj/structure/closet/secure_closet/freezer/empty,
 /obj/item/reagent_containers/condiment/enzyme,
@@ -17129,22 +17165,6 @@
 /obj/structure/cable,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_2/first_apartment/bedroom)
-"jnu" = (
-/obj/structure/stone_tile/block/cracked{
-	color = "#464646";
-	dir = 9
-	},
-/obj/structure/stone_tile/surrounding_tile{
-	color = "#464646"
-	},
-/obj/structure/flora/rock/pile{
-	color = "#292929"
-	},
-/mob/living/basic/faithless,
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple_second)
 "jnw" = (
 /turf/closed/wall/ice,
 /area/awaymission/avangarde17/inside/base_kitchen)
@@ -17591,6 +17611,19 @@
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/base_cargo)
+"jzK" = (
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 1
+	},
+/obj/structure/stone_tile/block{
+	color = "#464646"
+	},
+/mob/living/basic/faithless,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple_second)
 "jAf" = (
 /mob/living/basic/faithless,
 /obj/structure/stone_tile/block/cracked{
@@ -19555,12 +19588,9 @@
 /turf/open/floor/carpet/green,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "kBd" = (
-/obj/structure/chair/pew/left,
+/obj/structure/chair/pew/right,
 /obj/effect/turf_decal/siding/thinplating{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 1
+	dir = 5
 	},
 /obj/item/cane,
 /turf/open/floor/stone,
@@ -20840,19 +20870,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/awaymission/avangarde17/inside/base_briefroom)
-"lhP" = (
-/obj/structure/stone_tile/block/cracked{
-	color = "#464646"
-	},
-/obj/structure/stone_tile/block{
-	color = "#464646";
-	dir = 1
-	},
-/mob/living/basic/faithless,
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple_second)
 "lhY" = (
 /obj/structure/statue/forgoten/forgoten_3/broke,
 /obj/structure/stone_tile/slab/cracked{
@@ -22446,14 +22463,6 @@
 /obj/machinery/oven/range,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment)
-"mgi" = (
-/obj/structure/chair/pew/left,
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 9
-	},
-/obj/item/cane,
-/turf/open/floor/stone,
-/area/awaymission/avangarde17/outside/city)
 "mgm" = (
 /obj/structure/chair/wood,
 /obj/effect/turf_decal/siding/wood/cherry,
@@ -24400,6 +24409,24 @@
 /obj/structure/cable,
 /turf/open/floor/catwalk_floor/iron_white,
 /area/awaymission/avangarde17/outside/city)
+"nik" = (
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 5
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 10
+	},
+/obj/structure/stone_tile/surrounding_tile/cracked{
+	color = "#464646";
+	dir = 8
+	},
+/mob/living/basic/faithless,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple_second)
 "niS" = (
 /obj/effect/turf_decal/weather/snow/corner,
 /obj/structure/cable,
@@ -32320,26 +32347,6 @@
 /obj/item/cane,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment/bedroom)
-"rAE" = (
-/obj/structure/stone_tile/block{
-	color = "#464646";
-	dir = 8
-	},
-/obj/structure/stone_tile/surrounding_tile/cracked{
-	color = "#464646";
-	dir = 10
-	},
-/obj/structure/stone_tile/cracked{
-	color = "#464646"
-	},
-/obj/structure/stone_tile/center/cracked{
-	color = "#464646"
-	},
-/mob/living/basic/faithless,
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple_second)
 "rAJ" = (
 /obj/structure/hedge,
 /obj/machinery/light/small/directional/west,
@@ -35076,6 +35083,20 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/base)
+"sYL" = (
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646";
+	dir = 8
+	},
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 4
+	},
+/mob/living/basic/faithless,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple_second)
 "sYR" = (
 /obj/machinery/light_switch/directional/south,
 /turf/open/floor/carpet/green,
@@ -35603,6 +35624,17 @@
 	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_4/fifth_apartment)
+"tqI" = (
+/obj/structure/chair/pew/left,
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/obj/item/cane,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "trb" = (
 /obj/structure/chair/office/light,
 /obj/machinery/power/apc/auto_name/directional/north,
@@ -36162,6 +36194,13 @@
 /obj/structure/cable,
 /turf/open/floor/wood/tile/oak,
 /area/awaymission/avangarde17/inside/base_kitchen)
+"tEJ" = (
+/obj/item/trash/semki{
+	pixel_x = 8;
+	pixel_y = -4
+	},
+/turf/open/misc/dirt/dark/station,
+/area/awaymission/avangarde17/outside/city)
 "tFj" = (
 /obj/structure/flora/tree/dead/style_random,
 /obj/structure/flora/grass/brown/style_random,
@@ -36541,6 +36580,19 @@
 /obj/structure/flora/grass/both/style_random,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
+"tQv" = (
+/obj/structure/stone_tile/block/cracked{
+	color = "#464646"
+	},
+/obj/structure/stone_tile/block{
+	color = "#464646";
+	dir = 1
+	},
+/mob/living/basic/faithless,
+/turf/open/floor/cult{
+	color = "#4b4b4b"
+	},
+/area/awaymission/avangarde17/inside/temple_second)
 "tQI" = (
 /obj/structure{
 	name = "теплотрасса";
@@ -36589,19 +36641,6 @@
 	color = "#4b4b4b"
 	},
 /area/awaymission/avangarde17/inside/temple)
-"tSb" = (
-/obj/structure/stone_tile/block{
-	color = "#464646";
-	dir = 1
-	},
-/obj/structure/stone_tile/block{
-	color = "#464646"
-	},
-/mob/living/basic/faithless,
-/turf/open/floor/cult{
-	color = "#4b4b4b"
-	},
-/area/awaymission/avangarde17/inside/temple_second)
 "tSj" = (
 /obj/effect/turf_decal/tile/bar/opposingcorners,
 /obj/effect/turf_decal/tile/brown/opposingcorners{
@@ -39799,6 +39838,16 @@
 /obj/structure/flora/rock/pile/icy/style_random,
 /turf/open/floor/asphalt,
 /area/awaymission/avangarde17/outside/mountains)
+"vIv" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/box/emptysandbags,
+/obj/item/storage/box/emptysandbags,
+/obj/item/storage/box/emptysandbags,
+/obj/item/storage/box/emptysandbags,
+/obj/item/storage/box/emptysandbags,
+/obj/item/storage/box/emptysandbags,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/inside/base_hangar)
 "vJk" = (
 /obj/structure/shelves,
 /obj/item/reagent_containers/cup/glass/bottle/champagne{
@@ -41685,14 +41734,6 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/base)
-"wBM" = (
-/obj/structure/chair/pew/right,
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 5
-	},
-/obj/item/cane,
-/turf/open/floor/stone,
-/area/awaymission/avangarde17/outside/city)
 "wBP" = (
 /obj/structure/mineral_door/wood,
 /turf/open/floor/pod/light,
@@ -44972,28 +45013,6 @@
 /obj/structure/cable,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_3/first_apartment/bedroom)
-"ycp" = (
-/obj/structure/bed/medical,
-/obj/effect/turf_decal/tile/dark_blue/opposingcorners,
-/obj/item/wheelchair,
-/obj/item/wheelchair{
-	pixel_x = 0;
-	pixel_y = 5
-	},
-/obj/item/cane/crutch/wood{
-	pixel_x = 1;
-	pixel_y = 0
-	},
-/obj/item/cane/crutch/wood{
-	pixel_x = 4;
-	pixel_y = 0
-	},
-/obj/item/cane/crutch/wood{
-	pixel_x = -3;
-	pixel_y = 0
-	},
-/turf/open/floor/iron/white,
-/area/awaymission/avangarde17/inside/hospital)
 "ydh" = (
 /obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
@@ -51929,7 +51948,7 @@ tCQ
 gvr
 emh
 nEd
-hGl
+vIv
 toc
 mTK
 vkq
@@ -89419,7 +89438,7 @@ kQl
 rvi
 vWY
 xIo
-vUD
+grZ
 eQO
 rdQ
 qPg
@@ -95111,7 +95130,7 @@ eoI
 eoI
 qlm
 bnD
-ycp
+iYv
 vDD
 dEm
 otA
@@ -96115,7 +96134,7 @@ lys
 cAh
 wHc
 lpc
-kBd
+tqI
 voq
 qgH
 cYq
@@ -96384,7 +96403,7 @@ rgL
 aco
 rgL
 wiR
-wBM
+kBd
 sAC
 gre
 rPi
@@ -96635,8 +96654,8 @@ pnw
 gYn
 iel
 qcH
-rgL
-rgL
+tEJ
+bJR
 rgL
 fak
 rgL
@@ -100481,7 +100500,7 @@ lDW
 iXq
 ujv
 cHn
-mgi
+iQn
 rlk
 lxK
 saa
@@ -120968,11 +120987,11 @@ kWc
 kWc
 sAy
 tup
-jnu
+eAV
 hra
 hra
 hTH
-dVl
+nik
 nbL
 mQZ
 kWc
@@ -121231,7 +121250,7 @@ nbL
 tnp
 tup
 tup
-tSb
+jzK
 kWc
 kWc
 sin
@@ -121484,7 +121503,7 @@ qUS
 kWc
 rVv
 rVv
-lhP
+tQv
 sgf
 rVv
 kWc
@@ -121995,13 +122014,13 @@ sin
 kWc
 kWc
 tup
-rAE
+iZE
 hra
 vkL
 jNp
 mQZ
 vkL
-hGc
+sYL
 nbL
 kWc
 kWc
