@@ -39,6 +39,13 @@
 	requires_power = FALSE
 	base_lighting_alpha = 120
 
+/area/awaymission/avangarde17/outside/ruin/second
+	name = "Руины"
+	icon_state = "awaycontent6"
+	requires_power = FALSE
+	base_lighting_alpha = 120
+
+
 /area/awaymission/avangarde17/outside/roofs
 	name = "Крыша"
 	icon_state = "awaycontent7"
@@ -61,6 +68,10 @@
 /area/awaymission/avangarde17/inside/temple
 	name = "Храм"
 	icon_state = "awaycontent11"
+
+/area/awaymission/avangarde17/inside/temple_second
+	name = "Храм"
+	icon_state = "awaycontent"
 
 /area/awaymission/avangarde17/inside/bar
 	name = "Рюмочная \"Красная Звезда\""
@@ -99,6 +110,10 @@
 	icon_state = "awaycontent24"
 
 /area/awaymission/avangarde17/inside/ruin
+	name = "Руины"
+	icon_state = "awaycontent19"
+
+/area/awaymission/avangarde17/inside/ruin_second
 	name = "Руины"
 	icon_state = "awaycontent19"
 
