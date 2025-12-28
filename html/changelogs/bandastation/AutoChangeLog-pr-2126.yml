@@ -1,0 +1,4 @@
+author: "ReeZii"
+delete-after: True
+changes:
+  - bugfix: "Кнопка выдачи доступов уборщику для глав вновь снова работает"
