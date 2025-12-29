@@ -456,22 +456,22 @@
 		if(user == patient)
 			if(!silent)
 				user.visible_message(
-					span_warning("[user] begins expertly wrapping the wounds on [p_their()]'s [limb.plaintext_zone] with [src]..."),
-					span_warning("You begin quickly wrapping the wounds on your [limb.plaintext_zone] with [src], keeping the holo-image indications in mind..."),
+					span_warning("[user] begins expertly wrapping the wounds on [p_their()]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src]..."),
+					span_warning("You begin quickly wrapping the wounds on your [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src], keeping the holo-image indications in mind..."),
 					visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 				)
 		else
 			if(!silent)
 				user.visible_message(
-					span_warning("[user] begins expertly wrapping the wounds on [patient]'s [limb.plaintext_zone] with [src]..."),
-					span_warning("You begin quickly wrapping the wounds on [patient]'s [limb.plaintext_zone] with [src], keeping the holo-image indications in mind..."),
+					span_warning("[user] begins expertly wrapping the wounds on [patient]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src]..."),
+					span_warning("You begin quickly wrapping the wounds on [patient]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src], keeping the holo-image indications in mind..."),
 					visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 				)
 	else
 		if(!silent)
 			user.visible_message(
-				span_warning("[user] begins wrapping the wounds on [patient]'s [limb.plaintext_zone] with [src]..."),
-				span_warning("You begin wrapping the wounds on [user == patient ? "your" : "[patient]'s"] [limb.plaintext_zone] with [src]..."),
+				span_warning("[user] begins wrapping the wounds on [patient]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src]..."),
+				span_warning("You begin wrapping the wounds on [user == patient ? "your" : "[patient]'s"] [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src]..."),
 				visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 			)
 	playsound(src, heal_begin_sound, 75, TRUE, MEDIUM_RANGE_SOUND_EXTRARANGE)
@@ -482,8 +482,8 @@
 	if(!silent)
 		patient.balloon_alert(user, "wrapped [parse_zone(healed_zone)]")
 		user.visible_message(
-			span_green("[user] applies [src] to [patient]'s [limb.plaintext_zone]."),
-			span_green("You bandage the wounds on [user == patient ? "your" : "[patient]'s"] [limb.plaintext_zone]."),
+			span_green("[user] applies [src] to [patient]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+			span_green("You bandage the wounds on [user == patient ? "your" : "[patient]'s"] [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 		if(heal_end_sound)

@@ -97,3 +97,13 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "ei_coat"
 	body_parts_covered = CHEST | GROIN | ARMS
+
+// MARK: USSP
+/obj/item/clothing/suit/space/ussp_expedition
+	name = "'Voskhod' EVA suit"
+	desc = "Экспедиционный скафандр \"Восход\", создан для использования в космических экспедицях СССП. \
+		Имеет небольшое бронепокрытие для обеспечения защиты в потенциально враждебных сценариях."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "voskhod_suit"
+	armor_type = /datum/armor/suit_armor
