@@ -16,6 +16,7 @@
 	cost = 250
 	source = /datum/robot_energy_storage/medical
 	merge_type = /obj/item/stack/medical
+	apply_verb = "treating"
 	/// How long it takes to apply it to yourself
 	var/self_delay = 5 SECONDS
 	/// How long it takes to apply it to someone else
@@ -32,8 +33,6 @@
 	var/sanitization
 	/// How much we add to flesh_healing for burn wounds on application
 	var/flesh_regeneration
-	/// Verb used when applying this object to someone
-	var/apply_verb = "treating"
 	/// Whether this item can be used on dead bodies
 	var/works_on_dead = FALSE
 	/// The sound this makes when starting healing with this item
@@ -328,7 +327,7 @@
 				break // one at a time
 		affecting.adjustBleedStacks(-1 * stop_bleeding, 0)
 	if(flesh_regeneration || sanitization)
-		for(var/datum/wound/burn/flesh/wound as anything in affecting.wounds)
+		for(var/datum/wound/burn/flesh/wound in affecting.wounds)
 			if(wound.can_be_ointmented_or_meshed())
 				wound.flesh_healing += flesh_regeneration
 				wound.sanitization += sanitization
@@ -336,7 +335,7 @@
 	post_heal_effects(max(previous_damage - affecting.get_damage(), 0), patient, user)
 	return TRUE
 
-/// Healing a simple mob, just an adjust_brute_loss call
+/// Healing a simple mob, just an adjust_brute_loss() call
 /obj/item/stack/medical/proc/heal_simplemob(mob/living/patient, mob/living/user)
 	patient.adjust_brute_loss(-1 * (heal_brute * patient.maxHealth / 100))
 	user.visible_message(
@@ -382,6 +381,8 @@
 	custom_price = PAYCHECK_CREW * 2
 	absorption_rate = 0.125
 	absorption_capacity = 5
+	sanitization = 3
+	flesh_regeneration = 5
 	splint_factor = 0.7
 	burn_cleanliness_bonus = 0.35
 	merge_type = /obj/item/stack/medical/gauze
@@ -455,22 +456,22 @@
 		if(user == patient)
 			if(!silent)
 				user.visible_message(
-					span_warning("[user] begins expertly wrapping the wounds on [p_their()]'s [limb.plaintext_zone] with [src]..."),
-					span_warning("You begin quickly wrapping the wounds on your [limb.plaintext_zone] with [src], keeping the holo-image indications in mind..."),
+					span_warning("[user] begins expertly wrapping the wounds on [p_their()]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src]..."),
+					span_warning("You begin quickly wrapping the wounds on your [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src], keeping the holo-image indications in mind..."),
 					visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 				)
 		else
 			if(!silent)
 				user.visible_message(
-					span_warning("[user] begins expertly wrapping the wounds on [patient]'s [limb.plaintext_zone] with [src]..."),
-					span_warning("You begin quickly wrapping the wounds on [patient]'s [limb.plaintext_zone] with [src], keeping the holo-image indications in mind..."),
+					span_warning("[user] begins expertly wrapping the wounds on [patient]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src]..."),
+					span_warning("You begin quickly wrapping the wounds on [patient]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src], keeping the holo-image indications in mind..."),
 					visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 				)
 	else
 		if(!silent)
 			user.visible_message(
-				span_warning("[user] begins wrapping the wounds on [patient]'s [limb.plaintext_zone] with [src]..."),
-				span_warning("You begin wrapping the wounds on [user == patient ? "your" : "[patient]'s"] [limb.plaintext_zone] with [src]..."),
+				span_warning("[user] begins wrapping the wounds on [patient]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src]..."),
+				span_warning("You begin wrapping the wounds on [user == patient ? "your" : "[patient]'s"] [limb.ru_plaintext_zone[PREPOSITIONAL]] with [src]..."),
 				visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 			)
 	playsound(src, heal_begin_sound, 75, TRUE, MEDIUM_RANGE_SOUND_EXTRARANGE)
@@ -481,8 +482,8 @@
 	if(!silent)
 		patient.balloon_alert(user, "wrapped [parse_zone(healed_zone)]")
 		user.visible_message(
-			span_green("[user] applies [src] to [patient]'s [limb.plaintext_zone]."),
-			span_green("You bandage the wounds on [user == patient ? "your" : "[patient]'s"] [limb.plaintext_zone]."),
+			span_green("[user] applies [src] to [patient]'s [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
+			span_green("You bandage the wounds on [user == patient ? "your" : "[patient]'s"] [limb.ru_plaintext_zone[PREPOSITIONAL]]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 		if(heal_end_sound)
@@ -490,6 +491,13 @@
 
 	if(limb.cached_bleed_rate)
 		add_mob_blood(patient)
+
+	// Dressing burns provides a "one-time" bonus to sanitization and healing
+	// However, any notable infection will reduce the effectiveness of this bonus
+	for(var/datum/wound/burn/flesh/wound in limb.wounds)
+		wound.sanitization += sanitization * (wound.infection > 0.1 ? 0.2 : 1)
+		wound.flesh_healing += flesh_regeneration * (wound.infection > 0.1 ? 0 : 1)
+
 	limb.apply_gauze(src)
 
 /obj/item/stack/medical/gauze/twelve
@@ -527,6 +535,8 @@
 	burn_cleanliness_bonus = 0.7
 	absorption_rate = 0.075
 	absorption_capacity = 4
+	sanitization = 1
+	flesh_regeneration = 3
 	merge_type = /obj/item/stack/medical/gauze/improvised
 
 	/*

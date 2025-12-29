@@ -45,6 +45,7 @@ GLOBAL_VAR(antag_prototypes)
 		result += "EMPTY<br>"
 	else
 		var/obj_count = 1
+		list_clear_nulls(objectives) // BANDASTATION EDIT: null reference removal
 		for(var/datum/objective/objective as anything in objectives)
 			result += "<B>[obj_count]</B>: [objective.explanation_text] \
 				<a href='byond://?src=[REF(owner)];obj_edit=[REF(objective)]'>Edit</a> \
