@@ -5,6 +5,7 @@
 #include "code/SSHttp.dm"
 #include "code/tts_component.dm"
 #include "code/tts_configuration.dm"
+#include "code/tts_filters.dm"
 #include "code/tts_provider.dm"
 #include "code/tts_seed.dm"
 #include "code/tts_subsystem.dm"
