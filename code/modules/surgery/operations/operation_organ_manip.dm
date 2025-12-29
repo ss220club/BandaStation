@@ -208,7 +208,7 @@
 		span_notice("[surgeon] успешно вставляет [declent_ru(organ.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] успешно вставляет что-то в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, пока ваш новый [declent_ru(organ.name, ACCUSATIVE)] оживает!")
+	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, пока орган начинает приживаться!")
 
 /datum/surgery_operation/limb/organ_manipulation/internal
 	name = "Манипуляции с внутренними органами"

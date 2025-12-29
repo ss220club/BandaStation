@@ -43,7 +43,7 @@
 		limb.owner,
 		span_notice("Вы начинаете отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] ..."),
 		span_notice("[surgeon] начинает отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете ужасную боль в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 

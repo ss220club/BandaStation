@@ -104,30 +104,30 @@ DEFINE_BITFIELD(surgery_state, list(
 
 /// For use in translating bitfield to human readable strings. Keep in the correct order!
 #define SURGERY_STATE_READABLE list(\
-	"Skin is cut" = SURGERY_SKIN_CUT, \
-	"Skin is open" = SURGERY_SKIN_OPEN, \
-	"Blood vessels are unclamped" = SURGERY_VESSELS_UNCLAMPED, \
-	"Blood vessels are clamped" = SURGERY_VESSELS_CLAMPED, \
-	"Organs are cut" = SURGERY_ORGANS_CUT, \
-	"Bone is drilled" = SURGERY_BONE_DRILLED, \
-	"Bone is sawed" = SURGERY_BONE_SAWED, \
-	"Plastic is applied" = SURGERY_PLASTIC_APPLIED, \
-	"Prosthetic is unsecured" = SURGERY_PROSTHETIC_UNSECURED, \
-	"Cavity is opened wide" = SURGERY_CAVITY_WIDENED, \
+	"Кожа разрена" = SURGERY_SKIN_CUT, \
+	"Кожа раскрыта" = SURGERY_SKIN_OPEN, \
+	"Сосуды не зажаты" = SURGERY_VESSELS_UNCLAMPED, \
+	"Сосуды зажаты" = SURGERY_VESSELS_CLAMPED, \
+	"Органы разрезан" = SURGERY_ORGANS_CUT, \
+	"Кость просверлена" = SURGERY_BONE_DRILLED, \
+	"Кость распилена" = SURGERY_BONE_SAWED, \
+	"Пластик наложен" = SURGERY_PLASTIC_APPLIED, \
+	"Протез не закреплён" = SURGERY_PROSTHETIC_UNSECURED, \
+	"Полость широко раскрыта" = SURGERY_CAVITY_WIDENED, \
 )
 
 /// For use in translating bitfield to steps required for surgery. Keep in the correct order!
 #define SURGERY_STATE_GUIDES(must_must_not) list(\
-	"the skin [must_must_not] be cut" = SURGERY_SKIN_CUT, \
-	"the skin [must_must_not] be open" = SURGERY_SKIN_OPEN, \
-	"the blood vessels [must_must_not] be unclamped" = SURGERY_VESSELS_UNCLAMPED, \
-	"the blood vessels [must_must_not] be clamped" = SURGERY_VESSELS_CLAMPED, \
-	"the organs [must_must_not] be cut" = SURGERY_ORGANS_CUT, \
-	"the bone [must_must_not] be drilled" = SURGERY_BONE_DRILLED, \
-	"the bone [must_must_not] be sawed" = SURGERY_BONE_SAWED, \
-	"plastic [must_must_not] be applied" = SURGERY_PLASTIC_APPLIED, \
-	"the prosthetic [must_must_not] be unsecured" = SURGERY_PROSTHETIC_UNSECURED, \
-	"the chest cavity [must_must_not] be opened wide" = SURGERY_CAVITY_WIDENED, \
+	"кожа [must_must_not] быть разрезана" = SURGERY_SKIN_CUT, \
+	"кожа [must_must_not] быть раскрыта" = SURGERY_SKIN_OPEN, \
+	"сосуды [must_must_not] быть зажаты" = SURGERY_VESSELS_UNCLAMPED, \
+	"сосуды [must_must_not] быть зажаты" = SURGERY_VESSELS_CLAMPED, \
+	"орган [must_must_not] быть разрезаны" = SURGERY_ORGANS_CUT, \
+	"кость [must_must_not] быть просверлены" = SURGERY_BONE_DRILLED, \
+	"кость [must_must_not] быть просверлены" = SURGERY_BONE_SAWED, \
+	"пластик [must_must_not] быть наложен" = SURGERY_PLASTIC_APPLIED, \
+	"протез [must_must_not] быть не закреплён" = SURGERY_PROSTHETIC_UNSECURED, \
+	"грудная полость [must_must_not] быть раскрыта" = SURGERY_CAVITY_WIDENED, \
 )
 
 // Yes these are glorified bitflag manipulation macros, they're meant to make reading surgical operations a bit easier

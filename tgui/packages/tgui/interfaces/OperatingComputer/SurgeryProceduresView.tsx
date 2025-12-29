@@ -199,7 +199,7 @@ export const SurgeryProceduresView = (props: SurgeryProceduresViewProps) => {
                   <Stack.Item bold>{surgery.desc}</Stack.Item>
                   <Stack.Item>
                     <Collapsible
-                      title="Requirements"
+                      title="Требования"
                       open={pinnedOperations.includes(surgery.name)}
                     >
                       <Stack

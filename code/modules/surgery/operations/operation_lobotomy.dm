@@ -1,5 +1,5 @@
 /datum/surgery_operation/organ/lobotomy
-	name = "Лоботомировать"
+	name = "Лоботомия"
 	rnd_name = "Лоботомия (Лоботомия)"
 	desc = "Исправление большинства травм мозга пациента с риском вызвать новые постоянные травмы."
 	rnd_desc = "Инвазивная хирургическая процедура, которая гарантирует удаление почти всех травм мозга, но может вызвать другую постоянную травму взамен."
@@ -82,8 +82,8 @@
 			organ.owner.gain_trauma_type(BRAIN_TRAUMA_SPECIAL, TRAUMA_RESILIENCE_MAGIC)
 
 /datum/surgery_operation/organ/lobotomy/mechanic
-	name = "Провести нейронную дефрагментацию"
-	rnd_name = "WetWire ОС Деструктивная дефрагментация (Лоботомия)"
+	name = "Проведение нейронной дефрагментации"
+	rnd_name = "WetWire ОС деструктивная дефрагментация (Лоботомия)"
 	implements = list(
 		TOOL_MULTITOOL = 1.15,
 		/obj/item/melee/energy/sword = 1.85,

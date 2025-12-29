@@ -11,7 +11,7 @@
 
 /datum/surgery_operation/limb/filter_blood/all_required_strings()
 	. = list()
-	. += "операция на груди (цель грудь)"
+	. += "операция на груди"
 	. += ..()
 	. += "пациент не должен быть хаском"
 

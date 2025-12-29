@@ -48,9 +48,9 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("Вы начинаете подогревать костный мозг [patient] с помощью [tool]..."),
-		span_notice("[surgeon] начинает подогревать костный мозг [patient] с помощью [tool]..."),
-		span_notice("[surgeon] начинает подогревать что‑то в груди [patient] с помощью [tool]..."),
+		span_notice("Вы начинаете подогревать костный мозг [patient] с помощью [tool.declent_ru(ACCUSATIVE)]..."),
+		span_notice("[surgeon] начинает подогревать костный мозг [patient] с помощью [tool.declent_ru(ACCUSATIVE)]..."),
+		span_notice("[surgeon] начинает подогревать что‑то в груди [patient] с помощью [tool.declent_ru(ACCUSATIVE)]..."),
 	)
 	display_pain(patient, "Вы чувствуете, как жгучее тепло разливается по вашей груди!")
 

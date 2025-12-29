@@ -45,7 +45,7 @@ export const PatientStateView = (props: PatientStateViewProps) => {
     return (
       <Section fill>
         <NoticeBox color="red" align="center">
-          No patient detected
+          Пациент не обнаружен
         </NoticeBox>
       </Section>
     );
@@ -248,7 +248,7 @@ const PatientStateNextOperationsView = (
         {possible_next_operations.length === 0 ? (
           <Stack.Item>
             <NoticeBox color="green" align="center">
-              No operations available
+              Нет доступных операций
             </NoticeBox>
           </Stack.Item>
         ) : (
@@ -269,7 +269,7 @@ const PatientStateNextOperationsView = (
                         {!!operation.priority && (
                           <Stack.Item color="orange">
                             <Icon name="exclamation" mr={1} />
-                            Recommended next step
+                            Рекомендуемый следующий шаг
                           </Stack.Item>
                         )}
                         {pinnedOperations.includes(operation.name) && (
