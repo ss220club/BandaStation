@@ -113,11 +113,11 @@ export const SurgeryProceduresView = (props: SurgeryProceduresViewProps) => {
           />
           <Button
             icon="filter"
-            tooltip="Скрыть робо-операции."
+            tooltip="Скрывает операции на роботических конечностях."
             onClick={() => setFilterRobotic(!filterRobotic)}
             selected={filterRobotic}
           >
-            Hide Mechanic
+            Скрыть робо-операции
           </Button>
           <Button
             width="75px"

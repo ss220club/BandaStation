@@ -16,7 +16,7 @@
 	return image('icons/obj/medical/syringe.dmi', "implantcase-b")
 
 /datum/surgery_operation/basic/implant_removal/any_optional_strings()
-	return ..() + list("наличие кейса для имплантов под пациентом или в руках позволит сохранить извлеченный имплант")
+	return ..() + list("наличие кейса для имплантов у пациента или в руках позволит сохранить извлеченный имплант")
 
 /datum/surgery_operation/basic/implant_removal/on_preop(mob/living/patient, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(

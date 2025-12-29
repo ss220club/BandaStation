@@ -591,7 +591,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
  * For surgery operations that can be performed with any item, this explains what kind of item is needed
  */
 /datum/surgery_operation/proc/get_any_tool()
-	return "Any item"
+	return "Любой предмет"
 
 /**
  * Return a list of lists of strings indicating the various requirements for this operation

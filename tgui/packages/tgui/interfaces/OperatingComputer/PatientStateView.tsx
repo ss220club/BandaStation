@@ -188,7 +188,7 @@ const PatientStateNextOperationsView = (
     (operation) => operation.show_as_next,
   );
 
-  const allTools = ['all tools'].concat(
+  const allTools = ['Все инструменты'].concat(
     possible_next_operations
       .map((operation) => operation.tool_rec)
       .flatMap((tool) => tool.split(' / '))

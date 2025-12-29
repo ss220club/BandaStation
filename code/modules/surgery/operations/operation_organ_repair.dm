@@ -443,7 +443,7 @@
 			span_warning("[surgeon] случайно попадает инструментом прямо в мозг [organ.owner.declent_ru(GENITIVE)]!"),
 			span_warning("[surgeon] случайно попадает инструментом прямо в мозг [organ.owner.declent_ru(GENITIVE)]!"),
 		)
-		display_pain(organ.owner, "Вы чувствуете нутряную пронзающую боль, проходящую сквозь голову прямо в мозг!")
+		display_pain(organ.owner, "Вы чувствуете пронзающую боль, которая проникает сквозь череп прямо в мозг!")
 		organ.owner.adjust_organ_loss(ORGAN_SLOT_BRAIN, 70)
 
 	else
@@ -517,7 +517,7 @@
 
 /datum/surgery_operation/organ/repair/brain/mechanic
 	name = "Проведение нейронной отладки"
-	rnd_name = "Wetware OS Диагностика (Хирургия мозга)"
+	rnd_name = "Wetware OS диагностика (Хирургия мозга)"
 	implements = list(
 		TOOL_MULTITOOL = 1.15,
 		TOOL_HEMOSTAT = 1.05,

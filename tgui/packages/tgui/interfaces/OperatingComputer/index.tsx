@@ -55,7 +55,7 @@ export const OperatingComputer = () => {
                 selected={tab === ComputerTabs.Experiments}
                 onClick={() => setTab(3)}
               >
-                Эксперименты
+                Возможные эксперименты
               </Tabs.Tab>
             </Tabs>
           </Stack.Item>

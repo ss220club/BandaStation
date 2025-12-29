@@ -26,7 +26,7 @@ export const ExperimentView = () => {
         <Stack vertical fill>
           {techwebs.some((e) => e.selected) && (
             <Stack.Item grow>
-              <Section title="Возможные эксперименты" scrollable fill>
+              <Section title="Эксперименты" scrollable fill>
                 {experiments.length > 0 ? (
                   experiments
                     .sort((a, b) => (a.name > b.name ? 1 : -1))
