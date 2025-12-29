@@ -101,7 +101,7 @@
 
 	var/list/aid_readable = list()
 	for(var/aid in surgical_aids)
-	aid_readable += copytext_char(aid, -1) == "s" ? aid : "\a [aid]"
+	//aid_readable += copytext_char(aid, -1) == "s" ? aid : "\a [aid]"// BANDASTATION REMOVAL
 
 	// "They have surgial drapes and a bedsheet adorning their chest, arms, and legs."
 	return "[owner.p_They()] [owner.p_have()] [english_list(aid_readable)] adorning [owner.p_their()] [english_list(zones_readable)]."
