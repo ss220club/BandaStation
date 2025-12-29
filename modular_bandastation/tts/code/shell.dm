@@ -12,8 +12,8 @@
 
 	var/datum/singleton/sound_effect/complex_effect
 	for(var/datum/singleton/sound_effect/effect as anything in effects)
-		complex_effect = effect
-
+		if(effect.complex)
+			complex_effect = effect
 			break
 
 	var/filename_modifying = replacetext(filename_input, ".ogg", "")
