@@ -104,11 +104,11 @@ DEFINE_BITFIELD(surgery_state, list(
 
 /// For use in translating bitfield to human readable strings. Keep in the correct order!
 #define SURGERY_STATE_READABLE list(\
-	"Кожа разрена" = SURGERY_SKIN_CUT, \
+	"Кожа разрезана" = SURGERY_SKIN_CUT, \
 	"Кожа раскрыта" = SURGERY_SKIN_OPEN, \
 	"Сосуды не зажаты" = SURGERY_VESSELS_UNCLAMPED, \
 	"Сосуды зажаты" = SURGERY_VESSELS_CLAMPED, \
-	"Органы разрезан" = SURGERY_ORGANS_CUT, \
+	"Органы разрезаны" = SURGERY_ORGANS_CUT, \
 	"Кость просверлена" = SURGERY_BONE_DRILLED, \
 	"Кость распилена" = SURGERY_BONE_SAWED, \
 	"Пластик наложен" = SURGERY_PLASTIC_APPLIED, \

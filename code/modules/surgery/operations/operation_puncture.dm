@@ -44,7 +44,7 @@
 			limb.owner,
 			span_notice("Вы успешно соединили последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 			span_notice("[surgeon] успешно соединяет последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
-			span_notice("[surgeon] успешно соединяет последние разорванные кровеносные сосуды в [limb.owner.declent_ru(GENITIVE)] у [limb.owner.declent_ru(GENITIVE)]!"),
+			span_notice("[surgeon] успешно соединяет последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 		)
 		return
 

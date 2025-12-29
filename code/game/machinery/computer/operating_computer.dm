@@ -70,9 +70,9 @@
 /obj/machinery/computer/operating/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(istype(tool, /obj/item/disk/surgery))
 		user.visible_message(
-			span_notice("[user] begins to load [tool.declent_ru(ACCUSATIVE)] in [src]..."),
-			span_notice("You begin to load a surgery protocol from [tool.declent_ru(ACCUSATIVE)]..."),
-			span_hear("You hear the chatter of a floppy drive."),
+			span_notice("[user] начинает загружать [tool.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]..."),
+			span_notice("Вы начинаете загружать хирургические протоколы с [tool.declent_ru(ACCUSATIVE)]..."),
+			span_hear("Вы слышите жужжание дисковода для дискеты."),
 		)
 		var/obj/item/disk/surgery/disky = tool
 		if(!do_after(user, 1 SECONDS, src))
@@ -80,7 +80,7 @@
 		advanced_surgeries |= disky.surgeries
 		update_static_data_for_all_viewers()
 		playsound(src, 'sound/machines/compiler/compiler-stage2.ogg', 50, FALSE, SILENCED_SOUND_EXTRARANGE)
-		balloon_alert(user, "surgeries loaded")
+		balloon_alert(user, "операции загружены")
 		return ITEM_INTERACT_SUCCESS
 
 	if((tool.item_flags & SURGICAL_TOOL) && !user.combat_mode)
@@ -258,7 +258,7 @@
 		if(just_drapes)
 			data["surgeries"] += list(list(
 				"name" = "Подготовка к операции",
-				"desc" = "Начните операцию постелив хирургическую простынь на пациента.",
+				"desc" = "Начните операцию, постелив хирургическую простынь на пациента.",
 				"tool_rec" = /obj/item/surgical_drapes::name,
 				"show_as_next" = TRUE,
 				"show_in_list" = FALSE,

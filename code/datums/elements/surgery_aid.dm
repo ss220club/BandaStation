@@ -54,7 +54,7 @@
 		target_mob.balloon_alert(surgeon, "[parse_zone(body_zone)] подготовлена для операции")
 		return
 	prep.untrack_surgery(body_zone)
-	target_mob.balloon_alert(surgeon, "операции отменены")
+	target_mob.balloon_alert(surgeon, "операция отменена")
 
 /// Tracks which body zones have been prepped for surgery
 /datum/status_effect/surgery_prepped
@@ -101,7 +101,7 @@
 
 	var/list/aid_readable = list()
 	for(var/aid in surgical_aids)
-	//	aid_readable += copytext_char(aid, -1) == "s" ? aid : "\a [aid]" // BANDASTATION REMOVAL
+	aid_readable += copytext_char(aid, -1) == "s" ? aid : "\a [aid]"
 
 	// "They have surgial drapes and a bedsheet adorning their chest, arms, and legs."
 	return "[owner.p_They()] [owner.p_have()] [english_list(aid_readable)] adorning [owner.p_their()] [english_list(zones_readable)]."
@@ -114,7 +114,7 @@
 	if(movement_counter < 4)
 		return
 	// "The surgical drapes and bedsheets adorning John fall off!"
-	owner.visible_message(span_warning("[capitalize(declent_ru(surgical_aids, NOMINATIVE))] спадает с [owner]!"))
+	owner.visible_message(span_warning("[capitalize(declent_ru(surgical_aids, NOMINATIVE))] спадают с [owner]!"))
 	qdel(src)
 
 /datum/status_effect/surgery_prepped/proc/on_attach_limb(datum/source, obj/item/bodypart/limb)
