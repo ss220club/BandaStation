@@ -165,11 +165,17 @@
 	// BANDASTATION EDIT START - Get AI for the vox Type
 	var/turf/ai_turf_as_turf = ai_turf
 	if(!istype(ai_turf_as_turf))
-		return //and prolly throw an error because wtf
-	var/mob/living/silicon/ai/the_AI = null
-	for(var/mob/living/silicon/ai/found_AI in ai_turf_as_turf.contents)
-		if(istype(found_AI))
-			the_AI = found_AI
+		return
+
+	var/mob/living/silicon/ai/the_AI = locate(/mob/living/silicon/ai) in ai_turf_as_turf
+	if(!the_AI)
+		for(var/obj/item/aicard/card in ai_turf_as_turf.get_all_contents())
+			if(card.AI && istype(card.AI, /mob/living/silicon/ai))
+				the_AI = card.AI
+				break
+	if(!the_AI)
+		return
+
 	// BANDASTATION EDIT END
 	/* ORIGINAL TG:
 	if(GLOB.vox_sounds[word])
