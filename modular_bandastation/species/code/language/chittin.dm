@@ -26,6 +26,12 @@
 		"зза","ззу","ззи",
 	)
 
+/datum/language/chittin/get_random_name(gender, name_count = 2, force_use_syllables = FALSE)
+	if(gender == MALE)
+		return "[pick(GLOB.first_names_male_kidan)][random_name_spacer][pick(GLOB.last_names_kidan)]"
+	else
+		return "[pick(GLOB.first_names_female_kidan)][random_name_spacer][pick(GLOB.last_names_kidan)]"
+
 /datum/language_holder/kidan
 	understood_languages = list(
 		/datum/language/common = list(LANGUAGE_ATOM),
