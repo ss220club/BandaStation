@@ -100,7 +100,7 @@
 		zones_readable += parse_zone(zone)
 
 	var/list/aid_readable = list()
-	for(var/aid in surgical_aids)
+	//for(var/aid in surgical_aids) // BANDASTATION REMOVAL
 	//aid_readable += copytext_char(aid, -1) == "s" ? aid : "\a [aid]"// BANDASTATION REMOVAL
 
 	// "They have surgial drapes and a bedsheet adorning their chest, arms, and legs."

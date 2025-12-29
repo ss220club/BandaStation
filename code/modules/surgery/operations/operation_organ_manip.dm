@@ -155,8 +155,8 @@
 			display_results(
 				surgeon,
 				limb.owner,
-				span_notice("Вы начинаете извлекать [declent_ru(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] [limb.owner.declent_ru(GENITIVE)]..."),
-				span_notice("[surgeon] начинает извлекать [declent_ru(organ.name, ACCUSATIVE)] у [limb.owner.declent_ru(GENITIVE)]."),
+				span_notice("Вы начинаете извлекать [ru_parse_zone(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] [limb.owner.declent_ru(GENITIVE)]..."),
+				span_notice("[surgeon] начинает извлекать [ru_parse_zone(organ.name, ACCUSATIVE)] у [limb.owner.declent_ru(GENITIVE)]."),
 				span_notice("[surgeon] начинает извлекать что-то у [limb.owner.declent_ru(GENITIVE)]."),
 			)
 			display_pain(limb.owner, "Вы чувствуете тянущее ощущение в [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
@@ -186,12 +186,12 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно извлекаете [declent_ru(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно извлекает [declent_ru(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("Вы успешно извлекаете [ru_parse_zone(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно извлекает [ru_parse_zone(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]!"),
 		span_notice("[surgeon] успешно извлекает что-то из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, вы больше не чувствуете свой [declent_ru(organ.name, ACCUSATIVE)]!")
-	log_combat(surgeon, limb.owner, "surgically removed [declent_ru(organ.name, ACCUSATIVE)] from")
+	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, вы больше не чувствуете свой [ru_parse_zone(organ.name, ACCUSATIVE)]!")
+	log_combat(surgeon, limb.owner, "surgically removed [ru_parse_zone(organ.name, ACCUSATIVE)] from")
 	organ.Remove(limb.owner)
 	organ.forceMove(limb.owner.drop_location())
 	organ.on_surgical_removal(surgeon, limb, tool)
@@ -204,8 +204,8 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно вставляете [declent_ru(organ.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно вставляет [declent_ru(organ.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы успешно вставляете [ru_parse_zone(organ.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно вставляет [ru_parse_zone(organ.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] успешно вставляет что-то в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, пока орган начинает приживаться!")
