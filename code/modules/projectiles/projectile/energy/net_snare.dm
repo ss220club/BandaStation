@@ -19,7 +19,7 @@
 	if(isliving(target))
 		var/mob/living/living_target = target
 		living_target.adjust_staggered_up_to(STAGGERED_SLOWDOWN_LENGTH * 0.5, 5 SECONDS)
-		for(var/turf/trapped_turf in range(0.5, get_turf(living_target))) // BANDASTATION EDIT DRAGNET REBALANCE BOUNTY ORIG: 1, channel
+		for(var/turf/trapped_turf in range(1, get_turf(living_target)))
 			if(trapped_turf.density)
 				continue
 			new /obj/effect/nettingportal(trapped_turf, destination_beacon)
