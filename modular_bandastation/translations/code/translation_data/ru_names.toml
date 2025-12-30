@@ -29460,3 +29460,12 @@ accusative = "резиновую печать ОТКАЗАНО"
 instrumental = "резиновой печатью ОТКАЗАНО"
 prepositional = "резиновой печати ОТКАЗАНО"
 gender = "female"
+
+["tactical tank"]
+nominative = "тактический баллон"
+genitive = "тактического баллона"
+dative = "тактическому баллону"
+accusative = "тактический баллон"
+instrumental = "тактическим баллоном"
+prepositional = "тактическом баллоне"
+gender = "male"
