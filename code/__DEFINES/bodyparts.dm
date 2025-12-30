@@ -113,18 +113,18 @@ DEFINE_BITFIELD(surgery_state, list(
 	"Кость распилена" = SURGERY_BONE_SAWED, \
 	"Пластик наложен" = SURGERY_PLASTIC_APPLIED, \
 	"Протез не закреплён" = SURGERY_PROSTHETIC_UNSECURED, \
-	"Полость широко раскрыта" = SURGERY_CAVITY_WIDENED, \
+	"Грудная полость широко раскрыта" = SURGERY_CAVITY_WIDENED, \
 )
 
 /// For use in translating bitfield to steps required for surgery. Keep in the correct order!
 #define SURGERY_STATE_GUIDES(must_must_not) list(\
 	"кожа [must_must_not] быть разрезана" = SURGERY_SKIN_CUT, \
 	"кожа [must_must_not] быть раскрыта" = SURGERY_SKIN_OPEN, \
-	"сосуды [must_must_not] быть зажаты" = SURGERY_VESSELS_UNCLAMPED, \
+	"сосуды [must_must_not] быть разжаты" = SURGERY_VESSELS_UNCLAMPED, \
 	"сосуды [must_must_not] быть зажаты" = SURGERY_VESSELS_CLAMPED, \
-	"орган [must_must_not] быть разрезаны" = SURGERY_ORGANS_CUT, \
-	"кость [must_must_not] быть просверлены" = SURGERY_BONE_DRILLED, \
-	"кость [must_must_not] быть просверлены" = SURGERY_BONE_SAWED, \
+	"орган [must_must_not] быть разрезан" = SURGERY_ORGANS_CUT, \
+	"кость [must_must_not] быть просверлена" = SURGERY_BONE_DRILLED, \
+	"кость [must_must_not] быть распилена" = SURGERY_BONE_SAWED, \
 	"пластик [must_must_not] быть наложен" = SURGERY_PLASTIC_APPLIED, \
 	"протез [must_must_not] быть не закреплён" = SURGERY_PROSTHETIC_UNSECURED, \
 	"грудная полость [must_must_not] быть раскрыта" = SURGERY_CAVITY_WIDENED, \
