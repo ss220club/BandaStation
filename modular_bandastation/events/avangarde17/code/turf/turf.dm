@@ -22,7 +22,7 @@
 
 /turf/open/floor/asphalt/avangarde
 	baseturfs = /turf/open/misc/asteroid/moon
-
+	footstep = FOOTSTEP_SAND
 
 /turf/open/floor/asphalt/avangarde/crowbar_act(mob/living/user, obj/item/I)
 	. = ..()
