@@ -12,7 +12,7 @@ import { NowPlayingWidget } from './audio/NowPlayingWidget';
 import { ChatPanel } from './chat/ChatPanel';
 import { ChatTabs } from './chat/ChatTabs';
 import { useChatPersistence } from './chat/use-chat-persistence';
-import { EmotePanel, useEmotes } from './emotes'; // BANDASTATION ADD  - Emote Panel
+//import { EmotePanel, useEmotes } from './emotes'; // BANDASTATION ADD  - Emote Panel
 import { gameAtom } from './game/atoms';
 import { useKeepAlive } from './game/use-keep-alive';
 import { Notifications } from './Notifications';
@@ -23,7 +23,7 @@ import { SettingsPanel } from './settings/SettingsPanel';
 import { useSettings } from './settings/use-settings';
 
 export function Panel(props) {
-  const emotes = useEmotes(); // BANDASTATION ADD  - Emote Panel
+  //const emotes = useEmotes(); // BANDASTATION ADD  - Emote Panel
   const [audioVisible, setAudioVisible] = useAtom(visibleAtom);
   const game = useAtomValue(gameAtom);
   const { settings } = useSettings();
@@ -44,7 +44,7 @@ export function Panel(props) {
                 <PingIndicator />
               </Stack.Item>
               {/* BANDASTATION ADD START - Emote Panel */}
-              <Stack.Item>
+              {/* <Stack.Item>
                 <Button
                   color="grey"
                   selected={emotes.visible}
@@ -53,7 +53,7 @@ export function Panel(props) {
                   tooltipPosition="bottom-start"
                   onClick={() => emotes.toggle()}
                 />
-              </Stack.Item>
+              </Stack.Item> */}
               {/* BANDASTATION ADD END - Emote Panel */}
               <Stack.Item>
                 <Button
@@ -78,13 +78,13 @@ export function Panel(props) {
           </Section>
         </Stack.Item>
         {/* BANDASTATION ADD START - Emote Panel */}
-        {emotes.visible && (
+        {/* {emotes.visible && (
           <Stack.Item>
             <Section>
               <EmotePanel />
             </Section>
           </Stack.Item>
-        )}
+        )} */}
         {/* BANDASTATION ADD END - Emote Panel */}
         {audioVisible && (
           <Stack.Item>
