@@ -13,9 +13,7 @@ import { setupGlobalEvents } from 'tgui-core/events';
 import { setupHotKeys } from 'tgui-core/hotkeys';
 import { captureExternalLinks } from 'tgui-core/links';
 import { setupHotReloading } from 'tgui-dev-server/link/client';
-import { emotesReducer } from 'tgui-panel/emotes'; // BANDASTATION ADD  - Emote Panel
 import { App } from './App';
-
 import { setDebugHotKeys } from './debug/use-debug';
 import { bus } from './events/listeners';
 import { render } from './renderer';
