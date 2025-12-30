@@ -1,18 +1,19 @@
 /obj/item/minigun_backpack
-	name = "backpack ammo stash"
-	desc = "The massive back stash can hold a lot of ammo on your back."
+	name = "backpack minigun ammo stash"
+	desc = "Массивный рюкзак который может держать много патронов на вашей спине."
 	icon = 'modular_bandastation/weapon/icons/ranged/minigun.dmi'
 	icon_state = "holstered"
 	inhand_icon_state = "backpack"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/minigun_back.dmi'
 	lefthand_file = 'icons/mob/inhands/equipment/backpack_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/backpack_righthand.dmi'
-	slot_flags = ITEM_SLOT_BACK
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_SUITSTORE
 	w_class = WEIGHT_CLASS_HUGE
 	resistance_flags = INDESTRUCTIBLE
 	var/obj/item/gun/ballistic/minigun/gun
 	var/armed = FALSE //whether the gun is attached, FALSE is attached, TRUE is the gun is wielded.
 	var/overheat = 0
-	var/overheat_max = 75
+	var/overheat_max = 100
 	var/heat_stage = 0
 	var/heat_diffusion = 2
 
@@ -39,12 +40,12 @@
 				armed = TRUE
 				if(!user.put_in_hands(gun))
 					armed = FALSE
-					to_chat(user, span_warning("You need a free hand to hold the gun!"))
+					to_chat(user, span_warning("Вам нужна свободная рука, чтобы держать оружие!"))
 					return
 				update_appearance(UPDATE_ICON)
 				user.update_worn_back()
 		else
-			to_chat(user, span_warning("You are already holding the gun!"))
+			to_chat(user, span_warning("Вы уже держите оружие!"))
 	else
 		..()
 
@@ -56,7 +57,7 @@
 
 /obj/item/minigun_backpack/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>Current heat level: [overheat] / [overheat_max]"
+	. += "<span class='notice'>Текущий уровень нагрева: [overheat] / [overheat_max]"
 
 /obj/item/minigun_backpack/dropped(mob/user)
 	. = ..()
@@ -73,16 +74,16 @@
 	gun.forceMove(src)
 	armed = FALSE
 	if(user)
-		to_chat(user, span_notice("You attach the [gun.name] to the [name]."))
+		to_chat(user, span_notice("Вы прикрепляете [gun.name] к [name]."))
 	else
-		visible_message(span_warning("The [gun.name] snaps back onto the [name]!"))
+		visible_message(span_warning("[gun.name] автоматически прикрепляется к [name]!"))
 	update_appearance(UPDATE_ICON)
 	user.update_worn_back()
 
 /obj/item/gun/ballistic/minigun
-	name = "M-546 Osprey"
-	desc = "An advanced minigun with an incredible rate of fire and safety overheating lock mechanism. Requires a bulky backpack to store all that ammo."
-	icon = 'modular_bandastation/weapon/icons/ranged/minigun_item.dmi'
+	name = "M-546 \"Osprey\""
+	desc = "Миниган разработанный в ТСФ в калибре .40 Long, обладающий невероятной скорострельностью и механизмом блокировки при перегреве. Требуется объемный рюкзак для хранения всех этих патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic64x32.dmi'
 	icon_state = "minigun_fire"
 	inhand_icon_state = "minigun"
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
@@ -129,13 +130,13 @@
 /obj/item/gun/ballistic/minigun/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	if(ammo_pack)
 		if(ammo_pack.overheat > ammo_pack.overheat_max * (1 / 3) && ammo_pack.heat_stage < 1)
-			to_chat(user, "You feel warmth from the handle of the gun.")
+			to_chat(user, span_notice("Вы чувствуете тепло от рукоятки оружия."))
 			ammo_pack.heat_stage += 1
 			..()
-			playsound(user, 'sound/effects/wounds/sizzle2.ogg', 50, TRUE)
+			playsound(user, 'sound/effects/wounds/sizzle2.ogg', 70, TRUE)
 
 		if(ammo_pack.overheat > ammo_pack.overheat_max * (2 / 3) && ammo_pack.heat_stage < 2)
-			to_chat(user, "The gun's heat sensor beeps rapidly as it reaches its limit!")
+			to_chat(user, span_notice("Датчик температуры оружия быстро пищит, как только достигает предела!"))
 			ammo_pack.heat_stage += 1
 			..()
 			playsound(user, 'sound/items/weapons/gun/general/empty_alarm.ogg', 50, TRUE)
@@ -144,12 +145,12 @@
 			ammo_pack.overheat += burst_size
 			..()
 		else
-			to_chat(user, "The gun's heat sensor locked the trigger to prevent heat damage.")
+			to_chat(user, span_notice("Датчик температуры оружия заблокировал спусковой крючок, чтобы предотвратить повреждение от перегрева."))
 			playsound(user, 'sound/effects/wounds/sizzle1.ogg', 100, TRUE)
 
 /obj/item/gun/ballistic/minigun/afterattack(atom/target, mob/living/user, flag, params)
 	if(!ammo_pack || ammo_pack.loc != user)
-		to_chat(user, "You need more ammo to fire the gun!")
+		to_chat(user, "Вам нужно больше патронов, чтобы стрелять из оружия!")
 	. = ..()
 
 /obj/item/gun/ballistic/minigun/dropped(mob/living/user)
