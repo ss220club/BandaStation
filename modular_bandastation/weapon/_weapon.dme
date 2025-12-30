@@ -22,6 +22,8 @@
 #include "code/ranged/ballistic/magazines.dm"
 #include "code/ranged/ballistic/mounted_machine_gun.dm"
 #include "code/ranged/ballistic/projectiles.dm"
+
+// Nanotrasen
 #include "code/ranged/ballistic/nanotrasen/pistols/gp9.dm"
 #include "code/ranged/ballistic/nanotrasen/pistols/1911.dm"
 #include "code/ranged/ballistic/nanotrasen/pistols/cm23.dm"
@@ -33,15 +35,22 @@
 #include "code/ranged/ballistic/nanotrasen/rifles/f90.dm"
 #include "code/ranged/ballistic/nanotrasen/special/cm15.dm"
 #include "code/ranged/ballistic/nanotrasen/special/cm40.dm"
+
+// Elyzium
 #include "code/ranged/ballistic/elyzium/pistols/tp14.dm"
 #include "code/ranged/ballistic/elyzium/smgs/fn18.dm"
 #include "code/ranged/ballistic/elyzium/rifles/fn4.dm"
 #include "code/ranged/ballistic/elyzium/rifles/hlrm2.dm"
 #include "code/ranged/ballistic/elyzium/special/as32.dm"
+
+// TSF
 #include "code/ranged/ballistic/tsf/pistols/wespe.dm"
 #include "code/ranged/ballistic/tsf/smgs/sindano.dm"
 #include "code/ranged/ballistic/tsf/rifles/carwo.dm"
 #include "code/ranged/ballistic/tsf/special/renoster.dm"
+#include "code/ranged/ballistic/tsf/special/minigun.dm"
+
+// USSP
 #include "code/ranged/ballistic/ussp/pistols/bobr.dm"
 #include "code/ranged/ballistic/ussp/pistols/zashch.dm"
 #include "code/ranged/ballistic/ussp/pistols/dvoystvol.dm"
