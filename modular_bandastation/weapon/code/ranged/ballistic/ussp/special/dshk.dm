@@ -31,6 +31,8 @@
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
+	slowdown = 1
+	item_flags = NEEDS_PERMIT | SLOWS_WHILE_IN_HAND
 	var/cover_open = FALSE
 
 /obj/item/gun/ballistic/automatic/dshk/Initialize(mapload)

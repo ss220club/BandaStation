@@ -24,6 +24,8 @@
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/rpg_load.ogg'
 	dry_fire_sound = 'modular_bandastation/weapon/sound/ranged/launcher_empty.ogg'
 	recoil = 0.5
+	slowdown = 1
+	item_flags = NEEDS_PERMIT | SLOWS_WHILE_IN_HAND
 
 /obj/item/gun/ballistic/rocketlauncher/rpg/Initialize(mapload)
 	. = ..()
