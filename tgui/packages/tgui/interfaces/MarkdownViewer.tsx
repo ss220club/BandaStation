@@ -35,7 +35,7 @@ export const MarkdownRenderer = (props: MarkdownRendererProps) => {
   }
 
   // biome-ignore lint/security/noDangerouslySetInnerHtml: ignore
-  return <Box dangerouslySetInnerHTML={{ __html: content }} />;
+  return <div dangerouslySetInnerHTML={{ __html: content }} />;
 };
 
 MarkdownRenderer.defaultProps = {
