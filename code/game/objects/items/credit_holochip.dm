@@ -24,20 +24,20 @@
 
 /obj/item/holochip/examine(mob/user)
 	. = ..()
-	. += "[span_notice("В нём [credits] [MONEY_NAME].")]"+\
+	. += "[span_notice("В нём [credits][MONEY_NAME].")]"+\
 	span_notice("Alt-ЛКМ, чтобы разделить.")
 
 /obj/item/holochip/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
 	if(istype(held_item, /obj/item/holochip))
 		context[SCREENTIP_CONTEXT_LMB] = "Объединить с..."
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "Разделить [MONEY_NAME_CAPITALIZED]"
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "Разделить кредиты"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/holochip/get_item_credit_value()
 	return credits
 
 /obj/item/holochip/update_name()
-	name = "голочип номиналом [credits] [MONEY_NAME_SINGULAR]."
+	name = "голочип номиналом [credits][MONEY_NAME_SINGULAR]."
 	return ..()
 
 /obj/item/holochip/update_icon_state()
@@ -117,7 +117,7 @@
 	if(loc != user)
 		to_chat(user, span_warning("Вы должны держать голочип, чтобы продолжить!"))
 		return CLICK_ACTION_BLOCKING
-	var/split_amount = tgui_input_number(user, "Сколько [MONEY_NAME] вы хотите разделить с голочипа? (Макс: [credits] [MONEY_SYMBOL].)", "Голочип", max_value = credits)
+	var/split_amount = tgui_input_number(user, "Сколько кредитов вы хотите разделить с голочипа? (Макс: [credits][MONEY_SYMBOL].)", "Голочип", max_value = credits)
 	if(!split_amount || QDELETED(user) || QDELETED(src) || issilicon(user) || !usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH) || loc != user)
 		return CLICK_ACTION_BLOCKING
 	var/new_credits = spend(split_amount, TRUE)
@@ -126,7 +126,7 @@
 		if(!user.put_in_hands(chip)[MONEY_NAME])
 			chip.forceMove(user.drop_location())
 		add_fingerprint(user)
-	to_chat(user, span_notice("Вы разделили [split_amount] [MONEY_NAME]. в новый голочип."))
+	to_chat(user, span_notice("Вы разделили [split_amount][MONEY_NAME] в новый голочип."))
 	return CLICK_ACTION_SUCCESS
 
 /obj/item/holochip/emp_act(severity)

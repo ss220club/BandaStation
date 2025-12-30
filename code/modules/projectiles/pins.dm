@@ -314,7 +314,7 @@
 	if(active_prompt_user == user)
 		return FALSE
 	active_prompt_user = user
-	var/license_request = tgui_alert(user, "Вы готовы к оплате [payment_amount] [MONEY_NAME][declension_ru(payment_amount, "", "а", "ов")] за [( multi_payment ) ? "каждый выстрел из [gun.declent_ru(GENITIVE)]" : "лицензию [gun.declent_ru(GENITIVE)]"]?", "Покупка оружия", list("Да", "Нет"), 15 SECONDS)
+	var/license_request = tgui_alert(user, "Вы готовы к оплате [payment_amount][MONEY_NAME] за [( multi_payment ) ? "каждый выстрел из [gun.declent_ru(GENITIVE)]" : "лицензию [gun.declent_ru(GENITIVE)]"]?", "Покупка оружия", list("Да", "Нет"), 15 SECONDS)
 	if(!user.can_perform_action(src))
 		active_prompt_user = null
 		return FALSE
