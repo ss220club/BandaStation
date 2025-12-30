@@ -530,6 +530,18 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 5
 	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/third_apartment)
 "aqc" = (
@@ -2124,6 +2136,7 @@
 /obj/structure/sibirskiy{
 	pixel_y = 32
 	},
+/obj/effect/landmark/start/ussp/town/oper,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/police/chief)
 "bhr" = (
@@ -4543,6 +4556,21 @@
 /obj/structure/flora/rock/icy/style_random,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside)
+"csX" = (
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/turf/closed/wall/mineral/iron,
+/area/awaymission/avangarde17/inside/house_1/second_apartment/second_bedroom)
 "cte" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood/tile/oak,
@@ -5480,6 +5508,21 @@
 "cVD" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_4)
+"cVE" = (
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/turf/closed/wall/mineral/iron,
+/area/awaymission/avangarde17/inside/house_2/second_apartment/second_bedroom)
 "cVU" = (
 /obj/structure/table/wood,
 /obj/effect/mapping_helpers/broken_floor,
@@ -5629,6 +5672,18 @@
 	dir = 4
 	},
 /obj/machinery/light_switch/directional/west,
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/second_apartment)
 "cZq" = (
@@ -7253,6 +7308,10 @@
 	},
 /turf/open/floor/iron/small,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment/bathroom)
+"dMi" = (
+/obj/structure/flora/tree/pine/xmas/presents,
+/turf/open/openspace,
+/area/awaymission/avangarde17/outside/city)
 "dMw" = (
 /obj/structure/platform/iron,
 /obj/structure/window/reinforced/survival_pod/spawner/directional/east,
@@ -7747,9 +7806,11 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/inside/mine)
 "dVL" = (
-/obj/machinery/vending/sovietsoda{
-	all_products_free = 1
+/obj/structure/sink/shell_only/directional/south{
+	pixel_x = 1;
+	pixel_y = 10
 	},
+/obj/structure/mop_bucket/janitorialcart,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/gov/second_floor)
 "dWg" = (
@@ -7886,6 +7947,15 @@
 /area/awaymission/avangarde17/outside/mountains)
 "dZh" = (
 /obj/structure/cable,
+/obj/item/mop,
+/obj/item/mop,
+/obj/item/mop,
+/obj/item/reagent_containers/cup/bucket,
+/obj/item/reagent_containers/cup/bucket,
+/obj/item/reagent_containers/cup/bucket,
+/obj/item/soap/homemade,
+/obj/item/soap/homemade,
+/obj/item/soap/homemade,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/gov/second_floor)
 "dZK" = (
@@ -9902,6 +9972,18 @@
 	pixel_y = -5
 	},
 /obj/machinery/light_switch/directional/west,
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_4/first_apartment)
 "feE" = (
@@ -10317,6 +10399,16 @@
 "fvt" = (
 /turf/closed/indestructible/rock,
 /area/awaymission/avangarde17/inside/temple_second)
+"fwh" = (
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/obj/effect/landmark/start/ussp/town/janitor,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/inside/gov/second_floor)
 "fwj" = (
 /obj/structure/cable,
 /turf/open/floor/asphalt/avangarde,
@@ -13983,6 +14075,18 @@
 	dir = 4
 	},
 /obj/machinery/light_switch/directional/west,
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/second_apartment)
 "hzI" = (
@@ -17804,6 +17908,18 @@
 	pixel_y = -1;
 	name = "Ленина 2 - Этаж 1 - Квартира 4"
 	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/fourth_apartment)
 "jCP" = (
@@ -18390,6 +18506,18 @@
 	pixel_x = -4;
 	pixel_y = 8
 	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_2/fourth_apartment)
 "jRD" = (
@@ -18897,6 +19025,21 @@
 /obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_2/fourth_apartment)
+"kfD" = (
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/turf/closed/wall/mineral/iron,
+/area/awaymission/avangarde17/inside/house_1/first_apartment/bedroom)
 "kfR" = (
 /obj/machinery/light/small/directional/north,
 /obj/structure/hedge,
@@ -21033,6 +21176,18 @@
 	pixel_y = -1;
 	name = "Ленина 2 - Этаж 1 - Квартира 3"
 	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/third_apartment)
 "lng" = (
@@ -22517,6 +22672,18 @@
 /obj/effect/turf_decal/siding/wood/cherry/corner{
 	dir = 1
 	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_2/fifth_apartment)
 "mgB" = (
@@ -23387,6 +23554,7 @@
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 5
 	},
+/obj/effect/landmark/start/ussp/base/zampolit,
 /turf/open/floor/wood/oak,
 /area/awaymission/avangarde17/inside/base)
 "mJe" = (
@@ -23748,6 +23916,7 @@
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 8
 	},
+/obj/effect/landmark/start/ussp/base/prapor,
 /turf/open/floor/wood/large/oak,
 /area/awaymission/avangarde17/inside/base_prapor)
 "mQK" = (
@@ -28123,6 +28292,18 @@
 	pixel_x = 10;
 	pixel_y = 5
 	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_2/third_apartment)
 "pna" = (
@@ -28511,6 +28692,9 @@
 	dir = 1
 	},
 /obj/structure/sign/calendar/ussp/directional/west,
+/obj/item/key/appartment,
+/obj/item/key/appartment,
+/obj/item/key/appartment,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_1/fifth_apartment)
 "pvH" = (
@@ -29027,6 +29211,7 @@
 /obj/structure/chair/comfy/red{
 	dir = 8
 	},
+/obj/effect/landmark/start/ussp/town/detective,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/police)
 "pMK" = (
@@ -29081,12 +29266,10 @@
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/base_cargo)
 "pNW" = (
-/obj/machinery/vending/cigarette/ussp{
-	all_products_free = 1
-	},
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
 	},
+/obj/structure/reagent_dispensers/watertank/high,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/gov/second_floor)
 "pNZ" = (
@@ -30734,6 +30917,10 @@
 	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_3/fifth_apartment)
+"qCO" = (
+/obj/effect/landmark/start/ussp/town/cargo,
+/turf/open/floor/pod/light,
+/area/awaymission/avangarde17/inside/hangar/second_floor)
 "qCR" = (
 /obj/structure/bed{
 	dir = 4
@@ -35386,6 +35573,7 @@
 /obj/structure/sibirskiy/lenin{
 	pixel_y = 32
 	},
+/obj/effect/landmark/start/ussp/base/comendant,
 /turf/open/floor/carpet/red,
 /area/awaymission/avangarde17/inside/base_briefroom)
 "tjw" = (
@@ -35528,6 +35716,7 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
 	},
+/obj/effect/landmark/start/ussp/town/janitor,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/gov/second_floor)
 "tpr" = (
@@ -35602,6 +35791,18 @@
 	pixel_y = -5
 	},
 /obj/machinery/light_switch/directional/west,
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
+/obj/item/key/appartment{
+	pixel_x = 10;
+	pixel_y = 12
+	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_3/first_apartment)
 "tqs" = (
@@ -36827,6 +37028,11 @@
 	},
 /turf/open/floor/pod,
 /area/awaymission/avangarde17/inside/hangar)
+"tXS" = (
+/obj/effect/turf_decal/bot,
+/obj/effect/landmark/start/ussp/town/cargo,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/inside/hangar/second_floor)
 "tYt" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_1/first_apartment/bedroom)
@@ -38520,6 +38726,18 @@
 	pixel_y = 5
 	},
 /obj/structure/sign/calendar/ussp/directional/north,
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_1/third_apartment)
 "uUt" = (
@@ -39414,6 +39632,18 @@
 	pixel_x = 4;
 	pixel_y = 0;
 	name = "Ленина 1 - Этаж 1 - Квартира 4"
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/fourth_apartment)
@@ -40913,6 +41143,18 @@
 	pixel_y = 8
 	},
 /obj/machinery/light/small/directional/north,
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/key/appartment{
+	pixel_x = -3;
+	pixel_y = -5
+	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_1/fourth_apartment)
 "whD" = (
@@ -43461,6 +43703,21 @@
 /obj/structure/transport/linear/public,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/hangar)
+"xjk" = (
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/obj/item/key/appartment{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/turf/closed/wall/mineral/iron,
+/area/awaymission/avangarde17/inside/house_2/first_apartment/bedroom)
 "xjn" = (
 /obj/structure/closet/crate/large,
 /obj/item/stack/sheet/iron/five,
@@ -92542,7 +92799,7 @@ hsm
 hUj
 qKS
 mnd
-rFK
+xjk
 iuY
 qjK
 qgm
@@ -92554,7 +92811,7 @@ ouW
 hvM
 uLZ
 wmo
-tYt
+kfD
 tLt
 vdr
 exR
@@ -93050,7 +93307,7 @@ vqp
 rZj
 rZj
 rZj
-rZj
+cVE
 ydh
 uZB
 env
@@ -93062,7 +93319,7 @@ cqD
 lrV
 lrV
 lrV
-lrV
+csX
 evT
 iKy
 ddF
@@ -163205,7 +163462,7 @@ vdy
 vdy
 lsC
 rLz
-kfs
+fwh
 gWa
 bkv
 bkv
@@ -163788,7 +164045,7 @@ eSf
 iDI
 yeC
 pdG
-pdG
+tXS
 ltf
 qUN
 qUN
@@ -163985,7 +164242,7 @@ bkv
 bkv
 bkv
 bkv
-bkv
+dMi
 bkv
 bkv
 bkv
@@ -164818,11 +165075,11 @@ hKP
 hKP
 fmv
 gtw
-pdG
+tXS
 pdG
 fmv
 lsp
-lsp
+qCO
 lsp
 lsp
 iDI

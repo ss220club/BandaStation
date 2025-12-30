@@ -8,8 +8,8 @@
 	icon_state = "bobik"
 	layer = LYING_MOB_LAYER
 	max_occupants = 4
-	pixel_y = -36
-	pixel_x = -36
+	pixel_y = -32
+	pixel_x = -32
 	enter_delay = 1 SECONDS
 	escape_time = 1 SECONDS
 	vehicle_move_delay = 1.5
