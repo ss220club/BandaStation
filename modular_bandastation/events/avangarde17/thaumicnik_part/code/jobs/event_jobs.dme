@@ -16,3 +16,12 @@
 #include "ussp_trader_deli.dm"
 #include "ussp_trader_manu.dm"
 #include "ussp_waiter.dm"
+
+#include "ussp_base_zampolit.dm"
+#include "ussp_base_comendant.dm"
+#include "ussp_detective.dm"
+#include "ussp_tajaran_boss.dm"
+#include "ussp_oper.dm"
+#include "ussp_janitor.dm"
+#include "ussp_cargonian.dm"
+#include "ussp_base_prapor.dm"

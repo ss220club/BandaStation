@@ -1,5 +1,5 @@
 /datum/outfit/job/ussp_radio_assistant
-	name = "Ассистент радиоведущего"
+	name = "Радиоведущий"
 	id = /obj/item/card/id/advanced/ussp/passport
 	id_trim = /datum/id_trim/job/ussp_radio_assistant
 	uniform = /obj/item/clothing/under/costume/buttondown/slacks/service
@@ -16,7 +16,7 @@
 	messenger = /obj/item/storage/backpack/messenger
 
 /datum/job/ussp_radio_assistant
-	title = "Ассистент радиоведущего"
+	title = "Радиоведущий"
 	supervisors = "правительством СССП"
 	description = "Помогайте вести эфир, зачитывайте монотонный текст, носите чай."
 	departments_list = list(
@@ -24,8 +24,8 @@
 	)
 	outfit = /datum/outfit/job/ussp_radio_assistant
 	faction = FACTION_STATION
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	paycheck = PAYCHECK_ZERO
 	bounty_types = CIV_JOB_BASIC
 	department_for_prefs = /datum/job_department/service
@@ -33,7 +33,7 @@
 	job_flags = STATION_JOB_FLAGS
 	event_description = "Помогайте вашему товарищу принимать звонки радиослушателей, готовьте программы, анекдоты и истории, а также следите за исправностью оборудования! Обязательно посетите собрание в местном райкоме на площади Революции. Все необходимые товары вы можете получить в гастрономе или промтоварах по талонам, которые выдаются специальным автоматом на втором этаже райкома по курсу один талон - один товар."
 /datum/id_trim/job/ussp_radio_assistant
-	assignment = "Ассистент радиоведущего"
+	assignment = "Радиоведущий"
 	trim_state = "trim_psychologist"
 	department_color = COLOR_SERVICE_LIME
 	subdepartment_color = COLOR_SERVICE_LIME

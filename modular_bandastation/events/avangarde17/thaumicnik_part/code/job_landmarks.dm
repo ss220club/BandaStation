@@ -10,11 +10,20 @@
 /obj/effect/landmark/start/ussp/base/doctor
 	name = "Военный врач"
 
+/obj/effect/landmark/start/ussp/base/zampolit
+	name = "Замполит"
+
+/obj/effect/landmark/start/ussp/base/comendant
+	name = "Комендант"
+
+/obj/effect/landmark/start/ussp/base/prapor
+	name = "Прапор"
+
 /obj/effect/landmark/start/ussp/town
 	icon_state = JOB_ASSISTANT
 
 /obj/effect/landmark/start/ussp/town/workless
-	name = "Безработный"
+	name = "Житель ПГТ \"Зорька\""
 
 /obj/effect/landmark/start/ussp/town/homeless
 	name = "Бездомный"
@@ -24,6 +33,9 @@
 
 /obj/effect/landmark/start/ussp/town/tajaran
 	name = "Бандит 'Чёрной Таяры'"
+
+/obj/effect/landmark/start/ussp/town/tajaran_boss
+	name = "Босс 'Чёрной Таяры'"
 
 /obj/effect/landmark/start/ussp/town/militiaman
 	name = "Милиционер"
@@ -44,7 +56,7 @@
 	name = "Заведующий складом"
 
 /obj/effect/landmark/start/ussp/town/radio_assistant
-	name = "Ассистент радиоведущего"
+	name = "Радиоведущий"
 
 /obj/effect/landmark/start/ussp/town/trader_deli
 	name = "Продавец гастронома"
@@ -54,3 +66,15 @@
 
 /obj/effect/landmark/start/ussp/town/waiter
 	name = "Буфетчик рюмочной"
+
+/obj/effect/landmark/start/ussp/town/oper
+	name = "Оперуполномоченный"
+
+/obj/effect/landmark/start/ussp/town/detective
+	name = "Следователь"
+
+/obj/effect/landmark/start/ussp/town/cargo
+	name = "Работник склада"
+
+/obj/effect/landmark/start/ussp/town/janitor
+	name = "Дворник"
