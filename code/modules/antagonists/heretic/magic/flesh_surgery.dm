@@ -214,7 +214,7 @@
 		if(organ.organ_flags & (ORGAN_ROBOTIC|ORGAN_VITAL|ORGAN_UNREMOVABLE))
 			continue
 
-		organs_we_can_remove[organ.name] = organ
+		organs_we_can_remove[declent_ru(organ.name, ACCUSATIVE)] = organ
 
 	if(!length(organs_we_can_remove))
 		victim.balloon_alert(caster, "тут нет органов!")

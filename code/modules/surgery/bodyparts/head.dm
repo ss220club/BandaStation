@@ -15,7 +15,6 @@
 	wound_resistance = 5
 	disabled_wound_penalty = 25
 	scars_covered_by_clothes = FALSE
-	grind_results = null
 	is_dimorphic = TRUE
 	unarmed_attack_verbs = list("кусает", "грызет")
 	unarmed_attack_verbs_continuous = list("кусает", "грызет")
@@ -105,6 +104,9 @@
 	QDEL_NULL(worn_head_offset)
 	QDEL_NULL(worn_face_offset)
 	return ..()
+
+/obj/item/bodypart/head/grind_results()
+	return null
 
 /obj/item/bodypart/head/examine(mob/user)
 	. = ..()
@@ -268,6 +270,7 @@
 	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	bodytype = BODYTYPE_ALIEN | BODYTYPE_ORGANIC
 	bodyshape = BODYSHAPE_HUMANOID
+	biological_state = BIO_STANDARD_ALIEN
 
 /obj/item/bodypart/head/larva
 	icon = 'icons/mob/human/species/alien/bodyparts.dmi'
