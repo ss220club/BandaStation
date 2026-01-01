@@ -1,11 +1,124 @@
 /obj/item/ticket_machine_ticket/talon
-	name = "талон на услугу"
-	desc = "Талон, который печатает автомат с талонами. Вы можете обменять его на один товар."
+	name = "талонный лист"
+	desc = "Лист с вырезаемыми талонами, который печатает автомат с талонными листами. Вы можете вписать назначение кусочков листа и вырезать их в соответствующие талоны."
 	icon_state = "paperslip_words"
+	/// Общее количество ячеек на талонном листе
+	var/total_cells = 20
+	/// Количество использованных ячеек
+	var/used_cells = 0
+	/// Сопоставление типов талонов с их весом в ячейках
+	var/static/list/talon_types = list(
+		"Еда" = list(
+			"path" = /obj/item/stack/talon/food,
+			"weight" = 1
+		),
+		"Одежда" = list(
+			"path" = /obj/item/stack/talon/clothes,
+			"weight" = 2
+		),
+		"Инструменты" = list(
+			"path" = /obj/item/stack/talon/tools,
+			"weight" = 3
+		),
+		"Алкоголь" = list(
+			"path" = /obj/item/stack/talon/alcohol,
+			"weight" = 2
+		),
+		"Бытовые товары" = list(
+			"path" = /obj/item/stack/talon/household,
+			"weight" = 1
+		)
+	)
+
+/obj/item/ticket_machine_ticket/talon/examine(mob/user)
+	. = ..()
+	var/remaining = total_cells - used_cells
+	if(remaining > 0)
+		. += span_notice("На листе осталось [remaining] из [total_cells] ячеек.")
+	else
+		. += span_warning("Все ячейки на листе использованы!")
+
+/obj/item/ticket_machine_ticket/talon/attack_self(mob/user)
+	ui_interact(user)
+
+/obj/item/ticket_machine_ticket/talon/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "TalonTicketModal")
+		ui.open()
+
+/obj/item/ticket_machine_ticket/talon/ui_state(mob/user)
+	return GLOB.always_state
+
+/obj/item/ticket_machine_ticket/talon/ui_static_data(mob/user)
+	var/list/data = list()
+	data["title"] = "Талонный лист"
+	data["message"] = "Выберите тип талона для вырезания:"
+	var/list/buttons_data = list()
+	for(var/talon_name in talon_types)
+		var/list/talon_info = talon_types[talon_name]
+		buttons_data += list(list(
+			"name" = talon_name,
+			"weight" = talon_info["weight"]
+		))
+	data["buttons"] = buttons_data
+	return data
+
+/obj/item/ticket_machine_ticket/talon/ui_data(mob/user)
+	var/list/data = list()
+	data["remaining_cells"] = total_cells - used_cells
+	data["total_cells"] = total_cells
+	return data
+
+/obj/item/ticket_machine_ticket/talon/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if (.)
+		return
+	switch(action)
+		if("choose")
+			var/payload = params["choice"]
+			handle_choice(payload)
+			return TRUE
+
+/// Обрабатывает выбор пользователя из модального окна
+/obj/item/ticket_machine_ticket/talon/proc/handle_choice(payload)
+	if(!(payload in talon_types))
+		to_chat(usr, span_warning("Неизвестный тип талона!"))
+		return
+
+	var/list/talon_info = talon_types[payload]
+	var/weight = talon_info["weight"]
+	var/remaining_cells = total_cells - used_cells
+
+	if(weight > remaining_cells)
+		to_chat(usr, span_warning("Недостаточно ячеек на талонном листе для вырезания этого талона!"))
+		return
+
+	// Создаем талон
+	var/talon_path = talon_info["path"]
+	var/obj/item/stack/talon/new_talon = new talon_path(get_turf(src))
+
+	// Выдаем талон игроку
+	if(!usr.put_in_hands(new_talon))
+		new_talon.forceMove(get_turf(usr))
+
+	// Увеличиваем количество использованных ячеек
+	used_cells += weight
+
+	playsound(loc, 'sound/items/poster/poster_ripped.ogg', vol = 50, vary = TRUE)
+	to_chat(usr, span_notice("Вы вырезали талон на [payload] из талонного листа."))
+
+	// Обновляем UI
+	SStgui.update_uis(src)
+
+	// Если все ячейки использованы, удаляем лист
+	if(used_cells >= total_cells)
+		to_chat(usr, span_notice("Талонный лист полностью использован!"))
+		qdel(src)
 
 /obj/machinery/ticket_machine/talon
 	name = "Талонный автомат"
-	desc = "Автомат для выдачи талонов на различные услуги."
+	desc = "Автомат для выдачи талонных листов на различные услуги."
 	icon_state = "ticketmachine"
 	/// cooldown in seconds per-player
 	var/ticket_cooldown = 600 SECONDS
