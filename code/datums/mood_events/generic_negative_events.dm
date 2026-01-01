@@ -89,7 +89,7 @@
 
 /datum/mood_event/reattachment/add_effects(obj/item/bodypart/limb)
 	if(limb)
-		description = "Ай! Такое ощущение, что я уснул на <i>[limb.plaintext_zone]</i>."
+		description = "Ай! Такое ощущение, что я уснул на <i>[limb.ru_plaintext_zone[PREPOSITIONAL]]</i>."
 
 /datum/mood_event/tased
 	description = "There's no \"z\" in \"taser\". It's in the zap."

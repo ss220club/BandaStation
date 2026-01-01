@@ -107,13 +107,13 @@ export const SurgeryProceduresView = (props: SurgeryProceduresViewProps) => {
         <>
           <Input
             width="215px"
-            placeholder="Search..."
+            placeholder="Поиск..."
             value={searchText}
             onChange={setSearchText}
           />
           <Button
             icon="filter"
-            tooltip="Filter out robotic surgeries."
+            tooltip="Скрыть робо-операции."
             onClick={() => setFilterRobotic(!filterRobotic)}
             selected={filterRobotic}
           >
@@ -122,7 +122,7 @@ export const SurgeryProceduresView = (props: SurgeryProceduresViewProps) => {
           <Button
             width="75px"
             icon="sort"
-            tooltip="Cycle between sorting methods."
+            tooltip="Переключить порядок сортировки."
             onClick={() =>
               setSortType(
                 sortType === 'default'

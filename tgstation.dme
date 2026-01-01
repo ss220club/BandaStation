@@ -304,6 +304,7 @@
 #include "code\__DEFINES\bandastation\pronouns.dm"
 #include "code\__DEFINES\bandastation\ru_jobs.dm"
 #include "code\__DEFINES\bandastation\rust_utils.dm"
+#include "code\__DEFINES\bandastation\vox_defines.dm"
 #include "code\__DEFINES\construction\actions.dm"
 #include "code\__DEFINES\construction\material.dm"
 #include "code\__DEFINES\construction\rcd.dm"
