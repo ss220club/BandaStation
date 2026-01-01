@@ -10,7 +10,7 @@ export const EmotePanel = (props, context) => {
 
   const emoteList = [];
   for (const name in emotes.list) {
-    let type = emotes.list[name]?.type;
+    const type = emotes.list[name]?.type;
     switch (type) {
       case TGUI_PANEL_EMOTE_TYPE_DEFAULT:
         emoteList.push({ type, name, key: emotes.list[name]['key'] });
