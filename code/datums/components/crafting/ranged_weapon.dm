@@ -96,6 +96,7 @@
 	)
 	time = 30 SECONDS //Maybe the delay will make you reconsider your choices
 	category = CAT_WEAPON_RANGED
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /datum/crafting_recipe/ebow
 	name = "Energy Crossbow"
@@ -158,6 +159,7 @@
 	)
 	time = 10 SECONDS
 	category = CAT_WEAPON_RANGED
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /datum/crafting_recipe/improvised_pneumatic_cannon //Pretty easy to obtain but
 	name = "Pneumatic Cannon"
@@ -505,3 +507,4 @@
 	steps = list(
 		"use high quality gibtonite and advanced release or large grenades for better yield",
 	)
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
