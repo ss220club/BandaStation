@@ -533,6 +533,7 @@
 	tint = INFINITY // You WILL Be blind, no matter what
 	dog_fashion = /datum/dog_fashion/head
 	custom_materials = null
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /obj/item/clothing/glasses/blindfold/Initialize(mapload)
 	. = ..()

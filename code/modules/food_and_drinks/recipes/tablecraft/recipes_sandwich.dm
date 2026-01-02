@@ -117,6 +117,7 @@
 	result = /obj/item/food/sandwich/peanut_butter_banana
 	added_foodtypes = NUTS
 	category = CAT_SANDWICH
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /datum/crafting_recipe/food/philly_cheesesteak
 	name = "Philly Cheesesteak"

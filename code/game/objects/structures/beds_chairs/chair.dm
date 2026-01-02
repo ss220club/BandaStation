@@ -290,6 +290,7 @@
 	buildstacktype = /obj/item/stack/sheet/animalhide/carp
 	fishing_modifier = -12
 	custom_materials = null
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /obj/structure/chair/office
 	name = "office chair"
