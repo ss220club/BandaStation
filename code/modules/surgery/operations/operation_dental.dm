@@ -1,11 +1,13 @@
 /datum/surgery_operation/limb/add_dental_implant
-	name = "Добавление зубного импланта"
+	name = "add dental implant"
 	desc = "Имплантация таблетки в зубы пациента."
+	operation_flags = OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
 		/obj/item/reagent_containers/applicator/pill = 1,
 	)
 	time = 1.6 SECONDS
-	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED|SURGERY_BONE_DRILLED
+	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_BONE_DRILLED
+	any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
 
 /datum/surgery_operation/limb/add_dental_implant/all_required_strings()
 	. = list()
@@ -62,12 +64,14 @@
 /datum/surgery_operation/limb/remove_dental_implant
 	name = "Удаление зубного импланта"
 	desc = "Удаление зубного имплантата из зубов пациента."
+	operation_flags = OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
 		TOOL_HEMOSTAT = 1,
 		IMPLEMENT_HAND = 1,
 	)
 	time = 3.2 SECONDS
-	all_surgery_states_required = SURGERY_BONE_DRILLED|SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
+	all_surgery_states_required = SURGERY_BONE_DRILLED|SURGERY_SKIN_OPEN
+	any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
 
 /datum/surgery_operation/limb/remove_dental_implant/get_default_radial_image()
 	return image(/obj/item/reagent_containers/applicator/pill)

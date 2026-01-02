@@ -8,7 +8,7 @@
 	)
 	time = 3 SECONDS
 	preop_sound = 'sound/items/handling/surgery/hemostat1.ogg'
-	operation_flags = OPERATION_AFFECTS_MOOD | OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_AFFECTS_MOOD | OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
 	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_ORGANS_CUT
 
 /datum/surgery_operation/limb/repair_puncture/get_default_radial_image()
@@ -79,7 +79,7 @@
 	)
 	time = 3.2 SECONDS
 	preop_sound = 'sound/items/handling/surgery/hemostat1.ogg'
-	operation_flags = OPERATION_AFFECTS_MOOD | OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_AFFECTS_MOOD | OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
 	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_ORGANS_CUT
 
 /datum/surgery_operation/limb/seal_veins/get_default_radial_image()

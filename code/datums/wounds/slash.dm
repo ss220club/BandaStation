@@ -342,6 +342,7 @@
 	demotes_to = /datum/wound/slash/flesh/moderate
 	status_effect_type = /datum/status_effect/wound/slash/flesh/severe
 	scar_keyword = "slashsevere"
+	surgery_states = SURGERY_SKIN_CUT | SURGERY_VESSELS_UNCLAMPED
 
 	simple_treat_text = "<b>Наложение повязки</b> на рану является важным и уменьшит потерю крови. После этого рану можно <b>зашить</b>, желательно, чтобы пациент отдыхал и/или держал свою рану."
 	homemade_treat_text = "Простыни можно разорвать, чтобы сделать <b>самодельный бинт</b>. <b>Мука, соль и соленая вода</b>, нанесенные на кожу, помогут, но чистая поваренная соль НЕ рекомендуется. Падение на землю и удерживание раны снизит кровотечение."
@@ -375,6 +376,7 @@
 	demotes_to = /datum/wound/slash/flesh/severe
 	status_effect_type = /datum/status_effect/wound/slash/flesh/critical
 	scar_keyword = "slashcritical"
+	surgery_states = SURGERY_SKIN_OPEN | SURGERY_VESSELS_UNCLAMPED
 	wound_flags = (ACCEPTS_GAUZE | MANGLES_EXTERIOR | CAN_BE_GRASPED)
 	simple_treat_text = "<b>Наложение повязки</b> на рану является важным, как и немедленное обращение за помощью - <b>Смерть</b> наступит, если лечение будет задержано, так как нехватка <b>кислорода</b> убивает пациента, поэтому <b>пища, железо и солево-глюкозный раствор</b> всегда рекомендуется после лечения. Эта рана не заживет сама по себе."
 	homemade_treat_text = "Простыни можно порвать, чтобы сделать <b>самодельный бинт</b>. <b>Мука, соль и соленая вода</b>, нанесенные на кожу, помогут. Падение на землю и удерживание раны снизит кровотечение."

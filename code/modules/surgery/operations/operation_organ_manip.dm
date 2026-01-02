@@ -4,7 +4,7 @@
 /datum/surgery_operation/limb/organ_manipulation
 	name = "Манипуляции с органами"
 	abstract_type = /datum/surgery_operation/limb/organ_manipulation
-	operation_flags = OPERATION_MORBID | OPERATION_NOTABLE
+	operation_flags = OPERATION_MORBID | OPERATION_NOTABLE | OPERATION_NO_PATIENT_REQUIRED
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	/// Radial slice datums for every organ type we can manipulate
 	VAR_PRIVATE/list/cached_organ_manipulation_options
@@ -190,16 +190,22 @@
 		span_notice("[surgeon] успешно извлекает [ru_parse_zone(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]!"),
 		span_notice("[surgeon] успешно извлекает что-то из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, вы больше не чувствуете свой [ru_parse_zone(organ.name, ACCUSATIVE)]!")
-	log_combat(surgeon, limb.owner, "surgically removed [ru_parse_zone(organ.name, ACCUSATIVE)] from")
-	organ.Remove(limb.owner)
-	organ.forceMove(limb.owner.drop_location())
+	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, вы больше не чувствуете свой [declent_ru(organ.name, ACCUSATIVE)]!")
+	log_combat(surgeon, limb.owner, "surgically removed [declent_ru(organ.name, ACCUSATIVE)] from")
+	if (limb.owner)
+		organ.Remove(limb.owner)
+	else
+		organ.bodypart_remove(limb)
+	organ.forceMove(limb.owner ? limb.owner.drop_location() : limb.drop_location())
 	organ.on_surgical_removal(surgeon, limb, tool)
 
 /datum/surgery_operation/limb/organ_manipulation/proc/on_success_insert_organ(obj/item/bodypart/limb, mob/living/surgeon, obj/item/organ/organ)
 	surgeon.temporarilyRemoveItemFromInventory(organ, TRUE)
 	organ.pre_surgical_insertion(surgeon, limb, limb.body_zone)
-	organ.Insert(limb.owner)
+	if (limb.owner)
+		organ.Insert(limb.owner)
+	else
+		organ.bodypart_insert(limb)
 	organ.on_surgical_insertion(surgeon, limb, organ)
 	display_results(
 		surgeon,
@@ -246,7 +252,8 @@
 /datum/surgery_operation/limb/organ_manipulation/internal/abductor
 	name = "Экспериментальные манипуляции с органами"
 	operation_flags = parent_type::operation_flags | OPERATION_IGNORE_CLOTHES | OPERATION_LOCKED | OPERATION_NO_WIKI
-	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
+	all_surgery_states_required = SURGERY_SKIN_OPEN
+	any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
 	bone_locked_organs = "мозг или любые органы грудной клетки, КРОМЕ сердца"
 
 /datum/surgery_operation/limb/organ_manipulation/internal/abductor/organ_check(obj/item/bodypart/limb, obj/item/organ/organ)
@@ -257,7 +264,8 @@
 	name = "Манипуляции с внешними чертами"
 	desc = "Манипуляции с особенностями пациента, такими как крылья мотылька или хвост ящера."
 	replaced_by = /datum/surgery_operation/limb/organ_manipulation/external/abductor
-	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED|SURGERY_BONE_SAWED
+	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_BONE_SAWED
+	any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
 
 /datum/surgery_operation/limb/organ_manipulation/external/organ_check(obj/item/bodypart/limb, obj/item/organ/organ)
 	return (organ.organ_flags & ORGAN_EXTERNAL)
@@ -277,6 +285,7 @@
 /datum/surgery_operation/limb/organ_manipulation/external/abductor
 	name = "Внешние экспериментальные манипуляции"
 	operation_flags = parent_type::operation_flags | OPERATION_IGNORE_CLOTHES | OPERATION_LOCKED | OPERATION_NO_WIKI
-	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
+	all_surgery_states_required = SURGERY_SKIN_OPEN
+	any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
 
 #undef OPERATION_REMOVED_ORGAN
