@@ -9,7 +9,7 @@
 		TOOL_WIRECUTTER = 2.5,
 	)
 	time = 3 SECONDS
-	operation_flags = OPERATION_AFFECTS_MOOD | OPERATION_LOOPING | OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_AFFECTS_MOOD | OPERATION_LOOPING | OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
 	preop_sound = list(
 		TOOL_SCALPEL = 'sound/items/handling/surgery/scalpel1.ogg',
 		TOOL_HEMOSTAT = 'sound/items/handling/surgery/hemostat1.ogg',
