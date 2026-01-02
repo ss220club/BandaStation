@@ -1,7 +1,7 @@
 /datum/surgery_operation/limb/repair_hairline
 	name = "Сращивание волосяной трещины"
 	desc = "Заживление волосяной трещины в кости пациента."
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
 		TOOL_BONESET = 1,
 		/obj/item/stack/medical/bone_gel = 1,
@@ -46,9 +46,9 @@
 	)
 
 /datum/surgery_operation/limb/reset_compound
-	name = "Вправление сложного перелома"
+	name = "reset compound fracture"
 	desc = "Вправление сложного перелома кости пациента, для подготавливки её к правильному заживлению."
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
 		TOOL_BONESET = 1,
 		/obj/item/stack/sticky_tape/surgical = 1.66,
@@ -56,7 +56,8 @@
 		/obj/item/stack/sticky_tape = 5,
 	)
 	time = 6 SECONDS
-	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
+	all_surgery_states_required = SURGERY_SKIN_OPEN
+	any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
 
 /datum/surgery_operation/limb/reset_compound/get_default_radial_image()
 	return image(/obj/item/bonesetter)
@@ -93,9 +94,9 @@
 	)
 
 /datum/surgery_operation/limb/repair_compound
-	name = "Лечение сложного перелома"
+	name = "repair compound fracture"
 	desc = "Залечивание сложного перелома кости пациента."
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
 		/obj/item/stack/medical/bone_gel = 1,
 		/obj/item/stack/sticky_tape/surgical = 1,
@@ -139,9 +140,9 @@
 	)
 
 /datum/surgery_operation/limb/prepare_cranium_repair
-	name = "Удаление обломков черепа"
+	name = "discard skull debris"
 	desc = "Удаление костных фрагментов и обломков из черепной щели пациента перед началом восстановления."
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
 		TOOL_HEMOSTAT = 1,
 		TOOL_WIRECUTTER = 2.5,
@@ -178,9 +179,9 @@
 	fissure?.prepped = TRUE
 
 /datum/surgery_operation/limb/repair_cranium
-	name = "Восстановление черепа"
+	name = "repair cranium"
 	desc = "Закрытие трещины в черепе пациента."
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
 		/obj/item/stack/medical/bone_gel = 1,
 		/obj/item/stack/sticky_tape/surgical = 1,
