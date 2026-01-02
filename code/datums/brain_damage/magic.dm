@@ -16,7 +16,7 @@
 	COOLDOWN_DECLARE(damage_warning_cooldown)
 	var/next_damage_warning = 0
 
-/datum/brain_trauma/magic/lumiphobia/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/magic/lumiphobia/on_life(seconds_per_tick)
 	..()
 	var/turf/T = owner.loc
 	if(!istype(T))
@@ -37,7 +37,7 @@
 	gain_text = span_warning("Вы чувствуете ненавистное присутствие рядом с собой.")
 	lose_text = span_notice("Вы чувствуете, как ненавистное присутствие исчезает.")
 
-/datum/brain_trauma/magic/poltergeist/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/magic/poltergeist/on_life(seconds_per_tick)
 	..()
 	if(!SPT_PROB(2, seconds_per_tick))
 		return
@@ -97,7 +97,7 @@
 	QDEL_NULL(stalker)
 	return ..()
 
-/datum/brain_trauma/magic/stalker/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/magic/stalker/on_life(seconds_per_tick)
 	// Dead and unconscious people are not interesting to the psychic stalker.
 	if(owner.stat != CONSCIOUS)
 		return

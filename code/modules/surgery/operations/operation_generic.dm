@@ -19,7 +19,7 @@
 	time = 1.6 SECONDS
 	preop_sound = 'sound/items/handling/surgery/scalpel1.ogg'
 	success_sound = 'sound/items/handling/surgery/scalpel2.ogg'
-	operation_flags = OPERATION_AFFECTS_MOOD
+	operation_flags = OPERATION_AFFECTS_MOOD | OPERATION_NO_PATIENT_REQUIRED
 	any_surgery_states_blocked = ALL_SURGERY_SKIN_STATES
 	/// We can't cut mobs with this biostate
 	var/biostate_blacklist = BIO_CHITIN
@@ -58,7 +58,15 @@
 	if(!limb.can_bleed())
 		return
 
-	//var/blood_name = limb.owner.get_bloodtype()?.get_blood_name() || "Blood" // BANDASTATION REMOVAL
+	/// BANDASTATION REMOVAL START
+	// var/blood_name = limb.owner?.get_bloodtype()?.get_blood_name()
+	// if(!blood_name && length(limb.blood_dna_info))
+	// 	var/datum/blood_type/blood_type = limb.blood_dna_info[limb.blood_dna_info[1]]
+	// 	blood_name = blood_type?.get_blood_name()
+	// if(!blood_name)
+	// 	blood_name = "Blood"
+	/// BANDASTATION REMOVAL END
+
 	display_results(
 		surgeon,
 		limb.owner,
@@ -92,9 +100,10 @@
 
 /// Pulls the skin back to access internals
 /datum/surgery_operation/limb/retract_skin
-	name = "Раздвинуть кожу"
+	name = "retract skin"
 	desc = "Раздвигает кожу пациента, чтобы получить доступ к внутренним органам. \
 		Вызывает хирургическое состояние \"кожа раздвинута\"."
+	operation_flags = OPERATION_NO_PATIENT_REQUIRED
 	required_bodytype = ~BODYTYPE_ROBOTIC
 	replaced_by = /datum/surgery_operation/limb/retract_skin/abductor
 	implements = list(
@@ -102,6 +111,7 @@
 		TOOL_SCREWDRIVER = 2.25,
 		TOOL_WIRECUTTER = 2.85,
 		/obj/item/stack/rods = 2.85,
+		/obj/item/kitchen/fork = 2.85,
 	)
 	time = 2.4 SECONDS
 	preop_sound = 'sound/items/handling/surgery/retractor1.ogg'
@@ -136,6 +146,7 @@
 	desc = "Прижечь разрез на коже пациента, закрывая его. \
 		Устраняет большинство хирургических состояний."
 	required_bodytype = ~BODYTYPE_ROBOTIC
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
 	replaced_by = /datum/surgery_operation/limb/close_skin/abductor
 	implements = list(
 		TOOL_CAUTERY = 1,
@@ -246,6 +257,7 @@
 	desc = "Снять зажимы с кровеносных сосудов в теле пациента, чтобы восстановить кровоток. \
 		Убирает хирургическое состояние \"сосуды зажаты\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP
 	replaced_by = /datum/surgery_operation/limb/unclamp_bleeders/abductor
 	implements = list(
 		TOOL_HEMOSTAT = 1,
@@ -310,7 +322,7 @@
 		/obj/item = 'sound/items/handling/surgery/scalpel1.ogg',
 	)
 	success_sound = 'sound/items/handling/surgery/organ2.ogg'
-	operation_flags = OPERATION_AFFECTS_MOOD
+	operation_flags = OPERATION_AFFECTS_MOOD | OPERATION_NO_PATIENT_REQUIRED
 	all_surgery_states_required = SURGERY_SKIN_OPEN
 	any_surgery_states_blocked = SURGERY_BONE_SAWED|SURGERY_BONE_DRILLED
 
@@ -353,6 +365,7 @@
 	desc = "Соединить рассечённые или зафиксировать сломанные кости. \
 		Убирает хирургические состояния \"кость распилена\" и \"кость просверлена\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP
 	implements = list(
 		/obj/item/stack/medical/bone_gel = 1,
 		/obj/item/stack/sticky_tape/surgical = 1,
@@ -398,6 +411,7 @@
 	desc = "Просверливание кости пациента. \
 		Вызывает хирургическое состояние \"кость просверлена\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP
 	implements = list(
 		TOOL_DRILL = 1,
 		/obj/item/screwdriver/power = 1.25,
@@ -448,6 +462,7 @@
 	desc = "Сделайте разрез на тканях внутренних органов, что позволит вылечить или манипулировать с органом. \
 		Вызывает хирургическое состояние \"орган разрезан\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP
 	replaced_by = /datum/surgery_operation/limb/incise_organs/abductor
 	implements = list(
 		TOOL_SCALPEL = 1,
