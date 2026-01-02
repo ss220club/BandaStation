@@ -1,9 +1,9 @@
 /datum/surgery_operation/organ/pacify
-	name = "Пацификация"
+	name = "pacification"
 	rnd_name = "Паксопсия (Пацификация)"
 	desc = "Удаление агрессивных наклонностей из мозга пациента."
 	rnd_desc = "Хирургическая процедура, которая навсегда подавляет центр агрессии в мозгу, лишая пациента желания наносить прямой вред."
-	operation_flags = OPERATION_MORBID | OPERATION_LOCKED | OPERATION_NOTABLE
+	operation_flags = OPERATION_MORBID | OPERATION_LOCKED | OPERATION_NOTABLE | OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
 		TOOL_HEMOSTAT = 1,
 		TOOL_SCREWDRIVER = 2.85,
@@ -15,7 +15,8 @@
 	failure_sound = 'sound/items/handling/surgery/organ2.ogg'
 	required_organ_flag = ORGAN_TYPE_FLAGS & ~ORGAN_ROBOTIC
 	target_type = /obj/item/organ/brain
-	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED|SURGERY_BONE_SAWED
+	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_BONE_SAWED
+	any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
 
 /datum/surgery_operation/organ/pacify/get_default_radial_image()
 	return image(/atom/movable/screen/alert/status_effect/high::overlay_icon, /atom/movable/screen/alert/status_effect/high::overlay_state)

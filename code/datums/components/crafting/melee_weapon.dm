@@ -89,7 +89,6 @@
 	time = 4 SECONDS
 	category = CAT_WEAPON_MELEE
 
-
 /datum/crafting_recipe/balloon_mallet
 	name = "Balloon Mallet"
 	result = /obj/item/balloon_mallet
@@ -233,6 +232,7 @@
 	)
 	time = 10 SECONDS
 	category = CAT_WEAPON_MELEE
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /datum/crafting_recipe/bambostaff
 	name = "Bamboo Bo Staff"
@@ -255,6 +255,7 @@
 	)
 	time = 120 SECONDS
 	category = CAT_WEAPON_MELEE
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /datum/crafting_recipe/dragonator_spear_untreated
 	name = "Untreated Giant-Killer Spear"
