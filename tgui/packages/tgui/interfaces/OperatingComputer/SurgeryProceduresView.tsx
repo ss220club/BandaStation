@@ -117,7 +117,7 @@ export const SurgeryProceduresView = (props: SurgeryProceduresViewProps) => {
             onClick={() => setFilterRobotic(!filterRobotic)}
             selected={filterRobotic}
           >
-            Скрыть робо-операции
+            Скрыть
           </Button>
           <Button
             width="75px"

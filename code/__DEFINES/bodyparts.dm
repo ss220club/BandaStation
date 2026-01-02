@@ -118,16 +118,16 @@ DEFINE_BITFIELD(surgery_state, list(
 
 /// For use in translating bitfield to steps required for surgery. Keep in the correct order!
 #define SURGERY_STATE_GUIDES(must_must_not) list(\
-	"кожа [must_must_not] быть разрезана" = SURGERY_SKIN_CUT, \
-	"кожа [must_must_not] быть раскрыта" = SURGERY_SKIN_OPEN, \
-	"сосуды [must_must_not] быть разжаты" = SURGERY_VESSELS_UNCLAMPED, \
-	"сосуды [must_must_not] быть зажаты" = SURGERY_VESSELS_CLAMPED, \
-	"орган [must_must_not] быть разрезан" = SURGERY_ORGANS_CUT, \
-	"кость [must_must_not] быть просверлена" = SURGERY_BONE_DRILLED, \
-	"кость [must_must_not] быть распилена" = SURGERY_BONE_SAWED, \
-	"пластик [must_must_not] быть наложен" = SURGERY_PLASTIC_APPLIED, \
-	"протез [must_must_not] быть не закреплён" = SURGERY_PROSTHETIC_UNSECURED, \
-	"грудная полость [must_must_not] быть раскрыта" = SURGERY_CAVITY_WIDENED, \
+	"[must_must_not] разрез кожи" = SURGERY_SKIN_CUT, \
+	"[must_must_not], чтобы кожа была раскрыта" = SURGERY_SKIN_OPEN, \
+	"[must_must_not], чтобы сосуды были разжаты" = SURGERY_VESSELS_UNCLAMPED, \
+	"[must_must_not], чтобы сосуды были зажаты" = SURGERY_VESSELS_CLAMPED, \
+	"[must_must_not], чтобы орган был разрезан" = SURGERY_ORGANS_CUT, \
+	"[must_must_not], чтобы кость была просверлена" = SURGERY_BONE_DRILLED, \
+	"[must_must_not], чтобы кость была распилена" = SURGERY_BONE_SAWED, \
+	"[must_must_not] наложение пластика" = SURGERY_PLASTIC_APPLIED, \
+	"[must_must_not], чтобы протез был не закреплён" = SURGERY_PROSTHETIC_UNSECURED, \
+	"[must_must_not], чтобы грудная полость была раскрыта" = SURGERY_CAVITY_WIDENED, \
 )
 
 // Yes these are glorified bitflag manipulation macros, they're meant to make reading surgical operations a bit easier

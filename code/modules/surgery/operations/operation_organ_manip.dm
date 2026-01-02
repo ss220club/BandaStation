@@ -108,7 +108,7 @@
 			option = new()
 			option.image = get_generic_limb_radial_image(limb.body_zone)
 			option.image.overlays += add_radial_overlays(organ.type)
-			option.name = "Извлечь [initial(organ.name)]"
+			option.name = "Извлечь [initial(organ.name)]."
 			option.info = "Извлечь [initial(organ.name)] из пациента."
 			LAZYSET(cached_organ_manipulation_options, "[organ.type]_remove", option)
 
@@ -122,7 +122,7 @@
 		option = new()
 		option.image = get_generic_limb_radial_image(limb.body_zone)
 		option.image.overlays += add_radial_overlays(list(image('icons/hud/screen_gen.dmi', "arrow_large_still"), organ.type))
-		option.name = "Вставить [initial(organ.name)]"
+		option.name = "Вставить [initial(organ.name)]."
 		option.info = "Вставить [initial(organ.name)] в пациента."
 		LAZYSET(cached_organ_manipulation_options, "[organ.type]_insert", option)
 
@@ -165,8 +165,8 @@
 			display_results(
 				surgeon,
 				limb.owner,
-				span_notice("Вы начинаете вставлять [declent_ru(tool.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]..."),
-				span_notice("[surgeon] начинает вставлять [declent_ru(tool.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+				span_notice("Вы начинаете вставлять [ru_parse_zone(tool.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]..."),
+				span_notice("[surgeon] начинает вставлять [ru_parse_zone(tool.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 				span_notice("[surgeon] начинает вставлять что-то в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 			)
 			display_pain(limb.owner, "Вы чувствуете, как что-то помещают в вашу [limb.ru_plaintext_zone[ACCUSATIVE]]!")
@@ -211,7 +211,7 @@
 	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, пока орган начинает приживаться!")
 
 /datum/surgery_operation/limb/organ_manipulation/internal
-	name = "Манипуляции с внутренними органами"
+	name = "Манипуляции с органами"
 	desc = "Манипуляции с внутренними органами пациента."
 	replaced_by = /datum/surgery_operation/limb/organ_manipulation/internal/abductor
 	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_ORGANS_CUT
