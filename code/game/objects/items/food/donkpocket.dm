@@ -379,7 +379,6 @@
 	crafting_complexity = FOOD_COMPLEXITY_4
 	warm_type = /obj/item/food/donkpocket/warm/deluxe/vegan
 	custom_materials = null
-	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /obj/item/food/donkpocket/warm/deluxe/vegan
 	name = "warm Donk-roll"
