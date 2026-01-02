@@ -226,7 +226,7 @@
 	effects |= new_sound_effects
 	effects = sort_effects(effects)
 
-/datum/component/tts_component/proc/tts_effects_remove(atom/user, list/sound_effects_to_remove)
+/datum/component/tts_component/proc/tts_effects_remove(list/sound_effects_to_remove)
 	if(!length(sound_effects_to_remove))
 		return
 
