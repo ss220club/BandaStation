@@ -86,10 +86,10 @@
 	"}
 
 	var/index = 0
-	for(var/word in GLOB.vox_sounds)
+	for(var/word in get_vox_sounds(vox_type)) // BANDASTATION EDIT - VOX types - ORIGINAL TG: for(var/word in GLOB.vox_sounds)
 		index++
 		dat += "<A href='byond://?src=[REF(src)];say_word=[word]'>[capitalize(word)]</A>"
-		if(index != GLOB.vox_sounds.len)
+		if(index != length(get_vox_sounds(vox_type))) // BANDASTATION EDIT - VOX types - ORIGINAL TG: if(index != GLOB.vox_sounds.len)
 			dat += " / "
 
 	var/datum/browser/popup = new(src, "announce_help", "Announcement Help", 500, 400)
@@ -134,7 +134,7 @@
 		if(!word)
 			words -= word
 			continue
-		if(!GLOB.vox_sounds[word])
+		if(!get_vox_sounds(vox_type)[word]) //BANDASTATION EDIT - VOX types - ORIGINAL TG: if(!GLOB.vox_sounds[word])
 			incorrect_words += word
 
 	if(incorrect_words.len)
@@ -162,15 +162,47 @@
 
 	word = LOWER_TEXT(word)
 
+	// BANDASTATION EDIT START - Get AI for the vox Type
+	var/turf/ai_turf_as_turf = ai_turf
+	if(!istype(ai_turf_as_turf))
+		return
+
+	var/mob/living/silicon/ai/the_AI = locate(/mob/living/silicon/ai) in ai_turf_as_turf
+	if(!the_AI)
+		for(var/obj/item/aicard/card in ai_turf_as_turf.get_all_contents())
+			if(card.AI && istype(card.AI, /mob/living/silicon/ai))
+				the_AI = card.AI
+				break
+	if(!the_AI)
+		return
+
+	// BANDASTATION EDIT END
+	/* ORIGINAL TG:
 	if(GLOB.vox_sounds[word])
 
 		var/sound_file = GLOB.vox_sounds[word]
+	*/
+	// BANDASTATION EDIT START
+	var/vox_volume_modifier = 1
+	var/sound_file
+	if(the_AI.get_vox_sounds(the_AI.vox_type)[word])
+		sound_file = the_AI.get_vox_sounds(the_AI.vox_type)[word]
+		// If the vox stuff are disabled, or we failed getting the word from the list, just early return.
+		if(!sound_file)
+			return FALSE
+		switch(the_AI.vox_type)
+			if(VOX_MIL)
+				vox_volume_modifier = 0.50
+			if(VOX_HL)
+				vox_volume_modifier = 0.40 // No, my poor ears...
+	// BANDASTATION EDIT END
 
 	// If there is no single listener, broadcast to everyone in the same z level
 		if(!only_listener)
 			// Play voice for all mobs in the z level
 			for(var/mob/player_mob as anything in GLOB.player_list)
 				var/pref_volume = safe_read_pref(player_mob.client, /datum/preference/numeric/volume/sound_ai_vox)
+				pref_volume *= vox_volume_modifier // BANDASTATION EDIT
 				if(!player_mob.can_hear() || !pref_volume)
 					continue
 

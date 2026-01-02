@@ -11,30 +11,30 @@
 		"moving" = FALSE,
 	)
 	description = list(
-		"The Path of Flesh revolves around summoning ghouls and monstrosities to do your bidding.",
-		"Pick this path if you enjoy the fantasy of being a necromancer commanding legions of allies.",
+		"Путь Плоти специализируется на призыве гулей и чудовищ для выполнения ваших приказов.",
+		"Выбирайте этот путь, если вам нравится чувствовать себя некромантом, командующим ордами нежити.",
 	)
 	pros = list(
-		"Can turn dead humanoids into fragile but loyal ghouls.",
-		"Access to a versatile list of summoned minions.",
-		"Your summons are very versatie and can quicky overwhelm the crew should you coordinate your attacks",
-		"Eating organs or being fat grants various boons (depending on the level of your passive).",
+		"Способен превращать мертвых гуманоидов в хрупких, но преданных гулей.",
+		"Доступ к разнообразному списку призываемых миньонов.",
+		"Ваши призывы очень разнообразны и могут быстро подавить экипаж, если вы скоординируете свои атаки.",
+		"Поедание органов или полнота дают различные бонусы (в зависимости от уровня вашего пассивного навыка).",
 	)
 	cons = list(
-		"A high degree of your progression is obtaining additional summoned monsters.",
-		"You have very little utility beyond your summoned monsters.",
-		"You gain no inherent access to defensive, offensive or mobility spells.",
-		"You are mostly focused around supporting your minions.",
+		"Важным этапом вашего прогресса является получение дополнительных призываемых чудовищ.",
+		"У вас очень мало полезных способностей, кроме призыва чудовищ.",
+		"Вы не получаете врожденного доступа к заклинаниям защиты, атаки или мобильности.",
+		"Вы в основном фокусируетесь на поддержке своих миньонов.",
 	)
 	tips = list(
-		"Your Mansus Grasp allows you to turn dead humanoids into ghouls (even mindshielded humanoids like security officers and the captain). It also Leaves a mark that causes heavy bleeding when triggered by your bloody blade.",
-		"As a Flesh Heretic, organs and dead bodies are your best friends! You can use them for rituals, to heal or to gain buffs.",
-		"Your Flesh Surgery spell can heal your summons. Your robes grant you an aura that also heals nearby summons (but not yourself).",
-		"Your Flesh Surgery spell also lets you steal organs from humanoids. Useful if you need a spare liver.",
-		"Raw Prophets can link you and other summons in a telepathic network, allowing for long distance co-ordination.",
-		"Flesh Stalkers are decent combatants with the ability to disguise themselves as small creatures, like beepskies and corgis. They can also utilize an EMP spell, but this can potentially harm them if they transformed into a robot!",
-		"Your success with this path is reliant on how knowledgable or robust your minions are. However, there is always power in numbers; the more minions, the higher your chances of success.",
-		"Your minions are more expendable than you are. Do not be afraid to tell them to go to their deaths. You can just recover them later... maybe.",
+		"Ваша Хватка Мансуса позволяет вам превращать мертвых гуманоидов в гулей (даже гуманоидов с защитой разума, таких как офицеры и капитан). Она также оставляет след, который вызывает сильное кровотечение, когда его задевает ваш Кровавый Клинок.",
+		"Для Еретика Плоти органы и трупы — лучшие друзья! Вы можете использовать их для ритуалов, исцеления или получения усилений.",
+		"Ваше заклинание «Плетение Плоти» может исцелять ваших призываемых существ. Ваша мантия наделяет вас аурой, которая также исцеляет призываемых существ, находящихся поблизости (но не вас самих).",
+		"Ваше заклинание «Плетение Плоти» также позволяет вам похищать органы у гуманоидов. Полезно, если вам нужна запасная печень.",
+		"Сырые Пророки могут соединить вас и других призываемых существ в телепатическую сеть, позволяющую координировать действия на большом расстоянии.",
+		"Преследователи Плоти — неплохие бойцы, способные маскироваться под мелких существ, таких как бипски и корги. Они также могут использовать заклинание ЭМИ, но это может нанести им вред, если они превратились в робота!",
+		"Ваш успех на этом пути зависит от того, насколько опытные и сильные ваши подчиненные. Однако в количестве всегда есть сила: чем больше подчиненных, тем выше ваши шансы на успех.",
+		"Ваши подчиненные более легкозаменяемы, чем вы. Не бойтесь отправлять их на верную гибель. Вы всегда сможете восстановить их позже... возможно.",
 	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_flesh
@@ -50,9 +50,9 @@
 	ascension = /datum/heretic_knowledge/ultimate/flesh_final
 
 /datum/heretic_knowledge/limited_amount/starting/base_flesh
-	name = "Principle of Hunger"
+	name = "Главенство Голода"
 	desc = "Открывает перед вами Путь плоти. \
-		Позволяет трансмутировать нож и лужу крови в Кровавый клинок. \
+		Позволяет трансмутировать нож и лужу крови в Кровавый Клинок. \
 		Одновременно можно иметь только три."
 	gain_text = "Сотни наших голодали, но не я... Я нашел силу в своей жадности."
 	required_atoms = list(
@@ -127,10 +127,10 @@
 	LAZYREMOVE(created_items, WEAKREF(ghoul))
 
 /datum/heretic_knowledge/limited_amount/flesh_ghoul
-	name = "Imperfect Ritual"
+	name = "Несовершенный Ритуал"
 	desc = "Позволяет трансмутировать труп и мак, чтобы создать Безголосого мертвеца. \
 		Трупу необязательно иметь душу. \
-		Безголосые мертвецы - это немые гули, у них всего 50 здоровья, но они могут эффективно использовать Кровавые клинки. \
+		Безголосые мертвецы - это немые гули, у них всего 50 здоровья, но они могут эффективно использовать Кровавые Клинки. \
 		Одновременно можно иметь только два."
 	gain_text = "Я нашел записи о темном ритуале, незаконченные... но все же я стремился вперед."
 	required_atoms = list(
@@ -211,8 +211,8 @@
 	REMOVE_TRAIT(ghoul, TRAIT_MUTE, MAGIC_TRAIT)
 
 /datum/heretic_knowledge/spell/flesh_surgery
-	name = "Knitting of Flesh"
-	desc = "Дарует вам заклинание Knit Flesh. Это заклинание позволяет извлекать органы из жертв \
+	name = "Плетение Плоти"
+	desc = "Дарует вам заклинание «Плетение Плоти». Это заклинание позволяет извлекать органы из жертв \
 		без необходимости длительной операции. Этот процесс занимает гораздо больше времени, если цель жива. \
 		Это заклинание также позволяет вам исцелять ваших миньонов и призванных или восстанавливать отказавшие органы до приемлемого состояния."
 	gain_text = "Но они недолго оставались вне моей досягаемости. С каждым шагом крики усиливались, пока, наконец, \
@@ -236,9 +236,9 @@
 	)
 
 /datum/heretic_knowledge/summon/raw_prophet
-	name = "Raw Ritual"
-	desc = "Позволяет трансмутировать пару глаз, левую руку и лужу крови, чтобы создать Сырого пророка. \
-		Сырые пророки обладают значительно увеличенной дальностью зрения и рентгеновским зрением, \
+	name = "Сырой Ритуал"
+	desc = "Позволяет трансмутировать пару глаз, левую руку и лужу крови, чтобы создать Сырого Пророка. \
+		Сырые Пророки обладают значительно увеличенной дальностью зрения и рентгеновским зрением, \
 		а также джаунтом дальнего действия и способностью связывать разумы для легкого общения, но очень хрупки и слабы в бою."
 	gain_text = "Я не мог продолжать в одиночку. Я смог призвать Жуткого человека, чтобы он помог мне увидеть больше. \
 		Крики... когда-то постоянные, теперь заглушались их убогим видом. Ничто не было недосягаемо."
@@ -253,9 +253,9 @@
 
 
 /datum/heretic_knowledge/blade_upgrade/flesh
-	name = "Bleeding Steel"
+	name = "Кровоточащая Сталь"
 	desc = "Ваш Кровавый клинок теперь вызывает у врагов сильное кровотечение при атаке."
-	gain_text = "Жудкий человек был не один. Он привел меня к Маршалу. \
+	gain_text = "Жуткий человек был не один. Он привел меня к Маршалу. \
 		Наконец-то я начал понимать. А потом с небес хлынул кровавый дождь."
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "blade_upgrade_flesh"
@@ -272,7 +272,7 @@
 	crit_wound.apply_wound(bodypart, attack_direction = get_dir(source, target))
 
 /datum/heretic_knowledge/summon/stalker
-	name = "Lonely Ritual"
+	name = "Ритуал Одиночества"
 	desc = "Позволяет трансмутировать хвост любого вида, желудок, язык, ручку и лист бумаги, чтобы создать Сталкера. \
 		Сталкеры имеют джаунт, могут выпускать ЭМИ, превращаться в животных или автоматонов и сильны в бою."
 	gain_text = "Я смог объединить свою жадность и желания, чтобы вызвать мистическое чудовище, которого я никогда раньше не видел. \
@@ -292,7 +292,7 @@
 	is_final_knowledge = TRUE
 
 /datum/heretic_knowledge/ultimate/flesh_final
-	name = "Priest's Final Hymn"
+	name = "Последний Гимн Жреца"
 	desc = "Ритуал вознесения Пути плоти. \
 		Принесите 4 трупа к руне трансмутации, чтобы завершить ритуал. \
 		После завершения вы обретаете способность сбросить человеческую форму \

@@ -155,7 +155,7 @@ GLOBAL_LIST_INIT(xeno_recipes, list ( \
 GLOBAL_LIST_INIT(carp_recipes, list ( \
 	new/datum/stack_recipe("carp costume", /obj/item/clothing/suit/hooded/carp_costume, 4, crafting_flags = NONE, category = CAT_CLOTHING), \
 	new/datum/stack_recipe("carp mask", /obj/item/clothing/mask/gas/carp, 1, crafting_flags = NONE, category = CAT_CLOTHING), \
-	new/datum/stack_recipe("carpskin chair", /obj/structure/chair/comfy/carp, 2, crafting_flags = NONE, category = CAT_FURNITURE), \
+	new/datum/stack_recipe("carpskin chair", /obj/structure/chair/comfy/carp, 2, crafting_flags = CRAFT_SKIP_MATERIALS_PARITY, category = CAT_FURNITURE), \
 	new/datum/stack_recipe("carpskin suit", /obj/item/clothing/under/suit/carpskin, 3, crafting_flags = NONE, category = CAT_CLOTHING), \
 	new/datum/stack_recipe("carpskin fedora", /obj/item/clothing/head/fedora/carpskin, 2, crafting_flags = NONE, category = CAT_CLOTHING), \
 	new/datum/stack_recipe("carpskin fishing bag", /obj/item/storage/bag/fishing/carpskin, 3, crafting_flags = NONE, category = CAT_CONTAINERS), \
@@ -271,7 +271,7 @@ GLOBAL_LIST_INIT(leather_recipes, list ( \
 	merge_type = /obj/item/stack/sheet/sinew/wolf
 
 GLOBAL_LIST_INIT(sinew_recipes, list ( \
-	new/datum/stack_recipe("sinew restraints", /obj/item/restraints/handcuffs/cable/sinew, 1, crafting_flags = NONE, category = CAT_EQUIPMENT), \
+	new/datum/stack_recipe("sinew restraints", /obj/item/restraints/handcuffs/cable/sinew, 1, crafting_flags = CRAFT_SKIP_MATERIALS_PARITY, category = CAT_EQUIPMENT), \
 ))
 
 /obj/item/stack/sheet/sinew/get_main_recipes()

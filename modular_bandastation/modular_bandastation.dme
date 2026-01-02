@@ -11,6 +11,7 @@
 #include "aesthetics/_aesthetics.dme"
 #include "aesthetics_sounds/_aesthetics_sounds.dme"
 #include "ai_laws/_ai_laws.dme"
+#include "ai_vox/_ai_vox.dme"
 #include "announcers/_announcers.dme"
 #include "antagonists/_antagonists.dme"
 #include "augmentation_preferences/_augmentation_preferences.dme"
@@ -21,6 +22,7 @@
 #include "balance/_balance.dme"
 #include "bar_hookahs/_bar_hookahs.dme"
 #include "barsigns/_barsigns.dme"
+#include "borgs/_borgs.dme"
 #include "changelog/_changelog.dme"
 #include "chat/_chat.dme"
 #include "chemistry/_chemistry.dme"
@@ -28,6 +30,7 @@
 #include "communication/_communication.dme"
 #include "cryosleep/_cryosleep.dme"
 #include "cult_overhaul/_cult_overhaul.dme"
+#include "revolution_overhaul/_revolution_overhaul.dme"
 #include "custom_emote_panel/_custom_emote_panel.dme"
 #include "customization/_customization.dme"
 #include "cyrillic_fixes/_cyrillic_fixes.dme"
@@ -82,6 +85,7 @@
 #include "world_topics/_world_topics.dme"
 #include "movespeed_limit/_movespeed_limit.dme"
 #include "tesla_rework/_teslarework.dme"
+#include "job_restrictions/_job_restrictions.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //
