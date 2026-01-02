@@ -39,7 +39,7 @@ function getColorValueClass(quirk: Quirk) {
 
 function getCorrespondingPreferences(
   customization_options: string[],
-  relevant_preferences: Record<string, string> = {},
+  relevant_preferences: Record<string, string>,
 ) {
   return Object.fromEntries(
     filter(Object.entries(relevant_preferences), ([key, value]) =>
@@ -55,37 +55,33 @@ type QuirkListProps = {
 };
 
 type QuirkProps = {
-  handleClick: (quirkName: string, quirk: Quirk) => void;
+  onClick: (quirkName: string, quirk: Quirk) => void;
   randomBodyEnabled: boolean;
   selected: boolean;
   serverData: ServerData;
-  quirkActionLocked: boolean;
 };
 
 function QuirkList(props: QuirkProps & QuirkListProps) {
   const {
     quirks = [],
     selected,
-    handleClick,
+    onClick,
     serverData,
     randomBodyEnabled,
-    quirkActionLocked,
   } = props;
 
   return (
     <Stack vertical>
       {quirks.map(([quirkKey, quirk]) => (
-        <Stack.Item key={quirkKey} m={0}>
-          <QuirkDisplay
-            handleClick={handleClick}
-            quirk={quirk}
-            quirkKey={quirkKey}
-            randomBodyEnabled={randomBodyEnabled}
-            selected={selected}
-            serverData={serverData}
-            quirkActionLocked={quirkActionLocked}
-          />
-        </Stack.Item>
+        <QuirkDisplay
+          key={quirkKey}
+          quirk={quirk}
+          quirkKey={quirkKey}
+          randomBodyEnabled={randomBodyEnabled}
+          selected={selected}
+          serverData={serverData}
+          onClick={onClick}
+        />
       ))}
     </Stack>
   );
@@ -98,25 +94,27 @@ type QuirkDisplayProps = {
 } & QuirkProps;
 
 function QuirkDisplay(props: QuirkDisplayProps) {
-  const { quirk, quirkKey, handleClick, selected, quirkActionLocked } = props;
+  const { quirk, quirkKey, onClick, selected } = props;
   const { icon, value, name, description, customizable, failTooltip } = quirk;
 
   const className = 'PreferencesMenu__QuirksQuirk';
   const [customizationExpanded, setCustomizationExpanded] = useState(false);
   const child = (
-    <Box
-      className={className}
-      style={{
-        opacity: props.quirkActionLocked ? 0.6 : 1,
-        pointerEvents: props.quirkActionLocked ? 'none' : 'auto',
-      }}
-      onClick={() => {
-        if (quirkActionLocked) return;
+    <Stack
+      fill
+      g={0}
+      className={classes([
+        className,
+        getColorValueClass(quirk),
+        failTooltip && 'Unremovable',
+      ])}
+      onClick={(event) => {
+        event.stopPropagation();
         if (selected) {
           setCustomizationExpanded(false);
         }
 
-        handleClick(quirkKey, quirk);
+        onClick(quirkKey, quirk);
       }}
     >
       <Stack.Item className={`${className}--Icon`}>
@@ -266,19 +264,6 @@ function QuirkPage() {
     data.selected_quirks = selected_quirks;
   }
 
-  const [quirkActionLocked, setQuirkActionLocked] = useState(false);
-
-  function withQuirkDebounce(debounce: () => void, delay = 200) {
-    if (quirkActionLocked) return;
-
-    setQuirkActionLocked(true);
-    debounce();
-
-    setTimeout(() => {
-      setQuirkActionLocked(false);
-    }, delay);
-  }
-
   const [searchQuery, setSearchQuery] = useState('');
   const server_data = useServerPrefs();
   if (!server_data) return;
@@ -377,125 +362,42 @@ function QuirkPage() {
               value={searchQuery}
               onChange={setSearchQuery}
             />
-          </Stack.Item>
-          <Stack.Item grow className="PreferencesMenu__Quirks__QuirkList">
-            <QuirkList
-              selected={false}
-              quirkActionLocked={quirkActionLocked}
-              handleClick={(quirkName, quirk) => {
-                if (getReasonToNotAdd(quirkName) !== undefined) {
-                  return;
-                }
-
-                withQuirkDebounce(() => {
-                  setSelectedQuirks(selectedQuirks.concat(quirkName));
-                  act('give_quirk', { quirk: quirk.name });
-                });
-              }}
-              quirks={quirks
-                .filter(([quirkName, _]) => {
-                  return (
-                    selectedQuirks.indexOf(quirkName) === -1 &&
-                    quirkSearch(quirkInfo[quirkName])
-                  );
-                })
-                .map(([quirkName, quirk]) => {
-                  return [
-                    quirkName,
-                    {
-                      ...quirk,
-                      failTooltip: getReasonToNotAdd(quirkName),
-                    },
-                  ];
-                })}
-              serverData={server_data}
-              randomBodyEnabled={randomBodyEnabled}
-            />
-          </Stack.Item>
-        </Stack>
-      </Stack.Item>
-
-      <Stack.Item
-  align = 'center' > <Icon name="exchange-alt" size={1.5} ml={2} mr={2} />;
-  </Stack.Item>
-
-      <Stack.Item basis="50%">
-        <Stack vertical fill align="center">
-          <Stack.Item>
-  pointsEnabled ? (
-    <Box fontSize="1.3em">Quirk Balance</Box>
-  ) : (
-    <Box mt=
-  maxPositiveQuirks > 0 ? 3.4 : 0;
-  />;
-  )
-  </Stack.Item>
-          <Stack.Item>
-  pointsEnabled ? (
-    <StatDisplay>
-  balance;
-  </StatDisplay>
-  ) : (
-    <Box mt=
-  maxPositiveQuirks > 0 ? 3.4 : 0;
-  />;
-  )
-  </Stack.Item>
-          <Stack.Item>
-            <Box as="b" fontSize="1.6em">
-              Current Quirks
-            </Box>
-          </Stack.Item>
-          <Stack.Item p=
-  1.5
-  /> {/ * Filler;
-  to;
-  better;
-  align;
-  the;
-  menu * /  .;<ISacekmtt};
-  grow;
-  className =
-    'PreferencesMenu__Quirks__QuirkList' >
-    (
-      <QuirkList
-        selected
-        quirkActionLocked={quirkActionLocked}
-        handleClick={(quirkName, quirk) => {
-          if (getReasonToNotRemove(quirkName) !== undefined) {
-            return;
           }
+        >
+          <QuirkList
+            selected={false}
+            onClick={(quirkName, quirk) => {
+              if (getReasonToNotAdd(quirkName) !== undefined) {
+                return;
+              }
 
-          withQuirkDebounce(() => {
-            setSelectedQuirks(
-              selectedQuirks.filter((otherQuirk) => quirkName !== otherQuirk),
-            );
+              setSelectedQuirks(selectedQuirks.concat(quirkName));
 
-            act('remove_quirk', { quirk: quirk.name });
-          });
-        }}
-        quirks={quirks
-          .filter(([quirkName, _]) => {
-            return selectedQuirks.indexOf(quirkName) !== -1;
-          })
-          .map(([quirkName, quirk]) => {
-            return [
-              quirkName,
-              {
-                ...quirk,
-                failTooltip: getReasonToNotRemove(quirkName),
-              },
-            ];
-          })}
-        serverData={server_data}
-        randomBodyEnabled={randomBodyEnabled}
-      />
-    );
-  </Stack.Item>
-        </Stack>
+              act('give_quirk', { quirk: quirk.name });
+            }}
+            quirks={quirks
+              .filter(([quirkName, _]) => {
+                return (
+                  selectedQuirks.indexOf(quirkName) === -1 &&
+                  quirkSearch(quirkInfo[quirkName])
+                );
+              })
+              .map(([quirkName, quirk]) => {
+                return [
+                  quirkName,
+                  {
+                    ...quirk,
+                    failTooltip: getReasonToNotAdd(quirkName),
+                  },
+                ];
+              })}
+            serverData={server_data}
+            randomBodyEnabled={randomBodyEnabled}
+          />
+        </Section>
       </Stack.Item>
     </Stack>
-  )
+  );
 
   const currentQuirks = (
     <Stack fill vertical>
