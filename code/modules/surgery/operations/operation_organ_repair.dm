@@ -448,7 +448,6 @@
 		)
 		display_pain(organ.owner, "Вы чувствуете пронзающую боль, которая проникает сквозь череп прямо в мозг!")
 		organ.owner.adjust_organ_loss(ORGAN_SLOT_BRAIN, 70)
-
 	else
 	if(isnull(brain))
 		display_results(

@@ -155,8 +155,8 @@
 			display_results(
 				surgeon,
 				limb.owner,
-				span_notice("Вы начинаете извлекать [ru_parse_zone(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] [limb.owner.declent_ru(GENITIVE)]..."),
-				span_notice("[surgeon] начинает извлекать [ru_parse_zone(organ.name, ACCUSATIVE)] у [limb.owner.declent_ru(GENITIVE)]."),
+				span_notice("Вы начинаете извлекать [organ.name] из [limb.ru_plaintext_zone[GENITIVE]] [limb.owner.declent_ru(GENITIVE)]..."),
+				span_notice("[surgeon] начинает извлекать [organ.name] у [limb.owner.declent_ru(GENITIVE)]."),
 				span_notice("[surgeon] начинает извлекать что-то у [limb.owner.declent_ru(GENITIVE)]."),
 			)
 			display_pain(limb.owner, "Вы чувствуете тянущее ощущение в [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
@@ -186,8 +186,8 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно извлекаете [ru_parse_zone(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно извлекает [ru_parse_zone(organ.name, ACCUSATIVE)] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]!"),
+		span_notice("Вы успешно извлекаете [organ.name] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно извлекает [organ.name] из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]!"),
 		span_notice("[surgeon] успешно извлекает что-то из [limb.ru_plaintext_zone[GENITIVE]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, вы больше не чувствуете свой [declent_ru(organ.name, ACCUSATIVE)]!")
@@ -210,8 +210,8 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы успешно вставляете [ru_parse_zone(organ.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно вставляет [ru_parse_zone(organ.name, ACCUSATIVE)] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы успешно вставляете [organ.name] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно вставляет [organ.name] в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] успешно вставляет что-то в [limb.ru_plaintext_zone[ACCUSATIVE]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] пульсирует от боли, пока орган начинает приживаться!")
