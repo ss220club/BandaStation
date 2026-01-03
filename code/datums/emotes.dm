@@ -57,13 +57,13 @@
 	/// Can only code call this event instead of the player.
 	var/only_forced_audio = FALSE
 	/// The cooldown between the uses of the emote.
-	var/cooldown = 0.8 SECONDS
+	var/cooldown = 3 SECONDS // BANDASTATION EDIT: 0.8 -> 3
 	/// Does this message have a message that can be modified by the user?
 	var/can_message_change = FALSE
 	/// How long is the shared emote cooldown triggered by this emote?
-	var/general_emote_audio_cooldown = 2 SECONDS
+	var/general_emote_audio_cooldown = 3 SECONDS // BANDASTATION EDIT: 2 -> 3
 	/// How long is the specific emote cooldown triggered by this emote?
-	var/specific_emote_audio_cooldown = 5 SECONDS
+	var/specific_emote_audio_cooldown = 3 SECONDS // BANDASTATION EDIT: 5 -> 3
 	/// Does this emote's sound ignore walls?
 	var/sound_wall_ignore = FALSE
 
@@ -92,14 +92,20 @@
  * * intentional - Bool that says whether the emote was forced (FALSE) or not (TRUE).
  *
  */
-/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE)
-	var/msg = select_message_type(user, message, intentional)
-	if(params && message_param)
-		msg = select_param(user, params)
+/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, message_override = null) // BANDASTATION EDIT - Emote Panel
+	var/msg = message_override || select_message_type(user, message, intentional) // BANDASTATION EDIT - Emote Panel
+	if(params)
+		if(message_param)
+			msg = select_param(user, params)
+		else
+			msg = params
 
 	msg = replace_pronoun(user, msg)
 	if(!msg)
 		return
+
+	/// Use the type override if it exists
+	var/running_emote_type = type_override || emote_type
 
 	if(user.client)
 		user.log_message(msg, LOG_EMOTE)
@@ -116,13 +122,13 @@
 		playsound(source = user,soundin = tmp_sound,vol = 50, vary = FALSE, ignore_walls = sound_wall_ignore, frequency = frequency)
 
 
-	var/is_important = emote_type & EMOTE_IMPORTANT
-	var/is_visual = emote_type & EMOTE_VISIBLE
-	var/is_audible = emote_type & EMOTE_AUDIBLE
+	var/is_important = running_emote_type & EMOTE_IMPORTANT
+	var/is_visual = running_emote_type & EMOTE_VISIBLE
+	var/is_audible = running_emote_type & EMOTE_AUDIBLE
 	var/additional_message_flags = get_message_flags(intentional)
 
 	// Emote doesn't get printed to chat, runechat only
-	if(emote_type & EMOTE_RUNECHAT)
+	if(running_emote_type & EMOTE_RUNECHAT)
 		for(var/mob/viewer as anything in viewers(user))
 			if(isnull(viewer.client))
 				continue

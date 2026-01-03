@@ -55,11 +55,11 @@
 		if(!limb)
 			replace_limb(zone)
 			return
-		if((limb.get_damage() >= (limb.max_damage / 2)) || (!IS_ORGANIC_LIMB(limb)))
+		if((limb.get_damage() >= (limb.max_damage / 2)) || (!IS_ORGANIC_LIMB(limb)) && !HAS_TRAIT(owner, TRAIT_NODISMEMBER))
 			replace_limb(zone, limb)
 			return
 
-	if(owner.getToxLoss() > 40)
+	if(owner.get_tox_loss() > 40)
 		replace_blood()
 		return
 	var/tox_amount = 0
@@ -68,8 +68,8 @@
 	if(tox_amount > 10)
 		replace_blood()
 		return
-	if(owner.blood_volume < BLOOD_VOLUME_OKAY)
-		owner.blood_volume = BLOOD_VOLUME_NORMAL
+	if(owner.get_blood_volume() < BLOOD_VOLUME_OKAY)
+		owner.set_blood_volume(BLOOD_VOLUME_NORMAL)
 		to_chat(owner, span_warning("You feel your blood pulsing within you."))
 		return
 
@@ -85,7 +85,7 @@
 	qdel(implant)
 
 /obj/item/organ/heart/gland/heal/proc/reject_cyberimp(obj/item/organ/cyberimp/implant)
-	owner.visible_message(span_warning("[owner] vomits up his [implant.name]!"), span_userdanger("You suddenly vomit up your [implant.name]!"))
+	owner.visible_message(span_warning("[owner] vomits up his [declent_ru(implant.name, ACCUSATIVE)]!"), span_userdanger("You suddenly vomit up your [declent_ru(implant.name, ACCUSATIVE)]!"))
 	owner.vomit(REJECTION_VOMIT_FLAGS, lost_nutrition = 0)
 	implant.Remove(owner)
 	implant.forceMove(owner.drop_location())
@@ -171,7 +171,7 @@
 
 /obj/item/organ/heart/gland/heal/proc/replace_limb(body_zone, obj/item/bodypart/limb)
 	if(limb)
-		owner.visible_message(span_warning("[owner]'s [limb.plaintext_zone] suddenly detaches from [owner.p_their()] body!"), span_userdanger("Your [limb.plaintext_zone] suddenly detaches from your body!"))
+		owner.visible_message(span_warning("[owner]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] suddenly detaches from [owner.p_their()] body!"), span_userdanger("Your [limb.ru_plaintext_zone[PREPOSITIONAL]] suddenly detaches from your body!"))
 		playsound(owner, SFX_DESECRATION, 50, TRUE, -1)
 		limb.drop_limb()
 	else
@@ -194,13 +194,13 @@
 	var/keep_going = FALSE
 	owner.vomit(vomit_flags = (MOB_VOMIT_BLOOD | MOB_VOMIT_FORCE), lost_nutrition = 0, distance = 3)
 	owner.Stun(15)
-	owner.adjustToxLoss(-15, forced = TRUE)
+	owner.adjust_tox_loss(-15, forced = TRUE)
 
-	owner.blood_volume = min(BLOOD_VOLUME_NORMAL, owner.blood_volume + 20)
-	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
+	owner.adjust_blood_volume(20, maximum = BLOOD_VOLUME_NORMAL)
+	if(owner.get_blood_volume() < BLOOD_VOLUME_NORMAL)
 		keep_going = TRUE
 
-	if(owner.getToxLoss())
+	if(owner.get_tox_loss())
 		keep_going = TRUE
 	for(var/datum/reagent/toxin/R in owner.reagents.reagent_list)
 		owner.reagents.remove_reagent(R.type, 4)
@@ -226,7 +226,7 @@
 			gibs.streak(dirs)
 
 	var/obj/item/bodypart/chest/new_chest = new(null)
-	new_chest.replace_limb(owner, TRUE)
+	new_chest.replace_limb(owner)
 	qdel(chest)
 
 #undef REJECTION_VOMIT_FLAGS

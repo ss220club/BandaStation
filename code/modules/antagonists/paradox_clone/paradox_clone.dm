@@ -50,9 +50,8 @@
 	//dont want anyone noticing there's two now
 	var/mob/living/carbon/human/clone_human = owner.current
 	var/obj/item/clothing/under/sensor_clothes = clone_human.w_uniform
-	if(sensor_clothes)
-		sensor_clothes.sensor_mode = SENSOR_OFF
-		clone_human.update_suit_sensors()
+	if(istype(sensor_clothes))
+		sensor_clothes.set_sensor_mode(SENSOR_OFF)
 
 	// Perform a quick copy of existing memories.
 	// This may result in some minutely imperfect memories, but it'll do
@@ -67,7 +66,7 @@
 	var/name_and_job
 
 /datum/objective/paradox_clone_replace/update_explanation_text()
-	explanation_text = "Take [name_and_job || "someone's"]'s place. Avoid collateral damage - remember, your mission is to blend in!"
+	explanation_text = "Займите место [name_and_job || "кого-то"]. Избегайте лишних жертв - помните, ваша миссия - слиться с толпой!"
 
 /datum/objective/paradox_clone_replace/check_completion()
 	return completed || considered_alive(owner)

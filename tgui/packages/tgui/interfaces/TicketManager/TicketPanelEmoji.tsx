@@ -8,7 +8,7 @@ import {
 } from 'tgui-core/components';
 
 import { useBackend } from '../../backend';
-import { ManagerData } from './types';
+import type { ManagerData } from './types';
 
 export function TicketPanelEmoji(props) {
   const { data } = useBackend<ManagerData>();

@@ -39,12 +39,15 @@ at the cost of risking a vicious bite.**/
 		var/picked_item = pick_weight(loot_table)
 		hidden_item = new picked_item(src)
 
+	/* BANDASTATION REMOVAL START - Stupid TG Shit
 	var/datum/fish_source/moisture_trap/fish_source = new
 	if(prob(50)) // 50% chance there's another item to fish out of there
 		var/picked_item = pick_weight(loot_table)
 		fish_source.fish_table[picked_item] = 5
 		fish_source.fish_counts[picked_item] = 1;
+
 	AddComponent(/datum/component/fishing_spot, fish_source)
+	BANDASTATION REMOVAL END */
 
 
 /obj/structure/moisture_trap/Destroy()
@@ -148,7 +151,7 @@ at the cost of risking a vicious bite.**/
 	var/altar_result = show_radial_menu(user, src, altar_options, custom_check = CALLBACK(src, PROC_REF(check_menu), user), require_near = TRUE, tooltips = TRUE)
 	switch(altar_result)
 		if("Change Color")
-			var/chosen_color = input(user, "", "Choose Color", pants_color) as color|null
+			var/chosen_color = tgui_color_picker(user, "", "Choose Color", pants_color)
 			if(!isnull(chosen_color) && user.can_perform_action(src))
 				pants_color = chosen_color
 		if("Create Artefact")
@@ -250,6 +253,7 @@ at the cost of risking a vicious bite.**/
 	icon_state = "steam_vent"
 	anchored = TRUE
 	density = FALSE
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2.3, /datum/material/plastic = SMALL_MATERIAL_AMOUNT * 2)
 	/// How often does the vent reset the blow_steam cooldown.
 	var/steam_speed = 20 SECONDS
 	/// Is the steam vent active?

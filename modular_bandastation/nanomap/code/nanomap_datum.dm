@@ -22,4 +22,15 @@
 		map_ui_data["maxFloor"] = max_station_z_level
 		map_ui_data["lavalandLevel"] = lavaland_z_level
 
+		// Add ladders and stairs for navigator UI
+		var/list/ladders_and_stairs = list()
+		for(var/obj/structure/ladded_or_stairs as anything in (GLOB.ladders + GLOB.stairs))
+			ladders_and_stairs += list(list(
+				"posX" = ladded_or_stairs.x,
+				"posY" = ladded_or_stairs.y,
+				"posZ" = ladded_or_stairs.z,
+			))
+			
+		map_ui_data["stairs"] = ladders_and_stairs
+
 	return map_ui_data

@@ -3,6 +3,7 @@
 	select_name = "ion"
 	fire_sound = 'sound/items/weapons/ionrifle.ogg'
 	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect/blue
+	muzzle_flash_color = LIGHT_COLOR_BLUE
 
 /obj/item/ammo_casing/energy/ion/hos
 	projectile_type = /obj/projectile/ion/weak
@@ -53,6 +54,7 @@
 /obj/item/ammo_casing/energy/scatter
 	projectile_type = /obj/projectile/beam/disabler/scatter
 	select_name = "scatter"
+	delay = 5 // 0.5 SECONDS BANDASTATION ADDITION: DRAGNET REBALANCE BOUNTY
 	pellets = 10
 	variance = 10
 	harmful = FALSE
@@ -60,6 +62,7 @@
 /obj/item/ammo_casing/energy/snare
 	projectile_type = /obj/projectile/energy/snare
 	select_name = "snare"
+	delay = 5 // 0.5 SECONDS BANDASTATION ADDITION: DRAGNET REBALANCE BOUNTY
 	harmful = FALSE
 
 /obj/item/ammo_casing/energy/tesla_cannon

@@ -8,11 +8,11 @@ ADMIN_VERB(camera_view, R_DEBUG, "Camera Range Display", "Shows the range of cam
 
 	if(!on)
 		var/list/seen = list()
-		for(var/obj/machinery/camera/C as anything in GLOB.cameranet.cameras)
-			for(var/turf/T in C.can_see())
-				seen[T]++
-		for(var/turf/T in seen)
-			T.maptext = MAPTEXT(seen[T])
+		for(var/obj/machinery/camera/cam as anything in SScameras.cameras)
+			for(var/turf/cam_turf as anything in cam.can_see())
+				seen[cam]++
+		for(var/turf/seen_turf as anything in seen)
+			seen_turf.maptext = MAPTEXT(seen[seen_turf])
 	BLACKBOX_LOG_ADMIN_VERB("Show Camera Range")
 
 #ifdef TESTING
@@ -34,7 +34,7 @@ ADMIN_VERB_VISIBILITY(sec_camera_report, ADMIN_VERB_VISIBLITY_FLAG_MAPPING_DEBUG
 ADMIN_VERB(sec_camera_report, R_DEBUG, "Camera Report", "Get a printout of all camera issues.", ADMIN_CATEGORY_MAPPING)
 	var/list/obj/machinery/camera/CL = list()
 
-	for(var/obj/machinery/camera/C as anything in GLOB.cameranet.cameras)
+	for(var/obj/machinery/camera/C as anything in SScameras.cameras)
 		CL += C
 
 	var/output = {"<B>Camera Abnormalities Report</B><HR>
@@ -119,7 +119,7 @@ ADMIN_VERB(cmd_show_at_markers, R_DEBUG, "Show roundstart AT markers", "Places a
 
 	BLACKBOX_LOG_ADMIN_VERB("Show Roundstart Active Turf Markers")
 
-ADMIN_VERB(enable_mapping_verbs, R_DEBUG, "Enable Mapping Verbs", "Enable all mapping verbs.", ADMIN_CATEGORY_MAPPING)
+ADMIN_VERB(enable_mapping_verbs, R_DEBUG, "Enable Mapping Verbs", "Enable all mapping verbs.", ADMIN_CATEGORY_DEBUG) // BANDASTATION EDIT: Original - ADMIN_CATEGORY_MAPPING
 	SSadmin_verbs.update_visibility_flag(user, ADMIN_VERB_VISIBLITY_FLAG_MAPPING_DEBUG, TRUE)
 	BLACKBOX_LOG_ADMIN_VERB("Enable Debug Verbs")
 

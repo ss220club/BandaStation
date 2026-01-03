@@ -45,7 +45,7 @@
 
 /datum/species/moth/randomize_features()
 	var/list/features = ..()
-	features[FEATURE_MOTH_MARKINGS] = pick(SSaccessories.moth_markings_list)
+	features[FEATURE_MOTH_MARKINGS] = pick(SSaccessories.feature_list[FEATURE_MOTH_MARKINGS])
 	return features
 
 /datum/species/moth/get_scream_sound(mob/living/carbon/human/moth)
@@ -108,24 +108,26 @@
 		Due to that, it isn't of much use out in space. Their eyes are very sensitive."
 
 /datum/species/moth/get_species_description()
-	return "Hailing from a planet that was lost long ago, the moths travel \
-		the galaxy as a nomadic people aboard a colossal fleet of ships, seeking a new homeland."
+	return "Нианы инсектоидные гуманоиды, ведущие кочевой образ жизни. \
+	Они общительны, ценят коллектив и известны как торговцы, инженеры и посредники."
 
 /datum/species/moth/get_species_lore()
 	return list(
-		"Their homeworld lost to the ages, the moths live aboard the Grand Nomad Fleet. \
-		Made up of what could be found, bartered, repaired, or stolen the armada is a colossal patchwork \
-		built on a history of politely flagging travelers down and taking their things. Occasionally a moth \
-		will decide to leave the fleet, usually to strike out for fortunes to send back home.",
+	"Родной мир Ниан - Зувийен, некогда богатая и разнообразная планета с множеством биомов и форм жизни. \
+	Долгое время нианы жили разрозненными кланами, развивая культуру и науку, не покидая привычные регионы. \
+	Со временем нестабильность местной звезды начала необратимо разрушать климат планеты. \
+	Катастрофы и истощение ресурсов поставили цивилизацию ниан на грань вымирания.",
 
-		"Nomadic life produces a tight-knit culture, with moths valuing their friends, family, and vessels highly. \
-		Moths are gregarious by nature and do best in communal spaces. This has served them well on the galactic stage, \
-		maintaining a friendly and personable reputation even in the face of hostile encounters. \
-		It seems that the galaxy has come to accept these former pirates.",
+	"В условиях нарастающего кризиса нианы были вынуждены объединиться и пересмотреть своё устройство общества. \
+	Борьба за ресурсы сменилась поиском долгосрочных решений для спасения вида. \
+	Понимая, что Зувийен обречён, нианы начали активное освоение космоса и строительство звездного флота. \
+	Так началась история их народа за пределами родного мира.",
 
-		"Surprisingly, living together in a giant fleet hasn't flattened variance in dialect and culture. \
-		These differences are welcomed and encouraged within the fleet for the variety that they bring.",
-	)
+	"Попытки спасти Зувийен с помощью терраформирования и автономных систем завершились катастрофой. \
+	С тех пор нианы продолжают жить среди звёзд, сохраняя культуру и надежду однажды обрести новый дом.",
+)
+
+
 
 /datum/species/moth/create_pref_unique_perks()
 	var/list/to_add = list()

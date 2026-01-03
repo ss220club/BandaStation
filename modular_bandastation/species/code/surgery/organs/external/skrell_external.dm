@@ -8,9 +8,7 @@
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE
 
-	preference = "feature_skrell_head_tentacle"
-
-	dna_block = /datum/dna_block/feature/skrell_head_tentacle
+	dna_block = /datum/dna_block/feature/accessory/skrell_head_tentacle
 	restyle_flags = EXTERNAL_RESTYLE_FLESH
 
 	bodypart_overlay = /datum/bodypart_overlay/mutant/head_tentacle
@@ -26,6 +24,10 @@
 /obj/item/organ/head_tentacle/ui_action_click(mob/user, actiontype)
 	. = ..()
 	atom_storage.open_storage(user)
+
+/obj/item/organ/head_tentacle/on_bodypart_remove(obj/item/bodypart/limb, movement_flags)
+	. = ..()
+	atom_storage.remove_all()
 
 // MARK: Action
 
@@ -50,7 +52,7 @@
 	color_source = ORGAN_COLOR_INHERIT
 
 /datum/bodypart_overlay/mutant/head_tentacle/get_global_feature_list()
-	return SSaccessories.skrell_head_tentacles_list
+	return SSaccessories.feature_list[FEATURE_SKRELL_HEAD_TENTACLE]
 
 /datum/bodypart_overlay/mutant/head_tentacle/can_draw_on_bodypart(obj/item/bodypart/bodypart_owner)
 	var/mob/living/carbon/human/human = bodypart_owner.owner

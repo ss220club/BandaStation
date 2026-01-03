@@ -32,6 +32,7 @@ export const MESSAGE_TYPE_OOC = 'ooc';
 export const MESSAGE_TYPE_ADMINPM = 'adminpm';
 export const MESSAGE_TYPE_COMBAT = 'combat';
 export const MESSAGE_TYPE_ADMINCHAT = 'adminchat';
+export const MESSAGE_TYPE_MENTORCHAT = "mentorchat";
 export const MESSAGE_TYPE_MODCHAT = 'modchat';
 export const MESSAGE_TYPE_PRAYER = 'prayer';
 export const MESSAGE_TYPE_EVENTCHAT = 'eventchat';
@@ -39,8 +40,18 @@ export const MESSAGE_TYPE_ADMINLOG = 'adminlog';
 export const MESSAGE_TYPE_ATTACKLOG = 'attacklog';
 export const MESSAGE_TYPE_DEBUG = 'debug';
 
+type MessageType = {
+  type: string;
+  name: string;
+  description: string;
+} & Partial<{
+  selector: string;
+  important: boolean;
+  admin: boolean;
+}>;
+
 // Metadata for each message type
-export const MESSAGE_TYPES = [
+export const MESSAGE_TYPES: MessageType[] = [
   // Always-on types
   {
     type: MESSAGE_TYPE_SYSTEM,
@@ -118,6 +129,13 @@ export const MESSAGE_TYPES = [
     name: 'Admin Chat',
     description: 'ASAY messages',
     selector: '.admin_channel, .adminsay',
+    admin: true,
+  },
+  {
+    type: MESSAGE_TYPE_MENTORCHAT,
+    name: 'Mentor Chat',
+    description: 'MSAY messages',
+    selector: '.mentorsay',
     admin: true,
   },
   {

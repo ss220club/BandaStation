@@ -348,7 +348,7 @@
 	. = ..()
 	if (!.)
 		return
-	if(!check.dna.mutations.len)
+	if(!LAZYLEN(check.dna.mutations))
 		return FALSE
 	return TRUE
 
@@ -488,8 +488,8 @@
 	min_purity = 0.98
 
 /datum/experiment/scanning/points/bluespace_crystal
-	name = "Изучение блуспейс кристаллов"
-	description = "Исследуйте свойства блуспейс кристаллов путём сканирования искусственных или естественных вариантов. Это поможет нам глубже понять феномен блуспейса."
+	name = "Изучение блюспейс кристаллов"
+	description = "Исследуйте свойства блюспейс кристаллов путём сканирования искусственных или естественных вариантов. Это поможет нам глубже понять феномен блюспейса."
 	required_points = 1
 	required_atoms = list(
 		/obj/item/stack/ore/bluespace_crystal = 1,

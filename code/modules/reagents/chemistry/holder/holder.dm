@@ -338,6 +338,8 @@
 	include_source_subtypes = FALSE,
 	keep_data = FALSE,
 )
+	if(!total_volume)
+		return FALSE
 	if(!ispath(source_reagent_typepath))
 		stack_trace("invalid reagent path passed to convert reagent [source_reagent_typepath]")
 		return FALSE
@@ -776,10 +778,8 @@
  * * coeff - multiplier to be applied on temp diff between param temp and current temp
  */
 /datum/reagents/proc/expose_temperature(temperature, coeff = 0.02)
-	if(istype(my_atom,/obj/item/reagent_containers))
-		var/obj/item/reagent_containers/RCs = my_atom
-		if(RCs.reagent_flags & NO_REACT) //stasis holders IE cryobeaker
-			return
+	if(flags & NO_REACT) //stasis holders IE cryobeaker
+		return
 	var/temp_delta = (temperature - chem_temp) * coeff
 	if(temp_delta > 0)
 		chem_temp = min(chem_temp + max(temp_delta, 1), temperature)

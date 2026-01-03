@@ -68,7 +68,7 @@
 		var/mob/living/carbon/human/human_user = user
 		human_user.apply_damage(rand(force/2, force), BRUTE, human_user.get_active_hand())
 	else
-		living_user.adjustBruteLoss(rand(force/2, force))
+		living_user.adjust_brute_loss(rand(force/2, force))
 
 /obj/item/melee/baseball_bat/homerun/centcom/pre_attack(atom/movable/target, mob/living/user, params)
 	var/datum/component/transforming/transform_component = GetComponent(/datum/component/transforming)

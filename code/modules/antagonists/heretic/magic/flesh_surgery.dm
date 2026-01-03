@@ -126,7 +126,7 @@
 /datum/action/cooldown/spell/touch/flesh_surgery/proc/register_held_organ(obj/item/organ/new_held_organ, obj/item/melee/touch_attack/hand)
 	hand.vis_contents += new_held_organ
 	held_organ = new_held_organ
-	new_held_organ.flags_1 |= IS_ONTOP_1
+	ADD_TRAIT(new_held_organ, TRAIT_SKIP_BASIC_REACH_CHECK, REF(src))
 	new_held_organ.vis_flags |= VIS_INHERIT_PLANE
 	RegisterSignal(new_held_organ, COMSIG_MOVABLE_MOVED, PROC_REF(unregister_held_organ))
 	RegisterSignal(new_held_organ, COMSIG_QDELETING, PROC_REF(unregister_held_organ))
@@ -139,7 +139,7 @@
 /datum/action/cooldown/spell/touch/flesh_surgery/proc/unregister_held_organ(obj/item/organ/removed_organ)
 	LAZYREMOVE(attached_hand.vis_contents, removed_organ)
 	held_organ = null
-	removed_organ.flags_1 &= ~IS_ONTOP_1
+	REMOVE_TRAIT(removed_organ, TRAIT_SKIP_BASIC_REACH_CHECK, REF(src))
 	removed_organ.vis_flags &= ~VIS_INHERIT_PLANE
 	UnregisterSignal(removed_organ, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING))
 	// Reset item offsets
@@ -214,7 +214,7 @@
 		if(organ.organ_flags & (ORGAN_ROBOTIC|ORGAN_VITAL|ORGAN_UNREMOVABLE))
 			continue
 
-		organs_we_can_remove[organ.name] = organ
+		organs_we_can_remove[declent_ru(organ.name, ACCUSATIVE)] = organ
 
 	if(!length(organs_we_can_remove))
 		victim.balloon_alert(caster, "тут нет органов!")

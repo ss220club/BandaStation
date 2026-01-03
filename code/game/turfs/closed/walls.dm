@@ -1,7 +1,7 @@
 /turf/closed/wall
 	name = "wall"
 	gender = FEMALE
-	desc = "A huge chunk of iron used to separate rooms."
+	desc = "Массивный блок металла, используемый для разделения отсеков."
 	icon = 'icons/turf/walls/wall.dmi'
 	icon_state = "wall-0"
 	base_icon_state = "wall"
@@ -56,7 +56,7 @@
 	. = NONE
 	if(!isnull(held_item))
 		if((initial(smoothing_flags) & SMOOTH_DIAGONAL_CORNERS) && held_item.tool_behaviour == TOOL_WRENCH)
-			context[SCREENTIP_CONTEXT_LMB] = "Adjust Wall Corner"
+			context[SCREENTIP_CONTEXT_LMB] = "Отрегулировать угол стены"
 			return CONTEXTUAL_SCREENTIP_SET
 
 /turf/closed/wall/mouse_drop_receive(atom/dropping, mob/user, params)
@@ -75,11 +75,11 @@
 /turf/closed/wall/examine(mob/user)
 	. = ..()
 	if(initial(smoothing_flags) & SMOOTH_DIAGONAL_CORNERS)
-		. += span_notice("You could adjust its corners with a <b>wrench</b>.")
+		. += span_notice("Подтяните <b>болты</b> для регулирования углов.")
 	. += deconstruction_hints(user)
 
 /turf/closed/wall/proc/deconstruction_hints(mob/user)
-	return span_notice("The outer plating is <b>welded</b> firmly in place.")
+	return span_notice("Внешняя обшивка накрепко <b>приварена</b> к каркасу.")
 
 /turf/closed/wall/attack_tk()
 	return
@@ -93,10 +93,6 @@
 		if(newgirder) //maybe we don't /want/ a girder!
 			transfer_fingerprints_to(newgirder)
 
-	for(var/obj/O in src.contents) //Eject contents!
-		if(istype(O, /obj/structure/sign/poster))
-			var/obj/structure/sign/poster/P = O
-			INVOKE_ASYNC(P, TYPE_PROC_REF(/obj/structure/sign/poster, roll_and_drop), src)
 	if(decon_type)
 		ChangeTurf(decon_type, flags = CHANGETURF_INHERIT_AIR)
 	else
@@ -162,47 +158,45 @@
 	else
 		playsound(src, 'sound/effects/bang.ogg', 50, TRUE)
 		add_dent(WALL_DENT_HIT)
-		user.visible_message(span_danger("[user] smashes \the [src]!"), \
-					span_danger("You smash \the [src]!"), \
-					span_hear("You hear a booming smash!"))
+		user.visible_message(span_danger("[user] крушит [src.declent_ru(ACCUSATIVE)]!"), \
+					span_danger("Вы крушите [src.declent_ru(ACCUSATIVE)]!"), \
+					span_hear("Вы слышите оглушительный грохот!"))
 	return TRUE
 
 /**
  *Deals damage back to the hulk's arm.
  *
  *When a hulk manages to break a wall using their hulk smash, this deals back damage to the arm used.
- *This is in its own proc just to be easily overridden by other wall types. Default allows for three
- *smashed walls per arm. Also, we use CANT_WOUND here because wounds are random. Wounds are applied
- *by hulk code based on arm damage and checked when we call break_an_arm().
+ *This is in its own proc just to be easily overridden by other wall types. Default will likely cause a
+ *critical bone wound in at least three punches.
  *Arguments:
  **arg1 is the arm to deal damage to.
  **arg2 is the hulk
  */
 /turf/closed/wall/proc/hulk_recoil(obj/item/bodypart/arm, mob/living/carbon/human/hulkman, damage = 20)
-	hulkman.apply_damage(damage, BRUTE, arm, wound_bonus = CANT_WOUND)
 	var/datum/mutation/hulk/smasher = locate(/datum/mutation/hulk) in hulkman.dna.mutations
-	if(!smasher || !damage) //sanity check but also snow and wood walls deal no recoil damage, so no arm breaky
+	if(!smasher || !damage || smasher.no_recoil) //sanity check but also snow and wood walls deal no recoil damage, so no arm breaky. Also, if our type of hulk doesn't cause recoil damage, return.
 		return
-	smasher.break_an_arm(arm)
+	hulkman.apply_damage(damage, BRUTE, arm, wound_bonus = 0) //enough damage to regularly result in at least a breakage.
 
 /turf/closed/wall/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	to_chat(user, span_notice("You push the wall but nothing happens!"))
+	to_chat(user, span_notice("Вы толкаете [src.declent_ru(ACCUSATIVE)], но ничего не происходит."))
 	playsound(src, 'sound/items/weapons/genhit.ogg', 25, TRUE)
 	add_fingerprint(user)
 
 /turf/closed/wall/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if (!ISADVANCEDTOOLUSER(user))
-		to_chat(user, span_warning("You don't have the dexterity to do this!"))
+		to_chat(user, span_warning("У вас недостаточно ловкости для этого!"))
 		return ITEM_INTERACT_BLOCKING
 
 	add_fingerprint(user)
 
 	//the istype cascade has been spread among various procs for easy overriding
-	if(try_clean(tool, user) || try_wallmount(tool, user) || try_decon(tool, user))
+	if(try_clean(tool, user) || try_decon(tool, user))
 		return ITEM_INTERACT_SUCCESS
 
 	return NONE
@@ -215,27 +209,13 @@
 		if(!W.tool_start_check(user, amount=1))
 			return FALSE
 
-		to_chat(user, span_notice("You begin fixing dents on the wall..."))
+		to_chat(user, span_notice("Вы начинаете чинить вмятины на [src.declent_ru(PREPOSITIONAL)]..."))
 		if(W.use_tool(src, user, 0, volume=100))
 			if(iswallturf(src) && LAZYLEN(dent_decals))
-				to_chat(user, span_notice("You fix some dents on the wall."))
+				to_chat(user, span_notice("Вы запаиваете некоторые вмятины на [src.declent_ru(PREPOSITIONAL)]."))
 				cut_overlay(dent_decals)
 				dent_decals.Cut()
 			return TRUE
-
-	return FALSE
-
-/turf/closed/wall/proc/try_wallmount(obj/item/W, mob/user)
-	//check for wall mounted frames
-	if(istype(W, /obj/item/wallframe))
-		var/obj/item/wallframe/F = W
-		if(F.try_build(src, user))
-			F.attach(src, user)
-			return TRUE
-		return FALSE
-	//Poster stuff
-	else if(istype(W, /obj/item/poster) && Adjacent(user)) //no tk memes.
-		return place_poster(W,user)
 
 	return FALSE
 
@@ -244,10 +224,10 @@
 		if(!I.tool_start_check(user, amount=round(slicing_duration / 50), heat_required = HIGH_TEMPERATURE_REQUIRED))
 			return FALSE
 
-		to_chat(user, span_notice("You begin slicing through the outer plating..."))
+		to_chat(user, span_notice("Вы начинаете вгрызаться во внешнюю обшивку..."))
 		if(I.use_tool(src, user, slicing_duration, volume=100))
 			if(iswallturf(src))
-				to_chat(user, span_notice("You remove the outer plating."))
+				to_chat(user, span_notice("Вы снимаете внешнюю обшивку с каркаса."))
 				dismantle_wall()
 			return TRUE
 
@@ -286,11 +266,12 @@
 	return FALSE
 
 /turf/closed/wall/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
-	switch(rcd_data["[RCD_DESIGN_MODE]"])
+	switch(rcd_data[RCD_DESIGN_MODE])
 		if(RCD_WALLFRAME)
-			var/obj/item/wallframe/wallmount = rcd_data["[RCD_DESIGN_PATH]"]
+			var/obj/item/wallframe/wallmount = rcd_data[RCD_DESIGN_PATH]
 			var/obj/item/wallframe/new_wallmount = new wallmount(user.drop_location())
-			return try_wallmount(new_wallmount, user, src)
+			if(new_wallmount.interact_with_atom(src, user) == ITEM_INTERACT_SUCCESS)
+				return TRUE
 		if(RCD_DECONSTRUCT)
 			ScrapeAway()
 			return TRUE
@@ -344,6 +325,6 @@
 	else
 		smoothing_flags |= SMOOTH_DIAGONAL_CORNERS
 	QUEUE_SMOOTH(src)
-	to_chat(user, span_notice("You adjust [src]."))
+	to_chat(user, span_notice("Вы регулируете угол [src.declent_ru(ACCUSATIVE)]."))
 	tool.play_tool_sound(src)
 	return ITEM_INTERACT_SUCCESS

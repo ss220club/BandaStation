@@ -10,10 +10,12 @@
 /datum/mood_event/on_fire
 	description = "Я ГОРЮ!!!"
 	mood_change = -12
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/suffocation
 	description = "НЕ МОГУ... ДЫШАТЬ..."
 	mood_change = -12
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/burnt_thumb
 	description = "Не стоило играть с зажигалками..."
@@ -32,6 +34,7 @@
 	description = "Я весь в креме. На вкус как пирог."
 	mood_change = -2
 	timeout = 3 MINUTES
+	event_flags = MOOD_EVENT_WHIMSY // if whimsical, no penalty
 
 /datum/mood_event/inked
 	description = "I've been splashed with squid ink. Tastes like salt."
@@ -42,6 +45,7 @@
 	description = "Я подскользнулся. Следует быть более осторожным..."
 	mood_change = -2
 	timeout = 3 MINUTES
+	event_flags = MOOD_EVENT_WHIMSY // if whimsical, no penalty
 
 /datum/mood_event/eye_stab
 	description = "Когда-то и меня вела дорога приключений... А потом мне проткнули отверткой глаз."
@@ -81,16 +85,11 @@
 	description = "Ай! Такое ощущение, что я уснул на этой конечности."
 	mood_change = -3
 	timeout = 2 MINUTES
-
-/datum/mood_event/reattachment/New(mob/M, ...)
-	if(HAS_TRAIT(M, TRAIT_ANALGESIA))
-		qdel(src)
-		return
-	return ..()
+	event_flags = MOOD_EVENT_PAIN
 
 /datum/mood_event/reattachment/add_effects(obj/item/bodypart/limb)
 	if(limb)
-		description = "Ай! Такое ощущение, что я уснул на <i>[limb.plaintext_zone]</i>."
+		description = "Ай! Такое ощущение, что я уснул на <i>[limb.ru_plaintext_zone[PREPOSITIONAL]]</i>."
 
 /datum/mood_event/tased
 	description = "There's no \"z\" in \"taser\". It's in the zap."
@@ -117,12 +116,7 @@
 	description = "Этот грёбанный стол, чёрт, как же больно..."
 	mood_change = -3
 	timeout = 3 MINUTES
-
-/datum/mood_event/table_limbsmash/New(mob/M, ...)
-	if(HAS_TRAIT(M, TRAIT_ANALGESIA))
-		qdel(src)
-		return
-	return ..()
+	event_flags = MOOD_EVENT_PAIN
 
 /datum/mood_event/table_limbsmash/add_effects(obj/item/bodypart/banged_limb)
 	if(banged_limb)
@@ -147,15 +141,18 @@
 /datum/mood_event/photophobia
 	description = "Слишком яркий свет..."
 	mood_change = -3
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/nyctophobia
 	description = "Здесь слишком темно..."
 	mood_change = -3
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/claustrophobia
 	description = "Я в заперти?! Дайте мне выйти!!!"
 	mood_change = -7
 	timeout = 1 MINUTES
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/bright_light
 	description = "Я ненавижу свет... Мне нужно найти место по-темнее..."
@@ -177,9 +174,14 @@
 	description = "Я на нервах и на стрёме и не могу стоять на месте!!"
 	mood_change = -2
 
+/datum/mood_event/jittery/add_effects(...)
+	if(HAS_PERSONALITY(owner, /datum/personality/paranoid))
+		mood_change -= 1
+
 /datum/mood_event/choke
 	description = "Я НЕ МОГУ ДЫШАТЬ!!!"
 	mood_change = -10
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/vomit
 	description = "Меня только что вырвало. Отвратительно."
@@ -195,27 +197,25 @@
 	description = "Медицина может и сделает мне лучше, но сейчас она чертовски жжёт."
 	mood_change = -5
 	timeout = 60 SECONDS
-
-/datum/mood_event/painful_medicine/New(mob/M, ...)
-	if(HAS_TRAIT(M, TRAIT_ANALGESIA))
-		qdel(src)
-		return
-	return ..()
+	event_flags = MOOD_EVENT_PAIN
 
 /datum/mood_event/startled
 	description = "Hearing that word made me think about something scary."
 	mood_change = -1
 	timeout = 1 MINUTES
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/phobia
-	description = "I saw something very frightening."
+	description = "I saw something very frightening!"
 	mood_change = -4
 	timeout = 4 MINUTES
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/spooked
 	description = "Грохот этих костей... Он до сих пор преследует меня."
 	mood_change = -4
 	timeout = 4 MINUTES
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/notcreeping
 	description = "Голоса недовольны и болезненно заставляют мои мысли вернуться к выполнению задачи."
@@ -243,30 +243,24 @@
 /datum/mood_event/back_pain
 	description = "Сумки никогда не сидят хорошо на моей спине, черт, как же больно!"
 	mood_change = -15
-
-/datum/mood_event/back_pain/New(mob/M, ...)
-	if(HAS_TRAIT(M, TRAIT_ANALGESIA))
-		qdel(src)
-		return
-	return ..()
-
-/datum/mood_event/sad_empath
-	description = "Кому-то грустно..."
-	mood_change = -1
-	timeout = 60 SECONDS
-
-/datum/mood_event/sad_empath/add_effects(mob/sadtarget)
-	description = "[capitalize(sadtarget.declent_ru(NOMINATIVE))] выглядит грустно..."
+	event_flags = MOOD_EVENT_PAIN
 
 /datum/mood_event/sacrifice_bad
 	description = "Эти чертовы дикари!"
 	mood_change = -5
 	timeout = 2 MINUTES
+	event_flags = MOOD_EVENT_SPIRITUAL
 
 /datum/mood_event/artbad
 	description = "У меня из задницы выходят произведения получше, чем это."
 	mood_change = -2
 	timeout = 2 MINUTES
+	event_flags = MOOD_EVENT_ART
+
+/datum/mood_event/artbad/add_effects()
+	if(HAS_PERSONALITY(owner, /datum/personality/creative))
+		mood_change = 0
+		description = "Everyone has to start their art journey somewhere!"
 
 /datum/mood_event/graverobbing
 	description = "Я только что осквернил чью-то могилу... Не могу поверить себе..."
@@ -280,6 +274,7 @@
 /datum/mood_event/gunpoint
 	description = "Он сошел с ума! Мне нужно быть осторожным..."
 	mood_change = -10
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/tripped
 	description = "Не могу поверить, что я попался на самый старый прикол!"
@@ -295,6 +290,7 @@
 	description = "Я УВИДЕЛ УЖАС ЗА ПРЕДЕЛАМИ ЭТОГО МИРА. РЕАЛЬНОСТЬ РАЗВЕРНУЛАСЬ НА МОИХ ГЛАЗАХ!"
 	mood_change = -25
 	timeout = 4 MINUTES
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/high_five_full_hand
 	description = "О боже, я даже не умею правильно давать пятюню..."
@@ -320,6 +316,7 @@
 /datum/mood_event/surgery
 	description = "ОНИ РЕЖУТ МЕНЯ!!"
 	mood_change = -8
+	event_flags = MOOD_EVENT_FEAR
 	var/surgery_completed = FALSE
 
 /datum/mood_event/surgery/success
@@ -423,16 +420,19 @@
 /datum/mood_event/gamer_withdrawal
 	description = "Вот бы сейчас поиграть во что-нибудь..."
 	mood_change = -5
+	event_flags = MOOD_EVENT_GAMING
 
 /datum/mood_event/gamer_lost
 	description = "Если я так плох в видеоиграх, могу ли я называть себя геймером?"
-	mood_change = -10
+	mood_change = -6
 	timeout = 10 MINUTES
+	event_flags = MOOD_EVENT_GAMING
 
 /datum/mood_event/lost_52_card_pickup
 	description = "Как же стыдно! Придется с позором поднимать все эти карты с пола..."
 	mood_change = -3
 	timeout = 3 MINUTES
+	event_flags = MOOD_EVENT_WHIMSY | MOOD_EVENT_GAMING
 
 /datum/mood_event/russian_roulette_lose_cheater
 	description = "I gambled and lost! Good thing I wasn't aiming for my head..."
@@ -443,6 +443,12 @@
 	description = "Я поставил на кон свою жизнь и проиграл! Это такой конец..."
 	mood_change = -20
 	timeout = 10 MINUTES
+
+/datum/mood_event/russian_roulette_lose/add_effects()
+	if(HAS_PERSONALITY(owner, /datum/personality/gambler))
+		mood_change *= 0.5
+		description = "I gambled my life and lost! Truth is, the game was rigged from the start..."
+		return
 
 /datum/mood_event/bad_touch_bear_hug
 	description = "Меня слишком сильно обняли."
@@ -473,11 +479,17 @@
 	description = "ЛУНА СУДИТ И СЧИТАЕТ МЕНЯ ЖАЖДУЩИМ!!!"
 	mood_change = -3
 	timeout = 5 MINUTES
+	event_flags = MOOD_EVENT_FEAR
+
+/datum/mood_event/moon_insanity/add_effects()
+	if(HAS_PERSONALITY(owner, /datum/personality/spiritual))
+		mood_change *= 2
 
 /datum/mood_event/amulet_insanity
-	description = "Я вИжУ сВеТ, и ЕгО нУжНо ПоТуШиТь"
+	description = "Я вИжУ сВеТ, и ЕгО нУжНо ПоТуШиТь!"
 	mood_change = -6
 	timeout = 5 MINUTES
+	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/mallet_humiliation
 	description = "Попасть под удар такого глупого оружия довольно унизительно..."
@@ -535,7 +547,94 @@
 		description = "Blowing smoke in my face, really?"
 		mood_change = 0
 
+/datum/mood_event/slots/loss
+	description = "Вот блин!"
+	mood_change = -2
+	timeout = 5 MINUTES
+	event_flags = MOOD_EVENT_GAMING
+
+/datum/mood_event/slots/loss/add_effects()
+	if(HAS_PERSONALITY(owner, /datum/personality/gambler))
+		mood_change = 0
+		description = "Вот блин."
+	if(HAS_PERSONALITY(owner, /datum/personality/industrious) || HAS_PERSONALITY(owner, /datum/personality/slacking/diligent))
+		mood_change *= 1.5
+
 /datum/mood_event/lost_control_of_life
 	description = "I've lost control of my life."
 	mood_change = -5
 	timeout = 5 MINUTES
+
+/datum/mood_event/empathetic_sad
+	description = "Seeing sad people makes me sad."
+	mood_change = -2
+	timeout = 3 MINUTES
+
+/datum/mood_event/misanthropic_sad
+	description = "Seeing happy people makes me uneasy."
+	mood_change = -2
+	timeout = 3 MINUTES
+
+/datum/mood_event/paranoid/one_on_one
+	description = "I'm alone with someone - what if they want to kill me?"
+	mood_change = -3
+	event_flags = MOOD_EVENT_FEAR
+
+/datum/mood_event/paranoid/large_group
+	description = "There are so many people around - any one of them could be out to get me!"
+	mood_change = -3
+	event_flags = MOOD_EVENT_FEAR
+
+/datum/mood_event/nt_disillusioned
+	description = "I hate the company, and everything it stands for."
+	mood_change = -2
+
+/datum/mood_event/disillusioned_revs_lost
+	description = "The revolution was defeated... greaaaat."
+	mood_change = -2
+	timeout = 10 MINUTES
+
+/datum/mood_event/loyalist_revs_win
+	description = "The revolution was a success... This will hurt quarterly profits."
+	mood_change = -2
+	timeout = 10 MINUTES
+
+/datum/mood_event/slacking_off_diligent
+	description = "I should get back to work."
+	mood_change = -1
+
+/datum/mood_event/unimaginative_patronage
+	description = "That felt like a waste of money."
+	mood_change = -2
+	timeout = 5 MINUTES
+
+/datum/mood_event/unimaginative_framing
+	description = "I could've hung something more useful there."
+	mood_change = -2
+	timeout = 5 MINUTES
+
+/datum/mood_event/unimaginative_sculpting
+	description = "That felt like a waste of materials."
+	mood_change = -2
+	timeout = 5 MINUTES
+
+/datum/mood_event/splattered_with_blood
+	description = "Eugh, I just got coated in blood!"
+	mood_change = -4
+	timeout = 4 MINUTES
+
+/datum/mood_event/splattered_with_blood/can_effect_mob(datum/mood/home, mob/living/who, ...)
+	if(isvampire(who))
+		return FALSE
+
+	return ..()
+
+/datum/mood_event/splattered_with_blood/add_effects(...)
+	if(HAS_TRAIT(owner, TRAIT_CULT_HALO))
+		mood_change = 2
+		description = "Blood, blood! The Geometer will be pleased."
+		return
+	if(HAS_TRAIT(owner, TRAIT_MORBID) || HAS_TRAIT(owner, TRAIT_EVIL))
+		mood_change = 0
+		description = "I just got coated in blood. Fascinating!"
+		return

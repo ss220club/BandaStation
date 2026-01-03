@@ -197,7 +197,7 @@
 	if(!istype(charger))
 		return
 
-	var/datum/component/material_container/mat_container = charger.materials.mat_container
+	var/datum/material_container/mat_container = charger.materials.mat_container
 	if(!mat_container || charger.materials.on_hold())
 		charger.sendmats = FALSE
 		return
@@ -277,7 +277,7 @@
 		if(!isnull(details[SKIN_PIXEL_X]))
 			cyborg.base_pixel_x = details[SKIN_PIXEL_X]
 		if(!isnull(details[SKIN_PIXEL_Y]))
-			cyborg.base_pixel_y = details[SKIN_PIXEL_Y]
+			cyborg.base_pixel_z = details[SKIN_PIXEL_Y]
 		if(!isnull(details[SKIN_LIGHT_KEY]))
 			special_light_key = details[SKIN_LIGHT_KEY]
 		if(!isnull(details[SKIN_HAT_OFFSET]))
@@ -300,8 +300,18 @@
 
 /obj/item/robot_model/proc/do_transform_delay()
 	var/mob/living/silicon/robot/cyborg = loc
+	// BANDASTATION ADDITION - Borg Skins
+	var/animation_state = "[cyborg_base_icon]_transform"
+	var/has_animation = icon_states(cyborg.icon).Find(animation_state)
+
+	if(!has_animation)
+		do_smoke(1, 0, src, get_turf(src), /obj/effect/particle_effect/fluid/smoke)
+
 	sleep(0.1 SECONDS)
-	flick("[cyborg_base_icon]_transform", cyborg)
+
+	if(has_animation)
+		flick(animation_state, cyborg)
+	// BANDASTATION ADDITION END
 	ADD_TRAIT(cyborg, TRAIT_NO_TRANSFORM, REF(src))
 	if(locked_transform)
 		cyborg.ai_lockdown = TRUE
@@ -317,6 +327,7 @@
 			'sound/items/tools/welder.ogg',
 			'sound/items/tools/ratchet.ogg',
 			), 80, TRUE, -1)
+		do_sparks(2, FALSE, src) // BANDASTATION ADDITION - Borg Skins
 		sleep(0.7 SECONDS)
 	cyborg.SetLockdown(FALSE)
 	cyborg.ai_lockdown = FALSE
@@ -421,16 +432,12 @@
 	button_icon_state = "meson"
 
 /datum/action/cooldown/borg_meson/Activate()
-	if(usr.sight & SEE_TURFS)
-		usr.clear_sight(SEE_TURFS)
-		owner.lighting_cutoff_red += 5
-		owner.lighting_cutoff_green += 15
-		owner.lighting_cutoff_blue += 5
+	var/mob/living/silicon/robot/borg = owner
+	if(borg.sight & SEE_TURFS)
+		borg.sight_mode = BORGDEFAULT
 	else
-		usr.add_sight(SEE_TURFS)
-		owner.lighting_cutoff_red -= 5
-		owner.lighting_cutoff_green -= 15
-		owner.lighting_cutoff_blue -= 5
+		borg.sight_mode = BORGMESON
+	borg.update_sight()
 
 /obj/item/robot_model/engineering/be_transformed_to(obj/item/robot_model/old_model, forced = FALSE)
 	var/datum/action/cooldown/borg_meson/night_vision = new(loc)
@@ -988,16 +995,15 @@
 /datum/action/cooldown/borg_thermal
 	name = "Toggle Thermal Night Vision"
 	button_icon = 'icons/mob/actions/actions_mecha.dmi'
-	button_icon_state = "meson"
+	button_icon_state = "thermal"
 
 /datum/action/cooldown/borg_thermal/Activate()
-	if(usr.sight & SEE_TURFS)
-		usr.clear_sight(SEE_TURFS|SEE_MOBS)
-		usr.lighting_cutoff = LIGHTING_CUTOFF_VISIBLE
+	var/mob/living/silicon/robot/borg = owner
+	if(borg.sight & SEE_MOBS)
+		borg.sight_mode = BORGDEFAULT
 	else
-		usr.add_sight(SEE_TURFS|SEE_MOBS)
-		usr.lighting_cutoff = LIGHTING_CUTOFF_HIGH
-	usr.sync_lighting_plane_cutoff()
+		borg.sight_mode = BORGTHERM
+	borg.update_sight()
 
 /obj/item/robot_model/saboteur/be_transformed_to(obj/item/robot_model/old_model, forced = FALSE)
 	var/datum/action/cooldown/borg_thermal/thermal_vision = new(loc)

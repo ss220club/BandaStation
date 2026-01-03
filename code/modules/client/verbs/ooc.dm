@@ -4,7 +4,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 ///talking in OOC uses this
 /client/verb/ooc(msg as text)
 	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
-	set category = "OOC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "OOC"
 
 	if(GLOB.say_disabled) //This is here to try to identify lag problems
 		to_chat(usr, span_danger("Общение было заблокировано администрацией."))
@@ -145,7 +145,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 		return
 
 ADMIN_VERB(set_ooc_color, R_FUN, "Set Player OOC Color", "Modifies the global OOC color.", ADMIN_CATEGORY_SERVER)
-	var/newColor = input(user, "Please select the new player OOC color.", "OOC color") as color|null
+	var/newColor = tgui_color_picker(user, "Please select the new player OOC color.", "OOC color")
 	if(isnull(newColor))
 		return
 	var/new_color = sanitize_color(newColor)
@@ -347,7 +347,7 @@ ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC
 
 /client/verb/fit_viewport()
 	set name = "Fit Viewport"
-	set category = "OOC"
+	set category = "Special" // BANDASTATION REPLACEMENT: Original: "OOC"
 	set desc = "Fit the width of the map window to match the viewport"
 
 	// Fetch aspect ratio
@@ -424,15 +424,14 @@ ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC
 /client/proc/attempt_auto_fit_viewport()
 	if (!prefs?.read_preference(/datum/preference/toggle/auto_fit_viewport))
 		return
+	// No need to attempt to fit the viewport on non-initialized clients as they'll auto-fit viewport right before finishing init
 	if(fully_created)
 		INVOKE_ASYNC(src, VERB_REF(fit_viewport))
-	else //Delayed to avoid wingets from Login calls.
-		addtimer(CALLBACK(src, VERB_REF(fit_viewport), 1 SECONDS))
 
 /client/verb/policy()
 	set name = "Show Policy"
 	set desc = "Show special server rules related to your current character."
-	set category = "OOC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "OOC"
 
 	//Collect keywords
 	var/list/keywords = mob.get_policy_keywords()
@@ -461,7 +460,7 @@ ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC
 /client/proc/export_preferences()
 	set name = "Export Preferences"
 	set desc = "Export your current preferences to a file."
-	set category = "OOC"
+	set category = "Special" // BANDASTATION REPLACEMENT: Original: "OOC"
 
 	ASSERT(prefs, "User attempted to export preferences while preferences were null!") // what the fuck
 
@@ -470,12 +469,12 @@ ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC
 /client/verb/map_vote_tally_count()
 	set name = "Show Map Vote Tallies"
 	set desc = "View the current map vote tally counts."
-	set category = "Server"
+	set category = "OOC" // BANDASTATION REPLACEMENT: Original: "Server"
 	to_chat(mob, SSmap_vote.tally_printout)
 
 
 /client/verb/linkforumaccount()
-	set category = "OOC"
+	set category = null // BANDASTATION REPLACEMENT: Original: "OOC"
 	set name = "Link Forum Account"
 	set desc = "Validates your byond account to your forum account. Required to post on the forums."
 

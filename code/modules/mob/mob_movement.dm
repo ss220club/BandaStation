@@ -382,10 +382,14 @@
  * force_drop = the slip forces them to drop held items
  * immobilize = time (in deciseconds) the slip leaves them immobilized
  */
-/mob/proc/slip(knockdown_amount, obj/slipped_on, lube_flags, paralyze, daze, force_drop = FALSE, immobilize) /// BANDASTATION EDIT - Immobilizing slippery
-	add_mob_memory(/datum/memory/was_slipped, antagonist = slipped_on)
+/mob/proc/slip(knockdown_amount, obj/slipped_on, lube_flags, paralyze, daze, force_drop = FALSE, immobilize) // BANDASTATION EDIT - Immobilizing slippery
+	SEND_SIGNAL(src, COMSIG_MOB_SLIPPED, knockdown_amount, slipped_on, lube_flags, paralyze, daze, force_drop, immobilize) // BANDASTATION EDIT - Immobilizing slippery
 
-	SEND_SIGNAL(src, COMSIG_MOB_SLIPPED, knockdown_amount, slipped_on, lube_flags, paralyze, daze, force_drop, immobilize) /// BANDASTATION EDIT - Immobilizing slippery
+/mob/living/slip(knockdown_amount, obj/slipped_on, lube_flags, paralyze, daze, force_drop = FALSE, immobilize) // BANDASTATION EDIT - Immobilizing slippery
+	add_mob_memory(/datum/memory/was_slipped, antagonist = slipped_on)
+	add_mood_event("slipped", /datum/mood_event/slipped)
+	add_personality_mood_to_viewers(src, "slip_observed", list(/datum/personality/whimsical = /datum/mood_event/whimsical_slip), range = 5)
+	return ..()
 
 //bodypart selection verbs - Cyberboss
 //8: repeated presses toggles through head - eyes - mouth

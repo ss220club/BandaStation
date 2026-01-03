@@ -16,7 +16,7 @@
 	/// Coefficient applied to consumed materials. Lower values result in lower material consumption.
 	var/creation_efficiency = 2
 	///The container to hold materials
-	var/datum/component/material_container/materials
+	var/datum/material_container/materials
 	/// The inserted board
 	var/obj/item/circuitboard/machine/inserted_board
 	/// List of components that need to be packed along with the circuitboard
@@ -33,8 +33,8 @@
 /obj/machinery/flatpacker/Initialize(mapload)
 	register_context()
 
-	materials = AddComponent( \
-		/datum/component/material_container, \
+	materials = new ( \
+		src, \
 		SSmaterials.materials_by_category[MAT_CATEGORY_SILO], \
 		0, \
 		MATCONTAINER_EXAMINE, \
@@ -44,10 +44,10 @@
 	return ..()
 
 /obj/machinery/flatpacker/Destroy()
-	materials = null
+	QDEL_NULL(materials)
 	QDEL_NULL(inserted_board)
 	QDEL_LIST(flatpacked_components)
-	. = ..()
+	return ..()
 
 /obj/machinery/flatpacker/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = NONE
@@ -219,7 +219,7 @@
 	return costs
 
 /obj/machinery/flatpacker/base_item_interaction(mob/living/user, obj/item/attacking_item, list/modifiers)
-	if(attacking_item.flags_1 & HOLOGRAM_1 || attacking_item.item_flags & ABSTRACT)
+	if(attacking_item.flags_1 & HOLOGRAM_1)
 		return ITEM_INTERACT_SKIP_TO_ATTACK
 
 	if(istype(attacking_item, /obj/item/circuitboard/machine))
@@ -235,7 +235,7 @@
 		inserted_board = attacking_item
 
 		//compute the needed mats from its stock parts
-		for(var/type as anything in inserted_board.req_components)
+		for(var/type in inserted_board.req_components)
 			//these don't count to the final cost as they have to inserted manually
 			if(type in inserted_board.flatpack_components)
 				continue
@@ -373,7 +373,7 @@
 				say("No power to dispense sheets")
 				return
 
-			materials.retrieve_sheets(amount, material)
+			materials.retrieve_stack(amount, material)
 			return TRUE
 
 /**

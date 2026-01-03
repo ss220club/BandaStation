@@ -250,6 +250,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		send2chat(new /datum/tgs_message_content("[GLOB.round_id ? "Раунд [GLOB.round_id]" : "Раунд только что"] закончился."), channel_tag)
 	send2adminchat("Server", "Round just ended.")
 
+	send_round_end_webhook() // BANDASATION ADD
+
 	if(length(CONFIG_GET(keyed_list/cross_server)))
 		send_news_report()
 
@@ -257,6 +259,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 
 	handle_hearts()
 	set_observer_default_invisibility(0, span_warning("Раунд закончился! Вы теперь видны для живых."))
+	INVOKE_ASYNC(SSvote, TYPE_PROC_REF(/datum/controller/subsystem/vote, initiate_vote), /datum/vote/map_vote, vote_initiator_name = "Map Rotation", forced = TRUE) // BANDASTATION ADD - move to roundend
 
 	CHECK_TICK
 
@@ -289,11 +292,14 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	//stop collecting feedback during grifftime
 	SSblackbox.Seal()
 
-	world.TgsTriggerEvent("tg-Roundend", wait_for_completion = TRUE)
+	TriggerRoundEndTgsEvent()
 
 	sleep(5 SECONDS)
 	ready_for_reboot = TRUE
 	standard_reboot()
+
+/datum/controller/subsystem/ticker/proc/TriggerRoundEndTgsEvent()
+	world.TgsTriggerEvent("tg-Roundend", wait_for_completion = TRUE)
 
 /datum/controller/subsystem/ticker/proc/standard_reboot()
 	if(ready_for_reboot)
@@ -523,9 +529,9 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	for(var/venue_path in SSrestaurant.all_venues)
 		var/datum/venue/venue = SSrestaurant.all_venues[venue_path]
 		tourist_income += venue.total_income
-		parts += "[venue] обслужил [venue.customers_served] гостей и заработал [venue.total_income] кредитов.<br>"
-	parts += "В общем заработав [tourist_income] кредитов[tourist_income ? "!" : "..."]<br>"
-	log_econ("В конце раунда обслуживание заработало: [tourist_income] кредитов.")
+		parts += "[venue] обслужил [venue.customers_served] гостей и заработал [venue.total_income][MONEY_NAME].<br>"
+	parts += "В общем заработав [tourist_income][MONEY_NAME][tourist_income ? "!" : "..."]<br>"
+	log_econ("В конце раунда обслуживание заработало: [tourist_income][MONEY_NAME].")
 
 	// Award service achievements based on tourist income
 	switch(tourist_income)
@@ -547,12 +553,12 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			parts += "<span class='reallybig greentext'>Центральное командование впечатлено проделанной работой отделом обслуживания! Вот это команда!</span><br>"
 
 	parts += "<b>Общая статистика:</b><br>"
-	parts += "В эту смену экипаж собрал [station_vault] кредитов.<br>"
+	parts += "В эту смену экипаж собрал [station_vault][MONEY_NAME].<br>"
 	if(total_players > 0)
-		parts += "В среднем было собрано [station_vault/total_players] кредитов.<br>"
-		log_econ("Roundend credit total: [station_vault] credits. Average Credits: [station_vault/total_players]")
+		parts += "В среднем было собрано [station_vault/total_players][MONEY_NAME].<br>"
+		log_econ("Roundend credits total: [station_vault][MONEY_NAME]. Average: [station_vault/total_players][MONEY_NAME_CAPITALIZED]")
 	if(mr_moneybags)
-		parts += "Самым богатым членом экипажа в конце смены был <b>[mr_moneybags.account_holder] с [mr_moneybags.account_balance]</b> кредитов!</div>"
+		parts += "Самым богатым членом экипажа в конце смены был <b>[mr_moneybags.account_holder] с [mr_moneybags.account_balance]</b>[MONEY_SYMBOL]!</div>"
 	else
 		parts += "Каким-то образом, никто не смог заработать кредитов за эту смену...</div>"
 	return parts.Join()

@@ -106,12 +106,44 @@
 /obj/item/gift/anything
 	name = "christmas gift"
 	desc = "It could be anything!"
+	/// Weak reference to who this gift is for and who can open it, if that's nobody then anyone can
+	var/datum/weakref/recipient_ref = null
 
 /obj/item/gift/anything/get_gift_type()
-	var/static/list/obj/item/possible_gifts = null
+	var/static/list/possible_gifts = null
 
 	if(isnull(possible_gifts))
-		possible_gifts = get_sane_item_types(/obj/item)
+		var/list/all_items = get_sane_item_types(/obj/item)
+		// BANDASTATION EDIT START: No debug and centcom items
+		possible_gifts = list()
 
-	var/gift_type = pick(possible_gifts)
-	return gift_type
+		for(var/typepath in all_items)
+			var/type_str = "[typepath]"
+			if(findtext(type_str, "debug") || findtext(type_str, "centcom"))
+				continue
+			possible_gifts += typepath
+		// BANDASTATION EDIT END: No debug and centcom items
+
+	return pick(possible_gifts)
+
+/obj/item/gift/anything/attack_self(mob/user)
+	if (isnull(recipient_ref))
+		return ..()
+
+	var/datum/mind/recipient = recipient_ref.resolve()
+	if(recipient && recipient != user?.mind)
+		to_chat(user, span_notice("This gift isn't for you, and you don't want to get on Santa's bad side!"))
+		return FALSE
+	return ..()
+
+/// Assign the mind of someone as the person this gift is for
+/obj/item/gift/anything/proc/assign_recipient(datum/mind/recipient)
+	if (ismob(recipient)) // You're presumably at this point because you are an admin who fucked up but I will save you
+		var/mob/recipient_mob = recipient
+		recipient = recipient_mob.mind
+
+	if (isnull(recipient))
+		return
+
+	name = "[initial(name)] for [recipient.name] ([recipient.assigned_role.title])"
+	recipient_ref = WEAKREF(recipient)

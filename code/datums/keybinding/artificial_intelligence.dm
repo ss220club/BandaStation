@@ -8,14 +8,14 @@
 /datum/keybinding/artificial_intelligence/reconnect
 	hotkey_keys = list("-")
 	name = "reconnect"
-	full_name = "Reconnect to shell"
-	description = "Reconnects you to your most recently used AI shell"
+	full_name = "Переподключиться к оболочке"
+	description = "Подключает к ИИ оболочке, которая была подключена последней"
 	keybind_signal = COMSIG_KB_SILICON_RECONNECT_DOWN
 
-/datum/keybinding/artificial_intelligence/reconnect/down(client/user, turf/target)
+/datum/keybinding/artificial_intelligence/reconnect/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
 	var/mob/living/silicon/ai/our_ai = user.mob
-	our_ai.deploy_to_shell(our_ai.redeploy_action.last_used_shell)
+	our_ai.select_shell(our_ai.redeploy_action.last_used_shell)
 	return TRUE

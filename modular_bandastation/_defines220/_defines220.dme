@@ -1,5 +1,6 @@
 #include "_defines220.dm"
 
+#include "code/defines/~is_helpers.dm"
 #include "code/defines/atom_hud.dm"
 #include "code/signals_atom.dm"
 #include "code/signals_item.dm"
@@ -13,6 +14,7 @@
 #include "code/defines/subsystems.dm"
 #include "code/defines/text_to_speech.dm"
 #include "code/defines/roles.dm"
+#include "code/defines/revolution.dm"
 #include "code/signals_mob/signals_mob_ai.dm"
 #include "code/signals_mob/signals_mob_carbon.dm"
 #include "code/signals_mob/signals_mob_living.dm"
@@ -21,3 +23,4 @@
 #include "code/signals_mob/signals_mob_simple.dm"
 #include "code/defines/calibers.dm"
 #include "code/defines/colors.dm"
+#include "code/defines/custom_emote_panel.dm"

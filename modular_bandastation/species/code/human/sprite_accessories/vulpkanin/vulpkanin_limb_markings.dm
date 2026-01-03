@@ -24,6 +24,3 @@
 		/obj/item/bodypart/leg/right/digitigrade,
 		/obj/item/bodypart/leg/left/digitigrade,
 	)
-
-/datum/bodypart_overlay/simple/body_marking/vulpkanin_limb/get_accessory(name)
-	return SSaccessories.vulpkanin_limb_markings_list[name]
