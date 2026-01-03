@@ -113,11 +113,11 @@ export const SurgeryProceduresView = (props: SurgeryProceduresViewProps) => {
           />
           <Button
             icon="filter"
-            tooltip="Скрыть робо-операции."
+            tooltip="Скрывает операции на роботических конечностях."
             onClick={() => setFilterRobotic(!filterRobotic)}
             selected={filterRobotic}
           >
-            Hide Mechanic
+            Скрыть
           </Button>
           <Button
             width="75px"
@@ -199,7 +199,7 @@ export const SurgeryProceduresView = (props: SurgeryProceduresViewProps) => {
                   <Stack.Item bold>{surgery.desc}</Stack.Item>
                   <Stack.Item>
                     <Collapsible
-                      title="Requirements"
+                      title="Требования"
                       open={pinnedOperations.includes(surgery.name)}
                     >
                       <Stack
