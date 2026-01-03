@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/complexity/useLiteralKeys: <explanation> */
+/** biome-ignore-all lint/style/useTemplate: <explanation> */
 import { Button, Collapsible, LabeledList, Stack } from 'tgui-core/components';
 
 import { useBackend } from '../backend';
