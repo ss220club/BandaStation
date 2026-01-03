@@ -121,7 +121,7 @@
 		qdel(C)
 
 // MARK: Mob related
-/mob/living/basic/adjustStaminaLoss(amount, updating_stamina = TRUE, forced = FALSE, required_biotype)
+/mob/living/basic/adjust_stamina_loss(amount, updating_stamina = TRUE, forced = FALSE, required_biotype)
 	if(isshadowling_ascended(src))
 		return
 	else
@@ -287,7 +287,6 @@
 	iris_overlay = "eyes_cyber_glow_iris"
 	eye_icon_state = "eyes_glow_gs"
 	icon_eyes_path = 'modular_bandastation/augmentation_preferences/icons/human_face.dmi'
-	overlay_ignore_lighting = TRUE
 	pepperspray_protect = TRUE
 	color_cutoffs = null
 	flash_protect = FLASH_PROTECTION_FLASH

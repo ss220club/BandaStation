@@ -92,8 +92,8 @@
 		var/temp_drop = is_vulp ? COLD_WAVE_TEMP_DROP_VULP : COLD_WAVE_TEMP_DROP
 		var/frostoil_amt = is_vulp ? COLD_WAVE_FROSTOIL_AMOUNT_VULP : COLD_WAVE_FROSTOIL_AMOUNT
 		var/burn_amt = is_vulp ? COLD_WAVE_BURN_DAMAGE : COLD_WAVE_BURN_DAMAGE_VULP
-		T.adjustFireLoss(burn_amt)
-		T.adjustStaminaLoss(COLD_WAVE_STAMINA_DAMAGE)
+		T.adjust_fire_loss(burn_amt)
+		T.adjust_stamina_loss(COLD_WAVE_STAMINA_DAMAGE)
 		apply_slow(T, COLD_WAVE_SLOW_DURATION)
 		T.adjust_bodytemperature(temp_drop)
 

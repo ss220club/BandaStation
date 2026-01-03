@@ -47,13 +47,13 @@
 				continue
 		var/dist = get_dist(H, L)
 		if(dist <= knock_radius)
-			L.adjustOrganLoss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_CLOSE)
+			L.adjust_organ_loss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_CLOSE)
 			L.soundbang_act(2, 10 SECONDS, 10)
 			L.Knockdown(2 SECONDS)
 			L.adjust_dizzy(4)
 			knockback_away_from(H, L, 3)
 		else
-			L.adjustOrganLoss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_FAR)
+			L.adjust_organ_loss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_FAR)
 			L.soundbang_act(2, 5 SECONDS, 5)
 			L.adjust_confusion(6 SECONDS)
 			L.adjust_staggered(6 SECONDS)

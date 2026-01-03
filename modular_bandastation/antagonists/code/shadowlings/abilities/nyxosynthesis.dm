@@ -38,7 +38,7 @@
 
 	var/stam_regen = (light < SHADOWLING_DIM_THRESHOLD) ? SHADOWLING_DARK_STAMINA_PER_LIMB_DEEP : SHADOWLING_DARK_STAMINA_PER_LIMB_DIM
 	if(stam_regen > 0 && coef > 0)
-		owner.adjustStaminaLoss(-(stam_regen * coef))
+		owner.adjust_stamina_loss(-(stam_regen * coef))
 
 	if(!owner.has_status_effect(/datum/status_effect/shadow/nightmare))
 		owner.apply_status_effect(/datum/status_effect/shadow)

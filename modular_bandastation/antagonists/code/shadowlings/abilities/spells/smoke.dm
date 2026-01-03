@@ -35,13 +35,13 @@
 		is_ally = (smoker in hive.lings) || (smoker in hive.thralls)
 
 	if(is_ally)
-		smoker.adjustBruteLoss(-heal_amount)
-		smoker.adjustFireLoss(-heal_amount)
-		smoker.adjustToxLoss(-heal_amount)
-		smoker.adjustOxyLoss(-heal_amount)
+		smoker.adjust_brute_loss(-heal_amount)
+		smoker.adjust_fire_loss(-heal_amount)
+		smoker.adjust_tox_loss(-heal_amount)
+		smoker.adjust_oxy_loss(-heal_amount)
 		var/mob/living/carbon/C = smoker
 		if(istype(C))
-			C.adjustStaminaLoss(-heal_amount)
+			C.adjust_stamina_loss(-heal_amount)
 	else
 		var/mob/living/carbon/C2 = smoker
 		if(istype(C2))

@@ -97,7 +97,7 @@
 	if(!istype(T))
 		return
 	T.Stun(1 SECONDS)
-	T.adjustStaminaLoss(baton_stamina)
+	T.adjust_stamina_loss(baton_stamina)
 	apply_slow(T, 2 SECONDS)
 	apply_shake(T, 8, 0.6 SECONDS)
 

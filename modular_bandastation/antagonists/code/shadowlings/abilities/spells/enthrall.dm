@@ -93,9 +93,9 @@
 			to_chat(H, span_warning("Связь прервана."))
 			return FALSE
 
-		T.adjustOxyLoss(ENTHRALL_OXY_DRAIN)
+		T.adjust_oxy_loss(ENTHRALL_OXY_DRAIN)
 
-	T.adjustOxyLoss(ENTHRALL_OXY_RESTORE)
+	T.adjust_oxy_loss(ENTHRALL_OXY_RESTORE)
 
 	var/obj/item/organ/brain/shadow/tumor_thrall/O = new
 	if(!O.Insert(T))
