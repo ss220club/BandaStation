@@ -438,17 +438,6 @@
 
 /datum/surgery_operation/organ/repair/eyes/on_failure(obj/item/organ/organ, mob/living/surgeon, obj/item/tool, list/operation_args)
 	var/obj/item/organ/brain/brain = locate() in organ.bodypart_owner
-	if(brain)
-		display_results(
-			surgeon,
-			organ.owner,
-			span_warning("Вы случайно попадаете инструментом прямо в мозг [organ.owner.declent_ru(GENITIVE)]!"),
-			span_warning("[surgeon] случайно попадает инструментом прямо в мозг [organ.owner.declent_ru(GENITIVE)]!"),
-			span_warning("[surgeon] случайно попадает инструментом прямо в мозг [organ.owner.declent_ru(GENITIVE)]!"),
-		)
-		display_pain(organ.owner, "Вы чувствуете пронзающую боль, которая проникает сквозь череп прямо в мозг!")
-		organ.owner.adjust_organ_loss(ORGAN_SLOT_BRAIN, 70)
-	else
 	if(isnull(brain))
 		display_results(
 			surgeon,
