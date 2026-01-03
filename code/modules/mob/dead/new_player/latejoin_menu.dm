@@ -10,7 +10,7 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 	if(!species)
 		return TRUE
 
-	if(locate(/datum/station_trait/xenobureaucracyerror) in GLOB.lobby_station_traits)
+	if(locate(/datum/station_trait/xenobureaucracy_error) in GLOB.lobby_station_traits)
 		return TRUE
 
 	if(!job_title)

@@ -77,7 +77,7 @@ ADMIN_VERB(change_title_screen_css, R_DEBUG, "Title Screen: Set CSS", ADMIN_VERB
 	if(SSticker.current_state >= GAME_STATE_SETTING_UP)
 		return
 
-	if(locate(/datum/station_trait/xenobureaucracyerror) in GLOB.lobby_station_traits)
+	if(locate(/datum/station_trait/xenobureaucracy_error) in GLOB.lobby_station_traits)
 		return
 
 	var/prefs_species = src.prefs.read_preference(/datum/preference/choiced/species)

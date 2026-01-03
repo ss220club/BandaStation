@@ -57,7 +57,7 @@
 			to_chat(usr, span_boldwarning("Ошибка настроек персонажа. Выберите предпочитаемую должность."))
 			return
 
-		var/ignore_restrictions = locate(/datum/station_trait/xenobureaucracyerror) in GLOB.lobby_station_traits
+		var/ignore_restrictions = locate(/datum/station_trait/xenobureaucracy_error) in GLOB.lobby_station_traits
 		if(!ignore_restrictions)
 			var/list/allowed_species = CONFIG_GET(str_list/allowed_species)
 			var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
