@@ -204,6 +204,7 @@
 #define SPECIES_VULPKANIN "vulpkanin"
 #define SPECIES_TAJARAN "tajaran"
 #define SPECIES_SKRELL "skrell"
+#define SPECIES_IPC "ipc"
 /// BANDASTATION ADDITION END - Species
 
 // Like species IDs, but not specifically attached a species.
