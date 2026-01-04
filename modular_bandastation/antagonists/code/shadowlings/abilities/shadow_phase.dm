@@ -6,7 +6,7 @@
 // MARK: Status effects
 /datum/status_effect/shadow/phase
 	id = "shadow_phase"
-	tick_interval = 0.3 SECONDS
+	tick_interval = 0.4 SECONDS
 	alert_type = null
 	duration = STATUS_EFFECT_PERMANENT
 
