@@ -2,7 +2,7 @@
 	name = "Ксеноглавы"
 	trait_type = STATION_TRAIT_NEUTRAL
 	trait_processes = FALSE
-	weight = 10
+	weight = 5
 	cost = STATION_TRAIT_COST_MINIMAL
 	show_in_report = TRUE
 	report_message = "Вследствие сбоя в кадровом реестре НаноТрейзен ограничения по биологическому виду для командного состава были аннулированы."
