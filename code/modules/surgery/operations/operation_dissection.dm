@@ -113,7 +113,7 @@
 
 /obj/item/research_notes/examine(mob/user)
 	. = ..()
-	. += span_notice("It is worth [value] research points.")
+	. += span_notice("Это стоит [value] исследовательских очков.")
 
 /obj/item/research_notes/attackby(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(istype(attacking_item, /obj/item/research_notes))
@@ -145,7 +145,7 @@
 	value = value + new_paper.value
 	if(origin_type != new_paper.origin_type && !mixed)
 		value += bonus * 0.3
-		origin_type = "[origin_type] and [new_paper.origin_type]"
+		origin_type = "[origin_type] и [new_paper.origin_type]"
 		mixed = TRUE
 	change_vol()
 	qdel(new_paper)

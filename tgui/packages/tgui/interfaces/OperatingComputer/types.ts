@@ -15,7 +15,7 @@ export type OperatingComputerData = {
 export type PatientData = {
   health: number;
   blood_type: string;
-  stat: 'Conscious' | 'Unconscious' | 'Dead';
+  stat: 'В сознании' | 'Без сознания' | 'Мёртв';
   statstate: 'good' | 'average' | 'bad';
   minHealth: number;
   maxHealth: number;

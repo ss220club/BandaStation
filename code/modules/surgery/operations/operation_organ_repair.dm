@@ -46,8 +46,8 @@
 
 /datum/surgery_operation/organ/repair/lobectomy
 	name = "Удаление поврежденной доли легкого"
-	rnd_name = "Лобэктомия (Хирургия легких)"
-	desc = "Восстановление поврежденных легких пациента путем удаления наиболее поврежденной доли."
+	rnd_name = "Лобэктомия (Восстановление лёгких)"
+	desc = "Восстановление поврежденных лёгких пациента путем удаления наиболее поврежденной доли."
 	implements = list(
 		TOOL_SCALPEL = 1.05,
 		/obj/item/melee/energy/sword = 1.5,
@@ -76,9 +76,9 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_notice("Вы успешно удаляете наиболее поврежденную долю легкого [organ.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно удаляет наиболее поврежденную долю легкого [organ.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно удаляет наиболее поврежденную долю легкого [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы успешно удаляете наиболее повреждённую долю легкого [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно удаляет наиболее повреждённую долю легкого [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно удаляет наиболее повреждённую долю легкого [organ.owner.declent_ru(GENITIVE)]."),
 	)
 
 /datum/surgery_operation/organ/repair/lobectomy/on_failure(obj/item/organ/organ, mob/living/surgeon, obj/item/tool, list/operation_args)
@@ -87,7 +87,7 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_warning("Вы совершаете ошибку, не сумев удалить поврежденную долю легкого [organ.owner.declent_ru(GENITIVE)]!"),
+		span_warning("Вы совершаете ошибку, не сумев удалить повреждённую долю легкого [organ.owner.declent_ru(GENITIVE)]!"),
 		span_warning("[surgeon] совершает ошибку!"),
 		span_warning("[surgeon] совершает ошибку!"),
 	)
@@ -95,7 +95,7 @@
 
 /datum/surgery_operation/organ/repair/lobectomy/mechanic
 	name = "Проведение техобслуживания"
-	rnd_name = "Диагностика фильтрации воздуха (Хирургия легких)"
+	rnd_name = "Диагностика фильтрации воздуха (Восстановление лёгких)"
 	implements = list(
 		TOOL_WRENCH = 1.05,
 		TOOL_SCALPEL = 1.05,
@@ -110,7 +110,7 @@
 
 /datum/surgery_operation/organ/repair/hepatectomy
 	name = "Удаление поврежденной части печени"
-	rnd_name = "Гепатэктомия (Хирургия печени)"
+	rnd_name = "Гепатэктомия (Восстановление печени)"
 	desc = "Восстановление поврежденной печени пациента путем удаления наиболее поврежденного сегмента."
 	implements = list(
 		TOOL_SCALPEL = 1.05,
@@ -141,9 +141,9 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_notice("Вы успешно удаляете поврежденную часть печени [organ.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно удаляет поврежденную часть печени [organ.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно удаляет поврежденную часть печени [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы успешно удаляете повреждённую часть печени [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно удаляет повреждённую часть печени [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно удаляет повреждённую часть печени [organ.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(organ.owner, "Боль немного отступает!")
 
@@ -160,7 +160,7 @@
 
 /datum/surgery_operation/organ/repair/hepatectomy/mechanic
 	name = "Проведение техобслуживания"
-	rnd_name = "Диагностика системы очистки от примесей (Хирургия печени)"
+	rnd_name = "Диагностика системы очистки от примесей (Восстановление печени)"
 	implements = list(
 		TOOL_WRENCH = 1.05,
 		TOOL_SCALPEL = 1.05,
@@ -175,7 +175,7 @@
 
 /datum/surgery_operation/organ/repair/coronary_bypass
 	name = "Коронарное шунтирование"
-	rnd_name = "Аортокоронарное шунтирование (Хирургия сердца)"
+	rnd_name = "Аортокоронарное шунтирование (Восстановление сердца)"
 	desc = "Установка шунта на поврежденное сердце пациента для восстановления нормального кровотока."
 	implements = list(
 		TOOL_HEMOSTAT = 1.05,
@@ -240,7 +240,7 @@
 
 /datum/surgery_operation/organ/repair/gastrectomy
 	name = "Удаление поврежденной части желудка"
-	rnd_name = "Гастрэктомия (Хирургия желудка)"
+	rnd_name = "Гастрэктомия (Восстановление желудка)"
 	desc = "Восстановление желудка пациента путем удаления поврежденного сегмента."
 	implements = list(
 		TOOL_SCALPEL = 1.05,
@@ -279,9 +279,9 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_notice("Вы успешно удаляете поврежденную часть желудка [organ.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно удаляет поврежденную часть желудка [organ.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно удаляет поврежденную часть желудка [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("Вы успешно удаляете повреждённую часть желудка [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно удаляет повреждённую часть желудка [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно удаляет повреждённую часть желудка [organ.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(organ.owner, "Боль в животе немного утихает!")
 
@@ -524,7 +524,7 @@
 
 /datum/surgery_operation/organ/repair/brain/mechanic
 	name = "Проведение нейронной отладки"
-	rnd_name = "Wetware OS Диагностика (Хирургия мозга)"
+	rnd_name = "Wetware OS диагностика (Хирургия мозга)"
 	implements = list(
 		TOOL_MULTITOOL = 1.15,
 		TOOL_HEMOSTAT = 1.05,
