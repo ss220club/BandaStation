@@ -35,3 +35,15 @@
 	desc = "Униформа спецназа ГРУ СССП."
 	icon_state = "ussp_spetsnaz"
 	can_adjust = FALSE
+
+/obj/item/clothing/under/rank/ussp/militsioner
+	name = "militsioner uniform"
+	desc = "Рабочая униформа советского милиционера."
+	icon_state = "ussp_militsia"
+	can_adjust = FALSE
+
+/obj/item/clothing/under/rank/ussp/gopnik
+	name = "patsan uniform"
+	desc = "Реальные пацанские спортивки от фирмы Айбибас."
+	icon_state = "ussp_gopnik"
+	can_adjust = FALSE

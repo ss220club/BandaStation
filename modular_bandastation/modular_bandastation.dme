@@ -94,4 +94,7 @@
 // Модпаки включены по умолчанию для запуска всех тестов и для этого кода тоже.
 #ifndef DISABLE_PRIME_MODPACKS
 #include "prime_only/_prime_only.dme"
+#include "traps/_traps.dme"
+#include "spells/_spells.dme"
+#include "events/_events.dme"
 #endif

@@ -133,6 +133,14 @@
 	icon_state = "ussp_overcoat_officer"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 
+/obj/item/clothing/suit/armor/vest/ussp/militsia
+	name = "militsioner overcoat"
+	desc = "Шинель советского милиционера."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
+	icon_state = "ussp_militsia"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	dog_fashion = null
+
 /obj/item/clothing/suit/armor/vest/marine/ussp_officer
 	name = "tactical soviet armor vest"
 	desc = "Стандартная тактическая броня для бойцов армии СССП, но с чёткими опознавательными знаками командира отряда. \

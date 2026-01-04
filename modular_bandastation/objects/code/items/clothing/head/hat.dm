@@ -273,3 +273,9 @@
 	icon_state = "ussp_hat_komandir"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
 
+/obj/item/clothing/head/hats/ussp_militsia
+	name = "militsioner hat"
+	desc = "Фуражка советского милиционера."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "ussp_militsia"
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
