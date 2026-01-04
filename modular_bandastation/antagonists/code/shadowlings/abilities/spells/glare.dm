@@ -51,11 +51,6 @@
 				continue
 			if(T in hive.thralls)
 				continue
-		var/turf/tt = get_turf(T)
-		if(!tt)
-			continue
-		if(tt.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
-			continue
 		targets += T
 	return targets
 

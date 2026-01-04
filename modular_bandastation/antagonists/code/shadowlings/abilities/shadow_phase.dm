@@ -6,16 +6,18 @@
 // MARK: Status effects
 /datum/status_effect/shadow/phase
 	id = "shadow_phase"
-	tick_interval = 0.4 SECONDS
+	tick_interval = 0.2 SECONDS
 	alert_type = null
 	duration = STATUS_EFFECT_PERMANENT
 
 	var/light_immunity = FALSE
+	var/time_in_light = 0
 
 /datum/status_effect/shadow/phase/on_apply()
 	. = ..()
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/shadowling/phase)
 	ADD_TRAIT(owner, TRAIT_UNDENSE, REF(src))
+	time_in_light = 0
 
 	return TRUE
 
@@ -54,9 +56,14 @@
 
 	var/brightness = T.get_lumcount()
 	if(brightness >= SHADOWLING_LIGHT_THRESHOLD)
-		owner.Knockdown(1 SECONDS)
-		owner.Paralyze(1 SECONDS)
-		owner.remove_status_effect(type)
+		time_in_light += seconds_between_ticks
+
+		if(time_in_light >= SHADOWLING_PHASE_IN_LIGHT_DURATION)
+			owner.Knockdown(1 SECONDS)
+			owner.Paralyze(1 SECONDS)
+			owner.remove_status_effect(type)
+	else
+		time_in_light = 0
 
 // MARK: Object visual effects
 /obj/effect/dummy/phased_mob/shadowling

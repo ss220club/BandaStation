@@ -20,8 +20,8 @@
 				burn  = SHADOWLING_BRIGHT_BURN_PER_LIMB  * coef,
 				required_bodytype = BODYTYPE_SHADOW
 			)
-			if(world.time >= next_burn_sfx_time)
-				playsound(T, sfx_burn, 50, TRUE)
+			if(owner.stat != DEAD && world.time >= next_burn_sfx_time)
+				playsound(T, sfx_burn, 10, TRUE)
 				next_burn_sfx_time = world.time + 1 SECONDS
 		if(applied_speed)
 			owner.remove_movespeed_modifier(/datum/movespeed_modifier/shadowling/dark)

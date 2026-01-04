@@ -30,7 +30,7 @@
 	name = "Теневой вход"
 	desc = "Стать нематериальным и проходить сквозь стены на ограниченное время. Яркий свет до набора достаточного числа слуг разрывает фазу."
 	button_icon_state = "shadowling_crawl"
-	cooldown_time = 30 SECONDS
+	cooldown_time = 20 SECONDS
 	// Shadowling related
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE

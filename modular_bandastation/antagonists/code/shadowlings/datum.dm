@@ -149,7 +149,7 @@
 	return current_thralls() >= required_thralls()
 
 /datum/objective/shadowling/enslave_fraction/admin_edit(mob/admin)
-	var/new_pct = input(admin, "Какой процент от стартового экипажа должен быть затраллен?", "Shadowling objective", percent) as num|null
+	var/new_pct = input(admin, "Какой процент от стартового экипажа должен быть порабощён?", "Shadowling objective", percent) as num|null
 	if(isnum(new_pct))
 		percent = clamp(round(new_pct), 1, 100)
 		update_explanation_text()
