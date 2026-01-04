@@ -18883,18 +18883,6 @@
 	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
-"jHr" = (
-/obj/structure{
-	name = "теплотрасса";
-	icon = 'icons/obj/pipes_n_cables/disposal.dmi';
-	icon_state = "pipe";
-	dir = 4;
-	density = 1;
-	anchored = 1;
-	color = "gray"
-	},
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside)
 "jHt" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
@@ -21211,6 +21199,15 @@
 	dir = 8
 	},
 /turf/open/misc/dirt/dark/station,
+/area/awaymission/avangarde17/outside/city)
+"kOA" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/floor/fakeice/slippery,
 /area/awaymission/avangarde17/outside/city)
 "kOE" = (
 /obj/structure/shelves,
@@ -42004,7 +42001,7 @@
 	dir = 4
 	},
 /turf/open/floor/fakeice/slippery,
-/area/awaymission/avangarde17/outside)
+/area/awaymission/avangarde17/outside/city)
 "vMv" = (
 /obj/structure/stone_tile/surrounding_tile/cracked{
 	color = "#464646";
@@ -82919,9 +82916,9 @@ lpc
 oXc
 loM
 loM
-xHx
-xGd
-xHx
+oXc
+gzt
+oXc
 qNd
 xHx
 xHx
@@ -83165,7 +83162,7 @@ loM
 loM
 loM
 loM
-gzt
+oXc
 kKq
 tIU
 qPg
@@ -83181,8 +83178,8 @@ oXc
 oXc
 nGk
 vLV
-dWl
-xHx
+kOA
+oXc
 xHx
 xHx
 gTo
@@ -83437,9 +83434,9 @@ oXc
 gzt
 oXc
 oXc
-jHr
-xHx
-xHx
+pEW
+oXc
+oXc
 xHx
 nMF
 xHx
@@ -148701,7 +148698,7 @@ loM
 loM
 loM
 loM
-loM
+bkv
 uym
 uym
 hYj
