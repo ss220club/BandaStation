@@ -45,6 +45,7 @@
 	time = 12 SECONDS
 	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WELDER, TOOL_WIRECUTTER)
 	reqs = list(
+		/obj/item/storage/medkit = 1,
 		/obj/item/stack/sheet/plasteel = 5,
 		/obj/item/stack/sheet/iron = 5,
 		/obj/item/stack/sheet/plastic = 10,
