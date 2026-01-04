@@ -1,0 +1,86 @@
+/datum/surgery_operation/limb/debride
+	name = "Обработка зараженной плоти"
+	rnd_name = "Обработка раны"
+	desc = "Удаление инфицированной или омертвевшей плоти из раны пациента, чтобы ускорить заживление."
+	implements = list(
+		TOOL_HEMOSTAT = 1,
+		TOOL_SCALPEL = 1.25,
+		TOOL_SAW = 1.66,
+		TOOL_WIRECUTTER = 2.5,
+	)
+	time = 3 SECONDS
+	operation_flags = OPERATION_AFFECTS_MOOD | OPERATION_LOOPING | OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
+	preop_sound = list(
+		TOOL_SCALPEL = 'sound/items/handling/surgery/scalpel1.ogg',
+		TOOL_HEMOSTAT = 'sound/items/handling/surgery/hemostat1.ogg',
+	)
+	success_sound = 'sound/items/handling/surgery/retractor2.ogg'
+	failure_sound = 'sound/items/handling/surgery/organ1.ogg'
+
+	/// How much infestation is removed per step (positive number)
+	var/infestation_removed = 4
+	/// How much sanitization is added per step
+	var/sanitization_added = 0.5 // just enough to stop infestation from worsening
+
+/datum/surgery_operation/limb/debride/get_default_radial_image()
+	return image(/obj/item/reagent_containers/applicator/patch/aiuri)
+
+/datum/surgery_operation/limb/debride/all_required_strings()
+	return list("на конечности должен быть ожог второй степени или хуже") + ..()
+
+/datum/surgery_operation/limb/debride/state_check(obj/item/bodypart/limb)
+	var/datum/wound/burn/flesh/wound = locate() in limb.wounds
+	return wound?.infection > 0
+
+/// To give the surgeon a heads up how much work they have ahead of them
+/datum/surgery_operation/limb/debride/proc/get_progress(datum/wound/burn/flesh/wound)
+	if(wound?.infection <= 0)
+		return null
+
+	var/estimated_remaining_steps = wound.infection / infestation_removed
+	var/progress_text
+
+	switch(estimated_remaining_steps)
+		if(-INFINITY to 1)
+			return null
+		if(1 to 2)
+			progress_text = ", подготовка к удалению последних остатков инфекции"
+		if(2 to 4)
+			progress_text = ", неуклонно сокращая количество оставшихся очагов инфекции"
+		if(5 to INFINITY)
+			progress_text = ", хотя ещё довольно много подлежит удалению"
+
+	return progress_text
+
+/datum/surgery_operation/limb/debride/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+	display_results(
+		surgeon,
+		limb.owner,
+		span_notice("Вы начинаете удалять зараженную плоть с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает удалять зараженную плоть с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
+		span_notice("[surgeon] начинает удалять зараженную плоть с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+	)
+	display_pain(limb.owner, "Инфекция в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]] приносит адскую боль! Такое чувство, что вас режут ножом!")
+
+/datum/surgery_operation/limb/debride/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args, default_display_results = FALSE)
+	limb.receive_damage(3, wound_bonus = CANT_WOUND, sharpness = tool.get_sharpness(), damage_source = tool)
+	var/datum/wound/burn/flesh/wound = locate() in limb.wounds
+	wound?.infection -= infestation_removed
+	wound?.sanitization += sanitization_added
+	display_results(
+		surgeon,
+		limb.owner,
+		span_notice("Вы успешно удалили часть зараженной плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]][get_progress(wound)] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно удалил часть зараженной плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
+		span_notice("[surgeon] успешно удалил часть зараженной плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+	)
+
+/datum/surgery_operation/limb/debride/on_failure(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+	display_results(
+		surgeon,
+		limb.owner,
+		span_notice("Вы отрезаете немного здоровой плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] отрезает немного здоровой плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
+		span_notice("[surgeon] отрезает немного здоровой плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
+	)
+	limb.receive_damage(rand(4, 8), wound_bonus = CANT_WOUND, sharpness = tool.get_sharpness(), damage_source = tool)

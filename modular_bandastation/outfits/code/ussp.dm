@@ -103,11 +103,12 @@
 	id_trim = /datum/id_trim/ussp/soldier/srochnik
 	suit = /obj/item/clothing/suit/armor/vest/ussp
 	gloves = /obj/item/clothing/gloves/combat
-	back = /obj/item/gun/ballistic/rifle/boltaction
+	back = /obj/item/gun/ballistic/rifle/boltaction/army/tactical
 	r_pocket = /obj/item/radio/off
 	backpack_contents = null
 	ears = null
-	belt = /obj/item/storage/belt/military/army/ussp/full_rifle_small
+	belt = /obj/item/storage/belt/military/army/ussp/full_rifle
+	l_pocket = /obj/item/knife/combat
 
 /datum/id_trim/ussp/soldier/srochnik
 	assignment = "USSP - Red Army Srochnik"
@@ -145,12 +146,12 @@
 	id_trim = /datum/id_trim/ussp/soldier
 	uniform = /obj/item/clothing/under/rank/ussp/soldier
 	suit = /obj/item/clothing/suit/armor/vest/marine/security/ussp_security
-	suit_store = /obj/item/gun/ballistic/automatic/sabel
+	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto
 	back = /obj/item/storage/backpack/ussp
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
 		/obj/item/storage/medkit/emergency,
-		/obj/item/grenade/smokebomb,
+		/obj/item/grenade/frag,
 	)
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
@@ -167,15 +168,15 @@
 	id_trim = /datum/id_trim/ussp/soldier/officer
 	uniform = /obj/item/clothing/under/rank/ussp/officer
 	suit = /obj/item/clothing/suit/armor/vest/marine/ussp_officer
-	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto/modern // не уверен
+	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto/modern
 	back = /obj/item/storage/backpack/ussp
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
 		/obj/item/storage/box/zipties,
 		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
-		/obj/item/melee/baton,
 	)
+	belt = /obj/item/storage/belt/military/army/ussp/full_autorifle_officer
 	glasses = /obj/item/clothing/glasses/hud/security/night
 	neck = /obj/item/binoculars
 	head = /obj/item/clothing/head/helmet/marine/ussp_officer_kaska
@@ -186,19 +187,18 @@
 	name = "USSP - Red Army Sanitar"
 	id_trim = /datum/id_trim/ussp/soldier/medic
 	suit = /obj/item/clothing/suit/armor/vest/marine/medic/ussp_medic
-	suit_store = /obj/item/gun/ballistic/rifle/boltaction
+	suit_store = /obj/item/gun/ballistic/automatic/bison
 	back = /obj/item/storage/backpack/ussp
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
-		/obj/item/storage/medkit/regular = 1,
-		/obj/item/storage/medkit/advanced = 1,
-		/obj/item/storage/medkit/tactical = 1,
-		/obj/item/defibrillator/compact/loaded
+		/obj/item/storage/medkit/o2,
+		/obj/item/storage/medkit/toxin,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/defibrillator/compact/loaded,
 	)
 	head = /obj/item/clothing/head/helmet/marine/security/ussp_kaska/medic
 	glasses = /obj/item/clothing/glasses/hud/health
-	belt = /obj/item/storage/belt/military/army/ussp/full_rifle
-	l_pocket = /obj/item/healthanalyzer/advanced
+	belt = /obj/item/storage/belt/military/army/ussp/full_smg_bison
 
 	skillchips = list(/obj/item/skillchip/entrails_reader)
 
@@ -210,14 +210,59 @@
 	name = "USSP - Red Army Stroibat"
 	id_trim = /datum/id_trim/ussp/soldier/engineer
 	suit = /obj/item/clothing/suit/armor/vest/marine/engineer/ussp_engineer
-	suit_store = /obj/item/gun/ballistic/rifle/sks
-	back = /obj/item/deployable_turret_folded
+	suit_store = /obj/item/gun/ballistic/shotgun/riot/lethal
+	back = /obj/item/mounted_machine_gun_folded/volna
 	backpack_contents = null
 	l_pocket = /obj/item/wrench
 	belt = /obj/item/storage/belt/military/army/ussp/full_engineer
 
 /datum/id_trim/ussp/soldier/engineer
 	assignment = "USSP - Red Army Stroibat"
+
+//Grenadier
+/datum/outfit/ussp/military/grenadier
+	name = "USSP - Red Army Grenadier"
+	id_trim = /datum/id_trim/ussp/soldier/grenadier
+	suit = /obj/item/clothing/suit/armor/vest/marine/engineer/ussp_engineer
+	suit_store = /obj/item/gun/ballistic/rocketlauncher/rpg
+	back = /obj/item/storage/backpack/ussp
+	backpack_contents = list(
+		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/medkit/regular,
+		/obj/item/ammo_casing/rocket/rpg = 2,
+		/obj/item/ammo_casing/rocket/rpg/weak = 2,
+	)
+	belt = /obj/item/storage/belt/military/army/ussp/full_rpg
+
+/datum/id_trim/ussp/soldier/grenadier
+	assignment = "USSP - Red Army Grenadier"
+
+// Snipers
+/datum/outfit/ussp/military/sniper
+	name = "USSP - Red Army Sniper"
+	id_trim = /datum/id_trim/ussp/soldier/sniper
+	suit_store = /obj/item/gun/ballistic/automatic/lanca
+	back = /obj/item/storage/backpack/ussp
+	backpack_contents = list(
+		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/medkit/regular,
+	)
+	belt = /obj/item/storage/belt/military/army/ussp/full_sniper
+	glasses = /obj/item/clothing/glasses/hud/security/night
+	neck = /obj/item/binoculars
+	mask = /obj/item/clothing/mask/breath/red_gas
+
+/datum/id_trim/ussp/soldier/sniper
+	assignment = "USSP - Red Army Sniper"
+
+/datum/outfit/ussp/military/sniper/Heavy
+	name = "USSP - Red Army Heavy Sniper"
+	id_trim = /datum/id_trim/ussp/soldier/sniper/heavy
+	suit_store = /obj/item/gun/ballistic/automatic/wylom
+	belt = /obj/item/storage/belt/military/army/ussp/full_sniper_heavy
+
+/datum/id_trim/ussp/soldier/sniper/heavy
+	assignment = "USSP - Red Army Heavy Sniper"
 
 //Riot
 /datum/outfit/ussp/military/riot
@@ -226,29 +271,75 @@
 	id_trim = /datum/id_trim/ussp/soldier/riot
 	uniform = /obj/item/clothing/under/rank/ussp/militsiya
 	suit = /obj/item/clothing/suit/armor/riot/ussp_riot
-	suit_store = /obj/item/gun/ballistic/shotgun/riot_one_hand
+	suit_store = /obj/item/gun/ballistic/shotgun/riot
 	back = /obj/item/storage/backpack/ussp
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
 		/obj/item/grenade/chem_grenade/teargas,
 		/obj/item/megaphone/sec,
-		/obj/item/storage/medkit/emergency,
+		/obj/item/storage/medkit/regular,
 		/obj/item/storage/box/zipties,
-		/obj/item/storage/box/rubbershot,
-		/obj/item/storage/box/rubbershot,
-		/obj/item/storage/box/rubbershot,
+		/obj/item/ammo_box/c12ga/rubbershot,
+		/obj/item/ammo_box/c12ga/beanbag,
 	)
 	head = /obj/item/clothing/head/helmet/toggleable/riot/ussp_riot
 	mask = /obj/item/clothing/mask/balaclava/breath
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	glasses = /obj/item/clothing/glasses/hud/security/night
-	belt = /obj/item/melee/baton
+	belt = /obj/item/storage/belt/security/full
+	l_hand = /obj/item/melee/baton
 	r_hand = /obj/item/shield/riot/flash/ussp
 	l_pocket = /obj/item/assembly/flash
 	r_pocket = /obj/item/grenade/flashbang
 
 /datum/id_trim/ussp/soldier/riot
 	assignment = "USSP - OMON"
+
+// USSP Juggernaut
+/datum/outfit/ussp/military/heavy
+	name = "USSP - Red Army Heavy Trooper"
+	id = /obj/item/card/id/advanced/ussp
+	id_trim = /datum/id_trim/ussp/soldier/heavy_trooper
+	uniform = /obj/item/clothing/under/rank/ussp/soldier
+	suit = /obj/item/clothing/suit/armor/swat/ussp_heavy
+	suit_store = /obj/item/gun/ballistic/automatic/pmk
+	back = /obj/item/storage/backpack/ussp
+	backpack_contents = list(
+		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/medkit/tactical_lite,
+		/obj/item/grenade/smokebomb = 2,
+	)
+	belt = /obj/item/storage/belt/military/army/ussp/full_machinegun_pmk
+	head = /obj/item/clothing/head/helmet/toggleable/riot/ussp_heavy
+	mask = /obj/item/clothing/mask/balaclava/breath
+	ears = /obj/item/radio/headset/heads/captain/alt/ussp
+	glasses = /obj/item/clothing/glasses/hud/security/night
+
+/datum/id_trim/ussp/soldier/heavy_trooper
+	assignment = "USSP - Red Army Heavy Trooper"
+
+// USSP Honor Guard
+/datum/outfit/ussp/military/officer/honor_guard
+	name = "USSP - Red Army Honor Guard"
+	id_trim = /datum/id_trim/ussp/soldier/officer/honor_guard
+	suit = /obj/item/clothing/suit/armor/vest/ussp/officer
+	suit_store = /obj/item/gun/ballistic/rifle/sks/c762x54mmr
+	backpack_contents = list(
+		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/ammo_box/c762x54mmr/rubber,
+		/obj/item/ammo_box/c762x54mmr/incendiary,
+		/obj/item/ammo_box/c762x54mmr/ap,
+		/obj/item/ammo_box/n762,
+	)
+	head = /obj/item/clothing/head/hats/ussp_officer
+	ears = /obj/item/radio/headset/heads/captain/alt/ussp
+	belt = /obj/item/storage/belt/military/army/ussp/full_sks_honor_guard
+	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
+	l_pocket = /obj/item/knife/combat
+
+/datum/id_trim/ussp/soldier/officer/honor_guard
+	assignment = "USSP - Red Army Honor Guard"
 
 // USSP SPETSNAZ (Unarmed)
 /datum/outfit/ussp/spetsnaz_unarmed
@@ -288,35 +379,36 @@
 	id = /obj/item/card/id/advanced/ussp
 	id_trim = /datum/id_trim/ussp/spetsnaz
 	uniform = /obj/item/clothing/under/rank/ussp/spetsnaz
-	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto/upp
+	suit_store = /obj/item/gun/ballistic/automatic/vityaz
 	back = /obj/item/mod/control/pre_equipped/ussp_standart
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
 		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
-		/obj/item/grenade/c4 = 2,
+		/obj/item/grenade/c4/x4 = 2,
 	)
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
 	mask = /obj/item/clothing/mask/balaclava/breath
 	glasses = /obj/item/clothing/glasses/meson/night
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
-	belt = /obj/item/storage/belt/military/army/ussp/full_autorifle_spetsnaz
-	r_pocket = /obj/item/flashlight/seclite
+	belt = /obj/item/storage/belt/military/army/ussp/full_smg_spetsnaz
+	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	l_pocket = /obj/item/knife/combat
 
 // USSP SPETSNAZ Officer (MOD)
 /datum/outfit/ussp/spetsnaz/officer
 	name = "USSP - SPETSNAZ Officer"
 	id_trim = /datum/id_trim/ussp/spetsnaz/officer
-	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto/gauss
+	suit_store = /obj/item/gun/ballistic/automatic/miecz
 	back = /obj/item/mod/control/pre_equipped/ussp_elite
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
-		/obj/item/storage/medkit/tactical_lite,
+		/obj/item/storage/medkit/tactical,
 		/obj/item/grenade/frag = 2,
-		/obj/item/grenade/c4 = 2,
+		/obj/item/grenade/c4/x4 = 2,
 	)
+	belt = /obj/item/storage/belt/military/army/ussp/full_autorifle_spetsnaz_officer
 	neck = /obj/item/binoculars
 
 // USSP infiltrator
@@ -326,11 +418,11 @@
 	id_trim = /datum/id_trim/ussp/infiltrator
 	uniform = /obj/item/clothing/under/syndicate/camo
 	suit = /obj/item/clothing/suit/hooded/stealth_cloak
-	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto/upp/suppressed
+	suit_store = /obj/item/gun/ballistic/automatic/lanca/army/suppressed
 	back = /obj/item/storage/backpack/ussp
 	backpack_contents = list(
 		/obj/item/storage/box/survival/radio,
-		/obj/item/storage/medkit/emergency,
+		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/smokebomb = 2,
 		/obj/item/grenade/c4 = 2,
 	)
@@ -342,7 +434,8 @@
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	neck = /obj/item/binoculars
 	belt = /obj/item/storage/belt/military/army/ussp/full_infiltrator
-	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
+	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
+	l_pocket = /obj/item/knife/combat
 
 /datum/id_trim/ussp/infiltrator
 	assignment = "USSP - Razvedka"
