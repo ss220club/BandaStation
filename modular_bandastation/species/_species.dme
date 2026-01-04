@@ -7,6 +7,7 @@
 #include "code/human/species/skills.dm"
 #include "code/human/species_type/moth.dm"
 #include "code/human/species_type/skrell.dm"
+#include "code/human/species_type/kidan.dm"
 #include "code/human/species_type/tajaran.dm"
 #include "code/human/species_type/vulpkanin.dm"
 
@@ -32,6 +33,7 @@
 
 #include "code/language/canilunzt.dm"
 #include "code/language/qurvolious.dm"
+#include "code/language/chittin.dm"
 #include "code/language/siiktajr.dm"
 #include "code/language/spinwarder.dm"
 
@@ -63,6 +65,7 @@
 
 #include "code/surgery/bodyparts/skrell_bodyparts.dm"
 #include "code/surgery/bodyparts/tajaran_bodyparts.dm"
+#include "code/surgery/bodyparts/kidan_bodyparts.dm"
 #include "code/surgery/bodyparts/vulpkanin_bodyparts.dm"
 
 #include "code/surgery/organs/external/skrell_external.dm"
@@ -71,6 +74,7 @@
 #include "code/surgery/organs/external/tajaran_external.dm"
 #include "code/surgery/organs/internal/tajaran_internal.dm"
 #include "code/surgery/organs/internal/skrell_internal.dm"
+#include "code/surgery/organs/internal/kidan_internal.dm"
 #include "code/surgery/organs/limbgrower_designs.dm"
 
 #include "code/human/sprite_accessories/vulpkanin/hair_masks.dm"

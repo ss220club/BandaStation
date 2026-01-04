@@ -8,5 +8,6 @@
 #include "code/mothpeople.dm"
 #include "code/podpeople.dm"
 #include "code/skrell.dm"
+#include "code/kidan.dm"
 #include "code/tajaran.dm"
 #include "code/vulpkanin.dm"
