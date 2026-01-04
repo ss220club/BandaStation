@@ -17,7 +17,7 @@
 			if(BRUTE)
 				damage_amount *= 0.25
 			if(BURN)
-				damage_amount *= 2
+				damage_amount *= 2.0
 	. = ..()
 
 /obj/structure/alien/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
@@ -143,6 +143,7 @@
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_ALIEN_WEEDS + SMOOTH_GROUP_ALIEN_RESIN
 	canSmoothWith = SMOOTH_GROUP_ALIEN_WEEDS + SMOOTH_GROUP_WALLS
+	armor_type = /datum/armor/alien/weeds // BANDASTATION ADDITION: Xeno Rework
 	///the range of the weeds going to be affected by the node
 	var/node_range = NODERANGE
 	///the parent node that will determine if we grow or die
@@ -155,6 +156,11 @@
 		/turf/open/water,
 		/turf/open/openspace,
 	)
+
+/datum/armor/alien/weeds // BANDASTATION ADDITION: Xeno Rework
+	melee = 50
+	fire = 98
+	acid = 100
 
 /obj/structure/alien/weeds/Initialize(mapload)
 	//so the sprites line up right in the map editor
@@ -246,7 +252,7 @@
 	qdel(src)
 
 /obj/structure/alien/weeds/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return exposed_temperature > 300
+	return exposed_temperature > 6000 // BANDASTATION EDIT: Xeno Rework. Previously: 300
 
 /obj/structure/alien/weeds/atmos_expose(datum/gas_mixture/air, exposed_temperature)
 	take_damage(5, BURN, 0, 0)
@@ -442,7 +448,7 @@
 		child = null
 
 /obj/structure/alien/egg/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return exposed_temperature > 500
+	return exposed_temperature > 1200 // BANDASTATION EDIT: Xeno Rework. Previously: 500
 
 /obj/structure/alien/egg/atmos_expose(datum/gas_mixture/air, exposed_temperature)
 	take_damage(5, BURN, 0, 0)
