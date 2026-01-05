@@ -335,7 +335,6 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 				var/regex/html_cleaner = new("<\[^>\]*>", "g")
 				cached_content = html_cleaner.Replace(cached_content, " ")
 
-			to_chat(usr, "<span class='notice'>DEBUG AI: Safe Content: '[copytext(cached_content, 1, 50)]...'</span>")
 			// === ВСТАВКА AI END ===
 
 
