@@ -214,7 +214,7 @@
 	desc = "Накладывает зажим на кровеносных сосудах пациента, чтобы предотвратить потерю крови. \
 		Вызывает хирургическое состояние \"сосуды зажаты\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
 	replaced_by = /datum/surgery_operation/limb/clamp_bleeders/abductor
 	implements = list(
 		TOOL_HEMOSTAT = 1,
@@ -257,7 +257,7 @@
 	desc = "Снять зажимы с кровеносных сосудов в теле пациента, чтобы восстановить кровоток. \
 		Убирает хирургическое состояние \"сосуды зажаты\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_NO_PATIENT_REQUIRED
 	replaced_by = /datum/surgery_operation/limb/unclamp_bleeders/abductor
 	implements = list(
 		TOOL_HEMOSTAT = 1,
@@ -365,7 +365,7 @@
 	desc = "Соединить рассечённые или зафиксировать сломанные кости. \
 		Убирает хирургические состояния \"кость распилена\" и \"кость просверлена\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
 		/obj/item/stack/medical/bone_gel = 1,
 		/obj/item/stack/sticky_tape/surgical = 1,
@@ -411,7 +411,7 @@
 	desc = "Просверливание кости пациента. \
 		Вызывает хирургическое состояние \"кость просверлена\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
 		TOOL_DRILL = 1,
 		/obj/item/screwdriver/power = 1.25,
@@ -462,7 +462,7 @@
 	desc = "Сделайте разрез на тканях внутренних органов, что позволит вылечить или манипулировать с органом. \
 		Вызывает хирургическое состояние \"орган разрезан\"."
 	required_bodytype = ~BODYTYPE_ROBOTIC
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP
+	operation_flags = OPERATION_NO_PATIENT_REQUIRED
 	replaced_by = /datum/surgery_operation/limb/incise_organs/abductor
 	implements = list(
 		TOOL_SCALPEL = 1,
