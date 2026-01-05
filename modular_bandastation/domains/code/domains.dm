@@ -36,7 +36,7 @@
 	name = "TSF - Marine (Bitrun)"
 	uniform = /obj/item/clothing/under/rank/tsf/marine
 	back = /obj/item/storage/backpack/tsf
-	suit = /obj/item/clothing/suit/armor
+	suit = /obj/item/clothing/suit/armor/vest
 	head = /obj/item/clothing/head/beret/tsf_marine
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/sunglasses
