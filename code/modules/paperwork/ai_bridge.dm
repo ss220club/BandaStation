@@ -1,9 +1,8 @@
-var/global/datum/ai_bridge/global_ai_bridge
+/// Global singleton for AI bridge, initialized automatically
+GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
 /proc/get_ai_bridge()
-	if(!global_ai_bridge)
-		global_ai_bridge = new /datum/ai_bridge()
-	return global_ai_bridge
+    return GLOB.global_ai_bridge
 
 /datum/ai_bridge
 	var/list/pending_faxes = list()
@@ -32,9 +31,11 @@ var/global/datum/ai_bridge/global_ai_bridge
 	pending_faxes[fid] = fax_data
 
 	// Cleanup timer after 30 minutes
-	addtimer(CALLBACK(src, .proc/cleanup_fax_data, fid), 30 MINUTES)
+	// LINT FIX: Use PROC_REF macro
+	addtimer(CALLBACK(src, PROC_REF(cleanup_fax_data), fid), 30 MINUTES)
 
-	send_request_sshttp("/fax/analyze", fax_data, CALLBACK(src, .proc/on_analyze_complete, fid, fax_data))
+	// LINT FIX: Use PROC_REF macro
+	send_request_sshttp("/fax/analyze", fax_data, CALLBACK(src, PROC_REF(on_analyze_complete), fid, fax_data))
 
 /datum/ai_bridge/proc/on_analyze_complete(fid, list/fax_data, list/response_data)
 	if(!response_data) return
@@ -51,7 +52,9 @@ var/global/datum/ai_bridge/global_ai_bridge
 	if(!urgency) urgency = "Unknown"
 
 	var/color = "green"
-	var/urg_lower = lowertext(urgency)
+	// LINT FIX: Use LOWER_TEXT macro
+	var/urg_lower = LOWER_TEXT(urgency)
+	
 	if(findtext(urg_lower, "medium")) color = "#ff9900"
 	if(findtext(urg_lower, "high")) color = "red"
 	if(findtext(urg_lower, "critical")) color = "darkred"
@@ -60,9 +63,10 @@ var/global/datum/ai_bridge/global_ai_bridge
 	msg += "<b>Summary:</b> [summary]<br>"
 	msg += "<b>Urgency:</b> <font color='[color]'>[urgency]</font><br>"
 	msg += "<b>AI Actions: </b>"
-	msg += "<a href='?src=\ref[src];action=reply;mode=approve;fid=[fid]'>APPROVE</a> "
-	msg += "<a href='?src=\ref[src];action=reply;mode=deny;fid=[fid]'>DENY</a> "
-	msg += "<a href='?src=\ref[src];action=reply;mode=custom;fid=[fid]'>CUSTOM</a>"
+	// LINT FIX: Use REF() macro and byond:// prefix
+	msg += "<a href='byond://?src=[REF(src)];action=reply;mode=approve;fid=[fid]'>APPROVE</a> "
+	msg += "<a href='byond://?src=[REF(src)];action=reply;mode=deny;fid=[fid]'>DENY</a> "
+	msg += "<a href='byond://?src=[REF(src)];action=reply;mode=custom;fid=[fid]'>CUSTOM</a>"
 
 	message_admins(msg)
 
@@ -100,7 +104,8 @@ var/global/datum/ai_bridge/global_ai_bridge
 		"custom_note" = custom_note
 	)
 
-	send_request_sshttp("/fax/reply", request_data, CALLBACK(src, .proc/on_generation_complete, user, fax_data))
+	// LINT FIX: Use PROC_REF macro
+	send_request_sshttp("/fax/reply", request_data, CALLBACK(src, PROC_REF(on_generation_complete), user, fax_data))
 
 /datum/ai_bridge/proc/on_generation_complete(mob/user, list/fax_data, list/response_data)
 	if(!response_data) return
@@ -152,7 +157,8 @@ var/global/datum/ai_bridge/global_ai_bridge
 	// SShttp accepts a list of headers
 	var/list/headers = list("Content-Type" = "application/json")
 
-	var/datum/callback/wrapper = CALLBACK(src, .proc/handle_sshttp_response, cb)
+	// LINT FIX: Use PROC_REF macro
+	var/datum/callback/wrapper = CALLBACK(src, PROC_REF(handle_sshttp_response), cb)
 
 	// Call the built-in subsystem
 	SShttp.create_async_request("POST", url, json_payload, headers, wrapper)
@@ -189,12 +195,12 @@ var/global/datum/ai_bridge/global_ai_bridge
 /datum/ai_bridge/proc/get_json_value_case_insensitive(list/L, key)
 	if(key in L) return L[key]
 	
+	// If no exact match, try capitalized key (Go often sends Capitalized keys)
 	var/cap_key = capitalize(key)
 	if(cap_key in L) return L[cap_key]
 	
 	return null
 
 // --- CONFIG DEFINITION ---
-// This defines the config option so CONFIG_GET works.
 /datum/config_entry/string/ai_secretary_url
 	protection = CONFIG_ENTRY_LOCKED
