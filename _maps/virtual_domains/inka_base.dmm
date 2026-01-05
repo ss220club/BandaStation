@@ -1957,7 +1957,7 @@
 	icon_state = "mechpad-open";
 	pixel_x = 0;
 	pixel_y = 1;
-	layer = 2.89
+	plane = -4.1
 	},
 /obj/item/storage/toolbox/mechanical{
 	pixel_x = -6;
@@ -5278,7 +5278,7 @@
 	icon_state = "mechpad-open";
 	pixel_x = 0;
 	pixel_y = 1;
-	layer = 2.88
+	plane = -4.1
 	},
 /obj/structure/cable,
 /turf/open/floor/plating/reinforced,
@@ -5529,14 +5529,6 @@
 /obj/structure/railing,
 /obj/structure/barricade/sandbags,
 /turf/open/floor/pod/light,
-/area/virtual_domain)
-"MN" = (
-/obj/effect/light_emitter{
-	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
-	},
-/turf/open/misc/dirt/station,
 /area/virtual_domain)
 "MP" = (
 /obj/effect/turf_decal/stripes/line{
@@ -6704,6 +6696,14 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/asphalt,
 /area/virtual_domain)
+"Vn" = (
+/obj/effect/light_emitter{
+	name = "outdoor light";
+	set_cap = 3;
+	set_luminosity = 6
+	},
+/turf/open/misc/dirt/station,
+/area/virtual_domain)
 "Vq" = (
 /obj/effect/turf_decal/tile/dark_blue/half{
 	dir = 8
@@ -7552,7 +7552,7 @@ us
 Ql
 eA
 iA
-MN
+Vn
 Jy
 iA
 iA
