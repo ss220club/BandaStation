@@ -29,13 +29,19 @@ const fromWhoOptions = ['Nanotrasen', 'Syndicate'] as const;
 
 export function AdminFax(props) {
   const { act, data } = useBackend<Data>();
-  const { faxes = [], stamps = [] } = data;
+  const {
+    faxes = [],
+    stamps = [],
+    prefillText = '',
+    prefillPaperName = '',
+    prefillSender = ''
+  } = data;
 
   const [fax, setFax] = useState('');
-  const [saved, setSaved] = useState(false);
-  const [paperName, setPaperName] = useState('');
-  const [fromWho, setFromWho] = useState('');
-  const [rawText, setRawText] = useState('');
+  const [saved, setSaved] = useState(!!prefillText);
+  const [paperName, setPaperName] = useState(prefillPaperName);
+  const [fromWho, setFromWho] = useState(prefillSender);
+  const [rawText, setRawText] = useState(prefillText);
   const [stamp, setStamp] = useState('');
   const [stampCoordX, setStampCoordX] = useState(0);
   const [stampCoordY, setStampCoordY] = useState(0);

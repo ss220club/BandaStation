@@ -17,6 +17,11 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 	/// Default name of paper. paper - bluh-bluh. Used when field with paper name not edited.
 	var/default_paper_name = "Standard Report"
 
+	// === ДОБАВЛЕНО: Поля для предзаполнения ===
+	var/prefill_text = ""
+	var/prefill_paper_name = ""
+	var/prefill_sender = ""
+
 /datum/fax_panel_interface/New()
 	//Get all faxes, and save them to our list.
 	for(var/obj/machinery/fax/fax as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/fax))
@@ -64,6 +69,12 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 
 	data["faxes"] = list()
 	data["stamps"] = list()
+
+	// === ДОБАВЛЕНО: Передаем данные в фронтенд ===
+	data["prefillText"] = prefill_text
+	data["prefillPaperName"] = prefill_paper_name
+	data["prefillSender"] = prefill_sender
+	// ============================================
 
 	for(var/stamp in stamp_list)
 		data["stamps"] += list(stamp[1]) // send only names.

@@ -318,6 +318,27 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 				to_chat(usr, icon2html(src.icon, usr) + span_warning("Fax cannot send all above paper on this protected network, sorry."))
 				return
 
+			// === ВСТАВКА AI START ===
+			var/cached_name = fax_paper.name
+			var/cached_content = ""
+
+			// 1. Сначала пробуем наш безопасный парсер
+			cached_content = safe_get_paper_text(fax_paper)
+
+			// 2. Если он не справился, пробуем встроенный (на свой страх и риск, но с try catch бы...)
+
+			if(!cached_content)
+				cached_content = "(Empty Paper / Unreadable Form)"
+			else
+				// Чистка
+				cached_content = replacetext(cached_content, "<br>", "\n")
+				var/regex/html_cleaner = new("<\[^>\]*>", "g")
+				cached_content = html_cleaner.Replace(cached_content, " ")
+
+			to_chat(usr, "<span class='notice'>DEBUG AI: Safe Content: '[copytext(cached_content, 1, 50)]...'</span>")
+			// === ВСТАВКА AI END ===
+
+
 			fax_paper.request_state = TRUE
 			fax_paper.loc = null
 
@@ -327,6 +348,15 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 			history_add("Send", params["name"])
 
 			GLOB.requests.fax_request(usr.client, "sent a fax message from [fax_name]/[fax_id] to [params["name"]]", list("paper" = fax_paper, "destination_id" = params["id"], "sender_name" = fax_name))
+
+			// === ВСТАВКА AI: ОТПРАВКА ===
+			if(params["id"] == "central_command" || params["id"] == "centcom" || params["id"] == "Central Command")
+				var/datum/ai_bridge/AI = get_ai_bridge()
+				if(AI)
+					var/real_sender = "[fax_name] ([usr.real_name])"
+					AI.process_incoming_fax(cached_name, cached_content, real_sender, params["id"])
+			// ============================
+
 			var/list/admins = get_holders_with_rights(R_ADMIN) /// BANDASTATION EDIT: Proper permissions
 			to_chat(admins, /// BANDASTATION EDIT: Proper permissions
 				span_adminnotice("[icon2html(src.icon, admins)]<b><font color=green>FAX REQUEST: </font>[ADMIN_FULLMONTY(usr)]:</b> [span_linkify("sent a fax message from [fax_name]/[fax_id][ADMIN_FLW(src)] to [html_encode(params["name"])]")] [ADMIN_SHOW_PAPER(fax_paper)] [ADMIN_PRINT_FAX(fax_paper, fax_name, params["id"])]"), /// BANDASTATION EDIT: Proper permissions
@@ -368,7 +398,7 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 /obj/machinery/fax/proc/log_fax(obj/item/sent, destination_id, name)
 	if (istype(sent, /obj/item/paper))
 		var/obj/item/paper/sent_paper = sent
-		log_paper("[usr] has sent a fax with the message \"[sent_paper.get_raw_text()]\" to [name]/[destination_id].")
+		log_paper("[usr] has sent a fax with the message \"[sent_paper.name]\" to [name]/[destination_id].")
 		return
 	log_game("[usr] has faxed [sent] to [name]/[destination_id].]")
 
@@ -601,3 +631,32 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 	else
 		return FALSE
 	return TRUE
+
+/proc/safe_get_paper_text(obj/item/paper/P)
+	if(!istype(P) || !("raw_text_inputs" in P.vars))
+		return ""
+
+	var/list/inputs = P.vars["raw_text_inputs"]
+	if(!length(inputs)) return ""
+
+	var/full_text = ""
+
+	// Перебираем инпуты вручную
+	for(var/datum/paper_input/I in inputs)
+		// Проверка на null (чтобы избежать Runtime)
+		if(!I) continue
+
+		// Пытаемся достать raw_text
+		if("raw_text" in I.vars)
+			var/txt = I.vars["raw_text"]
+			if(txt) full_text += txt + "\n"
+
+		// Если есть дети (вложенные поля)
+		if("children" in I.vars)
+			var/list/kids = I.vars["children"]
+			if(length(kids))
+				for(var/datum/paper_input/child in kids)
+					if(child && ("raw_text" in child.vars))
+						full_text += child.vars["raw_text"] + " "
+
+	return full_text
