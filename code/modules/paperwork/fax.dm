@@ -349,7 +349,7 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 			GLOB.requests.fax_request(usr.client, "sent a fax message from [fax_name]/[fax_id] to [params["name"]]", list("paper" = fax_paper, "destination_id" = params["id"], "sender_name" = fax_name))
 
 			// === ВСТАВКА AI: ОТПРАВКА ===
-			if(params["id"] == "central_command" || params["id"] == "centcom" || params["id"] == "Central Command")
+			if(params["id"] == "central_command")
 				var/datum/ai_bridge/AI = get_ai_bridge()
 				if(AI)
 					var/real_sender = "[fax_name] ([usr.real_name])"

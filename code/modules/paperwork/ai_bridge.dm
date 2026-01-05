@@ -1,5 +1,5 @@
-#define AI_BACKEND_URL "http://127.0.0.1:8000"
-//Это адрес сервиса-обертки для ollama, развернутого локально. Можно менять при сохранении функционала.
+var/base_url = CONFIG_GET(string/ai_secretary_url)
+if(!base_url) return
 var/global/datum/ai_bridge/global_ai_bridge
 
 /proc/get_ai_bridge()
@@ -28,23 +28,19 @@ var/global/datum/ai_bridge/global_ai_bridge
 	)
 	pending_faxes[fid] = fax_data
 
-	// Используем SShttp
+    addtimer(CALLBACK(src, .proc/cleanup_fax_data, fid), 30 MINUTES)
+
 	send_request_sshttp("/fax/analyze", fax_data, CALLBACK(src, .proc/on_analyze_complete, fid, fax_data))
 
-// Коллбек теперь получает ДАННЫЕ (список), потому что мы распакуем их в handle_response
 /datum/ai_bridge/proc/on_analyze_complete(fid, list/fax_data, list/response_data)
 	if(!response_data) return
 	notify_admins(fid, fax_data, response_data)
 
 /datum/ai_bridge/proc/notify_admins(fid, list/fax_data, list/analysis)
-	// Учитываем регистр букв от Go (Summary vs summary)
-	var/summary = analysis["summary"]
-	if(!summary) summary = analysis["Summary"]
 
-	var/urgency = analysis["urgency"]
-	if(!urgency) urgency = analysis["Urgency"]
+    var/summary = get_json_value_case_insensitive(analysis, "summary")
+    var/urgency = get_json_value_case_insensitive(analysis, "urgency")
 
-	// Заглушки
 	if(!summary) summary = "No summary generated."
 	if(!urgency) urgency = "Unknown"
 
@@ -104,9 +100,7 @@ var/global/datum/ai_bridge/global_ai_bridge
 	if(!response_data) return
 	if(!user || !user.client) return
 
-	// Go может вернуть Draft или draft
-	var/draft_text = response_data["draft"]
-	if(!draft_text) draft_text = response_data["Draft"]
+	var/draft_text = get_json_value_case_insensitive(response_data, "draft")
 
 	if(!draft_text)
 		to_chat(user, "<span class='danger'>AI Error: Empty draft received.</span>")
@@ -122,10 +116,13 @@ var/global/datum/ai_bridge/global_ai_bridge
 
 	ui.sending_fax_name = "Central Command"
 	ui.default_paper_name = "Reply to [fax_data["sender"]]"
-	ui.fax_paper.name = ui.default_paper_name
-
-	var/html_text = replacetext(draft_text, "\n", "<br>")
-	if("info" in ui.fax_paper.vars) ui.fax_paper.vars["info"] = html_text
+	var/obj/item/paper/P = ui.fax_paper
+    P.name = ui.default_paper_name
+    
+    var/html_text = replacetext(draft_text, "\n", "<br>")
+    
+    P.info = html_text
+    P.update_icon() 
 
 	ui.ui_interact(user)
 	to_chat(user, "<span class='adminnotice'>AI Draft Generated!</span>")
@@ -134,7 +131,7 @@ var/global/datum/ai_bridge/global_ai_bridge
 // --- 3. ОТПРАВКА ЧЕРЕЗ SSHTTP (МАГИЯ ТУТ) ---
 
 /datum/ai_bridge/proc/send_request_sshttp(endpoint, list/data, datum/callback/cb)
-	var/url = "[AI_BACKEND_URL][endpoint]"
+	var/url = "[base_url][endpoint]"
 	var/json_payload = json_encode(data)
 
 	// SShttp принимает список заголовков
@@ -173,3 +170,18 @@ var/global/datum/ai_bridge/global_ai_bridge
 
 	// 4. Вызов целевого коллбека с готовыми данными
 	original_cb.Invoke(decoded_data)
+
+//Cleanup procedure
+/datum/ai_bridge/proc/cleanup_fax_data(fid)
+    if(pending_faxes[fid])
+        pending_faxes -= fid
+
+/datum/ai_bridge/proc/get_json_value_case_insensitive(list/L, key)
+    if(key in L) return L[key]
+    
+    // Если точного совпадения нет, ищем перебором (медленнее, но надежно)
+    // Либо просто проверяем с большой буквы, как самое частое поведение Go
+    var/cap_key = capitalize(key)
+    if(cap_key in L) return L[cap_key]
+    
+    return null
