@@ -14,7 +14,7 @@
 	max_specific_storage = WEIGHT_CLASS_NORMAL
 
 /datum/storage/medkit/surgery_kit/New(atom/parent, max_slots, max_specific_storage, max_total_storage, rustle_sound, remove_rustle_sound, list/holdables)
-	holdables = list(
+	set_holdables = list(
 		/obj/item/surgical_drapes,
 		/obj/item/scalpel,
 		/obj/item/circular_saw,
