@@ -16,7 +16,7 @@
 	очень хорошо вооружены."
 	is_modular = TRUE
 	forced_outfit = /datum/outfit/tsf/bitrun
-	key = "inka_base_defense"
+	key = "inka_base"
 	map_name = "inka_base"
 	mob_modules = list(/datum/modular_mob_segment/nanotrasen_team)
 	reward_points = BITRUNNER_REWARD_HIGH
@@ -35,11 +35,10 @@
 /datum/outfit/tsf/bitrun
 	name = "TSF - Marine (Bitrun)"
 	uniform = /obj/item/clothing/under/rank/tsf/marine
+	id = /obj/item/card/id/advanced
 	back = /obj/item/storage/backpack/tsf
-	suit = /obj/item/clothing/suit/armor/vest
 	head = /obj/item/clothing/head/beret/tsf_marine
 	shoes = /obj/item/clothing/shoes/jackboots
-	glasses = /obj/item/clothing/glasses/sunglasses
 
 #undef SPAWN_ALWAYS
 #undef SPAWN_LIKELY
