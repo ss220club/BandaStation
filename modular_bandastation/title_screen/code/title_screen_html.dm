@@ -30,6 +30,7 @@
 				<input type="checkbox" id="hide_menu">
 				<img id="screen_blur" class="bg bg-blur" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
 				<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
+				<iframe id="screen_video" class="bg hidden" style="border: none; pointer-events: none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				<div class="lobby_wrapper">
 					<div class="lobby_container">
 						<div class="lobby-name">

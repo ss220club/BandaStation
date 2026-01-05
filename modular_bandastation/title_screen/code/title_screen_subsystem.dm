@@ -223,6 +223,27 @@
 	message_admins("Title Screen: [key_name_admin(usr)] has changed the title screen CSS.")
 
 /**
+ * Включает проигрывание YouTube видео в лобби для всех игроков
+ * user - тот, кто вызвал (обычно админ), link - ID видео или полная ссылка
+ */
+/datum/controller/subsystem/title/proc/play_youtube_video(user, link)
+	var/video_id = link
+
+	var/v_pos = findtext(link, "v=")
+	if(v_pos)
+		var/start_pos = v_pos + 2
+		var/end_pos = findtext(link, "&", start_pos)
+		if(!end_pos)
+			video_id = copytext(link, start_pos)
+		else
+			video_id = copytext(link, start_pos, end_pos)
+
+	title_output_to_all(video_id, "toggleYoutubeVideo")
+
+	log_admin("[key_name(user)] enabled YouTube background in lobby (Video ID: [video_id]).")
+	message_admins("[key_name_admin(user)] включил YouTube видео на фоне лобби.")
+
+/**
  * Changes title image to desired
  */
 /datum/controller/subsystem/title/proc/set_title_image(user, desired_image_file)
