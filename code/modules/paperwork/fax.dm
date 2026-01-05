@@ -318,14 +318,11 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 				to_chat(usr, icon2html(src.icon, usr) + span_warning("Fax cannot send all above paper on this protected network, sorry."))
 				return
 
-			// === ВСТАВКА AI START ===
+			// AI checkup
 			var/cached_name = fax_paper.name
 			var/cached_content = ""
 
-			// 1. Сначала пробуем наш безопасный парсер
 			cached_content = safe_get_paper_text(fax_paper)
-
-			// 2. Если он не справился, пробуем встроенный (на свой страх и риск, но с try catch бы...)
 
 			if(!cached_content)
 				cached_content = "(Empty Paper / Unreadable Form)"
@@ -335,7 +332,7 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 				var/regex/html_cleaner = new("<\[^>\]*>", "g")
 				cached_content = html_cleaner.Replace(cached_content, " ")
 
-			// === ВСТАВКА AI END ===
+			// AI checkup END
 
 
 			fax_paper.request_state = TRUE
@@ -348,13 +345,12 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 
 			GLOB.requests.fax_request(usr.client, "sent a fax message from [fax_name]/[fax_id] to [params["name"]]", list("paper" = fax_paper, "destination_id" = params["id"], "sender_name" = fax_name))
 
-			// === ВСТАВКА AI: ОТПРАВКА ===
+			// AI send
 			if(params["id"] == "central_command")
 				var/datum/ai_bridge/AI = get_ai_bridge()
 				if(AI)
 					var/real_sender = "[fax_name] ([usr.real_name])"
 					AI.process_incoming_fax(cached_name, cached_content, real_sender, params["id"])
-			// ============================
 
 			var/list/admins = get_holders_with_rights(R_ADMIN) /// BANDASTATION EDIT: Proper permissions
 			to_chat(admins, /// BANDASTATION EDIT: Proper permissions

@@ -27,7 +27,7 @@ const paperNameOptions = [
 
 const fromWhoOptions = ['Nanotrasen', 'Syndicate'] as const;
 
-export function AdminFax(props) {
+export function AdminFax() {
   const { act, data } = useBackend<Data>();
   const {
     faxes = [],
