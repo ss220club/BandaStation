@@ -1,3 +1,8 @@
+#define URGENCY_COLOR_LOW "green"
+#define URGENCY_COLOR_MEDIUM "#ff9900"
+#define URGENCY_COLOR_HIGH "red"
+#define URGENCY_COLOR_CRITICAL "darkred"
+
 /// Global singleton for AI bridge, initialized automatically
 GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
@@ -51,16 +56,16 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	if(!summary) summary = "No summary generated."
 	if(!urgency) urgency = "Unknown"
 
-	var/color = "green"
+	var/color = URGENCY_COLOR_LOW
 
 	var/urg_lower = LOWER_TEXT(urgency)
 	
 	if(findtext(urg_lower, "medium")) 
-		color = "#ff9900"
+		color = URGENCY_COLOR_MEDIUM
 	else if(findtext(urg_lower, "high"))
-		color = "red"
+		color = URGENCY_COLOR_HIGH
 	else if(findtext(urg_lower, "critical"))
-		color = "darkred"
+		color = URGENCY_COLOR_CRITICAL
 
 	var/msg = "<span class='notice'><b>AI SECRETARY:</b> Fax from [fax_data["sender"]]</span><br>"
 	msg += "<b>Summary:</b> [summary]<br>"
