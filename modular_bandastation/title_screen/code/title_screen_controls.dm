@@ -1,7 +1,7 @@
 /**
  * Enables an admin to upload a new titlescreen image.
  */
-ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить изображение", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_HIDDEN)
+ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить фон", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_HIDDEN)
 	if(!check_rights(R_ADMIN))
 		return
 
