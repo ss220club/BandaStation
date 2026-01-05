@@ -3279,7 +3279,6 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/bitrunning/mob_segment,
 /turf/open/floor/pod/dark,
 /area/virtual_domain)
 "xK" = (
@@ -4810,7 +4809,6 @@
 	pixel_x = 0;
 	pixel_y = 0
 	},
-/obj/effect/landmark/bitrunning/mob_segment,
 /turf/open/floor/pod/light,
 /area/virtual_domain)
 "HS" = (
@@ -5059,6 +5057,7 @@
 	set_cap = 3;
 	set_luminosity = 6
 	},
+/obj/effect/landmark/bitrunning/mob_segment,
 /turf/open/floor/pod/light,
 /area/virtual_domain)
 "Kn" = (
@@ -5281,6 +5280,11 @@
 	plane = -4.1
 	},
 /obj/structure/cable,
+/obj/effect/light_emitter{
+	name = "outdoor light";
+	set_cap = 3;
+	set_luminosity = 6
+	},
 /turf/open/floor/plating/reinforced,
 /area/virtual_domain)
 "Lm" = (
@@ -6696,14 +6700,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/asphalt,
 /area/virtual_domain)
-"Vn" = (
-/obj/effect/light_emitter{
-	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
-	},
-/turf/open/misc/dirt/station,
-/area/virtual_domain)
 "Vq" = (
 /obj/effect/turf_decal/tile/dark_blue/half{
 	dir = 8
@@ -7079,11 +7075,6 @@
 	},
 /turf/open/floor/iron/dark/smooth_half,
 /area/virtual_domain)
-"XF" = (
-/obj/effect/decal/cleanable/dirt,
-/mob/living/basic/trooper/nanotrasen/ranged/elite,
-/turf/open/floor/pod/dark,
-/area/virtual_domain)
 "XH" = (
 /obj/machinery/button/door/indestructible{
 	pixel_y = -32;
@@ -7271,8 +7262,8 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/virtual_domain)
 "Zz" = (
-/obj/structure/railing{
-	dir = 1
+/obj/structure/sign/nanotrasen{
+	pixel_x = -32
 	},
 /obj/effect/landmark/bitrunning/mob_segment,
 /turf/open/floor/pod/dark,
@@ -7552,7 +7543,7 @@ us
 Ql
 eA
 iA
-Vn
+iA
 Jy
 iA
 iA
@@ -7701,7 +7692,7 @@ VL
 an
 dr
 Wn
-Ku
+lQ
 zJ
 uS
 Dc
@@ -8068,7 +8059,7 @@ Ne
 Xp
 Xp
 QX
-Zz
+Rf
 SV
 OK
 Lg
@@ -8117,7 +8108,7 @@ Xp
 Xp
 QX
 FO
-SV
+VW
 Ku
 UX
 SV
@@ -10203,7 +10194,7 @@ kH
 nY
 Ks
 Ku
-TN
+Zz
 xP
 NW
 SV
@@ -10251,7 +10242,7 @@ kP
 eS
 DW
 ZJ
-XF
+SV
 SV
 SV
 Ku
