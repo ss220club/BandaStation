@@ -52,3 +52,4 @@
 		/obj/item/stack/sticky_tape = 2
 	)
 	category = CAT_CONTAINERS
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
