@@ -628,6 +628,24 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 		return FALSE
 	return TRUE
 
+/proc/get_paper_input_text_recursive(datum/paper_input/I)
+	if(!I)
+		return ""
+
+	var/text = ""
+	if("raw_text" in I.vars)
+		var/txt = I.vars["raw_text"]
+		if(txt)
+			text += txt + "\n"
+
+	if("children" in I.vars)
+		var/list/kids = I.vars["children"]
+		if(length(kids))
+			for(var/datum/paper_input/child in kids)
+				text += get_paper_input_text_recursive(child)
+
+	return text
+
 /proc/safe_get_paper_text(obj/item/paper/P)
 	if(!istype(P) || !("raw_text_inputs" in P.vars))
 		return ""
@@ -636,22 +654,7 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 	if(!length(inputs)) return ""
 
 	var/full_text = ""
-
-	// Iterate through inputs manually
 	for(var/datum/paper_input/I in inputs)
-		// null checkup
-		if(!I) continue
-		//raw text case
-		if("raw_text" in I.vars)
-			var/txt = I.vars["raw_text"]
-			if(txt) full_text += txt + "\n"
-
-		// If have children
-		if("children" in I.vars)
-			var/list/kids = I.vars["children"]
-			if(length(kids))
-				for(var/datum/paper_input/child in kids)
-					if(child && ("raw_text" in child.vars))
-						full_text += child.vars["raw_text"] + " "
+		full_text += get_paper_input_text_recursive(I)
 
 	return full_text
