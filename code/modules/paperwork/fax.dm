@@ -1,6 +1,8 @@
 GLOBAL_VAR_INIT(nt_fax_department, pick("NT HR Department", "NT Legal Department", "NT Complaint Department", "NT Customer Relations", "Nanotrasen Tech Support", "NT Internal Affairs Dept"))
 GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 
+#define FAX_ID_CENTRAL_COMMAND "central_command"
+
 /obj/machinery/fax
 	name = "Fax Machine"
 	desc = "Bluespace technologies on the application of bureaucracy."
@@ -57,7 +59,7 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 	)
 	/// List with a fake-networks(not a fax actually), for request manager.
 	var/list/special_networks = list(
-		nanotrasen = list(fax_name = "NT HR Department", fax_id = "central_command", color = "teal", emag_needed = FALSE),
+		nanotrasen = list(fax_name = "NT HR Department", fax_id = FAX_ID_CENTRAL_COMMAND, color = "teal", emag_needed = FALSE),
 		syndicate = list(fax_name = "Sabotage Department", fax_id = "syndicate", color = "red", emag_needed = TRUE),
 	)
 	// Regex cleaner
@@ -347,7 +349,7 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 			GLOB.requests.fax_request(usr.client, "sent a fax message from [fax_name]/[fax_id] to [params["name"]]", list("paper" = fax_paper, "destination_id" = params["id"], "sender_name" = fax_name))
 
 			// AI send
-			if(params["id"] == "central_command")
+			if(params["id"] == FAX_ID_CENTRAL_COMMAND)
 				var/datum/ai_bridge/AI = get_ai_bridge()
 				if(AI)
 					var/real_sender = "[fax_name] ([usr.real_name])"
