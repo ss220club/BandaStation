@@ -211,3 +211,8 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 // --- CONFIG DEFINITION ---
 /datum/config_entry/string/ai_secretary_url
 	protection = CONFIG_ENTRY_LOCKED
+
+#undef URGENCY_COLOR_LOW
+#undef URGENCY_COLOR_MEDIUM
+#undef URGENCY_COLOR_HIGH
+#undef URGENCY_COLOR_CRITICAL

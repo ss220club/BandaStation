@@ -660,3 +660,5 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 		full_text += get_paper_input_text_recursive(I)
 
 	return full_text
+
+#undef FAX_ID_CENTRAL_COMMAND
