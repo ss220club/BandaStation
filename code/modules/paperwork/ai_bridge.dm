@@ -2,8 +2,7 @@
 GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
 /proc/get_ai_bridge()
-
-    return  GLOB.global_ai_bridge
+	return GLOB.global_ai_bridge
 
 /datum/ai_bridge
 	var/list/pending_faxes = list()
