@@ -1,5 +1,5 @@
 #define AI_BACKEND_URL "http://127.0.0.1:8000"
-
+//Это адрес сервиса-обертки для ollama, развернутого локально. Можно менять при сохранении функционала.
 var/global/datum/ai_bridge/global_ai_bridge
 
 /proc/get_ai_bridge()
