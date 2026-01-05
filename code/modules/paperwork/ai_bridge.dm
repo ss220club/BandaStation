@@ -52,18 +52,21 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	if(!urgency) urgency = "Unknown"
 
 	var/color = "green"
-	// LINT FIX: Use LOWER_TEXT macro
+
 	var/urg_lower = LOWER_TEXT(urgency)
 	
-	if(findtext(urg_lower, "medium")) color = "#ff9900"
-	if(findtext(urg_lower, "high")) color = "red"
-	if(findtext(urg_lower, "critical")) color = "darkred"
+	if(findtext(urg_lower, "medium")) 
+		color = "#ff9900"
+	else if(findtext(urg_lower, "high"))
+		color = "red"
+	else if(findtext(urg_lower, "critical"))
+		color = "darkred"
 
 	var/msg = "<span class='notice'><b>AI SECRETARY:</b> Fax from [fax_data["sender"]]</span><br>"
 	msg += "<b>Summary:</b> [summary]<br>"
 	msg += "<b>Urgency:</b> <font color='[color]'>[urgency]</font><br>"
 	msg += "<b>AI Actions: </b>"
-	// LINT FIX: Use REF() macro and byond:// prefix
+
 	msg += "<a href='byond://?src=[REF(src)];action=reply;mode=approve;fid=[fid]'>APPROVE</a> "
 	msg += "<a href='byond://?src=[REF(src)];action=reply;mode=deny;fid=[fid]'>DENY</a> "
 	msg += "<a href='byond://?src=[REF(src)];action=reply;mode=custom;fid=[fid]'>CUSTOM</a>"
@@ -104,7 +107,6 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 		"custom_note" = custom_note
 	)
 
-	// LINT FIX: Use PROC_REF macro
 	send_request_sshttp("/fax/reply", request_data, CALLBACK(src, PROC_REF(on_generation_complete), user, fax_data))
 
 /datum/ai_bridge/proc/on_generation_complete(mob/user, list/fax_data, list/response_data)

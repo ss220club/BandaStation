@@ -60,6 +60,8 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 		nanotrasen = list(fax_name = "NT HR Department", fax_id = "central_command", color = "teal", emag_needed = FALSE),
 		syndicate = list(fax_name = "Sabotage Department", fax_id = "syndicate", color = "red", emag_needed = TRUE),
 	)
+	// Regex cleaner
+	var/static/regex/html_cleaner = new("<\[^>\]*>", "g")
 
 /obj/machinery/fax/auto_name
 	name = "Auto-naming Fax Machine"
@@ -327,9 +329,8 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 			if(!cached_content)
 				cached_content = "(Empty Paper / Unreadable Form)"
 			else
-				// Чистка
+				// Cleanup
 				cached_content = replacetext(cached_content, "<br>", "\n")
-				var/regex/html_cleaner = new("<\[^>\]*>", "g")
 				cached_content = html_cleaner.Replace(cached_content, " ")
 
 			// AI checkup END
@@ -636,17 +637,16 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 
 	var/full_text = ""
 
-	// Перебираем инпуты вручную
+	// Iterate through inputs manually
 	for(var/datum/paper_input/I in inputs)
-		// Проверка на null (чтобы избежать Runtime)
+		// null checkup
 		if(!I) continue
-
-		// Пытаемся достать raw_text
+		//raw text case
 		if("raw_text" in I.vars)
 			var/txt = I.vars["raw_text"]
 			if(txt) full_text += txt + "\n"
 
-		// Если есть дети (вложенные поля)
+		// If have children
 		if("children" in I.vars)
 			var/list/kids = I.vars["children"]
 			if(length(kids))

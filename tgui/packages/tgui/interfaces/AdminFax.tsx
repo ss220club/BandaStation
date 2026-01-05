@@ -18,6 +18,9 @@ import { Window } from '../layouts';
 type Data = {
   faxes: string[];
   stamps: string[];
+  prefillText?: string;
+  prefillPaperName?: string;
+  prefillSender?: string;
 };
 
 const paperNameOptions = [
