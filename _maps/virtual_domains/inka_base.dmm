@@ -976,13 +976,13 @@
 	icon_state = "track_break";
 	name = "tower";
 	pixel_x = 0;
-	pixel_y = 0
+	pixel_y = 0;
+	plane = -3.9
 	},
 /obj/structure{
 	icon = 'icons/obj/machines/telecomms.dmi';
 	icon_state = "bus";
 	name = "Hub";
-	layer = 2.89;
 	pixel_x = 0;
 	pixel_y = 8;
 	density = 1
@@ -5249,31 +5249,29 @@
 	icon_state = "track";
 	name = "tower";
 	pixel_x = 0;
-	pixel_y = 0
+	pixel_y = 0;
+	plane = -3.9
 	},
 /obj/structure{
 	icon = 'icons/obj/science/circuits.dmi';
 	icon_state = "usb_cable";
 	name = "Hub";
 	pixel_x = -15;
-	pixel_y = 2;
-	layer = 2.89
+	pixel_y = 2
 	},
 /obj/structure{
 	icon = 'icons/obj/science/circuits.dmi';
 	icon_state = "usb_cable";
 	name = "Hub";
 	pixel_x = -14;
-	pixel_y = -3;
-	layer = 2.89
+	pixel_y = -3
 	},
 /obj/structure{
 	icon = 'icons/obj/science/circuits.dmi';
 	icon_state = "usb_cable";
 	name = "Hub";
 	pixel_x = -15;
-	pixel_y = 6;
-	layer = 2.89
+	pixel_y = 6
 	},
 /obj/structure{
 	icon = 'icons/obj/machines/telepad.dmi';
@@ -5283,11 +5281,6 @@
 	layer = 2.88
 	},
 /obj/structure/cable,
-/obj/effect/light_emitter{
-	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
-	},
 /turf/open/floor/plating/reinforced,
 /area/virtual_domain)
 "Lm" = (
@@ -5536,6 +5529,14 @@
 /obj/structure/railing,
 /obj/structure/barricade/sandbags,
 /turf/open/floor/pod/light,
+/area/virtual_domain)
+"MN" = (
+/obj/effect/light_emitter{
+	name = "outdoor light";
+	set_cap = 3;
+	set_luminosity = 6
+	},
+/turf/open/misc/dirt/station,
 /area/virtual_domain)
 "MP" = (
 /obj/effect/turf_decal/stripes/line{
@@ -7551,7 +7552,7 @@ us
 Ql
 eA
 iA
-iA
+MN
 Jy
 iA
 iA
