@@ -121,8 +121,8 @@
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/structure/table/glass,
 /obj/item/storage/briefcase/secure,
-/obj/item/computer_disk/medical,
-/obj/item/computer_disk/medical,
+/obj/item/disk/computer/medical,
+/obj/item/disk/computer/medical,
 /turf/open/floor/iron/white,
 /area/station/command/heads_quarters/cmo)
 "E" = (
