@@ -79,18 +79,26 @@
 		return TRUE
 
 	to_chat(H, span_notice("Вы начинаете связывать разум [T.real_name] с ульем. Не шевелитесь и оставайтесь в тени..."))
+	apply_wibbly_filters(T)
+	apply_wibbly_filters(H)
 	to_chat(T, span_danger("Холодная тьма обволакивает ваш разум..."))
 
 	// 30 second cast - to prevent players from speedrunning converts
 	for(var/i = 1 to 3)
 		if(cancel_on_bright && !is_dark(H))
 			to_chat(H, span_warning("Свет разорвал связь."))
+			remove_wibbly_filters(T)
+			remove_wibbly_filters(H)
 			return FALSE
 		if(QDELETED(T) || get_dist(H, T) > 2 || has_mindshield(T) || !is_dark(T))
 			to_chat(H, span_warning("Цель утрачена."))
+			remove_wibbly_filters(T)
+			remove_wibbly_filters(H)
 			return FALSE
 		if(!do_after(H, enthrall_time, T))
 			to_chat(H, span_warning("Связь прервана."))
+			remove_wibbly_filters(T)
+			remove_wibbly_filters(H)
 			return FALSE
 
 		T.adjust_oxy_loss(ENTHRALL_OXY_DRAIN)
@@ -102,8 +110,12 @@
 		qdel(O)
 		owner.balloon_alert(owner, "связать не удалось")
 		to_chat(H, span_warning("Не удалось связать [T.real_name] с ульем."))
+		remove_wibbly_filters(T)
+		remove_wibbly_filters(H)
 		return FALSE
 
 	to_chat(H, span_notice("Вы связываете разум [T.real_name] с ульем."))
 	to_chat(T, span_danger("Холодная тьма пронзает ваш мозг... Вы становитесь слугой роя!"))
+	remove_wibbly_filters(T)
+	remove_wibbly_filters(H)
 	return TRUE

@@ -30,6 +30,13 @@
 	ling_roles.Cut()
 	return ..()
 
+/datum/team/shadow_hive/proc/update_objective_explanations()
+	if(!islist(objectives))
+		return
+
+	for(var/datum/objective/shadowling/enslave_fraction/O in objectives)
+		O.update_explanation_text()
+
 /datum/team/shadow_hive/add_member(datum/mind/new_member)
 	. = ..()
 	if(!new_member)
@@ -38,6 +45,7 @@
 		return
 	if(!(new_member in members))
 		members += new_member
+
 
 /datum/team/shadow_hive/remove_member(datum/mind/old_member)
 	. = ..()
@@ -65,6 +73,7 @@
 	to_chat(H, span_notice("Вы ощущаете голоса роя в своей голове..."))
 	grant_sync_action(H)
 	grant_comm_action(H)
+	update_objective_explanations()
 
 /datum/team/shadow_hive/proc/leave_member(mob/living/carbon/human/H)
 	if(!istype(H))
@@ -75,6 +84,7 @@
 	UnregisterSignal(H, COMSIG_QDELETING)
 	if(H.mind && (H.mind in members))
 		members -= H.mind
+	update_objective_explanations()
 
 /datum/team/shadow_hive/proc/_on_member_qdel(mob/living/source)
 	SIGNAL_HANDLER
@@ -84,6 +94,7 @@
 	UnregisterSignal(source, COMSIG_QDELETING)
 	if(source?.mind && (source.mind in members))
 		members -= source.mind
+	update_objective_explanations()
 
 /datum/team/shadow_hive/proc/sanitize()
 	for(var/i = length(lings) to 1 step -1)
