@@ -39,7 +39,6 @@
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/pistol/gp9/sec
-	pin = /obj/item/firing_pin/alert_level/blue
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
 
 /obj/item/gun/ballistic/automatic/pistol/gp9/spec
