@@ -8,10 +8,10 @@
 	},
 /obj/machinery/status_display/evac/directional/north,
 /obj/effect/turf_decal/tile/blue/opposingcorners,
-/obj/item/computer_disk/medical{
+/obj/item/disk/computer/medical{
 	pixel_x = -3
 	},
-/obj/item/computer_disk/medical{
+/obj/item/disk/computer/medical{
 	pixel_x = 3
 	},
 /obj/item/storage/medkit/regular,

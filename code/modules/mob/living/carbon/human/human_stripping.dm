@@ -106,8 +106,8 @@ GLOBAL_LIST_INIT(strippable_human_items, create_strippable_list(list(
 		"[SENSOR_COORDS]" = "Слежение",
 	)
 
-	var/new_mode = tgui_input_list(user, "Переключение датчиков комбинезона", "Переключение датчиков", sensor_mode_text_to_num, senor_mode_num_to_text["[jumpsuit.sensor_mode]"])
-	new_mode = sensor_mode_text_to_num[new_mode]
+	var/new_mode_str = tgui_input_list(user, "Переключение датчиков комбинезона", "Переключение датчиков", sensor_mode_text_to_num, senor_mode_num_to_text["[jumpsuit.sensor_mode]"])
+	var/new_mode = sensor_mode_text_to_num[new_mode_str]
 	if(isnull(new_mode)) // also catches returning null
 		return
 
@@ -121,6 +121,8 @@ GLOBAL_LIST_INIT(strippable_human_items, create_strippable_list(list(
 		return
 	source.balloon_alert(user, "датчики переключены")
 	to_chat(source, span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно переключает датчики [jumpsuit.ru_p_yours(GENITIVE)] [jumpsuit.declent_ru(GENITIVE)]."))
+	user.log_message("изменил(а) режим датчиков костюма [key_name(source)] на [new_mode_str]", LOG_ATTACK, color="red")
+	source.log_message("режим датчиков костюма изменен на [new_mode_str] игроком [key_name(user)]", LOG_VICTIM, color="orange", log_globally=FALSE)
 
 /datum/strippable_item/mob_item_slot/jumpsuit/proc/do_strip_accessory(atom/source, mob/user, obj/item/clothing/under/jumpsuit)
 	var/list/accessory_choices = list()

@@ -77,6 +77,7 @@
 	result = /obj/item/food/cake/birthday
 	added_foodtypes = JUNKFOOD
 	category = CAT_CAKE
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /datum/crafting_recipe/food/energycake
 	name = "Energy cake"

@@ -4071,8 +4071,8 @@
 "aYE" = (
 /obj/structure/table/glass,
 /obj/machinery/firealarm/directional/east,
-/obj/item/computer_disk/medical,
-/obj/item/computer_disk/medical,
+/obj/item/disk/computer/medical,
+/obj/item/disk/computer/medical,
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 4
 	},
@@ -34805,7 +34805,7 @@
 /obj/item/stamp/head/qm{
 	pixel_x = -8
 	},
-/obj/item/computer_disk/quartermaster{
+/obj/item/disk/computer/quartermaster{
 	pixel_x = 4
 	},
 /obj/item/pen{
@@ -48327,14 +48327,14 @@
 /area/station/hallway/primary/fore)
 "lLw" = (
 /obj/structure/table,
-/obj/item/computer_disk/ordnance{
+/obj/item/disk/computer/ordnance{
 	pixel_x = -5;
 	pixel_y = 6
 	},
-/obj/item/computer_disk{
+/obj/item/disk/computer{
 	pixel_x = -2
 	},
-/obj/item/computer_disk{
+/obj/item/disk/computer{
 	pixel_x = 7;
 	pixel_y = 2
 	},
@@ -81159,15 +81159,15 @@
 	dir = 8
 	},
 /obj/structure/table/wood,
-/obj/item/computer_disk/engineering{
+/obj/item/disk/computer/engineering{
 	pixel_y = 3;
 	pixel_x = 4
 	},
-/obj/item/computer_disk/engineering{
+/obj/item/disk/computer/engineering{
 	pixel_y = 3;
 	pixel_x = 4
 	},
-/obj/item/computer_disk/engineering{
+/obj/item/disk/computer/engineering{
 	pixel_y = 3;
 	pixel_x = 4
 	},
@@ -93874,15 +93874,15 @@
 	},
 /obj/structure/table/glass,
 /obj/item/radio/intercom/directional/north,
-/obj/item/computer_disk{
+/obj/item/disk/computer{
 	pixel_x = 7;
 	pixel_y = 2
 	},
-/obj/item/computer_disk/ordnance{
+/obj/item/disk/computer/ordnance{
 	pixel_y = 4;
 	pixel_x = -5
 	},
-/obj/item/computer_disk/ordnance,
+/obj/item/disk/computer/ordnance,
 /obj/item/paper_bin,
 /obj/item/pen,
 /obj/effect/turf_decal/tile/purple/anticorner{
