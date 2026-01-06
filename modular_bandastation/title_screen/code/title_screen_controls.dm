@@ -5,7 +5,7 @@ ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить фон", 
 	if(!check_rights(R_ADMIN))
 		return
 
-	switch(tgui_input_list(usr, "Что делаем с изображением в лобби?", "Лобби", list("Меняем", "Сбрасываем", "Включаем YouTube", "Ничего")))
+	switch(tgui_input_list(usr, "Что делаем с фоном лобби?", "Фон лобби", list("Меняем", "Сбрасываем", "Включаем YouTube", "Ничего")))
 		if("Меняем")
 			var/file = input(usr) as icon|null
 			if(file)

@@ -227,16 +227,12 @@
  * user - тот, кто вызвал (обычно админ), link - ID видео или полная ссылка
  */
 /datum/controller/subsystem/title/proc/play_youtube_video(user, link)
-	var/video_id = link
-
-	var/v_pos = findtext(link, "v=")
-	if(v_pos)
-		var/start_pos = v_pos + 2
-		var/end_pos = findtext(link, "&", start_pos)
-		if(!end_pos)
-			video_id = copytext(link, start_pos)
-		else
-			video_id = copytext(link, start_pos, end_pos)
+	var/video_id
+	var/regex/youtube_regex = new("(?:v=|/embed/|/shorts/|youtu.be/)(\[a-zA-Z0-9_-\]{11})")
+	if(youtube_regex.Find(link))
+		video_id = youtube_regex.group[1]
+	else
+		video_id = link
 
 	title_output_to_all(video_id, "toggleYoutubeVideo")
 

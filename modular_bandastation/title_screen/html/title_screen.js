@@ -211,23 +211,15 @@ function toggleYoutubeVideo(videoId) {
 
   if (!videoFrame) return;
 
-  isVideoEnabled = !isVideoEnabled;
+  isVideoEnabled = true;
 
-  if (isVideoEnabled) {
-    img.classList.add('hidden');
-    blur.classList.add('hidden');
+  img.classList.add('hidden');
+  blur.classList.add('hidden');
 
-    const url = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&loop=1&playlist=${videoId}&showinfo=0&modestbranding=1`;
+  const url = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&loop=1&playlist=${videoId}&showinfo=0&modestbranding=1`;
 
-    videoFrame.src = url;
-    videoFrame.classList.remove('hidden');
-  } else {
-    img.classList.remove('hidden');
-    blur.classList.remove('hidden');
-
-    videoFrame.src = '';
-    videoFrame.classList.add('hidden');
-  }
+  videoFrame.src = url;
+  videoFrame.classList.remove('hidden');
 }
 
 /* Tell Byond that the title screen is ready */
