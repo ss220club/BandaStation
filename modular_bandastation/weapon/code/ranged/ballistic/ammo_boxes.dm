@@ -149,6 +149,11 @@
 /obj/item/ammo_box/speedloader/strilka310
 	desc = "Пятизарядная обойма для винтовок калибра .310 Strilka."
 
+/obj/item/ammo_box/speedloader/strilka310/rubber
+	name = "stripper clip (.310 Strilka rubber)"
+	desc = parent_type::desc + " В этой должны находиться травматические патроны."
+	ammo_type = /obj/item/ammo_casing/strilka310/rubber
+
 /obj/item/ammo_box/speedloader/strilka310/ap
 	name = "stripper clip (.310 Strilka armor-piercing)"
 	desc = parent_type::desc + " В этой должны находиться бронебойные патроны."

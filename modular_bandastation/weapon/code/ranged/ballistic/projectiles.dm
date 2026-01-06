@@ -640,3 +640,6 @@
 	damage = 60
 	armour_penetration = 40
 	wound_falloff_tile = -1
+
+/obj/projectile/bullet/a50ae/585sol
+	name = ".585 Sol bullet"

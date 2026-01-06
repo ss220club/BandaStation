@@ -45,7 +45,11 @@
 
 // TSF
 #include "code/ranged/ballistic/tsf/pistols/wespe.dm"
+#include "code/ranged/ballistic/tsf/pistols/eland.dm"
+#include "code/ranged/ballistic/tsf/pistols/takbok.dm"
+#include "code/ranged/ballistic/tsf/pistols/skild.dm"
 #include "code/ranged/ballistic/tsf/smgs/sindano.dm"
+#include "code/ranged/ballistic/tsf/smgs/bogseo.dm"
 #include "code/ranged/ballistic/tsf/rifles/carwo.dm"
 #include "code/ranged/ballistic/tsf/special/renoster.dm"
 #include "code/ranged/ballistic/tsf/special/minigun.dm"

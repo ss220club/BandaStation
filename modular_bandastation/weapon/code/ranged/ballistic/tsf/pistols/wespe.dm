@@ -11,6 +11,10 @@
 	preview_name = "Black"
 	new_icon_state = "wespe_black"
 
+/datum/atom_skin/wespe/blue
+	preview_name = "Blue"
+	new_icon_state = "wespe_blue"
+
 /obj/item/gun/ballistic/automatic/pistol/wespe
 	name = "'Wespe' pistol"
 	desc = "Стандартный служебный пистолет различных военных подразделений ТСФ. Использует патрон .35 Sol Short имеет встроенный фонарик."

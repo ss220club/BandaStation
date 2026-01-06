@@ -347,7 +347,7 @@
 /obj/item/ammo_casing/strilka310/rubber
 	name = ".310 Strilka rubber bullet casing"
 	desc = "Травматический безгильзовый винтовочный патрон c резиновой пулей калибра .310 Стрилка."
-	icon_state = "762x51r-casing"
+	icon_state = "310r-casing"
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	projectile_type = /obj/projectile/bullet/strilka310/rubber
 
@@ -457,3 +457,16 @@
 	icon_state = "rpg_rocket_low_yield"
 	base_icon_state = "rpg_rocket_low_yield"
 	projectile_type = /obj/projectile/bullet/rocket/weak
+
+// MARK: .585 Sol
+/obj/item/ammo_casing/c585sol
+	name = ".585 Sol bullet casing"
+	desc = "Пистолетный безгильзовый патрон калибра .585 Sol."
+	projectile_type = /obj/projectile/bullet/a50ae/585sol
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "585trappiste"
+	caliber = CALIBER_585SOL
+
+/obj/item/ammo_casing/c585sol/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/caseless)

@@ -1287,3 +1287,34 @@
 	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c46x30mm/rubber
+
+// MARK: Eland / Takbok - TSF revolvers
+/obj/item/ammo_box/magazine/internal/cylinder/eland
+	ammo_type = /obj/item/ammo_casing/c35sol
+	caliber = CALIBER_SOL35SHORT
+	max_ammo = 8
+
+/obj/item/ammo_box/magazine/internal/cylinder/eland/army
+	ammo_type = /obj/item/ammo_casing/c38
+	caliber = CALIBER_38
+	max_ammo = 6
+
+/obj/item/ammo_box/magazine/internal/cylinder/takbok
+	ammo_type = /obj/item/ammo_casing/c585sol
+	caliber = CALIBER_585SOL
+	max_ammo = 5
+
+// MARK: .50 pistol/smg mags
+/obj/item/ammo_box/magazine/c585sol
+	name = ".50 magazine"
+	desc = "A standard size magazine for .585 pistols, holds 10 rounds."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "pistol_585_standard"
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	w_class = WEIGHT_CLASS_SMALL
+	ammo_type = /obj/item/ammo_casing/c585sol
+	caliber = CALIBER_585SOL
+	max_ammo = 10
+
+/obj/item/ammo_box/magazine/c585sol/spawns_empty
+	start_empty = TRUE
