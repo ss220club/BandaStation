@@ -215,7 +215,7 @@ GLOBAL_LIST_INIT(syndicate_employers, list(
 	"Donk Corporation",
 	"Gorlex Marauders",
 	"MI13",
-	"Tiger Cooperative Fanatic",
+	"Tiger Cooperative Occultist",
 	"Waffle Corporation Terrorist",
 	"Waffle Corporation",
 	"S.E.L.F."
@@ -232,7 +232,7 @@ GLOBAL_LIST_INIT(hijack_employers, list(
 	//"Animal Rights Consortium", BANDASTATION REMOVAL - Syndicate Lore Rewritten
 	//"Bee Liberation Front", BANDASTATION REMOVAL - Syndicate Lore Rewritten
 	"Gone Postal",
-	"Tiger Cooperative Fanatic",
+	"Tiger Cooperative Occultist",
 	"Waffle Corporation Terrorist",
 ))
 
