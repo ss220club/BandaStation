@@ -232,7 +232,7 @@ GLOBAL_LIST_INIT(hijack_employers, list(
 	//"Animal Rights Consortium", BANDASTATION REMOVAL - Syndicate Lore Rewritten
 	//"Bee Liberation Front", BANDASTATION REMOVAL - Syndicate Lore Rewritten
 	"Gone Postal",
-	"Tiger Cooperative Occultist"
+	"Tiger Cooperative Occultist",
 	"Waffle Corporation Terrorist",
 ))
 
