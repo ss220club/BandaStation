@@ -12,6 +12,8 @@
 	force = 12
 	w_class = WEIGHT_CLASS_BULKY
 
+	appearance_flags = KEEP_TOGETHER | PIXEL_SCALE | TILE_BOUND
+
 	var/obj/item/stored_weapon = null
 
 /obj/item/tank/internals/tactical/Initialize(mapload)
@@ -43,17 +45,34 @@
 		. += span_info("Магнитный захват пуст.")
 
 /obj/item/tank/internals/tactical/attackby(obj/item/W, mob/user, params)
-	if(istype(W, /obj/item/gun) || istype(W, /obj/item/melee))
+	var/is_weapon = istype(W, /obj/item/gun) || \
+	                istype(W, /obj/item/melee) || \
+	                istype(W, /obj/item/spear) || \
+	                istype(W, /obj/item/kinetic_crusher) || \
+	                istype(W, /obj/item/chainsaw) || \
+	                istype(W, /obj/item/nullrod)
+
+	if(is_weapon)
 		if(stored_weapon)
 			to_chat(user, span_warning("Магнитный захват уже занят [stored_weapon.name]!"))
 			return
 
-		if(user.transferItemToLoc(W, src))
+		W.dropped(user)
+
+		if(user.transferItemToLoc(W, src, TRUE))
 			stored_weapon = W
 			to_chat(user, span_notice("Вы закрепили [W.name] на магнитном захвате баллона."))
 			playsound(src, 'sound/items/weapons/magin.ogg', 40, TRUE)
 			update_appearance()
+			user.update_held_items()
 			return
+		else
+			if(W.forceMove(src))
+				stored_weapon = W
+				update_appearance()
+				user.update_held_items()
+				return
+
 	return ..()
 
 /obj/item/tank/internals/tactical/click_alt(mob/user)
@@ -80,14 +99,20 @@
 		return
 
 	var/mutable_appearance/weapon_overlay = mutable_appearance(stored_weapon.icon, stored_weapon.icon_state)
+
 	var/matrix/M = matrix()
 	M.Turn(90)
 	M.Scale(0.6, 0.6)
 	weapon_overlay.transform = M
 
-	weapon_overlay.pixel_y = 2
-	weapon_overlay.layer = FLOAT_LAYER
+	weapon_overlay.pixel_x = 0
+	weapon_overlay.pixel_y = 3
+
+	weapon_overlay.layer = 20
+
 	weapon_overlay.color = stored_weapon.color
+	weapon_overlay.alpha = stored_weapon.alpha
+
 	. += weapon_overlay
 
 /obj/item/tank/internals/tactical/worn_overlays(is_worn, slot)
@@ -96,10 +121,7 @@
 		return
 
 	var/mob/living/L = loc
-	if(!istype(L))
-		return
-
-	if(L.dir == SOUTH)
+	if(!istype(L) || L.dir == SOUTH)
 		return
 
 	var/mutable_appearance/weapon_worn = mutable_appearance(stored_weapon.icon, stored_weapon.icon_state)
@@ -115,8 +137,10 @@
 		weapon_worn.pixel_y = 1
 
 	weapon_worn.transform = M
-	weapon_worn.layer = FLOAT_LAYER + 0.01
+
+	weapon_worn.layer = FLOAT_LAYER + 0.1
 	weapon_worn.color = stored_weapon.color
+	weapon_worn.alpha = stored_weapon.alpha
 
 	. += weapon_worn
 
@@ -125,3 +149,4 @@
 	if(ismob(loc))
 		var/mob/M = loc
 		M.update_appearance()
+		M.update_held_items()
