@@ -5,11 +5,9 @@
 /obj/item/bodypart/chest/ipc
 	name = "IPC chassis"
 	desc = "Основной корпус IPC, содержащий все жизненно важные системы."
-	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
-	icon_state = "torso_m"
+	icon_greyscale  = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
 	is_dimorphic = TRUE
-	should_draw_greyscale = TRUE
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_ROBOTIC
 
@@ -35,11 +33,10 @@
 /obj/item/bodypart/head/ipc
 	name = "IPC head"
 	desc = "Голова IPC с оптическими и аудио сенсорами."
-	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
-	icon_state = "head_m"
+	icon_greyscale  = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
-	is_dimorphic = TRUE
-	should_draw_greyscale = TRUE
+	head_flags = HEAD_LIPS|HEAD_DEBRAIN
+	is_dimorphic = FALSE
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_ROBOTIC
 
@@ -66,10 +63,8 @@
 /obj/item/bodypart/arm/left/ipc
 	name = "IPC left arm"
 	desc = "Левая рука IPC."
-	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
-	icon_state = "l_arm"
+	icon_greyscale  = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
-	should_draw_greyscale = TRUE
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_ROBOTIC
 
@@ -84,10 +79,8 @@
 /obj/item/bodypart/arm/right/ipc
 	name = "IPC right arm"
 	desc = "Правая рука IPC."
-	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
-	icon_state = "r_arm"
+	icon_greyscale  = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
-	should_draw_greyscale = TRUE
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_ROBOTIC
 
@@ -102,10 +95,8 @@
 /obj/item/bodypart/leg/left/ipc
 	name = "IPC left leg"
 	desc = "Левая нога IPC."
-	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
-	icon_state = "l_leg"
+	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
-	should_draw_greyscale = TRUE
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_ROBOTIC
 
@@ -118,10 +109,8 @@
 /obj/item/bodypart/leg/right/ipc
 	name = "IPC right leg"
 	desc = "Правая нога IPC."
-	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
-	icon_state = "r_leg"
+	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
-	should_draw_greyscale = TRUE
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_ROBOTIC
 

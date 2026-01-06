@@ -1,12 +1,12 @@
 /datum/species/ipc
-	name = "\improper IPC"
+	name = "IPC"
 	id = SPECIES_IPC
 	sexes = TRUE
 
 	// Визуальные параметры
-	meat = /obj/item/stack/sheet/plasteel{amount = 5}
+	meat = null
 	skinned_type = /obj/item/stack/sheet/iron{amount = 10}
-	exotic_bloodtype = "O"
+	exotic_bloodtype = BLOOD_TYPE_OIL
 
 	// Физиологические особенности
 	mutantlungs = /obj/item/organ/lungs/ipc
