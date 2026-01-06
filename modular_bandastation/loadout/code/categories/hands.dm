@@ -67,11 +67,11 @@
 	item_path = /obj/item/storage/fancy/ringbox
 	donator_level = DONATOR_TIER_2
 
-// MARK: Tier 5
+// MARK: Tier 4
 /datum/loadout_item/pocket_items/ringbox_diamond
 	name = "Коробочка с кольцом с бриллиантом"
 	item_path = /obj/item/storage/fancy/ringbox/diamond
-	donator_level = DONATOR_TIER_5
+	donator_level = DONATOR_TIER_4
 
 // MARK: Tier 1
 /datum/loadout_item/gloves/biker_gloves
