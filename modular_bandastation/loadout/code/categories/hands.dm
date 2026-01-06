@@ -56,19 +56,22 @@
 	name = "Перчатки без пальцев"
 	item_path = /obj/item/clothing/gloves/fingerless
 
+// MARK: Tier 2
 /datum/loadout_item/pocket_items/ringbox_silver
 	name = "Коробочка с серебряным кольцом"
 	item_path = /obj/item/storage/fancy/ringbox/silver
+	donator_level = DONATOR_TIER_2
 
 /datum/loadout_item/pocket_items/ringbox_gold
 	name = "Коробочка с золотым кольцом"
 	item_path = /obj/item/storage/fancy/ringbox
+	donator_level = DONATOR_TIER_2
 
-// MARK: Tier 1
+// MARK: Tier 5
 /datum/loadout_item/pocket_items/ringbox_diamond
 	name = "Коробочка с кольцом с бриллиантом"
 	item_path = /obj/item/storage/fancy/ringbox/diamond
-	donator_level = DONATOR_TIER_1
+	donator_level = DONATOR_TIER_5
 
 // MARK: Tier 1
 /datum/loadout_item/gloves/biker_gloves
