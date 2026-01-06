@@ -220,8 +220,8 @@
 	desc = "Hello <;~insert appropriate greeting here: 'Comrade'|'Imperalist Scum'|'Quartermaster of Reputable Station'~;>, \
 		we have the most modern russian military equipment the black market can offer, for the right price of course. \
 		No lock, best price."
-	order_flags = ORDER_EMAG_ONLY // BANDASTATION EDIT: ORIGINAL: order_flags = ORDER_CONTRABAND
-	cost = CARGO_CRATE_VALUE * 15 // BANDASTATION EDIT: ORIGINAL: cost = CARGO_CRATE_VALUE * 12
+	order_flags = ORDER_CONTRABAND
+	cost = CARGO_CRATE_VALUE * 20 // BANDASTATION EDIT: ORIGINAL: cost = CARGO_CRATE_VALUE * 12
 	contains = list(
 		/obj/item/food/rationpack,
 		/obj/item/ammo_box/speedloader/strilka310,
