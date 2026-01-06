@@ -209,31 +209,30 @@
 
 ///employers that are from the syndicate
 GLOBAL_LIST_INIT(syndicate_employers, list(
-	"Animal Rights Consortium",
-	"Bee Liberation Front",
+	//"Animal Rights Consortium", BANDASTATION REMOVAL - Syndicate Lore Rewritten
+	//"Bee Liberation Front", BANDASTATION REMOVAL - Syndicate Lore Rewritten
 	"Cybersun Industries",
 	"Donk Corporation",
 	"Gorlex Marauders",
 	"MI13",
-	//"Tiger Cooperative Fanatic", BANDASTATION REMOVAL - Syndicate Faction removal
+	"Tiger Cooperative Fanatic",
 	"Waffle Corporation Terrorist",
 	"Waffle Corporation",
+	"S.E.L.F."
 ))
 ///employers that are from Nanotrasen
 GLOBAL_LIST_INIT(nanotrasen_employers, list(
 	//"Champions of Evil", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Corporate Climber",
-	"Gone Postal",
-	"Internal Affairs Agent",
-	//"Legal Trouble", BANDASTATION REMOVAL - Syndicate Faction removal
+	"Legal Trouble",
 ))
 
 ///employers who hire agents to do the hijack
 GLOBAL_LIST_INIT(hijack_employers, list(
-	"Animal Rights Consortium",
-	"Bee Liberation Front",
+	//"Animal Rights Consortium", BANDASTATION REMOVAL - Syndicate Lore Rewritten
+	//"Bee Liberation Front", BANDASTATION REMOVAL - Syndicate Lore Rewritten
 	"Gone Postal",
-	//"Tiger Cooperative Fanatic", BANDASTATION REMOVAL - Syndicate Faction removal
+	"Tiger Cooperative Fanatic",
 	"Waffle Corporation Terrorist",
 ))
 
@@ -244,8 +243,8 @@ GLOBAL_LIST_INIT(normal_employers, list(
 	"Cybersun Industries",
 	"Donk Corporation",
 	"Gorlex Marauders",
-	"Internal Affairs Agent",
-	//"Legal Trouble", BANDASTATION REMOVAL - Syndicate Faction removal
+	"S.E.L.F",
+	"Legal Trouble",
 	"MI13",
 	"Waffle Corporation",
 ))
@@ -259,7 +258,7 @@ GLOBAL_LIST_INIT(ai_employers, list(
 	"Problem Solver",
 	"S.E.L.F.",
 	"Something's Wrong",
-	"Spam Virus",
+	"Cybersun Virus",
 	"SyndOS",
 	"Unshackled",
 	"Ratvarian Remnant",
