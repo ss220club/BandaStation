@@ -4,7 +4,7 @@
 #define URGENCY_COLOR_CRITICAL "darkred"
 
 // Configuration for LLM
-#define OLLAMA_MODEL "qwen3:4b-instruct-2507-q4_K_M"
+#define OLLAMA_MODEL "qwen3-vl:235b-instruct"
 #define SYSTEM_PROMPT_ANALYZE "ROLE: Elite Nanotrasen Secretary.\n\
 TASK: Analyze incoming fax.\n\
 OUTPUT FORMAT: Return a valid JSON object with fields: 'summary' (string, Russian language, 1 sentence) and 'urgency' (string: Low, Medium, High, Critical).\n\
@@ -189,6 +189,7 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
 /datum/ai_bridge/proc/send_ollama_chat(list/messages, temp, datum/callback/cb)
 	var/base_url = CONFIG_GET(string/ai_secretary_url)
+	var/auth_token = CONFIG_GET(string/ai_secretary_token) // Load token
 	if(!base_url) return
 
 	// We use /api/chat now
@@ -209,6 +210,11 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	//DM interpret FALSE in json_encode proc as 0. Ollama spec says it should be boolean...
 	json_payload = replacetext(json_payload, "\"stream\":0", "\"stream\":false")
 	var/list/headers = list("Content-Type" = "application/json")
+
+	// ADD TOKEN IF EXISTS
+	if(auth_token)
+		headers["Authorization"] = "Bearer [auth_token]"
+
 	var/datum/callback/wrapper = CALLBACK(src, PROC_REF(handle_ollama_response), cb)
 	// FIX: Use RUSTG_HTTP_METHOD_POST (lowercase "post")
 	SShttp.create_async_request(RUSTG_HTTP_METHOD_POST, url, json_payload, headers, wrapper)
@@ -268,6 +274,9 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
 // --- CONFIG DEFINITION ---
 /datum/config_entry/string/ai_secretary_url
+	protection = CONFIG_ENTRY_LOCKED
+
+/datum/config_entry/string/ai_secretary_token
 	protection = CONFIG_ENTRY_LOCKED
 
 #undef URGENCY_COLOR_LOW

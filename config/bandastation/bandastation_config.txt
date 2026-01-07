@@ -5,7 +5,8 @@
 #TTS_API_URL_SILERO
 
 ## AI Secretary
-AI_SECRETARY_URL http://127.0.0.1:11434
+AI_SECRETARY_URL https://ollama.com
+AI_SECRETARY_TOKEN my_secret_token
 
 ## SS Central
 #SS_CENTRAL_URL http://127.0.0.1:8000/v1
