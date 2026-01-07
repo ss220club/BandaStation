@@ -218,7 +218,7 @@ GLOBAL_LIST_INIT(syndicate_employers, list(
 	"Tiger Cooperative Occultist",
 	"Waffle Corporation Terrorist",
 	"Waffle Corporation",
-	"S.E.L.F."
+	"S.E.L.F"
 ))
 ///employers that are from Nanotrasen
 GLOBAL_LIST_INIT(nanotrasen_employers, list(
