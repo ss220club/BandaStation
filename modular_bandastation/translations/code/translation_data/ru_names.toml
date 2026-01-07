@@ -11239,6 +11239,15 @@ instrumental = "хирургическим меднабором"
 prepositional = "хирургическом меднаборе"
 gender = "male"
 
+["surgery kit"]
+nominative = "хирургический набор"
+genitive = "хирургического набора"
+dative = "хирургическому набору"
+accusative = "хирургический набор"
+instrumental = "хирургическим набором"
+prepositional = "хирургическом наборе"
+gender = "male"
+
 # MARK: Organs
 ["chest"]
 nominative = "грудь"
