@@ -187,7 +187,7 @@
 					losebreath += 0.5 * determined_mod * seconds_per_tick
 				else if(get_stamina_loss() < 25 * determined_mod)
 					to_chat(src, span_danger("Вы чувствуете [word]. Становится немного сложнее сфокусироваться."))
-					adjust_stamina_loss(10 * determined_mod * REM * seconds_per_tick)
+					adjust_stamina_loss(5 * determined_mod * seconds_per_tick)
 		// Pretty low blood, getting dangerous!
 		if(BLOOD_VOLUME_RISKY to BLOOD_VOLUME_OKAY)
 			if(SPT_PROB(5, seconds_per_tick))
@@ -195,10 +195,10 @@
 				set_dizzy_if_lower(2 SECONDS * determined_mod)
 				if(prob(50))
 					to_chat(src, span_bolddanger("Вы сильно чувствуете [word]. Становится сложнее дышать!"))
-					losebreath += 1 * determined_mod * seconds_per_tick
+					losebreath += 1 * determined_mod
 				else if(get_stamina_loss() < 40 * determined_mod)
 					to_chat(src, span_bolddanger("Вы сильно чувствуете [word]. Становится сложнее оставаться в сознании!"))
-					adjust_stamina_loss(15 * determined_mod * REM * seconds_per_tick)
+					adjust_stamina_loss(7.5 * determined_mod)
 		// Very low blood, danger!!
 		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_RISKY)
 			if(SPT_PROB(5, seconds_per_tick))
@@ -206,10 +206,10 @@
 				set_dizzy_if_lower(4 SECONDS * determined_mod)
 				if(prob(50))
 					to_chat(src, span_userdanger("Вы очень сильно чувствуете [word]! Становится гораздо сложнее дышать!"))
-					losebreath += 1.5 * determined_mod * seconds_per_tick
+					losebreath += 1.5 * determined_mod
 				else if(get_stamina_loss() < 80 * determined_mod)
 					to_chat(src, span_userdanger("Вы очень сильно чувствуете [word]! Становится гораздо сложнее оставаться в сознании!"))
-					adjust_stamina_loss(20 * determined_mod * REM * seconds_per_tick)
+					adjust_stamina_loss(10 * determined_mod)
 		// Critically low blood, death is near! Adrenaline won't help you here.
 		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 			if(SPT_PROB(7.5, seconds_per_tick))
