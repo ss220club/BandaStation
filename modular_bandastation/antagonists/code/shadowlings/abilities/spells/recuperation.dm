@@ -77,6 +77,7 @@
 		return FALSE
 
 	T.shadowling_strip_quirks()
+	T.reset_robotic_limbs()
 	T.set_species(/datum/species/shadow/shadowling)
 
 	for(var/datum/action/cooldown/ability in T.actions)

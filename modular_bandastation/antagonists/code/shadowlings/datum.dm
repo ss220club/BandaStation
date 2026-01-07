@@ -46,6 +46,7 @@
 		objectives |= list(
 			new /datum/objective/shadow_thrall/survive,
 			new /datum/objective/shadow_thrall/assist_ascension,
+			new /datum/objective/shadow_thrall/save_shadowlings,
 		)
 	else
 		objectives |= shadow_team.get_objectives()
@@ -230,6 +231,19 @@
 			return TRUE
 	return FALSE
 
+/datum/objective/shadow_thrall/save_shadowlings
+	name = "Save your Masters"
+	explanation_text = "Если тенеморфы мертвы или не отвечают: Огранизуйтесь слугами, соберите силы - найдите и спасите своих Повелителей."
+
+/datum/objective/shadow_thrall/save_shadowlings/check_completion()
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	if(!hive)
+		return FALSE
+	for(var/mob/living/carbon/human/L in hive.lings)
+		if(isshadowling_ascended(L))
+			return TRUE
+	return FALSE
+
 // MARK: Global shadowling roundender
 /proc/shadowling_begin_roundender(mob/living/carbon/human/ascended=null)
 	if(GLOB.is_shadowling_roundender_started)
@@ -240,7 +254,7 @@
 	sound_to_playing_players(SHADOWLING_RISEN_MUSIC, 70)
 
 	priority_announce(
-		text = "Внимание! Ситуация критическая: угроза поглощения, объект на грани утраты. Незамедлительно задействуйте все доступные ресурсы и приступайте к процедуре эвакуации. Запуск эвакуационного шаттла утверждён и отмене не подлежит.",
+		text = "Внимание! Наши сканеры дальнего действия зафиксировали всплеск паранормальной активности. В связи с угрозой поглощения и утратой объекта - незамедлительно задействуйте все доступные ресурсы и приступайте к процедуре эвакуации. Запуск эвакуационного шаттла утверждён и отмене не подлежит.",
 		title = "[command_name()]: Отдел паранормальных явлений",
 		sound = SSstation.announcer.get_rand_report_sound(),
 		has_important_message = TRUE,

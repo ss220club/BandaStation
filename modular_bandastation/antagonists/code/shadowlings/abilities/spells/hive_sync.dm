@@ -14,7 +14,7 @@
 		return FALSE
 
 	var/nt = hive.count_max_thralls()
-
+	hive.update_objective_explanations()
 	var/list/new_unlocks = grant_unlocks_for(H, nt)
 	if(length(new_unlocks))
 		to_chat(H, span_notice("Живых слуг: [nt]. Новые способности: [jointext(new_unlocks, ", ")]."))

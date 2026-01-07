@@ -102,5 +102,5 @@
 	T.apply_damage(attack_value, BRUTE, null, sharpness = SHARP_POINTY)
 	H.do_attack_animation(T)
 	playsound(get_turf(H), sfx_activate, 65, TRUE)
-	T.log_message("was hit by [H] with shadow strike for 20 brute", LOG_ATTACK, color = "#8a2be2")
+	T.log_message("was hit by [H] with shadow strike for [attack_value] brute", LOG_ATTACK, color = "#8a2be2")
 	return TRUE

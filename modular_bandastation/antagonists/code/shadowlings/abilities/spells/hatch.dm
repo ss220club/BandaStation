@@ -167,6 +167,7 @@
 		return FALSE
 
 	H.shadowling_strip_quirks()
+	H.reset_robotic_limbs()
 	H.set_species(/datum/species/shadow/shadowling)
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	hive.grant_sync_action(H)

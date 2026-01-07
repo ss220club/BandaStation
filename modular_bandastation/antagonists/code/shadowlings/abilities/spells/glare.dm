@@ -65,8 +65,6 @@
 	var/turf/tt = get_turf(T)
 	if(!tt)
 		return FALSE
-	if(tt.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
-		return FALSE
 	return TRUE
 
 /datum/action/cooldown/shadowling/glare/DoEffectOnTargets(mob/living/carbon/human/H, list/targets)
@@ -91,9 +89,9 @@
 /datum/action/cooldown/shadowling/glare/proc/apply_glare_primary(mob/living/carbon/human/T)
 	if(!istype(T))
 		return
-	T.Stun(1 SECONDS)
+	T.Stun(3 SECONDS)
 	T.adjust_stamina_loss(baton_stamina)
-	apply_slow(T, 2 SECONDS)
+	apply_slow(T, 5 SECONDS)
 	apply_shake(T, 8, 0.6 SECONDS)
 
 /datum/action/cooldown/shadowling/glare/proc/apply_glare_knock(mob/living/carbon/human/T)

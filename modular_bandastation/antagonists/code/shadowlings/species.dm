@@ -141,10 +141,24 @@
 	overlays_standing[EYES_LAYER] = E.generate_body_overlay(src)
 	apply_overlay(EYES_LAYER)
 
+/proc/is_robotic_bodypart(obj/item/bodypart/B)
+	return B.bodytype == BODYTYPE_ROBOTIC
+
+/mob/living/carbon/human/proc/reset_robotic_limbs()
+	for(var/zone in GLOB.all_body_zones)
+		var/obj/item/bodypart/B = get_bodypart(zone)
+		if(!B)
+			continue
+
+		if(!is_robotic_bodypart(B))
+			continue
+
+		reset_to_original_bodypart(zone)
+
 // MARK: Claws
 /obj/item/knife/combat/umbral_claw
 	name = "umbral claw (slash)"
-	desc = "Слиток зазубренной тени."
+	desc = "Зазубренные когти тени."
 	icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_objects.dmi'
 	icon_state = "claw_right"
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
@@ -166,7 +180,7 @@
 
 /obj/item/knife/combat/umbral_claw/left
 	name = "umbral claw (pierce)"
-	desc = "Слиток копьевой тени."
+	desc = "Пронзающие когти тени."
 	icon_state = "claw_left"
 	sharpness = SHARP_POINTY
 	attack_verb_continuous = list("пронзает", "протыкает", "разрывает")
@@ -232,9 +246,9 @@
 	unarmed_attack_effect = ATTACK_EFFECT_CLAW
 	unarmed_attack_sound = 'sound/items/weapons/slash.ogg'
 	unarmed_miss_sound = 'sound/items/weapons/slashmiss.ogg'
-	unarmed_damage_low = 5
-	unarmed_damage_high = 14
-	unarmed_effectiveness = 20
+	unarmed_damage_low = 8
+	unarmed_damage_high = 20
+	unarmed_effectiveness = 35
 	unarmed_sharpness = SHARP_POINTY
 	bodypart_traits = list(TRAIT_CHUNKYFINGERS)
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'

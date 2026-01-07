@@ -59,6 +59,10 @@
 		return
 	if(ispath(A.type, /obj/machinery/power/apc))
 		return
+	// snowflake for flares
+	if(istype(A, /obj/item/flashlight/flare))
+		var/obj/item/flashlight/flare/F = A
+		F.turn_off()
 	A.extinguish()
 	A.on_saboteur(src, 30 SECONDS)
 
