@@ -5,7 +5,7 @@ ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить фон", 
 	if(!check_rights(R_ADMIN))
 		return
 
-	switch(tgui_input_list(usr, "Что делаем с фоном лобби?", "Фон лобби", list("Меняем", "Сбрасываем", "Включаем YouTube", "Ничего")))
+	switch(tgui_input_list(usr, "Что делаем с фоном лобби?", "Фон лобби", list("Меняем", "Сбрасываем", "Включаем YouTube", "Включаем RuTube", "Ничего")))
 		if("Меняем")
 			var/file = input(usr) as icon|null
 			if(file)
@@ -18,6 +18,11 @@ ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить фон", 
 			var/link = tgui_input_text(usr, "Введи ссылку на видео:", "YouTube ссылка", max_length = 128)
 			if(link)
 				SStitle.play_youtube_video(usr, link)
+
+		if("Включаем RuTube")
+			var/link = tgui_input_text(usr, "Введи ссылку на видео:", "RuTube ссылка", max_length = 128)
+			if(link)
+				SStitle.play_rutube_video(usr, link)
 
 /**
  * Sets a titlescreen notice, a big red text on the main screen.

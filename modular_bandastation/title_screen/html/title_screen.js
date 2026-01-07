@@ -204,22 +204,45 @@ document.addEventListener('mouseup', reFocus);
 
 let isVideoEnabled = false;
 
-function toggleYoutubeVideo(videoId) {
+function toggleVideo(videoId, platform) {
   const img = document.getElementById('screen_image');
   const blur = document.getElementById('screen_blur');
   const videoFrame = document.getElementById('screen_video');
 
   if (!videoFrame) return;
 
-  isVideoEnabled = true;
+  if (videoId) {
+    isVideoEnabled = true;
 
-  img.classList.add('hidden');
-  blur.classList.add('hidden');
+    img.classList.add('hidden');
+    blur.classList.add('hidden');
 
-  const url = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&loop=1&playlist=${videoId}&showinfo=0&modestbranding=1`;
+    let url = '';
 
-  videoFrame.src = url;
-  videoFrame.classList.remove('hidden');
+    if (platform === 'youtube') {
+      url = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&loop=1&playlist=${videoId}&showinfo=0&modestbranding=1`;
+    } else if (platform === 'rutube') {
+      url = `https://rutube.ru/play/embed/${videoId}?autoStart=true&mute=0&autoplay=1`;
+    }
+
+    videoFrame.src = url;
+    videoFrame.classList.remove('hidden');
+  } else {
+    isVideoEnabled = false;
+    videoFrame.src = '';
+    videoFrame.classList.add('hidden');
+
+    img.classList.remove('hidden');
+    blur.classList.remove('hidden');
+  }
+}
+
+function toggleYoutubeVideo(videoId) {
+  toggleVideo(videoId, 'youtube');
+}
+
+function toggleRutubeVideo(videoId) {
+  toggleVideo(videoId, 'rutube');
 }
 
 /* Tell Byond that the title screen is ready */

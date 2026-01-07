@@ -240,6 +240,23 @@
 	message_admins("[key_name_admin(user)] включил YouTube видео на фоне лобби.")
 
 /**
+ * Включает проигрывание RuTube видео в лобби для всех игроков
+ * user - тот, кто вызвал (обычно админ), link - ID видео или полная ссылка
+ */
+/datum/controller/subsystem/title/proc/play_rutube_video(user, link)
+	var/video_id
+	var/regex/rutube_regex = new("(?:/video/|/play/embed/)(\\w+)")
+
+	if(rutube_regex.Find(link))
+		video_id = rutube_regex.group[1]
+	else
+		video_id = link
+
+	title_output_to_all(video_id, "toggleRutubeVideo")
+
+	log_admin("[key_name(user)] enabled Rutube background in lobby (Video ID: [video_id]).")
+	message_admins("[key_name_admin(user)] включил Rutube видео на фоне лобби.")
+/**
  * Changes title image to desired
  */
 /datum/controller/subsystem/title/proc/set_title_image(user, desired_image_file)
