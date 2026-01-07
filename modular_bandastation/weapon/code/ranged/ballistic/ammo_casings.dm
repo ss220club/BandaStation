@@ -462,11 +462,35 @@
 /obj/item/ammo_casing/c585sol
 	name = ".585 Sol bullet casing"
 	desc = "Пистолетный безгильзовый патрон калибра .585 Sol."
-	projectile_type = /obj/projectile/bullet/a50ae/585sol
+	projectile_type = /obj/projectile/bullet/c585sol
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
-	icon_state = "585trappiste"
+	icon_state = "585sol"
 	caliber = CALIBER_585SOL
 
 /obj/item/ammo_casing/c585sol/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/caseless)
+
+/obj/item/ammo_casing/c585sol/rubber
+	name = ".585 Sol rubber bullet casing"
+	desc = "Травматический безгильзовый пистолетный патрон c резиновой пулей калибра .585 Sol."
+	icon_state = "585sol_rubber"
+	projectile_type = /obj/projectile/bullet/c585sol/rubber
+
+/obj/item/ammo_casing/c585sol/ap
+	name = ".585 Sol armor-piercing bullet casing"
+	desc = "Бронебойный пистолетный безгильзовый патрон калибра .585 Sol."
+	projectile_type = /obj/projectile/bullet/c585sol/ap
+	icon_state = "585sol_ap"
+
+/obj/item/ammo_casing/c585sol/hp
+	name = ".585 Sol hollow-point bullet casing"
+	desc = "Экспансивный пистолетный безгильзовый патрон калибра .585 Sol."
+	projectile_type = /obj/projectile/bullet/c585sol/hp
+	icon_state = "585sol_hp"
+
+/obj/item/ammo_casing/c585sol/incendiary
+	name = ".585 Sol incendiary bullet casing"
+	desc = "Зажигательный пистолетный безгильзовый патрон калибра .585 Sol."
+	projectile_type = /obj/projectile/bullet/incendiary/c585sol
+	icon_state = "585sol_ic"

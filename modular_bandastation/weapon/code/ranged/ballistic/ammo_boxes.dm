@@ -132,20 +132,33 @@
 	ammo_band_icon = "+357_ammo_band"
 	ammo_band_color = null
 
+/obj/item/ammo_box/speedloader/a50ae_cylinder
+	name = "speed loader (.50 AE)"
+	desc = "Предназначен для быстрой перезарядки револьверов калибра .50 AE."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "50speedload"
+	ammo_type = /obj/item/ammo_casing/a50ae
+	max_ammo = 5
+	caliber = CALIBER_50AE
+	multiple_sprites = AMMO_BOX_PER_BULLET
+	item_flags = NO_MAT_REDEMPTION
+	ammo_band_icon = "+38_ammo_band"
+	ammo_band_color = null
+
+// MARK: .310
 /obj/item/ammo_box/speedloader/strilka310_cylinder
 	name = "speed loader (.310 Strilka)"
 	desc = "Предназначен для быстрой перезарядки револьверов калибра .310 Стрилка. Произведено в СССП, не удивительно."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "310speedload"
 	ammo_type = /obj/item/ammo_casing/strilka310
-	max_ammo = 7
+	max_ammo = 8
 	caliber = CALIBER_STRILKA310
 	multiple_sprites = AMMO_BOX_PER_BULLET
 	item_flags = NO_MAT_REDEMPTION
 	ammo_band_icon = "+357_ammo_band"
 	ammo_band_color = null
 
-// MARK: .310
 /obj/item/ammo_box/speedloader/strilka310
 	desc = "Пятизарядная обойма для винтовок калибра .310 Strilka."
 
@@ -398,6 +411,47 @@
 	desc = parent_type::desc + "<br>Серая полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
 	icon_state = "45box-ap"
 	ammo_type = /obj/item/ammo_casing/c45/ap
+
+/obj/item/ammo_box/c45/incendiary
+	name = "ammo box (.45 incendiary)"
+	desc = parent_type::desc + "<br>Красная полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
+	icon_state = "45box-incendiary"
+	ammo_type = /obj/item/ammo_casing/c45/inc
+
+// MARK: .585 Sol
+/obj/item/ammo_box/c585sol
+	name = "ammo box (.585 Sol)"
+	desc = "Коробка с пистолетными патронами калибра .585 Sol, вмещает 30 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "585box"
+	w_class = WEIGHT_CLASS_SMALL
+	caliber = CALIBER_45
+	ammo_type = /obj/item/ammo_casing/c45
+	max_ammo = 30
+
+/obj/item/ammo_box/c585sol/rubber
+	name = "ammo box (.585 Sol rubber)"
+	desc = parent_type::desc + "<br>Синяя полоска указывает на то, что здесь должны храниться нелетальные боеприпасы."
+	icon_state = "585box_rubber"
+	ammo_type = /obj/item/ammo_casing/c585sol/rubber
+
+/obj/item/ammo_box/c585sol/hp
+	name = "ammo box (.585 Sol hollow-point)"
+	desc = parent_type::desc + "<br>Оранжевая полоска указывает на то, что в ней должны храниться экспансивные боеприпасы."
+	icon_state = "585box_hp"
+	ammo_type = /obj/item/ammo_casing/c585sol/hp
+
+/obj/item/ammo_box/c585sol/ap
+	name = "ammo box (.585 Sol armor-piercing)"
+	desc = parent_type::desc + "<br>Серая полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
+	icon_state = "585box_ap"
+	ammo_type = /obj/item/ammo_casing/c585sol/ap
+
+/obj/item/ammo_box/c585sol/incendiary
+	name = "ammo box (.585 Sol incendiary)"
+	desc = parent_type::desc + "<br>Красная полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
+	icon_state = "585box_incendiary"
+	ammo_type = /obj/item/ammo_casing/c585sol/incendiary
 
 // MARK: 10mm
 /obj/item/ammo_box/c10mm

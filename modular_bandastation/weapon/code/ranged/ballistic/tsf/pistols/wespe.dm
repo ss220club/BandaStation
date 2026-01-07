@@ -11,13 +11,9 @@
 	preview_name = "Black"
 	new_icon_state = "wespe_black"
 
-/datum/atom_skin/wespe/blue
-	preview_name = "Blue"
-	new_icon_state = "wespe_blue"
-
 /obj/item/gun/ballistic/automatic/pistol/wespe
 	name = "'Wespe' pistol"
-	desc = "Стандартный служебный пистолет различных военных подразделений ТСФ. Использует патрон .35 Sol Short имеет встроенный фонарик."
+	desc = "Стандартный служебный пистолет различных военных подразделений ТСФ. Использует патрон .35 Sol Short и имеет встроенный фонарик."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	icon_state = "wespe"
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/pistol_light.ogg'
@@ -49,8 +45,40 @@
 		Он должен был использовать стандартные патроны, стандартные магазины и быть способным \
 		функционировать во всех условиях, в которых обычно работает ТСФ. \
 		Так получилось, что эти качества сделали это оружие популярным \
-		в пограничном пространстве, и, скорее всего, именно поэтому вы сейчас смотрите на \
-		этот пистолет."
+		в пограничном пространстве, и, скорее всего, именно поэтому вы сейчас смотрите на этот пистолет."
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/no_mag
 	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/pistol/wespe_civ
+	name = "'Wespe' pistol"
+	desc = "Гражданская версия служебного пистолета различных военных подразделений ТСФ. Использует патрон .35 Sol Short и имеет встроенный фонарик."
+	icon_state = "wespe_wood"
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/pistol_light.ogg'
+	w_class = WEIGHT_CLASS_NORMAL
+	accepted_magazine_type = /obj/item/ammo_box/magazine/c35sol_pistol
+	special_mags = TRUE
+	suppressor_x_offset = 7
+	suppressor_y_offset = 0
+	recoil = 0.3
+
+/obj/item/gun/ballistic/automatic/pistol/wespe_civ/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/wespe_civ)
+
+/obj/item/gun/ballistic/automatic/pistol/wespe_civ/no_mag
+	spawnwithmagazine = FALSE
+
+/datum/atom_skin/wespe_civ
+	abstract_type = /datum/atom_skin/wespe_civ
+	change_inhand_icon_state = TRUE
+	change_base_icon_state = TRUE
+
+/datum/atom_skin/wespe_civ/default
+	preview_name = "Default"
+	new_icon_state = "wespe_wood"
+
+/datum/atom_skin/wespe_civ/blue
+	preview_name = "Blue"
+	new_icon_state = "wespe_blue"

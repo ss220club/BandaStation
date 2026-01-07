@@ -470,6 +470,9 @@
 	sharpness = NONE
 	embed_type = null
 
+/obj/projectile/bullet/incendiary/c9mm
+	leaves_fire_trail = FALSE
+
 // MARK: 10mm
 /obj/projectile/bullet/c10mm/rubber
 	name = "10mm rubber bullet"
@@ -505,6 +508,9 @@
 	shrapnel_type = null
 	sharpness = NONE
 	embed_type = null
+
+/obj/projectile/bullet/incendiary/c45
+	leaves_fire_trail = FALSE
 
 // MARK: 4.6x30mm
 /obj/projectile/bullet/c46x30mm/rubber
@@ -641,5 +647,53 @@
 	armour_penetration = 40
 	wound_falloff_tile = -1
 
-/obj/projectile/bullet/a50ae/585sol
+// MARK: .585 Sol
+/obj/projectile/bullet/c585sol
 	name = ".585 Sol bullet"
+	damage = 30
+	wound_bonus = -10
+	wound_falloff_tile = -10
+
+/obj/projectile/bullet/c585sol/rubber
+	name = ".585 Sol rubber bullet"
+	damage = 5
+	stamina = 30
+	wound_bonus = -20
+	exposed_wound_bonus = -20
+	weak_against_armour = TRUE
+	ricochet_auto_aim_angle = 30
+	ricochet_auto_aim_range = 5
+	ricochets_max = 4
+	ricochet_incidence_leeway = 50
+	ricochet_chance = 130
+	ricochet_decay_damage = 0.8
+	shrapnel_type = null
+	sharpness = NONE
+	embed_type = null
+
+/obj/projectile/bullet/c585sol/ap
+	name = ".585 Sol armor-piercing bullet"
+	armour_penetration = 50
+	wound_bonus = 0
+	exposed_wound_bonus = 0
+	shrapnel_type = null
+	embed_type = null
+
+/obj/projectile/bullet/c585sol/hp
+	name = ".585 Sol hollow-point bullet"
+	damage = 40
+	wound_bonus = 20
+	exposed_wound_bonus = 20
+	armour_penetration = 0
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+
+/obj/projectile/bullet/incendiary/c585sol
+	name = ".585 Sol incendiary bullet"
+	damage = 20
+	fire_stacks = 2
+	light_system = OVERLAY_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = LIGHT_COLOR_INTENSE_RED
+	leaves_fire_trail = FALSE

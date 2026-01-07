@@ -1300,21 +1300,74 @@
 	max_ammo = 6
 
 /obj/item/ammo_box/magazine/internal/cylinder/takbok
-	ammo_type = /obj/item/ammo_casing/c585sol
-	caliber = CALIBER_585SOL
+	ammo_type = /obj/item/ammo_casing/a50ae
+	caliber = CALIBER_50AE
 	max_ammo = 5
 
 // MARK: .50 pistol/smg mags
 /obj/item/ammo_box/magazine/c585sol
-	name = ".50 magazine"
-	desc = "A standard size magazine for .585 pistols, holds 10 rounds."
+	name = "pistol magazine (.585 Sol)"
+	desc = "Магазин стандартного размера для пистолетов ТСФ калибра .585 Sol, вмещает 10 патронов. Подходит для пистолетов Skild."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
-	icon_state = "pistol_585_standard"
+	icon_state = "pistol_585_standart"
+	base_icon_state = "pistol_585_standart"
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 	w_class = WEIGHT_CLASS_SMALL
 	ammo_type = /obj/item/ammo_casing/c585sol
 	caliber = CALIBER_585SOL
 	max_ammo = 10
+	ammo_band_icon = "+c585sol_mag_ammo_band"
+	ammo_band_color = null
+
+/obj/item/ammo_box/magazine/c585sol/ap
+	name = "pistol magazine (.585 Sol AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c585sol/ap
+
+/obj/item/ammo_box/magazine/c585sol/rubber
+	name = "pistol magazine (.585 Sol rubber)"
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c585sol/rubber
+
+/obj/item/ammo_box/magazine/c585sol/hp
+	name = "pistol magazine (.585 Sol HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c585sol/hp
+
+/obj/item/ammo_box/magazine/c585sol/incendiary
+	name = "pistol magazine (.585 Sol incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c585sol/incendiary
+
+/obj/item/ammo_box/magazine/c585sol/extended
+	name = "extended pistol magazine (.585 Sol)"
+	desc = "Увеличенный магазин для пистолетов ТСФ калибра .585 Sol, вмещает 25 патронов."
+	icon_state = "pistol_585_extended"
+	base_icon_state = "pistol_585_extended"
+	w_class = WEIGHT_CLASS_NORMAL
+	max_ammo = 25
+
+/obj/item/ammo_box/magazine/c585sol/extended/ap
+	name = "extended pistol magazine (.585 Sol AP)"
+	MAGAZINE_TYPE_ARMORPIERCE
+	ammo_type = /obj/item/ammo_casing/c585sol/ap
+
+/obj/item/ammo_box/magazine/c585sol/extended/rubber
+	name = "extended pistol magazine (.585 Sol rubber)"
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c585sol/rubber
+
+/obj/item/ammo_box/magazine/c585sol/extended/hp
+	name = "extended pistol magazine (.585 Sol HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c585sol/hp
+
+/obj/item/ammo_box/magazine/c585sol/extended/incendiary
+	name = "extended pistol magazine (.585 Sol incendiary)"
+	MAGAZINE_TYPE_INCENDIARY
+	ammo_type = /obj/item/ammo_casing/c585sol/incendiary
 
 /obj/item/ammo_box/magazine/c585sol/spawns_empty
 	start_empty = TRUE
