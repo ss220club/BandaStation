@@ -3,6 +3,28 @@
 #define URGENCY_COLOR_HIGH "red"
 #define URGENCY_COLOR_CRITICAL "darkred"
 
+// Configuration for LLM
+#define OLLAMA_MODEL "qwen3:4b-instruct-2507-q4_K_M"
+#define SYSTEM_PROMPT_ANALYZE "ROLE: Elite Nanotrasen Secretary.\n\
+TASK: Analyze incoming fax.\n\
+OUTPUT FORMAT: Return a valid JSON object with fields: 'summary' (string, Russian language, 1 sentence) and 'urgency' (string: Low, Medium, High, Critical).\n\
+\n\
+URGENCY LOGIC:\n\
+1. SENDER: 'Assistant', 'Clown', 'Mime', 'Unknown' -> LOW (unless confirmed by Heads).\n\
+2. CONTENT: 'Reptilians', 'Vampires' -> LOW (Paranoia). 'Nuke', 'Blob', 'Rev' -> HIGH (if from Command). 'Pizza', 'Jokes' -> LOW."
+
+#define SYSTEM_PROMPT_REPLY_BASE "ROLE: Central Command Officer (Nanotrasen).\n\
+SETTING: Central Command, flagship Трурль.\n\
+TASK: Write a formal reply fax based on the Administrator's decision.\n\
+LANGUAGE: Russian.\n\
+TONE: Bureaucratic, Official, Corporate.\n\
+OUTPUT FORMAT: Return a valid JSON object with field: 'draft' (string, use <br> for new lines).\n\
+\n\
+CRITICAL RULES:\n\
+1. LENGTH: STRICTLY UNDER 150 WORDS. Be concise.\n\
+2. NO META-GAMING: Never mention 'Administrator' or 'Server'. Refer to 'Central Command Directives'.\n\
+3. FORMAT: No headers. Only: Reply body + Signature."
+
 /// Global singleton for AI bridge, initialized automatically
 GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
@@ -18,7 +40,6 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 /datum/ai_bridge/proc/process_incoming_fax(title, content, sender_name, sender_id)
 	set waitfor = FALSE
 	
-	// Check config immediately
 	if(!CONFIG_GET(string/ai_secretary_url))
 		return
 
@@ -35,19 +56,23 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	)
 	pending_faxes[fid] = fax_data
 
-	// Cleanup timer after 30 minutes
-	// LINT FIX: Use PROC_REF macro
 	addtimer(CALLBACK(src, PROC_REF(cleanup_fax_data), fid), 30 MINUTES)
 
-	// LINT FIX: Use PROC_REF macro
-	send_request_sshttp("/fax/analyze", fax_data, CALLBACK(src, PROC_REF(on_analyze_complete), fid, fax_data))
+	// --- PREPARE OLLAMA REQUEST ---
+	var/user_prompt = "Sender: [sender_name]\nTitle: [title]\nContent:\n[content]"
+	
+	var/list/messages = list(
+		list("role" = "system", "content" = SYSTEM_PROMPT_ANALYZE),
+		list("role" = "user", "content" = user_prompt)
+	)
 
-/datum/ai_bridge/proc/on_analyze_complete(fid, list/fax_data, list/response_data)
-	if(!response_data) return
-	// If data was already cleaned up by timer, do not continue
+	send_ollama_chat(messages, 0.1, CALLBACK(src, PROC_REF(on_analyze_complete), fid, fax_data))
+
+/datum/ai_bridge/proc/on_analyze_complete(fid, list/fax_data, list/llm_response_json)
+	if(!llm_response_json) return
 	if(!pending_faxes[fid]) return
 
-	notify_admins(fid, fax_data, response_data)
+	notify_admins(fid, fax_data, llm_response_json)
 
 /datum/ai_bridge/proc/notify_admins(fid, list/fax_data, list/analysis)
 	var/summary = get_json_value_case_insensitive(analysis, "summary")
@@ -57,7 +82,6 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	if(!urgency) urgency = "Unknown"
 
 	var/color = URGENCY_COLOR_LOW
-
 	var/urg_lower = LOWER_TEXT(urgency)
 	
 	if(findtext(urg_lower, "medium")) 
@@ -102,23 +126,35 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 		start_generation(usr, fax_data, mode, custom_note)
 
 /datum/ai_bridge/proc/start_generation(mob/user, list/fax_data, mode, custom_note)
-	var/list/request_data = list(
-		"original_fax" = list(
-			"sender" = fax_data["sender"],
-			"title" = fax_data["title"],
-			"content" = fax_data["content"]
-		),
-		"action" = mode,
-		"custom_note" = custom_note
+	
+	var/instruction = ""
+	switch(mode)
+		if("approve")
+			instruction = "DECISION: APPROVE. State that the request aligns with Nanotrasen Strategic Interests."
+		if("deny")
+			instruction = "DECISION: DENY. Invent a bureaucratic excuse (e.g., Missing Form 27B-6, Budget Freeze, Low Social Credit)."
+		if("custom")
+			instruction = "DECISION: The Central Command dictates: '[custom_note]'.\nTASK: Rewrite this order into professional, threatening corporate language. Keep it direct."
+		else
+			instruction = "DECISION: Acknowledge receipt."
+
+	var/system_prompt_full = "[SYSTEM_PROMPT_REPLY_BASE]\n\nCOMMAND:\n[instruction]"
+	
+	var/user_content = "Original Fax from: [fax_data["sender"]]\nSubject: [fax_data["title"]]\nMessage: \"[fax_data["content"]]\"\n\nWrite the reply:"
+
+	var/list/messages = list(
+		list("role" = "system", "content" = system_prompt_full),
+		list("role" = "user", "content" = user_content)
 	)
 
-	send_request_sshttp("/fax/reply", request_data, CALLBACK(src, PROC_REF(on_generation_complete), user, fax_data))
+	// Saving user and fax_data in CALLBACK for further usage
+	send_ollama_chat(messages, 0.8, CALLBACK(src, PROC_REF(on_generation_complete), user, fax_data))
 
-/datum/ai_bridge/proc/on_generation_complete(mob/user, list/fax_data, list/response_data)
-	if(!response_data) return
+/datum/ai_bridge/proc/on_generation_complete(mob/user, list/fax_data, list/llm_response_json)
+	if(!llm_response_json) return
 	if(!user || !user.client) return
 
-	var/draft_text = get_json_value_case_insensitive(response_data, "draft")
+	var/draft_text = get_json_value_case_insensitive(llm_response_json, "draft")
 
 	if(!draft_text)
 		to_chat(user, "<span class='danger'>AI Error: Empty draft received.</span>")
@@ -135,14 +171,11 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	ui.sending_fax_name = "Central Command"
 	ui.default_paper_name = "Reply to [fax_data["sender"]]"
 	
-	// Explicitly casting to paper
 	var/obj/item/paper/P = ui.fax_paper
 	P.name = ui.default_paper_name
 	
 	var/html_text = replacetext(draft_text, "\n", "<br>")
 	
-	// WORKAROUND: Compiler does not see 'info' variable on paper object in this codebase.
-	// Using vars[] access as a fallback.
 	if("info" in P.vars)
 		P.vars["info"] = html_text
 	
@@ -152,60 +185,85 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	to_chat(user, "<span class='adminnotice'>AI Draft Generated!</span>")
 
 
-// --- 3. SENDING VIA SSHTTP ---
+// --- 3. UNIVERSAL SENDING (DIRECT TO OLLAMA CHAT API) ---
 
-/datum/ai_bridge/proc/send_request_sshttp(endpoint, list/data, datum/callback/cb)
+/datum/ai_bridge/proc/send_ollama_chat(list/messages, temp, datum/callback/cb)
 	var/base_url = CONFIG_GET(string/ai_secretary_url)
 	if(!base_url) return
 
-	var/url = "[base_url][endpoint]"
-	var/json_payload = json_encode(data)
-
-	// SShttp accepts a list of headers
+	// We use /api/chat now
+	var/url = "[base_url]/api/chat"
+	
+	var/list/payload = list(
+		"model" = OLLAMA_MODEL,
+		"messages" = messages,
+		"stream" = FALSE,
+		"format" = "json", // Force JSON output
+		"options" = list(
+			"temperature" = temp,
+			"num_ctx" = 2048,
+			"top_p" = 0.9
+		)
+	)
+	var/json_payload = json_encode(payload)
+	//DM interpret FALSE in json_encode proc as 0. Ollama spec says it should be boolean...
+	json_payload = replacetext(json_payload, "\"stream\":0", "\"stream\":false")
 	var/list/headers = list("Content-Type" = "application/json")
-
-	// LINT FIX: Use PROC_REF macro
-	var/datum/callback/wrapper = CALLBACK(src, PROC_REF(handle_sshttp_response), cb)
-
-	// Call the built-in subsystem
-	SShttp.create_async_request("POST", url, json_payload, headers, wrapper)
+	var/datum/callback/wrapper = CALLBACK(src, PROC_REF(handle_ollama_response), cb)
+	// FIX: Use RUSTG_HTTP_METHOD_POST (lowercase "post")
+	SShttp.create_async_request(RUSTG_HTTP_METHOD_POST, url, json_payload, headers, wrapper)
 
 
-// Response handler from SShttp
-/datum/ai_bridge/proc/handle_sshttp_response(datum/callback/original_cb, datum/http_response/res)
+// Handler: Unpacks Ollama JSON envelope
+/datum/ai_bridge/proc/handle_ollama_response(datum/callback/original_cb, datum/http_response/res)
 	if(res.errored)
-		message_admins("<span class='danger'>AI Bridge Connection Error: [res.error]</span>")
+		message_admins("<span class='danger'>AI Connection Error: [res.error]</span>")
 		return
 
 	if(res.status_code != 200)
-		message_admins("<span class='danger'>AI Bridge HTTP Error [res.status_code]: [res.body]</span>")
+		message_admins("<span class='danger'>AI HTTP Error [res.status_code]: [res.body]</span>")
 		return
 
-	var/list/decoded_data = null
+	// 1. Decode Ollama Envelope
+	var/list/ollama_envelope = null
 	try
-		decoded_data = json_decode(res.body)
+		ollama_envelope = json_decode(res.body)
 	catch(var/exception/e)
-		message_admins("<span class='danger'>AI Bridge JSON Parse Error: [e] | Data: [copytext(res.body, 1, 50)]...</span>")
+		message_admins("<span class='danger'>AI Error: Invalid JSON from Ollama. [e]</span>")
 		return
 
-	original_cb.Invoke(decoded_data)
+	// 2. Extract content from "message": { "content": "..." }
+	var/list/msg_struct = ollama_envelope["message"]
+	if(!msg_struct)
+		message_admins("<span class='danger'>AI Error: Missing message field.</span>")
+		return
+		
+	var/inner_json_text = msg_struct["content"]
+	if(!inner_json_text)
+		message_admins("<span class='danger'>AI Error: Empty content field.</span>")
+		return
+
+	// 3. Decode the inner content (summary/urgency OR draft)
+	var/list/final_data = null
+	try
+		final_data = json_decode(inner_json_text)
+	catch(var/exception/e2)
+		message_admins("<span class='danger'>AI Error: Generated text is not valid JSON. [e2]</span>")
+		return
+
+	original_cb.Invoke(final_data)
 
 
 // --- UTILITIES ---
 
-// Memory cleanup
 /datum/ai_bridge/proc/cleanup_fax_data(fid)
 	if(pending_faxes[fid])
 		pending_faxes -= fid
 
-// Safe JSON lookup (case-insensitive)
 /datum/ai_bridge/proc/get_json_value_case_insensitive(list/L, key)
 	if(key in L) return L[key]
-	
-	// If no exact match, try capitalized key (Go often sends Capitalized keys)
 	var/cap_key = capitalize(key)
 	if(cap_key in L) return L[cap_key]
-	
 	return null
 
 // --- CONFIG DEFINITION ---
@@ -216,3 +274,6 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 #undef URGENCY_COLOR_MEDIUM
 #undef URGENCY_COLOR_HIGH
 #undef URGENCY_COLOR_CRITICAL
+#undef OLLAMA_MODEL
+#undef SYSTEM_PROMPT_ANALYZE
+#undef SYSTEM_PROMPT_REPLY_BASE
