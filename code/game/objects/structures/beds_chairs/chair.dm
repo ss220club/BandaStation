@@ -1,4 +1,4 @@
-#define DECLENT_PREPOSITION_S (lowertext(copytext(declent_ru(NOMINATIVE), 1, 2)) == "с" ? "со" : "с") // BANDASTATION EDIT
+#define DECLENT_PREPOSITION_S ((copytext(declent_ru(NOMINATIVE), 1, 2) in list("с", "С")) ? "со" : "с") // BANDASTATION EDIT
 
 /obj/structure/chair
 	name = "chair"
