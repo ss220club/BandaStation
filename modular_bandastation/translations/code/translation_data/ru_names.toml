@@ -1810,12 +1810,12 @@ prepositional = "платном ударнике"
 gender = "male"
 
 ["outback firing pin"]
-nominative = "ударник глубинки"
-genitive = "ударника глубинки"
-dative = "ударнику глубинки"
-accusative = "ударник глубинки"
-instrumental = "ударником глубинки"
-prepositional = "ударнике глубинки"
+nominative = "внестанционный ударник"
+genitive = "внестанционного ударника"
+dative = "внестанционному ударнику"
+accusative = "внестанционного ударника"
+instrumental = "внестанционным ударником"
+prepositional = "внестанционном ударнике"
 gender = "male"
 
 ["laser tag firing pin"]
@@ -11237,6 +11237,15 @@ dative = "хирургическому меднабору"
 accusative = "хирургический меднабор"
 instrumental = "хирургическим меднабором"
 prepositional = "хирургическом меднаборе"
+gender = "male"
+
+["surgery kit"]
+nominative = "хирургический набор"
+genitive = "хирургического набора"
+dative = "хирургическому набору"
+accusative = "хирургический набор"
+instrumental = "хирургическим набором"
+prepositional = "хирургическом наборе"
 gender = "male"
 
 # MARK: Organs

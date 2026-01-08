@@ -20,7 +20,8 @@
 		/obj/item = 'sound/items/handling/surgery/scalpel1.ogg',
 	)
 	success_sound = 'sound/items/handling/surgery/organ2.ogg'
-	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_BONE_SAWED|SURGERY_VESSELS_CLAMPED
+	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_BONE_SAWED
+	any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
 
 /datum/surgery_operation/limb/amputate/get_recommended_tool()
 	return TOOL_SAW
@@ -43,7 +44,7 @@
 		limb.owner,
 		span_notice("Вы начинаете отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] ..."),
 		span_notice("[surgeon] начинает отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] начинает отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает отсекать [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете ужасную боль в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
