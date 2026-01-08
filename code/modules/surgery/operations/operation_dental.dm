@@ -11,7 +11,7 @@
 
 /datum/surgery_operation/limb/add_dental_implant/all_required_strings()
 	. = list()
-	. += "операция на рту (цель: рот)"
+	. += "операция на рту"
 	. += ..()
 	. += "во рту должны быть зубы"
 
@@ -42,7 +42,7 @@
 		span_notice("[surgeon] начинает вставлять [tool.declent_ru(ACCUSATIVE)] в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] начинает что-то вставлять в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
-	display_pain(limb.owner, "Something's being jammed into your [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
+	display_pain(limb.owner, "Что-то засовывают вам в [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
 
 /datum/surgery_operation/limb/add_dental_implant/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	// Pills go into head
@@ -62,7 +62,7 @@
 	)
 
 /datum/surgery_operation/limb/remove_dental_implant
-	name = "remove dental implant"
+	name = "Удаление зубного импланта"
 	desc = "Удаление зубного имплантата из зубов пациента."
 	operation_flags = OPERATION_NO_PATIENT_REQUIRED
 	implements = list(
@@ -138,7 +138,7 @@
 	if(!do_after(owner, owner.stat * (2.5 SECONDS), owner,  IGNORE_USER_LOC_CHANGE | IGNORE_INCAPACITATED))
 		return FALSE
 	var/obj/item/pill = target
-	to_chat(owner, span_notice("Вы стискиваете зубы и раздавливаете имплантированную [pill.name]!"))
+	to_chat(owner, span_notice("Вы стискиваете зубы и раздавливаете имплантированную [declent_ru(pill.name, ACCUSATIVE)]!"))
 	owner.log_message("swallowed an implanted pill, [pill]", LOG_ATTACK)
 	pill.reagents.trans_to(owner, pill.reagents.total_volume, transferred_by = owner, methods = INGEST)
 	qdel(pill)
