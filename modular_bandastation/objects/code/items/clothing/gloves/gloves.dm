@@ -58,6 +58,8 @@
 	body_parts_covered = 0
 	strip_delay = 4 SECONDS
 	clothing_traits = list(TRAIT_FINGERPRINT_PASSTHROUGH)
+	resistance_flags = FIRE_PROOF
+	siemens_coefficient = 1
 
 /obj/item/clothing/gloves/ring/diamond
 	name = "diamond ring"
