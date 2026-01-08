@@ -206,7 +206,9 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 			"top_p" = 0.9
 		)
 	)
-	var/json_payload = json_encode(payload, JSON_BOOL_AS_STR_LOWER)
+	var/json_payload = json_encode(payload)
+	//DM interpret FALSE in json_encode proc as 0. Ollama spec says it should be boolean...
+	json_payload = replacetext(json_payload, "\"stream\":0", "\"stream\":false")
 	var/list/headers = list("Content-Type" = "application/json")
 
 	// ADD TOKEN IF EXISTS
