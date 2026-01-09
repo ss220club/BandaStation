@@ -6791,6 +6791,16 @@
 #include "interface\fonts\spess_font.dm"
 #include "interface\fonts\tiny_unicode.dm"
 #include "interface\fonts\vcr_osd_mono.dm"
+#include "modular_bandastation\_defines220\code\defines\pollution.dm"
+#include "modular_bandastation\pollution\_pollution.dm"
+#include "modular_bandastation\pollution\code\generic_pollutants.dm"
+#include "modular_bandastation\pollution\code\generic_turf_pollutions.dm"
+#include "modular_bandastation\pollution\code\pollutant_datum.dm"
+#include "modular_bandastation\pollution\code\pollution.dm"
+#include "modular_bandastation\pollution\code\pollution_controller.dm"
+#include "modular_bandastation\pollution\code\pollution_effect.dm"
+#include "modular_bandastation\pollution\code\pollution_emitter_element.dm"
+#include "modular_bandastation\pollution\code\pollution_generic_inits.dm"
 // END_INCLUDE
 
 // BANDASTATION

@@ -1,7 +1,12 @@
 /mob/living/carbon/Life(seconds_per_tick = SSMOBS_DT)
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
-
+// BANDASTATION ADDITION START
+	if(isopenturf(loc))
+		var/turf/open/my_our_turf = loc
+		if(my_our_turf.pollution)
+			my_our_turf.pollution.touch_act(src)
+// BANDASTATION ADDITION END
 	if(damageoverlaytemp)
 		damageoverlaytemp = 0
 		update_damage_hud()

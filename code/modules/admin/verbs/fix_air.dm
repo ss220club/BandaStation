@@ -11,3 +11,7 @@ ADMIN_VERB_AND_CONTEXT_MENU(fix_air, R_ADMIN, "Fix Air", "Fixes air in a specifi
 		valid_range_turf.copy_air(GM)
 		valid_range_turf.temperature = initial(valid_range_turf.temperature)
 		valid_range_turf.update_visuals()
+		// BANDASTATION ADDITION START
+		if(valid_range_turf.pollution)
+			qdel(valid_range_turf.pollution)
+		// BANDASTATION ADDITION END

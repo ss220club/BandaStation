@@ -96,7 +96,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/match/proc/matchignite()
 	if(lit || burnt || broken)
 		return
-
+// BANDASTATION ADDITION START
+	var/turf/my_turf = get_turf(src)
+	my_turf.pollute_turf(/datum/pollutant/sulphur, 5)
+// BANDASTATION ADDITION END
 	playsound(src, 'sound/items/match_strike.ogg', 15, TRUE)
 	lit = TRUE
 	damtype = BURN
@@ -241,6 +244,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/choke_forever = FALSE
 	/// When choking, what is the maximum amount of time we COULD choke for
 	var/choke_time_max = 30 SECONDS // I am mean
+	/// What type of pollution does this produce on smoking, changed to weed pollution sometimes
+	var/pollution_type = /datum/pollutant/smoke // BANDASTATION ADDITION
 	/// The particle effect of the smoke rising out of the cigarette when lit
 	VAR_PRIVATE/obj/effect/abstract/particle_holder/cig_smoke
 	/// The particle effect of the smoke rising out of the mob when...smoked
@@ -454,6 +459,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		e.start(src)
 		qdel(src)
 		return
+// BANDASTATION ADDITION START
+	// Setting the puffed pollutant to cannabis if we're smoking the space drugs reagent(obtained from cannabis)
+	if(reagents.has_reagent(/datum/reagent/drug/space_drugs))
+		pollution_type = /datum/pollutant/smoke/cannabis
+// BANDASTATION ADDITION END
 	// allowing reagents to react after being lit
 	update_appearance(UPDATE_ICON)
 	if(flavor_text)
@@ -574,11 +584,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/cigarette/process(seconds_per_tick)
 	var/mob/living/user = isliving(loc) ? loc : null
+	var/turf/location = get_turf(src) // BANDASTATION ADDITION
 	user?.ignite_mob()
 
 	if(!check_oxygen(user))
 		extinguish()
 		return
+
+	location.pollute_turf(pollution_type, 5, POLLUTION_PASSIVE_EMITTER_CAP) // BANDASTATION ADDITION
 
 	smoketime -= seconds_per_tick * (1 SECONDS)
 	if(smoketime <= 0)
@@ -1203,6 +1216,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 	//Time to start puffing those fat vapes, yo.
 	COOLDOWN_START(src, drag_cooldown, dragtime)
+	// BANDASTATION ADDITION START
+	//open flame removed because vapes are a closed system, they won't light anything on fire
+	var/turf/my_turf = get_turf(src)
+	my_turf.pollute_turf(/datum/pollutant/smoke/vape, 5, POLLUTION_PASSIVE_EMITTER_CAP)
+	// BANDASTATION ADDITION END
+	if(obj_flags & EMAGGED)
 	if(obj_flags & EMAGGED)
 		var/datum/effect_system/fluid_spread/smoke/chem/smoke_machine/puff = new
 		puff.set_up(4, holder = src, location = loc, carry = reagents, efficiency = 24)

@@ -33,3 +33,11 @@
 
 #define SQUASH_WITH_HANDS_DELAY 1.5 SECONDS
 #define RCD_NO_SKILLCHIP_DELAY_MULTIPLIER 1.5
+
+//pollution defines
+//Cap for active emitters that can be running for a very long time
+#define POLLUTION_ACTIVE_EMITTER_CAP 200
+//For things that you dont want to cause too much pollution
+#define POLLUTION_PASSIVE_EMITTER_CAP 70
+
+#define POLLUTION_HEIGHT_DIVISOR 10

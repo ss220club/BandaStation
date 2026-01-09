@@ -66,6 +66,7 @@
 #include "overrides/_overrides.dme"
 #include "paperwork/_paperwork.dme"
 #include "pixel_shift/_pixel_shift.dme"
+#include "pollution/_pollution.dme"
 #include "preferences/_preferences.dme"
 #include "ru_jobs/_ru_jobs.dme"
 #include "security_levels/_security_levels.dme"
