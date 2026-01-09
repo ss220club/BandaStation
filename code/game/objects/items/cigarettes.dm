@@ -1222,7 +1222,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	my_turf.pollute_turf(/datum/pollutant/smoke/vape, 5, POLLUTION_PASSIVE_EMITTER_CAP)
 	// BANDASTATION ADDITION END
 	if(obj_flags & EMAGGED)
-	if(obj_flags & EMAGGED)
 		var/datum/effect_system/fluid_spread/smoke/chem/smoke_machine/puff = new
 		puff.set_up(4, holder = src, location = loc, carry = reagents, efficiency = 24)
 		puff.start()

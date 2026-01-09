@@ -50,21 +50,21 @@
 	if(update_active)
 		my_turf.update_adjacent_pollutants()
 
-/datum/pollution/proc/add_pollutant(polutant_type, amount)
-	if(!pollutants[polutant_type])
-		pollutants[polutant_type] = 0
-	pollutants[polutant_type] += amount
+/datum/pollution/proc/add_pollutant(pollutant_type, amount)
+	if(!pollutants[pollutant_type])
+		pollutants[pollutant_type] = 0
+	pollutants[pollutant_type] += amount
 	total_amount += amount
 	update_height()
 	handle_overlay()
 	SET_ACTIVE_POLLUTION(src)
 
 /datum/pollution/proc/add_pollutant_list(list/passed_pollutants)
-	for(var/polutant_type in passed_pollutants)
-		if(!pollutants[polutant_type])
-			pollutants[polutant_type] = 0
-		pollutants[polutant_type] += passed_pollutants[polutant_type]
-		total_amount += passed_pollutants[polutant_type]
+	for(var/pollutant_type in passed_pollutants)
+		if(!pollutants[pollutant_type])
+			pollutants[pollutant_type] = 0
+		pollutants[pollutant_type] += passed_pollutants[pollutant_type]
+		total_amount += passed_pollutants[pollutant_type]
 	update_height()
 	handle_overlay()
 	SET_ACTIVE_POLLUTION(src)
@@ -97,7 +97,7 @@
 	var/list/already_processed_cache = SSpollution.processed_this_run
 	var/list/potential_activers = list()
 	for(var/turf/open/open_turf as anything in my_turf.atmos_adjacent_turfs)
-		if(!already_processed_cache[open_turf])
+		if(!open_turf.pollution || !already_processed_cache[open_turf.pollution])
 			if(can_share_with(open_turf))
 				sharing_turfs[open_turf] = TRUE
 			else

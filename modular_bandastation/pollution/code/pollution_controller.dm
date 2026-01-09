@@ -6,7 +6,7 @@ SUBSYSTEM_DEF(pollution)
 	/// Currently active pollution
 	var/list/active_pollution = list()
 	/// All pollution in the world
-	var/list/all_polution = list()
+	var/list/all_pollution = list()
 	/// Currently processed batch of pollutants
 	var/list/current_run = list()
 	/// Already processed pollutants in cell process
@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(pollution)
 	var/list/singletons = list()
 
 /datum/controller/subsystem/pollution/stat_entry(msg)
-	msg += "|AT:[active_pollution.len]|P:[all_polution.len]"
+	msg += "|AT:[active_pollution.len]|P:[all_pollution.len]"
 	return ..()
 
 /datum/controller/subsystem/pollution/Initialize()
@@ -48,7 +48,7 @@ SUBSYSTEM_DEF(pollution)
 		if(dissapation_ticker >= TICKS_TO_DISSIPATE * 4)
 			pollution_task = POLLUTION_TASK_DISSIPATE
 			dissapation_ticker = 0
-			current_run_cache = all_polution.Copy()
+			current_run_cache = all_pollution.Copy()
 	if(pollution_task == POLLUTION_TASK_DISSIPATE)
 		while(current_run_cache.len)
 			var/datum/pollution/pollution = current_run_cache[current_run_cache.len]

@@ -1,5 +1,5 @@
-#define REGISTER_POLLUTION(pollution) SSpollution.all_polution[pollution] = TRUE
-#define UNREGISTER_POLLUTION(pollution) SSpollution.all_polution -= pollution
+#define REGISTER_POLLUTION(pollution) SSpollution.all_pollution[pollution] = TRUE
+#define UNREGISTER_POLLUTION(pollution) SSpollution.all_pollution -= pollution
 #define SET_ACTIVE_POLLUTION(pollution) SSpollution.active_pollution[pollution] = TRUE
 #define SET_UNACTIVE_POLLUTION(pollution) SSpollution.active_pollution -= pollution
 #define SET_PROCESSED_THIS_RUN(pollution) SSpollution.processed_this_run[pollution] = TRUE
