@@ -70,7 +70,7 @@
 		organ.owner,
 		span_notice("Вы облажались, повредив мозговую ткань!"),
 		span_notice("[surgeon] облажался, что привело к повреждению мозга!"),
-		span_notice("[surgeon] заканчивает операцию на мозге [organ.owner]."),
+		span_notice("[surgeon] заканчивает операцию на мозге [organ.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(organ.owner, "Your head throbs with horrible pain!")
 	organ.apply_organ_damage(40)
@@ -122,7 +122,7 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_notice("Вы начинаете промывание мозгов у [organ.owner]..."),
+		span_notice("Вы начинаете промывание мозгов у [organ.owner.declent_ru(GENITIVE)]..."),
 		span_notice("[surgeon] начинает лечить мозг [organ.owner.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] приступает к выполнению операции на мозге [organ.owner.declent_ru(GENITIVE)]."),
 	)

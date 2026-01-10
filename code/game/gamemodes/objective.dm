@@ -638,7 +638,7 @@ GLOBAL_LIST_EMPTY(possible_items)
 	if(item)
 		targetinfo = item
 		steal_target = targetinfo.targetitem
-		explanation_text = "Украдите [targetinfo.name]" // BANDASTATION EDIT: Correct target name
+		explanation_text = "Украдите [targetinfo.name]"
 		give_special_equipment(targetinfo.special_equipment)
 		return steal_target
 	else
