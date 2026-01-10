@@ -10,17 +10,7 @@
 #define POLLUTION_TASK_PROCESS 1
 #define POLLUTION_TASK_DISSIPATE 2
 
-#define SCENT_DESC_ODOR        "odour"
-#define SCENT_DESC_SMELL       "smell"
-#define SCENT_DESC_FRAGRANCE   "fragrance"
-
 #define POLLUTION_DISSIPATION_PLANETARY_MULTIPLIER 4
-
-///Minimum amount of smell power to be able to sniff a pollutant
-#define POLLUTANT_SMELL_THRESHOLD 3.5
-
-#define POLLUTANT_SMELL_NORMAL 20
-#define POLLUTANT_SMELL_STRONG 40
 
 //Bitflags for pollutants
 #define POLLUTANT_APPEARANCE (1<<0) //Pollutant has an appearance
