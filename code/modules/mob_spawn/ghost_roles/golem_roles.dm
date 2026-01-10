@@ -79,7 +79,9 @@
 	name = "inert servant golem shell"
 	prompt_name = "a servant golem"
 	you_are_text = "You are a golem."
-	flavour_text = "You are highly resistant to heat and cold as well as blunt trauma. You must consume minerals to maintain motion. You are unable to wear clothes, but can still use most tools."
+	flavour_text = "Вы - искуственно созданный голем, обязанный подчиняться всем приказам вашего создателя. Будучи големом, вы крайне устойчивы к теплу, холоду и физическим повреждениям. \
+		Вам требуется употреблять минералы для поддержания активности вашей оболочки. \
+		Вы не можете носить большую часть одежды, однако всё ещё можете использоваться различные инструменты."
 	spawner_job_path = /datum/job/servant_golem
 	/// Weakref to the creator of this golem shell.
 	var/datum/weakref/owner_ref
