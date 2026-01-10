@@ -11,32 +11,32 @@
 		"moving" = FALSE,
 	)
 	description = list(
-		"The Path of Moon revolves around sanity, sowing confusion and discord, and skirting the conventional rules of combat.",
-		"Play this path if you are already experienced with Heretic and want to try something highly unconventional, or simply if you desire to play a pacifist Heretic (Yes, really!)."
+		"Путь Луны фокусируется на здравомыслии, сея смятение и разлад в головах ваших противников, нарушая привычные правила боя.",
+		"Выбирайте этот путь, если у вас уже есть опыт игры на Еретике и хочется попробовать нечто уникальное, или просто хочется отыграть пацифиста (Да, именно так!)."
 	)
 	pros = list(
-		"High amount of tools to confound foes.",
-		"Sows chaos through the station via lunatics.",
-		"Practically immune to disabling effects while wearing the Resplendent Regalia."
+		"Богатый набор инструментов для запутывания ваших противников.",
+		"Сейте хаос на станции при помощи безумцев.",
+		"Невосприимчивость к эффектам оглушения при ношении Блистательного Облачения."
 	)
 	cons = list(
-		"No mobility.",
-		"Mo direct tools to damage your opponents.",
-		"Reliant on misdirection and confusion.",
-		"Lunatics can become liabilities.",
-		"Fairly fragile despite their unique protection mechanics.",
-		"Death while wearing the Resplendent Regalia results in a gorey end.",
+		"Отсутствует мобильность.",
+		"Отсутствуют навыки для нанесения урона напрямую.",
+		"Зависимость от запутывания и ошеломления противника.",
+		"Безумцы могут стать помехой.",
+		"Крайне уязвим, несмотря на уникальную механику защиты.",
+		"Смерть, во время ношения Блистательного Облачения, приведет к крайне кровавому финалу.",
 	)
 	tips = list(
-		"Your Mansus Grasp will make your victim briefly hallucinate and apply a mark that, when triggered by your moon blade, will apply confusion and pacify them (the latter will get removed if the victim receives too much damage at once).",
-		"Your moon blade is special compared to the other heretic blades. It can be used even if you are pacified.",
-		"Your passive makes you completely impervious to brain traumas and slowly regenerates your brain health. Makes sure to upgrade it to bolster the regeneration effect.",
-		"Your Resplendent Regalia utterly changes the rules of combat for you and your opponents; You become fully immune to disabling effect, and all damage received (lethal or non lethal) will be converted into brain damage. However. the robes themselves have no armor, and prevent you from using guns as well as pacifying you (you can still use your moon blade).",
-		"Your moon amulette allows you to channel its effects through your moon blade. When toggled on, your Moon blade will no longer do lethal damage, but do sanity damage and become unblockable, this also allows you to use it while wearing your robes!",
-		"Your moon amulette is a vital part of your kit, as it allows your passive to regenerate double the brain health while worn.",
-		"If the sanity of your opponents goes below  a certain threshold, they'll become a lunatic. Lunatics are prompted to start attacking everyone (including you). Should you want to sacrifice them (or to get them to leave you be), hit them again with your moon blade to put them to sleep.",
-		"Ringleader's Rise summons an army of clones. They do barely any damage, but should they be attacked by non-heretics, they will explode and cause sanity and brain damage to those around them.",
-		"Your ascension will grant you an aura that converts nearby people to loyal lunatics. However, if they have a mindshield implant, their heads will instead detonate after a time.",
+		"Использование «Хватки Мансуса» накладывает на цель кратковременные галлюцинации, а также метку, активируемую вашим Лунным Клинком. Активация Метки усмиряет цель, а также вводит её в замешательство (усмирение спадает, если цель получила слишком много урона).",
+		"Ваш Лунный Клинок уникален в сравнении с клинками других путей, вы можете пользоваться им даже если подверглись пацификации.",
+		"Ваш пассивный навык делает вас полностью невосприимчивым к повреждениям мозга, а также медленно восстанавливают его здоровье. Обязательно улучшите его, чтобы усилить эффект.",
+		"Ваше Блистательное Облачение значительно меняет правила боя для вас и ваших противников; Вы становитесь полностью неуязвимы для эффектов оглушения, а все полученные повреждения (смертельные или несмертельные) будут преобразованы в повреждения мозга, однако сама мантия не имеет брони и препятствует использованию стрелкового оружия, пацифицируя вас (вы все ещё можете использовать Лунный Клинок).",
+		"Эффекты вашего Лунного Амулета проецируются на Лунный Клинок. При активации, ваш Лунный Клинок больше не будет наносить смертельный урон, он будет наносить урон рассудку и станет неблокируемым, что также позволит вам использовать его в Блистательном Облачении!",
+		"Ваш Лунный Амулет ключевой элемент вашего снаряжения, при ношении, он удвоит скорость восстановления повреждений мозга.",
+		"Если рассудок ваших оппонентов упадет ниже определенного значения, они обезумят. Безумцам будет предложено нападать на всех (в том числе и вас). Если вы захотите принести их в жертву (или заставить их оставить вас в покое), ударьте их еще раз своим Лунным Клинком, чтобы усыпить.",
+		"«Восстание Зачинщиков» призывает армию клонов. Они практически не наносят урон, но если на них нападут неверные, они взорвутся, приводя к потере рассудка и нанесению урона мозгу.",
+		"Ваше возвышение даст вам ауру, превращающую ближайших к вам людей в верных вам сумасшедших. Однако, если у цели есть имплант защиты разума, то вместо порабощения, через некоторое время их головы просто взорвутся.",
 	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_moon
@@ -52,8 +52,8 @@
 	ascension = /datum/heretic_knowledge/ultimate/moon_final
 
 /datum/heretic_knowledge/limited_amount/starting/base_moon
-	name = "Moonlight Troupe"
-	desc = "Открывает перед вами Путь луны. \
+	name = "Лунная Тропа"
+	desc = "Открывает перед вами Путь Луны. \
 		Позволяет трансмутировать 2 листа стекла и нож в Лунный клинок. \
 		Одновременно можно иметь только два."
 	gain_text = "Под лунным светом смех отдается эхом."
@@ -88,20 +88,20 @@
 	carbon_target.mob_mood.adjust_sanity(-30)
 
 /datum/heretic_knowledge/spell/mind_gate
-	name = "Mind Gate"
-	desc = "Grants you Mind Gate, a spell which mutes,deafens, blinds, inflicts hallucinations, \
-		confusion, oxygen loss and brain damage to its target over 10 seconds.\
-		The caster takes 20 brain damage per use."
-	gain_text = "My mind swings open like a gate, and its insight will let me perceive the truth."
+	name = "Врата Разума"
+	desc = "Дарует вам «Врата Разума» - заклинание, отнимающее голос, лишающее слуха, зрения, наводящее галлюцинации, \
+		смятение, лишающее воздуха и наносящее урон мозгу цели в течение 10с.\
+		Заклинатель получает 20 единиц урона мозга за каждое использование."
+	gain_text = "Мой разум распахивается, как врата, и его возвышение позволит мне постичь истину."
 
 	action_to_add = /datum/action/cooldown/spell/pointed/mind_gate
 	cost = 2
 
 /datum/heretic_knowledge/moon_amulet
-	name = "Moonlight Amulet"
-	desc = "Позволяет трансмутировать 2 листа стекла, сердце и галстук, чтобы создать Moonlight Amulet. \
-			Если предмет использован на том, у кого слабый рассудок, они становятся берсерком, нападая на всех подряд; \
-			если рассудок не достаточно низок, то уменьшается их настроение. \
+	name = "Лунный Амулет"
+	desc = "Позволяет трансмутировать 2 листа стекла, сердце и галстук, чтобы создать Лунный Амулет. \
+			Если предметом пользуется человек с слабым рассудком, то он становятся берсерком, нападающим на всех подряд; \
+			если рассудок недостаточно низок, то он начнет постепенно убывать. \
 			Ношение этого предмета дарует вам способность видеть язычников сквозь стены, а ваши клинки сделает безвредными - они будут калечить разум жертв. \
 			Предоставляет термальное зрение и удваивает регенерацию мозга еретика Луны при ношении."
 	gain_text = "Во главе парада стоял он, луна сгустилась в единную массу, отражение души."
@@ -119,11 +119,11 @@
 	research_tree_icon_frame = 9
 
 /datum/heretic_knowledge/armor/moon
-	desc = "Allows you to transmute a table (or a suit), a mask and two sheets of glass to create a Resplendant Regalia, this robe will render the user   fully immune to disabling effects and convert all forms of damage into brain damage, while also pacifying the user and render him unable to use ranged weapons (Moon blade will bypass pacifism). \
-			Acts as a focus while hooded."
-	gain_text = "Trails of light and mirth flowed from every arm of this magnificent attire. \
-				The troupe twirled in irridescent cascades, dazzling onlookers with the truth they sought. \
-				I observed, basking in the light, to find my self."
+	desc = "Позволяет преобразовать стол (или костюм), маску и два листа стекла для создания Блистательного Облачения, эта роба сделает носителя невосприимчивым к эффектам оглушения, преобразует все виды повреждений в урон мозгу, а также пацифицируя носителя, лишая его возможности пользоваться дальнобойным оружием (Лунные Клинки обходят пацифизм). \
+			Действует как фокусировка, пока надет капюшон."
+	gain_text = "Струи света и веселья струились из каждой складки этого великолепного наряда. \
+				Труппа кружилась радужными каскадами, ослепляя зрителей истиной, которую они искали. \
+				Купаясь в свете, я наблюдал, как обретаю себя."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/moon)
 	research_tree_icon_state = "moon_armor"
 	required_atoms = list(
@@ -133,18 +133,18 @@
 	)
 
 /datum/heretic_knowledge/spell/moon_parade
-	name = "Lunar Parade"
-	desc = "Grants you Lunar Parade, a spell that - after a short charge - sends a carnival forward \
-		when hitting someone they are forced to join the parade and suffer hallucinations."
-	gain_text = "The music like a reflection of the soul compelled them, like moths to a flame they followed"
+	name = "Лунный Парад"
+	desc = "Дарует вам «Лунный Парад» - заклинание после короткой зарядки, отправляет вперед снаряд \
+		при попадании которого, цель присоединяется к параду, и начинает страдать от галюцинаций."
+	gain_text = "Музыка, словно отражение души, завораживала их, ведя их за собой, как мотыльков ведет за собой пламя."
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/moon_parade
 	cost = 2
 	drafting_tier = 5
 
 /datum/heretic_knowledge/blade_upgrade/moon
-	name = "Moonlight Blade"
+	name = "Лунный Клинок"
 	desc = "Ваш клинок теперь наносит урон мозгу и рассудку, а также вызывает случайные галлюцинации. \
-			Наносит больше урона мозгу если жертва в безумии или спит."
+			Наносит больше урона мозгу если жертва лишилась рассудка или спит."
 	gain_text = "Его остроумие было острым, как клинок, оно прорезало ложь, чтобы принести нам радость."
 
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
@@ -169,10 +169,10 @@
 	target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 25)
 
 /datum/heretic_knowledge/spell/moon_ringleader
-	name = "Ringleaders Rise"
-	desc = "Дает вам Ringleaders Rise, заклинание по области, которое наносит больше урона мозгу в зависимости от отсутствующего рассудка у целей, \
-			также вызывает им галлюцинации, больше тем, у кого мало рассудка. \
-			Если их рассудок достаточно слабый, они обезумеют и потеряют половину рассудка."
+	name = "Восстание Зачинщиков"
+	desc = "Дарует вам «Восстание Зачинщиков» - заклинание действующее на область, и наносящее урон мозгу, пропорционально недостающему рассудку целей, \
+			также вызывает галлюцинации, чем слабее разум цели, тем сильнее галюцинации. \
+			Если значение их рассудка достаточно низкое, цель сойдет с ума, лишившись половины имевшегося рассудка."
 	gain_text = "Взял его за руку, мы поднялись, и те, кто видел правду, поднялись вместе с нами. \
 		Шпрехшталмейстер указал вверх, и тусклый свет правды осветил нас еще больше."
 
@@ -183,7 +183,7 @@
 	is_final_knowledge = TRUE
 
 /datum/heretic_knowledge/ultimate/moon_final
-	name = "The Last Act"
+	name = "Последний Акт"
 	desc = "Ритуал вознесения Пути луны. \
 		Принесите 3 трупа с более чем 50 урона мозгу на руну трансмутации, чтобы завершить ритуал \
 		При завершении, вы становитесь предвестником безумия и получаете ауру пассивного снижения рассудка, \
