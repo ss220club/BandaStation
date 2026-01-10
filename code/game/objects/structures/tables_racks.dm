@@ -13,7 +13,7 @@
  */
 
 /obj/structure/table
-	name = "стол"
+	name = "table"
 	desc = "Квадратный кусок железа, стоящий на четырех металлических ножках. Его нельзя переместить."
 	icon = 'icons/obj/smooth_structures/table.dmi'
 	icon_state = "table-0"
@@ -214,7 +214,7 @@
 	. += deconstruction_hints(user)
 
 /obj/structure/table/proc/deconstruction_hints(mob/user)
-	return span_notice("Верхняя часть <b>привинчена</b> но также видны основные  <b>болты</b>.")
+	return span_notice("Верхняя часть <b>привинчена</b> но также видны основные <b>болты</b>.")
 
 /obj/structure/table/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
@@ -447,12 +447,12 @@
 /obj/structure/table/greyscale/finalize_material_effects(list/materials)
 	. = ..()
 	var/english_list = get_material_english_list(materials)
-	desc = "Квадрат  [(length(materials) > 1) ? "amalgamation" : "piece"] из [english_list]  на четырех ножках. Его нельзя переместить."
+	desc = "Квадратный [(length(materials) > 1) ? "сплав" : "кусок"] из [english_list]  на четырех ножках. Его нельзя переместить."
 
 ///Table on wheels
 /obj/structure/table/rolling
 	name = "Rolling table"
-	desc = "Стол на колесиках марки NT \"Rolly poly\" . Его можно и нужно двигать."
+	desc = "Стол на колесиках марки NT \"Rolly poly\". Его можно и нужно двигать."
 	anchored = FALSE
 	smoothing_flags = NONE
 	smoothing_groups = null
@@ -576,7 +576,7 @@
 		table_shatter(M)
 
 /obj/structure/table/glass/proc/table_shatter(mob/living/victim)
-	visible_message(span_warning("[src] breaks!"),
+	visible_message(span_warning("[src] ломается!"),
 		span_danger("Вы слышите звук разбивающегося стекла."))
 
 	playsound(loc, SFX_SHATTER, 50, TRUE)
@@ -604,7 +604,7 @@
 	color = NARSIE_WINDOW_COLOUR
 
 /obj/structure/table/glass/plasmaglass
-	name = "стол из плазменного стекла"
+	name = "plasma glass table"
 	desc = "Кто-то посчитал это хорошей идеей."
 	icon = 'icons/obj/smooth_structures/plasmaglass_table.dmi'
 	icon_state = "plasmaglass_table-0"
@@ -619,7 +619,7 @@
  */
 
 /obj/structure/table/wood
-	name = "деревянный стол"
+	name = "wooden table"
 	desc = "Не подносите к нему огонь. Говорят, что он хорошо горит."
 	icon = 'icons/obj/smooth_structures/wood_table.dmi'
 	icon_state = "wood_table-0"
@@ -652,8 +652,8 @@
 		..()
 
 /obj/structure/table/wood/poker //No specialties, Just a mapping object.
-	name = "игорный стол"
-	desc = "Потрепанные стол для сомнительных делишек в сомнительных местах."
+	name = "gambling table"
+	desc = "Потрепанный стол для сомнительных делишек в сомнительных местах."
 	icon = 'icons/obj/smooth_structures/poker_table.dmi'
 	icon_state = "poker_table-0"
 	base_icon_state = "poker_table"
@@ -666,7 +666,7 @@
 	..(FALSE)
 
 /obj/structure/table/wood/fancy
-	name = "изысканный стол"
+	name = "fancy table"
 	desc = "Стандартный металлический стол, покрытый удивительно изысканной тканью с узором."
 	icon = 'icons/obj/smooth_structures/fancy_table.dmi'
 	icon_state = "fancy_table-0"
@@ -745,7 +745,7 @@
  * Reinforced tables
  */
 /obj/structure/table/reinforced
-	name = "укреплённый стол"
+	name = "reinforced table"
 	desc = "Укреплённая версия стола с четырьмя ножками."
 	icon = 'icons/obj/smooth_structures/reinforced_table.dmi'
 	icon_state = "reinforced_table-0"
@@ -780,9 +780,9 @@
 
 /obj/structure/table/reinforced/deconstruction_hints(mob/user)
 	if(deconstruction_ready)
-		return span_notice("Верхняя крышка была <i>приварена</i> неплотно, и  <b>болты</b> видны.")
+		return span_notice("Верхняя крышка была <i>приварена</i> неплотно, и <b>болты</b> видны.")
 	else
-		return span_notice("The top cover is firmly <b>welded</b> on.")
+		return span_notice("Верхняя крышка прочно <b>приварена</b>.")
 
 /obj/structure/table/reinforced/welder_act_secondary(mob/living/user, obj/item/tool)
 	if(tool.tool_start_check(user, amount = 0))
@@ -798,7 +798,7 @@
 		else
 			to_chat(user, span_notice("Вы начинаете ослаблять укрепленный стол..."))
 			if (tool.use_tool(src, user, 50, volume = 50))
-				to_chat(user, span_notice("You weaken the table."))
+				to_chat(user, span_notice("Вы ослабили стол."))
 				deconstruction_ready = TRUE
 				return ITEM_INTERACT_SUCCESS
 	return ITEM_INTERACT_BLOCKING
@@ -844,7 +844,7 @@
 	return TRUE
 
 /obj/structure/table/bronze
-	name = "бронзовый стол"
+	name = "bronze table"
 	desc = "Прочный стол из бронзы."
 	icon = 'icons/obj/smooth_structures/brass_table.dmi'
 	icon_state = "brass_table-0"
@@ -859,8 +859,8 @@
 	playsound(src, 'sound/effects/magic/clockwork/fellowship_armory.ogg', 50, TRUE)
 
 /obj/structure/table/reinforced/rglass
-	name = "стол из укреплённого стекла"
-	desc = "Укрпелённая версия стеклянного стола."
+	name = "reinforced glass table"
+	desc = "Укреплённая версия стеклянного стола."
 	icon = 'icons/obj/smooth_structures/rglass_table.dmi'
 	icon_state = "rglass_table-0"
 	base_icon_state = "rglass_table"
@@ -869,7 +869,7 @@
 	max_integrity = 150
 
 /obj/structure/table/reinforced/plasmarglass
-	name = "стол из укреплённого плазменного стекла"
+	name = "reinforced plasma glass table"
 	desc = "Укреплённая версия стола из плазменного стекла."
 	icon = 'icons/obj/smooth_structures/rplasmaglass_table.dmi'
 	icon_state = "rplasmaglass_table-0"
@@ -878,8 +878,8 @@
 	buildstack = /obj/item/stack/sheet/plasmarglass
 
 /obj/structure/table/reinforced/titaniumglass
-	name = "титановый стеклянный стол"
-	desc = "Стол из титанового укреплённого стекла, покрытый свежим слоем белой краски NT."
+	name = "titanium glass table"
+	desc = "Стол из титана и укреплённого стекла, покрытый свежим слоем белой краски NT."
 	icon = 'icons/obj/smooth_structures/titaniumglass_table.dmi'
 	icon_state = "titaniumglass_table-0"
 	base_icon_state = "titaniumglass_table"
@@ -889,7 +889,7 @@
 
 /obj/structure/table/reinforced/plastitaniumglass
 	name = "plastitanium glass table"
-	desc = "A table made of titanium reinforced silica-plasma composite. About as durable as it sounds."
+	desc = "Стол, изготовленный из титана и армированного кварц-плазменного композита. Примерно такой же прочный, как это и звучит."
 	icon = 'icons/obj/smooth_structures/plastitaniumglass_table.dmi'
 	icon_state = "plastitaniumglass_table-0"
 	base_icon_state = "plastitaniumglass_table"
@@ -902,7 +902,7 @@
  */
 
 /obj/structure/table/optable
-	name = "операционный стол"
+	name = "operating table"
 	desc = "Используется для сложных медицинских процедур."
 	icon = 'icons/obj/medical/surgery_table.dmi'
 	icon_state = "surgery_table"
@@ -1207,15 +1207,15 @@
 /obj/structure/table/optable/examine(mob/user)
 	. = ..()
 	if (air_tank)
-		. += span_notice("К нему прикреплен \a [air_tank] с помощю пары [EXAMINE_HINT("болтов")].")
+		. += span_notice("К нему прикреплен \a [air_tank] с помощью пары [EXAMINE_HINT("болтов")].")
 		if (patient)
-			. += span_info("Вы можете подключить  [patient] к \the [air_tank] перетащив \the [src] на него.")
+			. += span_info("Вы можете подключить [patient] к \the [air_tank] перетащив \the [src] на него.")
 	else
 		. += span_notice("Внизу имеется крепежный паз для воздушного баллона.")
 	if (breath_mask)
 		. += span_notice("К его боковой стороне прикреплена \a [breath_mask], которая закреплена [EXAMINE_HINT("винтом")].")
 		if (breath_mask.loc == src)
-			. += span_info("Вы можете снять маску, щелкнув правой кнопкой мыши по \the [src] пустой рукой")
+			. += span_info("Вы можете снять маску, щелкнув правой кнопкой мыши по \the [src] пустой рукой.")
 	else
 		. += span_notice("Сбоку есть порт для дыхательной маски.")
 
@@ -1231,7 +1231,7 @@
 		balloon_alert(user, "руки заняты!")
 		return TRUE
 
-	to_chat(user, span_notice("Вы достаете  \the [breath_mask] из \the [src]."))
+	to_chat(user, span_notice("Вы достаете \the [breath_mask] из \the [src]."))
 	update_appearance()
 	return TRUE
 
@@ -1249,7 +1249,7 @@
 		return
 
 	user.visible_message(span_notice("[user] начинает подключать [src] [air_tank] к [patient] [internals]."), span_notice("Вы начинаете подключать [src] [air_tank] к [patient] [internals]..."), ignored_mobs = patient)
-	to_chat(patient, span_userdanger("[user]начинает подключать [src] [air_tank] к вашему [internals]!"))
+	to_chat(patient, span_userdanger("[user] начинает подключать [src] [air_tank] к вашему [internals]!"))
 
 	if (!do_after(user, 4 SECONDS, patient))
 		return
@@ -1259,7 +1259,7 @@
 
 	patient.open_internals(air_tank, is_external = TRUE)
 	to_chat(user, span_notice("Вы подключаете [src] [air_tank] к [patient] [internals]."))
-	to_chat(patient, span_userdanger("[user] подключает [src] [air_tank] к [internals]!"))
+	to_chat(patient, span_userdanger("[user] подключает [src] [air_tank] к вашим [internals]!"))
 
 /obj/structure/table/optable/proc/on_mask_moved(datum/source, atom/oldloc, direction)
 	SIGNAL_HANDLER
@@ -1312,7 +1312,7 @@
  * Racks
  */
 /obj/structure/rack
-	name = "стойка"
+	name = "rack"
 	desc = "Отличается от средневековой версии."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "rack"
@@ -1324,7 +1324,7 @@
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT)
 
 /obj/structure/rack/skeletal
-	name = "скелетный мини-бар"
+	name = "skeletal minibar"
 	desc = "Потряси меня выпивкой!"
 	icon = 'icons/obj/fluff/general.dmi'
 	icon_state = "minibar"
@@ -1412,7 +1412,7 @@
  */
 
 /obj/item/rack_parts
-	name = "детали стойки"
+	name = "rack parts"
 	desc = "Части стойки."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "rack_parts"
@@ -1456,7 +1456,7 @@
 		if(!user.temporarilyRemoveItemFromInventory(src))
 			return
 		var/obj/structure/rack/R = new /obj/structure/rack(get_turf(src))
-		user.visible_message(span_notice("[user] собирает \a [R]."), span_notice("ты собираешь \a [R]."))
+		user.visible_message(span_notice("[user] собирает \a [R]."), span_notice("Вы собираете \a [R]."))
 		R.add_fingerprint(user)
 		qdel(src)
 	building = FALSE
