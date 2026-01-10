@@ -7,11 +7,30 @@
 		return "<a href='byond://?src=[REF(src)];track=[html_encode(namepart)]'>"
 	return ""
 
+//BANDA STATION ADDITION - AI DOOR
+/mob/living/silicon/proc/compose_open_door_href(atom/movable/speaker)
+	var/mob/living/target = speaker.GetSource()
+
+	if(!target || !isliving(target))
+		return ""
+
+	var/mob/living/silicon/ai/controller
+	if(isAI(src))
+		controller = src
+	else if(iscyborg(src))
+		var/mob/living/silicon/robot/bot = src
+		if(bot.shell && bot.connected_ai)
+			controller = bot.connected_ai
+
+	return controller ? " <a href='byond://?src=[REF(controller)];open=[REF(target)]'>\[OPEN\]</a>" : ""
+
+//BANDA STATION ADDITION END
+
 /mob/living/silicon/compose_job(atom/movable/speaker, message_langs, raw_message, radio_freq)
-	//Also includes the </a> for AI hrefs, for convenience.
 	if(!HAS_TRAIT(src, TRAIT_CAN_GET_AI_TRACKING_MESSAGE))
 		return ""
-	return "[radio_freq ? " (" + speaker.GetJob() + ")" : ""]" + "[speaker.GetSource() ? "</a>" : ""]"
+
+	return "[radio_freq ? " ([speaker.GetJob()])" : ""][speaker.GetSource() ? "</a>" : ""][compose_open_door_href(speaker)]" //BANDA STATION ADDITION - AI DOOR
 
 /mob/living/silicon/ai/try_speak(message, ignore_spam = FALSE, forced = null, filterproof = FALSE)
 	// AIs cannot speak if silent AI is on.

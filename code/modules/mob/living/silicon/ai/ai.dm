@@ -404,6 +404,16 @@
 
 /mob/living/silicon/ai/Topic(href, href_list)
 	..()
+
+	// BANDA STATION ADDITION - AI DOOR
+	if(href_list["open"])
+		if(usr == src || (deployed_shell && usr == deployed_shell))
+			var/mob/living/target = locate(href_list["open"])
+			if(target)
+				open_nearest_door(target)
+			return
+	// END BANDA STATION ADDITION
+
 	if(usr != src)
 		return
 
@@ -1198,6 +1208,76 @@
 			///which in this case would be somewhere else, so we drop their MMI at the core instead
 			mind?.transfer_to(mmi_gone.brainmob)
 			qdel(src)
+
+// BANDA STATION ADDITION - AI DOOR
+/mob/living/silicon/ai/proc/open_nearest_door(mob/living/target)
+	if(!istype(target))
+		return
+
+	var/mob/living/user = usr
+	if(!user || !user.client)
+		user = src
+
+	var/can_see_target = FALSE
+	if(can_see(target))
+		can_see_target = TRUE
+	else if(deployed_shell && get_dist(deployed_shell, target) <= 7)
+		can_see_target = TRUE
+	else if(deployed_shell && SScameras.is_visible_by_cameras(get_turf(target)))
+		can_see_target = TRUE
+
+	if(!can_see_target)
+		to_chat(user, span_warning("Цель вне видимости ваших камер."))
+		return
+
+	var/obj/machinery/door/airlock/A = null
+	var/dist = -1
+
+	for(var/obj/machinery/door/airlock/D in range(3, target))
+		if(!D.density)
+			continue
+
+		var/curr_dist = get_dist(D, target)
+		if(dist < 0 || curr_dist < dist)
+			dist = curr_dist
+			A = D
+
+	if(istype(A))
+
+		if(!A.hasPower())
+			to_chat(user, span_warning("Ошибка: [A] отключен."))
+			return
+
+		if(A.locked)
+			to_chat(user, span_warning("Ошибка: [A] болты подняты."))
+			return
+
+		if(A.welded)
+			to_chat(user, span_warning("Ошибка: [A] шлюз не поддается."))
+			return
+
+		if(A.wires && A.wires.is_cut(WIRE_AI))
+			to_chat(user, span_warning("Ошибка подключения: шлюз [A] не отвечает."))
+			return
+		// --------------------------------
+
+		var/confirm = tgui_alert(user, "Вы хотите открыть [A] для [target]?", "Открыть шлюз", list("Да", "Нет"))
+
+		if(confirm == "Да")
+			if(QDELETED(A) || !A.density || !A.hasPower() || A.locked || (A.wires && A.wires.is_cut(WIRE_AI)))
+				to_chat(user, span_warning("Действие сброшено"))
+				return
+
+			if(get_dist(A, target) > 5)
+				to_chat(user, span_warning("Действие сброшено: Цель переместилась."))
+				return
+
+			A.open()
+			to_chat(user, span_notice("Вы открываете [A] для [target]."))
+			log_silicon("opened [A] for [key_name(target)] via chat link at [AREACOORD(A)]")
+	else
+		to_chat(user, span_warning("Не удалось найти подходящий шлюз поблизости [target]."))
+// BANDA STATION ADDITION - END
 
 #undef HOLOGRAM_CHOICE_CHARACTER
 #undef CHARACTER_TYPE_SELF
