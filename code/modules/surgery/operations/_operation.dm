@@ -891,7 +891,6 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 			operation_args[OPERATION_SPEED] = 0
 
 		var/failure_chance = get_modified_failure_chance(time, patient, surgeon, tool, operation_args) // BANDASTATION EDIT
-		to_chat(surgeon, "Шанс неудачи операции составляет [failure_chance]%.")
 		if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(failure_chance, 0, 99))) // BANDASTATION EDIT
 			failure(operating_on, surgeon, tool, operation_args)
 			result |= ITEM_INTERACT_FAILURE
