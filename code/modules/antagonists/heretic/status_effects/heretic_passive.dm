@@ -70,11 +70,11 @@
 // Level 2 grants lava immunity
 // Level 3 grants resistance to high pressure
 /datum/status_effect/heretic_passive/ash
-	name = "Клятва Разрушения"
+	name = "Vow of Destruction"
 	passive_descriptions = list(
-		"Невосприимчивость к жару и пепельным бурям.",
-		"Невосприимчивость к лаве.",
-		"Устойчивость к низкому и высокому давлению."
+		"Heat and ash storm immunity.",
+		"Lava immunity.",
+		"Resistance to high and low pressure."
 	)
 
 /datum/status_effect/heretic_passive/ash/on_apply()
@@ -100,12 +100,12 @@
 // Level 2 Makes you immune to fall damage/stun from falling
 // Level 3 only has the cooldown reduction (nothing else added)
 /datum/status_effect/heretic_passive/blade
-	name = "Танец Клейма"
+	name = "Dance of the Brand"
 	id = "blade_passive"
 	passive_descriptions = list(
-		"Держа в руке Еретический Клинок, вы автоматичесски нанесёте ответный удар, напавшему на вас. Данный эффект может сработать раз в 20 секунд.",
-		"Невосприимчивость к урону от падений.",
-		"Время перезарядки ответного удара уменьшено до 10 секунд."
+		"Being attacked while wielding a Heretic Blade in either hand will deliver a free, instant counterattack to the attacker. This effect can only trigger once every 20 seconds.",
+		"Immunity to fall damage.",
+		"Cooldown of the riposte reduced to 10 seconds."
 	)
 	/// The cooldown before we can riposte again
 	var/base_cooldown = 20 SECONDS
@@ -217,9 +217,9 @@
 	name = "Chosen of the Stars"
 	id = "cosmic_passive"
 	passive_descriptions = list(
-		"Космические поля ускоряют вас и восстанавливают выносливость.",
-		"Космические поля препятствуют активации гранат и сигналеров, а также отключают уже активированные гранаты.",
-		"Космические поля замедляют полет снарядов."
+		"Cosmic fields speed you up and regenerate stamina.",
+		"Cosmic fields disrupt grenades or signalers from being activated and turn off already primed grenades.",
+		"Cosmic fields slow projectiles down."
 	)
 
 /datum/status_effect/heretic_passive/cosmic/tick(seconds_between_ticks)
@@ -259,12 +259,12 @@
 // Level 2, organs and raw meat heals you. You also become a voracious glutton who likes all food. No slowdown from being fat
 // Level 3, being fat gives damage resistance
 /datum/status_effect/heretic_passive/flesh
-	name = "Зверский голод"
+	name = "Ravenous Hunger"
 	id = "flesh_passive"
 	passive_descriptions = list(
-		"Имунитет к болезням, отвращению и космичесским муравьям.",
-		"Употребление в пищу органов или мяса теперь лечит вас, вы приобретаете черты прожорливости, а ожирение не замедляет ваш рост.",
-		"В состоянии ожирения урон по вам, и по вашей выносливости снижен на 25%, также становитесь устойчивы к оглушающей дубинке."
+		"Immunity to Diseases, Disgust and space ants.",
+		"Eating organs or meat now heals you, gain the voracious and gluttonous trait and being fat doesn't slow you down.",
+		"Gain a flat 25% damage and stamina damage reduction when fat as well as baton resistance."
 	)
 
 /datum/status_effect/heretic_passive/flesh/on_apply()
@@ -353,12 +353,12 @@
 // Level 2 Gains X-ray Vision
 // Level 3 your grasp no longer goes on cooldown when opening things
 /datum/status_effect/heretic_passive/lock
-	name = "Открытое Приглашение"
+	name = "Open Invitation"
 	id = "lock_passive"
 	passive_descriptions = list(
-		"Устойчивость к току, все знания, полученные в магазине, стоят дешевле",
-		"Рентгеновское зрение, позволяющее видеть сквозь предметы и стены.",
-		"При использовании на дверь или шкафчик, Хватка больше не уходит на перезарядку."
+		"Shock insulation, all knowledges researched from the shop are cheaper",
+		"X-ray vision, you can see through walls and objects.",
+		"Grasp no longer goes on cooldown when used to open a door or locker."
 	)
 
 /datum/status_effect/heretic_passive/lock/on_apply()
@@ -395,12 +395,12 @@
 // Level 2 grants sleep immunity
 // Level 3, Mind gate + Ringleader's rise will channel the moon amulet effects
 /datum/status_effect/heretic_passive/moon
-	name = "Ты тоже слышишь Голоса?"
+	name = "Do You Hear The Voices Too?"
 	id = "moon_passive"
 	passive_descriptions = list(
-		"Вы защиищены от травмы мозга, и пассивно восстанавливаете его здоровье (в бою, восстановление снижается на половину)",
-		"Вас более не могут усыпить, а также скорость восстановления травм мозга увеличена вдвое",
-		"Врата Разуму and Восстание Зачинщиков усиливают действие Лунного амулета, ещё сильнее ускоряя скорость восстановления травм мозга."
+		"Can no longer develop brain traumas, passively regenerates brain health, (this bonus is halved in combat).",
+		"Sleep immunity, increases the ratio at which your brain damage regenerates.",
+		"Mind gate and Ringleader's rise will channel the moon amulet effects, further inreases brain regeneration."
 	)
 	/// Built-in moon amulet which channels through your spells
 	var/obj/item/clothing/neck/heretic_focus/moon_amulet/amulet
@@ -465,12 +465,12 @@
 // Level 2 will heal wounds when standing on rust
 // Level 3 will restore lost limbs when standing on rust
 /datum/status_effect/heretic_passive/rust
-	name = "Высасывающая Прогулка"
+	name = "Leeching Walk"
 	id = "rust_passive"
 	passive_descriptions = list(
-		"Стоя на ржавчине, вы исцеляете организм и очищаете его от химических веществ",
-		"Стоя на ржавчине, ваши раны заживают, а органы исцеляются. Также ржавению поддаются усиленные полы и стены. Эффект заживления увеличен.",
-		"Стоя на ржавчине вы восстанавливаете утеряные конечности, также ржавчине поддаются титановые полы и стены. Эффект заживления увеличен."
+		"Standing on Rusted tiles heals and purge chems off your body.",
+		"Standing on Rusted tiles closes up your wounds and heals your organs, you may now rust reinforced floors and walls, healing effect increased.",
+		"Standing on Rusted tiles regenerates your limbs, you may now rust titanium and plastitanium walls, healing effect increased."
 	)
 
 /datum/status_effect/heretic_passive/rust/on_apply()
@@ -560,12 +560,12 @@
 // Level 2 No breathe
 // Level 3 No slip on water/ice
 /datum/status_effect/heretic_passive/void
-	name = "Пусть Аристократа"
+	name = "Aristocrat's Way"
 	id = "void_passive"
 	passive_descriptions = list(
-		"Невосприимчивость к холоду и низкому давлению.",
-		"Вам более не требуется дышать.",
-		"Вы больше не подскальзываетесь на воде, льде и иных скользких поверхностях."
+		"Cold and low pressure immunity.",
+		"You no longer need to breathe.",
+		"Water, ice and slippery surfaces no slip you."
 	)
 
 /datum/status_effect/heretic_passive/void/on_apply()

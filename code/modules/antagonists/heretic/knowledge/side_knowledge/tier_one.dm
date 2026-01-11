@@ -3,12 +3,12 @@
  */
 
 /datum/heretic_knowledge/void_cloak
-	name = "Накидка Пустоты"
-	desc = "Позволяет трансмутировать осколок стекла, простыню, и любую верхнюю одежду (например броню или костюм), \
-		чтобы создать Накидку Пустоты. Накидка защищает вас от космического пространсва, а тействует как фокусировка, пока надет капюшон \
-		Когда капюшон поднят, плащ полностью невидим. Он также обеспечивает неплохую броню и \
-		имеет карманы, в которые можно поместить один из ваших клинков, различные ритуальные компоненты (например, органы) и небольшие еретические безделушки."
-	gain_text = "Сова хранит то, что не обрело формы в действительности, но уже существует в теории. А таких сущностей немало."
+	name = "Void Cloak"
+	desc = "Allows you to transmute a glass shard, a bedsheet, and any outer clothing item (such as armor or a suit jacket) \
+		to create a Void Cloak. While the hood is down, the cloak functions as a focus and protects you from space. \
+		While the hood is up, the cloak is completely invisible. It also provide decent armor and \
+		has pockets which can hold one of your blades, various ritual components (such as organs), and small heretical trinkets."
+	gain_text = "The Owl is the keeper of things that are not quite in practice, but in theory are. Many things are."
 	required_atoms = list(
 		/obj/item/shard = 1,
 		/obj/item/clothing/suit = 1,
@@ -21,10 +21,10 @@
 	drafting_tier = 1
 
 /datum/heretic_knowledge/medallion
-	name = "Пепельные Глаза"
-	desc = "Позволяет трансмутировать глаза, свечу, и осколок стекла в Потусторонний Медальон. \
-		При ношении Потусторонний Медальон дает термальное зрение, а также работает как фокусировщик."
-	gain_text = "Пронзительный взляд вел тх сквозь обыденность. Ни темнота, ни ужас не могли их остановить."
+	name = "Ashen Eyes"
+	desc = "Allows you to transmute a pair of eyes, a candle, and a glass shard into an Eldritch Medallion. \
+		The Eldritch Medallion grants you thermal vision while worn, and also functions as a focus."
+	gain_text = "Piercing eyes guided them through the mundane. Neither darkness nor terror could stop them."
 	required_atoms = list(
 		/obj/item/organ/eyes = 1,
 		/obj/item/shard = 1,
@@ -37,11 +37,11 @@
 	drafting_tier = 1
 
 /datum/heretic_knowledge/essence // AKA Eldritch Flask
-	name = "Священный Ритуал"
-	desc = "Позволяет трансмутировать емкость с водой и осколок стекла во Флягу Потусторонней Эссенции. \
-		Потустороннюю эссенцию можно употреблять для мощного исцеления или давать язычникам, для смертельного отравления"
-	gain_text = "Это наш старый рецепт. Нашептала мне Сова. \
-		Созданноея Жрецом - жидкость, которая существовала и нет одновременно."
+	name = "Priest's Ritual"
+	desc = "Allows you to transmute a tank of water and a glass shard into a Flask of Eldritch Essence. \
+		Eldritch Essence can be consumed for potent healing, or given to heathens for deadly poisoning."
+	gain_text = "This is an old recipe. The Owl whispered it to me. \
+		Created by the Priest - the Liquid that both was and is not."
 	required_atoms = list(
 		/obj/structure/reagent_dispensers/watertank = 1,
 		/obj/item/shard = 1,
@@ -53,11 +53,11 @@
 	drafting_tier = 1
 
 /datum/heretic_knowledge/phylactery
-	name = "Филактерий Проклятия"
-	desc = "Позволяет трансмутировать лист стекла и мак в филактерию, способную мгновенно вытягивать кровь, даже на большой дистанции. \
-		Имейте в виду, что ваша цель все еще может почувствовать укол."
-	gain_text = "Настойка, извращённая в форму кровососущего паразита. \
-		Выбрала ли она этот облик сама, или же это - шутка больного разума, породившего этот мерзкий артефакт, - вопрос, над которым лучше не задумываться."
+	name = "Phylactery of Damnation"
+	desc = "Allows you to transmute a sheet of glass and a poppy into a Phylactery that can instantly draw blood, even from long distances. \
+		Be warned, your target may still feel a prick."
+	gain_text = "A tincture twisted into the shape of a bloodsucker vermin. \
+		Whether it chose the shape for itself, or this is the humor of the sickened mind that conjured this vile implement into being is something best not pondered."
 	required_atoms = list(
 		/obj/item/stack/sheet/glass = 1,
 		/obj/item/food/grown/poppy = 1,
@@ -69,11 +69,11 @@
 	drafting_tier = 1
 
 /datum/heretic_knowledge/crucible
-	name = "Растерзанный Тигель"
-	desc = "Позволяет трансмутировать переносной бак с водой и стол, чтобы создать Растерзанный Тигель. \
-		Растерзанный Тигель открывает возможность варить могущественные зелья, как для боя, так и общего назначения, однако между использованиями его нужно подкармливать органами, или частами тела."
-	gain_text = "Это чистейшая агония. Мне не удалось призвать образ Аристократа, \
-		но, привлёкши внимание Жреца, я наткнулся на иной рецепт…"
+	name = "Mawed Crucible"
+	desc = "Allows you to transmute a portable water tank and a table to create a Mawed Crucible. \
+		The Mawed Crucible can brew powerful potions for combat and utility, but must be fed bodyparts and organs between uses."
+	gain_text = "This is pure agony. I wasn't able to summon the figure of the Aristocrat, \
+		but with the Priest's attention I stumbled upon a different recipe..."
 	required_atoms = list(
 		/obj/structure/reagent_dispensers/watertank = 1,
 		/obj/structure/table = 1,
@@ -85,11 +85,12 @@
 	drafting_tier = 1
 
 /datum/heretic_knowledge/eldritch_coin
-	name = "Потусторонняя Монета"
-	desc = "Позволяет трансмутировать лист плазмы и алмаз, чтобы создать Потустороннюю Монету \
-		Монета откроет или закроет ближайшие двери если выпадет орёл, и болтирует их, если выпадет решка. \
-		Если вставить монету в шлюз, она сожжет его плату, оставив шлюз открытым, если он не болтирован."
-	gain_text = "Мансус - место для всех видов греха. Но алчность занимает в нём особое место"
+	name = "Eldritch Coin"
+	desc = "Allows you to transmute a sheet of plasma and a diamond to create an Eldritch Coin. \
+		The coin will open or close nearby doors when landing on heads and toggle their bolts \
+		when landing on tails. If you insert the coin into an airlock, it will be consumed \
+		to fry its electronics, opening the airlock permanently unless bolted. "
+	gain_text = "The Mansus is a place of all sorts of sins. But greed held a special role."
 	required_atoms = list(
 		/obj/item/stack/sheet/mineral/diamond = 1,
 		/obj/item/stack/sheet/mineral/plasma = 1,

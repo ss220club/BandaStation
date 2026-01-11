@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * The base heretic knowledge. Grants the Mansus Grasp spell.
  */
 /datum/heretic_knowledge/spell/basic
-	name = "Рассвет"
+	name = "Break of Dawn"
 	desc = "Начните свое путешествие в Мансус. \
 		Дарует вам Хватку Мансуса, мощное и улучшаемое обездвиживающее заклинание, \
 		которое может быть применено независимо от наличия фокусировки."
@@ -65,7 +65,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * Also includes a ritual to turn their heart into a living heart.
  */
 /datum/heretic_knowledge/living_heart
-	name = "Живое Сердце"
+	name = "The Living Heart"
 	desc = "Дарует вам Живое сердце, позволяющее отслеживать жертвенные цели. \
 		Если вы потеряете сердце, вы можете трансмутировать мак и лужу крови, \
 		чтобы пробудить свое сердце в Живое сердце. Если ваше сердце кибернетическое, \
@@ -178,7 +178,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * They require a focus to cast advanced spells.
  */
 /datum/heretic_knowledge/amber_focus
-	name = "Янтарный фокусировщик"
+	name = "Amber Focus"
 	desc = "Позволяет трансмутировать лист стекла и пару глаз, чтобы создать Янтарную фокусировку. \
 		Для того чтобы произносить более сложные заклинания, необходимо носить фокусировку."
 	required_atoms = list(
@@ -193,8 +193,8 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	research_tree_icon_state = "eldritch_necklace"
 
 /datum/heretic_knowledge/spell/cloak_of_shadows
-	name = "Покров Тени"
-	desc = "Дарует вам заклинание Покров Тени. Это заклинание полностью скрывает вашу личность в фиолетовой дымке \
+	name = "Cloak of Shadow"
+	desc = "Дарует вам заклинание Cloak of Shadow. Это заклинание полностью скрывает вашу личность в фиолетовой дымке \
 		на три минуты, помогая вам сохранять секретность. Для наложения заклинания требуется фокусировка."
 	action_to_add = /datum/action/cooldown/spell/shadow_cloak
 	cost = 0
@@ -208,11 +208,11 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * Overall, it's a tradeoff between speed and stealth or power.
  */
 /datum/heretic_knowledge/codex_cicatrix
-	name = "Кодекс Шрама"
-	desc = "Позволяет трансмутировать книгу, любую ручку, любое тело (животного или человека) и шкуру или кожу, чтобы создать Кодекс Шрама. \
-		Кодекс Шрама можно использовать при истощении влияний для получения дополнительных знаний, но при этом возрастает риск быть замеченным. \
+	name = "Codex Cicatrix"
+	desc = "Позволяет трансмутировать книгу, любую ручку, любое тело (животного или человека) и шкуру или кожу, чтобы создать Codex Cicatrix. \
+		Codex Cicatrix можно использовать при истощении влияний для получения дополнительных знаний, но при этом возрастает риск быть замеченным. \
 		Его также можно использовать для того, чтобы легче рисовать и удалять руны трансмутации, и использоваться в качестве фокусировки"
-	gain_text = "Оккультизм оставляет фрагменты знаний и силы везде и всюду. Кодекс Шрама - один из таких примеров. \
+	gain_text = "Оккультизм оставляет фрагменты знаний и силы везде и всюду. Codex Cicatrix - один из таких примеров. \
 		В кожаном переплете и на старых страницах открывается путь к Мансусу."
 	required_atoms = list(
 		list(/obj/item/toy/eldritch_book, /obj/item/book) = 1,
@@ -279,9 +279,9 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	return ..()
 
 /datum/heretic_knowledge/feast_of_owls
-	name = "Пир для Сов"
-	desc = "Позволяет вам пройти ритуал, который дает вам 5 очков знаний, но не дает возможности совершить вознесение. Это можно сделать только один раз и эффект нельзя отменить."
-	gain_text = "Под мягким сиянием безрассудсва скрывается зверь, крадущийся в ночи. Я выведу его на свет и позволю ему предстать предо мной. Он насытится моими амбициями и оставит после себя знания."
+	name = "Feast of Owls"
+	desc = "Allows you to undergo a ritual that gives you 5 knowledge points but locks you out of ascension. This can only be done once and cannot be reverted."
+	gain_text = "Under the soft glow of unreason there is a beast that stalks the night. I shall bring it forth and let it enter my presence. It will feast upon my amibitions and leave knowledge in its wake."
 	is_starting_knowledge = TRUE
 	required_atoms = list()
 	research_tree_icon_path = 'icons/mob/actions/actions_animal.dmi'
@@ -329,8 +329,8 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * Gives access to solars since those doors are especially useful to get in or out of space.
  */
 /datum/heretic_knowledge/bookworm
-	name = "Приветсвие Уоррена Кинга"
-	desc = "Позволяет трансмутировать 5 обрезков провода и лист бумаги, чтобы наделить любое удостоверение личности доступом к внешним шлюзам"
+	name = "Warren King's Welcome"
+	desc = "Allows you to transmute 5 cable pieces and a piece of paper to infuse any ID with maintenace and external airlock access."
 	gain_text = "Gnawed into vicious-stained fingerbones, my grim invitation snaps my nauseous and clouded mind towards the heavy-set door. \
 	Slowly, the light dances between a crawling darkness, blanketing the fetid promenade with infinite machinations. \
 	But the King will soon take his pound of flesh. Even here, the taxman takes their cut. For there are a thousands mouths to feed."
