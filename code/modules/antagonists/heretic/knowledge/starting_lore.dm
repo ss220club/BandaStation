@@ -178,8 +178,8 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * They require a focus to cast advanced spells.
  */
 /datum/heretic_knowledge/amber_focus
-	name = "Янтарный фокусировщик"
-	desc = "Позволяет трансмутировать лист стекла и пару глаз, чтобы создать Янтарную фокусировку. \
+	name = "Янтарный Фокусировщик"
+	desc = "Позволяет трансмутировать лист стекла и пару глаз, чтобы создать Янтарную Фокусировку. \
 		Для того чтобы произносить более сложные заклинания, необходимо носить фокусировку."
 	required_atoms = list(
 		/obj/item/organ/eyes = 1,
