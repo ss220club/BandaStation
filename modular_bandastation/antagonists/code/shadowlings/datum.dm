@@ -25,6 +25,11 @@
 		return FALSE
 	return ..()
 
+/datum/antagonist/shadowling/get_preview_icon()
+	var/mob/living/carbon/human/dummy/consistent/dummy = new()
+	dummy.set_species(/datum/species/shadow/shadowling, icon_update = TRUE)
+	return finish_preview_icon(render_preview_outfit(preview_outfit, dummy))
+
 /datum/antagonist/shadowling/on_gain()
 	if(!owner)
 		return
