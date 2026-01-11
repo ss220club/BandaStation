@@ -759,7 +759,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 		basemod *= mod_amt
 	if(HAS_TRAIT(patient, TRAIT_SURGICALLY_ANALYZED))
 		basemod *= 0.8
-	if(HAS_TRAIT(patient, TRAIT_ANALGESIA) || HAS_TRAIT(patient, TRAIT_STASIS)) // BANDASTATION EDIT - Боль и свет
+	if(HAS_TRAIT(patient, TRAIT_ANALGESIA) || HAS_TRAIT(patient, TRAIT_STASIS) || patient.stat >= 2) // BANDASTATION EDIT
 		basemod *= 0.8
 	return basemod
 
@@ -1015,7 +1015,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 
 	if(target.stat >= UNCONSCIOUS || HAS_TRAIT(target, TRAIT_KNOCKEDOUT))
 		return
-	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || HAS_TRAIT(target, TRAIT_STASIS) || drunken_patient && prob(drunken_ignorance_probability)) // BANDASTATION EDIT - Боль и свет
+	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || HAS_TRAIT(target, TRAIT_STASIS) || drunken_patient && prob(drunken_ignorance_probability)) // BANDASTATION EDIT
 		to_chat(target, span_notice("Вы испытываете притупленное покалывание, пока ваше тело оперируют."))
 		return
 	to_chat(target, span_userdanger(pain_message))
