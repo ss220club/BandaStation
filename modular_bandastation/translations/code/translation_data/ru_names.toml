@@ -29523,3 +29523,101 @@ accusative = "кольцо с бриллиантом"
 instrumental = "кольцом с бриллиантом"
 prepositional = "кольце с бриллиантом"
 gender = "neuter"
+
+# MARK:  Heretic common items
+
+["Amber Focus"]
+nominative ="Янтарный фокусировщик"
+genitive ="Янтарного фокусировщика"
+dative ="Янтарному фокусировщику"
+accusative ="Янтарный фокусировщик"
+instrumental ="Янтарным фокусировщиком"
+prepositional ="Янтарном фокусировщике"
+gender ="neuter"
+
+["Codex Cicatrix"]
+nominative = "Кодекс Шрама"
+genitive = "Кодекса Шрама"
+dative = "Кодексу Шрама"
+accusative = "Кодекс Шрама"
+instrumental = "Кодексом Шрама"
+prepositional = "Кодексе Шрама"
+gender = "neuter"
+
+[""]
+nominative =""
+genitive =""
+dative =""
+accusative =""
+instrumental =""
+prepositional =""
+gender ="neuter"
+
+# MARK: Cosmic heretic items
+
+["Starwoven Cloak"]
+nominative = "Сотканный из звёзд"
+genitive = "Сотканного из звёзд"
+dative = "Сотканному из звёзд"
+accusative = "Сотканный из звёзд"
+instrumental = "Сотканным из звёзд"
+prepositional = "Сотканном из звёзд"
+gender = "neuter"
+
+["Cosmic Blade"]
+nominative = "Космический Клинок"
+genitive = "Космического Клинка"
+dative = "Космическому Клинку"
+accusative = "Космический Клинок"
+instrumental = "Космическим Клинком"
+prepositional = "Космическом Клинке"
+gender = "neuter"
+
+# MARK: Moon heretic items
+
+["Resplendent Regalia"]
+nominative = "Блистательное Облачение"
+genitive = "Блистательного Облачения"
+dative = "Блистательному Облачению"
+accusative = "Блистательное Облачение"
+instrumental = "Блистательным Облачением"
+prepositional = "Блистательном Облачении"
+gender = "neuter"
+
+["Moonlight Amulet"]
+nominative = "Лунный Амулет"
+genitive = "Лунного Амулета"
+dative = "Лунному Амулету"
+accusative = "Лунный Амулет"
+instrumental = "Лунным Амулетом"
+prepositional = "Лунном Амулете"
+gender = "neuter"
+
+["Moonlight Blade"]
+nominative = "Лунный Клинок"
+genitive = "Лунного Клинка"
+dative = "Лунному Клинку"
+accusative = "Лунный Клинок"
+instrumental = "Лунным Клинком"
+prepositional = "Лунном Клинке"
+gender = "neuter"
+
+# MARK: Void heretic items
+
+["Hollow Weave"]
+nominative = "Сплетение Пустоты"
+genitive = "Сплетения Пустоты"
+dative = "Сплетению Пустоты"
+accusative = "Сплетение Пустоты"
+instrumental = "Сплетением Пустоты"
+prepositional = "Сплетении Пустоты"
+gender = "neuter"
+
+["Void Cloak"]
+nominative = "Никидка Пустоты"
+genitive = "Накидки Пустоты"
+dative = "Накидке Пустоты"
+accusative = "Накидку Пустоты"
+instrumental = "Накидкой Пустоты"
+prepositional = "Накидке Пустоты"
+gender = "neuter"
