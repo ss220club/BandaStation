@@ -74114,7 +74114,7 @@
 	c_tag = "Research - Genetics";
 	network = list("ss13","rd")
 	},
-/obj/item/infuser_book,
+/obj/item/tgui_book/manual/infuser,
 /obj/effect/turf_decal/tile/purple/half,
 /turf/open/floor/iron/dark,
 /area/station/science/genetics)
