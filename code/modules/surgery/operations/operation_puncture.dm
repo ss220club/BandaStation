@@ -34,7 +34,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы начинаете соединять разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает соединять разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает соединять разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 		span_notice("[surgeon] начинает соединять разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете ужасную колющую боль в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
@@ -49,8 +49,8 @@
 			surgeon,
 			limb.owner,
 			span_notice("Вы успешно соединили последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-			span_notice("[surgeon] успешно соединяет последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
-			span_notice("[surgeon] успешно соединяет последние разорванные кровеносные сосуды в [limb.owner.declent_ru(GENITIVE)] у [limb.owner.declent_ru(GENITIVE)]!"),
+			span_notice("[surgeon] успешно соединяет последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
+			span_notice("[surgeon] успешно соединяет последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 		)
 		return
 
@@ -59,7 +59,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы успешно соединили часть кровеносных сосудов в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно соединяет часть кровеносных сосудов в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] успешно соединяет часть кровеносных сосудов в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
 		span_notice("[surgeon] успешно соединяет часть кровеносных сосудов в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
@@ -68,7 +68,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы случайно разрываете кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] разрывает кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] разрывает кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [declent_ru(tool, ACCUSATIVE)]!"),
 		span_notice("[surgeon] разрывает кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	limb.receive_damage(rand(4, 8), wound_bonus = 10, sharpness = SHARP_EDGED, damage_source = tool)
@@ -121,7 +121,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы начинаете прижигать соединенные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает прижигать соединенные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает прижигать соединенные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 		span_notice("[surgeon] начинает прижигать соединенные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете жжение в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
@@ -135,7 +135,7 @@
 			surgeon,
 			limb.owner,
 			span_notice("Вы успешно прижгли последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-			span_notice("[surgeon] успешно прижигает последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+			span_notice("[surgeon] успешно прижигает последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
 			span_notice("[surgeon] успешно прижигает последние разорванные кровеносные сосуды в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 		)
 		return
@@ -145,6 +145,6 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы успешно прижгли часть кровеносных сосудов в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно прижигает часть кровеносных сосудов в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] успешно прижигает часть кровеносных сосудов в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
 		span_notice("[surgeon] успешно прижигает часть кровеносных сосудов в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
