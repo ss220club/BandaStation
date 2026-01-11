@@ -301,9 +301,7 @@
 				"ВАШИ ЧУВСТВА ОХВАЧЕНЫ УЖАСОМ, КОГДА В ВАШ РАЗУМ ВТОРГАЕТСЯ ПОТУСТОРОННЯЯ СИЛА, ПЫТАЮЩАЯСЯ ПЕРЕПИСЫВАТЬ ВАШЕ СУЩЕСТВО. \
 				ВЫ ДАЖЕ НЕ УСПЕВАЕТЕ КРИКНУТЬ, КАК ВАШ ИМПЛАНТ АКТИВИРУЕТ СВОЮ СИСТЕМУ АВАРИЙНОЙ ПСИОНИЧЕСКОЙ ЗАЩИТЫ, СНОСЯ ВАМ ГОЛОВУ.")))
 			var/obj/item/bodypart/head/head = locate() in carbon_view.bodyparts
-			if(head)
-				head.dismember()
-			else
+			if(!head?.dismember())
 				carbon_view.gib(DROP_ALL_REMAINS)
 			var/datum/effect_system/reagents_explosion/explosion = new()
 			explosion.set_up(1, get_turf(carbon_view), TRUE, 0)
