@@ -18032,6 +18032,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
 /obj/effect/turf_decal/bot,
+/obj/machinery/button/door/directional/west{
+	id = "Skynet_launch";
+	name = "Mech Bay Door Control";
+	req_access = list("robotics")
+	},
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/mechbay)
 "erN" = (
@@ -18845,7 +18850,7 @@
 /area/station/maintenance/department/medical/ghetto/central)
 "eDS" = (
 /obj/effect/turf_decal/loading_area,
-/obj/item/radio/intercom/directional/north,
+/obj/machinery/firealarm/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/mechbay)
 "eDZ" = (
@@ -23595,6 +23600,10 @@
 /obj/effect/turf_decal/tile/bar/opposingcorners,
 /obj/structure/table/reinforced,
 /obj/effect/spawner/random/food_or_drink/snack/lizard,
+/obj/item/reagent_containers/cup/glass/drinkingglass{
+	pixel_y = 10;
+	pixel_x = -9
+	},
 /turf/open/floor/iron/kitchen,
 /area/station/security/prison)
 "fLd" = (
@@ -32844,12 +32853,14 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/hallway/west)
 "hWd" = (
-/obj/effect/turf_decal/tile/purple{
-	dir = 8
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/button/door/incinerator_vent_ordmix{
+	pixel_x = 40;
+	pixel_y = 8;
+	dir = 4
 	},
-/obj/structure/closet/firecloset,
-/turf/open/floor/iron,
-/area/station/hallway/primary/starboard/west)
+/turf/closed/wall/r_wall,
+/area/station/science/ordnance/burnchamber)
 "hWn" = (
 /obj/structure/table,
 /obj/item/storage/toolbox/mechanical{
@@ -35818,11 +35829,6 @@
 /turf/open/floor/iron/dark/small,
 /area/station/medical/morgue)
 "iKc" = (
-/obj/machinery/button/door/directional/north{
-	id = "Skynet_launch";
-	name = "Mech Bay Door Control";
-	req_access = list("robotics")
-	},
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
 	dir = 1
 	},
@@ -39363,7 +39369,7 @@
 "jEG" = (
 /obj/effect/turf_decal/tile/bar/opposingcorners,
 /obj/structure/table/reinforced,
-/obj/item/storage/bag/tray,
+/obj/structure/reagent_dispensers/servingdish,
 /turf/open/floor/iron/kitchen,
 /area/station/security/prison)
 "jEN" = (
@@ -56660,10 +56666,14 @@
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom/ghetto)
 "nPk" = (
-/obj/effect/turf_decal/tile/purple,
-/obj/structure/closet/emcloset,
-/turf/open/floor/iron,
-/area/station/hallway/primary/starboard/west)
+/obj/machinery/atmospherics/pipe/smart/simple/dark/visible,
+/obj/machinery/button/ignition/incinerator/ordmix{
+	pixel_y = -6;
+	dir = 4;
+	pixel_x = 8
+	},
+/turf/closed/wall/r_wall,
+/area/station/science/ordnance/burnchamber)
 "nPl" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -59785,8 +59795,12 @@
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/port/greater)
 "oBv" = (
-/turf/open/floor/plating,
-/area/station/medical/morgue)
+/obj/machinery/door/airlock/research/glass,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/science/robotics,
+/obj/machinery/door/firedoor,
+/turf/open/floor/iron,
+/area/station/science/robotics/mechbay)
 "oBx" = (
 /obj/structure/closet/emcloset,
 /obj/effect/landmark/start/hangover,
@@ -62198,6 +62212,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
+/obj/item/radio/intercom/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/mechbay)
 "pgL" = (
@@ -69500,6 +69515,9 @@
 	pixel_x = 4
 	},
 /obj/structure/cable,
+/obj/item/reagent_containers/cup/glass/drinkingglass{
+	pixel_x = -7
+	},
 /turf/open/floor/iron/kitchen,
 /area/station/security/prison)
 "qXM" = (
@@ -75025,6 +75043,10 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/station/service/library/ghetto)
+"soI" = (
+/obj/effect/spawner/random/structure/crate,
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/upper)
 "soN" = (
 /obj/effect/spawner/random/maintenance,
 /obj/effect/turf_decal/tile/dark/opposingcorners,
@@ -95878,6 +95900,11 @@
 /obj/machinery/holopad,
 /turf/open/floor/iron/dark,
 /area/station/medical/morgue)
+"xyW" = (
+/obj/structure/closet/emcloset,
+/obj/machinery/light/small/directional/south,
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
 "xyZ" = (
 /obj/structure/bed/dogbed/runtime,
 /mob/living/basic/pet/cat/runtime,
@@ -96033,16 +96060,6 @@
 /obj/machinery/door/airlock/research/glass/incinerator/ordmix_interior,
 /obj/effect/mapping_helpers/airlock/locked,
 /obj/effect/mapping_helpers/airlock/access/all/science/ordnance,
-/obj/machinery/button/ignition/incinerator/ordmix{
-	pixel_x = 24;
-	pixel_y = 8;
-	dir = 4
-	},
-/obj/machinery/button/door/incinerator_vent_ordmix{
-	pixel_x = 39;
-	pixel_y = 8;
-	dir = 4
-	},
 /turf/open/floor/engine,
 /area/station/science/ordnance/burnchamber)
 "xCk" = (
@@ -97412,6 +97429,10 @@
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/wood/large,
 /area/station/service/bar/atrium/ghetto)
+"xTl" = (
+/obj/structure/closet/firecloset,
+/turf/open/floor/iron/dark,
+/area/station/hallway/primary/starboard)
 "xTn" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -151919,7 +151940,7 @@ mpY
 mpY
 mpY
 fsD
-fsD
+hWd
 qNu
 aYf
 bgF
@@ -152176,7 +152197,7 @@ lsI
 kRY
 sFU
 lzb
-sFU
+nPk
 pXP
 aCZ
 oxp
@@ -203818,8 +203839,8 @@ nrH
 fHn
 nke
 ckR
+xTl
 lCk
-oBv
 uYN
 lCk
 luY
@@ -204075,9 +204096,9 @@ nrH
 nYw
 nke
 ckR
+xyW
 lCk
 uYN
-oBv
 lCk
 nhZ
 bri
@@ -207160,7 +207181,7 @@ sKd
 kkl
 bMM
 nnU
-nnU
+soI
 kYb
 uta
 hFm
@@ -207415,8 +207436,8 @@ sKd
 sKd
 sKd
 kkl
-sKd
-hWd
+bMM
+htm
 htm
 htm
 htm
@@ -208187,8 +208208,8 @@ wfV
 sKd
 kkl
 sKd
-nPk
-vlt
+niF
+oBv
 iKc
 ruJ
 tZp
