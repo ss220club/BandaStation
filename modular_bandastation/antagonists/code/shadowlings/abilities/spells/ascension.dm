@@ -131,7 +131,6 @@
 		if(i == 1)
 			to_chat(H, span_notice("Тьма начинает собираться внутри вас..."))
 		else
-			var/past_secs = (i - 1) * (step_time / (1 SECONDS))
 			to_chat(H, span_notice("Тьма сгущается, силы всё ближе..."))
 
 		if(!do_after(H, step_time, H))
