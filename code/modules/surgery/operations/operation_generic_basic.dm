@@ -25,7 +25,7 @@
 	return "Любой острый предмет"
 
 /datum/surgery_operation/basic/incise_skin/all_blocked_strings()
-	return ..() + list("У пациента не должно быть сложной анатомии")
+	return ..() + list("у пациента не должно быть сложной анатомии")
 
 /datum/surgery_operation/basic/incise_skin/get_default_radial_image()
 	return image(/obj/item/scalpel)
@@ -88,7 +88,7 @@
 	return "Любой острый предмет, требующий усилия"
 
 /datum/surgery_operation/basic/saw_bone/all_blocked_strings()
-	return ..() + list("У пациента не должно быть сложной анатомии")
+	return ..() + list("у пациента не должно быть сложной анатомии")
 
 /datum/surgery_operation/basic/saw_bone/get_default_radial_image()
 	return image(/obj/item/circular_saw)
@@ -151,7 +151,7 @@
 	return "Любой источник тепла"
 
 /datum/surgery_operation/basic/close_skin/all_blocked_strings()
-	return ..() + list("У пациента не должно быть сложной анатомии")
+	return ..() + list("у пациента не должно быть сложной анатомии")
 
 /datum/surgery_operation/basic/close_skin/get_default_radial_image()
 	return image(/obj/item/cautery)
