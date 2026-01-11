@@ -86,7 +86,7 @@
 	icon_state = "default"
 
 /obj/item/storage/box/stamps
-	icon_state = "default"
+	illustration = "stamp"
 
 // MARK: Security
 /obj/item/storage/box/deputy
