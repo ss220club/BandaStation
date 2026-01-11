@@ -208,11 +208,11 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * Overall, it's a tradeoff between speed and stealth or power.
  */
 /datum/heretic_knowledge/codex_cicatrix
-	name = "Кодекс Шрама"
-	desc = "Позволяет трансмутировать книгу, любую ручку, любое тело (животного или человека) и шкуру или кожу, чтобы создать Кодекс Шрама. \
-		Кодекс Шрама можно использовать при истощении влияний для получения дополнительных знаний, но при этом возрастает риск быть замеченным. \
+	name = "Кодекс Цикатрикс"
+	desc = "Позволяет трансмутировать книгу, любую ручку, любое тело (животного или человека) и шкуру или кожу, чтобы создать Кодекс Цикатрикс. \
+		Кодекс Цикатрикс можно использовать при истощении влияний для получения дополнительных знаний, но при этом возрастает риск быть замеченным. \
 		Его также можно использовать для того, чтобы легче рисовать и удалять руны трансмутации, и использоваться в качестве фокусировки"
-	gain_text = "Оккультизм оставляет фрагменты знаний и силы везде и всюду. Кодекс Шрама - один из таких примеров. \
+	gain_text = "Оккультизм оставляет фрагменты знаний и силы везде и всюду. Кодекс Цикатрикс - один из таких примеров. \
 		В кожаном переплете и на старых страницах открывается путь к Мансусу."
 	required_atoms = list(
 		list(/obj/item/toy/eldritch_book, /obj/item/book) = 1,
@@ -329,7 +329,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * Gives access to solars since those doors are especially useful to get in or out of space.
  */
 /datum/heretic_knowledge/bookworm
-	name = "Приветсвие Уоррена Кинга"
+	name = "Приветствие Уоррена Кинга"
 	desc = "Позволяет трансмутировать 5 обрезков провода и лист бумаги, чтобы наделить любое удостоверение личности доступом к внешним шлюзам"
 	gain_text = "Gnawed into vicious-stained fingerbones, my grim invitation snaps my nauseous and clouded mind towards the heavy-set door. \
 	Slowly, the light dances between a crawling darkness, blanketing the fetid promenade with infinite machinations. \

@@ -29536,12 +29536,12 @@ prepositional ="Янтарном фокусировщике"
 gender ="neuter"
 
 ["Codex Cicatrix"]
-nominative = "Кодекс Шрама"
-genitive = "Кодекса Шрама"
-dative = "Кодексу Шрама"
-accusative = "Кодекс Шрама"
-instrumental = "Кодексом Шрама"
-prepositional = "Кодексе Шрама"
+nominative = "Кодекс Цикатрикс"
+genitive = "Кодекса Цикатрикс"
+dative = "Кодексу Цикатрикс"
+accusative = "Кодекс Цикатрикс"
+instrumental = "Кодексом Цикатрикс"
+prepositional = "Кодексе Цикатрикс"
 gender = "neuter"
 
 [""]
