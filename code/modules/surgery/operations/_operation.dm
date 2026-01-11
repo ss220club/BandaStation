@@ -463,8 +463,6 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	/// Lasts muuuuuch longer.
 	var/datum/mood_event/surgery/surgery_failure_mood_event = /datum/mood_event/surgery/failure
 
-	var/failure_prob_mod = 0 // BANDASTATION ADDITION
-
 /**
  * Checks to see if this operation can be performed
  * This is the main entry point for checking availability
@@ -862,7 +860,6 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 			// You can only operate on one mob at a time without a hippocratic oath
 			interaction_key = HAS_TRAIT(surgeon, TRAIT_HIPPOCRATIC_OATH) ? (patient || operating_on) : DOAFTER_SOURCE_SURGERY,
 		))
-			failure_prob_mod = 0 // BANDASTATION EDIT
 			result |= ITEM_INTERACT_BLOCKING
 			if (patient)
 				update_surgery_mood(patient, SURGERY_STATE_FAILURE)
@@ -893,14 +890,14 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 		if(HAS_TRAIT(surgeon, TRAIT_IGNORE_SURGERY_MODIFIERS) && !(operation_flags & OPERATION_ALWAYS_FAILABLE))
 			operation_args[OPERATION_SPEED] = 0
 
-		if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(GET_FAILURE_CHANCE(time, operation_args[OPERATION_SPEED]) + failure_prob_mod, 0, 99))) // BANDASTATION EDIT original - if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(GET_FAILURE_CHANCE(time, operation_args[OPERATION_SPEED]), 0, 99)))
-			failure_prob_mod = 0 // BANDASTATION EDIT
+		var/failure_chance = get_modified_failure_chance(time, patient, surgeon, tool, operation_args) // BANDASTATION EDIT
+		to_chat(surgeon, "Шанс неудачи операции составляет [failure_chance]%.")
+		if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(failure_chance, 0, 99))) // BANDASTATION EDIT
 			failure(operating_on, surgeon, tool, operation_args)
 			result |= ITEM_INTERACT_FAILURE
 			if (patient)
 				update_surgery_mood(patient, SURGERY_STATE_FAILURE)
 		else
-			failure_prob_mod = 0 // BANDASTATION EDIT
 			success(operating_on, surgeon, tool, operation_args)
 			result |= ITEM_INTERACT_SUCCESS
 			if (patient)
@@ -1020,7 +1017,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	if(target.stat >= UNCONSCIOUS || HAS_TRAIT(target, TRAIT_KNOCKEDOUT))
 		return
 	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || HAS_TRAIT(target, TRAIT_STASIS) || drunken_patient && prob(drunken_ignorance_probability)) // BANDASTATION EDIT - Боль и свет
-		to_chat(target, span_notice("Вы испытываете тупое, онемевшее ощущение, когда на вашем теле делают хирургическую операцию."))
+		to_chat(target, span_notice("Вы испытываете притупленное покалывание, пока ваше тело оперируют."))
 		return
 	to_chat(target, span_userdanger(pain_message))
 	if(prob(30) && !mechanical_surgery)
@@ -1193,7 +1190,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	var/screwedmessage = ""
 	switch(operation_args[OPERATION_SPEED])
 		if(2.5 to 3)
-			screwedmessage = " У вас почти получилось"
+			screwedmessage = " А ведь у вас почти получилось..."
 		if(3 to 4)
 			pass()
 		if(4 to 5)
