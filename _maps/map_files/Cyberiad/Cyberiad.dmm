@@ -692,8 +692,8 @@
 /turf/closed/wall/r_wall,
 /area/station/security/brig)
 "ajI" = (
-/obj/structure/barricade/wooden,
 /obj/effect/spawner/structure/window/reinforced,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "ajN" = (
@@ -2330,7 +2330,7 @@
 /area/station/engineering/dronefabricator)
 "aDz" = (
 /obj/effect/spawner/structure/window/reinforced,
-/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
 "aDC" = (
@@ -5959,13 +5959,6 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/station/science/xenobiology)
-"bwo" = (
-/obj/structure/barricade/wooden,
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/auxiliary)
 "bwq" = (
 /obj/structure/railing{
 	dir = 8
@@ -14144,9 +14137,9 @@
 /turf/open/floor/engine/co2,
 /area/station/engineering/atmos)
 "drS" = (
-/obj/structure/barricade/wooden,
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "drT" = (
@@ -19125,8 +19118,8 @@
 "eHu" = (
 /obj/machinery/door/airlock/medical,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/structure/barricade/wooden,
 /obj/effect/mapping_helpers/airlock/locked,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "eHy" = (
@@ -26304,7 +26297,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/door/airlock/multi_tile,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/iron/white,
 /area/station/maintenance/department/medical/ghetto/central)
 "gtG" = (
@@ -32232,7 +32225,6 @@
 /obj/machinery/door/airlock/public,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/barricade/wooden/crude,
-/obj/structure/barricade/wooden,
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/ghetto/fore/starboard)
 "hOm" = (
@@ -52148,7 +52140,7 @@
 "mIz" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "mIC" = (
@@ -54337,7 +54329,6 @@
 /obj/machinery/door/airlock/public,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/barricade/wooden/crude,
-/obj/structure/barricade/wooden,
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/ghetto/fore/starboard)
 "nlp" = (
@@ -58563,9 +58554,9 @@
 /turf/open/floor/iron,
 /area/station/maintenance/department/electrical)
 "omS" = (
-/obj/structure/barricade/wooden,
 /obj/machinery/door/airlock/freezer,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/iron/freezer,
 /area/station/maintenance/port/fore)
 "omU" = (
@@ -93718,8 +93709,8 @@
 "wYK" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/structure/barricade/wooden,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/auxiliary)
 "wYX" = (
@@ -94205,9 +94196,9 @@
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
 "xem" = (
-/obj/structure/barricade/wooden,
 /obj/machinery/door/airlock/freezer,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "xeo" = (
@@ -96001,11 +95992,6 @@
 /obj/machinery/power/apc/auto_name/directional/east,
 /turf/open/floor/iron,
 /area/station/security/checkpoint/customs)
-"xBc" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/barricade/wooden,
-/turf/open/floor/plating,
-/area/station/maintenance/starboard/aft)
 "xBh" = (
 /obj/structure/table,
 /obj/effect/spawner/random/maintenance,
@@ -132951,7 +132937,7 @@ ceC
 ceC
 doz
 ncb
-bwo
+wYK
 ncb
 ceC
 ceC
@@ -214657,7 +214643,7 @@ jqC
 vkt
 uln
 gEC
-xBc
+ajI
 wvl
 bTH
 eex
@@ -218509,7 +218495,7 @@ htd
 tLv
 qOR
 bTH
-xBc
+ajI
 bTH
 rMZ
 bTH
