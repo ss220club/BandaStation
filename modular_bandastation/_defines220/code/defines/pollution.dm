@@ -5,7 +5,7 @@
 #define SET_PROCESSED_THIS_RUN(pollution) SSpollution.processed_this_run[pollution] = TRUE
 #define REMOVE_POLLUTION_CURRENTRUN(pollution) SSpollution.current_run -= pollution
 
-#define TICKS_TO_DISSIPATE 20
+#define TICKS_TO_DISSIPATE 10
 
 #define POLLUTION_TASK_PROCESS 1
 #define POLLUTION_TASK_DISSIPATE 2
