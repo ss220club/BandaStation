@@ -145,12 +145,10 @@
 
 		play_tick_fx(H)
 
-		var/total = steps * (step_time / (1 SECONDS))
-		var/passed = (i - 1) * (step_time / (1 SECONDS))
 		if(i == 1)
-			to_chat(H, span_notice("Тьма собирается внутри вас (0/[total] сек)."))
+			to_chat(H, span_notice("Тьма собирается внутри вас, а тело начинает меняться."))
 		else
-			to_chat(H, span_notice("Тьма сгущается ([passed]/[total] сек)."))
+			to_chat(H, span_notice("Тьма сгущается, приближая превращение..."))
 
 		if(!do_after(H, step_time, H)) {
 			to_chat(H, span_warning("Вы вырвались из кокона — вылупление прервано."))

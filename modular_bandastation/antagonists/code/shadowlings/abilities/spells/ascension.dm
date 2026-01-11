@@ -128,12 +128,11 @@
 
 		_play_tick_fx(H)
 
-		var/total_secs = steps * (step_time / (1 SECONDS))
 		if(i == 1)
-			to_chat(H, span_notice("Тьма собирается (0/[total_secs] сек)."))
+			to_chat(H, span_notice("Тьма начинает собираться внутри вас..."))
 		else
 			var/past_secs = (i - 1) * (step_time / (1 SECONDS))
-			to_chat(H, span_notice("Тьма сгущается ([past_secs]/[total_secs] сек)."))
+			to_chat(H, span_notice("Тьма сгущается, силы всё ближе..."))
 
 		if(!do_after(H, step_time, H))
 			to_chat(H, span_warning("Вы теряете концентрацию — Возвышение прервано."))
