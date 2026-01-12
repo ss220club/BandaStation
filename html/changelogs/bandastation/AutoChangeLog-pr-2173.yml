@@ -1,0 +1,5 @@
+author: "PetyaFX"
+delete-after: True
+changes:
+  - rscdel: "Реверт https://github.com/tgstation/tgstation/pull/94737"
+  - bugfix: "Исправлено некорректное поведение слаймов."
