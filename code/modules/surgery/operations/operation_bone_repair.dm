@@ -66,9 +66,9 @@
 	limb.receive_damage(25, damage_source = tool)
 
 /datum/surgery_operation/limb/repair_hairline
-	name = "Сращивание волосяной трещины"
-	desc = "Заживление волосяной трещины в кости пациента."
-	operation_flags = OPERATION_PRIORITY_NEXT_STEP | OPERATION_NO_PATIENT_REQUIRED
+	name = "Сращивание трещины"
+	desc = "Заживление трещины в кости пациента."
+	operation_flags = OPERATION_PRIORITY_NEXT_STEP
 	implements = list(
 		TOOL_BONESET = 1,
 		/obj/item/stack/medical/bone_gel = 1,
@@ -89,7 +89,7 @@
 	return image(/obj/item/bonesetter)
 
 /datum/surgery_operation/limb/repair_hairline/all_required_strings()
-	return list("конечность должна иметь трещину волосяного типа") + ..()
+	return list("конечность должна иметь трещину") + ..()
 
 /datum/surgery_operation/limb/repair_hairline/state_check(obj/item/bodypart/limb)
 	if(!(locate(/datum/wound/blunt/bone/severe) in limb.wounds))
@@ -101,7 +101,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы начинаете устаранять трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает устаранять трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает устаранять трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 		span_notice("[surgeon] начинает устаранять трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] ноет от боли!")
@@ -114,7 +114,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы успешно устаранили трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно устаранил трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] успешно устаранил трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
 		span_notice("[surgeon] успешно устаранил трещину в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
@@ -155,7 +155,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы начинаете вправлять кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает вправлять кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает вправлять кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 		span_notice("[surgeon] начинает вправлять кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Ноющая боль в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]] невыносима!")
@@ -168,7 +168,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы успешно вправляете кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно вправляет кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] успешно вправляет кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
 		span_notice("[surgeon] успешно вправляет кость в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
@@ -208,7 +208,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы начинаете устранять перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает устранять перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает устранять перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 		span_notice("[surgeon] начинает устранять перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Ноющая боль в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]] невыносима!")
@@ -220,7 +220,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы успешно устраняете перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно устраняет перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] успешно устраняет перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
 		span_notice("[surgeon] успешно устраняет перелом в [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
@@ -304,7 +304,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы начинаете восстанавливать череп у [limb.owner.declent_ru(GENITIVE)], насколько это возможно..."),
-		span_notice("[surgeon] начинает восстанавливать череп у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает восстанавливать череп у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 		span_notice("[surgeon] начинает восстанавливать череп у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 
@@ -318,6 +318,6 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы успешно восстанавливаете череп у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно восстанавливает череп у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] успешно восстанавливает череп у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 		span_notice("[surgeon] успешно восстанавливает череп у [limb.owner.declent_ru(GENITIVE)].")
 	)
