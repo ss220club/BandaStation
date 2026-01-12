@@ -164,12 +164,12 @@
 	drafting_tier = 5
 
 /datum/heretic_knowledge/armor/lock
-	desc = "Allows you to transmute a table (or a suit), a mask and a crowbar to create a shifting guise. \
-		It grants you camoflage from cameras, hides your identity, voice and muffles your footsteps. \
-		Acts as a focus while hooded."
+	desc = "Позволяет трансмутировать стол (или костюм), маску и лом, чтобы создать Меняющийся Облик. \
+		Это одеяние будет прятать ваше присутсвие на камерах видеонаблюдения, скрывать вашу личность и голос, а также приглушать шаги. \
+		Когда надет капюшон, работает как фокусировщик."
 	gain_text = "While stewards are known to the Concierge, \
-				they still consort between one another and with outsiders under shaded cloaks and drawn hoods. \
-				Familiarity is treachery, even to oneself."
+				Хотя Хранителю Ключей и известны стюарды, они по прежнему общаются друг с другом и посторонними лицами, скрывая свой облик под копюшононами. \
+				Фамильярность - это предательство, даже по отношению к самому себе."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/lock)
 	research_tree_icon_state = "lock_armor"
 	required_atoms = list(

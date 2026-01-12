@@ -19,7 +19,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 /datum/heretic_knowledge/spell/basic
 	name = "Рассвет"
 	desc = "Начните свое путешествие в Мансус. \
-		Дарует вам Хватку Мансуса, мощное и улучшаемое обездвиживающее заклинание, \
+		Дарует вам «Хватку Мансуса», мощное и улучшаемое обездвиживающее заклинание, \
 		которое может быть применено независимо от наличия фокусировки."
 	action_to_add = /datum/action/cooldown/spell/touch/mansus_grasp
 	cost = 0
@@ -66,7 +66,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  */
 /datum/heretic_knowledge/living_heart
 	name = "Живое Сердце"
-	desc = "Дарует вам Живое сердце, позволяющее отслеживать жертвенные цели. \
+	desc = "Дарует вам «Живое сердце», позволяющее отслеживать жертвенные цели. \
 		Если вы потеряете сердце, вы можете трансмутировать мак и лужу крови, \
 		чтобы пробудить свое сердце в Живое сердце. Если ваше сердце кибернетическое, \
 		вы не сможете возродить его."
@@ -111,7 +111,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 	if(where_to_put_our_heart)
 		where_to_put_our_heart.AddComponent(/datum/component/living_heart)
-		desc = "Дарует вам Живое сердце, привязанное к вашему [where_to_put_our_heart.name], позволяя отслеживать жертвенные цели. \
+		desc = "Дарует вам «Живое сердце», привязанное к вашему [where_to_put_our_heart.name], позволяя отслеживать жертвенные цели. \
 			Если вы потеряете [where_to_put_our_heart.ru_p_own(ACCUSATIVE)] [where_to_put_our_heart.declent_ru(ACCUSATIVE)], вы можете трансмутировать мак и лужу крови, \
 			чтобы пробудить [where_to_put_our_heart.ru_p_own(ACCUSATIVE)] [where_to_put_our_heart.declent_ru(ACCUSATIVE)] в Живое сердце. \
 			Если [where_to_put_our_heart.ru_p_yours()] [where_to_put_our_heart.declent_ru(NOMINATIVE)] кибернетическое, ритуал будет невозможен!"
@@ -194,7 +194,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 /datum/heretic_knowledge/spell/cloak_of_shadows
 	name = "Покров Тени"
-	desc = "Дарует вам заклинание Покров Тени. Это заклинание полностью скрывает вашу личность в фиолетовой дымке \
+	desc = "Дарует вам заклинание «Покров Тени». Это заклинание полностью скрывает вашу личность в фиолетовой дымке \
 		на три минуты, помогая вам сохранять секретность. Для наложения заклинания требуется фокусировка."
 	action_to_add = /datum/action/cooldown/spell/shadow_cloak
 	cost = 0
