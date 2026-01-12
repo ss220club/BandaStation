@@ -1218,10 +1218,26 @@
 	if(!user || !user.client)
 		user = src
 
-	var/can_see_target = can_see(target) || (deployed_shell && (get_dist(deployed_shell, target) <= 7 || SScameras.is_visible_by_cameras(get_turf(target))))
+	var/can_see_target = FALSE
+
+	if(istype(loc, /obj/item/aicard))
+		if(can_see(target))
+			can_see_target = TRUE
+
+	else if(deployed_shell && user == deployed_shell)
+
+		if(get_dist(deployed_shell, target) <= 7)
+			can_see_target = TRUE
+
+		else if(SScameras.is_visible_by_cameras(get_turf(target)))
+			can_see_target = TRUE
+
+	else
+		if(can_see(target))
+			can_see_target = TRUE
 
 	if(!can_see_target)
-		to_chat(user, span_warning("Цель вне видимости ваших камер."))
+		to_chat(user, span_warning("Цель вне вашей видимости."))
 		return
 
 	var/obj/machinery/door/airlock/A = null
@@ -1237,23 +1253,21 @@
 			A = D
 
 	if(A)
-
 		if(!A.hasPower())
-			to_chat(user, span_warning("Ошибка: [A] отключен."))
+			to_chat(user, span_warning("Ошибка: шлюз [A] отключен."))
 			return
 
 		if(A.locked)
-			to_chat(user, span_warning("Ошибка: [A] болты подняты."))
+			to_chat(user, span_warning("Ошибка: шлюз [A] болты подняты."))
 			return
 
 		if(A.welded)
-			to_chat(user, span_warning("Ошибка: [A] шлюз не поддается."))
+			to_chat(user, span_warning("Ошибка: шлюз [A] не поддается."))
 			return
 
 		if(A.wires && A.wires.is_cut(WIRE_AI))
 			to_chat(user, span_warning("Ошибка подключения: шлюз [A] не отвечает."))
 			return
-		// --------------------------------
 
 		var/confirm = tgui_alert(user, "Вы хотите открыть [A] для [target]?", "Открыть шлюз", list("Да", "Нет"))
 
