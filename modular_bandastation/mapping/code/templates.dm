@@ -9,6 +9,11 @@
 	map_name = "syndie_cc"
 	key = LAZY_TEMPLATE_KEY_SYNDIE_CC
 
+/datum/lazy_template/cc
+	map_dir = "_maps/templates/lazy_templates/ss220"
+	map_name = "centcom"
+	key = LAZY_TEMPLATE_KEY_CC
+
 // MARK: Shuttles
 /datum/map_template/shuttle/sit
 	port_id = "sit"
