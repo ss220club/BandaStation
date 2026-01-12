@@ -545,9 +545,9 @@
 				render_block += "<span class='notice ml-2'>[round(reagent.volume, 0.001)] units of [reagent.name][reagent.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
 
 		if(!length(render_block)) //If no VISIBLY DISPLAYED reagents are present, we report as if there is nothing.
-						render_list += "<span class='notice ml-1'>Субъект не содержит реагенты в кровотоке.</span><br>"
+						render_list += "<span class='notice ml-1'>Субъект не содержит реагенты в [LOWER_TEXT(target.get_bloodtype()?.get_blood_name()) || "blood"]stream.</span><br>"
 		else
-						render_list += "<span class='notice ml-1'>Субъект содержит следующие реагенты в кровотоке:</span><br>"
+						render_list += "<span class='notice ml-1'>Субъект содержит следующие реагенты в [LOWER_TEXT(target.get_bloodtype()?.get_blood_name()) || "blood"]stream:</span><br>"
 			render_list += render_block //Otherwise, we add the header, reagent readouts, and clear the readout block for use on the stomach.
 			render_block.Cut()
 
