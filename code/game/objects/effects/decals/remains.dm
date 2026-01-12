@@ -5,7 +5,8 @@ GLOBAL_LIST_INIT(remains_blocked_reagents, list(
 		subtypesof(/datum/reagent/mutationtoxin),
 		/datum/reagent/aslimetoxin,
 		/datum/reagent/gluttonytoxin,
-		/datum/reagent/gondola_mutation_toxin))
+		/datum/reagent/gondola_mutation_toxin,
+		/datum/reagent/magillitis))
 // BANDASTATION ADD END
 
 /obj/effect/decal/remains
