@@ -22,7 +22,7 @@
 	/// How long the slip keeps the crossing mob knocked over (they can still crawl and use weapons) for.
 	var/knockdown_time = 0
 	/// How long the slip paralyzes (prevents the crossing mob doing anything) for.
-	var/paralyze_time = 0.25 //ss220 add slip paralyzes
+	var/paralyze_time = 0.25 SECONDS //ss220 add slip paralyzes
 
 	/// BANDASTATION ADDITION START - Immobilizing slippery
 	/// How long the slip immobilizes mob (prevents voluntary movement of the crossing mob)
