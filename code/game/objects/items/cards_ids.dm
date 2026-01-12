@@ -164,7 +164,7 @@
 
 /obj/item/card/id/Destroy()
 	if (registered_account)
-		registered_account.bank_cards -= src
+		LAZYREMOVE(registered_account.bank_cards, src)
 	if (my_store)
 		QDEL_NULL(my_store)
 	if (isitem(loc))
@@ -767,9 +767,9 @@
 		to_chat(user, span_warning("Номер счёта является недействительным."))
 		return FALSE
 	if(old_account)
-		old_account.bank_cards -= src
+		LAZYREMOVE(old_account.bank_cards, src)
 		account.account_balance += old_account.account_balance
-	account.bank_cards += src
+	LAZYADD(account.bank_cards, src)
 	registered_account = account
 	to_chat(user, span_notice("Указанный аккаунт был привязан к этой ID-карте. Он содержит [account.account_balance][MONEY_NAME]."))
 	return TRUE
@@ -1094,11 +1094,10 @@
 
 /obj/item/card/id/departmental_budget/Initialize(mapload)
 	. = ..()
-	var/datum/bank_account/B = SSeconomy.get_dep_account(department_ID)
-	if(B)
-		registered_account = B
-		if(!B.bank_cards.Find(src))
-			B.bank_cards += src
+	var/datum/bank_account/department_account = SSeconomy.get_dep_account(department_ID)
+	if(department_account)
+		registered_account = department_account
+		LAZYOR(department_account.bank_cards, src)
 		name = "departmental card ([department_name])"
 		desc = "Обеспечивает доступ к бюджету [department_name]."
 	SSeconomy.dep_cards += src
@@ -1375,7 +1374,7 @@
 	registered_name = "Emergency Response Intern"
 	trim = /datum/id_trim/centcom/ert
 
-/obj/item/card/id/advanced/centcom/ert
+/obj/item/card/id/advanced/centcom/ert/commander
 	registered_name = JOB_ERT_COMMANDER
 	trim = /datum/id_trim/centcom/ert/commander
 
@@ -1968,7 +1967,7 @@
 
 	var/datum/bank_account/account = SSeconomy.bank_accounts_by_id["[owner.account_id]"]
 	if(account)
-		account.bank_cards += src
+		LAZYADD(account.bank_cards, src)
 		registered_account = account
 		to_chat(user, span_notice("Ваш номер счёта был автоматически назначен."))
 

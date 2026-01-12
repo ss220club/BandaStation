@@ -696,11 +696,6 @@
 "ajE" = (
 /turf/closed/wall/r_wall,
 /area/station/security/brig)
-"ajI" = (
-/obj/structure/barricade/wooden,
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
-/area/station/maintenance/starboard/aft)
 "ajN" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -2335,7 +2330,7 @@
 /area/station/engineering/dronefabricator)
 "aDz" = (
 /obj/effect/spawner/structure/window/reinforced,
-/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
 "aDC" = (
@@ -4076,8 +4071,8 @@
 "aYE" = (
 /obj/structure/table/glass,
 /obj/machinery/firealarm/directional/east,
-/obj/item/computer_disk/medical,
-/obj/item/computer_disk/medical,
+/obj/item/disk/computer/medical,
+/obj/item/disk/computer/medical,
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 4
 	},
@@ -5965,10 +5960,10 @@
 /turf/open/floor/iron/dark,
 /area/station/science/xenobiology)
 "bwo" = (
-/obj/structure/barricade/wooden,
 /obj/machinery/door/airlock/external/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/auxiliary)
 "bwq" = (
@@ -13004,9 +12999,9 @@
 	id = "eng_vaul_maint";
 	dir = 4
 	},
-/obj/structure/barricade/wooden,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
 /obj/structure/cable,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "ddQ" = (
@@ -14149,9 +14144,9 @@
 /turf/open/floor/engine/co2,
 /area/station/engineering/atmos)
 "drS" = (
-/obj/structure/barricade/wooden,
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "drT" = (
@@ -17830,7 +17825,7 @@
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/ghetto/central/aft)
 "eox" = (
-/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/iron/white,
 /area/station/maintenance/department/medical/ghetto/central)
 "eoG" = (
@@ -19139,8 +19134,8 @@
 "eHu" = (
 /obj/machinery/door/airlock/medical,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/structure/barricade/wooden,
 /obj/effect/mapping_helpers/airlock/locked,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "eHy" = (
@@ -21888,8 +21883,8 @@
 /turf/open/floor/wood/ebonite,
 /area/station/maintenance/ghetto/starboard)
 "frD" = (
-/obj/structure/barricade/wooden,
 /obj/effect/spawner/structure/window/reinforced,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/department/electrical)
 "frG" = (
@@ -26322,7 +26317,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/door/airlock/multi_tile,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/iron/white,
 /area/station/maintenance/department/medical/ghetto/central)
 "gtG" = (
@@ -32250,7 +32245,6 @@
 /obj/machinery/door/airlock/public,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/barricade/wooden/crude,
-/obj/structure/barricade/wooden,
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/ghetto/fore/starboard)
 "hOm" = (
@@ -34822,7 +34816,7 @@
 /obj/item/stamp/head/qm{
 	pixel_x = -8
 	},
-/obj/item/computer_disk/quartermaster{
+/obj/item/disk/computer/quartermaster{
 	pixel_x = 4
 	},
 /obj/item/pen{
@@ -35756,10 +35750,10 @@
 /area/station/maintenance/ghetto/fore/starboard)
 "iJz" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/barricade/wooden,
 /obj/structure/cable,
 /obj/machinery/door/airlock,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "iJE" = (
@@ -43006,7 +43000,7 @@
 	id = "eng_vaul_maint";
 	dir = 4
 	},
-/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "kxU" = (
@@ -48348,14 +48342,14 @@
 /area/station/hallway/primary/fore)
 "lLw" = (
 /obj/structure/table,
-/obj/item/computer_disk/ordnance{
+/obj/item/disk/computer/ordnance{
 	pixel_x = -5;
 	pixel_y = 6
 	},
-/obj/item/computer_disk{
+/obj/item/disk/computer{
 	pixel_x = -2
 	},
-/obj/item/computer_disk{
+/obj/item/disk/computer{
 	pixel_x = 7;
 	pixel_y = 2
 	},
@@ -52170,7 +52164,7 @@
 "mIz" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "mIC" = (
@@ -54359,7 +54353,6 @@
 /obj/machinery/door/airlock/public,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/barricade/wooden/crude,
-/obj/structure/barricade/wooden,
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/ghetto/fore/starboard)
 "nlp" = (
@@ -58598,9 +58591,9 @@
 /turf/open/floor/iron,
 /area/station/maintenance/department/electrical)
 "omS" = (
-/obj/structure/barricade/wooden,
 /obj/machinery/door/airlock/freezer,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/iron/freezer,
 /area/station/maintenance/port/fore)
 "omU" = (
@@ -59320,11 +59313,11 @@
 /area/station/maintenance/disposal/incinerator)
 "ouQ" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/barricade/wooden,
 /obj/machinery/door/airlock,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
 /obj/structure/cable,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/port)
 "ouT" = (
@@ -68597,10 +68590,10 @@
 /area/station/commons/dorms)
 "qLI" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/barricade/wooden,
 /obj/machinery/door/airlock,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/port)
 "qLP" = (
@@ -74167,7 +74160,7 @@
 	c_tag = "Research - Genetics";
 	network = list("ss13","rd")
 	},
-/obj/item/infuser_book,
+/obj/item/tgui_book/manual/infuser,
 /obj/effect/turf_decal/tile/purple/half,
 /turf/open/floor/iron/dark,
 /area/station/science/genetics)
@@ -81230,15 +81223,15 @@
 	dir = 8
 	},
 /obj/structure/table/wood,
-/obj/item/computer_disk/engineering{
+/obj/item/disk/computer/engineering{
 	pixel_y = 3;
 	pixel_x = 4
 	},
-/obj/item/computer_disk/engineering{
+/obj/item/disk/computer/engineering{
 	pixel_y = 3;
 	pixel_x = 4
 	},
-/obj/item/computer_disk/engineering{
+/obj/item/disk/computer/engineering{
 	pixel_y = 3;
 	pixel_x = 4
 	},
@@ -93790,13 +93783,6 @@
 /obj/machinery/light/directional/north,
 /turf/open/floor/iron,
 /area/station/security/prison)
-"wYK" = (
-/obj/machinery/door/airlock/external/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/structure/barricade/wooden,
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/auxiliary)
 "wYX" = (
 /obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
@@ -93949,15 +93935,15 @@
 	},
 /obj/structure/table/glass,
 /obj/item/radio/intercom/directional/north,
-/obj/item/computer_disk{
+/obj/item/disk/computer{
 	pixel_x = 7;
 	pixel_y = 2
 	},
-/obj/item/computer_disk/ordnance{
+/obj/item/disk/computer/ordnance{
 	pixel_y = 4;
 	pixel_x = -5
 	},
-/obj/item/computer_disk/ordnance,
+/obj/item/disk/computer/ordnance,
 /obj/item/paper_bin,
 /obj/item/pen,
 /obj/effect/turf_decal/tile/purple/anticorner{
@@ -94280,9 +94266,9 @@
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
 "xem" = (
-/obj/structure/barricade/wooden,
 /obj/machinery/door/airlock/freezer,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "xeo" = (
@@ -96087,7 +96073,7 @@
 /area/station/security/checkpoint/customs)
 "xBc" = (
 /obj/effect/spawner/structure/window/reinforced,
-/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "xBh" = (
@@ -136110,7 +136096,7 @@ ncb
 uPA
 ncb
 ncb
-wYK
+bwo
 ncb
 vAK
 fTP
@@ -136638,7 +136624,7 @@ xgd
 scr
 pZA
 uaJ
-wYK
+bwo
 xrP
 ceC
 ceC
@@ -216537,7 +216523,7 @@ bTH
 bTH
 htd
 htd
-ajI
+xBc
 drS
 bTH
 bTH
@@ -216791,7 +216777,7 @@ hMs
 bTH
 cRY
 cRY
-ajI
+xBc
 gpU
 rMZ
 tjb
@@ -217048,7 +217034,7 @@ fRM
 bTH
 txL
 txL
-ajI
+xBc
 qXN
 rMZ
 uFB
