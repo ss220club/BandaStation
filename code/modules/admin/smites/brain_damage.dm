@@ -7,7 +7,7 @@
 /datum/smite/brain_damage/configure(client/user)
 	var/amount_choice = tgui_input_number(user,
 		"Сколько урона наносим мозгу?",
-		"Количетсво урона?",
+		"Количество урона?",
 		min_value=1,
 		max_value=200)
 	if(!amount_choice)
