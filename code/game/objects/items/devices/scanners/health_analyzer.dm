@@ -404,7 +404,7 @@
 					compatible_types_readable |= initial(comp_blood_type.name)
 				blood_type_format = span_tooltip("Совместимые группы [english_list(compatible_types_readable)].", blood_type_format)
 
-		render_list += "<span class='[cached_blood_volume < BLOOD_VOLUME_SAFE ? "alert" : "info"] ml-1'>Объем [blood_type.get_blood_name()]: [level_format],</span> <span class='info'>[blood_type_format]</span><br>"
+		render_list += "<span class='[cached_blood_volume < BLOOD_VOLUME_SAFE ? "alert" : "info"] ml-1'>Уровень [blood_type.get_blood_name()]: [level_format],</span> <span class='info'>[blood_type_format]</span><br>"
 
 	var/blood_alcohol_content = target.get_blood_alcohol_content()
 	if(blood_alcohol_content > 0)
