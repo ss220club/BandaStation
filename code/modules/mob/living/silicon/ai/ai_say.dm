@@ -27,6 +27,7 @@
 //BANDA STATION ADDITION END
 
 /mob/living/silicon/compose_job(atom/movable/speaker, message_langs, raw_message, radio_freq)
+	//Also includes the </a> for AI hrefs, for convenience.
 	if(!HAS_TRAIT(src, TRAIT_CAN_GET_AI_TRACKING_MESSAGE))
 		return ""
 

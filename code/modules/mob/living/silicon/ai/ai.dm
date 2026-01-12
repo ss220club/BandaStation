@@ -1211,20 +1211,14 @@
 
 // BANDA STATION ADDITION - AI DOOR
 /mob/living/silicon/ai/proc/open_nearest_door(mob/living/target)
-	if(!istype(target))
+	if(!target)
 		return
 
 	var/mob/living/user = usr
 	if(!user || !user.client)
 		user = src
 
-	var/can_see_target = FALSE
-	if(can_see(target))
-		can_see_target = TRUE
-	else if(deployed_shell && get_dist(deployed_shell, target) <= 7)
-		can_see_target = TRUE
-	else if(deployed_shell && SScameras.is_visible_by_cameras(get_turf(target)))
-		can_see_target = TRUE
+	var/can_see_target = can_see(target) || (deployed_shell && (get_dist(deployed_shell, target) <= 7 || SScameras.is_visible_by_cameras(get_turf(target))))
 
 	if(!can_see_target)
 		to_chat(user, span_warning("Цель вне видимости ваших камер."))
@@ -1242,7 +1236,7 @@
 			dist = curr_dist
 			A = D
 
-	if(istype(A))
+	if(A)
 
 		if(!A.hasPower())
 			to_chat(user, span_warning("Ошибка: [A] отключен."))
