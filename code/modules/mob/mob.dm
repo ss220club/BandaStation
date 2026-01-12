@@ -181,7 +181,7 @@
  * Goes through hud_possible list and adds the images to the hud_list variable (if not already cached)
  */
 /atom/proc/prepare_huds()
-	if(hud_list) // I choose to be lienient about people calling this proc more then once
+	if(hud_list) // I choose to be lenient about people calling this proc more then once
 		return
 	hud_list = list()
 	for(var/hud in hud_possible)
@@ -588,7 +588,7 @@
 		SEND_SIGNAL(src, COMSIG_MOB_EXAMINING, examinify, result)
 		if(removes_double_click)
 			result += span_notice("<i>You can <a href=byond://?src=[REF(src)];run_examinate=[REF(examinify)]>examine</a> [examinify] closer...</i>")
-		result_combined = (atom_title ? fieldset_block("[atom_title]", jointext(result, "<br>"), "boxed_message") : boxed_message(jointext(result, "<br>")))
+		result_combined = (atom_title ? fieldset_block("[atom_title].", jointext(result, "<br>"), "boxed_message") : boxed_message(jointext(result, "<br>")))
 
 	to_chat(src, span_infoplain(result_combined))
 	SEND_SIGNAL(src, COMSIG_MOB_EXAMINATE, examinify)
@@ -872,6 +872,15 @@
 	set name = "Cancel Camera View"
 	set category = "Special" // BANDASTATION REPLACEMENT: Original: "OOC"
 	reset_perspective(null)
+
+/**
+ * Helpful for when a players uplink window gets glitched to above their screen.
+ * preventing them from moving the UPLINK window.
+ */
+/mob/verb/reset_ui_positions_for_mob()
+	set name = "Reset UI Positions"
+	set category = "Special"
+	SStgui.reset_ui_position(src)
 
 //suppress the .click/dblclick macros so people can't use them to identify the location of items or aimbot
 /mob/verb/DisClick(argu = null as anything, sec = "" as text, number1 = 0 as num  , number2 = 0 as num)
@@ -1512,8 +1521,7 @@
 	. = ..()
 	// Queue update if change is small enough (6 is 1% of nutrition softcap)
 	if(abs(change) >= 6)
-		mob_mood?.update_nutrition_moodlets()
-		hud_used?.hunger?.update_hunger_bar()
+		update_nutrition()
 	else
 		living_flags |= QUEUE_NUTRITION_UPDATE
 
@@ -1529,10 +1537,15 @@
 	. = ..()
 	// Queue update if change is small enough (6 is 1% of nutrition softcap)
 	if(abs(old_nutrition - nutrition) >= 6)
-		mob_mood?.update_nutrition_moodlets()
-		hud_used?.hunger?.update_hunger_bar()
+		update_nutrition()
 	else
 		living_flags |= QUEUE_NUTRITION_UPDATE
+
+/// Updates nutrition related effects
+/mob/living/proc/update_nutrition()
+	mob_mood?.update_nutrition_moodlets()
+	hud_used?.hunger?.update_hunger_bar()
+	SEND_SIGNAL(src, COMSIG_LIVING_UPDATE_NUTRITION)
 
 /// Apply a proper movespeed modifier based on items we have equipped
 /mob/proc/update_equipment_speed_mods()

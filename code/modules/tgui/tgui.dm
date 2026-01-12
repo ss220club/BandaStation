@@ -154,6 +154,20 @@
 /**
  * public
  *
+ * Sends a message to the front end to push the UI window to position 0,0
+ *
+ * optional can_be_suspended bool
+ */
+/datum/tgui/proc/reset_ui_position()
+	if(window)
+		// Windows you want to keep are usually blue screens of death
+		// and we want to keep them around, to allow user to read
+		// the error message properly.
+		window.send_message("resetposition")
+
+/**
+ * public
+ *
  * Closes all ByondUI elements, left dangling by a forceful TGUI exit,
  * such as via Alt+F4, closing or terminating the process
  *
@@ -205,11 +219,12 @@
  *
  * optional custom_data list Custom data to send instead of ui_data.
  * optional force bool Send an update even if UI is not interactive.
+ * optional always_instant bool Send and update regardless of the cooldown.
  */
-/datum/tgui/proc/send_full_update(custom_data, force)
+/datum/tgui/proc/send_full_update(custom_data, force, always_instant)
 	if(!user.client || !initialized || closing)
 		return
-	if(!COOLDOWN_FINISHED(src, refresh_cooldown))
+	if(!always_instant && !COOLDOWN_FINISHED(src, refresh_cooldown))
 		refreshing = TRUE
 		addtimer(CALLBACK(src, PROC_REF(send_full_update), custom_data, force), COOLDOWN_TIMELEFT(src, refresh_cooldown), TIMER_UNIQUE)
 		return
@@ -219,7 +234,8 @@
 		custom_data,
 		with_data = should_update_data,
 		with_static_data = TRUE))
-	COOLDOWN_START(src, refresh_cooldown, TGUI_REFRESH_FULL_UPDATE_COOLDOWN)
+	if(!always_instant)
+		COOLDOWN_START(src, refresh_cooldown, TGUI_REFRESH_FULL_UPDATE_COOLDOWN)
 
 /**
  * public

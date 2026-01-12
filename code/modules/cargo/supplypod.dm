@@ -713,7 +713,7 @@
 			var/datum/supply_order/SO = single_order
 			if (SO.pack.crate_type)
 				SO.generate(pod)
-			else if (SO.pack.goody) //Goody orders lack a crate_type and need special handling
+			else if (SO.pack.order_flags & ORDER_GOODY) //Goody orders lack a crate_type and need special handling
 				SO.generateCombo(pod, SO.orderer, SO.pack.contains, SO.pack.cost)
 		else if (istype(single_order, /atom/movable))
 			var/atom/movable/O = single_order
@@ -794,7 +794,8 @@
 /obj/item/disk/cargo/bluespace_pod //Disk that can be inserted into the Express Console to allow for Advanced Bluespace Pods
 	name = "Bluespace Drop Pod Upgrade"
 	desc = "This disk provides a firmware update to the Express Supply Console, granting the use of Nanotrasen's Bluespace Drop Pods to the supply department."
-	icon = 'icons/obj/devices/circuitry_n_data.dmi'
-	icon_state = "cargodisk"
-	inhand_icon_state = "card-id"
-	w_class = WEIGHT_CLASS_SMALL
+	icon_state = "datadisk12"
+	sticker_icon_state = "o_cargopod"
+
+/obj/item/disk/cargo/bluespace_pod/setup_reskins()
+	return

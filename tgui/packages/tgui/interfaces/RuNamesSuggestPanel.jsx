@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/style/useTemplate: <explanation> */
 import { useState } from 'react';
 import { Button, Input, LabeledList, Section } from 'tgui-core/components';
 

@@ -60,11 +60,11 @@
 	)
 
 /datum/armor/mod_theme_skrell_raskinta
-	melee = 15
-	bullet = 20
-	laser = 45
-	energy = 20
-	bomb = 30
+	melee = 50
+	bullet = 50
+	laser = 50
+	energy = 50
+	bomb = 50
 	bio = 100
 	fire = 90
 	acid = 90
@@ -135,11 +135,11 @@
 	)
 
 /datum/armor/mod_theme_skrell_guard
-	melee = 55
-	bullet = 55
+	melee = 60
+	bullet = 60
 	laser = 65
-	energy = 50
-	bomb = 60
+	energy = 60
+	bomb = 70
 	bio = 100
 	fire = 100
 	acid = 100

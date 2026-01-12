@@ -287,7 +287,7 @@
 			bank_account.adjust_money(-shuttle.credit_cost)
 
 			var/purchaser_name = (obj_flags & EMAGGED) ? scramble_message_replace_chars("AUTHENTICATION FAILURE: CVE-2018-17107", 60) : user.real_name
-			minor_announce("[purchaser_name] купил [shuttle.name] за [shuttle.credit_cost] кредитов.[shuttle.extra_desc ? " [shuttle.extra_desc]" : ""]" , "Покупка шаттла")
+			minor_announce("[purchaser_name] купил [shuttle.name] за [shuttle.credit_cost][MONEY_NAME].[shuttle.extra_desc ? " [shuttle.extra_desc]" : ""]" , "Покупка шаттла")
 
 			message_admins("[ADMIN_LOOKUPFLW(user)] purchased [shuttle.name].")
 			log_shuttle("[key_name(user)] has purchased [shuttle.name].")
@@ -297,7 +297,7 @@
 			// AIs cannot recall the shuttle
 			if (!authenticated(user) || HAS_SILICON_ACCESS(user) || syndicate)
 				return
-			SSshuttle.cancelEvac(user)
+			SSshuttle.cancel_evac(user)
 		if ("requestNukeCodes")
 			if (!authenticated_as_non_silicon_captain(user))
 				return
@@ -326,7 +326,7 @@
 			ert_request(reason, user)
 			to_chat(user, span_notice("ERT request sent."))
 			user.log_message("has requested an Emergency Response Team from CentCom with reason \"[reason]\"", LOG_SAY)
-			priority_announce("Отправлен запрос ОБР. Инициатор: [name]. Запрос принят к рассмотрению. Решение будет направлено в ближайшее время.", "[command_name()]: Служба быстрого реагирования", SSstation.announcer.get_rand_report_sound())
+			priority_announce("Отправлен запрос ОБР. Инициатор: [user]. Запрос принят к рассмотрению.", "[command_name()]: Служба быстрого реагирования", SSstation.announcer.get_rand_report_sound())
 			playsound(src, 'sound/machines/terminal/terminal_prompt.ogg', 50, FALSE)
 			COOLDOWN_START(src, important_action_cooldown, IMPORTANT_ACTION_COOLDOWN)
 		// BANDASTATION ADDITION - END
@@ -602,7 +602,7 @@
 
 				if (SSshuttle.emergency.mode != SHUTTLE_IDLE && SSshuttle.emergency.mode != SHUTTLE_RECALL)
 					data["shuttleCalled"] = TRUE
-					data["shuttleRecallable"] = SSshuttle.canRecall() || syndicate
+					data["shuttleRecallable"] = SSshuttle.can_recall(user) || syndicate
 
 				if (SSshuttle.emergencyCallAmount)
 					data["shuttleCalledPreviously"] = TRUE
@@ -664,6 +664,8 @@
 		"callShuttleReasonMinLength" = CALL_SHUTTLE_REASON_LENGTH,
 		"maxStatusLineLength" = MAX_STATUS_LINE_LENGTH,
 		"maxMessageLength" = MAX_MESSAGE_LEN,
+		"displayed_currency_full_name" = " [MONEY_NAME]",
+		"displayed_currency_name" = " [MONEY_SYMBOL]",
 	)
 
 /obj/machinery/computer/communications/Topic(href, href_list)

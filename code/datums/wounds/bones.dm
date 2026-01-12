@@ -69,13 +69,13 @@
 
 	return ..()
 
-/datum/wound/blunt/bone/remove_wound(ignore_limb, replaced)
+/datum/wound/blunt/bone/remove_wound(ignore_limb, replaced, destroying)
 	limp_slowdown = 0
 	limp_chance = 0
 	QDEL_NULL(active_trauma)
 	return ..()
 
-/datum/wound/blunt/bone/handle_process(seconds_per_tick, times_fired)
+/datum/wound/blunt/bone/handle_process(seconds_per_tick)
 	. = ..()
 
 	if (!victim || HAS_TRAIT(victim, TRAIT_STASIS))
@@ -88,7 +88,7 @@
 			active_trauma = victim.gain_trauma_type(brain_trauma_group, TRAUMA_RESILIENCE_WOUND)
 		next_trauma_cycle = world.time + (rand(100-WOUND_BONE_HEAD_TIME_VARIANCE, 100+WOUND_BONE_HEAD_TIME_VARIANCE) * 0.01 * trauma_cycle_cooldown)
 
-	var/is_bone_limb = ((limb.biological_state & BIO_BONE) && !(limb.biological_state & BIO_FLESH))
+	var/is_bone_limb = ((limb.biological_state & BIO_BONE) && !(limb.biological_state & (BIO_FLESH|BIO_CHITIN)))
 	if(!gelled || (!taped && !is_bone_limb))
 		return
 
@@ -159,7 +159,7 @@
 
 	if(gun.recoil > 0 && severity >= WOUND_SEVERITY_SEVERE && prob(25 * (severity - 1)))
 		if(!HAS_TRAIT(victim, TRAIT_ANALGESIA))
-			to_chat(victim, span_danger("The fracture in your [limb.plaintext_zone] explodes with pain as [gun] kicks back!"))
+			to_chat(victim, span_danger("The fracture in your [limb.ru_plaintext_zone[PREPOSITIONAL]] explodes with pain as [gun] kicks back!"))
 		victim.apply_damage(rand(1, 3) * (severity - 1) * gun.weapon_weight, BRUTE, limb, wound_bonus = CANT_WOUND, wound_clothing = FALSE)
 
 	if(!HAS_TRAIT(victim, TRAIT_ANALGESIA))
@@ -409,7 +409,7 @@
 	a_or_from = "a"
 	desc = "Кости пациента получили множественные переломы, \
 		сопровождающиеся разрывом кожи, вызывая значительную боль и практически полную бесполезность конечности."
-	treat_text = "Немедленно перевяжите поврежденную конечность марлей или наложите шину. Проведите хирургическое лечение. \
+	treat_text = "Немедленно перевяжите повреждённую конечность марлей или наложите шину. Проведите хирургическое лечение. \
 		В случае чрезвычайной ситуации можно нанести костный гель и хирургическую ленту на пораженную область для восстановления в течение длительного времени."
 	treat_text_short = "Проведите хирургическое лечение или нанесите костный гель и хирургическую ленту. Также следует использовать шину или повязку из марли."
 	examine_desc = "полностью раздроблена и треснута, обнажая осколки кости"
@@ -429,10 +429,14 @@
 	internal_bleeding_chance = 60
 	wound_flags = (ACCEPTS_GAUZE | MANGLES_INTERIOR)
 	regen_ticks_needed = 240 // ticks every 2 seconds, 480 seconds, so roughly 8 minutes default
+	surgery_states = SURGERY_SKIN_CUT | SURGERY_BONE_SAWED // Bad enough to count as a busted skull/ribcage
 
 	simple_desc = "Кости пациента фактически полностью раздроблены, вызывая полную неподвижность конечности."
 	simple_treat_text = "<b>Перевязывание</b> раны немного уменьшит её влияние до тех пор, пока не будет проведено <b>хирургическое лечение</b> с использованием костного геля и хирургической ленты."
 	homemade_treat_text = "Хотя это крайне сложно и медленно в исполнении, <b>костный гель и хирургическая лента</b> могут быть нанесены непосредственно на рану, однако для большинства людей это практически невозможно выполнить самостоятельно, если только они не приняли одну или несколько <b>обезболивающих</b> (Известно, что морфин и шахтерская мазь могут помочь)"
+
+	/// Tracks if a surgeon has reset the bone (part one of the surgical treatment process)
+	VAR_FINAL/reset = FALSE
 
 /datum/wound_pregen_data/bone/compound
 	abstract = FALSE
@@ -451,7 +455,7 @@
 /// if someone is using bone gel on our wound
 /datum/wound/blunt/bone/proc/gel(obj/item/stack/medical/bone_gel/I, mob/user)
 	// skellies get treated nicer with bone gel since their "reattach dismembered limbs by hand" ability sucks when it's still critically wounded
-	if((limb.biological_state & BIO_BONE) && !(limb.biological_state & BIO_FLESH))
+	if((limb.biological_state & BIO_BONE) && !(limb.biological_state & (BIO_FLESH|BIO_CHITIN)))
 		return skelly_gel(I, user)
 
 	if(gelled)
@@ -531,6 +535,10 @@
 	processes = TRUE
 	return TRUE
 
+/datum/wound/blunt/bone/item_can_treat(obj/item/potential_treater, mob/user)
+	// assume that - if working on a ready-to-operate limb - the surgery wants to do the real surgery instead of bone regeneration
+	return ..() && !HAS_TRAIT(limb, TRAIT_READY_TO_OPERATE)
+
 /datum/wound/blunt/bone/treat(obj/item/tool, mob/user)
 	if(istype(tool, /obj/item/stack/medical/bone_gel))
 		gel(tool, user)
@@ -543,16 +551,16 @@
 	. += "<div class='ml-3'>"
 
 	if(severity > WOUND_SEVERITY_MODERATE)
-		if((limb.biological_state & BIO_BONE) && !(limb.biological_state & BIO_FLESH))
+		if((limb.biological_state & BIO_BONE) && !(limb.biological_state & (BIO_FLESH|BIO_CHITIN)))
 			if(!gelled)
-				. += "Рекомендуемое лечение: Нанесите костный гель непосредственно на поврежденную конечность. Существо из костей, похоже, не так сильно реагирует на нанесение костного геля, как особь с плотью. Хирургическая лента также будет ненужен.\n"
+				. += "Рекомендуемое лечение: Нанесите костный гель непосредственно на повреждённую конечность. Существо из костей, похоже, не так сильно реагирует на нанесение костного геля, как особь с плотью. Хирургическая лента также будет ненужен.\n"
 			else
 				. += "[span_notice("Примечание: Регенерация костей в процессе. Кости восстановлены на [round(regen_ticks_current*100/regen_ticks_needed)]%.")]\n"
 		else
 			if(!gelled)
-				. += "Альтернативное лечение: Нанесите костный гель непосредственно на поврежденную конечность, затем нанесите хирургическую ленту, чтобы начать регенерацию костей. Это крайне болезненно и медленно, рекомендуется только в крайних случаях.\n"
+				. += "Альтернативное лечение: Нанесите костный гель непосредственно на повреждённую конечность, затем нанесите хирургическую ленту, чтобы начать регенерацию костей. Это крайне болезненно и медленно, рекомендуется только в крайних случаях.\n"
 			else if(!taped)
-				. += "[span_notice("Продолжайте альтернативное лечение: Нанесите хирургическую ленту непосредственно на поврежденную конечность, чтобы начать регенерацию костей. Обратите внимание, что это крайне болезненно и медленно, хотя сон или лежание ускорят восстановление.")]\n"
+				. += "[span_notice("Продолжайте альтернативное лечение: Нанесите хирургическую ленту непосредственно на повреждённую конечность, чтобы начать регенерацию костей. Обратите внимание, что это крайне болезненно и медленно, хотя сон или лежание ускорят восстановление.")]\n"
 			else
 				. += "[span_notice("Примечание: Регенерация костей в процессе. Кости восстановлены на [round(regen_ticks_current*100/regen_ticks_needed)]%.")]\n"
 
