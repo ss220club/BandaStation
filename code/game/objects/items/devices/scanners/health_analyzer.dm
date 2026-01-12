@@ -194,7 +194,7 @@
 		if(advanced)
 			render_list += "<span class='alert ml-1'>Уровень усталости: [target.get_stamina_loss()]%.</span><br>"
 		else
-			render_list += "<span class='alert ml-1'>Cубъект страдает от переутомления.</span><br>"
+			render_list += "<span class='alert ml-1'>Субъект страдает от переутомления.</span><br>"
 
 	// Check for brain - both organic (carbon) and synthetic (cyborg MMI)
 	var/has_brain = FALSE
@@ -542,7 +542,7 @@
 				if(reagent_types_to_check)
 					if(!istype(reagent, reagent_types_to_check))
 						continue
-				render_block += "<span class='notice ml-2'>[round(reagent.volume, 0.001)] units of [reagent.name][reagent.overdosed ? "</span> - [span_bolddanger("ПЕРЕЗДОЗИРОВКА")]" : ".</span>"]<br>"
+				render_block += "<span class='notice ml-2'>[round(reagent.volume, 0.001)] units of [reagent.name][reagent.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
 
 		if(!length(render_block)) //If no VISIBLY DISPLAYED reagents are present, we report as if there is nothing.
 			render_list += "<span class='notice ml-1'>Субъект не содержит реагенты в кровотоке.</span><br>"
@@ -610,7 +610,7 @@
 /obj/item/healthanalyzer/advanced
 	name = "advanced health analyzer"
 	icon_state = "health_adv"
-	desc = "Ручной сканер тела, способный с высокой точностью определять жизненно важные показатели человека."
+	desc = "Ручной сканер тела, способный с высокой точностью определять жизненно важные показатели субъекта."
 	advanced = TRUE
 
 #define AID_EMOTION_NEUTRAL "neutral"
@@ -635,7 +635,7 @@
 			if (scanner.give_wound_treatment_bonus)
 				ADD_TRAIT(current_wound, TRAIT_WOUND_SCANNED, ANALYZER_TRAIT)
 				if(!advised)
-					to_chat(user, span_notice("Вы замечаете, как над вами появляются яркие голографические изображения [(length(wounded_part.wounds) || length(patient.get_wounded_bodyparts()) ) > 1 ? "различных раны" : "ран"]. Похоже, они содержат полезную информацию, которая должна облегчить лечение!"))
+					to_chat(user, span_notice("Вы замечаете, как над вами появляются яркие голографические изображения [(length(wounded_part.wounds) || length(patient.get_wounded_bodyparts()) ) > 1 ? "различных ран" : "ран"]. Похоже, они содержат полезную информацию, которая должна облегчить лечение!"))
 					advised = TRUE
 		render_list += "</span>"
 
@@ -672,7 +672,7 @@
 	/// How often one can ask for encouragement
 	var/patience = 10 SECONDS
 	/// What do we scan for, only used in descriptions
-	var/scan_for_what = "серъезные увечия"
+	var/scan_for_what = "серьёзные увечья"
 
 /obj/item/healthanalyzer/simple/attack_self(mob/user)
 	if(next_encouragement < world.time)
