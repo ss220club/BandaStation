@@ -7,6 +7,10 @@
 	name = "Воображаемый друг"
 	desc = "Пациент может видеть и слышать воображаемого человека."
 	scan_desc = "частичная шизофрения"
+	symptoms = "Проявляет признаки взаимодействия с невидимым собеседником, включая разговоры с самим собой, \
+			реакции на неслышимые стимулы и поведение, указывающее на присутствие компаньона. \
+			Этот «воображаемый друг» может влиять на действия и эмоциональное состояние пациента, \
+			приводя к социальной изоляции, изменённому восприятию реальности или нетипичной активности."
 	gain_text = span_notice("По какой-то причине вы чувствуете себя в хорошей компании.")
 	lose_text = span_warning("Вы снова чувствуете себя одиноким.")
 	var/mob/eye/imaginary_friend/friend
@@ -513,6 +517,7 @@
 	gain_text = ""
 	lose_text = ""
 	random_gain = FALSE
+	known_trauma = FALSE
 
 /datum/brain_trauma/special/imaginary_friend/trapped_owner/make_friend()
 	friend = new /mob/eye/imaginary_friend/trapped(get_turf(owner), src)
