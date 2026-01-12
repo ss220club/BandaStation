@@ -1074,7 +1074,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	// Create a probability to ignore the pain based on drunkenness level
 	var/drunk_ignore_prob = clamp(patient.get_drunk_amount(), 0, 90)
 
-	if(HAS_TRAIT(patient, TRAIT_ANALGESIA) || prob(drunk_ignore_prob))
+	if(HAS_TRAIT(patient, TRAIT_ANALGESIA) || HAS_TRAIT(patient, TRAIT_STASIS) || prob(drunk_ignore_prob))
 		patient.clear_mood_event(SURGERY_MOOD_CATEGORY) //incase they gained the trait mid-surgery (or became drunk). has the added side effect that if someone has a bad surgical memory/mood and gets drunk & goes back to surgery, they'll forget they hated it, which is kinda funny imo.
 		return
 	if(patient.stat >= UNCONSCIOUS)
