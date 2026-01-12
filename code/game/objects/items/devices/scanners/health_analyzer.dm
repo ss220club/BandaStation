@@ -81,7 +81,7 @@
 		)
 
 		var/floor_text = "<span class='info'>Анализ результатов для <b>[scan_turf]</b> ([station_time_timestamp()]):</span><br>"
-		floor_text += "<span class='info ml-1'>Общее состояние: <i>Unknown</i></span><br>"
+		floor_text += "<span class='info ml-1'>Общее состояние: <i>Неизвестно</i></span><br>"
 		floor_text += "<span class='alert ml-1'>Субъект демонстрирует признаки умственной отсталости.</span><br>"
 		floor_text += "<span class='info ml-1'>Температура тела: [scan_turf?.return_air()?.return_temperature() || "???"]</span><br>"
 
@@ -91,7 +91,7 @@
 		return
 
 	if(ispodperson(M) && !advanced)
-		to_chat(user, span_info("[M]'s Биологическая структура слишком сложна для анализатора здоровья."))
+		to_chat(user, span_info("Биологическая структура [M] слишком сложна для анализатора здоровья."))
 		return
 
 	user.visible_message(span_notice("[user] анализирует жизненные показатели [M]."))
@@ -194,7 +194,7 @@
 		if(advanced)
 			render_list += "<span class='alert ml-1'>Уровень усталости: [target.get_stamina_loss()]%.</span><br>"
 		else
-			render_list += "<span class='alert ml-1'>Cубъект страдает от переутомления.</span><br>"
+			render_list += "<span class='alert ml-1'>Субъект страдает от переутомления.</span><br>"
 
 	// Check for brain - both organic (carbon) and synthetic (cyborg MMI)
 	var/has_brain = FALSE
@@ -340,13 +340,13 @@
 			if(!render)
 				render_list += "<hr>"
 			render_list += "<span class='notice ml-1'>Обнаруженные кибернетические модификации:</span><br>"
-			render_list += "<span class='notice ml-2'>[english_list(cyberimps, and_text = ", and ")]</span><br>"
+			render_list += "<span class='notice ml-2'>[english_list(cyberimps, and_text = ", и ")]</span><br>"
 
 		render_list += "<hr>"
 
 		//Genetic stability
 		if(advanced && humantarget.has_dna() && humantarget.dna.stability != initial(humantarget.dna.stability))
-			render_list += "<span class='info ml-1'>Генетическая стабильностьч: [humantarget.dna.stability]%.</span><br>"
+			render_list += "<span class='info ml-1'>Генетическая стабильность: [humantarget.dna.stability]%.</span><br>"
 
 		//body temperature
 		var/datum/species/targetspecies = humantarget.dna.species
@@ -380,7 +380,7 @@
 		if(cached_blood_volume <= BLOOD_VOLUME_SAFE && cached_blood_volume > BLOOD_VOLUME_OKAY)
 			level_format = "НИЗКИЙ [blood_percent]%, [cached_blood_volume] cl"
 			if (blood_type.restoration_chem)
-				level_format = conditional_tooltip(level_format, "Recommendation: [blood_type.restoration_chem::name] supplement.", tochat)
+				level_format = conditional_tooltip(level_format, "Рекомендация: [blood_type.restoration_chem::name] supplement.", tochat)
 		else if(cached_blood_volume <= BLOOD_VOLUME_OKAY)
 			level_format = "<b>КРИТИЧЕСКИЙ [blood_percent]%</b>, [cached_blood_volume] cl"
 			var/recommendation = list()
@@ -439,7 +439,7 @@
 		if (lungs.received_pressure_mult != initial_pressure_mult)
 			var/tooltip
 			var/dilation_text
-			var/beginning_text = "Расширение Лёгких: "
+			var/beginning_text = "Расширение лёгких: "
 			if (lungs.received_pressure_mult > initial_pressure_mult) // higher than usual
 				beginning_text = span_blue("<b>[beginning_text]</b>")
 				dilation_text = span_blue("[(lungs.received_pressure_mult * 100) - 100]%")
@@ -542,12 +542,12 @@
 				if(reagent_types_to_check)
 					if(!istype(reagent, reagent_types_to_check))
 						continue
-				render_block += "<span class='notice ml-2'>[round(reagent.volume, 0.001)] units of [reagent.name][reagent.overdosed ? "</span> - [span_bolddanger("ПЕРЕЗДОЗИРОВКА")]" : ".</span>"]<br>"
+				render_block += "<span class='notice ml-2'>[round(reagent.volume, 0.001)] units of [reagent.name][reagent.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
 
 		if(!length(render_block)) //If no VISIBLY DISPLAYED reagents are present, we report as if there is nothing.
-			render_list += "<span class='notice ml-1'>Субъект не содержит реагенты в [LOWER_TEXT(target.get_bloodtype()?.get_blood_name()) || "blood"]stream.</span><br>"
+						render_list += "<span class='notice ml-1'>Субъект не содержит реагенты в кровотоке.</span><br>"
 		else
-			render_list += "<span class='notice ml-1'>Субъект содержит следующие реагенты в [LOWER_TEXT(target.get_bloodtype()?.get_blood_name()) || "blood"]stream:</span><br>"
+						render_list += "<span class='notice ml-1'>Субъект содержит следующие реагенты в кровотоке:</span><br>"
 			render_list += render_block //Otherwise, we add the header, reagent readouts, and clear the readout block for use on the stomach.
 			render_block.Cut()
 
@@ -635,7 +635,7 @@
 			if (scanner.give_wound_treatment_bonus)
 				ADD_TRAIT(current_wound, TRAIT_WOUND_SCANNED, ANALYZER_TRAIT)
 				if(!advised)
-					to_chat(user, span_notice("Вы замечаете, как над вами появляются яркие голографические изображения [(length(wounded_part.wounds) || length(patient.get_wounded_bodyparts()) ) > 1 ? "различных раны" : "ран"]. Похоже, они содержат полезную информацию, которая должна облегчить лечение!"))
+					to_chat(user, span_notice("Вы замечаете, как над вами появляются яркие голографические изображения [(length(wounded_part.wounds) || length(patient.get_wounded_bodyparts()) ) > 1 ? "различных ран" : "ран"]. Похоже, они содержат полезную информацию, которая должна облегчить лечение!"))
 					advised = TRUE
 		render_list += "</span>"
 
@@ -759,11 +759,11 @@
 
 /obj/item/healthanalyzer/simple/disease
 	name = "disease state analyzer"
-	desc = "Ещё один из сомнительно полезных медико‑научных сканеров компании MeLo-Tech — анализатор заболеваний. В наши дни они встречаются довольно редко: NT выяснила, что оснащение больниц самым дешёвым пандемическим оборудованием привело к чрезмерным человеческим потерям, что оказалось невыгодным. Ходят слухи, что встроенный ИИ завидует успеху анализатора первой помощи.."
+	desc = "Ещё один из сомнительно полезных медико‑научных сканеров компании MeLo-Tech — анализатор заболеваний. В наши дни они встречаются довольно редко: NT выяснила, что оснащение больниц самым дешёвым пандемическим оборудованием привело к чрезмерным человеческим потерям, что оказалось невыгодным. Ходят слухи, что встроенный ИИ завидует успеху анализатора первой помощи."
 	icon_state = "disease_aid"
 	mode = SCANNER_NO_MODE
 	encouragements = list("мотивирует вас принимать лекарства", "на короткое время появляется вращающееся нарисованное сердце", "успокаивает вас относительно вашего состояния", \
-			"напоминает вам, что каждый старается изо всех сил", "выводит на экран сообщение с пожеланием удачи", "отображает сообщение о том, как оно гордится тем, что вы заботитесь о себе.", "официально освобождает вас от всех ваших грехов")
+			"напоминает вам, что каждый старается изо всех сил", "выводит на экран сообщение с пожеланием удачи", "отображает сообщение о том, как оно гордится тем, что вы заботитесь о себе", "официально освобождает вас от всех ваших грехов")
 	patience = 20 SECONDS
 	scan_for_what = "diseases"
 
