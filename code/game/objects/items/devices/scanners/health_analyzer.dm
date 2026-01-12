@@ -206,7 +206,7 @@
 			has_brain = TRUE
 
 	if(!has_brain) // kept exclusively for soul purposes
-		render_list += "<span class='alert ml-1'>У субъекта отутствует развитый мозг.</span><br>"
+		render_list += "<span class='alert ml-1'>У субъекта отсутствует развитый мозг.</span><br>"
 
 	if(iscarbon(target))
 		var/mob/living/carbon/carbontarget = target
