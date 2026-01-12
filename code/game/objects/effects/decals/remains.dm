@@ -28,12 +28,24 @@
 	COOLDOWN_DECLARE(gas_cooldown)
 	///The length of the aforementioned cooldown.
 	var/gas_cooldown_length = (20 SECONDS)
+	// BANDASTATION EDIT START
+	var/list/blocked_reagents = list(
+		/datum/reagent/aslimetoxin,
+		/datum/reagent/gluttonytoxin,
+		/datum/reagent/gondola_mutation_toxin,
+	)
+	// BANDASTATION EDIT END
 
 /obj/effect/decal/remains/human/smokey/Initialize(mapload)
 	. = ..()
 
 	proximity_monitor = new(src, 1)
-	var/list/blocked_reagents = subtypesof(/datum/reagent/medicine) + subtypesof(/datum/reagent/consumable) //Boooooriiiiing
+	// BANDASTATION EDIT START
+	blocked_reagents += \
+		subtypesof(/datum/reagent/medicine) + \
+		subtypesof(/datum/reagent/consumable) + \
+		subtypesof(/datum/reagent/mutationtoxin)
+	// BANDASTATION EDIT END
 	that_shit_that_killed_saddam = get_random_reagent_id(blacklist = blocked_reagents)
 
 /obj/effect/decal/remains/human/smokey/HasProximity(atom/movable/tomb_raider)
