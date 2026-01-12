@@ -1,4 +1,0 @@
-author: "HailFriend"
-delete-after: True
-changes:
-  - admin: "Поменял значение таймера авто закрытия тикета до 20 минут"
