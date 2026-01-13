@@ -48,7 +48,7 @@
 		. += span_notice("Alt-click [src] чтобы переключить отображение повреждений конечностей. Ctrl-shift-click чтобы распечатать отчёт.")
 
 /obj/item/healthanalyzer/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] начинает анализировать [user.p_them()]себя при помощи [src]! Дисплей показывает что [user.p_theyre()] мертв!"))
+	user.visible_message(span_suicide("[user] начинает анализировать [user.p_them()]себя при помощи [src]! Дисплей показывает, что [user.p_theyre()] мертв!"))
 	return BRUTELOSS
 
 /obj/item/healthanalyzer/attack_self(mob/user)
@@ -82,7 +82,7 @@
 
 		var/floor_text = "<span class='info'>Анализ результатов для <b>[scan_turf]</b> ([station_time_timestamp()]):</span><br>"
 		floor_text += "<span class='info ml-1'>Общее состояние: <i>Неизвестно</i></span><br>"
-		floor_text += "<span class='alert ml-1'>У субъекта отутствует мозг.</span><br>"
+		floor_text += "<span class='alert ml-1'>У субъекта отсутствует мозг.</span><br>"
 		floor_text += "<span class='info ml-1'>Температура тела: [scan_turf?.return_air()?.return_temperature() || "???"]</span><br>"
 
 		if(user.can_read(src) && !user.is_blind())
@@ -91,7 +91,7 @@
 		return
 
 	if(ispodperson(M) && !advanced)
-		to_chat(user, span_info("[M]'s Биологическая структура слишком сложна для анализатора здоровья."))
+		to_chat(user, span_info("Биологическая структура [M] слишком сложна для анализатора здоровья."))
 		return
 
 	user.visible_message(span_notice("[user] анализирует жизненные показатели [M]."))
@@ -380,7 +380,7 @@
 		if(cached_blood_volume <= BLOOD_VOLUME_SAFE && cached_blood_volume > BLOOD_VOLUME_OKAY)
 			level_format = "НИЗКИЙ [blood_percent]%, [cached_blood_volume] cl"
 			if (blood_type.restoration_chem)
-				level_format = conditional_tooltip(level_format, "Рекомендация: Поставка [blood_type.restoration_chem::name].", tochat)
+				level_format = conditional_tooltip(level_format, "Рекомендация: Приём [blood_type.restoration_chem::name].", tochat)
 		else if(cached_blood_volume <= BLOOD_VOLUME_OKAY)
 			level_format = "<b>КРИТИЧЕСКИЙ [blood_percent]%</b>, [cached_blood_volume] cl"
 			var/recommendation = list()
@@ -426,7 +426,7 @@
 			<b>Внимание: [disease.form] обнаружен</b><br>\
 			<div class='ml-2'>\
 			Название: [disease.name].<br>\
-			Распространение: [disease.spread_text].<br>\
+			Тип: [disease.spread_text].<br>\
 			Стадия: [disease.stage]/[disease.max_stages].<br>\
 			Возможное лекарство: [disease.cure_text]</div>\
 			</span>"
