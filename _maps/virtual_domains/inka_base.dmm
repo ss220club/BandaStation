@@ -2288,6 +2288,19 @@
 	dir = 1
 	},
 /area/virtual_domain)
+"pZ" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/belt/security/full{
+	pixel_x = 8;
+	pixel_y = -6
+	},
+/obj/item/storage/belt/security/full,
+/obj/item/storage/belt/security/full{
+	pixel_x = -8;
+	pixel_y = 6
+	},
+/turf/template_noop,
+/area/virtual_domain/safehouse)
 "qc" = (
 /obj/structure/table/wood,
 /obj/machinery/fax/admin,
@@ -2737,6 +2750,22 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/virtual_domain)
+"tQ" = (
+/obj/structure/table/reinforced,
+/obj/effect/spawner/random/armory/laser_gun{
+	pixel_x = -5;
+	pixel_y = 10
+	},
+/obj/effect/spawner/random/armory/laser_gun{
+	pixel_x = 1;
+	pixel_y = 3
+	},
+/obj/effect/spawner/random/armory/laser_gun{
+	pixel_x = 7;
+	pixel_y = -4
+	},
+/turf/template_noop,
+/area/virtual_domain/safehouse)
 "tS" = (
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron/dark/textured_large,
@@ -4592,6 +4621,22 @@
 /obj/effect/landmark/bitrunning/mob_segment,
 /turf/open/floor/carpet/royalblack,
 /area/virtual_domain)
+"GA" = (
+/obj/structure/table/reinforced,
+/obj/machinery/recharger{
+	pixel_x = 0;
+	pixel_y = 11
+	},
+/obj/machinery/recharger{
+	pixel_x = 6;
+	pixel_y = 0
+	},
+/obj/machinery/recharger{
+	pixel_x = -6;
+	pixel_y = 0
+	},
+/turf/template_noop,
+/area/virtual_domain/safehouse)
 "GH" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/asphalt,
@@ -6127,6 +6172,22 @@
 /obj/item/stack/sheet/mineral/uranium/fifty,
 /turf/open/floor/iron/dark/textured_large,
 /area/virtual_domain)
+"Qc" = (
+/obj/structure/table/reinforced,
+/obj/item/clothing/glasses/night{
+	pixel_x = 6;
+	pixel_y = 9
+	},
+/obj/item/clothing/glasses/night{
+	pixel_x = 2;
+	pixel_y = 4
+	},
+/obj/item/clothing/glasses/night{
+	pixel_x = -4;
+	pixel_y = -2
+	},
+/turf/template_noop,
+/area/virtual_domain/safehouse)
 "Qg" = (
 /obj/machinery/door/airlock/hatch,
 /turf/open/floor/pod/dark,
@@ -8431,8 +8492,8 @@ mi
 mi
 mi
 YH
-YH
-YH
+pZ
+Qc
 YH
 YH
 YH
@@ -8528,8 +8589,8 @@ mi
 bw
 YH
 YH
-YH
-YH
+tQ
+GA
 YH
 YH
 Ne
