@@ -4,7 +4,7 @@
 	pixel_x = -32
 	pixel_y = -32
 	anchored = TRUE
-	plane = ABOVE_GAME_PLANE
+	plane = GAME_PLANE
 	layer = FLY_LAYER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = KEEP_APART|RESET_TRANSFORM|RESET_COLOR
