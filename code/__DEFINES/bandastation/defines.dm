@@ -36,7 +36,7 @@
 
 //pollution defines
 //Cap for active emitters that can be running for a very long time
-#define POLLUTION_ACTIVE_EMITTER_CAP 150
+#define POLLUTION_ACTIVE_EMITTER_CAP 200
 //For things that you dont want to cause too much pollution
 #define POLLUTION_PASSIVE_EMITTER_CAP 50
 

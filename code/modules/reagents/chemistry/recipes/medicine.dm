@@ -8,10 +8,7 @@
 	purity_min = 0.1
 	rate_up_lim = 35
 	reaction_tags = REACTION_TAG_HEALING | REACTION_TAG_EASY
-// BANDASTATION ADDITION START
-	pollutant_type = /datum/pollutant/chemical_vapors
-	pollutant_amount = 0.2
-// BANDASTATION ADDITION END
+
 /datum/chemical_reaction/medicine/leporazine
 	results = list(/datum/reagent/medicine/leporazine = 2)
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/copper = 1)

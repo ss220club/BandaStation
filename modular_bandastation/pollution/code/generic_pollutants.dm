@@ -12,13 +12,12 @@
 	thickness = 2
 
 ///Sulphur coming from igniting matches
-/datum/pollutant/sulphur
+/datum/pollutant/smoke/sulphur
 	name = "Sulphur"
 
-///Organic waste and garbage makes this
-/datum/pollutant/decaying_waste
-	name = "Decaying Waste"
-
-///Green goo piles and medicine chemical reactions make this
-/datum/pollutant/chemical_vapors
-	name = "Chemical Vapors"
+///Dust for events or future
+/datum/pollutant/dust
+	name = "Dust"
+	pollutant_flags = POLLUTANT_APPEARANCE | POLLUTANT_BREATHE_ACT
+	thickness = 2
+	color = "#ffed9c"

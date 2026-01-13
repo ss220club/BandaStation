@@ -98,7 +98,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		return
 // BANDASTATION ADDITION START
 	var/turf/my_turf = get_turf(src)
-	my_turf.pollute_turf(/datum/pollutant/sulphur, 5)
+	my_turf.pollute_turf(/datum/pollutant/smoke/sulphur, 5)
 // BANDASTATION ADDITION END
 	playsound(src, 'sound/items/match_strike.ogg', 15, TRUE)
 	lit = TRUE
