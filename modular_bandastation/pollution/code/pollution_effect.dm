@@ -1,6 +1,6 @@
 /obj/effect/abstract/pollution
-	icon = 'icons/effects/96x96.dmi'
-	icon_state = "smoke"
+	icon = 'modular_bandastation/pollution/icons/effects/96x96.dmi'
+	icon_state = "smoke-static"
 	pixel_x = -32
 	pixel_y = -32
 	anchored = TRUE
