@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/ash
-	name = "Ashen Passage"
+	name = "Пепельный Пролёт"
 	desc = "Заклинание малой дальности, позволяющее беспрепятственно проходить сквозь стены. Также снимает связки при усилении."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
@@ -78,7 +78,7 @@
 	return
 
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/ash/long
-	name = "Ashen Walk"
+	name = "Пепельная Походка"
 	desc = "Заклинание большой дальности, позволяющее беспрепятственно проходить сквозь многочисленные стены."
 	jaunt_duration = 5 SECONDS
 
