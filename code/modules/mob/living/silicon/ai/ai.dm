@@ -1294,24 +1294,41 @@
 
 	var/can_see_target = FALSE
 
-	if(istype(loc, /obj/item/aicard))
+	if(istype(loc, /obj/item/aicard)) //В интеллкарте
+
+		if(control_disabled)
+			to_chat(user, span_warning("Беспроводная связь отключена."))
+			return
+
 		if(can_see(target))
 			can_see_target = TRUE
 
-	else if(deployed_shell && user == deployed_shell)
+	else if(deployed_shell && user == deployed_shell) //Оболочки
 
 		if(get_dist(deployed_shell, target) <= 7)
 			can_see_target = TRUE
 
 		else if(SScameras.is_visible_by_cameras(get_turf(target)))
-			can_see_target = TRUE
+
+			for(var/obj/machinery/camera/C in range(7, target))
+
+				// Имитируем все проверки зрения ИИ... да да...
+				if(QDELETED(C)) continue
+				if(!C.camera_enabled) continue
+				if(C.machine_stat & BROKEN) continue
+				if(C.emped) continue
+				if(C.wires && (C.wires.is_cut(WIRE_CAMERA) || C.wires.is_cut(WIRE_POWER)))
+					continue
+
+				can_see_target = TRUE
+				break
 
 	else
 		if(can_see(target))
 			can_see_target = TRUE
 
 	if(!can_see_target)
-		to_chat(user, span_warning("Цель вне вашей видимости."))
+		to_chat(user, span_warning("Цель вне зоны видимости."))
 		return
 
 	var/obj/machinery/door/airlock/A = null
@@ -1332,11 +1349,11 @@
 			return
 
 		if(A.locked)
-			to_chat(user, span_warning("Ошибка: шлюз [A] болты подняты."))
+			to_chat(user, span_warning("Ошибка: [A] болты подняты."))
 			return
 
 		if(A.welded)
-			to_chat(user, span_warning("Ошибка: шлюз [A] не поддается."))
+			to_chat(user, span_warning("Ошибка: шлюз[A] не поддается."))
 			return
 
 		if(A.wires && A.wires.is_cut(WIRE_AI))
