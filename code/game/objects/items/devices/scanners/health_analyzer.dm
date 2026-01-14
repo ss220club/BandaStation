@@ -45,7 +45,7 @@
 /obj/item/healthanalyzer/examine(mob/user)
 	. = ..()
 	if(src.mode != SCANNER_NO_MODE)
-		. += span_notice("Alt-click [src] чтобы переключить отображение повреждений конечностей. Ctrl-shift-click чтобы распечатать отчёт.")
+		. += span_notice("Alt+ЛКМ по [declent_ru(DATIVE)], чтобы переключить отображение повреждений конечностей. Ctrl+shift+ЛКМ чтобы распечатать отчёт.")
 
 /obj/item/healthanalyzer/suicide_act(mob/living/carbon/user)
 	user.visible_message(span_suicide("[user] начинает анализировать [user.p_them()]себя при помощи [src]! Дисплей показывает, что [user.p_theyre()] мертв!"))
