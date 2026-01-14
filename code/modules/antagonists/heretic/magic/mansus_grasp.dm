@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/touch/mansus_grasp
-	name = "Mansus Grasp"
+	name = "Хватка Мансуса"
 	desc = "Заклинание прикосновения, позволяющее вам направить силу Старых богов через вашу хватку."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"

@@ -1,8 +1,8 @@
 /datum/action/cooldown/spell/pointed/void_prison
-	name = "Void Prison"
-	desc = "Sends a heathen into the void for 10 seconds. \
-		They will be unable to perform any actions for the duration. \
-		Afterwards, they will be chilled and returned to the mortal plane."
+	name = "Пустотная Тюрьма"
+	desc = "Отправляет язычника в Пустоту на 10 секунд. \
+		В течение этого времени цель не может выполнять какие-либо действия. \
+		По истечении времени они будут охлаждены и возвращены на наш уровень бытия."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'

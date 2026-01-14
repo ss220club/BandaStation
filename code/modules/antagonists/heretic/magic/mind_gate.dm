@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/pointed/mind_gate
-	name = "Mind Gate"
+	name = "Врата Разума"
 	desc = "Наносит вам 20 урона мозгу, и накладывает галлюцинации на цель, \
 			замешательство на 10 секунд, потерю дыхания и урон мозгу. \
 			It also blinds, mutes and deafens your target, if their sanity is low enough, they will be knocked down as well."

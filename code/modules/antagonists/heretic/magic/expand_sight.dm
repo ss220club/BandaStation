@@ -1,6 +1,6 @@
 // Action for Raw Prophets that boosts up or shrinks down their sight range.
 /datum/action/innate/expand_sight
-	name = "Expand Sight"
+	name = "Расширение Обзора"
 	desc = "Значительно увеличивает дальность обзора, позволяя видеть врагов на гораздо большем расстоянии."
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
 	button_icon_state = "eye"

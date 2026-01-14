@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/pointed/apetra_vulnera
-	name = "Apetra Vulnera"
+	name = "Неприкосновенные Раны"
 	desc = "Вызывает обильное кровотечение из каждой части тела, которое имеет более 15-и ушибов. \
 		Накладывает рану на случайную часть тела, если не найдены подходящие части тела."
 	background_icon_state = "bg_heretic"

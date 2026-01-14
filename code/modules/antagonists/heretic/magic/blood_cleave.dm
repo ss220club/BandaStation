@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/pointed/cleave
-	name = "Cleave"
+	name = "Разрезание"
 	desc = "Вызывает сильное кровотечение у цели и близежащих к ней."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"

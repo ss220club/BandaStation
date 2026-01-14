@@ -1,6 +1,6 @@
 // Given to heretic monsters.
 /datum/action/cooldown/spell/emp/eldritch
-	name = "Energetic Pulse"
+	name = "Потусторонний Импульс"
 	desc = "Заклинание, которое вызывает вокруг вас сильное ЭМИ, выводящее из строя электронику."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"

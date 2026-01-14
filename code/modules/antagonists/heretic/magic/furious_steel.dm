@@ -1,8 +1,8 @@
 /datum/action/cooldown/spell/pointed/projectile/furious_steel
-	name = "Furious Steel"
-	desc = "Summon three silver blades which orbit you. \
-		While orbiting you, these blades will protect you from attacks, but will be consumed on use. \
-		Additionally, you can click to fire the blades at a target, dealing damage and causing bleeding."
+	name = "Ярость Клинков"
+	desc = "Призывает три серебрянных лезвия, кружащщих вокруг вас. \
+		Во время вращения, клинки защищают вас от входящего урона, расходуясь при каждом блокировании. \
+		Дополнительно, вы можете по щелчку, направить клинки в выбранную цель, нанося урон и вызывая у неё кровотечение при попадпнии."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'

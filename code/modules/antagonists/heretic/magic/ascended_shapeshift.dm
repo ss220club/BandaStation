@@ -1,6 +1,6 @@
 // Given to ascended knock heretics, is a form of shapeshift that can turn into all 4 common heretic summons, and is not limited to 1 selection.
 /datum/action/cooldown/spell/shapeshift/eldritch/ascension
-	name = "Ascended Shapechange"
+	name = "Высшее Обращение"
 	desc = "Позволяет принять форму другого мистического существа, получая все его способности. \
 		Вы можете менять формы в любой момент, а если форма умирает, то вы продолжаете жить."
 	cooldown_time = 20 SECONDS
