@@ -76,8 +76,8 @@
 	if ((HAS_TRAIT(user, TRAIT_CLUMSY) || HAS_TRAIT(user, TRAIT_DUMB)) && prob(50))
 		var/turf/scan_turf = get_turf(user)
 		user.visible_message(
-			span_warning("[user] анализирует жизненные показатели [scan_turf]!"),
-			span_notice("Вы глупо пытаетесь проанализировать жизненные показатели [scan_turf]!"),
+			span_warning("[user.declent_ru(NOMINATIVE)] анализирует жизненные показатели [scan_turf.declent_ru(GENITIVE)]!"),
+			span_notice("Вы глупо пытаетесь проанализировать жизненные показатели [scan_turf.declent_ru(GENITIVE)]!"),
 		)
 
 		var/floor_text = "<span class='info'>Анализ результатов для <b>[scan_turf]</b> ([station_time_timestamp()]):</span><br>"
