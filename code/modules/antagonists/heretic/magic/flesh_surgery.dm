@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/touch/flesh_surgery
-	name = "Хирургия Плоти"
+	name = "Хирургия плоти"
 	desc = "Заклинание прикосновения, которое позволяет вам либо собрать, либо восстановить плоть цели. \
 		Нажав левой кнопкой мыши, можно извлечь органы жертвы, не прибегая к хирургическому вмешательству или расчленению. \
 		Вы также можете подобрать свободный орган и вставить его в свою жертву. \
@@ -112,10 +112,10 @@
 /// If cast on an organ with left-click, we'll try to grab it.
 /datum/action/cooldown/spell/touch/flesh_surgery/proc/grab_organ(obj/item/melee/touch_attack/hand, obj/item/organ/to_grab, mob/living/carbon/caster)
 	if(held_organ)
-		hand.balloon_alert(caster, "already holding organ!")
+		hand.balloon_alert(caster, "уже держу орган!")
 		return ITEM_INTERACT_FAILURE
 	if(to_grab.organ_flags & ORGAN_ROBOTIC && !allow_cyber_organs)
-		hand.balloon_alert(caster, "cybernetic organs not allowed!")
+		hand.balloon_alert(caster, "кибернетичесские органы недопустимы!")
 		return ITEM_INTERACT_FAILURE
 	if(!caster.transferItemToLoc(to_grab, hand))
 		hand.balloon_alert(caster, "couldn't grab organ!")
@@ -151,7 +151,7 @@
 /// If cast on an organ with right-click, we'll restore its health and even un-fail it.
 /datum/action/cooldown/spell/touch/flesh_surgery/proc/heal_organ(obj/item/melee/touch_attack/hand, obj/item/organ/to_heal, mob/living/carbon/caster)
 	if(held_organ)
-		hand.balloon_alert(caster, "drop held organ first!")
+		hand.balloon_alert(caster, "сначала бросьте удерживаемый орган!")
 		return FALSE
 	if(to_heal.damage == 0)
 		to_heal.balloon_alert(caster, "уже в хорошем состоянии!")
@@ -289,7 +289,7 @@
 
 	var/zone_organ_goes_in = inserted_organ.zone
 	if(!victim.get_bodypart(deprecise_zone(zone_organ_goes_in)))
-		hand.balloon_alert(caster, "nowhere for organ to go!")
+		hand.balloon_alert(caster, "нет места для органа!")
 		return FALSE
 
 	var/slot_organ_goes_in = inserted_organ.slot
@@ -312,9 +312,9 @@
 
 	if(using_on_self && replacing_with_failing)
 		var/are_you_sure = tgui_alert(caster,
-			"Are you sure you want to replace your [organ_victim_already_has.name] with a non-functional [inserted_organ.name]?",
-			"Are you sure?",
-			list("Yes", "No"))
+			"Вы уверены что хотите заменить [organ_victim_already_has.name] непригодным [inserted_organ.name]?",
+			"Вы точно уверены?",
+			list("Да", "Нет"))
 		if(!are_you_sure)
 			return FALSE
 
@@ -323,20 +323,20 @@
 
 	if(using_on_self)
 		caster.visible_message(
-			span_danger("[caster]'s hand glows a brilliant red as [caster.p_they()] begin[caster.p_es()] forcing [inserted_organ] into [caster.p_their()] [zone_organ_goes_in]!!"),
-			span_userdanger("You begin forcing [inserted_organ] into your [zone_organ_goes_in]!")
+			span_danger("[caster] рука светилась ярко красным, когда [caster.p_they()] начал [caster.p_es()] засовыва [inserted_organ] в [caster.p_their()] [zone_organ_goes_in]!!"),
+			span_userdanger("В с силой вводите [inserted_organ] в ваш [zone_organ_goes_in]!")
 		)
 	else
 		caster.visible_message(
-			span_danger("[caster]'s hand glows a brilliant red as [caster.p_they()] begin[caster.p_es()] forcing [inserted_organ] into [victim]'s [zone_organ_goes_in]!!"),
-			span_notice("You begin forcing [inserted_organ] into [victim]'s [zone_organ_goes_in].")
+			span_danger("Рука [caster] hзагорается ярко красным, когда [caster.p_they()] начинает [caster.p_es()] принуждая [inserted_organ] попапсть в [victim] [zone_organ_goes_in]!!"),
+			span_notice("Вы начинаете с силой вводить [inserted_organ] в [victim] [zone_organ_goes_in].")
 		)
 
 	victim.balloon_alert(caster, "inserting [inserted_organ]...")
 	playsound(victim, 'sound/items/weapons/slice.ogg', 50, TRUE)
 	victim.add_atom_colour(COLOR_DARK_RED, TEMPORARY_COLOUR_PRIORITY)
 	if(!do_after(caster, time_it_takes, victim, extra_checks = CALLBACK(src, PROC_REF(insertion_checks), inserted_organ, hand, victim, caster)))
-		victim.balloon_alert(caster, "interrupted!")
+		victim.balloon_alert(caster, "прервано!")
 		victim.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, COLOR_DARK_RED)
 		return FALSE
 
@@ -344,13 +344,13 @@
 
 	if(using_on_self)
 		caster.visible_message(
-			span_danger("[caster] crams [inserted_organ] into [caster.p_their()] own [zone_organ_goes_in][organ_victim_already_has ? ", forcing out [caster.p_their()] [organ_victim_already_has.name]": ""]!"),
-			span_userdanger("You finish inserting [inserted_organ] into your [zone_organ_goes_in][organ_victim_already_has ? ", forcing out your [organ_victim_already_has]" : ""]!")
+			span_danger("[caster] запихивает [inserted_organ] в [caster.p_their()] собственный [zone_organ_goes_in][organ_victim_already_has ? ", вытесняя [caster.p_their()] [organ_victim_already_has.name]": ""]!"),
+			span_userdanger("Вы заканчиваете вставлять [inserted_organ] в ваш [zone_organ_goes_in][organ_victim_already_has ? ", вытесняя ваш [organ_victim_already_has]" : ""]!")
 		)
 	else
 		caster.visible_message(
-			span_danger("[caster] crams [inserted_organ] into [victim]'s [zone_organ_goes_in][organ_victim_already_has ? ", forcing out [victim.p_their()] [organ_victim_already_has.name]": ""]!"),
-			span_notice("You finish inserting [inserted_organ] into [victim]'s [zone_organ_goes_in][organ_victim_already_has ? ", forcing out [victim.p_their()] [organ_victim_already_has.name]": ""].")
+			span_danger("[caster] запихивает [inserted_organ] в [victim] [zone_organ_goes_in][organ_victim_already_has ? ", вытесняя [victim.p_their()] [organ_victim_already_has.name]": ""]!"),
+			span_notice("Вы заканчиваете вставлять [inserted_organ] в [victim] [zone_organ_goes_in][organ_victim_already_has ? ", вытесняя [victim.p_their()] [organ_victim_already_has.name]": ""].")
 		)
 
 	unregister_held_organ(inserted_organ)
@@ -390,8 +390,8 @@
 	return TRUE
 
 /obj/item/melee/touch_attack/flesh_surgery
-	name = "\improper knit flesh"
-	desc = "Let's go practice medicine."
+	name = "\improper Хирургия плоти"
+	desc = "А ну-ка, что это там у тебя внутри?."
 	icon = 'icons/obj/weapons/hand.dmi'
 	icon_state = "disintegrate"
 	inhand_icon_state = "disintegrate"

@@ -1,6 +1,6 @@
 // Shoots out in a wave-like, what rust heretics themselves get
 /datum/action/cooldown/spell/cone/staggered/entropic_plume
-	name = "Шлейф Энтропии"
+	name = "Шлейф энтропии"
 	desc = "Извергает дезориентирующую струю, которая заставляет врагов ударять друг друга, \
 		ненадолго ослепляет их (увеличивается с дальностью) и отравляет (уменьшается с дальностью). \
 		Также распространяет ржавчину на пути струи."
@@ -36,7 +36,7 @@
 	victim.apply_status_effect(/datum/status_effect/forced_combat/amok)
 	victim.apply_status_effect(/datum/status_effect/cloudstruck, 5 SECONDS)
 	victim.adjust_disgust(100)
-	to_chat(victim, span_boldwarning("You feel filled with a rage that is not your own!"))
+	to_chat(victim, span_boldwarning("Вы чувствуете, что вас переполняет взявшаяся из ниоткуда ярость!"))
 
 /datum/action/cooldown/spell/cone/staggered/entropic_plume/calculate_cone_shape(current_level)
 	// At the first level (that isn't level 1) we will be small

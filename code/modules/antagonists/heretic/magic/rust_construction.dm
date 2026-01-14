@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/pointed/rust_construction
-	name = "Возведение Ржавчины"
+	name = "Возведение ржавчины"
 	desc = "Превращает ржавый пол в полноценную стену из ржавчины. Создание стены под мобом нанесет ему вред."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"

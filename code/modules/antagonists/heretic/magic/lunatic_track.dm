@@ -1,5 +1,5 @@
 /datum/action/cooldown/lunatic_track
-	name = "Эхо Лунного Света"
+	name = "Эхо Лунного света"
 	desc = "Найдите своего Шпрехшталмейстера."
 	check_flags = AB_CHECK_CONSCIOUS
 	background_icon_state = "bg_heretic"

@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/pointed/crimson_cleave
-	name = "Багровый Разрез"
+	name = "Багровый разрез"
 	desc = "Направленное заклинание, исцеляющее вас, нанося урон врагу. \
 		Это также избавит вас от всех ран."
 	background_icon_state = "bg_heretic"
@@ -42,14 +42,14 @@
 			continue
 		if(victim.can_block_magic(antimagic_flags))
 			victim.visible_message(
-				span_danger("[victim]'s flashes in a firey glow, but repels the blaze!"),
-				span_danger("Your body begins to flash a firey glow, but you are protected!!")
+				span_danger("[victim] вспыхивает багровым огнем, но тело отторгает пламя!"),
+				span_danger("Ваше тело начинает пылать, но вы защищены!!")
 			)
 			continue
 
 		victim.visible_message(
-			span_danger("[victim]'s veins are shredded from within as an unholy blaze erupts from [victim.p_their()] blood!"),
-			span_danger("Your veins burst from within and unholy flame erupts from your blood!")
+			span_danger("Вены [victim] разрываются изнутри, когда нечестивое пламя вырывается из крови [victim.p_their()]!"),
+			span_danger("Твои вены разрываются изнутри, и нечестивое пламя вырывается вместе с кровью из открывшихся ран!")
 		)
 
 		victim.apply_damage(15, BRUTE, wound_bonus = CANT_WOUND)

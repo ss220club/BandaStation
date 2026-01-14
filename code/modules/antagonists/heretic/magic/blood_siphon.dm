@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/pointed/blood_siphon
-	name = "Отток Крови"
+	name = "Отток крови"
 	desc = "Заклинание с выбором цели, которое исцеляет ваши раны, нанося урон врагу. \
 		Имеет шанс передать раны между вами и врагом."
 	background_icon_state = "bg_heretic"

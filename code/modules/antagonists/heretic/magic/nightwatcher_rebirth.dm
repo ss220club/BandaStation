@@ -51,7 +51,7 @@
 
 	//This is essentially a death mark, use this to finish your opponent quicker.
 	if(CAN_SUCCUMB(victim))
-		victim.investigate_log("has been executed by fiery rebirth.", INVESTIGATE_DEATHS)
+		victim.investigate_log("был казнен огненным возрождением", INVESTIGATE_DEATHS)
 		victim.death()
 	victim.apply_damage(20, BURN)
 	victim.extinguish_mob()

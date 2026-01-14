@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/pointed/projectile/moon_parade
-	name = "Лунный Парад"
+	name = "Лунный парад"
 	desc = "Начинает парад, заставляя всех на его пути присоединиться к нему и страдать от галлюцинаций."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"

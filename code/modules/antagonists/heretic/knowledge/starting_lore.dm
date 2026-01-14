@@ -44,7 +44,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 	INVOKE_ASYNC(cast_on, TYPE_PROC_REF(/atom/movable, say), message = "R'CH T'H F'SH!", forced = "fishing rod infusion invocation")
 	playsound(cast_on, /datum/action/cooldown/spell/touch/mansus_grasp::sound, 15)
-	cast_on.visible_message(span_notice("[cast_on] snaps [cast_on.p_their()] fingers next to [held_rod], covering it in a burst of purple flames!"))
+	cast_on.visible_message(span_notice("[cast_on] щйлкает [cast_on.p_their()] пальцами рядом с [held_rod], окутывая его вспышкой фиолетового пламени!"))
 
 	ADD_TRAIT(held_rod, TRAIT_ROD_MANSUS_INFUSED, REF(held_rod))
 	held_rod.difficulty_modifier -= 20
@@ -65,7 +65,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * Also includes a ritual to turn their heart into a living heart.
  */
 /datum/heretic_knowledge/living_heart
-	name = "Живое Сердце"
+	name = "Живое сердце"
 	desc = "Дарует вам «Живое сердце», позволяющее отслеживать жертвенные цели. \
 		Если вы потеряете сердце, вы можете трансмутировать мак и лужу крови, \
 		чтобы пробудить свое сердце в Живое сердце. Если ваше сердце кибернетическое, \
@@ -178,8 +178,8 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * They require a focus to cast advanced spells.
  */
 /datum/heretic_knowledge/amber_focus
-	name = "Янтарный Фокусировщик"
-	desc = "Позволяет трансмутировать лист стекла и пару глаз, чтобы создать Янтарную Фокусировку. \
+	name = "Янтарный фокусировщик"
+	desc = "Позволяет трансмутировать лист стекла и пару глаз, чтобы создать Янтарную фокусировку. \
 		Для того чтобы произносить более сложные заклинания, необходимо носить фокусировку."
 	required_atoms = list(
 		/obj/item/organ/eyes = 1,
@@ -275,7 +275,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		stack_trace("Somehow, no book in codex cicatrix selected atoms! [english_list(selected_atoms)]")
 	playsound(body, 'sound/items/poster/poster_ripped.ogg', 100, TRUE)
 	body.do_jitter_animation()
-	body.visible_message(span_danger("An awful ripping sound is heard as [ripped_thing]'s [exterior_text] is ripped straight out, wrapping around [le_book || "the book"], turning into an eldritch shade of blue!"))
+	body.visible_message(span_danger("Ужасный рвущийся звук раздается, когда [ripped_thing]'s [exterior_text] вырывается наружу, обволакивая всё вокруг [le_book || "the book"], приобретая жуткий, потусторонний оттенок!"))
 	return ..()
 
 /datum/heretic_knowledge/feast_of_owls
@@ -293,8 +293,8 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	return !invoker.feast_of_owls
 
 /datum/heretic_knowledge/feast_of_owls/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
-	var/alert = tgui_alert(user,"Do you really want to forsake your ascension? This action cannot be reverted.", "Feast of Owls", list("Yes I'm sure", "No"), 30 SECONDS)
-	if(alert != "Yes I'm sure" || QDELETED(user) || QDELETED(src) || get_dist(user, loc) > 2)
+	var/alert = tgui_alert(user,"Вы действительно хотите отказаться от своего вознесения? Это действие невозможно отменить.", "Пир для Сов", list("Да, я уверен", "Нет"), 30 SECONDS)
+	if(alert != "Да, я уверен" || QDELETED(user) || QDELETED(src) || get_dist(user, loc) > 2)
 		return FALSE
 	var/datum/antagonist/heretic/heretic_datum = GET_HERETIC(user)
 	if(QDELETED(heretic_datum) || heretic_datum.feast_of_owls)
@@ -312,13 +312,13 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		playsound(loc, 'sound/items/eatfood.ogg', 100, TRUE)
 		heretic_datum.adjust_knowledge_points(1)
 
-		to_chat(user, span_danger("You feel something invisible tearing away at your very essence!"))
+		to_chat(user, span_danger("Вы чувствуете, как что-то невидимое разрушает саму вашу сущность!"))
 		user.do_jitter_animation()
 		sleep(1 SECONDS)
 		if(QDELETED(user) || QDELETED(heretic_datum))
 			return FALSE
 
-	to_chat(user, span_danger(span_big("Your ambition is ravaged, but something powerful remains in its wake...")))
+	to_chat(user, span_danger(span_big("Ваши амбиции разрушены, но на их месте пробуждается нечто могущественное...")))
 	var/drain_message = pick_list(HERETIC_INFLUENCE_FILE, "drain_message")
 	to_chat(user, span_hypnophrase(span_big("[drain_message]")))
 	return .
@@ -352,7 +352,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		selected_atoms += used_id
 		return TRUE
 
-	user.balloon_alert(user, "ritual failed, no ID lacking access!")
+	user.balloon_alert(user, "Ритуал провален, ID не имеет доступа!")
 	return FALSE
 
 /datum/heretic_knowledge/bookworm/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)

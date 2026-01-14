@@ -1,6 +1,6 @@
 // Currently unused
 /datum/action/cooldown/spell/touch/mad_touch
-	name = "Касание Безумия"
+	name = "Касание безумия"
 	desc = "Заклинание косания, которая лишает врага рассудка и сбивает его с ног."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"

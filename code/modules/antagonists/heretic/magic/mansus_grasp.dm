@@ -58,9 +58,9 @@
 		carbon_hit.mob_light(range = 1.5, power = 2.5, color = COLOR_CULT_RED, duration = 0.5 SECONDS)
 		playsound(carbon_hit, 'sound/effects/magic/curse.ogg', 50, TRUE)
 
-		to_chat(caster, span_warning("An unholy force intervenes as you grasp [carbon_hit], absorbing most of the effects!"))
-		to_chat(carbon_hit, span_warning("As [caster] grasps you with eldritch forces, your blood magic absorbs most of the effects!"))
-		carbon_hit.balloon_alert_to_viewers("absorbed!")
+		to_chat(caster, span_warning("Нечестивая сила вмешивается, когда вы наносите [carbon_hit], поглощая большую часть эффекта!"))
+		to_chat(carbon_hit, span_warning("Когда [caster] хватает вас потусторонними силами, ваша кровавая магия поглощает большую часть эффектов!"))
+		carbon_hit.balloon_alert_to_viewers("поглощено!")
 		return TRUE
 
 	carbon_hit.adjust_timed_status_effect(4 SECONDS, /datum/status_effect/speech/slurring/heretic)
@@ -79,7 +79,7 @@
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/melee/touch_attack/mansus_fist
-	name = "Mansus Grasp"
+	name = "Удар Мансуса"
 	desc = "Зловещая аура, искажающая течение реальности вокруг себя. \
 		Вызывает сбивание с ног, незначительные ушибы и большой урон стамине. \
 		Он приобретает дополнительные полезные эффекты по мере того, как вы расширяете свои знания Мансуса."

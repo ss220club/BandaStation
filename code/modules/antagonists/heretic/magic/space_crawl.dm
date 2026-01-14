@@ -6,7 +6,7 @@
  * Lets the caster enter and exit tiles of space or misc turfs.
  */
 /datum/action/cooldown/spell/jaunt/space_crawl
-	name = "Космичесская Фаза"
+	name = "Космичесская фаза"
 	desc = "Позволяет вам появляться и исчезать, находясь в космосе или зоне с низким давлением."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"

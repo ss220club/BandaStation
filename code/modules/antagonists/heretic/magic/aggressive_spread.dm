@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/aoe/rust_conversion
-	name = "Агрессивное Распространение"
+	name = "Агрессивное распространение"
 	desc = "Распространяет ржавчину на соседние поверхности."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
