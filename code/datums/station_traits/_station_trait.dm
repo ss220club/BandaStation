@@ -35,6 +35,8 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 	var/list/lobby_buttons = list()
 	/// The ID that we look for in dynamic.json. Not synced with 'name' because I can already see this go wrong
 	var/dynamic_threat_id
+	// BANDASTATION ADDITION: Public traits in titles screen
+	var/public_in_lobby = FALSE
 
 /datum/station_trait/New()
 	. = ..()
