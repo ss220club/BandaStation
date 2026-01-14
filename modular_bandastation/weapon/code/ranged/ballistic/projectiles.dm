@@ -697,3 +697,100 @@
 	light_power = 1
 	light_color = LIGHT_COLOR_INTENSE_RED
 	leaves_fire_trail = FALSE
+
+// MARK: .980 Grenades
+#define GRENADE_SMOKE_RANGE 0.75
+/obj/projectile/bullet/c980grenade
+	name = ".980 Tydhouer practice grenade"
+	damage = 20
+	stamina = 30
+	range = 14
+	speed = 1
+	sharpness = NONE
+
+/obj/projectile/bullet/c980grenade/on_hit(atom/target, blocked = 0, pierce_hit)
+	..()
+	fuse_activation(target)
+	return BULLET_ACT_HIT
+
+/obj/projectile/bullet/c980grenade/on_range()
+	fuse_activation(get_turf(src))
+	return ..()
+
+/// Generic proc that is called when the projectile should 'detonate', being either on impact or when the range runs out
+/obj/projectile/bullet/c980grenade/proc/fuse_activation(atom/target)
+	playsound(src, 'modular_bandastation/weapon/sound/ranged/grenade_burst.ogg', 50, TRUE, -3)
+	do_sparks(3, FALSE, src)
+
+/obj/projectile/bullet/c980grenade/shrapnel
+	name = ".980 Tydhouer shrapnel grenade"
+	/// What type of casing should we put inside the bullet to act as shrapnel later
+	var/casing_to_spawn = /obj/item/grenade/c980payload
+
+/obj/projectile/bullet/c980grenade/shrapnel/fuse_activation(atom/target)
+	var/obj/item/grenade/shrapnel_maker = new casing_to_spawn(get_turf(target))
+	shrapnel_maker.detonate()
+	playsound(src, 'modular_bandastation/weapon/sound/ranged/grenade_burst.ogg', 50, TRUE, -3)
+	qdel(shrapnel_maker)
+
+/obj/item/grenade/c980payload
+	shrapnel_type = /obj/projectile/bullet/shrapnel/shorter_range
+	shrapnel_radius = 3
+	ex_dev = 0
+	ex_heavy = 0
+	ex_light = 0
+	ex_flame = 0
+
+/obj/projectile/bullet/shrapnel/shorter_range
+	range = 2
+
+/obj/projectile/bullet/c980grenade/shrapnel/stingball
+	name = ".980 Tydhouer stingball grenade"
+	casing_to_spawn = /obj/item/grenade/c980payload/stingball
+
+/obj/item/grenade/c980payload/stingball
+	shrapnel_type = /obj/projectile/bullet/pellet/stingball/shorter_range
+	shrapnel_radius = 3
+
+/obj/projectile/bullet/pellet/stingball/shorter_range
+	range = 10
+
+/obj/projectile/bullet/c980grenade/smoke
+	name = ".980 Tydhouer smoke grenade"
+
+/obj/projectile/bullet/c980grenade/smoke/fuse_activation(atom/target)
+	playsound(src, 'modular_bandastation/weapon/sound/ranged/grenade_burst.ogg', 50, TRUE, -3)
+	playsound(src, 'sound/effects/smoke.ogg', 50, TRUE, -3)
+	var/datum/effect_system/fluid_spread/smoke/bad/smoke = new
+	smoke.set_up(GRENADE_SMOKE_RANGE, holder = src, location = src)
+	smoke.start()
+
+/obj/projectile/bullet/c980grenade/shrapnel/phosphor
+	name = ".980 Tydhouer phosphor grenade"
+	casing_to_spawn = /obj/item/grenade/c980payload/phosphor
+
+/obj/projectile/bullet/c980grenade/shrapnel/phosphor/fuse_activation(atom/target)
+	. = ..()
+	playsound(src, 'sound/effects/smoke.ogg', 50, TRUE, -3)
+	var/datum/effect_system/fluid_spread/smoke/quick/smoke = new
+	smoke.set_up(GRENADE_SMOKE_RANGE, holder = src, location = src)
+	smoke.start()
+
+/obj/item/grenade/c980payload/phosphor
+	shrapnel_type = /obj/projectile/bullet/incendiary/fire/backblast/short_range
+
+/obj/projectile/bullet/incendiary/fire/backblast/short_range
+	range = 2
+
+/obj/projectile/bullet/c980grenade/riot
+	name = ".980 Tydhouer tear gas grenade"
+
+/obj/projectile/bullet/c980grenade/riot/fuse_activation(atom/target)
+	playsound(src, 'modular_bandastation/weapon/sound/ranged/grenade_burst.ogg', 50, TRUE, -3)
+	playsound(src, 'sound/effects/smoke.ogg', 50, TRUE, -3)
+	var/datum/effect_system/fluid_spread/smoke/chem/smoke = new()
+	smoke.chemholder.add_reagent(/datum/reagent/consumable/condensedcapsaicin, 10)
+	smoke.set_up(GRENADE_SMOKE_RANGE, holder = src, location = src)
+	smoke.start()
+
+#undef GRENADE_SMOKE_RANGE

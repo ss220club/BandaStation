@@ -494,3 +494,50 @@
 	desc = "Зажигательный пистолетный безгильзовый патрон калибра .585 Sol."
 	projectile_type = /obj/projectile/bullet/incendiary/c585sol
 	icon_state = "585sol_ic"
+
+// MARK: .980 GRENADES
+/obj/item/ammo_casing/c980grenade
+	name = ".980 Tydhouer practice grenade"
+	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Practice shells disintegrate into harmless sparks."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "980_solid"
+	caliber = CALIBER_980TYDHOUER
+	projectile_type = /obj/projectile/bullet/c980grenade
+	harmful = FALSE
+
+/obj/item/ammo_casing/c980grenade/fire_casing(atom/target, mob/living/user, params, distro, quiet, zone_override, spread, atom/fired_from)
+	var/obj/item/gun/ballistic/automatic/kiboko/firing_launcher = fired_from
+	if(istype(firing_launcher))
+		loaded_projectile.range = firing_launcher.target_range
+	. = ..()
+
+/obj/item/ammo_casing/c980grenade/smoke
+	name = ".980 Tydhouer smoke grenade"
+	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Bursts into a laser-weakening smoke cloud."
+	icon_state = "980_smoke"
+	projectile_type = /obj/projectile/bullet/c980grenade/smoke
+
+/obj/item/ammo_casing/c980grenade/shrapnel
+	name = ".980 Tydhouer shrapnel grenade"
+	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Explodes into shrapnel on detonation."
+	icon_state = "980_explosive"
+	projectile_type = /obj/projectile/bullet/c980grenade/shrapnel
+	harmful = TRUE
+
+/obj/item/ammo_casing/c980grenade/shrapnel/stingball
+	name = ".980 Tydhouer stingball grenade"
+	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Explodes into stingballs on detonation."
+	icon_state = "980_stingball"
+	projectile_type = /obj/projectile/bullet/c980grenade/shrapnel/stingball
+
+/obj/item/ammo_casing/c980grenade/shrapnel/phosphor
+	name = ".980 Tydhouer phosphor grenade"
+	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Explodes into smoke and flames on detonation."
+	icon_state = "980_gas_alternate"
+	projectile_type = /obj/projectile/bullet/c980grenade/shrapnel/phosphor
+
+/obj/item/ammo_casing/c980grenade/riot
+	name = ".980 Tydhouer tear gas grenade"
+	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Bursts into a tear gas cloud."
+	icon_state = "980_gas"
+	projectile_type = /obj/projectile/bullet/c980grenade/riot

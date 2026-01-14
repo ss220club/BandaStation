@@ -1371,3 +1371,58 @@
 
 /obj/item/ammo_box/magazine/c585sol/spawns_empty
 	start_empty = TRUE
+
+// MARK: .980 TSF GL
+/obj/item/ammo_box/magazine/c980_grenade
+	name = "Kiboko grenade box (.980 Tydhouer)"
+	desc = "Магазин стандартного размера для гранат .980 \"Тайдхойер\", вмещает четыре снаряда."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "granata_standard"
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	w_class = WEIGHT_CLASS_SMALL
+	ammo_type = /obj/item/ammo_casing/c980grenade
+	caliber = CALIBER_980TYDHOUER
+	max_ammo = 4
+
+/obj/item/ammo_box/magazine/c980_grenade/starts_empty
+	start_empty = TRUE
+
+/obj/item/ammo_box/magazine/c980_grenade/phosphor
+	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/phosphor
+
+/obj/item/ammo_box/magazine/c980_grenade/shrapnel
+	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel
+
+/obj/item/ammo_box/magazine/c980_grenade/shrapnel/stingball
+	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/stingball
+
+/obj/item/ammo_box/magazine/c980_grenade/smoke
+	ammo_type = /obj/item/ammo_casing/c980grenade/smoke
+
+/obj/item/ammo_box/magazine/c980_grenade/gas
+	ammo_type = /obj/item/ammo_casing/c980grenade/riot
+
+/obj/item/ammo_box/magazine/c980_grenade/drum
+	name = "Kiboko grenade drum (.980 Tydhouer)"
+	desc = "Барабан для гранат калибра .980 \"Тайдхойер\", вмещает шесть снарядов."
+	icon_state = "granata_drum"
+	w_class = WEIGHT_CLASS_NORMAL
+	max_ammo = 6
+
+/obj/item/ammo_box/magazine/c980_grenade/drum/starts_empty
+	start_empty = TRUE
+
+/obj/item/ammo_box/magazine/c980_grenade/drum/phosphor
+	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/phosphor
+
+/obj/item/ammo_box/magazine/c980_grenade/drum/shrapnel/stingball
+	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/stingball
+
+/obj/item/ammo_box/magazine/c980_grenade/drum/shrapnel
+	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel
+
+/obj/item/ammo_box/magazine/c980_grenade/drum/smoke
+	ammo_type = /obj/item/ammo_casing/c980grenade/smoke
+
+/obj/item/ammo_box/magazine/c980_grenade/drum/gas
+	ammo_type = /obj/item/ammo_casing/c980grenade/riot

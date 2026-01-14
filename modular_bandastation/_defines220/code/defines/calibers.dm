@@ -9,3 +9,4 @@
 #define CALIBER_127x108mm "12.7x108mm"
 #define CALIBER_456MAG ".456 Magnum"
 #define CALIBER_585SOL ".585 Sol"
+#define CALIBER_980TYDHOUER ".980 Tydhouer"

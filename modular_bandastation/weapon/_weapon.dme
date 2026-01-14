@@ -50,9 +50,11 @@
 #include "code/ranged/ballistic/tsf/pistols/skild.dm"
 #include "code/ranged/ballistic/tsf/smgs/sindano.dm"
 #include "code/ranged/ballistic/tsf/smgs/bogseo.dm"
+#include "code/ranged/ballistic/tsf/smgs/vector.dm"
 #include "code/ranged/ballistic/tsf/rifles/carwo.dm"
 #include "code/ranged/ballistic/tsf/special/renoster.dm"
 #include "code/ranged/ballistic/tsf/special/minigun.dm"
+#include "code/ranged/ballistic/tsf/special/kiboko.dm"
 
 // USSP
 #include "code/ranged/ballistic/ussp/pistols/bobr.dm"
