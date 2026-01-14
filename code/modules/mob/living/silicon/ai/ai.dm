@@ -1353,7 +1353,7 @@
 			return
 
 		if(A.welded)
-			to_chat(user, span_warning("Ошибка: шлюз[A] не поддается."))
+			to_chat(user, span_warning("Ошибка: шлюз [A] не поддается."))
 			return
 
 		if(A.wires && A.wires.is_cut(WIRE_AI))
