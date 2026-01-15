@@ -1,4 +1,0 @@
-author: "ThaumicNik"
-delete-after: True
-changes:
-  - bugfix: "Трубы пламбинга более не отсоединяются от машин сами по себе."
