@@ -315,7 +315,7 @@
 	var/mob/living/to_reset = bad_dog.resolve()
 
 	to_chat(owner, span_hierophant("Вы предлагаете [to_reset] изменить\ его личность..."))
-	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Хотите ли вы играть за [span_danger("[owner.real_name]'s")] [span_notice(to_reset.name)]?", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, alert_pic = to_reset, jump_target = owner, role_name_text = to_reset.name, amount_to_pick = 1)
+	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Хотите ли вы играть за [span_danger("[owner.real_name]")] [span_notice(to_reset.name)]?", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, alert_pic = to_reset, jump_target = owner, role_name_text = to_reset.name, amount_to_pick = 1)
 	if(isnull(chosen_one))
 		to_chat(owner, span_hierophant("Ваш запрос о смене [to_reset]'\s личноси судя по всему был отклонён... Похоже пока придётся мириться с этим."))
 		StartCooldown()

@@ -323,16 +323,16 @@
 
 	if(using_on_self)
 		caster.visible_message(
-			span_danger("[caster] рука светилась ярко красным, когда [caster.p_they()] начал [caster.p_es()] засовыва [inserted_organ] в [caster.p_their()] [zone_organ_goes_in]!!"),
+			span_danger("Рука [caster] светилась ярко красным, когда [caster.p_they()] начал [caster.p_es()] засовывать [inserted_organ] в [caster.p_their()] [zone_organ_goes_in]!!"),
 			span_userdanger("В с силой вводите [inserted_organ] в ваш [zone_organ_goes_in]!")
 		)
 	else
 		caster.visible_message(
-			span_danger("Рука [caster] hзагорается ярко красным, когда [caster.p_they()] начинает [caster.p_es()] принуждая [inserted_organ] попапсть в [victim] [zone_organ_goes_in]!!"),
-			span_notice("Вы начинаете с силой вводить [inserted_organ] в [victim] [zone_organ_goes_in].")
+			span_danger("Рука [caster] hзагорается ярко красным, когда [caster.p_they()] начинает [caster.p_es()] засовывать [inserted_organ] в [victim] [zone_organ_goes_in]!!"),
+			span_notice("Вы  с силой вводите [inserted_organ] в [victim] [zone_organ_goes_in].")
 		)
 
-	victim.balloon_alert(caster, "inserting [inserted_organ]...")
+	victim.balloon_alert(caster, "вставляет [inserted_organ]...")
 	playsound(victim, 'sound/items/weapons/slice.ogg', 50, TRUE)
 	victim.add_atom_colour(COLOR_DARK_RED, TEMPORARY_COLOUR_PRIORITY)
 	if(!do_after(caster, time_it_takes, victim, extra_checks = CALLBACK(src, PROC_REF(insertion_checks), inserted_organ, hand, victim, caster)))
@@ -391,7 +391,7 @@
 
 /obj/item/melee/touch_attack/flesh_surgery
 	name = "\improper Хирургия плоти"
-	desc = "А ну-ка, что это там у тебя внутри?."
+	desc = "Покажи, что это там у тебя внутри."
 	icon = 'icons/obj/weapons/hand.dmi'
 	icon_state = "disintegrate"
 	inhand_icon_state = "disintegrate"

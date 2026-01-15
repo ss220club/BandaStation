@@ -36,7 +36,7 @@
 	drafting_tier = 3
 
 /datum/heretic_knowledge/summon/ashy
-	name = "Пепельный Ритуал"
+	name = "Пепельный ритуал"
 	desc = "Позволяет трансмутировать костер и книгу для создания Духа Пепла. \
 		Духи Пепла обладают рывком на короткую дистанцию и способны дистанционно вызывать кровотечение у врагов. \
 		Также они могут, на некоторое время, создать вокруг себя кольцо огня. \
@@ -57,7 +57,7 @@
 #define RISEN_MAX_HEALTH 125
 
 /datum/heretic_knowledge/limited_amount/risen_corpse
-	name = "Разрушительный Ритуал"
+	name = "Разрушительный ритуал"
 	desc = "Позволяет трансмутировать труп с душой, пару латексных или нитриловых перчаток, \
 		и любой костюм, чтобы создать Разбитого восставшего. \
 		Разбитые восставшие это сильные гули с 125 здоровья, но не могут держать предметы, \
@@ -121,7 +121,7 @@
 /// Make [victim] into a shattered risen ghoul.
 /datum/heretic_knowledge/limited_amount/risen_corpse/proc/make_risen(mob/living/user, mob/living/carbon/human/victim)
 	user.log_message("Из тела [key_name(victim)] восстает упырь.", LOG_GAME)
-	victim.log_message("восстать упырём [key_name(user)].", LOG_VICTIM, log_globally = FALSE)
+	victim.log_message("Восстать упырём [key_name(user)].", LOG_VICTIM, log_globally = FALSE)
 	message_admins("[ADMIN_LOOKUPFLW(user)] создан упырь, [ADMIN_LOOKUPFLW(victim)].")
 
 	victim.apply_status_effect(

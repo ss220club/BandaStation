@@ -44,7 +44,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 	INVOKE_ASYNC(cast_on, TYPE_PROC_REF(/atom/movable, say), message = "R'CH T'H F'SH!", forced = "fishing rod infusion invocation")
 	playsound(cast_on, /datum/action/cooldown/spell/touch/mansus_grasp::sound, 15)
-	cast_on.visible_message(span_notice("[cast_on] щйлкает [cast_on.p_their()] пальцами рядом с [held_rod], окутывая его вспышкой фиолетового пламени!"))
+	cast_on.visible_message(span_notice("[cast_on] щёлкает [cast_on.p_their()] пальцами рядом с [held_rod], окутывая его вспышкой фиолетового пламени!"))
 
 	ADD_TRAIT(held_rod, TRAIT_ROD_MANSUS_INFUSED, REF(held_rod))
 	held_rod.difficulty_modifier -= 20
@@ -281,7 +281,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 /datum/heretic_knowledge/feast_of_owls
 	name = "Пир для Сов"
 	desc = "Позволяет вам пройти ритуал, который дает вам 5 очков знаний, но не дает возможности совершить вознесение. Это можно сделать только один раз и эффект нельзя отменить."
-	gain_text = "Под мягким сиянием безрассудсва скрывается зверь, крадущийся в ночи. Я выведу его на свет и позволю ему предстать предо мной. Он насытится моими амбициями и оставит после себя знания."
+	gain_text = "Под мягким сиянием безрассудсва скрывается Зверь, крадущийся в ночи. Я выведу его на свет и позволю ему предстать предо мной. Он насытится моими амбициями и оставит после себя знания."
 	is_starting_knowledge = TRUE
 	required_atoms = list()
 	research_tree_icon_path = 'icons/mob/actions/actions_animal.dmi'

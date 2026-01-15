@@ -42,7 +42,7 @@
 			continue
 		if(victim.can_block_magic(antimagic_flags))
 			victim.visible_message(
-				span_danger("[victim] вспыхивает багровым огнем, но тело отторгает пламя!"),
+				span_danger("[victim] вспыхивает багровым пламенем, но тело отторгает огонь!"),
 				span_danger("Ваше тело начинает пылать, но вы защищены!!")
 			)
 			continue
