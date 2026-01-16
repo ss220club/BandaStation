@@ -57,13 +57,15 @@
 			to_chat(usr, span_boldwarning("Ошибка настроек персонажа. Выберите предпочитаемую должность."))
 			return
 
-		var/list/allowed_species = CONFIG_GET(str_list/allowed_species)
-		var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
-		if(length(allowed_species) && !("[prefs_specie]" in allowed_species))
-			for(var/job_id in prefs_jobs)
-				if(job_id in job_restrictions)
-					to_chat(usr, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
-					return
+		var/ignore_restrictions = locate(/datum/station_trait/xenobureaucracy_error) in GLOB.lobby_station_traits
+		if(!ignore_restrictions)
+			var/list/allowed_species = CONFIG_GET(str_list/allowed_species)
+			var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
+			if(length(allowed_species) && !("[prefs_specie]" in allowed_species))
+				for(var/job_id in prefs_jobs)
+					if(job_id in job_restrictions)
+						to_chat(usr, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
+						return
 
 		ready = PLAYER_READY_TO_PLAY
 		SStitle.title_output(client, TRUE, "toggleReady")
