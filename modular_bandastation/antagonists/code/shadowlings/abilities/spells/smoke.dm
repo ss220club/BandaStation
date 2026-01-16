@@ -106,7 +106,7 @@
 	channel_time = 0
 	min_req = 1
 	max_req = 5
-	required_thralls = 20
+	required_thralls = 30
 	var/smoke_radius = 4
 	var/smoke_ticks = 6
 	var/heal_amount = 10

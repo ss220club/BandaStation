@@ -73,6 +73,7 @@
 	to_chat(H, span_notice("Вы ощущаете голоса роя в своей голове..."))
 	grant_sync_action(H)
 	grant_comm_action(H)
+	grant_night_vision(H)
 	update_objective_explanations()
 
 /datum/team/shadow_hive/proc/leave_member(mob/living/carbon/human/H)
@@ -148,6 +149,14 @@
 	for(var/datum/action/cooldown/shadowling/commune/existing in H.actions)
 		return
 	var/datum/action/cooldown/shadowling/commune/A = new
+	A.Grant(H)
+
+/datum/team/shadow_hive/proc/grant_night_vision(mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	for(var/datum/action/cooldown/shadowling/toggle_night_vision/existing in H.actions)
+		return
+	var/datum/action/cooldown/shadowling/toggle_night_vision/A = new
 	A.Grant(H)
 
 /datum/team/shadow_hive/proc/get_ling_role(mob/living/carbon/human/H)

@@ -1,5 +1,5 @@
 /datum/movespeed_modifier/shadowling/phase
-	multiplicative_slowdown = -0.9
+	multiplicative_slowdown = -0.6
 	priority = 30
 	movetypes = GROUND
 

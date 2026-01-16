@@ -74,7 +74,7 @@
 	var/reagent_type = /datum/reagent/consumable/frostoil
 	min_req = 1
 	max_req = 10
-	required_thralls = 50
+	required_thralls = 20
 
 /datum/action/cooldown/shadowling/cold_wave/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/list/targets = collect_cone_targets(H)
