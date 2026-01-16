@@ -80,7 +80,7 @@
 			span_notice("Вы глупо пытаетесь проанализировать жизненные показатели [scan_turf.declent_ru(GENITIVE)]!"),
 		)
 
-		var/floor_text = "<span class='info'>Анализ результатов для <b>[scan_turf]</b> ([station_time_timestamp()]):</span><br>"
+		var/floor_text = "<span class='info'>Анализ результатов для <b>[scan_turf.declent_ru(GENITIVE)]</b> ([station_time_timestamp()]):</span><br>"
 		floor_text += "<span class='info ml-1'>Общее состояние: <i>Неизвестно</i></span><br>"
 		floor_text += "<span class='alert ml-1'>У субъекта отсутствует мозг.</span><br>"
 		floor_text += "<span class='info ml-1'>Температура тела: [scan_turf?.return_air()?.return_temperature() || "???"]</span><br>"
@@ -470,7 +470,7 @@
 /obj/item/healthanalyzer/click_ctrl_shift(mob/user)
 	. = ..()
 	if(!LAZYLEN(last_scan_text))
-		balloon_alert(user, "не анализируется!")
+		balloon_alert(user, "нет анализизов!")
 		return
 	if(scanner_busy)
 		balloon_alert(user, "анализатор занят!")
