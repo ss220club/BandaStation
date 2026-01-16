@@ -644,7 +644,7 @@
 			var/obj/item/healthanalyzer/simple/simple_scanner = scanner
 			// Only emit the cheerful scanner message if this scan came from a scanner
 			playsound(simple_scanner, 'sound/machines/ping.ogg', 50, FALSE)
-			to_chat(user, span_notice("\The [simple_scanner] радостно пикает и на короткое время показывает смайлик с несколькими восклицательными знаками! Он рад сообщить, что [patient] не имеет ран!"))
+			to_chat(user, span_notice("[capitalize(simple_scanner.declent_ru(NOMINATIVE))] радостно пикает и на короткое время показывает смайлик с несколькими восклицательными знаками! Он рад сообщить, что [patient] не имеет ран!"))
 			simple_scanner.show_emotion(AID_EMOTION_HAPPY)
 		to_chat(user, "<span class='notice ml-1'>У субъекта не обнаружено ранений.</span>")
 	else
@@ -677,7 +677,7 @@
 /obj/item/healthanalyzer/simple/attack_self(mob/user)
 	if(next_encouragement < world.time)
 		playsound(src, 'sound/machines/ping.ogg', 50, FALSE)
-		to_chat(user, span_notice("[src] издает радостный звуковой сигнал и [pick(encouragements)]!"))
+		to_chat(user, span_notice("[capitalize(declent_ru(NOMINATIVE))] издает радостный звуковой сигнал и [pick(encouragements)]!"))
 		next_encouragement = world.time + 10 SECONDS
 		show_emotion(AID_EMOTION_HAPPY)
 	else if(emotion != AID_EMOTION_ANGRY)
@@ -686,14 +686,14 @@
 		violence(user)
 
 /obj/item/healthanalyzer/simple/proc/greed_warning(mob/user)
-	to_chat(user, span_warning("[src] на экране появляется хмурое лицо пугающе высокого разрешения, упрекающее вас за то, что вы просите слишком настойчиво."))
+	to_chat(user, span_warning("На экране [declent_ru(GENITIVE)] появляется лицо пугающе высокого разрешения, упрекающее вас за то, что вы просите слишком настойчиво."))
 	show_emotion(AID_EMOTION_ANGRY)
 
 /obj/item/healthanalyzer/simple/proc/violence(mob/user)
 	playsound(src, 'sound/machines/buzz/buzz-sigh.ogg', 50, FALSE)
 	if(isliving(user))
 		var/mob/living/L = user
-		to_chat(L, span_warning("[src] разочарованно жужжит и колет вас за жадность. Ай!"))
+		to_chat(L, span_warning("[capitalize(declent_ru(NOMINATIVE))] разочарованно жужжит и колет вас за жадность. Ай!"))
 		flick(icon_state + "_pinprick", src)
 		violence_damage(user)
 		user.dropItemToGround(src)
@@ -710,13 +710,13 @@
 
 	add_fingerprint(user)
 	user.visible_message(
-		span_notice("[user] scans [interacting_with] for [scan_for_what]."),
-		span_notice("You scan [interacting_with] for [scan_for_what]."),
+		span_notice("[user] сканирует [interacting_with] на [scan_for_what]."),
+		span_notice("Вы сканируете [interacting_with] на [scan_for_what]."),
 	)
 
 	if(!iscarbon(interacting_with))
 		playsound(src, 'sound/machines/buzz/buzz-sigh.ogg', 30, TRUE)
-		to_chat(user, span_notice("[src] издает печальное жужжание и на короткое время показывает грустное лицо, показывая, что не может выполнить сканирование [interacting_with]."))
+		to_chat(user, span_notice("[capitalize(declent_ru(NOMINATIVE))] издает печальное жужжание и на короткое время показывает грустное лицо, показывая, что не может выполнить сканирование [interacting_with]."))
 		show_emotion(AI_EMOTION_SAD)
 		return ITEM_INTERACT_BLOCKING
 
@@ -765,7 +765,7 @@
 	encouragements = list("мотивирует вас принимать лекарства", "на короткое время появляется вращающееся нарисованное сердце", "успокаивает вас относительно вашего состояния", \
 			"напоминает вам, что каждый старается изо всех сил", "выводит на экран сообщение с пожеланием удачи", "отображает сообщение о том, как оно гордится тем, что вы заботитесь о себе.", "официально освобождает вас от всех ваших грехов")
 	patience = 20 SECONDS
-	scan_for_what = "diseases"
+	scan_for_what = "болезни"
 
 /obj/item/healthanalyzer/simple/disease/violence_damage(mob/living/user)
 	user.adjust_brute_loss(1)
@@ -802,7 +802,7 @@
 
 	if(!length(render))
 		playsound(scanner, 'sound/machines/ping.ogg', 50, FALSE)
-		to_chat(user, span_notice("\The [scanner] радостно пикает и на короткое время показывает смайлик с несколькими восклицательными знаками! Он рад сообщить, что [patient] не имеет болезней!"))
+		to_chat(user, span_notice("Анализатор болезней радостно пикает и на короткое время показывает смайлик с несколькими восклицательными знаками! Он рад сообщить, что [patient] не имеет болезней!"))
 		scanner.emotion = AID_EMOTION_HAPPY
 	else
 		to_chat(user, span_notice(render.Join("")))
