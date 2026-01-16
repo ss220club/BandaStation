@@ -1,0 +1,106 @@
+// MARK: Ability
+/datum/action/cooldown/shadowling/shadow_strike
+	name = "Теневой удар"
+	desc = "Материализуясь из тени рядом с ближайшей целью в 2 тайлах, наносит быстрый удар."
+	button_icon_state = "shadow_strike"
+	cooldown_time = 0
+	// Shadowling related
+	requires_dark_user = FALSE
+	requires_dark_target = FALSE
+	max_range = 2
+	channel_time = 0
+	var/static/sfx_activate = 'sound/effects/magic/demon_attack1.ogg'
+	var/attack_value = 30
+
+/datum/action/cooldown/shadowling/shadow_strike/can_use(mob/living/carbon/human/H)
+	if(!..())
+		return FALSE
+	if(istype(owner.loc, /obj/effect/dummy/phased_mob/shadowling))
+		return TRUE
+	if(owner.has_status_effect(/datum/status_effect/shadow/phase))
+		return TRUE
+	owner.balloon_alert(owner, "вы должны быть нематериальны")
+	return FALSE
+
+/datum/action/cooldown/shadowling/shadow_strike/Trigger(mob/clicker, trigger_flags, atom/target)
+	var/mob/living/carbon/human/H = owner
+	if(!istype(H))
+		return
+	if(!can_use(H))
+		return
+	var/mob/living/target_mob = find_closest_target(H)
+	if(!target_mob)
+		owner.balloon_alert(owner, "нет доступных целей")
+		return
+	if(DoEffect(H, target_mob))
+		StartCooldown()
+
+/datum/action/cooldown/shadowling/shadow_strike/proc/find_closest_target(mob/living/carbon/human/H)
+	var/datum/team/shadow_hive/hive = get_shadow_hive()
+	var/turf/center = get_turf(H)
+	if(!center)
+		return null
+	var/mob/living/best
+	var/best_dist = 999
+	for(var/mob/living/L in range(max_range, center))
+		if(L == H)
+			continue
+		if(L.stat == DEAD)
+			continue
+		if(hive)
+			if(L in hive.lings)
+				continue
+			if(L in hive.thralls)
+				continue
+		var/d = get_dist(H, L)
+		if(d < best_dist)
+			best = L
+			best_dist = d
+	return best
+
+/datum/action/cooldown/shadowling/shadow_strike/DoEffect(mob/living/carbon/human/H, atom/target)
+	if(!istype(H))
+		return FALSE
+
+	var/mob/living/carbon/human/T = null
+	if(istype(target, /mob/living/carbon/human))
+		T = target
+	else
+		T = find_closest_target(H)
+
+	if(!istype(T))
+		owner.balloon_alert(owner, "нет доступных целей")
+		return FALSE
+
+	var/turf/nearby = pick_adjacent_open_turf(get_turf(T))
+	var/datum/action/cooldown/shadowling/shadow_phase/SP
+	for(var/datum/action/cooldown/shadowling/shadow_phase/X in H.actions)
+		SP = X; break
+	if(SP)
+		SP.materialize_near(H, nearby, FALSE)
+	else
+		if(istype(H.loc, /obj/effect/dummy/phased_mob/shadowling))
+			var/obj/effect/dummy/phased_mob/shadowling/P = H.loc
+			if(istype(nearby)) P.forceMove(nearby)
+			P.eject_jaunter(FALSE)
+		else
+			H.remove_status_effect(/datum/status_effect/shadow/phase)
+
+	if(get_dist(H, T) > 1)
+		step_towards(H, T)
+
+	if(QDELETED(H) || QDELETED(T) || get_dist(H, T) > 1)
+		owner.balloon_alert(owner, "слишком далеко для удара")
+		return FALSE
+
+	H.visible_message(
+		span_boldwarning("[H] вырывается из тени и поражает [T]!"),
+		span_userdanger("Вы вырываетесь из тени и поражаете [T]!"),
+		ignored_mobs = null
+	)
+
+	T.apply_damage(attack_value, BRUTE, null, sharpness = SHARP_POINTY)
+	H.do_attack_animation(T)
+	playsound(get_turf(H), sfx_activate, 65, TRUE)
+	T.log_message("was hit by [H] with shadow strike for [attack_value] brute", LOG_ATTACK, color = "#8a2be2")
+	return TRUE
