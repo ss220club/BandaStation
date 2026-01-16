@@ -7070,11 +7070,10 @@
 	pixel_x = 6;
 	pixel_y = 6
 	},
-/obj/item/stamp{
-	pixel_x = 3;
-	pixel_y = 3
-	},
 /obj/item/stamp/centcom,
+/obj/item/stamp/granted{
+	pixel_x = 6
+	},
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/briefing)
 "vE" = (
@@ -9655,13 +9654,16 @@
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/stamp,
 /obj/structure/table/reinforced,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/item/radio/headset/headset_cent{
 	pixel_x = -9
 	},
 /obj/structure/sign/poster/official/no_erp/directional/north,
+/obj/item/stamp/granted{
+	pixel_y = 3;
+	pixel_x = -2
+	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/ferry)
 "DN" = (
@@ -14544,9 +14546,6 @@
 	pixel_x = -2;
 	pixel_y = 12
 	},
-/obj/item/stamp{
-	pixel_y = 7
-	},
 /obj/structure/table/reinforced,
 /obj/structure/railing{
 	dir = 8
@@ -14558,6 +14557,10 @@
 	dir = 9
 	},
 /obj/effect/turf_decal/tile/brown/half/contrasted,
+/obj/item/stamp/granted{
+	pixel_y = 7;
+	pixel_x = -2
+	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "SM" = (

@@ -9859,11 +9859,10 @@
 	pixel_x = 6;
 	pixel_y = 6
 	},
-/obj/item/stamp{
-	pixel_x = 3;
-	pixel_y = 3
-	},
 /obj/item/stamp/centcom,
+/obj/item/stamp/granted{
+	pixel_x = 6
+	},
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/briefing)
 "wSd" = (
