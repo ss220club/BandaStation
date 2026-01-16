@@ -6868,13 +6868,6 @@
 /obj/machinery/light_switch/directional/west,
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/conference_room)
-"vd" = (
-/obj/effect/turf_decal/box/white{
-	color = "#6b8cc4"
-	},
-/obj/effect/landmark/ert_spawn,
-/turf/open/floor/iron/smooth_large,
-/area/centcom/central_command_areas/ert)
 "ve" = (
 /obj/structure/railing{
 	dir = 9;
@@ -11425,15 +11418,15 @@
 	pixel_x = 6;
 	pixel_y = 6
 	},
-/obj/item/stamp{
-	pixel_x = 6;
-	pixel_y = 3
-	},
 /obj/item/stamp/centcom{
 	pixel_x = 6
 	},
 /obj/effect/turf_decal/tile/dark_blue/anticorner{
 	dir = 8
+	},
+/obj/item/stamp/granted{
+	pixel_y = -4;
+	pixel_x = 6
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/control)
@@ -13798,7 +13791,6 @@
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/engine)
 "QC" = (
-/obj/effect/landmark/ert_spawn,
 /obj/effect/turf_decal/box/white{
 	color = "#6b8cc4"
 	},
@@ -15757,7 +15749,6 @@
 /area/centcom/central_command_areas/ert)
 "Wr" = (
 /obj/structure/chair/comfy/corp,
-/obj/effect/landmark/ert_brief_spawn,
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -23330,7 +23321,7 @@ ok
 QC
 QC
 Gs
-vd
+QC
 BR
 sj
 DM
@@ -23443,7 +23434,7 @@ ok
 lp
 tQ
 Gs
-vd
+QC
 BR
 sj
 kJ
@@ -23556,7 +23547,7 @@ ok
 kO
 kO
 Gs
-vd
+QC
 BR
 BV
 BV
@@ -23669,7 +23660,7 @@ ok
 QC
 QC
 Gs
-vd
+QC
 BR
 BV
 EM
