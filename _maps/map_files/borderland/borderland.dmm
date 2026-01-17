@@ -248,7 +248,7 @@
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 4
 	},
-/turf/open/floor/vault/alien,
+/turf/open/floor/vault/sandstone,
 /area/altam/main_zones/caves)
 "air" = (
 /obj/structure/cable,
@@ -400,7 +400,7 @@
 /area/altam/main_zones/main)
 "apL" = (
 /obj/effect/turf_decal/siding/wideplating_new,
-/turf/open/floor/vault/alien,
+/turf/open/floor/vault/sandstone,
 /area/altam/main_zones/caves)
 "apP" = (
 /obj/effect/turf_decal/siding/thinplating{
@@ -670,6 +670,17 @@
 "aDY" = (
 /turf/open/lava,
 /area/altam/main_zones/caves)
+"aFk" = (
+/obj/effect/turf_decal/siding/wideplating_new/corner,
+/obj/effect/turf_decal/siding/wideplating_new/corner{
+	dir = 8
+	},
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "aFE" = (
 /obj/machinery/photocopier,
 /turf/open/floor/iron/smooth_large,
@@ -784,9 +795,11 @@
 /turf/closed/wall/mineral/titanium/nodiagonal,
 /area/altam/main_zones/premises)
 "aKr" = (
-/obj/structure/showcase/machinery,
 /obj/structure/window/reinforced/spawner/directional/south,
-/turf/open/floor/wood{
+/obj/structure/chair/stool/bar/dark{
+	dir = 8
+	},
+/turf/open/floor/carpet{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -1365,16 +1378,12 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
 "bjV" = (
-/obj/structure/holosign/barrier/cyborg,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
+/mob/living/basic/spider/giant/hunter/ice,
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/caves)
 "bkb" = (
 /obj/structure/chair/wood{
 	dir = 8
@@ -1984,7 +1993,7 @@
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 8
 	},
-/turf/open/floor/vault/alien,
+/turf/open/floor/vault/sandstone,
 /area/altam/main_zones/caves)
 "bOf" = (
 /obj/structure/railing{
@@ -2163,14 +2172,13 @@
 /turf/open/floor/plating,
 /area/altam/main_zones/main)
 "bUu" = (
-/obj/structure/mecha_wreckage/durand,
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
+/obj/structure/flora/rock/style_4{
+	icon_state = "basalt3"
 	},
-/area/altam/main_zones/main)
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "bUy" = (
 /obj/structure/railing{
 	dir = 5
@@ -2326,7 +2334,7 @@
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 10
 	},
-/turf/open/floor/vault/alien,
+/turf/open/floor/vault/sandstone,
 /area/altam/main_zones/caves)
 "cbj" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -2394,7 +2402,10 @@
 	},
 /area/altam/main_zones/main)
 "cfR" = (
-/obj/structure/mecha_wreckage/savannah_ivanov,
+/obj/structure/flora/grass/brown,
+/obj/effect/mine/shrapnel{
+	pixel_x = 1
+	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -2530,12 +2541,12 @@
 	},
 /area/altam/main_zones/main)
 "cjo" = (
-/obj/machinery/deployable_turret{
-	dir = 4
-	},
-/obj/structure/platform/iron,
-/turf/open/floor/engine/hull/reinforced{
-	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+/obj/effect/turf_decal/weather/dirt,
+/obj/effect/mine/shrapnel,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
 "cju" = (
@@ -2654,13 +2665,17 @@
 	},
 /area/altam/main_zones/caves)
 "cnU" = (
-/mob/living/basic/spider/giant/ambush,
-/turf/open/misc/dirt/dark{
+/obj/structure/barricade/sandbags,
+/obj/effect/turf_decal/weather/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/caves)
+/area/altam/main_zones/main)
 "cnY" = (
 /obj/structure/flora/grass/brown/style_random,
 /obj/effect/turf_decal/weather/dirt{
@@ -3086,6 +3101,14 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
+"cCF" = (
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/structure/musician/piano,
+/turf/open/floor/carpet{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "cCP" = (
 /obj/structure/table/optable,
 /turf/open/floor/wood/large{
@@ -3159,16 +3182,13 @@
 	},
 /area/altam/main_zones/caves)
 "cEZ" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
-	},
-/obj/structure/platform/material,
-/obj/structure/musician/piano,
-/turf/open/floor/carpet/royalblue{
+/obj/structure/holosign/barrier/cyborg,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/embassy/main)
+/area/altam/main_zones/main)
 "cFv" = (
 /obj/structure/flora/lunar_plant/style_3,
 /obj/effect/turf_decal/weather/dirt{
@@ -3417,6 +3437,12 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"cTb" = (
+/mob/living/basic/spider/giant/hunter/ice,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "cTt" = (
 /turf/closed/wall/mineral/iron,
 /area/altam/main_zones/main)
@@ -3934,7 +3960,7 @@
 /area/altam/main_zones/caves)
 "dpC" = (
 /mob/living/basic/mining/ice_whelp{
-	maxHealth = 400;
+	maxHealth = 1000;
 	name = "Сумеречный Дракон"
 	},
 /turf/open/indestructible/white{
@@ -3974,6 +4000,7 @@
 "dsd" = (
 /obj/structure/table/reinforced/titaniumglass,
 /obj/machinery/light/small/directional/south,
+/obj/item/documents,
 /turf/open/floor/iron/dark/side,
 /area/altam/embassy/main)
 "dsU" = (
@@ -4810,6 +4837,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/caves)
+"eby" = (
+/obj/structure/table/reinforced/rglass,
+/obj/item/book/manual/wiki/telescience,
+/turf/open/floor/carpet/royalblue{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "ebC" = (
 /turf/open/floor/asphalt{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
@@ -5107,8 +5142,8 @@
 /area/altam/main_zones/caves)
 "eoJ" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/mine/shrapnel{
-	pixel_x = 1
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
 	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
@@ -5454,6 +5489,17 @@
 "eDJ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/gun/ballistic/automatic/carwo/marksman/wooden,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"eDY" = (
+/obj/structure/barricade/sandbags,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -5931,16 +5977,11 @@
 	},
 /area/altam/main_zones/main)
 "eVh" = (
-/obj/effect/turf_decal/trimline/yellow/warning{
-	dir = 8
+/obj/structure/flora/rock/style_4{
+	icon_state = "basalt2"
 	},
-/mob/living/basic/mining/basilisk{
-	dir = 8
-	},
-/turf/open/floor/asphalt{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/caves)
 "eVv" = (
@@ -6626,7 +6667,7 @@
 /area/altam/main_zones/caves)
 "fCL" = (
 /obj/structure/closet/secure_closet/armory1,
-/obj/item/gun/ballistic/automatic/carwo/auto/machinegun/top_fed,
+/obj/item/gun/ballistic/automatic/carwo/auto/machinegun/wooden,
 /turf/open/floor/vault,
 /area/altam/main_zones/premises)
 "fCZ" = (
@@ -6913,6 +6954,9 @@
 "fKT" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/structure/barricade/sandbags,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -6920,13 +6964,15 @@
 	},
 /area/altam/main_zones/main)
 "fKV" = (
-/obj/structure/mecha_wreckage/savannah_ivanov,
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+/obj/structure/table/reinforced/rglass,
+/obj/item/table_clock{
+	pixel_y = 5
+	},
+/turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/embassy/main)
 "fLj" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
@@ -6999,9 +7045,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
 	},
-/obj/machinery/deployable_turret{
-	dir = 4
-	},
+/obj/machinery/deployable_turret/mounted_machine_gun/volna,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -7045,18 +7089,11 @@
 	},
 /area/altam/main_zones/main)
 "fPv" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
+/obj/structure/gulag_vent/ice,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/obj/structure/platform/material,
-/obj/structure/chair/stool/bar/dark{
-	dir = 8
-	},
-/turf/open/floor/carpet/royalblue{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
+/area/altam/main_zones/caves)
 "fPS" = (
 /obj/machinery/airalarm/directional/north,
 /obj/machinery/atmospherics/components/binary/pump/off{
@@ -7809,15 +7846,13 @@
 	},
 /area/altam/main_zones/caves)
 "gwI" = (
-/mob/living/basic/mining/basilisk{
-	dir = 8
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
 	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/caves)
 "gwY" = (
 /obj/structure/chair{
 	dir = 4
@@ -8764,6 +8799,15 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"hmU" = (
+/mob/living/basic/spider/giant/hunter/ice,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "hmW" = (
 /obj/machinery/door/airlock/command,
 /obj/structure/cable,
@@ -9181,15 +9225,16 @@
 	},
 /area/altam/main_zones/caves)
 "hFY" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 4
+/obj/effect/mine/shrapnel{
+	pixel_x = 1
 	},
-/obj/machinery/light/directional/south,
-/turf/open/floor/carpet/royalblue{
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/embassy/main)
+/area/altam/main_zones/main)
 "hGa" = (
 /obj/structure/fluff/tram_rail{
 	dir = 1
@@ -9396,7 +9441,7 @@
 /area/altam/embassy/main)
 "hTj" = (
 /obj/structure/closet/wardrobe,
-/obj/item/mod/control/pre_equipped/tsf_elite,
+/obj/item/mod/control/pre_equipped/standard,
 /turf/open/floor/vault,
 /area/altam/main_zones/premises)
 "hUQ" = (
@@ -9594,6 +9639,15 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"ier" = (
+/mob/living/basic/spider/giant/hunter/ice,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "ieZ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/storage/box/slugs,
@@ -9655,16 +9709,9 @@
 /turf/closed/wall/mineral/wood,
 /area/altam/main_zones/premises)
 "igj" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/obj/item/banner/species/rakht/mundane,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
+/obj/item/food/spidereggs,
+/turf/open/misc/asteroid/moon/dug,
+/area/altam/main_zones/caves)
 "ign" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -10326,6 +10373,7 @@
 /area/altam/main_zones/main)
 "iKP" = (
 /obj/structure/table/wood/fancy,
+/obj/item/claymore/weak/ceremonial,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -10681,12 +10729,11 @@
 	},
 /area/altam/main_zones/main)
 "jdz" = (
-/obj/effect/turf_decal/siding/wideplating_new,
 /obj/effect/turf_decal/siding/wideplating_new{
-	dir = 8
+	dir = 10
 	},
 /obj/effect/turf_decal/siding/wideplating_new{
-	dir = 4
+	dir = 6
 	},
 /turf/open/floor/stone/icemoon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
@@ -10829,7 +10876,7 @@
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 6
 	},
-/turf/open/floor/vault/alien,
+/turf/open/floor/vault/sandstone,
 /area/altam/main_zones/caves)
 "jlv" = (
 /obj/structure/rack,
@@ -11045,6 +11092,17 @@
 /turf/open/misc/ice/temperate{
 	icon = 'modular_bandastation/aesthetics/floors/icons/floors.dmi';
 	icon_state = "reinforced_hull"
+	},
+/area/altam/main_zones/main)
+"jty" = (
+/obj/effect/turf_decal/siding/yellow{
+	dir = 1
+	},
+/obj/structure/fake_stairs/directional/west{
+	color = "#555559"
+	},
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/main)
 "jtG" = (
@@ -11452,13 +11510,13 @@
 	},
 /area/altam/embassy/main)
 "jMc" = (
-/obj/item/banner/species/rakht/mundane,
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
 	},
-/area/altam/main_zones/main)
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "jML" = (
 /obj/structure/closet/syndicate/personal,
 /turf/open/floor/iron/dark,
@@ -11666,6 +11724,14 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
+"jXd" = (
+/obj/effect/decal/cleanable/cobweb/cobweb2{
+	icon_state = "cocoon_large2"
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "jYl" = (
 /obj/structure/flora/rock/icy/style_random{
 	icon_state = "basalt2"
@@ -11857,6 +11923,7 @@
 /area/altam/main_zones/main)
 "kfW" = (
 /obj/structure/table/reinforced/titaniumglass,
+/obj/item/documents/photocopy,
 /turf/open/floor/iron/dark/side,
 /area/altam/embassy/main)
 "kgk" = (
@@ -11923,17 +11990,11 @@
 /turf/open/floor/vault,
 /area/altam/main_zones/main)
 "khE" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
+/obj/item/banner/species/rakht/mundane,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 6
-	},
-/turf/open/floor/carpet/royalblue{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
+/area/altam/main_zones/main)
 "khT" = (
 /obj/structure/bookcase/random/fiction,
 /turf/open/floor/wood/large{
@@ -12165,16 +12226,13 @@
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
 "ktJ" = (
-/obj/structure/platform/iron,
-/obj/machinery/deployable_turret{
-	dir = 8
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
 	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/caves)
 "kux" = (
 /obj/structure/flora/tree/pine/style_2,
 /obj/effect/turf_decal/siding/wideplating_new/dark{
@@ -12472,15 +12530,11 @@
 	},
 /area/altam/main_zones/caves)
 "kEZ" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
+/obj/item/banner/species/vulpkanin,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
-/obj/effect/turf_decal/siding/wood,
-/turf/open/floor/carpet/royalblue{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/embassy/main)
+/area/altam/main_zones/main)
 "kFa" = (
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/iron,
@@ -12604,7 +12658,7 @@
 /obj/effect/decal/cleanable/blood/gibs/old{
 	icon_state = "gib3"
 	},
-/turf/open/floor/vault/alien,
+/turf/open/floor/vault/sandstone,
 /area/altam/main_zones/caves)
 "kJA" = (
 /obj/effect/spawner/random/clothing/wardrobe_closet,
@@ -12761,17 +12815,17 @@
 	},
 /area/altam/main_zones/premises)
 "kSS" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 1
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
 	},
-/obj/effect/turf_decal/siding/wood{
+/obj/effect/turf_decal/weather/snow/corner{
 	dir = 10
 	},
-/turf/open/floor/carpet/royalblue{
-	max_integrity = 10000;
-	uses_integrity = 10000
+/obj/effect/mine/shrapnel,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/area/altam/embassy/main)
+/area/altam/main_zones/main)
 "kTm" = (
 /obj/structure/flora/tree/pine/style_random{
 	max_integrity = 10000;
@@ -13059,6 +13113,9 @@
 	dir = 1
 	},
 /obj/structure/barricade/sandbags,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -13709,16 +13766,16 @@
 /turf/open/floor/fakepit,
 /area/altam/main_zones/caves)
 "lHO" = (
-/obj/structure/holosign/barrier/cyborg,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
 	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
 	},
-/area/altam/main_zones/main)
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "lHZ" = (
 /obj/structure/holosign/barrier/engineering,
 /turf/open/floor/plating/reinforced,
@@ -14260,12 +14317,10 @@
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
 "mbf" = (
-/obj/structure/platform/material,
-/turf/open/floor/carpet/royalblue{
-	max_integrity = 10000;
-	uses_integrity = 10000
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/area/altam/embassy/main)
+/area/altam/main_zones/caves)
 "mbu" = (
 /obj/structure/railing/platform/reinforced,
 /obj/structure/flora/rock/pile/icy/style_random,
@@ -14377,6 +14432,15 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"mgp" = (
+/mob/living/basic/spider/giant/hunter/ice,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "mgz" = (
 /turf/closed/indestructible/rock/snow/ice/ore{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
@@ -14662,6 +14726,14 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"muE" = (
+/obj/machinery/light/directional/south,
+/obj/structure/closet/emcloset,
+/turf/open/floor/carpet/royalblue{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "muG" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -15035,6 +15107,14 @@
 	},
 /turf/open/floor/plating,
 /area/altam/main_zones/premises)
+"mHm" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "mHu" = (
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
@@ -15234,6 +15314,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"mQj" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "mRq" = (
 /turf/closed/wall/ice{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
@@ -16459,9 +16547,6 @@
 	},
 /area/altam/main_zones/caves)
 "nYT" = (
-/mob/living/basic/mining/basilisk{
-	dir = 4
-	},
 /obj/effect/turf_decal/siding/golden{
 	dir = 8
 	},
@@ -17452,11 +17537,18 @@
 	},
 /area/altam/main_zones/main)
 "oRe" = (
-/mob/living/basic/spider/giant/ambush,
-/turf/open/misc/dirt/jungle/wasteland{
-	initial_gas_mix = "o2=22;n2=82;TEMP=200"
+/obj/effect/mine/shrapnel{
+	pixel_x = 1
 	},
-/area/altam/main_zones/caves)
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "oRG" = (
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 9
@@ -18234,11 +18326,11 @@
 /area/altam/main_zones/caves)
 "pAo" = (
 /mob/living/basic/mining/ice_whelp{
-	maxHealth = 400;
+	maxHealth = 1000;
 	name = "Сумеречный Дракон"
 	},
 /obj/effect/turf_decal/siding/wideplating_new,
-/turf/open/floor/vault/alien,
+/turf/open/floor/vault/sandstone,
 /area/altam/main_zones/caves)
 "pAF" = (
 /obj/effect/turf_decal/siding/wideplating_new{
@@ -18470,6 +18562,7 @@
 /obj/structure/closet/crate/silvercrate,
 /obj/item/stack/sheet/mineral/diamond/fifty,
 /obj/item/clothing/head/helmet/dragoon,
+/obj/item/clothing/suit/armor/dragoon,
 /turf/open/indestructible/white{
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
@@ -19990,6 +20083,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"rgH" = (
+/obj/structure/table/reinforced/rglass,
+/obj/item/clothing/head/hats/tsf_cap,
+/turf/open/floor/carpet/royalblue{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "rhF" = (
 /obj/item/clothing/suit/hooded/wintercoat,
 /turf/open/misc/dirt/dark{
@@ -20054,15 +20155,14 @@
 	},
 /area/altam/main_zones/main)
 "rjz" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/obj/machinery/light/directional/south,
-/turf/open/floor/carpet/royalblue{
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mine/shrapnel,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/embassy/main)
+/area/altam/main_zones/main)
 "rjL" = (
 /obj/structure/barricade/wooden/snowed,
 /turf/open/floor/wood/large{
@@ -20494,6 +20594,15 @@
 	dir = 4
 	},
 /area/altam/main_zones/premises)
+"rEa" = (
+/obj/structure/barricade/sandbags,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "rEq" = (
 /obj/machinery/conveyor{
 	dir = 8;
@@ -20810,6 +20919,17 @@
 	},
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
+"rSp" = (
+/obj/structure/flora/rock/style_4{
+	icon_state = "basalt3"
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "rSw" = (
 /obj/effect/turf_decal/trimline/yellow/tram,
 /turf/open/floor/iron/showroomfloor,
@@ -21567,6 +21687,15 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"sEq" = (
+/obj/item/banner/species/vulpkanin,
+/obj/effect/turf_decal/siding/yellow{
+	dir = 5
+	},
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/main)
 "sEu" = (
@@ -22454,15 +22583,22 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
-"trs" = (
-/obj/structure/holosign/barrier/cyborg,
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+"trj" = (
+/obj/structure/table/wood/fancy,
+/obj/item/storage/fancy/candle_box,
+/turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
+"trs" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "trA" = (
 /obj/structure/safe/vault,
 /turf/open/floor/iron/checker{
@@ -22909,9 +23045,17 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"tPN" = (
+/obj/structure/flora/rock/style_4,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "tQf" = (
-/obj/structure/platform/iron,
-/turf/open/misc/asteroid/snow/atmosphere{
+/obj/machinery/deployable_turret/mounted_machine_gun/volna{
+	dir = 4
+	},
+/turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -23275,7 +23419,7 @@
 /area/awaymission/snowdin/post/mining_main)
 "ufv" = (
 /obj/effect/turf_decal/siding/wideplating_new/corner,
-/turf/open/floor/vault/alien,
+/turf/open/floor/vault/sandstone,
 /area/altam/main_zones/caves)
 "ufE" = (
 /obj/effect/spawner/random/clothing/mafia_outfit,
@@ -23414,7 +23558,7 @@
 	},
 /area/altam/main_zones/caves)
 "ule" = (
-/turf/open/floor/vault/alien,
+/turf/open/floor/vault/sandstone,
 /area/altam/main_zones/caves)
 "ulD" = (
 /obj/structure/fluff/tram_rail{
@@ -23751,12 +23895,17 @@
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
 "uFs" = (
-/obj/machinery/deployable_turret{
+/obj/structure/holosign/barrier/cyborg,
+/obj/effect/turf_decal/weather/dirt{
 	dir = 8
 	},
-/obj/structure/platform/iron,
-/turf/open/floor/engine/hull/reinforced{
-	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
 "uFD" = (
@@ -24009,6 +24158,15 @@
 /obj/structure/closet/syndicate/resources,
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
+"uPa" = (
+/obj/item/banner/species/rakht/mundane,
+/obj/effect/turf_decal/siding/yellow{
+	dir = 6
+	},
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "uPk" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -24235,6 +24393,19 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
+"uWg" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 9
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "uWo" = (
 /obj/machinery/door/airlock/highsecurity,
 /obj/structure/cable,
@@ -24391,13 +24562,11 @@
 	},
 /area/altam/main_zones/caves)
 "vde" = (
-/obj/item/banner/species/vulpkanin,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/caves)
 "vdi" = (
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 1
@@ -24625,6 +24794,13 @@
 "voz" = (
 /turf/closed/mineral/bscrystal,
 /area/altam/main_zones/caves)
+"vpl" = (
+/obj/item/kirbyplants/organic/plant6,
+/turf/open/floor/carpet/royalblue{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/embassy/main)
 "vpL" = (
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor3"
@@ -25284,6 +25460,17 @@
 /obj/machinery/light/directional/west,
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
+"vSI" = (
+/obj/structure/closet/crate/secure/weapon,
+/obj/item/ammo_box/magazine/volna,
+/obj/item/ammo_box/magazine/volna,
+/obj/item/ammo_box/magazine/volna,
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "vSK" = (
 /obj/structure/flora/tree/dead/style_3,
 /turf/open/misc/asteroid/snow/atmosphere{
@@ -25389,8 +25576,6 @@
 /turf/open/floor/iron,
 /area/altam/main_zones/premises)
 "vWu" = (
-/obj/structure/platform/material,
-/obj/structure/platform/material,
 /obj/structure/sign/flag/terragov/directional/south,
 /turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
@@ -25627,13 +25812,13 @@
 	},
 /area/altam/main_zones/main)
 "weL" = (
-/obj/structure/platform/material,
-/obj/structure/sign/flag/terragov/directional/south,
-/turf/open/floor/carpet/royalblue{
-	max_integrity = 10000;
-	uses_integrity = 10000
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
 	},
-/area/altam/embassy/main)
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "wfl" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -25839,16 +26024,11 @@
 	},
 /area/altam/embassy/main)
 "wqj" = (
-/obj/structure/platform/iron,
-/obj/machinery/deployable_turret{
-	dir = 4
+/obj/structure/flora/ash/seraka,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/caves)
 "wqB" = (
 /obj/structure/mineral_door/iron,
 /turf/open/floor/iron,
@@ -26357,6 +26537,16 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/caves)
+"wNf" = (
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "wNl" = (
 /obj/structure/chair/sofa/bench/left,
 /turf/open/misc/dirt/dark{
@@ -26484,13 +26674,12 @@
 	},
 /area/altam/main_zones/main)
 "wTb" = (
-/obj/item/banner/species/vulpkanin,
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+/obj/structure/closet/firecloset/full,
+/turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/embassy/main)
 "wTG" = (
 /obj/structure/closet/crate/secure/syndicate/gorlex,
 /obj/item/gun/ballistic/automatic/c20r,
@@ -26498,6 +26687,31 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
+"wUf" = (
+/obj/structure/flora/rock/style_4{
+	icon_state = "basalt3"
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
+"wUw" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "wUK" = (
 /obj/item/kirbyplants/organic/plant7,
 /turf/open/floor/iron,
@@ -26588,9 +26802,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
-/obj/machinery/deployable_turret{
-	dir = 4
-	},
+/obj/machinery/deployable_turret/mounted_machine_gun/volna,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -26685,7 +26897,7 @@
 /obj/effect/turf_decal/siding/wideplating_new/corner{
 	dir = 8
 	},
-/turf/open/floor/vault/alien,
+/turf/open/floor/vault/sandstone,
 /area/altam/main_zones/caves)
 "wZQ" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -27767,9 +27979,13 @@
 	},
 /area/altam/main_zones/main)
 "xWd" = (
-/obj/structure/platform/iron,
-/turf/open/floor/engine/hull/reinforced{
-	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+/obj/machinery/deployable_turret/mounted_machine_gun/volna{
+	dir = 8
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
 "xWe" = (
@@ -37334,7 +37550,7 @@ wiB
 wiB
 rXG
 wiB
-bUu
+tdD
 dPH
 jCM
 bth
@@ -37593,7 +37809,7 @@ veT
 rSF
 tdD
 uSo
-fKV
+dPH
 dPH
 ylz
 rXG
@@ -38362,7 +38578,7 @@ wiB
 sFz
 wiB
 wiB
-cfR
+wiB
 rGy
 mJi
 dPH
@@ -40167,7 +40383,7 @@ dPH
 dPH
 dPH
 ylz
-wiB
+qTX
 dwZ
 wiB
 wiB
@@ -40425,7 +40641,7 @@ dPH
 iAZ
 wiB
 sFz
-wiB
+rXG
 aaF
 aaF
 wiB
@@ -40672,7 +40888,7 @@ wiB
 wiB
 aaF
 wiB
-wiB
+qTX
 wiB
 qTX
 wiB
@@ -40680,10 +40896,10 @@ tdD
 dPH
 dPH
 ylz
-qTX
+wiB
 aaF
 aaF
-rSF
+kSS
 wiB
 aaF
 qTX
@@ -40926,11 +41142,11 @@ aaF
 xFJ
 wiB
 wiB
-wiB
-wiB
-wiB
-aaF
 qTX
+wiB
+iBm
+aaF
+wiB
 wiB
 wiB
 rEJ
@@ -40938,16 +41154,16 @@ dPH
 dPH
 kVT
 dwZ
-rXG
+wiB
 wiB
 aaF
 wiB
-wiB
+cxG
 wiB
 kfy
-rXG
+wiB
 aaF
-tdD
+cjo
 dPH
 dPH
 ylz
@@ -41100,7 +41316,7 @@ sFz
 dwZ
 qZh
 rGd
-kbT
+aFk
 sdA
 jdz
 dPH
@@ -41182,27 +41398,27 @@ wiB
 wiB
 wiB
 wiB
-wiB
+cfR
 wiB
 aaF
-rSF
+wiB
 aaF
 wiB
 jdQ
-jdQ
+eDY
 fKT
 dPH
 dPH
 leK
-jdQ
+eDY
 hVR
-rXG
-cxG
 wiB
+wiB
+rXG
 wiB
 dwZ
 wiB
-aaF
+rjz
 rSF
 aaF
 mJi
@@ -41441,23 +41657,23 @@ wiB
 wiB
 wiB
 aaF
-wiB
-kfy
-wiB
+ctg
+ctg
+ctg
 eoJ
-jdQ
+rEa
 dPH
 boF
 dPH
 dPH
 kEK
 dPH
-jdQ
+bPX
 wiB
 wiB
 sFz
 wiB
-aaF
+rjz
 wiB
 wiB
 wiB
@@ -41697,25 +41913,25 @@ wiB
 qTX
 kfy
 qTX
-wiB
-qTX
-wiB
-qTX
-wiB
-jdQ
-wTb
-trs
+tdD
+wQE
+wQE
+wQE
+dPH
+cnU
+dPH
+boF
 dPH
 dPH
-bjV
-jMc
+kEK
+dPH
+ylz
+dnj
+ctg
+ctg
 wiB
-kfy
-rXG
-wiB
-rXG
 aaF
-rXG
+wiB
 aaF
 rXG
 wiB
@@ -41951,31 +42167,31 @@ aaF
 wiB
 wiB
 wiB
+wiB
+wiB
+dwZ
+tdD
+wQE
 xWd
-xWd
+dPH
+dPH
+bth
 uFs
-xWd
-xWd
-xWd
-xWd
-xWd
-xWd
-uFs
-xWd
+kEZ
 wgM
 wgM
-tQf
-ktJ
-tQf
-tQf
-tQf
-tQf
-tQf
-ktJ
-tQf
-tQf
-tQf
-tQf
+khE
+uFs
+lUb
+wQE
+wQE
+wQE
+ylz
+wiB
+sFz
+wiB
+wiB
+wiB
 sSA
 dPH
 dPH
@@ -42207,33 +42423,33 @@ aaF
 pJJ
 qTX
 wiB
+dwZ
+wiB
+wiB
+wiB
+tdD
+wQE
+vSI
+dPH
+dPH
+dPH
+dPH
+nAL
+nAL
+nAL
+nAL
+dPH
+dPH
+dPH
 xWd
-tQf
-qba
-nAL
-nAL
-qba
-nAL
-nAL
-qba
-nAL
-nAL
-qba
-nAL
-nAL
-nAL
-nAL
-qba
-nAL
-nAL
-nAL
-nAL
-nAL
-qba
-nAL
-nAL
-tQf
-tQf
+wQE
+ylz
+dwZ
+wiB
+wiB
+wiB
+wiB
+wiB
 mJi
 dPH
 dPH
@@ -42464,9 +42680,9 @@ wiB
 sFz
 wiB
 wiB
-xWd
-nAL
-nAL
+wiB
+wiB
+wiB
 ePf
 ePf
 ePf
@@ -42479,18 +42695,18 @@ ePf
 qba
 qba
 ePf
+mxJ
+uyP
+wNf
+vSI
+wQE
+ntm
 wiB
 wiB
+dwZ
 wiB
+sFz
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-qba
-qba
-tQf
 rXG
 mJi
 dPH
@@ -42721,14 +42937,14 @@ wiB
 wiB
 qTX
 wiB
-xWd
-qba
+wiB
+sFz
 ePf
 ePf
 wiB
 wiB
 wiB
-wiB
+dwZ
 wiB
 wiB
 wiB
@@ -42746,8 +42962,8 @@ ePf
 ePf
 wiB
 wiB
-nAL
-tQf
+wiB
+wiB
 kfy
 tdD
 dPH
@@ -42978,8 +43194,8 @@ wiB
 dwZ
 wiB
 wiB
-xWd
-nAL
+wiB
+wiB
 ePf
 wiB
 wiB
@@ -42988,7 +43204,7 @@ wiB
 wiB
 wiB
 wiB
-wiB
+dwZ
 wiB
 oLN
 fXD
@@ -42997,14 +43213,14 @@ wiB
 wiB
 wiB
 wiB
-wiB
+dwZ
 wiB
 wiB
 ePf
 ePf
 wiB
-qba
-tQf
+wiB
+wiB
 rXG
 wiB
 mJi
@@ -43235,10 +43451,10 @@ wiB
 wiB
 qTX
 sFz
-xWd
-nAL
-ePf
 wiB
+wiB
+ePf
+dwZ
 vml
 wyi
 wyi
@@ -43249,7 +43465,7 @@ phe
 wiB
 oLN
 nMS
-wiB
+dwZ
 vml
 wyi
 wyi
@@ -43260,8 +43476,8 @@ wiB
 wiB
 ePf
 wiB
-qba
-tQf
+wiB
+dwZ
 cxG
 kfy
 tdD
@@ -43492,8 +43708,8 @@ wiB
 wiB
 wiB
 wiB
-xWd
-nAL
+wiB
+dwZ
 ePf
 wiB
 ydI
@@ -43517,8 +43733,8 @@ wiB
 wiB
 ePf
 wiB
-nAL
-tQf
+wiB
+wiB
 kfy
 wiB
 wiB
@@ -43749,8 +43965,8 @@ wiB
 sFz
 wiB
 wiB
-xWd
-nAL
+wiB
+wiB
 ePf
 wiB
 ydI
@@ -43771,11 +43987,11 @@ wsb
 iLN
 bIR
 wiB
-wiB
+dwZ
 ePf
 wiB
-nAL
-tQf
+wiB
+wiB
 rXG
 wiB
 dwZ
@@ -44006,8 +44222,8 @@ wiB
 wiB
 qTX
 wiB
-xWd
-qba
+wiB
+wiB
 ePf
 wiB
 ydI
@@ -44031,8 +44247,8 @@ wiB
 wiB
 ePf
 wiB
-nAL
-tQf
+sFz
+wiB
 wiB
 wiB
 rEJ
@@ -44263,8 +44479,8 @@ wiB
 wiB
 wiB
 dwZ
-xWd
-nAL
+wiB
+wiB
 ePf
 wiB
 ydI
@@ -44284,12 +44500,12 @@ tLX
 pyC
 fpD
 bIR
-wiB
+dwZ
 wiB
 ePf
 wiB
-qba
-tQf
+wiB
+wiB
 wiB
 wiB
 tdD
@@ -44520,8 +44736,8 @@ wiB
 sFz
 qTX
 wiB
-xWd
-nAL
+wiB
+wiB
 ePf
 wiB
 ydI
@@ -44544,9 +44760,9 @@ bIR
 wiB
 wiB
 ePf
+dwZ
 wiB
-nAL
-tQf
+wiB
 wiB
 kfy
 nin
@@ -44777,10 +44993,10 @@ pJJ
 sFz
 wiB
 wiB
-xWd
-nAL
-ePf
 wiB
+wiB
+ePf
+dwZ
 ydI
 kXw
 npM
@@ -44796,14 +45012,14 @@ wiB
 wiB
 wiB
 wiB
-wiB
+dwZ
 wiB
 wiB
 wiB
 ePf
 wiB
-nAL
-tQf
+wiB
+wiB
 qTX
 wiB
 tdD
@@ -45034,8 +45250,8 @@ wiB
 wiB
 qTX
 wiB
-xWd
-nAL
+wiB
+sFz
 ePf
 wiB
 kfi
@@ -45058,9 +45274,9 @@ bzN
 flF
 kNM
 ePf
+sFz
 wiB
-nAL
-tQf
+wiB
 kfy
 wiB
 kfy
@@ -45291,18 +45507,18 @@ wiB
 dwZ
 wiB
 wiB
-xWd
-qba
+wiB
+wiB
 ePf
 wiB
 ctg
 ctg
-ctg
+iPb
 wiB
 wiB
 wiB
 wiB
-wiB
+dwZ
 oLN
 nAL
 nAL
@@ -45316,8 +45532,8 @@ nAL
 nWA
 ePf
 wiB
-nAL
-tQf
+wiB
+dwZ
 qTX
 dwZ
 wiB
@@ -45548,8 +45764,8 @@ wiB
 wiB
 qTX
 wiB
-xWd
-nAL
+wiB
+dwZ
 ePf
 tdD
 lHs
@@ -45573,8 +45789,8 @@ nAL
 deJ
 ePf
 wiB
-nAL
-tQf
+wiB
+wiB
 tCi
 kfy
 tdD
@@ -45805,8 +46021,8 @@ wiB
 wiB
 wiB
 sFz
-xWd
-nAL
+wiB
+wiB
 ePf
 tdD
 mxJ
@@ -45829,9 +46045,9 @@ mWN
 oLN
 piL
 ePf
+dwZ
 wiB
-nAL
-tQf
+wiB
 kfy
 wiB
 tdD
@@ -46062,8 +46278,8 @@ wiB
 sFz
 qTX
 wiB
-xWd
-nAL
+wiB
+wiB
 ePf
 tdD
 lHs
@@ -46087,8 +46303,8 @@ oLN
 hds
 ePf
 wiB
-nAL
-tQf
+wiB
+sFz
 qTX
 wiB
 tdD
@@ -46319,11 +46535,11 @@ wiB
 wiB
 wiB
 dwZ
-xWd
-nAL
+wiB
+wiB
 ePf
 ePf
-ftF
+geo
 ftF
 ftF
 oLN
@@ -46344,8 +46560,8 @@ msW
 ePf
 ePf
 wiB
-qba
-tQf
+wiB
+wiB
 wiB
 wiB
 tdD
@@ -46576,9 +46792,9 @@ wiB
 xoK
 qTX
 wiB
-xWd
-qba
-nAL
+wiB
+wiB
+wiB
 ePf
 ePf
 ePf
@@ -46600,9 +46816,9 @@ ePf
 ePf
 ePf
 wiB
+sFz
 wiB
-nAL
-tQf
+wiB
 qTX
 kfy
 tdD
@@ -46833,33 +47049,33 @@ wiB
 sFz
 wiB
 wiB
-xWd
-tQf
-qba
-nAL
-qba
-nAL
-nAL
-nAL
+wiB
+dwZ
+wiB
+sFz
+wiB
+wiB
+sEq
+oLN
 nMS
+uPa
+ctg
+ctg
+rVM
 wiB
 wiB
 wiB
 wiB
 wiB
 wiB
+dwZ
 wiB
 wiB
 wiB
 wiB
 wiB
 wiB
-wiB
-wiB
-wiB
-nAL
-nAL
-tQf
+dwZ
 wiB
 wiB
 tdD
@@ -47091,32 +47307,32 @@ wiB
 qTX
 wiB
 wiB
-xWd
-xWd
-xWd
-xWd
-cjo
-xWd
-oLN
-qba
-nAL
-nAL
-qba
-nAL
-nAL
-qba
-qba
-qba
-nAL
-nAL
-nAL
-nAL
-nAL
-nAL
-qba
-qba
-tQf
-tQf
+wiB
+wiB
+wiB
+wiB
+wiB
+cEZ
+jty
+cqW
+iwR
+dPH
+vSI
+wQE
+nul
+wiB
+sFz
+wiB
+wiB
+wiB
+wiB
+wiB
+sFz
+wiB
+dwZ
+wiB
+wiB
+wiB
 qTX
 wiB
 tdD
@@ -47353,26 +47569,26 @@ qTX
 wiB
 qTX
 wiB
-xWd
-oLN
-nAL
+dfh
+dPH
+dPH
+wUw
+dPH
 tQf
-wqj
-tQf
-tQf
-tQf
-tQf
-tQf
-tQf
-tQf
-tQf
-tQf
-tQf
-tQf
-tQf
-tQf
-tQf
-tQf
+wQE
+ylz
+wiB
+wiB
+wiB
+dwZ
+wiB
+wiB
+wiB
+wiB
+wiB
+wiB
+wiB
+dwZ
 aaF
 wiB
 aaF
@@ -47610,14 +47826,14 @@ wiB
 wiB
 dwZ
 qTX
-wiB
-msW
-nMS
-wiB
-wiB
-qTX
-wiB
-qTX
+tdD
+dPH
+dPH
+kEK
+dPH
+wQE
+wQE
+oRe
 wiB
 qTX
 wiB
@@ -47867,13 +48083,13 @@ wiB
 wiB
 kfy
 wiB
-qTX
-oLN
-nMS
-wiB
-dwZ
-kfy
-wiB
+hFY
+dPH
+dPH
+uWg
+ftF
+ftF
+ftF
 wiB
 wiB
 wiB
@@ -48124,13 +48340,13 @@ wiB
 wiB
 wiB
 wiB
-wiB
-oLN
-fXD
-wiB
+tdD
+dPH
+dPH
+ylz
 qTX
-wiB
-wiB
+kfy
+qTX
 dwZ
 kfy
 wiB
@@ -48381,10 +48597,10 @@ wiB
 dwZ
 wiB
 wiB
-qTX
-cqW
-cqW
-wiB
+hFY
+dPH
+dPH
+rXw
 wiB
 wiB
 kfy
@@ -48637,12 +48853,12 @@ mgz
 wiB
 wiB
 wiB
-vde
-iwR
+wiB
+tdD
 dPH
 dPH
-lHO
-igj
+ylz
+ctg
 iPb
 ctg
 ctg
@@ -49143,7 +49359,7 @@ mgz
 uHg
 faA
 faA
-coC
+jXd
 faA
 faA
 faA
@@ -49399,9 +49615,9 @@ mgz
 mgz
 uHg
 faA
-aWL
-coC
-uVk
+bUu
+igj
+hmU
 coC
 faA
 faA
@@ -49657,13 +49873,13 @@ faA
 faA
 faA
 faA
-val
-coC
+fPv
+gwI
 coC
 faA
 faA
-coC
-coC
+mbf
+wqj
 bHu
 mgz
 mgz
@@ -49910,8 +50126,8 @@ bHu
 mgz
 faA
 faA
-oFi
-coC
+eVh
+gwI
 faA
 faA
 faA
@@ -49919,8 +50135,8 @@ coC
 coC
 faA
 faA
-coC
-coC
+mbf
+ktJ
 bHu
 bHu
 hZi
@@ -50166,9 +50382,9 @@ wiB
 bHu
 mgz
 faA
-nww
-coC
-coC
+tPN
+wqj
+gwI
 uVk
 coC
 coC
@@ -50176,7 +50392,7 @@ coC
 faA
 faA
 coC
-coC
+jMc
 coC
 coC
 dlI
@@ -50429,13 +50645,13 @@ faA
 faA
 nww
 coC
+vde
+mbf
+mbf
+gwI
 coC
-coC
-coC
-coC
-coC
-coC
-coC
+trs
+trs
 nww
 owf
 wiB
@@ -50687,12 +50903,12 @@ faA
 faA
 coC
 coC
+lHO
+jMc
 coC
-coC
-coC
-coC
-coC
-coC
+vde
+mbf
+mbf
 faA
 uHg
 mgz
@@ -50939,12 +51155,12 @@ mgz
 mgz
 mgz
 faA
-val
+fPv
+gwI
 coC
 coC
-coC
-coC
-coC
+vde
+wqj
 faA
 val
 faA
@@ -51196,11 +51412,11 @@ mgz
 mgz
 mgz
 faA
-uVk
+cTb
+weL
 coC
 coC
-coC
-coC
+mQj
 faA
 faA
 faA
@@ -51453,11 +51669,11 @@ mgz
 mgz
 mgz
 faA
-coC
-coC
-coC
-coC
-coC
+mbf
+mbf
+weL
+vde
+mbf
 faA
 faA
 faA
@@ -51480,7 +51696,7 @@ puV
 puV
 uJn
 uJn
-iKP
+trj
 aev
 mgz
 mgz
@@ -51704,7 +51920,7 @@ faA
 faA
 faA
 coC
-coC
+trs
 faA
 mgz
 mgz
@@ -51713,11 +51929,11 @@ faA
 faA
 faA
 faA
-coC
-coC
+vde
+mbf
 faA
 faA
-coC
+trs
 uVk
 coC
 aWL
@@ -51961,7 +52177,7 @@ mgz
 mgz
 faA
 faA
-coC
+mbf
 faA
 faA
 mgz
@@ -51971,11 +52187,11 @@ uHg
 uHg
 faA
 oFi
-coC
+mHm
 faA
-nww
-coC
-coC
+tPN
+mbf
+gwI
 coC
 faA
 faA
@@ -52218,8 +52434,8 @@ mgz
 mgz
 mgz
 faA
-coC
-coC
+mbf
+mbf
 faA
 faA
 mgz
@@ -52231,8 +52447,8 @@ coC
 coC
 faA
 faA
-val
-coC
+fPv
+gwI
 faA
 faA
 faA
@@ -52475,14 +52691,14 @@ mgz
 mgz
 mgz
 bHu
-aWL
-coC
+bUu
+ktJ
 coC
 faA
 faA
 faA
-val
-coC
+fPv
+mbf
 faA
 faA
 coC
@@ -52738,8 +52954,8 @@ coC
 coC
 coC
 coC
-coC
-uVk
+jMc
+mgp
 faA
 faA
 coC
@@ -52995,6 +53211,7 @@ coC
 coC
 coC
 coC
+trs
 coC
 coC
 coC
@@ -53002,9 +53219,8 @@ coC
 coC
 coC
 coC
-coC
-coC
-coC
+trs
+trs
 faA
 faA
 mgz
@@ -53252,16 +53468,16 @@ faA
 nww
 oFi
 faA
+mbf
+gwI
 coC
 coC
+trs
+trs
 coC
-coC
-coC
-coC
-coC
-coC
-coC
-coC
+vde
+mbf
+wqj
 faA
 uHg
 mgz
@@ -53509,13 +53725,13 @@ faA
 faA
 faA
 faA
-coC
-coC
+wqj
+gwI
 coC
 faA
-val
-coC
-aWL
+fPv
+mbf
+wUf
 nww
 faA
 faA
@@ -53602,7 +53818,7 @@ qYR
 wiB
 dwZ
 pNF
-opO
+wiB
 dwZ
 pNF
 mgz
@@ -53766,7 +53982,7 @@ bHu
 mgz
 mgz
 faA
-aWL
+rSp
 coC
 coC
 faA
@@ -54537,13 +54753,13 @@ mgz
 mgz
 mgz
 faA
-oFi
-val
+eVh
+fPv
 faA
 faA
 coC
 coC
-uVk
+ier
 bHu
 mgz
 mgz
@@ -54794,13 +55010,13 @@ mgz
 mgz
 mgz
 faA
-coC
-coC
+wqj
+ktJ
 coC
 faA
 faA
-coC
-val
+vde
+fPv
 bHu
 mgz
 mgz
@@ -55051,13 +55267,13 @@ mgz
 mgz
 mgz
 faA
-coC
+jMc
 uVk
 coC
 coC
 coC
-coC
-nww
+vde
+tPN
 bHu
 mgz
 mgz
@@ -55569,8 +55785,8 @@ coC
 coC
 faA
 faA
-uVk
-oFi
+bjV
+eVh
 faA
 mgz
 mgz
@@ -55826,8 +56042,8 @@ faA
 coC
 coC
 coC
-coC
-val
+vde
+fPv
 faA
 mgz
 bHu
@@ -56339,8 +56555,8 @@ mgz
 faA
 faA
 coC
-coC
-aWL
+trs
+trs
 faA
 uHg
 bHu
@@ -56595,9 +56811,9 @@ mgz
 faA
 faA
 nww
-uVk
-coC
-coC
+bjV
+mbf
+bUu
 faA
 uHg
 bHu
@@ -56852,8 +57068,8 @@ mgz
 faA
 coC
 coC
-coC
-coC
+vde
+mbf
 faA
 faA
 uHg
@@ -61476,7 +61692,7 @@ mgz
 mgz
 gIp
 gIp
-wiB
+ylz
 wiB
 pJJ
 wiB
@@ -62503,7 +62719,7 @@ mgz
 dPH
 dPH
 dPH
-wiB
+ylz
 sFz
 wiB
 mIc
@@ -62757,9 +62973,9 @@ kxb
 wiB
 xag
 jTQ
-dwZ
+hQU
 dPH
-wiB
+iAZ
 dwZ
 wiB
 oCT
@@ -63015,7 +63231,7 @@ gRi
 oWE
 kxb
 wiB
-sFz
+iKC
 wiB
 wiB
 oCT
@@ -64910,7 +65126,7 @@ jUc
 vNS
 iJU
 wte
-iPc
+vpl
 eNY
 wiB
 mgz
@@ -65167,7 +65383,7 @@ jUc
 vNS
 ofW
 wte
-iPc
+wTb
 eNY
 wiB
 bHu
@@ -65424,7 +65640,7 @@ ets
 cxZ
 iJU
 wte
-cys
+muE
 eNY
 wiB
 bHu
@@ -66195,7 +66411,7 @@ dsd
 vNS
 iJU
 wte
-iPc
+fKV
 eNY
 wiB
 mgz
@@ -66452,7 +66668,7 @@ vNS
 vNS
 iJU
 wte
-iPc
+qhi
 eNY
 sFz
 mgz
@@ -69533,10 +69749,10 @@ vOU
 sXT
 vOU
 sMo
-aKr
+hEh
 iJU
 wte
-hFY
+cys
 eNY
 wiB
 mgz
@@ -69792,8 +70008,8 @@ nFd
 sMo
 hNX
 iJU
-kEZ
-bKD
+wte
+iPc
 eNY
 wiB
 mgz
@@ -70049,8 +70265,8 @@ dWW
 vOU
 mGd
 ofW
-khE
-mbf
+wte
+iPc
 eNY
 wiB
 mgz
@@ -70306,8 +70522,8 @@ dWW
 vOU
 lgR
 iJU
-cEZ
-weL
+wte
+vWu
 eNY
 wiB
 mgz
@@ -70563,7 +70779,7 @@ dWW
 sMo
 iJU
 iJU
-fPv
+wte
 vWu
 eNY
 wiB
@@ -70818,10 +71034,10 @@ bJM
 etZ
 dWW
 vOU
-hEh
+cCF
 ofW
-kSS
-mbf
+wte
+iPc
 eNY
 wiB
 bHu
@@ -71077,8 +71293,8 @@ xRN
 cTA
 aKr
 iJU
-kEZ
-ecy
+wte
+iPc
 eNY
 wiB
 bHu
@@ -71335,7 +71551,7 @@ vNS
 vNS
 iJU
 wte
-rjz
+cys
 eNY
 wiB
 mgz
@@ -71849,7 +72065,7 @@ lgR
 vNS
 iJU
 wte
-iPc
+eby
 eNY
 wiB
 mgz
@@ -72106,7 +72322,7 @@ iJU
 wIH
 iJU
 wte
-iPc
+rgH
 eNY
 sFz
 mgz
@@ -73758,8 +73974,8 @@ bHu
 bHu
 mgz
 wiB
-qYR
-wiB
+aZA
+ctg
 wiB
 wiB
 wiB
@@ -74014,7 +74230,7 @@ mgz
 mgz
 mgz
 mgz
-wiB
+tdD
 qzm
 qzm
 mgz
@@ -75335,7 +75551,7 @@ mgz
 bHu
 qYR
 tdD
-gwI
+dPH
 dPH
 ylz
 bHu
@@ -75461,7 +75677,7 @@ mxd
 uHg
 uHg
 mxd
-oRe
+oUo
 oUo
 qSz
 mxd
@@ -75721,7 +75937,7 @@ uHg
 uHg
 wVA
 oUo
-oRe
+oUo
 uHg
 mgz
 mgz
@@ -77008,13 +77224,13 @@ uHg
 uHg
 oUo
 oUo
-oRe
+oUo
 uHg
 mgz
 mgz
 mgz
 uHg
-kgs
+oUo
 oUo
 qSz
 oUo
@@ -77519,7 +77735,7 @@ mgz
 mgz
 uHg
 uHg
-oRe
+oUo
 oUo
 oUo
 uHg
@@ -78733,7 +78949,7 @@ rUK
 rUK
 rUK
 rUK
-cnU
+rUK
 rUK
 uHg
 mgz
@@ -78953,7 +79169,7 @@ pBi
 pBi
 pBi
 pBi
-eVh
+pBi
 pBi
 pBi
 pBi
@@ -79064,7 +79280,7 @@ mgz
 uHg
 uHg
 qSz
-oRe
+oUo
 uHg
 mgz
 mgz
@@ -79760,7 +79976,7 @@ mgz
 mgz
 uHg
 rUK
-cnU
+rUK
 aHS
 rUK
 uHg
@@ -81039,7 +81255,7 @@ dCA
 uHg
 uHg
 rUK
-cnU
+rUK
 rUK
 rUK
 uHg
@@ -81140,7 +81356,7 @@ uHg
 uHg
 oUo
 oUo
-kgs
+oUo
 uHg
 mgz
 "}
@@ -81329,7 +81545,7 @@ rUK
 rUK
 rUK
 rUK
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -81832,7 +82048,7 @@ uHg
 uHg
 uHg
 rUK
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -82073,7 +82289,7 @@ rUK
 rUK
 rUK
 aHS
-cnU
+rUK
 rUK
 wMI
 rUK
@@ -82098,7 +82314,7 @@ uHg
 uHg
 uHg
 rUK
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -82624,7 +82840,7 @@ uHg
 rUK
 rUK
 rUK
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -83094,7 +83310,7 @@ cDd
 mgz
 uHg
 rUK
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -83103,7 +83319,7 @@ rUK
 aHS
 rUK
 rUK
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -83372,7 +83588,7 @@ uHg
 rUK
 rUK
 rUK
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -83390,7 +83606,7 @@ uHg
 rUK
 rUK
 rUK
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -83637,7 +83853,7 @@ uHg
 uHg
 uHg
 uHg
-rUK
+uHg
 rUK
 rUK
 rUK
@@ -83894,8 +84110,8 @@ uHg
 uHg
 uHg
 uHg
-rUK
-cnU
+uHg
+uHg
 rUK
 sVE
 rUK
@@ -84159,7 +84375,7 @@ uHg
 uHg
 uHg
 uHg
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -84677,7 +84893,7 @@ uHg
 uHg
 uHg
 uHg
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -84851,7 +85067,7 @@ bsw
 bsw
 cDk
 rUK
-rGS
+rUK
 bsw
 bsw
 bsw
@@ -84909,7 +85125,7 @@ rUK
 rUK
 rUK
 rUK
-cnU
+rUK
 rUK
 uHg
 uHg
@@ -85163,7 +85379,7 @@ uHg
 uHg
 uHg
 rUK
-cnU
+rUK
 rUK
 rUK
 rUK
@@ -85454,7 +85670,7 @@ uHg
 uHg
 rUK
 rUK
-cnU
+rUK
 rUK
 rUK
 uHg
@@ -85744,7 +85960,7 @@ mgz
 uHg
 pjV
 oUo
-kgs
+oUo
 uHg
 mgz
 mgz
@@ -86241,9 +86457,9 @@ mgz
 uHg
 mRq
 mRq
-wLa
+nIy
 gSZ
-vkj
+eEX
 mRq
 mRq
 mgz
@@ -86257,7 +86473,7 @@ mgz
 mgz
 uHg
 oUo
-oUo
+kgs
 pjV
 oUo
 ljz
@@ -87794,7 +88010,7 @@ dJH
 dJH
 gSz
 qSz
-oUo
+kgs
 uHg
 uHg
 uHg
@@ -89051,7 +89267,7 @@ fIg
 oUo
 axJ
 evG
-fIg
+oUo
 qSz
 mxd
 faA
@@ -90882,7 +91098,7 @@ uJb
 jWU
 uJb
 uJb
-eDu
+uJb
 uJb
 uJb
 uJb
@@ -91112,7 +91328,7 @@ faA
 rHd
 oUo
 oUo
-fIg
+oUo
 oUo
 uYL
 evG
@@ -91148,7 +91364,7 @@ mXP
 oUo
 oUo
 oUo
-kgs
+oUo
 uHg
 uHg
 qSz
@@ -91411,7 +91627,7 @@ uHg
 uHg
 mxd
 rHd
-kgs
+oUo
 wVA
 rHd
 kgs
@@ -91653,7 +91869,7 @@ nZs
 nZs
 nZs
 nZs
-aWg
+nZs
 hbv
 nZs
 nZs
