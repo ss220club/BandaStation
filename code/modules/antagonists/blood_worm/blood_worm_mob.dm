@@ -136,6 +136,8 @@
 
 	ADD_TRAIT(src, TRAIT_BLOOD_HUD, INNATE_TRAIT)
 
+	ADD_TRAIT(src, TRAIT_SLEEPIMMUNE, INNATE_TRAIT) // BANDASTATION EDIT: SSD fix
+
 	// Move speed delays at min health
 	// Hatchling goes from 1.5 up to 2 deciseconds
 	// Juvenile goes from 1.8 up to 2.3 deciseconds
