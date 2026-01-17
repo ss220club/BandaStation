@@ -232,7 +232,7 @@
 							<td style='width:5em;'><font color='#ff3333'><b>Ушибы</b></font></td>\
 							<td style='width:4em;'><font color='#ff9933'><b>Ожоги</b></font></td>\
 							<td style='width:4em;'><font color='#00cc66'><b>Токсины</b></font></td>\
-							<td style='width:8em;'><font color='#00cccc'><b>Удушение</b></font></td>\
+							<td style='width:8em;'><font color='#00cccc'><b>Удушье</b></font></td>\
 							</tr>\
 							<tr>\
 							<td><font color='#ff3333'><b>Общий:</b></font></td>\
