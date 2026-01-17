@@ -2095,12 +2095,6 @@
 /obj/effect/spawner/random/engineering/material_rare,
 /turf/open/floor/iron/dark/textured_large,
 /area/virtual_domain)
-"oJ" = (
-/obj/structure/sink/directional/west,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/bitrunning/cache_spawn,
-/turf/open/floor/plating,
-/area/virtual_domain)
 "oK" = (
 /obj/machinery/door/poddoor/shutters/window{
 	id = "inka_cell_2"
@@ -2387,18 +2381,9 @@
 /turf/open/floor/iron/dark/smooth_half,
 /area/virtual_domain)
 "qM" = (
-/obj/docking_port/stationary{
-	dir = 8;
-	dwidth = 2;
-	height = 11;
-	name = "Inka: NT Base";
-	shuttle_id = "specops_inka";
-	width = 5
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/turf/open/floor/plating,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/pod/dark,
 /area/virtual_domain)
 "qV" = (
 /obj/machinery/door/window/brigdoor/left/directional/east,
@@ -2494,9 +2479,10 @@
 /turf/open/floor/carpet/black,
 /area/virtual_domain)
 "rL" = (
+/obj/structure/sink/directional/west,
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/pod/dark,
+/obj/effect/landmark/bitrunning/cache_spawn,
+/turf/open/floor/plating,
 /area/virtual_domain)
 "rN" = (
 /obj/structure/cable,
@@ -8132,11 +8118,11 @@ SV
 OK
 Lg
 un
-qM
+un
 un
 Pk
 ju
-rL
+qM
 lz
 fr
 dw
@@ -9623,7 +9609,7 @@ oK
 HV
 ex
 hq
-oJ
+rL
 Bp
 DW
 DW
