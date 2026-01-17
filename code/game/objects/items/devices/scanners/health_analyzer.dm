@@ -426,7 +426,7 @@
 			<b>Внимание: [disease.form] обнаружен</b><br>\
 			<div class='ml-2'>\
 			Название: [disease.name].<br>\
-			Тип: [disease.spread_text].<br>\
+			Распространение: [disease.spread_text].<br>\
 			Стадия: [disease.stage]/[disease.max_stages].<br>\
 			Возможное лекарство: [disease.cure_text]</div>\
 			</span>"
@@ -797,7 +797,7 @@
 	for(var/datum/disease/disease as anything in patient.diseases)
 		if(!(disease.visibility_flags & HIDDEN_SCANNER))
 			render += "<span class='alert ml-1'><b>Warning: [disease.form] detected</b><br>\
-			<div class='ml-2'>Имя: [disease.name].<br>Тип: [disease.spread_text].<br>Стадия: [disease.stage]/[disease.max_stages].<br>Возможное лекарство: [disease.cure_text]</div>\
+			<div class='ml-2'>Имя: [disease.name].<brРаспространение: [disease.spread_text].<br>Стадия: [disease.stage]/[disease.max_stages].<br>Возможное лекарство: [disease.cure_text]</div>\
 			</span>"
 
 	if(!length(render))
