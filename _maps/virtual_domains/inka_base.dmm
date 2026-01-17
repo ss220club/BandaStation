@@ -158,7 +158,6 @@
 	dir = 4
 	},
 /obj/machinery/light/directional/east,
-/obj/effect/landmark/bitrunning/cache_spawn,
 /turf/open/floor/iron/dark/smooth_corner{
 	dir = 8
 	},
@@ -778,6 +777,7 @@
 /area/virtual_domain)
 "fz" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/bitrunning/cache_spawn,
 /turf/open/floor/plating,
 /area/virtual_domain)
 "fB" = (
@@ -1624,10 +1624,9 @@
 	},
 /area/virtual_domain)
 "lz" = (
-/obj/machinery/button/door/indestructible{
-	id = "inka_base_north_2"
-	},
-/turf/closed/wall/r_wall,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/pod/light,
 /area/virtual_domain)
 "lA" = (
 /obj/structure/railing{
@@ -2096,6 +2095,12 @@
 /obj/effect/spawner/random/engineering/material_rare,
 /turf/open/floor/iron/dark/textured_large,
 /area/virtual_domain)
+"oJ" = (
+/obj/structure/sink/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/bitrunning/cache_spawn,
+/turf/open/floor/plating,
+/area/virtual_domain)
 "oK" = (
 /obj/machinery/door/poddoor/shutters/window{
 	id = "inka_cell_2"
@@ -2489,8 +2494,9 @@
 /turf/open/floor/carpet/black,
 /area/virtual_domain)
 "rL" = (
-/obj/effect/landmark/bitrunning/cache_spawn,
-/turf/open/floor/mineral/titanium/tiled,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/pod/dark,
 /area/virtual_domain)
 "rN" = (
 /obj/structure/cable,
@@ -3178,6 +3184,8 @@
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
 	},
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/effect/mapping_helpers/airlock/cutaiwire,
 /turf/open/floor/wood/cherry,
 /area/virtual_domain)
 "wB" = (
@@ -5053,7 +5061,6 @@
 	},
 /obj/effect/turf_decal/tile/yellow/opposingcorners,
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/bitrunning/cache_spawn,
 /turf/open/floor/iron/dark,
 /area/virtual_domain)
 "JI" = (
@@ -6186,6 +6193,10 @@
 	pixel_x = -4;
 	pixel_y = -2
 	},
+/obj/item/grenade/c4{
+	pixel_x = 12;
+	pixel_y = 41
+	},
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "Qg" = (
@@ -6659,10 +6670,6 @@
 /area/virtual_domain)
 "Uv" = (
 /obj/machinery/door/poddoor{
-	id = "inka_base_east"
-	},
-/obj/machinery/button/door/indestructible{
-	pixel_y = 28;
 	id = "inka_base_east"
 	},
 /turf/open/floor/pod/dark,
@@ -7757,7 +7764,7 @@ lQ
 zJ
 uS
 Dc
-rL
+eG
 ep
 uS
 Ki
@@ -8129,8 +8136,8 @@ qM
 un
 Pk
 ju
-SV
-DW
+rL
+lz
 fr
 dw
 PG
@@ -9402,7 +9409,7 @@ Mj
 Qg
 Ku
 Ku
-lz
+DW
 Ku
 rc
 ME
@@ -9616,7 +9623,7 @@ oK
 HV
 ex
 hq
-fh
+oJ
 Bp
 DW
 DW
