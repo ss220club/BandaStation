@@ -1,10 +1,10 @@
-GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
+//GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new()) BANDASTATION REMOVAL
 
 /proc/add_item_to_steal(source, type)
 	GLOB.steal_item_handler.objectives_by_path[type] += source
 	return type
-
-/// Holds references to information about all of the items you might need to steal for objectives
+// BANDASTATION REMOVAL START:
+/*// Holds references to information about all of the items you might need to steal for objectives
 /datum/objective_item_handler
 	var/list/list/objectives_by_path
 	var/generated_items = FALSE
@@ -49,6 +49,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	SIGNAL_HANDLER
 	for(var/typepath in objectives_by_path)
 		objectives_by_path[typepath] -= source
+*///  BANDASTATION REMOVAL STOP
 
 //Contains the target item datums for Steal objectives.
 /datum/objective_item
