@@ -218,7 +218,7 @@
 	throwforce = 0
 	w_class = WEIGHT_CLASS_BULKY
 	projectile_type = /obj/projectile/bullet/shrapnel
-/*/ BANDASTATION REMOVAL START: Ratvarian Repeater remove
+
 /obj/structure/mounted_gun/ratvarian_repeater
 	name = "Ratvarian Repeater"
 	desc = "''Brains? Bronze? Why not both?''"
@@ -295,7 +295,6 @@
 	fully_loaded_gun = FALSE
 	is_firing = FALSE
 	icon_state = icon_state_base
-*/// BANDASTATION REMOVAL END
 
 /obj/structure/mounted_gun/ballista
 	name = "Improvised Ballista"
