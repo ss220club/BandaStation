@@ -91,10 +91,10 @@
 		return
 
 	if(ispodperson(M) && !advanced)
-		to_chat(user, span_info("Биологическая структура [M] слишком сложна для анализатора здоровья."))
+		to_chat(user, span_info("Биологическая структура [M.declent_ru(GENITIVE)] слишком сложна для анализатора здоровья."))
 		return
 
-	user.visible_message(span_notice("[user] анализирует жизненные показатели [M]."))
+	user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] анализирует жизненные показатели [M.declent_ru(GENITIVE)]."))
 	balloon_alert(user, "анализ жизненных показателей")
 	playsound(user.loc, 'sound/items/healthanalyzer.ogg', 50)
 
@@ -168,7 +168,7 @@
 			oxy_loss += 200 - (oxy_loss + tox_loss + fire_loss + brute_loss)
 			oxy_loss = clamp(oxy_loss, 0, 200)
 
-	render_list += "[span_info("Анализ результатов для <b>[target]</b> ([station_time_timestamp()]):")]<br><span class='info ml-1'>Общее состояние: [mob_status]</span><br>"
+	render_list += "[span_info("Анализ результатов для <b>[target.declent_ru(GENITIVE)]</b> ([station_time_timestamp()]):")]<br><span class='info ml-1'>Общее состояние: [mob_status]</span><br>"
 
 	if(!advanced && target.has_reagent(/datum/reagent/inverse/technetium))
 		advanced = TRUE
@@ -351,7 +351,7 @@
 		//body temperature
 		var/datum/species/targetspecies = humantarget.dna.species
 		var/disguised = !ishumanbasic(humantarget) && istype(humantarget.head, /obj/item/clothing/head/hooded/human_head) && istype(humantarget.wear_suit, /obj/item/clothing/suit/hooded/bloated_human)
-		var/species_name = "[disguised ? "\"[/datum/species/human::name]\"" : targetspecies.name][mutant ? "-derived mutant" : ""]"
+		var/species_name = "[disguised ? "\"[/datum/species/human::name]\"" : targetspecies.name][mutant ? "-мутант" : ""]"
 
 		render_list += "<span class='info ml-1'>Вид: [species_name]</span><br>"
 		var/core_temperature_message = "Внутренняя температура тела: [round(humantarget.coretemperature-T0C, 0.1)] &deg;C ([round(humantarget.coretemperature*1.8-459.67,0.1)] &deg;F)"
@@ -378,14 +378,14 @@
 		var/blood_type_format
 		var/level_format
 		if(cached_blood_volume <= BLOOD_VOLUME_SAFE && cached_blood_volume > BLOOD_VOLUME_OKAY)
-			level_format = "НИЗКИЙ [blood_percent]%, [cached_blood_volume] cl"
+			level_format = "НИЗКИЙ [blood_percent]%, [cached_blood_volume] сл"
 			if (blood_type.restoration_chem)
-				level_format = conditional_tooltip(level_format, "Рекомендация: Приём [blood_type.restoration_chem::name].", tochat)
+				level_format = conditional_tooltip(level_format, "Рекомендация: приём [blood_type.restoration_chem::name].", tochat)
 		else if(cached_blood_volume <= BLOOD_VOLUME_OKAY)
-			level_format = "<b>КРИТИЧЕСКИЙ [blood_percent]%</b>, [cached_blood_volume] cl"
+			level_format = "<b>КРИТИЧЕСКИЙ [blood_percent]%</b>, [cached_blood_volume] сл"
 			var/recommendation = list()
 			if (blood_type.restoration_chem)
-				recommendation += "Поставка [blood_type.restoration_chem::name]"
+				recommendation += "ввод [blood_type.restoration_chem::name]"
 			if (blood_type.restoration_chem == /datum/reagent/iron)
 				recommendation += "[/datum/reagent/medicine/salglu_solution::name]"
 			if (length(recommendation))
@@ -394,7 +394,7 @@
 				recommendation += "Немедленное переливание [blood_type.get_blood_name()]"
 			level_format = conditional_tooltip(level_format, "Рекомендация: [english_list(recommendation, and_text = " или ")].", tochat)
 		else
-			level_format = "[blood_percent]%, [cached_blood_volume] cl"
+			level_format = "[blood_percent]%, [cached_blood_volume] сл"
 
 		if (blood_type.get_type())
 			blood_type_format = "группа крови: [blood_type.get_type()]"
@@ -423,7 +423,7 @@
 			render_list += "<hr>"
 			disease_hr = TRUE
 		render_list += "<span class='alert ml-1'>\
-			<b>Внимание: [disease.form] обнаружен</b><br>\
+			<b>Внимание: [disease.form]</b><br>\
 			<div class='ml-2'>\
 			Название: [disease.name].<br>\
 			Распространение: [disease.spread_text].<br>\
@@ -470,7 +470,7 @@
 /obj/item/healthanalyzer/click_ctrl_shift(mob/user)
 	. = ..()
 	if(!LAZYLEN(last_scan_text))
-		balloon_alert(user, "нет анализизов!")
+		balloon_alert(user, "нет анализов!")
 		return
 	if(scanner_busy)
 		balloon_alert(user, "анализатор занят!")
@@ -542,7 +542,7 @@
 				if(reagent_types_to_check)
 					if(!istype(reagent, reagent_types_to_check))
 						continue
-				render_block += "<span class='notice ml-2'>[round(reagent.volume, 0.001)] units of [reagent.name][reagent.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
+				render_block += "<span class='notice ml-2'>[round(reagent.volume, 0.001)] юнитов [reagent.name][reagent.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
 
 		if(!length(render_block)) //If no VISIBLY DISPLAYED reagents are present, we report as if there is nothing.
 			render_list += "<span class='notice ml-1'>Субъект не содержит реагенты в кровотоке.</span><br>"
@@ -563,7 +563,7 @@
 						if(!istype(bit, reagent_types_to_check))
 							continue
 					if(!belly.food_reagents[bit.type])
-						render_block += "<span class='notice ml-2'>[round(bit.volume, 0.001)] units of [bit.name][bit.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
+						render_block += "<span class='notice ml-2'>[round(bit.volume, 0.001)] юнитов [bit.name][bit.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
 					else
 						var/bit_vol = bit.volume - belly.food_reagents[bit.type]
 						if(bit_vol > 0)
@@ -710,8 +710,8 @@
 
 	add_fingerprint(user)
 	user.visible_message(
-		span_notice("[user] сканирует [interacting_with] на [scan_for_what]."),
-		span_notice("Вы сканируете [interacting_with] на [scan_for_what]."),
+		span_notice("[user] сканирует [interacting_with.declent_ru(ACCUSATIVE)] на [scan_for_what]."),
+		span_notice("Вы сканируете [interacting_with.declent_ru(ACCUSATIVE)] на [scan_for_what]."),
 	)
 
 	if(!iscarbon(interacting_with))
@@ -796,7 +796,7 @@
 	var/list/render = list()
 	for(var/datum/disease/disease as anything in patient.diseases)
 		if(!(disease.visibility_flags & HIDDEN_SCANNER))
-			render += "<span class='alert ml-1'><b>Warning: [disease.form] detected</b><br>\
+			render += "<span class='alert ml-1'><b>Внимание: [disease.form]</b><br>\
 			<div class='ml-2'>Имя: [disease.name].<brРаспространение: [disease.spread_text].<br>Стадия: [disease.stage]/[disease.max_stages].<br>Возможное лекарство: [disease.cure_text]</div>\
 			</span>"
 
