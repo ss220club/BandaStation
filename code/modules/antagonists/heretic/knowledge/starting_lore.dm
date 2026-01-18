@@ -330,7 +330,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  */
 /datum/heretic_knowledge/bookworm
 	name = "Приветствие Уоррена Кинга"
-	desc = "Позволяет трансмутировать 5 обрезков провода и лист бумаги, чтобы наделить любое удостоверение личности доступом к внешним шлюзам"
+	desc = "Позволяет трансмутировать 5 обрезков провода и лист бумаги, чтобы наделить любую ID-карту доступом к внешним шлюзам"
 	gain_text = "Gnawed into vicious-stained fingerbones, my grim invitation snaps my nauseous and clouded mind towards the heavy-set door. \
 	Slowly, the light dances between a crawling darkness, blanketing the fetid promenade with infinite machinations. \
 	But the King will soon take his pound of flesh. Even here, the taxman takes their cut. For there are a thousands mouths to feed."
