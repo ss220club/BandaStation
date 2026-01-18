@@ -295,4 +295,4 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 #undef OLLAMA_MODEL
 #undef SYSTEM_PROMPT_ANALYZE
 #undef SYSTEM_PROMPT_REPLY_BASE
-#undef FAX_MD_TEMPLATE
+#undef FAX_TEMPLATE_FILE
