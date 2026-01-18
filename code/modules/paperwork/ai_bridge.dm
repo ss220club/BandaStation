@@ -2,6 +2,7 @@
 #define URGENCY_COLOR_MEDIUM "#ff9900"
 #define URGENCY_COLOR_HIGH "red"
 #define URGENCY_COLOR_CRITICAL "darkred"
+#define FAX_TEMPLATE_FILE "config/blanks/markdown/centcom/nt_centcom_00.md"
 
 // Configuration for LLM
 #define OLLAMA_MODEL "qwen3-vl:235b-instruct"
@@ -23,7 +24,7 @@ OUTPUT FORMAT: Return a valid JSON object with field: 'draft' (string, use <br> 
 CRITICAL RULES:\n\
 1. LENGTH: STRICTLY UNDER 150 WORDS. Be concise.\n\
 2. NO META-GAMING: Never mention 'Administrator' or 'Server'. Refer to 'Central Command Directives'.\n\
-3. FORMAT: No headers. Only: Reply body + Signature."
+3. FORMAT: No headers. Only: Reply body."
 
 /// Global singleton for AI bridge, initialized automatically
 GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
@@ -160,13 +161,21 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 		to_chat(user, "<span class='danger'>AI Error: Empty draft received.</span>")
 		return
 
+	var/final_md = ""
+	if(fexists(FAX_TEMPLATE_FILE))
+		final_md = file2text(FAX_TEMPLATE_FILE)
+	else
+		// Фолбэк, если файл не найден (чтобы не упало с ошибкой)
+		to_chat(user, "<span class='boldwarning'>Warning: Template file [FAX_TEMPLATE_FILE] not found! Using raw text.</span>")
+		final_md = "\[input_field]"
+	final_md = replacetext(final_md, "\[input_field]", draft_text)
 	// --- FAX INTERFACE ---
 	var/datum/fax_panel_interface/ui = new /datum/fax_panel_interface(user)
 
-	var/plain_text = replacetext(draft_text, "<br>", "\n")
+	//var/plain_text = replacetext(draft_text, "<br>", "\n")
 	ui.prefill_sender = "Central Command"
 	ui.prefill_paper_name = "Reply to [fax_data["sender"]]"
-	ui.prefill_text = plain_text
+	ui.prefill_text = final_md
 
 	ui.sending_fax_name = "Central Command"
 	ui.default_paper_name = "Reply to [fax_data["sender"]]"
@@ -174,10 +183,10 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	var/obj/item/paper/P = ui.fax_paper
 	P.name = ui.default_paper_name
 	
-	var/html_text = replacetext(draft_text, "\n", "<br>")
+	//var/html_text = replacetext(draft_text, "\n", "<br>")
 	
 	if("info" in P.vars)
-		P.vars["info"] = html_text
+		P.vars["info"] = final_md
 	
 	P.update_icon() 
 
@@ -286,3 +295,4 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 #undef OLLAMA_MODEL
 #undef SYSTEM_PROMPT_ANALYZE
 #undef SYSTEM_PROMPT_REPLY_BASE
+#undef FAX_MD_TEMPLATE
