@@ -60,9 +60,8 @@
 	var/possessed_atom = usr.GetComponent(/datum/component/object_possession)?.possessed
 	if(!possessed_atom)
 		. = say_dead(message)
-	else if(ismovable(possessed_atom))
-		var/atom/movable/object_movable = possessed_atom
-		. = object_movable.say(message)
+	else
+		. = possessed_atom.say(message)
 	// BANDASTATION EDIT END: Possessed objects can speak
 
 /mob/dead/observer/Hear(atom/movable/speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, list/spans, list/message_mods = list(), message_range)
