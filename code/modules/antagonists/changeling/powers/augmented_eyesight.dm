@@ -8,6 +8,7 @@
 	helptext = "Дает нам рентгеновское зрение или защиту от вспышек. \
 		Пока рентгеновское зрение активно, мы станем гораздо более уязвимыми для устройств со вспышкой."
 	button_icon_state = "augmented_eyesight"
+	category = "utility"
 	chemical_cost = 0
 	dna_cost = 2
 	// Active = Flash weakness and x-ray

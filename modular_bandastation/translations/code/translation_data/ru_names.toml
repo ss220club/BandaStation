@@ -29469,3 +29469,57 @@ accusative = "резиновую печать ОТКАЗАНО"
 instrumental = "резиновой печатью ОТКАЗАНО"
 prepositional = "резиновой печати ОТКАЗАНО"
 gender = "female"
+
+["ring box"]
+nominative = "коробочка для кольца"
+genitive = "коробочки для кольца"
+dative = "коробочке для кольца"
+accusative = "коробочку для кольца"
+instrumental = "коробочкой для кольца"
+prepositional = "коробочке для кольца"
+gender = "female"
+
+["diamond ring box"]
+nominative = "коробочка с кольцом с бриллиантом"
+genitive = "коробочки с кольцом с бриллиантом"
+dative = "коробочке с кольцом с бриллиантом"
+accusative = "коробочку с кольцом с бриллиантом"
+instrumental = "коробочкой с кольцом с бриллиантом"
+prepositional = "коробочке с кольцом с бриллиантом"
+gender = "female"
+
+["silver ring box"]
+nominative = "коробочка с серебряным кольцом"
+genitive = "коробочки с серебряным кольцом"
+dative = "коробочке с серебряным кольцом"
+accusative = "коробочку с серебряным кольцом"
+instrumental = "коробочкой с серебряным кольцом"
+prepositional = "коробочке с серебряным кольцом"
+gender = "female"
+
+["gold ring"]
+nominative = "золотое кольцо"
+genitive = "золотого кольца"
+dative = "золотому кольцу"
+accusative = "золотое кольцо"
+instrumental = "золотым кольцом"
+prepositional = "золотом кольце"
+gender = "neuter"
+
+["silver ring"]
+nominative = "серебряное кольцо"
+genitive = "серебряного кольца"
+dative = "серебряному кольцу"
+accusative = "серебряное кольцо"
+instrumental = "серебряным кольцом"
+prepositional = "серебряном кольце"
+gender = "neuter"
+
+["diamond ring"]
+nominative = "кольцо с бриллиантом"
+genitive = "кольца с бриллиантом"
+dative = "кольцу с бриллиантом"
+accusative = "кольцо с бриллиантом"
+instrumental = "кольцом с бриллиантом"
+prepositional = "кольце с бриллиантом"
+gender = "neuter"
