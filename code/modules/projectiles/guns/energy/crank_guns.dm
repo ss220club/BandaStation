@@ -152,7 +152,6 @@
 	light_color = COLOR_BLUE
 	ammo_type = list(/obj/item/ammo_casing/energy/nanite/cryo)
 
-/*/ BANDASTATION REMOVAL START: Ratvarian Repeater remove
 /obj/item/gun/energy/laser/musket/repeater
 	name = "iconoclast's repeater"
 	desc = "A weapon of incredible bulk, this ratvarian repeater has been permanently severed from its stand to be carried by hand. Cumbersome, Yes - but powerful."
@@ -186,7 +185,7 @@
 
 /obj/item/gun/energy/laser/musket/repeater/add_deep_lore()
 	return
-*/// BANDASTATION REMOVAL END
+
 // The Deep Lore //
 
 // Laser Musket
