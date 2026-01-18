@@ -57,7 +57,7 @@
 		return
 
 	// BANDASTATION EDIT START: Possessed objects can speak
-	var/possessed_atom = usr.GetComponent(/datum/component/object_possession)?.possessed
+	var/obj/possessed_atom = usr.GetComponent(/datum/component/object_possession)?.possessed
 	if(!possessed_atom)
 		. = say_dead(message)
 	else
