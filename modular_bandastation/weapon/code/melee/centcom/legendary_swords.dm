@@ -109,6 +109,20 @@
 	unwieldsound = 'modular_bandastation/weapon/sound/melee/kel_saberoff.ogg'
 	hit_wield = 'modular_bandastation/weapon/sound/melee/kel_saberhit.ogg'
 
+/obj/item/dualsaber/legendary_saber/luna
+	name = "Луна"
+	desc = "\"Луна\" - один из легендарных энергетических мечей Галактики. Эта энергорапира - воплощённый дуализм, вечная спутница Земли. Рукоять, выполненная из облегченного сплава иридия, имеет характерный фиолетовый оттенок. Она плавно оплетена линиями гарды, прикрывающей руку, а кольца позволяют удобно удерживать оружие для колющих ударов и финтов. Из-за такой конструкции энергокристалл расположен снаружи, потому он формирует серебристо-бирюзовый тонкий клинок - что и придаёт сходство с рапирой, однако и рассеивает часть энергии вдоль первой половины лезвия. По этой же причине для неумелого бойца Луна слишком опасна, в руках опытного же фехтовальщика - грозное оружие, способное пронзать и защищать выверенными движениями. Создатель: Айнхорн Д'Альварес. Текущий владелец: Виктория Ольшевская."
+	icon_state = "olsh_dualsaber0"
+	inhand_icon_state = "kel_dualsaber0"
+	saber_color = "olshevskaya"
+	refusal_text = "Свет Луны не падает на тебя, клинок не слушается."
+	light_color = LIGHT_COLOR_HOLY_MAGIC
+	saber_name = "olsh"
+	// I don't get any sounds, so we'll just use already existing sounds (why are you using unique sounds? That's scary.)
+	wieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberon.ogg'
+	unwieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberoff.ogg'
+	hit_wield = 'modular_bandastation/weapon/sound/melee/kir_saberhit.ogg'
+
 /obj/item/dualsaber/legendary_saber/pre_attack(atom/A, mob/living/user, params)
 	var/charged = FALSE
 	var/proximity = get_proximity(A, user)

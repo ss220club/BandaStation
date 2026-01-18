@@ -283,3 +283,59 @@
 		/obj/item/clothing/neck/cloak/sci_mantle = 3,
 		)
 	. = ..()
+
+// Oll Foods Vending Machine
+// It's subtype of snack to allow random spawn of this vendor on maps without editing
+/obj/machinery/vending/snack/ollfoods
+	name = "Oll Foods"
+	desc = "Торговый автомат с премиальными натуральными продуктами. Технология их поддержания в свежем состоянии секретна и запатентована."
+	icon = 'modular_bandastation/objects/icons/obj/machines/vending.dmi'
+	icon_state = "ollfoods"
+	product_slogans = "Яблоки, груши и многое другое! В пять раз больше витанов!; Лучше переплатить за еду, чем платить за лечение!"
+	product_ads = "Свежее!;Натуральное!;С любовью из Олл Фудс;Прямо с грядки;Настоящий вкус;Приготовь сам!;Последний урожай!"
+	products = list(
+		/obj/item/food/grown/apple = 6,
+		/obj/item/food/grown/banana = 6,
+		/obj/item/food/grown/grapes = 6,
+		/obj/item/food/grown/plum = 6,
+		/obj/item/food/grown/watermelon = 6,
+		/obj/item/food/grown/pineapple = 6,
+		/obj/item/food/grown/carrot = 6,
+		/obj/item/food/grown/cabbage = 6,
+		/obj/item/food/grown/pumpkin = 6,
+		/obj/item/food/grown/parsnip = 6,
+		/obj/item/food/grown/potato = 6,
+		/obj/item/food/grown/tomato = 6,
+		/obj/item/food/grown/corn = 6,
+		/obj/item/reagent_containers/condiment/flour = 6,
+		/obj/item/reagent_containers/condiment/rice = 6,
+		/obj/item/reagent_containers/condiment/sugar = 6,
+		/obj/item/reagent_containers/condiment/milk = 6,
+		/obj/item/reagent_containers/condiment/soymilk = 4,
+		/obj/item/reagent_containers/condiment/coconut_milk = 4,
+	)
+	contraband = list(
+		/obj/item/food/grown/ambrosia = 4,
+		/obj/item/food/grown/cannabis = 4,
+
+	)
+	premium = list(
+		/obj/item/food/grown/apple/gold = 1,
+	)
+	allow_custom = FALSE
+	refill_canister = /obj/item/vending_refill/ollfoods
+	default_price = PAYCHECK_CREW
+	extra_price = PAYCHECK_CREW * 5
+
+/obj/item/vending_refill/ollfoods
+	machine_name = "Oll Foods"
+
+/datum/supply_pack/vending/ollfoods
+	name = "Oll Foods"
+	desc = "В этом контейнере содержится набор для восполнения торгового автомата Oll Foods"
+	cost = CARGO_CRATE_VALUE * 2
+	contains = list(/obj/item/vending_refill/ollfoods)
+	crate_name = "oll foods supply crate"
+
+
+
