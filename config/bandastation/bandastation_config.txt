@@ -27,6 +27,7 @@
 ## Bandastation Races
 ROUNDSTART_RACES vulpkanin
 ROUNDSTART_RACES tajaran
+ROUNDSTART_RACES kidan
 
 ## Automatic crew transfer
 
