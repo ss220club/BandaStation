@@ -754,7 +754,7 @@
 		return NONE
 
 /obj/item/storage/belt/sheath/sabre/update_icon_state()
-
+	. = ..()
 	icon_state = base_icon_state
 	inhand_icon_state = base_icon_state
 	worn_icon_state = base_icon_state
@@ -765,13 +765,14 @@
 	return
 
 /obj/item/storage/belt/sheath/sabre/item_ctrl_click(mob/user)
-
+	. = ..()
 	if(skinned)
 		return CLICK_ACTION_BLOCKING
 	if(!length(contents))
 		to_chat(user, span_notice("Поместите саблю в ножны, прежде чем пытаться сделать это"))
 		return CLICK_ACTION_BLOCKING
 	else
+		var/obj/item/melee/sabre/reskin_object = contents[1]
 		var/list/skins = list()
 		for(var/option in options)
 			skins[option] = image(icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi', icon_state = "sheath_"+options[option]+"-full")
@@ -790,15 +791,15 @@
 			worn_icon = 'modular_bandastation/objects/icons/obj/clothing/belts/sheath.dmi'
 			lefthand_file = 'icons/mob/inhands/equipment/belt_lefthand.dmi'
 			righthand_file = 'icons/mob/inhands/equipment/belt_righthand.dmi'
-			contents[1].icon = 'modular_bandastation/objects/icons/obj/weapons/sword.dmi'
-			contents[1].lefthand_file = 'modular_bandastation/objects/icons/obj/weapons/saber/saber_left.dmi'
-			contents[1].righthand_file = 'modular_bandastation/objects/icons/obj/weapons/saber/saber_right.dmi'
+			reskin_object.icon = 'modular_bandastation/objects/icons/obj/weapons/sword.dmi'
+			reskin_object.lefthand_file = 'modular_bandastation/objects/icons/obj/weapons/saber/saber_left.dmi'
+			reskin_object.righthand_file = 'modular_bandastation/objects/icons/obj/weapons/saber/saber_right.dmi'
 			base_icon_state = "sheath_"+ options[choice]
 			icon_state = "sheath_"+ options[choice]
 			inhand_icon_state = "sheath"
 			worn_icon_state = "sheath_"+ options[choice]
-			contents[1].icon_state = "saber_"+ options[choice]
-			contents[1].inhand_icon_state = "saber_" + options[choice]
+			reskin_object.icon_state = "saber_"+ options[choice]
+			reskin_object.inhand_icon_state = "saber_" + options[choice]
 			src.update_icon_state()
 			to_chat(user, "[choice] идеально вам подходит.")
 		return CLICK_ACTION_SUCCESS
