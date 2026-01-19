@@ -451,7 +451,7 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 
 	var/tech_text = ""
 	if(owner.has_reagent(/datum/reagent/inverse/technetium))
-		tech_text = "[round((damage / maxHealth) * 100, 1)]% damaged"
+		tech_text = "[round((damage / maxHealth) * 100, 1)]% повреждено"
 
 	if(organ_flags & ORGAN_FAILING)
 		return conditional_tooltip("[colored ? "<font color='#cc3333'>" : ""][tech_text || "Не функционирует"][colored ? "</font>" : ""]", "Проведение операции или замена хирургическим путем.", add_tooltips)

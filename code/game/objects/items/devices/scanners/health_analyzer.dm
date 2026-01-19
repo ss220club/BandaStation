@@ -567,7 +567,7 @@
 					else
 						var/bit_vol = bit.volume - belly.food_reagents[bit.type]
 						if(bit_vol > 0)
-							render_block += "<span class='notice ml-2'>[round(bit_vol, 0.001)] units of [bit.name][bit.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
+							render_block += "<span class='notice ml-2'>[round(bit_vol, 0.001)] юнитов [bit.name][bit.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
 
 			if(!length(render_block))
 				render_list += "<span class='notice ml-1'>Субъект не содержит реагенты в желудке.</span><br>"
@@ -797,12 +797,12 @@
 	for(var/datum/disease/disease as anything in patient.diseases)
 		if(!(disease.visibility_flags & HIDDEN_SCANNER))
 			render += "<span class='alert ml-1'><b>Внимание: [disease.form]</b><br>\
-			<div class='ml-2'>Имя: [disease.name].<brРаспространение: [disease.spread_text].<br>Стадия: [disease.stage]/[disease.max_stages].<br>Возможное лекарство: [disease.cure_text]</div>\
+			<div class='ml-2'>Имя: [disease.name].<br>Распространение: [disease.spread_text].<br>Стадия: [disease.stage]/[disease.max_stages].<br>Возможное лекарство: [disease.cure_text]</div>\
 			</span>"
 
 	if(!length(render))
 		playsound(scanner, 'sound/machines/ping.ogg', 50, FALSE)
-		to_chat(user, span_notice("Анализатор болезней радостно пикает и на короткое время показывает смайлик с несколькими восклицательными знаками! Он рад сообщить, что [patient] не имеет болезней!"))
+		to_chat(user, span_notice("[capitalize(scanner.declent_ru(NOMINATIVE))] радостно пикает и на короткое время показывает смайлик с несколькими восклицательными знаками! Он рад сообщить, что [patient] не имеет болезней!"))
 		scanner.emotion = AID_EMOTION_HAPPY
 	else
 		to_chat(user, span_notice(render.Join("")))
