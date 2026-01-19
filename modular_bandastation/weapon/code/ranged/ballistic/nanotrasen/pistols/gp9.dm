@@ -38,6 +38,9 @@
 /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
 	spawnwithmagazine = FALSE
 
+/obj/item/gun/ballistic/automatic/pistol/gp9/sec
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
+
 /obj/item/gun/ballistic/automatic/pistol/gp9/spec
 	name = "GP-93R"
 	desc = "Стандартный служебный пистолет общего назначения под малоимпульсные патроны калибра 9x25мм НТ. Специальный вариант с возможностью вести автоматический огонь."
