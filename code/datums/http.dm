@@ -27,10 +27,11 @@
 	src.output_file = output_file
 	src.timeout_seconds = timeout_seconds
 
-/datum/http_request/proc/fire_and_forget()
-	var/result = rustg_http_request_fire_and_forget(method, url, body, headers, build_options())
-	if(result != "ok")
-		CRASH("[result]")
+// BANDASTATION REMOVAL: rustg
+// /datum/http_request/proc/fire_and_forget()
+// 	var/result = rustg_http_request_fire_and_forget(method, url, body, headers, build_options())
+// 	if(result != "ok")
+// 		CRASH("[result]")
 
 /datum/http_request/proc/execute_blocking()
 	_raw_response = rustg_http_request_blocking(method, url, body, headers, build_options())

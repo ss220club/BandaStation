@@ -341,7 +341,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	headers["Content-Type"] = "application/json"
 	var/datum/http_request/request = new
 	request.prepare(RUSTG_HTTP_METHOD_POST, webhook, json_encode(webhook_info), headers, "tmp/response.json")
-	request.fire_and_forget()
+	//request.fire_and_forget() // BANDASTATION REMOVAL: rustg
 
 /datum/admin_help/Destroy()
 	RemoveActive()
