@@ -10789,6 +10789,24 @@ instrumental = "анализатором травм"
 prepositional = "анализаторе травм"
 gender = "male"
 
+["disease state analyzer"]
+nominative = "анализатор болезней"
+genitive = "анализатора болезней"
+dative = "анализатору болезней"
+accusative = "анализатор болезней"
+instrumental = "анализатором болезней"
+prepositional = "анализаторе болезней"
+gender = "male"
+
+["mining wound analyzer"]
+nominative = "шахтерский анализатор травм"
+genitive = "шахтерского анализатора травм"
+dative = "шахтерскому анализатору травм"
+accusative = "шахтерский анализатор травм"
+instrumental = "шахтерским анализатором травм"
+prepositional = "шахтерском анализаторе травм"
+gender = "male"
+
 ["Inhaler"]
 nominative = "ингалятор"
 genitive = "ингалятора"
