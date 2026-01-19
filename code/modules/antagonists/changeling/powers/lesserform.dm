@@ -3,6 +3,7 @@
 	desc = "Мы переформируемся и становимся низшими. Мы становимся обезьяной. Стоит 5 химикатов."
 	helptext = "Трансформация значительно уменьшает наши размеры, позволяя нам выскальзывать из наручников и пролезать в вентиляционные отверстия."
 	button_icon_state = "lesser_form"
+	category = "stealth"
 	chemical_cost = 5
 	dna_cost = 1
 	/// Whether to allow the transformation animation to play
