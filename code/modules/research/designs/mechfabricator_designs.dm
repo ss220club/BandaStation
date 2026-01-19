@@ -2479,6 +2479,17 @@
 	)
 	build_path = /obj/item/mod/module/plasma_stabilizer
 
+// BANDASTATION ADD START - RAVE MODULE in Fabricator
+/datum/design/module/mod_rave
+	name = "Rave Module"
+	id = "mod_rave"
+	materials = list(
+		/datum/material/iron =SMALL_MATERIAL_AMOUNT*5,
+		/datum/material/glass =HALF_SHEET_MATERIAL_AMOUNT,
+	)
+	build_path = /obj/item/mod/module/visor/rave
+// BANDASTATION ADD END - RAVE MODULE in Fabricator
+
 /datum/design/module/mod_glove_translator
 	name = "Glove Translator Module"
 	id = "mod_sign_radio"
