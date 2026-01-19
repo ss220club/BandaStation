@@ -481,9 +481,9 @@
 	on_stun_volume = 50
 	active = FALSE
 	stun_on_harmbaton = TRUE
-	wait_desc = "still charging!"
-	activated_word = "activated"
-	context_living_rmb_active = "Harmful Stun"
+	wait_desc = "ещё перезаряжается!"
+	activated_word = "активирован"
+	context_living_rmb_active = "Травмирующее оглушение"
 	light_range = 1.5
 	light_system = OVERLAY_LIGHT
 	light_on = FALSE
