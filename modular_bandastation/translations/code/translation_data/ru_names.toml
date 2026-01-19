@@ -25511,6 +25511,7 @@ dative = "сырому блюспейс ядру"
 accusative = "сырое блюспейс ядро"
 instrumental = "сырым блюспейс ядром"
 prepositional = "сыром блюспейс ядре"
+gender = "neuter"
 
 ["raw vortex core"]
 nominative = "сырое вортекс ядро"
@@ -25519,6 +25520,7 @@ dative = "сырому вортекс ядру"
 accusative = "сырое вортекс ядро"
 instrumental = "сырым вортекс ядром"
 prepositional = "сыром вортекс ядре"
+gender = "neuter"
 
 ["raw gravity core"]
 nominative = "сырое гравитационное ядро"
@@ -25527,6 +25529,7 @@ dative = "сырому гравитационному ядру"
 accusative = "сырое гравитационное ядро"
 instrumental = "сырым гравитационным ядром"
 prepositional = "сыром гравитационном ядре"
+gender = "neuter"
 
 ["raw pyro core"]
 nominative = "сырое пиро ядро"
@@ -25535,6 +25538,7 @@ dative = "сырому пиро ядру"
 accusative = "сырое пиро ядро"
 instrumental = "сырым пиро ядром"
 prepositional = "сыром пиро ядре"
+gender = "neuter"
 
 ["raw flux core"]
 nominative = "сырое флюкс ядро"
@@ -25543,6 +25547,7 @@ dative = "сырому флюкс ядру"
 accusative = "сырое флюкс ядро"
 instrumental = "сырым флюкс ядром"
 prepositional = "сыром флюкс ядре"
+gender = "neuter"
 
 ["raw bioscrambler core"]
 nominative = "сырое биоскремблер ядро"
@@ -25551,6 +25556,7 @@ dative = "сырому биоскремблер ядру"
 accusative = "сырое биоскремблер ядро"
 instrumental = "сырым биоскремблер ядром"
 prepositional = "сыром биоскремблер ядре"
+gender = "neuter"
 
 ["raw dimensional core"]
 nominative = "сырое пространственное ядро"
@@ -25559,6 +25565,7 @@ dative = "сырому пространственному ядру"
 accusative = "сырое пространственное ядро"
 instrumental = "сырым пространственным ядром"
 prepositional = "сыром пространственном ядре"
+gender = "neuter"
 
 ["raw ectoplasm core"]
 nominative = "сырое эктоплазменное ядро"
@@ -25567,6 +25574,7 @@ dative = "сырому эктоплазменному ядру"
 accusative = "сырое эктоплазменное ядро"
 instrumental = "сырым эктоплазменным ядром"
 prepositional = "сыром эктоплазменном ядре"
+gender = "neuter"
 
 ["raw hallucination core"]
 nominative = "сырое галлюцинаторное ядро"
@@ -25575,6 +25583,16 @@ dative = "сырому галлюцинаторному ядру"
 accusative = "сырое галлюцинаторное ядро"
 instrumental = "сырым галлюцинаторным ядром"
 prepositional = "сыром галлюцинаторном ядре"
+gender = "neuter"
+
+["raw weather core"]
+nominative = "сырое погодное ядро"
+genitive = "сырого погодного ядра"
+dative = "сырому погодному ядру"
+accusative = "сырое погодное ядро"
+instrumental = "сырым погодным ядром"
+prepositional = "сыром погодном ядре"
+gender = "neuter"
 
 ["pyroclastic anomaly core"]
 nominative = "пирокластическое аномальное ядро"
@@ -25583,6 +25601,7 @@ dative = "пирокластическому аномальному ядру"
 accusative = "пирокластическое аномальное ядро"
 instrumental = "пирокластическим аномальным ядром"
 prepositional = "пирокластическом аномальном ядре"
+gender = "neuter"
 
 ["gravitational anomaly core"]
 nominative = "гравитационное аномальное ядро"
@@ -25591,6 +25610,7 @@ dative = "гравитационному аномальному ядру"
 accusative = "гравитационное аномальное ядро"
 instrumental = "гравитационным аномальным ядром"
 prepositional = "гравитационном аномальном ядре"
+gender = "neuter"
 
 ["bluespace anomaly core"]
 nominative = "аномальное ядро блюспейс"
@@ -25599,6 +25619,7 @@ dative = "аномальному ядру блюспейс"
 accusative = "аномальное ядро блюспейс"
 instrumental = "аномальным ядром блюспейс"
 prepositional = "аномальном ядре блюспейс"
+gender = "neuter"
 
 ["vortex anomaly core"]
 nominative = "аномальное ядро вортекс"
@@ -25607,6 +25628,7 @@ dative = "аномальному ядру вортекс"
 accusative = "аномальное ядро вортекс"
 instrumental = "аномальным ядром вортекс"
 prepositional = "аномальном ядре вортекс"
+gender = "neuter"
 
 ["flux anomaly core"]
 nominative = "аномальное ядро флюкс"
@@ -25615,6 +25637,7 @@ dative = "аномальному ядру флюкс"
 accusative = "аномальное ядро флюкс"
 instrumental = "аномальным ядром флюкс"
 prepositional = "аномальном ядре флюкс"
+gender = "neuter"
 
 ["bioscrambler anomaly core"]
 nominative = "аномальное ядро биоскремблер"
@@ -25623,6 +25646,7 @@ dative = "аномальному ядру биоскремблер"
 accusative = "аномальное ядро биоскремблер"
 instrumental = "аномальным ядром биоскремблер"
 prepositional = "аномальном ядре биоскремблер"
+gender = "neuter"
 
 ["hallucination anomaly core"]
 nominative = "галлюцинаторное аномальное ядро"
@@ -25631,6 +25655,7 @@ dative = "галлюцинаторному аномальному ядру"
 accusative = "галлюцинаторное аномальное ядро"
 instrumental = "галлюцинаторным аномальным ядром"
 prepositional = "галлюцинаторном аномальном ядре"
+gender = "neuter"
 
 ["dimensional anomaly core"]
 nominative = "пространственное аномальное ядро"
@@ -25639,6 +25664,16 @@ dative = "пространственному аномальному ядру"
 accusative = "пространственное аномальное ядро"
 instrumental = "пространственным аномальным ядром"
 prepositional = "пространственном аномальном ядре"
+gender = "neuter"
+
+["weather anomaly core"]
+nominative = "погодное аномальное ядро"
+genitive = "погодного аномального ядра"
+dative = "погодному аномальному ядру"
+accusative = "погодное аномальное ядро"
+instrumental = "погодным аномальным ядром"
+prepositional = "погодном аномальном ядре"
+gender = "neuter"
 
 # MARK: Banners
 
