@@ -93,7 +93,7 @@
 		flashed.balloon_alert(source, "[flashed.ru_p_they()] предан кому-то другому!")
 		return
 
-	if (HAS_TRAIT(flashed, TRAIT_UNCONVERTABLE))
+	if (HAS_MIND_TRAIT(flashed, TRAIT_UNCONVERTABLE))
 		flashed.balloon_alert(source, "[flashed.ru_p_they()] сопротивляется!")
 		return
 
