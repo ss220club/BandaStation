@@ -179,16 +179,16 @@
 	if(HAS_TRAIT(target, TRAIT_HUSK))
 		if(advanced)
 			if(HAS_TRAIT_FROM(target, TRAIT_HUSK, CHANGELING_DRAIN))
-				render_list += "<span class='alert ml-1'>Субъект был превращен в хаска [conditional_tooltip("поглощением", "Необратимо. При обычных обстоятельствах оживление возможно только путём пересадки мозга.", tochat)].</span><br>"
+				render_list += "<span class='alert ml-1'>Субъект был превращён в хаска [conditional_tooltip("поглощением", "Необратимо. При обычных обстоятельствах оживление возможно только путём пересадки мозга.", tochat)].</span><br>"
 			else if(HAS_TRAIT_FROM(target, TRAIT_HUSK, SKELETON_TRAIT))
-				render_list += "<span class='alert ml-1'>Субъект был превращен в хаска вследствие значительной потери мягких тканей.</span><br>"
+				render_list += "<span class='alert ml-1'>Субъект был превращён в хаска вследствие значительной потери мягких тканей.</span><br>"
 			else if(!HAS_TRAIT_FROM(target, TRAIT_HUSK, BURN)) // prioritize showing unknown causes over burns
-				render_list += "<span class='alert ml-1'>Субъект был превращен в хаска по мистическим причинам.</span><br>"
+				render_list += "<span class='alert ml-1'>Субъект был превращён в хаска по мистическим причинам.</span><br>"
 			else
-				render_list += "<span class='alert ml-1'>Субъект был превращен в хаска вследствие [conditional_tooltip("сильных ожогов", "Обработайте ожоги и нанесите средство для обработки хасков, например [/datum/reagent/medicine/c2/synthflesh::name].", tochat)].</span><br>"
+				render_list += "<span class='alert ml-1'>Субъект был превращён в хаска вследствие [conditional_tooltip("сильных ожогов", "Обработайте ожоги и нанесите средство для обработки хасков, например [/datum/reagent/medicine/c2/synthflesh::name].", tochat)].</span><br>"
 
 		else
-			render_list += "<span class='alert ml-1'>Субъект был превращен в хаска.</span><br>"
+			render_list += "<span class='alert ml-1'>Субъект был превращён в хаска.</span><br>"
 
 	if(target.get_stamina_loss())
 		if(advanced)
