@@ -221,7 +221,7 @@
 			atom_parent.balloon_alert(user, "нельзя взять в одну руку!")
 			user.dropItemToGround(parent, force = TRUE)
 		else
-			atom_parent.balloon_alert(user, "что-то держим в другой руке!")
+			atom_parent.balloon_alert(user, "что-то держу в другой руке!")
 		return COMPONENT_EQUIPPED_FAILED
 	if(user.usable_hands < 2)
 		if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
