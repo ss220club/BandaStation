@@ -128,8 +128,6 @@
 	else
 		return ..()
 
-
-
 /obj/item/autosurgeon/screwdriver_act(mob/living/user, obj/item/screwtool)
 	if(..())
 		return TRUE
@@ -150,11 +148,9 @@
 	return TRUE
 
 /obj/item/autosurgeon/medical_hud
-	name = "autosurgeon"
 	desc = "Одноразовый автохирург, который содержит имплант MedHUD. Отверткой можно достать имплант, но нельзя вставить обратно."
 	uses = 1
 	starting_organ = /obj/item/organ/cyberimp/eyes/hud/medical
-
 
 /obj/item/autosurgeon/syndicate
 	name = "suspicious autosurgeon"

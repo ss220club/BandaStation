@@ -13,6 +13,7 @@
 // MARK: Ranged - General
 #include "code/ranged/supply_packs.dm"
 #include "code/ranged/weapon_designs.dm"
+#include "code/ranged/weapon_choice.dm"
 #include "code/ranged/overrides/ballistic_master.dm"
 #include "code/ranged/overrides/mystery_box_additions.dm"
 

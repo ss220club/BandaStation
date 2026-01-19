@@ -22,6 +22,12 @@
 	/// How much sanitization is added per step
 	var/sanitization_added = 0.5 // just enough to stop infestation from worsening
 
+/datum/surgery_operation/limb/debride/get_time_modifiers(obj/item/bodypart/limb, mob/living/surgeon, tool)
+	. = ..()
+	for(var/datum/wound/burn/flesh/wound in limb.wounds)
+		if(HAS_TRAIT(wound, TRAIT_WOUND_SCANNED))
+			. *= 0.5
+
 /datum/surgery_operation/limb/debride/get_default_radial_image()
 	return image(/obj/item/reagent_containers/applicator/patch/aiuri)
 
@@ -57,7 +63,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы начинаете удалять зараженную плоть с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]..."),
-		span_notice("[surgeon] начинает удалять зараженную плоть с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("[surgeon] начинает удалять зараженную плоть с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 		span_notice("[surgeon] начинает удалять зараженную плоть с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Инфекция в вашей [limb.ru_plaintext_zone[PREPOSITIONAL]] приносит адскую боль! Такое чувство, что вас режут ножом!")
@@ -71,7 +77,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы успешно удалили часть зараженной плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]][get_progress(wound)] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] успешно удалил часть зараженной плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] успешно удалил часть зараженной плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
 		span_notice("[surgeon] успешно удалил часть зараженной плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 
@@ -80,7 +86,7 @@
 		surgeon,
 		limb.owner,
 		span_notice("Вы отрезаете немного здоровой плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]."),
-		span_notice("[surgeon] отрезает немного здоровой плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]!"),
+		span_notice("[surgeon] отрезает немного здоровой плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
 		span_notice("[surgeon] отрезает немного здоровой плоти с [limb.ru_plaintext_zone[PREPOSITIONAL]] у [limb.owner.declent_ru(GENITIVE)]!"),
 	)
 	limb.receive_damage(rand(4, 8), wound_bonus = CANT_WOUND, sharpness = tool.get_sharpness(), damage_source = tool)
