@@ -48,7 +48,7 @@
 		. += span_notice("Alt+ЛКМ по [declent_ru(DATIVE)], чтобы переключить отображение повреждений конечностей. Ctrl+shift+ЛКМ чтобы распечатать отчёт.")
 
 /obj/item/healthanalyzer/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] начинает анализировать [user.p_them()]себя при помощи [src]! Дисплей показывает, что [user.p_theyre()] мертв!"))
+	user.visible_message(span_suicide("[user.declent_ru(NOMINATIVE)] начинает анализировать себя при помощи [declent_ru(GENITIVE)]! Дисплей показывает, что [user.ru_p_they()] мёртв!"))
 	return BRUTELOSS
 
 /obj/item/healthanalyzer/attack_self(mob/user)
