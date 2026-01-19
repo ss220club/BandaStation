@@ -1,5 +1,0 @@
-author: "PetyaFX"
-delete-after: True
-changes:
-  - code_imp: "Имплементация Emote панели переделана под модернизацию TGUI бэкенда."
-  - bugfix: "Emote панель вернулась в UI, исправлен баг с задержкой открытия панели."
