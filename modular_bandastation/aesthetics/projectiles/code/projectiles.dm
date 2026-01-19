@@ -116,3 +116,6 @@
 
 /obj/projectile/bullet/p50/strela60
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/ballista_spear/prod
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
