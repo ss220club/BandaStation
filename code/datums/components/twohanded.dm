@@ -297,7 +297,7 @@
 		parent_item.force = force_unwielded
 
 	// update the items name to remove the wielded status
-	var/sf = findtext(parent_item.name, " (двуручный хват)", -10) // 10 == length(" (Wielded)")
+	var/sf = findtext(parent_item.name, " (двуручный хват)", -17) // 10 == length(" (Wielded)")
 	if(sf)
 		parent_item.name = copytext(parent_item.name, 1, sf)
 	else
