@@ -389,9 +389,9 @@
 			if (blood_type.restoration_chem == /datum/reagent/iron)
 				recommendation += "[/datum/reagent/medicine/salglu_solution::name]"
 			if (length(recommendation))
-				recommendation += "Переливание [blood_type.get_blood_name()]"
+				recommendation += "переливание [blood_type.get_blood_name()]"
 			else
-				recommendation += "Немедленное переливание [blood_type.get_blood_name()]"
+				recommendation += "немедленное переливание [blood_type.get_blood_name()]"
 			level_format = conditional_tooltip(level_format, "Рекомендация: [english_list(recommendation, and_text = " или ")].", tochat)
 		else
 			level_format = "[blood_percent]%, [cached_blood_volume] сл"
@@ -476,7 +476,7 @@
 		balloon_alert(user, "анализатор занят!")
 		return
 	scanner_busy = TRUE
-	balloon_alert(user, "печать отчета...")
+	balloon_alert(user, "печать отчёта...")
 	addtimer(CALLBACK(src, PROC_REF(print_report), user), 2 SECONDS)
 
 /obj/item/healthanalyzer/proc/print_report(mob/user)
