@@ -386,9 +386,9 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_GOOD
 
-/datum/reagent/consumable/ethanol/green_fairy/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
+/datum/reagent/consumable/ethanol/green_fairy/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired, metabolization_ratio)
 	. = ..()
-	drinker.set_drugginess(20 SECONDS * REM * seconds_per_tick)
+	drinker.set_drugginess(20 SECONDS * metabolization_ratio * seconds_per_tick)
 
 /datum/glass_style/drinking_glass/green_fairy
 	required_drink_type = /datum/reagent/consumable/ethanol/green_fairy
@@ -442,13 +442,13 @@
 	quality = DRINK_FANTASTIC
 	glass_price = DRINK_PRICE_HIGH
 
-/datum/reagent/consumable/ethanol/rainbow_sky/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
+/datum/reagent/consumable/ethanol/rainbow_sky/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired, metabolization_ratio)
 	. = ..()
 	var/need_mob_update
-	need_mob_update = drinker.adjust_brute_loss(-1 * REM * seconds_per_tick, updating_health = FALSE, required_bodytype = affected_bodytype)
-	need_mob_update |= drinker.adjust_fire_loss(-1 * REM * seconds_per_tick, updating_health = FALSE, required_bodytype = affected_bodytype)
-	drinker.set_drugginess(30 SECONDS * REM * seconds_per_tick)
-	drinker.adjust_hallucinations(10 SECONDS * REM * seconds_per_tick)
+	need_mob_update = drinker.adjust_brute_loss(-1 * metabolization_ratio * seconds_per_tick, updating_health = FALSE, required_bodytype = affected_bodytype)
+	need_mob_update |= drinker.adjust_fire_loss(-1 * metabolization_ratio * seconds_per_tick, updating_health = FALSE, required_bodytype = affected_bodytype)
+	drinker.set_drugginess(30 SECONDS * metabolization_ratio * seconds_per_tick)
+	drinker.adjust_hallucinations(10 SECONDS * metabolization_ratio * seconds_per_tick)
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
 
@@ -675,17 +675,17 @@
 	. = ..()
 	affected_mob.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/robbusto)
 
-/datum/reagent/consumable/robbusto/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+/datum/reagent/consumable/robbusto/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired, metabolization_ratio)
 	. = ..()
 	var/high_message = pick("Вы чувствуете себя бодрее", "Вы должны быть быстрее!")
 	if(SPT_PROB(2.5, seconds_per_tick))
 		to_chat(affected_mob, span_notice("[high_message]"))
 	affected_mob.add_mood_event("tweaking", /datum/mood_event/stimulant_medium)
-	affected_mob.AdjustAllImmobility(-10 * REM * seconds_per_tick)
+	affected_mob.AdjustAllImmobility(-10 * metabolization_ratio * seconds_per_tick)
 	var/need_mob_update
-	need_mob_update = affected_mob.adjust_stamina_loss(-1 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
-	affected_mob.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
-	need_mob_update += affected_mob.adjust_organ_loss(ORGAN_SLOT_HEART, (rand(1,3) * REM * seconds_per_tick)/5, required_organ_flag = affected_organ_flags)
+	need_mob_update = affected_mob.adjust_stamina_loss(-1 * metabolization_ratio * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
+	affected_mob.set_jitter_if_lower(4 SECONDS * metabolization_ratio * seconds_per_tick)
+	need_mob_update += affected_mob.adjust_organ_loss(ORGAN_SLOT_HEART, (rand(1,3) * metabolization_ratio * seconds_per_tick)/5, required_organ_flag = affected_organ_flags)
 	if(need_mob_update)
 		. = UPDATE_MOB_HEALTH
 	if(SPT_PROB(2.5, seconds_per_tick))
@@ -885,14 +885,14 @@
 	)
 	required_temp = 333
 
-/datum/reagent/consumable/chifir/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired)
+/datum/reagent/consumable/chifir/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, times_fired, metabolization_ratio)
 	. = ..()
-	drinker.set_drugginess(10 SECONDS * REM * seconds_per_tick)
+	drinker.set_drugginess(10 SECONDS * metabolization_ratio * seconds_per_tick)
 	if(SPT_PROB(10, seconds_per_tick))
 		drinker.say(pick("Эх, раз, ещё раз, ещё много-много раз!","Марсианский централ, ветер северный!","Мурка, ты мой мурёночек…","За решёткой мостика не видать..."))
 	var/need_mob_update
-	need_mob_update = drinker.adjust_stamina_loss(2 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
-	drinker.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
+	need_mob_update = drinker.adjust_stamina_loss(2 * metabolization_ratio * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
+	drinker.set_jitter_if_lower(4 SECONDS * metabolization_ratio * seconds_per_tick)
 	if(need_mob_update)
 		. = UPDATE_MOB_HEALTH
 

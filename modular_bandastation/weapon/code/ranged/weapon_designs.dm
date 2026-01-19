@@ -95,8 +95,13 @@
 	. = ..()
 	design_ids += list(
 		"c9x25mm_rubber_sec",
+		"breaching_slug",
+	)
+
+/datum/techweb_node/riot_supression/New()
+	. = ..()
+	design_ids += list(
 		"c9x25mm_sec",
-		"breaching_slug"
 	)
 
 /datum/techweb_node/exotic_ammo/New()
