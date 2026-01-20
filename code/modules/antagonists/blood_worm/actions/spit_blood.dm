@@ -86,7 +86,7 @@
 		return
 
 	owner.visible_message(
-		message = span_danger("[owner] плюётся[owner.p_s()] токсичной кровью!"),
+		message = span_danger("[owner] плюётся токсичной кровью!"),
 		self_message = span_danger("Вы плюете токсичную кровь!"),
 		blind_message = span_hear("Вы слышите звук плевка.")
 	)
@@ -107,7 +107,7 @@
 		return
 
 	owner.visible_message(
-		message = span_danger("[owner] выплёвывает[owner.p_s()] сгусток токсичной крови!"),
+		message = span_danger("[owner] выплёвывает сгусток токсичной крови!"),
 		self_message = span_danger("Вы плюете сгусток токсичной крови!"),
 		blind_message = span_hear("Вы слышите звук плевка.")
 	)
@@ -176,9 +176,9 @@
 		return FALSE
 
 	host.visible_message(
-		message = span_danger("[host] разбрызгивает[host.p_s()] токсичную кровь на [restraints]!"),
+		message = span_danger("[host] разбрызгивает токсичную кровь на [restraints]!"),
 		self_message = span_danger("Вы разбрызгиваете токсичную кровь на [restraints]!"),
-		blind_message = span_hear("Вы слышите звук плевка.")
+		blind_message = span_hear("Вы слышите шипение.")
 	)
 
 	log_combat(host, restraints, "melted", addition = "(Spit Blood)")
@@ -237,7 +237,7 @@
 	return TRUE
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/finish_melting_cocoon(obj/structure/spider/cocoon/cocoon)
-	cocoon.visible_message(span_danger("[cocoon] плавится[cocoon.p_s()], превращаясь в кучу липкой крови!"))
+	cocoon.visible_message(span_danger("[cocoon] плавится, превращаясь в кучу липкой крови!"))
 	new /obj/effect/decal/cleanable/blood/old(get_turf(cocoon))
 	qdel(cocoon)
 

@@ -52,16 +52,16 @@
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/Activate(atom/target)
 	owner.visible_message(
-		message = span_danger("[owner] начинает[owner.p_s()] выращивать кокон!"),
+		message = span_danger("[owner] начинает выращивать кокон!"),
 		self_message = span_notice("Вы начинаете выращивать кокон."),
-		blind_message = span_hear("До вас доносится звук сшиваемой плоти.")
+		blind_message = span_hear("До вас доносится звук сплетающейся плоти.")
 	)
 
 	if (!do_after(owner, 5 SECONDS, extra_checks = CALLBACK(src, PROC_REF(check_consumed_blood))))
 		return FALSE
 
 	owner.visible_message(
-		message = span_danger("[owner] вошел в[owner.p_s()] кокон!"),
+		message = span_danger("[owner] вошел в кокон!"),
 		self_message = span_green("Вы входите в свеже сотканный кокон!"),
 		blind_message = span_hear("Вы прекращаете слышть звук сшивания плоти!")
 	)
@@ -147,8 +147,8 @@
 /// Cancels the incubation process, destroying the cocoon early.
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/proc/cancel()
 	cocoon.visible_message(
-		message = span_danger("[cocoon] разваливется[cocoon.p_s()] на куски, избавляясь от [owner]."),
-		blind_message = span_danger("Вы слышите противный чавкающий звук!"),
+		message = span_danger("[cocoon] разваливается на куски, избавляясь от [owner]."),
+		blind_message = span_danger("Вы слышите противный хлюпающий звук!"),
 		ignored_mobs = owner
 	)
 
@@ -202,7 +202,7 @@
 
 	if (total_consumed_blood < total_blood_required)
 		if (feedback)
-			worm.balloon_alert(worm, "вы насытились тольно на [FLOOR(total_consumed_blood / total_blood_required * 100, 1)]% от требуемого для дальнейшего роста!")
+			worm.balloon_alert(worm, "вы насытились только на [FLOOR(total_consumed_blood / total_blood_required * 100, 1)]% от необходимого для дальнейшего роста!")
 		return FALSE
 	return TRUE
 
@@ -226,7 +226,7 @@
 	total_blood_required = 500
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/hatchling/Activate(atom/target)
-	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд, вы станете взрослой особью, получив увеличение характеристик, а также навык «Плевок токсичной кровью», однако, вы потеряете возможность перемещатсья по вентиляции.", "Mature", list("Yes", "No"), 30 SECONDS) != "Yes")
+	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд, вы станете юной особью, получив увеличение характеристик, а также навык «Плевок токсичной кровью», однако, вы потеряете возможность перемещатьсья по вентиляции.", "Mature", list("Yes", "No"), 30 SECONDS) != "Yes")
 		return
 	if (!IsAvailable(feedback = TRUE))
 		return
@@ -262,7 +262,7 @@
 	total_blood_required = 1500
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/juvenile/Activate(atom/target)
-	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд вы станете взрослым кровавым червем, увеличив свои характеристики, а также получив навык «Плевок сгутском токсичной крови», активировать который можно нажав ПКМ при активации навыка «Плевок токсичной кровью», находясь снаружи своего носителя.", "Mature", list("Yes", "No"), 30 SECONDS) != "Yes")
+	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд вы станете взрослым кровавым червем, увеличив свои характеристики, а также получив навык «Плевок сгустком токсичной крови», активировать который можно нажав ПКМ при использовании «Плевок токсичной кровью» вне носителя.", "Mature", list("Yes", "No"), 30 SECONDS) != "Yes")
 		return
 	if (!IsAvailable(feedback = TRUE))
 		return

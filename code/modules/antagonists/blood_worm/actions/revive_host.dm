@@ -58,7 +58,7 @@
 		animate(transform = original_transform, time = 0.2 SECONDS, easing = CUBIC_EASING | EASE_IN, flags = ANIMATION_PARALLEL)
 
 		host.visible_message(
-			message = span_danger("[host] безудержно[host.p_s()] трясется!"),
+			message = span_danger("[host] безудержно трясется!"),
 			ignored_mobs = owner
 		)
 
@@ -67,7 +67,7 @@
 		return FALSE
 
 	host.visible_message(
-		message = span_danger("[host] восстает[host.p_s()] из метрвых!"),
+		message = span_danger("[host] восстает из мёртвых!"),
 		ignored_mobs = owner
 	)
 

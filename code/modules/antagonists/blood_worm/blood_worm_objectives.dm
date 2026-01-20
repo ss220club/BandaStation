@@ -7,7 +7,7 @@
 
 /datum/objective/blood_worm/kill
 	name = "УБЕЙ"
-	explanation_text = "Мы должны помешать всем членам командования спастись живыми на аварийном эвакуациооном шаттле."
+	explanation_text = "Мы должны помешать всем членам командования спастись живыми на аварийном эвакуационном шаттле."
 
 /datum/objective/blood_worm/kill/check_completion()
 	for (var/mob/player_mob as anything in GLOB.player_list)
@@ -33,7 +33,7 @@
 	update_explanation_text()
 
 /datum/objective/blood_worm/consume/update_explanation_text()
-	explanation_text = "Мы должны поглотить не менее [blood_required] единиц реальной крови, чотбы уталить наш аппетит."
+	explanation_text = "Мы должны поглотить не менее [blood_required] единиц реальной крови, чтобы уталить наш аппетит."
 
 /datum/objective/blood_worm/consume/check_completion()
 	return get_blood_worm_team().blood_consumed_total >= blood_required
@@ -48,7 +48,7 @@
 	update_explanation_text()
 
 /datum/objective/blood_worm/multiply/update_explanation_text()
-	explanation_text = "Нас должно расплодиться как минимум [times_required] чтобы ничто не могло остановить наше распространение."
+	explanation_text = "Нас должно расплодиться как минимум [times_required], чтобы ничто не могло остановить наше распространение."
 
 /datum/objective/blood_worm/multiply/check_completion()
 	return get_blood_worm_team().times_reproduced_total >= times_required
@@ -63,7 +63,7 @@
 	update_explanation_text()
 
 /datum/objective/blood_worm/conquer/update_explanation_text()
-	explanation_text = "Как минимум [worms_required] из нас должны улететь живыми на эвакуациооном шаттле, чтобы захватить то, что находится на другой стороне."
+	explanation_text = "Как минимум [worms_required] из нас должны улететь живыми на эвакуационном шаттле, чтобы захватить то, что находится на другой стороне."
 
 /datum/objective/blood_worm/conquer/check_completion()
 	var/conquerors = 0

@@ -1,5 +1,5 @@
 /datum/team/blood_worm
-	name = "\improper Кроваваые Черви"
+	name = "\improper Кроваые Черви"
 	member_name = "blood worm"
 
 	var/blood_consumed_total = 0

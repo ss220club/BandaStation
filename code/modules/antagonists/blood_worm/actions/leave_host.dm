@@ -21,7 +21,7 @@
 	var/mob/living/carbon/human/host = worm.host
 
 	host.visible_message(
-		message = span_danger("[host] падает[host.p_s()] и начинает[host.p_s()] безудержно стрястись!"),
+		message = span_danger("[host] падает и начинает безудержно трястись!"),
 		ignored_mobs = owner
 	)
 

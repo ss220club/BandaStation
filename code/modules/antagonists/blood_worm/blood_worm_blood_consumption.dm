@@ -18,7 +18,7 @@
 	consumed_normal_blood += added_normal_blood
 
 	if (!was_synth_capped && consumed_synth_blood >= maximum_synth_blood)
-		balloon_alert_self("достигут предел питания синтетической кровью!")
+		balloon_alert_self("достигнут предел питания синтетической кровью!")
 
 	if (!was_ready_to_mature && get_consumed_blood() >= cocoon_action?.total_blood_required)
 		balloon_alert_self("готов к росту!")

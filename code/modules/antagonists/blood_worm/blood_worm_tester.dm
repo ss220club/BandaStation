@@ -1,6 +1,6 @@
 /obj/item/blood_worm_tester
 	name = "Анализатор наличия паразитов в крови"
-	desc = "Специальное устройство, запатентованное медицинской корпорацией «Дефорест», специально разработанное для выявления паразитов в крови, в частности, печально известных, кровавых червей. Утверждается, что процесс тестирования очень болезненный.."
+	desc = "Специальное устройство, запатентованное медицинской корпорацией «Дефорест», специально разработанное для выявления паразитов в крови, в частности, печально известных, кровавых червей. Утверждается, что процесс тестирования очень болезненный."
 
 	icon = 'icons/obj/antags/blood_worm.dmi'
 	icon_state = "tester"
@@ -24,7 +24,7 @@
 	return ..()
 
 /obj/item/blood_worm_tester/update_desc(updates)
-	desc = "[initial(desc)] [spent ? "Анализатор израсходован." : "Тестер заряжен для единоразоваго использования."]"
+	desc = "[initial(desc)] [spent ? "Анализатор израсходован." : "Тестер заряжен для единоразового использования."]"
 	return ..()
 
 /obj/item/blood_worm_tester/attack(mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
@@ -42,19 +42,19 @@
 
 	if (target_mob != user)
 		user.visible_message(
-			message = span_danger("[user] объединяет [user.p_s()] [target_mob] с [src]!"),
-			self_message = span_danger("Вы объединяете [target_mob] с [src]!"),
+			message = span_danger("[user] делает укол [target_mob] при помощи [src]!"),
+			self_message = span_danger("Вы делаете укол пациенту [target_mob] при помощи [src]!"),
 			ignored_mobs = target_mob,
 		)
 
 		target_mob.show_message(
-			msg = span_userdanger("[user] объединяет[user.p_s()] вас с [src]!"),
+			msg = span_userdanger("[user] колит вас используя [src]!"),
 			type = MSG_VISUAL,
 		)
 	else
 		user.visible_message(
-			message = span_notice("[user] объединяет[user.p_s()] [user.p_themselves()] с [src]."),
-			self_message = span_notice("Вы объединили себя с [src]."),
+			message = span_notice("[user] колит [user.p_themselves()] используя [src]."),
+			self_message = span_notice("Вы укололи себя с помощью [src]."),
 		)
 
 	log_combat(user, target_mob, "tested", src)

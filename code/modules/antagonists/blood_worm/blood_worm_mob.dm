@@ -21,8 +21,8 @@
 
 	attack_sound = 'sound/items/weapons/bite.ogg'
 	attack_vis_effect = ATTACK_EFFECT_BITE
-	attack_verb_continuous = "кусаете"
-	attack_verb_simple = "кусаете"
+	attack_verb_continuous = "кусает"
+	attack_verb_simple = "кусает"
 
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = T0C + 100
@@ -276,7 +276,7 @@
 
 /mob/living/basic/blood_worm/hatchling
 	name = "Детеныш кровавого червя"
-	desc = "Только что вылупивший кровавый червь. Личинка выглядит голодной и слабой, для дальшейшего роста требуется кровь."
+	desc = "Только что вылупившийся кровавый червь. Личинка выглядит голодной и слабой, для дальшейшего роста требуется кровь."
 
 	icon_state = "hatchling"
 	icon_living = "hatchling"
@@ -318,7 +318,7 @@
 
 /mob/living/basic/blood_worm/juvenile
 	name = "Юный кровавый червь"
-	desc = "Кровавый червь среднего размера. Имеет множество длинных и черезвычайно острых зубов, всем своим видом показывая жажду крови."
+	desc = "Кровавый червь среднего размера. Имеет множество длинных и чрезвычайно острых зубов, всем своим видом показывая жажду крови."
 
 	icon_state = "juvenile"
 	icon_living = "juvenile"
