@@ -243,7 +243,7 @@ GLOBAL_LIST_INIT(normal_employers, list(
 	"Cybersun Industries",
 	"Donk Corporation",
 	"Gorlex Marauders",
-	"S.E.L.F",
+	"S.E.L.F. Activist",  // BANDASTATION EDIT - Syndicate Lore Rewritten
 	"Legal Trouble",
 	"MI13",
 	"Waffle Corporation",
