@@ -40,17 +40,16 @@
 
 /obj/item/melee/baseball_bat/attack_self(mob/user)
 	// BANDASTATION EDIT START: Centcom homerun
-	if(!always_homerun)
-		if(!homerun_able)
-			return ..()
-		if(homerun_ready)
-			to_chat(user, span_warning("You're already ready to do a home run!"))
-			return ..()
-		to_chat(user, span_warning("You begin gathering strength..."))
-		playsound(get_turf(src), 'sound/effects/magic/lightning_chargeup.ogg', 65, TRUE)
-		if(do_after(user, 9 SECONDS, target = src))
-			to_chat(user, span_userdanger("You gather power! Time for a home run!"))
-			homerun_ready = TRUE
+	if(!always_homerun || !homerun_able)
+		return ..()
+	if(homerun_ready)
+		to_chat(user, span_warning("You're already ready to do a home run!"))
+		return ..()
+	to_chat(user, span_warning("You begin gathering strength..."))
+	playsound(get_turf(src), 'sound/effects/magic/lightning_chargeup.ogg', 65, TRUE)
+	if(do_after(user, 9 SECONDS, target = src))
+		to_chat(user, span_userdanger("You gather power! Time for a home run!"))
+		homerun_ready = TRUE
 	// BANDASTATION EDIT END: Centcom homerun
 	return ..()
 
