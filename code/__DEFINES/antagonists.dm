@@ -258,7 +258,7 @@ GLOBAL_LIST_INIT(ai_employers, list(
 	"Problem Solver",
 	"S.E.L.F.",
 	"Something's Wrong",
-	"Cybersun Virus",
+	"Cybersun Virus", // BANDASTATION EDIT - Syndicate Lore Rewritten
 	"SyndOS",
 	"Unshackled",
 	"Ratvarian Remnant",
