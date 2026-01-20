@@ -215,7 +215,7 @@ GLOBAL_LIST_INIT(syndicate_employers, list(
 	"Donk Corporation",
 	"Gorlex Marauders",
 	"MI13",
-	"Tiger Cooperative Occultist",
+	"Tiger Cooperative Occultist", // BANDASTATION EDIT - Syndicate Lore Rewritten
 	"Waffle Corporation Terrorist",
 	"Waffle Corporation",
 	"S.E.L.F"
