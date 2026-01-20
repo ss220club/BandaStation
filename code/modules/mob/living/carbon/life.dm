@@ -2,10 +2,10 @@
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 // BANDASTATION ADDITION START
-	if(isopenturf(loc))
-		var/turf/open/my_our_turf = loc
-		if(my_our_turf.pollution)
-			my_our_turf.pollution.touch_act(src)
+	// if(isopenturf(loc))
+	// 	var/turf/open/my_our_turf = loc
+	// 	if(my_our_turf.pollution)
+	// 		my_our_turf.pollution.touch_act(src)
 // BANDASTATION ADDITION END
 	if(damageoverlaytemp)
 		damageoverlaytemp = 0
@@ -113,6 +113,12 @@
 				breath = loc_as_obj.handle_internal_lifeform(src, BREATH_VOLUME)
 
 			else if(isturf(loc)) //Breathe from loc as turf
+				//BANDASTATION ADDITION: Pollution
+				if(isopenturf(loc))
+					var/turf/open/open_turf = loc
+					if(open_turf.pollution)
+						open_turf.pollution.breathe_act(src)
+				//BANDASTATION ADDITION END: Pollution
 				var/breath_moles = 0
 				if(environment)
 					breath_moles = environment.total_moles()*BREATH_PERCENTAGE
