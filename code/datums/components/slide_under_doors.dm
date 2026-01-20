@@ -42,7 +42,7 @@
 	notify_user()
 
 /datum/component/slide_under_doors/proc/notify_user()
-	to_chat(parent, span_notice("You can slide under doors! <b>Right-click on a door to slide under it.</b>"))
+	to_chat(parent, span_notice("Вы можете протискиваться под шлюзами! <b>Нажмите ПКМ на шлюз, чтобы протиснуться под ним.</b>"))
 
 /datum/component/slide_under_doors/proc/on_user_unarmed_attack(mob/living/user, atom/target, is_adjacent, modifiers)
 	SIGNAL_HANDLER

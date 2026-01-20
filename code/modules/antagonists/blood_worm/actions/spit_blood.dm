@@ -1,6 +1,6 @@
 /datum/action/cooldown/mob_cooldown/blood_worm/spit
-	name = "Spit Blood"
-	desc = "Spit corrosive blood at your target in exchange for your own health. Right-click to melt restraints while in a host."
+	name = "Плевок токсичной кровью"
+	desc = "Плюньте токсичной кровью в свою цель в обмен на собственное здоровье. ПКМ находясь в организме-носителе чтобы расплавить оковы."
 
 	button_icon_state = "spit_blood"
 
@@ -26,12 +26,12 @@
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/set_click_ability(mob/on_who)
 	. = ..()
-	var/right_click_message = ishuman(owner) ? ", right-click to melt restraints" : (burst_projectile_type ? ", right-click for a burst" : "")
-	to_chat(owner, span_notice("You fill your [ishuman(owner) ? "mouth" : "maw"] with blood. <b>Left-click to spit corrosive blood[right_click_message]!</b>"))
+	var/right_click_message = ishuman(owner) ? ", <b>нажмите ПКМ чтобы расплавить оковы</b>" : (burst_projectile_type ? ",<b> нажмите ПКМ чтобы плюнуть сгустком крови</b>" : "")
+	to_chat(owner, span_notice("Вы заполняете [ishuman(owner) ? "рот" : "пасть"] кровью. <b>Нажмите ЛКМ чтобы плюнуть токсичной кровью[right_click_message]!</b>"))
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/unset_click_ability(mob/on_who, refund_cooldown)
 	. = ..()
-	to_chat(owner, span_notice("You empty your [ishuman(owner) ? "mouth" : "maw"] of blood."))
+	to_chat(owner, span_notice("Вы опустошаете [ishuman(owner) ? "рот" : "пасть"]  от крови."))
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/IsAvailable(feedback)
 	if (!ishuman(owner) && !istype(owner, /mob/living/basic/blood_worm))
@@ -41,11 +41,11 @@
 
 	if (worm.host?.is_mouth_covered())
 		if (feedback)
-			owner.balloon_alert(owner, "mouth is covered!")
+			owner.balloon_alert(owner, "рот закрыт!")
 		return FALSE
 	if (worm.get_worm_health() - health_cost < minimum_health)
 		if (feedback)
-			owner.balloon_alert(owner, "out of blood!")
+			owner.balloon_alert(owner, "закончилась кровь!")
 		return FALSE
 
 	return ..()
@@ -86,9 +86,9 @@
 		return
 
 	owner.visible_message(
-		message = span_danger("\The [owner] spit[owner.p_s()] corrosive blood!"),
-		self_message = span_danger("You spit corrosive blood!"),
-		blind_message = span_hear("You hear spitting.")
+		message = span_danger("[owner] плюётся[owner.p_s()] токсичной кровью!"),
+		self_message = span_danger("Вы плюете токсичную кровь!"),
+		blind_message = span_hear("Вы слышите звук плевка.")
 	)
 
 	spit(target, modifiers, projectile_type)
@@ -103,13 +103,13 @@
 
 	var/mob/living/basic/blood_worm/worm = src.target
 	if (worm.get_worm_health() - health_cost * burst_count < minimum_health)
-		owner.balloon_alert(owner, "out of blood!")
+		owner.balloon_alert(owner, "закончилась кровь!")
 		return
 
 	owner.visible_message(
-		message = span_danger("\The [owner] spit[owner.p_s()] a burst of corrosive blood!"),
-		self_message = span_danger("You spit a burst of corrosive blood!"),
-		blind_message = span_hear("You hear spitting.")
+		message = span_danger("[owner] выплёвывает[owner.p_s()] сгусток токсичной крови!"),
+		self_message = span_danger("Вы плюете сгусток токсичной крови!"),
+		blind_message = span_hear("Вы слышите звук плевка.")
 	)
 
 	spit(target, modifiers, burst_projectile_type, count = burst_count, spread = 10)
@@ -164,7 +164,7 @@
 		playsound(host, SFX_SIZZLE, vol = 80, vary = TRUE, ignore_walls = FALSE)
 		StartCooldown(20 SECONDS)
 	if (!something_to_melt)
-		host.balloon_alert(host, "not restrained!")
+		host.balloon_alert(host, "Ваши руки свободны!")
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/melt_restraints_in_slot(mob/living/carbon/human/host, slot)
 	var/obj/restraints = host.get_item_by_slot(slot)
@@ -172,13 +172,13 @@
 	if (!istype(restraints))
 		return FALSE
 	if (restraints.resistance_flags & (INDESTRUCTIBLE | UNACIDABLE | ACID_PROOF))
-		host.balloon_alert(host, "\the [restraints] [restraints.p_are()] too tough!")
+		host.balloon_alert(host, "[restraints] [restraints.p_are()] слишком крепки!")
 		return FALSE
 
 	host.visible_message(
-		message = span_danger("\The [host] spit[host.p_s()] corrosive blood all over \the [restraints]!"),
-		self_message = span_danger("You spit corrosive blood all over \the [restraints]!"),
-		blind_message = span_hear("You hear sizzling.")
+		message = span_danger("[host] разбрызгивает[host.p_s()] токсичную кровь на [restraints]!"),
+		self_message = span_danger("Вы разбрызгиваете токсичную кровь на [restraints]!"),
+		blind_message = span_hear("Вы слышите звук плевка.")
 	)
 
 	log_combat(host, restraints, "melted", addition = "(Spit Blood)")
@@ -187,22 +187,22 @@
 	return TRUE
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/finish_melting_restraints(obj/restraints)
-	restraints.visible_message(span_danger("\The [restraints] melt[restraints.p_s()] into a pile of goopy blood!"))
+	restraints.visible_message(span_danger("[restraints] плавятся[restraints.p_s()], превращаясь в сгусток крови!"))
 	new /obj/effect/decal/cleanable/blood/old(get_turf(restraints))
 	qdel(restraints)
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/melt_closet(mob/living/carbon/human/host, obj/structure/closet/closet)
 	if (closet.resistance_flags & (INDESTRUCTIBLE | UNACIDABLE | ACID_PROOF))
-		host.balloon_alert(host, "\the [closet] [closet.p_are()] too tough!")
+		host.balloon_alert(host, "[closet] [closet.p_are()] слишком крепок!")
 		return FALSE
 
 	closet.visible_message(
-		message = span_danger("\The [closet]'s hinges overflow with corrosive blood and begin to melt!"),
-		blind_message = span_hear("You hear sizzling."),
+		message = span_danger("[closet] петли переполняются разъедающей кровью и начинают плавиться!"),
+		blind_message = span_hear("Вы слышите шипение."),
 		ignored_mobs = host
 	)
 
-	to_chat(host, span_danger("You spit corrosive blood all over \the [closet]'s interior hinges!"))
+	to_chat(host, span_danger("Вы разбрызгиваете токсичную кровь на петли [closet]!"))
 
 	log_combat(host, closet, "melted", addition = "(Spit Blood)")
 
@@ -210,7 +210,7 @@
 	return TRUE
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/finish_melting_closet(obj/structure/closet/closet)
-	closet.visible_message(span_danger("\The [closet]'s hinges melt into a pile of goopy blood!"))
+	closet.visible_message(span_danger("Петли [closet] плавятся, превращаясь в сгусток крови!"))
 	new /obj/effect/decal/cleanable/blood/old(get_turf(closet))
 
 	closet.welded = FALSE
@@ -220,16 +220,16 @@
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/melt_cocoon(mob/living/carbon/human/host, obj/structure/spider/cocoon/cocoon)
 	if (cocoon.resistance_flags & (INDESTRUCTIBLE | UNACIDABLE | ACID_PROOF))
-		host.balloon_alert(host, "\the [cocoon] [cocoon.p_are()] too tough!")
+		host.balloon_alert(host, "[cocoon] [cocoon.p_are()] слишком крепок!")
 		return FALSE
 
 	cocoon.visible_message(
-		message = span_danger("\The [cocoon]'s threads begin to fall apart!"),
-		blind_message = span_hear("You hear sizzling."),
+		message = span_danger("Нити [cocoon] начинают распадаться!"),
+		blind_message = span_hear("Вы слышите шипение."),
 		ignored_mobs = host
 	)
 
-	to_chat(host, span_danger("You spit corrosive blood all over the inside of \the [cocoon]!"))
+	to_chat(host, span_danger("Вы расплескиваете токсичную кровь по всей внутренней части [cocoon]!"))
 
 	log_combat(host, cocoon, "melted", addition = "(Spit Blood)")
 
@@ -237,7 +237,7 @@
 	return TRUE
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/finish_melting_cocoon(obj/structure/spider/cocoon/cocoon)
-	cocoon.visible_message(span_danger("\The [cocoon] melt[cocoon.p_s()] into a pile of goopy blood!"))
+	cocoon.visible_message(span_danger("[cocoon] плавится[cocoon.p_s()], превращаясь в кучу липкой крови!"))
 	new /obj/effect/decal/cleanable/blood/old(get_turf(cocoon))
 	qdel(cocoon)
 

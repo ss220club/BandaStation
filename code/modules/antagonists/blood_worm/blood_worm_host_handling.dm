@@ -6,9 +6,9 @@
 		playsound(src, 'sound/effects/magic/enter_blood.ogg', vol = 60, vary = TRUE, ignore_walls = FALSE)
 
 		visible_message(
-			message = span_bolddanger("\The [src] enter[p_s()] \the [new_host]!"),
-			self_message = span_notice("You enter \the [new_host]."),
-			blind_message = span_hear("You hear a squelch.")
+			message = span_bolddanger("[src] проникает [p_s()] в [new_host]!"),
+			self_message = span_notice("Вы проникаете в [new_host]."),
+			blind_message = span_hear("Вы слышите хлюпанье.")
 		)
 
 		new /obj/effect/temp_visual/blood_worm_invade_host(get_turf(new_host), effect_name)
@@ -82,12 +82,12 @@
 		return
 
 	visible_message(
-		message = span_bolddanger("\The [src] emerge[p_s()] from \the [host]!"),
-		blind_message = span_hear("You hear a squelch."),
+		message = span_bolddanger("[src] выходит [p_s()] из [host]!"),
+		blind_message = span_hear("Вы слышите хлюпанье."),
 		ignored_mobs = list(host, src)
 	)
 
-	to_chat_self(span_notice("You emerge from \the [host]."))
+	to_chat_self(span_notice("Вы покидаете [host]."))
 
 	log_blood_worm("[key_name(src)] left their host [key_name(host)]")
 

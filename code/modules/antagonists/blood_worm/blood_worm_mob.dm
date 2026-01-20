@@ -21,8 +21,8 @@
 
 	attack_sound = 'sound/items/weapons/bite.ogg'
 	attack_vis_effect = ATTACK_EFFECT_BITE
-	attack_verb_continuous = "bites"
-	attack_verb_simple = "bite"
+	attack_verb_continuous = "кусаете"
+	attack_verb_simple = "кусаете"
 
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = T0C + 100
@@ -275,8 +275,8 @@
 	icon_state = "invade-[effect_name]"
 
 /mob/living/basic/blood_worm/hatchling
-	name = "hatchling blood worm"
-	desc = "A freshly hatched blood worm. It looks hungry and weak, requiring blood to grow further."
+	name = "Детеныш кровавого червя"
+	desc = "Только что вылупивший кровавый червь. Личинка выглядит голодной и слабой, для дальшейшего роста требуется кровь."
 
 	icon_state = "hatchling"
 	icon_living = "hatchling"
@@ -317,8 +317,8 @@
 	AddComponent(/datum/component/slide_under_doors, slide_in_delay = 3 SECONDS)
 
 /mob/living/basic/blood_worm/juvenile
-	name = "juvenile blood worm"
-	desc = "A mid-sized blood worm. It looks bloodthirsty and has numerous long and extremely sharp teeth."
+	name = "Юный кровавый червь"
+	desc = "Кровавый червь среднего размера. Имеет множество длинных и черезвычайно острых зубов, всем своим видом показывая жажду крови."
 
 	icon_state = "juvenile"
 	icon_living = "juvenile"
@@ -360,8 +360,8 @@
 	AddComponent(/datum/component/slide_under_doors, slide_in_delay = 5 SECONDS)
 
 /mob/living/basic/blood_worm/adult
-	name = "adult blood worm"
-	desc = "A monstrosity of a blood worm. It'd probably be better to put your head in an industrial shredder rather than its maw."
+	name = "Взрослый кровавый червь"
+	desc = "Чудовищный кровяной червь. Наверное, было бы лучше засунуть голову в промышленный измельчитель, чем в его пасть."
 
 	icon = 'icons/mob/nonhuman-player/blood_worm_32x48.dmi'
 

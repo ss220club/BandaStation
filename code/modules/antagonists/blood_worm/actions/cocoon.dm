@@ -38,11 +38,11 @@
 		return FALSE
 	if (HAS_TRAIT(owner, TRAIT_SHAPESHIFTED))
 		if (feedback)
-			owner.balloon_alert(owner, "not while shapeshifted!")
+			owner.balloon_alert(owner, "не во время превращения!")
 		return FALSE
 	if (!isturf(owner.loc))
 		if (feedback)
-			owner.balloon_alert(owner, "get on the ground!")
+			owner.balloon_alert(owner, "встаньте на землю!")
 		return FALSE
 	if (!check_consumed_blood(feedback))
 		return FALSE
@@ -52,18 +52,18 @@
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/Activate(atom/target)
 	owner.visible_message(
-		message = span_danger("\The [owner] start[owner.p_s()] growing a cocoon!"),
-		self_message = span_notice("You start growing a cocoon."),
-		blind_message = span_hear("You start hearing fleshy knitting!")
+		message = span_danger("[owner] начинает[owner.p_s()] выращивать кокон!"),
+		self_message = span_notice("Вы начинаете выращивать кокон."),
+		blind_message = span_hear("До вас доносится звук сшиваемой плоти.")
 	)
 
 	if (!do_after(owner, 5 SECONDS, extra_checks = CALLBACK(src, PROC_REF(check_consumed_blood))))
 		return FALSE
 
 	owner.visible_message(
-		message = span_danger("\The [owner] enter[owner.p_s()] a cocoon!"),
-		self_message = span_green("You enter your freshly grown cocoon!"),
-		blind_message = span_hear("You stop hearing fleshy knitting!")
+		message = span_danger("[owner] вошел в[owner.p_s()] кокон!"),
+		self_message = span_green("Вы входите в свеже сотканный кокон!"),
+		blind_message = span_hear("Вы прекращаете слышть звук сшивания плоти!")
 	)
 
 	cocoon = new cocoon_type(get_turf(owner))
@@ -98,8 +98,8 @@
 			continue // Harms potential hosts.
 
 		unfortunate_observer.visible_message(
-			message = span_danger("\The [unfortunate_observer] is splashed with a wave of corrosive blood!"),
-			self_message = span_userdanger("You're splashed with a wave of corrosive blood! YEOWCH!"),
+			message = span_danger("[unfortunate_observer] окатывается волной едкой крови!"),
+			self_message = span_userdanger("Вас окатывает волной едкой крови! АУЧ!"),
 			blind_message = span_hear("You hear sizzling!")
 		)
 
@@ -147,13 +147,13 @@
 /// Cancels the incubation process, destroying the cocoon early.
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/proc/cancel()
 	cocoon.visible_message(
-		message = span_danger("\The [cocoon] fall[cocoon.p_s()] apart, expelling \the [owner] within."),
-		blind_message = span_danger("You hear a splat!"),
+		message = span_danger("[cocoon] разваливется[cocoon.p_s()] на куски, избавляясь от [owner]."),
+		blind_message = span_danger("Вы слышите противный чавкающий звук!"),
 		ignored_mobs = owner
 	)
 
 	if (!QDELETED(owner) && owner.stat != DEAD)
-		to_chat(owner, span_userdanger("Your cocoon falls apart!"))
+		to_chat(owner, span_userdanger("Ваш кокон разваливается на части!"))
 
 	playsound(cocoon, 'sound/effects/splat.ogg', vol = 60, vary = TRUE, ignore_walls = FALSE)
 
@@ -202,7 +202,7 @@
 
 	if (total_consumed_blood < total_blood_required)
 		if (feedback)
-			worm.balloon_alert(worm, "only at [FLOOR(total_consumed_blood / total_blood_required * 100, 1)]% of required growth!")
+			worm.balloon_alert(worm, "вы насытились тольно на [FLOOR(total_consumed_blood / total_blood_required * 100, 1)]% от требуемого для дальнейшего роста!")
 		return FALSE
 	return TRUE
 
@@ -215,8 +215,8 @@
 	anchored = TRUE
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/hatchling
-	name = "Mature"
-	desc = "Enter incubation in a cocoon, emerging as a juvenile blood worm."
+	name = "Взросление"
+	desc = "Проводит инкубацию в коконе, превращая вас в молодого кровяного червя."
 
 	button_icon_state = "mature_hatchling"
 
@@ -226,7 +226,7 @@
 	total_blood_required = 500
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/hatchling/Activate(atom/target)
-	if (tgui_alert(owner, "Are you sure? After [cocoon_time / 10] seconds, you will become a juvenile, gaining stat increases and the ability to spit corrosive blood, but losing the ability to ventcrawl.", "Mature", list("Yes", "No"), 30 SECONDS) != "Yes")
+	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд, вы станете взрослой особью, получив увеличение характеристик, а также навык «Плевок токсичной кровью», однако, вы потеряете возможность перемещатсья по вентиляции.", "Mature", list("Yes", "No"), 30 SECONDS) != "Yes")
 		return
 	if (!IsAvailable(feedback = TRUE))
 		return
@@ -239,8 +239,8 @@
 	log_blood_worm("[key_name(new_worm)] finished maturing into a juvenile blood worm")
 
 /obj/structure/blood_worm_cocoon/hatchling
-	name = "small blood cocoon"
-	desc = "The incubation cocoon of a hatchling blood worm. Its surface is slowly shifting."
+	name = "маленький кровавый кокон"
+	desc = "Инкубационный кокон детеныша кровяного червя. Его поверхность медленно изменяется."
 
 	icon_state = "cocoon-small"
 
@@ -248,11 +248,11 @@
 	damage_deflection = 10
 
 /obj/structure/blood_worm_cocoon/hatchling/examine(mob/user)
-	return ..() + span_warning("It can be broken to prevent the blood worm from maturing.")
+	return ..() + span_warning("Кокон можно сломать, чтобы предотвратить созревание кровяного червя.")
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/juvenile
-	name = "Mature"
-	desc = "Enter incubation in a cocoon, emerging as an adult blood worm."
+	name = "Зрелость"
+	desc = "Проводит инкубацию в коконе, превращая вас во взрослого кровяного червя."
 
 	button_icon_state = "mature_juvenile"
 
@@ -262,7 +262,7 @@
 	total_blood_required = 1500
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/juvenile/Activate(atom/target)
-	if (tgui_alert(owner, "Are you sure? After [cocoon_time / 10] seconds, you will become an adult, gaining stat increases and the ability to spit bursts of corrosive blood by right-clicking with Spit Blood while outside of a host.", "Mature", list("Yes", "No"), 30 SECONDS) != "Yes")
+	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд вы станете взрослым кровавым червем, увеличив свои характеристики, а также получив навык «Плевок сгутском токсичной крови», активировать который можно нажав ПКМ при активации навыка «Плевок токсичной кровью», находясь снаружи своего носителя.", "Mature", list("Yes", "No"), 30 SECONDS) != "Yes")
 		return
 	if (!IsAvailable(feedback = TRUE))
 		return
@@ -275,8 +275,8 @@
 	log_blood_worm("[key_name(new_worm)] finished maturing into an adult blood worm")
 
 /obj/structure/blood_worm_cocoon/juvenile
-	name = "medium blood cocoon"
-	desc = "The incubation cocoon of a juvenile blood worm. Its surface is slowly shifting."
+	name = "средний кровавый кокон"
+	desc = "Инкубационный кокон молодого кровавого червя. Его поверхность медленно изменяется."
 
 	icon_state = "cocoon-medium"
 
@@ -284,11 +284,11 @@
 	damage_deflection = 15
 
 /obj/structure/blood_worm_cocoon/juvenile/examine(mob/user)
-	return ..() + span_warning("It can be broken to prevent the blood worm from maturing, but it looks rather tough.")
+	return ..() + span_warning("Кокон можно сломать, чтобы предотвратить созревание кровяного червя, хотя выглядит он довольно крепким.")
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/adult
-	name = "Reproduce"
-	desc = "Enter incubation in a cocoon, creating 4 new hatchlings including yourself."
+	name = "Размножение"
+	desc = "Погрузиться в инкубацию внутри кокона и породить 4 новых личинки, одной из которых будете вы."
 
 	button_icon_state = "reproduce"
 
@@ -314,7 +314,7 @@
 	return ..()
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/adult/Activate(atom/target)
-	if (tgui_alert(owner, "Are you sure? After [cocoon_time / 10] seconds, you will create [num_hatchlings + 1] new hatchlings, including yourself.", "Reproduce", list("Yes", "No"), 30 SECONDS) != "Yes")
+	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд, вы создадите [num_hatchlings + 1] новых личинок, включая себя самого.", "Reproduce", list("Yes", "No"), 30 SECONDS) != "Yes")
 		return
 	if (!IsAvailable(feedback = TRUE))
 		return
@@ -325,7 +325,7 @@
 	cocoon.balloon_alert(owner, "polling ghosts")
 
 	candidates = SSpolling.poll_ghost_candidates(
-		question = "Would you like to become a newly hatched blood worm? (x[num_hatchlings])",
+		question = "Хотели бы вы стать только что вылупившимся кровяным червем? (x[num_hatchlings])",
 		role = ROLE_BLOOD_WORM_INFESTATION,
 		check_jobban = ROLE_BLOOD_WORM_INFESTATION,
 		poll_time = cocoon_time,
@@ -343,9 +343,9 @@
 		return
 	if (num_candidates <= 0)
 		cancel()
-		owner.balloon_alert(owner, "no candidates!") // We can't host this balloon alert on a deleted cocoon.
+		owner.balloon_alert(owner, "нет кандидатов!") // We can't host this balloon alert on a deleted cocoon.
 		return
-	if (num_candidates < num_hatchlings && tgui_alert(owner, "There are only [num_candidates]/[num_hatchlings] candidates for hatchlings, want to proceed anyway?", "Ghost Shortage", list("Yes", "No"), 10 SECONDS) != "Yes")
+	if (num_candidates < num_hatchlings && tgui_alert(owner, "Сейчас только [num_candidates]/[num_hatchlings] кандидатов для личинок, всё равно хотите продолжить?", "Ghost Shortage", list("Да", "Нет"), 10 SECONDS) != "Да")
 		cancel()
 		return
 
@@ -390,11 +390,11 @@
 			continue
 
 		// Sucks, but that's just how it is sometimes.
-		to_chat(candidate, span_warning("The blood worm cocoon you rolled a hatchling spot for was canceled. Sorry."))
+		to_chat(candidate, span_warning("Кокон кровавого червя, которого вы выбрали был отменен. Увы."))
 
 /obj/structure/blood_worm_cocoon/adult
-	name = "large blood cocoon"
-	desc = "The incubation cocoon of an adult blood worm. You can see many faint shadows within."
+	name = "крупный кровавый кокон"
+	desc = "Инкубационный кокон взрослого кровяного червя. Вы можете видеть множество слабых теней внутри."
 
 	icon_state = "cocoon-large"
 
@@ -402,4 +402,4 @@
 	damage_deflection = 20
 
 /obj/structure/blood_worm_cocoon/adult/examine(mob/user)
-	return ..() + span_warning("It can be broken to prevent the blood worm from reproducing, but it looks extremely tough.")
+	return ..() + span_warning("Его можно сломать, чтобы предотвратить размножение кровяного червя, но на вид он чрезвычайно прочный.")

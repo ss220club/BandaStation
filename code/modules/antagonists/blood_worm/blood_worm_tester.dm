@@ -1,6 +1,6 @@
 /obj/item/blood_worm_tester
-	name = "hemoparasite testing tool"
-	desc = "A proprietary device patented by the DeForest Medical Corporation that is tailor-made for detecting hemoparasites, such as the infamous space-faring blood worm. The testing process is allegedly very painful."
+	name = "Анализатор наличия паразитов в крови"
+	desc = "Специальное устройство, запатентованное медицинской корпорацией «Дефорест», специально разработанное для выявления паразитов в крови, в частности, печально известных, кровавых червей. Утверждается, что процесс тестирования очень болезненный.."
 
 	icon = 'icons/obj/antags/blood_worm.dmi'
 	icon_state = "tester"
@@ -24,37 +24,37 @@
 	return ..()
 
 /obj/item/blood_worm_tester/update_desc(updates)
-	desc = "[initial(desc)] [spent ? "This one is spent." : "It's loaded for a single use."]"
+	desc = "[initial(desc)] [spent ? "Анализатор израсходован." : "Тестер заряжен для единоразоваго использования."]"
 	return ..()
 
 /obj/item/blood_worm_tester/attack(mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
 	if (spent)
-		target_mob.balloon_alert(user, "already spent!")
+		target_mob.balloon_alert(user, "уже израсходован!")
 		return
 	if (!ISADVANCEDTOOLUSER(user))
-		target_mob.balloon_alert(user, "needs dexterity!")
+		target_mob.balloon_alert(user, "не хватает ловкости!")
 		return
 	if (!ishuman(target_mob))
-		target_mob.balloon_alert(user, "target a human!")
+		target_mob.balloon_alert(user, "нацельтесь в человека!")
 		return
 	if (!target_mob.try_inject(user, injection_flags = INJECT_TRY_SHOW_ERROR_MESSAGE))
 		return
 
 	if (target_mob != user)
 		user.visible_message(
-			message = span_danger("\The [user] jab[user.p_s()] \the [target_mob] with \the [src]!"),
-			self_message = span_danger("You jab \the [target_mob] with \the [src]!"),
+			message = span_danger("[user] объединяет [user.p_s()] [target_mob] с [src]!"),
+			self_message = span_danger("Вы объединяете [target_mob] с [src]!"),
 			ignored_mobs = target_mob,
 		)
 
 		target_mob.show_message(
-			msg = span_userdanger("\The [user] jab[user.p_s()] you with \the [src]!"),
+			msg = span_userdanger("[user] объединяет[user.p_s()] вас с [src]!"),
 			type = MSG_VISUAL,
 		)
 	else
 		user.visible_message(
-			message = span_notice("\The [user] jab[user.p_s()] [user.p_themselves()] with \the [src]."),
-			self_message = span_notice("You jab yourself with \the [src]."),
+			message = span_notice("[user] объединяет[user.p_s()] [user.p_themselves()] с [src]."),
+			self_message = span_notice("Вы объединили себя с [src]."),
 		)
 
 	log_combat(user, target_mob, "tested", src)
