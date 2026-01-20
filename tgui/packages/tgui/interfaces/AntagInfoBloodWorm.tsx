@@ -23,7 +23,7 @@ export const AntagInfoBloodWorm = (props) => {
         <Section scrollable fill>
           <Stack vertical>
             <Stack.Item textColor="red" fontSize="20px">
-              You are a Blood Worm!
+              Ты Кровавый Червь!
             </Stack.Item>
             <Stack.Item>
               <ObjectivePrintout objectives={objectives} />
