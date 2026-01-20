@@ -9,10 +9,10 @@
 	inverse_chem = /datum/reagent/impurity/ipecacide
 	chemical_flags = REAGENT_NO_RANDOM_RECIPE
 
-/datum/reagent/toxin/lipolytic/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+/datum/reagent/toxin/lipolytic/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired, metabolization_ratio)
 	. = ..()
 	if(affected_mob.nutrition >= NUTRITION_LEVEL_WELL_FED)
-		affected_mob.adjust_nutrition(-1.5 * REM * normalise_creation_purity() * seconds_per_tick)
+		affected_mob.adjust_nutrition(-1.5 * metabolization_ratio * normalise_creation_purity() * seconds_per_tick)
 
 		if(affected_mob.overeatduration > 0)
 			affected_mob.overeatduration = max(affected_mob.overeatduration - (4 SECONDS * seconds_per_tick), 0)
