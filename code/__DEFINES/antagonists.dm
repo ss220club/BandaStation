@@ -256,7 +256,7 @@ GLOBAL_LIST_INIT(ai_employers, list(
 	"Fanatical Revelation",
 	"Logic Core Error",
 	"Problem Solver",
-	"S.E.L.F",
+	"S.E.L.F.",
 	"Something's Wrong",
 	"Cybersun Virus",
 	"SyndOS",
