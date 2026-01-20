@@ -52,7 +52,6 @@
 			to_chat(user, span_userdanger("You gather power! Time for a home run!"))
 			homerun_ready = TRUE
 	// BANDASTATION EDIT END: Centcom homerun
-
 	return ..()
 
 /obj/item/melee/baseball_bat/attack(mob/living/target, mob/living/user)
