@@ -96,6 +96,10 @@ ADMIN_VERB(change_title_screen_css, R_DEBUG, "Title Screen: Set CSS", ADMIN_VERB
 		if(job_id in job_restrictions)
 			to_chat(src, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
 			SStitle.title_output(src, FALSE, "toggleReady")
+			if(!usr)
+				return
+			var/mob/dead/new_player/player = usr
+			player.ready = PLAYER_NOT_READY
 			return
 
 /datum/client_interface/proc/validate_job_restrictions()
