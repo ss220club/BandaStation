@@ -783,7 +783,7 @@
  *
  * Override this if you want an atom to be usable as a supplypod.
  */
-/atom/proc/setOpened()
+/atom/proc/set_opened()
 	return
 
 /**
@@ -791,7 +791,7 @@
  *
  * Override this if you want an atom to be usable as a supplypod.
  */
-/atom/proc/setClosed()
+/atom/proc/set_closed()
 	return
 
 ///Called after the atom is 'tamed' for type-specific operations, Usually called by the tameable component but also other things.
