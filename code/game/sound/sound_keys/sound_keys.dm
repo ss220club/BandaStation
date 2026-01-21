@@ -1157,6 +1157,7 @@
 		'sound/machines/telephone/talk_phone5.ogg',
 		'sound/machines/telephone/talk_phone6.ogg',
 		'sound/machines/telephone/talk_phone7.ogg',
+	)
 
 /datum/sound_effect/alien_spit_acid
 	key = SFX_ALIEN_SPIT_ACID
