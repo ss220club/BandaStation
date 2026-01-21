@@ -1,0 +1,4 @@
+author: "Ez-Briz"
+delete-after: True
+changes:
+  - admin: "Во время Possess Object сообщения отправляются от лица объекта, в который вселился администратор, а не в дедчат."
