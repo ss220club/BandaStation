@@ -3442,6 +3442,24 @@ instrumental = "оглушающим прутом"
 prepositional = "оглушающем пруте"
 gender = "male"
 
+["teleprod"]
+nominative = "телепрут"
+genitive = "телепрута"
+dative = "телепруту"
+accusative = "телепрут"
+instrumental = "телепрутом"
+prepositional = "телепруте"
+gender = "male"
+
+["snatcherprod"]
+nominative = "хватопрут"
+genitive = "хватопрута"
+dative = "хватопруту"
+accusative = "хватопрут"
+instrumental = "хватопрутом"
+prepositional = "хватопруте"
+gender = "male"
+
 ["advanced baton"]
 nominative = "высокотехнологическая дубинка"
 genitive = "высокотехнологической дубинки"
@@ -3530,6 +3548,33 @@ dative = "телескопической дубинке"
 accusative = "телескопическую дубинку"
 instrumental = "телескопической дубинкой"
 prepositional = "телескопической дубинке"
+gender = "female"
+
+["bronze-capped telescopic baton"]
+nominative = "телескопическая дубинка с бронзовым навершием"
+genitive = "телескопической дубинки с бронзовым навершием"
+dative = "телескопической дубинке с бронзовым навершием"
+accusative = "телескопическую дубинку с бронзовым навершием"
+instrumental = "телескопической дубинкой с бронзовым навершием"
+prepositional = "телескопической дубинке с бронзовым навершием"
+gender = "female"
+
+["silver-capped telescopic baton"]
+nominative = "телескопическая дубинка с серебряным навершием"
+genitive = "телескопической дубинки с серебряным навершием"
+dative = "телескопической дубинке с серебряным навершием"
+accusative = "телескопическую дубинку с серебряным навершием"
+instrumental = "телескопической дубинкой с серебряным навершием"
+prepositional = "телескопической дубинке с серебряным навершием"
+gender = "female"
+
+["gold-capped telescopic baton"]
+nominative = "телескопическая дубинка с золотым навершием"
+genitive = "телескопической дубинки с золотым навершием"
+dative = "телескопической дубинке с золотым навершием"
+accusative = "телескопическую дубинку с золотым навершием"
+instrumental = "телескопической дубинкой с золотым навершием"
+prepositional = "телескопической дубинке с золотым навершием"
 gender = "female"
 
 ["baseball bat"]

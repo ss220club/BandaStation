@@ -189,12 +189,12 @@
 /obj/item/shield/riot/attackby(obj/item/attackby_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attackby_item, /obj/item/stack/sheet/mineral/titanium))
 		if (atom_integrity >= max_integrity)
-			to_chat(user, span_warning("[src] is already in perfect condition."))
+			to_chat(user, span_warning("[declent_ru(NOMINATIVE)] уже в хорошем состоянии."))
 			return
 		var/obj/item/stack/sheet/mineral/titanium/titanium_sheet = attackby_item
 		titanium_sheet.use(1)
 		atom_integrity = max_integrity
-		to_chat(user, span_notice("You repair [src] with [titanium_sheet]."))
+		to_chat(user, span_notice("Вы чините [declent_ru(ACCUSATIVE)] с помощью [titanium_sheet.declent_ru(DATIVE)]."))
 		return
 	return ..()
 
@@ -266,10 +266,10 @@
 	if(istype(attackby_item, /obj/item/assembly/flash/handheld))
 		var/obj/item/assembly/flash/handheld/flash = attackby_item
 		if(flash.burnt_out)
-			to_chat(user, span_warning("No sense replacing it with a broken bulb!"))
+			to_chat(user, span_warning("Нет смысла заменять его сломанной лампочкой!"))
 			return
 		else
-			to_chat(user, span_notice("You begin to replace the bulb..."))
+			to_chat(user, span_notice("Вы начинаете заменять лампочку..."))
 			if(do_after(user, 2 SECONDS, target = user))
 				if(QDELETED(flash) || flash.burnt_out)
 					return
@@ -440,7 +440,7 @@
 	SIGNAL_HANDLER
 	if(!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
 		if(send_message)
-			balloon_alert(user, "extend it first!")
+			balloon_alert(user, "сначала разверните!")
 		return COMPONENT_BLOCK_ITEM_DISARM_ATTACK
 
 /datum/armor/item_shield/ballistic
@@ -462,12 +462,12 @@
 /obj/item/shield/ballistic/attackby(obj/item/attackby_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attackby_item, /obj/item/stack/sheet/mineral/titanium))
 		if (atom_integrity >= max_integrity)
-			to_chat(user, span_warning("[src] is already in perfect condition."))
+			to_chat(user, span_warning("[declent_ru(NOMINATIVE)] уже в хорошем состоянии."))
 			return
 		var/obj/item/stack/sheet/mineral/titanium/titanium_sheet = attackby_item
 		titanium_sheet.use(1)
 		atom_integrity = max_integrity
-		to_chat(user, span_notice("You repair [src] with [titanium_sheet]."))
+		to_chat(user, span_notice("Вы чините [declent_ru(ACCUSATIVE)] с помощью [titanium_sheet.declent_ru(DATIVE)]."))
 		return
 	return ..()
 
