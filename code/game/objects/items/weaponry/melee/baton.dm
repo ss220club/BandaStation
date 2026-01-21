@@ -411,7 +411,7 @@
 
 /obj/item/melee/baton/telescopic/silver
 	name = "silver-capped telescopic baton"
-	desc = "Компактное, но надежное оружие личной защиты. В сложенном виде его можно спрятать. Серебряный вариант Обладает неплохим пробитием."
+	desc = "Компактное, но надежное оружие личной защиты. В сложенном виде его можно спрятать. Серебряный вариант. Обладает неплохим пробитием."
 	icon_state = "telebaton_silver"
 	stun_armour_penetration = 30 // strong enough to pen sec armor
 
