@@ -7,31 +7,16 @@
 import './styles/main.scss';
 import './styles/themes/light.scss';
 
-import { combineReducers } from 'common/redux';
 import { createRoot } from 'react-dom/client';
-import { setGlobalStore } from 'tgui/backend';
-import { configureStore } from 'tgui/store';
 import { setupGlobalEvents } from 'tgui-core/events';
 import { captureExternalLinks } from 'tgui-core/links';
 import { setupHotReloading } from 'tgui-dev-server/link/client';
+//import { emotesReducer } from 'tgui-panel/emotes'; // BANDASTATION ADD  - Emote Panel
 import { App } from './app';
-import { emotesReducer } from './emotes'; // BANDASTATION ADD  - Emote Panel
 import { bus } from './events/listeners';
 import { setupPanelFocusHacks } from './panelFocus';
 
 const root = createRoot(document.getElementById('react-root')!);
-
-// BANDASTATION ADD START - Emote Panel
-// Create Redux store for emotes
-const store = configureStore({
-  reducer: combineReducers({
-    emotes: emotesReducer,
-  }),
-});
-
-// Set global store so useSelector/useDispatch work
-setGlobalStore(store);
-// BANDASTATION ADD END - Emote Panel
 
 function render(component: React.ReactElement) {
   root.render(component);
@@ -54,15 +39,7 @@ function setupApp() {
   render(<App />);
 
   // Dispatch incoming messages as store actions
-  Byond.subscribe((type, payload) => {
-    bus.dispatch({ type, payload });
-    // BANDASTATION ADD START - Emote Panel
-    // Also dispatch to Redux store for emotes actions
-    if (type.startsWith('emotes/')) {
-      store.dispatch({ type, payload });
-    }
-    // BANDASTATION ADD END - Emote Panel
-  });
+  Byond.subscribe((type, payload) => bus.dispatch({ type, payload }));
 
   // Unhide the panel
   Byond.winset('output_selector.legacy_output_selector', {

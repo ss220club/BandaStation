@@ -3,7 +3,7 @@
 /mob/living/simple_animal/hostile/megafauna/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/mannoroth)
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/add_tts_component()
+/mob/living/basic/boss/blood_drunk_miner/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/chen)
 
 /mob/living/basic/mining/basilisk/add_tts_component()

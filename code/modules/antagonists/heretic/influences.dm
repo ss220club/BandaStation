@@ -110,10 +110,13 @@
 
 	var/mob/living/carbon/human/human_user = user
 	var/obj/item/bodypart/their_poor_arm = human_user.get_active_hand()
+	if (!their_poor_arm)
+		return TRUE
+
 	if(prob(25))
 		to_chat(human_user, span_userdanger("Потустороннее присутствие разрывает и распыляет [their_poor_arm.ru_p_yours(ACCUSATIVE)] [their_poor_arm.declent_ru(ACCUSATIVE)], когда вы пытаетесь коснуться дыры в самой ткани реальности!"))
-		their_poor_arm.dismember()
-		their_poor_arm.forceMove(src) // stored for later fishage
+		if (their_poor_arm.dismember())
+			their_poor_arm.forceMove(src) // stored for later fishage
 	else
 		to_chat(human_user,span_danger("Вы отдёргиваете руку от отверстия, когда мистическая энергия бьется, пытаясь зацепиться за этот мир!"))
 	return TRUE
@@ -139,8 +142,7 @@
 	// A very elaborate way to suicide
 	visible_message(span_userdanger("Psychic tendrils lash out from [src], psychically grabbing onto [user]'s psychically sensitive mind and tearing [user.p_their()] head off!"))
 	var/obj/item/bodypart/head/head = locate() in human_user.bodyparts
-	if(head)
-		head.dismember()
+	if(head?.dismember())
 		head.forceMove(src) // stored for later fishage
 	else
 		human_user.gib(DROP_ALL_REMAINS)

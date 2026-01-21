@@ -77,6 +77,9 @@ ADMIN_VERB(change_title_screen_css, R_DEBUG, "Title Screen: Set CSS", ADMIN_VERB
 	if(SSticker.current_state >= GAME_STATE_SETTING_UP)
 		return
 
+	if(locate(/datum/station_trait/xenobureaucracy_error) in GLOB.lobby_station_traits)
+		return
+
 	var/prefs_species = src.prefs.read_preference(/datum/preference/choiced/species)
 	var/list/prefs_jobs = src.prefs.job_preferences
 	var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
@@ -93,6 +96,10 @@ ADMIN_VERB(change_title_screen_css, R_DEBUG, "Title Screen: Set CSS", ADMIN_VERB
 		if(job_id in job_restrictions)
 			to_chat(src, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
 			SStitle.title_output(src, FALSE, "toggleReady")
+			if(!usr)
+				return
+			var/mob/dead/new_player/player = usr
+			player.ready = PLAYER_NOT_READY
 			return
 
 /datum/client_interface/proc/validate_job_restrictions()

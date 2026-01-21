@@ -311,7 +311,7 @@
 		set_arm_fluff(arm)
 	return TRUE
 
-/datum/status_effect/golem/diamond/tick(delta_time, times_fired)
+/datum/status_effect/golem/diamond/tick(delta_time)
 	owner.alpha = max(owner.alpha - alpha_per_tick, 0)
 
 /// Reset alpha to starting value
@@ -397,7 +397,7 @@
 	if (!proximity || !isliving(punchee))
 		return NONE
 	var/mob/living/victim = punchee
-	if (victim.body_position == LYING_DOWN || (!(FACTION_MINING in victim.faction) && !(FACTION_BOSS in victim.faction)))
+	if (victim.body_position == LYING_DOWN || !victim.has_faction(list(FACTION_MINING, FACTION_BOSS)))
 		return NONE
 	victim.apply_damage(mining_bonus, BRUTE)
 

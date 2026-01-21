@@ -319,8 +319,10 @@
 	desc = "May or may not contain traces of lead."
 	icon_state = "medkit_tactical_premium"
 	inhand_icon_state = "medkit-tactical-premium"
-	grind_results = list(/datum/reagent/lead = 10)
 	storage_type = /datum/storage/medkit/tactical/premium
+
+/obj/item/storage/medkit/tactical/premium/grind_results()
+	return list(/datum/reagent/lead = 10)
 
 /obj/item/storage/medkit/tactical/premium/PopulateContents()
 	if(empty)
@@ -469,8 +471,8 @@
 		var/obj/item/bodypart/head/myhead = user.get_bodypart(BODY_ZONE_HEAD)
 		if(myhead)
 			user.visible_message(span_suicide("[user] puts [user.p_their()] head into \the [src] and begins closing it! It looks like [user.p_theyre()] trying to commit suicide!"))
-			myhead.dismember()
-			myhead.forceMove(src) //force your enemies to kill themselves with your head collection box!
+			if (myhead.dismember())
+				myhead.forceMove(src) //force your enemies to kill themselves with your head collection box!
 			playsound(user, "desecration-01.ogg", 50, TRUE, -1)
 			return BRUTELOSS
 		user.visible_message(span_suicide("[user] is beating [user.p_them()]self with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
