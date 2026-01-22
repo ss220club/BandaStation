@@ -5,10 +5,13 @@
 
 	// Визуальные параметры
 	meat = null
-	skinned_type = /obj/item/stack/sheet/iron{amount = 10}
+	inherent_biotypes = MOB_ROBOTIC
 	exotic_bloodtype = BLOOD_TYPE_OIL
+	species_language_holder = /datum/language_holder/synthetic
 
 	// Физиологические особенности
+	mutantstomach = null
+	mutantliver = null
 	mutantlungs = /obj/item/organ/lungs/ipc
 	mutantbrain = /obj/item/organ/brain/positronic
 	mutantheart = /obj/item/organ/heart/ipc_battery
@@ -31,11 +34,14 @@
 		TRAIT_RESISTCOLD,
 		TRAIT_NOBREATH,
 		TRAIT_RADIMMUNE,
+		TRAIT_LIVERLESS_METABOLISM,
+		TRAIT_GENELESS,
+		TRAIT_NOCRITDAMAGE,
 		TRAIT_VIRUSIMMUNE,
 		TRAIT_PIERCEIMMUNE,
 		TRAIT_TOXIMMUNE,
 		TRAIT_LIMBATTACHMENT,
-		TRAIT_EASYDISMEMBER
+		TRAIT_EASYDISMEMBER,
 	)
 
 	// Урон модификаторы
@@ -66,33 +72,16 @@
 
 /datum/species/ipc/on_species_gain(mob/living/carbon/human/H, datum/species/old_species, pref_load)
 	. = ..()
-
-	cpu_temperature = 30
-	last_repair_time = world.time
-
-	// Используем базовый replace_body который уже существует
 	replace_body(H, src)
-
-	// Добавляем органы
-	if(!H.get_organ_slot(ORGAN_SLOT_BRAIN))
-		var/obj/item/organ/brain/positronic/B = new()
-		B.Insert(H)
-
-	if(!H.get_organ_slot(ORGAN_SLOT_HEART))
-		var/obj/item/organ/heart/ipc_battery/battery = new()
-		battery.Insert(H)
-
 	H.update_body()
 	H.update_body_parts()
-
-	to_chat(H, span_notice("Системная диагностика завершена. Все системы функционируют нормально."))
+	to_chat(H, span_warning("СИСТЕМА НЕ АКТИВИРОВАНА: Отсутствует позитронное ядро и источник питания. Требуется хирургическое вмешательство."))
 
 /datum/species/ipc/on_species_loss(mob/living/carbon/human/H, datum/species/new_species, pref_load)
 	. = ..()
 
 /datum/species/ipc/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	. = ..()
-
 	handle_self_repair(H)
 	handle_temperature(H)
 	handle_battery(H)
@@ -104,7 +93,6 @@
 	if(world.time < last_repair_time + self_repair_delay)
 		return
 
-	// Используем apply_damage с отрицательными значениями для лечения
 	if(H.bruteloss > 0)
 		H.apply_damage(-self_repair_amount, BRUTE, forced = TRUE)
 		last_repair_time = world.time
@@ -146,10 +134,8 @@
 	chassis_manufacturer = chassis_name
 	to_chat(H, span_notice("Шасси установлено: [chassis_name]"))
 
-// Обработка ЭМП
 /datum/species/ipc/spec_stun(mob/living/carbon/human/H, amount)
 	. = ..()
-	// Заглушка для ЭМП - реализуем через другой прок
 
 /datum/species/ipc/proc/handle_emp(mob/living/carbon/human/H, severity)
 	var/emp_damage = 0
@@ -165,17 +151,14 @@
 
 	H.apply_damage(emp_damage * 0.5, BRUTE, forced = TRUE)
 	H.apply_damage(emp_damage * 0.5, BURN, forced = TRUE)
-
 	cpu_temperature = min(cpu_temperature + (emp_damage * 0.5), cpu_temp_critical)
 
-// Вызов ЭМП обработки
 /obj/item/organ/brain/positronic/emp_act(severity)
 	. = ..()
 	if(owner && istype(owner.dna.species, /datum/species/ipc))
 		var/datum/species/ipc/S = owner.dna.species
 		S.handle_emp(owner, severity)
 
-// Хелпер для лечения - вызываем вручную через глаголы
 /datum/species/ipc/proc/try_repair_brute(mob/living/carbon/human/H, obj/item/tool, mob/user)
 	if(!istype(tool, /obj/item/weldingtool))
 		return FALSE
@@ -257,7 +240,6 @@
 	self_repair_enabled = !self_repair_enabled
 	to_chat(H, span_notice("Саморемонт [self_repair_enabled ? "включен" : "выключен"]."))
 
-// Глагол для саморемонта
 /mob/living/carbon/human/verb/toggle_ipc_self_repair()
 	set name = "Toggle Self-Repair"
 	set category = "IC"
@@ -270,7 +252,6 @@
 	var/datum/species/ipc/S = dna.species
 	S.toggle_self_repair(src)
 
-// Глагол для ремонта сваркой
 /mob/living/carbon/human/verb/ipc_weld_repair()
 	set name = "Repair with Welder"
 	set category = "IC"
@@ -287,7 +268,6 @@
 	var/datum/species/ipc/S = dna.species
 	S.try_repair_brute(src, held, src)
 
-// Глагол для ремонта кабелем
 /mob/living/carbon/human/verb/ipc_cable_repair()
 	set name = "Repair with Cable"
 	set category = "IC"

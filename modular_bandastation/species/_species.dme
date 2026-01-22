@@ -61,7 +61,10 @@
 #include "code/preferences/species_features/vulpkanin/tail_markings/vulpkanin_tail_markings_color.dm"
 
 
-#include "code/preferences/species_features/Ipc/_ipc_defines.dm"
+#include "code/preferences/species_features/Ipc/ipc_chassis.dm"
+#include "code/preferences/species_features/Ipc/ipc_surgery.dm"
+#include "code/preferences/species_features/Ipc/ipc_bodytype_system.dm"
+
 
 #include "code/reagents/mutation.dm"
 
@@ -79,4 +82,7 @@
 #include "code/surgery/organs/limbgrower_designs.dm"
 #include "code/surgery/organs/internal/ipc_internal.dm"
 
+
 #include "code/human/sprite_accessories/vulpkanin/hair_masks.dm"
+
+
