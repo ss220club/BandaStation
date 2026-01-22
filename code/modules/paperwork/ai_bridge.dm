@@ -3,28 +3,13 @@
 #define URGENCY_COLOR_HIGH "red"
 #define URGENCY_COLOR_CRITICAL "darkred"
 #define FAX_TEMPLATE_FILE "config/blanks/markdown/centcom/nt_centcom_00.md"
+#define PROMPTS_PATH "config/bandastation/prompts"
+#define DEFAULT_ANALYZE_PROMPT "You are a secretary. Analyze this fax and return JSON."
+#define DEFAULT_REPLY_PROMPT "You are Central Command. Write a reply."
 
 // Configuration for LLM
 #define OLLAMA_MODEL "qwen3-vl:235b-instruct"
-#define SYSTEM_PROMPT_ANALYZE "ROLE: Elite Nanotrasen Secretary.\n\
-TASK: Analyze incoming fax.\n\
-OUTPUT FORMAT: Return a valid JSON object with fields: 'summary' (string, Russian language, 1 sentence) and 'urgency' (string: Low, Medium, High, Critical).\n\
-\n\
-URGENCY LOGIC:\n\
-1. SENDER: 'Assistant', 'Clown', 'Mime', 'Unknown' -> LOW (unless confirmed by Heads).\n\
-2. CONTENT: 'Reptilians', 'Vampires' -> LOW (Paranoia). 'Nuke', 'Blob', 'Rev' -> HIGH (if from Command). 'Pizza', 'Jokes' -> LOW."
 
-#define SYSTEM_PROMPT_REPLY_BASE "ROLE: Central Command Officer (Nanotrasen).\n\
-SETTING: Central Command, flagship Трурль.\n\
-TASK: Write a formal reply fax based on the Administrator's decision.\n\
-LANGUAGE: Russian.\n\
-TONE: Bureaucratic, Official, Corporate.\n\
-OUTPUT FORMAT: Return a valid JSON object with field: 'draft' (string, use <br> for new lines).\n\
-\n\
-CRITICAL RULES:\n\
-1. LENGTH: STRICTLY UNDER 150 WORDS. Be concise.\n\
-2. NO META-GAMING: Never mention 'Administrator' or 'Server'. Refer to 'Central Command Directives'.\n\
-3. FORMAT: No headers. Only: Reply body."
 
 /// Global singleton for AI bridge, initialized automatically
 GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
@@ -35,6 +20,29 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 /datum/ai_bridge
 	var/list/pending_faxes = list()
 	var/fax_uid_counter = 0
+	var/prompt_analyze_text = ""
+	var/prompt_reply_text = ""
+
+/datum/ai_bridge/New()
+	..()
+	load_prompts()
+
+
+/datum/ai_bridge/proc/load_prompts()
+	var/analyze_path = "[PROMPTS_PATH]/system_prompt_analyze_fax.txt"
+	var/reply_path = "[PROMPTS_PATH]/system_prompt_reply_fax.txt"
+
+	if(fexists(analyze_path))
+		prompt_analyze_text = file2text(analyze_path)
+	else
+		log_world("AI BRIDGE: Файл [analyze_path] не найден! Использую дефолт.")
+		prompt_analyze_text = DEFAULT_ANALYZE_PROMPT
+
+	if(fexists(reply_path))
+		prompt_reply_text = file2text(reply_path)
+	else
+		log_world("AI BRIDGE: Файл [reply_path] не найден! Использую дефолт.")
+		prompt_reply_text = DEFAULT_REPLY_PROMPT
 
 // --- 1. INCOMING FAX ---
 
@@ -61,9 +69,8 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
 	// --- PREPARE OLLAMA REQUEST ---
 	var/user_prompt = "Sender: [sender_name]\nTitle: [title]\nContent:\n[content]"
-	
 	var/list/messages = list(
-		list("role" = "system", "content" = SYSTEM_PROMPT_ANALYZE),
+		list("role" = "system", "content" = prompt_analyze_text),
 		list("role" = "user", "content" = user_prompt)
 	)
 
@@ -139,7 +146,7 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 		else
 			instruction = "DECISION: Acknowledge receipt."
 
-	var/system_prompt_full = "[SYSTEM_PROMPT_REPLY_BASE]\n\nCOMMAND:\n[instruction]"
+	var/system_prompt_full = "[prompt_reply_text]\n\nCOMMAND:\n[instruction]"
 	
 	var/user_content = "Original Fax from: [fax_data["sender"]]\nSubject: [fax_data["title"]]\nMessage: \"[fax_data["content"]]\"\n\nWrite the reply:"
 
@@ -293,6 +300,7 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 #undef URGENCY_COLOR_HIGH
 #undef URGENCY_COLOR_CRITICAL
 #undef OLLAMA_MODEL
-#undef SYSTEM_PROMPT_ANALYZE
-#undef SYSTEM_PROMPT_REPLY_BASE
+#undef DEFAULT_ANALYZE_PROMPT
+#undef DEFAULT_REPLY_PROMPT
 #undef FAX_TEMPLATE_FILE
+#undef PROMPTS_PATH
