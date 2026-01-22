@@ -8,7 +8,9 @@
 	gain_text = span_danger("Кажется защиты от света больше нет...")
 	lose_text = span_notice("Просветление.")
 	medical_record_text = "Пациент страдает острой фобией света и настаивает на том, что он физически вреден."
+	medical_symptom_text = "Exhibits heightened sensitivity to bright lights, leading to discomfort and avoidance behaviors."
 	hardcore_value = 4
+	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_TRAUMALIKE
 	mail_goodies = list(
 		/obj/item/flashlight/flashdark,
 		/obj/item/food/grown/mushroom/glowshroom/shadowshroom,
