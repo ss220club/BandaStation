@@ -27,8 +27,8 @@
 	var/obj/item/bodypart/head/myhead = user.get_bodypart(BODY_ZONE_HEAD)
 	if(myhead)
 		user.visible_message(span_suicide("[user] puts [user.p_their()] head into \the [src] and begins closing it! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
-		myhead.dismember()
-		myhead.forceMove(src) //force your enemies to kill themselves with your head collection box!
+		if (myhead.dismember())
+			myhead.forceMove(src) //force your enemies to kill themselves with your head collection box!
 		playsound(user, "desecration-01.ogg", 50, TRUE, -1)
 		return BRUTELOSS
 	user.visible_message(span_suicide("[user] is beating [user.p_them()]self with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
