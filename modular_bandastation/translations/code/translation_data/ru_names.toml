@@ -29576,3 +29576,41 @@ accusative = "кольцо с бриллиантом"
 instrumental = "кольцом с бриллиантом"
 prepositional = "кольце с бриллиантом"
 gender = "neuter"
+
+# MARK: Blood Worm
+
+["small blood cocoon"]
+nominative = "малый кровяной кокон"
+genitive = "малого кровяного кокона"
+dative = "малому кровяному кокону"
+accusative = "малый кровяной кокон"
+instrumental = "малым кровяным коконом"
+prepositional = "малом кровяном коконе"
+gender = "neuter"
+
+["medium blood cocoon"]
+nominative = "небольшой кровяной кокон"
+genitive = "небольшого кровяного кокона"
+dative = "небольшому кровяному кокону"
+accusative = "небольшой кровяной кокон"
+instrumental = "небольшим кровяным коконом"
+prepositional = "небольшом кровяном коконе"
+gender = "neuter"
+
+["large blood cocoon"]
+nominative = "крупный кровяной кокон"
+genitive = "крупного кровяного кокона"
+dative = "крупному кровяному кокону"
+accusative = "крупный кровяной кокон"
+instrumental = "крупным кровяным коконом"
+prepositional = "крупном кровяном коконе"
+gender = "neuter"
+
+["hemoparasite testing tool"]
+nominative = "анализатор наличия паразитов в крови"
+genitive = "анализатора наличия паразитов в крови"
+dative = "анализатору наличия паразитов в крови"
+accusative = "анализатор наличия паразитов в крови"
+instrumental = "анализатором наличия паразитов в крови"
+prepositional = "анализаторе наличия паразитов в крови"
+gender = "neuter"

@@ -2,7 +2,7 @@
 
 /datum/action/cooldown/mob_cooldown/blood_worm/inject
 	name = "Введение крови"
-	desc = "Вводите свою кровь в поврежденные ткани вашего организма-носителя, исцеляя его в обмен на ваше собственное здоровье."
+	desc = "Вводите свою кровь в поврежденные ткани вашего носителя, исцеляя его в обмен на ваше собственное здоровье."
 
 	button_icon_state = "inject_blood"
 
@@ -46,11 +46,11 @@
 	host.apply_status_effect(status_effect_type, worm)
 
 	host.visible_message(
-		message = span_danger("Раны [host] начинают заживать с необычной скоростью!"),
+		message = span_danger("Раны [host.declent_ru(ACCUSATIVE)] начинают заживать с необычной скоростью!"),
 		ignored_mobs = owner
 	)
 
-	to_chat(owner, span_notice("Вы вводите кровь в поврежденные ткани вашего организма-носителя."))
+	to_chat(owner, span_notice("Вы вводите кровь в поврежденные ткани вашего носителя."))
 
 	worm.adjust_worm_health(-health_cost)
 

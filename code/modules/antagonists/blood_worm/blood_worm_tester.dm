@@ -42,19 +42,19 @@
 
 	if (target_mob != user)
 		user.visible_message(
-			message = span_danger("[user] делает укол [target_mob] при помощи [src]!"),
-			self_message = span_danger("Вы делаете укол пациенту [target_mob] при помощи [src]!"),
+			message = span_danger("[user.declent_ru(NOMINATIVE)] делает укол [target_mob.declent_ru(GENITIVE)] при помощи [src.declent_ru(GENITIVE)]!"),
+			self_message = span_danger("Вы делаете укол [target_mob.declent_ru(DATIVE)] при помощи [src.declent_ru(GENITIVE)]!"),
 			ignored_mobs = target_mob,
 		)
 
 		target_mob.show_message(
-			msg = span_userdanger("[user] колит вас используя [src]!"),
+			msg = span_userdanger("[user.declent_ru(NOMINATIVE)] колит вас используя [src.declent_ru(NOMINATIVE)]!"),
 			type = MSG_VISUAL,
 		)
 	else
 		user.visible_message(
-			message = span_notice("[user] колит [user.p_themselves()] используя [src]."),
-			self_message = span_notice("Вы укололи себя с помощью [src]."),
+			message = span_notice("[user.declent_ru(NOMINATIVE)] колит [user.p_themselves()] используя [src.declent_ru(NOMINATIVE)]."),
+			self_message = span_notice("Вы укололи себя с помощью [src.declent_ru(GENITIVE)]."),
 		)
 
 	log_combat(user, target_mob, "tested", src)

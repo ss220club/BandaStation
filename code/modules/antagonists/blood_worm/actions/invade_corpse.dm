@@ -1,6 +1,6 @@
 /datum/action/cooldown/mob_cooldown/blood_worm/invade
 	name = "Вторжение в труп"
-	desc = "Вторгнитесь в труп гуманоида, сделав его своим организмом-носителем."
+	desc = "Вторгнитесь в труп гуманоида, сделав его своим носителем."
 
 	button_icon_state = "invade_corpse"
 
@@ -34,9 +34,9 @@
 		return TRUE // Don't bite the victim.
 
 	worm.visible_message(
-		message = span_danger("[worm] начинает проникать в [victim]!"),
-		self_message = span_notice("Вы начинаете проникать в [victim]."),
-		blind_message = span_hear("До тебя доносится влажный, сдавливающий звук.")
+		message = span_danger("[worm.declent_ru(NOMINATIVE)] начинает проникать в [victim.declent_ru(ACCUSATIVE)]!"),
+		self_message = span_notice("Вы начинаете проникать в [victim.declent_ru(ACCUSATIVE)]."),
+		blind_message = span_hear("Вы слышите мерзкий, хлюпающий звук.")
 	)
 
 	if (!do_after(worm, 5 SECONDS, victim, extra_checks = CALLBACK(src, PROC_REF(invade_check), worm, victim)))
@@ -49,7 +49,7 @@
 /datum/action/cooldown/mob_cooldown/blood_worm/invade/proc/invade_check(mob/living/basic/blood_worm/worm, mob/living/carbon/human/victim, feedback = FALSE)
 	if (HAS_TRAIT(victim, TRAIT_BLOOD_WORM_HOST))
 		if (feedback)
-			victim.balloon_alert(worm, "уже организм-носитель!")
+			victim.balloon_alert(worm, "уже носитель!")
 		return FALSE
 	if (victim.stat != DEAD)
 		if (feedback)

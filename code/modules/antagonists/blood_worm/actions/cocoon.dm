@@ -52,7 +52,7 @@
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/Activate(atom/target)
 	owner.visible_message(
-		message = span_danger("[owner] начинает выращивать кокон!"),
+		message = span_danger("[owner.declent_ru(NOMINATIVE)] начинает выращивать кокон!"),
 		self_message = span_notice("Вы начинаете выращивать кокон."),
 		blind_message = span_hear("До вас доносится звук сплетающейся плоти.")
 	)
@@ -61,9 +61,9 @@
 		return FALSE
 
 	owner.visible_message(
-		message = span_danger("[owner] вошел в кокон!"),
-		self_message = span_green("Вы входите в свеже сотканный кокон!"),
-		blind_message = span_hear("Вы прекращаете слышть звук сшивания плоти!")
+		message = span_danger("[owner.declent_ru(NOMINATIVE)] вошел в кокон!"),
+		self_message = span_green("Вы входите в свежесотканный кокон!"),
+		blind_message = span_hear("Вы больше не слышите звук срастающейся плоти!")
 	)
 
 	cocoon = new cocoon_type(get_turf(owner))
@@ -98,9 +98,9 @@
 			continue // Harms potential hosts.
 
 		unfortunate_observer.visible_message(
-			message = span_danger("[unfortunate_observer] окатывается волной едкой крови!"),
+			message = span_danger("[unfortunate_observer.declent_ru(NOMINATIVE)] окатывается волной едкой крови!"),
 			self_message = span_userdanger("Вас окатывает волной едкой крови! АУЧ!"),
-			blind_message = span_hear("You hear sizzling!")
+			blind_message = span_hear("Вы слышите шипение!")
 		)
 
 		unfortunate_observer.Knockdown(3 SECONDS)
@@ -147,7 +147,7 @@
 /// Cancels the incubation process, destroying the cocoon early.
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/proc/cancel()
 	cocoon.visible_message(
-		message = span_danger("[cocoon] разваливается на куски, избавляясь от [owner]."),
+		message = span_danger("[cocoon.declent_ru(NOMINATIVE)] разваливается на куски, избавляясь от [owner.declent_ru(ACCUSATIVE)]."),
 		blind_message = span_danger("Вы слышите противный хлюпающий звук!"),
 		ignored_mobs = owner
 	)
@@ -226,7 +226,7 @@
 	total_blood_required = 500
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/hatchling/Activate(atom/target)
-	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд, вы станете юной особью, получив увеличение характеристик, а также навык «Плевок токсичной кровью», однако, вы потеряете возможность перемещатьсья по вентиляции.", "Mature", list("Yes", "No"), 30 SECONDS) != "Yes")
+	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд, вы станете юной особью, получив увеличение характеристик, а также навык «Плевок токсичной кровью», однако, вы потеряете возможность перемещатьсья по вентиляции.", "Взросление", list("Да", "Нет"), 30 SECONDS) != "Да")
 		return
 	if (!IsAvailable(feedback = TRUE))
 		return
@@ -239,7 +239,7 @@
 	log_blood_worm("[key_name(new_worm)] finished maturing into a juvenile blood worm")
 
 /obj/structure/blood_worm_cocoon/hatchling
-	name = "маленький кровавый кокон"
+	name = "малый кровяной кокон"
 	desc = "Инкубационный кокон детеныша кровяного червя. Его поверхность медленно изменяется."
 
 	icon_state = "cocoon-small"
@@ -251,7 +251,7 @@
 	return ..() + span_warning("Кокон можно сломать, чтобы предотвратить созревание кровяного червя.")
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/juvenile
-	name = "Зрелость"
+	name = "Взросление"
 	desc = "Проводит инкубацию в коконе, превращая вас во взрослого кровяного червя."
 
 	button_icon_state = "mature_juvenile"
@@ -262,7 +262,7 @@
 	total_blood_required = 1500
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/juvenile/Activate(atom/target)
-	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд вы станете взрослым кровавым червем, увеличив свои характеристики, а также получив навык «Плевок сгустком токсичной крови», активировать который можно нажав ПКМ при использовании «Плевок токсичной кровью» вне носителя.", "Mature", list("Yes", "No"), 30 SECONDS) != "Yes")
+	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд вы станете взрослым кровавым червем, увеличив свои характеристики, а также получив навык «Плевок сгустком токсичной крови», активировать который можно нажав ПКМ при использовании «Плевок токсичной кровью» вне носителя.", "Взросление", list("Да", "Нет"), 30 SECONDS) != "Да")
 		return
 	if (!IsAvailable(feedback = TRUE))
 		return
@@ -275,8 +275,8 @@
 	log_blood_worm("[key_name(new_worm)] finished maturing into an adult blood worm")
 
 /obj/structure/blood_worm_cocoon/juvenile
-	name = "средний кровавый кокон"
-	desc = "Инкубационный кокон молодого кровавого червя. Его поверхность медленно изменяется."
+	name = "небольшой кровяной кокон"
+	desc = "Инкубационный кокон молодого кровяного червя. Его поверхность медленно изменяется."
 
 	icon_state = "cocoon-medium"
 
@@ -288,7 +288,7 @@
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/adult
 	name = "Размножение"
-	desc = "Погрузиться в инкубацию внутри кокона и породить 4 новых личинки, одной из которых будете вы."
+	desc = "Погрузиться в инкубацию внутри кокона и породить 4 новые личинки, одной из которых будете вы."
 
 	button_icon_state = "reproduce"
 
@@ -314,7 +314,7 @@
 	return ..()
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/adult/Activate(atom/target)
-	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд, вы создадите [num_hatchlings + 1] новых личинок, включая себя самого.", "Reproduce", list("Yes", "No"), 30 SECONDS) != "Yes")
+	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд, вы создадите [num_hatchlings + 1] новых личинок, включая себя самого.", "Размножение", list("Да", "Нет"), 30 SECONDS) != "Да")
 		return
 	if (!IsAvailable(feedback = TRUE))
 		return
@@ -390,11 +390,11 @@
 			continue
 
 		// Sucks, but that's just how it is sometimes.
-		to_chat(candidate, span_warning("Кокон кровавого червя, которого вы выбрали был отменен. Увы."))
+		to_chat(candidate, span_warning("Кокон кровяного червя, которого вы выбрали был отменен. Увы."))
 
 /obj/structure/blood_worm_cocoon/adult
-	name = "крупный кровавый кокон"
-	desc = "Инкубационный кокон взрослого кровяного червя. Вы можете видеть множество слабых теней внутри."
+	name = "крупный кровяной кокон"
+	desc = "Инкубационный кокон взрослого кровяного червя. Вы можете видеть множество едва разлечемых очертаний внутри."
 
 	icon_state = "cocoon-large"
 

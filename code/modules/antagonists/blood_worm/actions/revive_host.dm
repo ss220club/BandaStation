@@ -1,6 +1,6 @@
 /datum/action/cooldown/mob_cooldown/blood_worm/revive
-	name = "Оживить организм-носитель"
-	desc = "Восстановите кровообращение организма-носителя, возвращая его к жизни."
+	name = "Оживить носителя"
+	desc = "Восстановите кровообращение организма, возвращая его к жизни, захватывая тело под свой контроль."
 
 	button_icon_state = "revive_host"
 
@@ -43,7 +43,7 @@
 	var/mob/living/basic/blood_worm/worm = target
 	var/mob/living/carbon/human/host = worm.host
 
-	to_chat(owner, span_notice("Вы начинаете восстанавливать циркуляцию крови [host]..."))
+	to_chat(owner, span_notice("Вы начинаете восстанавливать циркуляцию крови [host.declent_ru(ACCUSATIVE)]..."))
 
 	for (var/i in 1 to 3)
 		if (!do_after(owner, 2 SECONDS, host, timed_action_flags = IGNORE_INCAPACITATED | IGNORE_USER_LOC_CHANGE | IGNORE_TARGET_LOC_CHANGE, extra_checks = CALLBACK(src, PROC_REF(run_checks), worm, host)))
@@ -58,7 +58,7 @@
 		animate(transform = original_transform, time = 0.2 SECONDS, easing = CUBIC_EASING | EASE_IN, flags = ANIMATION_PARALLEL)
 
 		host.visible_message(
-			message = span_danger("[host] безудержно трясется!"),
+			message = span_danger("[host.declent_ru(NOMINATIVE)] безудержно трясется!"),
 			ignored_mobs = owner
 		)
 
@@ -67,11 +67,11 @@
 		return FALSE
 
 	host.visible_message(
-		message = span_danger("[host] восстает из мёртвых!"),
+		message = span_danger("[host.declent_ru(NOMINATIVE)] восстает из мёртвых!"),
 		ignored_mobs = owner
 	)
 
-	to_chat(owner, span_green("Вы успешно оживили [host]!"))
+	to_chat(owner, span_green("Вы успешно оживили [host.declent_ru(ACCUSATIVE)]!"))
 
 	return ..()
 
@@ -80,11 +80,11 @@
 		return FALSE
 	if (host.stat != DEAD)
 		if (feedback)
-			host.balloon_alert(owner, "не мёртв!")
+			host.balloon_alert(owner, "ещё жив!")
 		return FALSE
 	if (HAS_TRAIT(host, TRAIT_HUSK))
 		if (feedback)
-			host.balloon_alert(owner, "выпотрошен!")
+			host.balloon_alert(owner, "хаск!")
 		return FALSE
 	if (!host.get_organ_slot(ORGAN_SLOT_BRAIN))
 		if (feedback)
