@@ -143,42 +143,97 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 	if(!limb)
 		return surgeries
 
-	// Проверяем каждую операцию - доступна ли она СЕЙЧАС
-	for(var/op_type in GLOB.ipc_all_operations)
-		var/datum/surgery_operation/op = new op_type()
+	// Получаем компонент панели для проверки состояния
+	var/datum/component/ipc_panel/panel = limb.GetComponent(/datum/component/ipc_panel)
 
-		// Проверяем с РАЗНЫМИ инструментами
-		var/is_available = FALSE
-		var/best_tool_name = "Неизвестно"
+	// Определяем доступные операции вручную на основе состояния
+	var/panel_state = panel ? panel.panel_state : 0
 
-		for(var/tool_type in op.implements)
-			var/obj/item/tool
-
-			// Создаём временный инструмент для проверки
-			if(ispath(tool_type, /obj/item))
-				tool = new tool_type()
-			else
-				// Если это текстовая константа - пропускаем
-				continue
-
-			// Проверяем доступность с этим инструментом
-			if(hascall(op, "snowflake_check_availability"))
-				if(op.snowflake_check_availability(limb, null, tool, target_zone))
-					is_available = TRUE
-					best_tool_name = get_tool_display_name(tool_type)
-					qdel(tool)
-					break
-
-			qdel(tool)
-
-		if(is_available)
+	// Для головы и груди
+	if(target_zone == BODY_ZONE_CHEST || target_zone == BODY_ZONE_HEAD)
+		if(panel_state == 0) // Закрыта
 			surgeries += list(list(
-				"name" = op.name,
-				"desc" = op.desc,
-				"tool_rec" = best_tool_name
+				"name" = "Открыть панель шасси",
+				"desc" = "Открутить панель доступа к внутренним компонентам IPC.",
+				"tool_rec" = "Отвёртка"
+			))
+		else if(panel_state == 1) // Открыта
+			surgeries += list(list(
+				"name" = "Подготовить электронику",
+				"desc" = "Подготовьте внутреннюю электронику IPC к операции с помощью мультитула.",
+				"tool_rec" = "Мультитул"
+			))
+			surgeries += list(list(
+				"name" = "Закрыть панель шасси",
+				"desc" = "Закрутить панель доступа к внутренним компонентам IPC.",
+				"tool_rec" = "Отвёртка"
+			))
+			surgeries += list(list(
+				"name" = "Закрутить панель (аварийно)",
+				"desc" = "Быстро закрутить открытую панель шасси IPC гаечным ключом.",
+				"tool_rec" = "Гаечный ключ"
+			))
+		else if(panel_state == 2) // Подготовлена
+			if(target_zone == BODY_ZONE_CHEST)
+				surgeries += list(list(
+					"name" = "Манипуляции с компонентами",
+					"desc" = "Установка или извлечение компонентов грудной клетки IPC.",
+					"tool_rec" = "Орган IPC или Мультитул"
+				))
+			else if(target_zone == BODY_ZONE_HEAD)
+				surgeries += list(list(
+					"name" = "Манипуляции с сенсорами головы",
+					"desc" = "Установка или извлечение сенсоров головы IPC.",
+					"tool_rec" = "Орган IPC или Мультитул"
+				))
+			surgeries += list(list(
+				"name" = "Закрутить панель (аварийно)",
+				"desc" = "Быстро закрутить открытую панель шасси IPC гаечным ключом.",
+				"tool_rec" = "Гаечный ключ"
 			))
 
-		qdel(op)
+	// Для рук и ног
+	else if(target_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+		if(panel_state == 0) // Закрыта
+			surgeries += list(list(
+				"name" = "Открыть панель конечности",
+				"desc" = "Открутить панель доступа на конечности IPC.",
+				"tool_rec" = "Отвёртка"
+			))
+			surgeries += list(list(
+				"name" = "Отключить конечность",
+				"desc" = "Отключите электронику конечности IPC перед снятием.",
+				"tool_rec" = "Мультитул"
+			))
+		else if(panel_state == 1) // Открыта
+			if(limb.brute_dam > 0)
+				surgeries += list(list(
+					"name" = "Заварить механические повреждения",
+					"desc" = "Используйте сварку для ремонта механических повреждений.",
+					"tool_rec" = "Сварка"
+				))
+			if(limb.burn_dam > 0)
+				surgeries += list(list(
+					"name" = "Починить проводку",
+					"desc" = "Используйте кабель для ремонта электрических повреждений.",
+					"tool_rec" = "Кабель"
+				))
+			surgeries += list(list(
+				"name" = "Установить имплант",
+				"desc" = "Установите имплант в конечность IPC.",
+				"tool_rec" = "Имплант"
+			))
+			surgeries += list(list(
+				"name" = "Закрыть панель конечности",
+				"desc" = "Закрутить панель доступа на конечности IPC.",
+				"tool_rec" = "Отвёртка"
+			))
+		else if(panel_state == 3) // Отключена
+			surgeries += list(list(
+				"name" = "Открутить конечность",
+				"desc" = "Открутите конечность IPC с помощью гаечного ключа.",
+				"tool_rec" = "Гаечный ключ"
+			))
 
 	return surgeries
 
