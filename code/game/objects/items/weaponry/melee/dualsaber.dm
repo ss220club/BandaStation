@@ -38,9 +38,11 @@
 	var/two_hand_force = 40
 	var/hacked = FALSE
 	var/list/possible_colors = list("red", "blue", "green", "purple")
+	// BANDASTATION EDIT START
 	var/hit_wield = 'modular_bandastation/weapon/sound/melee/mid_saberhit.ogg'
 	var/hit_unwield = SFX_SWING_HIT
 	var/bypass_nodrop = FALSE
+	// BANDASTATION EDIT END
 
 /datum/armor/item_dualsaber
 	fire = 100
@@ -63,11 +65,11 @@
 	if(user && HAS_TRAIT(user, TRAIT_HULK))
 		to_chat(user, span_warning("You lack the grace to wield this!"))
 		return COMPONENT_TWOHANDED_BLOCK_WIELD
-	if(HAS_TRAIT_FROM(src, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT) && !bypass_nodrop)
+	if(HAS_TRAIT_FROM(src, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT) && !bypass_nodrop) // BANDASTATION EDIT
 		to_chat(user, span_warning("You can't seem to hold [src] properly!"))
 		return COMPONENT_TWOHANDED_BLOCK_WIELD
 	update_weight_class(w_class_on)
-	hitsound = hit_wield
+	hitsound = hit_wield // BANDASTATION EDIT
 	START_PROCESSING(SSobj, src)
 	set_light_on(TRUE)
 
@@ -75,7 +77,7 @@
 /// switch hitsounds
 /obj/item/dualsaber/proc/on_unwield(obj/item/source, mob/living/carbon/user)
 	update_weight_class(initial(w_class))
-	hitsound = hit_unwield
+	hitsound = hit_unwield // BANDASTATION EDIT
 	STOP_PROCESSING(SSobj, src)
 	set_light_on(FALSE)
 
