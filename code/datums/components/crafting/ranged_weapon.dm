@@ -345,8 +345,9 @@
 	time = 15 SECONDS
 	category = CAT_WEAPON_RANGED
 	crafting_flags = CRAFT_CHECK_DENSITY
+	non_craftable = TRUE // BANDASTATION ADDITION: REPEATER REMOVAL
 
-/datum/crafting_recipe/Detached_Ratvarian_Repeater
+/datum/crafting_recipe/detached_ratvarian_repeater
 	name = "Iconoclast's Repeater"
 	tool_behaviors = list(TOOL_WELDER)
 	result = /obj/item/gun/energy/laser/musket/repeater
@@ -356,7 +357,6 @@
 	time = 10 SECONDS
 	category = CAT_WEAPON_RANGED
 	crafting_flags = CRAFT_CHECK_DENSITY
-
 
 /datum/crafting_recipe/large_ballista
 	name = "Improvised Ballista"
