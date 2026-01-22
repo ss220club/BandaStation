@@ -41,6 +41,8 @@
 	var/internal_bleeding_chance
 	/// If we let off blood when hit, the max blood lost is this * the incoming damage
 	var/internal_bleeding_coefficient
+	/// If TRUE we are ready to be mended in surgery
+	VAR_FINAL/mend_state = FALSE
 
 /datum/wound/pierce/bleed/wound_injury(datum/wound/old_wound = null, attack_direction = null)
 	set_blood_flow(initial_flow)
@@ -95,7 +97,7 @@
 		return BLOOD_FLOW_INCREASING
 	return BLOOD_FLOW_STEADY
 
-/datum/wound/pierce/bleed/handle_process(seconds_per_tick, times_fired)
+/datum/wound/pierce/bleed/handle_process(seconds_per_tick)
 	if (!victim || HAS_TRAIT(victim, TRAIT_STASIS))
 		return
 
@@ -184,7 +186,7 @@
 /datum/wound_pregen_data/flesh_pierce
 	abstract = TRUE
 
-	required_limb_biostate = (BIO_FLESH)
+	required_limb_biostate = BIO_FLESH
 	required_wounding_type = WOUND_PIERCE
 
 	wound_series = WOUND_SERIES_FLESH_PUNCTURE_BLEED
@@ -203,8 +205,8 @@
 	occur_text = "выбрызгивает тонкую струю крови"
 	sound_effect = 'sound/effects/wounds/pierce1.ogg'
 	severity = WOUND_SEVERITY_MODERATE
-	initial_flow = 1.5
-	gauzed_clot_rate = 0.8
+	initial_flow = 1.25
+	gauzed_clot_rate = 0.75
 	clot_rate = 0.03
 	internal_bleeding_chance = 30
 	internal_bleeding_coefficient = 1.25
@@ -274,8 +276,8 @@
 	occur_text = "брызжет сильным фонтаном крови, обнажая проколотую рану"
 	sound_effect = 'sound/effects/wounds/pierce2.ogg'
 	severity = WOUND_SEVERITY_SEVERE
-	initial_flow = 2.25
-	gauzed_clot_rate = 0.6
+	initial_flow = 2
+	gauzed_clot_rate = 0.5
 	clot_rate = 0.02
 	internal_bleeding_chance = 60
 	internal_bleeding_coefficient = 1.5
@@ -331,7 +333,7 @@
 	RegisterSignal(limb, COMSIG_BODYPART_UPDATE_WOUND_OVERLAY, PROC_REF(wound_overlay))
 	limb.update_part_wound_overlay()
 
-/datum/wound/pierce/bleed/severe/eye/remove_wound(ignore_limb, replaced)
+/datum/wound/pierce/bleed/severe/eye/remove_wound(ignore_limb, replaced, destroying)
 	if (!isnull(limb))
 		UnregisterSignal(limb, COMSIG_BODYPART_UPDATE_WOUND_OVERLAY)
 	return ..()
@@ -387,13 +389,14 @@
 	occur_text = "разлетается на куски, отправляя части внутренностей во все стороны"
 	sound_effect = 'sound/effects/wounds/pierce3.ogg'
 	severity = WOUND_SEVERITY_CRITICAL
-	initial_flow = 3
-	gauzed_clot_rate = 0.4
+	initial_flow = 2.5
+	gauzed_clot_rate = 0.3
 	internal_bleeding_chance = 80
 	internal_bleeding_coefficient = 1.75
 	threshold_penalty = 15
 	status_effect_type = /datum/status_effect/wound/pierce/critical
 	scar_keyword = "piercecritical"
+	surgery_states = SURGERY_SKIN_CUT | SURGERY_VESSELS_UNCLAMPED // Bad enough to count
 	wound_flags = (ACCEPTS_GAUZE | MANGLES_EXTERIOR | CAN_BE_GRASPED)
 
 	simple_treat_text = "<b>Перевязывание</b> раны имеет первостепенное значение, так же как и получение непосредственной медицинской помощи - <b>Смерть</b> наступит, если лечение будет задержано, так как недостаток <b>кислорода</b> убьет пациента, поэтому <b>пища, железо и солево-глюкозный раствор</b> всегда рекомендуются после лечения. Эта рана не заживет самостоятельно."

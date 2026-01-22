@@ -23,10 +23,13 @@
 	var/reagent_consumption_method = INGEST
 	///What sound does our consumption play on consuming from the container?
 	var/consumption_sound = 'sound/items/drink.ogg'
+	///Whether to allow heating up the contents with a source of flame.
+	var/heatable = TRUE
 
 /obj/item/reagent_containers/cup/Initialize(mapload, vol)
 	. = ..()
-	AddElement(/datum/element/reagents_item_heatable)
+	if(heatable)
+		AddElement(/datum/element/reagents_item_heatable)
 
 /obj/item/reagent_containers/cup/examine(mob/user)
 	. = ..()
@@ -461,7 +464,7 @@
 	if(!tool.blend_requirements(src))
 		to_chat(user, span_warning("Cannot grind this!"))
 		return ITEM_INTERACT_BLOCKING
-	if((length(tool.grind_results) || tool.reagents?.total_volume) && user.transferItemToLoc(tool, src))
+	if((length(tool.grind_results()) || tool.reagents?.total_volume) && user.transferItemToLoc(tool, src))
 		grinded = tool
 		return ITEM_INTERACT_SUCCESS
 	return NONE

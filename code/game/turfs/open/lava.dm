@@ -23,6 +23,7 @@
 	clawfootstep = FOOTSTEP_LAVA
 	heavyfootstep = FOOTSTEP_LAVA
 	rust_resistance = RUST_RESISTANCE_ABSOLUTE
+	turf_flags = NO_RUST
 	/// How much fire damage we deal to living mobs stepping on us
 	var/lava_damage = 20
 	/// How many firestacks we add to living mobs stepping on us
@@ -406,17 +407,9 @@
 	immunity_resistance_flags = FREEZE_PROOF
 	lava_temperature = 100
 
-/turf/open/lava/plasma/examine(mob/user)
+/turf/open/lava/plasma/Initialize(mapload)
 	. = ..()
-	. += span_info("Some <b>liquid plasma<b> could probably be scooped up with a <b>container</b>.")
-
-/turf/open/lava/plasma/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!I.is_open_container())
-		return ..()
-	if(!I.reagents.add_reagent(/datum/reagent/toxin/plasma, rand(5, 10)))
-		to_chat(user, span_warning("[I] is full."))
-		return
-	user.visible_message(span_notice("[user] scoops some plasma from the [src] with [I]."), span_notice("You scoop out some plasma from the [src] using [I]."))
+	AddElement(/datum/element/reagent_scoopable_atom, /datum/reagent/toxin/plasma)
 
 /turf/open/lava/plasma/do_burn(atom/movable/burn_target, seconds_per_tick = 1)
 	. = TRUE

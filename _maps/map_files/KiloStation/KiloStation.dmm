@@ -1215,9 +1215,9 @@
 	},
 /obj/item/folder/yellow,
 /obj/item/clipboard,
-/obj/item/computer_disk/quartermaster,
-/obj/item/computer_disk/quartermaster,
-/obj/item/computer_disk/quartermaster,
+/obj/item/disk/computer/quartermaster,
+/obj/item/disk/computer/quartermaster,
+/obj/item/disk/computer/quartermaster,
 /obj/effect/spawner/random/entertainment/coin,
 /obj/effect/spawner/random/entertainment/coin,
 /obj/item/pen/blue{
@@ -6401,11 +6401,11 @@
 	pixel_x = 8;
 	pixel_y = 6
 	},
-/obj/item/computer_disk/engineering{
+/obj/item/disk/computer/engineering{
 	pixel_x = 10;
 	pixel_y = -8
 	},
-/obj/item/computer_disk/engineering{
+/obj/item/disk/computer/engineering{
 	pixel_x = 10;
 	pixel_y = -8
 	},
@@ -12143,7 +12143,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/turf_decal/siding/purple,
 /obj/machinery/dna_infuser,
-/obj/item/infuser_book,
+/obj/item/tgui_book/manual/infuser,
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 4
 	},
@@ -12733,7 +12733,6 @@
 /turf/open/floor/engine,
 /area/station/maintenance/disposal/incinerator)
 "enj" = (
-/obj/structure/barricade/wooden,
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/abandoned,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -12742,6 +12741,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/effect/spawner/structure/electrified_grille,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/fore)
 "enr" = (
@@ -18375,9 +18375,9 @@
 /turf/closed/wall/r_wall,
 /area/station/tcommsat/computer)
 "gbB" = (
-/obj/item/computer_disk/medical,
-/obj/item/computer_disk/medical,
-/obj/item/computer_disk/medical,
+/obj/item/disk/computer/medical,
+/obj/item/disk/computer/medical,
+/obj/item/disk/computer/medical,
 /obj/item/clothing/neck/stethoscope{
 	pixel_y = 5
 	},
@@ -22993,20 +22993,20 @@
 /turf/open/floor/iron/dark,
 /area/station/maintenance/port/fore)
 "hCY" = (
-/obj/item/computer_disk{
+/obj/item/disk/computer{
 	pixel_x = -5;
 	pixel_y = 8
 	},
-/obj/item/computer_disk{
+/obj/item/disk/computer{
 	pixel_x = 7;
 	pixel_y = 2
 	},
-/obj/item/computer_disk{
+/obj/item/disk/computer{
 	pixel_x = -8;
 	pixel_y = -3
 	},
 /obj/structure/table,
-/obj/item/computer_disk/ordnance{
+/obj/item/disk/computer/ordnance{
 	pixel_x = 2;
 	pixel_y = 1
 	},
@@ -30289,8 +30289,8 @@
 /turf/closed/wall,
 /area/station/hallway/primary/port)
 "jQR" = (
-/obj/structure/barricade/wooden,
 /obj/effect/spawner/structure/window,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/station/maintenance/port/fore)
 "jQT" = (
@@ -33502,12 +33502,12 @@
 /turf/open/floor/iron/dark,
 /area/station/maintenance/fore)
 "kWW" = (
-/obj/structure/barricade/wooden,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/abandoned,
 /obj/effect/spawner/structure/electrified_grille,
 /obj/effect/mapping_helpers/airlock/access/any/security/maintenance,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/port/aft)
 "kXp" = (
@@ -34961,9 +34961,9 @@
 "ltQ" = (
 /obj/structure/table,
 /obj/item/clipboard,
-/obj/item/computer_disk/ordnance,
-/obj/item/computer_disk/ordnance,
-/obj/item/computer_disk/ordnance,
+/obj/item/disk/computer/ordnance,
+/obj/item/disk/computer/ordnance,
+/obj/item/disk/computer/ordnance,
 /obj/item/circuitboard/aicore{
 	pixel_y = 5
 	},
@@ -50996,8 +50996,8 @@
 /obj/structure/cable,
 /obj/structure/table/wood,
 /obj/machinery/fax{
-	fax_name = "Captain's Office";
-	name = "Captain's Fax Machine"
+	fax_name = "Blueshield's Office";
+	name = "Blueshield's Fax Machine"
 	},
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/blueshield)
@@ -61052,10 +61052,10 @@
 /area/station/medical/medbay/central)
 "ubC" = (
 /obj/structure/grille,
-/obj/structure/barricade/wooden,
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/abandoned,
 /obj/effect/mapping_helpers/airlock/access/any/security/maintenance,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/port/aft)
 "ubF" = (

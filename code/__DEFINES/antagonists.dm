@@ -215,17 +215,17 @@ GLOBAL_LIST_INIT(syndicate_employers, list(
 	"Donk Corporation",
 	"Gorlex Marauders",
 	"MI13",
-	"Tiger Cooperative Fanatic",
+	//"Tiger Cooperative Fanatic", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Waffle Corporation Terrorist",
 	"Waffle Corporation",
 ))
 ///employers that are from Nanotrasen
 GLOBAL_LIST_INIT(nanotrasen_employers, list(
-	"Champions of Evil",
+	//"Champions of Evil", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Corporate Climber",
 	"Gone Postal",
 	"Internal Affairs Agent",
-	"Legal Trouble",
+	//"Legal Trouble", BANDASTATION REMOVAL - Syndicate Faction removal
 ))
 
 ///employers who hire agents to do the hijack
@@ -233,19 +233,19 @@ GLOBAL_LIST_INIT(hijack_employers, list(
 	"Animal Rights Consortium",
 	"Bee Liberation Front",
 	"Gone Postal",
-	"Tiger Cooperative Fanatic",
+	//"Tiger Cooperative Fanatic", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Waffle Corporation Terrorist",
 ))
 
 ///employers who hire agents to do a task and escape... or martyrdom. whatever
 GLOBAL_LIST_INIT(normal_employers, list(
-	"Champions of Evil",
+	//"Champions of Evil", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Corporate Climber",
 	"Cybersun Industries",
 	"Donk Corporation",
 	"Gorlex Marauders",
 	"Internal Affairs Agent",
-	"Legal Trouble",
+	//"Legal Trouble", BANDASTATION REMOVAL - Syndicate Faction removal
 	"MI13",
 	"Waffle Corporation",
 ))
@@ -283,7 +283,7 @@ GLOBAL_LIST_INIT(ai_employers, list(
 #define GET_CULTIST(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/cult))
 
 /// Checks if the mob is a sentient or non-sentient cultist
-#define IS_CULTIST_OR_CULTIST_MOB(mob) ((IS_CULTIST(mob)) || (mob.faction.Find(FACTION_CULT)))
+#define IS_CULTIST_OR_CULTIST_MOB(mob) ((IS_CULTIST(mob)) || (mob.has_faction(FACTION_CULT)))
 
 /**
  * Heretic checks
@@ -422,6 +422,7 @@ GLOBAL_LIST_INIT(human_invader_antagonists, list(
 #define ANTAG_GROUP_ARACHNIDS "Arachnid Infestation"
 #define ANTAG_GROUP_ASHWALKERS "Ash Walkers"
 #define ANTAG_GROUP_BIOHAZARDS "Biohazards"
+#define ANTAG_GROUP_BLOODY "Bloody Monstrosities"
 #define ANTAG_GROUP_CLOWNOPS "Clown Operatives"
 #define ANTAG_GROUP_ERT "Emergency Response Team"
 #define ANTAG_GROUP_GLITCH "Digital Anomalies"

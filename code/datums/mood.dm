@@ -152,11 +152,13 @@
  *
  * Arguments:
  * * category - (text) category of the mood event - see /datum/mood_event for category explanation
- * * type - (path) any /datum/mood_event
+ * * type - (path) any /datum/mood_event (besides /datum/mood_event/conditional)
  */
 /datum/mood/proc/add_mood_event(category, new_type, ...)
 	if (!ispath(new_type, /datum/mood_event))
 		CRASH("A non path ([new_type]), was used to add a mood event. This shouldn't be happening.")
+	if (ispath(new_type, /datum/mood_event/conditional))
+		CRASH("A conditional mood event ([new_type]) was used in add_mood_event. Use add_conditional_mood_event instead.")
 	if (!istext(category))
 		category = REF(category)
 
@@ -166,6 +168,14 @@
 		qdel(new_event)
 		return
 
+	add_mood_event_instance(new_event, params)
+
+/**
+ * Handles adding a mood event instance, including replacing or refreshing existing events
+ */
+/datum/mood/proc/add_mood_event_instance(datum/mood_event/new_event, list/params)
+	PRIVATE_PROC(TRUE)
+	var/category = new_event.category
 	var/datum/mood_event/existing_event = mood_events[category]
 	if(existing_event)
 		var/continue_adding = FALSE
@@ -196,6 +206,43 @@
 		), range = 4)
 
 /**
+ * Adds a conditional mood event to the mob
+ *
+ * Arguments:
+ * * category - (text) category of the mood event - see /datum/mood_event for category explanation
+ * * base_type - (path) any /datum/mood_event/conditional
+ */
+/datum/mood/proc/add_conditional_mood_event(category, datum/base_type, ...)
+	if (!ispath(base_type, /datum/mood_event/conditional))
+		if (ispath(base_type, /datum/mood_event))
+			CRASH("A non-conditional mood event ([base_type]) was used in add_conditional_mood_event. Use add_mood_event instead.")
+		CRASH("A non path ([base_type]), was used to add a mood event. This shouldn't be happening.")
+	if (!istext(category))
+		category = REF(category)
+
+	var/list/params = args.Copy(3)
+	var/list/datum/mood_event/conditional/all_valid_conditional_events = list()
+	for(var/event_subtype in valid_typesof(base_type))
+		var/datum/mood_event/potential_event = new event_subtype(category)
+		if(!potential_event.can_effect_mob(arglist(list(src, mob_parent) + params)))
+			qdel(potential_event)
+			continue
+
+		all_valid_conditional_events += potential_event
+
+	if(!length(all_valid_conditional_events))
+		return //no valid events to add
+
+	var/datum/mood_event/conditional/highest_priority_event
+	for(var/datum/mood_event/conditional/checked_event as anything in all_valid_conditional_events)
+		if(!highest_priority_event || checked_event.priority > highest_priority_event.priority)
+			highest_priority_event = checked_event
+
+	add_mood_event_instance(highest_priority_event, params)
+	all_valid_conditional_events -= highest_priority_event // you are the chosen one
+	QDEL_LIST(all_valid_conditional_events) // clean up the losers
+
+/**
  * Removes a mood event from the mob
  *
  * Arguments:
@@ -224,16 +271,17 @@
 	mood = 0
 	shown_mood = 0
 
-	for(var/category in mood_events)
-		var/datum/mood_event/the_event = mood_events[category]
-		var/event_mood = the_event.mood_change
-		event_mood *= max((event_mood > 0) ? positive_mood_modifier : negative_mood_modifier, 0)
-		mood += event_mood
-		if (!the_event.hidden)
-			shown_mood += event_mood
+	if (!HAS_TRAIT(mob_parent, TRAIT_APATHETIC))
+		for(var/category in mood_events)
+			var/datum/mood_event/the_event = mood_events[category]
+			var/event_mood = the_event.mood_change
+			event_mood *= max((event_mood > 0) ? positive_mood_modifier : negative_mood_modifier, 0)
+			mood += event_mood
+			if (!the_event.hidden)
+				shown_mood += event_mood
 
-	mood *= max(mood_modifier, 0)
-	shown_mood *= max(mood_modifier, 0)
+		mood *= max(mood_modifier, 0)
+		shown_mood *= max(mood_modifier, 0)
 
 	switch(mood)
 		if (-INFINITY to MOOD_SAD4)
@@ -376,41 +424,44 @@
 			if(81 to INFINITY)
 				msg += "[span_boldwarning("Ик... где... где я? Кто... я?")]<br>"
 
-	msg += span_notice("Мой текущий рассудок: ") //Long term
-	switch(sanity)
-		if(SANITY_GREAT to INFINITY)
-			msg += "[span_boldnicegreen("Мой разум словно храм!")]<br>"
-		if(SANITY_NEUTRAL to SANITY_GREAT)
-			msg += "[span_nicegreen("Я чувствую себя прекрасно!")]<br>"
-		if(SANITY_DISTURBED to SANITY_NEUTRAL)
-			msg += "[span_nicegreen("Я чувствую себя вполне прилично.")]<br>"
-		if(SANITY_UNSTABLE to SANITY_DISTURBED)
-			msg += "[span_warning("Я чувствую себя немного не в своей тарелке...")]<br>"
-		if(SANITY_CRAZY to SANITY_UNSTABLE)
-			msg += "[span_warning("Я схожу с ума!!")]<br>"
-		if(SANITY_INSANE to SANITY_CRAZY)
-			msg += "[span_boldwarning("АХАХАХАХАХАХАХАХАХАХ!!")]<br>"
+	if (HAS_TRAIT(mob_parent, TRAIT_APATHETIC))
+		msg += span_notice("Моё настроение: [span_grey("Я ничего не чувствую.")]<br>")
+	else
+		msg += span_notice("Мой текущий рассудок: ") //Long term
+		switch(sanity)
+			if(SANITY_GREAT to INFINITY)
+				msg += "[span_boldnicegreen("Мой разум словно храм!")]<br>"
+			if(SANITY_NEUTRAL to SANITY_GREAT)
+				msg += "[span_nicegreen("Я чувствую себя прекрасно!")]<br>"
+			if(SANITY_DISTURBED to SANITY_NEUTRAL)
+				msg += "[span_nicegreen("Я чувствую себя вполне прилично.")]<br>"
+			if(SANITY_UNSTABLE to SANITY_DISTURBED)
+				msg += "[span_warning("Я чувствую себя немного не в своей тарелке...")]<br>"
+			if(SANITY_CRAZY to SANITY_UNSTABLE)
+				msg += "[span_warning("Я схожу с ума!!")]<br>"
+			if(SANITY_INSANE to SANITY_CRAZY)
+				msg += "[span_boldwarning("АХАХАХАХАХАХАХАХАХАХ!!")]<br>"
 
-	msg += span_notice("Мое текущее настроение: ") //Short term
-	switch(mood_level)
-		if(MOOD_LEVEL_SAD4)
-			msg += "[span_boldwarning("Я хочу умереть!")]<br>"
-		if(MOOD_LEVEL_SAD3)
-			msg += "[span_boldwarning("Я чувствую себя ужасно...")]<br>"
-		if(MOOD_LEVEL_SAD2)
-			msg += "[span_boldwarning("Я чувствую себя расстроенно.")]<br>"
-		if(MOOD_LEVEL_SAD1)
-			msg += "[span_warning("Я немного грущу.")]<br>"
-		if(MOOD_LEVEL_NEUTRAL)
-			msg += "[span_grey("Я в порядке.")]<br>"
-		if(MOOD_LEVEL_HAPPY1)
-			msg += "[span_nicegreen("Я чувствую себя вполне нормально.")]<br>"
-		if(MOOD_LEVEL_HAPPY2)
-			msg += "[span_boldnicegreen("Я чувствую себя довольно хорошо.")]<br>"
-		if(MOOD_LEVEL_HAPPY3)
-			msg += "[span_boldnicegreen("Я чувствую себя потрясающе!")]<br>"
-		if(MOOD_LEVEL_HAPPY4)
-			msg += "[span_boldnicegreen("Я обожаю жизнь!")]<br>"
+		msg += span_notice("Моё текущее настроение: ") //Short term
+		switch(mood_level)
+			if(MOOD_LEVEL_SAD4)
+				msg += "[span_boldwarning("Лучше бы я подох!")]<br>"
+			if(MOOD_LEVEL_SAD3)
+				msg += "[span_boldwarning("Я чувствую себя ужасно...")]<br>"
+			if(MOOD_LEVEL_SAD2)
+				msg += "[span_boldwarning("Я чувствую себя расстроенно.")]<br>"
+			if(MOOD_LEVEL_SAD1)
+				msg += "[span_warning("Я немного грущу.")]<br>"
+			if(MOOD_LEVEL_NEUTRAL)
+				msg += "[span_grey("Я в порядке.")]<br>"
+			if(MOOD_LEVEL_HAPPY1)
+				msg += "[span_nicegreen("Я чувствую себя вполне нормально.")]<br>"
+			if(MOOD_LEVEL_HAPPY2)
+				msg += "[span_boldnicegreen("Я чувствую себя довольно хорошо.")]<br>"
+			if(MOOD_LEVEL_HAPPY3)
+				msg += "[span_boldnicegreen("Я чувствую себя потрясающе!")]<br>"
+			if(MOOD_LEVEL_HAPPY4)
+				msg += "[span_boldnicegreen("Я обожаю жизнь!")]<br>"
 
 	var/list/additional_lines = list()
 	SEND_SIGNAL(user, COMSIG_CARBON_MOOD_CHECK, additional_lines)
@@ -527,6 +578,9 @@
 	if (amount > maximum)
 		amount = min(amount, maximum)
 
+	if (HAS_TRAIT(mob_parent, TRAIT_APATHETIC))
+		amount = SANITY_NEUTRAL
+
 	if(amount == sanity) //Prevents stuff from flicking around.
 		return
 
@@ -572,6 +626,10 @@
 
 	update_mood_icon()
 
+/// Sets sanity to a specific amount, useful for callbacks
+/datum/mood/proc/reset_sanity(amount)
+	set_sanity(amount, override = TRUE)
+
 /// Adjusts sanity by a value
 /datum/mood/proc/adjust_sanity(amount, minimum = SANITY_INSANE, maximum = SANITY_GREAT, override = FALSE)
 	set_sanity(sanity + amount, minimum, maximum, override)
@@ -599,7 +657,6 @@
 
 /**
  * Returns true if you already have a mood from a provided category.
- * You may think to yourself, why am I trying to get a boolean from a component? Well, this system probably should not be a component.
  *
  * Arguments
  * * category - Mood category to validate against.

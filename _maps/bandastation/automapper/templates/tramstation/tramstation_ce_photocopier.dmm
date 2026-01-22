@@ -152,9 +152,9 @@
 	dir = 1
 	},
 /obj/structure/window/reinforced/spawner/directional/west,
-/obj/item/computer_disk/engineering,
-/obj/item/computer_disk/engineering,
-/obj/item/computer_disk/engineering,
+/obj/item/disk/computer/engineering,
+/obj/item/disk/computer/engineering,
+/obj/item/disk/computer/engineering,
 /turf/open/floor/iron,
 /area/station/command/heads_quarters/ce)
 "G" = (

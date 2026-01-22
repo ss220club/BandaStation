@@ -455,6 +455,7 @@
 	result = /obj/item/food/donkpocket/deluxe/vegan
 	removed_foodtypes = BREAKFAST
 	category = CAT_PASTRY
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 ////////////////////////////////////////////////MUFFINS////////////////////////////////////////////////
 

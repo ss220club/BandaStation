@@ -2,6 +2,9 @@
 	name = "Гипноз"
 	desc = "Сознания пациента полностью поглощено каким-то словом или предложением, фокусируя мысли и поступки вокруг него."
 	scan_desc = "повторяющийся мыслительный паттерн"
+	symptoms = "Зацикливается на конкретном слове или фразе. Эта фиксация может приводить к изменению поведения, \
+		например к приоритету действий, связанных с этой фразой, над другими задачами, при одновременном пренебрежении работой, \
+		личными потребностями или социальными взаимодействиями."
 	gain_text = ""
 	lose_text = ""
 	resilience = TRAUMA_RESILIENCE_SURGERY
@@ -60,7 +63,7 @@
 	owner.mind.remove_antag_datum(/datum/antagonist/hypnotized)
 	antagonist = null
 
-/datum/brain_trauma/hypnosis/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/hypnosis/on_life(seconds_per_tick)
 	..()
 	if(SPT_PROB(1, seconds_per_tick))
 		if(prob(50))
