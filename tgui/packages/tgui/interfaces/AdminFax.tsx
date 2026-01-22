@@ -21,6 +21,7 @@ type Data = {
   prefillText?: string;
   prefillPaperName?: string;
   prefillSender?: string;
+  generatedName?: string;
 };
 
 const paperNameOptions = [
@@ -37,7 +38,8 @@ export function AdminFax() {
     stamps = [],
     prefillText = '',
     prefillPaperName = '',
-    prefillSender = ''
+    prefillSender = '',
+    generatedName = 'John Doe'
   } = data;
 
   const [fax, setFax] = useState('');
@@ -45,6 +47,10 @@ export function AdminFax() {
   const [paperName, setPaperName] = useState(prefillPaperName);
   const [fromWho, setFromWho] = useState(prefillSender);
   const [rawText, setRawText] = useState(prefillText);
+  
+  const [signerName, setSignerName] = useState(generatedName);
+  const [signerJob, setSignerJob] = useState('Офицер ЦентКом'); // Дефолтная должность
+
   const [stamp, setStamp] = useState('');
   const [stampCoordX, setStampCoordX] = useState(0);
   const [stampCoordY, setStampCoordY] = useState(0);
@@ -54,8 +60,24 @@ export function AdminFax() {
     stamps.unshift('None');
   }
 
+  const handleSave = () => {
+    setSaved(true);
+    act('save', {
+      faxName: fax,
+      paperName: paperName,
+      rawText: rawText,
+      stamp: stamp,
+      stampX: stampCoordX,
+      stampY: stampCoordY,
+      stampAngle: stampAngle,
+      fromWho: fromWho,
+      signerName: signerName,
+      signerJob: signerJob,
+    });
+  };
+
   return (
-    <Window title="Admin Fax Panel" width={400} height={675} theme="admin">
+    <Window title="Admin Fax Panel" width={400} height={750} theme="admin">
       <Window.Content scrollable>
         <Section
           title="Fax Menu"
@@ -129,6 +151,33 @@ export function AdminFax() {
                 tooltip="What was written in fax log?"
               />
             </Stack.Item>
+            
+            <Stack.Divider />
+            <Stack.Item>
+                <Box mb={0.5} color="label">Auto-fill Fields:</Box>
+                <Stack fill>
+                    <Stack.Item grow>
+                        <Box mb="2px" fontSize="0.9em">Name:</Box>
+                        <Input 
+                            fluid
+                            value={signerName}
+                            onChange={(value) => setSignerName(value)}
+                        />
+                    </Stack.Item>
+                    <Stack.Item grow>
+                        <Box mb="2px" fontSize="0.9em">Job:</Box>
+                        <Input 
+                            fluid
+                            value={signerJob}
+                            onChange={(value) => setSignerJob(value)}
+                        />
+                    </Stack.Item>
+                </Stack>
+                <Box fontSize="10px" color="gray" mt={0.5}>
+                    Will replace [input_field...] tags on Save.
+                </Box>
+            </Stack.Item>
+            
             <Stack.Divider />
             <Stack.Item>
               <TextArea
@@ -213,19 +262,7 @@ export function AdminFax() {
           <Button
             icon="floppy-disk"
             color="green"
-            onClick={() => {
-              setSaved(true);
-              act('save', {
-                faxName: fax,
-                paperName: paperName,
-                rawText: rawText,
-                stamp: stamp,
-                stampX: stampCoordX,
-                stampY: stampCoordY,
-                stampAngle: stampAngle,
-                fromWho: fromWho,
-              });
-            }}
+            onClick={handleSave}
           >
             Save
           </Button>

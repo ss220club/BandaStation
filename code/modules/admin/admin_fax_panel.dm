@@ -20,6 +20,8 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 	var/prefill_text = ""
 	var/prefill_paper_name = ""
 	var/prefill_sender = ""
+	
+	var/generated_signer_name = "John Doe"
 
 /datum/fax_panel_interface/New()
 	//Get all faxes, and save them to our list.
@@ -37,11 +39,23 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 
 	//Give our paper special status, to read everywhere.
 	fax_paper.request_state = TRUE
+	
+	generated_signer_name = generate_spinwarder_name()
+
+/datum/fax_panel_interface/proc/generate_spinwarder_name()
+	var/f_name = "Джон"
+	var/l_name = "Доу"
+
+	if(length(GLOB.first_names_male_spinwarder))
+		f_name = pick(GLOB.first_names_male_spinwarder)
+
+	if(length(GLOB.last_names_male_spinwarder))
+		l_name = pick(GLOB.last_names_male_spinwarder)
+			
+	return "[f_name] [l_name]"
 
 /**
  * Return fax if name exists
- * Arguments:
- * * name - Name of fax what we try to find.
  */
 /datum/fax_panel_interface/proc/get_fax_by_name(name)
 	if(!length(available_faxes))
@@ -73,6 +87,7 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 	data["prefillText"] = prefill_text
 	data["prefillPaperName"] = prefill_paper_name
 	data["prefillSender"] = prefill_sender
+	data["generatedName"] = generated_signer_name
 
 	for(var/stamp in stamp_list)
 		data["stamps"] += list(stamp[1]) // send only names.
@@ -126,14 +141,32 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 					break
 
 			fax_paper.name = "paper — [default_paper_name]"
-			fax_paper.add_raw_text(replace_text_keys(params["rawText"], ui.user), advanced_html = TRUE)
+			
+			// === Tag rewrite logic ===
+			var/final_text = params["rawText"]
+			
+			if(params["signerName"])
+				var/s_name = params["signerName"]
+				var/s_html = "<font face='[SIGNATURE_FONT]'><i>[s_name]</i></font>"
+				
+				final_text = replacetext(final_text, "\[input_field autofill_type=sign]", s_html)
+			
+			if(params["signerJob"])
+				final_text = replacetext(final_text, "\[input_field autofill_type=job]", params["signerJob"])
+				
+			var/game_time = time2text(world.timeofday, "hh:mm")
+			final_text = replacetext(final_text, "\[input_field autofill_type=time]", game_time)
+			
+			// ============================
+
+			fax_paper.add_raw_text(replace_text_keys(final_text, ui.user), advanced_html = TRUE)
 
 			if(stamp)
 				fax_paper.add_stamp(stamp_class, params["stampX"], params["stampY"], params["stampAngle"], stamp)
 
 			fax_paper.update_static_data(ui.user) // OK, it's work, and update UI.
 
-		if("send")
+		if("send")	
 			//copy
 			var/obj/item/paper/our_fax = fax_paper.copy(/obj/item/paper)
 			our_fax.name = fax_paper.name
