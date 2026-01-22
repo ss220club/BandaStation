@@ -3,7 +3,7 @@
 #define URGENCY_COLOR_HIGH "red"
 #define URGENCY_COLOR_CRITICAL "darkred"
 #define FAX_TEMPLATE_FILE "config/blanks/markdown/centcom/nt_centcom_00.md"
-#define PROMPTS_PATH "config/bandastation/prompts"
+#define PROMPTS_PATH "config/bandastation"
 #define DEFAULT_ANALYZE_PROMPT "You are a secretary. Analyze this fax and return JSON."
 #define DEFAULT_REPLY_PROMPT "You are Central Command. Write a reply."
 
