@@ -154,8 +154,8 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 			if(params["signerJob"])
 				final_text = replacetext(final_text, "\[input_field autofill_type=job]", params["signerJob"])
 				
-			var/game_time = time2text(world.timeofday, "hh:mm")
-			final_text = replacetext(final_text, "\[input_field autofill_type=time]", game_time)
+			var/formatted_time = "[time2text(world.timeofday, "DD/MM")]/[CURRENT_STATION_YEAR] [station_time_timestamp()]"
+			final_text = replacetext(final_text, "\[input_field autofill_type=time]", formatted_time)
 			
 			// ============================
 
