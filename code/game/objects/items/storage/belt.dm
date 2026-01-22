@@ -741,68 +741,6 @@
 	storage_type = /datum/storage/sabre_belt
 	stored_blade = /obj/item/melee/sabre
 	base_icon_state = "sheath"
-	var/skinned = FALSE
-	var/list/options = list("Классика" = "classic", "Церемониальный" = "ceremonial", "Шашка" = "cossack","Стандартная" = "default")
-
-// BANDASTATION EDIT - sabre skins
-
-/obj/item/storage/belt/sheath/sabre/add_context(atom/source, list/context, obj/item/held_item, mob/user)
-	. = ..()
-	if(!skinned)
-		return context[SCREENTIP_CONTEXT_CTRL_LMB] = "Сменить скин."
-	else
-		return NONE
-
-/obj/item/storage/belt/sheath/sabre/update_icon_state()
-	. = ..()
-	icon_state = base_icon_state
-	inhand_icon_state = base_icon_state
-	worn_icon_state = base_icon_state
-	if(contents.len)
-		icon_state += "-full"
-		inhand_icon_state += "-full"
-		worn_icon_state += "-full"
-	return
-
-/obj/item/storage/belt/sheath/sabre/item_ctrl_click(mob/user)
-	. = ..()
-	if(skinned)
-		return CLICK_ACTION_BLOCKING
-	if(!length(contents))
-		to_chat(user, span_notice("Поместите саблю в ножны, прежде чем пытаться сделать это"))
-		return CLICK_ACTION_BLOCKING
-	else
-		var/obj/item/melee/sabre/reskin_object = contents[1]
-		var/list/skins = list()
-		for(var/option in options)
-			skins[option] = image(icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi', icon_state = "sheath_"+options[option]+"-full")
-
-
-		var/choice = show_radial_menu(user,src,skins,require_near = TRUE)
-
-		if(!choice)
-			return
-		if(choice == "default")
-			skinned = TRUE
-			return
-		else
-			skinned = TRUE
-			icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi'
-			worn_icon = 'modular_bandastation/objects/icons/obj/clothing/belts/sheath.dmi'
-			lefthand_file = 'icons/mob/inhands/equipment/belt_lefthand.dmi'
-			righthand_file = 'icons/mob/inhands/equipment/belt_righthand.dmi'
-			reskin_object.icon = 'modular_bandastation/objects/icons/obj/weapons/sword.dmi'
-			reskin_object.lefthand_file = 'modular_bandastation/objects/icons/obj/weapons/saber/saber_left.dmi'
-			reskin_object.righthand_file = 'modular_bandastation/objects/icons/obj/weapons/saber/saber_right.dmi'
-			base_icon_state = "sheath_"+ options[choice]
-			icon_state = "sheath_"+ options[choice]
-			inhand_icon_state = "sheath"
-			worn_icon_state = "sheath_"+ options[choice]
-			reskin_object.icon_state = "saber_"+ options[choice]
-			reskin_object.inhand_icon_state = "saber_" + options[choice]
-			src.update_icon_state()
-			to_chat(user, "[choice] идеально вам подходит.")
-		return CLICK_ACTION_SUCCESS
 
 /obj/item/storage/belt/sheath/grass_sabre
 	name = "sabre sheath"
