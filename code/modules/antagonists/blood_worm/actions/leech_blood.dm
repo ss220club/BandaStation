@@ -99,7 +99,7 @@
 
 	leech.visible_message(
 		message = span_danger("[leech.declent_ru(NOMINATIVE)] жадно вгрызается в [target.declent_ru(ACCUSATIVE)]!"),
-		self_message = span_danger("Вы вгрызаетесь [target]!"),
+		self_message = span_danger("Вы вгрызаетесь в [target.declent_ru(ACCUSATIVE)]!"),
 		blind_message = span_hear("Вы слышите звук укуса, за которым следует отвратительный хруст!"),
 		ignored_mobs = list(target)
 	)
