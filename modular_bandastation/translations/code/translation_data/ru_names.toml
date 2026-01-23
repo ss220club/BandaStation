@@ -2360,12 +2360,12 @@ prepositional = "юбке охраны"
 gender = "female"
 
 ["security alternative skirt"]
-nominative = "альтернативная юбка охраны"
-genitive = "альтернативной юбки охраны"
-dative = "альтернативной юбке охраны"
-accusative = "альтернативную юбку охраны"
-instrumental = "альтернативной юбкой охраны"
-prepositional = "альтернативной юбке охраны"
+nominative = "юбка охраны"
+genitive = "юбки охраны"
+dative = "юбке охраны"
+accusative = "юбку охраны"
+instrumental = "юбкой охраны"
+prepositional = "юбке охраны"
 gender = "female"
 
 ["security formal uniform"]
@@ -2387,12 +2387,12 @@ prepositional = "чёрной униформе охраны"
 gender = "female"
 
 ["security turtleneck"]
-nominative = "защитная водолазка охраны"
-genitive = "защитной водолазки охраны"
-dative = "защитной водолазке охраны"
-accusative = "защитную водолазку охраны"
-instrumental = "защитной водолазкой охраны"
-prepositional = "защитной водолазке охраны"
+nominative = "водолазка охраны"
+genitive = "водолазки охраны"
+dative = "водолазке охраны"
+accusative = "водолазку охраны"
+instrumental = "водолазкой охраны"
+prepositional = "водолазке охраны"
 gender = "female"
 
 ["warden's black uniform"]
@@ -2748,12 +2748,12 @@ prepositional = "юбке-комбинезоне смотрителя"
 gender = "female"
 
 ["warden's alternative blue skirt"]
-nominative = "альтернативная синяя юбка смотрителя"
-genitive = "альтернативной синей юбки смотрителя"
-dative = "альтернативной cиней юбке смотрителя"
-accusative = "альтернативную синюю юбку смотрителя"
-instrumental = "альтернативной синей юбкой смотрителя"
-prepositional = "альтернативной синей юбке смотрителя"
+nominative = "синяя юбка смотрителя"
+genitive = "синей юбки смотрителя"
+dative = "cиней юбке смотрителя"
+accusative = "синюю юбку смотрителя"
+instrumental = "синей юбкой смотрителя"
+prepositional = "синей юбке смотрителя"
 gender = "female"
 
 ["warden's formal blue uniform"]
@@ -17298,21 +17298,21 @@ prepositional = "полосатой инженерной бандане"
 gender = "female"
 
 ["engineering alternative jumpsuit"]
-nominative = "инженерный альтернативный комбинезон"
-genitive = "инженерного альтернативного комбинезона"
-dative = "инженерному альтернативному комбинезону"
-accusative = "инженерный альтернативный комбинезон"
-instrumental = "инженерным альтернативным комбинезоном"
-prepositional = "инженерном альтернативном комбинезоне"
+nominative = "инженерный комбинезон"
+genitive = "инженерного комбинезона"
+dative = "инженерному комбинезону"
+accusative = "инженерный комбинезон"
+instrumental = "инженерным комбинезоном"
+prepositional = "инженерном комбинезоне"
 gender = "male"
 
 ["engineering alternative jumpskirt"]
-nominative = "инженерная альтернативная юбка-комбинезон"
-genitive = "инженерной альтернативной юбки-комбинезона"
-dative = "инженерной альтернативной юбке-комбинезону"
-accusative = "инженерную альтернативную юбку-комбинезон"
-instrumental = "инженерной альтернативной юбкой-комбинезоном"
-prepositional = "инженерной альтернативной юбке-комбинезоне"
+nominative = "инженерная юбка-комбинезон"
+genitive = "инженерной юбки-комбинезона"
+dative = "инженерной юбке-комбинезону"
+accusative = "инженерную юбку-комбинезон"
+instrumental = "инженерной юбкой-комбинезоном"
+prepositional = "инженерной юбке-комбинезоне"
 gender = "female"
 
 ["engineering guard uniform"]
