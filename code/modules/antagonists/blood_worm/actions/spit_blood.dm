@@ -202,7 +202,7 @@
 		ignored_mobs = host
 	)
 
-	to_chat(host, span_danger("Вы разбрызгиваете токсичную кровь на петли [closet]!"))
+	to_chat(host, span_danger("Вы разбрызгиваете токсичную кровь на петли [closet.declent_ru(GENITIVE)]!"))
 
 	log_combat(host, closet, "melted", addition = "(Spit Blood)")
 
