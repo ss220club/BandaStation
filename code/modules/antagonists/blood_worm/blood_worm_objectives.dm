@@ -33,7 +33,7 @@
 	update_explanation_text()
 
 /datum/objective/blood_worm/consume/update_explanation_text()
-	explanation_text = "Мы должны поглотить не менее [blood_required] единиц реальной крови, чтобы уталить наш аппетит."
+	explanation_text = "Мы должны поглотить не менее [blood_required] единиц реальной крови, чтобы утолить наш аппетит."
 
 /datum/objective/blood_worm/consume/check_completion()
 	return get_blood_worm_team().blood_consumed_total >= blood_required
