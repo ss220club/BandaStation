@@ -11,6 +11,7 @@
 #include "avangarde17/code/obj/statue.dm"
 #include "avangarde17/code/obj/tools.dm"
 #include "avangarde17/code/obj/talon_machine.dm"
+#include "avangarde17/code/obj/talons.dm"
 
 #include "avangarde17/code/turf/turf.dm"
 

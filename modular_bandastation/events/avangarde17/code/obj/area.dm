@@ -71,7 +71,7 @@
 
 /area/awaymission/avangarde17/inside/temple_second
 	name = "Храм"
-	icon_state = "awaycontent"
+	icon_state = "awaycontent12"
 
 /area/awaymission/avangarde17/inside/bar
 	name = "Рюмочная \"Красная Звезда\""
