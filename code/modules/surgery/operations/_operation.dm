@@ -142,7 +142,7 @@
 	visible_message(
 		span_notice("[declent_ru(NOMINATIVE)] пытается закрыть [ru_p_theirs()] [limb.ru_plaintext_zone[PREPOSITIONAL]] с помощью [tool.declent_ru(GENITIVE)]..."),
 		span_notice("Вы пытаетесь закрыть свою [limb.ru_plaintext_zone[PREPOSITIONAL]] с помощью [tool.declent_ru(GENITIVE)]..."),
-		span_hear("Вы слышите пение."),
+		span_hear("Вы слышите [tool?.get_temperature() ? "шипение" : "шуршание"]"),
 		vision_distance = 5,
 		visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 	)
@@ -158,7 +158,7 @@
 	visible_message(
 		span_notice("[declent_ru(NOMINATIVE)] закрывает [ru_p_theirs()] [limb.ru_plaintext_zone[PREPOSITIONAL]] с помощью [tool.declent_ru(GENITIVE)]."),
 		span_notice("Вы закрываете свою [limb.ru_plaintext_zone[PREPOSITIONAL]] с помощью [tool.declent_ru(GENITIVE)]."),
-		span_hear("Вы слышите пение."),
+		span_hear("Вы слышите [tool?.get_temperature() ? "шипение" : "шуршание"]"),
 		vision_distance = 5,
 		visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 	)
@@ -742,29 +742,17 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	// Ignore alllll the penalties (but also all the bonuses)
 	if(!HAS_TRAIT(surgeon, TRAIT_IGNORE_SURGERY_MODIFIERS))
 		var/mob/living/patient = get_patient(operating_on)
-		total_mod *= get_morbid_modifier(surgeon, tool)
+		total_mod *= get_surgeon_surgery_speed_mod(patient, surgeon, tool)
 		if(!isnull(patient)) // Some surgeries can lack patients
-			total_mod *= get_location_modifier(get_turf(patient))
-			total_mod *= get_mob_surgery_speed_mod(patient)
+			total_mod *= get_location_modifier(get_turf(patient), patient, surgeon, tool)
+			total_mod *= get_mob_surgery_speed_mod(patient, surgeon, tool)
 		// Using TRAIT_SELF_SURGERY on a surgery which doesn't normally allow self surgery imparts a penalty
 		if(operating_on == surgeon && HAS_TRAIT(surgeon, TRAIT_SELF_SURGERY) && !(operation_flags & OPERATION_SELF_OPERABLE))
 			total_mod *= 1.5
 	return round(total_mod, 0.01)
 
-/// Returns a time modifier for morbid operations
-/datum/surgery_operation/proc/get_morbid_modifier(mob/living/surgeon, obj/item/tool)
-	PROTECTED_PROC(TRUE)
-	if(!(operation_flags & OPERATION_MORBID))
-		return 1.0
-	if(!HAS_MIND_TRAIT(surgeon, TRAIT_MORBID))
-		return 1.0
-	if(!isitem(tool) || !(tool.item_flags & CRUEL_IMPLEMENT))
-		return 1.0
-
-	return 0.7
-
 /// Returns a time modifier based on the mob's status
-/datum/surgery_operation/proc/get_mob_surgery_speed_mod(mob/living/patient)
+/datum/surgery_operation/proc/get_mob_surgery_speed_mod(mob/living/patient, mob/living/surgeon, tool)
 	PROTECTED_PROC(TRUE)
 	var/basemod = 1.0
 	for(var/mod_id, mod_amt in patient.mob_surgery_speed_mods)
@@ -775,8 +763,26 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 		basemod *= 0.8
 	return basemod
 
+/// Returns a time modifier based on the surgeon's status
+/datum/surgery_operation/proc/get_surgeon_surgery_speed_mod(mob/living/patient, mob/living/surgeon, tool)
+	PROTECTED_PROC(TRUE)
+	var/basemod = 1.0
+	if((operation_flags & OPERATION_MORBID) && HAS_MIND_TRAIT(surgeon, TRAIT_MORBID) && isitem(tool))
+		var/obj/item/realtool = tool
+		if(realtool.item_flags & CRUEL_IMPLEMENT)
+			basemod *= 0.7
+
+	var/drunkness = surgeon.get_drunk_amount()
+	// being drunk gives upwards of a 12x speed penalty - unless you land in the ballmer peak
+	if(drunkness >= BALLMER_PEAK_LOW_END && drunkness <= BALLMER_PEAK_HIGH_END)
+		basemod *= 0.8
+	else
+		basemod *= 1 + round((drunkness ** 1.5) / 90, 0.1)
+
+	return basemod
+
 /// Gets the surgery speed modifier for a given mob, based off what sort of table/bed/whatever is on their turf.
-/datum/surgery_operation/proc/get_location_modifier(turf/operation_turf)
+/datum/surgery_operation/proc/get_location_modifier(turf/operation_turf, mob/living/patient, mob/living/surgeon, tool)
 	PROTECTED_PROC(TRUE)
 	// Technically this IS a typecache, just not the usual kind :3
 	// The order of the modifiers matter, latter entries override earlier ones

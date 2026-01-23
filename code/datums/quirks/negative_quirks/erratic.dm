@@ -6,7 +6,8 @@
 	gain_text = span_danger("Вы чувствуете себя неуравновешенным.") // say that again?
 	lose_text = span_notice("Вы чувствуете себя более стабильно.")
 	medical_record_text = "У пациента биполярное расстройство личности."
-	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_MOODLET_BASED|QUIRK_PROCESSES
+	medical_symptom_text = "Exhibits sudden and unpredictable changes in personality, mood, and behavior, often swinging between extremes of emotion and demeanor."
+	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_MOODLET_BASED|QUIRK_PROCESSES|QUIRK_TRAUMALIKE
 	hardcore_value = 3
 	mail_goodies = list(/obj/item/storage/pill_bottle/psicodine)
 	/// Cooldown between personality randomizations
