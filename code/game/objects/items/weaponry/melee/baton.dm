@@ -164,7 +164,7 @@
 	// clumsy people redirect this attack - yes, this bypasses IWASBATONED and such
 	if(HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))
 		user.visible_message(
-			span_danger("[user.declent_ru(NOMINATIVE)] случайно бьёт себя по голове [declent_ru(INSTRUMENTAL)]! Что за придурок!"),
+			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] случайно бьёт себя по голове [declent_ru(INSTRUMENTAL)]! Что за придурок!"),
 			span_userdanger("Вы случайно бьёте себя по голове [declent_ru(INSTRUMENTAL)]!"),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)

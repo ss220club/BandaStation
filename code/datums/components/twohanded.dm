@@ -221,7 +221,7 @@
 			atom_parent.balloon_alert(user, "нельзя взять в одну руку!")
 			user.dropItemToGround(parent, force = TRUE)
 		else
-			atom_parent.balloon_alert(user, "что-то держу в другой руке!")
+			atom_parent.balloon_alert(user, "что-то держим в другой руке!")
 		return COMPONENT_EQUIPPED_FAILED
 	if(user.usable_hands < 2)
 		if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
@@ -262,7 +262,7 @@
 	// Let's reserve the other hand
 	offhand_item = new(user)
 	offhand_item.name = "[parent_item.name] - offhand"
-	offhand_item.desc = "Ваша другая рука на [parent_item.declent_ru(PREPOSITIONAL)]."
+	offhand_item.desc = "Ваша вторая рука держит [parent_item.declent_ru(ACCUSATIVE)]."
 	offhand_item.wielded = TRUE
 	RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
 	RegisterSignal(offhand_item, COMSIG_QDELETING, PROC_REF(on_destroy))

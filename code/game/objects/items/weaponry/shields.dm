@@ -189,7 +189,7 @@
 /obj/item/shield/riot/attackby(obj/item/attackby_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attackby_item, /obj/item/stack/sheet/mineral/titanium))
 		if (atom_integrity >= max_integrity)
-			to_chat(user, span_warning("[declent_ru(NOMINATIVE)] уже в хорошем состоянии."))
+			to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] уже в хорошем состоянии."))
 			return
 		var/obj/item/stack/sheet/mineral/titanium/titanium_sheet = attackby_item
 		titanium_sheet.use(1)
@@ -462,7 +462,7 @@
 /obj/item/shield/ballistic/attackby(obj/item/attackby_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attackby_item, /obj/item/stack/sheet/mineral/titanium))
 		if (atom_integrity >= max_integrity)
-			to_chat(user, span_warning("[declent_ru(NOMINATIVE)] уже в хорошем состоянии."))
+			to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] уже в хорошем состоянии."))
 			return
 		var/obj/item/stack/sheet/mineral/titanium/titanium_sheet = attackby_item
 		titanium_sheet.use(1)
