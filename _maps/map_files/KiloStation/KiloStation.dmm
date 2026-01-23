@@ -70242,7 +70242,6 @@
 	network = list("ss13","engine")
 	},
 /obj/effect/decal/cleanable/blood/old,
-/obj/structure/cable,
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
 /obj/machinery/power/smes/engineering,
 /obj/structure/cable,
