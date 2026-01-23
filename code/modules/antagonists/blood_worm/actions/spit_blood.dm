@@ -220,7 +220,7 @@
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/melt_cocoon(mob/living/carbon/human/host, obj/structure/spider/cocoon/cocoon)
 	if (cocoon.resistance_flags & (INDESTRUCTIBLE | UNACIDABLE | ACID_PROOF))
-		host.balloon_alert(host, "[cocoon] [cocoon.p_are()] слишком крепок!")
+		host.balloon_alert(host, "[capitalize(cocoon.declent_ru(NOMINATIVE))] слишком крепкая!")
 		return FALSE
 
 	cocoon.visible_message(
