@@ -52257,7 +52257,6 @@
 /obj/effect/turf_decal/bot,
 /obj/item/storage/toolbox/electrical,
 /obj/item/clothing/mask/gas,
-/obj/structure/cable,
 /obj/structure/table,
 /obj/structure/sign/poster/contraband/missing_gloves/directional/east,
 /turf/open/floor/iron/dark,
@@ -55127,7 +55126,6 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
 /obj/structure/cable,
-/obj/structure/cable,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
 "shO" = (
@@ -56823,7 +56821,6 @@
 	},
 /obj/machinery/meter,
 /obj/machinery/light/directional/west,
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
 /obj/machinery/status_display/evac/directional/west,
 /turf/open/floor/engine,
@@ -70245,7 +70242,6 @@
 	network = list("ss13","engine")
 	},
 /obj/effect/decal/cleanable/blood/old,
-/obj/machinery/firealarm/directional/east,
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
 /obj/machinery/power/smes/engineering,
