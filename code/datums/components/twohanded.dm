@@ -251,7 +251,7 @@
 	parent_item.update_appearance()
 
 	if(iscyborg(user))
-		to_chat(user, span_notice("You dedicate your module to [parent]."))
+		to_chat(user, span_notice("Вы подключаете ваш модуль к [parent]."))
 	else
 		to_chat(user, span_notice("Вы хватаете [parent.declent_ru(ACCUSATIVE)] двумя руками."))
 
@@ -261,7 +261,8 @@
 
 	// Let's reserve the other hand
 	offhand_item = new(user)
-	offhand_item.name = "[parent_item.name] - offhand"
+	offhand_item.name = "[parent_item.declent_ru(NOMINATIVE)] - вторая рука"
+	offhand_item.ru_names_rename(ru_names_toml(initial(parent_item.name), suffix = " - вторая рука", override_base = offhand_item.name))
 	offhand_item.desc = "Ваша вторая рука держит [parent_item.declent_ru(ACCUSATIVE)]."
 	offhand_item.wielded = TRUE
 	RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
