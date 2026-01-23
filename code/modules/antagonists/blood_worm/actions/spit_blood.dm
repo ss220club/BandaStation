@@ -176,8 +176,8 @@
 		return FALSE
 
 	host.visible_message(
-		message = span_danger("[host] разбрызгивает токсичную кровь на [restraints]!"),
-		self_message = span_danger("Вы разбрызгиваете токсичную кровь на [restraints]!"),
+		message = span_danger("[capitalize(host.declent_ru(NOMINATIVE))] разбрызгивает токсичную кровь на [restraints.declent_ru(ACCUSATIVE)]!"),
+		self_message = span_danger("Вы разбрызгиваете токсичную кровь на [restraints.declent_ru(ACCUSATIVE)]!"),
 		blind_message = span_hear("Вы слышите шипение.")
 	)
 
