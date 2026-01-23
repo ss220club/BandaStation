@@ -275,7 +275,7 @@
 	log_blood_worm("[key_name(new_worm)] finished maturing into an adult blood worm")
 
 /obj/structure/blood_worm_cocoon/juvenile
-	name = "небольшой кровяной кокон"
+	name = "medium blood cocoon"
 	desc = "Инкубационный кокон молодого кровяного червя. Его поверхность медленно изменяется."
 
 	icon_state = "cocoon-medium"
@@ -393,7 +393,7 @@
 		to_chat(candidate, span_warning("Кокон кровяного червя, которого вы выбрали был отменен. Увы."))
 
 /obj/structure/blood_worm_cocoon/adult
-	name = "крупный кровяной кокон"
+	name = "large blood cocoon"
 	desc = "Инкубационный кокон взрослого кровяного червя. Вы можете видеть множество едва разлечемых очертаний внутри."
 
 	icon_state = "cocoon-large"

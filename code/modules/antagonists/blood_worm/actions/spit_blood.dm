@@ -1,5 +1,5 @@
 /datum/action/cooldown/mob_cooldown/blood_worm/spit
-	name = "Плевок токсичной кровью"
+	name = "Плевок кровью"
 	desc = "Плюньте токсичной кровью в свою цель в обмен на собственное здоровье. ПКМ находясь в носителе чтобы расплавить оковы."
 
 	button_icon_state = "spit_blood"
