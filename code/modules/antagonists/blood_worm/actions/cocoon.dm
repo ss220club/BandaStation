@@ -239,7 +239,7 @@
 	log_blood_worm("[key_name(new_worm)] finished maturing into a juvenile blood worm")
 
 /obj/structure/blood_worm_cocoon/hatchling
-	name = "малый кровяной кокон"
+	name = "small blood cocoon"
 	desc = "Инкубационный кокон детеныша кровяного червя. Его поверхность медленно изменяется."
 
 	icon_state = "cocoon-small"
