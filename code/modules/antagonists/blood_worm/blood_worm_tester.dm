@@ -53,7 +53,7 @@
 		)
 	else
 		user.visible_message(
-			message = span_notice("[user.declent_ru(NOMINATIVE)] колит [user.p_themselves()] используя [src.declent_ru(NOMINATIVE)]."),
+			message = span_notice("[user.declent_ru(NOMINATIVE)] укалывает [user.ru_p_themselves()] себя используя [src.declent_ru(ACCUSATIVE)]."),
 			self_message = span_notice("Вы укололи себя с помощью [src.declent_ru(GENITIVE)]."),
 		)
 
