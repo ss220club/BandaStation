@@ -87,7 +87,7 @@
 
 	owner.visible_message(
 		message = span_danger("[capitalize(owner.declent_ru(NOMINATIVE))] плюётся токсичной кровью!"),
-		self_message = span_danger("Вы плюете токсичную кровь!"),
+		self_message = span_danger("Вы плюёте токсичную кровь!"),
 		blind_message = span_hear("Вы слышите звук плевка.")
 	)
 
@@ -108,7 +108,7 @@
 
 	owner.visible_message(
 		message = span_danger("[capitalize(owner.declent_ru(NOMINATIVE))] выплёвывает сгусток токсичной крови!"),
-		self_message = span_danger("Вы плюете сгусток токсичной крови!"),
+		self_message = span_danger("Вы плюёте сгустком токсичной крови!"),
 		blind_message = span_hear("Вы слышите звук плевка.")
 	)
 

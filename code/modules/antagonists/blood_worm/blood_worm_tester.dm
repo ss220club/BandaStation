@@ -1,6 +1,6 @@
 /obj/item/blood_worm_tester
 	name = "hemoparasite testing tool"
-	desc = "Специальное устройство, запатентованное медицинской корпорацией DeForest, специально разработанное для выявления паразитов в крови, в частности, печально известных, кровных червей. Утверждается, что процесс тестирования очень болезненный."
+	desc = "Специальное устройство, запатентованное медицинской корпорацией DeForest, разработанное для выявления паразитов в крови, в частности, печально известных, кровных червей. Утверждается, что процесс тестирования очень болезненный."
 
 	icon = 'icons/obj/antags/blood_worm.dmi'
 	icon_state = "tester"
@@ -24,7 +24,7 @@
 	return ..()
 
 /obj/item/blood_worm_tester/update_desc(updates)
-	desc = "[initial(desc)] [spent ? "Анализатор израсходован." : "Тестер заряжен для единоразового использования."]"
+	desc = "[initial(desc)] [spent ? "Анализатор израсходован." : "Анализатор заряжен для единоразового использования."]"
 	return ..()
 
 /obj/item/blood_worm_tester/attack(mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)

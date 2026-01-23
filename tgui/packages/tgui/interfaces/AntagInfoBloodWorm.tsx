@@ -23,7 +23,7 @@ export const AntagInfoBloodWorm = (props) => {
         <Section scrollable fill>
           <Stack vertical>
             <Stack.Item textColor="red" fontSize="20px">
-              Ты - кровяной червь!
+              Вы - кровяной червь!
             </Stack.Item>
             <Stack.Item>
               <ObjectivePrintout objectives={objectives} />
@@ -32,8 +32,8 @@ export const AntagInfoBloodWorm = (props) => {
               <Stack vertical>
                 <Stack.Item bold>Статус ваших задач:</Stack.Item>
                 <Stack.Item>
-                  - Общее количество поглощённой крови: {team.blood_consumed_total} units<br/>
-                  - Общее количество размножившихся особей: {team.times_reproduced_total} times
+                  - Общее количество поглощённой крови: {team.blood_consumed_total} юнитов<br/>
+                  - Общее количество размножившихся особей: {team.times_reproduced_total}
                 </Stack.Item>
               </Stack>
             </Stack.Item>
@@ -95,7 +95,7 @@ export const AntagInfoBloodWorm = (props) => {
                   <LabeledList.Item label="Кровопотеря">
                   Находясь в носителе, вы полностью преобразуетесь в кровь. Это делает вас крайне уязвимым к кровоточащим ранам.
                   Когда ваш носитель истекает кровью, урон передаётся вам, носитель будет кровоточить даже после своей смерти!
-                  Также, он будет истекать кровью на 50% быстрее, чем обычные люди..
+                  Также, он будет истекать кровью на 50% быстрее, чем обычные люди.
                   </LabeledList.Item>
                   <LabeledList.Item label="Низший биологичесский вид">
                   У ваших носителей отсутствуют ваши развитые органы чувств, что делает их уязвимыми для обычных препятствий, таких как темнота и светошумовые гранаты.
