@@ -39,7 +39,7 @@
 	return get_blood_worm_team().blood_consumed_total >= blood_required
 
 /datum/objective/blood_worm/multiply
-	name = "РАЗМНОЖСЯ"
+	name = "РАЗМНОЖЬСЯ"
 
 	var/times_required = 0
 

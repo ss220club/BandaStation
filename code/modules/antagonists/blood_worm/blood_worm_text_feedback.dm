@@ -39,7 +39,7 @@
 
 	var/growth_string = ""
 	if (HAS_TRAIT(bloodbag, TRAIT_BLOOD_WORM_HOST))
-		growth_string = ", но поглотить их невозможно, так как они являются носителzvb"
+		growth_string = ", но поглотить их невозможно, так как они являются носителем"
 	else if (total_blood_now < cocoon_action?.total_blood_required)
 		var/rounded_growth = CEILING(potential_gain / cocoon_action.total_blood_required * 100, 1)
 		if (rounded_growth > 0)

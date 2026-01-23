@@ -107,7 +107,7 @@
 	target.show_message(
 		msg = span_userdanger("[leech.declent_ru(NOMINATIVE)] вгрызается в вас!"),
 		type = MSG_VISUAL,
-		alt_msg = span_userdanger("Ты чувствуешь, как что-то вгрызается в тебя!"),
+		alt_msg = span_userdanger("Вы чувствуете, как что-то вгрызается в тебя!"),
 		alt_type = MSG_AUDIBLE
 	)
 
