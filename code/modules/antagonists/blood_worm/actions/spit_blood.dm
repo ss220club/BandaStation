@@ -197,7 +197,7 @@
 		return FALSE
 
 	closet.visible_message(
-		message = span_danger("[closet] петли переполняются разъедающей кровью и начинают плавиться!"),
+		message = span_danger("Петли [closet.declent_ru(GENITIVE)] переполняются разъедающей кровью и начинают плавиться!"),
 		blind_message = span_hear("Вы слышите шипение."),
 		ignored_mobs = host
 	)
