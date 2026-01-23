@@ -187,7 +187,7 @@
 	return TRUE
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/finish_melting_restraints(obj/restraints)
-	restraints.visible_message(span_danger("[restraints] плавятся[restraints.p_s()], превращаясь в сгусток крови!"))
+	restraints.visible_message(span_danger("[capitalize(restraints.declent_ru(NOMINATIVE))] плавятся, превращаясь в сгусток крови!"))
 	new /obj/effect/decal/cleanable/blood/old(get_turf(restraints))
 	qdel(restraints)
 
