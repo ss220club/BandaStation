@@ -1,5 +1,5 @@
 /datum/antagonist/blood_worm
-	name = "\improper Кровавый Червь"
+	name = "\improper Кровяной червь"
 	roundend_category = "blood worms"
 	antagpanel_category = ANTAG_GROUP_BLOODY
 	pref_flag = ROLE_BLOOD_WORM
