@@ -1,5 +1,5 @@
 /mob/living/blood_worm_host
-	name = "Носитель"
+	name = "Host"
 	desc = "..как вообще это осматривать? У ЭТОЙ ТВАРИ ДАЖЕ НЕТ ТЕЛА!."
 
 	var/datum/action/changeling_expel_worm/expel_worm_action
