@@ -275,7 +275,7 @@
 	icon_state = "invade-[effect_name]"
 
 /mob/living/basic/blood_worm/hatchling
-	name = "Детеныш кровавого червя"
+	name = "hatchling blood worm"
 	desc = "Только что вылупившийся кровавый червь. Личинка выглядит голодной и слабой, для дальшейшего роста требуется кровь."
 
 	icon_state = "hatchling"
