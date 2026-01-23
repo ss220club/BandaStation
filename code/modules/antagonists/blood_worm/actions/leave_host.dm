@@ -1,6 +1,6 @@
 /datum/action/cooldown/mob_cooldown/blood_worm/eject
 	name = "Покинуть носителя"
-	desc = "Покинь своего хозяина-носителя, забрав с собой его кровь."
+	desc = "Покинь своего носителя, забрав с собой его кровь."
 
 	button_icon_state = "leave_host"
 
