@@ -7,7 +7,7 @@
 
 /datum/objective/blood_worm/kill
 	name = "УБЕЙ"
-	explanation_text = "Мы должны помешать всем членам командования спастись живыми на аварийном эвакуационном шаттле."
+	explanation_text = "Мы должны помешать всем членам командования спастись живыми на эвакуационном шаттле."
 
 /datum/objective/blood_worm/kill/check_completion()
 	for (var/mob/player_mob as anything in GLOB.player_list)
