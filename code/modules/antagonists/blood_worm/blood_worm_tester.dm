@@ -48,7 +48,7 @@
 		)
 
 		target_mob.show_message(
-			msg = span_userdanger("[user.declent_ru(NOMINATIVE)] колит вас используя [src.declent_ru(NOMINATIVE)]!"),
+			msg = span_userdanger("[user.declent_ru(NOMINATIVE)] укалывает вас [src.declent_ru(INSTRUMENTAL)]!"),
 			type = MSG_VISUAL,
 		)
 	else
