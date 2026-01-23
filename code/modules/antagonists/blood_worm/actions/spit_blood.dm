@@ -172,7 +172,7 @@
 	if (!istype(restraints))
 		return FALSE
 	if (restraints.resistance_flags & (INDESTRUCTIBLE | UNACIDABLE | ACID_PROOF))
-		host.balloon_alert(host, "[restraints] [restraints.p_are()] слишком крепки!")
+		host.balloon_alert(host, "[capitalize(restraints.declent_ru(NOMINATIVE))] слишком крепки!")
 		return FALSE
 
 	host.visible_message(
