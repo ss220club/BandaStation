@@ -360,7 +360,7 @@
 	AddComponent(/datum/component/slide_under_doors, slide_in_delay = 5 SECONDS)
 
 /mob/living/basic/blood_worm/adult
-	name = "Взрослый кровавый червь"
+	name = "adult blood worm"
 	desc = "Чудовищный кровяной червь. Наверное, было бы лучше засунуть голову в промышленный измельчитель, чем в его пасть."
 
 	icon = 'icons/mob/nonhuman-player/blood_worm_32x48.dmi'
