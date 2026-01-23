@@ -12466,6 +12466,13 @@
 /obj/structure/cable,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
+"eiS" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/obj/machinery/firealarm/directional/east,
+/turf/open/floor/engine,
+/area/station/engineering/supermatter/room)
 "eiW" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/railing,
@@ -14314,6 +14321,7 @@
 /obj/effect/turf_decal/tile/dark/anticorner/contrasted{
 	dir = 1
 	},
+/obj/machinery/firealarm/directional/west,
 /turf/open/floor/iron,
 /area/station/engineering/supermatter/room)
 "ePb" = (
@@ -21781,7 +21789,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /turf/open/floor/iron/dark,
-/area/station/maintenance/starboard/aft)
+/area/station/engineering/supermatter/room)
 "hjk" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/monitored/ordnance_burn_chamber_input,
 /turf/open/floor/engine/vacuum,
@@ -41783,6 +41791,10 @@
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
 /turf/open/floor/iron,
 /area/station/hallway/primary/port)
+"nHW" = (
+/obj/structure/sign/warning/biohazard,
+/turf/closed/wall,
+/area/station/science/xenobiology)
 "nIg" = (
 /obj/machinery/door/airlock/security/glass{
 	name = "Research Security Post"
@@ -53213,7 +53225,7 @@
 "rAO" = (
 /obj/structure/sign/departments/xenobio,
 /turf/closed/wall,
-/area/station/maintenance/starboard/fore)
+/area/station/science/xenobiology)
 "rAQ" = (
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment,
@@ -111505,7 +111517,7 @@ syu
 gqk
 okt
 qVc
-lZi
+vJc
 rAO
 hZP
 lZi
@@ -111575,11 +111587,11 @@ uSH
 dmf
 uSH
 qZX
-qZX
-qZX
+ekm
+ekm
 hjj
-qZX
-qZX
+ekm
+ekm
 qfv
 rIm
 vOd
@@ -111836,10 +111848,10 @@ vLG
 ckQ
 sOJ
 aov
-qZX
+ekm
 xNP
 vUD
-rYi
+eiS
 rnp
 sWj
 oaF
@@ -112093,7 +112105,7 @@ aAU
 fBE
 xBz
 sdT
-qZX
+ekm
 ekm
 ekm
 ekm
@@ -112533,8 +112545,8 @@ ndz
 kYR
 puJ
 vna
-lDu
-khy
+vJc
+nHW
 leB
 rST
 lDu
