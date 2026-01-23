@@ -210,7 +210,7 @@
 	return TRUE
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/finish_melting_closet(obj/structure/closet/closet)
-	closet.visible_message(span_danger("Петли [closet] плавятся, превращаясь в сгусток крови!"))
+	closet.visible_message(span_danger("Петли [closet.declent_ru(GENITIVE)] плавятся, превращаясь в сгусток крови!"))
 	new /obj/effect/decal/cleanable/blood/old(get_turf(closet))
 
 	closet.welded = FALSE
