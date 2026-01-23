@@ -193,7 +193,7 @@
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/melt_closet(mob/living/carbon/human/host, obj/structure/closet/closet)
 	if (closet.resistance_flags & (INDESTRUCTIBLE | UNACIDABLE | ACID_PROOF))
-		host.balloon_alert(host, "[closet] [closet.p_are()] слишком крепок!")
+		host.balloon_alert(host, "[capitalize(closet.declent_ru(NOMINATIVE))] слишком крепкий!")
 		return FALSE
 
 	closet.visible_message(
