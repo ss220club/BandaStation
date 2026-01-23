@@ -251,7 +251,7 @@
 	parent_item.update_appearance()
 
 	if(iscyborg(user))
-		to_chat(user, span_notice("Вы подключаете ваш модуль к [parent]."))
+		to_chat(user, span_notice("Вы подключаете ваш модуль к [parent.declent_ru(DATIVE)]."))
 	else
 		to_chat(user, span_notice("Вы хватаете [parent.declent_ru(ACCUSATIVE)] двумя руками."))
 
@@ -320,7 +320,7 @@
 		// Show message if requested
 		if(show_message)
 			if(iscyborg(user))
-				to_chat(user, span_notice("You free up your module."))
+				to_chat(user, span_notice("Вы убираете свой модуль."))
 			else if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
 				to_chat(user, span_notice("Вы роняете [parent.declent_ru(ACCUSATIVE)]."))
 			else

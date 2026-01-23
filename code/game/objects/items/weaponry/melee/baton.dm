@@ -93,7 +93,7 @@
 		readout += "[span_warning("Не может наносить оглушающие удары")], либо [span_warning("использует для атаки необычный метод")]."
 		return readout.Join("\n")
 
-	readout += "Требуется [span_warning("[HITS_TO_CRIT(stamina_damage)] удар[declension_ru(stamina_damage, "", "ов", "а")]")], чтобы оглушить врага."
+	readout += "Требуется [span_warning("[HITS_TO_CRIT(stamina_damage)] удар[declension_ru(HITS_TO_CRIT(stamina_damage), "", "ов", "а")]")], чтобы оглушить врага."
 
 	readout += "\nЭффект каждого удара можно смягчить с помощью брони типа [span_warning("[armour_type_against_stun]")]."
 
@@ -133,7 +133,7 @@
 		return FALSE
 	if(HAS_TRAIT_FROM(target, TRAIT_IWASBATONED, REF(user)) ) //no doublebaton abuse anon!
 		if(!harmbatonning)
-			target.balloon_alert(user, "ещё перезаряжается!")
+			target.balloon_alert(user, "нельзя пока оглушить!")
 		return FALSE
 	return TRUE
 
