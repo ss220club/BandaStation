@@ -317,7 +317,7 @@
 	AddComponent(/datum/component/slide_under_doors, slide_in_delay = 3 SECONDS)
 
 /mob/living/basic/blood_worm/juvenile
-	name = "Юный кровавый червь"
+	name = "juvenile blood worm"
 	desc = "Кровавый червь среднего размера. Имеет множество длинных и чрезвычайно острых зубов, всем своим видом показывая жажду крови."
 
 	icon_state = "juvenile"
