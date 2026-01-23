@@ -23,7 +23,7 @@ export const AntagInfoBloodWorm = (props) => {
         <Section scrollable fill>
           <Stack vertical>
             <Stack.Item textColor="red" fontSize="20px">
-              Ты Кровавый Червь!
+              Ты - кровяной червь!
             </Stack.Item>
             <Stack.Item>
               <ObjectivePrintout objectives={objectives} />
@@ -143,7 +143,7 @@ export const AntagInfoBloodWorm = (props) => {
                   могут ломать шлюзы и прочие преграды при помощи своих острых зубов. Вашим жертвам не скрыться!
                   </LabeledList.Item>
                   <LabeledList.Item label="Объединяйтесь">
-                  Ваш род часто разделяют общие цели и готовы работать сообща. У вас есть свой язык, Червиное наречие,
+                  Ваш род часто разделяют общие цели и готовы работать сообща. У вас есть свой язык - червиное наречие,
                   которое понимает только ваш род. Вы можете определить, является ли кто-либо носителем кровяного червя, по значку на ИЛС.
                   </LabeledList.Item>
                   <LabeledList.Item label="Время тюрьмы">

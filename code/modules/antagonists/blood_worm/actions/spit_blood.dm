@@ -229,7 +229,7 @@
 		ignored_mobs = host
 	)
 
-	to_chat(host, span_danger("Вы расплескиваете токсичную кровь по всей внутренней части [cocoon]!"))
+	to_chat(host, span_danger("Вы расплескиваете токсичную кровь по всей внутренней части [cocoon.declent_ru(GENITIVE)]!"))
 
 	log_combat(host, cocoon, "melted", addition = "(Spit Blood)")
 
@@ -237,7 +237,7 @@
 	return TRUE
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/proc/finish_melting_cocoon(obj/structure/spider/cocoon/cocoon)
-	cocoon.visible_message(span_danger("[cocoon] плавится, превращаясь в кучу липкой крови!"))
+	cocoon.visible_message(span_danger("[cocoon.declent_ru(NOMINATIVE)] плавится, превращаясь в кучу липкой крови!"))
 	new /obj/effect/decal/cleanable/blood/old(get_turf(cocoon))
 	qdel(cocoon)
 

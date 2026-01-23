@@ -6,8 +6,8 @@
 		playsound(src, 'sound/effects/magic/enter_blood.ogg', vol = 60, vary = TRUE, ignore_walls = FALSE)
 
 		visible_message(
-			message = span_bolddanger("[src] проникает в [new_host]!"),
-			self_message = span_notice("Вы проникаете в [new_host]."),
+			message = span_bolddanger("[src.declent_ru(NOMINATIVE)] проникает в [new_host.declent_ru(ACCUSATIVE)]!"),
+			self_message = span_notice("Вы проникаете в [new_host.declent_ru(ACCUSATIVE)]."),
 			blind_message = span_hear("Вы слышите хлюпанье.")
 		)
 
@@ -82,12 +82,12 @@
 		return
 
 	visible_message(
-		message = span_bolddanger("[src] выходит из [host]!"),
+		message = span_bolddanger("[src.declent_ru(NOMINATIVE)] выходит из [host.declent_ru(ACCUSATIVE)]!"),
 		blind_message = span_hear("Вы слышите хлюпанье."),
 		ignored_mobs = list(host, src)
 	)
 
-	to_chat_self(span_notice("Вы покидаете [host]."))
+	to_chat_self(span_notice("Вы покидаете [host.declent_ru(GENITIVE)]."))
 
 	log_blood_worm("[key_name(src)] left their host [key_name(host)]")
 

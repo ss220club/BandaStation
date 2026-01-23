@@ -29607,10 +29607,11 @@ prepositional = "крупном кровяном коконе"
 gender = "neuter"
 
 ["hemoparasite testing tool"]
-nominative = "анализатор наличия паразитов в крови"
-genitive = "анализатора наличия паразитов в крови"
-dative = "анализатору наличия паразитов в крови"
-accusative = "анализатор наличия паразитов в крови"
-instrumental = "анализатором наличия паразитов в крови"
-prepositional = "анализаторе наличия паразитов в крови"
-gender = "neuter"
+nominative = "тест на гемопаразитов"
+genitive = "теста на гемопаразитов"
+dative = "тесту на гемопаразитов"
+accusative = "тест на гемопаразитов"
+instrumental = "тестом на гемопаразитов"
+prepositional = "тесте на гемопаразитов"
+gender = "male"
+
