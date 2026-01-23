@@ -14,7 +14,7 @@
 
 /obj/structure/table
 	name = "table"
-	desc = "A square piece of iron standing on four metal legs. It can not move."
+	desc = "Квадратный кусок железа, стоящий на четырех металлических ножках. Его нельзя переместить."
 	icon = 'icons/obj/smooth_structures/table.dmi'
 	icon_state = "table-0"
 	base_icon_state = "table"
@@ -189,16 +189,16 @@
 	if(istype(held_item, /obj/item/toy/cards/deck))
 		var/obj/item/toy/cards/deck/dealer_deck = held_item
 		if(HAS_TRAIT(dealer_deck, TRAIT_WIELDED))
-			context[SCREENTIP_CONTEXT_LMB] = "Deal card"
-			context[SCREENTIP_CONTEXT_RMB] = "Deal card faceup"
+			context[SCREENTIP_CONTEXT_LMB] = "Раздать карты лицом вниз"
+			context[SCREENTIP_CONTEXT_RMB] = "Раздать карты лицом вверх"
 			. = CONTEXTUAL_SCREENTIP_SET
 
 	if(deconstruction_ready)
 		if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-			context[SCREENTIP_CONTEXT_RMB] = "Disassemble"
+			context[SCREENTIP_CONTEXT_RMB] = "Разобрать"
 			. = CONTEXTUAL_SCREENTIP_SET
 		if(held_item.tool_behaviour == TOOL_WRENCH)
-			context[SCREENTIP_CONTEXT_RMB] = "Deconstruct"
+			context[SCREENTIP_CONTEXT_RMB] = "Деконстурировать"
 			. = CONTEXTUAL_SCREENTIP_SET
 
 	return . || NONE
@@ -206,11 +206,11 @@
 /obj/structure/table/examine(mob/user)
 	. = ..()
 	if(is_flipped)
-		. += span_notice("It's been flipped on its side!")
+		. += span_notice("Он перевернут на бок!")
 	. += deconstruction_hints(user)
 
 /obj/structure/table/proc/deconstruction_hints(mob/user)
-	return span_notice("The top is <b>screwed</b> on, but the main <b>bolts</b> are also visible.")
+	return span_notice("Верхняя часть <b>привинчена</b> но также видны основные <b>болты</b>.")
 
 /obj/structure/table/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
@@ -288,13 +288,13 @@
 	var/interaction_key = "table_flip_[REF(src)]"
 	if(!is_flipped)
 		if(!LAZYACCESS(user.do_afters, interaction_key)) // To avoid balloon alert spam
-			user.balloon_alert_to_viewers("flipping table...")
+			user.balloon_alert_to_viewers("Переворачивание стола...")
 		if(do_after(user, max_integrity * 0.25, src, interaction_key = interaction_key))
 			flip_table(get_dir(user, src))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	if(!LAZYACCESS(user.do_afters, interaction_key)) // To avoid balloon alert spam
-		user.balloon_alert_to_viewers("flipping table upright...")
+		user.balloon_alert_to_viewers("Поднятие стола...")
 	if(do_after(user, max_integrity * 0.25, src, interaction_key = interaction_key))
 		unflip_table()
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -324,7 +324,7 @@
 /obj/structure/table/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	if(!deconstruction_ready)
 		return NONE
-	to_chat(user, span_notice("You start disassembling [src]..."))
+	to_chat(user, span_notice("Вы начинаете разбирать [src]..."))
 	if(tool.use_tool(src, user, 2 SECONDS, volume=50))
 		deconstruct(TRUE)
 	return ITEM_INTERACT_SUCCESS
@@ -332,7 +332,7 @@
 /obj/structure/table/wrench_act_secondary(mob/living/user, obj/item/tool)
 	if(!deconstruction_ready)
 		return NONE
-	to_chat(user, span_notice("You start deconstructing [src]..."))
+	to_chat(user, span_notice("Вы начинаете декоструировать [src]..."))
 	if(tool.use_tool(src, user, 4 SECONDS, volume=50))
 		playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
 		frame = null
@@ -369,7 +369,7 @@
 	for(var/obj/item/thing in used_tray.contents)
 		AfterPutItemOnTable(thing, user)
 	used_tray.atom_storage.remove_all(drop_location())
-	user.visible_message(span_notice("[user] empties [used_tray] on [src]."))
+	user.visible_message(span_notice("[user] опустошает [used_tray] на [src]."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/table/proc/deck_act(mob/living/user, obj/item/toy/cards/deck/dealer_deck, list/modifiers, flip)
@@ -419,7 +419,7 @@
 
 /obj/structure/table/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	if(the_rcd.mode == RCD_DECONSTRUCT)
-		return list("delay" = 2.4 SECONDS, "cost" = 16)
+		return list("задержка" = 2.4 SECONDS, "стоимость" = 16)
 	return FALSE
 
 /obj/structure/table/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
@@ -443,12 +443,12 @@
 /obj/structure/table/greyscale/finalize_material_effects(list/materials)
 	. = ..()
 	var/english_list = get_material_english_list(materials)
-	desc = "A square [(length(materials) > 1) ? "amalgamation" : "piece"] of [english_list] on four legs. It can not move."
+	desc = "Квадратный [(length(materials) > 1) ? "сплав" : "кусок"] из [english_list] на четырех ножках. Его нельзя переместить."
 
 ///Table on wheels
 /obj/structure/table/rolling
 	name = "Rolling table"
-	desc = "An NT brand \"Rolly poly\" rolling table. It can and will move."
+	desc = "Стол на колесиках марки NT \"Rolly poly\". Его можно и нужно двигать."
 	anchored = FALSE
 	smoothing_flags = NONE
 	smoothing_groups = null
@@ -475,16 +475,16 @@
 		return
 
 	if(rable.loaded)
-		to_chat(user, span_warning("You already have \a [rable.loaded] docked!"))
+		to_chat(user, span_warning("У вас уже [rable.loaded] пристыкован!"))
 		return ITEM_INTERACT_FAILURE
 
 	if(locate(/mob/living) in loc.get_all_contents())
-		to_chat(user, span_warning("You can't collect \the [src] with that much on top!"))
+		to_chat(user, span_warning("Нельзя собирать [src] с таким большим грузом сверху!"))
 		return ITEM_INTERACT_FAILURE
 
 	rable.loaded = src
 	forceMove(rable)
-	user.visible_message(span_notice("[user] collects \the [src]."), span_notice("You collect \the [src]."))
+	user.visible_message(span_notice("[user] собирает \the [src]."), span_notice("Вы собираете \the [src]."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/table/rolling/AfterPutItemOnTable(obj/item/thing, mob/living/user)
@@ -526,7 +526,7 @@
  */
 /obj/structure/table/glass
 	name = "glass table"
-	desc = "What did I say about leaning on the glass tables? Now you need surgery."
+	desc = "Что я говорил про то, что нельзя опираться на стеклянные столы? Теперь тебе нужна операция."
 	icon = 'icons/obj/smooth_structures/glass_table.dmi'
 	icon_state = "glass_table-0"
 	base_icon_state = "glass_table"
@@ -572,8 +572,8 @@
 		table_shatter(M)
 
 /obj/structure/table/glass/proc/table_shatter(mob/living/victim)
-	visible_message(span_warning("[src] breaks!"),
-		span_danger("You hear breaking glass."))
+	visible_message(span_warning("[src] ломается!"),
+		span_danger("Вы слышите звук разбивающегося стекла."))
 
 	playsound(loc, SFX_SHATTER, 50, TRUE)
 
@@ -601,7 +601,7 @@
 
 /obj/structure/table/glass/plasmaglass
 	name = "plasma glass table"
-	desc = "Someone thought this was a good idea."
+	desc = "Кто-то решил, что это хорошая идея."
 	icon = 'icons/obj/smooth_structures/plasmaglass_table.dmi'
 	icon_state = "plasmaglass_table-0"
 	base_icon_state = "plasmaglass_table"
@@ -616,7 +616,7 @@
 
 /obj/structure/table/wood
 	name = "wooden table"
-	desc = "Do not apply fire to this. Rumour says it burns easily."
+	desc = "Не подносите к этому огонь. По слухам, оно легко воспламеняется."
 	icon = 'icons/obj/smooth_structures/wood_table.dmi'
 	icon_state = "wood_table-0"
 	base_icon_state = "wood_table"
@@ -633,8 +633,8 @@
 	if(QDELETED(src) || prob(66))
 		return
 	visible_message(
-		span_warning("[src] smashes into bits!"),
-		blind_message = span_hear("You hear the loud cracking of wood being split."),
+		span_warning("[src] разбивается на куски!"),
+		blind_message = span_hear("Вы слышите громкий треск раскалывающегося дерева."),
 	)
 
 	playsound(src, 'sound/effects/wounds/crack2.ogg', 50, TRUE)
@@ -649,7 +649,7 @@
 
 /obj/structure/table/wood/poker //No specialties, Just a mapping object.
 	name = "gambling table"
-	desc = "A seedy table for seedy dealings in seedy places."
+	desc = "Потрепанный стол для сомнительных сделок в сомнительных местах."
 	icon = 'icons/obj/smooth_structures/poker_table.dmi'
 	icon_state = "poker_table-0"
 	base_icon_state = "poker_table"
@@ -663,7 +663,7 @@
 
 /obj/structure/table/wood/fancy
 	name = "fancy table"
-	desc = "A standard metal table frame covered with an amazingly fancy, patterned cloth."
+	desc = "Стандартный металлический стол, покрытый удивительно изысканной тканью с узором."
 	icon = 'icons/obj/smooth_structures/fancy_table.dmi'
 	icon_state = "fancy_table-0"
 	base_icon_state = "fancy_table"
@@ -742,7 +742,7 @@
  */
 /obj/structure/table/reinforced
 	name = "reinforced table"
-	desc = "A reinforced version of the four legged table."
+	desc = "Укреплённая версия стола с четырьмя ножками."
 	icon = 'icons/obj/smooth_structures/reinforced_table.dmi'
 	icon_state = "reinforced_table-0"
 	base_icon_state = "reinforced_table"
@@ -769,16 +769,16 @@
 		return NONE
 
 	if(held_item.tool_behaviour == TOOL_WELDER)
-		context[SCREENTIP_CONTEXT_RMB] = deconstruction_ready ? "Strengthen" : "Weaken"
+		context[SCREENTIP_CONTEXT_RMB] = deconstruction_ready ? "Укрепить" : "Ослабить"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	return . || NONE
 
 /obj/structure/table/reinforced/deconstruction_hints(mob/user)
 	if(deconstruction_ready)
-		return span_notice("The top cover has been <i>welded</i> loose and the main frame's <b>bolts</b> are exposed.")
+		return span_notice("Верхняя крышка была <i>приварена</i> неплотно, и <b>болты</b> основной рамы остались видны.")
 	else
-		return span_notice("The top cover is firmly <b>welded</b> on.")
+		return span_notice("Верхняя крышка прочно <b>приварена</b>.")
 
 /obj/structure/table/reinforced/welder_act_secondary(mob/living/user, obj/item/tool)
 	if(tool.tool_start_check(user, amount = 0))
@@ -786,15 +786,15 @@
 			return ITEM_INTERACT_BLOCKING
 
 		if(deconstruction_ready)
-			to_chat(user, span_notice("You start strengthening the reinforced table..."))
+			to_chat(user, span_notice("Вы начинаете укреплять укрепленный стол..."))
 			if (tool.use_tool(src, user, 50, volume = 50))
-				to_chat(user, span_notice("You strengthen the table."))
+				to_chat(user, span_notice("Вы укрепляете стол."))
 				deconstruction_ready = FALSE
 				return ITEM_INTERACT_SUCCESS
 		else
-			to_chat(user, span_notice("You start weakening the reinforced table..."))
+			to_chat(user, span_notice("Вы начинаете ослаблять укрепленный стол..."))
 			if (tool.use_tool(src, user, 50, volume = 50))
-				to_chat(user, span_notice("You weaken the table."))
+				to_chat(user, span_notice("Вы ослабляете стол."))
 				deconstruction_ready = TRUE
 				return ITEM_INTERACT_SUCCESS
 	return ITEM_INTERACT_BLOCKING
@@ -841,7 +841,7 @@
 
 /obj/structure/table/bronze
 	name = "bronze table"
-	desc = "A solid table made out of bronze."
+	desc = "Прочный стол из бронзы."
 	icon = 'icons/obj/smooth_structures/brass_table.dmi'
 	icon_state = "brass_table-0"
 	base_icon_state = "brass_table"
@@ -856,7 +856,7 @@
 
 /obj/structure/table/reinforced/rglass
 	name = "reinforced glass table"
-	desc = "A reinforced version of the glass table."
+	desc = "Укреплённая версия стеклянного стола."
 	icon = 'icons/obj/smooth_structures/rglass_table.dmi'
 	icon_state = "rglass_table-0"
 	base_icon_state = "rglass_table"
@@ -866,7 +866,7 @@
 
 /obj/structure/table/reinforced/plasmarglass
 	name = "reinforced plasma glass table"
-	desc = "A reinforced version of the plasma glass table."
+	desc = "Укреплённая версия стола из плазменного стекла."
 	icon = 'icons/obj/smooth_structures/rplasmaglass_table.dmi'
 	icon_state = "rplasmaglass_table-0"
 	base_icon_state = "rplasmaglass_table"
@@ -875,7 +875,7 @@
 
 /obj/structure/table/reinforced/titaniumglass
 	name = "titanium glass table"
-	desc = "A titanium reinforced glass table, with a fresh coat of NT white paint."
+	desc = "Стол из титана и укрепленного стекла, покрытый свежим слоем белой краски NT."
 	icon = 'icons/obj/smooth_structures/titaniumglass_table.dmi'
 	icon_state = "titaniumglass_table-0"
 	base_icon_state = "titaniumglass_table"
@@ -885,7 +885,7 @@
 
 /obj/structure/table/reinforced/plastitaniumglass
 	name = "plastitanium glass table"
-	desc = "A table made of titanium reinforced silica-plasma composite. About as durable as it sounds."
+	desc = "Стол, изготовленный из титана и армированного кремне-плазменного композита. Примерно такой же прочный, как и звучит."
 	icon = 'icons/obj/smooth_structures/plastitaniumglass_table.dmi'
 	icon_state = "plastitaniumglass_table-0"
 	base_icon_state = "plastitaniumglass_table"
@@ -899,7 +899,7 @@
 
 /obj/structure/table/optable
 	name = "operating table"
-	desc = "Used for advanced medical procedures."
+	desc = "Используется для сложных медицинских процедур."
 	icon = 'icons/obj/medical/surgery_table.dmi'
 	icon_state = "surgery_table"
 	buildstack = /obj/item/stack/sheet/mineral/silver
@@ -954,14 +954,14 @@
 
 	if(being_buckled == buckler)
 		being_buckled.visible_message(
-			span_notice("[buckler] lays down on [src]."),
-			span_notice("You lay down on [src]."),
+			span_notice("[buckler] ложится на [src]."),
+			span_notice("Ты ложишься на [src]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 	else
 		being_buckled.visible_message(
-			span_notice("[buckler] lays [being_buckled] down on [src]."),
-			span_notice("[buckler] lays you down on [src]."),
+			span_notice("[buckler] кладет [being_buckled] на [src]."),
+			span_notice("[buckler] укладывает вас на [src]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 
@@ -971,14 +971,14 @@
 
 	if(being_unbuckled == unbuckler)
 		being_unbuckled.visible_message(
-			span_notice("[unbuckler] gets up from [src]."),
-			span_notice("You get up from [src]."),
+			span_notice("[unbuckler] встает с [src]."),
+			span_notice("Вы встаете с [src]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 	else
 		being_unbuckled.visible_message(
-			span_notice("[unbuckler] pulls [being_unbuckled] up from [src]."),
-			span_notice("[unbuckler] pulls you up from [src]."),
+			span_notice("[unbuckler] вытаскивает [being_unbuckled] из [src]."),
+			span_notice("[unbuckler] вытаскивает вас из [src]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 
@@ -986,26 +986,26 @@
 	. = ..()
 	if(isnull(held_item))
 		if (breath_mask?.loc == src)
-			context[SCREENTIP_CONTEXT_RMB] = "Take mask"
+			context[SCREENTIP_CONTEXT_RMB] = "Взять маску"
 			. |= CONTEXTUAL_SCREENTIP_SET
 		return
 
 	if(breath_mask && breath_mask != held_item)
 		if (held_item.tool_behaviour == TOOL_SCREWDRIVER)
-			context[SCREENTIP_CONTEXT_LMB] = "Detach mask"
+			context[SCREENTIP_CONTEXT_LMB] = "Снять маску"
 			. |= CONTEXTUAL_SCREENTIP_SET
 	else if (istype(held_item, /obj/item/clothing/mask/breath))
-		context[SCREENTIP_CONTEXT_LMB] = "Attach mask"
+		context[SCREENTIP_CONTEXT_LMB] = "Прикрепить маску"
 		. |= CONTEXTUAL_SCREENTIP_SET
 
 	if(air_tank)
 		if (held_item.tool_behaviour == TOOL_WRENCH)
-			context[SCREENTIP_CONTEXT_LMB] = "Detach tank"
+			context[SCREENTIP_CONTEXT_LMB] = "Отсоединить бак"
 			. |= CONTEXTUAL_SCREENTIP_SET
 	else if (istype(held_item, /obj/item/tank))
 		var/obj/item/tank/as_tank = held_item
 		if (as_tank.tank_holder_icon_state)
-			context[SCREENTIP_CONTEXT_LMB] = "Attach tank"
+			context[SCREENTIP_CONTEXT_LMB] = "Прикрепить бак"
 			. |= CONTEXTUAL_SCREENTIP_SET
 
 /obj/structure/table/optable/atom_deconstruct(disassembled)
@@ -1133,7 +1133,7 @@
 /obj/structure/table/optable/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if (istype(tool, /obj/item/clothing/mask/breath))
 		if (breath_mask && breath_mask != tool)
-			balloon_alert(user, "mask already attached!")
+			balloon_alert(user, "маска уже прикреплена!")
 			return ITEM_INTERACT_BLOCKING
 
 		if (!user.transferItemToLoc(tool, src))
@@ -1143,7 +1143,7 @@
 			breath_mask = tool
 			RegisterSignal(breath_mask, COMSIG_MOVABLE_MOVED, PROC_REF(on_mask_moved))
 
-		balloon_alert(user, "mask attached")
+		balloon_alert(user, "маска прикреплена")
 		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
 		update_appearance()
 		return ITEM_INTERACT_SUCCESS
@@ -1152,19 +1152,19 @@
 		return NONE
 
 	if (air_tank)
-		balloon_alert(user, "tank already attached!")
+		balloon_alert(user, "бак уже подключен!")
 		return ITEM_INTERACT_BLOCKING
 
 	var/obj/item/tank/as_tank = tool
 	if (!as_tank.tank_holder_icon_state)
-		balloon_alert(user, "does not fit!")
+		balloon_alert(user, "не подходит!")
 		return ITEM_INTERACT_BLOCKING
 
 	if (!user.transferItemToLoc(tool, src))
 		return ITEM_INTERACT_BLOCKING
 
 	air_tank = as_tank
-	balloon_alert(user, "tank attached")
+	balloon_alert(user, "бак прикреплен")
 	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
 	update_appearance()
 	return ITEM_INTERACT_SUCCESS
@@ -1189,12 +1189,12 @@
 /obj/structure/table/optable/wrench_act(mob/living/user, obj/item/tool)
 	if (!air_tank)
 		return NONE
-	balloon_alert(user, "detaching the tank...")
+	balloon_alert(user, "отсоединяем бак...")
 	if (!tool.use_tool(src, user, 3 SECONDS))
 		return ITEM_INTERACT_BLOCKING
 	air_tank.forceMove(drop_location())
 	tool.play_tool_sound(src, 50)
-	balloon_alert(user, "tank detached")
+	balloon_alert(user, "бак отсоединён")
 	if (air_tank.IsReachableBy(user))
 		user.put_in_hands(air_tank)
 	if (patient?.external && patient.external == air_tank)
@@ -1214,31 +1214,31 @@
 /obj/structure/table/optable/examine(mob/user)
 	. = ..()
 	if (air_tank)
-		. += span_notice("It has \a [air_tank] secured to it with a couple of [EXAMINE_HINT("bolts")].")
+		. += span_notice("К нему прикреплен [air_tank] с помощью пары  [EXAMINE_HINT("болтов")].")
 		if (patient)
-			. += span_info("You can connect [patient]'s internals to \the [air_tank] by dragging \the [src] onto them.")
+			. += span_info("Вы можете подключить [patient] к \the [air_tank] перетащив \the [src] на них.")
 	else
-		. += span_notice("It has an attachment slot for an air tank underneath.")
+		. += span_notice("Под ним имеется прорезь для крепления воздушного бака.")
 	if (breath_mask)
-		. += span_notice("It has \a [breath_mask] attached to its side, the tube secured with a single [EXAMINE_HINT("screw")].")
+		. += span_notice("К нему прикреплена [breath_mask] сбоку, трубка закреплена одним [EXAMINE_HINT("винтом")].")
 		if (breath_mask.loc == src)
-			. += span_info("You can detach the mask by right-clicking \the [src] with an empty hand.")
+			. += span_info("Вы можете снять маску, щелкнув правой кнопкой мыши на [src] пустой рукой.")
 	else
-		. += span_notice("There's a port for a breathing mask tube on its side.")
+		. += span_notice("На боку есть отверстие для трубки дыхательной маски.")
 
 /obj/structure/table/optable/proc/detach_mask(mob/living/user)
 	if (!istype(user) || !IsReachableBy(user) || !user.can_interact_with(src))
 		return FALSE
 
 	if (!breath_mask)
-		balloon_alert(user, "no mask attached!")
+		balloon_alert(user, "нет прикрепленной маски")
 		return TRUE
 
 	if (!user.put_in_hands(breath_mask))
-		balloon_alert(user, "hands busy!")
+		balloon_alert(user, "руки заняты!")
 		return TRUE
 
-	to_chat(user, span_notice("You pull out \the [breath_mask] from \the [src]."))
+	to_chat(user, span_notice("Вы вытаскиваете [breath_mask] из [src]."))
 	update_appearance()
 	return TRUE
 
@@ -1247,16 +1247,16 @@
 		return
 
 	if (!air_tank)
-		balloon_alert(user, "no tank attached!")
+		balloon_alert(user, "бак не прикреплен!")
 		return
 
 	var/internals = patient.can_breathe_internals()
 	if (!internals)
-		balloon_alert(user, "no internals connector!")
+		balloon_alert(user, "нет разъема для подключения пациента!")
 		return
 
-	user.visible_message(span_notice("[user] begins connecting [src]'s [air_tank] to [patient]'s [internals]."), span_notice("You begin connecting [src]'s [air_tank] to [patient]'s [internals]..."), ignored_mobs = patient)
-	to_chat(patient, span_userdanger("[user] begins connecting [src]'s [air_tank] to your [internals]!"))
+	user.visible_message(span_notice("[user] начинает подключать [src] [air_tank] к [patient] [internals]."), span_notice("Вы начинаете подключать [src] [air_tank] к [patient] [internals]..."), ignored_mobs = patient)
+	to_chat(patient, span_userdanger("[user] начинает подключать [src] [air_tank] к вашим [internals]!"))
 
 	if (!do_after(user, 4 SECONDS, patient))
 		return
@@ -1265,8 +1265,8 @@
 		return
 
 	patient.open_internals(air_tank, is_external = TRUE)
-	to_chat(user, span_notice("You connect [src]'s [air_tank] to [patient]'s [internals]."))
-	to_chat(patient, span_userdanger("[user] connects [src]'s [air_tank] to your [internals]!"))
+	to_chat(user, span_notice("Вы подключаете [src] [air_tank] к [patient] [internals]."))
+	to_chat(patient, span_userdanger("[user] подключает [src] [air_tank] к вашим [internals]!"))
 
 /obj/structure/table/optable/proc/on_mask_moved(datum/source, atom/oldloc, direction)
 	SIGNAL_HANDLER
@@ -1290,9 +1290,9 @@
 
 	if(isliving(loc))
 		var/mob/living/user = loc
-		to_chat(user, span_warning("[breath_mask]'s tube overextends and it comes out of your hands!"))
+		to_chat(user, span_warning("Трубка [breath_mask] слишком растягивается, и она выскальзывает у вас из рук!"))
 	else
-		visible_message(span_notice("[breath_mask] snaps back into \the [src]."))
+		visible_message(span_notice("[breath_mask] возвращается в [src]."))
 	snap_mask_back()
 
 /obj/structure/table/optable/proc/snap_mask_back()
@@ -1320,7 +1320,7 @@
  */
 /obj/structure/rack
 	name = "rack"
-	desc = "Different from the Middle Ages version."
+	desc = "Отличается от средневековой версии."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "rack"
 	layer = TABLE_LAYER
@@ -1332,7 +1332,7 @@
 
 /obj/structure/rack/skeletal
 	name = "skeletal minibar"
-	desc = "Rattle me boozes!"
+	desc = "Потряси меня выпивкой!"
 	icon = 'icons/obj/fluff/general.dmi'
 	icon_state = "minibar"
 	custom_materials = list(/datum/material/bone = SHEET_MATERIAL_AMOUNT)
@@ -1349,14 +1349,14 @@
 		return NONE
 
 	if(held_item.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_RMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_RMB] = "Деконстурировать"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	return NONE
 
 /obj/structure/rack/examine(mob/user)
 	. = ..()
-	. += span_notice("It's held together by a couple of <b>bolts</b>.")
+	. += span_notice("Он скрепляется парой <b>болтов</b>.")
 
 /obj/structure/rack/CanAllowThrough(atom/movable/mover, border_dir)
 	. = ..()
@@ -1391,7 +1391,7 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	user.do_attack_animation(src, ATTACK_EFFECT_KICK)
-	user.visible_message(span_danger("[user] kicks [src]."), null, null, COMBAT_MESSAGE_RANGE)
+	user.visible_message(span_danger("[user] пинает [src]."), null, null, COMBAT_MESSAGE_RANGE)
 	take_damage(rand(4,8), BRUTE, MELEE, 1)
 
 /obj/structure/rack/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
@@ -1420,7 +1420,7 @@
 
 /obj/item/rack_parts
 	name = "rack parts"
-	desc = "Parts of a rack."
+	desc = "Части стойки."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "rack_parts"
 	inhand_icon_state = "rack_parts"
@@ -1437,11 +1437,11 @@
 		return NONE
 
 	if(held_item == src)
-		context[SCREENTIP_CONTEXT_LMB] = "Construct Rack"
+		context[SCREENTIP_CONTEXT_LMB] = "Собрать стойку"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "Деконстурировать"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	return NONE
@@ -1458,12 +1458,12 @@
 	if(building)
 		return
 	building = TRUE
-	to_chat(user, span_notice("You start constructing a rack..."))
+	to_chat(user, span_notice("Вы начинаете собирать стойку..."))
 	if(do_after(user, 5 SECONDS, target = user, progress=TRUE))
 		if(!user.temporarilyRemoveItemFromInventory(src))
 			return
 		var/obj/structure/rack/R = new /obj/structure/rack(get_turf(src))
-		user.visible_message(span_notice("[user] assembles \a [R]."), span_notice("You assemble \a [R]."))
+		user.visible_message(span_notice("[user] собирает [R]."), span_notice("Вы собираете [R]."))
 		R.add_fingerprint(user)
 		qdel(src)
 	building = FALSE
