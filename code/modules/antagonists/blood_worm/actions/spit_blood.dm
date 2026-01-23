@@ -224,7 +224,7 @@
 		return FALSE
 
 	cocoon.visible_message(
-		message = span_danger("Нити [cocoon] начинают распадаться!"),
+		message = span_danger("Оболочка [cocoon.declent_ru(GENITIVE)] начинает распадаться!"),
 		blind_message = span_hear("Вы слышите шипение."),
 		ignored_mobs = host
 	)
