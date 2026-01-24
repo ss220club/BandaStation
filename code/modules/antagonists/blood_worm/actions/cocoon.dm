@@ -284,7 +284,7 @@
 	damage_deflection = 15
 
 /obj/structure/blood_worm_cocoon/juvenile/examine(mob/user)
-	return ..() + span_warning("Кокон можно сломать, чтобы предотвратить созревание кровяного червя, хотя выглядит он довольно крепким.")
+	return ..() + span_warning("Его можно сломать, чтобы предотвратить созревание кровяного червя, хотя выглядит он довольно крепким.")
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/adult
 	name = "Размножение"
