@@ -1,6 +1,6 @@
 /datum/action/cooldown/mob_cooldown/blood_worm/invade
-	name = "Вторжение в труп"
-	desc = "Вторгнитесь в труп гуманоида, сделав его своим носителем."
+	name = "Захват трупа"
+	desc = "Захватите труп гуманоида, сделав его своим носителем."
 
 	button_icon_state = "invade_corpse"
 
