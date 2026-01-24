@@ -314,7 +314,7 @@
 	return ..()
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/adult/Activate(atom/target)
-	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд, вы создадите [num_hatchlings + 1] новых личинок, включая себя самого.", "Размножение", list("Да", "Нет"), 30 SECONDS) != "Да")
+	if (tgui_alert(owner, "Вы уверены? После [cocoon_time / 10] секунд, вы создадите [num_hatchlings + 1] новые личинки, включая себя самого.", "Размножение", list("Да", "Нет"), 30 SECONDS) != "Да")
 		return
 	if (!IsAvailable(feedback = TRUE))
 		return
