@@ -55,13 +55,13 @@
 	var/synth_string = "[CEILING(synth_content * 100, 1)]%"
 	switch(synth_content)
 		if (-INFINITY to 0)
-			synth_string = "not"
+			synth_string = "не является"
 		if (1 to INFINITY)
-			synth_string = "fully"
+			synth_string = "является"
 		if (0 to 1)
 			synth_string = "[CEILING(synth_content * 100, 1)]%"
 
-	result += span_notice("[target.p_They()] [target.p_have()] [rounded_volume] unit[rounded_volume == 1 ? "" : "s"] of blood[growth_string]. [target.p_Their()] blood is <b>[synth_string]</b> synthetic.")
+	result += span_notice("У [target.ru_p_theirs()] есть [rounded_volume] юнитов крови[growth_string]. [capitalize(target.ru_p_them())] кровь <b>[synth_string]</b> синтетической.")
 
 /mob/living/basic/blood_worm/get_status_tab_items()
 	return ..() + get_special_status_tab_items()

@@ -54,7 +54,7 @@
 	owner.visible_message(
 		message = span_danger("[owner.declent_ru(NOMINATIVE)] начинает выращивать кокон!"),
 		self_message = span_notice("Вы начинаете выращивать кокон."),
-		blind_message = span_hear("До вас доносится звук сплетающейся плоти.")
+		blind_message = span_hear("До вас доносится звук срастающейся плоти.")
 	)
 
 	if (!do_after(owner, 5 SECONDS, extra_checks = CALLBACK(src, PROC_REF(check_consumed_blood))))
@@ -240,7 +240,7 @@
 
 /obj/structure/blood_worm_cocoon/hatchling
 	name = "small blood cocoon"
-	desc = "Инкубационный кокон детеныша кровяного червя. Его поверхность медленно изменяется."
+	desc = "Инкубационный кокон личинки кровяного червя. Его поверхность медленно изменяется."
 
 	icon_state = "cocoon-small"
 
