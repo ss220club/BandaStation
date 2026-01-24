@@ -46,7 +46,7 @@
 	host.apply_status_effect(status_effect_type, worm)
 
 	host.visible_message(
-		message = span_danger("Раны [host.declent_ru(ACCUSATIVE)] начинают заживать с необычной скоростью!"),
+		message = span_danger("Раны [host.declent_ru(ACCUSATIVE)] начинают заживать с необычайной скоростью!"),
 		ignored_mobs = owner
 	)
 
