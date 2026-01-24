@@ -1256,7 +1256,7 @@
 		return
 
 	user.visible_message(span_notice("[user] начинает подключать [src] [air_tank] к [patient] [internals]."), span_notice("Вы начинаете подключать [src] [air_tank] к [patient] [internals]..."), ignored_mobs = patient)
-	to_chat(patient, span_userdanger("[user] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)] к вашим [internals.declent_ru(DATIVE)]!"))
+	to_chat(patient, span_userdanger("[user] начинает подключать [air_tank] от [src] к вашим [internals]!"))
 
 	if (!do_after(user, 4 SECONDS, patient))
 		return
@@ -1265,8 +1265,8 @@
 		return
 
 	patient.open_internals(air_tank, is_external = TRUE)
-	to_chat(user, span_notice("Вы подключаете [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)] к [internals.declent_ru(DATIVE)] [patient.declent_ru(GENITIVE)]."))
-	to_chat(patient, span_userdanger("[user] подключает [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)] к вашим [internals.declent_ru(DATIVE)]!"))
+	to_chat(user, span_notice("Вы подключаете [air_tank] от [src] [patient]."))
+	to_chat(patient, span_userdanger("[user] подключает [air_tank] от [src] к вашим [internals]!"))
 
 /obj/structure/table/optable/proc/on_mask_moved(datum/source, atom/oldloc, direction)
 	SIGNAL_HANDLER
