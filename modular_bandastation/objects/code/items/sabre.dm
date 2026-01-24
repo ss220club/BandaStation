@@ -27,3 +27,5 @@
 
 /obj/item/melee/sabre/setup_reskins()
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/cap_sabre)
+
+/datum/component/reskinable_item/cap_sabre/reskin_obj(mob/user)
