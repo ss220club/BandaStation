@@ -25,6 +25,11 @@
 	new_icon_state = "saber_cossack"
 	new_inhand_icon_state = "saber_cossack"
 
+/datum/atom_skin/cap_sabre/katana
+	preview_name = "Katana"
+	new_icon_state = "saber_katana"
+	new_inhand_icon_state = "saber_katana"
+
 /obj/item/melee/sabre/setup_reskins()
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/cap_sabre)
 

@@ -28,8 +28,8 @@
 
 /datum/atom_skin/cap_sheath/katana
 	preview_name = "Katana"
-	new_icon_state = "capitan_katana"
-	new_inhand_icon_state = "capitan_katana"
+	new_icon_state = "sheath_katana"
+	new_inhand_icon_state = "sheath_katana"
 
 /obj/item/storage/belt/sheath/sabre/setup_reskins()
 	AddComponent(/datum/component/reskinable_item/sabre, /datum/atom_skin/cap_sheath)
