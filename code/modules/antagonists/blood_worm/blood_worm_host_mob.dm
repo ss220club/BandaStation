@@ -10,7 +10,7 @@
 		return
 
 	if (IS_CHANGELING(src))
-		to_chat(src, span_good("Кровяной червь в вашем теле уязвим для ваших генетических способностей!"))
+		to_chat(src, span_good("Кровяной червь в вашем теле уязвим для ваших генетических особенностей!"))
 
 		if (!expel_worm_action)
 			expel_worm_action = new(src)
