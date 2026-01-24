@@ -226,7 +226,7 @@
 	music_player = user
 	START_PROCESSING(SSinstruments, src)
 	if(id)
-		sync_play()
+		sync_play(user)
 
 /**
  * Attempts to find other instruments with the same ID and syncs them to our song.
@@ -514,7 +514,7 @@
 /datum/song/stationary/should_stop_playing(atom/player)
 	. = ..()
 	if(. == STOP_PLAYING || . == IGNORE_INSTRUMENT_CHECKS)
-		return TRUE
+		return
 	var/obj/structure/musician/M = parent
 	return M.can_play(player) ? NONE : STOP_PLAYING
 
