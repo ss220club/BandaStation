@@ -115,7 +115,7 @@
 	make_climbable()
 	AddElement(/datum/element/give_turf_traits, turf_traits)
 	AddElement(/datum/element/footstep_override, priority = STEP_SOUND_TABLE_PRIORITY)
-	//resets vars from table being flipped
+	//resets vars from tableflipped
 	layer = TABLE_LAYER
 	smoothing_flags |= SMOOTH_BITMASK
 	pass_flags_self |= PASSTABLE
@@ -288,13 +288,13 @@
 	var/interaction_key = "table_flip_[REF(src)]"
 	if(!is_flipped)
 		if(!LAZYACCESS(user.do_afters, interaction_key)) // To avoid balloon alert spam
-			user.balloon_alert_to_viewers("Переворачивание стола...")
+			user.balloon_alert_to_viewers("переворачиваем стол...")
 		if(do_after(user, max_integrity * 0.25, src, interaction_key = interaction_key))
 			flip_table(get_dir(user, src))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	if(!LAZYACCESS(user.do_afters, interaction_key)) // To avoid balloon alert spam
-		user.balloon_alert_to_viewers("Поднятие стола...")
+		user.balloon_alert_to_viewers("поднимаем стол...")
 	if(do_after(user, max_integrity * 0.25, src, interaction_key = interaction_key))
 		unflip_table()
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -324,7 +324,7 @@
 /obj/structure/table/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	if(!deconstruction_ready)
 		return NONE
-	to_chat(user, span_notice("Вы начинаете разбирать [src]..."))
+	to_chat(user, span_notice("Вы начинаете разбирать [src.declent_ru(ACCUSATIVE)]..."))
 	if(tool.use_tool(src, user, 2 SECONDS, volume=50))
 		deconstruct(TRUE)
 	return ITEM_INTERACT_SUCCESS
@@ -332,7 +332,7 @@
 /obj/structure/table/wrench_act_secondary(mob/living/user, obj/item/tool)
 	if(!deconstruction_ready)
 		return NONE
-	to_chat(user, span_notice("Вы начинаете деконструировать [src]..."))
+	to_chat(user, span_notice("Вы начинаете деконструировать [src.declent_ru(ACCUSATIVE)]..."))
 	if(tool.use_tool(src, user, 4 SECONDS, volume=50))
 		playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
 		frame = null
@@ -369,7 +369,7 @@
 	for(var/obj/item/thing in used_tray.contents)
 		AfterPutItemOnTable(thing, user)
 	used_tray.atom_storage.remove_all(drop_location())
-	user.visible_message(span_notice("[user] опустошает [used_tray] на [src]."))
+	user.visible_message(span_notice("[user] опустошает [used_tray.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/table/proc/deck_act(mob/living/user, obj/item/toy/cards/deck/dealer_deck, list/modifiers, flip)
@@ -448,7 +448,7 @@
 ///Table on wheels
 /obj/structure/table/rolling
 	name = "Rolling table"
-	desc = "Стол на колесиках марки NT \"Rolly poly\". Его можно перемещать."
+	desc = "Стол на колесиках марки NT \"Ролли полли\". Его можно перемещать."
 	anchored = FALSE
 	smoothing_flags = NONE
 	smoothing_groups = null
@@ -475,7 +475,7 @@
 		return
 
 	if(rable.loaded)
-		to_chat(user, span_warning("У вас уже пристыкован [rable.loaded]!"))
+		to_chat(user, span_warning("Вы уже пристыкован[genderize_ru(rable.loaded, "", "а", "о", "ы")] к [rable.loaded.declent_ru(DATIVE)]!"))
 		return ITEM_INTERACT_FAILURE
 
 	if(locate(/mob/living) in loc.get_all_contents())
@@ -484,7 +484,7 @@
 
 	rable.loaded = src
 	forceMove(rable)
-	user.visible_message(span_notice("[user] собирает [src.declent_ru(ACCUSATIVE)]."), span_notice("Вы собираете [src.declent_ru(ACCUSATIVE)]."))
+	user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] собирает [src.declent_ru(ACCUSATIVE)]."), span_notice("Вы собираете [src.declent_ru(ACCUSATIVE)]."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/table/rolling/AfterPutItemOnTable(obj/item/thing, mob/living/user)
@@ -572,7 +572,7 @@
 		table_shatter(M)
 
 /obj/structure/table/glass/proc/table_shatter(mob/living/victim)
-	visible_message(span_warning("[src] ломается!"),
+	visible_message(span_warning("[src.declent_ru(NOMINATIVE)] ломается!"),
 		span_danger("Вы слышите звук разбивающегося стекла."))
 
 	playsound(loc, SFX_SHATTER, 50, TRUE)
@@ -633,7 +633,7 @@
 	if(QDELETED(src) || prob(66))
 		return
 	visible_message(
-		span_warning("[src] разбивается на куски!"),
+		span_warning("[src.declent_ru(NOMINATIVE)] разбивается на куски!"),
 		blind_message = span_hear("Вы слышите громкий треск раскалывающегося дерева."),
 	)
 
@@ -954,14 +954,14 @@
 
 	if(being_buckled == buckler)
 		being_buckled.visible_message(
-			span_notice("[buckler] ложится на [src]."),
-			span_notice("Вы ложитесь на [src]."),
+			span_notice("[buckler.declent_ru(NOMINATIVE)] ложится на [src.declent_ru(ACCUSATIVE)]."),
+			span_notice("Вы ложитесь на [src.declent_ru(ACCUSATIVE)]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 	else
 		being_buckled.visible_message(
-			span_notice("[buckler] кладёт [being_buckled] на [src]."),
-			span_notice("[buckler] кладёт вас на [src]."),
+			span_notice("[buckler.declent_ru(NOMINATIVE)] кладёт [being_buckled.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]."),
+			span_notice("[buckler] кладёт вас на [src.declent_ru(ACCUSATIVE)]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 
@@ -971,14 +971,14 @@
 
 	if(being_unbuckled == unbuckler)
 		being_unbuckled.visible_message(
-			span_notice("[unbuckler] встаёт с [src]."),
-			span_notice("Вы встаёте с [src]."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] встаёт с [src.declent_ru(GENITIVE)]."),
+			span_notice("Вы встаёте с [src.declent_ru(GENITIVE)]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 	else
 		being_unbuckled.visible_message(
-			span_notice("[unbuckler] вытаскивает [being_unbuckled] из [src]."),
-			span_notice("[unbuckler] вытаскивает вас из [src]."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстёгивает [being_unbuckled.declent_ru(ACCUSATIVE)] с [src.declent_ru(GENITIVE)]."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстёгивает вас с [src.declent_ru(GENITIVE)]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 
@@ -1152,7 +1152,7 @@
 		return NONE
 
 	if (air_tank)
-		balloon_alert(user, "бак уже подключен!")
+		balloon_alert(user, "баллон уже подключён!")
 		return ITEM_INTERACT_BLOCKING
 
 	var/obj/item/tank/as_tank = tool
@@ -1164,7 +1164,7 @@
 		return ITEM_INTERACT_BLOCKING
 
 	air_tank = as_tank
-	balloon_alert(user, "бак прикреплен")
+	balloon_alert(user, "баллон прикреплён")
 	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
 	update_appearance()
 	return ITEM_INTERACT_SUCCESS
@@ -1189,12 +1189,12 @@
 /obj/structure/table/optable/wrench_act(mob/living/user, obj/item/tool)
 	if (!air_tank)
 		return NONE
-	balloon_alert(user, "отсоединяем бак...")
+	balloon_alert(user, "отсоединяем баллон...")
 	if (!tool.use_tool(src, user, 3 SECONDS))
 		return ITEM_INTERACT_BLOCKING
 	air_tank.forceMove(drop_location())
 	tool.play_tool_sound(src, 50)
-	balloon_alert(user, "бак отсоединён")
+	balloon_alert(user, "баллон отсоединён")
 	if (air_tank.IsReachableBy(user))
 		user.put_in_hands(air_tank)
 	if (patient?.external && patient.external == air_tank)
@@ -1214,11 +1214,11 @@
 /obj/structure/table/optable/examine(mob/user)
 	. = ..()
 	if (air_tank)
-		. += span_notice("К нему прикреплен [air_tank] с помощью пары [EXAMINE_HINT("болтов")].")
+		. += span_notice("К нему прикреплен[genderize_ru(air_tank, "", "а", "о", "ы")] [air_tank.declent_ru(NOMINATIVE)] с помощью пары [EXAMINE_HINT("болтов")].")
 		if (patient)
-			. += span_info("Вы можете подключить [patient] к  [air_tank.declent_ru(DATIVE)] перетащив [src.declent_ru(ACCUSATIVE)] на них.")
+			. += span_info("Вы можете подключить [air_tank.declent_ru(DATIVE)] [patient.declent_ru(ACCUSATIVE)] перетащив [src.declent_ru(ACCUSATIVE)] на [patient.ru_p_them()].")
 	else
-		. += span_notice("Под ним имеется прорезь для крепления воздушного бака.")
+		. += span_notice("Под ним имеется прорезь для крепления воздушного баллона.")
 	if (breath_mask)
 		. += span_notice("К нему прикреплена [breath_mask.declent_ru(NOMINATIVE)] сбоку, трубка закреплена одним [EXAMINE_HINT("винтом")].")
 		if (breath_mask.loc == src)
@@ -1231,7 +1231,7 @@
 		return FALSE
 
 	if (!breath_mask)
-		balloon_alert(user, "нет прикрепленной маски")
+		balloon_alert(user, "нет прикреплённой маски")
 		return TRUE
 
 	if (!user.put_in_hands(breath_mask))
@@ -1247,16 +1247,16 @@
 		return
 
 	if (!air_tank)
-		balloon_alert(user, "бак не прикреплен!")
+		balloon_alert(user, "баллон не приклреплён!")
 		return
 
 	var/internals = patient.can_breathe_internals()
 	if (!internals)
-		balloon_alert(user, "нет разъема для подключения пациента!")
+		balloon_alert(user, "нет маски для подключения!")
 		return
 
-	user.visible_message(span_notice("[user] начинает подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(ACCUSATIVE)] к [patient] [internals]."), span_notice("Вы начинаете подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(ACCUSATIVE)] к [patient] [internals]..."), ignored_mobs = patient)
-	to_chat(patient, span_userdanger("[user] начинает подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(ACCUSATIVE)] к вашим [internals]!"))
+	user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(ACCUSATIVE)] к [patient.ru_p_them()] [internals]."), span_notice("Вы начинаете подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(ACCUSATIVE)] к [patient.ru_p_them()] [internals]..."), ignored_mobs = patient)
+	to_chat(patient, span_userdanger("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(ACCUSATIVE)] к вашим [internals]!"))
 
 	if (!do_after(user, 4 SECONDS, patient))
 		return
@@ -1265,8 +1265,8 @@
 		return
 
 	patient.open_internals(air_tank, is_external = TRUE)
-	to_chat(user, span_notice("Вы подключаете [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(GENITIVE)] к [patient]."))
-	to_chat(patient, span_userdanger("[user] подключает [air_tank] от [src.declent_ru(GENITIVE)] к вашим [internals]!"))
+	to_chat(user, span_notice("Вы подключаете [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(GENITIVE)] к [patient.ru_p_them()] [internals]."))
+	to_chat(patient, span_userdanger("[user.declent_ru(NOMINATIVE)] подключает [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)] к вашим [internals]!"))
 
 /obj/structure/table/optable/proc/on_mask_moved(datum/source, atom/oldloc, direction)
 	SIGNAL_HANDLER
@@ -1463,7 +1463,7 @@
 		if(!user.temporarilyRemoveItemFromInventory(src))
 			return
 		var/obj/structure/rack/R = new /obj/structure/rack(get_turf(src))
-		user.visible_message(span_notice("[user] собирает [R.declent_ru(ACCUSATIVE)]."), span_notice("Вы собираете [R.declent_ru(ACCUSATIVE)]."))
+		user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] собирает [R.declent_ru(ACCUSATIVE)]."), span_notice("Вы собираете [R.declent_ru(ACCUSATIVE)]."))
 		R.add_fingerprint(user)
 		qdel(src)
 	building = FALSE
