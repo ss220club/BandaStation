@@ -189,13 +189,13 @@
 	if(istype(held_item, /obj/item/toy/cards/deck))
 		var/obj/item/toy/cards/deck/dealer_deck = held_item
 		if(HAS_TRAIT(dealer_deck, TRAIT_WIELDED))
-			context[SCREENTIP_CONTEXT_LMB] = "Раздать карты лицом вниз"
-			context[SCREENTIP_CONTEXT_RMB] = "Раздать карты лицом вверх"
+			context[SCREENTIP_CONTEXT_LMB] = "Deal card"
+			context[SCREENTIP_CONTEXT_RMB] = "Deal card faceup"
 			. = CONTEXTUAL_SCREENTIP_SET
 
 	if(deconstruction_ready)
 		if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-			context[SCREENTIP_CONTEXT_RMB] = "Разобрать"
+			context[SCREENTIP_CONTEXT_RMB] = "Disassemble"
 			. = CONTEXTUAL_SCREENTIP_SET
 		if(held_item.tool_behaviour == TOOL_WRENCH)
 			context[SCREENTIP_CONTEXT_RMB] = "Deconstruct"
@@ -210,7 +210,7 @@
 	. += deconstruction_hints(user)
 
 /obj/structure/table/proc/deconstruction_hints(mob/user)
-	return span_notice("Верхняя часть <b>привинчена</b> но также видны основные <b>болты</b>.")
+	return span_notice("Верхняя часть <b>привинчена</b>, но также видны основные <b>болты</b>.")
 
 /obj/structure/table/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
@@ -475,16 +475,16 @@
 		return
 
 	if(rable.loaded)
-		to_chat(user, span_warning("У вас уже пристыкован [rable.loaded.declent_ru(NOMINATIVE)]!"))
+		to_chat(user, span_warning("У вас уже пристыкован [rable.loaded]!"))
 		return ITEM_INTERACT_FAILURE
 
 	if(locate(/mob/living) in loc.get_all_contents())
-		to_chat(user, span_warning("Нельзя собирать [src] с грузом сверху!"))
+		to_chat(user, span_warning("Нельзя собирать [src.declent_ru(ACCUSATIVE)] с грузом сверху!"))
 		return ITEM_INTERACT_FAILURE
 
 	rable.loaded = src
 	forceMove(rable)
-	user.visible_message(span_notice("[user] собирает \the [src]."), span_notice("Вы собираете \the [src]."))
+	user.visible_message(span_notice("[user] собирает [src.declent_ru(ACCUSATIVE)]."), span_notice("Вы собираете [src.declent_ru(ACCUSATIVE)]."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/table/rolling/AfterPutItemOnTable(obj/item/thing, mob/living/user)
@@ -1178,7 +1178,7 @@
 
 	breath_mask.forceMove(drop_location())
 	tool.play_tool_sound(src, 50)
-	balloon_alert(user, "mask detached")
+	balloon_alert(user, "маска снята")
 	UnregisterSignal(breath_mask, list(COMSIG_MOVABLE_MOVED, COMSIG_ITEM_DROPPED))
 	if (breath_mask.IsReachableBy(user))
 		user.put_in_hands(breath_mask)
@@ -1220,9 +1220,9 @@
 	else
 		. += span_notice("Под ним имеется прорезь для крепления воздушного бака.")
 	if (breath_mask)
-		. += span_notice("К нему прикреплена [breath_mask] сбоку, трубка закреплена одним [EXAMINE_HINT("винтом")].")
+		. += span_notice("К нему прикреплена [breath_mask.declent_ru(NOMINATIVE)] сбоку, трубка закреплена одним [EXAMINE_HINT("винтом")].")
 		if (breath_mask.loc == src)
-			. += span_info("Вы можете снять маску, щелкнув правой кнопкой мыши по [src] пустой рукой.")
+			. += span_info("Вы можете снять маску, щелкнув правой кнопкой мыши по [src.declent_ru(DATIVE)] пустой рукой.")
 	else
 		. += span_notice("На боку есть отверстие для трубки дыхательной маски.")
 
@@ -1238,7 +1238,7 @@
 		balloon_alert(user, "руки заняты!")
 		return TRUE
 
-	to_chat(user, span_notice("Вы вытаскиваете [breath_mask] из [src]."))
+	to_chat(user, span_notice("Вы вытаскиваете [breath_mask.declent_ru(ACCUSATIVE)] из [src.declent_ru(ACCUSATIVE)]."))
 	update_appearance()
 	return TRUE
 
@@ -1255,8 +1255,8 @@
 		balloon_alert(user, "нет разъема для подключения пациента!")
 		return
 
-	user.visible_message(span_notice("[user] начинает подключать [src] [air_tank] к [patient] [internals]."), span_notice("Вы начинаете подключать [src] [air_tank] к [patient] [internals]..."), ignored_mobs = patient)
-	to_chat(patient, span_userdanger("[user] начинает подключать [air_tank] от [src] к вашим [internals]!"))
+	user.visible_message(span_notice("[user] начинает подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(ACCUSATIVE)] к [patient] [internals]."), span_notice("Вы начинаете подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(ACCUSATIVE)] к [patient] [internals]..."), ignored_mobs = patient)
+	to_chat(patient, span_userdanger("[user] начинает подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(ACCUSATIVE)] к вашим [internals]!"))
 
 	if (!do_after(user, 4 SECONDS, patient))
 		return
@@ -1265,8 +1265,8 @@
 		return
 
 	patient.open_internals(air_tank, is_external = TRUE)
-	to_chat(user, span_notice("Вы подключаете [air_tank] от [src] [patient]."))
-	to_chat(patient, span_userdanger("[user] подключает [air_tank] от [src] к вашим [internals]!"))
+	to_chat(user, span_notice("Вы подключаете [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(GENITIVE)] к [patient]."))
+	to_chat(patient, span_userdanger("[user] подключает [air_tank] от [src.declent_ru(GENITIVE)] к вашим [internals]!"))
 
 /obj/structure/table/optable/proc/on_mask_moved(datum/source, atom/oldloc, direction)
 	SIGNAL_HANDLER
@@ -1290,9 +1290,9 @@
 
 	if(isliving(loc))
 		var/mob/living/user = loc
-		to_chat(user, span_warning("Трубка [breath_mask] слишком растягивается, и она выскальзывает у вас из рук!"))
+		to_chat(user, span_warning("Трубка [breath_mask.declent_ru(ACCUSATIVE)] слишком растягивается, и она выскальзывает у вас из рук!"))
 	else
-		visible_message(span_notice("[breath_mask] возвращается в [src]."))
+		visible_message(span_notice("[breath_mask.declent_ru(NOMINATIVE)] возвращается в [src.declent_ru(ACCUSATIVE)]."))
 	snap_mask_back()
 
 /obj/structure/table/optable/proc/snap_mask_back()
@@ -1391,7 +1391,7 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	user.do_attack_animation(src, ATTACK_EFFECT_KICK)
-	user.visible_message(span_danger("[user] пинает [src]."), null, null, COMBAT_MESSAGE_RANGE)
+	user.visible_message(span_danger("[user] пинает [src.declent_ru(ACCUSATIVE)]."), null, null, COMBAT_MESSAGE_RANGE)
 	take_damage(rand(4,8), BRUTE, MELEE, 1)
 
 /obj/structure/rack/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
@@ -1420,7 +1420,7 @@
 
 /obj/item/rack_parts
 	name = "rack parts"
-	desc = "Части стойки."
+	desc = "Части подставки."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "rack_parts"
 	inhand_icon_state = "rack_parts"
@@ -1437,7 +1437,7 @@
 		return NONE
 
 	if(held_item == src)
-		context[SCREENTIP_CONTEXT_LMB] = "Собрать стойку"
+		context[SCREENTIP_CONTEXT_LMB] = "Construct Rack"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item.tool_behaviour == TOOL_WRENCH)
@@ -1458,12 +1458,12 @@
 	if(building)
 		return
 	building = TRUE
-	to_chat(user, span_notice("Вы начинаете собирать стойку..."))
+	to_chat(user, span_notice("Вы начинаете собирать подставку..."))
 	if(do_after(user, 5 SECONDS, target = user, progress=TRUE))
 		if(!user.temporarilyRemoveItemFromInventory(src))
 			return
 		var/obj/structure/rack/R = new /obj/structure/rack(get_turf(src))
-		user.visible_message(span_notice("[user] собирает [R]."), span_notice("Вы собираете [R]."))
+		user.visible_message(span_notice("[user] собирает [R.declent_ru(ACCUSATIVE)]."), span_notice("Вы собираете [R.declent_ru(ACCUSATIVE)]."))
 		R.add_fingerprint(user)
 		qdel(src)
 	building = FALSE
