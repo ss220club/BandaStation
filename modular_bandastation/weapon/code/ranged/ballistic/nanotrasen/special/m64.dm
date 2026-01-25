@@ -39,7 +39,7 @@
 	. = ..()
 
 /obj/item/gun/ballistic/shotgun/riot/m64/black
-	desc = parent_type::desc + "<br>Окрашенна в тактический черный цвет."
+	desc = parent_type::desc + "<br>Окрашен в тактический черный цвет."
 	base_icon_state = "m64_black"
 	icon_state = "m64_black"
 	worn_icon_state = "m64_black"

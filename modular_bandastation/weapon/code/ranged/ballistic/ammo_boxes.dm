@@ -425,8 +425,8 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "585box"
 	w_class = WEIGHT_CLASS_SMALL
-	caliber = CALIBER_45
-	ammo_type = /obj/item/ammo_casing/c45
+	caliber = CALIBER_585SOL
+	ammo_type = /obj/item/ammo_casing/c585sol
 	max_ammo = 30
 
 /obj/item/ammo_box/c585sol/rubber

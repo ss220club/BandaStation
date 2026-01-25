@@ -1,7 +1,7 @@
 /obj/item/gun/ballistic/automatic/bogseo
 	name = "Bogseo Submachine Gun"
 	desc = "Оружие, которое едва ли можно назвать 'пистолетом'- пулеметом, стреляющее чудовищными патронами калибра .585. \
-        Оно обладает достаточной отдачей, чтобы сильно ушибить плечо, если использовать его без защиты."
+		Оно обладает достаточной отдачей, чтобы сильно ушибить плечо, если использовать его без защиты."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	icon_state = "bogseo"
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'

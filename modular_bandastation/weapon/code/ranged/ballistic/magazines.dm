@@ -1439,7 +1439,7 @@
 // MARK: Taipan
 /obj/item/ammo_box/magazine/taipan
 	name = "antimaterial sniper rifle magazine (20x138mm)"
-	desc = "A 20x138mm magazine suitable ammo for anti antimaterial sniper rifles."
+	desc = "Магазин калибра 20x138мм, подходящий для  антиматериальным снайперским винтовкам."
 	icon_state = ".50mag"
 	base_icon_state = ".50mag"
 	ammo_type = /obj/item/ammo_casing/mm20x138
