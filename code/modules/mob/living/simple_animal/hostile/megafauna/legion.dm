@@ -175,6 +175,11 @@
 		loot = list(/obj/item/storm_staff)
 		var/list/achievements = list(/datum/award/achievement/boss/boss_killer, /datum/award/score/boss_score, /datum/award/score/legion_score, /datum/award/achievement/boss/legion_kill)
 		AddElement(/datum/element/kill_achievement, string_list(achievements), crusher_achievement_type, /datum/memory/megafauna_slayer)
+		// BANDASTATION EDIT START
+		death_sound = 'modular_bandastation/mobs/sound/legion_death.ogg'
+		for(var/area/lavaland/L in world)
+			SEND_SOUND(L, sound('modular_bandastation/mobs/sound/legion_death_far.ogg'))
+		// BANDASTATION EDIT END
 	else if(prob(20)) //20% chance for sick lootz.
 		loot = list(/obj/structure/closet/crate/necropolis/tendril)
 		if(!true_spawn)
