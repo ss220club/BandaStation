@@ -13,6 +13,7 @@
 	weapon_weight = WEAPON_HEAVY
 	slot_flags = ITEM_SLOT_BELT
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c585sol
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c585sol/extended
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/smg_heavy_2.ogg'
 	can_suppress = TRUE
 	suppressor_x_offset = 9
@@ -20,7 +21,7 @@
 	fire_delay = 0.15 SECONDS
 	actions_types = list()
 	spread = 12.5
-	recoil = 2
+	recoil = 1.5
 
 /obj/item/gun/ballistic/automatic/bogseo/Initialize(mapload)
 	. = ..()
