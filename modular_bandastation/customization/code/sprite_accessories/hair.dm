@@ -524,7 +524,7 @@
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "braid_tail"
 	hair_appendages_inner = list("braid_tail_front" = HAIR_APPENDAGE_FRONT, "braid_tail_hanging_front" = HAIR_APPENDAGE_HANGING_FRONT)
-	hair_appendages_outer = null
+	hair_appendages_outer = list()
 
 /datum/sprite_accessory/hair/long_over_eye
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
@@ -536,7 +536,6 @@
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "long"
 	hair_appendages_inner = list("long_rear" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = null
 
 /datum/sprite_accessory/hair/bob2
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
@@ -546,7 +545,7 @@
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "ponytail_side_fourth"
 	hair_appendages_inner = list("ponytail_side_fourth_front" = HAIR_APPENDAGE_FRONT, "ponytail_side_fourth_hanging_front" = HAIR_APPENDAGE_HANGING_FRONT)
-	hair_appendages_outer = null
+	hair_appendages_outer = list()
 
 /datum/sprite_accessory/hair/over_eye
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
@@ -627,7 +626,6 @@
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "long_second"
 	hair_appendages_inner = list("long_second_rear" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = null
 
 /datum/sprite_accessory/hair/mulder
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
