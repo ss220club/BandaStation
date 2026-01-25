@@ -177,7 +177,7 @@
 		AddElement(/datum/element/kill_achievement, string_list(achievements), crusher_achievement_type, /datum/memory/megafauna_slayer)
 		// BANDASTATION EDIT START
 		death_sound = 'modular_bandastation/mobs/sound/legion_death.ogg'
-		for(var/area/lavaland/L in world)
+		for(var/area/lavaland/L in typesof(/area/lavaland))
 			SEND_SOUND(L, sound('modular_bandastation/mobs/sound/legion_death_far.ogg'))
 		// BANDASTATION EDIT END
 	else if(prob(20)) //20% chance for sick lootz.
