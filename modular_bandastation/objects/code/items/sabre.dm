@@ -31,6 +31,10 @@
 	new_inhand_icon_state = "saber_katana"
 
 /obj/item/melee/sabre/setup_reskins()
-	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/cap_sabre)
+	AddComponent(/datum/component/reskinable_item/cap_sabre, /datum/atom_skin/cap_sabre)
 
-/datum/component/reskinable_item/cap_sabre/reskin_obj(mob/user)
+/datum/component/reskinable_item/cap_sabre/on_click_alt_reskin(datum/source, mob/user)
+	return
+
+/datum/component/reskinable_item/cap_sabre/add_context(atom/source, list/context, obj/item/held_item, mob/user)
+	return
