@@ -11,7 +11,7 @@
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c585sol
 	suppressor_x_offset = 8
 	suppressor_y_offset = 0
-	recoil = 2
+	recoil = 1.2
 
 /obj/item/gun/ballistic/automatic/pistol/skild/army/no_mag
 	spawnwithmagazine = FALSE

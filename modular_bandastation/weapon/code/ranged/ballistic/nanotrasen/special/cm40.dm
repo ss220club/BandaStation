@@ -22,7 +22,7 @@
 	fire_delay = 0.1 SECONDS
 	actions_types = list()
 	spread = 10
-	recoil = 1
+	recoil = 0.7
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/cm40_cocked.ogg'
 	load_sound = 'modular_bandastation/weapon/sound/ranged/cm40_reload.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/cm40_reload.ogg'
