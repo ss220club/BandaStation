@@ -47,13 +47,13 @@
 // Animals additions
 
 /* Megafauna */
-/mob/living/basic/mining/legion
-	death_sound = 'modular_bandastation/mobs/sound/legion_death.ogg'
+// /mob/living/basic/mining/legion
+// 	death_sound = 'modular_bandastation/mobs/sound/legion_death.ogg'
 
-/mob/living/basic/mining/legion/death(gibbed)
-	for(var/area/lavaland/L in world)
-		SEND_SOUND(L, sound('modular_bandastation/mobs/sound/legion_death_far.ogg'))
-	. = ..()
+// /mob/living/basic/mining/legion/death(gibbed)
+// 	for(var/area/lavaland/L in world)
+// 		SEND_SOUND(L, sound('modular_bandastation/mobs/sound/legion_death_far.ogg'))
+// 	. = ..()
 
 /* Nar Sie */
 /obj/narsie/Initialize(mapload)
