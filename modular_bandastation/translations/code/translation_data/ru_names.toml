@@ -29896,3 +29896,12 @@ instrumental = "баллоном воздуха"
 prepositional = "баллоне воздуха"
 gender = "male"
 
+["surgery mask"]
+nominative = "хирургическая маска"
+genitive = "хирургической маски"
+dative = "хирургической маске"
+accusative = "хирургическую маску"
+instrumental = "хирургической маской"
+prepositional = "хирургической маске"
+gender = "female"
+
