@@ -17,6 +17,7 @@
 	desc = "Тяжелый дробовик двенадцатого калибра, вмещающий шесть патронов. Производится для различных военных подразделений ТСФ и используется ими."
 	sawn_desc = "Обрез тяжелого дробовика двенадцатого калибра, вмещающий шесть патронов. Главное не сломать себе руки."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	base_icon_state = "renoster"
 	icon_state = "renoster"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "renoster"
@@ -35,6 +36,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	projectile_damage_multiplier = 1.2
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/Initialize(mapload)
 	. = ..()
@@ -43,8 +45,12 @@
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/update_icon_state()
 	. = ..()
-	inhand_icon_state = "[icon_state][sawn_off ? "":"_sawoff"]"
-	worn_icon_state = "[icon_state][sawn_off ? "":"_sawoff"]"
+	if(sawn_off)
+		inhand_icon_state = "[base_icon_state]_sawoff"
+		worn_icon_state = "[base_icon_state]_sawoff"
+	else
+		inhand_icon_state = "[base_icon_state]"
+		worn_icon_state = "[base_icon_state]"
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/add_seclight_point()
 	AddComponent(
@@ -61,7 +67,7 @@
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/examine_more(mob/user)
 	. = ..()
-	. += "По своей сути Реностер был разработан как тяжелый полицейский дробовик. \
+	. += "По своей сути \"Реностэр\" был разработан как тяжелый полицейский дробовик. \
 		Следовательно, он обладает всеми качествами, необходимыми полицейским структурам. \
 		Большая вместимость патронов, прочная рама, достаточно большие \
 		возможности для модификации, чтобы удовлетворить даже самые обеспеченные \
@@ -77,11 +83,12 @@
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/black
 	name = "tactical Renoster shotgun"
+	base_icon_state = "renoster_black"
 	icon_state = "renoster_black"
 	worn_icon_state = "renoster_black"
 	inhand_icon_state = "renoster_black"
 	recoil = 1
-	projectile_damage_multiplier = 1.5
+	projectile_damage_multiplier = 1.3
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/black/examine_more(mob/user)
 	. = ..()
