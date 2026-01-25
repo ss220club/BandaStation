@@ -24341,6 +24341,25 @@ instrumental = "пенным скипетром"
 prepositional = "пенном скипетре"
 gender = "male"
 
+# MARK: Walker
+["cosmic skull"]
+nominative = "космический череп"
+genitive = "космического черепа"
+dative = "космическому черепу"
+accusative = "космический череп"
+instrumental = "космическим черепом"
+prepositional = "космическом черепе"
+gender = "male"
+
+["void eater"]
+nominative = "пожиратель пустоты"
+genitive = "пожирателя пустоты"
+dative = "пожирателю пустоты"
+accusative = "пожиратель пустоты"
+instrumental = "пожирателем пустоты"
+prepositional = "пожирателе пустоты"
+gender = "male"
+
 # MARK: Colonial Marines
 ["flare pouch"]
 nominative = "подсумок осветительных огней"
