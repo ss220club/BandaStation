@@ -6,7 +6,7 @@
 /datum/religion_rites/deaconize
 	name = "Посвящение в диакона"
 	desc = "Обращает кого-то в вашу религию. Необходимо добровольное согласие, так как при при первом использовании претенденту сначала предложат вступить.\
-	Он обретёт те же святые силы, что и вы. Вы можете посвятить только одного человека, так что убедись, что он достоен!"
+	Он обретёт те же святые силы, что и вы. Вы можете посвятить только одного человека, так что убедитесь, что он достоен!"
 	ritual_length = 30 SECONDS
 	ritual_invocations = list(
 		"Хороший, благородный человек был приведен сюда верой ...",
@@ -15,7 +15,7 @@
 		"И душой, готовой следовать ...",
 		"Да предложим мы свою руку взамен ..."
 	)
-	invoke_msg = "And use them to the best of our abilities."
+	invoke_msg = "И использовать их наилучшим образом."
 	rite_flags = RITE_ALLOW_MULTIPLE_PERFORMS | RITE_ONE_TIME_USE
 
 	///The person currently being deaconized.
@@ -34,7 +34,7 @@
 		return FALSE
 	var/mob/living/carbon/human/possible_deacon = locate() in movable_reltool.buckled_mobs
 	if(!possible_deacon)
-		to_chat(user, span_warning("Ничто не пристегнуто к [movable_reltool.declent_ru(NOMINATIVE)]!"))
+		to_chat(user, span_warning("Ничто не пристегнуто к [movable_reltool.declent_ru(DATIVE)]!"))
 		return FALSE
 	if(!is_valid_for_deacon(possible_deacon, user))
 		return FALSE
@@ -48,13 +48,13 @@
 /datum/religion_rites/deaconize/invoke_effect(mob/living/carbon/human/user, atom/movable/religious_tool)
 	. = ..()
 	if(!(potential_deacon in religious_tool.buckled_mobs)) //checks one last time if the right corpse is still buckled
-		to_chat(user, span_warning("[potential_deacon] больше не находится на алтаре!"))
+		to_chat(user, span_warning("[potential_deacon.declent_ru(NOMINATIVE)] больше не находится на алтаре!"))
 		return FALSE
 	if(potential_deacon.stat != CONSCIOUS)
 		to_chat(user, span_warning("[potential_deacon.declent_ru(NOMINATIVE)] должен находиться в сознании, чтобы сработал ритуал!"))
 		return FALSE
 	if(!potential_deacon.mind)
-		to_chat(user, span_warning("Разум [potential_deacon.declent_ru(ACCUSATIVE)] находится в другом месте!"))
+		to_chat(user, span_warning("Разум [potential_deacon.declent_ru(GENITIVE)] находится в другом месте!"))
 		return FALSE
 	if(IS_CULTIST(potential_deacon))//what the fuck?!
 		to_chat(user, span_warning("[GLOB.deity] увидел истинное, тёмное зло в сердце [potential_deacon.declent_ru(GENITIVE)], потому [potential_deacon.ru_p_they()] был поражен!"))
@@ -73,10 +73,10 @@
 ///Helper if the passed possible_deacon is valid to become a deacon or not.
 /datum/religion_rites/deaconize/proc/is_valid_for_deacon(mob/living/carbon/human/possible_deacon, mob/living/user)
 	if(possible_deacon.stat != CONSCIOUS)
-		to_chat(user, span_warning("[possible_deacon] должен быть жив и в сознании, чтобы вступить!"))
+		to_chat(user, span_warning("[possible_deacon.declent_ru(NOMINATIVE)] должен быть жив и в сознании, чтобы вступить!"))
 		return FALSE
 	if(possible_deacon.mind && possible_deacon.mind.holy_role)
-		to_chat(user, span_warning("[possible_deacon] уже является членом этой религии!"))
+		to_chat(user, span_warning("[possible_deacon.declent_ru(NOMINATIVE)] уже является членом этой религии!"))
 		return FALSE
 	return TRUE
 
@@ -85,7 +85,7 @@
  * If they accept, the deaconize rite can now recruit them instead of just offering more invites.
  */
 /datum/religion_rites/deaconize/proc/invite_deacon(mob/living/carbon/human/invited)
-	var/ask = tgui_alert(invited, "Принять [GLOB.deity]? Ожидается, что вы будете следовать указам священника.", "Приглашение", list("Да", "Нет"), 60 SECONDS)
+	var/ask = tgui_alert(invited, "Присоединиться к [GLOB.deity]? Ожидается, что вы будете следовать указам священника.", "Приглашение", list("Да", "Нет"), 60 SECONDS)
 	if(ask != "Да")
 		return
 	potential_deacon = invited
