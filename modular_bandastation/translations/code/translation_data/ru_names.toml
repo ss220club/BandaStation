@@ -29849,3 +29849,13 @@ accusative = "детали стойки"
 instrumental = "деталями стойки"
 prepositional = "деталях стойки"
 gender = "plural"
+
+["air tank"]
+nominative = "баллон воздуха"
+genitive = "баллона воздуха"
+dative = "баллону воздуха"
+accusative = "баллон воздуха"
+instrumental = "баллоном воздуха"
+prepositional = "баллоне воздуха"
+gender = "male"
+
