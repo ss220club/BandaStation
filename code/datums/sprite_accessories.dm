@@ -274,8 +274,8 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/braid
 	name = "Braid (Floorlength)"
 	icon_state = "hair_braid"
-	hair_appendages_inner = list("hair_braid_a1" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = list("hair_braid_a1o" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_inner = list("hair_braid_a1" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_outer = list("hair_braid_a1o" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/braided
 	name = "Braided"
@@ -284,14 +284,14 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/front_braid
 	name = "Braided Front"
 	icon_state = "hair_braidfront"
-	hair_appendages_inner = list("hair_braidfront_a1" = HAIR_APPENDAGE_HANGING_FRONT)
-	hair_appendages_outer = list("hair_braidfront_a1o" = HAIR_APPENDAGE_HANGING_FRONT)
+	//hair_appendages_inner = list("hair_braidfront_a1" = HAIR_APPENDAGE_HANGING_FRONT)
+	//hair_appendages_outer = list("hair_braidfront_a1o" = HAIR_APPENDAGE_HANGING_FRONT)
 
 /datum/sprite_accessory/hair/not_floorlength_braid
 	name = "Braid (High)"
 	icon_state = "hair_braid2"
-	hair_appendages_inner = list("hair_braid2_a1" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = list("hair_braid2_a1o" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_inner = list("hair_braid2_a1" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_outer = list("hair_braid2_a1o" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/lowbraid
 	name = "Braid (Low)"
@@ -300,14 +300,14 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/shortbraid
 	name = "Braid (Short)"
 	icon_state = "hair_shortbraid"
-	hair_appendages_inner = list("hair_shortbraid_a1" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = list("hair_shortbraid_a1o" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_inner = list("hair_shortbraid_a1" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_outer = list("hair_shortbraid_a1o" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/braidtail
 	name = "Braided Tail"
 	icon_state = "hair_braidtail"
-	hair_appendages_inner = list("hair_braidtail_a1" = HAIR_APPENDAGE_HANGING_FRONT)
-	hair_appendages_outer = list("hair_braidtail_a1o" = HAIR_APPENDAGE_HANGING_FRONT)
+	//hair_appendages_inner = list("hair_braidtail_a1" = HAIR_APPENDAGE_HANGING_FRONT)
+	//hair_appendages_outer = list("hair_braidtail_a1o" = HAIR_APPENDAGE_HANGING_FRONT)
 
 /datum/sprite_accessory/hair/bun
 	name = "Bun Head"
@@ -316,8 +316,8 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/bun2
 	name = "Bun Head 2"
 	icon_state = "hair_bunhead2"
-	hair_appendages_inner = list("hair_bunhead2_a1" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = list("hair_bunhead2_a1o" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_inner = list("hair_bunhead2_a1" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_outer = list("hair_bunhead2_a1o" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/bun3
 	name = "Bun Head 3"
@@ -330,8 +330,8 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/manbun
 	name = "Bun (Manbun)"
 	icon_state = "hair_manbun"
-	hair_appendages_inner = list("hair_manbun_a1" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = list("hair_manbun_a1o" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_inner = list("hair_manbun_a1" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_outer = list("hair_manbun_a1o" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/tightbun
 	name = "Bun (Tight)"
@@ -396,8 +396,8 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/cornrowdualtail
 	name = "Cornrow Tail"
 	icon_state = "hair_cornrowtail"
-	hair_appendages_inner = list("hair_cornrowtail_a1" = HAIR_APPENDAGE_HANGING_FRONT)
-	hair_appendages_outer = list("hair_cornrowtail_a1o" = HAIR_APPENDAGE_HANGING_FRONT)
+	//hair_appendages_inner = list("hair_cornrowtail_a1" = HAIR_APPENDAGE_HANGING_FRONT)
+	//hair_appendages_outer = list("hair_cornrowtail_a1o" = HAIR_APPENDAGE_HANGING_FRONT)
 
 /datum/sprite_accessory/hair/crew
 	name = "Crewcut"
@@ -422,8 +422,8 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/doublebun
 	name = "Double Bun"
 	icon_state = "hair_doublebun"
-	hair_appendages_inner = list("hair_doublebun_a1" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = list("hair_doublebun_a1o" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_inner = list("hair_doublebun_a1" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_outer = list("hair_doublebun_a1o" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/dreadlocks
 	name = "Dreadlocks"
@@ -562,12 +562,12 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/long
 	name = "Long Hair 1"
 	icon_state = "hair_long"
-	hair_appendages_inner = list("hair_long_a1" = HAIR_APPENDAGE_HANGING_REAR)
+	//hair_appendages_inner = list("hair_long_a1" = HAIR_APPENDAGE_HANGING_REAR)
 
 /datum/sprite_accessory/hair/long2
 	name = "Long Hair 2"
 	icon_state = "hair_long2"
-	hair_appendages_inner = list("hair_long2_a1" = HAIR_APPENDAGE_HANGING_REAR)
+	//hair_appendages_inner = list("hair_long2_a1" = HAIR_APPENDAGE_HANGING_REAR)
 
 /datum/sprite_accessory/hair/long3
 	name = "Long Hair 3"
@@ -737,8 +737,8 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/highponytail
 	name = "Ponytail (High)"
 	icon_state = "hair_highponytail"
-	hair_appendages_inner = list("hair_highponytail_a1" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = list("hair_highponytail_a1o" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_inner = list("hair_highponytail_a1" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_outer = list("hair_highponytail_a1o" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/stail
 	name = "Ponytail (Short)"
@@ -749,8 +749,8 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/longponytail
 	name = "Ponytail (Long)"
 	icon_state = "hair_longstraightponytail"
-	hair_appendages_inner = list("hair_longstraightponytail_a1" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = list("hair_longstraightponytail_a1o" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_inner = list("hair_longstraightponytail_a1" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_outer = list("hair_longstraightponytail_a1o" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/countryponytail
 	name = "Ponytail (Country)"
@@ -779,13 +779,13 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/sidetail4
 	name = "Ponytail (Side) 4"
 	icon_state = "hair_sidetail4"
-	hair_appendages_inner = list("hair_sidetail4_a1" = HAIR_APPENDAGE_HANGING_FRONT)
-	hair_appendages_outer = list("hair_sidetail4_a1o" = HAIR_APPENDAGE_HANGING_FRONT)
+	//hair_appendages_inner = list("hair_sidetail4_a1" = HAIR_APPENDAGE_HANGING_FRONT)
+	//hair_appendages_outer = list("hair_sidetail4_a1o" = HAIR_APPENDAGE_HANGING_FRONT)
 
 /datum/sprite_accessory/hair/spikyponytail
 	name = "Ponytail (Spiky)"
 	icon_state = "hair_spikyponytail"
-	hair_appendages_inner = list("hair_spikyponytail_a1" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_inner = list("hair_spikyponytail_a1" = HAIR_APPENDAGE_REAR)
 	hair_appendages_outer = list("hair_spikyponytail_a1o" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/poofy
@@ -970,8 +970,8 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/hair/wisp
 	name = "Wisp"
 	icon_state = "hair_wisp"
-	hair_appendages_inner = list("hair_wisp_a1" = HAIR_APPENDAGE_REAR)
-	hair_appendages_outer = list("hair_wisp_a1o" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_inner = list("hair_wisp_a1" = HAIR_APPENDAGE_REAR)
+	//hair_appendages_outer = list("hair_wisp_a1o" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/ziegler
 	name = "Ziegler"
