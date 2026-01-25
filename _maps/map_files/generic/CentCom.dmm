@@ -4881,6 +4881,9 @@
 /obj/effect/turf_decal/line/dark_blue/line{
 	dir = 4
 	},
+/obj/effect/turf_decal/line/dark_blue{
+	dir = 8
+	},
 /turf/open/floor/iron/dark/smooth_edge{
 	dir = 4
 	},
@@ -5981,10 +5984,10 @@
 /area/centcom/central_command_areas/armory)
 "aMx" = (
 /obj/effect/turf_decal/line/dark_blue{
-	dir = 8
-	},
-/obj/effect/turf_decal/line/dark_blue{
 	dir = 4
+	},
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 8
 	},
 /turf/open/floor/iron/dark/smooth_edge{
 	dir = 4
@@ -7558,6 +7561,13 @@
 "aXH" = (
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
+"aXI" = (
+/obj/machinery/door/airlock/public{
+	id_tag = "Room3";
+	name = "Room 3"
+	},
+/turf/open/floor/wood/tile/cherry,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "aXM" = (
 /obj/effect/spawner/random/vending/colavend,
 /obj/effect/turf_decal/tile/dark_blue/full,
@@ -7953,16 +7963,6 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
-"bfq" = (
-/obj/item/kirbyplants/random,
-/obj/effect/turf_decal/trimline/yellow/filled/shrink_ccw,
-/obj/effect/turf_decal/trimline/yellow/filled/shrink_cw{
-	dir = 1
-	},
-/obj/structure/sign/poster/official/moth_delam/directional/west,
-/obj/machinery/light/directional/west,
-/turf/open/floor/iron,
-/area/centcom/central_command_areas/planetary_port)
 "bge" = (
 /turf/open/floor/light/colour_cycle/dancefloor_b,
 /area/centcom/central_command_areas/planetary_port/club)
@@ -7976,6 +7976,19 @@
 	},
 /turf/open/floor/bluespace,
 /area/centcom/central_command_areas/planetary_port/club)
+"bEE" = (
+/obj/structure/dresser,
+/turf/open/floor/carpet/royalblue,
+/area/centcom/central_command_areas/planetary_port/hotel)
+"bQd" = (
+/obj/item/kirbyplants/random,
+/obj/effect/turf_decal/trimline/yellow/filled/shrink_cw,
+/obj/effect/turf_decal/trimline/yellow/filled/shrink_ccw{
+	dir = 1
+	},
+/obj/machinery/light/directional/east,
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/planetary_port)
 "bQl" = (
 /obj/structure/window/reinforced/spawner/directional/west,
 /obj/machinery/digital_clock/directional/north,
@@ -8072,8 +8085,9 @@
 "dcq" = (
 /turf/open/floor/carpet/lone,
 /area/centcom/central_command_areas/planetary_port/club)
-"dgT" = (
-/turf/open/floor/carpet/royalblue,
+"dmc" = (
+/obj/effect/spawner/structure/window/reinforced/indestructible,
+/turf/open/floor/plating,
 /area/centcom/central_command_areas/planetary_port/hotel)
 "dmE" = (
 /obj/effect/turf_decal/siding/wood{
@@ -8081,9 +8095,13 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/centcom/central_command_areas/planetary_port/club)
-"dvv" = (
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
+"dwf" = (
+/obj/effect/turf_decal/trimline/yellow/filled/warning{
+	dir = 1
+	},
+/obj/machinery/light/directional/north,
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/planetary_port)
 "dwH" = (
 /obj/machinery/status_display/ai,
 /turf/closed/indestructible/riveted,
@@ -8157,16 +8175,6 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
-"dZM" = (
-/obj/item/kirbyplants/random,
-/obj/effect/turf_decal/trimline/yellow/filled/shrink_ccw,
-/obj/effect/turf_decal/trimline/yellow/filled/shrink_cw{
-	dir = 1
-	},
-/obj/structure/sign/poster/official/moth_epi/directional/west,
-/obj/machinery/light/directional/west,
-/turf/open/floor/iron,
-/area/centcom/central_command_areas/planetary_port)
 "ebp" = (
 /obj/structure/chair/comfy/corp{
 	dir = 1
@@ -8217,6 +8225,13 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
+"els" = (
+/obj/machinery/door/airlock/public{
+	id_tag = "Room1";
+	name = "Room 1"
+	},
+/turf/open/floor/wood/tile/cherry,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "enS" = (
 /obj/machinery/computer/camera_advanced{
 	dir = 4
@@ -8224,6 +8239,15 @@
 /obj/structure/light_fake/small/directional/west,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/cabin/soo)
+"eoZ" = (
+/obj/machinery/button/door/directional/east{
+	normaldoorcontrol = 1;
+	name = "Cabin Bolt Control";
+	id = "Room1";
+	specialfunctions = 4
+	},
+/turf/open/floor/wood/tile/cherry,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "exv" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -8239,11 +8263,6 @@
 	},
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/admin)
-"eLF" = (
-/obj/structure/table/wood/fancy/royalblack,
-/obj/effect/spawner/random/entertainment/plushie_delux,
-/turf/open/floor/carpet/royalblue,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "eNg" = (
 /obj/structure/window/reinforced/spawner/directional/east,
 /obj/structure/closet/crate/bin,
@@ -8301,6 +8320,13 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
+"fdp" = (
+/turf/closed/indestructible/fakedoor,
+/area/centcom/central_command_areas/planetary_port/hotel)
+"fmi" = (
+/obj/structure/sign/poster/official/random/directional/south,
+/turf/open/floor/carpet/royalblue,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "foE" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
@@ -8331,6 +8357,11 @@
 	},
 /turf/open/floor/bluespace,
 /area/centcom/central_command_areas/planetary_port/club)
+"fDL" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/effect/spawner/random/entertainment/plushie_delux,
+/turf/open/floor/carpet/royalblue,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "fHh" = (
 /obj/structure/table/glass,
 /obj/item/paper_bin{
@@ -8350,20 +8381,16 @@
 /obj/structure/light_fake/spot/directional/east,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
-"fLg" = (
-/obj/structure/table/wood/fancy/royalblack,
-/obj/item/flashlight/lamp/green{
-	pixel_x = 3;
-	pixel_y = 8
-	},
-/turf/open/floor/carpet/royalblue,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "fLE" = (
 /obj/item/banner/command,
 /obj/machinery/light/blacklight/directional/west,
 /obj/structure/sign/poster/official/random/directional/west,
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/planetary_port/club)
+"fLK" = (
+/obj/machinery/light/very_dim/directional/east,
+/turf/open/floor/wood/tile/cherry,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "fOm" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/kirbyplants/organic/plant10{
@@ -8389,6 +8416,16 @@
 /obj/structure/sign/poster/greenscreen/directional/north,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
+"fZQ" = (
+/obj/item/kirbyplants/random,
+/obj/effect/turf_decal/trimline/yellow/filled/shrink_ccw,
+/obj/effect/turf_decal/trimline/yellow/filled/shrink_cw{
+	dir = 1
+	},
+/obj/structure/sign/poster/official/moth_delam/directional/west,
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/planetary_port)
 "gfQ" = (
 /obj/effect/turf_decal/siding/dark_blue{
 	dir = 4
@@ -8434,12 +8471,6 @@
 /obj/effect/turf_decal/siding/wood/end,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
-"gCI" = (
-/obj/structure/bed/double,
-/obj/item/bedsheet/nanotrasen/double,
-/obj/machinery/light/directional/east,
-/turf/open/floor/carpet/royalblue,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "gLG" = (
 /obj/structure/window/reinforced/spawner/directional/east,
 /obj/structure/table/glass,
@@ -8485,10 +8516,6 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/centcom/central_command_areas/planetary_port/club)
-"gYb" = (
-/obj/machinery/light/directional/west,
-/turf/open/floor/iron,
-/area/centcom/central_command_areas/planetary_port)
 "htl" = (
 /obj/machinery/jukebox/disco/indestructible,
 /turf/open/floor/mineral/abductor,
@@ -8541,24 +8568,6 @@
 /obj/structure/mirror/directional/north,
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/cabin/soo)
-"ijx" = (
-/obj/machinery/button/door/directional/east{
-	normaldoorcontrol = 1;
-	name = "Cabin Bolt Control";
-	id = "Room2";
-	specialfunctions = 4
-	},
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
-"iqR" = (
-/obj/machinery/button/door/directional/west{
-	id = "Room3";
-	name = "Cabin Bolt Control";
-	normaldoorcontrol = 1;
-	specialfunctions = 4
-	},
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "irm" = (
 /obj/effect/turf_decal/trimline/yellow/filled/arrow_cw{
 	dir = 9
@@ -8581,6 +8590,14 @@
 "iAT" = (
 /turf/open/floor/light/colour_cycle/dancefloor_a,
 /area/centcom/central_command_areas/planetary_port/club)
+"iDi" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/item/flashlight/lamp/green{
+	pixel_x = 3;
+	pixel_y = 8
+	},
+/turf/open/floor/carpet/royalblue,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "iDX" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -8594,6 +8611,22 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"iJZ" = (
+/obj/structure/sign/poster/official/no_erp/directional/west,
+/turf/open/floor/wood/tile/cherry,
+/area/centcom/central_command_areas/planetary_port/hotel)
+"iOf" = (
+/obj/machinery/door/airlock/multi_tile/public/glass,
+/obj/effect/mapping_helpers/airlock/autoname,
+/turf/open/floor/wood/tile/cherry,
+/area/centcom/central_command_areas/planetary_port/hotel)
+"iYH" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/item/flashlight/lamp/green{
+	pixel_y = 10
+	},
+/turf/open/floor/carpet/royalblue,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "iZa" = (
 /obj/machinery/door/airlock/highsecurity,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -8606,6 +8639,12 @@
 "jfF" = (
 /turf/open/floor/carpet/royalblack,
 /area/centcom/central_command_areas/planetary_port/club)
+"jjQ" = (
+/obj/structure/bed/double,
+/obj/item/bedsheet/nanotrasen/double,
+/obj/machinery/light/directional/east,
+/turf/open/floor/carpet/royalblue,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "jsc" = (
 /obj/effect/turf_decal/line/dark_blue,
 /obj/effect/turf_decal/line/dark_blue{
@@ -8652,10 +8691,6 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/centcom/central_command_areas/planetary_port/club)
-"kgT" = (
-/obj/effect/spawner/structure/window/reinforced/indestructible,
-/turf/open/floor/plating,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "kjs" = (
 /turf/open/floor/bluespace,
 /area/centcom/central_command_areas/planetary_port/club)
@@ -8769,13 +8804,6 @@
 	},
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/admin)
-"lcj" = (
-/obj/effect/turf_decal/trimline/yellow/filled/line{
-	dir = 1
-	},
-/obj/structure/sign/departments/security/directional/north,
-/turf/open/floor/iron,
-/area/centcom/central_command_areas/planetary_port)
 "leK" = (
 /obj/structure/table/bronze,
 /obj/effect/spawner/random/food_or_drink/booze,
@@ -8791,10 +8819,6 @@
 /obj/structure/window/fulltile,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/admin)
-"ljS" = (
-/obj/effect/spawner/random/structure/closet_private,
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "lnf" = (
 /obj/effect/turf_decal/tile/red/anticorner,
 /obj/item/banner/security,
@@ -8810,13 +8834,6 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/admin)
-"lpu" = (
-/obj/structure/table/wood/fancy/royalblack,
-/obj/item/flashlight/lamp/green{
-	pixel_y = 10
-	},
-/turf/open/floor/carpet/royalblue,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "lsu" = (
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/flashlight/lamp{
@@ -8826,9 +8843,11 @@
 /obj/structure/sign/calendar/directional/south,
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/cabin/soo)
-"lBu" = (
-/obj/machinery/door/airlock/multi_tile/public/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
+"lEW" = (
+/obj/machinery/door/airlock/public{
+	id_tag = "Room2";
+	name = "Room 2"
+	},
 /turf/open/floor/wood/tile/cherry,
 /area/centcom/central_command_areas/planetary_port/hotel)
 "lJq" = (
@@ -8899,6 +8918,10 @@
 	},
 /turf/open/floor/bluespace,
 /area/centcom/central_command_areas/planetary_port/club)
+"ndh" = (
+/obj/effect/spawner/random/structure/closet_private,
+/turf/open/floor/wood/tile/cherry,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "ndQ" = (
 /obj/effect/turf_decal/tile/red/half{
 	dir = 1
@@ -8925,6 +8948,9 @@
 /obj/effect/turf_decal/siding/dark/end,
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/admin)
+"nEz" = (
+/turf/open/floor/wood/tile/cherry,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "nEX" = (
 /obj/structure/table/glass,
 /obj/machinery/computer/records/medical/laptop,
@@ -9063,6 +9089,9 @@
 	},
 /turf/open/floor/bluespace,
 /area/centcom/central_command_areas/planetary_port/club)
+"pnN" = (
+/turf/open/floor/carpet/royalblue,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "prS" = (
 /obj/effect/turf_decal/siding/wood/end,
 /turf/open/floor/wood/large,
@@ -9105,13 +9134,6 @@
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
-"pBE" = (
-/obj/machinery/door/airlock/public{
-	id_tag = "Room3";
-	name = "Room 3"
-	},
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "pEw" = (
 /obj/machinery/photocopier/gratis/prebuilt,
 /obj/machinery/newscaster/directional/north,
@@ -9201,14 +9223,6 @@
 /obj/effect/turf_decal/siding/wood/corner,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
-"qrk" = (
-/obj/structure/dresser,
-/turf/open/floor/carpet/royalblue,
-/area/centcom/central_command_areas/planetary_port/hotel)
-"qrS" = (
-/obj/structure/sign/poster/official/no_erp/directional/east,
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "qrY" = (
 /obj/machinery/computer/communications{
 	dir = 4
@@ -9218,10 +9232,6 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/admin)
-"quc" = (
-/obj/structure/sign/poster/official/no_erp/directional/west,
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "quV" = (
 /obj/structure/chair/comfy/corp,
 /turf/open/floor/carpet/black,
@@ -9309,11 +9319,8 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
-"rBu" = (
-/obj/machinery/door/airlock/public{
-	id_tag = "Room2";
-	name = "Room 2"
-	},
+"rWB" = (
+/obj/structure/sign/poster/official/no_erp/directional/east,
 /turf/open/floor/wood/tile/cherry,
 /area/centcom/central_command_areas/planetary_port/hotel)
 "rYc" = (
@@ -9329,6 +9336,10 @@
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/wood/parquet,
 /area/centcom/central_command_areas/planetary_port/club)
+"sbE" = (
+/obj/machinery/light/very_dim/directional/west,
+/turf/open/floor/wood/tile/cherry,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "sbY" = (
 /obj/effect/turf_decal/trimline/yellow/filled/corner,
 /turf/open/floor/iron,
@@ -9391,17 +9402,13 @@
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "sLr" = (
-/obj/machinery/light/very_dim/directional/east,
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/planetary_port)
 "sNM" = (
 /obj/structure/chair/sofa/corp/left,
 /turf/open/floor/carpet/neon/simple/blue,
 /area/centcom/central_command_areas/planetary_port/club)
-"sTn" = (
-/obj/machinery/light/very_dim/directional/west,
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "tdV" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -9429,16 +9436,6 @@
 /obj/structure/sign/flag/nanotrasen/directional/north,
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/cabin/soo)
-"tlc" = (
-/obj/machinery/door/airlock/public{
-	id_tag = "Room1";
-	name = "Room 1"
-	},
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
-"tnt" = (
-/turf/closed/indestructible/fakedoor,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "tnO" = (
 /obj/structure/table/glass,
 /obj/item/stamp/centcom{
@@ -9545,6 +9542,13 @@
 	dir = 1
 	},
 /area/centcom/central_command_areas/hallway)
+"ued" = (
+/obj/effect/turf_decal/trimline/yellow/filled/line{
+	dir = 1
+	},
+/obj/structure/sign/departments/security/directional/north,
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/planetary_port)
 "ugP" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/storage/fancy/cigarettes/cigars,
@@ -9612,15 +9616,6 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/centcom/central_command_areas/planetary_port/club)
-"uAt" = (
-/obj/machinery/button/door/directional/east{
-	normaldoorcontrol = 1;
-	name = "Cabin Bolt Control";
-	id = "Room1";
-	specialfunctions = 4
-	},
-/turf/open/floor/wood/tile/cherry,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "uEk" = (
 /obj/structure/table/glass,
 /obj/item/stamp/centcom{
@@ -9725,6 +9720,16 @@
 /obj/effect/turf_decal/siding/dark/end,
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/admin)
+"voD" = (
+/obj/structure/bed/double{
+	dir = 1
+	},
+/obj/item/bedsheet/nanotrasen/double{
+	dir = 1
+	},
+/obj/machinery/light/directional/west,
+/turf/open/floor/carpet/royalblue,
+/area/centcom/central_command_areas/planetary_port/hotel)
 "vrx" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /obj/item/clothing/under/rank/civilian/curator/treasure_hunter,
@@ -9747,15 +9752,6 @@
 /obj/structure/sign/clock/directional/north,
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/cabin/soo)
-"vxo" = (
-/obj/item/kirbyplants/random,
-/obj/effect/turf_decal/trimline/yellow/filled/shrink_cw,
-/obj/effect/turf_decal/trimline/yellow/filled/shrink_ccw{
-	dir = 1
-	},
-/obj/machinery/light/directional/east,
-/turf/open/floor/iron,
-/area/centcom/central_command_areas/planetary_port)
 "vyf" = (
 /obj/structure/table/glass,
 /obj/item/stamp/centcom{
@@ -9820,6 +9816,16 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/cabin/soo)
+"vEE" = (
+/obj/item/kirbyplants/random,
+/obj/effect/turf_decal/trimline/yellow/filled/shrink_ccw,
+/obj/effect/turf_decal/trimline/yellow/filled/shrink_cw{
+	dir = 1
+	},
+/obj/structure/sign/poster/official/moth_epi/directional/west,
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/planetary_port)
 "vJA" = (
 /obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/carpet/black,
@@ -9877,16 +9883,6 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
-"wdn" = (
-/obj/structure/bed/double{
-	dir = 1
-	},
-/obj/item/bedsheet/nanotrasen/double{
-	dir = 1
-	},
-/obj/machinery/light/directional/west,
-/turf/open/floor/carpet/royalblue,
-/area/centcom/central_command_areas/planetary_port/hotel)
 "wfp" = (
 /obj/structure/table/bronze,
 /obj/effect/spawner/random/food_or_drink/booze,
@@ -9970,13 +9966,6 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
-"wBv" = (
-/obj/effect/turf_decal/trimline/yellow/filled/warning{
-	dir = 1
-	},
-/obj/machinery/light/directional/north,
-/turf/open/floor/iron,
-/area/centcom/central_command_areas/planetary_port)
 "wDT" = (
 /obj/structure/chair/comfy/corp{
 	dir = 8
@@ -10036,9 +10025,14 @@
 /obj/machinery/light/directional/north,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
-"xfL" = (
-/obj/structure/sign/poster/official/random/directional/south,
-/turf/open/floor/carpet/royalblue,
+"wUd" = (
+/obj/machinery/button/door/directional/east{
+	normaldoorcontrol = 1;
+	name = "Cabin Bolt Control";
+	id = "Room2";
+	specialfunctions = 4
+	},
+/turf/open/floor/wood/tile/cherry,
 /area/centcom/central_command_areas/planetary_port/hotel)
 "xjr" = (
 /obj/structure/chair/sofa/corp/right,
@@ -10119,6 +10113,15 @@
 /obj/structure/curtain/cloth/fancy/mechanical/start_closed,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/planetary_port/club)
+"yda" = (
+/obj/machinery/button/door/directional/west{
+	id = "Room3";
+	name = "Cabin Bolt Control";
+	normaldoorcontrol = 1;
+	specialfunctions = 4
+	},
+/turf/open/floor/wood/tile/cherry,
+/area/centcom/central_command_areas/planetary_port/hotel)
 
 (1,1,1) = {"
 aTJ
@@ -24426,13 +24429,13 @@ aaa
 aaa
 aFQ
 uwh
-lpu
-wdn
-eLF
+iYH
+voD
+fDL
 uwh
-lpu
-wdn
-eLF
+iYH
+voD
+fDL
 uwh
 aFQ
 ieP
@@ -24683,13 +24686,13 @@ aaa
 aaa
 aFQ
 uwh
-qrk
-dgT
-xfL
+bEE
+pnN
+fmi
 uwh
-qrk
-dgT
-xfL
+bEE
+pnN
+fmi
 uwh
 aFQ
 ieP
@@ -24940,13 +24943,13 @@ aaa
 aaa
 aFQ
 uwh
-ljS
-dvv
-ijx
+ndh
+nEz
+wUd
 uwh
-ljS
-dvv
-uAt
+ndh
+nEz
+eoZ
 uwh
 uwh
 ieP
@@ -25198,11 +25201,11 @@ aaa
 aFQ
 uwh
 uwh
-rBu
+lEW
 uwh
 uwh
 uwh
-tlc
+els
 uwh
 uwh
 uwh
@@ -25217,7 +25220,7 @@ aRK
 aRK
 aRK
 alI
-gYb
+sLr
 mGy
 aRK
 aRK
@@ -25453,16 +25456,16 @@ aaa
 aaa
 aaa
 aFQ
-tnt
-dvv
-dvv
-sTn
-quc
-dvv
-dvv
-sTn
-quc
-lBu
+fdp
+nEz
+nEz
+sbE
+iJZ
+nEz
+nEz
+sbE
+iJZ
+iOf
 aSa
 aYR
 aYR
@@ -25710,16 +25713,16 @@ aaa
 aaa
 aaa
 aFQ
-tnt
-dvv
-dvv
-sLr
-qrS
-dvv
-dvv
-sLr
-qrS
-dvv
+fdp
+nEz
+nEz
+fLK
+rWB
+nEz
+nEz
+fLK
+rWB
+nEz
 aSa
 aYR
 aYR
@@ -25969,7 +25972,7 @@ aaa
 aFQ
 uwh
 uwh
-pBE
+aXI
 uwh
 uwh
 sGJ
@@ -25977,9 +25980,9 @@ sGJ
 sGJ
 sGJ
 sGJ
-wBv
+dwf
 sbY
-vxo
+bQd
 ala
 iGy
 alk
@@ -25987,7 +25990,7 @@ alk
 alk
 akC
 anU
-vxo
+bQd
 ala
 iGy
 alk
@@ -26225,9 +26228,9 @@ aaa
 aaa
 aFQ
 uwh
-ljS
-dvv
-iqR
+ndh
+nEz
+yda
 uwh
 sGJ
 uqK
@@ -26482,9 +26485,9 @@ aaa
 aaa
 aFQ
 uwh
-qrk
-dgT
-xfL
+bEE
+pnN
+fmi
 uwh
 sGJ
 fRa
@@ -26493,7 +26496,7 @@ aQj
 orG
 lJw
 mGy
-dZM
+vEE
 aJT
 gpH
 ajj
@@ -26501,7 +26504,7 @@ ajj
 ajj
 aIg
 fvm
-bfq
+fZQ
 aJT
 gpH
 ajj
@@ -26739,9 +26742,9 @@ aaa
 aaa
 aFQ
 uwh
-fLg
-gCI
-eLF
+iDi
+jjQ
+fDL
 uwh
 sGJ
 ndQ
@@ -26997,7 +27000,7 @@ aaa
 aFQ
 uwh
 uwh
-kgT
+dmc
 uwh
 uwh
 sGJ
@@ -27262,7 +27265,7 @@ pJu
 aYR
 nNa
 iZa
-lcj
+ued
 aYR
 aYR
 aYR
