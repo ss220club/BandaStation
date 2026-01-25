@@ -42,7 +42,7 @@
 		starer.cure_trauma_type(/datum/brain_trauma/voided) //this wouldn't make much sense to have anymore
 		starer.gain_trauma(/datum/brain_trauma/voided/stable)
 
-	to_chat(user, span_purple("And a whole world opens up to you."))
+	to_chat(user, span_purple("И перед вами открывается целый мир."))
 	playsound(get_turf(user), 'sound/effects/curse/curse5.ogg', 60)
 
 /**
