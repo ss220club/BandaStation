@@ -25,9 +25,9 @@
 	return ..()
 
 /obj/item/gun/ballistic/rocketlauncher/oneuse/load_gun(obj/item/ammo, mob/living/user)
-    if(user)
-        balloon_alert(user, "оно одноразовое!")
-    return FALSE
+	if(user)
+		balloon_alert(user, "оно одноразовое!")
+	return FALSE
 
 /obj/item/gun/ballistic/rocketlauncher/oneuse/attack_self(mob/user)
 	return ITEM_INTERACT_BLOCKING
