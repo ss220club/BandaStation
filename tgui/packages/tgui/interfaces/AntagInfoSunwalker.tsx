@@ -34,7 +34,7 @@ export const AntagInfoSunwalker = (props) => {
             </Section>
           </Stack.Item>
           <Stack.Item width="60%">
-            <Section fill title="Powers">
+            <Section fill title="Способности">
               <LabeledList>
                 <LabeledList.Item label="Space Dive">
                   Вы можете перемещаться под станцией по космосу, используйте
