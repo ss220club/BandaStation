@@ -96,3 +96,173 @@
 		/obj/item/ammo_box/speedloader/c762x54mmr/incendiary = 5,
 		/obj/item/ammo_box/speedloader/c762x54mmr/hp = 5,
 	)
+
+/obj/effect/spawner/random/armory/c46x30
+	name = "4.6x30mm ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c46x30,
+		/obj/item/ammo_box/c46x30/ap,
+		/obj/item/ammo_box/c46x30/incendiary,
+		/obj/item/ammo_box/c46x30/rubber,
+	)
+
+/obj/effect/spawner/random/armory/c338
+	name = ".338 ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c338,
+		/obj/item/ammo_box/c338/ap,
+		/obj/item/ammo_box/c338/hp,
+		/obj/item/ammo_box/c338/incendiary,
+	)
+
+/obj/effect/spawner/random/armory/c762x51
+	name = "7.62x51mm ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c762x51,
+		/obj/item/ammo_box/c762x51/ap,
+		/obj/item/ammo_box/c762x51/hp,
+		/obj/item/ammo_box/c762x51/incendiary,
+		/obj/item/ammo_box/c762x51/rubber,
+	)
+
+/obj/effect/spawner/random/armory/c223
+	name = "5.56x45mm ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c223,
+		/obj/item/ammo_box/c223/ap,
+		/obj/item/ammo_box/c223/hp,
+		/obj/item/ammo_box/c223/incendiary,
+		/obj/item/ammo_box/c223/rubber,
+	)
+
+/obj/effect/spawner/random/armory/c9mm
+	name = "9mm ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c9mm,
+		/obj/item/ammo_box/c9mm/ap,
+		/obj/item/ammo_box/c9mm/hp,
+		/obj/item/ammo_box/c9mm/incendiary,
+		/obj/item/ammo_box/c9mm/rubber,
+	)
+
+/obj/effect/spawner/random/armory/c10mm
+	name = "10mm ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c10mm,
+		/obj/item/ammo_box/c10mm/ap,
+		/obj/item/ammo_box/c10mm/hp,
+		/obj/item/ammo_box/c10mm/incendiary,
+		/obj/item/ammo_box/c10mm/rubber,
+	)
+
+/obj/effect/spawner/random/armory/c585sol
+	name = ".585 Sol ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c585sol,
+		/obj/item/ammo_box/c585sol/ap,
+		/obj/item/ammo_box/c585sol/hp,
+		/obj/item/ammo_box/c585sol/incendiary,
+		/obj/item/ammo_box/c585sol/rubber,
+	)
+
+/obj/effect/spawner/random/armory/c45
+	name = ".45 ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c45,
+		/obj/item/ammo_box/c45/ap,
+		/obj/item/ammo_box/c45/hp,
+		/obj/item/ammo_box/c45/incendiary,
+		/obj/item/ammo_box/c45/rubber,
+	)
+
+/obj/effect/spawner/random/armory/c38
+	name = ".38 ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c38,
+		/obj/item/ammo_box/c38/ap,
+		/obj/item/ammo_box/c38/hp,
+		/obj/item/ammo_box/c38/hotshot,
+		/obj/item/ammo_box/c38/iceblox,
+		/obj/item/ammo_box/c38/rubber,
+	)
+
+/obj/effect/spawner/random/armory/c762x54mmr
+	name = "7.62x54mmR ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c762x54mmr,
+		/obj/item/ammo_box/c762x54mmr/ap,
+		/obj/item/ammo_box/c762x54mmr/hp,
+		/obj/item/ammo_box/c762x54mmr/incendiary,
+		/obj/item/ammo_box/c762x54mmr/rubber,
+	)
+
+/obj/effect/spawner/random/armory/c762x39
+	name = "7.62x39mm ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c762x39,
+		/obj/item/ammo_box/c762x39/ap,
+		/obj/item/ammo_box/c762x39/civilian,
+		/obj/item/ammo_box/c762x39/incendiary,
+		/obj/item/ammo_box/c762x39/rubber,
+		/obj/item/ammo_box/c762x39/ricochet,
+		/obj/item/ammo_box/c762x39/blank,
+		/obj/item/ammo_box/c762x39/hunting,
+		/obj/item/ammo_box/c762x39/emp,
+	)
+
+/obj/effect/spawner/random/armory/c40sol
+	name = ".40 Sol Long ammo box spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/ammo_box/c40sol,
+		/obj/item/ammo_box/c40sol/ap,
+		/obj/item/ammo_box/c40sol/fragmentation,
+		/obj/item/ammo_box/c40sol/incendiary,
+	)
+
+/obj/effect/spawner/random/armory/renoster
+	name = "Renoster shotgun spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/gun/ballistic/shotgun/riot/renoster,
+		/obj/item/gun/ballistic/shotgun/riot/renoster/sawoff,
+		/obj/item/gun/ballistic/shotgun/riot/renoster/black,
+		/obj/item/gun/ballistic/shotgun/riot/renoster/black/sawoff,
+	)
+
+/obj/effect/spawner/random/armory/amk
+	name = "AMK rifle spawner"
+	icon_state = "buckshot"
+	spawn_loot_count = 1
+	loot = list(
+		/obj/item/gun/ballistic/automatic/sabel/auto,
+		/obj/item/gun/ballistic/automatic/sabel/auto/short,
+		/obj/item/gun/ballistic/automatic/sabel/auto/army,
+		/obj/item/gun/ballistic/automatic/sabel/auto/army/alt,
+		/obj/item/gun/ballistic/automatic/sabel/auto/short/army,
+		/obj/item/gun/ballistic/automatic/sabel/auto/no_mag,
+	)
