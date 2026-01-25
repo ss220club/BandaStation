@@ -27,6 +27,10 @@
 		"Бытовые товары" = list(
 			"path" = /obj/item/stack/talon/household,
 			"weight" = 1
+		),
+		"Бытовая техника" = list(
+			"path" = /obj/item/stack/talon/machinery,
+			"weight" = 1
 		)
 	)
 
