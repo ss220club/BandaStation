@@ -498,7 +498,7 @@
 // MARK: .980 GRENADES
 /obj/item/ammo_casing/c980grenade
 	name = ".980 Tydhouer practice grenade"
-	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Practice shells disintegrate into harmless sparks."
+	desc = "Большой гранатовый снаряд, который взрывается на расстоянии, заданном орудием, из которого он выпущен. Учебные снаряды распадаются на безвредные искры."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "980_solid"
 	caliber = CALIBER_980TYDHOUER
@@ -513,31 +513,83 @@
 
 /obj/item/ammo_casing/c980grenade/smoke
 	name = ".980 Tydhouer smoke grenade"
-	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Bursts into a laser-weakening smoke cloud."
+	desc = "Большой гранатовый снаряд, который взрывается на расстоянии, заданном орудием, из которого он выпущен. Взрывается, образуя облако дыма, ослабляющее лазеры."
 	icon_state = "980_smoke"
 	projectile_type = /obj/projectile/bullet/c980grenade/smoke
 
 /obj/item/ammo_casing/c980grenade/shrapnel
 	name = ".980 Tydhouer shrapnel grenade"
-	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Explodes into shrapnel on detonation."
+	desc = "Большой гранатовый снаряд, который взрывается на расстоянии, заданном орудием, из которого он выпущен. При взрыве разлетается на осколки."
 	icon_state = "980_explosive"
 	projectile_type = /obj/projectile/bullet/c980grenade/shrapnel
 	harmful = TRUE
 
 /obj/item/ammo_casing/c980grenade/shrapnel/stingball
 	name = ".980 Tydhouer stingball grenade"
-	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Explodes into stingballs on detonation."
+	desc = "Большой гранатовый снаряд, который взрывается на расстоянии, заданном орудием, из которого он выпущен. При взрыве разрывается на травматические осколки."
 	icon_state = "980_stingball"
 	projectile_type = /obj/projectile/bullet/c980grenade/shrapnel/stingball
 
 /obj/item/ammo_casing/c980grenade/shrapnel/phosphor
 	name = ".980 Tydhouer phosphor grenade"
-	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Explodes into smoke and flames on detonation."
+	desc = "Большой гранатовый снаряд, который взрывается на расстоянии, заданном орудием, из которого он выпущен. Взрывается, образуя облако фосфора."
 	icon_state = "980_gas_alternate"
 	projectile_type = /obj/projectile/bullet/c980grenade/shrapnel/phosphor
 
 /obj/item/ammo_casing/c980grenade/riot
 	name = ".980 Tydhouer tear gas grenade"
-	desc = "A large grenade shell that will detonate at a range given to it by the gun that fires it. Bursts into a tear gas cloud."
+	desc = "Большой гранатовый снаряд, который взрывается на расстоянии, заданном орудием, из которого он выпущен. Взрывается, образуя облако слезоточивого газа."
 	icon_state = "980_gas"
 	projectile_type = /obj/projectile/bullet/c980grenade/riot
+
+// MARK: 40mm Grenades
+/obj/item/ammo_casing/a40mm
+	name = "40mm HE grenade"
+	desc = "Граната калибра 40-мм, которая может быть активирована только после выстрела из гранатомета."
+	caliber = CALIBER_40MM
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "40mmHE"
+	projectile_type = /obj/projectile/bullet/a40mm
+	custom_materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT)
+
+/obj/item/ammo_casing/a40mm/rubber
+	name = "40mm rubber slug shell"
+	desc = "Резиновый снаряд в 40-мм оболочке. Старший брат резиновой пули для дробовиков, этот снаряд сбивает с ног с одного удара. <br>Не очень эффективен против людей в броне."
+	icon_state = "40mmRUBBER"
+	projectile_type = /obj/projectile/bullet/shotgun_beanbag/a40mm
+
+/obj/item/ammo_casing/a40mm/weak
+	name = "light 40mm HE grenade"
+	desc = parent_type::desc + "<br>Облегченная версия для юных гранатометчиков."
+	icon_state = "40mm"
+	projectile_type = /obj/projectile/bullet/a40mm/weak
+
+/obj/item/ammo_casing/a40mm/incendiary
+	name = "40mm incendiary grenade"
+	desc = parent_type::desc + "<br>Зажигательная версия, при взрыве образует облако фосфорного дыма."
+	icon_state = "40mmINCEN"
+	projectile_type = /obj/projectile/bullet/a40mm/incendiary
+
+/obj/item/ammo_casing/a40mm/smoke
+	name = "40mm smoke grenade"
+	desc = parent_type::desc + "<br>Дымовая версия, при взрыве образует облако дыма."
+	icon_state = "40mmSMOKE"
+	projectile_type = /obj/projectile/bullet/a40mm/smoke
+
+/obj/item/ammo_casing/a40mm/stun
+	name = "40mm stun grenade"
+	desc = parent_type::desc + "<br>Светошумовая версия, при взрыве ослепляет и оглушает окружающих."
+	icon_state = "40mmSTUN"
+	projectile_type = /obj/projectile/bullet/a40mm/stun
+
+/obj/item/ammo_casing/a40mm/hedp
+	name = "40mm HEDP grenade"
+	desc = parent_type::desc + "<br>Бронебойно-пробивная версия, уничтожает экзокостюмы и роботов, также может пробивать стены."
+	icon_state = "40mmHEDP"
+	projectile_type = /obj/projectile/bullet/a40mm/hedp
+
+/obj/item/ammo_casing/a40mm/frag
+	name = "40mm fragmentation grenade"
+	desc = parent_type::desc + "<br>Осколочно-разрывная версия, при взрыве разбрасывает множество осколков."
+	icon_state = "40mmFRAG"
+	projectile_type = /obj/projectile/bullet/a40mm/frag

@@ -1426,3 +1426,22 @@
 
 /obj/item/ammo_box/magazine/c980_grenade/drum/gas
 	ammo_type = /obj/item/ammo_casing/c980grenade/riot
+
+// MARK: Shotguns
+/obj/item/ammo_box/magazine/internal/shot/large
+	ammo_type = /obj/item/ammo_casing/shotgun/rubbershot
+	max_ammo = 8
+
+/obj/item/ammo_box/magazine/internal/shot/super
+	ammo_type = /obj/item/ammo_casing/shotgun/buckshot/milspec
+	max_ammo = 10
+
+// MARK: Taipan
+/obj/item/ammo_box/magazine/taipan
+	name = "antimaterial sniper rifle magazine (20x138mm)"
+	desc = "A 20x138mm magazine suitable ammo for anti antimaterial sniper rifles."
+	icon_state = ".50mag"
+	base_icon_state = ".50mag"
+	ammo_type = /obj/item/ammo_casing/mm20x138
+	max_ammo = 3
+	caliber = CALIBER_50BMG

@@ -15,6 +15,7 @@
 #include "code/ranged/weapon_designs.dm"
 #include "code/ranged/overrides/ballistic_master.dm"
 #include "code/ranged/overrides/mystery_box_additions.dm"
+#include "code/ranged/china_lake.dm"
 
 // MARK: Ranged - Ballistic
 #include "code/ranged/ballistic/ammo_boxes.dm"
@@ -35,6 +36,7 @@
 #include "code/ranged/ballistic/nanotrasen/rifles/f90.dm"
 #include "code/ranged/ballistic/nanotrasen/special/cm15.dm"
 #include "code/ranged/ballistic/nanotrasen/special/cm40.dm"
+#include "code/ranged/ballistic/nanotrasen/special/m64.dm"
 
 // Elyzium
 #include "code/ranged/ballistic/elyzium/pistols/tp14.dm"
@@ -52,9 +54,14 @@
 #include "code/ranged/ballistic/tsf/smgs/bogseo.dm"
 #include "code/ranged/ballistic/tsf/smgs/vector.dm"
 #include "code/ranged/ballistic/tsf/rifles/carwo.dm"
+#include "code/ranged/ballistic/tsf/rifles/hydra.dm"
+#include "code/ranged/ballistic/tsf/rifles/taipan.dm"
+#include "code/ranged/ballistic/tsf/rifles/t26.dm"
 #include "code/ranged/ballistic/tsf/special/renoster.dm"
 #include "code/ranged/ballistic/tsf/special/minigun.dm"
 #include "code/ranged/ballistic/tsf/special/kiboko.dm"
+#include "code/ranged/ballistic/tsf/special/spas20.dm"
+#include "code/ranged/ballistic/tsf/special/law.dm"
 
 // USSP
 #include "code/ranged/ballistic/ussp/pistols/bobr.dm"

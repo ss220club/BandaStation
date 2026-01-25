@@ -651,6 +651,17 @@
 	icon_state = "a50box-incendiary"
 	ammo_type = /obj/item/ammo_casing/p50/incendiary
 
+// MARK: .50 AE
+/obj/item/ammo_box/a50ae
+	name = "ammo box (.50 AE)"
+	desc = "Коробка с винтовочными патронами калибра .50 AE, вмещает 20 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "a50aebox"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_50AE
+	ammo_type = /obj/item/ammo_casing/a50ae
+	max_ammo = 20
+
 // MARK: 4.6x30mm
 /obj/item/ammo_box/c46x30
 	name = "ammo box (4.6x30mm)"
@@ -764,7 +775,7 @@
 // MARK: .980 Grenades
 /obj/item/ammo_box/c980grenade
 	name = "ammo box (.980 Tydhouer practice)"
-	desc = "A box of four .980 Tydhouer practice grenades. Instructions on the box indicate these are dummy practice rounds that will disintegrate into sparks on detonation. Neat!"
+	desc = "Коробка с четырьмя учебными гранатами калибра .980 \"Тайдхойер\". Инструкции на коробке указывают, что это гранаты которые при взрыве распадаются на искры."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "980box_solid"
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
@@ -775,33 +786,118 @@
 
 /obj/item/ammo_box/c980grenade/shrapnel
 	name = "ammo box (.980 Tydhouer shrapnel)"
-	desc = "A box of four .980 Tydhouer shrapnel grenades. Instructions on the box indicate these are shrapnel rounds. It's also covered in hazard signs, odd."
+	desc = "Коробка с четырьмя шрапнельными гранатами калибра .980 \"Тайдхойер\". На ней также нанесены знаки опасности, но кому они нужны?"
 	icon_state = "980box_explosive"
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel
 
 /obj/item/ammo_box/c980grenade/shrapnel/stingball
 	name = "ammo box (.980 Tydhouer stingball)"
-	desc = "A box of four .980 Tydhouer stingball grenades. Instructions on the box indicate these are stingball rounds. It's also covered in hazard signs, odd."
+	desc = "Коробка с четырьмя травматическими гранатами калибра .980 \"Тайдхойер\". На ней также нанесены знаки опасности, но кому они нужны?"
 	icon_state = "980box_stingball"
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/stingball
 
 /obj/item/ammo_box/c980grenade/shrapnel/phosphor
 	name = "ammo box (.980 Tydhouer phosphor)"
-	desc = "A box of four .980 Tydhouer phosphor grenades. Instructions on the box indicate these are incendiary explosive rounds. It's also covered in hazard signs, odd."
+	desc = "Коробка с четырьмя фосфорными гранатами калибра .980 \"Тайдхойер\". Инструкции на коробке указывают, что это зажигательные взрывные снаряды. На ней также нанесены знаки опасности, но кому они нужны?"
 	icon_state = "980box_gas_alternate"
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/phosphor
 
 /obj/item/ammo_box/c980grenade/smoke
 	name = "ammo box (.980 Tydhouer smoke)"
-	desc = "A box of four .980 Tydhouer smoke grenades. Instructions on the box indicate these are smoke rounds that will make a small cloud of laser-dampening smoke on detonation."
+	desc = "Коробка с четырьмя дымовыми гранатами калибра .980 \"Тайдхойер\". Инструкции на коробке указывают, что это дымовые снаряды, которые при взрыве образуют небольшое облако дыма, гасящего лазерное излучение."
 	icon_state = "980box_smoke"
 	ammo_type = /obj/item/ammo_casing/c980grenade/smoke
 
 /obj/item/ammo_box/c980grenade/riot
 	name = "ammo box (.980 Tydhouer tear gas)"
-	desc = "A box of four .980 Tydhouer tear gas grenades. Instructions on the box indicate these are smoke rounds that will make a small cloud of laser-dampening smoke on detonation."
+	desc = "Коробка с четырьмя гранатами со слезоточивым газом калибра .980 \"Тайдхойер\". Инструкции на коробке указывают, что это дымовые гранаты, которые при взрыве образуют небольшое облако слезоточивого газа."
 	icon_state = "980box_gas"
 	ammo_type = /obj/item/ammo_casing/c980grenade/riot
+
+// MARK: 40mm GRENADE BOX
+#define A40MM_GRENADE_INBOX_SPRITE_WIDTH 3
+/datum/storage/a40mm_box
+	max_slots = 4
+
+/obj/item/storage/fancy/a40mm_box
+	name = "40mm grenade box"
+	desc = "Металлическая коробка, предназначенная для хранения 40-мм гранат."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "40mm_box"
+	base_icon_state = "40mm_box"
+	spawn_type = /obj/item/ammo_casing/a40mm
+	spawn_count = 4
+	open_status = FALSE
+	appearance_flags = KEEP_TOGETHER|LONG_GLIDE
+	contents_tag = "grenade"
+	foldable_result = null
+	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*5)
+	force = 8
+	throwforce = 12
+	throw_speed = 2
+	throw_range = 7
+	resistance_flags = null
+	storage_type = /datum/storage/a40mm_box
+
+/obj/item/storage/fancy/a40mm_box/Initialize(mapload)
+	. = ..()
+	atom_storage.set_holdable(list(/obj/item/ammo_casing/a40mm))
+
+/obj/item/storage/fancy/a40mm_box/attack_self(mob/user)
+	..()
+	if(open_status == FANCY_CONTAINER_OPEN)
+		playsound(src, 'sound/machines/click.ogg', 30, TRUE)
+
+/obj/item/storage/fancy/a40mm_box/PopulateContents()
+	. = ..()
+	update_appearance()
+
+/obj/item/storage/fancy/a40mm_box/update_icon_state()
+	. = ..()
+	icon_state = "[base_icon_state][open_status ? "_open" : null]"
+
+/obj/item/storage/fancy/a40mm_box/update_overlays()
+	. = ..()
+	if(!open_status)
+		return
+
+	var/grenades = 0
+	for(var/_grenade in contents)
+		var/obj/item/ammo_casing/a40mm/grenade = _grenade
+		if (!istype(grenade))
+			continue
+		. += image(icon = initial(icon), icon_state = (initial(grenade.icon_state) + "_inbox"), pixel_x = grenades * A40MM_GRENADE_INBOX_SPRITE_WIDTH)
+		grenades += 1
+
+#undef A40MM_GRENADE_INBOX_SPRITE_WIDTH
+
+/obj/item/storage/fancy/a40mm_box/rubber
+	name = "40mm RUBBER grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/rubber
+
+/obj/item/storage/fancy/a40mm_box/weak
+	name = "40mm LIGHT grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/weak
+
+/obj/item/storage/fancy/a40mm_box/incendiary
+	name = "40mm INCENDIARY grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/incendiary
+
+/obj/item/storage/fancy/a40mm_box/smoke
+	name = "40mm SMOKE grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/smoke
+
+/obj/item/storage/fancy/a40mm_box/stun
+	name = "40mm STUN grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/stun
+
+/obj/item/storage/fancy/a40mm_box/hedp
+	name = "40mm HEDP grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/hedp
+
+/obj/item/storage/fancy/a40mm_box/frag
+	name = "40mm FRAG grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/frag
 
 // MARK: BOXES WITH MAGAZINES / AMMO BOXES
 /obj/item/storage/toolbox/ammobox/c9x25mm_mags
