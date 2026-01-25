@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/vektor
 	name = "Vektor submachine gun"
-	desc = "Пистолет-пулемет ТСФ, стреляющий патронами калибра 9мм."
+	desc = "Скорострельный и компактный пистолет-пулемет ТСФ стреляющий патронами калибра 9мм."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	icon_state = "vector"
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
@@ -18,7 +18,7 @@
 	spread = 5
 	fire_delay = 0.1 SECONDS
 	actions_types = list()
-	recoil = 0.2
+	recoil = 0.4
 
 /obj/item/gun/ballistic/automatic/vektor/Initialize(mapload)
 	. = ..()
