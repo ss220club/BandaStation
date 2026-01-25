@@ -29576,3 +29576,12 @@ accusative = "кольцо с бриллиантом"
 instrumental = "кольцом с бриллиантом"
 prepositional = "кольце с бриллиантом"
 gender = "neuter"
+
+["Altar of the Gods"]
+nominative = "алтарь Божеств"
+genitive = "алтаря Божеств"
+dative = "алтарю Божеств"
+accusative = "алтарь Божеств"
+instrumental = "алтарём Божеств"
+prepositional = "алтаре Божеств"
+gender = "neuter"
