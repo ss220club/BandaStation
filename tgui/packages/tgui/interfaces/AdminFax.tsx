@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import {
   Box,
   Button,
@@ -22,6 +23,7 @@ type Data = {
   prefillPaperName?: string;
   prefillSender?: string;
   generatedName?: string;
+  generatedJob?: string;
 };
 
 const paperNameOptions = [
@@ -39,7 +41,8 @@ export function AdminFax() {
     prefillText = '',
     prefillPaperName = '',
     prefillSender = '',
-    generatedName = 'John Doe'
+    generatedName = 'John Doe',
+    generatedJob = 'Centcom Intern',
   } = data;
 
   const [fax, setFax] = useState('');
@@ -49,7 +52,15 @@ export function AdminFax() {
   const [rawText, setRawText] = useState(prefillText);
   
   const [signerName, setSignerName] = useState(generatedName);
-  const [signerJob, setSignerJob] = useState('Centcom Intern'); // Дефолтная должность
+  const [signerJob, setSignerJob] = useState(generatedJob);
+
+  useEffect(() => {
+    setSignerName(generatedName);
+  }, [generatedName]);
+
+  useEffect(() => {
+    setSignerJob(generatedJob);
+  }, [generatedJob]);
 
   const [stamp, setStamp] = useState('');
   const [stampCoordX, setStampCoordX] = useState(0);
@@ -154,7 +165,21 @@ export function AdminFax() {
             
             <Stack.Divider />
             <Stack.Item>
-                <Box mb={0.5} color="label">Auto-fill Fields:</Box>
+                <Stack align="center">
+                    <Stack.Item grow>
+                            <Box mb={0.5} color="label">Auto-fill Fields:</Box>
+                    </Stack.Item>
+                    <Stack.Item>
+                        <Button 
+                            icon="user" 
+                            tooltip="Use my character's name"
+                            onClick={() => act('use_current_user')}
+                        >
+                            From Current
+                        </Button>
+                    </Stack.Item>
+                </Stack>
+
                 <Stack fill>
                     <Stack.Item grow>
                         <Box mb="2px" fontSize="0.9em">Name:</Box>
@@ -177,7 +202,6 @@ export function AdminFax() {
                     Will replace [input_field...] tags on Save.
                 </Box>
             </Stack.Item>
-            
             <Stack.Divider />
             <Stack.Item>
               <TextArea

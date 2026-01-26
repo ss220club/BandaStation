@@ -22,6 +22,7 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 	var/prefill_sender = ""
 	
 	var/generated_signer_name = "John Doe"
+	var/generated_signer_job = "Centcom Intern" 
 
 /datum/fax_panel_interface/New()
 	//Get all faxes, and save them to our list.
@@ -43,9 +44,10 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 	generated_signer_name = generate_spinwarder_name()
 
 /datum/fax_panel_interface/proc/generate_spinwarder_name()
-	var/f_name = "Джон"
-	var/l_name = "Доу"
+	var/f_name = "John"
+	var/l_name = "Doe"
 
+	// Используем глобальные списки, если они есть
 	if(length(GLOB.first_names_male_spinwarder))
 		f_name = pick(GLOB.first_names_male_spinwarder)
 
@@ -83,11 +85,9 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 	data["faxes"] = list()
 	data["stamps"] = list()
 
-	// Fields form Ai to Frontend
 	data["prefillText"] = prefill_text
 	data["prefillPaperName"] = prefill_paper_name
 	data["prefillSender"] = prefill_sender
-	data["generatedName"] = generated_signer_name
 
 	for(var/stamp in stamp_list)
 		data["stamps"] += list(stamp[1]) // send only names.
@@ -97,6 +97,14 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 		if(another_fax && istype(another_fax))
 			data["faxes"] += list(another_fax.fax_name)
 
+	return data
+
+/datum/fax_panel_interface/ui_data(mob/user)
+	var/list/data = list()
+
+	data["generatedName"] = generated_signer_name
+	data["generatedJob"] = generated_signer_job
+	
 	return data
 
 /datum/fax_panel_interface/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -123,6 +131,12 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 			if(!fax_paper)
 				return
 			fax_paper.ui_interact(ui.user)
+		
+		if("use_current_user")
+			if(ui.user)
+				generated_signer_name = ui.user.real_name
+				generated_signer_job = "Nanotrasen Navy Officer"
+				return TRUE
 
 		if("save") // save paper
 			if(params["paperName"])
@@ -142,13 +156,11 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 
 			fax_paper.name = "paper — [default_paper_name]"
 			
-			// === Tag rewrite logic ===
 			var/final_text = params["rawText"]
 			
 			if(params["signerName"])
 				var/s_name = params["signerName"]
 				var/s_html = "<font face='[SIGNATURE_FONT]'><i>[s_name]</i></font>"
-				
 				final_text = replacetext(final_text, "\[input_field autofill_type=sign]", s_html)
 			
 			if(params["signerJob"])
@@ -156,15 +168,13 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 				
 			var/formatted_time = "[time2text(world.timeofday, "DD/MM")]/[CURRENT_STATION_YEAR] [station_time_timestamp()]"
 			final_text = replacetext(final_text, "\[input_field autofill_type=time]", formatted_time)
-			
-			// ============================
 
 			fax_paper.add_raw_text(replace_text_keys(final_text, ui.user), advanced_html = TRUE)
 
 			if(stamp)
 				fax_paper.add_stamp(stamp_class, params["stampX"], params["stampY"], params["stampAngle"], stamp)
 
-			fax_paper.update_static_data(ui.user) // OK, it's work, and update UI.
+			fax_paper.update_static_data(ui.user)
 
 		if("send")	
 			//copy
@@ -178,3 +188,4 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 		if("createPaper")
 			var/obj/item/paper/our_paper = fax_paper.copy(/obj/item/paper, ui.user.loc)
 			our_paper.name = fax_paper.name
+			
