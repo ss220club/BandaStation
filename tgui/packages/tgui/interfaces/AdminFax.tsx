@@ -225,7 +225,7 @@ export function AdminFax() {
                       step={1}
                       width="45px"
                       minValue={0}
-                      maxValue={400}
+                      maxValue={600}
                       value={stampCoordY}
                       onChange={(v) => setStampCoordY(v)}
                     />

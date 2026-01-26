@@ -8,7 +8,7 @@
 #define DEFAULT_REPLY_PROMPT "You are Central Command. Write a reply."
 
 // Configuration for LLM
-#define OLLAMA_MODEL "qwen3-vl:235b-instruct"
+#define OLLAMA_MODEL "deepseek-v3.2:cloud"
 
 
 /// Global singleton for AI bridge, initialized automatically
