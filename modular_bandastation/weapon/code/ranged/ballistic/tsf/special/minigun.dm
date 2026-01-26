@@ -24,11 +24,11 @@
 	AddElement(/datum/element/drag_pickup)
 
 /obj/item/minigun_backpack/Destroy()
-    STOP_PROCESSING(SSobj, src)
-    if(gun && isatom(gun))
-        gun.ammo_pack = null
-        gun = null
-    return ..()
+	STOP_PROCESSING(SSobj, src)
+	if(gun && isatom(gun))
+		gun.ammo_pack = null
+		gun = null
+	return ..()
 
 /obj/item/minigun_backpack/process()
 	overheat = max(0, overheat - heat_diffusion)
@@ -157,19 +157,19 @@
 	. = ..()
 
 /obj/item/gun/ballistic/minigun/Destroy()
-    // detach from ammo pack so the pack won't reference a deleted gun
-    if(ammo_pack && isatom(ammo_pack))
-        ammo_pack.gun = null
-        ammo_pack = null
-    return ..()
+	// detach from ammo pack so the pack won't reference a deleted gun
+	if(ammo_pack && isatom(ammo_pack))
+		ammo_pack.gun = null
+		ammo_pack = null
+	return ..()
 
 /obj/item/gun/ballistic/minigun/dropped(mob/user)
-    . = ..()
-    if(ammo_pack && isatom(ammo_pack) && ammo_pack.loc == user)
-        // put it back into the pack owned by this user
-        ammo_pack.attach_gun(user)
-    else
-        QDEL_NULL(src)
+	. = ..()
+	if(ammo_pack && isatom(ammo_pack) && ammo_pack.loc == user)
+		// put it back into the pack owned by this user
+		ammo_pack.attach_gun(user)
+	else
+		QDEL_NULL(src)
 
 /obj/item/ammo_box/magazine/internal/minigun
 	name = "Minigun back stash box"
