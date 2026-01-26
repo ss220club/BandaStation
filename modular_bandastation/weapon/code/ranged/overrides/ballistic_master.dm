@@ -121,6 +121,12 @@
 /obj/item/gun/ballistic/revolver/peashooter
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 
+/obj/item/gun/ballistic/revolver/reverse/mateba
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
+
+/obj/item/gun/ballistic/revolver/russian
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
+
 /obj/item/gun/ballistic/revolver/c38
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	recoil = 0.3
