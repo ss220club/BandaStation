@@ -45,8 +45,10 @@
 		playsound(src, pick(src.damaged_sounds), 40, 1)
 
 // Animals additions
+
 /* Megafauna */
 /mob/living/simple_animal/hostile/megafauna/legion/death()
+	. = ..()
 	if(last_legion)
 		death_sound = 'modular_bandastation/mobs/sound/legion_death.ogg'
 		for(var/area/lavaland/L in typesof(/area/lavaland))
