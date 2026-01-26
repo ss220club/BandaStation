@@ -39,13 +39,13 @@
 
 	var/growth_string = ""
 	if (HAS_TRAIT(bloodbag, TRAIT_BLOOD_WORM_HOST))
-		growth_string = ", но поглотить их невозможно, так как они являются носителем"
+		growth_string = ", поглощение которых невозможно, так как тело пренадлежит другому червю"
 	else if (total_blood_now < cocoon_action?.total_blood_required)
 		var/rounded_growth = CEILING(potential_gain / cocoon_action.total_blood_required * 100, 1)
 		if (rounded_growth > 0)
-			growth_string = ", их поглощение внесет <b>[rounded_growth]%</b> вклада в ваш рост"
+			growth_string = ", поглощение которых внесет <b>[rounded_growth]%</b> вклада в ваш рост"
 		else
-			growth_string = ", их поглощение не поспособствует вашему росту"
+			growth_string = ", поглощение которых не поспособствует вашему росту"
 	else
 		if (!istype(src, /mob/living/basic/blood_worm/adult))
 			growth_string = ". Вы готовы к взрослению"

@@ -65,7 +65,7 @@
 
 	playsound(src, 'sound/items/hypospray.ogg', vol = 50, vary = TRUE)
 
-	say("Scanning...")
+	say("Сканирование...")
 
 	// Handling it as a timer instead of a do_after prevents abusing the do_after to do antag checks.
 	// Otherwise, if the target runs away from the testing do_after, then that means they're likely a host.
@@ -80,8 +80,8 @@
 
 /obj/item/blood_worm_tester/proc/report_results(is_worm)
 	if (is_worm)
-		say("Active hemoparasite presence detected!")
+		say("Зафиксировано присутствие гемопаразитов!")
 		playsound(src, 'sound/machines/beep/twobeep.ogg', vol = 50, vary = TRUE)
 	else
-		say("No anomalous readings found.")
+		say("Никаких аномальных показаний обнаружено не было.")
 		playsound(src, 'sound/machines/buzz/buzz-two.ogg', vol = 40, vary = TRUE)
