@@ -7,12 +7,15 @@
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	inhand_icon_state = "law"
+	worn_icon = 'icons/mob/clothing/belt.dmi'
+	worn_icon_state = "gun"
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_BELT
 	var/extended = FALSE
 	dry_fire_sound = 'modular_bandastation/weapon/sound/ranged/launcher_empty.ogg'
 	fire_delay = 1 SECONDS
 	pin = /obj/item/firing_pin
+	SET_BASE_PIXEL(-16, 0)
 
 /obj/item/gun/ballistic/rocketlauncher/oneuse/Initialize(mapload)
 	. = ..()

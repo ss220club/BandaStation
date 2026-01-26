@@ -104,7 +104,25 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	recoil = 0.4
 
+/obj/item/gun/ballistic/revolver/badass
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
+	recoil = 0.3
+
+/obj/item/gun/ballistic/revolver/mateba
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
+	recoil = 0.2
+
+/obj/item/gun/ballistic/revolver/golden
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
+
+/obj/item/gun/ballistic/revolver/nagant
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
+
+/obj/item/gun/ballistic/revolver/peashooter
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
+
 /obj/item/gun/ballistic/revolver/c38
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	recoil = 0.3
 
 /obj/item/gun/ballistic/automatic/pistol
@@ -209,10 +227,3 @@
 /obj/item/gun/ballistic/clear_suppressor()
 	w_class = initial(w_class)
 	return ..()
-
-// MARK: Visual effect after firing (muzzle flash)
-/obj/effect/temp_visual/dir_setting/firing_effect
-	light_system = OVERLAY_LIGHT
-	light_range = 2
-	light_power = 1
-	light_color = LIGHT_COLOR_FIRE

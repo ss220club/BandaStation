@@ -450,7 +450,7 @@
 /obj/item/ammo_box/c585sol/incendiary
 	name = "ammo box (.585 Sol incendiary)"
 	desc = parent_type::desc + "<br>Красная полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
-	icon_state = "585box_incendiary"
+	icon_state = "585box_ic"
 	ammo_type = /obj/item/ammo_casing/c585sol/incendiary
 
 // MARK: 10mm
