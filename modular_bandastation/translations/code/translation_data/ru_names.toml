@@ -2359,6 +2359,51 @@ instrumental = "юбкой охраны"
 prepositional = "юбке охраны"
 gender = "female"
 
+["security alternative skirt"]
+nominative = "юбка охраны"
+genitive = "юбки охраны"
+dative = "юбке охраны"
+accusative = "юбку охраны"
+instrumental = "юбкой охраны"
+prepositional = "юбке охраны"
+gender = "female"
+
+["security formal uniform"]
+nominative = "официальная униформа охраны"
+genitive = "официальной униформы охраны"
+dative = "официальной униформе охраны"
+accusative = "официальную униформу охраны"
+instrumental = "официальной униформой охраны"
+prepositional = "официальной униформе охраны"
+gender = "female"
+
+["security black uniform"]
+nominative = "чёрная униформа охраны"
+genitive = "чёрной униформы охраны"
+dative = "чёрной униформе охраны"
+accusative = "чёрную униформу охраны"
+instrumental = "чёрной униформой охраны"
+prepositional = "чёрной униформе охраны"
+gender = "female"
+
+["security turtleneck"]
+nominative = "водолазка охраны"
+genitive = "водолазки охраны"
+dative = "водолазке охраны"
+accusative = "водолазку охраны"
+instrumental = "водолазкой охраны"
+prepositional = "водолазке охраны"
+gender = "female"
+
+["security alternative black uniform"]
+nominative = "чёрная униформа охраны"
+genitive = "чёрной униформы охраны"
+dative = "чёрной униформе охраны"
+accusative = "чёрную униформу охраны"
+instrumental = "чёрной униформой охраны"
+prepositional = "чёрной униформе охраны"
+gender = "female"
+
 ["grey security jumpsuit"]
 nominative = "серый комбинезон охраны"
 genitive = "серого комбинезона охраны"
@@ -2700,6 +2745,24 @@ dative = "юбке-комбинезону смотрителя"
 accusative = "юбку-комбинезон смотрителя"
 instrumental = "юбкой-комбинезоном смотрителя"
 prepositional = "юбке-комбинезоне смотрителя"
+gender = "female"
+
+["warden's alternative blue skirt"]
+nominative = "синяя юбка смотрителя"
+genitive = "синей юбки смотрителя"
+dative = "cиней юбке смотрителя"
+accusative = "синюю юбку смотрителя"
+instrumental = "синей юбкой смотрителя"
+prepositional = "синей юбке смотрителя"
+gender = "female"
+
+["warden's formal blue uniform"]
+nominative = "официальная синяя униформа смотрителя"
+genitive = "официальной синей униформы смотрителя"
+dative = "официальной синей униформе смотрителя"
+accusative = "официальную синюю униформу смотрителя"
+instrumental = "официальной синей униформой смотрителя"
+prepositional = "официальной синей униформе смотрителя"
 gender = "female"
 
 ["security door remote"]
@@ -10067,6 +10130,15 @@ instrumental = "комбинезоном парамедика"
 prepositional = "комбинезоне парамедика"
 gender = "male"
 
+["light paramedic uniform"]
+nominative = "светлая униформа парамедика"
+genitive = "светлой униформы парамедика"
+dative = "светлой униформе парамедика"
+accusative = "светлую униформу парамедика"
+instrumental = "светлой униформой парамедика"
+prepositional = "светлой униформе парамедика"
+gender = "male"
+
 ["paramedic jumpskirt"]
 nominative = "юбка-комбинезон парамедика"
 genitive = "юбки-комбинезона парамедика"
@@ -10074,6 +10146,15 @@ dative = "юбке-комбинезону парамедика"
 accusative = "юбку-комбинезон парамедика"
 instrumental = "юбкой-комбинезоном парамедика"
 prepositional = "юбке-комбинезоне парамедика"
+gender = "female"
+
+["light paramedic skirt"]
+nominative = "светлая юбка парамедика"
+genitive = "светлой юбки парамедика"
+dative = "светлой юбке парамедика"
+accusative = "светлую юбку парамедика"
+instrumental = "светлой юбкой парамедика"
+prepositional = "светлой юбке парамедика"
 gender = "female"
 
 ["paramedic's jacket"]
@@ -12965,6 +13046,15 @@ dative = "юбке-комбинезону учёного"
 accusative = "юбку-комбинезон учёного"
 instrumental = "юбкой-комбинезоном учёного"
 prepositional = "юбке-комбинезоне учёного"
+gender = "female"
+
+["science utility uniform"]
+nominative = "практичная научная униформа"
+genitive = "практической научной униформы"
+dative = "практической научной униформе"
+accusative = "практичную научную униформу"
+instrumental = "практической научной униформой"
+prepositional = "практической научной униформе"
 gender = "female"
 
 ["science winter coat"]
@@ -17234,6 +17324,33 @@ instrumental = "полосатой инженерной банданой"
 prepositional = "полосатой инженерной бандане"
 gender = "female"
 
+["engineering alternative jumpsuit"]
+nominative = "инженерный комбинезон"
+genitive = "инженерного комбинезона"
+dative = "инженерному комбинезону"
+accusative = "инженерный комбинезон"
+instrumental = "инженерным комбинезоном"
+prepositional = "инженерном комбинезоне"
+gender = "male"
+
+["engineering alternative jumpskirt"]
+nominative = "инженерная юбка-комбинезон"
+genitive = "инженерной юбки-комбинезона"
+dative = "инженерной юбке-комбинезону"
+accusative = "инженерную юбку-комбинезон"
+instrumental = "инженерной юбкой-комбинезоном"
+prepositional = "инженерной юбке-комбинезоне"
+gender = "female"
+
+["mechanic uniform"]
+nominative = "униформа механика"
+genitive = "униформы механика"
+dative = "униформе механика"
+accusative = "униформу механика"
+instrumental = "униформой механика"
+prepositional = "униформе механика"
+gender = "female"
+
 ["engineer's jumpskirt"]
 nominative = "юбка-комбинезон инженера"
 genitive = "юбки-комбинезона инженера"
@@ -19027,6 +19144,24 @@ dative = "юбке-костюму синего щита"
 accusative = "юбку-костюм синего щита"
 instrumental = "юбкой-костюмом синего щита"
 prepositional = "юбке-костюме синего щита"
+gender = "female"
+
+["blueshield's blue skirt"]
+nominative = "синяя юбка синего щита"
+genitive = "синей юбки синего щита"
+dative = "синей юбке синего щита"
+accusative = "синюю юбку синего щита"
+instrumental = "синей юбкой синего щита"
+prepositional = "синей юбке синего щита"
+gender = "female"
+
+["blueshield's black skirt"]
+nominative = "чёрная юбка синего щита"
+genitive = "чёрной юбки синего щита"
+dative = "чёрной юбке синего щита"
+accusative = "чёрную юбку синего щита"
+instrumental = "чёрной юбкой синего щита"
+prepositional = "чёрной юбке синего щита"
 gender = "female"
 
 ["blueshield's casual suit"]
