@@ -2014,9 +2014,6 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/tcommsat/computer)
-"aFo" = (
-/turf/open/space/basic,
-/area/station/solars/port/aft)
 "aGd" = (
 /obj/structure/table,
 /obj/machinery/camera/directional/west{
@@ -3720,7 +3717,7 @@
 /turf/open/floor/iron/dark,
 /area/station/medical/medbay/central)
 "blX" = (
-/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
+/obj/machinery/atmospherics/pipe/layer_manifold/yellow/visible,
 /turf/closed/wall/r_wall,
 /area/station/engineering/atmos)
 "blZ" = (
@@ -40277,11 +40274,6 @@
 	},
 /turf/open/floor/circuit/green,
 /area/station/engineering/storage/tech)
-"nfP" = (
-/obj/structure/lattice,
-/obj/structure/grille/broken,
-/turf/open/space/basic,
-/area/space)
 "nfR" = (
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/structure/flora/bush/lavendergrass/style_random,
@@ -41880,7 +41872,7 @@
 "nIG" = (
 /obj/structure/grille,
 /turf/open/space/basic,
-/area/space)
+/area/space/nearstation)
 "nIO" = (
 /obj/structure/sign/warning/secure_area,
 /turf/closed/wall/r_wall,
@@ -44719,10 +44711,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
-"oMy" = (
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/station/solars/port/aft)
 "oMA" = (
 /obj/structure/cable,
 /obj/machinery/vending/wardrobe/gene_wardrobe,
@@ -46903,11 +46891,6 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood,
 /area/station/maintenance/starboard/fore)
-"pvX" = (
-/obj/structure/lattice,
-/obj/structure/grille,
-/turf/open/space/basic,
-/area/space)
 "pwa" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/effect/turf_decal/delivery,
@@ -48915,10 +48898,6 @@
 /obj/effect/turf_decal/tile/green/half/contrasted,
 /turf/open/floor/iron/showroomfloor,
 /area/station/science/ordnance/storage)
-"qex" = (
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/station/solars/starboard/aft)
 "qez" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/disposalpipe/segment{
@@ -63835,11 +63814,6 @@
 /obj/structure/cable,
 /turf/open/floor/grass,
 /area/station/security/prison/garden)
-"uXy" = (
-/obj/structure/grille,
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/space)
 "uXB" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/closet/firecloset,
@@ -84603,11 +84577,11 @@ drM
 tPH
 cmU
 cmU
-cry
-cry
-cry
-cry
-cry
+aaa
+aaa
+aaa
+aaa
+aaa
 bSt
 aaa
 aaa
@@ -84864,9 +84838,9 @@ gUw
 gUw
 gUw
 gUw
-oMy
+acm
 awn
-oMy
+acm
 gUw
 gUw
 gUw
@@ -85378,9 +85352,9 @@ oQQ
 oQQ
 oQQ
 oQQ
-oMy
+acm
 awn
-oMy
+acm
 oQQ
 gUw
 gUw
@@ -85630,19 +85604,19 @@ fWk
 xDE
 aKY
 cmU
-oMy
-aFo
-aFo
-aFo
-aFo
-aFo
+acm
+aaa
+aaa
+aaa
+aaa
+aaa
 awn
-aFo
-aFo
-aFo
-aFo
-aFo
-oMy
+aaa
+aaa
+aaa
+aaa
+aaa
+acm
 aaa
 acm
 aaa
@@ -85892,9 +85866,9 @@ gUw
 gUw
 gUw
 gUw
-oMy
+acm
 awn
-oMy
+acm
 gUw
 gUw
 gUw
@@ -86406,9 +86380,9 @@ gUw
 gUw
 gUw
 gUw
-oMy
+acm
 awn
-oMy
+acm
 gUw
 gUw
 gUw
@@ -86658,19 +86632,19 @@ mes
 ubN
 tPH
 cmU
-oMy
-aFo
-aFo
-aFo
-aFo
-aFo
+acm
+aaa
+aaa
+aaa
+aaa
+aaa
 awn
-aFo
-aFo
-aFo
-aFo
-aFo
-oMy
+aaa
+aaa
+aaa
+aaa
+aaa
+acm
 aaa
 aeo
 aaa
@@ -86920,9 +86894,9 @@ gUw
 gUw
 gUw
 gUw
-oMy
+acm
 awn
-oMy
+acm
 gUw
 oQQ
 gUw
@@ -87434,9 +87408,9 @@ gUw
 gUw
 gUw
 gUw
-oMy
+acm
 awn
-oMy
+acm
 gUw
 gUw
 gUw
@@ -87686,20 +87660,20 @@ acm
 aeo
 aeU
 cmU
-cry
-cry
-cry
-cry
-cry
-cry
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
 awn
-cry
-cry
-cry
-cry
-cry
-cry
-cry
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
+aaa
 aeo
 aaa
 acm
@@ -115988,7 +115962,7 @@ cmU
 aaa
 aaQ
 aaa
-acm
+aaa
 aaa
 aaa
 aaa
@@ -116235,16 +116209,16 @@ gix
 gix
 gix
 gfB
-qex
+acm
 qsy
-qex
+acm
 gix
 gix
 gix
 nUv
 aOP
-cry
-uXy
+acm
+pUY
 aaa
 aaa
 aaa
@@ -116500,8 +116474,8 @@ oAg
 oAg
 oAg
 qsy
-cry
-uXy
+aaa
+pUY
 aaa
 aaa
 aaa
@@ -116749,15 +116723,15 @@ aOP
 aOP
 gix
 gix
-qex
+acm
 nNb
-qex
+acm
 gix
 kgD
 gix
 gix
 gfB
-cry
+aaa
 pUY
 aaa
 aaa
@@ -117001,7 +116975,7 @@ rCi
 pcC
 aeU
 cmU
-cko
+acm
 nNb
 acm
 aaa
@@ -117254,7 +117228,7 @@ bUN
 bUN
 bUk
 ctu
-aeu
+iVL
 aeU
 aeU
 cmU
@@ -117511,7 +117485,7 @@ bUN
 bUN
 bUC
 kdH
-aeU
+kdH
 cmU
 aUz
 cmU
@@ -118029,7 +118003,7 @@ aaa
 acm
 aaa
 acm
-aaa
+acm
 nNb
 acm
 aaa
@@ -118291,9 +118265,9 @@ daS
 gfB
 gfB
 gfB
-qex
+acm
 nNb
-qex
+acm
 gix
 gix
 kgD
@@ -118557,7 +118531,7 @@ oAg
 oAg
 qsy
 acm
-pvX
+aeo
 aaa
 aaa
 aaa
@@ -118805,16 +118779,16 @@ gfB
 gfB
 daS
 gix
-qex
+acm
 oAg
-qex
+acm
 kgD
 kgD
 kgD
 gix
 nom
 acm
-nfP
+aaQ
 aaa
 aaa
 aaa
@@ -119071,7 +119045,7 @@ acm
 aaa
 aaa
 acm
-pvX
+aeo
 aaa
 aaa
 aaa
@@ -119328,7 +119302,7 @@ aeo
 aeo
 aeo
 aeo
-pvX
+aeo
 aaa
 aaa
 aaa
