@@ -8,10 +8,12 @@
 	name = "Синдром пробужденного Бога"
 	desc = "Время от времени пациент неконтролируемо транслирует речь древнего бога."
 	scan_desc = "божественная иллюзия"
+	symptoms = "Occasionally utters phrases or commands in a commanding tone, often accompanied by a sense of divine authority. \
+		These utterances can influence the behavior of others, compelling them to act in accordance with the spoken words."
 	gain_text = span_notice("Вы чувствуете высшую силу внутри своего разума...")
 	lose_text = span_warning("Божественное присутствие покидает вашу голову, потеряв интерес.")
 
-/datum/brain_trauma/special/godwoken/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/special/godwoken/on_life(seconds_per_tick)
 	..()
 	if(SPT_PROB(2, seconds_per_tick))
 		if(prob(33) && (owner.IsStun() || owner.IsParalyzed() || owner.IsUnconscious()))
@@ -52,12 +54,14 @@
 	name = "Блюспейс пророчество"
 	desc = "Пациент может ощущать колебания и переплетения блюспейса вокруг себя, показывающего проходы, которые никто другой не может увидеть."
 	scan_desc = "bluespace attunement"
+	symptoms = "Gains the ability to perceive hidden pathways through bluespace, allowing for spontaneous creation of temporary portals \
+		that connect two distant locations. To the average eye, the patient appears to disappear into thin air, only to reappear elsewhere nearby."
 	gain_text = span_notice("Вы чувствуете, как блюспейс пульсирует вокруг тебя...")
 	lose_text = span_warning("Слабая пульсация блюспейса сменяется тишиной.")
 	/// Cooldown so we can't teleport literally everywhere on a whim
 	COOLDOWN_DECLARE(portal_cooldown)
 
-/datum/brain_trauma/special/bluespace_prophet/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/special/bluespace_prophet/on_life(seconds_per_tick)
 	if(!COOLDOWN_FINISHED(src, portal_cooldown))
 		return
 
@@ -156,6 +160,8 @@
 	name = "Квантовое выравнивание"
 	desc = "Пациент склонен к частой спонтанной квантовой запутанности, вопреки всем обстоятельствам, что приводит к пространственным аномалиям."
 	scan_desc = "квантовое выравнивание"
+	symptoms = "Frequently experiences spontaneous quantum entanglement with nearby objects or beings, \
+		resulting in sudden and unpredictable teleportation events that connect the patient to the entangled target."
 	gain_text = span_notice("Вы чувствуете слабую связь со всем, что вас окружает...")
 	lose_text = span_warning("Вы больше не чувствуете связи со своим окружением.")
 	var/atom/linked_target = null
@@ -164,7 +170,7 @@
 	/// Cooldown for snapbacks
 	COOLDOWN_DECLARE(snapback_cooldown)
 
-/datum/brain_trauma/special/quantum_alignment/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/special/quantum_alignment/on_life(seconds_per_tick)
 	if(linked)
 		if(QDELETED(linked_target))
 			linked_target = null
@@ -239,6 +245,8 @@
 	name = "Насильственный психоз"
 	desc = "Пациент сражается непредсказуемыми способами, начиная от оказания помощи своей жертве и заканчивая нанесением ей жестоких ударов."
 	scan_desc = "насильственный психоз"
+	symptoms = "Exhibits erratic and potentially violent behavior when in physical contact with others, \
+		often accidentally attacking those they intend to offer a hand, or hugging those who they mean to strike."
 	gain_text = span_warning("Вы чувствуете себя расстроенными...")
 	lose_text = span_notice("Вы чувствуете себя более уравновешенным.")
 	/// The martial art we teach
@@ -261,6 +269,8 @@
 	name = "Упорство"
 	desc = "Пациент психологически нечувствителен к боли и травмам и может оставаться на ногах гораздо дольше обычного человека."
 	scan_desc = "травматическая невропатия"
+	symptoms = "Exhibits a remarkable resistance to pain and physical trauma, \
+		allowing them to sustain severe injuries that would incapacitate an otherwise normal individual."
 	gain_text = span_warning("Вы внезапно перестаете чувствовать боль.")
 	lose_text = span_warning("Вы понимаете, что снова можете чувствовать боль.")
 
@@ -276,6 +286,8 @@
 	name = "Функциональный церебральный некроз"
 	desc = "Мозг пациента находится в функциональном предсмертном состоянии, что время от времени вызывает осознанные галлюцинации, которые часто интерпретируются как голоса умерших."
 	scan_desc = "хронический функциональный некроз"
+	symptoms = "Experiences intermittent auditory hallucinations characterized by whispering voices, \
+		which are often perceived as communications from the deceased."
 	gain_text = span_warning("Вы чувствуете себя мертвым внутри.")
 	lose_text = span_notice("Вы снова чувствуете себя живым.")
 	var/active = FALSE
@@ -303,13 +315,15 @@
 	name = "Экзистенциальный кризис"
 	desc = "Связь пациента с реальностью ослабевает, вызывая периодические эпизоды несуществования."
 	scan_desc = "экзистенциальный кризис"
+	symptoms = "Experiences sporadic episodes of \"non-existence\", during which the patient temporarily fades out of reality, \
+		becoming intangible and invisible to others. Often accompanied by feelings of detachment, depression, and disorientation."
 	gain_text = span_warning("Вы чувствуете себя менее реальным.")
 	lose_text = span_notice("Вы снова чувствуете себя более значимым.")
 	var/obj/effect/abstract/sync_holder/veil/veil
 	/// A cooldown to prevent constantly erratic dolphining through the fabric of reality
 	COOLDOWN_DECLARE(crisis_cooldown)
 
-/datum/brain_trauma/special/existential_crisis/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/special/existential_crisis/on_life(seconds_per_tick)
 	..()
 	if(!veil && COOLDOWN_FINISHED(src, crisis_cooldown) && SPT_PROB(1.5, seconds_per_tick))
 		if(isturf(owner.loc))
@@ -354,6 +368,7 @@
 	gain_text = span_warning("Правосудие придет за вами.")
 	lose_text = span_notice("Вы были освобождены от ответственности за ваши преступления.")
 	random_gain = FALSE
+	known_trauma = FALSE
 	/// A ref to our fake beepsky image that we chase the owner with
 	var/obj/effect/client_image_holder/securitron/beepsky
 
@@ -430,6 +445,10 @@
 	name = "Боевое ПТСР"
 	desc = "Пациент испытывает посттравматическое стрессовое расстройство, вызванное пережитыми боевыми действиями, что приводит к отсутствию эмоций. Кроме того, у него наблюдаются лёгкие галлюцинации."
 	scan_desc = "ПТСР"
+	symptoms = "Witnessed or experienced a traumatic, horrific, or potentially life threatening event, \
+		resulting in avoidance, intrusive thoughts, flashbacks, auditory hallucinations, \
+		emotional numbness, detachment from others, and heightened reactivity to stimuli - \
+		particularly in situations reminiscent of the traumatic event."
 	gain_text = span_warning("Вы возвращаетесь в хаос прошлого! Взрывы! Стрельба! Эмоции покинули строй!")
 	lose_text = span_notice("Вы чувствуете, как исчезают воспоминания о прошлом, как возвращаются ваши эмоции и проясняется разум.")
 	resilience = TRAUMA_RESILIENCE_ABSOLUTE
@@ -449,7 +468,7 @@
 		/datum/hallucination/battle/stun_prod,
 	)
 
-/datum/brain_trauma/special/ptsd/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/special/ptsd/on_life(seconds_per_tick)
 	if(owner.stat != CONSCIOUS)
 		return
 
@@ -477,6 +496,9 @@
 	name = "Дикие инстинкты"
 	desc = "Разум пациента застревает в первобытном состоянии, заставляя его действовать скорее инстинктивно, чем разумно."
 	scan_desc = "одичание"
+	symptoms = "Rarely experiences episodes where higher cognitive functions are suppressed, \
+		resulting in behavior driven primarily by primal instincts. During these episodes, \
+		the patient may exhibit increased aggression, territoriality, and a focus on basic survival needs."
 	gain_text = span_warning("Ваши зрачки расширяются, и вам становится все труднее мыслить здраво.")
 	lose_text = span_notice("Ваш разум проясняется, и вы чувствуете, что лучше контролируете ситуацию.")
 	resilience = TRAUMA_RESILIENCE_SURGERY
@@ -504,7 +526,7 @@
 		owner.ai_controller = new old_ai_controller_type(owner)
 	owner.remove_language(/datum/language/monkey, UNDERSTOOD_LANGUAGE, TRAUMA_TRAIT)
 
-/datum/brain_trauma/special/primal_instincts/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/special/primal_instincts/on_life(seconds_per_tick)
 	if(isnull(owner.ai_controller))
 		qdel(src)
 		return
@@ -534,6 +556,7 @@
 	lose_text = span_warning("Вы чувствуете, что потеряли чувство долга.")
 	resilience = TRAUMA_RESILIENCE_ABSOLUTE
 	random_gain = FALSE
+	known_trauma = FALSE
 	var/static/list/talk_lines = list(
 		"Я горжусь тобой.",
 		"Я верю в тебя!",
@@ -558,7 +581,7 @@
 		"Ах!",
 	)
 
-/datum/brain_trauma/special/axedoration/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/special/axedoration/on_life(seconds_per_tick)
 	if(owner.stat != CONSCIOUS)
 		return
 

@@ -11,7 +11,9 @@
 	operation_flags = OPERATION_LOCKED | OPERATION_NOTABLE
 	time = 20 SECONDS
 	target_type = /obj/item/organ/wings/moth
-	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
+	all_surgery_states_required = SURGERY_SKIN_OPEN
+	any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
+	required_organ_flag = NONE
 
 /datum/surgery_operation/organ/fix_wings/get_default_radial_image()
 	return image(icon = 'icons/mob/human/species/moth/moth_wings.dmi', icon_state = "m_moth_wings_monarch_BEHIND")
@@ -26,7 +28,7 @@
 	if(!organ.burnt)
 		return FALSE
 	// If bones are sawed, prevent the operation (unless we're operating on a limb with no bones)
-	if(!LIMB_HAS_ANY_SURGERY_STATE(organ.bodypart_owner, SURGERY_BONE_DRILLED|SURGERY_BONE_SAWED) && LIMB_HAS_BONES(organ.bodypart_owner))
+	if(LIMB_HAS_ANY_SURGERY_STATE(organ.bodypart_owner, SURGERY_BONE_DRILLED|SURGERY_BONE_SAWED) && LIMB_HAS_BONES(organ.bodypart_owner))
 		return FALSE
 	if(organ.owner.reagents?.get_reagent_amount(/datum/reagent/medicine/c2/synthflesh) < 5)
 		return FALSE
@@ -36,9 +38,9 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_notice("Вы начинаете чинить повреждённые крылья [organ.owner]..."),
-		span_notice("[surgeon] начинает чинить повреждённые крылья [organ.owner]."),
-		span_notice("[surgeon] начинает операцию на повреждённых крыльях [organ.owner]."),
+		span_notice("Вы начинаете чинить повреждённые крылья [organ.owner.declent_ru(GENITIVE)]..."),
+		span_notice("[surgeon] начинает чинить повреждённые крылья [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает операцию на повреждённых крыльях [organ.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(organ.owner, "Ваши крылья адски жгутся!")
 
@@ -46,9 +48,9 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_notice("Вам удаётся полностью восстановить крылья [organ.owner]."),
-		span_notice("[surgeon] успешно восстанавливает крылья [organ.owner]!"),
-		span_notice("[surgeon] завершает операцию на крыльях [organ.owner]."),
+		span_notice("Вам удаётся полностью восстановить крылья [organ.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] успешно восстанавливает крылья [organ.owner.declent_ru(GENITIVE)]!"),
+		span_notice("[surgeon] завершает операцию на крыльях [organ.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(organ.owner, "Вы снова чувствуете свои крылья!")
 	// heal the wings in question

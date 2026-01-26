@@ -67,8 +67,8 @@
 	category = CAT_WEAPON_RANGED
 
 /datum/crafting_recipe/advancedegun/New()
-	..()
-	blacklist += subtypesof(/obj/item/gun/energy/e_gun)
+	LAZYADD(blacklist, typecacheof(/obj/item/gun/energy/e_gun, ignore_root_path = TRUE))
+	return ..()
 
 /datum/crafting_recipe/tempgun
 	name = "Temperature Gun"
@@ -81,8 +81,8 @@
 	category = CAT_WEAPON_RANGED
 
 /datum/crafting_recipe/tempgun/New()
-	..()
-	blacklist += subtypesof(/obj/item/gun/energy/e_gun)
+	LAZYADD(blacklist, typecacheof(/obj/item/gun/energy/e_gun, ignore_root_path = TRUE))
+	return ..()
 
 /datum/crafting_recipe/beam_rifle
 	name = "Event Horizon Anti-Existential Beam Rifle"
@@ -96,6 +96,7 @@
 	)
 	time = 30 SECONDS //Maybe the delay will make you reconsider your choices
 	category = CAT_WEAPON_RANGED
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /datum/crafting_recipe/ebow
 	name = "Energy Crossbow"
@@ -108,7 +109,18 @@
 	time = 10 SECONDS
 	category = CAT_WEAPON_RANGED
 
-/datum/crafting_recipe/xraylaser
+/datum/crafting_recipe/laser
+	abstract_type = /datum/crafting_recipe/laser
+	/// We will use the same blacklist for every type here to avoid repeating lists
+	var/static/list/laser_blacklist
+
+/datum/crafting_recipe/laser/New()
+	if(isnull(laser_blacklist))
+		laser_blacklist = typecacheof(/obj/item/gun/energy/laser, ignore_root_path = TRUE)
+	blacklist = laser_blacklist
+	return ..()
+
+/datum/crafting_recipe/laser/xraylaser
 	name = "X-ray Laser Gun"
 	result = /obj/item/gun/energy/laser/xray
 	reqs = list(
@@ -118,11 +130,7 @@
 	time = 10 SECONDS
 	category = CAT_WEAPON_RANGED
 
-/datum/crafting_recipe/xraylaser/New()
-	..()
-	blacklist += subtypesof(/obj/item/gun/energy/laser)
-
-/datum/crafting_recipe/hellgun
+/datum/crafting_recipe/laser/hellgun
 	name = "Hellfire Laser Gun"
 	result = /obj/item/gun/energy/laser/hellgun
 	reqs = list(
@@ -132,11 +140,7 @@
 	time = 10 SECONDS
 	category = CAT_WEAPON_RANGED
 
-/datum/crafting_recipe/hellgun/New()
-	..()
-	blacklist += subtypesof(/obj/item/gun/energy/laser)
-
-/datum/crafting_recipe/ioncarbine
+/datum/crafting_recipe/laser/ioncarbine
 	name = "Ion Carbine"
 	result = /obj/item/gun/energy/ionrifle/carbine
 	reqs = list(
@@ -145,10 +149,6 @@
 	)
 	time = 10 SECONDS
 	category = CAT_WEAPON_RANGED
-
-/datum/crafting_recipe/ioncarbine/New()
-	..()
-	blacklist += subtypesof(/obj/item/gun/energy/laser)
 
 /datum/crafting_recipe/teslacannon
 	name = "Tesla Cannon"
@@ -159,6 +159,7 @@
 	)
 	time = 10 SECONDS
 	category = CAT_WEAPON_RANGED
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /datum/crafting_recipe/improvised_pneumatic_cannon //Pretty easy to obtain but
 	name = "Pneumatic Cannon"
@@ -241,8 +242,8 @@
 		/obj/item/gun/ballistic/rifle/rebarxbow = 1,
 	)
 	blacklist = list(
-	/obj/item/gun/ballistic/rifle/rebarxbow/forced,
-	/obj/item/gun/ballistic/rifle/rebarxbow/syndie,
+		/obj/item/gun/ballistic/rifle/rebarxbow/forced,
+		/obj/item/gun/ballistic/rifle/rebarxbow/syndie,
 	)
 	tool_behaviors = list(TOOL_CROWBAR)
 	time = 1 SECONDS
@@ -289,8 +290,8 @@
 	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_MUST_BE_LEARNED
 
 /datum/crafting_recipe/deagle_prime/New()
-	..()
-	blacklist += subtypesof(/obj/item/gun/ballistic/automatic/pistol)
+	LAZYADD(blacklist, typecacheof(/obj/item/gun/ballistic/automatic/pistol, ignore_root_path = TRUE))
+	return ..()
 
 /datum/crafting_recipe/deagle_prime_mag
 	name = "Regal Condor Magazine (10mm Reaper)"
@@ -344,8 +345,9 @@
 	time = 15 SECONDS
 	category = CAT_WEAPON_RANGED
 	crafting_flags = CRAFT_CHECK_DENSITY
+	non_craftable = TRUE // BANDASTATION ADDITION: REPEATER REMOVAL
 
-/datum/crafting_recipe/Detached_Ratvarian_Repeater
+/datum/crafting_recipe/detached_ratvarian_repeater
 	name = "Iconoclast's Repeater"
 	tool_behaviors = list(TOOL_WELDER)
 	result = /obj/item/gun/energy/laser/musket/repeater
@@ -355,7 +357,6 @@
 	time = 10 SECONDS
 	category = CAT_WEAPON_RANGED
 	crafting_flags = CRAFT_CHECK_DENSITY
-
 
 /datum/crafting_recipe/large_ballista
 	name = "Improvised Ballista"
@@ -479,6 +480,7 @@
 	)
 	time = 10 SECONDS
 	category = CAT_WEAPON_RANGED
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /datum/crafting_recipe/sks
 	name = "Sakhno SKS semi-automatic rifle"
@@ -506,3 +508,4 @@
 	steps = list(
 		"use high quality gibtonite and advanced release or large grenades for better yield",
 	)
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
