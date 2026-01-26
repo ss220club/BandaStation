@@ -116,6 +116,7 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
 	icon_state = "security_skirt"
 	body_parts_covered = CHEST|GROIN|ARMS
+	dying_key = DYE_REGISTRY_JUMPSKIRT
 	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 	alt_covers_chest = TRUE
 	armor_type = /datum/armor/clothing_under/rank_security
@@ -144,8 +145,8 @@
 	alt_covers_chest = TRUE
 	armor_type = /datum/armor/clothing_under/rank_security
 
-/obj/item/clothing/under/security/warden_black
-	name = "warden's black uniform"
+/obj/item/clothing/under/security/alternative_black
+	name = "security alternative black uniform"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
 	icon_state = "warden_black"
@@ -158,6 +159,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/blueshield.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/blueshield.dmi'
 	icon_state = "plain_skirt_blue"
+	inhand_icon_state = null
 	body_parts_covered = CHEST|GROIN|ARMS
 	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 	alt_covers_chest = TRUE
@@ -168,7 +170,9 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/blueshield.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/blueshield.dmi'
 	icon_state = "plain_skirt_black"
+	inhand_icon_state = null
 	body_parts_covered = CHEST|GROIN|ARMS
+	dying_key = DYE_REGISTRY_JUMPSKIRT
 	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 	alt_covers_chest = TRUE
 	armor_type = /datum/armor/clothing_under/rank_blueshield
@@ -179,7 +183,9 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
 	icon_state = "security_skirt_blue"
+	inhand_icon_state = null
 	body_parts_covered = CHEST|GROIN|ARMS
+	dying_key = DYE_REGISTRY_JUMPSKIRT
 	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 	alt_covers_chest = TRUE
 	armor_type = /datum/armor/clothing_under/rank_security
@@ -189,6 +195,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
 	icon_state = "formal_blue"
+	inhand_icon_state = null
 	alt_covers_chest = TRUE
 	armor_type = /datum/armor/clothing_under/rank_security
 
@@ -208,8 +215,8 @@
 	can_adjust = TRUE
 	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 
-/obj/item/clothing/under/engineering/engineering_guard
-	name = "engineering guard uniform"
+/obj/item/clothing/under/engineering/mechanic
+	name = "mechanic uniform"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/engineering.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/engineering.dmi'
 	icon_state = "engineering_guard_uniform"

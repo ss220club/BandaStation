@@ -268,6 +268,7 @@
 		/obj/item/clothing/head/soft/sec/corporate = 3,
 		/obj/item/clothing/under/security/formal = 3,
 		/obj/item/clothing/under/security/black = 3,
+		/obj/item/clothing/under/security/alternative_black = 3,
 		/obj/item/clothing/head/sec_beanie = 3,
 		/obj/item/clothing/neck/cloak/sec_poncho = 3,
 		/obj/item/clothing/under/rank/security/officer/corporate = 3,
@@ -277,7 +278,6 @@
 		/obj/item/clothing/suit/armor/vest/coat = 3,
 		/obj/item/clothing/suit/armor/vest/caftan = 3,
 		/obj/item/clothing/under/security/turtleneck = 3,
-		/obj/item/clothing/under/security/warden_black = 3,
 		)
 	. = ..()
 
@@ -294,7 +294,7 @@
 	products += list(
 		/obj/item/clothing/under/engineering/telecomm = 3,
 		/obj/item/clothing/under/engineering/telecomm/skirt = 3,
-		/obj/item/clothing/under/engineering/engineering_guard = 3,
+		/obj/item/clothing/under/engineering/mechanic = 3,
 		)
 	. = ..()
 

@@ -2395,13 +2395,13 @@ instrumental = "водолазкой охраны"
 prepositional = "водолазке охраны"
 gender = "female"
 
-["warden's black uniform"]
-nominative = "чёрная униформа смотрителя"
-genitive = "чёрной униформы смотрителя"
-dative = "чёрной униформе смотрителя"
-accusative = "чёрную униформу смотрителя"
-instrumental = "чёрной униформой смотрителя"
-prepositional = "чёрной униформе смотрителя"
+["security alternative black uniform"]
+nominative = "чёрная униформа охраны"
+genitive = "чёрной униформы охраны"
+dative = "чёрной униформе охраны"
+accusative = "чёрную униформу охраны"
+instrumental = "чёрной униформой охраны"
+prepositional = "чёрной униформе охраны"
 gender = "female"
 
 ["grey security jumpsuit"]
@@ -17315,13 +17315,13 @@ instrumental = "инженерной юбкой-комбинезоном"
 prepositional = "инженерной юбке-комбинезоне"
 gender = "female"
 
-["engineering guard uniform"]
-nominative = "униформа инженерной охраны"
-genitive = "униформы инженерной охраны"
-dative = "униформе инженерной охраны"
-accusative = "униформу инженерной охраны"
-instrumental = "униформой инженерной охраны"
-prepositional = "униформе инженерной охраны"
+["mechanic uniform"]
+nominative = "униформа механика"
+genitive = "униформы механика"
+dative = "униформе механика"
+accusative = "униформу механика"
+instrumental = "униформой механика"
+prepositional = "униформе механика"
 gender = "female"
 
 ["engineer's jumpskirt"]
