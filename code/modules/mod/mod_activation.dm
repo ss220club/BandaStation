@@ -169,8 +169,8 @@
 	if(cloth_type && src.theme.worn_cloth_icons[cloth_type][1] != "")
 		overslot.worn_icon = src.theme.worn_cloth_icons[cloth_type][1]
 		overslot.worn_icon_state = src.theme.worn_cloth_icons[cloth_type][2]
-		src.theme.worn_cloth_icons[cloth_type][1] = "icon"
-		src.theme.worn_cloth_icons[cloth_type][2] = "state"
+		src.theme.worn_cloth_icons[cloth_type][1] = ""
+		src.theme.worn_cloth_icons[cloth_type][2] = ""
 	//BANDASTATION ADD stop - modsuits improvements expansion
 	if(part_datum.overslotting)
 		overslot = part_datum.overslotting

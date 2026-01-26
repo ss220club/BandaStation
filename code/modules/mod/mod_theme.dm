@@ -52,10 +52,10 @@
 	//BANDASTATION ADD start - modsuits improvements expansion
 	/// List of wearer clothes textures. Needed for closing sequence
 	var/list/worn_cloth_icons = list(
-		"head" = list("icon", "state"),
-		"suit" = list("icon", "state"),
-		"gloves" = list("icon", "state"),
-		"shoes" = list("icon", "state")
+		"head" = list("", ""),
+		"suit" = list("", ""),
+		"gloves" = list("", ""),
+		"shoes" = list("", "")
 	)
 	//BANDASTATION ADD stop - modsuits improvements expansion
 	/// List of variants and items created by them, with the flags we set.
