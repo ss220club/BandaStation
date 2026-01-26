@@ -2669,15 +2669,6 @@
 	},
 /turf/open/floor/grass,
 /area/station/medical/paramedic)
-"aPX" = (
-/obj/structure/cable,
-/obj/machinery/power/solar{
-	id = "aftstarboard";
-	name = "Aft-Starboard Solar Array"
-	},
-/obj/structure/cable,
-/turf/open/floor/iron/solarpanel/airless,
-/area/station/solars/starboard/aft)
 "aQl" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -29352,7 +29343,6 @@
 /obj/effect/mapping_helpers/broken_floor,
 /obj/effect/landmark/event_spawn,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
 /area/station/maintenance/disposal)
 "jzh" = (
@@ -34074,19 +34064,6 @@
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/science/ordnance)
-"ldd" = (
-/obj/machinery/power/solar{
-	id = "aftstarboard";
-	name = "Aft-Starboard Solar Array"
-	},
-/obj/effect/turf_decal/box,
-/obj/structure/cable,
-/obj/machinery/power/solar{
-	id = "aftstarboard";
-	name = "Aft-Starboard Solar Array"
-	},
-/turf/open/floor/iron/solarpanel/airless,
-/area/station/solars/starboard/aft)
 "lds" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/item/stack/rods,
@@ -48448,7 +48425,6 @@
 /turf/open/floor/carpet/red,
 /area/station/command/heads_quarters/hos)
 "pUY" = (
-/obj/structure/lattice,
 /obj/structure/grille,
 /obj/structure/lattice,
 /turf/open/space/basic,
@@ -72847,11 +72823,6 @@
 /obj/effect/landmark/navigate_destination/bar,
 /turf/open/floor/iron/dark,
 /area/station/hallway/secondary/service)
-"xLl" = (
-/obj/structure/lattice/catwalk,
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/station/solars/port/aft)
 "xLC" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/stripes/line{
@@ -85153,7 +85124,7 @@ awn
 awn
 awn
 awn
-xLl
+awn
 awn
 awn
 awn
@@ -116273,7 +116244,7 @@ qex
 gix
 gix
 gix
-aPX
+nUv
 aOP
 cry
 uXy
@@ -116785,7 +116756,7 @@ qex
 nNb
 qex
 gix
-ldd
+kgD
 gix
 gix
 gfB
@@ -118835,7 +118806,7 @@ acm
 aOP
 gfB
 gfB
-nUv
+daS
 gix
 qex
 oAg
