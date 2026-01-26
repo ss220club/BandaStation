@@ -49,7 +49,7 @@ export function AdminFax() {
   const [rawText, setRawText] = useState(prefillText);
   
   const [signerName, setSignerName] = useState(generatedName);
-  const [signerJob, setSignerJob] = useState('Офицер ЦентКом'); // Дефолтная должность
+  const [signerJob, setSignerJob] = useState('Centcom Intern'); // Дефолтная должность
 
   const [stamp, setStamp] = useState('');
   const [stampCoordX, setStampCoordX] = useState(0);
