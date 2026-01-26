@@ -63,6 +63,7 @@
 	var/datum/action/cooldown/mob_cooldown/chase_target/chase_target
 	/// Create Turrets Ability
 	var/datum/action/cooldown/mob_cooldown/create_legion_turrets/create_legion_turrets
+	var/last_legion // BANDASTATION EDIT
 
 /mob/living/simple_animal/hostile/megafauna/legion/Initialize(mapload)
 	. = ..()
@@ -166,7 +167,7 @@
 	if(Split())
 		return
 	//We check what loot we should drop.
-	var/last_legion = TRUE
+	last_legion = TRUE // BANDASTATION EDIT
 	for(var/mob/living/simple_animal/hostile/megafauna/legion/other in GLOB.mob_living_list)
 		if(other != src)
 			last_legion = FALSE
@@ -175,11 +176,6 @@
 		loot = list(/obj/item/storm_staff)
 		var/list/achievements = list(/datum/award/achievement/boss/boss_killer, /datum/award/score/boss_score, /datum/award/score/legion_score, /datum/award/achievement/boss/legion_kill)
 		AddElement(/datum/element/kill_achievement, string_list(achievements), crusher_achievement_type, /datum/memory/megafauna_slayer)
-		// BANDASTATION EDIT START
-		death_sound = 'modular_bandastation/mobs/sound/legion_death.ogg'
-		for(var/area/lavaland/L in typesof(/area/lavaland))
-			SEND_SOUND(L, sound('modular_bandastation/mobs/sound/legion_death_far.ogg'))
-		// BANDASTATION EDIT END
 	else if(prob(20)) //20% chance for sick lootz.
 		loot = list(/obj/structure/closet/crate/necropolis/tendril)
 		if(!true_spawn)
