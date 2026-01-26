@@ -266,7 +266,7 @@
 	wound_bonus = 0 // Juveniles can afford to fix wounds on their hosts. This doesn't cause critical wounds. (at least not in testing)
 
 /datum/action/cooldown/mob_cooldown/blood_worm/spit/adult
-	desc = "Spit corrosive blood at your target in exchange for your own health. Right-click to melt restraints while in a host, or fire a burst while out of a host."
+	desc = "Плюньте токсичной кровью в свою цель в обмен на собственное здоровье. Нажмите ПКМ, чтобы расплавить оковы, находясь в носителе, или плюнуть токсичной кровью, если вы вне носителя."
 	health_cost = 6.5 // This is enough for 26 shots in a row at full health. (keep in mind that health is VERY important)
 	projectile_type = /obj/projectile/blood_worm_spit/adult
 	burst_projectile_type = /obj/projectile/blood_worm_spit/adult_burst
