@@ -422,15 +422,30 @@
 		if(!disease_hr)
 			render_list += "<hr>"
 			disease_hr = TRUE
+		var/cure_text
+		if(istype(disease, /datum/disease/advance))
+			var/datum/disease/advance/advanced_disease = disease
+			var/remedies = list()
+			var/remedy_limit = advanced ? 3 : 2
+			for(var/datum/symptom/each_symptom as anything in advanced_disease.symptoms)
+				if(!each_symptom.symptom_cure)
+					continue
+				var/datum/reagent/each_cure = each_symptom.symptom_cure
+				if(!each_symptom.neutered && !(each_cure::name in remedies))
+					remedies += each_cure::name
+				if(length(remedies) >= remedy_limit)
+					break
+			cure_text = english_list(remedies, nothing_text = "Nothing")
+		else
+			cure_text = disease.cure_text
 		render_list += "<span class='alert ml-1'>\
 			<b>Внимание: [disease.form]</b><br>\
 			<div class='ml-2'>\
 			Название: [disease.name].<br>\
 			Распространение: [disease.spread_text].<br>\
 			Стадия: [disease.stage]/[disease.max_stages].<br>\
-			Возможное лекарство: [disease.cure_text]</div>\
+			Возможное лекарство: [cure_text]</div>\
 			</span>"
-
 
 	// Lungs
 	var/obj/item/organ/lungs/lungs = target.get_organ_slot(ORGAN_SLOT_LUNGS)
@@ -796,8 +811,16 @@
 	var/list/render = list()
 	for(var/datum/disease/disease as anything in patient.diseases)
 		if(!(disease.visibility_flags & HIDDEN_SCANNER))
+			var/disease_cure = disease.cure_text
+			if(istype(disease, /datum/disease/advance))
+				var/datum/disease/advance/advanced_disease = disease
+				for(var/datum/symptom/each_symptom as anything in advanced_disease.symptoms)
+					if(!each_symptom.neutered && each_symptom.symptom_cure)
+						var/datum/reagent/each_cure = each_symptom.symptom_cure
+						disease_cure = each_cure::name
+						break // We only get one
 			render += "<span class='alert ml-1'><b>Внимание: [disease.form]</b><br>\
-			<div class='ml-2'>Имя: [disease.name].<br>Распространение: [disease.spread_text].<br>Стадия: [disease.stage]/[disease.max_stages].<br>Возможное лекарство: [disease.cure_text]</div>\
+			<div class='ml-2'>Имя: [disease.name].<br>Распространение: [disease.spread_text].<br>Стадия: [disease.stage]/[disease.max_stages].<br>Возможное лекарство: [disease_cure]</div>\
 			</span>"
 
 	if(!length(render))
