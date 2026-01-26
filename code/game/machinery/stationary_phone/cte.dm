@@ -1,0 +1,134 @@
+GLOBAL_VAR_INIT(central_telephone_exchange, null)
+
+#define STATUS_INBOUND              "Inbound call"
+#define STATUS_ONGOING              "Ongoing call"
+#define STATUS_OUTGOING             "Outgoing call"
+#define STATUS_IDLE                 "Idle"
+#define TIMEOUT_DURATION            30 SECONDS
+
+#define COMMSIG_OFFHOOK             "Communication Signal - Offhook"           // The telephone is removed from the hook
+#define COMMSIG_DIALTONE            "Communication Signal - Dialtone"          // The phone should play the dialtone sound, indicating it's ready for dialing
+#define COMMSIG_DIAL                "Communication Signal - Dial"	             // The phone sends a request to the CTE, attempting to call a `phone_id`
+#define COMMSIG_RINGING             "Communication Signal - Ringing"           // The phone rings, being ready to pick up
+#define COMMSIG_RINGBACK            "Communication Signal - Ringback"	         // The caller hears the ringback sounds, waiting for the other side to pick up
+#define COMMSIG_BUSY                "Communication Signal - Busy"	             // The target phone is busy
+#define COMMSIG_NUMBER_NOT_FOUND    "Communication Signal - Number Not Found"	 // The CTE couldn't find the device with such `phone_id`
+#define COMMSIG_ANSWER              "Communication Signal - Answer"	           // The phone should initialize the call
+#define COMMSIG_TALK                "Communication Signal - Talk"	             // The signal sent with the voice message itself
+#define COMMSIG_HANGUP              "Communication Signal - Hangup"	           // The other side has hanged up
+#define COMMSIG_TIMEOUT             "Communication Signal - Timeout"	         // The line has been inactive for over 30 seconds
+
+/obj/machinery/central_telephone_exchange
+	name = "Central Telephone Exchange unit"
+	desc = "A central switching unit responsible for connecting telephone calls within the station sectors."
+	icon = 'icons/obj/machines/phone.dmi'
+	icon_state = "cte"
+	use_power = NO_POWER_USE
+	idle_power_usage = 0
+	active_power_usage = 0
+	density = TRUE
+
+/obj/machinery/central_telephone_exchange/Initialize(mapload)
+	. = ..()
+	if(GLOB.central_telephone_exchange)
+		return INITIALIZE_HINT_QDEL // there should only exist one of those
+
+	GLOB.central_telephone_exchange = src
+	update_overlays()
+
+/obj/machinery/central_telephone_exchange/update_overlays()
+	. = ..()
+	overlays += emissive_appearance(icon, "cte_light", src)
+
+/obj/machinery/central_telephone_exchange/proc/find_device(device_id)
+	for(var/obj/structure/transmitter/each_transmitter in GLOB.transmitters)
+		if(each_transmitter.phone_id == device_id)
+			return each_transmitter
+	return null
+
+/obj/machinery/central_telephone_exchange/proc/process_commsig(device_id, commsig, data)
+	// to_chat(world, "DEBUG: the master CTE received [commsig] from [device_id] with data ([data])")
+	var/obj/structure/transmitter/device = find_device(device_id)
+	if(!device)
+		CRASH("A transmitter insists it's ID is [device_id], but was not found in the list for the given ID.")
+
+	switch(commsig)
+		if(COMMSIG_OFFHOOK)
+			device.process_commsig(COMMSIG_DIALTONE)
+
+		if(COMMSIG_DIAL)
+			var/obj/structure/transmitter/target = find_device(data)
+			if(!target)
+				device.process_commsig(COMMSIG_NUMBER_NOT_FOUND)
+				return
+
+			if(is_device_busy(device) || is_device_busy(target))
+				device.process_commsig(COMMSIG_BUSY)
+				return
+
+			device.process_commsig(COMMSIG_RINGBACK)
+			target.process_commsig(COMMSIG_RINGING, device_id)
+
+			addtimer(CALLBACK(src, PROC_REF(timeout_call), device_id, data), TIMEOUT_DURATION)
+
+		if(COMMSIG_ANSWER)
+			var/obj/structure/transmitter/new_caller = find_device(data)
+			if(new_caller)
+				device.process_commsig(COMMSIG_ANSWER, new_caller.phone_id)
+				new_caller.process_commsig(COMMSIG_ANSWER, device_id)
+
+		if(COMMSIG_HANGUP)
+			var/obj/structure/transmitter/new_caller = find_device(data)
+			if(new_caller)
+				new_caller.process_commsig(COMMSIG_HANGUP)
+			device.process_commsig(COMMSIG_HANGUP)
+
+		if(COMMSIG_TALK)
+			var/target_id = data["target_id"]
+			var/message = data["message"]
+			var/speaker_age = data["speaker_age"]
+			var/speaker_physique = data["speaker_physique"]
+			var/obj/structure/transmitter/target = find_device(target_id)
+			if(target && are_devices_connected(device, target))
+				var/list/talk_data = list(
+					"message" = message,
+					"speaker_age" = speaker_age,
+					"speaker_physique" = speaker_physique
+				)
+				target.process_commsig(COMMSIG_TALK, talk_data)
+
+/obj/machinery/central_telephone_exchange/proc/is_device_busy(obj/structure/transmitter/device)
+	return (device.status == STATUS_INBOUND || device.status == STATUS_OUTGOING)
+
+/obj/machinery/central_telephone_exchange/proc/get_connected_device(obj/structure/transmitter/device)
+	if(device.current_call)
+		return device.current_call
+	return null
+
+/obj/machinery/central_telephone_exchange/proc/are_devices_connected(obj/structure/transmitter/device1, obj/structure/transmitter/device2)
+	return (device1.current_call == device2 && device2.current_call == device1)
+
+/obj/machinery/central_telephone_exchange/proc/timeout_call(caller_id, target_id)
+	var/obj/structure/transmitter/new_caller = find_device(caller_id)
+	var/obj/structure/transmitter/target = find_device(target_id)
+
+	if(!new_caller || !target)
+		return
+
+	if(new_caller.status == STATUS_OUTGOING && target.status == STATUS_INBOUND)
+		new_caller.process_commsig(COMMSIG_TIMEOUT)
+		target.process_commsig(COMMSIG_TIMEOUT)
+
+#undef COMMSIG_OFFHOOK
+#undef COMMSIG_DIALTONE
+#undef COMMSIG_DIAL
+#undef COMMSIG_RINGING
+#undef COMMSIG_RINGBACK
+#undef COMMSIG_BUSY
+#undef COMMSIG_NUMBER_NOT_FOUND
+#undef COMMSIG_ANSWER
+#undef COMMSIG_TALK
+#undef COMMSIG_HANGUP
+#undef COMMSIG_TIMEOUT
+
+#undef TIMEOUT_DURATION

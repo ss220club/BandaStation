@@ -1,0 +1,3 @@
+#include "_traps.dm"
+
+#include "code/traps.dm"

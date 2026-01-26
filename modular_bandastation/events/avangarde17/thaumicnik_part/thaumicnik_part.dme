@@ -1,0 +1,7 @@
+#include "code/vanilla_jobs_disabler.dm"
+#include "code/jobs_fixes.dm"
+#include "code/job_landmarks.dm"
+#include "code/passport.dm"
+#include "code/ancient_virus.dm"
+#include "code/jobs/event_jobs.dme"
+#include "code/appartment_keys.dm"
