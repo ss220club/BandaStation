@@ -34,7 +34,7 @@
 		return FALSE
 	var/mob/living/carbon/human/possible_deacon = locate() in movable_reltool.buckled_mobs
 	if(!possible_deacon)
-		to_chat(user, span_warning("Ничто не пристегнуто к [movable_reltool.declent_ru(DATIVE)]!"))
+		to_chat(user, span_warning("Ничего не пристегнуто к [movable_reltool.declent_ru(DATIVE)]!"))
 		return FALSE
 	if(!is_valid_for_deacon(possible_deacon, user))
 		return FALSE
