@@ -57,7 +57,7 @@
 		to_chat(user, span_warning("Разум [potential_deacon.declent_ru(GENITIVE)] находится в другом месте!"))
 		return FALSE
 	if(IS_CULTIST(potential_deacon))//what the fuck?!
-		to_chat(user, span_warning("[GLOB.deity] увидел истинное, тёмное зло в сердце [potential_deacon.declent_ru(GENITIVE)], потому [potential_deacon.ru_p_they()] был поражен!"))
+		to_chat(user, span_warning("[GLOB.deity] увидел истинное, тёмное зло в сердце [potential_deacon.declent_ru(GENITIVE)], потому [potential_deacon.ru_p_they()] был[genderize_ru(potential_deacon, "", "а", "о", "и")] [genderize_ru(potential_deacon, "поражён", "поражена", "поражено", "поражены")]!"))
 		playsound(get_turf(religious_tool), 'sound/effects/pray.ogg', 50, TRUE)
 		potential_deacon.gib(DROP_ORGANS|DROP_BODYPARTS)
 		return FALSE
