@@ -136,8 +136,8 @@ GLOBAL_LIST_INIT(strippable_alien_humanoid_items, create_strippable_list(list(
 	if(!can_consume(lucky_winner))
 		return TRUE
 
-	var/obj/item/organ/stomach/alien/melting_pot = get_organ_slot(ORGAN_SLOT_STOMACH)
-	if(!istype(melting_pot))
+	var/obj/item/organ/stomach/melting_pot = get_organ_slot(ORGAN_SLOT_STOMACH) // BANDASTATION EDIT
+	if(!melting_pot)                                                            // BANDASTATION EDIT
 		visible_message(span_clown("[capitalize(declent_ru(NOMINATIVE))], кажется, не может поглотить [lucky_winner.declent_ru(ACCUSATIVE)]!"), \
 			span_alien("Вы чувствуете боль в своей... груди? Вы не можете проглотить [lucky_winner.declent_ru(ACCUSATIVE)]."))
 		return TRUE
@@ -148,7 +148,6 @@ GLOBAL_LIST_INIT(strippable_alien_humanoid_items, create_strippable_list(list(
 	log_combat(src, lucky_winner, "devoured")
 	melting_pot.consume_thing(lucky_winner)
 	return TRUE
-
 /mob/living/carbon/alien/adult/get_butt_sprite()
 	return icon('icons/mob/butts.dmi', BUTT_SPRITE_XENOMORPH)
 
