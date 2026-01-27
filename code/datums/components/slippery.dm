@@ -76,7 +76,8 @@
 	force_drop = FALSE,
 	slot_whitelist,
 	datum/callback/can_slip_callback,
-	immobilize = 2 SECONDS, /// BANDASTATION ADDITION - Immobilizing slippery
+	immobilize = 0 SECONDS, /// BANDASTATION ADDITION - Immobilizing slippery
+	paralyze = 0.25 SECONDS,/// BANDASTATION ADDITION - slip paralyzes
 )
 	src.knockdown_time = max(knockdown, 0)
 	src.paralyze_time = max(paralyze, 0)
