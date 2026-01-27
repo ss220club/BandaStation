@@ -586,7 +586,7 @@
 	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/nt_disillusioned
-	description = "Я ненавижу эту компанию и все, что она олицетворяет."
+	description = "Я ненавижу эту компанию и всё, что она олицетворяет."
 	mood_change = -2
 
 /datum/mood_event/disillusioned_revs_lost
