@@ -27,7 +27,7 @@
 
 /datum/religion_rites/deaconize/perform_rite(mob/living/user, atom/religious_tool)
 	if(!ismovable(religious_tool))
-		to_chat(user, span_warning("Для проведения обряда необходим священный алтарь, на котором участник могут быть зафиксированы."))
+		to_chat(user, span_warning("Для проведения обряда необходим священный алтарь, на котором участник может быть зафиксирован."))
 		return FALSE
 	var/atom/movable/movable_reltool = religious_tool
 	if(!movable_reltool)
