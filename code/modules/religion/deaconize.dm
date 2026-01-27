@@ -73,7 +73,7 @@
 ///Helper if the passed possible_deacon is valid to become a deacon or not.
 /datum/religion_rites/deaconize/proc/is_valid_for_deacon(mob/living/carbon/human/possible_deacon, mob/living/user)
 	if(possible_deacon.stat != CONSCIOUS)
-		to_chat(user, span_warning("[possible_deacon.declent_ru(NOMINATIVE)] должен быть жив и в сознании, чтобы вступить!"))
+		to_chat(user, span_warning("[possible_deacon.declent_ru(NOMINATIVE)] долж[genderize_ru(possible_deacon, "ен", "на", "но", "ны")] быть жив[genderize_ru(possible_deacon, "", "а", "о", "ы")] и в сознании, чтобы вступить!"))
 		return FALSE
 	if(possible_deacon.mind && possible_deacon.mind.holy_role)
 		to_chat(user, span_warning("[possible_deacon.declent_ru(NOMINATIVE)] уже является членом этой религии!"))
