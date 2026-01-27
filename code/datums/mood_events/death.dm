@@ -205,7 +205,7 @@
 	if(islarva(dead_mob))
 		change_modifier = 0.1
 		timeout_modifier = 0.1
-		description = "Что за чудный день, когда этих червей размазывают."
+		description = "Прекрасный день, когда давят этих червей."
 
 	if(isalienadult(dead_mob))
 		change_modifier = 0.25
@@ -219,7 +219,7 @@
 	if(isalienroyal(dead_mob) || istype(dead_mob, /mob/living/basic/alien/queen))
 		change_modifier = 0.5
 		timeout_modifier = 0.5
-		description = "Королева пала! Галактика начнет новую жизнь! Я надеюсь, что все эти ублюдки сгниют в аду!"
+		description = "Королева пала! Галактика начнёт новую жизнь! Я надеюсь, что все эти ублюдки сгниют в аду!"
 		if(gibbed || dusted)
 			change_modifier += 0.25
 			timeout_modifier += 0.25

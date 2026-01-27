@@ -661,7 +661,7 @@
 	mood_change = 2
 
 /datum/mood_event/nt_loyalist
-	description = "Я горжусь тем, что являюсь частью семьи NT™!"
+	description = "Я горжусь тем, что являюсь частью семьи НТ™!"
 	mood_change = 2
 
 /datum/mood_event/loyalist_revs_lost

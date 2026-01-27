@@ -118,12 +118,12 @@
 	mood_change = -2
 
 /datum/mood_event/hot_spring_left
-	description = "Это было приятно помыться в тёплой воде."
+	description = "Было приятно помыться в тёплой воде."
 	mood_change = 4
 	timeout = 4 MINUTES
 
 /datum/mood_event/hot_spring_hater_left
-	description = "Я ненавижу ванны! И я ненавижу, как там холодно, когда выходишь из ванны!"
+	description = "Я ненавижу ванны! Ненавижу, как холодно становится, когда выходишь из ванны!"
 	mood_change = -3
 	timeout = 2 MINUTES
 

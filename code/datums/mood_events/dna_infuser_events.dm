@@ -11,7 +11,7 @@
 
 /datum/mood_event/fish_waterless
 	mood_change = -3
-	description = "Быть сухим - это отстой. Я чувствую себя как рыба вне воды."
+	description = "Быть сухим - отстой. Я чувствую себя как рыба вне воды."
 
 /datum/mood_event/fish_water
 	mood_change = 1
