@@ -115,7 +115,7 @@
 		hand.balloon_alert(caster, "уже держу орган!")
 		return ITEM_INTERACT_FAILURE
 	if(to_grab.organ_flags & ORGAN_ROBOTIC && !allow_cyber_organs)
-		hand.balloon_alert(caster, "кибернетичесские органы недопустимы!")
+		hand.balloon_alert(caster, "кибернетические органы недопустимы!")
 		return ITEM_INTERACT_FAILURE
 	if(!caster.transferItemToLoc(to_grab, hand))
 		hand.balloon_alert(caster, "не могу взять орган!")
@@ -324,7 +324,7 @@
 	if(using_on_self)
 		caster.visible_message(
 			span_danger("Рука [caster.declent_ru(GENITIVE)] светилась ярко красным, когда [caster.ru_p_they()] начал[genderize_ru(caster, "", "а", "о", "и")] засовывать [inserted_organ.declent_ru(NOMINATIVE)] в [caster.ru_p_them()] [zone_organ_goes_in]!!"),
-			span_userdanger("В с силой вводите [inserted_organ.declent_ru(NOMINATIVE)] в [zone_organ_goes_in]!")
+			span_userdanger("Вы с силой вводите [inserted_organ.declent_ru(NOMINATIVE)] в [zone_organ_goes_in]!")
 		)
 	else
 		caster.visible_message(
