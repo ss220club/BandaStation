@@ -37,7 +37,7 @@
 	event_flags = MOOD_EVENT_WHIMSY // if whimsical, no penalty
 
 /datum/mood_event/inked
-	description = "На меня брызнули чернила кальмара. На вкус солёная..."
+	description = "На меня брызнули чернила кальмара. На вкус солёные..."
 	mood_change = -3
 	timeout = 3 MINUTES
 
