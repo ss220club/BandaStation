@@ -94,7 +94,7 @@
 			description = "Ощущение прекрасного кровавого душа было приятным."
 			mood_change = 6 // you sicko
 		else
-			description = "Недавно у меня был ужасный душ, из которого лилась кровь!"
+			description = "Недавно я принял ужасный душ, из которого лилась кровь!"
 			mood_change = -4
 			timeout = 3 MINUTES
 	else if(istype(shower_reagent, /datum/reagent/water))

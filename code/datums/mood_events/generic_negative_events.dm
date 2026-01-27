@@ -200,7 +200,7 @@
 	event_flags = MOOD_EVENT_PAIN
 
 /datum/mood_event/startled
-	description = "Услышав это слово, я подумал о чем-то страшном."
+	description = "Услышав это слово, я подумал о чём-то страшном."
 	mood_change = -1
 	timeout = 1 MINUTES
 	event_flags = MOOD_EVENT_FEAR

@@ -28,7 +28,7 @@
 		|| HAS_PERSONALITY(owner, /datum/personality/callous) \
 	)
 		mood_change = -2
-		description = "Они сжали меня объятием слишком сильно!"
+		description = "Меня сжали в объятьях слишком сильно!"
 		return
 
 /datum/mood_event/betterhug
@@ -665,7 +665,7 @@
 	mood_change = 2
 
 /datum/mood_event/loyalist_revs_lost
-	description = "Революция потерпела поражение! Да здравствует НаноТрейзен!"
+	description = "Революция потерпела поражение! Да здравствует Нанотрейзен!"
 	mood_change = 4
 	timeout = 10 MINUTES
 

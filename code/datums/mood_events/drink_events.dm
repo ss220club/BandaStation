@@ -44,7 +44,7 @@
 
 /datum/mood_event/drunk_after
 	mood_change = 2
-	description = "Может, кайф и прошел, но я все еще чувствую себя хорошо."
+	description = "Может, кайф и прошел, но я все ещё чувствую себя хорошо."
 	timeout = 5 MINUTES
 
 /datum/mood_event/wrong_brandy
