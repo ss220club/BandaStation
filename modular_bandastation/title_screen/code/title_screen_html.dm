@@ -30,6 +30,7 @@
 				<input type="checkbox" id="hide_menu">
 				<img id="screen_blur" class="bg bg-blur" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
 				<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
+				<iframe id="screen_video" class="bg hidden" style="border: none;" allow="autoplay; encrypted-media" allowfullscreen alt="[screen_image_url]"></iframe>
 				<div class="lobby_wrapper">
 					<div class="lobby_container">
 						<div class="lobby-name">
@@ -52,7 +53,7 @@
 								[create_button(player, "start_now", "Запустить раунд", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
 								[create_button(player, "delay", "Отложить начало раунда", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
 								[create_button(player, "notice", "Оставить уведомление")]
-								[create_button(player, "picture", "Сменить изображение")]
+								[create_button(player, "picture", "Сменить фон")]
 							</div>
 						</div>
 					</div>
