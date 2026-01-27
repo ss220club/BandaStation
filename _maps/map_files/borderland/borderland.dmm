@@ -1426,13 +1426,6 @@
 	},
 /turf/open/floor/wood/large/oak,
 /area/altam/main_zones/caves)
-"bbI" = (
-/obj/structure/bookcase/random/religion,
-/turf/open/floor/wood/large{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "bcp" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lantern,
@@ -3960,12 +3953,6 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/main)
-"cNU" = (
-/obj/structure/fluff/minepost,
-/turf/open/misc/dirt/jungle/wasteland{
-	initial_gas_mix = "o2=22;n2=82;TEMP=200"
-	},
-/area/altam/main_zones/main)
 "cOl" = (
 /obj/structure/railing/wooden_fence{
 	dir = 8
@@ -4113,13 +4100,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
-"cTC" = (
-/obj/item/kirbyplants/organic/plant7,
-/turf/open/floor/wood/large{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "cTX" = (
 /turf/open/floor/iron/dark/side{
 	dir = 8
@@ -6341,14 +6321,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"exv" = (
-/mob/living/basic/mining/basilisk{
-	dir = 8
-	},
-/turf/open/misc/dirt/jungle/wasteland{
-	initial_gas_mix = "o2=22;n2=82;TEMP=200"
-	},
-/area/altam/main_zones/main)
 "exF" = (
 /obj/effect/turf_decal/siding/thinplating,
 /obj/structure/cable,
@@ -7311,7 +7283,7 @@
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "fho" = (
 /obj/effect/turf_decal/siding/wideplating_new/dark{
 	dir = 10
@@ -7838,7 +7810,7 @@
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "fAz" = (
 /obj/structure/chair/office/tactical{
 	dir = 4
@@ -11433,7 +11405,7 @@
 "ifb" = (
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "ifk" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -15454,7 +15426,7 @@
 /area/altam/main_zones/main)
 "lcL" = (
 /turf/open/floor/carpet/orange,
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "lcP" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 10
@@ -17724,7 +17696,7 @@
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "mEA" = (
 /turf/open/water/alternative,
 /area/altam/main_zones/main)
@@ -20923,14 +20895,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"pdr" = (
-/obj/structure/table/wood,
-/obj/item/flashlight/lantern,
-/turf/open/floor/wood/large{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "pdO" = (
 /obj/structure/table,
 /obj/structure/showcase/machinery/microwave{
@@ -21846,7 +21810,7 @@
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "pMx" = (
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor4"
@@ -24712,18 +24676,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"rYb" = (
-/obj/structure/bed{
-	dir = 4
-	},
-/obj/item/bedsheet/yellow{
-	dir = 1
-	},
-/turf/open/floor/wood/large{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "rYf" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -26671,14 +26623,6 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
-"tte" = (
-/obj/structure/bed/double,
-/obj/item/bedsheet/yellow/double,
-/turf/open/floor/wood/large{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "ttk" = (
 /obj/machinery/brm,
 /obj/machinery/conveyor{
@@ -26790,13 +26734,6 @@
 /obj/structure/chair/sofa/left/brown,
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
-"tyS" = (
-/obj/item/kirbyplants/organic/plant20,
-/turf/open/floor/wood/large{
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
-/area/altam/main_zones/main)
 "tzu" = (
 /obj/structure/chair/plastic,
 /turf/open/misc/dirt/jungle/wasteland{
@@ -28253,7 +28190,7 @@
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "uEs" = (
 /obj/effect/turf_decal/arrows{
 	dir = 8
@@ -30548,7 +30485,7 @@
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "wfl" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -31982,7 +31919,7 @@
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "xcz" = (
 /obj/machinery/light/directional/north,
 /turf/open/floor/wood/tile{
@@ -32480,7 +32417,7 @@
 /turf/open/misc/dirt/jungle/wasteland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/caves)
 "xwd" = (
 /turf/closed/wall/r_wall,
 /area/altam/embassy/main)
@@ -152038,13 +151975,13 @@ ylz
 wiB
 sFz
 wiB
-nCK
-nCK
-nCK
-nCK
-nCK
-nCK
-nCK
+jHV
+jHV
+jHV
+jHV
+jHV
+jHV
+jHV
 dwZ
 wiB
 sFz
@@ -152295,13 +152232,13 @@ amI
 wiB
 wiB
 dwZ
-nCK
-cTC
-vfc
-vfc
-pdr
-rYb
-nCK
+jHV
+qje
+uJn
+uJn
+bcp
+ofi
+jHV
 wiB
 dPA
 wJa
@@ -152557,7 +152494,7 @@ uDW
 lcL
 lcL
 lcL
-vfc
+uJn
 ifb
 wiB
 mUg
@@ -152814,7 +152751,7 @@ fgX
 lcL
 lcL
 lcL
-vfc
+uJn
 ifb
 wiB
 lVd
@@ -153045,10 +152982,10 @@ mgz
 mgz
 mgz
 mgz
-mgz
-kQl
-kQl
-mgz
+uHg
+oUo
+oUo
+uHg
 mgz
 mgz
 mgz
@@ -153066,13 +153003,13 @@ dPH
 bth
 wiB
 wiB
-nCK
-bbI
+jHV
+mBg
 lcL
 lcL
 lcL
 mEm
-nCK
+jHV
 wiB
 wdb
 kbT
@@ -153301,11 +153238,11 @@ cKJ
 bHu
 bHu
 mgz
-mgz
-mgz
-kQl
-hqj
-mgz
+uHg
+uHg
+oUo
+qSz
+uHg
 mgz
 mgz
 mgz
@@ -153323,13 +153260,13 @@ dPH
 dPH
 ylz
 dwZ
-nCK
-nCK
-oeX
-oeX
-nCK
-nCK
-nCK
+jHV
+jHV
+maM
+maM
+jHV
+jHV
+jHV
 wiB
 msO
 ekU
@@ -153558,11 +153495,11 @@ cKJ
 cKJ
 bHu
 mgz
-mgz
-kQl
-kQl
-exv
-mgz
+uHg
+oUo
+oUo
+kgs
+uHg
 mgz
 mgz
 mgz
@@ -153814,12 +153751,12 @@ mgz
 bHu
 bHu
 bHu
-mgz
-mgz
-hqj
-kQl
-qIV
-mgz
+uHg
+uHg
+qSz
+oUo
+lMK
+uHg
 bHu
 bHu
 mgz
@@ -154070,13 +154007,13 @@ mgz
 mgz
 mgz
 mgz
-mgz
-mgz
-qIV
-kQl
-exv
-mgz
-mgz
+uHg
+uHg
+lMK
+oUo
+kgs
+uHg
+uHg
 bHu
 cKJ
 bHu
@@ -154326,13 +154263,13 @@ wiB
 wiB
 mgz
 mgz
-mgz
-hqj
-kQl
-kQl
-kQl
-mgz
-mgz
+uHg
+qSz
+oUo
+oUo
+oUo
+uHg
+uHg
 bHu
 cKJ
 cKJ
@@ -154585,9 +154522,9 @@ qau
 mgz
 mgz
 kQl
-kQl
-hqj
-mgz
+oUo
+qSz
+uHg
 mgz
 mgz
 bHu
@@ -154608,13 +154545,13 @@ qbK
 eSX
 wiB
 wiB
-nCK
-nCK
-oeX
-oeX
-nCK
-nCK
-nCK
+jHV
+jHV
+maM
+maM
+jHV
+jHV
+jHV
 wiB
 qvc
 wiB
@@ -154843,8 +154780,8 @@ dwZ
 wiB
 fMV
 kQl
-mgz
-mgz
+uHg
+uHg
 mgz
 bHu
 bHu
@@ -154865,20 +154802,20 @@ gNj
 tdB
 wiB
 sFz
-nCK
+jHV
 pLM
 lcL
 lcL
 lcL
-tyS
-nCK
+uAf
+jHV
 wiB
 qvc
 dwZ
-nCK
-nCK
-nCK
-nCK
+jHV
+jHV
+jHV
+jHV
 tdD
 aXm
 aXm
@@ -155123,7 +155060,7 @@ wiB
 wiB
 wiB
 ifb
-vfc
+uJn
 lcL
 lcL
 lcL
@@ -155132,10 +155069,10 @@ ifb
 sFz
 qvc
 wiB
-nCK
-bbI
+jHV
+mBg
 fAl
-nCK
+jHV
 tdD
 aXm
 aXm
@@ -155380,7 +155317,7 @@ sFz
 wiB
 dwZ
 ifb
-vfc
+uJn
 lcL
 lcL
 lcL
@@ -155389,10 +155326,10 @@ ifb
 wiB
 qZh
 ulP
-oeX
+maM
 lcL
 lcL
-nCK
+jHV
 dfh
 aXm
 aXm
@@ -155636,20 +155573,20 @@ mgz
 dwZ
 wiB
 wiB
-nCK
-bbI
-vfc
-tte
-vfc
+jHV
+mBg
+uJn
+okx
+uJn
 weY
-nCK
+jHV
 dwZ
 qvc
 sFz
-nCK
+jHV
 lcL
 lcL
-nCK
+jHV
 tdD
 aXm
 aXm
@@ -155893,13 +155830,13 @@ mgz
 mgz
 osu
 wiB
-nCK
-nCK
+jHV
+jHV
 ifb
 ifb
 ifb
-nCK
-nCK
+jHV
+jHV
 wiB
 qvc
 wiB
@@ -156417,10 +156354,10 @@ wiB
 sFz
 qvc
 sFz
-nCK
+jHV
 xcx
-pdr
-nCK
+bcp
+jHV
 dwZ
 wiB
 jcL
@@ -156674,10 +156611,10 @@ lap
 wiB
 qvc
 wiB
-nCK
-nCK
-nCK
-nCK
+jHV
+jHV
+jHV
+jHV
 wiB
 osu
 mgz
@@ -157904,13 +157841,13 @@ aXm
 fRH
 mgz
 mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
+uHg
+uHg
+uHg
+uHg
+uHg
+uHg
+uHg
 mgz
 mgz
 mgz
@@ -158159,16 +158096,16 @@ tqa
 cDd
 mgz
 mgz
-mgz
-mgz
-mgz
-cNU
-kQl
-exv
-hqj
-cNU
-mgz
-mgz
+uHg
+uHg
+uHg
+rHd
+oUo
+kgs
+qSz
+rHd
+uHg
+uHg
 mgz
 mgz
 mgz
@@ -158416,17 +158353,17 @@ tqa
 cDd
 mgz
 mgz
-mgz
-hqj
-kQl
-kQl
+uHg
+qSz
+oUo
+oUo
 xvM
-kQl
-kQl
-kQl
-kQl
-mgz
-mgz
+oUo
+oUo
+oUo
+oUo
+uHg
+uHg
 mgz
 mgz
 mgz
@@ -158671,19 +158608,19 @@ tqa
 tqa
 tqa
 cDd
-mgz
-mgz
-mgz
-qIV
-kQl
-kQl
-kQl
-qIV
-kQl
-kQl
-kQl
-hqj
-mgz
+uHg
+uHg
+uHg
+lMK
+oUo
+oUo
+oUo
+lMK
+oUo
+oUo
+oUo
+qSz
+uHg
 mgz
 mgz
 qau
@@ -158928,19 +158865,19 @@ tqa
 tqa
 wWx
 cDd
-hqj
-kQl
-cNU
-kQl
-kQl
-cNU
-mgz
-mgz
-mgz
-hqj
-kQl
-kQl
-kQl
+qSz
+oUo
+rHd
+oUo
+oUo
+rHd
+uHg
+uHg
+uHg
+qSz
+oUo
+oUo
+oUo
 mgz
 wiB
 wiB
@@ -159185,17 +159122,17 @@ tqa
 tqa
 bCN
 mWy
-kQl
-kQl
-kQl
-kQl
-hqj
+oUo
+oUo
+oUo
+oUo
+qSz
+uHg
+uHg
 mgz
-mgz
-mgz
-mgz
-cNU
-kQl
+uHg
+rHd
+oUo
 fiB
 nZz
 dwZ
@@ -159442,16 +159379,16 @@ tqa
 bCN
 bCN
 mWy
-kQl
-kQl
-kQl
-exv
-mgz
-mgz
+oUo
+oUo
+oUo
+kgs
+uHg
+uHg
 mgz
 fRH
-mgz
-mgz
+uHg
+uHg
 mgz
 wiB
 wiB
@@ -159699,11 +159636,11 @@ tqa
 tqa
 bCk
 cDd
-qIV
-hqj
-cNU
-mgz
-mgz
+lMK
+qSz
+rHd
+uHg
+uHg
 mgz
 fRH
 fRH
@@ -159956,10 +159893,10 @@ tqa
 tqa
 tqa
 cDd
-mgz
-mgz
-mgz
-mgz
+uHg
+uHg
+uHg
+uHg
 fRH
 fRH
 fRH
