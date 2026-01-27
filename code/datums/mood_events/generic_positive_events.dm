@@ -556,7 +556,7 @@
 
 /datum/mood_event/fish_petting/add_effects(obj/item/fish/fish, morbid)
 	if(!morbid)
-		description = "Было приятно погладить [fish.declent_ru(NOMINATIVE)]."
+		description = "Было приятно погладить [fish.declent_ru(ACCUSATIVE)]."
 	else
 		description = "Я глажу [fish.declent_ru(ACCUSATIVE)], когда [fish.ru_p_they()] извиваются под моими прикосновениями, пребывая в блаженном неведении о том, насколько жесток этот мир."
 

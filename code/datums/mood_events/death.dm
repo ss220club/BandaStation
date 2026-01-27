@@ -125,7 +125,7 @@
 /// Then gamers
 /datum/mood_event/conditional/see_death/gamer
 	priority = GAMER_PRIORITY
-	description = "Ещё один глотает пыль!" /// Пусть будет так...
+	description = "Ещё один глотает пыль!"
 	mood_change = parent_type::mood_change * -0.5
 
 /datum/mood_event/conditional/see_death/gamer/condition_fulfilled(mob/living/who, mob/dead_mob, dusted, gibbed)

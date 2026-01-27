@@ -636,7 +636,7 @@
 		return
 	if(HAS_TRAIT(owner, TRAIT_MORBID) || HAS_TRAIT(owner, TRAIT_EVIL))
 		mood_change = 0
-		description = "Я покрыт кровью. Очаравательно!"
+		description = "Я покрыт кровью. Очаровательно!"
 		return
 
 /datum/mood_event/teetotal_hangover
