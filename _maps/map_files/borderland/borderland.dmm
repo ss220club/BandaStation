@@ -402,6 +402,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
+"amI" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/obj/structure/flora/grass/brown/style_random,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "anb" = (
 /obj/effect/turf_decal/trimline/yellow/corner,
 /turf/open/floor/iron/dark,
@@ -508,6 +519,9 @@
 /obj/structure/table/wood,
 /obj/item/storage/box/donkpockets/donkpocketpizza,
 /obj/item/radio,
+/obj/item/book/manual/wiki/medicine{
+	pixel_x = 8
+	},
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -619,6 +633,17 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"avP" = (
+/obj/structure/flora/lunar_plant/style_1,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "awe" = (
 /obj/effect/spawner/random/exotic/syndie,
 /turf/open/misc/asteroid/snow/atmosphere{
@@ -636,6 +661,15 @@
 /obj/item/ammo_box/magazine/m45,
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
+"axu" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/item/banner/solgov,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "axJ" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 9
@@ -644,6 +678,13 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"ayP" = (
+/obj/structure/flora/rock/pile/icy/style_random,
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "ayU" = (
 /obj/structure/chair/sofa/corp{
 	dir = 1
@@ -683,16 +724,16 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
 "aBq" = (
-/obj/effect/spawner/structure/window,
-/obj/effect/light_emitter{
-	light_color = "#C8E4FF";
-	light_dir = 4
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
 	},
-/turf/open/floor/wood/large{
-	max_integrity = 10000;
-	uses_integrity = 10000
+/obj/structure/railing/wooden_fence{
+	dir = 8
 	},
-/area/altam/main_zones/premises)
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "aBG" = (
 /obj/structure/railing{
 	pixel_y = 4
@@ -762,6 +803,15 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"aDi" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/item/clothing/mask/gas/explorer,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
 "aDx" = (
@@ -882,6 +932,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/premises)
+"aIM" = (
+/obj/structure/table/wood,
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/premises)
 "aIP" = (
 /obj/machinery/door/airlock/highsecurity,
 /obj/effect/light_emitter{
@@ -962,6 +1020,9 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/weather/snow,
+/obj/item/ammo_casing/c762x39/hunting{
+	dir = 10
+	},
 /turf/open/floor/stone/icemoon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -1112,6 +1173,17 @@
 /obj/structure/sign/poster/sword_of_altam/brotherhood/directional/north,
 /turf/open/floor/wood/tile/amaranth,
 /area/altam/main_zones/premises)
+"aUf" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 5
+	},
+/obj/structure/flora/grass/brown/style_random,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "aUv" = (
 /mob/living/simple_animal/bot/mulebot,
 /turf/open/floor/vault,
@@ -1354,6 +1426,13 @@
 	},
 /turf/open/floor/wood/large/oak,
 /area/altam/main_zones/caves)
+"bbI" = (
+/obj/structure/bookcase/random/religion,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "bcp" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lantern,
@@ -1890,6 +1969,12 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
+"bCk" = (
+/obj/structure/sign/warning/directional/south,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "bCH" = (
 /obj/structure/railing/wooden_fence{
 	dir = 10
@@ -1912,6 +1997,12 @@
 	},
 /turf/open/floor/pod{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
+"bCN" = (
+/obj/structure/ore_box,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/caves)
 "bCV" = (
@@ -1966,6 +2057,17 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
+"bEl" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "bEq" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 1
@@ -2013,10 +2115,15 @@
 	},
 /area/altam/main_zones/main)
 "bHf" = (
-/obj/machinery/exoscanner{
-	pixel_y = 7
+/obj/effect/turf_decal/weather/snow/corner,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
 	},
-/turf/open/floor,
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
 /area/altam/main_zones/main)
 "bHu" = (
 /turf/closed/indestructible/rock/snow/ice{
@@ -2337,6 +2444,16 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/premises)
+"bSm" = (
+/obj/structure/flora/grass/brown,
+/obj/effect/turf_decal/weather/dirt,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "bSK" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -2500,6 +2617,19 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"bXu" = (
+/obj/effect/turf_decal/trimline/yellow/warning{
+	dir = 10
+	},
+/obj/item/ammo_casing/c762x39{
+	dir = 9
+	},
+/turf/open/floor/asphalt{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "bXB" = (
 /obj/structure/flora/tree/dead/style_random,
 /turf/open/misc/asteroid/moon{
@@ -2532,6 +2662,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
+"bYo" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/machinery/deployable_turret/mounted_machine_gun{
+	dir = 8
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "bYq" = (
 /obj/item/instrument/guitar,
 /turf/open/misc/dirt/dark{
@@ -2820,6 +2961,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
+"cic" = (
+/obj/effect/turf_decal/trimline/yellow/line{
+	dir = 1
+	},
+/obj/item/ammo_casing/c762x39/hunting,
+/turf/open/floor/asphalt{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "cik" = (
 /obj/structure/mineral_door/wood,
 /obj/effect/light_emitter{
@@ -3037,6 +3189,25 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"coN" = (
+/obj/structure/barricade/wooden/snowed,
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=200"
+	},
+/area/altam/main_zones/main)
+"coO" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "cpn" = (
 /obj/effect/turf_decal/trimline/yellow/warning,
 /obj/effect/turf_decal/weather/snow,
@@ -3512,6 +3683,15 @@
 /obj/item/stack/spacecash/c10000,
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
+"cCs" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "cCB" = (
 /obj/machinery/light/directional/south,
 /turf/open/floor/iron/dark,
@@ -3781,8 +3961,10 @@
 	},
 /area/altam/main_zones/main)
 "cNU" = (
-/obj/machinery/telecomms/allinone,
-/turf/open/floor,
+/obj/structure/fluff/minepost,
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=200"
+	},
 /area/altam/main_zones/main)
 "cOl" = (
 /obj/structure/railing/wooden_fence{
@@ -3792,6 +3974,16 @@
 	dir = 8
 	},
 /turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"cPu" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -3825,6 +4017,16 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"cRw" = (
+/obj/item/ammo_casing/c762x39{
+	dir = 8
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "cRG" = (
 /obj/structure/rack,
 /obj/item/clothing/glasses/meson/engine,
@@ -3843,6 +4045,22 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/premises)
+"cSe" = (
+/obj/effect/turf_decal/siding/wideplating_new/dark{
+	dir = 1
+	},
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor4"
+	},
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "cSB" = (
 /obj/effect/light_emitter{
 	light_color = "#C8E4FF";
@@ -3895,6 +4113,13 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
+"cTC" = (
+/obj/item/kirbyplants/organic/plant7,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "cTX" = (
 /turf/open/floor/iron/dark/side{
 	dir = 8
@@ -4228,6 +4453,17 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"dgE" = (
+/obj/effect/turf_decal/siding/wideplating_new,
+/obj/item/ammo_casing/c762x39{
+	dir = 5
+	},
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "dgS" = (
 /obj/structure/closet/crate/secure/freezer/donk,
 /obj/machinery/power/apc/auto_name/directional/west,
@@ -4446,6 +4682,15 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/premises)
+"dqV" = (
+/obj/effect/turf_decal/weather/snow/corner,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "drE" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
@@ -4514,6 +4759,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"dul" = (
+/obj/effect/turf_decal/siding/wideplating_new{
+	dir = 4
+	},
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "duw" = (
 /obj/effect/decal/cleanable/blood/gibs/old{
 	icon_state = "gib2-overlay"
@@ -4550,7 +4806,7 @@
 "dwz" = (
 /obj/effect/decal/cleanable/greenglow/radioactive,
 /obj/effect/turf_decal/weather/snow/corner{
-	dir = 5
+	dir = 4
 	},
 /turf/open/misc/asteroid/moon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
@@ -5236,8 +5492,15 @@
 	},
 /area/altam/main_zones/main)
 "dSq" = (
-/obj/machinery/telecomms/hub/preset,
-/turf/open/floor,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
 /area/altam/main_zones/main)
 "dSt" = (
 /obj/effect/turf_decal/siding/wideplating_new/dark{
@@ -5357,6 +5620,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/caves)
+"dWU" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/structure/flora/rock/icy/style_random,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "dWW" = (
 /obj/structure/chair/wood/wings{
 	dir = 1
@@ -5436,6 +5710,13 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
+"dZd" = (
+/obj/effect/light_emitter{
+	light_color = "#C8E4FF"
+	},
+/obj/effect/spawner/structure/window,
+/turf/open/floor/plating,
+/area/altam/main_zones/premises)
 "dZw" = (
 /obj/structure/flora/rock/pile/icy/style_random,
 /obj/effect/turf_decal/siding/wideplating_new/dark,
@@ -5498,6 +5779,7 @@
 "eby" = (
 /obj/structure/table/reinforced/rglass,
 /obj/item/book/manual/wiki/telescience,
+/obj/item/clothing/head/hats/tsf_cap,
 /turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -5818,6 +6100,21 @@
 /obj/structure/table/reinforced,
 /turf/open/floor/vault,
 /area/altam/main_zones/main)
+"enI" = (
+/obj/effect/turf_decal/siding/wideplating_new/corner,
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor6"
+	},
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"enP" = (
+/obj/machinery/telecomms/relay/preset/auto,
+/turf/open/floor/vault,
+/area/altam/main_zones/main)
 "eov" = (
 /obj/structure/closet/crate/grave,
 /obj/structure/railing{
@@ -6044,6 +6341,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"exv" = (
+/mob/living/basic/mining/basilisk{
+	dir = 8
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=200"
+	},
+/area/altam/main_zones/main)
 "exF" = (
 /obj/effect/turf_decal/siding/thinplating,
 /obj/structure/cable,
@@ -6112,6 +6417,19 @@
 	dir = 4
 	},
 /turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"eAB" = (
+/obj/effect/turf_decal/trimline/yellow/warning{
+	dir = 5
+	},
+/obj/item/ammo_casing/c762x39{
+	dir = 1
+	},
+/turf/open/floor/asphalt{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -6403,6 +6721,15 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
+"eJS" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/obj/item/mining_scanner,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "eKi" = (
 /obj/effect/turf_decal/siding/wood,
 /obj/structure/cable,
@@ -6624,6 +6951,13 @@
 	},
 /turf/open/floor/engine/hull/reinforced{
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"eSX" = (
+/obj/effect/turf_decal/weather/snow/corner,
+/obj/structure/railing/wooden_fence,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
 "eSY" = (
@@ -6970,6 +7304,14 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"fgX" = (
+/obj/structure/table/wood/fancy/red,
+/obj/item/storage/fancy/candle_box,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "fho" = (
 /obj/effect/turf_decal/siding/wideplating_new/dark{
 	dir = 10
@@ -6986,6 +7328,15 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/altam/main_zones/caves)
+"fiB" = (
+/obj/structure/barricade/wooden/snowed,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=200"
+	},
+/area/altam/main_zones/main)
 "fiS" = (
 /obj/structure/chair/stool/bar/dark{
 	dir = 8
@@ -7134,6 +7485,17 @@
 	},
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/premises)
+"fmy" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/structure/railing/wooden_fence{
+	dir = 9
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "fmL" = (
 /obj/structure/railing/wooden_fence{
 	dir = 1
@@ -7148,6 +7510,7 @@
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 10
 	},
+/obj/structure/flora/grass/brown/style_2,
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -7376,6 +7739,14 @@
 "fuw" = (
 /turf/open/floor/vault/rock,
 /area/altam/main_zones/main)
+"fuG" = (
+/obj/structure/chair/sofa/bench/left,
+/obj/item/storage/backpack/fireproof,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/premises)
 "fuP" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 6
@@ -7457,6 +7828,17 @@
 /obj/structure/closet/secure_closet/chemical,
 /turf/open/floor/iron/showroomfloor,
 /area/altam/embassy/main)
+"fAl" = (
+/obj/structure/closet/crate/wooden,
+/obj/item/stack/rods,
+/obj/item/stack/rods,
+/obj/item/stack/medical/gauze/improvised,
+/obj/item/spear,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "fAz" = (
 /obj/structure/chair/office/tactical{
 	dir = 4
@@ -7685,6 +8067,17 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"fHd" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/obj/structure/railing/wooden_fence{
+	dir = 1
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "fHe" = (
 /mob/living/basic/deer/ice{
 	dir = 8
@@ -7879,6 +8272,14 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"fMV" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/main)
 "fNl" = (
@@ -8181,6 +8582,19 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"gak" = (
+/obj/effect/turf_decal/trimline/yellow/warning{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor4"
+	},
+/turf/open/floor/asphalt{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "gap" = (
 /obj/structure/fluff/tram_rail,
 /obj/structure/fluff/tram_rail{
@@ -8325,6 +8739,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"gfg" = (
+/obj/structure/table/wood,
+/obj/item/storage/toolbox/fishing,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/premises)
 "gfz" = (
 /obj/structure/railing/corner{
 	dir = 4
@@ -8438,6 +8860,17 @@
 "giK" = (
 /obj/structure/platform/material,
 /obj/structure/railing/platform/reinforced,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"giY" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
+	},
+/obj/structure/flora/grass/brown/style_random,
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -8681,6 +9114,17 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"gsl" = (
+/obj/structure/flora/grass/brown,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -9046,6 +9490,17 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"gHZ" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "gIa" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -9127,8 +9582,14 @@
 	},
 /area/altam/embassy/main)
 "gJO" = (
-/obj/machinery/telecomms/relay/preset/auto,
-/turf/open/floor,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
 /area/altam/main_zones/main)
 "gKc" = (
 /obj/item/stack/sheet/plasteel,
@@ -9221,6 +9682,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/premises)
+"gML" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
+	},
+/obj/structure/railing/wooden_fence{
+	dir = 10
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "gMU" = (
 /obj/structure/altar,
 /turf/open/floor/carpet/red,
@@ -9237,6 +9709,17 @@
 	},
 /turf/open/floor/engine/hull/reinforced{
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"gNj" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/obj/structure/railing/wooden_fence{
+	dir = 4
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
 "gNQ" = (
@@ -10290,6 +10773,17 @@
 	},
 /turf/open/water/alternative,
 /area/altam/main_zones/caves)
+"hCI" = (
+/obj/structure/flora/rock/icy/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "hCK" = (
 /obj/effect/turf_decal/siding/wideplating_new/dark{
 	dir = 4
@@ -10317,6 +10811,15 @@
 	},
 /turf/open/misc/ice{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"hEt" = (
+/obj/effect/turf_decal/siding/wideplating_new,
+/obj/structure/flora/grass/brown/style_2,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
 "hEI" = (
@@ -10898,6 +11401,19 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"ieP" = (
+/obj/effect/turf_decal/siding/wideplating_new/dark{
+	dir = 9
+	},
+/obj/item/ammo_casing/c762x39{
+	dir = 6
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "ieQ" = (
 /obj/effect/decal/cleanable/glass,
 /turf/open/floor/carpet/red,
@@ -10915,17 +11431,8 @@
 	},
 /area/altam/main_zones/main)
 "ifb" = (
-/obj/effect/turf_decal/siding/wideplating_new{
-	dir = 1
-	},
-/obj/effect/turf_decal/siding/wideplating_new/corner{
-	dir = 8
-	},
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
-	},
+/obj/effect/spawner/structure/window,
+/turf/open/floor/plating,
 /area/altam/main_zones/main)
 "ifk" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -11228,6 +11735,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/caves)
+"isu" = (
+/obj/effect/turf_decal/siding/wideplating_new{
+	dir = 4
+	},
+/obj/structure/flora/grass/brown/style_2,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "isx" = (
 /obj/structure/railing{
 	dir = 4
@@ -11548,6 +12066,15 @@
 /obj/item/stack/ore/plasma,
 /turf/open/misc/ashplanet/rocky{
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"iBX" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/obj/structure/closet/crate/secure/weapon,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
 "iBY" = (
@@ -12099,6 +12626,17 @@
 /obj/item/bedsheet/blue,
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
+"jcL" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/structure/flora/grass/brown/style_random,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "jdc" = (
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 6
@@ -12454,6 +12992,22 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"jol" = (
+/obj/effect/turf_decal/siding/wideplating_new/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wideplating_new/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wideplating_new{
+	dir = 8
+	},
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "jpD" = (
 /obj/effect/spawner/structure/window/hollow/middle,
 /turf/open/floor/wood/large{
@@ -12580,6 +13134,17 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
+"jwV" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/decal/cleanable/blood/gibs/old{
+	icon_state = "floor6"
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "jxe" = (
 /obj/structure/table/reinforced,
 /obj/machinery/fax/auto_name{
@@ -12754,6 +13319,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
+"jFd" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/effect/decal/cleanable/blood/gibs/old{
+	icon_state = "floor7"
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "jFk" = (
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor6"
@@ -13662,6 +14238,20 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/premises)
+"kmt" = (
+/obj/structure/flora/rock/pile/icy/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "kmH" = (
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 6
@@ -13981,12 +14571,10 @@
 /area/altam/main_zones/caves)
 "kxI" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 10
-	},
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "tracks"
 	},
+/obj/effect/turf_decal/weather/snow/corner,
 /turf/open/misc/asteroid/moon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
@@ -14073,9 +14661,14 @@
 	},
 /area/altam/main_zones/main)
 "kAe" = (
-/obj/structure/barricade/sandbags,
-/obj/effect/turf_decal/weather/snow,
-/turf/open/floor/vault,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
 /area/altam/main_zones/main)
 "kAf" = (
 /obj/structure/closet/boxinggloves,
@@ -14263,8 +14856,10 @@
 	},
 /area/altam/main_zones/caves)
 "kFO" = (
-/obj/effect/turf_decal/weather/snow,
-/turf/open/floor/vault,
+/obj/structure/bonfire/dense,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
 /area/altam/main_zones/main)
 "kFQ" = (
 /obj/effect/turf_decal/siding/wood,
@@ -14522,6 +15117,18 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/premises)
+"kSr" = (
+/obj/item/banner/solgov,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "kSS" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
@@ -14782,6 +15389,19 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"lap" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "lay" = (
 /obj/effect/turf_decal/weather/snow,
 /obj/effect/turf_decal/trimline/yellow/line{
@@ -14804,6 +15424,15 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/premises)
+"lbw" = (
+/obj/structure/flora/rock/icy/style_random,
+/obj/effect/turf_decal/trimline/yellow/line,
+/turf/open/floor/asphalt{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/caves)
 "lbX" = (
 /obj/structure/flora/grass/brown/style_2,
 /obj/effect/turf_decal/weather/dirt,
@@ -14813,11 +15442,18 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"lcb" = (
+/obj/machinery/telecomms/hub/preset,
+/turf/open/floor/vault,
+/area/altam/main_zones/main)
 "lcu" = (
 /turf/open/floor/carpet{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
+/area/altam/main_zones/main)
+"lcL" = (
+/turf/open/floor/carpet/orange,
 /area/altam/main_zones/main)
 "lcP" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -15190,6 +15826,9 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 8
 	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -15250,10 +15889,11 @@
 "luN" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood/gibs/robot_debris/old,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220";
-	max_integrity = 10000;
-	uses_integrity = 10000
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
 "lvo" = (
@@ -15266,6 +15906,19 @@
 	},
 /turf/closed/wall/mineral/wood,
 /area/altam/main_zones/premises)
+"lvD" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "lwq" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 8
@@ -15790,6 +16443,19 @@
 /obj/structure/hedge/opaque,
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
+"lNL" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "lNP" = (
 /obj/structure/closet/secure_closet/armory1,
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -15822,6 +16488,17 @@
 	dir = 8
 	},
 /turf/open/misc/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"lPp" = (
+/obj/structure/stairs/material{
+	dir = 1;
+	icon = 'icons/turf/floors.dmi';
+	base_icon_state = "greenerdirt";
+	icon_state = "greenerdirt"
+	},
+/turf/closed/indestructible/rock/snow/ice/ore{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
@@ -15866,6 +16543,15 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"lRi" = (
+/obj/effect/light_emitter{
+	light_color = "#C8E4FF"
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/closed/wall/mineral/wood,
+/area/altam/main_zones/premises)
 "lRu" = (
 /obj/structure/sign/painting/library{
 	pixel_y = 32
@@ -15986,6 +16672,17 @@
 /obj/item/stack/sheet/bone,
 /turf/open/floor/vault,
 /area/altam/main_zones/premises)
+"lVd" = (
+/obj/effect/turf_decal/siding/wideplating_new{
+	dir = 1
+	},
+/obj/structure/chair/sofa/bench,
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "lVk" = (
 /obj/structure/railing{
 	dir = 6
@@ -16049,6 +16746,20 @@
 	dir = 4
 	},
 /turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"lXr" = (
+/obj/effect/turf_decal/weather/snow/corner,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/mob/living/basic/mining/wolf{
+	dir = 8
+	},
+/turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -16281,6 +16992,15 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"mfT" = (
+/obj/item/stack/sheet/mineral/wood,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "mgh" = (
 /obj/effect/light_emitter{
 	light_color = "#C8E4FF";
@@ -16357,6 +17077,13 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"mhY" = (
+/obj/structure/closet/crate/wooden,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/premises)
 "mjr" = (
 /obj/structure/flora/grass/brown/style_random,
 /obj/structure/sign/warning/secure_area/directional/east,
@@ -16365,6 +17092,12 @@
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
+/area/altam/main_zones/main)
+"mjw" = (
+/obj/machinery/exoscanner{
+	pixel_y = 7
+	},
+/turf/open/floor/vault,
 /area/altam/main_zones/main)
 "mkg" = (
 /obj/effect/turf_decal/siding/wood,
@@ -16942,6 +17675,14 @@
 	},
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
+"mBX" = (
+/obj/effect/light_emitter{
+	light_color = "#C8E4FF";
+	light_dir = 2
+	},
+/obj/effect/spawner/structure/window,
+/turf/open/floor/plating,
+/area/altam/main_zones/premises)
 "mCB" = (
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
@@ -16973,6 +17714,17 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
+"mEm" = (
+/obj/structure/closet/crate/wooden,
+/obj/item/stack/rods,
+/obj/item/spear,
+/obj/item/stack/medical/gauze/improvised,
+/obj/item/stack/medical/gauze/improvised,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "mEA" = (
 /turf/open/water/alternative,
 /area/altam/main_zones/main)
@@ -17409,6 +18161,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"mUg" = (
+/obj/effect/turf_decal/siding/wideplating_new{
+	dir = 1
+	},
+/obj/structure/chair/sofa/bench/right,
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "mUo" = (
 /obj/machinery/door/airlock/highsecurity,
 /obj/structure/cable,
@@ -17495,6 +18258,12 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"mWy" = (
+/obj/structure/barricade/wooden,
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=200"
+	},
+/area/altam/main_zones/caves)
 "mWz" = (
 /obj/effect/turf_decal/siding/golden{
 	dir = 5
@@ -18021,6 +18790,16 @@
 /obj/structure/cable,
 /turf/open/floor/carpet/red,
 /area/altam/main_zones/caves)
+"nrj" = (
+/obj/item/ammo_casing/c762x39{
+	dir = 5
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "nrs" = (
 /obj/structure/flora/rock/pile/icy/style_random,
 /obj/effect/turf_decal/weather/dirt{
@@ -18729,6 +19508,15 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
+"nZz" = (
+/obj/structure/barricade/wooden/snowed,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=200"
+	},
+/area/altam/main_zones/main)
 "nZI" = (
 /turf/open/floor/carpet{
 	max_integrity = 10000;
@@ -19161,6 +19949,9 @@
 /area/altam/main_zones/main)
 "orh" = (
 /obj/structure/flora/rock/icy/style_random,
+/obj/effect/turf_decal/trimline/yellow/line{
+	dir = 1
+	},
 /turf/open/floor/asphalt{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -19229,6 +20020,20 @@
 	pixel_y = 5
 	},
 /turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"otA" = (
+/obj/effect/turf_decal/siding/wideplating_new{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wideplating_new/corner{
+	dir = 8
+	},
+/obj/structure/flora/grass/brown/style_2,
+/turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -19837,6 +20642,17 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"oQT" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "oRe" = (
 /obj/effect/mine/shrapnel{
 	pixel_x = 1
@@ -19854,6 +20670,7 @@
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 9
 	},
+/obj/structure/flora/grass/brown/style_2,
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -20106,6 +20923,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"pdr" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/lantern,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "pdO" = (
 /obj/structure/table,
 /obj/structure/showcase/machinery/microwave{
@@ -20204,6 +21029,9 @@
 /obj/structure/flora/rock/icy/style_random,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 10
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
 	},
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
@@ -20524,11 +21352,17 @@
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
 "pqF" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
 	},
-/obj/structure/barricade/sandbags,
-/turf/open/floor/vault,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
 /area/altam/main_zones/main)
 "pqM" = (
 /obj/effect/turf_decal/siding/wood,
@@ -20665,6 +21499,19 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"pxE" = (
+/obj/effect/turf_decal/trimline/yellow/line{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor3"
+	},
+/turf/open/floor/asphalt{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "pxU" = (
 /obj/effect/turf_decal/siding/wideplating_new/dark,
 /obj/structure/flora/rock/pile/icy/style_random,
@@ -20785,6 +21632,16 @@
 /obj/machinery/portable_atmospherics/scrubber,
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
+"pDm" = (
+/obj/item/ammo_casing/c762x39{
+	dir = 9
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "pDv" = (
 /obj/structure/railing{
 	dir = 5
@@ -20977,6 +21834,19 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"pLM" = (
+/obj/structure/closet/crate/wooden,
+/obj/item/stack/medical/gauze/improvised,
+/obj/item/stack/medical/gauze/improvised,
+/obj/item/spear,
+/obj/item/spear,
+/obj/item/spear,
+/obj/item/stack/rods,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "pMx" = (
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor4"
@@ -21371,6 +22241,14 @@
 /obj/effect/turf_decal/weather/snow,
 /turf/open/floor/engine/hull/reinforced{
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"qbK" = (
+/mob/living/basic/goat{
+	dir = 4
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
 "qbL" = (
@@ -21815,11 +22693,15 @@
 /turf/closed/wall,
 /area/altam/main_zones/main)
 "qvc" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
+/obj/effect/turf_decal/siding/wideplating_new{
+	dir = 1
 	},
-/obj/structure/barricade/sandbags,
-/turf/open/floor/vault,
+/obj/effect/turf_decal/siding/wideplating_new,
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
 /area/altam/main_zones/main)
 "qvw" = (
 /obj/machinery/smartfridge/drying,
@@ -21866,6 +22748,10 @@
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"qwY" = (
+/obj/machinery/telecomms/allinone,
+/turf/open/floor/vault,
+/area/altam/main_zones/main)
 "qxJ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/structure/closet_empty/crate/with_loot,
@@ -22215,6 +23101,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/embassy/main)
+"qOD" = (
+/obj/effect/turf_decal/trimline/yellow/line,
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor5"
+	},
+/turf/open/floor/asphalt{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "qOK" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 6
@@ -22270,6 +23167,17 @@
 /obj/item/banner/solgov,
 /turf/open/floor/engine/hull/reinforced{
 	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"qQk" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
 "qQX" = (
@@ -22692,8 +23600,8 @@
 	},
 /area/altam/main_zones/main)
 "rgH" = (
-/obj/structure/table/reinforced/rglass,
-/obj/item/clothing/head/hats/tsf_cap,
+/obj/structure/displaycase,
+/obj/item/clothing/accessory/medal/silver/bureaucracy,
 /turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -23269,6 +24177,12 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"rCx" = (
+/mob/living/basic/goat,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "rDj" = (
 /obj/structure/barricade/sandbags,
 /obj/structure/sign/flag/terragov/directional/north,
@@ -23639,6 +24553,18 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
+"rQi" = (
+/obj/effect/turf_decal/trimline/yellow/line,
+/obj/effect/turf_decal/weather/snow,
+/obj/item/ammo_casing/c762x39/hunting{
+	dir = 9
+	},
+/turf/open/floor/asphalt{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "rQj" = (
 /obj/structure/chair/sofa/corp/right,
 /turf/open/floor/iron/dark/side,
@@ -23695,16 +24621,25 @@
 	},
 /area/altam/main_zones/main)
 "rTZ" = (
-/obj/effect/spawner/structure/window,
-/obj/effect/light_emitter{
-	light_color = "#C8E4FF";
-	light_dir = 2
+/obj/effect/turf_decal/siding/wideplating_new,
+/obj/effect/turf_decal/siding/wideplating_new/corner{
+	dir = 1
 	},
-/turf/open/floor/wood/large{
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
-/area/altam/main_zones/premises)
+/area/altam/main_zones/main)
+"rUo" = (
+/obj/structure/flora/rock/pile/icy/style_random,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "rUw" = (
 /obj/structure/fence{
 	icon_state = "straight_cut1";
@@ -23773,6 +24708,18 @@
 /obj/effect/mine/shrapnel,
 /turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"rYb" = (
+/obj/structure/bed{
+	dir = 4
+	},
+/obj/item/bedsheet/yellow{
+	dir = 1
+	},
+/turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
 	},
@@ -24079,6 +25026,17 @@
 /obj/structure/cable,
 /turf/open/floor/carpet/blue,
 /area/altam/embassy/main)
+"sjz" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "sjP" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/paper_bin,
@@ -24258,6 +25216,15 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"ssg" = (
+/obj/structure/bed{
+	dir = 4
+	},
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/premises)
 "suf" = (
 /obj/structure/bed/double,
 /obj/item/bedsheet/blue/double{
@@ -24426,6 +25393,15 @@
 "szr" = (
 /turf/open/floor/carpet/red,
 /area/altam/main_zones/caves)
+"szK" = (
+/obj/structure/flora/rock/pile/icy/style_random,
+/obj/structure/flora/grass/brown/style_random,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "szW" = (
 /obj/structure/flora/ash/seraka,
 /turf/open/misc/dirt/jungle/wasteland{
@@ -24702,6 +25678,14 @@
 /obj/structure/fence/cut,
 /obj/effect/turf_decal/trimline/yellow/line,
 /turf/open/floor/asphalt{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"sIw" = (
+/obj/item/gun/ballistic/automatic/pistol/wespe,
+/turf/open/misc/asteroid/snow/atmosphere{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -25167,6 +26151,28 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"tam" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"tao" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "tar" = (
 /obj/structure/railing/wooden_fence,
 /obj/effect/turf_decal/weather/snow/corner{
@@ -25210,6 +26216,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/caves)
+"tbX" = (
+/obj/item/ammo_casing/c762x39,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "tbZ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/chair/wood{
@@ -25237,6 +26251,9 @@
 	},
 /obj/effect/turf_decal/siding/wideplating_new/corner,
 /obj/effect/turf_decal/weather/snow,
+/obj/item/ammo_casing/c762x39/hunting{
+	dir = 6
+	},
 /turf/open/floor/stone/icemoon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -25259,6 +26276,17 @@
 /obj/item/multitool,
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
+"tdB" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/obj/structure/railing/wooden_fence{
+	dir = 6
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "tdD" = (
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/misc/asteroid/snow/atmosphere{
@@ -25423,10 +26451,33 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"tic" = (
+/obj/effect/turf_decal/weather/dirt,
+/obj/structure/flora/grass/brown/style_random,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "tif" = (
 /obj/effect/turf_decal/siding/blue,
 /turf/open/floor/iron/dark,
 /area/altam/main_zones/caves)
+"tig" = (
+/obj/effect/turf_decal/siding/wideplating_new/dark{
+	dir = 1
+	},
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/item/toy/plush/moth,
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "tjc" = (
 /obj/effect/decal/cleanable/crayon/e{
 	icon_state = "k"
@@ -25480,6 +26531,15 @@
 /obj/machinery/papershredder,
 /turf/open/floor/iron/dark,
 /area/altam/embassy/main)
+"tkV" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "tmN" = (
 /obj/item/target/syndicate,
 /turf/open/misc/dirt/dark{
@@ -25611,6 +26671,14 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"tte" = (
+/obj/structure/bed/double,
+/obj/item/bedsheet/yellow/double,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "ttk" = (
 /obj/machinery/brm,
 /obj/machinery/conveyor{
@@ -25666,6 +26734,19 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"twG" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "twU" = (
 /obj/machinery/power/apc/auto_name/directional/east,
 /obj/structure/cable,
@@ -25709,12 +26790,32 @@
 /obj/structure/chair/sofa/left/brown,
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
+"tyS" = (
+/obj/item/kirbyplants/organic/plant20,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "tzu" = (
 /obj/structure/chair/plastic,
 /turf/open/misc/dirt/jungle/wasteland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
+"tzz" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "tAh" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/ladder,
@@ -26195,6 +27296,20 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"tTg" = (
+/obj/effect/turf_decal/weather/dirt,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "tTq" = (
 /obj/machinery/door/poddoor/shutters{
 	dir = 4;
@@ -26268,6 +27383,9 @@
 /obj/effect/turf_decal/line/neutral/line{
 	dir = 1
 	},
+/obj/item/ammo_casing/c762x39/hunting{
+	dir = 5
+	},
 /turf/open/floor/asphalt{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
@@ -26325,6 +27443,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/caves)
+"tWq" = (
+/obj/structure/flora/rock/icy/style_random{
+	icon_state = "lavarocks2"
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "tWt" = (
 /obj/effect/light_emitter{
 	light_color = "#C8E4FF"
@@ -26501,8 +27630,12 @@
 /turf/open/floor/iron,
 /area/altam/main_zones/premises)
 "udy" = (
-/obj/structure/barricade/sandbags,
-/turf/open/floor/vault,
+/mob/living/basic/goat{
+	dir = 8
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
 /area/altam/main_zones/main)
 "udz" = (
 /obj/structure/geyser/protozine,
@@ -26739,12 +27872,6 @@
 "ulW" = (
 /obj/machinery/nuclearbomb,
 /obj/effect/decal/cleanable/greenglow/radioactive,
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 9
-	},
 /turf/open/misc/asteroid/moon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
@@ -26977,10 +28104,10 @@
 	},
 /area/altam/embassy/main)
 "uvl" = (
-/obj/effect/spawner/structure/window,
-/obj/effect/light_emitter{
-	light_color = "#C8E4FF"
-	},
+/obj/structure/closet/crate/wooden,
+/obj/item/stack/rods,
+/obj/item/stack/rods,
+/obj/item/knife/combat,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -27030,6 +28157,19 @@
 /obj/structure/table/wood/fancy/red,
 /turf/open/floor/carpet/red,
 /area/altam/main_zones/premises)
+"uyh" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "uyP" = (
 /obj/structure/bonfire/dense,
 /turf/open/misc/dirt/dark{
@@ -27105,6 +28245,15 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/premises)
+"uDW" = (
+/obj/structure/table/wood/fancy/red,
+/obj/item/plate/large,
+/obj/item/food/bread/meat,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "uEs" = (
 /obj/effect/turf_decal/arrows{
 	dir = 8
@@ -28242,6 +29391,9 @@
 /obj/structure/flora/rock/icy/style_random{
 	icon_state = "lavarocks"
 	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
 /turf/open/misc/asteroid/moon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
@@ -29335,9 +30487,31 @@
 	dir = 1
 	},
 /area/altam/main_zones/caves)
+"wdb" = (
+/obj/effect/turf_decal/siding/wideplating_new{
+	dir = 1
+	},
+/obj/structure/chair/sofa/bench/left,
+/turf/open/floor/stone/icemoon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "wdk" = (
 /turf/closed/mineral/gold,
 /area/altam/main_zones/caves)
+"wdW" = (
+/obj/effect/turf_decal/siding/wideplating_new/dark/corner,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "wep" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
@@ -29367,6 +30541,14 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/caves)
+"weY" = (
+/obj/structure/displaycase/trophy,
+/obj/item/book/granter,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "wfl" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -29524,6 +30706,16 @@
 	},
 /turf/open/misc/asteroid/moon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"wjG" = (
+/obj/item/ammo_casing/c762x39{
+	dir = 1
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
 "wli" = (
@@ -29695,6 +30887,15 @@
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/altam/embassy/main)
+"wrL" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "wrS" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
@@ -29969,6 +31170,19 @@
 	dir = 9
 	},
 /turf/open/floor/vault/rock{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
+"wGt" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
 	max_integrity = 10000;
 	uses_integrity = 10000
@@ -30578,6 +31792,13 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"wWx" = (
+/obj/structure/sign/warning/directional/south,
+/obj/structure/ore_box,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=78;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "wWE" = (
 /turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220";
@@ -30752,6 +31973,14 @@
 	},
 /turf/open/chasm/true{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"xcx" = (
+/obj/structure/bed,
+/obj/item/bedsheet/yellow,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
 "xcz" = (
@@ -30978,6 +32207,17 @@
 "xmN" = (
 /turf/open/floor/wood/cold{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"xmO" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
 "xnp" = (
@@ -31235,6 +32475,12 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=200"
 	},
 /area/altam/main_zones/caves)
+"xvM" = (
+/obj/item/storage/toolbox/mechanical,
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=200"
+	},
+/area/altam/main_zones/main)
 "xwd" = (
 /turf/closed/wall/r_wall,
 /area/altam/embassy/main)
@@ -31765,6 +33011,12 @@
 	},
 /turf/open/lava,
 /area/altam/main_zones/caves)
+"xQB" = (
+/obj/structure/bonfire,
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "xRN" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/east,
@@ -31984,6 +33236,17 @@
 	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
+"xYJ" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/obj/structure/railing/wooden_fence{
+	dir = 8
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "xZe" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
@@ -32161,7 +33424,14 @@
 	},
 /area/altam/main_zones/caves)
 "ydq" = (
-/turf/open/floor,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
 /area/altam/main_zones/main)
 "ydI" = (
 /obj/effect/light_emitter{
@@ -32169,6 +33439,15 @@
 	},
 /turf/closed/indestructible/reinforced,
 /area/altam/rakht_base/main)
+"yem" = (
+/obj/effect/turf_decal/weather/snow/corner,
+/mob/living/basic/goat/pete,
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
+	},
+/area/altam/main_zones/main)
 "yeJ" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 8
@@ -32318,6 +33597,16 @@
 	},
 /turf/open/floor/wood/tile/cherry{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
+"yjf" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220";
+	max_integrity = 10000;
+	uses_integrity = 10000
 	},
 /area/altam/main_zones/main)
 "yle" = (
@@ -39863,14 +41152,14 @@ sFz
 wiB
 dwZ
 sFz
-wiB
-wiB
+kWt
+hEI
 dwZ
 wiB
 sFz
 wiB
-wiB
-wiB
+kWt
+hEI
 mgz
 mgz
 mgz
@@ -40127,7 +41416,7 @@ fSh
 fSh
 fSh
 dFw
-dwZ
+rIb
 bHu
 mgz
 mgz
@@ -40630,8 +41919,8 @@ sFz
 wiB
 wiB
 jTQ
-wiB
-xbP
+kWt
+dZd
 mkm
 mkm
 mkm
@@ -40640,7 +41929,7 @@ mkm
 mkm
 mkm
 mkm
-aev
+mBX
 wiB
 jTQ
 bHu
@@ -40887,8 +42176,8 @@ wiB
 wiB
 sFz
 wiB
-wiB
-xbP
+nXc
+dZd
 lyY
 mkm
 mkm
@@ -40897,7 +42186,7 @@ mkm
 mkm
 mkm
 mkm
-aev
+mBX
 wiB
 wiB
 dwZ
@@ -41914,8 +43203,8 @@ wiB
 dwZ
 wiB
 wiB
-wiB
-wiB
+kWt
+hEI
 sFz
 wiB
 wiB
@@ -41923,11 +43212,11 @@ qZh
 bXS
 wiB
 wiB
-wiB
-wiB
+kWt
+hEI
 dwZ
-wiB
-wiB
+kWt
+hEI
 wiB
 mgz
 mgz
@@ -42178,13 +43467,13 @@ aev
 wiB
 qZh
 vOZ
-wiB
+kWt
 eVw
 fSh
 fSh
 fSh
 dFw
-wiB
+mTc
 sFz
 mgz
 mgz
@@ -42432,10 +43721,10 @@ uJn
 tUK
 bcp
 aev
-dwZ
+rUo
 qZh
 bXS
-sFz
+nXc
 xbP
 bcp
 ofi
@@ -42682,17 +43971,17 @@ mgz
 mgz
 mgz
 dwZ
-wiB
+kWt
 tJf
 pPx
 uJn
 uJn
 uJn
 aev
-wiB
+mTc
 qZh
 bXS
-wiB
+sFz
 xbP
 uJn
 uJn
@@ -42773,7 +44062,7 @@ wiB
 wiB
 rXG
 pJJ
-wiB
+wjG
 xZD
 wiB
 wiB
@@ -42939,7 +44228,7 @@ mgz
 mgz
 mgz
 wiB
-wiB
+nXc
 xbP
 evy
 uJn
@@ -43031,7 +44320,7 @@ wiB
 wiB
 wiB
 wiB
-wiB
+cRw
 pvD
 wiB
 aaF
@@ -43207,7 +44496,7 @@ wiB
 qZh
 bXS
 wiB
-xbP
+lRi
 uJn
 uJn
 uJn
@@ -43290,7 +44579,7 @@ wiB
 aaF
 aaF
 cso
-wiB
+nrj
 wiB
 cxG
 wiB
@@ -43459,17 +44748,17 @@ uQx
 mkm
 mkm
 mkm
-rTZ
+plS
 sFz
 qZh
 bXS
-wiB
-uvl
+kWt
+eQp
 mkm
 mkm
 uQx
 aev
-wiB
+hEI
 wiB
 bHu
 mgz
@@ -43546,8 +44835,8 @@ aaF
 aaF
 wiB
 wiB
-wiB
-wiB
+pDm
+tbX
 wiB
 sFz
 tdD
@@ -43716,17 +45005,17 @@ vdl
 cZd
 mkm
 mkm
-rTZ
+plS
 wiB
 qZh
 bXS
-wiB
-uvl
+nXc
+eQp
 mkm
 mkm
 vdl
 aev
-wiB
+mTc
 sFz
 bHu
 mgz
@@ -43967,7 +45256,7 @@ mgz
 mgz
 mgz
 sFz
-wiB
+kWt
 xbP
 iYw
 mkm
@@ -44224,11 +45513,11 @@ mgz
 mgz
 mgz
 wiB
-wiB
+nXc
 nsc
 rgl
-aBq
-aBq
+qmG
+qmG
 rgl
 whn
 wiB
@@ -44486,14 +45775,14 @@ wiB
 dwZ
 wiB
 wiB
-sFz
-wiB
-tdD
+nXc
+mTc
+tic
 dPH
 dPH
 ylz
-wiB
-wiB
+nXc
+mTc
 wiB
 wiB
 dwZ
@@ -47139,24 +48428,24 @@ wiB
 wiB
 wiB
 ePf
+kWt
+hEI
 wiB
 wiB
-wiB
-wiB
-wiB
-wiB
+kWt
+hEI
 wiB
 dwZ
 wiB
 oLN
 fXD
+kWt
+hEI
 wiB
 wiB
 wiB
-wiB
-wiB
-dwZ
-wiB
+urp
+hEI
 wiB
 ePf
 ePf
@@ -47396,7 +48685,7 @@ sFz
 wiB
 wiB
 ePf
-dwZ
+lkz
 vml
 wyi
 wyi
@@ -47404,10 +48693,10 @@ wyi
 wyi
 wyi
 phe
-wiB
+hEI
 oLN
 nMS
-dwZ
+lkz
 vml
 wyi
 wyi
@@ -47661,7 +48950,7 @@ cab
 tLX
 pvm
 bIR
-wiB
+mTc
 oLN
 nMS
 agg
@@ -48185,7 +49474,7 @@ gMW
 oQk
 cER
 bIR
-wiB
+hEI
 wiB
 ePf
 wiB
@@ -48424,7 +49713,7 @@ dwZ
 wiB
 wiB
 ePf
-wiB
+kWt
 ydI
 geg
 wKX
@@ -48442,7 +49731,7 @@ tLX
 pyC
 fpD
 bIR
-dwZ
+ayP
 wiB
 ePf
 wiB
@@ -48681,7 +49970,7 @@ wiB
 wiB
 wiB
 ePf
-wiB
+owl
 ydI
 mUK
 npM
@@ -48692,14 +49981,14 @@ bIR
 sVB
 oLN
 nMS
-wiB
+kWt
 kfi
 syM
 syM
 syM
 syM
 bIR
-wiB
+mTc
 wiB
 ePf
 dwZ
@@ -48938,7 +50227,7 @@ wiB
 wiB
 wiB
 ePf
-dwZ
+lkz
 ydI
 kXw
 npM
@@ -48949,12 +50238,12 @@ bIR
 wiB
 msW
 nMS
+nXc
+mTc
 wiB
-wiB
-wiB
-wiB
-wiB
-dwZ
+nXc
+htT
+rIb
 wiB
 wiB
 wiB
@@ -49457,9 +50746,9 @@ ctg
 ctg
 iPb
 wiB
-wiB
-wiB
-wiB
+nXc
+htT
+mTc
 dwZ
 oLN
 nAL
@@ -51562,13 +52851,13 @@ mgz
 mgz
 nfa
 nfa
-cNU
-dSq
-xXr
-kFO
-xXr
-udy
-qvc
+mgz
+mgz
+bHu
+diH
+pJJ
+wiB
+ftF
 bzD
 mJi
 dPH
@@ -51819,13 +53108,13 @@ mgz
 mgz
 mgz
 mgz
-bHf
-ydq
-xXr
-kFO
-xXr
-xXr
-udy
+mgz
+mgz
+mgz
+bHu
+mgz
+mgz
+dwZ
 wiB
 gsf
 dPH
@@ -52076,13 +53365,13 @@ mgz
 mgz
 mgz
 mgz
-cNU
-gJO
-xXr
-xXr
-xXr
-kFO
-xXr
+mgz
+mgz
+mgz
+mgz
+mgz
+bHu
+bHu
 cxG
 vjN
 dPH
@@ -52334,12 +53623,12 @@ mgz
 mgz
 mgz
 mgz
-udy
-xXr
-xXr
-xXr
-xXr
-udy
+bHu
+bHu
+dwZ
+mgz
+bHu
+wiB
 wiB
 pvb
 dPH
@@ -52591,12 +53880,12 @@ bHu
 mgz
 mgz
 mgz
-kAe
-udy
-xXr
-kFO
-pqF
-pqF
+pJJ
+wiB
+wiB
+wiB
+iPb
+ctg
 wZQ
 dPH
 dPH
@@ -54050,8 +55339,8 @@ mgz
 qZh
 eVw
 fSh
-eqh
-eqh
+roD
+roD
 fSh
 dFM
 fSh
@@ -54569,7 +55858,7 @@ uJn
 uJn
 hYo
 unI
-rTZ
+plS
 bXS
 sFz
 mJi
@@ -54862,7 +56151,7 @@ ylz
 pJJ
 wiB
 wiB
-nVw
+bBV
 wiB
 tCi
 wiB
@@ -55118,11 +56407,11 @@ dPH
 ylz
 kfy
 dwZ
-nVw
+kWt
 xbP
 fSh
-eqh
-eqh
+roD
+roD
 fSh
 fSh
 aev
@@ -55140,15 +56429,15 @@ wiB
 wiB
 dwZ
 kfy
-wiB
-wiB
+kWt
+hEI
 kfy
 wiB
 kfy
 wiB
 dwZ
-wiB
-wiB
+kWt
+hEI
 wiB
 sFz
 wiB
@@ -55375,8 +56664,8 @@ dPH
 bth
 wiB
 qGb
-nVw
-uvl
+nXc
+eQp
 aIz
 aIz
 uJn
@@ -55633,7 +56922,7 @@ dPH
 ylz
 kfy
 wiB
-uvl
+eQp
 puV
 puV
 uJn
@@ -55648,8 +56937,8 @@ dwZ
 kfy
 dPH
 dPH
-dOd
-wiB
+avP
+kWt
 xbP
 mkO
 ofi
@@ -55905,9 +57194,9 @@ wiB
 jTQ
 mJi
 dPH
-kfy
-wiB
-uvl
+vdq
+nXc
+eQp
 uJn
 vyr
 vyr
@@ -55919,7 +57208,7 @@ vyr
 mNk
 vXN
 jfx
-rTZ
+plS
 wiB
 qYR
 ifk
@@ -56160,11 +57449,11 @@ bHu
 qGb
 wiB
 kfy
-wiB
+tdD
 dPH
-wiB
+ylz
 jTQ
-uvl
+eQp
 uJn
 vyr
 vyr
@@ -56176,7 +57465,7 @@ vyr
 mNk
 bZc
 jfx
-rTZ
+plS
 qYR
 pai
 dPH
@@ -56417,9 +57706,9 @@ bHu
 kfy
 dwZ
 pJJ
-wiB
+tdD
 dPH
-wiB
+ylz
 dwZ
 xbP
 hWu
@@ -56434,7 +57723,7 @@ vyr
 qoP
 vyr
 aev
-tdD
+wrL
 dPH
 dPH
 dPH
@@ -56674,24 +57963,24 @@ mgz
 mgz
 wiB
 wiB
-jTQ
+kTm
 dPH
-wiB
+ylz
 kfy
 eVw
 fSh
 fSh
-eqh
-eqh
+roD
+roD
 fSh
 dFM
 dFM
 fSh
-eqh
-eqh
+roD
+roD
 fSh
 dFw
-tdD
+cCs
 dPH
 dPH
 nMk
@@ -56918,7 +58207,7 @@ dPH
 ylz
 wiB
 wiB
-uvl
+eQp
 puV
 puV
 uJn
@@ -56930,23 +58219,23 @@ mgz
 mgz
 mgz
 bHu
-wiB
+cxG
 wiB
 sJr
 ddK
 wiB
 wiB
-wiB
+ycN
 kfy
 wiB
-wiB
-wiB
+nXc
+mTc
 mkY
 ddK
 wiB
 dwZ
-wiB
-wiB
+nXc
+mTc
 wiB
 lUb
 dPH
@@ -57174,8 +58463,8 @@ dPH
 dPH
 ylz
 kfy
-nVw
-uvl
+kWt
+eQp
 ehZ
 ehZ
 uJn
@@ -57434,8 +58723,8 @@ cxG
 vqT
 xbP
 rgl
-aBq
-aBq
+qmG
+qmG
 rgl
 rgl
 aev
@@ -57445,7 +58734,7 @@ mgz
 mgz
 ipL
 wiB
-wiB
+ctg
 qZh
 drT
 wJa
@@ -57688,8 +58977,8 @@ dPH
 ylz
 kfy
 wiB
-nVw
-nVw
+nXc
+mTc
 wiB
 wiB
 wiB
@@ -57701,7 +58990,7 @@ mgz
 mgz
 bHu
 kfy
-cxG
+lUb
 dPH
 fub
 hof
@@ -57957,7 +59246,7 @@ mgz
 mgz
 mgz
 pJJ
-dwZ
+hrw
 dPH
 dPH
 oEh
@@ -57974,8 +59263,8 @@ wiB
 kfy
 wiB
 kCL
-wiB
-wiB
+kWt
+hEI
 wiB
 fub
 vOZ
@@ -58213,27 +59502,27 @@ mgz
 mgz
 bHu
 kfy
-wiB
+lUb
 dPH
 dPH
-wiB
+iAZ
 wiB
 kfy
-wiB
-wiB
+kWt
+hEI
 jIz
-wJa
+xwZ
 wex
-wJa
+xwZ
 qPk
 kfy
-wiB
+kWt
 eVw
 fSh
 dFM
 fSh
 dFw
-kfy
+gsl
 qZh
 vOZ
 fmL
@@ -58469,22 +59758,22 @@ mgz
 kfy
 kfy
 dwZ
-wiB
+lUb
 dPH
 dPH
-kfy
+uUJ
 fSh
 fSh
 fSh
 fSh
-wiB
-qZh
+mTc
+fub
 kbT
 kbT
 kbT
 bXS
 wiB
-dwZ
+lkz
 xbP
 nMo
 uJn
@@ -58725,11 +60014,11 @@ mgz
 mgz
 wiB
 ipL
-wiB
+lUb
 dPH
 dPH
 dPH
-wiB
+ylz
 xbP
 uJn
 qje
@@ -58746,8 +60035,8 @@ xbP
 mBg
 uJn
 uJn
-aev
-wiB
+mBX
+sHx
 qZh
 bXS
 fmL
@@ -58981,29 +60270,29 @@ mgz
 mgz
 bHu
 kfy
-wiB
+lUb
 dPH
 dPH
 dPH
-dwZ
+fYL
 wiB
 nNs
 vyr
 kYQ
-rTZ
+plS
 dwZ
 qZh
+cSY
 kbT
 kbT
-kbT
-bXS
+vOZ
 wiB
 kfy
 xbP
 ipS
 vyr
 ipS
-aev
+mBX
 kfy
 fub
 vOZ
@@ -59237,23 +60526,23 @@ mgz
 mgz
 mgz
 bHu
-dwZ
+wPh
 dPH
 dPH
 dPH
-wiB
-kfy
-wiB
+uUJ
+kWt
+ftO
 xbP
 vyr
 aOU
-rTZ
+plS
 wiB
 qZh
 kbT
 kbT
 kbT
-bXS
+vOZ
 lkp
 wiB
 xbP
@@ -59261,7 +60550,7 @@ jNu
 vyr
 jNu
 aev
-wiB
+lrU
 fub
 bXS
 dwZ
@@ -59494,10 +60783,10 @@ cAd
 cAd
 cAd
 mgz
-kfy
+bSm
 dPH
 dPH
-wiB
+iAZ
 xbP
 jHV
 jHV
@@ -59505,8 +60794,8 @@ jHV
 vyr
 vyr
 aev
-wiB
-oEh
+hEI
+gnV
 eAz
 bar
 chD
@@ -59754,7 +61043,7 @@ bsw
 quG
 dPH
 dPH
-wiB
+bEl
 xbP
 bcp
 uJn
@@ -59762,7 +61051,7 @@ uJn
 vyr
 guM
 aev
-wiB
+mTc
 wiB
 kfy
 wiB
@@ -59770,8 +61059,8 @@ dwZ
 wiB
 wiB
 wiB
-wiB
-tCi
+nXc
+tWq
 wiB
 kfy
 wiB
@@ -60011,7 +61300,7 @@ vBS
 pTx
 dPH
 dPH
-kfy
+gHZ
 xbP
 okx
 uJn
@@ -60268,11 +61557,11 @@ rUK
 pTx
 dPH
 dPH
-dwZ
+nul
 xbP
 rgl
-aBq
-aBq
+qmG
+qmG
 rgl
 rgl
 aev
@@ -60525,12 +61814,12 @@ rUK
 quG
 mgz
 mgz
-wiB
-wiB
-wiB
-wiB
 kfy
 wiB
+nXc
+mTc
+kfy
+fGL
 pJJ
 dwZ
 wiB
@@ -61039,7 +62328,7 @@ cAd
 mgz
 mgz
 mgz
-mgz
+sac
 mgz
 bHu
 pJJ
@@ -61941,17 +63230,17 @@ wiB
 wiB
 hmj
 jHV
-uJn
-uJn
-uJn
-uJn
+ssg
+mkm
+mkm
+aIM
 jHV
 wiB
 jHV
-uJn
-uJn
-uJn
-uJn
+gfg
+mkm
+mkm
+ssg
 jHV
 wiB
 dwZ
@@ -62198,17 +63487,17 @@ wiB
 wiB
 fmL
 jHV
-uJn
-uJn
-uJn
-uJn
+uvl
+mkm
+mkm
+mBg
 jHV
 wiB
 jHV
-uJn
-uJn
-uJn
-uJn
+pPx
+mkm
+mkm
+mhY
 jHV
 hmj
 sFz
@@ -63231,7 +64520,7 @@ ekU
 ekU
 vYv
 vYv
-ekU
+dul
 ekU
 vYv
 vYv
@@ -69673,7 +70962,7 @@ aoO
 aoO
 dQD
 ksZ
-rrN
+qOD
 vdi
 vQU
 aoO
@@ -69930,8 +71219,8 @@ krz
 kZq
 pFl
 kZq
-nsE
-tMz
+gak
+eAB
 krz
 tYE
 krz
@@ -70187,7 +71476,7 @@ aSS
 cos
 sSW
 cos
-xED
+bXu
 hFb
 aSS
 aSS
@@ -70446,7 +71735,7 @@ gap
 pjb
 rrN
 vdi
-eKT
+ieP
 bcP
 eTo
 bcP
@@ -70961,7 +72250,7 @@ dMZ
 dcz
 ebC
 svi
-hof
+enI
 dng
 dnO
 ebC
@@ -71218,7 +72507,7 @@ dMZ
 ebC
 dcz
 svi
-bXS
+dgE
 cWm
 wJi
 svv
@@ -71778,7 +73067,7 @@ kpl
 rWj
 dDU
 wiB
-wiB
+qYR
 wiB
 mhM
 cSY
@@ -72033,11 +73322,11 @@ ltH
 kWJ
 jLf
 kpl
-dDU
-wiB
-wiB
-wiB
-mhM
+juP
+isu
+fsc
+isu
+sea
 kbT
 kbT
 mOW
@@ -72250,7 +73539,7 @@ bXS
 maM
 rbU
 udj
-hss
+fuG
 vyr
 uDC
 udj
@@ -72290,11 +73579,11 @@ nCK
 wiB
 qZh
 kbT
-dDU
-wiB
-wiB
-wiB
-mhM
+gIb
+kbT
+uoj
+kbT
+jnl
 kbT
 vOZ
 wiB
@@ -72547,11 +73836,11 @@ sHd
 uSK
 fub
 kbT
-juP
-fsc
-fsc
-fsc
-sea
+gIb
+geY
+uqp
+kbT
+cGl
 kbT
 bXS
 hmj
@@ -72759,7 +74048,7 @@ ixu
 rAQ
 fUb
 vdi
-izc
+cSe
 lFz
 ybQ
 uxm
@@ -72805,10 +74094,10 @@ mTc
 phP
 kbT
 gIb
+rbp
+eXM
 kbT
-uoj
-kbT
-jnl
+cGl
 cSY
 sMH
 qYR
@@ -73061,9 +74350,9 @@ wiB
 qYR
 qZh
 cSY
-gIb
-geY
-uqp
+ncw
+otv
+iBd
 kbT
 cGl
 veh
@@ -73319,10 +74608,10 @@ wiB
 qZh
 kbT
 gIb
-rbp
-eXM
 kbT
-cGl
+uoj
+kbT
+dIn
 kbT
 bXS
 hmj
@@ -73575,11 +74864,11 @@ ftO
 cwQ
 qZh
 kbT
-ncw
-otv
-iBd
-kbT
-cGl
+otA
+uHp
+uHp
+uHp
+oHL
 cSY
 sMH
 wiB
@@ -73832,11 +75121,11 @@ nCK
 qEs
 xUR
 cSY
-gIb
-kbT
-uoj
-kbT
-dIn
+dDU
+wiB
+wiB
+qYR
+mhM
 kbT
 sMH
 wiB
@@ -74028,8 +75317,8 @@ wiB
 wiB
 wiB
 ffG
-aaF
-aaF
+tkV
+iqu
 wiB
 wiB
 aaF
@@ -74044,7 +75333,7 @@ ixu
 xzY
 rrN
 fTF
-izc
+tig
 bXS
 maM
 uJn
@@ -74089,11 +75378,11 @@ nCK
 qYR
 qZh
 kbT
-ifb
-uHp
-uHp
-uHp
-oHL
+dDU
+qYR
+wiB
+wiB
+hEt
 kbT
 vOZ
 qYR
@@ -74284,7 +75573,7 @@ wiB
 cxG
 pQS
 wiB
-aaF
+kls
 ulW
 kxI
 sFz
@@ -74348,7 +75637,7 @@ cSY
 kbT
 qjM
 fsc
-fsc
+isu
 fsc
 jBS
 kbT
@@ -75071,7 +76360,7 @@ egY
 ixu
 dMZ
 rrN
-vdi
+cic
 svi
 bXS
 wiB
@@ -75124,8 +76413,8 @@ oEh
 cYQ
 qYR
 lkM
-hmj
-wiB
+mfT
+ftO
 nCK
 bOH
 afR
@@ -75327,8 +76616,8 @@ wiB
 egY
 ixu
 dMZ
-rrN
-vdi
+qOD
+pxE
 svi
 bXS
 dwZ
@@ -75382,7 +76671,7 @@ gPT
 nCK
 flZ
 nCK
-sFz
+htT
 nCK
 kfF
 nCK
@@ -75584,7 +76873,7 @@ wiB
 egY
 ixu
 dMZ
-fUb
+rQi
 vdi
 svi
 aNK
@@ -75639,7 +76928,7 @@ wot
 wot
 cuC
 nCK
-wiB
+sFz
 nXc
 mTc
 lkM
@@ -75888,7 +77177,7 @@ wJa
 wJa
 exk
 bXS
-wiB
+kWt
 nCK
 aFW
 rij
@@ -76145,7 +77434,7 @@ vYv
 ekU
 qZc
 bXS
-wiB
+nXc
 nVh
 baz
 ijf
@@ -76153,7 +77442,7 @@ bXd
 tGl
 bae
 nCK
-wiB
+hEI
 sFz
 wiB
 wiB
@@ -76410,13 +77699,13 @@ wiB
 nCK
 nCK
 nCK
-sFz
+mTc
 dwZ
 wiB
 sFz
 wiB
 wiB
-wiB
+sFz
 wiB
 wiB
 wiB
@@ -76682,7 +77971,7 @@ bHu
 mgz
 qzm
 qzm
-dwZ
+nul
 wiB
 wiB
 jTQ
@@ -76708,7 +77997,7 @@ mgz
 mgz
 qzm
 qzm
-xEG
+wdW
 gpl
 jZg
 tYE
@@ -76949,13 +78238,13 @@ dwZ
 wiB
 wiB
 wiB
+cxG
 wiB
 wiB
 wiB
 wiB
 wiB
 wiB
-wiB
 mgz
 mgz
 mgz
@@ -76964,7 +78253,7 @@ mgz
 mgz
 mgz
 mgz
-qYR
+nqx
 rmk
 jZg
 eWl
@@ -77204,7 +78493,7 @@ jTQ
 wiB
 wiB
 wiB
-wiB
+pJJ
 dwZ
 wiB
 qau
@@ -77968,13 +79257,13 @@ mgz
 mgz
 mgz
 mgz
-jKp
+wiB
 kfy
 wiB
 wiB
 jTQ
 qYR
-ugR
+wiB
 cxG
 wiB
 ipL
@@ -78226,17 +79515,17 @@ mgz
 mgz
 mgz
 bHu
+pJJ
+wiB
+wiB
+dwZ
 wiB
 wiB
 wiB
 dwZ
 wiB
-wiB
-wiB
 dwZ
 wiB
-cxG
-wiB
 mgz
 mgz
 mgz
@@ -78249,7 +79538,7 @@ mgz
 mgz
 mgz
 wiB
-wiB
+pJJ
 kEr
 rrN
 vdi
@@ -78257,10 +79546,10 @@ iFg
 sFz
 wiB
 wiB
+pJJ
 wiB
 wiB
-wiB
-wiB
+osu
 bHu
 mgz
 bHu
@@ -78489,9 +79778,9 @@ qau
 wiB
 wiB
 jTQ
-qGb
 wiB
-dwZ
+pJJ
+wiB
 wiB
 wiB
 bHu
@@ -78744,12 +80033,12 @@ wiB
 wiB
 dwZ
 wiB
+pJJ
 wiB
 wiB
 wiB
 wiB
-wiB
-wiB
+qGb
 mgz
 mgz
 mgz
@@ -79289,9 +80578,9 @@ sFz
 wiB
 dwZ
 wiB
+pJJ
 wiB
-wiB
-wiB
+osu
 mgz
 mgz
 mgz
@@ -79777,7 +81066,7 @@ jTQ
 wiB
 wiB
 wiB
-wiB
+pJJ
 wiB
 wiB
 bHu
@@ -79790,7 +81079,7 @@ mgz
 mgz
 mgz
 qau
-wiB
+pJJ
 wiB
 rmk
 rrN
@@ -80028,7 +81317,7 @@ wiB
 wiB
 wiB
 jTQ
-wiB
+pJJ
 wiB
 wiB
 wiB
@@ -80310,7 +81599,7 @@ ifS
 fGf
 vSe
 iFg
-wiB
+pJJ
 wiB
 wiB
 wiB
@@ -80436,7 +81725,7 @@ bHu
 mgz
 bHu
 dwZ
-wiB
+ctg
 jhI
 wiB
 wiB
@@ -80533,12 +81822,12 @@ mgz
 mgz
 mgz
 mgz
-mgz
-mgz
+qzm
+qzm
+ylz
 wiB
 wiB
-wiB
-wiB
+pJJ
 wiB
 wiB
 wiB
@@ -80694,9 +81983,9 @@ mgz
 mgz
 bHu
 hqj
-wiB
-wiB
-sFz
+bth
+ctg
+rVM
 wiB
 wiB
 wiB
@@ -80782,7 +82071,7 @@ dPH
 dPH
 ylz
 wiB
-wiB
+pJJ
 dwZ
 osu
 bHu
@@ -80791,7 +82080,7 @@ mgz
 mgz
 bHu
 bHu
-wiB
+ftF
 dwZ
 wiB
 wiB
@@ -80829,7 +82118,7 @@ wiB
 dwZ
 wiB
 wiB
-wiB
+pJJ
 sFz
 wiB
 whu
@@ -80965,7 +82254,7 @@ wiB
 wiB
 sFz
 wiB
-wiB
+ctg
 wiB
 wiB
 dwZ
@@ -81222,7 +82511,7 @@ bHu
 mgz
 bHu
 bHu
-mgz
+qzm
 mgz
 bHu
 mgz
@@ -81479,7 +82768,7 @@ mgz
 mgz
 mgz
 mgz
-mgz
+qzm
 mgz
 mgz
 mgz
@@ -81537,8 +82826,8 @@ wiB
 bHu
 mgz
 mgz
-bHu
-bHu
+qzm
+mgz
 mgz
 mgz
 mgz
@@ -81559,7 +82848,7 @@ nrs
 wiB
 wiB
 wiB
-wiB
+pJJ
 wiB
 ctg
 iyZ
@@ -81794,7 +83083,7 @@ wiB
 wiB
 mgz
 mgz
-mgz
+qzm
 mgz
 mgz
 mgz
@@ -81836,7 +83125,7 @@ wiB
 wiB
 wiB
 wiB
-wiB
+pJJ
 qYR
 wiB
 wiB
@@ -81855,7 +83144,7 @@ eoZ
 wiB
 wiB
 wiB
-wiB
+pJJ
 sFz
 wiB
 whu
@@ -81863,7 +83152,7 @@ sFz
 wiB
 wiB
 wiB
-wiB
+osu
 mgz
 mgz
 mgz
@@ -82101,7 +83390,7 @@ mgz
 bHu
 mgz
 bHu
-wiB
+ctg
 wiB
 qYR
 wiB
@@ -82357,9 +83646,9 @@ mgz
 mgz
 mgz
 mgz
-mgz
-mgz
-dwZ
+lPp
+lPp
+nul
 wiB
 qau
 rmk
@@ -82593,7 +83882,7 @@ wiB
 wiB
 jTQ
 qYR
-wiB
+pJJ
 wiB
 jTQ
 wiB
@@ -82617,13 +83906,13 @@ mgz
 mgz
 mgz
 bHu
-wiB
+pJJ
 wiB
 rmk
 rrN
 vdi
 iFg
-wiB
+pJJ
 wiB
 wiB
 sFz
@@ -82840,7 +84129,7 @@ dPH
 ylz
 wiB
 jTQ
-wiB
+pJJ
 wiB
 dwZ
 wiB
@@ -82855,7 +84144,7 @@ wiB
 qYR
 wiB
 wiB
-wiB
+pJJ
 wiB
 wiB
 wiB
@@ -82887,7 +84176,7 @@ wiB
 wiB
 wiB
 sFz
-wiB
+pJJ
 wiB
 sFz
 bHu
@@ -83103,7 +84392,7 @@ wiB
 wiB
 jTQ
 wiB
-wiB
+pJJ
 dwZ
 wiB
 wiB
@@ -83147,7 +84436,7 @@ wiB
 dwZ
 wiB
 wiB
-wiB
+osu
 bHu
 mgz
 mgz
@@ -83662,7 +84951,7 @@ dPH
 bth
 wiB
 wiB
-wiB
+pJJ
 wiB
 dwZ
 bHu
@@ -83922,7 +85211,7 @@ wiB
 xag
 wiB
 wiB
-wiB
+osu
 mgz
 mgz
 mgz
@@ -84105,7 +85394,7 @@ qYR
 wiB
 wiB
 wiB
-wiB
+tdD
 kQl
 pFK
 rYH
@@ -84362,7 +85651,7 @@ wiB
 wiB
 dwZ
 wiB
-wiB
+tdD
 kQl
 kQl
 kQl
@@ -85489,7 +86778,7 @@ jYl
 wiB
 wiB
 sFz
-wiB
+tdD
 dPH
 rUK
 oRM
@@ -85717,7 +87006,7 @@ gAJ
 bHu
 wiB
 wiB
-wiB
+osu
 wiB
 vwM
 dPH
@@ -85747,7 +87036,7 @@ dwZ
 wiB
 wiB
 wiB
-wiB
+ftF
 uHg
 uHg
 uHg
@@ -88571,10 +89860,10 @@ mgz
 mgz
 dOd
 kWt
-hEI
+lrU
 dwZ
-kWt
-ftO
+gTY
+qQk
 hEI
 wiB
 jYl
@@ -88827,12 +90116,12 @@ mgz
 mgz
 mgz
 jYl
-owl
-dcP
-dcP
-dcP
-dcP
-ueY
+dSq
+oCT
+oWE
+oWE
+kxb
+dqV
 dOd
 sFz
 mgz
@@ -89084,12 +90373,12 @@ mgz
 mgz
 mgz
 sFz
+oCT
 dcP
 dcP
 dcP
-dcP
-dcP
-wiB
+mnU
+yjf
 tnP
 mgz
 mgz
@@ -94088,8 +95377,8 @@ mgz
 quG
 mgz
 quG
-ebC
-ebC
+rrN
+vdi
 nbm
 mgz
 bHu
@@ -94345,8 +95634,8 @@ mgz
 cDd
 eGD
 cDd
-mAT
-mAT
+aqo
+kEg
 aPE
 mgz
 mgz
@@ -94602,8 +95891,8 @@ uHg
 cDd
 eGD
 cDd
-mAT
-mAT
+aqo
+kEg
 aPE
 mgz
 mgz
@@ -94859,8 +96148,8 @@ uHg
 cDd
 eGD
 cDd
-mAT
-mAT
+aqo
+kEg
 aPE
 mgz
 mgz
@@ -95116,8 +96405,8 @@ oUo
 cDd
 eGD
 cDd
-mAT
-mAT
+aqo
+kEg
 aPE
 mgz
 mgz
@@ -95373,8 +96662,8 @@ oUo
 oUo
 lMK
 qSz
-mAT
-mAT
+aqo
+kEg
 aPE
 mgz
 mgz
@@ -95630,8 +96919,8 @@ oUo
 kgs
 lMK
 lMK
-mAT
-mAT
+aqo
+kEg
 cDd
 mgz
 mgz
@@ -95887,8 +97176,8 @@ oUo
 lMK
 eGD
 cDd
-mAT
-mAT
+aqo
+kEg
 cDd
 mgz
 mgz
@@ -96144,8 +97433,8 @@ uHg
 cDd
 eGD
 cDd
-mAT
-mAT
+aqo
+kEg
 cDd
 mgz
 mgz
@@ -96401,7 +97690,7 @@ mgz
 cDd
 eGD
 cDd
-orh
+lbw
 orh
 cDd
 mgz
@@ -96658,7 +97947,7 @@ mgz
 cDd
 eGD
 cDd
-orh
+lbw
 orh
 cDd
 mgz
@@ -96915,7 +98204,7 @@ mgz
 cDd
 eGD
 cDd
-orh
+lbw
 orh
 cDd
 mgz
@@ -97172,7 +98461,7 @@ mgz
 cDd
 eGD
 cDd
-orh
+lbw
 uHg
 cDd
 mgz
@@ -141959,7 +143248,7 @@ fRH
 fRH
 fRH
 iAZ
-uUA
+kmt
 phw
 fRH
 fRH
@@ -142215,7 +143504,7 @@ fRH
 fYL
 ftF
 ftF
-wiB
+tdD
 aXm
 aXm
 fRH
@@ -145040,8 +146329,8 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -145295,14 +146584,14 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -145550,15 +146839,15 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -145806,15 +147095,15 @@ aXm
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+wiB
+ctg
+hCI
+pai
 fRH
 fRH
 fRH
@@ -146062,13 +147351,13 @@ aXm
 aXm
 aXm
 aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
+mgz
+mgz
+mgz
+mgz
+dwZ
+wiB
+tdD
 aXm
 aXm
 aXm
@@ -146226,9 +147515,9 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -146321,12 +147610,12 @@ aXm
 aXm
 aXm
 aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
+xwG
+ctg
+ctg
+dWU
+iPb
+kFl
 aXm
 aXm
 aXm
@@ -146484,13 +147773,13 @@ fRH
 fRH
 fRH
 fRH
+mgz
+mgz
 fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
+mgz
 fRH
 fRH
 fRH
@@ -146562,7 +147851,7 @@ fRH
 fRH
 fRH
 fRH
-fRH
+wba
 fRH
 fRH
 fRH
@@ -146742,26 +148031,26 @@ fRH
 fRH
 fRH
 fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
+mgz
+mgz
+geo
+ftF
+ftF
+geo
+mJi
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -146818,8 +148107,8 @@ aXm
 aXm
 aXm
 aXm
-aXm
-aXm
+fWq
+tdD
 aXm
 aXm
 aXm
@@ -146999,25 +148288,25 @@ fRH
 fRH
 fRH
 fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
+mgz
+mgz
+dwZ
+pJJ
+wiB
+tdD
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -147070,14 +148359,14 @@ aXm
 aXm
 aXm
 aXm
+mgz
+mgz
+mgz
 aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
+uWg
+wiB
+pJJ
+wzq
 aXm
 aXm
 aXm
@@ -147256,25 +148545,25 @@ fRH
 fRH
 fRH
 fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+wiB
+geo
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -147328,13 +148617,13 @@ aXm
 aXm
 aXm
 aXm
+mgz
+mgz
 aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
+ylz
+mgz
+mgz
+mgz
 aXm
 aXm
 aXm
@@ -147513,6 +148802,11 @@ fRH
 fRH
 fRH
 fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -147520,18 +148814,13 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -147586,11 +148875,11 @@ aXm
 aXm
 aXm
 aXm
-aXm
-aXm
-aXm
-aXm
-aXm
+mgz
+ftF
+dwZ
+mgz
+mgz
 aXm
 aXm
 aXm
@@ -147630,13 +148919,13 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
-aXm
+mgz
+mgz
+geo
+ftF
+geo
+ftF
+fDt
 aXm
 fRH
 fRH
@@ -147770,6 +149059,12 @@ fRH
 fRH
 fRH
 fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -147779,15 +149074,9 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -147843,11 +149132,11 @@ aXm
 aXm
 aXm
 aXm
-aXm
-aXm
-aXm
-aXm
-aXm
+mgz
+mgz
+mgz
+mgz
+mgz
 aXm
 aXm
 aXm
@@ -147886,13 +149175,13 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
+mgz
+mgz
+mgz
+wiB
+kyf
+uyh
+tTg
 aXm
 aXm
 fRH
@@ -148028,11 +149317,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -148101,6 +149390,9 @@ aXm
 aXm
 aXm
 aXm
+mgz
+mgz
+mgz
 aXm
 aXm
 aXm
@@ -148128,12 +149420,6 @@ aXm
 aXm
 aXm
 aXm
-aXm
-aXm
-aXm
-fRH
-fRH
-fRH
 fRH
 fRH
 fRH
@@ -148148,10 +149434,13 @@ fRH
 fRH
 mgz
 mgz
-mgz
-aXm
-aXm
-aXm
+dwZ
+wiB
+tzz
+wiB
+wiB
+ftF
+geo
 mgz
 aXm
 aXm
@@ -148286,11 +149575,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -148400,12 +149689,12 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
 mgz
-mgz
-mgz
+sFz
+wiB
+wiB
+wiB
+wiB
 mgz
 mgz
 mgz
@@ -148543,11 +149832,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -148657,12 +149946,12 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
 mgz
-mgz
-mgz
+osu
+wiB
+lvD
+wiB
+dwZ
 mgz
 bHu
 bHu
@@ -148801,11 +150090,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -148915,10 +150204,10 @@ mgz
 mgz
 mgz
 mgz
-mgz
-mgz
-mgz
-mgz
+dwZ
+kyf
+yem
+wiB
 mgz
 mgz
 mgz
@@ -149059,10 +150348,10 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -149172,12 +150461,12 @@ mgz
 mgz
 mgz
 mgz
+wiB
+wrS
+pPm
+qau
 mgz
 mgz
-mgz
-fRH
-fRH
-fRH
 mgz
 mgz
 mgz
@@ -149316,10 +150605,10 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -149428,10 +150717,10 @@ mgz
 mgz
 mgz
 bHu
-bHu
-bHu
-mgz
-mgz
+wiB
+wiB
+tzz
+sFz
 mgz
 mgz
 mgz
@@ -149572,11 +150861,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -149685,16 +150974,16 @@ fRH
 fRH
 mgz
 mgz
-cKJ
+qau
+sFz
+wiB
+wiB
+mgz
+mgz
 bHu
 mgz
 mgz
 mgz
-mgz
-bHu
-mgz
-mgz
-aXm
 mgz
 mgz
 aXm
@@ -149828,14 +151117,14 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -149942,16 +151231,16 @@ fRH
 fRH
 mgz
 mgz
-cKJ
+wiB
+wiB
+wiB
+dwZ
+mgz
+bHu
+bHu
 bHu
 mgz
 mgz
-mgz
-bHu
-bHu
-bHu
-mgz
-aXm
 mgz
 mgz
 aXm
@@ -150086,13 +151375,13 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -150198,17 +151487,17 @@ fRH
 fRH
 fRH
 mgz
+mgz
+wiB
+dwZ
+wiB
+osu
 mgz
 bHu
 cKJ
-mgz
-mgz
-bHu
-cKJ
-cKJ
 bHu
 mgz
-aXm
+mgz
 mgz
 mgz
 aXm
@@ -150344,13 +151633,13 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -150455,58 +151744,58 @@ fRH
 fRH
 fRH
 mgz
+mgz
+wiB
+wiB
+wiB
+sFz
 mgz
 bHu
 cKJ
-mgz
-mgz
-bHu
-bHu
-cKJ
 bHu
 mgz
+mgz
+mgz
+mgz
+quG
+fRH
 aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+mgz
+mgz
+dwZ
+osu
+wiB
+wiB
+sFz
+wiB
+wiB
+dwZ
+sFz
+wiB
+wiB
+osu
+wiB
 mgz
 mgz
 mgz
 mgz
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-mgz
-mgz
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
 mgz
 mgz
 mgz
@@ -150601,14 +151890,14 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -150712,22 +152001,22 @@ fRH
 fRH
 fRH
 mgz
+mgz
+sFz
+wiB
+lvD
+wiB
 mgz
 bHu
 bHu
-mgz
-mgz
-mgz
-bHu
-bHu
 bHu
 mgz
-aXm
 mgz
 mgz
 mgz
-mgz
-mgz
+quG
+fRH
+fRH
 fDk
 chN
 chN
@@ -150745,9 +152034,9 @@ aXm
 aXm
 aXm
 aXm
+ylz
 wiB
-wiB
-wiB
+sFz
 wiB
 nCK
 nCK
@@ -150756,14 +152045,14 @@ nCK
 nCK
 nCK
 nCK
+dwZ
+wiB
+sFz
 wiB
 wiB
+sFz
 wiB
-mgz
-mgz
-mgz
-mgz
-mgz
+wiB
 mgz
 mgz
 aXm
@@ -150859,14 +152148,14 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -150967,24 +152256,24 @@ fRH
 fRH
 fRH
 fRH
-fRH
 mgz
+mgz
+dwZ
+wiB
+wiB
+bHf
+qau
 mgz
 mgz
 bHu
-bHu
 mgz
 mgz
 mgz
 mgz
 mgz
-mgz
-aXm
-mgz
-mgz
-mgz
-mgz
-mgz
+quG
+fRH
+fRH
 czO
 nAL
 nAL
@@ -151002,25 +152291,25 @@ aXm
 aXm
 aXm
 aXm
+amI
 wiB
 wiB
-wiB
-wiB
+dwZ
+nCK
+cTC
+vfc
+vfc
+pdr
+rYb
 nCK
 wiB
+dPA
+wJa
+wJa
+wJa
+ddK
 wiB
 wiB
-wiB
-wiB
-nCK
-wiB
-wiB
-wiB
-wiB
-wiB
-mgz
-mgz
-mgz
 aXm
 aXm
 aXm
@@ -151116,15 +152405,15 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -151223,25 +152512,25 @@ mgz
 fRH
 fRH
 fRH
+mgz
+mgz
+mgz
+wiB
+wiB
+wiB
+bHf
+wiB
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+quG
 fRH
 fRH
-mgz
-mgz
-mgz
-mgz
-bHu
-mgz
-mgz
-mgz
-mgz
-mgz
-aXm
-aXm
-aXm
-mgz
-mgz
-mgz
-mgz
 ugI
 nAL
 nAL
@@ -151259,25 +152548,25 @@ aXm
 aXm
 aXm
 aXm
+uRQ
 wiB
 wiB
 wiB
+ifb
+uDW
+lcL
+lcL
+lcL
+vfc
+ifb
 wiB
+mUg
+kbT
+kbT
+kFO
+bXS
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-mgz
-wiB
+dfh
 aXm
 aXm
 aXm
@@ -151373,13 +152662,13 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -151480,61 +152769,61 @@ mgz
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
 mgz
 mgz
 mgz
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-mgz
-mgz
-mgz
+qau
 wiB
+dwZ
+bHf
+wiB
+mgz
+mgz
+mgz
+mgz
+bHu
+mgz
+mgz
+mgz
+quG
+quG
+quG
+quG
+coN
+coN
+quG
+quG
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+thC
 aXm
 aXm
 aXm
 dPH
 dPH
+rXw
 wiB
+sFz
+ifb
+fgX
+lcL
+lcL
+lcL
+vfc
+ifb
 wiB
+lVd
+kbT
+kbT
+clr
+bXS
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+tdD
 aXm
 aXm
 aXm
@@ -151631,11 +152920,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -151740,58 +153029,58 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
+sFz
+wiB
+wiB
+bHf
+wiB
+dwZ
+mgz
+mgz
+mgz
+bHu
+bHu
+bHu
 mgz
 mgz
 mgz
 mgz
 mgz
+kQl
+kQl
 mgz
 mgz
 mgz
-aXm
-aXm
-aXm
+mgz
+mgz
 mgz
 mgz
 mgz
 mgz
 wiB
-wiB
-wiB
-wiB
+jcL
+ftF
+sjz
 dPH
 dPH
-wiB
+bth
 wiB
 wiB
 nCK
-wiB
-wiB
-wiB
-wiB
-wiB
+bbI
+lcL
+lcL
+lcL
+mEm
 nCK
 wiB
+wdb
+kbT
+kbT
+kFO
+bXS
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+giY
 aXm
 aXm
 aXm
@@ -151889,10 +153178,10 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -151998,56 +153287,56 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
-aXm
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-aXm
-aXm
-mgz
-mgz
-mgz
-mgz
-mgz
+osu
+wiB
+ydq
+kAe
 wiB
 wiB
+mgz
+mgz
+bHu
+cKJ
+cKJ
+bHu
+bHu
+mgz
+mgz
+mgz
+kQl
+hqj
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+dwZ
 wiB
 wiB
-wiB
+sFz
+mJi
 dPH
 dPH
-wiB
-wiB
+ylz
+dwZ
 nCK
 nCK
-wiB
-wiB
+oeX
+oeX
 nCK
 nCK
 nCK
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+msO
+ekU
+aBL
+ekU
+xUE
+lUb
 aXm
 aXm
 aXm
@@ -152145,11 +153434,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -152255,25 +153544,24 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
-mgz
-mgz
-mgz
-mgz
-mgz
+dwZ
+wiB
+sFz
+lNL
+wiB
+wiB
+qau
 mgz
 mgz
 bHu
+cKJ
+cKJ
+bHu
+mgz
+mgz
+kQl
+kQl
+exv
 mgz
 mgz
 mgz
@@ -152282,28 +153570,29 @@ mgz
 mgz
 mgz
 mgz
+mgz
+sFz
 wiB
+sFz
 wiB
-wiB
-wiB
-wiB
+tdD
 dPH
 dPH
+aUf
+wiB
+wiB
+sFz
+qZh
+bXS
+wiB
+wiB
+sFz
 wiB
 wiB
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+qvc
+ctg
+lUb
 aXm
 aXm
 aXm
@@ -152402,11 +153691,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -152512,22 +153801,14 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
 mgz
-mgz
-mgz
-mgz
-mgz
+wiB
+qau
+wiB
+wiB
+wiB
+sFz
+dwZ
 mgz
 mgz
 bHu
@@ -152535,30 +153816,38 @@ bHu
 bHu
 mgz
 mgz
+hqj
+kQl
+qIV
+mgz
+bHu
+bHu
+mgz
+mgz
 bHu
 mgz
 mgz
 mgz
 mgz
+osu
 wiB
 wiB
-wiB
-wiB
+dfh
 dPH
 dPH
 dPH
+mkY
+wJa
+wJa
 kbT
 kbT
-kbT
-kbT
-kbT
-kbT
-kbT
-kbT
-kbT
-kbT
-kbT
-dPH
+wJa
+wJa
+wJa
+wJa
+jol
+wJa
+rTZ
 dPH
 dPH
 aXm
@@ -152660,11 +153949,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -152769,25 +154058,25 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
-aXm
+mgz
+mgz
+wiB
+wiB
+sFz
+wiB
+wiB
+osu
 mgz
 mgz
 mgz
 mgz
 mgz
 mgz
-bHu
+qIV
+kQl
+exv
+mgz
+mgz
 bHu
 cKJ
 bHu
@@ -152799,23 +154088,23 @@ mgz
 mgz
 mgz
 wiB
-wiB
-wiB
-wiB
-wiB
+fmy
+xYJ
+aBq
+gML
 dPH
+oEh
+ekU
+ekU
 kbT
 kbT
-kbT
-kbT
-kbT
-kbT
-kbT
-kbT
-kbT
-kbT
-kbT
-dPH
+ekU
+ekU
+ekU
+ekU
+aBL
+ekU
+xUE
 dPH
 dPH
 aXm
@@ -152917,11 +154206,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -153018,6 +154307,10 @@ mgz
 mgz
 mgz
 mgz
+bHu
+bHu
+bHu
+bHu
 mgz
 mgz
 mgz
@@ -153025,23 +154318,19 @@ mgz
 mgz
 mgz
 mgz
-mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
-aXm
+wiB
+dwZ
+wiB
+pqF
+wiB
+wiB
 mgz
 mgz
 mgz
-mgz
+hqj
+kQl
+kQl
+kQl
 mgz
 mgz
 bHu
@@ -153055,27 +154344,27 @@ mgz
 mgz
 mgz
 mgz
+sFz
+fHd
+udy
+rCx
+eSX
+ftF
+wiB
+dwZ
+wiB
+qZh
+bXS
+wiB
+sFz
 wiB
 wiB
+qvc
 wiB
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-kbT
-wiB
-wiB
-wiB
-wiB
-wiB
+ftF
+jcL
+mJi
 aXm
 aXm
 aXm
@@ -153173,12 +154462,12 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -153276,28 +154565,28 @@ mgz
 mgz
 mgz
 mgz
+bHu
+bHu
+bHu
+bHu
+bHu
 mgz
 mgz
 mgz
 mgz
 mgz
+qau
+wiB
+wiB
+ydq
+kAe
+wiB
+qau
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
-aXm
-mgz
-mgz
-mgz
+kQl
+kQl
+hqj
 mgz
 mgz
 mgz
@@ -153313,27 +154602,27 @@ mgz
 mgz
 mgz
 mgz
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-nCK
-nCK
+nVw
+qbK
+qbK
+eSX
 wiB
 wiB
 nCK
 nCK
+oeX
+oeX
+nCK
+nCK
 nCK
 wiB
-kbT
+qvc
+wiB
+sFz
 wiB
 wiB
 wiB
-wiB
-wiB
-wiB
+wzq
 aXm
 aXm
 aXm
@@ -153429,13 +154718,13 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -153520,7 +154809,6 @@ fRH
 fRH
 fRH
 fRH
-mgz
 fRH
 mgz
 mgz
@@ -153534,26 +154822,27 @@ mgz
 mgz
 mgz
 mgz
+bHu
+cKJ
+cKJ
+bHu
+bHu
+bHu
 mgz
 mgz
 mgz
 mgz
 mgz
-mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-aXm
-aXm
-mgz
-mgz
+sFz
+wiB
+wiB
+ydq
+kAe
+wiB
+dwZ
+wiB
+fMV
+kQl
 mgz
 mgz
 mgz
@@ -153570,27 +154859,27 @@ mgz
 mgz
 mgz
 mgz
+qbK
+gNj
+gNj
+tdB
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+sFz
+nCK
+pLM
+lcL
+lcL
+lcL
+tyS
 nCK
 wiB
-wiB
-wiB
-wiB
-wiB
-nCK
-wiB
-kbT
-wiB
+qvc
+dwZ
 nCK
 nCK
 nCK
 nCK
-wiB
+tdD
 aXm
 aXm
 aXm
@@ -153686,12 +154975,12 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -153782,44 +155071,19 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
 mgz
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
-mgz
-mgz
-bHu
-bHu
-mgz
 mgz
 mgz
 mgz
 mgz
 bHu
 bHu
-bHu
+cKJ
+cKJ
+cKJ
 bHu
 bHu
 mgz
@@ -153829,25 +155093,50 @@ mgz
 mgz
 mgz
 wiB
+dwZ
+tzz
+wiB
+wiB
+wiB
+sFz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+bHu
+bHu
+bHu
+bHu
+bHu
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+dwZ
 wiB
 wiB
 wiB
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-kbT
+ifb
+vfc
+lcL
+lcL
+lcL
+uDW
+ifb
+sFz
+qvc
 wiB
 nCK
-wiB
-wiB
+bbI
+fAl
 nCK
-wiB
+tdD
 aXm
 aXm
 aXm
@@ -153858,7 +155147,7 @@ aXm
 aXm
 aXm
 aXm
-aXm
+mgz
 mgz
 mgz
 mgz
@@ -153943,12 +155232,12 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -154034,21 +155323,11 @@ fRH
 fRH
 fRH
 fRH
-mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
 fRH
 fRH
 mgz
 mgz
-mgz
-mgz
+fRH
 fRH
 fRH
 fRH
@@ -154058,22 +155337,25 @@ fRH
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-mgz
-mgz
-aXm
-mgz
-mgz
-mgz
-mgz
+bHu
+bHu
+cKJ
+cKJ
+bHu
 bHu
 mgz
 mgz
 mgz
 mgz
-aXm
+mgz
+mgz
+osu
+wiB
+wiB
+wiB
+sFz
+wiB
+dwZ
 mgz
 mgz
 mgz
@@ -154087,24 +155369,31 @@ mgz
 mgz
 mgz
 mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+sFz
 wiB
+dwZ
+ifb
+vfc
+lcL
+lcL
+lcL
+fgX
+ifb
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-kbT
-wiB
-wiB
-wiB
-wiB
+qZh
+ulP
+oeX
+lcL
+lcL
 nCK
-wiB
+dfh
 aXm
 aXm
 aXm
@@ -154201,11 +155490,11 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -154302,42 +155591,16 @@ fRH
 fRH
 fRH
 fRH
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-fRH
-fRH
-fRH
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
 mgz
 mgz
 mgz
 mgz
 bHu
-mgz
-mgz
-mgz
-aXm
-aXm
-aXm
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
+bHu
+cKJ
+cKJ
+bHu
+bHu
 mgz
 mgz
 mgz
@@ -154345,23 +155608,49 @@ mgz
 mgz
 mgz
 wiB
+wiB
+dwZ
+wiB
+wiB
+osu
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+dwZ
 wiB
 wiB
 nCK
-wiB
-wiB
-wiB
-wiB
-wiB
+bbI
+vfc
+tte
+vfc
+weY
 nCK
-wiB
-kbT
-wiB
+dwZ
+qvc
+sFz
 nCK
-wiB
-wiB
+lcL
+lcL
 nCK
-wiB
+tdD
 aXm
 aXm
 aXm
@@ -154458,13 +155747,13 @@ mgz
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -154564,31 +155853,11 @@ mgz
 mgz
 mgz
 mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
+bHu
+bHu
 cKJ
-mgz
-mgz
-aXm
-aXm
-aXm
-aXm
+cKJ
+bHu
 mgz
 mgz
 mgz
@@ -154596,29 +155865,49 @@ mgz
 mgz
 mgz
 mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
+qau
 wiB
+whu
+pqF
+whu
+wiB
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+osu
 wiB
 nCK
 nCK
-nCK
-nCK
-nCK
+ifb
+ifb
+ifb
 nCK
 nCK
 wiB
-kbT
+qvc
 wiB
-wiB
-wiB
-wiB
-nCK
-wiB
+ifb
+lcL
+lcL
+ifb
+tdD
 aXm
 aXm
 aXm
@@ -154715,13 +156004,13 @@ fRH
 fRH
 fRH
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -154822,6 +156111,11 @@ mgz
 mgz
 mgz
 mgz
+bHu
+bHu
+bHu
+bHu
+bHu
 mgz
 mgz
 mgz
@@ -154829,24 +156123,19 @@ mgz
 mgz
 mgz
 mgz
+wiB
+wiB
+bHf
+wiB
+qau
 mgz
 mgz
 mgz
 mgz
 mgz
 mgz
+bHu
 mgz
-mgz
-mgz
-cKJ
-cKJ
-mgz
-mgz
-aXm
-aXm
-aXm
-aXm
-aXm
 mgz
 mgz
 mgz
@@ -154863,20 +156152,20 @@ mgz
 wiB
 wiB
 wiB
+dwZ
+wiB
+sFz
 wiB
 wiB
 wiB
+qvc
 wiB
+ifb
+lcL
+lcL
+ifb
 wiB
-wiB
-kbT
-wiB
-wiB
-wiB
-wiB
-nCK
-wiB
-wiB
+mJi
 aXm
 aXm
 aXm
@@ -154972,13 +156261,13 @@ mgz
 mgz
 fRH
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -155083,62 +156372,62 @@ mgz
 mgz
 mgz
 mgz
+bHu
+bHu
 mgz
 mgz
 mgz
 mgz
 mgz
 mgz
+wiB
+dwZ
+bHf
+wiB
 mgz
 mgz
 mgz
 mgz
 mgz
 mgz
+bHu
+bHu
+bHu
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+bHu
+bHu
 cKJ
 bHu
-mgz
-mgz
-mgz
-mgz
-aXm
-aXm
-aXm
-aXm
-mgz
-mgz
-mgz
-mgz
-mgz
-bHu
-bHu
-cKJ
-bHu
 bHu
 mgz
 mgz
+dwZ
+wiB
+sFz
 wiB
 wiB
 wiB
 wiB
 wiB
-wiB
-wiB
-wiB
-wiB
-kbT
-wiB
+sFz
+qvc
+sFz
 nCK
-wiB
-wiB
+xcx
+pdr
 nCK
+dwZ
 wiB
-wiB
-wiB
+jcL
 mgz
 mgz
 mgz
-aXm
+mgz
 aXm
 aXm
 aXm
@@ -155232,11 +156521,11 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -155346,6 +156635,12 @@ mgz
 mgz
 mgz
 mgz
+mgz
+mgz
+qau
+wiB
+bHf
+sFz
 mgz
 mgz
 mgz
@@ -155353,15 +156648,9 @@ mgz
 mgz
 mgz
 bHu
+cKJ
 bHu
 mgz
-mgz
-mgz
-mgz
-mgz
-aXm
-aXm
-aXm
 mgz
 mgz
 mgz
@@ -155374,29 +156663,29 @@ bHu
 mgz
 mgz
 mgz
-mgz
-mgz
 wiB
 wiB
 wiB
 wiB
+kyf
+twG
+twG
+lap
 wiB
-wiB
-wiB
-kbT
+qvc
 wiB
 nCK
 nCK
 nCK
 nCK
 wiB
-wiB
+osu
 mgz
 mgz
 mgz
+bHu
 mgz
 mgz
-aXm
 aXm
 aXm
 aXm
@@ -155491,10 +156780,10 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -155598,27 +156887,27 @@ fRH
 fRH
 mgz
 mgz
-fRH
-fRH
-fRH
 mgz
 mgz
 mgz
 mgz
-aXm
-aXm
+mgz
+mgz
+mgz
+whu
+wiB
+lXr
+wiB
+dwZ
+mgz
 mgz
 mgz
 mgz
 bHu
+cKJ
+cKJ
+bHu
 mgz
-mgz
-mgz
-aXm
-aXm
-aXm
-aXm
-aXm
 mgz
 mgz
 mgz
@@ -155628,32 +156917,32 @@ mgz
 bHu
 cKJ
 cKJ
+mgz
+mgz
+jdQ
+bBV
+wiB
+wiB
+wGt
+gJO
+wiB
+wiB
+wiB
+wiB
+qvc
+wiB
+wiB
+wiB
+wiB
+sFz
+dwZ
+mgz
+mgz
+mgz
 bHu
 bHu
 mgz
 mgz
-mgz
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-kbT
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-aXm
 aXm
 aXm
 aXm
@@ -155738,7 +157027,6 @@ fRH
 fRH
 fRH
 fRH
-fRH
 mgz
 mgz
 mgz
@@ -155748,10 +157036,11 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -155855,62 +157144,62 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
-aXm
+mgz
+mgz
+mgz
+mgz
+mgz
+dwZ
+wiB
+sFz
+kyf
+cPu
+kAe
+wiB
+wiB
 mgz
 mgz
 mgz
 bHu
-mgz
-mgz
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-mgz
-mgz
-mgz
-mgz
-mgz
+cKJ
 bHu
-bHu
-bHu
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 mgz
 bHu
 bHu
 bHu
 mgz
 mgz
+sFz
+jdQ
+nXc
+sHx
+wiB
+dwZ
+wiB
+wiB
+dwZ
+sFz
+wiB
+qvc
+dwZ
+wiB
+sFz
+wiB
+osu
 mgz
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
 mgz
 mgz
+bHu
+cKJ
+bHu
 mgz
 mgz
-mgz
-mgz
-mgz
-aXm
 aXm
 aXm
 aXm
@@ -155994,8 +157283,6 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
 mgz
 mgz
 mgz
@@ -156005,10 +157292,12 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -156113,61 +157402,61 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-aXm
-aXm
 mgz
 mgz
 mgz
-mgz
-mgz
-mgz
-mgz
-aXm
-aXm
-aXm
-aXm
-aXm
-aXm
-mgz
-mgz
-mgz
-mgz
+wiB
+wiB
+wiB
+coO
+gJO
+dwZ
+ydq
+kAe
+wiB
+qau
 mgz
 mgz
 bHu
 bHu
 mgz
 mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+dwZ
+sFz
+wiB
+jdQ
+kyf
+tao
+kWt
+kSr
+jdQ
+jdQ
+jdQ
+jdQ
+wiB
+qvc
+jdQ
+jdQ
+jdQ
+axu
+mgz
+mgz
+mgz
+bHu
+cKJ
+cKJ
 bHu
 mgz
 mgz
-mgz
-mgz
-mgz
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-aXm
 aXm
 aXm
 aXm
@@ -156248,13 +157537,6 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
 mgz
 mgz
 mgz
@@ -156262,10 +157544,17 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 mgz
@@ -156358,25 +157647,6 @@ aXm
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-mgz
-mgz
-fRH
-fRH
-mgz
 mgz
 mgz
 mgz
@@ -156388,43 +157658,62 @@ mgz
 fRH
 fRH
 fRH
-fRH
+mgz
+mgz
+mgz
+qau
+wiB
+lvD
+wiB
+wiB
+wiB
+wiB
+wiB
+ydq
+kAe
+wiB
+sFz
 mgz
 mgz
 mgz
 mgz
 mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+qau
+wiB
+wiB
+wiB
+wGt
+gJO
+jdQ
+tam
+wiB
+jdQ
+bYo
+nVw
+ftO
+ftO
+qvc
+ftO
+ftO
+ftO
 mgz
 mgz
 mgz
 bHu
+bHu
+cKJ
+bHu
+bHu
 mgz
 mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-aXm
 fRH
 fRH
 fRH
@@ -156516,12 +157805,12 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -156613,21 +157902,6 @@ tqa
 cDd
 aXm
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
 mgz
 mgz
 mgz
@@ -156643,6 +157917,20 @@ mgz
 mgz
 mgz
 mgz
+sFz
+wiB
+kyf
+gJO
+sFz
+osu
+mgz
+mgz
+qau
+wiB
+ydq
+lap
+wiB
+dwZ
 mgz
 mgz
 mgz
@@ -156651,37 +157939,38 @@ mgz
 mgz
 mgz
 mgz
-aXm
-aXm
 mgz
 mgz
 mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
+dwZ
 wiB
 wiB
 wiB
 wiB
 wiB
 wiB
-wiB
-wiB
-wiB
+jdQ
+nXc
+sHx
+jdQ
+iBX
+nVw
+nVw
+nVw
+qvc
+nVw
+nVw
+nVw
 mgz
 mgz
 mgz
 mgz
-aXm
+mgz
+bHu
 mgz
 mgz
 mgz
 mgz
-aXm
 fRH
 fRH
 fRH
@@ -156773,12 +158062,12 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -156868,76 +158157,76 @@ tqa
 tqa
 tqa
 cDd
-aXm
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+cNU
+kQl
+exv
+hqj
+cNU
 mgz
 mgz
 mgz
 mgz
 mgz
 mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-fRH
-fRH
-fRH
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-fRH
-mgz
-mgz
+dwZ
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+kyf
+gJO
 wiB
 mgz
 mgz
 mgz
+mgz
+mgz
+sFz
+wiB
+wiB
+wiB
+wiB
+osu
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+wiB
+sFz
+wiB
+sFz
+wiB
+dwZ
+wiB
+sFz
+dwZ
+mgz
+mgz
+mkY
+wJa
+wJa
+wJa
+wJa
+kbT
+wJa
+wJa
+ddK
+mgz
+mgz
+mgz
 fRH
 fRH
 mgz
 mgz
 mgz
-fRH
+mgz
 fRH
 fRH
 fRH
@@ -157030,9 +158319,9 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -157125,67 +158414,67 @@ tqa
 tqa
 tqa
 cDd
-aXm
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+hqj
+kQl
+kQl
+xvM
+kQl
+kQl
+kQl
+kQl
+mgz
+mgz
+mgz
+mgz
+mgz
+osu
+sFz
+tzz
+wiB
+dwZ
 mgz
 mgz
 mgz
 mgz
 mgz
 mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-mgz
-mgz
+dwZ
+sFz
+dwZ
+wiB
+wiB
+szK
+wiB
+qau
+wiB
+dwZ
+wiB
+osu
+sFz
+dwZ
+wiB
+kyf
+tao
 wiB
 wiB
 wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+qau
+mgz
+mgz
+mgz
+mgz
+qZh
+kbT
+kbT
+kbT
+kbT
+kbT
+kbT
+kbT
+bXS
 mgz
 mgz
 mgz
@@ -157287,9 +158576,9 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -157382,26 +158671,26 @@ tqa
 tqa
 tqa
 cDd
-aXm
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
 mgz
 mgz
+mgz
+qIV
+kQl
+kQl
+kQl
+qIV
+kQl
+kQl
+kQl
+hqj
+mgz
+mgz
+mgz
+qau
+wiB
+wiB
+wiB
+qau
 mgz
 mgz
 mgz
@@ -157410,39 +158699,39 @@ mgz
 bHu
 mgz
 mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-mgz
-mgz
 wiB
 wiB
 wiB
+wGt
+kAe
+wiB
+wiB
+sFz
 wiB
 wiB
 wiB
+qau
 wiB
 wiB
+xmO
 wiB
+wiB
+sFz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+oEh
+ekU
+ekU
+ekU
+kbT
+kbT
+ekU
+ekU
+xUE
 mgz
 mgz
 mgz
@@ -157637,27 +158926,27 @@ tqa
 tqa
 tqa
 tqa
-tqa
+wWx
 cDd
-aXm
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+hqj
+kQl
+cNU
+kQl
+kQl
+cNU
+mgz
+mgz
+mgz
+hqj
+kQl
+kQl
+kQl
+mgz
+wiB
+wiB
+lvD
+wiB
+sFz
 mgz
 mgz
 mgz
@@ -157668,38 +158957,38 @@ bHu
 bHu
 mgz
 mgz
+qau
+wiB
+wiB
+ydq
+twG
+twG
+twG
+twG
+twG
+twG
+twG
+twG
+twG
+gJO
+wiB
+wiB
 mgz
 mgz
 mgz
 mgz
-fRH
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
 mgz
-mgz
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+xXr
+jdQ
+jdQ
+jdQ
+qZh
+bXS
+jdQ
+jdQ
+jdQ
 mgz
 mgz
 mgz
@@ -157894,27 +159183,27 @@ tqa
 tqa
 tqa
 tqa
-tqa
-cDd
-aXm
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+bCN
+mWy
+kQl
+kQl
+kQl
+kQl
+hqj
+mgz
+mgz
+mgz
+mgz
+cNU
+kQl
+fiB
+nZz
+dwZ
+sFz
+kyf
+gJO
+dwZ
+mgz
 mgz
 mgz
 mgz
@@ -157927,36 +159216,36 @@ mgz
 mgz
 mgz
 mgz
+sFz
+wiB
+wiB
+wiB
+wiB
+wiB
+wiB
+wiB
+dwZ
+wiB
+wiB
+qau
+dwZ
+mgz
+mgz
 mgz
 mgz
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
 mgz
 mgz
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+mgz
+xXr
+ksd
+oQT
+sHx
+qZh
+bXS
+ksd
+oQT
+sHx
 mgz
 bHu
 mgz
@@ -158066,8 +159355,8 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -158150,28 +159439,28 @@ tqa
 tqa
 tqa
 tqa
-tqa
-tqa
-cDd
-aXm
+bCN
+bCN
+mWy
+kQl
+kQl
+kQl
+exv
+mgz
+mgz
+mgz
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+wiB
+wiB
+wiB
+wiB
+xmO
+wiB
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -158185,35 +159474,35 @@ mgz
 mgz
 mgz
 mgz
-mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+wiB
+wiB
+qau
+wiB
+dwZ
+sFz
+wiB
+wiB
+osu
+sFz
 mgz
 mgz
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+mgz
+mgz
+fRH
+fRH
+fRH
+fRH
+mgz
+mgz
+xXr
+xXr
+xXr
+xXr
+xXr
+xXr
+xXr
+xXr
+xXr
 mgz
 bHu
 mgz
@@ -158322,8 +159611,8 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -158408,27 +159697,27 @@ tqa
 tqa
 tqa
 tqa
-tqa
+bCk
 cDd
-aXm
+qIV
+hqj
+cNU
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+qau
+sFz
+wiB
+wGt
+gJO
+sFz
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -158442,34 +159731,34 @@ mgz
 mgz
 mgz
 mgz
-mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+wiB
+dwZ
+sFz
+osu
+wiB
+wiB
+wiB
+qau
 mgz
 mgz
 mgz
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
-wiB
+mgz
+mgz
+fRH
+fRH
+fRH
+fRH
+fRH
+mgz
+mgz
+mgz
+mjw
+qwY
+lcb
+lcb
+enP
+qwY
+mjw
 mgz
 mgz
 bHu
@@ -158667,25 +159956,25 @@ tqa
 tqa
 tqa
 cDd
-aXm
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+dwZ
+sIw
+wiB
+wiB
+wiB
+qau
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -158700,16 +159989,16 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+wiB
+qau
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -158924,25 +160213,25 @@ tqa
 tqa
 tqa
 cDd
-aXm
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+osu
+wiB
+aDi
+ftO
+jFd
+wiB
+mgz
+mgz
 mgz
 mgz
 bHu
@@ -158957,13 +160246,13 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -159190,16 +160479,16 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+wiB
+qau
+owl
+xQB
+ueY
+dwZ
+mgz
+mgz
 mgz
 mgz
 bHu
@@ -159215,10 +160504,10 @@ mgz
 mgz
 mgz
 fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -159354,8 +160643,8 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -159447,16 +160736,16 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+sFz
+wiB
+jwV
+eJS
+mTc
+mgz
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -159609,9 +160898,9 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -159704,15 +160993,15 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+wiB
+dwZ
+sFz
+mgz
+mgz
 fRH
 mgz
 mgz
@@ -159866,17 +161155,6 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-mgz
-mgz
-mgz
-fRH
-fRH
-fRH
-fRH
-mgz
 mgz
 mgz
 mgz
@@ -159885,10 +161163,21 @@ mgz
 mgz
 mgz
 fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -159961,15 +161250,15 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 mgz
 mgz
@@ -160123,30 +161412,30 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
 mgz
 mgz
 mgz
 mgz
-fRH
-fRH
 mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 mgz
 mgz
 mgz
@@ -160219,13 +161508,13 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 mgz
@@ -160386,25 +161675,25 @@ mgz
 mgz
 mgz
 mgz
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 mgz
 fRH
 fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
 mgz
 fRH
 fRH
@@ -160643,18 +161932,18 @@ mgz
 mgz
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -160901,17 +162190,17 @@ mgz
 mgz
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -161159,16 +162448,16 @@ mgz
 mgz
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -161417,15 +162706,15 @@ mgz
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -161676,13 +162965,13 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -161933,14 +163222,14 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -162190,14 +163479,14 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -162447,14 +163736,14 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -162704,14 +163993,14 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -162961,14 +164250,14 @@ fRH
 fRH
 fRH
 fRH
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
 fRH
 fRH
 fRH
@@ -163218,14 +164507,14 @@ fRH
 fRH
 fRH
 fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
-fRH
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
+mgz
 fRH
 fRH
 fRH
