@@ -18,22 +18,22 @@
 	switch(drunkness)
 		if(0 to 30)
 			mood_change = 3
-			description = "Everything just feels better after a drink or two."
+			description = "После одной-двух рюмок все становится лучше."
 		if(30 to 45)
 			mood_change = 4
-			description = "Is it getting hotter, or is it just me? I need another drink to cool down."
+			description = "Становится все жарче, или мне только кажется? Мне нужно выпить еще, чтобы остыть."
 		if(45 to 60)
 			mood_change = 5
-			description = "Who keeps moving the floor? I'm going to talk to them... after this drink."
+			description = "Кто продолжает двигать пол? Я собираюсь поговорить с ними... после того, как выпью."
 		if(60 to 90)
 			mood_change = 6
-			description = "I'm noooot drunk, you're drunk! In fact... I need another drink!"
+			description = "Я совсем пьян, ты пьян! На самом деле... Мне нужно еще выпить!"
 		if(90 to INFINITY)
 			mood_change = 3 // crash out
-			description = "You're my BESSST frien'... You and me agains' th' world, buddy. Le's get another drink."
+			description = "Ты мой лууууууучший друг! Мы с тобой против всего мира, приятель. Давай ещё по одной."
 	if(HAS_PERSONALITY(owner, /datum/personality/teetotal))
 		mood_change *= -1.5
-		description = "I don't like drinking... It makes me feel horrible."
+		description = "Я не люблю пить... Из-за этого я чувствую себя ужасно."
 	if(HAS_PERSONALITY(owner, /datum/personality/bibulous))
 		mood_change *= 1.5
 	if(old_mood != mood_change)
@@ -44,7 +44,7 @@
 
 /datum/mood_event/drunk_after
 	mood_change = 2
-	description = "The buzz might be gone, but I still feel good."
+	description = "Может, кайф и прошел, но я все еще чувствую себя хорошо."
 	timeout = 5 MINUTES
 
 /datum/mood_event/wrong_brandy
