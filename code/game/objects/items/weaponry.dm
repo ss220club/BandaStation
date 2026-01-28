@@ -173,6 +173,10 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	throw_range = 5
 	armour_penetration = 35
 
+/obj/item/claymore/cutlass/Initialize(mapload)
+	. = ..()
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
+
 /obj/item/claymore/cutlass/old
 	name = "old cutlass"
 	desc = parent_type::desc + " This one seems a tad old."
