@@ -24360,6 +24360,15 @@ instrumental = "пожирателем пустоты"
 prepositional = "пожирателе пустоты"
 gender = "male"
 
+["nebula vomit"]
+nominative = "рвота туманности"
+genitive = "рвоты туманности"
+dative = "рвоте туманности"
+accusative = "рвоту туманности"
+instrumental = "рвотой туманности"
+prepositional = "рвоте туманности"
+gender = "female"
+
 # MARK: Colonial Marines
 ["flare pouch"]
 nominative = "подсумок осветительных огней"
