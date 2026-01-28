@@ -20,7 +20,10 @@ import {
   calculateProgression,
   dangerLevelsTooltip,
 } from './calculateDangerLevel';
+import { type Objective, ObjectiveMenu } from './ObjectiveMenu'; // BANDASTATION ADDITION
+/* //  BANDASTATION EDIT START (re_traitorsecondary)
 import { GenericUplink, type Item } from './GenericUplink';
+*/ // BANDASTATION REMOVAL END
 import { PrimaryObjectiveMenu } from './PrimaryObjectiveMenu';
 
 type UplinkItem = {
@@ -49,6 +52,8 @@ type UplinkData = {
   progression_points: number;
   joined_population?: number;
   lockable: BooleanLike;
+  current_expected_progression: number; // BANDASTATION ADDITION
+  progression_scaling_deviance: number; // BANDASTATION ADDITION
   current_progression_scaling: number;
   uplink_flag: number;
   assigned_role: string;
@@ -62,10 +67,17 @@ type UplinkData = {
     [key: string]: number;
   };
 
+  has_objectives: BooleanLike; // BANDASTATION ADDITION
   has_progression: BooleanLike;
   primary_objectives: {
     [key: number]: string;
   };
+
+  completed_final_objective: string; // BANDASTATION ADDITION
+  potential_objectives: Objective[]; // BANDASTATION ADDITION
+  active_objectives: Objective[]; // BANDASTATION ADDITION
+  maximum_active_objectives: number; // BANDASTATION ADDITION
+  maximum_potential_objectives: number; // BANDASTATION ADDITION
   purchased_items: number;
   shop_locked: BooleanLike;
   can_renegotiate: BooleanLike;
@@ -176,7 +188,15 @@ export class Uplink extends Component<any, UplinkState> {
       joined_population,
       primary_objectives,
       can_renegotiate,
+      completed_final_objective, // BANDASTATION ADDITION
+      active_objectives, // BANDASTATION ADDITION
+      potential_objectives, // BANDASTATION ADDITION
+      has_objectives, // BANDASTATION ADDITION
       has_progression,
+      maximum_active_objectives, // BANDASTATION ADDITION
+      maximum_potential_objectives, // BANDASTATION ADDITION
+      current_expected_progression, // BANDASTATION ADDITION
+      progression_scaling_deviance, // BANDASTATION ADDITION
       current_progression_scaling,
       extra_purchasable,
       extra_purchasable_stock,
@@ -261,6 +281,18 @@ export class Uplink extends Component<any, UplinkState> {
         },
       });
     }
+    // Get the difference between the current progression and // BANDASTATION ADDITION
+    // expected progression // BANDASTATION ADDITION
+    let progressionPercentage = // BANDASTATION ADDITION
+      current_expected_progression - progression_points; // BANDASTATION ADDITION
+    // Clamp it down between 0 and 2 // BANDASTATION ADDITION
+    progressionPercentage = Math.min(
+      // BANDASTATION ADDITION
+      Math.max(progressionPercentage / progression_scaling_deviance, -1), // BANDASTATION ADDITION
+      1, // BANDASTATION ADDITION
+    ); // BANDASTATION ADDITION
+    // Round it and convert it into a percentage // BANDASTATION ADDITION
+    progressionPercentage = Math.round(progressionPercentage * 1000) / 10; // BANDASTATION ADDITION
 
     return (
       <Window width={700} height={600} theme="syndicate">
@@ -276,8 +308,11 @@ export class Uplink extends Component<any, UplinkState> {
                           <Box>
                             <Box>
                               <Box>Ваше текущее значение угрозы.</Box> Угроза
-                              определяет, какие предметы вы можете
-                              приобрести.&nbsp;
+                              определяет
+                              {has_objectives
+                                ? ' серьезность второстепенных задач, которые вы получаете, и ' // BANDASTATION ADDITION
+                                : ' '}
+                              предметов которые вы можете купить.&nbsp;
                               <Box mt={0.5}>
                                 {/* A minute in deciseconds */}
                                 Угроза пассивно увеличивается на{' '}
@@ -288,6 +323,35 @@ export class Uplink extends Component<any, UplinkState> {
                                 </Box>
                                 &nbsp;каждую минуту
                               </Box>
+                              {Math.abs(progressionPercentage) > 0 && ( // BANDASTATION ADDITION
+                                <Box mt={0.5}>
+                                  По той причине что ваш уровень угрозы
+                                  {progressionPercentage < 0 // BANDASTATION ADDITION
+                                    ? ' выше ' // BANDASTATION ADDITION
+                                    : ' ниже '}
+                                  отметки на который он должен быть, то вы
+                                  будете получать
+                                  <Box // BANDASTATION ADDITION
+                                    as="span" // BANDASTATION ADDITION
+                                    color={
+                                      // BANDASTATION ADDITION
+                                      progressionPercentage < 0 // BANDASTATION ADDITION
+                                        ? 'red' // BANDASTATION ADDITION
+                                        : 'green' // BANDASTATION ADDITION
+                                    } // BANDASTATION ADDITION
+                                    ml={1} // BANDASTATION ADDITION
+                                    mr={1} // BANDASTATION ADDITION
+                                  >
+                                    {' '}
+                                    {/*  */}
+                                    {progressionPercentage}%
+                                  </Box>
+                                  {progressionPercentage < 0
+                                    ? 'меньше'
+                                    : 'больше'}{' '}
+                                  угрозы каждую минуту.
+                                </Box> // BANDASTATION ADDITION
+                              )}
                               {dangerLevelsTooltip}
                             </Box>
                           </Box>
@@ -298,6 +362,7 @@ export class Uplink extends Component<any, UplinkState> {
                     </Stack.Item>
                   )}
                   {!!primary_objectives && (
+                  {!!(primary_objectives || has_objectives) && ( // BANDASTATION ADDITION
                     <Stack.Item grow={1}>
                       <Tabs fluid>
                         {primary_objectives && (
@@ -312,6 +377,20 @@ export class Uplink extends Component<any, UplinkState> {
                             onClick={() => this.setState({ currentTab: 0 })}
                           >
                             Основные задачи
+                          </Tabs.Tab>
+                        )}
+                        {!!has_objectives && (
+                          <Tabs.Tab
+                            style={{
+                              overflow: 'hidden',
+                              whiteSpace: 'nowrap',
+                              textOverflow: 'ellipsis',
+                            }}
+                            icon="star-half-stroke"
+                            selected={currentTab === 1}
+                            onClick={() => this.setState({ currentTab: 1 })}
+                          >
+                            Второстепенные задачи
                           </Tabs.Tab>
                         )}
                         <Tabs.Tab
@@ -351,42 +430,77 @@ export class Uplink extends Component<any, UplinkState> {
               {(currentTab === 0 && primary_objectives && (
                 <PrimaryObjectiveMenu
                   primary_objectives={primary_objectives}
+                  final_objective={completed_final_objective} // BANDASTATION ADDITION
                   can_renegotiate={can_renegotiate}
                 />
-              )) || (
-                <>
-                  <GenericUplink
-                    currency={`${telecrystals} TC`}
-                    categories={allCategories}
-                    items={items}
-                    handleBuy={(item: ItemExtraData) => {
-                      if (!item.extraData?.ref) {
-                        act('buy', { path: item.id });
-                      } else {
-                        act('buy', { ref: item.extraData.ref });
-                      }
-                    }}
+              )) ||
+                (currentTab === 1 && has_objectives && (
+                  <ObjectiveMenu
+                    activeObjectives={active_objectives}
+                    potentialObjectives={potential_objectives}
+                    maximumActiveObjectives={maximum_active_objectives}
+                    maximumPotentialObjectives={maximum_potential_objectives}
+                    handleObjectiveAction={(objective, action) =>
+                      act('objective_act', {
+                        check: objective.original_progression,
+                        objective_action: action,
+                        index: objective.id,
+                      })
+                    }
+                    handleStartObjective={(objective) =>
+                      act('start_objective', {
+                        check: objective.original_progression,
+                        index: objective.id,
+                      })
+                    }
+                    handleObjectiveAbort={(objective) =>
+                      act('objective_abort', {
+                        check: objective.original_progression,
+                        index: objective.id,
+                      })
+                    }
+                    handleObjectiveCompleted={(objective) =>
+                      act('finish_objective', {
+                        check: objective.original_progression,
+                        index: objective.id,
+                      })
+                    }
+                    handleRequestObjectives={() => act('regenerate_objectives')}
                   />
-                  {(shop_locked && !data.debug && (
-                    <Dimmer>
-                      <Box
-                        color="red"
-                        fontFamily={'Bahnschrift'}
-                        fontSize={3}
-                        align={'top'}
-                        as="span"
-                      >
-                        РЫНОК ЗАБЛОКИРОВАН
-                      </Box>
-                    </Dimmer>
-                  )) ||
-                    null}
-                </>
-              )}
+                )) || (
+                  <>
+                    <GenericUplink
+                      currency={`${telecrystals} TC`}
+                      categories={allCategories}
+                      items={items}
+                      handleBuy={(item: ItemExtraData) => {
+                        if (!item.extraData?.ref) {
+                          act('buy', { path: item.id });
+                        } else {
+                          act('buy', { ref: item.extraData.ref });
+                        }
+                      }}
+                    />
+                    {(shop_locked && !data.debug && (
+                      <Dimmer>
+                        <Box
+                          color="red"
+                          fontFamily={'Bahnschrift'}
+                          fontSize={3}
+                          align={'top'}
+                          as="span"
+                        >
+                          МАГАЗИН ЗАБЛОКИРОВАН
+                        </Box>
+                      </Dimmer>
+                    )) ||
+                      null}
+                  </>
+                )}
             </Stack.Item>
           </Stack>
-        </Window.Content>
+    </Window.Content>
       </Window>
-    );
+    )
   }
 }
