@@ -200,21 +200,40 @@
 
 // MARK: Uplink items
 /datum/uplink_item/ammo_nuclear/basic/carbine/a40mm
+	name = "40mm HE Grenade Box"
+	desc = "A box of 40mm HE grenades for use with the China Lake and M-90gl's under-barrel grenade launchers. \
+		Your teammates will ask you to not shoot these down small hallways. \
+		You'll do it anyway."
 	item = /obj/item/storage/fancy/a40mm_box
 
-/datum/uplink_item/ammo_nuclear/basic/carbine/a40mm/stun
+/datum/uplink_item/ammo_nuclear/special/carbine/a40mm/stun
+	name = "40mm Stun Grenade Box"
+	desc = "A box of 40mm Stun grenades for use with the China Lake and M-90gl's under-barrel grenade launchers. \
+		Stun grenades are basically like a better flashbangs! Bang-bang!"
 	item = /obj/item/storage/fancy/a40mm_box/stun
 
-/datum/uplink_item/ammo_nuclear/basic/carbine/a40mm/incendiary
+/datum/uplink_item/ammo_nuclear/incendiary/carbine/a40mm/incendiary
+	name = "40mm Incendiary Grenade Box"
+	desc = "A box of 40mm Incendiary grenades for use with the China Lake and M-90gl's under-barrel grenade launchers. \
+		Incendiary grenades explode with a lot of fire! Roasted crew members are guaranteed."
 	item = /obj/item/storage/fancy/a40mm_box/incendiary
 
-/datum/uplink_item/ammo_nuclear/basic/carbine/a40mm/frag
+/datum/uplink_item/ammo_nuclear/hp/carbine/a40mm/frag
+	name = "40mm Frag Grenade Box"
+	desc = "A box of 40mm Frag grenades for use with the China Lake and M-90gl's under-barrel grenade launchers. \
+		Fragmentation grenades explode with lots of dangerous shrapnel! It's best to lie down on the ground."
 	item = /obj/item/storage/fancy/a40mm_box/frag
 
 /datum/uplink_item/ammo_nuclear/basic/carbine/a40mm/smoke
+	name = "40mm Smoke Grenade Box"
+	desc = "A box of 40mm HE grenades for use with the China Lake and M-90gl's under-barrel grenade launchers. \
+		Smoke grenades form a cloud of smoke when they explode that can reduce danger from lasers and cover your friend!"
 	item = /obj/item/storage/fancy/a40mm_box/smoke
 
-/datum/uplink_item/ammo_nuclear/basic/carbine/a40mm/hedp
+/datum/uplink_item/ammo_nuclear/ap/carbine/a40mm/hedp
+	name = "40mm HEDP Grenade Box"
+	desc = "A box of 40mm HE grenades for use with the China Lake and M-90gl's under-barrel grenade launchers. \
+		HEDP grenades can destroy almost any silicon or mechas... and people too. Walls and doors are also included."
 	item = /obj/item/storage/fancy/a40mm_box/hedp
 
 // Ammo casing random drop rotation
