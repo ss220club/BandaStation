@@ -2359,6 +2359,51 @@ instrumental = "юбкой охраны"
 prepositional = "юбке охраны"
 gender = "female"
 
+["security alternative skirt"]
+nominative = "юбка охраны"
+genitive = "юбки охраны"
+dative = "юбке охраны"
+accusative = "юбку охраны"
+instrumental = "юбкой охраны"
+prepositional = "юбке охраны"
+gender = "female"
+
+["security formal uniform"]
+nominative = "официальная униформа охраны"
+genitive = "официальной униформы охраны"
+dative = "официальной униформе охраны"
+accusative = "официальную униформу охраны"
+instrumental = "официальной униформой охраны"
+prepositional = "официальной униформе охраны"
+gender = "female"
+
+["security black uniform"]
+nominative = "чёрная униформа охраны"
+genitive = "чёрной униформы охраны"
+dative = "чёрной униформе охраны"
+accusative = "чёрную униформу охраны"
+instrumental = "чёрной униформой охраны"
+prepositional = "чёрной униформе охраны"
+gender = "female"
+
+["security turtleneck"]
+nominative = "водолазка охраны"
+genitive = "водолазки охраны"
+dative = "водолазке охраны"
+accusative = "водолазку охраны"
+instrumental = "водолазкой охраны"
+prepositional = "водолазке охраны"
+gender = "female"
+
+["security alternative black uniform"]
+nominative = "чёрная униформа охраны"
+genitive = "чёрной униформы охраны"
+dative = "чёрной униформе охраны"
+accusative = "чёрную униформу охраны"
+instrumental = "чёрной униформой охраны"
+prepositional = "чёрной униформе охраны"
+gender = "female"
+
 ["grey security jumpsuit"]
 nominative = "серый комбинезон охраны"
 genitive = "серого комбинезона охраны"
@@ -2700,6 +2745,24 @@ dative = "юбке-комбинезону смотрителя"
 accusative = "юбку-комбинезон смотрителя"
 instrumental = "юбкой-комбинезоном смотрителя"
 prepositional = "юбке-комбинезоне смотрителя"
+gender = "female"
+
+["warden's alternative blue skirt"]
+nominative = "синяя юбка смотрителя"
+genitive = "синей юбки смотрителя"
+dative = "cиней юбке смотрителя"
+accusative = "синюю юбку смотрителя"
+instrumental = "синей юбкой смотрителя"
+prepositional = "синей юбке смотрителя"
+gender = "female"
+
+["warden's formal blue uniform"]
+nominative = "официальная синяя униформа смотрителя"
+genitive = "официальной синей униформы смотрителя"
+dative = "официальной синей униформе смотрителя"
+accusative = "официальную синюю униформу смотрителя"
+instrumental = "официальной синей униформой смотрителя"
+prepositional = "официальной синей униформе смотрителя"
 gender = "female"
 
 ["security door remote"]
@@ -10067,6 +10130,15 @@ instrumental = "комбинезоном парамедика"
 prepositional = "комбинезоне парамедика"
 gender = "male"
 
+["light paramedic uniform"]
+nominative = "светлая униформа парамедика"
+genitive = "светлой униформы парамедика"
+dative = "светлой униформе парамедика"
+accusative = "светлую униформу парамедика"
+instrumental = "светлой униформой парамедика"
+prepositional = "светлой униформе парамедика"
+gender = "male"
+
 ["paramedic jumpskirt"]
 nominative = "юбка-комбинезон парамедика"
 genitive = "юбки-комбинезона парамедика"
@@ -10074,6 +10146,15 @@ dative = "юбке-комбинезону парамедика"
 accusative = "юбку-комбинезон парамедика"
 instrumental = "юбкой-комбинезоном парамедика"
 prepositional = "юбке-комбинезоне парамедика"
+gender = "female"
+
+["light paramedic skirt"]
+nominative = "светлая юбка парамедика"
+genitive = "светлой юбки парамедика"
+dative = "светлой юбке парамедика"
+accusative = "светлую юбку парамедика"
+instrumental = "светлой юбкой парамедика"
+prepositional = "светлой юбке парамедика"
 gender = "female"
 
 ["paramedic's jacket"]
@@ -10787,6 +10868,24 @@ dative = "анализатору травм"
 accusative = "анализатор травм"
 instrumental = "анализатором травм"
 prepositional = "анализаторе травм"
+gender = "male"
+
+["disease state analyzer"]
+nominative = "анализатор болезней"
+genitive = "анализатора болезней"
+dative = "анализатору болезней"
+accusative = "анализатор болезней"
+instrumental = "анализатором болезней"
+prepositional = "анализаторе болезней"
+gender = "male"
+
+["mining wound analyzer"]
+nominative = "шахтерский анализатор травм"
+genitive = "шахтерского анализатора травм"
+dative = "шахтерскому анализатору травм"
+accusative = "шахтерский анализатор травм"
+instrumental = "шахтерским анализатором травм"
+prepositional = "шахтерском анализаторе травм"
 gender = "male"
 
 ["Inhaler"]
@@ -12947,6 +13046,15 @@ dative = "юбке-комбинезону учёного"
 accusative = "юбку-комбинезон учёного"
 instrumental = "юбкой-комбинезоном учёного"
 prepositional = "юбке-комбинезоне учёного"
+gender = "female"
+
+["science utility uniform"]
+nominative = "практичная научная униформа"
+genitive = "практической научной униформы"
+dative = "практической научной униформе"
+accusative = "практичную научную униформу"
+instrumental = "практической научной униформой"
+prepositional = "практической научной униформе"
 gender = "female"
 
 ["science winter coat"]
@@ -17216,6 +17324,33 @@ instrumental = "полосатой инженерной банданой"
 prepositional = "полосатой инженерной бандане"
 gender = "female"
 
+["engineering alternative jumpsuit"]
+nominative = "инженерный комбинезон"
+genitive = "инженерного комбинезона"
+dative = "инженерному комбинезону"
+accusative = "инженерный комбинезон"
+instrumental = "инженерным комбинезоном"
+prepositional = "инженерном комбинезоне"
+gender = "male"
+
+["engineering alternative jumpskirt"]
+nominative = "инженерная юбка-комбинезон"
+genitive = "инженерной юбки-комбинезона"
+dative = "инженерной юбке-комбинезону"
+accusative = "инженерную юбку-комбинезон"
+instrumental = "инженерной юбкой-комбинезоном"
+prepositional = "инженерной юбке-комбинезоне"
+gender = "female"
+
+["mechanic uniform"]
+nominative = "униформа механика"
+genitive = "униформы механика"
+dative = "униформе механика"
+accusative = "униформу механика"
+instrumental = "униформой механика"
+prepositional = "униформе механика"
+gender = "female"
+
 ["engineer's jumpskirt"]
 nominative = "юбка-комбинезон инженера"
 genitive = "юбки-комбинезона инженера"
@@ -19009,6 +19144,24 @@ dative = "юбке-костюму синего щита"
 accusative = "юбку-костюм синего щита"
 instrumental = "юбкой-костюмом синего щита"
 prepositional = "юбке-костюме синего щита"
+gender = "female"
+
+["blueshield's blue skirt"]
+nominative = "синяя юбка синего щита"
+genitive = "синей юбки синего щита"
+dative = "синей юбке синего щита"
+accusative = "синюю юбку синего щита"
+instrumental = "синей юбкой синего щита"
+prepositional = "синей юбке синего щита"
+gender = "female"
+
+["blueshield's black skirt"]
+nominative = "чёрная юбка синего щита"
+genitive = "чёрной юбки синего щита"
+dative = "чёрной юбке синего щита"
+accusative = "чёрную юбку синего щита"
+instrumental = "чёрной юбкой синего щита"
+prepositional = "чёрной юбке синего щита"
 gender = "female"
 
 ["blueshield's casual suit"]
@@ -25511,6 +25664,7 @@ dative = "сырому блюспейс ядру"
 accusative = "сырое блюспейс ядро"
 instrumental = "сырым блюспейс ядром"
 prepositional = "сыром блюспейс ядре"
+gender = "neuter"
 
 ["raw vortex core"]
 nominative = "сырое вортекс ядро"
@@ -25519,6 +25673,7 @@ dative = "сырому вортекс ядру"
 accusative = "сырое вортекс ядро"
 instrumental = "сырым вортекс ядром"
 prepositional = "сыром вортекс ядре"
+gender = "neuter"
 
 ["raw gravity core"]
 nominative = "сырое гравитационное ядро"
@@ -25527,6 +25682,7 @@ dative = "сырому гравитационному ядру"
 accusative = "сырое гравитационное ядро"
 instrumental = "сырым гравитационным ядром"
 prepositional = "сыром гравитационном ядре"
+gender = "neuter"
 
 ["raw pyro core"]
 nominative = "сырое пиро ядро"
@@ -25535,6 +25691,7 @@ dative = "сырому пиро ядру"
 accusative = "сырое пиро ядро"
 instrumental = "сырым пиро ядром"
 prepositional = "сыром пиро ядре"
+gender = "neuter"
 
 ["raw flux core"]
 nominative = "сырое флюкс ядро"
@@ -25543,6 +25700,7 @@ dative = "сырому флюкс ядру"
 accusative = "сырое флюкс ядро"
 instrumental = "сырым флюкс ядром"
 prepositional = "сыром флюкс ядре"
+gender = "neuter"
 
 ["raw bioscrambler core"]
 nominative = "сырое биоскремблер ядро"
@@ -25551,6 +25709,7 @@ dative = "сырому биоскремблер ядру"
 accusative = "сырое биоскремблер ядро"
 instrumental = "сырым биоскремблер ядром"
 prepositional = "сыром биоскремблер ядре"
+gender = "neuter"
 
 ["raw dimensional core"]
 nominative = "сырое пространственное ядро"
@@ -25559,6 +25718,7 @@ dative = "сырому пространственному ядру"
 accusative = "сырое пространственное ядро"
 instrumental = "сырым пространственным ядром"
 prepositional = "сыром пространственном ядре"
+gender = "neuter"
 
 ["raw ectoplasm core"]
 nominative = "сырое эктоплазменное ядро"
@@ -25567,6 +25727,7 @@ dative = "сырому эктоплазменному ядру"
 accusative = "сырое эктоплазменное ядро"
 instrumental = "сырым эктоплазменным ядром"
 prepositional = "сыром эктоплазменном ядре"
+gender = "neuter"
 
 ["raw hallucination core"]
 nominative = "сырое галлюцинаторное ядро"
@@ -25575,6 +25736,16 @@ dative = "сырому галлюцинаторному ядру"
 accusative = "сырое галлюцинаторное ядро"
 instrumental = "сырым галлюцинаторным ядром"
 prepositional = "сыром галлюцинаторном ядре"
+gender = "neuter"
+
+["raw weather core"]
+nominative = "сырое погодное ядро"
+genitive = "сырого погодного ядра"
+dative = "сырому погодному ядру"
+accusative = "сырое погодное ядро"
+instrumental = "сырым погодным ядром"
+prepositional = "сыром погодном ядре"
+gender = "neuter"
 
 ["pyroclastic anomaly core"]
 nominative = "пирокластическое аномальное ядро"
@@ -25583,6 +25754,7 @@ dative = "пирокластическому аномальному ядру"
 accusative = "пирокластическое аномальное ядро"
 instrumental = "пирокластическим аномальным ядром"
 prepositional = "пирокластическом аномальном ядре"
+gender = "neuter"
 
 ["gravitational anomaly core"]
 nominative = "гравитационное аномальное ядро"
@@ -25591,6 +25763,7 @@ dative = "гравитационному аномальному ядру"
 accusative = "гравитационное аномальное ядро"
 instrumental = "гравитационным аномальным ядром"
 prepositional = "гравитационном аномальном ядре"
+gender = "neuter"
 
 ["bluespace anomaly core"]
 nominative = "аномальное ядро блюспейс"
@@ -25599,6 +25772,7 @@ dative = "аномальному ядру блюспейс"
 accusative = "аномальное ядро блюспейс"
 instrumental = "аномальным ядром блюспейс"
 prepositional = "аномальном ядре блюспейс"
+gender = "neuter"
 
 ["vortex anomaly core"]
 nominative = "аномальное ядро вортекс"
@@ -25607,6 +25781,7 @@ dative = "аномальному ядру вортекс"
 accusative = "аномальное ядро вортекс"
 instrumental = "аномальным ядром вортекс"
 prepositional = "аномальном ядре вортекс"
+gender = "neuter"
 
 ["flux anomaly core"]
 nominative = "аномальное ядро флюкс"
@@ -25615,6 +25790,7 @@ dative = "аномальному ядру флюкс"
 accusative = "аномальное ядро флюкс"
 instrumental = "аномальным ядром флюкс"
 prepositional = "аномальном ядре флюкс"
+gender = "neuter"
 
 ["bioscrambler anomaly core"]
 nominative = "аномальное ядро биоскремблер"
@@ -25623,6 +25799,7 @@ dative = "аномальному ядру биоскремблер"
 accusative = "аномальное ядро биоскремблер"
 instrumental = "аномальным ядром биоскремблер"
 prepositional = "аномальном ядре биоскремблер"
+gender = "neuter"
 
 ["hallucination anomaly core"]
 nominative = "галлюцинаторное аномальное ядро"
@@ -25631,6 +25808,7 @@ dative = "галлюцинаторному аномальному ядру"
 accusative = "галлюцинаторное аномальное ядро"
 instrumental = "галлюцинаторным аномальным ядром"
 prepositional = "галлюцинаторном аномальном ядре"
+gender = "neuter"
 
 ["dimensional anomaly core"]
 nominative = "пространственное аномальное ядро"
@@ -25639,6 +25817,16 @@ dative = "пространственному аномальному ядру"
 accusative = "пространственное аномальное ядро"
 instrumental = "пространственным аномальным ядром"
 prepositional = "пространственном аномальном ядре"
+gender = "neuter"
+
+["weather anomaly core"]
+nominative = "погодное аномальное ядро"
+genitive = "погодного аномального ядра"
+dative = "погодному аномальному ядру"
+accusative = "погодное аномальное ядро"
+instrumental = "погодным аномальным ядром"
+prepositional = "погодном аномальном ядре"
+gender = "neuter"
 
 # MARK: Banners
 
@@ -29523,3 +29711,42 @@ accusative = "кольцо с бриллиантом"
 instrumental = "кольцом с бриллиантом"
 prepositional = "кольце с бриллиантом"
 gender = "neuter"
+
+# MARK: Blood Worm
+
+["small blood cocoon"]
+nominative = "малый кровяной кокон"
+genitive = "малого кровяного кокона"
+dative = "малому кровяному кокону"
+accusative = "малый кровяной кокон"
+instrumental = "малым кровяным коконом"
+prepositional = "малом кровяном коконе"
+gender = "neuter"
+
+["medium blood cocoon"]
+nominative = "небольшой кровяной кокон"
+genitive = "небольшого кровяного кокона"
+dative = "небольшому кровяному кокону"
+accusative = "небольшой кровяной кокон"
+instrumental = "небольшим кровяным коконом"
+prepositional = "небольшом кровяном коконе"
+gender = "neuter"
+
+["large blood cocoon"]
+nominative = "крупный кровяной кокон"
+genitive = "крупного кровяного кокона"
+dative = "крупному кровяному кокону"
+accusative = "крупный кровяной кокон"
+instrumental = "крупным кровяным коконом"
+prepositional = "крупном кровяном коконе"
+gender = "neuter"
+
+["hemoparasite testing tool"]
+nominative = "тест на гемопаразитов"
+genitive = "теста на гемопаразитов"
+dative = "тесту на гемопаразитов"
+accusative = "тест на гемопаразитов"
+instrumental = "тестом на гемопаразитов"
+prepositional = "тесте на гемопаразитов"
+gender = "male"
+
