@@ -112,3 +112,7 @@ GLOBAL_DATUM(bridge_axe, /obj/item/fireaxe)
 	force_unwielded = 5
 	force_wielded = 30
 	demolition_mod = 3
+
+/obj/item/fireaxe/boardingaxe/Initialize(mapload)
+	. = ..()
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)

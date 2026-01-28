@@ -311,6 +311,7 @@
 	reagents.add_reagent(/datum/reagent/toxin/chloralhydrate, 20)
 	reagents.add_reagent(/datum/reagent/toxin/mutetoxin, 15)
 	reagents.add_reagent(/datum/reagent/toxin/staminatoxin, 10)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/pen/sleepy/on_inserted_into_dart(datum/source, obj/item/ammo_casing/dart, mob/user)
 	. = ..()
