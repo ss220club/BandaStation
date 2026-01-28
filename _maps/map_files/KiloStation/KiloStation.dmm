@@ -44640,6 +44640,12 @@
 	dir = 4
 	},
 /obj/machinery/newscaster/directional/north,
+/obj/machinery/button/door/directional/north{
+	id = "emmd";
+	name = "Medical Lockdown Toggle";
+	pixel_y = 37;
+	pixel_x = 14
+	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/medical/surgery/fore)
 "oKV" = (
@@ -51179,7 +51185,6 @@
 /area/station/cargo/warehouse)
 "qTY" = (
 /obj/structure/table,
-/obj/machinery/light_switch/directional/north,
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
 /obj/item/book/manual/wiki/surgery,
 /obj/item/razor,
@@ -53201,12 +53206,7 @@
 /obj/item/clothing/suit/apron/surgical,
 /obj/machinery/firealarm/directional/east,
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
-/obj/machinery/button/door/directional/north{
-	id = "emmd";
-	name = "Medical Lockdown Toggle";
-	pixel_y = 37;
-	pixel_x = 10
-	},
+/obj/machinery/light_switch/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/aft)
 "rzE" = (
@@ -60868,9 +60868,6 @@
 /turf/open/floor/plating,
 /area/station/security/armory)
 "tXR" = (
-/obj/structure/chair/office/light{
-	dir = 4
-	},
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 8
 	},
@@ -73208,7 +73205,6 @@
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/lab)
 "xST" = (
-/obj/item/kirbyplants/organic/plant10,
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue/half/contrasted,
 /obj/structure/cable,

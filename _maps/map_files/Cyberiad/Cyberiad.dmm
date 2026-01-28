@@ -19102,6 +19102,9 @@
 /obj/effect/turf_decal/trimline/blue/filled/corner,
 /obj/structure/closet/secure_closet/medical2,
 /obj/structure/extinguisher_cabinet/directional/west,
+/obj/machinery/camera/directional/north{
+	pixel_x = 23
+	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
 "eHi" = (
@@ -65226,8 +65229,6 @@
 	dir = 4
 	},
 /obj/item/kirbyplants/random,
-/obj/machinery/airalarm/directional/west,
-/obj/machinery/camera/directional/west,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
 "pQT" = (
@@ -71856,6 +71857,9 @@
 	},
 /obj/structure/closet/secure_closet/medical2,
 /obj/structure/extinguisher_cabinet/directional/east,
+/obj/machinery/camera/directional/north{
+	pixel_x = -3
+	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
 "rBw" = (
@@ -80551,7 +80555,6 @@
 	dir = 4
 	},
 /obj/item/kirbyplants/random,
-/obj/machinery/camera/directional/east,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
 "tJk" = (
