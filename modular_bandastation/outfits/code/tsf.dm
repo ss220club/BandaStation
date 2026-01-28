@@ -224,11 +224,6 @@
 	l_pocket = /obj/item/restraints/handcuffs
 	r_pocket = /obj/item/restraints/handcuffs
 
-/obj/item/gun/ballistic/shotgun/riot_one_hand
-	name = "one-hand riot shotgun"
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot
-	weapon_weight = WEAPON_MEDIUM
-
 /datum/id_trim/tsf/marine/riot
 	assignment = "TSF - Riot Specialist"
 

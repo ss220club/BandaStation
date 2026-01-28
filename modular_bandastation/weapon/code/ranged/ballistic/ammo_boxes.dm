@@ -132,22 +132,40 @@
 	ammo_band_icon = "+357_ammo_band"
 	ammo_band_color = null
 
+/obj/item/ammo_box/speedloader/a50ae_cylinder
+	name = "speed loader (.50 AE)"
+	desc = "Предназначен для быстрой перезарядки револьверов калибра .50 AE."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "50speedload"
+	ammo_type = /obj/item/ammo_casing/a50ae
+	max_ammo = 5
+	caliber = CALIBER_50AE
+	multiple_sprites = AMMO_BOX_PER_BULLET
+	item_flags = NO_MAT_REDEMPTION
+	ammo_band_icon = "+38_ammo_band"
+	ammo_band_color = null
+
+// MARK: .310
 /obj/item/ammo_box/speedloader/strilka310_cylinder
 	name = "speed loader (.310 Strilka)"
 	desc = "Предназначен для быстрой перезарядки револьверов калибра .310 Стрилка. Произведено в СССП, не удивительно."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "310speedload"
 	ammo_type = /obj/item/ammo_casing/strilka310
-	max_ammo = 7
+	max_ammo = 8
 	caliber = CALIBER_STRILKA310
 	multiple_sprites = AMMO_BOX_PER_BULLET
 	item_flags = NO_MAT_REDEMPTION
 	ammo_band_icon = "+357_ammo_band"
 	ammo_band_color = null
 
-// MARK: .310
 /obj/item/ammo_box/speedloader/strilka310
 	desc = "Пятизарядная обойма для винтовок калибра .310 Strilka."
+
+/obj/item/ammo_box/speedloader/strilka310/rubber
+	name = "stripper clip (.310 Strilka rubber)"
+	desc = parent_type::desc + " В этой должны находиться травматические патроны."
+	ammo_type = /obj/item/ammo_casing/strilka310/rubber
 
 /obj/item/ammo_box/speedloader/strilka310/ap
 	name = "stripper clip (.310 Strilka armor-piercing)"
@@ -394,6 +412,47 @@
 	icon_state = "45box-ap"
 	ammo_type = /obj/item/ammo_casing/c45/ap
 
+/obj/item/ammo_box/c45/incendiary
+	name = "ammo box (.45 incendiary)"
+	desc = parent_type::desc + "<br>Красная полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
+	icon_state = "45box-incendiary"
+	ammo_type = /obj/item/ammo_casing/c45/inc
+
+// MARK: .585 Sol
+/obj/item/ammo_box/c585sol
+	name = "ammo box (.585 Sol)"
+	desc = "Коробка с пистолетными патронами калибра .585 Sol, вмещает 30 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "585box"
+	w_class = WEIGHT_CLASS_SMALL
+	caliber = CALIBER_585SOL
+	ammo_type = /obj/item/ammo_casing/c585sol
+	max_ammo = 30
+
+/obj/item/ammo_box/c585sol/rubber
+	name = "ammo box (.585 Sol rubber)"
+	desc = parent_type::desc + "<br>Синяя полоска указывает на то, что здесь должны храниться нелетальные боеприпасы."
+	icon_state = "585box_rubber"
+	ammo_type = /obj/item/ammo_casing/c585sol/rubber
+
+/obj/item/ammo_box/c585sol/hp
+	name = "ammo box (.585 Sol hollow-point)"
+	desc = parent_type::desc + "<br>Оранжевая полоска указывает на то, что в ней должны храниться экспансивные боеприпасы."
+	icon_state = "585box_hp"
+	ammo_type = /obj/item/ammo_casing/c585sol/hp
+
+/obj/item/ammo_box/c585sol/ap
+	name = "ammo box (.585 Sol armor-piercing)"
+	desc = parent_type::desc + "<br>Серая полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
+	icon_state = "585box_ap"
+	ammo_type = /obj/item/ammo_casing/c585sol/ap
+
+/obj/item/ammo_box/c585sol/incendiary
+	name = "ammo box (.585 Sol incendiary)"
+	desc = parent_type::desc + "<br>Красная полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
+	icon_state = "585box_ic"
+	ammo_type = /obj/item/ammo_casing/c585sol/incendiary
+
 // MARK: 10mm
 /obj/item/ammo_box/c10mm
 	name = "ammo box (10mm)"
@@ -592,6 +651,17 @@
 	icon_state = "a50box-incendiary"
 	ammo_type = /obj/item/ammo_casing/p50/incendiary
 
+// MARK: .50 AE
+/obj/item/ammo_box/a50ae
+	name = "ammo box (.50 AE)"
+	desc = "Коробка с винтовочными патронами калибра .50 AE, вмещает 20 патронов."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "a50aebox"
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_50AE
+	ammo_type = /obj/item/ammo_casing/a50ae
+	max_ammo = 20
+
 // MARK: 4.6x30mm
 /obj/item/ammo_box/c46x30
 	name = "ammo box (4.6x30mm)"
@@ -701,6 +771,133 @@
 	desc = parent_type::desc + "<br>Серый цвет патрона на коробке указывает на то, что в ней должны храниться фугасно-пробивные пули 'ФРАГ-12'."
 	icon_state = "12gbox-frag"
 	ammo_type = /obj/item/ammo_casing/shotgun/frag12
+
+// MARK: .980 Grenades
+/obj/item/ammo_box/c980grenade
+	name = "ammo box (.980 Tydhouer practice)"
+	desc = "Коробка с четырьмя учебными гранатами калибра .980 \"Тайдхойер\". Инструкции на коробке указывают, что это гранаты которые при взрыве распадаются на искры."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "980box_solid"
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+	w_class = WEIGHT_CLASS_NORMAL
+	caliber = CALIBER_980TYDHOUER
+	ammo_type = /obj/item/ammo_casing/c980grenade
+	max_ammo = 4
+
+/obj/item/ammo_box/c980grenade/shrapnel
+	name = "ammo box (.980 Tydhouer shrapnel)"
+	desc = "Коробка с четырьмя шрапнельными гранатами калибра .980 \"Тайдхойер\". На ней также нанесены знаки опасности, но кому они нужны?"
+	icon_state = "980box_explosive"
+	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel
+
+/obj/item/ammo_box/c980grenade/shrapnel/stingball
+	name = "ammo box (.980 Tydhouer stingball)"
+	desc = "Коробка с четырьмя травматическими гранатами калибра .980 \"Тайдхойер\". На ней также нанесены знаки опасности, но кому они нужны?"
+	icon_state = "980box_stingball"
+	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/stingball
+
+/obj/item/ammo_box/c980grenade/shrapnel/phosphor
+	name = "ammo box (.980 Tydhouer phosphor)"
+	desc = "Коробка с четырьмя фосфорными гранатами калибра .980 \"Тайдхойер\". Инструкции на коробке указывают, что это зажигательные взрывные снаряды. На ней также нанесены знаки опасности, но кому они нужны?"
+	icon_state = "980box_gas_alternate"
+	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/phosphor
+
+/obj/item/ammo_box/c980grenade/smoke
+	name = "ammo box (.980 Tydhouer smoke)"
+	desc = "Коробка с четырьмя дымовыми гранатами калибра .980 \"Тайдхойер\". Инструкции на коробке указывают, что это дымовые снаряды, которые при взрыве образуют небольшое облако дыма, гасящего лазерное излучение."
+	icon_state = "980box_smoke"
+	ammo_type = /obj/item/ammo_casing/c980grenade/smoke
+
+/obj/item/ammo_box/c980grenade/riot
+	name = "ammo box (.980 Tydhouer tear gas)"
+	desc = "Коробка с четырьмя гранатами со слезоточивым газом калибра .980 \"Тайдхойер\". Инструкции на коробке указывают, что это дымовые гранаты, которые при взрыве образуют небольшое облако слезоточивого газа."
+	icon_state = "980box_gas"
+	ammo_type = /obj/item/ammo_casing/c980grenade/riot
+
+// MARK: 40mm GRENADE BOX
+#define A40MM_GRENADE_INBOX_SPRITE_WIDTH 3
+/datum/storage/a40mm_box
+	max_slots = 4
+
+/obj/item/storage/fancy/a40mm_box
+	name = "40mm grenade box"
+	desc = "Металлическая коробка, предназначенная для хранения 40-мм гранат."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "40mm_box"
+	base_icon_state = "40mm_box"
+	spawn_type = /obj/item/ammo_casing/a40mm
+	spawn_count = 4
+	open_status = FALSE
+	appearance_flags = KEEP_TOGETHER|LONG_GLIDE
+	contents_tag = "grenade"
+	foldable_result = null
+	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*5)
+	force = 8
+	throwforce = 12
+	throw_speed = 2
+	throw_range = 7
+	resistance_flags = null
+	storage_type = /datum/storage/a40mm_box
+
+/obj/item/storage/fancy/a40mm_box/Initialize(mapload)
+	. = ..()
+	atom_storage.set_holdable(list(/obj/item/ammo_casing/a40mm))
+
+/obj/item/storage/fancy/a40mm_box/attack_self(mob/user)
+	..()
+	if(open_status == FANCY_CONTAINER_OPEN)
+		playsound(src, 'sound/machines/click.ogg', 30, TRUE)
+
+/obj/item/storage/fancy/a40mm_box/PopulateContents()
+	. = ..()
+	update_appearance()
+
+/obj/item/storage/fancy/a40mm_box/update_icon_state()
+	. = ..()
+	icon_state = "[base_icon_state][open_status ? "_open" : null]"
+
+/obj/item/storage/fancy/a40mm_box/update_overlays()
+	. = ..()
+	if(!open_status)
+		return
+
+	var/grenades = 0
+	for(var/_grenade in contents)
+		var/obj/item/ammo_casing/a40mm/grenade = _grenade
+		if (!istype(grenade))
+			continue
+		. += image(icon = initial(icon), icon_state = (initial(grenade.icon_state) + "_inbox"), pixel_x = grenades * A40MM_GRENADE_INBOX_SPRITE_WIDTH)
+		grenades += 1
+
+#undef A40MM_GRENADE_INBOX_SPRITE_WIDTH
+
+/obj/item/storage/fancy/a40mm_box/rubber
+	name = "40mm RUBBER grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/rubber
+
+/obj/item/storage/fancy/a40mm_box/weak
+	name = "40mm LIGHT grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/weak
+
+/obj/item/storage/fancy/a40mm_box/incendiary
+	name = "40mm INCENDIARY grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/incendiary
+
+/obj/item/storage/fancy/a40mm_box/smoke
+	name = "40mm SMOKE grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/smoke
+
+/obj/item/storage/fancy/a40mm_box/stun
+	name = "40mm STUN grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/stun
+
+/obj/item/storage/fancy/a40mm_box/hedp
+	name = "40mm HEDP grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/hedp
+
+/obj/item/storage/fancy/a40mm_box/frag
+	name = "40mm FRAG grenade box"
+	spawn_type = /obj/item/ammo_casing/a40mm/frag
 
 // MARK: BOXES WITH MAGAZINES / AMMO BOXES
 /obj/item/storage/toolbox/ammobox/c9x25mm_mags
