@@ -293,6 +293,10 @@
 	powered_state = null
 	emagged_state = null
 
+/obj/item/defibrillator/compact/combat/Initialize(mapload)
+	. = ..()
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
+
 /obj/item/defibrillator/compact/combat/loaded
 	cell_removable = FALSE // Don't let people just have an infinite power cell
 
