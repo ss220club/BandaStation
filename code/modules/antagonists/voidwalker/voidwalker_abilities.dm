@@ -26,11 +26,11 @@
 	. = ..()
 
 	if(!isliving(cast_on))
-		cast_on.balloon_alert(owner.declent_ru(NOMINATIVE), "не может быть выбран целью!")
+		cast_on.balloon_alert(owner, "не может быть выбран целью!")
 		return FALSE
 
 	if(!check_if_staring(cast_on))
-		owner.balloon_alert(owner.declent_ru(NOMINATIVE), "не может вас видеть!")
+		owner.balloon_alert(owner, "не может вас видеть!")
 		return FALSE
 
 	return .
@@ -52,10 +52,10 @@
 	SIGNAL_HANDLER
 
 	if(target.is_blind() || !(owner in view(target, world.view)))
-		owner.balloon_alert(owner.declent_ru(NOMINATIVE), "нарушена видимость!")
+		owner.balloon_alert(owner, "нарушена видимость!")
 		return FALSE
 	if(in_combat)
-		owner.balloon_alert(owner.declent_ru(NOMINATIVE), "прервано боем!")
+		owner.balloon_alert(owner, "прервано боем!")
 		in_combat = FALSE
 	return TRUE
 
@@ -136,5 +136,5 @@
 	if(istype(get_turf(target), valid_target_turf))
 		return ..()
 
-	owner.balloon_alert(owner, "must target [initial(valid_target_turf.name)]!")
+	owner.balloon_alert(owner, "должен быть целью [initial(valid_target_turf.name)]!")
 	return FALSE
