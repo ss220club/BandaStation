@@ -26,10 +26,10 @@
 	item = /obj/item/storage/toolbox/guncase/china_lake
 	relevant_child_items = list(
 		/datum/uplink_item/ammo_nuclear/basic/carbine/a40mm,
-		/datum/uplink_item/ammo_nuclear/basic/carbine/a40mm/stun,
-		/datum/uplink_item/ammo_nuclear/basic/carbine/a40mm/incendiary,
-		/datum/uplink_item/ammo_nuclear/basic/carbine/a40mm/frag,
-		/datum/uplink_item/ammo_nuclear/basic/carbine/a40mm/hedp,
+		/datum/uplink_item/ammo_nuclear/special/carbine/a40mm/stun,
+		/datum/uplink_item/ammo_nuclear/incendiary/carbine/a40mm/incendiary,
+		/datum/uplink_item/ammo_nuclear/hp/carbine/a40mm/frag,
+		/datum/uplink_item/ammo_nuclear/ap/carbine/a40mm/hedp,
 		/datum/uplink_item/ammo_nuclear/basic/carbine/a40mm/smoke,
 	)
 
