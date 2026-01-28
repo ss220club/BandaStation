@@ -42,4 +42,4 @@
 	new weapon_to_spawn (src)
 	new extra_to_spawn (src)
 	new /obj/item/ammo_box/a40mm/rubber (src)
-	new /obj/item/ammo_box/a40mm/smoke (src)
+	new /obj/item/storage/fancy/a40mm_box/smoke (src)
