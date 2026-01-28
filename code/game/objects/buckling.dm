@@ -375,13 +375,13 @@
 /atom/movable/proc/unbuckle_feedback(mob/living/unbuckled_mob, mob/unbuckler)
 	if(unbuckled_mob == unbuckler)
 		unbuckled_mob.visible_message(
-			span_notice("[unbuckler] unbuckles [unbuckler.p_them()]self from [src]."),
-			span_notice("You unbuckle yourself from [src]."),
-			span_hear("You hear metal clanking."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстегивает себя от [src.declent_ru(GENITIVE)]."),
+			span_notice("Вы отстегиваете себя от [src.declent_ru(GENITIVE)]."),
+			span_hear("Вы слышите лязг металла."),
 		)
 	else
 		unbuckled_mob.visible_message(
-			span_notice("[unbuckler] unbuckles [unbuckled_mob] from [src]."),
-			span_notice("[unbuckler] unbuckles you from [src]."),
-			span_hear("You hear metal clanking."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстёгивает [unbuckled_mob.declent_ru(GENITIVE)] от [src.declent_ru(GENITIVE)]."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстёгивает от [src.declent_ru(GENITIVE)]."),
+			span_hear("Вы слышите лязг металла."),
 		)
