@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/aoe/fiery_rebirth
-	name = "Nightwatcher's Rebirth"
+	name = "Прерождение Ночного Дозорного"
 	desc = "Заклинание, которое тушит вас, и истощает жизненные силы окружающих язычников в огне, \
 		исцеляет вас за каждую истощенного. Те, кто находятся в критическом состоянии, \
 		будут истощены досуха, убивая их."
@@ -51,7 +51,7 @@
 
 	//This is essentially a death mark, use this to finish your opponent quicker.
 	if(CAN_SUCCUMB(victim))
-		victim.investigate_log("has been executed by fiery rebirth.", INVESTIGATE_DEATHS)
+		victim.investigate_log("был казнен огненным возрождением", INVESTIGATE_DEATHS)
 		victim.death()
 	victim.apply_damage(20, BURN)
 	victim.extinguish_mob()

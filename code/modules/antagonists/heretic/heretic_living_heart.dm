@@ -66,7 +66,7 @@
  * Allows a heretic to track sacrifice targets.
  */
 /datum/action/cooldown/track_target
-	name = "Living Heartbeat"
+	name = "Биение живого сердца"
 	desc = "ЛКМ: Выберите одну из целей для отслеживания. ПКМ: Повторяет последнюю цель, которую вы выбрали для отслеживания."
 	check_flags = AB_CHECK_CONSCIOUS
 	background_icon_state = "bg_heretic"
