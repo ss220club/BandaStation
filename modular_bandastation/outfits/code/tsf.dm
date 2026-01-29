@@ -106,7 +106,7 @@
 	head = /obj/item/clothing/head/beret/tsf_marine_officer
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	shoes = /obj/item/clothing/shoes/jackboots
-	belt = /obj/item/storage/belt/military/army/tsf/full
+	belt = /obj/item/storage/belt/military/army/tsf/full_pistol
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 
 /datum/id_trim/tsf/marine/officer
@@ -261,7 +261,7 @@
 		/obj/item/clothing/head/beret/tsf_marine,
 	)
 	belt = /obj/item/storage/belt/military/army/tsf/full_sniper_carwo
-	glasses = /obj/item/clothing/glasses/hud/sunglasses/tsf
+	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 	neck = /obj/item/binoculars
 
 /datum/id_trim/tsf/marine/sniper
@@ -275,7 +275,7 @@
 /datum/outfit/tsf/marine/sniper/heavy
 	name = "TSF - Marine Heavy Sniper"
 	id_trim = /datum/id_trim/tsf/marine/sniper/heavy
-	suit_store = /obj/item/gun/ballistic/automatic/t26
+	suit_store = /obj/item/gun/ballistic/rifle/sniper_rifle/t26
 	belt = /obj/item/storage/belt/military/army/tsf/full_sniper_heavy
 
 /datum/id_trim/tsf/marine/sniper/heavy
@@ -343,7 +343,7 @@
 	backpack_contents = null
 	belt = /obj/item/storage/belt/military/army/tsf/full_minigun
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
-	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
+	glasses = 
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/engi
 
 /datum/id_trim/tsf/marine/minigunner
