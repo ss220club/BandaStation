@@ -459,7 +459,7 @@
 	belt = /obj/item/storage/belt/military/army/tsf/full_autorifle_cr13_marsok
 	neck = /obj/item/binoculars
 
-/datum/outfit/tsf/marsoc/officer
+/datum/outfit/tsf/marsoc/officer/smg
 	name = "TSF - MARSOC Officer (Bogseo SMG)"
 	id_trim = /datum/id_trim/tsf/marsoc/officer
 	uniform = /obj/item/clothing/under/rank/tsf/marsoc_officer
@@ -518,7 +518,7 @@
 	l_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	r_pocket = /obj/item/knife/combat
 
-/datum/outfit/tsf/infiltrator
+/datum/outfit/tsf/infiltrator/smg
 	name = "TSF - Infiltrator (Bogseo SMG Suppressed)"
 	suit_store = /obj/item/gun/ballistic/automatic/bogseo/suppressed
 	belt = /obj/item/storage/belt/military/army/tsf/full_smg_bogseo
