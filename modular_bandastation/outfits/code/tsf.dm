@@ -343,7 +343,7 @@
 	backpack_contents = null
 	belt = /obj/item/storage/belt/military/army/tsf/full_minigun
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
-	glasses = 
+	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/engi
 
 /datum/id_trim/tsf/marine/minigunner
