@@ -18253,6 +18253,9 @@
 /obj/machinery/light/small/directional/east{
 	pixel_y = 13
 	},
+/obj/structure/mirror/directional/east{
+	pixel_x = 25
+	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
 "evB" = (
@@ -49066,6 +49069,9 @@
 	},
 /obj/machinery/light/small/directional/west{
 	pixel_y = 13
+	},
+/obj/structure/mirror/directional/west{
+	pixel_x = -25
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
