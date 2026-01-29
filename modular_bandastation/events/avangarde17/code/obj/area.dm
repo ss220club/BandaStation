@@ -133,37 +133,61 @@
 	name = "Райком - Второй Этаж"
 	icon_state = "awaycontent23"
 
-/area/awaymission/avangarde17/inside/police
+/area/awaymission/avangarde17/inside/militia
 	name = "Участковый Пункт Милиции"
 	icon_state = "awaycontent1"
 
-/area/awaymission/avangarde17/inside/police/armory
-	name = "Участковый Пункт Милиции - Оружейная"
+/area/awaymission/avangarde17/inside/militia/interrogation
+	name = "Участковый Пункт Милиции - Допросная"
 	icon_state = "awaycontent2"
 
-/area/awaymission/avangarde17/inside/police/chief
-	name = "Участковый Пункт Милиции - Кабинет Опера"
+/area/awaymission/avangarde17/inside/militia/investigator
+	name = "Участковый Пункт Милиции - Кабинет следователя"
 	icon_state = "awaycontent3"
 
-/area/awaymission/avangarde17/inside/police/cabinet
-	name = "Участковый Пункт Милиции - Кабинеты"
+/area/awaymission/avangarde17/inside/militia/bathroom
+	name = "Участковый Пункт Милиции - Уборная"
 	icon_state = "awaycontent4"
 
-/area/awaymission/avangarde17/inside/police/prison
-	name = "Участковый Пункт Милиции - Обезьянник"
+/area/awaymission/avangarde17/inside/militia/garage
+	name = "Участковый Пункт Милиции - Гараж"
 	icon_state = "awaycontent5"
 
-/area/awaymission/avangarde17/inside/police/car
-	name = "Участковый Пункт Милиции - Гараж"
+/area/awaymission/avangarde17/inside/militia/evidence
+	name = "Участковый Пункт Милиции - Вещдоки"
 	icon_state = "awaycontent6"
 
-/area/awaymission/avangarde17/inside/police/second_floor
-	name = "Участковый Пункт Милиции - Второй Этаж"
+/area/awaymission/avangarde17/inside/militia/cells
+	name = "Участковый Пункт Милиции - Заключённые"
+	icon_state = "awaycontent7"
+
+/area/awaymission/avangarde17/inside/militia/second_floor
+	name = "Участковый Пункт Милиции - Второй этаж"
+	icon_state = "awaycontent8"
+
+/area/awaymission/avangarde17/inside/militia/storage
+	name = "Участковый Пункт Милиции - Кладовка"
+	icon_state = "awaycontent9"
+
+/area/awaymission/avangarde17/inside/militia/brief
+	name = "Участковый Пункт Милиции - Переговорная"
 	icon_state = "awaycontent10"
 
-/area/awaymission/avangarde17/inside/police/custodials
-	name = "Участковый Пункт Милиции - Уборная"
-	icon_state = "awaycontent8"
+/area/awaymission/avangarde17/inside/militia/head
+	name = "Участковый Пункт Милиции - Кабинет Начальника"
+	icon_state = "awaycontent11"
+
+/area/awaymission/avangarde17/inside/militia/locker
+	name = "Участковый Пункт Милиции - Раздевалка"
+	icon_state = "awaycontent12"
+
+/area/awaymission/avangarde17/inside/militia/armory
+	name = "Участковый Пункт Милиции - Оружейная"
+	icon_state = "awaycontent13"
+
+/area/awaymission/avangarde17/inside/militia/warden
+	name = "Участковый Пункт Милиции - Кабинет постового"
+	icon_state = "awaycontent14"
 
 /area/awaymission/avangarde17/inside/hospital
 	name = "Фельдшерско-Акушерский Пункт"
