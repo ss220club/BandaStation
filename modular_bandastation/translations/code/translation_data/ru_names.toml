@@ -29810,7 +29810,7 @@ instrumental = "филактерией проклятия"
 prepositional = "филактерии проклятия"
 gender = "female"
 
-["Mawed Crucible"]
+["mawed crucible"]
 nominative = "Зубастый тигель"
 genitive = "Зубастого тигеля"
 dative = "Зубастому тигелю"
@@ -29827,15 +29827,6 @@ accusative = "Потусторонюю монету"
 instrumental = "Потусторонней монетой"
 prepositional = "Потусторонней монете"
 gender = "female"
-
-[""]
-nominative = ""
-genitive = ""
-dative = ""
-accusative = ""
-instrumental = ""
-prepositional = ""
-gender = "male"
 
 # MARK: Blood Worm
 
