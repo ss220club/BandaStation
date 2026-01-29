@@ -421,9 +421,9 @@
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4/x4 = 2,
 		/obj/item/gun/ballistic/rocketlauncher/oneuse,
-		/obj/item/gun/ballistic/shotgun/riot/renoster/black/sawoff,
 		/obj/item/clothing/head/beret/tsf_marsoc,
 	)
+	l_hand = /obj/item/gun/ballistic/shotgun/riot/renoster/black/sawoff
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
 	mask = /obj/item/clothing/mask/gas/sechailer
