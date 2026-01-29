@@ -45,7 +45,7 @@
 	new /obj/item/storage/fancy/a40mm_box/smoke (src)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/sec
-	name = "GL-41 grenade launcher"
+	name = "GL-41 40mm grenade launcher"
 	desc = "40mm break-operated grenade launcher."
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	icon_state = "riotgun"
@@ -57,3 +57,6 @@
 /obj/item/ammo_box/magazine/internal/grenadelauncher/sec
 	name = "GL-41 grenade launcher internal magazine"
 	ammo_type = /obj/item/ammo_casing/a40mm/rubber
+
+/obj/item/gun/grenadelauncher
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic40x32.dmi'
