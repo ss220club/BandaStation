@@ -87,7 +87,7 @@
 	if(COOLDOWN_FINISHED(src, next_automatic_message_time) && radio)
 		var/automatic_nav_message = "[src]. Сектор [z]. [locked ? "Маяк Заблокирован" : "Маяк Доступен"]. Координаты: [x] Долготы, [y] Широты."
 
-		say("[automatic_nav_message]")
+		say("[automatic_nav_message]") // BANDASTATION EDIT
 
 		COOLDOWN_START(src, next_automatic_message_time, automatic_message_cooldown)
 
