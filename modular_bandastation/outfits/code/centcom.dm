@@ -178,3 +178,7 @@
 	// So, this disk is just good for making bomb go boom
 	fake = FALSE
 	SSpoints_of_interest.make_point_of_interest(src)
+
+/obj/item/storage/box/survival/centcom
+	mask_type = /obj/item/clothing/mask/gas/sechailer
+	medipen_type =  /obj/item/reagent_containers/hypospray/medipen/atropine

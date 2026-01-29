@@ -43,7 +43,7 @@
 	suit = /obj/item/clothing/suit/armor/centcom_formal/tsf_commander
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
-		/obj/item/storage/box/survival/security,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/reagent_containers/hypospray/combat/nanites,
 		/obj/item/storage/fancy/cigarettes/cigars/havana,
 		/obj/item/reagent_containers/cup/glass/bottle/whiskey,
@@ -55,7 +55,7 @@
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/thermal/eyepatch/tsf_commander
-	r_pocket = /obj/item/lighter
+	r_pocket = /obj/item/lighter/skull
 
 /datum/id_trim/tsf/commander
 	assignment = "TSF - Commanding Officer"
@@ -73,7 +73,7 @@
 	uniform = /obj/item/clothing/under/rank/tsf/marine
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf,
 		/obj/item/storage/fancy/cigarettes/cigpack_robust,
 		/obj/item/lighter/greyscale,
 	)
@@ -99,7 +99,7 @@
 	uniform = /obj/item/clothing/under/rank/tsf/marine_officer
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/storage/fancy/cigarettes/cigpack_robust,
 		/obj/item/lighter/greyscale,
 	)
@@ -125,7 +125,7 @@
 	suit_store = /obj/item/gun/ballistic/automatic/sindano
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf,
 		/obj/item/grenade/smokebomb,
 		/obj/item/shield/riot/tele,
 	)
@@ -147,7 +147,7 @@
 	suit_store = /obj/item/gun/ballistic/automatic/carwo
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/storage/box/zipties,
 		/obj/item/storage/medkit/emergency,
 		/obj/item/grenade/frag = 2,
@@ -166,7 +166,7 @@
 	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/wooden
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf,
 		/obj/item/storage/medkit/regular = 1,
 		/obj/item/storage/medkit/advanced = 1,
 		/obj/item/storage/medkit/tactical = 1,
@@ -208,7 +208,7 @@
 	suit_store = /obj/item/gun/ballistic/shotgun/riot_one_hand
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf,
 		/obj/item/storage/box/teargas,
 		/obj/item/grenade/flashbang = 2,
 		/obj/item/megaphone/sec,
@@ -235,7 +235,7 @@
 	uniform = /obj/item/clothing/under/rank/tsf/marsoc
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf,
 	)
 	head = /obj/item/clothing/head/beret/tsf_marsoc
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
@@ -270,7 +270,7 @@
 	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto
 	back = /obj/item/mod/control/pre_equipped/tsf_standart
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf,
 		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
@@ -292,7 +292,7 @@
 	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun
 	back = /obj/item/mod/control/pre_equipped/tsf_elite
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
@@ -317,7 +317,7 @@
 	suit_store = /obj/item/gun/ballistic/automatic/carwo/marksman/suppressed
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/storage/medkit/emergency,
 		/obj/item/grenade/smokebomb = 2,
 		/obj/item/grenade/c4 = 2,
@@ -352,7 +352,7 @@
 	suit = /obj/item/clothing/suit/armor/vest/tsf_overcoat
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/lighter/greyscale,
 		/obj/item/storage/fancy/cigarettes/cigars/cohiba,
 		/obj/item/stamp/tsf,
@@ -381,7 +381,7 @@
 	suit = /obj/item/clothing/suit/tsf_suitjacket
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/lighter,
 		/obj/item/storage/fancy/cigarettes/cigars/cohiba,
 		/obj/item/stamp/tsf,
@@ -405,3 +405,17 @@
 	. = ..()
 	access = list(ACCESS_CENT_CAPTAIN, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_SECURITY - ACCESS_CAPTAIN - ACCESS_AI_UPLOAD)
 
+/obj/item/storage/box/survival/tsf
+	mask_type = /obj/item/clothing/mask/gas/sechailer
+	internal_type = /obj/item/tank/internals/emergency_oxygen/engi
+
+/obj/item/storage/box/survival/tsf/PopulateContents()
+	. = ..()
+	new /obj/item/crowbar(src)
+	new /obj/item/food/rationpack(src)
+	new /obj/item/radio/off(src)
+	new /obj/item/flashlight/seclite(src)
+
+/obj/item/storage/box/survival/tsf/officer
+	medipen_type =  /obj/item/reagent_containers/hypospray/medipen/atropine
+	internal_type = /obj/item/tank/internals/emergency_oxygen/double
