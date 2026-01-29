@@ -43,3 +43,17 @@
 	new extra_to_spawn (src)
 	new /obj/item/ammo_box/a40mm/rubber (src)
 	new /obj/item/storage/fancy/a40mm_box/smoke (src)
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/sec
+	name = "GL-41 grenade launcher"
+	desc = "40mm break-operated grenade launcher."
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
+	icon_state = "riotgun"
+	inhand_icon_state = "riotgun"
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/grenade_launcher.ogg'
+	pin = /obj/item/firing_pin
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/grenadelauncher/sec
+
+/obj/item/ammo_box/magazine/internal/grenadelauncher/sec
+	name = "GL-41 grenade launcher internal magazine"
+	ammo_type = /obj/item/ammo_casing/a40mm/rubber
