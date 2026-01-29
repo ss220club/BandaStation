@@ -91,6 +91,13 @@
 	fire_delay = 0.1 SECONDS
 	recoil = 0.1
 
+/obj/item/gun/ballistic/automatic/sindano/black/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	spawnwithmagazine = /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
+	w_class = WEIGHT_CLASS_NORMAL
+
 /obj/item/gun/ballistic/automatic/sindano/black/examine_more(mob/user)
 	. = ..()
 	. += "На этом варианте \"Синдано\" установлены рукоятка и прицел, что серьезно \

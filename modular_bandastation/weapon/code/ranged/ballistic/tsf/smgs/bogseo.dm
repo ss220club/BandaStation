@@ -42,3 +42,9 @@
 
 /obj/item/gun/ballistic/automatic/bogseo/no_mag
 	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/bogseo/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	spawnwithmagazine = /obj/item/ammo_box/magazine/c585sol/extended/ap

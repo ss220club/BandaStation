@@ -158,6 +158,12 @@
 	worn_icon_state = "infanterie_black"
 	inhand_icon_state = "infanterie_black"
 
+/obj/item/gun/ballistic/automatic/carwo/auto/black/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	spawnwithmagazine = /obj/item/ammo_box/magazine/c40sol_rifle/long
+
 /obj/item/gun/ballistic/automatic/carwo/auto/black/no_mag
 	spawnwithmagazine = FALSE
 

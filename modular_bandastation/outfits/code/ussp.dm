@@ -139,7 +139,7 @@
 	big_pointer = TRUE
 
 // USSP Military
-//Rifleman
+// Rifleman
 /datum/outfit/ussp/military
 	name = "USSP - Red Army Ryadovoy"
 	id = /obj/item/card/id/advanced/ussp
@@ -161,7 +161,7 @@
 	belt = /obj/item/storage/belt/military/army/ussp/full_autorifle
 	l_pocket = /obj/item/knife/combat
 
-//Officer
+// Officer
 /datum/outfit/ussp/military/officer
 	name = "USSP - Red Army Officer"
 	id_trim = /datum/id_trim/ussp/soldier/officer
@@ -181,7 +181,7 @@
 	head = /obj/item/clothing/head/helmet/marine/ussp_officer_kaska
 	mask = /obj/item/clothing/mask/breath/red_gas
 
-//Medic
+// Medic
 /datum/outfit/ussp/military/medic
 	name = "USSP - Red Army Sanitar"
 	id_trim = /datum/id_trim/ussp/soldier/medic
@@ -204,7 +204,7 @@
 /datum/id_trim/ussp/soldier/medic
 	assignment = "USSP - Red Army Sanitar"
 
-//Engineer
+// Engineer
 /datum/outfit/ussp/military/engineer
 	name = "USSP - Red Army Stroibat"
 	id_trim = /datum/id_trim/ussp/soldier/engineer
@@ -219,7 +219,7 @@
 /datum/id_trim/ussp/soldier/engineer
 	assignment = "USSP - Red Army Stroibat"
 
-//Grenadier
+// Grenadier
 /datum/outfit/ussp/military/grenadier
 	name = "USSP - Red Army Grenadier"
 	id_trim = /datum/id_trim/ussp/soldier/grenadier
@@ -255,7 +255,7 @@
 /datum/id_trim/ussp/soldier/sniper
 	assignment = "USSP - Red Army Sniper"
 
-/datum/outfit/ussp/military/sniper/Heavy
+/datum/outfit/ussp/military/sniper/heavy
 	name = "USSP - Red Army Heavy Sniper"
 	id_trim = /datum/id_trim/ussp/soldier/sniper/heavy
 	suit_store = /obj/item/gun/ballistic/automatic/wylom
@@ -264,7 +264,7 @@
 /datum/id_trim/ussp/soldier/sniper/heavy
 	assignment = "USSP - Red Army Heavy Sniper"
 
-//Riot
+// Riot
 /datum/outfit/ussp/military/riot
 	name = "USSP - OMON"
 	id = /obj/item/card/id/advanced/ussp
