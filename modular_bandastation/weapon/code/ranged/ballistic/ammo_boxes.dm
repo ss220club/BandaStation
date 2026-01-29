@@ -145,6 +145,12 @@
 	ammo_band_icon = "+38_ammo_band"
 	ammo_band_color = null
 
+/obj/item/ammo_box/speedloader/c38/ap
+	name = "speed loader (.38 AP)"
+	desc = parent_type::desc + "<br>Бронебойные пули хорошо пробивают броню, но наносят мало увейчий.."
+	ammo_type = /obj/item/ammo_casing/c38/ap
+	ammo_band_color = COLOR_AMMO_ARMORPIERCE
+
 // MARK: .310
 /obj/item/ammo_box/speedloader/strilka310_cylinder
 	name = "speed loader (.310 Strilka)"

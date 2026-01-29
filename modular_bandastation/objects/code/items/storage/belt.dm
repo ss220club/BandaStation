@@ -179,7 +179,7 @@
 /obj/item/storage/belt/military/army/tsf/full_sniper_heavy/PopulateContents()
 	new /obj/item/gun/ballistic/revolver/eland/army(src)
 	new /obj/item/ammo_box/speedloader/c38/true(src)
-	new /obj/item/ammo_box/speedloader/c38/ap(src)
+	new /obj/item/ammo_box/speedloader/c38/dumdum(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds/incendiary(src)
