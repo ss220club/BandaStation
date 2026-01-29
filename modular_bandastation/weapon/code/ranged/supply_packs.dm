@@ -335,8 +335,8 @@
 		Мы спилили серийные номера, но на прикладе еще видны царапины от прошлой зачистки. \
 		Он лягается как черт, и мы не оплачиваем лечение твоего плеча, усек?"
 	item = /obj/effect/spawner/random/armory/renoster
-	price_min = CARGO_CRATE_VALUE * 20
-	price_max = CARGO_CRATE_VALUE * 30
+	price_min = CARGO_CRATE_VALUE * 40
+	price_max = CARGO_CRATE_VALUE * 50
 	stock_max = 1
 	availability_prob = 30
 
@@ -347,13 +347,13 @@
 		Партия списанная, может ствол перегрет, а может из него вообще боялись стрелять. \
 		Мы точность не гарантируем, тут главное попасть в ту же сторону, лады?"
 	item = /obj/item/gun/ballistic/automatic/pistol/skild
-	price_min = CARGO_CRATE_VALUE * 10
-	price_max = CARGO_CRATE_VALUE * 20
+	price_min = CARGO_CRATE_VALUE * 20
+	price_max = CARGO_CRATE_VALUE * 25
 	stock_max = 1
 	availability_prob = 35
 
 /datum/market_item/weapon/sindano
-	name = "Sindano pistol"
+	name = "Sindano SMG"
 	desc = "Послушай, это компактная «поливалка» от ТСФ для спецотрядов и не только их. \
 		Калибр .35 Sol — редкая, злая штука, мелкая пуля, но бешеная скорость. \
 		ТСФ разработали этот ПП под калибр .35 Sol, чтобы дырявить бронежилеты в узких коридорах кораблей. \
@@ -374,8 +374,8 @@
 		Эта пушка выглядит слишком аккуратной и эргономичной для этой дыры, так что не свети ей лишний раз. \
 		Он может быть капризным к грязным патронам, так что не пихай в него всякий мусор, лады?"
 	item = /obj/item/gun/ballistic/automatic/pistol/tp14
-	price_min = CARGO_CRATE_VALUE * 10
-	price_max = CARGO_CRATE_VALUE * 20
+	price_min = CARGO_CRATE_VALUE * 20
+	price_max = CARGO_CRATE_VALUE * 25
 	stock_max = 1
 	availability_prob = 35
 
@@ -387,20 +387,20 @@
 		Компактная, скорострельная и жрет дешевые 9мм патроны, не давясь. \
 		Правда, эта крошка не любит песок и грязь, так что не роняй ее, лады?"
 	item = /obj/item/gun/ballistic/automatic/fn18
-	price_min = CARGO_CRATE_VALUE * 20
-	price_max = CARGO_CRATE_VALUE * 30
+	price_min = CARGO_CRATE_VALUE * 40
+	price_max = CARGO_CRATE_VALUE * 50
 	stock_max = 1
 	availability_prob = 30
 
 /datum/market_item/weapon/takbok
-	name = "Takbok pistol"
+	name = "Takbok revolver"
 	desc = "Послушай, это не игрушка для ковбоев, это тяжелый «аргумент» офицеров ТСФ. \
 		Барабан всего на пять гнезд, зато калибр .50 AE пробивает бронепластины как картон. \
 		Эта пушка выглядит потертой, будто прошла пару войн на границе, но механизм надежен, как кусок скалы. \
 		Если промахнешься всеми пятью — можешь просто ударить им по голове, эффект будет тот же, лады?"
 	item = /obj/item/gun/ballistic/revolver/takbok
-	price_min = CARGO_CRATE_VALUE * 10
-	price_max = CARGO_CRATE_VALUE * 20
+	price_min = CARGO_CRATE_VALUE * 20
+	price_max = CARGO_CRATE_VALUE * 25
 	stock_max = 1
 	availability_prob = 35
 
@@ -411,21 +411,21 @@
 		Этот ствол, наверное, прошел через три революции, прежде чем попасть к нам. \
 		Он будет стрелять всегда, даже если ты забудешь, как его чистить, усек?"
 	item = /obj/effect/spawner/random/armory/amk
-	price_min = CARGO_CRATE_VALUE * 20
-	price_max = CARGO_CRATE_VALUE * 30
+	price_min = CARGO_CRATE_VALUE * 40
+	price_max = CARGO_CRATE_VALUE * 50
 	stock_max = 1
 	availability_prob = 30
 
 /datum/market_item/weapon/sabel
-	name = "Sabel rifle"
+	name = "Sabel carbine"
 	desc = "Послушай, «Сабля» — это тот же АМК, который попытался стать цивилизованным. \
 		Гражданский карабин, только одиночный огонь, никакой автоматики, чтобы не нервировать местных копов. \
 		Но внутри это всё тот же неубиваемый советский трактор под 7.62. \
 		Идеально для охоты или самообороны, если ты не планируешь устраивать маленькую войну. \
 		И не пытайся кустарно вернуть ему автоогонь, лады?"
 	item = /obj/item/gun/ballistic/automatic/sabel
-	price_min = CARGO_CRATE_VALUE * 15
-	price_max = CARGO_CRATE_VALUE * 25
+	price_min = CARGO_CRATE_VALUE * 25
+	price_max = CARGO_CRATE_VALUE * 40
 	stock_max = 1
 	availability_prob = 50
 
