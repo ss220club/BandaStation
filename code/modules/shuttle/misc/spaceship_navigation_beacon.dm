@@ -1,5 +1,5 @@
 /obj/machinery/spaceship_navigation_beacon
-	name = "radio navigation gigabeacon" //Радионавигационный гигамаяк
+	name = "radio navigation gigabeacon"
 	desc = "Устройство, которое постоянно передает свое местоположение на частотах, обычно используемых для флотской навигации. Используется для создания путевых точек в неизведанных или неосвоенных районах."
 	icon = 'icons/obj/machines/navigation_beacon.dmi'
 	icon_state = "beacon_active"
@@ -94,7 +94,7 @@
 // Item used to actually make nav beacons
 
 /obj/item/folded_navigation_gigabeacon
-	name = "compact radio navigation gigabeacon" // Мобильный радионавигационный гигамаяк
+	name = "compact radio navigation gigabeacon"
 	desc = "Мобильный радионавигационный гигамаяк. Устройство, которое постоянно передает свое местоположение на частотах, обычно используемых для флотской навигации. Используется для создания путевых точек в неизведанных или неосвоенных районах. Необходимо разложить перед использованием."
 	icon = 'icons/obj/machines/navigation_beacon.dmi'
 	icon_state = "beacon_folded"
