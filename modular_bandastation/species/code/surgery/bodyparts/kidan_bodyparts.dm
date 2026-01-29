@@ -4,6 +4,7 @@
 	is_dimorphic = FALSE
 	brute_modifier = 0.85
 	head_flags = HEAD_LIPS|HEAD_EYESPRITES|HEAD_EYEHOLES|HEAD_DEBRAIN
+	bodypart_traits = list(TRAIT_ANTENNAE)
 
 /obj/item/bodypart/chest/kidan
 	icon_greyscale = 'icons/bandastation/mob/species/kidan/bodyparts.dmi'

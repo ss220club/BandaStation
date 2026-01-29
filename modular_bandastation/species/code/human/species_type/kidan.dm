@@ -2,6 +2,11 @@
 	name = "Кидан"
 	plural_form = "Киданы"
 	id = SPECIES_KIDAN
+	inherent_traits = list(
+		TRAIT_LUMINESCENT_EYES,
+		TRAIT_ANTENNAE,
+		TRAIT_ROCK_EATER,
+	)
 	inherent_biotypes = MOB_ORGANIC | MOB_HUMANOID | MOB_BUG
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT
 
@@ -13,6 +18,13 @@
 	mutanttongue = /obj/item/organ/tongue/kidan
 	mutantliver = /obj/item/organ/liver/kidan
 	mutantstomach = /obj/item/organ/stomach/kidan
+
+	mutant_organs = list(
+		/obj/item/organ/antennae/kidan = /datum/sprite_accessory/antennae/kidan/long::name
+	)
+
+	meat = /obj/item/food/meat/slab/human/mutant/kidan
+	death_sound = 'modular_bandastation/emote_panel/audio/kidan/deathsound_kidan.ogg'
 
 	exotic_bloodtype = BLOOD_TYPE_KIDAN
 
