@@ -1,8 +1,8 @@
 /datum/action/cooldown/spell/pointed/mind_gate
 	name = "Врата разума"
-	desc = "Наносит вам 20 урона мозгу, и накладывает галлюцинации на цель, \
-			замешательство на 10 секунд, потерю дыхания и урон мозгу. \
-			Это также ослепляет, лишает голоса и оглушает вашу цель, и если ее рассудок достаточно низок, она также будет сбита с ног."
+	desc = "Наносит вам 20 урона мозгу, накладывает на цель галлюцинации и \
+			замешательство на 10 секунд, также вызывает кислородное голодание и наносит урон мозгу цели. \
+			Помимо этого навык ослепляет, лишает голоса и оглушает вашу цель, если ее рассудок достаточно низок, она также будет сбита с ног."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -38,7 +38,7 @@
 
 	cast_on.adjust_confusion(10 SECONDS)
 	cast_on.adjust_oxy_loss(30)
-	cast_on.cause_hallucination(get_random_valid_hallucination_subtype(/datum/hallucination/body), "Врата разума открыты [owner]")
+	cast_on.cause_hallucination(get_random_valid_hallucination_subtype(/datum/hallucination/body), "Врата разума открыты [owner.declent_ru(INSTRUMENTAL)]")
 	cast_on.cause_hallucination(/datum/hallucination/delusion/preset/heretic/gate, "Вызваны вратами разума")
 	cast_on.adjust_organ_loss(ORGAN_SLOT_BRAIN, 30)
 

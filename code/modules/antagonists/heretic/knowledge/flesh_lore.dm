@@ -107,8 +107,8 @@
 
 /// Makes [victim] into a ghoul.
 /datum/heretic_knowledge/limited_amount/starting/base_flesh/proc/make_ghoul(mob/living/user, mob/living/carbon/human/victim)
-	user.log_message("создан гуль, контролируемый [key_name(victim)].", LOG_GAME)
-	message_admins("[ADMIN_LOOKUPFLW(user)] создан гуль, [ADMIN_LOOKUPFLW(victim)].")
+	user.log_message("created a ghoul, controlled by [key_name(victim)].", LOG_GAME)
+	message_admins("[ADMIN_LOOKUPFLW(user)] created a ghoul, [ADMIN_LOOKUPFLW(victim)].")
 
 	victim.apply_status_effect(
 		/datum/status_effect/ghoul,
@@ -189,8 +189,8 @@
 
 /// Makes [victim] into a ghoul.
 /datum/heretic_knowledge/limited_amount/flesh_ghoul/proc/make_ghoul(mob/living/user, mob/living/carbon/human/victim)
-	user.log_message("создан безмолвный мертвец, контролируемый [key_name(victim)].", LOG_GAME)
-	message_admins("[ADMIN_LOOKUPFLW(user)] создан безмолвный мертвец, [ADMIN_LOOKUPFLW(victim)].")
+	user.log_message("created a voiceless dead, controlled by [key_name(victim)].", LOG_GAME)
+	message_admins("[ADMIN_LOOKUPFLW(user)] created a voiceless dead, [ADMIN_LOOKUPFLW(victim)].")
 
 	victim.apply_status_effect(
 		/datum/status_effect/ghoul,
@@ -211,8 +211,8 @@
 	REMOVE_TRAIT(ghoul, TRAIT_MUTE, MAGIC_TRAIT)
 
 /datum/heretic_knowledge/spell/flesh_surgery
-	name = "Плетение плоти"
-	desc = "Дарует вам заклинание «Плетение плоти». Это заклинание позволяет извлекать органы из жертв \
+	name = "Переплетение плоти"
+	desc = "Дарует вам заклинание «Переплетение плоти». Это заклинание позволяет извлекать органы из жертв \
 		без необходимости длительной операции. Этот процесс занимает гораздо больше времени, если цель жива. \
 		Это заклинание также позволяет вам исцелять ваших миньонов и призванных или восстанавливать отказавшие органы до приемлемого состояния."
 	gain_text = "Но они недолго оставались вне моей досягаемости. С каждым шагом крики усиливались, пока, наконец, \
@@ -222,10 +222,10 @@
 	drafting_tier = 5
 
 /datum/heretic_knowledge/armor/flesh
-	name = "Извивающиеся Объятия"
-	desc = "Позволяет трансмутировать стол (или костюм), маску и лужу крови, чтобы создать Извивающиеся Объятия. \
+	name = "Извивающиеся объятия"
+	desc = "Позволяет трансмутировать стол (или костюм), маску и лужу крови, чтобы создать Извивающиеся объятия. \
 		Облачение дарует вам возможность определять состояние здоровья других живых (или не живых) существ, а также ауру, лечащую ваших призываемых существ \
-		Действует как фокусировка, пока надет капюшон.."
+		Действует как фокусировка, пока надет капюшон."
 	gain_text = "Я закутался в эти жалкие, лениво шевелящиеся твари, словно тёплое одеяло. \
 				Глазами-не-моими они будут видеть. Зубами-не-моими — сжимать. Конечностями-не-моими — ломать."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/flesh)

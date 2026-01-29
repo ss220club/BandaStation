@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/conjure/cosmic_expansion
-	name = "Космичесская экспансия"
+	name = "Космическая экспансия"
 	desc = "Создает вокруг вас область космических полей размером 5x5. \
 		Существа на расстоянии до 7 тайлов также получат Метку звезды."
 	background_icon_state = "bg_heretic"

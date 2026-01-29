@@ -44,7 +44,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 	INVOKE_ASYNC(cast_on, TYPE_PROC_REF(/atom/movable, say), message = "R'CH T'H F'SH!", forced = "fishing rod infusion invocation")
 	playsound(cast_on, /datum/action/cooldown/spell/touch/mansus_grasp::sound, 15)
-	cast_on.visible_message(span_notice("[cast_on] щёлкает [cast_on.p_their()] пальцами рядом с [held_rod], окутывая его вспышкой фиолетового пламени!"))
+	cast_on.visible_message(span_notice("[cast_on] щёлкает пальцами рядом с [held_rod], окутывая его вспышкой фиолетового пламени!"))
 
 	ADD_TRAIT(held_rod, TRAIT_ROD_MANSUS_INFUSED, REF(held_rod))
 	held_rod.difficulty_modifier -= 20
@@ -210,7 +210,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 /datum/heretic_knowledge/codex_cicatrix
 	name = "Кодекс Цикатрикс"
 	desc = "Позволяет трансмутировать книгу, любую ручку, любое тело (животного или человека) и шкуру или кожу, чтобы создать кодекс Цикатрикс. \
-		Кодекс Цикатрикс можно использовать при истощении влияний для получения дополнительных знаний, но при этом возрастает риск быть замеченным. \
+		Кодекс Цикатрикс можно использовать при извлечении влияний для получения дополнительных знаний, но при этом возрастает риск быть замеченным. \
 		Его также можно использовать для того, чтобы легче рисовать и удалять руны трансмутации, и использоваться в качестве фокусировки"
 	gain_text = "Оккультизм оставляет фрагменты знаний и силы везде и всюду. Кодекс Цикатрикс - один из таких примеров. \
 		В кожаном переплете и на старых страницах открывается путь к Мансусу."
@@ -275,13 +275,13 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		stack_trace("Somehow, no book in codex cicatrix selected atoms! [english_list(selected_atoms)]")
 	playsound(body, 'sound/items/poster/poster_ripped.ogg', 100, TRUE)
 	body.do_jitter_animation()
-	body.visible_message(span_danger("Ужасный рвущийся звук раздается, когда [ripped_thing]'s [exterior_text] вырывается наружу, обволакивая всё вокруг [le_book || "the book"], приобретая жуткий, потусторонний оттенок!"))
+	body.visible_message(span_danger("Ужасный рвущийся звук раздается, когда [ripped_thing.declent_ru(ACCUSATIVE)] [exterior_text] вырывается наружу, обволакивая всё вокруг [le_book || "the book"], приобретая жуткий, потусторонний оттенок!"))
 	return ..()
 
 /datum/heretic_knowledge/feast_of_owls
 	name = "Пир для Сов"
 	desc = "Позволяет вам пройти ритуал, который дает вам 5 очков знаний, но не дает возможности совершить вознесение. Это можно сделать только один раз и эффект нельзя отменить."
-	gain_text = "Под мягким сиянием безрассудсва скрывается Зверь, крадущийся в ночи. Я выведу его на свет и позволю ему предстать предо мной. Он насытится моими амбициями и оставит после себя знания."
+	gain_text = "Под мягким сиянием безрассудства скрывается Зверь, крадущийся в ночи. Я выведу его на свет и позволю ему предстать предо мной. Он насытится моими амбициями и оставит после себя знания."
 	is_starting_knowledge = TRUE
 	required_atoms = list()
 	research_tree_icon_path = 'icons/mob/actions/actions_animal.dmi'

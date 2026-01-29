@@ -128,7 +128,7 @@
 
 	var/turf/open/our_turf = loc
 	if(our_turf.GetTemperature() > T0C)
-		loc.balloon_alert(user, "Ритуал провален, не достаточно холодно!")
+		loc.balloon_alert(user, "Ритуал провален, недостаточно холодно!")
 		return FALSE
 
 	return ..()
@@ -305,8 +305,8 @@
 		return NONE
 
 	ascended_heretic.visible_message(
-		span_danger("Буря Пустоты окружающая [ascended_heretic] отклоняет [hitting_projectile]!"),
-		span_userdanger("Буря Пустоты защитила вас от [hitting_projectile]!"),
+		span_danger("Буря Пустоты, окружающая [ascended_heretic.declent_ru(GENITIVE)] отклоняет [hitting_projectile.declent_ru(ACCUSATIVE)]!"),
+		span_userdanger("Буря Пустоты защитила вас от [hitting_projectile.declent_ru(ACCUSATIVE)]!"),
 	)
 	playsound(ascended_heretic, SFX_VOID_DEFLECT, 75, TRUE)
 	hitting_projectile.firer = ascended_heretic

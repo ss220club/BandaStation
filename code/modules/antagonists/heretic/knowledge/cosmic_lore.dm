@@ -314,13 +314,13 @@
 
 	var/mob/living/to_reset = bad_dog.resolve()
 
-	to_chat(owner, span_hierophant("Вы предлагаете [to_reset] изменить\ его личность..."))
+	to_chat(owner, span_hierophant("Вы предлагаете изменить личность [to_reset]..."))
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Хотите ли вы играть за [span_danger("[owner.real_name]")] [span_notice(to_reset.name)]?", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, alert_pic = to_reset, jump_target = owner, role_name_text = to_reset.name, amount_to_pick = 1)
 	if(isnull(chosen_one))
-		to_chat(owner, span_hierophant("Ваш запрос о смене [to_reset]'\s личноси судя по всему был отклонён... Похоже пока придётся мириться с этим."))
+		to_chat(owner, span_hierophant("Ваш запрос о смене личности [to_reset], судя по всему, был отклонён... Похоже пока придётся мириться с этим."))
 		StartCooldown()
 		return FALSE
-	to_chat(to_reset, span_hierophant("Ваш призыватель перезагрузил вас, и вашим телом завладел призрак.  Похоже, он был не очень доволен вышими действиями."))
+	to_chat(to_reset, span_hierophant("Ваш призыватель перезагрузил вас, и вашим телом завладел призрак. Похоже, он был не очень доволен вышими действиями."))
 	to_chat(owner, span_hierophant("Разум [to_reset] изменился, чтобы лучше подходить вам."))
 	message_admins("[key_name_admin(chosen_one)] взял контроль над ([ADMIN_LOOKUPFLW(to_reset)])")
 	to_reset.ghostize(FALSE)

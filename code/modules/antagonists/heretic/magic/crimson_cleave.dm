@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/pointed/crimson_cleave
 	name = "Багровый разрез"
-	desc = "Направленное заклинание, исцеляющее вас, нанося урон врагу. \
-		Это также избавит вас от всех ран."
+	desc = "Направленное заклинание, которое исцеляет вас, нанося урон врагу. \
+		Оно также избавит вас от всех ран."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'

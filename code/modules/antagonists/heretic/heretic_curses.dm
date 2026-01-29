@@ -153,7 +153,7 @@
 		to_chat(chosen_mob, span_notice("На мгновение вы чувствуете легкую боль, но она вскоре проходит. Странно."))
 		return
 
-	to_chat(chosen_mob, span_danger("Вы внезапно теряете чувствительность в ноге[chosen_mob.usable_legs == 1 ? "":"s"]!"))
+	to_chat(chosen_mob, span_danger("Вы внезапно теряете чувствительность в [chosen_mob.usable_legs == 1 ? "ноге":"ногах"]!"))
 	chosen_mob.add_traits(list(TRAIT_PARALYSIS_L_LEG, TRAIT_PARALYSIS_R_LEG), type)
 	return ..()
 

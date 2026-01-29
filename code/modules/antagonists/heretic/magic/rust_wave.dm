@@ -1,7 +1,7 @@
 // Shoots out in a wave-like, what rust heretics themselves get
 /datum/action/cooldown/spell/cone/staggered/entropic_plume
 	name = "Шлейф энтропии"
-	desc = "Извергает дезориентирующую струю, которая заставляет врагов ударять друг друга, \
+	desc = "Извергает дезориентирующую струю, которая заставляет врагов бить друг друга, \
 		ненадолго ослепляет их (увеличивается с дальностью) и отравляет (уменьшается с дальностью). \
 		Также распространяет ржавчину на пути струи."
 	background_icon_state = "bg_heretic"

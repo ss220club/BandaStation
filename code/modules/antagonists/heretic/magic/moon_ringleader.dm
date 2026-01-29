@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/aoe/moon_ringleader
 	name = "Восшествие Артистов"
 	desc = "Заклинание по области, призывающее ваши копии. \
-			Если к ваши копии атакуют, они нанесут урон рассудку, и ненадолго оглушат всех, кто находистя поблизости."
+			Если ваши копии будут атакованы, они нанесут урон рассудку, и ненадолго оглушат всех, кто находится поблизости."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
