@@ -276,7 +276,7 @@
 	name = "TSF - Marine Heavy Sniper"
 	id_trim = /datum/id_trim/tsf/marine/sniper/heavy
 	suit_store = /obj/item/gun/ballistic/rifle/sniper_rifle/t26
-		backpack_contents = list(
+	backpack_contents = list(
 		/obj/item/storage/box/survival/tsf,
 		/obj/item/storage/medkit/regular,
 		/obj/item/clothing/head/beret/tsf_marine,
