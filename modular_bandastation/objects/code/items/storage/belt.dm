@@ -40,7 +40,6 @@
 	new /obj/item/ammo_box/c12ga/milspec(src)
 	new /obj/item/ammo_box/c12ga/slug(src)
 	new /obj/item/ammo_box/c12ga/breacher(src)
-	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/tsf/full_marsok_breacher/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/skild/army(src)
@@ -70,7 +69,7 @@
 	new /obj/item/ammo_box/magazine/c585sol/extended/rubber(src)
 
 /obj/item/storage/belt/military/army/tsf/full_smg_sindano/PopulateContents()
-	new /obj/item/gun/ballistic/revolver/eland(src)
+	new /obj/item/gun/ballistic/revolver/eland/army(src)
 	new /obj/item/ammo_box/speedloader/c38/true(src)
 	new /obj/item/ammo_box/speedloader/c38/dumdum(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
@@ -180,7 +179,7 @@
 /obj/item/storage/belt/military/army/tsf/full_sniper_heavy/PopulateContents()
 	new /obj/item/gun/ballistic/revolver/eland/army(src)
 	new /obj/item/ammo_box/speedloader/c38/true(src)
-	new /obj/item/ammo_box/c38/ap(src)
+	new /obj/item/ammo_box/speedloader/c38/ap(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds/incendiary(src)
@@ -190,7 +189,6 @@
 	new /obj/item/gun/ballistic/automatic/pistol/skild/army(src)
 	new /obj/item/ammo_box/magazine/c585sol(src)
 	new /obj/item/ammo_box/magazine/c585sol(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/box(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/box(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/box(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/box/ap(src)

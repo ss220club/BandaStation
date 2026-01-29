@@ -207,7 +207,7 @@
 	id_trim = /datum/id_trim/tsf/marine/engineer
 	suit = /obj/item/clothing/suit/armor/vest/marine/engineer
 	suit_store = /obj/item/gun/ballistic/shotgun/riot/renoster/super
-	back = /obj/item/deployable_turret_folded
+	back = /obj/item/mounted_machine_gun_folded
 	backpack_contents = null
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 	head = /obj/item/clothing/head/helmet/marine/engineer
@@ -223,7 +223,7 @@
 	name = "TSF - Marine Grenadier (GL)"
 	id_trim = /datum/id_trim/tsf/marine/grenadier
 	suit = /obj/item/clothing/suit/armor/vest/marine/engineer
-	suit_store = /obj/item/gun/ballistic/automatic/kiboko
+	suit_store = /obj/item/gun/ballistic/automatic/kiboko/drum_gl
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
 		/obj/item/storage/box/survival/tsf,
@@ -267,7 +267,7 @@
 /datum/id_trim/tsf/marine/sniper
 	assignment = "TSF - Marine Marksman"
 
-/datum/outfit/tsf/marine/sniper
+/datum/outfit/tsf/marine/sniper/hydra
 	name = "TSF - Marine Marksman (Hydra)"
 	suit_store = /obj/item/gun/ballistic/automatic/hydra/dmr/tsf
 	belt = /obj/item/storage/belt/military/army/tsf/full_sniper_hydra
@@ -276,6 +276,13 @@
 	name = "TSF - Marine Heavy Sniper"
 	id_trim = /datum/id_trim/tsf/marine/sniper/heavy
 	suit_store = /obj/item/gun/ballistic/rifle/sniper_rifle/t26
+		backpack_contents = list(
+		/obj/item/storage/box/survival/tsf,
+		/obj/item/storage/medkit/regular,
+		/obj/item/clothing/head/beret/tsf_marine,
+		/obj/item/ammo_box/c38/ap,
+		/obj/item/ammo_box/c50,
+	)
 	belt = /obj/item/storage/belt/military/army/tsf/full_sniper_heavy
 
 /datum/id_trim/tsf/marine/sniper/heavy

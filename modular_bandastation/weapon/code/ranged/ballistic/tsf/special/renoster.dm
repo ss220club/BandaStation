@@ -99,6 +99,8 @@
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/sawoff
 	sawn_off = TRUE
+	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/black/sawoff
 	sawn_off = TRUE
+	w_class = WEIGHT_CLASS_NORMAL

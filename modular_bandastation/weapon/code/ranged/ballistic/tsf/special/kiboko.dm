@@ -75,6 +75,9 @@
 /obj/item/gun/ballistic/automatic/kiboko/black/no_mag
 	spawnwithmagazine = FALSE
 
+/obj/item/gun/ballistic/automatic/kiboko/drum_gl
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c980_grenade/drum/shrapnel
+
 /datum/atom_skin/kiboko
 	abstract_type = /datum/atom_skin/kiboko
 	change_inhand_icon_state = TRUE
