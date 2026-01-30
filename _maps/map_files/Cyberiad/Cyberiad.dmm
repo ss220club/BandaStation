@@ -52,8 +52,8 @@
 /obj/machinery/holopad{
 	pixel_x = 16
 	},
-/obj/machinery/duct,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/duct,
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/aft)
 "abe" = (
@@ -8255,7 +8255,6 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/main)
 "caq" = (
-/obj/machinery/duct,
 /obj/effect/landmark/event_spawn,
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/aft)
@@ -8885,6 +8884,7 @@
 /obj/effect/spawner/surgery_tray/full,
 /obj/structure/table/glass,
 /obj/machinery/light/directional/south,
+/obj/machinery/digital_clock/directional/south,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
 "ciq" = (
@@ -15654,7 +15654,6 @@
 /turf/closed/wall,
 /area/station/maintenance/solars/starboard/fore)
 "dKS" = (
-/obj/machinery/duct,
 /obj/machinery/holopad{
 	pixel_x = 16
 	},
@@ -17185,7 +17184,6 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine)
 "efv" = (
-/obj/machinery/duct,
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 8
 	},
@@ -18248,7 +18246,7 @@
 	},
 /obj/structure/sink/directional/west{
 	pixel_x = 15;
-	pixel_y = -3
+	pixel_y = -5
 	},
 /obj/machinery/light/small/directional/east{
 	pixel_y = 13
@@ -18652,8 +18650,8 @@
 /turf/open/floor/iron/dark,
 /area/station/science/ordnance)
 "eBv" = (
-/obj/machinery/duct,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/duct,
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/fore)
 "eBA" = (
@@ -19106,7 +19104,9 @@
 /obj/structure/closet/secure_closet/medical2,
 /obj/structure/extinguisher_cabinet/directional/west,
 /obj/machinery/camera/directional/north{
-	pixel_x = 23
+	pixel_x = 23;
+	network = list("ss13","medbay");
+	c_tag = "Medbay - Fore Operating Room"
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
@@ -26405,7 +26405,6 @@
 	dir = 10
 	},
 /obj/structure/closet/secure_closet/medical3,
-/obj/machinery/status_display/evac/directional/west,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
 "gvx" = (
@@ -29537,6 +29536,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/structure/table/glass,
 /obj/item/defibrillator/loaded,
+/obj/machinery/status_display/evac/directional/south,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
 "hiq" = (
@@ -39189,7 +39189,7 @@
 	},
 /obj/structure/table/glass,
 /obj/item/defibrillator/loaded,
-/obj/machinery/digital_clock/directional/south,
+/obj/machinery/status_display/evac/directional/south,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
 "jCw" = (
@@ -42662,7 +42662,6 @@
 /turf/open/floor/iron/cafeteria,
 /area/station/maintenance/ghetto/fore/starboard)
 "ktT" = (
-/obj/machinery/power/apc/auto_name/directional/west,
 /obj/structure/cable,
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 8
@@ -42670,6 +42669,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 4
 	},
+/obj/machinery/vitals_reader/directional/west,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)
 "ktW" = (
@@ -49065,7 +49065,7 @@
 	},
 /obj/structure/sink/directional/east{
 	pixel_x = -15;
-	pixel_y = -3
+	pixel_y = -5
 	},
 /obj/machinery/light/small/directional/west{
 	pixel_y = 13
@@ -51901,6 +51901,17 @@
 /obj/structure/cable,
 /turf/open/floor/carpet,
 /area/station/command/heads_quarters/captain/private)
+"mFE" = (
+/obj/effect/turf_decal/trimline/blue/filled/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/blue/filled/line{
+	dir = 8
+	},
+/obj/machinery/power/apc/auto_name/directional/west,
+/obj/structure/cable,
+/turf/open/floor/iron/white,
+/area/station/medical/surgery/fore)
 "mFF" = (
 /obj/structure/closet/cardboard,
 /turf/open/floor/plating,
@@ -71864,7 +71875,9 @@
 /obj/structure/closet/secure_closet/medical2,
 /obj/structure/extinguisher_cabinet/directional/east,
 /obj/machinery/camera/directional/north{
-	pixel_x = -3
+	pixel_x = -3;
+	network = list("ss13","medbay");
+	c_tag = "Medbay - Aft Operating Room"
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
@@ -71947,6 +71960,13 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/science/genetics)
+"rCb" = (
+/obj/effect/turf_decal/trimline/blue/filled/line{
+	dir = 4
+	},
+/obj/machinery/duct,
+/turf/open/floor/iron/dark,
+/area/station/medical/surgery/fore)
 "rCe" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/wood,
@@ -74008,6 +74028,13 @@
 /obj/structure/closet/bombcloset/security,
 /turf/open/floor/iron,
 /area/station/science/ordnance/office)
+"scg" = (
+/obj/effect/turf_decal/trimline/blue/filled/line{
+	dir = 8
+	},
+/obj/machinery/duct,
+/turf/open/floor/iron/dark,
+/area/station/medical/surgery/aft)
 "sci" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
@@ -76511,7 +76538,6 @@
 	dir = 1
 	},
 /obj/structure/closet/secure_closet/medical3,
-/obj/machinery/status_display/evac/directional/east,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
 "sHm" = (
@@ -87860,7 +87886,6 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 4
 	},
-/obj/machinery/duct,
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/aft)
 "vzo" = (
@@ -92424,7 +92449,6 @@
 /turf/open/floor/iron,
 /area/station/security/brig/entrance)
 "wGi" = (
-/obj/machinery/power/apc/auto_name/directional/east,
 /obj/structure/cable,
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 4
@@ -92432,6 +92456,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 8
 	},
+/obj/machinery/vitals_reader/directional/east,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
 "wGj" = (
@@ -92965,6 +92990,17 @@
 	},
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/ghetto/central)
+"wOC" = (
+/obj/effect/turf_decal/trimline/blue/filled/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/blue/filled/line{
+	dir = 8
+	},
+/obj/machinery/power/apc/auto_name/directional/east,
+/obj/structure/cable,
+/turf/open/floor/iron/white,
+/area/station/medical/surgery/aft)
 "wOD" = (
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted,
 /turf/open/floor/iron/dark,
@@ -199799,10 +199835,10 @@ mia
 cJm
 eHg
 ktT
-hiB
+mFE
 iKu
-hiB
 xvV
+hiB
 gve
 dRA
 pTY
@@ -200828,7 +200864,7 @@ kpu
 wsp
 gXC
 wBk
-wBk
+rCb
 wBk
 oUL
 mYz
@@ -201856,7 +201892,7 @@ vzM
 tgj
 oMe
 wvR
-wvR
+scg
 wvR
 oox
 cAD
@@ -202883,10 +202919,10 @@ iPv
 kLF
 rBm
 wGi
-iXZ
+wOC
 oja
-iXZ
 iEA
+iXZ
 sHj
 nKm
 sPX
