@@ -16,7 +16,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	in_use = FALSE
 	return ..()
 
-/mob/living/carbon/human/dummy/Life(seconds_per_tick = SSMOBS_DT, times_fired)
+/mob/living/carbon/human/dummy/Life(seconds_per_tick = SSMOBS_DT)
 	return
 
 /mob/living/carbon/human/dummy/attach_rot(mapload)
@@ -33,19 +33,19 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 		var/obj/item/organ/current_organ = get_organ_slot(slot) //Time to cache it lads
 		if(current_organ)
 			current_organ.Remove(src, special = TRUE) //Please don't somehow kill our dummy
-			SSwardrobe.stash_object(current_organ)
+			SSwardrobe.recycle_object(current_organ)
 
 	var/datum/species/current_species = dna.species
 	for(var/organ_path in current_species.mutant_organs)
 		var/obj/item/organ/current_organ = get_organ_by_type(organ_path)
 		if(current_organ)
 			current_organ.Remove(src, special = TRUE) //Please don't somehow kill our dummy
-			SSwardrobe.stash_object(current_organ)
+			SSwardrobe.recycle_object(current_organ)
 
 //Instead of just deleting our equipment, we save what we can and reinsert it into SSwardrobe's store
 //Hopefully this makes preference reloading not the worst thing ever
 /mob/living/carbon/human/dummy/delete_equipment()
-	var/list/items_to_check = get_equipped_items(INCLUDE_POCKETS | INCLUDE_HELD)
+	var/list/items_to_check = get_equipped_items(INCLUDE_POCKETS|INCLUDE_HELD|INCLUDE_PROSTHETICS|INCLUDE_ABSTRACT)
 	var/list/to_nuke = list() //List of items queued for deletion, can't qdel them before iterating their contents in case they hold something
 	///Travel to the bottom of the contents chain, expanding it out
 	for(var/i = 1; i <= length(items_to_check); i++) //Needs to be a c style loop since it can expand
@@ -66,7 +66,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 		if(ismob(checking.loc))
 			var/mob/checkings_owner = checking.loc
 			checkings_owner.temporarilyRemoveItemFromInventory(checking, TRUE) //Clear out of there yeah?
-		SSwardrobe.stash_object(checking)
+		SSwardrobe.recycle_object(checking)
 
 	for(var/obj/item/delete as anything in to_nuke)
 		qdel(delete)
@@ -81,7 +81,9 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	return TRUE
 
 /mob/living/carbon/human/dummy/proc/wipe_state()
+	dna.species.create_fresh_body(src) // BANDASTATION ADDITION - Add body modifications
 	delete_equipment()
+	update_lips(null, null, null, update = FALSE)
 	cut_overlays(TRUE)
 
 /mob/living/carbon/human/dummy/setup_human_dna()
@@ -112,49 +114,8 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 /proc/create_consistent_human_dna(mob/living/carbon/human/target)
 	target.dna.features[FEATURE_MUTANT_COLOR] = COLOR_VIBRANT_LIME
 	target.dna.features[FEATURE_ETHEREAL_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_LIZARD_MARKINGS] = get_consistent_feature_entry(SSaccessories.lizard_markings_list)
-	target.dna.features[FEATURE_EARS] = get_consistent_feature_entry(SSaccessories.ears_list)
-	target.dna.features[FEATURE_FRILLS] = get_consistent_feature_entry(SSaccessories.frills_list)
-	target.dna.features[FEATURE_HORNS] = get_consistent_feature_entry(SSaccessories.horns_list)
-	target.dna.features[FEATURE_MOTH_ANTENNAE] = get_consistent_feature_entry(SSaccessories.moth_antennae_list)
-	target.dna.features[FEATURE_MOTH_MARKINGS] = get_consistent_feature_entry(SSaccessories.moth_markings_list)
-	target.dna.features[FEATURE_MOTH_WINGS] = get_consistent_feature_entry(SSaccessories.moth_wings_list)
-	target.dna.features[FEATURE_SNOUT] = get_consistent_feature_entry(SSaccessories.snouts_list)
-	target.dna.features[FEATURE_SPINES] = get_consistent_feature_entry(SSaccessories.spines_list)
-	target.dna.features[FEATURE_TAIL] = get_consistent_feature_entry(SSaccessories.tails_list_felinid) // it's a lie
-	target.dna.features[FEATURE_TAIL_LIZARD] = get_consistent_feature_entry(SSaccessories.tails_list_lizard)
-	target.dna.features[FEATURE_TAIL_MONKEY] = get_consistent_feature_entry(SSaccessories.tails_list_monkey)
-	target.dna.features[FEATURE_TAIL_FISH] = get_consistent_feature_entry(SSaccessories.tails_list_fish)
-	target.dna.features[FEATURE_POD_HAIR] = get_consistent_feature_entry(SSaccessories.pod_hair_list)
-	target.dna.features[FEATURE_MUSH_CAP] = get_consistent_feature_entry(SSaccessories.caps_list)
-
-	// BANDA STATION EDIT START
-	// vulpkanin
-	target.dna.features[FEATURE_VULPKANIN_CHEST_MARKINGS] = get_consistent_feature_entry(SSaccessories.vulpkanin_chest_markings_list)
-	target.dna.features[FEATURE_VULPKANIN_HEAD_MARKINGS] = get_consistent_feature_entry(SSaccessories.vulpkanin_head_markings_list)
-	target.dna.features[FEATURE_VULPKANIN_TAIL] = get_consistent_feature_entry(SSaccessories.tails_list_vulpkanin)
-	target.dna.features[FEATURE_VULPKANIN_TAIL_MARKINGS] = get_consistent_feature_entry(SSaccessories.vulpkanin_tail_markings_list)
-	target.dna.features[FEATURE_VULPKANIN_FACIAL_HAIR] = get_consistent_feature_entry(SSaccessories.vulpkanin_facial_hair_list)
-	target.dna.features[FEATURE_VULPKANIN_BODY_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_VULPKANIN_TAIL_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_VULPKANIN_HEAD_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_VULPKANIN_FACIAL_HAIR_COLOR] = COLOR_WHITE
-
-	// tajaran
-	target.dna.features[FEATURE_TAJARAN_CHEST_MARKINGS] = get_consistent_feature_entry(SSaccessories.tajaran_chest_markings_list)
-	target.dna.features[FEATURE_TAJARAN_HEAD_MARKINGS] = get_consistent_feature_entry(SSaccessories.tajaran_head_markings_list)
-	target.dna.features[FEATURE_TAJARAN_TAIL] = get_consistent_feature_entry(SSaccessories.tails_list_tajaran)
-	target.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS] = get_consistent_feature_entry(SSaccessories.tajaran_tail_markings_list)
-	target.dna.features[FEATURE_TAJARAN_FACIAL_HAIR] = get_consistent_feature_entry(SSaccessories.tajaran_facial_hair_list)
-	target.dna.features[FEATURE_TAJARAN_BODY_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_TAJARAN_HEAD_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_TAJARAN_TAIL_MARKINGS_COLOR] = COLOR_WHITE
-	target.dna.features[FEATURE_TAJARAN_FACIAL_HAIR_COLOR] = COLOR_WHITE
-
-	// skrell
-	target.dna.features[FEATURE_SKRELL_HEAD_TENTACLE] = get_consistent_feature_entry(SSaccessories.skrell_head_tentacles_list)
-	// BANDA STATION EDIT STOP
-
+	for(var/feature_key in SSaccessories.feature_list)
+		target.dna.features[feature_key] = get_consistent_feature_entry(SSaccessories.feature_list[feature_key])
 	target.dna.initialize_dna(newblood_type = get_blood_type(BLOOD_TYPE_O_MINUS), create_mutation_blocks = FALSE, randomize_features = FALSE)
 
 	// UF and UI are nondeterministic, even though the features are the same some blocks will randomize slightly
@@ -184,6 +145,21 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 
 /mob/living/carbon/human/consistent/domutcheck()
 	return // We skipped adding any mutations so this runtimes
+
+/mob/living/carbon/human/consistent/slow
+
+#ifdef UNIT_TESTS
+//unit test dummies should be very fast with actions
+/mob/living/carbon/human/dummy/consistent/initialize_actionspeed()
+	add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/base, multiplicative_slowdown = -1)
+
+/mob/living/carbon/human/consistent/initialize_actionspeed()
+	add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/base, multiplicative_slowdown = -1)
+
+//this one gives us a small window of time for checks on asynced actions.
+/mob/living/carbon/human/consistent/slow/initialize_actionspeed()
+	add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/base, multiplicative_slowdown = 0.1)
+#endif
 
 //Inefficient pooling/caching way.
 GLOBAL_LIST_EMPTY(human_dummy_list)

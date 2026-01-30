@@ -7,8 +7,8 @@
 	name = "Pheromone Receptors"
 	desc = "Мы настраиваем свои органы чувств, чтобы отслеживать других генокрадов по запаху. Чем ближе они, тем легче их найти."
 	helptext = "Мы будем знать общее направление движения близлежащих генокрадов, причем более близкие запахи будут сильнее. Во время действия этой функции наша химическая выработка замедлена."
-	button_icon = 'icons/mob/actions/actions_spells.dmi'
-	button_icon_state = "nose"
+	button_icon_state = "pheromone_receptors"
+	category = "utility"
 	chemical_cost = 0 //Reduces regain rate while active.
 	dna_cost = 2
 	var/receptors_active = FALSE

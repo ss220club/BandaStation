@@ -30,6 +30,11 @@
 		"Доставляйте экипажу как можно больше страданий.",
 		"По возможности предотвращайте использование энергетического оружия.",
 	)
+	if(SSjob.assigned_captain)
+		explanation_texts += "Make the captain as miserable as possible."
+	var/datum/job/clown/clown_job = SSjob.get_job(JOB_CLOWN)
+	if(clown_job.current_positions)
+		explanation_texts += "Make the clown as miserable as possible."
 	explanation_text = pick(explanation_texts)
 	return ..()
 

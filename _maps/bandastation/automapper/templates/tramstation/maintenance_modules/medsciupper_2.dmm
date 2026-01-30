@@ -233,6 +233,9 @@
 "Do" = (
 /turf/closed/wall/r_wall,
 /area/station/maintenance/department/science)
+"DI" = (
+/turf/closed/wall,
+/area/station/asteroid)
 "DM" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/chair/plastic{
@@ -1300,7 +1303,7 @@ nm
 cn
 vr
 Vh
-tD
+DI
 tD
 tD
 Mf

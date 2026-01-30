@@ -1,26 +1,59 @@
-
-/datum/heretic_knowledge_tree_column/main/blade
-	neighbour_type_left = /datum/heretic_knowledge_tree_column/void_to_blade
-	neighbour_type_right = /datum/heretic_knowledge_tree_column/blade_to_rust
-
+/datum/heretic_knowledge_tree_column/blade
 	route = PATH_BLADE
 	ui_bgr = "node_blade"
+	complexity = "Hard"
+	complexity_color = COLOR_RED
+	icon = list(
+		"icon" = 'icons/obj/weapons/khopesh.dmi',
+		"state" = "dark_blade",
+		"frame" = 1,
+		"dir" = SOUTH,
+		"moving" = FALSE,
+	)
+	description = list(
+		"Путь Клинка, как следует из названия.",
+		"Вы очень компетентны в разрезании своих противников на кусочки.",
+		"Выбирайте этот путь, если хотите сражаться и быть лучшим в этом деле.",
+	)
+	pros = list(
+		"Способен блокировать атаки противника и наносить ответные удары.",
+		"Быстро наносит урон с помощью пары клинков и направленных ударов.",
+		"Высокая устойчивость к оглушению и сбиванию с ног.",
+		"Особо смертоносный боец в прямом бою с одиночным противником.",
+	)
+	cons = list(
+		"Требует высокого уровня мастерства.",
+		"Без клинков путь теряет большую часть своей боевой мощи.",
+		"Недостаточно возможностей для передвижения.",
+		"Отсутствие защиты от воздействия окружающей среды.",
+	)
+	tips = list(
+		"Ваш «Хватка Мансуса» оглушит противника, если он будет атакован сзади или в положении лежа. Это также заблокирует его в комнате, в которой он находится, до тех пор, пока метка не будет взорвана. Активация метки даст вам вращающийся вокруг вас нож, который защитит вас от одной рукопашной или дальней атаки.",
+		"У вас самый высокий лимит лезвий из всех путей (всего 4). Но поскольку для их изготовления требуется серебро или титан, у вас может возникнуть нехватка ингредиентов, если шахтёры не выполняют свою работу. Если вам нужны материалы - стены и сиденья шаттлов являются источником титана, а операционные столы - источником серебра.",
+		"Вы в значительной степени полагаетесь на ближний бой с противниками. Скользкий пол, метательные болы и медвежьи капканы — ваши злейшие враги. Вы можете противодействовать подскальзыванию, сделав «Поножи Пророка», или снять оковы с помощью «Пепельного прохода».",
+		"«Выпрямление» снимет с вас оглушение и сбитие с ног, но не позволит вести себя агрессивно на время действия.",
+		"С усиленными клинками ваша атакующая сила значительно возрастает. Вы сможете сражаться с клинками в обеих руках и усиливать их, активируя «Хватка Мансуса», держа их в руках. Ваши клинки также наносят дополнительный урон объектам, силиконам и мехам.",
+		"Поддержание хорошего нападения также создает хорошую защиту. С помощью вращающихся лезвий вы можете дополнительно блокировать атаки противника.",
+		"С помощью «Ярость Стали» вы можете не только изготовить несколько ножей для защиты, но и бросать их, щелкнув пустой рукой. Это даст вам силу в дальнем бою в случае необходимости.",
+		"Используйте «Волк Среди Овец» с осторожностью. У этой способности не только значительное время восстановления, но она также вооружает всех, кто попал под её действие, собственными клинками. Используйте её либо в качестве защиты последнего шанса, либо когда вы знаете, что у вас преимущество и вам нужно его усилить. Только не пытайтесь бежать из зоны действия арены, не уронив в критическое состояние кого-нибудь.",
+	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_blade
-	grasp = /datum/heretic_knowledge/blade_grasp
-	tier1 = /datum/heretic_knowledge/blade_dance
-	mark = /datum/heretic_knowledge/mark/blade_mark
-	ritual_of_knowledge = /datum/heretic_knowledge/knowledge_ritual/blade
-	unique_ability = /datum/heretic_knowledge/spell/realignment
-	tier2 = /datum/heretic_knowledge/spell/furious_steel
+	knowledge_tier1 = /datum/heretic_knowledge/spell/realignment
+	guaranteed_side_tier1 = /datum/heretic_knowledge/greaves_of_the_prophet
+	knowledge_tier2 = /datum/heretic_knowledge/duel_stance
+	guaranteed_side_tier2 = /datum/heretic_knowledge/essence
+	robes = /datum/heretic_knowledge/armor/blade
+	knowledge_tier3 = /datum/heretic_knowledge/spell/furious_steel
+	guaranteed_side_tier3 = /datum/heretic_knowledge/rune_carver
 	blade = /datum/heretic_knowledge/blade_upgrade/blade
-	tier3 = /datum/heretic_knowledge/spell/wolves_among_sheep
+	knowledge_tier4 = /datum/heretic_knowledge/spell/wolves_among_sheep
 	ascension = /datum/heretic_knowledge/ultimate/blade_final
 
 /datum/heretic_knowledge/limited_amount/starting/base_blade
-	name = "The Cutting Edge"
+	name = "Совершенство Остроты"
 	desc = "Открывает перед вами Путь клинков. \
-		Позволяет трансмутировать нож с одним слитком серебра или титаниума для создания Закаленного клинка. \
+		Позволяет трансмутировать нож с одним слитком серебра или титаниума для создания Закаленного Клинка. \
 		Одновременно можно иметь не более четырех."
 	gain_text = "Наши великие предки ковали мечи и практиковали спарринги накануне великих сражений."
 	required_atoms = list(
@@ -31,24 +64,11 @@
 	limit = 4 // It's the blade path, it's a given
 	research_tree_icon_path = 'icons/obj/weapons/khopesh.dmi'
 	research_tree_icon_state = "dark_blade"
+	mark_type = /datum/status_effect/eldritch/blade
+	eldritch_passive = /datum/status_effect/heretic_passive/blade
 
-/datum/heretic_knowledge/blade_grasp
-	name = "Grasp of the Blade"
-	desc = "Ваша Хватка Мансуса вызывает короткое оглушение при использовании на лежачей или стоящей спиной к вам цели."
-	gain_text = "История пехотинца рассказывается с древности. Это история крови и доблести, \
-		за которую выступают меч, сталь и серебро."
-	cost = 1
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_blade"
-
-/datum/heretic_knowledge/blade_grasp/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK, PROC_REF(on_mansus_grasp))
-
-/datum/heretic_knowledge/blade_grasp/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK)
-
-/datum/heretic_knowledge/blade_grasp/proc/on_mansus_grasp(mob/living/source, mob/living/target)
-	SIGNAL_HANDLER
+/datum/heretic_knowledge/limited_amount/starting/base_blade/on_mansus_grasp(mob/living/source, mob/living/target)
+	. = ..()
 
 	if(!check_behind(source, target))
 		return
@@ -59,109 +79,7 @@
 	target.balloon_alert(source, "удар в спину!")
 	playsound(target, 'sound/items/weapons/guillotine.ogg', 100, TRUE)
 
-/// The cooldown duration between triggers of blade dance
-#define BLADE_DANCE_COOLDOWN (20 SECONDS)
-
-/datum/heretic_knowledge/blade_dance
-	name = "Dance of the Brand"
-	desc = "Если вас атакуют, когда вы держите клинок еретика в любой руке, вы рипостом \
-		наносите удар в сторону нападающего. Этот эффект может сработать только один раз в 20 секунд."
-	gain_text = "Пехотинец был известен как грозный дуэлянт. \
-		Их генерал быстро назначил своим личным чемпионом."
-	cost = 1
-	research_tree_icon_path = 'icons/mob/actions/actions_ecult.dmi'
-	research_tree_icon_state = "shatter"
-	/// Whether the counter-attack is ready or not.
-	/// Used instead of cooldowns, so we can give feedback when it's ready again
-	var/riposte_ready = TRUE
-
-/datum/heretic_knowledge/blade_dance/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_LIVING_CHECK_BLOCK, PROC_REF(on_shield_reaction))
-
-/datum/heretic_knowledge/blade_dance/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	UnregisterSignal(user, COMSIG_LIVING_CHECK_BLOCK)
-
-/datum/heretic_knowledge/blade_dance/proc/on_shield_reaction(
-	mob/living/carbon/human/source,
-	atom/movable/hitby,
-	damage = 0,
-	attack_text = "the attack",
-	attack_type = MELEE_ATTACK,
-	armour_penetration = 0,
-	damage_type = BRUTE,
-)
-
-	SIGNAL_HANDLER
-
-	if(attack_type != MELEE_ATTACK)
-		return
-
-	if(!riposte_ready)
-		return
-
-	if(INCAPACITATED_IGNORING(source, INCAPABLE_GRAB))
-		return
-
-	var/mob/living/attacker = hitby.loc
-	if(!istype(attacker))
-		return
-
-	if(!source.Adjacent(attacker))
-		return
-
-	// Let's check their held items to see if we can do a riposte
-	var/obj/item/main_hand = source.get_active_held_item()
-	var/obj/item/off_hand = source.get_inactive_held_item()
-	// This is the item that ends up doing the "blocking" (flavor)
-	var/obj/item/striking_with
-
-	// First we'll check if the offhand is valid
-	if(!QDELETED(off_hand) && istype(off_hand, /obj/item/melee/sickly_blade))
-		striking_with = off_hand
-
-	// Then we'll check the mainhand
-	// We do mainhand second, because we want to prioritize it over the offhand
-	if(!QDELETED(main_hand) && istype(main_hand, /obj/item/melee/sickly_blade))
-		striking_with = main_hand
-
-	// No valid item in either slot? No riposte
-	if(!striking_with)
-		return
-
-	// If we made it here, deliver the strike
-	INVOKE_ASYNC(src, PROC_REF(counter_attack), source, attacker, striking_with, attack_text)
-
-	// And reset after a bit
-	riposte_ready = FALSE
-	addtimer(CALLBACK(src, PROC_REF(reset_riposte), source), BLADE_DANCE_COOLDOWN)
-
-/datum/heretic_knowledge/blade_dance/proc/counter_attack(mob/living/carbon/human/source, mob/living/target, obj/item/melee/sickly_blade/weapon, attack_text)
-	playsound(get_turf(source), 'sound/items/weapons/parry.ogg', 100, TRUE)
-	source.balloon_alert(source, "рипост использован")
-	source.visible_message(
-		span_warning("[capitalize(source.declent_ru(NOMINATIVE))] наклоняется к [attack_text] и наносит внезапный рипост [target.declent_ru(DATIVE)]!"),
-		span_warning("Вы наклоняетесь к [attack_text] и наносите внезапный рипост [target.declent_ru(DATIVE)]!"),
-		span_hear("Вы слышите лязг, за которым следует удар."),
-	)
-	weapon.melee_attack_chain(source, target)
-
-/datum/heretic_knowledge/blade_dance/proc/reset_riposte(mob/living/carbon/human/source)
-	riposte_ready = TRUE
-	source.balloon_alert(source, "рипост готов")
-
-#undef BLADE_DANCE_COOLDOWN
-
-/datum/heretic_knowledge/mark/blade_mark
-	name = "Mark of the Blade"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку клинка. Во время действия метки \
-		жертва не сможет покинуть текущую комнату, пока не истечет срок ее действия или пока она не сработает. \
-		Срабатывание метки вызовет нож, который в течение короткого времени будет вращаться вокруг вас. \
-		Нож блокирует любую направленную на вас атаку, но расходуется при использовании."
-	gain_text = "Его генерал хотел закончить войну, но чемпион знал, что без смерти не может быть жизни. \
-		Он сам убьет труса и всех, кто попытается бежать."
-	mark_type = /datum/status_effect/eldritch/blade
-
-/datum/heretic_knowledge/mark/blade_mark/create_mark(mob/living/source, mob/living/target)
+/datum/heretic_knowledge/limited_amount/starting/base_blade/create_mark(mob/living/source, mob/living/target)
 	var/datum/status_effect/eldritch/blade/blade_mark = ..()
 	if(istype(blade_mark))
 		var/area/to_lock_to = get_area(target)
@@ -169,27 +87,107 @@
 		to_chat(target, span_hypnophrase("Потусторонняя сила заставляет вас оставаться в [get_area_name(to_lock_to)]!"))
 	return blade_mark
 
-/datum/heretic_knowledge/mark/blade_mark/trigger_mark(mob/living/source, mob/living/target)
+/datum/heretic_knowledge/limited_amount/starting/base_blade/trigger_mark(mob/living/source, mob/living/target)
 	. = ..()
 	if(!.)
 		return
 	source.apply_status_effect(/datum/status_effect/protective_blades, 60 SECONDS, 1, 20, 0 SECONDS)
 
-/datum/heretic_knowledge/knowledge_ritual/blade
-
-
-
 /datum/heretic_knowledge/spell/realignment
-	name = "Realignment"
-	desc = "Дает вам заклинание Realignment, которое быстро и на короткое время выправит ваше тело. \
+	name = "Выпрямление"
+	desc = "Дает вам заклинание «Выпрямление», которое быстро и на короткое время выправит ваше тело. \
 		Во время этого процесса вы будете быстро восстанавливать стамину и быстро восстанавливаться после оглушения, однако вы не сможете атаковать. \
 		Это заклинание можно применять подряд, но при этом увеличивается время его перезарядки."
 	gain_text = "В шквале смертей он обрел мир внутри себя. Несмотря на неодолимые шансы, он ступал вперед."
 	action_to_add = /datum/action/cooldown/spell/realignment
-	cost = 1
+	cost = 2
+
+/// The amount of blood flow reduced per level of severity of gained bleeding wounds for Stance of the Torn Champion.
+#define BLOOD_FLOW_PER_SEVEIRTY -1
+
+/datum/heretic_knowledge/duel_stance
+	name = "Стойка Истерзанного Чемпиона"
+	desc = "Повышает устойчивость к потере крови при ранениях и даёт иммунитет к расчленению ваших конечностей. \
+		Кроме того, при уровне здоровья ниже 50% от максимального, \
+		вы становитесь более устойчивыми к получению ранений и замедлению."
+	gain_text = "Однажды, он остался один среди тел своих бывших товарищей, залитый чужой кровью. \
+		У него не было ни соперников, ни равных, ни цели."
+	cost = 2
+	research_tree_icon_path = 'icons/effects/blood.dmi'
+	research_tree_icon_state = "suitblood"
+	research_tree_icon_dir = SOUTH
+	drafting_tier = 5
+	/// Whether we're currently in duelist stance, gaining certain buffs (low health)
+	var/in_duelist_stance = FALSE
+
+/datum/heretic_knowledge/duel_stance/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
+	ADD_TRAIT(user, TRAIT_NODISMEMBER, type)
+	RegisterSignal(user, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(user, COMSIG_CARBON_GAIN_WOUND, PROC_REF(on_wound_gain))
+	RegisterSignal(user, COMSIG_LIVING_HEALTH_UPDATE, PROC_REF(on_health_update))
+
+	on_health_update(user) // Run this once, so if the knowledge is learned while hurt it activates properly
+
+/datum/heretic_knowledge/duel_stance/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
+	REMOVE_TRAIT(user, TRAIT_NODISMEMBER, type)
+	if(in_duelist_stance)
+		user.remove_traits(list(TRAIT_HARDLY_WOUNDED), type)
+		if(isliving(user))
+			var/mob/living/living_mob = user
+			living_mob.remove_movespeed_mod_immunities(type, /datum/movespeed_modifier/damage_slowdown, TRUE)
+
+	UnregisterSignal(user, list(COMSIG_ATOM_EXAMINE, COMSIG_CARBON_GAIN_WOUND, COMSIG_LIVING_HEALTH_UPDATE))
+
+/datum/heretic_knowledge/duel_stance/proc/on_examine(mob/living/source, mob/user, list/examine_list)
+	SIGNAL_HANDLER
+
+	var/obj/item/held_item = source.get_active_held_item()
+	if(in_duelist_stance)
+		examine_list += span_warning("[source] looks unnaturally poised[held_item?.force >= 15 ? " and ready to strike out":""].")
+
+/datum/heretic_knowledge/duel_stance/proc/on_wound_gain(mob/living/source, datum/wound/gained_wound, obj/item/bodypart/limb)
+	SIGNAL_HANDLER
+
+	if(gained_wound.blood_flow <= 0)
+		return
+
+	gained_wound.adjust_blood_flow(gained_wound.severity * BLOOD_FLOW_PER_SEVEIRTY)
+
+/datum/heretic_knowledge/duel_stance/proc/on_health_update(mob/living/source)
+	SIGNAL_HANDLER
+
+	if(in_duelist_stance && source.health > source.maxHealth * 0.5)
+		source.balloon_alert(source, "exited duelist stance")
+		in_duelist_stance = FALSE
+		source.remove_traits(list(TRAIT_HARDLY_WOUNDED), type)
+		source.remove_movespeed_mod_immunities(type, /datum/movespeed_modifier/damage_slowdown, TRUE)
+		return
+
+	if(!in_duelist_stance && source.health <= source.maxHealth * 0.5)
+		source.balloon_alert(source, "entered duelist stance")
+		in_duelist_stance = TRUE
+		ADD_TRAIT(source, TRAIT_HARDLY_WOUNDED, type)
+		source.add_movespeed_mod_immunities(type, /datum/movespeed_modifier/damage_slowdown, TRUE)
+		return
+
+#undef BLOOD_FLOW_PER_SEVEIRTY
+
+/datum/heretic_knowledge/armor/blade
+	desc = "Позволяет трансмутировать стол (или костюм), маску и лист титана или серебра для создания «Разбитых Доспехов». \
+			Обеспечивает устойчивость к ударам дубинкой и изоляцию от электричества при ношении. \
+			Выступает в роли фокуса, находясь в капюшоне."
+	gain_text = "Разносящаяся эхом во все стороны какофония насилия окружает меня. \
+				Даже после того, как стальной панцирь Чемпиона был разорван, каждая его часть по-прежнему жаждет предназначения, стремясь перехватить невидимых или воображаемых нападающих."
+	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/blade)
+	research_tree_icon_state = "blade_armor"
+	required_atoms = list(
+		list(/obj/structure/table, /obj/item/clothing/suit) = 1,
+		/obj/item/clothing/mask = 1,
+		list(/obj/item/stack/sheet/mineral/silver, /obj/item/stack/sheet/mineral/titanium) = 1,
+	)
 
 /datum/heretic_knowledge/spell/wolves_among_sheep
-	name = "Wolves Among Sheep"
+	name = "Волк Среди Овец"
 	desc = "Изменяет материю реальности, создавая магическую арену, недоступную для посторонних, \
 		все участники находятся в ловушке и защищены от любых форм контроля толпы или опасностей окружающей среды; \
 		попавшим в ловушку участникам выдается Клинок, и они не могут выйти или телепортироваться, пока не нанесут критический удар. \
@@ -199,15 +197,16 @@
 		Я стал всеобщим врагом, и мне никогда не обрести покоя. \
 		Я разрушил все связи и разорвал все союзы. В этой истине \
 		теперь я знаю, как непрочно товарищество. Враги мои будут повсюду, каждый по частям."
-	cost = 1
+	cost = 2
 	action_to_add = /datum/action/cooldown/spell/wolves_among_sheep
+	is_final_knowledge = TRUE
 
 /datum/heretic_knowledge/blade_upgrade/blade
-	name = "Empowered Blades"
-	desc = "Атакуя кого-либо с Закаленным клинком в обеих руках, \
+	name = "Усиление Клинков"
+	desc = "Атакуя кого-либо с услиленными клинками в обеих руках, \
 		теперь вы будете наносить удар обоими клинками сразу, нанося две атаки в быстрой последовательности. \
 		Второй удар будет немного слабее. \
-		Ваша Хватка мансуса может слиться с клинком, а сами клинки более эффективны против структур."
+		Ваша «Хватка Мансуса» может слиться с клинком, а сами клинки более эффективны против структур."
 	gain_text = "Я нашел его рассеченным на две части, половинки сцепились в дуэли без конца; \
 		шквал клинков, но ни один из них не попал в цель, ибо Чемпион был неукротим."
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
@@ -221,11 +220,10 @@
 	. = ..()
 	RegisterSignal(user, COMSIG_TOUCH_HANDLESS_CAST, PROC_REF(on_grasp_cast))
 	RegisterSignal(user, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(on_blade_equipped))
-	RegisterSignal(user, COMSIG_HERETIC_BLADE_ATTACK, PROC_REF(do_melee_effects))
 
 /datum/heretic_knowledge/blade_upgrade/blade/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
-	UnregisterSignal(user, list(COMSIG_TOUCH_HANDLESS_CAST, COMSIG_MOB_EQUIPPED_ITEM, COMSIG_HERETIC_BLADE_ATTACK))
+	UnregisterSignal(user, list(COMSIG_TOUCH_HANDLESS_CAST, COMSIG_MOB_EQUIPPED_ITEM))
 
 ///Tries to infuse our held blade with our mansus grasp
 /datum/heretic_knowledge/blade_upgrade/blade/proc/on_grasp_cast(mob/living/carbon/cast_on)
@@ -296,30 +294,30 @@
 /datum/heretic_knowledge/blade_upgrade/blade/proc/on_blade_equipped(mob/user, obj/item/equipped, slot)
 	SIGNAL_HANDLER
 	if(istype(equipped, /obj/item/melee/sickly_blade/dark))
-		equipped.demolition_mod = 1.5
+		equipped.demolition_mod = 2.5
 
 /datum/heretic_knowledge/spell/furious_steel
-	name = "Furious Steel"
-	desc = "Дарует вам Furious Steel, заклинание с выбором цели. При его использовании вокруг вас появятся три \
+	name = "Ярость Стали"
+	desc = "Дарует вам «Ярость Стали», заклинание с выбором цели. При его использовании вокруг вас появятся три \
 		вращающихся клинка. Эти клинки защищают вас от всех атак, \
 		но при использовании расходуются. Кроме того, вы можете использовать кнопку, чтобы выстрелить лезвиями \
 		в цель, нанося урон и вызывая кровотечение."
 	gain_text = "Не раздумывая, я взял нож павшего солдата и со всей силы метнул. Моя меткость оказалась верна! \
-		Чемпион Растерзаний улыбнулся их первому вкусу агонии, и, кивнув, их клинки стали моими собственными."
+		Чемпион Растерзаний улыбнулся их первому вкусу агонии, и кивнув, их клинки стали моими собственными."
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/furious_steel
-	cost = 1
+	cost = 2
 
 /datum/heretic_knowledge/ultimate/blade_final
-	name = "Maelstrom of Silver"
+	name = "Серебряный Вихрь"
 	desc = "Ритуал вознесения Пути клинков. \
 		Принесите 3 безголовых или со сломанным черепом трупа к руне трансмутации, чтобы завершить ритуал. \
 		После завершения вы будете окружены постоянно восстанавливающимися вращающимися лезвиями. \
 		Эти клинки защищают вас от всех атак, но расходуются при использовании. \
-		Ваше заклинание Furious Steel также будет перезаряжаться быстрее. \
+		Ваше заклинание «Ярость Стали» также будет перезаряжаться быстрее. \
 		Кроме того, вы становитесь мастером боя, получая полный иммунитет к ранам и возможность снимать короткие оглушения. \
 		Ваши Закаленные клинки наносят бонусный урон и исцеляют вас при атаке на часть нанесенного урона."
 	gain_text = "Чемпион Растерзаний освобожден! Я стану воссоединенным клинком, и с моими более великими амбициями, \
-		МНЕ НЕТ РАВНЫХ! БУРЯ ИЗ СТАЛИ И СЕРЕБРА НАДВИГАЕТСЯ НА НАС! УЗРИТЕ МОЁ ВОЗНЕСЕНИЕ!"
+		МНЕ НЕТ РАВНЫХ! ВИХРЬ ИЗ СТАЛИ И СЕРЕБРА НАДВИГАЕТСЯ НА НАС! УЗРИТЕ МОЁ ВОЗНЕСЕНИЕ!"
 
 	ascension_achievement = /datum/award/achievement/misc/blade_ascension
 	announcement_text = "%SPOOKY% Мастер клинков %NAME%, ученик Чемпиона Растерзаний, вознесся! Их сталь — та, что рассечет реальность в серебряном шторме! %SPOOKY%"
@@ -337,7 +335,7 @@
 
 	ADD_TRAIT(user, TRAIT_NEVER_WOUNDED, type)
 	RegisterSignal(user, COMSIG_HERETIC_BLADE_ATTACK, PROC_REF(on_eldritch_blade))
-	user.apply_status_effect(/datum/status_effect/protective_blades/recharging, null, 8, 30, 0.25 SECONDS, /obj/effect/floating_blade, 1 MINUTES)
+	user.apply_status_effect(/datum/status_effect/protective_blades/recharging, STATUS_EFFECT_PERMANENT, 8, 30, 0.25 SECONDS, /obj/effect/floating_blade, 60 SECONDS)
 	user.add_stun_absorption(
 		source = name,
 		message = span_warning("%EFFECT_OWNER throws off the stun!"),

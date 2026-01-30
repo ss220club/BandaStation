@@ -41,7 +41,12 @@ map tramstation
 endmap
 
 map cyberiad
-	maxplayers 100
+	minplayers 50
+	votable
+endmap
+
+map kilostation
+	maxplayers 40
 	votable
 endmap
 

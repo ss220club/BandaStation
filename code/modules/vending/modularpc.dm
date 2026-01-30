@@ -8,7 +8,7 @@
 	product_ads = "Получите свои геймперские приблуды!;Лучшие видеокарты для всех ваших нужд в космо-крипте!;Самое надёжное охлаждение!;Лучшая RGB-подсветка в космосе!"
 	vend_reply = "Игра начинается!"
 	products = list(
-		/obj/item/computer_disk = 8,
+		/obj/item/disk/computer = 8,
 		/obj/item/modular_computer/laptop = 4,
 		/obj/item/modular_computer/pda = 4,
 	)
@@ -19,7 +19,6 @@
 	default_price = PAYCHECK_CREW
 	extra_price = PAYCHECK_COMMAND
 	payment_department = ACCOUNT_SCI
-	allow_custom = TRUE
 
 /obj/item/vending_refill/modularpc
 	machine_name = "Deluxe Silicate Selections"

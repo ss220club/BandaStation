@@ -455,6 +455,7 @@
 	result = /obj/item/food/donkpocket/deluxe/vegan
 	removed_foodtypes = BREAKFAST
 	category = CAT_PASTRY
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 ////////////////////////////////////////////////MUFFINS////////////////////////////////////////////////
 
@@ -555,6 +556,7 @@
 	result = /obj/item/food/fortunecookie
 	added_foodtypes = SUGAR
 	category = CAT_PASTRY
+	requirements_mats_blacklist = list(/obj/item/paper)
 
 /datum/crafting_recipe/food/poppypretzel
 	time = 1.5 SECONDS

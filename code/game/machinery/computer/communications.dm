@@ -206,6 +206,11 @@
 			if (SSsecurity_level.get_current_level_as_number() >= SEC_LEVEL_DELTA)
 				to_chat(user, span_warning("Central Command has placed a lock on the alert level due to a doomsday!"))
 				return
+			// BANDASTATION ADD Start - Sec Levels
+			if (SSsecurity_level.get_current_level_as_number() >= SEC_LEVEL_GAMMA) // GAMMA and EPSILON
+				to_chat(user, span_warning("Центральным командованием установлено военное положение. Изменение кода невозможно."))
+				return
+			// BANDASTATION ADD End - Sec Levels
 			if (SSsecurity_level.get_current_level_as_number() == new_sec_level)
 				return
 
@@ -261,7 +266,7 @@
 				if (can_buy_shuttles_or_fail_reason != FALSE)
 					to_chat(user, span_alert("[can_buy_shuttles_or_fail_reason]"))
 				return
-			var/list/shuttles = flatten_list(SSmapping.shuttle_templates)
+			var/list/shuttles = assoc_to_values(SSmapping.shuttle_templates)
 			var/datum/map_template/shuttle/shuttle = locate(params["shuttle"]) in shuttles
 			if (!istype(shuttle))
 				return
@@ -282,7 +287,7 @@
 			bank_account.adjust_money(-shuttle.credit_cost)
 
 			var/purchaser_name = (obj_flags & EMAGGED) ? scramble_message_replace_chars("AUTHENTICATION FAILURE: CVE-2018-17107", 60) : user.real_name
-			minor_announce("[purchaser_name] купил [shuttle.name] за [shuttle.credit_cost] кредитов.[shuttle.extra_desc ? " [shuttle.extra_desc]" : ""]" , "Покупка шаттла")
+			minor_announce("[purchaser_name] купил [shuttle.name] за [shuttle.credit_cost][MONEY_NAME].[shuttle.extra_desc ? " [shuttle.extra_desc]" : ""]" , "Покупка шаттла")
 
 			message_admins("[ADMIN_LOOKUPFLW(user)] purchased [shuttle.name].")
 			log_shuttle("[key_name(user)] has purchased [shuttle.name].")
@@ -292,7 +297,7 @@
 			// AIs cannot recall the shuttle
 			if (!authenticated(user) || HAS_SILICON_ACCESS(user) || syndicate)
 				return
-			SSshuttle.cancelEvac(user)
+			SSshuttle.cancel_evac(user)
 		if ("requestNukeCodes")
 			if (!authenticated_as_non_silicon_captain(user))
 				return
@@ -321,7 +326,7 @@
 			ert_request(reason, user)
 			to_chat(user, span_notice("ERT request sent."))
 			user.log_message("has requested an Emergency Response Team from CentCom with reason \"[reason]\"", LOG_SAY)
-			priority_announce("Отправлен запрос ОБР. Инициатор: [name]. Запрос принят к рассмотрению. Решение будет направлено в ближайшее время.", "[command_name()]: Служба быстрого реагирования", SSstation.announcer.get_rand_report_sound())
+			priority_announce("Отправлен запрос ОБР. Инициатор: [user]. Запрос принят к рассмотрению.", "[command_name()]: Служба быстрого реагирования", SSstation.announcer.get_rand_report_sound())
 			playsound(src, 'sound/machines/terminal/terminal_prompt.ogg', 50, FALSE)
 			COOLDOWN_START(src, important_action_cooldown, IMPORTANT_ACTION_COOLDOWN)
 		// BANDASTATION ADDITION - END
@@ -355,7 +360,7 @@
 			if(soft_filter_result)
 				if(tgui_alert(user,"Your message contains \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". \"[soft_filter_result[CHAT_FILTER_INDEX_REASON]]\", Are you sure you want to use it?", "Soft Blocked Word", list("Yes", "No")) != "Yes")
 					return
-				message_admins("[ADMIN_LOOKUPFLW(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". They may be using a disallowed term for a cross-station message. Increasing delay time to reject.\n\n Message: \"[message]\"")
+				message_admins("[ADMIN_LOOKUPFLW(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". They may be using a disallowed term for a cross-station message. Increasing delay time to reject.\n\n Message: \"[html_encode(message)]\"")
 				log_admin_private("[key_name(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". They may be using a disallowed term for a cross-station message. Increasing delay time to reject.\n\n Message: \"[message]\"")
 				GLOB.communications_controller.soft_filtering = TRUE
 
@@ -363,7 +368,7 @@
 
 			var/destination = params["destination"]
 			if (!(destination in CONFIG_GET(keyed_list/cross_server)) && destination != "all")
-				message_admins("[ADMIN_LOOKUPFLW(user)] has passed an invalid destination into comms console cross-sector message. Message: \"[message]\"")
+				message_admins("[ADMIN_LOOKUPFLW(user)] has passed an invalid destination into comms console cross-sector message. Message: \"[html_encode(message)]\"")
 				return
 
 			user.log_message("is about to send the following message to [destination]: [message]", LOG_GAME)
@@ -373,7 +378,7 @@
 					"<b color='orange'>CROSS-SECTOR MESSAGE (OUTGOING):</b> [ADMIN_LOOKUPFLW(user)] is about to send \
 					the following message to <b>[destination]</b> (will autoapprove in [GLOB.communications_controller.soft_filtering ? DisplayTimeText(EXTENDED_CROSS_SECTOR_CANCEL_TIME) : DisplayTimeText(CROSS_SECTOR_CANCEL_TIME)]): \
 					<b><a href='byond://?src=[REF(src)];reject_cross_comms_message=1'>REJECT</a></b><br> \
-					[message]" \
+					[html_encode(message)]" \
 				)
 			)
 
@@ -597,7 +602,7 @@
 
 				if (SSshuttle.emergency.mode != SHUTTLE_IDLE && SSshuttle.emergency.mode != SHUTTLE_RECALL)
 					data["shuttleCalled"] = TRUE
-					data["shuttleRecallable"] = SSshuttle.canRecall() || syndicate
+					data["shuttleRecallable"] = SSshuttle.can_recall(user) || syndicate
 
 				if (SSshuttle.emergencyCallAmount)
 					data["shuttleCalledPreviously"] = TRUE
@@ -659,6 +664,8 @@
 		"callShuttleReasonMinLength" = CALL_SHUTTLE_REASON_LENGTH,
 		"maxStatusLineLength" = MAX_STATUS_LINE_LENGTH,
 		"maxMessageLength" = MAX_MESSAGE_LEN,
+		"displayed_currency_full_name" = " [MONEY_NAME]",
+		"displayed_currency_name" = " [MONEY_SYMBOL]",
 	)
 
 /obj/machinery/computer/communications/Topic(href, href_list)

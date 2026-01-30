@@ -36,7 +36,6 @@
 	default_price = PAYCHECK_CREW * 0.7
 	extra_price = PAYCHECK_CREW
 	payment_department = ACCOUNT_SRV
-	allow_custom = TRUE
 
 	var/static/list/spiking_booze = list(
 		// Your "common" spiking booze
@@ -153,8 +152,13 @@
 	product_slogans = "~Встряхни мне немного сока Шамблера!~"
 	product_ads = "Освежает!;Жажда ДНК? Утолите свою жажду!;Выпито более триллиона душ!;Сделано с использованием настоящей ДНК!;Коллективный разум требует вашей жажды!;Пей на здоровье!;Поглотите свою жажду."
 	light_mask = "shamblers-light-mask"
+	refill_canister = /obj/item/vending_refill/cola/shamblers
 	light_color = COLOR_MOSTLY_PURE_PINK
-	allow_custom = FALSE
+
+
+/obj/item/vending_refill/cola/shamblers
+	machine_name = "Shambler's Vendor"
+	icon_state = "refill_shamblers"
 
 /obj/machinery/vending/cola/shamblers/Initialize(mapload)
 	. = ..()

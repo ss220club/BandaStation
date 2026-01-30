@@ -26,7 +26,7 @@
 	midround_type = HEAVY_MIDROUND
 	false_alarm_able = TRUE
 	ruleset_flags = RULESET_INVADER
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 0,
 		DYNAMIC_TIER_LOWMEDIUM = 0,
 		DYNAMIC_TIER_MEDIUMHIGH = 1,
@@ -271,7 +271,7 @@
 	pref_flag = ROLE_WIZARD_MIDROUND
 	jobban_flag = ROLE_WIZARD
 	ruleset_flags = RULESET_INVADER|RULESET_HIGH_IMPACT
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 0,
 		DYNAMIC_TIER_LOWMEDIUM = 0,
 		DYNAMIC_TIER_MEDIUMHIGH = 1,
@@ -294,7 +294,7 @@
 	pref_flag = ROLE_OPERATIVE_MIDROUND
 	jobban_flag = ROLE_OPERATIVE
 	ruleset_flags = RULESET_INVADER|RULESET_HIGH_IMPACT
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 0,
 		DYNAMIC_TIER_LOWMEDIUM = 1,
 		DYNAMIC_TIER_MEDIUMHIGH = 3,
@@ -378,7 +378,7 @@
 	false_alarm_able = TRUE
 	pref_flag = ROLE_BLOB
 	ruleset_flags = RULESET_INVADER
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 0,
 		DYNAMIC_TIER_LOWMEDIUM = 1,
 		DYNAMIC_TIER_MEDIUMHIGH = 3,
@@ -407,6 +407,9 @@
 /datum/dynamic_ruleset/midround/from_ghosts/blob/false_alarm()
 	priority_announce("Вспышка биологической угрозы 5-го уровня зафиксирована на борту [station_name()]. Всему персоналу надлежит сдержать её распространение любой ценой!", "Биологическая угроза", ANNOUNCER_OUTBREAK5)
 
+	// Set status displays to biohazard alert even for false alarm
+	send_status_display_biohazard_alert()
+
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph
 	name = "Alien Infestation"
 	config_tag = "Xenomorph"
@@ -415,7 +418,7 @@
 	false_alarm_able = TRUE
 	pref_flag = ROLE_ALIEN
 	ruleset_flags = RULESET_INVADER
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 0,
 		DYNAMIC_TIER_LOWMEDIUM = 1,
 		DYNAMIC_TIER_MEDIUMHIGH = 5,
@@ -432,7 +435,7 @@
 	max_antag_cap += prob(50) // 50% chance to get a second xeno, free!
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/can_be_selected()
-	return ..() && length(find_vents()) > 0
+	return ..() && length(find_vent_spawns()) > 0
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/execute()
 	. = ..()
@@ -448,30 +451,53 @@
 	return new /mob/living/carbon/alien/larva
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/create_execute_args()
-	return list(find_vents())
+	return list(find_vent_spawns())
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/assign_role(datum/mind/candidate, list/vent_list)
 	// xeno login gives antag datums
 	var/obj/vent = length(vent_list) >= 2 ? pick_n_take(vent_list) : vent_list[1]
 	candidate.current.move_into_vent(vent)
 
-/datum/dynamic_ruleset/midround/from_ghosts/xenomorph/proc/find_vents()
-	var/list/vents = list()
-	var/list/vent_pumps = SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/atmospherics/components/unary/vent_pump)
-	for(var/obj/machinery/atmospherics/components/unary/vent_pump/temp_vent as anything in vent_pumps)
-		if(QDELETED(temp_vent))
-			continue
-		if(!is_station_level(temp_vent.loc.z) || temp_vent.welded)
-			continue
-		var/datum/pipeline/temp_vent_parent = temp_vent.parents[1]
-		if(!temp_vent_parent)
-			continue
-		// Stops Aliens getting stuck in small networks.
-		// See: Security, Virology
-		if(length(temp_vent_parent.other_atmos_machines) <= 20)
-			continue
-		vents += temp_vent
-	return vents
+/datum/dynamic_ruleset/midround/from_ghosts/blood_worms
+	name = "Blood Worm Infestation"
+	config_tag = "Midround Blood Worm"
+	preview_antag_datum = /datum/antagonist/blood_worm/infestation
+	// Please set this to HEAVY_MIDROUND once dynamic has fine-grained handling for spawn times and doesn't restrict all heavy midrounds to spawning after 40 minutes.
+	// Blood worms are intended to spawn 10-30 minutes into a round. This is a band-aid fix, and the better of two evils. (wrong threat tier vs wrong round timing)
+	midround_type = LIGHT_MIDROUND
+	false_alarm_able = TRUE
+	pref_flag = ROLE_BLOOD_WORM_INFESTATION
+	candidate_role = "Blood Worm"
+	ruleset_flags = RULESET_INVADER
+	weight = 2 // For reference, Nightmare has a weight of 5.
+	min_pop = 20 // Blood worms are limited by resources, so low pop means they have a harder time getting their tail in the door.
+	min_antag_cap = 1
+	max_antag_cap = 2
+	signup_atom_appearance = /mob/living/basic/blood_worm/juvenile
+
+/datum/dynamic_ruleset/midround/from_ghosts/blood_worms/can_be_selected()
+	return ..() && length(find_vent_spawns()) > 0
+
+/datum/dynamic_ruleset/midround/from_ghosts/blood_worms/execute()
+	. = ..()
+	addtimer(CALLBACK(src, PROC_REF(announce_worms)), rand(450, 750) SECONDS)
+
+/datum/dynamic_ruleset/midround/from_ghosts/blood_worms/create_ruleset_body()
+	return new /mob/living/basic/blood_worm/hatchling
+
+/datum/dynamic_ruleset/midround/from_ghosts/blood_worms/create_execute_args()
+	return list(find_vent_spawns())
+
+/datum/dynamic_ruleset/midround/from_ghosts/blood_worms/assign_role(datum/mind/candidate, list/vent_list)
+	candidate.add_antag_datum(/datum/antagonist/blood_worm)
+	var/obj/vent = length(vent_list) >= 2 ? pick_n_take(vent_list) : vent_list[1]
+	candidate.current.move_into_vent(vent)
+
+/datum/dynamic_ruleset/midround/from_ghosts/blood_worms/proc/announce_worms()
+	priority_announce("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", ANNOUNCER_ALIENS)
+
+/datum/dynamic_ruleset/midround/from_ghosts/blood_worms/false_alarm()
+	announce_worms()
 
 /datum/dynamic_ruleset/midround/from_ghosts/nightmare
 	name = "Nightmare"
@@ -502,7 +528,7 @@
 	false_alarm_able = TRUE
 	pref_flag = ROLE_SPACE_DRAGON
 	ruleset_flags = RULESET_INVADER
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 0,
 		DYNAMIC_TIER_LOWMEDIUM = 3,
 		DYNAMIC_TIER_MEDIUMHIGH = 5,
@@ -572,7 +598,7 @@
 	midround_type = HEAVY_MIDROUND
 	pref_flag = ROLE_NINJA
 	ruleset_flags = RULESET_INVADER
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 0,
 		DYNAMIC_TIER_LOWMEDIUM = 0,
 		DYNAMIC_TIER_MEDIUMHIGH = 1,
@@ -655,7 +681,7 @@
 	candidate_role = "Changeling"
 	pref_flag = ROLE_CHANGELING_MIDROUND
 	jobban_flag = ROLE_CHANGELING
-	ruleset_flags = RULESET_INVADER
+	ruleset_flags = RULESET_INVADER|RULESET_VARIATION
 	weight = 5
 	min_pop = 15
 	max_antag_cap = 1
@@ -666,6 +692,21 @@
 
 /datum/dynamic_ruleset/midround/from_ghosts/space_changeling/assign_role(datum/mind/candidate)
 	generate_changeling_meteor(candidate)
+
+/datum/dynamic_ruleset/midround/from_ghosts/space_changeling/mass
+	name = "Mass Space Changelings"
+	config_tag = "Mass Changelings"
+	midround_type = HEAVY_MIDROUND
+	min_pop = 25
+	min_antag_cap = 2
+	max_antag_cap = 3
+	repeatable_weight_decrease = 4
+	weight = alist(
+		DYNAMIC_TIER_LOW = 0,
+		DYNAMIC_TIER_LOWMEDIUM = 3,
+		DYNAMIC_TIER_MEDIUMHIGH = 4,
+		DYNAMIC_TIER_HIGH = 5,
+	)
 
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone
 	name = "Paradox Clone"
@@ -680,6 +721,7 @@
 	signup_atom_appearance = /obj/effect/bluespace_stream
 	/// Chance of getting another clone for the price of free
 	var/bonus_clone_chance = 20
+	var/datum/weakref/original // BANDASTATION ADDITION
 
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/New(list/dynamic_config)
 	. = ..()
@@ -694,7 +736,32 @@
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/create_ruleset_body()
 	return // handled by assign_role() entirely
 
+
+// BANDASTATION ADD - START
+#define RANDOM_CLONE "Рандом"
+
+/datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/configure_ruleset(mob/admin)
+	var/list/admin_pool = list("[RULESET_CONFIG_CANCEL]" = TRUE, "[RANDOM_CLONE]" = TRUE)
+	for(var/mob/living/carbon/human/player in GLOB.player_list)
+		if(!player.client || !player.mind || !(player.mind.assigned_role.job_flags & JOB_CREW_MEMBER))
+			continue
+		admin_pool += player
+
+	var/picked = tgui_input_list(admin, "Выберите игрока для клонирования", "Выбор игрока для клонирования", admin_pool)
+	switch(picked)
+		if(RANDOM_CLONE)
+			return
+		if(RULESET_CONFIG_CANCEL, null)
+			return RULESET_CONFIG_CANCEL
+		else
+			message_admins("[key_name_admin(admin)] picked [picked] to be cloned as Paradox Clone.")
+			original = WEAKREF(picked)
+
+#undef RANDOM_CLONE
+// BANDASTATION ADD - END
+
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone/assign_role(datum/mind/candidate, mob/living/carbon/human/good_version)
+	good_version = original?.resolve() || find_clone() // BANDASTATION ADDITION
 	var/mob/living/carbon/human/bad_version = good_version.make_full_human_copy(find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE))
 	candidate.transfer_to(bad_version, force_key_move = TRUE)
 
@@ -931,33 +998,33 @@
 	var/announcement_title = ""
 	switch(hunter_backstory)
 		if(HUNTER_PACK_COPS)
-			announcement_text_list += "Attention Crew of [station_name()], this is the Police. A wanted criminal has been reported taking refuge on your station."
-			announcement_text_list += "We have a warrant from the SSC authorities to take them into custody. Officers have been dispatched to your location."
-			announcement_text_list += "We demand your cooperation in bringing this criminal to justice."
-			announcement_title += "Spacepol Command"
+			announcement_text_list += "Внимание, экипаж [station_name()], это межгалактическая полиция Космопола. Сообщается, что на вашей станции нашел убежище разыскиваемый преступник."
+			announcement_text_list += "У нас есть ордер от департамента защиты вашего сектора на проведение задержания. Офицеры направлены к вам."
+			announcement_text_list += "Мы требуем вашего сотрудничества в привлечении этого преступника к ответственности."
+			announcement_title += "Командование Космопола"
 		if(HUNTER_PACK_RUSSIAN)
-			announcement_text_list += "Zdraviya zhelaju, [station_name()] crew. We are coming to your station."
-			announcement_text_list += "There is a criminal aboard. We will arrest them and return them to the gulag. That's good, yes?"
-			announcement_title += "Russian Freighter"
+			announcement_text_list += "Zdraviya zhelaju, экипаж [station_name()]. Мы направляемся к вашей станции."
+			announcement_text_list += "На вашем борту находится преступник. Мы его арестуем и вернём в ГУЛАГ. Хорошо, да?"
+			announcement_title += "Разыскной шаттл НКВД КССП"
 		if(HUNTER_PACK_BOUNTY)
-			announcement_text_list += "[station_name()]. One of our bounty marks has ended up on your station. We will be arriving to collect shortly."
-			announcement_text_list += "Let's make this quick. If you don't want trouble, stay the hell out of our way."
-			announcement_title += "Unregistered Signal"
+			announcement_text_list += "[station_name()]. Одна из наших \"голов\" объявилась на вашей станции. Мы скоро прибудем, чтобы забрать её."
+			announcement_text_list += "Быстро всё сделаем и улетим. Не хотите проблем - катитесь к чёрту с нашей дороги."
+			announcement_title += "Незарегистрированный сигнал"
 		if(HUNTER_PACK_PSYKER)
-			announcement_text_list += "HEY, CAN YOU HEAR US? We're coming to your station. There's a bad guy down there, really bad guy. We need to arrest them."
-			announcement_text_list += "We're also offering fortune telling services out of the front door if you have paying customers."
-			announcement_title += "Fortune-Telling Entertainment Shuttle"
+			announcement_text_list += "ЭЙ, ВЫ НАС СЛЫШИТЕ? Мы уже на подлёте к вашей станции! У вас там гад, настоящий отпетый негодяй! Мы его должны арестовать!"
+			announcement_text_list += "Кстати, мы ещё и гадаем прямо у входа. Можете направлять к нам своих клиентов, если у них есть деньги."
+			announcement_title += "Шаттл гадания и развлечений"
 		if(HUNTER_PACK_MI13)
-			announcement_text_list += "Illegal intrusion detected in the crew monitoring network. Central Command has been informed."
-			announcement_text_list += "Please report any suspicious individuals or behaviour to your local security team."
-			announcement_title += "Nanotrasen Intrusion Countermeasures Electronics"
+			announcement_text_list += "Обнаружено несанкционированное проникновение в сеть мониторинга экипажа. Центральное командование уведомлено."
+			announcement_text_list += "Любые проявления подозрительной активности или подозрительных лиц следует немедленно сообщать в местную службу безопасности."
+			announcement_title += "Нанотрейзен: контрмеры электронному вторжению"
 
 	if(!length(announcement_text_list))
-		announcement_text_list += "Unidentified ship detected near the station."
+		announcement_text_list += "Обнаружен неопознанный шаттл вблизи станции."
 		stack_trace("Fugitive hunter announcement was unable to generate an announcement text based on backstory: [hunter_backstory]")
 
 	if(!length(announcement_title))
-		announcement_title += "Unknown Signal"
+		announcement_title += "Неизвестный сигнал"
 		stack_trace("Fugitive hunter announcement was unable to generate an announcement title based on backstory: [hunter_backstory]")
 
 	priority_announce(jointext(announcement_text_list, " "), announcement_title)
@@ -1061,6 +1128,7 @@
 	false_alarm_able = TRUE
 	pref_flag = ROLE_SLEEPER_AGENT
 	jobban_flag = ROLE_TRAITOR
+	ruleset_flags = RULESET_VARIATION
 	weight = 10
 	min_pop = 3
 	blacklisted_roles = list(
@@ -1076,6 +1144,22 @@
 		"[command_name()] High-Priority Update",
 	)
 
+/datum/dynamic_ruleset/midround/from_living/traitor/mass
+	name = "Mass Traitors"
+	config_tag = "Mass Traitors"
+	midround_type = HEAVY_MIDROUND
+	min_pop = 15
+	min_antag_cap = 2
+	max_antag_cap = 4
+	repeatable_weight_decrease = 8
+	blacklisted_roles = list()
+	weight = alist(
+		DYNAMIC_TIER_LOW = 0,
+		DYNAMIC_TIER_LOWMEDIUM = 3,
+		DYNAMIC_TIER_MEDIUMHIGH = 8,
+		DYNAMIC_TIER_HIGH = 10,
+	)
+
 /datum/dynamic_ruleset/midround/from_living/malf_ai
 	name = "Malfunctioning AI"
 	config_tag = "Midround Malfunctioning AI"
@@ -1084,7 +1168,7 @@
 	pref_flag = ROLE_MALF_MIDROUND
 	jobban_flag = ROLE_MALF
 	ruleset_flags = RULESET_HIGH_IMPACT
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 0,
 		DYNAMIC_TIER_LOWMEDIUM = 1,
 		DYNAMIC_TIER_MEDIUMHIGH = 3,
@@ -1112,7 +1196,7 @@
 	midround_type = HEAVY_MIDROUND
 	pref_flag = ROLE_BLOB_INFECTION
 	jobban_flag = ROLE_BLOB
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 0,
 		DYNAMIC_TIER_LOWMEDIUM = 1,
 		DYNAMIC_TIER_MEDIUMHIGH = 3,
@@ -1136,7 +1220,7 @@
 	midround_type = LIGHT_MIDROUND
 	pref_flag = ROLE_OBSESSED
 	blacklisted_roles = list()
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 5,
 		DYNAMIC_TIER_LOWMEDIUM = 5,
 		DYNAMIC_TIER_MEDIUMHIGH = 3,

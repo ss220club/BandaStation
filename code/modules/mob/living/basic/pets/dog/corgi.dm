@@ -23,6 +23,7 @@
 	var/obj/item/inventory_head = null
 	///Currently worn item on the back slot
 	var/obj/item/inventory_back = null
+	var/obj/item/inventory_mask = null	// SS220 EDIT - FASHION
 	///Is this corgi physically slow due to age, etc?
 	var/is_slow = FALSE
 	///Item slots that are available for this corgi to equip stuff into
@@ -35,7 +36,7 @@
 	update_appearance()
 	AddElement(/datum/element/strippable, length(strippable_inventory_slots) ? create_strippable_list(strippable_inventory_slots) : GLOB.strippable_corgi_items)
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_CORGI, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
-	RegisterSignal(src, COMSIG_MOB_TRIED_ACCESS, PROC_REF(on_tried_access))
+	RegisterSignal(src, COMSIG_MOB_RETRIEVE_ACCESS, PROC_REF(retrieve_access))
 	RegisterSignals(src, list(COMSIG_BASICMOB_LOOK_ALIVE, COMSIG_BASICMOB_LOOK_DEAD), PROC_REF(on_appearance_change))
 	if(can_breed)
 		add_breeding_component()
@@ -43,6 +44,7 @@
 /mob/living/basic/pet/dog/corgi/Destroy()
 	QDEL_NULL(inventory_head)
 	QDEL_NULL(inventory_back)
+	QDEL_NULL(inventory_mask)	// SS220 EDIT - FASHION
 	QDEL_NULL(access_card)
 	UnregisterSignal(src, list(COMSIG_BASICMOB_LOOK_ALIVE, COMSIG_BASICMOB_LOOK_DEAD))
 	return ..()
@@ -53,6 +55,11 @@
 	if(gone == inventory_head)
 		dropped_something = TRUE
 		inventory_head = null
+	// SS220 EDIT - START - FASHION
+	if(gone == inventory_mask)
+		dropped_something = TRUE
+		inventory_mask = null
+	// SS220 EDIT - END - FASHION
 	if(gone == inventory_back)
 		dropped_something = TRUE
 		inventory_back = null
@@ -83,6 +90,7 @@
 /mob/living/basic/pet/dog/corgi/proc/undress_dog()
 	inventory_head?.forceMove(drop_location())
 	inventory_back?.forceMove(drop_location())
+	inventory_mask?.forceMove(drop_location()) // SS220 EDIT - FASHION
 
 /mob/living/basic/pet/dog/corgi/examine(mob/user)
 	. = ..()
@@ -201,6 +209,28 @@
 
 		. += back_icon
 
+	// SS220 EDIT - START - FASHION
+	if(inventory_mask)
+		var/image/mask_icon
+		var/datum/dog_fashion/equipped_mask_fashion_item = new inventory_mask.dog_fashion(src)
+
+		if(!equipped_mask_fashion_item.obj_icon_state)
+			equipped_mask_fashion_item.obj_icon_state = inventory_mask.icon_state
+		if(!equipped_mask_fashion_item.obj_alpha)
+			equipped_mask_fashion_item.obj_alpha = inventory_mask.alpha
+		if(!equipped_mask_fashion_item.obj_color)
+			equipped_mask_fashion_item.obj_color = inventory_mask.color
+
+		if(stat == DEAD || HAS_TRAIT(src, TRAIT_FAKEDEATH))
+			mask_icon = equipped_mask_fashion_item.get_overlay(dir = EAST)
+			mask_icon.pixel_z = -14
+			mask_icon.transform = mask_icon.transform.Turn(180)
+		else
+			mask_icon = equipped_mask_fashion_item.get_overlay()
+
+		. += mask_icon
+	// SS220 EDIT - END - FASHION
+
 //Corgis are supposed to be simpler, so only a select few objects can actually be put
 //to be compatible with them. The objects are below.
 //Many  hats added, Some will probably be removed, just want to see which ones are popular.
@@ -267,10 +297,10 @@
 		var/datum/dog_fashion/equipped_back_fashion_item = new inventory_back.dog_fashion(src)
 		equipped_back_fashion_item.apply(src)
 
-///Handler for COMSIG_MOB_TRIED_ACCESS
-/mob/living/basic/pet/dog/corgi/proc/on_tried_access(mob/accessor, obj/locked_thing)
+///Handler for COMSIG_MOB_RETRIEVE_ACCESS
+/mob/living/basic/pet/dog/corgi/proc/retrieve_access(mob/accessor, list/player_access)
 	SIGNAL_HANDLER
-	return locked_thing?.check_access(access_card) ? ACCESS_ALLOWED : ACCESS_DISALLOWED
+	player_access += access_card.GetAccess()
 
 ///Handles updating any existing overlays for the corgi (such as fashion items) when it changes how it appears, as in, dead or alive.
 /mob/living/basic/pet/dog/corgi/proc/on_appearance_change()
@@ -292,7 +322,7 @@
 			possible_headwear += item
 	if(!length(possible_headwear))
 		for(var/obj/item/item in orange(1))
-			if(ispath(item.dog_fashion, /datum/dog_fashion/head) && CanReach(item))
+			if(ispath(item.dog_fashion, /datum/dog_fashion/head) && item.IsReachableBy(src))
 				possible_headwear += item
 	if(!length(possible_headwear))
 		return
@@ -517,7 +547,7 @@
 		visible_message(span_warning("[src] arises again, revived by the dark magicks!"), \
 		span_cult_large("RISE"))
 		revive(ADMIN_HEAL_ALL) //also means that a dead Nars-Ian can consume a pet and revive
-	adjustBruteLoss(-maxHealth)
+	adjust_brute_loss(-maxHealth)
 
 //LISA! SQUEEEEEEEEE~
 /mob/living/basic/pet/dog/corgi/lisa

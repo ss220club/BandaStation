@@ -1,7 +1,7 @@
 /datum/techweb_node/oldstation_surgery
 	id = TECHWEB_NODE_OLDSTATION_SURGERY
-	display_name = "Experimental Dissection"
-	description = "Grants access to experimental dissections, which allows generation of research points."
+	display_name = "Экспериментальное вскрытие"
+	description = "Предоставляет доступ к экспериментальным вскрытиям, что позволяет создавать исследовательские очки."
 	prereq_ids = list(TECHWEB_NODE_MEDBAY_EQUIP)
 	design_ids = list(
 		"surgery_oldstation_dissection",
@@ -12,40 +12,41 @@
 
 /datum/techweb_node/surgery
 	id = TECHWEB_NODE_SURGERY
-	display_name = "Improved Wound-Tending"
-	description = "Who would have known being more gentle with a hemostat decreases patient pain?"
+	display_name = "Улучшенный уход за ранами"
+	description = "Проведённые исследования демонстрируют, что использование щадящих манипуляций гемостатическим зажимом способствует значительному снижению боли у пациента."
 	prereq_ids = list(TECHWEB_NODE_MEDBAY_EQUIP)
 	design_ids = list(
-		"surgery_heal_brute_upgrade",
-		"surgery_heal_burn_upgrade",
+		"surgery_heal_upgrade",
+		"medibot_upgrade",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
 	announce_channels = list(RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/surgery_adv
 	id = TECHWEB_NODE_SURGERY_ADV
-	display_name = "Advanced Surgery"
-	description = "When simple medicine doesn't cut it."
+	display_name = "Продвинутая хирургия"
+	description = "Применение специализированных методик в случаях, когда стандартные хирургические протоколы признаны недостаточно эффективными или неприменимыми."
 	prereq_ids = list(TECHWEB_NODE_SURGERY)
 	design_ids = list(
 		"harvester",
-		"surgery_heal_brute_upgrade_femto",
-		"surgery_heal_burn_upgrade_femto",
+		"medibot_upgrade_two",
 		"surgery_heal_combo",
+		"surgery_heal_upgrade_femto",
 		"surgery_lobotomy",
 		"surgery_lobotomy_mechanic",
 		"surgery_wing_reconstruction",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_2_POINTS)
-	required_experiments = list(/datum/experiment/autopsy/human)
+	discount_experiments = list(/datum/experiment/autopsy/human = TECHWEB_TIER_2_POINTS)
 	announce_channels = list(RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/surgery_exp
 	id = TECHWEB_NODE_SURGERY_EXP
-	display_name = "Experimental Surgery"
-	description = "When evolution isn't fast enough."
+	display_name = "Экспериментальная хирургия"
+	description = "Отрасль хирургии, тестирующая радикальные и нестандартные методики оперативного вмешательства. Процедуры направлены на модификацию глубоких структур организма для достижения специфических и зачастую уникальных функциональных изменений."
 	prereq_ids = list(TECHWEB_NODE_SURGERY_ADV)
 	design_ids = list(
+		"medibot_upgrade_three",
 		"surgery_cortex_folding",
 		"surgery_cortex_folding_mechanic",
 		"surgery_cortex_imprint",
@@ -73,8 +74,8 @@
 
 /datum/techweb_node/surgery_tools
 	id = TECHWEB_NODE_SURGERY_TOOLS
-	display_name = "Advanced Surgery Tools"
-	description = "Surgical instruments of dual purpose for quick operations."
+	display_name = "Продвинутые хирургические инструменты"
+	description = "Передовые хирургические инструменты для более быстрых хирургических операций и более удобного использования."
 	prereq_ids = list(TECHWEB_NODE_SURGERY_EXP)
 	design_ids = list(
 		"laserscalpel",

@@ -19,13 +19,13 @@ import {
 } from './constants';
 import type { IconSettings } from './index';
 
-export interface SpawnPanelData {
+export type SpawnPanelData = {
   icon: string;
   iconState: string;
   iconStates: string[];
   selected_object?: string;
   precise_mode: string;
-}
+};
 
 interface CreateObjectSettingsProps {
   onCreateObject?: (obj: Record<string, unknown>) => void;
@@ -40,7 +40,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
   const [amount, setAmount] = useState(1);
   const [cordsType, setCordsType] = useState(0);
   const [spawnLocation, setSpawnLocation] = useState('Current location');
-  const [direction, setDirection] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [objectName, setObjectName] = useState('');
   const [offset, setOffset] = useState('');
 
@@ -87,7 +87,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
       if (!offsetStr.trim()) return [0, 0, 0];
 
       const parts = offsetStr.split(',').map((part) => {
-        return parseInt(part.trim());
+        return parseInt(part.trim(), 10);
       });
 
       while (parts.length < 3) {
@@ -107,7 +107,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
       if (!offsetStr.trim()) return [0, 0, 0];
 
       const parts = offsetStr.split(',').map((part) => {
-        return parseInt(part.trim());
+        return parseInt(part.trim(), 10);
       });
 
       while (parts.length < 3) {
@@ -135,7 +135,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
     const defaultAmount = 1;
     const defaultCordsType = 0;
     const defaultSpawnLocation = 'Current location';
-    const defaultDirection = 0;
+    const defaultDirection = 1; // BANDASTATION EDIT: No more facing up objects/mobs
     const defaultObjectName = '';
     const defaultOffset = '';
 
@@ -207,7 +207,7 @@ export function CreateObjectSettings(props: CreateObjectSettingsProps) {
       if (!offsetStr.trim()) return [0, 0, 0];
 
       const parts = offsetStr.split(',').map((part) => {
-        return parseInt(part.trim());
+        return parseInt(part.trim(), 10);
       });
 
       while (parts.length < 3) {

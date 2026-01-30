@@ -32,14 +32,7 @@
 			notify_flags = NOTIFY_CATEGORY_NOFLASH,
 		)
 
-/obj/effect/mob_spawn/ghost_role/human/golem/name_mob(mob/living/spawned_mob, forced_name)
-	if(forced_name || !iscarbon(spawned_mob))
-		return ..()
-
-	forced_name = generate_random_name_species_based(spawned_mob.gender, TRUE, species_type = /datum/species/golem)
-	return ..()
-
-/obj/effect/mob_spawn/ghost_role/human/golem/special(mob/living/new_spawn, mob/mob_possessor)
+/obj/effect/mob_spawn/ghost_role/human/golem/special(mob/living/new_spawn, mob/mob_possessor, apply_prefs)
 	. = ..()
 	if(is_path_in_list(initial_type, GLOB.golem_stack_food_directory))
 		var/datum/golem_food_buff/initial_buff = GLOB.golem_stack_food_directory[initial_type]
@@ -73,7 +66,7 @@
 	desc = "A humanoid shape, empty, lifeless, and full of potential."
 	prompt_name = "a free golem"
 
-/obj/effect/mob_spawn/ghost_role/human/golem/adamantine/special(mob/living/new_spawn, mob/mob_possessor)
+/obj/effect/mob_spawn/ghost_role/human/golem/adamantine/special(mob/living/new_spawn, mob/mob_possessor, apply_prefs)
 	. = ..()
 	if(!ishuman(new_spawn))
 		return
@@ -85,8 +78,10 @@
 /obj/effect/mob_spawn/ghost_role/human/golem/servant
 	name = "inert servant golem shell"
 	prompt_name = "a servant golem"
-	you_are_text = "You are a golem."
-	flavour_text = "You are highly resistant to heat and cold as well as blunt trauma. You must consume minerals to maintain motion. You are unable to wear clothes, but can still use most tools."
+	you_are_text = "Вы голем-слуга."
+	flavour_text = "Вы - искусственно созданный голем, обязанный подчиняться всем приказам вашего создателя. Будучи големом, вы крайне устойчивы к теплу, холоду и физическим повреждениям. \
+	Вам необходимо употреблять минералы для поддержания активности вашей оболочки. \
+	Вы не можете носить большую часть одежды, однако всё ещё можете использовать различные инструменты."
 	spawner_job_path = /datum/job/servant_golem
 	/// Weakref to the creator of this golem shell.
 	var/datum/weakref/owner_ref
@@ -110,8 +105,6 @@
 	to_chat(new_spawn, span_userdanger("Serve [real_owner.real_name], and assist [real_owner.p_them()] in completing [real_owner.p_their()] goals at any cost."))
 
 /obj/effect/mob_spawn/ghost_role/human/golem/servant/name_mob(mob/living/spawned_mob, forced_name)
-	if(forced_name || !iscarbon(spawned_mob))
-		return ..()
 	if(owner_ref?.resolve())
 		forced_name =  "Golem ([rand(1,999)])"
 	return ..()

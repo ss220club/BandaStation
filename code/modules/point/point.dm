@@ -101,7 +101,7 @@
  */
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"
-	set category = "Object"
+	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 
 	if(istype(A, /obj/effect/temp_visual/point))
 		return FALSE
@@ -119,7 +119,7 @@
 
 		if(ismovable(pointing_at))
 			var/atom/movable/pointed_movable = pointing_at
-			if(pointed_movable.flags_1 & IS_ONTOP_1)
+			if(HAS_TRAIT(pointed_movable, TRAIT_SKIP_BASIC_REACH_CHECK) || pointing_at.loc.IsContainedAtomAccessible(pointing_at, src))
 				pointing_at = pointed_movable.loc
 
 		if(!(pointing_at in view(client.view, src)))

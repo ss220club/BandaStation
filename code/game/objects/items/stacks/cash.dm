@@ -13,17 +13,19 @@
 	full_w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 	var/value = 0
-	grind_results = list(/datum/reagent/cellulose = 10)
 
 /obj/item/stack/spacecash/Initialize(mapload, new_amount, merge = TRUE, list/mat_override=null, mat_amt=1)
 	. = ..()
 	add_traits(list(TRAIT_FISHING_BAIT, TRAIT_BAIT_ALLOW_FISHING_DUD), INNATE_TRAIT)
 	update_desc()
 
+/obj/item/stack/spacecash/grind_results()
+	return list(/datum/reagent/cellulose = 10)
+
 /obj/item/stack/spacecash/update_desc()
 	. = ..()
 	var/total_worth = get_item_credit_value()
-	desc = "Стоит [total_worth] кр. в общей сумме."
+	desc = "Стоит [total_worth][MONEY_SYMBOL]. в общей сумме."
 
 /obj/item/stack/spacecash/get_item_credit_value()
 	return (amount*value)

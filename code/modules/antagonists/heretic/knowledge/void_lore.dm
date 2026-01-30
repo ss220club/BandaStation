@@ -1,33 +1,65 @@
-
-/datum/heretic_knowledge_tree_column/main/void
-	neighbour_type_left = /datum/heretic_knowledge_tree_column/flesh_to_void
-	neighbour_type_right = /datum/heretic_knowledge_tree_column/void_to_blade
-
+/datum/heretic_knowledge_tree_column/void
 	route = PATH_VOID
 	ui_bgr = "node_void"
+	complexity = "Easy"
+	complexity_color = COLOR_GREEN
+	icon = list(
+		"icon" = 'icons/obj/weapons/khopesh.dmi',
+		"state" = "void_blade",
+		"frame" = 1,
+		"dir" = SOUTH,
+		"moving" = FALSE,
+	)
+	description = list(
+		"Путь Пустоты фокусируется на скрытности, леденящем холоде, подвижности и разгерметизациях.",
+		"Выберите этот путь, если вам нравится быть проворным убийцей, который не дает своим врагам возможности догнать его.",
+	)
+	pros = list(
+		"Защита от космического пространства.",
+		"Ваши заклинания накладывают суммирующийся отрицательный эффект, который охлаждает и замедляет цели.",
+		"Большое количество заклинаний подвижности.",
+		"Высокая скрытность.",
+	)
+	cons = list(
+		"Несмотря на то, что вы защищены от космического пространства, в нем вы далеко не так подвижны, как пешком.",
+		"Имеет затруднения в борьбе с противниками, устойчивых к холоду.",
+		"Испытывает сложности в борьбе синтетиками.",
+	)
+	tips = list(
+		"«Хватка Мансус» лишает противника дара речи, делая её идеальным инструментом для тихого убийства (Держите в уме, что датчики она не выключает, и вам придется это делать самостоятельно). Хватка накладывает метку, срабатывающую при ударе Клинком Пустоты, активация метки наложит экстремальное переохлаждение, значительно замедляя цель.",
+		"Накидка Пустоты может быть использована для сокрытия Клинка Пустоты и Кодекса Шрама при опущенном капюшоне, и для фокусировки заклинаний при поднятом.",
+		"«Холод Пустоты» - это отрицательный эффект, накладываемый вашими заклинаниями, вашей Хваткой, вашими метками и вашим клинком, когда вы откроете его улучшения. Каждый раз, накладывая эффект, вы будете замедлять противника на 10%, вплоть до 50%.",
+		"При накоплении 5 стаков «Холода Пустоты», цель теряет возможность согреться.",
+		"Вы невосприимчивы к низким температурам и низкому давлению с начала смены. Поднимите свой пассивный навык до второго уровня и у вас пропадет потребность в дыхании. Используйте это себе на пользу.",
+		"«Пустотная тюрьма» может ввести цель в стазис на 10 секунд. Идеально, если вы сражаетесь с несколькими противниками, и вам нужно изолировать одну цель за раз.",
+		"Поток Пустоты - ваша сигнатурная способность. Она медленно разрушает окна и воздушные шлюзы в зоне своего действия. Используйте это для создания разгерметизаций и расширения своей зоны контроля.",
+	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_void
-	grasp = /datum/heretic_knowledge/void_grasp
-	tier1 = /datum/heretic_knowledge/cold_snap
-	mark = 	/datum/heretic_knowledge/mark/void_mark
-	ritual_of_knowledge = /datum/heretic_knowledge/knowledge_ritual/void
-	unique_ability = /datum/heretic_knowledge/spell/void_conduit
-	tier2 = /datum/heretic_knowledge/spell/void_phase
+	knowledge_tier1 = /datum/heretic_knowledge/spell/void_phase
+	guaranteed_side_tier1 = /datum/heretic_knowledge/void_cloak
+	knowledge_tier2 = /datum/heretic_knowledge/spell/void_prison
+	guaranteed_side_tier2 = /datum/heretic_knowledge/ether
+	robes = /datum/heretic_knowledge/armor/void
+	knowledge_tier3 = /datum/heretic_knowledge/spell/void_pull
+	guaranteed_side_tier3 = /datum/heretic_knowledge/summon/maid_in_mirror
 	blade = /datum/heretic_knowledge/blade_upgrade/void
-	tier3 =	/datum/heretic_knowledge/spell/void_pull
+	knowledge_tier4 = /datum/heretic_knowledge/spell/void_conduit
 	ascension = /datum/heretic_knowledge/ultimate/void_final
 
 /datum/heretic_knowledge/limited_amount/starting/base_void
-	name = "Glimmer of Winter"
-	desc = "Открывает перед вами Путь пустоты. \
+	name = "Проблеск Зимы"
+	desc = "Открывает перед вами Путь Пустоты. \
 		Позволяет трансмутировать нож при отрицательных температурах в Пустотный клинок. \
-		дновременно можно иметь только два."
+		Одновременно можно иметь только два."
 	gain_text = "Я чувствую мерцание в воздухе, воздух вокруг меня становится холоднее. \
 		Я начинаю осознавать пустоту существования. Что-то наблюдает за мной."
 	required_atoms = list(/obj/item/knife = 1)
 	result_atoms = list(/obj/item/melee/sickly_blade/void)
 	research_tree_icon_path = 'icons/obj/weapons/khopesh.dmi'
 	research_tree_icon_state = "void_blade"
+	mark_type = /datum/status_effect/eldritch/void
+	eldritch_passive = /datum/status_effect/heretic_passive/void
 
 /datum/heretic_knowledge/limited_amount/starting/base_void/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
 	if(!isopenturf(loc))
@@ -41,23 +73,8 @@
 
 	return ..()
 
-/datum/heretic_knowledge/void_grasp
-	name = "Grasp of Void"
-	desc = "Ваша Хватка Мансуса на время заглушает и охлаждает жертву."
-	gain_text = "Я увидел холодного наблюдателя, который наблюдает за мной. Во мне поселился холод. \
-		Он молчит. Это еще не конец таинства."
-	cost = 1
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_void"
-
-/datum/heretic_knowledge/void_grasp/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK, PROC_REF(on_mansus_grasp))
-
-/datum/heretic_knowledge/void_grasp/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK)
-
-/datum/heretic_knowledge/void_grasp/proc/on_mansus_grasp(mob/living/source, mob/living/target)
-	SIGNAL_HANDLER
+/datum/heretic_knowledge/limited_amount/starting/base_void/on_mansus_grasp(mob/living/source, mob/living/target)
+	. = ..()
 
 	if(!iscarbon(target))
 		return
@@ -66,71 +83,68 @@
 	carbon_target.adjust_silence(10 SECONDS)
 	carbon_target.apply_status_effect(/datum/status_effect/void_chill, 2)
 
-/datum/heretic_knowledge/cold_snap
-	name = "Aristocrat's Way"
-	desc = "Дает иммунитет к низким температурам и устраняет потребность в дыхании. \
-		Вы все еще можете получить повреждения из-за отсутствия давления."
-	gain_text = "Я нашел нить холодного дыхания. Она привела меня в странное святилище, сплошь состоящее из кристаллов. \
-		Полупрозрачное и белое изображение дворянина стояло передо мной."
-	cost = 1
-	research_tree_icon_path = 'icons/effects/effects.dmi'
-	research_tree_icon_state = "the_freezer"
-
-	/// Traits we apply to become immune to the environment
-	var/static/list/gain_traits = list(TRAIT_NO_SLIP_ICE, TRAIT_NO_SLIP_SLIDE)
-
-/datum/heretic_knowledge/cold_snap/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	user.add_traits(list(TRAIT_NOBREATH, TRAIT_RESISTCOLD), type)
-	RegisterSignal(user, COMSIG_LIVING_LIFE, PROC_REF(check_environment))
-
-/datum/heretic_knowledge/cold_snap/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	user.remove_traits(list(TRAIT_RESISTCOLD, TRAIT_NOBREATH), type)
-	UnregisterSignal(user, COMSIG_LIVING_LIFE)
-
-///Checks if our traits should be active
-/datum/heretic_knowledge/cold_snap/proc/check_environment(mob/living/user)
-	SIGNAL_HANDLER
-
-	var/datum/gas_mixture/environment = user.loc?.return_air()
-	if(!isnull(environment))
-		var/affected_temperature = environment.return_temperature()
-		var/affected_pressure = environment.return_pressure()
-		if(affected_temperature <= T0C || affected_pressure < ONE_ATMOSPHERE)
-			user.add_traits(gain_traits, type)
-		else
-			user.remove_traits(gain_traits, type)
-
-/datum/heretic_knowledge/mark/void_mark
-	name = "Mark of Void"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку пустоты. Метка срабатывает при атаке Пустотным клинком. \
-		При срабатывании он заставляет жертву замолчать и быстро понижает температуру ее тела и окружающего воздуха."
-	gain_text = "Порыв ветра? Мерцание в воздухе? Присутствие переполняет, \
-		мои чувства начали предавать меня. Мой разум - мой собственный враг."
-	mark_type = /datum/status_effect/eldritch/void
-
-/datum/heretic_knowledge/knowledge_ritual/void
-
-/datum/heretic_knowledge/spell/void_conduit
-	name = "Void Conduit"
-	desc = "Дарует вам Void Conduit, заклинание призыва пульсирующих врат в саму Пустоту. Каждый пульс ломает окна и шлюзы, мистически замораживает язычников и защищает еретиков от низкого давления."
-	gain_text = "В неподвижном и холодном воздухе, гул переходит в какофонический грохот. \
-		В этому шуме нет различия между стуком оконных стекол и зевком знания, который резонирует в моем черепе. \
-		Двери не закроются. Теперь я не могу сдержать холод."
-	action_to_add = /datum/action/cooldown/spell/conjure/void_conduit
-	cost = 1
-
 /datum/heretic_knowledge/spell/void_phase
-	name = "Void Phase"
-	desc = "Дарует вам Void Phase, заклинание телепортации дальнего действия. \
-		Дополнительно наносит урон язычникам вокруг вашей первоначальной и целевой цели."
+	name = "Фаза Пустоты"
+	desc = "Дарует вам «Фазу Пустоты» - заклинание телепортации дальнего действия. \
+		Дополнительно наносит урон язычникам около места входа и места выхода из фазы."
 	gain_text = "Сущность называет себя Аристократом. Он легко проходит сквозь воздух, \
 		оставляя за собой резкий холодный ветер. Он исчезает, а я остаюсь в метели."
 	action_to_add = /datum/action/cooldown/spell/pointed/void_phase
-	cost = 1
+	cost = 2
 	research_tree_icon_frame = 7
 
+/datum/heretic_knowledge/spell/void_prison
+	name = "Пустотная тюрьма"
+	desc = "Дарует вам «Пустотную тюрьму» - заклинание помещающее вашего противника в шар, лишая его способности говорить и делать что-либо. \
+		Накладывает Холод Пустоты после окончания эффекта."
+	gain_text = "В начале я видел себя, танцующим на заснеженной улице. \
+		Я пытаюсь закричать, схватить этого дурака и сказать им, чтобы они бежали. \
+		Но рубцы остались только на моём избивающем кулаке. \
+		Мое улыбающееся лицо поворачивается ко мне, и в остекленевших глазах отражается тот пустой путь, на который меня завели."
+
+	action_to_add = /datum/action/cooldown/spell/pointed/void_prison
+	cost = 2
+	drafting_tier = 5
+
+/datum/heretic_knowledge/armor/void
+	name = "Сплетение Пустоты"
+	desc = "Позволяет трансформировать стол (или костюм) и маску при минусовых температурах для создания Сплетение Пустоты, это броня будет время от времени нейтрализовывать атаки по вам и ненадолго маскировать вас, давая сменить позицию. \
+			Действует как фокусировка, пока надет капюшон."
+	gain_text = "Ступая сквозь холодный воздух, я был шокирован новыми ощущениями. \
+				Тысячи почти неуловимых нитей цепляются за мою фигуру. \
+				С каждым шагом я теряюсь в догадках. \
+				Даже когда я слышу хруст снега, когда ставлю ногу на землю, я не чувствую ничего."
+	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/void)
+	research_tree_icon_state = "void_armor"
+	required_atoms = list(
+		list(/obj/structure/table, /obj/item/clothing/suit) = 1,
+		/obj/item/clothing/mask = 1,
+	)
+
+/datum/heretic_knowledge/armor/void/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
+	if(!isopenturf(loc))
+		loc.balloon_alert(user, "ritual failed, invalid location!")
+		return FALSE
+
+	var/turf/open/our_turf = loc
+	if(our_turf.GetTemperature() > T0C)
+		loc.balloon_alert(user, "ritual failed, not cold enough!")
+		return FALSE
+
+	return ..()
+
+/datum/heretic_knowledge/spell/void_pull
+	name = "Притяжение Пустоты"
+	desc = "Дарует вам «Притяжение Пустоты» - заклинание, притягивающее к вам всех близлежащих язычников, ненадолго оглушая их."
+	gain_text = "Всё мимолетно, но что ещё остаётся? Я близок к завершению того, что было начато. \
+		Аристократ снова раскрывает себя мне. Они говорят мне, что я опоздал. Их притяжение огромно, я не могу повернуть назад."
+
+	action_to_add = /datum/action/cooldown/spell/aoe/void_pull
+	cost = 2
+	research_tree_icon_frame = 6
+
 /datum/heretic_knowledge/blade_upgrade/void
-	name = "Seeking Blade"
+	name = "Ищущий клинок"
 	desc = "Ваш клинок теперь замораживает врагов. К тому же, теперь вы можете атаковать отмеченные цели на расстоянии Пустотным клинком, телепортируясь прямо к ним. "
 	gain_text = "Мимолетные воспоминания, мимолетные ноги. Я отмечаю свой путь застывшей кровью на снегу. Покрытый и забытый."
 
@@ -156,22 +170,20 @@
 /datum/heretic_knowledge/blade_upgrade/void/proc/follow_up_attack(mob/living/user, mob/living/target, obj/item/melee/sickly_blade/blade)
 	blade.melee_attack_chain(user, target)
 
-/datum/heretic_knowledge/spell/void_pull
-	name = "Void Pull"
-	desc = "Наделяет вас заклинанием Void Pull, которое притягивает всех ближайших язычников к вам, ненадолго оглушая их."
-	gain_text = "Все мимолетно, но разве что-то остается? Я близок к завершению начатого. \
-		Аристократ снова предстает передо мной. Он говорит мне, что я опоздал. Его притяжение огромно, я не могу повернуть назад."
-
-	action_to_add = /datum/action/cooldown/spell/aoe/void_pull
-	cost = 1
-
-
-	research_tree_icon_frame = 6
+/datum/heretic_knowledge/spell/void_conduit
+	name = "Поток Пустоты"
+	desc = "Дарует вам «Поток Пустоты» - заклинание, вызывающее пульсирующие врата в саму Пустоту. Каждый импульс разбивает окна и воздушные шлюзы, поражая язычников жутким холодом и защищая еретика от низкого давления."
+	gain_text = "Гул в неподвижном, холодном воздухе превращается в какофонию грохотов. \
+		За этим шумом невозможно различить стук оконных стекол и зияющее знание, которое рикошетом отдается в моем черепе. \
+		Врата не затворятся. Я не могу сдержать этот холод."
+	action_to_add = /datum/action/cooldown/spell/conjure/void_conduit
+	cost = 2
+	is_final_knowledge = TRUE
 
 /datum/heretic_knowledge/ultimate/void_final
-	name = "Waltz at the End of Time"
-	desc = "Ритуал вознесения Пути пустоты. \
-		Принесите 3 трупа к руне трансмутации при отрицательных температурах, чтобы завершить риAdditionally, you will become immune to the effects of space.туал. \
+	name = "Вальс Конца Времен"
+	desc = "Ритуал вознесения Пути Пустоты. \
+		Принесите 3 трупа к руне трансмутации при отрицательных температурах, чтобы завершить ритуал. \
 		После завершения вызывает сильный шторм пустотного снега, \
 		который обрушивается на станцию, замораживая и повреждая язычников. Те, кто находится поблизости, замолчат и замерзнут еще быстрее. \
 		Кроме того, у вас появится иммунитет к воздействию космоса."
@@ -228,7 +240,7 @@
  *
  * Also starts storms in any area that doesn't have one.
  */
-/datum/heretic_knowledge/ultimate/void_final/proc/on_life(mob/living/source, seconds_per_tick, times_fired)
+/datum/heretic_knowledge/ultimate/void_final/proc/on_life(mob/living/source, seconds_per_tick)
 	SIGNAL_HANDLER
 
 	for(var/atom/thing_in_range as anything in range(10, source))

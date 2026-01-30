@@ -20,6 +20,7 @@
 		/obj/item/cane/white = 2,
 		/obj/item/clothing/glasses/eyepatch/medical = 2,
 		/obj/item/storage/box/bandages = 2,
+		/obj/item/storage/box/triage_cards = 4,
 		/obj/item/pinpointer/crew = 2,
 	)
 	contraband = list(
@@ -39,7 +40,6 @@
 	extra_price = PAYCHECK_COMMAND
 	payment_department = ACCOUNT_MED
 	light_mask = "med-light-mask"
-	allow_custom = TRUE
 
 /obj/item/vending_refill/medical
 	machine_name = "NanoMed Plus"

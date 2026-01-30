@@ -213,7 +213,7 @@
 "rA" = (
 /obj/modular_map_connector,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "rK" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment,

@@ -50,6 +50,8 @@
 
 
 		var/datum/loadout_item/loadout_item = GLOB.all_loadout_datums[real_path] /// BANDASTATION ADDITION - Loadout
+		if(loadout_item.is_disabled())
+			continue
 		if(!istype(loadout_item, /datum/loadout_item))
 			to_chat(preferences.parent, span_boldnotice("The following invalid loadout item was found \
 				in your character loadout: [real_path || "null"]. \

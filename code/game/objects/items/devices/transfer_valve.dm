@@ -24,6 +24,7 @@
 
 /obj/item/transfer_valve/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/cuffable_item)
 	RegisterSignal(src, COMSIG_ITEM_FRIED, PROC_REF(on_fried))
 	register_context()
 	register_item_context()
@@ -99,18 +100,31 @@
 			to_chat(user, span_warning("There are already two tanks attached, remove one first!"))
 			return
 
+		var/attached = FALSE
 		if(!tank_one)
 			if(!user.transferItemToLoc(item, src))
 				return
 			tank_one = item
+			attached = TRUE
 			to_chat(user, span_notice("You attach the tank to the transfer valve."))
 		else if(!tank_two)
 			if(!user.transferItemToLoc(item, src))
 				return
 			tank_two = item
+			attached = TRUE
 			to_chat(user, span_notice("You attach the tank to the transfer valve."))
 
 		update_appearance()
+
+		// BANDASTATION ADDITION
+		if(attached && tank_one && tank_two)
+			var/datum/gas_mixture/air1 = tank_one.return_air()
+			var/t1_data = "P:[air1.return_pressure()]kPa, T:[air1.return_temperature()]K]"
+			var/datum/gas_mixture/air2 = tank_two.return_air()
+			var/t2_data = "P:[air2.return_pressure()]kPa, T:[air2.return_temperature()]K]"
+			var/tanks_info = "[tank_one.name] ([t1_data]) + [tank_two.name] ([t2_data])"
+			log_bomber(user, "assembled a ttv bomb", src, "Tanks: [tanks_info]")
+
 //TODO: Have this take an assemblyholder
 	else if(isassembly(item))
 		var/obj/item/assembly/A = item
@@ -233,6 +247,11 @@
 
 	if(!istype(target) || (target != tank_one && target != tank_two))
 		return FALSE
+
+	for(var/obj/effect/forcefield/cosmic_field/potential_field as anything in GLOB.active_cosmic_fields)
+		if(get_dist(potential_field, src) < 3)
+			new /obj/effect/temp_visual/revenant(get_turf(src))
+			return FALSE
 
 	// Throw both tanks into processing queue
 	var/datum/gas_mixture/target_mix = target.return_air()

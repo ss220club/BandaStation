@@ -12,7 +12,7 @@
 #define VAULT_QUICK "Arm Muscle Stimulus"
 
 /datum/station_goal/dna_vault
-	name = "DNA Vault"
+	name = "ДНК хранилище"
 	var/animal_count
 	var/human_count
 	var/plant_count
@@ -46,10 +46,10 @@
 
 /datum/station_goal/dna_vault/on_report()
 	var/datum/supply_pack/P = SSshuttle.supply_packs[/datum/supply_pack/engineering/dna_vault]
-	P.special_enabled = TRUE
+	P.order_flags |= ORDER_SPECIAL_ENABLED
 
 	P = SSshuttle.supply_packs[/datum/supply_pack/engineering/dna_probes]
-	P.special_enabled = TRUE
+	P.order_flags |= ORDER_SPECIAL_ENABLED
 
 /datum/station_goal/dna_vault/check_completion()
 	if(..())
@@ -61,7 +61,7 @@
 
 /obj/machinery/dna_vault
 	name = "DNA Vault"
-	desc = "Break glass in case of apocalypse."
+	desc = "Разбить стекло в случае апокалипсиса."
 	icon = 'icons/obj/machines/dna_vault.dmi'
 	icon_state = "vault"
 	density = TRUE

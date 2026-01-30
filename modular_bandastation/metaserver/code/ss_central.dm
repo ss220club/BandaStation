@@ -215,3 +215,106 @@ SUBSYSTEM_DEF(central)
 		tiers += item["tier"]
 
 	return max(tiers)
+
+/datum/controller/subsystem/central/proc/create_ban_request(
+	ckey,
+	admin_ckey,
+	list/roles_to_ban,
+	is_server_ban,
+	reason,
+	duration,
+	interval,
+	severity,
+	player_ip = null,
+	player_cid = null
+)
+	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/bans"
+	var/list/headers = list()
+	headers["Authorization"] = "Bearer [CONFIG_GET(string/ss_central_token)]"
+
+	duration = text2num(duration)
+
+	// convert duration to hours
+	var/duration_hours
+	if(!interval || interval == "MINUTE")
+		duration_hours = duration / 60.0
+	else if(interval == "HOUR")
+		duration_hours = duration
+	else if(interval == "DAY")
+		duration_hours = duration * 24
+	else if(interval == "WEEK")
+		duration_hours = duration * 24 * 7
+	else
+		duration_hours = duration
+
+	// determine job
+	var/list/job = is_server_ban ? null : roles_to_ban
+	var/job_string = null
+	if(job)
+		job_string = jointext(job, ",")
+
+	var/is_permaban = (duration_hours <= 0)
+
+	// backend expects null duration for permabans
+	if(is_permaban)
+		duration_hours = null
+
+	var/bantype
+
+	if(job)
+		if(is_permaban)
+			bantype = "JOB_PERMABAN"
+		else
+			bantype = "JOB_TEMPBAN"
+	else
+		if(is_permaban)
+			bantype = "PERMABAN"
+		else
+			bantype = "TEMPBAN"
+
+	var/list/body = list()
+	body["player_ckey"] = ckey
+	body["admin_ckey"] = admin_ckey
+	body["reason"] = reason
+	body["server_type"] = CONFIG_GET(string/servername)
+	body["duration_hours"] = duration_hours
+	body["bantype"] = bantype
+	body["job"] = job_string
+
+	if(player_ip)
+		body["player_ip"] = player_ip
+	if(player_cid)
+		body["player_cid"] = player_cid
+
+	body["round_id"] = GLOB.round_id
+
+	SShttp.create_async_request(
+		RUSTG_HTTP_METHOD_POST,
+		endpoint,
+		json_encode(body),
+		headers,
+		CALLBACK(src, PROC_REF(create_ban_request_callback), ckey)
+	)
+
+
+/datum/controller/subsystem/central/proc/create_ban_request_callback(ckey, datum/http_response/response)
+	if(response.errored)
+		stack_trace("Failed to log ban: HTTP error - [response.error]")
+		return
+
+	switch(response.status_code)
+		if(201)
+			// successful
+			. = .
+
+		if(404)
+			message_admins("Не удалось залогировать бан: игрок не найден)")
+			return
+
+		if(409)
+			message_admins("Не удалось залогировать бан: бан уже существует)")
+			return
+
+		else
+			stack_trace("Could not log ban: HTTP [response.status_code] - [response.body]")
+			return

@@ -55,10 +55,10 @@
 
 /datum/species/vulpkanin/randomize_features()
 	var/list/features = ..()
-	features[FEATURE_VULPKANIN_CHEST_MARKINGS] = prob(50) ? pick(SSaccessories.vulpkanin_chest_markings_list) : SPRITE_ACCESSORY_NONE
-	features[FEATURE_VULPKANIN_TAIL_MARKINGS] = prob(50) ? pick(SSaccessories.vulpkanin_tail_markings_list) : SPRITE_ACCESSORY_NONE
-	features[FEATURE_VULPKANIN_HEAD_MARKINGS] = prob(50) ? pick(SSaccessories.vulpkanin_head_markings_list) : SPRITE_ACCESSORY_NONE
-	features[FEATURE_VULPKANIN_FACIAL_HAIR] = prob(50) ? pick(SSaccessories.vulpkanin_facial_hair_list) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_CHEST_MARKINGS] = prob(50) ? pick(SSaccessories.feature_list[FEATURE_VULPKANIN_CHEST_MARKINGS]) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_TAIL_MARKINGS] = prob(50) ? pick(SSaccessories.feature_list[FEATURE_VULPKANIN_TAIL_MARKINGS]) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_HEAD_MARKINGS] = prob(50) ? pick(SSaccessories.feature_list[FEATURE_VULPKANIN_HEAD_MARKINGS]) : SPRITE_ACCESSORY_NONE
+	features[FEATURE_VULPKANIN_FACIAL_HAIR] = prob(50) ? pick(SSaccessories.feature_list[FEATURE_VULPKANIN_FACIAL_HAIR]) : SPRITE_ACCESSORY_NONE
 
 	var/furcolor = "#[random_color()]"
 	features[FEATURE_VULPKANIN_BODY_MARKINGS_COLOR] = furcolor

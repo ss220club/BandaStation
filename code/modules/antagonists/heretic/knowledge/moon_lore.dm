@@ -1,57 +1,80 @@
-
-/datum/heretic_knowledge_tree_column/main/moon
-	neighbour_type_left = /datum/heretic_knowledge_tree_column/ash_to_moon
-	neighbour_type_right = /datum/heretic_knowledge_tree_column/moon_to_lock
-
+/datum/heretic_knowledge_tree_column/moon
 	route = PATH_MOON
 	ui_bgr = "node_moon"
+	complexity = "Hard"
+	complexity_color = COLOR_RED
+	icon = list(
+		"icon" = 'icons/obj/weapons/khopesh.dmi',
+		"state" = "moon_blade",
+		"frame" = 1,
+		"dir" = SOUTH,
+		"moving" = FALSE,
+	)
+	description = list(
+		"Путь Луны фокусируется на здравомыслии, сея смятение и разлад в головах ваших противников, нарушая привычные правила боя.",
+		"Выбирайте этот путь, если у вас уже есть опыт игры на Еретике и хочется попробовать нечто уникальное, или просто хочется отыграть пацифиста (Да, именно так!)."
+	)
+	pros = list(
+		"Богатый набор инструментов для запутывания ваших противников.",
+		"Сейте хаос на станции при помощи безумцев.",
+		"Невосприимчивость к эффектам оглушения при ношении Блистательного Облачения."
+	)
+	cons = list(
+		"Отсутствует мобильность.",
+		"Отсутствуют навыки для нанесения урона напрямую.",
+		"Зависимость от запутывания и ошеломления противника.",
+		"Безумцы могут стать помехой.",
+		"Крайне уязвим, несмотря на уникальную механику защиты.",
+		"Смерть, во время ношения Блистательного Облачения, приведет к крайне кровавому финалу.",
+	)
+	tips = list(
+		"Использование «Хватки Мансуса» накладывает на цель кратковременные галлюцинации, а также метку, активируемую вашим Лунным Клинком. Активация Метки усмиряет цель, а также вводит её в замешательство (усмирение спадает, если цель получила слишком много урона).",
+		"Ваш Лунный Клинок уникален в сравнении с клинками других путей, вы можете пользоваться им даже если подверглись пацификации.",
+		"Ваш пассивный навык делает вас полностью невосприимчивым к повреждениям мозга, а также медленно восстанавливают его здоровье. Обязательно улучшите его, чтобы усилить эффект.",
+		"Ваше Блистательное Облачение значительно меняет правила боя для вас и ваших противников; Вы становитесь полностью неуязвимы для эффектов оглушения, а все полученные повреждения (смертельные или несмертельные) будут преобразованы в повреждения мозга, однако сама мантия не имеет брони и препятствует использованию стрелкового оружия, пацифицируя вас (вы все ещё можете использовать Лунный Клинок).",
+		"Эффекты вашего Лунного Амулета проецируются на Лунный Клинок. При активации, ваш Лунный Клинок больше не будет наносить смертельный урон, он будет наносить урон рассудку и станет неблокируемым, что также позволит вам использовать его в Блистательном Облачении!",
+		"Ваш Лунный Амулет ключевой элемент вашего снаряжения, при ношении, он удвоит скорость восстановления повреждений мозга.",
+		"Если рассудок ваших оппонентов упадет ниже определенного значения, они обезумят. Безумцам будет предложено нападать на всех (в том числе и вас). Если вы захотите принести их в жертву (или заставить их оставить вас в покое), ударьте их еще раз своим Лунным Клинком, чтобы усыпить.",
+		"«Восстание Зачинщиков» призывает армию клонов. Они практически не наносят урон, но если на них нападут неверные, они взорвутся, приводя к потере рассудка и нанесению урона мозгу.",
+		"Ваше возвышение даст вам ауру, превращающую ближайших к вам людей в верных вам сумасшедших. Однако, если у цели есть имплант защиты разума, то вместо порабощения, через некоторое время их головы просто взорвутся.",
+	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_moon
-	grasp = /datum/heretic_knowledge/moon_grasp
-	tier1 = /datum/heretic_knowledge/spell/moon_smile
-	mark = /datum/heretic_knowledge/mark/moon_mark
-	ritual_of_knowledge = /datum/heretic_knowledge/knowledge_ritual/moon
-	unique_ability = /datum/heretic_knowledge/spell/moon_parade
-	tier2 = /datum/heretic_knowledge/moon_amulet
+	knowledge_tier1 = /datum/heretic_knowledge/spell/mind_gate
+	guaranteed_side_tier1 = /datum/heretic_knowledge/phylactery
+	knowledge_tier2 = /datum/heretic_knowledge/moon_amulet
+	guaranteed_side_tier2 = /datum/heretic_knowledge/codex_morbus
+	robes = /datum/heretic_knowledge/armor/moon
+	knowledge_tier3 = /datum/heretic_knowledge/spell/moon_parade
+	guaranteed_side_tier3 = /datum/heretic_knowledge/unfathomable_curio
 	blade = /datum/heretic_knowledge/blade_upgrade/moon
-	tier3 =	/datum/heretic_knowledge/spell/moon_ringleader
+	knowledge_tier4 = /datum/heretic_knowledge/spell/moon_ringleader
 	ascension = /datum/heretic_knowledge/ultimate/moon_final
 
 /datum/heretic_knowledge/limited_amount/starting/base_moon
-	name = "Moonlight Troupe"
-	desc = "Открывает перед вами Путь луны. \
-		Позволяет трансмутировать 2 листа железа и нож в Лунный клинок. \
+	name = "Лунная Тропа"
+	desc = "Открывает перед вами Путь Луны. \
+		Позволяет трансмутировать 2 листа стекла и нож в Лунный клинок. \
 		Одновременно можно иметь только два."
 	gain_text = "Под лунным светом смех отдается эхом."
 	required_atoms = list(
 		/obj/item/knife = 1,
-		/obj/item/stack/sheet/iron = 2,
+		/obj/item/stack/sheet/glass = 2,
 	)
 	result_atoms = list(/obj/item/melee/sickly_blade/moon)
 	research_tree_icon_path = 'icons/obj/weapons/khopesh.dmi'
 	research_tree_icon_state = "moon_blade"
+	mark_type = /datum/status_effect/eldritch/moon
+	eldritch_passive = /datum/status_effect/heretic_passive/moon
 
 /datum/heretic_knowledge/limited_amount/starting/base_moon/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	ADD_TRAIT(user, TRAIT_EMPATH, REF(src))
+	. = ..()
+	user.AddComponentFrom(REF(src), /datum/component/empathy, seen_it = TRUE, visible_info = ALL, self_empath = FALSE, sense_dead = FALSE, sense_whisper = TRUE, smite_target = FALSE)
 
-/datum/heretic_knowledge/moon_grasp
-	name = "Grasp of Lunacy"
-	desc = "Ваша Хватка Мансуса заставит жертву галлюцинировать, что все вокруг - лунная масса, \
-		и на короткое время скроет вашу личность."
-	gain_text = "Труппа на стороне луны показала мне правду, и я принял её."
-	cost = 1
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_moon"
+/datum/heretic_knowledge/limited_amount/starting/base_moon/on_mansus_grasp(mob/living/source, mob/living/target)
+	. = ..()
 
-/datum/heretic_knowledge/moon_grasp/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK, PROC_REF(on_mansus_grasp))
-
-/datum/heretic_knowledge/moon_grasp/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK)
-
-/datum/heretic_knowledge/moon_grasp/proc/on_mansus_grasp(mob/living/source, mob/living/target)
-	SIGNAL_HANDLER
-	if(target.can_block_magic(MAGIC_RESISTANCE_MIND))
+	if(target.can_block_magic(MAGIC_RESISTANCE_MOON))
 		to_chat(target, span_danger("You hear echoing laughter from above..but it is dull and distant."))
 		return
 
@@ -64,39 +87,23 @@
 	carbon_target.cause_hallucination(/datum/hallucination/delusion/preset/moon, "delusion/preset/moon hallucination caused by mansus grasp")
 	carbon_target.mob_mood.adjust_sanity(-30)
 
-/datum/heretic_knowledge/spell/moon_smile
-	name = "Smile of the moon"
-	desc = "Дает вам заклинание Smile of the moon, позволяющее на расстоянии заглушить, ослепить, оглушить и сбить с ног цель \
-		на время, зависящее от ее рассудка."
-	gain_text = "Луна улыбается всем нам, и те, кто видит ее правдивую сторону, могут приносить её радость."
+/datum/heretic_knowledge/spell/mind_gate
+	name = "Врата Разума"
+	desc = "Дарует вам «Врата Разума» - заклинание, отнимающее голос, лишающее слуха, зрения, наводящее галлюцинации, \
+		смятение, лишающее воздуха и наносящее урон мозгу цели в течение 10с.\
+		Заклинатель получает 20 единиц урона мозга за каждое использование."
+	gain_text = "Мой разум распахивается, как врата, и его возвышение позволит мне постичь истину."
 
-	action_to_add = /datum/action/cooldown/spell/pointed/moon_smile
-	cost = 1
-
-/datum/heretic_knowledge/mark/moon_mark
-	name = "Mark of Moon"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку луны, которая накладывает пацифизм на цель, пока ее не атакуют. \
-		Метка может быть активирована вашим Лунным клинком, оставляя жертву в замешательстве."
-	gain_text = "Труппа на луне могла танцевать весь день \
-		и в этом танце луна улыбалась нам \
-		но когда наступала ночь, ее улыбка тусклела, так как была вынуждена смотреть на землю."
-	mark_type = /datum/status_effect/eldritch/moon
-
-/datum/heretic_knowledge/knowledge_ritual/moon
-
-/datum/heretic_knowledge/spell/moon_parade
-	name = "Lunar Parade"
-	desc = "Дает вам заклинание Lunar Parade, которое через короткую задержку посылает вперед карнавал. \
-		Те, в кого попал карнавал, вынуждены присоединиться к параду и страдать от галлюцинаций."
-	gain_text = "Музыка, как отражение души, побуждала их, и они, словно мотыльки на пламя, следовали за ней."
-	action_to_add = /datum/action/cooldown/spell/pointed/projectile/moon_parade
-	cost = 1
+	action_to_add = /datum/action/cooldown/spell/pointed/mind_gate
+	cost = 2
 
 /datum/heretic_knowledge/moon_amulet
-	name = "Moonlight Amulet"
-	desc = "Позволяет трансмутировать 2 листа стекла, сердце и галстук, чтобы создать Moonlight Amulet. \
-			Если предмет использован на том, у кого слабый рассудок, они становятся берсерком, нападая на всех подряд; \
-			если рассудок не достаточно низок, то уменьшается их настроение."
+	name = "Лунный Амулет"
+	desc = "Позволяет трансмутировать 2 листа стекла, сердце и галстук, чтобы создать Лунный Амулет. \
+			Если предметом пользуется человек с слабым рассудком, то он становятся берсерком, нападающим на всех подряд; \
+			если рассудок недостаточно низок, то он начнет постепенно убывать. \
+			Ношение этого предмета дарует вам способность видеть язычников сквозь стены, а ваши клинки сделает безвредными - они будут калечить разум жертв. \
+			Предоставляет термальное зрение и удваивает регенерацию мозга еретика Луны при ношении."
 	gain_text = "Во главе парада стоял он, луна сгустилась в единную массу, отражение души."
 
 	required_atoms = list(
@@ -105,18 +112,40 @@
 		/obj/item/clothing/neck/tie = 1,
 	)
 	result_atoms = list(/obj/item/clothing/neck/heretic_focus/moon_amulet)
-	cost = 1
-
+	cost = 2
 
 	research_tree_icon_path = 'icons/obj/antags/eldritch.dmi'
 	research_tree_icon_state = "moon_amulette"
 	research_tree_icon_frame = 9
 
-/datum/heretic_knowledge/blade_upgrade/moon
-	name = "Moonlight Blade"
-	desc = "Ваш клинок теперь наносит урон мозгу и рассудку, а также вызывает случайные галлюцинации."
-	gain_text = "Его остроумие было острым, как клинок, оно прорезало ложь, чтобы принести нам радость."
+/datum/heretic_knowledge/armor/moon
+	desc = "Позволяет преобразовать стол (или костюм), маску и два листа стекла для создания Блистательного Облачения, эта роба сделает носителя невосприимчивым к эффектам оглушения, преобразует все виды повреждений в урон мозгу, а также пацифицируя носителя, лишая его возможности пользоваться дальнобойным оружием (Лунные Клинки обходят пацифизм). \
+			Действует как фокусировка, пока надет капюшон."
+	gain_text = "Струи света и веселья струились из каждой складки этого великолепного наряда. \
+				Труппа кружилась радужными каскадами, ослепляя зрителей истиной, которую они искали. \
+				Купаясь в свете, я наблюдал, как обретаю себя."
+	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/moon)
+	research_tree_icon_state = "moon_armor"
+	required_atoms = list(
+		list(/obj/structure/table, /obj/item/clothing/suit) = 1,
+		/obj/item/clothing/mask = 1,
+		/obj/item/stack/sheet/glass = 2,
+	)
 
+/datum/heretic_knowledge/spell/moon_parade
+	name = "Лунный Парад"
+	desc = "Дарует вам «Лунный Парад» - заклинание после короткой зарядки, отправляет вперед снаряд \
+		при попадании которого, цель присоединяется к параду, и начинает страдать от галюцинаций."
+	gain_text = "Музыка, словно отражение души, завораживала их, ведя их за собой, как мотыльков ведет за собой пламя."
+	action_to_add = /datum/action/cooldown/spell/pointed/projectile/moon_parade
+	cost = 2
+	drafting_tier = 5
+
+/datum/heretic_knowledge/blade_upgrade/moon
+	name = "Лунный Клинок"
+	desc = "Ваш клинок теперь наносит урон мозгу и рассудку, а также вызывает случайные галлюцинации. \
+			Наносит больше урона мозгу если жертва лишилась рассудка или спит."
+	gain_text = "Его остроумие было острым, как клинок, оно прорезало ложь, чтобы принести нам радость."
 
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "blade_upgrade_moon"
@@ -125,37 +154,40 @@
 	if(source == target || !isliving(target))
 		return
 
-	if(target.can_block_magic(MAGIC_RESISTANCE_MIND))
+	if(target.can_block_magic(MAGIC_RESISTANCE_MOON))
 		return
 
-	target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 10, 100)
 	target.cause_hallucination( \
 			get_random_valid_hallucination_subtype(/datum/hallucination/body), \
 			"upgraded path of moon blades", \
 		)
 	target.emote(pick("giggle", "laugh"))
-	target.mob_mood.adjust_sanity(-10)
+	target.mob_mood?.adjust_sanity(-10)
+	if(target.stat == CONSCIOUS && target.mob_mood?.sanity >= SANITY_NEUTRAL)
+		target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 10)
+		return
+	target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 25)
 
 /datum/heretic_knowledge/spell/moon_ringleader
-	name = "Ringleaders Rise"
-	desc = "Дает вам Ringleaders Rise, заклинание по области, которое наносит больше урона мозгу в зависимости от отсутствующего рассудка у целей, \
-			также вызывает им галлюцинации, больше тем, у кого мало рассудка. \
-			Если их рассудок достаточно слабый, они обезумеют и потеряют половину рассудка."
+	name = "Восстание Зачинщиков"
+	desc = "Дарует вам «Восстание Зачинщиков» - заклинание действующее на область, и наносящее урон мозгу, пропорционально недостающему рассудку целей, \
+			также вызывает галлюцинации, чем слабее разум цели, тем сильнее галюцинации. \
+			Если значение их рассудка достаточно низкое, цель сойдет с ума, лишившись половины имевшегося рассудка."
 	gain_text = "Взял его за руку, мы поднялись, и те, кто видел правду, поднялись вместе с нами. \
 		Шпрехшталмейстер указал вверх, и тусклый свет правды осветил нас еще больше."
 
 	action_to_add = /datum/action/cooldown/spell/aoe/moon_ringleader
-	cost = 1
-
+	cost = 2
 
 	research_tree_icon_frame = 5
+	is_final_knowledge = TRUE
 
 /datum/heretic_knowledge/ultimate/moon_final
-	name = "The Last Act"
+	name = "Последний Акт"
 	desc = "Ритуал вознесения Пути луны. \
 		Принесите 3 трупа с более чем 50 урона мозгу на руну трансмутации, чтобы завершить ритуал \
 		При завершении, вы становитесь предвестником безумия и получаете ауру пассивного снижения рассудка, \
-		увеличения замешательства, и, если их рассудок достаточно низкий, урона мозгу и ослепления. \
+		а члены экипажа с достаточно низким рассудком станут аколитами. \
 		Одна пятая экипажа превратится в аколитов и будет следовать вашим приказам, также они получат Moonlight Amulet"
 	gain_text = "Мы нырнули вниз, к толпе, его душа отделилась в поисках более великой авантюры, \
 		туда, откуда Шпрехшталмейстер начал парад, и я продолжу его до самой кончины солнца \
@@ -198,62 +230,89 @@
 	var/max_lunatics = ceil(max(length(GLOB.manifest.locked), length(lunatic_candidates)) * 0.2)
 
 	for(var/mob/living/carbon/human/crewmate as anything in lunatic_candidates)
-		// Heretics, lunatics and monsters shouldn't become lunatics because they either have a master or have a mansus grasp
-		if(IS_HERETIC_OR_MONSTER(crewmate))
-			to_chat(crewmate, span_boldwarning("Вознесение [user.declent_ru(GENITIVE)] влияет на слабовольных. Их разумы будут разрушены." ))
-			continue
-		// Mindshielded and anti-magic folks are immune against this effect because this is a magical mind effect
-		if(HAS_MIND_TRAIT(crewmate, TRAIT_UNCONVERTABLE) || crewmate.can_block_magic(MAGIC_RESISTANCE))
-			to_chat(crewmate, span_boldwarning("Вы чувствуете, что защитились от чего-то." ))
-			continue
 		if(amount_of_lunatics > max_lunatics)
 			to_chat(crewmate, span_boldwarning("Вы чувствуете неспокойство, как будто на мгновение что-то смотрело на вас."))
 			continue
-		var/datum/antagonist/lunatic/lunatic = crewmate.mind.add_antag_datum(/datum/antagonist/lunatic)
-		lunatic.set_master(user.mind, user)
-		var/obj/item/clothing/neck/heretic_focus/moon_amulet/amulet = new(crewmate.drop_location())
-		var/static/list/slots = list(
-			LOCATION_NECK,
-			LOCATION_HANDS,
-			LOCATION_RPOCKET,
-			LOCATION_LPOCKET,
-			LOCATION_BACKPACK,
-		)
-		crewmate.equip_in_one_of_slots(amulet, slots, qdel_on_fail = FALSE)
-		crewmate.emote("laugh")
-		amount_of_lunatics++
+		if(attempt_conversion(crewmate, user))
+			amount_of_lunatics++
+
+/datum/heretic_knowledge/ultimate/moon_final/proc/attempt_conversion(mob/living/carbon/convertee, mob/user)
+	// Heretics, lunatics and monsters shouldn't become lunatics because they either have a master or have a mansus grasp
+	if(IS_HERETIC_OR_MONSTER(convertee))
+		to_chat(convertee, span_boldwarning("[user]'s rise is influencing those who are weak willed. Their minds shall rend." ))
+		return FALSE
+	// Mindshielded and anti-magic folks are immune against this effect because this is a magical mind effect
+	if(HAS_MIND_TRAIT(convertee, TRAIT_UNCONVERTABLE) || convertee.can_block_magic(MAGIC_RESISTANCE))
+		to_chat(convertee, span_boldwarning("You feel shielded from something." ))
+		return FALSE
+
+	if(!convertee.mind)
+		return FALSE
+
+	var/datum/antagonist/lunatic/lunatic = convertee.mind.add_antag_datum(/datum/antagonist/lunatic)
+	lunatic.set_master(user.mind, user)
+	var/obj/item/clothing/neck/heretic_focus/moon_amulet/amulet = new(convertee.drop_location())
+	var/static/list/slots = list(
+		LOCATION_NECK,
+		LOCATION_HANDS,
+		LOCATION_RPOCKET,
+		LOCATION_LPOCKET,
+		LOCATION_BACKPACK,
+	)
+	convertee.equip_in_one_of_slots(amulet, slots, qdel_on_fail = FALSE)
+	INVOKE_ASYNC(convertee, TYPE_PROC_REF(/mob, emote), "laugh")
+	return TRUE
 
 /datum/heretic_knowledge/ultimate/moon_final/proc/on_life(mob/living/source, seconds_per_tick, times_fired)
 	SIGNAL_HANDLER
-
 	visible_hallucination_pulse(
 		center = get_turf(source),
 		radius = 7,
 		hallucination_duration = 60 SECONDS
 	)
 
-	for(var/mob/living/carbon/carbon_view in view(5, source))
+	for(var/mob/living/carbon/carbon_view in range(7, source))
+		var/carbon_sanity = carbon_view.mob_mood.sanity
 		if(carbon_view.stat != CONSCIOUS)
 			continue
 		if(IS_HERETIC_OR_MONSTER(carbon_view))
 			continue
-		if(carbon_view.can_block_magic(MAGIC_RESISTANCE_MIND)) //Somehow a shitty piece of tinfoil is STILL able to hold out against the power of an ascended heretic.
+		if(carbon_view.can_block_magic(MAGIC_RESISTANCE_MOON)) //Somehow a shitty piece of tinfoil is STILL able to hold out against the power of an ascended heretic.
 			continue
 		new /obj/effect/temp_visual/moon_ringleader(get_turf(carbon_view))
+		if(carbon_view.has_status_effect(/datum/status_effect/confusion))
+			to_chat(carbon_view, span_big(span_hypnophrase("ВАШ РАЗУМ ТРЕЩИТ ОТ ТЫСЯЧИ ГОЛОСОВ, СЛИТЫХ В БЕЗУМНУЮ КАКОФОНИЮ ЗВУКОВ И МУЗЫКИ. КАЖДАЯ ЩЕПКА ВАШЕГО СУЩЕСТВА КРИЧИТ: «БЕГИ».")))
 		carbon_view.adjust_confusion(2 SECONDS)
-		carbon_view.mob_mood.adjust_sanity(-5)
-		var/carbon_sanity = carbon_view.mob_mood.sanity
-		if(carbon_sanity < 30)
-			if(SPT_PROB(20, seconds_per_tick))
-				to_chat(carbon_view, span_warning("вы чувствуете, как ваш разум разрушается!"))
-			carbon_view.adjustOrganLoss(ORGAN_SLOT_BRAIN, 5)
+		carbon_view.mob_mood.adjust_sanity(-20)
 
-		if(carbon_sanity < 10)
-			if(SPT_PROB(20, seconds_per_tick))
-				to_chat(carbon_view, span_warning("оно эхом отдается в вас!"))
-			visible_hallucination_pulse(
-				center = get_turf(carbon_view),
-				radius = 7,
-				hallucination_duration = 50 SECONDS
-			)
-			carbon_view.adjust_temp_blindness(5 SECONDS)
+		if(carbon_sanity >= 10)
+			return
+		// So our sanity is dead, time to fuck em up
+		if(SPT_PROB(20, seconds_per_tick))
+			to_chat(carbon_view, span_warning("оно эхом отдаётся в вас!"))
+		visible_hallucination_pulse(
+			center = get_turf(carbon_view),
+			radius = 7,
+			hallucination_duration = 50 SECONDS
+		)
+		carbon_view.adjust_temp_blindness(5 SECONDS)
+		if(should_mind_explode(carbon_view))
+			to_chat(carbon_view, span_boldbig(span_red(\
+				"ВАШИ ЧУВСТВА ОХВАЧЕНЫ УЖАСОМ, КОГДА В ВАШ РАЗУМ ВТОРГАЕТСЯ ПОТУСТОРОННЯЯ СИЛА, ПЫТАЮЩАЯСЯ ПЕРЕПИСЫВАТЬ ВАШЕ СУЩЕСТВО. \
+				ВЫ ДАЖЕ НЕ УСПЕВАЕТЕ КРИКНУТЬ, КАК ВАШ ИМПЛАНТ АКТИВИРУЕТ СВОЮ СИСТЕМУ АВАРИЙНОЙ ПСИОНИЧЕСКОЙ ЗАЩИТЫ, СНОСЯ ВАМ ГОЛОВУ.")))
+			var/obj/item/bodypart/head/head = locate() in carbon_view.bodyparts
+			if(!head?.dismember())
+				carbon_view.gib(DROP_ALL_REMAINS)
+			var/datum/effect_system/reagents_explosion/explosion = new()
+			explosion.set_up(1, get_turf(carbon_view), 1)
+			explosion.start(src)
+		else
+			attempt_conversion(carbon_view, source)
+
+
+/datum/heretic_knowledge/ultimate/moon_final/proc/should_mind_explode(mob/living/carbon/target)
+	if(HAS_TRAIT(target, TRAIT_MINDSHIELD))
+		return TRUE
+	if(IS_CULTIST_OR_CULTIST_MOB(target))
+		return TRUE
+	return FALSE

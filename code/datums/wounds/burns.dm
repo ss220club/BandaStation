@@ -18,33 +18,31 @@
 
 	default_scar_file = FLESH_SCAR_FILE
 
-	treatable_by = list(/obj/item/stack/medical/ointment, /obj/item/stack/medical/mesh) // sterilizer and alcohol will require reagent treatments, coming soon
-
 	// Flesh damage vars
-	/// How much damage to our flesh we currently have. Once both this and infestation reach 0, the wound is considered healed
+	/// How much damage to our flesh we currently have. Once both this and infection reach 0, the wound is considered healed
 	var/flesh_damage = 5
 	/// Our current counter for how much flesh regeneration we have stacked from regenerative mesh/synthflesh/whatever, decrements each tick and lowers flesh_damage
 	var/flesh_healing = 0
 
-	// Infestation vars (only for severe and critical)
+	// Infection vars (only for severe and critical)
 	/// How quickly infection breeds on this burn if we don't have disinfectant
-	var/infestation_rate = 0
+	var/infection_rate = 0
 	/// Our current level of infection
-	var/infestation = 0
-	/// Our current level of sanitization/anti-infection, from disinfectants/alcohol/UV lights. While positive, totally pauses and slowly reverses infestation effects each tick
+	var/infection = 0
+	/// Our current level of sanitization/anti-infection, from disinfectants/alcohol/UV lights. While positive, totally pauses and slowly reverses infection effects each tick
 	var/sanitization = 0
 
-	/// Once we reach infestation beyond WOUND_INFESTATION_SEPSIS, we get this many warnings before the limb is completely paralyzed (you'd have to ignore a really bad burn for a really long time for this to happen)
+	/// Once we reach infection beyond WOUND_INFECTION_SEPTIC, we get this many warnings before the limb is completely paralyzed (you'd have to ignore a really bad burn for a really long time for this to happen)
 	var/strikes_to_lose_limb = 3
 
-/datum/wound/burn/flesh/handle_process(seconds_per_tick, times_fired)
+/datum/wound/burn/flesh/handle_process(seconds_per_tick)
 
 	if (!victim || HAS_TRAIT(victim, TRAIT_STASIS))
 		return
 
 	. = ..()
 	if(strikes_to_lose_limb <= 0) // we've already hit sepsis, nothing more to do
-		victim.adjustToxLoss(0.25 * seconds_per_tick)
+		victim.adjust_tox_loss(0.25 * seconds_per_tick)
 		if(SPT_PROB(0.5, seconds_per_tick))
 			victim.visible_message(span_danger("Инфекция на остатках [limb.ru_plaintext_zone[GENITIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)] тошнотворно пузырится!"), span_warning("Вы чувствуете, как инфекция на остатках вашей [limb.ru_plaintext_zone[GENITIVE] || limb.plaintext_zone] проникает в ваши вены!"), vision_distance = COMBAT_MESSAGE_RANGE)
 		return
@@ -56,10 +54,10 @@
 	if(HAS_TRAIT(victim, TRAIT_VIRUS_RESISTANCE))
 		sanitization += 0.9
 	if(HAS_TRAIT(victim, TRAIT_IMMUNODEFICIENCY))
-		infestation += 0.05
+		infection += 0.05
 		sanitization = max(sanitization - 0.15, 0)
-		if(infestation_rate <= 0.15 && prob(50))
-			infestation_rate += 0.001
+		if(infection_rate <= 0.15 && prob(50))
+			infection_rate += 0.001
 	if(limb.current_gauze)
 		limb.seep_gauze(WOUND_BURN_SANITIZATION_RATE * seconds_per_tick)
 
@@ -69,11 +67,11 @@
 		flesh_healing = max(flesh_healing - (0.5 * bandage_factor * seconds_per_tick), 0) // good bandages multiply the length of flesh healing
 
 	// if we have little/no infection, the limb doesn't have much burn damage, and our nutrition is good, heal some flesh
-	if(infestation <= WOUND_INFECTION_MODERATE && (limb.burn_dam < 5) && (victim.nutrition >= NUTRITION_LEVEL_FED))
+	if(infection <= WOUND_INFECTION_MODERATE && (limb.burn_dam < 5) && (victim.nutrition >= NUTRITION_LEVEL_FED))
 		flesh_healing += 0.2
 
 	// here's the check to see if we're cleared up
-	if((flesh_damage <= 0) && (infestation <= WOUND_INFECTION_MODERATE))
+	if((flesh_damage <= 0) && (infection <= WOUND_INFECTION_MODERATE))
 		to_chat(victim, span_green("Ожоги на вашей [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] зажили!"))
 		qdel(src)
 		return
@@ -81,18 +79,18 @@
 	// sanitization is checked after the clearing check but before the actual ill-effects, because we freeze the effects of infection while we have sanitization
 	if(sanitization > 0)
 		var/bandage_factor = limb.current_gauze?.burn_cleanliness_bonus || 1
-		infestation = max(infestation - (WOUND_BURN_SANITIZATION_RATE * seconds_per_tick), 0)
+		infection = max(infection - (WOUND_BURN_SANITIZATION_RATE * seconds_per_tick), 0)
 		sanitization = max(sanitization - (WOUND_BURN_SANITIZATION_RATE * bandage_factor * seconds_per_tick), 0)
 		return
 
-	infestation += infestation_rate * seconds_per_tick
-	switch(infestation)
+	infection += infection_rate * seconds_per_tick
+	switch(infection)
 		if(0 to WOUND_INFECTION_MODERATE)
 			return
 
 		if(WOUND_INFECTION_MODERATE to WOUND_INFECTION_SEVERE)
 			if(SPT_PROB(15, seconds_per_tick))
-				victim.adjustToxLoss(0.2)
+				victim.adjust_tox_loss(0.2)
 				if(prob(6))
 					to_chat(victim, span_warning("Волдыри на вашей [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] выделяют странный гной..."))
 
@@ -108,7 +106,7 @@
 				return
 
 			if(SPT_PROB(10, seconds_per_tick))
-				victim.adjustToxLoss(0.5)
+				victim.adjust_tox_loss(0.5)
 
 		if(WOUND_INFECTION_CRITICAL to WOUND_INFECTION_SEPTIC)
 			if(!disabling)
@@ -124,12 +122,12 @@
 			if(SPT_PROB(2.48, seconds_per_tick))
 				if(prob(20))
 					to_chat(victim, span_warning("Вы размышляете о жизни без своей [limb.ru_plaintext_zone[GENITIVE] || limb.plaintext_zone]..."))
-					victim.adjustToxLoss(0.75)
+					victim.adjust_tox_loss(0.75)
 				else
-					victim.adjustToxLoss(1)
+					victim.adjust_tox_loss(1)
 
 		if(WOUND_INFECTION_SEPTIC to INFINITY)
-			if(SPT_PROB(0.5 * infestation, seconds_per_tick))
+			if(SPT_PROB(0.5 * infection, seconds_per_tick))
 				strikes_to_lose_limb--
 				switch(strikes_to_lose_limb)
 					if(2 to INFINITY)
@@ -167,7 +165,7 @@
 
 		condition += ", и перевязана [limb.current_gauze.declent_ru(INSTRUMENTAL)]. Повязка [bandage_condition]."
 	else
-		switch(infestation)
+		switch(infection)
 			if(WOUND_INFECTION_MODERATE to WOUND_INFECTION_SEVERE)
 				condition += ", [span_deadsay("и видны ранние признаки инфекции.")]"
 			if(WOUND_INFECTION_SEVERE to WOUND_INFECTION_CRITICAL)
@@ -184,7 +182,7 @@
 /datum/wound/burn/flesh/severity_text(simple = FALSE)
 	. = ..()
 	. += " Ожог / "
-	switch(infestation)
+	switch(infection)
 		if(-INFINITY to WOUND_INFECTION_MODERATE)
 			. += "Отсутствует"
 		if(WOUND_INFECTION_MODERATE to WOUND_INFECTION_SEVERE)
@@ -206,10 +204,10 @@
 	. = ..()
 	. += "<div class='ml-3'>"
 
-	if(infestation <= sanitization && flesh_damage <= flesh_healing)
+	if(infection <= sanitization && flesh_damage <= flesh_healing)
 		. += "Дополнительное лечение не требуется: Ожоги заживут в ближайшее время."
 	else
-		switch(infestation)
+		switch(infection)
 			if(WOUND_INFECTION_MODERATE to WOUND_INFECTION_SEVERE)
 				. += "Уровень инфекции: Умеренный\n"
 			if(WOUND_INFECTION_SEVERE to WOUND_INFECTION_CRITICAL)
@@ -218,7 +216,7 @@
 				. += "Уровень инфекции: [span_deadsay("КРИТИЧЕСКИЙ")]\n"
 			if(WOUND_INFECTION_SEPTIC to INFINITY)
 				. += "Уровень инфекции: [span_deadsay("ПОТЕРЯ НЕМИУЕМА")]\n"
-		if(infestation > sanitization)
+		if(infection > sanitization)
 			. += "\tХирургическая обработка, антибиотики/стерилизаторы или регенеративная сетка избавят от инфекции. Ультрафиолетовые ручные фонарики парамедиков также эффективны.\n"
 
 		if(flesh_damage > 0)
@@ -231,7 +229,7 @@
 
 /// Checks if the wound is in a state that ointment or flesh will help
 /datum/wound/burn/flesh/proc/can_be_ointmented_or_meshed()
-	if(infestation > 0 && sanitization < infestation)
+	if(infection > 0 && sanitization < infection)
 		return TRUE
 	if(flesh_damage > 0 && flesh_healing <= flesh_damage)
 		return TRUE
@@ -241,22 +239,21 @@
 /datum/wound/burn/flesh/proc/uv(obj/item/flashlight/pen/paramedic/I, mob/user)
 	if(!COOLDOWN_FINISHED(I, uv_cooldown))
 		to_chat(user, span_notice("[capitalize(I.declent_ru(NOMINATIVE))] еще перезаряжается!"))
-		return TRUE
-	if(infestation <= 0 || infestation < sanitization)
+		return
+	if(infection <= 0 || infection < sanitization)
 		to_chat(user, span_notice("Заражение на [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)] уже излечивается, и дополнительная обработка ультрафиолетом не требуется!"))
-		return TRUE
+		return
 
 	user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] дезинфицирует ожоги [limb.ru_plaintext_zone[GENITIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)] при помощи [I.declent_ru(GENITIVE)]."), span_notice("Вы дезинфицируете ожоги [limb.ru_plaintext_zone[GENITIVE] || limb.plaintext_zone] у [user == victim ? "вас" : "[victim.declent_ru(GENITIVE)]"] при помощи [I.declent_ru(GENITIVE)]."), vision_distance=COMBAT_MESSAGE_RANGE)
 	sanitization += I.uv_power
 	COOLDOWN_START(I, uv_cooldown, I.uv_cooldown_length)
-	return TRUE
 
-/datum/wound/burn/flesh/treat(obj/item/I, mob/user)
-	if(istype(I, /obj/item/flashlight/pen/paramedic))
-		return uv(I, user)
+/datum/wound/burn/flesh/treat(obj/item/tool, mob/user)
+	if(istype(tool, /obj/item/flashlight/pen/paramedic))
+		uv(tool, user)
 
 // people complained about burns not healing on stasis beds, so in addition to checking if it's cured, they also get the special ability to very slowly heal on stasis beds if they have the healing effects stored
-/datum/wound/burn/flesh/on_stasis(seconds_per_tick, times_fired)
+/datum/wound/burn/flesh/on_stasis(seconds_per_tick)
 	. = ..()
 	if(strikes_to_lose_limb <= 0) // we've already hit sepsis, nothing more to do
 		if(SPT_PROB(0.5, seconds_per_tick))
@@ -264,12 +261,12 @@
 		return
 	if(flesh_healing > 0)
 		flesh_damage = max(flesh_damage - (0.1 * seconds_per_tick), 0)
-	if((flesh_damage <= 0) && (infestation <= 1))
+	if((flesh_damage <= 0) && (infection <= 1))
 		to_chat(victim, span_green("Ожоги на [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] очистились!"))
 		qdel(src)
 		return
 	if(sanitization > 0)
-		infestation = max(infestation - (0.1 * WOUND_BURN_SANITIZATION_RATE * seconds_per_tick), 0)
+		infection = max(infection - (0.1 * WOUND_BURN_SANITIZATION_RATE * seconds_per_tick), 0)
 
 /datum/wound/burn/flesh/on_synthflesh(reac_volume)
 	flesh_healing += reac_volume * 0.5 // 20u patch will heal 10 flesh standard
@@ -277,7 +274,7 @@
 /datum/wound_pregen_data/flesh_burn
 	abstract = TRUE
 
-	required_wounding_types = list(WOUND_BURN)
+	required_wounding_type = WOUND_BURN
 	required_limb_biostate = BIO_FLESH
 
 	wound_series = WOUND_SERIES_FLESH_BURN_BASIC
@@ -325,8 +322,8 @@
 	damage_multiplier_penalty = 1.2
 	series_threshold_penalty = 40
 	status_effect_type = /datum/status_effect/wound/burn/flesh/severe
-	treatable_by = list(/obj/item/flashlight/pen/paramedic, /obj/item/stack/medical/ointment, /obj/item/stack/medical/mesh)
-	infestation_rate = 0.07 // appx 9 minutes to reach sepsis without any treatment
+	treatable_by = list(/obj/item/flashlight/pen/paramedic)
+	infection_rate = 0.07 // appx 9 minutes to reach sepsis without any treatment
 	flesh_damage = 12.5
 	scar_keyword = "burnsevere"
 
@@ -356,8 +353,8 @@
 	sound_effect = 'sound/effects/wounds/sizzle2.ogg'
 	threshold_penalty = 25
 	status_effect_type = /datum/status_effect/wound/burn/flesh/critical
-	treatable_by = list(/obj/item/flashlight/pen/paramedic, /obj/item/stack/medical/ointment, /obj/item/stack/medical/mesh)
-	infestation_rate = 0.075 // appx 4.33 minutes to reach sepsis without any treatment
+	treatable_by = list(/obj/item/flashlight/pen/paramedic)
+	infection_rate = 0.075 // appx 4.33 minutes to reach sepsis without any treatment
 	flesh_damage = 20
 	scar_keyword = "burncritical"
 

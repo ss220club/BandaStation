@@ -1,30 +1,58 @@
-/// The max amount of health a ghoul has.
-#define GHOUL_MAX_HEALTH 25
-/// The max amount of health a voiceless dead has.
-#define MUTE_MAX_HEALTH 50
-
-/datum/heretic_knowledge_tree_column/main/flesh
-	neighbour_type_left = /datum/heretic_knowledge_tree_column/lock_to_flesh
-	neighbour_type_right = /datum/heretic_knowledge_tree_column/flesh_to_void
-
+/datum/heretic_knowledge_tree_column/flesh
 	route = PATH_FLESH
 	ui_bgr = "node_flesh"
+	complexity = "Varies"
+	complexity_color = COLOR_ORANGE
+	icon = list(
+		"icon" = 'icons/obj/weapons/khopesh.dmi',
+		"state" = "flesh_blade",
+		"frame" = 1,
+		"dir" = SOUTH,
+		"moving" = FALSE,
+	)
+	description = list(
+		"Путь Плоти специализируется на призыве гулей и чудовищ для выполнения ваших приказов.",
+		"Выбирайте этот путь, если вам нравится чувствовать себя некромантом, командующим ордами нежити.",
+	)
+	pros = list(
+		"Способен превращать мертвых гуманоидов в хрупких, но преданных гулей.",
+		"Доступ к разнообразному списку призываемых миньонов.",
+		"Ваши призывы очень разнообразны и могут быстро подавить экипаж, если вы скоординируете свои атаки.",
+		"Поедание органов или полнота дают различные бонусы (в зависимости от уровня вашего пассивного навыка).",
+	)
+	cons = list(
+		"Важным этапом вашего прогресса является получение дополнительных призываемых чудовищ.",
+		"У вас очень мало полезных способностей, кроме призыва чудовищ.",
+		"Вы не получаете врожденного доступа к заклинаниям защиты, атаки или мобильности.",
+		"Вы в основном фокусируетесь на поддержке своих миньонов.",
+	)
+	tips = list(
+		"Ваша Хватка Мансуса позволяет вам превращать мертвых гуманоидов в гулей (даже гуманоидов с защитой разума, таких как офицеры и капитан). Она также оставляет след, который вызывает сильное кровотечение, когда его задевает ваш Кровавый Клинок.",
+		"Для Еретика Плоти органы и трупы — лучшие друзья! Вы можете использовать их для ритуалов, исцеления или получения усилений.",
+		"Ваше заклинание «Плетение Плоти» может исцелять ваших призываемых существ. Ваша мантия наделяет вас аурой, которая также исцеляет призываемых существ, находящихся поблизости (но не вас самих).",
+		"Ваше заклинание «Плетение Плоти» также позволяет вам похищать органы у гуманоидов. Полезно, если вам нужна запасная печень.",
+		"Сырые Пророки могут соединить вас и других призываемых существ в телепатическую сеть, позволяющую координировать действия на большом расстоянии.",
+		"Преследователи Плоти — неплохие бойцы, способные маскироваться под мелких существ, таких как бипски и корги. Они также могут использовать заклинание ЭМИ, но это может нанести им вред, если они превратились в робота!",
+		"Ваш успех на этом пути зависит от того, насколько опытные и сильные ваши подчиненные. Однако в количестве всегда есть сила: чем больше подчиненных, тем выше ваши шансы на успех.",
+		"Ваши подчиненные более легкозаменяемы, чем вы. Не бойтесь отправлять их на верную гибель. Вы всегда сможете восстановить их позже... возможно.",
+	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_flesh
-	grasp = /datum/heretic_knowledge/limited_amount/flesh_grasp
-	tier1 = /datum/heretic_knowledge/limited_amount/flesh_ghoul
-	mark = 	/datum/heretic_knowledge/mark/flesh_mark
-	ritual_of_knowledge = /datum/heretic_knowledge/knowledge_ritual/flesh
-	unique_ability = /datum/heretic_knowledge/spell/flesh_surgery
-	tier2 = /datum/heretic_knowledge/summon/raw_prophet
+	knowledge_tier1 = /datum/heretic_knowledge/limited_amount/flesh_ghoul
+	guaranteed_side_tier1 = /datum/heretic_knowledge/limited_amount/risen_corpse
+	knowledge_tier2 = /datum/heretic_knowledge/spell/flesh_surgery
+	guaranteed_side_tier2 = /datum/heretic_knowledge/crucible
+	robes = /datum/heretic_knowledge/armor/flesh
+	knowledge_tier3 = /datum/heretic_knowledge/summon/raw_prophet
+	guaranteed_side_tier3 = /datum/heretic_knowledge/spell/crimson_cleave
 	blade = /datum/heretic_knowledge/blade_upgrade/flesh
-	tier3 = /datum/heretic_knowledge/summon/stalker
+	knowledge_tier4 = /datum/heretic_knowledge/summon/stalker
 	ascension = /datum/heretic_knowledge/ultimate/flesh_final
 
 /datum/heretic_knowledge/limited_amount/starting/base_flesh
-	name = "Principle of Hunger"
+	name = "Главенство Голода"
 	desc = "Открывает перед вами Путь плоти. \
-		Позволяет трансмутировать нож и лужу крови в Кровавый клинок. \
+		Позволяет трансмутировать нож и лужу крови в Кровавый Клинок. \
 		Одновременно можно иметь только три."
 	gain_text = "Сотни наших голодали, но не я... Я нашел силу в своей жадности."
 	required_atoms = list(
@@ -35,6 +63,8 @@
 	limit = 3 // Bumped up so they can arm up their ghouls too.
 	research_tree_icon_path = 'icons/obj/weapons/khopesh.dmi'
 	research_tree_icon_state = "flesh_blade"
+	mark_type = /datum/status_effect/eldritch/flesh
+	eldritch_passive = /datum/status_effect/heretic_passive/flesh
 
 /datum/heretic_knowledge/limited_amount/starting/base_flesh/on_research(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
@@ -45,28 +75,8 @@
 	to_chat(user, span_hierophant("Пройдя Путь плоти, вы получаете еще одну цель."))
 	our_heretic.owner.announce_objectives()
 
-/datum/heretic_knowledge/limited_amount/flesh_grasp
-	name = "Grasp of Flesh"
-	desc = "Ваша Хватка Мансуса получает способность создавать гуля из трупа с душой. \
-		Гули имеют всего 25 здоровья и выглядят как хаски в глазах язычников, но могут эффективно использовать Кровавые клинки. \
-		Используя этот способ, можно иметь только одного."
-	gain_text = "Мои новообретенные желания заставляли меня достигать все больших и больших высот."
-
-	limit = 1
-	cost = 1
-
-
-	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
-	research_tree_icon_state = "grasp_flesh"
-
-/datum/heretic_knowledge/limited_amount/flesh_grasp/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK, PROC_REF(on_mansus_grasp))
-
-/datum/heretic_knowledge/limited_amount/flesh_grasp/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
-	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK)
-
-/datum/heretic_knowledge/limited_amount/flesh_grasp/proc/on_mansus_grasp(mob/living/source, mob/living/target)
-	SIGNAL_HANDLER
+/datum/heretic_knowledge/limited_amount/starting/base_flesh/on_mansus_grasp(mob/living/source, mob/living/target)
+	. = ..()
 
 	if(target.stat != DEAD)
 		return
@@ -92,8 +102,11 @@
 
 	make_ghoul(source, target)
 
+/// The max amount of health a ghoul has.
+#define GHOUL_MAX_HEALTH 25
+
 /// Makes [victim] into a ghoul.
-/datum/heretic_knowledge/limited_amount/flesh_grasp/proc/make_ghoul(mob/living/user, mob/living/carbon/human/victim)
+/datum/heretic_knowledge/limited_amount/starting/base_flesh/proc/make_ghoul(mob/living/user, mob/living/carbon/human/victim)
 	user.log_message("created a ghoul, controlled by [key_name(victim)].", LOG_GAME)
 	message_admins("[ADMIN_LOOKUPFLW(user)] created a ghoul, [ADMIN_LOOKUPFLW(victim)].")
 
@@ -106,18 +119,18 @@
 	)
 
 /// Callback for the ghoul status effect - Tracking all of our ghouls
-/datum/heretic_knowledge/limited_amount/flesh_grasp/proc/apply_to_ghoul(mob/living/ghoul)
+/datum/heretic_knowledge/limited_amount/starting/base_flesh/proc/apply_to_ghoul(mob/living/ghoul)
 	LAZYADD(created_items, WEAKREF(ghoul))
 
 /// Callback for the ghoul status effect - Tracking all of our ghouls
-/datum/heretic_knowledge/limited_amount/flesh_grasp/proc/remove_from_ghoul(mob/living/ghoul)
+/datum/heretic_knowledge/limited_amount/starting/base_flesh/proc/remove_from_ghoul(mob/living/ghoul)
 	LAZYREMOVE(created_items, WEAKREF(ghoul))
 
 /datum/heretic_knowledge/limited_amount/flesh_ghoul
-	name = "Imperfect Ritual"
+	name = "Несовершенный Ритуал"
 	desc = "Позволяет трансмутировать труп и мак, чтобы создать Безголосого мертвеца. \
 		Трупу необязательно иметь душу. \
-		Безголосые мертвецы - это немые гули, у них всего 50 здоровья, но они могут эффективно использовать Кровавые клинки. \
+		Безголосые мертвецы - это немые гули, у них всего 50 здоровья, но они могут эффективно использовать Кровавые Клинки. \
 		Одновременно можно иметь только два."
 	gain_text = "Я нашел записи о темном ритуале, незаконченные... но все же я стремился вперед."
 	required_atoms = list(
@@ -125,11 +138,9 @@
 		/obj/item/food/grown/poppy = 1,
 	)
 	limit = 2
-	cost = 1
+	cost = 2
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "ghoul_voiceless"
-
-
 
 /datum/heretic_knowledge/limited_amount/flesh_ghoul/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
 	. = ..()
@@ -173,6 +184,9 @@
 	make_ghoul(user, soon_to_be_ghoul)
 	return TRUE
 
+/// The max amount of health a voiceless dead has.
+#define MUTE_MAX_HEALTH 50
+
 /// Makes [victim] into a ghoul.
 /datum/heretic_knowledge/limited_amount/flesh_ghoul/proc/make_ghoul(mob/living/user, mob/living/carbon/human/victim)
 	user.log_message("created a voiceless dead, controlled by [key_name(victim)].", LOG_GAME)
@@ -196,31 +210,35 @@
 	LAZYREMOVE(created_items, WEAKREF(ghoul))
 	REMOVE_TRAIT(ghoul, TRAIT_MUTE, MAGIC_TRAIT)
 
-/datum/heretic_knowledge/mark/flesh_mark
-	name = "Mark of Flesh"
-	desc = "Ваша Хватка Мансуса теперь накладывает Метку плоти. Метка срабатывает от атаки вашим Кровавым клинком. \
-		При срабатывании у жертвы начинается обильное кровотечение."
-	gain_text = "Тогда-то я и увидел их, отмеченных. Они были вне досягаемости. Они кричали и кричали."
-
-
-	mark_type = /datum/status_effect/eldritch/flesh
-
-/datum/heretic_knowledge/knowledge_ritual/flesh
-
 /datum/heretic_knowledge/spell/flesh_surgery
-	name = "Knitting of Flesh"
-	desc = "Дарует вам заклинание Knit Flesh. Это заклинание позволяет извлекать органы из жертв \
+	name = "Плетение Плоти"
+	desc = "Дарует вам заклинание «Плетение Плоти». Это заклинание позволяет извлекать органы из жертв \
 		без необходимости длительной операции. Этот процесс занимает гораздо больше времени, если цель жива. \
 		Это заклинание также позволяет вам исцелять ваших миньонов и призванных или восстанавливать отказавшие органы до приемлемого состояния."
 	gain_text = "Но они недолго оставались вне моей досягаемости. С каждым шагом крики усиливались, пока, наконец, \
 		я не понял, что их можно заглушить."
 	action_to_add = /datum/action/cooldown/spell/touch/flesh_surgery
-	cost = 1
+	cost = 2
+	drafting_tier = 5
+
+/datum/heretic_knowledge/armor/flesh
+	desc = "Allows you to transmute a table (or a suit), a mask and a pool of blood to create a writhing embrace. \
+		It grants you the ability to detect the health condition of other living (and non-living) and an aura that slowly heals your summons. \
+		Acts as a focus while hooded."
+	gain_text = "I tugged these wretched, slothing things about me, like one might a warm blanket. \
+				With eyes-not-mine, they will witness. With teeth-not-mine, they will clench. With limbs-not-mine, they will break."
+	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/flesh)
+	research_tree_icon_state = "flesh_armor"
+	required_atoms = list(
+		list(/obj/structure/table, /obj/item/clothing/suit) = 1,
+		/obj/item/clothing/mask = 1,
+		/obj/effect/decal/cleanable/blood = 1,
+	)
 
 /datum/heretic_knowledge/summon/raw_prophet
-	name = "Raw Ritual"
-	desc = "Позволяет трансмутировать пару глаз, левую руку и лужу крови, чтобы создать Сырого gророка. \
-		Сырые пророки обладают значительно увеличенной дальностью зрения и рентгеновским зрением, \
+	name = "Сырой Ритуал"
+	desc = "Позволяет трансмутировать пару глаз, левую руку и лужу крови, чтобы создать Сырого Пророка. \
+		Сырые Пророки обладают значительно увеличенной дальностью зрения и рентгеновским зрением, \
 		а также джаунтом дальнего действия и способностью связывать разумы для легкого общения, но очень хрупки и слабы в бою."
 	gain_text = "Я не мог продолжать в одиночку. Я смог призвать Жуткого человека, чтобы он помог мне увидеть больше. \
 		Крики... когда-то постоянные, теперь заглушались их убогим видом. Ничто не было недосягаемо."
@@ -230,14 +248,14 @@
 		/obj/item/bodypart/arm/left = 1,
 	)
 	mob_to_summon = /mob/living/basic/heretic_summon/raw_prophet
-	cost = 1
+	cost = 2
 	poll_ignore_define = POLL_IGNORE_RAW_PROPHET
 
 
 /datum/heretic_knowledge/blade_upgrade/flesh
-	name = "Bleeding Steel"
+	name = "Кровоточащая Сталь"
 	desc = "Ваш Кровавый клинок теперь вызывает у врагов сильное кровотечение при атаке."
-	gain_text = "Жудкий человек был не один. Он привел меня к Маршалу. \
+	gain_text = "Жуткий человек был не один. Он привел меня к Маршалу. \
 		Наконец-то я начал понимать. А потом с небес хлынул кровавый дождь."
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "blade_upgrade_flesh"
@@ -254,7 +272,7 @@
 	crit_wound.apply_wound(bodypart, attack_direction = get_dir(source, target))
 
 /datum/heretic_knowledge/summon/stalker
-	name = "Lonely Ritual"
+	name = "Ритуал Одиночества"
 	desc = "Позволяет трансмутировать хвост любого вида, желудок, язык, ручку и лист бумаги, чтобы создать Сталкера. \
 		Сталкеры имеют джаунт, могут выпускать ЭМИ, превращаться в животных или автоматонов и сильны в бою."
 	gain_text = "Я смог объединить свою жадность и желания, чтобы вызвать мистическое чудовище, которого я никогда раньше не видел. \
@@ -268,13 +286,13 @@
 		/obj/item/paper = 1,
 	)
 	mob_to_summon = /mob/living/basic/heretic_summon/stalker
-	cost = 1
+	cost = 2
 
 	poll_ignore_define = POLL_IGNORE_STALKER
-
+	is_final_knowledge = TRUE
 
 /datum/heretic_knowledge/ultimate/flesh_final
-	name = "Priest's Final Hymn"
+	name = "Последний Гимн Жреца"
 	desc = "Ритуал вознесения Пути плоти. \
 		Принесите 4 трупа к руне трансмутации, чтобы завершить ритуал. \
 		После завершения вы обретаете способность сбросить человеческую форму \
@@ -297,7 +315,7 @@
 	worm_spell.Grant(user)
 
 	var/datum/antagonist/heretic/heretic_datum = GET_HERETIC(user)
-	var/datum/heretic_knowledge/limited_amount/flesh_grasp/grasp_ghoul = heretic_datum.get_knowledge(/datum/heretic_knowledge/limited_amount/flesh_grasp)
+	var/datum/heretic_knowledge/limited_amount/starting/base_flesh/grasp_ghoul = heretic_datum.get_knowledge(/datum/heretic_knowledge/limited_amount/starting/base_flesh)
 	grasp_ghoul.limit *= 3
 	var/datum/heretic_knowledge/limited_amount/flesh_ghoul/ritual_ghoul = heretic_datum.get_knowledge(/datum/heretic_knowledge/limited_amount/flesh_ghoul)
 	ritual_ghoul.limit *= 3

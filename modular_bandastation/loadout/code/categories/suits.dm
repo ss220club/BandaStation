@@ -9,6 +9,21 @@
 /datum/loadout_item/suits/insert_path_into_outfit(datum/outfit/outfit, mob/living/carbon/human/equipper, visuals_only = FALSE)
 	if(outfit.suit)
 		LAZYADD(outfit.backpack_contents, outfit.suit)
+
+	if(outfit.suit_store)
+		if(outfit.suit_store::w_class <= WEIGHT_CLASS_NORMAL)
+			LAZYADD(outfit.backpack_contents, outfit.suit_store)
+		else if((!outfit.belt || (outfit.belt::w_class <= WEIGHT_CLASS_NORMAL)) && (outfit.suit_store::slot_flags & ITEM_SLOT_BELT))
+			if(outfit.belt)
+				LAZYADD(outfit.backpack_contents, outfit.belt)
+			outfit.belt = outfit.suit_store
+		else if(!outfit.r_hand)
+			outfit.r_hand = outfit.suit_store
+		else if(!outfit.l_hand)
+			outfit.l_hand = outfit.suit_store
+
+		outfit.suit_store = null
+
 	outfit.suit = item_path
 
 // MARK: Tier 0

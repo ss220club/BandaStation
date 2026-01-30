@@ -3,7 +3,7 @@
 
 /obj/item/plant_analyzer
 	name = "plant analyzer"
-	desc = "A scanner used to evaluate a plant's various areas of growth, genetic traits and chemicals."
+	desc = "Сканер, используемый для оценки различных аспектов роста растений, их генетических особенностей и химического состава."
 	icon = 'icons/obj/devices/scanner.dmi'
 	icon_state = "hydro"
 	inhand_icon_state = "analyzer"
@@ -13,6 +13,9 @@
 	w_class = WEIGHT_CLASS_TINY
 	slot_flags = ITEM_SLOT_BELT
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*0.3, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.2)
+	sound_vary = TRUE
+	pickup_sound = SFX_GENERIC_DEVICE_PICKUP
+	drop_sound = SFX_GENERIC_DEVICE_DROP
 	/// Cached data from ui_interact
 	var/list/last_scan_data
 	/// Weakref to the last thing we scanned
@@ -42,8 +45,8 @@
 		if(!(living_target.mob_biotypes & MOB_PLANT))
 			return NONE
 
-		context[SCREENTIP_CONTEXT_LMB] = "Scan health"
-		context[SCREENTIP_CONTEXT_RMB] = "Scan chemicals"
+		context[SCREENTIP_CONTEXT_LMB] = "Сканирование здоровья"
+		context[SCREENTIP_CONTEXT_RMB] = "Сканирование на химикаты"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(isitem(target))
@@ -52,7 +55,7 @@
 		if(!item_target.get_plant_seed())
 			return NONE
 
-		context[SCREENTIP_CONTEXT_LMB] = "Scan plant stats"
+		context[SCREENTIP_CONTEXT_LMB] = "Сканирование показателей растения"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	return NONE
@@ -109,8 +112,8 @@
  */
 /obj/item/plant_analyzer/proc/plant_biotype_health_scan(mob/living/scanned_mob, mob/living/carbon/human/user)
 	user.visible_message(
-		span_notice("[user] analyzes [scanned_mob]'s vitals."),
-		span_notice("You analyze [scanned_mob]'s vitals.")
+		span_notice("[user] анализирует жизненные показатели [scanned_mob]."),
+		span_notice("Вы анализируете жизненные показатели [scanned_mob].")
 		)
 
 	healthscan(user, scanned_mob, advanced = TRUE)
@@ -124,8 +127,8 @@
  */
 /obj/item/plant_analyzer/proc/plant_biotype_chem_scan(mob/living/scanned_mob, mob/living/carbon/human/user)
 	user.visible_message(
-		span_notice("[user] analyzes [scanned_mob]'s bloodstream."),
-		span_notice("You analyze [scanned_mob]'s bloodstream.")
+		span_notice("[user] анализирует кровоток [scanned_mob]."),
+		span_notice("Вы анализируете кровоток [scanned_mob].")
 		)
 	chemscan(user, scanned_mob)
 	add_fingerprint(user)
@@ -262,16 +265,16 @@
 
 	if(graft)
 		last_scan_data["graft_data"] = list(
-			"name" = graft.parent_name,
+			"name" = graft.plant_dna.name,
 			"icon" = graft.icon,
 			"icon_state" = graft.icon_state,
-			"yield" = graft.yield,
-			"production" = graft.production,
-			"lifespan" = graft.lifespan,
-			"endurance" = graft.endurance,
-			"weed_rate" = graft.weed_rate,
-			"weed_chance" = graft.weed_chance,
-			"graft_gene" = graft.stored_trait.type,
+			"yield" = graft.plant_dna.yield,
+			"production" = graft.plant_dna.production,
+			"lifespan" = graft.plant_dna.lifespan,
+			"endurance" = graft.plant_dna.endurance,
+			"weed_rate" = graft.plant_dna.weed_rate,
+			"weed_chance" = graft.plant_dna.weed_chance,
+			"graft_gene" = graft.plant_dna.graft_gene.type
 		)
 
 	if(user)
@@ -323,11 +326,11 @@
 			product_grinder_results[seed.product] = list()
 			var/obj/item/food/grown/product = new seed.product
 			var/datum/reagent/product_distill_reagent = product.distill_reagent
-			var/datum/reagent/product_juice_typepath = product.juice_typepath
+			var/datum/reagent/product_juice_typepath = product.juice_typepath()
 			product_grinder_results[seed.product]["distill_reagent"] = initial(product_distill_reagent.name)
 			product_grinder_results[seed.product]["juice_name"] = initial(product_juice_typepath.name)
 			product_grinder_results[seed.product]["grind_results"] = list()
-			for(var/datum/reagent/reagent as anything in product.grind_results)
+			for(var/datum/reagent/reagent as anything in product.grind_results())
 				product_grinder_results[seed.product]["grind_results"] += initial(reagent.name)
 			qdel(product)
 		seed_data["distill_reagent"] = product_grinder_results[seed.product]["distill_reagent"]

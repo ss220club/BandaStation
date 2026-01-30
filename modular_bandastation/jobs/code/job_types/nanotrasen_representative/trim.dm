@@ -40,10 +40,7 @@
 		ACCESS_THEATRE,
 		ACCESS_WEAPONS,
 	)
-	template_access = list(
-		ACCESS_CAPTAIN,
-		ACCESS_CHANGE_IDS
-	)
+	template_access = null
 	job = /datum/job/nanotrasen_representative
 	big_pointer = TRUE
 	pointer_color = COLOR_CENTCOM_BLUE

@@ -4,6 +4,7 @@
 		Чтобы сохранить секретность, мы можем говорить через обманку, как через обычный мозг. \
 		Ложный мозг будет передавать вам услышанную речь в фиолетовом цвете."
 	button_icon = 'icons/obj/devices/assemblies.dmi'
+	category = "stealth"
 	button_icon_state = "mmi_off"
 	dna_cost = CHANGELING_POWER_UNOBTAINABLE
 	ignores_fakedeath = TRUE // Can be used while fake dead

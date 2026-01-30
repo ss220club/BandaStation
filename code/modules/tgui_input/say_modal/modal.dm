@@ -24,13 +24,15 @@
 	/// The user who opened the window
 	var/client/client
 	/// Injury phrases to blurt out
-	var/list/hurt_phrases = list("ГХА!", "ГРХ!", "УГХ!", "АРГХ!", "АУ!", "МГХ!", "АХХ!")
+	var/static/list/hurt_phrases = list("ГХА!", "ГРХ!", "УГХ!", "АРГХ!", "АУ!", "МГХ!", "АХХ!")
 	/// Max message length
 	var/max_length = MAX_MESSAGE_LEN
 	/// The modal window
 	var/datum/tgui_window/window
 	/// Boolean for whether the tgui_say was opened by the user.
 	var/window_open
+	/// What text was present in the say box the last time save_text was called
+	var/saved_text = ""
 
 /** Creates the new input window to exist in the background. */
 /datum/tgui_say/New(client/client, id)
@@ -50,7 +52,6 @@
 	sleep(3 SECONDS)
 	window.initialize(
 			strict_mode = TRUE,
-			fancy = TRUE,
 			inline_css = file("tgui/public/tgui-say.bundle.css"),
 			inline_js = file("tgui/public/tgui-say.bundle.js"),
 	);
@@ -87,7 +88,14 @@
 	if(!payload?["channel"])
 		CRASH("No channel provided to an open TGUI-Say")
 	window_open = TRUE
-	if(payload["channel"] != OOC_CHANNEL && payload["channel"] != ADMIN_CHANNEL)
+	// BANDASTATION ADDITION START - Mentors
+	var/static/list/no_thinking_bubble_channels = list(
+		OOC_CHANNEL,
+		ADMIN_CHANNEL,
+		MENTOR_CHANNEL
+	)
+	// BANDASTATION ADDITION END - Mentors
+	if(!(payload["channel"] in no_thinking_bubble_channels)) // BANDASTATION EDIT - Mentors: (payload["channel"] in no_thinking_bubble_channels)
 		start_thinking()
 	if(!client.typing_indicators)
 		log_speech_indicators("[key_name(client)] started typing at [loc_name(client.mob)], indicators DISABLED.")
@@ -128,7 +136,7 @@
 	if (type == "typing")
 		start_typing()
 		return TRUE
-	if (type == "entry" || type == "force")
+	if (type == "entry" || type == "force" || type == "save")
 		handle_entry(type, payload)
 		return TRUE
 	return FALSE

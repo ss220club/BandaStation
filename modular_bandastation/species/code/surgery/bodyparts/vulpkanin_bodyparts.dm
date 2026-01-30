@@ -3,6 +3,7 @@
 	limb_id = SPECIES_VULPKANIN
 	is_dimorphic = FALSE
 	head_flags = HEAD_LIPS|HEAD_EYESPRITES|HEAD_EYECOLOR|HEAD_EYEHOLES|HEAD_DEBRAIN|HEAD_HAIR
+	species_hair_mask = /datum/hair_mask/vulp
 
 /obj/item/bodypart/chest/vulpkanin
 	icon_greyscale = 'icons/bandastation/mob/species/vulpkanin/bodyparts.dmi'

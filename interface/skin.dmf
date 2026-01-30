@@ -65,7 +65,7 @@ window "mainwindow"
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
 		statusbar = false
-		icon = 'icons\\ui\\common\\ss220.png'
+		icon = 'icons\\ui\\common\\ss220_icon.png'
 		macro = "default"
 		menu = "menu"
 	elem "split"
@@ -270,12 +270,13 @@ window "inputwindow"
 	elem "input"
 		type = INPUT
 		pos = 0,0
-		size = 805x20
+		size = 520x20
 		anchor1 = 0,0
 		anchor2 = 100,100
 		is-default = true
 		border = line
 		saved-params = "command"
+		can-scroll = true
 
 window "inputbuttons"
 	elem "inputbuttons"
