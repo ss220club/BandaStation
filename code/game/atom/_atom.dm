@@ -411,6 +411,10 @@
 /atom/proc/is_drainable()
 	return reagents && (reagents.flags & DRAINABLE)
 
+/// Can we dunk stuff into this container?
+/atom/proc/is_dunkable()
+	return reagents && (reagents.flags & DUNKABLE)
+
 /** Handles exposing this atom to a list of reagents.
  *
  * Sends COMSIG_ATOM_EXPOSE_REAGENTS
@@ -783,7 +787,7 @@
  *
  * Override this if you want an atom to be usable as a supplypod.
  */
-/atom/proc/setOpened()
+/atom/proc/set_opened()
 	return
 
 /**
@@ -791,7 +795,7 @@
  *
  * Override this if you want an atom to be usable as a supplypod.
  */
-/atom/proc/setClosed()
+/atom/proc/set_closed()
 	return
 
 ///Called after the atom is 'tamed' for type-specific operations, Usually called by the tameable component but also other things.

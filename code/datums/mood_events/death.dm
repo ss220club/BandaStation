@@ -1,3 +1,16 @@
+// Defines for priority levels of various conditional death moodlets.
+// These are defines so it's easier to get an overview of all priority levels in one place and tweak them all in some synchronous manner
+
+#define DESENSITIZED_PRIORITY 10
+#define PET_PRIORITY 30
+#define XENO_PRIORITY 35
+#define DONTCARE_PRIORITY 40
+#define ASHWALKER_PRIORITY 50
+#define GAMER_PRIORITY 80
+#define REVOLUTIONARY_PRIORITY 85
+#define CULT_PRIORITY 90
+#define NAIVE_PRIORITY 100
+
 /datum/mood_event/conditional/see_death
 	mood_change = -8
 	timeout = 5 MINUTES
@@ -13,7 +26,7 @@
 	return TRUE
 
 /datum/mood_event/conditional/see_death/add_effects(mob/dead_mob, dusted, gibbed)
-	update_effect(dead_mob)
+	update_effect(dead_mob, dusted, gibbed)
 
 	if(HAS_TRAIT(dead_mob, TRAIT_SPAWNED_MOB))
 		mood_change *= 0.25
@@ -38,7 +51,7 @@
 	description = capitalize(replacetext(description, "%DEAD_MOB%", get_descriptor(dead_mob)))
 
 /// Blank proc which allows conditional effects to modify mood, timeout, or description before the main effect is applied
-/datum/mood_event/conditional/see_death/proc/update_effect(mob/dead_mob)
+/datum/mood_event/conditional/see_death/proc/update_effect(mob/dead_mob, dusted, gibbed)
 	return
 
 /// Checks if the dead mob is a pet
@@ -76,18 +89,18 @@
 
 /// Highest priority: Clown naivety about death
 /datum/mood_event/conditional/see_death/naive
-	priority = 100
+	priority = NAIVE_PRIORITY
 	mood_change = 0
 
 /datum/mood_event/conditional/see_death/naive/condition_fulfilled(mob/living/who, mob/dead_mob, dusted, gibbed)
 	return HAS_MIND_TRAIT(who, TRAIT_NAIVE) && !dusted && !gibbed
 
-/datum/mood_event/conditional/see_death/naive/update_effect(mob/dead_mob)
+/datum/mood_event/conditional/see_death/naive/update_effect(mob/dead_mob, dusted, gibbed)
 	description = "Have a good nap, [get_descriptor(dead_mob)]."
 
 /// Cultists are super brainwashed so they get buffs instead
 /datum/mood_event/conditional/see_death/cult
-	priority = 90
+	priority = CULT_PRIORITY
 	description = "More souls for the Geometer!"
 	mood_change = parent_type::mood_change * -0.5
 
@@ -100,19 +113,19 @@
 
 /// Revs are also brainwashed but less so
 /datum/mood_event/conditional/see_death/revolutionary
-	priority = 85
+	priority = REVOLUTIONARY_PRIORITY
 	mood_change = parent_type::mood_change * -0.5
 
 /datum/mood_event/conditional/see_death/revolutionary/condition_fulfilled(mob/living/who, mob/dead_mob, dusted, gibbed)
 	return IS_REVOLUTIONARY(who) && (dead_mob.mind?.assigned_role.job_flags & JOB_HEAD_OF_STAFF)
 
-/datum/mood_event/conditional/see_death/revolutionary/update_effect(mob/dead_mob)
+/datum/mood_event/conditional/see_death/revolutionary/update_effect(mob/dead_mob, dusted, gibbed)
 	var/datum/job/possible_head_job = dead_mob.mind?.assigned_role
 	description = "[possible_head_job.title ? "The [LOWER_TEXT(possible_head_job.title)]" : "Another head of staff"] is dead! Long live the revolution!"
 
 /// Then gamers
 /datum/mood_event/conditional/see_death/gamer
-	priority = 80
+	priority = GAMER_PRIORITY
 	description = "Another one bites the dust!"
 	mood_change = parent_type::mood_change * -0.5
 
@@ -121,7 +134,7 @@
 
 /// People who just don't gaf
 /datum/mood_event/conditional/see_death/dontcare
-	priority = 40
+	priority = DONTCARE_PRIORITY
 	mood_change = 0
 	timeout = parent_type::timeout * 0.5
 
@@ -140,9 +153,26 @@
 	else
 		description = "Oh, %DEAD_MOB% died. Shame, I guess."
 
+/// Ashwalkers get a small boost from sacrificing people to the necropolis spire, and don't care otherwise
+/datum/mood_event/conditional/see_death/ashwalker
+	priority = ASHWALKER_PRIORITY
+	mood_change = 0
+
+/datum/mood_event/conditional/see_death/ashwalker/condition_fulfilled(mob/living/who, mob/dead_mob, dusted, gibbed)
+	return HAS_TRAIT(who, TRAIT_NECROPOLIS_WORSHIP) && !HAS_TRAIT(dead_mob, TRAIT_NECROPOLIS_WORSHIP)
+
+/datum/mood_event/conditional/see_death/ashwalker/update_effect(mob/dead_mob, dusted, gibbed)
+	if(gibbed)
+		description = "%DEAD_MOB% hasss been torn asssunder, glory to the Necropolisss!"
+		mood_change = /datum/mood_event/conditional/see_death::mood_change * -0.5
+	else if(dusted)
+		description = "Oh, %DEAD_MOB% wasss vaporized."
+	else
+		description = "Oh, %DEAD_MOB% died. Ssshame, I guesss."
+
 /// Pets take priority over normal death moodlets
 /datum/mood_event/conditional/see_death/pet
-	priority = 30
+	priority = PET_PRIORITY
 
 /datum/mood_event/conditional/see_death/pet/condition_fulfilled(mob/living/who, mob/dead_mob, dusted, gibbed)
 	return is_pet(dead_mob)
@@ -163,9 +193,88 @@
 		mood_change *= 0.25
 		timeout *= 0.5
 
+/// Small boost if you see a xenomorph die
+/datum/mood_event/conditional/see_death/xeno
+	priority = XENO_PRIORITY
+
+/// Check if the passed mob is any kind of xenomorph (covering for both carbon and basic types)
+/datum/mood_event/conditional/see_death/xeno/proc/is_any_xenomorph(mob/target)
+	return isalien(target) || isalienadult(target) // latter proc should have coverage for basic mbos
+
+/datum/mood_event/conditional/see_death/xeno/condition_fulfilled(mob/living/who, mob/dead_mob, dusted, gibbed)
+	if(is_any_xenomorph(who))
+		return FALSE
+
+	if(HAS_TRAIT(who, TRAIT_XENO_HOST))
+		return TRUE
+
+	return is_any_xenomorph(dead_mob)
+
+// Give buffs based on the type of xenomorph dying
+/datum/mood_event/conditional/see_death/xeno/update_effect(mob/dead_mob, dusted, gibbed)
+	// following values are in absolute value form, we make it have a positive effect later
+	var/change_modifier = 0
+	var/timeout_modifier = 0
+
+	if(HAS_TRAIT(owner, TRAIT_XENO_HOST))
+		handle_embryo_carrier(dead_mob)
+		return
+
+	if(islarva(dead_mob))
+		change_modifier = 0.1
+		timeout_modifier = 0.1
+		description = "Fine day whenever those slugs get squished."
+
+	if(isalienadult(dead_mob))
+		change_modifier = 0.25
+		timeout_modifier = 0.25
+		description = "That xenomorph bit the dust! Hell yeah!"
+		if(gibbed || dusted)
+			change_modifier += 0.1
+			timeout_modifier += 0.1
+			description = "It warms my heart to see xenomorphs get blown to bits!"
+
+	if(isalienroyal(dead_mob) || istype(dead_mob, /mob/living/basic/alien/queen))
+		change_modifier = 0.5
+		timeout_modifier = 0.5
+		description = "The queen has fallen! The galaxy lives another day! I hope those bastards all rot in hell!"
+		if(gibbed || dusted)
+			change_modifier += 0.25
+			timeout_modifier += 0.25
+			description = "Seeing the xenomorph queen blown to bits fills me with extreme joy!"
+
+
+	mood_change = initial(mood_change) * -change_modifier
+	timeout = initial(timeout) * timeout_modifier
+
+/// Separate proc that handles cases where the viewer is carrying a xenomorph embryo
+/datum/mood_event/conditional/see_death/xeno/proc/handle_embryo_carrier(mob/dead_mob)
+	if(!HAS_TRAIT(owner, TRAIT_XENO_HOST))
+		return
+
+	var/obj/item/organ/body_egg/alien_embryo/embryo = owner.get_organ_by_type(/obj/item/organ/body_egg/alien_embryo)
+	if(isnull(embryo))
+		stack_trace("Xeno Host [owner] missing embryo organ despite having XENO_HOST trait. What the fuck?")
+		return
+
+	if(owner.stat != CONSCIOUS) // if the carrier is sleeping then presumably the embryo's hivemind isn't affected
+		return
+
+	// You feel a lot worse if you're conscious and see a xenomorph die while implanted because the hivemind feels the loss of their sister
+	var/embryo_stage_multiplier = 1 + (embryo.stage / 10)
+	mood_change *= embryo_stage_multiplier
+	timeout *= embryo_stage_multiplier
+	description = "There's something inside of me churning after I saw that xenomorph die."
+	RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_XENO_HOST), PROC_REF(on_embryo_removal))
+
+/// Handles cleanup once the embryo carrier dies
+/datum/mood_event/conditional/see_death/xeno/proc/on_embryo_removal(datum/source)
+	SIGNAL_HANDLER
+	qdel(src)
+
 /// Desensitized brings up the rear
 /datum/mood_event/conditional/see_death/desensitized
-	priority = 10
+	priority = DESENSITIZED_PRIORITY
 	mood_change = parent_type::mood_change * 0.5
 	timeout = parent_type::timeout * 0.5
 
@@ -179,3 +288,14 @@
 		description = "I saw %DEAD_MOB% get vaporized."
 	else
 		description = "I saw %DEAD_MOB% die."
+
+
+#undef DESENSITIZED_PRIORITY
+#undef PET_PRIORITY
+#undef XENO_PRIORITY
+#undef DONTCARE_PRIORITY
+#undef ASHWALKER_PRIORITY
+#undef GAMER_PRIORITY
+#undef REVOLUTIONARY_PRIORITY
+#undef CULT_PRIORITY
+#undef NAIVE_PRIORITY
