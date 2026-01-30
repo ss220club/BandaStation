@@ -1960,10 +1960,6 @@
 	if(!after_input_check(user))
 		return TRUE
 
-	var/new_age = tgui_input_number(user, "Введите возраст", "Возраст агентской карты", AGE_MIN, AGE_MAX, AGE_MIN)
-	if(!after_input_check(user))
-		return TRUE
-
 	var/wallet_spoofing = tgui_alert(user, "Активировать подмену ID-карт в кошельках, позволяя этой карте принудительно занимать видимый слот ID-карты в кошельках?", "Подмена ID-карт в кошельках", list("Да", "Нет"))
 	if(!after_input_check(user))
 		return
