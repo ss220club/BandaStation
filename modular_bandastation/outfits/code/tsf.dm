@@ -261,7 +261,7 @@
 		/obj/item/clothing/head/beret/tsf_marine,
 	)
 	belt = /obj/item/storage/belt/military/army/tsf/full_sniper_carwo
-	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
+	glasses = /obj/item/clothing/glasses/hud/security/night
 	neck = /obj/item/binoculars
 
 /datum/id_trim/tsf/marine/sniper
