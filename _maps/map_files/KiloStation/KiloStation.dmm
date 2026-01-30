@@ -13288,8 +13288,13 @@
 /turf/closed/wall/mineral/plastitanium,
 /area/station/maintenance/port/greater)
 "ewa" = (
-/obj/effect/turf_decal/tile/blue/opposingcorners,
 /obj/effect/landmark/event_spawn,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/medical/exam_room)
 "ewl" = (
@@ -26576,12 +26581,15 @@
 /turf/open/floor/iron/dark,
 /area/station/hallway/secondary/exit/departure_lounge)
 "iCV" = (
-/obj/effect/turf_decal/tile/blue{
-	dir = 4
-	},
 /obj/effect/turf_decal/loading_area{
 	dir = 4;
 	pixel_x = 5
+	},
+/obj/effect/turf_decal/tile/blue/half/contrasted{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/medical/exam_room)
@@ -61479,7 +61487,6 @@
 /area/station/hallway/primary/central/fore)
 "ugq" = (
 /obj/structure/sign/departments/psychology/directional/north,
-/obj/effect/turf_decal/tile/blue/opposingcorners,
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted{
 	dir = 4
 	},
@@ -61487,6 +61494,9 @@
 	name = "emergency shower"
 	},
 /obj/effect/turf_decal/box,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/medical/exam_room)
 "ugy" = (
@@ -61659,8 +61669,10 @@
 	},
 /area/station/hallway/primary/central/fore)
 "uko" = (
-/obj/effect/turf_decal/tile/blue,
-/obj/effect/turf_decal/tile/blue/half/contrasted{
+/obj/effect/turf_decal/tile/blue/anticorner/contrasted{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},
 /turf/open/floor/iron/showroomfloor,
