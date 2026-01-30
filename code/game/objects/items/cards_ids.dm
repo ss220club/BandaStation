@@ -1400,7 +1400,7 @@
 	registered_name = JOB_CAPTAIN_RU
 	trim = /datum/id_trim/job/captain
 	registered_age = null
-	inherent_assigned_name = "Captain"
+	inherent_assigned_name = JOB_CAPTAIN_RU
 
 /obj/item/card/id/advanced/centcom
 	name = "\improper CentCom ID"
