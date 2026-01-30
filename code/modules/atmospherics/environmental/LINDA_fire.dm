@@ -255,7 +255,7 @@
 		sparkle_overlay.alpha = sparkle_amt * 255
 		add_overlay(sparkle_overlay)
 	if(temperature > 400000 && temperature < 1500000) //Lightning because very anime.
-		var/mutable_appearance/lightning_overlay = mutable_appearance('icons/effects/fire.dmi', "overcharged")
+		var/mutable_appearance/lightning_overlay = mutable_appearance('modular_bandastation/aesthetics/fire/icons/fire.dmi', "overcharged") // BANDASTATION EDIT: NEW FIRE ICON
 		lightning_overlay.blend_mode = BLEND_ADD
 		add_overlay(lightning_overlay)
 	if(temperature > 4500000) //This is where noblium happens. Some fusion-y effects.
