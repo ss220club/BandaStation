@@ -57,6 +57,3 @@
 /obj/item/ammo_box/magazine/internal/grenadelauncher/sec
 	name = "GL-41 grenade launcher internal magazine"
 	ammo_type = /obj/item/ammo_casing/a40mm/rubber
-
-/obj/item/gun/grenadelauncher
-	icon = 'modular_bandastation/weapon/icons/ranged/ballistic40x32.dmi'
