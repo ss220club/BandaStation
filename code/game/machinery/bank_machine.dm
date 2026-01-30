@@ -60,7 +60,7 @@
 	if(value)
 		if(synced_bank_account)
 			synced_bank_account.adjust_money(value)
-			say("Credits deposited! The [synced_bank_account.account_holder] is now [synced_bank_account.account_balance] cr.")
+			say("[MONEY_NAME_CAPITALIZED] deposited! The [synced_bank_account.account_holder] is now [synced_bank_account.account_balance][MONEY_SYMBOL].")
 		qdel(weapon)
 		return
 	return ..()
@@ -118,7 +118,7 @@
 				say("Error: Console not in reach of station, withdrawal cannot begin.")
 			. = TRUE
 		if("halt")
-			say("Station credit withdrawal halted.")
+			say("Station credits withdrawal halted.")
 			end_siphon()
 			. = TRUE
 

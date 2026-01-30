@@ -431,7 +431,6 @@
 		/obj/item/reagent_containers/spray/waterflower/lube = 1,
 		/obj/item/food/pie/cream = 2,
 		/obj/item/bikehorn/airhorn = 1,
-		/obj/item/inspector/clown/bananium = 1,
 	)
 	belt = /obj/item/storage/belt/champion
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses
@@ -457,7 +456,6 @@
 		/obj/item/food/pie/cream = 2,
 		/obj/item/bikehorn/airhorn = 1,
 		/obj/item/stack/sheet/mineral/bananium = 10,
-		/obj/item/inspector/clown/bananium = 1,
 	)
 	belt = /obj/item/storage/belt/military/assault/ert/full_red_clown
 	shoes = /obj/item/clothing/shoes/clown_shoes/banana_shoes/combat
@@ -473,7 +471,6 @@
 		/obj/item/food/pie/cream = 2,
 		/obj/item/bikehorn/airhorn = 1,
 		/obj/item/stack/sheet/mineral/bananium = 15,
-		/obj/item/inspector/clown/bananium = 1,
 	)
 	organs = list(
 		/obj/item/organ/cyberimp/brain/anti_stun

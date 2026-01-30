@@ -4,6 +4,7 @@
 		Идеально для остановки побега жертвы. Плохо работает в вакууме. Стоит 20 химикатов."
 	helptext = "Излучает высокочастотный звук, который сбивает с толку и оглушает людей, выбивает свет и перегружает сенсоры киборгов."
 	button_icon_state = "resonant_shriek"
+	category = "combat"
 	chemical_cost = 20
 	dna_cost = 1
 	req_human = TRUE
@@ -34,7 +35,8 @@
 /datum/action/changeling/dissonant_shriek
 	name = "Technophagic Shriek"
 	desc = "Мы смещаем голосовые связки, чтобы выпустить высокочастотный звук, который перегружает близлежащую электронику. Ломает наушники и камеры, а так же, иногда ломает лазерное оружие, двери и модсьюты. Стоит 20 химикатов."
-	button_icon_state = "dissonant_shriek"
+	button_icon_state = "technophagic_shriek"
+	category = "combat"
 	chemical_cost = 20
 	dna_cost = 1
 	disabled_by_fire = FALSE

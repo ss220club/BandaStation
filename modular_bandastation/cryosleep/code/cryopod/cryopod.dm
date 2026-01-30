@@ -272,12 +272,13 @@ GLOBAL_LIST_EMPTY(objectives)
 /obj/machinery/cryopod/proc/handle_occupant_items()
 	var/obj/machinery/computer/cryopod/control_computer = get_linked_control_computer()
 	var/mob/mob_occupant = occupant
+
+	if(!mob_occupant || issilicon(mob_occupant))
+		return
+
 	var/atom/drop_location = drop_location()
 	for(var/obj/item/item_to_store in mob_occupant)
 		if(HAS_TRAIT(item_to_store, TRAIT_NODROP))
-			continue
-
-		if(issilicon(mob_occupant) && istype(item_to_store, /obj/item/mmi))
 			continue
 
 		if(!control_computer)

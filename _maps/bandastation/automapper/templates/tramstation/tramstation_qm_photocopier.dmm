@@ -73,8 +73,8 @@
 "P" = (
 /obj/structure/table,
 /obj/item/clipboard,
-/obj/item/computer_disk/quartermaster,
-/obj/item/computer_disk/quartermaster,
+/obj/item/disk/computer/quartermaster,
+/obj/item/disk/computer/quartermaster,
 /obj/structure/disposalpipe/segment{
 	dir = 5
 	},

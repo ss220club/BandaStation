@@ -6,3 +6,4 @@
 #include "code/admin_verbs.dm"
 #include "code/buildmode_offer.dm"
 #include "code/smites/broken_limb.dm"
+#include "code/raider_controller.dm"

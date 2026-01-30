@@ -2,7 +2,8 @@
 	name = "Anatomic Panacea"
 	desc = "Выводит загрязнения из нашей формы: лечит болезни, удаляет паразитов, отрезвляет нас, очищает от токсинов и радиации, лечит травмы и повреждения мозга, а также полностью сбрасывает наш генетический код. Стоит 20 химикатов."
 	helptext = "Можно использовать в бессознательном состоянии."
-	button_icon_state = "panacea"
+	button_icon_state = "anatomic_panacea"
+	category = "utility"
 	chemical_cost = 20
 	dna_cost = 1
 	req_stat = HARD_CRIT

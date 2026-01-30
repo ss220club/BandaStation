@@ -37,7 +37,7 @@ export const random_species: Feature<RandomSetting> = {
   name: 'Случайный вид',
   component: (props) => {
     const { act, data } = useBackend<PreferencesMenuData>();
-    const species = data.character_preferences.randomization['species'];
+    const species = data.character_preferences.randomization.species;
 
     return (
       <RandomizationButton
@@ -58,7 +58,7 @@ export const random_tts_seed: Feature<RandomSetting> = {
   name: 'Случайный голос',
   component: (props) => {
     const { act, data } = useBackend<PreferencesMenuData>();
-    const tts_seed = data.character_preferences.randomization['tts_seed'];
+    const tts_seed = data.character_preferences.randomization.tts_seed;
 
     return (
       <RandomizationButton
