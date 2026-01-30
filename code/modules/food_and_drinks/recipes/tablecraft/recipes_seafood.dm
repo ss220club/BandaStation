@@ -62,6 +62,7 @@
 	result = /obj/item/food/taco/fish
 
 	category = CAT_SEAFOOD
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY // BANDASTATION ADDITION - Crafting unit test workaround
 
 /datum/crafting_recipe/food/vegetariansushiroll
 	name ="Vegetarian sushi roll"

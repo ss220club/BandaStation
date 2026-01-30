@@ -705,7 +705,7 @@
 /obj/machinery/door/airlock/examine(mob/user)
 	. = ..()
 	if(closeOtherId)
-		. += span_warning("This airlock cycles on ID: [sanitize(closeOtherId)].")
+		. += span_warning("This airlock cycles on ID: [sanitize(closeOtherId, apply_ic_filter = TRUE)].") // BANDASTATION EDIT - Sanitize emotes
 	else if(cyclelinkedairlock)
 		. += span_warning("This airlock cycles with: [cyclelinkedairlock.name].")
 	else

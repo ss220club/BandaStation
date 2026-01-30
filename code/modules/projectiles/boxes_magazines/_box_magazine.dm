@@ -85,8 +85,8 @@
 	var/list/readout = list()
 
 	if(caliber && max_ammo) // Text references a 'magazine' as only magazines generally have the caliber variable initialized
-		readout += "Up to [span_warning("[max_ammo] [caliber] [casing_phrasing]s")] can be found within this magazine. \
-		\nAccidentally discharging any of these projectiles may void your insurance contract."
+		readout += "До [span_warning("[max_ammo] [caliber] [casing_phrasing]s")] могут находиться в магазине. \
+		\nСлучайное применение любого из этих снарядов может привести к аннулированию страховки."
 
 	var/obj/item/ammo_casing/mag_ammo = get_and_shuffle_round()
 

@@ -442,7 +442,7 @@
 	message_admins("A [summoned.name] is being summoned by [ADMIN_LOOKUPFLW(user)] in [ADMIN_COORDJMP(summoned)].")
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(check_jobban = ROLE_HERETIC, poll_time = 10 SECONDS, checked_target = summoned, ignore_category = poll_ignore_define, alert_pic = summoned, role_name_text = summoned.name)
 	if(isnull(chosen_one))
-		loc.balloon_alert(user, "ritual failed, no ghosts!")
+		loc.balloon_alert(user, "ритуал провален, нет призраков!")
 		animate(summoned, 0.5 SECONDS, alpha = 0)
 		QDEL_IN(summoned, 0.6 SECONDS)
 		return FALSE
@@ -474,8 +474,8 @@
  */
 /datum/heretic_knowledge/knowledge_ritual
 	name = "Ritual of Knowledge"
-	desc = "A randomly generated transmutation ritual that rewards knowledge points and can only be completed once."
-	gain_text = "Everything can be a key to unlocking the secrets behind the Gates. I must be wary and wise."
+	desc = "Случайно создаваемый ритуал трансмутации, который вознаграждается очками знаний и может быть выполнен только один раз."
+	gain_text = "Все может стать ключом к разгадке секретов, скрытых за Вратами. Я должен быть осторожным и мудрым."
 	abstract_parent_type = /datum/heretic_knowledge/knowledge_ritual
 	cost = 1
 	priority = MAX_KNOWLEDGE_PRIORITY - 10 // A pretty important midgame ritual.
@@ -529,15 +529,15 @@
 
 	var/list/requirements_string = list()
 
-	to_chat(user, span_hierophant("The [name] requires the following:"))
+	to_chat(user, span_hierophant("Для [name] требуется следующее:"))
 	for(var/obj/item/path as anything in required_atoms)
 		var/amount_needed = required_atoms[path]
 		to_chat(user, span_hypnophrase("[amount_needed] [initial(path.name)]\s..."))
 		requirements_string += "[amount_needed == 1 ? "":"[amount_needed] "][initial(path.name)]\s"
 
-	to_chat(user, span_hierophant("Completing it will reward you [KNOWLEDGE_RITUAL_POINTS] knowledge points. You can check the knowledge in your Researched Knowledge to be reminded."))
+	to_chat(user, span_hierophant("За его выполнение вы получите [KNOWLEDGE_RITUAL_POINTS] очков знаний. Вы можете проверить знания в ваших \"иследованных знаниях\"."))
 
-	desc = "Allows you to transmute [english_list(requirements_string)] for [KNOWLEDGE_RITUAL_POINTS] bonus knowledge points. This can only be completed once."
+	desc = "Позволяет трансмутировать [english_list(requirements_string)] для получения [KNOWLEDGE_RITUAL_POINTS] бонусных очков знаний. Это можно выполнить только один раз."
 
 /datum/heretic_knowledge/knowledge_ritual/can_be_invoked(datum/antagonist/heretic/invoker)
 	return !was_completed
@@ -550,9 +550,9 @@
 	our_heretic.adjust_knowledge_points(KNOWLEDGE_RITUAL_POINTS)
 	was_completed = TRUE
 
-	to_chat(user, span_boldnotice("[name] completed!"))
+	to_chat(user, span_boldnotice("[name] завершено!"))
 	to_chat(user, span_hypnophrase(span_big("[pick_list(HERETIC_INFLUENCE_FILE, "drain_message")]")))
-	desc += " (Completed!)"
+	desc += " (Завершен!)"
 	log_heretic_knowledge("[key_name(user)] completed a [name] at [gameTimestamp()].")
 	user.add_mob_memory(/datum/memory/heretic_knowledge_ritual)
 	SEND_SIGNAL(our_heretic, COMSIG_HERETIC_PASSIVE_UPGRADE_FINAL)
@@ -636,9 +636,9 @@
 	SSblackbox.record_feedback("tally", "heretic_ascended", 1, heretic_datum.heretic_path.route)
 	log_heretic_knowledge("[key_name(user)] completed their final ritual at [gameTimestamp()].")
 	notify_ghosts(
-		"[user.real_name] has completed an ascension ritual!",
+		"[user.real_name] завершил ритуал вознесения!",
 		source = user,
-		header = "A Heretic is Ascending!",
+		header = "Еретик вознесся!",
 	)
 	priority_announce(
 		text = replacetext(replacetext(announcement_text, "%NAME%", user.real_name), "%SPOOKY%", GLOBAL_PROC_REF(generate_heretic_text)),

@@ -1,12 +1,12 @@
 /datum/brain_trauma/special/obsessed
-	name = "Psychotic Schizophrenia"
-	desc = "Patient has a subtype of delusional disorder, becoming irrationally attached to someone."
-	scan_desc = "psychotic schizophrenic delusions"
-	symptoms = "Exhibits obsessive behaviors towards a specific individual, \
-		including frequent staring, intrusive thoughts, and an overwhelming desire to be near them. \
-		This obsession can lead to social withdrawal, anxiety, and impaired daily functioning."
+	name = "Психотическая шизофрения"
+	desc = "У пациента есть подтип бредового расстройства, он становится иррационально привязанным к кому-то."
+	scan_desc = "психотические шизофренические бредовые идеи"
+	symptoms = "Проявляет навязчивое поведение по отношению к конкретному человеку, \
+		включая частые пристальные взгляды, навязчивые мысли и непреодолимое желание находиться рядом с ним. \
+		Эта одержимость может приводить к социальной изоляции, тревожности и нарушению повседневной деятельности."
 	gain_text = "If you see this message, make a github issue report. The trauma initialized wrong."
-	lose_text = span_warning("The voices in your head fall silent.")
+	lose_text = span_warning("Голоса в вашей голове замолкают..")
 	can_gain = TRUE
 	random_gain = FALSE
 	resilience = TRAUMA_RESILIENCE_LOBOTOMY
@@ -19,6 +19,13 @@
 	var/time_spent_away = 0 SECONDS
 	var/obsession_hug_count = 0
 
+// BANDATATION ADD - Start
+/datum/brain_trauma/special/obsessed/New(mob/living/obsession)
+	. = ..()
+	if(istype(obsession))
+		src.obsession = obsession
+// BANDATATION ADD - End
+
 /datum/brain_trauma/special/obsessed/on_gain()
 	//setup, linking, etc//
 	if(!obsession)//admins didn't set one
@@ -26,7 +33,7 @@
 		if(!obsession)//we didn't find one
 			lose_text = ""
 			return FALSE
-	gain_text = span_warning("You hear a sickening, raspy voice in your head. It wants one small task of you...")
+	gain_text = span_warning("Вы слышите отвратительный, скрипучий голос у себя в голове. Он требует от вас выполнения одного небольшого задания...")
 	owner.mind.add_antag_datum(/datum/antagonist/obsessed)
 	antagonist = owner.mind.has_antag_datum(/datum/antagonist/obsessed)
 	antagonist.trauma = src
@@ -77,15 +84,17 @@
 		UnregisterSignal(obsession, COMSIG_MOB_EYECONTACT)
 	REMOVE_TRAIT(owner, TRAIT_DESENSITIZED, REF(src))
 
-/datum/brain_trauma/special/obsessed/handle_speech(datum/source, list/speech_args)
-	if(!viewing)
-		return
-	if(prob(25)) // 25% chances to be nervous and stutter.
-		if(prob(50)) // 12.5% chance (previous check taken into account) of doing something suspicious.
-			addtimer(CALLBACK(src, PROC_REF(on_failed_social_interaction)), rand(1 SECONDS, 3 SECONDS))
-		else if(!owner.has_status_effect(/datum/status_effect/speech/stutter))
-			to_chat(owner, span_warning("Being near [obsession] makes you nervous and you begin to stutter..."))
-		owner.set_stutter_if_lower(6 SECONDS)
+// // BANDASTATION REMOVAL START - Remove Obsessed speech debuff
+// /datum/brain_trauma/special/obsessed/handle_speech(datum/source, list/speech_args)
+// 	if(!viewing)
+// 		return
+// 	if(prob(25)) // 25% chances to be nervous and stutter.
+// 		if(prob(50)) // 12.5% chance (previous check taken into account) of doing something suspicious.
+// 			addtimer(CALLBACK(src, PROC_REF(on_failed_social_interaction)), rand(1 SECONDS, 3 SECONDS))
+// 		else if(!owner.has_status_effect(/datum/status_effect/speech/stutter))
+// 			to_chat(owner, span_warning("Нахождение рядом с [obsession] заставляет вас нервничать, и вы начинаете заикаться..."))
+// 		owner.set_stutter_if_lower(6 SECONDS)
+// // BANDASTATION REMOVAL END - Remove Obsessed speech debuff
 
 /// Singal proc for [COMSIG_CARBON_HELPED], when our obsessed helps (hugs) our obsession, increases hug count
 /datum/brain_trauma/special/obsessed/proc/on_hug(datum/source, mob/living/hugged)
@@ -103,17 +112,17 @@
 		if(1 to 40)
 			INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob, emote), pick("blink", "blink_r"))
 			owner.set_eye_blur_if_lower(20 SECONDS)
-			to_chat(owner, span_userdanger("You sweat profusely and have a hard time focusing..."))
+			to_chat(owner, span_userdanger("Вы обильно потеете, и вам трудно сосредоточиться..."))
 		if(41 to 80)
 			INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob, emote), "pale")
 			shake_camera(owner, 15, 1)
 			owner.adjust_stamina_loss(70)
-			to_chat(owner, span_userdanger("You feel your heart lurching in your chest..."))
+			to_chat(owner, span_userdanger("Вы чувствуете, как ваше сердце бешено колотится в груди..."))
 		if(81 to 100)
 			INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob, emote), "cough")
 			owner.adjust_dizzy(20 SECONDS)
 			owner.adjust_disgust(5)
-			to_chat(owner, span_userdanger("You gag and swallow a bit of bile..."))
+			to_chat(owner, span_userdanger("Вы давитесь и проглатываете немного желчи..."))
 
 // if the creep examines first, then the obsession examines them, have a 50% chance to possibly blow their cover. wearing a mask avoids this risk
 /datum/brain_trauma/special/obsessed/proc/stare(datum/source, mob/living/examining_mob, triggering_examiner)
@@ -122,7 +131,7 @@
 	if(examining_mob != owner || !triggering_examiner || prob(50))
 		return
 
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(to_chat), obsession, span_warning("You catch [examining_mob] staring at you..."), 3))
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(to_chat), obsession, span_warning("Вы замечаете, что [examining_mob] пристально смотрит на вас..."), 3))
 	return COMSIG_BLOCK_EYECONTACT
 
 /datum/brain_trauma/special/obsessed/proc/find_obsession()

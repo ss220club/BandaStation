@@ -2,8 +2,8 @@
 
 // This surgery is so snowflake that it doesn't use any of the operation subtypes, it forges its own path
 /datum/surgery_operation/prosthetic_replacement
-	name = "prosthetic replacement"
-	desc = "Replace a missing limb with a prosthetic (or arbitrary) item."
+	name = "Замена протеза"
+	desc = "Замена отсутствующей конечности протезом (или произвольным предметом)."
 	implements = list(
 		/obj/item/bodypart = 1,
 		/obj/item = 1,
@@ -25,26 +25,26 @@
 	return image(/obj/item/bodypart/chest)
 
 /datum/surgery_operation/prosthetic_replacement/get_recommended_tool()
-	return "any limb / any item"
+	return "любая конечность / любой предмет"
 
 /datum/surgery_operation/prosthetic_replacement/get_any_tool()
-	return "Any suitable arm replacement"
+	return "Любой подходящий протез руки"
 
 /datum/surgery_operation/prosthetic_replacement/all_required_strings()
 	. = list()
-	. += "operate on chest (target chest)"
+	. += "операция на груди"
 	. += ..()
-	. += "when the chest is prepared, target the zone of the limb you are attaching"
+	. += "когда грудная клетка будет готова, нацелитесь на область конечности, которую вы прикрепляете"
 
 /datum/surgery_operation/prosthetic_replacement/any_required_strings()
-	return list("arms may receive any suitable item in lieu of a replacement limb") + ..()
+	return list("руки можно заменить любым подходящим предметом") + ..()
 
 /datum/surgery_operation/prosthetic_replacement/get_radial_options(obj/item/bodypart/chest/chest, obj/item/tool, operating_zone)
 	var/datum/radial_menu_choice/option = LAZYACCESS(cached_prosthetic_options, tool.type)
 	if(!option)
 		option = new()
-		option.name = "attach [initial(tool.name)]"
-		option.info = "Replace the patient's missing limb with [initial(tool.name)]."
+		option.name = "прикрепить [initial(tool.name)]"
+		option.info = "Замените отсутствующую конечность пациента на [initial(tool.name)]."
 		option.image = image(tool.type)
 		LAZYSET(cached_prosthetic_options, tool.type, option)
 
@@ -114,11 +114,11 @@
 	display_results(
 		surgeon,
 		chest.owner,
-		span_notice("You begin to replace [chest.owner]'s missing [target_zone_readable] with [tool]..."),
-		span_notice("[surgeon] begins to replace [chest.owner]'s missing [target_zone_readable] with [tool]."),
-		span_notice("[surgeon] begins to replace [chest.owner]'s missing [target_zone_readable]."),
+		span_notice("Вы начинаете заменять отсутствующий [target_zone_readable] в [chest.owner] с помощью [tool]..."),
+		span_notice("[surgeon] начинает заменять отсутствующую [target_zone_readable] в [chest.owner] с помощью  [tool]."),
+		span_notice("[surgeon] начинает заменять отсуствующую [target_zone_readable] в [chest.owner]."),
 	)
-	display_pain(chest.owner, "You feel an uncomfortable sensation where your [target_zone_readable] should be!")
+	display_pain(chest.owner, "Вы испытываете неприятное ощущение там, где должна быть ваша [target_zone_readable]!")
 
 	operation_args[OPERATION_REJECTION_DAMAGE] = 10
 	if(isbodypart(tool))
@@ -144,11 +144,11 @@
 		bodypart_to_attach.bodypart_flags |= BODYPART_IMPLANTED
 	display_results(
 		surgeon, patient,
-		span_notice("You succeed in replacing [patient]'s [bodypart_to_attach.plaintext_zone]."),
-		span_notice("[surgeon] successfully replaces [patient]'s [bodypart_to_attach.plaintext_zone] with [bodypart_to_attach]!"),
-		span_notice("[surgeon] successfully replaces [patient]'s [bodypart_to_attach.plaintext_zone]!"),
+		span_notice("Вам удалось заменить [bodypart_to_attach.plaintext_zone] у [patient]."),
+		span_notice("[surgeon] успешно заменяет [bodypart_to_attach.plaintext_zone] у [patient] на [bodypart_to_attach]!"),
+		span_notice("[surgeon] успешно заменяет [bodypart_to_attach.plaintext_zone] у [patient] !"),
 	)
-	display_pain(patient, "You feel synthetic sensation wash from your [bodypart_to_attach.plaintext_zone], which you can feel again!", TRUE)
+	display_pain(patient, "Вы ощущаете синтетическое чувство, которое распространяется от вашей [bodypart_to_attach.plaintext_zone], снова чувствуя её!", TRUE)
 
 /datum/surgery_operation/prosthetic_replacement/proc/handle_arbitrary_prosthetic(mob/living/carbon/patient, mob/living/surgeon, obj/item/thing_to_attach, target_zone)
 	SSblackbox.record_feedback("tally", "arbitrary_prosthetic", 1, initial(thing_to_attach.name))
@@ -156,17 +156,17 @@
 	new_limb.add_surgical_state(SURGERY_PROSTHETIC_UNSECURED)
 	display_results(
 		surgeon, patient,
-		span_notice("You attach [thing_to_attach]."),
-		span_notice("[surgeon] finishes attaching [thing_to_attach]!"),
-		span_notice("[surgeon] finishes the attachment procedure!"),
+		span_notice("Вы прикрепляете [thing_to_attach]."),
+		span_notice("[surgeon] завершает прикрепление [thing_to_attach]!"),
+		span_notice("[surgeon] заканчивает процедуру прикрепления!"),
 	)
-	display_pain(patient, "You feel a strange sensation as [thing_to_attach] takes the place of your arm!", TRUE)
+	display_pain(patient, "Вы испытываете странное ощущение, когда [thing_to_attach] занимает место вашей руки!", TRUE)
 
 #undef OPERATION_REJECTION_DAMAGE
 
 /datum/surgery_operation/limb/secure_arbitrary_prosthetic
-	name = "secure prosthetic"
-	desc = "Ensure that an arbitrary prosthetic is properly attached to a patient's body."
+	name = "Закрепление протеза"
+	desc = "Убедитесь, что произвольный протез правильно прикреплен к телу пациента."
 	implements = list(
 		/obj/item/stack/medical/suture = 1,
 		/obj/item/stack/sticky_tape/surgical = 1.25,
@@ -183,23 +183,23 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to [tool.singular_name] [limb] to [limb.owner]'s body."),
-		span_notice("[surgeon] begins to [tool.singular_name] [limb] to [limb.owner]'s body."),
-		span_notice("[surgeon] begins to [tool.singular_name] something to [limb.owner]'s body."),
+		span_notice("Вы начинаете прикреплять [tool.singular_name] [limb] к телу у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает прикреплять [tool.singular_name] [limb] к телу у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] начинает прикреплять [tool.singular_name] к телу у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	var/obj/item/bodypart/chest = limb.owner.get_bodypart(BODY_ZONE_CHEST)
-	display_pain(limb.owner, "[surgeon] begins to [tool.singular_name] [limb] to your body!", IS_ROBOTIC_LIMB(chest))
+	display_pain(limb.owner, "[surgeon] прикрепляет [tool.singular_name] [limb] к вашему телу!", IS_ROBOTIC_LIMB(chest))
 
 /datum/surgery_operation/limb/secure_arbitrary_prosthetic/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/stack/tool, list/operation_args)
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You finish [tool.apply_verb] [limb] to [limb.owner]'s body."),
-		span_notice("[surgeon] finishes [tool.apply_verb] [limb] to [limb.owner]'s body."),
-		span_notice("[surgeon] finishes the [tool.apply_verb] procedure!"),
+		span_notice("Вы заканчиваете прикреплять [tool.apply_verb] [limb]  к телу у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] заканчивает прикреплять [tool.apply_verb] [limb] к телу у [limb.owner.declent_ru(GENITIVE)]."),
+		span_notice("[surgeon] завершает процедуру [tool.apply_verb]!"),
 	)
 	var/obj/item/bodypart/chest = limb.owner.get_bodypart(BODY_ZONE_CHEST)
-	display_pain(limb.owner, "You feel more secure as your prosthetic is firmly attached to your body!", IS_ROBOTIC_LIMB(chest))
+	display_pain(limb.owner, "Вы чувствуете себя в большей безопасности, так как ваш протез надежно прикреплен к вашему телу!", IS_ROBOTIC_LIMB(chest))
 	limb.remove_surgical_state(SURGERY_PROSTHETIC_UNSECURED)
 	limb.AddComponent(/datum/component/item_as_prosthetic_limb, null, 0) // updates drop probability to zero
 	tool.use(1)

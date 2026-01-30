@@ -1,7 +1,7 @@
-#define SHUTTER_MOVEMENT_DURATION 0.4 SECONDS
-#define SHUTTER_WAIT_DURATION 0.2 SECONDS
-/// Maximum number of station trait buttons we will display, please think hard before creating scenarios where there are more than this
-#define MAX_STATION_TRAIT_BUTTONS_VERTICAL 3
+// #define SHUTTER_MOVEMENT_DURATION 0.4 SECONDS
+// #define SHUTTER_WAIT_DURATION 0.2 SECONDS
+// /// Maximum number of station trait buttons we will display, please think hard before creating scenarios where there are more than this
+// #define MAX_STATION_TRAIT_BUTTONS_VERTICAL 3
 #define TRAIT_BUTTON_Y_ORIGIN 397
 #define TRAIT_BUTTON_X_ORIGIN 233
 #define TRAIT_BUTTON_OFFSET 27
@@ -12,9 +12,9 @@
 	var/menu_hud_status = TRUE
 	var/list/shown_station_trait_buttons
 
+/* BANDASTATION REMOVAL - HTML Title Screen
 /datum/hud/new_player/New(mob/owner)
 	. = ..()
-
 	if (!owner?.client || owner.client.interviewee)
 		return
 
@@ -530,7 +530,7 @@
 	. = ..()
 	if(QDELETED(src) || !desc)
 		return
-	openToolTip(usr, tip_src = src, params = params, title = name, content = desc,)
+	openToolTip(usr, tip_src = src, params = params, title = get_tip_name(), content = desc)
 
 /atom/movable/screen/lobby/button/sign_up/MouseExited()
 	. = ..()
@@ -821,3 +821,4 @@
 #undef TRAIT_BUTTON_X_ORIGIN
 #undef TRAIT_BUTTON_OFFSET
 #undef SQUARE_VIEWPORT_OFFSET
+*/

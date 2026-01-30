@@ -23,6 +23,7 @@
 /obj/structure/chair/Initialize(mapload)
 	. = ..()
 	if(prob(0.2))
+		ru_names_rename(ru_names_list("tactical [name]", "тактический [declent_ru(NOMINATIVE)]", "тактического [declent_ru(GENITIVE)]", "тактическому [declent_ru(DATIVE)]", "тактический [declent_ru(ACCUSATIVE)]", "тактическим [declent_ru(INSTRUMENTAL)]", "тактическом [declent_ru(PREPOSITIONAL)]", gender = declent_ru("gender")))
 		name = "tactical [name]"
 		fishing_modifier -= 8
 	MakeRotate()
@@ -415,7 +416,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/chair/stool/bar, 0)
 	AddElement(/datum/element/cuffable_item)
 
 /obj/item/chair/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins hitting [user.p_them()]self with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins hitting [user.p_them()]self with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	playsound(src,hitsound,50,TRUE)
 	return BRUTELOSS
 

@@ -20,6 +20,12 @@
 
 	return ..()
 
+	/// BANDASTATION ADDITION START - Flatpack fix
+/datum/storage/bag_of_holding/New(atom/parent, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+	set_holdable(cant_hold_list = /obj/item/flatpack)
+	/// BANDASTATION ADDITION END - Flatpack fix
+
 /datum/storage/bag_of_holding/proc/recursive_insertion(obj/item/to_insert, mob/living/user)
 	if(confirm_recursive_insertion(to_insert, user))
 		create_rift(to_insert, user)

@@ -1,7 +1,7 @@
 /// Creates a constant Ring of Fire around the caster for a set duration of time, which follows them.
 /datum/action/cooldown/spell/fire_sworn
 	name = "Oath of Flame"
-	desc = "For a minute, you will passively create a ring of fire around you."
+	desc = "В течение минуты вы будете пассивно создавать вокруг себя огненное кольцо."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -62,7 +62,7 @@
 /// Creates one, large, expanding ring of fire around the caster, which does not follow them.
 /datum/action/cooldown/spell/fire_cascade
 	name = "Lesser Fire Cascade"
-	desc = "Heats the air around you."
+	desc = "Нагревает воздух вокруг вас."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -102,7 +102,7 @@
 // Currently unused - releases streams of fire around the caster.
 /datum/action/cooldown/spell/pointed/ash_beams
 	name = "Nightwatcher's Rite"
-	desc = "A powerful spell that releases five streams of eldritch fire towards the target."
+	desc = "Мощное заклинание, выпускающее в цель пять потоков мистического пламени."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -149,13 +149,13 @@
 
 		for(var/mob/living/L in T.contents)
 			if(L.can_block_magic())
-				L.visible_message(span_danger("The spell bounces off of [L]!"), span_danger("The spell bounces off of you!"))
+				L.visible_message(span_danger("Заклинание отскакивает от [L.declent_ru(GENITIVE)]!"), span_danger("Заклинание отскакивает от вас!"))
 				continue
 			if((L in hit_list) || L == source)
 				continue
 			hit_list += L
 			L.adjust_fire_loss(20)
-			to_chat(L, span_userdanger("You're hit by [source]'s eldritch flames!"))
+			to_chat(L, span_userdanger("Вы поражены мистическим пламенем [source.declent_ru(GENITIVE)]!"))
 
 		new /obj/effect/hotspot(T)
 		T.hotspot_expose(700,50,1)

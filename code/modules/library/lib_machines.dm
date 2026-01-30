@@ -461,7 +461,7 @@ GLOBAL_VAR_INIT(library_table_modified, 0)
 				return
 			var/datum/borrowbook/loan = new /datum/borrowbook
 
-			var/loan_to = copytext(sanitize(params["loaned_to"]), 1, MAX_NAME_LEN)
+			var/loan_to = copytext(sanitize(params["loaned_to"], apply_ic_filter = TRUE), 1, MAX_NAME_LEN) // BANDASTATION EDIT - Sanitize emotes
 			var/checkoutperiod = max(params["checkout_time"], 1)
 
 			loan.book_data = book_info.return_copy()

@@ -2,7 +2,7 @@
 	name = "byteforge"
 
 	circuit = /obj/item/circuitboard/machine/byteforge
-	desc = "A machine used by the quantum server. Quantum code converges here, materializing decrypted assets from the virtual abyss."
+	desc = "Машина, используемая квантовым сервером. Квантовый код сходится здесь, материализуя расшифрованные активы из виртуальной бездны."
 	icon = 'icons/obj/machines/bitrunning.dmi'
 	icon_state = "byteforge"
 	base_icon_state = "byteforge"

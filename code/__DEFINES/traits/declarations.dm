@@ -47,6 +47,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define STATION_TRAIT_UNIQUE_AI "station_trait_unique_ai"
 #define STATION_TRAIT_UNNATURAL_ATMOSPHERE "station_trait_unnatural_atmosphere"
 #define STATION_TRAIT_SPIKED_DRINKS "station_trait_spiked_drinks"
+#define STATION_TRAIT_XENOBUREAUCRACY_ERROR "station_trait_xenobureaucracy_error"
 
 // Hud traits
 /// This hud is owned by a client with an open escape menu
@@ -763,6 +764,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BONSAI "bonsai"
 #define TRAIT_LIGHTBULB_REMOVER "lightbulb_remover"
 #define TRAIT_KNOW_ROBO_WIRES "know_robo_wires"
+#define TRAIT_ADVANCED_RCD_KNOWLEDGE "advanced_rcd_knowledge" //BANDASTATION ADD - Engineer Skillchip RCD
 #define TRAIT_KNOW_ENGI_WIRES "know_engi_wires"
 #define TRAIT_ENTRAILS_READER "entrails_reader"
 #define TRAIT_SABRAGE_PRO "sabrage_pro"
