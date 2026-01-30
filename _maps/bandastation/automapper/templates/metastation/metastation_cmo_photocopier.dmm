@@ -42,8 +42,8 @@
 "h" = (
 /obj/structure/table/glass,
 /obj/structure/cable,
-/obj/item/computer_disk/medical,
-/obj/item/computer_disk/medical,
+/obj/item/disk/computer/medical,
+/obj/item/disk/computer/medical,
 /obj/item/folder/white,
 /obj/item/folder/blue{
 	pixel_x = 6;

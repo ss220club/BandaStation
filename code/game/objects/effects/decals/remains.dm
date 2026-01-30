@@ -1,3 +1,14 @@
+// BANDASTATION ADD START
+GLOBAL_LIST_INIT(remains_blocked_reagents, list(
+		subtypesof(/datum/reagent/medicine),
+		subtypesof(/datum/reagent/consumable),
+		subtypesof(/datum/reagent/mutationtoxin),
+		/datum/reagent/aslimetoxin,
+		/datum/reagent/gluttonytoxin,
+		/datum/reagent/gondola_mutation_toxin,
+		/datum/reagent/magillitis))
+// BANDASTATION ADD END
+
 /obj/effect/decal/remains
 	name = "remains"
 	gender = PLURAL
@@ -33,8 +44,7 @@
 	. = ..()
 
 	proximity_monitor = new(src, 1)
-	var/list/blocked_reagents = subtypesof(/datum/reagent/medicine) + subtypesof(/datum/reagent/consumable) //Boooooriiiiing
-	that_shit_that_killed_saddam = get_random_reagent_id(blacklist = blocked_reagents)
+	that_shit_that_killed_saddam = get_random_reagent_id(blacklist = GLOB.remains_blocked_reagents) // BANDASTATION EDIT
 
 /obj/effect/decal/remains/human/smokey/HasProximity(atom/movable/tomb_raider)
 	if(!COOLDOWN_FINISHED(src, gas_cooldown))
@@ -48,7 +58,7 @@
 
 ///Releases a cloud of smoke based on the randomly generated reagent in Initialize().
 /obj/effect/decal/remains/human/smokey/proc/release_smoke(mob/living/smoke_releaser)
-	visible_message(span_warning("[smoke_releaser] disturbs the [src], which releases a huge cloud of gas!"))
+	visible_message(span_warning("[smoke_releaser] disturbs [src], which releases a huge cloud of gas!"))
 	var/datum/effect_system/fluid_spread/smoke/chem/cigarette_puff = new()
 	cigarette_puff.chemholder.add_reagent(that_shit_that_killed_saddam, 15)
 	cigarette_puff.attach(get_turf(src))

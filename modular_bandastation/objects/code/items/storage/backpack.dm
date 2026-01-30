@@ -70,3 +70,14 @@
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/backpack_righthand.dmi'
 	icon_state = "backpack_ei"
 	inhand_icon_state = "backpack_ei"
+
+// MARK: ERT
+/obj/item/storage/backpack/ert/extra_large
+	name = "emergency response large backpack"
+	desc = "Специальный тактический рюкзак."
+	storage_type = /datum/storage/backpack/ert_large
+
+/datum/storage/backpack/ert_large
+	max_specific_storage = WEIGHT_CLASS_BULKY
+	max_total_storage = 21
+	max_slots = 26

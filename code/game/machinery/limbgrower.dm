@@ -33,7 +33,7 @@
 	stored_research = GLOB.autounlock_techwebs[/datum/techweb/autounlocking/limbgrower]
 	. = ..()
 	AddComponent(/datum/component/plumbing/simple_demand)
-	AddComponent(/datum/component/simple_rotation)
+	AddElement(/datum/element/simple_rotation)
 	register_context()
 
 /obj/machinery/limbgrower/add_context(atom/source, list/context, obj/item/held_item, mob/user)
@@ -274,7 +274,7 @@
 	//i need to create a body part manually using a set icon (otherwise it doesn't appear)
 	var/obj/item/bodypart/limb
 	limb = new buildpath(loc)
-	limb.name = "\improper synthetic [selected_category] [limb.plaintext_zone]"
+	limb.name = "\improper synthetic [selected_category] [limb.ru_plaintext_zone[PREPOSITIONAL]]"
 	limb.limb_id = selected_category
 	limb.species_color = "#62A262"
 	limb.update_icon_dropped()
