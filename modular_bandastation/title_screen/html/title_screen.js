@@ -4,46 +4,59 @@ function call_byond(href, value) {
 
 // MARK: State/Info updates
 function toggleGoodBadClass(element, condition) {
-  element.classList.add(condition ? "good" : "bad");
-  element.classList.remove(!condition ? "good" : "bad");
+  element.classList.add(condition ? 'good' : 'bad');
+  element.classList.remove(!condition ? 'good' : 'bad');
 }
 
-let ready_int = 0;
-const readyElement = document.querySelector(".lobby-toggle_ready");
+const ready_int = 0;
+const readyElement = document.querySelector('.lobby-toggle_ready');
 function toggleReady(setReady) {
-  toggleGoodBadClass(readyElement, setReady === "1"); // YES. Byond sends true/false like a "1"/"0"
+  toggleGoodBadClass(readyElement, setReady === '1'); // YES. Byond sends true/false like a "1"/"0"
 }
 
-const noticeElement = document.getElementById("container_notice");
+const noticeElement = document.getElementById('container_notice');
 function updateNotice(notice) {
   const emptyNotice = notice === undefined;
-  noticeElement.classList.toggle("hidden", emptyNotice);
-  noticeElement.innerHTML = emptyNotice ? "" : notice;
+  noticeElement.classList.toggle('hidden', emptyNotice);
+  noticeElement.innerHTML = emptyNotice ? '' : notice;
 }
 
-const character_name_slot = document.getElementById("character_name");
+const character_name_slot = document.getElementById('character_name');
 function updateCharacterName(name) {
-  character_name_slot.setAttribute("data-name", name);
+  character_name_slot.setAttribute('data-name', name);
 }
 
-const info_placement = document.getElementById("round_info");
+const info_placement = document.getElementById('round_info');
 function updateInfo(info) {
   info_placement.innerHTML = info;
 }
 
-const adminButtons = document.getElementById("lobby_admin");
+const adminButtons = document.getElementById('lobby_admin');
 function toggleAdmin(visible) {
-  adminButtons.classList.toggle("hidden", visible !== "true");
+  adminButtons.classList.toggle('hidden', visible !== 'true');
 }
 
 // MARK: Image processing
 let imgSrc;
-const imgElement = document.getElementById("screen_image");
-const imgBlurElement = document.getElementById("screen_blur");
+const imgElement = document.getElementById('screen_image');
+const imgBlurElement = document.getElementById('screen_blur');
+
 function updateImage(image) {
   imgSrc = image;
   imgElement.src = imgSrc;
   imgBlurElement.src = imgSrc;
+
+  const videoFrame = document.getElementById('screen_video');
+  if (videoFrame) {
+    videoFrame.src = '';
+    videoFrame.classList.add('hidden');
+    if (typeof isVideoEnabled !== 'undefined') {
+      isVideoEnabled = false;
+    }
+  }
+
+  imgElement.classList.remove('hidden');
+  imgBlurElement.classList.remove('hidden');
 }
 
 let attempts = 0;
@@ -74,11 +87,11 @@ function traitSignup(assign, id) {
 
   const traitID = `lobby-trait-${Number(id)}`;
   const trait_link = document.getElementById(traitID);
-  toggleGoodBadClass(trait_link, assign === "true");
+  toggleGoodBadClass(trait_link, assign === 'true');
 }
 
 let traitsCount = 0;
-const traitsContainer = document.getElementById("lobby_traits");
+const traitsContainer = document.getElementById('lobby_traits');
 function createTraitButton(name, desc) {
   if (!traitsContainer) {
     return;
@@ -86,79 +99,79 @@ function createTraitButton(name, desc) {
 
   traitsCount++;
   if (traitsCount === 1) {
-    const hr = document.createElement("hr");
+    const hr = document.createElement('hr');
     traitsContainer.appendChild(hr);
   }
 
-  const button = document.createElement("a");
+  const button = document.createElement('a');
   button.id = `lobby-trait-${traitsCount}`;
-  button.className = "lobby_element checkbox bad";
+  button.className = 'lobby_element checkbox bad';
   button.href = `byond://?src=${globalThis.playerRef};trait_signup=${name};id=${traitsCount}`;
 
-  const buttonText = document.createElement("span");
-  buttonText.className = "lobby-text";
+  const buttonText = document.createElement('span');
+  buttonText.className = 'lobby-text';
   buttonText.innerHTML = name;
 
-  const buttonTooltipWrapper = document.createElement("div");
-  buttonTooltipWrapper.className = "lobby-tooltip";
-  buttonTooltipWrapper.setAttribute("data-position", "right");
+  const buttonTooltipWrapper = document.createElement('div');
+  buttonTooltipWrapper.className = 'lobby-tooltip';
+  buttonTooltipWrapper.setAttribute('data-position', 'right');
 
-  const buttonTooltip = document.createElement("span");
-  buttonTooltip.className = "lobby-tooltip-content";
+  const buttonTooltip = document.createElement('span');
+  buttonTooltip.className = 'lobby-tooltip-content';
   buttonTooltip.innerHTML = desc;
 
   buttonTooltipWrapper.appendChild(buttonTooltip);
   button.appendChild(buttonText);
   button.appendChild(buttonTooltipWrapper);
   traitsContainer.appendChild(button);
-  traitsContainer.classList.remove("hidden");
+  traitsContainer.classList.remove('hidden');
 }
 
 // MARK: Loading
-const loadingName = document.getElementById("character_name");
+const loadingName = document.getElementById('character_name');
 function updateLoadingName(name) {
-  loadingName.setAttribute("data-loading", name);
+  loadingName.setAttribute('data-loading', name);
 }
 
-const logoElement = document.getElementById("logo");
+const logoElement = document.getElementById('logo');
 function updateLoadedCount(count) {
-  logoElement.setAttribute("data-loaded", `${Math.round(count)}%`);
+  logoElement.setAttribute('data-loaded', `${Math.round(count)}%`);
   document.documentElement.style.setProperty(
-    "--loading-percentage",
+    '--loading-percentage',
     `${count}%`,
   );
 }
 
 function finishLoading() {
-  document.documentElement.style = "";
-  document.documentElement.className = "";
+  document.documentElement.style = '';
+  document.documentElement.className = '';
 }
 
 // MARK: Authentication
-const authBrowser = document.getElementById("external_auth");
-const authCheckbox = document.getElementById("hide_auth");
-const authButton = document.getElementById("open_auth");
+const authBrowser = document.getElementById('external_auth');
+const authCheckbox = document.getElementById('hide_auth');
+const authButton = document.getElementById('open_auth');
 function toggleAuthModal() {
   const checked = authCheckbox.checked;
   authCheckbox.checked = !checked;
 
   if (!checked) {
-    call_byond("discord_oauth_close", true);
+    call_byond('discord_oauth_close', true);
     setTimeout(() => {
-      authButton.style.display = "";
-      authBrowser.className = "";
+      authButton.style.display = '';
+      authBrowser.className = '';
     }, 200);
   }
 }
 
 function updateAuthBrowser() {
-  authBrowser.className = "open";
-  authButton.style.display = "none";
+  authBrowser.className = 'open';
+  authButton.style.display = 'none';
   setTimeout(() => updateExternalWindowPos(), 1000);
 }
 
 function updateExternalWindowPos() {
-  if(!authBrowser) {
+  if (!authBrowser) {
     return;
   }
 
@@ -173,21 +186,64 @@ function updateExternalWindowPos() {
     ],
   };
 
-  BYOND.winset("authwindow", {
+  BYOND.winset('authwindow', {
     pos: `${placeholderSize.pos[0]},${placeholderSize.pos[1]}`,
     size: `${placeholderSize.size[0]},${placeholderSize.size[1]}`,
   });
 }
 
-window.addEventListener("resize", updateExternalWindowPos);
+window.addEventListener('resize', updateExternalWindowPos);
 
 /* Return focus to Byond after click */
 function reFocus() {
-  call_byond("focus", true);
+  call_byond('focus', true);
 }
 
-document.addEventListener("keyup", reFocus);
-document.addEventListener("mouseup", reFocus);
+document.addEventListener('keyup', reFocus);
+document.addEventListener('mouseup', reFocus);
+
+let isVideoEnabled = false;
+
+function toggleVideo(videoId, platform) {
+  const img = document.getElementById('screen_image');
+  const blur = document.getElementById('screen_blur');
+  const videoFrame = document.getElementById('screen_video');
+
+  if (!videoFrame) return;
+
+  if (videoId) {
+    isVideoEnabled = true;
+
+    img.classList.add('hidden');
+    blur.classList.add('hidden');
+
+    let url = '';
+
+    if (platform === 'youtube') {
+      url = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&loop=1&playlist=${videoId}&showinfo=0&modestbranding=1`;
+    } else if (platform === 'rutube') {
+      url = `https://rutube.ru/play/embed/${videoId}?autoStart=true&mute=0&autoplay=1`;
+    }
+
+    videoFrame.src = url;
+    videoFrame.classList.remove('hidden');
+  } else {
+    isVideoEnabled = false;
+    videoFrame.src = '';
+    videoFrame.classList.add('hidden');
+
+    img.classList.remove('hidden');
+    blur.classList.remove('hidden');
+  }
+}
+
+function toggleYoutubeVideo(videoId) {
+  toggleVideo(videoId, 'youtube');
+}
+
+function toggleRutubeVideo(videoId) {
+  toggleVideo(videoId, 'rutube');
+}
 
 /* Tell Byond that the title screen is ready */
-call_byond("titleReady", true);
+call_byond('titleReady', true);
