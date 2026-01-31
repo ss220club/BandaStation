@@ -10,6 +10,14 @@
 	name = "Long Antennae"
 	icon_state = "long"
 
+/datum/sprite_accessory/antennae/kidan/none
+	name = "None Antennae"
+	icon_state = "none"
+
+/datum/sprite_accessory/antennae/kidan/spiral
+	name = "Spiral Antennae"
+	icon_state = "spiral"
+
 /datum/sprite_accessory/antennae/kidan/burnt
 	name = "Burnt Off"
 	icon_state = "burnt"
