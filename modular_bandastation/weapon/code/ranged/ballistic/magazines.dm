@@ -1388,18 +1388,23 @@
 	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/c980_grenade/phosphor
+	name = "Kiboko grenade box (.980 Tydhouer Phosphor)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/phosphor
 
 /obj/item/ammo_box/magazine/c980_grenade/shrapnel
+	name = "Kiboko grenade box (.980 Tydhouer Shrapnel)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel
 
 /obj/item/ammo_box/magazine/c980_grenade/shrapnel/stingball
+	name = "Kiboko grenade box (.980 Tydhouer Singball)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/stingball
 
 /obj/item/ammo_box/magazine/c980_grenade/smoke
+	name = "Kiboko grenade box (.980 Tydhouer Smoke)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/smoke
 
 /obj/item/ammo_box/magazine/c980_grenade/gas
+	name = "Kiboko grenade box (.980 Tydhouer Teargas)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/riot
 
 /obj/item/ammo_box/magazine/c980_grenade/drum
@@ -1413,18 +1418,23 @@
 	start_empty = TRUE
 
 /obj/item/ammo_box/magazine/c980_grenade/drum/phosphor
+	name = "Kiboko grenade drum (.980 Tydhouer Phosphor)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/phosphor
 
 /obj/item/ammo_box/magazine/c980_grenade/drum/shrapnel/stingball
+	name = "Kiboko grenade drum (.980 Tydhouer Stingball)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/stingball
 
 /obj/item/ammo_box/magazine/c980_grenade/drum/shrapnel
+	name = "Kiboko grenade drum (.980 Tydhouer Shrapnel)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel
 
 /obj/item/ammo_box/magazine/c980_grenade/drum/smoke
+	name = "Kiboko grenade drum (.980 Tydhouer Smoke)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/smoke
 
 /obj/item/ammo_box/magazine/c980_grenade/drum/gas
+	name = "Kiboko grenade drum (.980 Tydhouer Teargas)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/riot
 
 // MARK: Shotguns

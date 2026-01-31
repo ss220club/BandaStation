@@ -18,6 +18,7 @@
 	tac_reloads = TRUE
 	rack_delay = 1 SECONDS
 	can_suppress = FALSE
+	SET_BASE_PIXEL(-16, 0)
 
 /obj/item/gun/ballistic/rifle/sniper_rifle/t26/no_mag
 	spawnwithmagazine = FALSE
