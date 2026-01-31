@@ -381,7 +381,7 @@
 		)
 	else
 		unbuckled_mob.visible_message(
-			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстёгивает [unbuckled_mob.declent_ru(GENITIVE)] от [src.declent_ru(GENITIVE)]."),
-			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстёгивает от [src.declent_ru(GENITIVE)]."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстёгивает [unbuckled_mob.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)]."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстёгивает вас от [src.declent_ru(GENITIVE)]."),
 			span_hear("Вы слышите лязг металла."),
 		)
