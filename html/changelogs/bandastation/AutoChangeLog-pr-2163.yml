@@ -1,0 +1,4 @@
+author: "mcbalaam"
+delete-after: True
+changes:
+  - admin: "Теперь в лобби можно включить ролик с YouTube"
