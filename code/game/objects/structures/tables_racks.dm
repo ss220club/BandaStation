@@ -1224,7 +1224,7 @@
 		if (breath_mask.loc == src)
 			. += span_info("Вы можете снять маску, щёлкнув правой кнопкой мыши по [src.declent_ru(DATIVE)] пустой рукой.")
 	else
-		. += span_notice("На боку есть отверстие для трубки дыхательной маски.")
+			. += span_notice("На боку есть отверстие для трубки дыхательной маски.")
 
 /obj/structure/table/optable/proc/detach_mask(mob/living/user)
 	if (!istype(user) || !IsReachableBy(user) || !user.can_interact_with(src))
