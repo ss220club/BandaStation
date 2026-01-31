@@ -87,23 +87,6 @@
 			part_datum.overslotting = overslot
 			wearer.transferItemToLoc(overslot, part, force = TRUE)
 			RegisterSignal(part, COMSIG_ATOM_EXITED, PROC_REF(on_overslot_exit))
-			//BANDASTATION ADD start - modsuits improvements expansion
-			//Making clothes invisible when MODsuit is opening saving old texture in to buffer
-			var/cloth_type = FALSE
-			if(istype(overslot, /obj/item/clothing/head))
-				cloth_type = "head"
-			else if(istype(overslot, /obj/item/clothing/suit))
-				cloth_type = "suit"
-			if(istype(overslot, /obj/item/clothing/gloves))
-				cloth_type = "gloves"
-			else if(istype(overslot, /obj/item/clothing/shoes))
-				cloth_type = "shoes"
-			if(cloth_type)
-				src.theme.worn_cloth_icons[cloth_type][1] = overslot.worn_icon
-				src.theme.worn_cloth_icons[cloth_type][2] = overslot.worn_icon_state
-				overslot.worn_icon = 'icons/blanks/32x32.dmi'
-				overslot.worn_icon_state = "nothing"
-			//BANDASTATION ADD stop - modsuits improvements expansion
 	if(wearer.equip_to_slot_if_possible(part, part.slot_flags, qdel_on_fail = FALSE, disable_warning = TRUE))
 		ADD_TRAIT(part, TRAIT_NODROP, MOD_TRAIT)
 		wearer.update_clothing(slot_flags|part.slot_flags)
@@ -155,25 +138,8 @@
 			return FALSE
 	REMOVE_TRAIT(part, TRAIT_NODROP, MOD_TRAIT)
 	wearer.transferItemToLoc(part, src, force = TRUE)
-	//BANDASTATION ADD start - modsuits improvements expansion
-	var/obj/item/overslot = part_datum.overslotting
-	var/cloth_type = FALSE
-	if(istype(overslot, /obj/item/clothing/head))
-		cloth_type = "head"
-	else if(istype(overslot, /obj/item/clothing/suit))
-		cloth_type = "suit"
-	if(istype(overslot, /obj/item/clothing/gloves))
-		cloth_type = "gloves"
-	else if(istype(overslot, /obj/item/clothing/shoes))
-		cloth_type = "shoes"
-	if(cloth_type && src.theme.worn_cloth_icons[cloth_type][1] != "")
-		overslot.worn_icon = src.theme.worn_cloth_icons[cloth_type][1]
-		overslot.worn_icon_state = src.theme.worn_cloth_icons[cloth_type][2]
-		src.theme.worn_cloth_icons[cloth_type][1] = ""
-		src.theme.worn_cloth_icons[cloth_type][2] = ""
-	//BANDASTATION ADD stop - modsuits improvements expansion
 	if(part_datum.overslotting)
-		overslot = part_datum.overslotting
+		var/obj/item/overslot = part_datum.overslotting
 		if(!QDELING(wearer) && !wearer.equip_to_slot_if_possible(overslot, overslot.slot_flags, qdel_on_fail = FALSE, disable_warning = TRUE))
 			wearer.dropItemToGround(overslot, force = TRUE, silent = TRUE)
 	wearer.update_clothing(slot_flags|part.slot_flags)
