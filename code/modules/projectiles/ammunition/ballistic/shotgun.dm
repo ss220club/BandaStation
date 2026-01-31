@@ -10,6 +10,8 @@
 	projectile_type = /obj/projectile/bullet/shotgun_slug
 	newtonian_force = 1.25
 
+	bounce_sfx_override = 'modular_bandastation/weapon/sound/ranged/bulletcasing_shotgun_bounce.ogg'
+
 /obj/item/ammo_casing/shotgun/milspec
 	name = "shotgun milspec slug"
 	desc = "A 12 gauge milspec lead slug."

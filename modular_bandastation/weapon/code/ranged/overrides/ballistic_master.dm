@@ -236,6 +236,16 @@
 		HEDP grenades can destroy almost any silicon or mechas... and people too. Walls and doors are also included."
 	item = /obj/item/storage/fancy/a40mm_box/hedp
 
+// Ammo casings new drop sounds
+/obj/item/ammo_casing
+	var/list/bounce_sfx_override = list('modular_bandastation/weapon/sound/ranged/bulletcasing_bounce1.ogg', 'modular_bandastation/weapon/sound/ranged/bulletcasing_bounce2.ogg', 'modular_bandastation/weapon/sound/ranged/bulletcasing_bounce3.ogg')
+
+/obj/item/ammo_casing/bounce_away(still_warm = FALSE, bounce_delay = 3)
+	. = ..()
+	if(bounce_sfx_override)
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound), src, pick(bounce_sfx_override), 20, 1), bounce_delay) //Soft / non-solid turfs that shouldn't make a sound when a shell casing is ejected over them.
+		return
+
 // Ammo casing random drop rotation
 /obj/item/ammo_casing/update_icon_state()
 	. = ..()
