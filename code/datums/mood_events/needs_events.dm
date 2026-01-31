@@ -91,7 +91,7 @@
 /datum/mood_event/shower/add_effects(shower_reagent)
 	if(istype(shower_reagent, /datum/reagent/blood))
 		if(HAS_TRAIT(owner, TRAIT_MORBID) || HAS_TRAIT(owner, TRAIT_EVIL) || (owner.mob_biotypes & MOB_UNDEAD))
-			description = "Ощущение прекрасного кровавого душа было приятным."
+			description = "Ощущение прекрасного кровавого душа было великолепным."
 			mood_change = 6 // you sicko
 		else
 			description = "Недавно я принял ужасный душ, из которого лилась кровь!"

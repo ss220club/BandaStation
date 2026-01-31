@@ -206,7 +206,7 @@
 	event_flags = MOOD_EVENT_FEAR
 
 /datum/mood_event/phobia
-	description = "Я увидел нечто очень пугающее!"
+	description = "Я увидел нечто очень ужасающее!"
 	mood_change = -4
 	timeout = 4 MINUTES
 	event_flags = MOOD_EVENT_FEAR
@@ -520,7 +520,7 @@
 
 //Gained when you're hit over the head with wrapping paper or cardboard roll
 /datum/mood_event/bapped
-	description = "Ой... моя голова, я чувствую себя немного глупо сейчас!"
+	description = "Ауч... моя голова, я чувствую себя немного глупо!"
 	mood_change = -1
 	timeout = 3 MINUTES
 
@@ -645,7 +645,7 @@
 	timeout = 10 MINUTES
 
 /datum/mood_event/normal_hangover
-	description = "Ну и ночка."
+	description = "Фух... Ну и ночка..."
 	mood_change = 0
 	timeout = 10 MINUTES
 
