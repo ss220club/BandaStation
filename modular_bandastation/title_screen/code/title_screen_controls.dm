@@ -1,11 +1,11 @@
 /**
  * Enables an admin to upload a new titlescreen image.
  */
-ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить изображение", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_HIDDEN)
+ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить фон", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_HIDDEN)
 	if(!check_rights(R_ADMIN))
 		return
 
-	switch(tgui_alert(usr, "Что делаем с изображением в лобби?", "Лобби", list("Меняем", "Сбрасываем", "Ничего")))
+	switch(tgui_input_list(usr, "Что делаем с фоном лобби?", "Фон лобби", list("Меняем", "Сбрасываем", "Включаем YouTube", "Включаем RuTube", "Ничего")))
 		if("Меняем")
 			var/file = input(usr) as icon|null
 			if(file)
@@ -13,6 +13,16 @@ ADMIN_VERB(change_title_screen, R_ADMIN, "Лобби: Изменить изоб�
 
 		if("Сбрасываем")
 			SStitle.set_title_image(usr)
+
+		if("Включаем YouTube")
+			var/link = tgui_input_text(usr, "Введи ссылку на видео:", "YouTube ссылка", max_length = 128)
+			if(link)
+				SStitle.play_youtube_video(usr, link)
+
+		if("Включаем RuTube")
+			var/link = tgui_input_text(usr, "Введи ссылку на видео:", "RuTube ссылка", max_length = 128)
+			if(link)
+				SStitle.play_rutube_video(usr, link)
 
 /**
  * Sets a titlescreen notice, a big red text on the main screen.
@@ -70,3 +80,37 @@ ADMIN_VERB(change_title_screen_css, R_DEBUG, "Title Screen: Set CSS", ADMIN_VERB
 	if(isnewplayer(mob))
 		return
 	. = ..()
+
+/client/proc/validate_job_restrictions()
+	set waitfor = FALSE
+
+	if(SSticker.current_state >= GAME_STATE_SETTING_UP)
+		return
+
+	if(locate(/datum/station_trait/xenobureaucracy_error) in GLOB.lobby_station_traits)
+		return
+
+	var/prefs_species = src.prefs.read_preference(/datum/preference/choiced/species)
+	var/list/prefs_jobs = src.prefs.job_preferences
+	var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
+	var/list/allowed_species = CONFIG_GET(str_list/allowed_species)
+
+	if(!prefs_species)
+		return
+
+	if(allowed_species && length(allowed_species))
+		if("[prefs_species]" in allowed_species)
+			return
+
+	for(var/job_id in prefs_jobs)
+		if(job_id in job_restrictions)
+			to_chat(src, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
+			SStitle.title_output(src, FALSE, "toggleReady")
+			if(!usr)
+				return
+			var/mob/dead/new_player/player = usr
+			player.ready = PLAYER_NOT_READY
+			return
+
+/datum/client_interface/proc/validate_job_restrictions()
+	return TRUE

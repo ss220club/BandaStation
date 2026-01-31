@@ -88,12 +88,14 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 	if(organ_flags & ORGAN_EDIBLE)
 		AddComponentFrom(
 			SOURCE_EDIBLE_INNATE, \
-			/datum/component/edible,\
-			initial_reagents = food_reagents,\
-			foodtypes = foodtype_flags,\
-			volume = reagent_vol,\
-			tastes = food_tastes,\
-			after_eat = CALLBACK(src, PROC_REF(OnEatFrom)))
+			/datum/component/edible, \
+			initial_reagents = food_reagents, \
+			foodtypes = foodtype_flags, \
+			volume = reagent_vol, \
+			tastes = food_tastes, \
+			after_eat = CALLBACK(src, PROC_REF(OnEatFrom)), \
+		)
+		RegisterSignal(src, COMSIG_FOOD_ATTEMPT_EAT, PROC_REF(block_nom))
 
 	if(bodypart_overlay)
 		setup_bodypart_overlay()
@@ -154,7 +156,7 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 	if(!IS_ROBOTIC_ORGAN(src) && (clean_types & CLEAN_TYPE_BLOOD))
 		add_blood_DNA(blood_dna_info)
 
-/obj/item/organ/proc/on_death(seconds_per_tick, times_fired) //runs decay when outside of a person
+/obj/item/organ/proc/on_death(seconds_per_tick) //runs decay when outside of a person
 	if(organ_flags & (ORGAN_ROBOTIC | ORGAN_FROZEN))
 		return
 
@@ -168,7 +170,9 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 			var/air_temperature_factor = min((exposed_air.temperature - T0C) / 20, 1)
 			apply_organ_damage(decay_factor * maxHealth * seconds_per_tick * air_temperature_factor)
 
-/obj/item/organ/proc/on_life(seconds_per_tick, times_fired) //repair organ damage if the organ is not failing
+/obj/item/organ/proc/on_life(seconds_per_tick) //repair organ damage if the organ is not failing
+	SHOULD_CALL_PARENT(TRUE)
+
 	if(organ_flags & ORGAN_FAILING)
 		handle_failing_organs(seconds_per_tick)
 		return
@@ -230,11 +234,12 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 /obj/item/organ/proc/enter_wardrobe()
 	STOP_PROCESSING(SSobj, src)
 
-/obj/item/organ/process(seconds_per_tick, times_fired)
-	on_death(seconds_per_tick, times_fired) //Kinda hate doing it like this, but I really don't want to call process directly.
+/obj/item/organ/process(seconds_per_tick)
+	on_death(seconds_per_tick) //Kinda hate doing it like this, but I really don't want to call process directly.
 
 /obj/item/organ/proc/OnEatFrom(eater, feeder)
-	useable = FALSE //You can't use it anymore after eating it you spaztic
+	// You can't use it anymore after eating it
+	organ_flags |= ORGAN_UNUSABLE
 
 /obj/item/organ/item_action_slot_check(slot,mob/user)
 	return //so we don't grant the organ's action to mobs who pick up the organ.
@@ -341,6 +346,8 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 	// Delegate to species if possible.
 	if(dna?.species)
 		for(var/obj/item/organ/organ as anything in organs)
+			if(organ.organ_flags & ORGAN_EMP)
+				organ.organ_flags &= ~ORGAN_EMP
 			if(remove_hazardous && (organ.organ_flags & ORGAN_HAZARDOUS))
 				qdel(organ)
 				continue
@@ -437,23 +444,23 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 /// Called by medical scanners to get a simple summary of how healthy the organ is. Returns an empty string if things are fine.
 /obj/item/organ/proc/get_status_text(advanced, add_tooltips, colored = TRUE)
 	if(advanced && (organ_flags & ORGAN_HAZARDOUS))
-		return conditional_tooltip("[colored ? "<font color='#cc3333'>" : ""]Harmful Foreign Body[colored ? "</font>" : ""]", "Remove surgically.", add_tooltips)
+		return conditional_tooltip("[colored ? "<font color='#cc3333'>" : ""]Вредное инородное тело[colored ? "</font>" : ""]", "Удалить хирургическим путем.", add_tooltips)
 
 	if(organ_flags & ORGAN_EMP)
-		return conditional_tooltip("[colored ? "<font color='#cc3333'>" : ""]EMP-Derived Failure[colored ? "</font>" : ""]", "Repair or replace surgically.", add_tooltips)
+		return conditional_tooltip("[colored ? "<font color='#cc3333'>" : ""]Сбой, вызванный ЭМИ[colored ? "</font>" : ""]", "Починить или заменить хирургическим путем.", add_tooltips)
 
 	var/tech_text = ""
 	if(owner.has_reagent(/datum/reagent/inverse/technetium))
-		tech_text = "[round((damage / maxHealth) * 100, 1)]% damaged"
+		tech_text = "[round((damage / maxHealth) * 100, 1)]% повреждено"
 
 	if(organ_flags & ORGAN_FAILING)
-		return conditional_tooltip("[colored ? "<font color='#cc3333'>" : ""][tech_text || "Non-Functional"][colored ? "</font>" : ""]", "Repair or replace surgically.", add_tooltips)
+		return conditional_tooltip("[colored ? "<font color='#cc3333'>" : ""][tech_text || "Не функционирует"][colored ? "</font>" : ""]", "Проведение операции или замена хирургическим путем.", add_tooltips)
 
 	if(damage > high_threshold)
-		return conditional_tooltip("[colored ? "<font color='#ff9933'>" : ""][tech_text || "Severely Damaged"][colored ? "</font>" : ""]", "[healing_factor ? "Treat with rest or use specialty medication." : "Repair surgically or use specialty medication."]", add_tooltips && owner.stat != DEAD)
+		return conditional_tooltip("[colored ? "<font color='#ff9933'>" : ""][tech_text || "Сильно поврежден"][colored ? "</font>" : ""]", "[healing_factor ? "Лечение покоем или принятием специальных препаратов." : "Проведение операции или принятие специальных препаратов."]", add_tooltips && owner.stat != DEAD)
 
 	if(damage > low_threshold)
-		return conditional_tooltip("[colored ? "<font color='#ffcc33'>" : ""][tech_text || "Mildly Damaged"][colored ? "</font>" : ""]", "[healing_factor ? "Treat with rest." : "Use specialty medication."]", add_tooltips && owner.stat != DEAD)
+		return conditional_tooltip("[colored ? "<font color='#ffcc33'>" : ""][tech_text || "Слегка поврежден"][colored ? "</font>" : ""]", "[healing_factor ? "Лечение покоем." : "Принятие специальных препаратов."]", add_tooltips && owner.stat != DEAD)
 
 	if(tech_text)
 		return "[colored ? "<font color='#33cc33'>" : ""][tech_text][colored ? "</font>" : ""]"
@@ -495,6 +502,16 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 /obj/item/organ/proc/replace_into(mob/living/carbon/new_owner)
 	Insert(new_owner, special = TRUE, movement_flags = DELETE_IF_REPLACED)
 
+/// Signal proc for [COMSIG_FOOD_ATTEMPT_EAT], block feeding an organ to a mob if they are marked as ready to operate - to prevent mistakenly feeding your patient
+/obj/item/organ/proc/block_nom(datum/source, mob/living/carbon/eater, mob/living/carbon/feeder)
+	SIGNAL_HANDLER
+	if(!HAS_TRAIT(eater, TRAIT_READY_TO_OPERATE))
+		return NONE
+	if(eater == feeder)
+		to_chat(feeder, span_warning("You feel it unwise to eat [source] while you're undergoing surgery."))
+	else
+		to_chat(feeder, span_warning("The only thing you could think of doing with [source] right now is feeding it to [eater], but that doesn't seem right."))
+	return BLOCK_EAT_ATTEMPT
 
 /// Get all possible organ slots by checking every organ, and then store it and give it whenever needed
 /proc/get_all_slots()

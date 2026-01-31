@@ -177,7 +177,8 @@
 	name = "Arm Blade"
 	desc = "Мы превращаем одну из наших рук в смертоносный клинок. Стоит 20 химикатов."
 	helptext = "Мы можем убрать свой клинок так же, как и сформировали его. Нельзя использовать, находясь в меньшей форме."
-	button_icon_state = "armblade"
+	button_icon_state = "arm_blade"
+	category = "combat"
 	chemical_cost = 20
 	dna_cost = 2
 	req_human = TRUE
@@ -227,6 +228,8 @@
 	)
 
 /obj/item/melee/arm_blade/afterattack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
+	if(QDELETED(target))
+		return
 	if(istype(target, /obj/structure/table))
 		var/obj/smash = target
 		smash.deconstruct(FALSE)
@@ -271,6 +274,7 @@
 	В боевой стойке, поймав жертву, мы возьмем ее в захват; притянем к себе и нанесем удар, если в руках у нас также есть острое оружие. \
 	Не может быть использована в меньшей форме."
 	button_icon_state = "tentacle"
+	category = "combat"
 	chemical_cost = 10
 	dna_cost = 2
 	req_human = TRUE
@@ -487,6 +491,7 @@
 	desc = "Мы превращаем одну из наших рук в твердый щит. Стоит 20 химикатов."
 	helptext = "Органическая ткань не может вечно сопротивляться повреждениям; щит может сломаться, после того, как по нему нанесут слишком много ударов. Чем больше генов мы поглощаем, тем сильнее он становится. Невозможно использовать, находясь в меньшей форме."
 	button_icon_state = "organic_shield"
+	category = "combat"
 	chemical_cost = 20
 	dna_cost = 1
 	req_human = TRUE
@@ -523,6 +528,9 @@
 		loc.visible_message(span_warning("Конец руки [loc.declent_ru(GENITIVE)] быстро раздувается, образуя огромную массу, похожую на щит!"), span_warning("Мы надуваем руку, превращая ее в прочный щит."), span_hear("Вы слышите, как рвется и разрывается органическая масса!"))
 
 /obj/item/shield/changeling/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK, damage_type = BRUTE)
+	if(attack_type == OVERWHELMING_ATTACK)
+		return FALSE
+
 	if(remaining_uses < 1)
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
@@ -541,6 +549,7 @@
 	desc = "Мы превращаем нашу кожу в прочный хитин, чтобы защитить себя от повреждений. Стоит 20 химикатов."
 	helptext = "На поддержание брони требуется небольшой расход химикатов. Доспехи обеспечивают достойную защиту от грубой силы и энергетического оружия. Не может быть использована в меньшей форме."
 	button_icon_state = "chitinous_armor"
+	category = "combat"
 	chemical_cost = 20
 	dna_cost = 1
 	req_human = TRUE
@@ -607,6 +616,7 @@
 	desc = "Мы покрываем голову восковым покрытием, похожим на пчелиный улей, которое можно использовать для производства пчел, атакующих наших врагов. Стоит 15 химикатов."
 	helptext = "Хотя голова улья не дает особой брони, она позволяет посылать пчел в атаку на цели. Внутрь улья можно насыпать реагенты, чтобы все выпущенные пчелы впрыскивали эти реагенты."
 	button_icon_state = "hive_head"
+	category = "combat"
 	chemical_cost = 15
 	dna_cost = 2
 	req_human = FALSE
@@ -682,7 +692,8 @@
 		spawns = 1
 	for(var/i in 1 to spawns)
 		var/mob/living/basic/summoned_minion = new spawn_type(owner.drop_location())
-		summoned_minion.faction = list("[REF(owner)]")
+		summoned_minion.set_allies(list("[REF(owner)]"))
+		summoned_minion.set_faction(null)
 		minion_additional_changes(summoned_minion)
 
 ///Our tell that we're using this ability. Usually a sound and a visible message.area

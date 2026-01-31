@@ -57,7 +57,7 @@
 	UnregisterSignal(former_jellyperson, COMSIG_HUMAN_ON_HANDLE_BLOOD)
 	return ..()
 
-/datum/species/jelly/proc/slime_blood(mob/living/carbon/human/slime, seconds_per_tick, times_fired)
+/datum/species/jelly/proc/slime_blood(mob/living/carbon/human/slime, seconds_per_tick)
 	SIGNAL_HANDLER
 
 	if(slime.stat == DEAD)
@@ -69,7 +69,7 @@
 	// Blood regen thresholds use your real amount of blood.
 	if(slime.get_blood_volume() <= 0)
 		slime.adjust_blood_volume(JELLY_REGEN_RATE_EMPTY * slime.physiology.blood_regen_mod * seconds_per_tick)
-		slime.adjustBruteLoss(2.5 * seconds_per_tick)
+		slime.adjust_brute_loss(2.5 * seconds_per_tick)
 		to_chat(slime, span_danger("You feel empty!"))
 
 	// Same logic applies here.
@@ -255,7 +255,7 @@
 /datum/species/jelly/slime/copy_properties_from(datum/species/jelly/slime/old_species)
 	bodies = old_species.bodies
 
-/datum/species/jelly/slime/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
+/datum/species/jelly/slime/spec_life(mob/living/carbon/human/H, seconds_per_tick)
 	. = ..()
 	if(H.get_blood_volume() >= BLOOD_VOLUME_SLIME_SPLIT)
 		if(SPT_PROB(2.5, seconds_per_tick))

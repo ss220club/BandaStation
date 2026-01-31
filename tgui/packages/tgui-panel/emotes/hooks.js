@@ -1,11 +1,7 @@
-import { useDispatch, useSelector } from 'tgui/backend';
-import { selectEmotes } from './selectors';
+import { useAtom } from 'jotai';
+import { emotesAtom } from './atom';
 
 export const useEmotes = () => {
-  const emotes = useSelector(selectEmotes);
-  const dispatch = useDispatch();
-  return {
-    ...emotes,
-    toggle: () => dispatch({ type: 'emotes/toggle' }),
-  };
+  const [emotes] = useAtom(emotesAtom);
+  return emotes;
 };

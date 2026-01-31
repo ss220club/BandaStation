@@ -100,6 +100,20 @@
 /mob/living/proc/is_ears_covered()
 	return null
 
+/**
+ * Check if the passed body zone is covered by some clothes
+ *
+ * * location: body zone to check
+ * ([BODY_ZONE_CHEST], [BODY_ZONE_HEAD], etc)
+ * * exluded_equipment_slots: equipment slots to ignore when checking coverage
+ * (for example, if you want to ignore helmets, pass [ITEM_SLOT_HEAD])
+ *
+ * Returns TRUE if the location is accessible (not covered)
+ * Returns FALSE if the location is covered by something
+ */
+/mob/living/proc/is_location_accessible(location, exluded_equipment_slots = NONE)
+	return TRUE
+
 /mob/living/bullet_act(obj/projectile/proj, def_zone, piercing_hit = FALSE, blocked = 0)
 	. = ..()
 	if (. != BULLET_ACT_HIT)
@@ -128,7 +142,7 @@
 		apply_projectile_effects(proj, def_zone, blocked)
 
 /mob/living/proc/apply_projectile_effects(obj/projectile/proj, def_zone, armor_check)
-	apply_damage(
+	var/damage_dealt = apply_damage(
 		damage = proj.damage,
 		damagetype = proj.damage_type,
 		def_zone = def_zone,
@@ -139,6 +153,10 @@
 		attack_direction = get_dir(proj.starting, src),
 		attacking_item = proj,
 	)
+
+	if(proj.damage_type == BRUTE && damage_dealt >= 10 && proj.speed >= 1 && prob(0.1))
+		var/obj/item/organ/brain/a_brain = locate() in get_bodypart(def_zone)
+		a_brain?.cure_trauma_type(resilience = TRAUMA_RESILIENCE_LOBOTOMY)
 
 	apply_effects(
 		stun = proj.stun,
@@ -459,13 +477,8 @@
 	if(.)
 		return TRUE
 
-	for(var/datum/surgery/operations as anything in surgeries)
-		if(user.combat_mode)
-			break
-		if(IS_IN_INVALID_SURGICAL_POSITION(src, operations))
-			continue
-		if(operations.next_step(user, modifiers))
-			return TRUE
+	if(!combat_mode && HAS_TRAIT(src, TRAIT_READY_TO_OPERATE) && user.perform_surgery(src))
+		return TRUE
 
 	return FALSE
 
@@ -581,12 +594,12 @@
 	if(shock_damage < 1)
 		return FALSE
 	if(!(flags & SHOCK_ILLUSION))
-		adjustFireLoss(shock_damage)
-		if(getFireLoss() > 100)
+		adjust_fire_loss(shock_damage)
+		if(get_fire_loss() > 100)
 			add_shared_particles(/particles/smoke/burning)
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, remove_shared_particles), /particles/smoke/burning), 10 SECONDS)
 	else
-		adjustStaminaLoss(shock_damage)
+		adjust_stamina_loss(shock_damage)
 	//BANDASTATION EDIT START - electrocute message
 	var/shock_name = source
 	if(isatom(source))
@@ -665,7 +678,7 @@
 	return TRUE
 
 //called when the mob receives a loud bang
-/mob/living/proc/soundbang_act(intensity = SOUNDBANG_NORMAL, stun_pwr = 20, damage_pwr = 5, deafen_pwr = 15, ignore_deafness = FALSE, send_sound = TRUE)
+/mob/living/proc/soundbang_act(intensity = SOUNDBANG_NORMAL, stun_pwr = 2 SECONDS, damage_pwr = 5, deafen_pwr = 1.5 SECONDS, ignore_deafness = FALSE, send_sound = TRUE)
 	var/protection = get_ear_protection(ignore_deafness)
 	if(protection >= intensity)
 		return FALSE
@@ -797,7 +810,7 @@
 			if(obj_content.flags_1 & ON_BORDER_1 && obj_content.dir == shove_dir && obj_content.density)
 				shove_flags |= SHOVE_DIRECTIONAL_BLOCKED
 				break
-		if(target_turf != target_shove_turf && !(shove_flags && SHOVE_DIRECTIONAL_BLOCKED)) //Make sure that we don't run the exact same check twice on the same tile
+		if(target_turf != target_shove_turf && !(shove_flags & SHOVE_DIRECTIONAL_BLOCKED)) //Make sure that we don't run the exact same check twice on the same tile
 			for(var/obj/obj_content in target_shove_turf)
 				if(obj_content.flags_1 & ON_BORDER_1 && obj_content.dir == REVERSE_DIR(shove_dir) && obj_content.density)
 					shove_flags |= SHOVE_DIRECTIONAL_BLOCKED
@@ -808,22 +821,22 @@
 		if(!(shove_flags & SHOVE_DIRECTIONAL_BLOCKED) && (SEND_SIGNAL(target_shove_turf, COMSIG_LIVING_DISARM_COLLIDE, src, target, shove_flags, weapon) & COMSIG_LIVING_SHOVE_HANDLED))
 			return
 		if((shove_flags & SHOVE_BLOCKED) && !(shove_flags & (SHOVE_KNOCKDOWN_BLOCKED|SHOVE_CAN_KICK_SIDE)))
-			target.Knockdown(SHOVE_KNOCKDOWN_SOLID, daze_amount = 3 SECONDS)
+			var/knocked_down = target.Knockdown(SHOVE_KNOCKDOWN_SOLID, daze_amount = 3 SECONDS)
 			target.visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] толкает [target.declent_ru(ACCUSATIVE)], сбивая [target.ru_p_them()] с ног!"),
 				span_userdanger("Вы сбиты с ног от толчка [declent_ru(GENITIVE)]!"), span_hear("Вы слышите агрессивное шарканье с последующим громким стуком!"), COMBAT_MESSAGE_RANGE, src)
 			to_chat(src, span_danger("Вы толкаете [target.declent_ru(ACCUSATIVE)], сбивая [target.ru_p_them()] с ног!"))
-			log_combat(src, target, "shoved", "knocking them down[weapon ? " with [weapon]" : ""]")
+			log_combat(src, target, "shoved", "[knocked_down ? "knocking them down[weapon ? " with [weapon]" : ""]" : ""]")
 			return
 
 	if(shove_flags & SHOVE_CAN_KICK_SIDE) //KICK HIM IN THE NUTS
-		target.Paralyze(SHOVE_CHAIN_PARALYZE)
-		target.apply_status_effect(/datum/status_effect/no_side_kick)
-		target.visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] пинает [target.declent_ru(ACCUSATIVE)] в [target.ru_p_them()] бок!"),
-						span_userdanger("[capitalize(declent_ru(NOMINATIVE))] пинает вас в ваш бок!"), span_hear("Вы слышите агрессивное шарканье с последующим громким стуком!"), COMBAT_MESSAGE_RANGE, src)
-		to_chat(src, span_danger("Вы пинаете [target.declent_ru(ACCUSATIVE)] в [target.ru_p_them()] бок!"))
-		addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, SetKnockdown), 0), SHOVE_CHAIN_PARALYZE)
-		log_combat(src, target, "kicks", "onto their side (paralyzing)")
-		return
+		if(target.Paralyze(SHOVE_CHAIN_PARALYZE))
+			target.apply_status_effect(/datum/status_effect/no_side_kick)
+			target.visible_message(span_danger("[capitalize(declent_ru(NOMINATIVE))] пинает [target.declent_ru(ACCUSATIVE)] в [target.ru_p_them()] бок!"),
+							span_userdanger("[capitalize(declent_ru(NOMINATIVE))] пинает вас в ваш бок!"), span_hear("Вы слышите агрессивное шарканье с последующим громким стуком!"), COMBAT_MESSAGE_RANGE, src)
+			to_chat(src, span_danger("Вы пинаете [target.declent_ru(ACCUSATIVE)] в [target.ru_p_them()] бок!"))
+			addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, SetKnockdown), 0), SHOVE_CHAIN_PARALYZE)
+			log_combat(src, target, "kicks", "onto their side (paralyzing)")
+			return
 
 	target.get_shoving_message(src, weapon, shove_flags)
 

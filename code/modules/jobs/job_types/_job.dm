@@ -11,11 +11,8 @@
 	/// Innate skill levels unlocked at roundstart. Based on config.jobs_have_minimal_access config setting, for example with a full crew. Format is list(/datum/skill/foo = SKILL_EXP_NOVICE) with exp as an integer or as per code/_DEFINES/skills.dm
 	var/list/minimal_skills
 
-	/// Determines who can demote this position
-	var/department_head = list()
-
 	/// Tells the given channels that the given mob is the new department head. See communications.dm for valid channels.
-	var/list/head_announce = null
+	var/head_announce
 
 	/// Bitflags for the job
 	var/auto_deadmin_role_flags = NONE
@@ -71,7 +68,7 @@
 
 	var/display_order = JOB_DISPLAY_ORDER_DEFAULT
 
-	///What types of bounty tasks can this job receive past the default?
+	///What types of bounty tasks can this job receive past the default? TODO, move to id trims.
 	var/bounty_types = CIV_JOB_BASIC
 
 	/// Goodies that can be received via the mail system.
@@ -187,7 +184,7 @@
 /// Note the joining mob has no client at this point.
 /datum/job/proc/announce_job(mob/living/joining_mob)
 	if(head_announce)
-		announce_head(joining_mob, head_announce)
+		announce_head(joining_mob, list(head_announce))
 
 
 //Used for a special check of whether to allow a client to latejoin as this job.
@@ -408,8 +405,7 @@
 		var/datum/bank_account/account = SSeconomy.bank_accounts_by_id["[equipped.account_id]"]
 
 		if(account && account.account_id == equipped.account_id)
-			card.registered_account = account
-			account.bank_cards += card
+			card.set_account(account)
 
 		equipped.update_ID_card()
 
@@ -424,8 +420,8 @@
 		stack_trace("pda_slot was set but we couldn't find a PDA!")
 		return
 
-	pda.imprint_id(equipped.real_name, equipped_job.title)
-	pda.update_ringtone(equipped_job.job_tone)
+	pda.imprint_id(equipped.real_name, equipped_job?.title || equipped.job)
+	pda.update_ringtone(equipped_job?.job_tone)
 	pda.UpdateDisplay()
 
 	var/client/equipped_client = GLOB.directory[ckey(equipped.mind?.key)]

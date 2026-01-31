@@ -6,6 +6,7 @@
 	desc = "Мы развиваем способность уменьшать накопление кислоты в наших мышцах, что позволяет нам двигаться гораздо быстрее."
 	helptext = "Нагрузка вызовет у нас усталость, и мы быстро выдохнемся. Обычные ограничения по весу, как у космических скафандров, все еще действуют. Не может быть использовано в меньшей форме."
 	button_icon_state = "strained_muscles"
+	category = "utility"
 	chemical_cost = 0
 	dna_cost = 1
 	req_human = TRUE
@@ -49,7 +50,7 @@
 
 		stacks++
 
-		user.adjustStaminaLoss(stacks * 1.3) //At first the changeling may regenerate stamina fast enough to nullify fatigue, but it will stack
+		user.adjust_stamina_loss(stacks * 1.3) //At first the changeling may regenerate stamina fast enough to nullify fatigue, but it will stack
 
 		if(stacks == 11) //Warning message that the stacks are getting too high
 			to_chat(user, span_warning("Наши ноги начинают болеть..."))

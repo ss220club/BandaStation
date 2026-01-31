@@ -4,36 +4,36 @@
 	display_name = "Оборудование медицинского отдела"
 	description = "Базовый комплект медицинского оборудования для оказания неотложной помощи при сохранении функциональности медотдела."
 	design_ids = list(
-		"operating",
-		"medicalbed",
-		"defibmountdefault",
-		"defibrillator",
-		"surgical_drapes",
-		"scalpel",
-		"retractor",
-		"hemostat",
-		"cautery",
-		"circular_saw",
-		"surgicaldrill",
-		"bonesetter",
+		"beaker",
 		"blood_filter",
-		"surgical_tape",
+		"blood_pack",
+		"blood_scanner",
+		"bonesetter",
+		"cautery",
+		"chem_pack",
+		"circular_saw",
+		"defibmountdefault",
+		"dropper",
+		"hemostat",
+		"jerrycan",
+		"large_beaker",
+		"medicalbed",
+		"operating",
+		"organ_jar",
 		"penlight",
 		"penlight_paramedic",
-		"stethoscope",
-		"beaker",
-		"large_beaker",
-		"chem_pack",
-		"blood_pack",
-		"syringe",
-		"dropper",
 		"pillbottle",
-		"xlarge_beaker",
-		"organ_jar",
-		"jerrycan",
 		"reflex_hammer",
-		"blood_scanner",
+		"retractor",
+		"scalpel",
+		"stethoscope",
 		"suit_sensor",
+		"surgical_drapes",
+		"surgical_tape",
+		"surgicaldrill",
+		"syringe",
+		"vitals_monitor",
+		"xlarge_beaker",
 	)
 	experiments_to_unlock = list(
 		/datum/experiment/autopsy/human,
@@ -75,17 +75,17 @@
 	description = "Современное медицинское оборудование для поддержания жизнеспособности экипажа с минимальными физическими повреждениями."
 	prereq_ids = list(TECHWEB_NODE_CHEM_SYNTHESIS)
 	design_ids = list(
-		"smoke_machine",
 		"chem_mass_spec",
-		"healthanalyzer_advanced",
-		"mod_health_analyzer",
 		"crewpinpointer",
-		"defibrillator_compact",
 		"defibmount",
-		"medicalbed_emergency",
-		"piercesyringe",
-		// "diode_disk_healing", // BANDASTATION REMOVAL - Healing beam design removal
+		//"diode_disk_healing", // BANDASTATION REMOVAL - Healing beam design removal
 		"diode_disk_sanity",
+		"healthanalyzer_advanced",
+		"medicalbed_emergency",
+		"mod_health_analyzer",
+		"piercesyringe",
+		"smoke_machine",
+		"vitals_monitor_advanced",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_3_POINTS)
 	required_experiments = list(/datum/experiment/scanning/reagent/haloperidol)
@@ -97,12 +97,13 @@
 	description = "Технология криогенной консервации экипажа, разработанная на основе случайного химического воздействия и адаптированная для безопасного применения."
 	prereq_ids = list(TECHWEB_NODE_MEDBAY_EQUIP_ADV, TECHWEB_NODE_FUSION)
 	design_ids = list(
+		"cryo_grenade",
 		"cryotube",
 		"mech_sleeper",
-		"stasis",
-		"cryo_grenade",
 		"splitbeaker",
 		"stasisbodybag", // BANDASTATION ADDITION - PERMA-DEATH
+		"stasis",
+		"stasis_bodybag",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_4_POINTS)
 	discount_experiments = list(/datum/experiment/scanning/reagent/cryostylane = TECHWEB_TIER_4_POINTS)

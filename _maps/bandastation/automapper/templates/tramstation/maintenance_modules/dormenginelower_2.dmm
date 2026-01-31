@@ -256,7 +256,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
-/area/template_noop)
+/area/space/nearstation)
 "mg" = (
 /obj/effect/turf_decal/sand/plating,
 /obj/structure/cable/layer1,
@@ -369,7 +369,7 @@
 "qN" = (
 /obj/structure/holosign/barrier/engineering,
 /turf/open/floor/iron/freezer,
-/area/template_noop)
+/area/space/nearstation)
 "qW" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
@@ -391,7 +391,7 @@
 "rA" = (
 /obj/modular_map_connector,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "rK" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment,
@@ -677,7 +677,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
-/area/template_noop)
+/area/space/nearstation)
 "FX" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/grille,
@@ -818,7 +818,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /turf/open/floor/plating,
-/area/template_noop)
+/area/space/nearstation)
 "PL" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment{

@@ -153,7 +153,7 @@
 	///fontawesome icon name to use in to display the user's balance in the vendor UI
 	var/displayed_currency_icon = "coins"
 	///String of the used currency to display in the vendor UI
-	var/displayed_currency_name = " cr"
+	var/displayed_currency_name = MONEY_SYMBOL
 	///Whether our age check is currently functional
 	var/age_restrictions = TRUE
 	/// How many credits does this vending machine have? 20% of all sales go to this pool, and are given freely when the machine is restocked, or successfully tilted. Lost on deconstruction.
@@ -361,7 +361,7 @@
 	if(isnull(refill_canister))
 		return // you can add the comment here instead
 
-	. += span_notice("Its maintainence panel can be [EXAMINE_HINT("screwed")] [panel_open ? "closed" : "open"]")
+	. += span_notice("Its maintenance panel can be [EXAMINE_HINT("screwed")] [panel_open ? "closed" : "open"].")
 	if(panel_open)
 		. += span_notice("The machine may be [EXAMINE_HINT("pried")] apart.")
 

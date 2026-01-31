@@ -10,7 +10,8 @@
 	else
 		return INFINITY //Can't get flashed without eyes
 	if(isclothing(head)) //Adds head protection
-		. += head.flash_protect
+		var/obj/item/clothing/helmet = head
+		. += helmet.flash_protect
 	if(isclothing(glasses)) //Glasses
 		. += glasses.flash_protect
 	if(isclothing(wear_mask)) //Mask
@@ -72,9 +73,9 @@
 /mob/living/carbon/check_projectile_dismemberment(obj/projectile/proj, def_zone)
 	var/obj/item/bodypart/affecting = get_bodypart(def_zone)
 	if(affecting && affecting.can_dismember() && !(affecting.bodypart_flags & BODYPART_UNREMOVABLE) && affecting.get_damage() >= (affecting.max_damage - proj.dismemberment))
-		affecting.dismember(proj.damtype)
-		if(proj.catastropic_dismemberment)
-			apply_damage(proj.damage, proj.damtype, BODY_ZONE_CHEST, wound_bonus = proj.wound_bonus) //stops a projectile blowing off a limb effectively doing no damage. Mostly relevant for sniper rifles.
+		if(!affecting.dismember(proj.damtype) || !proj.catastropic_dismemberment)
+			return
+		apply_damage(proj.damage, proj.damtype, BODY_ZONE_CHEST, wound_bonus = proj.wound_bonus) //stops a projectile blowing off a limb effectively doing no damage. Mostly relevant for sniper rifles.
 
 /mob/living/carbon/try_catch_item(obj/item/item, skip_throw_mode_check = FALSE, try_offhand = FALSE)
 	. = ..()
@@ -253,7 +254,7 @@
 		return
 	else
 		show_message(span_userdanger("Блоб атакует!"))
-		adjustBruteLoss(10)
+		adjust_brute_loss(10)
 
 ///Adds to the parent by also adding functionality to propagate shocks through pulling and doing some fluff effects.
 /mob/living/carbon/electrocute_act(shock_damage, source, siemens_coeff = 1, flags = NONE, jitter_time = 20 SECONDS, stutter_time = 4 SECONDS, stun_duration = 4 SECONDS)
@@ -280,11 +281,17 @@
 			C.electrocute_act(shock_damage*0.75, src, 1, flags, jitter_time, stutter_time, stun_duration)
 	//Stun
 	var/should_stun = (!(flags & SHOCK_TESLA) || siemens_coeff > 0.5) && !(flags & SHOCK_NOSTUN)
-	var/paralyze = !(flags & SHOCK_KNOCKDOWN)
+	var/stun = !(flags & SHOCK_KNOCKDOWN)
 	var/immediately_stun = should_stun && !(flags & SHOCK_DELAY_STUN)
 	if (immediately_stun)
-		if (paralyze)
-			Paralyze(stun_duration)
+		if (stun)
+			// intended effect here is to floor you immediately if you are shocked twice in quick succession
+			// or to keep you floored if you are already incapacitated otherwise
+			if(incapacitated)
+				Paralyze(stun_duration)
+			// otherwise it just stuns you upright - until the second shock, which floors you
+			else
+				Stun(stun_duration)
 		else
 			Knockdown(stun_duration)
 	//Jitter and other fluff.
@@ -292,12 +299,12 @@
 	adjust_jitter(jitter_time)
 	adjust_stutter(stutter_time)
 	if (should_stun)
-		addtimer(CALLBACK(src, PROC_REF(secondary_shock), paralyze, stun_duration * 1.5), 2 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(secondary_shock), stun, stun_duration * 1.5), 2 SECONDS)
 	return shock_damage
 
 ///Called slightly after electrocute act to apply a secondary stun.
-/mob/living/carbon/proc/secondary_shock(paralyze, stun_duration)
-	if (paralyze)
+/mob/living/carbon/proc/secondary_shock(stun, stun_duration)
+	if (stun)
 		Paralyze(stun_duration)
 	else
 		Knockdown(stun_duration)
@@ -537,7 +544,7 @@
 		. = FALSE
 
 
-/mob/living/carbon/adjustOxyLoss(amount, updating_health = TRUE, forced, required_biotype, required_respiration_type)
+/mob/living/carbon/adjust_oxy_loss(amount, updating_health = TRUE, forced, required_biotype, required_respiration_type)
 	if(!forced && HAS_TRAIT(src, TRAIT_NOBREATH))
 		amount = min(amount, 0) //Prevents oxy damage but not healing
 
@@ -549,7 +556,7 @@
 	if(!limb)
 		return
 
-/mob/living/carbon/setOxyLoss(amount, updating_health = TRUE, forced, required_biotype, required_respiration_type)
+/mob/living/carbon/set_oxy_loss(amount, updating_health = TRUE, forced, required_biotype, required_respiration_type)
 	. = ..()
 	check_passout()
 
@@ -557,8 +564,8 @@
 * Check to see if we should be passed out from oxyloss
 */
 /mob/living/carbon/proc/check_passout()
-	var/mob_oxyloss = getOxyLoss()
-	if(mob_oxyloss >= OXYLOSS_PASSOUT_THRESHOLD)
+	var/mob_oxyloss = get_oxy_loss()
+	if(mob_oxyloss >= OXYLOSS_PASSOUT_THRESHOLD && !HAS_TRAIT(src, TRAIT_NO_OXYLOSS_PASSOUT))
 		if(!HAS_TRAIT_FROM(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT))
 			ADD_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
 	else if(mob_oxyloss < OXYLOSS_PASSOUT_THRESHOLD)
@@ -688,7 +695,7 @@
 		if (picked_user_part && BODYTYPE_CAN_BE_BIOSCRAMBLED(picked_user_part.bodytype))
 			changed_something = TRUE
 			new_part = new new_part()
-			new_part.replace_limb(src, special = TRUE)
+			new_part.replace_limb(src)
 			if (picked_user_part)
 				qdel(picked_user_part)
 

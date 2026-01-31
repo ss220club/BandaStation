@@ -98,34 +98,39 @@
 	status_type = STATUS_EFFECT_UNIQUE
 	duration = STATUS_EFFECT_PERMANENT //Will remove self when block breaks.
 	alert_type = /atom/movable/screen/alert/status_effect/freon/stasis
+	tick_interval = STATUS_EFFECT_NO_TICK
 	/// The cube we will place our mob into.
 	var/obj/structure/ice_stasis/cube
 	/// Whether or not this version of the status effect can be resisted out of.
 	var/resistable = TRUE
 
 /datum/status_effect/frozenstasis/on_apply()
-	if(resistable)
-		RegisterSignal(owner, COMSIG_LIVING_RESIST, PROC_REF(breakCube))
 	cube = new /obj/structure/ice_stasis(get_turf(owner))
 	owner.forceMove(cube)
+	RegisterSignal(cube, COMSIG_QDELETING, PROC_REF(clear_effect))
+	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(has_escaped))
+	if(resistable)
+		RegisterSignal(owner, COMSIG_LIVING_RESIST, PROC_REF(clear_effect))
 	ADD_TRAIT(owner, TRAIT_GODMODE, TRAIT_STATUS_EFFECT(id))
-	return ..()
+	return TRUE
 
-/datum/status_effect/frozenstasis/tick(seconds_between_ticks)
-	if(!cube || owner.loc != cube)
-		owner.remove_status_effect(src)
-
-/datum/status_effect/frozenstasis/proc/breakCube()
+/datum/status_effect/frozenstasis/proc/clear_effect(...)
 	SIGNAL_HANDLER
 
-	owner.remove_status_effect(src)
+	qdel(src)
+
+/datum/status_effect/frozenstasis/proc/has_escaped(...)
+	SIGNAL_HANDLER
+
+	if(owner.loc != cube)
+		qdel(src)
 
 /datum/status_effect/frozenstasis/on_remove()
-	if(cube)
-		qdel(cube)
 	REMOVE_TRAIT(owner, TRAIT_GODMODE, TRAIT_STATUS_EFFECT(id))
-	if(resistable)
-		UnregisterSignal(owner, COMSIG_LIVING_RESIST)
+	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
+	UnregisterSignal(owner, COMSIG_LIVING_RESIST)
+	UnregisterSignal(cube, COMSIG_QDELETING)
+	QDEL_NULL(cube)
 
 /datum/status_effect/frozenstasis/irresistable
 	resistable = FALSE
@@ -182,10 +187,10 @@
 
 /datum/status_effect/slime_clone_decay/tick(seconds_between_ticks)
 	var/need_mob_update
-	need_mob_update = owner.adjustToxLoss(1, updating_health = FALSE)
-	need_mob_update += owner.adjustOxyLoss(1, updating_health = FALSE)
-	need_mob_update += owner.adjustBruteLoss(1, updating_health = FALSE)
-	need_mob_update += owner.adjustFireLoss(1, updating_health = FALSE)
+	need_mob_update = owner.adjust_tox_loss(1, updating_health = FALSE)
+	need_mob_update += owner.adjust_oxy_loss(1, updating_health = FALSE)
+	need_mob_update += owner.adjust_brute_loss(1, updating_health = FALSE)
+	need_mob_update += owner.adjust_fire_loss(1, updating_health = FALSE)
 	if(need_mob_update)
 		owner.updatehealth()
 	owner.color = "#007BA7"
@@ -207,7 +212,7 @@
 
 /datum/status_effect/bloodchill/tick(seconds_between_ticks)
 	if(prob(50))
-		owner.adjustFireLoss(2)
+		owner.adjust_fire_loss(2)
 
 /datum/status_effect/bloodchill/on_remove()
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/status_effect/bloodchill)
@@ -223,7 +228,7 @@
 
 /datum/status_effect/bonechill/tick(seconds_between_ticks)
 	if(prob(50))
-		owner.adjustFireLoss(1)
+		owner.adjust_fire_loss(1)
 		owner.set_jitter_if_lower(6 SECONDS)
 		owner.adjust_bodytemperature(-10)
 		if(ishuman(owner))
@@ -245,7 +250,7 @@
 	alert_type = null
 
 /datum/status_effect/rebreathing/tick(seconds_between_ticks)
-	owner.adjustOxyLoss(-6, 0) //Just a bit more than normal breathing.
+	owner.adjust_oxy_loss(-6, 0) //Just a bit more than normal breathing.
 
 ///////////////////////////////////////////////////////
 //////////////////CONSUMING EXTRACTS///////////////////
@@ -485,7 +490,7 @@
 
 /datum/status_effect/stabilized/grey/tick(seconds_between_ticks)
 	for(var/mob/living/basic/slime/slimes_in_range in range(1, get_turf(owner)))
-		if(!(REF(owner) in slimes_in_range.faction))
+		if(!slimes_in_range.has_ally(owner))
 			to_chat(owner, span_notice("[linked_extract] pulses gently as it communicates with [slimes_in_range]."))
 			slimes_in_range.befriend(owner)
 	return ..()
@@ -521,17 +526,17 @@
 	healed_last_tick = FALSE
 	var/need_mob_update = FALSE
 
-	if(owner.getBruteLoss() > 0)
-		need_mob_update += owner.adjustBruteLoss(-0.2, updating_health = FALSE)
+	if(owner.get_brute_loss() > 0)
+		need_mob_update += owner.adjust_brute_loss(-0.2, updating_health = FALSE)
 		healed_last_tick = TRUE
 
-	if(owner.getFireLoss() > 0)
-		need_mob_update += owner.adjustFireLoss(-0.2, updating_health = FALSE)
+	if(owner.get_fire_loss() > 0)
+		need_mob_update += owner.adjust_fire_loss(-0.2, updating_health = FALSE)
 		healed_last_tick = TRUE
 
-	if(owner.getToxLoss() > 0)
+	if(owner.get_tox_loss() > 0)
 		// Forced, so slimepeople are healed as well.
-		need_mob_update += owner.adjustToxLoss(-0.2, updating_health = FALSE, forced = TRUE)
+		need_mob_update += owner.adjust_tox_loss(-0.2, updating_health = FALSE, forced = TRUE)
 		healed_last_tick = TRUE
 
 	if(need_mob_update)
@@ -874,26 +879,20 @@
 
 /datum/status_effect/stabilized/pink/on_apply()
 	faction_name = FACTION_PINK_EXTRACT(owner)
-	owner.faction |= faction_name
+	owner.add_ally(faction_name)
 	to_chat(owner, span_notice("[linked_extract] pulses, generating a fragile aura of peace."))
 	return ..()
 
 /datum/status_effect/stabilized/pink/tick(seconds_between_ticks)
 	update_nearby_mobs()
-	var/has_faction = FALSE
-	for (var/check_faction in owner.faction)
-		if(check_faction != faction_name)
-			continue
-		has_faction = TRUE
-		break
-
-	if(has_faction)
+	var/has_ally = owner.has_ally(faction_name)
+	if(has_ally)
 		if(owner.has_status_effect(/datum/status_effect/brokenpeace))
-			owner.faction -= faction_name
+			owner.remove_ally(faction_name)
 			to_chat(owner, span_userdanger("The peace has been broken! Hostile creatures will now react to you!"))
 	else if(!owner.has_status_effect(/datum/status_effect/brokenpeace))
 		to_chat(owner, span_notice("[linked_extract] pulses, generating a fragile aura of peace."))
-		owner.faction |= faction_name
+		owner.add_ally(faction_name)
 	return ..()
 
 /// Pacifies mobs you can see and unpacifies mobs you no longer can
@@ -912,7 +911,7 @@
 			return // No point continuing from here if we're going to end the effect
 		if(beast in visible_things)
 			continue
-		beast.faction -= faction_name
+		beast.remove_ally(faction_name)
 		beast.remove_status_effect(/datum/status_effect/pinkdamagetracker)
 		mobs -= weak_mob
 
@@ -925,16 +924,16 @@
 			continue
 		mobs += weak_mob
 		beast.apply_status_effect(/datum/status_effect/pinkdamagetracker)
-		beast.faction |= faction_name
+		beast.add_faction(faction_name)
 
 /datum/status_effect/stabilized/pink/on_remove()
 	for(var/datum/weakref/weak_mob as anything in mobs)
 		var/mob/living/beast = weak_mob.resolve()
 		if(isnull(beast))
 			continue
-		beast.faction -= faction_name
+		beast.remove_faction(faction_name)
 		beast.remove_status_effect(/datum/status_effect/pinkdamagetracker)
-	owner.faction -= faction_name
+	owner.remove_faction(faction_name)
 
 /datum/status_effect/stabilized/oil
 	id = "stabilizedoil"
@@ -1003,11 +1002,11 @@
 		return
 
 	var/list/healing_types = list()
-	if(owner.getBruteLoss() > 0)
+	if(owner.get_brute_loss() > 0)
 		healing_types += BRUTE
-	if(owner.getFireLoss() > 0)
+	if(owner.get_fire_loss() > 0)
 		healing_types += BURN
-	if(owner.getToxLoss() > 0)
+	if(owner.get_tox_loss() > 0)
 		healing_types += TOX
 
 	if(length(healing_types))

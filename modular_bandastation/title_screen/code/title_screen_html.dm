@@ -30,6 +30,7 @@
 				<input type="checkbox" id="hide_menu">
 				<img id="screen_blur" class="bg bg-blur" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
 				<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
+				<iframe id="screen_video" class="bg hidden" style="border: none;" allow="autoplay; encrypted-media" allowfullscreen alt="[screen_image_url]"></iframe>
 				<div class="lobby_wrapper">
 					<div class="lobby_container">
 						<div class="lobby-name">
@@ -44,6 +45,7 @@
 							[!discord_linked || player.client.interviewee ? "" : {"
 								<div id="lobby_traits" class="[!length(GLOB.lobby_station_traits) ? "hidden" : ""]">
 									[discord_linked ? create_trait_buttons(player) : ""]
+									[discord_linked ? create_public_traits(player) : ""]
 								</div>
 							"}]
 							<div id="lobby_admin" class="[check_rights_for(viewer, R_ADMIN|R_DEBUG) ? "" : "hidden"]">
@@ -51,7 +53,7 @@
 								[create_button(player, "start_now", "Запустить раунд", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
 								[create_button(player, "delay", "Отложить начало раунда", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
 								[create_button(player, "notice", "Оставить уведомление")]
-								[create_button(player, "picture", "Сменить изображение")]
+								[create_button(player, "picture", "Сменить фон")]
 							</div>
 						</div>
 					</div>
@@ -168,3 +170,19 @@
 			</div>
 		</div>
 	"}
+
+/datum/title_screen/proc/create_public_traits(mob/dead/new_player/player)
+	var/list/html = list()
+	var/first = TRUE
+
+	for(var/datum/station_trait/trait as anything in SSstation.station_traits)
+		if(!trait.public_in_lobby)
+			continue
+
+		if(first)
+			html += "<hr>"
+			first = FALSE
+
+		html += create_button(player, "", "[trait.name]", "[trait.report_message]")
+
+	return html.Join()

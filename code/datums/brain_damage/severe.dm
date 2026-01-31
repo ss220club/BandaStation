@@ -10,6 +10,7 @@
 	name = "Немота"
 	desc = "Пациент полностью лишен возможности говорить."
 	scan_desc = "обширное повреждение речевого центра мозга"
+	symptoms = "Completley incapable of producing sound or speech verbally."
 	gain_text = span_warning("Вы разучились говорить!")
 	lose_text = span_notice("Вы вдруг вспоминаете, как говорить.")
 
@@ -25,6 +26,7 @@
 	name = "Афазия"
 	desc = "Пациент не способен говорить или понимать какой-либо язык."
 	scan_desc = "обширное повреждение языкового центра мозга"
+	symptoms = "Completely incapable of understanding or producing language besides incomprehensible utterances."
 	gain_text = span_warning("У вас проблемы с формированием слов в голове...")
 	lose_text = span_notice("Вы вдруг вспоминаете, как работают языки.")
 
@@ -44,6 +46,7 @@
 	name = "Корковая слепота"
 	desc = "Мозг пациента больше не связан с его глазами."
 	scan_desc = "обширное повреждение затылочной доли мозга"
+	symptoms = "Exhibits a complete loss of vision despite having fully functional eyes."
 	gain_text = span_warning("Вы не можете видеть!")
 	lose_text = span_notice("Ваше зрение возвращается.")
 
@@ -59,6 +62,7 @@
 	name = "Паралич"
 	desc = "Мозг пациента больше не может контролировать часть своих двигательных функций."
 	scan_desc = "церебральный паралич"
+	symptoms = "Experience a complete loss of voluntary movement in specific body parts."
 	gain_text = ""
 	lose_text = ""
 	var/paralysis_type
@@ -117,11 +121,13 @@
 
 /datum/brain_trauma/severe/paralysis/paraplegic
 	random_gain = FALSE
+	known_trauma = FALSE
 	paralysis_type = "legs"
 	resilience = TRAUMA_RESILIENCE_ABSOLUTE
 
 /datum/brain_trauma/severe/paralysis/hemiplegic
 	random_gain = FALSE
+	known_trauma = FALSE
 	resilience = TRAUMA_RESILIENCE_ABSOLUTE
 
 /datum/brain_trauma/severe/paralysis/hemiplegic/left
@@ -134,6 +140,7 @@
 	name = "Нарколепсия"
 	desc = "Пациент может непроизвольно засыпать во время обычной деятельности."
 	scan_desc = "травматическая нарколепсия"
+	symptoms = "Experiences sudden and uncontrollable episodes of drowsiness or sleepiness during regular activities."
 	gain_text = span_warning("У вас постоянное чувство сонливости...")
 	lose_text = span_notice("Вы снова чувствуете себя бодрым и осознающим происходящее.")
 	/// Odds seconds_per_tick the user falls asleep
@@ -149,7 +156,7 @@
 	var/sleep_time_minimum = 6 SECONDS
 	var/sleep_time_maximum = 6 SECONDS
 
-/datum/brain_trauma/severe/narcolepsy/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/severe/narcolepsy/on_life(seconds_per_tick)
 	if(owner.IsSleeping())
 		return
 
@@ -197,14 +204,16 @@
 	sleep_chance_drowsy = 1
 	sleep_time_minimum = 20 SECONDS
 	sleep_time_maximum = 30 SECONDS
+	known_trauma = FALSE
 
 /datum/brain_trauma/severe/monophobia
 	name = "Монофобия"
 	desc = "Пациент чувствует себя больным и обеспокоенным, находясь вдали от других людей, что приводит к потенциально смертельному уровню стресса."
 	scan_desc = "монофобия"
+	symptoms = "Experiences intense fear and anxiety when alone, often leading to panic attacks, \
+		nausea, rapid heartbeat, and in severe cases, fainting, vomiting, or heart failure."
 	gain_text = span_warning("Вы чувствуете себя по-настоящему одиноким...")
 	lose_text = span_notice("Вам кажется, что вы могли бы чувствовать себя в безопасности в одиночестве.")
-	var/stress = 0
 
 /datum/brain_trauma/severe/monophobia/on_gain()
 	. = ..()
@@ -218,6 +227,7 @@
 	name = "Нарушение координации"
 	desc = "Пациент не в состоянии пользоваться сложными инструментами или механизмами."
 	scan_desc = "крайняя дискоординация"
+	symptoms = "Completely incapable of performing tasks that require fine motor skills or coordination, such as using tools or operating machinery."
 	gain_text = span_warning("Вы едва можете контролировать свои руки!")
 	lose_text = span_notice("Вы снова чувствуете контроль над своими руками.")
 
@@ -233,6 +243,8 @@
 	name = "Травматическое ненасилие"
 	desc = "Пациент крайне не желает причинять вред другим насильственными способами."
 	scan_desc = "синдром пацифизма"
+	symptoms = "Completely incapable of willing themselves to commit acts of violence or harm towards others, \
+		often going to great lengths to avoid confrontations or situations that may lead to violence."
 	gain_text = span_notice("Вы чувствуете себя странно умиротворенным.")
 	lose_text = span_notice("Вы больше не чувствуете себя обязанным не причинять вреда.")
 
@@ -248,6 +260,8 @@
 	name = "Гипнотический ступор"
 	desc = "Пациент склонен к эпизодам крайнего ступора, что делает его чрезвычайно внушаемым."
 	scan_desc = "онирический контур обратной связи"
+	symptoms = "Experiences sudden episodes of deep stupor or trance-like states, during which the patient becomes highly suggestible to external influences, \
+		often leading to altered perceptions or behaviors, memories imposed by others, or in severe cases, danger to self or others."
 	gain_text = span_warning("Вы чувствуете себя несколько ошеломленным.")
 	lose_text = span_notice("Вы чувствуете, как туман рассеивается в вашем сознании.")
 
@@ -255,7 +269,7 @@
 	..()
 	owner.remove_status_effect(/datum/status_effect/trance)
 
-/datum/brain_trauma/severe/hypnotic_stupor/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/severe/hypnotic_stupor/on_life(seconds_per_tick)
 	..()
 	if(SPT_PROB(0.5, seconds_per_tick) && !owner.has_status_effect(/datum/status_effect/trance))
 		owner.apply_status_effect(/datum/status_effect/trance, rand(100,300), FALSE)
@@ -267,6 +281,7 @@
 	gain_text = span_warning("Вы чувствуете себя странно, как будто только что забыли что-то важное.")
 	lose_text = span_notice("Вы чувствуете, как тяжесть свалилась с ваших плеч.")
 	random_gain = FALSE
+	known_trauma = FALSE
 	var/trigger_phrase = "Nanotrasen"
 
 /datum/brain_trauma/severe/hypnotic_trigger/New(phrase)
@@ -296,6 +311,8 @@
 	name = "Дислексия"
 	desc = "Пациент не в состоянии ни читать, ни писать."
 	scan_desc = "дислексия"
+	symptoms = "Experiences significant difficulties in reading and writing, often confusing letters and words, \
+		leading to challenges in literacy-related tasks such as reading scanners or completing paperwork."
 	gain_text = span_warning("У вас проблемы с чтением или письмом...")
 	lose_text = span_notice("Вы вдруг вспоминаете, как читать и писать.")
 
@@ -311,6 +328,8 @@
 	name = "Клептомания"
 	desc = "Пациент склонен к воровству вещей."
 	scan_desc = "клептомания"
+	symptoms = "Experiences an uncontrollable urge to steal nearby items, often without need or reason, \
+		leading to compulsive theft behaviors that can interfere with daily life and social interactions."
 	gain_text = span_warning("Вы чувствуете внезапное желание взять это. Конечно, никто не заметит.")
 	lose_text = span_notice("Вы больше не чувствуете желания брать чужие вещи.")
 	/// Cooldown between allowing steal attempts
@@ -330,7 +349,7 @@
 	if(damage_amount >= 5 && (damage_type == BRUTE || damage_type == BURN || damage_type == STAMINA))
 		COOLDOWN_START(src, steal_cd, 12 SECONDS)
 
-/datum/brain_trauma/severe/kleptomaniac/on_life(seconds_per_tick, times_fired)
+/datum/brain_trauma/severe/kleptomaniac/on_life(seconds_per_tick)
 	if(owner.usable_hands <= 0)
 		return
 	if(!SPT_PROB(5, seconds_per_tick))

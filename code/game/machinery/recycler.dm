@@ -16,16 +16,16 @@
 	var/crush_damage = 1000
 	var/eat_victim_items = TRUE
 	var/item_recycle_sound = 'sound/items/tools/welder.ogg'
-	var/datum/component/material_container/materials
+	var/datum/material_container/materials
 
 /obj/machinery/recycler/Initialize(mapload)
-	materials = AddComponent(
-		/datum/component/material_container, \
+	materials = new (
+		src, \
 		SSmaterials.materials_by_category[MAT_CATEGORY_SILO], \
 		INFINITY, \
 		MATCONTAINER_NO_INSERT \
 	)
-	AddComponent(/datum/component/simple_rotation)
+	AddElement(/datum/element/simple_rotation)
 	AddComponent(
 		/datum/component/butchering/recycler, \
 		speed = 0.1 SECONDS, \
@@ -45,7 +45,7 @@
 	AddElement(/datum/element/connect_loc, loc_connections)
 
 /obj/machinery/recycler/Destroy()
-	materials = null
+	QDEL_NULL(materials)
 	return ..()
 
 /obj/machinery/recycler/RefreshParts()
@@ -290,7 +290,7 @@
 
 	// Instantly lie down, also go unconscious from the pain, before you die.
 	living_mob.Unconscious(100)
-	living_mob.adjustBruteLoss(crush_damage)
+	living_mob.adjust_brute_loss(crush_damage)
 	update_appearance()
 
 /obj/machinery/recycler/on_deconstruction(disassembled)

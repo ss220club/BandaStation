@@ -100,7 +100,7 @@ Burning extracts:
 			if(istype(C))
 				C.electrocute_act(25,src)
 			else
-				M.adjustFireLoss(25)
+				M.adjust_fire_loss(25)
 			to_chat(M, span_danger("You feel a sharp electrical pulse!"))
 	..()
 
@@ -243,7 +243,7 @@ Burning extracts:
 	user.visible_message(span_danger("[src] shudders violently, and summons an army for [user]!"))
 	for(var/i in 1 to 3) //Less than gold normally does, since it's safer and faster.
 		var/mob/living/spawned_mob = create_random_mob(get_turf(user), HOSTILE_SPAWN)
-		spawned_mob.faction |= "[REF(user)]"
+		spawned_mob.add_ally(user)
 		if(prob(50))
 			for(var/j in 1 to rand(1, 3))
 				step(spawned_mob, pick(NORTH,SOUTH,EAST,WEST))

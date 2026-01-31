@@ -78,7 +78,7 @@
 	else
 		attack_cost = HAS_TRAIT(parent, TRAIT_WIELDED) ? stamina_cost_wielded_on_atom : stamina_cost_on_atom
 
-	if(!ignore_exhaustion && ((user.maxHealth - (user.getStaminaLoss() + attack_cost)) <= user.crit_threshold))
+	if(!ignore_exhaustion && ((user.maxHealth - (user.get_stamina_loss() + attack_cost)) <= user.crit_threshold))
 		user.balloon_alert(user, "нет сил!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -90,4 +90,4 @@
 /datum/component/stamina_cost_per_hit/proc/on_afterattack(obj/item/attaking_item, atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	SIGNAL_HANDLER // COMSIG_ITEM_AFTERATTACK
 
-	user.adjustStaminaLoss(attack_cost)
+	user.adjust_stamina_loss(attack_cost)

@@ -1685,7 +1685,7 @@
 	return FALSE
 
 /obj/machinery/door/airlock/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
-	switch(rcd_data["[RCD_DESIGN_MODE]"])
+	switch(rcd_data[RCD_DESIGN_MODE])
 		if(RCD_DECONSTRUCT)
 			qdel(src)
 			return TRUE
@@ -1708,6 +1708,9 @@
 
 	else if(istype(note, /obj/item/photo))
 		return "photo_[frame_state]"
+
+/obj/machinery/door/airlock/IsContainedAtomAccessible(atom/contained, atom/movable/user)
+	return ..() || (contained == note)
 
 /obj/machinery/door/airlock/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -2441,6 +2444,7 @@
 	aiControlDisabled = AI_WIRE_DISABLED
 	req_access = list(ACCESS_BLOODCULT)
 	damage_deflection = 10
+	custom_materials = list(/datum/material/runedmetal = SHEET_MATERIAL_AMOUNT)
 	var/openingoverlaytype = /obj/effect/temp_visual/cult/door
 	var/friendly = FALSE
 	var/stealthy = FALSE

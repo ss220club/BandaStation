@@ -34,7 +34,7 @@
 	if (soft_filter_result)
 		if(tgui_alert(usr,"Your message contains \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". \"[soft_filter_result[CHAT_FILTER_INDEX_REASON]]\", Are you sure you want to say it?", "Soft Blocked Word", list("Yes", "No")) != "Yes")
 			return
-		message_admins("[ADMIN_LOOKUPFLW(usr)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\" they may be using a disallowed term. Message: \"[message]\"")
+		message_admins("[ADMIN_LOOKUPFLW(usr)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\" they may be using a disallowed term. Message: \"[html_encode(message)]\"")
 		log_admin_private("[key_name(usr)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\" they may be using a disallowed term. Message: \"[message]\"")
 
 	if(!message)
@@ -56,7 +56,13 @@
 	if(message[1] == "*" && check_emote(message, forced))
 		return
 
-	. = say_dead(message)
+	// BANDASTATION EDIT START: Possessed objects can speak
+	var/obj/possessed_atom = usr.GetComponent(/datum/component/object_possession)?.possessed
+	if(!possessed_atom)
+		. = say_dead(message)
+	else
+		. = possessed_atom.say(message)
+	// BANDASTATION EDIT END: Possessed objects can speak
 
 /mob/dead/observer/Hear(atom/movable/speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, list/spans, list/message_mods = list(), message_range)
 	. = ..()

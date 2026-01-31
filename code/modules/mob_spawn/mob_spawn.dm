@@ -76,7 +76,7 @@
 /obj/effect/mob_spawn/proc/special(mob/living/spawned_mob, mob/mob_possessor, apply_prefs)
 	SHOULD_CALL_PARENT(TRUE)
 	if(faction)
-		spawned_mob.faction = faction
+		spawned_mob.set_faction(faction)
 	if(ishuman(spawned_mob))
 		var/mob/living/carbon/human/spawned_human = spawned_mob
 		if(mob_species)
@@ -339,9 +339,9 @@
 /obj/effect/mob_spawn/corpse/special(mob/living/spawned_mob, mob/mob_possessor, apply_prefs)
 	. = ..()
 	spawned_mob.death(TRUE)
-	spawned_mob.adjustOxyLoss(oxy_damage)
-	spawned_mob.adjustBruteLoss(brute_damage)
-	spawned_mob.adjustFireLoss(burn_damage)
+	spawned_mob.adjust_oxy_loss(oxy_damage)
+	spawned_mob.adjust_brute_loss(brute_damage)
+	spawned_mob.adjust_fire_loss(burn_damage)
 	if (corpse_description)
 		spawned_mob.AddComponent(/datum/component/temporary_description, corpse_description, naive_corpse_description)
 

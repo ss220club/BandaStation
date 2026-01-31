@@ -22,7 +22,7 @@
 	c_tag = "Security - Armory External"
 	},
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "CQ" = (
 /obj/structure/lattice,
 /obj/structure/grille,
@@ -31,7 +31,7 @@
 "FW" = (
 /obj/structure/reagent_dispensers/wall/peppertank/directional/east,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "Oi" = (
 /obj/structure/lattice,
 /turf/open/space/basic,
@@ -39,7 +39,7 @@
 "PN" = (
 /obj/structure/secure_safe/directional/east,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "QL" = (
 /turf/open/space/basic,
 /area/space)

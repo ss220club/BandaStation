@@ -37,6 +37,9 @@
 
 	var/eye_color_left = null // set to a hex code to override a mob's left eye color
 	var/eye_color_right = null // set to a hex code to override a mob's right eye color
+	/// The icon file of that eyes as its applied to the mob
+	var/eye_icon = 'icons/mob/human/human_eyes.dmi'
+	/// The icon state of that eyes as its applied to the mob
 	var/eye_icon_state = "eyes"
 	/// Do these eyes have blinking animations
 	var/blink_animation = TRUE
@@ -293,8 +296,8 @@
 		return list()
 
 	// BANDASTATION EDIT START - Feat: Augmentation
-	var/mutable_appearance/eye_left = mutable_appearance(icon_eyes_path, "[eye_icon_state]_l", -EYES_LAYER, parent)
-	var/mutable_appearance/eye_right = mutable_appearance(icon_eyes_path, "[eye_icon_state]_r", -EYES_LAYER, parent)
+	var/mutable_appearance/eye_left = mutable_appearance(eye_icon, "[eye_icon_state]_l", -EYES_LAYER, parent)
+	var/mutable_appearance/eye_right = mutable_appearance(eye_icon, "[eye_icon_state]_r", -EYES_LAYER, parent)
 	// BANDASTATION EDIT END - Feat: Augmentation
 
 	var/list/overlays = list(eye_left, eye_right)
@@ -315,12 +318,12 @@
 			overlays += eyelids
 
 	if (scarring & RIGHT_EYE_SCAR)
-		var/mutable_appearance/right_scar = mutable_appearance(icon_eyes_path, "eye_scar_right", -EYES_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
+		var/mutable_appearance/right_scar = mutable_appearance(eye_icon, "eye_scar_right", -EYES_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
 		right_scar.color = my_head.draw_color
 		overlays += right_scar
 
 	if (scarring & LEFT_EYE_SCAR)
-		var/mutable_appearance/left_scar = mutable_appearance(icon_eyes_path, "eye_scar_left", -EYES_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
+		var/mutable_appearance/left_scar = mutable_appearance(eye_icon, "eye_scar_left", -EYES_LAYER, parent) // BANDASTATION EDIT - Feat: Augmentation
 		left_scar.color = my_head.draw_color
 		overlays += left_scar
 
@@ -545,7 +548,7 @@
 
 /obj/effect/abstract/eyelid_effect
 	name = "eyelid"
-	icon = 'icons/mob/human/human_face.dmi'
+	icon = 'icons/mob/human/human_eyes.dmi'
 	layer = -EYES_LAYER
 	vis_flags = VIS_INHERIT_DIR | VIS_INHERIT_PLANE | VIS_INHERIT_ID
 
@@ -568,6 +571,7 @@
 #define NIGHTVISION_LIGHT_HIG 3
 
 /obj/item/organ/eyes/night_vision
+	abstract_type = /obj/item/organ/eyes/night_vision
 	actions_types = list(/datum/action/item_action/organ_action/use)
 
 	// These lists are used as the color cutoff for the eye
@@ -737,6 +741,7 @@
 	iris_overlay = null
 	flash_protect = FLASH_PROTECTION_WELDER
 	tint = INFINITY
+	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 2.5, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 1.9)
 	var/obj/item/flashlight/eyelight/eye
 	light_reactive = FALSE
 	pupils_name = "flashlights"
@@ -881,12 +886,12 @@
 			set_beam_range(new_range)
 			return TRUE
 		if("pick_color")
-			var/new_color = input(
+			var/new_color = tgui_color_picker(
 				usr,
 				"Choose eye color color:",
 				"High Luminosity Eyes Menu",
 				light_color_string
-			) as color|null
+			)
 			if(new_color)
 				var/to_update = params["to_update"]
 				set_beam_color(new_color, to_update)
@@ -1188,7 +1193,7 @@
 		apply_organ_damage(20 * examtool.light_power) //that's 0.5 lightpower for a penlight, so one penlight shining is equivalent to two seconds in a lit area
 	return span_danger("[owner.p_Their()] eyes [penlight_message].")
 
-/obj/item/organ/eyes/night_vision/maintenance_adapted/on_life(seconds_per_tick, times_fired)
+/obj/item/organ/eyes/night_vision/maintenance_adapted/on_life(seconds_per_tick)
 	if(owner.get_eye_protection() <= FLASH_PROTECTION_SENSITIVE && !owner.is_blind() && isturf(owner.loc) && owner.has_light_nearby(light_amount=0.5)) //we allow a little more than usual so we can produce light from the adapted eyes
 		to_chat(owner, span_danger("Your eyes! They burn in the light!"))
 		apply_organ_damage(10) //blind quickly

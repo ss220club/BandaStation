@@ -110,10 +110,13 @@
 
 	var/mob/living/carbon/human/human_user = user
 	var/obj/item/bodypart/their_poor_arm = human_user.get_active_hand()
+	if (!their_poor_arm)
+		return TRUE
+
 	if(prob(25))
 		to_chat(human_user, span_userdanger("Потустороннее присутствие разрывает и распыляет [their_poor_arm.ru_p_yours(ACCUSATIVE)] [their_poor_arm.declent_ru(ACCUSATIVE)], когда вы пытаетесь коснуться дыры в самой ткани реальности!"))
-		their_poor_arm.dismember()
-		their_poor_arm.forceMove(src) // stored for later fishage
+		if (their_poor_arm.dismember())
+			their_poor_arm.forceMove(src) // stored for later fishage
 	else
 		to_chat(human_user,span_danger("Вы отдёргиваете руку от отверстия, когда мистическая энергия бьется, пытаясь зацепиться за этот мир!"))
 	return TRUE
@@ -139,14 +142,13 @@
 	// A very elaborate way to suicide
 	visible_message(span_userdanger("Psychic tendrils lash out from [src], psychically grabbing onto [user]'s psychically sensitive mind and tearing [user.p_their()] head off!"))
 	var/obj/item/bodypart/head/head = locate() in human_user.bodyparts
-	if(head)
-		head.dismember()
+	if(head?.dismember())
 		head.forceMove(src) // stored for later fishage
 	else
 		human_user.gib(DROP_ALL_REMAINS)
 	human_user.investigate_log("has died from using telekinesis on a heretic influence.", INVESTIGATE_DEATHS)
 	var/datum/effect_system/reagents_explosion/explosion = new()
-	explosion.set_up(1, get_turf(human_user), TRUE, 0)
+	explosion.set_up(1, get_turf(human_user), 1)
 	explosion.start(src)
 
 /obj/effect/visible_heretic_influence/examine(mob/living/user)
@@ -156,7 +158,7 @@
 		return
 
 	. += span_userdanger("Ваш разум горит, когда вы смотрите на разрыв!")
-	user.adjustOrganLoss(ORGAN_SLOT_BRAIN, 10, 190)
+	user.adjust_organ_loss(ORGAN_SLOT_BRAIN, 10, 190)
 	user.add_mood_event("gates_of_mansus", /datum/mood_event/gates_of_mansus)
 
 /obj/effect/heretic_influence

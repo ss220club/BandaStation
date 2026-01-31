@@ -152,10 +152,10 @@
 			spell.reset_spell_cooldown()
 
 		var/need_mob_update = FALSE
-		need_mob_update += rewarded.adjustBruteLoss(-25, updating_health = FALSE)
-		need_mob_update += rewarded.adjustFireLoss(-25, updating_health = FALSE)
-		need_mob_update += rewarded.adjustToxLoss(-25, updating_health = FALSE)
-		need_mob_update += rewarded.adjustOxyLoss(-25, updating_health = FALSE)
+		need_mob_update += rewarded.adjust_brute_loss(-25, updating_health = FALSE)
+		need_mob_update += rewarded.adjust_fire_loss(-25, updating_health = FALSE)
+		need_mob_update += rewarded.adjust_tox_loss(-25, updating_health = FALSE)
+		need_mob_update += rewarded.adjust_oxy_loss(-25, updating_health = FALSE)
 		if(need_mob_update)
 			rewarded.updatehealth()
 
@@ -683,11 +683,11 @@
 
 		var/healed = 0
 		if(recovery) //very mild healing for those with the water adaptation trait (fish infusion)
-			healed += owner.adjustOxyLoss(recovery * (water_adaptation ? 1.5 : 1), updating_health = FALSE, required_biotype = MOB_ORGANIC)
-			healed += owner.adjustFireLoss(recovery, updating_health = FALSE, required_bodytype = BODYTYPE_ORGANIC)
-			healed += owner.adjustToxLoss(recovery, updating_health = FALSE, required_biotype = MOB_ORGANIC)
-			healed += owner.adjustBruteLoss(recovery, updating_health = FALSE, required_bodytype = BODYTYPE_ORGANIC)
-		healed += owner.adjustStaminaLoss(stam_recovery, updating_stamina = FALSE)
+			healed += owner.adjust_oxy_loss(recovery * (water_adaptation ? 1.5 : 1), updating_health = FALSE, required_biotype = MOB_ORGANIC)
+			healed += owner.adjust_fire_loss(recovery, updating_health = FALSE, required_bodytype = BODYTYPE_ORGANIC)
+			healed += owner.adjust_tox_loss(recovery, updating_health = FALSE, required_biotype = MOB_ORGANIC)
+			healed += owner.adjust_brute_loss(recovery, updating_health = FALSE, required_bodytype = BODYTYPE_ORGANIC)
+		healed += owner.adjust_stamina_loss(stam_recovery, updating_stamina = FALSE)
 		if(healed)
 			owner.updatehealth()
 	else if(istype(shower_reagent, /datum/reagent/blood))
@@ -773,22 +773,27 @@
 /datum/status_effect/spotlight_light/on_apply()
 	mob_light_obj = owner.mob_light(2, 1.5, spotlight_color)
 
+	var/turf/owner_turf = get_turf(owner)
+
 	beam_from_above_a = new /obj/effect/overlay/spotlight
 	beam_from_above_a.color = spotlight_color
 	beam_from_above_a.alpha = BEAM_ALPHA
-	owner.vis_contents += beam_from_above_a
 	beam_from_above_a.layer = BELOW_MOB_LAYER
+	SET_PLANE(beam_from_above_a, PLANE_TO_TRUE(beam_from_above_a.plane), owner_turf)
+	owner.vis_contents += beam_from_above_a
 
 	beam_from_above_b = new /obj/effect/overlay/spotlight
 	beam_from_above_b.color = spotlight_color
 	beam_from_above_b.alpha = BEAM_ALPHA
 	beam_from_above_b.layer = ABOVE_MOB_LAYER
 	beam_from_above_b.pixel_y = -2 //Slight vertical offset for an illusion of volume
+	SET_PLANE(beam_from_above_b, PLANE_TO_TRUE(beam_from_above_b.plane), owner_turf)
 	owner.vis_contents += beam_from_above_b
 
 	if(additional_overlay)
 		owner.add_overlay(additional_overlay)
 
+	RegisterSignal(owner, COMSIG_MOVABLE_Z_CHANGED, PROC_REF(on_z_change))
 	return TRUE
 
 /datum/status_effect/spotlight_light/on_remove()
@@ -800,6 +805,13 @@
 
 	if(additional_overlay)
 		owner.cut_overlay(additional_overlay)
+
+	UnregisterSignal(owner, COMSIG_MOVABLE_Z_CHANGED)
+
+/datum/status_effect/spotlight_light/proc/on_z_change(mob/living/source, turf/old_turf, turf/new_turf, same_z_layer)
+	SIGNAL_HANDLER
+	SET_PLANE(beam_from_above_a, PLANE_TO_TRUE(beam_from_above_a.plane), new_turf)
+	SET_PLANE(beam_from_above_b, PLANE_TO_TRUE(beam_from_above_b.plane), new_turf)
 
 /datum/status_effect/spotlight_light/divine
 	id = "divine_spotlight"
