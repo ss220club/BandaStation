@@ -79,7 +79,7 @@
 	if(can_flip)
 		AddElement( \
 			/datum/element/contextual_screentip_bare_hands, \
-			rmb_text = "Flip", \
+			rmb_text = "Перевернуть", \
 		)
 
 	ADD_TRAIT(src, TRAIT_COMBAT_MODE_SKIP_INTERACTION, INNATE_TRAIT)
@@ -115,7 +115,7 @@
 	make_climbable()
 	AddElement(/datum/element/give_turf_traits, turf_traits)
 	AddElement(/datum/element/footstep_override, priority = STEP_SOUND_TABLE_PRIORITY)
-	//resets vars from tableflipped
+	//resets vars from table being flipped
 	layer = TABLE_LAYER
 	smoothing_flags |= SMOOTH_BITMASK
 	pass_flags_self |= PASSTABLE
@@ -189,16 +189,16 @@
 	if(istype(held_item, /obj/item/toy/cards/deck))
 		var/obj/item/toy/cards/deck/dealer_deck = held_item
 		if(HAS_TRAIT(dealer_deck, TRAIT_WIELDED))
-			context[SCREENTIP_CONTEXT_LMB] = "Deal card"
-			context[SCREENTIP_CONTEXT_RMB] = "Deal card faceup"
+			context[SCREENTIP_CONTEXT_LMB] = "Раздать карты"
+			context[SCREENTIP_CONTEXT_RMB] = "Раздать карты лицом"
 			. = CONTEXTUAL_SCREENTIP_SET
 
 	if(deconstruction_ready)
 		if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-			context[SCREENTIP_CONTEXT_RMB] = "Disassemble"
+			context[SCREENTIP_CONTEXT_RMB] = "Развинитить"
 			. = CONTEXTUAL_SCREENTIP_SET
 		if(held_item.tool_behaviour == TOOL_WRENCH)
-			context[SCREENTIP_CONTEXT_RMB] = "Deconstruct"
+			context[SCREENTIP_CONTEXT_RMB] = "Раскрутить"
 			. = CONTEXTUAL_SCREENTIP_SET
 
 	return . || NONE
@@ -206,7 +206,7 @@
 /obj/structure/table/examine(mob/user)
 	. = ..()
 	if(is_flipped)
-		. += span_notice("Он перевернут на бок!")
+		. += span_notice("Он перевёрнут на бок!")
 	. += deconstruction_hints(user)
 
 /obj/structure/table/proc/deconstruction_hints(mob/user)
@@ -332,7 +332,7 @@
 /obj/structure/table/wrench_act_secondary(mob/living/user, obj/item/tool)
 	if(!deconstruction_ready)
 		return NONE
-	to_chat(user, span_notice("Вы начинаете деконструировать [src.declent_ru(ACCUSATIVE)]..."))
+	to_chat(user, span_notice("Вы начинаете разбирать [src.declent_ru(ACCUSATIVE)]..."))
 	if(tool.use_tool(src, user, 4 SECONDS, volume=50))
 		playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
 		frame = null
@@ -448,7 +448,7 @@
 ///Table on wheels
 /obj/structure/table/rolling
 	name = "Rolling table"
-	desc = "Стол на колесиках марки NT \"Ролли полли\". Его можно перемещать."
+	desc = "Стол на колесиках марки НТ \"Ролли полли\". Его можно перемещать."
 	anchored = FALSE
 	smoothing_flags = NONE
 	smoothing_groups = null
@@ -475,11 +475,11 @@
 		return
 
 	if(rable.loaded)
-		to_chat(user, span_warning("Вы уже пристыкован[genderize_ru(rable.loaded, "", "а", "о", "ы")] к [rable.loaded.declent_ru(DATIVE)]!"))
+		to_chat(user, span_warning("Вы уже пристыковали [rable.loaded.declent_ru(ACCUSATIVE)]!"))
 		return ITEM_INTERACT_FAILURE
 
 	if(locate(/mob/living) in loc.get_all_contents())
-		to_chat(user, span_warning("Нельзя собирать [src.declent_ru(ACCUSATIVE)] с грузом сверху!"))
+		to_chat(user, span_warning("Нельзя собрать [src.declent_ru(ACCUSATIVE)] с грузом сверху!"))
 		return ITEM_INTERACT_FAILURE
 
 	rable.loaded = src
@@ -572,7 +572,7 @@
 		table_shatter(M)
 
 /obj/structure/table/glass/proc/table_shatter(mob/living/victim)
-	visible_message(span_warning("[src.declent_ru(NOMINATIVE)] ломается!"),
+	visible_message(span_warning("[src.declent_ru(NOMINATIVE)] разбивается!"),
 		span_danger("Вы слышите звук разбивающегося стекла."))
 
 	playsound(loc, SFX_SHATTER, 50, TRUE)
@@ -663,7 +663,7 @@
 
 /obj/structure/table/wood/fancy
 	name = "fancy table"
-	desc = "Стандартный металлический стол, покрытый удивительно изысканной тканью с узором."
+	desc = "Стандартная металлическая рама стола, покрытая удивительно изысканной тканью с узором."
 	icon = 'icons/obj/smooth_structures/fancy_table.dmi'
 	icon_state = "fancy_table-0"
 	base_icon_state = "fancy_table"
@@ -986,26 +986,26 @@
 	. = ..()
 	if(isnull(held_item))
 		if (breath_mask?.loc == src)
-			context[SCREENTIP_CONTEXT_RMB] = "Take mask"
+			context[SCREENTIP_CONTEXT_RMB] = "Взять маску"
 			. |= CONTEXTUAL_SCREENTIP_SET
 		return
 
 	if(breath_mask && breath_mask != held_item)
 		if (held_item.tool_behaviour == TOOL_SCREWDRIVER)
-			context[SCREENTIP_CONTEXT_LMB] = "Detach mask"
+			context[SCREENTIP_CONTEXT_LMB] = "Открепить маску"
 			. |= CONTEXTUAL_SCREENTIP_SET
 	else if (istype(held_item, /obj/item/clothing/mask/breath))
-		context[SCREENTIP_CONTEXT_LMB] = "Attach mask"
+		context[SCREENTIP_CONTEXT_LMB] = "Прикрепить маску"
 		. |= CONTEXTUAL_SCREENTIP_SET
 
 	if(air_tank)
 		if (held_item.tool_behaviour == TOOL_WRENCH)
-			context[SCREENTIP_CONTEXT_LMB] = "Detach tank"
+			context[SCREENTIP_CONTEXT_LMB] = "Отрепить баллон"
 			. |= CONTEXTUAL_SCREENTIP_SET
 	else if (istype(held_item, /obj/item/tank))
 		var/obj/item/tank/as_tank = held_item
 		if (as_tank.tank_holder_icon_state)
-			context[SCREENTIP_CONTEXT_LMB] = "Attach tank"
+			context[SCREENTIP_CONTEXT_LMB] = "Прикрепить баллон"
 			. |= CONTEXTUAL_SCREENTIP_SET
 
 /obj/structure/table/optable/atom_deconstruct(disassembled)
@@ -1214,15 +1214,15 @@
 /obj/structure/table/optable/examine(mob/user)
 	. = ..()
 	if (air_tank)
-		. += span_notice("К нему прикреплен[genderize_ru(air_tank, "", "а", "о", "ы")] [air_tank.declent_ru(NOMINATIVE)] с помощью пары [EXAMINE_HINT("болтов")].")
+		. += span_notice("К нему прикреплён [air_tank.declent_ru(NOMINATIVE)] с помощью пары [EXAMINE_HINT("болтов")].")
 		if (patient)
-			. += span_info("Вы можете подключить [air_tank.declent_ru(DATIVE)] [patient.declent_ru(ACCUSATIVE)] перетащив [src.declent_ru(ACCUSATIVE)] на [patient.ru_p_them()].")
+		. += span_info("Вы можете подключить [air_tank.declent_ru(ACCUSATIVE)] к [patient.declent_ru(DATIVE)] перетащив [src.declent_ru(ACCUSATIVE)] на пациента.")
 	else
-		. += span_notice("Под ним имеется прорезь для крепления воздушного баллона.")
+		. += span_notice("Под ним имеется прорезь для крепления баллона.")
 	if (breath_mask)
 		. += span_notice("К нему прикреплена [breath_mask.declent_ru(NOMINATIVE)] сбоку, трубка закреплена одним [EXAMINE_HINT("винтом")].")
 		if (breath_mask.loc == src)
-			. += span_info("Вы можете снять маску, щелкнув правой кнопкой мыши по [src.declent_ru(DATIVE)] пустой рукой.")
+		. += span_info("Вы можете снять маску, щёлкнув правой кнопкой мыши по [src.declent_ru(DATIVE)] пустой рукой.")
 	else
 		. += span_notice("На боку есть отверстие для трубки дыхательной маски.")
 
@@ -1238,7 +1238,7 @@
 		balloon_alert(user, "руки заняты!")
 		return TRUE
 
-	to_chat(user, span_notice("Вы вытаскиваете [breath_mask.declent_ru(ACCUSATIVE)] из [src.declent_ru(ACCUSATIVE)]."))
+	to_chat(user, span_notice("Вы вытаскиваете [breath_mask.declent_ru(ACCUSATIVE)] из [src.declent_ru(GENITIVE)]."))
 	update_appearance()
 	return TRUE
 
@@ -1255,7 +1255,7 @@
 		balloon_alert(user, "нет маски для подключения!")
 		return
 
-	user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(ACCUSATIVE)] к [patient.ru_p_them()] [internals]."), span_notice("Вы начинаете подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(ACCUSATIVE)] к [patient.ru_p_them()] [internals]..."), ignored_mobs = patient)
+	user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(ACCUSATIVE)] к [patient.ru_p_them()] [internals]."), span_notice("Вы начинаете подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(ACCUSATIVE)] к [ru_p_them()] [internals]..."), ignored_mobs = patient)
 	to_chat(patient, span_userdanger("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(ACCUSATIVE)] к вашим [internals]!"))
 
 	if (!do_after(user, 4 SECONDS, patient))
@@ -1349,7 +1349,7 @@
 		return NONE
 
 	if(held_item.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_RMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_RMB] = "Разобрать"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	return NONE
@@ -1437,11 +1437,11 @@
 		return NONE
 
 	if(held_item == src)
-		context[SCREENTIP_CONTEXT_LMB] = "Construct Rack"
+		context[SCREENTIP_CONTEXT_LMB] = "Собрать подставку"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	return NONE
