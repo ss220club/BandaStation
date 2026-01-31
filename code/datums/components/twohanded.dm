@@ -262,7 +262,6 @@
 	// Let's reserve the other hand
 	offhand_item = new(user)
 	offhand_item.name = "[parent_item.declent_ru(NOMINATIVE)] - offhand"
-	offhand_item.ru_names_rename(ru_names_toml(initial(parent_item.name), suffix = " - вторая рука", override_base = offhand_item.name))
 	offhand_item.desc = "Ваша вторая рука держит [parent_item.declent_ru(ACCUSATIVE)]."
 	offhand_item.wielded = TRUE
 	RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
