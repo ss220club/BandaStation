@@ -51,7 +51,7 @@
 		to_chat(user, span_warning("[potential_deacon.declent_ru(NOMINATIVE)] больше не находится на алтаре!"))
 		return FALSE
 	if(potential_deacon.stat != CONSCIOUS)
-		to_chat(user, span_warning("[potential_deacon.declent_ru(NOMINATIVE)] должен находиться в сознании, чтобы сработал ритуал!"))
+		to_chat(user, span_warning("[potential_deacon.declent_ru(NOMINATIVE)] должен быть в сознании, чтобы сработал ритуал!"))
 		return FALSE
 	if(!potential_deacon.mind)
 		to_chat(user, span_warning("Разум [potential_deacon.declent_ru(GENITIVE)] находится в другом месте!"))
