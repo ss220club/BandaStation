@@ -43,36 +43,6 @@
 	save_slime_randomization()
 	return ..()
 
-ADMIN_VERB(check_slime_randomization, R_DEBUG, "Check Slime Recipes", "Выводит текущие рандомные рецепты слаймов в чат.", "Debug")
-	var/list/msg = list("<span class='adminnotice'>Текущая рандомизация слаймов:</span>")
-
-	var/found_any = FALSE
-
-	for(var/reagent_id in GLOB.chemical_reactions_list_reactant_index)
-		for(var/datum/chemical_reaction/slime/R in GLOB.chemical_reactions_list_reactant_index[reagent_id])
-			if(!R.randomized)
-				continue
-
-			found_any = TRUE
-
-			var/extract_name = "[R.required_container]"
-			extract_name = replacetext(extract_name, "/obj/item/slime_extract/", "")
-
-			var/list/reagent_names = list()
-			for(var/reag in R.required_reagents)
-				var/reag_path = "[reag]"
-				reag_path = replacetext(reag_path, "/datum/reagent/", "")
-				reagent_names += reag_path
-
-			var/recipe_line = "<b>[R.type]</b>: <span class='nicegreen'>[extract_name]</span> <- ([reagent_names.Join(", ")])"
-			msg += recipe_line
-
-	if(!found_any)
-		to_chat(user, "<span class='adminnotice'>Рандомизированных рецептов слаймов не найдено.</span>")
-		return
-
-	to_chat(user, msg.Join("<br>"))
-
 /datum/chemical_reaction/slime
 	var/randomized = FALSE
 	var/persistence_period = 4 // days
