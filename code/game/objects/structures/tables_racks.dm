@@ -1214,15 +1214,15 @@
 /obj/structure/table/optable/examine(mob/user)
 	. = ..()
 	if (air_tank)
-		. += span_notice("К нему прикреплён [air_tank.declent_ru(NOMINATIVE)] с помощью пары [EXAMINE_HINT("болтов")].")
+		 . += span_notice("К нему прикреплён [air_tank.declent_ru(NOMINATIVE)] с помощью пары [EXAMINE_HINT("болтов")].")
 		if (patient)
-		. += span_info("Вы можете подключить [air_tank.declent_ru(ACCUSATIVE)] к [patient.declent_ru(DATIVE)] перетащив [src.declent_ru(ACCUSATIVE)] на пациента.")
+		 . += span_info("Вы можете подключить [air_tank.declent_ru(ACCUSATIVE)] к [patient.declent_ru(DATIVE)] перетащив [src.declent_ru(ACCUSATIVE)] на пациента.")
 	else
 		. += span_notice("Под ним имеется прорезь для крепления баллона.")
 	if (breath_mask)
-		. += span_notice("К нему прикреплена [breath_mask.declent_ru(NOMINATIVE)] сбоку, трубка закреплена одним [EXAMINE_HINT("винтом")].")
+		 . += span_notice("К нему прикреплена [breath_mask.declent_ru(NOMINATIVE)] сбоку, трубка закреплена одним [EXAMINE_HINT("винтом")].")
 		if (breath_mask.loc == src)
-		. += span_info("Вы можете снять маску, щёлкнув правой кнопкой мыши по [src.declent_ru(DATIVE)] пустой рукой.")
+		 . += span_info("Вы можете снять маску, щёлкнув правой кнопкой мыши по [src.declent_ru(DATIVE)] пустой рукой.")
 	else
 		. += span_notice("На боку есть отверстие для трубки дыхательной маски.")
 
