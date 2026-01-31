@@ -94,7 +94,7 @@
 /datum/mood_event/conditional/see_death/naive/condition_fulfilled(mob/living/who, mob/dead_mob, dusted, gibbed)
 	return HAS_MIND_TRAIT(who, TRAIT_NAIVE) && !dusted && !gibbed
 
-/datum/mood_event/conditional/see_death/naive/update_effect(mob/dead_mob)
+/datum/mood_event/conditional/see_death/naive/update_effect(mob/dead_mob, dusted, gibbed)
 	description = "Хорошо поспать, [get_descriptor(dead_mob)]."
 
 /// Cultists are super brainwashed so they get buffs instead
