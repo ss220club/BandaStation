@@ -55,8 +55,7 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		user.do_attack_animation(climbed_thing)
 		structure_climber.Paralyze(40)
-		structure_climber.visible_message(span_warning("[structure_climber.declent_ru(NOMINATIVE)] сбивает [climbed_thing.declent_ru(ACCUSATIVE)]."), span_warning("Ты сбиваешь [climbed_thing.declent_ru(ACCUSATIVE)]!"), span_hear("Ты слышишь плач из [structure_climber.declent_ru(ACCUSATIVE)] после хлопка."))
-
+		structure_climber.visible_message(span_warning("[structure_climber.declent_ru(NOMINATIVE)] сбивает [climbed_thing.declent_ru(ACCUSATIVE)]."), span_warning("Ты сбиваешь [climbed_thing.declent_ru(ACCUSATIVE)]!"), span_hear("Ты слышишь плач из [structure_climber.declent_ru(GENITIVE)] после хлопка."))
 
 /datum/element/climbable/proc/climb_structure(atom/climbed_thing, mob/living/user, params)
 	if(!can_climb(climbed_thing, user))

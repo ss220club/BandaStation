@@ -195,10 +195,10 @@
 
 	if(deconstruction_ready)
 		if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-			context[SCREENTIP_CONTEXT_RMB] = "Развинитить"
+			context[SCREENTIP_CONTEXT_RMB] = "Разобрать"
 			. = CONTEXTUAL_SCREENTIP_SET
 		if(held_item.tool_behaviour == TOOL_WRENCH)
-			context[SCREENTIP_CONTEXT_RMB] = "Раскрутить"
+			context[SCREENTIP_CONTEXT_RMB] = "Разобрать"
 			. = CONTEXTUAL_SCREENTIP_SET
 
 	return . || NONE
@@ -961,7 +961,7 @@
 	else
 		being_buckled.visible_message(
 			span_notice("[buckler.declent_ru(NOMINATIVE)] кладёт [being_buckled.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]."),
-			span_notice("[buckler] кладёт вас на [src.declent_ru(ACCUSATIVE)]."),
+			span_notice("[buckler.declent_ru(NOMINATIVE)] кладёт вас на [src.declent_ru(ACCUSATIVE)]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 
@@ -1247,7 +1247,7 @@
 		return
 
 	if (!air_tank)
-		balloon_alert(user, "баллон не приклреплён!")
+		balloon_alert(user, "баллон не прикреплён!")
 		return
 
 	var/internals = patient.can_breathe_internals()
@@ -1255,8 +1255,8 @@
 		balloon_alert(user, "нет маски для подключения!")
 		return
 
-	user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(ACCUSATIVE)] к [patient.ru_p_them()] [internals]."), span_notice("Вы начинаете подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(ACCUSATIVE)] к [ru_p_them()] [internals]..."), ignored_mobs = patient)
-	to_chat(patient, span_userdanger("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(ACCUSATIVE)] к вашим [internals]!"))
+		user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)] к [patient.ru_p_them()] [internals]."), span_notice("Вы начинаете подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(GENITIVE)] к [ru_p_them()] [internals]..."), ignored_mobs = patient)
+		to_chat(patient, span_userdanger("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)] к вашим [internals]!"))
 
 	if (!do_after(user, 4 SECONDS, patient))
 		return
@@ -1290,7 +1290,7 @@
 
 	if(isliving(loc))
 		var/mob/living/user = loc
-		to_chat(user, span_warning("Трубка [breath_mask.declent_ru(ACCUSATIVE)] слишком растягивается, и она выскальзывает у вас из рук!"))
+		to_chat(user, span_warning("Трубка [breath_mask.declent_ru(GENITIVE)] слишком растягивается, и она выскальзывает у вас из рук!"))
 	else
 		visible_message(span_notice("[breath_mask.declent_ru(NOMINATIVE)] возвращается в [src.declent_ru(ACCUSATIVE)]."))
 	snap_mask_back()
