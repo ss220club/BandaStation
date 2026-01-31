@@ -34,7 +34,7 @@
 /datum/element/climbable/proc/get_examine_tags(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list["доступная для подъёма"] = "Похоже на то, на что можно взобраться."
+	examine_list["climbable"] = "Похоже на то, на что можно взобраться."
 
 /datum/element/climbable/proc/can_climb(atom/source, mob/user)
 	if (!source.IsReachableBy(user))
