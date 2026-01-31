@@ -321,6 +321,11 @@
 
 	if(bypassing)
 		set_fire_stage("heavy")
+		// BANDASTATION ADDITION START: NEW FIRE RISES
+		var/mutable_appearance/heavy_heat_overlay = mutable_appearance('modular_bandastation/aesthetics/fire/icons/fire.dmi', "heavy")
+		heavy_heat_overlay.blend_mode = BLEND_ADD
+		add_overlay(heavy_heat_overlay)
+		// BANDASTATION ADDITION END: NEW FIRE RISES
 		if(!cold_fire)
 			location.burn_tile()
 
@@ -337,8 +342,18 @@
 	else
 		if(volume > CELL_VOLUME*0.4)
 			set_fire_stage("medium")
+			// BANDASTATION ADDITION START: NEW FIRE RISES
+			var/mutable_appearance/medium_heat_overlay = mutable_appearance('modular_bandastation/aesthetics/fire/icons/fire.dmi', "medium")
+			medium_heat_overlay.blend_mode = BLEND_ADD
+			add_overlay(medium_heat_overlay)
+			// BANDASTATION ADDITION END: NEW FIRE RISES
 		else
 			set_fire_stage("light")
+			// BANDASTATION ADDITION START: NEW FIRE RISES
+			var/mutable_appearance/light_heat_overlay = mutable_appearance('modular_bandastation/aesthetics/fire/icons/fire.dmi', "light")
+			light_heat_overlay.blend_mode = BLEND_ADD
+			add_overlay(light_heat_overlay)
+			// BANDASTATION ADDITION END: NEW FIRE RISES
 
 	if((visual_update_tick++ % 7) == 0)
 		update_color()

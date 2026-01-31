@@ -20,7 +20,6 @@
 #include "disposal/code/disposal.dm"
 #include "dresser/code/dresser.dm"
 #include "extinguisher_cabinet/code/extinguisher_cabinet.dm"
-#include "fire/code/fire.dm"
 #include "firealarm/code/firealarm.dm"
 #include "floors/code/floors.dm"
 #include "keycard_auth/code/keycard_auth.dm"
