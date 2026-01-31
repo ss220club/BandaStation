@@ -29879,12 +29879,12 @@ prepositional = "скелетном минибаре"
 gender = "male"
 
 ["rack parts"]
-nominative = "детали стойки"
-genitive = "деталей стойки"
-dative = "деталям стойки"
-accusative = "детали стойки"
-instrumental = "деталями стойки"
-prepositional = "деталях стойки"
+nominative = "детали подставки"
+genitive = "деталей подставки"
+dative = "деталям подставки"
+accusative = "детали подставки"
+instrumental = "деталями подставки"
+prepositional = "деталях подставки"
 gender = "plural"
 
 ["air tank"]
@@ -29896,6 +29896,20 @@ instrumental = "баллоном воздуха"
 prepositional = "баллоне воздуха"
 gender = "male"
 
+["table frame"]
+nominative = "рама стола"
+genitive = "рамы стола"
+dative = "раме стола"
+accusative = "раму стола"
+instrumental = "рамой стола"
+prepositional = "раме стола"
+gender = "female"
 
-
-
+["wooden table frame"]
+nominative = "деревянная рама стола"
+genitive = "деревянной рамы стола"
+dative = "деревянной раме стола"
+accusative = "деревянную раму стола"
+instrumental = "деревянной рамой стола"
+prepositional = "деревянной раме стола"
+gender = "female"
