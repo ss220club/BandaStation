@@ -1,6 +1,6 @@
 // Деревянный заборчик и ворота by FF
 
-/obj/structure/wooden_fencing
+/obj/structure/railing/wooden_fencing
 	name = "wooden fence"
 	desc = "A basic wooden fence meant to prevent people like you either in or out of somewhere."
 	icon = 'modular_bandastation/icons/obj/structures/wooden_fence.dmi'

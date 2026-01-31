@@ -18,14 +18,24 @@
 			"Up": true,
 			"Linkage": null,
 			"Weather_Snowstorm": true,
-			"Gravity": true
+			"Gravity": true,
+			"No Parallax": true
+		},
+		{
+			"Up": true,
+			"Linkage": null,
+			"Baseturf": "/turf/open/misc/asteroid/snow/atmosphere",
+			"Weather_Snowstorm": true,
+			"Gravity": true,
+			"No Parallax": true
 		},
 		{
 			"Down": true,
 			"Linkage": null,
 			"Baseturf": "/turf/open/misc/asteroid/snow/atmosphere",
 			"Weather_Snowstorm": true,
-			"Gravity": true
+			"Gravity": true,
+			"No Parallax": true
 		}
 	]
 }
