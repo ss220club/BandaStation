@@ -707,6 +707,8 @@
 /obj/item/ammo_box/magazine/c762x39mm,
 /obj/item/ammo_box/magazine/c762x39mm,
 /obj/item/ammo_box/magazine/c762x39mm,
+/obj/item/storage/toolbox/ammobox/amk_bullets,
+/obj/item/storage/toolbox/ammobox/amk_bullets,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -1871,9 +1873,7 @@
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 5
 	},
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "bnc" = (
 /obj/structure/chair/sofa/right/brown,
@@ -2277,9 +2277,7 @@
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 1
 	},
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "bBw" = (
 /obj/effect/turf_decal/caution/stand_clear,
@@ -2984,9 +2982,7 @@
 	dir = 6
 	},
 /obj/effect/turf_decal/weather/snow,
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "bUu" = (
 /obj/structure/flora/rock/style_4{
@@ -3207,6 +3203,9 @@
 /obj/item/ammo_box/magazine/c762x39mm,
 /obj/item/ammo_box/magazine/c762x39mm,
 /obj/item/ammo_box/magazine/c762x39mm,
+/obj/item/storage/toolbox/ammobox/amk_bullets,
+/obj/item/storage/toolbox/ammobox/amk_bullets,
+/obj/item/storage/toolbox/ammobox/amk_bullets,
 /turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=276";
 	max_integrity = 10000;
@@ -7221,9 +7220,7 @@
 /area/altam/embassy/main)
 "ekw" = (
 /obj/effect/turf_decal/weather/snow,
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "ekB" = (
 /obj/effect/turf_decal/trimline/dark_blue/line,
@@ -8609,6 +8606,8 @@
 /obj/item/ammo_box/magazine/c762x39mm,
 /obj/item/ammo_box/magazine/c762x39mm,
 /obj/item/ammo_box/magazine/c762x39mm,
+/obj/item/storage/toolbox/ammobox/amk_bullets,
+/obj/item/storage/toolbox/ammobox/amk_bullets,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -9902,16 +9901,6 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
-"fMo" = (
-/obj/machinery/suit_storage_unit,
-/obj/item/mod/control/pre_equipped/tsf_elite,
-/obj/effect/turf_decal/trimline/dark_blue/line{
-	dir = 1
-	},
-/turf/open/floor/iron/dark{
-	explosive_resistance = 1
-	},
-/area/altam/embassy/main)
 "fMw" = (
 /obj/effect/turf_decal/weather/snow/corner,
 /turf/open/misc/ice/icemoon{
@@ -14873,8 +14862,6 @@
 	},
 /area/altam/main_zones/main)
 "iRV" = (
-/obj/machinery/suit_storage_unit,
-/obj/item/mod/control/pre_equipped/tsf_elite,
 /obj/effect/turf_decal/trimline/dark_blue/filled/warning{
 	dir = 8
 	},
@@ -15858,9 +15845,7 @@
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 4
 	},
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "jCM" = (
 /obj/effect/decal/cleanable/blood/oil,
@@ -19813,9 +19798,7 @@
 	dir = 10
 	},
 /obj/effect/turf_decal/weather/snow,
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "lRO" = (
 /obj/machinery/scanner_gate/preset_guns,
@@ -21530,9 +21513,7 @@
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 10
 	},
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "mOm" = (
 /obj/structure/rack,
@@ -21835,9 +21816,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/weather/snow,
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "mVK" = (
 /obj/effect/turf_decal/siding/wideplating_new/dark{
@@ -23868,9 +23847,7 @@
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 9
 	},
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "opL" = (
 /obj/structure/closet/crate/secure/weapon,
@@ -30348,9 +30325,7 @@
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 10
 	},
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "szq" = (
 /obj/structure/railing{
@@ -30770,9 +30745,7 @@
 	},
 /area/altam/main_zones/main)
 "sKW" = (
-/turf/open/floor/plating{
-	explosive_resistance = 1
-	},
+/turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "sLa" = (
 /obj/effect/light_emitter{
@@ -53458,10 +53431,10 @@ ctg
 eoJ
 rEa
 aDg
-boF
 aDg
 aDg
-kEK
+aDg
+aDg
 aDg
 bPX
 pvD
@@ -53715,10 +53688,10 @@ wQE
 aDg
 cnU
 aDg
-boF
 aDg
 aDg
-kEK
+aDg
+aDg
 aDg
 ylz
 dnj
@@ -76024,7 +75997,7 @@ wiB
 nCK
 pvD
 sSb
-nCK
+taz
 nCK
 nCK
 qYR
@@ -79324,7 +79297,7 @@ pvD
 pvD
 egY
 ixu
-oqv
+dMZ
 rrN
 vdi
 svi
@@ -79581,7 +79554,7 @@ pvD
 pvD
 egY
 ixu
-oqv
+dMZ
 heq
 teX
 fub
@@ -79838,7 +79811,7 @@ pvD
 pvD
 egY
 ixu
-oqv
+dMZ
 vof
 tQn
 hzZ
@@ -145009,7 +144982,7 @@ ecy
 esF
 dVK
 rka
-fMo
+vrl
 vNS
 liQ
 mDC
@@ -145266,7 +145239,7 @@ dJJ
 uHT
 bOf
 rka
-fMo
+vrl
 vNS
 vNS
 aXI
@@ -147322,7 +147295,7 @@ dJJ
 qXh
 wKA
 dUJ
-fMo
+vrl
 vNS
 gyX
 dUJ
@@ -147579,7 +147552,7 @@ bKD
 dmn
 xxE
 dUJ
-fMo
+vrl
 vNS
 vNS
 aXI
