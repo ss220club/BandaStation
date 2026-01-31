@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/shapeshift/shed_human_form
-	name = "Shed form"
-	desc = "Сбрось свою хрупкую форму, стань единым с оружием, стань единым с императором. \
+	name = "Сброс облика"
+	desc = "Сбросьте свою хрупкую форму, стань единым с оружием, стань единым с Императором. \
 		Вызывает тяжелые повреждения мозга и потерю рассудка у находящихся поблизости смертных."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"

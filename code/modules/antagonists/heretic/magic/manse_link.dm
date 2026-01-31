@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/pointed/manse_link
-	name = "Manse Link"
+	name = "Связь Мансуса"
 	desc = "Это заклинание позволяет вам пронзать реальность и соединять разумы друг с другом с помощью \
-		связи Мансуса. Все разумы, подключенные к вашей связи Мансуса, смогут незаметно общаться на больших расстояниях."
+		связи Мансуса. Все разумы, подключённые к вашей связи Мансуса, смогут незаметно общаться на больших расстояниях."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
