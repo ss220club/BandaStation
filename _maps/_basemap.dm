@@ -21,10 +21,11 @@
 		#include "map_files\MetaStation\MetaStation.dmm"
 		#include "map_files\Mining\Lavaland.dmm"
 		#include "map_files\tramstation\tramstation.dmm"
+		#include "map_files\borderland\borderland.dmm"
 		// #include "map_files\CatwalkStation\CatwalkStation_2023.dmm"
 		// #include "map_files\NebulaStation\NebulaStation.dmm"
 		// #include "map_files\wawastation\wawastation.dmm"
-		// #include "map_files\borderland\borderland.dmm"
+		#include "map_files\borderland\borderland.dmm"
 		// BANDASTATION - ADDITION STAT
 		#include "map_files\Cyberiad\Cyberiad.dmm"
 		#include "map_files\KiloStation\KiloStation.dmm"
