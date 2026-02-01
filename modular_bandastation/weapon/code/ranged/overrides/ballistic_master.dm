@@ -246,6 +246,9 @@
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound), src, pick(bounce_sfx_override), 20, 1), bounce_delay) //Soft / non-solid turfs that shouldn't make a sound when a shell casing is ejected over them.
 		return
 
+/obj/item/ammo_casing/shotgun
+	bounce_sfx_override = 'modular_bandastation/weapon/sound/ranged/bulletcasing_shotgun_bounce.ogg'
+
 // Ammo casing random drop rotation
 /obj/item/ammo_casing/update_icon_state()
 	. = ..()
