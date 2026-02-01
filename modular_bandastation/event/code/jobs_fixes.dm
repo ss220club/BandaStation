@@ -42,15 +42,15 @@
 
 // Granting special language
 /datum/outfit/job/tsf/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
-	..()
+	. = ..()
 	if(visuals_only)
 		return
-	translator.grant_language(/datum/language/terrum)
-	translator.remove_blocked_language(/datum/language/terrum)
-	translator.set_active_language(/datum/language/terrum)
+	translator.grant_language(/datum/language/uncommon)
+	translator.remove_blocked_language(/datum/language/uncommon)
+	translator.set_active_language(/datum/language/uncommon)
 
 /datum/outfit/job/vulpa_ashtar/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
-	..()
+	. = ..()
 	if(visuals_only)
 		return
 	translator.grant_language(/datum/language/canilunzt)

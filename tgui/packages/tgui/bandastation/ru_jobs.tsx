@@ -69,7 +69,7 @@ export const DEPARTMENTS_RU = {
   'NT Representation': 'Представительство НТ',
   Justice: 'Юридический',
   Security: 'Аштар',
-  Service: 'Обслуживание',
+  Service: 'ТСФ',
   Cargo: 'Снабжение',
   Science: 'Исследование',
   Medical: 'Медицина',

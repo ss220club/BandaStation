@@ -1,6 +1,5 @@
 #include "_event.dm"
 
-#include "code/department_renaming.dm"
 #include "code/jobs_fixes.dm"
 #include "code/vanilla_jobs_disabler.dm"
 
@@ -11,6 +10,7 @@
 #include "code/jobs/ashtar_machinegun.dm"
 #include "code/jobs/ashtar_medic.dm"
 #include "code/jobs/ashtar.dm"
+#include "code/jobs/civilian.dm"
 #include "code/jobs/tsf_marine_machinegun.dm"
 #include "code/jobs/tsf_marine.dm"
 #include "code/jobs/tsf_medic.dm"

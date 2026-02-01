@@ -3,7 +3,7 @@
 	supervisors = "офицером вашего отделения"
 	description = "Спасайте своих ребят на поле боя доставая пули из задницы. Главное не умрите первым!"
 	departments_list = list(
-		/datum/job_department/command,
+		/datum/job_department/service,
 	)
 	outfit = /datum/outfit/tsf/marine/medic
 	faction = FACTION_STATION
@@ -13,7 +13,7 @@
 
 	paycheck = PAYCHECK_ZERO
 	bounty_types = CIV_JOB_BASIC
-	department_for_prefs = /datum/job_department/command
+	department_for_prefs = /datum/job_department/service
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
 

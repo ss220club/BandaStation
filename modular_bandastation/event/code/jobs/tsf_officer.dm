@@ -3,7 +3,7 @@
 	supervisors = "полковником"
 	description = "Командуйте своим отделением резервистов. Приведите ТСФ к победе если начнется битва!"
 	departments_list = list(
-		/datum/job_department/command,
+		/datum/job_department/service,
 	)
 	outfit = /datum/outfit/tsf/marine/officer/carwo
 	faction = FACTION_STATION
@@ -13,15 +13,6 @@
 
 	paycheck = PAYCHECK_ZERO
 	bounty_types = CIV_JOB_BASIC
-	department_for_prefs = /datum/job_department/command
+	department_for_prefs = /datum/job_department/service
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
-
-/datum/outfit/tsf/marine/officer/carwo
-	id_trim = /datum/id_trim/job/tsf/marine/officer
-
-/datum/id_trim/job/tsf/marine/officer
-	assignment = "TSF - Marine Officer"
-	trim_state = "trim_tsf_rank2"
-	big_pointer = TRUE
-	job = /datum/job/tsf_army_officer
