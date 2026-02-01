@@ -369,7 +369,7 @@
 	for(var/obj/item/thing in used_tray.contents)
 		AfterPutItemOnTable(thing, user)
 	used_tray.atom_storage.remove_all(drop_location())
-	user.visible_message(span_notice("[user] опустошает [used_tray.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]."))
+	user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] опустошает [used_tray.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/table/proc/deck_act(mob/living/user, obj/item/toy/cards/deck/dealer_deck, list/modifiers, flip)
