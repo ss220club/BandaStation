@@ -54,13 +54,17 @@
 	if(istype(shell, /obj/machinery/jukebox/concertspeaker))
 		linked_jukebox = shell
 		linked_jukebox.master_component = src
+		linked_jukebox.remote_installed = TRUE
 		RegisterSignal(linked_jukebox, COMSIG_INSTRUMENT_START, PROC_REF(on_song_start))
 		RegisterSignal(linked_jukebox, COMSIG_INSTRUMENT_END,   PROC_REF(on_song_end))
+		linked_jukebox.update_icon()
 
 /obj/item/circuit_component/concert_master/unregister_shell(atom/movable/shell)
 	if(linked_jukebox)
 		UnregisterSignal(linked_jukebox, list(COMSIG_INSTRUMENT_START, COMSIG_INSTRUMENT_END))
 		linked_jukebox.master_component = null
+		linked_jukebox.remote_installed = FALSE
+		linked_jukebox.update_icon()
 	linked_jukebox = null
 	return ..()
 

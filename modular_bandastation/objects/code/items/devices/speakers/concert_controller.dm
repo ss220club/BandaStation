@@ -12,6 +12,7 @@
 	max_integrity = 250
 	integrity_failure = 25
 	var/shell_capacity = SHELL_CAPACITY_SMALL
+	var/remote_installed = FALSE
 	var/obj/item/circuit_component/concert_master/master_component
 	var/obj/item/concert_disk/inserted_disk
 
@@ -43,11 +44,13 @@
 		overlays += mutable_appearance(icon, "song_act1")
 		overlays += mutable_appearance(icon, "song_act2")
 		overlays += mutable_appearance(icon, "song_act3b")
+
+	if(length(music_player.songs))
 		overlays += mutable_appearance(icon, "playing")
 	else
 		overlays += mutable_appearance(icon, "standby")
 
-	if(master_component)
+	if(remote_installed)
 		overlays += mutable_appearance(icon, "synced")
 	else
 		overlays += mutable_appearance(icon, "asynced")
@@ -113,6 +116,7 @@
 	if(concert_system)
 		concert_system.load_album(D.album_id)
 		to_chat(user, span_notice("Вы загрузили альбом: [D.name]."))
+		update_overlays()
 
 /obj/machinery/jukebox/concertspeaker/proc/eject_disk(mob/user)
 	if(!inserted_disk)
@@ -126,8 +130,11 @@
 
 	if(user && user.put_in_active_hand(D))
 		to_chat(user, span_notice("Вы извлекли диск [D.name]."))
+
 	else
 		D.forceMove(drop_location())
+
+	update_overlays()
 
 	if(music_player)
 		music_player.songs = list()

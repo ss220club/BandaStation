@@ -13,7 +13,7 @@
 	var/active = FALSE
 	var/stat = 0
 	var/frequency = 1400
-	var/is_synced = TRUE
+	var/is_synced = FALSE
 	var/shell_capacity = SHELL_CAPACITY_SMALL
 
 /obj/structure/concertspeaker/examine()
@@ -26,7 +26,6 @@
 		icon_state = "[base_icon_state]_broken"
 	else
 		icon_state = base_icon_state
-	update_overlays()
 
 /obj/structure/concertspeaker/update_overlays()
 	. = ..()
@@ -37,10 +36,11 @@
 		overlays += mutable_appearance(icon, "song_act2")
 		overlays += mutable_appearance(icon, "song_act3a")
 
-	if(is_synced)
-		overlays += mutable_appearance(icon, "synced")
-	else
-		overlays += mutable_appearance(icon, "asynced")
+	if(anchored)
+		if(is_synced)
+			overlays += mutable_appearance(icon, "synced")
+		else
+			overlays += mutable_appearance(icon, "asynced")
 
 /obj/structure/concertspeaker/wrench_act(mob/living/user, obj/item/I)
 	if(resistance_flags & INDESTRUCTIBLE)
@@ -52,12 +52,14 @@
 		density = TRUE
 		layer = 5
 		update_icon()
+		update_overlays()
 	else if(anchored)
 		to_chat(user, span_notice("You unsecure and disconnect [src]."))
 		anchored = FALSE
 		density = FALSE
 		layer = initial(layer)
 		update_icon()
+		update_overlays()
 		src.force_stop_all_listeners()
 
 	icon_state = "[base_icon_state][anchored ? null : "_unanchored"]"
