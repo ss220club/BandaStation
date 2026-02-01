@@ -62,3 +62,10 @@
 #include "code/ranged/energy/awaymission_gun.dm"
 #include "code/ranged/energy/eg_14.dm"
 #include "code/ranged/energy/pulse.dm"
+
+// MARK: Structures
+
+#include "code/machinery/mortar/mortar.dm"
+#include "code/machinery/mortar/mortar_shell.dm"
+
+
