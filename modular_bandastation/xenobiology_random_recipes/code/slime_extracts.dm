@@ -48,6 +48,7 @@
 	var/persistence_period = 4 // days
 	var/created
 	var/persistent = TRUE
+	reaction_flags = REACTION_INSTANT | REACTION_COMPETITIVE
 
 	var/randomize_container = TRUE
 	var/list/possible_containers = list(
@@ -73,11 +74,66 @@
 		/obj/item/slime_extract/adamantine
 	)
 
+// ADMIN_VERB(check_slime_randomization, R_DEBUG, "Check Slime Recipes", "Выводит текущие рандомные рецепты слаймов в чат.", "Debug")
+// 	var/list/msg = list("<span class='adminnotice'>Текущая рандомизация слаймов:</span>")
+
+// 	var/found_any = FALSE
+
+// 	for(var/reagent_id in GLOB.chemical_reactions_list_reactant_index)
+// 		for(var/datum/chemical_reaction/slime/R in GLOB.chemical_reactions_list_reactant_index[reagent_id])
+// 			if(!R.randomized)
+// 				continue
+
+// 			found_any = TRUE
+
+// 			var/extract_name = "[R.required_container]"
+// 			extract_name = replacetext(extract_name, "/obj/item/slime_extract/", "")
+
+// 			var/list/reagent_names = list()
+// 			for(var/reag in R.required_reagents)
+// 				var/reag_path = "[reag]"
+// 				reag_path = replacetext(reag_path, "/datum/reagent/", "")
+// 				reagent_names += reag_path
+
+// 			var/recipe_line = "<b>[R.type]</b>: <span class='nicegreen'>[extract_name]</span> <- ([reagent_names.Join(", ")])"
+// 			msg += recipe_line
+
+// 	if(!found_any)
+// 		to_chat(user, "<span class='adminnotice'>Рандомизированных рецептов слаймов не найдено.</span>")
+// 		return
+
+// 	to_chat(user, msg.Join("<br>"))
+
 /datum/chemical_reaction/slime/proc/GenerateRecipe()
 	created = world.realtime
-	if(randomize_container)
-		required_container = pick(possible_containers)
-	return TRUE
+	var/native_reagent = (required_reagents?.len) ? required_reagents[1] : null
+	var/amount = (required_reagents?.len) ? required_reagents[native_reagent] : 0
+
+	var/success = FALSE
+	for(var/i in 1 to 50)
+		var/potential_container = pick(possible_containers)
+
+		if(CheckGlobalCollision(potential_container, native_reagent, amount)) // TM only, we should randomize reagents too, since with only 20 extracts vs 50 recipes we can only minimize the collisions by checking the amount
+			continue
+
+		required_container = potential_container
+		success = TRUE
+		break
+
+	return success
+
+/datum/chemical_reaction/slime/proc/CheckGlobalCollision(cont_path, reag_path, amount)
+	for(var/reagent_id in GLOB.chemical_reactions_list_reactant_index)
+		for(var/datum/chemical_reaction/slime/R in GLOB.chemical_reactions_list_reactant_index[reagent_id])
+			if(R == src)
+				continue
+
+			if(R.required_container == cont_path && R.required_reagents?.len && R.required_reagents[1] == reag_path)
+				// at least we're trying
+				var/other_amount = R.required_reagents[R.required_reagents[1]]
+				if(other_amount == amount)
+					return TRUE
+	return FALSE
 
 /datum/chemical_reaction/slime/proc/LoadOldRecipe(list/recipe_data)
 	created = text2num(recipe_data["timestamp"])
