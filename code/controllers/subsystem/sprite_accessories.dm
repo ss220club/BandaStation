@@ -121,6 +121,9 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 
 	// skrell
 	feature_list[FEATURE_SKRELL_HEAD_TENTACLE] = INIT_ACCESSORY(/datum/sprite_accessory/skrell_head_tentacle)
+
+	// kidan
+	feature_list[FEATURE_KIDAN_ANTENNAE] = INIT_ACCESSORY(/datum/sprite_accessory/antennae/kidan)
 	/// BANDASTATION ADDITION END - Species
 
 /// This proc just initializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name

@@ -53,6 +53,7 @@
 		/// BANDASTATION ADDITION START - Species
 		/datum/species/skrell = /obj/item/reagent_containers/blood/skrell,
 		/datum/species/moth = /obj/item/reagent_containers/blood/moth,
+		/datum/species/kidan = /obj/item/reagent_containers/blood/kidan,
 		/// BANDASTATION ADDITION END - Species
 	)
 

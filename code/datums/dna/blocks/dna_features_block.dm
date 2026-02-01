@@ -126,4 +126,8 @@
 // MARK: Skrell
 /datum/dna_block/feature/accessory/skrell_head_tentacle
 	feature_key = FEATURE_SKRELL_HEAD_TENTACLE
+
+// MARK: Kidan
+/datum/dna_block/feature/accessory/antennae/kidan
+	feature_key = FEATURE_KIDAN_ANTENNAE
 // BANDASTATION ADD END - Species
