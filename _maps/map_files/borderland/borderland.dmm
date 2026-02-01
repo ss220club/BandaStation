@@ -316,6 +316,9 @@
 	pixel_y = 3
 	},
 /obj/structure/rack,
+/obj/item/wormhole_jaunter,
+/obj/item/wormhole_jaunter,
+/obj/item/wormhole_jaunter,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -610,6 +613,7 @@
 /obj/item/book/manual/wiki/medicine{
 	pixel_x = 8
 	},
+/obj/item/clothing/neck/stethoscope,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -691,6 +695,16 @@
 /obj/item/ammo_box/c762x39,
 /obj/item/ammo_box/c762x39,
 /obj/item/ammo_box/magazine/c762x39mm,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/rods/ten,
+/obj/item/stack/rods/ten,
+/obj/item/stack/rods/ten,
+/obj/item/stack/rods/ten,
+/obj/item/stack/rods/ten,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -946,6 +960,7 @@
 	dir = 8
 	},
 /obj/structure/cable,
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/diagonal{
 	explosive_resistance = 1
 	},
@@ -1551,6 +1566,7 @@
 	pixel_x = -3;
 	pixel_y = -3
 	},
+/obj/item/storage/medkit/toxin,
 /turf/open/floor/iron/showroomfloor{
 	planetary_atmos = 1;
 	initial_gas_mix = "o2=22;n2=82;TEMP=276"
@@ -1587,6 +1603,7 @@
 /obj/structure/chair/office/tactical,
 /obj/effect/turf_decal/trimline/dark_blue/line,
 /obj/effect/turf_decal/trimline/dark_blue,
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -1673,9 +1690,8 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
-/obj/effect/turf_decal/siding/wood,
 /obj/structure/railing{
-	color = "#6e6e6e"
+	dir = 1
 	},
 /turf/open/floor/wood/large/oak,
 /area/altam/main_zones/caves)
@@ -1913,6 +1929,12 @@
 	uses_integrity = 10000;
 	explosive_resistance = 1
 	},
+/area/altam/main_zones/main)
+"bpa" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/plating/reinforced,
 /area/altam/main_zones/main)
 "bph" = (
 /obj/structure/fireplace{
@@ -2201,6 +2223,7 @@
 /area/altam/main_zones/main)
 "bzK" = (
 /obj/effect/turf_decal/bot,
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -2451,6 +2474,7 @@
 "bEI" = (
 /obj/structure/table/reinforced,
 /obj/item/folder/documents,
+/obj/item/clothing/neck/stethoscope,
 /turf/open/floor/iron/dark/side{
 	dir = 1;
 	explosive_resistance = 1
@@ -2837,6 +2861,7 @@
 /obj/structure/chair/greyscale{
 	dir = 8
 	},
+/obj/effect/landmark/start,
 /turf/open/floor/carpet/blue,
 /area/altam/embassy/main)
 "bRd" = (
@@ -5792,15 +5817,10 @@
 	},
 /area/altam/main_zones/premises)
 "dxa" = (
-/obj/effect/turf_decal/weather/dirt{
+/obj/structure/railing{
 	dir = 4
 	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=276";
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	explosive_resistance = 1
-	},
+/turf/open/floor/plating/reinforced,
 /area/altam/main_zones/main)
 "dxk" = (
 /obj/effect/spawner/random/exotic,
@@ -8524,16 +8544,15 @@
 	},
 /area/altam/main_zones/main)
 "eYD" = (
-/obj/effect/turf_decal/siding/wideplating_new/dark{
-	dir = 9
+/obj/structure/chair/wood,
+/obj/effect/landmark/start,
+/turf/open/floor/carpet{
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1;
+	planetary_atmos = 1
 	},
-/obj/structure/railing{
-	dir = 9
-	},
-/turf/open/chasm/true{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220"
-	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "eYR" = (
 /turf/closed/wall/mineral/titanium/nodiagonal{
 	initial_gas_mix = "o2=22;n2=82;TEMP=275"
@@ -8771,16 +8790,17 @@
 	},
 /area/altam/main_zones/premises)
 "fho" = (
-/obj/effect/turf_decal/siding/wideplating_new/dark{
-	dir = 10
+/obj/structure/chair/wood{
+	dir = 8
 	},
-/obj/structure/railing{
-	dir = 10
+/obj/effect/landmark/start,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1;
+	planetary_atmos = 1
 	},
-/turf/open/chasm/true{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220"
-	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "fhD" = (
 /obj/machinery/door/airlock/engineering,
 /obj/structure/cable,
@@ -9388,6 +9408,9 @@
 /area/altam/main_zones/main)
 "fAa" = (
 /obj/structure/closet/secure_closet/chemical,
+/obj/item/wormhole_jaunter,
+/obj/item/wormhole_jaunter,
+/obj/item/wormhole_jaunter,
 /turf/open/floor/iron/showroomfloor{
 	planetary_atmos = 1;
 	initial_gas_mix = "o2=22;n2=82;TEMP=276"
@@ -10992,6 +11015,7 @@
 /obj/structure/chair/wood{
 	dir = 4
 	},
+/obj/effect/landmark/start,
 /turf/open/floor/carpet{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -11042,6 +11066,16 @@
 	explosive_resistance = 1
 	},
 /area/altam/main_zones/caves)
+"gwt" = (
+/obj/structure/chair/wood,
+/obj/effect/landmark/start,
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=276";
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/main)
 "gwI" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
@@ -12001,9 +12035,6 @@
 /obj/effect/turf_decal/siding/wideplating_new/dark{
 	dir = 8
 	},
-/obj/structure/railing{
-	dir = 8
-	},
 /turf/open/chasm/true{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
@@ -12383,6 +12414,15 @@
 /obj/structure/table,
 /obj/item/camera,
 /turf/open/floor/iron{
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/premises)
+"hjQ" = (
+/obj/effect/turf_decal/trimline/yellow/line{
+	dir = 1
+	},
+/obj/effect/landmark/start,
+/turf/open/floor/iron/dark{
 	explosive_resistance = 1
 	},
 /area/altam/main_zones/premises)
@@ -13856,6 +13896,7 @@
 /obj/structure/chair/office/tactical{
 	dir = 8
 	},
+/obj/effect/landmark/start,
 /turf/open/floor/iron/smooth_large,
 /area/altam/embassy/main)
 "imK" = (
@@ -13868,16 +13909,12 @@
 	},
 /area/altam/embassy/main)
 "inj" = (
-/obj/effect/turf_decal/siding/wideplating_new/dark{
-	dir = 4
-	},
-/obj/structure/railing{
-	dir = 4
-	},
-/turf/open/chasm/true{
+/obj/structure/closet/body_bag/stasis,
+/obj/item/clothing/neck/stethoscope,
+/turf/open/misc/asteroid/snow/ice{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/premises)
 "iol" = (
 /obj/structure/chair{
 	dir = 4
@@ -14501,6 +14538,12 @@
 	explosive_resistance = 1
 	},
 /area/altam/main_zones/caves)
+"iEf" = (
+/obj/effect/landmark/start/assistant,
+/turf/open/floor/iron/dark/smooth_large{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "iEg" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
@@ -14955,6 +14998,13 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
+"iWl" = (
+/obj/structure/cable,
+/obj/effect/landmark/start,
+/turf/open/floor/iron/dark/diagonal{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "iWQ" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 8
@@ -15750,6 +15800,13 @@
 	explosive_resistance = 1
 	},
 /area/altam/embassy/main)
+"jyE" = (
+/obj/effect/landmark/start,
+/turf/open/floor/carpet/orange{
+	explosive_resistance = 1;
+	planetary_atmos = 1
+	},
+/area/altam/main_zones/premises)
 "jyJ" = (
 /obj/structure/mineral_door/gold,
 /turf/open/floor/vault/alien,
@@ -16649,6 +16706,7 @@
 	dir = 8
 	},
 /obj/machinery/light/directional/south,
+/obj/effect/landmark/start,
 /turf/open/floor/carpet/blue,
 /area/altam/embassy/main)
 "kbT" = (
@@ -17184,6 +17242,7 @@
 	},
 /obj/machinery/power/apc/auto_name/directional/east,
 /obj/structure/cable,
+/obj/effect/landmark/start,
 /turf/open/floor/carpet/blue,
 /area/altam/embassy/main)
 "ksz" = (
@@ -18707,11 +18766,11 @@
 	},
 /area/altam/main_zones/caves)
 "llh" = (
-/obj/effect/landmark/start/station_engineer,
-/turf/open/floor/iron/dark/diagonal{
-	explosive_resistance = 1
+/obj/effect/turf_decal/siding/wood,
+/turf/open/chasm/true{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
-/area/altam/embassy/main)
+/area/altam/main_zones/caves)
 "llw" = (
 /obj/effect/turf_decal/caution/stand_clear/red{
 	dir = 1
@@ -18960,6 +19019,7 @@
 /area/altam/main_zones/caves)
 "lua" = (
 /obj/structure/closet/secure_closet/medical1,
+/obj/item/clothing/neck/stethoscope,
 /turf/open/floor/iron/showroomfloor{
 	planetary_atmos = 1;
 	initial_gas_mix = "o2=22;n2=82;TEMP=276"
@@ -19150,6 +19210,7 @@
 /obj/structure/chair/wood{
 	dir = 4
 	},
+/obj/effect/landmark/start,
 /turf/open/floor/carpet/cyan{
 	explosive_resistance = 1
 	},
@@ -19258,6 +19319,14 @@
 	},
 /obj/item/stack/sheet/iron/fifty,
 /obj/item/stack/sheet/iron/fifty,
+/obj/item/storage/toolbox/mechanical{
+	pixel_x = -2;
+	pixel_y = -1
+	},
+/obj/item/multitool{
+	pixel_x = 3
+	},
+/obj/item/clothing/glasses/welding,
 /turf/open/floor/iron/dark{
 	explosive_resistance = 1
 	},
@@ -19670,6 +19739,16 @@
 	explosive_resistance = 1
 	},
 /area/altam/embassy/main)
+"lNf" = (
+/obj/item/wormhole_jaunter,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=276";
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	slowdown = 0;
+	planetary_atmos = 1
+	},
+/area/altam/main_zones/main)
 "lNL" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
@@ -19787,11 +19866,14 @@
 	},
 /area/altam/main_zones/premises)
 "lRu" = (
-/obj/effect/landmark/start/station_engineer,
-/turf/open/floor/iron/dark/smooth_large{
-	explosive_resistance = 1
+/obj/effect/landmark/start,
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1;
+	planetary_atmos = 1
 	},
-/area/altam/embassy/main)
+/area/altam/main_zones/premises)
 "lRD" = (
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 6
@@ -19913,7 +19995,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 8
 	},
-/obj/effect/landmark/start/janitor,
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -20189,6 +20271,7 @@
 /area/altam/main_zones/premises)
 "maP" = (
 /obj/effect/turf_decal/trimline/dark_blue,
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark{
 	explosive_resistance = 1
 	},
@@ -20268,6 +20351,15 @@
 	explosive_resistance = 1
 	},
 /area/altam/embassy/main)
+"mea" = (
+/obj/effect/landmark/start,
+/turf/open/floor/carpet{
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1;
+	planetary_atmos = 1
+	},
+/area/altam/main_zones/premises)
 "mep" = (
 /obj/structure/flora/rock/icy/style_random{
 	max_integrity = 10000;
@@ -20288,6 +20380,7 @@
 /obj/effect/decal/cleanable/blood/gibs/old{
 	icon_state = "floor2"
 	},
+/obj/item/wormhole_jaunter,
 /turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=276";
 	max_integrity = 10000;
@@ -21203,6 +21296,13 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/caves)
+"mDt" = (
+/obj/effect/turf_decal/trimline/yellow/line,
+/obj/effect/landmark/start,
+/turf/open/floor/iron/dark{
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/premises)
 "mDC" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/warning{
 	dir = 4
@@ -21823,16 +21923,11 @@
 /turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "mVK" = (
-/obj/effect/turf_decal/siding/wideplating_new/dark{
-	dir = 6
+/obj/effect/landmark/start,
+/turf/open/floor/iron/dark/diagonal{
+	explosive_resistance = 1
 	},
-/obj/structure/railing{
-	dir = 6
-	},
-/turf/open/chasm/true{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220"
-	},
-/area/altam/main_zones/main)
+/area/altam/embassy/main)
 "mVU" = (
 /obj/structure/railing/platform{
 	dir = 1
@@ -22009,7 +22104,7 @@
 	},
 /area/altam/main_zones/premises)
 "nbY" = (
-/obj/effect/landmark/start/medical_doctor,
+/obj/effect/landmark/start,
 /turf/open/floor/iron/showroomfloor{
 	planetary_atmos = 1;
 	initial_gas_mix = "o2=22;n2=82;TEMP=276"
@@ -22990,6 +23085,7 @@
 	pixel_x = -3;
 	pixel_y = -3
 	},
+/obj/item/storage/medkit/toxin,
 /turf/open/floor/iron/showroomfloor{
 	planetary_atmos = 1;
 	initial_gas_mix = "o2=22;n2=82;TEMP=276"
@@ -23855,6 +23951,20 @@
 /obj/item/storage/belt/military/army/ussp/full_autorifle,
 /obj/item/storage/belt/military/army/ussp/full_autorifle,
 /obj/item/storage/belt/military/army/ussp/full_autorifle,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/sheet/mineral/sandbags/thirty,
+/obj/item/stack/rods/ten,
+/obj/item/stack/rods/ten,
+/obj/item/stack/rods/ten,
+/obj/item/stack/sheet/plasteel/fifty,
+/obj/item/stack/sheet/plasteel/fifty,
+/obj/item/stack/sheet/plasteel/fifty,
+/obj/item/stack/sheet/plasteel/fifty,
+/obj/item/stack/sheet/plasteel/fifty,
 /turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=276";
 	max_integrity = 10000;
@@ -24136,6 +24246,7 @@
 "oxS" = (
 /obj/effect/turf_decal/siding/wood,
 /obj/structure/cable,
+/obj/effect/landmark/start,
 /turf/open/floor/wood{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -24450,6 +24561,7 @@
 /obj/structure/chair/office/tactical{
 	dir = 4
 	},
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/diagonal{
 	explosive_resistance = 1
 	},
@@ -27911,6 +28023,7 @@
 /obj/structure/chair/office/tactical{
 	dir = 4
 	},
+/obj/effect/landmark/start,
 /turf/open/floor/iron/smooth_large,
 /area/altam/embassy/main)
 "qXA" = (
@@ -28969,6 +29082,8 @@
 /area/altam/main_zones/main)
 "rEq" = (
 /obj/structure/closet/secure_closet/miner,
+/obj/item/wormhole_jaunter,
+/obj/item/wormhole_jaunter,
 /turf/open/floor/iron/cafeteria{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -29395,6 +29510,18 @@
 	explosive_resistance = 1
 	},
 /area/altam/embassy/main)
+"rRM" = (
+/obj/structure/chair/wood{
+	dir = 8
+	},
+/obj/effect/landmark/start,
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=276";
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/main)
 "rSp" = (
 /obj/structure/flora/rock/style_4{
 	icon_state = "basalt3"
@@ -29911,6 +30038,7 @@
 	dir = 8
 	},
 /obj/structure/cable,
+/obj/effect/landmark/start,
 /turf/open/floor/carpet/blue,
 /area/altam/embassy/main)
 "sjz" = (
@@ -30986,13 +31114,11 @@
 	},
 /area/altam/main_zones/main)
 "sRJ" = (
-/obj/effect/landmark/start/cook,
-/turf/open/floor/iron/cafeteria{
-	max_integrity = 10000;
-	uses_integrity = 10000;
+/obj/effect/landmark/start,
+/turf/open/floor/iron/dark{
 	explosive_resistance = 1
 	},
-/area/altam/embassy/main)
+/area/altam/main_zones/premises)
 "sRS" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/warning{
 	dir = 1
@@ -31114,6 +31240,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/trimline/dark_blue,
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -31718,12 +31845,13 @@
 /area/altam/main_zones/main)
 "tou" = (
 /obj/structure/closet/crate/wooden,
-/obj/item/gun/magic/hook/bounty,
 /obj/item/spear/military,
 /obj/item/stack/medical/gauze/improvised,
 /obj/item/stack/medical/gauze/improvised,
 /obj/item/stack/medical/gauze/improvised,
 /obj/item/flashlight/lantern,
+/obj/item/stack/rods,
+/obj/item/stack/rods,
 /turf/open/misc/dirt/jungle/wasteland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=270";
 	slowdown = 0;
@@ -32307,6 +32435,13 @@
 	explosive_resistance = 1
 	},
 /area/altam/main_zones/premises)
+"tMj" = (
+/obj/effect/turf_decal/trimline/dark_blue/line,
+/obj/effect/landmark/start,
+/turf/open/floor/iron/dark/smooth_large{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "tMz" = (
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 5
@@ -32579,6 +32714,15 @@
 	explosive_resistance = 1
 	},
 /area/altam/main_zones/main)
+"tTi" = (
+/obj/structure/cable,
+/obj/effect/landmark/start,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "tTq" = (
 /obj/machinery/door/poddoor/shutters{
 	dir = 4;
@@ -32759,6 +32903,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/corner{
 	dir = 1
 	},
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -33080,6 +33225,15 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
+"uhy" = (
+/obj/structure/cable,
+/obj/effect/landmark/start,
+/turf/open/floor/iron/cafeteria{
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "uhC" = (
 /turf/open/floor/vault/rock{
 	initial_gas_mix = "o2=22;n2=82;TEMP=255";
@@ -33493,6 +33647,7 @@
 "urz" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/sign/flag/terragov/directional/north,
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -33881,6 +34036,7 @@
 /obj/structure/chair/office/tactical{
 	dir = 8
 	},
+/obj/effect/landmark/start,
 /turf/open/floor/iron/smooth_large,
 /area/altam/embassy/main)
 "uIc" = (
@@ -34154,6 +34310,7 @@
 /obj/structure/chair/wood{
 	dir = 4
 	},
+/obj/effect/landmark/start,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -34591,6 +34748,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/trimline/dark_blue,
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -35455,6 +35613,7 @@
 /obj/structure/chair/office/tactical{
 	dir = 4
 	},
+/obj/effect/landmark/start,
 /turf/open/floor/iron/smooth_large,
 /area/altam/embassy/main)
 "vAz" = (
@@ -36026,10 +36185,7 @@
 /area/altam/embassy/main)
 "vUz" = (
 /obj/effect/turf_decal/siding/wideplating_new/dark{
-	dir = 5
-	},
-/obj/structure/railing{
-	dir = 5
+	dir = 4
 	},
 /turf/open/chasm/true{
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
@@ -36875,6 +37031,15 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
+"wrx" = (
+/obj/structure/flora/ash/stem_shroom,
+/obj/effect/landmark/start,
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=270";
+	slowdown = 0;
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/caves)
 "wrE" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 10
@@ -38043,15 +38208,8 @@
 "wZF" = (
 /obj/structure/window/reinforced,
 /obj/structure/table/reinforced,
-/obj/item/storage/toolbox/mechanical{
-	pixel_x = -2;
-	pixel_y = -1
-	},
-/obj/item/clothing/glasses/welding,
-/obj/item/multitool{
-	pixel_x = 3
-	},
 /obj/machinery/light/small/directional/east,
+/obj/machinery/cell_charger,
 /turf/open/floor/iron/dark{
 	explosive_resistance = 1
 	},
@@ -38324,6 +38482,7 @@
 	},
 /obj/structure/cable,
 /obj/machinery/light/small/directional/west,
+/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/diagonal{
 	explosive_resistance = 1
 	},
@@ -51784,7 +51943,7 @@ jQV
 sFz
 kWt
 xbP
-iYw
+fho
 mkm
 mkm
 mkm
@@ -51796,7 +51955,7 @@ sFz
 xbP
 fDs
 mkm
-iYw
+fho
 aev
 wiB
 pvD
@@ -54170,7 +54329,7 @@ uHg
 uHg
 uZu
 bbq
-uZu
+llh
 uHg
 jQV
 jQV
@@ -55471,9 +55630,9 @@ ePf
 pvD
 ydI
 dYb
-npM
+hjQ
 cab
-tLX
+mDt
 pvm
 bIR
 mTc
@@ -55741,7 +55900,7 @@ rWU
 iYy
 tLX
 wsb
-iLN
+sRJ
 bIR
 pvD
 wiB
@@ -56756,9 +56915,9 @@ ePf
 lkz
 ydI
 kXw
-npM
+hjQ
 cab
-tLX
+mDt
 oaj
 bIR
 pvD
@@ -63724,7 +63883,7 @@ vdq
 nXc
 eQp
 uJn
-vyr
+mea
 vyr
 vyr
 vyr
@@ -66559,8 +66718,8 @@ pvD
 pvD
 xbP
 mBg
-uJn
-uJn
+lRu
+lRu
 mBX
 sHx
 ixn
@@ -67831,7 +67990,7 @@ xbP
 okx
 uJn
 nMo
-mNk
+eYD
 vXN
 aev
 pvD
@@ -68243,7 +68402,7 @@ jQV
 jQV
 wiB
 scH
-tAn
+inj
 kSi
 wCK
 vXo
@@ -76258,7 +76417,7 @@ wiB
 nXc
 nCK
 kZT
-mxJ
+gwt
 uyP
 bXN
 nCK
@@ -76516,7 +76675,7 @@ pvD
 nCK
 xyE
 aDg
-bkb
+rRM
 cip
 flZ
 qYR
@@ -77528,8 +77687,8 @@ jiq
 jiq
 jiq
 vUz
-inj
-mVK
+vUz
+vUz
 aoO
 aoO
 aoO
@@ -77784,9 +77943,9 @@ krz
 krz
 tYE
 krz
-gAJ
-gAJ
-gAJ
+bpa
+bpa
+bpa
 krz
 vRx
 krz
@@ -78041,9 +78200,9 @@ aSS
 aSS
 aSS
 aSS
-gAJ
-gAJ
-gAJ
+dxa
+dxa
+dxa
 xWw
 aSS
 aSS
@@ -78298,9 +78457,9 @@ tEj
 tEj
 tEj
 tEj
-eYD
 gYH
-fho
+gYH
+gYH
 bcP
 eTo
 msE
@@ -80475,7 +80634,7 @@ suW
 vNS
 tZc
 tZc
-tZc
+uhy
 tZc
 tZc
 fpR
@@ -80692,7 +80851,7 @@ lhI
 wZw
 sVs
 rka
-ekB
+tMj
 pIP
 phT
 pvD
@@ -80989,7 +81148,7 @@ hbD
 vNS
 gzI
 gzI
-sRJ
+gzI
 gzI
 tZc
 flc
@@ -84472,7 +84631,7 @@ kdo
 pvD
 pNF
 lbX
-dxa
+aDg
 aDg
 bth
 nrs
@@ -87132,7 +87291,7 @@ pvD
 peH
 tqI
 iqd
-rTj
+nbY
 vNS
 wiz
 mLU
@@ -87646,7 +87805,7 @@ pvD
 peH
 ujl
 rTj
-nbY
+rTj
 vNS
 pGb
 mLU
@@ -89194,7 +89353,7 @@ lwM
 xOw
 dUJ
 rka
-lRu
+mCB
 jKY
 eNY
 pvD
@@ -89449,7 +89608,7 @@ vSP
 vSP
 vNS
 jjv
-mCB
+iEf
 mCB
 giD
 vNS
@@ -99552,7 +99711,7 @@ jQV
 jQV
 jQV
 uHg
-wVA
+wrx
 oUo
 oUo
 oUo
@@ -141633,9 +141792,9 @@ fRH
 fRH
 peH
 rka
-rka
+mVK
 jiC
-rka
+mVK
 rka
 pGb
 vNS
@@ -141889,11 +142048,11 @@ fRH
 fRH
 fRH
 peH
-rka
+mVK
 fZB
 bZV
 fZB
-rka
+mVK
 axp
 vNS
 xcz
@@ -142404,9 +142563,9 @@ fRH
 fRH
 peH
 rka
+mVK
 rka
-rka
-rka
+mVK
 rka
 rka
 jIi
@@ -142661,9 +142820,9 @@ fRH
 fRH
 peH
 jvB
-dUJ
+iWl
 jvB
-dUJ
+iWl
 jvB
 dUJ
 aXI
@@ -143174,11 +143333,11 @@ fRH
 fRH
 fRH
 peH
-rka
+mVK
 ixm
 bZV
 ixm
-rka
+mVK
 cvD
 vNS
 vOU
@@ -143432,9 +143591,9 @@ fRH
 fRH
 peH
 rka
-rka
+mVK
 jiC
-rka
+mVK
 rka
 pGb
 vNS
@@ -149088,7 +149247,7 @@ peH
 cRG
 dUJ
 rka
-llh
+rka
 rka
 rka
 vNS
@@ -150897,7 +151056,7 @@ xth
 vOU
 vNS
 arf
-sMo
+tTi
 fKK
 fKK
 hoL
@@ -159083,7 +159242,7 @@ uDW
 lcL
 lcL
 lcL
-uJn
+lRu
 ifb
 pvD
 mUg
@@ -162164,9 +162323,9 @@ pvD
 pvD
 jHV
 mBg
-uJn
+lRu
 okx
-uJn
+lRu
 weY
 jHV
 wiB
@@ -162687,7 +162846,7 @@ pvD
 qvc
 pvD
 ifb
-lcL
+jyE
 lcL
 ifb
 pvD
@@ -167265,7 +167424,7 @@ fRH
 jQV
 jQV
 sFz
-pvD
+lNf
 jwV
 eJS
 mTc
