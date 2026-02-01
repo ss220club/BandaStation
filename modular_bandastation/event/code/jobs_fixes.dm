@@ -41,7 +41,7 @@
 	set_overflow_role(overflow_role)
 
 // Granting special language
-/datum/outfit/job/tsf/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
+/datum/outfit/job/tsf_marine/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
 	. = ..()
 	if(visuals_only)
 		return
@@ -55,6 +55,7 @@
 		return
 	translator.grant_language(/datum/language/canilunzt)
 	translator.remove_blocked_language(/datum/language/canilunzt)
+	translator.remove_language(/datum/language/common)
 	translator.set_active_language(/datum/language/canilunzt)
 
 /datum/job

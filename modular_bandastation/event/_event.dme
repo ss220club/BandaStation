@@ -15,6 +15,8 @@
 #include "code/jobs/tsf_marine.dm"
 #include "code/jobs/tsf_medic.dm"
 #include "code/jobs/tsf_officer.dm"
+#include "code/jobs/tsf_cook.dm"
+#include "code/jobs/tsf_mech_operator.dm"
 
 // #include "code/jobs/ussp_assistant.dm"
 // #include "code/jobs/ussp_cook.dm"
