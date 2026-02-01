@@ -10,6 +10,8 @@
 	inhand_icon_state = "t26"
 	inhand_x_dimension = 32
 	inhand_y_dimension = 32
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/taipan.ogg'
+	fire_sound_volume = 70
 	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
 	recoil = 3
 	accepted_magazine_type = /obj/item/ammo_box/magazine/sniper_rounds

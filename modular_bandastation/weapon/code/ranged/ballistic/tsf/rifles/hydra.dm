@@ -19,7 +19,7 @@
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c223
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/hydra.ogg'
 	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/suppressed_rifle.ogg'
-	can_suppress = TRUE
+	can_suppress = FALSE
 	suppressor_x_offset = 10
 	burst_size = 1
 	fire_delay = 0.18 SECONDS
