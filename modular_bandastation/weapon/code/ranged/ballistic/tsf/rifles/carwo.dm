@@ -158,6 +158,12 @@
 	worn_icon_state = "infanterie_black"
 	inhand_icon_state = "infanterie_black"
 
+/obj/item/gun/ballistic/automatic/carwo/auto/black/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	spawnwithmagazine = /obj/item/ammo_box/magazine/c40sol_rifle/long
+
 /obj/item/gun/ballistic/automatic/carwo/auto/black/no_mag
 	spawnwithmagazine = FALSE
 
@@ -190,4 +196,31 @@
 	inhand_icon_state = "outomaties_wooden"
 
 /obj/item/gun/ballistic/automatic/carwo/auto/machinegun/wooden/no_mag
+	spawnwithmagazine = FALSE
+
+// MARK: XAR-10
+/obj/item/gun/ballistic/automatic/carwo/auto/xar
+	name = "Carwo XAR-10"
+	desc = "Тяжелая боевая винтовка в компоновке булл-пап, стреляющая патронами калибра .40 Sol. Часто встречается в руках спец-отрядов ТСФ. Принимает любой стандартный магазин от винтовок ТСФ."
+	icon_state = "xar10"
+	worn_icon_state = "xar10"
+	inhand_icon_state = "xar10"
+	SET_BASE_PIXEL(-8, 0)
+	suppressor_x_offset = 12
+	burst_size = 1
+	fire_delay = 0.15 SECONDS
+	actions_types = list()
+	spread = 3.5
+	recoil = 0.4
+
+/obj/item/gun/ballistic/automatic/carwo/auto/xar/no_mag
+	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/carwo/auto/xar/black
+	desc = parent_type::desc + "<br>Окрашенна в тактический черный цвет."
+	icon_state = "xar10_black"
+	worn_icon_state = "xar10_black"
+	inhand_icon_state = "xar10_black"
+
+/obj/item/gun/ballistic/automatic/carwo/auto/xar/black/no_mag
 	spawnwithmagazine = FALSE
