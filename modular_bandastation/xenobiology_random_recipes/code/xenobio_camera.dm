@@ -44,12 +44,17 @@
 
 	var/list/data = json_decode(file2text(json_file))
 
-	// синхронизация с временем жизни рецептов
-	// рецепты хранят время создания в /datum/chemical_reaction/slime/var/created
-	var/datum/chemical_reaction/slime/S = /datum/chemical_reaction/slime
+	var/recipe_timestamp
+	for(var/reagent_id in GLOB.chemical_reactions_list_reactant_index)
+		for(var/datum/chemical_reaction/slime/R in GLOB.chemical_reactions_list_reactant_index[reagent_id])
+			if(istype(R) && R.randomized)
+				recipe_timestamp = R.created
+				break
+		if(recipe_timestamp)
+			break
 
 	// в идеальном мире это надо отслеживать читая метадату файла нотесов
-	if(data["timestamp"] && data["timestamp"] < S.created)
+	if(data["timestamp"] && recipe_timestamp && data["timestamp"] < recipe_timestamp)
 		return "Старые записи стерты из-за ротации рецептов"
 
 	return data["text"]
