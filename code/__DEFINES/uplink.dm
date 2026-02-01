@@ -8,11 +8,12 @@
 
 /// This item is purchasable to clown ops
 #define UPLINK_CLOWN_OPS (1 << 2)
-
+/// This item is purchasable to infiltrators (midround traitors)
+#define UPLINK_INFILTRATORS (1 << 3) //  BANDASTATION ADDITION
 /// Can be randomly given to spies for their bounties
-#define UPLINK_SPY (1 << 3)
+#define UPLINK_SPY (1 << 4)
 
-#define UPLINK_LONE_OP (1 << 4)
+#define UPLINK_LONE_OP (1 << 5)
 
 /// A blanket define for an item being purchasable by all types of nukie
 #define UPLINK_ALL_SYNDIE_OPS (UPLINK_NUKE_OPS | UPLINK_LONE_OP | UPLINK_CLOWN_OPS)
