@@ -48,7 +48,7 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
 /datum/ai_bridge/proc/process_incoming_fax(title, content, sender_name, sender_id)
 	set waitfor = FALSE
-	
+
 	if(!CONFIG_GET(string/ai_secretary_url))
 		return
 
@@ -91,8 +91,8 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
 	var/color = URGENCY_COLOR_LOW
 	var/urg_lower = LOWER_TEXT(urgency)
-	
-	if(findtext(urg_lower, "medium")) 
+
+	if(findtext(urg_lower, "medium"))
 		color = URGENCY_COLOR_MEDIUM
 	else if(findtext(urg_lower, "high"))
 		color = URGENCY_COLOR_HIGH
@@ -134,7 +134,7 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 		start_generation(usr, fax_data, mode, custom_note)
 
 /datum/ai_bridge/proc/start_generation(mob/user, list/fax_data, mode, custom_note)
-	
+
 	var/instruction = ""
 	switch(mode)
 		if("approve")
@@ -147,7 +147,7 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 			instruction = "DECISION: Acknowledge receipt."
 
 	var/system_prompt_full = "[prompt_reply_text]\n\nCOMMAND:\n[instruction]"
-	
+
 	var/user_content = "Original Fax from: [fax_data["sender"]]\nSubject: [fax_data["title"]]\nMessage: \"[fax_data["content"]]\"\n\nWrite the reply:"
 
 	var/list/messages = list(
@@ -186,16 +186,16 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
 	ui.sending_fax_name = "Central Command"
 	ui.default_paper_name = "Reply to [fax_data["sender"]]"
-	
+
 	var/obj/item/paper/P = ui.fax_paper
 	P.name = ui.default_paper_name
-	
+
 	//var/html_text = replacetext(draft_text, "\n", "<br>")
-	
+
 	if("info" in P.vars)
 		P.vars["info"] = final_md
-	
-	P.update_icon() 
+
+	P.update_icon()
 
 	ui.ui_interact(user)
 	to_chat(user, "<span class='adminnotice'>AI Draft Generated!</span>")
@@ -210,7 +210,7 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
 	// We use /api/chat now
 	var/url = "[base_url]/api/chat"
-	
+
 	var/list/payload = list(
 		"model" = OLLAMA_MODEL,
 		"messages" = messages,
@@ -259,16 +259,19 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	if(!msg_struct)
 		message_admins("<span class='danger'>AI Error: Missing message field.</span>")
 		return
-		
-	var/inner_json_text = msg_struct["content"]
-	if(!inner_json_text)
+
+	var/raw_content = msg_struct["content"]
+	if(!raw_content)
 		message_admins("<span class='danger'>AI Error: Empty content field.</span>")
 		return
+
+	// --- FIX: SANITIZE JSON STRING ---
+	var/clean_json_text = extract_json_from_text(raw_content)
 
 	// 3. Decode the inner content (summary/urgency OR draft)
 	var/list/final_data = null
 	try
-		final_data = json_decode(inner_json_text)
+		final_data = json_decode(clean_json_text)
 	catch(var/exception/e2)
 		message_admins("<span class='danger'>AI Error: Generated text is not valid JSON. [e2]</span>")
 		return
@@ -287,6 +290,21 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	var/cap_key = capitalize(key)
 	if(cap_key in L) return L[cap_key]
 	return null
+
+/datum/ai_bridge/proc/extract_json_from_text(text)
+	var/start_pos = findtext(text, "{")
+	if(!start_pos) return text
+
+	var/end_pos = 0
+	for(var/i = length(text), i > start_pos, i--)
+		if(copytext(text, i, i + 1) == "}")
+			end_pos = i
+			break
+
+	if(!end_pos) return text
+
+	return copytext(text, start_pos, end_pos + 1)
+
 
 // --- CONFIG DEFINITION ---
 /datum/config_entry/string/ai_secretary_url
