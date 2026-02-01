@@ -1254,8 +1254,9 @@
 	if (!internals)
 		balloon_alert(user, "нет маски для подключения!")
 		return
-		user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)] к [patient.ru_p_them()] [internals]."), span_notice("Вы начинаете подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(GENITIVE)] к [ru_p_them()] [internals]..."), ignored_mobs = patient)
-		to_chat(patient, span_userdanger("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)] к вашим [internals]!"))
+
+	user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)] к [patient.ru_p_them()] [internals]."), span_notice("Вы начинаете подключать [air_tank.declent_ru(NOMINATIVE)] от [src.declent_ru(GENITIVE)] к [ru_p_them()] [internals]..."), ignored_mobs = patient)
+	to_chat(patient, span_userdanger("[user.declent_ru(NOMINATIVE)] начинает подключать [air_tank.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)] к вашим [internals]!"))
 
 	if (!do_after(user, 4 SECONDS, patient))
 		return
