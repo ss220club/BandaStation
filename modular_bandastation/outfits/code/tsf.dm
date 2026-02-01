@@ -914,3 +914,27 @@
 		/obj/item/ammo_casing/rocket/rpg = 2,
 		/obj/item/ammo_casing/rocket/rpg/weak = 2,
 	)
+
+/datum/outfit/vulpa_ashtar/engi
+	name = "Ashtar - Engineer"
+	backpack_contents = list(
+		/obj/item/storage/box/survival/ussp,
+		/obj/item/storage/medkit/regular,
+		/obj/item/grenade/frag,
+		/obj/item/clothing/mask/gas/explorer,
+		/obj/item/ammo_box/magazine/c762x39mm = 2,
+	)
+	belt = /obj/item/storage/belt/utility/full/engi
+	glasses = /obj/item/clothing/glasses/welding/up
+
+/datum/outfit/vulpa_ashtar/engi/officer
+	name = "Ashtar - Engineer Officer"
+	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto/army/alt
+	backpack_contents = list(
+		/obj/item/storage/box/survival/ussp,
+		/obj/item/storage/medkit/regular,
+		/obj/item/grenade/frag,
+		/obj/item/clothing/mask/gas/explorer,
+		/obj/item/ammo_box/magazine/c762x39mm/ap = 2,
+	)
+	head = /obj/item/clothing/head/helmet/marine/ussp_officer_kaska
