@@ -2317,9 +2317,6 @@
 	},
 /area/altam/main_zones/main)
 "bCg" = (
-/obj/structure/sign/painting/library{
-	pixel_y = 32
-	},
 /obj/item/kirbyplants/organic/plant6,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
@@ -3173,7 +3170,8 @@
 	dir = 9
 	},
 /obj/machinery/deployable_turret/mounted_machine_gun{
-	dir = 8
+	dir = 8;
+	can_be_undeployed = 0
 	},
 /turf/open/misc/asteroid/moon{
 	initial_gas_mix = "o2=22;n2=82;TEMP=275";
@@ -9068,7 +9066,8 @@
 /area/altam/embassy/main)
 "foY" = (
 /obj/machinery/deployable_turret/mounted_machine_gun{
-	dir = 1
+	dir = 1;
+	can_be_undeployed = 0
 	},
 /turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=276";
@@ -9123,11 +9122,8 @@
 	},
 /area/altam/main_zones/caves)
 "fqM" = (
-/obj/structure/closet/secure_closet/armory1,
-/obj/item/gun/ballistic/shotgun/riot/renoster,
-/obj/item/gun/ballistic/shotgun/riot/renoster,
-/obj/item/gun/ballistic/shotgun/riot/renoster,
-/obj/item/gun/ballistic/shotgun/riot/renoster,
+/obj/structure/closet/secure_closet,
+/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack,
 /turf/open/floor/iron/dark{
 	explosive_resistance = 1
 	},
@@ -16417,12 +16413,12 @@
 	},
 /area/altam/main_zones/main)
 "jTo" = (
-/obj/structure/closet/secure_closet/armory1,
 /obj/item/gun/ballistic/shotgun/riot/renoster,
 /obj/effect/spawner/random/armory/slug,
 /obj/effect/turf_decal/trimline/dark_blue/filled/warning{
 	dir = 8
 	},
+/obj/structure/closet/secure_closet,
 /turf/open/floor/iron/dark{
 	explosive_resistance = 1
 	},
@@ -16918,7 +16914,8 @@
 "kjE" = (
 /obj/structure/platform/material,
 /obj/machinery/deployable_turret/mounted_machine_gun{
-	dir = 1
+	dir = 1;
+	can_be_undeployed = 0
 	},
 /turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=276";
@@ -18710,10 +18707,10 @@
 	},
 /area/altam/main_zones/caves)
 "llh" = (
-/obj/structure/sign/painting/large/library{
-	dir = 2
+/obj/effect/landmark/start/station_engineer,
+/turf/open/floor/iron/dark/diagonal{
+	explosive_resistance = 1
 	},
-/turf/closed/wall,
 /area/altam/embassy/main)
 "llw" = (
 /obj/effect/turf_decal/caution/stand_clear/red{
@@ -19790,10 +19787,10 @@
 	},
 /area/altam/main_zones/premises)
 "lRu" = (
-/obj/structure/sign/painting/library{
-	pixel_y = 32
+/obj/effect/landmark/start/station_engineer,
+/turf/open/floor/iron/dark/smooth_large{
+	explosive_resistance = 1
 	},
-/turf/closed/wall,
 /area/altam/embassy/main)
 "lRD" = (
 /obj/effect/turf_decal/trimline/yellow/warning{
@@ -19916,6 +19913,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 8
 	},
+/obj/effect/landmark/start/janitor,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -19976,7 +19974,8 @@
 /area/altam/embassy/main)
 "lWP" = (
 /obj/machinery/deployable_turret/mounted_machine_gun{
-	dir = 8
+	dir = 8;
+	can_be_undeployed = 0
 	},
 /turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=276";
@@ -22010,14 +22009,10 @@
 	},
 /area/altam/main_zones/premises)
 "nbY" = (
-/obj/structure/sign/painting/large/library{
-	dir = 4
-	},
-/turf/open/floor/carpet{
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	explosive_resistance = 1;
-	planetary_atmos = 1
+/obj/effect/landmark/start/medical_doctor,
+/turf/open/floor/iron/showroomfloor{
+	planetary_atmos = 1;
+	initial_gas_mix = "o2=22;n2=82;TEMP=276"
 	},
 /area/altam/embassy/main)
 "ncm" = (
@@ -26646,10 +26641,10 @@
 /area/altam/embassy/main)
 "qdi" = (
 /obj/item/gun/ballistic/automatic/carwo/auto/machinegun/top_fed,
-/obj/structure/closet/secure_closet/armory1,
 /obj/effect/turf_decal/trimline/dark_blue/filled/warning{
 	dir = 8
 	},
+/obj/structure/closet/secure_closet,
 /turf/open/floor/iron/dark{
 	explosive_resistance = 1
 	},
@@ -30991,14 +30986,10 @@
 	},
 /area/altam/main_zones/main)
 "sRJ" = (
-/obj/structure/closet/secure_closet/armory1,
-/obj/item/gun/ballistic/automatic/carwo/auto/machinegun,
-/obj/item/gun/ballistic/automatic/carwo/auto/machinegun,
-/obj/item/gun/ballistic/automatic/carwo/auto/machinegun,
-/obj/item/gun/ballistic/automatic/carwo/auto/machinegun,
-/obj/item/gun/ballistic/automatic/carwo/auto/machinegun/top_fed,
-/obj/item/gun/ballistic/automatic/carwo/auto/machinegun/top_fed,
-/turf/open/floor/iron/dark{
+/obj/effect/landmark/start/cook,
+/turf/open/floor/iron/cafeteria{
+	max_integrity = 10000;
+	uses_integrity = 10000;
 	explosive_resistance = 1
 	},
 /area/altam/embassy/main)
@@ -34285,11 +34276,12 @@
 	},
 /area/altam/main_zones/main)
 "uSt" = (
-/obj/structure/closet/secure_closet/armory2,
-/obj/item/gun/ballistic/automatic/carwo,
-/obj/item/gun/ballistic/automatic/carwo,
-/obj/item/gun/ballistic/automatic/carwo,
-/obj/item/gun/ballistic/automatic/carwo,
+/obj/structure/closet/secure_closet,
+/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg,
+/obj/item/mecha_ammo/lmg,
+/obj/item/mecha_ammo/lmg,
+/obj/item/mecha_ammo/lmg,
+/obj/item/mecha_ammo/lmg,
 /turf/open/floor/iron/dark{
 	explosive_resistance = 1
 	},
@@ -39486,9 +39478,6 @@
 /obj/structure/table/wood/fancy/blue,
 /obj/item/paper_bin,
 /obj/item/pen/blue,
-/obj/structure/sign/painting/library{
-	pixel_y = 32
-	},
 /turf/open/floor/carpet/royalblue{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -40168,9 +40157,6 @@
 	},
 /area/altam/main_zones/main)
 "ylM" = (
-/obj/structure/sign/painting/library{
-	pixel_y = 32
-	},
 /obj/item/kirbyplants/organic/plant21,
 /turf/open/floor/wood/tile{
 	max_integrity = 10000;
@@ -76631,12 +76617,12 @@ vNS
 vNS
 vNS
 vNS
-lRu
 vNS
 vNS
 vNS
 vNS
-lRu
+vNS
+vNS
 vNS
 iJU
 uRn
@@ -78944,7 +78930,7 @@ lgR
 lgR
 lLp
 lgR
-llh
+vNS
 lgR
 aaP
 aVd
@@ -81003,7 +80989,7 @@ hbD
 vNS
 gzI
 gzI
-gzI
+sRJ
 gzI
 tZc
 flc
@@ -83059,7 +83045,7 @@ gdg
 vNS
 nQJ
 vDe
-nbY
+nZI
 xRN
 cTA
 aKr
@@ -85329,7 +85315,7 @@ pvD
 jTQ
 pvD
 skI
-sRJ
+uSt
 odj
 hsT
 bQN
@@ -87660,7 +87646,7 @@ pvD
 peH
 ujl
 rTj
-rTj
+nbY
 vNS
 pGb
 mLU
@@ -89201,14 +89187,14 @@ pvD
 pvD
 peH
 pRc
-rTj
+nbY
 rLf
 vNS
 lwM
 xOw
 dUJ
 rka
-mCB
+lRu
 jKY
 eNY
 pvD
@@ -149102,7 +149088,7 @@ peH
 cRG
 dUJ
 rka
-rka
+llh
 rka
 rka
 vNS
