@@ -9,6 +9,29 @@
 /obj/item/mortar_shell/proc/detonate(turf/target_turf)
 	forceMove(target_turf)
 
+// MARK: MORTAR SHELL FALL INDICATOR
+
+/obj/effect/particle_effect/fluid/smoke
+
+/obj/effect/mortar_shell_fall_indicator
+	name = "falling shell"
+	desc = "БЕГИ, СУКА!!! БЕГИ!!!"
+	icon = 'icons/obj/supplypods_32x32.dmi'
+	icon_state = "LZ_Slider"
+	layer = PROJECTILE_HIT_THRESHHOLD_LAYER
+
+/obj/effect/mortar_shell_fall_indicator/Initialize(mapload)
+	. = ..()
+	update_overlays()
+	transform = matrix() * 1.5
+	animate(src, transform = matrix()*0.01, time = SHELL_TRAVEL_TIME)
+	animate(src, transform = matrix().Turn(90), time = SHELL_TRAVEL_TIME)
+	QDEL_IN(src, SHELL_TRAVEL_TIME)
+
+/obj/effect/mortar_shell_fall_indicator/update_overlays()
+	. = ..()
+	add_overlay("LZ")
+
 // MARK: MEDIUM EXPLOSIVE
 
 /obj/item/mortar_shell/me
@@ -36,3 +59,5 @@
 
 /obj/item/mortar_shell/incendiary/detonate(turf/target_turf)
 	explosion(target_turf, 0, 1, 3, 7, explosion_cause = src)
+
+#undef SHELL_TRAVEL_TIME

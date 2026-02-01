@@ -1,7 +1,7 @@
 // MARK: MORTAR OBJECT
 
 #define DEPLOY_TIME 8 SECONDS
-#define SHELL_TRAVEL_TIME 2.5 SECONDS
+#define SHELL_TRAVEL_TIME 4.5 SECONDS
 
 /obj/machinery/mortar
 	name = "\improper M402 mortar"
@@ -18,13 +18,10 @@
 	/// Automatic offsets from target. Currently not used
 	var/offset_x = 0
 	var/offset_y = 0
-	var/is_busy = FALSE
 
 /obj/machinery/mortar/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attacking_item, /obj/item/mortar_shell))
-		is_busy = TRUE
 		fire(attacking_item, user)
-
 
 /obj/machinery/mortar/wrench_act(mob/living/user, obj/item/wrench/used_wrench)
 	if(!ishuman(user))
@@ -40,7 +37,7 @@
 	qdel(src)
 	return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/mortar/proc/fire(var/obj/item/mortar_shell/shell, mob/living/user)
+/obj/machinery/mortar/proc/fire(obj/item/mortar_shell/shell, mob/living/user)
 	var/turf/target_turf = locate(target_x, target_y, z)
 	user.visible_message(span_warning("[user] начал заряжать \a [shell.name] внутрь [src]."), span_notice("Вы начали заряжать \a [shell.name] внутрь [src]"))
 	playsound(loc, 'modular_bandastation/weapon/sound/machinery/mortar/gun_mortar_reload.ogg', 50, 1)
@@ -48,22 +45,23 @@
 		return
 	visible_message(span_alertwarning("[uppertext("[name]")] ДЕЛАЕТ ВЫСТРЕЛ!"))
 	playsound(loc, 'modular_bandastation/weapon/sound/machinery/mortar/gun_mortar_fire.ogg', 50, 1)
-	is_busy = FALSE
 	flick(icon_state + "_fire", src)
 	shell.forceMove(src)
 	for(var/mob/mob in get_hearers_in_range(7, src, RECURSIVE_CONTENTS_CLIENT_MOBS))
 		shake_camera(mob, 1 SECONDS, 1)
+	playsound(target_turf, 'modular_bandastation/weapon/sound/machinery/mortar/gun_mortar_travel.ogg', 50, 1)
+	new /obj/effect/mortar_shell_fall_indicator(target_turf)
 	addtimer(CALLBACK(src, PROC_REF(handle_shell), target_turf, shell), SHELL_TRAVEL_TIME)
-
-/obj/machinery/mortar/proc/handle_shell(turf/target, obj/item/mortar_shell/shell)
-	playsound(target, 'modular_bandastation/weapon/sound/machinery/mortar/gun_mortar_travel.ogg', 50, 1)
 	var/relative_dir
-	for(var/mob/mob in range(15, get_hearers_in_range(7, src, RECURSIVE_CONTENTS_CLIENT_MOBS)))
-		if(get_turf(mob) == target)
+	for(var/mob/mob in hearers(15, target_turf))
+		if(get_turf(mob) == target_turf)
 			relative_dir = 0
 		else
-			relative_dir = get_dir(mob, target)
+			relative_dir = get_dir(mob, target_turf)
 		to_chat(mob, span_bolddanger("СНАРЯД ПАДАЕТ [relative_dir ? uppertext(("НА " + dir2text(relative_dir) + " ОТ ВАС")) : uppertext("ПРЯМО НА ВАС")]!"))
+
+
+/obj/machinery/mortar/proc/handle_shell(turf/target, obj/item/mortar_shell/shell)
 	shell.detonate(target)
 	qdel(shell)
 
@@ -94,8 +92,8 @@
 
 /obj/machinery/mortar/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
-	var/new_target_x = tgui_input_number(user, "Координата X (1-255)?", default = 1, max_value = 255, min_value = 1)
-	var/new_target_y = tgui_input_number(user, "Координата Y (1-255)?", default = 1, max_value = 255, min_value = 1)
+	var/new_target_x = tgui_input_number(user, "Координата X (1-255)?", default = target_x, max_value = 255, min_value = 1)
+	var/new_target_y = tgui_input_number(user, "Координата Y (1-255)?", default = target_y, max_value = 255, min_value = 1)
 	if(QDELETED(src) || !in_range(src, user))
 		return
 	target_x = new_target_x
@@ -122,5 +120,5 @@
 	AddComponent(/datum/component/deployable, DEPLOY_TIME, /obj/machinery/mortar)
 
 #undef DEPLOY_TIME
-#undef SHELL_TRAVEL_TIME
+
 
