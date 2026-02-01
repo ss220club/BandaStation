@@ -1,0 +1,70 @@
+/datum/action/innate/notes
+	name = "Заметки"
+	button_icon = 'icons/mob/actions/actions_silicon.dmi'
+	button_icon_state = "pda"
+	var/save_path = "data/XenobioNotes.json"
+
+/datum/action/innate/notes/Activate()
+	if(!target || !isliving(owner))
+		return
+
+	ui_interact(owner)
+
+/datum/action/innate/notes/ui_interact(mob/user)
+	var/current_notes = load_notes()
+
+	var/new_notes = tgui_input_text(
+		user = user,
+		message = "Запишите здесь результаты экспериментов или текущие рецепты. Заметки общие для всех ученых и сохраняются между сменами.",
+		title = "Заметки",
+		default = current_notes,
+		max_length = 9999,
+		multiline = TRUE,
+		encode = FALSE
+	)
+
+	if(isnull(new_notes))
+		return
+
+	if(new_notes != current_notes)
+		var/confirmation = tgui_alert(user, "Сохранить изменения в общих заметках?", "Подтверждение", list("Да", "Нет"))
+
+		if(confirmation != "Да")
+			to_chat(user, span_warning("Изменения не сохранены."))
+			return
+
+	save_notes(new_notes)
+	to_chat(user, span_nicegreen("Заметки успешно обновлены."))
+	log_game("Xenobio Notes: [key_name(user)] updated notes. Text: [new_notes]")
+
+/datum/action/innate/notes/proc/load_notes()
+	var/json_file = file(save_path)
+	if(!fexists(json_file))
+		return ""
+
+	var/list/data = json_decode(file2text(json_file))
+
+	// синхронизация с временем жизни рецептов
+	// рецепты хранят время создания в /datum/chemical_reaction/slime/var/created
+	var/datum/chemical_reaction/slime/S = /datum/chemical_reaction/slime
+
+	// в идеальном мире это надо отслеживать читая метадату файла нотесов
+	if(data["timestamp"] && data["timestamp"] < S.created)
+		return "Старые записи стерты из-за ротации рецептов"
+
+	return data["text"]
+
+/datum/action/innate/notes/proc/save_notes(new_text)
+	var/list/data = list(
+		"text" = new_text,
+		"timestamp" = world.realtime
+	)
+
+	var/json_file = file(save_path)
+	if(fexists(json_file))
+		fdel(json_file)
+	WRITE_FILE(json_file, json_encode(data))
+
+/obj/machinery/computer/camera_advanced/xenobio/Initialize(mapload)
+	actions += new /datum/action/innate/notes(src)
+	. = ..()
