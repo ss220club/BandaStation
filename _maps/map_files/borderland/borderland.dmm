@@ -24297,7 +24297,6 @@
 "oxS" = (
 /obj/effect/turf_decal/siding/wood,
 /obj/structure/cable,
-/obj/effect/landmark/start,
 /turf/open/floor/wood{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -29195,15 +29194,6 @@
 	dir = 4
 	},
 /area/altam/main_zones/premises)
-"rDN" = (
-/obj/structure/cable,
-/obj/effect/landmark/start,
-/turf/open/floor/wood/tile{
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	explosive_resistance = 1
-	},
-/area/altam/embassy/main)
 "rEa" = (
 /obj/structure/barricade/sandbags,
 /obj/effect/turf_decal/weather/dirt,
@@ -151182,7 +151172,7 @@ xth
 vOU
 vNS
 arf
-rDN
+sMo
 fKK
 fKK
 hoL
