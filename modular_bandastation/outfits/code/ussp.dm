@@ -520,3 +520,11 @@
 /obj/item/storage/box/survival/ussp/officer
 	medipen_type =  /obj/item/reagent_containers/hypospray/medipen/atropine
 	internal_type = /obj/item/tank/internals/emergency_oxygen/double
+
+/datum/outfit/ussp/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
+	. = ..()
+	if(visuals_only)
+		return
+	translator.grant_language(/datum/language/spinwarder)
+	translator.remove_blocked_language(/datum/language/spinwarder)
+	translator.set_active_language(/datum/language/spinwarder)

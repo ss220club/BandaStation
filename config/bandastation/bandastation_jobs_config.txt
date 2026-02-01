@@ -13,3 +13,4 @@ JOB_RESTRICTIONS Blueshield
 
 ALLOWED_SPECIES /datum/species/human
 ALLOWED_SPECIES /datum/species/skrell
+
