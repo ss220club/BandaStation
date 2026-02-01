@@ -40,7 +40,7 @@
 	qdel(src)
 	return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/mortar/proc/fire(var/obj/item/mortar_shell/shell, mob/living/user)
+/obj/machinery/mortar/proc/fire(obj/item/mortar_shell/shell, mob/living/user)
 	var/turf/target_turf = locate(target_x, target_y, z)
 	user.visible_message(span_warning("[user] начал заряжать \a [shell.name] внутрь [src]."), span_notice("Вы начали заряжать \a [shell.name] внутрь [src]"))
 	playsound(loc, 'modular_bandastation/weapon/sound/machinery/mortar/gun_mortar_reload.ogg', 50, 1)
