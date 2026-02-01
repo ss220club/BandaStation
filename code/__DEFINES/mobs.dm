@@ -56,6 +56,7 @@
 /// BANDASTATION ADDITION START - Species
 #define BLOOD_TYPE_MOTH "M"
 #define BLOOD_TYPE_SKRELL "SK"
+#define BLOOD_TYPE_KIDAN  "K"
 /// BANDASTATION ADDITION START - Species
 
 // Blood exposure behavior flag defines
@@ -208,6 +209,7 @@
 #define SPECIES_VULPKANIN "vulpkanin"
 #define SPECIES_TAJARAN "tajaran"
 #define SPECIES_SKRELL "skrell"
+#define SPECIES_KIDAN  "kidan"
 /// BANDASTATION ADDITION END - Species
 
 // Like species IDs, but not specifically attached a species.
