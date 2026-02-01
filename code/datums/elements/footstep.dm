@@ -54,6 +54,13 @@
 			src.volume = 90*volume
 			RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(play_simplestep_machine))
 			return
+
+		// BANDASTATION EDIT - Start
+		if(FOOTSTEP_MOB_GIANT)
+			footstep_sounds = pick('modular_bandastation/mobs/sound/composer_step_1.ogg', 'modular_bandastation/mobs/sound/composer_step_2.ogg')
+			src.volume = 90*volume
+		// BANDASTATION EDIT - End
+
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(play_simplestep))
 	steps_for_living[target] = 0
 
