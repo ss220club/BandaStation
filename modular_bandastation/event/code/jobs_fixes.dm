@@ -41,7 +41,7 @@
 	set_overflow_role(overflow_role)
 
 // Granting special language
-/datum/outfit/job/tsf_marine/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
+/datum/outfit/tsf/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
 	. = ..()
 	if(visuals_only)
 		return
@@ -49,7 +49,7 @@
 	translator.remove_blocked_language(/datum/language/uncommon)
 	translator.set_active_language(/datum/language/uncommon)
 
-/datum/outfit/job/vulpa_ashtar/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
+/datum/outfit/vulpa_ashtar/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
 	. = ..()
 	if(visuals_only)
 		return
