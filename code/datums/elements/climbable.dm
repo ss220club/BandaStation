@@ -55,14 +55,15 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		user.do_attack_animation(climbed_thing)
 		structure_climber.Paralyze(40)
-		structure_climber.visible_message(span_warning("[structure_climber.declent_ru(ACCUSATIVE)] сбивают с [climbed_thing.declent_ru(GENITIVE)]."), span_warning("Вас сбивают с [climbed_thing.declent_ru(GENITIVE)]!"), span_hear("Вы слышите крик от [structure_climber.declent_ru(GENITIVE)], за которым следует удар."))
+		structure_climber.visible_message(span_warning("[structure_climber] is knocked off [climbed_thing]."), span_warning("You're knocked off [climbed_thing]!"), span_hear("You hear a cry from [structure_climber], followed by a slam."))
+
 
 /datum/element/climbable/proc/climb_structure(atom/climbed_thing, mob/living/user, params)
 	if(!can_climb(climbed_thing, user))
 		return
 	climbed_thing.add_fingerprint(user)
-	user.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] начинает взбираться на [climbed_thing.declent_ru(ACCUSATIVE)]."), \
-								span_notice("Вы начинаете взбираться на [climbed_thing.declent_ru(ACCUSATIVE)]..."))
+	user.visible_message(span_warning("[user] starts climbing onto [climbed_thing]."), \
+								span_notice("You start climbing onto [climbed_thing]..."))
 	// Time in deciseoncds it takes to complete the climb do_after()
 	var/adjusted_climb_time = climb_time
 	// Time in deciseonds that the mob is stunned after climbing successfully.
