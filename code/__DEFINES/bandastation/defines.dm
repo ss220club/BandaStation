@@ -33,3 +33,6 @@
 
 #define SQUASH_WITH_HANDS_DELAY 1.5 SECONDS
 #define RCD_NO_SKILLCHIP_DELAY_MULTIPLIER 1.5
+
+//from base of atom/movable/update_voice_effect(): (should_apply_voice_effect)
+#define COMSIG_MOVABLE_UPDATE_VOICE_EFFECT "movable_update_voice_effect"
