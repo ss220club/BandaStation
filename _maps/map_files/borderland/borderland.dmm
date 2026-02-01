@@ -129,6 +129,16 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
+"aeu" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/sign/flag/terragov/directional/north,
+/obj/effect/landmark/start/assistant{
+	name = "Резервист ТСФ"
+	},
+/turf/open/floor/iron/dark/smooth_large{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "aev" = (
 /obj/effect/light_emitter{
 	light_color = "#C8E4FF";
@@ -870,6 +880,9 @@
 /area/altam/main_zones/caves)
 "azW" = (
 /obj/structure/sign/flag/terragov/directional/north,
+/obj/effect/landmark/start/assistant{
+	name = "Резервист ТСФ"
+	},
 /turf/open/floor/iron/dark/diagonal{
 	explosive_resistance = 1
 	},
@@ -960,7 +973,6 @@
 	dir = 8
 	},
 /obj/structure/cable,
-/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/diagonal{
 	explosive_resistance = 1
 	},
@@ -994,6 +1006,16 @@
 /area/altam/main_zones/main)
 "aDY" = (
 /turf/open/lava,
+/area/altam/main_zones/caves)
+"aEF" = (
+/obj/effect/landmark/start/assistant{
+	name = "Гранатометчик Аштара"
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=270";
+	slowdown = 0;
+	explosive_resistance = 1
+	},
 /area/altam/main_zones/caves)
 "aFk" = (
 /obj/effect/turf_decal/siding/wideplating_new/corner,
@@ -1150,6 +1172,16 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=275"
 	},
 /area/altam/main_zones/premises)
+"aKn" = (
+/obj/item/wormhole_jaunter,
+/turf/open/misc/asteroid/snow/atmosphere{
+	initial_gas_mix = "o2=22;n2=82;TEMP=276";
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	slowdown = 0;
+	planetary_atmos = 1
+	},
+/area/altam/main_zones/main)
 "aKr" = (
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/structure/chair/stool/bar/dark{
@@ -1243,13 +1275,6 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
-"aOC" = (
-/obj/effect/turf_decal/trimline/dark_blue/line,
-/obj/effect/landmark/start,
-/turf/open/floor/iron/dark/smooth_large{
-	explosive_resistance = 1
-	},
-/area/altam/embassy/main)
 "aON" = (
 /obj/structure/flora/rock/icy/style_random{
 	icon_state = "lavarocks2"
@@ -2224,7 +2249,6 @@
 /area/altam/main_zones/main)
 "bzK" = (
 /obj/effect/turf_decal/bot,
-/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -2862,7 +2886,6 @@
 /obj/structure/chair/greyscale{
 	dir = 8
 	},
-/obj/effect/landmark/start,
 /turf/open/floor/carpet/blue,
 /area/altam/embassy/main)
 "bRd" = (
@@ -5818,14 +5841,11 @@
 	},
 /area/altam/main_zones/premises)
 "dxa" = (
-/obj/effect/turf_decal/trimline/yellow/line{
-	dir = 1
+/obj/structure/railing{
+	dir = 4
 	},
-/obj/effect/landmark/start,
-/turf/open/floor/iron/dark{
-	explosive_resistance = 1
-	},
-/area/altam/main_zones/premises)
+/turf/open/floor/plating/reinforced,
+/area/altam/main_zones/main)
 "dxk" = (
 /obj/effect/spawner/random/exotic,
 /turf/open/floor/engine/hull/reinforced{
@@ -6441,13 +6461,6 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
-"dNT" = (
-/obj/structure/cable,
-/obj/effect/landmark/start,
-/turf/open/floor/iron/dark/diagonal{
-	explosive_resistance = 1
-	},
-/area/altam/embassy/main)
 "dNX" = (
 /mob/living/basic/mining/basilisk{
 	dir = 4
@@ -6691,6 +6704,19 @@
 	max_integrity = 10000;
 	uses_integrity = 10000;
 	slowdown = 0;
+	planetary_atmos = 1
+	},
+/area/altam/main_zones/main)
+"dVg" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/obj/effect/landmark/start/assistant{
+	name = "Гражданский"
+	},
+/turf/open/misc/asteroid/moon{
+	initial_gas_mix = "o2=22;n2=82;TEMP=275";
+	explosive_resistance = 1;
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
@@ -7530,6 +7556,16 @@
 	planetary_atmos = 1
 	},
 /area/altam/embassy/main)
+"eug" = (
+/obj/effect/landmark/start/assistant{
+	name = "Помощник гранатометчика Аштара"
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=270";
+	slowdown = 0;
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/caves)
 "eut" = (
 /obj/item/clothing/suit/armor/vest/caftan,
 /obj/effect/turf_decal/weather/snow/corner,
@@ -8555,13 +8591,14 @@
 	},
 /area/altam/main_zones/main)
 "eYD" = (
-/obj/effect/turf_decal/siding/wideplating_new/dark{
-	dir = 8
+/obj/effect/turf_decal/bot,
+/obj/effect/landmark/start/assistant{
+	name = "Армейский офицер ТСФ"
 	},
-/turf/open/chasm/true{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+/turf/open/floor/iron/dark/smooth_large{
+	explosive_resistance = 1
 	},
-/area/altam/main_zones/main)
+/area/altam/embassy/main)
 "eYR" = (
 /turf/closed/wall/mineral/titanium/nodiagonal{
 	initial_gas_mix = "o2=22;n2=82;TEMP=275"
@@ -8799,12 +8836,14 @@
 	},
 /area/altam/main_zones/premises)
 "fho" = (
-/obj/effect/landmark/start,
-/turf/open/floor/carpet/orange{
-	explosive_resistance = 1;
-	planetary_atmos = 1
+/obj/effect/turf_decal/bot,
+/obj/effect/landmark/start/assistant{
+	name = "Полевой медик ТСФ"
 	},
-/area/altam/main_zones/premises)
+/turf/open/floor/iron/dark/smooth_large{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "fhD" = (
 /obj/machinery/door/airlock/engineering,
 /obj/structure/cable,
@@ -10513,6 +10552,13 @@
 	explosive_resistance = 1
 	},
 /area/altam/embassy/main)
+"gfD" = (
+/obj/structure/closet/body_bag/stasis,
+/obj/item/clothing/neck/stethoscope,
+/turf/open/misc/asteroid/snow/ice{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/premises)
 "gfH" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 8
@@ -10617,6 +10663,19 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
+"gip" = (
+/obj/structure/chair/office/tactical{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/dark_blue/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/dark_blue,
+/obj/effect/landmark/start,
+/turf/open/floor/iron/dark/smooth_large{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "giD" = (
 /obj/structure/closet/secure_closet/engineering_welding,
 /obj/effect/turf_decal/stripes/line{
@@ -11019,7 +11078,6 @@
 /obj/structure/chair/wood{
 	dir = 4
 	},
-/obj/effect/landmark/start,
 /turf/open/floor/carpet{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -12026,14 +12084,13 @@
 	},
 /area/altam/main_zones/main)
 "gYH" = (
-/obj/effect/landmark/start,
-/turf/open/floor/wood/large{
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	explosive_resistance = 1;
-	planetary_atmos = 1
+/obj/effect/turf_decal/siding/wideplating_new/dark{
+	dir = 8
 	},
-/area/altam/main_zones/premises)
+/turf/open/chasm/true{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "gZf" = (
 /obj/structure/flora/grass/brown/style_random,
 /obj/effect/turf_decal/weather/dirt{
@@ -13882,7 +13939,6 @@
 /obj/structure/chair/office/tactical{
 	dir = 8
 	},
-/obj/effect/landmark/start,
 /turf/open/floor/iron/smooth_large,
 /area/altam/embassy/main)
 "imK" = (
@@ -13895,11 +13951,13 @@
 	},
 /area/altam/embassy/main)
 "inj" = (
-/obj/effect/landmark/start,
-/turf/open/floor/iron/dark/diagonal{
-	explosive_resistance = 1
+/obj/effect/turf_decal/siding/wideplating_new/dark{
+	dir = 4
 	},
-/area/altam/embassy/main)
+/turf/open/chasm/true{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/main)
 "iol" = (
 /obj/structure/chair{
 	dir = 4
@@ -15818,6 +15876,20 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=275"
 	},
 /area/altam/main_zones/premises)
+"jzV" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/obj/effect/landmark/start/assistant{
+	name = "Боец Аштара"
+	},
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1;
+	planetary_atmos = 1
+	},
+/area/altam/main_zones/caves)
 "jzY" = (
 /obj/effect/turf_decal/siding/blue{
 	dir = 9
@@ -15890,12 +15962,6 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
-"jCZ" = (
-/obj/effect/turf_decal/siding/wood,
-/turf/open/chasm/true{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220"
-	},
-/area/altam/main_zones/caves)
 "jDb" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
@@ -16677,7 +16743,6 @@
 	dir = 8
 	},
 /obj/machinery/light/directional/south,
-/obj/effect/landmark/start,
 /turf/open/floor/carpet/blue,
 /area/altam/embassy/main)
 "kbT" = (
@@ -17213,7 +17278,6 @@
 	},
 /obj/machinery/power/apc/auto_name/directional/east,
 /obj/structure/cable,
-/obj/effect/landmark/start,
 /turf/open/floor/carpet/blue,
 /area/altam/embassy/main)
 "ksz" = (
@@ -18186,16 +18250,6 @@
 	explosive_resistance = 1
 	},
 /area/altam/main_zones/caves)
-"kUj" = (
-/obj/item/wormhole_jaunter,
-/turf/open/misc/asteroid/snow/atmosphere{
-	initial_gas_mix = "o2=22;n2=82;TEMP=276";
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	slowdown = 0;
-	planetary_atmos = 1
-	},
-/area/altam/main_zones/main)
 "kUv" = (
 /obj/structure/chair/sofa/bench,
 /turf/open/indestructible/vault{
@@ -18747,8 +18801,10 @@
 	},
 /area/altam/main_zones/caves)
 "llh" = (
-/obj/effect/landmark/start/assistant,
-/turf/open/floor/iron/dark/smooth_large{
+/obj/effect/landmark/start/assistant{
+	name = "Резервист ТСФ (Пулемёт)"
+	},
+/turf/open/floor/iron/dark/diagonal{
 	explosive_resistance = 1
 	},
 /area/altam/embassy/main)
@@ -19191,7 +19247,6 @@
 /obj/structure/chair/wood{
 	dir = 4
 	},
-/obj/effect/landmark/start,
 /turf/open/floor/carpet/cyan{
 	explosive_resistance = 1
 	},
@@ -19837,11 +19892,15 @@
 	},
 /area/altam/main_zones/premises)
 "lRu" = (
-/obj/effect/landmark/start,
-/turf/open/floor/iron/dark{
+/obj/effect/landmark/start/assistant{
+	name = "Полевой медик Аштара"
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=270";
+	slowdown = 0;
 	explosive_resistance = 1
 	},
-/area/altam/main_zones/premises)
+/area/altam/main_zones/caves)
 "lRD" = (
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 6
@@ -19963,7 +20022,6 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 8
 	},
-/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -20239,7 +20297,6 @@
 /area/altam/main_zones/premises)
 "maP" = (
 /obj/effect/turf_decal/trimline/dark_blue,
-/obj/effect/landmark/start,
 /turf/open/floor/iron/dark{
 	explosive_resistance = 1
 	},
@@ -20500,6 +20557,20 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/premises)
+"miK" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 10
+	},
+/obj/effect/landmark/start/assistant{
+	name = "Боец Аштара"
+	},
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1;
+	planetary_atmos = 1
+	},
+/area/altam/main_zones/caves)
 "mjr" = (
 /obj/structure/flora/grass/brown/style_random,
 /obj/structure/sign/warning/secure_area/directional/east,
@@ -20729,6 +20800,17 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/iron/dark{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
+"mpj" = (
+/obj/structure/cable,
+/obj/effect/landmark/start/assistant{
+	name = "Повар посольства ТСФ"
+	},
+/turf/open/floor/iron/cafeteria{
+	max_integrity = 10000;
+	uses_integrity = 10000;
 	explosive_resistance = 1
 	},
 /area/altam/embassy/main)
@@ -21875,13 +21957,13 @@
 /turf/open/indestructible/plating,
 /area/altam/main_zones/main)
 "mVK" = (
-/obj/effect/turf_decal/siding/wideplating_new/dark{
-	dir = 4
+/obj/effect/landmark/start/assistant{
+	name = "Полевой инженер Аштара"
 	},
-/turf/open/chasm/true{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+/turf/open/floor/iron/dark/smooth_large{
+	explosive_resistance = 1
 	},
-/area/altam/main_zones/main)
+/area/altam/embassy/main)
 "mVU" = (
 /obj/structure/railing/platform{
 	dir = 1
@@ -22058,15 +22140,15 @@
 	},
 /area/altam/main_zones/premises)
 "nbY" = (
-/obj/structure/chair/wood,
-/obj/effect/landmark/start,
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=276";
-	max_integrity = 10000;
-	uses_integrity = 10000;
+/obj/effect/landmark/start/assistant{
+	name = "Боец Аштара"
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=270";
+	slowdown = 0;
 	explosive_resistance = 1
 	},
-/area/altam/main_zones/main)
+/area/altam/main_zones/caves)
 "ncm" = (
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
@@ -22409,18 +22491,6 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
-"nou" = (
-/obj/structure/chair/wood{
-	dir = 8
-	},
-/obj/effect/landmark/start,
-/turf/open/floor/wood/large{
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	explosive_resistance = 1;
-	planetary_atmos = 1
-	},
-/area/altam/main_zones/premises)
 "noz" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 1
@@ -22858,12 +22928,6 @@
 	slowdown = 0;
 	planetary_atmos = 1
 	},
-/area/altam/main_zones/main)
-"nzK" = (
-/obj/structure/railing{
-	dir = 4
-	},
-/turf/open/floor/plating/reinforced,
 /area/altam/main_zones/main)
 "nAL" = (
 /turf/open/floor/wood/freezing{
@@ -23382,17 +23446,20 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
-"nXu" = (
-/obj/effect/landmark/start,
-/turf/open/floor/carpet{
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	explosive_resistance = 1;
-	planetary_atmos = 1
-	},
-/area/altam/main_zones/premises)
 "nXH" = (
 /obj/structure/chair/sofa/bench/right,
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=276";
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/main)
+"nYe" = (
+/obj/structure/chair/wood,
+/obj/effect/landmark/start/assistant{
+	name = "Гражданский"
+	},
 /turf/open/misc/dirt/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=276";
 	max_integrity = 10000;
@@ -23461,15 +23528,6 @@
 	explosive_resistance = 1
 	},
 /area/altam/main_zones/premises)
-"oaJ" = (
-/obj/structure/flora/ash/stem_shroom,
-/obj/effect/landmark/start,
-/turf/open/misc/dirt/jungle/wasteland{
-	initial_gas_mix = "o2=22;n2=82;TEMP=270";
-	slowdown = 0;
-	explosive_resistance = 1
-	},
-/area/altam/main_zones/caves)
 "obD" = (
 /obj/structure/flora/rock/icy/style_random{
 	icon_state = "Basalt Sand"
@@ -24554,7 +24612,6 @@
 /obj/structure/chair/office/tactical{
 	dir = 4
 	},
-/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/diagonal{
 	explosive_resistance = 1
 	},
@@ -24820,6 +24877,17 @@
 	explosive_resistance = 1
 	},
 /area/altam/main_zones/premises)
+"oQJ" = (
+/obj/structure/flora/rock/pile/icy/style_random,
+/obj/effect/landmark/start/assistant{
+	name = "Гранатометчик Аштара"
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=270";
+	slowdown = 0;
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/caves)
 "oQM" = (
 /obj/effect/turf_decal/siding/wood,
 /obj/effect/turf_decal/weather/snow/corner{
@@ -25008,6 +25076,15 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
+"oYj" = (
+/obj/structure/chair/greyscale{
+	dir = 8
+	},
+/obj/effect/landmark/start/assistant{
+	name = "Оператор экзокостюма Дюранд ТСФ"
+	},
+/turf/open/floor/carpet/blue,
+/area/altam/embassy/main)
 "oYw" = (
 /obj/structure/fluff/tram_rail{
 	dir = 1
@@ -25721,6 +25798,14 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
+"ptd" = (
+/obj/effect/landmark/start/assistant{
+	name = "Полевой медик ТСФ"
+	},
+/turf/open/floor/iron/dark/diagonal{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "ptH" = (
 /obj/structure/table/reinforced,
 /obj/item/paper_bin{
@@ -25823,18 +25908,6 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=276";
 	explosive_resistance = 1;
 	planetary_atmos = 1
-	},
-/area/altam/main_zones/main)
-"pxe" = (
-/obj/structure/chair/wood{
-	dir = 8
-	},
-/obj/effect/landmark/start,
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=276";
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	explosive_resistance = 1
 	},
 /area/altam/main_zones/main)
 "pxv" = (
@@ -26208,6 +26281,19 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=275"
 	},
 /area/altam/main_zones/main)
+"pKz" = (
+/obj/effect/landmark/start/assistant{
+	name = "Боец Аштара"
+	},
+/obj/effect/landmark/start/assistant{
+	name = "Боец Аштара"
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=270";
+	slowdown = 0;
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/caves)
 "pKC" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 1
@@ -26803,6 +26889,18 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
+"qes" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/landmark/start/assistant{
+	name = "Боец Аштара"
+	},
+/turf/open/floor/wood/large{
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1;
+	planetary_atmos = 1
+	},
+/area/altam/main_zones/caves)
 "qeI" = (
 /obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/wood{
@@ -27367,6 +27465,20 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/premises)
+"qzg" = (
+/obj/structure/chair/wood{
+	dir = 8
+	},
+/obj/effect/landmark/start/assistant{
+	name = "Гражданский"
+	},
+/turf/open/misc/dirt/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=276";
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/main)
 "qzm" = (
 /obj/structure/stairs/material{
 	dir = 1;
@@ -27623,6 +27735,16 @@
 	explosive_resistance = 1
 	},
 /area/altam/embassy/main)
+"qIF" = (
+/obj/effect/landmark/start/assistant{
+	name = "Полевой старший инженер Аштара"
+	},
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=270";
+	slowdown = 0;
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/caves)
 "qIV" = (
 /obj/structure/flora/rock/icy/style_random{
 	max_integrity = 10000;
@@ -28028,7 +28150,6 @@
 /obj/structure/chair/office/tactical{
 	dir = 4
 	},
-/obj/effect/landmark/start,
 /turf/open/floor/iron/smooth_large,
 /area/altam/embassy/main)
 "qXA" = (
@@ -29074,6 +29195,15 @@
 	dir = 4
 	},
 /area/altam/main_zones/premises)
+"rDN" = (
+/obj/structure/cable,
+/obj/effect/landmark/start,
+/turf/open/floor/wood/tile{
+	max_integrity = 10000;
+	uses_integrity = 10000;
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "rEa" = (
 /obj/structure/barricade/sandbags,
 /obj/effect/turf_decal/weather/dirt,
@@ -29785,13 +29915,6 @@
 	icon_state = "wood_tile"
 	},
 /area/altam/main_zones/main)
-"sdb" = (
-/obj/structure/closet/body_bag/stasis,
-/obj/item/clothing/neck/stethoscope,
-/turf/open/misc/asteroid/snow/ice{
-	initial_gas_mix = "o2=22;n2=82;TEMP=220"
-	},
-/area/altam/main_zones/premises)
 "sdo" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -30038,7 +30161,9 @@
 	dir = 8
 	},
 /obj/structure/cable,
-/obj/effect/landmark/start,
+/obj/effect/landmark/start/assistant{
+	name = "Оператор экзокостюма Дюранд ТСФ"
+	},
 /turf/open/floor/carpet/blue,
 /area/altam/embassy/main)
 "sjz" = (
@@ -31114,15 +31239,14 @@
 	},
 /area/altam/main_zones/main)
 "sRJ" = (
-/obj/structure/chair/wood,
-/obj/effect/landmark/start,
-/turf/open/floor/carpet{
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	explosive_resistance = 1;
-	planetary_atmos = 1
+/obj/effect/turf_decal/bot,
+/obj/effect/landmark/start/assistant{
+	name = "Резервист ТСФ"
 	},
-/area/altam/main_zones/premises)
+/turf/open/floor/iron/dark/smooth_large{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "sRS" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/warning{
 	dir = 1
@@ -31139,15 +31263,6 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=220"
 	},
 /area/altam/main_zones/main)
-"sSz" = (
-/obj/structure/cable,
-/obj/effect/landmark/start,
-/turf/open/floor/wood/tile{
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	explosive_resistance = 1
-	},
-/area/altam/embassy/main)
 "sSA" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 8
@@ -31253,7 +31368,6 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/trimline/dark_blue,
-/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -31377,6 +31491,12 @@
 	explosive_resistance = 1;
 	planetary_atmos = 1
 	},
+/area/altam/main_zones/main)
+"sZN" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/plating/reinforced,
 /area/altam/main_zones/main)
 "tam" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -32815,6 +32935,12 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
+"tTZ" = (
+/obj/effect/turf_decal/siding/wood,
+/turf/open/chasm/true{
+	initial_gas_mix = "o2=22;n2=82;TEMP=220"
+	},
+/area/altam/main_zones/caves)
 "tUa" = (
 /obj/structure/table/wood/fancy/red,
 /obj/structure/desk_bell{
@@ -33635,7 +33761,9 @@
 "urz" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/sign/flag/terragov/directional/north,
-/obj/effect/landmark/start,
+/obj/effect/landmark/start/assistant{
+	name = "Резервист ТСФ (Пулемёт)"
+	},
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -34024,7 +34152,6 @@
 /obj/structure/chair/office/tactical{
 	dir = 8
 	},
-/obj/effect/landmark/start,
 /turf/open/floor/iron/smooth_large,
 /area/altam/embassy/main)
 "uIc" = (
@@ -34298,7 +34425,6 @@
 /obj/structure/chair/wood{
 	dir = 4
 	},
-/obj/effect/landmark/start,
 /turf/open/floor/wood/large{
 	max_integrity = 10000;
 	uses_integrity = 10000;
@@ -34736,7 +34862,6 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/trimline/dark_blue,
-/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/smooth_large{
 	explosive_resistance = 1
 	},
@@ -35341,6 +35466,14 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=275"
 	},
 /area/altam/main_zones/premises)
+"vuA" = (
+/obj/effect/landmark/start/assistant{
+	name = "Резервист ТСФ"
+	},
+/turf/open/floor/iron/dark/diagonal{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "vuJ" = (
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor7"
@@ -35601,7 +35734,6 @@
 /obj/structure/chair/office/tactical{
 	dir = 4
 	},
-/obj/effect/landmark/start,
 /turf/open/floor/iron/smooth_large,
 /area/altam/embassy/main)
 "vAz" = (
@@ -35775,15 +35907,6 @@
 	explosive_resistance = 1
 	},
 /area/altam/main_zones/caves)
-"vHM" = (
-/obj/structure/cable,
-/obj/effect/landmark/start,
-/turf/open/floor/iron/cafeteria{
-	max_integrity = 10000;
-	uses_integrity = 10000;
-	explosive_resistance = 1
-	},
-/area/altam/embassy/main)
 "vID" = (
 /obj/effect/turf_decal/siding/thinplating,
 /obj/effect/turf_decal/weather/snow,
@@ -36181,11 +36304,15 @@
 	},
 /area/altam/embassy/main)
 "vUz" = (
-/obj/structure/railing{
-	dir = 8
+/obj/effect/landmark/start/assistant{
+	name = "Полевой инженер Аштара"
 	},
-/turf/open/floor/plating/reinforced,
-/area/altam/main_zones/main)
+/turf/open/misc/dirt/jungle/wasteland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=270";
+	slowdown = 0;
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/caves)
 "vUG" = (
 /obj/effect/turf_decal/siding/wideplating_new{
 	dir = 10
@@ -38468,7 +38595,6 @@
 	},
 /obj/structure/cable,
 /obj/machinery/light/small/directional/west,
-/obj/effect/landmark/start,
 /turf/open/floor/iron/dark/diagonal{
 	explosive_resistance = 1
 	},
@@ -39206,6 +39332,12 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
+"xDQ" = (
+/obj/effect/landmark/start,
+/turf/open/floor/iron/dark{
+	explosive_resistance = 1
+	},
+/area/altam/main_zones/premises)
 "xEu" = (
 /obj/effect/bump_teleporter{
 	id = 10;
@@ -39704,13 +39836,6 @@
 	planetary_atmos = 1
 	},
 /area/altam/main_zones/main)
-"xVl" = (
-/obj/effect/turf_decal/trimline/yellow/line,
-/obj/effect/landmark/start,
-/turf/open/floor/iron/dark{
-	explosive_resistance = 1
-	},
-/area/altam/main_zones/premises)
 "xWd" = (
 /obj/machinery/deployable_turret/mounted_machine_gun/volna{
 	dir = 8
@@ -40257,6 +40382,14 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=275"
 	},
 /area/altam/main_zones/premises)
+"yiX" = (
+/obj/effect/landmark/start/assistant{
+	name = "Армейский офицер ТСФ"
+	},
+/turf/open/floor/iron/dark/diagonal{
+	explosive_resistance = 1
+	},
+/area/altam/embassy/main)
 "yjc" = (
 /obj/structure/railing/unbreakable{
 	dir = 10
@@ -51936,7 +52069,7 @@ jQV
 sFz
 kWt
 xbP
-nou
+iYw
 mkm
 mkm
 mkm
@@ -51948,7 +52081,7 @@ sFz
 xbP
 fDs
 mkm
-nou
+iYw
 aev
 wiB
 pvD
@@ -54322,7 +54455,7 @@ uHg
 uHg
 uZu
 bbq
-jCZ
+tTZ
 uHg
 jQV
 jQV
@@ -55623,9 +55756,9 @@ ePf
 pvD
 ydI
 dYb
-dxa
+npM
 cab
-xVl
+tLX
 pvm
 bIR
 mTc
@@ -55893,7 +56026,7 @@ rWU
 iYy
 tLX
 wsb
-lRu
+xDQ
 bIR
 pvD
 wiB
@@ -56908,9 +57041,9 @@ ePf
 lkz
 ydI
 kXw
-dxa
+npM
 cab
-xVl
+tLX
 oaj
 bIR
 pvD
@@ -63876,7 +64009,7 @@ vdq
 nXc
 eQp
 uJn
-nXu
+vyr
 vyr
 vyr
 vyr
@@ -66711,8 +66844,8 @@ pvD
 pvD
 xbP
 mBg
-gYH
-gYH
+uJn
+uJn
 mBX
 sHx
 ixn
@@ -67983,7 +68116,7 @@ xbP
 okx
 uJn
 nMo
-sRJ
+mNk
 vXN
 aev
 pvD
@@ -68395,7 +68528,7 @@ jQV
 jQV
 wiB
 scH
-sdb
+gfD
 kSi
 wCK
 vXo
@@ -69554,7 +69687,7 @@ pvD
 skI
 qGk
 uZt
-vay
+gip
 cbj
 ppe
 phT
@@ -71964,7 +72097,7 @@ pvD
 qZh
 eYU
 pvD
-owl
+dVg
 mTc
 oWE
 dcP
@@ -76410,7 +76543,7 @@ wiB
 nXc
 nCK
 kZT
-nbY
+nYe
 uyP
 bXN
 nCK
@@ -76668,7 +76801,7 @@ pvD
 nCK
 xyE
 aDg
-pxe
+qzg
 cip
 flZ
 qYR
@@ -77679,9 +77812,9 @@ jiq
 jiq
 jiq
 jiq
-mVK
-mVK
-mVK
+inj
+inj
+inj
 aoO
 aoO
 aoO
@@ -77936,9 +78069,9 @@ krz
 krz
 tYE
 krz
-vUz
-vUz
-vUz
+sZN
+sZN
+sZN
 krz
 vRx
 krz
@@ -78193,9 +78326,9 @@ aSS
 aSS
 aSS
 aSS
-nzK
-nzK
-nzK
+dxa
+dxa
+dxa
 xWw
 aSS
 aSS
@@ -78450,9 +78583,9 @@ tEj
 tEj
 tEj
 tEj
-eYD
-eYD
-eYD
+gYH
+gYH
+gYH
 bcP
 eTo
 msE
@@ -80627,7 +80760,7 @@ suW
 vNS
 tZc
 tZc
-vHM
+mpj
 tZc
 tZc
 fpR
@@ -80844,7 +80977,7 @@ lhI
 wZw
 sVs
 rka
-aOC
+ekB
 pIP
 phT
 pvD
@@ -85470,7 +85603,7 @@ skI
 uSt
 odj
 hsT
-bQN
+oYj
 sii
 kaO
 xwd
@@ -86753,9 +86886,9 @@ pvD
 pvD
 pvD
 skI
-urz
+aeu
 oPo
-bzK
+sRJ
 oPo
 bzK
 oPo
@@ -87269,11 +87402,11 @@ pvD
 skI
 urz
 xzS
-bzK
+fho
 xzS
 bzK
 xzS
-bzK
+eYD
 mmD
 rka
 qhI
@@ -89601,7 +89734,7 @@ vSP
 vSP
 vNS
 jjv
-llh
+mVK
 mCB
 giD
 vNS
@@ -99454,10 +99587,10 @@ wXB
 iUh
 gLL
 oUo
+lRu
 oUo
-oUo
-oUo
-oUo
+nbY
+nbY
 oUo
 uHg
 uHg
@@ -99704,17 +99837,17 @@ jQV
 jQV
 jQV
 uHg
-oaJ
+wVA
+qIF
+vUz
 oUo
+eug
+eug
 oUo
+lRu
 oUo
-oUo
-oUo
-oUo
-oUo
-oUo
-oUo
-oUo
+nbY
+nbY
 wVA
 lMK
 uHg
@@ -99962,16 +100095,16 @@ jQV
 uHg
 uHg
 oUo
+vUz
+vUz
 oUo
+aEF
+oQJ
 oUo
+lRu
 oUo
-oUo
-qSz
-oUo
-oUo
-oUo
-oUo
-oUo
+nbY
+nbY
 gem
 jSl
 otf
@@ -100227,11 +100360,11 @@ oUo
 oUo
 oUo
 qSz
-oUo
-oUo
+nbY
+nbY
 pyE
 aYP
-jIg
+qes
 eCK
 qSz
 oUo
@@ -100484,11 +100617,11 @@ gSz
 oUo
 oUo
 oUo
-oUo
-oUo
+nbY
+nbY
 kgY
 iUh
-fyh
+jzV
 eCK
 oUo
 oUo
@@ -101512,8 +101645,8 @@ dJH
 dJH
 dJH
 xhl
-oUo
-oUo
+nbY
+nbY
 oUo
 eAU
 eCK
@@ -101769,11 +101902,11 @@ dJH
 dJH
 dJH
 xhl
-oUo
-oUo
+nbY
+nbY
 gem
 jSl
-otf
+miK
 eCK
 oUo
 wVA
@@ -102026,11 +102159,11 @@ dJH
 azh
 jSl
 jSl
-oUo
-oUo
+nbY
+nbY
 pyE
 aYP
-jIg
+qes
 eCK
 uHg
 uHg
@@ -102283,8 +102416,8 @@ dJH
 rvu
 iUh
 iUh
-oUo
-oUo
+pKz
+nbY
 kgY
 iUh
 fyh
@@ -102540,8 +102673,8 @@ dJH
 dJH
 dJH
 xhl
-oUo
-oUo
+nbY
+nbY
 oUo
 oUo
 uHg
@@ -102797,8 +102930,8 @@ dJH
 dJH
 dJH
 fvj
-oUo
-oUo
+nbY
+nbY
 qSz
 lMK
 uHg
@@ -103054,8 +103187,8 @@ dJH
 dJH
 xhl
 sGG
-oUo
-oUo
+nbY
+nbY
 uHg
 uHg
 uHg
@@ -103311,8 +103444,8 @@ dJH
 dJH
 xhl
 tzu
-oUo
-oUo
+nbY
+nbY
 uHg
 jQV
 jQV
@@ -141784,11 +141917,11 @@ fRH
 fRH
 fRH
 peH
+llh
 rka
-inj
 jiC
-inj
 rka
+ptd
 pGb
 vNS
 vOU
@@ -142041,11 +142174,11 @@ fRH
 fRH
 fRH
 peH
-inj
+vuA
 fZB
 bZV
 fZB
-inj
+rka
 axp
 vNS
 xcz
@@ -142302,7 +142435,7 @@ azW
 ixm
 bZV
 fHm
-rka
+yiX
 axp
 vNS
 vOU
@@ -142556,9 +142689,9 @@ fRH
 fRH
 peH
 rka
-inj
 rka
-inj
+rka
+rka
 rka
 rka
 jIi
@@ -142813,9 +142946,9 @@ fRH
 fRH
 peH
 jvB
-dNT
+dUJ
 jvB
-dNT
+dUJ
 jvB
 dUJ
 aXI
@@ -143073,7 +143206,7 @@ azW
 fZB
 bZV
 fZB
-rka
+yiX
 cvD
 vNS
 vOU
@@ -143326,11 +143459,11 @@ fRH
 fRH
 fRH
 peH
-inj
+vuA
 ixm
 bZV
 ixm
-inj
+rka
 cvD
 vNS
 vOU
@@ -143583,11 +143716,11 @@ fRH
 fRH
 fRH
 peH
+llh
 rka
-inj
 jiC
-inj
 rka
+ptd
 pGb
 vNS
 xcz
@@ -151049,7 +151182,7 @@ xth
 vOU
 vNS
 arf
-sSz
+rDN
 fKK
 fKK
 hoL
@@ -159235,7 +159368,7 @@ uDW
 lcL
 lcL
 lcL
-gYH
+uJn
 ifb
 pvD
 mUg
@@ -162316,9 +162449,9 @@ pvD
 pvD
 jHV
 mBg
-gYH
+uJn
 okx
-gYH
+uJn
 weY
 jHV
 wiB
@@ -162839,7 +162972,7 @@ pvD
 qvc
 pvD
 ifb
-fho
+lcL
 lcL
 ifb
 pvD
@@ -167417,7 +167550,7 @@ fRH
 jQV
 jQV
 sFz
-kUj
+aKn
 jwV
 eJS
 mTc
