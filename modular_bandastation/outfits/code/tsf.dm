@@ -778,9 +778,9 @@
 		/obj/item/storage/medkit/toxin,
 		/obj/item/storage/medkit/tactical,
 		/obj/item/defibrillator/compact/loaded,
-		/obj/item/grenade/frag = 2,
-		/obj/item/grenade/c4 = 2,
-		/obj/item/grenade/smokebomb = 2,
+		/obj/item/grenade/frag,
+		/obj/item/grenade/c4,
+		/obj/item/grenade/smokebomb,
 		/obj/item/ammo_box/magazine/c223 = 2,
 		/obj/item/clothing/head/beret/tsf_infiltrator,
 	)
