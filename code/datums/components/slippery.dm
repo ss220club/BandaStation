@@ -22,11 +22,11 @@
 	/// How long the slip keeps the crossing mob knocked over (they can still crawl and use weapons) for.
 	var/knockdown_time = 0
 	/// How long the slip paralyzes (prevents the crossing mob doing anything) for.
-	var/paralyze_time = 0
+	var/paralyze_time = 0.25 SECONDS //ss220 add slip paralyzes
 
 	/// BANDASTATION ADDITION START - Immobilizing slippery
 	/// How long the slip immobilizes mob (prevents voluntary movement of the crossing mob)
-	var/immobilize_time = 2 SECONDS
+	var/immobilize_time = 0 SECONDS
 	/// BANDASTATION ADDITION END - Immobilizing slippery
 
 	/// How long the slip dazes (makes the crossing mob vulnerable to shove stuns) for.
@@ -76,7 +76,8 @@
 	force_drop = FALSE,
 	slot_whitelist,
 	datum/callback/can_slip_callback,
-	immobilize = 2 SECONDS, /// BANDASTATION ADDITION - Immobilizing slippery
+	immobilize = 0 SECONDS, /// BANDASTATION ADDITION - Immobilizing slippery
+	paralyze = 0.25 SECONDS, /// BANDASTATION ADDITION - Paralyzes slippery
 )
 	src.knockdown_time = max(knockdown, 0)
 	src.paralyze_time = max(paralyze, 0)
