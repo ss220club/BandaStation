@@ -87,7 +87,6 @@
 #include "movespeed_limit/_movespeed_limit.dme"
 #include "tesla_rework/_teslarework.dme"
 #include "job_restrictions/_job_restrictions.dme"
-#include "event/_event.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //
