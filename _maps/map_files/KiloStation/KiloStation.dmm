@@ -15505,6 +15505,11 @@
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted{
 	dir = 4
 	},
+/obj/machinery/camera/directional/north{
+	c_tag = "Operating Theatre Secondary";
+	name = "medical camera";
+	network = list("ss13","medical")
+	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/medical/virology)
 "fjw" = (
@@ -63946,11 +63951,11 @@
 	pixel_y = 2
 	},
 /obj/machinery/airalarm/directional/east,
-/obj/structure/noticeboard/directional/south,
 /obj/machinery/light/directional/east,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
+/obj/item/radio/intercom/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/medical/virology)
 "uYM" = (
@@ -72675,18 +72680,13 @@
 /turf/open/floor/circuit/telecomms,
 /area/station/science/xenobiology)
 "xIQ" = (
-/obj/machinery/camera/directional/south{
-	c_tag = "Operating Theatre Secondary";
-	name = "medical camera";
-	network = list("ss13","medical")
-	},
-/obj/item/radio/intercom/directional/south,
 /obj/machinery/computer/operating{
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 4
 	},
+/obj/machinery/vitals_reader/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/medical/virology)
 "xIS" = (
