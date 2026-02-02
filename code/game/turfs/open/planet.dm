@@ -5,7 +5,7 @@
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "dirt"
 	base_icon_state = "dirt"
-	baseturfs = /turf/open/chasm/jungle
+	baseturfs = /turf/open/misc/dirt
 	initial_gas_mix = OPENTURF_LOW_PRESSURE
 	planetary_atmos = TRUE
 	footstep = FOOTSTEP_SAND
