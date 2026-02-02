@@ -271,16 +271,17 @@
 	mood = 0
 	shown_mood = 0
 
-	for(var/category in mood_events)
-		var/datum/mood_event/the_event = mood_events[category]
-		var/event_mood = the_event.mood_change
-		event_mood *= max((event_mood > 0) ? positive_mood_modifier : negative_mood_modifier, 0)
-		mood += event_mood
-		if (!the_event.hidden)
-			shown_mood += event_mood
+	if (!HAS_TRAIT(mob_parent, TRAIT_APATHETIC))
+		for(var/category in mood_events)
+			var/datum/mood_event/the_event = mood_events[category]
+			var/event_mood = the_event.mood_change
+			event_mood *= max((event_mood > 0) ? positive_mood_modifier : negative_mood_modifier, 0)
+			mood += event_mood
+			if (!the_event.hidden)
+				shown_mood += event_mood
 
-	mood *= max(mood_modifier, 0)
-	shown_mood *= max(mood_modifier, 0)
+		mood *= max(mood_modifier, 0)
+		shown_mood *= max(mood_modifier, 0)
 
 	switch(mood)
 		if (-INFINITY to MOOD_SAD4)
@@ -423,41 +424,44 @@
 			if(81 to INFINITY)
 				msg += "[span_boldwarning("Ик... где... где я? Кто... я?")]<br>"
 
-	msg += span_notice("Мой текущий рассудок: ") //Long term
-	switch(sanity)
-		if(SANITY_GREAT to INFINITY)
-			msg += "[span_boldnicegreen("Мой разум словно храм!")]<br>"
-		if(SANITY_NEUTRAL to SANITY_GREAT)
-			msg += "[span_nicegreen("Я чувствую себя прекрасно!")]<br>"
-		if(SANITY_DISTURBED to SANITY_NEUTRAL)
-			msg += "[span_nicegreen("Я чувствую себя вполне прилично.")]<br>"
-		if(SANITY_UNSTABLE to SANITY_DISTURBED)
-			msg += "[span_warning("Я чувствую себя немного не в своей тарелке...")]<br>"
-		if(SANITY_CRAZY to SANITY_UNSTABLE)
-			msg += "[span_warning("Я схожу с ума!!")]<br>"
-		if(SANITY_INSANE to SANITY_CRAZY)
-			msg += "[span_boldwarning("АХАХАХАХАХАХАХАХАХАХ!!")]<br>"
+	if (HAS_TRAIT(mob_parent, TRAIT_APATHETIC))
+		msg += span_notice("Моё настроение: [span_grey("Я ничего не чувствую.")]<br>")
+	else
+		msg += span_notice("Мой текущий рассудок: ") //Long term
+		switch(sanity)
+			if(SANITY_GREAT to INFINITY)
+				msg += "[span_boldnicegreen("Мой разум словно храм!")]<br>"
+			if(SANITY_NEUTRAL to SANITY_GREAT)
+				msg += "[span_nicegreen("Я чувствую себя прекрасно!")]<br>"
+			if(SANITY_DISTURBED to SANITY_NEUTRAL)
+				msg += "[span_nicegreen("Я чувствую себя вполне прилично.")]<br>"
+			if(SANITY_UNSTABLE to SANITY_DISTURBED)
+				msg += "[span_warning("Я чувствую себя немного не в своей тарелке...")]<br>"
+			if(SANITY_CRAZY to SANITY_UNSTABLE)
+				msg += "[span_warning("Я схожу с ума!!")]<br>"
+			if(SANITY_INSANE to SANITY_CRAZY)
+				msg += "[span_boldwarning("АХАХАХАХАХАХАХАХАХАХ!!")]<br>"
 
-	msg += span_notice("Мое текущее настроение: ") //Short term
-	switch(mood_level)
-		if(MOOD_LEVEL_SAD4)
-			msg += "[span_boldwarning("Я хочу умереть!")]<br>"
-		if(MOOD_LEVEL_SAD3)
-			msg += "[span_boldwarning("Я чувствую себя ужасно...")]<br>"
-		if(MOOD_LEVEL_SAD2)
-			msg += "[span_boldwarning("Я чувствую себя расстроенно.")]<br>"
-		if(MOOD_LEVEL_SAD1)
-			msg += "[span_warning("Я немного грущу.")]<br>"
-		if(MOOD_LEVEL_NEUTRAL)
-			msg += "[span_grey("Я в порядке.")]<br>"
-		if(MOOD_LEVEL_HAPPY1)
-			msg += "[span_nicegreen("Я чувствую себя вполне нормально.")]<br>"
-		if(MOOD_LEVEL_HAPPY2)
-			msg += "[span_boldnicegreen("Я чувствую себя довольно хорошо.")]<br>"
-		if(MOOD_LEVEL_HAPPY3)
-			msg += "[span_boldnicegreen("Я чувствую себя потрясающе!")]<br>"
-		if(MOOD_LEVEL_HAPPY4)
-			msg += "[span_boldnicegreen("Я обожаю жизнь!")]<br>"
+		msg += span_notice("Моё текущее настроение: ") //Short term
+		switch(mood_level)
+			if(MOOD_LEVEL_SAD4)
+				msg += "[span_boldwarning("Лучше бы я подох!")]<br>"
+			if(MOOD_LEVEL_SAD3)
+				msg += "[span_boldwarning("Я чувствую себя ужасно...")]<br>"
+			if(MOOD_LEVEL_SAD2)
+				msg += "[span_boldwarning("Я чувствую себя расстроенно.")]<br>"
+			if(MOOD_LEVEL_SAD1)
+				msg += "[span_warning("Я немного грущу.")]<br>"
+			if(MOOD_LEVEL_NEUTRAL)
+				msg += "[span_grey("Я в порядке.")]<br>"
+			if(MOOD_LEVEL_HAPPY1)
+				msg += "[span_nicegreen("Я чувствую себя вполне нормально.")]<br>"
+			if(MOOD_LEVEL_HAPPY2)
+				msg += "[span_boldnicegreen("Я чувствую себя довольно хорошо.")]<br>"
+			if(MOOD_LEVEL_HAPPY3)
+				msg += "[span_boldnicegreen("Я чувствую себя потрясающе!")]<br>"
+			if(MOOD_LEVEL_HAPPY4)
+				msg += "[span_boldnicegreen("Я обожаю жизнь!")]<br>"
 
 	var/list/additional_lines = list()
 	SEND_SIGNAL(user, COMSIG_CARBON_MOOD_CHECK, additional_lines)
@@ -574,6 +578,9 @@
 	if (amount > maximum)
 		amount = min(amount, maximum)
 
+	if (HAS_TRAIT(mob_parent, TRAIT_APATHETIC))
+		amount = SANITY_NEUTRAL
+
 	if(amount == sanity) //Prevents stuff from flicking around.
 		return
 
@@ -618,6 +625,10 @@
 		mob_parent.remove_status_effect(/datum/status_effect/hallucination/sanity)
 
 	update_mood_icon()
+
+/// Sets sanity to a specific amount, useful for callbacks
+/datum/mood/proc/reset_sanity(amount)
+	set_sanity(amount, override = TRUE)
 
 /// Adjusts sanity by a value
 /datum/mood/proc/adjust_sanity(amount, minimum = SANITY_INSANE, maximum = SANITY_GREAT, override = FALSE)

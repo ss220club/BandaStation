@@ -70,10 +70,10 @@
 		organ.owner,
 		span_notice("Вы облажались, повредив мозговую ткань!"),
 		span_notice("[surgeon] облажался, что привело к повреждению мозга!"),
-		span_notice("[surgeon] заканчивает операцию на мозге [organ.owner]."),
+		span_notice("[surgeon] заканчивает операцию на мозге [organ.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(organ.owner, "Your head throbs with horrible pain!")
-	organ.owner.adjust_organ_loss(ORGAN_SLOT_BRAIN, 40)
+	organ.apply_organ_damage(40)
 
 /datum/surgery_operation/organ/brainwash/mechanic
 	name = "Перепрограммирование"
@@ -122,7 +122,7 @@
 	display_results(
 		surgeon,
 		organ.owner,
-		span_notice("Вы начинаете промывание мозгов у [organ.owner]..."),
+		span_notice("Вы начинаете промывание мозгов у [organ.owner.declent_ru(GENITIVE)]..."),
 		span_notice("[surgeon] начинает лечить мозг [organ.owner.declent_ru(GENITIVE)]."),
 		span_notice("[surgeon] приступает к выполнению операции на мозге [organ.owner.declent_ru(GENITIVE)]."),
 	)

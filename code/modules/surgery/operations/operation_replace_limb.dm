@@ -50,13 +50,20 @@
 		return FALSE
 	return TRUE
 
+/datum/surgery_operation/limb/replace_limb/pre_preop(atom/movable/operating_on, mob/living/surgeon, obj/item/bodypart/tool, list/operation_args)
+	if(!length(tool.contents))
+		return TRUE
+	// Prevents quickly filling someone with high-tier organs by augmenting them with a pre-stuffed limb
+	to_chat(surgeon, span_warning("[tool] needs to be empty in order to be attached!"))
+	return FALSE
+
 /datum/surgery_operation/limb/replace_limb/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/bodypart/tool, list/operation_args)
 	// purposefully doesn't use plaintext zone for more context on what is being replaced with what
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы начинаете аугментировать [limb.name] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]..."),
-		span_notice("[surgeon] начинает аугментировать [limb.name] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool]."),
+		span_notice("Вы начинаете аугментировать [limb.name] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]..."),
+		span_notice("[surgeon] начинает аугментировать [limb.name] у [limb.owner.declent_ru(GENITIVE)] с помощью [tool.declent_ru(ACCUSATIVE)]."),
 		span_notice("[surgeon] начинает аугментировать [limb.name] у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Вы чувствуете ужасную боль в своей [limb.ru_plaintext_zone[PREPOSITIONAL]]!")
@@ -70,9 +77,9 @@
 		display_results(
 			surgeon,
 			patient,
-			span_warning("У вас никак не получается подобрать [tool] к телу [patient]!"),
-			span_warning("[surgeon] никак не может подобрать [tool] к телу [patient]!"),
-			span_warning("[surgeon] никак не может подобрать [tool] к телу [patient]!"),
+			span_warning("У вас никак не получается подобрать [tool.declent_ru(ACCUSATIVE)] к телу [patient]!"),
+			span_warning("[surgeon] никак не может подобрать [tool.declent_ru(ACCUSATIVE)] к телу [patient]!"),
+			span_warning("[surgeon] никак не может подобрать [tool.declent_ru(ACCUSATIVE)] к телу [patient]!"),
 		)
 		tool.forceMove(patient.drop_location())
 		return // could possibly happen
@@ -83,9 +90,9 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("Вы успешно аугментируете [limb.ru_plaintext_zone[PREPOSITIONAL]] [patient] с помощью [tool]!"),
-		span_notice("[surgeon] успешно аугментирует [limb.ru_plaintext_zone[PREPOSITIONAL]] [patient] с помощью [tool]!"),
+		span_notice("Вы успешно аугментируете [limb.ru_plaintext_zone[PREPOSITIONAL]] [patient] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
+		span_notice("[surgeon] успешно аугментирует [limb.ru_plaintext_zone[PREPOSITIONAL]] [patient] с помощью [tool.declent_ru(ACCUSATIVE)]!"),
 		span_notice("[surgeon] завершает аугментацию [limb.ru_plaintext_zone[PREPOSITIONAL]] [patient]."),
 	)
 	display_pain(patient, "Ваша [limb.ru_plaintext_zone[PREPOSITIONAL]] наполняется непривычными синтетическими ощущениями!", TRUE)
-	log_combat(surgeon, patient, "augmented", addition = "выдал новую [tool]")
+	log_combat(surgeon, patient, "augmented", addition = "выдал новую [tool.declent_ru(ACCUSATIVE)]")

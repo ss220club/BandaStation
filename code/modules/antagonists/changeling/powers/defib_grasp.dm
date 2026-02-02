@@ -4,6 +4,8 @@
 		мы оторвем им руки и мгновенно завершим наш стазис."
 	helptext = "Эта способность пассивна и срабатывает, когда к нашей груди прикладывают лопатки дефибриллятора \
 		пока мы мертвы или находимся в стазисе. Также на мгновение оглушает киборгов."
+	button_icon_state = "defibrillator_grasp"
+	category = "utility"
 	owner_has_control = FALSE
 	dna_cost = 0
 	disabled_by_fire = FALSE

@@ -61,8 +61,8 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("Вы готовитесь дать мозгу [patient] искру жизни с помощью [tool]."),
-		span_notice("[surgeon] готовится дать мозгу [patient] искру жизни с помощью [tool]."),
+		span_notice("Вы готовитесь дать мозгу [patient] искру жизни с помощью [tool.declent_ru(ACCUSATIVE)]."),
+		span_notice("[surgeon] готовится дать мозгу [patient] искру жизни с помощью [tool.declent_ru(ACCUSATIVE)]."),
 		span_notice("[surgeon] готовится дать мозгу [patient] искру жизни."),
 	)
 	patient.notify_revival("Кто‑то пытается дать разряд вашему мозгу.", source = patient)
@@ -71,8 +71,8 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("Вам удаётся успешно ударить мозг [patient] разрядом с помощью [tool]..."),
-		span_notice("[surgeon] посылает мощный разряд в мозг [patient] с помощью [tool]..."),
+		span_notice("Вам удаётся успешно ударить мозг [patient] разрядом с помощью [tool.declent_ru(ACCUSATIVE)]..."),
+		span_notice("[surgeon] посылает мощный разряд в мозг [patient] с помощью [tool.declent_ru(ACCUSATIVE)]..."),
 		span_notice("[surgeon] посылает мощный разряд в мозг [patient]..."),
 	)
 	patient.grab_ghost()
@@ -103,9 +103,9 @@
 	display_results(
 		surgeon,
 		patient,
-		span_warning("Вы бьёте мозг [patient] разрядом с помощью [tool], но [patient.p_they()] никак не реагирует[patient.p_s()]."),
-		span_warning("[surgeon] бьёт мозг [patient] разрядом с помощью [tool], но [patient.p_they()] никак не реагирует[patient.p_s()]."),
-		span_warning("[surgeon] бьёт мозг [patient] разрядом с помощью [tool], но [patient.p_they()] никак не реагирует[patient.p_s()]."),
+		span_warning("Вы бьёте мозг [patient] разрядом с помощью [tool.declent_ru(ACCUSATIVE)], но [patient.p_they()] никак не реагирует[patient.p_s()]."),
+		span_warning("[surgeon] бьёт мозг [patient] разрядом с помощью [tool.declent_ru(ACCUSATIVE)], но [patient.p_they()] никак не реагирует[patient.p_s()]."),
+		span_warning("[surgeon] бьёт мозг [patient] разрядом с помощью [tool.declent_ru(ACCUSATIVE)], но [patient.p_they()] никак не реагирует[patient.p_s()]."),
 	)
 
 /datum/surgery_operation/basic/revival/mechanic
