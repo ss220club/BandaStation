@@ -875,7 +875,7 @@
 
 /obj/structure/table/reinforced/titaniumglass
 	name = "titanium glass table"
-	desc = "Стол из титана и укрепленного стекла, покрытый свежим слоем белой краски NT."
+	desc = "Стол из титана и укрепленного стекла, покрытый свежим слоем белой краски НТ."
 	icon = 'icons/obj/smooth_structures/titaniumglass_table.dmi'
 	icon_state = "titaniumglass_table-0"
 	base_icon_state = "titaniumglass_table"
