@@ -34,7 +34,7 @@
 /datum/element/climbable/proc/get_examine_tags(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list["climbable"] = "Похоже на то, на что можно взобраться."
+	examine_list["пригодный для залезания"] = "Похоже на то, на что можно взобраться."
 
 /datum/element/climbable/proc/can_climb(atom/source, mob/user)
 	if (!source.IsReachableBy(user))
@@ -55,15 +55,15 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		user.do_attack_animation(climbed_thing)
 		structure_climber.Paralyze(40)
-		structure_climber.visible_message(span_warning("[structure_climber] is knocked off [climbed_thing]."), span_warning("You're knocked off [climbed_thing]!"), span_hear("You hear a cry from [structure_climber], followed by a slam."))
+		structure_climber.visible_message(span_warning("[structure_climber.declent_ru(NOMINATIVE)] срывается с [climbed_thing.declent_ru(ACCUSATIVE)]."), span_warning("Вы срываетесь с [climbed_thing.declent_ru(ACCUSATIVE)]!"), span_hear("Вы слышите крик от [structure_climber.declent_ru(GENITIVE)], за которым следует удар."))
 
 
 /datum/element/climbable/proc/climb_structure(atom/climbed_thing, mob/living/user, params)
 	if(!can_climb(climbed_thing, user))
 		return
 	climbed_thing.add_fingerprint(user)
-	user.visible_message(span_warning("[user] starts climbing onto [climbed_thing]."), \
-								span_notice("You start climbing onto [climbed_thing]..."))
+	user.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] начинает подниматься на [climbed_thing.declent_ru(ACCUSATIVE)]."), \
+								span_notice("Вы начинаете подниматься на [climbed_thing.declent_ru(ACCUSATIVE)]..."))
 	// Time in deciseoncds it takes to complete the climb do_after()
 	var/adjusted_climb_time = climb_time
 	// Time in deciseonds that the mob is stunned after climbing successfully.
@@ -94,7 +94,7 @@
 		if(do_climb(climbed_thing, user, params))
 			user.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] взбирается на [climbed_thing.declent_ru(ACCUSATIVE)]."), \
 								span_notice("Вы взобрались на [climbed_thing.declent_ru(ACCUSATIVE)]."))
-			log_combat(user, climbed_thing, "взобрался на")
+			log_combat(user, climbed_thing, "climbed onto")
 			if(adjusted_climb_stun)
 				user.Stun(adjusted_climb_stun)
 			var/atom/movable/buckle_target = climbed_thing

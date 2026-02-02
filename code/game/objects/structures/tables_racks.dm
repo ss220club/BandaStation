@@ -1000,7 +1000,7 @@
 
 	if(air_tank)
 		if (held_item.tool_behaviour == TOOL_WRENCH)
-			context[SCREENTIP_CONTEXT_LMB] = "Отрепить баллон"
+			context[SCREENTIP_CONTEXT_LMB] = "Открепить баллон"
 			. |= CONTEXTUAL_SCREENTIP_SET
 	else if (istype(held_item, /obj/item/tank))
 		var/obj/item/tank/as_tank = held_item
