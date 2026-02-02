@@ -19,41 +19,41 @@
 	color_disk = "FFFFFF"
 
 /obj/item/concert_disk/soundhand_02
-	name = "Soundhand Anumati"
+	name = "Soundhand E-Guitar Blues"
 	album_id = "soundhand_02"
 	color_disk = "C0392B"
 
 /obj/item/concert_disk/soundhand_03
-	name = "Soundhand Anumati"
+	name = "Soundhand Mountain Wind"
 	album_id = "soundhand_03"
 	color_disk = "E67E22"
 
 /obj/item/concert_disk/soundhand_04
-	name = "Soundhand Anumati"
+	name = "Soundhand Thunderstep"
 	album_id = "soundhand_04"
 	color_disk = "F1C40F"
 
 /obj/item/concert_disk/soundhand_05
-	name = "Soundhand Anumati"
+	name = "Soundhand Dream of the Sky"
 	album_id = "soundhand_05"
 	color_disk = "2ECC71"
 
 /obj/item/concert_disk/soundhand_06
-	name = "Soundhand Anumati"
+	name = "Soundhand Midnight Carnival"
 	album_id = "soundhand_06"
 	color_disk = "1ABC9C"
 
 /obj/item/concert_disk/soundhand_07
-	name = "Soundhand Anumati"
+	name = "Soundhand Ignition"
 	album_id = "soundhand_07"
 	color_disk = "3498DB"
 
 /obj/item/concert_disk/soundhand_08
-	name = "Soundhand Anumati"
+	name = "Soundhand Desctruction"
 	album_id = "soundhand_08"
 	color_disk = "9B59B6"
 
 /obj/item/concert_disk/soundhand_09
-	name = "Soundhand Anumati"
+	name = "Soundhand Liberty"
 	album_id = "soundhand_09"
 	color_disk = "2C3E50"
