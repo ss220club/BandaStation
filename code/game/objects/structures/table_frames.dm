@@ -107,7 +107,7 @@
 
 /obj/structure/table_frame/wood
 	name = "wooden table frame"
-	desc = "Четыре деревянные ножки с четырьмя каркасными стержнями для стола. Вы легко сможете пройти через это."
+	desc = "Четыре деревянные ножки с четырьмя деревянными каркасными стержнями для деревянного стола. Вы легко сможете пройти через это."
 	icon_state = "wood_frame"
 	framestack = /obj/item/stack/sheet/mineral/wood
 	framestackamount = 2
