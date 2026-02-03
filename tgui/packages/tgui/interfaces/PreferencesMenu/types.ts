@@ -210,6 +210,13 @@ export type PreferencesMenuData = {
   applied_body_modifications: string[];
   manufacturers: Record<string, string[]>;
   selected_manufacturer: Record<string, string>;
+
+  // IPC Customization data (from middleware)
+  ipc_customization?: IPCCustomization;
+  is_ipc?: boolean;
+  chassis_brands?: IPCChassisBrand[];
+  brain_types?: IPCBrainType[];
+  hef_manufacturers?: IPCHEFManufacturer[];
   // BANDASTATION ADDITION END
 };
 
@@ -242,6 +249,35 @@ export type BodyModification = {
   cost: number;
   manufacturers?: Record<string, string>;
   selectedManufacturer?: string;
+};
+
+// IPC Customization Types
+export type IPCChassisBrand = {
+  key: string;
+  name: string;
+  description: string;
+};
+
+export type IPCBrainType = {
+  key: string;
+  name: string;
+  description: string;
+};
+
+export type IPCHEFManufacturer = {
+  key: string;
+  name: string;
+};
+
+export type IPCCustomization = {
+  chassis_brand: string;
+  brain_type: string;
+  hef_head: string;
+  hef_chest: string;
+  hef_l_arm: string;
+  hef_r_arm: string;
+  hef_l_leg: string;
+  hef_r_leg: string;
 };
 // BANDASTATION ADDITION END
 
