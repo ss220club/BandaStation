@@ -37,7 +37,7 @@
 /datum/track/soundhand/j4
 	song_path = 'sound/music/soundhand/tajaranmoment/04.ogg'
 	song_name = "04 Смысл"
-	song_length = 5 MINUTES
+	song_length = 6 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/j5
@@ -49,7 +49,7 @@
 /datum/track/soundhand/j6
 	song_path = 'sound/music/soundhand/tajaranmoment/06.ogg'
 	song_name = "06 Воспоминания"
-	song_length = 5 MINUTES
+	song_length = 6 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/j7
@@ -79,7 +79,7 @@
 /datum/track/soundhand/j11
 	song_path = 'sound/music/soundhand/tajaranmoment/11.ogg'
 	song_name = "11 Неидеальные"
-	song_length = 5 MINUTES
+	song_length = 7 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/j12

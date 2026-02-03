@@ -85,11 +85,11 @@
 /datum/track/soundhand/d12
 	song_path = 'sound/music/soundhand/thunderstep/12.ogg'
 	song_name = "12 Свобода корпората"
-	song_length = 7 MINUTES
+	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/d13
 	song_path = 'sound/music/soundhand/thunderstep/13.ogg'
 	song_name = "13 Пьяный угар"
-	song_length = 5 MINUTES
+	song_length = 6 MINUTES
 	song_beat_deciseconds = 1 SECONDS

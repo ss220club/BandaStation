@@ -37,13 +37,13 @@
 /datum/track/soundhand/f4
 	song_path = 'sound/music/soundhand/midnightcarnival/04.ogg'
 	song_name = "04 Имплант"
-	song_length = 6 MINUTES
+	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/f5
 	song_path = 'sound/music/soundhand/midnightcarnival/05.ogg'
 	song_name = "05 Старая кассета"
-	song_length = 6 MINUTES
+	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/f6

@@ -37,7 +37,7 @@
 /datum/track/soundhand/b4
 	song_path = 'sound/music/soundhand/guitarblues/04.ogg'
 	song_name = "04 Сброс напряжения"
-	song_length = 6 MINUTES
+	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/b5
