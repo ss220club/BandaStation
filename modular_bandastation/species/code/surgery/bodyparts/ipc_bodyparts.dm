@@ -1,21 +1,18 @@
-
 // ============================================
-// БАЗОВЫЕ ЧАСТИ ТЕЛА IPC С ФЛАГАМИ
+// БАЗОВЫЕ ЧАСТИ ТЕЛА IPC С ПРАВИЛЬНЫМИ ИКОНКАМИ
 // ============================================
-
-// Флаг для синтетических частей тела
-
 
 /obj/item/bodypart/chest/ipc
 	name = "IPC chassis"
 	desc = "Основной корпус IPC, содержащий все жизненно важные системы."
+	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_state = "ipc_chest_m"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
 	is_dimorphic = TRUE
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_IPC
 	max_damage = 120
-
 
 	var/chassis_type = "Unbranded"
 
@@ -46,6 +43,8 @@
 /obj/item/bodypart/head/ipc
 	name = "IPC head"
 	desc = "Голова IPC с оптическими и аудио сенсорами."
+	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_state = "ipc_head"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
 	head_flags = HEAD_LIPS|HEAD_DEBRAIN
@@ -53,7 +52,6 @@
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_IPC
 	max_damage = 80
-
 
 	var/screen_icon = "BSOD"
 	var/antenna_type = "None"
@@ -85,12 +83,13 @@
 /obj/item/bodypart/arm/left/ipc
 	name = "IPC left arm"
 	desc = "Левая рука IPC."
+	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_state = "ipc_l_arm"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_IPC
 	max_damage = 70
-
 
 	var/grip_strength = 1.0
 
@@ -101,12 +100,13 @@
 /obj/item/bodypart/arm/right/ipc
 	name = "IPC right arm"
 	desc = "Правая рука IPC."
+	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_state = "ipc_r_arm"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_IPC
 	max_damage = 70
-
 
 	var/grip_strength = 1.0
 
@@ -117,12 +117,13 @@
 /obj/item/bodypart/leg/left/ipc
 	name = "IPC left leg"
 	desc = "Левая нога IPC."
+	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_state = "ipc_l_leg"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_IPC
 	max_damage = 70
-
 
 // ============================================
 // ПРАВАЯ НОГА
@@ -131,6 +132,8 @@
 /obj/item/bodypart/leg/right/ipc
 	name = "IPC right leg"
 	desc = "Правая нога IPC."
+	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_state = "ipc_r_leg"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
 	biological_state = BIO_ROBOTIC
@@ -234,4 +237,3 @@
 	do_sparks(2, TRUE, H)
 	to_chat(H, span_notice("Системная диагностика: [name] подключена и функционирует нормально."))
 	return TRUE
-

@@ -1018,6 +1018,283 @@
 		)
 		imp.forceMove(limb.owner.drop_location())
 
+// ============================================
+// СБОРКА IPC - ОПЕРАЦИИ
+// ============================================
+
+// ОПЕРАЦИЯ 1: Установка части тела на шасси
+/datum/surgery_operation/limb/ipc_attach_bodypart
+	name = "Присоединить часть тела"
+	desc = "Присоедините часть тела к шасси IPC с помощью отвёртки."
+	required_bodytype = BODYTYPE_IPC
+	operation_flags = OPERATION_MECHANIC
+	time = 3 SECONDS
+	preop_sound = 'sound/items/tools/screwdriver.ogg'
+	success_sound = 'sound/items/deconstruct.ogg'
+
+/datum/surgery_operation/limb/ipc_attach_bodypart/New()
+	. = ..()
+	implements = list(
+		TOOL_SCREWDRIVER = 1,
+		/obj/item/screwdriver = 1
+	)
+
+/datum/surgery_operation/limb/ipc_attach_bodypart/snowflake_check_availability(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, operated_zone)
+	// Проверяем что пациент - это шасси в сборке (грудь на столе)
+	if(!limb?.owner)
+		return FALSE
+
+	if(!istype(limb.owner.dna?.species, /datum/species/ipc))
+		return FALSE
+
+	// Проверяем что это мёртвое шасси
+	if(limb.owner.stat != DEAD)
+		return FALSE
+
+	// Проверяем что это грудная клетка (основа для сборки)
+	if(limb.body_zone != BODY_ZONE_CHEST)
+		return FALSE
+
+	return TRUE
+
+/datum/surgery_operation/limb/ipc_attach_bodypart/get_radial_options(obj/item/bodypart/limb, obj/item/tool, operating_zone)
+	var/list/options = list()
+
+	// Показываем какие части можно присоединить
+	var/list/missing_parts = list()
+
+	if(!limb.owner.get_bodypart(BODY_ZONE_HEAD))
+		missing_parts["Присоединить голову"] = BODY_ZONE_HEAD
+	if(!limb.owner.get_bodypart(BODY_ZONE_L_ARM))
+		missing_parts["Присоединить левую руку"] = BODY_ZONE_L_ARM
+	if(!limb.owner.get_bodypart(BODY_ZONE_R_ARM))
+		missing_parts["Присоединить правую руку"] = BODY_ZONE_R_ARM
+	if(!limb.owner.get_bodypart(BODY_ZONE_L_LEG))
+		missing_parts["Присоединить левую ногу"] = BODY_ZONE_L_LEG
+	if(!limb.owner.get_bodypart(BODY_ZONE_R_LEG))
+		missing_parts["Присоединить правую ногу"] = BODY_ZONE_R_LEG
+
+	for(var/part_name in missing_parts)
+		var/datum/radial_menu_choice/option = new()
+		option.name = part_name
+		option.info = "Присоединить эту часть к шасси."
+		options[option] = list(OPERATION_ACTION = "attach", "target_zone" = missing_parts[part_name])
+
+	return options
+
+/datum/surgery_operation/limb/ipc_attach_bodypart/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+	display_results(
+		surgeon,
+		limb.owner,
+		span_notice("Вы начинаете присоединять часть тела к [limb.owner]..."),
+		span_notice("[surgeon] начинает присоединять часть тела к [limb.owner]."),
+		span_notice("[surgeon] начинает работать с [limb.owner].")
+	)
+
+/datum/surgery_operation/limb/ipc_attach_bodypart/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+	var/target_zone = operation_args["target_zone"]
+
+	// Просим хирурга выбрать часть из инвентаря
+	var/obj/item/bodypart/new_part = null
+	for(var/obj/item/bodypart/part in surgeon.get_all_contents())
+		if(part.body_zone == target_zone && (part.bodytype & BODYTYPE_IPC))
+			new_part = part
+			break
+
+	if(!new_part)
+		to_chat(surgeon, span_warning("У вас нет подходящей части тела!"))
+		return
+
+	surgeon.temporarilyRemoveItemFromInventory(new_part, TRUE)
+	new_part.replace_limb(limb.owner, TRUE)
+
+	display_results(
+		surgeon,
+		limb.owner,
+		span_notice("Вы присоединили [new_part.plaintext_zone] к [limb.owner]."),
+		span_notice("[surgeon] присоединил часть тела к [limb.owner]."),
+		span_notice("[surgeon] закончил работу с [limb.owner].")
+	)
+
+	playsound(limb.owner, 'sound/items/tools/screwdriver.ogg', 50, TRUE)
+	do_sparks(2, TRUE, limb.owner)
+
+	// Проверяем завершённость сборки
+	check_ipc_assembly_completion(limb.owner)
+
+// Проверка завершённости сборки
+/proc/check_ipc_assembly_completion(mob/living/carbon/human/H)
+	if(!istype(H.dna?.species, /datum/species/ipc))
+		return
+
+	if(H.stat != DEAD)
+		return
+
+	// Проверяем все части тела
+	var/has_all_parts = H.get_bodypart(BODY_ZONE_HEAD) && \
+						H.get_bodypart(BODY_ZONE_CHEST) && \
+						H.get_bodypart(BODY_ZONE_L_ARM) && \
+						H.get_bodypart(BODY_ZONE_R_ARM) && \
+						H.get_bodypart(BODY_ZONE_L_LEG) && \
+						H.get_bodypart(BODY_ZONE_R_LEG)
+
+	// Проверяем критичные органы
+	var/has_critical = H.get_organ_slot(ORGAN_SLOT_BRAIN) && \
+					   H.get_organ_slot(ORGAN_SLOT_HEART)
+
+	if(has_all_parts && has_critical)
+		H.visible_message(
+			span_boldnotice("[H] готов к активации!"),
+			span_notice("Все компоненты установлены.")
+		)
+		do_sparks(3, TRUE, H)
+		playsound(H, 'sound/machines/ping.ogg', 50, TRUE)
+
+		// Автоматически активируем IPC
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(activate_assembled_ipc), H), 2 SECONDS)
+
+// Активация собранного IPC
+/proc/activate_assembled_ipc(mob/living/carbon/human/H)
+	if(!H || H.stat != DEAD)
+		return
+
+	H.visible_message(span_boldnotice("[H] активируется!"))
+
+	do_sparks(8, TRUE, H)
+	playsound(H, 'sound/machines/chime.ogg', 50, TRUE)
+
+	// Оживляем
+	H.revive(HEAL_ALL)
+	H.set_resting(FALSE, silent = TRUE)
+
+	// Устанавливаем имя
+	H.name = "IPC-[rand(1000, 9999)]"
+	H.real_name = H.name
+
+	to_chat(H, span_boldnotice("СИСТЕМЫ ЗАГРУЖЕНЫ. Добро пожаловать в мир!"))
+
+// ============================================
+// ОПЕРАЦИЯ: СМЕНА ТИПА ШАССИ (МУЖСКОЙ/ЖЕНСКИЙ)
+// ============================================
+
+/datum/surgery_operation/limb/ipc_change_chassis_type
+	name = "Изменить тип корпуса"
+	desc = "Измените конфигурацию шасси IPC (мужской/женский корпус)."
+	required_bodytype = BODYTYPE_IPC
+	operation_flags = OPERATION_MECHANIC
+	time = 2 SECONDS
+	preop_sound = 'sound/items/tools/ratchet.ogg'
+	success_sound = 'sound/items/tools/ratchet.ogg'
+
+	implements = list(
+		TOOL_WRENCH = 1,
+		/obj/item/wrench = 1
+	)
+
+/datum/surgery_operation/limb/ipc_change_chassis_type/snowflake_check_availability(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, operated_zone)
+	// Проверяем что пациент - IPC
+	if(!limb?.owner?.dna?.species)
+		return FALSE
+
+	if(!istype(limb.owner.dna.species, /datum/species/ipc))
+		return FALSE
+
+	// Проверяем что это мёртвое шасси в сборке
+	if(limb.owner.stat != DEAD)
+		return FALSE
+
+	// Только для грудной клетки
+	if(limb.body_zone != BODY_ZONE_CHEST)
+		return FALSE
+
+	// Проверяем что нет других частей кроме груди (пустое шасси)
+	if(limb.owner.get_bodypart(BODY_ZONE_HEAD))
+		return FALSE
+	if(limb.owner.get_bodypart(BODY_ZONE_L_ARM))
+		return FALSE
+	if(limb.owner.get_bodypart(BODY_ZONE_R_ARM))
+		return FALSE
+	if(limb.owner.get_bodypart(BODY_ZONE_L_LEG))
+		return FALSE
+	if(limb.owner.get_bodypart(BODY_ZONE_R_LEG))
+		return FALSE
+
+	// Проверяем что нет органов
+	if(limb.owner.get_organ_slot(ORGAN_SLOT_BRAIN))
+		return FALSE
+	if(limb.owner.get_organ_slot(ORGAN_SLOT_HEART))
+		return FALSE
+
+	return TRUE
+
+/datum/surgery_operation/limb/ipc_change_chassis_type/get_radial_options(obj/item/bodypart/limb, obj/item/tool, operating_zone)
+	var/list/options = list()
+
+	// Мужской корпус
+	var/datum/radial_menu_choice/male = new()
+	male.image = image(icon = 'icons/mob/human/bodyparts_greyscale.dmi', icon_state = "human_chest_m")
+	male.name = "Мужской корпус"
+	male.info = "Установить мужскую конфигурацию шасси."
+	options[male] = list(OPERATION_ACTION = "change_gender", "new_gender" = MALE)
+
+	// Женский корпус
+	var/datum/radial_menu_choice/female = new()
+	female.image = image(icon = 'icons/mob/human/bodyparts_greyscale.dmi', icon_state = "human_chest_f")
+	female.name = "Женский корпус"
+	female.info = "Установить женскую конфигурацию шасси."
+	options[female] = list(OPERATION_ACTION = "change_gender", "new_gender" = FEMALE)
+
+	return options
+
+/datum/surgery_operation/limb/ipc_change_chassis_type/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+	var/new_gender = operation_args["new_gender"]
+	var/gender_name = (new_gender == MALE) ? "мужской" : "женский"
+
+	display_results(
+		surgeon,
+		limb.owner,
+		span_notice("Вы начинаете настраивать шасси на [gender_name] корпус..."),
+		span_notice("[surgeon] начинает настраивать конфигурацию шасси [limb.owner]."),
+		span_notice("[surgeon] начинает работать с [limb.owner].")
+	)
+
+/datum/surgery_operation/limb/ipc_change_chassis_type/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+	var/new_gender = operation_args["new_gender"]
+	var/gender_name = (new_gender == MALE) ? "мужской" : "женский"
+
+	// Проверяем что шасси всё ещё пустое
+	if(limb.owner.get_bodypart(BODY_ZONE_HEAD) || limb.owner.get_bodypart(BODY_ZONE_L_ARM))
+		to_chat(surgeon, span_warning("Нельзя менять тип корпуса после начала сборки!"))
+		return
+
+	// Меняем пол
+	limb.owner.gender = new_gender
+
+	// Меняем спрайт грудной клетки
+	var/obj/item/bodypart/chest/ipc/torso = limb
+	if(torso)
+		if(new_gender == MALE)
+			torso.icon_state = "ipc_chest_m"
+		else
+			torso.icon_state = "ipc_chest_f"
+
+		// Обновляем внешность
+		torso.update_appearance()
+		limb.owner.update_body()
+		limb.owner.update_body_parts()
+
+	display_results(
+		surgeon,
+		limb.owner,
+		span_notice("Вы настроили шасси на [gender_name] корпус."),
+		span_notice("[surgeon] настроил конфигурацию шасси [limb.owner]."),
+		span_notice("[surgeon] закончил работу с [limb.owner].")
+	)
+
+	playsound(limb.owner, 'sound/items/tools/ratchet.ogg', 50, TRUE)
+	do_sparks(2, TRUE, limb.owner)
+
+#undef IPC_SELECTED_ORGAN
 #undef IPC_PANEL_CLOSED
 #undef IPC_PANEL_OPEN
 #undef IPC_ELECTRONICS_PREPARED

@@ -24,6 +24,7 @@ import {
   FeatureValueInput,
 } from '../preferences/features/base';
 import { GENDERS, Gender } from '../preferences/gender';
+import { IPCCustomizationPage } from '../preferences/IPCCustomization';
 import {
   createSetPreference,
   type PreferencesMenuData,
@@ -44,6 +45,7 @@ type CharacterControlsProps = {
   showGender: boolean;
   canDeleteCharacter: boolean;
   handleDeleteCharacter: () => void;
+  isIPC?: boolean;
 };
 
 function CharacterControls(props: CharacterControlsProps) {
@@ -66,7 +68,7 @@ function CharacterControls(props: CharacterControlsProps) {
       )}
       <Button
         icon="robot"
-        tooltip="Модификации тела"
+        tooltip={props.isIPC ? 'IPC Customization' : 'Модификации тела'}
         tooltipPosition="top"
         onClick={() => props.handleOpenAugmentations()}
       />
@@ -370,8 +372,10 @@ export function MainPage(props: MainPageProps) {
     useState(false);
   const [randomToggleEnabled] = useRandomToggleState();
   const [augmentationInputOpen, setAugmentationInputOpen] = useState(false);
+  const [ipcCustomizationOpen, setIpcCustomizationOpen] = useState(false);
 
   const serverData = useServerPrefs();
+  const isIPC = data.character_preferences.misc.species === 'IPC';
 
   const currentSpeciesData =
     serverData?.species[data.character_preferences.misc.species];
@@ -418,7 +422,13 @@ export function MainPage(props: MainPageProps) {
           <CharacterControls
             gender={data.character_preferences.misc.gender}
             handleOpenSpecies={props.openSpecies}
-            handleOpenAugmentations={() => setAugmentationInputOpen(true)} // BANDASTATION ADDITION - Feat: Augmentations
+            handleOpenAugmentations={() =>
+              // BANDASTATION ADDITION - Feat: Augmentations
+              isIPC
+                ? setIpcCustomizationOpen(true)
+                : setAugmentationInputOpen(true)
+            }
+            isIPC={isIPC}
             handleRotate={() => {
               act('rotate');
             }}
@@ -483,7 +493,11 @@ export function MainPage(props: MainPageProps) {
           handleClose={() => setAugmentationInputOpen(false)}
         />
       )}
-
+      {ipcCustomizationOpen && (
+        <IPCCustomizationPage
+          handleClose={() => setIpcCustomizationOpen(false)}
+        />
+      )}
       {deleteCharacterPopupOpen && (
         <DeleteCharacterPopup
           close={() => setDeleteCharacterPopupOpen(false)}

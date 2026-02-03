@@ -788,3 +788,90 @@ $department_map: (
     margin: 0;
   }
 }
+
+/* ============================================
+   УЛУЧШЕНИЕ IPC КАТЕГОРИЙ В BODY MODIFICATIONS
+   ============================================
+   Добавьте этот CSS в конец файла:
+   tgui/packages/tgui/styles/interfaces/PreferencesMenu.scss
+   ============================================ */
+
+/* IPC Chassis категория - специальное оформление */
+.BodyModificationsPage {
+  /* Категория IPC Chassis */
+  .Collapsible__title:has-text('IPC Chassis') {
+    background: linear-gradient(90deg, rgba(0, 217, 255, 0.2), transparent);
+    border-left: 3px solid #00d9ff;
+    color: #00d9ff;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+  }
+
+  /* Кнопки модификаций для IPC */
+  .Collapsible:has(.Collapsible__title:has-text('IPC')) {
+    .Button {
+      background: rgba(0, 217, 255, 0.05);
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(0, 217, 255, 0.15);
+        border-color: rgba(0, 217, 255, 0.4);
+        box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
+      }
+
+      &--color--green,
+      &.Button--selected {
+        background: rgba(0, 217, 255, 0.25);
+        border-color: #00d9ff;
+        box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+      }
+    }
+  }
+
+  /* Категория Органы (для IPC brain) */
+  .Collapsible__title:has-text('Органы') {
+    background: linear-gradient(90deg, rgba(255, 100, 100, 0.2), transparent);
+    border-left: 3px solid #ff6464;
+  }
+
+  /* Категория HEF */
+  .Collapsible__title:has-text('HEF') {
+    background: linear-gradient(90deg, rgba(255, 200, 0, 0.2), transparent);
+    border-left: 3px solid #ffc800;
+    color: #ffc800;
+  }
+}
+
+/* ============================================
+   АЛЬТЕРНАТИВА: Полноэкранный режим для IPC
+   ============================================
+   Раскомментируйте если хотите чтобы окно
+   Body Modifications было больше для IPC
+   ============================================ */
+
+.BodyModificationsPage--ipc {
+  width: 90vw !important;
+  height: 85vh !important;
+  max-width: 1400px;
+
+  .BodyModificationsPage__content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+  }
+
+  .BodyModificationsPage__left {
+    // Категории слева
+  }
+
+  .BodyModificationsPage__right {
+    // Превью справа
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(0, 217, 255, 0.05), transparent);
+    border: 2px solid rgba(0, 217, 255, 0.3);
+    border-radius: 8px;
+  }
+}

@@ -257,10 +257,8 @@
 /obj/item/organ/eyes/robotic/ipc
 	name = "IPC optical sensors"
 	desc = "Оптические сенсоры IPC. Позволяют видеть в различных спектрах."
-	icon = 'icons/obj/medical/organs/organs.dmi'
+	icon = 'icons/bandastation/mob/species/ipc/surgery.dmi'
 	icon_state = "cybernetic_eyeballs"
-	base_icon_state = "cybernetic_eyeballs"
-
 	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
 

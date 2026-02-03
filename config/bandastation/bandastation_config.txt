@@ -27,7 +27,7 @@
 ## Bandastation Races
 ROUNDSTART_RACES vulpkanin
 ROUNDSTART_RACES tajaran
-
+ROUNDSTART_RACES ipc
 ## Automatic crew transfer
 
 ## Time after the roundstart the automatic crew transfer will run. 1.5 hours by default

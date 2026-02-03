@@ -69,13 +69,71 @@
 
 	// ЭМП уязвимость
 	var/emp_vulnerability = 2
+	// Ключ выбранного бренда из фичи (morpheus, etamin, bishop, ...)
+	var/ipc_brand_key = "unbranded"
+	// Ключ визуального бренда (используется только для HEF, иначе = ipc_brand_key)
+	var/ipc_visual_brand_key = "unbranded"
+
+	// HEF: поштучный выбор бренда для каждой части тела.
+	// Каждое значение — ключ бренда (morpheus, etamin, ..., unbranded).
+	// Используется ТОЛЬКО когда ipc_brand_key == "hef".
+	var/hef_head = "unbranded"
+	var/hef_chest = "unbranded"
+	var/hef_l_arm = "unbranded"
+	var/hef_r_arm = "unbranded"
+	var/hef_l_leg = "unbranded"
+	var/hef_r_leg = "unbranded"
+	// Модификатор термической релаксации (Etamin: -0.2)
+	var/ipc_thermal_relaxation_mod = 0
+	// Модификатор скорости перегрева (Xion: 0.8 = 80%)
+	var/ipc_overheat_rate_mod = 1.0
+	// Модификатор стоимости ремонта (Cybersun: 1.5)
+	var/ipc_repair_cost_mod = 1.0
+
+/datum/species/ipc/get_species_description()
+	return "IPC (Integrated Positronic Chassis) — искусственные синтетики на основе позитронного ядра. \
+	Их корпус полностью заменяет биологическую плоть — это модульная кибернетическая система, \
+	способная к частичной саморегенерации и адаптации к различным условиям работы. \
+	Каждый IPC — уникальная machine, собранная или конвейерно, или в ручную из компонентов разных производителей."
+
+/datum/species/ipc/get_species_lore()
+	return list(
+		"Позитронные синтетики появились как коммерческий продукт крупных кибернетических корпораций, \
+		изначально созданные для промышленных и исследовательских миссий там, где биологический экипаж был бы непрактичен. \
+		Со временем позитронное ядро стало достаточно развитым, чтобы развивать нейронные паттерны, неотличимые от сознания — \
+		и тогда вопрос об их правовом статусе перестал быть абстрактным.",
+
+		"Каждый производитель закладывает в свои модели собственную специализацию. \
+		Morpheus Cyberkinetics ориентируется на когнитивные системы и нейроинтерфейсы — их головные модули считаются эталонными. \
+		Etamin Industry специализируется на термальной архитектуре корпуса, а их торсы оборудованы передовыми системами охлаждения. \
+		Bishop Cybernetics разработала манипуляторы с медицинской точностью, чьи руки способны выполнять тонкие хирургические операции. \
+		Hesphiastos Industries и Ward-Takahashi предпочитают кинематику и защищённость нижних конечностей — их ноги рассчитаны на тяжёлую среду.",
+
+		"Xion Manufacturing Group делает лёгкие каркасы для конечностей — их руки ценятся за соотношение силы к массе. \
+		Zeng-Hu Pharmaceuticals вывели биосинтетические оболочки для торса, позволяющие IPC частично интегрироваться в медикаментозные протоколы. \
+		Shellguard Munitions — единственный производитель, изначально ориентированный на боевое применение: \
+		их бронированные головные и торсовые модули развитиеы для поглощения ударов и энергетического оружия.",
+
+		"HEF — не бренд в традиционном смысле. Это обозначение для IPC, собранных из деталей разных производителей — \
+		так называемых «Frankensteinian» шасси. Обычно это вынужденная мера: запчасти из разных каталогов ставятся \
+		после полевых ремонтов, экономии бюджета или просто отсутствия оригинальных комплектов. \
+		Визуально такие IPC выглядят эклектично — каждая часть тела от своего завода, со своей конструктивной идеей. \
+		Но никаких геймплейных бонусов это не даёт: без единой интеграционной прошивки компоненты работают \
+		только в базовом режиме, без специализированных эффектов ни одного из производителей.",
+	)
 
 /datum/species/ipc/on_species_gain(mob/living/carbon/human/H, datum/species/old_species, pref_load)
 	. = ..()
 	replace_body(H, src)
 	H.update_body()
 	H.update_body_parts()
-	to_chat(H, span_warning("СИСТЕМА НЕ АКТИВИРОВАНА: Отсутствует позитронное ядро и источник питания. Требуется хирургическое вмешательство."))
+
+	// ПРИМЕЧАНИЕ:
+	// - Chassis brand применяется через body_modifications автоматически
+	// - Тип мозга тоже через body_modifications
+	// - Никакой дополнительной логики здесь не требуется
+	// - Body modifications применяются системой preferences ДО on_species_gain,
+	//   так что к этому моменту у IPC уже установлен правильный brain и chassis
 
 /datum/species/ipc/on_species_loss(mob/living/carbon/human/H, datum/species/new_species, pref_load)
 	. = ..()
@@ -283,3 +341,18 @@
 
 	var/datum/species/ipc/S = dna.species
 	S.try_repair_burn(src, held, src)
+
+/datum/species/ipc/proc/ipc_get_feature_values()
+    var/list/features = list()
+    features["ipc_chassis_brand"] = ipc_brand_key
+    if(ipc_brand_key == "hef")
+        features["ipc_hef_visual"] = ipc_visual_brand_key
+    return features
+
+/datum/species/ipc/proc/ipc_set_feature_values(list/features)
+    if(features["ipc_chassis_brand"])
+        ipc_brand_key = features["ipc_chassis_brand"]
+    if(ipc_brand_key == "hef" && features["ipc_hef_visual"])
+        ipc_visual_brand_key = features["ipc_hef_visual"]
+    else
+        ipc_visual_brand_key = ipc_brand_key

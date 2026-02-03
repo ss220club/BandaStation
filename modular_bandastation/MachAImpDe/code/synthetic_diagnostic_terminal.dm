@@ -5,7 +5,8 @@
 /obj/machinery/computer/operating/synthetic
 	name = "synthetic diagnostic terminal"
 	desc = "Специализированный терминал для диагностики синтетических организмов - IPC и андроидов."
-	icon_screen = "crew"
+	icon = 'icons/bandastation/mob/species/ipc/computer.dmi'
+	icon_screen = "ipc_crew"
 	icon_keyboard = "tech_key"
 	light_color = COLOR_BLUE_LIGHT
 
