@@ -375,7 +375,7 @@ export function MainPage(props: MainPageProps) {
   const [ipcCustomizationOpen, setIpcCustomizationOpen] = useState(false);
 
   const serverData = useServerPrefs();
-  const isIPC = data.character_preferences.misc.species === 'IPC';
+  const isIPC = data.character_preferences.misc.species === 'ipc';
 
   const currentSpeciesData =
     serverData?.species[data.character_preferences.misc.species];
