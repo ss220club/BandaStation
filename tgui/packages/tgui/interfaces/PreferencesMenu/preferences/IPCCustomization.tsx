@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Icon, Stack } from 'tgui-core/components';
+import { Box, Button, Icon, Modal, Stack } from 'tgui-core/components';
 
 import { useBackend } from '../../../backend';
 import { CharacterPreview } from '../../common/CharacterPreview';
@@ -99,7 +99,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   // Если не IPC - показываем сообщение
   if (!isIPC) {
     return (
-      <Box className="IPCPanel">
+      <Modal className="IPCPanel">
         <div className="IPCPanel__Header">
           <div className="IPCPanel__Title">
             <Icon name="robot" />
@@ -120,12 +120,12 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
             Данная конфигурация доступна только для КПБ
           </Box>
         </Stack>
-      </Box>
+      </Modal>
     );
   }
 
   return (
-    <Box className="IPCPanel">
+    <Modal className="IPCPanel">
       {/* Заголовок */}
       <div className="IPCPanel__Header">
         <div className="IPCPanel__Title">
@@ -281,7 +281,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
           ? 'HEF режим: выберите производителя для каждой части'
           : 'Выберите шасси "HEF" для настройки каждой части тела отдельно'}
       </div>
-    </Box>
+    </Modal>
   );
 };
 
