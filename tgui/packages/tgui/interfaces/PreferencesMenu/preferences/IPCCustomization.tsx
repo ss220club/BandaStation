@@ -52,9 +52,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   const serverData = useServerPrefs();
 
   // Какой выбор сейчас открыт
-  const [activeSelection, setActiveSelection] = useState<
-    'chassis' | 'brain' | string | null
-  >(null);
+  const [activeSelection, setActiveSelection] = useState<string | null>(null);
 
   // Получаем данные IPC из middleware (ui_data)
   const customization: IPCCustomization = data.ipc_customization || {
@@ -74,7 +72,8 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   const ipcData = serverData?.ipc_customization;
   const chassisBrands: IPCChassisBrand[] = ipcData?.chassis_brands || [];
   const brainTypes: IPCBrainType[] = ipcData?.brain_types || [];
-  const hefManufacturers: IPCHEFManufacturer[] = ipcData?.hef_manufacturers || [];
+  const hefManufacturers: IPCHEFManufacturer[] =
+    ipcData?.hef_manufacturers || [];
 
   const isHEF = customization.chassis_brand === 'hef';
 
@@ -96,277 +95,265 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     return manufacturer?.name || 'Unbranded';
   };
 
-  // Если не IPC - показываем сообщение
-  if (!isIPC) {
-    return (
-      <Modal className="IPCPanel">
-        <div className="IPCPanel__Header">
-          <div className="IPCPanel__Title">
-            <Icon name="robot" />
-            <span>КОНФИГУРАЦИЯ КПБ</span>
-          </div>
-          <Button
-            className="IPCPanel__CloseBtn"
-            icon="times"
-            onClick={props.handleClose}
-          />
-        </div>
-        <Stack fill vertical align="center" justify="center" p={2}>
-          <Icon name="exclamation-triangle" size={3} color="#ff3333" />
-          <Box mt={1} fontSize={1} color="label" bold textAlign="center">
-            ДОСТУП ЗАПРЕЩЁН
-          </Box>
-          <Box mt={0.5} color="label" textAlign="center" fontSize={0.9}>
-            Данная конфигурация доступна только для КПБ
-          </Box>
-        </Stack>
-      </Modal>
-    );
-  }
-
+  // Используем простой Modal со встроенными стилями для тестирования
   return (
-    <Modal className="IPCPanel">
-      {/* Заголовок */}
-      <div className="IPCPanel__Header">
-        <div className="IPCPanel__Title">
-          <Icon name="robot" />
-          <span>КОНФИГУРАЦИЯ КПБ</span>
-          {isHEF && (
-            <span className="IPCPanel__HEFBadge">
-              <Icon name="puzzle-piece" /> HEF
-            </span>
-          )}
-        </div>
-        <Button
-          className="IPCPanel__CloseBtn"
-          icon="times"
-          onClick={props.handleClose}
-        />
-      </div>
+    <Modal width="500px" height="500px">
+      <Box
+        style={{
+          background: 'linear-gradient(135deg, #0a1628 0%, #1a2a4a 100%)',
+          border: '2px solid #00aaff',
+          borderRadius: '4px',
+          padding: '0',
+          color: 'white',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Заголовок */}
+        <Box
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '0.75rem 1rem',
+            background: 'linear-gradient(90deg, rgba(0,170,255,0.2), transparent)',
+            borderBottom: '1px solid rgba(0,170,255,0.3)',
+          }}
+        >
+          <Box
+            bold
+            style={{
+              fontSize: '1.1rem',
+              color: '#00aaff',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+            }}
+          >
+            <Icon name="robot" /> КОНФИГУРАЦИЯ КПБ
+            {isHEF && (
+              <Box
+                as="span"
+                ml={1}
+                style={{
+                  fontSize: '0.7rem',
+                  background: 'rgba(255,200,0,0.2)',
+                  border: '1px solid rgba(255,200,0,0.5)',
+                  padding: '0.1rem 0.3rem',
+                  borderRadius: '2px',
+                  color: '#ffc800',
+                }}
+              >
+                HEF
+              </Box>
+            )}
+          </Box>
+          <Button icon="times" color="red" onClick={props.handleClose}>
+            Закрыть
+          </Button>
+        </Box>
 
-      {/* Основной контент */}
-      <div className="IPCPanel__Body">
-        {/* Левая часть - слоты */}
-        <div className="IPCPanel__Slots">
-          {/* Шасси - всегда видно */}
-          <SlotButton
-            label="Шасси"
-            value={currentChassis?.name || 'Unbranded'}
-            icon={BRAND_ICONS[customization.chassis_brand] || 'robot'}
-            isActive={activeSelection === 'chassis'}
-            color="blue"
-            onClick={() =>
-              setActiveSelection(activeSelection === 'chassis' ? null : 'chassis')
-            }
-          />
+        {/* Debug info */}
+        <Box
+          style={{
+            background: 'rgba(0,0,0,0.3)',
+            padding: '0.5rem',
+            fontSize: '0.75rem',
+            color: '#888',
+          }}
+        >
+          is_ipc: {String(isIPC)} | chassis_brands: {chassisBrands.length} |
+          brain_types: {brainTypes.length}
+        </Box>
 
-          {/* Мозг - всегда видно */}
-          <SlotButton
-            label="Ядро"
-            value={currentBrain?.name || 'Positronic'}
-            icon={BRAIN_ICONS[customization.brain_type] || 'brain'}
-            isActive={activeSelection === 'brain'}
-            color="purple"
-            onClick={() =>
-              setActiveSelection(activeSelection === 'brain' ? null : 'brain')
-            }
-          />
-
-          {/* HEF части - только если HEF режим */}
-          {isHEF && (
-            <>
-              <div className="IPCPanel__Divider">
-                <span>HEF ЧАСТИ</span>
-              </div>
-              {HEF_BODY_PARTS.map((part) => (
-                <SlotButton
-                  key={part.key}
-                  label={part.label}
-                  value={getPartManufacturerName(part.key)}
-                  icon={part.icon}
-                  isActive={activeSelection === part.key}
-                  color="yellow"
-                  onClick={() =>
-                    setActiveSelection(
-                      activeSelection === part.key ? null : part.key,
-                    )
-                  }
-                />
-              ))}
-            </>
-          )}
-        </div>
-
-        {/* Правая часть - персонаж + выбор */}
-        <div className="IPCPanel__Right">
-          {/* Превью персонажа */}
-          <div className="IPCPanel__Preview">
-            <CharacterPreview height="180px" id={data.character_preview_view} />
-            <div className="IPCPanel__PreviewInfo">
-              <div className="IPCPanel__PreviewName">
-                {currentChassis?.name || 'UNBRANDED'}
-              </div>
-              <div className="IPCPanel__PreviewBrain">
-                {currentBrain?.name || 'Positronic Core'}
-              </div>
-            </div>
-          </div>
-
-          {/* Панель выбора - показывается когда activeSelection не null */}
-          {activeSelection && (
-            <div className="IPCPanel__Selection">
-              {activeSelection === 'chassis' && (
-                <SelectionList
-                  title="ВЫБОР ШАССИ"
-                  items={chassisBrands.map((b) => ({
-                    key: b.key,
-                    name: b.name,
-                    description: b.description,
-                    icon: BRAND_ICONS[b.key] || 'robot',
-                    selected: b.key === customization.chassis_brand,
-                  }))}
-                  onSelect={(key) => {
-                    act('set_chassis_brand', { brand: key });
-                    setActiveSelection(null);
+        {/* Основной контент */}
+        <Box style={{ flex: 1, overflow: 'auto', padding: '0.75rem' }}>
+          {!isIPC ? (
+            <Stack fill vertical align="center" justify="center">
+              <Icon name="exclamation-triangle" size={3} color="red" />
+              <Box mt={1} bold fontSize={1.2}>
+                ДОСТУП ЗАПРЕЩЁН
+              </Box>
+              <Box mt={0.5} color="label">
+                Только для КПБ (IPC)
+              </Box>
+            </Stack>
+          ) : (
+            <Stack vertical>
+              {/* Превью персонажа */}
+              <Stack.Item>
+                <Box
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginBottom: '1rem',
                   }}
-                />
-              )}
+                >
+                  <CharacterPreview
+                    height="150px"
+                    id={data.character_preview_view}
+                  />
+                </Box>
+              </Stack.Item>
 
-              {activeSelection === 'brain' && (
-                <SelectionList
-                  title="ТИП ЯДРА"
-                  items={brainTypes.map((b) => ({
-                    key: b.key,
-                    name: b.name,
-                    description: b.description,
-                    icon: BRAIN_ICONS[b.key] || 'brain',
-                    selected: b.key === customization.brain_type,
-                  }))}
-                  onSelect={(key) => {
-                    act('set_brain_type', { brain_type: key });
-                    setActiveSelection(null);
-                  }}
-                />
-              )}
+              {/* Выбор шасси */}
+              <Stack.Item>
+                <Box bold mb={0.5} style={{ color: '#00aaff' }}>
+                  <Icon name="robot" /> Шасси: {currentChassis?.name || 'Unbranded'}
+                </Box>
+                <Stack wrap>
+                  {chassisBrands.length === 0 ? (
+                    <Box color="bad">Нет данных о шасси</Box>
+                  ) : (
+                    chassisBrands.map((brand) => (
+                      <Stack.Item key={brand.key} m={0.25}>
+                        <Button
+                          compact
+                          selected={brand.key === customization.chassis_brand}
+                          tooltip={brand.description}
+                          onClick={() =>
+                            act('set_chassis_brand', { brand: brand.key })
+                          }
+                        >
+                          <Icon name={BRAND_ICONS[brand.key] || 'robot'} />{' '}
+                          {brand.name}
+                        </Button>
+                      </Stack.Item>
+                    ))
+                  )}
+                </Stack>
+              </Stack.Item>
 
-              {/* HEF части */}
-              {activeSelection.startsWith('hef_') && (
-                <SelectionList
-                  title={
-                    HEF_BODY_PARTS.find((p) => p.key === activeSelection)
-                      ?.label.toUpperCase() || activeSelection.toUpperCase()
-                  }
-                  items={hefManufacturers.map((m) => ({
-                    key: m.key,
-                    name: m.name,
-                    icon: BRAND_ICONS[m.key] || 'cog',
-                    selected:
-                      m.key ===
-                      customization[activeSelection as keyof IPCCustomization],
-                  }))}
-                  onSelect={(key) => {
-                    act('set_hef_part', { part: activeSelection, manufacturer: key });
-                    setActiveSelection(null);
-                  }}
-                />
+              {/* Выбор мозга */}
+              <Stack.Item mt={1}>
+                <Box bold mb={0.5} style={{ color: '#aa55ff' }}>
+                  <Icon name="brain" /> Тип ядра: {currentBrain?.name || 'Positronic'}
+                </Box>
+                <Stack wrap>
+                  {brainTypes.length === 0 ? (
+                    <Box color="bad">Нет данных о типах ядра</Box>
+                  ) : (
+                    brainTypes.map((brain) => (
+                      <Stack.Item key={brain.key} m={0.25}>
+                        <Button
+                          compact
+                          selected={brain.key === customization.brain_type}
+                          tooltip={brain.description}
+                          onClick={() =>
+                            act('set_brain_type', { brain_type: brain.key })
+                          }
+                        >
+                          <Icon name={BRAIN_ICONS[brain.key] || 'brain'} />{' '}
+                          {brain.name}
+                        </Button>
+                      </Stack.Item>
+                    ))
+                  )}
+                </Stack>
+              </Stack.Item>
+
+              {/* HEF части - только если HEF режим */}
+              {isHEF && (
+                <Stack.Item mt={1}>
+                  <Box bold mb={0.5} style={{ color: '#ffc800' }}>
+                    <Icon name="puzzle-piece" /> HEF Части
+                  </Box>
+                  <Box
+                    style={{
+                      fontSize: '0.75rem',
+                      color: '#888',
+                      marginBottom: '0.5rem',
+                    }}
+                  >
+                    Выберите производителя для каждой части тела
+                  </Box>
+                  {HEF_BODY_PARTS.map((part) => (
+                    <Box key={part.key} mb={0.5}>
+                      <Box
+                        inline
+                        mr={1}
+                        style={{ width: '80px', display: 'inline-block' }}
+                      >
+                        <Icon name={part.icon} /> {part.label}:
+                      </Box>
+                      <Button
+                        compact
+                        onClick={() =>
+                          setActiveSelection(
+                            activeSelection === part.key ? null : part.key,
+                          )
+                        }
+                      >
+                        {getPartManufacturerName(part.key)}{' '}
+                        <Icon
+                          name={
+                            activeSelection === part.key
+                              ? 'chevron-up'
+                              : 'chevron-down'
+                          }
+                        />
+                      </Button>
+                      {activeSelection === part.key && (
+                        <Box
+                          mt={0.5}
+                          ml={2}
+                          style={{
+                            background: 'rgba(0,0,0,0.2)',
+                            padding: '0.5rem',
+                            borderRadius: '2px',
+                          }}
+                        >
+                          <Stack wrap>
+                            {hefManufacturers.map((m) => (
+                              <Stack.Item key={m.key} m={0.25}>
+                                <Button
+                                  compact
+                                  selected={
+                                    m.key ===
+                                    customization[
+                                      part.key as keyof IPCCustomization
+                                    ]
+                                  }
+                                  onClick={() => {
+                                    act('set_hef_part', {
+                                      part: part.key,
+                                      manufacturer: m.key,
+                                    });
+                                    setActiveSelection(null);
+                                  }}
+                                >
+                                  {m.name}
+                                </Button>
+                              </Stack.Item>
+                            ))}
+                          </Stack>
+                        </Box>
+                      )}
+                    </Box>
+                  ))}
+                </Stack.Item>
               )}
-            </div>
+            </Stack>
           )}
-        </div>
-      </div>
+        </Box>
 
-      {/* Подсказка внизу */}
-      <div className="IPCPanel__Footer">
-        {isHEF
-          ? 'HEF режим: выберите производителя для каждой части'
-          : 'Выберите шасси "HEF" для настройки каждой части тела отдельно'}
-      </div>
+        {/* Подвал */}
+        <Box
+          style={{
+            padding: '0.5rem 1rem',
+            background: 'rgba(0,0,0,0.3)',
+            borderTop: '1px solid rgba(0,170,255,0.2)',
+            fontSize: '0.7rem',
+            color: '#666',
+            textAlign: 'center',
+          }}
+        >
+          {isHEF
+            ? 'HEF режим активен - настройте каждую часть тела отдельно'
+            : 'Выберите шасси "HEF" для настройки каждой части тела'}
+        </Box>
+      </Box>
     </Modal>
   );
 };
-
-// ============================================
-// Компонент кнопки слота
-// ============================================
-type SlotButtonProps = {
-  label: string;
-  value: string;
-  icon: string;
-  isActive: boolean;
-  color: 'blue' | 'purple' | 'yellow' | 'red' | 'green';
-  onClick: () => void;
-};
-
-function SlotButton(props: SlotButtonProps) {
-  const { label, value, icon, isActive, color, onClick } = props;
-
-  return (
-    <div
-      className={`IPCPanel__Slot IPCPanel__Slot--${color} ${isActive ? 'IPCPanel__Slot--active' : ''}`}
-      onClick={onClick}
-    >
-      <div className="IPCPanel__SlotIcon">
-        <Icon name={icon} />
-      </div>
-      <div className="IPCPanel__SlotInfo">
-        <div className="IPCPanel__SlotLabel">{label}</div>
-        <div className="IPCPanel__SlotValue">{value}</div>
-      </div>
-      <Icon
-        name={isActive ? 'chevron-down' : 'chevron-right'}
-        className="IPCPanel__SlotArrow"
-      />
-    </div>
-  );
-}
-
-// ============================================
-// Компонент списка выбора
-// ============================================
-type SelectionItem = {
-  key: string;
-  name: string;
-  description?: string;
-  icon: string;
-  selected: boolean;
-};
-
-type SelectionListProps = {
-  title: string;
-  items: SelectionItem[];
-  onSelect: (key: string) => void;
-};
-
-function SelectionList(props: SelectionListProps) {
-  const { title, items, onSelect } = props;
-
-  return (
-    <div className="IPCPanel__SelectionList">
-      <div className="IPCPanel__SelectionHeader">{title}</div>
-      <div className="IPCPanel__SelectionItems">
-        {items.map((item) => (
-          <div
-            key={item.key}
-            className={`IPCPanel__SelectionItem ${item.selected ? 'IPCPanel__SelectionItem--selected' : ''}`}
-            onClick={() => onSelect(item.key)}
-          >
-            <div className="IPCPanel__SelectionItemIcon">
-              <Icon name={item.icon} />
-            </div>
-            <div className="IPCPanel__SelectionItemInfo">
-              <div className="IPCPanel__SelectionItemName">{item.name}</div>
-              {item.description && (
-                <div className="IPCPanel__SelectionItemDesc">
-                  {item.description}
-                </div>
-              )}
-            </div>
-            {item.selected && (
-              <Icon name="check" className="IPCPanel__SelectionItemCheck" />
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
