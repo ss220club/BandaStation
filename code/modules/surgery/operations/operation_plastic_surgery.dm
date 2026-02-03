@@ -25,6 +25,7 @@
 	return limb.body_zone == BODY_ZONE_HEAD
 
 /datum/surgery_operation/limb/plastic_surgery/pre_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+	. = ..() // BANDASTATION EDIT
 	if(HAS_TRAIT_FROM(limb.owner, TRAIT_DISFIGURED, TRAIT_GENERIC))
 		return TRUE //skip name selection if fixing disfigurement
 
