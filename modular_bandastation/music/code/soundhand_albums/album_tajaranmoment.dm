@@ -1,4 +1,4 @@
-/datum/concert_album/soundhand_01
+/datum/concert_album/soundhand_10
 	id = "soundhand_10"
 	track_types = list(
 		/datum/track/soundhand/j1,
