@@ -54,3 +54,10 @@
 	name = "ERT tactical engineering uniform"
 	desc = "Униформа, выполненная в темных цветах с опозновательными знаками инженерных подразделений ОБР."
 	inhand_icon_state = "bl_suit"
+
+/obj/item/clothing/under/rank/centcom/dress
+	name = "fleet officer's premium suit"
+	desc = "Официальная одежда офицера Центрального Командования нового пошива."
+	icon_state = "centcom_dress"
+	inhand_icon_state = "centcom_dress"
+	can_adjust = FALSE

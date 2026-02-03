@@ -109,6 +109,19 @@
 	unwieldsound = 'modular_bandastation/weapon/sound/melee/kel_saberoff.ogg'
 	hit_wield = 'modular_bandastation/weapon/sound/melee/kel_saberhit.ogg'
 
+/obj/item/dualsaber/legendary_saber/bsword
+	name = "Рассекающий"
+	desc = "\"Рассекающий\" — легендарный двуручный меч, покрытый напылением из разрушенного энергетического кристалла. Согласно легенде, кузнец стремился создать меч, который убивает не изяществом, а неизбежностью."
+	icon_state = "hel_dualsaber0"
+	inhand_icon_state = "hel_dualsaber0"
+	saber_color = "kirien"
+	refusal_text = "Только достойный узрит свет."
+	light_color = LIGHT_COLOR_VIVID_GREEN
+	saber_name = "hel"
+	wieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberon.ogg'
+	unwieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberoff.ogg'
+	hit_wield = 'modular_bandastation/weapon/sound/melee/kir_saberhit.ogg'
+
 /obj/item/dualsaber/legendary_saber/pre_attack(atom/A, mob/living/user, params)
 	var/charged = FALSE
 	var/proximity = get_proximity(A, user)
