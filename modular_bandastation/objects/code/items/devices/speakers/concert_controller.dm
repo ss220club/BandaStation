@@ -16,6 +16,11 @@
 	var/obj/item/circuit_component/concert_master/master_component
 	var/obj/item/concert_disk/inserted_disk
 
+/obj/machinery/jukebox/concertspeaker/Destroy()
+	if(music_player)
+		music_player.clear_album()
+	return ..()
+
 /obj/machinery/jukebox/concertspeaker/examine()
 	. = ..()
 	. += "<span class='notice'>Используйте гаечный ключ, чтобы разобрать для транспортировки и собрать для игры.</span>"
@@ -109,6 +114,9 @@
 		to_chat(user, span_warning("Диск уже вставлен."))
 		return
 
+	if(music_player)
+		music_player.clear_album()
+
 	inserted_disk = D
 	D.forceMove(src)
 
@@ -122,8 +130,8 @@
 	if(!inserted_disk)
 		return
 
-	if(music_player.active_song_sound)
-		stop_music()
+	if(music_player)
+		music_player.clear_album()
 
 	var/obj/item/concert_disk/D = inserted_disk
 	inserted_disk = null

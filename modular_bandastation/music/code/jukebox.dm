@@ -205,12 +205,18 @@
 		var/datum/track/TR = new T
 		songs[TR.song_name] = TR
 
+	qdel(A)
+
 /datum/jukebox/concertspeaker/proc/get_album(id)
 	for(var/T in subtypesof(/datum/concert_album))
 		var/datum/concert_album/A = new T
 		if(A.id == id)
 			return A
 	return null
+
+/datum/jukebox/concertspeaker/proc/clear_album()
+	stop_music()
+	songs = list()
 
 #undef MUTE_DEAF
 #undef MUTE_PREF
