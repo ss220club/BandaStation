@@ -24,6 +24,7 @@
 #include "code/station_traits.dm"
 #include "code/supply_packs.dm"
 #include "code/surgery/surgery.dm"
+#include "code/surgery/surgery_operations.dm"
 #include "code/vehicle/paddy.dm"
 #include "code/weapons/baton.dm"
 #include "code/weapons/dragnet.dm"
