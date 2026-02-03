@@ -285,6 +285,11 @@ export type ServerData = {
   // BANDASTATION ADDITION START
   text_to_speech: TtsData;
   body_modifications: BodyModification[];
+  ipc_customization: {
+    chassis_brands: IPCChassisBrand[];
+    brain_types: IPCBrainType[];
+    hef_manufacturers: IPCHEFManufacturer[];
+  };
   // BANDASTATION ADDITION END
   jobs: {
     departments: Record<string, Department>;

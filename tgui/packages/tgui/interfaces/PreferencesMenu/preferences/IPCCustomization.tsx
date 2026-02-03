@@ -10,6 +10,7 @@ import type {
   IPCHEFManufacturer,
   PreferencesMenuData,
 } from '../types';
+import { useServerPrefs } from '../useServerPrefs';
 
 type IPCCustomizationProps = {
   handleClose: () => void;
@@ -48,13 +49,14 @@ const HEF_BODY_PARTS = [
 
 export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   const { act, data } = useBackend<PreferencesMenuData>();
+  const serverData = useServerPrefs();
 
   // Какой выбор сейчас открыт
   const [activeSelection, setActiveSelection] = useState<
     'chassis' | 'brain' | string | null
   >(null);
 
-  // Получаем данные IPC из middleware
+  // Получаем данные IPC из middleware (ui_data)
   const customization: IPCCustomization = data.ipc_customization || {
     chassis_brand: 'unbranded',
     brain_type: 'positronic',
@@ -67,9 +69,12 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   };
 
   const isIPC = data.is_ipc ?? false;
-  const chassisBrands: IPCChassisBrand[] = data.chassis_brands || [];
-  const brainTypes: IPCBrainType[] = data.brain_types || [];
-  const hefManufacturers: IPCHEFManufacturer[] = data.hef_manufacturers || [];
+
+  // Получаем статические данные из serverData (preferences.json)
+  const ipcData = serverData?.ipc_customization;
+  const chassisBrands: IPCChassisBrand[] = ipcData?.chassis_brands || [];
+  const brainTypes: IPCBrainType[] = ipcData?.brain_types || [];
+  const hefManufacturers: IPCHEFManufacturer[] = ipcData?.hef_manufacturers || [];
 
   const isHEF = customization.chassis_brand === 'hef';
 

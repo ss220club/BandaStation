@@ -38,6 +38,11 @@ export const ServerPrefs = createContext<ServerData | undefined>({
   pref_job_slots: {},
   profile_index: 0,
   body_modifications: [],
+  ipc_customization: {
+    chassis_brands: [],
+    brain_types: [],
+    hef_manufacturers: [],
+  },
   // BANDASTATION ADDITION END - Feat: Augmentations
 });
 
