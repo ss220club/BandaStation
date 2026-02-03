@@ -84,7 +84,7 @@
 
 /datum/track/soundhand/c12
 	song_path = 'sound/music/soundhand/highwind/12.ogg'
-	song_name = "12 Радиация"
+	song_name = "12 Движок"
 	song_length = 6 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 

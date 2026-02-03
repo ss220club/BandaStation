@@ -10,5 +10,8 @@
 #include "code/soundhand_albums/album_midnightcarnival.dm"
 #include "code/soundhand_albums/album_skydream.dm"
 #include "code/soundhand_albums/album_thunderstep.dm"
+#include "code/soundhand_albums/album_tajaranmoment.dm"
+//Закоментить/Удалить после ивента
+#include "code/soundhand_albums/album_soundhand.dm"
 #include "code/jukebox.dm"
 #include "code/song.dm"

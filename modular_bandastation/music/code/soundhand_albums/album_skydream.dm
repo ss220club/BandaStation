@@ -78,18 +78,18 @@
 
 /datum/track/soundhand/e11
 	song_path = 'sound/music/soundhand/skydream/11.ogg'
-	song_name = "11 Не легенда"
+	song_name = "11 След"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/e12
 	song_path = 'sound/music/soundhand/skydream/12.ogg'
-	song_name = "12 Боль мой дом"
+	song_name = "12 Обыденность"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/e13
 	song_path = 'sound/music/soundhand/skydream/13.ogg'
-	song_name = "13 Воскрешение"
+	song_name = "13 Я не волшебник"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS

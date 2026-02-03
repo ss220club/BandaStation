@@ -30,19 +30,19 @@
 
 /datum/track/soundhand/b3
 	song_path = 'sound/music/soundhand/guitarblues/03.ogg'
-	song_name = "03 Воспоминания"
+	song_name = "03 Дым из токсинов"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/b4
 	song_path = 'sound/music/soundhand/guitarblues/04.ogg'
-	song_name = "04 Уходи"
+	song_name = "04 Сброс напряжения"
 	song_length = 6 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/b5
 	song_path = 'sound/music/soundhand/guitarblues/05.ogg'
-	song_name = "05 Прощание"
+	song_name = "05 Перерождение"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
@@ -78,18 +78,18 @@
 
 /datum/track/soundhand/b11
 	song_path = 'sound/music/soundhand/guitarblues/11.ogg'
-	song_name = "11 Чужой"
+	song_name = "11 Как не сгореть"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/b12
 	song_path = 'sound/music/soundhand/guitarblues/12.ogg'
-	song_name = "12 Как не сгореть"
+	song_name = "12 Здрасьте"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/b13
 	song_path = 'sound/music/soundhand/guitarblues/13.ogg'
-	song_name = "13 Движок"
+	song_name = "13 Супер-кристалл"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS

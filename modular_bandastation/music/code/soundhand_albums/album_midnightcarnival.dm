@@ -24,7 +24,7 @@
 
 /datum/track/soundhand/f2
 	song_path = 'sound/music/soundhand/midnightcarnival/02.ogg'
-	song_name = "02 Долг врача"
+	song_name = "02 Металл устал"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
@@ -36,7 +36,7 @@
 
 /datum/track/soundhand/f4
 	song_path = 'sound/music/soundhand/midnightcarnival/04.ogg'
-	song_name = "04 Смысл"
+	song_name = "04 Имплант"
 	song_length = 6 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
