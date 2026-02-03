@@ -2,12 +2,9 @@ import { useState } from 'react';
 import {
   Box,
   Button,
-  Collapsible,
   Dropdown,
   Icon,
-  LabeledList,
   Modal,
-  Section,
   Stack,
 } from 'tgui-core/components';
 
@@ -54,6 +51,27 @@ type IPCCustomizationData = PreferencesMenuData & {
   hef_manufacturers: HEFManufacturer[];
 };
 
+// Маппинг брендов на иконки
+const BRAND_ICONS: Record<string, string> = {
+  unbranded: 'robot',
+  morpheus: 'brain',
+  etamin: 'industry',
+  bishop: 'cross',
+  hephaestus: 'hammer',
+  wardtakahashi: 'building',
+  xion: 'microchip',
+  zenghu: 'flask',
+  shellguard: 'shield-alt',
+  cybersun: 'sun',
+  hef: 'puzzle-piece',
+};
+
+const BRAIN_ICONS: Record<string, string> = {
+  positronic: 'brain',
+  mmi: 'head-side-virus',
+  borg_core: 'server',
+};
+
 export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   const { act, data } = useBackend<IPCCustomizationData>();
   const [selectedTab, setSelectedTab] = useState<'brain' | 'chassis' | 'hef'>(
@@ -64,29 +82,51 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     return <LoadingScreen />;
   }
 
+  // Показываем сообщение если не IPC
   if (!data.is_ipc) {
     return (
-      <Modal className="IPCCustomization">
-        <Section
-          title="IPC Customization"
-          buttons={
-            <Button icon="times" color="red" onClick={props.handleClose} />
-          }
-        >
-          <Stack vertical align="center" justify="center" mt={5}>
+      <Modal className="CyberpunkMods CyberpunkMods--ipc">
+        <div className="CyberpunkMods__Scanline" />
+        <div className="CyberpunkMods__Header">
+          <div className="CyberpunkMods__HeaderTitle">
+            <Icon name="robot" className="CyberpunkMods__HeaderTitleIcon" />
+            <span>КОНФИГУРАЦИЯ КПБ</span>
+          </div>
+          <Button
+            className="CyberpunkMods__HeaderClose"
+            icon="times"
+            onClick={props.handleClose}
+          >
+            ЗАКРЫТЬ
+          </Button>
+        </div>
+        <div className="CyberpunkMods__Content">
+          <Stack vertical align="center" justify="center" fill>
             <Stack.Item>
-              <Icon name="robot" size={5} color="gray" />
+              <Icon name="exclamation-triangle" size={4} color="#ff3333" />
             </Stack.Item>
-            <Stack.Item fontSize={1.2} color="label" bold>
-              Эта кастомизация доступна только для IPC персонажей.
+            <Stack.Item mt={2}>
+              <Box fontSize={1.2} color="label" bold textAlign="center">
+                ДОСТУП ЗАПРЕЩЁН
+              </Box>
             </Stack.Item>
-            <Stack.Item mt={3}>
-              <Button fluid onClick={props.handleClose}>
-                Закрыть
+            <Stack.Item mt={1}>
+              <Box color="label" textAlign="center">
+                Данная конфигурация доступна только для
+                <br />
+                Кибернетических Позитронных Болванов (КПБ)
+              </Box>
+            </Stack.Item>
+            <Stack.Item mt={2}>
+              <Button
+                className="CyberpunkMods__ModCardBtn"
+                onClick={props.handleClose}
+              >
+                ЗАКРЫТЬ ИНТЕРФЕЙС
               </Button>
             </Stack.Item>
           </Stack>
-        </Section>
+        </div>
       </Modal>
     );
   }
@@ -94,80 +134,133 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   const customization = data.ipc_customization;
   const isHEF = customization.chassis_brand === 'hef';
 
+  // Находим текущий бренд и тип мозга
+  const currentBrand = data.chassis_brands.find(
+    (b) => b.key === customization.chassis_brand,
+  );
+  const currentBrain = data.brain_types.find(
+    (b) => b.key === customization.brain_type,
+  );
+
   return (
-    <Modal className="IPCCustomization">
-      <div className="IPCCustomization__Container">
-        {/* HEADER */}
-        <div className="IPCCustomization__Header">
-          <Box fontSize={1.5} bold>
-            <Icon name="robot" mr={1} />
-            IPC CUSTOMIZATION
-          </Box>
-          <Button icon="times" color="red" onClick={props.handleClose} />
+    <Modal className="CyberpunkMods CyberpunkMods--ipc">
+      {/* Scanline эффект */}
+      <div className="CyberpunkMods__Scanline" />
+
+      {/* Заголовок */}
+      <div className="CyberpunkMods__Header">
+        <div className="CyberpunkMods__HeaderTitle">
+          <Icon name="robot" className="CyberpunkMods__HeaderTitleIcon" />
+          <span>КОНФИГУРАЦИЯ КПБ</span>
+          <span className="CyberpunkMods__HeaderTitleSubtitle">
+            SYNTHETIC INTERFACE v3.14
+          </span>
+        </div>
+        <Button
+          className="CyberpunkMods__HeaderClose"
+          icon="times"
+          onClick={props.handleClose}
+        >
+          ЗАКРЫТЬ
+        </Button>
+      </div>
+
+      {/* Основной контент */}
+      <div className="CyberpunkMods__Content">
+        {/* Левая панель - Категории */}
+        <div className="CyberpunkMods__Categories">
+          <div className="CyberpunkMods__CategoriesTitle">СИСТЕМЫ</div>
+
+          <div
+            className={`CyberpunkMods__Category CyberpunkMods__Category--brain ${selectedTab === 'brain' ? 'CyberpunkMods__Category--active' : ''}`}
+            onClick={() => setSelectedTab('brain')}
+          >
+            <Icon name="brain" className="CyberpunkMods__CategoryIcon" />
+            <span className="CyberpunkMods__CategoryName">
+              Позитронное ядро
+            </span>
+          </div>
+
+          <div
+            className={`CyberpunkMods__Category CyberpunkMods__Category--chassis ${selectedTab === 'chassis' ? 'CyberpunkMods__Category--active' : ''}`}
+            onClick={() => setSelectedTab('chassis')}
+          >
+            <Icon name="cog" className="CyberpunkMods__CategoryIcon" />
+            <span className="CyberpunkMods__CategoryName">Шасси</span>
+          </div>
+
+          {isHEF && (
+            <div
+              className={`CyberpunkMods__Category CyberpunkMods__Category--prosthetics ${selectedTab === 'hef' ? 'CyberpunkMods__Category--active' : ''}`}
+              onClick={() => setSelectedTab('hef')}
+            >
+              <Icon name="puzzle-piece" className="CyberpunkMods__CategoryIcon" />
+              <span className="CyberpunkMods__CategoryName">
+                Поштучный выбор
+              </span>
+            </div>
+          )}
+
+          {/* Информационная панель */}
+          <div
+            style={{
+              marginTop: 'auto',
+              padding: '0.75rem',
+              background: 'rgba(0,128,255,0.1)',
+              borderTop: '1px solid rgba(0,128,255,0.2)',
+              fontSize: '0.7rem',
+              color: '#8a8a9a',
+            }}
+          >
+            <Box mb={0.5}>
+              <Icon name="info-circle" mr={0.5} />
+              СТАТУС СИСТЕМЫ
+            </Box>
+            <Box color="#0080ff">
+              Шасси: {currentBrand?.name || 'Не выбрано'}
+            </Box>
+            <Box color="#9d4edd">
+              Ядро: {currentBrain?.name || 'Не выбрано'}
+            </Box>
+          </div>
         </div>
 
-        {/* MAIN CONTENT */}
-        <div className="IPCCustomization__Content">
-          {/* LEFT PANEL - TABS */}
-          <div className="IPCCustomization__LeftPanel">
-            <Stack vertical>
-              <Stack.Item>
-                <Button
-                  fluid
-                  icon="brain"
-                  color={selectedTab === 'brain' ? 'blue' : 'default'}
-                  selected={selectedTab === 'brain'}
-                  onClick={() => setSelectedTab('brain')}
-                >
-                  Позитронное ядро
-                </Button>
-              </Stack.Item>
-              <Stack.Item>
-                <Button
-                  fluid
-                  icon="cog"
-                  color={selectedTab === 'chassis' ? 'blue' : 'default'}
-                  selected={selectedTab === 'chassis'}
-                  onClick={() => setSelectedTab('chassis')}
-                >
-                  Шасси
-                </Button>
-              </Stack.Item>
-              {isHEF && (
-                <Stack.Item>
-                  <Button
-                    fluid
-                    icon="puzzle-piece"
-                    color={selectedTab === 'hef' ? 'blue' : 'default'}
-                    selected={selectedTab === 'hef'}
-                    onClick={() => setSelectedTab('hef')}
-                  >
-                    Поштучный выбор
-                  </Button>
-                </Stack.Item>
-              )}
-            </Stack>
+        {/* Центральная панель - Превью */}
+        <div className="CyberpunkMods__Preview">
+          <div className="CyberpunkMods__PreviewCharacter">
+            <CharacterPreview height="300px" id={data.character_preview_view} />
           </div>
-
-          {/* CENTER - CHARACTER PREVIEW */}
-          <div className="IPCCustomization__Preview">
-            <CharacterPreview height="100%" id={data.character_preview_view} />
-            <div className="IPCCustomization__PreviewLabel">
-              <Box bold fontSize={1.1}>
-                {data.chassis_brands.find(
-                  (b) => b.key === customization.chassis_brand,
-                )?.name || 'Unbranded'}
-              </Box>
-              <Box color="label" fontSize={0.9}>
-                {data.brain_types.find(
-                  (b) => b.key === customization.brain_type,
-                )?.name || 'Positronic Core'}
-              </Box>
+          <div className="CyberpunkMods__PreviewInfo">
+            <div className="CyberpunkMods__PreviewInfoName">
+              {currentBrand?.name || 'UNBRANDED'}
             </div>
+            <div className="CyberpunkMods__PreviewInfoBrand">
+              {currentBrain?.name || 'Positronic Core'}
+            </div>
+            {currentBrand?.description && (
+              <Box
+                mt={1}
+                fontSize={0.75}
+                color="label"
+                textAlign="center"
+                style={{ maxWidth: '250px' }}
+              >
+                {currentBrand.description}
+              </Box>
+            )}
           </div>
+        </div>
 
-          {/* RIGHT PANEL - CONTENT */}
-          <div className="IPCCustomization__RightPanel">
+        {/* Правая панель - Контент вкладки */}
+        <div className="CyberpunkMods__List">
+          <div className="CyberpunkMods__ListHeader">
+            <span className="CyberpunkMods__ListHeaderTitle">
+              {selectedTab === 'brain' && 'ТИП ПОЗИТРОННОГО ЯДРА'}
+              {selectedTab === 'chassis' && 'БРЕНД ШАССИ'}
+              {selectedTab === 'hef' && 'ПОШТУЧНЫЙ ВЫБОР HEF'}
+            </span>
+          </div>
+          <div className="CyberpunkMods__ListContent">
             {selectedTab === 'brain' && (
               <BrainTypeSelector
                 brainTypes={data.brain_types}
@@ -218,38 +311,35 @@ type BrainTypeSelectorProps = {
 
 function BrainTypeSelector(props: BrainTypeSelectorProps) {
   const { brainTypes, currentBrainType, onSelect } = props;
-  const selectedBrain = brainTypes.find((b) => b.key === currentBrainType);
 
   return (
-    <Section fill scrollable title="Тип позитронного ядра">
-      <Stack vertical>
-        {brainTypes.map((brain) => (
-          <Stack.Item key={brain.key}>
-            <Button
-              fluid
-              color={brain.key === currentBrainType ? 'blue' : 'default'}
-              selected={brain.key === currentBrainType}
-              onClick={() => onSelect(brain.key)}
-              mb={0.5}
-            >
-              <Stack>
-                <Stack.Item grow>
-                  <Box bold>{brain.name}</Box>
-                  <Box color="label" fontSize={0.9} mt={0.3}>
-                    {brain.description}
-                  </Box>
-                </Stack.Item>
-                {brain.key === currentBrainType && (
-                  <Stack.Item>
-                    <Icon name="check" color="green" />
-                  </Stack.Item>
-                )}
-              </Stack>
-            </Button>
-          </Stack.Item>
-        ))}
-      </Stack>
-    </Section>
+    <div className="CyberpunkBrain__List">
+      {brainTypes.map((brain) => {
+        const isSelected = brain.key === currentBrainType;
+        const icon = BRAIN_ICONS[brain.key] || 'brain';
+
+        return (
+          <div
+            key={brain.key}
+            className={`CyberpunkBrain__Item ${isSelected ? 'CyberpunkBrain__Item--selected' : ''}`}
+            onClick={() => onSelect(brain.key)}
+          >
+            <div className="CyberpunkBrain__ItemIcon">
+              <Icon name={icon} />
+            </div>
+            <div className="CyberpunkBrain__ItemInfo">
+              <div className="CyberpunkBrain__ItemName">{brain.name}</div>
+              <div className="CyberpunkBrain__ItemDesc">{brain.description}</div>
+            </div>
+            {isSelected && (
+              <div className="CyberpunkBrain__ItemCheck">
+                <Icon name="check" />
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -266,35 +356,43 @@ function ChassisSelector(props: ChassisSelectorProps) {
   const { chassisBrands, currentChassis, onSelect } = props;
 
   return (
-    <Section fill scrollable title="Бренд шасси">
-      <Stack vertical>
-        {chassisBrands.map((chassis) => (
-          <Stack.Item key={chassis.key}>
-            <Button
-              fluid
-              color={chassis.key === currentChassis ? 'blue' : 'default'}
-              selected={chassis.key === currentChassis}
-              onClick={() => onSelect(chassis.key)}
-              mb={0.5}
-            >
-              <Stack>
-                <Stack.Item grow>
-                  <Box bold>{chassis.name}</Box>
-                  <Box color="label" fontSize={0.9} mt={0.3}>
-                    {chassis.description}
-                  </Box>
-                </Stack.Item>
-                {chassis.key === currentChassis && (
-                  <Stack.Item>
-                    <Icon name="check" color="green" />
-                  </Stack.Item>
-                )}
-              </Stack>
-            </Button>
-          </Stack.Item>
-        ))}
-      </Stack>
-    </Section>
+    <div className="CyberpunkChassis__Grid">
+      {chassisBrands.map((chassis) => {
+        const isSelected = chassis.key === currentChassis;
+        const icon = BRAND_ICONS[chassis.key] || 'robot';
+
+        return (
+          <div
+            key={chassis.key}
+            className={`CyberpunkChassis__Card ${isSelected ? 'CyberpunkChassis__Card--selected' : ''}`}
+            onClick={() => onSelect(chassis.key)}
+          >
+            <div className="CyberpunkChassis__CardIcon">
+              <Icon name={icon} />
+            </div>
+            <div className="CyberpunkChassis__CardName">{chassis.name}</div>
+            {chassis.description && (
+              <div className="CyberpunkChassis__CardDesc">
+                {chassis.description.length > 60
+                  ? chassis.description.substring(0, 60) + '...'
+                  : chassis.description}
+              </div>
+            )}
+            {isSelected && (
+              <Box
+                position="absolute"
+                top={0.5}
+                right={0.5}
+                color="#39ff14"
+                style={{ textShadow: '0 0 10px #39ff14' }}
+              >
+                <Icon name="check-circle" />
+              </Box>
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -327,37 +425,33 @@ function HEFPartsSelector(props: HEFPartsSelectorProps) {
   ];
 
   return (
-    <Section fill scrollable title="Поштучный выбор HEF">
-      <Box italic color="label" mb={1}>
-        Выберите производителя для каждой части тела. Только визуал, без
-        бонусов.
-      </Box>
-      <Stack vertical>
+    <div className="CyberpunkHEF">
+      <div className="CyberpunkHEF__Hint">
+        <Icon name="info-circle" mr={0.5} />
+        HEF позволяет выбрать разных производителей для каждой части тела.
+        Только визуальное отличие, без геймплейных бонусов.
+      </div>
+      <div className="CyberpunkHEF__Parts">
         {parts.map((part) => (
-          <Stack.Item key={part.key}>
-            <LabeledList>
-              <LabeledList.Item
-                label={
-                  <Box>
-                    <Icon name={part.icon} mr={0.5} />
-                    {part.label}
-                  </Box>
-                }
-              >
-                <Dropdown
-                  width="100%"
-                  selected={currentParts[part.key]}
-                  options={manufacturers.map((m) => m.key)}
-                  displayText={(key: string) =>
-                    manufacturers.find((m) => m.key === key)?.name || key
-                  }
-                  onSelected={(value) => onSelectPart(part.key, value)}
-                />
-              </LabeledList.Item>
-            </LabeledList>
-          </Stack.Item>
+          <div key={part.key} className="CyberpunkHEF__Part">
+            <div className="CyberpunkHEF__PartIcon">
+              <Icon name={part.icon} />
+            </div>
+            <div className="CyberpunkHEF__PartLabel">{part.label}</div>
+            <div className="CyberpunkHEF__PartSelect">
+              <Dropdown
+                width="100%"
+                selected={currentParts[part.key as keyof typeof currentParts]}
+                options={manufacturers.map((m) => ({
+                  value: m.key,
+                  displayText: m.name,
+                }))}
+                onSelected={(value) => onSelectPart(part.key, String(value))}
+              />
+            </div>
+          </div>
         ))}
-      </Stack>
-    </Section>
+      </div>
+    </div>
   );
 }
