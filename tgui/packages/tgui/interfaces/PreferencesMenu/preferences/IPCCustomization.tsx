@@ -66,7 +66,8 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     hef_r_leg: 'unbranded',
   };
 
-  const isIPC = data.is_ipc ?? false;
+  // Проверяем species напрямую из character_preferences (как в MainPage.tsx)
+  const isIPC = data.character_preferences?.misc?.species === 'ipc';
 
   // Получаем статические данные из serverData (preferences.json)
   const ipcData = serverData?.ipc_customization;
@@ -163,8 +164,9 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
             color: '#888',
           }}
         >
-          is_ipc: {String(isIPC)} | chassis_brands: {chassisBrands.length} |
-          brain_types: {brainTypes.length}
+          species: {data.character_preferences?.misc?.species || 'N/A'} |
+          is_ipc: {String(isIPC)} | chassis: {chassisBrands.length} |
+          brains: {brainTypes.length}
         </Box>
 
         {/* Основной контент */}
