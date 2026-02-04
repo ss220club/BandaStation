@@ -261,7 +261,7 @@
 
 	// Let's reserve the other hand
 	offhand_item = new(user)
-	offhand_item.name = "[parent_item.declent_ru(NOMINATIVE)] - offhand"
+	offhand_item.name = "[parent_item.name] - offhand"
 	offhand_item.desc = "Ваша вторая рука держит [parent_item.declent_ru(ACCUSATIVE)]."
 	offhand_item.wielded = TRUE
 	RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
