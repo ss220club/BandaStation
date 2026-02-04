@@ -92,7 +92,7 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
   }
 
   return (
-    <Modal width="700px" height="550px">
+    <Modal width="800px" height="600px">
       <Box
         style={{
           background: 'linear-gradient(135deg, #0a0a12 0%, #1a1a24 100%)',
@@ -214,8 +214,8 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
   // Стили для панелей
   const panelStyles = {
     categories: {
-      width: '160px',
-      minWidth: '160px',
+      width: '180px',
+      minWidth: '180px',
       background: 'rgba(0, 0, 0, 0.3)',
       borderRight: '1px solid rgba(255, 42, 109, 0.2)',
       display: 'flex',
@@ -231,11 +231,11 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
       padding: '1rem',
       background:
         'radial-gradient(circle at 50% 50%, rgba(255,42,109,0.05) 0%, transparent 70%)',
-      minWidth: '200px',
+      minWidth: '220px',
     },
     list: {
-      width: '260px',
-      minWidth: '260px',
+      width: '300px',
+      minWidth: '300px',
       background: 'rgba(0, 0, 0, 0.2)',
       borderLeft: '1px solid rgba(255, 42, 109, 0.2)',
       display: 'flex',
@@ -250,12 +250,13 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
       <Box style={panelStyles.categories}>
         <Box
           style={{
-            padding: '0.5rem 0.75rem',
-            fontSize: '0.65rem',
+            padding: '0.6rem 0.75rem',
+            fontSize: '0.75rem',
             textTransform: 'uppercase',
             letterSpacing: '1px',
             color: '#8a8a9a',
             borderBottom: '1px solid rgba(255,42,109,0.1)',
+            fontWeight: 600,
           }}
         >
           КАТЕГОРИИ
@@ -265,7 +266,7 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
         {installedMods.length > 0 && (
           <Box
             style={{
-              padding: '0.5rem 0.75rem',
+              padding: '0.6rem 0.75rem',
               cursor: 'pointer',
               borderLeft:
                 activeCategory === '__installed__'
@@ -281,14 +282,14 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
             }}
             onClick={() => setActiveCategory('__installed__')}
           >
-            <Icon name="check-circle" color="#39ff14" />
-            <span style={{ fontSize: '0.75rem' }}>Установлено</span>
+            <Icon name="check-circle" color="#39ff14" size={1.1} />
+            <span style={{ fontSize: '0.85rem' }}>Установлено</span>
             <Box
               as="span"
               ml="auto"
               style={{
-                fontSize: '0.65rem',
-                padding: '0.1rem 0.3rem',
+                fontSize: '0.75rem',
+                padding: '0.15rem 0.4rem',
                 background: 'rgba(57,255,20,0.2)',
                 borderRadius: '2px',
                 color: '#39ff14',
@@ -309,7 +310,7 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
             <Box
               key={category}
               style={{
-                padding: '0.5rem 0.75rem',
+                padding: '0.6rem 0.75rem',
                 cursor: 'pointer',
                 borderLeft: isActive
                   ? `3px solid ${config.color}`
@@ -321,14 +322,17 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
               }}
               onClick={() => setActiveCategory(category)}
             >
-              <Icon name={config.icon} style={{ color: config.color }} />
-              <span style={{ fontSize: '0.75rem' }}>{category}</span>
+              <Icon
+                name={config.icon}
+                style={{ color: config.color, fontSize: '1rem' }}
+              />
+              <span style={{ fontSize: '0.85rem' }}>{category}</span>
               <Box
                 as="span"
                 ml="auto"
                 style={{
-                  fontSize: '0.65rem',
-                  padding: '0.1rem 0.3rem',
+                  fontSize: '0.75rem',
+                  padding: '0.15rem 0.4rem',
                   background: 'rgba(255,42,109,0.2)',
                   borderRadius: '2px',
                   color: '#ff2a6d',
@@ -351,30 +355,30 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
 
       {/* Центральная панель - Превью персонажа */}
       <Box style={panelStyles.preview}>
-        <CharacterPreview height="200px" id={props.characterPreviewId} />
+        <CharacterPreview height="220px" id={props.characterPreviewId} />
         <Box mt={1} style={{ textAlign: 'center' }}>
           <Box
             bold
             style={{
-              fontSize: '0.9rem',
+              fontSize: '1.1rem',
               textTransform: 'uppercase',
-              letterSpacing: '1px',
+              letterSpacing: '2px',
             }}
           >
             ПАЦИЕНТ
           </Box>
-          <Stack mt={0.5} justify="center">
+          <Stack mt={0.75} justify="center">
             <Stack.Item>
               <Box style={{ textAlign: 'center' }}>
                 <Box
                   bold
-                  style={{ fontSize: '1.1rem', color: '#ffc800' }}
+                  style={{ fontSize: '1.3rem', color: '#ffc800' }}
                 >
                   {installedMods.length}
                 </Box>
                 <Box
                   style={{
-                    fontSize: '0.6rem',
+                    fontSize: '0.75rem',
                     color: '#8a8a9a',
                     textTransform: 'uppercase',
                   }}
@@ -387,13 +391,13 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
               <Box style={{ textAlign: 'center' }}>
                 <Box
                   bold
-                  style={{ fontSize: '1.1rem', color: '#00f0ff' }}
+                  style={{ fontSize: '1.3rem', color: '#00f0ff' }}
                 >
                   {props.bodyModifications.length}
                 </Box>
                 <Box
                   style={{
-                    fontSize: '0.6rem',
+                    fontSize: '0.75rem',
                     color: '#8a8a9a',
                     textTransform: 'uppercase',
                   }}
@@ -410,11 +414,13 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
       <Box style={panelStyles.list}>
         <Box
           style={{
-            padding: '0.5rem 0.75rem',
-            borderBottom: '1px solid rgba(255,42,109,0.2)',
-            fontSize: '0.8rem',
+            padding: '0.65rem 0.75rem',
+            borderBottom: '2px solid rgba(255,42,109,0.3)',
+            fontSize: '0.95rem',
             textTransform: 'uppercase',
             letterSpacing: '1px',
+            fontWeight: 600,
+            color: '#ff2a6d',
           }}
         >
           {activeCategory === '__installed__'
@@ -554,22 +560,22 @@ const ModificationCard = (props: ModificationCardProps) => {
         style={{
           display: 'flex',
           alignItems: 'center',
-          padding: '0.5rem 0.6rem',
-          gap: '0.5rem',
+          padding: '0.6rem 0.75rem',
+          gap: '0.6rem',
         }}
       >
         {/* Иконка */}
         <Box
           style={{
-            width: '28px',
-            height: '28px',
+            width: '36px',
+            height: '36px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: `rgba(${isInstalled ? '57,255,20' : '0,240,255'},0.1)`,
-            border: `1px solid rgba(${isInstalled ? '57,255,20' : '0,240,255'},0.3)`,
-            borderRadius: '2px',
-            fontSize: '0.85rem',
+            background: `rgba(${isInstalled ? '57,255,20' : '0,240,255'},0.15)`,
+            border: `2px solid ${isInstalled ? '#39ff14' : categoryConfig.color}`,
+            borderRadius: '4px',
+            fontSize: '1.1rem',
             color: isInstalled ? '#39ff14' : categoryConfig.color,
           }}
         >
@@ -580,7 +586,7 @@ const ModificationCard = (props: ModificationCardProps) => {
         <Box style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
           <Box
             style={{
-              fontSize: '0.75rem',
+              fontSize: '0.9rem',
               fontWeight: 600,
               color: '#e0e0e0',
               textTransform: 'uppercase',
@@ -594,7 +600,7 @@ const ModificationCard = (props: ModificationCardProps) => {
           </Box>
           <Box
             style={{
-              fontSize: '0.6rem',
+              fontSize: '0.75rem',
               color: '#8a8a9a',
               textTransform: 'uppercase',
             }}
@@ -653,26 +659,26 @@ const ModificationCard = (props: ModificationCardProps) => {
       {expanded && modification.description && (
         <Box
           style={{
-            padding: '0 0.6rem 0.5rem',
+            padding: '0 0.75rem 0.6rem',
             borderTop: '1px solid rgba(0,240,255,0.1)',
-            marginTop: '0.3rem',
-            paddingTop: '0.3rem',
+            marginTop: '0.4rem',
+            paddingTop: '0.4rem',
           }}
         >
-          <Box style={{ fontSize: '0.7rem', color: '#8a8a9a', lineHeight: 1.4 }}>
+          <Box style={{ fontSize: '0.85rem', color: '#8a8a9a', lineHeight: 1.4 }}>
             {modification.description}
           </Box>
           {modification.cost !== undefined && modification.cost > 0 && (
             <Box
-              mt={0.3}
-              style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+              mt={0.4}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
             >
-              <Box as="span" style={{ fontSize: '0.65rem', color: '#8a8a9a' }}>
+              <Box as="span" style={{ fontSize: '0.8rem', color: '#8a8a9a' }}>
                 Стоимость:
               </Box>
               <Box
                 as="span"
-                style={{ fontSize: '0.7rem', color: '#ffc800', fontWeight: 600 }}
+                style={{ fontSize: '0.85rem', color: '#ffc800', fontWeight: 600 }}
               >
                 {modification.cost}
               </Box>

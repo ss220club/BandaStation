@@ -52,82 +52,74 @@ const CYBER_COLORS = {
   bgPanel: 'rgba(10, 10, 18, 0.95)',
 };
 
-// Конфигурация слотов для Ripperdoc layout
+// Конфигурация слотов
 type SlotConfig = {
   key: string;
   label: string;
   icon: string;
   color: string;
-  side: 'left' | 'right';
   type: 'chassis' | 'brain' | 'hef';
 };
 
-// Части тела для HEF режима - расположение в стиле Ripperdoc
-const SLOT_CONFIGS: SlotConfig[] = [
-  // Левая сторона
+// Все слоты в одном списке - основные и HEF
+const MAIN_SLOTS: SlotConfig[] = [
   {
     key: 'chassis',
-    label: 'Шасси',
+    label: 'ШАССИ',
     icon: 'robot',
     color: CYBER_COLORS.blue,
-    side: 'left',
     type: 'chassis',
   },
   {
     key: 'brain',
-    label: 'Ядро',
+    label: 'ЯДРО',
     icon: 'brain',
     color: CYBER_COLORS.purple,
-    side: 'left',
     type: 'brain',
   },
-  {
-    key: 'hef_l_arm',
-    label: 'Л. Рука',
-    icon: 'hand-paper',
-    color: CYBER_COLORS.yellow,
-    side: 'left',
-    type: 'hef',
-  },
-  {
-    key: 'hef_l_leg',
-    label: 'Л. Нога',
-    icon: 'shoe-prints',
-    color: CYBER_COLORS.green,
-    side: 'left',
-    type: 'hef',
-  },
-  // Правая сторона
+];
+
+const HEF_SLOTS: SlotConfig[] = [
   {
     key: 'hef_head',
-    label: 'Голова',
+    label: 'ГОЛОВА',
     icon: 'head-side-virus',
     color: CYBER_COLORS.magenta,
-    side: 'right',
     type: 'hef',
   },
   {
     key: 'hef_chest',
-    label: 'Торс',
+    label: 'ГРУДЬ',
     icon: 'heart',
     color: CYBER_COLORS.red,
-    side: 'right',
+    type: 'hef',
+  },
+  {
+    key: 'hef_l_arm',
+    label: 'Л. РУКА',
+    icon: 'hand-paper',
+    color: CYBER_COLORS.yellow,
     type: 'hef',
   },
   {
     key: 'hef_r_arm',
-    label: 'П. Рука',
+    label: 'П. РУКА',
     icon: 'hand-paper',
     color: CYBER_COLORS.yellow,
-    side: 'right',
+    type: 'hef',
+  },
+  {
+    key: 'hef_l_leg',
+    label: 'Л. НОГА',
+    icon: 'shoe-prints',
+    color: CYBER_COLORS.green,
     type: 'hef',
   },
   {
     key: 'hef_r_leg',
-    label: 'П. Нога',
+    label: 'П. НОГА',
     icon: 'shoe-prints',
     color: CYBER_COLORS.green,
-    side: 'right',
     type: 'hef',
   },
 ];
@@ -137,7 +129,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   const serverData = useServerPrefs();
 
   // Какой слот сейчас выбран для редактирования
-  const [activeSlot, setActiveSlot] = useState<string | null>(null);
+  const [activeSlot, setActiveSlot] = useState<string | null>('chassis');
 
   // Получаем данные IPC из middleware (ui_data)
   const customization: IPCCustomization = data.ipc_customization || {
@@ -151,7 +143,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     hef_r_leg: 'unbranded',
   };
 
-  // Проверяем species напрямую из character_preferences (как в MainPage.tsx)
+  // Проверяем species напрямую из character_preferences
   const isIPC = data.character_preferences?.misc?.species === 'ipc';
 
   // Получаем статические данные из serverData (preferences.json)
@@ -179,7 +171,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     if (slot.type === 'brain') {
       return currentBrain?.name || 'Positronic';
     }
-    // HEF part
     const manufacturerKey =
       customization[slot.key as keyof IPCCustomization] || 'unbranded';
     const manufacturer = hefManufacturers.find(
@@ -188,21 +179,8 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     return manufacturer?.name || 'Unbranded';
   };
 
-  // Проверить, должен ли слот быть видимым
-  const isSlotVisible = (slot: SlotConfig): boolean => {
-    if (slot.type === 'chassis' || slot.type === 'brain') {
-      return true; // Всегда показываем шасси и мозг
-    }
-    return isHEF; // HEF части только если включен HEF режим
-  };
-
-  // Фильтруем слоты по стороне
-  const leftSlots = SLOT_CONFIGS.filter(
-    (s) => s.side === 'left' && isSlotVisible(s),
-  );
-  const rightSlots = SLOT_CONFIGS.filter(
-    (s) => s.side === 'right' && isSlotVisible(s),
-  );
+  // Собираем все видимые слоты
+  const visibleSlots = isHEF ? [...MAIN_SLOTS, ...HEF_SLOTS] : MAIN_SLOTS;
 
   // Рендер слота
   const renderSlot = (slot: SlotConfig) => {
@@ -214,74 +192,82 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
         key={slot.key}
         style={{
           background: isActive
-            ? `linear-gradient(135deg, rgba(0,240,255,0.15) 0%, ${CYBER_COLORS.bgPanel} 100%)`
+            ? `linear-gradient(135deg, rgba(0,240,255,0.2) 0%, ${CYBER_COLORS.bgPanel} 100%)`
             : `linear-gradient(135deg, rgba(26,26,36,0.8) 0%, ${CYBER_COLORS.bgPanel} 100%)`,
           border: isActive
             ? `2px solid ${CYBER_COLORS.cyan}`
-            : `1px solid rgba(${slot.color === CYBER_COLORS.blue ? '0,128,255' : '0,240,255'},0.3)`,
-          borderRadius: '3px',
-          padding: '0.5rem',
+            : `1px solid rgba(0,128,255,0.3)`,
+          borderRadius: '4px',
+          padding: '0.6rem 0.75rem',
           marginBottom: '0.5rem',
           cursor: 'pointer',
           transition: 'all 0.2s ease',
-          boxShadow: isActive ? `0 0 15px rgba(0,240,255,0.3)` : 'none',
+          boxShadow: isActive ? `0 0 15px rgba(0,240,255,0.4)` : 'none',
         }}
-        onClick={() => setActiveSlot(isActive ? null : slot.key)}
+        onClick={() => setActiveSlot(slot.key)}
       >
         <Box
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem',
+            gap: '0.6rem',
           }}
         >
           <Box
             style={{
-              width: '28px',
-              height: '28px',
+              width: '32px',
+              height: '32px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              background: `rgba(${slot.color === CYBER_COLORS.blue ? '0,128,255' : slot.color === CYBER_COLORS.purple ? '157,78,221' : slot.color === CYBER_COLORS.yellow ? '255,200,0' : slot.color === CYBER_COLORS.green ? '57,255,20' : slot.color === CYBER_COLORS.magenta ? '255,42,109' : '255,51,51'},0.2)`,
-              border: `1px solid ${slot.color}`,
-              borderRadius: '2px',
+              background: `rgba(0,0,0,0.4)`,
+              border: `2px solid ${slot.color}`,
+              borderRadius: '4px',
               color: slot.color,
-              fontSize: '0.85rem',
+              fontSize: '1rem',
+              boxShadow: isActive ? `0 0 8px ${slot.color}` : 'none',
             }}
           >
             <Icon name={slot.icon} />
           </Box>
-          <Box style={{ flex: 1 }}>
+          <Box style={{ flex: 1, minWidth: 0 }}>
             <Box
               style={{
-                fontSize: '0.65rem',
+                fontSize: '0.7rem',
                 color: CYBER_COLORS.textSecondary,
                 textTransform: 'uppercase',
                 letterSpacing: '1px',
+                marginBottom: '0.15rem',
               }}
             >
               {slot.label}
             </Box>
             <Box
               style={{
-                fontSize: '0.75rem',
-                color: CYBER_COLORS.textPrimary,
+                fontSize: '0.85rem',
+                color: isActive ? CYBER_COLORS.cyan : CYBER_COLORS.textPrimary,
                 fontWeight: 600,
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
               }}
             >
               {value}
             </Box>
           </Box>
           <Icon
-            name={isActive ? 'chevron-up' : 'chevron-right'}
-            style={{ color: CYBER_COLORS.textSecondary, fontSize: '0.7rem' }}
+            name={isActive ? 'chevron-right' : 'angle-right'}
+            style={{
+              color: isActive ? CYBER_COLORS.cyan : CYBER_COLORS.textSecondary,
+              fontSize: '0.9rem',
+            }}
           />
         </Box>
       </Box>
     );
   };
 
-  // Рендер панели выбора для активного слота
+  // Рендер панели выбора
   const renderSelectionPanel = () => {
     if (!activeSlot) {
       return (
@@ -294,24 +280,20 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
             height: '100%',
             color: CYBER_COLORS.textSecondary,
             textAlign: 'center',
-            padding: '1rem',
+            padding: '1.5rem',
           }}
         >
-          <Icon name="mouse-pointer" size={2} />
-          <Box mt={1} style={{ fontSize: '0.8rem' }}>
-            Выберите слот слева или справа
-          </Box>
-          <Box
-            mt={0.5}
-            style={{ fontSize: '0.7rem', color: CYBER_COLORS.textSecondary }}
-          >
-            для изменения компонента
+          <Icon name="hand-pointer" size={3} />
+          <Box mt={1.5} style={{ fontSize: '1rem' }}>
+            Выберите слот слева
           </Box>
         </Box>
       );
     }
 
-    const slot = SLOT_CONFIGS.find((s) => s.key === activeSlot);
+    const slot = [...MAIN_SLOTS, ...HEF_SLOTS].find(
+      (s) => s.key === activeSlot,
+    );
     if (!slot) return null;
 
     // Определяем опции для выбора
@@ -336,7 +318,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
       }));
     }
 
-    // Получаем текущее выбранное значение
+    // Текущее выбранное значение
     let currentValue = '';
     if (slot.type === 'chassis') {
       currentValue = customization.chassis_brand;
@@ -348,36 +330,58 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
 
     return (
       <Box style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        {/* Заголовок выбора */}
         <Box
           style={{
-            padding: '0.5rem 0.75rem',
-            background: `linear-gradient(90deg, rgba(0,240,255,0.1), transparent)`,
-            borderBottom: `1px solid rgba(0,240,255,0.2)`,
-            fontSize: '0.75rem',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '1px',
-            color: slot.color,
+            padding: '0.75rem 1rem',
+            background: `linear-gradient(90deg, rgba(0,240,255,0.15), transparent)`,
+            borderBottom: `2px solid ${slot.color}`,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
           }}
         >
-          <Icon name={slot.icon} /> {slot.label}
+          <Icon
+            name={slot.icon}
+            style={{ color: slot.color, fontSize: '1.1rem' }}
+          />
+          <Box
+            style={{
+              fontSize: '1rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+              color: slot.color,
+            }}
+          >
+            {slot.label}
+          </Box>
         </Box>
+
+        {/* Список опций */}
         <Box style={{ flex: 1, overflow: 'auto', padding: '0.5rem' }}>
           {options.map((option) => {
             const isSelected = option.key === currentValue;
+            const optionIcon =
+              slot.type === 'chassis'
+                ? BRAND_ICONS[option.key] || 'robot'
+                : slot.type === 'brain'
+                  ? BRAIN_ICONS[option.key] || 'brain'
+                  : 'industry';
+
             return (
               <Box
                 key={option.key}
                 style={{
                   background: isSelected
-                    ? `linear-gradient(135deg, rgba(57,255,20,0.1) 0%, ${CYBER_COLORS.bgPanel} 100%)`
+                    ? `linear-gradient(135deg, rgba(57,255,20,0.15) 0%, ${CYBER_COLORS.bgPanel} 100%)`
                     : 'rgba(0,0,0,0.3)',
                   border: isSelected
-                    ? `1px solid ${CYBER_COLORS.green}`
+                    ? `2px solid ${CYBER_COLORS.green}`
                     : '1px solid rgba(0,240,255,0.2)',
-                  borderRadius: '2px',
-                  padding: '0.5rem',
-                  marginBottom: '0.4rem',
+                  borderRadius: '4px',
+                  padding: '0.65rem 0.75rem',
+                  marginBottom: '0.5rem',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
                 }}
@@ -398,41 +402,38 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.5rem',
+                    gap: '0.6rem',
                   }}
                 >
+                  {/* Иконка */}
                   <Box
                     style={{
-                      width: '24px',
-                      height: '24px',
+                      width: '36px',
+                      height: '36px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       background: isSelected
                         ? `rgba(57,255,20,0.2)`
-                        : `rgba(0,128,255,0.2)`,
-                      border: `1px solid ${isSelected ? CYBER_COLORS.green : 'rgba(0,128,255,0.4)'}`,
-                      borderRadius: '2px',
+                        : `rgba(0,128,255,0.15)`,
+                      border: `2px solid ${isSelected ? CYBER_COLORS.green : 'rgba(0,128,255,0.4)'}`,
+                      borderRadius: '4px',
                       color: isSelected ? CYBER_COLORS.green : CYBER_COLORS.blue,
-                      fontSize: '0.75rem',
+                      fontSize: '1rem',
                     }}
                   >
-                    <Icon
-                      name={
-                        slot.type === 'chassis'
-                          ? (BRAND_ICONS[option.key] || 'robot')
-                          : slot.type === 'brain'
-                            ? (BRAIN_ICONS[option.key] || 'brain')
-                            : 'industry'
-                      }
-                    />
+                    <Icon name={optionIcon} />
                   </Box>
+
+                  {/* Текст */}
                   <Box style={{ flex: 1, minWidth: 0 }}>
                     <Box
                       style={{
-                        fontSize: '0.75rem',
+                        fontSize: '0.9rem',
                         fontWeight: 600,
-                        color: CYBER_COLORS.textPrimary,
+                        color: isSelected
+                          ? CYBER_COLORS.green
+                          : CYBER_COLORS.textPrimary,
                       }}
                     >
                       {option.name}
@@ -440,24 +441,25 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     {option.description && (
                       <Box
                         style={{
-                          fontSize: '0.6rem',
+                          fontSize: '0.75rem',
                           color: CYBER_COLORS.textSecondary,
-                          marginTop: '0.1rem',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
+                          marginTop: '0.2rem',
+                          lineHeight: 1.3,
                         }}
                       >
                         {option.description}
                       </Box>
                     )}
                   </Box>
+
+                  {/* Галочка */}
                   {isSelected && (
                     <Icon
                       name="check"
                       style={{
                         color: CYBER_COLORS.green,
-                        textShadow: `0 0 5px ${CYBER_COLORS.green}`,
+                        fontSize: '1.1rem',
+                        textShadow: `0 0 8px ${CYBER_COLORS.green}`,
                       }}
                     />
                   )}
@@ -470,9 +472,8 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     );
   };
 
-  // Используем Ripperdoc-style layout
   return (
-    <Modal width="650px" height="500px">
+    <Modal width="750px" height="550px">
       <Box
         style={{
           background: `linear-gradient(135deg, ${CYBER_COLORS.bgDark} 0%, #12121a 100%)`,
@@ -491,32 +492,35 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: '0.5rem 0.75rem',
-            background: `linear-gradient(90deg, rgba(0,128,255,0.2), transparent 50%, rgba(157,78,221,0.2))`,
-            borderBottom: `1px solid rgba(0,128,255,0.3)`,
+            padding: '0.6rem 1rem',
+            background: `linear-gradient(90deg, rgba(0,128,255,0.25), transparent 50%, rgba(157,78,221,0.25))`,
+            borderBottom: `2px solid rgba(0,128,255,0.4)`,
           }}
         >
           <Box
             bold
             style={{
-              fontSize: '1rem',
+              fontSize: '1.15rem',
               color: CYBER_COLORS.blue,
               textTransform: 'uppercase',
               letterSpacing: '2px',
-              textShadow: `0 0 10px rgba(0,128,255,0.5)`,
+              textShadow: `0 0 10px rgba(0,128,255,0.6)`,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
             }}
           >
             <Icon name="robot" /> КОНФИГУРАЦИЯ КПБ
             {isHEF && (
               <Box
                 as="span"
-                ml={1}
+                ml={0.5}
                 style={{
-                  fontSize: '0.6rem',
-                  background: 'rgba(255,200,0,0.2)',
-                  border: '1px solid rgba(255,200,0,0.5)',
-                  padding: '0.1rem 0.3rem',
-                  borderRadius: '2px',
+                  fontSize: '0.7rem',
+                  background: 'rgba(255,200,0,0.25)',
+                  border: '1px solid rgba(255,200,0,0.6)',
+                  padding: '0.2rem 0.5rem',
+                  borderRadius: '3px',
                   color: CYBER_COLORS.yellow,
                   textShadow: 'none',
                 }}
@@ -525,12 +529,12 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
               </Box>
             )}
           </Box>
-          <Button compact icon="times" color="red" onClick={props.handleClose}>
+          <Button icon="times" color="red" onClick={props.handleClose}>
             Закрыть
           </Button>
         </Box>
 
-        {/* Основной контент - Ripperdoc layout */}
+        {/* Основной контент */}
         {!isIPC ? (
           <Box
             style={{
@@ -541,44 +545,81 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
             }}
           >
             <Stack vertical align="center">
-              <Icon name="exclamation-triangle" size={3} color="red" />
-              <Box mt={1} bold fontSize={1.2}>
+              <Icon name="exclamation-triangle" size={4} color="red" />
+              <Box mt={1.5} bold fontSize={1.4}>
                 ДОСТУП ЗАПРЕЩЁН
               </Box>
-              <Box mt={0.5} color="label">
+              <Box mt={0.5} color="label" fontSize={1}>
                 Только для КПБ (IPC)
               </Box>
             </Stack>
           </Box>
         ) : (
           <Box style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-            {/* Левая панель - слоты */}
+            {/* Левая панель - ВСЕ слоты */}
             <Box
               style={{
-                width: '150px',
-                minWidth: '150px',
+                width: '180px',
+                minWidth: '180px',
                 background: 'rgba(0,0,0,0.3)',
-                borderRight: `1px solid rgba(0,128,255,0.2)`,
-                padding: '0.5rem',
+                borderRight: `1px solid rgba(0,128,255,0.25)`,
+                padding: '0.75rem',
                 overflowY: 'auto',
               }}
             >
-              {leftSlots.map(renderSlot)}
+              {/* Основные слоты */}
+              {MAIN_SLOTS.map(renderSlot)}
+
+              {/* HEF слоты - только если HEF режим */}
+              {isHEF && (
+                <>
+                  <Box
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      padding: '0.5rem 0',
+                      margin: '0.25rem 0',
+                    }}
+                  >
+                    <Box
+                      style={{
+                        fontSize: '0.7rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        color: CYBER_COLORS.yellow,
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      HEF Части
+                    </Box>
+                    <Box
+                      style={{
+                        flex: 1,
+                        height: '1px',
+                        background: `linear-gradient(90deg, rgba(255,200,0,0.4), transparent)`,
+                        marginLeft: '0.5rem',
+                      }}
+                    />
+                  </Box>
+                  {HEF_SLOTS.map(renderSlot)}
+                </>
+              )}
             </Box>
 
-            {/* Центр - персонаж и информация */}
+            {/* Центр - персонаж */}
             <Box
               style={{
                 flex: 1,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                padding: '0.5rem',
-                background: `radial-gradient(ellipse at 50% 50%, rgba(0,128,255,0.05) 0%, transparent 70%)`,
+                justifyContent: 'center',
+                padding: '1rem',
+                background: `radial-gradient(ellipse at 50% 50%, rgba(0,128,255,0.06) 0%, transparent 70%)`,
                 position: 'relative',
               }}
             >
-              {/* Сетка на фоне */}
+              {/* Сетка */}
               <Box
                 style={{
                   position: 'absolute',
@@ -587,36 +628,28 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                   right: 0,
                   bottom: 0,
                   backgroundImage: `
-                    linear-gradient(rgba(0,128,255,0.02) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0,128,255,0.02) 1px, transparent 1px)
+                    linear-gradient(rgba(0,128,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0,128,255,0.03) 1px, transparent 1px)
                   `,
-                  backgroundSize: '20px 20px',
+                  backgroundSize: '25px 25px',
                   pointerEvents: 'none',
                 }}
               />
 
-              {/* Персонаж */}
               <Box style={{ position: 'relative', zIndex: 1 }}>
                 <CharacterPreview
-                  height="180px"
+                  height="200px"
                   id={data.character_preview_view}
                 />
               </Box>
 
-              {/* Информация */}
-              <Box
-                mt={0.5}
-                style={{
-                  textAlign: 'center',
-                  zIndex: 1,
-                }}
-              >
+              <Box mt={1} style={{ textAlign: 'center', zIndex: 1 }}>
                 <Box
                   bold
                   style={{
-                    fontSize: '0.85rem',
+                    fontSize: '1.1rem',
                     textTransform: 'uppercase',
-                    letterSpacing: '1px',
+                    letterSpacing: '2px',
                     color: CYBER_COLORS.textPrimary,
                   }}
                 >
@@ -624,17 +657,18 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                 </Box>
                 <Box
                   style={{
-                    fontSize: '0.7rem',
+                    fontSize: '0.85rem',
                     color: CYBER_COLORS.purple,
+                    marginTop: '0.25rem',
                   }}
                 >
                   <Icon name="brain" /> {currentBrain?.name || 'Positronic'}
                 </Box>
                 {isHEF && (
                   <Box
-                    mt={0.25}
+                    mt={0.5}
                     style={{
-                      fontSize: '0.6rem',
+                      fontSize: '0.75rem',
                       color: CYBER_COLORS.yellow,
                     }}
                   >
@@ -644,40 +678,19 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
               </Box>
             </Box>
 
-            {/* Правая панель - слоты или выбор */}
+            {/* Правая панель - выбор */}
             <Box
               style={{
-                width: '180px',
-                minWidth: '180px',
-                background: 'rgba(0,0,0,0.2)',
-                borderLeft: `1px solid rgba(0,128,255,0.2)`,
+                width: '240px',
+                minWidth: '240px',
+                background: 'rgba(0,0,0,0.25)',
+                borderLeft: `1px solid rgba(0,128,255,0.25)`,
                 display: 'flex',
                 flexDirection: 'column',
                 overflow: 'hidden',
               }}
             >
-              {activeSlot ? (
-                renderSelectionPanel()
-              ) : (
-                <Box style={{ padding: '0.5rem', overflowY: 'auto' }}>
-                  {rightSlots.map(renderSlot)}
-                  {rightSlots.length === 0 && (
-                    <Box
-                      style={{
-                        textAlign: 'center',
-                        color: CYBER_COLORS.textSecondary,
-                        fontSize: '0.7rem',
-                        padding: '1rem',
-                      }}
-                    >
-                      <Icon name="info-circle" />
-                      <Box mt={0.5}>
-                        Выберите шасси HEF для настройки отдельных частей тела
-                      </Box>
-                    </Box>
-                  )}
-                </Box>
-              )}
+              {renderSelectionPanel()}
             </Box>
           </Box>
         )}
@@ -685,16 +698,16 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
         {/* Подвал */}
         <Box
           style={{
-            padding: '0.4rem 0.75rem',
+            padding: '0.5rem 1rem',
             background: 'rgba(0,0,0,0.4)',
-            borderTop: `1px solid rgba(0,128,255,0.2)`,
-            fontSize: '0.65rem',
+            borderTop: `1px solid rgba(0,128,255,0.25)`,
+            fontSize: '0.8rem',
             color: CYBER_COLORS.textSecondary,
             textAlign: 'center',
           }}
         >
           {isHEF
-            ? 'HEF режим: настройте производителя для каждой части тела'
+            ? 'HEF режим: выберите производителя для каждой части тела'
             : 'Выберите шасси "HEF (Frankensteinian)" для модульной настройки'}
         </Box>
       </Box>
