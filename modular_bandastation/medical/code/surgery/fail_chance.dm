@@ -24,16 +24,16 @@
 		var/obj/item/realtool = tool
 		var/tool_type = realtool.type
 		if(implements[tool] > 1.15) // чек на гетто инструмент
-			tool_mod = 5
+			tool_mod = SURGERY_TOOL_MOD_GHETTO
 		else
 			if(findtext("[tool_type]", "/advanced"))
-				tool_mod = 0
+				tool_mod = SURGERY_TOOL_MOD_ADVANCED
 			else if(findtext("[tool_type]", "/alien"))
-				tool_mod = 1
+				tool_mod = SURGERY_TOOL_MOD_ALIEN
 			else if(findtext("[tool_type]", "/augment"))
-				tool_mod = 0
+				tool_mod = SURGERY_TOOL_MOD_AUGMENT
 			else
-				tool_mod = 3
+				tool_mod = SURGERY_TOOL_MOD_BASIC
 
 	fail_chance += tool_mod
 
