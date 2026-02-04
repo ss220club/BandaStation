@@ -31,10 +31,10 @@ Regenerative extracts:
 	core_effect_before(H, user)
 	user.do_attack_animation(interacting_with)
 	// BANDASTATION EDIT START
-	H.adjust_brute_loss(-25)
-	H.adjust_fire_loss(-25)
-	H.adjust_tox_loss(-25)
-	H.adjust_oxy_loss(-25)
+	H.adjust_brute_loss(-25, forced = TRUE)
+	H.adjust_fire_loss(-25, forced = TRUE)
+	H.adjust_tox_loss(-25, forced = TRUE) // for jelly & others
+	H.adjust_oxy_loss(-25, forced = TRUE)
 	// BANDASTATION EDIT END
 	core_effect(H, user)
 	playsound(H, 'sound/effects/splat.ogg', 40, TRUE)
