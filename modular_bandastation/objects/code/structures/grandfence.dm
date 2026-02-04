@@ -3,24 +3,24 @@
 	desc = "Высокий, строгий забор с основанием из темного кирпича, вызывающий одновременно страх и уважение к владельцу."
 	icon = 'modular_bandastation/objects/icons/obj/structures/grandfence.dmi'
 	icon_state = "grandfence"
+	opacity = TRUE
 	density = TRUE
-	anchored = FALSE
-	max_integrity = 5000
+	anchored = TRUE
 
 /obj/structure/grandfence/corner
 	name = "fence"
 	desc = "Высокий, строгий забор с основанием из темного кирпича, вызывающий одновременно страх и уважение к владельцу"
 	icon = 'modular_bandastation/objects/icons/obj/structures/grandfence.dmi'
 	icon_state = "grandfence_corner"
+	opacity = TRUE
 	density = TRUE
-	anchored = FALSE
-	max_integrity = 5000
+	anchored = TRUE
 
 /obj/structure/grandfence/cornerend
 	name = "fence"
 	desc = "Высокий, строгий забор с основанием из темного кирпича, вызывающий одновременно страх и уважение к владельцу"
 	icon = 'modular_bandastation/objects/icons/obj/structures/grandfence.dmi'
 	icon_state = "grandfence_cornerend"
+	opacity = TRUE
 	density = TRUE
-	anchored = FALSE
-	max_integrity = 5000
+	anchored = TRUE
