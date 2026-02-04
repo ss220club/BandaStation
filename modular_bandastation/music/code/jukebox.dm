@@ -135,11 +135,16 @@
 		anchors += get_turf(parent)
 
 	var/list/seen = list()
-	for(var/turf/T as anything in anchors)
-		if(!T) continue
-		for(var/mob/M as anything in hearers(sound_range, T))
-			if(seen[M]) continue
+	for(var/turf/T in anchors)
+		if(!T)
+			continue
+
+		for(var/mob/M in hearers(sound_range, T))
+			if(seen[M])
+				continue
+
 			seen[M] = TRUE
+
 			if(!(M in listeners))
 				register_listener(M)
 
