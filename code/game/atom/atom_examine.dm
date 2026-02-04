@@ -96,13 +96,13 @@
 		if(resistance_flags & (ACID_PROOF | UNACIDABLE))
 			.[is_female ? "кислотостойкая" : "кислотостойкий"] = "[he_she_it] [verb_looks]! Возможно, [he_she_it_low] выдержит воздействие кислоты!"
 		if(resistance_flags & FREEZE_PROOF)
-			.[is_female ? "морозостойкая" : "морозостойкий"] = "[he_she_it] изготовлена из моростойких материалов."
+			.[is_female ? "морозостойкая" : "морозостойкий"] = "[he_she_it] [verb_made] из моростойких материалов."
 		if(resistance_flags & FIRE_PROOF)
-			.[is_female ? "огнестойкая" : "огнестойкий"] = "[he_she_it] изготовлена из огнестойких материалов."
+			.[is_female ? "огнестойкая" : "огнестойкий"] = "[he_she_it] [verb_made] из огнестойких материалов."
 		if(resistance_flags & SHUTTLE_CRUSH_PROOF)
-			.[is_female ? "очень прочная" : "очень прочный"] = "[he_she_it] невероятно [adj_very]. Должен выдержать даже приземление шаттла!"
+			.[is_female ? "очень прочная" : "очень прочный"] = "[he_she_it] невероятно [adj_very]. Выдержит даже приземление шаттла!"
 		if(resistance_flags & BOMB_PROOF)
-			.[is_female ? "взрывоустойчивая" : "взрывоустойчивый"] = "[he_she_it] способна пережить взрыв!"
+			.[is_female ? "взрывоустойчивая" : "взрывоустойчивый"] = "[he_she_it] переживёт взрыв!"
 		if(resistance_flags & FLAMMABLE)
 			.[is_female ? "легковоспламеняющаяся" : "легковоспламеняющийся"] = "[he_she_it] может легко загореться."
 
