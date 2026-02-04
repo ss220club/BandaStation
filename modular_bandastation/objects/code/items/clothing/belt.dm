@@ -31,6 +31,9 @@
 	new_icon_state = "sheath_katana"
 	new_inhand_icon_state = "sheath_katana"
 
+/obj/item/storage/belt/sheath/sabre
+	base_icon_state = "sheath"
+
 /obj/item/storage/belt/sheath/sabre/setup_reskins()
 	AddComponent(/datum/component/reskinable_item/sabre, /datum/atom_skin/cap_sheath)
 

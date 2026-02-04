@@ -740,7 +740,6 @@
 	worn_icon_state = "sheath"
 	storage_type = /datum/storage/sabre_belt
 	stored_blade = /obj/item/melee/sabre
-	base_icon_state = "sheath" // BANDASTATION EDIT - added to fix skin appearance issues
 
 /obj/item/storage/belt/sheath/grass_sabre
 	name = "sabre sheath"
