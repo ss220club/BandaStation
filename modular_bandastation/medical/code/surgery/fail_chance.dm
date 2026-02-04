@@ -11,8 +11,8 @@
 	if(!(HAS_TRAIT(patient, TRAIT_ANALGESIA) || patient.stat >= 2))
 		fail_chance += 40
 
-	// Свет
-	if(!surgeon.has_nightvision())
+	// Свет или абдуктор
+	if(!(surgeon.has_nightvision() || isabductor(surgeon)))
 		var/turf/patient_turf = get_turf(patient)
 		var/light_amount = patient_turf.get_lumcount() // минимальное кол-во света для успеха - 0.6
 		if(light_amount < 0.6)
