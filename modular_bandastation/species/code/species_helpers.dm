@@ -4,51 +4,33 @@
 
 /datum/species/human/get_evil_laugh_sound(mob/living/carbon/human/user)
 	if(user.physique == FEMALE)
-		return 'modular_bandastation/emote_panel/audio/human/female/evil_laugh_female_1.ogg'
-	return pick(
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_1.ogg',
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_2.ogg',
-	)
+		return pick(HUMAN_EVIL_LAUGH_SOUNDS_FEMALE)
+	return pick(HUMAN_EVIL_LAUGH_SOUNDS_MALE)
 
 /datum/species/jelly/get_evil_laugh_sound(mob/living/carbon/human/user)
 	if(user.physique == FEMALE)
-		return 'modular_bandastation/emote_panel/audio/human/female/evil_laugh_female_1.ogg'
-	return pick(
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_1.ogg',
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_2.ogg',
-	)
+		return pick(HUMAN_EVIL_LAUGH_SOUNDS_FEMALE)
+	return pick(HUMAN_EVIL_LAUGH_SOUNDS_MALE)
 
 /datum/species/pod/get_evil_laugh_sound(mob/living/carbon/human/user)
 	if(user.physique == FEMALE)
-		return 'modular_bandastation/emote_panel/audio/human/female/evil_laugh_female_1.ogg'
-	return pick(
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_1.ogg',
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_2.ogg',
-	)
+		return pick(HUMAN_EVIL_LAUGH_SOUNDS_FEMALE)
+	return pick(HUMAN_EVIL_LAUGH_SOUNDS_MALE)
 
 /datum/species/skrell/get_evil_laugh_sound(mob/living/carbon/human/user)
 	if(user.physique == FEMALE)
-		return 'modular_bandastation/emote_panel/audio/human/female/evil_laugh_female_1.ogg'
-	return pick(
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_1.ogg',
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_2.ogg',
-	)
+		return pick(HUMAN_EVIL_LAUGH_SOUNDS_FEMALE)
+	return pick(HUMAN_EVIL_LAUGH_SOUNDS_MALE)
 
 /datum/species/tajaran/get_evil_laugh_sound(mob/living/carbon/human/user)
 	if(user.physique == FEMALE)
-		return 'modular_bandastation/emote_panel/audio/human/female/evil_laugh_female_1.ogg'
-	return pick(
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_1.ogg',
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_2.ogg',
-	)
+		return pick(HUMAN_EVIL_LAUGH_SOUNDS_FEMALE)
+	return pick(HUMAN_EVIL_LAUGH_SOUNDS_MALE)
 
 /datum/species/vulpkanin/get_evil_laugh_sound(mob/living/carbon/human/user)
 	if(user.physique == FEMALE)
-		return 'modular_bandastation/emote_panel/audio/human/female/evil_laugh_female_1.ogg'
-	return pick(
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_1.ogg',
-		'modular_bandastation/emote_panel/audio/human/male/evil_laugh_male_2.ogg',
-	)
+		return pick(HUMAN_EVIL_LAUGH_SOUNDS_FEMALE)
+	return pick(HUMAN_EVIL_LAUGH_SOUNDS_MALE)
 
 /datum/species/lizard/get_evil_laugh_sound(mob/living/carbon/human/user)
 	return 'sound/mobs/humanoids/lizard/lizard_laugh1.ogg'
