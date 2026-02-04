@@ -1,4 +1,4 @@
-#define DECLENT_PREPOSITION_S ((copytext(declent_ru(NOMINATIVE), 1, 2) in list("с", "С")) ? "со" : "с") // BANDASTATION EDIT
+#define DECLENT_PREPOSITION_S ((copytext_char(declent_ru(NOMINATIVE), 1, 2) in list("с", "С")) ? "со" : "с") // BANDASTATION EDIT
 
 /obj/structure/chair
 	name = "chair"
@@ -70,7 +70,7 @@
 	. = ..()
 	. += span_notice("[capitalize(declent_ru(NOMINATIVE))] скрепле[genderize_ru(gender, "н", "на", "но", "ны")] парой <b>болтов</b>.")
 	if(!has_buckled_mobs() && can_buckle)
-		. += span_notice("Стоя на [declent_ru(PREPOSITIONAL)], перетащите на него своего персонажа чтобы сесть.")
+		. += span_notice("Перетащите на него своего персонажа, чтобы сесть.")
 
 ///This proc adds the rotate component, overwrite this if you for some reason want to change some specific args.
 /obj/structure/chair/proc/MakeRotate()

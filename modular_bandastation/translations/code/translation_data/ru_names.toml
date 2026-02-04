@@ -117,6 +117,7 @@ dative = "удобному креслу"
 accusative = "удобное кресло"
 instrumental = "удобным креслом"
 prepositional = "удобном кресле"
+gender = "neuter"
 
 ["carpskin chair"]
 nominative = "кресло из карповой кожи"
@@ -125,6 +126,7 @@ dative = "креслу из карповой кожи"
 accusative = "кресло из карповой кожи"
 instrumental = "креслом из карповой кожи"
 prepositional = "кресле из карповой кожи"
+gender = "neuter"
 
 ["office chair"]
 nominative = "офисное кресло"
@@ -133,6 +135,7 @@ dative = "офисному креслу"
 accusative = "офисное кресло"
 instrumental = "офисным креслом"
 prepositional = "офисном кресле"
+gender = "neuter"
 
 ["tactical swivel chair"]
 nominative = "тактическое вращающееся кресло"
@@ -141,6 +144,7 @@ dative = "тактическому вращающемуся креслу"
 accusative = "тактическое вращающееся кресло"
 instrumental = "тактическим вращающимся креслом"
 prepositional = "тактическом вращающемся кресле"
+gender = "neuter"
 
 ["stool"]
 nominative = "табурет"
@@ -158,6 +162,7 @@ dative = "барному табурету"
 accusative = "барный табурет"
 instrumental = "барным табуретом"
 prepositional = "барном табурете"
+gender = "male"
 
 ["bamboo stool"]
 nominative = "бамбуковый табурет"
@@ -166,6 +171,7 @@ dative = "бамбуковому табурету"
 accusative = "бамбуковый табурет"
 instrumental = "бамбуковым табуретом"
 prepositional = "бамбуковом табурете"
+gender = "male"
 
 ["strange chair"]
 nominative = "странный стул"
@@ -174,6 +180,7 @@ dative = "странному стулу"
 accusative = "странный стул"
 instrumental = "странным стулом"
 prepositional = "странном стуле"
+gender = "male"
 
 ["brass chair"]
 nominative = "бронзовое кресло"
@@ -182,6 +189,7 @@ dative = "бронзовому креслу"
 accusative = "бронзовое кресло"
 instrumental = "бронзовым креслом"
 prepositional = "бронзовом кресле"
+gender = "neuter"
 
 ["invisible chair"]
 nominative = "невидимый стул"
@@ -190,6 +198,7 @@ dative = "невидимому стулу"
 accusative = "невидимый стул"
 instrumental = "невидимым стулом"
 prepositional = "невидимом стуле"
+gender = "male"
 
 ["folding plastic chair"]
 nominative = "складной пластиковый стул"
@@ -198,6 +207,7 @@ dative = "складному пластиковому стулу"
 accusative = "складной пластиковый стул"
 instrumental = "складным пластиковым стулом"
 prepositional = "складном пластиковом стуле"
+gender = "male"
 
 ["musical chair"]
 nominative = "музыкальный стульчик"
@@ -206,6 +216,7 @@ dative = "музыкальному стульчику"
 accusative = "музыкальный стульчик"
 instrumental = "музыкальным стульчиком"
 prepositional = "музыкальном стульчике"
+gender = "male"
 
 ["shuttle seat"]
 accusative = "кресло шаттла"
