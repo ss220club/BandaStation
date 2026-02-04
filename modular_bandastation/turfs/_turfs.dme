@@ -1,15 +1,4 @@
 #include "_turfs.dm"
 
 #include "code/water.dm"
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
-#include "_turfs.dm"
-#include "code\water.dm"
-// END_INCLUDE
 #include "code/planet.dm"
