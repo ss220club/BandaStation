@@ -37,9 +37,9 @@
 	pixel_x = -32
 	},
 /obj/item/folder/yellow,
-/obj/item/computer_disk/quartermaster,
-/obj/item/computer_disk/quartermaster,
-/obj/item/computer_disk/quartermaster,
+/obj/item/disk/computer/quartermaster,
+/obj/item/disk/computer/quartermaster,
+/obj/item/disk/computer/quartermaster,
 /obj/item/coin/silver,
 /turf/open/floor/iron,
 /area/station/command/heads_quarters/qm)

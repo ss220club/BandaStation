@@ -260,12 +260,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			var/default_value = read_preference(requested_preference.type)
 
 			// Yielding
-			var/new_color = input(
+			var/new_color = tgui_color_picker(
 				usr,
 				"Select new color",
 				null,
 				default_value || COLOR_WHITE,
-			) as color | null
+			)
 
 			if (!new_color)
 				return FALSE
@@ -543,6 +543,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.icon_render_keys = list()
 		character.update_body(is_creating = TRUE)
 
+	src.parent.validate_job_restrictions() // BANDASTATION ADDITION: Job restrictions
 	SEND_SIGNAL(character, COMSIG_HUMAN_PREFS_APPLIED)
 
 /// Returns whether the parent mob should have the random hardcore settings enabled. Assumes it has a mind.

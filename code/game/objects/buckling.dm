@@ -9,6 +9,8 @@
 	var/buckle_requires_restraints = FALSE
 	/// The mobs currently buckled to this atom
 	var/list/mob/living/buckled_mobs = null //list()
+	/// How much time it takes to buckle a mob to us?
+	var/buckle_delay = 2 SECONDS
 	/// The maximum number of mob/livings allowed to be buckled to this atom at once
 	var/max_buckled_mobs = 1
 	/// Whether things buckled to this atom can be pulled while they're buckled
@@ -321,7 +323,7 @@
 		M.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] начинает пристегивать [M.declent_ru(ACCUSATIVE)] к [declent_ru(DATIVE)]!"),\
 			span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] начинает пристегивать вас к [declent_ru(DATIVE)]!"),\
 			span_hear("Вы слышите металлический лязг."))
-		if(!do_after(user, 2 SECONDS, M))
+		if(!do_after(user, buckle_delay, M))
 			return FALSE
 
 		// Sanity check before we attempt to buckle. Is everything still in a kosher state for buckling after the 3 seconds have elapsed?
@@ -373,13 +375,13 @@
 /atom/movable/proc/unbuckle_feedback(mob/living/unbuckled_mob, mob/unbuckler)
 	if(unbuckled_mob == unbuckler)
 		unbuckled_mob.visible_message(
-			span_notice("[unbuckler] unbuckles [unbuckler.p_them()]self from [src]."),
-			span_notice("You unbuckle yourself from [src]."),
-			span_hear("You hear metal clanking."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстегивает себя от [src.declent_ru(GENITIVE)]."),
+			span_notice("Вы отстегиваете себя от [src.declent_ru(GENITIVE)]."),
+			span_hear("Вы слышите лязг металла."),
 		)
 	else
 		unbuckled_mob.visible_message(
-			span_notice("[unbuckler] unbuckles [unbuckled_mob] from [src]."),
-			span_notice("[unbuckler] unbuckles you from [src]."),
-			span_hear("You hear metal clanking."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстёгивает [unbuckled_mob.declent_ru(ACCUSATIVE)] от [src.declent_ru(GENITIVE)]."),
+			span_notice("[unbuckler.declent_ru(NOMINATIVE)] отстёгивает вас от [src.declent_ru(GENITIVE)]."),
+			span_hear("Вы слышите лязг металла."),
 		)

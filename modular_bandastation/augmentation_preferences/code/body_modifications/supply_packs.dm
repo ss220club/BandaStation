@@ -1,7 +1,7 @@
 /datum/supply_pack/augmentations
 	access = NONE
 	group = "Imports"
-	goody = TRUE
+	order_flags = ORDER_GOODY
 	crate_type = null
 	cost = CARGO_CRATE_VALUE * 10
 	crate_name = "Контейнер Аугментаций"

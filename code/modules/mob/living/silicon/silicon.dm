@@ -49,6 +49,13 @@
 	interaction_range = 7 //wireless control range
 	var/control_disabled = FALSE // Set to 1 to stop AI from interacting via Click()
 
+	// BANDASTATION EDIT START - VOX AI, TG commit
+	// Default VOX.
+	var/vox_type = VOX_NORMAL
+	// The list of available VOX Announcer voices to choose from.
+	var/list/vox_voices = list(VOX_NORMAL, VOX_HL, VOX_BMS, VOX_MIL)
+	// BANDASTATION EDIT END
+
 	var/obj/item/modular_computer/pda/silicon/modularInterface
 
 
@@ -57,7 +64,7 @@
 	if(SStts.tts_enabled)
 		voice = pick(SStts.available_speakers)
 	GLOB.silicon_mobs += src
-	faction += FACTION_SILICON
+	add_faction(FACTION_SILICON)
 	if(ispath(radio))
 		radio = new radio(src)
 	var/datum/atom_hud/data/diagnostic/diag_hud = GLOB.huds[DATA_HUD_DIAGNOSTIC]
@@ -449,7 +456,7 @@
 /mob/living/silicon/get_inactive_held_item()
 	return FALSE
 
-/mob/living/silicon/handle_high_gravity(gravity, seconds_per_tick, times_fired)
+/mob/living/silicon/handle_high_gravity(gravity, seconds_per_tick)
 	return
 
 /mob/living/silicon/rust_heretic_act()
