@@ -96,28 +96,28 @@ const HEF_SLOTS: SlotConfig[] = [
   },
   {
     key: 'hef_l_arm',
-    label: 'Л. РУКА',
+    label: 'ЛЕВАЯ РУКА',
     icon: 'hand-paper',
     color: CYBER_COLORS.yellow,
     type: 'hef',
   },
   {
     key: 'hef_r_arm',
-    label: 'П. РУКА',
+    label: 'ПРАВАЯ РУКА',
     icon: 'hand-paper',
     color: CYBER_COLORS.yellow,
     type: 'hef',
   },
   {
     key: 'hef_l_leg',
-    label: 'Л. НОГА',
+    label: 'ЛЕВАЯ НОГА',
     icon: 'shoe-prints',
     color: CYBER_COLORS.green,
     type: 'hef',
   },
   {
     key: 'hef_r_leg',
-    label: 'П. НОГА',
+    label: 'ПРАВАЯ НОГА',
     icon: 'shoe-prints',
     color: CYBER_COLORS.green,
     type: 'hef',
@@ -233,23 +233,22 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
           <Box style={{ flex: 1, minWidth: 0 }}>
             <Box
               style={{
-                fontSize: '0.7rem',
+                fontSize: '0.65rem',
                 color: CYBER_COLORS.textSecondary,
                 textTransform: 'uppercase',
-                letterSpacing: '1px',
-                marginBottom: '0.15rem',
+                letterSpacing: '0.5px',
+                marginBottom: '0.1rem',
               }}
             >
               {slot.label}
             </Box>
             <Box
               style={{
-                fontSize: '0.85rem',
+                fontSize: '0.8rem',
                 color: isActive ? CYBER_COLORS.cyan : CYBER_COLORS.textPrimary,
                 fontWeight: 600,
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
+                lineHeight: 1.2,
+                wordBreak: 'break-word',
               }}
             >
               {value}
@@ -559,8 +558,8 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
             {/* Левая панель - ВСЕ слоты */}
             <Box
               style={{
-                width: '180px',
-                minWidth: '180px',
+                width: '200px',
+                minWidth: '200px',
                 background: 'rgba(0,0,0,0.3)',
                 borderRight: `1px solid rgba(0,128,255,0.25)`,
                 padding: '0.75rem',

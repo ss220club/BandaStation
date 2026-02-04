@@ -170,12 +170,24 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
 
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
+  // Проверяем, является ли персонаж IPC
+  const isIPC = data.character_preferences?.misc?.species === 'ipc';
+
+  // Категории, которые должны быть скрыты для не-IPC рас
+  const IPC_ONLY_CATEGORIES = ['IPC Chassis', 'IPC Chassis (HEF)'];
+
   // Группируем модификации по категориям
   const { categories, modificationsByCategory } = useMemo(() => {
     const byCategory: Record<string, BodyModification[]> = {};
 
     props.bodyModifications.forEach((mod) => {
       const category = mod.category || 'Прочее';
+
+      // Пропускаем IPC-категории для не-IPC рас
+      if (!isIPC && IPC_ONLY_CATEGORIES.includes(category)) {
+        return;
+      }
+
       if (!byCategory[category]) {
         byCategory[category] = [];
       }
@@ -193,7 +205,7 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
       categories: sortedCategories,
       modificationsByCategory: byCategory,
     };
-  }, [props.bodyModifications]);
+  }, [props.bodyModifications, isIPC]);
 
   // Установленные модификации
   const installedMods = useMemo(() => {
@@ -201,6 +213,14 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
       applied_body_modifications.includes(mod.key),
     );
   }, [props.bodyModifications, applied_body_modifications]);
+
+  // Общее количество отфильтрованных модификаций
+  const filteredModsCount = useMemo(() => {
+    return Object.values(modificationsByCategory).reduce(
+      (sum, mods) => sum + mods.length,
+      0,
+    );
+  }, [modificationsByCategory]);
 
   // Текущая выбранная категория или первая
   const currentCategory = activeCategory || categories[0] || null;
@@ -214,8 +234,8 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
   // Стили для панелей
   const panelStyles = {
     categories: {
-      width: '180px',
-      minWidth: '180px',
+      width: '170px',
+      minWidth: '170px',
       background: 'rgba(0, 0, 0, 0.3)',
       borderRight: '1px solid rgba(255, 42, 109, 0.2)',
       display: 'flex',
@@ -223,18 +243,17 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
       overflowY: 'auto' as const,
     },
     preview: {
-      flex: 1,
+      width: '200px',
+      minWidth: '200px',
       display: 'flex',
       flexDirection: 'column' as const,
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '1rem',
-      background:
-        'radial-gradient(circle at 50% 50%, rgba(255,42,109,0.05) 0%, transparent 70%)',
-      minWidth: '220px',
+      padding: '0.75rem',
+      background: 'transparent',
     },
     list: {
-      width: '300px',
+      flex: 1,
       minWidth: '300px',
       background: 'rgba(0, 0, 0, 0.2)',
       borderLeft: '1px solid rgba(255, 42, 109, 0.2)',
@@ -355,49 +374,54 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
 
       {/* Центральная панель - Превью персонажа */}
       <Box style={panelStyles.preview}>
-        <CharacterPreview height="220px" id={props.characterPreviewId} />
-        <Box mt={1} style={{ textAlign: 'center' }}>
+        <Box
+          style={{
+            border: '2px solid rgba(255,42,109,0.3)',
+            borderRadius: '4px',
+            padding: '0.5rem',
+            background:
+              'radial-gradient(circle at 50% 50%, rgba(255,42,109,0.08) 0%, transparent 70%)',
+          }}
+        >
+          <CharacterPreview height="180px" id={props.characterPreviewId} />
+        </Box>
+        <Box mt={0.75} style={{ textAlign: 'center' }}>
           <Box
             bold
             style={{
-              fontSize: '1.1rem',
+              fontSize: '0.9rem',
               textTransform: 'uppercase',
-              letterSpacing: '2px',
+              letterSpacing: '1px',
+              color: '#ff2a6d',
             }}
           >
             ПАЦИЕНТ
           </Box>
-          <Stack mt={0.75} justify="center">
+          <Stack mt={0.5} justify="center">
             <Stack.Item>
               <Box style={{ textAlign: 'center' }}>
-                <Box
-                  bold
-                  style={{ fontSize: '1.3rem', color: '#ffc800' }}
-                >
+                <Box bold style={{ fontSize: '1.1rem', color: '#ffc800' }}>
                   {installedMods.length}
                 </Box>
                 <Box
                   style={{
-                    fontSize: '0.75rem',
+                    fontSize: '0.6rem',
                     color: '#8a8a9a',
                     textTransform: 'uppercase',
                   }}
                 >
-                  Модификаций
+                  Установлено
                 </Box>
               </Box>
             </Stack.Item>
-            <Stack.Item ml={2}>
+            <Stack.Item ml={1.5}>
               <Box style={{ textAlign: 'center' }}>
-                <Box
-                  bold
-                  style={{ fontSize: '1.3rem', color: '#00f0ff' }}
-                >
-                  {props.bodyModifications.length}
+                <Box bold style={{ fontSize: '1.1rem', color: '#00f0ff' }}>
+                  {filteredModsCount}
                 </Box>
                 <Box
                   style={{
-                    fontSize: '0.75rem',
+                    fontSize: '0.6rem',
                     color: '#8a8a9a',
                     textTransform: 'uppercase',
                   }}
@@ -515,14 +539,14 @@ const ModificationCard = (props: ModificationCardProps) => {
     CATEGORY_CONFIG[modification.category] || DEFAULT_CATEGORY_CONFIG;
 
   // Определяем цвет границы в зависимости от состояния
-  let borderColor = 'rgba(0,240,255,0.2)';
+  let borderColor = 'rgba(255,42,109,0.3)';
   let bgGradient =
-    'linear-gradient(135deg, rgba(26,26,36,0.8) 0%, rgba(10,10,18,0.9) 100%)';
+    'linear-gradient(135deg, rgba(26,26,36,0.9) 0%, rgba(10,10,18,0.95) 100%)';
 
   if (isInstalled) {
     borderColor = '#39ff14';
     bgGradient =
-      'linear-gradient(135deg, rgba(57,255,20,0.1) 0%, rgba(10,10,18,0.9) 100%)';
+      'linear-gradient(135deg, rgba(57,255,20,0.1) 0%, rgba(10,10,18,0.95) 100%)';
   } else if (isIncompatible) {
     borderColor = 'rgba(255,51,51,0.3)';
   }
@@ -532,7 +556,7 @@ const ModificationCard = (props: ModificationCardProps) => {
       style={{
         background: bgGradient,
         border: `1px solid ${borderColor}`,
-        borderRadius: '3px',
+        borderRadius: '4px',
         marginBottom: '0.5rem',
         overflow: 'hidden',
         cursor: 'pointer',
@@ -548,7 +572,7 @@ const ModificationCard = (props: ModificationCardProps) => {
             position: 'absolute',
             top: 0,
             left: 0,
-            width: '3px',
+            width: '4px',
             height: '100%',
             background: '#39ff14',
             boxShadow: '0 0 10px #39ff14',
@@ -559,7 +583,7 @@ const ModificationCard = (props: ModificationCardProps) => {
       <Box
         style={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           padding: '0.6rem 0.75rem',
           gap: '0.6rem',
         }}
@@ -567,15 +591,16 @@ const ModificationCard = (props: ModificationCardProps) => {
         {/* Иконка */}
         <Box
           style={{
-            width: '36px',
-            height: '36px',
+            width: '32px',
+            height: '32px',
+            minWidth: '32px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: `rgba(${isInstalled ? '57,255,20' : '0,240,255'},0.15)`,
+            background: `rgba(${isInstalled ? '57,255,20' : '255,42,109'},0.15)`,
             border: `2px solid ${isInstalled ? '#39ff14' : categoryConfig.color}`,
             borderRadius: '4px',
-            fontSize: '1.1rem',
+            fontSize: '0.95rem',
             color: isInstalled ? '#39ff14' : categoryConfig.color,
           }}
         >
@@ -583,26 +608,24 @@ const ModificationCard = (props: ModificationCardProps) => {
         </Box>
 
         {/* Информация */}
-        <Box style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+        <Box style={{ flex: 1, minWidth: 0 }}>
           <Box
             style={{
-              fontSize: '0.9rem',
+              fontSize: '0.85rem',
               fontWeight: 600,
               color: '#e0e0e0',
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
+              lineHeight: 1.3,
+              marginBottom: '0.2rem',
             }}
           >
             {modification.name}
           </Box>
           <Box
             style={{
-              fontSize: '0.75rem',
+              fontSize: '0.7rem',
               color: '#8a8a9a',
               textTransform: 'uppercase',
+              letterSpacing: '0.5px',
             }}
           >
             {modification.category}
@@ -611,7 +634,12 @@ const ModificationCard = (props: ModificationCardProps) => {
 
         {/* Действия */}
         <Box
-          style={{ display: 'flex', gap: '0.3rem' }}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.3rem',
+            alignItems: 'flex-end',
+          }}
           onClick={(e: React.MouseEvent) => e.stopPropagation()}
         >
           {/* Выбор производителя для протезов */}
@@ -632,24 +660,58 @@ const ModificationCard = (props: ModificationCardProps) => {
           )}
 
           {isInstalled ? (
-            <Button compact icon="times" color="red" onClick={onRemove}>
-              Удалить
-            </Button>
+            <Box
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                padding: '0.35rem 0.6rem',
+                background: 'rgba(255,51,51,0.2)',
+                border: '1px solid rgba(255,51,51,0.5)',
+                borderRadius: '3px',
+                cursor: 'pointer',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                color: '#ff3333',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                whiteSpace: 'nowrap',
+              }}
+              onClick={onRemove}
+            >
+              <Icon name="times" /> Удалить
+            </Box>
           ) : (
             <Tooltip
               content={
                 isIncompatible ? 'Несовместимо с текущими модификациями' : ''
               }
             >
-              <Button
-                compact
-                icon="plus"
-                color="green"
-                disabled={isIncompatible}
-                onClick={onAdd}
+              <Box
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  padding: '0.35rem 0.6rem',
+                  background: isIncompatible
+                    ? 'rgba(100,100,100,0.2)'
+                    : 'rgba(57,255,20,0.15)',
+                  border: isIncompatible
+                    ? '1px solid rgba(100,100,100,0.3)'
+                    : '1px solid rgba(57,255,20,0.5)',
+                  borderRadius: '3px',
+                  cursor: isIncompatible ? 'not-allowed' : 'pointer',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  color: isIncompatible ? '#666' : '#39ff14',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px',
+                  whiteSpace: 'nowrap',
+                }}
+                onClick={isIncompatible ? undefined : onAdd}
               >
-                Установить
-              </Button>
+                <Icon name="plus" /> Установить
+              </Box>
             </Tooltip>
           )}
         </Box>
