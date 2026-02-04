@@ -110,8 +110,6 @@
 	var/obj/machinery/jukebox/concertspeaker/M = new(T)
 	M.dir = dir
 	M.set_anchored(TRUE)
-
-	// переносим схему, если была
 	for(var/obj/item/integrated_circuit/C in contents)
 		C.forceMove(M)
 

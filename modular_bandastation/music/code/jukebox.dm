@@ -7,9 +7,9 @@
 #define MUTE_RANGE (1<<2)
 
 /datum/jukebox/concertspeaker
-	var/list/last_anchor_by_mob = list() // mob->turf
-	var/list/last_d2_by_mob     = list() // mob->num
-	var/list/last_switch_time   = list() // mob->time
+	var/list/last_anchor_by_mob = list()
+	var/list/last_d2_by_mob     = list()
+	var/list/last_switch_time   = list()
 	var/const/ANCHOR_MIN_SWITCH_DS = 5
 	var/const/ANCHOR_MARGIN_D2     = 1
 	var/anchor_scan_timer_id
@@ -38,7 +38,6 @@
 
 	if(istype(machine) && machine.master_component)
 		for(var/obj/item/circuit_component/concert_listener/L in machine.master_component.remote.takers)
-			// берём только реально включённые колонки
 			if(!L.playing) continue
 			var/obj/item/integrated_circuit/C = L.parent
 			var/atom/movable/sh = C?.shell
@@ -52,7 +51,6 @@
 			var/turf/T = get_turf(sh)
 			if(T) turfs += T
 
-	// запасной якорь — сам контроллер
 	var/turf/self_t = get_turf(parent)
 	if(self_t) turfs += self_t
 
@@ -76,8 +74,6 @@
 			best = A
 
 	if(!best) return get_turf(parent)
-
-	// гистерезис
 	var/turf/prev = last_anchor_by_mob[listener]
 	var/prev_d2 = last_d2_by_mob[listener]
 	var/last_sw = last_switch_time[listener] || 0
@@ -90,7 +86,6 @@
 	last_switch_time[listener]   = world.time
 	return best
 
-/// Переопределяем позиционирование — ставим XYZ относительно ближайшего якоря
 /datum/jukebox/concertspeaker/update_listener(mob/listener)
 	if(isnull(active_song_sound))
 		..()
@@ -150,7 +145,6 @@
 
 /datum/jukebox/concertspeaker/proc/periodic_anchor_scan()
 	if(isnull(active_song_sound))
-		// стопаемся корректно; флаг TIMER_STOPPABLE позволяет это изнутри
 		stop_anchor_scan()
 		return
 	register_near_anchor_mobs()

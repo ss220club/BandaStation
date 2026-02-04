@@ -37,7 +37,6 @@
 
 /obj/item/circuit_component/concert_master/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/concert_remote))
-		// Разрешаем вставить только «свой» пульт
 		if(I != remote)
 			to_chat(user, span_warning("Этот пульт не подходит к данному контроллеру."))
 			return TRUE
@@ -77,7 +76,6 @@
 	started_playing.set_output(COMPONENT_SIGNAL)
 
 	for(var/obj/item/circuit_component/concert_listener/L in remote.takers)
-		//L.selected_song = starting_song
 		L.play_track()
 
 /obj/item/circuit_component/concert_master/proc/on_song_end()
@@ -87,7 +85,6 @@
 	stopped_playing.set_output(COMPONENT_SIGNAL)
 
 	for(var/obj/item/circuit_component/concert_listener/L in remote.takers)
-		//L.selected_song = null
 		L.stop_playback()
 
 /datum/supply_pack/goody/concert_controller
