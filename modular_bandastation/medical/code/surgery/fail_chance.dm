@@ -2,7 +2,7 @@
 	var/fail_chance = clamp(GET_FAILURE_CHANCE(operation_time, operation_args[OPERATION_SPEED]), 0, 99)
 
 	// Боль
-	if(!((HAS_TRAIT(patient, TRAIT_ANALGESIA) || HAS_TRAIT(patient, TRAIT_STASIS)) || patient.stat >= 2))
+	if(!(HAS_TRAIT(patient, TRAIT_ANALGESIA) || patient.stat >= 2))
 		fail_chance += 40
 
 	// Свет
