@@ -22,24 +22,65 @@ type BodyModificationsProps = {
 // Маппинг категорий на иконки и цвета
 const CATEGORY_CONFIG: Record<
   string,
-  { icon: string; colorClass: string; order: number }
+  { icon: string; colorClass: string; order: number; color: string }
 > = {
-  Протезы: { icon: 'hand-paper', colorClass: 'prosthetics', order: 1 },
-  Prosthetics: { icon: 'hand-paper', colorClass: 'prosthetics', order: 1 },
-  Импланты: { icon: 'microchip', colorClass: 'implants', order: 2 },
-  Implants: { icon: 'microchip', colorClass: 'implants', order: 2 },
-  Органы: { icon: 'heart', colorClass: 'organs', order: 3 },
-  Organs: { icon: 'heart', colorClass: 'organs', order: 3 },
-  Ампутации: { icon: 'cut', colorClass: 'prosthetics', order: 4 },
-  Amputations: { icon: 'cut', colorClass: 'prosthetics', order: 4 },
-  Роботизация: { icon: 'robot', colorClass: 'chassis', order: 5 },
-  Robotic: { icon: 'robot', colorClass: 'chassis', order: 5 },
+  Протезы: {
+    icon: 'hand-paper',
+    colorClass: 'prosthetics',
+    order: 1,
+    color: '#ffc800',
+  },
+  Prosthetics: {
+    icon: 'hand-paper',
+    colorClass: 'prosthetics',
+    order: 1,
+    color: '#ffc800',
+  },
+  Импланты: {
+    icon: 'microchip',
+    colorClass: 'implants',
+    order: 2,
+    color: '#ff2a6d',
+  },
+  Implants: {
+    icon: 'microchip',
+    colorClass: 'implants',
+    order: 2,
+    color: '#ff2a6d',
+  },
+  Органы: { icon: 'heart', colorClass: 'organs', order: 3, color: '#ff3333' },
+  Organs: { icon: 'heart', colorClass: 'organs', order: 3, color: '#ff3333' },
+  Ампутации: {
+    icon: 'cut',
+    colorClass: 'prosthetics',
+    order: 4,
+    color: '#ffc800',
+  },
+  Amputations: {
+    icon: 'cut',
+    colorClass: 'prosthetics',
+    order: 4,
+    color: '#ffc800',
+  },
+  Роботизация: {
+    icon: 'robot',
+    colorClass: 'chassis',
+    order: 5,
+    color: '#0080ff',
+  },
+  Robotic: {
+    icon: 'robot',
+    colorClass: 'chassis',
+    order: 5,
+    color: '#0080ff',
+  },
 };
 
 const DEFAULT_CATEGORY_CONFIG = {
   icon: 'cog',
   colorClass: 'implants',
   order: 99,
+  color: '#00f0ff',
 };
 
 export const BodyModificationsPage = (props: BodyModificationsProps) => {
@@ -51,33 +92,66 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
   }
 
   return (
-    <Modal className="CyberpunkMods CyberpunkMods--organic">
-      {/* Scanline эффект */}
-      <div className="CyberpunkMods__Scanline" />
-
-      {/* Заголовок */}
-      <div className="CyberpunkMods__Header">
-        <div className="CyberpunkMods__HeaderTitle">
-          <Icon name="user-astronaut" className="CyberpunkMods__HeaderTitleIcon" />
-          <span>МОДИФИКАЦИИ ТЕЛА</span>
-          <span className="CyberpunkMods__HeaderTitleSubtitle">
-            RIPPERDOC INTERFACE v2.77
-          </span>
-        </div>
-        <Button
-          className="CyberpunkMods__HeaderClose"
-          icon="times"
-          onClick={props.handleClose}
+    <Modal width="700px" height="550px">
+      <Box
+        style={{
+          background: 'linear-gradient(135deg, #0a0a12 0%, #1a1a24 100%)',
+          border: '2px solid #ff2a6d',
+          borderRadius: '4px',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          color: 'white',
+        }}
+      >
+        {/* Заголовок */}
+        <Box
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '0.75rem 1rem',
+            background:
+              'linear-gradient(90deg, rgba(255,42,109,0.2), transparent)',
+            borderBottom: '1px solid rgba(255,42,109,0.3)',
+          }}
         >
-          ЗАКРЫТЬ
-        </Button>
-      </div>
+          <Box
+            bold
+            style={{
+              fontSize: '1.1rem',
+              color: '#ff2a6d',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              textShadow: '0 0 10px rgba(255,42,109,0.5)',
+            }}
+          >
+            <Icon name="user-astronaut" /> МОДИФИКАЦИИ ТЕЛА
+            <Box
+              as="span"
+              ml={1}
+              style={{
+                fontSize: '0.65rem',
+                color: '#8a8a9a',
+                letterSpacing: '1px',
+                textShadow: 'none',
+              }}
+            >
+              RIPPERDOC v2.77
+            </Box>
+          </Box>
+          <Button icon="times" color="red" onClick={props.handleClose}>
+            Закрыть
+          </Button>
+        </Box>
 
-      {/* Основной контент */}
-      <BodyModificationsContent
-        bodyModifications={serverData.body_modifications}
-        characterPreviewId={data.character_preview_view}
-      />
+        {/* Основной контент */}
+        <BodyModificationsContent
+          bodyModifications={serverData.body_modifications || []}
+          characterPreviewId={data.character_preview_view}
+        />
+      </Box>
     </Modal>
   );
 };
@@ -137,81 +211,217 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
   const getCategoryConfig = (category: string) =>
     CATEGORY_CONFIG[category] || DEFAULT_CATEGORY_CONFIG;
 
+  // Стили для панелей
+  const panelStyles = {
+    categories: {
+      width: '160px',
+      minWidth: '160px',
+      background: 'rgba(0, 0, 0, 0.3)',
+      borderRight: '1px solid rgba(255, 42, 109, 0.2)',
+      display: 'flex',
+      flexDirection: 'column' as const,
+      overflowY: 'auto' as const,
+    },
+    preview: {
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column' as const,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '1rem',
+      background:
+        'radial-gradient(circle at 50% 50%, rgba(255,42,109,0.05) 0%, transparent 70%)',
+      minWidth: '200px',
+    },
+    list: {
+      width: '260px',
+      minWidth: '260px',
+      background: 'rgba(0, 0, 0, 0.2)',
+      borderLeft: '1px solid rgba(255, 42, 109, 0.2)',
+      display: 'flex',
+      flexDirection: 'column' as const,
+      overflow: 'hidden',
+    },
+  };
+
   return (
-    <div className="CyberpunkMods__Content">
+    <Box style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
       {/* Левая панель - Категории */}
-      <div className="CyberpunkMods__Categories">
-        <div className="CyberpunkMods__CategoriesTitle">КАТЕГОРИИ</div>
+      <Box style={panelStyles.categories}>
+        <Box
+          style={{
+            padding: '0.5rem 0.75rem',
+            fontSize: '0.65rem',
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+            color: '#8a8a9a',
+            borderBottom: '1px solid rgba(255,42,109,0.1)',
+          }}
+        >
+          КАТЕГОРИИ
+        </Box>
 
         {/* Установленные */}
         {installedMods.length > 0 && (
-          <div
-            className={`CyberpunkMods__Category ${activeCategory === '__installed__' ? 'CyberpunkMods__Category--active' : ''}`}
+          <Box
+            style={{
+              padding: '0.5rem 0.75rem',
+              cursor: 'pointer',
+              borderLeft:
+                activeCategory === '__installed__'
+                  ? '3px solid #39ff14'
+                  : '3px solid transparent',
+              background:
+                activeCategory === '__installed__'
+                  ? 'rgba(57,255,20,0.1)'
+                  : 'transparent',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            }}
             onClick={() => setActiveCategory('__installed__')}
           >
-            <Icon name="check-circle" className="CyberpunkMods__CategoryIcon" />
-            <span className="CyberpunkMods__CategoryName">Установлено</span>
-            <span className="CyberpunkMods__CategoryCount">
+            <Icon name="check-circle" color="#39ff14" />
+            <span style={{ fontSize: '0.75rem' }}>Установлено</span>
+            <Box
+              as="span"
+              ml="auto"
+              style={{
+                fontSize: '0.65rem',
+                padding: '0.1rem 0.3rem',
+                background: 'rgba(57,255,20,0.2)',
+                borderRadius: '2px',
+                color: '#39ff14',
+              }}
+            >
               {installedMods.length}
-            </span>
-          </div>
+            </Box>
+          </Box>
         )}
 
         {/* Категории модификаций */}
         {categories.map((category) => {
           const config = getCategoryConfig(category);
           const count = modificationsByCategory[category]?.length || 0;
+          const isActive = currentCategory === category;
 
           return (
-            <div
+            <Box
               key={category}
-              className={`CyberpunkMods__Category CyberpunkMods__Category--${config.colorClass} ${currentCategory === category ? 'CyberpunkMods__Category--active' : ''}`}
+              style={{
+                padding: '0.5rem 0.75rem',
+                cursor: 'pointer',
+                borderLeft: isActive
+                  ? `3px solid ${config.color}`
+                  : '3px solid transparent',
+                background: isActive ? `rgba(255,42,109,0.1)` : 'transparent',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
               onClick={() => setActiveCategory(category)}
             >
-              <Icon name={config.icon} className="CyberpunkMods__CategoryIcon" />
-              <span className="CyberpunkMods__CategoryName">{category}</span>
-              <span className="CyberpunkMods__CategoryCount">{count}</span>
-            </div>
+              <Icon name={config.icon} style={{ color: config.color }} />
+              <span style={{ fontSize: '0.75rem' }}>{category}</span>
+              <Box
+                as="span"
+                ml="auto"
+                style={{
+                  fontSize: '0.65rem',
+                  padding: '0.1rem 0.3rem',
+                  background: 'rgba(255,42,109,0.2)',
+                  borderRadius: '2px',
+                  color: '#ff2a6d',
+                }}
+              >
+                {count}
+              </Box>
+            </Box>
           );
         })}
-      </div>
+
+        {categories.length === 0 && (
+          <Box
+            style={{ padding: '1rem', color: '#8a8a9a', textAlign: 'center' }}
+          >
+            Нет доступных категорий
+          </Box>
+        )}
+      </Box>
 
       {/* Центральная панель - Превью персонажа */}
-      <div className="CyberpunkMods__Preview">
-        <div className="CyberpunkMods__PreviewCharacter">
-          <CharacterPreview height="280px" id={props.characterPreviewId} />
-        </div>
-        <div className="CyberpunkMods__PreviewInfo">
-          <div className="CyberpunkMods__PreviewInfoName">ПАЦИЕНТ</div>
-          <div className="CyberpunkMods__PreviewInfoStats">
-            <div className="CyberpunkMods__PreviewInfoStat">
-              <div className="CyberpunkMods__PreviewInfoStatValue">
-                {installedMods.length}
-              </div>
-              <div className="CyberpunkMods__PreviewInfoStatLabel">
-                Модификаций
-              </div>
-            </div>
-            <div className="CyberpunkMods__PreviewInfoStat">
-              <div className="CyberpunkMods__PreviewInfoStatValue">
-                {props.bodyModifications.length}
-              </div>
-              <div className="CyberpunkMods__PreviewInfoStatLabel">Доступно</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Box style={panelStyles.preview}>
+        <CharacterPreview height="200px" id={props.characterPreviewId} />
+        <Box mt={1} style={{ textAlign: 'center' }}>
+          <Box
+            bold
+            style={{
+              fontSize: '0.9rem',
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+            }}
+          >
+            ПАЦИЕНТ
+          </Box>
+          <Stack mt={0.5} justify="center">
+            <Stack.Item>
+              <Box style={{ textAlign: 'center' }}>
+                <Box
+                  bold
+                  style={{ fontSize: '1.1rem', color: '#ffc800' }}
+                >
+                  {installedMods.length}
+                </Box>
+                <Box
+                  style={{
+                    fontSize: '0.6rem',
+                    color: '#8a8a9a',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Модификаций
+                </Box>
+              </Box>
+            </Stack.Item>
+            <Stack.Item ml={2}>
+              <Box style={{ textAlign: 'center' }}>
+                <Box
+                  bold
+                  style={{ fontSize: '1.1rem', color: '#00f0ff' }}
+                >
+                  {props.bodyModifications.length}
+                </Box>
+                <Box
+                  style={{
+                    fontSize: '0.6rem',
+                    color: '#8a8a9a',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Доступно
+                </Box>
+              </Box>
+            </Stack.Item>
+          </Stack>
+        </Box>
+      </Box>
 
       {/* Правая панель - Список модификаций */}
-      <div className="CyberpunkMods__List">
-        <div className="CyberpunkMods__ListHeader">
-          <span className="CyberpunkMods__ListHeaderTitle">
-            {activeCategory === '__installed__'
-              ? 'УСТАНОВЛЕННЫЕ'
-              : currentCategory?.toUpperCase() || 'МОДИФИКАЦИИ'}
-          </span>
-        </div>
-        <div className="CyberpunkMods__ListContent">
+      <Box style={panelStyles.list}>
+        <Box
+          style={{
+            padding: '0.5rem 0.75rem',
+            borderBottom: '1px solid rgba(255,42,109,0.2)',
+            fontSize: '0.8rem',
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+          }}
+        >
+          {activeCategory === '__installed__'
+            ? 'УСТАНОВЛЕННЫЕ'
+            : currentCategory?.toUpperCase() || 'МОДИФИКАЦИИ'}
+        </Box>
+        <Box style={{ flex: 1, overflowY: 'auto', padding: '0.5rem' }}>
           {activeCategory === '__installed__' ? (
             // Показываем установленные
             installedMods.length > 0 ? (
@@ -238,14 +448,13 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
                 Нет установленных модификаций
               </Box>
             )
-          ) : (
+          ) : currentMods.length > 0 ? (
             // Показываем модификации категории
             currentMods.map((mod) => {
               const isInstalled = applied_body_modifications.includes(mod.key);
               const isIncompatible =
                 !isInstalled &&
-                (applied_body_modifications.includes(mod.key) ||
-                  incompatible_body_modifications.includes(mod.key));
+                incompatible_body_modifications.includes(mod.key);
 
               return (
                 <ModificationCard
@@ -266,10 +475,14 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
                 />
               );
             })
+          ) : (
+            <Box color="label" textAlign="center" mt={2}>
+              Выберите категорию
+            </Box>
           )}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
@@ -295,30 +508,109 @@ const ModificationCard = (props: ModificationCardProps) => {
   const categoryConfig =
     CATEGORY_CONFIG[modification.category] || DEFAULT_CATEGORY_CONFIG;
 
-  let cardClass = 'CyberpunkMods__ModCard';
-  if (isInstalled) cardClass += ' CyberpunkMods__ModCard--installed';
-  if (isIncompatible) cardClass += ' CyberpunkMods__ModCard--incompatible';
+  // Определяем цвет границы в зависимости от состояния
+  let borderColor = 'rgba(0,240,255,0.2)';
+  let bgGradient =
+    'linear-gradient(135deg, rgba(26,26,36,0.8) 0%, rgba(10,10,18,0.9) 100%)';
+
+  if (isInstalled) {
+    borderColor = '#39ff14';
+    bgGradient =
+      'linear-gradient(135deg, rgba(57,255,20,0.1) 0%, rgba(10,10,18,0.9) 100%)';
+  } else if (isIncompatible) {
+    borderColor = 'rgba(255,51,51,0.3)';
+  }
 
   return (
-    <div className={cardClass} onClick={() => setExpanded(!expanded)}>
-      <div className="CyberpunkMods__ModCardHeader">
-        <div className="CyberpunkMods__ModCardIcon">
+    <Box
+      style={{
+        background: bgGradient,
+        border: `1px solid ${borderColor}`,
+        borderRadius: '3px',
+        marginBottom: '0.5rem',
+        overflow: 'hidden',
+        cursor: 'pointer',
+        position: 'relative',
+        opacity: isIncompatible ? 0.5 : 1,
+      }}
+      onClick={() => setExpanded(!expanded)}
+    >
+      {/* Индикатор установленной модификации */}
+      {isInstalled && (
+        <Box
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '3px',
+            height: '100%',
+            background: '#39ff14',
+            boxShadow: '0 0 10px #39ff14',
+          }}
+        />
+      )}
+
+      <Box
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0.5rem 0.6rem',
+          gap: '0.5rem',
+        }}
+      >
+        {/* Иконка */}
+        <Box
+          style={{
+            width: '28px',
+            height: '28px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: `rgba(${isInstalled ? '57,255,20' : '0,240,255'},0.1)`,
+            border: `1px solid rgba(${isInstalled ? '57,255,20' : '0,240,255'},0.3)`,
+            borderRadius: '2px',
+            fontSize: '0.85rem',
+            color: isInstalled ? '#39ff14' : categoryConfig.color,
+          }}
+        >
           <Icon name={categoryConfig.icon} />
-        </div>
-        <div className="CyberpunkMods__ModCardInfo">
-          <div className="CyberpunkMods__ModCardName">{modification.name}</div>
-          <div className="CyberpunkMods__ModCardCategory">
+        </Box>
+
+        {/* Информация */}
+        <Box style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+          <Box
+            style={{
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              color: '#e0e0e0',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {modification.name}
+          </Box>
+          <Box
+            style={{
+              fontSize: '0.6rem',
+              color: '#8a8a9a',
+              textTransform: 'uppercase',
+            }}
+          >
             {modification.category}
-          </div>
-        </div>
-        <div
-          className="CyberpunkMods__ModCardActions"
-          onClick={(e) => e.stopPropagation()}
+          </Box>
+        </Box>
+
+        {/* Действия */}
+        <Box
+          style={{ display: 'flex', gap: '0.3rem' }}
+          onClick={(e: React.MouseEvent) => e.stopPropagation()}
         >
           {/* Выбор производителя для протезов */}
           {Array.isArray(manufacturers) && isInstalled && (
             <Dropdown
-              className="CyberpunkMods__ModCardBtn CyberpunkMods__ModCardBtn--manufacturer"
               selected={selectedManufacturer ?? ''}
               options={manufacturers.map((brand: string) => ({
                 value: brand,
@@ -334,12 +626,8 @@ const ModificationCard = (props: ModificationCardProps) => {
           )}
 
           {isInstalled ? (
-            <Button
-              className="CyberpunkMods__ModCardBtn CyberpunkMods__ModCardBtn--remove"
-              icon="times"
-              onClick={onRemove}
-            >
-              УДАЛИТЬ
+            <Button compact icon="times" color="red" onClick={onRemove}>
+              Удалить
             </Button>
           ) : (
             <Tooltip
@@ -348,36 +636,50 @@ const ModificationCard = (props: ModificationCardProps) => {
               }
             >
               <Button
-                className="CyberpunkMods__ModCardBtn CyberpunkMods__ModCardBtn--add"
+                compact
                 icon="plus"
+                color="green"
                 disabled={isIncompatible}
                 onClick={onAdd}
               >
-                УСТАНОВИТЬ
+                Установить
               </Button>
             </Tooltip>
           )}
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       {/* Развернутое описание */}
       {expanded && modification.description && (
-        <div className="CyberpunkMods__ModCardDetails">
-          <div className="CyberpunkMods__ModCardDetailsDesc">
+        <Box
+          style={{
+            padding: '0 0.6rem 0.5rem',
+            borderTop: '1px solid rgba(0,240,255,0.1)',
+            marginTop: '0.3rem',
+            paddingTop: '0.3rem',
+          }}
+        >
+          <Box style={{ fontSize: '0.7rem', color: '#8a8a9a', lineHeight: 1.4 }}>
             {modification.description}
-          </div>
+          </Box>
           {modification.cost !== undefined && modification.cost > 0 && (
-            <div className="CyberpunkMods__ModCardDetailsCost">
-              <span className="CyberpunkMods__ModCardDetailsCostLabel">
-                Стоимость очков:
-              </span>
-              <span className="CyberpunkMods__ModCardDetailsCostValue">
+            <Box
+              mt={0.3}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+            >
+              <Box as="span" style={{ fontSize: '0.65rem', color: '#8a8a9a' }}>
+                Стоимость:
+              </Box>
+              <Box
+                as="span"
+                style={{ fontSize: '0.7rem', color: '#ffc800', fontWeight: 600 }}
+              >
                 {modification.cost}
-              </span>
-            </div>
+              </Box>
+            </Box>
           )}
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 };
