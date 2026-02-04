@@ -235,7 +235,7 @@ Regenerative extracts:
 
 /obj/item/slimecross/regenerative/oil
 	colour = SLIME_TYPE_OIL
-	effect_desc = "Частично лечит цель и flashes everyone in sight."
+	effect_desc = "Частично лечит цель и ослепляет всех в зоне видимости."
 
 /obj/item/slimecross/regenerative/oil/core_effect(mob/living/target, mob/user)
 	playsound(src, 'sound/items/weapons/flash.ogg', 100, TRUE)
