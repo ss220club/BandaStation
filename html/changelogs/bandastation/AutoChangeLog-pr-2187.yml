@@ -1,0 +1,4 @@
+author: "Maximal08"
+delete-after: True
+changes:
+  - balance: "Slip Change: Removed 2 seconds of immobilize time, replaced with 0.5 seconds of paralysis"
