@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import {
   Box,
   Button,
-  Dropdown,
   Icon,
   Modal,
   Stack,
@@ -10,7 +9,6 @@ import {
 } from 'tgui-core/components';
 
 import { useBackend } from '../../../backend';
-import { CharacterPreview } from '../../common/CharacterPreview';
 import { LoadingScreen } from '../../common/LoadingScreen';
 import type { BodyModification, PreferencesMenuData } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
@@ -149,7 +147,6 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
         {/* Основной контент */}
         <BodyModificationsContent
           bodyModifications={serverData.body_modifications || []}
-          characterPreviewId={data.character_preview_view}
         />
       </Box>
     </Modal>
@@ -158,7 +155,6 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
 
 type BodyModificationsContentProps = {
   bodyModifications: BodyModification[];
-  characterPreviewId: string;
 };
 
 const BodyModificationsContent = (props: BodyModificationsContentProps) => {
@@ -372,61 +368,193 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
         )}
       </Box>
 
-      {/* Центральная панель - Превью персонажа */}
+      {/* Центральная панель - Статус модификаций */}
       <Box style={panelStyles.preview}>
+        {/* Статусный дисплей в стиле Cyberpunk */}
         <Box
           style={{
-            border: '2px solid rgba(255,42,109,0.3)',
-            borderRadius: '4px',
-            padding: '0.5rem',
+            width: '100%',
+            padding: '1rem',
             background:
-              'radial-gradient(circle at 50% 50%, rgba(255,42,109,0.08) 0%, transparent 70%)',
+              'linear-gradient(180deg, rgba(255,42,109,0.1) 0%, rgba(0,0,0,0.3) 100%)',
+            border: '2px solid rgba(255,42,109,0.4)',
+            borderRadius: '4px',
           }}
         >
-          <CharacterPreview height="180px" id={props.characterPreviewId} />
-        </Box>
-        <Box mt={0.75} style={{ textAlign: 'center' }}>
+          {/* Заголовок */}
           <Box
-            bold
             style={{
-              fontSize: '0.9rem',
-              textTransform: 'uppercase',
-              letterSpacing: '1px',
-              color: '#ff2a6d',
+              textAlign: 'center',
+              marginBottom: '1rem',
+              paddingBottom: '0.75rem',
+              borderBottom: '1px solid rgba(255,42,109,0.3)',
             }}
           >
-            ПАЦИЕНТ
+            <Icon
+              name="user-astronaut"
+              style={{
+                fontSize: '2rem',
+                color: '#ff2a6d',
+                display: 'block',
+                marginBottom: '0.5rem',
+                filter: 'drop-shadow(0 0 10px rgba(255,42,109,0.5))',
+              }}
+            />
+            <Box
+              bold
+              style={{
+                fontSize: '0.9rem',
+                textTransform: 'uppercase',
+                letterSpacing: '2px',
+                color: '#ff2a6d',
+                textShadow: '0 0 10px rgba(255,42,109,0.5)',
+              }}
+            >
+              RIPPERDOC
+            </Box>
+            <Box
+              style={{
+                fontSize: '0.65rem',
+                color: '#8a8a9a',
+                marginTop: '0.25rem',
+              }}
+            >
+              СИСТЕМА МОДИФИКАЦИЙ
+            </Box>
           </Box>
-          <Stack mt={0.5} justify="center">
+
+          {/* Статистика */}
+          <Stack vertical>
+            {/* Установленные */}
             <Stack.Item>
-              <Box style={{ textAlign: 'center' }}>
-                <Box bold style={{ fontSize: '1.1rem', color: '#ffc800' }}>
-                  {installedMods.length}
-                </Box>
+              <Box
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0.5rem 0.75rem',
+                  background: 'rgba(57,255,20,0.1)',
+                  border: '1px solid rgba(57,255,20,0.3)',
+                  borderRadius: '3px',
+                  marginBottom: '0.5rem',
+                }}
+              >
                 <Box
                   style={{
-                    fontSize: '0.6rem',
-                    color: '#8a8a9a',
-                    textTransform: 'uppercase',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
                   }}
                 >
-                  Установлено
+                  <Icon name="check-circle" style={{ color: '#39ff14' }} />
+                  <Box
+                    style={{
+                      fontSize: '0.8rem',
+                      color: '#e0e0e0',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    Активно
+                  </Box>
+                </Box>
+                <Box
+                  bold
+                  style={{
+                    fontSize: '1.25rem',
+                    color: '#39ff14',
+                    textShadow: '0 0 10px rgba(57,255,20,0.5)',
+                  }}
+                >
+                  {installedMods.length}
                 </Box>
               </Box>
             </Stack.Item>
-            <Stack.Item ml={1.5}>
-              <Box style={{ textAlign: 'center' }}>
-                <Box bold style={{ fontSize: '1.1rem', color: '#00f0ff' }}>
-                  {filteredModsCount}
-                </Box>
+
+            {/* Доступно */}
+            <Stack.Item>
+              <Box
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0.5rem 0.75rem',
+                  background: 'rgba(0,240,255,0.1)',
+                  border: '1px solid rgba(0,240,255,0.3)',
+                  borderRadius: '3px',
+                  marginBottom: '0.5rem',
+                }}
+              >
                 <Box
                   style={{
-                    fontSize: '0.6rem',
-                    color: '#8a8a9a',
-                    textTransform: 'uppercase',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
                   }}
                 >
-                  Доступно
+                  <Icon name="list" style={{ color: '#00f0ff' }} />
+                  <Box
+                    style={{
+                      fontSize: '0.8rem',
+                      color: '#e0e0e0',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    Доступно
+                  </Box>
+                </Box>
+                <Box
+                  bold
+                  style={{
+                    fontSize: '1.25rem',
+                    color: '#00f0ff',
+                    textShadow: '0 0 10px rgba(0,240,255,0.5)',
+                  }}
+                >
+                  {filteredModsCount}
+                </Box>
+              </Box>
+            </Stack.Item>
+
+            {/* Категорий */}
+            <Stack.Item>
+              <Box
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0.5rem 0.75rem',
+                  background: 'rgba(255,200,0,0.1)',
+                  border: '1px solid rgba(255,200,0,0.3)',
+                  borderRadius: '3px',
+                }}
+              >
+                <Box
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                  }}
+                >
+                  <Icon name="folder" style={{ color: '#ffc800' }} />
+                  <Box
+                    style={{
+                      fontSize: '0.8rem',
+                      color: '#e0e0e0',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    Категорий
+                  </Box>
+                </Box>
+                <Box
+                  bold
+                  style={{
+                    fontSize: '1.25rem',
+                    color: '#ffc800',
+                    textShadow: '0 0 10px rgba(255,200,0,0.5)',
+                  }}
+                >
+                  {categories.length}
                 </Box>
               </Box>
             </Stack.Item>
@@ -529,6 +657,7 @@ const ModificationCard = (props: ModificationCardProps) => {
   const { modification, isInstalled, isIncompatible, onAdd, onRemove } = props;
   const { act, data } = useBackend<PreferencesMenuData>();
   const [expanded, setExpanded] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const manufacturers = data.manufacturers?.[modification.key] || null;
   const selectedManufacturer =
@@ -642,21 +771,93 @@ const ModificationCard = (props: ModificationCardProps) => {
           }}
           onClick={(e: React.MouseEvent) => e.stopPropagation()}
         >
-          {/* Выбор производителя для протезов */}
+          {/* Выбор производителя для протезов - Cyberpunk стиль */}
           {Array.isArray(manufacturers) && isInstalled && (
-            <Dropdown
-              selected={selectedManufacturer ?? ''}
-              options={manufacturers.map((brand: string) => ({
-                value: brand,
-                displayText: brand === 'None' ? 'Без протеза' : brand,
-              }))}
-              onSelected={(brand) =>
-                act('set_body_modification_manufacturer', {
-                  body_modification_key: modification.key,
-                  manufacturer: brand,
-                })
-              }
-            />
+            <Box style={{ position: 'relative' }}>
+              <Box
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  padding: '0.35rem 0.6rem',
+                  background: 'rgba(0,240,255,0.1)',
+                  border: '1px solid rgba(0,240,255,0.4)',
+                  borderRadius: '3px',
+                  cursor: 'pointer',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  color: '#00f0ff',
+                  textTransform: 'uppercase',
+                  minWidth: '120px',
+                  justifyContent: 'space-between',
+                }}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                <span>
+                  {selectedManufacturer === 'None'
+                    ? 'Без протеза'
+                    : selectedManufacturer}
+                </span>
+                <Icon name={dropdownOpen ? 'chevron-up' : 'chevron-down'} />
+              </Box>
+              {dropdownOpen && (
+                <Box
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    right: 0,
+                    marginTop: '0.25rem',
+                    minWidth: '150px',
+                    background:
+                      'linear-gradient(180deg, rgba(10,10,18,0.98) 0%, rgba(26,26,36,0.98) 100%)',
+                    border: '1px solid rgba(0,240,255,0.5)',
+                    borderRadius: '4px',
+                    overflow: 'hidden',
+                    zIndex: 1000,
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                  }}
+                >
+                  {manufacturers.map((brand: string) => {
+                    const isSelected = brand === selectedManufacturer;
+                    return (
+                      <Box
+                        key={brand}
+                        style={{
+                          padding: '0.5rem 0.75rem',
+                          fontSize: '0.8rem',
+                          color: isSelected ? '#00f0ff' : '#e0e0e0',
+                          background: isSelected
+                            ? 'rgba(0,240,255,0.15)'
+                            : 'transparent',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          borderLeft: isSelected
+                            ? '3px solid #00f0ff'
+                            : '3px solid transparent',
+                        }}
+                        onClick={() => {
+                          act('set_body_modification_manufacturer', {
+                            body_modification_key: modification.key,
+                            manufacturer: brand,
+                          });
+                          setDropdownOpen(false);
+                        }}
+                      >
+                        <span>{brand === 'None' ? 'Без протеза' : brand}</span>
+                        {isSelected && (
+                          <Icon
+                            name="check"
+                            style={{ color: '#00f0ff', fontSize: '0.75rem' }}
+                          />
+                        )}
+                      </Box>
+                    );
+                  })}
+                </Box>
+              )}
+            </Box>
           )}
 
           {isInstalled ? (

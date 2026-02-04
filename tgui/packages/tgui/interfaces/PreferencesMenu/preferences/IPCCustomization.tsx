@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Box, Button, Icon, Modal, Stack } from 'tgui-core/components';
 
 import { useBackend } from '../../../backend';
-import { CharacterPreview } from '../../common/CharacterPreview';
 import type {
   IPCBrainType,
   IPCChassisBrand,
@@ -605,7 +604,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
               )}
             </Box>
 
-            {/* Центр - персонаж */}
+            {/* Центр - Статус КПБ */}
             <Box
               style={{
                 flex: 1,
@@ -635,43 +634,198 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                 }}
               />
 
-              <Box style={{ position: 'relative', zIndex: 1 }}>
-                <CharacterPreview
-                  height="200px"
-                  id={data.character_preview_view}
-                />
-              </Box>
-
-              <Box mt={1} style={{ textAlign: 'center', zIndex: 1 }}>
-                <Box
-                  bold
-                  style={{
-                    fontSize: '1.1rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '2px',
-                    color: CYBER_COLORS.textPrimary,
-                  }}
-                >
-                  {currentChassis?.name || 'STANDARD'}
-                </Box>
+              {/* Центральный дисплей статуса */}
+              <Box
+                style={{
+                  position: 'relative',
+                  zIndex: 1,
+                  width: '100%',
+                  maxWidth: '220px',
+                  padding: '1.25rem',
+                  background:
+                    'linear-gradient(180deg, rgba(0,128,255,0.15) 0%, rgba(0,0,0,0.4) 100%)',
+                  border: `2px solid ${CYBER_COLORS.blue}`,
+                  borderRadius: '6px',
+                  boxShadow: `0 0 20px rgba(0,128,255,0.2), inset 0 0 30px rgba(0,128,255,0.05)`,
+                }}
+              >
+                {/* Иконка робота */}
                 <Box
                   style={{
-                    fontSize: '0.85rem',
-                    color: CYBER_COLORS.purple,
-                    marginTop: '0.25rem',
+                    textAlign: 'center',
+                    marginBottom: '1rem',
+                    paddingBottom: '0.75rem',
+                    borderBottom: `1px solid rgba(0,128,255,0.3)`,
                   }}
                 >
-                  <Icon name="brain" /> {currentBrain?.name || 'Positronic'}
-                </Box>
-                {isHEF && (
+                  <Icon
+                    name="robot"
+                    style={{
+                      fontSize: '2.5rem',
+                      color: CYBER_COLORS.blue,
+                      display: 'block',
+                      marginBottom: '0.5rem',
+                      filter: `drop-shadow(0 0 15px ${CYBER_COLORS.blue})`,
+                    }}
+                  />
                   <Box
-                    mt={0.5}
+                    bold
                     style={{
                       fontSize: '0.75rem',
-                      color: CYBER_COLORS.yellow,
+                      textTransform: 'uppercase',
+                      letterSpacing: '2px',
+                      color: CYBER_COLORS.cyan,
                     }}
                   >
-                    HEF модульная система
+                    IPC UNIT
+                  </Box>
+                </Box>
+
+                {/* Шасси */}
+                <Box
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '0.5rem 0.6rem',
+                    background: 'rgba(0,128,255,0.1)',
+                    border: `1px solid rgba(0,128,255,0.4)`,
+                    borderRadius: '3px',
+                    marginBottom: '0.5rem',
+                  }}
+                >
+                  <Box
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                    }}
+                  >
+                    <Icon name="microchip" style={{ color: CYBER_COLORS.blue }} />
+                    <Box
+                      style={{
+                        fontSize: '0.7rem',
+                        color: '#8a8a9a',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      Шасси
+                    </Box>
+                  </Box>
+                  <Box
+                    bold
+                    style={{
+                      fontSize: '0.85rem',
+                      color: CYBER_COLORS.textPrimary,
+                    }}
+                  >
+                    {currentChassis?.name || 'Standard'}
+                  </Box>
+                </Box>
+
+                {/* Ядро */}
+                <Box
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '0.5rem 0.6rem',
+                    background: 'rgba(157,78,221,0.1)',
+                    border: `1px solid rgba(157,78,221,0.4)`,
+                    borderRadius: '3px',
+                    marginBottom: '0.5rem',
+                  }}
+                >
+                  <Box
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                    }}
+                  >
+                    <Icon name="brain" style={{ color: CYBER_COLORS.purple }} />
+                    <Box
+                      style={{
+                        fontSize: '0.7rem',
+                        color: '#8a8a9a',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      Ядро
+                    </Box>
+                  </Box>
+                  <Box
+                    bold
+                    style={{
+                      fontSize: '0.85rem',
+                      color: CYBER_COLORS.textPrimary,
+                    }}
+                  >
+                    {currentBrain?.name || 'Positronic'}
+                  </Box>
+                </Box>
+
+                {/* HEF статус */}
+                <Box
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '0.5rem 0.6rem',
+                    background: isHEF
+                      ? 'rgba(255,200,0,0.15)'
+                      : 'rgba(100,100,100,0.1)',
+                    border: `1px solid ${isHEF ? 'rgba(255,200,0,0.5)' : 'rgba(100,100,100,0.3)'}`,
+                    borderRadius: '3px',
+                  }}
+                >
+                  <Box
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                    }}
+                  >
+                    <Icon
+                      name="puzzle-piece"
+                      style={{ color: isHEF ? CYBER_COLORS.yellow : '#666' }}
+                    />
+                    <Box
+                      style={{
+                        fontSize: '0.7rem',
+                        color: '#8a8a9a',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      HEF
+                    </Box>
+                  </Box>
+                  <Box
+                    bold
+                    style={{
+                      fontSize: '0.8rem',
+                      color: isHEF ? CYBER_COLORS.yellow : '#666',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {isHEF ? 'АКТИВЕН' : 'НЕАКТИВЕН'}
+                  </Box>
+                </Box>
+
+                {/* HEF инфо */}
+                {isHEF && (
+                  <Box
+                    mt={0.75}
+                    style={{
+                      textAlign: 'center',
+                      fontSize: '0.7rem',
+                      color: CYBER_COLORS.yellow,
+                      padding: '0.4rem',
+                      background: 'rgba(255,200,0,0.05)',
+                      borderRadius: '3px',
+                    }}
+                  >
+                    <Icon name="info-circle" /> Модульная система: {HEF_SLOTS.length} частей
                   </Box>
                 )}
               </Box>
