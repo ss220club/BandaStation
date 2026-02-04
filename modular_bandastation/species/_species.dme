@@ -74,3 +74,4 @@
 #include "code/surgery/organs/limbgrower_designs.dm"
 
 #include "code/human/sprite_accessories/vulpkanin/hair_masks.dm"
+#include "code/species_helpers.dm"

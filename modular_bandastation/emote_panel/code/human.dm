@@ -166,3 +166,18 @@
 	. = ..()
 	user.spin(cooldown, pick(0.1 SECONDS, 0.2 SECONDS))
 	user.do_jitter_animation(rand(8 SECONDS, 16 SECONDS), cooldown / 4)
+
+/datum/emote/living/evil_laugh
+	key = "laughevil"
+	message = "злорадно смеётся."
+	message_mime = "бесшумно злорадно смеётся!"
+	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
+	vary = TRUE
+
+/datum/emote/living/evil_laugh/can_run_emote(mob/living/user, status_check = TRUE, intentional, params)
+	return ..() && user.can_speak(allow_mimes = TRUE)
+
+/datum/emote/living/evil_laugh/get_sound(mob/living/carbon/human/user)
+	if(!istype(user))
+		return
+	return user.dna.species.get_evil_laugh_sound(user)
