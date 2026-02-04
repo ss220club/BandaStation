@@ -172,6 +172,24 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
   // Категории, которые должны быть скрыты для не-IPC рас
   const IPC_ONLY_CATEGORIES = ['IPC Chassis', 'IPC Chassis (HEF)'];
 
+  // Модификации, которые должны быть скрыты для не-IPC рас (по ключу или названию)
+  const IPC_ONLY_MODIFICATIONS = [
+    'positronic',
+    'mmi',
+    'borg',
+    'ipc',
+    'позитронн',
+  ];
+
+  // Проверяем, является ли модификация IPC-специфичной
+  const isIPCOnlyModification = (mod: BodyModification): boolean => {
+    const lowerName = mod.name.toLowerCase();
+    const lowerKey = mod.key.toLowerCase();
+    return IPC_ONLY_MODIFICATIONS.some(
+      (term) => lowerName.includes(term) || lowerKey.includes(term),
+    );
+  };
+
   // Группируем модификации по категориям
   const { categories, modificationsByCategory } = useMemo(() => {
     const byCategory: Record<string, BodyModification[]> = {};
@@ -181,6 +199,11 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
 
       // Пропускаем IPC-категории для не-IPC рас
       if (!isIPC && IPC_ONLY_CATEGORIES.includes(category)) {
+        return;
+      }
+
+      // Пропускаем IPC-специфичные модификации для не-IPC рас
+      if (!isIPC && isIPCOnlyModification(mod)) {
         return;
       }
 
@@ -687,7 +710,6 @@ const ModificationCard = (props: ModificationCardProps) => {
         border: `1px solid ${borderColor}`,
         borderRadius: '4px',
         marginBottom: '0.5rem',
-        overflow: 'hidden',
         cursor: 'pointer',
         position: 'relative',
         opacity: isIncompatible ? 0.5 : 1,
@@ -773,22 +795,25 @@ const ModificationCard = (props: ModificationCardProps) => {
         >
           {/* Выбор производителя для протезов - Cyberpunk стиль */}
           {Array.isArray(manufacturers) && isInstalled && (
-            <Box style={{ position: 'relative' }}>
+            <Box style={{ position: 'relative', zIndex: dropdownOpen ? 100 : 1 }}>
               <Box
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.4rem',
                   padding: '0.35rem 0.6rem',
-                  background: 'rgba(0,240,255,0.1)',
-                  border: '1px solid rgba(0,240,255,0.4)',
-                  borderRadius: '3px',
+                  background: dropdownOpen
+                    ? 'rgba(0,240,255,0.2)'
+                    : 'rgba(0,240,255,0.1)',
+                  border: dropdownOpen
+                    ? '1px solid rgba(0,240,255,0.7)'
+                    : '1px solid rgba(0,240,255,0.4)',
+                  borderRadius: dropdownOpen ? '3px 3px 0 0' : '3px',
                   cursor: 'pointer',
-                  fontSize: '0.75rem',
+                  fontSize: '0.8rem',
                   fontWeight: 600,
                   color: '#00f0ff',
-                  textTransform: 'uppercase',
-                  minWidth: '120px',
+                  minWidth: '130px',
                   justifyContent: 'space-between',
                 }}
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -806,12 +831,12 @@ const ModificationCard = (props: ModificationCardProps) => {
                     position: 'absolute',
                     top: '100%',
                     right: 0,
-                    marginTop: '0.25rem',
-                    minWidth: '150px',
+                    left: 0,
                     background:
                       'linear-gradient(180deg, rgba(10,10,18,0.98) 0%, rgba(26,26,36,0.98) 100%)',
-                    border: '1px solid rgba(0,240,255,0.5)',
-                    borderRadius: '4px',
+                    border: '1px solid rgba(0,240,255,0.7)',
+                    borderTop: 'none',
+                    borderRadius: '0 0 4px 4px',
                     overflow: 'hidden',
                     zIndex: 1000,
                     boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
