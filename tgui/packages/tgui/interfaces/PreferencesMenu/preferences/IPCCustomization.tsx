@@ -30,10 +30,46 @@ const BRAND_ICONS: Record<string, string> = {
   hef: 'puzzle-piece',
 };
 
+// Цвета брендов для визуальной идентификации
+const BRAND_COLORS: Record<string, string> = {
+  unbranded: '#888888',
+  morpheus: '#00d4ff',
+  etamin: '#4fc3f7',
+  bishop: '#4caf50',
+  hesphiastos: '#ff5722',
+  ward_takahashi: '#ffeb3b',
+  xion: '#9c27b0',
+  zeng_hu: '#00bcd4',
+  shellguard: '#795548',
+  cybersun: '#ff9800',
+  hef: '#ffc107',
+  // HEF производители
+  general: '#888888',
+  hephaestus: '#ff5722',
+  hephaestus_titan: '#d84315',
+  interdyne: '#e91e63',
+  wardtakahashi: '#ffeb3b',
+  wardtakahashi_pro: '#ffd600',
+  xion_light: '#ce93d8',
+  gromtech: '#8bc34a',
+  bishop_mk2: '#66bb6a',
+  bishop_nano: '#81c784',
+  etamin_industry: '#29b6f6',
+  etamin_industry_lumineux: '#4fc3f7',
+  shellguard_brand: '#795548',
+  zeng_hu_brand: '#00bcd4',
+};
+
 const BRAIN_ICONS: Record<string, string> = {
   positronic: 'brain',
   mmi: 'head-side-virus',
   borg: 'server',
+};
+
+const BRAIN_COLORS: Record<string, string> = {
+  positronic: '#00d4ff',
+  mmi: '#ff5722',
+  borg: '#9c27b0',
 };
 
 // Цвета в стиле Cyberpunk 2077
@@ -178,6 +214,27 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     return manufacturer?.name || 'Unbranded';
   };
 
+  // Получить цвет для слота
+  const getSlotColor = (slot: SlotConfig): string => {
+    if (slot.type === 'chassis') {
+      return BRAND_COLORS[customization.chassis_brand] || BRAND_COLORS.unbranded;
+    }
+    if (slot.type === 'brain') {
+      return BRAIN_COLORS[customization.brain_type] || BRAIN_COLORS.positronic;
+    }
+    const manufacturerKey =
+      customization[slot.key as keyof IPCCustomization] || 'unbranded';
+    // Normalize key for color lookup
+    const normalizedKey = manufacturerKey.toLowerCase().replace(/[\s-]/g, '_');
+    return BRAND_COLORS[normalizedKey] || BRAND_COLORS.general || '#888888';
+  };
+
+  // Получить цвет для опции
+  const getOptionColor = (key: string): string => {
+    const normalizedKey = key.toLowerCase().replace(/[\s-]/g, '_');
+    return BRAND_COLORS[normalizedKey] || BRAIN_COLORS[normalizedKey] || '#888888';
+  };
+
   // Собираем все видимые слоты
   const visibleSlots = isHEF ? [...MAIN_SLOTS, ...HEF_SLOTS] : MAIN_SLOTS;
 
@@ -185,6 +242,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   const renderSlot = (slot: SlotConfig) => {
     const isActive = activeSlot === slot.key;
     const value = getSlotValue(slot);
+    const brandColor = getSlotColor(slot);
 
     return (
       <Box
@@ -202,14 +260,29 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
           cursor: 'pointer',
           transition: 'all 0.2s ease',
           boxShadow: isActive ? `0 0 15px rgba(0,240,255,0.4)` : 'none',
+          position: 'relative',
+          overflow: 'hidden',
         }}
         onClick={() => setActiveSlot(slot.key)}
       >
+        {/* Цветовой индикатор бренда */}
+        <Box
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: '4px',
+            background: brandColor,
+            boxShadow: `0 0 8px ${brandColor}`,
+          }}
+        />
         <Box
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.6rem',
+            marginLeft: '0.5rem',
           }}
         >
           <Box
@@ -220,11 +293,11 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
               alignItems: 'center',
               justifyContent: 'center',
               background: `rgba(0,0,0,0.4)`,
-              border: `2px solid ${slot.color}`,
+              border: `2px solid ${brandColor}`,
               borderRadius: '4px',
-              color: slot.color,
+              color: brandColor,
               fontSize: '1rem',
-              boxShadow: isActive ? `0 0 8px ${slot.color}` : 'none',
+              boxShadow: isActive ? `0 0 8px ${brandColor}` : 'none',
             }}
           >
             <Icon name={slot.icon} />
@@ -366,6 +439,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                 : slot.type === 'brain'
                   ? BRAIN_ICONS[option.key] || 'brain'
                   : 'industry';
+            const optionColor = getOptionColor(option.key);
 
             return (
               <Box
@@ -382,6 +456,8 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                   marginBottom: '0.5rem',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
+                  position: 'relative',
+                  overflow: 'hidden',
                 }}
                 onClick={() => {
                   if (slot.type === 'chassis') {
@@ -396,14 +472,27 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                   }
                 }}
               >
+                {/* Цветовая полоса бренда */}
+                <Box
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: '4px',
+                    background: optionColor,
+                    boxShadow: isSelected ? `0 0 8px ${optionColor}` : 'none',
+                  }}
+                />
                 <Box
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.6rem',
+                    marginLeft: '0.5rem',
                   }}
                 >
-                  {/* Иконка */}
+                  {/* Иконка с цветом бренда */}
                   <Box
                     style={{
                       width: '36px',
@@ -411,12 +500,10 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      background: isSelected
-                        ? `rgba(57,255,20,0.2)`
-                        : `rgba(0,128,255,0.15)`,
-                      border: `2px solid ${isSelected ? CYBER_COLORS.green : 'rgba(0,128,255,0.4)'}`,
+                      background: `rgba(0,0,0,0.3)`,
+                      border: `2px solid ${optionColor}`,
                       borderRadius: '4px',
-                      color: isSelected ? CYBER_COLORS.green : CYBER_COLORS.blue,
+                      color: optionColor,
                       fontSize: '1rem',
                     }}
                   >
@@ -640,8 +727,8 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                   position: 'relative',
                   zIndex: 1,
                   width: '100%',
-                  maxWidth: '220px',
-                  padding: '1.25rem',
+                  maxWidth: '240px',
+                  padding: '1rem',
                   background:
                     'linear-gradient(180deg, rgba(0,128,255,0.15) 0%, rgba(0,0,0,0.4) 100%)',
                   border: `2px solid ${CYBER_COLORS.blue}`,
@@ -653,112 +740,96 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                 <Box
                   style={{
                     textAlign: 'center',
-                    marginBottom: '1rem',
-                    paddingBottom: '0.75rem',
+                    marginBottom: '0.75rem',
+                    paddingBottom: '0.5rem',
                     borderBottom: `1px solid rgba(0,128,255,0.3)`,
                   }}
                 >
                   <Icon
                     name="robot"
                     style={{
-                      fontSize: '2.5rem',
-                      color: CYBER_COLORS.blue,
+                      fontSize: '2rem',
+                      color: BRAND_COLORS[customization.chassis_brand] || CYBER_COLORS.blue,
                       display: 'block',
-                      marginBottom: '0.5rem',
-                      filter: `drop-shadow(0 0 15px ${CYBER_COLORS.blue})`,
+                      marginBottom: '0.25rem',
+                      filter: `drop-shadow(0 0 10px ${BRAND_COLORS[customization.chassis_brand] || CYBER_COLORS.blue})`,
                     }}
                   />
                   <Box
                     bold
                     style={{
-                      fontSize: '0.75rem',
+                      fontSize: '0.7rem',
                       textTransform: 'uppercase',
-                      letterSpacing: '2px',
+                      letterSpacing: '1px',
                       color: CYBER_COLORS.cyan,
                     }}
                   >
-                    IPC UNIT
+                    КОНФИГУРАЦИЯ
                   </Box>
                 </Box>
 
-                {/* Шасси */}
+                {/* Шасси - вертикальный блок */}
                 <Box
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '0.5rem 0.6rem',
-                    background: 'rgba(0,128,255,0.1)',
-                    border: `1px solid rgba(0,128,255,0.4)`,
-                    borderRadius: '3px',
+                    padding: '0.5rem',
+                    background: 'rgba(0,0,0,0.3)',
+                    borderRadius: '4px',
                     marginBottom: '0.5rem',
+                    borderLeft: `3px solid ${BRAND_COLORS[customization.chassis_brand] || '#888'}`,
                   }}
                 >
                   <Box
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.4rem',
+                      fontSize: '0.6rem',
+                      color: '#8a8a9a',
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                      marginBottom: '0.2rem',
                     }}
                   >
-                    <Icon name="microchip" style={{ color: CYBER_COLORS.blue }} />
-                    <Box
-                      style={{
-                        fontSize: '0.7rem',
-                        color: '#8a8a9a',
-                        textTransform: 'uppercase',
-                      }}
-                    >
-                      Шасси
-                    </Box>
+                    <Icon name="microchip" style={{ marginRight: '0.3rem' }} />
+                    Шасси
                   </Box>
                   <Box
                     bold
                     style={{
                       fontSize: '0.85rem',
-                      color: CYBER_COLORS.textPrimary,
+                      color: BRAND_COLORS[customization.chassis_brand] || CYBER_COLORS.textPrimary,
+                      lineHeight: 1.2,
                     }}
                   >
                     {currentChassis?.name || 'Standard'}
                   </Box>
                 </Box>
 
-                {/* Ядро */}
+                {/* Ядро - вертикальный блок */}
                 <Box
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '0.5rem 0.6rem',
-                    background: 'rgba(157,78,221,0.1)',
-                    border: `1px solid rgba(157,78,221,0.4)`,
-                    borderRadius: '3px',
+                    padding: '0.5rem',
+                    background: 'rgba(0,0,0,0.3)',
+                    borderRadius: '4px',
                     marginBottom: '0.5rem',
+                    borderLeft: `3px solid ${BRAIN_COLORS[customization.brain_type] || '#888'}`,
                   }}
                 >
                   <Box
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.4rem',
+                      fontSize: '0.6rem',
+                      color: '#8a8a9a',
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                      marginBottom: '0.2rem',
                     }}
                   >
-                    <Icon name="brain" style={{ color: CYBER_COLORS.purple }} />
-                    <Box
-                      style={{
-                        fontSize: '0.7rem',
-                        color: '#8a8a9a',
-                        textTransform: 'uppercase',
-                      }}
-                    >
-                      Ядро
-                    </Box>
+                    <Icon name="brain" style={{ marginRight: '0.3rem' }} />
+                    Ядро
                   </Box>
                   <Box
                     bold
                     style={{
                       fontSize: '0.85rem',
-                      color: CYBER_COLORS.textPrimary,
+                      color: BRAIN_COLORS[customization.brain_type] || CYBER_COLORS.textPrimary,
+                      lineHeight: 1.2,
                     }}
                   >
                     {currentBrain?.name || 'Positronic'}
@@ -771,7 +842,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '0.5rem 0.6rem',
+                    padding: '0.4rem 0.5rem',
                     background: isHEF
                       ? 'rgba(255,200,0,0.15)'
                       : 'rgba(100,100,100,0.1)',
@@ -783,12 +854,12 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '0.4rem',
+                      gap: '0.3rem',
                     }}
                   >
                     <Icon
                       name="puzzle-piece"
-                      style={{ color: isHEF ? CYBER_COLORS.yellow : '#666' }}
+                      style={{ color: isHEF ? CYBER_COLORS.yellow : '#666', fontSize: '0.9rem' }}
                     />
                     <Box
                       style={{

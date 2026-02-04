@@ -17,6 +17,34 @@ type BodyModificationsProps = {
   handleClose: () => void;
 };
 
+// Цвета производителей протезов для визуальной идентификации
+const MANUFACTURER_COLORS: Record<string, string> = {
+  none: '#666666',
+  general: '#888888',
+  bishop: '#4caf50',
+  'bishop mk2': '#66bb6a',
+  'bishop nano': '#81c784',
+  'etamin industry': '#29b6f6',
+  'etamin industry lumineux': '#4fc3f7',
+  gromtech: '#8bc34a',
+  hephaestus: '#ff5722',
+  'hephaestus titan': '#d84315',
+  interdyne: '#e91e63',
+  morpheus: '#00d4ff',
+  shellguard: '#795548',
+  wardtakahashi: '#ffeb3b',
+  'wardtakahashi pro': '#ffd600',
+  xion: '#9c27b0',
+  'xion light': '#ce93d8',
+  'zeng-hu': '#00bcd4',
+};
+
+// Получить цвет производителя
+const getManufacturerColor = (name: string): string => {
+  const lowerName = name.toLowerCase();
+  return MANUFACTURER_COLORS[lowerName] || '#888888';
+};
+
 // Маппинг категорий на иконки и цвета
 const CATEGORY_CONFIG: Record<
   string,
@@ -815,10 +843,22 @@ const ModificationCard = (props: ModificationCardProps) => {
                   color: '#00f0ff',
                   minWidth: '130px',
                   justifyContent: 'space-between',
+                  borderLeft: `3px solid ${getManufacturerColor(selectedManufacturer || 'general')}`,
                 }}
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
-                <span>
+                {/* Цветовой индикатор */}
+                <Box
+                  style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: getManufacturerColor(selectedManufacturer || 'general'),
+                    boxShadow: `0 0 4px ${getManufacturerColor(selectedManufacturer || 'general')}`,
+                    flexShrink: 0,
+                  }}
+                />
+                <span style={{ flex: 1 }}>
                   {selectedManufacturer === 'None'
                     ? 'Без протеза'
                     : selectedManufacturer}
@@ -840,10 +880,13 @@ const ModificationCard = (props: ModificationCardProps) => {
                     overflow: 'hidden',
                     zIndex: 1000,
                     boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                    maxHeight: '200px',
+                    overflowY: 'auto',
                   }}
                 >
                   {manufacturers.map((brand: string) => {
                     const isSelected = brand === selectedManufacturer;
+                    const brandColor = getManufacturerColor(brand);
                     return (
                       <Box
                         key={brand}
@@ -857,10 +900,8 @@ const ModificationCard = (props: ModificationCardProps) => {
                           cursor: 'pointer',
                           display: 'flex',
                           alignItems: 'center',
-                          justifyContent: 'space-between',
-                          borderLeft: isSelected
-                            ? '3px solid #00f0ff'
-                            : '3px solid transparent',
+                          gap: '0.5rem',
+                          borderLeft: `3px solid ${brandColor}`,
                         }}
                         onClick={() => {
                           act('set_body_modification_manufacturer', {
@@ -870,7 +911,20 @@ const ModificationCard = (props: ModificationCardProps) => {
                           setDropdownOpen(false);
                         }}
                       >
-                        <span>{brand === 'None' ? 'Без протеза' : brand}</span>
+                        {/* Цветовой индикатор */}
+                        <Box
+                          style={{
+                            width: '8px',
+                            height: '8px',
+                            borderRadius: '50%',
+                            background: brandColor,
+                            boxShadow: `0 0 4px ${brandColor}`,
+                            flexShrink: 0,
+                          }}
+                        />
+                        <span style={{ flex: 1 }}>
+                          {brand === 'None' ? 'Без протеза' : brand}
+                        </span>
                         {isSelected && (
                           <Icon
                             name="check"
