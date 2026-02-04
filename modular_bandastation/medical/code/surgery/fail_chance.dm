@@ -1,3 +1,9 @@
+#define SURGERY_TOOL_MOD_GHETTO 10
+#define SURGERY_TOOL_MOD_ADVANCED 0
+#define SURGERY_TOOL_MOD_ALIEN 1
+#define SURGERY_TOOL_MOD_AUGMENT 0
+#define SURGERY_TOOL_MOD_BASIC 5
+
 /datum/surgery_operation/proc/get_modified_failure_chance(operation_time, mob/living/patient, mob/living/surgeon, tool, list/operation_args)
 	var/fail_chance = clamp(GET_FAILURE_CHANCE(operation_time, operation_args[OPERATION_SPEED]), 0, 99)
 
