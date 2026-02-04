@@ -320,9 +320,6 @@
 /obj/machinery/reagentgrinder{
 	pixel_y = 6
 	},
-/obj/machinery/reagentgrinder{
-	pixel_y = 6
-	},
 /obj/effect/turf_decal/siding/wood/ebonite,
 /turf/open/floor/wood/ebonite,
 /area/shuttle/escape)
