@@ -38,3 +38,9 @@
 	fail_chance += tool_mod
 
 	return fail_chance
+	
+#undef SURGERY_TOOL_MOD_GHETTO
+#undef SURGERY_TOOL_MOD_ADVANCED
+#undef SURGERY_TOOL_MOD_ALIEN
+#undef SURGERY_TOOL_MOD_AUGMENT
+#undef SURGERY_TOOL_MOD_BASIC
