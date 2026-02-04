@@ -70,6 +70,17 @@
 		fdel(json_file)
 	WRITE_FILE(json_file, json_encode(data))
 
+/obj/item/paper/fluff/xenobio_console_note
+	name = "заметка у консоли ксенобиологии"
+	default_raw_text = {"Приветствую коллега! На нашей станции поставили мутированный подвид слаймов для разведения, - они стали изменчивы!
+	<br>Каждые пару дней что-то происходит в их ДНК, и реакции их ядер на раздражители и реагенты меняются. Записывай находки в разделе \"Заметки\" на консоли.
+	<br>Удачных экспериментов!"}
+
 /obj/machinery/computer/camera_advanced/xenobio/Initialize(mapload)
 	actions += new /datum/action/innate/notes(src)
 	. = ..()
+	if(. != INITIALIZE_HINT_QDEL)
+		var/turf/T = get_turf(src)
+		if(T)
+			new /obj/item/paper/fluff/xenobio_console_note(T)
+			playsound(T, 'sound/items/handling/paper_drop.ogg', 30, TRUE)
