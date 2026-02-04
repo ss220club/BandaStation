@@ -77,39 +77,39 @@
  */
 // BANDASTATION EDIT START — род тегов
 /atom/proc/examine_tags(mob/user)
-    . = list()
-    if(abstract_type == type)
-        .[span_hypnophrase("abstract")] = "This is an abstract concept, you should report this to a strange entity called GITHUB!"
+	. = list()
+	if(abstract_type == type)
+		.[span_hypnophrase("abstract")] = "This is an abstract concept, you should report this to a strange entity called GITHUB!"
 
-    var/is_female = ((examine_descriptor()) in list("структура", "машина") )
-    var/he_she_it = is_female ? "Она" : "Он"
-    var/he_she_it_low = is_female ? "она" : "он"
-    var/adj_very = is_female ? "прочная" : "прочный"
-    var/verb_made = is_female ? "сделана" : "сделан"
-    var/verb_looks = is_female ? "выглядит довольно прочной" : "выглядит довольно прочным"
+	var/is_female = ((examine_descriptor()) in list("структура", "машина") )
+	var/he_she_it = is_female ? "Она" : "Он"
+	var/he_she_it_low = is_female ? "она" : "он"
+	var/adj_very = is_female ? "прочная" : "прочный"
+	var/verb_made = is_female ? "сделана" : "сделан"
+	var/verb_looks = is_female ? "выглядит довольно прочной" : "выглядит довольно прочным"
 
-    if(resistance_flags & INDESTRUCTIBLE)
-        .[is_female ? "неразрушаемая" : "неразрушаемый"] = "[he_she_it] очень [adj_very]! [he_she_it] выдержит всё, что с [is_female ? "ней" : "ним"] может случиться!"
-    else
-        if(resistance_flags & LAVA_PROOF)
-            .[is_female ? "лавастойкая" : "лавастойкий"] = "[he_she_it] [verb_made] из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
-        if(resistance_flags & (ACID_PROOF | UNACIDABLE))
-            .[is_female ? "кислотостойкая" : "кислотостойкий"] = "[he_she_it] [verb_looks]! Возможно, [he_she_it_low] выдержит воздействие кислоты!"
-        if(resistance_flags & FREEZE_PROOF)
-            .[is_female ? "морозостойкая" : "морозостойкий"] = "[he_she_it] изготовлена из моростойких материалов."
-        if(resistance_flags & FIRE_PROOF)
-            .[is_female ? "огнестойкая" : "огнестойкий"] = "[he_she_it] изготовлена из огнестойких материалов."
-        if(resistance_flags & SHUTTLE_CRUSH_PROOF)
-            .[is_female ? "очень прочная" : "очень прочный"] = "[he_she_it] невероятно [adj_very]. Должен выдержать даже наезд шаттла!"
-        if(resistance_flags & BOMB_PROOF)
-            .[is_female ? "взрывоустойчивая" : "взрывоустойчивый"] = "[he_she_it] способна пережить взрыв!"
-        if(resistance_flags & FLAMMABLE)
-            .[is_female ? "легковоспламеняющаяся" : "легковоспламеняющийся"] = "[he_she_it] может легко загореться."
+	if(resistance_flags & INDESTRUCTIBLE)
+		.[is_female ? "неразрушаемая" : "неразрушаемый"] = "[he_she_it] очень [adj_very]! [he_she_it] выдержит всё, что с [is_female ? "ней" : "ним"] может случиться!"
+	else
+		if(resistance_flags & LAVA_PROOF)
+			.[is_female ? "лавастойкая" : "лавастойкий"] = "[he_she_it] [verb_made] из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
+		if(resistance_flags & (ACID_PROOF | UNACIDABLE))
+			.[is_female ? "кислотостойкая" : "кислотостойкий"] = "[he_she_it] [verb_looks]! Возможно, [he_she_it_low] выдержит воздействие кислоты!"
+		if(resistance_flags & FREEZE_PROOF)
+			.[is_female ? "морозостойкая" : "морозостойкий"] = "[he_she_it] изготовлена из моростойких материалов."
+		if(resistance_flags & FIRE_PROOF)
+			.[is_female ? "огнестойкая" : "огнестойкий"] = "[he_she_it] изготовлена из огнестойких материалов."
+		if(resistance_flags & SHUTTLE_CRUSH_PROOF)
+			.[is_female ? "очень прочная" : "очень прочный"] = "[he_she_it] невероятно [adj_very]. Должен выдержать даже наезд шаттла!"
+		if(resistance_flags & BOMB_PROOF)
+			.[is_female ? "взрывоустойчивая" : "взрывоустойчивый"] = "[he_she_it] способна пережить взрыв!"
+		if(resistance_flags & FLAMMABLE)
+			.[is_female ? "легковоспламеняющаяся" : "легковоспламеняющийся"] = "[he_she_it] может легко загореться."
 
-    if(flags_1 & HOLOGRAM_1)
-        .["голографический"] = "Похоже на голограмму."
+	if(flags_1 & HOLOGRAM_1)
+		.["голографический"] = "Похоже на голограмму."
 
-    SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE_TAGS, user, .)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE_TAGS, user, .)
 // BANDASTATION EDIT END
 
 /// What this atom should be called in examine tags
