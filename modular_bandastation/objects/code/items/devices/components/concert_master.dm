@@ -11,10 +11,10 @@
 	var/obj/item/concert_remote/remote
 
 /obj/item/circuit_component/concert_master/populate_ports()
-    track_name_out  = add_output_port("Track Name", PORT_TYPE_STRING)
-    is_playing      = add_output_port("Is Playing", PORT_TYPE_NUMBER)
-    started_playing = add_output_port("Started Playing", PORT_TYPE_SIGNAL)
-    stopped_playing = add_output_port("Stopped Playing", PORT_TYPE_SIGNAL)
+	track_name_out  = add_output_port("Track Name", PORT_TYPE_STRING)
+	is_playing      = add_output_port("Is Playing", PORT_TYPE_NUMBER)
+	started_playing = add_output_port("Started Playing", PORT_TYPE_SIGNAL)
+	stopped_playing = add_output_port("Stopped Playing", PORT_TYPE_SIGNAL)
 
 /obj/item/circuit_component/concert_master/Initialize(mapload)
 	. = ..()
