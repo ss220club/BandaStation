@@ -87,7 +87,7 @@
 // 		)
 
 //Закоментить/Удалить после ивента
-/obj/item/concert_disk/soundhand_concert
-	name = "Soundhand Concert"
-	album_id = "soundhand_10"
-	color_disk = "FF3EFF"
+// /obj/item/concert_disk/soundhand_concert
+// 	name = "Soundhand Concert"
+// 	album_id = "soundhand_10"
+// 	color_disk = "FF3EFF"
