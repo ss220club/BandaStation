@@ -11,8 +11,8 @@
 	name = "fleet officer's coat jacket"
 	desc = "Укороченный пиджак в цветах НаноТрейзен."
 	icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/obj/clothing/suits/armor.dmi'
-	icon_state = "centcom_dress"
-	inhand_icon_state = "centcom_dress"
+	icon_state = "centcom_jacket"
+	inhand_icon_state = "centcom_jacket"
 	worn_icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/mob/clothing/suits/armor.dmi'
 	lefthand_file = 'modular_bandastation/aesthetics/clothing/centcom/icons/inhands/clothing/suits_lefthand.dmi'
 	righthand_file = 'modular_bandastation/aesthetics/clothing/centcom/icons/inhands/clothing/suits_righthand.dmi'

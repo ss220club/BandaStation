@@ -114,9 +114,12 @@
 	desc = "\"Рассекающий\" — легендарный двуручный меч, покрытый напылением из разрушенного энергетического кристалла. Согласно легенде, кузнец стремился создать меч, который убивает не изяществом, а неизбежностью."
 	icon_state = "hel_dualsaber0"
 	inhand_icon_state = "hel_dualsaber0"
+	worn_icon = 'modular_bandastation/weapon/icons/melee/melee_back.dmi'
 	saber_color = "kirien"
 	refusal_text = "Только достойный узрит свет."
 	light_color = LIGHT_COLOR_VIVID_GREEN
+	slot_flags = ITEM_SLOT_BACK
+	w_class = WEIGHT_CLASS_BULKY
 	saber_name = "hel"
 	wieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberon.ogg'
 	unwieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberoff.ogg'
