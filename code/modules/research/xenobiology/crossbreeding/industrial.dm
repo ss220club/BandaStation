@@ -4,7 +4,7 @@ Industrial extracts:
 */
 /obj/item/slimecross/industrial
 	name = "industrial extract"
-	desc = "A gel-like, sturdy extract, fond of plasma and industry."
+	desc = "Гелеобразный, устойчивый экстракт, любимый плазмой и промышленностью."
 	effect = "industrial"
 	icon_state = "industrial_still"
 	var/plasmarequired = 2 //Units of plasma required to be consumed to produce item.
@@ -53,37 +53,37 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/grey
 	colour = SLIME_TYPE_GREY
-	effect_desc = "Produces monkey cubes."
+	effect_desc = "Производит обезьяньи кубы."
 	itempath = /obj/item/food/monkeycube
 	itemamount = 5
 
 /obj/item/slimecross/industrial/orange
 	colour = SLIME_TYPE_ORANGE
-	effect_desc = "Produces slime zippo lighters."
+	effect_desc = "Производит причудливые слаймовые зажигалки."
 	plasmarequired = 6
 	itempath = /obj/item/lighter/slime
 
 /obj/item/slimecross/industrial/purple
 	colour = SLIME_TYPE_PURPLE
-	effect_desc = "Produces autoinjectors with regen jelly inside."
+	effect_desc = "Производит автоинъекторы с регенеративным желе внутри."
 	plasmarequired = 5
 	itempath = /obj/item/slimecrossbeaker/autoinjector/regenpack
 
 /obj/item/slimecross/industrial/blue
 	colour = SLIME_TYPE_BLUE
-	effect_desc = "Produces full fire extinguishers."
+	effect_desc = "Производит полные огнетушители."
 	plasmarequired = 10
 	itempath = /obj/item/extinguisher
 
 /obj/item/slimecross/industrial/metal
 	colour = SLIME_TYPE_METAL
-	effect_desc = "Produces iron sheets."
+	effect_desc = "Производит листы железа."
 	plasmarequired = 3
 	itempath = /obj/item/stack/sheet/iron/ten
 
 /obj/item/slimecross/industrial/yellow
 	colour = SLIME_TYPE_YELLOW
-	effect_desc = "Produces high capacity power cells, which are not fully charged on creation."
+	effect_desc = "Производит энергетические ячейки высокой мощности, которые при создании не заряжены полностью."
 	plasmarequired = 5
 	itempath = /obj/item/stock_parts/power_store/cell/high
 
@@ -94,13 +94,13 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/darkpurple
 	colour = SLIME_TYPE_DARK_PURPLE
-	effect_desc = "Produces plasma... for plasma."
+	effect_desc = "Производит плазму... из плазмы."
 	plasmarequired = 10
 	itempath = /obj/item/stack/sheet/mineral/plasma
 
 /obj/item/slimecross/industrial/darkblue
 	colour = SLIME_TYPE_DARK_BLUE
-	effect_desc = "Produces one-use fireproofing potions."
+	effect_desc = "Создает одноразовые зелья огнеупорности."
 	plasmarequired = 6
 	itempath = /obj/item/slimepotion/fireproof
 
@@ -111,7 +111,7 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/silver
 	colour = SLIME_TYPE_SILVER
-	effect_desc = "Produces random food and drink items."
+	effect_desc = "Производит случайную еду и напитки."
 	plasmarequired = 1
 	//Item picked below.
 
@@ -124,49 +124,49 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/bluespace
 	colour = SLIME_TYPE_BLUESPACE
-	effect_desc = "Produces synthetic bluespace crystals."
+	effect_desc = "Производит синтетические блюспейс кристаллы"
 	plasmarequired = 7
 	itempath = /obj/item/stack/ore/bluespace_crystal/artificial
 
 /obj/item/slimecross/industrial/sepia
 	colour = SLIME_TYPE_SEPIA
-	effect_desc = "Produces cameras."
+	effect_desc = "Прозводит камеры."
 	plasmarequired = 2
 	itempath = /obj/item/camera
 
 /obj/item/slimecross/industrial/cerulean
 	colour = SLIME_TYPE_CERULEAN
-	effect_desc = "Produces normal slime extract enhancers."
+	effect_desc = "Производит нормальные экстракты усилителя."
 	plasmarequired = 5
 	itempath = /obj/item/slimepotion/enhancer
 
 /obj/item/slimecross/industrial/pyrite
 	colour = SLIME_TYPE_PYRITE
-	effect_desc = "Produces cans of spraypaint."
+	effect_desc = "Производит баллончики с краской."
 	plasmarequired = 2
 	itempath = /obj/item/toy/crayon/spraycan
 
 /obj/item/slimecross/industrial/red
 	colour = SLIME_TYPE_RED
-	effect_desc = "Produces blood orbs."
+	effect_desc = "Производит сферы с кровью."
 	plasmarequired = 5
 	itempath = /obj/item/slimecrossbeaker/bloodpack
 
 /obj/item/slimecross/industrial/green
 	colour = SLIME_TYPE_GREEN
-	effect_desc = "Produces self-use-only slime jelly autoinjectors."
+	effect_desc = "Производит автоинъектор для самостоятельного использования с слаймовым желе."
 	plasmarequired = 7
 	itempath = /obj/item/slimecrossbeaker/autoinjector/slimejelly
 
 /obj/item/slimecross/industrial/pink
 	colour = SLIME_TYPE_PINK
-	effect_desc = "Produces synthpax and space drug autoinjectors."
+	effect_desc = "Проивзодит автоинъекторы с паксом и космодурью."
 	plasmarequired = 6
 	itempath = /obj/item/slimecrossbeaker/autoinjector/peaceandlove
 
 /obj/item/slimecross/industrial/gold
 	colour = SLIME_TYPE_GOLD
-	effect_desc = "Produces random coins."
+	effect_desc = "Производит случайные монеты."
 	plasmarequired = 10
 
 /obj/item/slimecross/industrial/gold/process()
@@ -175,31 +175,31 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/oil
 	colour = SLIME_TYPE_OIL
-	effect_desc = "Produces IEDs."
+	effect_desc = "Производит IED."
 	plasmarequired = 4
 	itempath = /obj/item/grenade/iedcasing/spawned
 
 /obj/item/slimecross/industrial/black //What does this have to do with black slimes? No clue! Fun, though
 	colour = SLIME_TYPE_BLACK
-	effect_desc = "Produces slime brand regenerative cigarettes."
+	effect_desc = "Производит шикарные пачки регенератинвых слаймовых сигарет."
 	plasmarequired = 6
 	itempath = /obj/item/storage/fancy/cigarettes/cigpack_xeno
 
 /obj/item/slimecross/industrial/lightpink
 	colour = SLIME_TYPE_LIGHT_PINK
-	effect_desc = "Produces heart shaped boxes that have candies in them."
+	effect_desc = "Производит коробки в форме сердца, в которых находятся конфеты."
 	plasmarequired = 3
 	itempath = /obj/item/storage/fancy/heart_box
 
 /obj/item/slimecross/industrial/adamantine
 	colour = SLIME_TYPE_ADAMANTINE
-	effect_desc = "Produces sheets of adamantine."
+	effect_desc = "Производит слитки адамантия."
 	plasmarequired = 10
 	itempath = /obj/item/stack/sheet/mineral/adamantine
 
 /obj/item/slimecross/industrial/rainbow
 	colour = SLIME_TYPE_RAINBOW
-	effect_desc = "Produces random slime extracts."
+	effect_desc = "Производит случайные слаймовые экстракты."
 	plasmarequired = 5
 	//Item picked below.
 
