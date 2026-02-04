@@ -17,8 +17,8 @@
 	var/obj/item/concert_disk/inserted_disk
 
 /obj/machinery/jukebox/concertspeaker/Destroy()
-	if(music_player)
-		music_player.clear_album()
+	clear_music_player()
+
 	return ..()
 
 /obj/machinery/jukebox/concertspeaker/examine()
@@ -114,8 +114,7 @@
 		to_chat(user, span_warning("Диск уже вставлен."))
 		return
 
-	if(music_player)
-		music_player.clear_album()
+	clear_music_player()
 
 	inserted_disk = D
 	D.forceMove(src)
@@ -130,8 +129,7 @@
 	if(!inserted_disk)
 		return
 
-	if(music_player)
-		music_player.clear_album()
+	clear_music_player()
 
 	var/obj/item/concert_disk/D = inserted_disk
 	inserted_disk = null
@@ -148,3 +146,9 @@
 		music_player.songs = list()
 
 	update_icon()
+
+/obj/machinery/jukebox/concertspeaker/proc/clear_music_player()
+	if(music_player)
+		var/datum/jukebox/concertspeaker/C = music_player
+		if(C)
+			C.clear_album()

@@ -215,7 +215,9 @@
 	return null
 
 /datum/jukebox/concertspeaker/proc/clear_album()
-	stop_music()
+	unlisten_all()
+	active_song_sound = null
+	selection = null
 	songs = list()
 
 #undef MUTE_DEAF
