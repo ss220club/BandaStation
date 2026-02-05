@@ -375,7 +375,7 @@ export function MainPage(props: MainPageProps) {
   const [ipcCustomizationOpen, setIpcCustomizationOpen] = useState(false);
 
   const serverData = useServerPrefs();
-  const isIPC = data.character_preferences.misc.species === 'IPC';
+  const isIPC = data.character_preferences.misc.species === 'ipc';
 
   const currentSpeciesData =
     serverData?.species[data.character_preferences.misc.species];
@@ -505,7 +505,65 @@ export function MainPage(props: MainPageProps) {
       )}
       <Stack.Item>
         <Stack fill vertical>
-          <Stack.Item basis="50%">{Character}</Stack.Item>
+          <Stack.Item basis="50%">
+            {/* Hide character preview when modal is open to avoid conflicts */}
+            {!augmentationInputOpen && !ipcCustomizationOpen && Character}
+            {(augmentationInputOpen || ipcCustomizationOpen) && (
+              <Section fill className="PreferencesMenu__Character">
+                <Stack fill vertical>
+                  <Stack.Item>
+                    <CharacterControls
+                      gender={data.character_preferences.misc.gender}
+                      handleOpenSpecies={props.openSpecies}
+                      handleOpenAugmentations={() =>
+                        isIPC
+                          ? setIpcCustomizationOpen(true)
+                          : setAugmentationInputOpen(true)
+                      }
+                      isIPC={isIPC}
+                      handleRotate={() => {
+                        act('rotate');
+                      }}
+                      setGender={createSetPreference(act, 'gender')}
+                      showGender={
+                        currentSpeciesData ? !!currentSpeciesData.sexes : true
+                      }
+                      canDeleteCharacter={
+                        Object.values(data.character_profiles).filter(
+                          (name) => !!name,
+                        ).length > 1
+                      }
+                      handleDeleteCharacter={() =>
+                        setDeleteCharacterPopupOpen(true)
+                      }
+                    />
+                  </Stack.Item>
+                  <Stack.Item grow style={{ alignSelf: 'center' }}>
+                    {/* Placeholder when modal is open */}
+                    <Box
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '100%',
+                        color: 'rgba(255,255,255,0.3)',
+                      }}
+                    >
+                      <Icon name="user-edit" size={4} />
+                    </Box>
+                  </Stack.Item>
+                  <Stack.Item>
+                    <NameInput
+                      large
+                      canRandomize
+                      name={data.character_preferences.names[data.name_to_use]}
+                      nameType={data.name_to_use}
+                    />
+                  </Stack.Item>
+                </Stack>
+              </Section>
+            )}
+          </Stack.Item>
           <Stack.Item grow mr={1}>
             <AlternativeNames names={data.character_preferences.names} />
           </Stack.Item>
