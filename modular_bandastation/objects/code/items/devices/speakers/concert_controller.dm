@@ -86,7 +86,7 @@
 /obj/machinery/jukebox/concertspeaker/proc/convert_to_regular(mob/user)
 	var/turf/T = get_turf(src)
 	if(!T) return
-
+	eject_disk(user)
 	stop_music()
 
 	var/obj/structure/concertspeaker/S = new(T)
