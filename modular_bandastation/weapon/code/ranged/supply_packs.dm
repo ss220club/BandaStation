@@ -114,13 +114,13 @@
 // MARK: Black Market
 /datum/market_item/weapon/c46x30
 	name = "4.6x30mm ammo box"
-	desc = "Слушай, 4.6x30mm — это не то, что можно купить в ларьке. \
+	desc = "Слушай, 4.6x30мм — это не то, что можно купить в ларьке. \
 		Если хочешь достать их, не светя своей личностью, то не жалуйся. \
 		Где-то тут качественный корпоративный стафф. А где-то — мусор с пола завода. \
 		Мы ничего не обещаем, лады?"
 	stock_max = 5
-	availability_prob = 35
-	item = /obj/effect/spawner/random/armory/c46x30
+	availability_prob = 50
+	item = /obj/effect/spawner/random/contraband/c46x30
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -144,7 +144,7 @@
 		Мы точность не гарантируем, лады?"
 	stock_max = 5
 	availability_prob = 30
-	item = /obj/effect/spawner/random/armory/c338
+	item = /obj/effect/spawner/random/contraband/c338
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -156,7 +156,7 @@
 		Мы за осечки не отвечаем, окей?"
 	stock_max = 5
 	availability_prob = 30
-	item = /obj/effect/spawner/random/armory/c762x51
+	item = /obj/effect/spawner/random/contraband/c762x51
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -168,7 +168,7 @@
 		Мы качество пороха не проверяли, понял?"
 	stock_max = 5
 	availability_prob = 30
-	item = /obj/effect/spawner/random/armory/c223
+	item = /obj/effect/spawner/random/contraband/c223
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -179,8 +179,8 @@
 		Тут вперемешку, где-то заводской стандарт, а где-то грязный самокрут из подвала. \
 		Мы за заклинивший затвор не отвечаем, понял?"
 	stock_max = 5
-	availability_prob = 35
-	item = /obj/effect/spawner/random/armory/c9mm
+	availability_prob = 75
+	item = /obj/effect/spawner/random/contraband/c9mm
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -191,8 +191,8 @@
 		Это может быть горячая партия от Синдиката или кустарная пересборка с передозировкой пороха. \
 		Мы за твои вывихнутые кисти не отвечаем, окей?"
 	stock_max = 5
-	availability_prob = 35
-	item = /obj/effect/spawner/random/armory/c10mm
+	availability_prob = 75
+	item = /obj/effect/spawner/random/contraband/c10mm
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -204,7 +204,7 @@
 		Мы не гарантируем, что твой ствол не разорвет к чертям, усек?"
 	stock_max = 5
 	availability_prob = 30
-	item = /obj/effect/spawner/random/armory/c585sol
+	item = /obj/effect/spawner/random/contraband/c585sol
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -215,8 +215,8 @@
 		В коробке может быть качественный экспансив или списанный военный запас прошлого века. \
 		Мы не обещаем, что порох не отсырел, лады?"
 	stock_max = 5
-	availability_prob = 35
-	item = /obj/effect/spawner/random/armory/c45
+	availability_prob = 75
+	item = /obj/effect/spawner/random/contraband/c45
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -227,7 +227,7 @@
 		Партия разная, что-то украли из вещдоков, что-то — трофей с складов Синдиката. \
 		Мы не виноваты, если тебе выпадет пустышка, лады?"
 	stock_max = 5
-	availability_prob = 30
+	availability_prob = 50
 	item = /obj/item/ammo_box/c357
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
@@ -239,8 +239,21 @@
 		Коробки не проверяем, что-то украли у копов, что-то нашли на свалке. \
 		Если выстрелит — тебе повезло, мы гарантий не даем, ясно?"
 	stock_max = 5
-	availability_prob = 35
-	item = /obj/effect/spawner/random/armory/c38
+	availability_prob = 75
+	item = /obj/effect/spawner/random/contraband/c38
+	price_min = CARGO_CRATE_VALUE * 1
+	price_max = CARGO_CRATE_VALUE * 3
+
+/datum/market_item/weapon/c35sol
+	name = ".35 Sol Short ammo box"
+	desc = "Слушай, .35 Sol Short — это то, чем ТСФ кормит свои пистолеты каждый день. \
+		Если хочешь стрелять казенным свинцом, не записываясь во флот ТСФ, то бери. \
+		Эта коробка «упала» с погрузчика в доках, так что картон немного помят. \
+		Внутри может быть заводской свежак, а может — отсыревший мусор. \
+		Мы контроль качества не проводим, усек?"
+	stock_max = 5
+	availability_prob = 75
+	item = /obj/effect/spawner/random/contraband/c35sol
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -252,7 +265,7 @@
 		Мы не гарантируем, что закраина гильзы не застрянет, ясно?"
 	stock_max = 5
 	availability_prob = 30
-	item = /obj/effect/spawner/random/armory/c762x54mmr
+	item = /obj/effect/spawner/random/contraband/c762x54mmr
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -288,7 +301,7 @@
 		Мы не обещаем, что порох будет чистым, окей?"
 	stock_max = 5
 	availability_prob = 30
-	item = /obj/effect/spawner/random/armory/c762x39
+	item = /obj/effect/spawner/random/contraband/c762x39
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -300,7 +313,7 @@
 		Мы не знаем, сколько лет они там пылились, понял?"
 	stock_max = 5
 	availability_prob = 30
-	item = /obj/effect/spawner/random/armory/c40sol
+	item = /obj/effect/spawner/random/contraband/c40sol
 	price_min = CARGO_CRATE_VALUE * 1
 	price_max = CARGO_CRATE_VALUE * 3
 
@@ -314,7 +327,7 @@
 	price_min = CARGO_CRATE_VALUE * 10
 	price_max = CARGO_CRATE_VALUE * 20
 	stock_max = 1
-	availability_prob = 30
+	availability_prob = 50
 
 /datum/market_item/weapon/bobr/short
 	name = "Bóbr revolver (short)"
@@ -334,11 +347,11 @@
 		Это тяжелая, тупая груда металла, созданная, чтобы сносить двери и головы 12-м калибром. \
 		Мы спилили серийные номера, но на прикладе еще видны царапины от прошлой зачистки. \
 		Он лягается как черт, и мы не оплачиваем лечение твоего плеча, усек?"
-	item = /obj/effect/spawner/random/armory/renoster
-	price_min = CARGO_CRATE_VALUE * 40
-	price_max = CARGO_CRATE_VALUE * 50
+	item = /obj/effect/spawner/random/contraband/renoster
+	price_min = CARGO_CRATE_VALUE * 20
+	price_max = CARGO_CRATE_VALUE * 25
 	stock_max = 1
-	availability_prob = 30
+	availability_prob = 50
 
 /datum/market_item/weapon/skild
 	name = "Skild pistol"
@@ -346,7 +359,7 @@
 		Этой штукой можно делать дырки в обшивке шаттлов, если отдачей тебя не выкинет в шлюз. \
 		Партия списанная, может ствол перегрет, а может из него вообще боялись стрелять. \
 		Мы точность не гарантируем, тут главное попасть в ту же сторону, лады?"
-	item = /obj/item/gun/ballistic/automatic/pistol/skild
+	item = /obj/effect/spawner/random/contraband/skild
 	price_min = CARGO_CRATE_VALUE * 20
 	price_max = CARGO_CRATE_VALUE * 25
 	stock_max = 1
@@ -354,17 +367,17 @@
 
 /datum/market_item/weapon/sindano
 	name = "Sindano SMG"
-	desc = "Послушай, это компактная «поливалка» от ТСФ для спецотрядов и не только их. \
+	desc = "Послушай, это компактная «поливалка» из ТСФ для их бойцов и не только их. \
 		Калибр .35 Sol — редкая, злая штука, мелкая пуля, но бешеная скорость. \
 		ТСФ разработали этот ПП под калибр .35 Sol, чтобы дырявить бронежилеты в узких коридорах кораблей. \
 		Эта штука жрет магазины за секунду, так что запасайся патронами. \
 		Этот ствол, скорее всего, «потерялся» во время учений или переброски войск. \
 		Механизм может быть разболтан от частой стрельбы очередями, мы гарантий не даем, лады?"
-	item = /obj/item/gun/ballistic/automatic/sindano
+	item = /obj/effect/spawner/random/contraband/sindano
 	price_min = CARGO_CRATE_VALUE * 20
 	price_max = CARGO_CRATE_VALUE * 25
 	stock_max = 1
-	availability_prob = 35
+	availability_prob = 50
 
 /datum/market_item/weapon/tp14
 	name = "TP-14 pistol"
@@ -398,9 +411,9 @@
 		Барабан всего на пять гнезд, зато калибр .50 AE пробивает бронепластины как картон. \
 		Эта пушка выглядит потертой, будто прошла пару войн на границе, но механизм надежен, как кусок скалы. \
 		Если промахнешься всеми пятью — можешь просто ударить им по голове, эффект будет тот же, лады?"
-	item = /obj/item/gun/ballistic/revolver/takbok
-	price_min = CARGO_CRATE_VALUE * 20
-	price_max = CARGO_CRATE_VALUE * 25
+	item = /obj/effect/spawner/random/contraband/takbok
+	price_min = CARGO_CRATE_VALUE * 40
+	price_max = CARGO_CRATE_VALUE * 50
 	stock_max = 1
 	availability_prob = 35
 
@@ -410,7 +423,7 @@
 		Грубая штампованная сталь, фанера и механизм, который работает даже в вакууме или болоте. \
 		Этот ствол, наверное, прошел через три революции, прежде чем попасть к нам. \
 		Он будет стрелять всегда, даже если ты забудешь, как его чистить, усек?"
-	item = /obj/effect/spawner/random/armory/amk
+	item = /obj/effect/spawner/random/contraband/amk
 	price_min = CARGO_CRATE_VALUE * 40
 	price_max = CARGO_CRATE_VALUE * 50
 	stock_max = 1
@@ -428,6 +441,33 @@
 	price_max = CARGO_CRATE_VALUE * 40
 	stock_max = 1
 	availability_prob = 50
+
+/datum/market_item/weapon/wespe
+	name = "Wespe pistol"
+	desc = "Послушай, это стандартная рабочая лошадка флота ТСФ. Их штампуют тысячами, и они работают везде. \
+		Никаких понтов, только пластик, сталь и короткий патрон .35 Sol. \
+		Партия, скажем так, «списанная» — может со склада, а может с холодного трупа. \
+		Это не пушка героя боевика, но она выстрелит, когда прижмет. \
+		Мы чистку не проводили, так что проверь ствол сам, лады?"
+	item = /obj/effect/spawner/random/contraband/wespe
+	price_min = CARGO_CRATE_VALUE * 20
+	price_max = CARGO_CRATE_VALUE * 25
+	stock_max = 1
+	availability_prob = 50
+
+/datum/market_item/weapon/carwo
+	name = "Carwo rifle"
+	desc = "Эй, само наличие у тебя этой винтовки — это уже срок в пяти секторах. \
+		«Карво» — это штатное оружие штурмовиков ТСФ, и они очень не любят, когда оно попадает к гражданским. \
+		Калибр .40 Sol Long, злой и пробивает стандартные бронежилеты охраны навылет. \
+		Эта штука досталась нам с очень мутной сделки, так что не свети ей перед камерами. \
+		Ствол потертый, номера спилены... может она прошла войну, а может валялась в шлюзе. \
+		Если ее заклинит в бою — мы тебя не знаем, понял?"
+	item = /obj/effect/spawner/random/contraband/carwo
+	price_min = CARGO_CRATE_VALUE * 40
+	price_max = CARGO_CRATE_VALUE * 50
+	stock_max = 1
+	availability_prob = 35
 
 // MARK: GUNCASE
 /obj/item/storage/toolbox/guncase/soviet
