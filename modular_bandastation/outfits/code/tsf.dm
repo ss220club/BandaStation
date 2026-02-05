@@ -345,7 +345,7 @@
 	id = /obj/item/card/id/advanced/tsf
 	id_trim = /datum/id_trim/tsf/marine/minigunner
 	uniform = /obj/item/clothing/under/rank/tsf/marine
-	suit = /obj/item/clothing/suit/armor/vest/marine/security
+	suit = /obj/item/clothing/suit/armor/swat/tsf_heavy
 	suit_store = /obj/item/gun/ballistic/shotgun/riot/renoster
 	back = /obj/item/minigun_backpack
 	backpack_contents = null
@@ -353,6 +353,7 @@
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/engi
+	head = /obj/item/clothing/head/helmet/marine/security/tsf_heavy
 
 /datum/id_trim/tsf/marine/minigunner
 	assignment = "TSF - Marine Heavy Trooper"
