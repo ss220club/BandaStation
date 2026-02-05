@@ -23,7 +23,7 @@
 	layer = MID_TURF_LAYER // Above other decals
 
 /obj/effect/decal/big_letter
-	name = "stenciled letter"
+	name = "Big letter"
 	icon = 'modular_bandastation/objects/icons/obj/effects/stencil.dmi'
 	icon_state = "A"
 	layer = MID_TURF_LAYER // Above other decals
