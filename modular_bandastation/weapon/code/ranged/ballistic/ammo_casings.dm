@@ -138,6 +138,20 @@
 	icon_state = "sa-casing"
 	projectile_type = /obj/projectile/bullet/c9x25mm/ap
 
+/obj/item/ammo_casing/c9x25mm/bs
+	name = "9x25mm NT bluespace bullet casing"
+	desc = "Эксперементальный пистолетный блюспейс патрон НТ калибра 9x25мм. Пробивает броню и движется быстрее чем другие пули."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "srr-casing"
+	projectile_type = /obj/projectile/bullet/c9x25mm/bs
+
+/obj/item/ammo_casing/c9x25mm/bs/admin
+	name = "9x25mm NT bluespace-M bullet casing"
+	desc = "Эксперементальный пистолетный блюспейс патрон НТ калибра 9x25мм. Пробивает броню и движется быстрее чем другие пули."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "srr-casing"
+	projectile_type = /obj/projectile/bullet/c9x25mm/bs/admin
+
 // MARK: .223 aka 5.56mm
 /obj/item/ammo_casing/a223
 	name = "5.56x45mm bullet casing"

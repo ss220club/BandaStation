@@ -76,6 +76,21 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
+/datum/design/c9x25mm/bs
+	name = "pistol magazine (9x25mm) (Bluespace)"
+	desc = "Designed to quickly reload GP-9 pistols. Bluespace bullets are faster than normal, but strikes with less damage."
+	id = "c9x25mm_bs"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
+		/datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT * 2
+	)
+	build_path = /obj/item/ammo_box/magazine/c9x25mm_pistol/bs
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
 /datum/design/breaching_slug
 	name = "Breaching Slug (Non-Lethal/Highly Destructive)"
 	desc = "Designed for breaching airlocks and windows, quickly and efficiently."
@@ -109,4 +124,5 @@
 	design_ids += list(
 		"c9x25mm_hp",
 		"c9x25mm_ap",
+		"c9x25mm_bs",
 	)

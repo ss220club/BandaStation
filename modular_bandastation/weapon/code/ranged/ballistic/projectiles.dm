@@ -311,6 +311,35 @@
 	shrapnel_type = null
 	embed_type = null
 
+/obj/projectile/bullet/c9x25mm/bs
+	name = "9x25mm NT bluespace bullet"
+	damage = 15
+	wound_bonus = -5
+	exposed_wound_bonus = 5
+	embed_falloff_tile = 0
+	armour_penetration = 20
+	shrapnel_type = null
+	embed_type = null
+	speed = 2
+
+/obj/projectile/bullet/c9x25mm/bs/admin
+	name = "9x25mm NT bluespace-moth bullet"
+	icon = 'icons/obj/toys/plushes.dmi'
+	hitsound = 'sound/mobs/humanoids/moth/scream_moth.ogg'
+	icon_state = "moffplush"
+	damage = 100
+	wound_bonus = 50
+	exposed_wound_bonus = 50
+	embed_falloff_tile = 0
+	armour_penetration = 50
+	speed = 2
+	embed_type = /datum/embedding/moth_bullet
+
+/datum/embedding/moth_bullet
+	pain_mult = 4
+	embed_chance = 100
+	fall_chance = 0
+
 // MARK: .223 aka 5.56mm
 /obj/projectile/bullet/a223
 	name = "5.56x45mm bullet"

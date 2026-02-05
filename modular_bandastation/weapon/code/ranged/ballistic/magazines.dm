@@ -386,6 +386,24 @@
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c9x25mm/hp
 
+/obj/item/ammo_box/magazine/c9x25mm_pistol/bs
+	name = "pistol magazine (9x25mm NT BS)"
+	desc = parent_type::desc + "<br>Содержит эксперементальные патроны с БС пулями."
+	ammo_band_color = COLOR_AMMO_ICEBLOX
+	ammo_type = /obj/item/ammo_casing/c9x25mm/bs
+
+/obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/bs
+	name = "extended pistol magazine (9x25mm NT BS)"
+	desc = parent_type::desc + "<br>Содержит эксперементальные патроны с БС пулями."
+	ammo_band_color = COLOR_AMMO_ICEBLOX
+	ammo_type = /obj/item/ammo_casing/c9x25mm/bs
+
+/obj/item/ammo_box/magazine/c9x25mm_pistol/bs/admin
+	name = "pistol magazine (9x25mm NT BS-M)"
+	desc = parent_type::desc + "<br>Содержит эксперементальные патроны с БС пулями. Почему-то они пушистые и кажется, жужжат как моли? Странно."
+	ammo_band_color = COLOR_ADMIN_PINK
+	ammo_type = /obj/item/ammo_casing/c9x25mm/bs/admin
+
 // MARK: CM5 - SMG
 /obj/item/ammo_box/magazine/cm5
 	name = "SMG magazine (9x25mm NT)"
@@ -417,6 +435,12 @@
 	name = "SMG magazine (9x25mm NT AP)"
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c9x25mm/ap
+
+/obj/item/ammo_box/magazine/cm5/bs
+	name = "SMG magazine (9x25mm NT BS)"
+	desc = parent_type::desc + "<br>Содержит эксперементальные патроны с БС пулями."
+	ammo_band_color = COLOR_AMMO_TRUESTRIKE
+	ammo_type = /obj/item/ammo_casing/c9x25mm/bs
 
 // MARK: CM82 - assault rifle
 /obj/item/ammo_box/magazine/c223
@@ -1161,6 +1185,20 @@
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c9mm/fire
 
+/obj/item/ammo_box/magazine/smgm9mm
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	ammo_band_icon = "+smg9mm_ammo_band"
+	ammo_band_color = null
+
+/obj/item/ammo_box/magazine/smgm9mm/rubber
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c9mm/rubber
+
+/obj/item/ammo_box/magazine/smgm9mm/hp
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c9mm/hp
+
 // MARK: AS32 - auto shotgun
 /obj/item/ammo_box/magazine/as32
 	name = "AS32 magazine (12ga buckshot)"
@@ -1449,7 +1487,7 @@
 // MARK: Taipan
 /obj/item/ammo_box/magazine/taipan
 	name = "antimaterial sniper rifle magazine (20x138mm)"
-	desc = "Магазин калибра 20x138мм, подходящий для  антиматериальным снайперским винтовкам."
+	desc = "Магазин калибра 20x138мм, подходящий антиматериальным снайперским винтовкам."
 	icon_state = ".50mag"
 	base_icon_state = ".50mag"
 	ammo_type = /obj/item/ammo_casing/mm20x138
