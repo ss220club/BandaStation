@@ -6,6 +6,7 @@
 	name = "IPC chassis"
 	desc = "Основной корпус IPC, содержащий все жизненно важные системы."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_chest_m"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
@@ -48,6 +49,7 @@
 	name = "IPC head"
 	desc = "Голова IPC с оптическими и аудио сенсорами."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_head"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
@@ -92,6 +94,7 @@
 	name = "IPC left arm"
 	desc = "Левая рука IPC."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_l_arm"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
@@ -113,6 +116,7 @@
 	name = "IPC right arm"
 	desc = "Правая рука IPC."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_r_arm"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
@@ -134,6 +138,7 @@
 	name = "IPC left leg"
 	desc = "Левая нога IPC."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_l_leg"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
@@ -153,6 +158,7 @@
 	name = "IPC right leg"
 	desc = "Правая нога IPC."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_r_leg"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
