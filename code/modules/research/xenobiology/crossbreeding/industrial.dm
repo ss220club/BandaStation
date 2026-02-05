@@ -4,7 +4,7 @@ Industrial extracts:
 */
 /obj/item/slimecross/industrial
 	name = "industrial extract"
-	desc = "Гелеобразный, устойчивый экстракт, любимый плазмой и промышленностью."
+	desc = "Гелеобразный, устойчивый экстракт, основанный на плазме и промышленности."
 	effect = "industrial"
 	icon_state = "industrial_still"
 	var/plasmarequired = 2 //Units of plasma required to be consumed to produce item.
@@ -124,13 +124,13 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/bluespace
 	colour = SLIME_TYPE_BLUESPACE
-	effect_desc = "Производит синтетические блюспейс кристаллы"
+	effect_desc = "Производит синтетические блюспейс кристаллы."
 	plasmarequired = 7
 	itempath = /obj/item/stack/ore/bluespace_crystal/artificial
 
 /obj/item/slimecross/industrial/sepia
 	colour = SLIME_TYPE_SEPIA
-	effect_desc = "Прозводит камеры."
+	effect_desc = "Производит камеры."
 	plasmarequired = 2
 	itempath = /obj/item/camera
 
@@ -160,7 +160,7 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/pink
 	colour = SLIME_TYPE_PINK
-	effect_desc = "Проивзодит автоинъекторы с паксом и космодурью."
+	effect_desc = "Производит автоинъекторы с паксом и космодурью."
 	plasmarequired = 6
 	itempath = /obj/item/slimecrossbeaker/autoinjector/peaceandlove
 
@@ -181,7 +181,7 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/black //What does this have to do with black slimes? No clue! Fun, though
 	colour = SLIME_TYPE_BLACK
-	effect_desc = "Производит шикарные пачки регенератинвых слаймовых сигарет."
+	effect_desc = "Производит шикарные пачки регенеративных слаймовых сигарет."
 	plasmarequired = 6
 	itempath = /obj/item/storage/fancy/cigarettes/cigpack_xeno
 
@@ -199,7 +199,7 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/rainbow
 	colour = SLIME_TYPE_RAINBOW
-	effect_desc = "Производит случайные слаймовые экстракты."
+	effect_desc = "Производит случайные экстракты слаймов."
 	plasmarequired = 5
 	//Item picked below.
 

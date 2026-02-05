@@ -29924,3 +29924,13 @@ accusative = "промышленный экстракт"
 instrumental = "промышленным экстрактом"
 prepositional = "промышленном экстракте"
 gender = "male"
+
+["stabilized extract"]
+nominative = "стабилизированный экстракт"
+genitive = "стабилизированного экстракта"
+dative = "стабилизированному экстракту"
+accusative = "стабилизированный экстракт"
+instrumental = "стабилизированным экстрактом"
+prepositional = "стабилизированном экстракте"
+gender = "male"
+
