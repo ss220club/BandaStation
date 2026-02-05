@@ -16,6 +16,10 @@
 
 	var/chassis_type = "Unbranded"
 
+	// Модификаторы урона от шасси
+	var/brute_reduction = 0  // Процент редукции brute урона (0.3 = 30% меньше урона)
+	var/burn_reduction = 0   // Процент редукции burn урона (0.3 = 30% меньше урона)
+
 /obj/item/bodypart/chest/ipc/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/ipc_panel)
@@ -56,6 +60,10 @@
 	var/screen_icon = "BSOD"
 	var/antenna_type = "None"
 
+	// Модификаторы урона от шасси
+	var/brute_reduction = 0
+	var/burn_reduction = 0
+
 /obj/item/bodypart/head/ipc/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/ipc_panel)
@@ -93,6 +101,10 @@
 
 	var/grip_strength = 1.0
 
+	// Модификаторы урона от шасси
+	var/brute_reduction = 0
+	var/burn_reduction = 0
+
 // ============================================
 // ПРАВАЯ РУКА
 // ============================================
@@ -110,6 +122,10 @@
 
 	var/grip_strength = 1.0
 
+	// Модификаторы урона от шасси
+	var/brute_reduction = 0
+	var/burn_reduction = 0
+
 // ============================================
 // ЛЕВАЯ НОГА
 // ============================================
@@ -124,6 +140,10 @@
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_IPC
 	max_damage = 70
+
+	// Модификаторы урона от шасси
+	var/brute_reduction = 0
+	var/burn_reduction = 0
 
 // ============================================
 // ПРАВАЯ НОГА
@@ -140,11 +160,21 @@
 	bodytype = BODYTYPE_IPC
 	max_damage = 70
 
+	// Модификаторы урона от шасси
+	var/brute_reduction = 0
+	var/burn_reduction = 0
+
 // ============================================
 // УРОН И СПАРКИ
 // ============================================
 
 /obj/item/bodypart/chest/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
+	// Применяем редукцию урона от шасси
+	if(brute_reduction > 0)
+		brute = brute * (1 - brute_reduction)
+	if(burn_reduction > 0)
+		burn = burn * (1 - burn_reduction)
+
 	. = ..()
 	if(brute > 10 || burn > 10)
 		do_sparks(3, TRUE, src)
@@ -152,6 +182,12 @@
 		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
 
 /obj/item/bodypart/head/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
+	// Применяем редукцию урона от шасси
+	if(brute_reduction > 0)
+		brute = brute * (1 - brute_reduction)
+	if(burn_reduction > 0)
+		burn = burn * (1 - burn_reduction)
+
 	. = ..()
 	if(brute > 10 || burn > 10)
 		do_sparks(3, TRUE, src)
@@ -159,6 +195,12 @@
 		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
 
 /obj/item/bodypart/arm/left/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
+	// Применяем редукцию урона от шасси
+	if(brute_reduction > 0)
+		brute = brute * (1 - brute_reduction)
+	if(burn_reduction > 0)
+		burn = burn * (1 - burn_reduction)
+
 	. = ..()
 	if(brute > 10 || burn > 10)
 		do_sparks(3, TRUE, src)
@@ -166,6 +208,12 @@
 		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
 
 /obj/item/bodypart/arm/right/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
+	// Применяем редукцию урона от шасси
+	if(brute_reduction > 0)
+		brute = brute * (1 - brute_reduction)
+	if(burn_reduction > 0)
+		burn = burn * (1 - burn_reduction)
+
 	. = ..()
 	if(brute > 10 || burn > 10)
 		do_sparks(3, TRUE, src)
@@ -173,6 +221,12 @@
 		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
 
 /obj/item/bodypart/leg/left/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
+	// Применяем редукцию урона от шасси
+	if(brute_reduction > 0)
+		brute = brute * (1 - brute_reduction)
+	if(burn_reduction > 0)
+		burn = burn * (1 - burn_reduction)
+
 	. = ..()
 	if(brute > 10 || burn > 10)
 		do_sparks(3, TRUE, src)
@@ -180,6 +234,12 @@
 		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
 
 /obj/item/bodypart/leg/right/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
+	// Применяем редукцию урона от шасси
+	if(brute_reduction > 0)
+		brute = brute * (1 - brute_reduction)
+	if(burn_reduction > 0)
+		burn = burn * (1 - burn_reduction)
+
 	. = ..()
 	if(brute > 10 || burn > 10)
 		do_sparks(3, TRUE, src)
