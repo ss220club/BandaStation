@@ -59,4 +59,5 @@
 	ammo_type = /obj/item/ammo_casing/a40mm/rubber
 
 /obj/item/gun/grenadelauncher
-	icon = 'modular_bandastation/weapon/icons/ranged/ballistic40x32.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	SET_BASE_PIXEL(-8, 0)
