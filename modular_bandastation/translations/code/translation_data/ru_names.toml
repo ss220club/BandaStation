@@ -29913,3 +29913,12 @@ accusative = "деревянную раму стола"
 instrumental = "деревянной рамой стола"
 prepositional = "деревянной раме стола"
 gender = "female"
+
+["stenciled letter"]
+nominative = "трафаретный символ"
+genitive = "трафаретного символа"
+dative = "трафаретному символу"
+accusative = "трафаретного символа"
+instrumental = "трафаретным символом"
+prepositional = "трафаретном символе"
+gender = "male"
