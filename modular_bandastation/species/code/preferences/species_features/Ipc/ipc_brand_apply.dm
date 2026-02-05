@@ -69,6 +69,7 @@
 			if(head)
 				if(custom_icon)
 					head.icon = custom_icon
+					head.icon_static = custom_icon  // Важно для bodyparts!
 					head.icon_greyscale = null
 				head.icon_state = "[prefix]_head"
 		if(BODY_ZONE_CHEST)
@@ -76,6 +77,7 @@
 			if(chest)
 				if(custom_icon)
 					chest.icon = custom_icon
+					chest.icon_static = custom_icon
 					chest.icon_greyscale = null
 				var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
 				chest.icon_state = "[prefix]_chest_[gender_suffix]"
@@ -84,6 +86,7 @@
 			if(l_arm)
 				if(custom_icon)
 					l_arm.icon = custom_icon
+					l_arm.icon_static = custom_icon
 					l_arm.icon_greyscale = null
 				l_arm.icon_state = "[prefix]_l_arm"
 		if(BODY_ZONE_R_ARM)
@@ -91,6 +94,7 @@
 			if(r_arm)
 				if(custom_icon)
 					r_arm.icon = custom_icon
+					r_arm.icon_static = custom_icon
 					r_arm.icon_greyscale = null
 				r_arm.icon_state = "[prefix]_r_arm"
 		if(BODY_ZONE_L_LEG)
@@ -98,6 +102,7 @@
 			if(l_leg)
 				if(custom_icon)
 					l_leg.icon = custom_icon
+					l_leg.icon_static = custom_icon
 					l_leg.icon_greyscale = null
 				l_leg.icon_state = "[prefix]_l_leg"
 		if(BODY_ZONE_R_LEG)
@@ -105,6 +110,7 @@
 			if(r_leg)
 				if(custom_icon)
 					r_leg.icon = custom_icon
+					r_leg.icon_static = custom_icon
 					r_leg.icon_greyscale = null
 				r_leg.icon_state = "[prefix]_r_leg"
 
@@ -115,6 +121,7 @@
 	if(chest)
 		if(custom_icon_file)
 			chest.icon = custom_icon_file
+			chest.icon_static = custom_icon_file  // Важно для bodyparts!
 			chest.icon_greyscale = null  // Отключаем greyscale систему для кастомных иконок
 		var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
 		chest.icon_state = "[prefix]_chest_[gender_suffix]"
@@ -124,6 +131,7 @@
 	if(head)
 		if(custom_icon_file)
 			head.icon = custom_icon_file
+			head.icon_static = custom_icon_file
 			head.icon_greyscale = null
 		head.icon_state = "[prefix]_head"
 
@@ -132,6 +140,7 @@
 	if(l_arm)
 		if(custom_icon_file)
 			l_arm.icon = custom_icon_file
+			l_arm.icon_static = custom_icon_file
 			l_arm.icon_greyscale = null
 		l_arm.icon_state = "[prefix]_l_arm"
 
@@ -140,6 +149,7 @@
 	if(r_arm)
 		if(custom_icon_file)
 			r_arm.icon = custom_icon_file
+			r_arm.icon_static = custom_icon_file
 			r_arm.icon_greyscale = null
 		r_arm.icon_state = "[prefix]_r_arm"
 
@@ -148,6 +158,7 @@
 	if(l_leg)
 		if(custom_icon_file)
 			l_leg.icon = custom_icon_file
+			l_leg.icon_static = custom_icon_file
 			l_leg.icon_greyscale = null
 		l_leg.icon_state = "[prefix]_l_leg"
 
@@ -156,6 +167,7 @@
 	if(r_leg)
 		if(custom_icon_file)
 			r_leg.icon = custom_icon_file
+			r_leg.icon_static = custom_icon_file
 			r_leg.icon_greyscale = null
 		r_leg.icon_state = "[prefix]_r_leg"
 
