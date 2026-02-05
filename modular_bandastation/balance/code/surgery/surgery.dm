@@ -17,9 +17,7 @@ GLOBAL_LIST_INIT(surgery_effects, list(
 	/datum/status_effect/pacify,
 	/datum/status_effect/eye_blur,
 	/datum/status_effect/dazed,
-	// /datum/status_effect/incapacitating/stamcrit,
 	/datum/status_effect/tox_vomit,
-	/datum/status_effect/woozy,
 	/datum/status_effect/seizure,
 ))
 
