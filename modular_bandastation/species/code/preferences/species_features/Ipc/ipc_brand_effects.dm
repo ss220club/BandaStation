@@ -133,14 +133,30 @@
 /proc/apply_effect_xion(mob/living/carbon/human/H)
 	// Резист к берн урону (30%) - применяем к каждой части тела
 	for(var/obj/item/bodypart/BP in H.bodyparts)
-		if(istype(BP, /obj/item/bodypart/chest/ipc) || \
-		   istype(BP, /obj/item/bodypart/head/ipc) || \
-		   istype(BP, /obj/item/bodypart/arm/left/ipc) || \
-		   istype(BP, /obj/item/bodypart/arm/right/ipc) || \
-		   istype(BP, /obj/item/bodypart/leg/left/ipc) || \
-		   istype(BP, /obj/item/bodypart/leg/right/ipc))
-			// Уменьшаем получаемый берн урон на 30%
-			BP.burn_reduction = 0.3
+		// Проверяем и применяем для chest
+		if(istype(BP, /obj/item/bodypart/chest/ipc))
+			var/obj/item/bodypart/chest/ipc/ipc_bp = BP
+			ipc_bp.burn_reduction = 0.3
+		// Проверяем и применяем для head
+		else if(istype(BP, /obj/item/bodypart/head/ipc))
+			var/obj/item/bodypart/head/ipc/ipc_bp = BP
+			ipc_bp.burn_reduction = 0.3
+		// Проверяем и применяем для left arm
+		else if(istype(BP, /obj/item/bodypart/arm/left/ipc))
+			var/obj/item/bodypart/arm/left/ipc/ipc_bp = BP
+			ipc_bp.burn_reduction = 0.3
+		// Проверяем и применяем для right arm
+		else if(istype(BP, /obj/item/bodypart/arm/right/ipc))
+			var/obj/item/bodypart/arm/right/ipc/ipc_bp = BP
+			ipc_bp.burn_reduction = 0.3
+		// Проверяем и применяем для left leg
+		else if(istype(BP, /obj/item/bodypart/leg/left/ipc))
+			var/obj/item/bodypart/leg/left/ipc/ipc_bp = BP
+			ipc_bp.burn_reduction = 0.3
+		// Проверяем и применяем для right leg
+		else if(istype(BP, /obj/item/bodypart/leg/right/ipc))
+			var/obj/item/bodypart/leg/right/ipc/ipc_bp = BP
+			ipc_bp.burn_reduction = 0.3
 
 	// Медленнее перегревается (80% от стандарта)
 	var/datum/species/ipc/S = H.dna.species
@@ -172,16 +188,36 @@
 /proc/apply_effect_shellguard(mob/living/carbon/human/H)
 	// Резист к бруту 2x и берн резист 1.5x
 	for(var/obj/item/bodypart/BP in H.bodyparts)
-		if(istype(BP, /obj/item/bodypart/chest/ipc) || \
-		   istype(BP, /obj/item/bodypart/head/ipc) || \
-		   istype(BP, /obj/item/bodypart/arm/left/ipc) || \
-		   istype(BP, /obj/item/bodypart/arm/right/ipc) || \
-		   istype(BP, /obj/item/bodypart/leg/left/ipc) || \
-		   istype(BP, /obj/item/bodypart/leg/right/ipc))
-			// Уменьшаем получаемый brute урон на 50% (2x резист)
-			BP.brute_reduction = 0.5
-			// Уменьшаем получаемый burn урон на ~33% (1.5x резист)
-			BP.burn_reduction = 0.33
+		// Проверяем и применяем для chest
+		if(istype(BP, /obj/item/bodypart/chest/ipc))
+			var/obj/item/bodypart/chest/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.5
+			ipc_bp.burn_reduction = 0.33
+		// Проверяем и применяем для head
+		else if(istype(BP, /obj/item/bodypart/head/ipc))
+			var/obj/item/bodypart/head/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.5
+			ipc_bp.burn_reduction = 0.33
+		// Проверяем и применяем для left arm
+		else if(istype(BP, /obj/item/bodypart/arm/left/ipc))
+			var/obj/item/bodypart/arm/left/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.5
+			ipc_bp.burn_reduction = 0.33
+		// Проверяем и применяем для right arm
+		else if(istype(BP, /obj/item/bodypart/arm/right/ipc))
+			var/obj/item/bodypart/arm/right/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.5
+			ipc_bp.burn_reduction = 0.33
+		// Проверяем и применяем для left leg
+		else if(istype(BP, /obj/item/bodypart/leg/left/ipc))
+			var/obj/item/bodypart/leg/left/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.5
+			ipc_bp.burn_reduction = 0.33
+		// Проверяем и применяем для right leg
+		else if(istype(BP, /obj/item/bodypart/leg/right/ipc))
+			var/obj/item/bodypart/leg/right/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.5
+			ipc_bp.burn_reduction = 0.33
 
 	// Одноразовый ЭМП-протектор - TODO при раундстарте
 	// Требует реализации системы имплантов
@@ -197,14 +233,30 @@
 /proc/apply_effect_unbranded(mob/living/carbon/human/H)
 	// Повышенный резист к бруту
 	for(var/obj/item/bodypart/BP in H.bodyparts)
-		if(istype(BP, /obj/item/bodypart/chest/ipc) || \
-		   istype(BP, /obj/item/bodypart/head/ipc) || \
-		   istype(BP, /obj/item/bodypart/arm/left/ipc) || \
-		   istype(BP, /obj/item/bodypart/arm/right/ipc) || \
-		   istype(BP, /obj/item/bodypart/leg/left/ipc) || \
-		   istype(BP, /obj/item/bodypart/leg/right/ipc))
-			// Уменьшаем получаемый brute урон на 20%
-			BP.brute_reduction = 0.2
+		// Проверяем и применяем для chest
+		if(istype(BP, /obj/item/bodypart/chest/ipc))
+			var/obj/item/bodypart/chest/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.2
+		// Проверяем и применяем для head
+		else if(istype(BP, /obj/item/bodypart/head/ipc))
+			var/obj/item/bodypart/head/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.2
+		// Проверяем и применяем для left arm
+		else if(istype(BP, /obj/item/bodypart/arm/left/ipc))
+			var/obj/item/bodypart/arm/left/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.2
+		// Проверяем и применяем для right arm
+		else if(istype(BP, /obj/item/bodypart/arm/right/ipc))
+			var/obj/item/bodypart/arm/right/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.2
+		// Проверяем и применяем для left leg
+		else if(istype(BP, /obj/item/bodypart/leg/left/ipc))
+			var/obj/item/bodypart/leg/left/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.2
+		// Проверяем и применяем для right leg
+		else if(istype(BP, /obj/item/bodypart/leg/right/ipc))
+			var/obj/item/bodypart/leg/right/ipc/ipc_bp = BP
+			ipc_bp.brute_reduction = 0.2
 
 	var/datum/species/ipc/S = H.dna.species
 	if(S)
