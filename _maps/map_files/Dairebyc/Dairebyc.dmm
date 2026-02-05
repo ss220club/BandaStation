@@ -19967,14 +19967,6 @@
 /obj/machinery/light/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/theatre)
-"eSR" = (
-/obj/machinery/atmospherics/components/trinary/filter/flipped/critical{
-	dir = 4
-	},
-/obj/effect/turf_decal/bot,
-/obj/effect/turf_decal/tile/yellow/opposingcorners,
-/turf/open/floor/iron/dark,
-/area/station/engineering/supermatter/room)
 "eSZ" = (
 /turf/closed/wall/r_wall,
 /area/station/science/explab)
@@ -20011,12 +20003,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "eTD" = (
-/obj/machinery/atmospherics/components/trinary/filter/flipped/critical{
-	dir = 4;
-	filter_type = list(/datum/gas/nitrogen)
-	},
 /obj/effect/turf_decal/bot,
 /obj/effect/turf_decal/tile/yellow/opposingcorners,
+/obj/machinery/atmospherics/components/trinary/filter/critical{
+	dir = 8
+	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/supermatter/room)
 "eTJ" = (
@@ -208446,7 +208437,7 @@ aKp
 tLE
 owL
 fOU
-eSR
+eTD
 kOF
 rLg
 tYD
@@ -208960,7 +208951,7 @@ qDM
 pxh
 qlX
 jrp
-eSR
+eTD
 qql
 rLg
 tYD
@@ -209474,7 +209465,7 @@ qDM
 vzU
 mgZ
 xbW
-eSR
+eTD
 wvz
 rLg
 tYD
@@ -210244,7 +210235,7 @@ jbB
 aKp
 upd
 cZC
-uSf
+wBU
 ooG
 oUV
 rLg
@@ -210502,7 +210493,7 @@ gfS
 wBU
 mDj
 mDj
-eSR
+eTD
 ljo
 rLg
 tYD
