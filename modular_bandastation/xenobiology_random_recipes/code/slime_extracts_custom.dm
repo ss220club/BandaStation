@@ -290,7 +290,6 @@ GLOBAL_LIST_INIT(slime_random_diseases, list(
 	/datum/disease/flu,
 	/datum/disease/beesease,
 	/datum/disease/fluspanish,
-	/datum/disease/tuberculosis,
 	/datum/disease/gastrolosis,
 ))
 
