@@ -66,6 +66,7 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/sabel/auto/examine(mob/user)
 	. = ..()

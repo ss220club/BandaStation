@@ -42,6 +42,7 @@
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/renoster)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/update_icon_state()
 	. = ..()

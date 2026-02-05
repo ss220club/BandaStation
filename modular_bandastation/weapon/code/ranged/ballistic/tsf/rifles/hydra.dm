@@ -36,6 +36,7 @@
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 	AddElement(/datum/element/update_icon_updates_onmob)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/hydra/update_icon_state()
 	. = ..()

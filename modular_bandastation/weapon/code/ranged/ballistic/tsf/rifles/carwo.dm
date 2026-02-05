@@ -29,6 +29,7 @@
 /obj/item/gun/ballistic/automatic/carwo/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/carwo/add_seclight_point()
 	AddComponent(\

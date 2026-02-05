@@ -15,7 +15,7 @@
 	dry_fire_sound = 'modular_bandastation/weapon/sound/ranged/launcher_empty.ogg'
 	fire_delay = 1 SECONDS
 	pin = /obj/item/firing_pin
-	SET_BASE_PIXEL(-16, 0)
+	SET_BASE_PIXEL(0, 0)
 
 /obj/item/gun/ballistic/rocketlauncher/oneuse/Initialize(mapload)
 	. = ..()

@@ -51,6 +51,7 @@
 /obj/item/gun/ballistic/automatic/wylom/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 2)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/wylom/bulpup
 	name = "AMV/B-92 'Wyłom'"

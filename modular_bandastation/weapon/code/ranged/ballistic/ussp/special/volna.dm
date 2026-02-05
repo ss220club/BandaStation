@@ -51,6 +51,7 @@
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/volna)
 	AddComponent(/datum/component/automatic_fire, 0.2 SECONDS)
 	AddElement(/datum/element/drag_pickup)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/volna/examine(mob/user)
 	. = ..()

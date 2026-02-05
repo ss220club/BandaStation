@@ -27,6 +27,8 @@
 	burst_size = 1
 	fire_delay = 1 SECONDS
 	can_suppress = FALSE
+	slowdown = 1
+	item_flags = NEEDS_PERMIT | SLOWS_WHILE_IN_HAND
 
 /obj/item/gun/ballistic/automatic/taipan/no_mag
 	spawnwithmagazine = FALSE
@@ -35,6 +37,7 @@
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 4)
 	AddElement(/datum/element/update_icon_updates_onmob)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/taipan/update_icon_state()
 	. = ..()

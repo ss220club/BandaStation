@@ -39,6 +39,7 @@
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/automatic_fire, 0.18 SECONDS)
 	AddElement(/datum/element/drag_pickup)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/pmk/examine(mob/user)
 	. = ..()
