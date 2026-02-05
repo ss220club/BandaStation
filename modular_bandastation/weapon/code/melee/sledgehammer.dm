@@ -37,6 +37,15 @@
 		)
 	AddComponent(/datum/component/rip_and_tear, stamina_cost = 40, tear_time = 6 SECONDS)
 
+/obj/item/sledgehammer/melee_attack_chain(mob/user, atom/target, params)
+	if(istype(target, /obj/structure/blob))
+		var/old_mod = demolition_mod
+		demolition_mod = 2
+		. = ..()
+		demolition_mod = old_mod
+		return .
+	return ..()
+
 /obj/item/sledgehammer/tactical
 	name = "D-4 tactical breaching hammer"
 	desc = "Металлопластиковый композитный молот для создания брешей в стенах или уничтожения различных структур."
@@ -76,7 +85,7 @@
 
 /obj/item/sledgehammer/syndie/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/stamina_cost_per_hit, stamina_cost=0)
+	AddComponent(/datum/component/stamina_cost_per_hit, stamina_cost = 0)
 	AddComponent(/datum/component/rip_and_tear, stamina_cost = 20, tear_time = 3 SECONDS, reinforced_multiplier = 2)
 
 /datum/armor/item_sledgehammer
