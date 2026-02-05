@@ -85,6 +85,17 @@
 
 	var/datum/hud/hud = H.hud_used
 
+	// Удаляем старые индикаторы если они есть (предотвращаем дубликаты)
+	for(var/atom/movable/screen/mood/ipc_battery/old_indicator in hud.static_inventory)
+		hud.static_inventory -= old_indicator
+		H.client?.screen -= old_indicator
+		qdel(old_indicator)
+
+	for(var/atom/movable/screen/mood/ipc_temperature/old_indicator in hud.static_inventory)
+		hud.static_inventory -= old_indicator
+		H.client?.screen -= old_indicator
+		qdel(old_indicator)
+
 	// Создаем и добавляем индикатор батареи
 	var/atom/movable/screen/mood/ipc_battery/battery_indicator = new()
 	battery_indicator.hud = hud

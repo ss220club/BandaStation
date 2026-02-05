@@ -21,6 +21,9 @@
 	var/datum/species/ipc/S = H.dna.species
 	S.ipc_brand_key = brand_key
 
+	// DEBUG: Выводим информацию о применении бренда
+	to_chat(H, span_boldnotice("DEBUG: Применяется бренд [brand_key]"))
+
 	if(brand_key == "hef")
 		// HEF: каждая часть тела может быть от разного производителя.
 		// Читаем поштучные выборы с species и применяем индивидуально.
@@ -30,8 +33,10 @@
 		// Обычный бренд: один визуальный префикс на всё тело
 		var/datum/ipc_brand/visual_brand = get_ipc_brand(brand_key)
 		if(!visual_brand)
+			to_chat(H, span_warning("DEBUG: Не удалось получить бренд [brand_key]!"))
 			return FALSE
 		S.ipc_visual_brand_key = brand_key
+		to_chat(H, span_notice("DEBUG: Применяем визуал с prefix=[visual_brand.visual_prefix], custom_icon=[visual_brand.custom_icon_file ? "YES" : "NO"]"))
 		apply_ipc_visual_prefix(H, visual_brand.visual_prefix, visual_brand.custom_icon_file)
 		qdel(visual_brand)
 
