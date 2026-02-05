@@ -32,7 +32,7 @@
 		to_chat(H, span_notice("ОШИБКА: Батарея не обнаружена."))
 		return
 
-	var/charge_percent = (battery.charge / battery.max_charge) * 100
+	var/charge_percent = (battery.charge / battery.maxcharge) * 100
 	to_chat(H, span_notice("Заряд батареи: [round(charge_percent)]%"))
 
 // Screen object для отображения температуры процессора
@@ -115,7 +115,7 @@
 	if(!battery)
 		return
 
-	var/charge_percent = (battery.charge / battery.max_charge) * 100
+	var/charge_percent = (battery.charge / battery.maxcharge) * 100
 
 	// Ищем battery indicator в HUD
 	for(var/atom/movable/screen/mood/ipc_battery/indicator in H.hud_used.static_inventory)

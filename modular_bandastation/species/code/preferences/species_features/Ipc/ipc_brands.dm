@@ -88,7 +88,7 @@
 	name = "Xion Manufacturing Group"
 	desc = "Резист к берн урону (30%). Медленнее перегревается (80%). Лечение занимает больше времени."
 	brand_key = "xion"
-	visual_prefix = "ipc"  // В bodyparts_xion.dmi спрайты называются ipc_head, ipc_chest_m, и т.д.
+	visual_prefix = "xion"  // В bodyparts_xion.dmi спрайты называются xion_head, xion_chest_m, и т.д.
 	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_xion.dmi'
 
 // 7. ZENG-HU PHARMACEUTICALS
