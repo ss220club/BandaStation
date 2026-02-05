@@ -26,6 +26,11 @@
 	// Итог: "[visual_prefix]_chest_m", "[visual_prefix]_head", и т.д.
 	var/visual_prefix = ""
 
+	// --- Кастомный файл иконок ---
+	// Путь к отдельному файлу .dmi для этого бренда (если есть)
+	// Если пустой — используется 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
+	var/custom_icon_file = null
+
 	// --- Ограничения по профессии ---
 	// Пустой список = нет ограничений, доступен всем
 	// Иначе — список department bitflags или job titles
@@ -84,6 +89,7 @@
 	desc = "Резист к берн урону (30%). Медленнее перегревается (80%). Лечение занимает больше времени."
 	brand_key = "xion"
 	visual_prefix = "xion"
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_xion.dmi'
 
 // 7. ZENG-HU PHARMACEUTICALS
 /datum/ipc_brand/zeng_hu

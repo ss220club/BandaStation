@@ -90,6 +90,10 @@
 	// Модификатор стоимости ремонта (Cybersun: 1.5)
 	var/ipc_repair_cost_mod = 1.0
 
+	// Дополнительные модификаторы от шасси
+	// Список модификаторов: "overheat_rate", "healing_time", "melee_damage", "implant_slots", и т.д.
+	var/list/ipc_chassis_modifiers = list()
+
 /datum/species/ipc/get_species_description()
 	return "IPC (Integrated Positronic Chassis) — искусственные синтетики на основе позитронного ядра. \
 	Их корпус полностью заменяет биологическую плоть — это модульная кибернетическая система, \

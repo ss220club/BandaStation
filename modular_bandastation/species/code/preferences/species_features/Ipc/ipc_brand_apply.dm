@@ -32,7 +32,7 @@
 		if(!visual_brand)
 			return FALSE
 		S.ipc_visual_brand_key = brand_key
-		apply_ipc_visual_prefix(H, visual_brand.visual_prefix)
+		apply_ipc_visual_prefix(H, visual_brand.visual_prefix, visual_brand.custom_icon_file)
 		qdel(visual_brand)
 
 	return TRUE
@@ -60,46 +60,68 @@
 	if(!brand)
 		return
 	var/prefix = brand.visual_prefix
+	var/custom_icon = brand.custom_icon_file
 	qdel(brand)
 
 	switch(zone)
 		if(BODY_ZONE_HEAD)
 			var/obj/item/bodypart/head/ipc/head = H.get_bodypart(BODY_ZONE_HEAD)
 			if(head)
+				if(custom_icon)
+					head.icon = custom_icon
+					head.icon_greyscale = custom_icon
 				head.icon_state = "[prefix]_head"
 				head.update_appearance()
 		if(BODY_ZONE_CHEST)
 			var/obj/item/bodypart/chest/ipc/chest = H.get_bodypart(BODY_ZONE_CHEST)
 			if(chest)
+				if(custom_icon)
+					chest.icon = custom_icon
+					chest.icon_greyscale = custom_icon
 				var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
 				chest.icon_state = "[prefix]_chest_[gender_suffix]"
 				chest.update_appearance()
 		if(BODY_ZONE_L_ARM)
 			var/obj/item/bodypart/arm/left/ipc/l_arm = H.get_bodypart(BODY_ZONE_L_ARM)
 			if(l_arm)
+				if(custom_icon)
+					l_arm.icon = custom_icon
+					l_arm.icon_greyscale = custom_icon
 				l_arm.icon_state = "[prefix]_l_arm"
 				l_arm.update_appearance()
 		if(BODY_ZONE_R_ARM)
 			var/obj/item/bodypart/arm/right/ipc/r_arm = H.get_bodypart(BODY_ZONE_R_ARM)
 			if(r_arm)
+				if(custom_icon)
+					r_arm.icon = custom_icon
+					r_arm.icon_greyscale = custom_icon
 				r_arm.icon_state = "[prefix]_r_arm"
 				r_arm.update_appearance()
 		if(BODY_ZONE_L_LEG)
 			var/obj/item/bodypart/leg/left/ipc/l_leg = H.get_bodypart(BODY_ZONE_L_LEG)
 			if(l_leg)
+				if(custom_icon)
+					l_leg.icon = custom_icon
+					l_leg.icon_greyscale = custom_icon
 				l_leg.icon_state = "[prefix]_l_leg"
 				l_leg.update_appearance()
 		if(BODY_ZONE_R_LEG)
 			var/obj/item/bodypart/leg/right/ipc/r_leg = H.get_bodypart(BODY_ZONE_R_LEG)
 			if(r_leg)
+				if(custom_icon)
+					r_leg.icon = custom_icon
+					r_leg.icon_greyscale = custom_icon
 				r_leg.icon_state = "[prefix]_r_leg"
 				r_leg.update_appearance()
 
 /// Устанавливает icon_state на всех частях тела по визуальному префиксу бренда
-/proc/apply_ipc_visual_prefix(mob/living/carbon/human/H, prefix)
+/proc/apply_ipc_visual_prefix(mob/living/carbon/human/H, prefix, custom_icon_file = null)
 	// Грудь — зависит от пола
 	var/obj/item/bodypart/chest/ipc/chest = H.get_bodypart(BODY_ZONE_CHEST)
 	if(chest)
+		if(custom_icon_file)
+			chest.icon = custom_icon_file
+			chest.icon_greyscale = custom_icon_file
 		var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
 		chest.icon_state = "[prefix]_chest_[gender_suffix]"
 		chest.update_appearance()
@@ -107,30 +129,45 @@
 	// Голова
 	var/obj/item/bodypart/head/ipc/head = H.get_bodypart(BODY_ZONE_HEAD)
 	if(head)
+		if(custom_icon_file)
+			head.icon = custom_icon_file
+			head.icon_greyscale = custom_icon_file
 		head.icon_state = "[prefix]_head"
 		head.update_appearance()
 
 	// Левая рука
 	var/obj/item/bodypart/arm/left/ipc/l_arm = H.get_bodypart(BODY_ZONE_L_ARM)
 	if(l_arm)
+		if(custom_icon_file)
+			l_arm.icon = custom_icon_file
+			l_arm.icon_greyscale = custom_icon_file
 		l_arm.icon_state = "[prefix]_l_arm"
 		l_arm.update_appearance()
 
 	// Правая рука
 	var/obj/item/bodypart/arm/right/ipc/r_arm = H.get_bodypart(BODY_ZONE_R_ARM)
 	if(r_arm)
+		if(custom_icon_file)
+			r_arm.icon = custom_icon_file
+			r_arm.icon_greyscale = custom_icon_file
 		r_arm.icon_state = "[prefix]_r_arm"
 		r_arm.update_appearance()
 
 	// Левая нога
 	var/obj/item/bodypart/leg/left/ipc/l_leg = H.get_bodypart(BODY_ZONE_L_LEG)
 	if(l_leg)
+		if(custom_icon_file)
+			l_leg.icon = custom_icon_file
+			l_leg.icon_greyscale = custom_icon_file
 		l_leg.icon_state = "[prefix]_l_leg"
 		l_leg.update_appearance()
 
 	// Правая нога
 	var/obj/item/bodypart/leg/right/ipc/r_leg = H.get_bodypart(BODY_ZONE_R_LEG)
 	if(r_leg)
+		if(custom_icon_file)
+			r_leg.icon = custom_icon_file
+			r_leg.icon_greyscale = custom_icon_file
 		r_leg.icon_state = "[prefix]_r_leg"
 		r_leg.update_appearance()
 
