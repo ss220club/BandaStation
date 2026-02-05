@@ -259,7 +259,6 @@
 	icon_state = "buckshot"
 	spawn_loot_count = 1
 	loot = list(
-		/obj/item/ammo_box/c12ga/slug,
 		/obj/item/ammo_box/c12ga/breacher,
 		/obj/item/ammo_box/c12ga/beanbag,
 		/obj/item/ammo_box/c12ga/incendiary,
@@ -331,8 +330,8 @@
 	icon_state = "shotgun"
 	spawn_loot_count = 1
 	loot = list(
-		/obj/item/gun/ballistic/revolver/bobr,
-		/obj/item/gun/ballistic/revolver/bobr/short,
+		/obj/item/gun/ballistic/revolver/bobr/empty,
+		/obj/item/gun/ballistic/revolver/bobr/short/empty,
 	)
 
 /obj/effect/spawner/random/contraband/skild
