@@ -1121,8 +1121,8 @@
 	caliber = CALIBER_SHOTGUN
 	max_ammo = 4
 
-/obj/item/ammo_box/magazine/internal/cylinder/rev12ga/empty
-	start_empty = TRUE
+/obj/item/ammo_box/magazine/internal/cylinder/rev12ga/less_lethal
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 
 // MARK: RPG
 

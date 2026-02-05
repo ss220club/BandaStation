@@ -35,7 +35,7 @@
 	icon_state = "bobr_short"
 
 /obj/item/gun/ballistic/revolver/bobr/empty
-	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev12ga/empty
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev12ga/less_lethal
 
 /obj/item/gun/ballistic/revolver/bobr/short/empty
-	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev12ga/empty
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev12ga/less_lethal
