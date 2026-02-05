@@ -42,6 +42,7 @@
 		TRAIT_TOXIMMUNE,
 		TRAIT_LIMBATTACHMENT,
 		TRAIT_EASYDISMEMBER,
+		TRAIT_NOHUNGER,  // IPC не едят, нет HUD голода
 	)
 
 	// Урон модификаторы
