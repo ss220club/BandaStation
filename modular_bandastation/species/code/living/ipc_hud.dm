@@ -69,23 +69,38 @@
 // ПРИМЕНЕНИЕ HUD ЭЛЕМЕНТОВ
 // ============================================
 
-/datum/species/ipc/on_species_gain(mob/living/carbon/human/H, datum/species/old_species)
+/datum/species/ipc/on_species_gain(mob/living/carbon/human/H, datum/species/old_species, pref_load)
 	. = ..()
+
+	to_chat(H, span_boldwarning("DEBUG HUD: on_species_gain вызван для IPC!"))
+
+	// ВАЖНО: Нужно вызвать replace_body, как в базовом ipc.dm
+	to_chat(H, span_notice("DEBUG HUD: Вызываем replace_body()"))
+	replace_body(H, src)
+	H.update_body()
+	H.update_body_parts()
 
 	// Удаляем mood datum если он есть
 	if(H.mob_mood)
+		to_chat(H, span_notice("DEBUG HUD: Удаляем mob_mood"))
 		QDEL_NULL(H.mob_mood)
 
 	// Добавляем кастомные HUD элементы
+	to_chat(H, span_notice("DEBUG HUD: Вызываем add_ipc_hud_elements()"))
 	add_ipc_hud_elements(H)
 
 /datum/species/ipc/proc/add_ipc_hud_elements(mob/living/carbon/human/H)
+	to_chat(H, span_notice("DEBUG HUD: add_ipc_hud_elements начался"))
+
 	if(!H.hud_used)
+		to_chat(H, span_warning("DEBUG HUD: H.hud_used == null! Выходим"))
 		return
 
+	to_chat(H, span_notice("DEBUG HUD: H.hud_used существует"))
 	var/datum/hud/hud = H.hud_used
 
 	// Удаляем старые индикаторы если они есть (предотвращаем дубликаты)
+	to_chat(H, span_notice("DEBUG HUD: Удаляем старые индикаторы..."))
 	for(var/atom/movable/screen/mood/ipc_battery/old_indicator in hud.static_inventory)
 		hud.static_inventory -= old_indicator
 		H.client?.screen -= old_indicator
@@ -97,22 +112,28 @@
 		qdel(old_indicator)
 
 	// Создаем и добавляем индикатор батареи
+	to_chat(H, span_notice("DEBUG HUD: Создаем battery_indicator"))
 	var/atom/movable/screen/mood/ipc_battery/battery_indicator = new()
 	battery_indicator.hud = hud
 	hud.static_inventory += battery_indicator
 	H.client?.screen += battery_indicator
+	to_chat(H, span_notice("DEBUG HUD: battery_indicator добавлен на screen"))
 
 	// Создаем и добавляем индикатор температуры
+	to_chat(H, span_notice("DEBUG HUD: Создаем temp_indicator"))
 	var/atom/movable/screen/mood/ipc_temperature/temp_indicator = new()
 	temp_indicator.hud = hud
 	// Позиционируем рядом с голодом (который мы скрыли)
 	temp_indicator.screen_loc = ui_hunger
 	hud.static_inventory += temp_indicator
 	H.client?.screen += temp_indicator
+	to_chat(H, span_notice("DEBUG HUD: temp_indicator добавлен на screen"))
 
 	// Обновляем индикаторы
+	to_chat(H, span_notice("DEBUG HUD: Обновляем иконки индикаторов"))
 	update_ipc_battery_icon(H)
 	update_ipc_temperature_icon(H)
+	to_chat(H, span_boldnotice("DEBUG HUD: add_ipc_hud_elements ЗАВЕРШЕН!"))
 
 // ============================================
 // ОБНОВЛЕНИЕ ИКОНОК HUD
