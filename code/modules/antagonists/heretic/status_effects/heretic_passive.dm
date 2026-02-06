@@ -353,7 +353,7 @@
 // Level 2 Gains X-ray Vision
 // Level 3 your grasp no longer goes on cooldown when opening things
 /datum/status_effect/heretic_passive/lock
-	name = "Открытое Приглашение"
+	name = "Открытое приглашение"
 	id = "lock_passive"
 	passive_descriptions = list(
 		"Устойчивость к току, все знания, полученные в магазине, стоят дешевле",
