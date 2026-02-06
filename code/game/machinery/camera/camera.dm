@@ -204,7 +204,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	if(isXRay(TRUE)) //don't reveal it's upgraded if was done via MALF AI Upgrade Camera Network ability
 		. += span_info("Она оборудована рентгеновским фотодиодом.")
 	else
-		. += span_info("Она может быть оборудована рентгеновским фотодиодом с помщью <b>анализатора</b>.")
+		. += span_info("Она может быть оборудована рентгеновским фотодиодом с помощью <b>газового анализатора</b>.")
 
 	if(isMotion())
 		. += span_info("Она оборудована датчиком движения.")
