@@ -24,17 +24,20 @@ Regenerative extracts:
 		return ITEM_INTERACT_BLOCKING
 	if(H != user)
 		user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] раздавливает [src.declent_ru(ACCUSATIVE)] над [H.declent_ru(INSTRUMENTAL)], молочная слизь быстро заживляет часть [H.ru_p_them()] ранений!"),
-			span_notice("Вы раздавливаете [src.declent_ru(ACCUSATIVE)], и он лопается над [H.declent_ru(INSTRUMENTAL)], молочная слизь быстро заживляет часть [H.ru_p_them()] ранений."))
+			span_notice("Вы раздавливаете [src.declent_ru(ACCUSATIVE)] и он лопается над [H.declent_ru(INSTRUMENTAL)], молочная слизь быстро заживляет часть [H.ru_p_them()] ранений."))
 	else
 		user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] раздавливает [src.declent_ru(ACCUSATIVE)] над собой, молочная слизь быстро заживляет часть [user.ru_p_them()] ранений!"),
-			span_notice("Вы раздавливаете [src.declent_ru(ACCUSATIVE)], и он лопается в вашей руке, покрывая вас молочной слизью, которая быстро заживляет ваши ранения!"))
+			span_notice("Вы раздавливаете [src.declent_ru(ACCUSATIVE)] и он лопается в вашей руке, покрывая вас молочной слизью, которая быстро заживляет ваши ранения!"))
 	core_effect_before(H, user)
 	user.do_attack_animation(interacting_with)
 	// BANDASTATION EDIT START
-	H.adjust_brute_loss(-25, forced = TRUE)
-	H.adjust_fire_loss(-25, forced = TRUE)
-	H.adjust_tox_loss(-25, forced = TRUE) // for jelly & others
-	H.adjust_oxy_loss(-25, forced = TRUE)
+	var/list/extract_reagents = list(
+		/datum/reagent/medicine/c2/helbital = 3,
+		/datum/reagent/medicine/c2/lenturi = 4,
+		/datum/reagent/medicine/c2/tirimol = 5,
+	)
+	extract_reagents += isjellyperson(H) ? list(/datum/reagent/toxin/amanitin = 7) :  list(/datum/reagent/medicine/c2/multiver = 15)
+	H.reagents.add_reagent_list(extract_reagents)
 	// BANDASTATION EDIT END
 	core_effect(H, user)
 	playsound(H, 'sound/effects/splat.ogg', 40, TRUE)
