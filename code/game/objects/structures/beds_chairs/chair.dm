@@ -730,7 +730,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/chair/stool/bar, 0)
 /obj/structure/handrail/proc/stop_buckle(mob/living/source, ...)
 	SIGNAL_HANDLER
 	source.visible_message(
-		span_warning("[source] теряет [source.p_their()] хватку на [declent_ru(PREPOSITIONAL)]!"),
+		span_warning("[source] теряет хватку на [declent_ru(PREPOSITIONAL)]!"),
 		span_warning("Вы теряете хватку на [declent_ru(PREPOSITIONAL)]!"),
 		visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		vision_distance = COMBAT_MESSAGE_RANGE,
