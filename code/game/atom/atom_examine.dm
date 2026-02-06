@@ -89,7 +89,7 @@
 	var/verb_looks = is_female ? "выглядит довольно прочной" : "выглядит довольно прочным"
 
 	if(resistance_flags & INDESTRUCTIBLE)
-		.[is_female ? "неразрушаемая" : "неразрушаемый"] = "[he_she_it] очень [adj_very]! [he_she_it] выдержит всё, что с [is_female ? "ней" : "ним"] может случиться!"
+		.[is_female ? "неразрушаемая" : "неразрушаемый"] = "[he_she_it] очень [adj_very]! [capitalize(he_she_it)] выдержит всё, что с [is_female ? "ней" : "ним"] может случиться!"
 	else
 		if(resistance_flags & LAVA_PROOF)
 			.[is_female ? "лавастойкая" : "лавастойкий"] = "[he_she_it] [verb_made] из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
