@@ -163,7 +163,7 @@
 
 	chosen_mob.remove_traits(list(TRAIT_PARALYSIS_L_LEG, TRAIT_PARALYSIS_R_LEG), type)
 	if(chosen_mob.usable_legs > 1)
-		to_chat(chosen_mob, span_green("Вы снова начинаете чувствовать вашу ногу[chosen_mob.usable_legs == 1 ? "":"s"]!"))
+		to_chat(chosen_mob, span_green("Вы снова начинаете чувствовать вашу ног[chosen_mob.usable_legs == 1 ? "у":"и"]!"))
 	return ..()
 
 //---- Curse of Corrosion
