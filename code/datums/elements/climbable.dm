@@ -37,7 +37,7 @@
 	var/is_female = (source.examine_descriptor() in list("структура", "машина"))
 	var/he_she_it = is_female ? "Она" : "Он"
 	var/their_low = is_female ? "её" : "его"
-	examine_list[is_female ? "удобная для залезания" : "удобный для залезания"] = "[he_she_it] выглядит как будто на [their_low] можно забраться."
+	examine_list[is_female ? "удобная для взбирания" : "удобный для взбирания"] = "[he_she_it] выглядит как будто на [their_low] можно забраться."
 	// BANDASTATION EDIT END
 
 /datum/element/climbable/proc/can_climb(atom/source, mob/user)
