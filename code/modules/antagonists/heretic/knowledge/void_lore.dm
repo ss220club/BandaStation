@@ -128,7 +128,7 @@
 
 	var/turf/open/our_turf = loc
 	if(our_turf.GetTemperature() > T0C)
-		loc.balloon_alert(user, "Ритуал провален, недостаточно холодно!")
+		loc.balloon_alert(user, "ритуал провален, недостаточно холодно!")
 		return FALSE
 
 	return ..()
