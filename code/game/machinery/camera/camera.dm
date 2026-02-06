@@ -214,7 +214,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	if(!camera_enabled)
 		. += span_info("Она сейчас выключена.")
 		if(!panel_open && powered())
-			. += span_notice("Вам придётся открыть панель техобслуживания с помощью <b>отвёртки</b> чтобы включить её.")
+			. += span_notice("Вам придётся открыть панель техобслуживания с помощью <b>отвёртки</b>, чтобы включить её.")
 
 	if(panel_open)
 		. += span_info("Панель техобслуживания открыта.")
