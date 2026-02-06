@@ -345,7 +345,7 @@
 	if(using_on_self)
 		caster.visible_message(
 			span_danger("Вы помещаете [inserted_organ.declent_ru(NOMINATIVE)] внутрь [zone_organ_goes_in][organ_victim_already_has ? ", вытесняя [organ_victim_already_has.name]": ""]!"),
-			span_userdanger("Вы заканчиваете установку [inserted_organ.declent_ru(NOMINATIVE)] в ваш [zone_organ_goes_in][organ_victim_already_has ? ", вытеснив [organ_victim_already_has]" : ""]!")
+			span_userdanger("Вы заканчиваете вставлять [inserted_organ.declent_ru(NOMINATIVE)] в ваш [zone_organ_goes_in][organ_victim_already_has ? ", вытеснив [organ_victim_already_has]" : ""]!")
 		)
 	else
 		caster.visible_message(
