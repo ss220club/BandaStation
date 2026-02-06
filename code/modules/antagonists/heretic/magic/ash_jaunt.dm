@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/ash
-	name = "Пепельный пролёт"
-	desc = "Заклинание малой дальности, позволяющее беспрепятственно проходить сквозь стены. Также снимает оковы при усилении умения."
+	name = "Пепельный проход"
+	desc = "Заклинание малой дальности, позволяющее беспрепятственно проходить сквозь стены. При получении усиления снимает оковы."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
