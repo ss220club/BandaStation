@@ -1,3 +1,15 @@
 2026-02-01:
   mcbalaam:
   - admin: Теперь в лобби можно включить ролик с YouTube
+2026-02-04:
+  Voyaker-coder:
+  - map: Добавление мониторов жизненных показателей в медблоки на станциях Кило и
+      Кибериада.
+2026-02-05:
+  Maximal08:
+  - balance: 'Slip Change: Removed 2 seconds of immobilize time, replaced with 0.5
+      seconds of paralysis'
+  Selenion:
+  - rscadd: Система AI Secretary для автоматической суммаризации факсов и генерации
+      ответов ЦК.
+  - rscadd: Новая команда/кнопки в админ-чате для быстрого ответа на факсы через ИИ.
