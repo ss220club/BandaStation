@@ -211,7 +211,7 @@
 		if(initial(species_type.changesource_flags) & RACE_SWAP)
 			chooseable_races[species_type.name] = species_type
 
-	var/species_name = tgui_input_list(user, "Выберите рассу", "Выбери расу, в которую превратите свою жертву", chooseable_races)
+	var/species_name = tgui_input_list(user, "Выберите расу", "Выбери расу, в которую превратите свою жертву", chooseable_races)
 	if(!species_name)
 		return FALSE
 	chosen_species = chooseable_races[species_name]
