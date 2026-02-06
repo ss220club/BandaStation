@@ -78,5 +78,5 @@
 
 /atom/movable/screen/alert/status_effect/realignment
 	name = "Реорганизация"
-	desc = "Вы реорганизуетесь. Вы не можете атаковать, но быстро восстанавливаете стамину."
+	desc = "Вы не можете атаковать, но быстро восстанавливаете выносливость."
 	icon_state = "realignment"
