@@ -1,7 +1,7 @@
 // Realignment. It's like Fleshmend but solely for stamina damage and stuns. Sec meta
 /datum/action/cooldown/spell/realignment
 	name = "Реорганизация"
-	desc = "Реорганизуетесь, быстро восстанавливая стамину и уменьшая любые оглушения и сбивания с ног. \
+	desc = "Реорганизуетесь, быстро восстанавливая выносливость и уменьшая любые оглушения и сбивания с ног. \
 		Вы не можете атаковать во время реорганизации. Можно применять несколько раз подряд, но каждое применение удлиняет перезярядку."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
