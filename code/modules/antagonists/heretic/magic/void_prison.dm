@@ -31,7 +31,7 @@
 	if(cast_on.can_block_magic(antimagic_flags))
 		cast_on.visible_message(
 			span_danger("Вихрящаяся холодная пустота окутывает [cast_on.declent_ru(GENITIVE)], но [cast_on.ru_p_they()] вырывается на свободу во вспышке жара!"),
-			span_danger("Перед вами начинает открываться зияющая Пустота, но огромная волна жара разрывает ее на части! Вы защищены!!")
+			span_danger("Перед вами начинает открываться зияющая Пустота, но огромная волна жара разрывает её на части! Вы защищены!!")
 		)
 		return
 	cast_on.apply_status_effect(/datum/status_effect/void_prison, "void_stasis")
