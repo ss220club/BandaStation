@@ -70,7 +70,7 @@
 		return FALSE
 
 	if(IS_HERETIC(to_curse) && to_curse != user)
-		to_chat(user, span_warning("[to_curse.p_their()] связь с Мансусом слишком сильна. Вы не можете проклясть [to_curse]."))
+		to_chat(user, span_warning("[capitalize(to_curse.ru_p_them())] связь с Мансусом слишком сильна. Вы не можете проклясть [to_curse]."))
 		return TRUE
 
 	if(to_curse.can_block_magic(MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY, charge_cost = 0))
