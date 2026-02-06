@@ -29752,12 +29752,12 @@ gender = "neuter"
 # MARK:  Heretic common items
 
 ["Amber Focus"]
-nominative ="Янтарный фокусировщик"
-genitive ="Янтарного фокусировщика"
-dative ="Янтарному фокусировщику"
-accusative ="Янтарный фокусировщик"
-instrumental ="Янтарным фокусировщиком"
-prepositional ="Янтарном фокусировщике"
+nominative = "Янтарный фокусировщик"
+genitive = "Янтарного фокусировщика"
+dative = "Янтарному фокусировщику"
+accusative = "Янтарный фокусировщик"
+instrumental = "Янтарным фокусировщиком"
+prepositional = "Янтарном фокусировщике"
 gender ="male"
 
 ["Codex Cicatrix"]
@@ -29772,22 +29772,31 @@ gender = "male"
 # MARK: Cosmic heretic items
 
 ["Starwoven Cloak"]
-nominative = "Сотканный из звёзд плащ"
-genitive = "Сотканного из звёзд плаща"
-dative = "Сотканному из звёзд плащу"
-accusative = "Сотканный из звёзд плащ"
-instrumental = "Сотканным из звёзд плащом"
-prepositional = "Сотканном из звёзд плаще"
+nominative = "Сотканный из звёзд"
+genitive = "Сотканного из звёзд"
+dative = "Сотканному из звёзд"
+accusative = "Сотканный из звёзд"
+instrumental = "Сотканным из звёзд"
+prepositional = "Сотканном из звёзд"
 gender = "neuter"
 
 ["Cosmic Blade"]
-nominative = "Космический Клинок"
-genitive = "Космического Клинка"
-dative = "Космическому Клинку"
-accusative = "Космический Клинок"
-instrumental = "Космическим Клинком"
-prepositional = "Космическом Клинке"
+nominative = "Космический клинок"
+genitive = "Космического клинка"
+dative = "Космическому клинку"
+accusative = "Космический клинок"
+instrumental = "Космическим клинком"
+prepositional = "Космическом клинке"
 gender = "male"
+
+["knit flesh"]
+nominative = "переплетение плоти"
+genitive = "переплетения плоти"
+dative = "переплетению плоти"
+accusative = "переплетение плоти"
+instrumental = "переплетением плоти"
+prepositional = "переплетении плоти"
+gender = "neuter"
 
 # MARK: Moon heretic items
 
@@ -29810,12 +29819,12 @@ prepositional = "Лунном амулете"
 gender = "male"
 
 ["Moonlight Blade"]
-nominative = "Лунный Клинок"
-genitive = "Лунного Клинка"
-dative = "Лунному Клинку"
-accusative = "Лунный Клинок"
-instrumental = "Лунным Клинком"
-prepositional = "Лунном Клинке"
+nominative = "Лунный клинок"
+genitive = "Лунного клинка"
+dative = "Лунному клинку"
+accusative = "Лунный клинок"
+instrumental = "Лунным клинком"
+prepositional = "Лунном клинке"
 gender = "male"
 
 # MARK: Void heretic items
@@ -29848,16 +29857,16 @@ prepositional = "филактерии проклятия"
 gender = "female"
 
 ["mawed crucible"]
-nominative = "Зубастый тигель"
-genitive = "Зубастого тигеля"
-dative = "Зубастому тигелю"
-accusative = "Зубастый тигель"
-instrumental = "Зубастым тигелем"
-prepositional = "Зубастом тигеле"
+nominative = "зубастый тигель"
+genitive = "зубастого тигеля"
+dative = "зубастому тигелю"
+accusative = "зубастый тигель"
+instrumental = "зубастым тигелем"
+prepositional = "зубастом тигеле"
 gender = "male"
 
 ["Eldritch Coin"]
-nominative = "Потустаронняя монета"
+nominative = "Потусторонняя монета"
 genitive = "Потусторонней монете"
 dative = "Потусторонней монете"
 accusative = "Потусторонюю монету"

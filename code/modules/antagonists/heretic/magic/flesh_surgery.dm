@@ -390,7 +390,7 @@
 	return TRUE
 
 /obj/item/melee/touch_attack/flesh_surgery
-	name = "переплетение плоти"
+	name = "knit flesh"
 	desc = "Давайте практиковать медицину!"
 	icon = 'icons/obj/weapons/hand.dmi'
 	icon_state = "disintegrate"
