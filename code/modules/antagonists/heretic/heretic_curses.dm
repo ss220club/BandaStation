@@ -52,7 +52,7 @@
 
 	var/mob/living/carbon/human/to_curse = potential_targets[chosen_mob]
 	if(QDELETED(to_curse))
-		loc.balloon_alert(user, "ритуал провален, некорретный выбор цели!")
+		loc.balloon_alert(user, "ритуал провален, некорректный выбор цели!")
 		return FALSE
 
 	// Yes, you COULD curse yourself, not sure why but you could
