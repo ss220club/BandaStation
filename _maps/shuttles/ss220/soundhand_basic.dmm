@@ -71,10 +71,6 @@
 /obj/structure/light_fake/floor,
 /turf/open/floor/mineral/titanium/tiled/white,
 /area/shuttle/escape)
-"cJ" = (
-/obj/machinery/computer/shuttle/soundhand,
-/turf/open/floor/mineral/titanium/tiled/white,
-/area/shuttle/escape)
 "dn" = (
 /obj/structure/closet/secure_closet/freezer/fridge/all_access,
 /obj/machinery/light/directional/east,
@@ -1585,7 +1581,7 @@ Hl
 Hl
 Hl
 Oo
-bz
+tc
 va
 un
 uw
@@ -1623,7 +1619,7 @@ pi
 OW
 Hl
 Oo
-tc
+bz
 ch
 HX
 EQ
@@ -1661,7 +1657,7 @@ Hl
 Hl
 Hl
 Oo
-cJ
+tc
 va
 XZ
 uw

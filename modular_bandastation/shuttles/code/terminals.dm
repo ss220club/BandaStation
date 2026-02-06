@@ -68,19 +68,3 @@
 	name = "Transport Specops"
 	greyscale_colors = CIRCUIT_COLOR_COMMAND
 	build_path = /obj/machinery/computer/shuttle/specops
-
-/obj/machinery/computer/shuttle/soundhand
-	name = "soundhand shuttle console"
-	desc = "A console that controls the Soundhand shuttle."
-	icon_screen = "teleport"
-	icon_keyboard = "security_key"
-	circuit = /obj/item/circuitboard/computer/soundhand
-	shuttleId = "soundhand"
-	possible_destinations = "soundhand_custom"
-	req_access = list(ACCESS_CENT_GENERAL)
-	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
-
-/obj/item/circuitboard/computer/soundhand
-	name = "Soundhand Shuttle"
-	greyscale_colors = CIRCUIT_COLOR_COMMAND
-	build_path = /obj/machinery/computer/shuttle/soundhand
