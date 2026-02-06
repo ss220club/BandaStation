@@ -332,7 +332,7 @@
 			span_notice("Вы начинаете вставлять [inserted_organ.declent_ru(NOMINATIVE)] в [zone_organ_goes_in] [victim.declent_ru(GENITIVE)].")
 		)
 
-	victim.balloon_alert(caster, "вставляет [inserted_organ.declent_ru(GENITIVE)]...")
+	victim.balloon_alert(caster, "вставляем [inserted_organ.declent_ru(GENITIVE)]...")
 	playsound(victim, 'sound/items/weapons/slice.ogg', 50, TRUE)
 	victim.add_atom_colour(COLOR_DARK_RED, TEMPORARY_COLOUR_PRIORITY)
 	if(!do_after(caster, time_it_takes, victim, extra_checks = CALLBACK(src, PROC_REF(insertion_checks), inserted_organ, hand, victim, caster)))
