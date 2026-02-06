@@ -209,7 +209,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	if(isMotion())
 		. += span_info("Она оборудована датчиком движения.")
 	else
-		. += span_info("Она может быть улучшена с помщью <b>датчика движения</b>.")
+		. += span_info("Она может быть улучшена с помощью <b>датчика движения</b>.")
 
 	if(!camera_enabled)
 		. += span_info("Она сейчас выключена.")
