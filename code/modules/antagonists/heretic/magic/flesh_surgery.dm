@@ -355,7 +355,7 @@
 
 	unregister_held_organ(inserted_organ)
 	inserted_organ.Insert(victim)
-	victim.balloon_alert(caster, "поставлен [inserted_organ.declent_ru(NOMINATIVE)]")
+	victim.balloon_alert(caster, "[inserted_organ.declent_ru(NOMINATIVE)] вставлен[genderize_ru(gender.inserted_organ, "", "а", "о", "ы")]"
 	victim.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, COLOR_DARK_RED)
 	playsound(victim, 'sound/effects/dismember.ogg', 50, TRUE)
 	if(victim.stat == CONSCIOUS)
