@@ -12231,9 +12231,13 @@
 	dir = 4
 	},
 /obj/structure/sign/poster/random/directional/south,
-/obj/machinery/computer/operating{
-	dir = 4
+/obj/structure/table,
+/obj/item/healthanalyzer,
+/obj/item/reagent_containers/chem_pack{
+	pixel_x = 10;
+	pixel_y = 10
 	},
+/obj/item/crowbar/red,
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
 "een" = (
@@ -22575,9 +22579,7 @@
 	dir = 4
 	},
 /obj/machinery/vitals_reader/directional/west,
-/obj/structure/table/optable{
-	dir = 1
-	},
+/obj/structure/bed/medical,
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
 "htJ" = (
@@ -25577,9 +25579,7 @@
 	},
 /obj/effect/turf_decal/box,
 /obj/machinery/vitals_reader/directional/west,
-/obj/structure/table/optable{
-	dir = 1
-	},
+/obj/structure/bed/medical,
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
 "imS" = (
@@ -49598,8 +49598,13 @@
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 4
 	},
-/obj/machinery/computer/operating{
-	dir = 4
+/obj/structure/table,
+/obj/item/stack/medical/mesh{
+	pixel_x = -4;
+	pixel_y = 3
+	},
+/obj/item/stack/medical/gauze{
+	pixel_x = 8
 	},
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
@@ -70007,20 +70012,6 @@
 /obj/effect/turf_decal/tile/neutral/anticorner/contrasted,
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
-/obj/structure/table,
-/obj/item/crowbar/red,
-/obj/item/healthanalyzer,
-/obj/item/stack/medical/mesh{
-	pixel_x = -4;
-	pixel_y = 3
-	},
-/obj/item/stack/medical/gauze{
-	pixel_x = 8
-	},
-/obj/item/reagent_containers/chem_pack{
-	pixel_x = 10;
-	pixel_y = 10
-	},
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
 "wOB" = (

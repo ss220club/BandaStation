@@ -24,7 +24,9 @@
 /obj/machinery/defibrillator_mount/directional/north,
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/vitals_reader/directional/west,
-/obj/machinery/computer/operating,
+/obj/structure/table/reinforced/rglass,
+/obj/item/stack/medical/mesh,
+/obj/item/stack/medical/gauze,
 /turf/open/floor/iron,
 /area/station/medical/treatment_center)
 "f" = (
@@ -36,14 +38,12 @@
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/light/cold/directional/north,
 /obj/item/radio/intercom/directional/north,
-/obj/structure/table/optable,
+/obj/structure/bed/medical,
 /turf/open/floor/iron,
 /area/station/medical/treatment_center)
 "k" = (
 /obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/structure/bed/medical{
-	dir = 4
-	},
+/obj/structure/bed/medical,
 /turf/open/floor/iron,
 /area/station/medical/treatment_center)
 "l" = (
@@ -57,28 +57,10 @@
 /obj/item/reagent_containers/syringe,
 /turf/open/floor/iron,
 /area/station/medical/treatment_center)
-"n" = (
-/obj/effect/turf_decal/trimline/blue/filled/line{
-	dir = 9
-	},
-/obj/structure/table/reinforced/rglass,
-/obj/item/stack/medical/mesh,
-/obj/item/stack/medical/gauze,
-/turf/open/floor/iron/white,
-/area/station/medical/treatment_center)
 "p" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 5
 	},
-/turf/open/floor/iron/white,
-/area/station/medical/treatment_center)
-"r" = (
-/obj/effect/turf_decal/trimline/blue/filled/line{
-	dir = 5
-	},
-/obj/structure/table/reinforced/rglass,
-/obj/item/stack/medical/gauze,
-/obj/item/stack/medical/suture,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "A" = (
@@ -89,7 +71,9 @@
 	},
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/firealarm/directional/north,
-/obj/structure/table/optable,
+/obj/structure/bed/medical{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/medical/treatment_center)
 "C" = (
@@ -197,7 +181,9 @@
 /obj/machinery/defibrillator_mount/directional/north,
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/vitals_reader/directional/east,
-/obj/machinery/computer/operating,
+/obj/structure/table/reinforced/rglass,
+/obj/item/stack/medical/suture,
+/obj/item/stack/medical/gauze,
 /turf/open/floor/iron,
 /area/station/medical/treatment_center)
 "Z" = (
@@ -238,7 +224,7 @@ O
 E
 "}
 (3,1,1) = {"
-n
+I
 P
 O
 O
@@ -268,7 +254,7 @@ O
 O
 "}
 (6,1,1) = {"
-r
+p
 K
 O
 O

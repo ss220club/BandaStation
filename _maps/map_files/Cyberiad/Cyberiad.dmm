@@ -13835,9 +13835,7 @@
 "dnz" = (
 /obj/effect/turf_decal/tile/blue/full,
 /obj/machinery/vitals_reader/directional/east,
-/obj/structure/table/optable{
-	dir = 1
-	},
+/obj/structure/bed/medical/anchored,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "dnB" = (
@@ -33575,9 +33573,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 8
 	},
-/obj/machinery/computer/operating{
-	dir = 4
-	},
+/obj/machinery/iv_drip,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "igh" = (
@@ -53922,7 +53918,6 @@
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
-/obj/machinery/iv_drip,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "nfA" = (
@@ -65243,9 +65238,7 @@
 	dir = 8
 	},
 /obj/machinery/vitals_reader/directional/west,
-/obj/structure/table/optable{
-	dir = 1
-	},
+/obj/structure/bed/medical/anchored,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "pQP" = (
@@ -79932,11 +79925,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/cargo/office)
-"tAR" = (
-/obj/effect/turf_decal/trimline/blue/filled/line,
-/obj/machinery/iv_drip,
-/turf/open/floor/iron/white,
-/area/station/medical/treatment_center)
 "tBb" = (
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/item/kirbyplants/random/dead,
@@ -82158,9 +82146,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 4
 	},
-/obj/machinery/computer/operating{
-	dir = 8
-	},
+/obj/machinery/iv_drip,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "ubT" = (
@@ -202673,7 +202659,7 @@ uJF
 qBf
 oOp
 blI
-tAR
+iFU
 gLx
 jHx
 oZN

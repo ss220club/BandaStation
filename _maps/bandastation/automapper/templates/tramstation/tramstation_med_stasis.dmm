@@ -6,12 +6,6 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
 	},
-/obj/structure/table/glass,
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/bodybags{
-	pixel_x = 5;
-	pixel_y = 5
-	},
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "j" = (
@@ -22,9 +16,6 @@
 	dir = 1
 	},
 /obj/structure/cable,
-/obj/structure/table/glass,
-/obj/item/stack/medical/gauze,
-/obj/item/stack/medical/suture,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "B" = (
@@ -45,7 +36,9 @@
 	c_tag = "Medical - Treatment North-West"
 	},
 /obj/machinery/vitals_reader/directional/west,
-/obj/machinery/computer/operating,
+/obj/structure/table/glass,
+/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/suture,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "H" = (
@@ -54,7 +47,12 @@
 	dir = 5
 	},
 /obj/machinery/vitals_reader/directional/east,
-/obj/machinery/computer/operating,
+/obj/structure/table/glass,
+/obj/item/storage/box/bodybags{
+	pixel_x = 5;
+	pixel_y = 5
+	},
+/obj/item/storage/box/beakers,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "I" = (
@@ -72,7 +70,7 @@
 	},
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
-/obj/structure/table/optable,
+/obj/structure/bed/medical,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "Y" = (
@@ -80,7 +78,9 @@
 	dir = 1
 	},
 /obj/machinery/airalarm/directional/north,
-/obj/structure/table/optable,
+/obj/structure/bed/medical{
+	dir = 4
+	},
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 

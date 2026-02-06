@@ -3,14 +3,14 @@
 /obj/machinery/defibrillator_mount/directional/north,
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/light/cold/directional/north,
-/obj/structure/table/optable,
+/obj/structure/bed/medical,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "j" = (
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/vitals_reader/directional/north,
 /obj/machinery/newscaster/directional/east,
-/obj/machinery/computer/operating,
+/obj/structure/table/glass,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "v" = (
@@ -19,7 +19,6 @@
 "x" = (
 /obj/machinery/airalarm/directional/north,
 /obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/structure/table/glass,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "A" = (
@@ -32,6 +31,15 @@
 /obj/machinery/iv_drip,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
+"B" = (
+/obj/machinery/defibrillator_mount/directional/north,
+/obj/effect/turf_decal/tile/blue/fourcorners,
+/obj/machinery/light/cold/directional/north,
+/obj/structure/bed/medical{
+	dir = 4
+	},
+/turf/open/floor/iron/white,
+/area/station/medical/treatment_center)
 "Q" = (
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/iv_drip,
@@ -41,14 +49,13 @@
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/vitals_reader/directional/north,
 /obj/item/radio/intercom/directional/west,
-/obj/machinery/computer/operating,
+/obj/structure/table/glass,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "X" = (
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/blue/fourcorners,
-/obj/structure/table/glass,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 
@@ -81,7 +88,7 @@ X
 v
 "}
 (8,1,1) = {"
-a
+B
 v
 "}
 (9,1,1) = {"
