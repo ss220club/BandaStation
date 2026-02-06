@@ -76,12 +76,6 @@
 		рынках, а заодно и продажи нескольким военным структурам, которые также \
 		сочли полезным иметь тяжелый дробовик."
 
-/obj/item/gun/ballistic/shotgun/riot/renoster/update_appearance(updates)
-	if(sawn_off)
-		suppressor_x_offset = 0
-		SET_BASE_PIXEL(0, 0)
-	. = ..()
-
 /obj/item/gun/ballistic/shotgun/riot/renoster/black
 	name = "tactical Renoster shotgun"
 	base_icon_state = "renoster_black"

@@ -13,6 +13,15 @@
 	suppressor_y_offset = 0
 	recoil = 1.2
 
+/obj/item/gun/ballistic/automatic/pistol/skild/add_seclight_point()
+	AddComponent(\
+		/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "mini-light", \
+		overlay_x = 21, \
+		overlay_y = 11 \
+	)
+
 /obj/item/gun/ballistic/automatic/pistol/skild/army/no_mag
 	spawnwithmagazine = FALSE
 
@@ -23,3 +32,12 @@
 
 /obj/item/gun/ballistic/automatic/pistol/skild/no_mag
 	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/pistol/skild/army/add_seclight_point()
+	AddComponent(\
+		/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "mini-light", \
+		overlay_x = 23, \
+		overlay_y = 11 \
+	)

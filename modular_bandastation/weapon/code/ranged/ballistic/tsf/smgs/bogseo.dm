@@ -28,6 +28,15 @@
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
+/obj/item/gun/ballistic/automatic/bogseo/add_seclight_point()
+	AddComponent(\
+		/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "mini-light", \
+		overlay_x = 25, \
+		overlay_y = 9 \
+	)
+
 /obj/item/gun/ballistic/automatic/bogseo/examine(mob/user)
 	. = ..()
 	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")

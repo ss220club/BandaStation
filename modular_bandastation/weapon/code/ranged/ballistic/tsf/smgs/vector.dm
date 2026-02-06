@@ -25,6 +25,15 @@
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
+/obj/item/gun/ballistic/automatic/vektor/add_seclight_point()
+	AddComponent(\
+		/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "mini-light", \
+		overlay_x = 23, \
+		overlay_y = 9 \
+	)
+
 /obj/item/gun/ballistic/automatic/vektor/no_mag
 	spawnwithmagazine = FALSE
 

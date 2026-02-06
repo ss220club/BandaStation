@@ -207,7 +207,7 @@
 	worn_icon_state = "xar10"
 	inhand_icon_state = "xar10"
 	SET_BASE_PIXEL(-8, 0)
-	suppressor_x_offset = 12
+	suppressor_x_offset = 4
 	burst_size = 1
 	fire_delay = 0.15 SECONDS
 	actions_types = list()

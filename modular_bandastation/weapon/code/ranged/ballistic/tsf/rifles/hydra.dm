@@ -19,8 +19,8 @@
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c223
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/hydra.ogg'
 	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/suppressed_rifle.ogg'
-	can_suppress = FALSE
-	suppressor_x_offset = 10
+	can_suppress = TRUE
+	suppressor_x_offset = 3
 	burst_size = 1
 	fire_delay = 0.18 SECONDS
 	actions_types = list()
@@ -37,6 +37,14 @@
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 	AddElement(/datum/element/update_icon_updates_onmob)
 	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
+
+/obj/item/gun/ballistic/automatic/hydra/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 25, \
+		overlay_y = 12, \
+	)
 
 /obj/item/gun/ballistic/automatic/hydra/update_icon_state()
 	. = ..()
@@ -86,6 +94,14 @@
 	underbarrel = new /obj/item/gun/ballistic/revolver/grenadelauncher/unrestricted(src)
 	update_appearance()
 
+/obj/item/gun/ballistic/automatic/hydra/gl/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 26, \
+		overlay_y = 9, \
+	)
+
 /obj/item/gun/ballistic/automatic/hydra/gl/Destroy()
 	QDEL_NULL(underbarrel)
 	return ..()
@@ -129,6 +145,7 @@
 	fire_delay = 1 SECONDS
 	burst_size = 2
 	spread = 1
+	suppressor_x_offset = 6
 
 /obj/item/gun/ballistic/automatic/hydra/dmr/Initialize(mapload)
 	. = ..()
@@ -188,6 +205,7 @@
 	projectile_damage_multiplier = 1.3
 	projectile_speed_multiplier = 1.5
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/laser1.ogg'
+	suppressor_x_offset = 4
 
 /obj/item/gun/ballistic/automatic/hydra/gl/cr13/tsf
 	desc = parent_type::desc + "<br>Образец в стандартных цветах армии ТСФ."
@@ -206,3 +224,5 @@
 	projectile_damage_multiplier = 1.3
 	projectile_speed_multiplier = 1.5
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/laser1.ogg'
+	suppressor_x_offset = 0
+

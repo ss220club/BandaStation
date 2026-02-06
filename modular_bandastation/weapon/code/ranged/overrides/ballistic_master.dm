@@ -21,6 +21,13 @@
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	base_icon_state = "riotshotgun"
 
+/obj/item/gun/ballistic/shotgun/riot/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 31, \
+		overlay_y = 11)
+
 /obj/item/gun/ballistic/shotgun/riot/update_icon_state()
 	. = ..()
 	if(sawn_off)
@@ -39,11 +46,25 @@
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 
+/obj/item/gun/ballistic/shotgun/automatic/combat/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 30, \
+		overlay_y = 11)
+
 /obj/item/gun/ballistic/shotgun/automatic/combat/compact
 	lefthand_file = 'icons/mob/inhands/weapons/64x_guns_left.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/64x_guns_right.dmi'
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
+
+/obj/item/gun/ballistic/shotgun/automatic/combat/compact/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 28, \
+		overlay_y = 11)
 
 /obj/item/gun/ballistic/shotgun/automatic/dual_tube
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'

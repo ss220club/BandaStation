@@ -19,8 +19,7 @@
 	rack_delay = 0.5 SECONDS
 	fire_delay = 0.5 SECONDS
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/large
-	suppressor_x_offset = 7
-	suppressor_y_offset = -3
+	suppressor_x_offset = 9
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 
@@ -31,12 +30,6 @@
 		overlay_x = 32, \
 		overlay_y = 12, \
 	)
-
-/obj/item/gun/ballistic/shotgun/riot/m64/update_appearance(updates)
-	if(sawn_off)
-		suppressor_x_offset = 0
-		SET_BASE_PIXEL(0, 0)
-	. = ..()
 
 /obj/item/gun/ballistic/shotgun/riot/m64/black
 	desc = parent_type::desc + "<br>Окрашен в тактический черный цвет."
@@ -60,6 +53,8 @@
 
 /obj/item/gun/ballistic/shotgun/riot/m64/sawoff
 	sawn_off = TRUE
+	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/gun/ballistic/shotgun/riot/m64/black/sawoff
 	sawn_off = TRUE
+	w_class = WEIGHT_CLASS_NORMAL
