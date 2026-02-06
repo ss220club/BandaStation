@@ -465,7 +465,7 @@
 // Level 2 will heal wounds when standing on rust
 // Level 3 will restore lost limbs when standing on rust
 /datum/status_effect/heretic_passive/rust
-	name = "Высасывающая Прогулка"
+	name = "Высасывающая прогулка"
 	id = "rust_passive"
 	passive_descriptions = list(
 		"Стоя на ржавчине, вы исцеляете организм и очищаете его от химических веществ",
