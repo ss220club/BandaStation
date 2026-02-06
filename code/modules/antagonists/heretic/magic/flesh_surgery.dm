@@ -350,7 +350,7 @@
 	else
 		caster.visible_message(
 			span_danger("[capitalize(caster)] помещает [inserted_organ] в [zone_organ_goes_in] [victim.declent_ru(ACCUSATIVE)] [organ_victim_already_has ? ", вытесняя [victim.ru_p_them()] [organ_victim_already_has.name]": ""]!"),
-			span_notice("Вы заканчиваете установку [inserted_organ.declent_ru(NOMINATIVE)] внутрь [zone_organ_goes_in][victim.declent_ru(ACCUSATIVE)] [organ_victim_already_has ? ", вытеснив [victim.ru_p_them()] [organ_victim_already_has.name]": ""].")
+			span_notice("Вы заканчиваете вставлять [inserted_organ.declent_ru(NOMINATIVE)] внутрь в [zone_organ_goes_in] [victim.declent_ru(ACCUSATIVE)][organ_victim_already_has ? ", вытеснив [victim.ru_p_them()] [organ_victim_already_has.name]": ""].")
 		)
 
 	unregister_held_organ(inserted_organ)
