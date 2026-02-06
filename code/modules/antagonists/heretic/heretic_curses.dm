@@ -58,7 +58,7 @@
 	// Yes, you COULD curse yourself, not sure why but you could
 	if(to_curse == user)
 		var/are_you_sure = tgui_alert(user, "Вы уверены что хотите проклясть самого себя?", name, list("Да", "Нет"))
-if(are_you_sure != "Да")
+		if(are_you_sure != "Да")
 			return FALSE
 
 	if(!ask_for_input(user))

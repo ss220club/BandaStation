@@ -323,7 +323,7 @@
 
 	if(using_on_self)
 		caster.visible_message(
-			span_danger("Рука [caster.declent_ru(GENITIVE)] светилась ярко красным, когда [caster.ru_p_they()] начал[genderize_ru(gender.caster, "", "а", "о", "и")] засовывать [inserted_organ.declent_ru(NOMINATIVE)] в [caster.ru_p_them()] [zone_organ_goes_in]!!"),
+			span_danger("Рука [caster.declent_ru(GENITIVE)] светилась ярко красным, когда [caster.ru_p_they()] начал[genderize_ru(caster.gender, "", "а", "о", "и")] засовывать [inserted_organ.declent_ru(NOMINATIVE)] в [caster.ru_p_them()] [zone_organ_goes_in]!!"),
 			span_userdanger("Вы с силой вводите [inserted_organ.declent_ru(NOMINATIVE)] в [zone_organ_goes_in]!")
 		)
 	else
@@ -349,13 +349,13 @@
 		)
 	else
 		caster.visible_message(
-			span_danger("[capitalize(caster)] помещает [inserted_organ] в [zone_organ_goes_in] [victim.declent_ru(ACCUSATIVE)] [organ_victim_already_has ? ", вытесняя [victim.ru_p_them()] [organ_victim_already_has.name]": ""]!"),
+			span_danger("[capitalize(caster)] помещает [inserted_organ.declent_ru(NOMINATIVE)] в [zone_organ_goes_in] [victim.declent_ru(ACCUSATIVE)] [organ_victim_already_has ? ", вытесняя [victim.ru_p_them()] [organ_victim_already_has.name]": ""]!"),
 			span_notice("Вы заканчиваете вставлять [inserted_organ.declent_ru(NOMINATIVE)] внутрь в [zone_organ_goes_in] [victim.declent_ru(ACCUSATIVE)][organ_victim_already_has ? ", вытеснив [victim.ru_p_them()] [organ_victim_already_has.name]": ""].")
 		)
 
 	unregister_held_organ(inserted_organ)
 	inserted_organ.Insert(victim)
-	victim.balloon_alert(caster, "[inserted_organ.declent_ru(NOMINATIVE)] вставлен[genderize_ru(gender.inserted_organ, "", "а", "о", "ы")]"
+	victim.balloon_alert(caster, "[inserted_organ.declent_ru(NOMINATIVE)] вставлен[genderize_ru(inserted_organ.gender, "", "а", "о", "ы")]")
 	victim.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, COLOR_DARK_RED)
 	playsound(victim, 'sound/effects/dismember.ogg', 50, TRUE)
 	if(victim.stat == CONSCIOUS)
