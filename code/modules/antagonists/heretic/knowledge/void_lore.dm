@@ -123,7 +123,7 @@
 
 /datum/heretic_knowledge/armor/void/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
 	if(!isopenturf(loc))
-		loc.balloon_alert(user, "Ритуал провален, неподходящее место!")
+		loc.balloon_alert(user, "ритуал провален, неподходящее место!")
 		return FALSE
 
 	var/turf/open/our_turf = loc
