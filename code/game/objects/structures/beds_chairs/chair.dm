@@ -436,7 +436,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/chair/stool/bar, 0)
 		to_chat(user, span_warning("Вам нужна твёрдая поверхность, чтобы поставить [declent_ru(NOMINATIVE)]!"))
 		return
 	if(!user.dropItemToGround(src))
-		to_chat(user, span_warning("[declent_ru(NOMINATIVE)] прилип к вашей руке!"))
+		to_chat(user, span_warning("[declent_ru(NOMINATIVE)] прилип[genderize_ru(gender, "", "ла", "ло", "ли"))] к вашей руке!"))
 		return
 	if(flags_1 & HOLOGRAM_1)
 		to_chat(user, span_notice("Вы пытаетесь поставить [declent_ru(ACCUSATIVE)], но он растворяется!"))
