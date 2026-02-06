@@ -1,10 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ad" = (
-/obj/structure/sign/flag/nanotrasen/directional/north,
-/obj/structure/platform/iron{
-	color = "#5f5f5f"
-	},
-/turf/open/floor/mineral/plastitanium/red,
+/obj/item/banner/soundhand/mundane,
+/obj/structure/sign/flag/ussp/directional/north,
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "az" = (
 /obj/structure/chair/sofa/corp/left{
@@ -40,6 +38,10 @@
 	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
+"bz" = (
+/obj/machinery/computer/camera_advanced/shuttle_docker/soundhand,
+/turf/open/floor/mineral/titanium/tiled/white,
+/area/shuttle/escape)
 "bQ" = (
 /obj/machinery/power/shuttle_engine/large,
 /turf/open/floor/plating,
@@ -70,13 +72,17 @@
 /turf/open/floor/mineral/titanium/tiled/white,
 /area/shuttle/escape)
 "cJ" = (
-/obj/machinery/computer/emergency_shuttle,
+/obj/machinery/computer/shuttle/soundhand,
 /turf/open/floor/mineral/titanium/tiled/white,
 /area/shuttle/escape)
 "dn" = (
 /obj/structure/closet/secure_closet/freezer/fridge/all_access,
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron/dark,
+/area/shuttle/escape)
+"du" = (
+/obj/structure/chair/sofa/corner/maroon,
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "dG" = (
 /obj/effect/turf_decal/siding/wood/ebonite{
@@ -136,6 +142,23 @@
 	},
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/iron/dark/herringbone,
+/area/shuttle/escape)
+"hu" = (
+/obj/structure/closet/infinite,
+/obj/item/clothing/suit/soundhand_white_jacket/tag,
+/obj/item/clothing/suit/soundhand_olive_jacket,
+/obj/item/clothing/suit/soundhand_olive_jacket,
+/obj/item/clothing/suit/soundhand_olive_jacket,
+/obj/item/clothing/suit/soundhand_olive_jacket,
+/obj/item/clothing/suit/soundhand_brown_jacket,
+/obj/item/clothing/suit/soundhand_brown_jacket,
+/obj/item/clothing/suit/soundhand_brown_jacket,
+/obj/item/clothing/suit/soundhand_brown_jacket,
+/obj/item/clothing/suit/soundhand_black_jacket,
+/obj/item/clothing/suit/soundhand_black_jacket,
+/obj/item/clothing/suit/soundhand_black_jacket,
+/obj/item/clothing/suit/soundhand_black_jacket,
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "hx" = (
 /obj/structure/table/reinforced/plastitaniumglass,
@@ -249,6 +272,12 @@
 	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
+"my" = (
+/obj/structure/chair/sofa/middle/maroon{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/escape)
 "mF" = (
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
@@ -299,7 +328,7 @@
 	color = "#6e6e6e";
 	pixel_x = -1
 	},
-/obj/item/banner/cult,
+/obj/item/banner/soundhand/mundane,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "ob" = (
@@ -312,7 +341,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/filled/corner{
 	dir = 8
 	},
-/obj/item/banner/cult,
+/obj/item/banner/soundhand/mundane,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "oz" = (
@@ -326,6 +355,10 @@
 "pe" = (
 /obj/machinery/smartfridge/food,
 /turf/open/floor/iron/dark,
+/area/shuttle/escape)
+"pi" = (
+/obj/item/banner/soundhand/mundane,
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "pk" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/line,
@@ -421,8 +454,14 @@
 /obj/machinery/computer/old,
 /turf/open/floor/mineral/titanium/tiled/white,
 /area/shuttle/escape)
+"ts" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/concert_disk/soundhand_concert,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/escape)
 "ty" = (
-/obj/item/banner/cult,
+/obj/item/banner/soundhand/mundane,
+/obj/structure/sign/flag/terragov/directional/north,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "tD" = (
@@ -453,6 +492,7 @@
 /area/shuttle/escape)
 "un" = (
 /obj/structure/table/reinforced/titaniumglass,
+/obj/item/instrument/piano_synth/headphones,
 /turf/open/floor/mineral/titanium/tiled/white,
 /area/shuttle/escape)
 "uw" = (
@@ -537,6 +577,12 @@
 /obj/machinery/barsign/all_access/directional/south,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
+"yL" = (
+/obj/structure/chair/sofa/middle/maroon{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/escape)
 "yW" = (
 /obj/structure/light_fake/floor,
 /turf/open/floor/iron/dark/herringbone,
@@ -550,10 +596,66 @@
 /area/shuttle/escape)
 "zs" = (
 /obj/structure/table/wood/fancy/royalblack,
+/obj/item/packed_concertspeaker{
+	pixel_y = 13;
+	pixel_x = -8
+	},
+/obj/item/packed_concertspeaker{
+	pixel_y = 13;
+	pixel_x = 9
+	},
+/obj/item/packed_concertspeaker{
+	pixel_x = -8;
+	pixel_y = 7
+	},
+/obj/item/packed_concertspeaker{
+	pixel_y = 7;
+	pixel_x = 9
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/escape)
+"zE" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/item/packed_concertspeaker{
+	pixel_y = 12;
+	pixel_x = -9
+	},
+/obj/item/packed_concertspeaker{
+	pixel_y = 12;
+	pixel_x = 7
+	},
+/obj/item/packed_concertspeaker{
+	pixel_x = -9;
+	pixel_y = 6
+	},
+/obj/item/packed_concertspeaker{
+	pixel_y = 6;
+	pixel_x = 7
+	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "zY" = (
 /turf/open/floor/plating,
+/area/shuttle/escape)
+"Aj" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/item/packed_concertspeaker{
+	pixel_y = 14;
+	pixel_x = -9
+	},
+/obj/item/packed_concertspeaker{
+	pixel_y = 14;
+	pixel_x = 8
+	},
+/obj/item/packed_concertspeaker{
+	pixel_y = 8;
+	pixel_x = -9
+	},
+/obj/item/packed_concertspeaker{
+	pixel_y = 8;
+	pixel_x = 8
+	},
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "Am" = (
 /obj/structure/chair/sofa/corp/right,
@@ -644,7 +746,7 @@
 /area/shuttle/escape)
 "DS" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/line,
-/obj/item/banner/cult,
+/obj/item/banner/soundhand/mundane,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "Eb" = (
@@ -700,6 +802,16 @@
 "FS" = (
 /obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
 /turf/open/floor/plating,
+/area/shuttle/escape)
+"Gh" = (
+/obj/structure/closet/infinite,
+/obj/item/instrument/soundhand_bass_guitar,
+/obj/item/instrument/soundhand_metal_guitar,
+/obj/item/instrument/soundhand_rock_guitar,
+/obj/item/instrument/drumskit_folded,
+/obj/item/instrument/piano_synth,
+/obj/item/radio/entertainment/microphone/physical,
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "Gm" = (
 /obj/structure/table/reinforced/plastitaniumglass,
@@ -767,6 +879,10 @@
 	},
 /turf/open/floor/wood/ebonite,
 /area/shuttle/escape)
+"Jc" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/escape)
 "Jf" = (
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/escape)
@@ -815,12 +931,19 @@
 /obj/structure/platform/iron{
 	color = "#5f5f5f"
 	},
+/obj/item/banner/soundhand/mundane,
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/escape)
 "Ky" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/effect/spawner/random/food_or_drink/booze,
 /turf/open/floor/carpet/royalblack,
+/area/shuttle/escape)
+"KW" = (
+/obj/structure/chair/sofa/left/maroon{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "Lr" = (
 /obj/structure/table/reinforced/plastitaniumglass,
@@ -831,7 +954,7 @@
 /area/shuttle/escape)
 "Lu" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/corner,
-/obj/item/banner/cult,
+/obj/item/banner/soundhand/mundane,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "Mq" = (
@@ -850,6 +973,20 @@
 	dir = 1
 	},
 /turf/open/floor/wood/ebonite,
+/area/shuttle/escape)
+"MF" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/item/circuit_component/concert_master{
+	pixel_y = -2;
+	pixel_x = -5
+	},
+/obj/item/concert_master{
+	pixel_x = 2
+	},
+/obj/item/packed_concertspeaker{
+	pixel_y = 21
+	},
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "MO" = (
 /obj/structure/light_fake/small/directional/east,
@@ -878,6 +1015,12 @@
 	dir = 8
 	},
 /turf/open/floor/iron/dark/herringbone,
+/area/shuttle/escape)
+"NB" = (
+/obj/structure/chair/sofa/corner/maroon{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "NF" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/corner{
@@ -913,7 +1056,7 @@
 	dir = 4;
 	color = "#6e6e6e"
 	},
-/obj/item/banner/cult,
+/obj/item/banner/soundhand/mundane,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "OW" = (
@@ -935,6 +1078,11 @@
 	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
+"PD" = (
+/obj/structure/holosign/barrier/atmos/sturdy,
+/obj/docking_port/mobile/soundhand,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/escape)
 "PR" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/line,
 /obj/structure/extinguisher_cabinet/directional/south,
@@ -948,7 +1096,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/shuttle/escape)
 "Rf" = (
-/obj/item/banner/cult,
+/obj/item/banner/soundhand/mundane,
 /turf/open/floor/carpet/royalblack,
 /area/shuttle/escape)
 "RB" = (
@@ -1073,9 +1221,23 @@
 	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
+"WL" = (
+/obj/structure/chair/sofa/right/maroon{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/escape)
 "Xl" = (
 /obj/structure/chair/sofa/corp/left,
 /turf/open/floor/carpet/royalblack,
+/area/shuttle/escape)
+"Xm" = (
+/obj/structure/chair/sofa/middle/maroon,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/escape)
+"XZ" = (
+/obj/structure/table/reinforced/titaniumglass,
+/turf/open/floor/mineral/titanium/tiled/white,
 /area/shuttle/escape)
 "Ym" = (
 /obj/structure/closet/secure_closet/freezer/meat/all_access,
@@ -1352,9 +1514,9 @@ Ts
 Ts
 uw
 JF
+MF
 zs
-zs
-Hl
+hu
 ec
 uw
 nk
@@ -1423,17 +1585,17 @@ Hl
 Hl
 Hl
 Oo
-tc
+bz
 va
 un
 uw
 BL
 Jf
-Hl
-Hl
-Hl
+NB
+yL
+WL
 uw
-ad
+GU
 ES
 ES
 ES
@@ -1454,22 +1616,22 @@ Gm
 FS
 "}
 (10,1,1) = {"
-aA
+PD
 Hl
 rb
-Hl
+pi
 OW
 Hl
 Oo
-cJ
+tc
 ch
 HX
 EQ
 Hl
 ec
-Hl
-Hl
-uw
+Xm
+Jc
+ts
 uw
 Km
 GU
@@ -1499,17 +1661,17 @@ Hl
 Hl
 Hl
 Oo
-tc
+cJ
 va
-un
+XZ
 uw
 BL
 Jf
-Hl
-Hl
-Hl
+du
+my
+KW
 uw
-ad
+GU
 ES
 ES
 ES
@@ -1541,7 +1703,7 @@ uw
 uw
 uw
 uw
-ty
+ad
 Jf
 Jf
 Jf
@@ -1580,9 +1742,9 @@ Ts
 Ts
 uw
 JF
-zs
-zs
-Hl
+zE
+Aj
+Gh
 ec
 uw
 nk

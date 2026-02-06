@@ -106,6 +106,15 @@
 /obj/item/banner/wizard/mundane
 	inspiration_available = FALSE
 
+/obj/item/banner/soundhand
+	name = "флаг группы Саундхэнд"
+	desc = "Флаг легендарной группы Саундхэнд. Вероятно были созданы исключительно для сжигания и эффекта восхищения от крутости."
+	icon_state = "banner_soundhand"
+	inhand_icon_state = "banner_soundhand"
+
+/obj/item/banner/soundhand/mundane
+	inspiration_available = FALSE
+
 // MARK: Species banners
 /obj/item/banner/species
 	icon_state = null

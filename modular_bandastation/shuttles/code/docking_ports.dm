@@ -131,3 +131,14 @@
 /obj/docking_port/mobile/gamma/register()
 	. = ..()
 	SSshuttle.gamma = src
+
+/obj/docking_port/mobile/soundhand
+	name = "soundhand shuttle"
+	shuttle_id = "soundhand"
+	movement_force = list("KNOCKDOWN" = 3, "THROW" = 2)
+	hidden = TRUE
+	dir = NORTH
+	port_direction = SOUTH
+	preferred_direction = NORTH
+	drop_landing_effect = /obj/effect/abstract/landing_zone
+	drop_landing_sound = 'sound/effects/alert.ogg'
