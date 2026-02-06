@@ -755,7 +755,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/chair/stool/bar, 0)
 		)
 	else
 		being_unbuckled.visible_message(
-			span_warning("[unbuckler] заставляет [being_unbuckled] отпустить [declent_ru(ACCUSATIVE)]!"),
+			span_warning("[unbuckler.declent_ru(NOMINATIVE)] заставляет [being_unbuckled.declent_ru(ACCUSATIVE)] отпустить [declent_ru(ACCUSATIVE)]!"),
 			span_warning("[unbuckler] заставляет вас отпустить [declent_ru(ACCUSATIVE)]!"),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 			vision_distance = COMBAT_MESSAGE_RANGE,
