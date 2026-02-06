@@ -4,7 +4,7 @@
  * For the functionality of the spell itself see [/obj/effect/abstract/heretic_arena] which is created during [/proc/create_arena()]
  */
 /datum/action/cooldown/spell/wolves_among_sheep
-	name = "Волк Среди Овец"
+	name = "Волк среди овец"
 	desc = "Изменяет структуру реальности, создавая арену, недоступную для посторонних, \
 		все участники находятся в ловушке и защищены от любых форм контроля или опасностей окружающей среды; \
 		попавшим в ловушку участникам выдается Клинок, и они не могут выйти или перенестись, пока не нанесут критический удар."
