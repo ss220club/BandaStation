@@ -14,7 +14,7 @@
 
 /obj/structure/table
 	name = "table"
-	desc = "Квадратный кусок железа, стоящий на четырех металлических ножках. Его нельзя переместить."
+	desc = "Это стол, за ним едят."
 	icon = 'icons/obj/smooth_structures/table.dmi'
 	icon_state = "table-0"
 	base_icon_state = "table"
