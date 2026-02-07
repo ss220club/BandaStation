@@ -125,6 +125,26 @@
 	name = "Райком"
 	icon_state = "awaycontent21"
 
+/area/awaymission/avangarde17/inside/gov/library
+	name = "Райком - Дом Культуры"
+	icon_state = "awaycontent11"
+
+/area/awaymission/avangarde17/inside/gov/janitor
+	name = "Райком - Подсобка Дворников"
+	icon_state = "awaycontent12"
+
+/area/awaymission/avangarde17/inside/gov/toilet
+	name = "Райком - Уборная"
+	icon_state = "awaycontent13"
+
+/area/awaymission/avangarde17/inside/gov/abandoned
+	name = "Райком - Заброшенная подсобка"
+	icon_state = "awaycontent14"
+
+/area/awaymission/avangarde17/inside/gov/party_worker
+	name = "Райком - Кабинет Партработника"
+	icon_state = "awaycontent15"
+
 /area/awaymission/avangarde17/inside/gov/radio
 	name = "Райком - Радиостанция"
 	icon_state = "awaycontent22"
@@ -132,6 +152,22 @@
 /area/awaymission/avangarde17/inside/gov/second_floor
 	name = "Райком - Второй Этаж"
 	icon_state = "awaycontent23"
+
+/area/awaymission/avangarde17/inside/gov/hop
+	name = "Райком - Кабинет Управляющего"
+	icon_state = "awaycontent16"
+
+/area/awaymission/avangarde17/inside/gov/captain
+	name = "Райком - Кабинет Председателя"
+	icon_state = "awaycontent17"
+
+/area/awaymission/avangarde17/inside/gov/meeting
+	name = "Райком - Зал Собраний"
+	icon_state = "awaycontent18"
+
+/area/awaymission/avangarde17/inside/gov/engi
+	name = "Райком - Подсобка Техников"
+	icon_state = "awaycontent19"
 
 /area/awaymission/avangarde17/inside/militia
 	name = "Участковый Пункт Милиции"
