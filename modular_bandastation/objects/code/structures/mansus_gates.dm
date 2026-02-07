@@ -1,6 +1,5 @@
 /obj/structure/mansus_gates
 	icon = 'modular_bandastation/objects/icons/obj/structures/mansus_gates.dmi'
-	resistance_flags = FLAMMABLE
 	max_integrity = 1000
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF

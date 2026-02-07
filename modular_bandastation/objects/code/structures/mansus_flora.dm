@@ -5,9 +5,6 @@
 	pixel_x = -48
 	pixel_y = -20
 
-/obj/structure/flora/tree/jungle/get_seethrough_map()
-	return SEE_THROUGH_MAP_THREE_X_THREE
-
 /obj/structure/flora/tree/jungle/mansus/style_2
 	icon_state = "tree2"
 
