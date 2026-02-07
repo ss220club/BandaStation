@@ -29522,7 +29522,6 @@ accusative = "резиновую печать ОТКАЗАНО"
 instrumental = "резиновой печатью ОТКАЗАНО"
 prepositional = "резиновой печати ОТКАЗАНО"
 [" centcom combat implant"]
-["centcom combat implant"]
 nominative = "боевой имплант центрального командования"
 genitive = "боевого импланта центрального командования"
 dative = "боевому импланту центрального командования"
@@ -29541,12 +29540,12 @@ prepositional = "настраиваемом импланте руки"
 gender = "male"
 
 ["shielded security HUD implant"]
-nominative = "защищенный имплант охранного HUD"
-genitive = "защищенного импланта охранного HUD"
-dative = "защищенному импланту охранного HUD"
-accusative = "защищенный имплант охранного HUD"
-instrumental = "защищенным имплантом охранного HUD"
-prepositional = "защищенном импланте охранного HUD"
+nominative = "защищенный имплант охранного ИЛС"
+genitive = "защищенного импланта охранного ИЛС"
+dative = "защищенному импланту охранного ИЛС"
+accusative = "защищенный имплант охранного ИЛС"
+instrumental = "защищенным имплантом охранного ИЛС"
+prepositional = "защищенном импланте охранного ИЛС"
 gender = "male"
 
 ["EMP absorber"]
@@ -29567,7 +29566,7 @@ instrumental = "кейсом для поглотителя ЭМИ"
 prepositional = "кейсе для поглотителя ЭМИ"
 gender = "male"
 
-["pump "]
+["pump"]
 nominative = "помпа"
 genitive = "помпы"
 dative = "помпе"
@@ -29638,3 +29637,66 @@ accusative = "кольцо с бриллиантом"
 instrumental = "кольцом с бриллиантом"
 prepositional = "кольце с бриллиантом"
 gender = "neuter"
+
+["Malice"]
+nominative = "Злоба"
+genitive = "Злобы"
+dative = "Злобе"
+accusative = "Злобу"
+instrumental = "Злобой"
+prepositional = "Злобе"
+gender = "female"
+
+["Sorrow Catcher"]
+nominative = "Ловец Скорби"
+genitive = "Ловца Скорби"
+dative = "Ловцу Скорби"
+accusative = "Ловца Скорби"
+instrumental = "Ловцом Скорби"
+prepositional = "Ловце Скорби"
+gender = "male"
+
+["Flame"]
+nominative = "Пламя"
+genitive = "Пламени"
+dative = "Пламени"
+accusative = "Пламя"
+instrumental = "Пламенем"
+prepositional = "Пламени"
+gender = "neuter"
+
+["Oath's Fidelity"]
+nominative = "Верность клятве"
+genitive = "Верности клятве"
+dative = "Верности клятве"
+accusative = "Верность клятве"
+instrumental = "Верностью клятве"
+prepositional = "Верности клятве"
+gender = "female"
+
+["Light Sister"]
+nominative = "Светлая Сестра"
+genitive = "Светлой Сестры"
+dative = "Светлой Сестре"
+accusative = "Светлую Сестру"
+instrumental = "Светлой Сестрой"
+prepositional = "Светлой Сестре"
+gender = "female"
+
+["Flee Catcher"]
+nominative = "Ловец Бегущих"
+genitive = "Ловца Бегущих"
+dative = "Ловцу Бегущих"
+accusative = "Ловца Бегущих"
+instrumental = "Ловцом Бегущих"
+prepositional = "Ловце Бегущих"
+gender = "male"
+
+["Orphan"]
+nominative = "Сирота"
+genitive = "Сироты"
+dative = "Сироте"
+accusative = "Сироту"
+instrumental = "Сиротой"
+prepositional = "Сироте"
+gender = "male"
