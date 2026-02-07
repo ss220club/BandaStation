@@ -66,7 +66,7 @@
 
 /datum/track/soundhand/g9
 	song_path = 'sound/music/soundhand/ignition/09.ogg'
-	song_name = "09 Диск"
+	song_name = "09 Щелк"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
