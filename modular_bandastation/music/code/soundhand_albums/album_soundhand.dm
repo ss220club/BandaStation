@@ -55,7 +55,7 @@
 /datum/track/soundhand/x7
 	song_path = 'sound/music/soundhand/ignition/09.ogg'
 	song_name = "07 Щелк"
-	song_length = 6 MINUTES
+	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/x8
@@ -85,7 +85,7 @@
 /datum/track/soundhand/x12
 	song_path = 'sound/music/soundhand/destruction/03.ogg'
 	song_name = "12 Мне хорошо"
-	song_length = 7 MINUTES
+	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
 /datum/track/soundhand/x13
