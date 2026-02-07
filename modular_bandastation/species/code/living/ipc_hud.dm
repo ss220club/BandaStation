@@ -14,13 +14,38 @@
 // HUD ИНДИКАТОРЫ ДЛЯ IPC
 // ============================================
 
-// Screen object для отображения заряда батареи
-/atom/movable/screen/mood/ipc_battery
+/// Индикатор заряда батареи IPC (аналог hunger bar)
+/atom/movable/screen/ipc_battery
 	name = "battery charge"
-	icon_state = "mood_neutral"  // Временно используем mood icons, можно заменить
-	screen_loc = ui_mood  // Используем ту же позицию что и mood
+	icon_state = "hungerbar"  // Используем ту же основу что и hunger
+	screen_loc = ui_mood  // Позиция где обычно mood
+	mouse_over_pointer = MOUSE_HAND_POINTER
+	/// Текущий заряд (процент)
+	var/charge_percent = 100
+	/// Иконка батареи рядом с баром
+	var/image/battery_image
+	/// Сам бар
+	var/atom/movable/screen/ipc_battery_bar/battery_bar
 
-/atom/movable/screen/mood/ipc_battery/Click()
+/atom/movable/screen/ipc_battery/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+
+	// Иконка батареи рядом с баром
+	battery_image = image(icon = 'icons/obj/power/power.dmi', icon_state = "cell", pixel_x = -5)
+	battery_image.plane = plane
+	battery_image.appearance_flags |= KEEP_APART
+	battery_image.add_filter("simple_outline", 2, outline_filter(1, COLOR_BLACK, OUTLINE_SHARP))
+	underlays += battery_image
+
+	// Создаем бар
+	battery_bar = new(src, hud_owner)
+	vis_contents += battery_bar
+
+/atom/movable/screen/ipc_battery/Destroy()
+	QDEL_NULL(battery_bar)
+	return ..()
+
+/atom/movable/screen/ipc_battery/Click()
 	if(!ismob(usr))
 		return
 	var/mob/living/carbon/human/H = usr
@@ -32,16 +57,94 @@
 		to_chat(H, span_notice("ОШИБКА: Батарея не обнаружена."))
 		return
 
-	var/charge_percent = (battery.charge / battery.maxcharge) * 100
-	to_chat(H, span_notice("Заряд батареи: [round(charge_percent)]%"))
+	var/charge = (battery.charge / battery.maxcharge) * 100
+	to_chat(H, span_notice("Заряд батареи: [round(charge)]% ([round(battery.charge)]/[battery.maxcharge])"))
 
-// Screen object для отображения температуры процессора
-/atom/movable/screen/mood/ipc_temperature
+/atom/movable/screen/ipc_battery/update_appearance(updates)
+	. = ..()
+	battery_bar?.update_charge(charge_percent)
+
+/// Бар заряда батареи с градиентом
+/atom/movable/screen/ipc_battery_bar
+	icon_state = "hungerbar_bar"
+	screen_loc = ui_mood
+	vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE
+	/// Маска для бара
+	var/static/icon/bar_mask
+	/// Градиент цветов для заряда (от красного до зеленого)
+	var/static/list/battery_gradient = list(
+		0.0, "#FF0000",  // 0% - красный (критично)
+		0.2, "#FF8000",  // 20% - оранжевый
+		0.5, "#FFFF00",  // 50% - желтый
+		0.8, "#00FF00",  // 80% - зеленый
+		1.0, "#00AA00",  // 100% - темно-зеленый
+	)
+	/// Текущий offset бара
+	var/bar_offset
+	/// Последний процент для оптимизации
+	var/last_charge_band
+
+/atom/movable/screen/ipc_battery_bar/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+	var/atom/movable/movable_loc = ismovable(loc) ? loc : null
+	screen_loc = movable_loc?.screen_loc
+	bar_mask ||= icon(icon, "hungerbar_mask")
+
+/atom/movable/screen/ipc_battery_bar/proc/update_charge(new_charge, instant = FALSE)
+	// Округляем до 5% для оптимизации
+	new_charge = round(new_charge, 5) / 100
+	if(new_charge == last_charge_band)
+		return
+	last_charge_band = new_charge
+
+	// Обновляем цвет
+	var/new_color = gradient(battery_gradient, clamp(new_charge, 0, 1))
+	if(instant)
+		color = new_color
+	else
+		animate(src, color = new_color, time = 0.5 SECONDS)
+
+	// Обновляем маску (заполненность бара)
+	var/old_bar_offset = bar_offset
+	bar_offset = clamp(-20 + (20 * new_charge), -20, 0)
+	if(old_bar_offset != bar_offset)
+		if(instant || isnull(old_bar_offset))
+			filters = filter(type = "alpha", icon = bar_mask, y = bar_offset)
+		else
+			animate(src, filters = filter(type = "alpha", icon = bar_mask, y = bar_offset), time = 0.5 SECONDS)
+
+/// Индикатор температуры CPU IPC (аналог hunger bar)
+/atom/movable/screen/ipc_temperature
 	name = "CPU temperature"
-	icon_state = "mood_neutral"  // Временно используем mood icons, можно заменить
-	screen_loc = ui_healthdoll  // Рядом с healthdoll
+	icon_state = "hungerbar"  // Используем ту же основу
+	screen_loc = ui_hunger  // Позиция где обычно hunger
+	mouse_over_pointer = MOUSE_HAND_POINTER
+	/// Текущая температура
+	var/temperature = 30
+	/// Иконка термометра рядом с баром
+	var/image/temp_image
+	/// Сам бар
+	var/atom/movable/screen/ipc_temperature_bar/temp_bar
 
-/atom/movable/screen/mood/ipc_temperature/Click()
+/atom/movable/screen/ipc_temperature/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+
+	// Иконка термометра рядом с баром
+	temp_image = image(icon = 'icons/obj/devices/tool.dmi', icon_state = "thermometer", pixel_x = -5)
+	temp_image.plane = plane
+	temp_image.appearance_flags |= KEEP_APART
+	temp_image.add_filter("simple_outline", 2, outline_filter(1, COLOR_BLACK, OUTLINE_SHARP))
+	underlays += temp_image
+
+	// Создаем бар
+	temp_bar = new(src, hud_owner)
+	vis_contents += temp_bar
+
+/atom/movable/screen/ipc_temperature/Destroy()
+	QDEL_NULL(temp_bar)
+	return ..()
+
+/atom/movable/screen/ipc_temperature/Click()
 	if(!ismob(usr))
 		return
 	var/mob/living/carbon/human/H = usr
@@ -65,6 +168,63 @@
 
 	to_chat(H, span_notice("Температура процессора: [round(temp)]°C ([status])"))
 
+/atom/movable/screen/ipc_temperature/update_appearance(updates)
+	. = ..()
+	temp_bar?.update_temperature(temperature)
+
+/// Бар температуры процессора с градиентом
+/atom/movable/screen/ipc_temperature_bar
+	icon_state = "hungerbar_bar"
+	screen_loc = ui_hunger
+	vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE
+	/// Маска для бара
+	var/static/icon/bar_mask
+	/// Градиент цветов для температуры (от синего через зеленый до красного)
+	var/static/list/temp_gradient = list(
+		0.0, "#0080FF",  // 0°C - синий (холодно)
+		0.15, "#00FFFF", // 20°C - голубой
+		0.3, "#00FF00",  // 40°C - зеленый (оптимально)
+		0.6, "#FFFF00",  // 80°C - желтый (тепло)
+		0.9, "#FF8000",  // 120°C - оранжевый (перегрев)
+		1.0, "#FF0000",  // 130°C+ - красный (критично)
+	)
+	/// Текущий offset бара
+	var/bar_offset
+	/// Последняя температурная полоса
+	var/last_temp_band
+
+/atom/movable/screen/ipc_temperature_bar/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+	var/atom/movable/movable_loc = ismovable(loc) ? loc : null
+	screen_loc = movable_loc?.screen_loc
+	bar_mask ||= icon(icon, "hungerbar_mask")
+
+/atom/movable/screen/ipc_temperature_bar/proc/update_temperature(new_temp, instant = FALSE)
+	// Нормализуем температуру в диапазон 0-1 (0°C -> 130°C)
+	var/normalized_temp = clamp(new_temp / 130, 0, 1)
+	// Округляем до 5°C для оптимизации
+	normalized_temp = round(normalized_temp, 0.05)
+
+	if(normalized_temp == last_temp_band)
+		return
+	last_temp_band = normalized_temp
+
+	// Обновляем цвет
+	var/new_color = gradient(temp_gradient, normalized_temp)
+	if(instant)
+		color = new_color
+	else
+		animate(src, color = new_color, time = 0.5 SECONDS)
+
+	// Обновляем маску (заполненность бара)
+	var/old_bar_offset = bar_offset
+	bar_offset = clamp(-20 + (20 * normalized_temp), -20, 0)
+	if(old_bar_offset != bar_offset)
+		if(instant || isnull(old_bar_offset))
+			filters = filter(type = "alpha", icon = bar_mask, y = bar_offset)
+		else
+			animate(src, filters = filter(type = "alpha", icon = bar_mask, y = bar_offset), time = 0.5 SECONDS)
+
 // ============================================
 // ПРИМЕНЕНИЕ HUD ЭЛЕМЕНТОВ
 // ============================================
@@ -72,68 +232,45 @@
 /datum/species/ipc/on_species_gain(mob/living/carbon/human/H, datum/species/old_species, pref_load)
 	. = ..()
 
-	to_chat(H, span_boldwarning("DEBUG HUD: on_species_gain вызван для IPC!"))
-
 	// ВАЖНО: Нужно вызвать replace_body, как в базовом ipc.dm
-	to_chat(H, span_notice("DEBUG HUD: Вызываем replace_body()"))
 	replace_body(H, src)
 	H.update_body()
 	H.update_body_parts()
 
 	// Удаляем mood datum если он есть
 	if(H.mob_mood)
-		to_chat(H, span_notice("DEBUG HUD: Удаляем mob_mood"))
 		QDEL_NULL(H.mob_mood)
 
 	// Добавляем кастомные HUD элементы
-	to_chat(H, span_notice("DEBUG HUD: Вызываем add_ipc_hud_elements()"))
 	add_ipc_hud_elements(H)
 
 /datum/species/ipc/proc/add_ipc_hud_elements(mob/living/carbon/human/H)
-	to_chat(H, span_notice("DEBUG HUD: add_ipc_hud_elements начался"))
-
 	if(!H.hud_used)
-		to_chat(H, span_warning("DEBUG HUD: H.hud_used == null! Выходим"))
 		return
 
-	to_chat(H, span_notice("DEBUG HUD: H.hud_used существует"))
 	var/datum/hud/hud = H.hud_used
 
-	// Удаляем старые индикаторы если они есть (предотвращаем дубликаты)
-	to_chat(H, span_notice("DEBUG HUD: Удаляем старые индикаторы..."))
-	for(var/atom/movable/screen/mood/ipc_battery/old_indicator in hud.static_inventory)
-		hud.static_inventory -= old_indicator
-		H.client?.screen -= old_indicator
-		qdel(old_indicator)
-
-	for(var/atom/movable/screen/mood/ipc_temperature/old_indicator in hud.static_inventory)
-		hud.static_inventory -= old_indicator
-		H.client?.screen -= old_indicator
-		qdel(old_indicator)
+	// Удаляем hunger если есть (IPC не едят)
+	if(hud.hunger)
+		hud.infodisplay -= hud.hunger
+		H.client?.screen -= hud.hunger
+		QDEL_NULL(hud.hunger)
 
 	// Создаем и добавляем индикатор батареи
-	to_chat(H, span_notice("DEBUG HUD: Создаем battery_indicator"))
-	var/atom/movable/screen/mood/ipc_battery/battery_indicator = new()
+	var/atom/movable/screen/ipc_battery/battery_indicator = new(null, hud)
 	battery_indicator.hud = hud
-	hud.static_inventory += battery_indicator
+	hud.infodisplay += battery_indicator
 	H.client?.screen += battery_indicator
-	to_chat(H, span_notice("DEBUG HUD: battery_indicator добавлен на screen"))
 
 	// Создаем и добавляем индикатор температуры
-	to_chat(H, span_notice("DEBUG HUD: Создаем temp_indicator"))
-	var/atom/movable/screen/mood/ipc_temperature/temp_indicator = new()
+	var/atom/movable/screen/ipc_temperature/temp_indicator = new(null, hud)
 	temp_indicator.hud = hud
-	// Позиционируем рядом с голодом (который мы скрыли)
-	temp_indicator.screen_loc = ui_hunger
-	hud.static_inventory += temp_indicator
+	hud.infodisplay += temp_indicator
 	H.client?.screen += temp_indicator
-	to_chat(H, span_notice("DEBUG HUD: temp_indicator добавлен на screen"))
 
 	// Обновляем индикаторы
-	to_chat(H, span_notice("DEBUG HUD: Обновляем иконки индикаторов"))
 	update_ipc_battery_icon(H)
 	update_ipc_temperature_icon(H)
-	to_chat(H, span_boldnotice("DEBUG HUD: add_ipc_hud_elements ЗАВЕРШЕН!"))
 
 // ============================================
 // ОБНОВЛЕНИЕ ИКОНОК HUD
@@ -149,43 +286,33 @@
 
 	var/charge_percent = (battery.charge / battery.maxcharge) * 100
 
-	// Ищем battery indicator в HUD
-	for(var/atom/movable/screen/mood/ipc_battery/indicator in H.hud_used.static_inventory)
-		// Меняем icon_state в зависимости от заряда
-		switch(charge_percent)
-			if(80 to INFINITY)
-				indicator.icon_state = "mood_happy"  // Зеленый
-			if(50 to 80)
-				indicator.icon_state = "mood_neutral"  // Желтый
-			if(20 to 50)
-				indicator.icon_state = "mood_sad"  // Оранжевый
-			if(-INFINITY to 20)
-				indicator.icon_state = "mood_insane"  // Красный
+	// Обновляем battery indicator
+	for(var/atom/movable/screen/ipc_battery/indicator in H.hud_used.infodisplay)
+		indicator.charge_percent = charge_percent
+		indicator.update_appearance()
 
 /datum/species/ipc/proc/update_ipc_temperature_icon(mob/living/carbon/human/H)
 	if(!H.hud_used)
 		return
 
-	var/temp = cpu_temperature
+	// Обновляем temperature indicator
+	for(var/atom/movable/screen/ipc_temperature/indicator in H.hud_used.infodisplay)
+		indicator.temperature = cpu_temperature
+		indicator.update_appearance()
 
-	// Ищем temperature indicator в HUD
-	for(var/atom/movable/screen/mood/ipc_temperature/indicator in H.hud_used.static_inventory)
-		// Меняем icon_state в зависимости от температуры
-		if(temp < cpu_temp_optimal_min)
-			indicator.icon_state = "mood_sad"  // Холодно
-		else if(temp >= cpu_temp_optimal_min && temp <= cpu_temp_optimal_max)
-			indicator.icon_state = "mood_happy"  // Оптимально
-		else if(temp > cpu_temp_optimal_max && temp < 80)
-			indicator.icon_state = "mood_neutral"  // Тепло
-		else if(temp >= 80 && temp < 120)
-			indicator.icon_state = "mood_sad"  // Перегрев
-		else
-			indicator.icon_state = "mood_insane"  // Критический перегрев
-
-// Вызываем обновление HUD при изменении батареи или температуры
+// Вызываем обновление HUD при изменении батареи
 /obj/item/organ/heart/ipc_battery/on_life(seconds_per_tick, times_fired)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	if(H && istype(H.dna?.species, /datum/species/ipc))
 		var/datum/species/ipc/S = H.dna.species
 		S.update_ipc_battery_icon(H)
+
+// Вызываем обновление HUD при изменении температуры в spec_life
+/datum/species/ipc/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
+	. = ..()
+	handle_self_repair(H)
+	handle_temperature(H)
+	handle_battery(H)
+	// Обновляем temperature HUD каждый tick
+	update_ipc_temperature_icon(H)
