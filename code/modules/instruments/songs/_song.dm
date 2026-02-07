@@ -424,7 +424,7 @@
 		return
 	bpm = new_bpm
 
-	// legacy tempo = deciseconds per beat
+	// BANDASTATION ADD: legacy tempo = deciseconds per beat
 	tempo = sanitize_tempo((60 SECONDS) / bpm, TRUE)
 
 	SEND_SIGNAL(parent, COMSIG_INSTRUMENT_TEMPO_CHANGE, src)
