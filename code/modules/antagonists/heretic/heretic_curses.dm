@@ -3,7 +3,7 @@
  */
 
 /datum/heretic_knowledge/curse
-	abstract_parent_type = /datum/heretic_knowledge/curse
+	abstract_type = /datum/heretic_knowledge/curse
 	/// How far can we curse people?
 	var/max_range = 64
 	/// The duration of the curse
@@ -266,7 +266,7 @@
 //---- Curse of Indulgence
 
 /datum/heretic_knowledge/curse/indulgence
-	abstract_parent_type = /datum/heretic_knowledge/curse/indulgence
+	abstract_type = /datum/heretic_knowledge/curse/indulgence
 	name = "Curse of Indulgence"
 	duration = 8 MINUTES
 	curse_color = COLOR_MAROON
