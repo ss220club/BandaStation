@@ -5,3 +5,4 @@
 #include "code\templates.dm"
 #include "code\areas\off_station.dm"
 #include "code\areas\station.dm"
+#include "code/areas/mansus_areas.dm"

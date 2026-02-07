@@ -4,6 +4,7 @@
 #include "code/effects/landmark.dm"
 #include "code/effects/spawners.dm"
 #include "code/effects/turf_decal.dm"
+#include "code/effects/mansus_light.dm"
 
 #include "code/floors/wooden.dm"
 
@@ -106,6 +107,8 @@
 #include "code/structures/posters.dm"
 #include "code/structures/signs.dm"
 #include "code/structures/statues.dm"
+#include "code/structures/mansus_flora.dm"
+#include "code/structures/mansus_gates.dm"
 #include "code/structures/crates_lockers/closets/secure/blueshield.dm"
 #include "code/structures/crates_lockers/closets/secure/gamma.dm"
 #include "code/structures/crates_lockers/closets/secure/lawyer.dm"
