@@ -30,5 +30,6 @@
 		"Explorer": {
 			"spawn_positions": 4
 		}
-	}
+	},
+	"bonus_weakpoints": 2
 }
