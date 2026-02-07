@@ -31,7 +31,7 @@
 	. = ..()
 
 	// Иконка батареи рядом с баром
-	battery_image = image(icon = 'icons/obj/power/power.dmi', icon_state = "cell", pixel_x = -5)
+	battery_image = image(icon = 'icons/obj/machines/cell_charger.dmi', icon_state = "cell", pixel_x = -5)
 	battery_image.plane = plane
 	battery_image.appearance_flags |= KEEP_APART
 	battery_image.add_filter("simple_outline", 2, outline_filter(1, COLOR_BLACK, OUTLINE_SHARP))
@@ -109,9 +109,9 @@
 	bar_offset = clamp(-20 + (20 * new_charge), -20, 0)
 	if(old_bar_offset != bar_offset)
 		if(instant || isnull(old_bar_offset))
-			filters = filter(type = "alpha", icon = bar_mask, y = bar_offset)
+			add_filter("ipc_battery_bar_mask", 1, alpha_mask_filter(0, bar_offset, bar_mask))
 		else
-			animate(src, filters = filter(type = "alpha", icon = bar_mask, y = bar_offset), time = 0.5 SECONDS)
+			transition_filter("ipc_battery_bar_mask", alpha_mask_filter(0, bar_offset), 0.5 SECONDS)
 
 /// Индикатор температуры CPU IPC (аналог hunger bar)
 /atom/movable/screen/ipc_temperature
@@ -221,9 +221,9 @@
 	bar_offset = clamp(-20 + (20 * normalized_temp), -20, 0)
 	if(old_bar_offset != bar_offset)
 		if(instant || isnull(old_bar_offset))
-			filters = filter(type = "alpha", icon = bar_mask, y = bar_offset)
+			add_filter("ipc_temperature_bar_mask", 1, alpha_mask_filter(0, bar_offset, bar_mask))
 		else
-			animate(src, filters = filter(type = "alpha", icon = bar_mask, y = bar_offset), time = 0.5 SECONDS)
+			transition_filter("ipc_temperature_bar_mask", alpha_mask_filter(0, bar_offset), 0.5 SECONDS)
 
 // ============================================
 // ПРИМЕНЕНИЕ HUD ЭЛЕМЕНТОВ
@@ -242,6 +242,20 @@
 		QDEL_NULL(H.mob_mood)
 
 	// Добавляем кастомные HUD элементы
+	RegisterSignal(H, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
+	if(H.hud_used)
+		on_hud_created(H)
+
+/datum/species/ipc/on_species_loss(mob/living/carbon/human/H, datum/species/new_species, pref_load)
+	. = ..()
+	UnregisterSignal(H, COMSIG_MOB_HUD_CREATED)
+	remove_ipc_hud_elements(H, new_species)
+
+/datum/species/ipc/proc/on_hud_created(datum/source)
+	SIGNAL_HANDLER
+	var/mob/living/carbon/human/H = source
+	if(!istype(H))
+		return
 	add_ipc_hud_elements(H)
 
 /datum/species/ipc/proc/add_ipc_hud_elements(mob/living/carbon/human/H)
@@ -249,6 +263,9 @@
 		return
 
 	var/datum/hud/hud = H.hud_used
+	// Не дублируем индикаторы если они уже есть
+	if(locate(/atom/movable/screen/ipc_battery) in hud.infodisplay)
+		return
 
 	// Удаляем hunger если есть (IPC не едят)
 	if(hud.hunger)
@@ -271,6 +288,30 @@
 	// Обновляем индикаторы
 	update_ipc_battery_icon(H)
 	update_ipc_temperature_icon(H)
+
+/datum/species/ipc/proc/remove_ipc_hud_elements(mob/living/carbon/human/H, datum/species/new_species)
+	if(!H?.hud_used)
+		return
+	var/datum/hud/hud = H.hud_used
+
+	for(var/atom/movable/screen/ipc_battery/indicator in hud.infodisplay)
+		hud.infodisplay -= indicator
+		H.client?.screen -= indicator
+		qdel(indicator)
+
+	for(var/atom/movable/screen/ipc_temperature/indicator in hud.infodisplay)
+		hud.infodisplay -= indicator
+		H.client?.screen -= indicator
+		qdel(indicator)
+
+	// Вернем hunger, если новый вид его использует
+	var/has_no_hunger_trait = FALSE
+	if(new_species && islist(new_species.inherent_traits))
+		has_no_hunger_trait = (TRAIT_NOHUNGER in new_species.inherent_traits)
+	if(!hud.hunger && !has_no_hunger_trait)
+		hud.hunger = new /atom/movable/screen/hunger(null, hud)
+		hud.infodisplay += hud.hunger
+		H.client?.screen += hud.hunger
 
 // ============================================
 // ОБНОВЛЕНИЕ ИКОНОК HUD
@@ -314,5 +355,4 @@
 	handle_self_repair(H)
 	handle_temperature(H)
 	handle_battery(H)
-	// Обновляем temperature HUD каждый tick
 	update_ipc_temperature_icon(H)
