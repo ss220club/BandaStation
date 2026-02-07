@@ -110,15 +110,28 @@
 
 	S.ram_to(my_port)
 
-#define SOUNDHAND_RAM_WARN_TIME (10 SECONDS)
+#define SOUNDHAND_RAM_WARN_TIME (15 SECONDS)
 /obj/docking_port/mobile/soundhand/proc/ram_to(obj/docking_port/stationary/target)
 	if(QDELETED(src) || QDELETED(target))
 		return FALSE
+
+	if(!ram_warned)
+		ram_warned = TRUE
+		announce_ram_warning()
 
 	initiate_drop_landing(target, SOUNDHAND_RAM_WARN_TIME)
 	addtimer(CALLBACK(src, PROC_REF(_do_ram_to), target), SOUNDHAND_RAM_WARN_TIME)
 	return TRUE
 #undef SOUNDHAND_RAM_WARN_TIME
+
+/obj/docking_port/mobile/soundhand/proc/announce_ram_warning()
+	priority_announce(
+		text = "ВНИМАНИЕ: автоматическая система шаттла сообщает об ошибках в навигационных расчётах. Возможна потеря точности выхода и столкновение при заходе. Немедленно освободите предполагаемую зону стыковки и прилегающие коридоры.",
+		title = "Аварийное предупреждение: шаттл",
+		sound = SSstation.announcer.get_rand_report_sound(),
+		sender_override = "Автоматическая система шаттла",
+		color_override = "red",
+	)
 
 /obj/docking_port/mobile/soundhand/proc/_do_ram_to(obj/docking_port/stationary/target)
 	if(QDELETED(src) || QDELETED(target))

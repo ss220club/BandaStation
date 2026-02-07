@@ -1,6 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ad" = (
-/obj/item/banner/soundhand/mundane,
+/obj/item/banner/soundhand/mundane{
+	anchored = 1
+	},
 /obj/structure/sign/flag/ussp/directional/north,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
@@ -140,7 +142,9 @@
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "hu" = (
-/obj/structure/closet/infinite,
+/obj/structure/closet/infinite{
+	anchored = 1
+	},
 /obj/item/clothing/suit/soundhand_white_jacket/tag,
 /obj/item/clothing/suit/soundhand_olive_jacket,
 /obj/item/clothing/suit/soundhand_olive_jacket,
@@ -324,7 +328,9 @@
 	color = "#6e6e6e";
 	pixel_x = -1
 	},
-/obj/item/banner/soundhand/mundane,
+/obj/item/banner/soundhand/mundane{
+	anchored = 1
+	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "ob" = (
@@ -337,7 +343,9 @@
 /obj/effect/turf_decal/trimline/dark_blue/filled/corner{
 	dir = 8
 	},
-/obj/item/banner/soundhand/mundane,
+/obj/item/banner/soundhand/mundane{
+	anchored = 1
+	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "oz" = (
@@ -353,7 +361,9 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "pi" = (
-/obj/item/banner/soundhand/mundane,
+/obj/item/banner/soundhand/mundane{
+	anchored = 1
+	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "pk" = (
@@ -453,10 +463,13 @@
 "ts" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/concert_disk/soundhand_concert,
+/obj/machinery/light/directional/south,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "ty" = (
-/obj/item/banner/soundhand/mundane,
+/obj/item/banner/soundhand/mundane{
+	anchored = 1
+	},
 /obj/structure/sign/flag/terragov/directional/north,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
@@ -742,7 +755,9 @@
 /area/shuttle/escape)
 "DS" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/line,
-/obj/item/banner/soundhand/mundane,
+/obj/item/banner/soundhand/mundane{
+	anchored = 1
+	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "Eb" = (
@@ -800,13 +815,28 @@
 /turf/open/floor/plating,
 /area/shuttle/escape)
 "Gh" = (
-/obj/structure/closet/infinite,
+/obj/structure/closet/infinite{
+	anchored = 1
+	},
 /obj/item/instrument/soundhand_bass_guitar,
 /obj/item/instrument/soundhand_metal_guitar,
 /obj/item/instrument/soundhand_rock_guitar,
 /obj/item/instrument/drumskit_folded,
 /obj/item/instrument/piano_synth,
 /obj/item/radio/entertainment/microphone/physical,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
+/obj/item/integrated_circuit,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "Gm" = (
@@ -877,6 +907,7 @@
 /area/shuttle/escape)
 "Jc" = (
 /obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/screwdriver/power,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "Jf" = (
@@ -914,6 +945,7 @@
 	pixel_y = 12
 	},
 /obj/structure/table/wood/fancy/royalblack,
+/obj/machinery/light/directional/north,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/escape)
 "JH" = (
@@ -927,7 +959,9 @@
 /obj/structure/platform/iron{
 	color = "#5f5f5f"
 	},
-/obj/item/banner/soundhand/mundane,
+/obj/item/banner/soundhand/mundane{
+	anchored = 1
+	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/escape)
 "Ky" = (
@@ -950,7 +984,9 @@
 /area/shuttle/escape)
 "Lu" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/corner,
-/obj/item/banner/soundhand/mundane,
+/obj/item/banner/soundhand/mundane{
+	anchored = 1
+	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "Mq" = (
@@ -1052,7 +1088,9 @@
 	dir = 4;
 	color = "#6e6e6e"
 	},
-/obj/item/banner/soundhand/mundane,
+/obj/item/banner/soundhand/mundane{
+	anchored = 1
+	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "OW" = (
@@ -1092,7 +1130,9 @@
 /turf/open/floor/carpet/royalblack,
 /area/shuttle/escape)
 "Rf" = (
-/obj/item/banner/soundhand/mundane,
+/obj/item/banner/soundhand/mundane{
+	anchored = 1
+	},
 /turf/open/floor/carpet/royalblack,
 /area/shuttle/escape)
 "RB" = (

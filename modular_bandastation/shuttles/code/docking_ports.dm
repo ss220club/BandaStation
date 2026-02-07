@@ -142,3 +142,21 @@
 	preferred_direction = NORTH
 	drop_landing_effect = /obj/effect/abstract/landing_zone
 	drop_landing_sound = 'sound/effects/alert.ogg'
+	var/ram_warned = FALSE
+
+/obj/docking_port/stationary/soundhand_beacon
+	name = "soundhand impact beacon"
+	invisibility = INVISIBILITY_OBSERVER
+	anchored = TRUE
+	density = FALSE
+	layer = BELOW_OBJ_LAYER
+
+	width = 19
+	height = 36
+	dwidth = 9
+	dheight = 35
+	dir = NORTH
+
+/obj/docking_port/stationary/soundhand_beacon/Initialize(mapload)
+	. = ..()
+	shuttle_id = "soundhand_beacon_[REF(src)]"
