@@ -40,6 +40,7 @@
       "name": "tgui",
       "version": "6.0.0",
       "dependencies": {
+        "@uidotdev/usehooks": "^2.4.1",
         "color-blend": "4.0.0",
         "common": "workspace:*",
         "dateformat": "^5.0.3",

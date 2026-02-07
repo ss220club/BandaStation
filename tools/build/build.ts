@@ -94,7 +94,7 @@ export const CutterTarget = new Juke.Target({
     const temp_path = `${cutter_path}_temp`; // yes this means its file extension is .exe_temp I don't really care
     await downloadFile(download_from, temp_path);
     fs.copyFileSync(temp_path, cutter_path);
-    fs.rmSync(temp_path)
+    fs.rmSync(temp_path);
     if (process.platform !== 'win32') {
       await Juke.exec('chmod', ['+x', cutter_path]);
     }
