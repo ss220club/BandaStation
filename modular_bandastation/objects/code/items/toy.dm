@@ -1,10 +1,16 @@
 #define SOUNDHAND_SUMMONER_CALL_ALLOWED "mrix"
 
 /obj/item/soundhand_summoner
-	name = "старый кликер"
-	desc = "Обычный кликер с единственной кнопкой, который похоже видал времена и получше"
+	name = "old clicker"
+	desc = "Старый кликер с единственной кнопкой."
 	icon = 'icons/obj/devices/tracker.dmi'
 	icon_state = "beacon"
+
+	custom_materials = list(
+		/datum/material/plastic = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/iron = SMALL_MATERIAL_AMOUNT * 4.5,
+		/datum/material/glass = SMALL_MATERIAL_AMOUNT * 1.7,
+	)
 
 	var/template_shuttle_id = "soundhand_basic"
 	var/next_use = 0
