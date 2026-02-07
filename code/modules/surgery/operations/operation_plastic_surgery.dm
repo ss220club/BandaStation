@@ -10,7 +10,7 @@
 		/obj/item/pen = 5,
 	)
 	time = 6.4 SECONDS
-	operation_flags = OPERATION_MORBID | OPERATION_AFFECTS_MOOD | OPERATION_NOTABLE
+	operation_flags = OPERATION_MORBID | OPERATION_AFFECTS_MOOD | OPERATION_NOTABLE | OPERATION_NO_PATIENT_REQUIRED
 	preop_sound = 'sound/items/handling/surgery/scalpel1.ogg'
 	success_sound = 'sound/items/handling/surgery/scalpel2.ogg'
 	all_surgery_states_required = SURGERY_SKIN_OPEN
@@ -25,16 +25,18 @@
 	return limb.body_zone == BODY_ZONE_HEAD
 
 /datum/surgery_operation/limb/plastic_surgery/pre_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
-	. = ..() // BANDASTATION EDIT
-	if(HAS_TRAIT_FROM(limb.owner, TRAIT_DISFIGURED, TRAIT_GENERIC))
+	if(HAS_TRAIT_FROM(limb, TRAIT_DISFIGURED, TRAIT_GENERIC))
 		return TRUE //skip name selection if fixing disfigurement
 
 	var/list/names = list()
 	if(isabductor(surgeon))
 		for(var/j in 1 to 9)
 			names += "Объект [limb.owner.gender == MALE ? "i" : "o"]-[pick("a", "b", "c", "d", "e")]-[rand(10000, 99999)]"
-		names += limb.owner.generate_random_mob_name(TRUE) //give one normal name in case they want to do regular plastic surgery
 
+		if(limb.owner)
+			names += limb.owner.generate_random_mob_name(TRUE) //give one normal name in case they want to do regular plastic surgery
+		else
+			names += generate_random_name_species_based(pick(MALE, FEMALE), TRUE, GLOB.species_list[limb.limb_id] || /datum/species/human)
 	else
 		var/advanced = LIMB_HAS_SURGERY_STATE(limb, SURGERY_PLASTIC_APPLIED)
 		var/obj/item/offhand = surgeon.get_inactive_held_item()
@@ -45,8 +47,12 @@
 		else
 			if(advanced)
 				to_chat(surgeon, span_warning("У вас нет фотографии, на которой можно основывать внешний вид!"))
+
 			for(var/i in 1 to 10)
-				names += limb.owner.generate_random_mob_name(TRUE)
+				if(limb.owner)
+					names += limb.owner.generate_random_mob_name(TRUE)
+				else
+					names += generate_random_name_species_based(pick(MALE, FEMALE), TRUE, GLOB.species_list[limb.limb_id] || /datum/species/human)
 
 	operation_args[OPERATION_NEW_NAME] = tgui_input_list(surgeon, "Выберите новое имя", "Пластическая операция", names)
 	return !!operation_args[OPERATION_NEW_NAME]
@@ -61,9 +67,12 @@
 	)
 	display_pain(limb.owner, "Вы чувствуете режущую боль по всему лицу!")
 
-/datum/surgery_operation/limb/plastic_surgery/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
-	if(HAS_TRAIT_FROM(limb.owner, TRAIT_DISFIGURED, TRAIT_GENERIC))
-		REMOVE_TRAIT(limb.owner, TRAIT_DISFIGURED, TRAIT_GENERIC)
+/datum/surgery_operation/limb/plastic_surgery/on_success(obj/item/bodypart/head/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+	if(!istype(limb))
+		CRASH("Plastic surgery finished on a non-head limb [limb]!")
+
+	if(HAS_TRAIT_FROM(limb, TRAIT_DISFIGURED, TRAIT_GENERIC))
+		REMOVE_TRAIT(limb, TRAIT_DISFIGURED, TRAIT_GENERIC)
 		display_results(
 			surgeon,
 			limb.owner,
@@ -74,14 +83,17 @@
 		display_pain(limb.owner, "Боль утихает, ваше лицо снова кажется нормальным!")
 		return
 
-	var/oldname = limb.owner.real_name
-	limb.owner.real_name = operation_args[OPERATION_NEW_NAME]
-	var/newname = limb.owner.real_name //something about how the code handles names required that I use this instead of target.real_name
+	var/oldname = limb.owner?.real_name || limb.real_name
+	if (limb.owner)
+		limb.owner.real_name = operation_args[OPERATION_NEW_NAME]
+	else
+		limb.real_name = operation_args[OPERATION_NEW_NAME]
+
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("Вы полностью изменили внешность [oldname], теперь это [newname]."),
-		span_notice("[surgeon] полностью изменил внешность [oldname], теперь это [newname]!"),
+		span_notice("Вы полностью изменили внешность [oldname], теперь это [operation_args[OPERATION_NEW_NAME]]."),
+		span_notice("[surgeon] полностью изменил внешность [oldname], теперь это [operation_args[OPERATION_NEW_NAME]]!"),
 		span_notice("[surgeon] заканчивает операцию на лице у [limb.owner.declent_ru(GENITIVE)]."),
 	)
 	display_pain(limb.owner, "Боль утихает, ваше лицо кажется новым и незнакомым!")
@@ -112,7 +124,7 @@
 		/obj/item/stack/sheet/plastic = 1,
 	)
 	time = 4.8 SECONDS
-	operation_flags = OPERATION_MORBID | OPERATION_LOCKED
+	operation_flags = OPERATION_MORBID | OPERATION_LOCKED | OPERATION_NO_PATIENT_REQUIRED
 	preop_sound = 'sound/effects/blob/blobattack.ogg'
 	success_sound = 'sound/effects/blob/attackblob.ogg'
 	failure_sound = 'sound/effects/blob/blobattack.ogg'
