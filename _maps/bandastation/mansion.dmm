@@ -442,6 +442,10 @@
 	},
 /turf/open/floor/stone,
 /area/space)
+"gq" = (
+/obj/machinery/door/puzzle/keycard/library,
+/turf/open/floor/wood/oak,
+/area/space)
 "gy" = (
 /obj/vehicle/ridden/janicart,
 /obj/effect/turf_decal/line/purple/line/contrasted{
@@ -911,6 +915,15 @@
 /obj/structure/flora/bush/large/style_2,
 /turf/open/floor/grass,
 /area/space)
+"lK" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 6
+	},
+/turf/open/floor/grass,
+/area/space)
 "lM" = (
 /obj/structure/window/spawner/directional/north,
 /obj/structure/window/spawner/directional/north,
@@ -1285,6 +1298,17 @@
 /obj/structure/billboard/starway,
 /turf/open/floor/grass,
 /area/space)
+"qC" = (
+/obj/structure/table/wood/fancy/red,
+/obj/item/flashlight/lantern{
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/cup/glass/bottle/holywater{
+	pixel_x = -10;
+	pixel_y = 2
+	},
+/turf/open/floor/carpet/red,
+/area/space)
 "qN" = (
 /turf/open/floor/material,
 /area/space)
@@ -1370,6 +1394,10 @@
 	pixel_y = 5
 	},
 /turf/open/floor/grass,
+/area/space)
+"rT" = (
+/obj/structure/chair/pew/right,
+/turf/open/floor/wood/oak,
 /area/space)
 "sa" = (
 /obj/structure/railing/platform{
@@ -1709,6 +1737,15 @@
 /obj/structure/table/wood/fancy/red,
 /turf/open/floor/wood/parquet/oak,
 /area/space)
+"wc" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 5
+	},
+/obj/structure/railing{
+	dir = 5
+	},
+/turf/open/floor/grass,
+/area/space)
 "we" = (
 /obj/structure/table/bronze,
 /obj/item/statuebust{
@@ -1847,6 +1884,16 @@
 	},
 /turf/open/floor/stone,
 /area/space)
+"ya" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 8
+	},
+/obj/structure/flora/bush/flowers_yw/style_2,
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/grass,
+/area/space)
 "ye" = (
 /obj/structure/table/wood/fancy/royalblack,
 /turf/open/floor/stone,
@@ -1867,6 +1914,16 @@
 	pixel_x = 2
 	},
 /turf/open/misc/dirt,
+/area/space)
+"yr" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 4
+	},
+/obj/structure/flora/bush/flowers_yw/style_2,
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/grass,
 /area/space)
 "yv" = (
 /obj/structure/railing/platform/corner,
@@ -1908,6 +1965,10 @@
 /turf/open/floor/iron/white/side{
 	dir = 1
 	},
+/area/space)
+"yQ" = (
+/obj/structure/railing/corner,
+/turf/open/floor/grass,
 /area/space)
 "yX" = (
 /obj/structure/flora/bush/jungle/b/style_random,
@@ -2120,6 +2181,15 @@
 "Cd" = (
 /turf/open/floor/wood/parquet/oak,
 /area/space)
+"Cp" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/space)
 "Cr" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
@@ -2261,6 +2331,15 @@
 /obj/structure/flora/bush/fullgrass/style_random,
 /turf/open/floor/grass,
 /area/space)
+"Dq" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 10
+	},
+/turf/open/floor/grass,
+/area/space)
 "Dy" = (
 /obj/effect/turf_decal/siding/thinplating,
 /obj/effect/turf_decal/siding/thinplating,
@@ -2395,6 +2474,11 @@
 	dir = 4
 	},
 /turf/open/floor/grass,
+/area/space)
+"FF" = (
+/obj/structure/altar/of_gods,
+/obj/item/storage/fancy/candle_box,
+/turf/open/floor/wood/oak,
 /area/space)
 "FH" = (
 /obj/effect/turf_decal/siding/thinplating,
@@ -2782,6 +2866,15 @@
 /obj/structure/flora/tree/jungle/style_random,
 /turf/open/misc/dirt,
 /area/space)
+"KK" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 9
+	},
+/obj/structure/railing{
+	dir = 9
+	},
+/turf/open/floor/grass,
+/area/space)
 "KM" = (
 /obj/effect/turf_decal/siding/wideplating/dark,
 /turf/open/floor/stone,
@@ -3013,6 +3106,16 @@
 	},
 /turf/open/floor/grass,
 /area/space)
+"Nz" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 8
+	},
+/obj/structure/flora/bush/grassy/style_random,
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/grass,
+/area/space)
 "NC" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 1
@@ -3069,6 +3172,11 @@
 	pixel_y = -5
 	},
 /turf/open/floor/stone,
+/area/space)
+"Ob" = (
+/obj/structure/altar/of_gods,
+/obj/item/book/bible,
+/turf/open/floor/wood/oak,
 /area/space)
 "Oc" = (
 /obj/machinery/door/airlock/silver,
@@ -3240,6 +3348,15 @@
 "Qp" = (
 /turf/closed/indestructible/rock,
 /area/space)
+"QD" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/grass,
+/area/space)
 "QK" = (
 /obj/item/reagent_containers/cup/bucket{
 	pixel_x = -6;
@@ -3395,6 +3512,16 @@
 	},
 /turf/open/floor/grass,
 /area/space)
+"Sw" = (
+/obj/structure/table/wood/fancy/red,
+/obj/item/flashlight/lantern{
+	pixel_y = 10
+	},
+/obj/item/nullrod{
+	pixel_x = 10
+	},
+/turf/open/floor/carpet/red,
+/area/space)
 "Sy" = (
 /obj/structure/flora/tree/jungle/small/style_3,
 /turf/open/misc/dirt,
@@ -3476,6 +3603,12 @@
 /area/space)
 "TA" = (
 /obj/structure/flora/bush/grassy/style_2,
+/turf/open/floor/grass,
+/area/space)
+"TI" = (
+/obj/structure/railing/corner{
+	dir = 8
+	},
 /turf/open/floor/grass,
 /area/space)
 "TJ" = (
@@ -3785,6 +3918,10 @@
 	color = "#A1662F"
 	},
 /turf/open/floor/grass,
+/area/space)
+"WQ" = (
+/obj/structure/chair/pew/left,
+/turf/open/floor/wood/oak,
 /area/space)
 "WR" = (
 /obj/structure/billboard/nanotrasen,
@@ -27193,7 +27330,7 @@ Gx
 Tk
 HX
 HX
-Tk
+HQ
 TR
 TR
 aR
@@ -27204,7 +27341,7 @@ BL
 HX
 aR
 TR
-Tk
+HQ
 HX
 HX
 Tk
@@ -28203,7 +28340,7 @@ OO
 Tk
 HX
 HX
-Tk
+HQ
 TR
 TR
 aR
@@ -28214,7 +28351,7 @@ BL
 HX
 aR
 TR
-Tk
+HQ
 HX
 HX
 Tk
@@ -37069,12 +37206,12 @@ Ws
 eg
 mf
 Hd
-iM
-sZ
-ZY
-Bq
-ZY
-ZY
+KK
+ya
+QD
+Nz
+QD
+Dq
 sZ
 Bq
 ZY
@@ -37276,7 +37413,7 @@ Ws
 js
 Ws
 js
-uV
+TI
 Hg
 Hg
 pa
@@ -38550,11 +38687,11 @@ Hd
 Hg
 Hg
 Hg
-hM
-hM
+pa
+pa
 Hg
-hM
-hM
+pa
+pa
 Hg
 Hg
 Hd
@@ -38751,13 +38888,13 @@ Hd
 Hd
 Hd
 Hg
-uV
-uV
-uV
-uV
-uV
-uV
-uV
+ER
+WQ
+WQ
+WQ
+WQ
+HX
+qC
 Hg
 Hg
 Hd
@@ -38953,14 +39090,14 @@ Hd
 Hd
 Hd
 Hg
-uV
-uV
-uV
-uV
-uV
-uV
-uV
-uV
+ER
+rT
+rT
+rT
+rT
+HX
+HX
+ER
 Hg
 Hd
 xY
@@ -39154,15 +39291,15 @@ Hd
 Hd
 Hd
 Hd
-uV
-uV
-uV
-uV
-uV
-uV
-uV
-uV
-uV
+gq
+HX
+HX
+HX
+HX
+HX
+HX
+Ob
+ER
 Hg
 Hd
 gX
@@ -39356,15 +39493,15 @@ Hd
 Hd
 Hd
 Hd
-uV
-uV
-uV
-uV
-uV
-uV
-uV
-uV
-uV
+gq
+HX
+HX
+HX
+HX
+HX
+HX
+FF
+ER
 Hg
 Hd
 gL
@@ -39559,14 +39696,14 @@ Hd
 Hd
 Hd
 Hg
-uV
-uV
-uV
-uV
-uV
-uV
-uV
-uV
+ER
+WQ
+WQ
+WQ
+WQ
+HX
+HX
+ER
 Hg
 Hd
 gX
@@ -39761,13 +39898,13 @@ Hd
 Hd
 Hd
 Hg
-uV
-uV
-uV
-uV
-uV
-uV
-uV
+ER
+rT
+rT
+rT
+rT
+HX
+Sw
 Hg
 Hg
 Hd
@@ -39902,7 +40039,7 @@ Ws
 js
 Ws
 js
-uV
+yQ
 Hg
 Hg
 pa
@@ -39964,11 +40101,11 @@ Hd
 Hg
 Hg
 Hg
-hM
-hM
+pa
+pa
 Hg
-hM
-hM
+pa
+pa
 Hg
 Hg
 Hd
@@ -40099,12 +40236,12 @@ mf
 mf
 Ws
 Hd
-Tu
-tF
-tF
-ub
-tF
-tF
+wc
+Cp
+Cp
+yr
+Cp
+lK
 Bd
 tF
 tF
