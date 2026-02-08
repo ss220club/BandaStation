@@ -23,6 +23,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/structures/ark_flowered.dmi'
 	icon_state = "middle"
 	layer = ABOVE_ALL_MOB_LAYER
+	pass_flags = PASS_FLAG_TABLE
 	opacity = FALSE
 	density = TRUE
 	anchored = TRUE
