@@ -1,5 +1,3 @@
-#include "__DEFINES/pass_flags.dm"
-
 /obj/structure/ark_flowered/left
 	name = "ark flowered"
 	desc = "Часть высокой, белоснежной мраморной арки, элегантно обвитой красными розами. Вызывает восторг и вдохновение от утонченного вкуса владельца."
@@ -30,5 +28,4 @@
 	anchored = TRUE
 	max_integrity = 5000
 
-	pass_flags = PASS_FLAG_TABLE
 
