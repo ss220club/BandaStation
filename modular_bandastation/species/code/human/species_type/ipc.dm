@@ -160,6 +160,9 @@
 	var/datum/action/innate/ipc_check_temperature/temp_check = new()
 	temp_check.Grant(H)
 
+	// Регистрируем обработчик электрошока
+	RegisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT, PROC_REF(on_electrocute))
+
 	// ПРИМЕЧАНИЕ:
 	// - Chassis brand применяется через body_modifications автоматически
 	// - Тип мозга тоже через body_modifications
@@ -178,6 +181,9 @@
 	var/datum/action/innate/ipc_check_temperature/temp_check = locate() in H.actions
 	if(temp_check)
 		temp_check.Remove(H)
+
+	// Отменяем регистрацию сигналов
+	UnregisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT)
 
 /datum/species/ipc/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	. = ..()
@@ -287,7 +293,7 @@
 
 				// 10% шанс потери 20% стамины
 				if(prob(10))
-					H.adjustStaminaLoss(H.getMaxStamina() * 0.2)
+					H.adjust_stamina_loss(H.max_stamina * 0.2)
 					to_chat(H, span_danger("Системы управления перегружены! Потеряна стамина."))
 		if(130 to INFINITY)
 			// 130°C+ (экстремальный перегрев): -10% скорости + экстремальный урон + 50% шанс потери стамины
@@ -302,7 +308,7 @@
 
 				// 50% шанс критической потери стамины
 				if(prob(50))
-					H.adjustStaminaLoss(H.getMaxStamina() * 0.5)
+					H.adjust_stamina_loss(H.max_stamina * 0.5)
 					to_chat(H, span_userdanger("КРИТИЧЕСКИЙ ОТКАЗ СИСТЕМЫ! Стамина критически низкая!"))
 
 /// Обновляет скорость действий на основе температуры и разгона
@@ -336,12 +342,12 @@
 /datum/species/ipc/spec_stun(mob/living/carbon/human/H, amount)
 	. = ..()
 
-/// Обработка электрошока - повышает температуру процессора
-/datum/species/ipc/spec_electrocute_act(mob/living/carbon/human/H, shock_damage, source, siemens_coeff, flags)
-	. = ..()
+/// Обработчик сигнала электрошока - повышает температуру процессора
+/datum/species/ipc/proc/on_electrocute(mob/living/carbon/human/source, shock_damage, siemens_coeff, flags)
+	SIGNAL_HANDLER
 	// Базовое повышение на 10 градусов от удара током
 	cpu_temperature = min(cpu_temperature + 10, 200)
-	to_chat(H, span_warning("Удар током повысил температуру процессора на 10°C!"))
+	to_chat(source, span_warning("Удар током повысил температуру процессора на 10°C!"))
 
 /datum/species/ipc/proc/handle_emp(mob/living/carbon/human/H, severity)
 	var/emp_damage = 0

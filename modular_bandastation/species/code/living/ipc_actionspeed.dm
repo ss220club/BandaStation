@@ -4,5 +4,6 @@
 // Модификатор скорости действий IPC от температуры процессора и разгона
 
 /datum/actionspeed_modifier/ipc_temperature
+	variable = TRUE
 	id = "ipc_temperature"
-	variable_multiplicative_slowdown = 0
+	multiplicative_slowdown = 0
