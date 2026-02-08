@@ -155,18 +155,46 @@
 	if(!istype(S))
 		return
 
-	var/temp = S.cpu_temperature
-	var/status = "оптимальном"
-	if(temp < S.cpu_temp_optimal_min)
-		status = "низкой"
-	else if(temp > S.cpu_temp_optimal_max && temp < 80)
-		status = "повышенной"
-	else if(temp >= 80 && temp < 120)
-		status = "высокой (перегрев!)"
-	else if(temp >= 120)
-		status = "критической (ОПАСНО!)"
+	// Определяем статус температуры
+	var/temp_status
+	switch(S.cpu_temperature)
+		if(-INFINITY to 20)
+			temp_status = "низкой (переохлаждение)"
+		if(20 to 40)
+			temp_status = "оптимальной"
+		if(40 to 80)
+			temp_status = "повышенной"
+		if(80 to 90)
+			temp_status = "высокой (перегрев)"
+		if(90 to 120)
+			temp_status = "критически высокой (сильный перегрев)"
+		if(120 to 130)
+			temp_status = "экстремальной (процессор горит)"
+		if(130 to INFINITY)
+			temp_status = "АВАРИЙНОЙ (процессор плавится)"
 
-	to_chat(H, span_notice("Температура процессора: [round(temp)]°C ([status])"))
+	// Формируем сообщение
+	var/message = "==== ДИАГНОСТИКА ТЕМПЕРАТУРЫ ===="
+	message += "\nТемпература процессора: [round(S.cpu_temperature, 0.1)]°C ([temp_status])"
+	message += "\nОптимальный диапазон: [S.cpu_temp_optimal_min]-[S.cpu_temp_optimal_max]°C"
+
+	// Активные системы охлаждения
+	message += "\n\n--- Системы охлаждения ---"
+	if(S.thermal_paste_active)
+		var/time_left = round((S.thermal_paste_end_time - world.time) / 600, 0.1)
+		message += "\n+ Термопаста: АКТИВНА ([time_left] мин осталось)"
+	if(S.cooling_block_active)
+		var/time_left = round((S.cooling_block_end_time - world.time) / 600, 0.1)
+		message += "\n+ Охладительный блок: АКТИВЕН ([time_left] мин осталось)"
+	if(S.improved_cooling_installed)
+		message += "\n+ Улучшенная система охлаждения: УСТАНОВЛЕНА"
+
+	// Разгон
+	if(S.overclock_active)
+		message += "\n\n--- Разгон ---"
+		message += "\n+ Разгон системы: АКТИВЕН (+[S.overclock_speed_bonus * 100]% скорости)"
+
+	to_chat(H, span_notice(message))
 
 /atom/movable/screen/ipc_temperature/update_appearance(updates)
 	. = ..()
@@ -275,13 +303,11 @@
 
 	// Создаем и добавляем индикатор батареи
 	var/atom/movable/screen/ipc_battery/battery_indicator = new(null, hud)
-	battery_indicator.hud = hud
 	hud.infodisplay += battery_indicator
 	H.client?.screen += battery_indicator
 
 	// Создаем и добавляем индикатор температуры
 	var/atom/movable/screen/ipc_temperature/temp_indicator = new(null, hud)
-	temp_indicator.hud = hud
 	hud.infodisplay += temp_indicator
 	H.client?.screen += temp_indicator
 

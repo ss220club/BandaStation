@@ -157,9 +157,6 @@
 	var/datum/action/cooldown/ipc_overclock/overclock = new()
 	overclock.Grant(H)
 
-	var/datum/action/innate/ipc_check_temperature/temp_check = new()
-	temp_check.Grant(H)
-
 	// Регистрируем обработчик электрошока
 	RegisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT, PROC_REF(on_electrocute))
 
@@ -177,10 +174,6 @@
 	var/datum/action/cooldown/ipc_overclock/overclock = locate() in H.actions
 	if(overclock)
 		overclock.Remove(H)
-
-	var/datum/action/innate/ipc_check_temperature/temp_check = locate() in H.actions
-	if(temp_check)
-		temp_check.Remove(H)
 
 	// Отменяем регистрацию сигналов
 	UnregisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT)
@@ -248,8 +241,8 @@
 
 	// Разгон системы нагревает процессор
 	if(overclock_active)
-		// +1 градус каждые 5 секунд = 0.2 градуса в секунду
-		cpu_temperature += 0.2 * seconds_per_tick
+		// +2 градуса в секунду = +10 градусов каждые 5 секунд
+		cpu_temperature += 2 * seconds_per_tick
 
 	// Ограничиваем температуру
 	cpu_temperature = clamp(cpu_temperature, 0, 200)
