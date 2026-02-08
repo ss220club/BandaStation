@@ -2700,9 +2700,12 @@
 /turf/open/floor/carpet/red,
 /area/shuttle/escape)
 "Kw" = (
-/obj/machinery/computer/emergency_shuttle,
 /obj/effect/turf_decal/tile/dark_blue/half{
 	dir = 1
+	},
+/obj/machinery/computer/shuttle{
+	shuttleId = "inka_arrival";
+	admin_controlled = 1
 	},
 /turf/open/floor/iron/dark/smooth_edge{
 	dir = 1
@@ -3207,12 +3210,12 @@
 /turf/open/floor/iron/white,
 /area/shuttle/escape)
 "RY" = (
-/obj/docking_port/mobile/emergency{
-	name = "The NTSS Independence"
-	},
 /obj/machinery/door/airlock/shuttle,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "cruisenw1"
+	cycle_id = "cruisesw1"
+	},
+/obj/docking_port/mobile/emergency{
+	name = "The NTSS Independence"
 	},
 /turf/open/floor/noslip,
 /area/shuttle/escape)
@@ -3735,26 +3738,26 @@ kd
 kd
 jt
 Tj
+Tj
+jt
+jt
+tC
+tC
+jt
+kd
+kd
+kd
+kd
+kd
+kd
+kd
+kd
+kd
+kd
+kd
+kd
+jt
 RY
-jt
-jt
-tC
-tC
-jt
-kd
-kd
-kd
-kd
-kd
-kd
-kd
-kd
-kd
-kd
-kd
-kd
-jt
-MK
 MK
 jt
 jt

@@ -1,0 +1,24 @@
+{
+	"version": 1,
+	"map_name": "Inka Event Station",
+	"map_path": "bandastation",
+	"map_file": "inka.dmm",
+	"space_ruin_levels": 0,
+	"space_empty_levels": 0,
+	"wilderness_levels": 0,
+	"planetary": 1,
+	"shuttles": {
+		"cargo": "cargo_box",
+		"ferry": "ferry_fancy",
+		"whiteship": "whiteship_box",
+		"emergency": "emergency_box"
+	},
+	"traits": [
+		{
+			"Linkage": null,
+			"Gravity": true,
+			"Baseturf": "/turf/open/misc/dirt/station",
+			"No Parallax": true
+		}
+	]
+}

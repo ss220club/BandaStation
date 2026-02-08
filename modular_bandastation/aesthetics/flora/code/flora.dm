@@ -139,7 +139,6 @@
 	icon = 'modular_bandastation/aesthetics/flora/icons/grass-sticks.dmi'
 	density = TRUE
 	resistance_flags = FLAMMABLE
-	product_types = list(/obj/item/grown/log/tree = 1)
 	harvest_amount_low = 2
 	harvest_amount_high = 4
 	harvest_message_med = "You finish chopping the log."
@@ -147,6 +146,9 @@
 	flora_flags = FLORA_WOODEN
 	can_uproot = FALSE
 	delete_on_harvest = TRUE
+
+/obj/structure/flora/dry_log/get_potential_products()
+	return list(/obj/item/grown/log/tree = 1)
 
 // Smoke - на один раунд, не обессудьте
 

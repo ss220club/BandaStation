@@ -26,7 +26,6 @@
 	icon_state = "water_swamp"
 	base_icon_state = "water_swamp"
 	baseturfs = /turf/open/water/alternative/muddy/deep
-	immerse_overlay_color = "#303c22"
 	is_swimming_tile = TRUE
 	stamina_entry_cost = 50
 	ticking_stamina_cost = 20
