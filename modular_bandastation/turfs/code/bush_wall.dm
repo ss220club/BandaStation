@@ -1,4 +1,4 @@
-/obj/structure/bush_wall
+/turf/closed/wall/bush_wall
 	name = "живая изгородь"
 	desc = "Живая изгородь из кустарника. На вид непроходимая, но мягкая."
 	icon = 'modular_bandastation/turfs/icons/bush_wall.dmi'
@@ -7,13 +7,13 @@
 	density = FALSE
 	opacity = FALSE
 
-/turf/closed/wall/bush
+/turf/closed/wall/bush_wall
 	CanPass(atom/movable/mover, turf/target)
 		if(istype(mover, /obj/projectile))
 			return TRUE
 		if(istype(mover, /obj/effect))
 			return TRUE
 
-/turf/closed/wall/bush
+/turf/closed/wall/bush_wall
 	CanAtmosPass(direction)
 		return TRUE
