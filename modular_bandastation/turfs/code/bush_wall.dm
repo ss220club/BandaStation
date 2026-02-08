@@ -11,7 +11,7 @@
 	if(istype(mover, /obj/projectile))
 		return TRUE
 	if(istype(mover, /obj/effect))
-	 	return TRUE
+		return TRUE
 
 /turf/closed/wall/bush/CanAtmosPass(direction)
-		return TRUE
+	return TRUE
