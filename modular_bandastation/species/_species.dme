@@ -12,6 +12,8 @@
 #include "code/human/species_type/ipc.dm"
 
 #include "code/living/ipc_hud.dm"
+#include "code/living/ipc_actionspeed.dm"
+#include "code/living/ipc_abilities.dm"
 
 #include "code/human/sprite_accessories/skrell/skrell_head_tentacles.dm"
 
