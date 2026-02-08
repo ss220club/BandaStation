@@ -643,9 +643,7 @@
 
 /obj/machinery/microwave/proc/spark()
 	visible_message(span_warning("Искры разлетаются вокруг [declent_ru(GENITIVE)]!"))
-	var/datum/effect_system/spark_spread/sparks = new
-	sparks.set_up(2, 1, src)
-	sparks.start()
+	do_sparks(2, TRUE, src)
 
 /**
  * The start of the cook loop
