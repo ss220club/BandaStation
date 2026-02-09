@@ -19,7 +19,7 @@ GLOBAL_LIST_EMPTY_TYPED(xenobio_slime_recipe_entries, /list)
 #define XENOBIO_TERMINAL_FORMULA_LEN 6
 #define XENOBIO_TERMINAL_LINE_LEN 84
 #define XENOBIO_TERMINAL_LINES 20
-#define XENOBIO_TERMINAL_SEPARATORS "().'[];:=<>-+?*&"
+#define XENOBIO_TERMINAL_SEPARATORS "().'\[\];:=<>-+?*&"
 
 /proc/xenobio_random_chemical_formula()
 	var/static/list/elements = list("H", "C", "N", "O", "S", "P", "Cl", "Br", "F", "I", "Na", "K", "Ca", "Mg", "Fe", "Al", "Zn", "Cu")
