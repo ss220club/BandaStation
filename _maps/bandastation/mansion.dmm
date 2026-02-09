@@ -936,7 +936,6 @@
 /area/space)
 "lM" = (
 /obj/structure/window/spawner/directional/north,
-/obj/structure/window/spawner/directional/north,
 /obj/structure/flora/bush/fullgrass,
 /turf/open/floor/grass,
 /area/space)
@@ -1672,11 +1671,6 @@
 /obj/structure/table/wood/fancy/red,
 /turf/open/floor/wood/tile/oak,
 /area/space)
-"vr" = (
-/obj/structure/grille,
-/obj/structure/grille,
-/turf/open/water/alternative,
-/area/space)
 "vu" = (
 /obj/structure/railing/platform/corner{
 	dir = 8
@@ -1692,14 +1686,6 @@
 	pixel_x = 5
 	},
 /turf/open/floor/grass,
-/area/space)
-"vG" = (
-/obj/structure/table/bronze,
-/obj/structure/table/bronze,
-/obj/item/statuebust{
-	pixel_y = 5
-	},
-/turf/open/floor/wood/tile/oak,
 /area/space)
 "vH" = (
 /obj/structure/railing{
@@ -23801,7 +23787,7 @@ ZQ
 ZQ
 ZQ
 ZQ
-vr
+cx
 ZQ
 ZQ
 ZQ
@@ -34667,7 +34653,7 @@ HX
 HX
 HX
 HX
-vG
+Ox
 IB
 hd
 vg
