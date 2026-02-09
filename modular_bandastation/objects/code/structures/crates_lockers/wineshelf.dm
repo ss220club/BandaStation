@@ -1,5 +1,5 @@
 /obj/structure/wine_rack
-	name = "Винная полка"
+	name = "wine shelf"
 	desc = "Деревянная полка для вина. Пустая."
 	icon = 'icons/obj/storage/wineshelf.dmi'
 	icon_state = "wineshelf_empty"
