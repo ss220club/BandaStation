@@ -6,3 +6,4 @@
 #include "code/melee_weapon.dm"
 #include "code/energy_katana.dm"
 #include "code/ninja_explosive.dm"
+#include "code/defib.dm"
