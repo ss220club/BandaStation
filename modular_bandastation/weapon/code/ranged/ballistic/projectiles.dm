@@ -927,7 +927,7 @@
 	name ="40mm HEDP grenade"
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "40mmHEDP_projectile"
-	damage = 50
+	damage = 40
 	var/anti_material_damage_bonus = 75
 
 /obj/projectile/bullet/a40mm/hedp/payload(atom/target)
