@@ -497,3 +497,22 @@
 		/obj/item/gun/energy/eg_14,
 
 	))
+
+// MARK: SYNDICATE
+/obj/item/storage/belt/military/mb_belt
+	name = "elegant belt"
+	desc = "Пояс необычной формы исключительного качества."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/belts.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/belt.dmi'
+	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/belt_lefthand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/belt_rightjand.dmi'
+	icon_state = "mb_belt"
+	inhand_icon_state = "mb_belt"
+	worn_icon_state = "mb_belt"
+	storage_type = /datum/storage/military_belt/syndicate
+
+
+/datum/storage/military_belt/syndicate
+	max_specific_storage = WEIGHT_CLASS_NORMAL
+	max_total_storage = WEIGHT_CLASS_SMALL * 8
+	max_slots = 10
