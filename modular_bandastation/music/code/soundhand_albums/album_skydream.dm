@@ -78,7 +78,7 @@
 
 /datum/track/soundhand/e11
 	song_path = 'sound/music/soundhand/skydream/11.ogg'
-	song_name = "11 След"
+	song_name = "11 Последствия"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
