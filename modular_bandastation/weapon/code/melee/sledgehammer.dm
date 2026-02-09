@@ -98,26 +98,3 @@
 /obj/item/sledgehammer/update_icon_state()
 	icon_state = "[base_icon_state]0"
 	return ..()
-
-/datum/uplink_item/role_restricted/syndiesledge
-	name = "Syndicate Breaching Sledgehammer"
-	desc = "Plastitanium sledgehammer made for destruction and chaos. Great for tearing down unnecessary walls or bystanders."
-	item = /obj/item/sledgehammer/syndie
-	cost = 10
-	restricted_roles = list(JOB_STATION_ENGINEER, JOB_CHIEF_ENGINEER, JOB_ATMOSPHERIC_TECHNICIAN)
-
-/datum/uplink_item/weapon_kits/low_cost/syndiesledge
-	name = "Syndicate Breaching Sledgehammer (Hard)"
-	desc = "Contains a plastitanium sledgehammer made for destruction and chaos. Great for tearing down unnecessary walls or bystanders. Comes with a welding helmet for your safety on the workplace!"
-	item = /obj/item/storage/toolbox/guncase/syndiesledge
-	purchasable_from = UPLINK_ALL_SYNDIE_OPS
-	surplus = 0
-
-/obj/item/storage/toolbox/guncase/syndiesledge
-	name = "syndicate sledgehammer case"
-	weapon_to_spawn = /obj/item/sledgehammer/syndie
-	extra_to_spawn = /obj/item/clothing/head/utility/welding
-
-/obj/item/storage/toolbox/guncase/syndiesledge/PopulateContents()
-	new weapon_to_spawn(src)
-	new extra_to_spawn(src)

@@ -1,5 +1,8 @@
 #include "_weapon.dm"
 
+// MARK: Weapons - General
+#include "code/uplink_items.dm"
+
 // MARK: Melee
 #include "code/melee/baton.dm"
 #include "code/melee/sledgehammer.dm"

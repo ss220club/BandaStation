@@ -111,12 +111,16 @@
 	design_ids += list(
 		"c9x25mm_rubber_sec",
 		"breaching_slug",
+		"box_c9x25mm_rubber",
+		"box_c38_rubber",
+		"box_c38",
 	)
 
 /datum/techweb_node/riot_supression/New()
 	. = ..()
 	design_ids += list(
 		"c9x25mm_sec",
+		"box_c9x25mm",
 	)
 
 /datum/techweb_node/exotic_ammo/New()
@@ -125,4 +129,177 @@
 		"c9x25mm_hp",
 		"c9x25mm_ap",
 		"c9x25mm_bs",
+	)
+
+/datum/design/box_c9x25mm
+	name = "Ammo Box (9x25mm) (Lethal)"
+	id = "box_c9x25mm"
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 20)
+	build_path = /obj/item/ammo_box/c9x25mm
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/box_c9x25mm/rubber
+	name = "Ammo Box (9x25mm) (Non-Lethal)"
+	id = "box_c9x25mm_rubber"
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 15)
+	build_path = /obj/item/ammo_box/c9x25mm/rubber
+	category = list(
+		RND_CATEGORY_INITIAL,
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/box_c38
+	name = "Ammo Box (.38) (Lethal)"
+	id = "box_c38"
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 25)
+	build_path = /obj/item/ammo_box/c38
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/box_c38/rubber
+	name = "Ammo Box (.38) (Non-Lethal)"
+	id = "box_c38_rubber"
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 20)
+	build_path = /obj/item/ammo_box/c38/rubber
+	category = list(
+		RND_CATEGORY_INITIAL,
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/c9mm_mag
+	name = "pistol magazine (9mm) (Lethal)"
+	desc = "Designed to quickly reload Makarov pistols."
+	id = "c9mm_mag"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 20
+	)
+	build_path = /obj/item/ammo_box/magazine/m9mm
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/c10mm_mag
+	name = "pistol magazine (10mm) (Lethal)"
+	desc = "Designed to quickly reload Ansem pistols."
+	id = "c10mm_mag"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 20
+	)
+	build_path = /obj/item/ammo_box/magazine/m10mm
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/c10mm
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	category = list(
+		RND_CATEGORY_HACKED,
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+
+/datum/design/c45
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	category = list(
+		RND_CATEGORY_HACKED,
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+
+/datum/design/c9mm
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	category = list(
+		RND_CATEGORY_HACKED,
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+
+/datum/design/box_c46x30mm
+	name = "Ammo Box (4.6x30mm) (Lethal)"
+	id = "box_c46x30mm"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 30)
+	build_path = /obj/item/ammo_box/c46x30
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/box_c357
+	name = "Ammo Box (.357) (Very Lethal)"
+	id = "box_c357"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 50)
+	build_path = /obj/item/ammo_box/c357
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/box_c50ae
+	name = "Ammo Box (.50 AE) (Very Lethal)"
+	id = "box_c50ae"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 50)
+	build_path = /obj/item/ammo_box/a50ae
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/box_310strilka
+	name = "Ammo Box (.310 Strilka) (Very Lethal)"
+	id = "box_310strilka"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 30)
+	build_path = /obj/item/ammo_box/strilka310
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/speedloader_310strilka
+	name = "Stripper Clip (.310 Strilka) (Very Lethal)"
+	id = "speedloader_310strilka"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 15)
+	build_path = /obj/item/ammo_box/speedloader/strilka310
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/mag_autorifle/rubber_mag
+	name = "WT-550 Autorifle Rubber Magazine (4.6x30mm rubber) (Non-lethal)"
+	desc = "A 20 round magazine for the out of date WT-550 Autorifle."
+	id = "mag_autorifle_rubber"
+	build_path = /obj/item/ammo_box/magazine/wt550m9/wtrubber
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/techweb_node/syndicate_basic/New()
+	. = ..()
+	design_ids += list(
+		"mag_autorifle_rubber",
+		"c9mm_mag",
+		"c10mm_mag",
+		"c9mm",
+		"c10mm",
+		"c45",
+		"box_c50ae",
+		"box_c357",
+		"box_c46x30mm",
+		"box_310strilka",
+		"speedloader_310strilka",
 	)
