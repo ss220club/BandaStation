@@ -82,6 +82,8 @@
 	//list(required_container, list(reagent_type = amount), required_temp or 0)
 	var/list/recipe_variants = list()
 
+	var/reaction_display_name = null
+
 /datum/chemical_reaction/slime/proc/get_rotation_index()
 	var/period_ds = persistence_period * (24 HOURS)
 	if(period_ds <= 0)
@@ -173,16 +175,23 @@
 
 /datum/chemical_reaction/slime/slimemonkey/New()
 	randomized = FALSE
+	reaction_display_name = "Обезьяньи кубики"
 
 /datum/chemical_reaction/slime/slimeinaprov/New()
 	randomized = FALSE
+	reaction_display_name = "Адреналин"
 
 /datum/chemical_reaction/slime/slimespawn/New()
 	randomized = FALSE
+	reaction_display_name = "Репродукция серого подвида слаймов"
+
+/datum/chemical_reaction/slime/slimemutate
+	reaction_display_name = "Синтез слаймо-токсина"
 
 // MARK: Positive
 
 /datum/chemical_reaction/slime/slimespeed
+	reaction_display_name = "Синтез ускоряющего агента"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/red,   list(/datum/reagent/water = 10), 0),
@@ -194,6 +203,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimestabilizer
+	reaction_display_name = "Стабилизатор"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/blue, list(/datum/reagent/blood = 10), 0),
@@ -205,6 +215,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimeregen
+	reaction_display_name = "Регенеративное желе"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/purple, list(/datum/reagent/blood = 10), 0),
@@ -216,6 +227,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimefireproof
+	reaction_display_name = "Огнестойкий агент"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/darkblue, list(/datum/reagent/water = 10), 0),
@@ -226,6 +238,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimeglow
+	reaction_display_name = "Реакция слаймо-свечения"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/yellow, list(/datum/reagent/water = 10), 0),
@@ -234,6 +247,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimeradio
+	reaction_display_name = "Блюспейс радио"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/bluespace, list(/datum/reagent/water = 10), 0),
@@ -242,6 +256,7 @@
 	)
 
 /datum/chemical_reaction/slime/docility
+	reaction_display_name = "Синтез реагента послушания"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/pink, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -250,6 +265,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimepsteroid
+	reaction_display_name = "Слаймо-стероид"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/purple, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -258,6 +274,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimepsteroid2
+	reaction_display_name = "Усилитель"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/cerulean, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -266,6 +283,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimemutator
+	reaction_display_name = "Мутатор"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/red, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -276,17 +294,18 @@
 	)
 
 /datum/chemical_reaction/slime/slimemetal
+	reaction_display_name = "Синтез металлов"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/metal, list(/datum/reagent/toxin/plasma = 10), 0),
 		list(/obj/item/slime_extract/darkpurple, list(/datum/reagent/toxin/plasma = 10), 450),
-		list(/obj/item/slime_extract/grey, list(/datum/reagent/toxin/plasma = 10), 420),
 		list(/obj/item/slime_extract/gold, list(/datum/reagent/iron = 10), 0),
 		list(/obj/item/slime_extract/silver, list(/datum/reagent/iron = 10), 0),
 		list(/obj/item/slime_extract/red, list(/datum/reagent/carbon = 10), 0),
 	)
 
 /datum/chemical_reaction/slime/slimeglass
+	reaction_display_name = "Синтез стекла"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/metal, list(/datum/reagent/water = 10), 0),
@@ -298,9 +317,11 @@
 	)
 
 /datum/chemical_reaction/slime/adamantine
+	reaction_display_name = "Синтез адамантина"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/adamantine, list(/datum/reagent/toxin/plasma = 10), 0),
+		list(/obj/item/slime_extract/adamantine, list(/datum/reagent/iron = 10), 0),
 		list(/obj/item/slime_extract/metal, list(/datum/reagent/toxin/plasma = 10), 600),
 		list(/obj/item/slime_extract/darkpurple, list(/datum/reagent/toxin/plasma = 10), 580),
 	)
@@ -308,6 +329,7 @@
 // MARK: Negative
 
 /datum/chemical_reaction/slime/slimebloodlust
+	reaction_display_name = "Кровожадность"
 	recipe_category = SLIME_RECIPE_NEGATIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/red, list(/datum/reagent/blood = 10), 0),
@@ -316,6 +338,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimeoverload
+	reaction_display_name = "Синтезированный EMP выброс"
 	recipe_category = SLIME_RECIPE_NEGATIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/yellow, list(/datum/reagent/blood = 10), 0),
@@ -324,6 +347,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimefreeze
+	reaction_display_name = "Заморозка"
 	recipe_category = SLIME_RECIPE_NEGATIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/darkblue, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -332,6 +356,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimeexplosion
+	reaction_display_name = "Синтезированный взрыв"
 	recipe_category = SLIME_RECIPE_NEGATIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/oil, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -340,6 +365,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimemutate2
+	reaction_display_name = "Синтез слаймо-токсина"
 	recipe_category = SLIME_RECIPE_NEGATIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/black, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -350,6 +376,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimemobspawn
+	reaction_display_name = "Репродукция существ"
 	recipe_category = SLIME_RECIPE_NEGATIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/gold, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -358,6 +385,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimefire
+	reaction_display_name = "Огненная реакция"
 	recipe_category = SLIME_RECIPE_NEGATIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/orange, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -365,9 +393,19 @@
 		list(/obj/item/slime_extract/oil, list(/datum/reagent/toxin/plasma = 10), 520),
 	)
 
+/datum/chemical_reaction/slime/slimebomb
+	reaction_display_name = "Синтез слайм-бомбы"
+	recipe_category = SLIME_RECIPE_NEGATIVE
+	recipe_variants = list(
+		list(/obj/item/slime_extract/adamantine, list(/datum/reagent/toxin/plasma = 10), 0),
+		list(/obj/item/slime_extract/metal, list(/datum/reagent/toxin/plasma = 10), 550),
+		list(/obj/item/slime_extract/oil, list(/datum/reagent/toxin/plasma = 10), 520),
+	)
+
 // MARK: Fun
 
 /datum/chemical_reaction/slime/slimebork
+	reaction_display_name = "Пищевая блюспейс реакция"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/silver, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -376,6 +414,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimefrost
+	reaction_display_name = "Синтез морозного масла"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/blue, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -384,16 +423,17 @@
 	)
 
 /datum/chemical_reaction/slime/slimefoam
+	reaction_display_name = "Синтез пены"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/blue, list(/datum/reagent/water = 10), 0),
-		list(/obj/item/slime_extract/grey, list(/datum/reagent/water = 10), 300),
 		list(/obj/item/slime_extract/lightpink, list(/datum/reagent/water = 10), 320),
 		list(/obj/item/slime_extract/rainbow, list(/datum/reagent/carbon = 10), 0),
 		list(/obj/item/slime_extract/pink, list(/datum/reagent/nitrogen = 10), 0),
 	)
 
 /datum/chemical_reaction/slime/slimecell
+	reaction_display_name = "Реакция слайм-батареи"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/yellow, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -402,6 +442,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimeplasma
+	reaction_display_name = "Синтез плазмы"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/darkpurple, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -410,6 +451,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimecrystal
+	reaction_display_name = "Блюспейс кристалл"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/bluespace, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -418,6 +460,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimefloor2
+	reaction_display_name = "Блюспейс плитка"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/bluespace, list(/datum/reagent/blood = 10), 0),
@@ -426,6 +469,7 @@
 	)
 
 /datum/chemical_reaction/slime/slime_territory
+	reaction_display_name = "Синтез маркера территории"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/cerulean, list(/datum/reagent/blood = 10), 0),
@@ -434,14 +478,15 @@
 	)
 
 /datum/chemical_reaction/slime/slimestop
+	reaction_display_name = "Остановка времени"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/sepia, list(/datum/reagent/toxin/plasma = 10), 0),
 		list(/obj/item/slime_extract/rainbow, list(/datum/reagent/toxin/plasma = 10), 380),
-		list(/obj/item/slime_extract/grey, list(/datum/reagent/toxin/plasma = 10), 350),
 	)
 
 /datum/chemical_reaction/slime/slimecamera
+	reaction_display_name = "Синтез камеры"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/sepia, list(/datum/reagent/water = 10), 0),
@@ -452,6 +497,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimefloor
+	reaction_display_name = "Синтез плиток"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/sepia, list(/datum/reagent/blood = 10), 0),
@@ -462,6 +508,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimepaint
+	reaction_display_name = "Синтез краски"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/pyrite, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -470,6 +517,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimecrayon
+	reaction_display_name = "Синтез мелков"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/pyrite, list(/datum/reagent/blood = 10), 0),
@@ -478,6 +526,7 @@
 	)
 
 /datum/chemical_reaction/slime/slime_rng
+	reaction_display_name = "Случайная слайм-репродукция"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/rainbow, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -486,6 +535,7 @@
 	)
 
 /datum/chemical_reaction/slime/slime_transfer
+	reaction_display_name = "Синтез реагента переноса"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/rainbow, list(/datum/reagent/blood = 10), 0),
@@ -494,6 +544,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimepotion2
+	reaction_display_name = "Синтез реагента разумности"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/lightpink, list(/datum/reagent/toxin/plasma = 10), 0),
@@ -502,6 +553,7 @@
 	)
 
 /datum/chemical_reaction/slime/renaming
+	reaction_display_name = "Синтез реагента переименования"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/lightpink, list(/datum/reagent/water = 10), 0),
@@ -510,6 +562,7 @@
 	)
 
 /datum/chemical_reaction/slime/gender
+	reaction_display_name = "Смена пола"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/pink, list(/datum/reagent/blood = 10), 0),
@@ -518,6 +571,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimecasp
+	reaction_display_name = "Синтез капсаицина"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/orange, list(/datum/reagent/blood = 10), 0),
@@ -526,6 +580,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimesmoke
+	reaction_display_name = "Дымовая реакция"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/orange, list(/datum/reagent/water = 5), 0),
@@ -534,6 +589,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimeoil
+	reaction_display_name = "Синтез масла"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/oil, list(/datum/reagent/blood = 10), 0),
@@ -542,6 +598,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimebork/drinks
+	reaction_display_name = "Блюспейс реакция напитков"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/silver, list(/datum/reagent/water = 10), 0),
@@ -550,6 +607,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimehuman
+	reaction_display_name = "Синтез человеко-токсина"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/grey, list(/datum/reagent/carbon = 10), 0),
@@ -558,6 +616,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimelizard
+	reaction_display_name = "Синтез унатхо-токсина"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/green, list(/datum/reagent/blood = 10), 0),
@@ -566,6 +625,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimefelinid
+	reaction_display_name = "Синтез феленидо-токсина"
 	recipe_category = SLIME_RECIPE_NEGATIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/rainbow, list(/datum/reagent/consumable/milk = 10), 0),
@@ -574,6 +634,7 @@
 	)
 
 /datum/chemical_reaction/slime/slimemoth
+	reaction_display_name = "Синтез моле-токсина"
 	recipe_category = SLIME_RECIPE_FUN
 	recipe_variants = list(
 		list(/obj/item/slime_extract/yellow, list(/datum/reagent/cellulose = 10), 0),
@@ -582,6 +643,7 @@
 	)
 
 /datum/chemical_reaction/slime/flight_potion
+	reaction_display_name = "Мутаген крыльев"
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/rainbow, list(/datum/reagent/water/holywater = 15), 0),
@@ -607,7 +669,7 @@
 // 		var/temp_str = (R.required_temp != initial(R.required_temp)) ? ", [R.required_temp] K" : ""
 // 		out += "[R.recipe_category] <b>[R.type]</b>: [container_name] + ([reag_parts.Join(", ")])[temp_str]"
 // 	if(length(disabled_out))
-// 		out += "<br>" + span_adminnotice("Отключены в этой ротации:") + "<br>" + disabled_out.Join("<br>")
+// 		out += "<br>" + span_adminnotice("Отключены в этой селекции мутаций:") + "<br>" + disabled_out.Join("<br>")
 // 	if(length(out) <= 1)
 // 		to_chat(user, span_adminnotice("Рандомизированных рецептов слаймов не найдено."), confidential = TRUE)
 // 		return

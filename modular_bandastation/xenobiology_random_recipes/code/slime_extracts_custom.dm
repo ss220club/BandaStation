@@ -1,15 +1,17 @@
 
-/datum/chemical_reaction/slime/slime_meth
-	results = list(/datum/reagent/drug/methamphetamine = 1)
-	required_reagents = list(/datum/reagent/phosphorus = 1)
-	required_container = /obj/item/slime_extract/blue
-	recipe_category = SLIME_RECIPE_POSITIVE
-	recipe_variants = list(
-		list(/obj/item/slime_extract/blue, list(/datum/reagent/water = 10), 0),
-		list(/obj/item/slime_extract/cerulean, list(/datum/reagent/water = 10), 0),
-	)
+// /datum/chemical_reaction/slime/slime_meth
+// 	reaction_display_name = "Метамфетамин"
+// 	results = list(/datum/reagent/drug/methamphetamine = 1)
+// 	required_reagents = list(/datum/reagent/phosphorus = 1)
+// 	required_container = /obj/item/slime_extract/blue
+// 	recipe_category = SLIME_RECIPE_POSITIVE
+// 	recipe_variants = list(
+// 		list(/obj/item/slime_extract/blue, list(/datum/reagent/water = 10), 0),
+// 		list(/obj/item/slime_extract/cerulean, list(/datum/reagent/water = 10), 0),
+// 	)
 
 /datum/chemical_reaction/slime/slime_vacuum
+	reaction_display_name = "Поглощение воздуха"
 	required_reagents = list(/datum/reagent/water = 5)
 	required_container = /obj/item/slime_extract/darkblue
 	recipe_category = SLIME_RECIPE_FUN
@@ -30,6 +32,7 @@
 	..()
 
 /datum/chemical_reaction/slime/slime_blood_puddle
+	reaction_display_name = "Лужа крови"
 	required_reagents = list(/datum/reagent/blood = 10)
 	required_container = /obj/item/slime_extract/red
 	recipe_category = SLIME_RECIPE_FUN
@@ -49,6 +52,7 @@
 	..()
 
 /datum/chemical_reaction/slime/slime_sparks
+	reaction_display_name = "Искры"
 	required_reagents = list(/datum/reagent/toxin/plasma = 1)
 	required_container = /obj/item/slime_extract/yellow
 	recipe_category = SLIME_RECIPE_FUN
@@ -65,6 +69,7 @@
 	..()
 
 /datum/chemical_reaction/slime/slime_drain_nutriment
+	reaction_display_name = "Вытягивание питательных веществ"
 	required_reagents = list(/datum/reagent/consumable/sugar = 10)
 	required_container = /obj/item/slime_extract/green
 	recipe_category = SLIME_RECIPE_NEGATIVE
@@ -83,6 +88,7 @@
 
 
 /datum/chemical_reaction/slime/slime_drain_blood
+	reaction_display_name = "Вытягивание крови"
 	required_reagents = list(/datum/reagent/toxin/plasma = 10)
 	required_container = /obj/item/slime_extract/red
 	recipe_category = SLIME_RECIPE_NEGATIVE
@@ -108,6 +114,7 @@ GLOBAL_LIST_INIT(slime_random_status_effects, list(
 ))
 
 /datum/chemical_reaction/slime/slime_random_status
+	reaction_display_name = "Неизвестная реакция"
 	required_reagents = list(/datum/reagent/blood = 1)
 	required_container = /obj/item/slime_extract/rainbow
 	recipe_category = SLIME_RECIPE_FUN
@@ -126,6 +133,7 @@ GLOBAL_LIST_INIT(slime_random_status_effects, list(
 	..()
 
 /datum/chemical_reaction/slime/slime_heart_attack
+	reaction_display_name = "Сердечный приступ"
 	required_reagents = list(/datum/reagent/blood = 5)
 	required_container = /obj/item/slime_extract/bluespace
 	recipe_category = SLIME_RECIPE_NEGATIVE
@@ -143,6 +151,7 @@ GLOBAL_LIST_INIT(slime_random_status_effects, list(
 	..()
 
 /datum/chemical_reaction/slime/slime_supermatter_sound
+	reaction_display_name = "Неизвестная реакция"
 	required_reagents = list(/datum/reagent/toxin/plasma = 5)
 	required_container = /obj/item/slime_extract/bluespace
 	recipe_category = SLIME_RECIPE_FUN
@@ -158,6 +167,7 @@ GLOBAL_LIST_INIT(slime_random_status_effects, list(
 	..()
 
 /datum/chemical_reaction/slime/slime_vomit_radius
+	reaction_display_name = "Синтез рвотных реагентов"
 	required_reagents = list(/datum/reagent/consumable/ethanol = 1)
 	required_container = /obj/item/slime_extract/oil
 	recipe_category = SLIME_RECIPE_NEGATIVE
@@ -179,6 +189,7 @@ GLOBAL_LIST_INIT(slime_random_status_effects, list(
 	..()
 
 /datum/chemical_reaction/slime/slime_give_blood
+	reaction_display_name = "Насыщение кровью"
 	required_reagents = list(/datum/reagent/blood = 1)
 	required_container = /obj/item/slime_extract/pink
 	recipe_category = SLIME_RECIPE_POSITIVE
@@ -196,6 +207,7 @@ GLOBAL_LIST_INIT(slime_random_status_effects, list(
 	..()
 
 /datum/chemical_reaction/slime/slime_give_nutriment
+	reaction_display_name = "Питательные вещества"
 	required_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	required_container = /obj/item/slime_extract/green
 	recipe_category = SLIME_RECIPE_POSITIVE
@@ -216,12 +228,13 @@ GLOBAL_LIST_INIT(slime_random_status_effects, list(
 	..()
 
 /datum/chemical_reaction/slime/slime_wet_tiles
+	reaction_display_name = "Пузырь воды"
 	required_reagents = list(/datum/reagent/water = 5)
 	required_container = /obj/item/slime_extract/blue
 	recipe_category = SLIME_RECIPE_POSITIVE
 	recipe_variants = list(
 		list(/obj/item/slime_extract/blue, list(/datum/reagent/water = 10), 0),
-		list(/obj/item/slime_extract/grey, list(/datum/reagent/water = 10), 280),
+		list(/obj/item/slime_extract/cerulean, list(/datum/reagent/water = 10), 280),
 		list(/obj/item/slime_extract/lightpink, list(/datum/reagent/water = 10), 300),
 	)
 
@@ -233,6 +246,7 @@ GLOBAL_LIST_INIT(slime_random_status_effects, list(
 	..()
 
 /datum/chemical_reaction/slime/slime_vines
+	reaction_display_name = "Лоза"
 	required_reagents = list(/datum/reagent/toxin/plasma = 5)
 	required_container = /obj/item/slime_extract/green
 	recipe_category = SLIME_RECIPE_FUN
@@ -250,6 +264,7 @@ GLOBAL_LIST_INIT(slime_random_status_effects, list(
 	..()
 
 /datum/chemical_reaction/slime/slime_thermite
+	reaction_display_name = "Термитная реакция"
 	required_reagents = list(/datum/reagent/toxin/plasma = 10)
 	required_container = /obj/item/slime_extract/orange
 	recipe_category = SLIME_RECIPE_NEGATIVE
@@ -294,6 +309,7 @@ GLOBAL_LIST_INIT(slime_random_diseases, list(
 ))
 
 /datum/chemical_reaction/slime/slime_virus
+	reaction_display_name = "Инкубация вируса"
 	required_reagents = list(/datum/reagent/toxin/mutagen = 1)
 	required_container = /obj/item/slime_extract/green
 	recipe_category = SLIME_RECIPE_NEGATIVE
@@ -325,6 +341,7 @@ GLOBAL_LIST_INIT(slime_other_reaction_types, list(
 ))
 
 /datum/chemical_reaction/slime/slime_random_other
+	reaction_display_name = "Неизвестная реакция"
 	required_reagents = list(/datum/reagent/toxin/plasma = 1)
 	required_container = /obj/item/slime_extract/rainbow
 	recipe_category = SLIME_RECIPE_FUN
