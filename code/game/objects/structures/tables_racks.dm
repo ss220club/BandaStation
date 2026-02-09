@@ -14,7 +14,7 @@
 
 /obj/structure/table
 	name = "table"
-	desc = "Квадратный кусок железа, стоящий на четырех металлических ножках. Его нельзя переместить."
+	desc = "Это стол, за ним едят."
 	icon = 'icons/obj/smooth_structures/table.dmi'
 	icon_state = "table-0"
 	base_icon_state = "table"
@@ -833,10 +833,7 @@
 	if(!electrocute_mob(user, cable_node, src, 1, TRUE))
 		return FALSE
 
-	var/datum/effect_system/spark_spread/sparks = new /datum/effect_system/spark_spread
-	sparks.set_up(3, TRUE, src)
-	sparks.start()
-
+	do_sparks(3, TRUE, src)
 	return TRUE
 
 /obj/structure/table/bronze
