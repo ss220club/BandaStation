@@ -790,9 +790,7 @@
 /obj/projectile/bullet/c980grenade/smoke/fuse_activation(atom/target)
 	playsound(src, 'modular_bandastation/weapon/sound/ranged/grenade_burst.ogg', 50, TRUE, -3)
 	playsound(src, 'sound/effects/smoke.ogg', 50, TRUE, -3)
-	var/datum/effect_system/fluid_spread/smoke/bad/smoke = new
-	smoke.set_up(GRENADE_SMOKE_RANGE, holder = src, location = src)
-	smoke.start()
+	do_smoke(GRENADE_SMOKE_RANGE, holder = src, location = src, smoke_type = /datum/effect_system/fluid_spread/smoke/bad, effect_type = /obj/effect/particle_effect/fluid/smoke/bad)
 
 /obj/projectile/bullet/c980grenade/shrapnel/phosphor
 	name = ".980 Tydhouer phosphor grenade"
@@ -801,9 +799,7 @@
 /obj/projectile/bullet/c980grenade/shrapnel/phosphor/fuse_activation(atom/target)
 	. = ..()
 	playsound(src, 'sound/effects/smoke.ogg', 50, TRUE, -3)
-	var/datum/effect_system/fluid_spread/smoke/quick/smoke = new
-	smoke.set_up(GRENADE_SMOKE_RANGE, holder = src, location = src)
-	smoke.start()
+	do_smoke(GRENADE_SMOKE_RANGE, holder = src, location = src, smoke_type = /datum/effect_system/fluid_spread/smoke/quick, effect_type = /obj/effect/particle_effect/fluid/smoke/quick)
 
 /obj/item/grenade/c980payload/phosphor
 	shrapnel_type = /obj/projectile/bullet/incendiary/fire/backblast/short_range
@@ -817,10 +813,7 @@
 /obj/projectile/bullet/c980grenade/riot/fuse_activation(atom/target)
 	playsound(src, 'modular_bandastation/weapon/sound/ranged/grenade_burst.ogg', 50, TRUE, -3)
 	playsound(src, 'sound/effects/smoke.ogg', 50, TRUE, -3)
-	var/datum/effect_system/fluid_spread/smoke/chem/smoke = new()
-	smoke.chemholder.add_reagent(/datum/reagent/consumable/condensedcapsaicin, 10)
-	smoke.set_up(GRENADE_SMOKE_RANGE, holder = src, location = src)
-	smoke.start()
+	do_chem_smoke(GRENADE_SMOKE_RANGE, holder = src, location = src, reagent_type = /datum/reagent/consumable/condensedcapsaicin, reagent_volume = 10)
 
 #undef GRENADE_SMOKE_RANGE
 
@@ -905,9 +898,8 @@
 	damage = 15
 
 /obj/projectile/bullet/a40mm/smoke/payload(atom/target)
-	var/datum/effect_system/fluid_spread/smoke/bad/smoke = new
-	smoke.set_up(4, holder = src, location = src)
-	smoke.start()
+	explosion(target, devastation_range = null, heavy_impact_range = null, light_impact_range = null, flame_range = null, flash_range = null, adminlog = FALSE, explosion_cause = src)
+	do_smoke(4, holder = src, location = src, smoke_type = /datum/effect_system/fluid_spread/smoke/bad, effect_type = /obj/effect/particle_effect/fluid/smoke/bad)
 
 // 40mm Stun Grenade
 /obj/projectile/bullet/a40mm/stun

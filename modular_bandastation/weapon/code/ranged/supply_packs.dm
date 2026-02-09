@@ -481,7 +481,7 @@
 /obj/item/storage/toolbox/guncase/china_lake/PopulateContents()
 	new weapon_to_spawn (src)
 	new extra_to_spawn (src)
-	new /obj/item/ammo_box/a40mm/rubber (src)
+	new /obj/item/storage/fancy/a40mm_box/rubber (src)
 	new /obj/item/storage/fancy/a40mm_box/smoke (src)
 
 /obj/item/storage/toolbox/guncase/desert_eagle
