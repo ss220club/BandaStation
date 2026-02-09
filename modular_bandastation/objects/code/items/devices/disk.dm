@@ -66,7 +66,7 @@
 /datum/supply_pack/goody/soundhand_disks_01
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 0.5
+	cost = CARGO_CRATE_VALUE
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
@@ -77,7 +77,7 @@
 /datum/supply_pack/goody/soundhand_disks_02
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 0.5
+	cost = CARGO_CRATE_VALUE
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
@@ -88,7 +88,7 @@
 /datum/supply_pack/goody/soundhand_disks_03
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 0.5
+	cost = CARGO_CRATE_VALUE
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
@@ -99,7 +99,7 @@
 /datum/supply_pack/goody/soundhand_disks_04
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 0.5
+	cost = CARGO_CRATE_VALUE
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
@@ -110,7 +110,7 @@
 /datum/supply_pack/goody/soundhand_disks_05
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 0.5
+	cost = CARGO_CRATE_VALUE
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
@@ -121,7 +121,7 @@
 /datum/supply_pack/goody/soundhand_disks_06
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 0.5
+	cost = CARGO_CRATE_VALUE
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
@@ -132,7 +132,7 @@
 /datum/supply_pack/goody/soundhand_disks_07
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 0.5
+	cost = CARGO_CRATE_VALUE
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
@@ -143,7 +143,7 @@
 /datum/supply_pack/goody/soundhand_disks_08
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 0.5
+	cost = CARGO_CRATE_VALUE
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
@@ -154,7 +154,7 @@
 /datum/supply_pack/goody/soundhand_disks_09
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 0.5
+	cost = CARGO_CRATE_VALUE
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
@@ -165,7 +165,7 @@
 /datum/supply_pack/goody/soundhand_disks_10
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 0.5
+	cost = CARGO_CRATE_VALUE
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
