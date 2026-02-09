@@ -63,28 +63,27 @@
 	album_id = "soundhand_10"
 	color_disk = "314FD2"
 
-// Раскоментить после ивента
-// /datum/supply_pack/goody/soundhand_disks
-// 	access = NONE
-// 	group = "Imports"
-// 	cost = CARGO_CRATE_VALUE * 5
-// 	crate_name = "Диски Саундхенд"
-// 	crate_type = /obj/structure/closet/crate
-// 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
-// 	name = "Диски Саундхенд"
-// 	desc = "Контейнер содержит все диски группы Саундхенд."
-// 	contains = list(
-// 		/obj/item/concert_disk/soundhand_01,
-// 		/obj/item/concert_disk/soundhand_02,
-// 		/obj/item/concert_disk/soundhand_03,
-// 		/obj/item/concert_disk/soundhand_04,
-// 		/obj/item/concert_disk/soundhand_05,
-// 		/obj/item/concert_disk/soundhand_06,
-// 		/obj/item/concert_disk/soundhand_07,
-// 		/obj/item/concert_disk/soundhand_08,
-// 		/obj/item/concert_disk/soundhand_09,
-// 		/obj/item/concert_disk/soundhand_10
-// 		)
+/datum/supply_pack/goody/soundhand_disks
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE * 5
+	crate_name = "Диски Саундхенд"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	name = "Диски Саундхенд"
+	desc = "Контейнер содержит все диски группы Саундхенд."
+	contains = list(
+		/obj/item/concert_disk/soundhand_01,
+		/obj/item/concert_disk/soundhand_02,
+		/obj/item/concert_disk/soundhand_03,
+		/obj/item/concert_disk/soundhand_04,
+		/obj/item/concert_disk/soundhand_05,
+		/obj/item/concert_disk/soundhand_06,
+		/obj/item/concert_disk/soundhand_07,
+		/obj/item/concert_disk/soundhand_08,
+		/obj/item/concert_disk/soundhand_09,
+		/obj/item/concert_disk/soundhand_10
+		)
 
 //Закоментить/Удалить после ивента
 /obj/item/concert_disk/soundhand_concert
