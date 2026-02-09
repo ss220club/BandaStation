@@ -234,6 +234,17 @@
 	if(cooling_block_active)
 		cpu_temperature = max(cpu_temperature - 1 * seconds_per_tick, 0)
 
+	// Пассивное охлаждение от термопасты и импланта (постоянное активное охлаждение)
+	// Термопаста/имплант дают постоянное охлаждение которое компенсирует часть нагрева
+	var/passive_cooling_rate = 0
+	if(thermal_paste_active)
+		passive_cooling_rate += 1  // 1°C/сек охлаждения
+	if(improved_cooling_installed)
+		passive_cooling_rate += 1  // еще 1°C/сек
+
+	if(passive_cooling_rate > 0)
+		cpu_temperature = max(cpu_temperature - (passive_cooling_rate * seconds_per_tick), 0)
+
 	// Охлаждение от баллона с холодным газом (через маску) - активное
 	// Эффективность зависит от температуры газа И теплоемкости (specific_heat)
 	if(H.internal && istype(H.internal, /obj/item/tank))
@@ -285,22 +296,6 @@
 				var/gas_consumption = 0.01 * (cooling_from_gas / 2) // 0.01 моль/сек на каждые 2°C охлаждения
 				if(gas.total_moles() > gas_consumption)
 					gas.remove(gas_consumption * seconds_per_tick)
-
-	// Пассивное охлаждение от термопасты и импланта (стабильный offset)
-	// Вместо прямого вычитания, стремимся к целевой температуре
-	var/passive_cooling_offset = 0
-	if(thermal_paste_active)
-		passive_cooling_offset += 10
-	if(improved_cooling_installed)
-		passive_cooling_offset += 10
-
-	if(passive_cooling_offset > 0)
-		// Целевая температура = текущая - offset
-		var/target_temp = max(cpu_temperature - passive_cooling_offset, 0)
-		if(cpu_temperature > target_temp)
-			// Охлаждаем со скоростью 0.3°C/сек к целевой температуре
-			var/cooling_rate = min((cpu_temperature - target_temp) * 0.1, 0.3) // 10% разницы или макс 0.3°C/сек
-			cpu_temperature = max(cpu_temperature - (cooling_rate * seconds_per_tick), target_temp)
 
 	// Разгон системы нагревает процессор
 	if(overclock_active)

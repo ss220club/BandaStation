@@ -8,17 +8,17 @@
 
 /obj/item/ipc_thermalpaste
 	name = "thermal paste applicator"
-	desc = "Специализированная термопаста для IPC. При нанесении на процессор снижает температуру на 10°C в течение 5-10 минут. Одноразовая."
+	desc = "Специализированная термопаста для IPC. Обеспечивает постоянное охлаждение 1°C/сек в течение 5-10 минут. Одноразовая."
 	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
 	icon_state = "termapasta"
 	w_class = WEIGHT_CLASS_TINY
 	var/duration_min = 5 MINUTES
 	var/duration_max = 10 MINUTES
-	var/cooling_power = 10 // градусов охлаждения
+	var/cooling_power = 1 // градусов охлаждения в секунду
 
 /obj/item/ipc_thermalpaste/examine(mob/user)
 	. = ..()
-	. += span_notice("Обеспечивает пассивное охлаждение на <b>[cooling_power]°C</b> в течение <b>[duration_min/600]-[duration_max/600] минут</b>.")
+	. += span_notice("Обеспечивает постоянное охлаждение <b>[cooling_power]°C/сек</b> в течение <b>[duration_min/600]-[duration_max/600] минут</b>.")
 	. += span_notice("Используйте на IPC для нанесения термопасты.")
 
 /obj/item/ipc_thermalpaste/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
@@ -140,7 +140,7 @@
 
 /obj/item/implant/ipc_cooling_system
 	name = "thermal stabilizer implant"
-	desc = "Улучшенная система охлаждения для IPC. При имплантации обеспечивает постоянное пассивное охлаждение на 10°C."
+	desc = "Улучшенная система охлаждения для IPC. При имплантации обеспечивает постоянное охлаждение 1°C/сек навсегда."
 	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
 	icon_state = "TermaStabImp"
 	w_class = WEIGHT_CLASS_TINY
