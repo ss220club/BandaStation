@@ -8,9 +8,7 @@
 
 /obj/item/ipc_thermalpaste
 	name = "thermal paste applicator"
-	name_ru = "аппликатор термопасты"
 	desc = "Специализированная термопаста для IPC. При нанесении на процессор снижает температуру на 10°C в течение 30-60 минут. Одноразовая."
-	desc_ru = "Специализированная термопаста для IPC. При нанесении на процессор снижает температуру на 10°C в течение 30-60 минут. Одноразовая."
 	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
 	icon_state = "termapasta"
 	w_class = WEIGHT_CLASS_TINY
@@ -64,9 +62,7 @@
 
 /obj/item/ipc_coolingblock
 	name = "portable cooling block"
-	name_ru = "портативный охладительный блок"
 	desc = "Высокотехнологичное устройство активного охлаждения для IPC. Обеспечивает мощное охлаждение на 30°C, но имеет ограниченное время работы."
-	desc_ru = "Высокотехнологичное устройство активного охлаждения для IPC. Обеспечивает мощное охлаждение на 30°C, но имеет ограниченное время работы."
 	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
 	icon_state = "ColdBlock"
 	w_class = WEIGHT_CLASS_SMALL
@@ -144,9 +140,7 @@
 
 /obj/item/implant/ipc_cooling_system
 	name = "thermal stabilizer implant"
-	name_ru = "имплант термостабилизатора"
 	desc = "Улучшенная система охлаждения для IPC. При имплантации обеспечивает постоянное пассивное охлаждение на 10°C."
-	desc_ru = "Улучшенная система охлаждения для IPC. При имплантации обеспечивает постоянное пассивное охлаждение на 10°C."
 	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
 	icon_state = "TermaStabImp"
 	w_class = WEIGHT_CLASS_TINY
@@ -206,9 +200,7 @@
 
 /obj/item/implantcase/ipc_cooling_system
 	name = "implant case - 'Thermal Stabilizer'"
-	name_ru = "кейс импланта - 'Термостабилизатор'"
 	desc = "Стеклянный кейс содержащий имплант термостабилизатора для IPC."
-	desc_ru = "Стеклянный кейс содержащий имплант термостабилизатора для IPC."
 	imp_type = /obj/item/implant/ipc_cooling_system
 
 // ============================================
@@ -217,9 +209,7 @@
 
 /obj/item/ipc_gas_cooling
 	name = "gas cooling system"
-	name_ru = "газовая система охлаждения"
 	desc = "Портативная система охлаждения на основе сжатого газа. Надевается на спину IPC и использует холодный газ для охлаждения процессора. Требует баллон с газом."
-	desc_ru = "Портативная система охлаждения на основе сжатого газа. Надевается на спину IPC и использует холодный газ для охлаждения процессора. Требует баллон с газом."
 	icon = 'icons/obj/device.dmi' // Временная иконка, можно заменить
 	icon_state = "batterer"
 	w_class = WEIGHT_CLASS_BULKY
