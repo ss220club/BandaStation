@@ -1,4 +1,4 @@
 /datum/modpack/contraband
-	name = "Контрабанда"
+	name = "Список контрабанды"
 	desc = "Добавляет различные предметы в список контрабанды."
 	author = "Hailfriend"
