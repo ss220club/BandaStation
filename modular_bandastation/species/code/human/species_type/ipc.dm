@@ -239,6 +239,28 @@
 	if(cooling_block_active)
 		cpu_temperature = max(cpu_temperature - 30 * seconds_per_tick, 0)
 
+	// Охлаждение от баллона с холодным газом (через маску)
+	if(H.internal && istype(H.internal, /obj/item/tank))
+		var/obj/item/tank/gas_tank = H.internal
+		var/datum/gas_mixture/gas = gas_tank.return_air()
+		if(gas)
+			var/gas_temp = gas.temperature - T0C
+			var/cooling_from_gas = 0
+
+			// Эффективность охлаждения зависит от температуры газа
+			if(gas_temp < 0)
+				// Очень холодный газ (ниже 0°C)
+				cooling_from_gas = min(abs(gas_temp) * 0.1, 20) // Максимум 20°C/сек
+			else if(gas_temp < 20)
+				// Холодный газ (0-20°C)
+				cooling_from_gas = (20 - gas_temp) * 0.3 // До 6°C/сек
+
+			if(cooling_from_gas > 0)
+				cpu_temperature = max(cpu_temperature - (cooling_from_gas * seconds_per_tick), 0)
+				// Расходуем газ медленно (0.05 моль в секунду)
+				if(gas.total_moles() > 0.05)
+					gas.remove(0.05 * seconds_per_tick)
+
 	// Разгон системы нагревает процессор
 	if(overclock_active)
 		// +2 градуса в секунду = +10 градусов каждые 5 секунд
