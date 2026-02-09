@@ -93,13 +93,148 @@ instrumental = "кустом"
 nominative = "куст"
 prepositional = "кусте"
 
-[chair]
-accusative = "стул"
-dative = "стулу"
-genitive = "стула"
-instrumental = "стулом"
+["chair"]
 nominative = "стул"
+genitive = "стула"
+dative = "стулу"
+accusative = "стул"
+instrumental = "стулом"
 prepositional = "стуле"
+gender = "male"
+
+["wooden chair"]
+nominative = "деревянный стул"
+genitive = "деревянного стула"
+dative = "деревянному стулу"
+accusative = "деревянный стул"
+instrumental = "деревянным стулом"
+prepositional = "деревянном стуле"
+
+["comfy chair"]
+nominative = "удобное кресло"
+genitive = "удобного кресла"
+dative = "удобному креслу"
+accusative = "удобное кресло"
+instrumental = "удобным креслом"
+prepositional = "удобном кресле"
+gender = "neuter"
+
+["carpskin chair"]
+nominative = "кресло из карповой кожи"
+genitive = "кресла из карповой кожи"
+dative = "креслу из карповой кожи"
+accusative = "кресло из карповой кожи"
+instrumental = "креслом из карповой кожи"
+prepositional = "кресле из карповой кожи"
+gender = "neuter"
+
+["office chair"]
+nominative = "офисное кресло"
+genitive = "офисного кресла"
+dative = "офисному креслу"
+accusative = "офисное кресло"
+instrumental = "офисным креслом"
+prepositional = "офисном кресле"
+gender = "neuter"
+
+["tactical swivel chair"]
+nominative = "тактическое вращающееся кресло"
+genitive = "тактического вращающегося кресла"
+dative = "тактическому вращающемуся креслу"
+accusative = "тактическое вращающееся кресло"
+instrumental = "тактическим вращающимся креслом"
+prepositional = "тактическом вращающемся кресле"
+gender = "neuter"
+
+["stool"]
+nominative = "табурет"
+genitive = "табурета"
+dative = "табурету"
+accusative = "табурет"
+instrumental = "табуретом"
+prepositional = "табурете"
+gender = "male"
+
+["bar stool"]
+nominative = "барный табурет"
+genitive = "барного табурета"
+dative = "барному табурету"
+accusative = "барный табурет"
+instrumental = "барным табуретом"
+prepositional = "барном табурете"
+gender = "male"
+
+["bamboo stool"]
+nominative = "бамбуковый табурет"
+genitive = "бамбукового табурета"
+dative = "бамбуковому табурету"
+accusative = "бамбуковый табурет"
+instrumental = "бамбуковым табуретом"
+prepositional = "бамбуковом табурете"
+gender = "male"
+
+["strange chair"]
+nominative = "странный стул"
+genitive = "странного стула"
+dative = "странному стулу"
+accusative = "странный стул"
+instrumental = "странным стулом"
+prepositional = "странном стуле"
+gender = "male"
+
+["brass chair"]
+nominative = "бронзовое кресло"
+genitive = "бронзового кресла"
+dative = "бронзовому креслу"
+accusative = "бронзовое кресло"
+instrumental = "бронзовым креслом"
+prepositional = "бронзовом кресле"
+gender = "neuter"
+
+["invisible chair"]
+nominative = "невидимый стул"
+genitive = "невидимого стула"
+dative = "невидимому стулу"
+accusative = "невидимый стул"
+instrumental = "невидимым стулом"
+prepositional = "невидимом стуле"
+gender = "male"
+
+["folding plastic chair"]
+nominative = "складной пластиковый стул"
+genitive = "складного пластикового стула"
+dative = "складному пластиковому стулу"
+accusative = "складной пластиковый стул"
+instrumental = "складным пластиковым стулом"
+prepositional = "складном пластиковом стуле"
+gender = "male"
+
+["musical chair"]
+nominative = "музыкальный стульчик"
+genitive = "музыкального стульчика"
+dative = "музыкальному стульчику"
+accusative = "музыкальный стульчик"
+instrumental = "музыкальным стульчиком"
+prepositional = "музыкальном стульчике"
+gender = "male"
+
+["shuttle seat"]
+accusative = "кресло шаттла"
+dative = "креслу шаттла"
+genitive = "кресла шаттла"
+instrumental = "креслом шаттла"
+nominative = "кресло шаттла"
+prepositional = "кресле шаттла"
+gender = "neuter"
+
+["tactical chair"]
+accusative = "тактический стул"
+dative = "тактическому стулу"
+genitive = "тактического стула"
+instrumental = "тактическим стулом"
+nominative = "тактический стул"
+prepositional = "тактическом стуле"
+gender = "male"
 
 ["chameleon projector"]
 accusative = "маскировочный проектор"
@@ -5605,15 +5740,6 @@ accusative = "слот-машину"
 instrumental = "слот-машиной"
 prepositional = "слот-машине"
 gender = "female"
-
-["stool"]
-nominative = "табурет"
-genitive = "табурета"
-dative = "табурету"
-accusative = "табурет"
-instrumental = "табуретом"
-prepositional = "табурете"
-gender = "male"
 
 ["battle arcade"]
 nominative = "игровой автомат \"Battle Arcade\""
@@ -24476,6 +24602,34 @@ instrumental = "пенным скипетром"
 prepositional = "пенном скипетре"
 gender = "male"
 
+# MARK: Walker
+["cosmic skull"]
+nominative = "космический череп"
+genitive = "космического черепа"
+dative = "космическому черепу"
+accusative = "космический череп"
+instrumental = "космическим черепом"
+prepositional = "космическом черепе"
+gender = "male"
+
+["void eater"]
+nominative = "пожиратель пустоты"
+genitive = "пожирателя пустоты"
+dative = "пожирателю пустоты"
+accusative = "пожиратель пустоты"
+instrumental = "пожирателем пустоты"
+prepositional = "пожирателе пустоты"
+gender = "male"
+
+["nebula vomit"]
+nominative = "рвота туманности"
+genitive = "рвоты туманности"
+dative = "рвоте туманности"
+accusative = "рвоту туманности"
+instrumental = "рвотой туманности"
+prepositional = "рвоте туманности"
+gender = "female"
+
 # MARK: Colonial Marines
 ["flare pouch"]
 nominative = "подсумок осветительных огней"
@@ -29712,6 +29866,15 @@ instrumental = "кольцом с бриллиантом"
 prepositional = "кольце с бриллиантом"
 gender = "neuter"
 
+["Altar of the Gods"]
+nominative = "алтарь Божеств"
+genitive = "алтаря Божеств"
+dative = "алтарю Божеств"
+accusative = "алтарь Божеств"
+instrumental = "алтарём Божеств"
+prepositional = "алтаре Божеств"
+gender = "neuter"
+
 # MARK: Blood Worm
 
 ["small blood cocoon"]
@@ -29750,3 +29913,129 @@ instrumental = "тестом на гемопаразитов"
 prepositional = "тесте на гемопаразитов"
 gender = "male"
 
+# MARK: TABLE
+["table"]
+nominative = "стол"
+genitive = "стола"
+dative = "столу"
+accusative = "стол"
+instrumental = "столом"
+prepositional = "столе"
+gender = "male"
+
+["glass table"]
+nominative = "стеклянный стол"
+genitive = "стеклянного стола"
+dative = "стеклянному столу"
+accusative = "стеклянный стол"
+instrumental = "стеклянным столом"
+prepositional = "стеклянном столе"
+gender = "male"
+
+["plasma glass table"]
+nominative = "плазменный стеклянный стол"
+genitive = "плазменного стеклянного стола"
+dative = "плазменному стеклянному столу"
+accusative = "плазменный стеклянный стол"
+instrumental = "плазменным стеклянным столом"
+prepositional = "плазменном стеклянном столе"
+gender = "male"
+
+["wooden table"]
+nominative = "деревянный стол"
+genitive = "деревявянного стола"
+dative = "деревянному столу"
+accusative = "деревянный стол"
+instrumental = "деревенянным столом"
+prepositional = "деревянном столе"
+gender = "male"
+
+["fancy table"]
+nominative = "изысканный стол"
+genitive = "изысканного стола"
+dative = "изысканному столу"
+accusative = "изысканный стол"
+instrumental = "изысканным столом"
+prepositional = "изысканном столе"
+gender = "male"
+
+["bronze table"]
+nominative = "бронзовый стол"
+genitive = "бронзового стола"
+dative = "бронзовому столу"
+accusative = "бронзовый стол"
+instrumental = "бронзовым столом"
+prepositional = "бронзовом столе"
+gender = "male"
+
+["reinforced glass table"]
+nominative = "укреплённый стеклянный стол"
+genitive = "укреплённого стеклянного стола"
+dative = "укреплённому стеклянному столу"
+accusative = "укреплённый стеклянный стол"
+instrumental = "укреплённым стеклянным столом"
+prepositional = "укреплённом стеклянном столе"
+gender = "male"
+
+["titanium glass table"]
+nominative = "титановый стеклянный стол"
+genitive = "титанового стеклянного стола"
+dative = "титановому стеклянному столу"
+accusative = "титановый стеклянный стол"
+instrumental = "титановым стеклянным столом"
+prepositional = "титановом стеклянном столе"
+gender = "male"
+
+["plastitanium glass table"]
+nominative = "пластитаниумовый стеклянный стол"
+genitive = "пластитаниумового стеклянного стола"
+dative = "пластитаниумовому стеклянному столу"
+accusative = "пластитаниумовый стеклянный стол"
+instrumental = "пластитаниумовым стеклянным столом"
+prepositional = "пластитаниумовом стеклянном столе"
+gender = "male"
+
+["skeletal minibar"]
+nominative = "скелетный минибар"
+genitive = "скелетного минибара"
+dative = "скелетному минибару"
+accusative = "скелетный минибар"
+instrumental = "скелетным минибаром"
+prepositional = "скелетном минибаре"
+gender = "male"
+
+["rack parts"]
+nominative = "детали подставки"
+genitive = "деталей подставки"
+dative = "деталям подставки"
+accusative = "детали подставки"
+instrumental = "деталями подставки"
+prepositional = "деталях подставки"
+gender = "plural"
+
+["air tank"]
+nominative = "баллон воздуха"
+genitive = "баллона воздуха"
+dative = "баллону воздуха"
+accusative = "баллон воздуха"
+instrumental = "баллоном воздуха"
+prepositional = "баллоне воздуха"
+gender = "male"
+
+["table frame"]
+nominative = "рама стола"
+genitive = "рамы стола"
+dative = "раме стола"
+accusative = "раму стола"
+instrumental = "рамой стола"
+prepositional = "раме стола"
+gender = "female"
+
+["wooden table frame"]
+nominative = "деревянная рама стола"
+genitive = "деревянной рамы стола"
+dative = "деревянной раме стола"
+accusative = "деревянную раму стола"
+instrumental = "деревянной рамой стола"
+prepositional = "деревянной раме стола"
+gender = "female"

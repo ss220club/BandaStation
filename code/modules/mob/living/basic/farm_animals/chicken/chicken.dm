@@ -40,6 +40,7 @@ GLOBAL_VAR_INIT(chicken_count, 0)
 	var/can_egg_layer = TRUE // SS220 EDIT
 
 /datum/emote/chicken
+	abstract_type = /datum/emote/chicken
 	mob_type_allowed_typecache = /mob/living/basic/chicken
 	mob_type_blacklist_typecache = list()
 
