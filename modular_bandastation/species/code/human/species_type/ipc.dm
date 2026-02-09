@@ -315,7 +315,7 @@
 		var/activity_heating = 0.05
 
 		// Дополнительный нагрев если персонаж бежит
-		if(H.m_intent == MOVE_INTENT_RUN)
+		if(H.move_intent == MOVE_INTENT_RUN)
 			activity_heating += 0.02
 
 		// Дополнительный нагрев при низком здоровье (стресс системы)
