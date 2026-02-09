@@ -203,6 +203,9 @@
 		last_repair_time = world.time
 
 /datum/species/ipc/proc/handle_temperature(mob/living/carbon/human/H, seconds_per_tick)
+	// DEBUG: Вывод температуры до модификаторов
+	var/temp_before = cpu_temperature
+
 	// Проверяем истечение эффектов охлаждения
 	if(thermal_paste_active && world.time > thermal_paste_end_time)
 		thermal_paste_active = FALSE
@@ -232,26 +235,56 @@
 		cpu_temperature = max(cpu_temperature - 1 * seconds_per_tick, 0)
 
 	// Охлаждение от баллона с холодным газом (через маску) - активное
+	// Эффективность зависит от температуры газа И теплоемкости (specific_heat)
 	if(H.internal && istype(H.internal, /obj/item/tank))
 		var/obj/item/tank/gas_tank = H.internal
 		var/datum/gas_mixture/gas = gas_tank.return_air()
-		if(gas)
+		if(gas && gas.total_moles() > 0.05)
 			var/gas_temp = gas.temperature - T0C
+
+			// Рассчитываем средний specific_heat газовой смеси
+			var/total_heat_capacity = 0
+			var/total_moles = gas.total_moles()
+
+			for(var/gas_id in gas.gases)
+				var/list/cached_gas = gas.gases[gas_id]
+				var/gas_moles = cached_gas[MOLES]
+				if(gas_moles > 0)
+					var/datum/gas/gas_datum = gas_id2path(gas_id)
+					var/list/gas_info = GLOB.meta_gas_info[gas_datum]
+					if(gas_info)
+						var/specific_heat = gas_info[META_GAS_SPECIFIC_HEAT]
+						// Взвешенный вклад каждого газа
+						total_heat_capacity += specific_heat * (gas_moles / total_moles)
+
+			// Модификатор эффективности на основе теплоемкости
+			// Базовый газ (O2/N2) = 20, множитель = 1.0
+			// Freon = 600, множитель = 30
+			// Hypernoblium = 2000, множитель = 100
+			var/heat_capacity_multiplier = total_heat_capacity / 20 // 20 = базовая теплоемкость O2/N2
+
 			var/cooling_from_gas = 0
 
 			// Эффективность охлаждения зависит от температуры газа
-			if(gas_temp < 0)
-				// Очень холодный газ (ниже 0°C)
-				cooling_from_gas = min(abs(gas_temp) * 0.01, 2) // Максимум 2°C/сек
-			else if(gas_temp < 20)
-				// Холодный газ (0-20°C)
-				cooling_from_gas = (20 - gas_temp) * 0.05 // До 1°C/сек
+			if(gas_temp < cpu_temperature) // Охлаждение только если газ холоднее процессора
+				var/temp_diff = cpu_temperature - gas_temp
+
+				// Базовая формула: 0.01°C/сек на каждый градус разницы * модификатор теплоемкости
+				cooling_from_gas = temp_diff * 0.01 * heat_capacity_multiplier
+
+				// Ограничиваем максимум в зависимости от теплоемкости
+				// Обычный газ (20): макс 2°C/сек
+				// Freon (600): макс 60°C/сек
+				// Hypernoblium (2000): макс 200°C/сек
+				var/max_cooling = heat_capacity_multiplier * 2
+				cooling_from_gas = min(cooling_from_gas, max_cooling)
 
 			if(cooling_from_gas > 0)
 				cpu_temperature = max(cpu_temperature - (cooling_from_gas * seconds_per_tick), 0)
-				// Расходуем газ медленно (0.05 моль в секунду)
-				if(gas.total_moles() > 0.05)
-					gas.remove(0.05 * seconds_per_tick)
+				// Расходуем газ пропорционально охлаждению (больше охлаждение = больше расход)
+				var/gas_consumption = 0.01 * (cooling_from_gas / 2) // 0.01 моль/сек на каждые 2°C охлаждения
+				if(gas.total_moles() > gas_consumption)
+					gas.remove(gas_consumption * seconds_per_tick)
 
 	// Пассивное охлаждение от термопасты и импланта (стабильный offset)
 	// Вместо прямого вычитания, стремимся к целевой температуре
@@ -274,8 +307,30 @@
 		// +2 градуса в секунду = +10 градусов каждые 5 секунд
 		cpu_temperature += 2 * seconds_per_tick
 
+	// Нагрев от взаимодействий/действий
+	// Чем больше действий выполняет IPC, тем больше нагревается процессор
+	if(H.client)
+		// Проверяем активность персонажа через recent_click_time или активные действия
+		// Базовый нагрев: +0.05°C/сек при активности
+		var/activity_heating = 0.05
+
+		// Дополнительный нагрев если персонаж бежит
+		if(H.m_intent == MOVE_INTENT_RUN)
+			activity_heating += 0.02
+
+		// Дополнительный нагрев при низком здоровье (стресс системы)
+		if(H.health < H.maxHealth * 0.5)
+			activity_heating += 0.03
+
+		cpu_temperature += activity_heating * seconds_per_tick
+
 	// Ограничиваем температуру
 	cpu_temperature = clamp(cpu_temperature, 0, 200)
+
+	// DEBUG: Выводим изменение температуры если значительное
+	var/temp_change = cpu_temperature - temp_before
+	if(abs(temp_change) > 0.5) // Выводим только если изменение больше 0.5°C
+		to_chat(H, span_small("DEBUG: T: [round(temp_before, 0.1)]°C → [round(cpu_temperature, 0.1)]°C ([temp_change > 0 ? "+" : ""][round(temp_change, 0.1)]°C)"))
 
 /// Обрабатывает эффекты температуры: урон, стамину, модификаторы скорости
 /datum/species/ipc/proc/handle_temperature_effects(mob/living/carbon/human/H)
