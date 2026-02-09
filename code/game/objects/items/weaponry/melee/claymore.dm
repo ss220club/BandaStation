@@ -68,7 +68,6 @@
 /obj/item/claymore/cutlass/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/cuffable_item) //closed sword guard
-	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/claymore/cutlass/old
 	name = "old cutlass"

@@ -243,10 +243,6 @@
 		/obj/item/mod/module/balloon/advanced,
 	)
 
-/obj/item/mod/control/pre_equipped/cosmohonk/Initialize(mapload, new_theme, new_skin, new_core)
-	. = ..()
-	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
-
 /obj/item/mod/control/pre_equipped/traitor
 	theme = /datum/mod_theme/syndicate
 	starting_frequency = MODLINK_FREQ_SYNDICATE
@@ -266,10 +262,6 @@
 	default_pins = list(
 		/obj/item/mod/module/jetpack,
 	)
-
-/obj/item/mod/control/pre_equipped/traitor/Initialize(mapload, new_theme, new_skin, new_core)
-	. = ..()
-	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/mod/control/pre_equipped/traitor_elite
 	theme = /datum/mod_theme/elite
@@ -406,10 +398,6 @@
 		/obj/item/mod/module/quick_cuff,
 	)
 
-/obj/item/mod/control/pre_equipped/interdyne/Initialize(mapload, new_theme, new_skin, new_core)
-	. = ..()
-	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
-
 /obj/item/mod/control/pre_equipped/enchanted
 	theme = /datum/mod_theme/enchanted
 	starting_frequency = null
@@ -446,10 +434,6 @@
 		/obj/item/mod/module/adrenaline_boost,
 		/obj/item/mod/module/energy_net,
 	)
-
-/obj/item/mod/control/pre_equipped/ninja/Initialize(mapload, new_theme, new_skin, new_core)
-	. = ..()
-	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/mod/control/pre_equipped/prototype
 	theme = /datum/mod_theme/prototype

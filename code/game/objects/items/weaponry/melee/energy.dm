@@ -338,7 +338,6 @@
 /obj/item/melee/energy/sword/pirate/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/cuffable_item) //closed sword guard
-	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /// Energy blades, which are effectively perma-extended energy swords
 /obj/item/melee/energy/blade
