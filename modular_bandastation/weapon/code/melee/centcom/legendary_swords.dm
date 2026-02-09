@@ -1,7 +1,7 @@
 #define LEGENDARY_SWORDS_CKEY_WHITELIST list("mooniverse")
 
 /obj/item/dualsaber/legendary_saber
-	name = "Злоба"
+	name = "Malice"
 	desc = "\"Злоба\" - один из легендарных энергетических мечей Галактики. Словно источая мистическую энергию, \"Злоба\" является олицетворением самой Тьмы, вызывающей трепет и ужас врагов её владельца. Гладкая и простая рукоять меча не может похвастаться орнаментами, узорами или древними рунами, но способна выплескивать рванный энергетический клинок кроваво-красного света, словно кричащий о непокорности и ярости своего владельца.  Некоторые истории гласят, что в этом клинке прибывает сама темная сущность могущества и бесконечного гнева, готовая исполнить волю своего хозяина даже за пределами пространства и времени. \n Создатель: Согда К'Трим. Текущий владелец: Миднайт Блэк."
 	icon = 'modular_bandastation/weapon/icons/melee/legendary.dmi'
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
@@ -10,19 +10,19 @@
 	inhand_icon_state = "mid_dualsaber0"
 	saber_color = "midnight"
 	light_color = LIGHT_COLOR_INTENSE_RED
+	hit_wield = 'modular_bandastation/weapon/sound/melee/mid_saberhit.ogg'
 	var/wieldsound = 'modular_bandastation/weapon/sound/melee/mid_saberon.ogg'
 	var/unwieldsound = 'modular_bandastation/weapon/sound/melee/mid_saberoff.ogg'
 	var/saber_name = "mid"
-	var/hit_wield = 'modular_bandastation/weapon/sound/melee/mid_saberhit.ogg'
-	var/hit_unwield = "swing_hit"
 	var/ranged = FALSE
 	var/power = 1
 	var/refusal_text = "Злоба неподвластна твоей воле, усмрить её сможет лишь сильнейший."
 	var/datum/enchantment/enchant
 	possible_colors = null
 	block_chance = 88
-	two_hand_force = 45
+	two_hand_force = 35
 	attack_speed = CLICK_CD_RAGE_MELEE
+	bypass_nodrop = TRUE
 
 /obj/item/dualsaber/legendary_saber/Initialize(mapload)
 	. = ..()
@@ -36,17 +36,10 @@
 	. = ..()
 	icon_state = inhand_icon_state = HAS_TRAIT(src, TRAIT_WIELDED) ? "[saber_name]_dualsaber[saber_color][HAS_TRAIT(src, TRAIT_WIELDED)]" : "[saber_name]_dualsaber0"
 
-/obj/item/dualsaber/legendary_saber/on_wield(obj/item/source, mob/living/carbon/user)
-	. = ..()
-	hitsound = hit_wield
-
-/obj/item/dualsaber/legendary_saber/on_unwield()
-	. = ..()
-	hitsound = hit_unwield
-
 /obj/item/dualsaber/legendary_saber/sorrow_catcher
-	name = "Ловец Скорби"
-	desc = "\"Ловец  Скорби\"  (Второе название \"Плакса\") -  один из легендарных энергетических мечей Галактики. Он символизирует не только силу власти и могущества, но и является предметом гордости своего обладателя.  Искусно выполненный клинок излучает мягкий голубой свет, словно призывая к миру и согласию, но при этом скрывает в себе силу и решимость защитить своего хозяина любой ценой. Рукоять меча сконструирована строго и со вкусом, создана из темного металла с матовым покрытием и украшена фреской логотипа NT. \"Ловец  Скорби\" имеет специфический звук, отдалённо напоминающий женский плач. Поэтому, немногие очевидцы гнева его хозяина дали мечу второе название - \"Плакса.\" \n Создатель: Гаскон-Валлен-Деламот. Текущий владелец: Билл Громов."
+	name = "Sorrow Catcher"
+	desc = "\"Ловец  Скорби\" -  один из легендарных энергетических мечей Галактики. \
+	Согласно легенде, предсмертные крики тех, кого сразило это оружие вырываются при каждой его активации, создавая специфических \"плачущий\" звук. "
 	icon_state = "gr_dualsaber0"
 	inhand_icon_state  = "gr_dualsaber0"
 	saber_color = "gromov"
@@ -58,8 +51,9 @@
 	hit_wield = 'modular_bandastation/weapon/sound/melee/gr_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/flame
-	name = "Пламя"
-	desc = "\"Пламя\" - один из легендарных энергетических мечей Галактики. Он отражает неумолимую справедливость и рьяность характера своего хозяина. В противоречие грозному названию, эфес меча представляет собой аккуратное и \"нежное\" произведение искусства - отполированная нарезная титановая основа завершается золотым навершием, а декоративная гарда выполнен в виде раскрывшегося бутона. Энергетический клинок источает яркий фиолетовый свет, несущий очищение и упокоение своим врагам. Рукоять меча крайне хорошо сбалансирована и отдает дань аристократическим традициям человеческого прошлого. \n Создатель: Гаскон-Валлен-Деламот. Текущий владелец: Шарлотта Дитерхис."
+	name = "Flame"
+	desc = "\"Пламя\" - один из легендарных энергетических мечей Галактики. \
+	Согласно легенде, этот меч - оружие завоевателей и праведников, долго время являвшийся фамильной реликвией одного знатного Эллизианского дома."
 	icon_state = "sh_dualsaber0"
 	inhand_icon_state = "sh_dualsaber0"
 	saber_color = "sharlotta"
@@ -71,8 +65,9 @@
 	hit_wield = 'modular_bandastation/weapon/sound/melee/sh_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/devotion
-	name = "Верность клятве"
-	desc = "\"Верность Клятве\" - один из легендарных энергетических мечей Галактики. Этот меч в первую очередь является сакральным символом, связывающий своего владельца вечной Клятвой. Его украшенную древними иероглифами человеческой расы рукоять покрывает хромированный сатин, а двойное изумрудно-зелёное лезвие меча требует от своего хозяина виртуозности и мастерства в обращении, в то же время являясь испытанием доблести, чести и силы духа. Одна из историй этого артефакта гласит, что в свечении клинка отражается душа его создателя - Арканона, который проводил долгие годы в изоляции в попытках создать что-то большее, чем просто оружие.  \n Создатель: Арканон.  Текущий владелец: Хель Кириэн."
+	name = "Oath's Fidelity"
+	desc = "\"Верность Клятве\" - один из легендарных энергетических мечей Галактики. \
+	В настоящий момент утерян."
 	icon_state = "kir_dualsaber0"
 	inhand_icon_state = "kir_dualsaber0"
 	saber_color = "kirien"
@@ -84,8 +79,9 @@
 	hit_wield = 'modular_bandastation/weapon/sound/melee/kir_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/sister
-	name = "Сестра"
-	desc = "\"Сестра\" - один из легендарных энергетических мечей Галактики. Являясь \"старшей\" парной частью еще одного легендарного меча - \"Ловца Бегущих\", это оружие представляет собой удивительный артефакт с глубокой историей и мистическими свойствами.  Его лезвие излучает мягкий  золотой свет, который извечно является символом мудрости и мощи. \"Сестра\" - это не просто меч, а символ верности высшим идеалам, дающий своему хозяину силу и решимость. Форма рукояти отсылает к оружию Справедливых Рыцарей древней человеческой истории и обладает строгим стилем, дополняющим своего владельца. Всю свою историю этот меч являлся желанным объектом многих великих существ, но \"Сестра\" способна поистине раскрыться лишь в руках того, кто искренне верит в силу справедливости и не понаслышке знает что такое честь и доблесть. \n Создатель: Коникс`Хеллькикс. Текущий Владелец: Мунивёрс Нормандия."
+	name = "Light Sister"
+	desc = "\"Светлая Сестра\" - один из легендарных энергетических мечей Галактики. \
+	Согласно легенде, этот элегантный меч был создан для одного из лидеров Синдиката прошлого, что по иронии судьбы была им же и убита."
 	icon_state = "norm_dualsaber0"
 	inhand_icon_state = "norm_dualsaber0"
 	saber_color = "normandy"
@@ -97,8 +93,9 @@
 	hit_wield = 'modular_bandastation/weapon/sound/melee/norm_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/flee_catcher
-	name = "Ловец Бегущих"
-	desc = "\"Ловец Бегущих\" - один из легендарных энергетических мечей Галактики. Являясь \"младшей\" парной частью еще одного легендарного меча - \"Сестры\", это оружие представляет собой более грубое и практичное творение. Корпус рукояти, изобилующий царапинами и потёртостями, говорит о тяжелой истории меча. Одной из традиций владельцев этого оружия является рисование под кнопкой включения отметок в виде белых жетонов, коих уже насчитывается семь штук. Рядом с самым первым жетоном выгравирована надпись : \"2361. А.М.\" \n Цвет клинка ярко-желтый,  его рукоять удлинена для комфортного боя как одной, так и двумя руками, навершие Типа \"P\" покрыто золотом и обладает специальным разъёмом для подключения своей старшей \"Сестры\", а гарда представляет собой два закругленных декоративных отростка. Из старых легенд известно, что строптивый и бурный характер меча могли сдержать лишь настоящие мастера, которые использовали хаотичный, но адаптивный под врага стиль боя. \n Создатель: Коникс`Хеллькикс. Текущий Владелец: Мунивёрс Нормандия, в последствии был передан Рицу Келли."
+	name = "Flee Catcher"
+	desc = "\"Ловец Бегущих\" - один из легендарных энергетических мечей Галактики. \
+	Согласно легенде, это потрепанное временем оружие есть страшная кара всех беглецов и предателей, всегда находящая цель."
 	icon_state = "kel_dualsaber0"
 	inhand_icon_state = "kel_dualsaber0"
 	saber_color = "kelly"
@@ -124,6 +121,20 @@
 	wieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberon.ogg'
 	unwieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberoff.ogg'
 	hit_wield = 'modular_bandastation/weapon/sound/melee/kir_saberhit.ogg'
+
+/obj/item/dualsaber/legendary_saber/orphan
+	name = "Orphan"
+	desc = "\"Сирота\" -  один из легендарных энергетических мечей Галактики. \
+	Элегантное на вид, но вселяющее ужас орудие неизвестного происхождения."
+	icon_state = "lex_dualsaber0"
+	inhand_icon_state = "lex_dualsaber0"
+	saber_color = "lebel"
+	refusal_text = "Сироте ты не хозяин."
+	light_color = COLOR_AMMO_INCENDIARY
+	saber_name = "lex"
+	wieldsound = 'modular_bandastation/weapon/sound/melee/lex_saberon.ogg'
+	unwieldsound = 'modular_bandastation/weapon/sound/melee/lex_saberoff.ogg'
+	hit_wield = 'modular_bandastation/weapon/sound/melee/lex_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/pre_attack(atom/A, mob/living/user, params)
 	var/charged = FALSE
@@ -152,7 +163,7 @@
 	name = "Рывок"
 	desc = "Этот клинок несёт владельца прямо к цели. Никто не уйдёт."
 	ranged = TRUE
-	range = 7
+	range = 5
 	actions_types = list(/datum/action/item_action/legendary_saber/rage)
 	var/movespeed = 0.8
 	var/on_leap_cooldown = FALSE
@@ -175,20 +186,20 @@
 
 /datum/enchantment/dash/on_legendary_hit(mob/living/target, mob/living/user, proximity, obj/item/dualsaber/legendary_saber/S)
 	if(proximity || !HAS_TRAIT(S, TRAIT_WIELDED)) // don't put it on cooldown if adjacent
-		return
+		return FALSE
 	. = ..()
 	if(!.)
-		return
-	charge(user, target, S)
+		return FALSE
+	return charge(user, target, S)
 
 /datum/enchantment/dash/proc/charge(mob/living/user, atom/chargeat, obj/item/dualsaber/legendary_saber/S)
 	if(on_leap_cooldown)
-		return
+		return FALSE
 	if(!chargeat)
-		return
+		return FALSE
 	var/turf/destination_turf  = get_turf(chargeat)
 	if(!destination_turf)
-		return
+		return FALSE
 	charging = TRUE
 	S.block_chance = 100
 	var/obj/effect/temp_visual/decoy/D = new /obj/effect/temp_visual/decoy(user.loc, user)
@@ -202,13 +213,16 @@
 
 	spawn(45 MILLISECONDS)
 		if(get_dist(user, destination_turf) > 1)
-			return
-		charge_end(user, S)
+			charging = FALSE
 		S.block_chance = initial(S.block_chance)
+	if(!charging)
+		return FALSE
+	return charge_end(user, S)
 
-/datum/enchantment/dash/proc/charge_end(list/targets = list(), mob/living/user, obj/item/dualsaber/legendary_saber/S)
+/datum/enchantment/dash/proc/charge_end(mob/living/user, obj/item/dualsaber/legendary_saber/S)
 	charging = FALSE
-	user.apply_damage(-40, STAMINA)
+	user.apply_damage(10, STAMINA)
+	return TRUE
 
 /datum/action/item_action/legendary_saber/rage
 	name = "Swordsman Rage"

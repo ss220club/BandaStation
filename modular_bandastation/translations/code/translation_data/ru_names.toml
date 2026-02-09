@@ -29810,6 +29810,67 @@ dative = "резиновой печати ОТКАЗАНО"
 accusative = "резиновую печать ОТКАЗАНО"
 instrumental = "резиновой печатью ОТКАЗАНО"
 prepositional = "резиновой печати ОТКАЗАНО"
+[" centcom combat implant"]
+nominative = "боевой имплант центрального командования"
+genitive = "боевого импланта центрального командования"
+dative = "боевому импланту центрального командования"
+accusative = "боевой имплант центрального командования"
+instrumental = "боевым имплантом центрального командования"
+prepositional = "боевом импланте центрального командования"
+gender = "male"
+
+["custom arm implant"]
+nominative = "настраиваемый имплант руки"
+genitive = "настраиваемого импланта руки"
+dative = "настраиваемому импланту руки"
+accusative = "настраиваемый имплант руки"
+instrumental = "настраиваемым имплантом руки"
+prepositional = "настраиваемом импланте руки"
+gender = "male"
+
+["shielded security HUD implant"]
+nominative = "защищенный имплант охранного ИЛС"
+genitive = "защищенного импланта охранного ИЛС"
+dative = "защищенному импланту охранного ИЛС"
+accusative = "защищенный имплант охранного ИЛС"
+instrumental = "защищенным имплантом охранного ИЛС"
+prepositional = "защищенном импланте охранного ИЛС"
+gender = "male"
+
+["EMP absorber"]
+nominative = "поглотитель ЭМИ"
+genitive = "поглотителя ЭМИ"
+dative = "поглотителю ЭМИ"
+accusative = "поглотитель ЭМИ"
+instrumental = "поглотителем ЭМИ"
+prepositional = "поглотителе ЭМИ"
+gender = "male"
+
+["EMP absorber implant case"]
+nominative = "кейс для поглотителя ЭМИ"
+genitive = "кейса для поглотителя ЭМИ"
+dative = "кейсу для поглотителя ЭМИ"
+accusative = "кейс для поглотителя ЭМИ"
+instrumental = "кейсом для поглотителя ЭМИ"
+prepositional = "кейсе для поглотителя ЭМИ"
+gender = "male"
+
+["pump"]
+nominative = "помпа"
+genitive = "помпы"
+dative = "помпе"
+accusative = "помпу"
+instrumental = "помпой"
+prepositional = "помпе"
+gender = "female"
+
+["combat medicine pump"]
+nominative = "боевая помпа для лекарств"
+genitive = "боевой помпы для лекарств"
+dative = "боевой помпе для лекарств"
+accusative = "боевую помпу для лекарств"
+instrumental = "боевой помпой для лекарств"
+prepositional = "боевой помпе для лекарств"
 gender = "female"
 
 ["ring box"]
@@ -29874,6 +29935,69 @@ accusative = "алтарь Божеств"
 instrumental = "алтарём Божеств"
 prepositional = "алтаре Божеств"
 gender = "neuter"
+
+["Malice"]
+nominative = "Злоба"
+genitive = "Злобы"
+dative = "Злобе"
+accusative = "Злобу"
+instrumental = "Злобой"
+prepositional = "Злобе"
+gender = "female"
+
+["Sorrow Catcher"]
+nominative = "Ловец Скорби"
+genitive = "Ловца Скорби"
+dative = "Ловцу Скорби"
+accusative = "Ловца Скорби"
+instrumental = "Ловцом Скорби"
+prepositional = "Ловце Скорби"
+gender = "male"
+
+["Flame"]
+nominative = "Пламя"
+genitive = "Пламени"
+dative = "Пламени"
+accusative = "Пламя"
+instrumental = "Пламенем"
+prepositional = "Пламени"
+gender = "neuter"
+
+["Oath's Fidelity"]
+nominative = "Верность клятве"
+genitive = "Верности клятве"
+dative = "Верности клятве"
+accusative = "Верность клятве"
+instrumental = "Верностью клятве"
+prepositional = "Верности клятве"
+gender = "female"
+
+["Light Sister"]
+nominative = "Светлая Сестра"
+genitive = "Светлой Сестры"
+dative = "Светлой Сестре"
+accusative = "Светлую Сестру"
+instrumental = "Светлой Сестрой"
+prepositional = "Светлой Сестре"
+gender = "female"
+
+["Flee Catcher"]
+nominative = "Ловец Бегущих"
+genitive = "Ловца Бегущих"
+dative = "Ловцу Бегущих"
+accusative = "Ловца Бегущих"
+instrumental = "Ловцом Бегущих"
+prepositional = "Ловце Бегущих"
+gender = "male"
+
+["Orphan"]
+nominative = "Сирота"
+genitive = "Сироты"
+dative = "Сироте"
+accusative = "Сироту"
+instrumental = "Сиротой"
+prepositional = "Сироте"
+gender = "male"
 
 # MARK: Blood Worm
 
