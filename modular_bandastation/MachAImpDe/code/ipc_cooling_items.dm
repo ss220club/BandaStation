@@ -8,12 +8,12 @@
 
 /obj/item/ipc_thermalpaste
 	name = "thermal paste applicator"
-	desc = "Специализированная термопаста для IPC. При нанесении на процессор снижает температуру на 10°C в течение 30-60 минут. Одноразовая."
+	desc = "Специализированная термопаста для IPC. При нанесении на процессор снижает температуру на 10°C в течение 5-10 минут. Одноразовая."
 	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
 	icon_state = "termapasta"
 	w_class = WEIGHT_CLASS_TINY
-	var/duration_min = 30 MINUTES
-	var/duration_max = 60 MINUTES
+	var/duration_min = 5 MINUTES
+	var/duration_max = 10 MINUTES
 	var/cooling_power = 10 // градусов охлаждения
 
 /obj/item/ipc_thermalpaste/examine(mob/user)
@@ -62,14 +62,14 @@
 
 /obj/item/ipc_coolingblock
 	name = "portable cooling block"
-	desc = "Высокотехнологичное устройство активного охлаждения для IPC. Обеспечивает мощное охлаждение на 30°C, но имеет ограниченное время работы."
+	desc = "Высокотехнологичное устройство активного охлаждения для IPC. Обеспечивает активное охлаждение 1°C/сек в течение 5 минут."
 	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
 	icon_state = "ColdBlock"
 	w_class = WEIGHT_CLASS_SMALL
 	var/max_charges = 3
 	var/charges = 3
 	var/duration = 5 MINUTES
-	var/cooling_power = 30 // градусов охлаждения
+	var/cooling_power = 1 // градусов охлаждения в секунду
 
 /obj/item/ipc_coolingblock/Initialize(mapload)
 	. = ..()
@@ -77,7 +77,7 @@
 
 /obj/item/ipc_coolingblock/examine(mob/user)
 	. = ..()
-	. += span_notice("Обеспечивает активное охлаждение на <b>[cooling_power]°C</b> в течение <b>[duration/600] минут</b>.")
+	. += span_notice("Обеспечивает активное охлаждение <b>[cooling_power]°C/сек</b> в течение <b>[duration/600] минут</b>.")
 	. += span_notice("Осталось зарядов: <b>[charges]/[max_charges]</b>.")
 	if(charges > 0)
 		. += span_notice("Используйте на IPC для активации охлаждения.")
@@ -124,7 +124,7 @@
 	S.cooling_block_active = TRUE
 	S.cooling_block_end_time = world.time + duration
 
-	to_chat(H, span_boldnotice("Охладительный блок активирован! Мощное охлаждение будет активно [duration/600] минут."))
+	to_chat(H, span_boldnotice("Охладительный блок активирован! Активное охлаждение [cooling_power]°C/сек будет работать [duration/600] минут."))
 
 	charges--
 	update_appearance()

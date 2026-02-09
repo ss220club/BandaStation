@@ -227,19 +227,11 @@
 				var/heating_amount = min((env_temp - cpu_temperature) * 0.005, cpu_cooling_rate)
 				cpu_temperature = min(cpu_temperature + heating_amount, env_temp)
 
-	// Применяем охлаждение от термопасты
-	if(thermal_paste_active)
-		cpu_temperature = max(cpu_temperature - 10 * seconds_per_tick, 0)
-
-	// Применяем охлаждение от улучшенной системы охлаждения
-	if(improved_cooling_installed)
-		cpu_temperature = max(cpu_temperature - 10 * seconds_per_tick, 0)
-
-	// Применяем охлаждение от охладительного блока
+	// Применяем активное охлаждение от охладительного блока
 	if(cooling_block_active)
-		cpu_temperature = max(cpu_temperature - 30 * seconds_per_tick, 0)
+		cpu_temperature = max(cpu_temperature - 1 * seconds_per_tick, 0)
 
-	// Охлаждение от баллона с холодным газом (через маску)
+	// Охлаждение от баллона с холодным газом (через маску) - активное
 	if(H.internal && istype(H.internal, /obj/item/tank))
 		var/obj/item/tank/gas_tank = H.internal
 		var/datum/gas_mixture/gas = gas_tank.return_air()
@@ -250,16 +242,32 @@
 			// Эффективность охлаждения зависит от температуры газа
 			if(gas_temp < 0)
 				// Очень холодный газ (ниже 0°C)
-				cooling_from_gas = min(abs(gas_temp) * 0.1, 20) // Максимум 20°C/сек
+				cooling_from_gas = min(abs(gas_temp) * 0.01, 2) // Максимум 2°C/сек
 			else if(gas_temp < 20)
 				// Холодный газ (0-20°C)
-				cooling_from_gas = (20 - gas_temp) * 0.3 // До 6°C/сек
+				cooling_from_gas = (20 - gas_temp) * 0.05 // До 1°C/сек
 
 			if(cooling_from_gas > 0)
 				cpu_temperature = max(cpu_temperature - (cooling_from_gas * seconds_per_tick), 0)
 				// Расходуем газ медленно (0.05 моль в секунду)
 				if(gas.total_moles() > 0.05)
 					gas.remove(0.05 * seconds_per_tick)
+
+	// Пассивное охлаждение от термопасты и импланта (стабильный offset)
+	// Вместо прямого вычитания, стремимся к целевой температуре
+	var/passive_cooling_offset = 0
+	if(thermal_paste_active)
+		passive_cooling_offset += 10
+	if(improved_cooling_installed)
+		passive_cooling_offset += 10
+
+	if(passive_cooling_offset > 0)
+		// Целевая температура = текущая - offset
+		var/target_temp = max(cpu_temperature - passive_cooling_offset, 0)
+		if(cpu_temperature > target_temp)
+			// Охлаждаем со скоростью 0.3°C/сек к целевой температуре
+			var/cooling_rate = min((cpu_temperature - target_temp) * 0.1, 0.3) // 10% разницы или макс 0.3°C/сек
+			cpu_temperature = max(cpu_temperature - (cooling_rate * seconds_per_tick), target_temp)
 
 	// Разгон системы нагревает процессор
 	if(overclock_active)
