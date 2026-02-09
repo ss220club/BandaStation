@@ -63,27 +63,115 @@
 	album_id = "soundhand_10"
 	color_disk = "314FD2"
 
-/datum/supply_pack/goody/soundhand_disks
+/datum/supply_pack/goody/soundhand_disks_01
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 5
+	cost = CARGO_CRATE_VALUE * 0.5
 	crate_name = "Диски Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
-	name = "Диски Саундхенд"
-	desc = "Контейнер содержит все диски группы Саундхенд."
-	contains = list(
-		/obj/item/concert_disk/soundhand_01,
-		/obj/item/concert_disk/soundhand_02,
-		/obj/item/concert_disk/soundhand_03,
-		/obj/item/concert_disk/soundhand_04,
-		/obj/item/concert_disk/soundhand_05,
-		/obj/item/concert_disk/soundhand_06,
-		/obj/item/concert_disk/soundhand_07,
-		/obj/item/concert_disk/soundhand_08,
-		/obj/item/concert_disk/soundhand_09,
-		/obj/item/concert_disk/soundhand_10
-		)
+	name = "Диск Саундхенд - Анумати"
+	desc = "Контейнер содержит альбомный диск группы Саундхенд."
+	contains = list(/obj/item/concert_disk/soundhand_01)
+
+/datum/supply_pack/goody/soundhand_disks_02
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE * 0.5
+	crate_name = "Диски Саундхенд"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	name = "Диск Саундхенд - Гитарный блюз"
+	desc = "Контейнер содержит альбомный диск группы Саундхенд."
+	contains = list(/obj/item/concert_disk/soundhand_02)
+
+/datum/supply_pack/goody/soundhand_disks_03
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE * 0.5
+	crate_name = "Диски Саундхенд"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	name = "Диск Саундхенд - Ветер Гор"
+	desc = "Контейнер содержит альбомный диск группы Саундхенд."
+	contains = list(/obj/item/concert_disk/soundhand_03)
+
+/datum/supply_pack/goody/soundhand_disks_04
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE * 0.5
+	crate_name = "Диски Саундхенд"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	name = "Диск Саундхенд - Громовая поступь"
+	desc = "Контейнер содержит альбомный диск группы Саундхенд."
+	contains = list(/obj/item/concert_disk/soundhand_04)
+
+/datum/supply_pack/goody/soundhand_disks_05
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE * 0.5
+	crate_name = "Диски Саундхенд"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	name = "Диск Саундхенд - Мечта о небе"
+	desc = "Контейнер содержит альбомный диск группы Саундхенд."
+	contains = list(/obj/item/concert_disk/soundhand_05)
+
+/datum/supply_pack/goody/soundhand_disks_06
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE * 0.5
+	crate_name = "Диски Саундхенд"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	name = "Диск Саундхенд - Полуночный карнавал"
+	desc = "Контейнер содержит альбомный диск группы Саундхенд."
+	contains = list(/obj/item/concert_disk/soundhand_06)
+
+/datum/supply_pack/goody/soundhand_disks_07
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE * 0.5
+	crate_name = "Диски Саундхенд"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	name = "Диск Саундхенд - Прогрев"
+	desc = "Контейнер содержит альбомный диск группы Саундхенд."
+	contains = list(/obj/item/concert_disk/soundhand_07)
+
+/datum/supply_pack/goody/soundhand_disks_08
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE * 0.5
+	crate_name = "Диски Саундхенд"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	name = "Диск Саундхенд - Разрушение"
+	desc = "Контейнер содержит альбомный диск группы Саундхенд."
+	contains = list(/obj/item/concert_disk/soundhand_08)
+
+/datum/supply_pack/goody/soundhand_disks_09
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE * 0.5
+	crate_name = "Диски Саундхенд"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	name = "Диск Саундхенд - Свобода"
+	desc = "Контейнер содержит альбомный диск группы Саундхенд."
+	contains = list(/obj/item/concert_disk/soundhand_09)
+
+/datum/supply_pack/goody/soundhand_disks_10
+	access = NONE
+	group = "Imports"
+	cost = CARGO_CRATE_VALUE * 0.5
+	crate_name = "Диски Саундхенд"
+	crate_type = /obj/structure/closet/crate
+	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
+	name = "Диск Саундхенд - Момент Таяры"
+	desc = "Контейнер содержит альбомный диск группы Саундхенд."
+	contains = list(/obj/item/concert_disk/soundhand_10)
 
 //Закоментить/Удалить после ивента
 /obj/item/concert_disk/soundhand_concert

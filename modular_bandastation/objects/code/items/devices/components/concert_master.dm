@@ -90,7 +90,7 @@
 /datum/supply_pack/goody/concert_controller
 	access = NONE
 	group = "Imports"
-	cost = CARGO_CRATE_VALUE * 5
+	cost = CARGO_CRATE_VALUE * 1.5
 	crate_name = "Контейнер Установки Саундхенд"
 	crate_type = /obj/structure/closet/crate
 	discountable = SUPPLY_PACK_NOT_DISCOUNTABLE
