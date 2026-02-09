@@ -14,6 +14,3 @@
 		if(istype(mover, /obj/effect))
 			return TRUE
 
-/turf/closed/wall/bush_wall
-	CanAtmosPass(direction)
-		return TRUE
