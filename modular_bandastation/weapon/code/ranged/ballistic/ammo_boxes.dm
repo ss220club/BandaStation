@@ -147,7 +147,7 @@
 
 /obj/item/ammo_box/speedloader/c38/ap
 	name = "speed loader (.38 AP)"
-	desc = parent_type::desc + "<br>Бронебойные пули хорошо пробивают броню, но наносят мало увейчий.."
+	desc = parent_type::desc + "<br>Бронебойные пули хорошо пробивают броню, но наносят мало увечий."
 	ammo_type = /obj/item/ammo_casing/c38/ap
 	ammo_band_color = COLOR_AMMO_ARMORPIERCE
 

@@ -97,10 +97,12 @@
 		/obj/item/ammo_box/speedloader/c762x54mmr/hp = 5,
 	)
 
-/obj/effect/spawner/random/contraband/c46x30
-	name = "random 4.6x30mm ammo box spawner"
+/obj/effect/spawner/random/contraband/ammo_box
 	icon_state = "buckshot"
 	spawn_loot_count = 1
+
+/obj/effect/spawner/random/contraband/ammo_box/c46x30
+	name = "random 4.6x30mm ammo box spawner"
 	loot = list(
 		/obj/item/ammo_box/c46x30,
 		/obj/item/ammo_box/c46x30/ap,
@@ -108,10 +110,8 @@
 		/obj/item/ammo_box/c46x30/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/c338
+/obj/effect/spawner/random/contraband/ammo_box/c338
 	name = "random .338 ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c338,
 		/obj/item/ammo_box/c338/ap,
@@ -119,10 +119,8 @@
 		/obj/item/ammo_box/c338/incendiary,
 	)
 
-/obj/effect/spawner/random/contraband/c762x51
+/obj/effect/spawner/random/contraband/ammo_box/c762x51
 	name = "random 7.62x51mm ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c762x51,
 		/obj/item/ammo_box/c762x51/ap,
@@ -131,10 +129,8 @@
 		/obj/item/ammo_box/c762x51/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/c223
+/obj/effect/spawner/random/contraband/ammo_box/c223
 	name = "random 5.56x45mm ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c223,
 		/obj/item/ammo_box/c223/ap,
@@ -143,10 +139,8 @@
 		/obj/item/ammo_box/c223/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/c9mm
+/obj/effect/spawner/random/contraband/ammo_box/c9mm
 	name = "random 9mm ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c9mm,
 		/obj/item/ammo_box/c9mm/ap,
@@ -155,10 +149,8 @@
 		/obj/item/ammo_box/c9mm/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/c10mm
+/obj/effect/spawner/random/contraband/ammo_box/c10mm
 	name = "random 10mm ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c10mm,
 		/obj/item/ammo_box/c10mm/ap,
@@ -167,10 +159,8 @@
 		/obj/item/ammo_box/c10mm/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/c585sol
+/obj/effect/spawner/random/contraband/ammo_box/c585sol
 	name = "random .585 Sol ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c585sol,
 		/obj/item/ammo_box/c585sol/ap,
@@ -179,10 +169,8 @@
 		/obj/item/ammo_box/c585sol/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/c45
+/obj/effect/spawner/random/contraband/ammo_box/c45
 	name = "random .45 ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c45,
 		/obj/item/ammo_box/c45/ap,
@@ -191,10 +179,8 @@
 		/obj/item/ammo_box/c45/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/c38
+/obj/effect/spawner/random/contraband/ammo_box/c38
 	name = "random .38 ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c38,
 		/obj/item/ammo_box/c38/ap,
@@ -204,10 +190,8 @@
 		/obj/item/ammo_box/c38/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/c35sol
+/obj/effect/spawner/random/contraband/ammo_box/c35sol
 	name = "random .35 Sol Short ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c35sol,
 		/obj/item/ammo_box/c35sol/ap,
@@ -215,10 +199,8 @@
 		/obj/item/ammo_box/c35sol/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/c762x54mmr
+/obj/effect/spawner/random/contraband/ammo_box/c762x54mmr
 	name = "random 7.62x54mmR ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c762x54mmr,
 		/obj/item/ammo_box/c762x54mmr/ap,
@@ -227,10 +209,8 @@
 		/obj/item/ammo_box/c762x54mmr/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/c762x39
+/obj/effect/spawner/random/contraband/ammo_box/c762x39
 	name = "random 7.62x39mm ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c762x39,
 		/obj/item/ammo_box/c762x39/ap,
@@ -243,10 +223,8 @@
 		/obj/item/ammo_box/c762x39/emp,
 	)
 
-/obj/effect/spawner/random/contraband/c40sol
+/obj/effect/spawner/random/contraband/ammo_box/c40sol
 	name = "random .40 Sol Long ammo box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c40sol,
 		/obj/item/ammo_box/c40sol/ap,
@@ -254,10 +232,8 @@
 		/obj/item/ammo_box/c40sol/incendiary,
 	)
 
-/obj/effect/spawner/random/contraband/shotgun_shells
+/obj/effect/spawner/random/contraband/ammo_box/shotgun_shells
 	name = "random shotgun shells box spawner"
-	icon_state = "buckshot"
-	spawn_loot_count = 1
 	loot = list(
 		/obj/item/ammo_box/c12ga/breacher,
 		/obj/item/ammo_box/c12ga/beanbag,
@@ -373,19 +349,19 @@
 		/obj/item/gun/energy/laser/musket/repeater = 30,
 		/obj/item/storage/box/syndie_kit/throwing_weapons = 30,
 		/obj/effect/spawner/random/contraband/grenades = 50,
-		/obj/effect/spawner/random/contraband/c46x30 = 30,
-		/obj/effect/spawner/random/contraband/c10mm = 30,
-		/obj/effect/spawner/random/contraband/c223 = 30,
-		/obj/effect/spawner/random/contraband/c45 = 30,
-		/obj/effect/spawner/random/contraband/c38 = 30,
-		/obj/effect/spawner/random/contraband/c40sol = 30,
-		/obj/effect/spawner/random/contraband/c762x54mmr = 30,
-		/obj/effect/spawner/random/contraband/c585sol = 30,
-		/obj/effect/spawner/random/contraband/c762x39 = 30,
-		/obj/effect/spawner/random/contraband/c762x51 = 30,
-		/obj/effect/spawner/random/contraband/shotgun_shells = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c46x30 = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c10mm = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c223 = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c45 = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c38 = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c40sol = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c762x54mmr = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c585sol = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c762x39 = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c762x51 = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/shotgun_shells = 30,
+		/obj/effect/spawner/random/contraband/ammo_box/c35sol = 30,
 		/obj/effect/spawner/random/armory/strilka = 30,
-		/obj/effect/spawner/random/contraband/c35sol = 30,
 		/obj/effect/spawner/random/sakhno = 30,
 		/obj/effect/spawner/random/sakhno/ammo = 30,
 		/obj/effect/spawner/random/contraband/amk = 30,

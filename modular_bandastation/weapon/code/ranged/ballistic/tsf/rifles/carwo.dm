@@ -218,7 +218,7 @@
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/carwo/auto/xar/black
-	desc = parent_type::desc + "<br>Окрашенна в тактический черный цвет."
+	desc = parent_type::desc + "<br>Окрашена в тактический черный цвет."
 	icon_state = "xar10_black"
 	worn_icon_state = "xar10_black"
 	inhand_icon_state = "xar10_black"

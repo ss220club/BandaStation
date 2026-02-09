@@ -122,7 +122,7 @@
 /obj/item/clothing/head/helmet/marine/security/tsf_heavy
 	name = "'Juggernaut' helmet"
 	desc = "Тяжелый бронированный шлем ТСФ, состоит из усиленных сплавов титана и пластали. \
-		Отлично защищает от любых повреждений, особенно от пуль. Для самых серьезныз защитников Федерации."
+		Отлично защищает от любых повреждений, особенно от пуль. Для самых серьезных защитников Федерации."
 	heat_protection = HEAD
 	max_heat_protection_temperature = SPACE_HELM_MAX_TEMP_PROTECT
 	armor_type = /datum/armor/armor_heavy

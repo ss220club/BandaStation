@@ -140,7 +140,7 @@
 
 /obj/item/ammo_casing/c9x25mm/bs
 	name = "9x25mm NT bluespace bullet casing"
-	desc = "Эксперементальный пистолетный блюспейс патрон НТ калибра 9x25мм. Пробивает броню и движется быстрее чем другие пули."
+	desc = "Экспериментальный пистолетный блюспейс патрон НТ калибра 9x25мм. Пробивает броню и движется быстрее чем другие пули."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "srr-casing"
 	projectile_type = /obj/projectile/bullet/c9x25mm/bs

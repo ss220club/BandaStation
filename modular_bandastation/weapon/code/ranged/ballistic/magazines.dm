@@ -388,7 +388,7 @@
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/bs
 	name = "pistol magazine (9x25mm NT BS)"
-	desc = parent_type::desc + "<br>Содержит эксперементальные патроны с БС пулями."
+	desc = parent_type::desc + "<br>Содержит экспериментальные патроны с БС пулями."
 	ammo_band_color = COLOR_AMMO_ICEBLOX
 	ammo_type = /obj/item/ammo_casing/c9x25mm/bs
 
@@ -1437,7 +1437,7 @@
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel
 
 /obj/item/ammo_box/magazine/c980_grenade/shrapnel/stingball
-	name = "Kiboko grenade box (.980 Tydhouer Singball)"
+	name = "Kiboko grenade box (.980 Tydhouer Stingball)"
 	ammo_type = /obj/item/ammo_casing/c980grenade/shrapnel/stingball
 
 /obj/item/ammo_box/magazine/c980_grenade/smoke
