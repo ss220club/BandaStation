@@ -409,6 +409,7 @@
 	},
 /obj/machinery/airalarm/directional/north,
 /obj/item/kirbyplants/random,
+/obj/machinery/firealarm/directional/west,
 /turf/open/floor/iron/dark/small,
 /area/station/escapepodbay)
 "BN" = (

@@ -160,7 +160,13 @@
 /area/station/security/armory)
 "iq" = (
 /obj/machinery/firealarm/directional/east,
-/turf/open/floor/iron/dark/textured_large,
+/obj/effect/turf_decal/trimline/red/filled/line{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 6
+	},
+/turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
 "iu" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark,
@@ -274,7 +280,6 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "nR" = (
-/obj/machinery/newscaster/directional/north,
 /obj/machinery/camera/autoname/motion/directional/north,
 /obj/structure/rack,
 /obj/item/vending_refill/security,
@@ -302,15 +307,8 @@
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
 "oy" = (
-/obj/effect/turf_decal/siding/thinplating_new/dark{
-	dir = 4
-	},
-/obj/effect/turf_decal/trimline/red/filled/line{
-	dir = 4
-	},
-/obj/effect/turf_decal/trimline/red/corner{
-	dir = 1
-	},
+/obj/effect/turf_decal/trimline/red/filled/line,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
 "qZ" = (
@@ -344,13 +342,10 @@
 /area/station/security/armory)
 "tO" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark{
-	dir = 5
+	dir = 1
 	},
 /obj/effect/turf_decal/trimline/red/filled/line{
-	dir = 5
-	},
-/obj/effect/turf_decal/trimline/red/corner{
-	dir = 8
+	dir = 1
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
@@ -376,19 +371,11 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "uJ" = (
+/obj/effect/turf_decal/trimline/red/filled/line{
+	dir = 1
+	},
 /obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 1
-	},
-/obj/machinery/holopad/secure,
-/obj/effect/turf_decal/trimline/red/filled/corner{
-	dir = 4
-	},
-/obj/effect/turf_decal/trimline/red/filled/corner{
-	dir = 1
-	},
-/obj/effect/turf_decal/trimline/red/corner,
-/obj/effect/turf_decal/trimline/red/corner{
-	dir = 8
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
@@ -399,7 +386,6 @@
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 9
 	},
-/obj/effect/turf_decal/trimline/red/corner,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
 "wX" = (
@@ -482,6 +468,7 @@
 /obj/effect/turf_decal/trimline/red/corner,
 /obj/machinery/light/floor,
 /obj/structure/cable,
+/obj/machinery/holopad/secure,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
 "Eh" = (
@@ -600,8 +587,13 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "UY" = (
-/obj/machinery/light/directional/east,
-/turf/open/floor/iron/dark/textured_large,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 5
+	},
+/obj/effect/turf_decal/trimline/red/filled/line{
+	dir = 5
+	},
+/turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
 "WX" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -619,14 +611,11 @@
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
 "XT" = (
-/obj/effect/turf_decal/siding/thinplating_new/dark{
-	dir = 8
-	},
 /obj/effect/turf_decal/trimline/red/filled/line{
-	dir = 8
+	dir = 10
 	},
-/obj/effect/turf_decal/trimline/red/corner{
-	dir = 4
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 10
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
@@ -636,14 +625,11 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "Zy" = (
-/obj/effect/turf_decal/trimline/red/corner{
-	dir = 4
-	},
-/obj/effect/turf_decal/trimline/red/corner{
-	dir = 1
-	},
-/obj/effect/turf_decal/trimline/red,
-/turf/open/floor/iron/dark/textured,
+/obj/effect/turf_decal/bot,
+/obj/machinery/flasher/portable,
+/obj/machinery/light/directional/north,
+/obj/machinery/newscaster/directional/north,
+/turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 
 (1,1,1) = {"
@@ -692,9 +678,9 @@ Ij
 Ij
 Ij
 td
-ES
-uJ
 Zy
+uJ
+oy
 xM
 Ab
 mv
