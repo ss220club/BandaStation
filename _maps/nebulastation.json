@@ -22,7 +22,6 @@
 			"Linkage": "Cross"
 		}
 	],
-<<<<<<< HEAD:_maps/nebulastation.json
 	"job_changes": {
 		"Nanotrasen Representative": {
 			"spawn_positions": 1
@@ -37,7 +36,5 @@
 			"spawn_positions": 4
 		}
 	},
-=======
->>>>>>> master:_maps/_removed_map_configs/nebulastation.json
 	"bonus_weakpoints": 2
 }
