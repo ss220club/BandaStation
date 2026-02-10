@@ -21,5 +21,19 @@
 			"Baseturf": "/turf/open/openspace",
 			"Linkage": "Cross"
 		}
-	]
+	],
+	"job_changes": {
+		"Nanotrasen Representative": {
+			"spawn_positions": 1
+		},
+		"Blueshield": {
+			"spawn_positions": 1
+		},
+		"Magistrate": {
+			"spawn_positions": 1
+		},
+		"Explorer": {
+			"spawn_positions": 4
+		}
+	}
 }
