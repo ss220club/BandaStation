@@ -1421,6 +1421,10 @@
 /obj/structure/flora/bush/large/style_3,
 /turf/open/floor/grass,
 /area/space)
+"sk" = (
+/obj/structure/chair/comfy/red,
+/turf/open/floor/wood/tile/oak,
+/area/space)
 "sq" = (
 /obj/effect/turf_decal/siding/wideplating/dark/corner{
 	dir = 1
@@ -2666,6 +2670,12 @@
 /obj/structure/flora/bush/flowers_yw/style_random,
 /turf/open/floor/grass,
 /area/space)
+"HH" = (
+/obj/structure/statue/statue_oll{
+	pixel_y = 5
+	},
+/turf/open/floor/stone,
+/area/space)
 "HK" = (
 /obj/structure/flora/bush/fullgrass/style_3,
 /turf/open/water/alternative,
@@ -3211,6 +3221,12 @@
 /obj/effect/turf_decal/siding/wideplating/dark/corner,
 /turf/open/floor/grass,
 /area/space)
+"Oh" = (
+/obj/structure/chair/comfy/red{
+	dir = 1
+	},
+/turf/open/floor/wood/tile/oak,
+/area/space)
 "Ol" = (
 /obj/structure/flora/rock/pile/jungle/style_2,
 /turf/open/floor/grass,
@@ -3656,6 +3672,13 @@
 /area/space)
 "TR" = (
 /turf/closed/indestructible/wood,
+/area/space)
+"TS" = (
+/obj/structure/statue/statue_oll{
+	dir = 1;
+	pixel_y = 5
+	},
+/turf/open/floor/stone,
 /area/space)
 "TX" = (
 /obj/effect/turf_decal/siding/thinplating{
@@ -20886,13 +20909,13 @@ uV
 uV
 tJ
 Hd
-xn
+HH
 Hd
 xf
 yy
 iL
 Hd
-xn
+TS
 Hd
 rJ
 uV
@@ -28991,9 +29014,9 @@ Tk
 Tk
 Tk
 Tk
-Tk
-Tk
-Tk
+sk
+vq
+Oh
 Tk
 Tk
 HX
@@ -30226,7 +30249,7 @@ Hd
 YP
 ZQ
 cv
-xn
+TS
 HN
 ZQ
 eo
@@ -30832,7 +30855,7 @@ Hd
 xr
 ZQ
 tU
-xZ
+HH
 tv
 ZQ
 eo
@@ -32021,9 +32044,9 @@ Tk
 Tk
 Tk
 Tk
-Tk
-Tk
-Tk
+sk
+vq
+Oh
 Tk
 Tk
 HX
@@ -37304,7 +37327,7 @@ xZ
 NC
 Hd
 KM
-Sa
+HH
 kt
 iv
 lZ
@@ -39310,7 +39333,7 @@ Hd
 Hd
 EW
 Hd
-xZ
+HH
 Hd
 Vx
 uY
