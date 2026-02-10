@@ -230,6 +230,17 @@
 	layer = ABOVE_MOB_LAYER
 	abstract_type = /obj/structure/statue/statue_holoplanet
 
+/obj/structure/statue/statue_oll
+	name = "Мраморная статуя"
+	desc = "Эта мраморная статуя с девушкой, которая держит кувшин. Олицетворяет собой плодородие и заботу о природе."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "statue_oll"
+	layer = ABOVE_MOB_LAYER
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/statue_oll
+
 
 // Dummies
 /**
