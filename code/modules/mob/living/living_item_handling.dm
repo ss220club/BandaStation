@@ -176,8 +176,8 @@
 		return
 
 	balloon_alert_to_viewers("предлагает что-то")
-	visible_message(span_notice("[declent_ru(NOMINATIVE)] предлагает [offered ? "[offered.declent_ru(ACCUSATIVE)] " : ""][offered_item.declent_ru(ACCUSATIVE)]."), \
-					span_notice("Вы предлагаете [offered ? "[offered.declent_ru(ACCUSATIVE)] " : ""][offered_item.declent_ru(ACCUSATIVE)]."), null, 2)
+	visible_message(span_notice("[declent_ru(NOMINATIVE)] предлагает [offered ? "[offered.declent_ru(DATIVE)] " : ""][offered_item.declent_ru(ACCUSATIVE)]."), \
+					span_notice("Вы предлагаете [offered ? "[offered.declent_ru(DATIVE)] " : ""][offered_item.declent_ru(ACCUSATIVE)]."), null, 2)
 
 	apply_status_effect(/datum/status_effect/offering, offered_item, null, offered)
 

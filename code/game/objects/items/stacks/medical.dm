@@ -146,8 +146,8 @@
 	else if(other_delay)
 		if(!silent)
 			user.visible_message(
-				span_notice("[user] начинает применять [src.declent_ru(ACCUSATIVE)] на [patient.declent_ru(DATIVE)]."),
-				span_notice("Вы начинаете применять [src.declent_ru(ACCUSATIVE)] на [patient.declent_ru(DATIVE)]..."),
+				span_notice("[user] начинает применять [src.declent_ru(ACCUSATIVE)] на [patient.declent_ru(PREPOSITIONAL)]."),
+				span_notice("Вы начинаете применять [src.declent_ru(ACCUSATIVE)] на [patient.declent_ru(PREPOSITIONAL)]..."),
 				visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 			)
 		if(!do_after(
@@ -165,8 +165,8 @@
 	else
 		if(!silent)
 			user.visible_message(
-				span_notice("[user] применяет [src.declent_ru(ACCUSATIVE)] на [patient.declent_ru(DATIVE)]."),
-				span_notice("Вы применяете [src.declent_ru(ACCUSATIVE)] на [patient.declent_ru(DATIVE)]."),
+				span_notice("[user] применяет [src.declent_ru(ACCUSATIVE)] на [patient.declent_ru(PREPOSITIONAL)]."),
+				span_notice("Вы применяете [src.declent_ru(ACCUSATIVE)] на [patient.declent_ru(PREPOSITIONAL)]."),
 				visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 			)
 
@@ -268,7 +268,7 @@
 			return FALSE
 		if(!IS_ORGANIC_LIMB(affecting)) //Limb must be organic to be healed - RR
 			if(!silent)
-				carbon_patient.balloon_alert(user, "[affecting.plaintext_zone[ACCUSATIVE]] не органическая!")
+				carbon_patient.balloon_alert(user, "[affecting.plaintext_zone] не органическая!")
 			return FALSE
 
 		var/datum/wound/burn/flesh/any_burn_wound = locate() in affecting.wounds
@@ -286,7 +286,7 @@
 				else if(!affecting.brute_dam && !affecting.burn_dam) // not hurt at all
 					carbon_patient.balloon_alert(user, "[affecting.plaintext_zone] не повреждена!")
 				else // probably hurt in some way but we are not the right item for this
-					carbon_patient.balloon_alert(user, "не вылечить [affecting.plaintext_zone] с помощью [declent_ru(name, ACCUSATIVE)]!")
+					carbon_patient.balloon_alert(user, "не вылечить [affecting.plaintext_zone] с помощью [declent_ru(name, GENITIVE)]!")
 			return FALSE
 		return TRUE
 
@@ -554,7 +554,7 @@
 /obj/item/stack/medical/suture
 	name = "suture"
 	desc = "Базовые стерильные швы, используемые для зашивания порезов, рваных ран и остановки кровотечения."
-	//gender = PLURAL
+	gender = PLURAL
 	singular_name = "suture"
 	icon_state = "suture"
 	self_delay = 3 SECONDS
