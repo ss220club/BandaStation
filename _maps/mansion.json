@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "map_name": "Mansion",
+  "map_path": "map_files/mansion",
+  "map_file": "mansion.dmm",
+  "fluff_name": "The Olshevsky Family mansion",
+  "space_ruin_levels": 0,
+  "space_empty_levels": 0,
+  "main_floor": 1,
+  "planetary": 1,
+  "give_players_hooks": 1,
+  "shuttles": {
+    "ferry": "ferry_fancy",
+    "whiteship": "whiteship_delta"
+  },
+  "traits": [
+    {
+      "Up": true,
+      "Linkage": null,
+      "Baseturf": "/turf/open/floor/grass",
+      "Gravity": true,
+      "No Parallax": true
+    },
+    {
+      "Down": true,
+      "Linkage": null,
+      "Baseturf": "/turf/open/misc/dirt",
+      "Gravity": true,
+      "No Parallax": true
+    }
+  ]
+}

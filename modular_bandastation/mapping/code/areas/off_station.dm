@@ -150,3 +150,35 @@
 
 /area/centcom/central_command_areas/srt/brief_srt
 	name = "ЦК - Брифинг ГСН"
+
+// Event: Особняк Ольшевских на Терре
+
+/area/mansion/main
+	name = "Терра"
+	icon = 'modular_bandastation/mapping/icons/areas/areas_mansion.dmi'
+	icon_state = "main"
+	default_gravity = 1
+	area_has_base_lighting = 1
+	base_lighting_alpha = 255
+	base_lighting_color = "#BFD7FF"
+	light_color = "#BFD7FF"
+
+/area/mansion/caves
+	name = "Пещеры"
+	icon = 'modular_bandastation/mapping/icons/areas/areas_mansion.dmi'
+	icon_state = "caves"
+	default_gravity = 1
+
+/area/mansion/premises
+	name = "Помещение"
+	icon = 'modular_bandastation/mapping/icons/areas/areas_mansion.dmi'
+	icon_state = "premises"
+	default_gravity = 1
+	requires_power = 1
+
+/area/mansion/oll_mansion
+	name = "Особняк"
+	icon = 'modular_bandastation/mapping/icons/areas/areas_mansion.dmi'
+	icon_state = "mansion"
+	default_gravity = 1
+	requires_power = 1
