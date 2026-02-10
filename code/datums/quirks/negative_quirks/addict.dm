@@ -3,7 +3,7 @@
 	desc = "Вы зависимы от того, чего не существует. Страдайте."
 	gain_text = span_danger("Вы вдруг почувствовали тягу к... чему-то? Вы не уверены, к чему конкретно.")
 	medical_record_text = "У пациента есть зависимость к чему-то, но он отказывается говорить, к чему конкретно."
-	abstract_parent_type = /datum/quirk/item_quirk/addict
+	abstract_type = /datum/quirk/item_quirk/addict
 	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_PROCESSES
 	no_process_traits = list(TRAIT_LIVERLESS_METABOLISM)
 	var/datum/reagent/reagent_type //!If this is defined, reagent_id will be unused and the defined reagent type will be instead.
