@@ -41,7 +41,7 @@
 
 /atom/movable/screen/alert/status_effect/ashstorm_immune
 	name = "Защищённый от пепельной бури"
-	desc = "После этой еды кажется, что я родился на Лавалэнде."
+	desc = "После этой еды кажется, что я родился на Лаваленде."
 	use_user_hud_icon = TRUE
 	overlay_state = "ashstorm_immune"
 

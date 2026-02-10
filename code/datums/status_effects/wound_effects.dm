@@ -20,7 +20,7 @@
 		human_owner.physiology.bleed_mod *= WOUND_DETERMINATION_BLEED_MOD
 
 /datum/status_effect/determined/on_remove()
-	owner.visible_message(span_danger("[owner] заметно обмяк[genderize_ru(owner.gender, "", "ла", "ло", "ли")]!"), span_warning("<b>Прилив адреналина иссякает, и боль от ран возвращается ноющей волной...</b>"), vision_distance=COMBAT_MESSAGE_RANGE)
+	owner.visible_message(span_danger("[owner] заметно обмяк[genderize_ru(owner.gender, "", "ла", "ло", "ли")]!"), span_warning("<b>Прилив адреналина иссякает, и ноющая волна боли от ран возвращается...</b>"), vision_distance=COMBAT_MESSAGE_RANGE)
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		human_owner.physiology.bleed_mod /= WOUND_DETERMINATION_BLEED_MOD
@@ -67,7 +67,7 @@
 
 /atom/movable/screen/alert/status_effect/limp
 	name = "Хромание"
-	desc = "У вас повреждена одна или обе ноги, из-за чего вы замедляете шаги! Зафиксируйте её или, по крайней мере, наложите повязку!"
+	desc = "У вас повреждена одна или обе ноги, из-за чего вы замедляете шаг! Зафиксируйте её или, по крайней мере, наложите повязку!"
 	icon_state = "injury"
 
 /datum/status_effect/limp/proc/check_step(mob/whocares, OldLoc, Dir, forced)
