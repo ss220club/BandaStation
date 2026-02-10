@@ -20,6 +20,7 @@ on:
 
 jobs:
   run_integration_tests:
+    if: inputs.map != "mansion"
     # If `inputs.major` is specified, this will output `Run Tests (major.minor; map; max)`.
     # For example, `Run Tests (515.1627; runtimestation; 515)`.
     #
