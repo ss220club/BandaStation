@@ -7,3 +7,4 @@
 #include "code/energy_katana.dm"
 #include "code/ninja_explosive.dm"
 #include "code/defib.dm"
+#include "code/collar_bomb.dm"
