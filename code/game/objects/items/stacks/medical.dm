@@ -180,7 +180,7 @@
 		CRASH("Stack medical item healing a non-carbon, non-animal mob [patient] ([patient.type])")
 	if(!use(1) || !repeating || amount <= 0)
 		var/atom/alert_loc = QDELETED(src) ? user : src
-		alert_loc.balloon_alert(user, repeating ? "всё истрачено!" : "[parse_zone(healed_zone, ACCUSATIVE)] обработана")
+		alert_loc.balloon_alert(user, repeating ? "всё истрачено!" : "[parse_zone(healed_zone, NOMINATIVE)] обработана")
 		if(heal_end_sound)
 			playsound(patient, heal_end_sound, 75, TRUE, MEDIUM_RANGE_SOUND_EXTRARANGE)
 		return
