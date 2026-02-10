@@ -638,6 +638,8 @@
 		mood_change = 0
 		description = "Я покрыт кровью. Очаровательно!"
 		return
+	if(IS_DESENSITIZED(owner))
+		mood_change *= 0.5
 
 /datum/mood_event/teetotal_hangover
 	description = "Какое позорное зрелище! Вот что происходит, когда человек злоупотребляет алкоголем!"
