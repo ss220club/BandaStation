@@ -134,7 +134,7 @@
 //---- Curse of Paralysis
 
 /datum/heretic_knowledge/curse/paralysis
-	abstract_parent_type = /datum/heretic_knowledge/curse/paralysis
+	abstract_type = /datum/heretic_knowledge/curse/paralysis
 	name = "Проклятие паралича"
 	desc = "Позволяет трансформировать топор, а также левую и правую ногу, чтобы наложить проклятие паралича на члена экипажа. \
 		Пока жертва проклята, она не сможет ходить. Вы можете усилить проклятие использовав предмет, к которому прикасалась жертва \
@@ -169,7 +169,7 @@
 //---- Curse of Corrosion
 
 /datum/heretic_knowledge/curse/corrosion
-	abstract_parent_type = /datum/heretic_knowledge/curse/corrosion
+	abstract_type = /datum/heretic_knowledge/curse/corrosion
 	name = "Проклятие коррозии"
 	desc = "Позволяет трансмутировать кусачки, лужу рвоты и сердце, чтобы наслать проклятие болезни на члена экипажа. \
 		Во время действия проклятия жертву будет постоянно рвать, а её органы будут постоянно получать повреждения. Вы можете усилить проклятие использовав предмет, к которому прикасалась жертва \
@@ -198,7 +198,7 @@
 //---- Curse of Transmutation
 
 /datum/heretic_knowledge/curse/transmutation
-	abstract_parent_type = /datum/heretic_knowledge/curse/transmutation
+	abstract_type = /datum/heretic_knowledge/curse/transmutation
 	name = "Проклятие преображения"
 	duration = 0 // Infinite curse, it breaks when our codex is destroyed
 	curse_color = NONE
