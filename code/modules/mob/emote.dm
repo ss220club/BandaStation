@@ -100,7 +100,7 @@
 		if(prob(fall_over_prob))
 			flippy_mcgee.Knockdown(1 SECONDS)
 			flippy_mcgee.visible_message(
-				span_notice("[flippy_mcgee.declent_ru(NOMINATIVE)] пытается сделать сальто и падает, вот болван!"),
+				span_notice("[flippy_mcgee.declent_ru(NOMINATIVE)] пытается сделать сальто и падает. Вот болван!"),
 				span_notice("Вы пытаетесь сделать сальто, не восстановив баланс после предыдущего, и падаете!")
 			)
 			if(prob(fall_over_prob/2))
