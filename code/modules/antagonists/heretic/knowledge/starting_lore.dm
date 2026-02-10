@@ -330,10 +330,10 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  */
 /datum/heretic_knowledge/bookworm
 	name = "Приветствие Уоррена Кинга"
-	desc = "Позволяет трансмутировать 5 обрезков провода и лист бумаги, чтобы наделить любую ID-карту доступом к внешним шлюзам"
-	gain_text = "Gnawed into vicious-stained fingerbones, my grim invitation snaps my nauseous and clouded mind towards the heavy-set door. \
-	Slowly, the light dances between a crawling darkness, blanketing the fetid promenade with infinite machinations. \
-	But the King will soon take his pound of flesh. Even here, the taxman takes their cut. For there are a thousands mouths to feed."
+	desc = "Позволяет трансмутировать 5 обрезков провода и лист бумаги, чтобы наделить любую ID-карту доступом в технические туннели и к внешним шлюзам"
+	gain_text = "Впившееся в осквернённые жестокостью кости пальцев, моё мрачное приглашение рывком обращает мой мутный, подташнивающий разум к массивной двери. \
+	Свет медленно пляшет в ползущей тьме, укрывая зловонный променад бесконечными кознями. \
+	Но Король скоро получит свой фунт плоти. Даже здесь налоговик требует свою долю. Ибо есть тысяча ртов, ждущих пищи."
 	required_atoms = list(
 		/obj/item/stack/cable_coil = 5,
 		/obj/item/paper = 1,

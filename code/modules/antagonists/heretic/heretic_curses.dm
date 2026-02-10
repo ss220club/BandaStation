@@ -211,7 +211,7 @@
 		if(initial(species_type.changesource_flags) & RACE_SWAP)
 			chooseable_races[species_type.name] = species_type
 
-	var/species_name = tgui_input_list(user, "Выберите расу", "Выбери расу, в которую превратите свою жертву", chooseable_races)
+	var/species_name = tgui_input_list(user, "Выберите расу", "Выберите расу, в которую превратите свою жертву", chooseable_races)
 	if(!species_name)
 		return FALSE
 	chosen_species = chooseable_races[species_name]
@@ -219,7 +219,7 @@
 
 /datum/heretic_knowledge/curse/transmutation/curse(mob/living/carbon/human/chosen_mob, obj/item/codex_cicatrix/morbus/cursing_book)
 	if(chosen_mob.dna.species == chosen_species)
-		to_chat(chosen_mob, span_warning("Вы чувствуете как ваше тело превращяется... в себя?"))
+		to_chat(chosen_mob, span_warning("Вы чувствуете как ваше тело превращается... в себя?"))
 		return
 	chosen_mob.apply_status_effect(/datum/status_effect/race_swap, chosen_species)
 	cursing_book.transmuted_victims += WEAKREF(chosen_mob)

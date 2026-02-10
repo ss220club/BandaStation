@@ -31195,6 +31195,17 @@ prepositional = "Лунном амулете"
 gender = "male"
 
 ["Moonlight Blade"]
+nominative = "Закалённый клинок"
+genitive = "Закалённого клинка"
+dative = "Закалённому клинку"
+accusative = "Закалённый клинок"
+instrumental = "Закалённым клинком"
+prepositional = "Закалённом клинке"
+gender = "male"
+
+# MARK: Blade heretic items
+
+["Sundered Blade"]
 nominative = "Лунный клинок"
 genitive = "Лунного клинка"
 dative = "Лунному клинку"

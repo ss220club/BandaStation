@@ -176,7 +176,7 @@
 		if(isnull(chosen_one))
 			loc.balloon_alert(user, "ритуал провален, нет призраков!")
 			return FALSE
-		message_admins("[key_name_admin(chosen_one)] взял контроль над ([key_name_admin(soon_to_be_ghoul)]) чтобы заменить АФК-игрока.")
+		message_admins("[key_name_admin(chosen_one)] has taken control of ([key_name_admin(soon_to_be_ghoul)]) to replace an AFK player.")
 		soon_to_be_ghoul.ghostize(FALSE)
 		soon_to_be_ghoul.PossessByPlayer(chosen_one.key)
 

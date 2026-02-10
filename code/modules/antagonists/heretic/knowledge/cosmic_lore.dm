@@ -320,7 +320,7 @@
 		to_chat(owner, span_hierophant("Ваш запрос о смене личности [to_reset], судя по всему, был отклонён... Похоже пока придётся мириться с этим."))
 		StartCooldown()
 		return FALSE
-	to_chat(to_reset, span_hierophant("Ваш призыватель перезагрузил вас, и вашим телом завладел призрак. Похоже, он был не очень доволен вышими действиями."))
+	to_chat(to_reset, span_hierophant("Ваш призыватель перезагрузил вас, и вашим телом завладел призрак. Похоже, он был не очень доволен вашими действиями."))
 	to_chat(owner, span_hierophant("Разум [to_reset] изменился, чтобы лучше подходить вам."))
 	message_admins("[key_name_admin(chosen_one)] взял контроль над ([ADMIN_LOOKUPFLW(to_reset)])")
 	to_reset.ghostize(FALSE)

@@ -115,7 +115,7 @@
 		hand.balloon_alert(caster, "уже держу орган!")
 		return ITEM_INTERACT_FAILURE
 	if(to_grab.organ_flags & ORGAN_ROBOTIC && !allow_cyber_organs)
-		hand.balloon_alert(caster, "кибернетичесские органы недопустимы!")
+		hand.balloon_alert(caster, "кибернетические органы недопустимы!")
 		return ITEM_INTERACT_FAILURE
 	if(!caster.transferItemToLoc(to_grab, hand))
 		hand.balloon_alert(caster, "не могу взять орган!")
