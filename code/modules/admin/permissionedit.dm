@@ -626,6 +626,18 @@ GLOBAL_LIST_INIT(permission_action_types, list(
 		var/next_rank = input("Please select a rank, or select [RANK_DONE] if you are finished.") as null|anything in display_rank_names
 
 		if (isnull(next_rank))
+			// SS220 EDIT START - FIX
+			// Если это НОВЫЙ админ и запись уже создана в БД,
+			// не оставляем NEW ADMIN висеть
+			if(use_db && !target_holder)
+				var/datum/db_query/query_remove_admin = SSdbcore.NewQuery(
+					"DELETE FROM [format_table_name(CONFIG_GET(string/admin_table))] WHERE ckey = :ckey",
+					list("ckey" = admin_ckey)
+				)
+				query_remove_admin.warn_execute()
+				qdel(query_remove_admin)
+				to_chat(usr, span_danger("PERMISSIONEDIT next_rank - Ошибка в добавлении администратора из-за отсутствующего ранга. Попробуйте еще раз."), confidential = TRUE)
+			// SS220 EDIT START - FIX
 			return
 
 		if (next_rank == RANK_DONE)
