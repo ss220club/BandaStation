@@ -634,9 +634,13 @@ GLOBAL_LIST_INIT(permission_action_types, list(
 					"DELETE FROM [format_table_name(CONFIG_GET(string/admin_table))] WHERE ckey = :ckey",
 					list("ckey" = admin_ckey)
 				)
-				query_remove_admin.warn_execute()
-				qdel(query_remove_admin)
-				to_chat(usr, span_danger("PERMISSIONEDIT next_rank - Ошибка в добавлении администратора из-за отсутствующего ранга. Попробуйте еще раз."), confidential = TRUE)
+				if(!query_remove_admin.warn_execute()){
+					qdel(query_remove_admin)
+					to_chat(usr, span_danger("Ошибка в запросе чистки при некорректной записи добавления нового администратора. Попробуйте добавить его еще раз, если права не выданы - сообщите разработчику с правами к БД, он разберется. Наверное. \[PERMISSIONEDIT next_rank\]"), confidential = TRUE)
+					return
+				}
+				QDEL_NULL(query_remove_admin)
+				to_chat(usr, span_danger("Запись о новом администраторе была удалена, так как ему не был присвоен ранг. Попробуйте еще раз. \[PERMISSIONEDIT next_rank\]"), confidential = TRUE)
 			// SS220 EDIT START - FIX
 			return
 
