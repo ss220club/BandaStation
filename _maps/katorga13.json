@@ -3,7 +3,7 @@
 	"map_name": "katorga13",
 	"map_path": "map_files/katorga13",
 	"map_file": "katorga13.dmm",
-	"main_floor": 2,
+	"main_floor": 1,
 	"shuttles": {
 		"emergency": "emergency_kilo",
 		"ferry": "ferry_kilo",
@@ -12,14 +12,6 @@
 	},
 	"traits": [
 		{
-			"Linkage": "Cross"
-		},
-		{
-			"Baseturf": "/turf/open/openspace",
-			"Linkage": "Cross"
-		},
-		{
-			"Baseturf": "/turf/open/misc/basalt/airless",
 			"Linkage": "Cross"
 		}
 	],
