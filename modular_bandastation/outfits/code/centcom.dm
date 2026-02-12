@@ -42,7 +42,7 @@
 	name = "Nanotrasen Navy Junior Officer Chief"
 
 	suit = /obj/item/clothing/suit/armor/vest
-	suit_store = /obj/item/gun/ballistic/rifle/boltaction
+	suit_store = /obj/item/gun/ballistic/automatic/pistol/cm23
 	belt = /obj/item/melee/baton/security/loaded
 	head = /obj/item/clothing/head/beret/cent_intern
 	l_hand = /obj/item/megaphone
@@ -161,10 +161,10 @@
 /datum/outfit/centcom/death_commando/officer
 	backpack_contents = list(
 		/obj/item/ammo_box/speedloader/c357 = 1,
-		/obj/item/flashlight = 1,
+		/obj/item/flashlight/seclite = 1,
 		/obj/item/grenade/c4/x4 = 1,
-		/obj/item/storage/box/flashbangs = 1,
-		/obj/item/storage/medkit/regular = 1,
+		/obj/item/storage/box/syndie_kit/frag_grenades = 1,
+		/obj/item/storage/medkit/tactical/premium = 1,
 		/obj/item/disk/nuclear/death_commando = 1,
 	)
 
