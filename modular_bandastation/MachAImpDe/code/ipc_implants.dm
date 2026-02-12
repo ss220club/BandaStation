@@ -289,7 +289,7 @@
 	if(!.)
 		return FALSE
 
-	RegisterSignal(imp_in, COMSIG_ATOM_EMP_ACT, PROC_REF(on_emp))
+	RegisterSignal(imp_in, COMSIG_ATOM_PRE_EMP_ACT, PROC_REF(on_emp))
 
 	if(!silent && ishuman(imp_in))
 		to_chat(imp_in, span_notice("EMP-протектор активирован."))
@@ -302,7 +302,7 @@
 	SIGNAL_HANDLER
 
 	if(!ishuman(imp_in))
-		return
+		return EMP_PROTECT_SELF | EMP_PROTECT_CONTENTS
 
 	var/mob/living/carbon/human/H = imp_in
 
@@ -320,11 +320,11 @@
 			to_chat(H, span_warning("EMP-протектор блокировал удар, но перегрелся и обжег вас!"))
 
 	// Блокируем ЕМП урон
-	return COMPONENT_EMP_PREVENT
+	return EMP_PROTECT_SELF | EMP_PROTECT_CONTENTS
 
 /obj/item/implant/emp_protector/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
-	UnregisterSignal(imp_in, COMSIG_ATOM_EMP_ACT)
+	UnregisterSignal(imp_in, COMSIG_ATOM_PRE_EMP_ACT)
 
 	if(!silent && ishuman(source))
 		to_chat(source, span_warning("EMP-протектор деактивирован."))
@@ -401,7 +401,7 @@
 		// Отключаем магбуты если активны
 		if(magboots_active)
 			REMOVE_TRAIT(H, TRAIT_NO_SLIP_ALL, "magnetic_leg")
-			H.remove_movespeed_modifier(/datum/movespeed_modifier/magboots)
+			REMOVE_TRAIT(H, TRAIT_NEGATES_GRAVITY, "magnetic_leg")
 
 		var/datum/action/toggle_magboots/action = locate() in H.actions
 		if(action)
@@ -418,30 +418,35 @@
 	button_icon_state = "magboots0"
 	background_icon_state = "bg_tech"
 
-/datum/action/toggle_magboots/Activate(atom/target)
+/datum/action/toggle_magboots/Trigger(trigger_flags)
+	. = ..()
+	if(!.)
+		return FALSE
+
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
-		return
+		return FALSE
 
 	// Находим любой magnetic_leg имплант
 	var/obj/item/implant/ipc/magnetic_leg/mag_implant = locate() in H.implants
 	if(!mag_implant)
-		return
+		return FALSE
 
 	mag_implant.magboots_active = !mag_implant.magboots_active
 
 	if(mag_implant.magboots_active)
 		ADD_TRAIT(H, TRAIT_NO_SLIP_ALL, "magnetic_leg")
-		H.add_movespeed_modifier(/datum/movespeed_modifier/magboots)
+		ADD_TRAIT(H, TRAIT_NEGATES_GRAVITY, "magnetic_leg")
 		to_chat(H, span_notice("Магнитные ботинки активированы."))
 		button_icon_state = "magboots1"
 	else
 		REMOVE_TRAIT(H, TRAIT_NO_SLIP_ALL, "magnetic_leg")
-		H.remove_movespeed_modifier(/datum/movespeed_modifier/magboots)
+		REMOVE_TRAIT(H, TRAIT_NEGATES_GRAVITY, "magnetic_leg")
 		to_chat(H, span_notice("Магнитные ботинки деактивированы."))
 		button_icon_state = "magboots0"
 
 	build_all_button_icons()
+	return TRUE
 
 /obj/item/implantcase/ipc/magnetic_leg
 	name = "implant case - 'Magnetic Leg'"
