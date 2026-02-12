@@ -35,11 +35,11 @@
 // ============================================
 // 1. MAGNETIC JOINTS IMPLANT
 // ============================================
-// Устанавливается в руки или ноги - защита от падений
+// Позволяет прикреплять конечность обратно без хирургии
 
 /obj/item/implant/ipc/magnetic_joints
 	name = "Magnetic Joints Implant"
-	desc = "Магнитные суставы для конечностей IPC. Обеспечивают стабильность и защиту от падений. Устанавливается в руки или ноги."
+	desc = "Магнитные суставы для конечностей IPC. Позволяют быстро прикрепить оторванную конечность без хирургии. Устанавливается в руки или ноги."
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
 /obj/item/implant/ipc/magnetic_joints/get_data()
@@ -47,7 +47,7 @@
 	<b>Name:</b> Magnetic Joints Implant<BR>
 	<b>Life:</b> Permanent<BR>
 	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
-	<b>Function:</b> Provides stability and prevents slipping.<BR>
+	<b>Function:</b> Allows easy limb reattachment without surgery.<BR>
 	<b>Integrity:</b> Active"}
 	return dat
 
@@ -65,11 +65,13 @@
 			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
 		return FALSE
 
-	// Даем трейт защиты от скольжения
-	ADD_TRAIT(H, TRAIT_NO_SLIP_WATER, "magnetic_joints_[installed_in_zone]")
+	// Получаем bodypart и даем трейт TRAIT_EASY_ATTACH для быстрого прикрепления
+	var/obj/item/bodypart/part = H.get_bodypart(installed_in_zone)
+	if(part)
+		ADD_TRAIT(part, TRAIT_EASY_ATTACH, "magnetic_joints")
 
 	if(!silent)
-		to_chat(H, span_notice("Магнитные суставы активированы в [installed_in_zone]. Вы чувствуете повышенную стабильность."))
+		to_chat(H, span_notice("Магнитные суставы активированы в [installed_in_zone]. Конечность можно быстро прикрепить без операции."))
 		if(user)
 			to_chat(user, span_notice("Вы успешно установили магнитные суставы."))
 
@@ -83,7 +85,10 @@
 
 	var/mob/living/carbon/human/H = source
 
-	REMOVE_TRAIT(H, TRAIT_NO_SLIP_WATER, "magnetic_joints_[installed_in_zone]")
+	// Убираем трейт с bodypart
+	var/obj/item/bodypart/part = H.get_bodypart(installed_in_zone)
+	if(part)
+		REMOVE_TRAIT(part, TRAIT_EASY_ATTACH, "magnetic_joints")
 
 	if(!silent)
 		to_chat(H, span_warning("Магнитные суставы деактивированы."))
@@ -96,11 +101,11 @@
 // ============================================
 // 2. SEALED JOINTS IMPLANT
 // ============================================
-// Укрепленные суставы - устанавливается в любую часть тела
+// Предотвращает dismemberment конечности
 
 /obj/item/implant/ipc/sealed_joints
 	name = "Sealed Joints Implant"
-	desc = "Укрепленные герметичные суставы. Увеличивают прочность части тела в которую установлены."
+	desc = "Укрепленные герметичные суставы. Предотвращают отрывание конечности без операции. Устанавливается в руки или ноги."
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
 /obj/item/implant/ipc/sealed_joints/get_data()
@@ -108,7 +113,7 @@
 	<b>Name:</b> Sealed Joints Implant<BR>
 	<b>Life:</b> Permanent<BR>
 	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
-	<b>Function:</b> Reinforces bodypart (+20% max damage).<BR>
+	<b>Function:</b> Prevents limb dismemberment without surgery.<BR>
 	<b>Integrity:</b> Active"}
 	return dat
 
@@ -126,15 +131,15 @@
 			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
 		return FALSE
 
-	// Увеличиваем max_damage конкретной части тела на 20%
+	// Устанавливаем флаг BODYPART_UNREMOVABLE для защиты от dismemberment
 	var/obj/item/bodypart/part = H.get_bodypart(installed_in_zone)
 	if(part)
-		part.max_damage *= 1.2
+		part.bodypart_flags |= BODYPART_UNREMOVABLE
 
 	if(!silent)
-		to_chat(H, span_notice("Герметичные суставы установлены в [installed_in_zone]. Конструкция усилена."))
+		to_chat(H, span_notice("Герметичные суставы установлены в [installed_in_zone]. Конечность защищена от отрывания."))
 		if(user)
-			to_chat(user, span_notice("Вы успешно установили укрепленные суставы."))
+			to_chat(user, span_notice("Вы успешно установили герметичные суставы."))
 
 	return TRUE
 
@@ -146,13 +151,13 @@
 
 	var/mob/living/carbon/human/H = source
 
-	// Возвращаем max_damage к норме
+	// Убираем флаг BODYPART_UNREMOVABLE
 	var/obj/item/bodypart/part = H.get_bodypart(installed_in_zone)
 	if(part)
-		part.max_damage /= 1.2
+		part.bodypart_flags &= ~BODYPART_UNREMOVABLE
 
 	if(!silent)
-		to_chat(H, span_warning("Герметичные суставы удалены."))
+		to_chat(H, span_warning("Герметичные суставы удалены. Конечность больше не защищена."))
 
 /obj/item/implantcase/ipc/sealed_joints
 	name = "implant case - 'Sealed Joints'"
