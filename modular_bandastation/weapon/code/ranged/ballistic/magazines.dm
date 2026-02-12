@@ -404,6 +404,10 @@
 	ammo_band_color = COLOR_ADMIN_PINK
 	ammo_type = /obj/item/ammo_casing/c9x25mm/bs/admin
 
+/obj/item/ammo_box/magazine/c9x25mm_pistol/bs/admin/rubber
+	name = "pistol magazine (9x25mm NT BS-MR)"
+	ammo_type = /obj/item/ammo_casing/c9x25mm/bs/admin/rubber
+
 // MARK: CM5 - SMG
 /obj/item/ammo_box/magazine/cm5
 	name = "SMG magazine (9x25mm NT)"

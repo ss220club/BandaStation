@@ -152,6 +152,10 @@
 	icon_state = "srr-casing"
 	projectile_type = /obj/projectile/bullet/c9x25mm/bs/admin
 
+/obj/item/ammo_casing/c9x25mm/bs/admin/rubber
+	name = "9x25mm NT bluespace-M rubber bullet casing"
+	projectile_type = /obj/projectile/bullet/c9x25mm/bs/admin/rubber
+
 // MARK: .223 aka 5.56mm
 /obj/item/ammo_casing/a223
 	name = "5.56x45mm bullet casing"

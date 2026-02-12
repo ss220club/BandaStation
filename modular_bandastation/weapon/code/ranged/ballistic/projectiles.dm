@@ -340,6 +340,13 @@
 	embed_chance = 100
 	fall_chance = 0
 
+/obj/projectile/bullet/c9x25mm/bs/admin/rubber
+	name = "9x25mm NT bluespace-moth rubber bullet"
+	damage = 0
+	stamina = 30
+	wound_bonus = 0
+	exposed_wound_bonus = 0
+
 // MARK: .223 aka 5.56mm
 /obj/projectile/bullet/a223
 	name = "5.56x45mm bullet"
