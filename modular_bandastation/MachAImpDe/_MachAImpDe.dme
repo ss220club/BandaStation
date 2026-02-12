@@ -1,6 +1,7 @@
 #include "_MachAImpDe.dm"
 
 #include "code/ipc_cooling_items.dm"
+#include "code/ipc_implants.dm"
 #include "code/synthetic_diagnostic_terminal.dm"
 // BEGIN_INTERNALS
 // END_INTERNALS
