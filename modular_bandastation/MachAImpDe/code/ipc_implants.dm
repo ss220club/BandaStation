@@ -7,8 +7,8 @@
 /obj/item/implant/ipc
 	name = "IPC implant"
 	desc = "Базовый имплант для IPC."
-	icon = 'icons/obj/medical/implants.dmi'
-	icon_state = "implant_default"
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "imp_jetpack-on"
 	w_class = WEIGHT_CLASS_TINY
 	/// В какой части тела установлен
 	var/installed_in_zone = null
@@ -259,8 +259,8 @@
 /obj/item/implant/emp_protector
 	name = "EMP-Protector Implant"
 	desc = "Защита от ЕМП ударов. Устанавливается в грудную клетку. Для IPC - нагревает процессор при блокировке, для других - наносит burn урон."
-	icon = 'icons/obj/medical/implants.dmi'
-	icon_state = "implant_default"
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "implant-reinforcers"
 	w_class = WEIGHT_CLASS_TINY
 	var/heat_per_use = 15 // Нагрев для IPC
 	var/burn_damage = 10 // Урон для органиков
