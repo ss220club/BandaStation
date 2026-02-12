@@ -6,6 +6,3 @@
 	. = ..()
 	REMOVE_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
-/obj/item/melee/energy/sword/nullrod/pirate/Initialize(mapload)
-	. = ..()
-	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
