@@ -10,6 +10,8 @@
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "imp_jetpack-on"
 	w_class = WEIGHT_CLASS_TINY
+	// Не даем action button по умолчанию - только нужным имплантам
+	actions_types = null
 	/// В какой части тела установлен
 	var/installed_in_zone = null
 	/// Список разрешенных зон для установки
@@ -167,23 +169,26 @@
 // ============================================
 // 3. REACTIVE REPAIR IMPLANT
 // ============================================
-// Автоматический ремонт конкретной части тела
+// Автоматический ремонт всего тела, устанавливается в грудь
 
 /obj/item/implant/ipc/reactive_repair
 	name = "Reactive Repair Implant"
-	desc = "Система автоматического ремонта для конечности IPC. Чинит часть тела в которую установлена."
-	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+	desc = "Система автоматического ремонта для IPC. Чинит все тело. Устанавливается в грудную клетку и расходует заряд батарейки."
+	allowed_zones = list(BODY_ZONE_CHEST)
+	actions_types = list(/datum/action/item_action/toggle_repair)
 	var/repair_amount = 2
 	var/repair_cooldown = 30 SECONDS
 	var/last_repair_time = 0
+	var/repair_active = TRUE  // По умолчанию включен
+	var/power_cost = 50 // Стоимость одного ремонта в единицах заряда
 
 /obj/item/implant/ipc/reactive_repair/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Reactive Repair Implant<BR>
-	<b>Life:</b> Permanent<BR>
+	<b>Life:</b> Depends on battery charge<BR>
 	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
-	<b>Function:</b> Auto-repair (2 HP/30s for this bodypart).<BR>
-	<b>Integrity:</b> Active"}
+	<b>Function:</b> Auto-repair (2 HP/30s for all body, costs [power_cost] charge).<BR>
+	<b>Status:</b> [repair_active ? "ACTIVE" : "INACTIVE"]"}
 	return dat
 
 /obj/item/implant/ipc/reactive_repair/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
@@ -200,37 +205,58 @@
 			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
 		return FALSE
 
-	// Регистрируем сигнал на получение урона
-	RegisterSignal(H, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_damage))
+	// Регистрируем процесс ремонта
+	START_PROCESSING(SSobj, src)
 
 	if(!silent)
-		to_chat(H, span_notice("Система реактивного ремонта активирована для [installed_in_zone]."))
+		to_chat(H, span_notice("Система реактивного ремонта активирована. Чинит все тело, расходует заряд батарейки."))
 		if(user)
 			to_chat(user, span_notice("Вы успешно установили имплант реактивного ремонта."))
 
 	return TRUE
 
-/obj/item/implant/ipc/reactive_repair/proc/on_damage(mob/living/carbon/human/source, damage, damagetype)
-	SIGNAL_HANDLER
+/obj/item/implant/ipc/reactive_repair/process(seconds_per_tick)
+	if(!imp_in || !repair_active)
+		return
 
 	// Проверяем кулдаун
 	if(world.time < last_repair_time + repair_cooldown)
 		return
 
-	// Чиним только конкретную часть тела
-	var/obj/item/bodypart/part = source.get_bodypart(installed_in_zone)
-	if(!part)
+	if(!ishuman(imp_in))
 		return
 
-	if(part.brute_dam <= 0 && part.burn_dam <= 0)
+	var/mob/living/carbon/human/H = imp_in
+
+	// Проверяем батарейку
+	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!battery || battery.charge < power_cost)
+		to_chat(H, span_warning("Реактивный ремонт деактивирован: недостаточно заряда батарейки!"))
+		repair_active = FALSE
 		return
 
-	if(part.brute_dam > part.burn_dam)
-		part.heal_damage(repair_amount, 0)
-		to_chat(source, span_notice("Реактивный ремонт устраняет механические повреждения [part.plaintext_zone]."))
+	// Ищем поврежденные части тела
+	var/obj/item/bodypart/damaged_part = null
+	var/max_damage = 0
+	for(var/obj/item/bodypart/part in H.bodyparts)
+		var/total_damage = part.brute_dam + part.burn_dam
+		if(total_damage > max_damage)
+			max_damage = total_damage
+			damaged_part = part
+
+	if(!damaged_part || max_damage <= 0)
+		return
+
+	// Расходуем заряд
+	battery.charge = max(battery.charge - power_cost, 0)
+
+	// Чиним наиболее поврежденную часть
+	if(damaged_part.brute_dam > damaged_part.burn_dam)
+		damaged_part.heal_damage(repair_amount, 0)
+		to_chat(H, span_notice("Реактивный ремонт устраняет механические повреждения [damaged_part.plaintext_zone]. Батарея: [round(battery.charge)]/[battery.maxcharge]"))
 	else
-		part.heal_damage(0, repair_amount)
-		to_chat(source, span_notice("Реактивный ремонт устраняет термические повреждения [part.plaintext_zone]."))
+		damaged_part.heal_damage(0, repair_amount)
+		to_chat(H, span_notice("Реактивный ремонт устраняет термические повреждения [damaged_part.plaintext_zone]. Батарея: [round(battery.charge)]/[battery.maxcharge]"))
 
 	last_repair_time = world.time
 
@@ -240,11 +266,38 @@
 	if(!ishuman(source))
 		return
 
-	var/mob/living/carbon/human/H = source
-	UnregisterSignal(H, COMSIG_MOB_APPLY_DAMAGE)
+	STOP_PROCESSING(SSobj, src)
 
 	if(!silent)
-		to_chat(H, span_warning("Система реактивного ремонта деактивирована."))
+		to_chat(source, span_warning("Система реактивного ремонта деактивирована."))
+
+/datum/action/item_action/toggle_repair
+	name = "Toggle Reactive Repair"
+	desc = "Включить/выключить систему реактивного ремонта."
+	button_icon = 'icons/mob/actions/actions_items.dmi'
+	button_icon_state = "deploy_nanites"
+	background_icon_state = "bg_tech"
+
+/datum/action/item_action/toggle_repair/Trigger(trigger_flags)
+	. = ..()
+	if(!.)
+		return FALSE
+
+	var/obj/item/implant/ipc/reactive_repair/repair_implant = target
+	if(!istype(repair_implant))
+		return FALSE
+
+	repair_implant.repair_active = !repair_implant.repair_active
+
+	if(repair_implant.repair_active)
+		button_icon_state = "deploy_nanites"
+		to_chat(owner, span_notice("Реактивный ремонт активирован."))
+	else
+		button_icon_state = "recall_nanites"
+		to_chat(owner, span_notice("Реактивный ремонт деактивирован."))
+
+	build_all_button_icons()
+	return TRUE
 
 /obj/item/implantcase/ipc/reactive_repair
 	name = "implant case - 'Reactive Repair'"
@@ -262,6 +315,7 @@
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "implant-reinforcers"
 	w_class = WEIGHT_CLASS_TINY
+	actions_types = null  // Нет action button
 	var/heat_per_use = 15 // Нагрев для IPC
 	var/burn_damage = 10 // Урон для органиков
 	var/installed_in_zone = null
@@ -489,17 +543,17 @@
 	// Убираем трейт NOHUNGER
 	REMOVE_TRAIT(H, TRAIT_NOHUNGER, SPECIES_TRAIT)
 
-	// Регистрируем обработку еды
-	RegisterSignal(H, COMSIG_FOOD_EATEN, PROC_REF(on_food_eaten))
+	// Регистрируем обработку еды - используем COMSIG_LIVING_EAT_FOOD
+	RegisterSignal(H, COMSIG_LIVING_EAT_FOOD, PROC_REF(on_food_eaten))
 
 	if(!silent)
-		to_chat(H, span_notice("Био-генератор активирован. Вы можете употреблять органическую пищу."))
+		to_chat(H, span_notice("Био-генератор активирован. Вы можете употреблять органическую пищу для зарядки батарейки."))
 		if(user)
 			to_chat(user, span_notice("Вы успешно установили био-генератор."))
 
 	return TRUE
 
-/obj/item/implant/ipc/bio_generator/proc/on_food_eaten(mob/living/carbon/human/source, atom/food, mob/feeder)
+/obj/item/implant/ipc/bio_generator/proc/on_food_eaten(mob/living/carbon/human/source, atom/food)
 	SIGNAL_HANDLER
 
 	if(!istype(source.dna?.species, /datum/species/ipc))
@@ -510,11 +564,29 @@
 	if(!battery)
 		return
 
-	// Преобразуем еду в энергию
-	var/energy_gain = 50
+	// Получаем reagents из еды
+	if(!food.reagents)
+		return
 
+	// Считаем nutrition value на основе всех consumable reagents в еде
+	var/total_nutrition = 0
+	for(var/datum/reagent/consumable/R in food.reagents.reagent_list)
+		// nutriment_factor * объем * коэффициент
+		var/nutrition_value = R.get_nutriment_factor(source) * R.volume
+		total_nutrition += nutrition_value
+
+	if(total_nutrition <= 0)
+		return
+
+	// Конвертируем nutrition в заряд батарейки
+	// 1 nutrition ≈ 2 charge (можно регулировать коэффициент)
+	var/energy_gain = total_nutrition * 2
+
+	var/old_charge = battery.charge
 	battery.charge = min(battery.charge + energy_gain, battery.maxcharge)
-	to_chat(source, span_notice("Био-генератор переработал пищу в [energy_gain] единиц энергии."))
+	var/actual_gain = battery.charge - old_charge
+
+	to_chat(source, span_notice("Био-генератор переработал пищу и зарядил батарейку на [round(actual_gain)] единиц. Батарея: [round(battery.charge)]/[battery.maxcharge]"))
 
 /obj/item/implant/ipc/bio_generator/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
@@ -528,7 +600,7 @@
 	if(istype(H.dna?.species, /datum/species/ipc))
 		ADD_TRAIT(H, TRAIT_NOHUNGER, SPECIES_TRAIT)
 
-	UnregisterSignal(H, COMSIG_FOOD_EATEN)
+	UnregisterSignal(H, COMSIG_LIVING_EAT_FOOD)
 
 	if(!silent)
 		to_chat(H, span_warning("Био-генератор деактивирован."))
