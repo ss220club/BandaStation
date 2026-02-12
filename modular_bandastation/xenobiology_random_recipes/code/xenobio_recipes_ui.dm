@@ -167,7 +167,7 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 /obj/machinery/computer/camera_advanced/xenobio/post_machine_initialize()
 	. = ..()
 	if(!CONFIG_GET(flag/no_default_techweb_link) && !stored_research)
-		CONNECT_TO_RND_SERVER_ROUNDSTART(stored_research, src)
+		CONNECT_TO_RND_SERVER_ROUNDSTART_ON_STATION(stored_research, src)
 
 /obj/machinery/computer/camera_advanced/xenobio/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()
