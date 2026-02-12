@@ -1,125 +1,57 @@
 // ============================================
 // ИМПЛАНТЫ ДЛЯ IPC
+// Устанавливаются через хирургию в конкретные части тела
 // ============================================
 
-// ============================================
-// 1. ETAMIN INDUSTRY PREMIUM UPDATE
-// ============================================
-// Шасси upgrade - позволяет использовать одноразовую спец абилку шасси
-
-/obj/item/implant/etamin_chassis_upgrade
-	name = "Etamin Industry Premium Update"
-	desc = "Улучшение прошивки от Etamin Industry. Позволяет использовать уникальную способность шасси один раз."
-	icon = 'icons/obj/medical/implants.dmi' // Временная иконка
-	icon_state = "implant_default"
-	w_class = WEIGHT_CLASS_TINY
-	var/ability_used = FALSE
-
-/obj/item/implant/etamin_chassis_upgrade/get_data()
-	var/dat = {"<b>Implant Specifications:</b><BR>
-	<b>Name:</b> Etamin Industry Premium Update<BR>
-	<b>Life:</b> Single Use<BR>
-	<b>Function:</b> Unlocks chassis special ability (one-time use).<BR>
-	<b>Status:</b> [ability_used ? "USED" : "READY"]"}
-	return dat
-
-/obj/item/implant/etamin_chassis_upgrade/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
-	. = ..()
-	if(!.)
-		return FALSE
-
-	if(!ishuman(target))
-		return FALSE
-
-	var/mob/living/carbon/human/H = target
-	if(!istype(H.dna?.species, /datum/species/ipc))
-		if(!silent)
-			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
-		return FALSE
-
-	// Даем абилку использования спец способности шасси
-	var/datum/action/cooldown/chassis_special/special = new()
-	special.Grant(H)
-
-	if(!silent)
-		to_chat(H, span_notice("Обновление прошивки установлено. Доступна специальная способность шасси."))
-		to_chat(user, span_notice("Вы успешно установили имплант улучшения прошивки."))
-
-	return TRUE
-
-/obj/item/implant/etamin_chassis_upgrade/removed(mob/living/source, silent = FALSE, special = FALSE)
-	. = ..()
-
-	if(!ishuman(source))
-		return
-
-	var/mob/living/carbon/human/H = source
-
-	// Удаляем абилку
-	var/datum/action/cooldown/chassis_special/action = locate() in H.actions
-	if(action)
-		action.Remove(H)
-
-	if(!silent)
-		to_chat(H, span_warning("Обновление прошивки удалено."))
-
-/obj/item/implantcase/etamin_chassis_upgrade
-	name = "implant case - 'Etamin Premium Update'"
-	desc = "Стеклянный кейс содержащий имплант обновления прошивки."
-	imp_type = /obj/item/implant/etamin_chassis_upgrade
-
-// Абилка для спец способности шасси (одноразовая)
-/datum/action/cooldown/chassis_special
-	name = "Chassis Special Ability"
-	desc = "Активирует уникальную способность вашего шасси. Одноразовое использование!"
-	button_icon = 'icons/mob/actions/actions_silicon.dmi'
-	button_icon_state = "upgrade"
-	background_icon_state = "bg_tech"
-	cooldown_time = 0 // Одноразовая
-	var/used = FALSE
-
-/datum/action/cooldown/chassis_special/IsAvailable(feedback = FALSE)
-	if(used)
-		return FALSE
-	return ..()
-
-/datum/action/cooldown/chassis_special/Activate(atom/target)
-	if(used)
-		return FALSE
-
-	var/mob/living/carbon/human/H = owner
-	if(!istype(H))
-		return FALSE
-
-	// TODO: Здесь будет логика активации спец способности в зависимости от бренда шасси
-	// Пока просто placeholder
-	to_chat(H, span_boldnotice("SPECIAL ABILITY ACTIVATED! (Placeholder - будет зависеть от бренда шасси)"))
-
-	used = TRUE
-	Remove(H)
-	return TRUE
-
-// ============================================
-// 2. MAGNETIC JOINTS IMPLANT
-// ============================================
-// Магнитные суставы - защита от падений/толчков
-
-/obj/item/implant/magnetic_joints
-	name = "Magnetic Joints Implant"
-	desc = "Магнитные суставы для IPC. Обеспечивают стабильность и защиту от падений."
+// Базовый класс для IPC имплантов
+/obj/item/implant/ipc
+	name = "IPC implant"
+	desc = "Базовый имплант для IPC."
 	icon = 'icons/obj/medical/implants.dmi'
 	icon_state = "implant_default"
 	w_class = WEIGHT_CLASS_TINY
+	/// В какой части тела установлен
+	var/installed_in_zone = null
+	/// Список разрешенных зон для установки
+	var/list/allowed_zones = list()
 
-/obj/item/implant/magnetic_joints/get_data()
+// Переопределяем implant() чтобы принимать body_zone
+/obj/item/implant/ipc/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
+	if(!body_zone)
+		return FALSE
+
+	// Проверяем разрешенную зону
+	if(length(allowed_zones) && !(body_zone in allowed_zones))
+		if(!silent && user)
+			to_chat(user, span_warning("[capitalize(src.name)] не может быть установлен в [body_zone]!"))
+		return FALSE
+
+	// Сохраняем зону установки
+	installed_in_zone = body_zone
+
+	// Вызываем стандартный implant
+	. = ..(target, user, silent, force)
+
+// ============================================
+// 1. MAGNETIC JOINTS IMPLANT
+// ============================================
+// Устанавливается в руки или ноги - защита от падений
+
+/obj/item/implant/ipc/magnetic_joints
+	name = "Magnetic Joints Implant"
+	desc = "Магнитные суставы для конечностей IPC. Обеспечивают стабильность и защиту от падений. Устанавливается в руки или ноги."
+	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+
+/obj/item/implant/ipc/magnetic_joints/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Magnetic Joints Implant<BR>
 	<b>Life:</b> Permanent<BR>
+	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
 	<b>Function:</b> Provides stability and prevents slipping.<BR>
 	<b>Integrity:</b> Active"}
 	return dat
 
-/obj/item/implant/magnetic_joints/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/ipc/magnetic_joints/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -129,21 +61,21 @@
 
 	var/mob/living/carbon/human/H = target
 	if(!istype(H.dna?.species, /datum/species/ipc))
-		if(!silent)
+		if(!silent && user)
 			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
 		return FALSE
 
 	// Даем трейт защиты от скольжения
-	ADD_TRAIT(H, TRAIT_NO_SLIP_WATER, "magnetic_joints")
-	ADD_TRAIT(H, TRAIT_HARDLY_WOUNDED, "magnetic_joints")
+	ADD_TRAIT(H, TRAIT_NO_SLIP_WATER, "magnetic_joints_[installed_in_zone]")
 
 	if(!silent)
-		to_chat(H, span_notice("Магнитные суставы активированы. Вы чувствуете повышенную стабильность."))
-		to_chat(user, span_notice("Вы успешно установили имплант магнитных суставов."))
+		to_chat(H, span_notice("Магнитные суставы активированы в [installed_in_zone]. Вы чувствуете повышенную стабильность."))
+		if(user)
+			to_chat(user, span_notice("Вы успешно установили магнитные суставы."))
 
 	return TRUE
 
-/obj/item/implant/magnetic_joints/removed(mob/living/source, silent = FALSE, special = FALSE)
+/obj/item/implant/ipc/magnetic_joints/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
 
 	if(!ishuman(source))
@@ -151,38 +83,36 @@
 
 	var/mob/living/carbon/human/H = source
 
-	REMOVE_TRAIT(H, TRAIT_NO_SLIP_WATER, "magnetic_joints")
-	REMOVE_TRAIT(H, TRAIT_HARDLY_WOUNDED, "magnetic_joints")
+	REMOVE_TRAIT(H, TRAIT_NO_SLIP_WATER, "magnetic_joints_[installed_in_zone]")
 
 	if(!silent)
 		to_chat(H, span_warning("Магнитные суставы деактивированы."))
 
-/obj/item/implantcase/magnetic_joints
+/obj/item/implantcase/ipc/magnetic_joints
 	name = "implant case - 'Magnetic Joints'"
-	desc = "Стеклянный кейс содержащий имплант магнитных суставов."
-	imp_type = /obj/item/implant/magnetic_joints
+	desc = "Стеклянный кейс содержащий имплант магнитных суставов для IPC."
+	imp_type = /obj/item/implant/ipc/magnetic_joints
 
 // ============================================
-// 3. SEALED JOINTS IMPLANT
+// 2. SEALED JOINTS IMPLANT
 // ============================================
-// Укрепленные суставы - больше HP частям тела
+// Укрепленные суставы - устанавливается в любую часть тела
 
-/obj/item/implant/sealed_joints
+/obj/item/implant/ipc/sealed_joints
 	name = "Sealed Joints Implant"
-	desc = "Укрепленные герметичные суставы для IPC. Увеличивают прочность частей тела."
-	icon = 'icons/obj/medical/implants.dmi'
-	icon_state = "implant_default"
-	w_class = WEIGHT_CLASS_TINY
+	desc = "Укрепленные герметичные суставы. Увеличивают прочность части тела в которую установлены."
+	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
-/obj/item/implant/sealed_joints/get_data()
+/obj/item/implant/ipc/sealed_joints/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Sealed Joints Implant<BR>
 	<b>Life:</b> Permanent<BR>
-	<b>Function:</b> Reinforces body parts, increasing max damage.<BR>
+	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
+	<b>Function:</b> Reinforces bodypart (+20% max damage).<BR>
 	<b>Integrity:</b> Active"}
 	return dat
 
-/obj/item/implant/sealed_joints/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/ipc/sealed_joints/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -192,21 +122,23 @@
 
 	var/mob/living/carbon/human/H = target
 	if(!istype(H.dna?.species, /datum/species/ipc))
-		if(!silent)
+		if(!silent && user)
 			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
 		return FALSE
 
-	// Увеличиваем max_damage всех частей тела на 20%
-	for(var/obj/item/bodypart/part in H.bodyparts)
+	// Увеличиваем max_damage конкретной части тела на 20%
+	var/obj/item/bodypart/part = H.get_bodypart(installed_in_zone)
+	if(part)
 		part.max_damage *= 1.2
 
 	if(!silent)
-		to_chat(H, span_notice("Герметичные суставы установлены. Ваша конструкция усилена."))
-		to_chat(user, span_notice("Вы успешно установили имплант укрепленных суставов."))
+		to_chat(H, span_notice("Герметичные суставы установлены в [installed_in_zone]. Конструкция усилена."))
+		if(user)
+			to_chat(user, span_notice("Вы успешно установили укрепленные суставы."))
 
 	return TRUE
 
-/obj/item/implant/sealed_joints/removed(mob/living/source, silent = FALSE, special = FALSE)
+/obj/item/implant/ipc/sealed_joints/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
 
 	if(!ishuman(source))
@@ -215,41 +147,41 @@
 	var/mob/living/carbon/human/H = source
 
 	// Возвращаем max_damage к норме
-	for(var/obj/item/bodypart/part in H.bodyparts)
+	var/obj/item/bodypart/part = H.get_bodypart(installed_in_zone)
+	if(part)
 		part.max_damage /= 1.2
 
 	if(!silent)
 		to_chat(H, span_warning("Герметичные суставы удалены."))
 
-/obj/item/implantcase/sealed_joints
+/obj/item/implantcase/ipc/sealed_joints
 	name = "implant case - 'Sealed Joints'"
 	desc = "Стеклянный кейс содержащий имплант укрепленных суставов."
-	imp_type = /obj/item/implant/sealed_joints
+	imp_type = /obj/item/implant/ipc/sealed_joints
 
 // ============================================
-// 4. REACTIVE REPAIR IMPLANT
+// 3. REACTIVE REPAIR IMPLANT
 // ============================================
-// Реактивный ремонт - автоматически чинит повреждения
+// Автоматический ремонт конкретной части тела
 
-/obj/item/implant/reactive_repair
+/obj/item/implant/ipc/reactive_repair
 	name = "Reactive Repair Implant"
-	desc = "Система автоматического ремонта для IPC. Активируется при получении повреждений."
-	icon = 'icons/obj/medical/implants.dmi'
-	icon_state = "implant_default"
-	w_class = WEIGHT_CLASS_TINY
-	var/repair_amount = 2 // Сколько HP чинит за раз
+	desc = "Система автоматического ремонта для конечности IPC. Чинит часть тела в которую установлена."
+	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+	var/repair_amount = 2
 	var/repair_cooldown = 30 SECONDS
 	var/last_repair_time = 0
 
-/obj/item/implant/reactive_repair/get_data()
+/obj/item/implant/ipc/reactive_repair/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Reactive Repair Implant<BR>
 	<b>Life:</b> Permanent<BR>
-	<b>Function:</b> Automatic repair on damage (2 HP every 30 seconds).<BR>
+	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
+	<b>Function:</b> Auto-repair (2 HP/30s for this bodypart).<BR>
 	<b>Integrity:</b> Active"}
 	return dat
 
-/obj/item/implant/reactive_repair/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/ipc/reactive_repair/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -259,7 +191,7 @@
 
 	var/mob/living/carbon/human/H = target
 	if(!istype(H.dna?.species, /datum/species/ipc))
-		if(!silent)
+		if(!silent && user)
 			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
 		return FALSE
 
@@ -267,39 +199,37 @@
 	RegisterSignal(H, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_damage))
 
 	if(!silent)
-		to_chat(H, span_notice("Система реактивного ремонта активирована."))
-		to_chat(user, span_notice("Вы успешно установили имплант реактивного ремонта."))
+		to_chat(H, span_notice("Система реактивного ремонта активирована для [installed_in_zone]."))
+		if(user)
+			to_chat(user, span_notice("Вы успешно установили имплант реактивного ремонта."))
 
 	return TRUE
 
-/obj/item/implant/reactive_repair/proc/on_damage(mob/living/carbon/human/source, damage, damagetype)
+/obj/item/implant/ipc/reactive_repair/proc/on_damage(mob/living/carbon/human/source, damage, damagetype)
 	SIGNAL_HANDLER
 
 	// Проверяем кулдаун
 	if(world.time < last_repair_time + repair_cooldown)
 		return
 
-	// Чиним случайную поврежденную часть тела
-	var/list/damaged_parts = list()
-	for(var/obj/item/bodypart/part in source.bodyparts)
-		if(part.brute_dam > 0 || part.burn_dam > 0)
-			damaged_parts += part
-
-	if(!length(damaged_parts))
+	// Чиним только конкретную часть тела
+	var/obj/item/bodypart/part = source.get_bodypart(installed_in_zone)
+	if(!part)
 		return
 
-	var/obj/item/bodypart/part = pick(damaged_parts)
+	if(part.brute_dam <= 0 && part.burn_dam <= 0)
+		return
 
 	if(part.brute_dam > part.burn_dam)
 		part.heal_damage(repair_amount, 0)
-		to_chat(source, span_notice("Система реактивного ремонта устраняет механические повреждения [part.plaintext_zone]."))
+		to_chat(source, span_notice("Реактивный ремонт устраняет механические повреждения [part.plaintext_zone]."))
 	else
 		part.heal_damage(0, repair_amount)
-		to_chat(source, span_notice("Система реактивного ремонта устраняет термические повреждения [part.plaintext_zone]."))
+		to_chat(source, span_notice("Реактивный ремонт устраняет термические повреждения [part.plaintext_zone]."))
 
 	last_repair_time = world.time
 
-/obj/item/implant/reactive_repair/removed(mob/living/source, silent = FALSE, special = FALSE)
+/obj/item/implant/ipc/reactive_repair/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
 
 	if(!ishuman(source))
@@ -311,69 +241,78 @@
 	if(!silent)
 		to_chat(H, span_warning("Система реактивного ремонта деактивирована."))
 
-/obj/item/implantcase/reactive_repair
+/obj/item/implantcase/ipc/reactive_repair
 	name = "implant case - 'Reactive Repair'"
 	desc = "Стеклянный кейс содержащий имплант реактивного ремонта."
-	imp_type = /obj/item/implant/reactive_repair
+	imp_type = /obj/item/implant/ipc/reactive_repair
 
 // ============================================
-// 5. EMP-PROTECTOR
+// 4. EMP-PROTECTOR (УНИВЕРСАЛЬНЫЙ)
 // ============================================
-// Защита от ЕМП с ограниченными зарядами, но греет
+// Защита от ЕМП для ВСЕХ РАС, устанавливается в грудь
 
 /obj/item/implant/emp_protector
 	name = "EMP-Protector Implant"
-	desc = "Защита от ЕМП ударов для синтетиков. Имеет ограниченные заряды и нагревает процессор при активации."
+	desc = "Защита от ЕМП ударов. Устанавливается в грудную клетку. Для IPC - нагревает процессор при блокировке, для других - наносит burn урон."
 	icon = 'icons/obj/medical/implants.dmi'
 	icon_state = "implant_default"
 	w_class = WEIGHT_CLASS_TINY
-	var/max_charges = 3
-	var/charges = 3
-	var/heat_per_use = 15 // Градусов нагрева при активации
+	var/heat_per_use = 15 // Нагрев для IPC
+	var/burn_damage = 10 // Урон для органиков
+	var/installed_in_zone = null
 
 /obj/item/implant/emp_protector/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> EMP-Protector Implant<BR>
-	<b>Life:</b> Limited charges ([charges]/[max_charges])<BR>
-	<b>Function:</b> Blocks EMP damage (heats CPU by +[heat_per_use]°C per use).<BR>
-	<b>Status:</b> [charges > 0 ? "ACTIVE" : "DEPLETED"]"}
+	<b>Life:</b> Permanent<BR>
+	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
+	<b>Function:</b> Blocks EMP damage (IPC: +[heat_per_use]°C, Others: [burn_damage] burn).<BR>
+	<b>Status:</b> ACTIVE"}
 	return dat
 
-/obj/item/implant/emp_protector/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
-	. = ..()
+/obj/item/implant/emp_protector/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
+	// Можно установить только в грудь
+	if(body_zone && body_zone != BODY_ZONE_CHEST)
+		if(!silent && user)
+			to_chat(user, span_warning("[capitalize(src.name)] может быть установлен только в грудную клетку!"))
+		return FALSE
+
+	installed_in_zone = body_zone
+
+	// Регистрируем обработку ЕМП
+	. = ..(target, user, silent, force)
 	if(!.)
 		return FALSE
 
-	// Регистрируем обработку ЕМП
 	RegisterSignal(imp_in, COMSIG_ATOM_EMP_ACT, PROC_REF(on_emp))
 
 	if(!silent && ishuman(imp_in))
-		to_chat(imp_in, span_notice("EMP-протектор активирован. Зарядов: [charges]/[max_charges]"))
-		to_chat(user, span_notice("Вы успешно установили EMP-протектор."))
+		to_chat(imp_in, span_notice("EMP-протектор активирован."))
+		if(user)
+			to_chat(user, span_notice("Вы успешно установили EMP-протектор."))
 
 	return TRUE
 
 /obj/item/implant/emp_protector/proc/on_emp(atom/source, severity)
 	SIGNAL_HANDLER
 
-	if(charges <= 0)
-		return
-
 	if(!ishuman(imp_in))
 		return
 
 	var/mob/living/carbon/human/H = imp_in
 
-	// Используем заряд
-	charges--
-
-	// Нагреваем процессор если это IPC
+	// Для IPC - нагрев процессора
 	if(istype(H.dna?.species, /datum/species/ipc))
 		var/datum/species/ipc/S = H.dna.species
 		S.cpu_temperature = min(S.cpu_temperature + heat_per_use, 200)
-		to_chat(H, span_warning("EMP-протектор блокировал удар! Процессор нагрелся на [heat_per_use]°C. Осталось зарядов: [charges]/[max_charges]"))
+		to_chat(H, span_warning("EMP-протектор блокировал удар! Процессор нагрелся на [heat_per_use]°C."))
+
+	// Для других рас - burn урон в грудь
 	else
-		to_chat(H, span_notice("EMP-протектор блокировал удар! Осталось зарядов: [charges]/[max_charges]"))
+		var/obj/item/bodypart/chest = H.get_bodypart(BODY_ZONE_CHEST)
+		if(chest)
+			chest.receive_damage(0, burn_damage)
+			to_chat(H, span_warning("EMP-протектор блокировал удар, но перегрелся и обжег вас!"))
 
 	// Блокируем ЕМП урон
 	return COMPONENT_EMP_PREVENT
@@ -391,27 +330,26 @@
 	imp_type = /obj/item/implant/emp_protector
 
 // ============================================
-// 6. MAGNETIC LEG
+// 5. MAGNETIC LEG
 // ============================================
-// Магнитные ботинки встроенные в ноги
+// Встроенные магбуты - только в ноги
 
-/obj/item/implant/magnetic_leg
+/obj/item/implant/ipc/magnetic_leg
 	name = "Magnetic Leg Implant"
-	desc = "Магнитные модули для ног. Функционируют как встроенные магнитные ботинки."
-	icon = 'icons/obj/medical/implants.dmi'
-	icon_state = "implant_default"
-	w_class = WEIGHT_CLASS_TINY
+	desc = "Магнитные модули для ног IPC. Функционируют как встроенные магнитные ботинки."
+	allowed_zones = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/magboots_active = FALSE
 
-/obj/item/implant/magnetic_leg/get_data()
+/obj/item/implant/ipc/magnetic_leg/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Magnetic Leg Implant<BR>
 	<b>Life:</b> Permanent<BR>
+	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
 	<b>Function:</b> Built-in magboots (toggle-able).<BR>
 	<b>Status:</b> [magboots_active ? "ACTIVE" : "INACTIVE"]"}
 	return dat
 
-/obj/item/implant/magnetic_leg/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/ipc/magnetic_leg/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -420,19 +358,25 @@
 		return FALSE
 
 	var/mob/living/carbon/human/H = target
+	if(!istype(H.dna?.species, /datum/species/ipc))
+		if(!silent && user)
+			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
+		return FALSE
 
-	// Даем абилку переключения магбутов
-	var/datum/action/toggle_magboots/toggle = new()
-	toggle.Grant(H)
-	toggle.implant = src
+	// Даем абилку переключения магбутов только если это первая нога
+	var/datum/action/toggle_magboots/existing = locate() in H.actions
+	if(!existing)
+		var/datum/action/toggle_magboots/toggle = new()
+		toggle.Grant(H)
 
 	if(!silent)
-		to_chat(H, span_notice("Магнитные модули ног установлены. Используйте абилку для активации."))
-		to_chat(user, span_notice("Вы успешно установили имплант магнитных ног."))
+		to_chat(H, span_notice("Магнитные модули установлены в [installed_in_zone]."))
+		if(user)
+			to_chat(user, span_notice("Вы успешно установили магнитные модули."))
 
 	return TRUE
 
-/obj/item/implant/magnetic_leg/removed(mob/living/source, silent = FALSE, special = FALSE)
+/obj/item/implant/ipc/magnetic_leg/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
 
 	if(!ishuman(source))
@@ -440,18 +384,26 @@
 
 	var/mob/living/carbon/human/H = source
 
-	// Отключаем магбуты если активны
-	if(magboots_active)
-		REMOVE_TRAIT(H, TRAIT_NO_SLIP_ALL, "magnetic_leg")
-		H.add_movespeed_modifier(/datum/movespeed_modifier/magboots/negate)
+	// Проверяем есть ли еще magnetic_leg импланты
+	var/has_other_mag_legs = FALSE
+	for(var/obj/item/implant/ipc/magnetic_leg/other in H.implants)
+		if(other != src)
+			has_other_mag_legs = TRUE
+			break
 
-	// Удаляем абилку
-	var/datum/action/toggle_magboots/action = locate() in H.actions
-	if(action)
-		action.Remove(H)
+	// Если нет других магнитных ног - убираем абилку
+	if(!has_other_mag_legs)
+		// Отключаем магбуты если активны
+		if(magboots_active)
+			REMOVE_TRAIT(H, TRAIT_NO_SLIP_ALL, "magnetic_leg")
+			H.remove_movespeed_modifier(/datum/movespeed_modifier/magboots)
+
+		var/datum/action/toggle_magboots/action = locate() in H.actions
+		if(action)
+			action.Remove(H)
 
 	if(!silent)
-		to_chat(H, span_warning("Магнитные модули ног удалены."))
+		to_chat(H, span_warning("Магнитные модули удалены из [installed_in_zone]."))
 
 // Абилка переключения магбутов
 /datum/action/toggle_magboots
@@ -460,19 +412,20 @@
 	button_icon = 'icons/obj/clothing/shoes.dmi'
 	button_icon_state = "magboots0"
 	background_icon_state = "bg_tech"
-	var/obj/item/implant/magnetic_leg/implant
 
 /datum/action/toggle_magboots/Activate(atom/target)
-	if(!implant)
-		return
-
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return
 
-	implant.magboots_active = !implant.magboots_active
+	// Находим любой magnetic_leg имплант
+	var/obj/item/implant/ipc/magnetic_leg/mag_implant = locate() in H.implants
+	if(!mag_implant)
+		return
 
-	if(implant.magboots_active)
+	mag_implant.magboots_active = !mag_implant.magboots_active
+
+	if(mag_implant.magboots_active)
 		ADD_TRAIT(H, TRAIT_NO_SLIP_ALL, "magnetic_leg")
 		H.add_movespeed_modifier(/datum/movespeed_modifier/magboots)
 		to_chat(H, span_notice("Магнитные ботинки активированы."))
@@ -485,106 +438,31 @@
 
 	build_all_button_icons()
 
-/obj/item/implantcase/magnetic_leg
+/obj/item/implantcase/ipc/magnetic_leg
 	name = "implant case - 'Magnetic Leg'"
 	desc = "Стеклянный кейс содержащий имплант магнитных ног."
-	imp_type = /obj/item/implant/magnetic_leg
+	imp_type = /obj/item/implant/ipc/magnetic_leg
 
 // ============================================
-// 7. A.R.S.T.M (Advanced Reagent Scanner and Tracking Module)
+// 6. BIO-GENERATOR
 // ============================================
-// Для парамедиков - встроенный экран экипажа в мозг
+// Позволяет IPC переваривать еду - устанавливается в грудь
 
-/obj/item/implant/crew_monitor
-	name = "A.R.S.T.M Implant"
-	desc = "Advanced Reagent Scanner and Tracking Module. Встроенный в мозг экран мониторинга экипажа для парамедиков. Частота обновления ниже чем у портативного устройства."
-	icon = 'icons/obj/medical/implants.dmi'
-	icon_state = "implant_default"
-	w_class = WEIGHT_CLASS_TINY
-
-/obj/item/implant/crew_monitor/get_data()
-	var/dat = {"<b>Implant Specifications:</b><BR>
-	<b>Name:</b> A.R.S.T.M Implant<BR>
-	<b>Life:</b> Permanent<BR>
-	<b>Function:</b> Built-in crew monitor (lower refresh rate).<BR>
-	<b>Integrity:</b> Active"}
-	return dat
-
-/obj/item/implant/crew_monitor/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
-	. = ..()
-	if(!.)
-		return FALSE
-
-	if(!ishuman(target))
-		return FALSE
-
-	var/mob/living/carbon/human/H = target
-
-	// Даем абилку открытия crew monitor
-	var/datum/action/open_crew_monitor/monitor = new()
-	monitor.Grant(H)
-
-	if(!silent)
-		to_chat(H, span_notice("A.R.S.T.M имплант активирован. Доступен мониторинг экипажа."))
-		to_chat(user, span_notice("Вы успешно установили A.R.S.T.M имплант."))
-
-	return TRUE
-
-/obj/item/implant/crew_monitor/removed(mob/living/source, silent = FALSE, special = FALSE)
-	. = ..()
-
-	if(!ishuman(source))
-		return
-
-	var/mob/living/carbon/human/H = source
-
-	// Удаляем абилку
-	var/datum/action/open_crew_monitor/action = locate() in H.actions
-	if(action)
-		action.Remove(H)
-
-	if(!silent)
-		to_chat(H, span_warning("A.R.S.T.M имплант деактивирован."))
-
-// Абилка открытия crew monitor
-/datum/action/open_crew_monitor
-	name = "Open Crew Monitor"
-	desc = "Открыть встроенный монитор состояния экипажа."
-	button_icon = 'icons/mob/actions/actions_medical.dmi'
-	button_icon_state = "health_analyzer"
-	background_icon_state = "bg_tech"
-
-/datum/action/open_crew_monitor/Activate(atom/target)
-	// TODO: Открыть UI crew monitor
-	// Пока просто placeholder
-	to_chat(owner, span_notice("Crew monitor interface (TODO: implement UI)"))
-
-/obj/item/implantcase/crew_monitor
-	name = "implant case - 'A.R.S.T.M'"
-	desc = "Стеклянный кейс содержащий A.R.S.T.M имплант."
-	imp_type = /obj/item/implant/crew_monitor
-
-// ============================================
-// 8. БИО-ГЕНЕРАТОР
-// ============================================
-// Позволяет IPC переваривать еду
-
-/obj/item/implant/bio_generator
+/obj/item/implant/ipc/bio_generator
 	name = "Bio-Generator Implant"
-	desc = "Биологический генератор для IPC. Позволяет перерабатывать органическую пищу в энергию."
-	icon = 'icons/obj/medical/implants.dmi'
-	icon_state = "implant_default"
-	w_class = WEIGHT_CLASS_TINY
+	desc = "Биологический генератор для IPC. Позволяет перерабатывать органическую пищу в энергию. Устанавливается в грудную клетку."
+	allowed_zones = list(BODY_ZONE_CHEST)
 
-/obj/item/implant/bio_generator/get_data()
+/obj/item/implant/ipc/bio_generator/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Bio-Generator Implant<BR>
 	<b>Life:</b> Permanent<BR>
-	<b>Function:</b> Allows IPC to digest organic food for energy.<BR>
+	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
+	<b>Function:</b> Allows food digestion for energy.<BR>
 	<b>Integrity:</b> Active"}
 	return dat
 
-/obj/item/implant/bio_generator/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/ipc/bio_generator/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -594,11 +472,11 @@
 
 	var/mob/living/carbon/human/H = target
 	if(!istype(H.dna?.species, /datum/species/ipc))
-		if(!silent)
+		if(!silent && user)
 			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
 		return FALSE
 
-	// Убираем трейт NOHUNGER и добавляем возможность есть
+	// Убираем трейт NOHUNGER
 	REMOVE_TRAIT(H, TRAIT_NOHUNGER, SPECIES_TRAIT)
 
 	// Регистрируем обработку еды
@@ -606,31 +484,29 @@
 
 	if(!silent)
 		to_chat(H, span_notice("Био-генератор активирован. Вы можете употреблять органическую пищу."))
-		to_chat(user, span_notice("Вы успешно установили био-генератор."))
+		if(user)
+			to_chat(user, span_notice("Вы успешно установили био-генератор."))
 
 	return TRUE
 
-/obj/item/implant/bio_generator/proc/on_food_eaten(mob/living/carbon/human/source, atom/food, mob/feeder)
+/obj/item/implant/ipc/bio_generator/proc/on_food_eaten(mob/living/carbon/human/source, atom/food, mob/feeder)
 	SIGNAL_HANDLER
 
 	if(!istype(source.dna?.species, /datum/species/ipc))
 		return
-
-	var/datum/species/ipc/S = source.dna.species
 
 	// Получаем батарею IPC
 	var/obj/item/organ/heart/ipc_battery/battery = source.get_organ_slot(ORGAN_SLOT_HEART)
 	if(!battery)
 		return
 
-	// Преобразуем еду в энергию (10% от nutrition как заряд)
-	// Предполагаем что еда дает ~5-10 nutrition
-	var/energy_gain = 50 // Примерно 50 единиц заряда за прием пищи
+	// Преобразуем еду в энергию
+	var/energy_gain = 50
 
 	battery.charge = min(battery.charge + energy_gain, battery.maxcharge)
 	to_chat(source, span_notice("Био-генератор переработал пищу в [energy_gain] единиц энергии."))
 
-/obj/item/implant/bio_generator/removed(mob/living/source, silent = FALSE, special = FALSE)
+/obj/item/implant/ipc/bio_generator/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
 
 	if(!ishuman(source))
@@ -647,7 +523,7 @@
 	if(!silent)
 		to_chat(H, span_warning("Био-генератор деактивирован."))
 
-/obj/item/implantcase/bio_generator
+/obj/item/implantcase/ipc/bio_generator
 	name = "implant case - 'Bio-Generator'"
 	desc = "Стеклянный кейс содержащий имплант био-генератора."
-	imp_type = /obj/item/implant/bio_generator
+	imp_type = /obj/item/implant/ipc/bio_generator
