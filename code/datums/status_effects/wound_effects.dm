@@ -66,7 +66,7 @@
 	right = null
 
 /atom/movable/screen/alert/status_effect/limp
-	name = "Хромание"
+	name = "Хромота"
 	desc = "У вас повреждена одна или обе ноги, из-за чего вы замедляете шаг! Зафиксируйте её или, по крайней мере, наложите повязку!"
 	icon_state = "injury"
 

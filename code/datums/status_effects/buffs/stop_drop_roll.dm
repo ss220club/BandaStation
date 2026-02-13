@@ -11,7 +11,7 @@
 		return FALSE
 
 	if(!owner.Knockdown(tick_interval * 2, ignore_canstun = TRUE) || owner.body_position != LYING_DOWN)
-		to_chat(owner, span_warning("Вы пытаетесь остановиться, упасть и катиться по полу, но вы не можете опуститься на землю!"))
+		to_chat(owner, span_warning("Вы пытаетесь остановиться, упасть и кататься по полу, но вы не можете опуститься на землю!"))
 		return FALSE
 
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(stop_rolling))
@@ -38,7 +38,7 @@
 /datum/status_effect/stop_drop_roll/proc/start_rolling()
 	owner.visible_message(
 		span_danger("[owner.declent_ru(NOMINATIVE)] катается по полу, пытаясь потушить себя!"),
-		span_notice("Вы останавливаетесь, падаете и катитесь!"),
+		span_notice("Вы останавливаетесь, падаете и катаетесь!"),
 	)
 	// Start with one weaker roll
 	reduce_firestacks(0.25)
