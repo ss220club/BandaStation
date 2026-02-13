@@ -119,9 +119,7 @@
 			continue
 
 		light.visible_message(span_boldwarning("[light.declent_ru(NOMINATIVE)] внезапно ярко вспыхивает и начинает искрить!"))
-		var/datum/effect_system/spark_spread/light_sparks = new /datum/effect_system/spark_spread()
-		light_sparks.set_up(4, 0, light)
-		light_sparks.start()
+		do_sparks(4, FALSE, light)
 		new /obj/effect/temp_visual/revenant(get_turf(light))
 		addtimer(CALLBACK(src, PROC_REF(overload_shock), light, caster), 2 SECONDS)
 
