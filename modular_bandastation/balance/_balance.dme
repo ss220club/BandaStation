@@ -23,6 +23,7 @@
 #include "code/station_traits.dm"
 #include "code/supply_packs.dm"
 #include "code/vehicle/paddy.dm"
+#include "code/vending.dm"
 #include "code/weapons/baton.dm"
 #include "code/weapons/dragnet.dm"
 #include "code/weapons/rifle.dm"
