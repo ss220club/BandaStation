@@ -31490,3 +31490,12 @@ accusative = "деревянную раму стола"
 instrumental = "деревянной рамой стола"
 prepositional = "деревянной раме стола"
 gender = "female"
+
+["stenciled letter"]
+nominative = "большой символ"
+genitive = "большого символа"
+dative = "большому символу"
+accusative = "большого символа"
+instrumental = "большим символом"
+prepositional = "большом символе"
+gender = "male"
