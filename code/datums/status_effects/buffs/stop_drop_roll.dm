@@ -69,7 +69,7 @@
 	SIGNAL_HANDLER
 
 	if(!QDELING(owner))
-		to_chat(owner, span_notice("Вы прекращаете кататься по полу."))
+		to_chat(owner, span_notice("Вы прекращаете кататься."))
 	qdel(src)
 
 /// Called when we've successfully extinguished ourselves.
