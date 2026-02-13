@@ -75,7 +75,7 @@
 	. = ..()
 
 	if(target.can_block_magic(MAGIC_RESISTANCE_MOON))
-		to_chat(target, span_danger("Вы слышите эхо смеха сверху... но оно глухое и отдаленное."))
+		to_chat(target, span_danger("Вы слышите эхо смеха сверху... но оно глухое и отдалённое."))
 		return
 
 	source.apply_status_effect(/datum/status_effect/moon_grasp_hide)
