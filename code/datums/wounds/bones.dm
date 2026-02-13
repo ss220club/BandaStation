@@ -459,10 +459,10 @@
 		return skelly_gel(I, user)
 
 	if(gelled)
-		to_chat(user, span_warning("[capitalize(limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone)] [user == victim ? "вас" : "у [victim.declent_ru(GENITIVE)]"] уже покрыта костным гелем!"))
+		to_chat(user, span_warning("[capitalize(limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone)] [user == victim ? "у вас" : "[victim.declent_ru(GENITIVE)]"] уже покрыта костным гелем!"))
 		return TRUE
 
-	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] начинает в спешке наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]..."), span_warning("Вы начинаете в спешке наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [user == victim ? "вас" : "у [victim.declent_ru(GENITIVE)]"], игнорируя предупреждающую наклейку..."))
+	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] начинает в спешке наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]..."), span_warning("Вы начинаете в спешке наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [user == victim ? "у вас" : "[victim.declent_ru(GENITIVE)]"], игнорируя предупреждающую наклейку..."))
 
 	if(!do_after(user, base_treat_time * 1.5 * (user == victim ? 1.5 : 1), target = victim, extra_checks=CALLBACK(src, PROC_REF(still_exists))))
 		return TRUE
@@ -470,7 +470,7 @@
 	I.use(1)
 	victim.emote("scream")
 	if(user != victim)
-		user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] заканчивает нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)], раздаётся шипящий звук!"), span_notice("Вы заканчиваете нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]!"), ignored_mobs=victim)
+		user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] заканчивает нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [victim.declent_ru(GENITIVE)], раздаётся шипящий звук!"), span_notice("Вы заканчиваете нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [victim.declent_ru(GENITIVE)]!"), ignored_mobs=victim)
 		to_chat(victim, span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] завершает нанесение [I.declent_ru(GENITIVE)] на вашу [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone], и вы чувствуете, как кости взрываются болью, когда начинают плавиться и реформироваться!"))
 	else
 		if(!HAS_TRAIT(victim, TRAIT_ANALGESIA))
@@ -488,17 +488,17 @@
 /// skellies are less averse to bone gel, since they're literally all bone
 /datum/wound/blunt/bone/proc/skelly_gel(obj/item/stack/medical/bone_gel/I, mob/user)
 	if(gelled)
-		to_chat(user, span_warning("[capitalize(limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone)] у [user == victim ? "вас" : "[victim.declent_ru(GENITIVE)]"] уже покрыта костным гелем!"))
+		to_chat(user, span_warning("[capitalize(limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone)] [user == victim ? "у вас" : "[victim.declent_ru(GENITIVE)]"] уже покрыта костным гелем!"))
 		return
 
-	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] начинает наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]..."), span_warning("Вы начинаете наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [user == victim ? "вас" : "[victim.declent_ru(GENITIVE)]"]..."))
+	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] начинает наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [victim.declent_ru(GENITIVE)]..."), span_warning("Вы начинаете наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [user == victim ? "у вас" : "[victim.declent_ru(GENITIVE)]"]..."))
 
 	if(!do_after(user, base_treat_time * (user == victim ? 1.5 : 1), target = victim, extra_checks=CALLBACK(src, PROC_REF(still_exists))))
 		return
 
 	I.use(1)
 	if(user != victim)
-		user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)], издавая шипящий звук!"), span_notice("Вы завершаете нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]!"), ignored_mobs=victim)
+		user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [victim.declent_ru(GENITIVE)], издавая шипящий звук!"), span_notice("Вы завершаете нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [victim.declent_ru(GENITIVE)]!"), ignored_mobs=victim)
 		to_chat(victim, span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] завершает нанесение [I.declent_ru(GENITIVE)] на вашу [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone], и вы чувствуете странное щекочущее покалывание, пока кости начинают восстанавливаться!"))
 	else
 		victim.visible_message(span_notice("[capitalize(victim.declent_ru(NOMINATIVE))] завершает нанесение [I.declent_ru(GENITIVE)] на свою [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone], издавая забавный шипящий звук!"), span_notice("Вы завершаете нанесение [I.declent_ru(GENITIVE)] на вашу [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] и чувствуете странное щекочущее покалывание, пока кость начинает восстанавливаться!"))
@@ -510,13 +510,13 @@
 /// if someone is using surgical tape on our wound
 /datum/wound/blunt/bone/proc/tape(obj/item/stack/sticky_tape/surgical/I, mob/user)
 	if(!gelled)
-		to_chat(user, span_warning("[capitalize(limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone)] у [user == victim ? "вас" : "[victim.declent_ru(GENITIVE)]"] должна быть покрыта костным гелем, чтобы выполнить эту экстренную операцию!"))
+		to_chat(user, span_warning("[capitalize(limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone)] [user == victim ? "у вас" : "[victim.declent_ru(GENITIVE)]"] должна быть покрыта костным гелем, чтобы выполнить эту экстренную операцию!"))
 		return TRUE
 	if(taped)
-		to_chat(user, span_warning("[capitalize(limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone)] у [user == victim ? "вас" : "[victim.declent_ru(GENITIVE)]"] уже обработана [I.declent_ru(INSTRUMENTAL)] и восстанавливается!"))
+		to_chat(user, span_warning("[capitalize(limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone)] [user == victim ? "у вас" : "[victim.declent_ru(GENITIVE)]"] уже обработана [I.declent_ru(INSTRUMENTAL)] и восстанавливается!"))
 		return TRUE
 
-	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] начинает наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]..."), span_warning("Вы начинаете наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [user == victim ? "вас" : "[victim.declent_ru(GENITIVE)]"] ..."))
+	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] начинает наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [victim.declent_ru(GENITIVE)]..."), span_warning("Вы начинаете наносить [I.declent_ru(ACCUSATIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [user == victim ? "у вас" : "[victim.declent_ru(GENITIVE)]"] ..."))
 
 	if(!do_after(user, base_treat_time * (user == victim ? 1.5 : 1), target = victim, extra_checks=CALLBACK(src, PROC_REF(still_exists))))
 		return TRUE
@@ -526,7 +526,7 @@
 
 	I.use(1)
 	if(user != victim)
-		user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)], издавая шипящий звук!"), span_notice("Вы завершаете нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]!"), ignored_mobs=victim)
+		user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [victim.declent_ru(GENITIVE)], издавая шипящий звук!"), span_notice("Вы завершаете нанесение [I.declent_ru(GENITIVE)] на [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone] [victim.declent_ru(GENITIVE)]!"), ignored_mobs=victim)
 		to_chat(victim, span_green("[capitalize(user.declent_ru(NOMINATIVE))] завершает нанесение [I.declent_ru(GENITIVE)] на вашу [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone], и вы сразу начинаете чувствовать, как ваши кости начинают восстанавливаться!"))
 	else
 		victim.visible_message(span_notice("[capitalize(victim.declent_ru(NOMINATIVE))] завершает нанесение [I.declent_ru(GENITIVE)] на свою [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone], !"), span_green("Вы завершаете нанесение [I.declent_ru(GENITIVE)] на вашу [limb.ru_plaintext_zone[ACCUSATIVE] || limb.plaintext_zone], и вы сразу начинаете чувствовать, как ваши кости начинают восстанавливаться!"))

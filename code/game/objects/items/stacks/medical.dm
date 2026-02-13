@@ -201,7 +201,7 @@
 	// second, handle what happens otherwise
 	if(!iscarbon(patient))
 		// behavior 0: non-carbons have no limbs so we can assume they are fully healed
-		patient.balloon_alert(user, "обработано полностью")
+		patient.balloon_alert(user, "полностью обработано")
 	else if(auto_change_zone)
 		// behavior 1: automatically pick another zone to heal
 		try_heal_auto_change_zone(patient, user, preferred_target, healed_zone)
@@ -221,7 +221,7 @@
 		other_affected_limbs += limb.body_zone
 
 	if(!length(other_affected_limbs))
-		patient.balloon_alert(user, "обработано полностью")
+		patient.balloon_alert(user, "полностью обработано")
 		return
 
 	var/next_picked = (preferred_target in other_affected_limbs) ? preferred_target : other_affected_limbs[1]
