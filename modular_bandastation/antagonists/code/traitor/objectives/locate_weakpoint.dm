@@ -111,7 +111,7 @@
 			bomb_sent = TRUE
 			var/obj/item/grenade/c4/es8/bomb = new(user.drop_location(), src)
 			user.put_in_hands(bomb)
-			bomb.balloon_alert(user, "ES8 материализуется в вашей руке")
+			bomb.balloon_alert(user, "в вашей руке материализуется ES8")
 
 /datum/traitor_objective/locate_weakpoint/proc/weakpoint_located()
 	description = "Слабая точка обнаружена в %AREA%. Вам нужно подорвать ES8 в этом месте, чтобы вызвать ударную волну, которая нанесёт станции серьёзные повреждения."
