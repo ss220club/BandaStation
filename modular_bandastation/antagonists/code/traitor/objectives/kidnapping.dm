@@ -245,14 +245,14 @@
 
 	if(sent_mob != target)
 		fail_objective(penalty_cost = telecrystal_penalty)
-		source.startExitSequence(source)
+		source.start_exit_sequence(source)
 		return
 
 	if(sent_mob.stat != DEAD)
 		telecrystal_reward += alive_bonus
 
 	succeed_objective()
-	source.startExitSequence(source)
+	source.start_exit_sequence(source)
 
 /datum/traitor_objective/target_player/kidnapping/proc/handle_target(mob/living/carbon/human/sent_mob)
 	victim_timerid = addtimer(CALLBACK(src, PROC_REF(return_target), sent_mob), COME_BACK_FROM_CAPTURE_TIME, TIMER_STOPPABLE)

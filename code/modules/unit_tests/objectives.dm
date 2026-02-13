@@ -31,8 +31,10 @@
 		if(objective.needs_reward && reward_is_zero(objective.progression_reward) && reward_is_zero(objective.telecrystal_reward))
 			TEST_FAIL("[objective_typepath] has not set either a progression reward or a telecrystal reward! Please set either a telecrystal or progression reward for this objective.")
 
-/// Returns whether the reward specified (in format (min, max)) is zero or not.
-/datum/unit_test/objectives_category/proc/reward_is_zero(list/reward)
+/// Returns whether the reward specified (number or list (min, max)) is zero or not.
+/datum/unit_test/objectives_category/proc/reward_is_zero(reward)
+	if(!islist(reward))
+		return (reward == 0)
 	return (reward[1] == 0 && reward[2] == 0)
 
 /datum/unit_test/objectives_category/Destroy()

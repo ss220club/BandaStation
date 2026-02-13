@@ -67,7 +67,18 @@
 	for(var/datum/traitor_objective/kill_pet/objective as anything in possible_duplicates)
 		possible_heads -= objective.target.title
 	if(limited_to_department_head)
-		possible_heads = possible_heads & role.department_head
+		var/list/department_head_titles = list()
+		for(var/department_type in role.departments_list)
+			var/datum/job_department/department = SSjob.get_department_type(department_type)
+			if(department?.department_head)
+				var/datum/job/head_job = SSjob.get_job_type(department.department_head)
+				if(head_job)
+					department_head_titles += head_job.title
+		var/list/filtered_heads = list()
+		for(var/head_title in department_head_titles)
+			if(possible_heads[head_title])
+				filtered_heads[head_title] = possible_heads[head_title]
+		possible_heads = filtered_heads
 	possible_heads -= role.title
 
 	if(!length(possible_heads))

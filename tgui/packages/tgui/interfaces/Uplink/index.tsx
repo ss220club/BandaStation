@@ -20,10 +20,8 @@ import {
   calculateProgression,
   dangerLevelsTooltip,
 } from './calculateDangerLevel';
-import { type Objective, ObjectiveMenu } from './ObjectiveMenu'; // BANDASTATION ADDITION
-/* //  BANDASTATION EDIT START (re_traitorsecondary)
 import { GenericUplink, type Item } from './GenericUplink';
-*/ // BANDASTATION REMOVAL END
+import { type Objective, ObjectiveMenu } from './ObjectiveMenu'; // BANDASTATION ADDITION
 import { PrimaryObjectiveMenu } from './PrimaryObjectiveMenu';
 
 type UplinkItem = {
@@ -361,7 +359,6 @@ export class Uplink extends Component<any, UplinkState> {
                       </Tooltip>
                     </Stack.Item>
                   )}
-                  {!!primary_objectives && (
                   {!!(primary_objectives || has_objectives) && ( // BANDASTATION ADDITION
                     <Stack.Item grow={1}>
                       <Tabs fluid>
@@ -499,8 +496,8 @@ export class Uplink extends Component<any, UplinkState> {
                 )}
             </Stack.Item>
           </Stack>
-    </Window.Content>
+        </Window.Content>
       </Window>
-    )
+    );
   }
 }
