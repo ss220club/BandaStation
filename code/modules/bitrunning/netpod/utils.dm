@@ -16,7 +16,7 @@
 
 	var/mob/player = occupant
 	player.playsound_local(src, 'sound/effects/splash.ogg', 60, TRUE)
-	to_chat(player, span_notice("The machine disconnects itself and begins to drain."))
+	to_chat(player, span_notice("Машина отключается и начинает сливать воду."))
 	open_machine()
 
 
@@ -49,7 +49,7 @@
 	mob_occupant.flash_act(override_blindness_check = TRUE, visual = TRUE)
 	mob_occupant.adjust_organ_loss(ORGAN_SLOT_BRAIN, disconnect_damage)
 	INVOKE_ASYNC(mob_occupant, TYPE_PROC_REF(/mob/living, emote), "scream")
-	to_chat(mob_occupant, span_danger("You've been forcefully disconnected from your avatar! Your thoughts feel scrambled!"))
+	to_chat(mob_occupant, span_danger("Вы были насильно отключены от своего аватара! Ваши мысли в смятении!"))
 
 
 /**
@@ -76,7 +76,7 @@
 		balloon_alert(neo, "ничего не загружено!!")
 		return
 
-	balloon_alert(neo, "establishing connection...")
+	balloon_alert(neo, "установка соединения...")
 
 	// Prevent hand interactions during loading to stop smuggling exploits into virtual domain
 	ADD_TRAIT(neo, TRAIT_HANDS_BLOCKED, TRAIT_GENERIC)

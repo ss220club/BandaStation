@@ -15,10 +15,10 @@
 
 /// Self-destructs the component, allowing free-roam by all entities with this restriction.
 /datum/component/virtual_entity/proc/jailbreak_mobs()
-	to_chat(parent, span_bolddanger("You shiver for a moment with a sense of clarity you haven't felt before."))
-	to_chat(parent, span_notice("You could go <i>anywhere</i>, do <i>anything</i>! You could leave this simulation right now if you wanted!"))
-	to_chat(parent, span_danger("But be warned, quantum entanglement will interfere with any previous lives."))
-	to_chat(parent, span_notice("You'll have just one chance to go nova, and there's no turning back."))
+	to_chat(parent, span_bolddanger("На мгновение вы вздрагиваете от ощущения ясности, которого раньше не испытывали."))
+	to_chat(parent, span_notice("Вы могли бы пойти <i>куда угодно</i>, делать <i>что угодно</i>! Вы могли бы покинуть эту симуляцию прямо сейчас, если бы захотели!"))
+	to_chat(parent, span_danger("Но имейте в виду, квантовая запутанность повлияет на все предыдущие жизни."))
+	to_chat(parent, span_notice("у вас будет только оин шанс попасть в нову, и пути назад уже не будет."))
 
 
 /// Remove any restrictions AFTER the mob has spawned
@@ -35,11 +35,11 @@
 
 	var/area/location_area = get_area(new_location)
 	if(!location_area)
-		stack_trace("Virtual entity entered a location with no area!")
+		stack_trace("Виртуальная сущность попала в пространство без какой-либо области!")
 		return
 
 	if(location_area.area_flags_mapping & VIRTUAL_SAFE_AREA)
-		source.balloon_alert(source, "out of bounds!")
+		source.balloon_alert(source, "за пределами области!")
 		COOLDOWN_START(src, OOB_cooldown, 2 SECONDS)
 		return COMPONENT_MOVABLE_BLOCK_PRE_MOVE
 

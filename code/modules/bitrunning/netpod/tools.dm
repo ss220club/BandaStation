@@ -9,11 +9,11 @@
 
 /obj/machinery/netpod/screwdriver_act(mob/living/user, obj/item/tool)
 	if(occupant)
-		balloon_alert(user, "in use!")
+		balloon_alert(user, "уже используется!")
 		return ITEM_INTERACT_SUCCESS
 
 	if(state_open)
-		balloon_alert(user, "close first.")
+		balloon_alert(user, "предварительно закройте.")
 		return ITEM_INTERACT_SUCCESS
 
 	if(default_deconstruction_screwdriver(user, "[base_icon_state]_panel", "[base_icon_state]_closed", tool))
