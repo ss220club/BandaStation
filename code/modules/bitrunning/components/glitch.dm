@@ -57,7 +57,7 @@
 		new_master = source,
 	)
 	alert.name = "Источник сломан"
-	alert.desc = "Наш байтфордж был сломан."
+	alert.desc = "Байтфордж был сломан."
 
 	if(!iscarbon(parent)) // Too powerful!
 		return
