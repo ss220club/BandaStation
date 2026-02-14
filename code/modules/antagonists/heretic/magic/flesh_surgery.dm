@@ -244,8 +244,8 @@
 
 	else
 		carbon_victim.visible_message(
-			span_danger("Рука [caster.declent_ru(GENITIVE)] светится ярким красным светом, когда протягивается к [parsed_zone(DATIVE)] [carbon_victim.declent_ru(GENITIVE)]!"),
-			span_userdanger("Рука [caster.declent_ru(GENITIVE)] светится ярким красным светом, когда протягивается к вашей [parsed_zone(DATIVE)]!"),
+			span_danger("Рука [caster.declent_ru(GENITIVE)] светится ярким красным светом, когда протягивается к [parsed_zone] [carbon_victim.declent_ru(GENITIVE)]!"),
+			span_userdanger("Рука [caster.declent_ru(GENITIVE)] светится ярким красным светом, когда протягивается к вашей [parsed_zone]!"),
 		)
 
 	carbon_victim.balloon_alert(caster, "начало извлечения [picked_organ.declent_ru(GENITIVE)]...")

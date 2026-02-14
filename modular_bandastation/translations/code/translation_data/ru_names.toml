@@ -31128,12 +31128,12 @@ gender = "neuter"
 # MARK:  Heretic common items
 
 ["Amber Focus"]
-nominative = "Янтарный фокусировщик"
-genitive = "Янтарного фокусировщика"
-dative = "Янтарному фокусировщику"
-accusative = "Янтарный фокусировщик"
-instrumental = "Янтарным фокусировщиком"
-prepositional = "Янтарном фокусировщике"
+nominative = "янтарный фокусировщик"
+genitive = "янтарного фокусировщика"
+dative = "янтарному фокусировщику"
+accusative = "янтарный фокусировщик"
+instrumental = "янтарным фокусировщиком"
+prepositional = "янтарном фокусировщике"
 gender ="male"
 
 ["Codex Cicatrix"]
@@ -31226,7 +31226,7 @@ prepositional = "Сплетении Пустоты"
 gender = "neuter"
 
 ["Void Cloak"]
-nominative = "Никидка Пустоты"
+nominative = "Накидка Пустоты"
 genitive = "Накидки Пустоты"
 dative = "Накидке Пустоты"
 accusative = "Накидку Пустоты"

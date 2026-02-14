@@ -275,7 +275,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		stack_trace("Somehow, no book in codex cicatrix selected atoms! [english_list(selected_atoms)]")
 	playsound(body, 'sound/items/poster/poster_ripped.ogg', 100, TRUE)
 	body.do_jitter_animation()
-	body.visible_message(span_danger("Ужасный рвущийся звук раздается, когда [ripped_thing.declent_ru(ACCUSATIVE)] [exterior_text] вырывается наружу, обволакивая всё вокруг [le_book || "the book"], приобретая жуткий, потусторонний оттенок!"))
+	body.visible_message(span_danger("Ужасный рвущийся звук раздается, когда [ripped_thing.declent_ru(ACCUSATIVE)] [exterior_text] вырывается наружу, обволакивая всё вокруг [le_book || "книги"], приобретая жуткий, потусторонний оттенок!"))
 	return ..()
 
 /datum/heretic_knowledge/feast_of_owls
