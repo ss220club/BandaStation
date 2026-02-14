@@ -18,7 +18,7 @@
 	to_chat(parent, span_bolddanger("На мгновение вы вздрагиваете от ощущения ясности, которого раньше не испытывали."))
 	to_chat(parent, span_notice("Вы могли бы пойти <i>куда угодно</i>, делать <i>что угодно</i>! Вы могли бы покинуть эту симуляцию прямо сейчас, если бы захотели!"))
 	to_chat(parent, span_danger("Но имейте в виду, квантовая запутанность повлияет на все предыдущие жизни."))
-	to_chat(parent, span_notice("у вас будет только оин шанс попасть в нову, и пути назад уже не будет."))
+	to_chat(parent, span_notice("у вас будет только один шанс попасть в нову, и пути назад уже не будет."))
 
 
 /// Remove any restrictions AFTER the mob has spawned
@@ -35,7 +35,7 @@
 
 	var/area/location_area = get_area(new_location)
 	if(!location_area)
-		stack_trace("Виртуальная сущность попала в пространство без какой-либо области!")
+		stack_trace("Virtual entity entered a location with no area!")
 		return
 
 	if(location_area.area_flags_mapping & VIRTUAL_SAFE_AREA)

@@ -11,7 +11,7 @@
 
 /obj/machinery/netpod/container_resist_act(mob/living/user)
 	user.visible_message(span_notice("[occupant.declent_ru(NOMINATIVE)] покидает [src.declent_ru(ACCUSATIVE)]!"),
-		span_notice("Вы забираетесь в [src.declent_ru(ACCUSATIVE)]!"),
+		span_notice("Вы выбираетесь из [src.declent_ru(GENITIVE)]!"),
 		span_notice("С шипением вы слышите, как открывается машина."))
 	open_machine()
 
