@@ -24,9 +24,6 @@
 			TEST_FAIL("[job_name] when made traitor does not have a proper uplink created when spawned in!")
 		//  BANDASTATION ADDITION START
 		for(var/datum/traitor_objective/objective_typepath as anything in subtypesof(/datum/traitor_objective))
-			var/mapfile = load_map('_maps/map_files/debug/runtimestation_minimal.dmm')
-			if (!mapfile)
-				return
 			if(initial(objective_typepath.abstract_type) == objective_typepath)
 				continue
 			var/datum/traitor_objective/objective = allocate(objective_typepath, traitor.uplink_handler)
