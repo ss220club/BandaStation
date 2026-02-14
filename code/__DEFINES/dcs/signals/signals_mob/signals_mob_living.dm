@@ -22,6 +22,11 @@
 ///Called when movement intent is toggled.
 #define COMSIG_MOVE_INTENT_TOGGLED "move_intent_toggled"
 
+///Called BEFORE movement intent is toggled.
+#define COMSIG_MOB_PRE_TOGGLE_MOVE_INTENT "mob_pre_toggle_move_intent"
+	/// Return this flag to prevent the toggle
+	#define COMPONENT_PREVENT_TOGGLE_MOVE_INTENT (1<<0)
+
 /// Called when combat mode is toggled.
 #define COMSIG_COMBAT_MODE_TOGGLED "combat_mode_toggled"
 
