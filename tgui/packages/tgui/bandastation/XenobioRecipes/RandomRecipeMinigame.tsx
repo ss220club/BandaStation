@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Box, Button } from 'tgui-core/components';
+import { Box, Button, Tooltip } from 'tgui-core/components';
 
 type WordEntry = { word: string; line: number; start: number };
 
@@ -130,16 +130,14 @@ export function RandomRecipeMinigame(props: Props) {
               );
             }
             if (seg.type === 'bonus') {
-              return (
+              const bonusBox = (
                 <Box
-                  key={i}
                   as="span"
                   style={{
                     color: 'rgba(120,160,220,0.92)',
                     cursor: canGuess ? 'pointer' : 'default',
                   }}
                   onClick={() => canGuess && onClaimBonus()}
-                  title="+1 попытка (одноразово)"
                   onMouseEnter={(e) => {
                     if (canGuess) {
                       e.currentTarget.style.backgroundColor =
@@ -154,6 +152,11 @@ export function RandomRecipeMinigame(props: Props) {
                 >
                   {seg.value}
                 </Box>
+              );
+              return (
+                <Tooltip key={i} content="+1 попытка (одноразово)" position="top">
+                  {bonusBox}
+                </Tooltip>
               );
             }
             return <span key={i}>{seg.value}</span>;
