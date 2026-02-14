@@ -21,8 +21,10 @@
 	var/bomb_sent = FALSE
 	/// Have we located the weakpoint yet?
 	var/weakpoint_found = FALSE
-	/// Areas that need to be scanned
+	/// Areas that need to be scanned (true/false)
 	var/list/area/scan_areas
+	// Ordered list of the two scan areas for UI/names (indices 1 and 2)
+	var/list/area/scan_area_list
 	/// Weakpoint where the bomb should be planted
 	var/area/weakpoint_area
 
@@ -58,14 +60,23 @@
 		if(!is_type_in_typecache(possible_area, allowed_areas) || initial(possible_area.outdoors) || is_type_in_typecache(possible_area, blacklisted_areas))
 			possible_areas -= possible_area
 
-	for(var/i in 1 to 2)
-		scan_areas[pick_n_take(possible_areas)] = TRUE
-	weakpoint_area = pick_n_take(possible_areas)
+	// prevents tests from bitching on runtimestation_minimal
+	if(length(possible_areas) < 3)
+		return FALSE
 
-	var/area/scan_area1 = scan_areas[1]
-	var/area/scan_area2 = scan_areas[2]
-	replace_in_name("%AREA1%", initial(scan_area1.name))
-	replace_in_name("%AREA2%", initial(scan_area2.name))
+	scan_area_list = list()
+	for(var/i in 1 to 2)
+		var/area/picked = pick_n_take(possible_areas)
+		if(!picked)
+			return FALSE
+		scan_area_list += picked
+		scan_areas[picked] = TRUE
+	weakpoint_area = pick_n_take(possible_areas)
+	if(!weakpoint_area)
+		return FALSE
+
+	replace_in_name("%AREA1%", initial(scan_area_list[1].name))
+	replace_in_name("%AREA2%", initial(scan_area_list[2].name))
 	RegisterSignal(SSdcs, COMSIG_GLOB_TRAITOR_OBJECTIVE_COMPLETED, PROC_REF(on_global_obj_completed))
 	return TRUE
 
@@ -151,8 +162,8 @@
 	objective_weakref = WEAKREF(objective)
 	if(!objective)
 		return
-	var/area/area1 = objective.scan_areas[1]
-	var/area/area2 = objective.scan_areas[2]
+	var/area/area1 = objective.scan_area_list[1]
+	var/area/area2 = objective.scan_area_list[2]
 	desc = replacetext(desc, "%AREA1%", initial(area1.name))
 	desc = replacetext(desc, "%AREA2%", initial(area2.name))
 
