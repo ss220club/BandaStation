@@ -1,0 +1,4 @@
+author: "adskipups"
+delete-after: True
+changes:
+  - rscadd: "Для маппинга были портированы декали в виде символов 3х3(символы можно менять через icon_state) P.S: Спасибо билду NSV13 за контент"
