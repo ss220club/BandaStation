@@ -161,3 +161,9 @@
 	if(stat > SOFT_CRIT)
 		return
 	return ..()
+
+/mob/living/toggle_move_intent(new_intent)
+	if(SEND_SIGNAL(src, COMSIG_MOB_PRE_TOGGLE_MOVE_INTENT, new_intent) & COMPONENT_PREVENT_TOGGLE_MOVE_INTENT)
+		return
+
+	return ..()
