@@ -6,6 +6,7 @@
 	desc = "This ramshackle device seems capable of receiving and sending signals for some nefarious purpose."
 	density = TRUE
 	anchored = TRUE
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5.05, /datum/material/bluespace = SHEET_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 0.5)
 	/// Traitor's code that they speak into the radio
 	var/uplink_code = ""
 	/// weakref to person who is going to use the beacon to get a replacement uplink
@@ -112,6 +113,7 @@
 		return NONE
 	context[SCREENTIP_CONTEXT_LMB] = "Synchronize with beacon"
 	return CONTEXTUAL_SCREENTIP_SET
+
 //CRAFTING
 /datum/crafting_recipe/syndicate_uplink_beacon
 	name = "Syndicate Uplink Beacon"
@@ -126,4 +128,3 @@
 	)
 	category = CAT_STRUCTURE
 	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_MUST_BE_LEARNED
-
