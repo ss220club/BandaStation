@@ -130,32 +130,28 @@ export function RandomRecipeMinigame(props: Props) {
               );
             }
             if (seg.type === 'bonus') {
-              const bonusBox = (
-                <Box
-                  as="span"
-                  style={{
-                    color: 'rgba(120,160,220,0.92)',
-                    cursor: canGuess ? 'pointer' : 'default',
-                  }}
-                  onClick={() => canGuess && onClaimBonus()}
-                  onMouseEnter={(e) => {
-                    if (canGuess) {
-                      e.currentTarget.style.backgroundColor =
-                        'rgba(50,90,40,0.35)';
-                      e.currentTarget.style.borderRadius = '3px';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '';
-                    e.currentTarget.style.borderRadius = '';
-                  }}
-                >
-                  {seg.value}
-                </Box>
-              );
               return (
                 <Tooltip key={i} content="+1 попытка (одноразово)" position="top">
-                  {bonusBox}
+                  <span
+                    style={{
+                      color: 'rgba(120,160,220,0.92)',
+                      cursor: canGuess ? 'pointer' : 'default',
+                    }}
+                    onClick={() => canGuess && onClaimBonus()}
+                    onMouseEnter={(e) => {
+                      if (canGuess) {
+                        e.currentTarget.style.backgroundColor =
+                          'rgba(50,90,40,0.35)';
+                        e.currentTarget.style.borderRadius = '3px';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '';
+                      e.currentTarget.style.borderRadius = '';
+                    }}
+                  >
+                    {seg.value}
+                  </span>
                 </Tooltip>
               );
             }
