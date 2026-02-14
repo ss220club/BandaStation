@@ -2,7 +2,7 @@
     name = "Limp"
     desc = "Старая травма ноги. Бегать невозможно."
     value = -6
-    icon = "weak"
+    icon = FA_ICON_CRUTCH
 
     mob_trait = TRAIT_LIMP
 
