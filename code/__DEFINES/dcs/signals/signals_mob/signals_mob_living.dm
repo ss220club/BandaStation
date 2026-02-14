@@ -1,3 +1,6 @@
+//Checks if anyone (components/elements/quirks) is listening to the specified signal on this object
+#define HAS_SIGNAL_LISTENERS(target, signal) (target.signal_procs?[signal])
+
 ///called on /living when attempting to pick up an item, from base of /mob/living/put_in_hand_check(): (obj/item/I)
 #define COMSIG_LIVING_TRY_PUT_IN_HAND "living_try_put_in_hand"
 	/// Can't pick up
