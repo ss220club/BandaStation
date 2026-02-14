@@ -163,7 +163,18 @@
 	return ..()
 
 /mob/living/toggle_move_intent(new_intent)
-	if(SEND_SIGNAL(src, COMSIG_MOB_PRE_TOGGLE_MOVE_INTENT, new_intent) & COMPONENT_PREVENT_TOGGLE_MOVE_INTENT)
-		return
+
+	if(HAS_TRAIT(src, TRAIT_LIMP))
+
+		var/target_intent = new_intent
+
+		if(!target_intent)
+			if(move_intent == MOVE_INTENT_RUN)
+				target_intent = MOVE_INTENT_WALK
+			else
+				target_intent = MOVE_INTENT_RUN
+
+		if(SEND_SIGNAL(src, COMSIG_MOB_PRE_TOGGLE_MOVE_INTENT, target_intent) & COMPONENT_PREVENT_TOGGLE_MOVE_INTENT)
+			return
 
 	return ..()

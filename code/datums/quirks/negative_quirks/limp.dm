@@ -1,9 +1,10 @@
 /datum/quirk/limp
     name = "Limp"
-    desc = "Из-за травмы вы не можете бегать."
-    value = -4
-    icon = "walking"
-    mob_trait = null
+    desc = "Старая травма ноги. Бегать невозможно."
+    value = -6
+    icon = "weak"
+
+    mob_trait = TRAIT_LIMP
 
 /datum/quirk/limp/add()
     var/mob/living/L = quirk_holder
@@ -19,9 +20,8 @@
 
 /datum/quirk/limp/proc/on_intent_attempt(datum/source, target_intent)
     SIGNAL_HANDLER
+    var/mob/living/L = source
 
     if(target_intent == MOVE_INTENT_RUN)
-        var/mob/living/L = source
         to_chat(L, span_warning("Моя нога слишком болит, чтобы бежать!"))
-
         return COMPONENT_PREVENT_TOGGLE_MOVE_INTENT
