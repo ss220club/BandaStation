@@ -62,7 +62,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 
 /datum/traitor_objective/steal_item
 	name = "Украдите %ITEM% и установите на него сканнер схематики."
-	description = "Нажатие кнопки материализует в вашей руки сканнер схематики, который вы должны установить на цель. Также вы можете оставить сканнер на предмета на %TIME% минут, за это вы получите %PROGRESSION% бонусной репутации и %TC% телекристалов."
+	description = "Нажатие кнопки материализует в вашей руки сканнер, который вы должны установить на цель. Также вы можете оставить сканнер на предмета на %TIME% минут, за это вы получите %PROGRESSION% бонусной репутации и %TC% телекристалов."
 
 	progression_minimum = 20 MINUTES
 
@@ -171,12 +171,12 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 /datum/traitor_objective/steal_item/generate_ui_buttons(mob/user)
 	var/list/buttons = list()
 	if(special_equipment)
-		buttons += add_ui_button("", "Pressing this will summon any extra special equipment you may need for the mission.", "tools", "summon_gear")
+		buttons += add_ui_button("", "Нажатие этой кнопки мателизует дополнительное снаряжение которое нужно для выполнения миссии.", "tools", "summon_gear")
 	if(!bug)
-		buttons += add_ui_button("", "Pressing this will materialize a scanner in your hand, which you can place on the target item", "wifi", "summon_bug")
+		buttons += add_ui_button("", "Нажатие этой кнопки мателизует сканнер в ваших руках, который вы должны прикрепить к предмету.", "wifi", "summon_bug")
 	else if(bug.planted_on)
-		buttons += add_ui_button("[DisplayTimeText(time_fulfilled)]", "This tells you how much time you have spent around the target item after the scanner has been planted.", "clock", "none")
-		buttons += add_ui_button("Skip Time", "Pressing this will succeed the mission. You will not get the extra TC and progression.", "forward", "cash_out")
+		buttons += add_ui_button("[DisplayTimeText(time_fulfilled)]", "Сколько времени ещё нужно подождать пока сканнер сделает свою полную работу.", "clock", "none")
+		buttons += add_ui_button("Пропустить время", "Нажатие этой кнопки отменит детальный скан предмета, вы не получите дополнительную награду.", "forward", "cash_out")
 	return buttons
 
 /datum/traitor_objective/steal_item/ui_perform_action(mob/living/user, action)
@@ -187,7 +187,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 				return
 			bug = new(user.drop_location())
 			user.put_in_hands(bug)
-			bug.balloon_alert(user, "the scanner materializes in your hand")
+			bug.balloon_alert(user, "сканнер материализуется в вашей руке")
 			bug.target_object_type = target_item.targetitem
 			AddComponent(/datum/component/traitor_objective_register, bug, \
 				fail_signals = list(COMSIG_QDELETING), \
@@ -200,7 +200,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 			for(var/item in special_equipment)
 				var/obj/item/new_item = new item(user.drop_location())
 				user.put_in_hands(new_item)
-			user.balloon_alert(user, "the equipment materializes in your hand")
+			user.balloon_alert(user, "снаряжение материлузется в вашей руке")
 			special_equipment = null
 		if("cash_out")
 			if(!bug.planted_on)
@@ -254,7 +254,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 
 /obj/item/traitor_bug
 	name = "suspicious device"
-	desc = "It looks dangerous."
+	desc = "Эта вещь выглядит крайне подозрительно."
 	item_flags = NOBLUDGEON
 
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
@@ -278,8 +278,8 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 
 	if(IS_TRAITOR(user))
 		if(target_object_type)
-			. += span_notice("This device must be placed by <b>clicking on the [initial(target_object_type.name)]</b> with it.")
-		. += span_notice("Remember, you may leave behind fingerprints or fibers on the device. Use <b>soap</b> or similar to scrub it clean to be safe!")
+			. += span_notice("Сканер должен быть расположен на [initial(target_object_type.name)].")
+		. += span_notice("Помните, вы возможно оставите отпечатки пальцев на сканере. Используйте мыло или другие инструменты для очистки чтобы убрать отпечатки.")
 
 /obj/item/traitor_bug/interact_with_atom(atom/movable/target, mob/living/user, list/modifiers)
 	if(!target_object_type || !ismovable(target))
@@ -289,7 +289,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	var/result = SEND_SIGNAL(src, COMSIG_TRAITOR_BUG_PRE_PLANTED_OBJECT, target)
 	if(!(result & COMPONENT_FORCE_PLACEMENT))
 		if(result & COMPONENT_FORCE_FAIL_PLACEMENT || !istype(target, target_object_type))
-			balloon_alert(user, "you can't attach this onto here!")
+			balloon_alert(user, "вы не можете прикрепить это здесь!")
 			return ITEM_INTERACT_BLOCKING
 	if(!do_after(user, deploy_time, src, hidden = TRUE))
 		return ITEM_INTERACT_BLOCKING

@@ -13,7 +13,7 @@
 
 /datum/traitor_objective/destroy_heirloom
 	name = "Уничтожьте %ITEM%, этот предмет является семейной реликвией %TARGET% в должности %JOB TITLE%"
-	description = "%TARGET% уже давно в нашем списке нежелательных персон и мы хотим показать ему, что мы серьёзно настроены. Найдите его %ITEM% и уничтожьте его."
+	description = "%TARGET% уже давно в нашем списке нежелательных личностей и мы хотим показать им, что мы серьёзно настроены. Найдите их %ITEM% и уничтожьте его."
 
 	abstract_type = /datum/traitor_objective/destroy_heirloom
 

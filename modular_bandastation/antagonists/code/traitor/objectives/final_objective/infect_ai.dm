@@ -46,7 +46,7 @@
 				return
 			var/area/delivery_area = get_area(user)
 			if(delivery_area.type != board_area_pickup)
-				to_chat(user, span_warning("Вы должны находится в [initial(board_area_pickup.name)] чтобы получить плату с вирусом."))
+				to_chat(user, span_warning("Вы должны находится в [initial(board_area_pickup.name)] чтобы получить плату."))
 				return
 			sent_board = TRUE
 			podspawn(list(

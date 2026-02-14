@@ -8,7 +8,7 @@
 
 /datum/traitor_objective/target_player/eyesnatching
 	name = "Украдите глаза %TARGET% в должности %JOB TITLE%"
-	description = "%TARGET% помешал не тем людям. Приподайте ему урок украдя его глаза. Мы выдадим вам специальное устройство для извлечения глаз."
+	description = "%TARGET% помешал не тем людям. Приподайте им урок украдя их глаза. Мы выдадим вам специальное устройство для извлечения глаз."
 
 	progression_minimum = 10 MINUTES
 

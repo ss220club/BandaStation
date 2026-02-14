@@ -1,8 +1,8 @@
 /datum/traitor_objective/ultimate/battlecruiser
-	name = "Раскройте координаты станции близлежащему крейсеру Синдиката."
-	description = "Используйте специальную карту загрузки на коммуникативной консоли, чтобы отправить координаты \
-	станции ближайшему крейсеру. Мы крайне советуем вам сообщить экипажу \
-	крейсера об вашей принадлежности к синдикату - ибо их задача уничтожить эту станцию."
+	name = "Раскройте координаты станции ближайшему штурмовому крейсеру Синдиката."
+	description = "Используйте специальную карту загрузки на консоли связи чтобы отправить координаты \
+	станции ближайшему крейсеру. Мы крайне советуем сообщить экипажу \
+	крейсера об вашей принадлежности к синдикату."
 
 	/// Checks whether we have sent the card to the traitor yet.
 	var/sent_accesscard = FALSE
@@ -30,7 +30,7 @@
 /datum/traitor_objective/ultimate/battlecruiser/generate_ui_buttons(mob/user)
 	var/list/buttons = list()
 	if(!sent_accesscard)
-		buttons += add_ui_button("", "Нажатие на эту кнопку создаст капсулу с картой загрузки, которую вы сможете использовать на консоли коммуникаций для связи с флотом.", "phone", "card")
+		buttons += add_ui_button("", "Нажатие на эту кнопку вызывет капсулу с ЕМАГом, который вы сможете использовать на консоли связи.", "phone", "card")
 	return buttons
 
 /datum/traitor_objective/ultimate/battlecruiser/ui_perform_action(mob/living/user, action)

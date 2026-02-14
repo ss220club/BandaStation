@@ -1,6 +1,6 @@
 /datum/traitor_objective/target_player/kidnapping
 	name = "Украдите %TARGET% в должности %JOB TITLE% и доставьте его в %AREA%"
-	description = "%TARGET% обладает важной информацией об НТ - вы должны украсть его и доставить в %AREA%, там вы можете вызвать капсулу для его транспортировки. \
+	description = "%TARGET% обладает важной информацией об НТ - вы должны украсть цель и доставить в %AREA%, там вы можете вызвать капсулу для транспортировки цели. \
 		Если %TARGET% будет доставлен живым, то вы получите бонусные %TC% telecrystals."
 
 	abstract_type = /datum/traitor_objective/target_player/kidnapping

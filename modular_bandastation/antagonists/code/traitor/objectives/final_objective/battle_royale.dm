@@ -1,8 +1,8 @@
 /datum/traitor_objective/ultimate/battle_royale
 	name = "Установите в экипаж скрытые импланты, затем заставьте их сражаться насмерть на подписочных стриминговых сервисах."
-	description = "Пройдите в %AREA% и получите комплект для стрима по Баттл Роялю. \
-		Используйте имплантер на экипаже, чтобы тайно внедрить им микровзрывное устройство. \
-		Как только у вас будет как минимум шесть участников, используйте пульт для запуска таймера и начала прямой трансляции. \
+	description = "Пройдите в %AREA% и получите комплект для проведения стрима по Баттл Роялю. \
+		Используйте имплантер на экипаже, чтобы тайно внедрить им взрывное устройство. \
+		Как только у вас будет как минимум шесть участников, используйте пульт для запуска прямой трансляции. \
 		Если после десяти минут останется более одного участника, все импланты взорвутся."
 
 	///Area type the objective owner must be in to receive the tools.
@@ -24,7 +24,7 @@
 /datum/traitor_objective/ultimate/battle_royale/generate_ui_buttons(mob/user)
 	var/list/buttons = list()
 	if(!equipped)
-		buttons += add_ui_button("", "Нажатие на кнопку вызовет капсулу с комплектом для Баттл Рояля.", "biohazard", "deliver_kit")
+		buttons += add_ui_button("", "Нажатие на кнопку вызовет капсулу с комплектом для стриминга.", "biohazard", "deliver_kit")
 	return buttons
 
 /datum/traitor_objective/ultimate/battle_royale/ui_perform_action(mob/living/user, action)
@@ -33,7 +33,7 @@
 		return
 	var/area/delivery_area = get_area(user)
 	if(delivery_area.type != kit_spawn_area)
-		to_chat(user, span_warning("Вы должны находится в [initial(kit_spawn_area.name)] чтобы получить комплект для Баттл Рояля."))
+		to_chat(user, span_warning("Вы должны находится в [initial(kit_spawn_area.name)] чтобы получить комплект стримера."))
 		return
 	equipped = TRUE
 	podspawn(list(

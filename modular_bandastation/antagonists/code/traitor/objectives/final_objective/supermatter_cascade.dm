@@ -1,7 +1,7 @@
 /datum/traitor_objective/ultimate/supermatter_cascade
-	name = "Уничтожьте станции с помощью резонансного каскада"
-	description = "Уничтожьте станции с помощью резонансного каскада. Отправляйтесь в %AREA% чтобы получить дестабилизирующий кристал, \
-		а затем используйте его на большом кристале СМ."
+	name = "Уничтожьте станцию с помощью каскадного резонансна"
+	description = "Уничтожьте станцию с помощью каскадного резонансна. Отправляйтесь в %AREA% чтобы получить дестабилизирующий кристал, \
+		а затем используйте его на большом кристале суперматерии."
 
 	///area type the objective owner must be in to receive the destabilizing crystal
 	var/area/dest_crystal_area_pickup
@@ -36,7 +36,7 @@
 /datum/traitor_objective/ultimate/supermatter_cascade/generate_ui_buttons(mob/user)
 	var/list/buttons = list()
 	if(!sent_crystal)
-		buttons += add_ui_button("", "Нажатие на кнопку вызовет капсулу с комплектом для резонансного каскада.", "biohazard", "destabilizing_crystal")
+		buttons += add_ui_button("", "Нажатие на кнопку вызовет капсулу с комплектом для каскадного резонанса.", "biohazard", "destabilizing_crystal")
 	return buttons
 
 /datum/traitor_objective/ultimate/supermatter_cascade/ui_perform_action(mob/living/user, action)
@@ -47,7 +47,7 @@
 				return
 			var/area/delivery_area = get_area(user)
 			if(delivery_area.type != dest_crystal_area_pickup)
-				to_chat(user, span_warning("Вы должны находится в [initial(dest_crystal_area_pickup.name)] чтобы получить комплект для вызова резонанского каскада."))
+				to_chat(user, span_warning("Вы должны находится в [initial(dest_crystal_area_pickup.name)] чтобы получить комплект для вызова каскадного резонанса."))
 				return
 			sent_crystal = TRUE
 			podspawn(list(

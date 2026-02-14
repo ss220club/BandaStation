@@ -10,7 +10,7 @@
 
 /datum/traitor_objective/kill_pet
 	name = "Убейте %DEPARTMENT HEAD%' любимого %PET%"
-	description = "%DEPARTMENT HEAD% разозлил нас тем, что прислал нам спам-имейлы, и мы хотим, чтобы его %PET% умер, чтобы показать им что происходит, когда они переходят черту. "
+	description = "%DEPARTMENT HEAD% разозлил нас тем, что прислал нам спам-имейлы, и мы хотим, чтобы его %PET% умер, чтобы показать что происходит, когда люди НТ переходят черту. "
 
 	progression_minimum = 0 MINUTES
 	telecrystal_reward = list(1, 2)

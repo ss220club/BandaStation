@@ -1,6 +1,6 @@
 /datum/traitor_objective/destroy_item
 	name = "Украдите %ITEM% и уничтожьте его"
-	description = "Найдите %ITEM% и уничтожьте его любым способом. Экипаж не должен иметь %ITEM% в их распоряжении. %METHOD%"
+	description = "Найдите %ITEM% и уничтожьте его любым способом. Экипаж не должен иметь %ITEM% в своём распоряжении. %METHOD%"
 
 	var/list/possible_items = list()
 	/// The current target item that we are stealing.
