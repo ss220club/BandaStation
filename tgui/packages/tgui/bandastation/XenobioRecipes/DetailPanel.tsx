@@ -9,6 +9,7 @@ export type ReactionEntry = {
 type Props = {
   slimeName: string;
   lore: string | null;
+  poolReactions: string[];
   reactions: ReactionEntry[];
   reactionCount: number;
   selectedSlimePath: string;
@@ -24,6 +25,7 @@ export function DetailPanel(props: Props) {
   const {
     slimeName,
     lore,
+    poolReactions,
     reactions,
     reactionCount,
     selectedSlimePath,
@@ -63,21 +65,100 @@ export function DetailPanel(props: Props) {
             <Button icon="times" onClick={onClose} compact />
           </Stack>
         </Stack.Item>
-        {lore && (
-          <Stack.Item shrink>
-            <Box
-              style={{
-                fontSize: '0.85rem',
-                color: 'rgba(200,210,220,0.95)',
-                marginBottom: '0.5rem',
-                padding: '0.4rem',
-                borderBottom: '1px solid rgba(100,120,160,0.3)',
-              }}
-            >
-              {lore}
+        <Stack.Item shrink style={{ minHeight: 0, overflow: 'auto' }}>
+          <Box
+            className="XenobioRecipes__Wiki"
+            style={{
+              fontSize: '0.85rem',
+              color: 'rgba(200,210,220,0.95)',
+              padding: '0.5rem',
+              marginBottom: '0.5rem',
+              backgroundColor: 'rgba(15,20,28,0.7)',
+              borderRadius: '8px',
+              border: '1px solid rgba(80,100,130,0.35)',
+            }}
+          >
+            {lore && (
+              <Box style={{ marginBottom: '0.75rem' }}>
+                <Box
+                  style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 'bold',
+                    color: 'rgba(140,180,220,0.95)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    marginBottom: '0.35rem',
+                  }}
+                >
+                  Описание
+                </Box>
+                <Box style={{ whiteSpace: 'pre-line', lineHeight: 1.4 }}>
+                  {lore}
+                </Box>
+              </Box>
+            )}
+            <Box>
+              <Box
+                style={{
+                  fontSize: '0.75rem',
+                  fontWeight: 'bold',
+                  color: 'rgba(140,180,220,0.95)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  marginBottom: '0.35rem',
+                }}
+              >
+                Потенциальные реакции
+              </Box>
+              <Box
+                style={{
+                  fontSize: '0.8rem',
+                  color: 'rgba(180,195,210,0.9)',
+                  marginBottom: '0.25rem',
+                }}
+              >
+                Потенциальный список реакций, которые могут быть спровоцированы
+                этим видом слайма. Вероятно, в текущей селекции слайма доступна
+                лишь часть из них.
+              </Box>
+              {poolReactions.length > 0 ? (
+                <Box
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '0.35rem',
+                    marginTop: '0.4rem',
+                  }}
+                >
+                  {poolReactions.map((name, i) => (
+                    <Box
+                      key={i}
+                      style={{
+                        padding: '0.2rem 0.5rem',
+                        backgroundColor: 'rgba(50,65,90,0.5)',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(90,120,160,0.25)',
+                        fontSize: '0.8rem',
+                      }}
+                    >
+                      {name}
+                    </Box>
+                  ))}
+                </Box>
+              ) : (
+                <Box
+                  style={{
+                    fontStyle: 'italic',
+                    color: 'rgba(140,150,160,0.85)',
+                    marginTop: '0.25rem',
+                  }}
+                >
+                  Нет данных о реакциях.
+                </Box>
+              )}
             </Box>
-          </Stack.Item>
-        )}
+          </Box>
+        </Stack.Item>
         <Stack.Item shrink>
           <Button
             icon="flask"
@@ -86,7 +167,7 @@ export function DetailPanel(props: Props) {
             onClick={onStudySlimeProperty}
             style={{ marginBottom: '0.5rem' }}
           >
-            Изучить свойство слайма ({recipeCost})
+            Изучить свойство слайма ({recipeCost} ксенобио)
           </Button>
         </Stack.Item>
         <Stack.Item grow style={{ overflow: 'auto', minHeight: 0 }}>
@@ -98,7 +179,7 @@ export function DetailPanel(props: Props) {
               color: 'rgba(200,210,230,0.98)',
             }}
           >
-            Открытые рецепты
+            Открытые рецепты реакций
           </Box>
           {reactions.length === 0 && (
             <Box

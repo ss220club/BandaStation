@@ -1,4 +1,9 @@
-#define XENOBIO_RECIPE_COST 25
+#define XENOBIO_RECIPE_COST 7
+#define XENOBIO_POINT_TYPE "Xenobio"
+#define XENOBIO_STUDY_COST 5
+#define XENOBIO_BASE_INCOME 0.5
+#define XENOBIO_BASE_PASSIVE_RATE 0.8
+#define XENOBIO_INCOME_INTERVAL 10
 
 /datum/action/innate/xenobio_recipes
 	name = "Рецепты"
@@ -110,11 +115,34 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 	return out
 
 /proc/xenobio_get_slime_lore(extract_path)
-	// var/path = ispath(extract_path) ? extract_path : text2path(extract_path)
-	// if(!path)
-	return "Один из изменчивых подвидов слаймов, реакция на химикаты которых со временем меняется, из-за изменений в их ДНК."
-	// var/obj/item/slime_extract/E = path
-	// return initial(E.desc)
+	var/path = ispath(extract_path) ? extract_path : text2path(extract_path)
+	var/desc = "Один из изменчивых подвидов слаймов, реакция на химикаты которых со временем меняется, из-за изменений в их ДНК."
+	if(path)
+		var/obj/item/slime_extract/E = path
+		desc = initial(E.desc) || desc
+	return desc
+
+/proc/xenobio_slime_reaction_supports_container(datum/chemical_reaction/slime/R, container_path)
+	if(R.required_container == container_path)
+		return TRUE
+	if(length(R.recipe_variants))
+		for(var/list/variant in R.recipe_variants)
+			if(length(variant) >= 1 && variant[1] == container_path)
+				return TRUE
+	return FALSE
+
+// all possible reactions
+/proc/xenobio_get_slime_pool_reaction_names(extract_path)
+	var/path = ispath(extract_path) ? extract_path : text2path(extract_path)
+	if(!path)
+		return list()
+	var/list/names = list()
+	for(var/datum/chemical_reaction/slime/R in xenobio_get_active_slime_reactions())
+		if(!xenobio_slime_reaction_supports_container(R, path))
+			continue
+		names += xenobio_reaction_display_name(R)
+	sortTim(names, GLOBAL_PROC_REF(cmp_text_asc))
+	return names
 
 /proc/xenobio_get_active_slime_reactions()
 	var/list/out = list()
@@ -163,11 +191,43 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 	var/pending_minigame_correct_word = null
 	var/pending_minigame_last_likeness = null
 	var/pending_minigame_attempts_left = 0
+	var/list/pending_minigame_bonus_segment = null
+	var/pending_minigame_bonus_claimed = FALSE
+
+/obj/machinery/computer/camera_advanced/xenobio/give_eye_control(mob/user)
+	. = ..()
+
+/proc/register_xenobio_research_point_type()
+	if(!(XENOBIO_POINT_TYPE in SSresearch.point_types))
+		SSresearch.point_types[XENOBIO_POINT_TYPE] = "Ксенобио"
 
 /obj/machinery/computer/camera_advanced/xenobio/post_machine_initialize()
 	. = ..()
+	register_xenobio_research_point_type()
 	if(!CONFIG_GET(flag/no_default_techweb_link) && !stored_research)
 		CONNECT_TO_RND_SERVER_ROUNDSTART_ON_STATION(stored_research, src)
+	addtimer(CALLBACK(src, PROC_REF(xenobio_income_tick)), XENOBIO_INCOME_INTERVAL SECONDS)
+
+/obj/machinery/computer/camera_advanced/xenobio/proc/xenobio_income_tick()
+	if(QDELETED(src) || !stored_research)
+		return
+	if(!(XENOBIO_POINT_TYPE in stored_research.research_points))
+		stored_research.research_points[XENOBIO_POINT_TYPE] = 0
+	var/mod = xenobio_income_modifier(stored_research)
+	stored_research.research_points[XENOBIO_POINT_TYPE] += XENOBIO_BASE_INCOME * mod
+	addtimer(CALLBACK(src, PROC_REF(xenobio_income_tick)), XENOBIO_INCOME_INTERVAL SECONDS)
+
+/proc/xenobio_income_modifier(datum/techweb/T)
+	if(!T)
+		return 0
+	var/mod = XENOBIO_BASE_PASSIVE_RATE
+	if(T.researched_nodes[TECHWEB_NODE_XENOBIOLOGY])
+		mod += 1
+	if(T.researched_nodes["xenobio_protocols"])
+		mod += 0.5
+	if(T.researched_nodes["xenobio_advanced"])
+		mod += 0.5
+	return max(0, mod)
 
 /obj/machinery/computer/camera_advanced/xenobio/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()
@@ -182,9 +242,12 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 	data["research_points"] = list()
 	if(stored_research)
 		data["research_points"] = stored_research.research_points.Copy()
+		if(!(XENOBIO_POINT_TYPE in data["research_points"]))
+			data["research_points"][XENOBIO_POINT_TYPE] = 0
 	else
-		data["research_points"] = list(TECHWEB_POINT_TYPE_GENERIC = 0)
+		data["research_points"] = list(TECHWEB_POINT_TYPE_GENERIC = 0, XENOBIO_POINT_TYPE = 0)
 	data["recipe_cost"] = XENOBIO_RECIPE_COST
+	data["xenobio_study_cost"] = XENOBIO_STUDY_COST
 	data["loaded_slime_path"] = loaded_slime_type ? "[loaded_slime_type]" : null
 	data["selected_slime"] = selected_slime_path
 	data["selected_slime_lore"] = null
@@ -199,8 +262,16 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 		data["minigame_last_likeness"] = pending_minigame_last_likeness
 		data["minigame_correct_length"] = length(pending_minigame_correct_word || "")
 		data["minigame_attempts_left"] = pending_minigame_attempts_left
+		if(pending_minigame_bonus_segment)
+			data["minigame_bonus_segment"] = list(
+				"line" = pending_minigame_bonus_segment["line"],
+				"start" = pending_minigame_bonus_segment["start"],
+				"length" = pending_minigame_bonus_segment["length"],
+			)
+		data["minigame_bonus_claimed"] = pending_minigame_bonus_claimed
 	if(selected_slime_path)
 		data["selected_slime_lore"] = xenobio_get_slime_lore(selected_slime_path)
+		data["selected_slime_pool_reactions"] = xenobio_get_slime_pool_reaction_names(selected_slime_path)
 		var/list/list/reaction_entries = GLOB.xenobio_slime_recipe_entries[selected_slime_path]
 		if(reaction_entries)
 			data["selected_slime_reactions"] = reaction_entries.Copy()
@@ -224,6 +295,8 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 			return try_open_random_recipe(usr)
 		if("guess_word")
 			return try_guess_terminal_word(usr, params["word"])
+		if("claim_bonus_attempt")
+			return try_claim_bonus_attempt(usr)
 		if("cancel_random_recipe_minigame")
 			return try_cancel_random_recipe_minigame(usr)
 		if("open_slime_detail")
@@ -284,9 +357,11 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 	if(!stored_research)
 		balloon_alert(user, "нет связи с R&D")
 		return TRUE
-	var/points = stored_research.research_points[TECHWEB_POINT_TYPE_GENERIC] || 0
-	if(points < XENOBIO_RECIPE_COST)
-		balloon_alert(user, "недостаточно очков ([XENOBIO_RECIPE_COST] нужно)")
+	if(!(XENOBIO_POINT_TYPE in stored_research.research_points))
+		stored_research.research_points[XENOBIO_POINT_TYPE] = 0
+	var/xenobio_pts = stored_research.research_points[XENOBIO_POINT_TYPE] || 0
+	if(xenobio_pts < XENOBIO_RECIPE_COST)
+		balloon_alert(user, "недостаточно очков ксенобио ([XENOBIO_RECIPE_COST] нужно)")
 		return TRUE
 	var/list/available = list()
 	for(var/datum/chemical_reaction/slime/R in active)
@@ -307,7 +382,7 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 	if(!length(available))
 		balloon_alert(user, "все рецепты уже открыты")
 		return TRUE
-	stored_research.remove_point_type(TECHWEB_POINT_TYPE_GENERIC, XENOBIO_RECIPE_COST)
+	stored_research.research_points[XENOBIO_POINT_TYPE] = max(0, (stored_research.research_points[XENOBIO_POINT_TYPE] || 0) - XENOBIO_RECIPE_COST)
 	var/datum/chemical_reaction/slime/picked = pick(available)
 	var/container_path = picked.required_container
 	var/list/reag_list = picked.required_reagents
@@ -375,6 +450,45 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 			line_str = copytext(line_str, 1, pos) + copytext(formula, j, j + 1) + copytext(line_str, pos + 1)
 		grid[line_idx] = line_str
 		word_entries += list(list("word" = formula, "line" = line_idx - 1, "start" = start - 1))
+	// bonus segment that gives +1 attempt
+	var/bonus_inner_len = 4
+	var/bonus_total_len = 2 + bonus_inner_len
+	var/bonus_text = "\["
+	for(var/b in 1 to bonus_inner_len)
+		var/p = rand(1, sep_len)
+		bonus_text += copytext(XENOBIO_TERMINAL_SEPARATORS, p, p + 1)
+	bonus_text += "\]"
+	var/list/word_ranges = list()
+	for(var/entry in word_entries)
+		word_ranges += list(list("line" = entry["line"], "start" = entry["start"], "end" = entry["start"] + length(entry["word"])))
+	var/bonus_line = -1
+	var/bonus_start = -1
+	for(var/attempt in 1 to 50)
+		var/cand_line = rand(1, XENOBIO_TERMINAL_LINES) - 1
+		var/cand_start = rand(0, len_line - bonus_total_len)
+		if(cand_start < 0)
+			continue
+		var/overlap = FALSE
+		for(var/range in word_ranges)
+			if(range["line"] != cand_line)
+				continue
+			if(cand_start < range["end"] && (cand_start + bonus_total_len) > range["start"])
+				overlap = TRUE
+				break
+		if(!overlap)
+			bonus_line = cand_line
+			bonus_start = cand_start
+			break
+	if(bonus_line >= 0 && bonus_start >= 0)
+		var/line_str = grid[bonus_line + 1]
+		for(var/k in 1 to bonus_total_len)
+			var/pos = bonus_start + k
+			line_str = copytext(line_str, 1, pos) + copytext(bonus_text, k, k + 1) + copytext(line_str, pos + 1)
+		grid[bonus_line + 1] = line_str
+		cons.pending_minigame_bonus_segment = list("line" = bonus_line, "start" = bonus_start, "length" = bonus_total_len)
+	else
+		cons.pending_minigame_bonus_segment = null
+	cons.pending_minigame_bonus_claimed = FALSE
 	cons.pending_minigame_terminal_lines = grid
 	cons.pending_minigame_terminal_words = word_entries
 	cons.pending_minigame_correct_word = correct_formula
@@ -413,9 +527,19 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 		pending_minigame_correct_word = null
 		pending_minigame_last_likeness = null
 		pending_minigame_attempts_left = 0
+		pending_minigame_bonus_segment = null
 		return TRUE
 	pending_minigame_attempts_left--
 	pending_minigame_last_likeness = xenobio_terminal_likeness(word, pending_minigame_correct_word)
+	return TRUE
+
+/obj/machinery/computer/camera_advanced/xenobio/proc/try_claim_bonus_attempt(mob/user)
+	if(!pending_random_recipe || !pending_minigame_bonus_segment || pending_minigame_bonus_claimed)
+		return FALSE
+	pending_minigame_bonus_claimed = TRUE
+	pending_minigame_attempts_left++
+	playsound(src, 'sound/machines/click.ogg', 25, vary = FALSE)
+	balloon_alert(user, "+1 попытка")
 	return TRUE
 
 /obj/machinery/computer/camera_advanced/xenobio/proc/try_cancel_random_recipe_minigame(mob/user)
@@ -426,6 +550,7 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 		pending_minigame_correct_word = null
 		pending_minigame_last_likeness = null
 		pending_minigame_attempts_left = 0
+		pending_minigame_bonus_segment = null
 	return TRUE
 
 /proc/xenobio_slime_has_study_available(slime_path)
@@ -459,9 +584,11 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 	if(!stored_research)
 		balloon_alert(user, "нет связи с R&D")
 		return TRUE
-	var/points = stored_research.research_points[TECHWEB_POINT_TYPE_GENERIC] || 0
-	if(points < XENOBIO_RECIPE_COST)
-		balloon_alert(user, "недостаточно очков ([XENOBIO_RECIPE_COST] нужно)")
+	if(!(XENOBIO_POINT_TYPE in stored_research.research_points))
+		stored_research.research_points[XENOBIO_POINT_TYPE] = 0
+	var/xenobio_points = stored_research.research_points[XENOBIO_POINT_TYPE] || 0
+	if(xenobio_points < XENOBIO_STUDY_COST)
+		balloon_alert(user, "недостаточно очков ксенобио ([XENOBIO_STUDY_COST] нужно)")
 		return TRUE
 	var/list/entries = GLOB.xenobio_slime_recipe_entries[slime_path]
 	var/list/already_added = list()
@@ -500,7 +627,7 @@ GLOBAL_LIST_INIT(xenobio_slime_tiers, list(
 		"reaction" = reaction_name,
 		"locked" = TRUE,
 	))
-	stored_research.remove_point_type(TECHWEB_POINT_TYPE_GENERIC, XENOBIO_RECIPE_COST)
+	stored_research.research_points[XENOBIO_POINT_TYPE] = max(0, (stored_research.research_points[XENOBIO_POINT_TYPE] || 0) - XENOBIO_STUDY_COST)
 	playsound(src, 'sound/machines/high_tech_confirm.ogg', 30, vary = FALSE)
 	balloon_alert(user, "рецепт открыт: [reaction_name]")
 	return TRUE

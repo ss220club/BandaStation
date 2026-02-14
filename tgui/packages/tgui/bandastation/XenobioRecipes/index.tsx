@@ -10,9 +10,11 @@ export type XenobioRecipesData = {
   slimes: SlimeEntry[];
   research_points: Record<string, number>;
   recipe_cost: number;
+  xenobio_study_cost?: number;
   loaded_slime_path: string | null;
   selected_slime: string | null;
   selected_slime_lore: string | null;
+  selected_slime_pool_reactions: string[];
   selected_slime_reactions: ReactionEntry[];
   slime_study_available: boolean;
   random_recipe_available: boolean;
@@ -22,6 +24,12 @@ export type XenobioRecipesData = {
   minigame_last_likeness?: number | null;
   minigame_correct_length?: number;
   minigame_attempts_left?: number;
+  minigame_bonus_segment?: {
+    line: number;
+    start: number;
+    length: number;
+  } | null;
+  minigame_bonus_claimed?: boolean;
 };
 
 export function XenobioRecipesLayout() {
@@ -30,9 +38,11 @@ export function XenobioRecipesLayout() {
     slimes = [],
     research_points = {},
     recipe_cost = 100,
+    xenobio_study_cost = 5,
     loaded_slime_path = null,
     selected_slime,
     selected_slime_lore,
+    selected_slime_pool_reactions = [],
     selected_slime_reactions = [],
     slime_study_available = false,
     random_recipe_available = true,
@@ -42,15 +52,19 @@ export function XenobioRecipesLayout() {
     minigame_last_likeness = null,
     minigame_correct_length = 0,
     minigame_attempts_left = 7,
+    minigame_bonus_segment = null,
+    minigame_bonus_claimed = false,
   } = data;
 
-  const points = research_points['General Research'] ?? 0;
+  //const points = research_points['General Research'] ?? 0;
+  const xenobioPoints = research_points['Xenobio'] ?? 0;
   const canBuyRandom =
-    points >= recipe_cost && random_recipe_available && !minigame_active;
+    xenobioPoints >= recipe_cost && random_recipe_available && !minigame_active;
   const selectedSlime = selected_slime
     ? slimes.find((s) => s.path === selected_slime)
     : null;
-  const selectedSlimeName = selectedSlime?.display_name ?? selectedSlime?.name ?? 'Слайм';
+  const selectedSlimeName =
+    selectedSlime?.display_name ?? selectedSlime?.name ?? 'Слайм';
   const selectedReactionCount = selectedSlime?.reaction_count ?? 0;
 
   return (
@@ -88,10 +102,10 @@ export function XenobioRecipesLayout() {
             disabled={!canBuyRandom}
             onClick={() => act('open_random_recipe')}
           >
-            Реконструктор реакций ({recipe_cost})
+            Реконструктор реакций ({recipe_cost} ксенобио)
           </Button>
           <Box bold style={{ marginLeft: '0.5rem', alignSelf: 'center' }}>
-            Очки: {points}
+            Очки ксенобиологии: {xenobioPoints}
           </Box>
         </Stack>
       </Box>
@@ -112,7 +126,10 @@ export function XenobioRecipesLayout() {
             lastLikeness={minigame_last_likeness ?? null}
             correctLength={minigame_correct_length ?? 0}
             attemptsLeft={minigame_attempts_left ?? 7}
+            bonusSegment={minigame_bonus_segment ?? null}
+            bonusClaimed={minigame_bonus_claimed ?? false}
             onGuess={(word) => act('guess_word', { word })}
+            onClaimBonus={() => act('claim_bonus_attempt')}
             onCancel={() => act('cancel_random_recipe_minigame')}
           />
         ) : (
@@ -137,12 +154,13 @@ export function XenobioRecipesLayout() {
               <DetailPanel
                 slimeName={selectedSlimeName}
                 lore={selected_slime_lore}
+                poolReactions={selected_slime_pool_reactions}
                 reactions={selected_slime_reactions}
                 reactionCount={selectedReactionCount}
                 selectedSlimePath={selected_slime}
                 loadedSlimePath={loaded_slime_path}
-                recipeCost={recipe_cost}
-                researchPoints={points}
+                recipeCost={xenobio_study_cost}
+                researchPoints={xenobioPoints}
                 studyAvailable={slime_study_available}
                 onClose={() => act('close_slime_detail')}
                 onStudySlimeProperty={() =>

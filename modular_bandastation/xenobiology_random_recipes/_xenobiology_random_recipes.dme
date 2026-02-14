@@ -2,5 +2,6 @@
 #include "code/xenobio_recipes_ui.dm"
 #include "code/xenobio_notes.dm"
 #include "code/slime_scanner.dm"
+#include "code/xenobio_research_nodes.dm"
 #include "code/slime_extracts.dm"
 #include "code/slime_extracts_custom.dm"
