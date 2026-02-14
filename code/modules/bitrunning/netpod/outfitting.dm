@@ -7,7 +7,7 @@
 
 	for(var/datum/outfit/outfit as anything in outfit_list)
 		var/outfit_name = initial(outfit.name)
-		if(findtext(outfit_name, "(") != 0 || findtext(outfit_name, "-") != 0)) // No special variants please
+		if(findtext(outfit_name, "(") != 0 || findtext(outfit_name, "-") != 0) // No special variants please
 			continue
 
 		collection["outfits"] += list(list("path" = outfit, "name" = outfit_name))
