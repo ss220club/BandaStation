@@ -583,3 +583,25 @@
         ipc_visual_brand_key = features["ipc_hef_visual"]
     else
         ipc_visual_brand_key = ipc_brand_key
+
+// ============================================
+// ITEM INTERACTION - EXTERNAL REPAIR
+// ============================================
+// Позволяет другим игрокам чинить IPC сваркой и кабелем без операций
+
+/mob/living/carbon/human/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	// Проверяем что цель - IPC
+	if(istype(dna?.species, /datum/species/ipc))
+		var/datum/species/ipc/S = dna.species
+
+		// Ремонт сваркой (brute damage)
+		if(istype(tool, /obj/item/weldingtool))
+			if(S.try_repair_brute(src, tool, user))
+				return ITEM_INTERACT_SUCCESS
+
+		// Ремонт кабелем (burn damage)
+		else if(istype(tool, /obj/item/stack/cable_coil))
+			if(S.try_repair_burn(src, tool, user))
+				return ITEM_INTERACT_SUCCESS
+
+	return ..() // Вызываем родительский метод для остальных взаимодействий
