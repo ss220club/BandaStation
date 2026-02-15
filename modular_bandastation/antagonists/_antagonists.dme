@@ -19,7 +19,7 @@
 #include "code/traitor/objectives/destroy_item.dm"
 #include "code/traitor/objectives/eyesnatching.dm"
 #include "code/traitor/objectives/hack_comm_console.dm"
-#include "code/traitor/objectives/infect.dm"
+// #include "code/traitor/objectives/infect.dm" BUGGED
 #include "code/traitor/objectives/kidnapping.dm"
 #include "code/traitor/objectives/kill_pet.dm"
 #include "code/traitor/objectives/locate_weakpoint.dm"
