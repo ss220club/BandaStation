@@ -329,7 +329,7 @@
 		return FALSE
 	. = ..()
 	src.right_side = right_side
-	examine_desc = "имеет ранение в [right_side ? "правом" : "левом"] глазу, и из впадины течёт кровь"
+	examine_desc = "имеет ранение в [right_side ? "правом" : "левом"] глазу, и из раны течёт кровь"
 	RegisterSignal(limb, COMSIG_BODYPART_UPDATE_WOUND_OVERLAY, PROC_REF(wound_overlay))
 	limb.update_part_wound_overlay()
 
