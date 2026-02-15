@@ -34,8 +34,8 @@
 	H.revive()
 
 	// Восстанавливаем немного HP
-	H.adjustBruteLoss(-50, forced = TRUE)
-	H.adjustFireLoss(-50, forced = TRUE)
+	H.adjust_brute_loss(-50, forced = TRUE)
+	H.adjust_fire_loss(-50, forced = TRUE)
 
 	to_chat(H, span_notice("СИСТЕМНЫЙ ПЕРЕЗАПУСК: Инициализация систем... Перезагрузка завершена."))
 

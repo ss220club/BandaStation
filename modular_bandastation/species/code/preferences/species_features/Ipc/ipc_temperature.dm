@@ -61,20 +61,21 @@
 
 	// Модификатор скорости
 	if(effects["speed_mod"])
-		H.add_movespeed_modifier(/datum/movespeed_modifier/ipc_temperature, update = TRUE)
-		var/datum/movespeed_modifier/ipc_temperature/speed_mod = H.get_movespeed_modifier(/datum/movespeed_modifier/ipc_temperature)
-		if(speed_mod)
-			speed_mod.multiplicative_slowdown = (1 - effects["speed_mod"]) * 2
+		H.add_or_update_variable_movespeed_modifier(
+			/datum/movespeed_modifier/ipc_temperature,
+			update = TRUE,
+			multiplicative_slowdown = (1 - effects["speed_mod"]) * 2
+		)
 
 	// Урон от перегрева
 	if(effects["damage"] && effects["damage_interval"])
 		if(world.time % (effects["damage_interval"] * 10) == 0)
-			H.adjustFireLoss(effects["damage"])
+			H.adjust_fire_loss(effects["damage"])
 			to_chat(H, "<span class='danger'>ПРЕДУПРЕЖДЕНИЕ: Критический перегрев! Получен урон от высокой температуры.</span>")
 
 	// Потеря стамины
 	if(effects["stamina_loss"] && prob(10))
-		H.adjustStaminaLoss(20)
+		H.adjust_stamina_loss(20)
 		to_chat(H, "<span class='warning'>Предупреждение: Системы нестабильны из-за перегрева.</span>")
 
 	// Шанс крита

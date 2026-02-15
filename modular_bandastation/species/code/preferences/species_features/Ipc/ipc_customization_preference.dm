@@ -22,29 +22,41 @@
 	return TRUE
 
 /datum/preference/ipc_customization/apply_to_human(mob/living/carbon/human/target, value)
+	to_chat(target, span_boldwarning("DEBUG PREF: apply_to_human ВЫЗВАН!"))
+
 	if(!islist(value))
+		to_chat(target, span_boldwarning("DEBUG PREF: value не список!"))
 		return
+
 	// FIX: Проверяем что target это живой human с dna и species
 	if(!istype(target))
+		to_chat(target, span_boldwarning("DEBUG PREF: target не human!"))
 		return
 	if(!target.dna)
+		to_chat(target, span_boldwarning("DEBUG PREF: нет target.dna!"))
 		return
 	if(!istype(target.dna.species, /datum/species/ipc))
+		to_chat(target, span_boldwarning("DEBUG PREF: species не IPC! species=[target.dna.species.type]"))
 		return
 
 	var/list/customization = value
 	var/datum/species/ipc/S = target.dna.species
 
+	to_chat(target, span_boldnotice("DEBUG PREF: Все проверки пройдены! Применяем customization..."))
+
 	// Применяем тип мозга
 	var/brain_type = customization["brain_type"] || "positronic"
+	to_chat(target, span_notice("DEBUG PREF: brain_type = [brain_type]"))
 	apply_ipc_brain_type_direct(target, brain_type)
 
 	// Применяем chassis brand
 	var/chassis_brand = customization["chassis_brand"] || "unbranded"
+	to_chat(target, span_notice("DEBUG PREF: chassis_brand = [chassis_brand]"))
 	S.ipc_brand_key = chassis_brand
 
 	if(chassis_brand == "hef")
 		// HEF: применяем поштучные выборы
+		to_chat(target, span_notice("DEBUG PREF: Применяем HEF визуал"))
 		S.hef_head = customization["hef_head"] || "unbranded"
 		S.hef_chest = customization["hef_chest"] || "unbranded"
 		S.hef_l_arm = customization["hef_l_arm"] || "unbranded"
@@ -54,9 +66,12 @@
 		apply_ipc_hef_visual(target, S)
 	else
 		// Обычный бренд: единый визуал + эффекты
+		to_chat(target, span_notice("DEBUG PREF: Вызываем apply_ipc_brand([chassis_brand])"))
 		apply_ipc_brand(target, chassis_brand)
+		to_chat(target, span_notice("DEBUG PREF: Вызываем apply_ipc_brand_effects([chassis_brand])"))
 		apply_ipc_brand_effects(target, chassis_brand)
 
+	to_chat(target, span_notice("DEBUG PREF: Вызываем update_body()"))
 	target.update_body()
 
 /datum/preference/ipc_customization/deserialize(input, datum/preferences/preferences)

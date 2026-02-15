@@ -100,11 +100,47 @@
 	patient_data["system_damage"] = round(patient.get_tox_loss(), 0.1)
 	patient_data["cooling_damage"] = round(patient.get_oxy_loss(), 0.1)
 
+	// Процентные показатели урона
+	patient_data["mechanical_damage_percent"] = round((patient.get_brute_loss() / patient.maxHealth) * 100, 0.1)
+	patient_data["electrical_damage_percent"] = round((patient.get_fire_loss() / patient.maxHealth) * 100, 0.1)
+
+	// Температура процессора (для IPC)
+	var/datum/species/ipc/ipc_species = patient.dna.species
+	if(istype(ipc_species))
+		patient_data["cpu_temperature"] = round(ipc_species.cpu_temperature, 0.1)
+		patient_data["cpu_temp_optimal_min"] = ipc_species.cpu_temp_optimal_min
+		patient_data["cpu_temp_optimal_max"] = ipc_species.cpu_temp_optimal_max
+		patient_data["cpu_temp_critical"] = ipc_species.cpu_temp_critical
+
+		// Определяем статус температуры
+		var/temp_status = "normal"
+		if(ipc_species.cpu_temperature < ipc_species.cpu_temp_optimal_min)
+			temp_status = "cold"
+		else if(ipc_species.cpu_temperature > ipc_species.cpu_temp_optimal_max && ipc_species.cpu_temperature < 90)
+			temp_status = "warm"
+		else if(ipc_species.cpu_temperature >= 90 && ipc_species.cpu_temperature < 120)
+			temp_status = "hot"
+		else if(ipc_species.cpu_temperature >= 120)
+			temp_status = "critical"
+
+		patient_data["cpu_temp_status"] = temp_status
+
+		// Информация о разгоне
+		patient_data["overclock_active"] = ipc_species.overclock_active
+		patient_data["overclock_speed_bonus"] = round(ipc_species.overclock_speed_bonus * 100)
+
+		// Информация о шасси
+		patient_data["chassis_brand"] = ipc_species.ipc_brand_key
+		patient_data["chassis_visual_brand"] = ipc_species.ipc_visual_brand_key
+
 	// Компоненты
 	patient_data["components"] = get_components_data(patient)
 
 	// Части тела
 	patient_data["bodyparts"] = get_bodyparts_data(patient)
+
+	// Импланты
+	patient_data["implants"] = get_implants_data(patient)
 
 	// Системные сообщения
 	patient_data["system_messages"] = get_system_messages(patient)
@@ -465,6 +501,62 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 
 	return bodyparts
 
+/obj/machinery/computer/operating/synthetic/proc/get_implants_data(mob/living/carbon/human/patient)
+	var/list/implants = list()
+
+	// Проверяем импланты в каждой части тела
+	for(var/zone in list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+		var/obj/item/bodypart/part = patient.get_bodypart(zone)
+		if(!part)
+			continue
+
+		// Ищем все импланты в этой части
+		for(var/obj/item/implant/imp in part.contents)
+			// Определяем тип импланта и его статус
+			var/implant_name = imp.name
+			var/implant_location = part.plaintext_zone
+			var/implant_status = "Активен"
+			var/implant_color = "good"
+
+			// Для IPC имплантов проверяем специфичные состояния
+			if(istype(imp, /obj/item/implant/ipc))
+				var/obj/item/implant/ipc/ipc_imp = imp
+
+				// Reactive Repair
+				if(istype(ipc_imp, /obj/item/implant/ipc/reactive_repair))
+					var/obj/item/implant/ipc/reactive_repair/rr = ipc_imp
+					if(rr.repair_active)
+						implant_status = "Активно лечит"
+						implant_color = "average"
+					else
+						implant_status = "Ожидание"
+
+				// Magnetic Leg
+				else if(istype(ipc_imp, /obj/item/implant/ipc/magnetic_leg))
+					var/obj/item/implant/ipc/magnetic_leg/ml = ipc_imp
+					if(ml.magboots_active)
+						implant_status = "Магниты активны"
+						implant_color = "average"
+					else
+						implant_status = "Магниты отключены"
+
+			implants += list(list(
+				"name" = implant_name,
+				"location" = implant_location,
+				"status" = implant_status,
+				"status_color" = implant_color
+			))
+
+	if(implants.len == 0)
+		implants += list(list(
+			"name" = "Нет установленных имплантов",
+			"location" = "—",
+			"status" = "—",
+			"status_color" = "average"
+		))
+
+	return implants
+
 /obj/machinery/computer/operating/synthetic/proc/get_system_messages(mob/living/carbon/human/patient)
 	var/list/system_messages = list()
 
@@ -472,10 +564,39 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 	var/obj/item/organ/heart/ipc_battery/battery = patient.get_organ_slot(ORGAN_SLOT_HEART)
 	var/obj/item/organ/lungs/ipc/cooling = patient.get_organ_slot(ORGAN_SLOT_LUNGS)
 
+	// Проверка температуры процессора
+	var/datum/species/ipc/ipc_species = patient.dna.species
+	if(istype(ipc_species))
+		if(ipc_species.cpu_temperature >= 130)
+			system_messages += list(list(
+				"type" = "critical",
+				"message" = "КРИТИЧНО: Температура процессора [round(ipc_species.cpu_temperature)]°C! Риск расплавления! Требуется немедленное охлаждение!"
+			))
+		else if(ipc_species.cpu_temperature >= 120)
+			system_messages += list(list(
+				"type" = "critical",
+				"message" = "КРИТИЧНО: Температура процессора [round(ipc_species.cpu_temperature)]°C! Критический перегрев! Требуется охлаждение!"
+			))
+		else if(ipc_species.cpu_temperature >= 90)
+			system_messages += list(list(
+				"type" = "warning",
+				"message" = "ПРЕДУПРЕЖДЕНИЕ: Температура процессора [round(ipc_species.cpu_temperature)]°C. Перегрев системы."
+			))
+		else if(ipc_species.cpu_temperature < ipc_species.cpu_temp_optimal_min)
+			system_messages += list(list(
+				"type" = "warning",
+				"message" = "ПРЕДУПРЕЖДЕНИЕ: Температура процессора [round(ipc_species.cpu_temperature)]°C. Ниже оптимальной."
+			))
+
 	if(!brain)
 		system_messages += list(list(
 			"type" = "critical",
 			"message" = "КРИТИЧНО: Позитронное ядро отсутствует. Система не функциональна."
+		))
+	else if(brain.damage > brain.maxHealth * 0.5)
+		system_messages += list(list(
+			"type" = "critical",
+			"message" = "КРИТИЧНО: Позитронное ядро повреждено на [round((brain.damage / brain.maxHealth) * 100)]%. Требуется ремонт."
 		))
 
 	if(!battery)
@@ -503,13 +624,25 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 	if(patient.get_brute_loss() > 50)
 		system_messages += list(list(
 			"type" = "warning",
-			"message" = "ПРЕДУПРЕЖДЕНИЕ: Критические механические повреждения. Требуется ремонт."
+			"message" = "ПРЕДУПРЕЖДЕНИЕ: Критические механические повреждения ([round(patient.get_brute_loss())] HP). Требуется ремонт."
 		))
 
 	if(patient.get_fire_loss() > 50)
 		system_messages += list(list(
 			"type" = "warning",
-			"message" = "ПРЕДУПРЕЖДЕНИЕ: Критические повреждения проводки. Требуется ремонт."
+			"message" = "ПРЕДУПРЕЖДЕНИЕ: Критические повреждения проводки ([round(patient.get_fire_loss())] HP). Требуется ремонт."
+		))
+
+	// Проверка отсутствующих конечностей
+	var/missing_limbs = 0
+	for(var/zone in list(BODY_ZONE_HEAD, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+		if(!patient.get_bodypart(zone))
+			missing_limbs++
+
+	if(missing_limbs > 0)
+		system_messages += list(list(
+			"type" = "warning",
+			"message" = "ПРЕДУПРЕЖДЕНИЕ: Отсутствует [missing_limbs] конечност[missing_limbs == 1 ? "ь" : "ей"]. Требуется установка."
 		))
 
 	if(system_messages.len == 0)

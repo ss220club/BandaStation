@@ -35,12 +35,19 @@
 	return "Шасси от Morpheus Cyberkinetics. Специализация: когнитивные системы и нейроинтерфейсы."
 
 /datum/body_modification/ipc_chassis/morpheus/apply_to_human(mob/living/carbon/human/target)
+	to_chat(target, span_boldwarning("DEBUG BODYMOD: Morpheus apply_to_human ВЫЗВАН!"))
 	if(!..())
+		to_chat(target, span_warning("DEBUG BODYMOD: parent apply_to_human вернул FALSE"))
 		return FALSE
+	to_chat(target, span_notice("DEBUG BODYMOD: Получаем species..."))
 	var/datum/species/ipc/S = target.dna.species
+	to_chat(target, span_notice("DEBUG BODYMOD: Устанавливаем brand_key = morpheus"))
 	S.ipc_brand_key = "morpheus"
+	to_chat(target, span_notice("DEBUG BODYMOD: Вызываем apply_ipc_brand(target, morpheus)"))
 	apply_ipc_brand(target, "morpheus")
+	to_chat(target, span_notice("DEBUG BODYMOD: Вызываем apply_ipc_brand_effects(target, morpheus)"))
 	apply_ipc_brand_effects(target, "morpheus")
+	to_chat(target, span_boldnotice("DEBUG BODYMOD: Morpheus apply_to_human ЗАВЕРШЁН!"))
 	return TRUE
 
 /datum/body_modification/ipc_chassis/etamin
@@ -115,12 +122,19 @@
 	return "Шасси от Xion Manufacturing Group. Специализация: лёгкие высокопроизводительные каркасы."
 
 /datum/body_modification/ipc_chassis/xion/apply_to_human(mob/living/carbon/human/target)
+	to_chat(target, span_boldwarning("DEBUG BODYMOD: Xion apply_to_human ВЫЗВАН!"))
 	if(!..())
+		to_chat(target, span_warning("DEBUG BODYMOD: parent apply_to_human вернул FALSE"))
 		return FALSE
+	to_chat(target, span_notice("DEBUG BODYMOD: Получаем species..."))
 	var/datum/species/ipc/S = target.dna.species
+	to_chat(target, span_notice("DEBUG BODYMOD: Устанавливаем brand_key = xion"))
 	S.ipc_brand_key = "xion"
+	to_chat(target, span_notice("DEBUG BODYMOD: Вызываем apply_ipc_brand(target, xion)"))
 	apply_ipc_brand(target, "xion")
+	to_chat(target, span_notice("DEBUG BODYMOD: Вызываем apply_ipc_brand_effects(target, xion)"))
 	apply_ipc_brand_effects(target, "xion")
+	to_chat(target, span_boldnotice("DEBUG BODYMOD: Xion apply_to_human ЗАВЕРШЁН!"))
 	return TRUE
 
 /datum/body_modification/ipc_chassis/zeng_hu

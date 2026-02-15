@@ -42,6 +42,7 @@
 		TRAIT_TOXIMMUNE,
 		TRAIT_LIMBATTACHMENT,
 		TRAIT_EASYDISMEMBER,
+		TRAIT_NOHUNGER,  // IPC не едят, нет HUD голода
 	)
 
 	// Урон модификаторы
@@ -57,6 +58,26 @@
 	var/cpu_temp_critical = 130
 	var/cpu_cooling_rate = 0.1
 	var/cpu_heating_from_environment = TRUE
+
+	// Модификатор скорости взаимодействия от температуры
+	var/temp_interaction_speed_mod = 1.0
+
+	// Таймеры для урона от перегрева
+	var/last_overheat_damage_time = 0
+	var/last_critical_damage_time = 0
+	var/last_extreme_damage_time = 0
+
+	// Системы охлаждения
+	var/thermal_paste_active = FALSE
+	var/thermal_paste_end_time = 0
+	var/improved_cooling_installed = FALSE
+	var/cooling_block_active = FALSE
+	var/cooling_block_end_time = 0
+	var/cooled_tank_active = FALSE
+
+	// Разгон системы
+	var/overclock_active = FALSE
+	var/overclock_speed_bonus = 0.4  // 40% ускорение по умолчанию
 
 	// Переменные для шасси
 	var/chassis_manufacturer = "Unbranded"
@@ -89,6 +110,10 @@
 	var/ipc_overheat_rate_mod = 1.0
 	// Модификатор стоимости ремонта (Cybersun: 1.5)
 	var/ipc_repair_cost_mod = 1.0
+
+	// Дополнительные модификаторы от шасси
+	// Список модификаторов: "overheat_rate", "healing_time", "melee_damage", "implant_slots", и т.д.
+	var/list/ipc_chassis_modifiers = list()
 
 /datum/species/ipc/get_species_description()
 	return "IPC (Integrated Positronic Chassis) — искусственные синтетики на основе позитронного ядра. \
@@ -128,6 +153,13 @@
 	H.update_body()
 	H.update_body_parts()
 
+	// Даем IPC абилки
+	var/datum/action/cooldown/ipc_overclock/overclock = new()
+	overclock.Grant(H)
+
+	// Регистрируем обработчик электрошока
+	RegisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT, PROC_REF(on_electrocute))
+
 	// ПРИМЕЧАНИЕ:
 	// - Chassis brand применяется через body_modifications автоматически
 	// - Тип мозга тоже через body_modifications
@@ -138,11 +170,22 @@
 /datum/species/ipc/on_species_loss(mob/living/carbon/human/H, datum/species/new_species, pref_load)
 	. = ..()
 
+	// Удаляем IPC абилки
+	var/datum/action/cooldown/ipc_overclock/overclock = locate() in H.actions
+	if(overclock)
+		overclock.Remove(H)
+
+	// Отменяем регистрацию сигналов
+	UnregisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT)
+
 /datum/species/ipc/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	. = ..()
 	handle_self_repair(H)
-	handle_temperature(H)
+	handle_temperature(H, seconds_per_tick)
+	handle_temperature_effects(H)
 	handle_battery(H)
+	// Применяем модификатор скорости действий от температуры и разгона
+	update_action_speed(H)
 
 /datum/species/ipc/proc/handle_self_repair(mob/living/carbon/human/H)
 	if(!self_repair_enabled)
@@ -159,23 +202,200 @@
 		H.apply_damage(-self_repair_amount * 0.5, BURN, forced = TRUE)
 		last_repair_time = world.time
 
-/datum/species/ipc/proc/handle_temperature(mob/living/carbon/human/H)
+/datum/species/ipc/proc/handle_temperature(mob/living/carbon/human/H, seconds_per_tick)
+	// DEBUG: Вывод температуры до модификаторов
+	var/temp_before = cpu_temperature
+
+	// Проверяем истечение эффектов охлаждения
+	if(thermal_paste_active && world.time > thermal_paste_end_time)
+		thermal_paste_active = FALSE
+		to_chat(H, span_warning("Эффект термопасты закончился."))
+
+	if(cooling_block_active && world.time > cooling_block_end_time)
+		cooling_block_active = FALSE
+		to_chat(H, span_warning("Охладительный блок перестал действовать."))
+
+	// Базовое охлаждение/нагрев от окружающей среды
 	var/turf/T = get_turf(H)
-	if(!T)
-		return
+	if(T)
+		var/datum/gas_mixture/environment = T.return_air()
+		if(environment)
+			var/env_temp = environment.temperature - T0C
 
-	var/datum/gas_mixture/environment = T.return_air()
-	if(!environment)
-		return
+			// Окружающая среда охлаждает или нагревает
+			if(env_temp < cpu_temperature)
+				var/cooling_amount = min((cpu_temperature - env_temp) * 0.01, cpu_cooling_rate * 2)
+				cpu_temperature = max(cpu_temperature - cooling_amount, env_temp)
+			else if(env_temp > cpu_temperature && cpu_heating_from_environment)
+				var/heating_amount = min((env_temp - cpu_temperature) * 0.005, cpu_cooling_rate)
+				cpu_temperature = min(cpu_temperature + heating_amount, env_temp)
 
-	var/env_temp = environment.temperature - T0C
+	// Применяем активное охлаждение от охладительного блока
+	if(cooling_block_active)
+		cpu_temperature = max(cpu_temperature - 1 * seconds_per_tick, 0)
 
-	if(env_temp < cpu_temperature)
-		var/cooling_amount = min((cpu_temperature - env_temp) * 0.01, cpu_cooling_rate * 2)
-		cpu_temperature = max(cpu_temperature - cooling_amount, env_temp)
-	else if(env_temp > cpu_temperature && cpu_heating_from_environment)
-		var/heating_amount = min((env_temp - cpu_temperature) * 0.005, cpu_cooling_rate)
-		cpu_temperature = min(cpu_temperature + heating_amount, env_temp)
+	// Пассивное охлаждение от термопасты и импланта (постоянное активное охлаждение)
+	// Термопаста/имплант дают постоянное охлаждение которое компенсирует часть нагрева
+	var/passive_cooling_rate = 0
+	if(thermal_paste_active)
+		passive_cooling_rate += 1  // 1°C/сек охлаждения
+	if(improved_cooling_installed)
+		passive_cooling_rate += 1  // еще 1°C/сек
+
+	if(passive_cooling_rate > 0)
+		cpu_temperature = max(cpu_temperature - (passive_cooling_rate * seconds_per_tick), 0)
+
+	// Охлаждение от баллона с холодным газом (через маску) - активное
+	// Эффективность зависит от температуры газа И теплоемкости (specific_heat)
+	if(H.internal && istype(H.internal, /obj/item/tank))
+		var/obj/item/tank/gas_tank = H.internal
+		var/datum/gas_mixture/gas = gas_tank.return_air()
+		if(gas && gas.total_moles() > 0.05)
+			var/gas_temp = gas.temperature - T0C
+
+			// Рассчитываем средний specific_heat газовой смеси
+			var/total_heat_capacity = 0
+			var/total_moles = gas.total_moles()
+
+			for(var/gas_id in gas.gases)
+				var/list/cached_gas = gas.gases[gas_id]
+				var/gas_moles = cached_gas[MOLES]
+				if(gas_moles > 0)
+					var/datum/gas/gas_datum = gas_id2path(gas_id)
+					var/list/gas_info = GLOB.meta_gas_info[gas_datum]
+					if(gas_info)
+						var/specific_heat = gas_info[META_GAS_SPECIFIC_HEAT]
+						// Взвешенный вклад каждого газа
+						total_heat_capacity += specific_heat * (gas_moles / total_moles)
+
+			// Модификатор эффективности на основе теплоемкости
+			// Базовый газ (O2/N2) = 20, множитель = 1.0
+			// Freon = 600, множитель = 30
+			// Hypernoblium = 2000, множитель = 100
+			var/heat_capacity_multiplier = total_heat_capacity / 20 // 20 = базовая теплоемкость O2/N2
+
+			var/cooling_from_gas = 0
+
+			// Эффективность охлаждения зависит от температуры газа
+			if(gas_temp < cpu_temperature) // Охлаждение только если газ холоднее процессора
+				var/temp_diff = cpu_temperature - gas_temp
+
+				// Базовая формула: 0.01°C/сек на каждый градус разницы * модификатор теплоемкости
+				cooling_from_gas = temp_diff * 0.01 * heat_capacity_multiplier
+
+				// Ограничиваем максимум в зависимости от теплоемкости
+				// Обычный газ (20): макс 2°C/сек
+				// Freon (600): макс 60°C/сек
+				// Hypernoblium (2000): макс 200°C/сек
+				var/max_cooling = heat_capacity_multiplier * 2
+				cooling_from_gas = min(cooling_from_gas, max_cooling)
+
+			if(cooling_from_gas > 0)
+				cpu_temperature = max(cpu_temperature - (cooling_from_gas * seconds_per_tick), 0)
+				// Расходуем газ пропорционально охлаждению (больше охлаждение = больше расход)
+				var/gas_consumption = 0.01 * (cooling_from_gas / 2) // 0.01 моль/сек на каждые 2°C охлаждения
+				if(gas.total_moles() > gas_consumption)
+					gas.remove(gas_consumption * seconds_per_tick)
+
+	// Разгон системы нагревает процессор
+	if(overclock_active)
+		// +2 градуса в секунду = +10 градусов каждые 5 секунд
+		cpu_temperature += 2 * seconds_per_tick
+
+	// Нагрев от взаимодействий/действий
+	// Чем больше действий выполняет IPC, тем больше нагревается процессор
+	if(H.client)
+		// Проверяем активность персонажа через recent_click_time или активные действия
+		// Базовый нагрев: +0.05°C/сек при активности
+		var/activity_heating = 0.05
+
+		// Дополнительный нагрев если персонаж бежит
+		if(H.move_intent == MOVE_INTENT_RUN)
+			activity_heating += 0.02
+
+		// Дополнительный нагрев при низком здоровье (стресс системы)
+		if(H.health < H.maxHealth * 0.5)
+			activity_heating += 0.03
+
+		cpu_temperature += activity_heating * seconds_per_tick
+
+	// Ограничиваем температуру
+	cpu_temperature = clamp(cpu_temperature, 0, 200)
+
+	// DEBUG: Выводим изменение температуры если значительное
+	var/temp_change = cpu_temperature - temp_before
+	if(abs(temp_change) > 0.5) // Выводим только если изменение больше 0.5°C
+		to_chat(H, span_small("DEBUG: T: [round(temp_before, 0.1)]°C → [round(cpu_temperature, 0.1)]°C ([temp_change > 0 ? "+" : ""][round(temp_change, 0.1)]°C)"))
+
+/// Обрабатывает эффекты температуры: урон, стамину, модификаторы скорости
+/datum/species/ipc/proc/handle_temperature_effects(mob/living/carbon/human/H)
+	// Расчет модификатора скорости взаимодействия по температуре
+	switch(cpu_temperature)
+		if(-INFINITY to 20)
+			// Меньше 20°C: -10% скорости
+			temp_interaction_speed_mod = 1.1  // Больше = медленнее
+		if(20 to 40)
+			// 20-40°C (оптимально): +10% скорости
+			temp_interaction_speed_mod = 0.9  // Меньше = быстрее
+		if(40 to 80)
+			// 40-80°C (горячо): нормальная скорость
+			temp_interaction_speed_mod = 1.0
+		if(80 to 90)
+			// 80-90°C (перегрев): -10% скорости
+			temp_interaction_speed_mod = 1.1
+		if(90 to 120)
+			// 90-120°C (сильный перегрев): -10% скорости + урон
+			temp_interaction_speed_mod = 1.1
+			// -1 урон каждые 30 секунд к мозгу
+			if(world.time > last_overheat_damage_time + 30 SECONDS)
+				var/obj/item/organ/brain/positronic/brain = H.get_organ_slot(ORGAN_SLOT_BRAIN)
+				if(brain)
+					brain.apply_organ_damage(1)
+					to_chat(H, span_danger("ПРЕДУПРЕЖДЕНИЕ: Перегрев процессора! Температура: [round(cpu_temperature)]°C"))
+				last_overheat_damage_time = world.time
+		if(120 to 130)
+			// 120-130°C (критический перегрев): -10% скорости + сильный урон + шанс потери стамины
+			temp_interaction_speed_mod = 1.1
+			// -2 урона каждые 15 секунд к мозгу
+			if(world.time > last_critical_damage_time + 15 SECONDS)
+				var/obj/item/organ/brain/positronic/brain = H.get_organ_slot(ORGAN_SLOT_BRAIN)
+				if(brain)
+					brain.apply_organ_damage(2)
+					to_chat(H, span_userdanger("КРИТИЧЕСКОЕ ПРЕДУПРЕЖДЕНИЕ: Процессор горит! Температура: [round(cpu_temperature)]°C"))
+				last_critical_damage_time = world.time
+
+				// 10% шанс потери 20% стамины
+				if(prob(10))
+					H.adjust_stamina_loss(H.max_stamina * 0.2)
+					to_chat(H, span_danger("Системы управления перегружены! Потеряна стамина."))
+		if(130 to INFINITY)
+			// 130°C+ (экстремальный перегрев): -10% скорости + экстремальный урон + 50% шанс потери стамины
+			temp_interaction_speed_mod = 1.1
+			// -3 урона каждые 10 секунд к мозгу
+			if(world.time > last_extreme_damage_time + 10 SECONDS)
+				var/obj/item/organ/brain/positronic/brain = H.get_organ_slot(ORGAN_SLOT_BRAIN)
+				if(brain)
+					brain.apply_organ_damage(3)
+					to_chat(H, span_boldwarning("!!! АВАРИЙНОЕ ОТКЛЮЧЕНИЕ !!! Процессор расплавляется! Температура: [round(cpu_temperature)]°C !!!"))
+				last_extreme_damage_time = world.time
+
+				// 50% шанс критической потери стамины
+				if(prob(50))
+					H.adjust_stamina_loss(H.max_stamina * 0.5)
+					to_chat(H, span_userdanger("КРИТИЧЕСКИЙ ОТКАЗ СИСТЕМЫ! Стамина критически низкая!"))
+
+/// Обновляет скорость действий на основе температуры и разгона
+/datum/species/ipc/proc/update_action_speed(mob/living/carbon/human/H)
+	// Базовый модификатор от температуры (temp_interaction_speed_mod уже рассчитан в handle_temperature_effects)
+	var/total_modifier = temp_interaction_speed_mod
+
+	// Разгон дает бонус к скорости
+	if(overclock_active)
+		total_modifier *= (1 - overclock_speed_bonus)  // 0.6 = 40% быстрее
+
+	// Применяем модификатор к скорости действий
+	// Меньше 1.0 = быстрее, больше 1.0 = медленнее
+	H.add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/ipc_temperature, multiplicative_slowdown = (total_modifier - 1))
 
 /datum/species/ipc/proc/handle_battery(mob/living/carbon/human/H)
 	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
@@ -194,6 +414,13 @@
 
 /datum/species/ipc/spec_stun(mob/living/carbon/human/H, amount)
 	. = ..()
+
+/// Обработчик сигнала электрошока - повышает температуру процессора
+/datum/species/ipc/proc/on_electrocute(mob/living/carbon/human/source, shock_damage, siemens_coeff, flags)
+	SIGNAL_HANDLER
+	// Базовое повышение на 10 градусов от удара током
+	cpu_temperature = min(cpu_temperature + 10, 200)
+	to_chat(source, span_warning("Удар током повысил температуру процессора на 10°C!"))
 
 /datum/species/ipc/proc/handle_emp(mob/living/carbon/human/H, severity)
 	var/emp_damage = 0
@@ -356,3 +583,36 @@
         ipc_visual_brand_key = features["ipc_hef_visual"]
     else
         ipc_visual_brand_key = ipc_brand_key
+
+// ============================================
+// ITEM INTERACTION - EXTERNAL REPAIR
+// ============================================
+// Позволяет другим игрокам чинить IPC сваркой и кабелем без операций
+// ВАЖНО: Работает только когда панель ЗАКРЫТА. Если панель открыта - пропускаем в surgery
+
+/mob/living/carbon/human/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	// Проверяем что цель - IPC
+	if(istype(dna?.species, /datum/species/ipc))
+		var/datum/species/ipc/S = dna.species
+
+		// Проверяем панель на целевой части тела (zone_selected)
+		var/obj/item/bodypart/target_part = get_bodypart(check_zone(user.zone_selected))
+		if(target_part)
+			var/datum/component/ipc_panel/panel = target_part.GetComponent(/datum/component/ipc_panel)
+			// Если панель открыта - вызываем surgery напрямую (минуя проверку TRAIT_READY_TO_OPERATE)
+			if(panel && panel.is_panel_open())
+				var/surgery_ret = user.perform_surgery(src, tool, LAZYACCESS(modifiers, RIGHT_CLICK))
+				if(surgery_ret)
+					return surgery_ret
+
+		// Ремонт сваркой (brute damage) - только с закрытой панелью
+		if(istype(tool, /obj/item/weldingtool))
+			if(S.try_repair_brute(src, tool, user))
+				return ITEM_INTERACT_SUCCESS
+
+		// Ремонт кабелем (burn damage) - только с закрытой панелью
+		else if(istype(tool, /obj/item/stack/cable_coil))
+			if(S.try_repair_burn(src, tool, user))
+				return ITEM_INTERACT_SUCCESS
+
+	return ..() // Вызываем родительский метод для остальных взаимодействий
