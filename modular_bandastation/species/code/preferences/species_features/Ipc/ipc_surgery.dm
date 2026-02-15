@@ -50,8 +50,8 @@
 	if(!limb?.owner?.dna?.species)
 		return FALSE
 
-	// Проверяем что это синтетическая часть с флагом
-	if(!(limb.bodypart_flags))
+	// Проверяем что это IPC bodypart с правильным bodytype
+	if(!(limb.bodytype & BODYTYPE_IPC))
 		return FALSE
 
 	return istype(limb.owner.dna.species, /datum/species/ipc)
@@ -676,8 +676,8 @@
 	if(!limb?.owner?.dna?.species)
 		return FALSE
 
-	// Проверяем флаг синтетической части
-	if(!(limb.bodypart_flags ))
+	// Проверяем что это IPC bodypart
+	if(!(limb.bodytype & BODYTYPE_IPC))
 		return FALSE
 
 	if(!istype(limb.owner.dna.species, /datum/species/ipc))
@@ -940,7 +940,7 @@
 	if(!limb?.owner?.dna?.species)
 		return FALSE
 
-	if(!(limb.bodypart_flags))
+	if(!(limb.bodytype & BODYTYPE_IPC))
 		return FALSE
 
 	if(!istype(limb.owner.dna.species, /datum/species/ipc))
