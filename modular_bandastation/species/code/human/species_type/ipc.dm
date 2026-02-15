@@ -95,6 +95,9 @@
 	// Ключ визуального бренда (используется только для HEF, иначе = ipc_brand_key)
 	var/ipc_visual_brand_key = "unbranded"
 
+	// Операционная система IPC
+	var/datum/ipc_operating_system/ipc_os
+
 	// HEF: поштучный выбор бренда для каждой части тела.
 	// Каждое значение — ключ бренда (morpheus, etamin, ..., unbranded).
 	// Используется ТОЛЬКО когда ipc_brand_key == "hef".
@@ -160,6 +163,13 @@
 	// Регистрируем обработчик электрошока
 	RegisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT, PROC_REF(on_electrocute))
 
+	// Инициализируем операционную систему IPC
+	if(!ipc_os)
+		ipc_os = new /datum/ipc_operating_system(H, ipc_brand_key)
+	var/datum/action/innate/ipc_open_os/os_action = new()
+	os_action.os_system = ipc_os
+	os_action.Grant(H)
+
 	// ПРИМЕЧАНИЕ:
 	// - Chassis brand применяется через body_modifications автоматически
 	// - Тип мозга тоже через body_modifications
@@ -174,6 +184,14 @@
 	var/datum/action/cooldown/ipc_overclock/overclock = locate() in H.actions
 	if(overclock)
 		overclock.Remove(H)
+
+	// Удаляем кнопку ОС
+	var/datum/action/innate/ipc_open_os/os_action = locate() in H.actions
+	if(os_action)
+		os_action.Remove(H)
+
+	// Удаляем ОС
+	QDEL_NULL(ipc_os)
 
 	// Отменяем регистрацию сигналов
 	UnregisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT)

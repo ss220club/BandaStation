@@ -46,6 +46,27 @@ type Zone = {
   name: string;
 };
 
+type OsVirus = {
+  name: string;
+  desc: string;
+  severity: string;
+  removable: boolean;
+  index: number;
+};
+
+type OsApp = {
+  name: string;
+  desc: string;
+  category: string;
+};
+
+type Implant = {
+  name: string;
+  location: string;
+  status: string;
+  status_color: string;
+};
+
 type PatientData = {
   name: string;
   type: string;
@@ -59,11 +80,30 @@ type PatientData = {
   electrical_damage: number;
   system_damage: number;
   cooling_damage: number;
+  mechanical_damage_percent: number;
+  electrical_damage_percent: number;
+  cpu_temperature?: number;
+  cpu_temp_optimal_min?: number;
+  cpu_temp_optimal_max?: number;
+  cpu_temp_critical?: number;
+  cpu_temp_status?: string;
+  overclock_active?: boolean;
+  overclock_speed_bonus?: number;
+  chassis_brand?: string;
+  chassis_visual_brand?: string;
   components: Component[];
   bodyparts: Bodypart[];
+  implants: Implant[];
   system_messages: SystemMessage[];
   os_version?: string;
   os_manufacturer?: string;
+  os_theme_color?: string;
+  os_brand_key?: string;
+  os_viruses?: OsVirus[];
+  os_virus_count?: number;
+  os_installed_apps?: OsApp[];
+  os_logged_in?: boolean;
+  os_has_password?: boolean;
 };
 
 type SyntheticDiagnosticData = {
@@ -582,27 +622,190 @@ export const SyntheticDiagnostic = (props) => {
               {/* ВКЛАДКА ОС */}
               {selectedTab === 2 && (
                 <Stack vertical mt={1}>
+                  {/* ИНФОРМАЦИЯ ОБ ОС */}
                   <Stack.Item>
                     <Section title="Операционная система">
                       <LabeledList>
-                        <LabeledList.Item label="Версия ОС">
-                          <Box color="good">
+                        <LabeledList.Item label="ОС">
+                          <Box
+                            bold
+                            color={patient.os_theme_color || 'good'}
+                          >
                             {patient.os_version || 'IPC-OS v2.4.1'}
                           </Box>
                         </LabeledList.Item>
-                        <LabeledList.Item label="Производитель">
+                        <LabeledList.Item label="Платформа">
                           {patient.os_manufacturer || 'Generic Systems'}
                         </LabeledList.Item>
-                        <LabeledList.Item label="Статус">
-                          <Box color="good">Система стабильна</Box>
+                        <LabeledList.Item label="Статус ОС">
+                          <Box
+                            bold
+                            color={
+                              (patient.os_virus_count || 0) > 0
+                                ? 'bad'
+                                : 'good'
+                            }
+                          >
+                            {(patient.os_virus_count || 0) > 0
+                              ? `ЗАРАЖЕНА (${patient.os_virus_count} угроз)`
+                              : 'Система стабильна'}
+                          </Box>
                         </LabeledList.Item>
-                        <LabeledList.Item label="Время работы">
-                          247:35:12
+                        <LabeledList.Item label="Пароль">
+                          <Box color={patient.os_has_password ? 'good' : 'average'}>
+                            {patient.os_has_password ? 'Установлен' : 'Не установлен'}
+                          </Box>
+                        </LabeledList.Item>
+                        <LabeledList.Item label="Сессия">
+                          <Box color={patient.os_logged_in ? 'good' : 'label'}>
+                            {patient.os_logged_in ? 'Активна' : 'Неактивна'}
+                          </Box>
                         </LabeledList.Item>
                       </LabeledList>
                     </Section>
                   </Stack.Item>
 
+                  {/* ВИРУСЫ */}
+                  <Stack.Item>
+                    <Section
+                      title={`Обнаруженные угрозы (${patient.os_viruses?.length || 0})`}
+                    >
+                      {(!patient.os_viruses ||
+                        patient.os_viruses.length === 0) && (
+                        <Box
+                          textAlign="center"
+                          p={1}
+                          color="good"
+                          backgroundColor="rgba(0, 150, 0, 0.1)"
+                        >
+                          Вирусов не обнаружено. ОС чиста.
+                        </Box>
+                      )}
+                      {patient.os_viruses &&
+                        patient.os_viruses.length > 0 && (
+                          <Table>
+                            <Table.Row header>
+                              <Table.Cell width="25%">Вирус</Table.Cell>
+                              <Table.Cell width="30%">Описание</Table.Cell>
+                              <Table.Cell width="15%">Опасность</Table.Cell>
+                              <Table.Cell width="15%">Тип</Table.Cell>
+                              <Table.Cell width="15%">Действие</Table.Cell>
+                            </Table.Row>
+                            {patient.os_viruses.map((virus, idx) => (
+                              <Table.Row key={idx}>
+                                <Table.Cell>
+                                  <Box
+                                    bold
+                                    color={
+                                      virus.severity === 'high'
+                                        ? 'bad'
+                                        : virus.severity === 'medium'
+                                          ? 'average'
+                                          : 'label'
+                                    }
+                                  >
+                                    {virus.name}
+                                  </Box>
+                                </Table.Cell>
+                                <Table.Cell>
+                                  <Box fontSize="0.85em">{virus.desc}</Box>
+                                </Table.Cell>
+                                <Table.Cell>
+                                  <Box
+                                    bold
+                                    color={
+                                      virus.severity === 'high'
+                                        ? 'bad'
+                                        : virus.severity === 'medium'
+                                          ? 'average'
+                                          : 'good'
+                                    }
+                                  >
+                                    {virus.severity === 'high'
+                                      ? 'ВЫСОКАЯ'
+                                      : virus.severity === 'medium'
+                                        ? 'СРЕДНЯЯ'
+                                        : 'НИЗКАЯ'}
+                                  </Box>
+                                </Table.Cell>
+                                <Table.Cell>
+                                  <Box
+                                    fontSize="0.8em"
+                                    color={
+                                      virus.removable ? 'label' : 'bad'
+                                    }
+                                  >
+                                    {virus.removable
+                                      ? 'Обычный'
+                                      : 'Rootkit'}
+                                  </Box>
+                                </Table.Cell>
+                                <Table.Cell>
+                                  <Button
+                                    compact
+                                    color="bad"
+                                    onClick={() =>
+                                      act('remove_virus', {
+                                        virus_index: virus.index,
+                                      })
+                                    }
+                                  >
+                                    Удалить
+                                  </Button>
+                                </Table.Cell>
+                              </Table.Row>
+                            ))}
+                          </Table>
+                        )}
+                    </Section>
+                  </Stack.Item>
+
+                  {/* УСТАНОВЛЕННЫЕ ПРИЛОЖЕНИЯ */}
+                  <Stack.Item>
+                    <Section
+                      title={`Установленные приложения (${patient.os_installed_apps?.length || 0})`}
+                    >
+                      {(!patient.os_installed_apps ||
+                        patient.os_installed_apps.length === 0) && (
+                        <Box textAlign="center" p={1} color="label">
+                          Дополнительные приложения не установлены.
+                        </Box>
+                      )}
+                      {patient.os_installed_apps &&
+                        patient.os_installed_apps.length > 0 && (
+                          <Table>
+                            <Table.Row header>
+                              <Table.Cell width="30%">
+                                Приложение
+                              </Table.Cell>
+                              <Table.Cell width="50%">Описание</Table.Cell>
+                              <Table.Cell width="20%">Категория</Table.Cell>
+                            </Table.Row>
+                            {patient.os_installed_apps.map((app, idx) => (
+                              <Table.Row key={idx}>
+                                <Table.Cell>
+                                  <Box bold>{app.name}</Box>
+                                </Table.Cell>
+                                <Table.Cell>
+                                  <Box fontSize="0.85em">{app.desc}</Box>
+                                </Table.Cell>
+                                <Table.Cell>
+                                  <Box fontSize="0.85em" color="label">
+                                    {app.category === 'diagnostic'
+                                      ? 'Диагностика'
+                                      : app.category === 'utility'
+                                        ? 'Утилита'
+                                        : 'Прочее'}
+                                  </Box>
+                                </Table.Cell>
+                              </Table.Row>
+                            ))}
+                          </Table>
+                        )}
+                    </Section>
+                  </Stack.Item>
+
+                  {/* СИСТЕМНЫЕ ЛОГИ (динамические на основе компонентов) */}
                   <Stack.Item>
                     <Section title="Системные логи">
                       <Box
@@ -615,25 +818,45 @@ export const SyntheticDiagnostic = (props) => {
                           overflowY: 'auto',
                         }}
                       >
-                        <Box color="good">
-                          [OK] Позитронное ядро: Инициализация успешна
-                        </Box>
-                        <Box color="good">
-                          [OK] Источник питания: 97% (4890/5000 units)
-                        </Box>
-                        <Box color="good">
-                          [OK] Система охлаждения: Эффективность 100%
-                        </Box>
-                        <Box color="good">
-                          [OK] Оптические сенсоры: Калибровка завершена
-                        </Box>
-                        <Box color="good">[OK] Аудио сенсоры: Тест пройден</Box>
-                        <Box color="good">
-                          [OK] Голосовой синтезатор: Готов к работе
-                        </Box>
-                        <Box color="label" mt={0.5}>
-                          [INFO] Все системы функционируют нормально
-                        </Box>
+                        {patient.components.map((component, idx) => (
+                          <Box
+                            key={idx}
+                            color={
+                              component.status_color === 'good'
+                                ? 'good'
+                                : component.status_color === 'average'
+                                  ? 'average'
+                                  : 'bad'
+                            }
+                          >
+                            [{component.status_color === 'good'
+                              ? 'OK'
+                              : component.status_color === 'average'
+                                ? 'WARN'
+                                : 'ERR'}
+                            ] {component.name}: {component.details}
+                          </Box>
+                        ))}
+                        {patient.system_messages.map((msg, idx) => (
+                          <Box
+                            key={`msg-${idx}`}
+                            color={
+                              msg.type === 'critical'
+                                ? 'bad'
+                                : msg.type === 'warning'
+                                  ? 'average'
+                                  : 'good'
+                            }
+                            mt={idx === 0 ? 0.5 : 0}
+                          >
+                            [{msg.type === 'critical'
+                              ? 'CRIT'
+                              : msg.type === 'warning'
+                                ? 'WARN'
+                                : 'INFO'}
+                            ] {msg.message}
+                          </Box>
+                        ))}
                       </Box>
                     </Section>
                   </Stack.Item>
