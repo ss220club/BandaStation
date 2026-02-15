@@ -68,7 +68,7 @@ GLOBAL_DATUM_INIT(objective_machine_handler, /datum/objective_target_machine_han
 	progression_minimum = 15 MINUTES
 
 	applicable_jobs = list(
-		JOB_STATION_ENGINEER = /obj/machinery/telecomms/hub,
+		// BANDASTATION REMOVAL: JOB_STATION_ENGINEER = /obj/machinery/telecomms/hub,
 		JOB_SCIENTIST = /obj/machinery/rnd/server,
 	)
 

@@ -10,7 +10,7 @@
 	description = "Вам будет предоставлено устройство, которое вам нужно использовать в %AREA1% и %AREA2%, чтобы определить уязвимую точку станции и подорвать там взрывное устройство. Внимание: как только вы начнёте сканировать одну из областей, станционный ИИ будет предупреждён об этом."
 
 	progression_minimum = 45 MINUTES
-	progression_reward = list(15 MINUTES, 20 MINUTES)
+	progression_reward = list(20 MINUTES, 25 MINUTES)
 	telecrystal_reward = list(3, 5)
 
 	var/progression_objectives_minimum = 20 MINUTES

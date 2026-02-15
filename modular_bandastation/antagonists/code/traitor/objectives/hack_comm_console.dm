@@ -9,7 +9,7 @@
 	description = "ПКМ по консоли чтобы начать взлом. При взломе ИИ будет оповещён об начале взлома, подготовьтесь перед взломом. Только один агент может выполнить эту цель."
 
 	progression_minimum = 60 MINUTES
-	progression_reward = list(30 MINUTES, 40 MINUTES)
+	progression_reward = list(40 MINUTES, 45 MINUTES)
 	telecrystal_reward = list(7, 12)
 
 	var/progression_objectives_minimum = 20 MINUTES
