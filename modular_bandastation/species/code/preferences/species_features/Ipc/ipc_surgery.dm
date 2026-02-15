@@ -743,7 +743,7 @@
 	if(!limb?.owner?.dna?.species)
 		return FALSE
 
-	if(!(limb.bodypart_flags ))
+	if(!(limb.bodytype & BODYTYPE_IPC))
 		return FALSE
 
 	if(!istype(limb.owner.dna.species, /datum/species/ipc))
@@ -806,7 +806,7 @@
 	if(!limb?.owner?.dna?.species)
 		return FALSE
 
-	if(!(limb.bodypart_flags ))
+	if(!(limb.bodytype & BODYTYPE_IPC))
 		return FALSE
 
 	if(!istype(limb.owner.dna.species, /datum/species/ipc))
@@ -867,7 +867,7 @@
 	if(!limb?.owner?.dna?.species)
 		return FALSE
 
-	if(!(limb.bodypart_flags ))
+	if(!(limb.bodytype & BODYTYPE_IPC))
 		return FALSE
 
 	if(!istype(limb.owner.dna.species, /datum/species/ipc))

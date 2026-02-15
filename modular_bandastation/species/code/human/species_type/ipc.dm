@@ -194,12 +194,12 @@
 	if(world.time < last_repair_time + self_repair_delay)
 		return
 
-	if(H.bruteloss > 0)
-		H.apply_damage(-self_repair_amount, BRUTE, forced = TRUE)
+	if(H.get_brute_loss() > 0)
+		H.heal_overall_damage(brute = self_repair_amount, forced = TRUE)
 		last_repair_time = world.time
 
-	if(H.fireloss > 0)
-		H.apply_damage(-self_repair_amount * 0.5, BURN, forced = TRUE)
+	if(H.get_fire_loss() > 0)
+		H.heal_overall_damage(burn = self_repair_amount * 0.5, forced = TRUE)
 		last_repair_time = world.time
 
 /datum/species/ipc/proc/handle_temperature(mob/living/carbon/human/H, seconds_per_tick)
@@ -454,7 +454,7 @@
 		to_chat(user, span_warning("[welder] не включен!"))
 		return FALSE
 
-	if(H.bruteloss <= 0)
+	if(H.get_brute_loss() <= 0)
 		to_chat(user, span_notice("[H] не имеет механических повреждений."))
 		return FALSE
 
@@ -473,7 +473,7 @@
 		return FALSE
 
 	var/heal_amount = rand(15, 25)
-	H.apply_damage(-heal_amount, BRUTE, forced = TRUE)
+	H.heal_overall_damage(brute = heal_amount, forced = TRUE)
 
 	user.visible_message(
 		span_notice("[user] заваривает повреждения [H]."),
@@ -490,7 +490,7 @@
 
 	var/obj/item/stack/cable_coil/cable = tool
 
-	if(H.fireloss <= 0)
+	if(H.get_fire_loss() <= 0)
 		to_chat(user, span_notice("[H] не имеет электрических повреждений."))
 		return FALSE
 
@@ -510,7 +510,7 @@
 		return FALSE
 
 	var/heal_amount = rand(10, 20)
-	H.apply_damage(-heal_amount, BURN, forced = TRUE)
+	H.heal_overall_damage(burn = heal_amount, forced = TRUE)
 
 	user.visible_message(
 		span_notice("[user] чинит проводку [H]."),
