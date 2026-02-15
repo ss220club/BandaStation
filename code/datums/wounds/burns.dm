@@ -152,8 +152,9 @@
 	if(strikes_to_lose_limb <= 0)
 		return span_deadsay("<B>[capitalize(victim.ru_p_them())] [limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone] полностью обезжизнена и не функционирует.</B>")
 
+	var/obj/item/stack/medical/wrap/current_gauze = LAZYACCESS(limb.applied_items, LIMB_ITEM_GAUZE)
 	var/list/condition = list("[capitalize(victim.ru_p_them())] [limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone] [examine_desc]")
-	if(limb.current_gauze)
+	if(current_gauze)
 		var/bandage_condition
 		switch(current_gauze.absorption_capacity)
 			if(0 to 1.25)

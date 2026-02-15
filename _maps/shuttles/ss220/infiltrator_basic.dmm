@@ -473,7 +473,7 @@
 	pixel_y = 9
 	},
 /obj/item/stack/medical/ointment,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/bruise_pack,
 /obj/item/healthanalyzer,
 /turf/open/floor/iron/white,

@@ -2942,7 +2942,7 @@
 	pixel_y = 10;
 	pixel_x = -10
 	},
-/obj/item/stack/sticky_tape{
+/obj/item/stack/medical/wrap/sticky_tape{
 	pixel_x = -6;
 	pixel_y = 2
 	},
@@ -5513,7 +5513,7 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
 	},
-/obj/item/stack/medical/gauze{
+/obj/item/stack/medical/wrap/gauze{
 	pixel_x = 7;
 	pixel_y = 6
 	},
@@ -32340,7 +32340,7 @@
 /obj/effect/turf_decal/trimline/blue/end,
 /obj/structure/fluff/shower_drain,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/stack/medical/gauze/improvised,
+/obj/item/stack/medical/wrap/gauze/improvised,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/iron/white/textured_large,
 /area/station/maintenance/ghetto/starboard)
@@ -36097,7 +36097,7 @@
 	},
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/structure/table/glass,
-/obj/item/stack/sticky_tape/surgical,
+/obj/item/stack/medical/wrap/sticky_tape/surgical,
 /obj/item/stack/medical/bone_gel,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/aft)
@@ -38070,7 +38070,7 @@
 	},
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/structure/table/glass,
-/obj/item/stack/sticky_tape/surgical,
+/obj/item/stack/medical/wrap/sticky_tape/surgical,
 /obj/item/stack/medical/bone_gel,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore)

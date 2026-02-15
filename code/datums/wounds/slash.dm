@@ -98,7 +98,7 @@
 	if(!current_gauze)
 		return ..()
 
-	var/list/msg = list("Порезы на [victim.ru_p_them()] [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] перевязаны [limb.current_gauze.declent_ru(INSTRUMENTAL)]. Перевязка ")
+	var/list/msg = list("Порезы на [victim.ru_p_them()] [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] перевязаны [current_gauze.declent_ru(INSTRUMENTAL)]. Перевязка ")
 	// how much life we have left in these bandages
 	switch(current_gauze.absorption_capacity)
 		if(0 to 1.25)

@@ -13,7 +13,7 @@
 	var/t_His = ru_p_them(TRUE)
 	var/t_his = ru_p_them()
 	var/t_him = ru_p_them()
-	// var/t_has = ru_p_have()
+	var/t_has = ru_p_have()
 	// var/t_is = ru_p_are()
 
 	. = list()
