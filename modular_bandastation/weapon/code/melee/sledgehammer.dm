@@ -38,7 +38,7 @@
 	AddComponent(/datum/component/rip_and_tear, stamina_cost = 40, tear_time = 6 SECONDS)
 
 /obj/item/sledgehammer/melee_attack_chain(mob/user, atom/target, params)
-	if(istype(target, /obj/structure/blob))
+	if(istype(target, /obj/structure/blob) || istype(target, /obj/structure/carp_rift))
 		var/old_mod = demolition_mod
 		demolition_mod = 2
 		. = ..()
