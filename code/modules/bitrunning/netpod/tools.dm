@@ -13,7 +13,7 @@
 		return ITEM_INTERACT_SUCCESS
 
 	if(state_open)
-		balloon_alert(user, "предварительно закройте.")
+		balloon_alert(user, "предварительно закройте")
 		return ITEM_INTERACT_SUCCESS
 
 	if(default_deconstruction_screwdriver(user, "[base_icon_state]_panel", "[base_icon_state]_closed", tool))
