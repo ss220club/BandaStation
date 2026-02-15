@@ -540,8 +540,12 @@
 			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
 		return FALSE
 
-	// Убираем трейт NOHUNGER
+	// Убираем трейт NOHUNGER чтобы можно было есть
 	REMOVE_TRAIT(H, TRAIT_NOHUNGER, SPECIES_TRAIT)
+
+	// Вставляем виртуальный stomach organ чтобы IPC мог есть еду
+	var/obj/item/organ/stomach/ipc_bio/bio_stomach = new()
+	bio_stomach.Insert(H)
 
 	// Регистрируем обработку еды - используем COMSIG_LIVING_EAT_FOOD
 	RegisterSignal(H, COMSIG_LIVING_EAT_FOOD, PROC_REF(on_food_eaten))
@@ -599,6 +603,12 @@
 	// Возвращаем трейт NOHUNGER
 	if(istype(H.dna?.species, /datum/species/ipc))
 		ADD_TRAIT(H, TRAIT_NOHUNGER, SPECIES_TRAIT)
+
+	// Удаляем виртуальный stomach organ
+	var/obj/item/organ/stomach/ipc_bio/bio_stomach = H.get_organ_slot(ORGAN_SLOT_STOMACH)
+	if(bio_stomach)
+		bio_stomach.Remove(H)
+		qdel(bio_stomach)
 
 	UnregisterSignal(H, COMSIG_LIVING_EAT_FOOD)
 
