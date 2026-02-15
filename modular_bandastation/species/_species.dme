@@ -1,7 +1,5 @@
 #include "_species.dm"
 
-#include "code/ipc_defines.dm"
-
 #include "code/_globalvars/lists.dm"
 
 #include "code/clothing/items.dm"
