@@ -49,7 +49,7 @@
 		else if(dusted)
 			description = "%DEAD_MOB% просто испарился у меня на глазах!!"
 		else
-			description = "Я видел смерть %DEAD_MOB%. Как ужасно..."
+			description = "Я видел, как %DEAD_MOB% умер. Как ужасно..."
 
 	description = capitalize(replacetext(description, "%DEAD_MOB%", get_descriptor(dead_mob)))
 

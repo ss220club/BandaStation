@@ -219,8 +219,8 @@
 
 /datum/wound/pierce/bleed/moderate/update_descriptions()
 	if(!limb.can_bleed())
-		examine_desc = "has a small, torn hole"
-		occur_text = "splits a small hole open"
+		examine_desc = "имеет небольшую рваную дыру"
+		occur_text = "пробивает небольшую дыру"
 
 /datum/wound_pregen_data/flesh_pierce/breakage
 	abstract = FALSE
@@ -235,10 +235,10 @@
 	return weight
 
 /datum/wound/pierce/bleed/moderate/needle_fail //for blood testamajig
-	name = "Pinprick Pierce"
-	desc = "Patient's skin has been deeply pierced, causing mild bleeding."
-	treat_text_short = "Apply bandaging or suturing."
-	examine_desc = "has a small red pinprick, gently bleeding"
+	name = "Глубокий прокол"
+	desc = "Кожа пациента была глубоко проколота, что привело к небольшому кровотечению."
+	treat_text_short = "Наложить повязку или швы."
+	examine_desc = "имеет небольшое красное отверстие, слегка кровоточит"
 	initial_flow = 0.5 //very minor, mostly there as fluff and "dont do that idiot" reminder
 	gauzed_clot_rate = 0.1
 	clot_rate = 0.03 // will close quickly on its own
@@ -252,12 +252,12 @@
 	abstract = FALSE
 
 /datum/wound/pierce/bleed/moderate/projectile
-	name = "Minor Skin Penetration"
-	desc = "Patient's skin has been pierced through, causing severe bruising and minor internal bleeding in affected area."
-	treat_text = "Apply bandaging or suturing to the wound, make use of blood clotting agents, \
-		cauterization, or in extreme circumstances, exposure to extreme cold or vaccuum. \
-		Follow with food and a rest period."
-	examine_desc = "has a small, circular hole, gently bleeding"
+	name = "Незначительный прокол кожи"
+	desc = "Кожа пациента была пробита, что привело к сильным ушибам и небольшому внутреннему кровотечению в поражённой области."
+	treat_text = "Наложить повязку или швы на рану, использовать кровоостанавливающие средства, \
+		прижечь рану, либо в крайних случаях подвергнуть воздействию экстремального холода или вакуума. \
+		Затем обеспечить питание и покой."
+	examine_desc = "имеет небольшое круглое отверстие, слегка кровоточит"
 	clot_rate = 0
 
 /datum/wound/pierce/bleed/moderate/projectile/update_descriptions()
@@ -318,9 +318,9 @@
 	return weight
 
 /datum/wound/pierce/bleed/severe/eye
-	name = "Eyeball Puncture"
-	desc = "Patient's eye has sustained extreme damage, causing severe bleeding from the ocular cavity."
-	occur_text = "looses a violent spray of blood, revealing a crushed eyeball"
+	name = "Прокол глазного яблока"
+	desc = "Глаз пациента получил серьёзные повреждения, вызывающее сильное кровотечение из глазной полости."
+	occur_text = "брызжет кровь, обнажая раздавленное глазное яблоко"
 	var/right_side = FALSE
 
 /datum/wound/pierce/bleed/severe/eye/apply_wound(obj/item/bodypart/limb, silent, datum/wound/old_wound, smited, attack_direction, wound_source, replacing, right_side)
@@ -329,7 +329,7 @@
 		return FALSE
 	. = ..()
 	src.right_side = right_side
-	examine_desc = "has its [right_side ? "right" : "left"] eye pierced clean through, blood spewing from the cavity"
+	examine_desc = "имеет ранение в [right_side ? "правом" : "левом"] глазу, и из раны течёт кровь"
 	RegisterSignal(limb, COMSIG_BODYPART_UPDATE_WOUND_OVERLAY, PROC_REF(wound_overlay))
 	limb.update_part_wound_overlay()
 
@@ -361,10 +361,10 @@
 	return ..()
 
 /datum/wound/pierce/bleed/severe/magicalearpain //what happens if you try to listen to the heartbeat of a corrupt heart while not a heretic
-	name = "Bleeding Ears"
-	desc = "Patient's ears are bleeding heavily as blood seeps through the inner flesh of the ear through some unknown means."
-	examine_desc = "is covered in blood, black-purple fluid flowing from its ears"
-	occur_text = "is soaked as two spurts of black liquid spray from its ears"
+	name = "Кровоточащие уши"
+	desc = "Уши пациента сильно кровоточат, так как кровь каким-то неизвестным образом просачивается через внутреннюю поверхность уха."
+	examine_desc = "всё покрыто кровью, из ушей течёт чёрно-фиолетовая жидкость"
+	occur_text = "промокает полностью, когда из ушей вырываются две струйки чёрной жидкости"
 	internal_bleeding_chance = 0 // just your ears
 
 /datum/wound_pregen_data/flesh_pierce/open_puncture/magicalearpain
