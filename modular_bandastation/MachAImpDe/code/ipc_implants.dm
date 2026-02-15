@@ -7,7 +7,7 @@
 /obj/item/implant/ipc
 	name = "IPC implant"
 	desc = "Базовый имплант для IPC."
-	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "reactive_repair"
 	w_class = WEIGHT_CLASS_TINY
 	// Не даем action button по умолчанию - только нужным имплантам
@@ -315,7 +315,7 @@
 /obj/item/implant/emp_protector
 	name = "EMP-Protector Implant"
 	desc = "Защита от ЕМП ударов. Устанавливается в грудную клетку. Для IPC - нагревает процессор при блокировке, для других - наносит burn урон."
-	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "emp_protector"
 	w_class = WEIGHT_CLASS_TINY
 	actions_types = null  // Нет action button
@@ -505,12 +505,6 @@
 
 	build_all_button_icons()
 	return TRUE
-
-/obj/item/implantcase/ipc/magnetic_leg
-	name = "implant case - 'Magnetic Leg'"
-	desc = "Стеклянный кейс содержащий имплант магнитных ног."
-	imp_type = /obj/item/implant/ipc/magnetic_leg
-
 // ============================================
 // 6. BIO-GENERATOR
 // ============================================
@@ -619,8 +613,3 @@
 
 	if(!silent)
 		to_chat(H, span_warning("Био-генератор деактивирован."))
-
-/obj/item/implantcase/ipc/bio_generator
-	name = "implant case - 'Bio-Generator'"
-	desc = "Стеклянный кейс содержащий имплант био-генератора."
-	imp_type = /obj/item/implant/ipc/bio_generator

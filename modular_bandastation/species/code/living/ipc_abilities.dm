@@ -7,7 +7,7 @@
 /datum/action/cooldown/ipc_overclock
 	name = "Разгон системы"
 	desc = "Ускоряет процессы взаимодействия на 40% за счет повышения температуры процессора. Нагревает процессор на 10°C каждые 5 секунд."
-	button_icon = 'modular_bandastation/MachAImpDe/icons/ipc_ui.dmi'
+	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
 	button_icon_state = "overdrive_0"
 	background_icon_state = "bg_tech_blue"
 	overlay_icon_state = "bg_tech_blue_border"
