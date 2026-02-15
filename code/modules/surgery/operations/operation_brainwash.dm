@@ -25,7 +25,6 @@
 	return image(/atom/movable/screen/alert/hypnosis::overlay_icon, /atom/movable/screen/alert/hypnosis::overlay_state)
 
 /datum/surgery_operation/organ/brainwash/pre_preop(obj/item/organ/brain/organ, mob/living/surgeon, obj/item/tool, list/operation_args)
-	. = ..() // BANDASTATION EDIT
 	operation_args[OPERATION_OBJECTIVE] = tgui_input_text(surgeon, "Выберите цель, которая будет запечатлена в мозгу вашего пациента", "Промывание мозгов", max_length = MAX_MESSAGE_LEN)
 	return !!operation_args[OPERATION_OBJECTIVE]
 
@@ -116,7 +115,6 @@
 	)
 
 /datum/surgery_operation/organ/brainwash/sleeper/pre_preop(obj/item/organ/brain/organ, mob/living/surgeon, obj/item/tool, list/operation_args)
-	. = ..() // BANDASTATION EDIT
 	operation_args[OPERATION_OBJECTIVE] = pick(possible_objectives)
 	return TRUE
 

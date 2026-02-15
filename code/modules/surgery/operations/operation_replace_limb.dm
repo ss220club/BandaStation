@@ -51,7 +51,6 @@
 	return TRUE
 
 /datum/surgery_operation/limb/replace_limb/pre_preop(atom/movable/operating_on, mob/living/surgeon, obj/item/bodypart/tool, list/operation_args)
-	. = ..() // BANDASTATION EDIT
 	if(!length(tool.contents))
 		return TRUE
 	// Prevents quickly filling someone with high-tier organs by augmenting them with a pre-stuffed limb
