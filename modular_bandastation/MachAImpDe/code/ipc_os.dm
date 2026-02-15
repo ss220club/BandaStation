@@ -611,6 +611,10 @@
 // TGUI DATA
 // ============================================
 
+/// Внутренняя ОС — доступна всегда, без проверки mobility
+/datum/ipc_operating_system/ui_state(mob/user)
+	return GLOB.always_state
+
 /datum/ipc_operating_system/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

@@ -10,6 +10,18 @@
 	icon_keyboard = "tech_key"
 	light_color = COLOR_BLUE_LIGHT
 
+/// Переопределяем поиск стола — приоритет synthetic diagnostic table
+/obj/machinery/computer/operating/synthetic/find_table()
+	// Сначала ищем специализированный стол
+	for(var/direction in GLOB.alldirs)
+		var/obj/structure/table/optable/synthetic/synth_table = locate(/obj/structure/table/optable/synthetic) in get_step(src, direction)
+		if(synth_table)
+			table = synth_table
+			synth_table.computer = src
+			return
+	// Если не нашли — ищем обычный operating table
+	..()
+
 /obj/machinery/computer/operating/synthetic/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -43,6 +55,17 @@
 		return data
 
 	data["has_table"] = TRUE
+
+	// Информация о столе
+	var/is_synthetic_table = istype(table, /obj/structure/table/optable/synthetic)
+	data["is_synthetic_table"] = is_synthetic_table
+	if(is_synthetic_table)
+		var/obj/structure/table/optable/synthetic/synth_table = table
+		data["table_charging"] = TRUE
+		data["table_cooling"] = TRUE
+		data["table_network"] = TRUE
+		data["table_charge_rate"] = synth_table.charge_rate
+		data["table_cooling_rate"] = synth_table.cooling_rate
 
 	// Поиск пациента
 	if(!table.patient)

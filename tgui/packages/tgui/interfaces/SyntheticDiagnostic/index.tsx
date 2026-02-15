@@ -9,7 +9,7 @@ import {
   Table,
   Tabs,
 } from 'tgui-core/components';
-import { useBackend } from '../../backend';
+import { useBackend, useLocalState } from '../../backend';
 import { Window } from '../../layouts';
 
 type Component = {
@@ -113,6 +113,12 @@ type SyntheticDiagnosticData = {
   patient_species?: string;
   target_zone?: string;
   has_table: boolean;
+  is_synthetic_table?: boolean;
+  table_charging?: boolean;
+  table_cooling?: boolean;
+  table_network?: boolean;
+  table_charge_rate?: number;
+  table_cooling_rate?: number;
   surgeries?: Surgery[];
   zones?: Zone[];
 };
@@ -131,7 +137,7 @@ export const SyntheticDiagnostic = (props) => {
   } = data;
 
   // КРИТИЧНО: используем React.useRef для сохранения вкладки
-  const [selectedTab, setSelectedTab] = React.useState(0);
+  const [selectedTab, setSelectedTab] = useLocalState('syntheticDiagnosticTab', 0);
 
   return (
     <Window width={850} height={900}>
@@ -440,6 +446,34 @@ export const SyntheticDiagnostic = (props) => {
                       </Stack>
                     </Section>
                   </Stack.Item>
+
+                  {/* СТАТУС СТОЛА */}
+                  {data.is_synthetic_table && (
+                    <Stack.Item>
+                      <Section title="Диагностический стол">
+                        <LabeledList>
+                          <LabeledList.Item label="Тип стола">
+                            <Box bold color="good">
+                              Synthetic Diagnostic Table
+                            </Box>
+                          </LabeledList.Item>
+                          <LabeledList.Item label="Зарядка">
+                            <Box color="good">
+                              Активна ({data.table_charge_rate} units/тик)
+                            </Box>
+                          </LabeledList.Item>
+                          <LabeledList.Item label="Охлаждение">
+                            <Box color="good">
+                              Активно (-{data.table_cooling_rate}°C/тик)
+                            </Box>
+                          </LabeledList.Item>
+                          <LabeledList.Item label="Сетевой порт">
+                            <Box color="good">Подключён</Box>
+                          </LabeledList.Item>
+                        </LabeledList>
+                      </Section>
+                    </Stack.Item>
+                  )}
                 </Stack>
               )}
 
