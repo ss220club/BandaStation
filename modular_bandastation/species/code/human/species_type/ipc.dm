@@ -194,11 +194,14 @@
 	if(world.time < last_repair_time + self_repair_delay)
 		return
 
-	if(H.bruteloss > 0)
+	var/brute = H.get_brute_loss()
+	var/burn = H.get_fire_loss()
+
+	if(brute > 0)
 		H.apply_damage(-self_repair_amount, BRUTE, forced = TRUE)
 		last_repair_time = world.time
 
-	if(H.fireloss > 0)
+	if(burn > 0)
 		H.apply_damage(-self_repair_amount * 0.5, BURN, forced = TRUE)
 		last_repair_time = world.time
 
@@ -588,18 +591,27 @@
 // ITEM INTERACTION - EXTERNAL REPAIR
 // ============================================
 // Позволяет другим игрокам чинить IPC сваркой и кабелем без операций
+// ВАЖНО: Работает только когда панель ЗАКРЫТА на target zone. Если панель открыта - используем surgery
 
 /mob/living/carbon/human/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	// Проверяем что цель - IPC
 	if(istype(dna?.species, /datum/species/ipc))
 		var/datum/species/ipc/S = dna.species
 
-		// Ремонт сваркой (brute damage)
+		// Проверяем панель на целевой части тела (zone_selected)
+		var/obj/item/bodypart/target_part = get_bodypart(check_zone(user.zone_selected))
+		if(target_part)
+			var/datum/component/ipc_panel/panel = target_part.GetComponent(/datum/component/ipc_panel)
+			// Если панель открыта на этой части - пропускаем в surgery system
+			if(panel && panel.is_panel_open())
+				return NONE
+
+		// Ремонт сваркой (brute damage) - только с закрытой панелью
 		if(istype(tool, /obj/item/weldingtool))
 			if(S.try_repair_brute(src, tool, user))
 				return ITEM_INTERACT_SUCCESS
 
-		// Ремонт кабелем (burn damage)
+		// Ремонт кабелем (burn damage) - только с закрытой панелью
 		else if(istype(tool, /obj/item/stack/cable_coil))
 			if(S.try_repair_burn(src, tool, user))
 				return ITEM_INTERACT_SUCCESS
