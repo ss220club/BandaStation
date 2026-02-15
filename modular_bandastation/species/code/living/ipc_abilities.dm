@@ -7,8 +7,8 @@
 /datum/action/cooldown/ipc_overclock
 	name = "Разгон системы"
 	desc = "Ускоряет процессы взаимодействия на 40% за счет повышения температуры процессора. Нагревает процессор на 10°C каждые 5 секунд."
-	button_icon = 'icons/mob/actions/actions_silicon.dmi'
-	button_icon_state = "rnd_sync"
+	button_icon = 'modular_bandastation/MachAImpDe/icons/ipc_ui.dmi'
+	button_icon_state = "overdrive_0"
 	background_icon_state = "bg_tech_blue"
 	overlay_icon_state = "bg_tech_blue_border"
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_INCAPACITATED
@@ -51,6 +51,7 @@
 
 /datum/action/cooldown/ipc_overclock/proc/activate_overclock(mob/living/carbon/human/H, datum/species/ipc/S)
 	S.overclock_active = TRUE
+	button_icon_state = "overdrive_1"
 	background_icon_state = "bg_tech_blue_active"
 	to_chat(H, span_notice("Разгон системы активирован! Скорость взаимодействия увеличена на [S.overclock_speed_bonus * 100]%."))
 	to_chat(H, span_warning("ПРЕДУПРЕЖДЕНИЕ: Температура процессора будет повышаться!"))
@@ -58,6 +59,7 @@
 
 /datum/action/cooldown/ipc_overclock/proc/deactivate_overclock(mob/living/carbon/human/H, datum/species/ipc/S)
 	S.overclock_active = FALSE
+	button_icon_state = "overdrive_0"
 	background_icon_state = "bg_tech_blue"
 	to_chat(H, span_notice("Разгон системы отключен. Процессор вернулся к нормальной работе."))
 	build_all_button_icons()

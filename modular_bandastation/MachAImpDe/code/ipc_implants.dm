@@ -7,8 +7,8 @@
 /obj/item/implant/ipc
 	name = "IPC implant"
 	desc = "Базовый имплант для IPC."
-	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
-	icon_state = "imp_jetpack-on"
+	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
+	icon_state = "reactive_repair"
 	w_class = WEIGHT_CLASS_TINY
 	// Не даем action button по умолчанию - только нужным имплантам
 	actions_types = null
@@ -42,6 +42,7 @@
 /obj/item/implant/ipc/magnetic_joints
 	name = "Magnetic Joints Implant"
 	desc = "Магнитные суставы для конечностей IPC. Позволяют быстро прикрепить оторванную конечность без хирургии. Устанавливается в руки или ноги."
+	icon_state = "magnetic_joints"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
 /obj/item/implant/ipc/magnetic_joints/get_data()
@@ -108,6 +109,7 @@
 /obj/item/implant/ipc/sealed_joints
 	name = "Sealed Joints Implant"
 	desc = "Укрепленные герметичные суставы. Предотвращают отрывание конечности без операции. Устанавливается в руки или ноги."
+	icon_state = "sealed_joints"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
 /obj/item/implant/ipc/sealed_joints/get_data()
@@ -174,6 +176,7 @@
 /obj/item/implant/ipc/reactive_repair
 	name = "Reactive Repair Implant"
 	desc = "Система автоматического ремонта для IPC. Чинит все тело. Устанавливается в грудную клетку и расходует заряд батарейки."
+	icon_state = "reactive_repair"
 	allowed_zones = list(BODY_ZONE_CHEST)
 	actions_types = list(/datum/action/item_action/toggle_repair)
 	var/repair_amount = 2
@@ -312,8 +315,8 @@
 /obj/item/implant/emp_protector
 	name = "EMP-Protector Implant"
 	desc = "Защита от ЕМП ударов. Устанавливается в грудную клетку. Для IPC - нагревает процессор при блокировке, для других - наносит burn урон."
-	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
-	icon_state = "implant-reinforcers"
+	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
+	icon_state = "emp_protector"
 	w_class = WEIGHT_CLASS_TINY
 	actions_types = null  // Нет action button
 	var/heat_per_use = 15 // Нагрев для IPC
@@ -396,6 +399,7 @@
 /obj/item/implant/ipc/magnetic_leg
 	name = "Magnetic Leg Implant"
 	desc = "Магнитные модули для ног IPC. Функционируют как встроенные магнитные ботинки."
+	icon_state = "magnetic_leg"
 	allowed_zones = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/magboots_active = FALSE
 
@@ -515,6 +519,7 @@
 /obj/item/implant/ipc/bio_generator
 	name = "Bio-Generator Implant"
 	desc = "Биологический генератор для IPC. Позволяет перерабатывать органическую пищу в энергию. Устанавливается в грудную клетку."
+	icon_state = "bio_generator"
 	allowed_zones = list(BODY_ZONE_CHEST)
 
 /obj/item/implant/ipc/bio_generator/get_data()
