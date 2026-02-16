@@ -13834,8 +13834,8 @@
 /area/station/maintenance/starboard/aft)
 "dnz" = (
 /obj/effect/turf_decal/tile/blue/full,
-/obj/machinery/stasis,
 /obj/machinery/vitals_reader/directional/east,
+/obj/structure/bed/medical/anchored,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "dnB" = (
@@ -33569,6 +33569,13 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/mechbay)
+"igf" = (
+/obj/effect/turf_decal/trimline/blue/filled/line{
+	dir = 8
+	},
+/obj/machinery/iv_drip,
+/turf/open/floor/iron/white,
+/area/station/medical/treatment_center)
 "igh" = (
 /obj/structure/plasticflaps{
 	opacity = 1
@@ -53911,7 +53918,6 @@
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
-/obj/machinery/iv_drip,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "nfA" = (
@@ -65228,14 +65234,11 @@
 /turf/open/floor/carpet,
 /area/station/maintenance/starboard/aft)
 "pQC" = (
-/obj/machinery/stasis{
-	dir = 4
-	},
-/obj/effect/landmark/start/hangover,
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 8
 	},
 /obj/machinery/vitals_reader/directional/west,
+/obj/structure/bed/medical/anchored,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "pQP" = (
@@ -79922,11 +79925,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/cargo/office)
-"tAR" = (
-/obj/effect/turf_decal/trimline/blue/filled/line,
-/obj/machinery/iv_drip,
-/turf/open/floor/iron/white,
-/area/station/medical/treatment_center)
 "tBb" = (
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/item/kirbyplants/random/dead,
@@ -82144,6 +82142,13 @@
 	},
 /turf/open/floor/iron/dark/telecomms,
 /area/station/tcommsat/server)
+"ubN" = (
+/obj/effect/turf_decal/trimline/blue/filled/line{
+	dir = 4
+	},
+/obj/machinery/iv_drip,
+/turf/open/floor/iron/white,
+/area/station/medical/treatment_center)
 "ubT" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -199825,7 +199830,7 @@ tVB
 rLY
 oOp
 hkd
-lqQ
+igf
 pQC
 irP
 gLx
@@ -202654,7 +202659,7 @@ uJF
 qBf
 oOp
 blI
-tAR
+iFU
 gLx
 jHx
 oZN
@@ -202909,7 +202914,7 @@ nTm
 qtE
 oOp
 uQg
-uJF
+ubN
 dnz
 ihX
 gLx
