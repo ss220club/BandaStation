@@ -90,8 +90,8 @@ function safeNum(val: number | null | undefined, fallback: number): number {
   return val ?? fallback;
 }
 
-function safeBool(val: boolean | null | undefined): boolean {
-  return val === true;
+function safeBool(val: boolean | number | null | undefined): boolean {
+  return !!val;
 }
 
 // ============================================

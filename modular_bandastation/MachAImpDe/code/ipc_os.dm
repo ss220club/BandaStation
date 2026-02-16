@@ -687,7 +687,7 @@
 
 	return data
 
-/datum/ipc_operating_system/ui_act(action, list/params)
+/datum/ipc_operating_system/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
 		return
