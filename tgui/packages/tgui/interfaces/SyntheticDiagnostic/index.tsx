@@ -1,3 +1,5 @@
+import '../../styles/interfaces/SyntheticDiagnostic.scss';
+
 import {
   AnimatedNumber,
   Box,
