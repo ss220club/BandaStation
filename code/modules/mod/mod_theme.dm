@@ -49,15 +49,6 @@
 	var/list/inbuilt_modules = list()
 	/// Allowed items in the chestplate's suit storage.
 	var/list/allowed_suit_storage = list()
-	//BANDASTATION ADD start - modsuits improvements expansion
-	/// List of wearer clothes textures. Needed for closing sequence
-	var/list/worn_cloth_icons = list(
-		"head" = list("", ""),
-		"suit" = list("", ""),
-		"gloves" = list("", ""),
-		"shoes" = list("", "")
-	)
-	//BANDASTATION ADD stop - modsuits improvements expansion
 	/// List of variants and items created by them, with the flags we set.
 	var/list/variants = list(
 		"standard" = list(
@@ -159,8 +150,7 @@
 		part_datum.sealed_layer = category[SEALED_LAYER]
 		part_datum.unsealed_message = category[UNSEALED_MESSAGE] || "No unseal message set! Tell a coder!"
 		part_datum.sealed_message = category[SEALED_MESSAGE] || "No seal message set! Tell a coder!"
-		if (category[CAN_OVERSLOT] != FALSE) //BANDASTATION ADD - modsuits improvements expansion
-			part_datum.can_overslot = TRUE  //BANDASTATION ADD - modsuits improvements expansion
+		part_datum.can_overslot = category[CAN_OVERSLOT] != FALSE ? TRUE : category[CAN_OVERSLOT] // BANDASTATION ADD - modsuits improvements expansion
 		part.clothing_flags = category[UNSEALED_CLOTHING] || NONE
 		part.visor_flags = category[SEALED_CLOTHING] || NONE
 		part.flags_inv = category[UNSEALED_INVISIBILITY] || NONE
