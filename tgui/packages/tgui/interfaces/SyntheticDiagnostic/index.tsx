@@ -1,8 +1,10 @@
-import React from 'react';
 import {
+  AnimatedNumber,
   Box,
   Button,
+  Icon,
   LabeledList,
+  NoticeBox,
   ProgressBar,
   Section,
   Stack,
@@ -10,7 +12,12 @@ import {
   Tabs,
 } from 'tgui-core/components';
 import { useBackend, useLocalState } from '../../backend';
+import { type BodyZone, BodyZoneSelector } from '../common/BodyZoneSelector';
 import { Window } from '../../layouts';
+
+// ============================================
+// TYPES
+// ============================================
 
 type Component = {
   name: string;
@@ -123,783 +130,852 @@ type SyntheticDiagnosticData = {
   zones?: Zone[];
 };
 
-export const SyntheticDiagnostic = (props) => {
-  const { act, data } = useBackend<SyntheticDiagnosticData>();
-  const {
-    patient,
-    error,
-    patient_name,
-    patient_species,
-    has_table,
-    surgeries,
-    target_zone,
-    zones,
-  } = data;
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
 
-  // КРИТИЧНО: используем React.useRef для сохранения вкладки
-  const [selectedTab, setSelectedTab] = useLocalState('syntheticDiagnosticTab', 0);
+function getCpuTempColor(status?: string): string {
+  switch (status) {
+    case 'critical':
+      return 'bad';
+    case 'hot':
+      return 'bad';
+    case 'warm':
+      return 'average';
+    case 'cold':
+      return 'blue';
+    default:
+      return 'good';
+  }
+}
+
+function getStatusColor(color: string): string {
+  if (color === 'good') return 'good';
+  if (color === 'average') return 'average';
+  return 'bad';
+}
+
+// ============================================
+// MAIN COMPONENT
+// ============================================
+
+export const SyntheticDiagnostic = () => {
+  const { act, data } = useBackend<SyntheticDiagnosticData>();
+  const { patient, error, patient_name, patient_species, has_table } = data;
+
+  const [selectedTab, setSelectedTab] = useLocalState(
+    'syntheticDiagnosticTab',
+    0,
+  );
 
   return (
-    <Window width={850} height={900}>
+    <Window
+      width={520}
+      height={700}
+      title="Synthetic Diagnostic Terminal"
+      theme="synthetic_diagnostic"
+    >
       <Window.Content scrollable>
-        <Section title="Диагностический терминал синтетиков">
-          {/* ЕСЛИ НЕТ СТОЛА */}
-          {!has_table && (
-            <Box color="bad" fontSize="1.2em" textAlign="center" my={2}>
-              <Box bold>⚠ Диагностический стол не подключён</Box>
-            </Box>
-          )}
+        {/* No table connected */}
+        {!has_table && (
+          <Section fill>
+            <NoticeBox color="yellow" align="center">
+              Diagnostic table not connected
+            </NoticeBox>
+          </Section>
+        )}
 
-          {/* ЕСЛИ ОШИБКА */}
-          {has_table && error && (
-            <Box color="bad" fontSize="1.1em" textAlign="center" my={2}>
-              <Box bold mb={1}>
-                ⚠ {error}
+        {/* Error state */}
+        {has_table && error && (
+          <Section fill>
+            <NoticeBox color="red" align="center">
+              {error}
+            </NoticeBox>
+            {patient_name && (
+              <Box textAlign="center" color="label" mt={1} fontSize="0.9em">
+                Patient: {patient_name} ({patient_species})
               </Box>
-              {patient_name && (
-                <Box fontSize="0.9em" color="label">
-                  Пациент: {patient_name} ({patient_species})
-                </Box>
-              )}
-            </Box>
-          )}
+            )}
+          </Section>
+        )}
 
-          {/* ЕСЛИ ПАЦИЕНТ ОБНАРУЖЕН */}
-          {patient && (
-            <>
-              {/* ТАБЫ */}
-              <Tabs>
-                <Tabs.Tab
-                  selected={selectedTab === 0}
-                  onClick={() => setSelectedTab(0)}
-                >
-                  📊 Диагностика
-                </Tabs.Tab>
-                <Tabs.Tab
-                  selected={selectedTab === 1}
-                  onClick={() => setSelectedTab(1)}
-                >
-                  🔧 Операции
-                </Tabs.Tab>
-                <Tabs.Tab
-                  selected={selectedTab === 2}
-                  onClick={() => setSelectedTab(2)}
-                >
-                  💻 Операционная система
-                </Tabs.Tab>
-              </Tabs>
+        {/* Patient detected */}
+        {patient && (
+          <>
+            <Tabs>
+              <Tabs.Tab
+                icon="heartbeat"
+                selected={selectedTab === 0}
+                onClick={() => setSelectedTab(0)}
+              >
+                Diagnostics
+              </Tabs.Tab>
+              <Tabs.Tab
+                icon="wrench"
+                selected={selectedTab === 1}
+                onClick={() => setSelectedTab(1)}
+              >
+                Operations
+              </Tabs.Tab>
+              <Tabs.Tab
+                icon="microchip"
+                selected={selectedTab === 2}
+                onClick={() => setSelectedTab(2)}
+              >
+                OS
+              </Tabs.Tab>
+            </Tabs>
 
-              {/* ВКЛАДКА ДИАГНОСТИКА */}
-              {selectedTab === 0 && (
-                <Stack vertical mt={1}>
-                  {/* БАЗОВАЯ ИНФОРМАЦИЯ */}
-                  <Stack.Item>
-                    <Section title="Базовая информация">
-                      <LabeledList>
-                        <LabeledList.Item label="Имя">
-                          <Box bold>{patient.name}</Box>
-                        </LabeledList.Item>
-                        <LabeledList.Item label="ID">
-                          {patient.id}
-                        </LabeledList.Item>
-                        <LabeledList.Item label="Тип">
-                          <Box color="label">{patient.type}</Box>
-                        </LabeledList.Item>
-                        <LabeledList.Item label="Статус системы">
-                          <Box
-                            bold
-                            color={
-                              patient.status_color === 'good'
-                                ? 'good'
-                                : patient.status_color === 'average'
-                                  ? 'average'
-                                  : 'bad'
-                            }
-                          >
-                            {patient.status}
-                          </Box>
-                        </LabeledList.Item>
-                      </LabeledList>
-                    </Section>
-                  </Stack.Item>
-
-                  {/* ЦЕЛОСТНОСТЬ КОРПУСА */}
-                  <Stack.Item>
-                    <Section title="Целостность корпуса">
-                      <LabeledList>
-                        <LabeledList.Item label="Общая целостность">
-                          <ProgressBar
-                            value={patient.integrity}
-                            minValue={-100}
-                            maxValue={patient.integrity_max}
-                            ranges={{
-                              good: [70, Infinity],
-                              average: [30, 70],
-                              bad: [-Infinity, 30],
-                            }}
-                          >
-                            {patient.integrity_percent}%
-                          </ProgressBar>
-                        </LabeledList.Item>
-
-                        <LabeledList.Item label="Механические повреждения">
-                          <ProgressBar
-                            value={patient.mechanical_damage}
-                            minValue={0}
-                            maxValue={200}
-                            ranges={{
-                              good: [-Infinity, 20],
-                              average: [20, 80],
-                              bad: [80, Infinity],
-                            }}
-                          >
-                            {patient.mechanical_damage}
-                          </ProgressBar>
-                        </LabeledList.Item>
-
-                        <LabeledList.Item label="Повреждения проводки">
-                          <ProgressBar
-                            value={patient.electrical_damage}
-                            minValue={0}
-                            maxValue={200}
-                            ranges={{
-                              good: [-Infinity, 20],
-                              average: [20, 80],
-                              bad: [80, Infinity],
-                            }}
-                          >
-                            {patient.electrical_damage}
-                          </ProgressBar>
-                        </LabeledList.Item>
-
-                        <LabeledList.Item label="Системные ошибки">
-                          <ProgressBar
-                            value={patient.system_damage}
-                            minValue={0}
-                            maxValue={200}
-                            ranges={{
-                              good: [-Infinity, 20],
-                              average: [20, 80],
-                              bad: [80, Infinity],
-                            }}
-                          >
-                            {patient.system_damage}
-                          </ProgressBar>
-                        </LabeledList.Item>
-
-                        <LabeledList.Item label="Перегрев системы">
-                          <ProgressBar
-                            value={patient.cooling_damage}
-                            minValue={0}
-                            maxValue={200}
-                            ranges={{
-                              good: [-Infinity, 20],
-                              average: [20, 80],
-                              bad: [80, Infinity],
-                            }}
-                          >
-                            {patient.cooling_damage}
-                          </ProgressBar>
-                        </LabeledList.Item>
-                      </LabeledList>
-                    </Section>
-                  </Stack.Item>
-
-                  {/* КОМПОНЕНТЫ */}
-                  <Stack.Item>
-                    <Section title="Установленные компоненты">
-                      <Table>
-                        <Table.Row header>
-                          <Table.Cell width="30%">Компонент</Table.Cell>
-                          <Table.Cell width="20%">Статус</Table.Cell>
-                          <Table.Cell>Детали</Table.Cell>
-                        </Table.Row>
-                        {patient.components.map((component, idx) => (
-                          <Table.Row key={idx}>
-                            <Table.Cell>
-                              <Box bold>{component.name}</Box>
-                            </Table.Cell>
-                            <Table.Cell>
-                              <Box
-                                color={
-                                  component.status_color === 'good'
-                                    ? 'good'
-                                    : component.status_color === 'average'
-                                      ? 'average'
-                                      : 'bad'
-                                }
-                              >
-                                {component.status}
-                              </Box>
-                            </Table.Cell>
-                            <Table.Cell>
-                              <Box fontSize="0.9em">{component.details}</Box>
-                            </Table.Cell>
-                          </Table.Row>
-                        ))}
-                      </Table>
-                    </Section>
-                  </Stack.Item>
-
-                  {/* КОНЕЧНОСТИ С ПАНЕЛЯМИ */}
-                  <Stack.Item>
-                    <Section title="Статус конечностей">
-                      <Table>
-                        <Table.Row header>
-                          <Table.Cell>Конечность</Table.Cell>
-                          <Table.Cell>Статус</Table.Cell>
-                          <Table.Cell>Панель</Table.Cell>
-                          <Table.Cell>Урон</Table.Cell>
-                          <Table.Cell>Механ.</Table.Cell>
-                          <Table.Cell>Электр.</Table.Cell>
-                        </Table.Row>
-                        {patient.bodyparts.map((part, idx) => (
-                          <Table.Row key={idx}>
-                            <Table.Cell>
-                              <Box bold>{part.name}</Box>
-                            </Table.Cell>
-                            <Table.Cell>
-                              <Box
-                                color={
-                                  part.status === 'Подключена' ||
-                                  part.status === 'Подключён'
-                                    ? 'good'
-                                    : 'bad'
-                                }
-                              >
-                                {part.status}
-                              </Box>
-                            </Table.Cell>
-                            <Table.Cell>
-                              <Box
-                                fontSize="0.85em"
-                                color={
-                                  part.panel_status === 'Закрыта'
-                                    ? 'good'
-                                    : part.panel_status === 'Открыта'
-                                      ? 'average'
-                                      : part.panel_status === 'Подготовлена'
-                                        ? 'label'
-                                        : 'bad'
-                                }
-                              >
-                                {part.panel_status}
-                              </Box>
-                            </Table.Cell>
-                            <Table.Cell>
-                              {part.max_damage > 0 ? (
-                                <ProgressBar
-                                  value={part.damage}
-                                  minValue={0}
-                                  maxValue={part.max_damage}
-                                  ranges={{
-                                    good: [-Infinity, part.max_damage * 0.3],
-                                    average: [
-                                      part.max_damage * 0.3,
-                                      part.max_damage * 0.7,
-                                    ],
-                                    bad: [part.max_damage * 0.7, Infinity],
-                                  }}
-                                >
-                                  {part.damage}/{part.max_damage}
-                                </ProgressBar>
-                              ) : (
-                                '—'
-                              )}
-                            </Table.Cell>
-                            <Table.Cell>{part.brute}</Table.Cell>
-                            <Table.Cell>{part.burn}</Table.Cell>
-                          </Table.Row>
-                        ))}
-                      </Table>
-                    </Section>
-                  </Stack.Item>
-
-                  {/* СИСТЕМНЫЕ СООБЩЕНИЯ */}
-                  <Stack.Item>
-                    <Section title="Системные сообщения">
-                      <Stack vertical>
-                        {patient.system_messages.map((msg, index) => (
-                          <Stack.Item key={index}>
-                            <Box
-                              p={1}
-                              backgroundColor={
-                                msg.type === 'critical'
-                                  ? 'rgba(200, 0, 0, 0.2)'
-                                  : msg.type === 'warning'
-                                    ? 'rgba(200, 150, 0, 0.2)'
-                                    : 'rgba(0, 150, 0, 0.2)'
-                              }
-                              bold={msg.type === 'critical'}
-                              color={
-                                msg.type === 'critical'
-                                  ? 'bad'
-                                  : msg.type === 'warning'
-                                    ? 'average'
-                                    : 'good'
-                              }
-                            >
-                              {msg.message}
-                            </Box>
-                          </Stack.Item>
-                        ))}
-                      </Stack>
-                    </Section>
-                  </Stack.Item>
-
-                  {/* СТАТУС СТОЛА */}
-                  {data.is_synthetic_table && (
-                    <Stack.Item>
-                      <Section title="Диагностический стол">
-                        <LabeledList>
-                          <LabeledList.Item label="Тип стола">
-                            <Box bold color="good">
-                              Synthetic Diagnostic Table
-                            </Box>
-                          </LabeledList.Item>
-                          <LabeledList.Item label="Зарядка">
-                            <Box color="good">
-                              Активна ({data.table_charge_rate} units/тик)
-                            </Box>
-                          </LabeledList.Item>
-                          <LabeledList.Item label="Охлаждение">
-                            <Box color="good">
-                              Активно (-{data.table_cooling_rate}°C/тик)
-                            </Box>
-                          </LabeledList.Item>
-                          <LabeledList.Item label="Сетевой порт">
-                            <Box color="good">Подключён</Box>
-                          </LabeledList.Item>
-                        </LabeledList>
-                      </Section>
-                    </Stack.Item>
-                  )}
-                </Stack>
-              )}
-
-              {/* ВКЛАДКА ОПЕРАЦИИ */}
-              {selectedTab === 1 && (
-                <Stack vertical mt={1}>
-                  {/* ВЫБОР ЗОНЫ ТЕЛА */}
-                  <Stack.Item>
-                    <Section title="Выбор зоны тела">
-                      <Stack fill>
-                        {zones &&
-                          zones.map((zone) => (
-                            <Stack.Item key={zone.id} grow>
-                              <Button
-                                fluid
-                                selected={target_zone === zone.id}
-                                color={
-                                  target_zone === zone.id ? 'good' : 'default'
-                                }
-                                onClick={() =>
-                                  act('change_zone', { new_zone: zone.id })
-                                }
-                              >
-                                {zone.name}
-                              </Button>
-                            </Stack.Item>
-                          ))}
-                      </Stack>
-                      {target_zone && zones && (
-                        <Box mt={1} textAlign="center" color="label">
-                          Выбранная зона:{' '}
-                          <Box as="span" bold color="good">
-                            {zones.find((z) => z.id === target_zone)?.name}
-                          </Box>
-                        </Box>
-                      )}
-                    </Section>
-                  </Stack.Item>
-
-                  {/* СПИСОК ОПЕРАЦИЙ */}
-                  <Stack.Item>
-                    <Section title="Доступные операции прямо сейчас">
-                      {!target_zone && (
-                        <Box
-                          textAlign="center"
-                          color="average"
-                          my={2}
-                          p={2}
-                          backgroundColor="rgba(100, 100, 100, 0.1)"
-                        >
-                          <Box fontSize="1.1em" bold mb={1}>
-                            ⚠ Выберите зону тела
-                          </Box>
-                          <Box>
-                            Используйте кнопки выше для выбора зоны тела.
-                          </Box>
-                        </Box>
-                      )}
-
-                      {target_zone && surgeries && surgeries.length > 0 && (
-                        <>
-                          <Box mb={1} p={1} backgroundColor="rgba(0,150,0,0.1)">
-                            <Box bold color="good">
-                              ✓ Найдено операций: {surgeries.length}
-                            </Box>
-                            <Box fontSize="0.9em" color="label">
-                              Это операции, которые можно выполнить прямо сейчас
-                            </Box>
-                          </Box>
-                          <Table>
-                            <Table.Row header>
-                              <Table.Cell width="35%">Операция</Table.Cell>
-                              <Table.Cell width="45%">Описание</Table.Cell>
-                              <Table.Cell width="20%">Инструмент</Table.Cell>
-                            </Table.Row>
-                            {surgeries.map((surgery, index) => (
-                              <Table.Row key={index}>
-                                <Table.Cell>
-                                  <Box bold color="good">
-                                    ► {surgery.name}
-                                  </Box>
-                                </Table.Cell>
-                                <Table.Cell>
-                                  <Box fontSize="0.9em">{surgery.desc}</Box>
-                                </Table.Cell>
-                                <Table.Cell>
-                                  <Box italic color="label">
-                                    {surgery.tool_rec}
-                                  </Box>
-                                </Table.Cell>
-                              </Table.Row>
-                            ))}
-                          </Table>
-                        </>
-                      )}
-
-                      {target_zone && surgeries && surgeries.length === 0 && (
-                        <Box
-                          textAlign="center"
-                          color="label"
-                          my={2}
-                          p={2}
-                          backgroundColor="rgba(100, 100, 100, 0.1)"
-                        >
-                          <Box fontSize="1.1em" mb={1}>
-                            ℹ Нет доступных операций
-                          </Box>
-                          <Box>
-                            Для выбранной зоны сейчас нет доступных операций.
-                            <br />
-                            Возможно, нужно выполнить предыдущие шаги.
-                          </Box>
-                        </Box>
-                      )}
-                    </Section>
-                  </Stack.Item>
-
-                  {/* ИНСТРУКЦИЯ */}
-                  <Stack.Item>
-                    <Section title="Инструкция по операциям">
-                      <Stack vertical>
-                        <Stack.Item>
-                          <Box
-                            p={1}
-                            mb={1}
-                            backgroundColor="rgba(50, 100, 200, 0.15)"
-                          >
-                            <Box bold mb={0.5} color="label">
-                              🔧 Грудная клетка / Голова (работа с органами):
-                            </Box>
-                            <Box ml={1} fontSize="0.9em">
-                              1. Открыть панель (отвёртка)
-                              <br />
-                              2. Подготовить электронику (мультитул)
-                              <br />
-                              3. Установить/Извлечь органы (органы или
-                              мультитул)
-                            </Box>
-                          </Box>
-                        </Stack.Item>
-
-                        <Stack.Item>
-                          <Box
-                            p={1}
-                            mb={1}
-                            backgroundColor="rgba(100, 150, 50, 0.15)"
-                          >
-                            <Box bold mb={0.5} color="label">
-                              🔨 Руки / Ноги (ремонт):
-                            </Box>
-                            <Box ml={1} fontSize="0.9em">
-                              1. Открыть панель (отвёртка)
-                              <br />
-                              2. Заварить брут-урон (сварка) или починить
-                              берн-урон (кабель)
-                              <br />
-                              3. Закрыть панель (отвёртка)
-                            </Box>
-                          </Box>
-                        </Stack.Item>
-
-                        <Stack.Item>
-                          <Box p={1} backgroundColor="rgba(200, 50, 50, 0.15)">
-                            <Box bold mb={0.5} color="label">
-                              ⚠ Снятие конечности:
-                            </Box>
-                            <Box ml={1} fontSize="0.9em">
-                              1. Отключить электронику (мультитул)
-                              <br />
-                              2. Открутить конечность (гаечный ключ)
-                            </Box>
-                          </Box>
-                        </Stack.Item>
-                      </Stack>
-                    </Section>
-                  </Stack.Item>
-                </Stack>
-              )}
-
-              {/* ВКЛАДКА ОС */}
-              {selectedTab === 2 && (
-                <Stack vertical mt={1}>
-                  {/* ИНФОРМАЦИЯ ОБ ОС */}
-                  <Stack.Item>
-                    <Section title="Операционная система">
-                      <LabeledList>
-                        <LabeledList.Item label="ОС">
-                          <Box
-                            bold
-                            color={patient.os_theme_color || 'good'}
-                          >
-                            {patient.os_version || 'IPC-OS v2.4.1'}
-                          </Box>
-                        </LabeledList.Item>
-                        <LabeledList.Item label="Платформа">
-                          {patient.os_manufacturer || 'Generic Systems'}
-                        </LabeledList.Item>
-                        <LabeledList.Item label="Статус ОС">
-                          <Box
-                            bold
-                            color={
-                              (patient.os_virus_count || 0) > 0
-                                ? 'bad'
-                                : 'good'
-                            }
-                          >
-                            {(patient.os_virus_count || 0) > 0
-                              ? `ЗАРАЖЕНА (${patient.os_virus_count} угроз)`
-                              : 'Система стабильна'}
-                          </Box>
-                        </LabeledList.Item>
-                        <LabeledList.Item label="Пароль">
-                          <Box color={patient.os_has_password ? 'good' : 'average'}>
-                            {patient.os_has_password ? 'Установлен' : 'Не установлен'}
-                          </Box>
-                        </LabeledList.Item>
-                        <LabeledList.Item label="Сессия">
-                          <Box color={patient.os_logged_in ? 'good' : 'label'}>
-                            {patient.os_logged_in ? 'Активна' : 'Неактивна'}
-                          </Box>
-                        </LabeledList.Item>
-                      </LabeledList>
-                    </Section>
-                  </Stack.Item>
-
-                  {/* ВИРУСЫ */}
-                  <Stack.Item>
-                    <Section
-                      title={`Обнаруженные угрозы (${patient.os_viruses?.length || 0})`}
-                    >
-                      {(!patient.os_viruses ||
-                        patient.os_viruses.length === 0) && (
-                        <Box
-                          textAlign="center"
-                          p={1}
-                          color="good"
-                          backgroundColor="rgba(0, 150, 0, 0.1)"
-                        >
-                          Вирусов не обнаружено. ОС чиста.
-                        </Box>
-                      )}
-                      {patient.os_viruses &&
-                        patient.os_viruses.length > 0 && (
-                          <Table>
-                            <Table.Row header>
-                              <Table.Cell width="25%">Вирус</Table.Cell>
-                              <Table.Cell width="30%">Описание</Table.Cell>
-                              <Table.Cell width="15%">Опасность</Table.Cell>
-                              <Table.Cell width="15%">Тип</Table.Cell>
-                              <Table.Cell width="15%">Действие</Table.Cell>
-                            </Table.Row>
-                            {patient.os_viruses.map((virus, idx) => (
-                              <Table.Row key={idx}>
-                                <Table.Cell>
-                                  <Box
-                                    bold
-                                    color={
-                                      virus.severity === 'high'
-                                        ? 'bad'
-                                        : virus.severity === 'medium'
-                                          ? 'average'
-                                          : 'label'
-                                    }
-                                  >
-                                    {virus.name}
-                                  </Box>
-                                </Table.Cell>
-                                <Table.Cell>
-                                  <Box fontSize="0.85em">{virus.desc}</Box>
-                                </Table.Cell>
-                                <Table.Cell>
-                                  <Box
-                                    bold
-                                    color={
-                                      virus.severity === 'high'
-                                        ? 'bad'
-                                        : virus.severity === 'medium'
-                                          ? 'average'
-                                          : 'good'
-                                    }
-                                  >
-                                    {virus.severity === 'high'
-                                      ? 'ВЫСОКАЯ'
-                                      : virus.severity === 'medium'
-                                        ? 'СРЕДНЯЯ'
-                                        : 'НИЗКАЯ'}
-                                  </Box>
-                                </Table.Cell>
-                                <Table.Cell>
-                                  <Box
-                                    fontSize="0.8em"
-                                    color={
-                                      virus.removable ? 'label' : 'bad'
-                                    }
-                                  >
-                                    {virus.removable
-                                      ? 'Обычный'
-                                      : 'Rootkit'}
-                                  </Box>
-                                </Table.Cell>
-                                <Table.Cell>
-                                  <Button
-                                    compact
-                                    color="bad"
-                                    onClick={() =>
-                                      act('remove_virus', {
-                                        virus_index: virus.index,
-                                      })
-                                    }
-                                  >
-                                    Удалить
-                                  </Button>
-                                </Table.Cell>
-                              </Table.Row>
-                            ))}
-                          </Table>
-                        )}
-                    </Section>
-                  </Stack.Item>
-
-                  {/* УСТАНОВЛЕННЫЕ ПРИЛОЖЕНИЯ */}
-                  <Stack.Item>
-                    <Section
-                      title={`Установленные приложения (${patient.os_installed_apps?.length || 0})`}
-                    >
-                      {(!patient.os_installed_apps ||
-                        patient.os_installed_apps.length === 0) && (
-                        <Box textAlign="center" p={1} color="label">
-                          Дополнительные приложения не установлены.
-                        </Box>
-                      )}
-                      {patient.os_installed_apps &&
-                        patient.os_installed_apps.length > 0 && (
-                          <Table>
-                            <Table.Row header>
-                              <Table.Cell width="30%">
-                                Приложение
-                              </Table.Cell>
-                              <Table.Cell width="50%">Описание</Table.Cell>
-                              <Table.Cell width="20%">Категория</Table.Cell>
-                            </Table.Row>
-                            {patient.os_installed_apps.map((app, idx) => (
-                              <Table.Row key={idx}>
-                                <Table.Cell>
-                                  <Box bold>{app.name}</Box>
-                                </Table.Cell>
-                                <Table.Cell>
-                                  <Box fontSize="0.85em">{app.desc}</Box>
-                                </Table.Cell>
-                                <Table.Cell>
-                                  <Box fontSize="0.85em" color="label">
-                                    {app.category === 'diagnostic'
-                                      ? 'Диагностика'
-                                      : app.category === 'utility'
-                                        ? 'Утилита'
-                                        : 'Прочее'}
-                                  </Box>
-                                </Table.Cell>
-                              </Table.Row>
-                            ))}
-                          </Table>
-                        )}
-                    </Section>
-                  </Stack.Item>
-
-                  {/* СИСТЕМНЫЕ ЛОГИ (динамические на основе компонентов) */}
-                  <Stack.Item>
-                    <Section title="Системные логи">
-                      <Box
-                        fontFamily="monospace"
-                        fontSize="0.85em"
-                        p={1}
-                        backgroundColor="rgba(0, 0, 0, 0.3)"
-                        style={{
-                          maxHeight: '200px',
-                          overflowY: 'auto',
-                        }}
-                      >
-                        {patient.components.map((component, idx) => (
-                          <Box
-                            key={idx}
-                            color={
-                              component.status_color === 'good'
-                                ? 'good'
-                                : component.status_color === 'average'
-                                  ? 'average'
-                                  : 'bad'
-                            }
-                          >
-                            [{component.status_color === 'good'
-                              ? 'OK'
-                              : component.status_color === 'average'
-                                ? 'WARN'
-                                : 'ERR'}
-                            ] {component.name}: {component.details}
-                          </Box>
-                        ))}
-                        {patient.system_messages.map((msg, idx) => (
-                          <Box
-                            key={`msg-${idx}`}
-                            color={
-                              msg.type === 'critical'
-                                ? 'bad'
-                                : msg.type === 'warning'
-                                  ? 'average'
-                                  : 'good'
-                            }
-                            mt={idx === 0 ? 0.5 : 0}
-                          >
-                            [{msg.type === 'critical'
-                              ? 'CRIT'
-                              : msg.type === 'warning'
-                                ? 'WARN'
-                                : 'INFO'}
-                            ] {msg.message}
-                          </Box>
-                        ))}
-                      </Box>
-                    </Section>
-                  </Stack.Item>
-                </Stack>
-              )}
-            </>
-          )}
-        </Section>
+            {selectedTab === 0 && <DiagnosticsTab />}
+            {selectedTab === 1 && <OperationsTab />}
+            {selectedTab === 2 && <OsTab />}
+          </>
+        )}
       </Window.Content>
     </Window>
+  );
+};
+
+// ============================================
+// DIAGNOSTICS TAB
+// ============================================
+
+const DiagnosticsTab = () => {
+  const { data } = useBackend<SyntheticDiagnosticData>();
+  const patient = data.patient!;
+
+  return (
+    <Stack vertical>
+      {/* Patient Info + Vital Signs */}
+      <Stack.Item>
+        <Section title="Patient">
+          <Stack>
+            <Stack.Item grow>
+              <LabeledList>
+                <LabeledList.Item label="Name">
+                  <Box bold>{patient.name}</Box>
+                </LabeledList.Item>
+                <LabeledList.Item label="ID">{patient.id}</LabeledList.Item>
+                <LabeledList.Item
+                  label="Status"
+                  color={getStatusColor(patient.status_color)}
+                >
+                  {patient.status}
+                </LabeledList.Item>
+                {patient.chassis_brand && (
+                  <LabeledList.Item label="Chassis">
+                    {patient.chassis_brand}
+                    {patient.chassis_visual_brand &&
+                      patient.chassis_visual_brand !== patient.chassis_brand && (
+                        <Box as="span" color="label" ml={1}>
+                          ({patient.chassis_visual_brand})
+                        </Box>
+                      )}
+                  </LabeledList.Item>
+                )}
+                {patient.overclock_active && (
+                  <LabeledList.Item label="Overclock" color="average">
+                    <Icon name="bolt" mr={0.5} />
+                    Active (+{patient.overclock_speed_bonus}%)
+                  </LabeledList.Item>
+                )}
+              </LabeledList>
+            </Stack.Item>
+          </Stack>
+        </Section>
+      </Stack.Item>
+
+      {/* Vital Gauges */}
+      <Stack.Item>
+        <Section title="Vitals">
+          <LabeledList>
+            <LabeledList.Item label="Integrity">
+              <ProgressBar
+                value={patient.integrity}
+                minValue={-100}
+                maxValue={patient.integrity_max}
+                ranges={{
+                  good: [70, Infinity],
+                  average: [30, 70],
+                  bad: [-Infinity, 30],
+                }}
+              >
+                <AnimatedNumber
+                  value={patient.integrity_percent}
+                  format={(v) => `${Math.round(v)}%`}
+                />
+              </ProgressBar>
+            </LabeledList.Item>
+
+            {patient.cpu_temperature !== undefined && (
+              <LabeledList.Item
+                label="CPU Temp"
+                color={getCpuTempColor(patient.cpu_temp_status)}
+              >
+                <ProgressBar
+                  value={patient.cpu_temperature}
+                  minValue={0}
+                  maxValue={patient.cpu_temp_critical || 150}
+                  ranges={{
+                    good: [0, patient.cpu_temp_optimal_max || 70],
+                    average: [
+                      patient.cpu_temp_optimal_max || 70,
+                      90,
+                    ],
+                    bad: [90, Infinity],
+                  }}
+                >
+                  <AnimatedNumber
+                    value={patient.cpu_temperature}
+                    format={(v) => `${Math.round(v)}°C`}
+                  />
+                </ProgressBar>
+              </LabeledList.Item>
+            )}
+
+            <LabeledList.Item label="Mechanical">
+              <ProgressBar
+                value={patient.mechanical_damage / 200}
+                color="bad"
+              >
+                <AnimatedNumber value={patient.mechanical_damage} />
+              </ProgressBar>
+            </LabeledList.Item>
+
+            <LabeledList.Item label="Electrical">
+              <ProgressBar
+                value={patient.electrical_damage / 200}
+                color="bad"
+              >
+                <AnimatedNumber value={patient.electrical_damage} />
+              </ProgressBar>
+            </LabeledList.Item>
+
+            <LabeledList.Item label="System">
+              <ProgressBar value={patient.system_damage / 200} color="bad">
+                <AnimatedNumber value={patient.system_damage} />
+              </ProgressBar>
+            </LabeledList.Item>
+
+            <LabeledList.Item label="Overheat">
+              <ProgressBar value={patient.cooling_damage / 200} color="bad">
+                <AnimatedNumber value={patient.cooling_damage} />
+              </ProgressBar>
+            </LabeledList.Item>
+          </LabeledList>
+        </Section>
+      </Stack.Item>
+
+      {/* Components */}
+      <Stack.Item>
+        <Section title="Components">
+          <Table>
+            <Table.Row header>
+              <Table.Cell>Component</Table.Cell>
+              <Table.Cell>Status</Table.Cell>
+              <Table.Cell>Details</Table.Cell>
+            </Table.Row>
+            {patient.components.map((comp, idx) => (
+              <Table.Row key={idx}>
+                <Table.Cell bold>{comp.name}</Table.Cell>
+                <Table.Cell color={getStatusColor(comp.status_color)}>
+                  {comp.status}
+                </Table.Cell>
+                <Table.Cell>
+                  <Box fontSize="0.9em">{comp.details}</Box>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table>
+        </Section>
+      </Stack.Item>
+
+      {/* Limbs */}
+      <Stack.Item>
+        <Section title="Limbs">
+          <Table>
+            <Table.Row header>
+              <Table.Cell>Limb</Table.Cell>
+              <Table.Cell>Status</Table.Cell>
+              <Table.Cell>Panel</Table.Cell>
+              <Table.Cell>Damage</Table.Cell>
+              <Table.Cell>Brute</Table.Cell>
+              <Table.Cell>Burn</Table.Cell>
+            </Table.Row>
+            {patient.bodyparts.map((part, idx) => (
+              <Table.Row key={idx}>
+                <Table.Cell bold>{part.name}</Table.Cell>
+                <Table.Cell
+                  color={
+                    part.status === 'Подключена' ||
+                    part.status === 'Подключён'
+                      ? 'good'
+                      : 'bad'
+                  }
+                >
+                  {part.status}
+                </Table.Cell>
+                <Table.Cell>
+                  <Box
+                    color={
+                      part.panel_status === 'Закрыта'
+                        ? 'good'
+                        : part.panel_status === 'Открыта'
+                          ? 'average'
+                          : part.panel_status === 'Подготовлена'
+                            ? 'label'
+                            : 'bad'
+                    }
+                  >
+                    {part.panel_status}
+                  </Box>
+                </Table.Cell>
+                <Table.Cell>
+                  {part.max_damage > 0 ? (
+                    <ProgressBar
+                      value={part.damage}
+                      minValue={0}
+                      maxValue={part.max_damage}
+                      ranges={{
+                        good: [-Infinity, part.max_damage * 0.3],
+                        average: [
+                          part.max_damage * 0.3,
+                          part.max_damage * 0.7,
+                        ],
+                        bad: [part.max_damage * 0.7, Infinity],
+                      }}
+                    >
+                      {part.damage}/{part.max_damage}
+                    </ProgressBar>
+                  ) : (
+                    '—'
+                  )}
+                </Table.Cell>
+                <Table.Cell>{part.brute}</Table.Cell>
+                <Table.Cell>{part.burn}</Table.Cell>
+              </Table.Row>
+            ))}
+          </Table>
+        </Section>
+      </Stack.Item>
+
+      {/* Implants */}
+      {patient.implants &&
+        patient.implants.length > 0 &&
+        patient.implants[0].name !== 'Нет установленных имплантов' && (
+          <Stack.Item>
+            <Section title="Implants">
+              <Table>
+                <Table.Row header>
+                  <Table.Cell>Implant</Table.Cell>
+                  <Table.Cell>Location</Table.Cell>
+                  <Table.Cell>Status</Table.Cell>
+                </Table.Row>
+                {patient.implants.map((imp, idx) => (
+                  <Table.Row key={idx}>
+                    <Table.Cell bold>{imp.name}</Table.Cell>
+                    <Table.Cell>{imp.location}</Table.Cell>
+                    <Table.Cell color={getStatusColor(imp.status_color)}>
+                      {imp.status}
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table>
+            </Section>
+          </Stack.Item>
+        )}
+
+      {/* System Messages */}
+      <Stack.Item>
+        <Section title="System Log">
+          <Stack vertical>
+            {patient.system_messages.map((msg, idx) => (
+              <Stack.Item key={idx}>
+                <Box
+                  p={0.5}
+                  fontFamily="monospace"
+                  fontSize="0.85em"
+                  backgroundColor={
+                    msg.type === 'critical'
+                      ? 'rgba(200, 0, 0, 0.15)'
+                      : msg.type === 'warning'
+                        ? 'rgba(200, 150, 0, 0.15)'
+                        : 'rgba(0, 150, 0, 0.1)'
+                  }
+                  color={
+                    msg.type === 'critical'
+                      ? 'bad'
+                      : msg.type === 'warning'
+                        ? 'average'
+                        : 'good'
+                  }
+                  bold={msg.type === 'critical'}
+                >
+                  <Icon
+                    name={
+                      msg.type === 'critical'
+                        ? 'exclamation-triangle'
+                        : msg.type === 'warning'
+                          ? 'exclamation-circle'
+                          : 'check-circle'
+                    }
+                    mr={1}
+                  />
+                  {msg.message}
+                </Box>
+              </Stack.Item>
+            ))}
+          </Stack>
+        </Section>
+      </Stack.Item>
+
+      {/* Diagnostic Table Status */}
+      {data.is_synthetic_table && (
+        <Stack.Item>
+          <Section title="Diagnostic Table">
+            <LabeledList>
+              <LabeledList.Item label="Type" color="good">
+                <Icon name="table" mr={0.5} />
+                Synthetic Diagnostic Table
+              </LabeledList.Item>
+              <LabeledList.Item label="Charging" color="good">
+                <Icon name="bolt" mr={0.5} />
+                Active ({data.table_charge_rate} units/tick)
+              </LabeledList.Item>
+              <LabeledList.Item label="Cooling" color="good">
+                <Icon name="snowflake" mr={0.5} />
+                Active (-{data.table_cooling_rate}°C/tick)
+              </LabeledList.Item>
+              <LabeledList.Item label="Network" color="good">
+                <Icon name="network-wired" mr={0.5} />
+                Connected
+              </LabeledList.Item>
+            </LabeledList>
+          </Section>
+        </Stack.Item>
+      )}
+    </Stack>
+  );
+};
+
+// ============================================
+// OPERATIONS TAB
+// ============================================
+
+const OperationsTab = () => {
+  const { act, data } = useBackend<SyntheticDiagnosticData>();
+  const { target_zone, surgeries, zones } = data;
+
+  return (
+    <Stack vertical>
+      {/* Body Zone Selector + Surgery State */}
+      <Stack.Item>
+        <Section title="Target Zone">
+          <Stack>
+            <Stack.Item>
+              <BodyZoneSelector
+                theme="slimecore"
+                precise={false}
+                selectedZone={(target_zone as BodyZone) || null}
+                onClick={(zone: BodyZone) =>
+                  zone !== target_zone &&
+                  act('change_zone', { new_zone: zone })
+                }
+              />
+            </Stack.Item>
+            <Stack.Item grow ml={1}>
+              <Stack vertical>
+                <Stack.Item>
+                  <Box bold fontSize="1em" mb={0.5}>
+                    {target_zone && zones
+                      ? zones.find((z) => z.id === target_zone)?.name ||
+                        'Select zone'
+                      : 'Select a body zone'}
+                  </Box>
+                </Stack.Item>
+                {/* Zone buttons as fallback */}
+                <Stack.Item>
+                  <Stack wrap>
+                    {zones &&
+                      zones.map((zone) => (
+                        <Stack.Item key={zone.id} m={0.25}>
+                          <Button
+                            compact
+                            selected={target_zone === zone.id}
+                            onClick={() =>
+                              act('change_zone', { new_zone: zone.id })
+                            }
+                          >
+                            {zone.name}
+                          </Button>
+                        </Stack.Item>
+                      ))}
+                  </Stack>
+                </Stack.Item>
+              </Stack>
+            </Stack.Item>
+          </Stack>
+        </Section>
+      </Stack.Item>
+
+      {/* Available Operations */}
+      <Stack.Item>
+        <Section
+          title="Available Operations"
+          buttons={
+            surgeries &&
+            surgeries.length > 0 && (
+              <Box color="good" fontSize="0.85em">
+                {surgeries.length} available
+              </Box>
+            )
+          }
+        >
+          {!target_zone && (
+            <NoticeBox color="yellow" align="center">
+              Select a body zone to view available operations
+            </NoticeBox>
+          )}
+
+          {target_zone && surgeries && surgeries.length > 0 && (
+            <Stack vertical>
+              {surgeries.map((surgery, idx) => (
+                <Stack.Item key={idx}>
+                  <Button fluid color="transparent">
+                    <Stack fill>
+                      <Stack.Item grow>
+                        <Box bold color="good">
+                          {surgery.name}
+                        </Box>
+                        <Box fontSize="0.85em" color="label">
+                          {surgery.desc}
+                        </Box>
+                      </Stack.Item>
+                      <Stack.Item>
+                        <Box italic color="label" fontSize="0.85em">
+                          {surgery.tool_rec}
+                        </Box>
+                      </Stack.Item>
+                    </Stack>
+                  </Button>
+                </Stack.Item>
+              ))}
+            </Stack>
+          )}
+
+          {target_zone && surgeries && surgeries.length === 0 && (
+            <NoticeBox color="green" align="center">
+              No operations available for this zone
+            </NoticeBox>
+          )}
+        </Section>
+      </Stack.Item>
+
+      {/* Surgery Instructions */}
+      <Stack.Item>
+        <Section title="Reference">
+          <Stack vertical>
+            <Stack.Item>
+              <Box p={0.5} backgroundColor="rgba(40, 80, 160, 0.15)">
+                <Box bold mb={0.5} fontSize="0.9em">
+                  <Icon name="microchip" mr={0.5} />
+                  Chest / Head (organ access):
+                </Box>
+                <Box ml={1.5} fontSize="0.85em" color="label">
+                  1. Open panel (Screwdriver)
+                </Box>
+                <Box ml={1.5} fontSize="0.85em" color="label">
+                  2. Prepare electronics (Multitool)
+                </Box>
+                <Box ml={1.5} fontSize="0.85em" color="label">
+                  3. Install/Extract organs (Organ or Multitool)
+                </Box>
+              </Box>
+            </Stack.Item>
+
+            <Stack.Item>
+              <Box p={0.5} backgroundColor="rgba(80, 120, 40, 0.15)">
+                <Box bold mb={0.5} fontSize="0.9em">
+                  <Icon name="wrench" mr={0.5} />
+                  Arms / Legs (repair):
+                </Box>
+                <Box ml={1.5} fontSize="0.85em" color="label">
+                  1. Open panel (Screwdriver)
+                </Box>
+                <Box ml={1.5} fontSize="0.85em" color="label">
+                  2. Weld brute (Welder) or fix burn (Cable)
+                </Box>
+                <Box ml={1.5} fontSize="0.85em" color="label">
+                  3. Close panel (Screwdriver)
+                </Box>
+              </Box>
+            </Stack.Item>
+
+            <Stack.Item>
+              <Box p={0.5} backgroundColor="rgba(160, 40, 40, 0.15)">
+                <Box bold mb={0.5} fontSize="0.9em">
+                  <Icon name="unlink" mr={0.5} />
+                  Limb removal:
+                </Box>
+                <Box ml={1.5} fontSize="0.85em" color="label">
+                  1. Disconnect electronics (Multitool)
+                </Box>
+                <Box ml={1.5} fontSize="0.85em" color="label">
+                  2. Detach limb (Wrench)
+                </Box>
+              </Box>
+            </Stack.Item>
+          </Stack>
+        </Section>
+      </Stack.Item>
+    </Stack>
+  );
+};
+
+// ============================================
+// OS TAB
+// ============================================
+
+const OsTab = () => {
+  const { act, data } = useBackend<SyntheticDiagnosticData>();
+  const patient = data.patient!;
+
+  return (
+    <Stack vertical>
+      {/* OS Info */}
+      <Stack.Item>
+        <Section title="Operating System">
+          <LabeledList>
+            <LabeledList.Item label="OS">
+              <Box bold color={patient.os_theme_color || 'good'}>
+                {patient.os_version || 'IPC-OS v2.4.1'}
+              </Box>
+            </LabeledList.Item>
+            <LabeledList.Item label="Platform">
+              {patient.os_manufacturer || 'Generic Systems'}
+            </LabeledList.Item>
+            <LabeledList.Item label="Status">
+              <Box
+                bold
+                color={
+                  (patient.os_virus_count || 0) > 0 ? 'bad' : 'good'
+                }
+              >
+                {(patient.os_virus_count || 0) > 0 ? (
+                  <>
+                    <Icon name="virus" mr={0.5} />
+                    INFECTED ({patient.os_virus_count} threats)
+                  </>
+                ) : (
+                  <>
+                    <Icon name="shield-alt" mr={0.5} />
+                    System stable
+                  </>
+                )}
+              </Box>
+            </LabeledList.Item>
+            <LabeledList.Item label="Password">
+              <Box color={patient.os_has_password ? 'good' : 'average'}>
+                {patient.os_has_password ? 'Set' : 'Not set'}
+              </Box>
+            </LabeledList.Item>
+            <LabeledList.Item label="Session">
+              <Box color={patient.os_logged_in ? 'good' : 'label'}>
+                {patient.os_logged_in ? 'Active' : 'Inactive'}
+              </Box>
+            </LabeledList.Item>
+          </LabeledList>
+        </Section>
+      </Stack.Item>
+
+      {/* Viruses */}
+      <Stack.Item>
+        <Section
+          title="Threats"
+          buttons={
+            <Box
+              color={
+                (patient.os_viruses?.length || 0) > 0 ? 'bad' : 'good'
+              }
+              fontSize="0.85em"
+            >
+              {patient.os_viruses?.length || 0} detected
+            </Box>
+          }
+        >
+          {(!patient.os_viruses || patient.os_viruses.length === 0) && (
+            <NoticeBox color="green" align="center">
+              No viruses detected. System clean.
+            </NoticeBox>
+          )}
+          {patient.os_viruses && patient.os_viruses.length > 0 && (
+            <Table>
+              <Table.Row header>
+                <Table.Cell>Virus</Table.Cell>
+                <Table.Cell>Severity</Table.Cell>
+                <Table.Cell>Type</Table.Cell>
+                <Table.Cell>Action</Table.Cell>
+              </Table.Row>
+              {patient.os_viruses.map((virus, idx) => (
+                <Table.Row key={idx}>
+                  <Table.Cell>
+                    <Box
+                      bold
+                      color={
+                        virus.severity === 'high'
+                          ? 'bad'
+                          : virus.severity === 'medium'
+                            ? 'average'
+                            : 'label'
+                      }
+                    >
+                      {virus.name}
+                    </Box>
+                    <Box fontSize="0.8em" color="label">
+                      {virus.desc}
+                    </Box>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Box
+                      bold
+                      color={
+                        virus.severity === 'high'
+                          ? 'bad'
+                          : virus.severity === 'medium'
+                            ? 'average'
+                            : 'good'
+                      }
+                    >
+                      {virus.severity === 'high'
+                        ? 'HIGH'
+                        : virus.severity === 'medium'
+                          ? 'MED'
+                          : 'LOW'}
+                    </Box>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Box
+                      fontSize="0.85em"
+                      color={virus.removable ? 'label' : 'bad'}
+                    >
+                      {virus.removable ? 'Standard' : 'Rootkit'}
+                    </Box>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Button
+                      compact
+                      color="bad"
+                      icon="trash"
+                      onClick={() =>
+                        act('remove_virus', {
+                          virus_index: virus.index,
+                        })
+                      }
+                    >
+                      Remove
+                    </Button>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table>
+          )}
+        </Section>
+      </Stack.Item>
+
+      {/* Installed Apps */}
+      <Stack.Item>
+        <Section
+          title="Installed Apps"
+          buttons={
+            <Box color="label" fontSize="0.85em">
+              {patient.os_installed_apps?.length || 0} apps
+            </Box>
+          }
+        >
+          {(!patient.os_installed_apps ||
+            patient.os_installed_apps.length === 0) && (
+            <Box textAlign="center" p={1} color="label" fontSize="0.9em">
+              No additional apps installed.
+            </Box>
+          )}
+          {patient.os_installed_apps &&
+            patient.os_installed_apps.length > 0 && (
+              <Table>
+                <Table.Row header>
+                  <Table.Cell>App</Table.Cell>
+                  <Table.Cell>Description</Table.Cell>
+                  <Table.Cell>Category</Table.Cell>
+                </Table.Row>
+                {patient.os_installed_apps.map((app, idx) => (
+                  <Table.Row key={idx}>
+                    <Table.Cell bold>{app.name}</Table.Cell>
+                    <Table.Cell>
+                      <Box fontSize="0.85em">{app.desc}</Box>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Box fontSize="0.85em" color="label">
+                        {app.category === 'diagnostic'
+                          ? 'Diagnostic'
+                          : app.category === 'utility'
+                            ? 'Utility'
+                            : 'Other'}
+                      </Box>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table>
+            )}
+        </Section>
+      </Stack.Item>
+
+      {/* System Logs */}
+      <Stack.Item>
+        <Section title="System Logs">
+          <Box
+            fontFamily="monospace"
+            fontSize="0.85em"
+            p={0.5}
+            backgroundColor="rgba(0, 0, 0, 0.3)"
+            style={{
+              maxHeight: '180px',
+              overflowY: 'auto',
+            }}
+          >
+            {patient.components.map((comp, idx) => (
+              <Box key={idx} color={getStatusColor(comp.status_color)}>
+                [
+                {comp.status_color === 'good'
+                  ? 'OK'
+                  : comp.status_color === 'average'
+                    ? 'WARN'
+                    : 'ERR'}
+                ] {comp.name}: {comp.details}
+              </Box>
+            ))}
+            {patient.system_messages.map((msg, idx) => (
+              <Box
+                key={`msg-${idx}`}
+                color={
+                  msg.type === 'critical'
+                    ? 'bad'
+                    : msg.type === 'warning'
+                      ? 'average'
+                      : 'good'
+                }
+                mt={idx === 0 ? 0.5 : 0}
+              >
+                [
+                {msg.type === 'critical'
+                  ? 'CRIT'
+                  : msg.type === 'warning'
+                    ? 'WARN'
+                    : 'INFO'}
+                ] {msg.message}
+              </Box>
+            ))}
+          </Box>
+        </Section>
+      </Stack.Item>
+    </Stack>
   );
 };

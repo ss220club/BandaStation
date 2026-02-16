@@ -1,0 +1,31 @@
+.theme-synthetic_diagnostic {
+  .Layout__content {
+    background-image: url('../assets/bg-deforest.svg');
+    background-size: 90%;
+  }
+  // Base - cyan/blue medical aesthetic for IPC diagnostics
+  --color-base: hsl(190, 80%, 15%);
+  --color-primary: hsl(from var(--color-base) h s calc(l + 5));
+  --color-border-primary: hsla(190, 60%, 70%, 0.6);
+  --secondary-lightness-adjustment: -10;
+  --base-gradient-spread: 0;
+
+  // Components
+  --button-background-selected: hsl(190, 70%, 25%);
+  --button-background-caution: hsl(30, 85%, 35%);
+  --button-background-danger: hsl(0, 80%, 35%);
+  --button-border-radius: 2px;
+
+  --collapsible-background-selected: hsl(190, 70%, 25%);
+  --collapsible-background-caution: hsl(30, 85%, 35%);
+  --collapsible-background-danger: hsl(0, 80%, 35%);
+
+  --progress-bar-background: hsla(0, 0%, 0%, 0.5);
+  --tab-background-selected: var(--color-base);
+
+  // Custom overrides for synth terminal
+  .Section__title {
+    color: hsl(190, 70%, 70%);
+    border-bottom-color: hsla(190, 60%, 50%, 0.4);
+  }
+}

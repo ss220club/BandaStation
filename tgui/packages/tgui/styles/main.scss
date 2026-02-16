@@ -50,6 +50,7 @@
 @include meta.load-css('./interfaces/DetectiveBoard.scss');
 @include meta.load-css('./interfaces/ColorPicker.scss');
 @include meta.load-css('./interfaces/CyberpunkModifications.scss'); // Cyberpunk style for body modifications
+@include meta.load-css('./interfaces/SyntheticDiagnostic.scss'); // BANDASTATION - IPC diagnostic terminal
 
 // Layouts
 @include meta.load-css('./layouts/Layout.scss');
