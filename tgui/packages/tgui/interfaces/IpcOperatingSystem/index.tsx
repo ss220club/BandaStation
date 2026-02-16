@@ -9,7 +9,6 @@ import {
   Section,
   Stack,
   Table,
-  Tabs,
 } from 'tgui-core/components';
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
@@ -80,7 +79,12 @@ type IpcOsData = {
 
 export const IpcOperatingSystem = () => {
   const { data } = useBackend<IpcOsData>();
-  const { logged_in, has_password, current_app, os_name, theme_color } = data;
+  const {
+    logged_in,
+    current_app = 'desktop',
+    os_name = 'IPC-OS',
+    theme_color = '#6a6a6a',
+  } = data;
 
   return (
     <Window width={700} height={650} title={os_name}>
@@ -108,7 +112,10 @@ export const IpcOperatingSystem = () => {
 // УТИЛИТЫ
 // ============================================
 
-function hexToRgba(hex: string, alpha: number): string {
+function hexToRgba(hex: string | undefined, alpha: number): string {
+  if (!hex || hex.length < 7) {
+    return `rgba(106, 106, 106, ${alpha})`;
+  }
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);
@@ -134,7 +141,12 @@ function getSeverityColor(severity: string): string {
 
 const LoginScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
-  const { os_name, os_version, theme_color, has_password } = data;
+  const {
+    os_name = 'IPC-OS',
+    os_version = '2.4.1',
+    theme_color = '#6a6a6a',
+    has_password,
+  } = data;
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
 
@@ -234,12 +246,12 @@ const LoginScreen = () => {
 const DesktopScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
   const {
-    os_name,
-    os_version,
-    theme_color,
-    virus_count,
+    os_name = 'IPC-OS',
+    os_version = '2.4.1',
+    theme_color = '#6a6a6a',
+    virus_count = 0,
     has_serious_viruses,
-    installed_apps,
+    installed_apps = [],
   } = data;
 
   const apps = [
@@ -458,11 +470,10 @@ const DiagnosticsApp = () => {
   const { act, data } = useBackend<IpcOsData>();
   const {
     scan_in_progress,
-    scan_progress,
-    scan_results,
+    scan_progress = 0,
+    scan_results = [],
     last_scan_time,
-    theme_color,
-    os_name,
+    theme_color = '#6a6a6a',
   } = data;
 
   return (
@@ -575,12 +586,12 @@ const AntivirusApp = () => {
   const { act, data } = useBackend<IpcOsData>();
   const {
     antivirus_scanning,
-    antivirus_progress,
-    antivirus_results,
-    viruses,
-    virus_count,
+    antivirus_progress = 0,
+    antivirus_results = [],
+    viruses = [],
+    virus_count = 0,
     has_serious_viruses,
-    theme_color,
+    theme_color = '#6a6a6a',
   } = data;
 
   return (
@@ -750,7 +761,12 @@ const AntivirusApp = () => {
 
 const NetDoorApp = () => {
   const { act, data } = useBackend<IpcOsData>();
-  const { network_connected, net_catalog, installed_apps, theme_color } = data;
+  const {
+    network_connected,
+    net_catalog = [],
+    installed_apps = [],
+    theme_color = '#6a6a6a',
+  } = data;
 
   return (
     <Flex direction="column" height="100%">
@@ -782,7 +798,8 @@ const NetDoorApp = () => {
             </Box>
             {!network_connected && (
               <Box fontSize="0.8em" color="label" mt={0.5}>
-                Встаньте на тайл с сетевым кабелем для подключения.
+                Подключитесь к диагностическому столу или встаньте на тайл с
+                сетевым кабелем.
               </Box>
             )}
           </Box>
@@ -795,7 +812,7 @@ const NetDoorApp = () => {
                   Каталог недоступен
                 </Box>
                 <Box fontSize="0.9em">
-                  Подключитесь к сетевому кабелю для доступа к каталогу.
+                  Подключитесь к сети для доступа к каталогу.
                 </Box>
               </Box>
             ) : (
@@ -907,7 +924,7 @@ type AppHeaderProps = {
 
 const AppHeader = (props: AppHeaderProps) => {
   const { act, data } = useBackend<IpcOsData>();
-  const { theme_color, os_name } = data;
+  const { theme_color = '#6a6a6a', os_name = 'IPC-OS' } = data;
 
   return (
     <Box
