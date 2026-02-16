@@ -979,6 +979,28 @@ const OsTab = () => {
           </Box>
         </Section>
       </Stack.Item>
+
+      {/* Dark Industries footer */}
+      <Stack.Item>
+        <Box
+          textAlign="center"
+          mt={1}
+          py={0.3}
+          style={{
+            borderTop: '1px solid rgba(200, 30, 30, 0.15)',
+          }}
+        >
+          <Box
+            fontSize="0.55em"
+            style={{
+              color: '#444',
+              letterSpacing: '3px',
+            }}
+          >
+            DARK INDUSTRIES
+          </Box>
+        </Box>
+      </Stack.Item>
     </Stack>
   );
 };

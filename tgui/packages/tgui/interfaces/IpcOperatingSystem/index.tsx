@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Flex,
+  Icon,
   Input,
   LabeledList,
   ProgressBar,
@@ -256,7 +257,6 @@ const LoginScreen = () => {
         <Box textAlign="center" color="label" fontSize="0.75em" italic>
           Integrated Positronic Chassis Operating System
         </Box>
-        <DarkIndustriesFooter />
       </Flex.Item>
     </Flex>
   );
@@ -280,13 +280,13 @@ const DesktopScreen = () => {
     {
       id: 'diagnostics',
       name: 'Самодиагностика',
-      icon: '[SCAN]',
+      faIcon: 'heartbeat',
       desc: 'Сканирование систем',
     },
     {
       id: 'antivirus',
       name: 'Антивирус',
-      icon: '[AV]',
+      faIcon: 'shield-alt',
       desc: 'Защита системы',
       badge: virus_count > 0 ? `${virus_count}` : undefined,
       badgeColor: has_serious_viruses ? 'bad' : 'average',
@@ -294,7 +294,7 @@ const DesktopScreen = () => {
     {
       id: 'netdoor',
       name: 'NET-door',
-      icon: '[NET]',
+      faIcon: 'network-wired',
       desc: 'Каталог приложений',
     },
   ];
@@ -381,16 +381,14 @@ const DesktopScreen = () => {
                         transition: 'background 0.2s',
                       }}
                     >
-                      <Box
-                        fontSize="1.4em"
-                        bold
+                      <Icon
+                        name={app.faIcon}
+                        size={2.5}
                         color={theme_color}
                         style={{
                           textShadow: `0 0 8px ${hexToRgba(theme_color, 0.6)}`,
                         }}
-                      >
-                        {app.icon}
-                      </Box>
+                      />
                     </Box>
                     {'badge' in app && app.badge && (
                       <Box
@@ -477,7 +475,6 @@ const DesktopScreen = () => {
             {' | '}
             Установлено приложений: {installed_apps.length}
           </Box>
-          <DarkIndustriesFooter />
         </Box>
       </Flex.Item>
     </Flex>
@@ -498,7 +495,7 @@ const DiagnosticsApp = () => {
 
   return (
     <Flex direction="column" height="100%">
-      <AppHeader title="Самодиагностика" icon="[SCAN]" />
+      <AppHeader title="Самодиагностика" icon="heartbeat" />
 
       <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
         <Box p={1}>
@@ -592,7 +589,6 @@ const DiagnosticsApp = () => {
             </Box>
           )}
 
-          <DarkIndustriesFooter />
         </Box>
       </Flex.Item>
     </Flex>
@@ -616,7 +612,7 @@ const AntivirusApp = () => {
 
   return (
     <Flex direction="column" height="100%">
-      <AppHeader title="Антивирус" icon="[AV]" />
+      <AppHeader title="Антивирус" icon="shield-alt" />
 
       <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
         <Box p={1}>
@@ -770,7 +766,6 @@ const AntivirusApp = () => {
             </Section>
           )}
 
-          <DarkIndustriesFooter />
         </Box>
       </Flex.Item>
     </Flex>
@@ -791,7 +786,7 @@ const NetDoorApp = () => {
 
   return (
     <Flex direction="column" height="100%">
-      <AppHeader title="NET-door" icon="[NET]" />
+      <AppHeader title="NET-door" icon="network-wired" />
 
       <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
         <Box p={1}>
@@ -929,7 +924,6 @@ const NetDoorApp = () => {
             </Section>
           )}
 
-          <DarkIndustriesFooter />
         </Box>
       </Flex.Item>
     </Flex>
@@ -939,22 +933,6 @@ const NetDoorApp = () => {
 // ============================================
 // COMMON COMPONENTS
 // ============================================
-
-const DarkIndustriesFooter = () => (
-  <Box
-    textAlign="center"
-    mt={1}
-    py={0.3}
-    style={{ borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}
-  >
-    <Box
-      fontSize="0.5em"
-      style={{ color: 'rgba(255,255,255,0.15)', letterSpacing: '3px' }}
-    >
-      DARK INDUSTRIES
-    </Box>
-  </Box>
-);
 
 type AppHeaderProps = {
   title: string;
@@ -989,7 +967,8 @@ const AppHeader = (props: AppHeaderProps) => {
             </Flex.Item>
             <Flex.Item>
               <Box bold color={theme_color} fontSize="0.95em">
-                {props.icon} {props.title}
+                <Icon name={props.icon} mr={0.5} />
+                {props.title}
               </Box>
             </Flex.Item>
           </Flex>
