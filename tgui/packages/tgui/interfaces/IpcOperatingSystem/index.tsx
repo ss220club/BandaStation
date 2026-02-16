@@ -14,7 +14,7 @@ import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
 
 // ============================================
-// ТИПЫ
+// TYPES
 // ============================================
 
 type ScanResult = {
@@ -74,17 +74,36 @@ type IpcOsData = {
 };
 
 // ============================================
-// ГЛАВНЫЙ КОМПОНЕНТ
+// SAFE DATA ACCESS HELPERS
+// ============================================
+
+function safeArray<T>(arr: T[] | null | undefined): T[] {
+  return arr || [];
+}
+
+function safeStr(val: string | null | undefined, fallback: string): string {
+  return val || fallback;
+}
+
+function safeNum(val: number | null | undefined, fallback: number): number {
+  return val ?? fallback;
+}
+
+function safeBool(val: boolean | null | undefined): boolean {
+  return val === true;
+}
+
+// ============================================
+// MAIN COMPONENT
 // ============================================
 
 export const IpcOperatingSystem = () => {
   const { data } = useBackend<IpcOsData>();
-  const {
-    logged_in,
-    current_app = 'desktop',
-    os_name = 'IPC-OS',
-    theme_color = '#6a6a6a',
-  } = data;
+
+  const logged_in = safeBool(data.logged_in);
+  const current_app = safeStr(data.current_app, 'desktop');
+  const os_name = safeStr(data.os_name, 'IPC-OS');
+  const theme_color = safeStr(data.theme_color, '#6a6a6a');
 
   return (
     <Window width={700} height={650} title={os_name}>
@@ -109,20 +128,23 @@ export const IpcOperatingSystem = () => {
 };
 
 // ============================================
-// УТИЛИТЫ
+// UTILITIES
 // ============================================
 
-function hexToRgba(hex: string | undefined, alpha: number): string {
-  if (!hex || hex.length < 7) {
+function hexToRgba(hex: string | null | undefined, alpha: number): string {
+  if (!hex || typeof hex !== 'string' || hex.length < 7) {
     return `rgba(106, 106, 106, ${alpha})`;
   }
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);
+  if (isNaN(r) || isNaN(g) || isNaN(b)) {
+    return `rgba(106, 106, 106, ${alpha})`;
+  }
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-function getSeverityColor(severity: string): string {
+function getSeverityColor(severity: string | null | undefined): string {
   switch (severity) {
     case 'low':
       return 'average';
@@ -136,23 +158,23 @@ function getSeverityColor(severity: string): string {
 }
 
 // ============================================
-// ЭКРАН ВХОДА
+// LOGIN SCREEN
 // ============================================
 
 const LoginScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
-  const {
-    os_name = 'IPC-OS',
-    os_version = '2.4.1',
-    theme_color = '#6a6a6a',
-    has_password,
-  } = data;
+
+  const os_name = safeStr(data.os_name, 'IPC-OS');
+  const os_version = safeStr(data.os_version, '2.4.1');
+  const theme_color = safeStr(data.theme_color, '#6a6a6a');
+  const has_password = safeBool(data.has_password);
+
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
 
   const handleSubmit = () => {
     if (!has_password) {
-      if (password.length < 1) {
+      if (!password || password.length < 1) {
         setError('Введите пароль (минимум 1 символ)');
         return;
       }
@@ -240,19 +262,18 @@ const LoginScreen = () => {
 };
 
 // ============================================
-// РАБОЧИЙ СТОЛ
+// DESKTOP
 // ============================================
 
 const DesktopScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
-  const {
-    os_name = 'IPC-OS',
-    os_version = '2.4.1',
-    theme_color = '#6a6a6a',
-    virus_count = 0,
-    has_serious_viruses,
-    installed_apps = [],
-  } = data;
+
+  const os_name = safeStr(data.os_name, 'IPC-OS');
+  const os_version = safeStr(data.os_version, '2.4.1');
+  const theme_color = safeStr(data.theme_color, '#6a6a6a');
+  const virus_count = safeNum(data.virus_count, 0);
+  const has_serious_viruses = safeBool(data.has_serious_viruses);
+  const installed_apps = safeArray(data.installed_apps);
 
   const apps = [
     {
@@ -279,7 +300,7 @@ const DesktopScreen = () => {
 
   return (
     <Flex direction="column" height="100%">
-      {/* Верхняя панель */}
+      {/* Top bar */}
       <Flex.Item>
         <Box
           p={0.5}
@@ -307,7 +328,7 @@ const DesktopScreen = () => {
         </Box>
       </Flex.Item>
 
-      {/* Рабочий стол */}
+      {/* Desktop area */}
       <Flex.Item grow={1}>
         <Flex
           direction="column"
@@ -315,7 +336,7 @@ const DesktopScreen = () => {
           justify="center"
           height="100%"
         >
-          {/* Логотип ОС */}
+          {/* OS Logo */}
           <Flex.Item mb={4}>
             <Box textAlign="center">
               <Box
@@ -335,7 +356,7 @@ const DesktopScreen = () => {
             </Box>
           </Flex.Item>
 
-          {/* Иконки приложений */}
+          {/* App icons */}
           <Flex.Item>
             <Flex wrap="wrap" justify="center">
               {apps.map((app) => (
@@ -370,7 +391,6 @@ const DesktopScreen = () => {
                         {app.icon}
                       </Box>
                     </Box>
-                    {/* Бейдж уведомлений */}
                     {'badge' in app && app.badge && (
                       <Box
                         style={{
@@ -404,7 +424,7 @@ const DesktopScreen = () => {
             </Flex>
           </Flex.Item>
 
-          {/* Установленные приложения */}
+          {/* Installed apps */}
           {installed_apps.length > 0 && (
             <Flex.Item mt={2}>
               <Box textAlign="center" color="label" fontSize="0.75em" mb={1}>
@@ -433,7 +453,7 @@ const DesktopScreen = () => {
         </Flex>
       </Flex.Item>
 
-      {/* Нижняя панель */}
+      {/* Bottom bar */}
       <Flex.Item>
         <Box
           p={0.3}
@@ -463,18 +483,16 @@ const DesktopScreen = () => {
 };
 
 // ============================================
-// ПРИЛОЖЕНИЕ: САМОДИАГНОСТИКА
+// DIAGNOSTICS APP
 // ============================================
 
 const DiagnosticsApp = () => {
   const { act, data } = useBackend<IpcOsData>();
-  const {
-    scan_in_progress,
-    scan_progress = 0,
-    scan_results = [],
-    last_scan_time,
-    theme_color = '#6a6a6a',
-  } = data;
+
+  const scan_in_progress = safeBool(data.scan_in_progress);
+  const scan_progress = safeNum(data.scan_progress, 0);
+  const scan_results = safeArray(data.scan_results);
+  const last_scan_time = safeStr(data.last_scan_time, '');
 
   return (
     <Flex direction="column" height="100%">
@@ -482,7 +500,6 @@ const DiagnosticsApp = () => {
 
       <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
         <Box p={1}>
-          {/* Кнопка запуска сканирования */}
           <Box mb={2}>
             <Button
               fluid
@@ -498,7 +515,6 @@ const DiagnosticsApp = () => {
             </Button>
           </Box>
 
-          {/* Прогресс */}
           {scan_in_progress && (
             <Box mb={2}>
               <ProgressBar
@@ -523,12 +539,13 @@ const DiagnosticsApp = () => {
             </Box>
           )}
 
-          {/* Результаты */}
           {!scan_in_progress && scan_results.length > 0 && (
             <Section title="Результаты сканирования">
-              <Box mb={1} color="label" fontSize="0.8em">
-                {last_scan_time}
-              </Box>
+              {!!last_scan_time && (
+                <Box mb={1} color="label" fontSize="0.8em">
+                  {last_scan_time}
+                </Box>
+              )}
               <Table>
                 <Table.Row header>
                   <Table.Cell width="20%">Категория</Table.Cell>
@@ -579,20 +596,19 @@ const DiagnosticsApp = () => {
 };
 
 // ============================================
-// ПРИЛОЖЕНИЕ: АНТИВИРУС
+// ANTIVIRUS APP
 // ============================================
 
 const AntivirusApp = () => {
   const { act, data } = useBackend<IpcOsData>();
-  const {
-    antivirus_scanning,
-    antivirus_progress = 0,
-    antivirus_results = [],
-    viruses = [],
-    virus_count = 0,
-    has_serious_viruses,
-    theme_color = '#6a6a6a',
-  } = data;
+
+  const antivirus_scanning = safeBool(data.antivirus_scanning);
+  const antivirus_progress = safeNum(data.antivirus_progress, 0);
+  const antivirus_results = safeArray(data.antivirus_results);
+  const viruses = safeArray(data.viruses);
+  const virus_count = safeNum(data.virus_count, 0);
+  const has_serious_viruses = safeBool(data.has_serious_viruses);
+  const theme_color = safeStr(data.theme_color, '#6a6a6a');
 
   return (
     <Flex direction="column" height="100%">
@@ -600,7 +616,7 @@ const AntivirusApp = () => {
 
       <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
         <Box p={1}>
-          {/* Статус */}
+          {/* Status */}
           <Box
             mb={2}
             p={1.5}
@@ -639,7 +655,7 @@ const AntivirusApp = () => {
             )}
           </Box>
 
-          {/* Список вирусов */}
+          {/* Virus list */}
           {viruses.length > 0 && (
             <Section title="Обнаруженные угрозы">
               <Stack vertical>
@@ -685,7 +701,7 @@ const AntivirusApp = () => {
             </Section>
           )}
 
-          {/* Кнопка сканирования */}
+          {/* Scan button */}
           <Box mb={2} mt={1}>
             <Button
               fluid
@@ -701,7 +717,7 @@ const AntivirusApp = () => {
             </Button>
           </Box>
 
-          {/* Прогресс */}
+          {/* Progress */}
           {antivirus_scanning && (
             <Box mb={2}>
               <ProgressBar
@@ -718,7 +734,7 @@ const AntivirusApp = () => {
             </Box>
           )}
 
-          {/* Результаты антивируса */}
+          {/* Results */}
           {!antivirus_scanning && antivirus_results.length > 0 && (
             <Section title="Результаты проверки">
               <Stack vertical>
@@ -756,17 +772,16 @@ const AntivirusApp = () => {
 };
 
 // ============================================
-// ПРИЛОЖЕНИЕ: NET-DOOR
+// NET-DOOR APP
 // ============================================
 
 const NetDoorApp = () => {
   const { act, data } = useBackend<IpcOsData>();
-  const {
-    network_connected,
-    net_catalog = [],
-    installed_apps = [],
-    theme_color = '#6a6a6a',
-  } = data;
+
+  const network_connected = safeBool(data.network_connected);
+  const net_catalog = safeArray(data.net_catalog);
+  const installed_apps = safeArray(data.installed_apps);
+  const theme_color = safeStr(data.theme_color, '#6a6a6a');
 
   return (
     <Flex direction="column" height="100%">
@@ -774,7 +789,7 @@ const NetDoorApp = () => {
 
       <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
         <Box p={1}>
-          {/* Статус подключения */}
+          {/* Connection status */}
           <Box
             mb={2}
             p={1}
@@ -804,7 +819,7 @@ const NetDoorApp = () => {
             )}
           </Box>
 
-          {/* Каталог приложений */}
+          {/* App catalog */}
           <Section title="Каталог приложений">
             {!network_connected ? (
               <Box textAlign="center" color="label" p={2}>
@@ -882,7 +897,7 @@ const NetDoorApp = () => {
             )}
           </Section>
 
-          {/* Установленные */}
+          {/* Installed */}
           {installed_apps.length > 0 && (
             <Section title="Установленные приложения">
               <Stack vertical>
@@ -914,7 +929,7 @@ const NetDoorApp = () => {
 };
 
 // ============================================
-// ОБЩИЕ КОМПОНЕНТЫ
+// COMMON COMPONENTS
 // ============================================
 
 type AppHeaderProps = {
@@ -924,7 +939,9 @@ type AppHeaderProps = {
 
 const AppHeader = (props: AppHeaderProps) => {
   const { act, data } = useBackend<IpcOsData>();
-  const { theme_color = '#6a6a6a', os_name = 'IPC-OS' } = data;
+
+  const theme_color = safeStr(data.theme_color, '#6a6a6a');
+  const os_name = safeStr(data.os_name, 'IPC-OS');
 
   return (
     <Box

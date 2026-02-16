@@ -133,23 +133,8 @@ type SyntheticDiagnosticData = {
 };
 
 // ============================================
-// HELPER FUNCTIONS
+// HELPERS
 // ============================================
-
-function getCpuTempColor(status?: string): string {
-  switch (status) {
-    case 'critical':
-      return 'bad';
-    case 'hot':
-      return 'bad';
-    case 'warm':
-      return 'average';
-    case 'cold':
-      return 'blue';
-    default:
-      return 'good';
-  }
-}
 
 function getStatusColor(color: string): string {
   if (color === 'good') return 'good';
@@ -172,33 +157,62 @@ export const SyntheticDiagnostic = () => {
 
   return (
     <Window
-      width={520}
-      height={700}
-      title="Synthetic Diagnostic Terminal"
+      width={680}
+      height={750}
+      title="DARK INDUSTRIES // Synthetic Diagnostic Terminal"
       theme="synthetic_diagnostic"
     >
       <Window.Content scrollable>
-        {/* No table connected */}
+        {/* Header branding */}
+        <Box
+          textAlign="center"
+          py={0.5}
+          style={{
+            borderBottom: '1px solid rgba(200, 30, 30, 0.3)',
+            background: 'rgba(200, 30, 30, 0.05)',
+          }}
+        >
+          <Box
+            bold
+            fontSize="0.8em"
+            style={{
+              color: '#cc3333',
+              letterSpacing: '4px',
+              textTransform: 'uppercase',
+            }}
+          >
+            DARK INDUSTRIES
+          </Box>
+          <Box
+            fontSize="0.6em"
+            style={{ color: '#666', letterSpacing: '2px' }}
+          >
+            SYNTHETIC DIAGNOSTIC SYSTEM v3.1
+          </Box>
+        </Box>
+
+        {/* No table */}
         {!has_table && (
-          <Section fill>
-            <NoticeBox color="yellow" align="center">
-              Diagnostic table not connected
+          <Box p={2} mt={2}>
+            <NoticeBox color="red" align="center">
+              <Icon name="unlink" mr={1} />
+              DIAGNOSTIC TABLE NOT CONNECTED
             </NoticeBox>
-          </Section>
+          </Box>
         )}
 
-        {/* Error state */}
+        {/* Error */}
         {has_table && error && (
-          <Section fill>
+          <Box p={2} mt={1}>
             <NoticeBox color="red" align="center">
               {error}
             </NoticeBox>
             {patient_name && (
-              <Box textAlign="center" color="label" mt={1} fontSize="0.9em">
+              <Box textAlign="center" color="label" mt={1} fontSize="0.85em">
                 Patient: {patient_name} ({patient_species})
               </Box>
             )}
-          </Section>
+          </Box>
         )}
 
         {/* Patient detected */}
@@ -206,31 +220,23 @@ export const SyntheticDiagnostic = () => {
           <>
             <Tabs>
               <Tabs.Tab
-                icon="heartbeat"
+                icon="stethoscope"
                 selected={selectedTab === 0}
                 onClick={() => setSelectedTab(0)}
               >
                 Diagnostics
               </Tabs.Tab>
               <Tabs.Tab
-                icon="wrench"
+                icon="microchip"
                 selected={selectedTab === 1}
                 onClick={() => setSelectedTab(1)}
-              >
-                Operations
-              </Tabs.Tab>
-              <Tabs.Tab
-                icon="microchip"
-                selected={selectedTab === 2}
-                onClick={() => setSelectedTab(2)}
               >
                 OS
               </Tabs.Tab>
             </Tabs>
 
-            {selectedTab === 0 && <DiagnosticsTab />}
-            {selectedTab === 1 && <OperationsTab />}
-            {selectedTab === 2 && <OsTab />}
+            {selectedTab === 0 && <MainDiagnosticsView />}
+            {selectedTab === 1 && <OsTab />}
           </>
         )}
       </Window.Content>
@@ -239,133 +245,279 @@ export const SyntheticDiagnostic = () => {
 };
 
 // ============================================
-// DIAGNOSTICS TAB
+// MAIN DIAGNOSTICS VIEW (merged ops + diagnostics)
 // ============================================
 
-const DiagnosticsTab = () => {
-  const { data } = useBackend<SyntheticDiagnosticData>();
+const MainDiagnosticsView = () => {
+  const { act, data } = useBackend<SyntheticDiagnosticData>();
   const patient = data.patient!;
+  const { target_zone, surgeries, zones } = data;
 
   return (
     <Stack vertical>
-      {/* Patient Info + Vital Signs */}
+      {/* Patient header bar */}
       <Stack.Item>
-        <Section title="Patient">
-          <Stack>
+        <Box
+          p={0.5}
+          style={{
+            background: 'rgba(200, 30, 30, 0.08)',
+            borderBottom: '1px solid rgba(200, 30, 30, 0.2)',
+          }}
+        >
+          <Stack fill>
             <Stack.Item grow>
-              <LabeledList>
-                <LabeledList.Item label="Name">
-                  <Box bold>{patient.name}</Box>
-                </LabeledList.Item>
-                <LabeledList.Item label="ID">{patient.id}</LabeledList.Item>
-                <LabeledList.Item
-                  label="Status"
-                  color={getStatusColor(patient.status_color)}
-                >
-                  {patient.status}
-                </LabeledList.Item>
-                {patient.chassis_brand && (
-                  <LabeledList.Item label="Chassis">
-                    {patient.chassis_brand}
-                    {patient.chassis_visual_brand &&
-                      patient.chassis_visual_brand !== patient.chassis_brand && (
-                        <Box as="span" color="label" ml={1}>
-                          ({patient.chassis_visual_brand})
-                        </Box>
-                      )}
-                  </LabeledList.Item>
-                )}
-                {patient.overclock_active && (
-                  <LabeledList.Item label="Overclock" color="average">
-                    <Icon name="bolt" mr={0.5} />
-                    Active (+{patient.overclock_speed_bonus}%)
-                  </LabeledList.Item>
-                )}
-              </LabeledList>
+              <Box bold>
+                {patient.name}
+                <Box as="span" color="label" ml={1} fontSize="0.85em">
+                  [{patient.id}]
+                </Box>
+              </Box>
             </Stack.Item>
+            <Stack.Item>
+              <Box
+                bold
+                color={getStatusColor(patient.status_color)}
+                fontSize="0.9em"
+              >
+                {patient.status}
+              </Box>
+            </Stack.Item>
+            {patient.chassis_brand && (
+              <Stack.Item ml={1}>
+                <Box color="label" fontSize="0.85em">
+                  {patient.chassis_brand}
+                </Box>
+              </Stack.Item>
+            )}
+            {patient.overclock_active && (
+              <Stack.Item ml={1}>
+                <Box color="average" fontSize="0.85em" bold>
+                  <Icon name="bolt" mr={0.5} />
+                  OC +{patient.overclock_speed_bonus}%
+                </Box>
+              </Stack.Item>
+            )}
           </Stack>
-        </Section>
+        </Box>
       </Stack.Item>
 
-      {/* Vital Gauges */}
+      {/* SPLIT LAYOUT: Left = Operations | Right = Vitals */}
       <Stack.Item>
-        <Section title="Vitals">
-          <LabeledList>
-            <LabeledList.Item label="Integrity">
-              <ProgressBar
-                value={patient.integrity}
-                minValue={-100}
-                maxValue={patient.integrity_max}
-                ranges={{
-                  good: [70, Infinity],
-                  average: [30, 70],
-                  bad: [-Infinity, 30],
-                }}
-              >
-                <AnimatedNumber
-                  value={patient.integrity_percent}
-                  format={(v) => `${Math.round(v)}%`}
+        <Stack fill>
+          {/* LEFT: Body zone + operations */}
+          <Stack.Item basis="45%">
+            <Section title="Operations">
+              <Box textAlign="center" mb={1}>
+                <BodyZoneSelector
+                  theme="slimecore"
+                  precise={false}
+                  selectedZone={(target_zone as BodyZone) || null}
+                  onClick={(zone: BodyZone) =>
+                    zone !== target_zone &&
+                    act('change_zone', { new_zone: zone })
+                  }
                 />
-              </ProgressBar>
-            </LabeledList.Item>
+              </Box>
 
-            {patient.cpu_temperature !== undefined && (
-              <LabeledList.Item
-                label="CPU Temp"
-                color={getCpuTempColor(patient.cpu_temp_status)}
-              >
-                <ProgressBar
-                  value={patient.cpu_temperature}
-                  minValue={0}
-                  maxValue={patient.cpu_temp_critical || 150}
-                  ranges={{
-                    good: [0, patient.cpu_temp_optimal_max || 70],
-                    average: [
-                      patient.cpu_temp_optimal_max || 70,
-                      90,
-                    ],
-                    bad: [90, Infinity],
-                  }}
+              {/* Zone buttons */}
+              <Stack wrap justify="center" mb={1}>
+                {zones &&
+                  zones.map((zone) => (
+                    <Stack.Item key={zone.id} m={0.2}>
+                      <Button
+                        compact
+                        fontSize="0.8em"
+                        selected={target_zone === zone.id}
+                        onClick={() =>
+                          act('change_zone', { new_zone: zone.id })
+                        }
+                      >
+                        {zone.name}
+                      </Button>
+                    </Stack.Item>
+                  ))}
+              </Stack>
+
+              {/* Available operations */}
+              {!target_zone && (
+                <Box
+                  textAlign="center"
+                  color="label"
+                  fontSize="0.8em"
+                  p={1}
                 >
-                  <AnimatedNumber
-                    value={patient.cpu_temperature}
-                    format={(v) => `${Math.round(v)}°C`}
-                  />
-                </ProgressBar>
-              </LabeledList.Item>
+                  Select zone
+                </Box>
+              )}
+
+              {target_zone && surgeries && surgeries.length > 0 && (
+                <Stack vertical>
+                  {surgeries.map((surgery, idx) => (
+                    <Stack.Item key={idx}>
+                      <Box
+                        p={0.5}
+                        style={{
+                          borderLeft: '2px solid rgba(200, 30, 30, 0.5)',
+                          background: 'rgba(200, 30, 30, 0.05)',
+                        }}
+                        mb={0.3}
+                      >
+                        <Box bold fontSize="0.85em" color="#cc6666">
+                          {surgery.name}
+                        </Box>
+                        <Box fontSize="0.75em" color="label">
+                          {surgery.desc}
+                        </Box>
+                        <Box
+                          fontSize="0.7em"
+                          italic
+                          color="label"
+                          mt={0.2}
+                        >
+                          Tool: {surgery.tool_rec}
+                        </Box>
+                      </Box>
+                    </Stack.Item>
+                  ))}
+                </Stack>
+              )}
+
+              {target_zone && surgeries && surgeries.length === 0 && (
+                <Box
+                  textAlign="center"
+                  color="label"
+                  fontSize="0.8em"
+                  p={1}
+                >
+                  No operations for this zone
+                </Box>
+              )}
+            </Section>
+          </Stack.Item>
+
+          {/* RIGHT: Vitals + damage */}
+          <Stack.Item grow>
+            <Section title="Vitals">
+              <LabeledList>
+                <LabeledList.Item label="Integrity">
+                  <ProgressBar
+                    value={patient.integrity}
+                    minValue={-100}
+                    maxValue={patient.integrity_max}
+                    ranges={{
+                      good: [70, Infinity],
+                      average: [30, 70],
+                      bad: [-Infinity, 30],
+                    }}
+                  >
+                    <AnimatedNumber
+                      value={patient.integrity_percent}
+                      format={(v) => `${Math.round(v)}%`}
+                    />
+                  </ProgressBar>
+                </LabeledList.Item>
+
+                {patient.cpu_temperature !== undefined && (
+                  <LabeledList.Item label="CPU">
+                    <ProgressBar
+                      value={patient.cpu_temperature}
+                      minValue={0}
+                      maxValue={patient.cpu_temp_critical || 150}
+                      ranges={{
+                        good: [0, patient.cpu_temp_optimal_max || 70],
+                        average: [patient.cpu_temp_optimal_max || 70, 90],
+                        bad: [90, Infinity],
+                      }}
+                    >
+                      <AnimatedNumber
+                        value={patient.cpu_temperature}
+                        format={(v) => `${Math.round(v)}°C`}
+                      />
+                    </ProgressBar>
+                  </LabeledList.Item>
+                )}
+
+                <LabeledList.Item label="Brute">
+                  <ProgressBar
+                    value={patient.mechanical_damage / 200}
+                    ranges={{
+                      good: [-Infinity, 0.1],
+                      average: [0.1, 0.4],
+                      bad: [0.4, Infinity],
+                    }}
+                  >
+                    <AnimatedNumber value={patient.mechanical_damage} />
+                  </ProgressBar>
+                </LabeledList.Item>
+
+                <LabeledList.Item label="Burn">
+                  <ProgressBar
+                    value={patient.electrical_damage / 200}
+                    ranges={{
+                      good: [-Infinity, 0.1],
+                      average: [0.1, 0.4],
+                      bad: [0.4, Infinity],
+                    }}
+                  >
+                    <AnimatedNumber value={patient.electrical_damage} />
+                  </ProgressBar>
+                </LabeledList.Item>
+
+                <LabeledList.Item label="Toxin">
+                  <ProgressBar
+                    value={patient.system_damage / 200}
+                    ranges={{
+                      good: [-Infinity, 0.1],
+                      average: [0.1, 0.4],
+                      bad: [0.4, Infinity],
+                    }}
+                  >
+                    <AnimatedNumber value={patient.system_damage} />
+                  </ProgressBar>
+                </LabeledList.Item>
+
+                <LabeledList.Item label="Heat">
+                  <ProgressBar
+                    value={patient.cooling_damage / 200}
+                    ranges={{
+                      good: [-Infinity, 0.1],
+                      average: [0.1, 0.4],
+                      bad: [0.4, Infinity],
+                    }}
+                  >
+                    <AnimatedNumber value={patient.cooling_damage} />
+                  </ProgressBar>
+                </LabeledList.Item>
+              </LabeledList>
+            </Section>
+
+            {/* Table status */}
+            {data.is_synthetic_table && (
+              <Section title="Table">
+                <Stack>
+                  <Stack.Item grow>
+                    <Box fontSize="0.8em">
+                      <Icon name="bolt" color="good" mr={0.5} />
+                      +{data.table_charge_rate} u/t
+                    </Box>
+                  </Stack.Item>
+                  <Stack.Item grow>
+                    <Box fontSize="0.8em">
+                      <Icon name="snowflake" color="good" mr={0.5} />
+                      -{data.table_cooling_rate}°C/t
+                    </Box>
+                  </Stack.Item>
+                  <Stack.Item>
+                    <Box fontSize="0.8em">
+                      <Icon name="network-wired" color="good" mr={0.5} />
+                      NET
+                    </Box>
+                  </Stack.Item>
+                </Stack>
+              </Section>
             )}
-
-            <LabeledList.Item label="Mechanical">
-              <ProgressBar
-                value={patient.mechanical_damage / 200}
-                color="bad"
-              >
-                <AnimatedNumber value={patient.mechanical_damage} />
-              </ProgressBar>
-            </LabeledList.Item>
-
-            <LabeledList.Item label="Electrical">
-              <ProgressBar
-                value={patient.electrical_damage / 200}
-                color="bad"
-              >
-                <AnimatedNumber value={patient.electrical_damage} />
-              </ProgressBar>
-            </LabeledList.Item>
-
-            <LabeledList.Item label="System">
-              <ProgressBar value={patient.system_damage / 200} color="bad">
-                <AnimatedNumber value={patient.system_damage} />
-              </ProgressBar>
-            </LabeledList.Item>
-
-            <LabeledList.Item label="Overheat">
-              <ProgressBar value={patient.cooling_damage / 200} color="bad">
-                <AnimatedNumber value={patient.cooling_damage} />
-              </ProgressBar>
-            </LabeledList.Item>
-          </LabeledList>
-        </Section>
+          </Stack.Item>
+        </Stack>
       </Stack.Item>
 
       {/* Components */}
@@ -373,7 +525,7 @@ const DiagnosticsTab = () => {
         <Section title="Components">
           <Table>
             <Table.Row header>
-              <Table.Cell>Component</Table.Cell>
+              <Table.Cell>Module</Table.Cell>
               <Table.Cell>Status</Table.Cell>
               <Table.Cell>Details</Table.Cell>
             </Table.Row>
@@ -384,7 +536,7 @@ const DiagnosticsTab = () => {
                   {comp.status}
                 </Table.Cell>
                 <Table.Cell>
-                  <Box fontSize="0.9em">{comp.details}</Box>
+                  <Box fontSize="0.85em">{comp.details}</Box>
                 </Table.Cell>
               </Table.Row>
             ))}
@@ -394,10 +546,10 @@ const DiagnosticsTab = () => {
 
       {/* Limbs */}
       <Stack.Item>
-        <Section title="Limbs">
+        <Section title="Chassis">
           <Table>
             <Table.Row header>
-              <Table.Cell>Limb</Table.Cell>
+              <Table.Cell>Part</Table.Cell>
               <Table.Cell>Status</Table.Cell>
               <Table.Cell>Panel</Table.Cell>
               <Table.Cell>Damage</Table.Cell>
@@ -450,7 +602,7 @@ const DiagnosticsTab = () => {
                       {part.damage}/{part.max_damage}
                     </ProgressBar>
                   ) : (
-                    '—'
+                    '\u2014'
                   )}
                 </Table.Cell>
                 <Table.Cell>{part.brute}</Table.Cell>
@@ -487,22 +639,22 @@ const DiagnosticsTab = () => {
           </Stack.Item>
         )}
 
-      {/* System Messages */}
+      {/* System log */}
       <Stack.Item>
         <Section title="System Log">
           <Stack vertical>
             {patient.system_messages.map((msg, idx) => (
               <Stack.Item key={idx}>
                 <Box
-                  p={0.5}
+                  p={0.3}
                   fontFamily="monospace"
-                  fontSize="0.85em"
+                  fontSize="0.8em"
                   backgroundColor={
                     msg.type === 'critical'
                       ? 'rgba(200, 0, 0, 0.15)'
                       : msg.type === 'warning'
-                        ? 'rgba(200, 150, 0, 0.15)'
-                        : 'rgba(0, 150, 0, 0.1)'
+                        ? 'rgba(200, 150, 0, 0.1)'
+                        : 'rgba(0, 150, 0, 0.05)'
                   }
                   color={
                     msg.type === 'critical'
@@ -521,7 +673,7 @@ const DiagnosticsTab = () => {
                           ? 'exclamation-circle'
                           : 'check-circle'
                     }
-                    mr={1}
+                    mr={0.5}
                   />
                   {msg.message}
                 </Box>
@@ -531,200 +683,52 @@ const DiagnosticsTab = () => {
         </Section>
       </Stack.Item>
 
-      {/* Diagnostic Table Status */}
-      {data.is_synthetic_table && (
-        <Stack.Item>
-          <Section title="Diagnostic Table">
-            <LabeledList>
-              <LabeledList.Item label="Type" color="good">
-                <Icon name="table" mr={0.5} />
-                Synthetic Diagnostic Table
-              </LabeledList.Item>
-              <LabeledList.Item label="Charging" color="good">
-                <Icon name="bolt" mr={0.5} />
-                Active ({data.table_charge_rate} units/tick)
-              </LabeledList.Item>
-              <LabeledList.Item label="Cooling" color="good">
-                <Icon name="snowflake" mr={0.5} />
-                Active (-{data.table_cooling_rate}°C/tick)
-              </LabeledList.Item>
-              <LabeledList.Item label="Network" color="good">
-                <Icon name="network-wired" mr={0.5} />
-                Connected
-              </LabeledList.Item>
-            </LabeledList>
-          </Section>
-        </Stack.Item>
-      )}
-    </Stack>
-  );
-};
-
-// ============================================
-// OPERATIONS TAB
-// ============================================
-
-const OperationsTab = () => {
-  const { act, data } = useBackend<SyntheticDiagnosticData>();
-  const { target_zone, surgeries, zones } = data;
-
-  return (
-    <Stack vertical>
-      {/* Body Zone Selector + Surgery State */}
-      <Stack.Item>
-        <Section title="Target Zone">
-          <Stack>
-            <Stack.Item>
-              <BodyZoneSelector
-                theme="slimecore"
-                precise={false}
-                selectedZone={(target_zone as BodyZone) || null}
-                onClick={(zone: BodyZone) =>
-                  zone !== target_zone &&
-                  act('change_zone', { new_zone: zone })
-                }
-              />
-            </Stack.Item>
-            <Stack.Item grow ml={1}>
-              <Stack vertical>
-                <Stack.Item>
-                  <Box bold fontSize="1em" mb={0.5}>
-                    {target_zone && zones
-                      ? zones.find((z) => z.id === target_zone)?.name ||
-                        'Select zone'
-                      : 'Select a body zone'}
-                  </Box>
-                </Stack.Item>
-                {/* Zone buttons as fallback */}
-                <Stack.Item>
-                  <Stack wrap>
-                    {zones &&
-                      zones.map((zone) => (
-                        <Stack.Item key={zone.id} m={0.25}>
-                          <Button
-                            compact
-                            selected={target_zone === zone.id}
-                            onClick={() =>
-                              act('change_zone', { new_zone: zone.id })
-                            }
-                          >
-                            {zone.name}
-                          </Button>
-                        </Stack.Item>
-                      ))}
-                  </Stack>
-                </Stack.Item>
-              </Stack>
-            </Stack.Item>
-          </Stack>
-        </Section>
-      </Stack.Item>
-
-      {/* Available Operations */}
-      <Stack.Item>
-        <Section
-          title="Available Operations"
-          buttons={
-            surgeries &&
-            surgeries.length > 0 && (
-              <Box color="good" fontSize="0.85em">
-                {surgeries.length} available
-              </Box>
-            )
-          }
-        >
-          {!target_zone && (
-            <NoticeBox color="yellow" align="center">
-              Select a body zone to view available operations
-            </NoticeBox>
-          )}
-
-          {target_zone && surgeries && surgeries.length > 0 && (
-            <Stack vertical>
-              {surgeries.map((surgery, idx) => (
-                <Stack.Item key={idx}>
-                  <Button fluid color="transparent">
-                    <Stack fill>
-                      <Stack.Item grow>
-                        <Box bold color="good">
-                          {surgery.name}
-                        </Box>
-                        <Box fontSize="0.85em" color="label">
-                          {surgery.desc}
-                        </Box>
-                      </Stack.Item>
-                      <Stack.Item>
-                        <Box italic color="label" fontSize="0.85em">
-                          {surgery.tool_rec}
-                        </Box>
-                      </Stack.Item>
-                    </Stack>
-                  </Button>
-                </Stack.Item>
-              ))}
-            </Stack>
-          )}
-
-          {target_zone && surgeries && surgeries.length === 0 && (
-            <NoticeBox color="green" align="center">
-              No operations available for this zone
-            </NoticeBox>
-          )}
-        </Section>
-      </Stack.Item>
-
-      {/* Surgery Instructions */}
+      {/* Reference */}
       <Stack.Item>
         <Section title="Reference">
-          <Stack vertical>
-            <Stack.Item>
-              <Box p={0.5} backgroundColor="rgba(40, 80, 160, 0.15)">
-                <Box bold mb={0.5} fontSize="0.9em">
+          <Stack>
+            <Stack.Item grow basis="33%">
+              <Box
+                p={0.5}
+                fontSize="0.75em"
+                style={{ borderLeft: '2px solid rgba(40, 80, 200, 0.5)' }}
+              >
+                <Box bold mb={0.3}>
                   <Icon name="microchip" mr={0.5} />
-                  Chest / Head (organ access):
+                  Chest/Head
                 </Box>
-                <Box ml={1.5} fontSize="0.85em" color="label">
-                  1. Open panel (Screwdriver)
-                </Box>
-                <Box ml={1.5} fontSize="0.85em" color="label">
-                  2. Prepare electronics (Multitool)
-                </Box>
-                <Box ml={1.5} fontSize="0.85em" color="label">
-                  3. Install/Extract organs (Organ or Multitool)
-                </Box>
+                <Box color="label">1. Screwdriver</Box>
+                <Box color="label">2. Multitool</Box>
+                <Box color="label">3. Organ/Multitool</Box>
               </Box>
             </Stack.Item>
-
-            <Stack.Item>
-              <Box p={0.5} backgroundColor="rgba(80, 120, 40, 0.15)">
-                <Box bold mb={0.5} fontSize="0.9em">
+            <Stack.Item grow basis="33%">
+              <Box
+                p={0.5}
+                fontSize="0.75em"
+                style={{ borderLeft: '2px solid rgba(80, 150, 40, 0.5)' }}
+              >
+                <Box bold mb={0.3}>
                   <Icon name="wrench" mr={0.5} />
-                  Arms / Legs (repair):
+                  Arms/Legs
                 </Box>
-                <Box ml={1.5} fontSize="0.85em" color="label">
-                  1. Open panel (Screwdriver)
-                </Box>
-                <Box ml={1.5} fontSize="0.85em" color="label">
-                  2. Weld brute (Welder) or fix burn (Cable)
-                </Box>
-                <Box ml={1.5} fontSize="0.85em" color="label">
-                  3. Close panel (Screwdriver)
-                </Box>
+                <Box color="label">1. Screwdriver</Box>
+                <Box color="label">2. Welder/Cable</Box>
+                <Box color="label">3. Screwdriver</Box>
               </Box>
             </Stack.Item>
-
-            <Stack.Item>
-              <Box p={0.5} backgroundColor="rgba(160, 40, 40, 0.15)">
-                <Box bold mb={0.5} fontSize="0.9em">
+            <Stack.Item grow basis="33%">
+              <Box
+                p={0.5}
+                fontSize="0.75em"
+                style={{ borderLeft: '2px solid rgba(200, 40, 40, 0.5)' }}
+              >
+                <Box bold mb={0.3}>
                   <Icon name="unlink" mr={0.5} />
-                  Limb removal:
+                  Detach
                 </Box>
-                <Box ml={1.5} fontSize="0.85em" color="label">
-                  1. Disconnect electronics (Multitool)
-                </Box>
-                <Box ml={1.5} fontSize="0.85em" color="label">
-                  2. Detach limb (Wrench)
-                </Box>
+                <Box color="label">1. Multitool</Box>
+                <Box color="label">2. Wrench</Box>
               </Box>
             </Stack.Item>
           </Stack>
@@ -744,12 +748,11 @@ const OsTab = () => {
 
   return (
     <Stack vertical>
-      {/* OS Info */}
       <Stack.Item>
         <Section title="Operating System">
           <LabeledList>
             <LabeledList.Item label="OS">
-              <Box bold color={patient.os_theme_color || 'good'}>
+              <Box bold color={patient.os_theme_color || '#cc6666'}>
                 {patient.os_version || 'IPC-OS v2.4.1'}
               </Box>
             </LabeledList.Item>
@@ -766,12 +769,12 @@ const OsTab = () => {
                 {(patient.os_virus_count || 0) > 0 ? (
                   <>
                     <Icon name="virus" mr={0.5} />
-                    INFECTED ({patient.os_virus_count} threats)
+                    INFECTED ({patient.os_virus_count})
                   </>
                 ) : (
                   <>
                     <Icon name="shield-alt" mr={0.5} />
-                    System stable
+                    Stable
                   </>
                 )}
               </Box>
@@ -806,9 +809,15 @@ const OsTab = () => {
           }
         >
           {(!patient.os_viruses || patient.os_viruses.length === 0) && (
-            <NoticeBox color="green" align="center">
-              No viruses detected. System clean.
-            </NoticeBox>
+            <Box
+              textAlign="center"
+              p={0.5}
+              color="good"
+              fontSize="0.85em"
+            >
+              <Icon name="check-circle" mr={0.5} />
+              No threats detected.
+            </Box>
           )}
           {patient.os_viruses && patient.os_viruses.length > 0 && (
             <Table>
@@ -833,7 +842,7 @@ const OsTab = () => {
                     >
                       {virus.name}
                     </Box>
-                    <Box fontSize="0.8em" color="label">
+                    <Box fontSize="0.75em" color="label">
                       {virus.desc}
                     </Box>
                   </Table.Cell>
@@ -857,7 +866,7 @@ const OsTab = () => {
                   </Table.Cell>
                   <Table.Cell>
                     <Box
-                      fontSize="0.85em"
+                      fontSize="0.8em"
                       color={virus.removable ? 'label' : 'bad'}
                     >
                       {virus.removable ? 'Standard' : 'Rootkit'}
@@ -884,19 +893,19 @@ const OsTab = () => {
         </Section>
       </Stack.Item>
 
-      {/* Installed Apps */}
+      {/* Installed apps */}
       <Stack.Item>
         <Section
-          title="Installed Apps"
+          title="Apps"
           buttons={
-            <Box color="label" fontSize="0.85em">
-              {patient.os_installed_apps?.length || 0} apps
+            <Box color="label" fontSize="0.8em">
+              {patient.os_installed_apps?.length || 0}
             </Box>
           }
         >
           {(!patient.os_installed_apps ||
             patient.os_installed_apps.length === 0) && (
-            <Box textAlign="center" p={1} color="label" fontSize="0.9em">
+            <Box textAlign="center" p={0.5} color="label" fontSize="0.85em">
               No additional apps installed.
             </Box>
           )}
@@ -915,11 +924,11 @@ const OsTab = () => {
                       <Box fontSize="0.85em">{app.desc}</Box>
                     </Table.Cell>
                     <Table.Cell>
-                      <Box fontSize="0.85em" color="label">
+                      <Box fontSize="0.8em" color="label">
                         {app.category === 'diagnostic'
-                          ? 'Diagnostic'
+                          ? 'Diag'
                           : app.category === 'utility'
-                            ? 'Utility'
+                            ? 'Util'
                             : 'Other'}
                       </Box>
                     </Table.Cell>
@@ -930,16 +939,16 @@ const OsTab = () => {
         </Section>
       </Stack.Item>
 
-      {/* System Logs */}
+      {/* System logs */}
       <Stack.Item>
-        <Section title="System Logs">
+        <Section title="Logs">
           <Box
             fontFamily="monospace"
-            fontSize="0.85em"
+            fontSize="0.8em"
             p={0.5}
-            backgroundColor="rgba(0, 0, 0, 0.3)"
+            backgroundColor="rgba(0, 0, 0, 0.4)"
             style={{
-              maxHeight: '180px',
+              maxHeight: '150px',
               overflowY: 'auto',
             }}
           >
@@ -964,7 +973,7 @@ const OsTab = () => {
                       ? 'average'
                       : 'good'
                 }
-                mt={idx === 0 ? 0.5 : 0}
+                mt={idx === 0 ? 0.3 : 0}
               >
                 [
                 {msg.type === 'critical'

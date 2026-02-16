@@ -1,31 +1,40 @@
 .theme-synthetic_diagnostic {
   .Layout__content {
-    background-image: url('../assets/bg-deforest.svg');
-    background-size: 90%;
+    background-image: none;
+    background-color: hsl(0, 0%, 5%);
   }
-  // Base - cyan/blue medical aesthetic for IPC diagnostics
-  --color-base: hsl(190, 80%, 15%);
-  --color-primary: hsl(from var(--color-base) h s calc(l + 5));
-  --color-border-primary: hsla(190, 60%, 70%, 0.6);
+
+  // Base - black/red cyberpunk roboticist aesthetic
+  --color-base: hsl(0, 70%, 12%);
+  --color-primary: hsl(0, 60%, 18%);
+  --color-border-primary: hsla(0, 80%, 50%, 0.4);
   --secondary-lightness-adjustment: -10;
   --base-gradient-spread: 0;
 
   // Components
-  --button-background-selected: hsl(190, 70%, 25%);
-  --button-background-caution: hsl(30, 85%, 35%);
-  --button-background-danger: hsl(0, 80%, 35%);
-  --button-border-radius: 2px;
+  --button-background-selected: hsl(0, 70%, 25%);
+  --button-background-caution: hsl(30, 80%, 30%);
+  --button-background-danger: hsl(0, 90%, 30%);
+  --button-border-radius: 0;
 
-  --collapsible-background-selected: hsl(190, 70%, 25%);
-  --collapsible-background-caution: hsl(30, 85%, 35%);
-  --collapsible-background-danger: hsl(0, 80%, 35%);
+  --collapsible-background-selected: hsl(0, 70%, 25%);
+  --collapsible-background-caution: hsl(30, 80%, 30%);
+  --collapsible-background-danger: hsl(0, 90%, 30%);
 
-  --progress-bar-background: hsla(0, 0%, 0%, 0.5);
-  --tab-background-selected: var(--color-base);
+  --progress-bar-background: hsla(0, 0%, 0%, 0.7);
+  --tab-background-selected: hsl(0, 70%, 15%);
 
-  // Custom overrides for synth terminal
+  // Section headers - red accent
   .Section__title {
-    color: hsl(190, 70%, 70%);
-    border-bottom-color: hsla(190, 60%, 50%, 0.4);
+    color: hsl(0, 70%, 65%);
+    border-bottom-color: hsla(0, 80%, 40%, 0.5);
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+  }
+
+  // Tabs - sharp cyberpunk style
+  .Tabs__tab {
+    border-radius: 0;
   }
 }
