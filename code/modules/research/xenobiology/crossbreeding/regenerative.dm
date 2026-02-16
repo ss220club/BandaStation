@@ -289,7 +289,7 @@ Regenerative extracts:
 
 /obj/item/slimecross/regenerative/rainbow
 	colour = SLIME_TYPE_RAINBOW
-	effect_desc = "Частично лечит цель и временно делает её бессмертной, но пессимистичной."
+	effect_desc = "Частично лечит цель и временно делает её бессмертной, но пацифистичной."
 
 /obj/item/slimecross/regenerative/rainbow/core_effect(mob/living/target, mob/user)
 	target.apply_status_effect(/datum/status_effect/rainbow_protection)
