@@ -159,44 +159,16 @@ export const SyntheticDiagnostic = () => {
     <Window
       width={680}
       height={750}
-      title="DARK INDUSTRIES // Synthetic Diagnostic Terminal"
+      title="Синтетический диагностический терминал"
       theme="synthetic_diagnostic"
     >
       <Window.Content scrollable>
-        {/* Header branding */}
-        <Box
-          textAlign="center"
-          py={0.5}
-          style={{
-            borderBottom: '1px solid rgba(200, 30, 30, 0.3)',
-            background: 'rgba(200, 30, 30, 0.05)',
-          }}
-        >
-          <Box
-            bold
-            fontSize="0.8em"
-            style={{
-              color: '#cc3333',
-              letterSpacing: '4px',
-              textTransform: 'uppercase',
-            }}
-          >
-            DARK INDUSTRIES
-          </Box>
-          <Box
-            fontSize="0.6em"
-            style={{ color: '#666', letterSpacing: '2px' }}
-          >
-            SYNTHETIC DIAGNOSTIC SYSTEM v3.1
-          </Box>
-        </Box>
-
         {/* No table */}
         {!has_table && (
           <Box p={2} mt={2}>
             <NoticeBox color="red" align="center">
               <Icon name="unlink" mr={1} />
-              DIAGNOSTIC TABLE NOT CONNECTED
+              Диагностический стол не подключён
             </NoticeBox>
           </Box>
         )}
@@ -209,7 +181,7 @@ export const SyntheticDiagnostic = () => {
             </NoticeBox>
             {patient_name && (
               <Box textAlign="center" color="label" mt={1} fontSize="0.85em">
-                Patient: {patient_name} ({patient_species})
+                Пациент: {patient_name} ({patient_species})
               </Box>
             )}
           </Box>
@@ -224,14 +196,14 @@ export const SyntheticDiagnostic = () => {
                 selected={selectedTab === 0}
                 onClick={() => setSelectedTab(0)}
               >
-                Diagnostics
+                Диагностика
               </Tabs.Tab>
               <Tabs.Tab
                 icon="microchip"
                 selected={selectedTab === 1}
                 onClick={() => setSelectedTab(1)}
               >
-                OS
+                ОС
               </Tabs.Tab>
             </Tabs>
 
@@ -306,7 +278,7 @@ const MainDiagnosticsView = () => {
         <Stack fill>
           {/* LEFT: Body zone + operations */}
           <Stack.Item basis="45%">
-            <Section title="Operations">
+            <Section title="Операции">
               <Box textAlign="center" mb={1}>
                 <BodyZoneSelector
                   theme="slimecore"
@@ -346,7 +318,7 @@ const MainDiagnosticsView = () => {
                   fontSize="0.8em"
                   p={1}
                 >
-                  Select zone
+                  Выберите зону
                 </Box>
               )}
 
@@ -374,7 +346,7 @@ const MainDiagnosticsView = () => {
                           color="label"
                           mt={0.2}
                         >
-                          Tool: {surgery.tool_rec}
+                          Инструмент: {surgery.tool_rec}
                         </Box>
                       </Box>
                     </Stack.Item>
@@ -389,7 +361,7 @@ const MainDiagnosticsView = () => {
                   fontSize="0.8em"
                   p={1}
                 >
-                  No operations for this zone
+                  Нет операций для данной зоны
                 </Box>
               )}
             </Section>
@@ -397,9 +369,9 @@ const MainDiagnosticsView = () => {
 
           {/* RIGHT: Vitals + damage */}
           <Stack.Item grow>
-            <Section title="Vitals">
+            <Section title="Показатели">
               <LabeledList>
-                <LabeledList.Item label="Integrity">
+                <LabeledList.Item label="Целостность">
                   <ProgressBar
                     value={patient.integrity}
                     minValue={-100}
@@ -437,7 +409,7 @@ const MainDiagnosticsView = () => {
                   </LabeledList.Item>
                 )}
 
-                <LabeledList.Item label="Brute">
+                <LabeledList.Item label="Механ.">
                   <ProgressBar
                     value={patient.mechanical_damage / 200}
                     ranges={{
@@ -450,7 +422,7 @@ const MainDiagnosticsView = () => {
                   </ProgressBar>
                 </LabeledList.Item>
 
-                <LabeledList.Item label="Burn">
+                <LabeledList.Item label="Ожоги">
                   <ProgressBar
                     value={patient.electrical_damage / 200}
                     ranges={{
@@ -463,7 +435,7 @@ const MainDiagnosticsView = () => {
                   </ProgressBar>
                 </LabeledList.Item>
 
-                <LabeledList.Item label="Toxin">
+                <LabeledList.Item label="Система">
                   <ProgressBar
                     value={patient.system_damage / 200}
                     ranges={{
@@ -476,7 +448,7 @@ const MainDiagnosticsView = () => {
                   </ProgressBar>
                 </LabeledList.Item>
 
-                <LabeledList.Item label="Heat">
+                <LabeledList.Item label="Нагрев">
                   <ProgressBar
                     value={patient.cooling_damage / 200}
                     ranges={{
@@ -493,7 +465,7 @@ const MainDiagnosticsView = () => {
 
             {/* Table status */}
             {data.is_synthetic_table && (
-              <Section title="Table">
+              <Section title="Стол">
                 <Stack>
                   <Stack.Item grow>
                     <Box fontSize="0.8em">
@@ -522,12 +494,12 @@ const MainDiagnosticsView = () => {
 
       {/* Components */}
       <Stack.Item>
-        <Section title="Components">
+        <Section title="Компоненты">
           <Table>
             <Table.Row header>
-              <Table.Cell>Module</Table.Cell>
-              <Table.Cell>Status</Table.Cell>
-              <Table.Cell>Details</Table.Cell>
+              <Table.Cell>Модуль</Table.Cell>
+              <Table.Cell>Статус</Table.Cell>
+              <Table.Cell>Детали</Table.Cell>
             </Table.Row>
             {patient.components.map((comp, idx) => (
               <Table.Row key={idx}>
@@ -546,15 +518,15 @@ const MainDiagnosticsView = () => {
 
       {/* Limbs */}
       <Stack.Item>
-        <Section title="Chassis">
+        <Section title="Шасси">
           <Table>
             <Table.Row header>
-              <Table.Cell>Part</Table.Cell>
-              <Table.Cell>Status</Table.Cell>
-              <Table.Cell>Panel</Table.Cell>
-              <Table.Cell>Damage</Table.Cell>
-              <Table.Cell>Brute</Table.Cell>
-              <Table.Cell>Burn</Table.Cell>
+              <Table.Cell>Часть</Table.Cell>
+              <Table.Cell>Статус</Table.Cell>
+              <Table.Cell>Панель</Table.Cell>
+              <Table.Cell>Урон</Table.Cell>
+              <Table.Cell>Механ.</Table.Cell>
+              <Table.Cell>Ожоги</Table.Cell>
             </Table.Row>
             {patient.bodyparts.map((part, idx) => (
               <Table.Row key={idx}>
@@ -618,12 +590,12 @@ const MainDiagnosticsView = () => {
         patient.implants.length > 0 &&
         patient.implants[0].name !== 'Нет установленных имплантов' && (
           <Stack.Item>
-            <Section title="Implants">
+            <Section title="Импланты">
               <Table>
                 <Table.Row header>
-                  <Table.Cell>Implant</Table.Cell>
-                  <Table.Cell>Location</Table.Cell>
-                  <Table.Cell>Status</Table.Cell>
+                  <Table.Cell>Имплант</Table.Cell>
+                  <Table.Cell>Расположение</Table.Cell>
+                  <Table.Cell>Статус</Table.Cell>
                 </Table.Row>
                 {patient.implants.map((imp, idx) => (
                   <Table.Row key={idx}>
@@ -641,7 +613,7 @@ const MainDiagnosticsView = () => {
 
       {/* System log */}
       <Stack.Item>
-        <Section title="System Log">
+        <Section title="Системный журнал">
           <Stack vertical>
             {patient.system_messages.map((msg, idx) => (
               <Stack.Item key={idx}>
@@ -685,7 +657,7 @@ const MainDiagnosticsView = () => {
 
       {/* Reference */}
       <Stack.Item>
-        <Section title="Reference">
+        <Section title="Справка">
           <Stack>
             <Stack.Item grow basis="33%">
               <Box
@@ -695,11 +667,11 @@ const MainDiagnosticsView = () => {
               >
                 <Box bold mb={0.3}>
                   <Icon name="microchip" mr={0.5} />
-                  Chest/Head
+                  Грудь/Голова
                 </Box>
-                <Box color="label">1. Screwdriver</Box>
-                <Box color="label">2. Multitool</Box>
-                <Box color="label">3. Organ/Multitool</Box>
+                <Box color="label">1. Отвёртка</Box>
+                <Box color="label">2. Мультитул</Box>
+                <Box color="label">3. Орган/Мультитул</Box>
               </Box>
             </Stack.Item>
             <Stack.Item grow basis="33%">
@@ -710,11 +682,11 @@ const MainDiagnosticsView = () => {
               >
                 <Box bold mb={0.3}>
                   <Icon name="wrench" mr={0.5} />
-                  Arms/Legs
+                  Руки/Ноги
                 </Box>
-                <Box color="label">1. Screwdriver</Box>
-                <Box color="label">2. Welder/Cable</Box>
-                <Box color="label">3. Screwdriver</Box>
+                <Box color="label">1. Отвёртка</Box>
+                <Box color="label">2. Сварка/Кабель</Box>
+                <Box color="label">3. Отвёртка</Box>
               </Box>
             </Stack.Item>
             <Stack.Item grow basis="33%">
@@ -725,14 +697,34 @@ const MainDiagnosticsView = () => {
               >
                 <Box bold mb={0.3}>
                   <Icon name="unlink" mr={0.5} />
-                  Detach
+                  Демонтаж
                 </Box>
-                <Box color="label">1. Multitool</Box>
-                <Box color="label">2. Wrench</Box>
+                <Box color="label">1. Мультитул</Box>
+                <Box color="label">2. Гаечный ключ</Box>
               </Box>
             </Stack.Item>
           </Stack>
         </Section>
+
+        {/* Dark Industries footer */}
+        <Box
+          textAlign="center"
+          mt={1}
+          py={0.3}
+          style={{
+            borderTop: '1px solid rgba(200, 30, 30, 0.15)',
+          }}
+        >
+          <Box
+            fontSize="0.55em"
+            style={{
+              color: '#444',
+              letterSpacing: '3px',
+            }}
+          >
+            DARK INDUSTRIES
+          </Box>
+        </Box>
       </Stack.Item>
     </Stack>
   );
@@ -749,17 +741,17 @@ const OsTab = () => {
   return (
     <Stack vertical>
       <Stack.Item>
-        <Section title="Operating System">
+        <Section title="Операционная система">
           <LabeledList>
-            <LabeledList.Item label="OS">
+            <LabeledList.Item label="ОС">
               <Box bold color={patient.os_theme_color || '#cc6666'}>
                 {patient.os_version || 'IPC-OS v2.4.1'}
               </Box>
             </LabeledList.Item>
-            <LabeledList.Item label="Platform">
+            <LabeledList.Item label="Платформа">
               {patient.os_manufacturer || 'Generic Systems'}
             </LabeledList.Item>
-            <LabeledList.Item label="Status">
+            <LabeledList.Item label="Статус">
               <Box
                 bold
                 color={
@@ -769,24 +761,24 @@ const OsTab = () => {
                 {(patient.os_virus_count || 0) > 0 ? (
                   <>
                     <Icon name="virus" mr={0.5} />
-                    INFECTED ({patient.os_virus_count})
+                    ЗАРАЖЕНА ({patient.os_virus_count})
                   </>
                 ) : (
                   <>
                     <Icon name="shield-alt" mr={0.5} />
-                    Stable
+                    Стабильна
                   </>
                 )}
               </Box>
             </LabeledList.Item>
-            <LabeledList.Item label="Password">
+            <LabeledList.Item label="Пароль">
               <Box color={patient.os_has_password ? 'good' : 'average'}>
-                {patient.os_has_password ? 'Set' : 'Not set'}
+                {patient.os_has_password ? 'Установлен' : 'Не установлен'}
               </Box>
             </LabeledList.Item>
-            <LabeledList.Item label="Session">
+            <LabeledList.Item label="Сессия">
               <Box color={patient.os_logged_in ? 'good' : 'label'}>
-                {patient.os_logged_in ? 'Active' : 'Inactive'}
+                {patient.os_logged_in ? 'Активна' : 'Неактивна'}
               </Box>
             </LabeledList.Item>
           </LabeledList>
@@ -796,7 +788,7 @@ const OsTab = () => {
       {/* Viruses */}
       <Stack.Item>
         <Section
-          title="Threats"
+          title="Угрозы"
           buttons={
             <Box
               color={
@@ -804,7 +796,7 @@ const OsTab = () => {
               }
               fontSize="0.85em"
             >
-              {patient.os_viruses?.length || 0} detected
+              {patient.os_viruses?.length || 0} обнаружено
             </Box>
           }
         >
@@ -816,16 +808,16 @@ const OsTab = () => {
               fontSize="0.85em"
             >
               <Icon name="check-circle" mr={0.5} />
-              No threats detected.
+              Угроз не обнаружено.
             </Box>
           )}
           {patient.os_viruses && patient.os_viruses.length > 0 && (
             <Table>
               <Table.Row header>
-                <Table.Cell>Virus</Table.Cell>
-                <Table.Cell>Severity</Table.Cell>
-                <Table.Cell>Type</Table.Cell>
-                <Table.Cell>Action</Table.Cell>
+                <Table.Cell>Вирус</Table.Cell>
+                <Table.Cell>Опасность</Table.Cell>
+                <Table.Cell>Тип</Table.Cell>
+                <Table.Cell>Действие</Table.Cell>
               </Table.Row>
               {patient.os_viruses.map((virus, idx) => (
                 <Table.Row key={idx}>
@@ -869,7 +861,7 @@ const OsTab = () => {
                       fontSize="0.8em"
                       color={virus.removable ? 'label' : 'bad'}
                     >
-                      {virus.removable ? 'Standard' : 'Rootkit'}
+                      {virus.removable ? 'Стандартный' : 'Руткит'}
                     </Box>
                   </Table.Cell>
                   <Table.Cell>
@@ -883,7 +875,7 @@ const OsTab = () => {
                         })
                       }
                     >
-                      Remove
+                      Удалить
                     </Button>
                   </Table.Cell>
                 </Table.Row>
@@ -896,7 +888,7 @@ const OsTab = () => {
       {/* Installed apps */}
       <Stack.Item>
         <Section
-          title="Apps"
+          title="Приложения"
           buttons={
             <Box color="label" fontSize="0.8em">
               {patient.os_installed_apps?.length || 0}
@@ -906,16 +898,16 @@ const OsTab = () => {
           {(!patient.os_installed_apps ||
             patient.os_installed_apps.length === 0) && (
             <Box textAlign="center" p={0.5} color="label" fontSize="0.85em">
-              No additional apps installed.
+              Дополнительных приложений нет.
             </Box>
           )}
           {patient.os_installed_apps &&
             patient.os_installed_apps.length > 0 && (
               <Table>
                 <Table.Row header>
-                  <Table.Cell>App</Table.Cell>
-                  <Table.Cell>Description</Table.Cell>
-                  <Table.Cell>Category</Table.Cell>
+                  <Table.Cell>Приложение</Table.Cell>
+                  <Table.Cell>Описание</Table.Cell>
+                  <Table.Cell>Категория</Table.Cell>
                 </Table.Row>
                 {patient.os_installed_apps.map((app, idx) => (
                   <Table.Row key={idx}>
@@ -926,10 +918,10 @@ const OsTab = () => {
                     <Table.Cell>
                       <Box fontSize="0.8em" color="label">
                         {app.category === 'diagnostic'
-                          ? 'Diag'
+                          ? 'Диагн.'
                           : app.category === 'utility'
-                            ? 'Util'
-                            : 'Other'}
+                            ? 'Утил.'
+                            : 'Другое'}
                       </Box>
                     </Table.Cell>
                   </Table.Row>
@@ -941,7 +933,7 @@ const OsTab = () => {
 
       {/* System logs */}
       <Stack.Item>
-        <Section title="Logs">
+        <Section title="Логи">
           <Box
             fontFamily="monospace"
             fontSize="0.8em"

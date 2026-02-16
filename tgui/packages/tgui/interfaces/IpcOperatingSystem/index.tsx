@@ -227,7 +227,7 @@ const LoginScreen = () => {
               fluid
               placeholder={has_password ? 'Пароль...' : 'Новый пароль...'}
               value={password}
-              onChange={(_e: React.ChangeEvent, val: string) => {
+              onChange={(val: string) => {
                 setPassword(val);
                 setError('');
               }}
