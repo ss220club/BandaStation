@@ -256,6 +256,7 @@ const LoginScreen = () => {
         <Box textAlign="center" color="label" fontSize="0.75em" italic>
           Integrated Positronic Chassis Operating System
         </Box>
+        <DarkIndustriesFooter />
       </Flex.Item>
     </Flex>
   );
@@ -476,6 +477,7 @@ const DesktopScreen = () => {
             {' | '}
             Установлено приложений: {installed_apps.length}
           </Box>
+          <DarkIndustriesFooter />
         </Box>
       </Flex.Item>
     </Flex>
@@ -589,6 +591,8 @@ const DiagnosticsApp = () => {
               </Box>
             </Box>
           )}
+
+          <DarkIndustriesFooter />
         </Box>
       </Flex.Item>
     </Flex>
@@ -765,6 +769,8 @@ const AntivirusApp = () => {
               </Stack>
             </Section>
           )}
+
+          <DarkIndustriesFooter />
         </Box>
       </Flex.Item>
     </Flex>
@@ -922,6 +928,8 @@ const NetDoorApp = () => {
               </Stack>
             </Section>
           )}
+
+          <DarkIndustriesFooter />
         </Box>
       </Flex.Item>
     </Flex>
@@ -931,6 +939,22 @@ const NetDoorApp = () => {
 // ============================================
 // COMMON COMPONENTS
 // ============================================
+
+const DarkIndustriesFooter = () => (
+  <Box
+    textAlign="center"
+    mt={1}
+    py={0.3}
+    style={{ borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}
+  >
+    <Box
+      fontSize="0.5em"
+      style={{ color: 'rgba(255,255,255,0.15)', letterSpacing: '3px' }}
+    >
+      DARK INDUSTRIES
+    </Box>
+  </Box>
+);
 
 type AppHeaderProps = {
   title: string;

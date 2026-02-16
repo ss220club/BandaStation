@@ -577,8 +577,8 @@ const MainDiagnosticsView = () => {
                     '\u2014'
                   )}
                 </Table.Cell>
-                <Table.Cell>{part.brute}</Table.Cell>
-                <Table.Cell>{part.burn}</Table.Cell>
+                <Table.Cell>{part.brute || '\u2014'}</Table.Cell>
+                <Table.Cell>{part.burn || '\u2014'}</Table.Cell>
               </Table.Row>
             ))}
           </Table>
