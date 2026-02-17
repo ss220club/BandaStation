@@ -12,6 +12,7 @@
 		"set_chassis_brand" = PROC_REF(set_chassis_brand),
 		"set_brain_type" = PROC_REF(set_brain_type),
 		"set_hef_part" = PROC_REF(set_hef_part),
+		"set_os_password" = PROC_REF(set_os_password),
 	)
 
 /// Append data to ui_data
@@ -117,6 +118,21 @@
 
 	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
 	customization[part] = manufacturer
+
+	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
+	return TRUE
+
+/datum/preference_middleware/ipc_customization/proc/set_os_password(list/params, mob/user)
+	var/new_password = params["password"]
+	if(isnull(new_password))
+		return FALSE
+
+	// Пустая строка = без пароля, иначе ограничение длины
+	if(length(new_password) > 32)
+		return FALSE
+
+	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
+	customization["os_password"] = new_password
 
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
 	return TRUE

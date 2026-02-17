@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Icon, Modal, Stack } from 'tgui-core/components';
+import { Box, Button, Icon, Input, Modal, Stack } from 'tgui-core/components';
 
 import { useBackend } from '../../../backend';
 import type {
@@ -899,6 +899,65 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     <Icon name="info-circle" /> Модульная система: {HEF_SLOTS.length} частей
                   </Box>
                 )}
+              </Box>
+
+              {/* Пароль ОС */}
+              <Box
+                mt={1}
+                style={{
+                  position: 'relative',
+                  zIndex: 1,
+                  width: '100%',
+                  maxWidth: '240px',
+                  padding: '0.75rem 1rem',
+                  background:
+                    'linear-gradient(180deg, rgba(0,240,255,0.08) 0%, rgba(0,0,0,0.4) 100%)',
+                  border: `1px solid ${CYBER_COLORS.cyan}40`,
+                  borderRadius: '6px',
+                }}
+              >
+                <Box
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    marginBottom: '0.4rem',
+                  }}
+                >
+                  <Icon
+                    name="lock"
+                    style={{ color: CYBER_COLORS.cyan, fontSize: '0.8rem' }}
+                  />
+                  <Box
+                    style={{
+                      fontSize: '0.6rem',
+                      color: '#8a8a9a',
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                    }}
+                  >
+                    Пароль ОС
+                  </Box>
+                </Box>
+                <Input
+                  fluid
+                  placeholder="Пароль (опционально)..."
+                  value={customization.os_password || ''}
+                  onChange={(val: string) => {
+                    act('set_os_password', { password: val });
+                  }}
+                />
+                <Box
+                  style={{
+                    fontSize: '0.6rem',
+                    color: CYBER_COLORS.textSecondary,
+                    marginTop: '0.3rem',
+                  }}
+                >
+                  {customization.os_password
+                    ? 'Пароль установлен — автовход при спавне'
+                    : 'Пусто — пароль вводится в игре'}
+                </Box>
               </Box>
             </Box>
 

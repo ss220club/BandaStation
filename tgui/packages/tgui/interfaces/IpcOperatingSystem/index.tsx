@@ -52,6 +52,10 @@ type InstalledApp = {
   desc: string;
   category: string;
   is_blackwall: boolean;
+  toggleable: boolean;
+  active: boolean;
+  has_effect: boolean;
+  last_message: string;
 };
 
 type IconPosition = {
@@ -183,6 +187,24 @@ function getSeverityColor(severity: string | null | undefined): string {
   }
 }
 
+function getAppIcon(app: InstalledApp): string {
+  if (safeBool(app.is_blackwall)) {
+    return 'skull-crossbones';
+  }
+  switch (app.category) {
+    case 'pda':
+      return 'mobile-alt';
+    case 'diagnostic':
+      return 'stethoscope';
+    case 'exploit':
+      return 'bug';
+    case 'mod':
+      return 'cogs';
+    default:
+      return 'cube';
+  }
+}
+
 function getCategoryLabel(cat: string): string {
   switch (cat) {
     case 'diagnostic':
@@ -193,6 +215,8 @@ function getCategoryLabel(cat: string): string {
       return 'Эксплойт';
     case 'mod':
       return 'Мод';
+    case 'pda':
+      return 'КПК';
     default:
       return 'Прочее';
   }
@@ -740,19 +764,21 @@ const DesktopScreen = () => {
         {installed_apps.map((app, idx) => {
           const posKey = `installed_${app.name}`;
           const pos = icon_positions[posKey];
+          const appIcon = getAppIcon(app);
+          const appColor = safeBool(app.active)
+            ? '#39ff14'
+            : safeBool(app.is_blackwall)
+              ? '#cc3333'
+              : hexToRgba(theme_color, 1);
           return (
             <DraggableDesktopIcon
               key={app.name}
               iconId={posKey}
-              name={app.name}
-              faIcon={
-                safeBool(app.is_blackwall) ? 'skull-crossbones' : 'cube'
+              name={
+                safeBool(app.active) ? `[ON] ${app.name}` : app.name
               }
-              color={
-                safeBool(app.is_blackwall)
-                  ? '#cc3333'
-                  : hexToRgba(theme_color, 1)
-              }
+              faIcon={appIcon}
+              color={appColor}
               initialX={pos?.x ?? 10 + (idx % 7) * 90}
               initialY={pos?.y ?? 100 + Math.floor(idx / 7) * 90}
               small
@@ -962,6 +988,60 @@ const InstalledAppScreen = () => {
                 ВНИМАНИЕ: Нелегальное ПО. Обнаружение может привести к
                 последствиям.
               </Box>
+            </Box>
+          )}
+
+          {/* Last message from app */}
+          {app.last_message && (
+            <Box
+              p={1}
+              mb={2}
+              style={{
+                border: `1px solid ${hexToRgba(theme_color, 0.3)}`,
+                borderRadius: '4px',
+                background: 'rgba(0,0,0,0.3)',
+              }}
+            >
+              <Box fontSize="0.7em" color="label" mb={0.3}>
+                <Icon name="terminal" mr={0.3} />
+                Последний вывод:
+              </Box>
+              <Box fontSize="0.85em" style={{ whiteSpace: 'pre-wrap' }}>
+                {app.last_message}
+              </Box>
+            </Box>
+          )}
+
+          {/* Action buttons */}
+          {safeBool(app.has_effect) && (
+            <Box mb={1}>
+              {safeBool(app.toggleable) ? (
+                <Button
+                  fluid
+                  color={safeBool(app.active) ? 'caution' : 'good'}
+                  icon={safeBool(app.active) ? 'stop' : 'play'}
+                  textAlign="center"
+                  onClick={() =>
+                    act('toggle_app', { app_name: app.name })
+                  }
+                >
+                  {safeBool(app.active)
+                    ? 'Деактивировать'
+                    : 'Активировать'}
+                </Button>
+              ) : (
+                <Button
+                  fluid
+                  color="good"
+                  icon="play"
+                  textAlign="center"
+                  onClick={() =>
+                    act('activate_app', { app_name: app.name })
+                  }
+                >
+                  Запустить
+                </Button>
+              )}
             </Box>
           )}
 

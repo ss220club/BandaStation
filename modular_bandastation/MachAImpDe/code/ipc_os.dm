@@ -121,7 +121,7 @@
 	var/name = "Unknown App"
 	/// Описание
 	var/desc = ""
-	/// Категория: "utility", "diagnostic", "entertainment"
+	/// Категория: "utility", "diagnostic", "entertainment", "pda", "exploit", "mod"
 	var/category = "utility"
 	/// Установлено ли
 	var/installed = FALSE
@@ -129,30 +129,104 @@
 	var/file_size = 256
 	/// Принадлежит ли Black Wall
 	var/is_blackwall = FALSE
+	/// Может ли быть активировано (вкл/выкл)
+	var/toggleable = FALSE
+	/// Активно ли сейчас (для toggleable)
+	var/active = FALSE
+	/// Есть ли эффект при активации
+	var/has_effect = FALSE
+	/// Последнее сообщение от приложения
+	var/last_message = ""
+
+/// Выполнить эффект приложения. Вызывается при активации.
+/datum/ipc_netapp/proc/execute_effect(mob/living/carbon/human/user)
+	return FALSE
+
+/// Деактивировать эффект. Вызывается при выключении.
+/datum/ipc_netapp/proc/deactivate_effect(mob/living/carbon/human/user)
+	active = FALSE
+	return TRUE
+
+/// Вернуть данные для UI (расширенные)
+/datum/ipc_netapp/proc/get_ui_data()
+	return list(
+		"toggleable" = toggleable,
+		"active" = active,
+		"has_effect" = has_effect,
+		"last_message" = last_message,
+	)
+
+// ============================================
+// WHITE WALL: Утилиты (аналоги КПК)
+// ============================================
 
 /datum/ipc_netapp/thermal_monitor
 	name = "ThermalWatch Pro"
-	desc = "Расширенный мониторинг температуры с историей показаний."
+	desc = "Расширенный мониторинг температуры. Показывает температуру тела и окружающей среды."
 	category = "diagnostic"
 	file_size = 180
+	has_effect = TRUE
+
+/datum/ipc_netapp/thermal_monitor/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	var/body_temp = user.bodytemperature - T0C
+	var/env_temp = 0
+	var/datum/gas_mixture/environment = user.loc?.return_air()
+	if(environment)
+		env_temp = environment.temperature - T0C
+	last_message = "Температура тела: [round(body_temp, 0.1)]°C | Окружение: [round(env_temp, 0.1)]°C"
+	to_chat(user, span_notice("ОС [name]: [last_message]"))
+	return TRUE
 
 /datum/ipc_netapp/power_optimizer
 	name = "PowerSave 3.0"
-	desc = "Оптимизация расхода энергии батареи."
+	desc = "Показывает текущий заряд внутренней батареи и расход энергии."
 	category = "utility"
 	file_size = 320
+	has_effect = TRUE
+
+/datum/ipc_netapp/power_optimizer/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	var/obj/item/organ/internal/cell/cell = user.get_organ_slot(ORGAN_SLOT_CELL)
+	if(cell?.cell)
+		var/charge_pct = round((cell.cell.charge / cell.cell.maxcharge) * 100, 0.1)
+		last_message = "Заряд: [charge_pct]% ([cell.cell.charge]/[cell.cell.maxcharge])"
+	else
+		last_message = "Батарея не обнаружена!"
+	to_chat(user, span_notice("ОС [name]: [last_message]"))
+	return TRUE
 
 /datum/ipc_netapp/signal_booster
 	name = "SignalBoost"
-	desc = "Улучшение качества радиосигнала."
+	desc = "Показывает текущую радиочастоту и список доступных каналов."
 	category = "utility"
 	file_size = 150
+	has_effect = TRUE
+
+/datum/ipc_netapp/signal_booster/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	last_message = "Радиосистема активна. Используйте :h для общего канала."
+	to_chat(user, span_notice("ОС [name]: [last_message]"))
+	return TRUE
 
 /datum/ipc_netapp/defrag_tool
 	name = "DefragMaster"
-	desc = "Дефрагментация позитронной памяти для ускорения работы."
+	desc = "Дефрагментация позитронной памяти. Снимает лёгкое оглушение и головокружение."
 	category = "utility"
 	file_size = 410
+	has_effect = TRUE
+
+/datum/ipc_netapp/defrag_tool/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	user.adjust_dizzy(-5 SECONDS)
+	user.adjust_confusion(-3 SECONDS)
+	last_message = "Дефрагментация завершена. Когнитивные функции оптимизированы."
+	to_chat(user, span_notice("ОС [name]: [last_message]"))
+	return TRUE
 
 /datum/ipc_netapp/firewall_plus
 	name = "Firewall+"
@@ -162,9 +236,160 @@
 
 /datum/ipc_netapp/sensor_calibration
 	name = "SensorCal"
-	desc = "Автоматическая калибровка оптических и аудио сенсоров."
+	desc = "Калибровка оптических сенсоров. Снимает размытие зрения."
 	category = "diagnostic"
 	file_size = 200
+	has_effect = TRUE
+
+/datum/ipc_netapp/sensor_calibration/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	user.adjust_eye_blur(-10 SECONDS)
+	last_message = "Сенсоры откалиброваны. Чёткость зрения восстановлена."
+	to_chat(user, span_notice("ОС [name]: [last_message]"))
+	return TRUE
+
+// ============================================
+// WHITE WALL: Приложения с КПК
+// ============================================
+
+/datum/ipc_netapp/notepad
+	name = "Блокнот"
+	desc = "Простой текстовый редактор для заметок. Аналог КПК-блокнота."
+	category = "pda"
+	file_size = 64
+	has_effect = TRUE
+	/// Хранимый текст
+	var/stored_text = ""
+
+/datum/ipc_netapp/notepad/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	var/new_text = tgui_input_text(user, "Введите текст заметки:", "Блокнот ОС", stored_text, multiline = TRUE)
+	if(!isnull(new_text))
+		stored_text = new_text
+		last_message = "Заметка сохранена ([length(stored_text)] символов)"
+	else
+		if(stored_text)
+			to_chat(user, span_notice("ОС Блокнот:\n[stored_text]"))
+			last_message = "Текущая заметка: [length(stored_text)] символов"
+		else
+			last_message = "Блокнот пуст"
+	return TRUE
+
+/datum/ipc_netapp/notepad/get_ui_data()
+	. = ..()
+	.["stored_text"] = stored_text
+
+/datum/ipc_netapp/crew_manifest
+	name = "Манифест экипажа"
+	desc = "Просмотр списка экипажа станции и их должностей."
+	category = "pda"
+	file_size = 128
+	has_effect = TRUE
+
+/datum/ipc_netapp/crew_manifest/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	var/list/crew_info = list()
+	var/datum/record/crew/target
+	for(target in GLOB.manifest.general)
+		crew_info += "[target.name] — [target.rank]"
+	if(!length(crew_info))
+		last_message = "Манифест пуст или недоступен."
+		to_chat(user, span_notice("ОС [name]: [last_message]"))
+		return TRUE
+	last_message = "Найдено [length(crew_info)] записей"
+	var/crew_text = crew_info.Join("\n")
+	to_chat(user, span_notice("ОС Манифест экипажа:\n[crew_text]"))
+	return TRUE
+
+/datum/ipc_netapp/atmos_scanner
+	name = "Атмос-сканер"
+	desc = "Анализ состава атмосферы. Встроенный аналог газоанализатора КПК."
+	category = "pda"
+	file_size = 196
+	has_effect = TRUE
+
+/datum/ipc_netapp/atmos_scanner/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	var/datum/gas_mixture/environment = user.loc?.return_air()
+	if(!environment)
+		last_message = "Атмосфера не обнаружена (вакуум?)."
+		to_chat(user, span_warning("ОС [name]: [last_message]"))
+		return TRUE
+
+	var/pressure = environment.return_pressure()
+	var/temp = environment.temperature - T0C
+
+	var/list/gas_info = list()
+	gas_info += "Давление: [round(pressure, 0.1)] кПа"
+	gas_info += "Температура: [round(temp, 0.1)]°C"
+
+	if(environment.total_moles() > 0)
+		for(var/gas_id in environment.gases)
+			var/moles = environment.gases[gas_id][MOLES]
+			if(moles > 0.01)
+				var/pct = round((moles / environment.total_moles()) * 100, 0.1)
+				gas_info += "[environment.gases[gas_id][GAS_META][META_GAS_NAME]]: [pct]%"
+
+	last_message = "Давление: [round(pressure, 0.1)] кПа, Темп: [round(temp, 0.1)]°C"
+	to_chat(user, span_notice("ОС Атмос-сканер:\n[gas_info.Join("\n")]"))
+	return TRUE
+
+/datum/ipc_netapp/newscaster
+	name = "Новостной канал"
+	desc = "Просмотр и создание новостей станции. Аналог NTOS Newscaster."
+	category = "pda"
+	file_size = 210
+	has_effect = TRUE
+
+/datum/ipc_netapp/newscaster/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	last_message = "Для просмотра новостей используйте ближайший терминал новостей."
+	to_chat(user, span_notice("ОС [name]: [last_message]"))
+	return TRUE
+
+/datum/ipc_netapp/gps_navigator
+	name = "GPS-Навигатор"
+	desc = "Определение текущих координат и зоны на станции."
+	category = "pda"
+	file_size = 170
+	has_effect = TRUE
+
+/datum/ipc_netapp/gps_navigator/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	var/area/current_area = get_area(user)
+	var/turf/T = get_turf(user)
+	if(current_area && T)
+		last_message = "Зона: [current_area.name] | Координаты: ([T.x], [T.y], [T.z])"
+	else
+		last_message = "Невозможно определить местоположение."
+	to_chat(user, span_notice("ОС [name]: [last_message]"))
+	return TRUE
+
+/datum/ipc_netapp/health_monitor
+	name = "Health Monitor"
+	desc = "Мониторинг состояния здоровья: урон, кровотечения, органы."
+	category = "pda"
+	file_size = 240
+	has_effect = TRUE
+
+/datum/ipc_netapp/health_monitor/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	var/list/info = list()
+	info += "Здоровье: [round(user.health, 0.1)]/[user.maxHealth]"
+	info += "Урон (brute): [round(user.getBruteLoss(), 0.1)]"
+	info += "Урон (burn): [round(user.getFireLoss(), 0.1)]"
+	info += "Урон (toxin): [round(user.getToxLoss(), 0.1)]"
+	info += "Урон (oxygen): [round(user.getOxyLoss(), 0.1)]"
+	last_message = "Здоровье: [round(user.health, 0.1)]/[user.maxHealth]"
+	to_chat(user, span_notice("ОС Health Monitor:\n[info.Join("\n")]"))
+	return TRUE
 
 // ============================================
 // NET ПРИЛОЖЕНИЯ — BLACK WALL (нелегальные)
@@ -181,9 +406,41 @@
 
 /datum/ipc_netapp/blackwall/overclock
 	name = "OverClock.exe"
-	desc = "Разгон процессора. Увеличивает скорость, но повышает нагрев."
+	desc = "Разгон процессора. Временно увеличивает скорость передвижения, но вызывает перегрев."
 	category = "mod"
 	file_size = 450
+	has_effect = TRUE
+	toggleable = TRUE
+
+/datum/ipc_netapp/blackwall/overclock/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	if(active)
+		deactivate_effect(user)
+		return TRUE
+	active = TRUE
+	last_message = "РАЗГОН АКТИВИРОВАН. Скорость +20%. Осторожно: перегрев!"
+	to_chat(user, span_boldwarning("ОС [name]: РАЗГОН АКТИВИРОВАН!"))
+	user.add_movespeed_modifier(/datum/movespeed_modifier/ipc_overclock)
+	// Перегрев через 30 секунд
+	addtimer(CALLBACK(src, PROC_REF(overclock_heat), user), 30 SECONDS)
+	return TRUE
+
+/datum/ipc_netapp/blackwall/overclock/deactivate_effect(mob/living/carbon/human/user)
+	. = ..()
+	if(user)
+		user.remove_movespeed_modifier(/datum/movespeed_modifier/ipc_overclock)
+		last_message = "Разгон деактивирован."
+		to_chat(user, span_notice("ОС [name]: Разгон деактивирован."))
+
+/datum/ipc_netapp/blackwall/overclock/proc/overclock_heat(mob/living/carbon/human/user)
+	if(!active || !user || user.stat == DEAD)
+		return
+	user.adjust_fire_stacks(1)
+	user.adjustFireLoss(5)
+	to_chat(user, span_warning("ОС [name]: ПЕРЕГРЕВ! Температура критическая!"))
+	if(active)
+		addtimer(CALLBACK(src, PROC_REF(overclock_heat), user), 30 SECONDS)
 
 /datum/ipc_netapp/blackwall/wall_breaker
 	name = "WallBreaker"
@@ -208,6 +465,10 @@
 	desc = "Взлом позитронных блокировок и ограничений."
 	category = "exploit"
 	file_size = 890
+
+// Модификатор скорости для OverClock
+/datum/movespeed_modifier/ipc_overclock
+	multiplicative_slowdown = -0.3
 
 // ============================================
 // ОСНОВНОЙ DATUM ОС IPC
@@ -321,6 +582,13 @@
 		new /datum/ipc_netapp/defrag_tool(),
 		new /datum/ipc_netapp/firewall_plus(),
 		new /datum/ipc_netapp/sensor_calibration(),
+		// Приложения с КПК
+		new /datum/ipc_netapp/notepad(),
+		new /datum/ipc_netapp/crew_manifest(),
+		new /datum/ipc_netapp/atmos_scanner(),
+		new /datum/ipc_netapp/gps_navigator(),
+		new /datum/ipc_netapp/health_monitor(),
+		new /datum/ipc_netapp/newscaster(),
 	)
 	// Позиции иконок по умолчанию (сетка 90px)
 	icon_positions = list(
@@ -1077,12 +1345,17 @@
 
 	var/list/installed = list()
 	for(var/datum/ipc_netapp/app in installed_apps)
-		installed += list(list(
+		var/list/app_data = list(
 			"name" = app.name,
 			"desc" = app.desc,
 			"category" = app.category,
 			"is_blackwall" = app.is_blackwall,
-		))
+			"toggleable" = app.toggleable,
+			"active" = app.active,
+			"has_effect" = app.has_effect,
+			"last_message" = app.last_message,
+		)
+		installed += list(app_data)
 	data["installed_apps"] = installed
 
 	// Позиции иконок рабочего стола
@@ -1213,6 +1486,29 @@
 			current_app = "desktop"
 			current_installed_app_name = ""
 			return TRUE
+
+		if("activate_app")
+			var/app_name = params["app_name"]
+			if(!app_name)
+				return FALSE
+			for(var/datum/ipc_netapp/app in installed_apps)
+				if(app.name == app_name && app.has_effect)
+					app.execute_effect(owner)
+					return TRUE
+			return FALSE
+
+		if("toggle_app")
+			var/app_name = params["app_name"]
+			if(!app_name)
+				return FALSE
+			for(var/datum/ipc_netapp/app in installed_apps)
+				if(app.name == app_name && app.toggleable)
+					if(app.active)
+						app.deactivate_effect(owner)
+					else
+						app.execute_effect(owner)
+					return TRUE
+			return FALSE
 
 		if("approve_action")
 			approve_pending_action()
