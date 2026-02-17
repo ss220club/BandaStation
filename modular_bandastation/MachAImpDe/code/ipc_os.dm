@@ -113,7 +113,7 @@
 	removable_by_antivirus = FALSE
 
 // ============================================
-// NET-DOOR ПРИЛОЖЕНИЯ (каталог)
+// NET ПРИЛОЖЕНИЯ — WHITE WALL (легальные)
 // ============================================
 
 /datum/ipc_netapp
@@ -125,36 +125,89 @@
 	var/category = "utility"
 	/// Установлено ли
 	var/installed = FALSE
+	/// Размер файла в КБ (для симуляции загрузки)
+	var/file_size = 256
+	/// Принадлежит ли Black Wall
+	var/is_blackwall = FALSE
 
 /datum/ipc_netapp/thermal_monitor
 	name = "ThermalWatch Pro"
 	desc = "Расширенный мониторинг температуры с историей показаний."
 	category = "diagnostic"
+	file_size = 180
 
 /datum/ipc_netapp/power_optimizer
 	name = "PowerSave 3.0"
 	desc = "Оптимизация расхода энергии батареи."
 	category = "utility"
+	file_size = 320
 
 /datum/ipc_netapp/signal_booster
 	name = "SignalBoost"
 	desc = "Улучшение качества радиосигнала."
 	category = "utility"
+	file_size = 150
 
 /datum/ipc_netapp/defrag_tool
 	name = "DefragMaster"
 	desc = "Дефрагментация позитронной памяти для ускорения работы."
 	category = "utility"
+	file_size = 410
 
 /datum/ipc_netapp/firewall_plus
 	name = "Firewall+"
 	desc = "Дополнительная защита от сетевых вирусов."
 	category = "utility"
+	file_size = 290
 
 /datum/ipc_netapp/sensor_calibration
 	name = "SensorCal"
 	desc = "Автоматическая калибровка оптических и аудио сенсоров."
 	category = "diagnostic"
+	file_size = 200
+
+// ============================================
+// NET ПРИЛОЖЕНИЯ — BLACK WALL (нелегальные)
+// ============================================
+
+/datum/ipc_netapp/blackwall
+	is_blackwall = TRUE
+
+/datum/ipc_netapp/blackwall/virus_kit
+	name = "VirusKit"
+	desc = "Набор инструментов для создания и распространения вирусов."
+	category = "exploit"
+	file_size = 780
+
+/datum/ipc_netapp/blackwall/overclock
+	name = "OverClock.exe"
+	desc = "Разгон процессора. Увеличивает скорость, но повышает нагрев."
+	category = "mod"
+	file_size = 450
+
+/datum/ipc_netapp/blackwall/wall_breaker
+	name = "WallBreaker"
+	desc = "Обход защитных систем и файрволлов."
+	category = "exploit"
+	file_size = 620
+
+/datum/ipc_netapp/blackwall/id_spoof
+	name = "ID_Spoof v3"
+	desc = "Подмена идентификационных данных в сети."
+	category = "exploit"
+	file_size = 340
+
+/datum/ipc_netapp/blackwall/ghost_mode
+	name = "GhostMode"
+	desc = "Скрытие от сканирования и диагностических систем."
+	category = "mod"
+	file_size = 550
+
+/datum/ipc_netapp/blackwall/neural_crack
+	name = "NeuralCrack"
+	desc = "Взлом позитронных блокировок и ограничений."
+	category = "exploit"
+	file_size = 890
 
 // ============================================
 // ОСНОВНОЙ DATUM ОС IPC
@@ -206,13 +259,28 @@
 	/// ID таймера антивируса
 	var/antivirus_timer_id = null
 
-	// --- NET-door ---
+	// --- NET ---
 	/// Подключён ли к сети
 	var/network_connected = FALSE
-	/// Доступные приложения в каталоге
+	/// Выбранная стена: "white" или "black"
+	var/net_wall = "white"
+	/// Доступные приложения (White Wall)
 	var/list/net_catalog = list()
+	/// Доступные приложения (Black Wall)
+	var/list/black_wall_catalog = list()
 	/// Установленные приложения
 	var/list/installed_apps = list()
+	// --- Загрузка приложений ---
+	/// Идёт ли загрузка
+	var/downloading = FALSE
+	/// Прогресс загрузки (0-100)
+	var/download_progress = 0
+	/// Имя загружаемого приложения
+	var/download_app_name = ""
+	/// Ссылка на загружаемое приложение
+	var/datum/ipc_netapp/download_target = null
+	/// ID таймера загрузки
+	var/download_timer_id = null
 
 /datum/ipc_operating_system/New(mob/living/carbon/human/new_owner, new_brand_key)
 	. = ..()
@@ -221,7 +289,7 @@
 	os_name = get_ipc_os_name(brand_key)
 	theme_color = get_ipc_os_theme_color(brand_key)
 
-	// Инициализируем каталог NET-door
+	// Инициализируем каталог NET — White Wall
 	net_catalog = list(
 		new /datum/ipc_netapp/thermal_monitor(),
 		new /datum/ipc_netapp/power_optimizer(),
@@ -230,16 +298,29 @@
 		new /datum/ipc_netapp/firewall_plus(),
 		new /datum/ipc_netapp/sensor_calibration(),
 	)
+	// Инициализируем каталог NET — Black Wall
+	black_wall_catalog = list(
+		new /datum/ipc_netapp/blackwall/virus_kit(),
+		new /datum/ipc_netapp/blackwall/overclock(),
+		new /datum/ipc_netapp/blackwall/wall_breaker(),
+		new /datum/ipc_netapp/blackwall/id_spoof(),
+		new /datum/ipc_netapp/blackwall/ghost_mode(),
+		new /datum/ipc_netapp/blackwall/neural_crack(),
+	)
 
 /datum/ipc_operating_system/Destroy()
 	owner = null
 	QDEL_LIST(viruses)
 	QDEL_LIST(net_catalog)
+	QDEL_LIST(black_wall_catalog)
 	QDEL_LIST(installed_apps)
+	download_target = null
 	if(scan_timer_id)
 		deltimer(scan_timer_id)
 	if(antivirus_timer_id)
 		deltimer(antivirus_timer_id)
+	if(download_timer_id)
+		deltimer(download_timer_id)
 	return ..()
 
 // ============================================
@@ -562,7 +643,7 @@
 	return TRUE
 
 // ============================================
-// NET-DOOR (СЕТЬ)
+// NET (СЕТЬ)
 // ============================================
 
 /// Проверка подключения к сети (нужен сетевой кабель рядом)
@@ -585,17 +666,63 @@
 	network_connected = FALSE
 	return FALSE
 
-/datum/ipc_operating_system/proc/install_net_app(datum/ipc_netapp/app)
-	if(!app)
-		return FALSE
-	if(app.installed)
-		return FALSE
-	if(!network_connected)
+/// Начать загрузку приложения (имитация)
+/datum/ipc_operating_system/proc/start_download(datum/ipc_netapp/app)
+	if(!app || app.installed || downloading || !network_connected)
 		return FALSE
 
-	app.installed = TRUE
-	installed_apps += app
+	downloading = TRUE
+	download_progress = 0
+	download_app_name = app.name
+	download_target = app
+
+	advance_download()
 	return TRUE
+
+/// Продвижение загрузки
+/datum/ipc_operating_system/proc/advance_download()
+	if(!downloading || !download_target)
+		downloading = FALSE
+		download_target = null
+		return
+
+	// Скорость зависит от размера файла — чем больше, тем дольше
+	var/step = max(8, round(100 / max(1, download_target.file_size / 100)))
+	download_progress = min(download_progress + step, 100)
+
+	if(download_progress >= 100)
+		// Загрузка завершена — устанавливаем
+		complete_download()
+		return
+
+	download_timer_id = addtimer(CALLBACK(src, PROC_REF(advance_download)), 0.8 SECONDS, TIMER_STOPPABLE)
+	SStgui.update_uis(src)
+
+/// Завершение загрузки
+/datum/ipc_operating_system/proc/complete_download()
+	if(download_target)
+		download_target.installed = TRUE
+		installed_apps += download_target
+		if(owner)
+			to_chat(owner, span_notice("ОС: Приложение \"[download_target.name]\" успешно установлено."))
+
+	downloading = FALSE
+	download_progress = 0
+	download_app_name = ""
+	download_target = null
+	SStgui.update_uis(src)
+
+/// Отмена загрузки
+/datum/ipc_operating_system/proc/cancel_download()
+	if(!downloading)
+		return
+	if(download_timer_id)
+		deltimer(download_timer_id)
+	downloading = FALSE
+	download_progress = 0
+	download_app_name = ""
+	download_target = null
+	SStgui.update_uis(src)
 
 /datum/ipc_operating_system/proc/uninstall_net_app(datum/ipc_netapp/app)
 	if(!app)
@@ -662,10 +789,17 @@
 		))
 	data["viruses"] = virus_list
 
-	// NET-door
+	// NET
 	check_network_connection()
 	data["network_connected"] = network_connected
+	data["net_wall"] = net_wall
 
+	// Загрузка
+	data["downloading"] = downloading
+	data["download_progress"] = download_progress
+	data["download_app_name"] = download_app_name
+
+	// White Wall каталог
 	var/list/catalog = list()
 	for(var/datum/ipc_netapp/app in net_catalog)
 		catalog += list(list(
@@ -673,8 +807,21 @@
 			"desc" = app.desc,
 			"category" = app.category,
 			"installed" = app.installed,
+			"file_size" = app.file_size,
 		))
 	data["net_catalog"] = catalog
+
+	// Black Wall каталог
+	var/list/black_catalog = list()
+	for(var/datum/ipc_netapp/app in black_wall_catalog)
+		black_catalog += list(list(
+			"name" = app.name,
+			"desc" = app.desc,
+			"category" = app.category,
+			"installed" = app.installed,
+			"file_size" = app.file_size,
+		))
+	data["black_wall_catalog"] = black_catalog
 
 	var/list/installed = list()
 	for(var/datum/ipc_netapp/app in installed_apps)
@@ -682,6 +829,7 @@
 			"name" = app.name,
 			"desc" = app.desc,
 			"category" = app.category,
+			"is_blackwall" = app.is_blackwall,
 		))
 	data["installed_apps"] = installed
 
@@ -713,7 +861,7 @@
 
 		if("open_app")
 			var/app_name = params["app"]
-			if(app_name in list("desktop", "diagnostics", "antivirus", "netdoor"))
+			if(app_name in list("desktop", "diagnostics", "antivirus", "net"))
 				current_app = app_name
 			return TRUE
 
@@ -725,12 +873,24 @@
 			start_antivirus_scan()
 			return TRUE
 
-		if("install_app")
+		if("switch_wall")
+			var/wall = params["wall"]
+			if(wall in list("white", "black"))
+				net_wall = wall
+			return TRUE
+
+		if("download_app")
 			var/app_name = params["app_name"]
-			for(var/datum/ipc_netapp/app in net_catalog)
+			var/wall = params["wall"]
+			var/list/search_catalog = (wall == "black") ? black_wall_catalog : net_catalog
+			for(var/datum/ipc_netapp/app in search_catalog)
 				if(app.name == app_name)
-					install_net_app(app)
+					start_download(app)
 					break
+			return TRUE
+
+		if("cancel_download")
+			cancel_download()
 			return TRUE
 
 		if("uninstall_app")

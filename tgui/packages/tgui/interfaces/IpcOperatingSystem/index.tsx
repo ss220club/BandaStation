@@ -10,6 +10,7 @@ import {
   Section,
   Stack,
   Table,
+  Tabs,
 } from 'tgui-core/components';
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
@@ -43,12 +44,14 @@ type NetApp = {
   desc: string;
   category: string;
   installed: boolean;
+  file_size: number;
 };
 
 type InstalledApp = {
   name: string;
   desc: string;
   category: string;
+  is_blackwall: boolean;
 };
 
 type IpcOsData = {
@@ -70,7 +73,12 @@ type IpcOsData = {
   has_serious_viruses: boolean;
   viruses: Virus[];
   network_connected: boolean;
+  net_wall: string;
+  downloading: boolean;
+  download_progress: number;
+  download_app_name: string;
   net_catalog: NetApp[];
+  black_wall_catalog: NetApp[];
   installed_apps: InstalledApp[];
 };
 
@@ -120,7 +128,7 @@ export const IpcOperatingSystem = () => {
             {current_app === 'desktop' && <DesktopScreen />}
             {current_app === 'diagnostics' && <DiagnosticsApp />}
             {current_app === 'antivirus' && <AntivirusApp />}
-            {current_app === 'netdoor' && <NetDoorApp />}
+            {current_app === 'net' && <NetApp />}
           </>
         )}
       </Window.Content>
@@ -155,6 +163,21 @@ function getSeverityColor(severity: string | null | undefined): string {
       return 'bad';
     default:
       return 'label';
+  }
+}
+
+function getCategoryLabel(cat: string): string {
+  switch (cat) {
+    case 'diagnostic':
+      return 'Диагн.';
+    case 'utility':
+      return 'Утилита';
+    case 'exploit':
+      return 'Эксплойт';
+    case 'mod':
+      return 'Мод';
+    default:
+      return 'Прочее';
   }
 }
 
@@ -266,6 +289,24 @@ const LoginScreen = () => {
 // DESKTOP
 // ============================================
 
+const SYSTEM_APPS = [
+  {
+    id: 'diagnostics',
+    name: 'Диагностика',
+    faIcon: 'heartbeat',
+  },
+  {
+    id: 'antivirus',
+    name: 'Антивирус',
+    faIcon: 'shield-alt',
+  },
+  {
+    id: 'net',
+    name: 'NET',
+    faIcon: 'globe',
+  },
+];
+
 const DesktopScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
 
@@ -276,208 +317,228 @@ const DesktopScreen = () => {
   const has_serious_viruses = safeBool(data.has_serious_viruses);
   const installed_apps = safeArray(data.installed_apps);
 
-  const apps = [
-    {
-      id: 'diagnostics',
-      name: 'Самодиагностика',
-      faIcon: 'heartbeat',
-      desc: 'Сканирование систем',
-    },
-    {
-      id: 'antivirus',
-      name: 'Антивирус',
-      faIcon: 'shield-alt',
-      desc: 'Защита системы',
-      badge: virus_count > 0 ? `${virus_count}` : undefined,
-      badgeColor: has_serious_viruses ? 'bad' : 'average',
-    },
-    {
-      id: 'netdoor',
-      name: 'NET-door',
-      faIcon: 'network-wired',
-      desc: 'Каталог приложений',
-    },
-  ];
-
   return (
     <Flex direction="column" height="100%">
-      {/* Top bar */}
+      {/* Top bar — title bar style */}
       <Flex.Item>
         <Box
-          p={0.5}
+          py={0.3}
+          px={1}
           style={{
-            background: hexToRgba(theme_color, 0.15),
+            background: hexToRgba(theme_color, 0.2),
             borderBottom: `1px solid ${hexToRgba(theme_color, 0.3)}`,
           }}
         >
           <Flex justify="space-between" align="center">
             <Flex.Item>
-              <Box bold color={theme_color} fontSize="0.85em" ml={1}>
+              <Box bold color={theme_color} fontSize="0.8em">
+                <Icon name="desktop" mr={0.5} />
                 {os_name} v{os_version}
               </Box>
             </Flex.Item>
             <Flex.Item>
-              <Button
-                icon="power-off"
-                color="bad"
-                compact
-                onClick={() => act('logout')}
-                tooltip="Выйти из системы"
-              />
+              <Flex align="center">
+                {virus_count > 0 && (
+                  <Flex.Item mr={1}>
+                    <Box
+                      fontSize="0.7em"
+                      bold
+                      color={has_serious_viruses ? 'bad' : 'average'}
+                    >
+                      <Icon name="virus" mr={0.3} />
+                      {virus_count}
+                    </Box>
+                  </Flex.Item>
+                )}
+                <Flex.Item>
+                  <Button
+                    icon="power-off"
+                    color="bad"
+                    compact
+                    onClick={() => act('logout')}
+                    tooltip="Выйти"
+                  />
+                </Flex.Item>
+              </Flex>
             </Flex.Item>
           </Flex>
         </Box>
       </Flex.Item>
 
-      {/* Desktop area */}
-      <Flex.Item grow={1}>
-        <Flex
-          direction="column"
-          align="center"
-          justify="center"
-          height="100%"
+      {/* Desktop icons area */}
+      <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
+        <Box p={1}>
+          <Flex wrap="wrap">
+            {/* System apps */}
+            {SYSTEM_APPS.map((app) => (
+              <Flex.Item key={app.id} m={0.5}>
+                <DesktopIcon
+                  name={app.name}
+                  icon={app.faIcon}
+                  color={theme_color}
+                  badge={
+                    app.id === 'antivirus' && virus_count > 0
+                      ? virus_count
+                      : undefined
+                  }
+                  badgeSevere={has_serious_viruses}
+                  onClick={() => act('open_app', { app: app.id })}
+                />
+              </Flex.Item>
+            ))}
+
+            {/* Installed NET apps */}
+            {installed_apps.map((app) => (
+              <Flex.Item key={app.name} m={0.5}>
+                <DesktopIcon
+                  name={app.name}
+                  icon={
+                    safeBool(app.is_blackwall) ? 'skull-crossbones' : 'cube'
+                  }
+                  color={
+                    safeBool(app.is_blackwall)
+                      ? '#cc3333'
+                      : hexToRgba(theme_color, 1)
+                  }
+                  small
+                  onClick={() => {}}
+                />
+              </Flex.Item>
+            ))}
+          </Flex>
+        </Box>
+      </Flex.Item>
+
+      {/* Taskbar */}
+      <Flex.Item>
+        <Box
+          py={0.3}
+          px={1}
+          style={{
+            background: hexToRgba(theme_color, 0.12),
+            borderTop: `1px solid ${hexToRgba(theme_color, 0.25)}`,
+          }}
         >
-          {/* OS Logo */}
-          <Flex.Item mb={4}>
-            <Box textAlign="center">
-              <Box
-                fontSize="3em"
-                bold
-                color={theme_color}
-                style={{
-                  textShadow: `0 0 30px ${hexToRgba(theme_color, 0.4)}`,
-                  letterSpacing: '5px',
-                }}
-              >
-                {os_name}
-              </Box>
-              <Box color="label" fontSize="0.8em" mt={0.5}>
-                Integrated Positronic OS
-              </Box>
-            </Box>
-          </Flex.Item>
-
-          {/* App icons */}
-          <Flex.Item>
-            <Flex wrap="wrap" justify="center">
-              {apps.map((app) => (
-                <Flex.Item key={app.id} mx={2} mb={2}>
-                  <Box
-                    textAlign="center"
-                    style={{ cursor: 'pointer', position: 'relative' }}
-                    onClick={() => act('open_app', { app: app.id })}
-                  >
-                    <Box
-                      p={1.5}
-                      style={{
-                        border: `1px solid ${hexToRgba(theme_color, 0.4)}`,
-                        borderRadius: '6px',
-                        background: hexToRgba(theme_color, 0.08),
-                        width: '90px',
-                        height: '70px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        transition: 'background 0.2s',
-                      }}
-                    >
-                      <Icon
-                        name={app.faIcon}
-                        size={2.5}
-                        color={theme_color}
-                        style={{
-                          textShadow: `0 0 8px ${hexToRgba(theme_color, 0.6)}`,
-                        }}
-                      />
-                    </Box>
-                    {'badge' in app && app.badge && (
-                      <Box
-                        style={{
-                          position: 'absolute',
-                          top: '-4px',
-                          right: '-4px',
-                          background:
-                            app.badgeColor === 'bad' ? '#cc3333' : '#cc9933',
-                          borderRadius: '50%',
-                          width: '18px',
-                          height: '18px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '0.7em',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        {app.badge}
-                      </Box>
-                    )}
-                    <Box fontSize="0.8em" mt={0.5} bold>
-                      {app.name}
-                    </Box>
-                    <Box fontSize="0.65em" color="label">
-                      {app.desc}
-                    </Box>
-                  </Box>
-                </Flex.Item>
-              ))}
-            </Flex>
-          </Flex.Item>
-
-          {/* Installed apps */}
-          {installed_apps.length > 0 && (
-            <Flex.Item mt={2}>
-              <Box textAlign="center" color="label" fontSize="0.75em" mb={1}>
-                Установленные приложения:
-              </Box>
-              <Flex wrap="wrap" justify="center">
-                {installed_apps.map((app) => (
-                  <Flex.Item key={app.name} mx={1}>
-                    <Box
-                      p={0.5}
-                      px={1}
-                      fontSize="0.75em"
-                      style={{
-                        border: `1px solid ${hexToRgba(theme_color, 0.2)}`,
-                        borderRadius: '3px',
-                        background: hexToRgba(theme_color, 0.05),
-                      }}
-                    >
-                      {app.name}
-                    </Box>
+          <Flex justify="space-between" align="center">
+            <Flex.Item>
+              <Flex align="center">
+                {SYSTEM_APPS.map((app) => (
+                  <Flex.Item key={app.id} mr={0.3}>
+                    <Button
+                      compact
+                      icon={app.faIcon}
+                      color="transparent"
+                      tooltip={app.name}
+                      onClick={() => act('open_app', { app: app.id })}
+                    />
                   </Flex.Item>
                 ))}
               </Flex>
             </Flex.Item>
-          )}
-        </Flex>
-      </Flex.Item>
-
-      {/* Bottom bar */}
-      <Flex.Item>
-        <Box
-          p={0.3}
-          textAlign="center"
-          style={{
-            background: hexToRgba(theme_color, 0.1),
-            borderTop: `1px solid ${hexToRgba(theme_color, 0.2)}`,
-          }}
-        >
-          <Box fontSize="0.7em" color="label">
-            {virus_count > 0 ? (
-              <Box as="span" color={has_serious_viruses ? 'bad' : 'average'}>
-                Обнаружено угроз: {virus_count}
+            <Flex.Item>
+              <Box fontSize="0.65em" color="label">
+                {virus_count > 0 ? (
+                  <Box
+                    as="span"
+                    color={has_serious_viruses ? 'bad' : 'average'}
+                  >
+                    <Icon name="exclamation-triangle" mr={0.3} />
+                    {virus_count} угроз
+                  </Box>
+                ) : (
+                  <Box as="span" color="good">
+                    <Icon name="check-circle" mr={0.3} />
+                    Защищено
+                  </Box>
+                )}
+                {' | '}
+                <Icon name="cube" mr={0.3} />
+                {installed_apps.length} прил.
               </Box>
-            ) : (
-              <Box as="span" color="good">
-                Система защищена
-              </Box>
-            )}
-            {' | '}
-            Установлено приложений: {installed_apps.length}
-          </Box>
+            </Flex.Item>
+          </Flex>
         </Box>
       </Flex.Item>
     </Flex>
+  );
+};
+
+// ============================================
+// DESKTOP ICON COMPONENT
+// ============================================
+
+type DesktopIconProps = {
+  name: string;
+  icon: string;
+  color: string;
+  badge?: number;
+  badgeSevere?: boolean;
+  small?: boolean;
+  onClick: () => void;
+};
+
+const DesktopIcon = (props: DesktopIconProps) => {
+  const size = props.small ? '70px' : '80px';
+  const iconSize = props.small ? 1.8 : 2.2;
+  return (
+    <Box
+      textAlign="center"
+      style={{
+        cursor: 'pointer',
+        position: 'relative',
+        width: size,
+      }}
+      onClick={props.onClick}
+    >
+      <Box
+        py={1}
+        style={{
+          border: `1px solid ${hexToRgba(props.color, 0.3)}`,
+          borderRadius: '4px',
+          background: hexToRgba(props.color, 0.06),
+        }}
+      >
+        <Icon
+          name={props.icon}
+          size={iconSize}
+          color={props.color}
+          style={{
+            textShadow: `0 0 6px ${hexToRgba(props.color, 0.5)}`,
+          }}
+        />
+      </Box>
+      {props.badge !== undefined && (
+        <Box
+          style={{
+            position: 'absolute',
+            top: '-3px',
+            right: '-3px',
+            background: props.badgeSevere ? '#cc3333' : '#cc9933',
+            borderRadius: '50%',
+            width: '16px',
+            height: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '0.65em',
+            fontWeight: 'bold',
+          }}
+        >
+          {props.badge}
+        </Box>
+      )}
+      <Box
+        fontSize={props.small ? '0.6em' : '0.7em'}
+        mt={0.3}
+        style={{
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {props.name}
+      </Box>
+    </Box>
   );
 };
 
@@ -588,7 +649,6 @@ const DiagnosticsApp = () => {
               </Box>
             </Box>
           )}
-
         </Box>
       </Flex.Item>
     </Flex>
@@ -608,7 +668,6 @@ const AntivirusApp = () => {
   const viruses = safeArray(data.viruses);
   const virus_count = safeNum(data.virus_count, 0);
   const has_serious_viruses = safeBool(data.has_serious_viruses);
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
 
   return (
     <Flex direction="column" height="100%">
@@ -765,7 +824,6 @@ const AntivirusApp = () => {
               </Stack>
             </Section>
           )}
-
         </Box>
       </Flex.Item>
     </Flex>
@@ -773,157 +831,263 @@ const AntivirusApp = () => {
 };
 
 // ============================================
-// NET-DOOR APP
+// NET APP (White Wall / Black Wall)
 // ============================================
 
-const NetDoorApp = () => {
+const NetApp = () => {
   const { act, data } = useBackend<IpcOsData>();
 
   const network_connected = safeBool(data.network_connected);
+  const net_wall = safeStr(data.net_wall, 'white');
   const net_catalog = safeArray(data.net_catalog);
+  const black_wall_catalog = safeArray(data.black_wall_catalog);
   const installed_apps = safeArray(data.installed_apps);
   const theme_color = safeStr(data.theme_color, '#6a6a6a');
+  const downloading = safeBool(data.downloading);
+  const download_progress = safeNum(data.download_progress, 0);
+  const download_app_name = safeStr(data.download_app_name, '');
+
+  const catalog = net_wall === 'black' ? black_wall_catalog : net_catalog;
+  const isBlack = net_wall === 'black';
 
   return (
     <Flex direction="column" height="100%">
-      <AppHeader title="NET-door" icon="network-wired" />
+      <AppHeader title="NET" icon="globe" />
 
       <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
         <Box p={1}>
           {/* Connection status */}
           <Box
-            mb={2}
-            p={1}
+            mb={1}
+            p={0.5}
             textAlign="center"
             style={{
-              border: `1px solid ${network_connected ? '#33cc33' : '#cc3333'}`,
-              borderRadius: '4px',
+              border: `1px solid ${network_connected ? 'rgba(50,200,50,0.3)' : 'rgba(200,50,50,0.3)'}`,
+              borderRadius: '3px',
               background: network_connected
-                ? 'rgba(0,200,0,0.1)'
-                : 'rgba(200,0,0,0.1)',
+                ? 'rgba(0,200,0,0.05)'
+                : 'rgba(200,0,0,0.05)',
             }}
           >
             <Box
               bold
               color={network_connected ? 'good' : 'bad'}
-              fontSize="1em"
+              fontSize="0.85em"
             >
+              <Icon
+                name={network_connected ? 'wifi' : 'times-circle'}
+                mr={0.5}
+              />
               {network_connected
                 ? 'Подключено к сети'
                 : 'Нет подключения к сети'}
             </Box>
-            {!network_connected && (
-              <Box fontSize="0.8em" color="label" mt={0.5}>
-                Подключитесь к диагностическому столу или встаньте на тайл с
-                сетевым кабелем.
-              </Box>
-            )}
           </Box>
 
-          {/* App catalog */}
-          <Section title="Каталог приложений">
-            {!network_connected ? (
-              <Box textAlign="center" color="label" p={2}>
-                <Box bold mb={1}>
-                  Каталог недоступен
-                </Box>
-                <Box fontSize="0.9em">
-                  Подключитесь к сети для доступа к каталогу.
-                </Box>
+          {/* Wall tabs */}
+          <Tabs>
+            <Tabs.Tab
+              icon="building"
+              selected={!isBlack}
+              onClick={() => act('switch_wall', { wall: 'white' })}
+            >
+              White Wall
+            </Tabs.Tab>
+            <Tabs.Tab
+              icon="skull-crossbones"
+              selected={isBlack}
+              onClick={() => act('switch_wall', { wall: 'black' })}
+              color={isBlack ? 'bad' : undefined}
+            >
+              Black Wall
+            </Tabs.Tab>
+          </Tabs>
+
+          {/* Black Wall warning */}
+          {isBlack && (
+            <Box
+              p={0.5}
+              mb={1}
+              textAlign="center"
+              fontSize="0.75em"
+              color="bad"
+              style={{
+                background: 'rgba(200,0,0,0.08)',
+                borderBottom: '1px solid rgba(200,0,0,0.2)',
+              }}
+            >
+              <Icon name="exclamation-triangle" mr={0.5} />
+              ВНИМАНИЕ: Нелегальное ПО. Использование на свой страх и риск.
+            </Box>
+          )}
+
+          {/* Download progress */}
+          {downloading && (
+            <Box mb={1}>
+              <Box fontSize="0.8em" color="label" mb={0.3}>
+                <Icon name="download" mr={0.5} />
+                Загрузка: {download_app_name}
               </Box>
-            ) : (
-              <Table>
-                <Table.Row header>
-                  <Table.Cell width="25%">Приложение</Table.Cell>
-                  <Table.Cell width="35%">Описание</Table.Cell>
-                  <Table.Cell width="15%">Категория</Table.Cell>
-                  <Table.Cell width="25%">Действие</Table.Cell>
-                </Table.Row>
-                {net_catalog.map((app, idx) => (
-                  <Table.Row key={idx}>
-                    <Table.Cell>
-                      <Box bold fontSize="0.9em">
-                        {app.name}
-                      </Box>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Box fontSize="0.8em" color="label">
-                        {app.desc}
-                      </Box>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Box
-                        fontSize="0.75em"
-                        color={
-                          app.category === 'diagnostic'
-                            ? 'good'
-                            : app.category === 'utility'
-                              ? 'label'
-                              : 'average'
+              <ProgressBar
+                value={download_progress}
+                minValue={0}
+                maxValue={100}
+                ranges={{
+                  average: [-Infinity, 60],
+                  good: [60, 100],
+                }}
+              >
+                {download_progress}%
+              </ProgressBar>
+              <Box mt={0.3} textAlign="right">
+                <Button
+                  compact
+                  color="bad"
+                  icon="times"
+                  onClick={() => act('cancel_download')}
+                >
+                  Отмена
+                </Button>
+              </Box>
+            </Box>
+          )}
+
+          {/* App catalog */}
+          {!network_connected ? (
+            <Box textAlign="center" color="label" p={2}>
+              <Icon name="plug" size={2} mb={1} />
+              <Box bold>Каталог недоступен</Box>
+              <Box fontSize="0.85em" mt={0.5}>
+                Встаньте на сетевой кабель для подключения.
+              </Box>
+            </Box>
+          ) : (
+            <Table>
+              <Table.Row header>
+                <Table.Cell width="28%">Приложение</Table.Cell>
+                <Table.Cell width="32%">Описание</Table.Cell>
+                <Table.Cell width="12%">Тип</Table.Cell>
+                <Table.Cell width="10%">Размер</Table.Cell>
+                <Table.Cell width="18%">Действие</Table.Cell>
+              </Table.Row>
+              {catalog.map((app, idx) => (
+                <Table.Row key={idx}>
+                  <Table.Cell>
+                    <Box bold fontSize="0.85em">
+                      <Icon
+                        name={isBlack ? 'skull' : 'cube'}
+                        mr={0.3}
+                        color={isBlack ? 'bad' : 'label'}
+                      />
+                      {app.name}
+                    </Box>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Box fontSize="0.75em" color="label">
+                      {app.desc}
+                    </Box>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Box
+                      fontSize="0.7em"
+                      color={
+                        app.category === 'exploit'
+                          ? 'bad'
+                          : app.category === 'mod'
+                            ? 'average'
+                            : app.category === 'diagnostic'
+                              ? 'good'
+                              : 'label'
+                      }
+                    >
+                      {getCategoryLabel(app.category)}
+                    </Box>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Box fontSize="0.7em" color="label">
+                      {app.file_size || 256} КБ
+                    </Box>
+                  </Table.Cell>
+                  <Table.Cell>
+                    {safeBool(app.installed) ? (
+                      <Button
+                        compact
+                        color="bad"
+                        icon="trash"
+                        disabled={downloading}
+                        onClick={() =>
+                          act('uninstall_app', { app_name: app.name })
                         }
                       >
-                        {app.category === 'diagnostic'
-                          ? 'Диагностика'
-                          : app.category === 'utility'
-                            ? 'Утилита'
-                            : 'Прочее'}
-                      </Box>
-                    </Table.Cell>
-                    <Table.Cell>
-                      {app.installed ? (
-                        <Button
-                          compact
-                          color="bad"
-                          onClick={() =>
-                            act('uninstall_app', { app_name: app.name })
-                          }
-                        >
-                          Удалить
-                        </Button>
-                      ) : (
-                        <Button
-                          compact
-                          color="good"
-                          onClick={() =>
-                            act('install_app', { app_name: app.name })
-                          }
-                        >
-                          Установить
-                        </Button>
-                      )}
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table>
-            )}
-          </Section>
+                        Удалить
+                      </Button>
+                    ) : (
+                      <Button
+                        compact
+                        color={isBlack ? 'caution' : 'good'}
+                        icon="download"
+                        disabled={downloading}
+                        onClick={() =>
+                          act('download_app', {
+                            app_name: app.name,
+                            wall: net_wall,
+                          })
+                        }
+                      >
+                        Скачать
+                      </Button>
+                    )}
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table>
+          )}
 
-          {/* Installed */}
+          {/* Installed apps */}
           {installed_apps.length > 0 && (
-            <Section title="Установленные приложения">
+            <Section title="Установленные">
               <Stack vertical>
                 {installed_apps.map((app, idx) => (
                   <Stack.Item key={idx}>
-                    <Box
-                      p={0.5}
-                      style={{
-                        borderLeft: `3px solid ${theme_color}`,
-                        paddingLeft: '8px',
-                      }}
-                    >
-                      <Box bold fontSize="0.9em">
-                        {app.name}
-                      </Box>
-                      <Box fontSize="0.75em" color="label">
-                        {app.desc}
-                      </Box>
-                    </Box>
+                    <Flex align="center" justify="space-between">
+                      <Flex.Item>
+                        <Box fontSize="0.85em">
+                          <Icon
+                            name={
+                              safeBool(app.is_blackwall)
+                                ? 'skull-crossbones'
+                                : 'cube'
+                            }
+                            mr={0.3}
+                            color={
+                              safeBool(app.is_blackwall) ? 'bad' : 'label'
+                            }
+                          />
+                          <Box as="span" bold>
+                            {app.name}
+                          </Box>
+                          <Box as="span" color="label" ml={0.5}>
+                            — {app.desc}
+                          </Box>
+                        </Box>
+                      </Flex.Item>
+                      <Flex.Item>
+                        <Button
+                          compact
+                          color="bad"
+                          icon="trash"
+                          disabled={downloading}
+                          onClick={() =>
+                            act('uninstall_app', { app_name: app.name })
+                          }
+                        />
+                      </Flex.Item>
+                    </Flex>
                   </Stack.Item>
                 ))}
               </Stack>
             </Section>
           )}
-
         </Box>
       </Flex.Item>
     </Flex>
