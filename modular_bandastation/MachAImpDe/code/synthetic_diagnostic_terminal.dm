@@ -10,6 +10,18 @@
 	icon_keyboard = "tech_key"
 	light_color = COLOR_BLUE_LIGHT
 
+/// Переопределяем поиск стола — приоритет synthetic diagnostic table
+/obj/machinery/computer/operating/synthetic/find_table()
+	// Сначала ищем специализированный стол
+	for(var/direction in GLOB.alldirs)
+		var/obj/structure/table/optable/synthetic/synth_table = locate(/obj/structure/table/optable/synthetic) in get_step(src, direction)
+		if(synth_table)
+			table = synth_table
+			synth_table.computer = src
+			return
+	// Если не нашли — ищем обычный operating table
+	..()
+
 /obj/machinery/computer/operating/synthetic/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -43,6 +55,17 @@
 		return data
 
 	data["has_table"] = TRUE
+
+	// Информация о столе
+	var/is_synthetic_table = istype(table, /obj/structure/table/optable/synthetic)
+	data["is_synthetic_table"] = is_synthetic_table
+	if(is_synthetic_table)
+		var/obj/structure/table/optable/synthetic/synth_table = table
+		data["table_charging"] = TRUE
+		data["table_cooling"] = TRUE
+		data["table_network"] = TRUE
+		data["table_charge_rate"] = synth_table.charge_rate
+		data["table_cooling_rate"] = synth_table.cooling_rate
 
 	// Поиск пациента
 	if(!table.patient)
@@ -145,9 +168,49 @@
 	// Системные сообщения
 	patient_data["system_messages"] = get_system_messages(patient)
 
-	// Информация об ОС
-	patient_data["os_version"] = "IPC-OS v2.4.1"
-	patient_data["os_manufacturer"] = "Generic Systems"
+	// Информация об ОС (реальные данные из IPC OS)
+	if(istype(ipc_species) && ipc_species.ipc_os)
+		var/datum/ipc_operating_system/os = ipc_species.ipc_os
+		patient_data["os_version"] = "[os.os_name] v[os.os_version]"
+		patient_data["os_manufacturer"] = os.os_name
+		patient_data["os_theme_color"] = os.theme_color
+		patient_data["os_brand_key"] = os.brand_key
+
+		// Вирусы
+		var/list/virus_list = list()
+		for(var/datum/ipc_virus/v in os.viruses)
+			virus_list += list(list(
+				"name" = v.name,
+				"desc" = v.desc,
+				"severity" = v.severity,
+				"removable" = v.removable_by_antivirus,
+				"index" = os.viruses.Find(v),
+			))
+		patient_data["os_viruses"] = virus_list
+		patient_data["os_virus_count"] = os.viruses.len
+
+		// Установленные приложения
+		var/list/apps = list()
+		for(var/datum/ipc_netapp/app in os.installed_apps)
+			apps += list(list(
+				"name" = app.name,
+				"desc" = app.desc,
+				"category" = app.category,
+			))
+		patient_data["os_installed_apps"] = apps
+
+		// Статус ОС
+		patient_data["os_logged_in"] = os.logged_in
+		patient_data["os_has_password"] = (os.password != "")
+		patient_data["os_remote_active"] = (os.remote_viewer != null)
+		patient_data["os_remote_viewer_name"] = os.remote_viewer ? os.remote_viewer.name : ""
+		patient_data["os_access_pending"] = os.pending_access_request
+	else
+		patient_data["os_version"] = "IPC-OS v2.4.1"
+		patient_data["os_manufacturer"] = "Generic Systems"
+		patient_data["os_viruses"] = list()
+		patient_data["os_virus_count"] = 0
+		patient_data["os_installed_apps"] = list()
 
 	return patient_data
 
@@ -662,6 +725,95 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 		if("change_zone")
 			if(params["new_zone"] in list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
 				target_zone = params["new_zone"]
+			return TRUE
+
+		if("remove_virus")
+			// Роботехник удаляет вирус через терминал
+			if(!table?.patient)
+				return FALSE
+			var/mob/living/carbon/human/patient = table.patient
+			if(!istype(patient.dna?.species, /datum/species/ipc))
+				return FALSE
+			var/datum/species/ipc/ipc_species = patient.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			var/virus_index = text2num(params["virus_index"])
+			if(!virus_index || virus_index < 1 || virus_index > ipc_species.ipc_os.viruses.len)
+				return FALSE
+			var/datum/ipc_virus/target_virus = ipc_species.ipc_os.viruses[virus_index]
+			if(ipc_species.ipc_os.remove_virus_by_roboticist(target_virus))
+				to_chat(usr, span_notice("Вирус успешно удалён из системы пациента."))
+				to_chat(patient, span_notice("ОС: Обнаружено внешнее вмешательство. Вирус удалён роботехником."))
+			return TRUE
+
+		if("request_os_access")
+			// Роботехник запрашивает доступ к ОС пациента
+			if(!table?.patient)
+				return FALSE
+			var/mob/living/carbon/human/patient = table.patient
+			if(!istype(patient.dna?.species, /datum/species/ipc))
+				return FALSE
+			var/datum/species/ipc/ipc_species = patient.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			ipc_species.ipc_os.request_remote_access(usr)
+			return TRUE
+
+		if("login_os_password")
+			// Роботехник входит в ОС по паролю
+			if(!table?.patient)
+				return FALSE
+			var/mob/living/carbon/human/patient = table.patient
+			if(!istype(patient.dna?.species, /datum/species/ipc))
+				return FALSE
+			var/datum/species/ipc/ipc_species = patient.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			var/input_password = params["password"]
+			if(!input_password)
+				return FALSE
+			ipc_species.ipc_os.remote_login(usr, input_password)
+			return TRUE
+
+		if("disconnect_os_remote")
+			// Роботехник отключает удалённый доступ
+			if(!table?.patient)
+				return FALSE
+			var/mob/living/carbon/human/patient = table.patient
+			if(!istype(patient.dna?.species, /datum/species/ipc))
+				return FALSE
+			var/datum/species/ipc/ipc_species = patient.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			ipc_species.ipc_os.revoke_remote_access()
+			return TRUE
+
+		if("inject_test_virus")
+			// DEBUG: Внедрение тестового вируса (для тестирования)
+			if(!table?.patient)
+				return FALSE
+			var/mob/living/carbon/human/patient = table.patient
+			if(!istype(patient.dna?.species, /datum/species/ipc))
+				return FALSE
+			var/datum/species/ipc/ipc_species = patient.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			var/virus_type = params["virus_type"]
+			var/datum/ipc_virus/new_virus
+			switch(virus_type)
+				if("display_glitch")
+					new_virus = new /datum/ipc_virus/display_glitch()
+				if("memory_leak")
+					new_virus = new /datum/ipc_virus/memory_leak()
+				if("sensor_noise")
+					new_virus = new /datum/ipc_virus/sensor_noise()
+				if("core_corruption")
+					new_virus = new /datum/ipc_virus/core_corruption()
+				if("neural_hijack")
+					new_virus = new /datum/ipc_virus/neural_hijack()
+			if(new_virus)
+				ipc_species.ipc_os.infect(new_virus)
+				to_chat(usr, span_notice("Тестовый вирус внедрён."))
 			return TRUE
 
 // ============================================
