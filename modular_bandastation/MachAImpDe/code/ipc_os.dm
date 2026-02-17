@@ -282,6 +282,14 @@
 	/// ID таймера загрузки
 	var/download_timer_id = null
 
+	// --- Удалённый доступ (роботехник через терминал) ---
+	/// Моб с удалённым доступом к ОС
+	var/mob/remote_viewer = null
+	/// Ожидается ли запрос на доступ
+	var/pending_access_request = FALSE
+	/// Кто запрашивает доступ
+	var/mob/requesting_user = null
+
 /datum/ipc_operating_system/New(mob/living/carbon/human/new_owner, new_brand_key)
 	. = ..()
 	owner = new_owner
@@ -309,7 +317,11 @@
 	)
 
 /datum/ipc_operating_system/Destroy()
+	if(remote_viewer)
+		to_chat(remote_viewer, span_warning("Удалённый доступ к ОС отключён: система уничтожена."))
 	owner = null
+	remote_viewer = null
+	requesting_user = null
 	QDEL_LIST(viruses)
 	QDEL_LIST(net_catalog)
 	QDEL_LIST(black_wall_catalog)
@@ -735,6 +747,119 @@
 	return TRUE
 
 // ============================================
+// УДАЛЁННЫЙ ДОСТУП (РОБОТЕХНИК)
+// ============================================
+
+/// Запрос удалённого доступа к ОС (метод запроса)
+/datum/ipc_operating_system/proc/request_remote_access(mob/requester)
+	if(!owner || !requester)
+		return FALSE
+	if(pending_access_request)
+		to_chat(requester, span_warning("Запрос доступа уже отправлен. Ожидайте ответа."))
+		return FALSE
+	if(remote_viewer)
+		to_chat(requester, span_warning("Удалённый доступ уже активен."))
+		return FALSE
+
+	pending_access_request = TRUE
+	requesting_user = requester
+
+	// Уведомляем IPC
+	to_chat(owner, span_notice("СИСТЕМА: Получен запрос на удалённый доступ к ОС от [requester.name]. Проверьте вашу ОС."))
+
+	// Открываем ОС у IPC если не открыта
+	ui_interact(owner)
+
+	SStgui.update_uis(src)
+	return TRUE
+
+/// Одобрить запрос доступа
+/datum/ipc_operating_system/proc/approve_access()
+	if(!pending_access_request || !requesting_user)
+		return FALSE
+
+	var/mob/requester = requesting_user
+	pending_access_request = FALSE
+	requesting_user = null
+	remote_viewer = requester
+
+	// Авто-логин если ещё не залогинены
+	if(!logged_in)
+		logged_in = TRUE
+
+	to_chat(owner, span_notice("ОС: Удалённый доступ предоставлен [requester.name]."))
+	to_chat(requester, span_notice("Удалённый доступ к ОС пациента одобрен."))
+
+	// Открываем ОС для роботехника
+	ui_interact(requester)
+
+	SStgui.update_uis(src)
+	return TRUE
+
+/// Отклонить запрос доступа
+/datum/ipc_operating_system/proc/deny_access()
+	if(!pending_access_request)
+		return FALSE
+
+	if(requesting_user)
+		to_chat(requesting_user, span_warning("Запрос на доступ к ОС отклонён пациентом."))
+
+	pending_access_request = FALSE
+	requesting_user = null
+
+	SStgui.update_uis(src)
+	return TRUE
+
+/// Войти удалённо по паролю (метод пароля)
+/datum/ipc_operating_system/proc/remote_login(mob/requester, input_password)
+	if(!requester)
+		return FALSE
+	if(remote_viewer)
+		to_chat(requester, span_warning("Удалённый доступ уже активен."))
+		return FALSE
+
+	if(!check_password(input_password))
+		to_chat(requester, span_warning("Неверный пароль ОС."))
+		return FALSE
+
+	remote_viewer = requester
+
+	// Авто-логин
+	if(!logged_in)
+		logged_in = TRUE
+
+	to_chat(owner, span_warning("ОС: Обнаружен удалённый вход в систему по паролю от [requester.name]!"))
+	to_chat(requester, span_notice("Доступ к ОС пациента получен по паролю."))
+
+	// Открываем ОС для роботехника
+	ui_interact(requester)
+	// Также открываем для IPC
+	if(owner)
+		ui_interact(owner)
+
+	SStgui.update_uis(src)
+	return TRUE
+
+/// Отключить удалённый доступ
+/datum/ipc_operating_system/proc/revoke_remote_access()
+	if(!remote_viewer)
+		return FALSE
+
+	to_chat(remote_viewer, span_warning("Удалённый доступ к ОС отключён."))
+	var/mob/old_viewer = remote_viewer
+	remote_viewer = null
+
+	// Закрываем UI только у бывшего зрителя (не у владельца)
+	if(LAZYLEN(open_uis))
+		for(var/datum/tgui/ui in open_uis)
+			if(ui.user == old_viewer)
+				ui.close()
+				break
+
+	SStgui.update_uis(src)
+	return TRUE
+
+// ============================================
 // TGUI DATA
 // ============================================
 
@@ -833,6 +958,13 @@
 		))
 	data["installed_apps"] = installed
 
+	// Удалённый доступ
+	data["pending_access_request"] = pending_access_request
+	data["requesting_user_name"] = requesting_user ? requesting_user.name : ""
+	data["has_remote_viewer"] = (remote_viewer != null)
+	data["remote_viewer_name"] = remote_viewer ? remote_viewer.name : ""
+	data["is_remote_user"] = (user != owner)
+
 	return data
 
 /datum/ipc_operating_system/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -899,6 +1031,18 @@
 				if(app.name == app_name)
 					uninstall_net_app(app)
 					break
+			return TRUE
+
+		if("approve_access")
+			approve_access()
+			return TRUE
+
+		if("deny_access")
+			deny_access()
+			return TRUE
+
+		if("revoke_remote")
+			revoke_remote_access()
 			return TRUE
 
 // ============================================

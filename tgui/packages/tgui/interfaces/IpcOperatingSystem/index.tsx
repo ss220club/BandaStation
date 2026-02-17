@@ -80,6 +80,12 @@ type IpcOsData = {
   net_catalog: NetApp[];
   black_wall_catalog: NetApp[];
   installed_apps: InstalledApp[];
+  // Remote access
+  pending_access_request: boolean;
+  requesting_user_name: string;
+  has_remote_viewer: boolean;
+  remote_viewer_name: string;
+  is_remote_user: boolean;
 };
 
 // ============================================
@@ -316,6 +322,11 @@ const DesktopScreen = () => {
   const virus_count = safeNum(data.virus_count, 0);
   const has_serious_viruses = safeBool(data.has_serious_viruses);
   const installed_apps = safeArray(data.installed_apps);
+  const pending_request = safeBool(data.pending_access_request);
+  const requesting_name = safeStr(data.requesting_user_name, '');
+  const has_remote = safeBool(data.has_remote_viewer);
+  const remote_name = safeStr(data.remote_viewer_name, '');
+  const is_remote = safeBool(data.is_remote_user);
 
   return (
     <Flex direction="column" height="100%">
@@ -334,10 +345,39 @@ const DesktopScreen = () => {
               <Box bold color={theme_color} fontSize="0.8em">
                 <Icon name="desktop" mr={0.5} />
                 {os_name} v{os_version}
+                {is_remote && (
+                  <Box
+                    as="span"
+                    ml={1}
+                    color="average"
+                    fontSize="0.85em"
+                  >
+                    [УДАЛЁННЫЙ ДОСТУП]
+                  </Box>
+                )}
               </Box>
             </Flex.Item>
             <Flex.Item>
               <Flex align="center">
+                {has_remote && !is_remote && (
+                  <Flex.Item mr={1}>
+                    <Box fontSize="0.7em" color="average">
+                      <Icon name="eye" mr={0.3} />
+                      {remote_name}
+                    </Box>
+                  </Flex.Item>
+                )}
+                {has_remote && !is_remote && (
+                  <Flex.Item mr={1}>
+                    <Button
+                      icon="unlink"
+                      color="caution"
+                      compact
+                      tooltip="Отключить удалённый доступ"
+                      onClick={() => act('revoke_remote')}
+                    />
+                  </Flex.Item>
+                )}
                 {virus_count > 0 && (
                   <Flex.Item mr={1}>
                     <Box
@@ -350,20 +390,66 @@ const DesktopScreen = () => {
                     </Box>
                   </Flex.Item>
                 )}
-                <Flex.Item>
-                  <Button
-                    icon="power-off"
-                    color="bad"
-                    compact
-                    onClick={() => act('logout')}
-                    tooltip="Выйти"
-                  />
-                </Flex.Item>
+                {!is_remote && (
+                  <Flex.Item>
+                    <Button
+                      icon="power-off"
+                      color="bad"
+                      compact
+                      onClick={() => act('logout')}
+                      tooltip="Выйти"
+                    />
+                  </Flex.Item>
+                )}
               </Flex>
             </Flex.Item>
           </Flex>
         </Box>
       </Flex.Item>
+
+      {/* Access request notification */}
+      {pending_request && !is_remote && (
+        <Flex.Item>
+          <Box
+            p={0.5}
+            style={{
+              background: 'rgba(200, 150, 0, 0.15)',
+              borderBottom: '1px solid rgba(200, 150, 0, 0.3)',
+            }}
+          >
+            <Flex justify="space-between" align="center">
+              <Flex.Item grow>
+                <Box fontSize="0.85em" color="average" bold>
+                  <Icon name="bell" mr={0.5} />
+                  Запрос доступа от:{' '}
+                  <Box as="span" color="white">
+                    {requesting_name}
+                  </Box>
+                </Box>
+              </Flex.Item>
+              <Flex.Item>
+                <Button
+                  compact
+                  color="good"
+                  icon="check"
+                  mr={0.5}
+                  onClick={() => act('approve_access')}
+                >
+                  Разрешить
+                </Button>
+                <Button
+                  compact
+                  color="bad"
+                  icon="times"
+                  onClick={() => act('deny_access')}
+                >
+                  Отклонить
+                </Button>
+              </Flex.Item>
+            </Flex>
+          </Box>
+        </Flex.Item>
+      )}
 
       {/* Desktop icons area */}
       <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
@@ -454,6 +540,15 @@ const DesktopScreen = () => {
                 {' | '}
                 <Icon name="cube" mr={0.3} />
                 {installed_apps.length} прил.
+                {has_remote && (
+                  <>
+                    {' | '}
+                    <Box as="span" color="average">
+                      <Icon name="eye" mr={0.3} />
+                      Удалённый доступ
+                    </Box>
+                  </>
+                )}
               </Box>
             </Flex.Item>
           </Flex>

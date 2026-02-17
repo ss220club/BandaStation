@@ -1,10 +1,12 @@
 import '../../styles/interfaces/SyntheticDiagnostic.scss';
 
+import React from 'react';
 import {
   AnimatedNumber,
   Box,
   Button,
   Icon,
+  Input,
   LabeledList,
   NoticeBox,
   ProgressBar,
@@ -113,6 +115,9 @@ type PatientData = {
   os_installed_apps?: OsApp[];
   os_logged_in?: boolean;
   os_has_password?: boolean;
+  os_remote_active?: boolean;
+  os_remote_viewer_name?: string;
+  os_access_pending?: boolean;
 };
 
 type SyntheticDiagnosticData = {
@@ -931,6 +936,11 @@ const OsTab = () => {
         </Section>
       </Stack.Item>
 
+      {/* Remote OS Access */}
+      <Stack.Item>
+        <RemoteAccessSection />
+      </Stack.Item>
+
       {/* System logs */}
       <Stack.Item>
         <Section title="Логи">
@@ -1002,5 +1012,194 @@ const OsTab = () => {
         </Box>
       </Stack.Item>
     </Stack>
+  );
+};
+
+// ============================================
+// REMOTE ACCESS SECTION (in OS tab)
+// ============================================
+
+const RemoteAccessSection = () => {
+  const { act, data } = useBackend<SyntheticDiagnosticData>();
+  const patient = data.patient!;
+  const [osPassword, setOsPassword] = React.useState('');
+
+  const remoteActive = !!patient.os_remote_active;
+  const accessPending = !!patient.os_access_pending;
+
+  return (
+    <Section
+      title="Удалённый доступ к ОС"
+      buttons={
+        <Box
+          color={remoteActive ? 'good' : accessPending ? 'average' : 'label'}
+          fontSize="0.8em"
+        >
+          {remoteActive ? (
+            <>
+              <Icon name="link" mr={0.5} />
+              Подключено
+            </>
+          ) : accessPending ? (
+            <>
+              <Icon name="clock" mr={0.5} />
+              Ожидание
+            </>
+          ) : (
+            <>
+              <Icon name="unlink" mr={0.5} />
+              Не подключено
+            </>
+          )}
+        </Box>
+      }
+    >
+      {/* Active connection */}
+      {remoteActive && (
+        <Box mb={1}>
+          <Box
+            p={0.5}
+            style={{
+              border: '1px solid rgba(50, 200, 50, 0.3)',
+              borderRadius: '3px',
+              background: 'rgba(0, 200, 0, 0.08)',
+            }}
+          >
+            <Stack justify="space-between" align="center">
+              <Stack.Item>
+                <Box fontSize="0.85em" color="good">
+                  <Icon name="desktop" mr={0.5} />
+                  Удалённый доступ активен:{' '}
+                  <Box as="span" bold>
+                    {patient.os_remote_viewer_name}
+                  </Box>
+                </Box>
+              </Stack.Item>
+              <Stack.Item>
+                <Button
+                  compact
+                  color="bad"
+                  icon="times"
+                  onClick={() => act('disconnect_os_remote')}
+                >
+                  Отключить
+                </Button>
+              </Stack.Item>
+            </Stack>
+          </Box>
+        </Box>
+      )}
+
+      {/* Pending request */}
+      {!remoteActive && accessPending && (
+        <Box
+          p={0.5}
+          mb={1}
+          style={{
+            border: '1px solid rgba(200, 150, 0, 0.3)',
+            borderRadius: '3px',
+            background: 'rgba(200, 150, 0, 0.08)',
+          }}
+        >
+          <Box fontSize="0.85em" color="average" textAlign="center">
+            <Icon name="hourglass-half" mr={0.5} />
+            Запрос отправлен. Ожидание подтверждения от пациента...
+          </Box>
+        </Box>
+      )}
+
+      {/* Access methods */}
+      {!remoteActive && !accessPending && (
+        <Stack vertical>
+          {/* Method 1: Request */}
+          <Stack.Item>
+            <Box
+              p={0.5}
+              mb={0.5}
+              style={{
+                borderLeft: '2px solid rgba(40, 80, 200, 0.5)',
+                background: 'rgba(40, 80, 200, 0.05)',
+              }}
+            >
+              <Box bold fontSize="0.85em" mb={0.3}>
+                <Icon name="paper-plane" mr={0.5} />
+                Запрос доступа
+              </Box>
+              <Box fontSize="0.75em" color="label" mb={0.5}>
+                Отправить запрос пациенту. Требуется подтверждение.
+              </Box>
+              <Button
+                compact
+                color="good"
+                icon="paper-plane"
+                onClick={() => act('request_os_access')}
+              >
+                Отправить запрос
+              </Button>
+            </Box>
+          </Stack.Item>
+
+          {/* Method 2: Password */}
+          {!!patient.os_has_password && (
+            <Stack.Item>
+              <Box
+                p={0.5}
+                style={{
+                  borderLeft: '2px solid rgba(200, 80, 40, 0.5)',
+                  background: 'rgba(200, 80, 40, 0.05)',
+                }}
+              >
+                <Box bold fontSize="0.85em" mb={0.3}>
+                  <Icon name="key" mr={0.5} />
+                  Вход по паролю
+                </Box>
+                <Box fontSize="0.75em" color="label" mb={0.5}>
+                  Ввести пароль ОС пациента. Пациент получит уведомление.
+                </Box>
+                <Stack align="center">
+                  <Stack.Item grow>
+                    <Input
+                      fluid
+                      placeholder="Пароль ОС..."
+                      value={osPassword}
+                      onChange={(val: string) => setOsPassword(val)}
+                      onEnter={() => {
+                        if (osPassword) {
+                          act('login_os_password', { password: osPassword });
+                          setOsPassword('');
+                        }
+                      }}
+                    />
+                  </Stack.Item>
+                  <Stack.Item ml={0.5}>
+                    <Button
+                      compact
+                      color="caution"
+                      icon="sign-in-alt"
+                      disabled={!osPassword}
+                      onClick={() => {
+                        act('login_os_password', { password: osPassword });
+                        setOsPassword('');
+                      }}
+                    >
+                      Войти
+                    </Button>
+                  </Stack.Item>
+                </Stack>
+              </Box>
+            </Stack.Item>
+          )}
+
+          {!patient.os_has_password && (
+            <Stack.Item>
+              <Box fontSize="0.8em" color="label" p={0.5}>
+                <Icon name="info-circle" mr={0.5} />
+                Пароль ОС не установлен — вход по паролю недоступен.
+              </Box>
+            </Stack.Item>
+          )}
+        </Stack>
+      )}
+    </Section>
   );
 };

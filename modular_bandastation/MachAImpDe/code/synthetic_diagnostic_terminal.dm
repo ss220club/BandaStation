@@ -202,6 +202,9 @@
 		// Статус ОС
 		patient_data["os_logged_in"] = os.logged_in
 		patient_data["os_has_password"] = (os.password != "")
+		patient_data["os_remote_active"] = (os.remote_viewer != null)
+		patient_data["os_remote_viewer_name"] = os.remote_viewer ? os.remote_viewer.name : ""
+		patient_data["os_access_pending"] = os.pending_access_request
 	else
 		patient_data["os_version"] = "IPC-OS v2.4.1"
 		patient_data["os_manufacturer"] = "Generic Systems"
@@ -741,6 +744,48 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			if(ipc_species.ipc_os.remove_virus_by_roboticist(target_virus))
 				to_chat(usr, span_notice("Вирус успешно удалён из системы пациента."))
 				to_chat(patient, span_notice("ОС: Обнаружено внешнее вмешательство. Вирус удалён роботехником."))
+			return TRUE
+
+		if("request_os_access")
+			// Роботехник запрашивает доступ к ОС пациента
+			if(!table?.patient)
+				return FALSE
+			var/mob/living/carbon/human/patient = table.patient
+			if(!istype(patient.dna?.species, /datum/species/ipc))
+				return FALSE
+			var/datum/species/ipc/ipc_species = patient.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			ipc_species.ipc_os.request_remote_access(usr)
+			return TRUE
+
+		if("login_os_password")
+			// Роботехник входит в ОС по паролю
+			if(!table?.patient)
+				return FALSE
+			var/mob/living/carbon/human/patient = table.patient
+			if(!istype(patient.dna?.species, /datum/species/ipc))
+				return FALSE
+			var/datum/species/ipc/ipc_species = patient.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			var/input_password = params["password"]
+			if(!input_password)
+				return FALSE
+			ipc_species.ipc_os.remote_login(usr, input_password)
+			return TRUE
+
+		if("disconnect_os_remote")
+			// Роботехник отключает удалённый доступ
+			if(!table?.patient)
+				return FALSE
+			var/mob/living/carbon/human/patient = table.patient
+			if(!istype(patient.dna?.species, /datum/species/ipc))
+				return FALSE
+			var/datum/species/ipc/ipc_species = patient.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			ipc_species.ipc_os.revoke_remote_access()
 			return TRUE
 
 		if("inject_test_virus")
