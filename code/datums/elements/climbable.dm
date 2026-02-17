@@ -33,8 +33,12 @@
 ///Someone inspected our embeddable item
 /datum/element/climbable/proc/get_examine_tags(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
-
-	examine_list["пригодная для залезания"] = "Похоже на то, на что можно взобраться."
+	/// BANDASTATION EDIT START — перевод тегов
+	var/is_female = (source.examine_descriptor() in list("структура", "машина"))
+	var/he_she_it = is_female ? "Она" : "Он"
+	var/their_low = is_female ? "её" : "его"
+	examine_list[is_female ? "удобная для взбирания" : "удобный для взбирания"] = "[he_she_it] выглядит как будто на [their_low] можно забраться."
+	// BANDASTATION EDIT END
 
 /datum/element/climbable/proc/can_climb(atom/source, mob/user)
 	if (!source.IsReachableBy(user))
