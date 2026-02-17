@@ -189,10 +189,10 @@
 /datum/ipc_netapp/power_optimizer/execute_effect(mob/living/carbon/human/user)
 	if(!user)
 		return FALSE
-	var/obj/item/organ/internal/cell/cell = user.get_organ_slot(ORGAN_SLOT_CELL)
-	if(cell?.cell)
-		var/charge_pct = round((cell.cell.charge / cell.cell.maxcharge) * 100, 0.1)
-		last_message = "Заряд: [charge_pct]% ([cell.cell.charge]/[cell.cell.maxcharge])"
+	var/obj/item/organ/heart/ipc_battery/battery = user.get_organ_slot(ORGAN_SLOT_HEART)
+	if(battery && istype(battery))
+		var/charge_pct = round((battery.charge / battery.maxcharge) * 100, 0.1)
+		last_message = "Заряд: [charge_pct]% ([battery.charge]/[battery.maxcharge])"
 	else
 		last_message = "Батарея не обнаружена!"
 	to_chat(user, span_notice("ОС [name]: [last_message]"))
@@ -383,10 +383,10 @@
 		return FALSE
 	var/list/info = list()
 	info += "Здоровье: [round(user.health, 0.1)]/[user.maxHealth]"
-	info += "Урон (brute): [round(user.getBruteLoss(), 0.1)]"
-	info += "Урон (burn): [round(user.getFireLoss(), 0.1)]"
-	info += "Урон (toxin): [round(user.getToxLoss(), 0.1)]"
-	info += "Урон (oxygen): [round(user.getOxyLoss(), 0.1)]"
+	info += "Урон (brute): [round(user.get_brute_loss(), 0.1)]"
+	info += "Урон (burn): [round(user.get_fire_loss(), 0.1)]"
+	info += "Урон (toxin): [round(user.get_tox_loss(), 0.1)]"
+	info += "Урон (oxygen): [round(user.get_oxy_loss(), 0.1)]"
 	last_message = "Здоровье: [round(user.health, 0.1)]/[user.maxHealth]"
 	to_chat(user, span_notice("ОС Health Monitor:\n[info.Join("\n")]"))
 	return TRUE
@@ -406,11 +406,13 @@
 
 /datum/ipc_netapp/blackwall/overclock
 	name = "OverClock.exe"
-	desc = "Разгон процессора. Временно увеличивает скорость передвижения, но вызывает перегрев."
+	desc = "Усиление разгона процессора. Увеличивает бонус существующей абилки разгона с 40% до 70% и добавляет ускорение передвижения. Повышенный нагрев!"
 	category = "mod"
 	file_size = 450
 	has_effect = TRUE
 	toggleable = TRUE
+	/// Оригинальное значение бонуса разгона (для восстановления при деактивации)
+	var/original_speed_bonus = 0
 
 /datum/ipc_netapp/blackwall/overclock/execute_effect(mob/living/carbon/human/user)
 	if(!user)
@@ -418,29 +420,44 @@
 	if(active)
 		deactivate_effect(user)
 		return TRUE
+
+	var/datum/species/ipc/ipc_species = user.dna?.species
+	if(!istype(ipc_species))
+		last_message = "ОШИБКА: Несовместимая архитектура."
+		return FALSE
+
 	active = TRUE
-	last_message = "РАЗГОН АКТИВИРОВАН. Скорость +20%. Осторожно: перегрев!"
-	to_chat(user, span_boldwarning("ОС [name]: РАЗГОН АКТИВИРОВАН!"))
-	user.add_movespeed_modifier(/datum/movespeed_modifier/ipc_overclock)
-	// Перегрев через 30 секунд
-	addtimer(CALLBACK(src, PROC_REF(overclock_heat), user), 30 SECONDS)
+	// Сохраняем оригинальный бонус и усиливаем
+	original_speed_bonus = ipc_species.overclock_speed_bonus
+	ipc_species.overclock_speed_bonus = 0.7  // 70% вместо стандартных 40%
+	// Добавляем бонус к скорости передвижения
+	user.add_movespeed_modifier(/datum/movespeed_modifier/ipc_overclock_enhanced)
+
+	last_message = "УСИЛЕННЫЙ РАЗГОН АКТИВИРОВАН. Бонус: 70% + ускорение движения."
+	to_chat(user, span_boldwarning("ОС [name]: УСИЛЕННЫЙ РАЗГОН АКТИВИРОВАН! Бонус разгона увеличен до 70%."))
+
+	// Если разгон уже был активен — обновляем скорость действий
+	if(ipc_species.overclock_active)
+		ipc_species.update_action_speed(user)
+
 	return TRUE
 
 /datum/ipc_netapp/blackwall/overclock/deactivate_effect(mob/living/carbon/human/user)
 	. = ..()
-	if(user)
-		user.remove_movespeed_modifier(/datum/movespeed_modifier/ipc_overclock)
-		last_message = "Разгон деактивирован."
-		to_chat(user, span_notice("ОС [name]: Разгон деактивирован."))
-
-/datum/ipc_netapp/blackwall/overclock/proc/overclock_heat(mob/living/carbon/human/user)
-	if(!active || !user || user.stat == DEAD)
+	if(!user)
 		return
-	user.adjust_fire_stacks(1)
-	user.adjustFireLoss(5)
-	to_chat(user, span_warning("ОС [name]: ПЕРЕГРЕВ! Температура критическая!"))
-	if(active)
-		addtimer(CALLBACK(src, PROC_REF(overclock_heat), user), 30 SECONDS)
+
+	var/datum/species/ipc/ipc_species = user.dna?.species
+	if(istype(ipc_species))
+		// Восстанавливаем оригинальный бонус
+		ipc_species.overclock_speed_bonus = original_speed_bonus || 0.4
+		// Обновляем скорость действий если разгон активен
+		if(ipc_species.overclock_active)
+			ipc_species.update_action_speed(user)
+
+	user.remove_movespeed_modifier(/datum/movespeed_modifier/ipc_overclock_enhanced)
+	last_message = "Усиленный разгон деактивирован. Бонус возвращён к стандартному."
+	to_chat(user, span_notice("ОС [name]: Усиленный разгон деактивирован."))
 
 /datum/ipc_netapp/blackwall/wall_breaker
 	name = "WallBreaker"
@@ -466,8 +483,8 @@
 	category = "exploit"
 	file_size = 890
 
-// Модификатор скорости для OverClock
-/datum/movespeed_modifier/ipc_overclock
+// Модификатор скорости для усиленного разгона (OverClock.exe)
+/datum/movespeed_modifier/ipc_overclock_enhanced
 	multiplicative_slowdown = -0.3
 
 // ============================================
