@@ -25,7 +25,6 @@
 		/datum/objective_item/steal/traitor/big_crowbar,
 	)
 
-/*/ NO MORE BLACKBOX, BECAUSE ITS RUINS MAIN OBJECTIVE
 /datum/traitor_objective/destroy_item/very_risky
 	progression_minimum = 40 MINUTES
 	progression_reward = 15 MINUTES
@@ -33,7 +32,6 @@
 	possible_items = list(
 		/datum/objective_item/steal/blackbox,
 	)
-*///
 
 /// Super early-game destroy objective intended to be items easily tided that the crew tends to value.
 /datum/traitor_objective/destroy_item/demoralise
@@ -51,6 +49,7 @@
 		/datum/objective_item/steal/traitor/telebaton,
 		/datum/objective_item/steal/traitor/cargo_budget,
 		/datum/objective_item/steal/traitor/insuls,
+		/datum/objective_item/steal/traitor/moth_plush,
 		/datum/objective_item/steal/spy/stamp,
 		/datum/objective_item/steal/traitor/denied_stamp,
 		/datum/objective_item/steal/traitor/granted_stamp,
