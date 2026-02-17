@@ -97,6 +97,8 @@
 
 	// Операционная система IPC
 	var/datum/ipc_operating_system/ipc_os
+	// Пароль ОС из настроек персонажа (применяется при инициализации ОС)
+	var/ipc_preset_os_password = ""
 
 	// HEF: поштучный выбор бренда для каждой части тела.
 	// Каждое значение — ключ бренда (morpheus, etamin, ..., unbranded).
@@ -166,6 +168,10 @@
 	// Инициализируем операционную систему IPC
 	if(!ipc_os)
 		ipc_os = new /datum/ipc_operating_system(H, ipc_brand_key)
+	// Применяем пароль из настроек персонажа (если задан)
+	if(ipc_preset_os_password && length(ipc_preset_os_password) >= 1)
+		ipc_os.set_password(ipc_preset_os_password)
+		ipc_os.logged_in = TRUE
 	var/datum/action/innate/ipc_open_os/os_action = new()
 	os_action.os_system = ipc_os
 	os_action.Grant(H)

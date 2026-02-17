@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Box,
   Button,
@@ -54,6 +54,11 @@ type InstalledApp = {
   is_blackwall: boolean;
 };
 
+type IconPosition = {
+  x: number;
+  y: number;
+};
+
 type IpcOsData = {
   os_name: string;
   os_version: string;
@@ -80,12 +85,17 @@ type IpcOsData = {
   net_catalog: NetApp[];
   black_wall_catalog: NetApp[];
   installed_apps: InstalledApp[];
+  icon_positions: Record<string, IconPosition>;
+  current_installed_app_name: string;
   // Remote access
   pending_access_request: boolean;
   requesting_user_name: string;
   has_remote_viewer: boolean;
   remote_viewer_name: string;
   is_remote_user: boolean;
+  remote_access_mode: string;
+  pending_action_approval: boolean;
+  pending_action_desc: string;
 };
 
 // ============================================
@@ -134,7 +144,8 @@ export const IpcOperatingSystem = () => {
             {current_app === 'desktop' && <DesktopScreen />}
             {current_app === 'diagnostics' && <DiagnosticsApp />}
             {current_app === 'antivirus' && <AntivirusApp />}
-            {current_app === 'net' && <NetApp />}
+            {current_app === 'net' && <NetAppScreen />}
+            {current_app === 'installed_app' && <InstalledAppScreen />}
           </>
         )}
       </Window.Content>
@@ -199,8 +210,8 @@ const LoginScreen = () => {
   const theme_color = safeStr(data.theme_color, '#6a6a6a');
   const has_password = safeBool(data.has_password);
 
-  const [password, setPassword] = React.useState('');
-  const [error, setError] = React.useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = () => {
     if (!has_password) {
@@ -292,6 +303,171 @@ const LoginScreen = () => {
 };
 
 // ============================================
+// DRAGGABLE DESKTOP ICON
+// ============================================
+
+type DraggableIconProps = {
+  iconId: string;
+  name: string;
+  faIcon: string;
+  color: string;
+  initialX: number;
+  initialY: number;
+  badge?: number;
+  badgeSevere?: boolean;
+  small?: boolean;
+  onOpen: () => void;
+};
+
+const DraggableDesktopIcon = (props: DraggableIconProps) => {
+  const { act } = useBackend();
+  const { iconId, name, faIcon, color, initialX, initialY, small } = props;
+  const size = small ? '70px' : '80px';
+  const iconSize = small ? 1.8 : 2.2;
+
+  const [position, setPosition] = useState({ x: initialX, y: initialY });
+  const [dragging, setDragging] = useState(false);
+  const lastMouseRef = useRef({ x: 0, y: 0 });
+  const hasDraggedRef = useRef(false);
+
+  // Sync with server-provided positions
+  useEffect(() => {
+    if (!dragging) {
+      setPosition({ x: initialX, y: initialY });
+    }
+  }, [initialX, initialY, dragging]);
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setDragging(true);
+      hasDraggedRef.current = false;
+      lastMouseRef.current = { x: e.screenX, y: e.screenY };
+    },
+    [],
+  );
+
+  useEffect(() => {
+    if (!dragging) {
+      return;
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const dx = e.screenX - lastMouseRef.current.x;
+      const dy = e.screenY - lastMouseRef.current.y;
+      if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+        hasDraggedRef.current = true;
+      }
+      setPosition((prev) => ({
+        x: Math.max(0, Math.min(600, prev.x + dx)),
+        y: Math.max(0, Math.min(500, prev.y + dy)),
+      }));
+      lastMouseRef.current = { x: e.screenX, y: e.screenY };
+    };
+
+    const handleMouseUp = () => {
+      setDragging(false);
+      if (hasDraggedRef.current) {
+        // Send final position to backend
+        setPosition((prev) => {
+          act('set_icon_position', {
+            icon_id: iconId,
+            x: prev.x,
+            y: prev.y,
+          });
+          return prev;
+        });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [dragging, iconId, act]);
+
+  const handleClick = useCallback(() => {
+    if (!hasDraggedRef.current) {
+      props.onOpen();
+    }
+  }, [props.onOpen]);
+
+  return (
+    <Box
+      style={{
+        position: 'absolute',
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        cursor: dragging ? 'grabbing' : 'grab',
+        zIndex: dragging ? 100 : 1,
+        userSelect: 'none',
+        width: size,
+        opacity: dragging ? 0.85 : 1,
+        transition: dragging ? 'none' : 'opacity 0.15s',
+      }}
+      textAlign="center"
+      onMouseDown={handleMouseDown}
+      onClick={handleClick}
+    >
+      <Box
+        py={1}
+        style={{
+          border: `1px solid ${hexToRgba(color, 0.3)}`,
+          borderRadius: '4px',
+          background: hexToRgba(color, dragging ? 0.15 : 0.06),
+          boxShadow: dragging
+            ? `0 4px 12px ${hexToRgba(color, 0.3)}`
+            : 'none',
+        }}
+      >
+        <Icon
+          name={faIcon}
+          size={iconSize}
+          color={color}
+          style={{
+            textShadow: `0 0 6px ${hexToRgba(color, 0.5)}`,
+          }}
+        />
+      </Box>
+      {props.badge !== undefined && (
+        <Box
+          style={{
+            position: 'absolute',
+            top: '-3px',
+            right: '-3px',
+            background: props.badgeSevere ? '#cc3333' : '#cc9933',
+            borderRadius: '50%',
+            width: '16px',
+            height: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '0.65em',
+            fontWeight: 'bold',
+          }}
+        >
+          {props.badge}
+        </Box>
+      )}
+      <Box
+        fontSize={small ? '0.6em' : '0.7em'}
+        mt={0.3}
+        style={{
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {name}
+      </Box>
+    </Box>
+  );
+};
+
+// ============================================
 // DESKTOP
 // ============================================
 
@@ -327,10 +503,14 @@ const DesktopScreen = () => {
   const has_remote = safeBool(data.has_remote_viewer);
   const remote_name = safeStr(data.remote_viewer_name, '');
   const is_remote = safeBool(data.is_remote_user);
+  const icon_positions = data.icon_positions || {};
+  const pending_action = safeBool(data.pending_action_approval);
+  const pending_action_desc = safeStr(data.pending_action_desc, '');
+  const remote_mode = safeStr(data.remote_access_mode, 'permission');
 
   return (
     <Flex direction="column" height="100%">
-      {/* Top bar — title bar style */}
+      {/* Top bar */}
       <Flex.Item>
         <Box
           py={0.3}
@@ -364,6 +544,16 @@ const DesktopScreen = () => {
                     <Box fontSize="0.7em" color="average">
                       <Icon name="eye" mr={0.3} />
                       {remote_name}
+                      {remote_mode === 'permission' && (
+                        <Box as="span" ml={0.3} color="label">
+                          [разр.]
+                        </Box>
+                      )}
+                      {remote_mode === 'password' && (
+                        <Box as="span" ml={0.3} color="bad">
+                          [полн.]
+                        </Box>
+                      )}
                     </Box>
                   </Flex.Item>
                 )}
@@ -451,48 +641,127 @@ const DesktopScreen = () => {
         </Flex.Item>
       )}
 
-      {/* Desktop icons area */}
-      <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
-        <Box p={1}>
-          <Flex wrap="wrap">
-            {/* System apps */}
-            {SYSTEM_APPS.map((app) => (
-              <Flex.Item key={app.id} m={0.5}>
-                <DesktopIcon
-                  name={app.name}
-                  icon={app.faIcon}
-                  color={theme_color}
-                  badge={
-                    app.id === 'antivirus' && virus_count > 0
-                      ? virus_count
-                      : undefined
-                  }
-                  badgeSevere={has_serious_viruses}
-                  onClick={() => act('open_app', { app: app.id })}
-                />
+      {/* Pending action approval notification */}
+      {pending_action && !is_remote && (
+        <Flex.Item>
+          <Box
+            p={0.5}
+            style={{
+              background: 'rgba(100, 150, 220, 0.15)',
+              borderBottom: '1px solid rgba(100, 150, 220, 0.3)',
+            }}
+          >
+            <Flex justify="space-between" align="center">
+              <Flex.Item grow>
+                <Box fontSize="0.85em" color="label" bold>
+                  <Icon name="cog" mr={0.5} />
+                  Запрос действия:{' '}
+                  <Box as="span" color="white">
+                    {pending_action_desc}
+                  </Box>
+                </Box>
               </Flex.Item>
-            ))}
+              <Flex.Item>
+                <Button
+                  compact
+                  color="good"
+                  icon="check"
+                  mr={0.5}
+                  onClick={() => act('approve_action')}
+                >
+                  Разрешить
+                </Button>
+                <Button
+                  compact
+                  color="bad"
+                  icon="times"
+                  onClick={() => act('deny_action')}
+                >
+                  Отклонить
+                </Button>
+              </Flex.Item>
+            </Flex>
+          </Box>
+        </Flex.Item>
+      )}
 
-            {/* Installed NET apps */}
-            {installed_apps.map((app) => (
-              <Flex.Item key={app.name} m={0.5}>
-                <DesktopIcon
-                  name={app.name}
-                  icon={
-                    safeBool(app.is_blackwall) ? 'skull-crossbones' : 'cube'
-                  }
-                  color={
-                    safeBool(app.is_blackwall)
-                      ? '#cc3333'
-                      : hexToRgba(theme_color, 1)
-                  }
-                  small
-                  onClick={() => {}}
-                />
-              </Flex.Item>
-            ))}
-          </Flex>
-        </Box>
+      {/* Remote user: waiting for approval indicator */}
+      {pending_action && is_remote && (
+        <Flex.Item>
+          <Box
+            p={0.5}
+            textAlign="center"
+            style={{
+              background: 'rgba(100, 150, 220, 0.1)',
+              borderBottom: '1px solid rgba(100, 150, 220, 0.2)',
+            }}
+          >
+            <Box fontSize="0.85em" color="label">
+              <Icon name="clock" mr={0.5} />
+              Ожидание подтверждения: {pending_action_desc}
+            </Box>
+          </Box>
+        </Flex.Item>
+      )}
+
+      {/* Desktop icons area — free positioning */}
+      <Flex.Item
+        grow={1}
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* System apps */}
+        {SYSTEM_APPS.map((app) => {
+          const pos = icon_positions[app.id];
+          const defaultIdx = SYSTEM_APPS.indexOf(app);
+          return (
+            <DraggableDesktopIcon
+              key={app.id}
+              iconId={app.id}
+              name={app.name}
+              faIcon={app.faIcon}
+              color={theme_color}
+              initialX={pos?.x ?? 10 + defaultIdx * 90}
+              initialY={pos?.y ?? 10}
+              badge={
+                app.id === 'antivirus' && virus_count > 0
+                  ? virus_count
+                  : undefined
+              }
+              badgeSevere={has_serious_viruses}
+              onOpen={() => act('open_app', { app: app.id })}
+            />
+          );
+        })}
+
+        {/* Installed NET apps */}
+        {installed_apps.map((app, idx) => {
+          const posKey = `installed_${app.name}`;
+          const pos = icon_positions[posKey];
+          return (
+            <DraggableDesktopIcon
+              key={app.name}
+              iconId={posKey}
+              name={app.name}
+              faIcon={
+                safeBool(app.is_blackwall) ? 'skull-crossbones' : 'cube'
+              }
+              color={
+                safeBool(app.is_blackwall)
+                  ? '#cc3333'
+                  : hexToRgba(theme_color, 1)
+              }
+              initialX={pos?.x ?? 10 + (idx % 7) * 90}
+              initialY={pos?.y ?? 100 + Math.floor(idx / 7) * 90}
+              small
+              onOpen={() =>
+                act('open_installed_app', { app_name: app.name })
+              }
+            />
+          );
+        })}
       </Flex.Item>
 
       {/* Taskbar */}
@@ -559,81 +828,159 @@ const DesktopScreen = () => {
 };
 
 // ============================================
-// DESKTOP ICON COMPONENT
+// INSTALLED APP SCREEN
 // ============================================
 
-type DesktopIconProps = {
-  name: string;
-  icon: string;
-  color: string;
-  badge?: number;
-  badgeSevere?: boolean;
-  small?: boolean;
-  onClick: () => void;
-};
+const InstalledAppScreen = () => {
+  const { act, data } = useBackend<IpcOsData>();
 
-const DesktopIcon = (props: DesktopIconProps) => {
-  const size = props.small ? '70px' : '80px';
-  const iconSize = props.small ? 1.8 : 2.2;
+  const app_name = safeStr(data.current_installed_app_name, '');
+  const theme_color = safeStr(data.theme_color, '#6a6a6a');
+  const installed_apps = safeArray(data.installed_apps);
+
+  const app = installed_apps.find((a) => a.name === app_name);
+
+  if (!app) {
+    return (
+      <Flex direction="column" height="100%">
+        <AppHeader title="Приложение" icon="cube" />
+        <Flex.Item grow={1}>
+          <Box p={2} textAlign="center" color="label">
+            Приложение не найдено.
+          </Box>
+        </Flex.Item>
+      </Flex>
+    );
+  }
+
+  const isBlackwall = safeBool(app.is_blackwall);
+
   return (
-    <Box
-      textAlign="center"
-      style={{
-        cursor: 'pointer',
-        position: 'relative',
-        width: size,
-      }}
-      onClick={props.onClick}
-    >
-      <Box
-        py={1}
-        style={{
-          border: `1px solid ${hexToRgba(props.color, 0.3)}`,
-          borderRadius: '4px',
-          background: hexToRgba(props.color, 0.06),
-        }}
-      >
-        <Icon
-          name={props.icon}
-          size={iconSize}
-          color={props.color}
-          style={{
-            textShadow: `0 0 6px ${hexToRgba(props.color, 0.5)}`,
-          }}
-        />
-      </Box>
-      {props.badge !== undefined && (
-        <Box
-          style={{
-            position: 'absolute',
-            top: '-3px',
-            right: '-3px',
-            background: props.badgeSevere ? '#cc3333' : '#cc9933',
-            borderRadius: '50%',
-            width: '16px',
-            height: '16px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '0.65em',
-            fontWeight: 'bold',
-          }}
-        >
-          {props.badge}
+    <Flex direction="column" height="100%">
+      <AppHeader
+        title={app.name}
+        icon={isBlackwall ? 'skull-crossbones' : 'cube'}
+      />
+
+      <Flex.Item grow={1} style={{ overflowY: 'auto' }}>
+        <Box p={2}>
+          {/* App info card */}
+          <Box
+            p={2}
+            mb={2}
+            style={{
+              border: `1px solid ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, 0.4)}`,
+              borderRadius: '6px',
+              background: hexToRgba(
+                isBlackwall ? '#cc3333' : theme_color,
+                0.08,
+              ),
+            }}
+          >
+            <Flex align="center" mb={1.5}>
+              <Flex.Item mr={1.5}>
+                <Box
+                  style={{
+                    width: '48px',
+                    height: '48px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: `1px solid ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, 0.3)}`,
+                    borderRadius: '8px',
+                    background: hexToRgba(
+                      isBlackwall ? '#cc3333' : theme_color,
+                      0.12,
+                    ),
+                  }}
+                >
+                  <Icon
+                    name={isBlackwall ? 'skull-crossbones' : 'cube'}
+                    size={2}
+                    color={isBlackwall ? '#cc3333' : theme_color}
+                  />
+                </Box>
+              </Flex.Item>
+              <Flex.Item grow>
+                <Box bold fontSize="1.3em">
+                  {app.name}
+                </Box>
+                <Box fontSize="0.85em" color="label" mt={0.3}>
+                  {getCategoryLabel(app.category)}
+                  {isBlackwall && (
+                    <Box as="span" color="bad" ml={1}>
+                      Black Wall
+                    </Box>
+                  )}
+                </Box>
+              </Flex.Item>
+            </Flex>
+
+            <Box
+              fontSize="0.9em"
+              color="label"
+              p={1}
+              style={{
+                background: 'rgba(0,0,0,0.2)',
+                borderRadius: '4px',
+              }}
+            >
+              {app.desc}
+            </Box>
+          </Box>
+
+          {/* Status */}
+          <Box
+            p={1}
+            mb={2}
+            textAlign="center"
+            style={{
+              border: '1px solid rgba(50,200,50,0.3)',
+              borderRadius: '4px',
+              background: 'rgba(0,200,0,0.05)',
+            }}
+          >
+            <Box color="good" bold fontSize="0.9em">
+              <Icon name="check-circle" mr={0.5} />
+              Приложение установлено и активно
+            </Box>
+          </Box>
+
+          {isBlackwall && (
+            <Box
+              p={1}
+              mb={2}
+              textAlign="center"
+              style={{
+                border: '1px solid rgba(200,50,50,0.3)',
+                borderRadius: '4px',
+                background: 'rgba(200,0,0,0.08)',
+              }}
+            >
+              <Box color="bad" fontSize="0.8em">
+                <Icon name="exclamation-triangle" mr={0.5} />
+                ВНИМАНИЕ: Нелегальное ПО. Обнаружение может привести к
+                последствиям.
+              </Box>
+            </Box>
+          )}
+
+          {/* Uninstall */}
+          <Button
+            fluid
+            color="bad"
+            icon="trash"
+            textAlign="center"
+            onClick={() => {
+              act('uninstall_app', { app_name: app.name });
+              act('close_installed_app');
+            }}
+          >
+            Удалить приложение
+          </Button>
         </Box>
-      )}
-      <Box
-        fontSize={props.small ? '0.6em' : '0.7em'}
-        mt={0.3}
-        style={{
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {props.name}
-      </Box>
-    </Box>
+      </Flex.Item>
+    </Flex>
   );
 };
 
@@ -929,7 +1276,7 @@ const AntivirusApp = () => {
 // NET APP (White Wall / Black Wall)
 // ============================================
 
-const NetApp = () => {
+const NetAppScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
 
   const network_connected = safeBool(data.network_connected);

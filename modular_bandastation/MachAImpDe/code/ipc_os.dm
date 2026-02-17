@@ -232,8 +232,10 @@
 	var/logged_in = FALSE
 
 	// --- Приложения ---
-	/// Какое приложение сейчас открыто: "desktop", "diagnostics", "antivirus", "netdoor"
+	/// Какое приложение сейчас открыто: "desktop", "diagnostics", "antivirus", "net", "installed_app"
 	var/current_app = "desktop"
+	/// Имя открытого установленного приложения (когда current_app == "installed_app")
+	var/current_installed_app_name = ""
 
 	// --- Самодиагностика ---
 	/// Идёт ли сканирование
@@ -270,6 +272,10 @@
 	var/list/black_wall_catalog = list()
 	/// Установленные приложения
 	var/list/installed_apps = list()
+	// --- Позиции иконок рабочего стола ---
+	/// Ассоциативный список: "app_id" = list("x" = N, "y" = N)
+	var/list/icon_positions = list()
+
 	// --- Загрузка приложений ---
 	/// Идёт ли загрузка
 	var/downloading = FALSE
@@ -289,6 +295,16 @@
 	var/pending_access_request = FALSE
 	/// Кто запрашивает доступ
 	var/mob/requesting_user = null
+	/// Режим удалённого доступа: "password" (полный) или "permission" (каждое действие требует подтверждения)
+	var/remote_access_mode = "permission"
+	/// Ожидается ли подтверждение действия от владельца
+	var/pending_action_approval = FALSE
+	/// Описание действия, ожидающего подтверждения
+	var/pending_action_desc = ""
+	/// Действие, ожидающее подтверждения (action name)
+	var/pending_action_name = ""
+	/// Параметры ожидающего действия
+	var/list/pending_action_params = list()
 
 /datum/ipc_operating_system/New(mob/living/carbon/human/new_owner, new_brand_key)
 	. = ..()
@@ -306,6 +322,13 @@
 		new /datum/ipc_netapp/firewall_plus(),
 		new /datum/ipc_netapp/sensor_calibration(),
 	)
+	// Позиции иконок по умолчанию (сетка 90px)
+	icon_positions = list(
+		"diagnostics" = list("x" = 10, "y" = 10),
+		"antivirus" = list("x" = 100, "y" = 10),
+		"net" = list("x" = 190, "y" = 10),
+	)
+
 	// Инициализируем каталог NET — Black Wall
 	black_wall_catalog = list(
 		new /datum/ipc_netapp/blackwall/virus_kit(),
@@ -715,6 +738,10 @@
 	if(download_target)
 		download_target.installed = TRUE
 		installed_apps += download_target
+		// Позиция для новой иконки: ищем свободное место на рабочем столе
+		var/next_x = 10 + (installed_apps.len - 1) % 7 * 90
+		var/next_y = 100 + round((installed_apps.len - 1) / 7) * 90
+		icon_positions["installed_[download_target.name]"] = list("x" = next_x, "y" = next_y)
 		if(owner)
 			to_chat(owner, span_notice("ОС: Приложение \"[download_target.name]\" успешно установлено."))
 
@@ -782,13 +809,14 @@
 	pending_access_request = FALSE
 	requesting_user = null
 	remote_viewer = requester
+	remote_access_mode = "permission"  // Доступ по запросу = режим разрешений
 
 	// Авто-логин если ещё не залогинены
 	if(!logged_in)
 		logged_in = TRUE
 
-	to_chat(owner, span_notice("ОС: Удалённый доступ предоставлен [requester.name]."))
-	to_chat(requester, span_notice("Удалённый доступ к ОС пациента одобрен."))
+	to_chat(owner, span_notice("ОС: Удалённый доступ предоставлен [requester.name] (режим разрешений)."))
+	to_chat(requester, span_notice("Удалённый доступ к ОС пациента одобрен (режим разрешений — действия требуют подтверждения)."))
 
 	// Открываем ОС для роботехника
 	ui_interact(requester)
@@ -823,13 +851,14 @@
 		return FALSE
 
 	remote_viewer = requester
+	remote_access_mode = "password"  // Доступ по паролю = полный доступ
 
 	// Авто-логин
 	if(!logged_in)
 		logged_in = TRUE
 
 	to_chat(owner, span_warning("ОС: Обнаружен удалённый вход в систему по паролю от [requester.name]!"))
-	to_chat(requester, span_notice("Доступ к ОС пациента получен по паролю."))
+	to_chat(requester, span_notice("Доступ к ОС пациента получен по паролю (полный доступ)."))
 
 	// Открываем ОС для роботехника
 	ui_interact(requester)
@@ -839,6 +868,104 @@
 
 	SStgui.update_uis(src)
 	return TRUE
+
+/// Получить описание действия для подтверждения
+/datum/ipc_operating_system/proc/get_action_description(action_name, list/action_params)
+	switch(action_name)
+		if("start_scan")
+			return "Запустить сканирование систем"
+		if("start_antivirus")
+			return "Запустить антивирусную проверку"
+		if("download_app")
+			return "Скачать приложение: [action_params["app_name"]]"
+		if("uninstall_app")
+			return "Удалить приложение: [action_params["app_name"]]"
+		if("cancel_download")
+			return "Отменить загрузку"
+	return "Неизвестное действие"
+
+/// Запросить подтверждение действия у владельца
+/datum/ipc_operating_system/proc/request_action_approval(action_name, list/action_params, mob/requester)
+	if(pending_action_approval)
+		to_chat(requester, span_warning("Уже ожидается подтверждение другого действия."))
+		return FALSE
+
+	pending_action_approval = TRUE
+	pending_action_name = action_name
+	pending_action_params = action_params.Copy()
+	pending_action_desc = get_action_description(action_name, action_params)
+
+	if(owner)
+		to_chat(owner, span_notice("СИСТЕМА: [requester.name] запрашивает разрешение: [pending_action_desc]. Проверьте вашу ОС."))
+
+	SStgui.update_uis(src)
+	return TRUE
+
+/// Одобрить запрошенное действие
+/datum/ipc_operating_system/proc/approve_pending_action()
+	if(!pending_action_approval)
+		return FALSE
+
+	var/action = pending_action_name
+	var/list/params = pending_action_params.Copy()
+
+	pending_action_approval = FALSE
+	pending_action_name = ""
+	pending_action_desc = ""
+	pending_action_params = list()
+
+	if(remote_viewer)
+		to_chat(remote_viewer, span_notice("Действие одобрено владельцем ОС."))
+
+	// Выполняем действие
+	execute_action(action, params)
+
+	SStgui.update_uis(src)
+	return TRUE
+
+/// Отклонить запрошенное действие
+/datum/ipc_operating_system/proc/deny_pending_action()
+	if(!pending_action_approval)
+		return FALSE
+
+	if(remote_viewer)
+		to_chat(remote_viewer, span_warning("Действие отклонено владельцем ОС: [pending_action_desc]"))
+
+	pending_action_approval = FALSE
+	pending_action_name = ""
+	pending_action_desc = ""
+	pending_action_params = list()
+
+	SStgui.update_uis(src)
+	return TRUE
+
+/// Выполнить действие напрямую (после одобрения или от владельца)
+/datum/ipc_operating_system/proc/execute_action(action, list/params)
+	switch(action)
+		if("start_scan")
+			start_diagnostics_scan()
+		if("start_antivirus")
+			start_antivirus_scan()
+		if("download_app")
+			var/app_name = params["app_name"]
+			var/wall = params["wall"]
+			var/list/search_catalog = (wall == "black") ? black_wall_catalog : net_catalog
+			for(var/datum/ipc_netapp/app in search_catalog)
+				if(app.name == app_name)
+					start_download(app)
+					break
+		if("cancel_download")
+			cancel_download()
+		if("uninstall_app")
+			var/app_name = params["app_name"]
+			for(var/datum/ipc_netapp/app in installed_apps)
+				if(app.name == app_name)
+					uninstall_net_app(app)
+					break
+
+/// Список действий, которые требуют подтверждения в permission-режиме
+/datum/ipc_operating_system/proc/is_sensitive_action(action)
+	return action in list("start_scan", "start_antivirus", "download_app", "cancel_download", "uninstall_app")
 
 /// Отключить удалённый доступ
 /datum/ipc_operating_system/proc/revoke_remote_access()
@@ -958,12 +1085,21 @@
 		))
 	data["installed_apps"] = installed
 
+	// Позиции иконок рабочего стола
+	data["icon_positions"] = icon_positions
+
+	// Текущее установленное приложение
+	data["current_installed_app_name"] = current_installed_app_name
+
 	// Удалённый доступ
 	data["pending_access_request"] = pending_access_request
 	data["requesting_user_name"] = requesting_user ? requesting_user.name : ""
 	data["has_remote_viewer"] = (remote_viewer != null)
 	data["remote_viewer_name"] = remote_viewer ? remote_viewer.name : ""
 	data["is_remote_user"] = (user != owner)
+	data["remote_access_mode"] = remote_access_mode
+	data["pending_action_approval"] = pending_action_approval
+	data["pending_action_desc"] = pending_action_desc
 
 	return data
 
@@ -971,6 +1107,13 @@
 	. = ..()
 	if(.)
 		return
+
+	var/is_remote = (ui.user != owner)
+
+	// Удалённый пользователь в permission-режиме: чувствительные действия требуют подтверждения
+	if(is_remote && remote_access_mode == "permission" && is_sensitive_action(action))
+		request_action_approval(action, params, ui.user)
+		return TRUE
 
 	switch(action)
 		if("set_password")
@@ -995,6 +1138,7 @@
 			var/app_name = params["app"]
 			if(app_name in list("desktop", "diagnostics", "antivirus", "net"))
 				current_app = app_name
+				current_installed_app_name = ""
 			return TRUE
 
 		if("start_scan")
@@ -1043,6 +1187,39 @@
 
 		if("revoke_remote")
 			revoke_remote_access()
+			return TRUE
+
+		if("set_icon_position")
+			var/icon_id = params["icon_id"]
+			if(!icon_id)
+				return FALSE
+			var/new_x = clamp(text2num(params["x"]), 0, 600)
+			var/new_y = clamp(text2num(params["y"]), 0, 500)
+			icon_positions[icon_id] = list("x" = new_x, "y" = new_y)
+			return TRUE
+
+		if("open_installed_app")
+			var/app_name = params["app_name"]
+			if(!app_name)
+				return FALSE
+			for(var/datum/ipc_netapp/app in installed_apps)
+				if(app.name == app_name)
+					current_app = "installed_app"
+					current_installed_app_name = app.name
+					return TRUE
+			return FALSE
+
+		if("close_installed_app")
+			current_app = "desktop"
+			current_installed_app_name = ""
+			return TRUE
+
+		if("approve_action")
+			approve_pending_action()
+			return TRUE
+
+		if("deny_action")
+			deny_pending_action()
 			return TRUE
 
 // ============================================

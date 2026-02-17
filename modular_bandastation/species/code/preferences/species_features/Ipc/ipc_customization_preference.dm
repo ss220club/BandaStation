@@ -71,6 +71,12 @@
 		to_chat(target, span_notice("DEBUG PREF: Вызываем apply_ipc_brand_effects([chassis_brand])"))
 		apply_ipc_brand_effects(target, chassis_brand)
 
+	// Сохраняем пароль ОС для применения при инициализации ОС (on_species_gain)
+	var/os_password = customization["os_password"]
+	if(os_password && length(os_password) >= 1)
+		S.ipc_preset_os_password = os_password
+		to_chat(target, span_notice("DEBUG PREF: os_password сохранён для инициализации ОС"))
+
 	to_chat(target, span_notice("DEBUG PREF: Вызываем update_body()"))
 	target.update_body()
 
@@ -88,6 +94,7 @@
 	return list(
 		"chassis_brand" = "unbranded",
 		"brain_type" = "positronic",
+		"os_password" = "",
 		"hef_head" = "unbranded",
 		"hef_chest" = "unbranded",
 		"hef_l_arm" = "unbranded",
