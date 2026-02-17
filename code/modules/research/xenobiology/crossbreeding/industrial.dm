@@ -83,7 +83,7 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/yellow
 	colour = SLIME_TYPE_YELLOW
-	effect_desc = "Производит энергетические ячейки высокой мощности, которые при создании не заряжены полностью."
+	effect_desc = "Производит батарейки высокой мощности, которые при создании не заряжены полностью."
 	plasmarequired = 5
 	itempath = /obj/item/stock_parts/power_store/cell/high
 
@@ -160,7 +160,7 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/pink
 	colour = SLIME_TYPE_PINK
-	effect_desc = "Производит автоинъекторы с паксом и космодурью."
+	effect_desc = "Производит автоинъекторы с синтпаксом и космодурью."
 	plasmarequired = 6
 	itempath = /obj/item/slimecrossbeaker/autoinjector/peaceandlove
 
@@ -175,7 +175,7 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/oil
 	colour = SLIME_TYPE_OIL
-	effect_desc = "Производит IED."
+	effect_desc = "Производит СВУ."
 	plasmarequired = 4
 	itempath = /obj/item/grenade/iedcasing/spawned
 
@@ -193,7 +193,7 @@ Industrial extracts:
 
 /obj/item/slimecross/industrial/adamantine
 	colour = SLIME_TYPE_ADAMANTINE
-	effect_desc = "Производит слитки адамантия."
+	effect_desc = "Производит слитки адамантина."
 	plasmarequired = 10
 	itempath = /obj/item/stack/sheet/mineral/adamantine
 

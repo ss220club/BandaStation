@@ -187,7 +187,7 @@
 	if(!istype(tool)) // Needed as long as this uses a var on the multitool.
 		return NONE
 	if(QDELETED(tool.buffer))
-		balloon_alert(user, "буффер пустой!")
+		balloon_alert(user, "буфер пустой!")
 		return ITEM_INTERACT_BLOCKING
 	if(!istype(tool.buffer, /obj/machinery/monkey_recycler))
 		balloon_alert(user, "можно подключить только переработчик!")

@@ -29934,3 +29934,11 @@ instrumental = "стабилизированным экстрактом"
 prepositional = "стабилизированном экстракте"
 gender = "male"
 
+["burning extract"]
+nominative = "горящий экстракт"
+genitive = "горящего экстракта"
+dative = "горящему экстракту"
+accusative = "горящий экстракт"
+instrumental = "горящим экстрактом"
+prepositional = "горящем экстракте"
+gender = "male"

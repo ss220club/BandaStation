@@ -66,11 +66,11 @@ Stabilized extracts:
 
 /obj/item/slimecross/stabilized/purple
 	colour = SLIME_TYPE_PURPLE
-	effect_desc = "Обеспечитает эффект регенерации."
+	effect_desc = "Обеспечивает эффект регенерации."
 
 /obj/item/slimecross/stabilized/blue
 	colour = SLIME_TYPE_BLUE
-	effect_desc = "Делает вас неуязвимым для подскальзывания на воде, мыле или пене. Космическая смазка и лёд все ещё слишком скользкие!"
+	effect_desc = "Позволяет вам не подскальзываться на воде, мыле или пене. Космическая смазка и лёд все ещё слишком скользкие!"
 
 /obj/item/slimecross/stabilized/metal
 	colour = SLIME_TYPE_METAL
@@ -102,7 +102,7 @@ Stabilized extracts:
 
 /obj/item/slimecross/stabilized/cerulean
 	colour = SLIME_TYPE_CERULEAN
-	effect_desc = "Создает ваш дубликат. Если вы умрете, удерживая при себе этот экстракт, то автоматически возьмете под контроль дубликат, если он жив. Не работает, если оригинал умирает от обезглавливания или полного уничтожения."
+	effect_desc = "Создает ваш дубликат. Если вы умрёте, удерживая при себе этот экстракт, то автоматически возьмёте под контроль дубликат, если он жив. Не работает, если оригинал умирает от обезглавливания или полного уничтожения."
 
 /obj/item/slimecross/stabilized/pyrite
 	colour = SLIME_TYPE_PYRITE
@@ -172,7 +172,7 @@ Stabilized extracts:
 
 /obj/item/slimecross/stabilized/oil
 	colour = SLIME_TYPE_OIL
-	effect_desc = "Если вы умрете, держа при себе этот экстракт, вы сильно взорветесь."
+	effect_desc = "Если вы умрёте, держа при себе этот экстракт - произойдёт сильный взрыв."
 
 /obj/item/slimecross/stabilized/black
 	colour = SLIME_TYPE_BLACK
@@ -188,7 +188,7 @@ Stabilized extracts:
 
 /obj/item/slimecross/stabilized/rainbow
 	colour = SLIME_TYPE_RAINBOW
-	effect_desc = "Создает Регенеративный экстракт. Если вы войдете в критическом состояние, он автоматически использует экстракт на вас."
+	effect_desc = "Вставьте в него регенеративный экстракт. Если вы войдете в критическом состояние, он автоматически использует экстракт на вас."
 	var/obj/item/slimecross/regenerative/regencore
 
 /obj/item/slimecross/stabilized/rainbow/attackby(obj/item/O, mob/user)
