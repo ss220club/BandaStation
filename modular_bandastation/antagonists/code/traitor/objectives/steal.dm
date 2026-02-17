@@ -7,7 +7,7 @@
 		) = 1,
 		/datum/traitor_objective/steal_item/somewhat_risky = 1,
 		list(
-			/datum/traitor_objective/destroy_item/very_risky = 1,
+			///datum/traitor_objective/destroy_item/very_risky = 1, FOR GOOD TIMES
 			/datum/traitor_objective/steal_item/very_risky = 1,
 		) = 1,
 		/datum/traitor_objective/steal_item/most_risky = 1
