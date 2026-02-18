@@ -201,7 +201,7 @@
 	var/effect_applied = FALSE
 
 /// При установке — снижаем charge_rate батареи
-/datum/ipc_netapp/power_optimizer/proc/apply_passive(mob/living/carbon/human/user)
+/datum/ipc_netapp/power_optimizer/apply_passive(mob/living/carbon/human/user)
 	if(!user || effect_applied)
 		return
 	var/obj/item/organ/heart/ipc_battery/battery = user.get_organ_slot(ORGAN_SLOT_HEART)
@@ -212,7 +212,7 @@
 		last_message = "Энергосбережение активно. Расход снижен на 30%."
 
 /// При удалении — восстанавливаем charge_rate
-/datum/ipc_netapp/power_optimizer/proc/remove_passive(mob/living/carbon/human/user)
+/datum/ipc_netapp/power_optimizer/remove_passive(mob/living/carbon/human/user)
 	if(!user || !effect_applied)
 		return
 	var/obj/item/organ/heart/ipc_battery/battery = user.get_organ_slot(ORGAN_SLOT_HEART)
