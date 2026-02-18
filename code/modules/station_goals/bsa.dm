@@ -298,7 +298,7 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 /obj/machinery/computer/bsa_control/ui_data()
 	var/obj/machinery/bsa/full/cannon = cannon_ref?.resolve()
 	var/list/data = list()
-	data["ready"] = cannon ? cannon.ready : FALSE
+	data["ready"] = cannon ? cannon.ready : FALSE // BANDASTATION ADDITION: BSA check
 	data["connected"] = cannon
 	data["notice"] = notice
 	data["unlocked"] = GLOB.bsa_unlock
