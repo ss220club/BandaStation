@@ -135,6 +135,8 @@
 	var/active = FALSE
 	/// Есть ли эффект при активации
 	var/has_effect = FALSE
+	/// Пассивный мод (эффект работает пока установлен)
+	var/is_passive = FALSE
 	/// Последнее сообщение от приложения
 	var/last_message = ""
 
@@ -146,6 +148,14 @@
 /datum/ipc_netapp/proc/deactivate_effect(mob/living/carbon/human/user)
 	active = FALSE
 	return TRUE
+
+/// Применить пассивный эффект. Вызывается при установке.
+/datum/ipc_netapp/proc/apply_passive(mob/living/carbon/human/user)
+	return
+
+/// Убрать пассивный эффект. Вызывается при удалении.
+/datum/ipc_netapp/proc/remove_passive(mob/living/carbon/human/user)
+	return
 
 /// Вернуть данные для UI (расширенные)
 /datum/ipc_netapp/proc/get_ui_data()
@@ -181,22 +191,35 @@
 
 /datum/ipc_netapp/power_optimizer
 	name = "PowerSave 3.0"
-	desc = "Показывает текущий заряд внутренней батареи и расход энергии."
+	desc = "Снижает расход батареи на 30%. Пассивный мод — работает пока установлен."
 	category = "utility"
 	file_size = 320
-	has_effect = TRUE
+	is_passive = TRUE
+	/// Оригинальный charge_rate (для восстановления при удалении)
+	var/original_charge_rate = 0
+	/// Применён ли эффект
+	var/effect_applied = FALSE
 
-/datum/ipc_netapp/power_optimizer/execute_effect(mob/living/carbon/human/user)
-	if(!user)
-		return FALSE
+/// При установке — снижаем charge_rate батареи
+/datum/ipc_netapp/power_optimizer/proc/apply_passive(mob/living/carbon/human/user)
+	if(!user || effect_applied)
+		return
 	var/obj/item/organ/heart/ipc_battery/battery = user.get_organ_slot(ORGAN_SLOT_HEART)
 	if(battery && istype(battery))
-		var/charge_pct = round((battery.charge / battery.maxcharge) * 100, 0.1)
-		last_message = "Заряд: [charge_pct]% ([battery.charge]/[battery.maxcharge])"
-	else
-		last_message = "Батарея не обнаружена!"
-	to_chat(user, span_notice("ОС [name]: [last_message]"))
-	return TRUE
+		original_charge_rate = battery.charge_rate
+		battery.charge_rate = battery.charge_rate * 0.7  // -30% расход
+		effect_applied = TRUE
+		last_message = "Энергосбережение активно. Расход снижен на 30%."
+
+/// При удалении — восстанавливаем charge_rate
+/datum/ipc_netapp/power_optimizer/proc/remove_passive(mob/living/carbon/human/user)
+	if(!user || !effect_applied)
+		return
+	var/obj/item/organ/heart/ipc_battery/battery = user.get_organ_slot(ORGAN_SLOT_HEART)
+	if(battery && istype(battery))
+		battery.charge_rate = original_charge_rate || 1
+	effect_applied = FALSE
+	last_message = ""
 
 /datum/ipc_netapp/signal_booster
 	name = "SignalBoost"
@@ -250,146 +273,47 @@
 	return TRUE
 
 // ============================================
-// WHITE WALL: Приложения с КПК
+// WHITE WALL: Виртуальный КПК
 // ============================================
 
-/datum/ipc_netapp/notepad
-	name = "Блокнот"
-	desc = "Простой текстовый редактор для заметок. Аналог КПК-блокнота."
+/datum/ipc_netapp/virtual_pda
+	name = "КПК-эмулятор"
+	desc = "Полноценный эмулятор КПК (КПК) со всеми стандартными приложениями: блокнот, мессенджер, манифест, навигатор и др."
 	category = "pda"
-	file_size = 64
+	file_size = 512
 	has_effect = TRUE
-	/// Хранимый текст
-	var/stored_text = ""
+	/// Внутренний КПК (создаётся при установке)
+	var/obj/item/modular_computer/pda/internal_pda
 
-/datum/ipc_netapp/notepad/execute_effect(mob/living/carbon/human/user)
+/// Создать внутренний КПК для пользователя
+/datum/ipc_netapp/virtual_pda/proc/ensure_pda(mob/living/carbon/human/user)
+	if(internal_pda && !QDELETED(internal_pda))
+		return internal_pda
+	internal_pda = new /obj/item/modular_computer/pda(user)
+	internal_pda.enabled = TRUE
+	internal_pda.screen_on = TRUE
+	// Назначаем имя владельца
+	var/pda_name = user.real_name ? user.real_name : user.name
+	var/pda_job = user.job ? user.job : "IPC"
+	internal_pda.imprint_id(pda_name, pda_job)
+	return internal_pda
+
+/datum/ipc_netapp/virtual_pda/execute_effect(mob/living/carbon/human/user)
 	if(!user)
 		return FALSE
-	var/new_text = tgui_input_text(user, "Введите текст заметки:", "Блокнот ОС", stored_text, multiline = TRUE)
-	if(!isnull(new_text))
-		stored_text = new_text
-		last_message = "Заметка сохранена ([length(stored_text)] символов)"
-	else
-		if(stored_text)
-			to_chat(user, span_notice("ОС Блокнот:\n[stored_text]"))
-			last_message = "Текущая заметка: [length(stored_text)] символов"
-		else
-			last_message = "Блокнот пуст"
-	return TRUE
-
-/datum/ipc_netapp/notepad/get_ui_data()
-	. = ..()
-	.["stored_text"] = stored_text
-
-/datum/ipc_netapp/crew_manifest
-	name = "Манифест экипажа"
-	desc = "Просмотр списка экипажа станции и их должностей."
-	category = "pda"
-	file_size = 128
-	has_effect = TRUE
-
-/datum/ipc_netapp/crew_manifest/execute_effect(mob/living/carbon/human/user)
-	if(!user)
+	var/obj/item/modular_computer/pda/pda = ensure_pda(user)
+	if(!pda)
+		last_message = "ОШИБКА: Не удалось инициализировать КПК."
 		return FALSE
-	var/list/crew_info = list()
-	var/datum/record/crew/target
-	for(target in GLOB.manifest.general)
-		crew_info += "[target.name] — [target.rank]"
-	if(!length(crew_info))
-		last_message = "Манифест пуст или недоступен."
-		to_chat(user, span_notice("ОС [name]: [last_message]"))
-		return TRUE
-	last_message = "Найдено [length(crew_info)] записей"
-	var/crew_text = crew_info.Join("\n")
-	to_chat(user, span_notice("ОС Манифест экипажа:\n[crew_text]"))
+	if(!pda.enabled)
+		pda.turn_on(user, open_ui = FALSE)
+	pda.ui_interact(user)
+	last_message = "КПК-эмулятор запущен."
 	return TRUE
 
-/datum/ipc_netapp/atmos_scanner
-	name = "Атмос-сканер"
-	desc = "Анализ состава атмосферы. Встроенный аналог газоанализатора КПК."
-	category = "pda"
-	file_size = 196
-	has_effect = TRUE
-
-/datum/ipc_netapp/atmos_scanner/execute_effect(mob/living/carbon/human/user)
-	if(!user)
-		return FALSE
-	var/datum/gas_mixture/environment = user.loc?.return_air()
-	if(!environment)
-		last_message = "Атмосфера не обнаружена (вакуум?)."
-		to_chat(user, span_warning("ОС [name]: [last_message]"))
-		return TRUE
-
-	var/pressure = environment.return_pressure()
-	var/temp = environment.temperature - T0C
-
-	var/list/gas_info = list()
-	gas_info += "Давление: [round(pressure, 0.1)] кПа"
-	gas_info += "Температура: [round(temp, 0.1)]°C"
-
-	if(environment.total_moles() > 0)
-		for(var/gas_id in environment.gases)
-			var/moles = environment.gases[gas_id][MOLES]
-			if(moles > 0.01)
-				var/pct = round((moles / environment.total_moles()) * 100, 0.1)
-				gas_info += "[environment.gases[gas_id][GAS_META][META_GAS_NAME]]: [pct]%"
-
-	last_message = "Давление: [round(pressure, 0.1)] кПа, Темп: [round(temp, 0.1)]°C"
-	to_chat(user, span_notice("ОС Атмос-сканер:\n[gas_info.Join("\n")]"))
-	return TRUE
-
-/datum/ipc_netapp/newscaster
-	name = "Новостной канал"
-	desc = "Просмотр и создание новостей станции. Аналог NTOS Newscaster."
-	category = "pda"
-	file_size = 210
-	has_effect = TRUE
-
-/datum/ipc_netapp/newscaster/execute_effect(mob/living/carbon/human/user)
-	if(!user)
-		return FALSE
-	last_message = "Для просмотра новостей используйте ближайший терминал новостей."
-	to_chat(user, span_notice("ОС [name]: [last_message]"))
-	return TRUE
-
-/datum/ipc_netapp/gps_navigator
-	name = "GPS-Навигатор"
-	desc = "Определение текущих координат и зоны на станции."
-	category = "pda"
-	file_size = 170
-	has_effect = TRUE
-
-/datum/ipc_netapp/gps_navigator/execute_effect(mob/living/carbon/human/user)
-	if(!user)
-		return FALSE
-	var/area/current_area = get_area(user)
-	var/turf/T = get_turf(user)
-	if(current_area && T)
-		last_message = "Зона: [current_area.name] | Координаты: ([T.x], [T.y], [T.z])"
-	else
-		last_message = "Невозможно определить местоположение."
-	to_chat(user, span_notice("ОС [name]: [last_message]"))
-	return TRUE
-
-/datum/ipc_netapp/health_monitor
-	name = "Health Monitor"
-	desc = "Мониторинг состояния здоровья: урон, кровотечения, органы."
-	category = "pda"
-	file_size = 240
-	has_effect = TRUE
-
-/datum/ipc_netapp/health_monitor/execute_effect(mob/living/carbon/human/user)
-	if(!user)
-		return FALSE
-	var/list/info = list()
-	info += "Здоровье: [round(user.health, 0.1)]/[user.maxHealth]"
-	info += "Урон (brute): [round(user.get_brute_loss(), 0.1)]"
-	info += "Урон (burn): [round(user.get_fire_loss(), 0.1)]"
-	info += "Урон (toxin): [round(user.get_tox_loss(), 0.1)]"
-	info += "Урон (oxygen): [round(user.get_oxy_loss(), 0.1)]"
-	last_message = "Здоровье: [round(user.health, 0.1)]/[user.maxHealth]"
-	to_chat(user, span_notice("ОС Health Monitor:\n[info.Join("\n")]"))
-	return TRUE
+/datum/ipc_netapp/virtual_pda/Destroy()
+	QDEL_NULL(internal_pda)
+	return ..()
 
 // ============================================
 // NET ПРИЛОЖЕНИЯ — BLACK WALL (нелегальные)
@@ -406,58 +330,10 @@
 
 /datum/ipc_netapp/blackwall/overclock
 	name = "OverClock.exe"
-	desc = "Усиление разгона процессора. Увеличивает бонус существующей абилки разгона с 40% до 70% и добавляет ускорение передвижения. Повышенный нагрев!"
+	desc = "Пассивный мод. Усиливает абилку разгона: бонус скорости 40% → 70%, добавляет ускорение передвижения при разгоне. Работает пока установлен."
 	category = "mod"
 	file_size = 450
-	has_effect = TRUE
-	toggleable = TRUE
-	/// Оригинальное значение бонуса разгона (для восстановления при деактивации)
-	var/original_speed_bonus = 0
-
-/datum/ipc_netapp/blackwall/overclock/execute_effect(mob/living/carbon/human/user)
-	if(!user)
-		return FALSE
-	if(active)
-		deactivate_effect(user)
-		return TRUE
-
-	var/datum/species/ipc/ipc_species = user.dna?.species
-	if(!istype(ipc_species))
-		last_message = "ОШИБКА: Несовместимая архитектура."
-		return FALSE
-
-	active = TRUE
-	// Сохраняем оригинальный бонус и усиливаем
-	original_speed_bonus = ipc_species.overclock_speed_bonus
-	ipc_species.overclock_speed_bonus = 0.7  // 70% вместо стандартных 40%
-	// Добавляем бонус к скорости передвижения
-	user.add_movespeed_modifier(/datum/movespeed_modifier/ipc_overclock_enhanced)
-
-	last_message = "УСИЛЕННЫЙ РАЗГОН АКТИВИРОВАН. Бонус: 70% + ускорение движения."
-	to_chat(user, span_boldwarning("ОС [name]: УСИЛЕННЫЙ РАЗГОН АКТИВИРОВАН! Бонус разгона увеличен до 70%."))
-
-	// Если разгон уже был активен — обновляем скорость действий
-	if(ipc_species.overclock_active)
-		ipc_species.update_action_speed(user)
-
-	return TRUE
-
-/datum/ipc_netapp/blackwall/overclock/deactivate_effect(mob/living/carbon/human/user)
-	. = ..()
-	if(!user)
-		return
-
-	var/datum/species/ipc/ipc_species = user.dna?.species
-	if(istype(ipc_species))
-		// Восстанавливаем оригинальный бонус
-		ipc_species.overclock_speed_bonus = original_speed_bonus || 0.4
-		// Обновляем скорость действий если разгон активен
-		if(ipc_species.overclock_active)
-			ipc_species.update_action_speed(user)
-
-	user.remove_movespeed_modifier(/datum/movespeed_modifier/ipc_overclock_enhanced)
-	last_message = "Усиленный разгон деактивирован. Бонус возвращён к стандартному."
-	to_chat(user, span_notice("ОС [name]: Усиленный разгон деактивирован."))
+	is_passive = TRUE
 
 /datum/ipc_netapp/blackwall/wall_breaker
 	name = "WallBreaker"
@@ -599,13 +475,8 @@
 		new /datum/ipc_netapp/defrag_tool(),
 		new /datum/ipc_netapp/firewall_plus(),
 		new /datum/ipc_netapp/sensor_calibration(),
-		// Приложения с КПК
-		new /datum/ipc_netapp/notepad(),
-		new /datum/ipc_netapp/crew_manifest(),
-		new /datum/ipc_netapp/atmos_scanner(),
-		new /datum/ipc_netapp/gps_navigator(),
-		new /datum/ipc_netapp/health_monitor(),
-		new /datum/ipc_netapp/newscaster(),
+		// Виртуальный КПК — все приложения КПК в одном
+		new /datum/ipc_netapp/virtual_pda(),
 	)
 	// Позиции иконок по умолчанию (сетка 90px)
 	icon_positions = list(
@@ -1027,6 +898,9 @@
 		var/next_x = 10 + (installed_apps.len - 1) % 7 * 90
 		var/next_y = 100 + round((installed_apps.len - 1) / 7) * 90
 		icon_positions["installed_[download_target.name]"] = list("x" = next_x, "y" = next_y)
+		// Применяем пассивный эффект если есть
+		if(download_target.is_passive && owner)
+			download_target.apply_passive(owner)
 		if(owner)
 			to_chat(owner, span_notice("ОС: Приложение \"[download_target.name]\" успешно установлено."))
 
@@ -1054,6 +928,9 @@
 	if(!app.installed)
 		return FALSE
 
+	// Убираем пассивный эффект если есть
+	if(app.is_passive && owner)
+		app.remove_passive(owner)
 	app.installed = FALSE
 	installed_apps -= app
 	return TRUE
@@ -1370,6 +1247,7 @@
 			"toggleable" = app.toggleable,
 			"active" = app.active,
 			"has_effect" = app.has_effect,
+			"is_passive" = app.is_passive,
 			"last_message" = app.last_message,
 		)
 		installed += list(app_data)

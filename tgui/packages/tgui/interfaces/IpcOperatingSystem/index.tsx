@@ -55,6 +55,7 @@ type InstalledApp = {
   toggleable: boolean;
   active: boolean;
   has_effect: boolean;
+  is_passive: boolean;
   last_message: string;
 };
 
@@ -961,14 +962,27 @@ const InstalledAppScreen = () => {
             mb={2}
             textAlign="center"
             style={{
-              border: '1px solid rgba(50,200,50,0.3)',
+              border: safeBool(app.is_passive)
+                ? '1px solid rgba(100,150,255,0.3)'
+                : '1px solid rgba(50,200,50,0.3)',
               borderRadius: '4px',
-              background: 'rgba(0,200,0,0.05)',
+              background: safeBool(app.is_passive)
+                ? 'rgba(100,150,255,0.05)'
+                : 'rgba(0,200,0,0.05)',
             }}
           >
-            <Box color="good" bold fontSize="0.9em">
-              <Icon name="check-circle" mr={0.5} />
-              Приложение установлено и активно
+            <Box
+              color={safeBool(app.is_passive) ? 'blue' : 'good'}
+              bold
+              fontSize="0.9em"
+            >
+              <Icon
+                name={safeBool(app.is_passive) ? 'cog' : 'check-circle'}
+                mr={0.5}
+              />
+              {safeBool(app.is_passive)
+                ? 'Пассивный мод — работает пока установлен'
+                : 'Приложение установлено и активно'}
             </Box>
           </Box>
 
