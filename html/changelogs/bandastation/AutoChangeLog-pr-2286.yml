@@ -1,0 +1,4 @@
+author: "IWantSomeFish"
+delete-after: True
+changes:
+  - balance: "Добавлено КД для БСА в одну минуту"
