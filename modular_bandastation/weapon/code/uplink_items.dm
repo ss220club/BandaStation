@@ -317,10 +317,10 @@
 		Эту штуку выменяли на ящик водки у интенданта где-то на окраине сектора. \
 		Смазка может быть старой, но эта дура выстрелит в любом состоянии, лады?"
 	item = /obj/item/gun/ballistic/revolver/bobr
-	price_min = CARGO_CRATE_VALUE * 10
-	price_max = CARGO_CRATE_VALUE * 20
+	price_min = CARGO_CRATE_VALUE * 25
+	price_max = CARGO_CRATE_VALUE * 50
 	stock_max = 1
-	availability_prob = 50
+	availability_prob = 30
 
 /datum/market_item/weapon/bobr/short
 	name = "Bóbr revolver (short)"
@@ -329,10 +329,10 @@
 		Он тяжелый, грубый и валит с ног даже стрелка. \
 		Мы не гарантируем, что ты удержишь его в руках после первого выстрела, усек?"
 	item = /obj/item/gun/ballistic/revolver/bobr/short
-	price_min = CARGO_CRATE_VALUE * 10
-	price_max = CARGO_CRATE_VALUE * 20
+	price_min = CARGO_CRATE_VALUE * 25
+	price_max = CARGO_CRATE_VALUE * 50
 	stock_max = 1
-	availability_prob = 30
+	availability_prob = 25
 
 /datum/market_item/weapon/renoster
 	name = "Renoster shotgun"
@@ -341,10 +341,10 @@
 		Мы спилили серийные номера, но на прикладе еще видны царапины от прошлой зачистки. \
 		Он лягается как черт, и мы не оплачиваем лечение твоего плеча, усек?"
 	item = /obj/effect/spawner/random/contraband/renoster
-	price_min = CARGO_CRATE_VALUE * 20
-	price_max = CARGO_CRATE_VALUE * 25
+	price_min = CARGO_CRATE_VALUE * 60
+	price_max = CARGO_CRATE_VALUE * 80
 	stock_max = 1
-	availability_prob = 50
+	availability_prob = 30
 
 /datum/market_item/weapon/skild
 	name = "Skild pistol"
@@ -353,10 +353,10 @@
 		Партия списанная, может ствол перегрет, а может из него вообще боялись стрелять. \
 		Мы точность не гарантируем, тут главное попасть в ту же сторону, лады?"
 	item = /obj/effect/spawner/random/contraband/skild
-	price_min = CARGO_CRATE_VALUE * 20
-	price_max = CARGO_CRATE_VALUE * 25
+	price_min = CARGO_CRATE_VALUE * 100
+	price_max = CARGO_CRATE_VALUE * 120
 	stock_max = 1
-	availability_prob = 35
+	availability_prob = 15
 
 /datum/market_item/weapon/sindano
 	name = "Sindano SMG"
@@ -367,10 +367,10 @@
 		Этот ствол, скорее всего, «потерялся» во время учений или переброски войск. \
 		Механизм может быть разболтан от частой стрельбы очередями, мы гарантий не даем, лады?"
 	item = /obj/effect/spawner/random/contraband/sindano
-	price_min = CARGO_CRATE_VALUE * 20
-	price_max = CARGO_CRATE_VALUE * 25
+	price_min = CARGO_CRATE_VALUE * 60
+	price_max = CARGO_CRATE_VALUE * 80
 	stock_max = 1
-	availability_prob = 50
+	availability_prob = 30
 
 /datum/market_item/weapon/tp14
 	name = "TP-14 pistol"
@@ -380,10 +380,10 @@
 		Эта пушка выглядит слишком аккуратной и эргономичной для этой дыры, так что не свети ей лишний раз. \
 		Он может быть капризным к грязным патронам, так что не пихай в него всякий мусор, лады?"
 	item = /obj/item/gun/ballistic/automatic/pistol/tp14
-	price_min = CARGO_CRATE_VALUE * 20
-	price_max = CARGO_CRATE_VALUE * 25
+	price_min = CARGO_CRATE_VALUE * 60
+	price_max = CARGO_CRATE_VALUE * 80
 	stock_max = 1
-	availability_prob = 35
+	availability_prob = 30
 
 /datum/market_item/weapon/fn18
 	name = "FN-18 SMG"
@@ -393,10 +393,10 @@
 		Компактная, скорострельная и жрет дешевые 9мм патроны, не давясь. \
 		Правда, эта крошка не любит песок и грязь, так что не роняй ее, лады?"
 	item = /obj/item/gun/ballistic/automatic/fn18
-	price_min = CARGO_CRATE_VALUE * 40
-	price_max = CARGO_CRATE_VALUE * 50
+	price_min = CARGO_CRATE_VALUE * 150
+	price_max = CARGO_CRATE_VALUE * 180
 	stock_max = 1
-	availability_prob = 30
+	availability_prob = 5
 
 /datum/market_item/weapon/takbok
 	name = "Takbok revolver"
@@ -405,10 +405,10 @@
 		Эта пушка выглядит потертой, будто прошла пару войн на границе, но механизм надежен, как кусок скалы. \
 		Если промахнешься всеми пятью — можешь просто ударить им по голове, эффект будет тот же, лады?"
 	item = /obj/effect/spawner/random/contraband/takbok
-	price_min = CARGO_CRATE_VALUE * 40
-	price_max = CARGO_CRATE_VALUE * 50
+	price_min = CARGO_CRATE_VALUE * 100
+	price_max = CARGO_CRATE_VALUE * 150
 	stock_max = 1
-	availability_prob = 35
+	availability_prob = 10
 
 /datum/market_item/weapon/sabel
 	name = "AMK rifle"
@@ -417,10 +417,10 @@
 		Этот ствол, наверное, прошел через три революции, прежде чем попасть к нам. \
 		Он будет стрелять всегда, даже если ты забудешь, как его чистить, усек?"
 	item = /obj/effect/spawner/random/contraband/amk
-	price_min = CARGO_CRATE_VALUE * 40
-	price_max = CARGO_CRATE_VALUE * 50
+	price_min = CARGO_CRATE_VALUE * 90
+	price_max = CARGO_CRATE_VALUE * 100
 	stock_max = 1
-	availability_prob = 30
+	availability_prob = 10
 
 /datum/market_item/weapon/sabel
 	name = "Sabel carbine"
@@ -430,10 +430,10 @@
 		Идеально для охоты или самообороны, если ты не планируешь устраивать маленькую войну. \
 		И не пытайся кустарно вернуть ему автоогонь, лады?"
 	item = /obj/item/gun/ballistic/automatic/sabel
-	price_min = CARGO_CRATE_VALUE * 25
-	price_max = CARGO_CRATE_VALUE * 40
+	price_min = CARGO_CRATE_VALUE * 60
+	price_max = CARGO_CRATE_VALUE * 80
 	stock_max = 1
-	availability_prob = 50
+	availability_prob = 25
 
 /datum/market_item/weapon/wespe
 	name = "Wespe pistol"
@@ -446,7 +446,7 @@
 	price_min = CARGO_CRATE_VALUE * 20
 	price_max = CARGO_CRATE_VALUE * 25
 	stock_max = 1
-	availability_prob = 50
+	availability_prob = 35
 
 /datum/market_item/weapon/carwo
 	name = "Carwo rifle"
@@ -457,7 +457,7 @@
 		Ствол потертый, номера спилены... может она прошла войну, а может валялась в шлюзе. \
 		Если ее заклинит в бою — мы тебя не знаем, понял?"
 	item = /obj/effect/spawner/random/contraband/carwo
-	price_min = CARGO_CRATE_VALUE * 40
-	price_max = CARGO_CRATE_VALUE * 50
+	price_min = CARGO_CRATE_VALUE * 100
+	price_max = CARGO_CRATE_VALUE * 120
 	stock_max = 1
-	availability_prob = 35
+	availability_prob = 10

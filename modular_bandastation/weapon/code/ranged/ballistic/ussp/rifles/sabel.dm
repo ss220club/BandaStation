@@ -18,6 +18,7 @@
 	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/heavy_shot_suppressed.ogg'
 	burst_size = 1
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c762x39mm/small/civ
 	special_mags = TRUE
 	can_suppress = TRUE
 	suppressor_x_offset = 3
