@@ -107,6 +107,12 @@
 	desc = "Продвинутая версия стандартного офицерского берета. Выдерживает попадание аннигиляторной пушки. Проверять не стоит."
 	greyscale_colors = "#b72b2f#acacac"
 
+/obj/item/clothing/head/beret/ert/ntci
+	name = "NTCI Operative beret"
+	desc = "Берет оперативника НТКР."
+	icon_state = "/obj/item/clothing/head/beret/militia"
+	armor_type = /datum/armor/beret_centcom_formal
+
 /obj/item/clothing/head/caphat/beret_black
 	name = "black captain beret"
 	desc = "Хорошо быть королём."

@@ -15,6 +15,7 @@
 	accepted_magazine_type = /obj/item/ammo_box/magazine/pmk
 	weapon_weight = WEAPON_HEAVY
 	burst_size = 1
+	fire_delay = 0.3 SECONDS
 	actions_types = list()
 	can_suppress = TRUE
 	suppressor_x_offset = 8

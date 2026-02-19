@@ -19,7 +19,7 @@
 	can_suppress = TRUE
 	suppressor_x_offset = 8
 	burst_size = 1
-	fire_delay = 0.1 SECONDS
+	fire_delay = 0.2 SECONDS
 	actions_types = list()
 	spread = 10
 	recoil = 0.7

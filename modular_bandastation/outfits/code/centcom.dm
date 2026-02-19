@@ -182,3 +182,145 @@
 /obj/item/storage/box/survival/centcom
 	mask_type = /obj/item/clothing/mask/gas/sechailer
 	medipen_type =  /obj/item/reagent_containers/hypospray/medipen/atropine
+
+// NTCI Operatives
+/datum/outfit/centcom/ntci
+	name = "NTCI - Operative (Base)"
+	id = /obj/item/card/id/advanced/black
+	id_trim = /datum/id_trim/centcom/ntci
+	uniform = /obj/item/clothing/under/rank/centcom/military
+	back = /obj/item/storage/backpack/satchel/leather
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom/ntci,
+		/obj/item/lighter/skull,
+		/obj/item/door_remote/omni,
+	)
+	belt = /obj/item/storage/belt/military/holster/ntci/full
+	ears = /obj/item/radio/headset/headset_cent/alt/leader
+	glasses = /obj/item/clothing/glasses/hud/security/sunglasses
+	gloves = /obj/item/clothing/gloves/combat
+	head = /obj/item/clothing/head/beret/ert/ntci
+	mask = /obj/item/clothing/mask/breath/breathscarf
+	shoes = /obj/item/clothing/shoes/combat/swat
+	r_pocket = /obj/item/knife/combat
+	l_pocket = /obj/item/reagent_containers/hypospray/combat/nanites
+
+/datum/id_trim/centcom/ntci
+	assignment = "NTCI Operative"
+	honorifics = list("Оперативник")
+	honorific_positions = HONORIFIC_POSITION_LAST | HONORIFIC_POSITION_NONE
+	trim_state = "trim_deathcommando"
+
+/obj/item/storage/box/survival/centcom/ntci/PopulateContents()
+	. = ..()
+	new /obj/item/extinguisher/mini(src)
+	new /obj/item/radio/off(src)
+	new /obj/item/flashlight/seclite(src)
+	new /obj/item/food/rationpack(src)
+
+/datum/outfit/centcom/ntci/equipped
+	name = "NTCI - Operative (Rifleman)"
+	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/ammo
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom,
+		/obj/item/clothing/head/beret/ert/ntci,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/grenade/smokebomb = 2,
+		/obj/item/grenade/c4,
+		/obj/item/grenade/c4/x4,
+		/obj/item/ammo_box/magazine/c762x39mm/ap,
+		/obj/item/ammo_box/magazine/c762x39mm/ap,
+		/obj/item/ammo_box/magazine/c762x39mm/incendiary,
+		/obj/item/ammo_box/magazine/c762x39mm/emp,
+	)
+	suit = /obj/item/clothing/suit/armor/vest/ntci_chestplate
+	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical
+	belt = /obj/item/storage/belt/military/holster/ntci/full_rifleman
+	head = /obj/item/clothing/head/helmet/ntci_helmet
+
+/datum/outfit/centcom/ntci/equipped/unmarked
+	name = "NTCI - Unknown Operative (Rifleman)"
+	id_trim = /datum/id_trim/centcom/ntci/unmarked
+	uniform = /obj/item/clothing/under/shirt_black
+
+/datum/id_trim/centcom/ntci/unmarked
+	assignment = "Operative"
+
+/datum/outfit/centcom/ntci/equipped/medic
+	name = "NTCI - Operative (Medic)"
+	id_trim = /datum/id_trim/centcom/ntci/medic
+	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/med
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom/ntci,
+		/obj/item/clothing/head/beret/ert/ntci,
+		/obj/item/storage/medkit/tactical/premium,
+		/obj/item/defibrillator/compact/combat/loaded/nanotrasen,
+		/obj/item/grenade/smokebomb = 2,
+		/obj/item/ammo_box/magazine/c762x39mm/ap,
+		/obj/item/ammo_box/magazine/c762x39mm/ap,
+		/obj/item/ammo_box/magazine/c762x39mm/incendiary,
+		/obj/item/ammo_box/magazine/c762x39mm/emp,
+	)
+
+/datum/id_trim/centcom/ntci/medic
+	assignment = "NTCI Operative Medic"
+
+/datum/outfit/centcom/ntci/equipped/medic/unmarked
+	name = "NTCI - Unknown Operative (Medic)"
+	id_trim = /datum/id_trim/centcom/ntci/unmarked
+	uniform = /obj/item/clothing/under/shirt_white
+
+/datum/outfit/centcom/ntci/equipped/machinegunner
+	name = "NTCI - Operative (Machinegunner)"
+	id_trim = /datum/id_trim/centcom/ntci/machinegunner
+	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/ammo
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom/ntci,
+		/obj/item/clothing/head/beret/ert/ntci,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/grenade/smokebomb = 2,
+		/obj/item/grenade/c4,
+		/obj/item/grenade/c4/x4,
+		/obj/item/ammo_box/magazine/cm40/ap,
+		/obj/item/ammo_box/magazine/cm40/ap,
+		/obj/item/ammo_box/magazine/cm40/incendiary,
+		/obj/item/ammo_box/magazine/cm40/hp,
+		/obj/item/gun/ballistic/rocketlauncher/oneuse,
+	)
+	suit = /obj/item/clothing/suit/armor/vest/ntci_chestplate // Make heavy armor
+	suit_store = /obj/item/gun/ballistic/automatic/cm40
+	belt = /obj/item/storage/belt/military/holster/ntci/full_machinegun
+
+/datum/id_trim/centcom/ntci/machinegunner
+	assignment = "NTCI Operative Machinegunner"
+
+/datum/outfit/centcom/ntci/equipped/machinegunner/unmarked
+	name = "NTCI - Unknown Operative (Machinegunner)"
+	id_trim = /datum/id_trim/centcom/ntci/unmarked
+	uniform = /obj/item/clothing/under/tshirt_black
+
+/datum/outfit/centcom/ntci/equipped/sniper
+	name = "NTCI - Operative (Sniper)"
+	id_trim = /datum/id_trim/centcom/ntci/sniper
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom/ntci,
+		/obj/item/clothing/head/beret/ert/ntci,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/grenade/smokebomb = 2,
+		/obj/item/grenade/c4,
+		/obj/item/grenade/c4/x4,
+		/obj/item/ammo_box/magazine/c338/extended,
+		/obj/item/ammo_box/magazine/c338/extended/hp,
+		/obj/item/ammo_box/magazine/c338/extended/ap,
+		/obj/item/ammo_box/magazine/c338/extended/incendiary,
+	)
+	suit_store = /obj/item/gun/ballistic/automatic/f90
+	belt = /obj/item/storage/belt/military/holster/ntci/full_sniper
+
+/datum/id_trim/centcom/ntci/sniper
+	assignment = "NTCI Operative Sniper"
+
+/datum/outfit/centcom/ntci/equipped/sniper/unmarked
+	name = "NTCI - Unknown Operative (Sniper)"
+	id_trim = /datum/id_trim/centcom/ntci/unmarked
+	uniform = /obj/item/clothing/under/hoodie_black

@@ -171,7 +171,7 @@
 /obj/projectile/bullet/c762x39/gauss/on_hit(atom/target, blocked = 0, pierce_hit)
 	. = ..()
 	if(isliving(target))
-		if(blocked > 50 || pierces > 2)
+		if(blocked > 80 || pierces > 2)
 			projectile_piercing = NONE
 			damage = max(0, damage - 20)
 			armour_penetration = max(0, armour_penetration - 20)
