@@ -276,20 +276,53 @@
 // WHITE WALL: Виртуальный КПК
 // ============================================
 
+/// Внутренний КПК для IPC — не тратит заряд, показывает заряд батареи КПБ
+/obj/item/modular_computer/pda/ipc_internal
+	name = "IPC Internal PDA"
+
+/// Не тратим заряд — питание идёт от батареи КПБ напрямую
+/obj/item/modular_computer/pda/ipc_internal/check_power_override()
+	return TRUE
+
+/// Синхронизируем отображение заряда с батареей КПБ
+/obj/item/modular_computer/pda/ipc_internal/get_header_data()
+	var/list/data = ..()
+	// Берём заряд из батареи КПБ владельца
+	var/mob/living/carbon/human/H = loc
+	if(istype(H))
+		var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
+		if(battery)
+			var/pct = round((battery.charge / battery.maxcharge) * 100)
+			data["PC_lowpower_mode"] = (battery.charge <= 0)
+			data["PC_batterypercent"] = "[pct]%"
+			if(pct >= 80)
+				data["PC_batteryicon"] = "batt_100.gif"
+			else if(pct >= 60)
+				data["PC_batteryicon"] = "batt_80.gif"
+			else if(pct >= 40)
+				data["PC_batteryicon"] = "batt_60.gif"
+			else if(pct >= 20)
+				data["PC_batteryicon"] = "batt_40.gif"
+			else if(pct >= 5)
+				data["PC_batteryicon"] = "batt_20.gif"
+			else
+				data["PC_batteryicon"] = "batt_5.gif"
+	return data
+
 /datum/ipc_netapp/virtual_pda
 	name = "КПК-эмулятор"
-	desc = "Полноценный эмулятор КПК (КПК) со всеми стандартными приложениями: блокнот, мессенджер, манифест, навигатор и др."
+	desc = "Полноценный эмулятор КПК со всеми стандартными приложениями. Питание от батареи КПБ, доп. расхода нет."
 	category = "pda"
 	file_size = 512
 	has_effect = TRUE
 	/// Внутренний КПК (создаётся при установке)
-	var/obj/item/modular_computer/pda/internal_pda
+	var/obj/item/modular_computer/pda/ipc_internal/internal_pda
 
 /// Создать внутренний КПК для пользователя
 /datum/ipc_netapp/virtual_pda/proc/ensure_pda(mob/living/carbon/human/user)
 	if(internal_pda && !QDELETED(internal_pda))
 		return internal_pda
-	internal_pda = new /obj/item/modular_computer/pda(user)
+	internal_pda = new /obj/item/modular_computer/pda/ipc_internal(user)
 	internal_pda.enabled = TRUE
 	internal_pda.screen_on = TRUE
 	// Назначаем имя владельца
