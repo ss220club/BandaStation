@@ -5,7 +5,7 @@
 	weight = 5
 	cost = STATION_TRAIT_COST_MINIMAL
 	show_in_report = TRUE
-	report_message = "Вследствии изменениях в кадровой политике НаноТрейзен - ограничения по биологическому виду для командного состава были аннулированы."
+	report_message = "Вследствии изменений в кадровой политике НаноТрейзен - ограничения по биологическому виду для командного состава были аннулированы."
 	trait_flags = STATION_TRAIT_MAP_UNRESTRICTED
 	sign_up_button = TRUE // only because with this flag our trait will be added to lobby_station_traits (which is sucks)
 	public_in_lobby = TRUE
