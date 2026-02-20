@@ -32,6 +32,13 @@
 	. = ..()
 	if(sawn_off)
 		inhand_icon_state = "[base_icon_state]_sawoff"
+		SET_BASE_PIXEL(0, 0)
+		AddComponent(/datum/component/seclite_attachable, \
+			light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+			light_overlay = "flight", \
+			overlay_x = 20, \
+			overlay_y = 11 \
+		)
 	else
 		inhand_icon_state = "[base_icon_state]"
 
@@ -58,12 +65,13 @@
 	righthand_file = 'icons/mob/inhands/weapons/64x_guns_right.dmi'
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
+	SET_BASE_PIXEL(0, 0)
 
 /obj/item/gun/ballistic/shotgun/automatic/combat/compact/add_seclight_point()
 	AddComponent(/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "flight", \
-		overlay_x = 28, \
+		overlay_x = 20, \
 		overlay_y = 11)
 
 /obj/item/gun/ballistic/shotgun/automatic/dual_tube

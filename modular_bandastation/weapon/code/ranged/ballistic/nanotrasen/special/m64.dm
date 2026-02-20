@@ -47,6 +47,7 @@
 	if(sawn_off)
 		inhand_icon_state = "[base_icon_state]_sawoff"
 		worn_icon_state = "[base_icon_state]_sawoff"
+		suppressor_x_offset = 0
 	else
 		inhand_icon_state = "[base_icon_state]"
 		worn_icon_state = "[base_icon_state]"
