@@ -21,7 +21,7 @@
 	. = ..()
 	if(!isliving(user))
 		return
-	user.AddComponent(/datum/component/pausable_bodycam, "bodycam", "[user.name] (Нательная камера)", "ss13", FALSE, 0.5 SECONDS, camera_on && !broken)
+	user.AddComponent(/datum/component/pausable_bodycam, "bodycam", "![user.name] (Нательная камера)", "ss13", FALSE, 0.5 SECONDS, camera_on && !broken)
 	toggle_action = new(src)
 	toggle_action.Grant(user)
 	RegisterSignal(clothes, COMSIG_ATOM_EMP_ACT, PROC_REF(on_emp))
