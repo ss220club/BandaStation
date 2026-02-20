@@ -8137,15 +8137,6 @@ instrumental = "вихревым леденцом"
 prepositional = "вихревом леденце"
 gender = "male"
 
-["pizza"]
-nominative = "пицца"
-genitive = "пиццы"
-dative = "пицце"
-accusative = "пиццу"
-instrumental = "пиццей"
-prepositional = "пицце"
-gender = "female"
-
 # MARK: Food - bread.dm
 
 ["bread"]
