@@ -3,6 +3,7 @@
 	network = list(CAMERANET_NETWORK_SS13)
 	internal_light = FALSE
 	start_active = TRUE
+	view_range = 5
 	var/datum/component/pausable_bodycam/bodycam_component
 
 /obj/machinery/camera/bodycam/Initialize(mapload)
