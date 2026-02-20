@@ -203,7 +203,7 @@
 	friendly_pull_line = "О-ох, куда вы меня уводите?"
 	first_warning_line = "Не трогай меня, извращенец!"
 	second_warning_line = "Я стану супер-сайяном, если ты ещё раз ко мне прикоснешься! Последнее предупреждение!"
-	self_defense_line = "ОМАЕ ВА МО, СИНДЭИРУ!"
+	self_defense_line = "ОМАЕ ВА МО, ШИНДЭЙРУ!"
 	speech_sound = 'sound/mobs/non-humanoids/tourist/tourist_talk_japanese1.ogg'
 	orderable_objects = list(
 		VENUE_RESTAURANT = list(
