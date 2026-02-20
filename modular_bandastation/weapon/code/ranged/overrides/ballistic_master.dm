@@ -33,12 +33,6 @@
 	if(sawn_off)
 		inhand_icon_state = "[base_icon_state]_sawoff"
 		SET_BASE_PIXEL(0, 0)
-		AddComponent(/datum/component/seclite_attachable, \
-			light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
-			light_overlay = "flight", \
-			overlay_x = 20, \
-			overlay_y = 11 \
-		)
 	else
 		inhand_icon_state = "[base_icon_state]"
 
@@ -46,6 +40,12 @@
 	. = ..()
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 20, \
+		overlay_y = 11 \
+	)
 
 /obj/item/gun/ballistic/shotgun/sc_pump
 	lefthand_file = 'icons/mob/inhands/weapons/64x_guns_left.dmi'
