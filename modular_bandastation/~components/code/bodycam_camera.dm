@@ -1,4 +1,4 @@
-// Used with pausable_bodycam, skips camera chunk addition on init, activates and updates when recieving a signal (observed from monitor)
+// Used with pausable_bodycam, skips camera chunk addition on init, activates and updates when receiving a signal (observed from monitor)
 /obj/machinery/camera/bodycam
 	network = list(CAMERANET_NETWORK_SS13)
 	internal_light = FALSE
