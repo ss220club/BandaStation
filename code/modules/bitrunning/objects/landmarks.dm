@@ -1,41 +1,41 @@
 /obj/effect/landmark/bitrunning
-	name = "Generic bitrunning effect"
+	name = "Эффект запуска битрана"
 	icon = 'icons/effects/bitrunning.dmi'
 	icon_state = "crate"
 
 /// In case you want to gate the crate behind a special condition.
 /obj/effect/landmark/bitrunning/loot_signal
-	name = "Mysterious aura"
+	name = "Мистическая аура"
 
 /// Where the exit hololadder spawns
 /obj/effect/landmark/bitrunning/hololadder_spawn
-	name = "Bitrunning hololadder spawn"
+	name = "Загрузка голозагрузчика битрана"
 	icon_state = "hololadder"
 
 /// A permanent exit for the domain
 /obj/effect/landmark/bitrunning/permanent_exit
-	name = "Bitrunning permanent exit"
+	name = "Постоянный выход из битрана"
 	icon_state = "perm_exit"
 
 /// Where the crates need to be taken
 /obj/effect/landmark/bitrunning/cache_goal_turf
-	name = "Bitrunning goal turf"
+	name = "Место приёма ящиков битрана"
 	icon_state = "goal"
 
 /// Where you want the crate to spawn
 /obj/effect/landmark/bitrunning/cache_spawn
-	name = "Bitrunning crate spawn"
+	name = "Место появления ящиков битрана"
 	icon_state = "crate"
 
 /// Where you want secondary objectives to spawn
 /obj/effect/landmark/bitrunning/curiosity_spawn
-	name = "Bitrunning curiosity spawn"
+	name = "Генерация точек интереса битрана"
 	icon_state = "crate"
 
 ///Swaps the locations of an encrypted crate in the area with another randomly selected crate.
 ///Randomizes names, so you have to inspect crates manually.
 /obj/effect/landmark/bitrunning/crate_replacer
-	name = "Bitrunning Goal Crate Randomizer"
+	name = "Рандомизатор ящиков с целями битрана"
 	icon_state = "crate"
 
 /obj/effect/landmark/bitrunning/crate_replacer/Initialize(mapload)
@@ -54,16 +54,16 @@
 			for(var/obj/structure/closet/crate/crate_to_check in area_turf)
 				if(istype(crate_to_check, /obj/structure/closet/crate/secure/bitrunning/encrypted))
 					encrypted_crate = crate_to_check
-					crate_to_check.desc += span_hypnophrase(" This feels like the crate we're looking for!")
+					crate_to_check.desc += span_hypnophrase("Похоже, это тот самый ящик, который мы ищем!")
 				else
 					crate_list += crate_to_check
-				crate_to_check.name = "Unidentified Crate"
+				crate_to_check.name = "Неопознанный ящик"
 
 	if(!encrypted_crate)
-		stack_trace("Bitrunning Goal Crate Randomizer failed to find an encrypted crate to swap positions for.")
+		stack_trace("Рандомизатору ящиков для целей битрана не удалось найти зашифрованный ящик для обмена позициями.")
 		return
 	if(!length(crate_list))
-		stack_trace("Bitrunning Goal Crate Randomizer failed to find any NORMAL crates to swap positions for.")
+		stack_trace("Рандомизатору ящиков для целей битрана не удалось найти ни одного обычного ящика,с котором можно было бы поменять позиции.")
 		return
 
 	var/original_location = encrypted_crate.loc
@@ -75,7 +75,7 @@
 
 /// A location for mobs to spawn.
 /obj/effect/landmark/bitrunning/mob_segment
-	name = "Bitrunning modular mob segment"
+	name = "Модульный сегмент с мобами битрана"
 	icon_state = "mob_segment"
 
 

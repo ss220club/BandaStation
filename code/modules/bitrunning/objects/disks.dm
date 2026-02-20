@@ -5,7 +5,7 @@
  * Just make it fun and engaging, it's PvE content.
  */
 /obj/item/disk/bitrunning
-	name = "generic bitrunning program"
+	name = "Основная программа битрана"
 	desc = "Диск с исходным кодом."
 	base_icon_state = "datadisk"
 	icon_state = "datadisk0"
@@ -148,7 +148,7 @@
 		if(initial(thing.name) == choice)
 			granted_item = thing
 
-	balloon_alert(user, "selected")
+	balloon_alert(user, "выбранно")
 	playsound(user, 'sound/items/click.ogg', 50, TRUE)
 	choice_made = choice
 
@@ -181,7 +181,7 @@
 
 ///proto-kinetic accelerator mods, to be applied to pka's given inside domains
 /obj/item/disk/bitrunning/item/pka_mods
-	name = "bitrunning gear: proto-kinetic accelerator mods"
+	name = "Снаряжение битраннинга: моды протокинетического акселератора"
 	selectable_items = list(
 		/obj/item/borg/upgrade/modkit/range,
 		/obj/item/borg/upgrade/modkit/damage,
@@ -191,7 +191,7 @@
 	)
 
 /obj/item/disk/bitrunning/item/pka_mods/premium
-	name = "bitrunning gear: premium proto-kinetic accelerator mods"
+	name = "Снаряжение битраннинга: премиальные моды протокинетического акселератора"
 	selectable_items = list(
 		/obj/item/borg/upgrade/modkit/cooldown/repeater,
 		/obj/item/borg/upgrade/modkit/lifesteal,
@@ -202,7 +202,7 @@
 
 ///proto-kinetic crusher trophies, to be applied to pkc's given inside domains
 /obj/item/disk/bitrunning/item/pkc_mods
-	name = "bitrunning gear: proto-kinetic crusher mods"
+	name = "Снаряжение битраннинга: моды протокинетического крушителя"
 	selectable_items = list(
 		/obj/item/crusher_trophy/watcher_wing,
 		/obj/item/crusher_trophy/blaster_tubes/magma_wing,
@@ -211,7 +211,7 @@
 	)
 
 /obj/item/disk/bitrunning/item/pkc_mods/premium
-	name = "bitrunning gear: premium proto-kinetic crusher mods"
+	name = "Снаряжение битраннинга: премиальные моды протокинетического крушителя"
 	selectable_items = list(
 		/obj/item/crusher_trophy/watcher_wing/ice_wing,
 		/obj/item/crusher_trophy/blaster_tubes,
@@ -223,7 +223,7 @@
 	)
 
 /obj/item/disk/bitrunning/item/mini_uzi
-	name = "bitrunning gear: mini-uzi"
+	name = "Снаряжение битраннинга: мини-узи"
 	selectable_items = list(
 		/obj/item/gun/ballistic/automatic/mini_uzi,
 	)

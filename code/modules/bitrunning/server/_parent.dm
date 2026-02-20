@@ -77,10 +77,10 @@
 		return
 
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] Panel"
+		context[SCREENTIP_CONTEXT_LMB] = "Панель [panel_open ? "закрыта" : "открыта"]"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(held_item.tool_behaviour == TOOL_CROWBAR && panel_open)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "разборка"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/quantum_server/examine(mob/user)
@@ -88,9 +88,9 @@
 
 	. += span_infoplain("Может требовать много ресурсов при работе. Обеспечьте достаточное энергоснабжение.")
 
-	. += span_notice("Its maintenance panel can be [EXAMINE_HINT("screwed")] [panel_open ? "close" : "open"].")
+	. += span_notice("Панель технического обслуживания может быть [EXAMINE_HINT("screwed")] [panel_open ? "закрыта" : "открыта"].")
 	if(panel_open)
-		. += span_notice("It can be [EXAMINE_HINT("pried")] apart.")
+		. += span_notice("Может быть [EXAMINE_HINT("pried")] отдельно.")
 
 	var/upgraded = FALSE
 	if(capacitor_coefficient < 1)
@@ -123,7 +123,7 @@
 	threat_prob_max *= 2
 
 	add_overlay(mutable_appearance('icons/obj/machines/bitrunning.dmi', "emag_overlay"))
-	balloon_alert(user, "system jailbroken...")
+	balloon_alert(user, "система взломана...")
 	playsound(src, 'sound/effects/sparks/sparks1.ogg', 35, vary = TRUE)
 
 
@@ -141,7 +141,7 @@
 		icon_state = base_icon_state
 		return ..()
 
-	icon_state = "[base_icon_state]_[is_ready ? "on" : "off"]"
+	icon_state = "[base_icon_state]_[is_ready ? "ВКЛ" : "ВЫКЛ"]"
 	return ..()
 
 
@@ -149,7 +149,7 @@
 	if(!istype(tool, /obj/item/bitrunning_debug))
 		return NONE
 
-	balloon_alert(user, "*hacker voice* i'm in")
+	balloon_alert(user, "*hacker voice* я внутри")
 	obj_flags |= EMAGGED
 	glitch_chance = 0.5
 	capacitor_coefficient = 0.1
@@ -159,10 +159,10 @@
 /obj/machinery/quantum_server/crowbar_act(mob/living/user, obj/item/crowbar)
 	. = NONE
 	if(!is_ready)
-		balloon_alert(user, "it's scalding hot!")
+		balloon_alert(user, "обжигающе горячо!")
 		return ITEM_INTERACT_FAILURE
 	if(length(avatar_connection_refs))
-		balloon_alert(user, "all clients must disconnect!")
+		balloon_alert(user, "все клиенты должны отключиться!")
 		return ITEM_INTERACT_FAILURE
 	if(default_deconstruction_crowbar(crowbar))
 		return ITEM_INTERACT_SUCCESS
@@ -170,7 +170,7 @@
 /obj/machinery/quantum_server/screwdriver_act(mob/living/user, obj/item/screwdriver)
 	. = NONE
 	if(!is_ready)
-		balloon_alert(user, "it's scalding hot!")
+		balloon_alert(user, "обжигающе горячо!")
 		return ITEM_INTERACT_FAILURE
 	if(default_deconstruction_screwdriver(user, "[base_icon_state]_panel", base_icon_state, screwdriver))
 		return ITEM_INTERACT_SUCCESS
@@ -195,8 +195,8 @@
 	return ..()
 
 /datum/aas_config_entry/bitrunning_QS_ready_announcement
-	name = "Cargo Alert: Bitrunning QS Ready"
-	general_tooltip = "Announces when the quantum server is ready to be used. No variables provided"
+	name = "Карго оповещение: Битран QS готов к работе"
+	general_tooltip = "Оповещает, когда квантовый сервер готов к работе. Переменные не указаны."
 	announcement_lines_map = list(
-		"Message" = "Quantum Server report: Thermal systems within operational parameters. Proceeding to domain configuration."
+		"Message" = "Отчёт квантового сервера: : Тепловые системы в рабочем состоянии. Переходим к настройке домена."
 	)

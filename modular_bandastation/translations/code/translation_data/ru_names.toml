@@ -31730,3 +31730,157 @@ accusative = "большого символа"
 instrumental = "большим символом"
 prepositional = "большом символе"
 gender = "male"
+
+# MARK: Bitrun
+["oval sunglasses"]
+nominative = "овальные солнцезащитные очки"
+genitive = "овальных солнцезащитных очков"
+dative = "овальным солнцезащитным очкам"
+accusative = "овальные солнцезащитные очки"
+instrumental = "овальными солнцезащитными очками"
+prepositional = "овальных солнцезащитных очках"
+gender = "plural"
+
+["leather trenchcoat"]
+nominative = "кожаный тренч"
+genitive = "кожаного тренча"
+dative = "кожаному тренчу"
+accusative = "кожаное тренч"
+instrumental = "кожаным тренчем"
+prepositional = "кожаном тренче"
+gender = "neuter"
+
+["bitrunning debug item"]
+nominative = "битранерский отладочный предмет"
+genitive = "битранерского отладочного предмета"
+dative = "битранерскому отладочному предмету"
+accusative = "битранерский отладочный предмет"
+instrumental = "битранерским отладочным предметом"
+prepositional = "битранерском отладочном предмете"
+gender = "male"
+
+["hololadder"]
+nominative = "голозагрузчик"
+genitive = "голозакгрузчика"
+dative = "голозагрузчику"
+accusative = "голозагрузчик"
+instrumental = "голозагрузчиком"
+prepositional = "голозагрузчике"
+gender = "male"
+
+["host monitor"]
+nominative = "главный монитор"
+genitive = "главного монитора"
+dative = "главному монитору"
+accusative = "главный монитор"
+instrumental = "главным монитором"
+prepositional = "главном мониторе"
+gender = "male"
+
+["base class cache"]
+nominative = "кэш базового класса"
+genitive = "кэша базового класса"
+dative = "кэшу базового класса"
+accusative = "кэш базового класса"
+instrumental = "кэшом базового класса"
+prepositional = "кэше базового класса"
+gender = "male"
+
+["encrypted cache"]
+nominative = "зашифрованный кэш"
+genitive = "зашифрованного кэша"
+dative = "зашифрованному кэшу"
+accusative = "зашифрованный кэш"
+instrumental = "зашифрованным кэшом"
+prepositional = "зашифрованном кэше"
+gender = "male"
+
+["decrypted cache"]
+nominative = "расшифрованный кэш"
+genitive = "расшифрованного кэша"
+dative = "расшифрованному кэшу"
+accusative = "расшифрованный кэш"
+instrumental = "расшифрованным кэшом"
+prepositional = "расшифрованном кэше"
+gender = "male"
+
+["bitrunning supplies order console"]
+nominative = "консоль заказа расходных материалов битрана"
+genitive = "консоли заказа расходных материалов битрана"
+dative = "консоли заказа расходных материалов битрана"
+accusative = "консоль заказа расходных материалов битрана"
+instrumental = "консолью заказа расходных материалов битрана"
+prepositional = "консоли заказа расходных материалов битрана"
+gender = "female"
+
+["Quantum Server"]
+nominative = "квантовый сервер"
+genitive = "квантового сервера"
+dative = "квантовуму серверу"
+accusative = "квантовый сервер"
+instrumental = "квантовым сервером"
+prepositional = "квантовом сервере"
+gender = "male"
+
+["lockbox"]
+nominative = "запирающийся ящик"
+genitive = "запирающегося ящика"
+dative = "запирающемуся ящику"
+accusative = "запирающийся ящик"
+instrumental = "запирающимся ящиком"
+prepositional = "запирающемся ящике"
+gender = "male"
+
+["lockbox of clusterbangs"]
+nominative = "запертый контейнер с кластерными гранатами"
+genitive = "запертого контейнера с кластерными гранатами"
+dative = "запертому контейнеру с кластерными гранатами"
+accusative = "запертый контейнер с кластерными гранатами"
+instrumental = "запертым контейнером с кластерными гранатами"
+prepositional = "запертом контейнере с кластерными гранатами"
+gender = "male"
+
+["order lockbox"]
+nominative = "запирающийся ящик для заказов"
+genitive = "запирающегося ящика для заказов"
+dative = "запирающемуся ящику для заказов"
+accusative = "запирающийся ящик для заказов"
+instrumental = "запирающимся ящиком для заказов"
+prepositional = "зопирающимся ящике для заказов"
+gender = "male"
+
+["dueling pistol case"]
+nominative = "футляр для дуэльного пистолета"
+genitive = "футляра для дуэльного пистолета"
+dative = "футляру для дуэльного пистолета"
+accusative = "футляр для дуэльного пистолета"
+instrumental = "футляром для дуэльного пистолета"
+prepositional = "футляре для дуэльного пистолета"
+gender = "male"
+
+["base class curiosity"]
+nominative = "редкость базового класса"
+genitive = "редкости базового класса"
+dative = "редкости базового класса"
+accusative = "редкость базового класса"
+instrumental = "редкостью базового класса"
+prepositional = "редкости базового класса"
+gender = "female"
+
+["encrypted curiosity"]
+nominative = "зашифрованная редкость"
+genitive = "зашифрованной редкости"
+dative = "зашифрованной редкости"
+accusative = "зашифрованную редкость"
+instrumental = "зашифрованной редкостью"
+prepositional = "зашифрованной редкости"
+gender = "female"
+
+["decrypted curiosity"]
+nominative = "расшифрованная редкость"
+genitive = "расшифрованной редкости"
+dative = "расшифрованной редкости"
+accusative = "расшифрованную редкость"
+instrumental = "расшифрованной редкостью"
+prepositional = "расшифрованной редкости"
+gender = "female"
