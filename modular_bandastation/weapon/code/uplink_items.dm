@@ -316,7 +316,7 @@
 		Это чистая советская мощь, никакой эргономики, только сталь и картечь. \
 		Эту штуку выменяли на ящик водки у интенданта где-то на окраине сектора. \
 		Смазка может быть старой, но эта дура выстрелит в любом состоянии, лады?"
-	item = /obj/item/gun/ballistic/revolver/bobr
+	item = /obj/item/gun/ballistic/revolver/bobr/empty
 	price_min = CARGO_CRATE_VALUE * 25
 	price_max = CARGO_CRATE_VALUE * 50
 	stock_max = 1
@@ -328,7 +328,7 @@
 		Советские инженеры СССП, видимо, ненавидели человеческие запястья, когда проектировали револьвер 12-го калибра. \
 		Он тяжелый, грубый и валит с ног даже стрелка. \
 		Мы не гарантируем, что ты удержишь его в руках после первого выстрела, усек?"
-	item = /obj/item/gun/ballistic/revolver/bobr/short
+	item = /obj/item/gun/ballistic/revolver/bobr/short/empty
 	price_min = CARGO_CRATE_VALUE * 25
 	price_max = CARGO_CRATE_VALUE * 50
 	stock_max = 1

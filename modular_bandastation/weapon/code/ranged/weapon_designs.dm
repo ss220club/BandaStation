@@ -263,7 +263,7 @@
 	name = "Ammo Box (.310 Strilka) (Very Lethal)"
 	id = "box_310strilka"
 	build_type = PROTOLATHE | AWAY_LATHE
-	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 30)
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 60)
 	build_path = /obj/item/ammo_box/strilka310
 	category = list(
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,

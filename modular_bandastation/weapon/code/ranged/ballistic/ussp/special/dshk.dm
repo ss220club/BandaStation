@@ -106,6 +106,7 @@
 	base_icon_state = "dshk12"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/dshk/c12ga
 	spread = 15
+	pb_knockback = 2
 
 /obj/item/gun/ballistic/automatic/dshk/shotgun/examine_more(mob/user)
 	. = ..()
