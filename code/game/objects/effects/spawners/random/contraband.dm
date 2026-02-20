@@ -171,7 +171,7 @@
 	loot = list(
 		/obj/item/grenade/chem_grenade/metalfoam,
 		/obj/item/grenade/chem_grenade/cleaner,
-		/obj/effect/spawner/random/entertainment/colorful_grenades,
+		// /obj/effect/spawner/random/entertainment/colorful_grenades, - /// BANDASATION REMOVAL - Remove Fun or in translation - We are scared of COLORFUL and Glitter grenades i guess
 		/obj/item/grenade/smokebomb,
 		/obj/item/grenade/chem_grenade/antiweed,
 		/obj/item/grenade/spawnergrenade/syndiesoap,

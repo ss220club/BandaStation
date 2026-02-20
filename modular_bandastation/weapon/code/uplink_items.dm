@@ -461,3 +461,12 @@
 	price_max = CARGO_CRATE_VALUE * 120
 	stock_max = 1
 	availability_prob = 10
+
+/datum/market_item/weapon/colorful_grenades
+	name = "EXTREMELY DANGEROUS MASS DESTRUCTION GRENADES"
+	desc = "ЭТО ОЧЕНЬ ОПАСНЫЕ ГРАНАТЫ МАССОВОГО УНИЧТОЖЕНИЯ, НЕ ЗАКАЗЫВАЙТЕ ИХ ЕСЛИ ВАМ НЕ ТРЕБУЕТСЯ УНИЧТОЖИТЬ СТАНЦИЮ ЛЮБОЙ ЦЕНОЙ!!! МЫ ВАС ПРЕДУПРЕДИЛИ!!!"
+	item = /obj/effect/spawner/random/entertainment/colorful_grenades
+	price_min = CARGO_CRATE_VALUE * 1250
+	price_max = CARGO_CRATE_VALUE * 5000
+	stock_max = 1
+	availability_prob = 50
