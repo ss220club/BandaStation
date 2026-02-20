@@ -204,6 +204,19 @@
 		if(!spying)
 			playsound(computer, 'sound/machines/terminal/terminal_off.ogg', 25, FALSE)
 
+// BANDASTATION ADDITION: Bodycam
+/datum/computer_file/program/secureye/proc/on_camera_disabled(obj/machinery/camera/camera)
+	var/obj/machinery/camera/active_camera = camera_ref?.resolve()
+	if(active_camera != camera)
+		return
+	if(!spying && active_camera)
+		active_camera.on_stop_watching(src)
+	camera_ref = null
+	last_camera_turf = null
+	update_active_camera_screen()
+	SStgui.update_uis(src)
+// BANDASTATION ADDITION END: Bodycam
+
 /datum/computer_file/program/secureye/proc/update_active_camera_screen()
 	var/obj/machinery/camera/active_camera = camera_ref?.resolve()
 	// Show static if can't use the camera
