@@ -23,7 +23,7 @@
 /obj/structure/hololadder/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 
-	context[SCREENTIP_CONTEXT_LMB] = "отключение"
+	context[SCREENTIP_CONTEXT_LMB] = "отключить"
 
 
 /obj/structure/hololadder/examine(mob/user)

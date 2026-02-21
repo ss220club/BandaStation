@@ -1,5 +1,5 @@
 /datum/lazy_template/virtual_domain/island_brawl
-	name = "Островная потосовка"
+	name = "Островная потасовка"
 	announce_to_ghosts = TRUE
 	cost = BITRUNNER_COST_HIGH
 	desc = "Мирный остров, спрятанный в Богом забытом месте.. Этот уровень будет автоматически завершен после того, как произойдет некоторое количесво смертей.."

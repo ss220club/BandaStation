@@ -112,7 +112,7 @@
 
 /obj/item/storage/lockbox/medal
 	name = "medal box"
-	desc = "Запертый ящик, котором хранятся почётные медали."
+	desc = "Запертый ящик, в котором хранятся почётные медали."
 	icon_state = "medalbox+l"
 	inhand_icon_state = "syringe_kit"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
@@ -301,7 +301,7 @@
 
 /obj/item/storage/lockbox/bitrunning
 	name = "base class curiosity"
-	desc = "Поговори спрограммистом."
+	desc = "Поговори с программистом."
 	req_access = list(ACCESS_INACCESSIBLE)
 	icon_state = "bitrunning+l"
 	inhand_icon_state = "bitrunning"
@@ -313,7 +313,7 @@
 
 /obj/item/storage/lockbox/bitrunning/encrypted
 	name = "encrypted curiosity"
-	desc = "Для открытия, Необходимо расшифровать данные в убежище."
+	desc = "Для открытия необходимо расшифровать данные в убежище."
 	resistance_flags =  INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	/// Path for the loot we are assigned
 	var/loot_path
@@ -339,7 +339,7 @@
 		return INITIALIZE_HINT_QDEL
 
 	if(!istype(completed_domain, /datum/lazy_template/virtual_domain)) // Check if this is a proper virtual domain before doing anything with it
-		log_runtime("Расшифрованная редкость была создана с недопустимым исходным доменом.. [completed_domain.name] ([completed_domain.type]).")
+		log_runtime("Decrypted curiosity was created with an invalid source domain. [completed_domain.name] ([completed_domain.type]).")
 		return INITIALIZE_HINT_QDEL
 
 	source_domain = completed_domain

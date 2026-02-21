@@ -77,7 +77,7 @@
 		return
 
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "Панель [panel_open ? "закрыта" : "открыта"]"
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(held_item.tool_behaviour == TOOL_CROWBAR && panel_open)
 		context[SCREENTIP_CONTEXT_LMB] = "разборка"
@@ -141,7 +141,7 @@
 		icon_state = base_icon_state
 		return ..()
 
-	icon_state = "[base_icon_state]_[is_ready ? "ВКЛ" : "ВЫКЛ"]"
+	icon_state = "[base_icon_state]_[is_ready ? "on" : "off"]"
 	return ..()
 
 

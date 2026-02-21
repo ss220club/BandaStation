@@ -139,7 +139,7 @@
 	var/timeout = 2 SECONDS
 	if(!ishuman(antag))
 		if (aas)
-			aas.broadcast("ПРЕДУПРЕЖДЕНИЕ КВАНТОВОГО СЕРВЕРА: Произашёл неожиданный сбой протоколов фабрикации. Немедленно эвакуируйтесь из области.", list(RADIO_CHANNEL_SUPPLY))
+			aas.broadcast("ПРЕДУПРЕЖДЕНИЕ КВАНТОВОГО СЕРВЕРА: Произошёл неожиданный сбой протоколов фабрикации. Немедленно эвакуируйтесь из области.", list(RADIO_CHANNEL_SUPPLY))
 		timeout = 10 SECONDS
 
 	if(!do_after(antag, timeout) || QDELETED(chosen_forge) || QDELETED(antag) || QDELETED(src) || !is_ready || !is_operational)

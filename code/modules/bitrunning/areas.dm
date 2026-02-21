@@ -48,14 +48,14 @@
 	area_flags_mapping = /area/virtual_domain::area_flags_mapping
 
 /area/ruin/space/virtual_domain
-	name = "Неиследованное простраснтво виртуального домена"
+	name = "Неисследованное простраснтво виртуального домена"
 	icon = 'icons/area/areas_station.dmi'
 	icon_state = "bit_ruin"
 	area_flags = /area/virtual_domain::area_flags
 	area_flags_mapping = /area/virtual_domain::area_flags_mapping
 
 /area/space/virtual_domain
-	name = "Космичесский виртуальный домен"
+	name = "Космический виртуальный домен"
 	icon = 'icons/area/areas_station.dmi'
 	icon_state = "bit_space"
 	area_flags = /area/virtual_domain::area_flags

@@ -1,5 +1,5 @@
 /obj/effect/landmark/bitrunning
-	name = "Эффект запуска битрана"
+	name = "Generic bitrunning effect"
 	icon = 'icons/effects/bitrunning.dmi'
 	icon_state = "crate"
 
@@ -60,10 +60,10 @@
 				crate_to_check.name = "Неопознанный ящик"
 
 	if(!encrypted_crate)
-		stack_trace("Рандомизатору ящиков для целей битрана не удалось найти зашифрованный ящик для обмена позициями.")
+		stack_trace("Bitrunning Goal Crate Randomizer failed to find an encrypted crate to swap positions for.")
 		return
 	if(!length(crate_list))
-		stack_trace("Рандомизатору ящиков для целей битрана не удалось найти ни одного обычного ящика,с котором можно было бы поменять позиции.")
+		stack_trace("Bitrunning Goal Crate Randomizer failed to find any NORMAL crates to swap positions for.")
 		return
 
 	var/original_location = encrypted_crate.loc

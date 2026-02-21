@@ -1,5 +1,5 @@
 /datum/lazy_template/virtual_domain/heretic_hunt
-	name = "Еретичесская охота"
+	name = "Еретическая охота"
 	cost = BITRUNNER_COST_LOW
 	desc = "Предай своего ближнего, чтобы достичь абсолютной силы."
 	difficulty = BITRUNNER_DIFFICULTY_LOW
@@ -55,7 +55,7 @@
 	if(locate(/obj/structure/closet/crate/secure/bitrunning/encrypted) in range(1, rune))
 		rune.balloon_alert_to_viewers("ритуал завершён")
 	else
-		rune.balloon_alert_to_viewers("жертвоприношение приято")
+		rune.balloon_alert_to_viewers("жертвоприношение принято")
 	flick("[rune.icon_state]_active", rune)
 	playsound(rune, 'sound/effects/magic/castsummon.ogg', 50, TRUE, extrarange = SILENCED_SOUND_EXTRARANGE, falloff_exponent = 10, ignore_walls = FALSE)
 

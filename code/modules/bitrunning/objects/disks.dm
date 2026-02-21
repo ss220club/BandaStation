@@ -148,7 +148,7 @@
 		if(initial(thing.name) == choice)
 			granted_item = thing
 
-	balloon_alert(user, "выбранно")
+	balloon_alert(user, "выбрано")
 	playsound(user, 'sound/items/click.ogg', 50, TRUE)
 	choice_made = choice
 

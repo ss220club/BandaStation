@@ -85,7 +85,7 @@
 	name = "Виртуальный спящий оперативник Синдиката"
 	icon = 'icons/obj/machines/sleeper.dmi'
 	icon_state = "sleeper_s"
-	prompt_name = "Вы - виртуальный оперативние Синдикак"
+	prompt_name = "Вы - виртуальный оперативник Синдиката"
 	you_are_text = "Вы - виртуальный оперативник Синдиката."
 	flavour_text = "Ревут сигналы тревоги! Нас берут на абордаж!"
 	outfit = /datum/outfit/virtual_syndicate
