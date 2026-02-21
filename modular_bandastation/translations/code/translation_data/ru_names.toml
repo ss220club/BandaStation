@@ -28051,15 +28051,6 @@ instrumental = "комнатой отдыха шахтеров"
 prepositional = "комнате отдыха шахтеров"
 gender = "male"
 
-["Bitrunning Den"]
-nominative = "битраннерская"
-genitive = "битраннерской"
-dative = "битраннерской"
-accusative = "битраннерскую"
-instrumental = "битраннерской"
-prepositional = "битраннерской"
-gender = "female"
-
 ["Cargo Bay Lower Floor"]
 nominative = "нижний этаж отдела снабжения"
 genitive = "нижнего этажа отдела снабжения"
