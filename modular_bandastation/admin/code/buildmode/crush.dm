@@ -44,3 +44,10 @@
 			var/turf/crush_to = isturf(object) ? object : get_turf(object)
 			crush_atom.fall_and_crush(crush_to, damage, crit_chance, paralyze_time=paralyze, rotation=rotation)
 			log_admin("Build Mode: [key_name(c)] crushed [crush_atom] to [object] ([AREACOORD(object)])")
+
+#undef ROTATION_DEFAULT
+#undef ROTATION_MIN
+#undef ROTATION_MAX
+#undef PARALYZE_DEFAULT
+#undef PARALYZE_MIN
+#undef PARALYZE_MAX
