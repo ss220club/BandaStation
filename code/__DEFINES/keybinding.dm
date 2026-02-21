@@ -60,6 +60,8 @@
 #define COMSIG_KB_LIVING_HOLDTHROWMODE_DOWN "keybinding_living_holdthrowmode_down"
 #define COMSIG_KB_LIVING_GIVEITEM_DOWN "keybinding_living_giveitem_down"
 #define COMSIG_KB_LIVING_VIEW_PET_COMMANDS "keybinding_living_view_pet_commands"
+#define COMSIG_KB_LIVING_FOV_FREELOOK_DOWN "keybinding_living_fov_freelook_down" // BANDASTATION ADDITION: FOV
+#define COMSIG_KB_LIVING_FOV_FREELOOK_UP "keybinding_living_fov_freelook_up" // BANDASTATION ADDITION: FOV
 
 //Mob
 #define COMSIG_KB_MOB_FACENORTH_DOWN "keybinding_mob_facenorth_down"

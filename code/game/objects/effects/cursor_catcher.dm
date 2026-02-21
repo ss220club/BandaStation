@@ -65,3 +65,34 @@
 	given_turf = locate(owner.x + our_x - round(view_list[1]/2), owner.y + our_y - round(view_list[2]/2), owner.z)
 	given_x = round(icon_x - ICON_SIZE_X * our_x, 1)
 	given_y = round(icon_y - ICON_SIZE_Y * our_y, 1)
+
+// BANDASTATION ADDITION START: FOV
+// сombat mode: receive mouse even when alpha=0 so we get MouseMove
+/atom/movable/screen/fullscreen/cursor_catcher/combat
+	mouse_opacity = MOUSE_OPACITY_OPAQUE
+
+/atom/movable/screen/fullscreen/cursor_catcher/combat/MouseMove(location, control, params)
+	. = ..()
+	if(owner?.client)
+		owner.client.mouseParams = params
+
+/atom/movable/screen/fullscreen/cursor_catcher/combat/calculate_params()
+	var/list/modifiers = params2list(mouse_params)
+	var/center_px = view_list[1] * ICON_SIZE_X / 2
+	var/center_py = view_list[2] * ICON_SIZE_Y / 2
+	var/icon_x = text2num(LAZYACCESS(modifiers, VIS_X))
+	if(isnull(icon_x))
+		icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
+	if(isnull(icon_x))
+		icon_x = center_px
+	var/icon_y = text2num(LAZYACCESS(modifiers, VIS_Y))
+	if(isnull(icon_y))
+		icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
+	if(isnull(icon_y))
+		icon_y = center_py
+	var/offset_x = round(icon_x - center_px)
+	var/offset_y = round(icon_y - center_py)
+	given_turf = locate(owner.x + round(offset_x / ICON_SIZE_X, 1), owner.y + round(offset_y / ICON_SIZE_Y, 1), owner.z)
+	given_x = round(icon_x - ICON_SIZE_X * round(icon_x / ICON_SIZE_X), 1)
+	given_y = round(icon_y - ICON_SIZE_Y * round(icon_y / ICON_SIZE_Y), 1)
+// BANDASTATION ADDITION END: FOV

@@ -30,15 +30,22 @@
 	var/dir_x = 0 // based on east/west
 	var/dir_y = 0 // based on north/south
 
-	if(dir & NORTH)
-		dir_y += vector_len
-	else if(dir & SOUTH)
-		dir_y -= vector_len
+	// BANDASTATION ADDITION START: FOV
+	if(!isnull(fov_view_direction_angle))
+		var/angle_rad = TORADIANS(fov_view_direction_angle)
+		dir_x = cos(angle_rad) * vector_len
+		dir_y = sin(angle_rad) * vector_len
+	else
+		if(dir & NORTH)
+			dir_y += vector_len
+		else if(dir & SOUTH)
+			dir_y -= vector_len
 
-	if(dir & EAST)
-		dir_x += vector_len
-	else if(dir & WEST)
-		dir_x -= vector_len
+		if(dir & EAST)
+			dir_x += vector_len
+		else if(dir & WEST)
+			dir_x -= vector_len
+	// BANDASTATION ADDITION END: FOV
 
 	///Calculate angle
 	var/angle = arccos((dir_x * rel_x + dir_y * rel_y) / (sqrt(dir_x**2 + dir_y**2) * sqrt(rel_x**2 + rel_y**2)))
@@ -111,6 +118,7 @@
 			fov_image = new()
 			fov_image.loc = anchor_point
 			fov_image.icon_state = icon_state
+			fov_image.alpha = 155 // BANDASTATION ADDITION: FOV
 			fov_image.dir = dir
 			if(angle)
 				var/matrix/matrix = new
@@ -131,3 +139,13 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	plane = FIELD_OF_VISION_BLOCKER_PLANE
 	screen_loc = "BOTTOM,LEFT"
+
+// BANDASTATION ADDITION START: FOV
+/image/fov_blocker_720
+	icon = 'icons/effects/fov/field_of_view_720.dmi'
+	icon_state = "90"
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	plane = FIELD_OF_VISION_BLOCKER_PLANE
+	appearance_flags = RESET_TRANSFORM
+	color = list(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 1,1,1,0)
+// BANDASTATION ADDITION END: FOV

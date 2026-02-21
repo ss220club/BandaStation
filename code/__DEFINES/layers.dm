@@ -37,6 +37,16 @@
 #define MASSIVE_OBJ_PLANE 3
 #define GHOST_PLANE 4
 #define POINT_PLANE 5
+#define FOV_CULLED_MOB_PLANE 6 // BANDASTATION ADDITION: FOV
+// relay layer so fov_culled_mob draws above game world but BELOW lighting when on RENDER_PLANE_GAME
+#define FOV_CULLED_MOB_LAYER_UNDER_LIGHTING (RENDER_PLANE_UNLIT_GAME + abs(LOWEST_EVER_PLANE * 30) + 0.5)
+// when relaying to GAME_UNMASKED, must be above game_plate content or mobs are hidden
+#define FOV_CULLED_MOB_LAYER_OVER_UNMASKED (RENDER_PLANE_GAME + abs(LOWEST_EVER_PLANE * 30) + 1)
+// relay to MASTER when FOV on (on top), to GAME when FOV off
+#define FOV_VIEWER_MOB_PLANE 7 // BANDASTATION ADDITION: FOV
+// viewer mob on MASTER so they draw above FOV composition
+#define FOV_VIEWER_MOB_LAYER_OVER_MASTER (RENDER_PLANE_MASTER + abs(LOWEST_EVER_PLANE * 30) + 10)
+// BANDASTATION FOV
 
 //---------- LIGHTING -------------
 /// Normal 1 per turf dynamic lighting underlays
@@ -73,6 +83,10 @@
 #define RENDER_PLANE_UNLIT_GAME 19
 
 #define RENDER_PLANE_LIGHTING 20
+// BANDASTATION FOV
+// so this is fucking sucks - this rt is for the lighting plate so FOV mob plane can multiply by it when drawing to GAME_UNMASKED (lit mobs in cone only)
+#define LIGHTING_PLATE_RENDER_TARGET "*LIGHTING_PLATE_RENDER_TARGET"
+// BANDASTATION FOV
 
 /// Masks the lighting plane with turfs, so we never light up the void
 /// Failing that, masks emissives and the overlay lighting plane

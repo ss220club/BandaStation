@@ -1030,13 +1030,15 @@
 /mob/living/proc/update_damage_overlays()
 	return
 
-/mob/living/Move(atom/newloc, direct, glide_size_override)
+/mob/living/Move(atom/newloc, direct, glide_size_override, update_dir = TRUE) // BANDASTATION EDIT: FOV
 	if(lying_angle != 0)
 		lying_angle_on_movement(direct)
+	if(fov_free_look)
+		update_dir = FALSE
 	if (buckled && buckled.loc != newloc) //not updating position
 		if (!buckled.anchored)
 			buckled.moving_from_pull = moving_from_pull
-			. = buckled.Move(newloc, direct, glide_size)
+			. = buckled.Move(newloc, direct, glide_size_override, update_dir) // BANDASTATION EDIT: FOV
 			buckled.moving_from_pull = null
 		return
 
@@ -1046,7 +1048,19 @@
 	if(pulling)
 		update_pull_movespeed()
 
-	. = ..()
+	// BANDASTATION EDIT: FOV
+	. = ..(newloc, direct, glide_size_override, update_dir)
+
+	// apply/remove walking backwards slowdown in combat mode or free look
+	if(combat_mode || fov_free_look)
+		if(!buckled && loc != old_loc && (movement_type & GROUND) && (direct & (NORTH|SOUTH|EAST|WEST)))
+			if(direct == turn(old_direction, 180))
+				add_movespeed_modifier(/datum/movespeed_modifier/walking_backwards)
+			else
+				remove_movespeed_modifier(MOVESPEED_ID_WALKING_BACKWARDS)
+	else
+		remove_movespeed_modifier(MOVESPEED_ID_WALKING_BACKWARDS)
+	// BANDASTATION EDIT END: FOV
 
 	if(moving_diagonally != FIRST_DIAG_STEP && isliving(pulledby))
 		var/mob/living/puller = pulledby

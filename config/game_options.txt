@@ -569,7 +569,7 @@ MAXFINE 2000
 #DRONE_AREA_INTERACTION_RESTRICT 1
 
 ## Whether native FoV is enabled for all people.
-#NATIVE_FOV
+NATIVE_FOV
 
 ## Whether circuit sounds are allowed to be played or not.
 #DISALLOW_CIRCUIT_SOUNDS

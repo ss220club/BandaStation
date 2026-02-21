@@ -227,3 +227,29 @@
 	if(!HAS_TRAIT(living_user, TRAIT_CAN_HOLD_ITEMS))
 		return
 	living_user.give()
+
+// BANDASTATION ADDITION START: FOV
+/datum/keybinding/living/fov_free_look
+	hotkey_keys = list("Right")
+	name = "fov_free_look"
+	full_name = "Свободный обзор FOV (зажать)"
+	description = "Удерживайте для свободного поворота поля зрения без боевого режима (например, ПКМ)."
+	keybind_signal = COMSIG_KB_LIVING_FOV_FREELOOK_DOWN
+
+/datum/keybinding/living/fov_free_look/down(client/user, turf/target, mousepos_x, mousepos_y)
+	. = ..()
+	if(.)
+		return
+	var/mob/living/owner = user.mob
+	owner.fov_free_look = TRUE
+	var/datum/component/fov_handler/fh = owner.GetComponent(/datum/component/fov_handler)
+	if(fh)
+		fh.start_combat_cursor_follow()
+	return TRUE
+
+/datum/keybinding/living/fov_free_look/up(client/user, turf/target)
+	. = ..()
+	var/mob/living/owner = user.mob
+	owner.fov_free_look = FALSE
+	return TRUE
+// BANDASTATION ADDITON END: FOV

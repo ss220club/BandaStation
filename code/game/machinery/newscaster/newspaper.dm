@@ -102,7 +102,7 @@
 		// User has additional arms or something, I dunno
 		if (isliving(loc))
 			var/mob/living/owner = loc
-			owner.remove_fov_trait(REF(src), FOV_REVERSE_270_DEGRESS)
+			//owner.remove_fov_trait(REF(src), FOV_REVERSE_270_DEGREES) // BANDASTATION EDIT: FOV (temp remove) @FIXME
 			owner.update_appearance(UPDATE_OVERLAYS)
 		return ITEM_INTERACT_SUCCESS
 
@@ -151,7 +151,7 @@
 	RegisterSignal(user, COMSIG_HUMAN_GET_VISIBLE_NAME, PROC_REF(holder_checked_name))
 	user.update_appearance(UPDATE_OVERLAYS)
 	if (!punctured)
-		user.add_fov_trait(REF(src), FOV_REVERSE_270_DEGRESS)
+		//user.add_fov_trait(REF(src), FOV_REVERSE_270_DEGREES) // BANDASTATION EDIT: FOV (temp remove) @FIXME
 	if (ishuman(user))
 		var/mob/living/carbon/human/as_human = user
 		as_human.update_visible_name()
@@ -162,7 +162,7 @@
 	UnregisterSignal(user, list(COMSIG_ATOM_UPDATE_OVERLAYS, COMSIG_HUMAN_GET_VISIBLE_NAME))
 	user.update_appearance(UPDATE_OVERLAYS)
 	if (!punctured)
-		user.remove_fov_trait(REF(src), FOV_REVERSE_270_DEGRESS)
+		//user.remove_fov_trait(REF(src), FOV_REVERSE_270_DEGREES) // BANDASTATION EDIT: FOV (temp remove) @FIXME
 	if (ishuman(user))
 		var/mob/living/carbon/human/as_human = user
 		as_human.update_visible_name()

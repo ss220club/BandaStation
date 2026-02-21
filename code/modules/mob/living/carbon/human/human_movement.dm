@@ -24,9 +24,12 @@
 /mob/living/carbon/human/mob_negates_gravity()
 	return dna.species.negates_gravity(src) || ..()
 
-/mob/living/carbon/human/Move(NewLoc, direct)
-	. = ..()
+// BANDASTATION EDIT START: FOV
+/mob/living/carbon/human/Move(NewLoc, direct, glide_size_override = 0, update_dir = TRUE)
+	if(combat_mode || fov_free_look)
+		update_dir = FALSE
+	. = ..(NewLoc, direct, glide_size_override, update_dir)
+// BANDASTATION EDIT END: FOV
 	if(shoes && body_position == STANDING_UP && has_gravity(loc))
 		if((. && !moving_diagonally) || (!. && moving_diagonally == SECOND_DIAG_STEP))
 			SEND_SIGNAL(shoes, COMSIG_SHOES_STEP_ACTION)
-
