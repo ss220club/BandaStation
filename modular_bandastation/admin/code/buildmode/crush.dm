@@ -20,25 +20,25 @@
 
 /datum/buildmode_mode/crush/show_help(client/builder)
 	to_chat(builder, span_purple(boxed_message(
-		"[span_bold("Set damage")] -> Right Mouse Button on buildmode button\n\
-		[span_bold("Select")] -> Left Mouse Button on obj/mob\n\
-		[span_bold("Crush")] -> Right Mouse Button on obj/mob"))
+		"[span_bold("Установить параметры")] -> ПКМ по кнопке билдмода\n\
+		[span_bold("Выбрать")] -> ЛКМ по объету/мобу\n\
+		[span_bold("Раздавить")] -> ПКМ по объекту/мобу/турфу"))
 	)
 
 /datum/buildmode_mode/crush/change_settings(client/c)
-	damage = tgui_input_number(c, "Damage from crushing", "Input")
-	crit_chance = tgui_input_number(c, "Crit Chance", "Input", 0, 100)
-	rotation = tgui_input_number(c, "Rotation", "Input", ROTATION_DEFAULT, ROTATION_MAX, ROTATION_MIN)
-	paralyze = tgui_input_number(c, "Paralyze in seconds", "Input", PARALYZE_DEFAULT, PARALYZE_MAX, PARALYZE_MIN) SECONDS
+	damage = tgui_input_number(c, "Урон от раздавливания", "Настройка")
+	crit_chance = tgui_input_number(c, "Шанс крита", "Настройка", 0, 100)
+	rotation = tgui_input_number(c, "Поворот", "Настройка", ROTATION_DEFAULT, ROTATION_MAX, ROTATION_MIN)
+	paralyze = tgui_input_number(c, "Паралич (в секундах)", "Настройка", PARALYZE_DEFAULT, PARALYZE_MAX, PARALYZE_MIN) SECONDS
 
-/datum/buildmode_mode/crush/handle_click(client/c, params, obj/object)
+/datum/buildmode_mode/crush/handle_click(client/c, params, object)
 	var/list/modifiers = params2list(params)
 
 	if(LAZYACCESS(modifiers, LEFT_CLICK))
 		if(isturf(object))
 			return
 		crush_atom = object
-		to_chat(c, "Selected object '[crush_atom]'")
+		to_chat(c, "Выбран объект '[crush_atom]'")
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(crush_atom)
 			var/turf/crush_to = isturf(object) ? object : get_turf(object)
