@@ -45,7 +45,7 @@
 			if(!crush_to)
 				return
 			crush_atom.fall_and_crush(crush_to, damage, crit_chance, paralyze_time=paralyze, rotation=rotation)
-			log_admin("Build Mode: [key_name(c)] crushed [crush_atom] to [object] ([AREACOORD(object)])")
+			log_admin("Build Mode: [key_name(c)] crushed [crush_atom] to [object] ([AREACOORD(crush_to)])")
 
 #undef ROTATION_DEFAULT
 #undef ROTATION_MIN
