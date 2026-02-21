@@ -861,7 +861,7 @@
 	stamina = 250 //BONK
 	paralyze = 5 SECONDS
 	wound_bonus = 30
-	weak_against_armour = TRUE
+	weak_against_armour = FALSE
 
 // Weak 40mm Grenade
 /obj/projectile/bullet/a40mm/weak
@@ -905,8 +905,8 @@
 	damage = 15
 
 /obj/projectile/bullet/a40mm/smoke/payload(atom/target)
-	explosion(target, devastation_range = null, heavy_impact_range = null, light_impact_range = null, flame_range = null, flash_range = null, adminlog = FALSE, explosion_cause = src)
-	do_smoke(4, holder = src, location = src, smoke_type = /datum/effect_system/fluid_spread/smoke/bad, effect_type = /obj/effect/particle_effect/fluid/smoke/bad)
+	explosion(target, devastation_range = 0, heavy_impact_range = 0, light_impact_range = 0, flame_range = 0, flash_range = 0, adminlog = FALSE, explosion_cause = src)
+	do_smoke(2, holder = src, location = src, smoke_type = /datum/effect_system/fluid_spread/smoke/bad, effect_type = /obj/effect/particle_effect/fluid/smoke/bad)
 
 // 40mm Stun Grenade
 /obj/projectile/bullet/a40mm/stun
