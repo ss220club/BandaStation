@@ -60,6 +60,7 @@
 	icon_state = "amk"
 	inhand_icon_state = "amk"
 	worn_icon_state = "amk"
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
 	fire_delay = 0.25 SECONDS
 	recoil = 0.7
 	spread = 6.5
