@@ -88,6 +88,7 @@
 #include "tesla_rework/_teslarework.dme"
 #include "job_restrictions/_job_restrictions.dme"
 #include "contraband/_contraband.dme"
+#include "quirks/limp/_limp.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //

@@ -161,7 +161,7 @@
 	if(stat > SOFT_CRIT)
 		return
 	return ..()
-
+// BANDASTATION ADDITION: Limp Quirk
 /mob/living/toggle_move_intent(new_intent)
 
 	if(HAS_TRAIT(src, TRAIT_LIMP))
@@ -178,3 +178,4 @@
 			return
 
 	return ..()
+// BANDASTATION ADDITION: END
