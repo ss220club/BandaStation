@@ -1,13 +1,13 @@
 /turf/open/indestructible/bitrunning_transport
-	name = "контурный пол"
+	name = "circuit floor"
 	desc = "Выглядит сложным. Вы можете видеть электрические цепи, проходящие через пол."
 	icon_state = "bitrunning"
 
 /turf/closed/indestructible/binary
-	name = "разрыв в ткани реальности"
+	name = "tear in the fabric of reality"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "binary"
 
 /obj/effect/baseturf_helper/virtual_domain
-	name = "редактор базового пространства виртуального домена"
+	name = "virtual domain baseturf editor"
 	baseturf = /turf/open/indestructible/binary

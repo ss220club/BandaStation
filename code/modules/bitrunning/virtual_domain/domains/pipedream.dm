@@ -41,7 +41,7 @@
 
 // ID Cards
 /obj/item/card/id/advanced/factory
-	name = "ID работника завода"
+	name = "factory worker ID"
 	trim = /datum/id_trim/factory
 
 /obj/item/card/id/advanced/factory/qm
@@ -89,16 +89,16 @@
 
 // Corpses
 /obj/effect/mob_spawn/corpse/human/factory
-	name = "Заводчанин"
+	name = "Factory Worker"
 	outfit = /datum/outfit/factory
 	icon_state = "corpsecargotech"
 
 /obj/effect/mob_spawn/corpse/human/factory/guard
-	name = "Охранник завода"
+	name = "Factory Guard"
 	outfit = /datum/outfit/factory/guard
 	icon_state = "corpsecargotech"
 
 /obj/effect/mob_spawn/corpse/human/factory/qm
-	name = "Заводской квартермейстер"
+	name = "Factory Quartermaster"
 	outfit = /datum/outfit/factory/qm
 	icon_state = "corpsecargotech"

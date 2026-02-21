@@ -1,8 +1,8 @@
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain
 	outfit = /datum/outfit/virtual_pirate
-	prompt_name = "сущность отладки виртуального домена"
+	prompt_name = "a virtual domain debug entity"
 	flavour_text = "Вам, наверное, не стоит этого видеть, обратитесь к администратору или программисту!"
-	you_are_text = "Тебя не должно было здесь быть. Как ты вообще это допустил?"
+	you_are_text = "Тебя не должно было здесь быть. Как ты вообще умудрился это?"
 	important_text = "Битранинг - это преступление и ваша главная угроза."
 	temp_body = TRUE
 	///Does this bit-entity get an antag datum with the goal of hunting bitrunners? TRUE by default
@@ -27,7 +27,7 @@
 //Beach Bums (Friendly)
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain/beach
 	prompt_name = "a virtual beach bum"
-	name = "виртуальный пляжный бомж"
+	name = "virtual beach bum sleeper"
 	you_are_text = "Ты, типа, полностью виртуальная имитация чувака, братан."
 	flavour_text = "Привет. Ты приехал сюда, типа, на весенние каникулы, надеясь подцепить парочку классных электронных цыпочек, сечёшь?"
 	important_text = "У вас не возникнет проблем с битраном: на самом деле, вы даже не осознаете, что находитесь в симуляции."
@@ -37,7 +37,7 @@
 	allow_custom_character = GHOSTROLE_TAKE_PREFS_APPEARANCE
 
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain/beach/lifeguard
-	name = "виртуальный спящий спасатель"
+	name = "virtual lifeguard sleeper"
 	you_are_text = "Вы - отважный виртуальный спасатель!"
 	flavour_text = "От вас зависит, чтобы никто не зависал и не был съеден вредоносными программами и прочим."
 	outfit = /datum/outfit/beachbum/lifeguard
@@ -49,7 +49,7 @@
 	lifeguard.update_body()
 
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain/beach/bartender
-	name = "виртуальный спящий бармен"
+	name = "virtual bartender sleeper"
 	you_are_text = "Вы - виртуальный пляжный бармен!"
 	flavour_text = "Ваша задача - обеспечить поступление виртуально приготовленных напитков и помочь чувакам имитировать опьянение."
 	outfit = /datum/outfit/spacebartender
@@ -57,7 +57,7 @@
 
 //Skeleton Pirates
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain/pirate
-	name = "Виртуальные останки пирата"
+	name = "Virtual Pirate Remains"
 	desc = "Какие-то неодушевленные кости. Кажется, что они могут ожить в любой момент!"
 	density = FALSE
 	icon = 'icons/effects/blood.dmi'
@@ -67,7 +67,7 @@
 	flavour_text = "Какая-то СУХОПУТНАЯ КРЫСА охотится за вашими сокровищами. Остановите их!"
 
 /datum/outfit/virtual_pirate
-	name = "Виртуальный пират"
+	name = "Virtual Pirate"
 	id = /obj/item/card/id/advanced
 	id_trim = /datum/id_trim/pirate
 	uniform = /obj/item/clothing/under/costume/pirate
@@ -82,10 +82,10 @@
 
 //Syndicate
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie
-	name = "Виртуальный спящий оперативник Синдиката"
+	name = "Virtual Syndicate Sleeper"
 	icon = 'icons/obj/machines/sleeper.dmi'
 	icon_state = "sleeper_s"
-	prompt_name = "Вы - виртуальный оперативник Синдиката"
+	prompt_name = "a virtual syndicate operative"
 	you_are_text = "Вы - виртуальный оперативник Синдиката."
 	flavour_text = "Ревут сигналы тревоги! Нас берут на абордаж!"
 	outfit = /datum/outfit/virtual_syndicate

@@ -74,7 +74,7 @@
 		atom_storage.set_locked(STORAGE_NOT_LOCKED)
 		balloon_alert(user, "замок сломан")
 		if (emag_card && user)
-			user.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] проводит [emag_card] по [src], ломая его!"))
+			user.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] проводит [emag_card] по [src.declent_ru(ACCUSATIVE)], ломая его!"))
 		return TRUE
 	return FALSE
 
@@ -313,7 +313,7 @@
 
 /obj/item/storage/lockbox/bitrunning/encrypted
 	name = "encrypted curiosity"
-	desc = "Для открытия необходимо расшифровать данные в убежище."
+	desc = "Для открытия, необходимо расшифровать данные в убежище."
 	resistance_flags =  INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	/// Path for the loot we are assigned
 	var/loot_path

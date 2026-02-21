@@ -5,7 +5,7 @@
  * Just make it fun and engaging, it's PvE content.
  */
 /obj/item/disk/bitrunning
-	name = "Основная программа битрана"
+	name = "основная программа битрана"
 	desc = "Диск с исходным кодом."
 	base_icon_state = "datadisk"
 	icon_state = "datadisk0"
@@ -154,7 +154,7 @@
 
 /// Tier 1 items. Simple, funny, or helpful.
 /obj/item/disk/bitrunning/item/tier1
-	name = "Снаряжение битраннинга: простое"
+	name = "Снаряжение битранинга: простое"
 	selectable_items = list(
 		/obj/item/pizzabox/infinite,
 		/obj/item/gun/medbeam,
@@ -163,7 +163,7 @@
 
 /// Tier 2 items. More complex, powerful, or useful.
 /obj/item/disk/bitrunning/item/tier2
-	name = "Снаряжение битраннинга: комплексное"
+	name = "Снаряжение битранинга: комплексное"
 	selectable_items = list(
 		/obj/item/reagent_containers/hypospray/medipen/survival/luxury,
 		/obj/item/gun/ballistic/automatic/pistol,
@@ -172,7 +172,7 @@
 
 /// Tier 3 items. Very powerful, game breaking.
 /obj/item/disk/bitrunning/item/tier3
-	name = "Снаряжение битраннинга: продвинутое"
+	name = "Снаряжение битранинга: продвинутое"
 	selectable_items = list(
 		/obj/item/gun/energy/e_gun/nuclear,
 		/obj/item/dualsaber/green,
@@ -181,7 +181,7 @@
 
 ///proto-kinetic accelerator mods, to be applied to pka's given inside domains
 /obj/item/disk/bitrunning/item/pka_mods
-	name = "Снаряжение битраннинга: моды протокинетического акселератора"
+	name = "Снаряжение битранинга: моды протокинетического акселератора"
 	selectable_items = list(
 		/obj/item/borg/upgrade/modkit/range,
 		/obj/item/borg/upgrade/modkit/damage,
@@ -191,7 +191,7 @@
 	)
 
 /obj/item/disk/bitrunning/item/pka_mods/premium
-	name = "Снаряжение битраннинга: премиальные моды протокинетического акселератора"
+	name = "Снаряжение битранинга: премиальные моды протокинетического акселератора"
 	selectable_items = list(
 		/obj/item/borg/upgrade/modkit/cooldown/repeater,
 		/obj/item/borg/upgrade/modkit/lifesteal,
@@ -202,7 +202,7 @@
 
 ///proto-kinetic crusher trophies, to be applied to pkc's given inside domains
 /obj/item/disk/bitrunning/item/pkc_mods
-	name = "Снаряжение битраннинга: моды протокинетического крушителя"
+	name = "Снаряжение битранинга: моды протокинетического крушителя"
 	selectable_items = list(
 		/obj/item/crusher_trophy/watcher_wing,
 		/obj/item/crusher_trophy/blaster_tubes/magma_wing,
@@ -211,7 +211,7 @@
 	)
 
 /obj/item/disk/bitrunning/item/pkc_mods/premium
-	name = "Снаряжение битраннинга: премиальные моды протокинетического крушителя"
+	name = "Снаряжение битранинга: премиальные моды протокинетического крушителя"
 	selectable_items = list(
 		/obj/item/crusher_trophy/watcher_wing/ice_wing,
 		/obj/item/crusher_trophy/blaster_tubes,
@@ -223,7 +223,7 @@
 	)
 
 /obj/item/disk/bitrunning/item/mini_uzi
-	name = "Снаряжение битраннинга: мини-узи"
+	name = "Снаряжение битранинга: мини-узи"
 	selectable_items = list(
 		/obj/item/gun/ballistic/automatic/mini_uzi,
 	)

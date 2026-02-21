@@ -5,37 +5,37 @@
 
 /// In case you want to gate the crate behind a special condition.
 /obj/effect/landmark/bitrunning/loot_signal
-	name = "Мистическая аура"
+	name = "Mysterious aura"
 
 /// Where the exit hololadder spawns
 /obj/effect/landmark/bitrunning/hololadder_spawn
-	name = "Загрузка голозагрузчика битрана"
+	name = "Bitrunning hololadder spawn"
 	icon_state = "hololadder"
 
 /// A permanent exit for the domain
 /obj/effect/landmark/bitrunning/permanent_exit
-	name = "Постоянный выход из битрана"
+	name = "Bitrunning permanent exit"
 	icon_state = "perm_exit"
 
 /// Where the crates need to be taken
 /obj/effect/landmark/bitrunning/cache_goal_turf
-	name = "Место приёма ящиков битрана"
+	name = "Bitrunning goal turf"
 	icon_state = "goal"
 
 /// Where you want the crate to spawn
 /obj/effect/landmark/bitrunning/cache_spawn
-	name = "Место появления ящиков битрана"
+	name = "Bitrunning crate spawn"
 	icon_state = "crate"
 
 /// Where you want secondary objectives to spawn
 /obj/effect/landmark/bitrunning/curiosity_spawn
-	name = "Генерация точек интереса битрана"
+	name = "Bitrunning curiosity spawn"
 	icon_state = "crate"
 
 ///Swaps the locations of an encrypted crate in the area with another randomly selected crate.
 ///Randomizes names, so you have to inspect crates manually.
 /obj/effect/landmark/bitrunning/crate_replacer
-	name = "Рандомизатор ящиков с целями битрана"
+	name = "Bitrunning Goal Crate Randomizer"
 	icon_state = "crate"
 
 /obj/effect/landmark/bitrunning/crate_replacer/Initialize(mapload)
@@ -75,7 +75,7 @@
 
 /// A location for mobs to spawn.
 /obj/effect/landmark/bitrunning/mob_segment
-	name = "Модульный сегмент с мобами битрана"
+	name = "Bitrunning modular mob segment"
 	icon_state = "mob_segment"
 
 

@@ -15,15 +15,15 @@
 	domain_flags = DOMAIN_NO_NOHIT_BONUS
 
 /turf/open/cliff/snowrock/virtual_domain
-	name = "ледяной шпиль"
+	name = "icy cliff"
 	initial_gas_mix = FROZEN_ATMOS
 
 /turf/open/lava/plasma/virtual_domain
-	name = "плазмовое озеро"
+	name = "plasma lake"
 	initial_gas_mix = FROZEN_ATMOS
 
 /datum/outfit/job/virtual_domain_iceclimber
-	name = "Альпинист"
+	name = "Ice Climber"
 
 	uniform = /obj/item/clothing/under/color/grey
 	backpack = /obj/item/storage/backpack/duffelbag

@@ -1,6 +1,6 @@
 /obj/machinery/computer/order_console/bitrunning
 	name = "bitrunning supplies order console"
-	desc = "НексаКэш(tm)! Сомнительно аутентичное снаряжение для цифрового сорвиголовы."
+	desc = "НексаКэш(ТМ)! Сомнительно аутентичное снаряжение для цифрового сорвиголовы."
 	icon = 'icons/obj/machines/bitrunning.dmi'
 	icon_state = "vendor"
 	icon_keyboard = null
