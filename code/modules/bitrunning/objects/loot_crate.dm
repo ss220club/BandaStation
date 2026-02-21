@@ -17,7 +17,7 @@
 /// The virtual domain - side of the bitrunning crate. Deliver to the send location.
 /obj/structure/closet/crate/secure/bitrunning/encrypted
 	name = "encrypted cache"
-	desc = "Для открытия требуется расшифровать данные в безопасной зоне."
+	desc = "Для открытия требуется расшифровать данные убежище."
 	locked = TRUE
 	damage_deflection = 30
 	resistance_flags =  INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF

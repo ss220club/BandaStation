@@ -18,7 +18,7 @@
 
 // ID Trims
 /datum/id_trim/factory
-	assignment = "Factory Worker"
+	assignment = "Заводчанин"
 	trim_state = "trim_cargotechnician"
 	department_color = COLOR_CARGO_BROWN
 	subdepartment_color = COLOR_CARGO_BROWN
@@ -28,7 +28,7 @@
 		)
 
 /datum/id_trim/factory/qm
-	assignment = "Factory Quartermaster"
+	assignment = "Заводской квартермейстер"
 	trim_state = "trim_quartermaster"
 	department_color = COLOR_COMMAND_BLUE
 	subdepartment_color = COLOR_CARGO_BROWN
@@ -41,7 +41,7 @@
 
 // ID Cards
 /obj/item/card/id/advanced/factory
-	name = "factory worker ID"
+	name = "ID работника завода"
 	trim = /datum/id_trim/factory
 
 /obj/item/card/id/advanced/factory/qm
@@ -50,7 +50,7 @@
 
 //Outfits
 /datum/outfit/factory
-	name = "Factory Worker"
+	name = "Заводчанин"
 
 	id_trim = /datum/id_trim/factory
 	id = /obj/item/card/id/advanced/
@@ -63,7 +63,7 @@
 	l_pocket = /obj/item/flashlight/seclite
 
 /datum/outfit/factory/guard
-	name = "Factory Guard"
+	name = "Охранник завода"
 
 	uniform = /obj/item/clothing/under/rank/security/officer/grey
 	suit = /obj/item/clothing/suit/armor/vest/alt
@@ -75,7 +75,7 @@
 	r_pocket = /obj/item/assembly/flash/handheld
 
 /datum/outfit/factory/qm
-	name = "Factory Quartermaster"
+	name = "Заводской квартермейстер"
 
 	id_trim = /datum/id_trim/factory/qm
 	id = /obj/item/card/id/advanced/silver
@@ -89,16 +89,16 @@
 
 // Corpses
 /obj/effect/mob_spawn/corpse/human/factory
-	name = "Factory Worker"
+	name = "Заводчанин"
 	outfit = /datum/outfit/factory
 	icon_state = "corpsecargotech"
 
 /obj/effect/mob_spawn/corpse/human/factory/guard
-	name = "Factory Guard"
+	name = "Охранник завода"
 	outfit = /datum/outfit/factory/guard
 	icon_state = "corpsecargotech"
 
 /obj/effect/mob_spawn/corpse/human/factory/qm
-	name = "Factory Quartermaster"
+	name = "Заводской квартермейстер"
 	outfit = /datum/outfit/factory/qm
 	icon_state = "corpsecargotech"

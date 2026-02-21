@@ -31884,3 +31884,111 @@ accusative = "расшифрованную редкость"
 instrumental = "расшифрованной редкостью"
 prepositional = "расшифрованной редкости"
 gender = "female"
+
+["crewmember"]
+nominative = "член экипажа"
+genitive = "члена экипажа"
+dative = "члену экипажа"
+accusative = "члена экипажа"
+instrumental = "членом экипажа"
+prepositional = "члене экипажа"
+gender = "male"
+
+["medical doctor"]
+nominative = "врач"
+genitive = " врача"
+dative = "врачу"
+accusative = "врача"
+instrumental = "врачём"
+prepositional = "враче"
+gender = "male"
+
+["security officer"]
+nominative = "офицер слудбы безопасности"
+genitive = " офицера слудбы безопасности"
+dative = "офицеру слудбы безопасности"
+accusative = "офицера слудбы безопасности"
+instrumental = "офицером слудбы безопасности"
+prepositional = "офицере слудбы безопасности"
+gender = "male"
+
+["engineer"]
+nominative = "инженер"
+genitive = " инженера"
+dative = "инженеру"
+accusative = "инженера"
+instrumental = "инженером"
+prepositional = "инженере"
+gender = "male"
+
+["assistant"]
+nominative = "ассистент"
+genitive = " ассистента"
+dative = "ассистенту"
+accusative = "ассистента"
+instrumental = "ассистентом"
+prepositional = "ассистенте"
+gender = "male"
+
+["senior crewmember"]
+nominative = "старший член экипажа"
+genitive = " старшего член экипажа"
+dative = "старшему член экипажа"
+accusative = "старшего член экипажа"
+instrumental = "старшим член экипажа"
+prepositional = "старшем член экипажа"
+gender = "male"
+
+["senior crewmember"]
+nominative = "старший член экипажа"
+genitive = " старшего член экипажа"
+dative = "старшему член экипажа"
+accusative = "старшего член экипажа"
+instrumental = "старшим член экипажа"
+prepositional = "старшем член экипажа"
+gender = "male"
+
+["chief medical officer"]
+nominative = "старший член экипажа"
+genitive = " старшего член экипажа"
+dative = "старшему член экипажа"
+accusative = "старшего член экипажа"
+instrumental = "старшим член экипажа"
+prepositional = "старшем член экипажа"
+gender = "male"
+
+["chief medical officer"]
+nominative = "главный врач"
+genitive = "главного варча"
+dative = "главному врачу"
+accusative = "главного врача"
+instrumental = "главным врачом"
+prepositional = "главном враче"
+gender = "male"
+
+["chief engineer"]
+nominative = "старший инженер"
+genitive = "старшего инженера"
+dative = "старшему инженеру"
+accusative = "старшего инженера"
+instrumental = "старшим инженером"
+prepositional = "старшем инженере"
+gender = "male"
+
+["head of security"]
+nominative = "глава службы безопасности"
+genitive = "главы службы безопасности"
+dative = "главе службы безопасности"
+accusative = "главу службы безопасности"
+instrumental = "главой службы безопасности"
+prepositional = "главе службы безопасности"
+gender = "male"
+
+["Islander"]
+nominative = "островитянин"
+genitive = "островитянина"
+dative = "островитянину"
+accusative = "островитянина"
+instrumental = "островитянином"
+prepositional = "островитянине"
+gender = "male"
