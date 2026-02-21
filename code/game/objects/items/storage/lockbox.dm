@@ -335,7 +335,7 @@
 	)
 
 	if(isnull(completed_domain))
-		log_runtime("Расшифрованная редкость была создана без исходного домена.")
+		log_runtime("Decrypted curiosity was created with no source domain.")
 		return INITIALIZE_HINT_QDEL
 
 	if(!istype(completed_domain, /datum/lazy_template/virtual_domain)) // Check if this is a proper virtual domain before doing anything with it

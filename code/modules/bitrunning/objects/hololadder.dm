@@ -30,7 +30,7 @@
 	. = ..()
 
 	if(isnull(server_ref.resolve()))
-		. += span_infoplain("Не к чему не подключено.")
+		. += span_infoplain("Ни к чему не подключено.")
 		return
 
 	if(isobserver(user))

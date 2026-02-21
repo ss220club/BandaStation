@@ -196,7 +196,7 @@
 
 /datum/aas_config_entry/bitrunning_QS_ready_announcement
 	name = "Карго оповещение: Битран QS готов к работе"
-	general_tooltip = "Оповещает, когда квантовый сервер готов к работе. Переменные не указаны."
+	general_tooltip = "Announces when the quantum server is ready to be used. No variables provided"
 	announcement_lines_map = list(
-		"Message" = "Отчёт квантового сервера: : Тепловые системы в рабочем состоянии. Переходим к настройке домена."
+		"Message" = "Отчёт квантового сервера: Тепловые системы в рабочем состоянии. Переходим к настройке домена."
 	)

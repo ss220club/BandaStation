@@ -19,7 +19,7 @@
 /obj/machinery/computer/quantum_console/examine(mob/user)
 	. = ..()
 	if(!server_ref)
-		. += span_warning("Пожалуйста, установите квантовый сервер на любой плоскости рядом с этой консолью.")
+		. += span_warning("Пожалуйста, установите квантовый сервер рядом с этой консолью.")
 
 /obj/machinery/computer/quantum_console/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()

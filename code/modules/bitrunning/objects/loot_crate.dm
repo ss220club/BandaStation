@@ -17,7 +17,7 @@
 /// The virtual domain - side of the bitrunning crate. Deliver to the send location.
 /obj/structure/closet/crate/secure/bitrunning/encrypted
 	name = "encrypted cache"
-	desc = "Для открытия требуется расшифровать данные убежище."
+	desc = "Для открытия требуется расшифровать данные в убежище."
 	locked = TRUE
 	damage_deflection = 30
 	resistance_flags =  INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
@@ -28,7 +28,7 @@
 /// The bitrunner den - side of the bitrunning crate. Appears in the receive location.
 /obj/structure/closet/crate/secure/bitrunning/decrypted
 	name = "decrypted cache"
-	desc = "Скомпилированая из виртуального домена. Награда за успешное прохождение битрана."
+	desc = "Скомпилированная из виртуального домена. Награда за успешное прохождение битрана."
 	locked = FALSE
 
 /obj/structure/closet/crate/secure/bitrunning/decrypted/Initialize(
