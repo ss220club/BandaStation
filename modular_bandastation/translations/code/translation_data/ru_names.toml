@@ -32068,11 +32068,11 @@ gender = "male"
 
 ["factory worker ID"]
 nominative = "ID-карта работника завода"
-genitive = ""ID-карты работника завода"
-dative = ""ID-карте работника завода"
-accusative = ""ID-карту работника завода"
-instrumental = ""ID-картой работника завода"
-prepositional = ""ID-карте работника завода"
+genitive = "ID-карты работника завода"
+dative = "ID-карте работника завода"
+accusative = "ID-карту работника завода"
+instrumental = "ID-картой работника завода"
+prepositional = "ID-карте работника завода"
 gender = "female"
 
 ["factory quartermaster ID"]
