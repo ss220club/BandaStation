@@ -41,7 +41,9 @@
 		to_chat(c, "Выбран объект '[crush_atom]'")
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(crush_atom)
-			var/turf/crush_to = isturf(object) ? object : get_turf(object)
+			var/turf/crush_to = get_turf(object)
+			if(!crush_to)
+				return
 			crush_atom.fall_and_crush(crush_to, damage, crit_chance, paralyze_time=paralyze, rotation=rotation)
 			log_admin("Build Mode: [key_name(c)] crushed [crush_atom] to [object] ([AREACOORD(object)])")
 
