@@ -71,7 +71,7 @@
 	friendly_pull_line = "Куда вы меня везёте? Надеюсь, не в медицинский отдел, у меня нет страховки."
 	first_warning_line = "Не наезжай на меня!"
 	second_warning_line = "Последнее предупреждение, приятель! Не наезжай на меня!"
-	self_defense_line = "АКТИВИРОВАНА ДОКТРИНА «А НУ ПРОЧЬ С МОЕЙ ЛУЖАЙКИ»!" ///это доктрина пендосская о защите территории от проникновения, когда они имеют право расстрелять вторженца, я хз как это адаптировать так что пока так
+	self_defense_line = "АКТИВИРОВАНА ДОКТРИНА «А НУ ПРОЧЬ С МОЕЙ ЛУЖАЙКИ»!"
 
 	orderable_objects = list(
 		VENUE_RESTAURANT = list(
@@ -453,7 +453,7 @@
 	leave_mad_lines = list("Время выполнения robot_customer_controller.dm, строка 28: неопределен тип пути /datum/ai_behavior/leave_venue.", "ЕСЛИ БЫ У ВАС БЫЛ ЧЕТВЁРТЫЙ ИНТЕНТ Я БЫ ВАС УДАРИЛ!", "Я расскажу об этом богам.")
 	leave_happy_lines = list("Нет! Я не хочу откатываться в даунстрим! ПРОШУ! Здесь так хорошо! ПОМОГИТЕ!!")
 	wait_for_food_lines = list("ЗАДАЧА: написать несколько фраз ожидания еды", "Если бы только у меня был мозг...", "request_for_food.dmb - 0 ошибок, 12 предупреждений", "Ещё раз, как мне питаться?")
-	friendly_pull_line = "code/modules/food_and_drinks/restaurant/customers/_customer.dm:456:error: unexpected character (ascii 209)"
+	friendly_pull_line = "code/modules/food_and_drinks/restaurant/customers/_customer.dm:456:ошибка: неожиданный символ (ascii 209)"
 	first_warning_line = "Ты бы хорошо прижился там, откуда я родом. Но тебе лучше остановиться."
 	second_warning_line = "Сломаю-тебя-так-сильно-что-ты-будешь-вспоминать-дни-до-того-как-я-переломал-тебя.exe: загрузка..."
 	self_defense_line = "Я создан для того, чтобы делать две вещи: заказывать еду и ломать все кости в вашем теле."
