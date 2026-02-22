@@ -30,7 +30,7 @@
 	)
 
 /datum/reagent/gondola_mutation_toxin/virtual_domain
-	name = "Продвинутое спокойствие"
+	name = "Advanced Tranquility"
 	gondola_disease = /datum/disease/transformation/gondola/virtual_domain
 
 /datum/disease/transformation/gondola/virtual_domain
