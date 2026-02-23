@@ -55,6 +55,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/your_fate, 32)
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/watching_eye, 32)
 
+/obj/structure/sign/poster/contraband/bread
+	name = "Кара небесная"
+	desc = "Хлебом единым жив человек."
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "bread"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/bread, 32)
+
 // Sword of Altam
 
 /obj/item/poster/random_sword_of_altam
@@ -179,3 +187,99 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/cool_scientist, 
 	icon_state = "legit6"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/atmos_team, 32)
+
+/obj/structure/sign/poster/official/kurit
+	name = "Курение скуривает"
+	desc = "ЗАДУМАЙСЯ."
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "kurit"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/kurit, 32)
+
+/obj/structure/sign/poster/official/breakfast
+	name = "Завтрак"
+	desc = "ММ ЕДА..."
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "breakfast"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/breakfast, 32)
+
+/obj/structure/sign/poster/official/krill
+	name = "Криль"
+	desc = "\"Во всём этом мире я один такой. Один на криллион.\""
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "krill"
+
+// Music
+
+/obj/structure/sign/poster/official/selected_ambient_works
+	name = "Selected Ambient Works"
+	desc = "Плакат странно выглядящего водопроводного крана."
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "selected_ambient_works"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/selected_ambient_works, 32)
+
+/obj/structure/sign/poster/official/richard_d_james
+	name = "Richard D. James"
+	desc = "Какой красивый молодой мужчина. Интересно, какую музыку он слушает?"
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "richard_d_james"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/richard_d_james, 32)
+
+/obj/structure/sign/poster/official/alberto_balsalm
+	name = "Alberto Balsalm"
+	desc = "Лучший бальзам для волос во всей галактике!"
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "alberto_balsalm"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/alberto_balsalm, 32)
+
+/obj/structure/sign/poster/official/tell_all_the_people
+	name = "Tell All The People"
+	desc = "\"Скажи чтоб не шли за мной.\""
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "tell_all_the_people"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/tell_all_the_people, 32)
+
+/obj/structure/sign/poster/official/sweet_ginger_green
+	name = "Sweet Ginger Green"
+	desc = "Когда не знаешь что послушать за работой - врубай Зелёненьких!"
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "sweet_ginger_green"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/sweet_ginger_green, 32)
+
+/obj/structure/sign/poster/official/vine_lady
+	name = "Vine Lady"
+	desc = "На плакате изображена деликатная дама с бокалом вина"
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "vine_lady"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/vine_lady, 32)
+
+/obj/structure/sign/poster/official/a_broken_frame
+	name = "A Broken Frame"
+	desc = "\"Ищем постеры в журналах моды.\""
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "a_broken_frame"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/a_broken_frame, 32)
+
+/obj/structure/sign/poster/official/fight_songs
+	name = "Fight Songs"
+	desc = "Критический удар по барабанным перепонкам."
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "fight_songs"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/fight_songs, 32)
+
+/obj/structure/sign/poster/official/rolling_stones
+	name = "The Rolling Stones"
+	desc = "Куда они катятся?"
+	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
+	icon_state = "rolling_stones"
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/rolling_stones, 32)
