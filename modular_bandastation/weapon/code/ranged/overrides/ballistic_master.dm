@@ -47,12 +47,6 @@
 		overlay_y = 11 \
 	)
 
-/obj/item/gun/ballistic/shotgun/sc_pump
-	lefthand_file = 'icons/mob/inhands/weapons/64x_guns_left.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/64x_guns_right.dmi'
-	inhand_x_dimension = 64
-	inhand_y_dimension = 64
-
 /obj/item/gun/ballistic/shotgun/automatic/combat/add_seclight_point()
 	AddComponent(/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
