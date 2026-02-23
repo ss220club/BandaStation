@@ -329,3 +329,25 @@
   - bugfix: Fixed metalgenned armor having broken armor stat calculations.
   lelandkemble:
   - bugfix: Fixed infinite machine guns
+2026-02-23:
+  Dominion:
+  - rscadd: Added a 3x handheld crew monitor medical crate to cargo.
+  - rscadd: Added a goodie crate with a handheld crew monitor to cargo.
+  Jacquerel:
+  - bugfix: Dead ghosts will return to the grave upon dying.
+  - bugfix: When you dig up a ghost's grave you will find the skeleton of that ghost,
+      not the skeleton of some other random guy.
+  - bugfix: The grave will also contain all of the ghost's worldly belongings.
+  Melbert:
+  - balance: Revamped echolocation effect entirely. Now updates constantly, rather
+      than on a cooldown.
+  - balance: Echolocaters can filter out certain objects that they would really prefer
+      not to see at the moment.
+  - balance: Echolocaters are mechanically (but not visually) blind, which means they
+      have flash immunity and whatnot. Because of course they are.
+  - balance: Echolocater lose their ability to echolocate if they've gone deaf. Then
+      you're truly fully blind.
+  - balance: Echolocaters can see (or rather, hear) mobs through walls.
+  - refactor: Refactored Prosopagnosia to make the effect a bit more generic.
+  alien3301:
+  - balance: Replaced formaldehyde with anacea in traitor poison kits
