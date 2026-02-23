@@ -1,0 +1,4 @@
+author: "TealSeer"
+delete-after: True
+changes:
+  - admin: "added tap all ore vents button to secrets panel"
