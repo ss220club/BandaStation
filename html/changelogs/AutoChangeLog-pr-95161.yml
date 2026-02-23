@@ -1,0 +1,4 @@
+author: "LemonInTheDark"
+delete-after: True
+changes:
+  - rscdel: "Removed the Aromantic personality (I'm pretty sure it wasn't really implemented correctly)"
