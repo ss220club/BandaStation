@@ -548,7 +548,7 @@
 	if(!istype(target_species) || !target_species.ipc_os)
 		return FALSE
 
-	var/datum/ipc_virus/new_virus = new virus_types[choice]()
+	var/datum/ipc_virus/new_virus = new virus_types[choice]
 	if(target_species.ipc_os.infect(new_virus))
 		last_message = "Вирус [choice] отправлен → [target.name]"
 		to_chat(user, span_warning("ОС [name]: Вирус успешно отправлен!"))
