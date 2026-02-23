@@ -253,9 +253,10 @@
 
 /datum/ipc_netapp/firewall_plus
 	name = "Firewall+"
-	desc = "Дополнительная защита от сетевых вирусов."
+	desc = "Пассивная защита от сетевых вирусов. Блокирует 60% попыток заражения. Работает пока установлен."
 	category = "utility"
 	file_size = 290
+	is_passive = TRUE
 
 /datum/ipc_netapp/sensor_calibration
 	name = "SensorCal"
@@ -283,6 +284,28 @@
 /// Не тратим заряд — питание идёт от батареи КПБ напрямую
 /obj/item/modular_computer/pda/ipc_internal/check_power_override()
 	return TRUE
+
+/// Получить ID-карту — берём из слота ID владельца-КПБ
+/obj/item/modular_computer/pda/ipc_internal/GetID()
+	// Если вставлена карта вручную — приоритет ей
+	if(stored_id)
+		return stored_id
+	// Иначе ищем ID карту у владельца
+	var/mob/living/carbon/human/H = loc
+	if(istype(H) && H.wear_id)
+		return H.wear_id.GetID()
+	return ..()
+
+/// Получить доступы — через подключённую ID-карту
+/obj/item/modular_computer/pda/ipc_internal/GetAccess()
+	if(stored_id)
+		return stored_id.GetAccess()
+	var/mob/living/carbon/human/H = loc
+	if(istype(H) && H.wear_id)
+		var/obj/item/card/id/id = H.wear_id.GetID()
+		if(id)
+			return id.GetAccess()
+	return ..()
 
 /// Синхронизируем отображение заряда с батареей КПБ
 /obj/item/modular_computer/pda/ipc_internal/get_header_data()
@@ -357,9 +380,54 @@
 
 /datum/ipc_netapp/blackwall/virus_kit
 	name = "VirusKit"
-	desc = "Набор инструментов для создания и распространения вирусов."
+	desc = "Создание и передача вирусов другим КПБ в зоне видимости."
 	category = "exploit"
 	file_size = 780
+	has_effect = TRUE
+
+/datum/ipc_netapp/blackwall/virus_kit/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	// Выбираем тип вируса для создания
+	var/list/virus_types = list(
+		"DisplayGlitch.v2" = /datum/ipc_virus/display_glitch,
+		"MemLeak.trojan" = /datum/ipc_virus/memory_leak,
+		"SensorNoise.worm" = /datum/ipc_virus/sensor_noise,
+	)
+	var/choice = tgui_input_list(user, "Выберите вирус для отправки:", "VirusKit", virus_types)
+	if(!choice)
+		return FALSE
+
+	// Ищем КПБ рядом
+	var/list/targets = list()
+	for(var/mob/living/carbon/human/H in view(7, user))
+		if(H == user)
+			continue
+		var/datum/species/ipc/ipc_species = H.dna?.species
+		if(istype(ipc_species) && ipc_species.ipc_os)
+			targets += H
+
+	if(!length(targets))
+		last_message = "Нет КПБ в зоне действия."
+		to_chat(user, span_warning("ОС [name]: [last_message]"))
+		return FALSE
+
+	var/mob/living/carbon/human/target = tgui_input_list(user, "Выберите цель:", "VirusKit", targets)
+	if(!target)
+		return FALSE
+
+	var/datum/species/ipc/target_species = target.dna?.species
+	if(!istype(target_species) || !target_species.ipc_os)
+		return FALSE
+
+	var/datum/ipc_virus/new_virus = new virus_types[choice]()
+	if(target_species.ipc_os.infect(new_virus))
+		last_message = "Вирус [choice] отправлен → [target.name]"
+		to_chat(user, span_warning("ОС [name]: Вирус успешно отправлен!"))
+	else
+		last_message = "Не удалось заразить [target.name]."
+		to_chat(user, span_warning("ОС [name]: Заражение не удалось (дубликат или файрволл)."))
+	return TRUE
 
 /datum/ipc_netapp/blackwall/overclock
 	name = "OverClock.exe"
@@ -370,27 +438,161 @@
 
 /datum/ipc_netapp/blackwall/wall_breaker
 	name = "WallBreaker"
-	desc = "Обход защитных систем и файрволлов."
+	desc = "Взлом ближайшего шлюза. Работает как одноразовый электрический разряд."
 	category = "exploit"
 	file_size = 620
+	has_effect = TRUE
+
+/datum/ipc_netapp/blackwall/wall_breaker/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	// Ищем шлюз рядом (в пределах 1 тайла)
+	var/list/airlocks = list()
+	for(var/obj/machinery/door/airlock/A in range(1, user))
+		airlocks += A
+
+	if(!length(airlocks))
+		last_message = "Шлюзов рядом не обнаружено."
+		to_chat(user, span_warning("ОС [name]: [last_message]"))
+		return FALSE
+
+	var/obj/machinery/door/airlock/target = airlocks[1]
+	if(length(airlocks) > 1)
+		target = tgui_input_list(user, "Выберите шлюз:", "WallBreaker", airlocks)
+	if(!target)
+		return FALSE
+
+	// Пытаемся открыть
+	if(target.locked)
+		target.set_bolt(FALSE)
+		last_message = "Болты шлюза [target.name] разблокированы."
+		to_chat(user, span_warning("ОС [name]: Болты шлюза разблокированы!"))
+	else if(target.density)
+		target.open()
+		last_message = "Шлюз [target.name] взломан и открыт."
+		to_chat(user, span_warning("ОС [name]: Шлюз взломан!"))
+	else
+		last_message = "Шлюз уже открыт."
+		to_chat(user, span_notice("ОС [name]: [last_message]"))
+
+	// КПБ получает урон от напряжения взлома
+	user.adjust_fire_loss(5)
+	to_chat(user, span_danger("Обратная связь от взлома повредила проводку!"))
+	return TRUE
 
 /datum/ipc_netapp/blackwall/id_spoof
 	name = "ID_Spoof v3"
-	desc = "Подмена идентификационных данных в сети."
+	desc = "Временная подмена имени и должности в системах станции."
 	category = "exploit"
 	file_size = 340
+	has_effect = TRUE
+	toggleable = TRUE
+	/// Оригинальное имя
+	var/original_name = ""
+	/// Поддельное имя
+	var/fake_name = ""
+	/// Поддельная должность
+	var/fake_job = ""
+
+/datum/ipc_netapp/blackwall/id_spoof/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	if(active)
+		deactivate_effect(user)
+		return TRUE
+
+	// Запрашиваем фейковые данные
+	var/new_name = tgui_input_text(user, "Введите поддельное имя:", "ID Spoof", user.real_name)
+	if(!new_name)
+		return FALSE
+	var/new_job = tgui_input_text(user, "Введите поддельную должность:", "ID Spoof", user.job)
+	if(!new_job)
+		return FALSE
+
+	original_name = user.real_name
+	fake_name = new_name
+	fake_job = new_job
+
+	// Подменяем видимые данные
+	user.fully_replace_character_name(user.real_name, fake_name)
+	user.job = fake_job
+	active = TRUE
+
+	last_message = "Активен: [fake_name] / [fake_job]"
+	to_chat(user, span_warning("ОС [name]: ID подменён на [fake_name] / [fake_job]"))
+	return TRUE
+
+/datum/ipc_netapp/blackwall/id_spoof/deactivate_effect(mob/living/carbon/human/user)
+	. = ..()
+	if(!user || !original_name)
+		return
+	user.fully_replace_character_name(user.real_name, original_name)
+	original_name = ""
+	fake_name = ""
+	fake_job = ""
+	last_message = "ID восстановлен."
+	to_chat(user, span_notice("ОС [name]: Оригинальный ID восстановлен."))
 
 /datum/ipc_netapp/blackwall/ghost_mode
 	name = "GhostMode"
-	desc = "Скрытие от сканирования и диагностических систем."
+	desc = "Скрытие от сенсоров экипажа, медицинского HUD и манифеста. Работает пока активен."
 	category = "mod"
 	file_size = 550
+	has_effect = TRUE
+	toggleable = TRUE
+
+/datum/ipc_netapp/blackwall/ghost_mode/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	if(active)
+		deactivate_effect(user)
+		return TRUE
+
+	active = TRUE
+	// Скрываем от сенсоров — неизвестная внешность и голос
+	ADD_TRAIT(user, TRAIT_UNKNOWN_APPEARANCE, "ghost_mode_app")
+	ADD_TRAIT(user, TRAIT_UNKNOWN_VOICE, "ghost_mode_app")
+	last_message = "Режим невидимости активен. Сенсоры не обнаруживают вас."
+	to_chat(user, span_warning("ОС [name]: GhostMode включён. Вы невидимы для сенсоров."))
+	return TRUE
+
+/datum/ipc_netapp/blackwall/ghost_mode/deactivate_effect(mob/living/carbon/human/user)
+	. = ..()
+	if(!user)
+		return
+	REMOVE_TRAIT(user, TRAIT_UNKNOWN_APPEARANCE, "ghost_mode_app")
+	REMOVE_TRAIT(user, TRAIT_UNKNOWN_VOICE, "ghost_mode_app")
+	last_message = "Режим невидимости отключён."
+	to_chat(user, span_notice("ОС [name]: GhostMode отключён. Сенсоры снова вас видят."))
 
 /datum/ipc_netapp/blackwall/neural_crack
 	name = "NeuralCrack"
-	desc = "Взлом позитронных блокировок и ограничений."
+	desc = "Снимает оглушение, выводит из бессознательного состояния и убирает замедления. Высокая нагрузка на систему."
 	category = "exploit"
 	file_size = 890
+	has_effect = TRUE
+
+/datum/ipc_netapp/blackwall/neural_crack/execute_effect(mob/living/carbon/human/user)
+	if(!user)
+		return FALSE
+	// Снимаем негативные эффекты
+	user.AdjustStun(-100 SECONDS)
+	user.AdjustKnockdown(-100 SECONDS)
+	user.AdjustImmobilized(-100 SECONDS)
+	user.AdjustParalyzed(-100 SECONDS)
+	user.AdjustUnconscious(-100 SECONDS)
+	user.SetSleeping(0)
+
+	// Цена — урон и нагрев процессора
+	user.adjust_fire_loss(10)
+	var/datum/species/ipc/ipc_species = user.dna?.species
+	if(istype(ipc_species))
+		ipc_species.cpu_temperature = min(ipc_species.cpu_temperature + 25, 200)
+
+	last_message = "Блокировки сняты. ВНИМАНИЕ: нагрузка на систему критическая!"
+	to_chat(user, span_boldwarning("ОС [name]: Все блокировки нейросети сняты!"))
+	to_chat(user, span_danger("Температура процессора повысилась на 25°C! Системы повреждены!"))
+	return TRUE
 
 // Модификатор скорости для усиленного разгона (OverClock.exe)
 /datum/movespeed_modifier/ipc_overclock_enhanced
@@ -860,6 +1062,14 @@
 		if(v.type == new_virus.type)
 			qdel(new_virus)
 			return FALSE
+	// Проверяем Firewall+ — блокирует 60% попыток заражения
+	for(var/datum/ipc_netapp/firewall_plus/fw in installed_apps)
+		if(prob(60))
+			if(owner)
+				to_chat(owner, span_notice("ОС Firewall+: Попытка заражения заблокирована!"))
+			qdel(new_virus)
+			return FALSE
+		break
 	new_virus.infection_time = world.time
 	viruses += new_virus
 	if(owner)
@@ -1302,6 +1512,18 @@
 	data["pending_action_approval"] = pending_action_approval
 	data["pending_action_desc"] = pending_action_desc
 
+	// Виртуальный КПК — подключённая ID-карта
+	var/pda_id_name = ""
+	var/pda_has_id = FALSE
+	for(var/datum/ipc_netapp/virtual_pda/vpda in installed_apps)
+		if(vpda.internal_pda?.stored_id)
+			pda_has_id = TRUE
+			var/obj/item/card/id/id = vpda.internal_pda.stored_id
+			pda_id_name = "[id.registered_name] — [id.assignment]"
+		break
+	data["pda_has_id"] = pda_has_id
+	data["pda_id_name"] = pda_id_name
+
 	return data
 
 /datum/ipc_operating_system/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -1445,6 +1667,33 @@
 		if("deny_action")
 			deny_pending_action()
 			return TRUE
+
+		if("connect_id")
+			// Подключить ID-карту из руки к виртуальному КПК
+			if(!owner)
+				return FALSE
+			var/obj/item/held = owner.get_active_held_item()
+			if(!held || !isidcard(held))
+				to_chat(owner, span_warning("ОС: Возьмите ID-карту в активную руку!"))
+				return FALSE
+			// Ищем виртуальный КПК в установленных приложениях
+			for(var/datum/ipc_netapp/virtual_pda/vpda in installed_apps)
+				var/obj/item/modular_computer/pda/pda = vpda.ensure_pda(owner)
+				if(pda)
+					pda.insert_id(held, owner)
+					to_chat(owner, span_notice("ОС: ID-карта подключена к КПК-эмулятору."))
+					return TRUE
+			to_chat(owner, span_warning("ОС: КПК-эмулятор не установлен!"))
+			return FALSE
+
+		if("disconnect_id")
+			// Отключить ID-карту от виртуального КПК
+			for(var/datum/ipc_netapp/virtual_pda/vpda in installed_apps)
+				if(vpda.internal_pda?.stored_id)
+					vpda.internal_pda.remove_id(owner)
+					to_chat(owner, span_notice("ОС: ID-карта отключена от КПК-эмулятора."))
+					return TRUE
+			return FALSE
 
 // ============================================
 // КНОПКА ДЕЙСТВИЯ (ОТКРЫТЬ ОС)

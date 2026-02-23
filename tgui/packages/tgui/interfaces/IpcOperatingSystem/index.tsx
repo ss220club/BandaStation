@@ -101,6 +101,9 @@ type IpcOsData = {
   remote_access_mode: string;
   pending_action_approval: boolean;
   pending_action_desc: string;
+  // Virtual PDA ID card
+  pda_has_id: boolean;
+  pda_id_name: string;
 };
 
 // ============================================
@@ -1055,6 +1058,55 @@ const InstalledAppScreen = () => {
                 >
                   Запустить
                 </Button>
+              )}
+            </Box>
+          )}
+
+          {/* ID card for КПК-эмулятор */}
+          {app.category === 'pda' && (
+            <Box
+              mb={1}
+              p={1}
+              style={{
+                border: `1px solid ${hexToRgba(theme_color, 0.3)}`,
+                borderRadius: '4px',
+                background: 'rgba(0,0,0,0.2)',
+              }}
+            >
+              <Box fontSize="0.8em" color="label" mb={0.5}>
+                <Icon name="id-card" mr={0.5} />
+                ID-карта:
+              </Box>
+              {safeBool(data.pda_has_id) ? (
+                <>
+                  <Box fontSize="0.85em" mb={0.5}>
+                    {safeStr(data.pda_id_name, 'Подключена')}
+                  </Box>
+                  <Button
+                    fluid
+                    color="caution"
+                    icon="eject"
+                    textAlign="center"
+                    onClick={() => act('disconnect_id')}
+                  >
+                    Отключить ID
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Box fontSize="0.85em" color="label" mb={0.5}>
+                    Не подключена (авто-доступ через слот ID)
+                  </Box>
+                  <Button
+                    fluid
+                    color="good"
+                    icon="id-card"
+                    textAlign="center"
+                    onClick={() => act('connect_id')}
+                  >
+                    Подключить ID из руки
+                  </Button>
+                </>
               )}
             </Box>
           )}
