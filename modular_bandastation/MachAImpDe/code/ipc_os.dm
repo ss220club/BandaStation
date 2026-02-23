@@ -137,6 +137,14 @@
 	var/has_effect = FALSE
 	/// Пассивный мод (эффект работает пока установлен)
 	var/is_passive = FALSE
+	/// Даёт ли абилку-кнопку на HUD при установке
+	var/grants_ability = FALSE
+	/// Кулдаун абилки (если grants_ability)
+	var/ability_cooldown = 0
+	/// Иконка абилки
+	var/ability_icon_state = "default"
+	/// Ссылка на выданную абилку
+	var/datum/action/cooldown/ipc_app_ability/granted_action
 	/// Последнее сообщение от приложения
 	var/last_message = ""
 
@@ -172,21 +180,44 @@
 
 /datum/ipc_netapp/thermal_monitor
 	name = "ThermalWatch Pro"
-	desc = "Расширенный мониторинг температуры. Показывает температуру тела и окружающей среды."
+	desc = "Расширенный мониторинг температуры процессора и окружающей среды. Показывает CPU temp, зону комфорта и предупреждения."
 	category = "diagnostic"
 	file_size = 180
 	has_effect = TRUE
+	grants_ability = TRUE
+	ability_cooldown = 3 SECONDS
 
 /datum/ipc_netapp/thermal_monitor/execute_effect(mob/living/carbon/human/user)
 	if(!user)
 		return FALSE
-	var/body_temp = user.bodytemperature - T0C
+	var/datum/species/ipc/ipc_species = user.dna?.species
+	if(!istype(ipc_species))
+		last_message = "ОШИБКА: Несовместимая архитектура."
+		to_chat(user, span_warning("ОС [name]: [last_message]"))
+		return FALSE
+
+	var/cpu_temp = round(ipc_species.cpu_temperature, 0.1)
 	var/env_temp = 0
 	var/datum/gas_mixture/environment = user.loc?.return_air()
 	if(environment)
-		env_temp = environment.temperature - T0C
-	last_message = "Температура тела: [round(body_temp, 0.1)]°C | Окружение: [round(env_temp, 0.1)]°C"
-	to_chat(user, span_notice("ОС [name]: [last_message]"))
+		env_temp = round(environment.temperature - T0C, 0.1)
+
+	// Определяем статус CPU
+	var/cpu_status = "НОРМА"
+	if(cpu_temp >= 130)
+		cpu_status = "КРИТИЧНО!"
+	else if(cpu_temp >= 90)
+		cpu_status = "ПЕРЕГРЕВ!"
+	else if(cpu_temp >= 80)
+		cpu_status = "ГОРЯЧО"
+	else if(cpu_temp < 20)
+		cpu_status = "ХОЛОДНО"
+
+	last_message = "CPU: [cpu_temp]°C ([cpu_status]) | Среда: [env_temp]°C"
+	to_chat(user, span_notice("ОС [name]: Температура CPU: [cpu_temp]°C — [cpu_status]"))
+	to_chat(user, span_notice("ОС [name]: Окружающая среда: [env_temp]°C"))
+	if(ipc_species.overclock_active)
+		to_chat(user, span_warning("ОС [name]: Разгон активен! Процессор нагревается."))
 	return TRUE
 
 /datum/ipc_netapp/power_optimizer
@@ -223,31 +254,69 @@
 
 /datum/ipc_netapp/signal_booster
 	name = "SignalBoost"
-	desc = "Показывает текущую радиочастоту и список доступных каналов."
+	desc = "Сканирует радиоэфир, показывает ближайшие радиоустройства и их частоты. Позволяет перехватывать сигналы."
 	category = "utility"
 	file_size = 150
 	has_effect = TRUE
+	grants_ability = TRUE
+	ability_cooldown = 10 SECONDS
 
 /datum/ipc_netapp/signal_booster/execute_effect(mob/living/carbon/human/user)
 	if(!user)
 		return FALSE
-	last_message = "Радиосистема активна. Используйте :h для общего канала."
-	to_chat(user, span_notice("ОС [name]: [last_message]"))
+	// Сканируем ближайшие радиоустройства
+	var/list/found_devices = list()
+	for(var/obj/item/radio/R in range(7, user))
+		if(R.is_on())
+			var/freq = R.get_frequency()
+			found_devices += "[R.name] ([freq / 10].[freq % 10] кГц)"
+	for(var/obj/machinery/telecomms/T in range(7, user))
+		found_devices += "[T.name] — телекоммуникации"
+
+	if(!length(found_devices))
+		last_message = "Радиоустройств не обнаружено в радиусе сканирования."
+		to_chat(user, span_notice("ОС [name]: [last_message]"))
+		return TRUE
+
+	to_chat(user, span_notice("ОС [name]: Обнаружено [length(found_devices)] устройств:"))
+	for(var/device in found_devices)
+		to_chat(user, span_notice("  → [device]"))
+
+	last_message = "Обнаружено [length(found_devices)] радиоустройств."
 	return TRUE
 
 /datum/ipc_netapp/defrag_tool
 	name = "DefragMaster"
-	desc = "Дефрагментация позитронной памяти. Снимает лёгкое оглушение и головокружение."
+	desc = "Дефрагментация системы: снижает температуру CPU на 15°C, восстанавливает 5 HP механических повреждений и оптимизирует когнитивные процессы."
 	category = "utility"
 	file_size = 410
 	has_effect = TRUE
+	grants_ability = TRUE
+	ability_cooldown = 30 SECONDS
 
 /datum/ipc_netapp/defrag_tool/execute_effect(mob/living/carbon/human/user)
 	if(!user)
 		return FALSE
+	var/datum/species/ipc/ipc_species = user.dna?.species
+
+	// Снижаем температуру CPU
+	if(istype(ipc_species))
+		var/old_temp = ipc_species.cpu_temperature
+		ipc_species.cpu_temperature = max(ipc_species.cpu_temperature - 15, 0)
+		var/cooled = round(old_temp - ipc_species.cpu_temperature, 0.1)
+		if(cooled > 0)
+			to_chat(user, span_notice("ОС [name]: Температура CPU снижена на [cooled]°C."))
+
+	// Лечим небольшой brute-урон
+	if(user.get_brute_loss() > 0)
+		user.heal_overall_damage(brute = 5, forced = TRUE)
+		to_chat(user, span_notice("ОС [name]: Восстановлено 5 HP механических повреждений."))
+
+	// Убираем головокружение и замешательство
 	user.adjust_dizzy(-5 SECONDS)
 	user.adjust_confusion(-3 SECONDS)
-	last_message = "Дефрагментация завершена. Когнитивные функции оптимизированы."
+
+	last_message = "Дефрагментация завершена. Системы оптимизированы."
 	to_chat(user, span_notice("ОС [name]: [last_message]"))
 	return TRUE
 
@@ -264,6 +333,8 @@
 	category = "diagnostic"
 	file_size = 200
 	has_effect = TRUE
+	grants_ability = TRUE
+	ability_cooldown = 15 SECONDS
 
 /datum/ipc_netapp/sensor_calibration/execute_effect(mob/living/carbon/human/user)
 	if(!user)
@@ -272,6 +343,61 @@
 	last_message = "Сенсоры откалиброваны. Чёткость зрения восстановлена."
 	to_chat(user, span_notice("ОС [name]: [last_message]"))
 	return TRUE
+
+// ============================================
+// АБИЛКА-КНОПКА ДЛЯ УСТАНОВЛЕННЫХ ПРИЛОЖЕНИЙ
+// ============================================
+
+/// Универсальная абилка для приложений ОС — привязана к конкретному netapp
+/datum/action/cooldown/ipc_app_ability
+	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_INCAPACITATED
+	click_to_activate = FALSE
+	background_icon_state = "bg_tech_blue"
+	overlay_icon_state = "bg_tech_blue_border"
+	/// Ссылка на приложение
+	var/datum/ipc_netapp/linked_app
+
+/datum/action/cooldown/ipc_app_ability/New(Target, datum/ipc_netapp/app)
+	linked_app = app
+	if(app)
+		name = app.name
+		desc = app.desc
+		button_icon_state = app.ability_icon_state
+		cooldown_time = app.ability_cooldown
+	. = ..()
+
+/datum/action/cooldown/ipc_app_ability/IsAvailable(feedback = FALSE)
+	. = ..()
+	if(!.)
+		return FALSE
+	if(!linked_app?.installed)
+		return FALSE
+	return TRUE
+
+/datum/action/cooldown/ipc_app_ability/Activate(atom/target)
+	var/mob/living/carbon/human/H = owner
+	if(!istype(H) || !linked_app)
+		return FALSE
+
+	// Для toggleable — переключаем
+	if(linked_app.toggleable)
+		if(linked_app.active)
+			linked_app.deactivate_effect(H)
+			background_icon_state = "bg_tech_blue"
+		else
+			linked_app.execute_effect(H)
+			if(linked_app.active)
+				background_icon_state = "bg_tech_blue_active"
+	else
+		linked_app.execute_effect(H)
+
+	build_all_button_icons()
+	StartCooldown()
+	return TRUE
+
+/datum/action/cooldown/ipc_app_ability/Remove(mob/living/remove_from)
+	linked_app = null
+	return ..()
 
 // ============================================
 // WHITE WALL: Виртуальный КПК
@@ -384,6 +510,8 @@
 	category = "exploit"
 	file_size = 780
 	has_effect = TRUE
+	grants_ability = TRUE
+	ability_cooldown = 20 SECONDS
 
 /datum/ipc_netapp/blackwall/virus_kit/execute_effect(mob/living/carbon/human/user)
 	if(!user)
@@ -442,6 +570,8 @@
 	category = "exploit"
 	file_size = 620
 	has_effect = TRUE
+	grants_ability = TRUE
+	ability_cooldown = 45 SECONDS
 
 /datum/ipc_netapp/blackwall/wall_breaker/execute_effect(mob/living/carbon/human/user)
 	if(!user)
@@ -487,6 +617,8 @@
 	file_size = 340
 	has_effect = TRUE
 	toggleable = TRUE
+	grants_ability = TRUE
+	ability_cooldown = 5 SECONDS
 	/// Оригинальное имя
 	var/original_name = ""
 	/// Поддельное имя
@@ -540,6 +672,8 @@
 	file_size = 550
 	has_effect = TRUE
 	toggleable = TRUE
+	grants_ability = TRUE
+	ability_cooldown = 5 SECONDS
 
 /datum/ipc_netapp/blackwall/ghost_mode/execute_effect(mob/living/carbon/human/user)
 	if(!user)
@@ -571,6 +705,8 @@
 	category = "exploit"
 	file_size = 890
 	has_effect = TRUE
+	grants_ability = TRUE
+	ability_cooldown = 60 SECONDS
 
 /datum/ipc_netapp/blackwall/neural_crack/execute_effect(mob/living/carbon/human/user)
 	if(!user)
@@ -733,6 +869,11 @@
 /datum/ipc_operating_system/Destroy()
 	if(remote_viewer)
 		to_chat(remote_viewer, span_warning("Удалённый доступ к ОС отключён: система уничтожена."))
+	// Убираем абилки у всех установленных приложений
+	for(var/datum/ipc_netapp/app in installed_apps)
+		if(app.granted_action)
+			app.granted_action.Remove(app.granted_action.owner)
+			QDEL_NULL(app.granted_action)
 	owner = null
 	remote_viewer = null
 	requesting_user = null
@@ -1144,6 +1285,11 @@
 		// Применяем пассивный эффект если есть
 		if(download_target.is_passive && owner)
 			download_target.apply_passive(owner)
+		// Выдаём абилку-кнопку если приложение её даёт
+		if(download_target.grants_ability && owner)
+			var/datum/action/cooldown/ipc_app_ability/new_action = new(null, download_target)
+			new_action.Grant(owner)
+			download_target.granted_action = new_action
 		if(owner)
 			to_chat(owner, span_notice("ОС: Приложение \"[download_target.name]\" успешно установлено."))
 
@@ -1171,9 +1317,16 @@
 	if(!app.installed)
 		return FALSE
 
+	// Деактивируем toggleable-эффект если активен
+	if(app.toggleable && app.active && owner)
+		app.deactivate_effect(owner)
 	// Убираем пассивный эффект если есть
 	if(app.is_passive && owner)
 		app.remove_passive(owner)
+	// Убираем абилку-кнопку если была выдана
+	if(app.granted_action)
+		app.granted_action.Remove(app.granted_action.owner)
+		QDEL_NULL(app.granted_action)
 	app.installed = FALSE
 	installed_apps -= app
 	return TRUE
