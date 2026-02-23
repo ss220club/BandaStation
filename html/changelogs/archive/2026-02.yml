@@ -338,6 +338,9 @@
   - bugfix: When you dig up a ghost's grave you will find the skeleton of that ghost,
       not the skeleton of some other random guy.
   - bugfix: The grave will also contain all of the ghost's worldly belongings.
+  LemonInTheDark:
+  - rscdel: Removed the Aromantic personality (I'm pretty sure it wasn't really implemented
+      correctly)
   Melbert:
   - balance: Revamped echolocation effect entirely. Now updates constantly, rather
       than on a cooldown.
