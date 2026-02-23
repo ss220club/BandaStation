@@ -74,12 +74,15 @@
 // Имплант для операционной раундстартом
 // +10% процентов успеха операций
 /proc/apply_effect_bishop(mob/living/carbon/human/H)
-	// Мед-худ — добавляем как trait или компонент
-	// TODO: Реализовать встроенный мед-худ
+	// Встроенный мед-худ
+	ADD_TRAIT(H, TRAIT_MEDICAL_HUD, "bishop_brand")
+
 	// +10% успеха операций
-	// TODO: Реализовать через модификатор к surgery success chance
-	// FIX: убран bare `pass`
-	return
+	var/datum/species/ipc/S = H.dna.species
+	if(S)
+		if(!S.ipc_chassis_modifiers)
+			S.ipc_chassis_modifiers = list()
+		S.ipc_chassis_modifiers["surgery_success"] = 1.1
 
 // ============================================
 // 4. HESPHIASTOS INDUSTRIES

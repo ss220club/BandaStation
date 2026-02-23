@@ -65,7 +65,8 @@
 	name = "Bishop Cybernetics"
 	desc = "Мед-худ встроенно. Имплант для операционной раундстартом. +10% успеха операций."
 	brand_key = "bishop"
-	visual_prefix = "bishop"
+	visual_prefix = "ipc"
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_bishop.dmi'
 	allowed_departments = list(DEPARTMENT_BITFLAG_MEDICAL, DEPARTMENT_BITFLAG_SCIENCE)
 
 // 4. HESPHIASTOS INDUSTRIES
