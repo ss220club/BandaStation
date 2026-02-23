@@ -349,5 +349,9 @@
       you're truly fully blind.
   - balance: Echolocaters can see (or rather, hear) mobs through walls.
   - refactor: Refactored Prosopagnosia to make the effect a bit more generic.
+  - bugfix: Fixes Changlings transformed into a Felinid losing decap immunity thanks
+      to their newly shrunken brain
+  TealSeer:
+  - admin: added tap all ore vents button to secrets panel
   alien3301:
   - balance: Replaced formaldehyde with anacea in traitor poison kits
