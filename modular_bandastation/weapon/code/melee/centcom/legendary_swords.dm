@@ -107,7 +107,7 @@
 	hit_wield = 'modular_bandastation/weapon/sound/melee/kel_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/bsword
-	name = "Рассекающий"
+	name = "Sunderer"
 	desc = "\"Рассекающий\" — легендарный двуручный меч, покрытый напылением из разрушенного энергетического кристалла. Согласно легенде, кузнец стремился создать меч, который убивает не изяществом, а неизбежностью."
 	icon_state = "hel_dualsaber0"
 	inhand_icon_state = "hel_dualsaber0"
