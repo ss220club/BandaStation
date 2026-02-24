@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Box,
   Button,
@@ -107,6 +113,289 @@ type IpcOsData = {
 };
 
 // ============================================
+// OS STYLE SYSTEM
+// ============================================
+
+/**
+ * Визуальный профиль ОС — каждый бренд имеет свой стиль интерфейса.
+ * Диапазоны: от минимализма (Bishop, Xion) до максимального стиля (Cybersun, Etamin).
+ */
+type OsStyleConfig = {
+  /** CSS border-radius для панелей и контейнеров */
+  borderRadius: string;
+  /** CSS font-family: 'monospace' для терминальных стилей, иначе 'inherit' */
+  fontFamily: string;
+  /** Показывать ли оверлей со сканлайнами (CRT-эффект) */
+  scanlines: boolean;
+  /** Интенсивность свечения текста (0 = нет, 1 = максимум) */
+  glowIntensity: number;
+  /** Прозрачность фона панелей (0-1) */
+  panelBgOpacity: number;
+  /** Ширина рамок */
+  borderWidth: string;
+  /** Трансформация текста заголовков */
+  textTransform: 'none' | 'uppercase';
+  /** Описание стиля для дебаг-бара */
+  styleDesc: string;
+};
+
+/** Полный список ключей брендов для цикличного переключения в дебаг-режиме */
+const ALL_BRAND_KEYS = [
+  'morpheus',
+  'etamin',
+  'bishop',
+  'hesphiastos',
+  'ward_takahashi',
+  'xion',
+  'zeng_hu',
+  'shellguard',
+  'cybersun',
+  'unbranded',
+  'hef',
+] as const;
+
+/** Возвращает hex-цвет темы по ключу бренда (дублирует логику backend) */
+function getOsBrandColor(brand_key: string): string {
+  const colors: Record<string, string> = {
+    morpheus: '#4a90d9',
+    etamin: '#d94a4a',
+    bishop: '#4ad9a5',
+    hesphiastos: '#d98f4a',
+    ward_takahashi: '#8f4ad9',
+    xion: '#4ad9d9',
+    zeng_hu: '#a5d94a',
+    shellguard: '#7a7a7a',
+    cybersun: '#d94a8f',
+    unbranded: '#5a8a5a',
+    hef: '#8a8a5a',
+  };
+  return colors[brand_key] ?? '#6a6a6a';
+}
+
+/** Возвращает название ОС по ключу бренда (дублирует логику backend) */
+function getOsStyleName(brand_key: string): string {
+  const names: Record<string, string> = {
+    morpheus: 'MorphOS',
+    etamin: 'EtaminOS',
+    bishop: 'BishopNet',
+    hesphiastos: 'HephForge',
+    ward_takahashi: 'WardLink',
+    xion: 'XionShell',
+    zeng_hu: 'ZengMed',
+    shellguard: 'ShellGuardOS',
+    cybersun: 'NightSun',
+    unbranded: 'FreeOS',
+    hef: 'PatchworkOS',
+  };
+  return names[brand_key] ?? 'GenericOS';
+}
+
+/**
+ * Возвращает визуальный профиль ОС для конкретного бренда.
+ *
+ * Философия стилей:
+ * - Morpheus/Ward-Takahashi: корпоративный профессионализм, мягкое свечение
+ * - Bishop/Zeng-Hu: медицинский минимализм, чистота, скруглённые края
+ * - Etamin/Hesphiastos/Shellguard: военная/индустриальная строгость, острые углы, CAPS
+ * - Cybersun: кибerpunk максимум — неон, сканлайны, максимальное свечение
+ * - Unbranded: хакерский терминал — monospace, зелёный, сканлайны
+ * - Xion: бюджетный утилитаризм — нет украшений, нет свечения
+ * - HEF: лоскутный — средний стиль, смешанный
+ */
+function getOsStyle(brand_key: string): OsStyleConfig {
+  switch (brand_key) {
+    // Morpheus Cyberkinetics — корпоративный техно, мягкий и профессиональный
+    case 'morpheus':
+      return {
+        borderRadius: '6px',
+        fontFamily: 'inherit',
+        scanlines: false,
+        glowIntensity: 0.5,
+        panelBgOpacity: 0.08,
+        borderWidth: '1px',
+        textTransform: 'none',
+        styleDesc: 'Корпоративный техно',
+      };
+
+    // Etamin Industry — военно-тактический, острые углы, CAPS, сканлайны
+    case 'etamin':
+      return {
+        borderRadius: '0px',
+        fontFamily: 'inherit',
+        scanlines: true,
+        glowIntensity: 0.35,
+        panelBgOpacity: 0.14,
+        borderWidth: '2px',
+        textTransform: 'uppercase',
+        styleDesc: 'Тактический военный',
+      };
+
+    // Bishop Cybernetics — клиническая чистота, максимальные скругления, минимум шума
+    case 'bishop':
+      return {
+        borderRadius: '10px',
+        fontFamily: 'inherit',
+        scanlines: false,
+        glowIntensity: 0.18,
+        panelBgOpacity: 0.05,
+        borderWidth: '1px',
+        textTransform: 'none',
+        styleDesc: 'Клинический минимализм',
+      };
+
+    // Hesphiastos Industries — кузнечный индустриальный, тяжёлые рамки, CAPS
+    case 'hesphiastos':
+      return {
+        borderRadius: '2px',
+        fontFamily: 'inherit',
+        scanlines: false,
+        glowIntensity: 0.45,
+        panelBgOpacity: 0.15,
+        borderWidth: '2px',
+        textTransform: 'uppercase',
+        styleDesc: 'Индустриальный кузнечный',
+      };
+
+    // Ward-Takahashi — элегантный премиум, фиолетовое свечение, изысканность
+    case 'ward_takahashi':
+      return {
+        borderRadius: '4px',
+        fontFamily: 'inherit',
+        scanlines: false,
+        glowIntensity: 0.68,
+        panelBgOpacity: 0.07,
+        borderWidth: '1px',
+        textTransform: 'none',
+        styleDesc: 'Премиум элегантный',
+      };
+
+    // Xion Manufacturing — бюджетный утилитаризм, ноль украшений, ноль свечения
+    case 'xion':
+      return {
+        borderRadius: '0px',
+        fontFamily: 'inherit',
+        scanlines: false,
+        glowIntensity: 0.08,
+        panelBgOpacity: 0.05,
+        borderWidth: '1px',
+        textTransform: 'none',
+        styleDesc: 'Бюджетный утилитарный',
+      };
+
+    // Zeng-Hu Pharmaceuticals — органический биотех, плавные формы
+    case 'zeng_hu':
+      return {
+        borderRadius: '10px',
+        fontFamily: 'inherit',
+        scanlines: false,
+        glowIntensity: 0.4,
+        panelBgOpacity: 0.09,
+        borderWidth: '1px',
+        textTransform: 'none',
+        styleDesc: 'Органический биотех',
+      };
+
+    // Shellguard Munitions — бронированный, серый, военный, сканлайны
+    case 'shellguard':
+      return {
+        borderRadius: '0px',
+        fontFamily: 'inherit',
+        scanlines: true,
+        glowIntensity: 0.15,
+        panelBgOpacity: 0.13,
+        borderWidth: '2px',
+        textTransform: 'uppercase',
+        styleDesc: 'Бронированный военный',
+      };
+
+    // Cybersun Industries — кибerpunk неон, максимальное свечение, сканлайны
+    case 'cybersun':
+      return {
+        borderRadius: '2px',
+        fontFamily: 'inherit',
+        scanlines: true,
+        glowIntensity: 1.0,
+        panelBgOpacity: 0.1,
+        borderWidth: '1px',
+        textTransform: 'none',
+        styleDesc: 'Киберпанк неон',
+      };
+
+    // Unbranded / FreeOS — хакерский терминал, monospace, сканлайны, зелёный CLI
+    case 'unbranded':
+      return {
+        borderRadius: '0px',
+        fontFamily: 'monospace',
+        scanlines: true,
+        glowIntensity: 0.7,
+        panelBgOpacity: 0.07,
+        borderWidth: '1px',
+        textTransform: 'none',
+        styleDesc: 'Хакерский терминал',
+      };
+
+    // HEF — лоскутная сборка, нейтральный смешанный стиль
+    case 'hef':
+      return {
+        borderRadius: '4px',
+        fontFamily: 'inherit',
+        scanlines: false,
+        glowIntensity: 0.3,
+        panelBgOpacity: 0.08,
+        borderWidth: '1px',
+        textTransform: 'none',
+        styleDesc: 'Лоскутная сборка',
+      };
+
+    default:
+      return {
+        borderRadius: '4px',
+        fontFamily: 'inherit',
+        scanlines: false,
+        glowIntensity: 0.4,
+        panelBgOpacity: 0.08,
+        borderWidth: '1px',
+        textTransform: 'none',
+        styleDesc: 'Стандартный',
+      };
+  }
+}
+
+// ============================================
+// DEBUG STYLE CONTEXT
+// ============================================
+
+type DebugStyleContextType = {
+  debugBrand: string | null;
+  setDebugBrand: (brand: string | null) => void;
+};
+
+const DebugStyleContext = React.createContext<DebugStyleContextType>({
+  debugBrand: null,
+  setDebugBrand: () => {},
+});
+
+/**
+ * Хук для получения активной темы ОС.
+ * Если активен дебаг-оверрайд — возвращает его стиль, иначе — реальный из backend.
+ */
+function useOsTheme() {
+  const { data } = useBackend<IpcOsData>();
+  const { debugBrand } = useContext(DebugStyleContext);
+
+  const effectiveBrand = debugBrand ?? safeStr(data.brand_key, 'unbranded');
+  const theme_color = debugBrand
+    ? getOsBrandColor(debugBrand)
+    : safeStr(data.theme_color, '#6a6a6a');
+  const os_name = debugBrand
+    ? getOsStyleName(debugBrand)
+    : safeStr(data.os_name, 'IPC-OS');
+  const style = getOsStyle(effectiveBrand);
+
+  return { theme_color, brand_key: effectiveBrand, os_name, style };
+}
+
+// ============================================
 // SAFE DATA ACCESS HELPERS
 // ============================================
 
@@ -132,32 +421,181 @@ function safeBool(val: boolean | number | null | undefined): boolean {
 
 export const IpcOperatingSystem = () => {
   const { data } = useBackend<IpcOsData>();
+  const [debugBrand, setDebugBrand] = useState<string | null>(null);
+
+  const effectiveBrand = debugBrand ?? safeStr(data.brand_key, 'unbranded');
+  const theme_color = debugBrand
+    ? getOsBrandColor(debugBrand)
+    : safeStr(data.theme_color, '#6a6a6a');
+  const os_name = debugBrand
+    ? getOsStyleName(debugBrand)
+    : safeStr(data.os_name, 'IPC-OS');
+  const style = getOsStyle(effectiveBrand);
 
   const logged_in = safeBool(data.logged_in);
   const current_app = safeStr(data.current_app, 'desktop');
-  const os_name = safeStr(data.os_name, 'IPC-OS');
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
 
   return (
-    <Window width={700} height={650} title={os_name}>
-      <Window.Content
-        style={{
-          background: `linear-gradient(135deg, rgba(0,0,0,0.95) 0%, ${hexToRgba(theme_color, 0.15)} 50%, rgba(0,0,0,0.95) 100%)`,
-        }}
-      >
-        {!logged_in ? (
-          <LoginScreen />
-        ) : (
-          <>
-            {current_app === 'desktop' && <DesktopScreen />}
-            {current_app === 'diagnostics' && <DiagnosticsApp />}
-            {current_app === 'antivirus' && <AntivirusApp />}
-            {current_app === 'net' && <NetAppScreen />}
-            {current_app === 'installed_app' && <InstalledAppScreen />}
-          </>
-        )}
-      </Window.Content>
-    </Window>
+    <DebugStyleContext.Provider value={{ debugBrand, setDebugBrand }}>
+      <Window width={700} height={650} title={os_name}>
+        <Window.Content
+          style={{
+            background: `linear-gradient(135deg, rgba(0,0,0,0.95) 0%, ${hexToRgba(theme_color, 0.15)} 50%, rgba(0,0,0,0.95) 100%)`,
+            fontFamily:
+              style.fontFamily === 'monospace'
+                ? '"Courier New", Courier, monospace'
+                : 'inherit',
+            position: 'relative',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Сканлайны — CRT-оверлей для военных/терминальных стилей */}
+          {style.scanlines && (
+            <Box
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage:
+                  'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px)',
+                pointerEvents: 'none',
+                zIndex: 9999,
+              }}
+            />
+          )}
+
+          {/* Дебаг-бар для переключения стилей на лету */}
+          <DebugStyleBar />
+
+          {!logged_in ? (
+            <LoginScreen />
+          ) : (
+            <>
+              {current_app === 'desktop' && <DesktopScreen />}
+              {current_app === 'diagnostics' && <DiagnosticsApp />}
+              {current_app === 'antivirus' && <AntivirusApp />}
+              {current_app === 'net' && <NetAppScreen />}
+              {current_app === 'installed_app' && <InstalledAppScreen />}
+            </>
+          )}
+        </Window.Content>
+      </Window>
+    </DebugStyleContext.Provider>
+  );
+};
+
+// ============================================
+// DEBUG STYLE BAR
+// ============================================
+
+/** Дебаг-панель сверху для переключения стилей ОС на лету. */
+const DebugStyleBar = () => {
+  const { debugBrand, setDebugBrand } = useContext(DebugStyleContext);
+  const { data } = useBackend<IpcOsData>();
+  const realBrand = safeStr(data.brand_key, 'unbranded');
+
+  const brands = [...ALL_BRAND_KEYS];
+  const currentIdx = debugBrand ? brands.indexOf(debugBrand as (typeof ALL_BRAND_KEYS)[number]) : -1;
+
+  const cycleNext = () => {
+    const nextIdx = (currentIdx + 1) % brands.length;
+    setDebugBrand(brands[nextIdx]);
+  };
+
+  const cyclePrev = () => {
+    const prevIdx = (currentIdx - 1 + brands.length) % brands.length;
+    setDebugBrand(brands[prevIdx]);
+  };
+
+  const reset = () => setDebugBrand(null);
+
+  const activeStyle = debugBrand ? getOsStyle(debugBrand) : null;
+  const activeColor = debugBrand ? getOsBrandColor(debugBrand) : '#aaa';
+
+  return (
+    <Box
+      style={{
+        background: 'rgba(40,30,0,0.85)',
+        borderBottom: '1px dashed rgba(255,200,0,0.45)',
+        padding: '2px 6px',
+        fontSize: '0.7em',
+      }}
+    >
+      <Flex align="center" justify="space-between">
+        <Flex.Item>
+          <Box bold color="average">
+            <Icon name="bug" mr={0.4} />
+            DEV
+          </Box>
+        </Flex.Item>
+
+        <Flex.Item grow ml={1} mr={1}>
+          {debugBrand ? (
+            <Flex align="center">
+              <Flex.Item>
+                <Box
+                  as="span"
+                  bold
+                  style={{ color: activeColor }}
+                >
+                  {getOsStyleName(debugBrand)}
+                </Box>
+              </Flex.Item>
+              <Flex.Item ml={0.5}>
+                <Box as="span" color="label">
+                  — {activeStyle?.styleDesc}
+                </Box>
+              </Flex.Item>
+              <Flex.Item ml={0.5}>
+                <Box as="span" color="label">
+                  [{currentIdx + 1}/{brands.length}]
+                </Box>
+              </Flex.Item>
+            </Flex>
+          ) : (
+            <Box color="label">
+              реальный:{' '}
+              <Box as="span" color="average">
+                {getOsStyleName(realBrand)}
+              </Box>
+            </Box>
+          )}
+        </Flex.Item>
+
+        <Flex.Item>
+          <Flex align="center">
+            <Button
+              compact
+              color="transparent"
+              icon="chevron-left"
+              tooltip="Предыдущий стиль"
+              onClick={cyclePrev}
+            />
+            <Button
+              compact
+              color="average"
+              icon="sync"
+              mr={0.3}
+              tooltip="Следующий стиль"
+              onClick={cycleNext}
+            >
+              Стиль
+            </Button>
+            {debugBrand && (
+              <Button
+                compact
+                color="transparent"
+                icon="times"
+                tooltip="Сбросить к реальному стилю"
+                onClick={reset}
+              />
+            )}
+          </Flex>
+        </Flex.Item>
+      </Flex>
+    </Box>
   );
 };
 
@@ -232,10 +670,9 @@ function getCategoryLabel(cat: string): string {
 
 const LoginScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
+  const { theme_color, os_name, style } = useOsTheme();
 
-  const os_name = safeStr(data.os_name, 'IPC-OS');
   const os_version = safeStr(data.os_version, '2.4.1');
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
   const has_password = safeBool(data.has_password);
 
   const [password, setPassword] = useState('');
@@ -263,8 +700,9 @@ const LoginScreen = () => {
             bold
             color={theme_color}
             style={{
-              textShadow: `0 0 20px ${hexToRgba(theme_color, 0.5)}`,
-              letterSpacing: '3px',
+              textShadow: `0 0 ${Math.round(20 * style.glowIntensity)}px ${hexToRgba(theme_color, style.glowIntensity * 0.6)}`,
+              letterSpacing: style.textTransform === 'uppercase' ? '4px' : '3px',
+              textTransform: style.textTransform,
             }}
           >
             {os_name}
@@ -279,9 +717,9 @@ const LoginScreen = () => {
         <Box
           p={2}
           style={{
-            border: `1px solid ${hexToRgba(theme_color, 0.3)}`,
-            borderRadius: '4px',
-            background: 'rgba(0,0,0,0.5)',
+            border: `${style.borderWidth} solid ${hexToRgba(theme_color, 0.35)}`,
+            borderRadius: style.borderRadius,
+            background: `rgba(0,0,0,${0.45 + style.panelBgOpacity})`,
             width: '300px',
           }}
         >
@@ -519,10 +957,9 @@ const SYSTEM_APPS = [
 
 const DesktopScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
+  const { theme_color, os_name, style } = useOsTheme();
 
-  const os_name = safeStr(data.os_name, 'IPC-OS');
   const os_version = safeStr(data.os_version, '2.4.1');
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
   const virus_count = safeNum(data.virus_count, 0);
   const has_serious_viruses = safeBool(data.has_serious_viruses);
   const installed_apps = safeArray(data.installed_apps);
@@ -545,12 +982,25 @@ const DesktopScreen = () => {
           px={1}
           style={{
             background: hexToRgba(theme_color, 0.2),
-            borderBottom: `1px solid ${hexToRgba(theme_color, 0.3)}`,
+            borderBottom: `${style.borderWidth} solid ${hexToRgba(theme_color, 0.3)}`,
           }}
         >
           <Flex justify="space-between" align="center">
             <Flex.Item>
-              <Box bold color={theme_color} fontSize="0.8em">
+              <Box
+                bold
+                color={theme_color}
+                fontSize="0.8em"
+                style={{
+                  textShadow:
+                    style.glowIntensity > 0.3
+                      ? `0 0 8px ${hexToRgba(theme_color, style.glowIntensity * 0.5)}`
+                      : 'none',
+                  textTransform: style.textTransform,
+                  letterSpacing:
+                    style.textTransform === 'uppercase' ? '1px' : 'normal',
+                }}
+              >
                 <Icon name="desktop" mr={0.5} />
                 {os_name} v{os_version}
                 {is_remote && (
@@ -801,7 +1251,7 @@ const DesktopScreen = () => {
           px={1}
           style={{
             background: hexToRgba(theme_color, 0.12),
-            borderTop: `1px solid ${hexToRgba(theme_color, 0.25)}`,
+            borderTop: `${style.borderWidth} solid ${hexToRgba(theme_color, 0.25)}`,
           }}
         >
           <Flex justify="space-between" align="center">
@@ -863,9 +1313,9 @@ const DesktopScreen = () => {
 
 const InstalledAppScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
+  const { theme_color, style } = useOsTheme();
 
   const app_name = safeStr(data.current_installed_app_name, '');
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
   const installed_apps = safeArray(data.installed_apps);
 
   const app = installed_apps.find((a) => a.name === app_name);
@@ -899,11 +1349,11 @@ const InstalledAppScreen = () => {
             p={2}
             mb={2}
             style={{
-              border: `1px solid ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, 0.4)}`,
-              borderRadius: '6px',
+              border: `${style.borderWidth} solid ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, 0.4)}`,
+              borderRadius: style.borderRadius,
               background: hexToRgba(
                 isBlackwall ? '#cc3333' : theme_color,
-                0.08,
+                style.panelBgOpacity,
               ),
             }}
           >
@@ -916,8 +1366,8 @@ const InstalledAppScreen = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    border: `1px solid ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, 0.3)}`,
-                    borderRadius: '8px',
+                    border: `${style.borderWidth} solid ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, 0.3)}`,
+                    borderRadius: style.borderRadius,
                     background: hexToRgba(
                       isBlackwall ? '#cc3333' : theme_color,
                       0.12,
@@ -928,11 +1378,18 @@ const InstalledAppScreen = () => {
                     name={isBlackwall ? 'skull-crossbones' : 'cube'}
                     size={2}
                     color={isBlackwall ? '#cc3333' : theme_color}
+                    style={
+                      style.glowIntensity > 0.3
+                        ? {
+                            textShadow: `0 0 8px ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, style.glowIntensity * 0.6)}`,
+                          }
+                        : undefined
+                    }
                   />
                 </Box>
               </Flex.Item>
               <Flex.Item grow>
-                <Box bold fontSize="1.3em">
+                <Box bold fontSize="1.3em" style={{ textTransform: style.textTransform }}>
                   {app.name}
                 </Box>
                 <Box fontSize="0.85em" color="label" mt={0.3}>
@@ -952,7 +1409,7 @@ const InstalledAppScreen = () => {
               p={1}
               style={{
                 background: 'rgba(0,0,0,0.2)',
-                borderRadius: '4px',
+                borderRadius: style.borderRadius,
               }}
             >
               {app.desc}
@@ -1249,6 +1706,7 @@ const DiagnosticsApp = () => {
 
 const AntivirusApp = () => {
   const { act, data } = useBackend<IpcOsData>();
+  const { style } = useOsTheme();
 
   const antivirus_scanning = safeBool(data.antivirus_scanning);
   const antivirus_progress = safeNum(data.antivirus_progress, 0);
@@ -1269,8 +1727,8 @@ const AntivirusApp = () => {
             p={1.5}
             textAlign="center"
             style={{
-              border: `1px solid ${virus_count > 0 ? (has_serious_viruses ? '#cc3333' : '#cc9933') : '#33cc33'}`,
-              borderRadius: '4px',
+              border: `${style.borderWidth} solid ${virus_count > 0 ? (has_serious_viruses ? '#cc3333' : '#cc9933') : '#33cc33'}`,
+              borderRadius: style.borderRadius,
               background:
                 virus_count > 0
                   ? has_serious_viruses
@@ -1424,13 +1882,13 @@ const AntivirusApp = () => {
 
 const NetAppScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
+  const { theme_color, style } = useOsTheme();
 
   const network_connected = safeBool(data.network_connected);
   const net_wall = safeStr(data.net_wall, 'white');
   const net_catalog = safeArray(data.net_catalog);
   const black_wall_catalog = safeArray(data.black_wall_catalog);
   const installed_apps = safeArray(data.installed_apps);
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
   const downloading = safeBool(data.downloading);
   const download_progress = safeNum(data.download_progress, 0);
   const download_app_name = safeStr(data.download_app_name, '');
@@ -1450,8 +1908,8 @@ const NetAppScreen = () => {
             p={0.5}
             textAlign="center"
             style={{
-              border: `1px solid ${network_connected ? 'rgba(50,200,50,0.3)' : 'rgba(200,50,50,0.3)'}`,
-              borderRadius: '3px',
+              border: `${style.borderWidth} solid ${network_connected ? 'rgba(50,200,50,0.3)' : 'rgba(200,50,50,0.3)'}`,
+              borderRadius: style.borderRadius,
               background: network_connected
                 ? 'rgba(0,200,0,0.05)'
                 : 'rgba(200,0,0,0.05)',
@@ -1692,17 +2150,15 @@ type AppHeaderProps = {
 };
 
 const AppHeader = (props: AppHeaderProps) => {
-  const { act, data } = useBackend<IpcOsData>();
-
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
-  const os_name = safeStr(data.os_name, 'IPC-OS');
+  const { act } = useBackend<IpcOsData>();
+  const { theme_color, os_name, style } = useOsTheme();
 
   return (
     <Box
       p={0.5}
       style={{
         background: hexToRgba(theme_color, 0.15),
-        borderBottom: `1px solid ${hexToRgba(theme_color, 0.3)}`,
+        borderBottom: `${style.borderWidth} solid ${hexToRgba(theme_color, 0.3)}`,
       }}
     >
       <Flex align="center" justify="space-between">
@@ -1718,7 +2174,18 @@ const AppHeader = (props: AppHeaderProps) => {
               />
             </Flex.Item>
             <Flex.Item>
-              <Box bold color={theme_color} fontSize="0.95em">
+              <Box
+                bold
+                color={theme_color}
+                fontSize="0.95em"
+                style={{
+                  textShadow:
+                    style.glowIntensity > 0.3
+                      ? `0 0 6px ${hexToRgba(theme_color, style.glowIntensity * 0.45)}`
+                      : 'none',
+                  textTransform: style.textTransform,
+                }}
+              >
                 <Icon name={props.icon} mr={0.5} />
                 {props.title}
               </Box>
