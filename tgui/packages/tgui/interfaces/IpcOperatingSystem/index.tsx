@@ -127,6 +127,8 @@ type OsStyleConfig = {
   fontFamily: string;
   /** Показывать ли оверлей со сканлайнами (CRT-эффект) */
   scanlines: boolean;
+  /** Непрозрачность сканлайн-оверлея (0-1, дефолт 0.06) */
+  scanlinesOpacity: number;
   /** Интенсивность свечения текста (0 = нет, 1 = максимум) */
   glowIntensity: number;
   /** Прозрачность фона панелей (0-1) */
@@ -135,6 +137,8 @@ type OsStyleConfig = {
   borderWidth: string;
   /** Трансформация текста заголовков */
   textTransform: 'none' | 'uppercase';
+  /** CSS background для Window.Content — уникальный фон бренда */
+  bgStyle: string;
   /** Паттерн фона: 'stripes' = предупреждающие полосы, 'grid' = сетка-лоскут */
   bgPattern?: 'stripes' | 'grid';
   /** Префикс заголовков приложений (напр. '[ ' для Etamin) */
@@ -210,160 +214,220 @@ function getOsStyleName(brand_key: string): string {
  */
 function getOsStyle(brand_key: string): OsStyleConfig {
   switch (brand_key) {
+    // ─────────────────────────────────────────────────────────────────
     // Morpheus Cyberkinetics — Corporate
-    // Чистый, профессиональный. Скруглённые углы, плавные градиенты.
+    // Чистый, профессиональный. Скруглённые углы, плавный синий центр.
+    // ─────────────────────────────────────────────────────────────────
     case 'morpheus':
       return {
         borderRadius: '6px',
         fontFamily: 'inherit',
         scanlines: false,
-        glowIntensity: 0.5,
-        panelBgOpacity: 0.08,
+        scanlinesOpacity: 0,
+        glowIntensity: 0.55,
+        panelBgOpacity: 0.1,
         borderWidth: '1px',
         textTransform: 'none',
+        bgStyle:
+          'radial-gradient(ellipse at 50% -10%, rgba(74,144,217,0.28) 0%, rgba(0,0,0,0.97) 55%)',
         styleDesc: 'Corporate',
       };
 
+    // ─────────────────────────────────────────────────────────────────
     // Etamin Industry — Military HUD
-    // Тактический. Острые углы, сканлайны, моноширинный шрифт, [[ ЗАГОЛОВОК ]]
+    // Тактический красно-чёрный. Острые углы, сканлайны, monospace,
+    // [[ ЗАГОЛОВОК ]], плотный красный туман снизу.
+    // ─────────────────────────────────────────────────────────────────
     case 'etamin':
       return {
         borderRadius: '0px',
         fontFamily: 'monospace',
         scanlines: true,
-        glowIntensity: 0.35,
-        panelBgOpacity: 0.14,
+        scanlinesOpacity: 0.11,
+        glowIntensity: 0.4,
+        panelBgOpacity: 0.18,
         borderWidth: '2px',
         textTransform: 'uppercase',
+        bgStyle:
+          'linear-gradient(180deg, rgba(18,3,3,0.99) 0%, rgba(217,74,74,0.14) 60%, rgba(8,0,0,1) 100%)',
         headerPrefix: '[ ',
         headerSuffix: ' ]',
         styleDesc: 'Military HUD',
       };
 
+    // ─────────────────────────────────────────────────────────────────
     // Bishop Cybernetics — Medical
-    // Медицинский минимализм. Тонкие линии, много пространства, стерильный вид.
+    // Стерильный. Очень тёмный с мягким зелёно-голубым снизу.
+    // Минимум шума, много пространства.
+    // ─────────────────────────────────────────────────────────────────
     case 'bishop':
       return {
-        borderRadius: '8px',
+        borderRadius: '10px',
         fontFamily: 'inherit',
         scanlines: false,
-        glowIntensity: 0.15,
-        panelBgOpacity: 0.04,
+        scanlinesOpacity: 0,
+        glowIntensity: 0.18,
+        panelBgOpacity: 0.05,
         borderWidth: '1px',
         textTransform: 'none',
+        bgStyle:
+          'linear-gradient(170deg, rgba(0,12,10,0.97) 0%, rgba(74,217,165,0.14) 100%)',
         styleDesc: 'Medical',
       };
 
+    // ─────────────────────────────────────────────────────────────────
     // Hesphiastos Industries — Industrial
-    // Тяжёлый индустриальный. Толстые рамки, предупреждающие полосы (warning stripes).
+    // Тяжёлый янтарно-оранжевый, индустриальный. Толстые рамки,
+    // warning stripes, раскалённый металл.
+    // ─────────────────────────────────────────────────────────────────
     case 'hesphiastos':
       return {
         borderRadius: '2px',
         fontFamily: 'inherit',
         scanlines: false,
-        glowIntensity: 0.45,
-        panelBgOpacity: 0.15,
+        scanlinesOpacity: 0,
+        glowIntensity: 0.5,
+        panelBgOpacity: 0.18,
         borderWidth: '2px',
         textTransform: 'uppercase',
+        bgStyle:
+          'linear-gradient(155deg, rgba(38,16,0,0.98) 0%, rgba(217,143,74,0.2) 55%, rgba(15,5,0,0.99) 100%)',
         bgPattern: 'stripes',
         styleDesc: 'Industrial',
       };
 
+    // ─────────────────────────────────────────────────────────────────
     // Ward-Takahashi — Elegant Minimal
-    // Японский корпоративный минимализм. Тонкие линии, элегантный, утончённый.
+    // Японский корпоративный минимализм. Глубокий фиолетовый градиент,
+    // тонкие линии, утончённость.
+    // ─────────────────────────────────────────────────────────────────
     case 'ward_takahashi':
       return {
         borderRadius: '4px',
         fontFamily: 'inherit',
         scanlines: false,
-        glowIntensity: 0.45,
-        panelBgOpacity: 0.05,
+        scanlinesOpacity: 0,
+        glowIntensity: 0.55,
+        panelBgOpacity: 0.06,
         borderWidth: '1px',
         textTransform: 'none',
+        bgStyle:
+          'linear-gradient(145deg, rgba(4,0,12,0.98) 0%, rgba(143,74,217,0.18) 55%, rgba(0,0,6,0.99) 100%)',
         styleDesc: 'Elegant Minimal',
       };
 
+    // ─────────────────────────────────────────────────────────────────
     // Xion Manufacturing — Standard
-    // Стандартный функциональный. Текущий базовый вид.
+    // Нейтральный базовый. Почти чёрный, слабый голубой намёк.
+    // ─────────────────────────────────────────────────────────────────
     case 'xion':
       return {
         borderRadius: '3px',
         fontFamily: 'inherit',
         scanlines: false,
-        glowIntensity: 0.25,
-        panelBgOpacity: 0.07,
+        scanlinesOpacity: 0,
+        glowIntensity: 0.28,
+        panelBgOpacity: 0.08,
         borderWidth: '1px',
         textTransform: 'none',
+        bgStyle:
+          'linear-gradient(135deg, rgba(0,0,0,0.97) 0%, rgba(74,217,217,0.09) 50%, rgba(0,0,0,0.97) 100%)',
         styleDesc: 'Standard',
       };
 
+    // ─────────────────────────────────────────────────────────────────
     // Zeng-Hu Pharmaceuticals — Organic / Bio
-    // Мягкие формы, скруглённые, органический стиль.
+    // Радиальный зелёный сверху, органический. Максимальные скругления.
+    // ─────────────────────────────────────────────────────────────────
     case 'zeng_hu':
       return {
-        borderRadius: '12px',
+        borderRadius: '14px',
         fontFamily: 'inherit',
         scanlines: false,
-        glowIntensity: 0.4,
-        panelBgOpacity: 0.09,
+        scanlinesOpacity: 0,
+        glowIntensity: 0.45,
+        panelBgOpacity: 0.1,
         borderWidth: '1px',
         textTransform: 'none',
+        bgStyle:
+          'radial-gradient(ellipse at 50% -5%, rgba(165,217,74,0.25) 0%, rgba(0,5,0,0.97) 55%)',
         styleDesc: 'Organic / Bio',
       };
 
+    // ─────────────────────────────────────────────────────────────────
     // Shellguard Munitions — Utilitarian
-    // Утилитарный военный. Серый, плотный, без украшений.
+    // Абсолютно серый, плоский. Ноль свечения, ноль украшений. Броня.
+    // ─────────────────────────────────────────────────────────────────
     case 'shellguard':
       return {
         borderRadius: '0px',
         fontFamily: 'inherit',
         scanlines: false,
-        glowIntensity: 0.05,
-        panelBgOpacity: 0.13,
+        scanlinesOpacity: 0,
+        glowIntensity: 0.04,
+        panelBgOpacity: 0.16,
         borderWidth: '2px',
         textTransform: 'uppercase',
+        bgStyle:
+          'linear-gradient(180deg, rgba(20,20,20,0.99) 0%, rgba(14,14,14,1) 100%)',
         styleDesc: 'Utilitarian',
       };
 
+    // ─────────────────────────────────────────────────────────────────
     // Cybersun Industries — Cyberpunk Neon
-    // Неон, тёмный, яркие акценты, глоу-эффекты, сканлайны.
+    // Мощный неон: два радиальных источника (маджента + фиолет),
+    // сканлайны, максимальное свечение.
+    // ─────────────────────────────────────────────────────────────────
     case 'cybersun':
       return {
         borderRadius: '2px',
         fontFamily: 'inherit',
         scanlines: true,
+        scanlinesOpacity: 0.09,
         glowIntensity: 1.0,
-        panelBgOpacity: 0.1,
+        panelBgOpacity: 0.12,
         borderWidth: '1px',
         textTransform: 'none',
+        bgStyle:
+          'radial-gradient(ellipse at 28% 22%, rgba(217,74,143,0.38) 0%, transparent 50%), radial-gradient(ellipse at 72% 78%, rgba(143,0,255,0.25) 0%, transparent 45%), rgba(2,0,6,0.98)',
         styleDesc: 'Cyberpunk Neon',
       };
 
+    // ─────────────────────────────────────────────────────────────────
     // Unbranded / FreeOS — Retro Terminal
-    // Зелёный CRT, сканлайны, моноширинный шрифт, ретро-терминал.
+    // Почти чёрный с фосфорным зелёным намёком. Monospace, сканлайны.
+    // ─────────────────────────────────────────────────────────────────
     case 'unbranded':
       return {
         borderRadius: '0px',
         fontFamily: 'monospace',
         scanlines: true,
-        glowIntensity: 0.7,
-        panelBgOpacity: 0.07,
+        scanlinesOpacity: 0.13,
+        glowIntensity: 0.75,
+        panelBgOpacity: 0.08,
         borderWidth: '1px',
         textTransform: 'none',
+        bgStyle:
+          'radial-gradient(ellipse at 50% 50%, rgba(90,138,90,0.15) 0%, rgba(0,3,0,0.99) 65%)',
         styleDesc: 'Retro Terminal',
       };
 
+    // ─────────────────────────────────────────────────────────────────
     // HEF — Patchwork
-    // Разношёрстный, глитч-эстетика, сеточный паттерн.
+    // Несимметричный лоскутный. Асимметричный gradient + сетка.
+    // ─────────────────────────────────────────────────────────────────
     case 'hef':
       return {
         borderRadius: '4px',
         fontFamily: 'inherit',
         scanlines: false,
+        scanlinesOpacity: 0,
         glowIntensity: 0.3,
-        panelBgOpacity: 0.08,
+        panelBgOpacity: 0.09,
         borderWidth: '1px',
         textTransform: 'none',
+        bgStyle:
+          'linear-gradient(110deg, rgba(0,0,0,0.97) 0%, rgba(138,138,90,0.15) 33%, rgba(0,0,0,0.97) 62%, rgba(138,138,90,0.1) 100%)',
         bgPattern: 'grid',
         styleDesc: 'Patchwork',
       };
@@ -373,10 +437,13 @@ function getOsStyle(brand_key: string): OsStyleConfig {
         borderRadius: '4px',
         fontFamily: 'inherit',
         scanlines: false,
+        scanlinesOpacity: 0.06,
         glowIntensity: 0.4,
         panelBgOpacity: 0.08,
         borderWidth: '1px',
         textTransform: 'none',
+        bgStyle:
+          'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(106,106,106,0.1) 50%, rgba(0,0,0,0.95) 100%)',
         styleDesc: 'Standard',
       };
   }
@@ -461,7 +528,7 @@ export const IpcOperatingSystem = () => {
       <Window width={700} height={650} title={os_name}>
         <Window.Content
           style={{
-            background: `linear-gradient(135deg, rgba(0,0,0,0.95) 0%, ${hexToRgba(theme_color, 0.15)} 50%, rgba(0,0,0,0.95) 100%)`,
+            background: style.bgStyle,
             fontFamily:
               style.fontFamily === 'monospace'
                 ? '"Courier New", Courier, monospace'
@@ -472,8 +539,8 @@ export const IpcOperatingSystem = () => {
             flexDirection: 'column',
           }}
         >
-          {/* Сканлайны — CRT-оверлей для военных/терминальных стилей */}
-          {style.scanlines && (
+          {/* Сканлайны — CRT-оверлей, непрозрачность задаётся брендом */}
+          {style.scanlines && style.scanlinesOpacity > 0 && (
             <Box
               style={{
                 position: 'absolute',
@@ -481,8 +548,7 @@ export const IpcOperatingSystem = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundImage:
-                  'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px)',
+                backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,${style.scanlinesOpacity}) 2px, rgba(0,0,0,${style.scanlinesOpacity}) 4px)`,
                 pointerEvents: 'none',
                 zIndex: 9999,
               }}
@@ -525,19 +591,28 @@ export const IpcOperatingSystem = () => {
           {/* Дебаг-бар для переключения стилей на лету */}
           <DebugStyleBar />
 
-          {/* Основной контент — растягивается на оставшуюся высоту */}
-          <Box style={{ flex: '1 1 0', overflow: 'hidden', position: 'relative' }}>
-            {!logged_in ? (
-              <LoginScreen />
-            ) : (
-              <>
-                {current_app === 'desktop' && <DesktopScreen />}
-                {current_app === 'diagnostics' && <DiagnosticsApp />}
-                {current_app === 'antivirus' && <AntivirusApp />}
-                {current_app === 'net' && <NetAppScreen />}
-                {current_app === 'installed_app' && <InstalledAppScreen />}
-              </>
-            )}
+          {/* Основной контент: flex-grown wrapper + абсолютный fill внутри,
+              чтобы height="100%" у LoginScreen/DesktopScreen работал корректно */}
+          <Box style={{ flex: '1 1 0%', minHeight: '0', position: 'relative' }}>
+            <Box
+              style={{
+                position: 'absolute',
+                inset: '0',
+                overflow: 'hidden',
+              }}
+            >
+              {!logged_in ? (
+                <LoginScreen />
+              ) : (
+                <>
+                  {current_app === 'desktop' && <DesktopScreen />}
+                  {current_app === 'diagnostics' && <DiagnosticsApp />}
+                  {current_app === 'antivirus' && <AntivirusApp />}
+                  {current_app === 'net' && <NetAppScreen />}
+                  {current_app === 'installed_app' && <InstalledAppScreen />}
+                </>
+              )}
+            </Box>
           </Box>
         </Window.Content>
       </Window>
