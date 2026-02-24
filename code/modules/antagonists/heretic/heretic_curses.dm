@@ -46,7 +46,7 @@
 			continue
 		potential_targets["[human_to_check.real_name]"] = human_to_check
 
-	var/chosen_mob = tgui_input_list(user, "Выберете цель для проклятия.", name, sort_list(potential_targets, GLOBAL_PROC_REF(cmp_text_asc)))
+	var/chosen_mob = tgui_input_list(user, "Выберите цель для проклятия.", name, sort_list(potential_targets, GLOBAL_PROC_REF(cmp_text_asc)))
 	if(isnull(chosen_mob))
 		return FALSE
 
