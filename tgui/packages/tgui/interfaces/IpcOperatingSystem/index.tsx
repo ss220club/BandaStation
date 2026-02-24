@@ -135,6 +135,12 @@ type OsStyleConfig = {
   borderWidth: string;
   /** Трансформация текста заголовков */
   textTransform: 'none' | 'uppercase';
+  /** Паттерн фона: 'stripes' = предупреждающие полосы, 'grid' = сетка-лоскут */
+  bgPattern?: 'stripes' | 'grid';
+  /** Префикс заголовков приложений (напр. '[ ' для Etamin) */
+  headerPrefix?: string;
+  /** Суффикс заголовков приложений (напр. ' ]' для Etamin) */
+  headerSuffix?: string;
   /** Описание стиля для дебаг-бара */
   styleDesc: string;
 };
@@ -204,7 +210,8 @@ function getOsStyleName(brand_key: string): string {
  */
 function getOsStyle(brand_key: string): OsStyleConfig {
   switch (brand_key) {
-    // Morpheus Cyberkinetics — корпоративный техно, мягкий и профессиональный
+    // Morpheus Cyberkinetics — Corporate
+    // Чистый, профессиональный. Скруглённые углы, плавные градиенты.
     case 'morpheus':
       return {
         borderRadius: '6px',
@@ -214,36 +221,41 @@ function getOsStyle(brand_key: string): OsStyleConfig {
         panelBgOpacity: 0.08,
         borderWidth: '1px',
         textTransform: 'none',
-        styleDesc: 'Корпоративный техно',
+        styleDesc: 'Corporate',
       };
 
-    // Etamin Industry — военно-тактический, острые углы, CAPS, сканлайны
+    // Etamin Industry — Military HUD
+    // Тактический. Острые углы, сканлайны, моноширинный шрифт, [[ ЗАГОЛОВОК ]]
     case 'etamin':
       return {
         borderRadius: '0px',
-        fontFamily: 'inherit',
+        fontFamily: 'monospace',
         scanlines: true,
         glowIntensity: 0.35,
         panelBgOpacity: 0.14,
         borderWidth: '2px',
         textTransform: 'uppercase',
-        styleDesc: 'Тактический военный',
+        headerPrefix: '[ ',
+        headerSuffix: ' ]',
+        styleDesc: 'Military HUD',
       };
 
-    // Bishop Cybernetics — клиническая чистота, максимальные скругления, минимум шума
+    // Bishop Cybernetics — Medical
+    // Медицинский минимализм. Тонкие линии, много пространства, стерильный вид.
     case 'bishop':
       return {
-        borderRadius: '10px',
+        borderRadius: '8px',
         fontFamily: 'inherit',
         scanlines: false,
-        glowIntensity: 0.18,
-        panelBgOpacity: 0.05,
+        glowIntensity: 0.15,
+        panelBgOpacity: 0.04,
         borderWidth: '1px',
         textTransform: 'none',
-        styleDesc: 'Клинический минимализм',
+        styleDesc: 'Medical',
       };
 
-    // Hesphiastos Industries — кузнечный индустриальный, тяжёлые рамки, CAPS
+    // Hesphiastos Industries — Industrial
+    // Тяжёлый индустриальный. Толстые рамки, предупреждающие полосы (warning stripes).
     case 'hesphiastos':
       return {
         borderRadius: '2px',
@@ -253,62 +265,68 @@ function getOsStyle(brand_key: string): OsStyleConfig {
         panelBgOpacity: 0.15,
         borderWidth: '2px',
         textTransform: 'uppercase',
-        styleDesc: 'Индустриальный кузнечный',
+        bgPattern: 'stripes',
+        styleDesc: 'Industrial',
       };
 
-    // Ward-Takahashi — элегантный премиум, фиолетовое свечение, изысканность
+    // Ward-Takahashi — Elegant Minimal
+    // Японский корпоративный минимализм. Тонкие линии, элегантный, утончённый.
     case 'ward_takahashi':
       return {
         borderRadius: '4px',
         fontFamily: 'inherit',
         scanlines: false,
-        glowIntensity: 0.68,
-        panelBgOpacity: 0.07,
-        borderWidth: '1px',
-        textTransform: 'none',
-        styleDesc: 'Премиум элегантный',
-      };
-
-    // Xion Manufacturing — бюджетный утилитаризм, ноль украшений, ноль свечения
-    case 'xion':
-      return {
-        borderRadius: '0px',
-        fontFamily: 'inherit',
-        scanlines: false,
-        glowIntensity: 0.08,
+        glowIntensity: 0.45,
         panelBgOpacity: 0.05,
         borderWidth: '1px',
         textTransform: 'none',
-        styleDesc: 'Бюджетный утилитарный',
+        styleDesc: 'Elegant Minimal',
       };
 
-    // Zeng-Hu Pharmaceuticals — органический биотех, плавные формы
+    // Xion Manufacturing — Standard
+    // Стандартный функциональный. Текущий базовый вид.
+    case 'xion':
+      return {
+        borderRadius: '3px',
+        fontFamily: 'inherit',
+        scanlines: false,
+        glowIntensity: 0.25,
+        panelBgOpacity: 0.07,
+        borderWidth: '1px',
+        textTransform: 'none',
+        styleDesc: 'Standard',
+      };
+
+    // Zeng-Hu Pharmaceuticals — Organic / Bio
+    // Мягкие формы, скруглённые, органический стиль.
     case 'zeng_hu':
       return {
-        borderRadius: '10px',
+        borderRadius: '12px',
         fontFamily: 'inherit',
         scanlines: false,
         glowIntensity: 0.4,
         panelBgOpacity: 0.09,
         borderWidth: '1px',
         textTransform: 'none',
-        styleDesc: 'Органический биотех',
+        styleDesc: 'Organic / Bio',
       };
 
-    // Shellguard Munitions — бронированный, серый, военный, сканлайны
+    // Shellguard Munitions — Utilitarian
+    // Утилитарный военный. Серый, плотный, без украшений.
     case 'shellguard':
       return {
         borderRadius: '0px',
         fontFamily: 'inherit',
-        scanlines: true,
-        glowIntensity: 0.15,
+        scanlines: false,
+        glowIntensity: 0.05,
         panelBgOpacity: 0.13,
         borderWidth: '2px',
         textTransform: 'uppercase',
-        styleDesc: 'Бронированный военный',
+        styleDesc: 'Utilitarian',
       };
 
-    // Cybersun Industries — кибerpunk неон, максимальное свечение, сканлайны
+    // Cybersun Industries — Cyberpunk Neon
+    // Неон, тёмный, яркие акценты, глоу-эффекты, сканлайны.
     case 'cybersun':
       return {
         borderRadius: '2px',
@@ -318,10 +336,11 @@ function getOsStyle(brand_key: string): OsStyleConfig {
         panelBgOpacity: 0.1,
         borderWidth: '1px',
         textTransform: 'none',
-        styleDesc: 'Киберпанк неон',
+        styleDesc: 'Cyberpunk Neon',
       };
 
-    // Unbranded / FreeOS — хакерский терминал, monospace, сканлайны, зелёный CLI
+    // Unbranded / FreeOS — Retro Terminal
+    // Зелёный CRT, сканлайны, моноширинный шрифт, ретро-терминал.
     case 'unbranded':
       return {
         borderRadius: '0px',
@@ -331,10 +350,11 @@ function getOsStyle(brand_key: string): OsStyleConfig {
         panelBgOpacity: 0.07,
         borderWidth: '1px',
         textTransform: 'none',
-        styleDesc: 'Хакерский терминал',
+        styleDesc: 'Retro Terminal',
       };
 
-    // HEF — лоскутная сборка, нейтральный смешанный стиль
+    // HEF — Patchwork
+    // Разношёрстный, глитч-эстетика, сеточный паттерн.
     case 'hef':
       return {
         borderRadius: '4px',
@@ -344,7 +364,8 @@ function getOsStyle(brand_key: string): OsStyleConfig {
         panelBgOpacity: 0.08,
         borderWidth: '1px',
         textTransform: 'none',
-        styleDesc: 'Лоскутная сборка',
+        bgPattern: 'grid',
+        styleDesc: 'Patchwork',
       };
 
     default:
@@ -356,7 +377,7 @@ function getOsStyle(brand_key: string): OsStyleConfig {
         panelBgOpacity: 0.08,
         borderWidth: '1px',
         textTransform: 'none',
-        styleDesc: 'Стандартный',
+        styleDesc: 'Standard',
       };
   }
 }
@@ -447,6 +468,8 @@ export const IpcOperatingSystem = () => {
                 : 'inherit',
             position: 'relative',
             overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           {/* Сканлайны — CRT-оверлей для военных/терминальных стилей */}
@@ -466,20 +489,56 @@ export const IpcOperatingSystem = () => {
             />
           )}
 
+          {/* Паттерн фона (warning stripes для Hesphiastos, grid для HEF) */}
+          {style.bgPattern === 'stripes' && (
+            <Box
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage:
+                  'repeating-linear-gradient(-45deg, rgba(255,160,0,0.04), rgba(255,160,0,0.04) 4px, transparent 4px, transparent 12px)',
+                pointerEvents: 'none',
+                zIndex: 1,
+              }}
+            />
+          )}
+          {style.bgPattern === 'grid' && (
+            <Box
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage:
+                  'linear-gradient(rgba(138,138,90,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(138,138,90,0.05) 1px, transparent 1px)',
+                backgroundSize: '20px 20px',
+                pointerEvents: 'none',
+                zIndex: 1,
+              }}
+            />
+          )}
+
           {/* Дебаг-бар для переключения стилей на лету */}
           <DebugStyleBar />
 
-          {!logged_in ? (
-            <LoginScreen />
-          ) : (
-            <>
-              {current_app === 'desktop' && <DesktopScreen />}
-              {current_app === 'diagnostics' && <DiagnosticsApp />}
-              {current_app === 'antivirus' && <AntivirusApp />}
-              {current_app === 'net' && <NetAppScreen />}
-              {current_app === 'installed_app' && <InstalledAppScreen />}
-            </>
-          )}
+          {/* Основной контент — растягивается на оставшуюся высоту */}
+          <Box style={{ flex: '1 1 0', overflow: 'hidden', position: 'relative' }}>
+            {!logged_in ? (
+              <LoginScreen />
+            ) : (
+              <>
+                {current_app === 'desktop' && <DesktopScreen />}
+                {current_app === 'diagnostics' && <DiagnosticsApp />}
+                {current_app === 'antivirus' && <AntivirusApp />}
+                {current_app === 'net' && <NetAppScreen />}
+                {current_app === 'installed_app' && <InstalledAppScreen />}
+              </>
+            )}
+          </Box>
         </Window.Content>
       </Window>
     </DebugStyleContext.Provider>
@@ -705,7 +764,7 @@ const LoginScreen = () => {
               textTransform: style.textTransform,
             }}
           >
-            {os_name}
+            {style.headerPrefix ?? ''}{os_name}{style.headerSuffix ?? ''}
           </Box>
           <Box fontSize="0.9em" color="label" mt={1}>
             v{os_version}
@@ -1002,7 +1061,7 @@ const DesktopScreen = () => {
                 }}
               >
                 <Icon name="desktop" mr={0.5} />
-                {os_name} v{os_version}
+                {style.headerPrefix ?? ''}{os_name}{style.headerSuffix ?? ''} v{os_version}
                 {is_remote && (
                   <Box
                     as="span"
@@ -2187,7 +2246,7 @@ const AppHeader = (props: AppHeaderProps) => {
                 }}
               >
                 <Icon name={props.icon} mr={0.5} />
-                {props.title}
+                {style.headerPrefix ?? ''}{props.title}{style.headerSuffix ?? ''}
               </Box>
             </Flex.Item>
           </Flex>
