@@ -417,8 +417,8 @@
 		Этот ствол, наверное, прошел через три революции, прежде чем попасть к нам. \
 		Он будет стрелять всегда, даже если ты забудешь, как его чистить, усек?"
 	item = /obj/effect/spawner/random/contraband/amk
-	price_min = CARGO_CRATE_VALUE * 90
-	price_max = CARGO_CRATE_VALUE * 100
+	price_min = CARGO_CRATE_VALUE * 100
+	price_max = CARGO_CRATE_VALUE * 120
 	stock_max = 1
 	availability_prob = 10
 
