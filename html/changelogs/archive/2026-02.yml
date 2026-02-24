@@ -372,3 +372,11 @@
   SyncIt21:
   - bugfix: moving reagents like acid/basic buffer and others across plumbing machinery
       produces correct effects again
+  Y0SH1M4S73R:
+  - rscadd: Adds ethereal mutation toxin, created by injecting enriched liquid electricity
+      into a green slime extract.
+  - qol: Moth Mutation Toxin and Felinid Mutation Toxin may be required for randomized
+      recipes. Remember, they are each obtained using cellulose and milk in a green
+      slime extract, respectively.
+  - rscadd: Adds ghost mutation toxin. You might find it in maintenance pills or strange
+      seeds.
