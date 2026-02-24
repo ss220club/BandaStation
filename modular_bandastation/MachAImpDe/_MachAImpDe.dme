@@ -2,6 +2,7 @@
 
 #include "code/ipc_autosurgeon.dm"
 #include "code/ipc_bio_stomach.dm"
+#include "code/ipc_combat_implants.dm"
 #include "code/ipc_cooling_items.dm"
 #include "code/ipc_implants.dm"
 #include "code/ipc_os.dm"
@@ -15,3 +16,13 @@
 // BEGIN_PREFERENCES
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "_MachAImpDe.dm"
+#include "code\ipc_autosurgeon.dm"
+#include "code\ipc_bio_stomach.dm"
+#include "code\ipc_combat_implants.dm"
+#include "code\ipc_cooling_items.dm"
+#include "code\ipc_implants.dm"
+#include "code\ipc_os.dm"
+#include "code\synthetic_diagnostic_table.dm"
+#include "code\synthetic_diagnostic_terminal.dm"
+// END_INCLUDE

@@ -10,8 +10,8 @@
 /obj/structure/table/optable/synthetic
 	name = "synthetic diagnostic table"
 	desc = "Специализированный диагностический стол для синтетических организмов. Оснащён системами зарядки, охлаждения и сетевым портом."
-	icon = 'icons/obj/medical/surgery_table.dmi'
-	icon_state = "surgery_table"
+	icon = 'modular_bandastation/MachAImpDe/icons/net_table.dmi'
+	icon_state = "ipc_net_table"
 
 	/// Скорость зарядки батареи (units/тик)
 	var/charge_rate = 50
