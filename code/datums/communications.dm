@@ -12,6 +12,9 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	/// Are we trying to send a cross-station message that contains soft-filtered words? If so, flip to TRUE to extend the time admins have to cancel the message.
 	var/soft_filtering = FALSE
 
+	/// The main content of the roundstart report
+	/// If nothing is set, it will pick a random flavor report
+	var/command_report_main_content = ""
 	/// A list of footnote datums, to be added to the bottom of the roundstart command report.
 	var/list/command_report_footnotes = list()
 	/// A counter of conditions that are blocking the command report from printing. Counter incremements up for every blocking condition, and de-incrememnts when it is complete.
@@ -50,7 +53,7 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	user.log_talk(input, LOG_SAY, tag="priority announcement")
 	message_admins("[ADMIN_LOOKUPFLW(user)] has made a priority announcement.")
 
-/datum/communciations_controller/proc/send_message(datum/comm_message/sending,print = TRUE,unique = FALSE)
+/datum/communciations_controller/proc/send_message(datum/comm_message/sending,print = TRUE,unique = FALSE, contains_advanced_html = FALSE)
 	for(var/obj/machinery/computer/communications/C in GLOB.shuttle_caller_list)
 		if(!(C.machine_stat & (BROKEN|NOPOWER)) && is_station_level(C.z))
 			if(unique)
@@ -61,7 +64,8 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			if(print)
 				var/obj/item/paper/printed_paper = new /obj/item/paper(C.loc)
 				printed_paper.name = "paper - '[sending.title]'"
-				printed_paper.add_raw_text(sending.content)
+				printed_paper.add_raw_text("</center>[sending.content]", advanced_html = contains_advanced_html)
+				printed_paper.color = "#deebff"
 				printed_paper.update_appearance()
 
 // Called AFTER everyone is equipped with their job
@@ -75,23 +79,36 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 		addtimer(CALLBACK(src, PROC_REF(send_roundstart_report), greenshift), 10 SECONDS)
 		return
 
-	SSstation.generate_station_goals(CONFIG_GET(number/station_goal_budget))
-	if(!fexists(STATION_REPORT_TEMPLATE_PATH))
-		stack_trace("station report template doesn't exist at path: [STATION_REPORT_TEMPLATE_PATH]")
-		return
+	. = ""
+	. += "<center><img src='[SSassets.transport.get_asset_url("nanotrasen-logo")]' width='50%'></center><hr>"
+	. += "<center><h2>[command_name()], TCD [time2text(world.realtime, "DDD, MMM DD")], [CURRENT_STATION_YEAR]</h2></center><hr>"
+	. += command_report_main_content || get_main_report_content()
+	if(CONFIG_GET(flag/no_dynamic_report))
+		if(isnull(greenshift))
+			greenshift = SSdynamic.current_tier.tier == 0
+	else
+		var/dynamic_report = SSdynamic.get_advisory_report()
+		if(isnull(greenshift)) // if we're not forced to be greenshift or not - check if we are an actual greenshift
+			greenshift = SSdynamic.current_tier.tier == 0 && dynamic_report == /datum/dynamic_tier/greenshift::advisory_report
 
-	var/station_report_template = file2text(STATION_REPORT_TEMPLATE_PATH)
-	if(!station_report_template)
-		stack_trace("station report template is empty at path: [STATION_REPORT_TEMPLATE_PATH]")
-		return
+		. += "<hr><h3>Nanotrasen Department of Intelligence Threat Advisory, Spinward Sector:</h3>"
+		. += dynamic_report
 
-	var/list/datum/station_goal/goals = SSstation.get_station_goals()
-	var/station_goals_section = ""
-	if(length(goals))
-		var/list/station_goal_reports = list()
-		for(var/datum/station_goal/station_goal as anything in goals)
+	SSstation.generate_station_goals(greenshift ? INFINITY : CONFIG_GET(number/station_goal_budget))
+
+	var/list/station_goal_strings = list()
+	if(greenshift)
+		station_goal_strings += "All special orders have been authorized for the shift. \
+			Feel free to pick one your crew wishes to specialize in - you are not expected to complete them all."
+
+	else
+		for(var/datum/station_goal/station_goal as anything in SSstation.get_station_goals())
 			station_goal.on_report()
-			station_goal_reports += station_goal.get_report()
+			station_goal_strings += station_goal.get_report()
+
+	if(length(station_goal_strings) > 0) // if we have any special orders to report, add them in
+		. += "<hr><h4>Special Orders for [station_name()]:</h4>"
+		. += station_goal_strings.Join("<hr>")
 
 		station_goals_section = list(
 			"# === Цели на смену ===\n",
@@ -104,6 +121,9 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	for(var/datum/station_trait/station_trait as anything in SSstation.station_traits)
 		if(!station_trait.show_in_report)
 			continue
+		trait_list_strings += "[station_trait.get_report()]<BR>"
+	if(trait_list_strings.len > 0)
+		. += "<hr><h4>Identified shift divergencies:</h4>" + trait_list_strings.Join()
 
 		trait_reports += "- [station_trait.get_report()]"
 
@@ -131,17 +151,45 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			footnotes.Join()
 		).Join()
 
-	station_report_template = replacetext(station_report_template, "%FOOTNOTES", footnote_section);
-	station_report_template = replacetext(station_report_template, "%SIGNING_OFFICER", "[pick(GLOB.first_names_male)] [pick(GLOB.last_names)]");
-
-	station_report_template = replace_text_keys(station_report_template)
+		. += "<hr><h4>Additional Notes: </h4>" + footnote_pile
 
 #ifndef MAP_TEST
-	print_command_report(station_report_template, "[command_name()] Status Summary", announce=FALSE)
-	priority_announce("Отчет был скопирован и распечатан на всех консолях связи.", "Отчет о безопасности", SSstation.announcer.get_rand_report_sound())
+	print_command_report(., "[command_name()] Status Summary", announce = FALSE, contains_advanced_html = TRUE)
+	if(greenshift)
+		priority_announce(
+			"Благодаря неустанным усилиям наших отделов безопасности и разведки, \
+				на данный момент нет никаких реальных угроз для станции [station_name()]. \
+				Все проекты по строительству на станции санкционированы. Продуктивной и безопасной смены!",
+			"Станционный отчёт",
+			SSstation.announcer.get_rand_report_sound(),
+			color_override = "green",
+		)
+	else if(CONFIG_GET(flag/roundstart_blue_alert))
+		if(SSsecurity_level.get_current_level_as_number() < SEC_LEVEL_BLUE)
+			SSsecurity_level.set_level(SEC_LEVEL_BLUE, announce = FALSE)
+		priority_announce(
+			"[SSsecurity_level.current_security_level.elevating_to_announcement]\n\n\
+				Отчет был скопирован и распечатан на всех консолях связи.",
+			"Уровень угрозы повышен.",
+			ANNOUNCER_INTERCEPT,
+			color_override = SSsecurity_level.current_security_level.announcement_color,
+		)
+	else
+		priority_announce(
+			"Отчет был скопирован и распечатан на всех консолях связи.",
+			"Отчет о безопасности",
+			SSstation.announcer.get_rand_report_sound(),
+		)
+
 #endif
 
 /// BANDASTATION EDIT END - UPDATED INTERCEPT TEMPLATE
+
+/// Return a random flavor/meme report to use in the command report
+/datum/communciations_controller/proc/get_main_report_content()
+	if(istype(SSstation.announcer, /datum/centcom_announcer/intern))
+		return pick_list_replacements("flavor_reports.json", "intern_reports")
+	return pick_list_replacements("flavor_reports.json", "reports")
 
 #undef COMMUNICATION_COOLDOWN
 #undef COMMUNICATION_COOLDOWN_AI
