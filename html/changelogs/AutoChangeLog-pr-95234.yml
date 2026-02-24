@@ -1,4 +1,0 @@
-author: "Melbert"
-delete-after: True
-changes:
-  - qol: "If an airlock pump's link is broken, it unbolts all airlocks"

@@ -358,3 +358,17 @@
   - admin: added tap all ore vents button to secrets panel
   alien3301:
   - balance: Replaced formaldehyde with anacea in traitor poison kits
+2026-02-24:
+  Melbert:
+  - qol: If an airlock pump's link is broken, it unbolts all airlocks
+  - rscadd: Cerdits siphoned from the vault are output as space cash rather than as
+      holochips
+  SmArtKar:
+  - bugfix: Breathing tube no longer bypasses nonfunctional lungs
+  - bugfix: Fixed bloodworms not being able to insert organs into their hosts
+  - balance: Husked mobs now keep some of their bodypart overlays, such as snouts,
+      tails and horns
+  - bugfix: Metalgen can no longer morph abstract turfs like space or chasms
+  SyncIt21:
+  - bugfix: moving reagents like acid/basic buffer and others across plumbing machinery
+      produces correct effects again

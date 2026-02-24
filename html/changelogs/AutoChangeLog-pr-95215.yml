@@ -1,4 +1,0 @@
-author: "SyncIt21"
-delete-after: True
-changes:
-  - bugfix: "moving reagents like acid/basic buffer and others across plumbing machinery produces correct effects again"

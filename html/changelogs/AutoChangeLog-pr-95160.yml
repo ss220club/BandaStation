@@ -1,4 +1,0 @@
-author: "SmArtKar"
-delete-after: True
-changes:
-  - bugfix: "Breathing tube no longer bypasses nonfunctional lungs"
