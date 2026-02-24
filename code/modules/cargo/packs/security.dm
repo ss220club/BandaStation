@@ -244,7 +244,7 @@
 	name = "Type 5 Laser Gun Crate"
 	desc = "Contains three Type 5 laser guns, developed by Nanotrasen. For when the going gets tough, you get going with the \
 		Type 5 Heat Delivery System. As developed by Nanotrasen."
-	cost = CARGO_CRATE_VALUE * 18 // BANDASTATION EDIT: ORIGINAL: cost = CARGO_CRATE_VALUE * 4
+	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/obj/item/gun/energy/laser = 3)
 	crate_name = "\improper Type 5 laser crate"
 	crate_type = /obj/structure/closet/crate/secure/plasma
@@ -252,7 +252,7 @@
 /datum/supply_pack/security/armory/laser_carbine
 	name = "Type 5/R Laser Carbine Crate"
 	desc = "Contains three Type 5R laser carbines, developed by Nanotrasen. Fires a rapid burst of slightly weaker laser projectiles."
-	cost = CARGO_CRATE_VALUE * 27 // BANDASTATION EDIT: ORIGINAL: cost = CARGO_CRATE_VALUE * 9
+	cost = CARGO_CRATE_VALUE * 9
 	contains = list(/obj/item/gun/energy/laser/carbine = 3)
 	crate_name = "\improper Type 5R laser carbine crate"
 	crate_type = /obj/structure/closet/crate/secure/plasma
@@ -260,7 +260,7 @@
 /datum/supply_pack/security/armory/disabler_smg
 	name = "Disabler SMG Crate"
 	desc = "Contains three disabler SMGs, capable of rapidly firing weak disabler beams."
-	cost = CARGO_CRATE_VALUE * 14 // BANDASTATION EDIT: ORIGINAL: cost = CARGO_CRATE_VALUE * 7
+	cost = CARGO_CRATE_VALUE * 7
 	contains = list(/obj/item/gun/energy/disabler/smg = 3)
 	crate_name = "disabler smg crate"
 	crate_type = /obj/structure/closet/crate/secure/plasma
@@ -377,7 +377,7 @@
 	name = "Thermal Pistol Crate"
 	desc = "Contains a pair of holsters each with two experimental thermal pistols, \
 		using nanites as the basis for their ammo. Can be shaken to reload."
-	cost = CARGO_CRATE_VALUE * 20 // BANDASTATION EDIT: ORIGINAL: cost = CARGO_CRATE_VALUE * 10
+	cost = CARGO_CRATE_VALUE * 10
 	contains = list(/obj/item/storage/belt/holster/energy/thermal = 2)
 	crate_name = "thermal pistol crate"
 
@@ -394,7 +394,7 @@
 	desc = "Contains two experimental thermal cannons for use by mechs. \
 		When used simultaneously, their excess power used to heat and cool the opposing weapon, \
 		increasing the reload speed."
-	cost = CARGO_CRATE_VALUE * 35 // BANDASTATION EDIT: ORIGINAL: cost = CARGO_CRATE_VALUE * 25
+	cost = CARGO_CRATE_VALUE * 25
 	contains = list(
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/thermal/cryo,
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/thermal/inferno,
@@ -406,7 +406,7 @@
 	desc = "Contains four single-use hemoparasite testing tools. \
 		These devices accurately report whether a patient is inhabited by a hemoparasite, such as the infamous space-faring blood worm. \
 		The DeForest Medical Corporation claims no liability for any mental and/or physical trauma caused to patients from the improper use of these devices."
-	cost = CARGO_CRATE_VALUE * 30 // These aren't meant to be bought en-masse. // BANDASTATION EDIT: ORIGINAL: cost = CARGO_CRATE_VALUE * 50
+	cost = CARGO_CRATE_VALUE * 50 // These aren't meant to be bought en-masse.
 	access_view = ACCESS_SECURITY
 	contains = list(/obj/item/blood_worm_tester = 4)
 	crate_name = "hemoparasite testing crate"
