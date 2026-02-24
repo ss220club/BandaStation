@@ -94,6 +94,9 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 		. += "<hr><h3>Nanotrasen Department of Intelligence Threat Advisory, Spinward Sector:</h3>"
 		. += dynamic_report
 
+	var/station_report_template = file2text(STATION_REPORT_TEMPLATE_PATH)
+	var/station_goals_section = ""
+
 	SSstation.generate_station_goals(greenshift ? INFINITY : CONFIG_GET(number/station_goal_budget))
 
 	var/list/station_goal_strings = list()
@@ -112,20 +115,20 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 
 		station_goals_section = list(
 			"# === Цели на смену ===\n",
-			station_goal_reports.Join("\n\n---\n\n"),
+			station_goal_strings.Join("\n\n---\n\n"),
 		).Join()
 
 	station_report_template = replacetext(station_report_template, "%STATION_GOALS", station_goals_section);
 
 	var/list/trait_reports = list()
+	var/list/trait_list_strings = list()
 	for(var/datum/station_trait/station_trait as anything in SSstation.station_traits)
 		if(!station_trait.show_in_report)
 			continue
 		trait_list_strings += "[station_trait.get_report()]<BR>"
-	if(trait_list_strings.len > 0)
-		. += "<hr><h4>Identified shift divergencies:</h4>" + trait_list_strings.Join()
-
 		trait_reports += "- [station_trait.get_report()]"
+	if(length(trait_list_strings) > 0)
+		. += "<hr><h4>Identified shift divergencies:</h4>" + trait_list_strings.Join()
 
 	var/trait_reports_sections = ""
 	if(length(trait_reports))
@@ -151,7 +154,9 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			footnotes.Join()
 		).Join()
 
-		. += "<hr><h4>Additional Notes: </h4>" + footnote_pile
+		. += "<hr><h4>Additional Notes: </h4>" + footnote_section
+
+	station_report_template = replacetext(station_report_template, "%FOOTNOTES", footnote_section)
 
 #ifndef MAP_TEST
 	print_command_report(., "[command_name()] Status Summary", announce = FALSE, contains_advanced_html = TRUE)

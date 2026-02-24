@@ -114,7 +114,7 @@ class KeybindingButton extends Component<{
   render() {
     const { currentHotkey, onClick, typingHotkey, defaults } = this.props;
 
-    const keyText = typingHotkey || currentHotkey || 'Unbound';
+    const keyText = typingHotkey || currentHotkey || 'Пусто';
     const child = (
       <Button
         fluid
@@ -125,7 +125,6 @@ class KeybindingButton extends Component<{
           event.stopPropagation();
           onClick?.();
         }}
-        selected={typingHotkey !== undefined}
         textColor={keyText === 'Пусто' ? 'grey' : undefined}
         color={
           keyText === 'Пусто' || !defaults || defaults.includes(keyText)
@@ -190,11 +189,7 @@ function getKeybindingNodes(
       }
       const keys = selectedKeybindings![keybindingId] || [];
 
-      const name = (
-        <Stack.Item basis="25%">
-          <KeybindingName keybinding={keybinding} />
-        </Stack.Item>
-      );
+      const name = <Stack.Item basis="25%">{keybinding.name}</Stack.Item>;
 
       return (
         <Stack.Item key={keybindingId} mb={1}>

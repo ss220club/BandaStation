@@ -562,6 +562,21 @@
 
 	return data
 
+/obj/item/paper/proc/convert_paper_input_from_data(list/input)
+	var/list/child_inputs
+	if(length(input[LIST_PAPER_CHILDREN]))
+		child_inputs = list()
+		for(var/list/child_data as anything in input[LIST_PAPER_CHILDREN])
+			child_inputs += convert_paper_input_from_data(child_data)
+	return new /datum/paper_input(
+		input[LIST_PAPER_RAW_TEXT],
+		input[LIST_PAPER_FONT],
+		input[LIST_PAPER_FIELD_COLOR],
+		input[LIST_PAPER_BOLD],
+		input[LIST_PAPER_ADVANCED_HTML],
+		child_inputs
+	)
+
 /obj/item/paper/proc/write_from_data(list/data)
 	for(var/list/input as anything in data[LIST_PAPER_RAW_TEXT_INPUT])
 		LAZYADD(raw_text_inputs, convert_paper_input_from_data(input))
