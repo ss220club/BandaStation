@@ -16,6 +16,5 @@
 	worn_icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/mob/clothing/suits/armor.dmi'
 	lefthand_file = 'modular_bandastation/aesthetics/clothing/centcom/icons/inhands/clothing/suits_lefthand.dmi'
 	righthand_file = 'modular_bandastation/aesthetics/clothing/centcom/icons/inhands/clothing/suits_righthand.dmi'
-	body_parts_covered = ARMS
 	armor_type = /datum/armor/armor_centcom_formal
 	resistance_flags = INDESTRUCTIBLE | FIRE_PROOF | FREEZE_PROOF | UNACIDABLE | ACID_PROOF
