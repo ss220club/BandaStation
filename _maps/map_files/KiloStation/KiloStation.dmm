@@ -2878,7 +2878,7 @@
 /obj/structure/table,
 /obj/machinery/light/small/directional/west,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "aUW" = (
@@ -37582,7 +37582,7 @@
 /area/station/cargo/office)
 "mlz" = (
 /obj/structure/table,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/suture,
 /obj/effect/turf_decal/tile/neutral{
@@ -49603,7 +49603,7 @@
 	pixel_x = -4;
 	pixel_y = 3
 	},
-/obj/item/stack/medical/gauze{
+/obj/item/stack/medical/wrap/gauze{
 	pixel_x = 8
 	},
 /turf/open/floor/iron/dark,
@@ -63832,7 +63832,7 @@
 /area/space/nearstation)
 "uWS" = (
 /obj/structure/rack,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/bruise_pack,
 /obj/effect/turf_decal/bot,
 /obj/machinery/light/small/directional/north,

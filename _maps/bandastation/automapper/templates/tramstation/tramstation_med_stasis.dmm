@@ -37,7 +37,7 @@
 	},
 /obj/machinery/vitals_reader/directional/west,
 /obj/structure/table/glass,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/suture,
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
