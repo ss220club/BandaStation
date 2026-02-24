@@ -195,7 +195,7 @@
 /datum/supply_pack/science/mechcore
 	name = "Mech Power Core Crate"
 	desc = "Набор силовых ядер для создания мехов"
-	cost = CARGO_CRATE_VALUE * 12
+	cost = CARGO_CRATE_VALUE * 30
 	access = ACCESS_ROBOTICS
 	access_view = ACCESS_ROBOTICS
 	contains = list(/obj/item/mecha_parts/core = 2)
