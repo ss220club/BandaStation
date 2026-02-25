@@ -1,4 +1,0 @@
-author: "SmArtKar"
-delete-after: True
-changes:
-  - bugfix: "Material turfs, such as plasma floors, now function again after 3+ years."

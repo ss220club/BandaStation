@@ -1,4 +1,0 @@
-author: "Melbert"
-delete-after: True
-changes:
-  - refactor: "Made some minor changes to how things like airlocks, vendors, and autolathes shock you. Report any wierdness with that"

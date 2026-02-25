@@ -380,3 +380,32 @@
       slime extract, respectively.
   - rscadd: Adds ghost mutation toxin. You might find it in maintenance pills or strange
       seeds.
+2026-02-25:
+  DaddyChristmas:
+  - balance: Golem shells can now be deconstructed with a crowbar (Not Golem the species!)
+  Dominion:
+  - rscadd: Incapacitation status effects and dead now trigger you to forcefully say
+      whatever was in your input prompt.
+  Melbert:
+  - refactor: Made some minor changes to how things like airlocks, vendors, and autolathes
+      shock you. Report any wierdness with that
+  - bugfix: Food items no longer "duplicate" their intended reagents when crafted
+  - rscadd: Spraying items with lube makes them slippery, causing them to fall out
+      of people's hands who try to pick them up or use them.
+  - rscadd: Vitals monitors have USB ports, allowing circuits to read patient status
+  SmArtKar:
+  - bugfix: Ghosts can now see through potted plants and syndicate armor when examining
+      people
+  - bugfix: Material turfs, such as plasma floors, now function again after 3+ years.
+  - bugfix: Condensers can no longer be used to ignite things
+  TealSeer:
+  - bugfix: fixed recharger not properly charging the laser rifle power pack
+  alien3301:
+  - balance: Clown's water flower can splash reagents
+  dwasint:
+  - qol: Ghosts now have runechat.
+  lelandkemble:
+  - rscadd: Several items have been given special interactions when placed inside
+      counterfit mail.
+  - bugfix: Bioscrambler anomaly pulse activation works
+  - bugfix: Pieces of paper no longer make bodybags inescapable

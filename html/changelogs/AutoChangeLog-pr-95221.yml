@@ -1,4 +1,0 @@
-author: "Melbert"
-delete-after: True
-changes:
-  - bugfix: "Food items no longer \"duplicate\" their intended reagents when crafted"

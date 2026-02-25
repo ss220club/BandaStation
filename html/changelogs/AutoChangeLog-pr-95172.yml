@@ -1,4 +1,0 @@
-author: "Dominion"
-delete-after: True
-changes:
-  - rscadd: "Incapacitation status effects and dead now trigger you to forcefully say whatever was in your input prompt."
