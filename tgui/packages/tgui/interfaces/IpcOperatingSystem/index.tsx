@@ -238,8 +238,7 @@ export const IpcOperatingSystem = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundImage:
-                  'repeating-linear-gradient(-45deg, rgba(255,160,0,0.04), rgba(255,160,0,0.04) 4px, transparent 4px, transparent 12px)',
+                backgroundImage: `repeating-linear-gradient(-45deg, ${style.bgPatternColor ?? 'rgba(255,160,0,0.04)'}, ${style.bgPatternColor ?? 'rgba(255,160,0,0.04)'} 4px, transparent 4px, transparent 12px)`,
                 pointerEvents: 'none',
                 zIndex: 1,
               }}
@@ -253,8 +252,7 @@ export const IpcOperatingSystem = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundImage:
-                  'linear-gradient(rgba(138,138,90,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(138,138,90,0.05) 1px, transparent 1px)',
+                backgroundImage: `linear-gradient(${style.bgPatternColor ?? 'rgba(138,138,90,0.05)'} 1px, transparent 1px), linear-gradient(90deg, ${style.bgPatternColor ?? 'rgba(138,138,90,0.05)'} 1px, transparent 1px)`,
                 backgroundSize: '20px 20px',
                 pointerEvents: 'none',
                 zIndex: 1,
@@ -296,6 +294,7 @@ export const IpcOperatingSystem = () => {
                 {current_app === 'antivirus' && <AntivirusApp />}
                 {current_app === 'net' && <NetAppScreen />}
                 {current_app === 'installed_app' && <InstalledAppScreen />}
+                {current_app === 'console' && <ConsoleApp />}
               </>
             )}
           </Box>
@@ -771,6 +770,11 @@ const SYSTEM_APPS = [
     id: 'net',
     name: 'NET',
     faIcon: 'globe',
+  },
+  {
+    id: 'console',
+    name: 'Консоль',
+    faIcon: 'terminal',
   },
 ];
 
@@ -2018,5 +2022,518 @@ const AppHeader = (props: AppHeaderProps) => {
         </Flex.Item>
       </Flex>
     </Box>
+  );
+};
+
+// ============================================
+// CONSOLE APP
+// ============================================
+
+type ConsoleLineKind = 'input' | 'output' | 'error' | 'success' | 'system';
+
+type ConsoleLine = {
+  id: number;
+  kind: ConsoleLineKind;
+  text: string;
+};
+
+type BypassChallenge = {
+  active: boolean;
+  targetApp: string;
+  code: string;
+  timeLeft: number;
+  attempts: number;
+};
+
+const BYPASS_TIME = 45;
+const BYPASS_ATTEMPTS = 3;
+
+function generateBypassCode(): string {
+  const chars = 'ABCDEF0123456789';
+  const seg = () =>
+    Array.from({ length: 4 }, () =>
+      chars[Math.floor(Math.random() * chars.length)],
+    ).join('');
+  return `${seg()}-${seg()}`;
+}
+
+function consoleLineColor(
+  kind: ConsoleLineKind,
+  accentColor: string,
+): string {
+  switch (kind) {
+    case 'input':
+      return accentColor;
+    case 'error':
+      return '#ff5555';
+    case 'success':
+      return '#55ff88';
+    case 'system':
+      return '#ffcc44';
+    default:
+      return 'inherit';
+  }
+}
+
+/**
+ * Встроенный терминал ОС.
+ * Позволяет вводить команды, просматривать статус системы
+ * и — с мини-игрой обхода — устанавливать Blackwall-программы.
+ */
+const ConsoleApp = () => {
+  const { act, data } = useBackend<IpcOsData>();
+  const { theme_color, style, os_name } = useOsTheme();
+
+  const [lines, setLines] = useState<ConsoleLine[]>([
+    {
+      id: 0,
+      kind: 'system',
+      text: `${os_name} Console — type "help" for commands`,
+    },
+    {
+      id: 1,
+      kind: 'system',
+      text: '──────────────────────────────────────────',
+    },
+  ]);
+  const [input, setInput] = useState('');
+  const [nextId, setNextId] = useState(2);
+  const [bypass, setBypass] = useState<BypassChallenge>({
+    active: false,
+    targetApp: '',
+    code: '',
+    timeLeft: 0,
+    attempts: 0,
+  });
+
+  const endRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when lines change
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [lines]);
+
+  // Countdown timer for active bypass challenge
+  useEffect(() => {
+    if (!bypass.active) {
+      return;
+    }
+    const id = setInterval(() => {
+      setBypass((prev) => {
+        if (!prev.active) {
+          return prev;
+        }
+        if (prev.timeLeft <= 1) {
+          addOutput([
+            {
+              kind: 'error',
+              text: '[ TIMEOUT ] — Blackwall challenge expired. Access denied.',
+            },
+          ]);
+          return { ...prev, active: false, timeLeft: 0 };
+        }
+        return { ...prev, timeLeft: prev.timeLeft - 1 };
+      });
+    }, 1000);
+    return () => clearInterval(id);
+  }, [bypass.active]);
+
+  function addOutput(newLines: Array<{ kind: ConsoleLineKind; text: string }>) {
+    setLines((prev) => {
+      let id = prev.length > 0 ? prev[prev.length - 1].id + 1 : 0;
+      const mapped = newLines.map((l) => ({ id: id++, kind: l.kind, text: l.text }));
+      return [...prev, ...mapped];
+    });
+    setNextId((n) => n + newLines.length);
+  }
+
+  function handleSubmit() {
+    const cmd = input.trim();
+    setInput('');
+    if (!cmd) {
+      return;
+    }
+
+    addOutput([{ kind: 'input', text: `> ${cmd}` }]);
+
+    // ── BYPASS CHALLENGE MODE ──────────────────────────────────────
+    if (bypass.active) {
+      if (cmd.toUpperCase() === bypass.code) {
+        addOutput([
+          { kind: 'success', text: '[ OK ] SEQUENCE VERIFIED' },
+          { kind: 'system', text: `Initiating install: ${bypass.targetApp}` },
+        ]);
+        act('console_bypass', { app_name: bypass.targetApp });
+        setBypass((p) => ({ ...p, active: false }));
+      } else {
+        const left = bypass.attempts - 1;
+        if (left <= 0) {
+          addOutput([
+            { kind: 'error', text: '[ FAIL ] SEQUENCE MISMATCH' },
+            { kind: 'error', text: 'BLACKWALL LOCKOUT ENGAGED.' },
+          ]);
+          setBypass((p) => ({ ...p, active: false }));
+        } else {
+          addOutput([
+            {
+              kind: 'error',
+              text: `[ FAIL ] WRONG. Attempts remaining: ${left}`,
+            },
+          ]);
+          setBypass((p) => ({ ...p, attempts: left }));
+        }
+      }
+      return;
+    }
+
+    // ── NORMAL COMMAND MODE ────────────────────────────────────────
+    const parts = cmd.trim().split(/\s+/);
+    const verb = parts[0].toLowerCase();
+
+    switch (verb) {
+      case 'help': {
+        addOutput([
+          { kind: 'output', text: 'Команды:' },
+          { kind: 'output', text: '  help              — эта справка' },
+          { kind: 'output', text: '  status            — состояние системы' },
+          { kind: 'output', text: '  sysinfo           — подробная информация' },
+          { kind: 'output', text: '  apps              — установленные приложения' },
+          { kind: 'output', text: '  catalog           — каталог Blackwall' },
+          { kind: 'output', text: '  scan              — запустить диагностику' },
+          { kind: 'output', text: '  bypass [app]      — обход Blackwall для программы' },
+          { kind: 'output', text: '  clear             — очистить терминал' },
+        ]);
+        break;
+      }
+
+      case 'status': {
+        const virusCount = safeArray(data.viruses).length;
+        const virusLine =
+          virusCount > 0
+            ? `УГРОЗЫ: ${virusCount} (${data.has_serious_viruses ? 'КРИТИЧНО' : 'средне'})`
+            : 'Угрозы не обнаружены';
+        addOutput([
+          {
+            kind: 'output',
+            text: `ОС: ${data.os_name ?? '?'} v${data.os_version ?? '?'}`,
+          },
+          {
+            kind: 'output',
+            text: `Сеть: ${data.network_connected ? 'ONLINE' : 'OFFLINE'}`,
+          },
+          { kind: 'output', text: `Антивирус: ${virusLine}` },
+          {
+            kind: 'output',
+            text: `Приложений: ${safeArray(data.installed_apps).length}`,
+          },
+          {
+            kind: data.has_remote_viewer ? 'error' : 'output',
+            text: data.has_remote_viewer
+              ? `УДАЛЁННЫЙ ДОСТУП: ${data.remote_viewer_name}`
+              : 'Удалённый доступ: нет',
+          },
+        ]);
+        break;
+      }
+
+      case 'sysinfo': {
+        addOutput([
+          { kind: 'system', text: '=== SYSTEM INFORMATION ===' },
+          { kind: 'output', text: `OS:      ${data.os_name} v${data.os_version}` },
+          { kind: 'output', text: `Brand:   ${data.brand_key}` },
+          { kind: 'output', text: `Color:   ${data.theme_color}` },
+          { kind: 'output', text: `Auth:    ${data.logged_in ? 'authenticated' : 'locked'}` },
+          { kind: 'output', text: `Net:     ${data.network_connected ? 'connected' : 'offline'}` },
+          { kind: 'output', text: `Viruses: ${safeArray(data.viruses).length}` },
+          { kind: 'output', text: `Apps:    ${safeArray(data.installed_apps).length} installed` },
+        ]);
+        break;
+      }
+
+      case 'apps': {
+        const apps = safeArray(data.installed_apps);
+        if (apps.length === 0) {
+          addOutput([
+            { kind: 'output', text: 'Нет установленных приложений.' },
+          ]);
+        } else {
+          addOutput([
+            { kind: 'system', text: `Установлено (${apps.length}):` },
+            ...apps.map((app) => ({
+              kind: 'output' as ConsoleLineKind,
+              text: `  ${app.is_blackwall ? '[BW]' : '[WW]'} ${app.name}  (${app.category})${app.active ? ' ● активно' : ''}`,
+            })),
+          ]);
+        }
+        break;
+      }
+
+      case 'catalog': {
+        const bw = safeArray(data.black_wall_catalog);
+        if (bw.length === 0) {
+          addOutput([
+            { kind: 'output', text: 'Blackwall каталог пуст.' },
+          ]);
+        } else {
+          addOutput([
+            { kind: 'system', text: '=== BLACKWALL CATALOG ===' },
+            ...bw.map((app) => ({
+              kind: 'output' as ConsoleLineKind,
+              text: `  ${app.installed ? '[+]' : '[ ]'} ${app.name}  ${app.file_size}кб`,
+            })),
+          ]);
+        }
+        break;
+      }
+
+      case 'scan': {
+        addOutput([{ kind: 'system', text: 'Запуск диагностики...' }]);
+        act('start_scan');
+        act('open_app', { app: 'diagnostics' });
+        break;
+      }
+
+      case 'bypass': {
+        const targetName = parts.slice(1).join(' ');
+        if (!targetName) {
+          addOutput([
+            {
+              kind: 'error',
+              text: 'Использование: bypass [имя программы]',
+            },
+            {
+              kind: 'output',
+              text: 'Введите "catalog" для списка Blackwall программ.',
+            },
+          ]);
+          break;
+        }
+
+        const bwCatalog = safeArray(data.black_wall_catalog);
+        const target = bwCatalog.find(
+          (a) => a.name.toLowerCase() === targetName.toLowerCase(),
+        );
+
+        if (!target) {
+          addOutput([
+            {
+              kind: 'error',
+              text: `Программа "${targetName}" не найдена в Blackwall.`,
+            },
+            {
+              kind: 'output',
+              text: `Доступные: ${bwCatalog.map((a) => a.name).join(', ')}`,
+            },
+          ]);
+          break;
+        }
+
+        if (target.installed) {
+          addOutput([
+            {
+              kind: 'output',
+              text: `"${target.name}" уже установлен.`,
+            },
+          ]);
+          break;
+        }
+
+        if (!data.network_connected) {
+          addOutput([
+            {
+              kind: 'error',
+              text: 'ОШИБКА: Нет подключения к сети. Bypass невозможен.',
+            },
+          ]);
+          break;
+        }
+
+        // Start bypass mini-game
+        const code = generateBypassCode();
+        setBypass({
+          active: true,
+          targetApp: target.name,
+          code,
+          timeLeft: BYPASS_TIME,
+          attempts: BYPASS_ATTEMPTS,
+        });
+
+        addOutput([
+          {
+            kind: 'system',
+            text: '════════════════════════════════════',
+          },
+          {
+            kind: 'system',
+            text: ' BLACKWALL OVERRIDE SEQUENCE',
+          },
+          {
+            kind: 'system',
+            text: '════════════════════════════════════',
+          },
+          {
+            kind: 'output',
+            text: `Цель:       ${target.name}`,
+          },
+          {
+            kind: 'output',
+            text: `Размер:     ${target.file_size} кб`,
+          },
+          {
+            kind: 'output',
+            text: `Попытки:    ${BYPASS_ATTEMPTS}`,
+          },
+          {
+            kind: 'output',
+            text: `Таймер:     ${BYPASS_TIME}s`,
+          },
+          {
+            kind: 'system',
+            text: 'Анализируем протоколы защиты...',
+          },
+          {
+            kind: 'success',
+            text: `КОД ДОСТУПА ► ${code} ◄`,
+          },
+          {
+            kind: 'output',
+            text: '────────────────────────────────────',
+          },
+          {
+            kind: 'output',
+            text: 'Введите код точно как показано выше:',
+          },
+        ]);
+        break;
+      }
+
+      case 'clear': {
+        setLines([]);
+        break;
+      }
+
+      case '': {
+        break;
+      }
+
+      default: {
+        addOutput([
+          {
+            kind: 'error',
+            text: `Команда не найдена: "${verb}" — введите "help"`,
+          },
+        ]);
+      }
+    }
+  }
+
+  const monoFont = '"Courier New", Courier, monospace';
+  const isInBypass = bypass.active;
+
+  return (
+    <Flex direction="column" height="100%">
+      {/* Header */}
+      <Flex.Item>
+        <AppHeader title="Консоль" icon="terminal" />
+      </Flex.Item>
+
+      {/* Terminal output */}
+      <Flex.Item
+        grow
+        style={{
+          overflow: 'auto',
+          fontFamily: monoFont,
+          fontSize: '0.82em',
+          lineHeight: '1.5',
+        }}
+      >
+        <Box p={1}>
+          {lines.map((line) => (
+            <Box
+              key={line.id}
+              style={{
+                color: consoleLineColor(line.kind, theme_color),
+                fontWeight: line.kind === 'success' ? 'bold' : 'normal',
+                textShadow:
+                  line.kind === 'success' && style.glowIntensity > 0.3
+                    ? `0 0 8px ${hexToRgba(theme_color, 0.6)}`
+                    : 'none',
+              }}
+            >
+              {line.text}
+            </Box>
+          ))}
+
+          {/* Bypass status pulse */}
+          {isInBypass && (
+            <Box
+              bold
+              style={{
+                color: '#ff4444',
+                borderLeft: '3px solid #ff4444',
+                paddingLeft: '6px',
+                marginTop: '4px',
+              }}
+            >
+              ⏱ {bypass.timeLeft}s | Попытки: {bypass.attempts} |{' '}
+              Введите код: {bypass.code}
+            </Box>
+          )}
+
+          <div ref={endRef} />
+        </Box>
+      </Flex.Item>
+
+      {/* Input line */}
+      <Flex.Item>
+        <Box
+          style={{
+            borderTop: `${style.borderWidth} solid ${hexToRgba(isInBypass ? '#ff4444' : theme_color, style.panelBorderOpacity)}`,
+            background: `rgba(0,0,0,${0.3 + style.panelBgOpacity})`,
+            padding: '4px 8px',
+          }}
+        >
+          <Flex align="center">
+            <Flex.Item>
+              <Box
+                bold
+                mr={1}
+                style={{
+                  fontFamily: monoFont,
+                  color: isInBypass ? '#ff4444' : theme_color,
+                  minWidth: '24px',
+                  textAlign: 'right',
+                  textShadow:
+                    style.glowIntensity > 0.5
+                      ? `0 0 6px currentColor`
+                      : 'none',
+                }}
+              >
+                {isInBypass ? `[${bypass.timeLeft}]` : '>'}
+              </Box>
+            </Flex.Item>
+            <Flex.Item grow>
+              <Input
+                fluid
+                value={input}
+                placeholder={
+                  isInBypass
+                    ? `Введите код доступа (${bypass.code.substring(0, 4)}...)`
+                    : 'Введите команду...'
+                }
+                onChange={(val: string) => setInput(val)}
+                onEnter={handleSubmit}
+                style={{
+                  fontFamily: monoFont,
+                  background: 'transparent',
+                  border: 'none',
+                  color: isInBypass ? '#ff4444' : 'inherit',
+                }}
+              />
+            </Flex.Item>
+          </Flex>
+        </Box>
+      </Flex.Item>
+    </Flex>
   );
 };

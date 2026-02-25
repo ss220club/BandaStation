@@ -1,8 +1,8 @@
 // ============================================
 // IPC OS STYLE SYSTEM
 // ============================================
-// Каждый бренд шасси имеет свою визуальную философию.
-// От корпоративного минимализма до киберпанк-неона.
+// Каждый бренд шасси несёт свою корпоративную философию.
+// Разные компании — разные ОС. Как настоящие.
 // ============================================
 
 /**
@@ -29,12 +29,16 @@ export type OsStyleConfig = {
   textTransform: 'none' | 'uppercase';
   /** CSS background для Window.Content — уникальный фон бренда */
   bgStyle: string;
-  /** Паттерн фона: 'stripes' = предупреждающие полосы, 'grid' = сетка-лоскут */
+  /** Паттерн фона поверх bgStyle */
   bgPattern?: 'stripes' | 'grid';
   /**
-   * Цвет базового текста.
-   * Применяется на уровне контент-контейнера — перекрывает дефолтный белый.
-   * Ключевая фича для Unbranded (фосфорный зелёный) и других.
+   * Цвет паттерна (CSS rgba строка).
+   * Если не указан — использует дефолт (оранжевый для stripes, оливковый для grid).
+   */
+  bgPatternColor?: string;
+  /**
+   * Цвет базового текста — перекрывает дефолтный белый на уровне контейнера.
+   * Ключевая фича для Unbranded (зелёный), Etamin (красноватый) и т.д.
    */
   textColor?: string;
   /** Префикс заголовков приложений (напр. '[ ' для Etamin) */
@@ -65,17 +69,17 @@ export type BrandKey = (typeof ALL_BRAND_KEYS)[number];
 /** Возвращает hex-цвет акцента темы по ключу бренда */
 export function getOsBrandColor(brand_key: string): string {
   const colors: Record<string, string> = {
-    morpheus: '#4a90d9',
-    etamin: '#d94a4a',
-    bishop: '#4ad9a5',
-    hesphiastos: '#d98f4a',
-    ward_takahashi: '#8f4ad9',
-    xion: '#4ad9d9',
-    zeng_hu: '#a5d94a',
-    shellguard: '#7a7a7a',
-    cybersun: '#d94a8f',
-    unbranded: '#5aff5a',
-    hef: '#8a8a5a',
+    morpheus: '#9b59d9',    // Фиолетовый корпоративный
+    etamin: '#d94a4a',      // Красный военный
+    bishop: '#4a8fd9',      // Стальной синий медицинский
+    hesphiastos: '#4a8a3a', // Военный зелёный
+    ward_takahashi: '#9a9aaa', // Серебристо-серый
+    xion: '#d97820',        // Инженерный оранжевый
+    zeng_hu: '#d4845a',     // Тёплый коралл
+    shellguard: '#aa1111',  // Тёмно-красный
+    cybersun: '#dd1133',    // Зловещий алый неон
+    unbranded: '#5aff5a',   // Фосфорный зелёный
+    hef: '#9060cc',         // Призрачный фиолет
   };
   return colors[brand_key] ?? '#6a6a6a';
 }
@@ -93,7 +97,7 @@ export function getOsStyleName(brand_key: string): string {
     shellguard: 'ShellGuardOS',
     cybersun: 'NightSun',
     unbranded: 'FreeOS',
-    hef: 'PatchworkOS',
+    hef: 'Yūrei OS',
   };
   return names[brand_key] ?? 'GenericOS';
 }
@@ -102,24 +106,24 @@ export function getOsStyleName(brand_key: string): string {
  * Возвращает визуальный профиль ОС для конкретного бренда.
  *
  * Философия каждого бренда:
- * - Morpheus:     корпоративный профессионализм, синий, чистота
- * - Etamin:       военный HUD, красно-чёрный, monospace, [[CAPS]]
- * - Bishop:       медицинская стерильность, холодный белый, максимум пространства
- * - Hesphiastos:  тяжёлая индустрия, янтарный, толстые рамки, warning stripes
- * - Ward-Takahashi: японский корпоративный минимализм, глубокий фиолет
- * - Xion:         базовый утилитаризм, нейтральный голубой
- * - Zeng-Hu:      органическая бионика, зелёный, максимум скруглений
- * - Shellguard:   утилитарная броня, серый, ноль украшений
- * - Cybersun:     cyberpunk неон, маджента+фиолет, максимальное свечение
- * - Unbranded:    ретро-терминал, фосфорный зелёный, CRT, monospace
- * - HEF:          лоскутная сборка, смешанный, сетка
+ * - Morpheus:       корпоративный фиолет — чистота, профессионализм
+ * - Etamin:         военный красно-чёрный HUD — тактика, monospace, [[CAPS]]
+ * - Bishop:         медицинский стальной синий — холодная стерильность
+ * - Hesphiastos:    военный зелёный — тяжёлая промышленность, warning stripes
+ * - Ward-Takahashi: минималистичный серый — японский корпоративный дзен
+ * - Xion:           инженерный оранжевый — функционально, без излишеств
+ * - Zeng-Hu:        тёплый коралловый — органика, человечность
+ * - Shellguard:     чёрный с тёмно-красным — броня, утилитаризм, ноль украшений
+ * - Cybersun:       зловещий алый неон — кибerpunk мрак и угроза
+ * - Unbranded:      фосфорный зелёный терминал — хакер, CRT, retro
+ * - HEF (Yūrei OS): призрачный фиолет — лоскут, сетка, экзотика
  */
 export function getOsStyle(brand_key: string): OsStyleConfig {
   switch (brand_key) {
     // ─────────────────────────────────────────────────────────────────
-    // Morpheus Cyberkinetics — Corporate
-    // Чистый корпоративный стиль. Синий центральный блик, округлые
-    // углы, сдержанное свечение. «Профессионально и надёжно.»
+    // Morpheus Cyberkinetics — Corporate Purple
+    // Корпоративная чистота с фиолетовым акцентом. Скруглённые углы,
+    // тонкие рамки, мягкое свечение. «Профессионально. Надёжно.»
     // ─────────────────────────────────────────────────────────────────
     case 'morpheus':
       return {
@@ -127,21 +131,22 @@ export function getOsStyle(brand_key: string): OsStyleConfig {
         fontFamily: 'inherit',
         scanlines: false,
         scanlinesOpacity: 0,
-        glowIntensity: 0.55,
+        glowIntensity: 0.6,
         panelBgOpacity: 0.1,
         panelBorderOpacity: 0.38,
         borderWidth: '1px',
         textTransform: 'none',
-        textColor: '#d8eeff',
+        textColor: '#ecdeff',
         bgStyle:
-          'radial-gradient(ellipse at 50% -10%, rgba(74,144,217,0.32) 0%, rgba(0,0,0,0.97) 55%)',
-        styleDesc: 'Corporate',
+          'radial-gradient(ellipse at 50% -8%, rgba(155,89,217,0.38) 0%, rgba(2,0,8,0.97) 55%)',
+        styleDesc: 'Corporate Purple',
       };
 
     // ─────────────────────────────────────────────────────────────────
     // Etamin Industry — Military HUD
     // Тактический боевой интерфейс. Красно-чёрный градиент снизу,
-    // сканлайны, monospace, острые края, [[ ЗАГОЛОВОК CAPS ]].
+    // сканлайны, monospace, острые края, [ ЗАГОЛОВОК CAPS ].
+    // «Угроза нейтрализована.»
     // ─────────────────────────────────────────────────────────────────
     case 'etamin':
       return {
@@ -163,9 +168,9 @@ export function getOsStyle(brand_key: string): OsStyleConfig {
       };
 
     // ─────────────────────────────────────────────────────────────────
-    // Bishop Cybernetics — Medical
-    // Медицинский минимализм. Стерильная тьма с мягким бирюзовым
-    // снизу. Максимальные скругления, тонкие линии, много воздуха.
+    // Bishop Cybernetics — Medical Steel
+    // Медицинская стерильность. Холодный стальной синий снизу.
+    // Максимальные скругления, тонкие линии, много воздуха.
     // «Точность. Чистота. Жизнь.»
     // ─────────────────────────────────────────────────────────────────
     case 'bishop':
@@ -174,21 +179,21 @@ export function getOsStyle(brand_key: string): OsStyleConfig {
         fontFamily: 'inherit',
         scanlines: false,
         scanlinesOpacity: 0,
-        glowIntensity: 0.2,
+        glowIntensity: 0.22,
         panelBgOpacity: 0.05,
         panelBorderOpacity: 0.22,
         borderWidth: '1px',
         textTransform: 'none',
-        textColor: '#e8fff8',
+        textColor: '#d8eeff',
         bgStyle:
-          'linear-gradient(175deg, rgba(0,8,6,0.98) 0%, rgba(50,180,130,0.12) 100%)',
-        styleDesc: 'Medical',
+          'linear-gradient(175deg, rgba(0,4,12,0.98) 0%, rgba(74,143,217,0.16) 100%)',
+        styleDesc: 'Medical Steel',
       };
 
     // ─────────────────────────────────────────────────────────────────
-    // Hesphiastos Industries — Industrial
-    // Тяжёлый индустриальный интерфейс. Янтарно-оранжевый накал,
-    // толстые рамки, предупреждающие полосы. Броня и огонь.
+    // Hesphiastos Industries — Military Green
+    // Тяжёлый военно-промышленный интерфейс. Оливково-зелёный,
+    // толстые рамки, предупреждающие зелёные полосы. Броня.
     // ─────────────────────────────────────────────────────────────────
     case 'hesphiastos':
       return {
@@ -196,22 +201,23 @@ export function getOsStyle(brand_key: string): OsStyleConfig {
         fontFamily: 'inherit',
         scanlines: false,
         scanlinesOpacity: 0,
-        glowIntensity: 0.6,
+        glowIntensity: 0.55,
         panelBgOpacity: 0.2,
         panelBorderOpacity: 0.7,
         borderWidth: '3px',
         textTransform: 'uppercase',
-        textColor: '#ffe0b0',
+        textColor: '#c8e8a8',
         bgStyle:
-          'linear-gradient(155deg, rgba(30,10,0,0.99) 0%, rgba(200,120,40,0.22) 55%, rgba(12,4,0,0.99) 100%)',
+          'linear-gradient(155deg, rgba(0,12,0,0.99) 0%, rgba(74,138,58,0.22) 55%, rgba(0,8,0,0.99) 100%)',
         bgPattern: 'stripes',
-        styleDesc: 'Industrial',
+        bgPatternColor: 'rgba(74,138,58,0.06)',
+        styleDesc: 'Military Green',
       };
 
     // ─────────────────────────────────────────────────────────────────
-    // Ward-Takahashi — Elegant Minimal
-    // Японский корпоративный минимализм. Глубокий фиолет, тончайшие
-    // линии, утончённость без излишеств. «Меньше — больше.»
+    // Ward-Takahashi — Elegant Gray
+    // Японский корпоративный минимализм. Холодный нейтральный серый,
+    // тончайшие линии, без излишеств. «Меньше — больше.»
     // ─────────────────────────────────────────────────────────────────
     case 'ward_takahashi':
       return {
@@ -219,21 +225,21 @@ export function getOsStyle(brand_key: string): OsStyleConfig {
         fontFamily: 'inherit',
         scanlines: false,
         scanlinesOpacity: 0,
-        glowIntensity: 0.55,
+        glowIntensity: 0.35,
         panelBgOpacity: 0.05,
-        panelBorderOpacity: 0.18,
+        panelBorderOpacity: 0.2,
         borderWidth: '1px',
         textTransform: 'none',
-        textColor: '#ecdeff',
+        textColor: '#d8d8e8',
         bgStyle:
-          'linear-gradient(145deg, rgba(4,0,14,0.98) 0%, rgba(120,60,220,0.2) 55%, rgba(0,0,8,0.99) 100%)',
-        styleDesc: 'Elegant Minimal',
+          'linear-gradient(145deg, rgba(6,6,8,0.98) 0%, rgba(120,120,140,0.18) 55%, rgba(2,2,4,0.99) 100%)',
+        styleDesc: 'Elegant Gray',
       };
 
     // ─────────────────────────────────────────────────────────────────
-    // Xion Manufacturing — Standard
-    // Нейтральный функциональный интерфейс. Бюджетная бирюза без
-    // украшений. Просто работает.
+    // Xion Manufacturing Group — Engineering Orange
+    // Инженерный функционализм. Оранжевый как знаки горных работ.
+    // Просто работает. Без украшений.
     // ─────────────────────────────────────────────────────────────────
     case 'xion':
       return {
@@ -241,20 +247,21 @@ export function getOsStyle(brand_key: string): OsStyleConfig {
         fontFamily: 'inherit',
         scanlines: false,
         scanlinesOpacity: 0,
-        glowIntensity: 0.28,
-        panelBgOpacity: 0.08,
-        panelBorderOpacity: 0.28,
-        borderWidth: '1px',
-        textTransform: 'none',
+        glowIntensity: 0.5,
+        panelBgOpacity: 0.1,
+        panelBorderOpacity: 0.45,
+        borderWidth: '2px',
+        textTransform: 'uppercase',
+        textColor: '#ffe0b0',
         bgStyle:
-          'linear-gradient(135deg, rgba(0,0,0,0.97) 0%, rgba(60,200,200,0.09) 50%, rgba(0,0,0,0.97) 100%)',
-        styleDesc: 'Standard',
+          'radial-gradient(ellipse at 50% -5%, rgba(217,120,32,0.28) 0%, rgba(0,0,0,0.97) 55%)',
+        styleDesc: 'Engineering Orange',
       };
 
     // ─────────────────────────────────────────────────────────────────
-    // Zeng-Hu Pharmaceuticals — Organic / Bio
-    // Органическая бионика. Радиальный жёлто-зелёный сверху,
-    // максимально скруглённые края, мягкая зелень. «Живой интерфейс.»
+    // Zeng-Hu Pharmaceuticals — Human Warmth
+    // Тёплый коралловый. Органические формы, максимальные скругления.
+    // Похоже на что-то созданное для людей, а не машин.
     // ─────────────────────────────────────────────────────────────────
     case 'zeng_hu':
       return {
@@ -262,21 +269,21 @@ export function getOsStyle(brand_key: string): OsStyleConfig {
         fontFamily: 'inherit',
         scanlines: false,
         scanlinesOpacity: 0,
-        glowIntensity: 0.45,
+        glowIntensity: 0.4,
         panelBgOpacity: 0.1,
         panelBorderOpacity: 0.28,
         borderWidth: '1px',
         textTransform: 'none',
-        textColor: '#edffd8',
+        textColor: '#ffeedd',
         bgStyle:
-          'radial-gradient(ellipse at 50% -5%, rgba(150,220,60,0.28) 0%, rgba(0,4,0,0.97) 58%)',
-        styleDesc: 'Organic / Bio',
+          'radial-gradient(ellipse at 50% -5%, rgba(212,132,90,0.3) 0%, rgba(4,2,0,0.97) 58%)',
+        styleDesc: 'Human Warmth',
       };
 
     // ─────────────────────────────────────────────────────────────────
-    // Shellguard Munitions — Utilitarian
-    // Абсолютный утилитаризм. Чистый серый без единого украшения.
-    // Ноль свечения. «Работает — значит достаточно.»
+    // Shellguard Munitions — Black & Red
+    // Абсолютный мрак с красным акцентом. Ноль украшений, ноль свечения.
+    // Только броня и функция. «Цель нейтрализована.»
     // ─────────────────────────────────────────────────────────────────
     case 'shellguard':
       return {
@@ -285,39 +292,38 @@ export function getOsStyle(brand_key: string): OsStyleConfig {
         scanlines: false,
         scanlinesOpacity: 0,
         glowIntensity: 0.04,
-        panelBgOpacity: 0.16,
+        panelBgOpacity: 0.18,
         panelBorderOpacity: 0.75,
         borderWidth: '2px',
         textTransform: 'uppercase',
-        textColor: '#cccccc',
+        textColor: '#cc8888',
         bgStyle:
-          'linear-gradient(180deg, rgba(18,18,18,0.99) 0%, rgba(12,12,12,1) 100%)',
-        styleDesc: 'Utilitarian',
+          'linear-gradient(180deg, rgba(5,0,0,0.99) 0%, rgba(10,0,0,1) 100%)',
+        styleDesc: 'Black & Red',
       };
 
     // ─────────────────────────────────────────────────────────────────
-    // Cybersun Industries — Cyberpunk Neon
-    // Максимальный киберпанк. Два мощных радиальных источника неона
-    // (маджента + фиолет), сканлайны, максимальное свечение.
-    // «Ночь — это наш день.»
+    // Cybersun Industries — Crimson Neon
+    // Зловещий алый киберпанк. Два мощных красных радиальных источника.
+    // Сканлайны, максимальное свечение. «Ночь не безопасна.»
     // ─────────────────────────────────────────────────────────────────
     case 'cybersun':
       return {
         borderRadius: '2px',
         fontFamily: 'inherit',
         scanlines: true,
-        scanlinesOpacity: 0.09,
+        scanlinesOpacity: 0.1,
         glowIntensity: 1.0,
         panelBgOpacity: 0.12,
         panelBorderOpacity: 0.65,
         borderWidth: '1px',
         textTransform: 'none',
-        textColor: '#ffd8f0',
+        textColor: '#ffaabb',
         bgStyle:
-          'radial-gradient(ellipse at 25% 20%, rgba(220,70,150,0.42) 0%, transparent 48%), ' +
-          'radial-gradient(ellipse at 75% 80%, rgba(130,0,255,0.28) 0%, transparent 45%), ' +
-          'rgba(2,0,6,0.98)',
-        styleDesc: 'Cyberpunk Neon',
+          'radial-gradient(ellipse at 25% 20%, rgba(220,20,50,0.48) 0%, transparent 48%), ' +
+          'radial-gradient(ellipse at 75% 80%, rgba(160,0,20,0.32) 0%, transparent 45%), ' +
+          'rgba(3,0,0,0.99)',
+        styleDesc: 'Crimson Neon',
       };
 
     // ─────────────────────────────────────────────────────────────────
@@ -343,9 +349,9 @@ export function getOsStyle(brand_key: string): OsStyleConfig {
       };
 
     // ─────────────────────────────────────────────────────────────────
-    // HEF — Patchwork
-    // Лоскутный эклектизм. Несимметричный оливковый градиент,
-    // сетка-оверлей. Собрано из того, что было.
+    // HEF — Yūrei OS (Призрак ОС)
+    // Лоскутный призрачный фиолет. Сетка-оверлей, эклектика.
+    // Собрано из всего что было. 幽霊.
     // ─────────────────────────────────────────────────────────────────
     case 'hef':
       return {
@@ -353,15 +359,17 @@ export function getOsStyle(brand_key: string): OsStyleConfig {
         fontFamily: 'inherit',
         scanlines: false,
         scanlinesOpacity: 0,
-        glowIntensity: 0.3,
+        glowIntensity: 0.45,
         panelBgOpacity: 0.09,
-        panelBorderOpacity: 0.28,
+        panelBorderOpacity: 0.32,
         borderWidth: '1px',
         textTransform: 'none',
+        textColor: '#d8b8ff',
         bgStyle:
-          'linear-gradient(110deg, rgba(0,0,0,0.97) 0%, rgba(130,130,80,0.16) 33%, rgba(0,0,0,0.97) 62%, rgba(130,130,80,0.11) 100%)',
+          'linear-gradient(110deg, rgba(2,0,6,0.97) 0%, rgba(100,60,180,0.18) 33%, rgba(2,0,6,0.97) 62%, rgba(100,60,180,0.12) 100%)',
         bgPattern: 'grid',
-        styleDesc: 'Patchwork',
+        bgPatternColor: 'rgba(144,96,204,0.06)',
+        styleDesc: 'Yūrei — Призрак',
       };
 
     default:
