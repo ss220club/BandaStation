@@ -791,6 +791,8 @@
 	var/network_connected = FALSE
 	/// Выбранная стена: "white" или "black"
 	var/net_wall = "white"
+	/// Разблокирован ли доступ к Black Wall
+	var/blackwall_unlocked = FALSE
 	/// Доступные приложения (White Wall)
 	var/list/net_catalog = list()
 	/// Доступные приложения (Black Wall)
@@ -1442,6 +1444,8 @@
 			return "Отменить загрузку"
 		if("console_bypass")
 			return "Консоль: Blackwall-обход для [action_params["app_name"]]"
+		if("unlock_blackwall")
+			return "Консоль: Разблокировать доступ к Black Wall"
 	return "Неизвестное действие"
 
 /// Запросить подтверждение действия у владельца
@@ -1525,7 +1529,7 @@
 
 /// Список действий, которые требуют подтверждения в permission-режиме
 /datum/ipc_operating_system/proc/is_sensitive_action(action)
-	return action in list("start_scan", "start_antivirus", "download_app", "cancel_download", "uninstall_app", "console_bypass")
+	return action in list("start_scan", "start_antivirus", "download_app", "cancel_download", "uninstall_app", "console_bypass", "unlock_blackwall")
 
 /// Отключить удалённый доступ
 /datum/ipc_operating_system/proc/revoke_remote_access()
@@ -1605,6 +1609,7 @@
 	check_network_connection()
 	data["network_connected"] = network_connected
 	data["net_wall"] = net_wall
+	data["blackwall_unlocked"] = blackwall_unlocked
 
 	// Загрузка
 	data["downloading"] = downloading
@@ -1753,6 +1758,15 @@
 				if(app.name == app_name)
 					uninstall_net_app(app)
 					break
+			return TRUE
+
+		// Разблокировка доступа к Black Wall через консоль
+		if("unlock_blackwall")
+			if(!network_connected)
+				return FALSE
+			blackwall_unlocked = TRUE
+			if(owner)
+				to_chat(owner, span_warning("⚡ КОНСОЛЬ: Доступ к Black Wall получен. Нелегальный раздел сети разблокирован."))
 			return TRUE
 
 		// Обход Blackwall через консоль — мини-игра завершена успешно

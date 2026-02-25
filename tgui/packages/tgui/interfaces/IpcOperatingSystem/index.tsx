@@ -96,6 +96,7 @@ type IpcOsData = {
   viruses: Virus[];
   network_connected: boolean;
   net_wall: string;
+  blackwall_unlocked: boolean;
   downloading: boolean;
   download_progress: number;
   download_app_name: string;
@@ -1715,6 +1716,7 @@ const NetAppScreen = () => {
   const downloading = safeBool(data.downloading);
   const download_progress = safeNum(data.download_progress, 0);
   const download_app_name = safeStr(data.download_app_name, '');
+  const blackwall_unlocked = safeBool(data.blackwall_unlocked);
 
   const catalog = net_wall === 'black' ? black_wall_catalog : net_catalog;
   const isBlack = net_wall === 'black';
@@ -1772,8 +1774,53 @@ const NetAppScreen = () => {
             </Tabs.Tab>
           </Tabs>
 
-          {/* Black Wall warning */}
-          {isBlack && (
+          {/* Black Wall: locked gate или статус */}
+          {isBlack && !blackwall_unlocked && (
+            <Box
+              mt={2}
+              mx={1}
+              p={2}
+              textAlign="center"
+              style={{
+                border: '1px solid rgba(200,0,0,0.35)',
+                borderRadius: '6px',
+                background: 'rgba(180,0,0,0.07)',
+              }}
+            >
+              <Box
+                style={{ fontSize: '2.6em', color: '#cc3333', lineHeight: 1 }}
+                mb={1}
+              >
+                <Icon name="lock" />
+              </Box>
+              <Box bold fontSize="1.05em" color="bad" mb={1}>
+                BLACKWALL — ДОСТУП ЗАПРЕЩЁН
+              </Box>
+              <Box fontSize="0.82em" color="label" mb={2}>
+                Для просмотра нелегального раздела сети необходимо взломать
+                защитный протокол.
+              </Box>
+              <Box
+                p={1}
+                style={{
+                  border: '1px solid rgba(200,50,50,0.3)',
+                  borderRadius: '4px',
+                  background: 'rgba(0,0,0,0.3)',
+                  fontFamily: '"Courier New", monospace',
+                  fontSize: '0.82em',
+                  color: '#cc5555',
+                }}
+              >
+                <Icon name="terminal" mr={0.5} />
+                Консоль →{' '}
+                <Box as="span" bold style={{ color: '#ff7777' }}>
+                  netwall
+                </Box>
+              </Box>
+            </Box>
+          )}
+
+          {isBlack && blackwall_unlocked && (
             <Box
               p={0.5}
               mb={1}
@@ -1790,8 +1837,8 @@ const NetAppScreen = () => {
             </Box>
           )}
 
-          {/* Download progress */}
-          {downloading && (
+          {/* Download progress — only when catalog accessible */}
+          {downloading && (!isBlack || blackwall_unlocked) && (
             <Box mb={1}>
               <Box fontSize="0.8em" color="label" mb={0.3}>
                 <Icon name="download" mr={0.5} />
@@ -1821,8 +1868,8 @@ const NetAppScreen = () => {
             </Box>
           )}
 
-          {/* App catalog */}
-          {!network_connected ? (
+          {/* App catalog — hidden when BW is locked */}
+          {isBlack && !blackwall_unlocked ? null : !network_connected ? (
             <Box textAlign="center" color="label" p={2}>
               <Icon name="plug" size={2} mb={1} />
               <Box bold>Каталог недоступен</Box>
@@ -2039,6 +2086,8 @@ type ConsoleLine = {
 
 type BypassChallenge = {
   active: boolean;
+  /** 'netwall' = unlock BW access, 'bypass' = install specific BW app */
+  mode: 'netwall' | 'bypass';
   targetApp: string;
   code: string;
   timeLeft: number;
@@ -2100,6 +2149,7 @@ const ConsoleApp = () => {
   const [nextId, setNextId] = useState(2);
   const [bypass, setBypass] = useState<BypassChallenge>({
     active: false,
+    mode: 'bypass',
     targetApp: '',
     code: '',
     timeLeft: 0,
@@ -2159,11 +2209,20 @@ const ConsoleApp = () => {
     // ── BYPASS CHALLENGE MODE ──────────────────────────────────────
     if (bypass.active) {
       if (cmd.toUpperCase() === bypass.code) {
-        addOutput([
-          { kind: 'success', text: '[ OK ] SEQUENCE VERIFIED' },
-          { kind: 'system', text: `Initiating install: ${bypass.targetApp}` },
-        ]);
-        act('console_bypass', { app_name: bypass.targetApp });
+        if (bypass.mode === 'netwall') {
+          addOutput([
+            { kind: 'success', text: '[ ACCESS GRANTED ] BLACKWALL BREACHED' },
+            { kind: 'system', text: 'Нелегальный раздел сети разблокирован.' },
+            { kind: 'output', text: 'Откройте NET → Black Wall для просмотра программ.' },
+          ]);
+          act('unlock_blackwall');
+        } else {
+          addOutput([
+            { kind: 'success', text: '[ OK ] SEQUENCE VERIFIED' },
+            { kind: 'system', text: `Initiating install: ${bypass.targetApp}` },
+          ]);
+          act('console_bypass', { app_name: bypass.targetApp });
+        }
         setBypass((p) => ({ ...p, active: false }));
       } else {
         const left = bypass.attempts - 1;
@@ -2200,7 +2259,8 @@ const ConsoleApp = () => {
           { kind: 'output', text: '  apps              — установленные приложения' },
           { kind: 'output', text: '  catalog           — каталог Blackwall' },
           { kind: 'output', text: '  scan              — запустить диагностику' },
-          { kind: 'output', text: '  bypass [app]      — обход Blackwall для программы' },
+          { kind: 'output', text: '  netwall           — взломать доступ к Black Wall' },
+          { kind: 'output', text: '  bypass [app]      — установить BW программу напрямую' },
           { kind: 'output', text: '  clear             — очистить терминал' },
         ]);
         break;
@@ -2293,6 +2353,46 @@ const ConsoleApp = () => {
         break;
       }
 
+      case 'netwall': {
+        if (safeBool(data.blackwall_unlocked)) {
+          addOutput([
+            { kind: 'success', text: 'Black Wall уже разблокирован.' },
+            { kind: 'output', text: 'Откройте NET → Black Wall для просмотра программ.' },
+          ]);
+          break;
+        }
+        if (!data.network_connected) {
+          addOutput([
+            { kind: 'error', text: 'ОШИБКА: Нет подключения к сети. Подключитесь к кабелю.' },
+          ]);
+          break;
+        }
+
+        const nwCode = generateBypassCode();
+        setBypass({
+          active: true,
+          mode: 'netwall',
+          targetApp: '',
+          code: nwCode,
+          timeLeft: BYPASS_TIME,
+          attempts: BYPASS_ATTEMPTS,
+        });
+
+        addOutput([
+          { kind: 'system', text: '████████████████████████████████████' },
+          { kind: 'system', text: ' BLACKWALL ACCESS GATE  v2.3.1' },
+          { kind: 'system', text: '████████████████████████████████████' },
+          { kind: 'output', text: 'Обнаружен зашифрованный нелегальный раздел.' },
+          { kind: 'output', text: 'Перехват пакетов защиты...' },
+          { kind: 'system', text: 'Анализ протоколов безопасности...' },
+          { kind: 'system', text: 'Брутфорс ключа шифрования...' },
+          { kind: 'success', text: `КОД ДОСТУПА ► ${nwCode} ◄` },
+          { kind: 'output', text: '────────────────────────────────────' },
+          { kind: 'output', text: 'Введите код для разблокировки Black Wall:' },
+        ]);
+        break;
+      }
+
       case 'bypass': {
         const targetName = parts.slice(1).join(' ');
         if (!targetName) {
@@ -2348,10 +2448,19 @@ const ConsoleApp = () => {
           break;
         }
 
+        if (!safeBool(data.blackwall_unlocked)) {
+          addOutput([
+            { kind: 'error', text: 'ОШИБКА: Black Wall не разблокирован.' },
+            { kind: 'output', text: 'Сначала запустите: netwall' },
+          ]);
+          break;
+        }
+
         // Start bypass mini-game
         const code = generateBypassCode();
         setBypass({
           active: true,
+          mode: 'bypass',
           targetApp: target.name,
           code,
           timeLeft: BYPASS_TIME,
