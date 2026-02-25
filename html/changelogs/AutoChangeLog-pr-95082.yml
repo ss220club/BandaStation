@@ -1,0 +1,5 @@
+author: "nevimer"
+delete-after: True
+changes:
+  - bugfix: "fixed runechat's for radio emotes appearing incorrectly for observers"
+  - code_imp: "reuse the emote check from living's hearing function"
