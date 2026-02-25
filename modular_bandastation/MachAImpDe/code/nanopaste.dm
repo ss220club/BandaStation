@@ -9,10 +9,9 @@
 	singular_name = "нанопаста"
 	desc = "Универсальная нанопаста для ремонта роботизированных частей тела. Восстанавливает механические и термические повреждения протезов, а также КПБ любого бренда."
 	icon = 'modular_bandastation/MachAImpDe/icons/stack_medical.dmi'
-	icon_state = "nanopaste"
-	lefthand_file = 'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi'
-	righthand_file = 'modular_bandastation/MachAImpDe/icons/implants_righthand.dmi'
-	worn_icon_state = "nanopaste"
+	icon_state = "nanopaste_tube_3"
+	worn_icon_state = "nanopaste_tube_1"
+	novariants = TRUE
 	amount = 5
 	max_amount = 5
 	w_class = WEIGHT_CLASS_TINY
@@ -23,6 +22,15 @@
 	repeating = TRUE
 	apply_verb = "ремонтируем"
 	merge_type = /obj/item/stack/medical/nanopaste
+
+/obj/item/stack/medical/nanopaste/update_icon_state()
+	if(amount >= 4)
+		icon_state = "nanopaste_tube_3"
+	else if(amount >= 2)
+		icon_state = "nanopaste_tube_2"
+	else
+		icon_state = "nanopaste_tube_1"
+	return ..()
 
 /// Нанопаста работает только на роботизированных конечностях
 /obj/item/stack/medical/nanopaste/can_heal(mob/living/patient, mob/living/user, healed_zone, silent = FALSE)

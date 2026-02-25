@@ -99,6 +99,7 @@
 	desc = "Биогенератор раундстартом. Синт кожа с особенностями лечения. При ожогах синт плоть менее эффективна НаноПастой. При брут — швы с синтплотью + нанопастой."
 	brand_key = "zeng_hu"
 	visual_prefix = "zenghu"
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_zenghu.dmi'
 
 // 8. SHELLGUARD MUNITIONS
 /datum/ipc_brand/shellguard
