@@ -20,8 +20,9 @@
 	name = "Arm Razor Implant"
 	desc = "Моноволоконная струна, встроенная в предплечье. Выдвигается для режущей атаки на ближнюю дистанцию. Способна отрезать конечности."
 	icon_state = "arm_razor"
+	arm_visual_state = "razorwire"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-	actions_types = list(/datum/action/item_action/activate_arm_razor)
+	actions_types = list(/datum/action/item_action/hands_free/activate_arm_razor)
 	/// Урон за удар
 	var/slash_damage = 20
 	/// Бонус к ранам (для dismember)
@@ -111,14 +112,14 @@
 	imp_type = /obj/item/implant/ipc/arm_razor
 
 // Action для атаки струной
-/datum/action/item_action/activate_arm_razor
+/datum/action/item_action/hands_free/activate_arm_razor
 	name = "Razor Slash"
 	desc = "Атаковать струной цель перед собой."
 	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "deploy_nanites"
+	button_icon_state = "neckchop"
 	background_icon_state = "bg_tech"
 
-/datum/action/item_action/activate_arm_razor/Trigger(trigger_flags)
+/datum/action/item_action/hands_free/activate_arm_razor/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -142,8 +143,9 @@
 	name = "Mantis Blade Implant"
 	desc = "Выдвижные лезвия богомола. В развёрнутом состоянии наносят тяжёлый режущий урон и могут отрезать конечности."
 	icon_state = "mantis_right"
+	arm_visual_state = "mantis"
 	allowed_zones = list(BODY_ZONE_R_ARM)
-	actions_types = list(/datum/action/item_action/toggle_mantis)
+	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis)
 	/// Урон в активном режиме
 	var/blade_damage = 15
 	/// Бонус к ранам для dismember
@@ -201,10 +203,10 @@
 		if(BODY_ZONE_R_ARM in M.allowed_zones)
 			has_right = TRUE
 
-	var/datum/action/item_action/mantis_leap/existing_leap = locate() in H.actions
+	var/datum/action/item_action/hands_free/mantis_leap/existing_leap = locate() in H.actions
 	if(has_left && has_right)
 		if(!existing_leap)
-			var/datum/action/item_action/mantis_leap/leap_action = new(src)
+			var/datum/action/item_action/hands_free/mantis_leap/leap_action = new(src)
 			leap_action.Grant(H)
 	else
 		if(existing_leap)
@@ -335,6 +337,7 @@
 	name = "Mantis Blade Implant (Left)"
 	desc = "Выдвижные лезвия богомола для левой руки."
 	icon_state = "mantis_left"
+	arm_visual_state = "mantis"
 	allowed_zones = list(BODY_ZONE_L_ARM)
 
 /obj/item/implantcase/ipc/mantis_right
@@ -348,14 +351,14 @@
 	imp_type = /obj/item/implant/ipc/mantis/left
 
 // Action для переключения лезвий
-/datum/action/item_action/toggle_mantis
+/datum/action/item_action/hands_free/toggle_mantis
 	name = "Toggle Mantis Blades"
 	desc = "Развернуть/свернуть лезвия богомола."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "deploy_nanites"
+	button_icon = 'icons/mob/actions/actions_changeling.dmi'
+	button_icon_state = "arm_blade"
 	background_icon_state = "bg_tech"
 
-/datum/action/item_action/toggle_mantis/Trigger(trigger_flags)
+/datum/action/item_action/hands_free/toggle_mantis/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -368,24 +371,21 @@
 	if(mantis_implant.blades_active)
 		to_chat(owner, span_warning("Лезвия богомола развёрнуты!"))
 		playsound(owner, 'sound/items/weapons/bladeslice.ogg', 50, TRUE)
-		button_icon_state = "deploy_nanites"
 	else
 		to_chat(owner, span_notice("Лезвия богомола свёрнуты."))
 		playsound(owner, 'sound/items/weapons/bladeslice.ogg', 30, TRUE)
-		button_icon_state = "recall_nanites"
 
-	build_all_button_icons()
 	return TRUE
 
 // Action для прыжка (выдаётся при парных лезвиях)
-/datum/action/item_action/mantis_leap
+/datum/action/item_action/hands_free/mantis_leap
 	name = "Mantis Leap"
 	desc = "Прыжок на врага с лезвиями богомола. Требуются парные лезвия."
 	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "yourinjectors"
+	button_icon_state = "legsweep"
 	background_icon_state = "bg_tech"
 
-/datum/action/item_action/mantis_leap/Trigger(trigger_flags)
+/datum/action/item_action/hands_free/mantis_leap/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -407,8 +407,9 @@
 	name = "Military Mantis Blade Implant"
 	desc = "Военная модификация лезвий богомола. Увеличенный урон и способность пробивать броню. Высокий шанс отрезания конечностей."
 	icon_state = "military_mantis_right"
+	arm_visual_state = "syndie_mantis"
 	allowed_zones = list(BODY_ZONE_R_ARM)
-	actions_types = list(/datum/action/item_action/toggle_mantis)
+	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis)
 	/// Урон в активном режиме
 	var/blade_damage = 22
 	/// Бонус к ранам для dismember
@@ -489,6 +490,7 @@
 	name = "Military Mantis Blade Implant (Left)"
 	desc = "Военная модификация лезвий богомола для левой руки."
 	icon_state = "military_mantis_left"
+	arm_visual_state = "syndie_mantis"
 	allowed_zones = list(BODY_ZONE_L_ARM)
 
 /obj/item/implantcase/ipc/military_mantis_right
@@ -511,8 +513,9 @@
 	name = "Arm Cannon Implant"
 	desc = "Встроенный дробовик в руке. Заряжается дробовыми патронами. Выстрел рассеивает пеллеты по площади."
 	icon_state = "arm_cannon"
+	arm_visual_state = "shell_cannon"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-	actions_types = list(/datum/action/item_action/fire_arm_cannon)
+	actions_types = list(/datum/action/item_action/hands_free/fire_arm_cannon)
 	/// Макс. количество патронов
 	var/max_shells = 4
 	/// Текущее количество патронов
@@ -646,14 +649,14 @@
 	sharpness = SHARP_EDGED
 
 // Action для выстрела
-/datum/action/item_action/fire_arm_cannon
+/datum/action/item_action/hands_free/fire_arm_cannon
 	name = "Fire Arm Cannon"
 	desc = "Выстрелить из встроенного дробовика."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "deploy_nanites"
+	button_icon = 'icons/mob/actions/actions_vehicle.dmi'
+	button_icon_state = "car_cannon"
 	background_icon_state = "bg_tech"
 
-/datum/action/item_action/fire_arm_cannon/Trigger(trigger_flags)
+/datum/action/item_action/hands_free/fire_arm_cannon/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -677,7 +680,7 @@
 	desc = "Сандевистан — имплант рефлекторного ускорения. Временно повышает скорость перемещения на 50%. У IPC расходует батарею и нагревает процессор."
 	icon_state = "sandy"
 	allowed_zones = list(BODY_ZONE_CHEST)
-	actions_types = list(/datum/action/item_action/activate_sandevistan)
+	actions_types = list(/datum/action/item_action/hands_free/activate_sandevistan)
 	/// Бонус скорости (отрицательное = быстрее)
 	var/speed_bonus = -0.5
 	/// Длительность эффекта
@@ -786,14 +789,14 @@
 	multiplicative_slowdown = -0.5
 
 // Action для активации
-/datum/action/item_action/activate_sandevistan
+/datum/action/item_action/hands_free/activate_sandevistan
 	name = "Activate Sandevistan"
 	desc = "Активировать Сандевистан — временное рефлекторное ускорение."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "deploy_nanites"
+	button_icon = 'icons/mob/actions/actions_changeling.dmi'
+	button_icon_state = "strained_muscles"
 	background_icon_state = "bg_tech"
 
-/datum/action/item_action/activate_sandevistan/Trigger(trigger_flags)
+/datum/action/item_action/hands_free/activate_sandevistan/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE

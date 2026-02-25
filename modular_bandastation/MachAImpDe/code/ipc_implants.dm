@@ -18,16 +18,18 @@
 	var/list/allowed_zones = list()
 	/// Overlay-изображение для визуально видимых имплантов (лезвия, пушка, струна)
 	var/image/arm_visual = null
+	/// Название состояния в implants_lefthand/righthand.dmi (null = оверлей не показывается)
+	var/arm_visual_state = null
 
 /// Добавляет визуальный оверлей на руку где установлен имплант
 /obj/item/implant/ipc/proc/apply_arm_visual(mob/living/carbon/human/H)
 	remove_arm_visual(H)
-	if(!installed_in_zone || !(installed_in_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
+	if(!arm_visual_state || !installed_in_zone || !(installed_in_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
 		return
 	var/dmi_file = (installed_in_zone == BODY_ZONE_L_ARM) ? \
 		'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi' : \
 		'modular_bandastation/MachAImpDe/icons/implants_righthand.dmi'
-	arm_visual = image(dmi_file, icon_state = icon_state)
+	arm_visual = image(dmi_file, icon_state = arm_visual_state)
 	LAZYADD(H.vis_contents, arm_visual)
 
 /// Убирает визуальный оверлей с руки
@@ -199,7 +201,7 @@
 	desc = "Система автоматического ремонта для IPC. Чинит все тело. Устанавливается в грудную клетку и расходует заряд батарейки."
 	icon_state = "reactive_repair"
 	allowed_zones = list(BODY_ZONE_CHEST)
-	actions_types = list(/datum/action/item_action/toggle_repair)
+	actions_types = list(/datum/action/item_action/hands_free/toggle_repair)
 	var/repair_amount = 2
 	var/repair_cooldown = 30 SECONDS
 	var/last_repair_time = 0
@@ -295,14 +297,14 @@
 	if(!silent)
 		to_chat(source, span_warning("Система реактивного ремонта деактивирована."))
 
-/datum/action/item_action/toggle_repair
+/datum/action/item_action/hands_free/toggle_repair
 	name = "Toggle Reactive Repair"
 	desc = "Включить/выключить систему реактивного ремонта."
 	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "deploy_nanites"
+	button_icon_state = "bci_repair"
 	background_icon_state = "bg_tech"
 
-/datum/action/item_action/toggle_repair/Trigger(trigger_flags)
+/datum/action/item_action/hands_free/toggle_repair/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -314,10 +316,8 @@
 	repair_implant.repair_active = !repair_implant.repair_active
 
 	if(repair_implant.repair_active)
-		button_icon_state = "deploy_nanites"
 		to_chat(owner, span_notice("Реактивный ремонт активирован."))
 	else
-		button_icon_state = "recall_nanites"
 		to_chat(owner, span_notice("Реактивный ремонт деактивирован."))
 
 	build_all_button_icons()
