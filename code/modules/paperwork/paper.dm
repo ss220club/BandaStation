@@ -424,6 +424,7 @@
 	return list(
 		get_asset_datum(/datum/asset/spritesheet/simple/stamps),
 		get_asset_datum(/datum/asset/simple/logos),
+		get_asset_datum(/datum/asset/simple/paper_logos),
 	)
 
 /obj/item/paper/ui_interact(mob/user, datum/tgui/ui)
@@ -531,6 +532,7 @@
 	static_data["default_pen_font"] = PEN_FONT
 	static_data["default_pen_color"] = COLOR_BLACK
 	static_data["signature_font"] = FOUNTAIN_PEN_FONT
+	static_data["replacements"] = get_paper_placements_data(user)
 
 	return static_data
 

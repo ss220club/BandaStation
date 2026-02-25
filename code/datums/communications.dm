@@ -79,6 +79,9 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 		addtimer(CALLBACK(src, PROC_REF(send_roundstart_report), greenshift), 10 SECONDS)
 		return
 
+	// Ensure NT logo asset is registered before we reference it in the report HTML
+	get_asset_datum(/datum/asset/simple/logos)
+
 	. = ""
 	. += "<center><img src='[SSassets.transport.get_asset_url("nanotrasen-logo")]' width='50%'></center><hr>"
 	. += "<center><h2>[command_name()], TCD [time2text(world.realtime, "DDD, MMM DD")], [CURRENT_STATION_YEAR]</h2></center><hr>"
