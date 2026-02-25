@@ -260,27 +260,27 @@
 	if(owner.is_blind())
 		if(advanced)
 			if(owner.is_blind_from(QUIRK_TRAIT))
-				return conditional_tooltip("Subject is permanently blind.", "Irreparable under normal circumstances.", add_tooltips)
+				return conditional_tooltip("Субъект полностью слеп.", "Не поддаётся лечению в обычных условиях.", add_tooltips)
 			if(owner.is_blind_from(EYE_SCARRING_TRAIT))
-				return conditional_tooltip("Subject is blind from widespread ocular scarring.", "Surgically replace eyes, irreparable otherwise.", add_tooltips)
+				return conditional_tooltip("Субъект слеп из-за обширных рубцов на глазах.", "Требуется хирургическая замена глаз, иначе состояние необратимо.", add_tooltips)
 			if(owner.is_blind_from(TRAUMA_TRAIT))
-				return conditional_tooltip("Subject is blind from mental trauma.", "Repair via treatment of associated trauma.", add_tooltips)
+				return conditional_tooltip("Субъект слеп из-за психической травмы.", "Лечится устранением связанной травмы.", add_tooltips)
 			if(owner.is_blind_from(GENETIC_MUTATION))
-				return conditional_tooltip("Subject is genetically blind.", "Use medication such as [/datum/reagent/medicine/mutadone::name].", add_tooltips)
+				return conditional_tooltip("Субъект страдает генетической слепотой.", "Используйте медикаменты, такие как [/datum/reagent/medicine/mutadone::name].", add_tooltips)
 			if(owner.is_blind_from(EYE_DAMAGE))
-				return conditional_tooltip("Subject is blind from eye damage.", "Repair surgically, use medication such as [/datum/reagent/medicine/oculine::name], or protect eyes with a blindfold.", add_tooltips)
-		return "Subject is blind."
+				return conditional_tooltip("Субъект слеп из-за повреждения глаз.", "Восстановите хирургически, используйте медикаменты, такие как [/datum/reagent/medicine/oculine::name], или защитите глаза повязкой.", add_tooltips)
+		return "Субъект слеп."
 	if(owner.is_nearsighted())
 		if(advanced)
 			if(owner.is_nearsighted_from(QUIRK_TRAIT))
-				return conditional_tooltip("Subject is permanently nearsighted.", "Irreparable under normal circumstances. Prescription glasses will assuage the effects.", add_tooltips)
+				return conditional_tooltip("Субъект страдает от постоянной близорукости.", "Не поддаётся лечению в обычных условиях. Очки с диоптриями смягчат эффект.", add_tooltips)
 			if(owner.is_nearsighted_from(TRAIT_RIGHT_EYE_SCAR) || owner.is_nearsighted_from(TRAIT_LEFT_EYE_SCAR))
-				return conditional_tooltip("Subject is nearsighted from severe ocular scarring.", "Surgically replace eyes, irreparable otherwise.", add_tooltips)
+				return conditional_tooltip("Субъект страдает близорукостью из-за серьёзных рубцов на глазах.", "Требуется хирургическая замена глаз, иначе состояние необратимо.", add_tooltips)
 			if(owner.is_nearsighted_from(GENETIC_MUTATION))
-				return conditional_tooltip("Subject is genetically nearsighted.", "Use medication such as [/datum/reagent/medicine/mutadone::name]. Prescription glasses will assuage the effects.", add_tooltips)
+				return conditional_tooltip("Субъект страдает генетической близорукостью.", "Используйте медикаменты, такие как [/datum/reagent/medicine/mutadone::name]. Очки с диоптриями смягчат эффект.", add_tooltips)
 			if(owner.is_nearsighted_from(EYE_DAMAGE))
-				return conditional_tooltip("Subject is nearsighted from eye damage.", "Repair surgically or use medication such as [/datum/reagent/medicine/oculine::name]. Prescription glasses will assuage the effects.", add_tooltips)
-		return "Subject is nearsighted."
+				return conditional_tooltip("Субъект страдает близорукостью из-за повреждения глаз.", "Восстановите хирургически или используйте медикаменты, такие как [/datum/reagent/medicine/oculine::name]. Очки с диоптриями смягчат эффект.", add_tooltips)
+		return "Субъект страдает близорукостью."
 	return ""
 
 /obj/item/organ/eyes/show_on_condensed_scans()
@@ -625,10 +625,10 @@
 	name = "undead eyes"
 	desc = "Somewhat counterintuitively, these half-rotten eyes actually have superior vision to those of a living human."
 	color_cutoffs = list(25, 35, 5)
-	penlight_message = "are rotten and decayed"
+	penlight_message = "are rotten and decayed!"
 
 /obj/item/organ/eyes/zombie/penlight_examine(mob/living/viewer, obj/item/examtool)
-	return span_danger(penlight_message)
+	return span_danger("[owner.p_Their()] eyes [penlight_message]")
 
 /obj/item/organ/eyes/alien
 	name = "alien eyes"
@@ -715,8 +715,9 @@
 	eye_color_left = "#3cb8a5"
 	eye_color_right = "#3cb8a5"
 	sight_flags = SEE_MOBS | SEE_OBJS | SEE_TURFS
+	flash_protect = FLASH_PROTECTION_SENSITIVE
 	organ_traits = list(TRAIT_XRAY_VISION)
-	penlight_message = "replaced by small radiation emitters and detectors"
+	penlight_message = "are replaced by small radiation emitters and detectors"
 
 /obj/item/organ/eyes/robotic/thermals
 	name = "thermal eyes"
@@ -1102,7 +1103,7 @@
 	eye_color_left = "#3c4e52"
 	eye_color_right = "#3c4e52"
 	blink_animation = FALSE
-	flash_protect = FLASH_PROTECTION_SENSITIVE
+	flash_protect = FLASH_PROTECTION_HYPER_SENSITIVE
 	pupils_name = "aperture clusters"
 
 /obj/item/organ/eyes/robotic/shield/moth
@@ -1127,13 +1128,14 @@
 	penlight_message = "are bulbous clusters of LEDs and cameras"
 	pupils_name = "aperture clusters"
 
-/obj/item/organ/eyes/robotic/thermals/moth //we inherit flash weakness from thermals
+/obj/item/organ/eyes/robotic/thermals/moth
 	name = "thermal moth eyes"
 	icon_state = "eyes_moth_cyber_thermal"
 	eye_icon_state = "motheyes_white"
 	eye_color_left = "#901f38"
 	eye_color_right = "#901f38"
 	blink_animation = FALSE
+	flash_protect = FLASH_PROTECTION_HYPER_SENSITIVE
 	pupils_name = "sensor clusters"
 	penlight_message = "are two clustered hemispheres of thermal sensors"
 
@@ -1185,13 +1187,13 @@
 	low_light_cutoff = list(5, 12, 20)
 	medium_light_cutoff = list(15, 20, 30)
 	high_light_cutoff = list(30, 35, 50)
-	penlight_message = "glow a foggy red, sizzling under the light"
+	penlight_message = "glow a foggy red, sizzling under the light!"
 
 /obj/item/organ/eyes/night_vision/maintenance_adapted/penlight_examine(mob/living/viewer, obj/item/examtool)
 	if(!owner.is_blind())
 		to_chat(owner, span_danger("Your eyes sizzle agonizingly as light is shone on them!"))
 		apply_organ_damage(20 * examtool.light_power) //that's 0.5 lightpower for a penlight, so one penlight shining is equivalent to two seconds in a lit area
-	return span_danger("[owner.p_Their()] eyes [penlight_message].")
+	return span_danger("[owner.p_Their()] eyes [penlight_message]")
 
 /obj/item/organ/eyes/night_vision/maintenance_adapted/on_life(seconds_per_tick)
 	if(owner.get_eye_protection() <= FLASH_PROTECTION_SENSITIVE && !owner.is_blind() && isturf(owner.loc) && owner.has_light_nearby(light_amount=0.5)) //we allow a little more than usual so we can produce light from the adapted eyes
