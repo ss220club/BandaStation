@@ -56,7 +56,13 @@
 	var/burning_temperature = null
 	///How much is consumed when it is burnt per second
 	var/burning_volume = 0.5
-	///Assoc list with key type of addiction this reagent feeds, and value amount of addiction points added per unit of reagent metabolzied (which means * REAGENTS_METABOLISM every life())
+	/**
+	 * Lazyassoc list of [addiction typepath] to [threshold value].
+	 *
+	 * [threshold value] can be interpreted as the number of units that must be consumed before an addiction is formed.
+	 *
+	 * Ex: list(/datum/addiction/stimulants = 50) -> "become addicted to stimulants after metabolizing 50 units of this reagent".
+	 */
 	var/list/addiction_types = null
 	/// The affected organ_flags, if the reagent damages/heals organ damage of an affected mob.
 	/// See "Organ defines for carbon mobs" in /code/_DEFINES/surgery.dm
@@ -235,6 +241,17 @@
  */
 /datum/reagent/proc/on_mob_dead(mob/living/carbon/affected_mob, seconds_per_tick)
 	SHOULD_CALL_PARENT(TRUE)
+
+/*
+ * Called when a reagent is exposed to electric current, rapidly heated or smashed, something that would cause explosives to get easily set off
+ * Returning a SPARK_ACT_ flag will signal that an action has occurred as a result, for parent behavior and logging purposes
+ * Probably shouldn't be called from within a mob's bloodstream, unless you're ready for some very explosive results
+ * Arguments:
+ * * power_charge - If we were triggered from electric current, how much power was dumped into us?
+ * * spark_flags - Flags specific to the interaction, is it in an enclosed space, should we nerf common reagents, etc.
+ */
+/datum/reagent/proc/on_spark_act(power_charge = 0, spark_flags = NONE)
+	return NONE
 
 /**
  * Called after add_reagents creates a new reagent.

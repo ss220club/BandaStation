@@ -1067,6 +1067,10 @@
 
 ///Called by mob Move() when the lying_angle is different than zero, to better visually simulate crawling.
 /mob/living/proc/lying_angle_on_movement(direct)
+	if(buckled && buckled.buckle_lying != NO_BUCKLE_LYING)
+		set_lying_angle(buckled.buckle_lying)
+		return
+
 	if(direct & EAST)
 		set_lying_angle(LYING_ANGLE_EAST)
 	else if(direct & WEST)
@@ -2415,7 +2419,9 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 		if(HARD_CRIT)
 			if(stat != UNCONSCIOUS)
 				cure_blind(UNCONSCIOUS_TRAIT)
+			REMOVE_TRAIT(src, TRAIT_DEAF, STAT_TRAIT)
 		if(DEAD)
+			REMOVE_TRAIT(src, TRAIT_DEAF, STAT_TRAIT)
 			remove_from_dead_mob_list()
 			add_to_alive_mob_list()
 	switch(stat) //Current stat.
@@ -2443,17 +2449,14 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 			if(. != UNCONSCIOUS)
 				become_blind(UNCONSCIOUS_TRAIT)
 			ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+			ADD_TRAIT(src, TRAIT_DEAF, STAT_TRAIT)
 			log_combat(src, src, "entered hard crit")
 		if(DEAD)
 			REMOVE_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+			ADD_TRAIT(src, TRAIT_DEAF, STAT_TRAIT)
 			remove_from_alive_mob_list()
 			add_to_dead_mob_list()
 			log_combat(src, src, "died")
-	if(!can_hear())
-		stop_sound_channel(CHANNEL_AMBIENCE)
-	refresh_looping_ambience()
-
-
 
 ///Reports the event of the change in value of the buckled variable.
 /mob/living/proc/set_buckled(new_buckled)

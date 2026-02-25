@@ -180,33 +180,33 @@
 		return FALSE
 	if((check_flags & AB_CHECK_CONSCIOUS) && owner.stat != CONSCIOUS)
 		if (feedback)
-			owner.balloon_alert(owner, "[owner.stat == DEAD ? "dead" : "unconscious"]!")
+			owner.balloon_alert(owner, "[owner.stat == DEAD ? "мёртв" : "без сознания"]!")
 		return FALSE
 	if((check_flags & AB_CHECK_HANDS_BLOCKED) && HAS_TRAIT(owner, TRAIT_HANDS_BLOCKED))
 		if (feedback)
-			owner.balloon_alert(owner, "hands blocked!")
+			owner.balloon_alert(owner, "руки заняты!")
 		return FALSE
 	if((check_flags & AB_CHECK_IMMOBILE) && HAS_TRAIT(owner, TRAIT_IMMOBILIZED))
 		if (feedback)
-			owner.balloon_alert(owner, "can't move!")
+			owner.balloon_alert(owner, "не могу двигаться!")
 		return FALSE
 	if((check_flags & AB_CHECK_INCAPACITATED) && HAS_TRAIT(owner, TRAIT_INCAPACITATED))
 		if (feedback)
-			owner.balloon_alert(owner, "incapacitated!")
+			owner.balloon_alert(owner, "недееспособен!")
 		return FALSE
 	if((check_flags & AB_CHECK_LYING) && isliving(owner))
 		var/mob/living/action_owner = owner
 		if(action_owner.body_position == LYING_DOWN)
 			if (feedback)
-				owner.balloon_alert(owner, "must stand up!")
+				owner.balloon_alert(owner, "нужно встать!")
 			return FALSE
 	if((check_flags & AB_CHECK_PHASED) && HAS_TRAIT(owner, TRAIT_MAGICALLY_PHASED))
 		if (feedback)
-			owner.balloon_alert(owner, "incorporeal!")
+			owner.balloon_alert(owner, "бесплотен!")
 		return FALSE
 	if((check_flags & AB_CHECK_OPEN_TURF) && !isopenturf(owner.loc))
 		if (feedback)
-			owner.balloon_alert(owner, "not enough space!")
+			owner.balloon_alert(owner, "недостаточно места!")
 		return FALSE
 	return TRUE
 
@@ -439,7 +439,7 @@
 		full_key = null
 		update_button_status(current_button)
 		return
-	full_key = tgui_input_keycombo(user, "Please bind a key for this action.")
+	full_key = tgui_input_keycombo(user, "Пожалуйста, привяжите клавишу для этого действия.")
 	update_button_status(current_button)
 
 /datum/action/proc/keydown(mob/source, key, client/client, full_key)

@@ -16631,7 +16631,7 @@
 	dir = 1
 	},
 /obj/structure/table,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/suture,
 /obj/item/stack/medical/mesh,
 /obj/machinery/power/apc/auto_name/directional/north,
@@ -44593,7 +44593,7 @@
 	pixel_x = -4;
 	pixel_y = 8
 	},
-/obj/item/stack/medical/gauze{
+/obj/item/stack/medical/wrap/gauze{
 	pixel_x = 8
 	},
 /obj/item/reagent_containers/syringe,
@@ -62053,7 +62053,7 @@
 /obj/item/stock_parts/power_store/cell/bluespace{
 	pixel_x = -5;
 	pixel_y = -8;
-	rigged = 1
+	corrupted = 1
 	},
 /turf/open/misc/asteroid,
 /area/station/asteroid)
