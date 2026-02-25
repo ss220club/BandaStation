@@ -1767,7 +1767,8 @@
 				/datum/ipc_virus/sensor_noise,
 				/datum/ipc_virus/memory_leak,
 			)
-			infect(new pick(mild_types))
+			var/virus_type = pick(mild_types)
+			infect(new virus_type)
 			if(owner)
 				to_chat(owner, span_danger("СИСТЕМА: Обнаружено вторжение во время сканирования сети!"))
 			return TRUE
