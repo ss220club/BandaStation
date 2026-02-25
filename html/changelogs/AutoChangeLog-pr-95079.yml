@@ -1,0 +1,4 @@
+author: "Melbert"
+delete-after: True
+changes:
+  - rscadd: "Vitals monitors have USB ports, allowing circuits to read patient status"
