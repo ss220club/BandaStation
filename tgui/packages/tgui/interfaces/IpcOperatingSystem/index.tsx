@@ -2117,6 +2117,53 @@ function consoleLineColor(
   }
 }
 
+// ── Probe helpers ──────────────────────────────────────────────────────────
+
+function randomHex(len: number): string {
+  const chars = '0123456789ABCDEF';
+  return Array.from(
+    { length: len },
+    () => chars[Math.floor(Math.random() * 16)],
+  ).join('');
+}
+
+type ProbeNodeKind =
+  | 'empty'
+  | 'data'
+  | 'corrupted'
+  | 'hostile'
+  | 'bw_fragment'
+  | 'bw_address';
+
+function pickProbeNodeKind(bwFragments: number): ProbeNodeKind {
+  const r = Math.random();
+  if (r < 0.35) return 'empty';
+  if (r < 0.55) return 'data';
+  if (r < 0.68) return 'corrupted';
+  if (r < 0.80) return 'hostile';
+  // 20 % BW-related
+  return bwFragments >= 2 ? 'bw_address' : 'bw_fragment';
+}
+
+const EMPTY_MSGS = [
+  'Пустой пакет. Нет данных.',
+  'Мёртвый конец. Нет маршрута.',
+  'Стандартный трафик. Ничего интересного.',
+  'Узел неактивен.',
+];
+
+const DATA_MSGS = [
+  'Журнал сервисных запросов. Актуальность: 3 дня.',
+  'Системные метрики станции. CPU: норма, RAM: норма.',
+  'Медицинские логи. Стандартное шифрование.',
+  'Рабочие протоколы инженерного отдела. Рутина.',
+  'Пакет обновлений White Wall. Ничего подозрительного.',
+];
+
+function randPick<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
 /**
  * Встроенный терминал ОС.
  * Позволяет вводить команды, просматривать статус системы
@@ -2140,6 +2187,10 @@ const ConsoleApp = () => {
   ]);
   const [input, setInput] = useState('');
   const [nextId, setNextId] = useState(2);
+  /** How many probes done this cycle (resets to 0 on 3rd — anti-scan) */
+  const [probeCount, setProbeCount] = useState(0);
+  /** BW address fragments collected — persists through anti-scan resets */
+  const [bwFragments, setBwFragments] = useState(0);
   const [bypass, setBypass] = useState<BypassChallenge>({
     active: false,
     mode: 'bypass',
@@ -2333,48 +2384,107 @@ const ConsoleApp = () => {
           break;
         }
 
-        const bwAlready = safeBool(data.blackwall_unlocked);
-        const wwCount = safeArray(data.net_catalog).length;
+        if (safeBool(data.blackwall_unlocked)) {
+          addOutput([
+            { kind: 'success', text: '[BW] Нелегальный сегмент уже разблокирован.' },
+            {
+              kind: 'output',
+              text: `    Приложений: ${safeArray(data.black_wall_catalog).length} — смотри NET.`,
+            },
+          ]);
+          break;
+        }
+
+        // ── Anti-scan: every 3rd probe resets the cycle ──
+        const newCount = probeCount + 1;
+        if (newCount >= 3) {
+          setProbeCount(0);
+          addOutput([
+            { kind: 'system', text: '══════════════════════════════════════' },
+            { kind: 'error',  text: '  [ANTI-SCAN] СКАНИРОВАНИЕ ОБНАРУЖЕНО' },
+            { kind: 'system', text: '══════════════════════════════════════' },
+            { kind: 'error',  text: 'Сетевой стек сброшен. Буферы очищены.' },
+            { kind: 'output', text: 'Собранные данные уничтожены. Начните заново.' },
+          ]);
+          break;
+        }
+        setProbeCount(newCount);
+
+        const addr = `0x${randomHex(4)}:${randomHex(2)}:${randomHex(4)}`;
+        const nodeKind = pickProbeNodeKind(bwFragments);
 
         addOutput([
-          { kind: 'system', text: '=== NETWORK PROBE ===' },
-          { kind: 'output', text: 'Сканирование сетевых пакетов...' },
-          { kind: 'output', text: `White Wall:  ${wwCount} приложений [ОК]` },
-          { kind: 'output', text: 'Проверка стандартных протоколов... [ОК]' },
-          { kind: 'output', text: '...' },
+          {
+            kind: 'system',
+            text: `Зондирование [${addr}]... (${newCount}/2)`,
+          },
         ]);
 
-        if (bwAlready) {
-          addOutput([
-            {
-              kind: 'success',
-              text: '[!] Нелегальный сегмент: РАЗБЛОКИРОВАН',
-            },
-            {
-              kind: 'output',
-              text: `    Приложений в каталоге: ${safeArray(data.black_wall_catalog).length}`,
-            },
-            { kind: 'output', text: '    Смотри NET → нижняя секция.' },
-          ]);
-        } else {
-          addOutput([
-            {
-              kind: 'system',
-              text: '[!] Аномалия: зашифрованный трафик на нестандартных портах',
-            },
-            {
-              kind: 'system',
-              text: '[!] Сигнатура: BLACKWALL-SEGMENT / нелегальный рынок ПО',
-            },
-            {
-              kind: 'error',
-              text: '[!] Доступ: ЗАБЛОКИРОВАН — шифрование неизвестного типа',
-            },
-            {
-              kind: 'output',
-              text: '    Обнаружен скрытый раздел. Требуется взлом протокола.',
-            },
-          ]);
+        switch (nodeKind) {
+          case 'empty': {
+            addOutput([
+              { kind: 'output', text: `  → ${randPick(EMPTY_MSGS)}` },
+            ]);
+            break;
+          }
+
+          case 'data': {
+            addOutput([
+              { kind: 'output', text: `  → ${randPick(DATA_MSGS)}` },
+            ]);
+            break;
+          }
+
+          case 'corrupted': {
+            addOutput([
+              { kind: 'error',  text: '  → [ОШИБКА] Повреждённые пакеты. Парсинг неудачен.' },
+              { kind: 'output', text: '  → Фрагмент данных отброшен.' },
+            ]);
+            break;
+          }
+
+          case 'hostile': {
+            addOutput([
+              { kind: 'error', text: '  → [ВНИМАНИЕ] Обнаружен вредоносный код!' },
+              { kind: 'error', text: '  → Попытка инъекции... Файлы скомпрометированы.' },
+            ]);
+            act('probe_infect');
+            break;
+          }
+
+          case 'bw_fragment': {
+            const newFrag = bwFragments + 1;
+            setBwFragments(newFrag);
+            addOutput([
+              {
+                kind: 'system',
+                text: `  → [???] Нестандартная сигнатура. Обфусцированный адрес.`,
+              },
+              {
+                kind: 'system',
+                text: `  → [???] Фрагмент [${newFrag}/2]: 0x${randomHex(4)}...${randomHex(4)}`,
+              },
+              {
+                kind: 'output',
+                text: newFrag >= 2
+                  ? '  → Адрес частично восстановлен. Продолжайте сканирование.'
+                  : '  → Продолжайте сканирование.',
+              },
+            ]);
+            break;
+          }
+
+          case 'bw_address': {
+            addOutput([
+              { kind: 'system',  text: '  → [!!!] Полный маршрут восстановлен.' },
+              {
+                kind: 'success',
+                text: `  → Адрес: BLACKWALL-SEGMENT / 0x${randomHex(4)}:BW:${randomHex(4)}`,
+              },
+              { kind: 'success', text: '  → Нелегальный рынок ПО. Протокол взлома: netwall' },
+            ]);
+            break;
+          }
         }
         break;
       }

@@ -1529,7 +1529,7 @@
 
 /// Список действий, которые требуют подтверждения в permission-режиме
 /datum/ipc_operating_system/proc/is_sensitive_action(action)
-	return action in list("start_scan", "start_antivirus", "download_app", "cancel_download", "uninstall_app", "console_bypass", "unlock_blackwall")
+	return action in list("start_scan", "start_antivirus", "download_app", "cancel_download", "uninstall_app", "console_bypass", "unlock_blackwall", "probe_infect")
 
 /// Отключить удалённый доступ
 /datum/ipc_operating_system/proc/revoke_remote_access()
@@ -1758,6 +1758,18 @@
 				if(app.name == app_name)
 					uninstall_net_app(app)
 					break
+			return TRUE
+
+		// Заражение через враждебный узел при сканировании сети
+		if("probe_infect")
+			var/list/mild_types = list(
+				/datum/ipc_virus/display_glitch,
+				/datum/ipc_virus/sensor_noise,
+				/datum/ipc_virus/memory_leak,
+			)
+			infect(new pick(mild_types))
+			if(owner)
+				to_chat(owner, span_danger("СИСТЕМА: Обнаружено вторжение во время сканирования сети!"))
 			return TRUE
 
 		// Разблокировка доступа к Black Wall через консоль
