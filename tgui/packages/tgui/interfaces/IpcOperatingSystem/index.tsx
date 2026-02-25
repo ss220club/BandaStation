@@ -2135,6 +2135,12 @@ type ProbeNodeKind =
   | 'bw_fragment'
   | 'bw_address';
 
+type ScannedNode = {
+  addr: string;
+  kind: ProbeNodeKind;
+  probed: boolean;
+};
+
 function pickProbeNodeKind(bwFragments: number): ProbeNodeKind {
   const r = Math.random();
   if (r < 0.35) return 'empty';
@@ -2187,10 +2193,12 @@ const ConsoleApp = () => {
   ]);
   const [input, setInput] = useState('');
   const [nextId, setNextId] = useState(2);
-  /** How many probes done this cycle (resets to 0 on 3rd — anti-scan) */
+  /** How many nodes probed this cycle (resets to 0 on 3rd — anti-scan) */
   const [probeCount, setProbeCount] = useState(0);
   /** BW address fragments collected — persists through anti-scan resets */
   const [bwFragments, setBwFragments] = useState(0);
+  /** Current list of scanned network nodes (empty = not scanned yet) */
+  const [scannedNodes, setScannedNodes] = useState<ScannedNode[]>([]);
   const [bypass, setBypass] = useState<BypassChallenge>({
     active: false,
     mode: 'bypass',
@@ -2297,13 +2305,14 @@ const ConsoleApp = () => {
       case 'help': {
         addOutput([
           { kind: 'output', text: 'Команды:' },
-          { kind: 'output', text: '  help    — эта справка' },
-          { kind: 'output', text: '  status  — состояние системы' },
-          { kind: 'output', text: '  sysinfo — подробная информация' },
-          { kind: 'output', text: '  apps    — установленные приложения' },
-          { kind: 'output', text: '  probe   — сканирование сети' },
-          { kind: 'output', text: '  scan    — запустить диагностику систем' },
-          { kind: 'output', text: '  clear   — очистить терминал' },
+          { kind: 'output', text: '  help       — эта справка' },
+          { kind: 'output', text: '  status     — состояние системы' },
+          { kind: 'output', text: '  sysinfo    — подробная информация' },
+          { kind: 'output', text: '  apps       — установленные приложения' },
+          { kind: 'output', text: '  probe      — сканировать ближайшие узлы' },
+          { kind: 'output', text: '  probe [N]  — зондировать узел N из списка' },
+          { kind: 'output', text: '  scan       — запустить диагностику систем' },
+          { kind: 'output', text: '  clear      — очистить терминал' },
         ]);
         break;
       }
@@ -2378,7 +2387,7 @@ const ConsoleApp = () => {
       case 'probe': {
         if (!data.network_connected) {
           addOutput([
-            { kind: 'error', text: 'Нет подключения к сети.' },
+            { kind: 'error',  text: 'Нет подключения к сети.' },
             { kind: 'output', text: 'Встаньте на сетевой кабель.' },
           ]);
           break;
@@ -2387,51 +2396,98 @@ const ConsoleApp = () => {
         if (safeBool(data.blackwall_unlocked)) {
           addOutput([
             { kind: 'success', text: '[BW] Нелегальный сегмент уже разблокирован.' },
-            {
-              kind: 'output',
-              text: `    Приложений: ${safeArray(data.black_wall_catalog).length} — смотри NET.`,
-            },
+            { kind: 'output',  text: `    Приложений: ${safeArray(data.black_wall_catalog).length} — смотри NET.` },
           ]);
           break;
         }
 
-        // ── Anti-scan: every 3rd probe resets the cycle ──
+        const probeArg = parts.slice(1).join('').trim();
+
+        // ── probe (no arg) — SCAN: generate fresh node list ──────────────
+        if (!probeArg) {
+          const nodeCount = 4 + Math.floor(Math.random() * 3); // 4–6
+          const freshNodes: ScannedNode[] = Array.from(
+            { length: nodeCount },
+            () => ({
+              addr: `0x${randomHex(4)}:${randomHex(2)}:${randomHex(4)}`,
+              kind: pickProbeNodeKind(bwFragments),
+              probed: false,
+            }),
+          );
+          setScannedNodes(freshNodes);
+
+          addOutput([
+            { kind: 'system', text: 'Сканирование ближайших узлов...' },
+            { kind: 'output', text: `Обнаружено ${nodeCount} точек доступа:` },
+            ...freshNodes.map((n, i) => ({
+              kind: 'output' as ConsoleLineKind,
+              text: `  [${i + 1}]  ${n.addr}   — неизвестно`,
+            })),
+            { kind: 'output', text: '' },
+            { kind: 'output', text: 'Используйте: probe [N] для зондирования' },
+          ]);
+          break;
+        }
+
+        // ── probe [N] — PROBE a specific node ────────────────────────────
+        const nodeIdx = parseInt(probeArg, 10) - 1;
+
+        if (scannedNodes.length === 0) {
+          addOutput([
+            { kind: 'error', text: 'Нет активного списка узлов.' },
+            { kind: 'output', text: 'Запустите probe без аргументов для сканирования.' },
+          ]);
+          break;
+        }
+
+        if (isNaN(nodeIdx) || nodeIdx < 0 || nodeIdx >= scannedNodes.length) {
+          addOutput([
+            { kind: 'error', text: `Неверный номер. Доступно: 1–${scannedNodes.length}` },
+          ]);
+          break;
+        }
+
+        const node = scannedNodes[nodeIdx];
+        if (node.probed) {
+          addOutput([
+            { kind: 'output', text: `[${node.addr}] — уже зондировался.` },
+          ]);
+          break;
+        }
+
+        // Anti-scan check — every 3rd probe resets cycle + node list
         const newCount = probeCount + 1;
         if (newCount >= 3) {
           setProbeCount(0);
+          setScannedNodes([]);
           addOutput([
             { kind: 'system', text: '══════════════════════════════════════' },
             { kind: 'error',  text: '  [ANTI-SCAN] СКАНИРОВАНИЕ ОБНАРУЖЕНО' },
             { kind: 'system', text: '══════════════════════════════════════' },
-            { kind: 'error',  text: 'Сетевой стек сброшен. Буферы очищены.' },
-            { kind: 'output', text: 'Собранные данные уничтожены. Начните заново.' },
+            { kind: 'error',  text: 'Сетевой стек сброшен. Список узлов очищен.' },
+            { kind: 'output', text: 'Запустите probe для повторного сканирования.' },
           ]);
           break;
         }
         setProbeCount(newCount);
 
-        const addr = `0x${randomHex(4)}:${randomHex(2)}:${randomHex(4)}`;
-        const nodeKind = pickProbeNodeKind(bwFragments);
+        // Mark node as probed
+        setScannedNodes((prev) =>
+          prev.map((n, i) => (i === nodeIdx ? { ...n, probed: true } : n)),
+        );
 
         addOutput([
-          {
-            kind: 'system',
-            text: `Зондирование [${addr}]... (${newCount}/2)`,
-          },
+          { kind: 'system', text: `Зондирование [${node.addr}]... (${newCount}/2)` },
         ]);
 
-        switch (nodeKind) {
+        switch (node.kind) {
           case 'empty': {
-            addOutput([
-              { kind: 'output', text: `  → ${randPick(EMPTY_MSGS)}` },
-            ]);
+            addOutput([{ kind: 'output', text: `  → ${randPick(EMPTY_MSGS)}` }]);
             break;
           }
 
           case 'data': {
-            addOutput([
-              { kind: 'output', text: `  → ${randPick(DATA_MSGS)}` },
-            ]);
+            addOutput([{ kind: 'output', text: `  → ${randPick(DATA_MSGS)}` }]);
             break;
           }
 
@@ -2456,14 +2512,8 @@ const ConsoleApp = () => {
             const newFrag = bwFragments + 1;
             setBwFragments(newFrag);
             addOutput([
-              {
-                kind: 'system',
-                text: `  → [???] Нестандартная сигнатура. Обфусцированный адрес.`,
-              },
-              {
-                kind: 'system',
-                text: `  → [???] Фрагмент [${newFrag}/2]: 0x${randomHex(4)}...${randomHex(4)}`,
-              },
+              { kind: 'system', text: '  → [???] Нестандартная сигнатура. Обфусцированный адрес.' },
+              { kind: 'system', text: `  → [???] Фрагмент [${newFrag}/2]: 0x${randomHex(4)}...${randomHex(4)}` },
               {
                 kind: 'output',
                 text: newFrag >= 2
@@ -2477,10 +2527,7 @@ const ConsoleApp = () => {
           case 'bw_address': {
             addOutput([
               { kind: 'system',  text: '  → [!!!] Полный маршрут восстановлен.' },
-              {
-                kind: 'success',
-                text: `  → Адрес: BLACKWALL-SEGMENT / 0x${randomHex(4)}:BW:${randomHex(4)}`,
-              },
+              { kind: 'success', text: `  → Адрес: BLACKWALL-SEGMENT / 0x${randomHex(4)}:BW:${randomHex(4)}` },
               { kind: 'success', text: '  → Нелегальный рынок ПО. Протокол взлома: netwall' },
             ]);
             break;
@@ -2695,8 +2742,8 @@ const ConsoleApp = () => {
         style={{
           overflow: 'auto',
           fontFamily: monoFont,
-          fontSize: '0.82em',
-          lineHeight: '1.5',
+          fontSize: '0.92em',
+          lineHeight: '1.6',
         }}
       >
         <Box p={1}>
