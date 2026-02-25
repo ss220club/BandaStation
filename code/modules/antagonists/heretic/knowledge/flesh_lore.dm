@@ -1,7 +1,7 @@
 /datum/heretic_knowledge_tree_column/flesh
 	route = PATH_FLESH
 	ui_bgr = "node_flesh"
-	complexity = "Varies"
+	complexity = "Изменчивая"
 	complexity_color = COLOR_ORANGE
 	icon = list(
 		"icon" = 'icons/obj/weapons/khopesh.dmi',

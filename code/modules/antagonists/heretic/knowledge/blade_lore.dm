@@ -1,7 +1,7 @@
 /datum/heretic_knowledge_tree_column/blade
 	route = PATH_BLADE
 	ui_bgr = "node_blade"
-	complexity = "Hard"
+	complexity = "Высокая"
 	complexity_color = COLOR_RED
 	icon = list(
 		"icon" = 'icons/obj/weapons/khopesh.dmi',

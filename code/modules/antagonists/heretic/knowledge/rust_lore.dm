@@ -1,7 +1,7 @@
 /datum/heretic_knowledge_tree_column/rust
 	route = PATH_RUST
 	ui_bgr = "node_rust"
-	complexity = "Medium"
+	complexity = "Умеренная"
 	complexity_color = COLOR_YELLOW
 	icon = list(
 		"icon" = 'icons/obj/weapons/khopesh.dmi',
