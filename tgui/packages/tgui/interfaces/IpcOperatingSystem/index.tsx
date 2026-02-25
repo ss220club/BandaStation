@@ -1709,7 +1709,6 @@ const NetAppScreen = () => {
   const { theme_color, style } = useOsTheme();
 
   const network_connected = safeBool(data.network_connected);
-  const net_wall = safeStr(data.net_wall, 'white');
   const net_catalog = safeArray(data.net_catalog);
   const black_wall_catalog = safeArray(data.black_wall_catalog);
   const installed_apps = safeArray(data.installed_apps);
@@ -1717,9 +1716,6 @@ const NetAppScreen = () => {
   const download_progress = safeNum(data.download_progress, 0);
   const download_app_name = safeStr(data.download_app_name, '');
   const blackwall_unlocked = safeBool(data.blackwall_unlocked);
-
-  const catalog = net_wall === 'black' ? black_wall_catalog : net_catalog;
-  const isBlack = net_wall === 'black';
 
   return (
     <Flex direction="column" height="100%">
@@ -1755,90 +1751,8 @@ const NetAppScreen = () => {
             </Box>
           </Box>
 
-          {/* Wall tabs */}
-          <Tabs>
-            <Tabs.Tab
-              icon="building"
-              selected={!isBlack}
-              onClick={() => act('switch_wall', { wall: 'white' })}
-            >
-              White Wall
-            </Tabs.Tab>
-            <Tabs.Tab
-              icon="skull-crossbones"
-              selected={isBlack}
-              onClick={() => act('switch_wall', { wall: 'black' })}
-              color={isBlack ? 'bad' : undefined}
-            >
-              Black Wall
-            </Tabs.Tab>
-          </Tabs>
-
-          {/* Black Wall: locked gate или статус */}
-          {isBlack && !blackwall_unlocked && (
-            <Box
-              mt={2}
-              mx={1}
-              p={2}
-              textAlign="center"
-              style={{
-                border: '1px solid rgba(200,0,0,0.35)',
-                borderRadius: '6px',
-                background: 'rgba(180,0,0,0.07)',
-              }}
-            >
-              <Box
-                style={{ fontSize: '2.6em', color: '#cc3333', lineHeight: 1 }}
-                mb={1}
-              >
-                <Icon name="lock" />
-              </Box>
-              <Box bold fontSize="1.05em" color="bad" mb={1}>
-                BLACKWALL — ДОСТУП ЗАПРЕЩЁН
-              </Box>
-              <Box fontSize="0.82em" color="label" mb={2}>
-                Для просмотра нелегального раздела сети необходимо взломать
-                защитный протокол.
-              </Box>
-              <Box
-                p={1}
-                style={{
-                  border: '1px solid rgba(200,50,50,0.3)',
-                  borderRadius: '4px',
-                  background: 'rgba(0,0,0,0.3)',
-                  fontFamily: '"Courier New", monospace',
-                  fontSize: '0.82em',
-                  color: '#cc5555',
-                }}
-              >
-                <Icon name="terminal" mr={0.5} />
-                Консоль →{' '}
-                <Box as="span" bold style={{ color: '#ff7777' }}>
-                  netwall
-                </Box>
-              </Box>
-            </Box>
-          )}
-
-          {isBlack && blackwall_unlocked && (
-            <Box
-              p={0.5}
-              mb={1}
-              textAlign="center"
-              fontSize="0.75em"
-              color="bad"
-              style={{
-                background: 'rgba(200,0,0,0.08)',
-                borderBottom: '1px solid rgba(200,0,0,0.2)',
-              }}
-            >
-              <Icon name="exclamation-triangle" mr={0.5} />
-              ВНИМАНИЕ: Нелегальное ПО. Использование на свой страх и риск.
-            </Box>
-          )}
-
-          {/* Download progress — only when catalog accessible */}
-          {downloading && (!isBlack || blackwall_unlocked) && (
+          {/* Download progress */}
+          {downloading && (
             <Box mb={1}>
               <Box fontSize="0.8em" color="label" mb={0.3}>
                 <Icon name="download" mr={0.5} />
@@ -1868,8 +1782,8 @@ const NetAppScreen = () => {
             </Box>
           )}
 
-          {/* App catalog — hidden when BW is locked */}
-          {isBlack && !blackwall_unlocked ? null : !network_connected ? (
+          {/* WHITE WALL catalog */}
+          {!network_connected ? (
             <Box textAlign="center" color="label" p={2}>
               <Icon name="plug" size={2} mb={1} />
               <Box bold>Каталог недоступен</Box>
@@ -1878,85 +1792,68 @@ const NetAppScreen = () => {
               </Box>
             </Box>
           ) : (
-            <Table>
-              <Table.Row header>
-                <Table.Cell width="28%">Приложение</Table.Cell>
-                <Table.Cell width="32%">Описание</Table.Cell>
-                <Table.Cell width="12%">Тип</Table.Cell>
-                <Table.Cell width="10%">Размер</Table.Cell>
-                <Table.Cell width="18%">Действие</Table.Cell>
-              </Table.Row>
-              {catalog.map((app, idx) => (
-                <Table.Row key={idx}>
-                  <Table.Cell>
-                    <Box bold fontSize="0.85em">
-                      <Icon
-                        name={isBlack ? 'skull' : 'cube'}
-                        mr={0.3}
-                        color={isBlack ? 'bad' : 'label'}
-                      />
-                      {app.name}
-                    </Box>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Box fontSize="0.75em" color="label">
-                      {app.desc}
-                    </Box>
-                  </Table.Cell>
-                  <Table.Cell>
+            <NetCatalogTable
+              apps={net_catalog}
+              downloading={downloading}
+              isBlack={false}
+              onDownload={(name) =>
+                act('download_app', { app_name: name, wall: 'white' })
+              }
+              onUninstall={(name) => act('uninstall_app', { app_name: name })}
+            />
+          )}
+
+          {/* BLACK WALL — appears only after unlock */}
+          {blackwall_unlocked && network_connected && (
+            <Box mt={2}>
+              {/* Separator */}
+              <Box
+                mb={1}
+                style={{
+                  borderTop: '1px solid rgba(180,0,0,0.4)',
+                  paddingTop: '8px',
+                }}
+              >
+                <Flex align="center" justify="space-between">
+                  <Flex.Item>
                     <Box
-                      fontSize="0.7em"
-                      color={
-                        app.category === 'exploit'
-                          ? 'bad'
-                          : app.category === 'mod'
-                            ? 'average'
-                            : app.category === 'diagnostic'
-                              ? 'good'
-                              : 'label'
-                      }
+                      bold
+                      fontSize="0.78em"
+                      style={{
+                        color: '#cc3333',
+                        letterSpacing: '2px',
+                        fontFamily: '"Courier New", monospace',
+                        textShadow: '0 0 8px rgba(200,0,0,0.5)',
+                      }}
                     >
-                      {getCategoryLabel(app.category)}
+                      <Icon name="skull-crossbones" mr={0.5} />
+                      ▓ BLACKWALL ▓
                     </Box>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Box fontSize="0.7em" color="label">
-                      {app.file_size || 256} КБ
+                  </Flex.Item>
+                  <Flex.Item>
+                    <Box
+                      fontSize="0.68em"
+                      color="bad"
+                      style={{ opacity: 0.7 }}
+                    >
+                      нелегальный раздел
                     </Box>
-                  </Table.Cell>
-                  <Table.Cell>
-                    {safeBool(app.installed) ? (
-                      <Button
-                        compact
-                        color="bad"
-                        icon="trash"
-                        disabled={downloading}
-                        onClick={() =>
-                          act('uninstall_app', { app_name: app.name })
-                        }
-                      >
-                        Удалить
-                      </Button>
-                    ) : (
-                      <Button
-                        compact
-                        color={isBlack ? 'caution' : 'good'}
-                        icon="download"
-                        disabled={downloading}
-                        onClick={() =>
-                          act('download_app', {
-                            app_name: app.name,
-                            wall: net_wall,
-                          })
-                        }
-                      >
-                        Скачать
-                      </Button>
-                    )}
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table>
+                  </Flex.Item>
+                </Flex>
+              </Box>
+
+              <NetCatalogTable
+                apps={black_wall_catalog}
+                downloading={downloading}
+                isBlack={true}
+                onDownload={(name) =>
+                  act('download_app', { app_name: name, wall: 'black' })
+                }
+                onUninstall={(name) =>
+                  act('uninstall_app', { app_name: name })
+                }
+              />
+            </Box>
           )}
 
           {/* Installed apps */}
@@ -2007,6 +1904,102 @@ const NetAppScreen = () => {
         </Box>
       </Flex.Item>
     </Flex>
+  );
+};
+
+// Вспомогательная таблица каталога — для WW и BW
+type NetCatalogTableProps = {
+  apps: NetApp[];
+  downloading: boolean;
+  isBlack: boolean;
+  onDownload: (name: string) => void;
+  onUninstall: (name: string) => void;
+};
+
+const NetCatalogTable = (props: NetCatalogTableProps) => {
+  const { apps, downloading, isBlack, onDownload, onUninstall } = props;
+
+  if (apps.length === 0) {
+    return (
+      <Box textAlign="center" color="label" p={1} fontSize="0.85em">
+        Каталог пуст.
+      </Box>
+    );
+  }
+
+  return (
+    <Table>
+      <Table.Row header>
+        <Table.Cell width="28%">Приложение</Table.Cell>
+        <Table.Cell width="34%">Описание</Table.Cell>
+        <Table.Cell width="12%">Тип</Table.Cell>
+        <Table.Cell width="8%">КБ</Table.Cell>
+        <Table.Cell width="18%">Действие</Table.Cell>
+      </Table.Row>
+      {apps.map((app, idx) => (
+        <Table.Row key={idx}>
+          <Table.Cell>
+            <Box bold fontSize="0.85em">
+              <Icon
+                name={isBlack ? 'skull' : 'cube'}
+                mr={0.3}
+                color={isBlack ? 'bad' : 'label'}
+              />
+              {app.name}
+            </Box>
+          </Table.Cell>
+          <Table.Cell>
+            <Box fontSize="0.75em" color="label">
+              {app.desc}
+            </Box>
+          </Table.Cell>
+          <Table.Cell>
+            <Box
+              fontSize="0.7em"
+              color={
+                app.category === 'exploit'
+                  ? 'bad'
+                  : app.category === 'mod'
+                    ? 'average'
+                    : app.category === 'diagnostic'
+                      ? 'good'
+                      : 'label'
+              }
+            >
+              {getCategoryLabel(app.category)}
+            </Box>
+          </Table.Cell>
+          <Table.Cell>
+            <Box fontSize="0.7em" color="label">
+              {app.file_size || 256}
+            </Box>
+          </Table.Cell>
+          <Table.Cell>
+            {safeBool(app.installed) ? (
+              <Button
+                compact
+                color="bad"
+                icon="trash"
+                disabled={downloading}
+                onClick={() => onUninstall(app.name)}
+              >
+                Удалить
+              </Button>
+            ) : (
+              <Button
+                compact
+                color={isBlack ? 'caution' : 'good'}
+                icon="download"
+                disabled={downloading}
+                onClick={() => onDownload(app.name)}
+              >
+                Скачать
+              </Button>
+            )}
+          </Table.Cell>
+        </Table.Row>
+      ))}
+    </Table>
   );
 };
 
@@ -2253,15 +2246,13 @@ const ConsoleApp = () => {
       case 'help': {
         addOutput([
           { kind: 'output', text: 'Команды:' },
-          { kind: 'output', text: '  help              — эта справка' },
-          { kind: 'output', text: '  status            — состояние системы' },
-          { kind: 'output', text: '  sysinfo           — подробная информация' },
-          { kind: 'output', text: '  apps              — установленные приложения' },
-          { kind: 'output', text: '  catalog           — каталог Blackwall' },
-          { kind: 'output', text: '  scan              — запустить диагностику' },
-          { kind: 'output', text: '  netwall           — взломать доступ к Black Wall' },
-          { kind: 'output', text: '  bypass [app]      — установить BW программу напрямую' },
-          { kind: 'output', text: '  clear             — очистить терминал' },
+          { kind: 'output', text: '  help    — эта справка' },
+          { kind: 'output', text: '  status  — состояние системы' },
+          { kind: 'output', text: '  sysinfo — подробная информация' },
+          { kind: 'output', text: '  apps    — установленные приложения' },
+          { kind: 'output', text: '  probe   — сканирование сети' },
+          { kind: 'output', text: '  scan    — запустить диагностику систем' },
+          { kind: 'output', text: '  clear   — очистить терминал' },
         ]);
         break;
       }
@@ -2272,14 +2263,19 @@ const ConsoleApp = () => {
           virusCount > 0
             ? `УГРОЗЫ: ${virusCount} (${data.has_serious_viruses ? 'КРИТИЧНО' : 'средне'})`
             : 'Угрозы не обнаружены';
+        const netStatus = data.network_connected
+          ? safeBool(data.blackwall_unlocked)
+            ? 'ONLINE [BW разблокирован]'
+            : 'ONLINE [аномалия — probe]'
+          : 'OFFLINE';
         addOutput([
           {
             kind: 'output',
             text: `ОС: ${data.os_name ?? '?'} v${data.os_version ?? '?'}`,
           },
           {
-            kind: 'output',
-            text: `Сеть: ${data.network_connected ? 'ONLINE' : 'OFFLINE'}`,
+            kind: data.network_connected ? 'output' : 'error',
+            text: `Сеть: ${netStatus}`,
           },
           { kind: 'output', text: `Антивирус: ${virusLine}` },
           {
@@ -2328,19 +2324,56 @@ const ConsoleApp = () => {
         break;
       }
 
-      case 'catalog': {
-        const bw = safeArray(data.black_wall_catalog);
-        if (bw.length === 0) {
+      case 'probe': {
+        if (!data.network_connected) {
           addOutput([
-            { kind: 'output', text: 'Blackwall каталог пуст.' },
+            { kind: 'error', text: 'Нет подключения к сети.' },
+            { kind: 'output', text: 'Встаньте на сетевой кабель.' },
+          ]);
+          break;
+        }
+
+        const bwAlready = safeBool(data.blackwall_unlocked);
+        const wwCount = safeArray(data.net_catalog).length;
+
+        addOutput([
+          { kind: 'system', text: '=== NETWORK PROBE ===' },
+          { kind: 'output', text: 'Сканирование сетевых пакетов...' },
+          { kind: 'output', text: `White Wall:  ${wwCount} приложений [ОК]` },
+          { kind: 'output', text: 'Проверка стандартных протоколов... [ОК]' },
+          { kind: 'output', text: '...' },
+        ]);
+
+        if (bwAlready) {
+          addOutput([
+            {
+              kind: 'success',
+              text: '[!] Нелегальный сегмент: РАЗБЛОКИРОВАН',
+            },
+            {
+              kind: 'output',
+              text: `    Приложений в каталоге: ${safeArray(data.black_wall_catalog).length}`,
+            },
+            { kind: 'output', text: '    Смотри NET → нижняя секция.' },
           ]);
         } else {
           addOutput([
-            { kind: 'system', text: '=== BLACKWALL CATALOG ===' },
-            ...bw.map((app) => ({
-              kind: 'output' as ConsoleLineKind,
-              text: `  ${app.installed ? '[+]' : '[ ]'} ${app.name}  ${app.file_size}кб`,
-            })),
+            {
+              kind: 'system',
+              text: '[!] Аномалия: зашифрованный трафик на нестандартных портах',
+            },
+            {
+              kind: 'system',
+              text: '[!] Сигнатура: BLACKWALL-SEGMENT / нелегальный рынок ПО',
+            },
+            {
+              kind: 'error',
+              text: '[!] Доступ: ЗАБЛОКИРОВАН — шифрование неизвестного типа',
+            },
+            {
+              kind: 'output',
+              text: '    Обнаружен скрытый раздел. Требуется взлом протокола.',
+            },
           ]);
         }
         break;
