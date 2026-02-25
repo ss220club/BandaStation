@@ -34,34 +34,34 @@
 		if("unbranded")
 			return "FreeOS"
 		if("hef")
-			return "PatchworkOS"
+			return "Yūrei OS"
 	return "GenericOS"
 
 /// Возвращает цвет темы ОС по ключу бренда
 /proc/get_ipc_os_theme_color(brand_key)
 	switch(brand_key)
 		if("morpheus")
-			return "#4a90d9"
+			return "#9b59d9"  // Корпоративный фиолет
 		if("etamin")
-			return "#d94a4a"
+			return "#d94a4a"  // Военный красный
 		if("bishop")
-			return "#4ad9a5"
+			return "#4a8fd9"  // Медицинский стальной синий
 		if("hesphiastos")
-			return "#d98f4a"
+			return "#4a8a3a"  // Военный зелёный
 		if("ward_takahashi")
-			return "#8f4ad9"
+			return "#9a9aaa"  // Элегантный серый
 		if("xion")
-			return "#4ad9d9"
+			return "#d97820"  // Инженерный оранжевый
 		if("zeng_hu")
-			return "#a5d94a"
+			return "#d4845a"  // Тёплый коралл
 		if("shellguard")
-			return "#7a7a7a"
+			return "#aa1111"  // Тёмно-красный
 		if("cybersun")
-			return "#d94a8f"
+			return "#dd1133"  // Зловещий алый неон
 		if("unbranded")
-			return "#5a8a5a"
+			return "#5aff5a"  // Фосфорный зелёный
 		if("hef")
-			return "#8a8a5a"
+			return "#9060cc"  // Призрачный фиолет
 	return "#6a6a6a"
 
 // ============================================
@@ -791,6 +791,8 @@
 	var/network_connected = FALSE
 	/// Выбранная стена: "white" или "black"
 	var/net_wall = "white"
+	/// Разблокирован ли доступ к Black Wall
+	var/blackwall_unlocked = FALSE
 	/// Доступные приложения (White Wall)
 	var/list/net_catalog = list()
 	/// Доступные приложения (Black Wall)
@@ -1440,6 +1442,10 @@
 			return "Удалить приложение: [action_params["app_name"]]"
 		if("cancel_download")
 			return "Отменить загрузку"
+		if("console_bypass")
+			return "Консоль: Blackwall-обход для [action_params["app_name"]]"
+		if("unlock_blackwall")
+			return "Консоль: Разблокировать доступ к Black Wall"
 	return "Неизвестное действие"
 
 /// Запросить подтверждение действия у владельца
@@ -1523,7 +1529,7 @@
 
 /// Список действий, которые требуют подтверждения в permission-режиме
 /datum/ipc_operating_system/proc/is_sensitive_action(action)
-	return action in list("start_scan", "start_antivirus", "download_app", "cancel_download", "uninstall_app")
+	return action in list("start_scan", "start_antivirus", "download_app", "cancel_download", "uninstall_app", "console_bypass", "unlock_blackwall", "probe_infect")
 
 /// Отключить удалённый доступ
 /datum/ipc_operating_system/proc/revoke_remote_access()
@@ -1603,6 +1609,7 @@
 	check_network_connection()
 	data["network_connected"] = network_connected
 	data["net_wall"] = net_wall
+	data["blackwall_unlocked"] = blackwall_unlocked
 
 	// Загрузка
 	data["downloading"] = downloading
@@ -1712,7 +1719,7 @@
 
 		if("open_app")
 			var/app_name = params["app"]
-			if(app_name in list("desktop", "diagnostics", "antivirus", "net"))
+			if(app_name in list("desktop", "diagnostics", "antivirus", "net", "console"))
 				current_app = app_name
 				current_installed_app_name = ""
 			return TRUE
@@ -1750,6 +1757,41 @@
 			for(var/datum/ipc_netapp/app in installed_apps)
 				if(app.name == app_name)
 					uninstall_net_app(app)
+					break
+			return TRUE
+
+		// Заражение через враждебный узел при сканировании сети
+		if("probe_infect")
+			var/list/mild_types = list(
+				/datum/ipc_virus/display_glitch,
+				/datum/ipc_virus/sensor_noise,
+				/datum/ipc_virus/memory_leak,
+			)
+			var/virus_type = pick(mild_types)
+			infect(new virus_type)
+			if(owner)
+				to_chat(owner, span_danger("СИСТЕМА: Обнаружено вторжение во время сканирования сети!"))
+			return TRUE
+
+		// Разблокировка доступа к Black Wall через консоль
+		if("unlock_blackwall")
+			if(!network_connected)
+				return FALSE
+			blackwall_unlocked = TRUE
+			if(owner)
+				to_chat(owner, span_warning("⚡ КОНСОЛЬ: Доступ к Black Wall получен. Нелегальный раздел сети разблокирован."))
+			return TRUE
+
+		// Обход Blackwall через консоль — мини-игра завершена успешно
+		if("console_bypass")
+			var/app_name = params["app_name"]
+			if(!app_name || !network_connected)
+				return FALSE
+			for(var/datum/ipc_netapp/app in black_wall_catalog)
+				if(app.name == app_name && !app.installed)
+					start_download(app)
+					if(owner)
+						to_chat(owner, span_warning("⚡ КОНСОЛЬ: Blackwall-обход активирован — [app_name] устанавливается."))
 					break
 			return TRUE
 

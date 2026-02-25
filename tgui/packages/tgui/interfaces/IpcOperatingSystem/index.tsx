@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Box,
   Button,
@@ -14,6 +20,12 @@ import {
 } from 'tgui-core/components';
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
+import {
+  ALL_BRAND_KEYS,
+  getOsBrandColor,
+  getOsStyle,
+  getOsStyleName,
+} from './os-styles';
 
 // ============================================
 // TYPES
@@ -84,6 +96,7 @@ type IpcOsData = {
   viruses: Virus[];
   network_connected: boolean;
   net_wall: string;
+  blackwall_unlocked: boolean;
   downloading: boolean;
   download_progress: number;
   download_app_name: string;
@@ -105,6 +118,40 @@ type IpcOsData = {
   pda_has_id: boolean;
   pda_id_name: string;
 };
+
+// ============================================
+// DEBUG STYLE CONTEXT
+// ============================================
+
+type DebugStyleContextType = {
+  debugBrand: string | null;
+  setDebugBrand: (brand: string | null) => void;
+};
+
+const DebugStyleContext = React.createContext<DebugStyleContextType>({
+  debugBrand: null,
+  setDebugBrand: () => {},
+});
+
+/**
+ * Хук для получения активной темы ОС.
+ * Если активен дебаг-оверрайд — возвращает его стиль, иначе — реальный из backend.
+ */
+function useOsTheme() {
+  const { data } = useBackend<IpcOsData>();
+  const { debugBrand } = useContext(DebugStyleContext);
+
+  const effectiveBrand = debugBrand ?? safeStr(data.brand_key, 'unbranded');
+  const theme_color = debugBrand
+    ? getOsBrandColor(debugBrand)
+    : safeStr(data.theme_color, '#6a6a6a');
+  const os_name = debugBrand
+    ? getOsStyleName(debugBrand)
+    : safeStr(data.os_name, 'IPC-OS');
+  const style = getOsStyle(effectiveBrand);
+
+  return { theme_color, brand_key: effectiveBrand, os_name, style };
+}
 
 // ============================================
 // SAFE DATA ACCESS HELPERS
@@ -132,32 +179,242 @@ function safeBool(val: boolean | number | null | undefined): boolean {
 
 export const IpcOperatingSystem = () => {
   const { data } = useBackend<IpcOsData>();
+  const [debugBrand, setDebugBrand] = useState<string | null>(null);
+
+  const effectiveBrand = debugBrand ?? safeStr(data.brand_key, 'unbranded');
+  const theme_color = debugBrand
+    ? getOsBrandColor(debugBrand)
+    : safeStr(data.theme_color, '#6a6a6a');
+  const os_name = debugBrand
+    ? getOsStyleName(debugBrand)
+    : safeStr(data.os_name, 'IPC-OS');
+  const style = getOsStyle(effectiveBrand);
 
   const logged_in = safeBool(data.logged_in);
   const current_app = safeStr(data.current_app, 'desktop');
-  const os_name = safeStr(data.os_name, 'IPC-OS');
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
+
+  // Высота дебаг-бара в пикселях — контент ниже него сдвигается на это значение
+  const DEBUG_BAR_H = 28;
 
   return (
-    <Window width={700} height={650} title={os_name}>
-      <Window.Content
-        style={{
-          background: `linear-gradient(135deg, rgba(0,0,0,0.95) 0%, ${hexToRgba(theme_color, 0.15)} 50%, rgba(0,0,0,0.95) 100%)`,
-        }}
-      >
-        {!logged_in ? (
-          <LoginScreen />
-        ) : (
-          <>
-            {current_app === 'desktop' && <DesktopScreen />}
-            {current_app === 'diagnostics' && <DiagnosticsApp />}
-            {current_app === 'antivirus' && <AntivirusApp />}
-            {current_app === 'net' && <NetAppScreen />}
-            {current_app === 'installed_app' && <InstalledAppScreen />}
-          </>
-        )}
-      </Window.Content>
-    </Window>
+    <DebugStyleContext.Provider value={{ debugBrand, setDebugBrand }}>
+      <Window width={700} height={650} title={os_name}>
+        {/*
+          fitted — убирает Window__contentPadding-обёртку, дети рендерятся
+          прямо в Layout.Content (position: absolute; inset: 0).
+          Это позволяет нам самим управлять абсолютными позициями внутри.
+        */}
+        <Window.Content
+          fitted
+          style={{
+            background: style.bgStyle,
+            fontFamily:
+              style.fontFamily === 'monospace'
+                ? '"Courier New", Courier, monospace'
+                : 'inherit',
+          }}
+        >
+          {/* Сканлайны — CRT-оверлей поверх всего */}
+          {style.scanlines && style.scanlinesOpacity > 0 && (
+            <Box
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,${style.scanlinesOpacity}) 2px, rgba(0,0,0,${style.scanlinesOpacity}) 4px)`,
+                pointerEvents: 'none',
+                zIndex: 9999,
+              }}
+            />
+          )}
+
+          {/* Паттерн фона (warning stripes для Hesphiastos, grid для HEF) */}
+          {style.bgPattern === 'stripes' && (
+            <Box
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: `repeating-linear-gradient(-45deg, ${style.bgPatternColor ?? 'rgba(255,160,0,0.04)'}, ${style.bgPatternColor ?? 'rgba(255,160,0,0.04)'} 4px, transparent 4px, transparent 12px)`,
+                pointerEvents: 'none',
+                zIndex: 1,
+              }}
+            />
+          )}
+          {style.bgPattern === 'grid' && (
+            <Box
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: `linear-gradient(${style.bgPatternColor ?? 'rgba(138,138,90,0.05)'} 1px, transparent 1px), linear-gradient(90deg, ${style.bgPatternColor ?? 'rgba(138,138,90,0.05)'} 1px, transparent 1px)`,
+                backgroundSize: '20px 20px',
+                pointerEvents: 'none',
+                zIndex: 1,
+              }}
+            />
+          )}
+
+          {/* Дебаг-бар — абсолютно позиционирован у верхней границы, z=200 */}
+          <Box
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 200,
+            }}
+          >
+            <DebugStyleBar />
+          </Box>
+
+          {/* Основной контент — ниже дебаг-бара, заполняет остаток окна */}
+          <Box
+            style={{
+              position: 'absolute',
+              top: DEBUG_BAR_H,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              overflow: 'hidden',
+              color: style.textColor ?? 'inherit',
+            }}
+          >
+            {!logged_in ? (
+              <LoginScreen />
+            ) : (
+              <>
+                {current_app === 'desktop' && <DesktopScreen />}
+                {current_app === 'diagnostics' && <DiagnosticsApp />}
+                {current_app === 'antivirus' && <AntivirusApp />}
+                {current_app === 'net' && <NetAppScreen />}
+                {current_app === 'installed_app' && <InstalledAppScreen />}
+                {current_app === 'console' && <ConsoleApp />}
+              </>
+            )}
+          </Box>
+        </Window.Content>
+      </Window>
+    </DebugStyleContext.Provider>
+  );
+};
+
+// ============================================
+// DEBUG STYLE BAR
+// ============================================
+
+/** Дебаг-панель сверху для переключения стилей ОС на лету. */
+const DebugStyleBar = () => {
+  const { debugBrand, setDebugBrand } = useContext(DebugStyleContext);
+  const { data } = useBackend<IpcOsData>();
+  const realBrand = safeStr(data.brand_key, 'unbranded');
+
+  const brands = [...ALL_BRAND_KEYS];
+  const currentIdx = debugBrand ? brands.indexOf(debugBrand as (typeof ALL_BRAND_KEYS)[number]) : -1;
+
+  const cycleNext = () => {
+    const nextIdx = (currentIdx + 1) % brands.length;
+    setDebugBrand(brands[nextIdx]);
+  };
+
+  const cyclePrev = () => {
+    const prevIdx = (currentIdx - 1 + brands.length) % brands.length;
+    setDebugBrand(brands[prevIdx]);
+  };
+
+  const reset = () => setDebugBrand(null);
+
+  const activeStyle = debugBrand ? getOsStyle(debugBrand) : null;
+  const activeColor = debugBrand ? getOsBrandColor(debugBrand) : '#aaa';
+
+  return (
+    <Box
+      style={{
+        background: 'rgba(40,30,0,0.85)',
+        borderBottom: '1px dashed rgba(255,200,0,0.45)',
+        padding: '2px 6px',
+        fontSize: '0.7em',
+      }}
+    >
+      <Flex align="center" justify="space-between">
+        <Flex.Item>
+          <Box bold color="average">
+            <Icon name="bug" mr={0.4} />
+            DEV
+          </Box>
+        </Flex.Item>
+
+        <Flex.Item grow ml={1} mr={1}>
+          {debugBrand ? (
+            <Flex align="center">
+              <Flex.Item>
+                <Box
+                  as="span"
+                  bold
+                  style={{ color: activeColor }}
+                >
+                  {getOsStyleName(debugBrand)}
+                </Box>
+              </Flex.Item>
+              <Flex.Item ml={0.5}>
+                <Box as="span" color="label">
+                  — {activeStyle?.styleDesc}
+                </Box>
+              </Flex.Item>
+              <Flex.Item ml={0.5}>
+                <Box as="span" color="label">
+                  [{currentIdx + 1}/{brands.length}]
+                </Box>
+              </Flex.Item>
+            </Flex>
+          ) : (
+            <Box color="label">
+              реальный:{' '}
+              <Box as="span" color="average">
+                {getOsStyleName(realBrand)}
+              </Box>
+            </Box>
+          )}
+        </Flex.Item>
+
+        <Flex.Item>
+          <Flex align="center">
+            <Button
+              compact
+              color="transparent"
+              icon="chevron-left"
+              tooltip="Предыдущий стиль"
+              onClick={cyclePrev}
+            />
+            <Button
+              compact
+              color="average"
+              icon="sync"
+              mr={0.3}
+              tooltip="Следующий стиль"
+              onClick={cycleNext}
+            >
+              Стиль
+            </Button>
+            {debugBrand && (
+              <Button
+                compact
+                color="transparent"
+                icon="times"
+                tooltip="Сбросить к реальному стилю"
+                onClick={reset}
+              />
+            )}
+          </Flex>
+        </Flex.Item>
+      </Flex>
+    </Box>
   );
 };
 
@@ -232,10 +489,9 @@ function getCategoryLabel(cat: string): string {
 
 const LoginScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
+  const { theme_color, os_name, style } = useOsTheme();
 
-  const os_name = safeStr(data.os_name, 'IPC-OS');
   const os_version = safeStr(data.os_version, '2.4.1');
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
   const has_password = safeBool(data.has_password);
 
   const [password, setPassword] = useState('');
@@ -263,11 +519,12 @@ const LoginScreen = () => {
             bold
             color={theme_color}
             style={{
-              textShadow: `0 0 20px ${hexToRgba(theme_color, 0.5)}`,
-              letterSpacing: '3px',
+              textShadow: `0 0 ${Math.round(20 * style.glowIntensity)}px ${hexToRgba(theme_color, style.glowIntensity * 0.6)}`,
+              letterSpacing: style.textTransform === 'uppercase' ? '4px' : '3px',
+              textTransform: style.textTransform,
             }}
           >
-            {os_name}
+            {style.headerPrefix ?? ''}{os_name}{style.headerSuffix ?? ''}
           </Box>
           <Box fontSize="0.9em" color="label" mt={1}>
             v{os_version}
@@ -279,9 +536,9 @@ const LoginScreen = () => {
         <Box
           p={2}
           style={{
-            border: `1px solid ${hexToRgba(theme_color, 0.3)}`,
-            borderRadius: '4px',
-            background: 'rgba(0,0,0,0.5)',
+            border: `${style.borderWidth} solid ${hexToRgba(theme_color, style.panelBorderOpacity)}`,
+            borderRadius: style.borderRadius,
+            background: `rgba(0,0,0,${0.45 + style.panelBgOpacity})`,
             width: '300px',
           }}
         >
@@ -515,14 +772,18 @@ const SYSTEM_APPS = [
     name: 'NET',
     faIcon: 'globe',
   },
+  {
+    id: 'console',
+    name: 'Консоль',
+    faIcon: 'terminal',
+  },
 ];
 
 const DesktopScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
+  const { theme_color, os_name, style } = useOsTheme();
 
-  const os_name = safeStr(data.os_name, 'IPC-OS');
   const os_version = safeStr(data.os_version, '2.4.1');
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
   const virus_count = safeNum(data.virus_count, 0);
   const has_serious_viruses = safeBool(data.has_serious_viruses);
   const installed_apps = safeArray(data.installed_apps);
@@ -545,14 +806,27 @@ const DesktopScreen = () => {
           px={1}
           style={{
             background: hexToRgba(theme_color, 0.2),
-            borderBottom: `1px solid ${hexToRgba(theme_color, 0.3)}`,
+            borderBottom: `${style.borderWidth} solid ${hexToRgba(theme_color, style.panelBorderOpacity)}`,
           }}
         >
           <Flex justify="space-between" align="center">
             <Flex.Item>
-              <Box bold color={theme_color} fontSize="0.8em">
+              <Box
+                bold
+                color={theme_color}
+                fontSize="0.8em"
+                style={{
+                  textShadow:
+                    style.glowIntensity > 0.3
+                      ? `0 0 8px ${hexToRgba(theme_color, style.glowIntensity * 0.5)}`
+                      : 'none',
+                  textTransform: style.textTransform,
+                  letterSpacing:
+                    style.textTransform === 'uppercase' ? '1px' : 'normal',
+                }}
+              >
                 <Icon name="desktop" mr={0.5} />
-                {os_name} v{os_version}
+                {style.headerPrefix ?? ''}{os_name}{style.headerSuffix ?? ''} v{os_version}
                 {is_remote && (
                   <Box
                     as="span"
@@ -801,7 +1075,7 @@ const DesktopScreen = () => {
           px={1}
           style={{
             background: hexToRgba(theme_color, 0.12),
-            borderTop: `1px solid ${hexToRgba(theme_color, 0.25)}`,
+            borderTop: `${style.borderWidth} solid ${hexToRgba(theme_color, 0.25)}`,
           }}
         >
           <Flex justify="space-between" align="center">
@@ -863,9 +1137,9 @@ const DesktopScreen = () => {
 
 const InstalledAppScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
+  const { theme_color, style } = useOsTheme();
 
   const app_name = safeStr(data.current_installed_app_name, '');
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
   const installed_apps = safeArray(data.installed_apps);
 
   const app = installed_apps.find((a) => a.name === app_name);
@@ -899,11 +1173,11 @@ const InstalledAppScreen = () => {
             p={2}
             mb={2}
             style={{
-              border: `1px solid ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, 0.4)}`,
-              borderRadius: '6px',
+              border: `${style.borderWidth} solid ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, 0.4)}`,
+              borderRadius: style.borderRadius,
               background: hexToRgba(
                 isBlackwall ? '#cc3333' : theme_color,
-                0.08,
+                style.panelBgOpacity,
               ),
             }}
           >
@@ -916,8 +1190,8 @@ const InstalledAppScreen = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    border: `1px solid ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, 0.3)}`,
-                    borderRadius: '8px',
+                    border: `${style.borderWidth} solid ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, style.panelBorderOpacity)}`,
+                    borderRadius: style.borderRadius,
                     background: hexToRgba(
                       isBlackwall ? '#cc3333' : theme_color,
                       0.12,
@@ -928,11 +1202,18 @@ const InstalledAppScreen = () => {
                     name={isBlackwall ? 'skull-crossbones' : 'cube'}
                     size={2}
                     color={isBlackwall ? '#cc3333' : theme_color}
+                    style={
+                      style.glowIntensity > 0.3
+                        ? {
+                            textShadow: `0 0 8px ${hexToRgba(isBlackwall ? '#cc3333' : theme_color, style.glowIntensity * 0.6)}`,
+                          }
+                        : undefined
+                    }
                   />
                 </Box>
               </Flex.Item>
               <Flex.Item grow>
-                <Box bold fontSize="1.3em">
+                <Box bold fontSize="1.3em" style={{ textTransform: style.textTransform }}>
                   {app.name}
                 </Box>
                 <Box fontSize="0.85em" color="label" mt={0.3}>
@@ -952,7 +1233,7 @@ const InstalledAppScreen = () => {
               p={1}
               style={{
                 background: 'rgba(0,0,0,0.2)',
-                borderRadius: '4px',
+                borderRadius: style.borderRadius,
               }}
             >
               {app.desc}
@@ -1014,7 +1295,7 @@ const InstalledAppScreen = () => {
               p={1}
               mb={2}
               style={{
-                border: `1px solid ${hexToRgba(theme_color, 0.3)}`,
+                border: `1px solid ${hexToRgba(theme_color, style.panelBorderOpacity)}`,
                 borderRadius: '4px',
                 background: 'rgba(0,0,0,0.3)',
               }}
@@ -1068,7 +1349,7 @@ const InstalledAppScreen = () => {
               mb={1}
               p={1}
               style={{
-                border: `1px solid ${hexToRgba(theme_color, 0.3)}`,
+                border: `1px solid ${hexToRgba(theme_color, style.panelBorderOpacity)}`,
                 borderRadius: '4px',
                 background: 'rgba(0,0,0,0.2)',
               }}
@@ -1249,6 +1530,7 @@ const DiagnosticsApp = () => {
 
 const AntivirusApp = () => {
   const { act, data } = useBackend<IpcOsData>();
+  const { style } = useOsTheme();
 
   const antivirus_scanning = safeBool(data.antivirus_scanning);
   const antivirus_progress = safeNum(data.antivirus_progress, 0);
@@ -1269,8 +1551,8 @@ const AntivirusApp = () => {
             p={1.5}
             textAlign="center"
             style={{
-              border: `1px solid ${virus_count > 0 ? (has_serious_viruses ? '#cc3333' : '#cc9933') : '#33cc33'}`,
-              borderRadius: '4px',
+              border: `${style.borderWidth} solid ${virus_count > 0 ? (has_serious_viruses ? '#cc3333' : '#cc9933') : '#33cc33'}`,
+              borderRadius: style.borderRadius,
               background:
                 virus_count > 0
                   ? has_serious_viruses
@@ -1424,19 +1706,16 @@ const AntivirusApp = () => {
 
 const NetAppScreen = () => {
   const { act, data } = useBackend<IpcOsData>();
+  const { theme_color, style } = useOsTheme();
 
   const network_connected = safeBool(data.network_connected);
-  const net_wall = safeStr(data.net_wall, 'white');
   const net_catalog = safeArray(data.net_catalog);
   const black_wall_catalog = safeArray(data.black_wall_catalog);
   const installed_apps = safeArray(data.installed_apps);
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
   const downloading = safeBool(data.downloading);
   const download_progress = safeNum(data.download_progress, 0);
   const download_app_name = safeStr(data.download_app_name, '');
-
-  const catalog = net_wall === 'black' ? black_wall_catalog : net_catalog;
-  const isBlack = net_wall === 'black';
+  const blackwall_unlocked = safeBool(data.blackwall_unlocked);
 
   return (
     <Flex direction="column" height="100%">
@@ -1450,8 +1729,8 @@ const NetAppScreen = () => {
             p={0.5}
             textAlign="center"
             style={{
-              border: `1px solid ${network_connected ? 'rgba(50,200,50,0.3)' : 'rgba(200,50,50,0.3)'}`,
-              borderRadius: '3px',
+              border: `${style.borderWidth} solid ${network_connected ? 'rgba(50,200,50,0.3)' : 'rgba(200,50,50,0.3)'}`,
+              borderRadius: style.borderRadius,
               background: network_connected
                 ? 'rgba(0,200,0,0.05)'
                 : 'rgba(200,0,0,0.05)',
@@ -1471,43 +1750,6 @@ const NetAppScreen = () => {
                 : 'Нет подключения к сети'}
             </Box>
           </Box>
-
-          {/* Wall tabs */}
-          <Tabs>
-            <Tabs.Tab
-              icon="building"
-              selected={!isBlack}
-              onClick={() => act('switch_wall', { wall: 'white' })}
-            >
-              White Wall
-            </Tabs.Tab>
-            <Tabs.Tab
-              icon="skull-crossbones"
-              selected={isBlack}
-              onClick={() => act('switch_wall', { wall: 'black' })}
-              color={isBlack ? 'bad' : undefined}
-            >
-              Black Wall
-            </Tabs.Tab>
-          </Tabs>
-
-          {/* Black Wall warning */}
-          {isBlack && (
-            <Box
-              p={0.5}
-              mb={1}
-              textAlign="center"
-              fontSize="0.75em"
-              color="bad"
-              style={{
-                background: 'rgba(200,0,0,0.08)',
-                borderBottom: '1px solid rgba(200,0,0,0.2)',
-              }}
-            >
-              <Icon name="exclamation-triangle" mr={0.5} />
-              ВНИМАНИЕ: Нелегальное ПО. Использование на свой страх и риск.
-            </Box>
-          )}
 
           {/* Download progress */}
           {downloading && (
@@ -1540,7 +1782,7 @@ const NetAppScreen = () => {
             </Box>
           )}
 
-          {/* App catalog */}
+          {/* WHITE WALL catalog */}
           {!network_connected ? (
             <Box textAlign="center" color="label" p={2}>
               <Icon name="plug" size={2} mb={1} />
@@ -1550,85 +1792,68 @@ const NetAppScreen = () => {
               </Box>
             </Box>
           ) : (
-            <Table>
-              <Table.Row header>
-                <Table.Cell width="28%">Приложение</Table.Cell>
-                <Table.Cell width="32%">Описание</Table.Cell>
-                <Table.Cell width="12%">Тип</Table.Cell>
-                <Table.Cell width="10%">Размер</Table.Cell>
-                <Table.Cell width="18%">Действие</Table.Cell>
-              </Table.Row>
-              {catalog.map((app, idx) => (
-                <Table.Row key={idx}>
-                  <Table.Cell>
-                    <Box bold fontSize="0.85em">
-                      <Icon
-                        name={isBlack ? 'skull' : 'cube'}
-                        mr={0.3}
-                        color={isBlack ? 'bad' : 'label'}
-                      />
-                      {app.name}
-                    </Box>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Box fontSize="0.75em" color="label">
-                      {app.desc}
-                    </Box>
-                  </Table.Cell>
-                  <Table.Cell>
+            <NetCatalogTable
+              apps={net_catalog}
+              downloading={downloading}
+              isBlack={false}
+              onDownload={(name) =>
+                act('download_app', { app_name: name, wall: 'white' })
+              }
+              onUninstall={(name) => act('uninstall_app', { app_name: name })}
+            />
+          )}
+
+          {/* BLACK WALL — appears only after unlock */}
+          {blackwall_unlocked && network_connected && (
+            <Box mt={2}>
+              {/* Separator */}
+              <Box
+                mb={1}
+                style={{
+                  borderTop: '1px solid rgba(180,0,0,0.4)',
+                  paddingTop: '8px',
+                }}
+              >
+                <Flex align="center" justify="space-between">
+                  <Flex.Item>
                     <Box
-                      fontSize="0.7em"
-                      color={
-                        app.category === 'exploit'
-                          ? 'bad'
-                          : app.category === 'mod'
-                            ? 'average'
-                            : app.category === 'diagnostic'
-                              ? 'good'
-                              : 'label'
-                      }
+                      bold
+                      fontSize="0.78em"
+                      style={{
+                        color: '#cc3333',
+                        letterSpacing: '2px',
+                        fontFamily: '"Courier New", monospace',
+                        textShadow: '0 0 8px rgba(200,0,0,0.5)',
+                      }}
                     >
-                      {getCategoryLabel(app.category)}
+                      <Icon name="skull-crossbones" mr={0.5} />
+                      ▓ BLACKWALL ▓
                     </Box>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Box fontSize="0.7em" color="label">
-                      {app.file_size || 256} КБ
+                  </Flex.Item>
+                  <Flex.Item>
+                    <Box
+                      fontSize="0.68em"
+                      color="bad"
+                      style={{ opacity: 0.7 }}
+                    >
+                      нелегальный раздел
                     </Box>
-                  </Table.Cell>
-                  <Table.Cell>
-                    {safeBool(app.installed) ? (
-                      <Button
-                        compact
-                        color="bad"
-                        icon="trash"
-                        disabled={downloading}
-                        onClick={() =>
-                          act('uninstall_app', { app_name: app.name })
-                        }
-                      >
-                        Удалить
-                      </Button>
-                    ) : (
-                      <Button
-                        compact
-                        color={isBlack ? 'caution' : 'good'}
-                        icon="download"
-                        disabled={downloading}
-                        onClick={() =>
-                          act('download_app', {
-                            app_name: app.name,
-                            wall: net_wall,
-                          })
-                        }
-                      >
-                        Скачать
-                      </Button>
-                    )}
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table>
+                  </Flex.Item>
+                </Flex>
+              </Box>
+
+              <NetCatalogTable
+                apps={black_wall_catalog}
+                downloading={downloading}
+                isBlack={true}
+                onDownload={(name) =>
+                  act('download_app', { app_name: name, wall: 'black' })
+                }
+                onUninstall={(name) =>
+                  act('uninstall_app', { app_name: name })
+                }
+              />
+            </Box>
           )}
 
           {/* Installed apps */}
@@ -1682,6 +1907,102 @@ const NetAppScreen = () => {
   );
 };
 
+// Вспомогательная таблица каталога — для WW и BW
+type NetCatalogTableProps = {
+  apps: NetApp[];
+  downloading: boolean;
+  isBlack: boolean;
+  onDownload: (name: string) => void;
+  onUninstall: (name: string) => void;
+};
+
+const NetCatalogTable = (props: NetCatalogTableProps) => {
+  const { apps, downloading, isBlack, onDownload, onUninstall } = props;
+
+  if (apps.length === 0) {
+    return (
+      <Box textAlign="center" color="label" p={1} fontSize="0.85em">
+        Каталог пуст.
+      </Box>
+    );
+  }
+
+  return (
+    <Table>
+      <Table.Row header>
+        <Table.Cell width="28%">Приложение</Table.Cell>
+        <Table.Cell width="34%">Описание</Table.Cell>
+        <Table.Cell width="12%">Тип</Table.Cell>
+        <Table.Cell width="8%">КБ</Table.Cell>
+        <Table.Cell width="18%">Действие</Table.Cell>
+      </Table.Row>
+      {apps.map((app, idx) => (
+        <Table.Row key={idx}>
+          <Table.Cell>
+            <Box bold fontSize="0.85em">
+              <Icon
+                name={isBlack ? 'skull' : 'cube'}
+                mr={0.3}
+                color={isBlack ? 'bad' : 'label'}
+              />
+              {app.name}
+            </Box>
+          </Table.Cell>
+          <Table.Cell>
+            <Box fontSize="0.75em" color="label">
+              {app.desc}
+            </Box>
+          </Table.Cell>
+          <Table.Cell>
+            <Box
+              fontSize="0.7em"
+              color={
+                app.category === 'exploit'
+                  ? 'bad'
+                  : app.category === 'mod'
+                    ? 'average'
+                    : app.category === 'diagnostic'
+                      ? 'good'
+                      : 'label'
+              }
+            >
+              {getCategoryLabel(app.category)}
+            </Box>
+          </Table.Cell>
+          <Table.Cell>
+            <Box fontSize="0.7em" color="label">
+              {app.file_size || 256}
+            </Box>
+          </Table.Cell>
+          <Table.Cell>
+            {safeBool(app.installed) ? (
+              <Button
+                compact
+                color="bad"
+                icon="trash"
+                disabled={downloading}
+                onClick={() => onUninstall(app.name)}
+              >
+                Удалить
+              </Button>
+            ) : (
+              <Button
+                compact
+                color={isBlack ? 'caution' : 'good'}
+                icon="download"
+                disabled={downloading}
+                onClick={() => onDownload(app.name)}
+              >
+                Скачать
+              </Button>
+            )}
+          </Table.Cell>
+        </Table.Row>
+      ))}
+    </Table>
+  );
+};
+
 // ============================================
 // COMMON COMPONENTS
 // ============================================
@@ -1692,17 +2013,15 @@ type AppHeaderProps = {
 };
 
 const AppHeader = (props: AppHeaderProps) => {
-  const { act, data } = useBackend<IpcOsData>();
-
-  const theme_color = safeStr(data.theme_color, '#6a6a6a');
-  const os_name = safeStr(data.os_name, 'IPC-OS');
+  const { act } = useBackend<IpcOsData>();
+  const { theme_color, os_name, style } = useOsTheme();
 
   return (
     <Box
       p={0.5}
       style={{
         background: hexToRgba(theme_color, 0.15),
-        borderBottom: `1px solid ${hexToRgba(theme_color, 0.3)}`,
+        borderBottom: `${style.borderWidth} solid ${hexToRgba(theme_color, style.panelBorderOpacity)}`,
       }}
     >
       <Flex align="center" justify="space-between">
@@ -1718,9 +2037,20 @@ const AppHeader = (props: AppHeaderProps) => {
               />
             </Flex.Item>
             <Flex.Item>
-              <Box bold color={theme_color} fontSize="0.95em">
+              <Box
+                bold
+                color={theme_color}
+                fontSize="0.95em"
+                style={{
+                  textShadow:
+                    style.glowIntensity > 0.3
+                      ? `0 0 6px ${hexToRgba(theme_color, style.glowIntensity * 0.45)}`
+                      : 'none',
+                  textTransform: style.textTransform,
+                }}
+              >
                 <Icon name={props.icon} mr={0.5} />
-                {props.title}
+                {style.headerPrefix ?? ''}{props.title}{style.headerSuffix ?? ''}
               </Box>
             </Flex.Item>
           </Flex>
@@ -1732,5 +2062,777 @@ const AppHeader = (props: AppHeaderProps) => {
         </Flex.Item>
       </Flex>
     </Box>
+  );
+};
+
+// ============================================
+// CONSOLE APP
+// ============================================
+
+type ConsoleLineKind = 'input' | 'output' | 'error' | 'success' | 'system';
+
+type ConsoleLine = {
+  id: number;
+  kind: ConsoleLineKind;
+  text: string;
+};
+
+type BypassChallenge = {
+  active: boolean;
+  /** 'netwall' = unlock BW access, 'bypass' = install specific BW app */
+  mode: 'netwall' | 'bypass';
+  targetApp: string;
+  code: string;
+  timeLeft: number;
+  attempts: number;
+};
+
+const BYPASS_TIME = 45;
+const BYPASS_ATTEMPTS = 3;
+
+function generateBypassCode(): string {
+  const chars = 'ABCDEF0123456789';
+  const seg = () =>
+    Array.from({ length: 4 }, () =>
+      chars[Math.floor(Math.random() * chars.length)],
+    ).join('');
+  return `${seg()}-${seg()}`;
+}
+
+function consoleLineColor(
+  kind: ConsoleLineKind,
+  accentColor: string,
+): string {
+  switch (kind) {
+    case 'input':
+      return accentColor;
+    case 'error':
+      return '#ff5555';
+    case 'success':
+      return '#55ff88';
+    case 'system':
+      return '#ffcc44';
+    default:
+      return 'inherit';
+  }
+}
+
+// ── Probe helpers ──────────────────────────────────────────────────────────
+
+function randomHex(len: number): string {
+  const chars = '0123456789ABCDEF';
+  return Array.from(
+    { length: len },
+    () => chars[Math.floor(Math.random() * 16)],
+  ).join('');
+}
+
+type ProbeNodeKind =
+  | 'empty'
+  | 'data'
+  | 'corrupted'
+  | 'hostile'
+  | 'bw_fragment'
+  | 'bw_address';
+
+type ScannedNode = {
+  addr: string;
+  kind: ProbeNodeKind;
+  probed: boolean;
+};
+
+function pickProbeNodeKind(bwFragments: number): ProbeNodeKind {
+  const r = Math.random();
+  if (r < 0.35) return 'empty';
+  if (r < 0.55) return 'data';
+  if (r < 0.68) return 'corrupted';
+  if (r < 0.80) return 'hostile';
+  // 20 % BW-related
+  return bwFragments >= 2 ? 'bw_address' : 'bw_fragment';
+}
+
+const EMPTY_MSGS = [
+  'Пустой пакет. Нет данных.',
+  'Мёртвый конец. Нет маршрута.',
+  'Стандартный трафик. Ничего интересного.',
+  'Узел неактивен.',
+];
+
+const DATA_MSGS = [
+  'Журнал сервисных запросов. Актуальность: 3 дня.',
+  'Системные метрики станции. CPU: норма, RAM: норма.',
+  'Медицинские логи. Стандартное шифрование.',
+  'Рабочие протоколы инженерного отдела. Рутина.',
+  'Пакет обновлений White Wall. Ничего подозрительного.',
+];
+
+function randPick<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+/**
+ * Встроенный терминал ОС.
+ * Позволяет вводить команды, просматривать статус системы
+ * и — с мини-игрой обхода — устанавливать Blackwall-программы.
+ */
+const ConsoleApp = () => {
+  const { act, data } = useBackend<IpcOsData>();
+  const { theme_color, style, os_name } = useOsTheme();
+
+  const [lines, setLines] = useState<ConsoleLine[]>([
+    {
+      id: 0,
+      kind: 'system',
+      text: `${os_name} Console — type "help" for commands`,
+    },
+    {
+      id: 1,
+      kind: 'system',
+      text: '──────────────────────────────────────────',
+    },
+  ]);
+  const [input, setInput] = useState('');
+  const [nextId, setNextId] = useState(2);
+  /** How many nodes probed this cycle (resets to 0 on 3rd — anti-scan) */
+  const [probeCount, setProbeCount] = useState(0);
+  /** BW address fragments collected — persists through anti-scan resets */
+  const [bwFragments, setBwFragments] = useState(0);
+  /** Current list of scanned network nodes (empty = not scanned yet) */
+  const [scannedNodes, setScannedNodes] = useState<ScannedNode[]>([]);
+  const [bypass, setBypass] = useState<BypassChallenge>({
+    active: false,
+    mode: 'bypass',
+    targetApp: '',
+    code: '',
+    timeLeft: 0,
+    attempts: 0,
+  });
+
+  const endRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when lines change
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [lines]);
+
+  // Countdown timer for active bypass challenge
+  useEffect(() => {
+    if (!bypass.active) {
+      return;
+    }
+    const id = setInterval(() => {
+      setBypass((prev) => {
+        if (!prev.active) {
+          return prev;
+        }
+        if (prev.timeLeft <= 1) {
+          addOutput([
+            {
+              kind: 'error',
+              text: '[ TIMEOUT ] — Blackwall challenge expired. Access denied.',
+            },
+          ]);
+          return { ...prev, active: false, timeLeft: 0 };
+        }
+        return { ...prev, timeLeft: prev.timeLeft - 1 };
+      });
+    }, 1000);
+    return () => clearInterval(id);
+  }, [bypass.active]);
+
+  function addOutput(newLines: Array<{ kind: ConsoleLineKind; text: string }>) {
+    setLines((prev) => {
+      let id = prev.length > 0 ? prev[prev.length - 1].id + 1 : 0;
+      const mapped = newLines.map((l) => ({ id: id++, kind: l.kind, text: l.text }));
+      return [...prev, ...mapped];
+    });
+    setNextId((n) => n + newLines.length);
+  }
+
+  function handleSubmit() {
+    const cmd = input.trim();
+    setInput('');
+    if (!cmd) {
+      return;
+    }
+
+    addOutput([{ kind: 'input', text: `> ${cmd}` }]);
+
+    // ── BYPASS CHALLENGE MODE ──────────────────────────────────────
+    if (bypass.active) {
+      if (cmd.toUpperCase() === bypass.code) {
+        if (bypass.mode === 'netwall') {
+          addOutput([
+            { kind: 'success', text: '[ ACCESS GRANTED ] BLACKWALL BREACHED' },
+            { kind: 'system', text: 'Нелегальный раздел сети разблокирован.' },
+            { kind: 'output', text: 'Откройте NET → Black Wall для просмотра программ.' },
+          ]);
+          act('unlock_blackwall');
+        } else {
+          addOutput([
+            { kind: 'success', text: '[ OK ] SEQUENCE VERIFIED' },
+            { kind: 'system', text: `Initiating install: ${bypass.targetApp}` },
+          ]);
+          act('console_bypass', { app_name: bypass.targetApp });
+        }
+        setBypass((p) => ({ ...p, active: false }));
+      } else {
+        const left = bypass.attempts - 1;
+        if (left <= 0) {
+          addOutput([
+            { kind: 'error', text: '[ FAIL ] SEQUENCE MISMATCH' },
+            { kind: 'error', text: 'BLACKWALL LOCKOUT ENGAGED.' },
+          ]);
+          setBypass((p) => ({ ...p, active: false }));
+        } else {
+          addOutput([
+            {
+              kind: 'error',
+              text: `[ FAIL ] WRONG. Attempts remaining: ${left}`,
+            },
+          ]);
+          setBypass((p) => ({ ...p, attempts: left }));
+        }
+      }
+      return;
+    }
+
+    // ── NORMAL COMMAND MODE ────────────────────────────────────────
+    const parts = cmd.trim().split(/\s+/);
+    const verb = parts[0].toLowerCase();
+
+    switch (verb) {
+      case 'help': {
+        addOutput([
+          { kind: 'output', text: 'Команды:' },
+          { kind: 'output', text: '  help       — эта справка' },
+          { kind: 'output', text: '  status     — состояние системы' },
+          { kind: 'output', text: '  sysinfo    — подробная информация' },
+          { kind: 'output', text: '  apps       — установленные приложения' },
+          { kind: 'output', text: '  probe      — сканировать ближайшие узлы' },
+          { kind: 'output', text: '  probe [N]  — зондировать узел N из списка' },
+          { kind: 'output', text: '  scan       — запустить диагностику систем' },
+          { kind: 'output', text: '  clear      — очистить терминал' },
+        ]);
+        break;
+      }
+
+      case 'status': {
+        const virusCount = safeArray(data.viruses).length;
+        const virusLine =
+          virusCount > 0
+            ? `УГРОЗЫ: ${virusCount} (${data.has_serious_viruses ? 'КРИТИЧНО' : 'средне'})`
+            : 'Угрозы не обнаружены';
+        const netStatus = data.network_connected
+          ? safeBool(data.blackwall_unlocked)
+            ? 'ONLINE [BW разблокирован]'
+            : 'ONLINE [аномалия — probe]'
+          : 'OFFLINE';
+        addOutput([
+          {
+            kind: 'output',
+            text: `ОС: ${data.os_name ?? '?'} v${data.os_version ?? '?'}`,
+          },
+          {
+            kind: data.network_connected ? 'output' : 'error',
+            text: `Сеть: ${netStatus}`,
+          },
+          { kind: 'output', text: `Антивирус: ${virusLine}` },
+          {
+            kind: 'output',
+            text: `Приложений: ${safeArray(data.installed_apps).length}`,
+          },
+          {
+            kind: data.has_remote_viewer ? 'error' : 'output',
+            text: data.has_remote_viewer
+              ? `УДАЛЁННЫЙ ДОСТУП: ${data.remote_viewer_name}`
+              : 'Удалённый доступ: нет',
+          },
+        ]);
+        break;
+      }
+
+      case 'sysinfo': {
+        addOutput([
+          { kind: 'system', text: '=== SYSTEM INFORMATION ===' },
+          { kind: 'output', text: `OS:      ${data.os_name} v${data.os_version}` },
+          { kind: 'output', text: `Brand:   ${data.brand_key}` },
+          { kind: 'output', text: `Color:   ${data.theme_color}` },
+          { kind: 'output', text: `Auth:    ${data.logged_in ? 'authenticated' : 'locked'}` },
+          { kind: 'output', text: `Net:     ${data.network_connected ? 'connected' : 'offline'}` },
+          { kind: 'output', text: `Viruses: ${safeArray(data.viruses).length}` },
+          { kind: 'output', text: `Apps:    ${safeArray(data.installed_apps).length} installed` },
+        ]);
+        break;
+      }
+
+      case 'apps': {
+        const apps = safeArray(data.installed_apps);
+        if (apps.length === 0) {
+          addOutput([
+            { kind: 'output', text: 'Нет установленных приложений.' },
+          ]);
+        } else {
+          addOutput([
+            { kind: 'system', text: `Установлено (${apps.length}):` },
+            ...apps.map((app) => ({
+              kind: 'output' as ConsoleLineKind,
+              text: `  ${app.is_blackwall ? '[BW]' : '[WW]'} ${app.name}  (${app.category})${app.active ? ' ● активно' : ''}`,
+            })),
+          ]);
+        }
+        break;
+      }
+
+      case 'probe': {
+        if (!data.network_connected) {
+          addOutput([
+            { kind: 'error',  text: 'Нет подключения к сети.' },
+            { kind: 'output', text: 'Встаньте на сетевой кабель.' },
+          ]);
+          break;
+        }
+
+        if (safeBool(data.blackwall_unlocked)) {
+          addOutput([
+            { kind: 'success', text: '[BW] Нелегальный сегмент уже разблокирован.' },
+            { kind: 'output',  text: `    Приложений: ${safeArray(data.black_wall_catalog).length} — смотри NET.` },
+          ]);
+          break;
+        }
+
+        const probeArg = parts.slice(1).join('').trim();
+
+        // ── probe (no arg) — SCAN: generate fresh node list ──────────────
+        if (!probeArg) {
+          const nodeCount = 4 + Math.floor(Math.random() * 3); // 4–6
+          const freshNodes: ScannedNode[] = Array.from(
+            { length: nodeCount },
+            () => ({
+              addr: `0x${randomHex(4)}:${randomHex(2)}:${randomHex(4)}`,
+              kind: pickProbeNodeKind(bwFragments),
+              probed: false,
+            }),
+          );
+          setScannedNodes(freshNodes);
+
+          addOutput([
+            { kind: 'system', text: 'Сканирование ближайших узлов...' },
+            { kind: 'output', text: `Обнаружено ${nodeCount} точек доступа:` },
+            ...freshNodes.map((n, i) => ({
+              kind: 'output' as ConsoleLineKind,
+              text: `  [${i + 1}]  ${n.addr}   — неизвестно`,
+            })),
+            { kind: 'output', text: '' },
+            { kind: 'output', text: 'Используйте: probe [N] для зондирования' },
+          ]);
+          break;
+        }
+
+        // ── probe [N] — PROBE a specific node ────────────────────────────
+        const nodeIdx = parseInt(probeArg, 10) - 1;
+
+        if (scannedNodes.length === 0) {
+          addOutput([
+            { kind: 'error', text: 'Нет активного списка узлов.' },
+            { kind: 'output', text: 'Запустите probe без аргументов для сканирования.' },
+          ]);
+          break;
+        }
+
+        if (isNaN(nodeIdx) || nodeIdx < 0 || nodeIdx >= scannedNodes.length) {
+          addOutput([
+            { kind: 'error', text: `Неверный номер. Доступно: 1–${scannedNodes.length}` },
+          ]);
+          break;
+        }
+
+        const node = scannedNodes[nodeIdx];
+        if (node.probed) {
+          addOutput([
+            { kind: 'output', text: `[${node.addr}] — уже зондировался.` },
+          ]);
+          break;
+        }
+
+        // Anti-scan check — every 3rd probe resets cycle + node list
+        const newCount = probeCount + 1;
+        if (newCount >= 3) {
+          setProbeCount(0);
+          setScannedNodes([]);
+          addOutput([
+            { kind: 'system', text: '══════════════════════════════════════' },
+            { kind: 'error',  text: '  [ANTI-SCAN] СКАНИРОВАНИЕ ОБНАРУЖЕНО' },
+            { kind: 'system', text: '══════════════════════════════════════' },
+            { kind: 'error',  text: 'Сетевой стек сброшен. Список узлов очищен.' },
+            { kind: 'output', text: 'Запустите probe для повторного сканирования.' },
+          ]);
+          break;
+        }
+        setProbeCount(newCount);
+
+        // Mark node as probed
+        setScannedNodes((prev) =>
+          prev.map((n, i) => (i === nodeIdx ? { ...n, probed: true } : n)),
+        );
+
+        addOutput([
+          { kind: 'system', text: `Зондирование [${node.addr}]... (${newCount}/2)` },
+        ]);
+
+        switch (node.kind) {
+          case 'empty': {
+            addOutput([{ kind: 'output', text: `  → ${randPick(EMPTY_MSGS)}` }]);
+            break;
+          }
+
+          case 'data': {
+            addOutput([{ kind: 'output', text: `  → ${randPick(DATA_MSGS)}` }]);
+            break;
+          }
+
+          case 'corrupted': {
+            addOutput([
+              { kind: 'error',  text: '  → [ОШИБКА] Повреждённые пакеты. Парсинг неудачен.' },
+              { kind: 'output', text: '  → Фрагмент данных отброшен.' },
+            ]);
+            break;
+          }
+
+          case 'hostile': {
+            addOutput([
+              { kind: 'error', text: '  → [ВНИМАНИЕ] Обнаружен вредоносный код!' },
+              { kind: 'error', text: '  → Попытка инъекции... Файлы скомпрометированы.' },
+            ]);
+            act('probe_infect');
+            break;
+          }
+
+          case 'bw_fragment': {
+            const newFrag = bwFragments + 1;
+            setBwFragments(newFrag);
+            addOutput([
+              { kind: 'system', text: '  → [???] Нестандартная сигнатура. Обфусцированный адрес.' },
+              { kind: 'system', text: `  → [???] Фрагмент [${newFrag}/2]: 0x${randomHex(4)}...${randomHex(4)}` },
+              {
+                kind: 'output',
+                text: newFrag >= 2
+                  ? '  → Адрес частично восстановлен. Продолжайте сканирование.'
+                  : '  → Продолжайте сканирование.',
+              },
+            ]);
+            break;
+          }
+
+          case 'bw_address': {
+            addOutput([
+              { kind: 'system',  text: '  → [!!!] Полный маршрут восстановлен.' },
+              { kind: 'success', text: `  → Адрес: BLACKWALL-SEGMENT / 0x${randomHex(4)}:BW:${randomHex(4)}` },
+              { kind: 'success', text: '  → Нелегальный рынок ПО. Протокол взлома: netwall' },
+            ]);
+            break;
+          }
+        }
+        break;
+      }
+
+      case 'scan': {
+        addOutput([{ kind: 'system', text: 'Запуск диагностики...' }]);
+        act('start_scan');
+        act('open_app', { app: 'diagnostics' });
+        break;
+      }
+
+      case 'netwall': {
+        if (safeBool(data.blackwall_unlocked)) {
+          addOutput([
+            { kind: 'success', text: 'Black Wall уже разблокирован.' },
+            { kind: 'output', text: 'Откройте NET → Black Wall для просмотра программ.' },
+          ]);
+          break;
+        }
+        if (!data.network_connected) {
+          addOutput([
+            { kind: 'error', text: 'ОШИБКА: Нет подключения к сети. Подключитесь к кабелю.' },
+          ]);
+          break;
+        }
+
+        const nwCode = generateBypassCode();
+        setBypass({
+          active: true,
+          mode: 'netwall',
+          targetApp: '',
+          code: nwCode,
+          timeLeft: BYPASS_TIME,
+          attempts: BYPASS_ATTEMPTS,
+        });
+
+        addOutput([
+          { kind: 'system', text: '████████████████████████████████████' },
+          { kind: 'system', text: ' BLACKWALL ACCESS GATE  v2.3.1' },
+          { kind: 'system', text: '████████████████████████████████████' },
+          { kind: 'output', text: 'Обнаружен зашифрованный нелегальный раздел.' },
+          { kind: 'output', text: 'Перехват пакетов защиты...' },
+          { kind: 'system', text: 'Анализ протоколов безопасности...' },
+          { kind: 'system', text: 'Брутфорс ключа шифрования...' },
+          { kind: 'success', text: `КОД ДОСТУПА ► ${nwCode} ◄` },
+          { kind: 'output', text: '────────────────────────────────────' },
+          { kind: 'output', text: 'Введите код для разблокировки Black Wall:' },
+        ]);
+        break;
+      }
+
+      case 'bypass': {
+        const targetName = parts.slice(1).join(' ');
+        if (!targetName) {
+          addOutput([
+            {
+              kind: 'error',
+              text: 'Использование: bypass [имя программы]',
+            },
+            {
+              kind: 'output',
+              text: 'Введите "catalog" для списка Blackwall программ.',
+            },
+          ]);
+          break;
+        }
+
+        const bwCatalog = safeArray(data.black_wall_catalog);
+        const target = bwCatalog.find(
+          (a) => a.name.toLowerCase() === targetName.toLowerCase(),
+        );
+
+        if (!target) {
+          addOutput([
+            {
+              kind: 'error',
+              text: `Программа "${targetName}" не найдена в Blackwall.`,
+            },
+            {
+              kind: 'output',
+              text: `Доступные: ${bwCatalog.map((a) => a.name).join(', ')}`,
+            },
+          ]);
+          break;
+        }
+
+        if (target.installed) {
+          addOutput([
+            {
+              kind: 'output',
+              text: `"${target.name}" уже установлен.`,
+            },
+          ]);
+          break;
+        }
+
+        if (!data.network_connected) {
+          addOutput([
+            {
+              kind: 'error',
+              text: 'ОШИБКА: Нет подключения к сети. Bypass невозможен.',
+            },
+          ]);
+          break;
+        }
+
+        if (!safeBool(data.blackwall_unlocked)) {
+          addOutput([
+            { kind: 'error', text: 'ОШИБКА: Black Wall не разблокирован.' },
+            { kind: 'output', text: 'Сначала запустите: netwall' },
+          ]);
+          break;
+        }
+
+        // Start bypass mini-game
+        const code = generateBypassCode();
+        setBypass({
+          active: true,
+          mode: 'bypass',
+          targetApp: target.name,
+          code,
+          timeLeft: BYPASS_TIME,
+          attempts: BYPASS_ATTEMPTS,
+        });
+
+        addOutput([
+          {
+            kind: 'system',
+            text: '════════════════════════════════════',
+          },
+          {
+            kind: 'system',
+            text: ' BLACKWALL OVERRIDE SEQUENCE',
+          },
+          {
+            kind: 'system',
+            text: '════════════════════════════════════',
+          },
+          {
+            kind: 'output',
+            text: `Цель:       ${target.name}`,
+          },
+          {
+            kind: 'output',
+            text: `Размер:     ${target.file_size} кб`,
+          },
+          {
+            kind: 'output',
+            text: `Попытки:    ${BYPASS_ATTEMPTS}`,
+          },
+          {
+            kind: 'output',
+            text: `Таймер:     ${BYPASS_TIME}s`,
+          },
+          {
+            kind: 'system',
+            text: 'Анализируем протоколы защиты...',
+          },
+          {
+            kind: 'success',
+            text: `КОД ДОСТУПА ► ${code} ◄`,
+          },
+          {
+            kind: 'output',
+            text: '────────────────────────────────────',
+          },
+          {
+            kind: 'output',
+            text: 'Введите код точно как показано выше:',
+          },
+        ]);
+        break;
+      }
+
+      case 'clear': {
+        setLines([]);
+        break;
+      }
+
+      case '': {
+        break;
+      }
+
+      default: {
+        addOutput([
+          {
+            kind: 'error',
+            text: `Команда не найдена: "${verb}" — введите "help"`,
+          },
+        ]);
+      }
+    }
+  }
+
+  const monoFont = '"Courier New", Courier, monospace';
+  const isInBypass = bypass.active;
+
+  return (
+    <Flex direction="column" height="100%">
+      {/* Header */}
+      <Flex.Item>
+        <AppHeader title="Консоль" icon="terminal" />
+      </Flex.Item>
+
+      {/* Terminal output */}
+      <Flex.Item
+        grow
+        style={{
+          overflow: 'auto',
+          fontFamily: monoFont,
+          fontSize: '0.92em',
+          lineHeight: '1.6',
+        }}
+      >
+        <Box p={1}>
+          {lines.map((line) => (
+            <Box
+              key={line.id}
+              style={{
+                color: consoleLineColor(line.kind, theme_color),
+                fontWeight: line.kind === 'success' ? 'bold' : 'normal',
+                textShadow:
+                  line.kind === 'success' && style.glowIntensity > 0.3
+                    ? `0 0 8px ${hexToRgba(theme_color, 0.6)}`
+                    : 'none',
+              }}
+            >
+              {line.text}
+            </Box>
+          ))}
+
+          {/* Bypass status pulse */}
+          {isInBypass && (
+            <Box
+              bold
+              style={{
+                color: '#ff4444',
+                borderLeft: '3px solid #ff4444',
+                paddingLeft: '6px',
+                marginTop: '4px',
+              }}
+            >
+              ⏱ {bypass.timeLeft}s | Попытки: {bypass.attempts} |{' '}
+              Введите код: {bypass.code}
+            </Box>
+          )}
+
+          <div ref={endRef} />
+        </Box>
+      </Flex.Item>
+
+      {/* Input line */}
+      <Flex.Item>
+        <Box
+          style={{
+            borderTop: `${style.borderWidth} solid ${hexToRgba(isInBypass ? '#ff4444' : theme_color, style.panelBorderOpacity)}`,
+            background: `rgba(0,0,0,${0.3 + style.panelBgOpacity})`,
+            padding: '4px 8px',
+          }}
+        >
+          <Flex align="center">
+            <Flex.Item>
+              <Box
+                bold
+                mr={1}
+                style={{
+                  fontFamily: monoFont,
+                  color: isInBypass ? '#ff4444' : theme_color,
+                  minWidth: '24px',
+                  textAlign: 'right',
+                  textShadow:
+                    style.glowIntensity > 0.5
+                      ? `0 0 6px currentColor`
+                      : 'none',
+                }}
+              >
+                {isInBypass ? `[${bypass.timeLeft}]` : '>'}
+              </Box>
+            </Flex.Item>
+            <Flex.Item grow>
+              <Input
+                fluid
+                value={input}
+                placeholder={
+                  isInBypass
+                    ? `Введите код доступа (${bypass.code.substring(0, 4)}...)`
+                    : 'Введите команду...'
+                }
+                onChange={(val: string) => setInput(val)}
+                onEnter={handleSubmit}
+                style={{
+                  fontFamily: monoFont,
+                  background: 'transparent',
+                  border: 'none',
+                  color: isInBypass ? '#ff4444' : 'inherit',
+                }}
+              />
+            </Flex.Item>
+          </Flex>
+        </Box>
+      </Flex.Item>
+    </Flex>
   );
 };
