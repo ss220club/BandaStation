@@ -16,6 +16,27 @@
 	var/installed_in_zone = null
 	/// Список разрешенных зон для установки
 	var/list/allowed_zones = list()
+	/// Overlay-изображение для визуально видимых имплантов (лезвия, пушка, струна)
+	var/image/arm_visual = null
+
+/// Добавляет визуальный оверлей на руку где установлен имплант
+/obj/item/implant/ipc/proc/apply_arm_visual(mob/living/carbon/human/H)
+	remove_arm_visual(H)
+	if(!installed_in_zone || !(installed_in_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
+		return
+	var/dmi_file = (installed_in_zone == BODY_ZONE_L_ARM) ? \
+		'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi' : \
+		'modular_bandastation/MachAImpDe/icons/implants_righthand.dmi'
+	arm_visual = image(dmi_file, icon_state = icon_state)
+	LAZYADD(H.vis_contents, arm_visual)
+
+/// Убирает визуальный оверлей с руки
+/obj/item/implant/ipc/proc/remove_arm_visual(mob/living/carbon/human/H)
+	if(!arm_visual)
+		return
+	if(H)
+		LAZYREMOVE(H.vis_contents, arm_visual)
+	arm_visual = null
 
 // Переопределяем implant() чтобы принимать body_zone
 /obj/item/implant/ipc/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)

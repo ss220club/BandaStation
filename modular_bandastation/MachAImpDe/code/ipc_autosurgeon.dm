@@ -79,23 +79,24 @@
 		)
 
 	// Определяем body_zone для установки
-	var/body_zone = user.zone_selected
-
-	// Для IPC имплантов проверяем allowed_zones
+	var/body_zone
 	if(istype(stored_implant, /obj/item/implant/ipc))
 		var/obj/item/implant/ipc/ipc_imp = stored_implant
-		if(length(ipc_imp.allowed_zones))
-			// Проверяем что выбранная зона разрешена
+		if(length(ipc_imp.allowed_zones) == 1)
+			// Единственная зона — берём её автоматически по типу импланта
+			body_zone = ipc_imp.allowed_zones[1]
+		else if(length(ipc_imp.allowed_zones) > 1)
+			// Несколько зон — пользователь выбирает через zone_selected
+			body_zone = user.zone_selected
 			if(!(body_zone in ipc_imp.allowed_zones))
-				// Если нет - берем первую разрешенную зону
 				body_zone = ipc_imp.allowed_zones[1]
-				to_chat(user, span_warning("Выбранная зона недоступна для этого импланта. Используется зона: [body_zone]."))
-
-	// Для EMP-protector проверяем что это грудь
+				to_chat(user, span_warning("Выбранная зона недоступна для этого импланта. Используется: [body_zone]."))
+		else
+			body_zone = user.zone_selected
 	else if(istype(stored_implant, /obj/item/implant/emp_protector))
-		if(body_zone != BODY_ZONE_CHEST)
-			body_zone = BODY_ZONE_CHEST
-			to_chat(user, span_warning("EMP-протектор может быть установлен только в грудную клетку."))
+		body_zone = BODY_ZONE_CHEST
+	else
+		body_zone = user.zone_selected
 
 	// Пытаемся установить имплант
 	var/success = FALSE

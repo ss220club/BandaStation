@@ -48,6 +48,8 @@
 		return FALSE
 	var/mob/living/carbon/human/H = target
 
+	apply_arm_visual(H)
+
 	if(!silent)
 		to_chat(H, span_notice("Моноволоконная струна установлена в [installed_in_zone]. Используйте способность для атаки."))
 		if(user)
@@ -97,6 +99,8 @@
 	return TRUE
 
 /obj/item/implant/ipc/arm_razor/removed(mob/living/source, silent = FALSE, special = FALSE)
+	if(ishuman(source))
+		remove_arm_visual(source)
 	. = ..()
 	if(!silent)
 		to_chat(source, span_warning("Струна извлечена."))
@@ -178,6 +182,8 @@
 
 	// Проверяем парные лезвия — если есть оба, даём прыжок
 	check_paired_mantis(H)
+
+	apply_arm_visual(H)
 
 	if(!silent)
 		to_chat(H, span_notice("Лезвия богомола установлены в [installed_in_zone]. Используйте способность для активации."))
@@ -314,9 +320,10 @@
 		leaping = FALSE
 		UnregisterSignal(source, COMSIG_MOVABLE_IMPACT)
 	if(ishuman(source))
+		var/mob/living/carbon/human/H = source
+		remove_arm_visual(H)
 		UnregisterSignal(source, COMSIG_LIVING_UNARMED_ATTACK)
 		// Убираем прыжок если больше нет пары
-		var/mob/living/carbon/human/H = source
 		// Ждём удаления из списка имплантов перед проверкой
 		addtimer(CALLBACK(src, PROC_REF(check_paired_mantis), H), 1)
 	. = ..()
@@ -430,6 +437,8 @@
 
 	RegisterSignal(H, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(on_unarmed_attack))
 
+	apply_arm_visual(H)
+
 	if(!silent)
 		to_chat(H, span_notice("Военные лезвия установлены в [installed_in_zone]."))
 		if(user)
@@ -469,6 +478,7 @@
 	if(blades_active)
 		blades_active = FALSE
 	if(ishuman(source))
+		remove_arm_visual(source)
 		UnregisterSignal(source, COMSIG_LIVING_UNARMED_ATTACK)
 	. = ..()
 	if(!silent)
@@ -541,6 +551,8 @@
 	// Регистрируем сигнал для зарядки — когда патрон используют на владельце
 	RegisterSignal(H, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
 
+	apply_arm_visual(H)
+
 	if(!silent)
 		to_chat(H, span_notice("Дробовик установлен в [installed_in_zone]. Заряжайте дробовыми патронами, используя их на себе."))
 		if(user)
@@ -612,6 +624,7 @@
 
 /obj/item/implant/ipc/arm_cannon/removed(mob/living/source, silent = FALSE, special = FALSE)
 	if(ishuman(source))
+		remove_arm_visual(source)
 		UnregisterSignal(source, COMSIG_ATOM_ATTACKBY)
 	. = ..()
 	if(!silent)
