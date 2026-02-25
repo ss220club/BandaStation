@@ -50,6 +50,7 @@
 	desc = "Расширенные слоты для имплантов и органов."
 	brand_key = "morpheus"
 	visual_prefix = "morpheus"
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_morpheus.dmi'
 
 // 2. ETAMIN INDUSTRY
 /datum/ipc_brand/etamin
@@ -105,6 +106,7 @@
 	desc = "Резист к бруту 2x от стандарта. Берн резист 1.5x. Одноразовый ЭМП-протектор (вытащить и заменить нельзя нельзя)."
 	brand_key = "shellguard"
 	visual_prefix = "shellguard"
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_shellguard.dmi'
 	allowed_departments = list(DEPARTMENT_BITFLAG_SECURITY)
 
 // 9. UNBRANDED

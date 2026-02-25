@@ -7,8 +7,10 @@
 /obj/item/implant/ipc
 	name = "IPC implant"
 	desc = "Базовый имплант для IPC."
-	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
 	icon_state = "reactive_repair"
+	lefthand_file = 'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi'
+	righthand_file = 'modular_bandastation/MachAImpDe/icons/implants_righthand.dmi'
 	w_class = WEIGHT_CLASS_TINY
 	// Не даем action button по умолчанию - только нужным имплантам
 	actions_types = null
@@ -315,8 +317,10 @@
 /obj/item/implant/emp_protector
 	name = "EMP-Protector Implant"
 	desc = "Защита от ЕМП ударов. Устанавливается в грудную клетку. Для IPC - нагревает процессор при блокировке, для других - наносит burn урон."
-	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
 	icon_state = "emp_protector"
+	lefthand_file = 'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi'
+	righthand_file = 'modular_bandastation/MachAImpDe/icons/implants_righthand.dmi'
 	w_class = WEIGHT_CLASS_TINY
 	actions_types = null  // Нет action button
 	var/heat_per_use = 15 // Нагрев для IPC
