@@ -82,6 +82,7 @@
 #include "code/surgery/bodyparts/tajaran_bodyparts.dm"
 #include "code/surgery/bodyparts/vulpkanin_bodyparts.dm"
 #include "code/surgery/bodyparts/ipc_bodyparts.dm"
+#include "code/surgery/bodyparts/ipc_branded_bodyparts.dm"
 
 #include "code/surgery/organs/external/skrell_external.dm"
 #include "code/surgery/organs/external/vulpkanin_external.dm"
