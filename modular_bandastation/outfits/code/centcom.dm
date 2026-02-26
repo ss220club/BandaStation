@@ -205,6 +205,10 @@
 	r_pocket = /obj/item/knife/combat
 	l_pocket = /obj/item/reagent_containers/hypospray/combat/nanites
 
+/datum/id_trim/centcom/ntci/New()
+	. = ..()
+	access = list(ACCESS_CENT_CAPTAIN, ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
+
 /datum/id_trim/centcom/ntci
 	assignment = "NTCI Operative"
 	honorifics = list("Оперативник")

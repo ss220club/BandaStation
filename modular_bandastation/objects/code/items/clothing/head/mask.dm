@@ -20,6 +20,8 @@
 	greyscale_config = /datum/greyscale_config/breathscarf
 	greyscale_config_worn = /datum/greyscale_config/breathscarf/worn
 	flags_1 = IS_PLAYER_COLORABLE_1
+	flags_cover = MASKCOVERSMOUTH
+	flags_inv = HIDEFACE|HIDEFACIALHAIR|HIDESNOUT|HIDENECK
 
 /datum/greyscale_config/breathscarf
 	name = "Breathscarf"
