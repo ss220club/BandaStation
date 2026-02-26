@@ -489,6 +489,11 @@
 	if(!silent)
 		to_chat(H, span_warning("Магнитные модули удалены из [installed_in_zone]."))
 
+/obj/item/implantcase/ipc/magnetic_leg
+	name = "implant case - 'Magnetic Leg'"
+	desc = "Стеклянный кейс содержащий имплант встроенных магнитных ботинок для IPC."
+	imp_type = /obj/item/implant/ipc/magnetic_leg
+
 // Абилка переключения магбутов
 /datum/action/toggle_magboots
 	name = "Toggle Magnetic Boots"
@@ -634,3 +639,8 @@
 
 	if(!silent)
 		to_chat(H, span_warning("Био-генератор деактивирован."))
+
+/obj/item/implantcase/ipc/bio_generator
+	name = "implant case - 'Bio-Generator'"
+	desc = "Стеклянный кейс содержащий имплант био-генератора для IPC."
+	imp_type = /obj/item/implant/ipc/bio_generator
