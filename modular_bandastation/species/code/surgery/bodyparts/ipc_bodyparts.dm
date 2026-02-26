@@ -16,8 +16,6 @@
 	max_damage = 120
 
 	var/chassis_type = "Unbranded"
-	/// Префикс визуала для брендированных грудных клеток (устанавливает icon_state с суффиксом пола при присоединении)
-	var/brand_visual_prefix = ""
 
 	// Модификаторы урона от шасси
 	var/brute_reduction = 0  // Процент редукции brute урона (0.3 = 30% меньше урона)
@@ -264,9 +262,9 @@
 	playsound(get_turf(H), 'sound/items/deconstruct.ogg', 50, TRUE)
 	do_sparks(2, TRUE, H)
 	to_chat(H, span_notice("Системная диагностика: [name] подключена и функционирует нормально."))
-	if(brand_visual_prefix)
-		var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
-		icon_state = "[brand_visual_prefix]_chest_[gender_suffix]"
+	// Обновляем суффикс пола в icon_state для правильного отображения
+	var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
+	icon_state = "ipc_chest_[gender_suffix]"
 	return TRUE
 
 /obj/item/bodypart/head/ipc/try_attach_limb(mob/living/carbon/human/H, special)
