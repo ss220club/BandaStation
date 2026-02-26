@@ -60,6 +60,8 @@
 	visual_prefix = "etamin"
 	allowed_departments = list(DEPARTMENT_BITFLAG_SECURITY)
 	requires_module = TRUE
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_etamin.dmi'
+
 
 // 3. BISHOP CYBERNETICS
 /datum/ipc_brand/bishop
@@ -77,6 +79,7 @@
 	brand_key = "hesphiastos"
 	visual_prefix = "hesphiastos"
 	allowed_departments = list(DEPARTMENT_BITFLAG_SECURITY)
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_hephaestus.dmi'
 
 // 5. WARD-TAKAHASHI
 /datum/ipc_brand/ward_takahashi
@@ -84,7 +87,7 @@
 	desc = "Ускоренный саморемонт. Увеличенный срок работы батарейки. Уменьшенное количество слотов имплантов."
 	brand_key = "ward_takahashi"
 	visual_prefix = "ward"
-
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_wardtakahashi.dmi'
 // 6. XION MANUFACTURING GROUP
 /datum/ipc_brand/xion
 	name = "Xion Manufacturing Group"
@@ -124,6 +127,7 @@
 	brand_key = "cybersun"
 	visual_prefix = "cybersun"
 	requires_module = TRUE
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_cybersun.dmi'
 
 // 11. HEF
 // HEF не имеет собственного визуала — он берётся из фичи ipc_hef_visual
