@@ -63,8 +63,8 @@
 /obj/item/ipc_coolingblock
 	name = "portable cooling block"
 	desc = "Высокотехнологичное устройство активного охлаждения для IPC. Обеспечивает активное охлаждение 1°C/сек в течение 5 минут."
-	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
-	icon_state = "ColdBlock"
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "ipc_cooler"
 	w_class = WEIGHT_CLASS_SMALL
 	var/max_charges = 3
 	var/charges = 3

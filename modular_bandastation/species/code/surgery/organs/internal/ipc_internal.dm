@@ -99,9 +99,8 @@
 /obj/item/organ/heart/ipc_battery
 	name = "IPC power cell"
 	desc = "Высокоемкая батарея, обеспечивающая питание всех систем IPC."
-	icon = 'icons/obj/medical/organs/organs.dmi'
-	icon_state = "heart-c-on"
-	base_icon_state = "heart-c-on"
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "ipc_cell"
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_HEART
 
@@ -117,7 +116,7 @@
 /obj/item/organ/heart/ipc_battery/Initialize(mapload)
 	. = ..()
 	// НЕ вызываем update_appearance() чтобы не ломать иконку
-	icon_state = "heart-c-on"
+	icon_state = "ipc_cell"
 
 /obj/item/organ/heart/ipc_battery/examine(mob/user)
 	. = ..()
@@ -195,9 +194,8 @@
 /obj/item/organ/lungs/ipc
 	name = "cooling system"
 	desc = "Система охлаждения IPC. Регулирует температуру вычислительных блоков."
-	icon = 'icons/obj/medical/organs/organs.dmi'
-	icon_state = "lungs-c"
-	base_icon_state = "lungs-c"
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "ipc_cooler"
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_LUNGS
 
@@ -210,9 +208,8 @@
 
 /obj/item/organ/lungs/ipc/Initialize(mapload)
 	. = ..()
-	// Убедимся что иконка правильная
 	if(!icon_state)
-		icon_state = "lungs-c"
+		icon_state = "ipc_cooler"
 	update_appearance()
 
 /obj/item/organ/lungs/ipc/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, movement_flags)
@@ -258,14 +255,14 @@
 	name = "IPC optical sensors"
 	desc = "Оптические сенсоры IPC. Позволяют видеть в различных спектрах."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
-	icon_state = "cybernetic_eyeballs"
+	icon_state = "ipc_eyes"
 	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
 
 /obj/item/organ/eyes/robotic/ipc/Initialize(mapload)
 	. = ..()
 	if(!icon_state)
-		icon_state = "cybernetic_eyeballs"
+		icon_state = "ipc_eyes"
 	update_appearance()
 
 /obj/item/organ/eyes/robotic/ipc/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, movement_flags)
@@ -300,9 +297,8 @@
 /obj/item/organ/tongue/robot/ipc
 	name = "IPC vocal synthesizer"
 	desc = "Голосовой синтезатор IPC."
-	icon = 'icons/obj/medical/organs/organs.dmi'
-	icon_state = "tonguerobot"
-	base_icon_state = "tonguerobot"
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "ipc_voicebox"
 
 	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
@@ -312,7 +308,7 @@
 /obj/item/organ/tongue/robot/ipc/Initialize(mapload)
 	. = ..()
 	if(!icon_state)
-		icon_state = "tonguerobot"
+		icon_state = "ipc_voicebox"
 	update_appearance()
 
 /obj/item/organ/tongue/robot/ipc/handle_speech(datum/source, list/speech_args)
