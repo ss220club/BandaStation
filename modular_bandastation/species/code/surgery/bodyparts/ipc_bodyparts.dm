@@ -103,10 +103,17 @@
 	max_damage = 70
 
 	var/grip_strength = 1.0
+	var/chassis_type = "Unbranded"
 
 	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
+
+/obj/item/bodypart/arm/left/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+	. = ..()
+	if(!. || lazy)
+		return
+	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // ПРАВАЯ РУКА
@@ -125,10 +132,17 @@
 	max_damage = 70
 
 	var/grip_strength = 1.0
+	var/chassis_type = "Unbranded"
 
 	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
+
+/obj/item/bodypart/arm/right/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+	. = ..()
+	if(!. || lazy)
+		return
+	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // ЛЕВАЯ НОГА
@@ -146,9 +160,17 @@
 	bodytype = BODYTYPE_IPC
 	max_damage = 70
 
+	var/chassis_type = "Unbranded"
+
 	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
+
+/obj/item/bodypart/leg/left/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+	. = ..()
+	if(!. || lazy)
+		return
+	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // ПРАВАЯ НОГА
@@ -166,9 +188,17 @@
 	bodytype = BODYTYPE_IPC
 	max_damage = 70
 
+	var/chassis_type = "Unbranded"
+
 	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
+
+/obj/item/bodypart/leg/right/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+	. = ..()
+	if(!. || lazy)
+		return
+	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // УРОН И СПАРКИ

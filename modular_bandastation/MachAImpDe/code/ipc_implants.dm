@@ -3,6 +3,54 @@
 // Устанавливаются через хирургию в конкретные части тела
 // ============================================
 
+// ============================================
+// ОВЕРЛЕЙ РУКИ — DATUM
+// Использует систему bodypart_overlays для
+// правильного рендеринга поверх тела.
+// ============================================
+
+/datum/bodypart_overlay/ipc_implant
+	layers = EXTERNAL_ADJACENT
+	/// Имплант, которому принадлежит этот оверлей
+	var/obj/item/implant/ipc/implant
+	/// Bodypart, к которой прикреплён оверлей
+	var/obj/item/bodypart/limb_ref
+
+/datum/bodypart_overlay/ipc_implant/New(obj/item/implant/ipc/implant_ref)
+	. = ..()
+	src.implant = implant_ref
+
+/datum/bodypart_overlay/ipc_implant/Destroy(force)
+	var/obj/item/bodypart/saved_limb = limb_ref
+	limb_ref = null
+	implant = null
+	if(saved_limb && !QDELETED(saved_limb))
+		saved_limb.remove_bodypart_overlay(src, update = FALSE)
+	return ..()
+
+/datum/bodypart_overlay/ipc_implant/added_to_limb(obj/item/bodypart/limb)
+	. = ..()
+	limb_ref = limb
+
+/datum/bodypart_overlay/ipc_implant/removed_from_limb(obj/item/bodypart/limb)
+	. = ..()
+	limb_ref = null
+
+/datum/bodypart_overlay/ipc_implant/generate_icon_cache()
+	. = ..()
+	if(implant)
+		. += implant.get_overlay_state()
+
+/datum/bodypart_overlay/ipc_implant/get_overlay(layer, obj/item/bodypart/limb)
+	layer = bitflag_to_layer(layer)
+	if(!implant)
+		return list()
+	return implant.get_overlay(layer, limb)
+
+// ============================================
+// БАЗОВЫЙ КЛАСС ИМПЛАНТОВ IPC
+// ============================================
+
 // Базовый класс для IPC имплантов
 /obj/item/implant/ipc
 	name = "IPC implant"
@@ -16,29 +64,46 @@
 	var/installed_in_zone = null
 	/// Список разрешенных зон для установки
 	var/list/allowed_zones = list()
-	/// Overlay-изображение для визуально видимых имплантов (лезвия, пушка, струна)
-	var/image/arm_visual = null
+	/// Bodypart overlay datum для визуально видимых имплантов (лезвия, пушка, струна)
+	var/arm_visual = null
 	/// Название состояния в implants_lefthand/righthand.dmi (null = оверлей не показывается)
 	var/arm_visual_state = null
 
-/// Добавляет визуальный оверлей на руку где установлен имплант
+/// Возвращает icon_state для bodypart overlay
+/obj/item/implant/ipc/proc/get_overlay_state()
+	return arm_visual_state
+
+/// Возвращает список images для рендеринга поверх bodypart
+/obj/item/implant/ipc/proc/get_overlay(image_layer, obj/item/bodypart/limb)
+	. = list()
+	if(!arm_visual_state || !limb)
+		return
+	var/dmi_file = (limb.body_zone == BODY_ZONE_L_ARM) ? \
+		'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi' : \
+		'modular_bandastation/MachAImpDe/icons/implants_righthand.dmi'
+	var/image/overlay = image(dmi_file, icon_state = arm_visual_state, layer = image_layer)
+	overlay.layer = -BODYPARTS_HIGH_LAYER
+	. += overlay
+
+/// Добавляет визуальный оверлей через bodypart overlay систему
 /obj/item/implant/ipc/proc/apply_arm_visual(mob/living/carbon/human/H)
 	remove_arm_visual(H)
 	if(!arm_visual_state || !installed_in_zone || !(installed_in_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)))
 		return
-	var/dmi_file = (installed_in_zone == BODY_ZONE_L_ARM) ? \
-		'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi' : \
-		'modular_bandastation/MachAImpDe/icons/implants_righthand.dmi'
-	arm_visual = image(dmi_file, icon_state = arm_visual_state)
-	LAZYADD(H.vis_contents, arm_visual)
+	var/obj/item/bodypart/limb = H.get_bodypart(installed_in_zone)
+	if(!limb)
+		return
+	arm_visual = new /datum/bodypart_overlay/ipc_implant(src)
+	limb.add_bodypart_overlay(arm_visual)
 
 /// Убирает визуальный оверлей с руки
 /obj/item/implant/ipc/proc/remove_arm_visual(mob/living/carbon/human/H)
 	if(!arm_visual)
 		return
-	if(H)
-		LAZYREMOVE(H.vis_contents, arm_visual)
-	arm_visual = null
+	var/datum/bodypart_overlay/ipc_implant/overlay = arm_visual
+	if(overlay.limb_ref)
+		overlay.limb_ref.remove_bodypart_overlay(overlay)
+	QDEL_NULL(arm_visual)
 
 // Переопределяем implant() чтобы принимать body_zone
 /obj/item/implant/ipc/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)

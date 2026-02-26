@@ -37,6 +37,7 @@
 	icon = IPC_DMI_MORPHEUS
 	icon_static = IPC_DMI_MORPHEUS
 	icon_greyscale = null
+	chassis_type = "Morpheus"
 
 /obj/item/bodypart/arm/right/ipc/morpheus
 	name = "Morpheus Cyberkinetics IPC right arm"
@@ -44,6 +45,7 @@
 	icon = IPC_DMI_MORPHEUS
 	icon_static = IPC_DMI_MORPHEUS
 	icon_greyscale = null
+	chassis_type = "Morpheus"
 
 /obj/item/bodypart/leg/left/ipc/morpheus
 	name = "Morpheus Cyberkinetics IPC left leg"
@@ -51,6 +53,7 @@
 	icon = IPC_DMI_MORPHEUS
 	icon_static = IPC_DMI_MORPHEUS
 	icon_greyscale = null
+	chassis_type = "Morpheus"
 
 /obj/item/bodypart/leg/right/ipc/morpheus
 	name = "Morpheus Cyberkinetics IPC right leg"
@@ -58,6 +61,7 @@
 	icon = IPC_DMI_MORPHEUS
 	icon_static = IPC_DMI_MORPHEUS
 	icon_greyscale = null
+	chassis_type = "Morpheus"
 
 #undef IPC_DMI_MORPHEUS
 
@@ -77,18 +81,22 @@
 /obj/item/bodypart/arm/left/ipc/etamin
 	name = "Etamin Industry IPC left arm"
 	desc = "Левая рука IPC производства Etamin Industry."
+	chassis_type = "Etamin"
 
 /obj/item/bodypart/arm/right/ipc/etamin
 	name = "Etamin Industry IPC right arm"
 	desc = "Правая рука IPC производства Etamin Industry."
+	chassis_type = "Etamin"
 
 /obj/item/bodypart/leg/left/ipc/etamin
 	name = "Etamin Industry IPC left leg"
 	desc = "Левая нога IPC производства Etamin Industry."
+	chassis_type = "Etamin"
 
 /obj/item/bodypart/leg/right/ipc/etamin
 	name = "Etamin Industry IPC right leg"
 	desc = "Правая нога IPC производства Etamin Industry."
+	chassis_type = "Etamin"
 
 // ============================================
 // 3. BISHOP CYBERNETICS
@@ -117,6 +125,7 @@
 	icon = IPC_DMI_BISHOP
 	icon_static = IPC_DMI_BISHOP
 	icon_greyscale = null
+	chassis_type = "Bishop"
 
 /obj/item/bodypart/arm/right/ipc/bishop
 	name = "Bishop Cybernetics IPC right arm"
@@ -124,6 +133,7 @@
 	icon = IPC_DMI_BISHOP
 	icon_static = IPC_DMI_BISHOP
 	icon_greyscale = null
+	chassis_type = "Bishop"
 
 /obj/item/bodypart/leg/left/ipc/bishop
 	name = "Bishop Cybernetics IPC left leg"
@@ -131,6 +141,7 @@
 	icon = IPC_DMI_BISHOP
 	icon_static = IPC_DMI_BISHOP
 	icon_greyscale = null
+	chassis_type = "Bishop"
 
 /obj/item/bodypart/leg/right/ipc/bishop
 	name = "Bishop Cybernetics IPC right leg"
@@ -138,6 +149,7 @@
 	icon = IPC_DMI_BISHOP
 	icon_static = IPC_DMI_BISHOP
 	icon_greyscale = null
+	chassis_type = "Bishop"
 
 #undef IPC_DMI_BISHOP
 
@@ -157,18 +169,22 @@
 /obj/item/bodypart/arm/left/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC left arm"
 	desc = "Левая рука IPC производства Hesphiastos Industries."
+	chassis_type = "Hesphiastos"
 
 /obj/item/bodypart/arm/right/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC right arm"
 	desc = "Правая рука IPC производства Hesphiastos Industries."
+	chassis_type = "Hesphiastos"
 
 /obj/item/bodypart/leg/left/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC left leg"
 	desc = "Левая нога IPC производства Hesphiastos Industries."
+	chassis_type = "Hesphiastos"
 
 /obj/item/bodypart/leg/right/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC right leg"
 	desc = "Правая нога IPC производства Hesphiastos Industries."
+	chassis_type = "Hesphiastos"
 
 // ============================================
 // 5. WARD-TAKAHASHI
@@ -186,18 +202,22 @@
 /obj/item/bodypart/arm/left/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC left arm"
 	desc = "Левая рука IPC производства Ward-Takahashi."
+	chassis_type = "Ward-Takahashi"
 
 /obj/item/bodypart/arm/right/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC right arm"
 	desc = "Правая рука IPC производства Ward-Takahashi."
+	chassis_type = "Ward-Takahashi"
 
 /obj/item/bodypart/leg/left/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC left leg"
 	desc = "Левая нога IPC производства Ward-Takahashi."
+	chassis_type = "Ward-Takahashi"
 
 /obj/item/bodypart/leg/right/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC right leg"
 	desc = "Правая нога IPC производства Ward-Takahashi."
+	chassis_type = "Ward-Takahashi"
 
 // ============================================
 // 6. XION MANUFACTURING GROUP
@@ -226,6 +246,7 @@
 	icon = IPC_DMI_XION
 	icon_static = IPC_DMI_XION
 	icon_greyscale = null
+	chassis_type = "Xion"
 
 /obj/item/bodypart/arm/right/ipc/xion
 	name = "Xion Manufacturing Group IPC right arm"
@@ -233,6 +254,7 @@
 	icon = IPC_DMI_XION
 	icon_static = IPC_DMI_XION
 	icon_greyscale = null
+	chassis_type = "Xion"
 
 /obj/item/bodypart/leg/left/ipc/xion
 	name = "Xion Manufacturing Group IPC left leg"
@@ -240,6 +262,7 @@
 	icon = IPC_DMI_XION
 	icon_static = IPC_DMI_XION
 	icon_greyscale = null
+	chassis_type = "Xion"
 
 /obj/item/bodypart/leg/right/ipc/xion
 	name = "Xion Manufacturing Group IPC right leg"
@@ -247,6 +270,7 @@
 	icon = IPC_DMI_XION
 	icon_static = IPC_DMI_XION
 	icon_greyscale = null
+	chassis_type = "Xion"
 
 #undef IPC_DMI_XION
 
@@ -277,6 +301,7 @@
 	icon = IPC_DMI_ZENGHU
 	icon_static = IPC_DMI_ZENGHU
 	icon_greyscale = null
+	chassis_type = "Zeng-Hu"
 
 /obj/item/bodypart/arm/right/ipc/zeng_hu
 	name = "Zeng-Hu Pharmaceuticals IPC right arm"
@@ -284,6 +309,7 @@
 	icon = IPC_DMI_ZENGHU
 	icon_static = IPC_DMI_ZENGHU
 	icon_greyscale = null
+	chassis_type = "Zeng-Hu"
 
 /obj/item/bodypart/leg/left/ipc/zeng_hu
 	name = "Zeng-Hu Pharmaceuticals IPC left leg"
@@ -291,6 +317,7 @@
 	icon = IPC_DMI_ZENGHU
 	icon_static = IPC_DMI_ZENGHU
 	icon_greyscale = null
+	chassis_type = "Zeng-Hu"
 
 /obj/item/bodypart/leg/right/ipc/zeng_hu
 	name = "Zeng-Hu Pharmaceuticals IPC right leg"
@@ -298,6 +325,7 @@
 	icon = IPC_DMI_ZENGHU
 	icon_static = IPC_DMI_ZENGHU
 	icon_greyscale = null
+	chassis_type = "Zeng-Hu"
 
 #undef IPC_DMI_ZENGHU
 
@@ -328,6 +356,7 @@
 	icon = IPC_DMI_SHELLGUARD
 	icon_static = IPC_DMI_SHELLGUARD
 	icon_greyscale = null
+	chassis_type = "Shellguard"
 
 /obj/item/bodypart/arm/right/ipc/shellguard
 	name = "Shellguard Munitions IPC right arm"
@@ -335,6 +364,7 @@
 	icon = IPC_DMI_SHELLGUARD
 	icon_static = IPC_DMI_SHELLGUARD
 	icon_greyscale = null
+	chassis_type = "Shellguard"
 
 /obj/item/bodypart/leg/left/ipc/shellguard
 	name = "Shellguard Munitions IPC left leg"
@@ -342,6 +372,7 @@
 	icon = IPC_DMI_SHELLGUARD
 	icon_static = IPC_DMI_SHELLGUARD
 	icon_greyscale = null
+	chassis_type = "Shellguard"
 
 /obj/item/bodypart/leg/right/ipc/shellguard
 	name = "Shellguard Munitions IPC right leg"
@@ -349,6 +380,7 @@
 	icon = IPC_DMI_SHELLGUARD
 	icon_static = IPC_DMI_SHELLGUARD
 	icon_greyscale = null
+	chassis_type = "Shellguard"
 
 #undef IPC_DMI_SHELLGUARD
 
@@ -368,15 +400,19 @@
 /obj/item/bodypart/arm/left/ipc/cybersun
 	name = "Cybersun Industries IPC left arm"
 	desc = "Левая рука IPC производства Cybersun Industries."
+	chassis_type = "Cybersun"
 
 /obj/item/bodypart/arm/right/ipc/cybersun
 	name = "Cybersun Industries IPC right arm"
 	desc = "Правая рука IPC производства Cybersun Industries."
+	chassis_type = "Cybersun"
 
 /obj/item/bodypart/leg/left/ipc/cybersun
 	name = "Cybersun Industries IPC left leg"
 	desc = "Левая нога IPC производства Cybersun Industries."
+	chassis_type = "Cybersun"
 
 /obj/item/bodypart/leg/right/ipc/cybersun
 	name = "Cybersun Industries IPC right leg"
 	desc = "Правая нога IPC производства Cybersun Industries."
+	chassis_type = "Cybersun"

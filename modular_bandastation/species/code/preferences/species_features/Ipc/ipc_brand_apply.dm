@@ -179,6 +179,85 @@
 	H.update_body_parts()
 
 // ============================================
+// ОПРЕДЕЛЕНИЕ БРЕНДА ПРИ СБОРКЕ ШАССИ
+// ============================================
+// Вызывается автоматически при прикреплении любой
+// небашенной конечности IPC (рука/нога).
+// Если все 5 небашенных частей (грудь + 2 руки + 2 ноги)
+// принадлежат одному бренду — применяем этот бренд.
+// ============================================
+
+/// Конвертирует chassis_type из bodypart в brand_key для apply_ipc_brand
+/proc/chassis_type_to_brand_key(chassis_type)
+	switch(chassis_type)
+		if("Morpheus")      return "morpheus"
+		if("Etamin")        return "etamin"
+		if("Bishop")        return "bishop"
+		if("Hesphiastos")   return "hesphiastos"
+		if("Ward-Takahashi") return "ward_takahashi"
+		if("Xion")          return "xion"
+		if("Zeng-Hu")       return "zeng_hu"
+		if("Shellguard")    return "shellguard"
+		if("Cybersun")      return "cybersun"
+	return "unbranded"
+
+/// Возвращает chassis_type для IPC-конечности (null если не IPC bodypart)
+/proc/ipc_get_bodypart_chassis_type(obj/item/bodypart/part)
+	if(istype(part, /obj/item/bodypart/chest/ipc))
+		var/obj/item/bodypart/chest/ipc/P = part
+		return P.chassis_type
+	if(istype(part, /obj/item/bodypart/arm/left/ipc))
+		var/obj/item/bodypart/arm/left/ipc/P = part
+		return P.chassis_type
+	if(istype(part, /obj/item/bodypart/arm/right/ipc))
+		var/obj/item/bodypart/arm/right/ipc/P = part
+		return P.chassis_type
+	if(istype(part, /obj/item/bodypart/leg/left/ipc))
+		var/obj/item/bodypart/leg/left/ipc/P = part
+		return P.chassis_type
+	if(istype(part, /obj/item/bodypart/leg/right/ipc))
+		var/obj/item/bodypart/leg/right/ipc/P = part
+		return P.chassis_type
+	return null
+
+/// Проверяет собранное шасси IPC и применяет бренд если все небашенные части совпадают.
+/// Вызывается из try_attach_limb у каждой небашенной конечности IPC.
+/proc/ipc_check_assembly_brand(mob/living/carbon/human/H)
+	if(!H || !istype(H.dna?.species, /datum/species/ipc))
+		return
+
+	var/list/required_zones = list(
+		BODY_ZONE_CHEST,
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_L_LEG,
+		BODY_ZONE_R_LEG,
+	)
+
+	var/detected_brand = null
+	var/all_match = TRUE
+
+	for(var/zone in required_zones)
+		var/obj/item/bodypart/part = H.get_bodypart(zone)
+		if(!part)
+			return  // Не все части ещё установлены
+
+		var/part_chassis_type = ipc_get_bodypart_chassis_type(part)
+		if(isnull(part_chassis_type))
+			return  // Не IPC bodypart
+
+		if(isnull(detected_brand))
+			detected_brand = part_chassis_type
+		else if(detected_brand != part_chassis_type)
+			all_match = FALSE
+			break
+
+	// Все 5 частей установлены — применяем бренд
+	var/brand_key = (all_match && detected_brand) ? chassis_type_to_brand_key(detected_brand) : "unbranded"
+	apply_ipc_brand(H, brand_key)
+	apply_ipc_brand_effects(H, brand_key)
+
+// ============================================
 // ВАЛИДАЦИЯ БРЕНДА ПО ПРОФЕССИИ
 // ============================================
 // Проверяем что профессия позволяет выбранный бренд.
