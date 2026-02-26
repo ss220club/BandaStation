@@ -409,3 +409,7 @@
       counterfit mail.
   - bugfix: Bioscrambler anomaly pulse activation works
   - bugfix: Pieces of paper no longer make bodybags inescapable
+2026-02-26:
+  nevimer:
+  - bugfix: fixed runechat's for radio emotes appearing incorrectly for observers
+  - code_imp: reuse the emote check from living's hearing function
