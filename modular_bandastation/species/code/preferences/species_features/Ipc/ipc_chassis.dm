@@ -406,13 +406,13 @@
 // ДИЗАЙНЫ УТИЛИТАРНЫХ ИМПЛАНТОВ IPC
 // ============================================
 
-/// Кейс с имплантом магнитных суставов
+/// Имплант магнитных суставов
 /datum/design/ipc_implant_magnetic_joints
-	name = "IPC Magnetic Joints Implant Case"
+	name = "IPC Magnetic Joints Implant"
 	desc = "Имплант магнитных суставов для конечностей IPC. Позволяет быстро прикрепить оторванную конечность без хирургии."
 	id = "ipc_implant_magnetic_joints"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/magnetic_joints
+	build_path = /obj/item/implant/ipc/magnetic_joints
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1,
@@ -421,13 +421,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_MEDICAL
 
-/// Кейс с имплантом герметичных суставов
+/// Имплант герметичных суставов
 /datum/design/ipc_implant_sealed_joints
-	name = "IPC Sealed Joints Implant Case"
+	name = "IPC Sealed Joints Implant"
 	desc = "Имплант укреплённых суставов IPC. Предотвращает отрывание конечности без хирургии."
 	id = "ipc_implant_sealed_joints"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/sealed_joints
+	build_path = /obj/item/implant/ipc/sealed_joints
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1,
@@ -437,13 +437,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_MEDICAL
 
-/// Кейс с имплантом реактивного ремонта
+/// Имплант реактивного ремонта
 /datum/design/ipc_implant_reactive_repair
-	name = "IPC Reactive Repair Implant Case"
+	name = "IPC Reactive Repair Implant"
 	desc = "Имплант автоматического ремонта для IPC. Медленно лечит повреждения за счёт заряда батареи."
 	id = "ipc_implant_reactive_repair"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/reactive_repair
+	build_path = /obj/item/implant/ipc/reactive_repair
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 2,
@@ -453,13 +453,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_MEDICAL
 
-/// Кейс с имплантом EMP-протектора (универсальный)
+/// Имплант EMP-протектора (универсальный)
 /datum/design/ipc_implant_emp_protector
-	name = "EMP-Protector Implant Case"
+	name = "EMP-Protector Implant"
 	desc = "Имплант защиты от ЭМИ. Для IPC нагревает процессор при блокировке, для органиков — прижигает ткань."
 	id = "ipc_implant_emp_protector"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/emp_protector
+	build_path = /obj/item/implant/emp_protector
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 2,
@@ -469,13 +469,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
-/// Кейс с имплантом магнитных ног
+/// Имплант магнитных ног
 /datum/design/ipc_implant_magnetic_leg
-	name = "IPC Magnetic Leg Implant Case"
+	name = "IPC Magnetic Leg Implant"
 	desc = "Встроенные магнитные ботинки для ног IPC. Позволяют удерживаться на металлических поверхностях в невесомости."
 	id = "ipc_implant_magnetic_leg"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/magnetic_leg
+	build_path = /obj/item/implant/ipc/magnetic_leg
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1,
@@ -485,13 +485,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
-/// Кейс с имплантом био-генератора
+/// Имплант био-генератора
 /datum/design/ipc_implant_bio_generator
-	name = "IPC Bio-Generator Implant Case"
+	name = "IPC Bio-Generator Implant"
 	desc = "Имплант, позволяющий IPC переваривать органическую пищу и конвертировать её в заряд батареи."
 	id = "ipc_implant_bio_generator"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/bio_generator
+	build_path = /obj/item/implant/ipc/bio_generator
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 3,
@@ -501,13 +501,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_MEDICAL
 
-/// Кейс импланта термостабилизатора
+/// Имплант термостабилизатора
 /datum/design/ipc_implant_cooling_system
-	name = "IPC Thermal Stabilizer Implant Case"
+	name = "IPC Thermal Stabilizer Implant"
 	desc = "Улучшенная система охлаждения для IPC. Обеспечивает постоянное пассивное охлаждение процессора."
 	id = "ipc_implant_cooling_system"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc_cooling_system
+	build_path = /obj/item/implant/ipc_cooling_system
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 2,
@@ -555,13 +555,13 @@
 // ДИЗАЙНЫ БОЕВЫХ ИМПЛАНТОВ IPC
 // ============================================
 
-/// Кейс с имплантом моновайера
+/// Имплант моновайера
 /datum/design/ipc_implant_arm_razor
-	name = "IPC Arm Razor Implant Case"
+	name = "IPC Arm Razor Implant"
 	desc = "Моноволоконная струна, встраиваемая в предплечье. Высокий шанс отсечения конечностей."
 	id = "ipc_implant_arm_razor"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/arm_razor
+	build_path = /obj/item/implant/ipc/arm_razor
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1,
@@ -571,13 +571,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
-/// Кейс с имплантом лезвий богомола (правая рука)
+/// Имплант лезвий богомола (правая рука)
 /datum/design/ipc_implant_mantis_r
-	name = "IPC Mantis Blade Implant Case (Right)"
+	name = "IPC Mantis Blade Implant (Right)"
 	desc = "Выдвижные лезвия богомола для правой руки IPC. При парной установке даёт прыжок-атаку."
 	id = "ipc_implant_mantis_r"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/mantis_right
+	build_path = /obj/item/implant/ipc/mantis
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 4,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1,
@@ -587,13 +587,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
-/// Кейс с имплантом лезвий богомола (левая рука)
+/// Имплант лезвий богомола (левая рука)
 /datum/design/ipc_implant_mantis_l
-	name = "IPC Mantis Blade Implant Case (Left)"
+	name = "IPC Mantis Blade Implant (Left)"
 	desc = "Выдвижные лезвия богомола для левой руки IPC. При парной установке даёт прыжок-атаку."
 	id = "ipc_implant_mantis_l"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/mantis_left
+	build_path = /obj/item/implant/ipc/mantis/left
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 4,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1,
@@ -603,13 +603,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
-/// Кейс с имплантом руки-дробовика
+/// Имплант руки-дробовика
 /datum/design/ipc_implant_arm_cannon
-	name = "IPC Arm Cannon Implant Case"
+	name = "IPC Arm Cannon Implant"
 	desc = "Встроенный дробовик в предплечье IPC. Заряжается охотничьей дробью."
 	id = "ipc_implant_arm_cannon"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/arm_cannon
+	build_path = /obj/item/implant/ipc/arm_cannon
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 2,
@@ -623,13 +623,13 @@
 // ДИЗАЙНЫ ВОЕННЫХ ИМПЛАНТОВ IPC (секретные)
 // ============================================
 
-/// Кейс с военными лезвиями богомола (правая)
+/// Военные лезвия богомола (правая)
 /datum/design/ipc_implant_military_mantis_r
-	name = "IPC Military Mantis Blade Case (Right)"
+	name = "IPC Military Mantis Blade (Right)"
 	desc = "Усиленные военные лезвия богомола для правой руки IPC. Наносят значительно больше урона и яда."
 	id = "ipc_implant_military_mantis_r"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/military_mantis_right
+	build_path = /obj/item/implant/ipc/military_mantis
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 2,
@@ -640,13 +640,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
-/// Кейс с военными лезвиями богомола (левая)
+/// Военные лезвия богомола (левая)
 /datum/design/ipc_implant_military_mantis_l
-	name = "IPC Military Mantis Blade Case (Left)"
+	name = "IPC Military Mantis Blade (Left)"
 	desc = "Усиленные военные лезвия богомола для левой руки IPC."
 	id = "ipc_implant_military_mantis_l"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/military_mantis_left
+	build_path = /obj/item/implant/ipc/military_mantis/left
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 2,
@@ -657,13 +657,13 @@
 	category = list(RND_CATEGORY_MECHFAB_IPC)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
-/// Кейс с сандевистаном
+/// Сандевистан
 /datum/design/ipc_implant_sandevistan
-	name = "IPC Sandevistan Implant Case"
+	name = "IPC Sandevistan Implant"
 	desc = "Адреналиновый ускоритель реакций для IPC. Временно многократно ускоряет действия."
 	id = "ipc_implant_sandevistan"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implantcase/ipc/sandevistan
+	build_path = /obj/item/implant/ipc/sandevistan
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 4,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 3,

@@ -270,6 +270,7 @@
 	icon = IPC_DMI_ZENGHU
 	icon_static = IPC_DMI_ZENGHU
 	icon_greyscale = null
+	head_flags = HEAD_LIPS|HEAD_DEBRAIN|HEAD_HAIR
 
 /obj/item/bodypart/arm/left/ipc/zeng_hu
 	name = "Zeng-Hu Pharmaceuticals IPC left arm"
