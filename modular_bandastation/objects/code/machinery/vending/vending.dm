@@ -174,6 +174,7 @@
 				/obj/item/gun/energy/laser/hellgun = 5,
 				/obj/item/gun/energy/laser/xray = 1,
 				/obj/item/gun/energy/laser/scatter = 1,
+				/obj/item/gun/energy/laser/scatter/shotty = 1,
 				/obj/item/gun/energy/lasercannon = 1,
 				/obj/item/gun/energy/ionrifle/carbine = 3,
 				/obj/item/gun/ballistic/shotgun/riot/m64 = 5,

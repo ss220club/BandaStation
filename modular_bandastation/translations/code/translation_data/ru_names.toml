@@ -2819,15 +2819,6 @@ instrumental = "перчатками Каза Рук"
 prepositional = "перчатках Каза Рук"
 gender = "plural"
 
-["compact combat shotgun"]
-nominative = "компактный боевой дробовик"
-genitive = "компактного боевого дробовика"
-dative = "компактному боевому дробовику"
-accusative = "компактный боевой дробовик"
-instrumental = "компактным боевым дробовиком"
-prepositional = "компактном боевом дробовике"
-gender = "male"
-
 ["warden's jacket"]
 nominative = "куртка смотрителя"
 genitive = "куртки смотрителя"
@@ -3388,13 +3379,13 @@ instrumental = "комплектом деталей для ионного кар
 prepositional = "комплекте деталей для ионного карабина (нелетально/очень разрушительное/очень летально для силиконов)"
 gender = "male"
 
-["X-ray laser gun"]
-nominative = "рентгеновский карабин"
-genitive = "рентгеновского карабина"
-dative = "рентгеновскому карабину"
-accusative = "рентгеновский карабин"
-instrumental = "рентгеновским карабином"
-prepositional = "рентгеновском карабине"
+["Type 6 X-ray laser gun"]
+nominative = "рентгеновский лазерный карабин Тип 6"
+genitive = "рентгеновского лазерного карабина Тип 6"
+dative = "рентгеновскому лазерному карабину Тип 6"
+accusative = "рентгеновский лазерный карабин Тип 6"
+instrumental = "рентгеновским лазерным карабином Тип 6"
+prepositional = "рентгеновском лазерном карабине Тип 6"
 gender = "male"
 
 ["x-ray laser gun parts kit (lethal)"]
@@ -3451,40 +3442,94 @@ instrumental = "энергетическим карабином"
 prepositional = "энергетическом карабине"
 gender = "male"
 
-["laser gun"]
-nominative = "лазерный карабин"
-genitive = "лазерного карабина"
-dative = "лазерному карабину"
-accusative = "лазерный карабин"
-instrumental = "лазерным карабином"
-prepositional = "лазерном карабине"
+["retro laser"]
+nominative = "ретро лазерный карабин"
+genitive = "ретро лазерного карабина"
+dative = "ретро лазерному карабину"
+accusative = "ретро лазерный карабин"
+instrumental = "ретро лазерным карабином"
+prepositional = "ретро лазерном карабине"
 gender = "male"
+
+["Type 1 laser gun"]
+nominative = "лазерный карабин Тип 1"
+genitive = "лазерного карабина Тип 1"
+dative = "лазерному карабину Тип 1"
+accusative = "лазерный карабин Тип 1"
+instrumental = "лазерным карабином Тип 1"
+prepositional = "лазерном карабине Тип 1"
+gender = "male"
+
+["Type 5 laser gun"]
+nominative = "лазерный карабин Тип 5"
+genitive = "лазерного карабина Тип 5"
+dative = "лазерному карабину Тип 5"
+accusative = "лазерный карабин Тип 5"
+instrumental = "лазерным карабином Тип 5"
+prepositional = "лазерном карабине Тип 5"
+gender = "male"
+
+["Type 3 laser gun"]
+nominative = "лазерный карабин Тип 3"
+genitive = "лазерного карабина Тип 3"
+dative = "лазерному карабину Тип 3"
+accusative = "лазерный карабин Тип 3"
+instrumental = "лазерным карабином Тип 3"
+prepositional = "лазерном карабине Тип 3"
+gender = "male"
+
+["Type 4 'hellfire' laser gun"]
+nominative = "лазерный карабин Тип 4 \"Hellfire\""
+genitive = "лазерного карабина Тип 4 \"Hellfire\""
+dative = "лазерному карабину Тип 4 \"Hellfire\""
+accusative = "лазерный карабин Тип 4 \"Hellfire\""
+instrumental = "лазерным карабином Тип 4 \"Hellfire\""
+prepositional = "лазерном карабине Тип 4 \"Hellfire\""
+gender = "male"
+
+["Type 5/C laser pistol"]
+nominative = "лазерный пистолет Тип 5/C"
+genitive = "лазерного пистолета Тип 5/C"
+dative = "лазерному пистолету Тип 5/C"
+accusative = "лазерный пистолет Тип 5/C"
+instrumental = "лазерным пистолетом Тип 5/C"
+prepositional = "лазерном пистолете Тип 5/C"
+gender = "male"
+
+["Type 5/A assault laser rifle"]
+nominative = "штурмовая лазерная винтовка Тип 5/A"
+genitive = "штурмовой лазерной винтовки Тип 5/A"
+dative = "штурмовой лазерной винтовке Тип 5/A"
+accusative = "штурмовую лазерную винтовку Тип 5/A"
+instrumental = "штурмовой лазерной винтовкой Тип 5/A"
+prepositional = "штурмовой лазерной винтовке Тип 5/A"
+gender = "female"
 
 ["practice laser gun"]
-nominative = "учебный лазерный карабин"
-genitive = "учебного лазерного карабина"
-dative = "учебному лазерному карабину"
-accusative = "учебный лазерный карабин"
-instrumental = "учебным лазерным карабином"
-prepositional = "учебном лазерном карабине"
+nominative = "учебный лазерный карабин Тип 5"
+genitive = "учебного лазерного карабина Тип 5"
+dative = "учебному лазерному карабину Тип 5"
+accusative = "учебный лазерный карабин Тип 5"
+instrumental = "учебным лазерным карабином Тип 5"
+prepositional = "учебном лазерном карабине Тип 5"
 gender = "male"
 
-["laser carbine"]
-nominative = "автоматический лазерный карабин"
-genitive = "автоматического лазерного карабина"
-dative = "автоматическому лазерному карабину"
-accusative = "автоматический лазерный карабин"
-instrumental = "автоматическим лазерным карабином"
-prepositional = "автоматическом лазерном карабине"
+["Type 5/R laser carbine"]
+nominative = "лазерный карабин Тип 5/R"
+genitive = "лазерного карабина Тип 5/R"
+dative = "лазерному карабину Тип 5/R"
+accusative = "лазерный карабин Тип 5/R"
+instrumental = "лазерным карабином Тип 5/R"
+prepositional = "лазерном карабине Тип 5/R"
 gender = "male"
 
 ["practice laser carbine"]
-nominative = "учебный автоматический лазерный карабин"
-genitive = "учебного автоматического лазерного карабина"
-dative = "учебному автоматическому лазерному карабину"
-accusative = "учебный автоматический лазерный карабин"
-instrumental = "учебным автоматическим лазерным карабином"
-prepositional = "учебном автоматическом лазерном карабине"
+nominative = "учебный лазерный карабин Тип 5/R"
+genitive = "учебного лазерного карабина Тип 5/R"
+dative = "учебному лазерному карабину Тип 5/R"
+accusative = "учебный лазерный карабин Тип 5/R"
+instrumental = "учебным лазерным карабином Тип 5/R"
+prepositional = "учебном лазерном карабине Тип 5/R"
 gender = "male"
 
 ["miniature energy gun"]
@@ -3496,6 +3541,42 @@ instrumental = "миниатюрным энергетическим пистол
 prepositional = "миниатюрном энергетическом пистолете"
 gender = "male"
 
+["energy shotgun"]
+nominative = "энергетический дробовик"
+genitive = "энергетического дробовика"
+dative = "энергетическому дробовику"
+accusative = "энергетический дробовик"
+instrumental = "энергетическим дробовиком"
+prepositional = "энергетическом дробовике"
+gender = "male"
+
+["scatter shot laser rifle"]
+nominative = "лазерная винтовка рассеянного действия"
+genitive = "лазерной винтовки рассеянного действия"
+dative = "лазерной винтовке рассеянного действия"
+accusative = "лазерную винтовку рассеянного действия"
+instrumental = "лазерной винтовкой рассеянного действия"
+prepositional = "лазерной винтовке рассеянного действия"
+gender = "female"
+
+["accelerator laser cannon"]
+nominative = "акселераторная лазерная пушка"
+genitive = "акселераторной лазерной пушки"
+dative = "акселераторной лазерной пушке"
+accusative = "акселераторную лазерную пушку"
+instrumental = "акселераторной лазерной пушкой"
+prepositional = "акселераторной лазерной пушке"
+gender = "female"
+
+["EG-14 advanced energy revolver"]
+nominative = "продвинутый энергетический револьвер EG-14"
+genitive = "продвинутого энергетического револьвера EG-14"
+dative = "продвинутому энергетическому револьверу EG-14"
+accusative = "продвинутый энергетический револьвер EG-14"
+instrumental = "продвинутым энергетическим револьвером EG-14"
+prepositional = "продвинутом энергетическом револьвере EG-14"
+gender = "male"
+
 ["antique laser gun"]
 nominative = "антикварный лазерный пистолет"
 genitive = "антикварного лазерного пистолета"
@@ -3503,6 +3584,24 @@ dative = "антикварному лазерному пистолету"
 accusative = "антикварный лазерный пистолет"
 instrumental = "антикварным лазерным пистолетом"
 prepositional = "антикварном лазерном пистолете"
+gender = "male"
+
+["cryo pistol"]
+nominative = "крио-нанитовый пистолет"
+genitive = "крио-нанитового пистолета"
+dative = "крио-нанитому пистолету"
+accusative = "крио-нанитовый пистолет"
+instrumental = "крио-нанитовым пистолетом"
+prepositional = "крио-нанитовом пистолете"
+gender = "male"
+
+["inferno pistol"]
+nominative = "инферно-нанитовый пистолет"
+genitive = "инферно-нанитового пистолета"
+dative = "инферно-нанитому пистолету"
+accusative = "инферно-нанитовый пистолет"
+instrumental = "инферно-нанитовым пистолетом"
+prepositional = "инферно-нанитовом пистолете"
 gender = "male"
 
 ["floral somatoray"]
@@ -3569,12 +3668,12 @@ prepositional = "лазерном мушкете"
 gender = "male"
 
 ["heroic laser musket"]
-nominative = "героический лазерный мушкет"
-genitive = "героического лазерного мушкета"
-dative = "героическому лазерному мушкету"
-accusative = "героический лазерный мушкет"
-instrumental = "героическим лазерным мушкетом"
-prepositional = "героическом лазерном мушкете"
+nominative = "продвинутый лазерный мушкет"
+genitive = "продвинутого лазерного мушкета"
+dative = "продвинутому лазерному мушкету"
+accusative = "продвинутый лазерный мушкет"
+instrumental = "продвинутым лазерным мушкетом"
+prepositional = "продвинутом лазерном мушкете"
 gender = "male"
 
 ["smoothbore disabler"]
@@ -3622,13 +3721,13 @@ instrumental = "боевым дробовиком"
 prepositional = "боевом дробовике"
 gender = "male"
 
-["compact shotgun"]
-nominative = "компактный дробовик"
-genitive = "компактного дробовика"
-dative = "компактному дробовику"
-accusative = "компактный дробовик"
-instrumental = "компактным дробовиком"
-prepositional = "компактном дробовике"
+["compact combat shotgun"]
+nominative = "компактный боевой дробовик"
+genitive = "компактного боевого дробовика"
+dative = "компактному боевому дробовику"
+accusative = "компактный боевой дробовик"
+instrumental = "компактным боевым дробовиком"
+prepositional = "компактном боевом дробовике"
 gender = "male"
 
 ["stun baton"]
