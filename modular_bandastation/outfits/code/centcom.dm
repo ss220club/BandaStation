@@ -204,6 +204,7 @@
 	shoes = /obj/item/clothing/shoes/combat/swat
 	r_pocket = /obj/item/knife/combat
 	l_pocket = /obj/item/reagent_containers/hypospray/combat/nanites
+	implants = list(/obj/item/implant/weapons_auth, /obj/item/implant/empprotection, /obj/item/implant/cqc)
 
 /datum/id_trim/centcom/ntci/New()
 	. = ..()
