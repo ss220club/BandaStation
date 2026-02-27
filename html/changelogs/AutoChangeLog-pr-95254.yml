@@ -1,4 +1,0 @@
-author: "Watermelon914"
-delete-after: True
-changes:
-  - bugfix: "Fixed composite types appearing incorrectly in the IC editor."
