@@ -1,5 +1,5 @@
 // MARK: WEAPONS
-/datum/supply_pack/security/laser
+/datum/supply_pack/security/armory/laser
 	cost = CARGO_CRATE_VALUE * 18 // Original price: 800 New price: 3600
 
 /datum/supply_pack/security/armory/ballistic
