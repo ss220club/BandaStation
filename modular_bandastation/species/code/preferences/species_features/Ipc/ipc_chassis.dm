@@ -629,7 +629,7 @@
 	desc = "Усиленные военные лезвия богомола для правой руки IPC. Наносят значительно больше урона и яда."
 	id = "ipc_implant_military_mantis_r"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implant/ipc/military_mantis
+	build_path = /obj/item/implant/ipc/mantis/military
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 2,
@@ -646,7 +646,7 @@
 	desc = "Усиленные военные лезвия богомола для левой руки IPC."
 	id = "ipc_implant_military_mantis_l"
 	build_type = PROTOLATHE
-	build_path = /obj/item/implant/ipc/military_mantis/left
+	build_path = /obj/item/implant/ipc/mantis/military/left
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 2,
