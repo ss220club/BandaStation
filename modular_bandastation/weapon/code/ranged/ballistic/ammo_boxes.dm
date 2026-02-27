@@ -132,19 +132,6 @@
 	ammo_band_icon = "+357_ammo_band"
 	ammo_band_color = null
 
-/obj/item/ammo_box/speedloader/a50ae_cylinder
-	name = "speed loader (.50 AE)"
-	desc = "Предназначен для быстрой перезарядки револьверов калибра .50 AE."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
-	icon_state = "50speedload"
-	ammo_type = /obj/item/ammo_casing/a50ae
-	max_ammo = 5
-	caliber = CALIBER_50AE
-	multiple_sprites = AMMO_BOX_PER_BULLET
-	item_flags = NO_MAT_REDEMPTION
-	ammo_band_icon = "+38_ammo_band"
-	ammo_band_color = null
-
 /obj/item/ammo_box/speedloader/c38/ap
 	name = "speed loader (.38 AP)"
 	desc = parent_type::desc + "<br>Бронебойные пули хорошо пробивают броню, но наносят мало увечий."
@@ -621,17 +608,6 @@
 	desc = parent_type::desc + "<br>Оранжевая полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
 	icon_state = "a50box-incendiary"
 	ammo_type = /obj/item/ammo_casing/p50/incendiary
-
-// MARK: .50 AE
-/obj/item/ammo_box/a50ae
-	name = "ammo box (.50 AE)"
-	desc = "Коробка с винтовочными патронами калибра .50 AE, вмещает 20 патронов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
-	icon_state = "a50aebox"
-	w_class = WEIGHT_CLASS_NORMAL
-	caliber = CALIBER_50AE
-	ammo_type = /obj/item/ammo_casing/a50ae
-	max_ammo = 20
 
 // MARK: 4.6x30mm
 /obj/item/ammo_box/c46x30
