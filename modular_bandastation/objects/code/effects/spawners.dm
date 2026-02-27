@@ -270,7 +270,7 @@
 	spawn_loot_count = 1
 	loot = list(
 		/obj/item/gun/ballistic/automatic/pistol/wespe,
-		/obj/item/gun/ballistic/automatic/pistol/wespe_civ,
+		/obj/item/gun/ballistic/automatic/pistol/wespe/no_mag,
 	)
 
 /obj/effect/spawner/random/contraband/bobr
