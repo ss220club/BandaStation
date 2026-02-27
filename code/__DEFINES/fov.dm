@@ -32,6 +32,8 @@
 /// combat cursor-follow: smoothing factor (1 = instant), update interval in ds
 #define FOV_MASK_ANGLE_SMOOTHING_FACTOR 1
 #define FOV_MASK_CURSOR_UPDATE_DS 0.2
+
+#define FOV_MASK_ANIMATE_TIME 0.05
 // BANDASTATION ADDITION END: FOV
 
 //Fullscreen overlay resolution in tiles for the clients view.

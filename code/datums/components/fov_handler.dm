@@ -140,7 +140,8 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 	if(tex_off_x != 0 || tex_off_y != 0)
 		base.Translate(tex_off_x, tex_off_y)
 	blocker_mask.transform = base
-	update_mask_attachment_position()
+	animate(blocker_mask, transform = base, time = FOV_MASK_ANIMATE_TIME SECONDS, flags = ANIMATION_END_NOW)
+	//update_mask_attachment_position()
 
 /datum/component/fov_handler/proc/update_mask_attachment_position()
 	blocker_mask.pixel_x = 0
