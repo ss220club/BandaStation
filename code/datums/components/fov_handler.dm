@@ -282,35 +282,15 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 		stop_combat_cursor_follow()
 		mob_parent.fov_view_direction_angle = null
 		return
-	// fallback to turf for angle and combat face_atom
-	var/angle_deg = get_angle_from_map_cursor_pixels(user_client)
-	var/turf/target_turf
+	combat_cursor_tracker.calculate_params()
+	var/angle_deg = combat_cursor_tracker.given_angle
 	if(isnull(angle_deg))
-		target_turf = get_turf_from_map_mouse(user_client)
-		if(!target_turf)
-			combat_cursor_tracker.calculate_params()
-			target_turf = combat_cursor_tracker.given_turf
-		if(!target_turf)
-			var/datum/position/pos = mouse_absolute_datum_map_position_from_client(user_client)
-			if(pos)
-				target_turf = locate(pos.x, pos.y, pos.z)
-		if(target_turf)
-			angle_deg = get_angle_from_mob_to_turf(mob_parent, target_turf)
-	// only turn the mob when in combat mode or free look (direction follows view)
-	if(mob_parent.combat_mode || mob_parent.fov_free_look)
-		if(!target_turf)
-			target_turf = get_turf_from_map_mouse(user_client)
-			if(!target_turf)
-				combat_cursor_tracker.calculate_params()
-				target_turf = combat_cursor_tracker.given_turf
-			if(!target_turf && user_client)
-				var/datum/position/pos = mouse_absolute_datum_map_position_from_client(user_client)
-				if(pos)
-					target_turf = locate(pos.x, pos.y, pos.z)
-		if(target_turf)
-			mob_parent.face_atom(target_turf)
+		angle_deg = get_angle_from_map_cursor_pixels(user_client)
 	if(!isnull(angle_deg))
 		mob_parent.fov_view_direction_angle = angle_deg
+		if(mob_parent.combat_mode || mob_parent.fov_free_look)
+			var/dir_angle = SIMPLIFY_DEGREES(90 - angle_deg) // quantize to match the angle
+			mob_parent.setDir(angle2dir(dir_angle))
 		if(applied_mask)
 			target_fov_mask_angle = 270 - angle_deg
 			var/diff = target_fov_mask_angle - current_fov_mask_angle

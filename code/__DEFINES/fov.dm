@@ -29,7 +29,6 @@
 #define FOV_MASK_CARDINAL_NORTH_Y 0
 #define FOV_MASK_CARDINAL_EAST_X 10
 #define FOV_MASK_CARDINAL_EAST_Y 15
-/// combat cursor-follow: smoothing factor (1 = instant), update interval in ds
 #define FOV_MASK_ANGLE_SMOOTHING_FACTOR 1
 #define FOV_MASK_CURSOR_UPDATE_DS 0.2
 

@@ -67,9 +67,11 @@
 	given_y = round(icon_y - ICON_SIZE_Y * our_y, 1)
 
 // BANDASTATION ADDITION START: FOV
-// сombat mode: receive mouse even when alpha=0 so we get MouseMove
+// combat mode: receive mouse even when alpha=0 so we get MouseMove
 /atom/movable/screen/fullscreen/cursor_catcher/combat
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
+	// degrees from view center to cursor
+	var/given_angle
 
 /atom/movable/screen/fullscreen/cursor_catcher/combat/MouseMove(location, control, params)
 	. = ..()
@@ -90,9 +92,7 @@
 		icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
 	if(isnull(icon_y))
 		icon_y = center_py
-	var/offset_x = round(icon_x - center_px)
-	var/offset_y = round(icon_y - center_py)
-	given_turf = locate(owner.x + round(offset_x / ICON_SIZE_X, 1), owner.y + round(offset_y / ICON_SIZE_Y, 1), owner.z)
-	given_x = round(icon_x - ICON_SIZE_X * round(icon_x / ICON_SIZE_X), 1)
-	given_y = round(icon_y - ICON_SIZE_Y * round(icon_y / ICON_SIZE_Y), 1)
+	var/dx = icon_x - center_px
+	var/dy = center_py - icon_y
+	given_angle = (dx != 0 || dy != 0) ? SIMPLIFY_DEGREES(ATAN2(dx, dy)) : null
 // BANDASTATION ADDITION END: FOV

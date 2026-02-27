@@ -19,42 +19,6 @@
 	return angle
 
 // BANDASTATION ADDITION START: FOV
-// angle in degrees from mob to turf
-/proc/get_angle_from_mob_to_turf(atom/mob, turf/target_turf)
-	if(!mob?.loc || !target_turf)
-		return null
-	var/dx = target_turf.x - mob.x
-	var/dy = target_turf.y - mob.y
-	if(!dx && !dy)
-		return null
-	return SIMPLIFY_DEGREES(ATAN2(dx, dy))
-
-// returns the turf under the map cursor by polling the map control and basically uses same fallbacks as get_angle_from_map_cursor_pixels for esc menu and inactive window
-/proc/get_turf_from_map_mouse(client/client)
-	if(!client?.mob?.loc)
-		return null
-	var/list/win = _get_map_cursor_winget(client)
-	if(!win || length(win) < 2)
-		return null
-	var/mouse_pos = win[1]
-	var/size_str = win[2]
-	var/list/mp = splittext(mouse_pos, ",")
-	if(length(mp) < 2)
-		return null
-	var/mousepos_x = text2num(mp[1])
-	var/mousepos_y = text2num(mp[2])
-	if(isnull(mousepos_x) || isnull(mousepos_y))
-		return null
-	var/list/sz = splittext(size_str, "x")
-	if(length(sz) < 2)
-		return null
-	var/sizex = text2num(sz[1])
-	var/sizey = text2num(sz[2])
-	if(!sizex || !sizey)
-		return null
-	var/list/result = get_loc_from_mousepos(mousepos_x, mousepos_y, sizex, sizey, client)
-	return length(result) ? result[1] : null
-
 // tries to get mouse pos and size from map, then mapwindow
 /proc/_get_map_cursor_winget(client/client)
 	if(!client)
