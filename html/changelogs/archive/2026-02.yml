@@ -413,3 +413,8 @@
   nevimer:
   - bugfix: fixed runechat's for radio emotes appearing incorrectly for observers
   - code_imp: reuse the emote check from living's hearing function
+2026-02-27:
+  Melbert:
+  - bugfix: Weather anomaly cores are orderable from cargo
+  - refactor: Anomaly core cargo orders are auto-generated - report any oddities with
+      them.
