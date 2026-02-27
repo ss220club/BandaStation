@@ -115,8 +115,8 @@
 /datum/action/item_action/hands_free/activate_arm_razor
 	name = "Razor Slash"
 	desc = "Атаковать струной цель перед собой."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "neckchop"
+	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	button_icon_state = "arm_razor"
 	background_icon_state = "bg_tech"
 
 /datum/action/item_action/hands_free/activate_arm_razor/Trigger(mob/clicker, trigger_flags)
@@ -263,7 +263,7 @@
 	// Проверяем парные лезвия — если есть оба, даём прыжок
 	check_paired_mantis(H)
 
-	apply_arm_visual(H)
+	// Оверлей появляется только при развёртывании лезвий, не при установке
 
 	if(!silent)
 		to_chat(H, span_notice("Лезвия богомола установлены в [installed_in_zone]. Используйте способность для активации."))
@@ -312,12 +312,14 @@
 				to_chat(H, span_notice("Вы роняете [hand_item], чтобы развернуть лезвие!"))
 				H.put_in_hand(blade, H.get_empty_held_index_for_side(side))
 				break
+		apply_arm_visual(H)
 		to_chat(H, span_warning("Лезвия богомола развёрнуты!"))
 		playsound(H, 'sound/items/weapons/bladeslice.ogg', 50, TRUE)
 	else
 		if(blade_item)
 			REMOVE_TRAIT(blade_item, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
 			QDEL_NULL(blade_item)
+		remove_arm_visual(H)
 		to_chat(H, span_notice("Лезвия богомола свёрнуты."))
 		playsound(H, 'sound/items/weapons/bladeslice.ogg', 30, TRUE)
 
@@ -698,8 +700,8 @@
 /datum/action/item_action/hands_free/fire_arm_cannon
 	name = "Fire Arm Cannon"
 	desc = "Выстрелить из встроенного дробовика."
-	button_icon = 'icons/mob/actions/actions_vehicle.dmi'
-	button_icon_state = "car_cannon"
+	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	button_icon_state = "arm_cannon"
 	background_icon_state = "bg_tech"
 
 /datum/action/item_action/hands_free/fire_arm_cannon/Trigger(mob/clicker, trigger_flags)
@@ -838,8 +840,8 @@
 /datum/action/item_action/hands_free/activate_sandevistan
 	name = "Activate Sandevistan"
 	desc = "Активировать Сандевистан — временное рефлекторное ускорение."
-	button_icon = 'icons/mob/actions/actions_changeling.dmi'
-	button_icon_state = "strained_muscles"
+	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	button_icon_state = "sandy"
 	background_icon_state = "bg_tech"
 
 /datum/action/item_action/hands_free/activate_sandevistan/Trigger(mob/clicker, trigger_flags)
