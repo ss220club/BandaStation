@@ -224,6 +224,10 @@
 /obj/item/gun/ballistic/automatic/pistol/deagle/nuclear
 	pin = /obj/item/firing_pin/implant/pindicate
 
+/obj/item/gun/grenadelauncher
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	SET_BASE_PIXEL(-8, 0)
+
 // Ammo casings new drop sounds
 /obj/item/ammo_casing
 	var/list/bounce_sfx_override = list('modular_bandastation/weapon/sound/ranged/bulletcasing_bounce1.ogg', 'modular_bandastation/weapon/sound/ranged/bulletcasing_bounce2.ogg', 'modular_bandastation/weapon/sound/ranged/bulletcasing_bounce3.ogg')
