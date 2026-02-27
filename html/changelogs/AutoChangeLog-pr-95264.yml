@@ -1,4 +1,0 @@
-author: "Ghommie"
-delete-after: True
-changes:
-  - bugfix: "Fixed materials not being applied when crafting with stacks if said stack is zero'd in the process."
