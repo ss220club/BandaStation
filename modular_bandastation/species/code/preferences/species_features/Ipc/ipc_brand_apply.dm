@@ -65,7 +65,6 @@
 	var/datum/ipc_brand/brand = get_ipc_brand(brand_key)
 	if(!brand)
 		return
-	var/prefix = brand.visual_prefix
 	var/custom_icon = brand.custom_icon_file
 	qdel(brand)
 

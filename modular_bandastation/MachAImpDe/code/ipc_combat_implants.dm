@@ -239,7 +239,7 @@
 /obj/item/implant/ipc/mantis/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
 	// Zone conflict check: prevent two mantis blades in the same arm
 	if(body_zone)
-		for(var/obj/item/implant/existing as anything in target.implants)
+		for(var/obj/item/implant/ipc/existing as anything in target.implants)
 			if(!istype(existing, /obj/item/implant/ipc/mantis) && !istype(existing, /obj/item/implant/ipc/military_mantis))
 				continue
 			if(existing.installed_in_zone == body_zone)
@@ -507,7 +507,7 @@
 /obj/item/implant/ipc/military_mantis/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
 	// Zone conflict check: prevent two blades in the same arm
 	if(body_zone)
-		for(var/obj/item/implant/existing as anything in target.implants)
+		for(var/obj/item/implant/ipc/existing as anything in target.implants)
 			if(!istype(existing, /obj/item/implant/ipc/mantis) && !istype(existing, /obj/item/implant/ipc/military_mantis))
 				continue
 			if(existing.installed_in_zone == body_zone)
