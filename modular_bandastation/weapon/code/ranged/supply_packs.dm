@@ -115,22 +115,6 @@
 /obj/item/storage/toolbox/guncase/soviet
 	desc = "Оружейный кейс. Символ СССП отпечатан на боковой стороне."
 
-/obj/item/storage/toolbox/guncase/china_lake
-	name = "China Lake grenade launcher guncase"
-	weapon_to_spawn = /obj/item/gun/ballistic/shotgun/china_lake
-	extra_to_spawn = /obj/item/storage/fancy/a40mm_box
-
-/obj/item/storage/toolbox/guncase/china_lake/PopulateContents()
-	new weapon_to_spawn (src)
-	new extra_to_spawn (src)
-	new /obj/item/storage/fancy/a40mm_box/rubber (src)
-	new /obj/item/storage/fancy/a40mm_box/smoke (src)
-
-/obj/item/storage/toolbox/guncase/desert_eagle
-	name = "desert eagle guncase"
-	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/deagle/nuclear
-	extra_to_spawn = /obj/item/ammo_box/magazine/m50
-
 /obj/item/storage/toolbox/guncase/syndiesledge
 	name = "syndicate sledgehammer case"
 	weapon_to_spawn = /obj/item/sledgehammer/syndie

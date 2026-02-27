@@ -159,16 +159,6 @@
 		/obj/item/ammo_box/c10mm/rubber,
 	)
 
-/obj/effect/spawner/random/contraband/ammo_box/c585sol
-	name = "random .585 Sol ammo box spawner"
-	loot = list(
-		/obj/item/ammo_box/c585sol,
-		/obj/item/ammo_box/c585sol/ap,
-		/obj/item/ammo_box/c585sol/hp,
-		/obj/item/ammo_box/c585sol/incendiary,
-		/obj/item/ammo_box/c585sol/rubber,
-	)
-
 /obj/effect/spawner/random/contraband/ammo_box/c45
 	name = "random .45 ammo box spawner"
 	loot = list(
@@ -283,24 +273,6 @@
 		/obj/item/gun/ballistic/automatic/pistol/wespe_civ,
 	)
 
-/obj/effect/spawner/random/contraband/eland
-	name = "random Eland revolvers spawner"
-	icon_state = "shotgun"
-	spawn_loot_count = 1
-	loot = list(
-		/obj/item/gun/ballistic/revolver/eland,
-		/obj/item/gun/ballistic/revolver/eland/army,
-	)
-
-/obj/effect/spawner/random/contraband/takbok
-	name = "random Takbok revolvers spawner"
-	icon_state = "shotgun"
-	spawn_loot_count = 1
-	loot = list(
-		/obj/item/gun/ballistic/revolver/takbok,
-		/obj/item/gun/ballistic/revolver/takbok/army,
-	)
-
 /obj/effect/spawner/random/contraband/bobr
 	name = "random Bobr revolvers spawner"
 	icon_state = "shotgun"
@@ -308,15 +280,6 @@
 	loot = list(
 		/obj/item/gun/ballistic/revolver/bobr/empty,
 		/obj/item/gun/ballistic/revolver/bobr/short/empty,
-	)
-
-/obj/effect/spawner/random/contraband/skild
-	name = "random Skild pistol spawner"
-	icon_state = "shotgun"
-	spawn_loot_count = 1
-	loot = list(
-		/obj/item/gun/ballistic/automatic/pistol/skild,
-		/obj/item/gun/ballistic/automatic/pistol/skild/army,
 	)
 
 /obj/effect/spawner/random/contraband/sindano
@@ -334,18 +297,14 @@
 		/obj/item/gun/ballistic/automatic/pistol/contraband = 50,
 		/obj/item/sledgehammer = 50,
 		/obj/effect/spawner/random/contraband/bobr = 50,
-		/obj/effect/spawner/random/contraband/eland = 50,
-		/obj/effect/spawner/random/contraband/takbok = 30,
-		/obj/effect/spawner/random/contraband/skild = 30,
 		/obj/effect/spawner/random/contraband/wespe = 50,
 		/obj/item/gun/ballistic/automatic/pistol/m1911/gold = 10,
 		/obj/item/gun/ballistic/automatic/pistol/zashch = 50,
-		/obj/item/gun/ballistic/shotgun/riot/m64 = 30,
 		/obj/item/gun/ballistic/automatic/pistol/deagle/contraband = 10,
 		/obj/item/gun/ballistic/revolver/mateba = 10,
 		/obj/item/gun/ballistic/revolver/reverse/mateba = 1,
 		/obj/item/gun/energy/laser/musket = 50,
-		/obj/item/gun/energy/laser/musket/prime = 30,
+		/obj/item/gun/energy/laser/musket/prime = 15,
 		/obj/item/gun/energy/laser/musket/repeater = 30,
 		/obj/item/storage/box/syndie_kit/throwing_weapons = 30,
 		/obj/effect/spawner/random/contraband/grenades = 50,
@@ -356,7 +315,6 @@
 		/obj/effect/spawner/random/contraband/ammo_box/c38 = 30,
 		/obj/effect/spawner/random/contraband/ammo_box/c40sol = 30,
 		/obj/effect/spawner/random/contraband/ammo_box/c762x54mmr = 30,
-		/obj/effect/spawner/random/contraband/ammo_box/c585sol = 30,
 		/obj/effect/spawner/random/contraband/ammo_box/c762x39 = 30,
 		/obj/effect/spawner/random/contraband/ammo_box/c762x51 = 30,
 		/obj/effect/spawner/random/contraband/ammo_box/shotgun_shells = 30,

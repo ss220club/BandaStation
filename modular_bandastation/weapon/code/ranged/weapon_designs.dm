@@ -237,50 +237,6 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
-/datum/design/box_c357
-	name = "Ammo Box (.357) (Very Lethal)"
-	id = "box_c357"
-	build_type = PROTOLATHE | AWAY_LATHE
-	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 50)
-	build_path = /obj/item/ammo_box/c357
-	category = list(
-		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
-	)
-	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
-
-/datum/design/box_c50ae
-	name = "Ammo Box (.50 AE) (Very Lethal)"
-	id = "box_c50ae"
-	build_type = PROTOLATHE | AWAY_LATHE
-	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 50)
-	build_path = /obj/item/ammo_box/a50ae
-	category = list(
-		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
-	)
-	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
-
-/datum/design/box_310strilka
-	name = "Ammo Box (.310 Strilka) (Very Lethal)"
-	id = "box_310strilka"
-	build_type = PROTOLATHE | AWAY_LATHE
-	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 60)
-	build_path = /obj/item/ammo_box/strilka310
-	category = list(
-		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
-	)
-	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
-
-/datum/design/speedloader_310strilka
-	name = "Stripper Clip (.310 Strilka) (Very Lethal)"
-	id = "speedloader_310strilka"
-	build_type = PROTOLATHE | AWAY_LATHE
-	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 15)
-	build_path = /obj/item/ammo_box/speedloader/strilka310
-	category = list(
-		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
-	)
-	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
-
 /datum/design/mag_autorifle/rubber_mag
 	name = "WT-550 Autorifle Rubber Magazine (4.6x30mm rubber) (Non-lethal)"
 	desc = "A 20 round magazine for the out of date WT-550 Autorifle."
@@ -297,9 +253,5 @@
 		"c9mm",
 		"c10mm",
 		"c45",
-		"box_c50ae",
-		"box_c357",
 		"box_c46x30mm",
-		"box_310strilka",
-		"speedloader_310strilka",
 	)

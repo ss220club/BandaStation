@@ -58,7 +58,6 @@
 			"icon" = "gun",
 			"products" = list(
 				/obj/item/gun/ballistic/shotgun/riot = 5,
-				/obj/item/gun/ballistic/shotgun/riot/m64 = 1,
 				/obj/item/gun/ballistic/shotgun/automatic/combat = 1,
 				/obj/item/gun/energy/disabler = 8,
 				/obj/item/gun/ballistic/automatic/pistol/gp9 = 5,
@@ -177,7 +176,6 @@
 				/obj/item/gun/energy/laser/scatter/shotty = 1,
 				/obj/item/gun/energy/lasercannon = 1,
 				/obj/item/gun/energy/ionrifle/carbine = 3,
-				/obj/item/gun/ballistic/shotgun/riot/m64 = 5,
 				/obj/item/gun/ballistic/shotgun/automatic/combat = 5,
 				/obj/item/gun/ballistic/shotgun/automatic/combat/compact = 1,
 				/obj/item/gun/ballistic/automatic/proto/unrestricted = 3,
@@ -185,7 +183,6 @@
 				/obj/item/gun/ballistic/automatic/cm5/compact = 3,
 				/obj/item/gun/ballistic/automatic/wt550 = 3,
 				/obj/item/gun/grenadelauncher = 1,
-				/obj/item/gun/ballistic/revolver/grenadelauncher/sec = 1,
 			),
 		),
 
@@ -240,11 +237,6 @@
 				/obj/item/grenade/barrier = 7,
 				/obj/item/grenade/frag = 7,
 				/obj/item/grenade/chem_grenade/incendiary = 7,
-				/obj/item/storage/fancy/a40mm_box/weak = 3,
-				/obj/item/storage/fancy/a40mm_box/stun = 3,
-				/obj/item/storage/fancy/a40mm_box/rubber = 3,
-				/obj/item/storage/fancy/a40mm_box/hedp = 3,
-				/obj/item/storage/fancy/a40mm_box/smoke = 3,
 			),
 		),
 
