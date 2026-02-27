@@ -13,10 +13,15 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 
 // BANDASTATION EDIT START: FOV
 /datum/component/fov_handler
+	/// Currently applied x size of the fov masks
 	var/current_fov_x = BASE_FOV_MASK_X_DIMENSION
+	/// Currently applied y size of the fov masks
 	var/current_fov_y = BASE_FOV_MASK_Y_DIMENSION
+	/// Whether we are applying the masks now
 	var/applied_mask = FALSE
+	/// The angle of the mask we are applying
 	var/fov_angle = FOV_145_DEGREES
+	/// The blocker mask applied to a client's screen
 	var/image/fov_blocker_720/blocker_mask
 	// fullscreen cursor_catcher/combat used to track cursor turf and update mob dir
 	var/atom/movable/screen/fullscreen/cursor_catcher/combat/combat_cursor_tracker
