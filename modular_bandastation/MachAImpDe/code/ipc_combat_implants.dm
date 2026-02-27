@@ -208,6 +208,8 @@
 	allowed_zones = list(BODY_ZONE_R_ARM)
 	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis)
 	allow_multiple = TRUE
+	/// Тип создаваемого оружия при развёртывании
+	var/blade_type = /obj/item/mantis_blade
 	/// Урон в активном режиме
 	var/blade_damage = 15
 	/// Бонус к ранам для dismember
@@ -218,7 +220,7 @@
 	var/blades_active = FALSE
 	/// Оружие в руке (пока лезвия развёрнуты)
 	var/obj/item/mantis_blade/blade_item = null
-	/// Прыжок на кулдауне?
+	/// Кулдаун прыжка
 	var/leap_cooldown_time = 15 SECONDS
 	/// Время последнего прыжка
 	var/last_leap_time = 0
@@ -228,20 +230,17 @@
 	var/leaping = FALSE
 
 /obj/item/implant/ipc/mantis/get_data()
-	var/dat = {"<b>Implant Specifications:</b><BR>
-	<b>Name:</b> Mantis Blade Implant<BR>
+	return {"<b>Implant Specifications:</b><BR>
+	<b>Name:</b> [name]<BR>
 	<b>Life:</b> Permanent<BR>
 	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
 	<b>Function:</b> Deployable blades (+[blade_damage] brute, dismember capable).<BR>
 	<b>Status:</b> [blades_active ? "DEPLOYED" : "RETRACTED"]"}
-	return dat
 
 /obj/item/implant/ipc/mantis/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
 	// Zone conflict check: prevent two mantis blades in the same arm
 	if(body_zone)
-		for(var/obj/item/implant/ipc/existing as anything in target.implants)
-			if(!istype(existing, /obj/item/implant/ipc/mantis) && !istype(existing, /obj/item/implant/ipc/military_mantis))
-				continue
+		for(var/obj/item/implant/ipc/mantis/existing as anything in target.implants)
 			if(existing.installed_in_zone == body_zone)
 				if(user)
 					to_chat(user, span_warning("В [body_zone] уже установлено лезвие богомола."))
@@ -287,7 +286,7 @@
 /obj/item/implant/ipc/mantis/proc/toggle_blades(mob/living/carbon/human/H)
 	blades_active = !blades_active
 	if(blades_active)
-		var/obj/item/mantis_blade/blade = new /obj/item/mantis_blade(null)
+		var/obj/item/mantis_blade/blade = new blade_type(null)
 		blade.force = blade_damage
 		blade.wound_bonus = blade_wound_bonus
 		blade.power_per_attack = power_per_attack
@@ -437,17 +436,13 @@
 	. = ..()
 	if(!.)
 		return FALSE
+	var/obj/item/implant/ipc/mantis/mantis_implant = target
+	if(!istype(mantis_implant))
+		return FALSE
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return FALSE
-	if(istype(target, /obj/item/implant/ipc/mantis))
-		var/obj/item/implant/ipc/mantis/mantis_implant = target
-		mantis_implant.toggle_blades(H)
-	else if(istype(target, /obj/item/implant/ipc/military_mantis))
-		var/obj/item/implant/ipc/military_mantis/mil_implant = target
-		mil_implant.toggle_blades(H)
-	else
-		return FALSE
+	mantis_implant.toggle_blades(H)
 	return TRUE
 
 // Action для прыжка (выдаётся при парных лезвиях)
@@ -474,121 +469,34 @@
 // ============================================
 // 3. MILITARY MANTIS — ВОЕННЫЕ ЛЕЗВИЯ БОГОМОЛА
 // ============================================
-// Улучшенная версия: больше урона, больше dismember.
+// Подтип mantis с повышенными характеристиками.
 
-/obj/item/implant/ipc/military_mantis
+/obj/item/implant/ipc/mantis/military
 	name = "Military Mantis Blade Implant"
 	desc = "Военная модификация лезвий богомола. Увеличенный урон и способность пробивать броню. Высокий шанс отрезания конечностей."
 	icon_state = "military_mantis_right"
 	arm_visual_state = "syndie_mantis"
-	allowed_zones = list(BODY_ZONE_R_ARM)
-	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis)
-	allow_multiple = TRUE
-	/// Урон в активном режиме
-	var/blade_damage = 22
-	/// Бонус к ранам для dismember
-	var/blade_wound_bonus = 35
-	/// Расход батареи за атаку (только IPC)
-	var/power_per_attack = 15
-	/// Лезвия развёрнуты?
-	var/blades_active = FALSE
-	/// Оружие в руке (пока лезвия развёрнуты)
-	var/obj/item/mantis_blade/military/blade_item = null
-
-/obj/item/implant/ipc/military_mantis/get_data()
-	var/dat = {"<b>Implant Specifications:</b><BR>
-	<b>Name:</b> Military Mantis Blade Implant<BR>
-	<b>Life:</b> Permanent<BR>
-	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
-	<b>Function:</b> Military-grade blades (+[blade_damage] brute, armor-piercing, high dismember).<BR>
-	<b>Status:</b> [blades_active ? "DEPLOYED" : "RETRACTED"]"}
-	return dat
-
-/obj/item/implant/ipc/military_mantis/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
-	// Zone conflict check: prevent two blades in the same arm
-	if(body_zone)
-		for(var/obj/item/implant/ipc/existing as anything in target.implants)
-			if(!istype(existing, /obj/item/implant/ipc/mantis) && !istype(existing, /obj/item/implant/ipc/military_mantis))
-				continue
-			if(existing.installed_in_zone == body_zone)
-				if(user)
-					to_chat(user, span_warning("В [body_zone] уже установлено лезвие богомола."))
-				return FALSE
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!ishuman(target))
-		return FALSE
-	var/mob/living/carbon/human/H = target
-
-	apply_arm_visual(H)
-
-	if(!silent)
-		to_chat(H, span_notice("Военные лезвия установлены в [installed_in_zone]."))
-		if(user)
-			to_chat(user, span_notice("Вы успешно установили военные лезвия богомола."))
-	return TRUE
-
-/// Разворачивает или сворачивает лезвия, создавая/удаляя оружие в руке
-/obj/item/implant/ipc/military_mantis/proc/toggle_blades(mob/living/carbon/human/H)
-	blades_active = !blades_active
-	if(blades_active)
-		var/obj/item/mantis_blade/military/blade = new /obj/item/mantis_blade/military(null)
-		blade.force = blade_damage
-		blade.wound_bonus = blade_wound_bonus
-		blade.power_per_attack = power_per_attack
-		blade_item = blade
-		ADD_TRAIT(blade, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
-		var/side = (installed_in_zone == BODY_ZONE_R_ARM) ? RIGHT_HANDS : LEFT_HANDS
-		var/hand = H.get_empty_held_index_for_side(side)
-		if(hand)
-			H.put_in_hand(blade, hand)
-		else
-			var/list/hand_items = H.get_held_items_for_side(side, all = TRUE)
-			for(var/obj/item/hand_item as anything in hand_items)
-				if(!H.dropItemToGround(hand_item))
-					continue
-				to_chat(H, span_notice("Вы роняете [hand_item], чтобы развернуть лезвие!"))
-				H.put_in_hand(blade, H.get_empty_held_index_for_side(side))
-				break
-		to_chat(H, span_warning("Военные лезвия богомола развёрнуты!"))
-		playsound(H, 'sound/items/weapons/bladeslice.ogg', 50, TRUE)
-	else
-		if(blade_item)
-			REMOVE_TRAIT(blade_item, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
-			QDEL_NULL(blade_item)
-		to_chat(H, span_notice("Военные лезвия богомола свёрнуты."))
-		playsound(H, 'sound/items/weapons/bladeslice.ogg', 30, TRUE)
-
-/obj/item/implant/ipc/military_mantis/removed(mob/living/source, silent = FALSE, special = FALSE)
-	if(blades_active)
-		blades_active = FALSE
-	if(blade_item)
-		REMOVE_TRAIT(blade_item, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
-		QDEL_NULL(blade_item)
-	if(ishuman(source))
-		remove_arm_visual(source)
-	. = ..()
-	if(!silent)
-		to_chat(source, span_warning("Военные лезвия извлечены."))
+	blade_type = /obj/item/mantis_blade/military
+	blade_damage = 22
+	blade_wound_bonus = 35
+	power_per_attack = 15
 
 // Левая рука
-/obj/item/implant/ipc/military_mantis/left
+/obj/item/implant/ipc/mantis/military/left
 	name = "Military Mantis Blade Implant (Left)"
 	desc = "Военная модификация лезвий богомола для левой руки."
 	icon_state = "military_mantis_left"
-	arm_visual_state = "syndie_mantis"
 	allowed_zones = list(BODY_ZONE_L_ARM)
 
 /obj/item/implantcase/ipc/military_mantis_right
 	name = "implant case - 'Military Mantis (Right)'"
 	desc = "Стеклянный кейс содержащий имплант военных лезвий богомола для правой руки."
-	imp_type = /obj/item/implant/ipc/military_mantis
+	imp_type = /obj/item/implant/ipc/mantis/military
 
 /obj/item/implantcase/ipc/military_mantis_left
 	name = "implant case - 'Military Mantis (Left)'"
 	desc = "Стеклянный кейс содержащий имплант военных лезвий богомола для левой руки."
-	imp_type = /obj/item/implant/ipc/military_mantis/left
+	imp_type = /obj/item/implant/ipc/mantis/military/left
 
 // ============================================
 // 4. ARM CANNON — ДРОБОВИК В РУКЕ
@@ -930,7 +838,7 @@
 
 /obj/item/autosurgeon/ipc/military_mantis_right/Initialize(mapload)
 	. = ..()
-	load_implant(new /obj/item/implant/ipc/military_mantis(src))
+	load_implant(new /obj/item/implant/ipc/mantis/military(src))
 
 /obj/item/autosurgeon/ipc/military_mantis_left
 	desc = "Одноразовый autosurgeon с имплантом военных лезвий для левой руки."
@@ -938,7 +846,7 @@
 
 /obj/item/autosurgeon/ipc/military_mantis_left/Initialize(mapload)
 	. = ..()
-	load_implant(new /obj/item/implant/ipc/military_mantis/left(src))
+	load_implant(new /obj/item/implant/ipc/mantis/military/left(src))
 
 /obj/item/autosurgeon/ipc/arm_cannon
 	desc = "Одноразовый autosurgeon с имплантом дробовика."
