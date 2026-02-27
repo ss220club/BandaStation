@@ -184,6 +184,10 @@
 		if(target_part && target_part.body_zone != BODY_ZONE_CHEST && target_part.body_zone != BODY_ZONE_HEAD)
 			target_part.try_dismember(WOUND_SLASH, force, wound_bonus)
 
+/// Left-hand variant — uses mirrored lefthand sprite sheet
+/obj/item/mantis_blade/left
+	icon = 'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi'
+
 /// Military variant with higher stats
 /obj/item/mantis_blade/military
 	name = "military mantis blade"
@@ -192,6 +196,10 @@
 	force = 22
 	wound_bonus = 35
 	power_per_attack = 15
+
+/// Military left-hand variant
+/obj/item/mantis_blade/military/left
+	icon = 'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi'
 
 // ============================================
 // 2. MANTIS BLADES — ЛЕЗВИЯ БОГОМОЛА
@@ -322,10 +330,8 @@
 		to_chat(user, span_warning("Сначала разверните лезвия!"))
 		return FALSE
 
-	// Кулдаун
+	// Кулдаун (таймер отображается на кнопке способности)
 	if(world.time < last_leap_time + leap_cooldown_time)
-		var/remaining = round((last_leap_time + leap_cooldown_time - world.time) / 10, 0.1)
-		to_chat(user, span_warning("Прыжок перезаряжается! Осталось [remaining]с."))
 		return FALSE
 
 	if(user.body_position == LYING_DOWN)
@@ -413,6 +419,8 @@
 	icon_state = "mantis_left"
 	arm_visual_state = "mantis"
 	allowed_zones = list(BODY_ZONE_L_ARM)
+	blade_type = /obj/item/mantis_blade/left
+	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis/left)
 
 /obj/item/implantcase/ipc/mantis_right
 	name = "implant case - 'Mantis Blade (Right)'"
@@ -428,9 +436,21 @@
 /datum/action/item_action/hands_free/toggle_mantis
 	name = "Toggle Mantis Blades"
 	desc = "Развернуть/свернуть лезвия богомола."
-	button_icon = 'icons/mob/actions/actions_changeling.dmi'
-	button_icon_state = "arm_blade"
+	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	button_icon_state = "mantis_right"
 	background_icon_state = "bg_tech"
+
+// Вариант для левой руки — своя иконка
+/datum/action/item_action/hands_free/toggle_mantis/left
+	button_icon_state = "mantis_left"
+
+// Военные варианты
+/datum/action/item_action/hands_free/toggle_mantis/military
+	name = "Toggle Military Mantis Blades"
+	button_icon_state = "military_mantis_right"
+
+/datum/action/item_action/hands_free/toggle_mantis/military/left
+	button_icon_state = "military_mantis_left"
 
 /datum/action/item_action/hands_free/toggle_mantis/Trigger(mob/clicker, trigger_flags)
 	. = ..()
@@ -449,9 +469,36 @@
 /datum/action/item_action/hands_free/mantis_leap
 	name = "Mantis Leap"
 	desc = "Прыжок на врага с лезвиями богомола. Требуются парные лезвия."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "legsweep"
+	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	button_icon_state = "mantis_right"
 	background_icon_state = "bg_tech"
+
+/datum/action/item_action/hands_free/mantis_leap/create_button()
+	var/atom/movable/screen/movable/action_button/button = ..()
+	button.maptext = ""
+	button.maptext_x = 4
+	button.maptext_y = 2
+	button.maptext_width = 32
+	button.maptext_height = 16
+	return button
+
+/datum/action/item_action/hands_free/mantis_leap/update_button_status(atom/movable/screen/movable/action_button/button, force = FALSE)
+	. = ..()
+	var/obj/item/implant/ipc/mantis/imp = target
+	if(!istype(imp) || !owner)
+		button.maptext = ""
+		return
+	var/time_left = max(imp.last_leap_time + imp.leap_cooldown_time - world.time, 0)
+	if(time_left <= 0)
+		button.maptext = ""
+	else
+		button.maptext = MAPTEXT_TINY_UNICODE("[round(time_left / 10, 0.1)]")
+
+/datum/action/item_action/hands_free/mantis_leap/process()
+	build_all_button_icons(UPDATE_BUTTON_STATUS)
+	var/obj/item/implant/ipc/mantis/imp = target
+	if(!istype(imp) || world.time >= imp.last_leap_time + imp.leap_cooldown_time)
+		STOP_PROCESSING(SSfastprocess, src)
 
 /datum/action/item_action/hands_free/mantis_leap/Trigger(mob/clicker, trigger_flags)
 	. = ..()
@@ -463,7 +510,8 @@
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return FALSE
-	mantis_implant.do_leap(H)
+	if(mantis_implant.do_leap(H))
+		START_PROCESSING(SSfastprocess, src)
 	return TRUE
 
 // ============================================
@@ -480,6 +528,7 @@
 	blade_damage = 22
 	blade_wound_bonus = 35
 	power_per_attack = 15
+	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis/military)
 
 // Левая рука
 /obj/item/implant/ipc/mantis/military/left
@@ -487,6 +536,8 @@
 	desc = "Военная модификация лезвий богомола для левой руки."
 	icon_state = "military_mantis_left"
 	allowed_zones = list(BODY_ZONE_L_ARM)
+	blade_type = /obj/item/mantis_blade/military/left
+	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis/military/left)
 
 /obj/item/implantcase/ipc/military_mantis_right
 	name = "implant case - 'Military Mantis (Right)'"
