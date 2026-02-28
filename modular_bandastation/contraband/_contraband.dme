@@ -8,3 +8,4 @@
 #include "code/ninja_explosive.dm"
 #include "code/defib.dm"
 #include "code/collar_bomb.dm"
+#include "code/handcuffs.dm"
