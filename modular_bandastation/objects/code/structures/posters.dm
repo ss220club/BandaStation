@@ -238,7 +238,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/sweet_ginger_gre
 
 /obj/structure/sign/poster/official/vine_lady
 	name = "Vine Lady"
-	desc = "На плакате изображена деликатная дама с бокалом вина"
+	desc = "На плакате изображена деликатная дама с бокалом вина."
 	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
 	icon_state = "vine_lady"
 
