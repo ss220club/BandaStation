@@ -610,6 +610,7 @@
 "anX" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table,
+/obj/item/storage/fancy/donut_box,
 /turf/open/floor/wood,
 /area/station/security/breakroom{
 	ambience_index = "ruins";
@@ -781,6 +782,18 @@
 	name = "Arrival Gate"
 	},
 /turf/open/floor/iron/white,
+/area/station/security/checkpoint/arrivals{
+	ambience_index = "ruins";
+	name = "\improper K13 Arrivals Security Checkpoint"
+	})
+"arD" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/glass,
+/obj/effect/decal/cleanable/glass,
+/turf/open/floor/iron/dark,
 /area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
 	name = "\improper K13 Arrivals Security Checkpoint"
@@ -980,6 +993,7 @@
 	})
 "awA" = (
 /obj/structure/extinguisher_cabinet/directional/west,
+/mob/living/silicon/robot/model/syndicate,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/ai/satellite/interior{
 	default_gravity = 1;
@@ -1164,6 +1178,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/trash/cigbutt,
+/obj/machinery/light/floor,
 /turf/open/floor/mineral/plastitanium/red,
 /area/station/hallway/secondary/dock{
 	ambience_index = "ruins";
@@ -1554,6 +1569,14 @@
 	ambience_index = "ruins";
 	name = "K13 Security"
 	})
+"aNa" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/floor,
+/turf/open/floor/iron/white,
+/area/station/security/checkpoint/arrivals{
+	ambience_index = "ruins";
+	name = "\improper K13 Arrivals Security Checkpoint"
+	})
 "aNg" = (
 /obj/structure/door_assembly/door_assembly_eng{
 	anchored = 1
@@ -1723,6 +1746,12 @@
 /area/station/security/office{
 	ambience_index = "ruins";
 	name = "\improper K13 Security Office"
+	})
+"aPP" = (
+/turf/open/floor/iron,
+/area/station/engineering/main{
+	ambience_index = "ruins";
+	name = "K13 Engineering"
 	})
 "aQj" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2115,6 +2144,7 @@
 /area/station/hallway/secondary/dock)
 "aZB" = (
 /obj/structure/sign/warning/vacuum/external/directional/south,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/white,
 /area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
@@ -2396,6 +2426,14 @@
 /area/station/medical/treatment_center{
 	ambience_index = "ruins";
 	name = "\improper K13 Medbay Main"
+	})
+"bjo" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/garbage,
+/turf/open/floor/iron/dark,
+/area/station/security/checkpoint/arrivals{
+	ambience_index = "ruins";
+	name = "\improper K13 Arrivals Security Checkpoint"
 	})
 "bju" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2792,6 +2830,7 @@
 	})
 "brZ" = (
 /obj/machinery/light/small/directional/north,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/station/security/brig/entrance{
 	ambience_index = "ruins";
@@ -3001,6 +3040,14 @@
 /area/station/maintenance/aft/lesser{
 	name = "K13 Lesser Aft Maintenance"
 	})
+"bwf" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/white,
+/area/station/security/office{
+	ambience_index = "ruins";
+	name = "\improper K13 Security Office"
+	})
 "bwj" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -3192,11 +3239,11 @@
 	name = "K13 Mansus"
 	})
 "bBh" = (
-/turf/open/openspace,
-/area/station/ai/satellite/hallway{
-	requires_power = 0;
-	default_gravity = 1;
-	name = "\improper K13 AI Satellite Hallway"
+/obj/effect/decal/cleanable/glass,
+/turf/open/floor/iron/dark,
+/area/station/security/brig/entrance{
+	ambience_index = "ruins";
+	name = "\improper K13 Brig Entrance"
 	})
 "bBH" = (
 /obj/effect/decal/cleanable/dirt,
@@ -4075,6 +4122,15 @@
 	ambience_index = "ruins";
 	name = "\improper K13 AI Satellite Foyer"
 	})
+"bXH" = (
+/turf/closed/wall/r_wall/rust{
+	explosive_resistance = 50;
+	rust_resistance = 5
+	},
+/area/station/medical/psychology{
+	ambience_index = "ruins";
+	name = "\improper K13 durka"
+	})
 "bXJ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -4514,10 +4570,13 @@
 	name = "K13 Security Post - First Floor"
 	})
 "chO" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/spawner/random/trash/grime,
 /turf/open/floor/iron/dark,
-/area/station/security/office{
+/area/station/security/brig/entrance{
 	ambience_index = "ruins";
-	name = "\improper K13 Security Office"
+	name = "\improper K13 Brig Entrance"
 	})
 "chV" = (
 /obj/item/crowbar/large,
@@ -5594,6 +5653,14 @@
 /area/station/maintenance/department/security/upper{
 	name = "K13 Upper Security Maintenance"
 	})
+"cGn" = (
+/obj/effect/spawner/structure/window/reinforced/indestructible,
+/obj/effect/mapping_helpers/damaged_window,
+/turf/open/floor/plating,
+/area/station/security/breakroom{
+	ambience_index = "ruins";
+	name = "\improper K13 Security Break Room"
+	})
 "cGI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/engineering/tank,
@@ -6068,12 +6135,12 @@
 	name = "\improper K13 AI Chamber"
 	})
 "cSy" = (
-/obj/structure/sign/warning/vacuum/external/directional/south,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/iron/white,
-/area/station/security/checkpoint/arrivals{
+/obj/machinery/power/port_gen/pacman/pre_loaded,
+/turf/open/floor/iron,
+/area/station/engineering/hallway/west{
 	ambience_index = "ruins";
-	name = "\improper K13 Arrivals Security Checkpoint"
+	name = "K13 Engineering Hallway West"
 	})
 "cSE" = (
 /obj/effect/decal/cleanable/dirt,
@@ -6609,6 +6676,17 @@
 	ambience_index = "spooky";
 	name = "\improper K13 Head of Security's Office";
 	default_gravity = 1
+	})
+"dei" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/turf/open/floor/iron/dark,
+/area/station/security/checkpoint/arrivals{
+	ambience_index = "ruins";
+	name = "\improper K13 Arrivals Security Checkpoint"
 	})
 "deo" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -7394,12 +7472,11 @@
 	name = "K13 Engineering"
 	})
 "dvK" = (
-/turf/closed/wall/r_wall/rust,
-/area/station/ai/satellite/foyer{
-	requires_power = 0;
-	default_gravity = 1;
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/station/security/breakroom{
 	ambience_index = "ruins";
-	name = "\improper K13 AI Satellite Foyer"
+	name = "\improper K13 Security Conference Room"
 	})
 "dvZ" = (
 /obj/structure/girder/reinforced,
@@ -7523,6 +7600,13 @@
 /area/station/engineering/hallway/west{
 	ambience_index = "ruins";
 	name = "K13 Engineering Hallway West"
+	})
+"dzd" = (
+/turf/open/openspace,
+/area/station/ai/satellite/hallway{
+	requires_power = 0;
+	default_gravity = 1;
+	name = "\improper K13 AI Satellite Hallway"
 	})
 "dzB" = (
 /obj/structure/girder/reinforced,
@@ -7668,6 +7752,14 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/brig{
 	name = "K13 Brig Maintenance"
+	})
+"dCb" = (
+/obj/machinery/light/red/directional/south,
+/turf/open/floor/iron/dark/smooth_large,
+/area/station/ai/satellite/interior{
+	default_gravity = 1;
+	requires_power = 0;
+	name = "\improper K13 AI Satellite Antechamber"
 	})
 "dCU" = (
 /obj/effect/spawner/random/maintenance,
@@ -8381,6 +8473,12 @@
 /area/station/maintenance/department/security/brig{
 	name = "K13 Brig Maintenance"
 	})
+"dRT" = (
+/turf/closed/indestructible/riveted,
+/area/station/service/kitchen{
+	ambience_index = "ruins";
+	name = "\improper K13 Kitchen"
+	})
 "dRV" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/vending/cigarette,
@@ -8657,6 +8755,13 @@
 /turf/closed/wall/r_wall/rust,
 /area/station/engineering/engine_smes{
 	name = "\improper K13 Engineering SMES"
+	})
+"dXF" = (
+/obj/effect/spawner/structure/window/reinforced/indestructible,
+/turf/open/floor/plating,
+/area/station/security/checkpoint/arrivals{
+	ambience_index = "ruins";
+	name = "\improper K13 Arrivals Security Checkpoint"
 	})
 "dXT" = (
 /obj/effect/decal/cleanable/dirt,
@@ -8985,6 +9090,14 @@
 /obj/structure/flora/bush/flowers_br/style_random,
 /turf/open/floor/grass,
 /area/station/hallway/secondary/dock)
+"edJ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/mess,
+/turf/open/floor/iron/dark,
+/area/station/security/office{
+	ambience_index = "ruins";
+	name = "\improper K13 Security Office"
+	})
 "edV" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/high_volume/siphon/monitored/air_output{
 	dir = 1
@@ -9039,6 +9152,7 @@
 	})
 "eeO" = (
 /obj/structure/grille/broken,
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/plating,
 /area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
@@ -9097,6 +9211,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/iron/dark,
 /area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
@@ -10684,10 +10799,13 @@
 	name = "\improper K13 AI Satellite Foyer"
 	})
 "eTZ" = (
-/turf/closed/wall,
-/area/station/cargo/miningoffice{
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/decal/cleanable/glass,
+/turf/open/floor/iron/dark,
+/area/station/security/brig/entrance{
 	ambience_index = "ruins";
-	name = "\improper K13 Mining Office"
+	name = "\improper K13 Brig Entrance"
 	})
 "eUj" = (
 /obj/effect/decal/cleanable/dirt,
@@ -11574,6 +11692,7 @@
 "fkb" = (
 /obj/effect/mapping_helpers/burnt_floor,
 /obj/structure/sign/poster/contraband/communist_state/directional/north,
+/obj/machinery/light/small/directional/north,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/upper{
 	ambience_index = "ruins";
@@ -11581,6 +11700,7 @@
 	})
 "fke" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/plating,
 /area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
@@ -12286,6 +12406,13 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Abandoned Medbay"
 	})
+"fzz" = (
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/plating,
+/area/station/commons/dorms/laundry{
+	ambience_index = "ruins";
+	name = "\improper K13 Laundry Room"
+	})
 "fzP" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -12638,6 +12765,12 @@
 /area/station/cargo/storage{
 	ambience_index = "ruins";
 	name = "\improper K13 Cargo Bay"
+	})
+"fIl" = (
+/turf/closed/wall,
+/area/station/cargo/miningoffice{
+	ambience_index = "ruins";
+	name = "\improper K13 Mining Office"
 	})
 "fIr" = (
 /obj/effect/decal/cleanable/dirt,
@@ -13072,6 +13205,7 @@
 	name = "K13 Medbay Storage"
 	})
 "fRP" = (
+/obj/effect/spawner/random/trash/grime,
 /turf/open/floor/iron/white,
 /area/station/escapepodbay{
 	name = "\improper K13 Pod Bay"
@@ -13189,7 +13323,7 @@
 	})
 "fUx" = (
 /obj/effect/mapping_helpers/burnt_floor,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor/broken,
 /turf/open/floor/iron,
 /area/station/medical/abandoned{
 	ambience_index = "ruins";
@@ -14800,6 +14934,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/iron/dark,
 /area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
@@ -15381,6 +15516,13 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Security Office"
 	})
+"gRZ" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/station/security/checkpoint/arrivals{
+	ambience_index = "ruins";
+	name = "\improper K13 Arrivals Security Checkpoint"
+	})
 "gSg" = (
 /obj/machinery/door/airlock/highsecurity,
 /obj/machinery/door/firedoor,
@@ -15706,6 +15848,8 @@
 	name = "\improper K13 Medbay Main"
 	})
 "gYx" = (
+/obj/machinery/light/floor,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/white,
 /area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
@@ -16120,10 +16264,11 @@
 	name = "\improper K13 Brig Entrance"
 	})
 "hhW" = (
-/turf/closed/indestructible/riveted,
-/area/station/service/kitchen{
+/obj/machinery/light/floor,
+/turf/open/floor/iron,
+/area/station/medical/abandoned{
 	ambience_index = "ruins";
-	name = "\improper K13 Kitchen"
+	name = "\improper K13 Abandoned Medbay"
 	})
 "hhZ" = (
 /obj/effect/decal/cleanable/dirt,
@@ -18062,6 +18207,15 @@
 	ambience_index = "ruins";
 	name = "K13 Upper Atmospherics"
 	})
+"igw" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/closed/indestructible/riveted,
+/area/station/ai/satellite/foyer{
+	requires_power = 0;
+	default_gravity = 1;
+	ambience_index = "ruins";
+	name = "\improper K13 AI Satellite Foyer"
+	})
 "igG" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 8
@@ -18315,11 +18469,12 @@
 	})
 "ilV" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/spawner/random/trash/mess,
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/spawner/random/trash/garbage,
 /turf/open/floor/iron/dark,
-/area/station/security/office{
+/area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
-	name = "\improper K13 Security Office"
+	name = "\improper K13 Arrivals Security Checkpoint"
 	})
 "ilY" = (
 /obj/machinery/suit_storage_unit/security{
@@ -18970,6 +19125,13 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Cargo Bay"
 	})
+"iys" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/station/security/office{
+	ambience_index = "ruins";
+	name = "\improper K13 Security Office"
+	})
 "iyI" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
@@ -19011,6 +19173,12 @@
 /area/station/cargo/storage{
 	ambience_index = "ruins";
 	name = "\improper K13 Cargo Bay"
+	})
+"izM" = (
+/turf/closed/wall,
+/area/station/medical/surgery/aft{
+	ambience_index = "ruins";
+	name = "\improper K13 Aft Operating Room"
 	})
 "izO" = (
 /obj/effect/decal/cleanable/dirt,
@@ -19227,11 +19395,13 @@
 	name = "K13 Security Post - First Floor"
 	})
 "iDO" = (
-/turf/open/floor/iron/dark/smooth_large,
-/area/station/ai/satellite/interior{
-	default_gravity = 1;
-	requires_power = 0;
-	name = "\improper K13 AI Satellite Antechamber"
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/red/directional/east,
+/turf/open/floor/mineral/plastitanium/red,
+/area/station/hallway/secondary/dock{
+	ambience_index = "ruins";
+	name = "\improper K13 Secondary Station Dock Hallway"
 	})
 "iEb" = (
 /obj/effect/decal/cleanable/blood/old,
@@ -19588,6 +19758,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/sign/poster/contraband/communist_state/directional/north,
+/obj/machinery/light/small/directional/north,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/upper{
 	ambience_index = "ruins";
@@ -21402,10 +21573,12 @@
 	name = "\improper K13 Security Office"
 	})
 "jDS" = (
-/turf/closed/indestructible/riveted,
-/area/station/security/breakroom{
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron/dark/textured,
+/area/station/cargo/lobby{
 	ambience_index = "ruins";
-	name = "\improper K13 Security Conference Room"
+	name = "\improper K13 Cargo Lobby"
 	})
 "jDX" = (
 /obj/structure/railing{
@@ -21531,10 +21704,12 @@
 	name = "\improper K13 Security Office"
 	})
 "jFX" = (
-/turf/closed/indestructible/riveted,
-/area/station/security/checkpoint/first{
-	ambience_index = "ruins";
-	name = "K13 Security Post - First Floor"
+/mob/living/silicon/robot/model/syndicate,
+/turf/open/floor/iron/dark/smooth_large,
+/area/station/ai/satellite/interior{
+	default_gravity = 1;
+	requires_power = 0;
+	name = "\improper K13 AI Satellite Antechamber"
 	})
 "jGd" = (
 /obj/effect/decal/cleanable/dirt,
@@ -21886,6 +22061,16 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Abandoned Medbay"
 	})
+"jMK" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/chair{
+	dir = 1
+	},
+/obj/machinery/light/red/directional/south,
+/turf/open/floor/iron/white,
+/area/station/escapepodbay{
+	name = "\improper K13 Pod Bay"
+	})
 "jML" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/extinguisher_cabinet/directional/west,
@@ -22126,13 +22311,10 @@
 	name = "K13 Brig Maintenance"
 	})
 "jRz" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
-/obj/machinery/power/apc/auto_name/directional/west,
-/turf/open/floor/iron/white,
-/area/station/security/breakroom{
+/turf/closed/wall,
+/area/station/security/lockers{
 	ambience_index = "ruins";
-	name = "\improper K13 Security Conference Room"
+	name = "\improper K13 Security Locker Room"
 	})
 "jRG" = (
 /obj/effect/mapping_helpers/burnt_floor,
@@ -22433,6 +22615,17 @@
 	ambience_index = "ruins";
 	name = "K13 Upper Atmospherics"
 	})
+"jWO" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/turf/open/floor/iron/dark/textured_large,
+/area/station/hallway/secondary/exit/escape_pod{
+	requires_power = 0;
+	default_gravity = 1;
+	name = "\improper K13 Escape Pod Bay";
+	ambience_index = "ruins"
+	})
 "jXa" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/light_fake/spot/burned/directional/north,
@@ -22461,10 +22654,12 @@
 	name = "Security K13 Maintenance Fore Lower Floor"
 	})
 "jXw" = (
-/turf/open/floor/iron/white,
-/area/station/security/breakroom{
+/turf/closed/wall/r_wall/rust,
+/area/station/ai/satellite/foyer{
+	requires_power = 0;
+	default_gravity = 1;
 	ambience_index = "ruins";
-	name = "\improper K13 Security Conference Room"
+	name = "\improper K13 AI Satellite Foyer"
 	})
 "jXC" = (
 /obj/effect/decal/cleanable/glass,
@@ -22740,6 +22935,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/burnt_floor,
+/obj/machinery/light/small/directional/north,
 /turf/open/floor/iron,
 /area/station/engineering/main{
 	ambience_index = "ruins";
@@ -23691,6 +23887,15 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Lower Brig"
 	})
+"kyd" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/red/directional/west,
+/turf/open/floor/mineral/plastitanium/red,
+/area/station/hallway/secondary/dock{
+	ambience_index = "ruins";
+	name = "\improper K13 Secondary Station Dock Hallway"
+	})
 "kyj" = (
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
@@ -23874,6 +24079,7 @@
 /obj/structure/table,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/item/storage/fancy/donut_box,
 /turf/open/floor/wood,
 /area/station/security/breakroom{
 	ambience_index = "ruins";
@@ -26134,11 +26340,10 @@
 	name = "\improper K13 Lower Brig"
 	})
 "lzz" = (
-/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/white,
 /area/station/security/breakroom{
 	ambience_index = "ruins";
-	name = "\improper K13 Security Conference Room"
+	name = "\improper K13 Security Break Room"
 	})
 "lzF" = (
 /obj/effect/decal/cleanable/dirt,
@@ -26365,7 +26570,7 @@
 /turf/open/floor/iron/white,
 /area/station/security/breakroom{
 	ambience_index = "ruins";
-	name = "\improper K13 Security Break Room"
+	name = "\improper K13 Security Conference Room"
 	})
 "lEB" = (
 /obj/effect/decal/cleanable/dirt,
@@ -26438,6 +26643,7 @@
 	})
 "lFz" = (
 /obj/machinery/light/red/directional/south,
+/mob/living/silicon/robot/model/syndicate,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/ai/satellite/interior{
 	default_gravity = 1;
@@ -27122,6 +27328,14 @@
 /area/centcom/heretic_sacrifice{
 	name = "K13 Mansus"
 	})
+"lUY" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/upper{
+	ambience_index = "ruins";
+	name = "K13 Upper Atmospherics"
+	})
 "lVw" = (
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/plating/airless,
@@ -27205,6 +27419,14 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/storage{
 	name = "K13 Ghetto Warehouse"
+	})
+"lWG" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/floor,
+/turf/open/floor/mineral/plastitanium/red,
+/area/station/hallway/secondary/dock{
+	ambience_index = "ruins";
+	name = "\improper K13 Secondary Station Dock Hallway"
 	})
 "lWT" = (
 /obj/machinery/wall_healer,
@@ -27964,6 +28186,14 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Security Office"
 	})
+"mny" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/glass,
+/turf/open/floor/iron/white,
+/area/station/security/checkpoint/arrivals{
+	ambience_index = "ruins";
+	name = "\improper K13 Arrivals Security Checkpoint"
+	})
 "mnH" = (
 /obj/effect/spawner/random/structure/crate_loot,
 /obj/effect/decal/cleanable/dirt,
@@ -27976,6 +28206,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/sign/flag/ussp/directional/north,
 /obj/structure/showcase/machinery/tv/broken,
+/obj/machinery/light/small/directional/north,
 /turf/open/floor/wood,
 /area/station/engineering/main{
 	ambience_index = "ruins";
@@ -29288,6 +29519,7 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 4
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/station/security/brig/entrance{
 	ambience_index = "ruins";
@@ -29544,6 +29776,14 @@
 /area/station/engineering/atmos{
 	ambience_index = "ruins";
 	name = "K13 Atmospherics"
+	})
+"naS" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/red/directional/south,
+/turf/open/floor/iron/white,
+/area/station/security/checkpoint/arrivals{
+	ambience_index = "ruins";
+	name = "\improper K13 Arrivals Security Checkpoint"
 	})
 "naU" = (
 /obj/effect/spawner/random/structure/crate,
@@ -29823,6 +30063,7 @@
 "njl" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/west,
 /turf/open/floor/iron/white,
 /area/station/security/breakroom{
 	ambience_index = "ruins";
@@ -29867,7 +30108,9 @@
 	default_gravity = 1
 	})
 "njM" = (
-/turf/closed/wall/r_wall/rust,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/cable,
+/turf/open/floor/iron/white,
 /area/station/security/breakroom{
 	ambience_index = "ruins";
 	name = "\improper K13 Security Conference Room"
@@ -30489,6 +30732,7 @@
 	})
 "nxr" = (
 /obj/machinery/airalarm/directional/north,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/station/security/brig/entrance{
 	ambience_index = "ruins";
@@ -30519,6 +30763,14 @@
 /turf/open/floor/plating,
 /area/station/maintenance/floor2/port/aft{
 	name = "\improper K13 2nd Floor Aft Port Maint"
+	})
+"nys" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/iron,
+/area/station/command/heads_quarters/ce{
+	ambience_index = "ruins";
+	name = "\improper K13 Chief Engineer's Office"
 	})
 "nyD" = (
 /obj/structure/cable,
@@ -31604,6 +31856,7 @@
 	})
 "nYF" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/grime,
 /turf/open/floor/iron/white,
 /area/station/commons/dorms/laundry{
 	ambience_index = "ruins";
@@ -32175,6 +32428,14 @@
 	ambience_index = "ruins";
 	name = "K13 Security Post - First Floor"
 	})
+"omD" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/wood,
+/area/station/command/heads_quarters/ce{
+	ambience_index = "ruins";
+	name = "\improper K13 Chief Engineer's Office"
+	})
 "omI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -32185,6 +32446,7 @@
 	})
 "omN" = (
 /obj/effect/spawner/random/structure/tank_holder,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/station/security/brig/entrance{
 	ambience_index = "ruins";
@@ -33381,6 +33643,13 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Auxiliary Restrooms"
 	})
+"oPs" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/red/directional/east,
+/turf/open/floor/iron/white,
+/area/station/escapepodbay{
+	name = "\improper K13 Pod Bay"
+	})
 "oPx" = (
 /turf/closed/indestructible/riveted,
 /area/station/service/kitchen/kitchen_backroom{
@@ -33678,6 +33947,14 @@
 /area/station/medical/treatment_center{
 	ambience_index = "ruins";
 	name = "\improper K13 Medbay Main"
+	})
+"oXM" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/dark,
+/area/station/security/brig/entrance{
+	ambience_index = "ruins";
+	name = "\improper K13 Brig Entrance"
 	})
 "oXP" = (
 /obj/structure/girder/reinforced,
@@ -34215,6 +34492,11 @@
 /area/station/security/office{
 	ambience_index = "ruins";
 	name = "\improper K13 Security Office"
+	})
+"pjF" = (
+/turf/open/floor/iron/white,
+/area/station/escapepodbay{
+	name = "\improper K13 Pod Bay"
 	})
 "pkk" = (
 /obj/machinery/holopad{
@@ -34988,6 +35270,14 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Secondary Station Dock Hallway"
 	})
+"pzT" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/cafeteria,
+/area/station/service/kitchen/diner{
+	ambience_index = "ruins";
+	name = "\improper K13 Diner"
+	})
 "pAh" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -35059,10 +35349,12 @@
 	name = "\improper K13 Kitchen"
 	})
 "pBN" = (
-/turf/closed/wall,
-/area/station/medical/surgery/aft{
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/cafeteria,
+/area/station/service/kitchen{
 	ambience_index = "ruins";
-	name = "\improper K13 Aft Operating Room"
+	name = "\improper K13 Kitchen"
 	})
 "pBW" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -36031,6 +36323,14 @@
 /turf/open/floor/plating/rust,
 /area/centcom/heretic_sacrifice{
 	name = "K13 Mansus"
+	})
+"pXh" = (
+/mob/living/silicon/robot/model/security,
+/turf/open/floor/iron/dark/smooth_large,
+/area/station/ai/satellite/interior{
+	default_gravity = 1;
+	requires_power = 0;
+	name = "\improper K13 AI Satellite Antechamber"
 	})
 "pXo" = (
 /obj/structure/chair/office/light,
@@ -38971,10 +39271,30 @@
 	})
 "rkC" = (
 /obj/machinery/vending/cigarette,
+/obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/dark/textured,
 /area/station/cargo/lobby{
 	ambience_index = "ruins";
 	name = "\improper K13 Cargo Lobby"
+	})
+"rkG" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/dark,
+/area/station/security/office{
+	ambience_index = "ruins";
+	name = "\improper K13 Security Office"
+	})
+"rle" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/red/directional/east,
+/turf/open/floor/iron/dark,
+/area/station/hallway/secondary/dock{
+	ambience_index = "ruins";
+	name = "\improper K13 Secondary Station Dock Hallway"
 	})
 "rlf" = (
 /obj/machinery/light/floor,
@@ -39343,6 +39663,13 @@
 /area/station/engineering/atmos{
 	ambience_index = "ruins";
 	name = "K13 Atmospherics"
+	})
+"rtr" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/station/commons/dorms/laundry{
+	ambience_index = "ruins";
+	name = "\improper K13 Laundry Room"
 	})
 "rtC" = (
 /obj/structure/table,
@@ -40630,10 +40957,14 @@
 	})
 "sai" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/iron/dark/smooth_large,
-/area/station/hallway/secondary/dock{
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/glass,
+/turf/open/floor/iron/dark,
+/area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
-	name = "\improper K13 Secondary Station Dock Hallway"
+	name = "\improper K13 Arrivals Security Checkpoint"
 	})
 "say" = (
 /obj/effect/decal/cleanable/dirt,
@@ -42753,6 +43084,12 @@
 	requires_power = 0;
 	name = "\improper K13 AI Satellite Antechamber"
 	})
+"sYO" = (
+/turf/closed/indestructible/riveted,
+/area/station/security/breakroom{
+	ambience_index = "ruins";
+	name = "\improper K13 Security Conference Room"
+	})
 "sZt" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -43662,6 +43999,7 @@
 /obj/machinery/light/small/directional/north,
 /obj/machinery/incident_display/delam/directional/north,
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron,
 /area/station/engineering/main{
 	ambience_index = "ruins";
@@ -44195,10 +44533,11 @@
 	name = "K13 Atmospherics"
 	})
 "tGi" = (
-/turf/closed/indestructible/riveted,
-/area/station/security/armory{
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/mineral/plastitanium/red,
+/area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
-	name = "\improper K13 Armory"
+	name = "\improper K13 Arrivals Security Checkpoint"
 	})
 "tGB" = (
 /obj/machinery/ai_slipper{
@@ -44568,6 +44907,13 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Security Office"
 	})
+"tQT" = (
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/cafeteria,
+/area/station/service/kitchen/diner{
+	ambience_index = "ruins";
+	name = "\improper K13 Diner"
+	})
 "tRs" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/freezer,
@@ -44927,11 +45273,13 @@
 	name = "\improper K13 Supermatter Engine Room"
 	})
 "uaa" = (
+/obj/structure/cable,
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/red/directional/east,
 /turf/open/floor/iron/dark,
-/area/station/security/office{
+/area/station/hallway/secondary/dock{
 	ambience_index = "ruins";
-	name = "\improper K13 Security Office"
+	name = "\improper K13 Secondary Station Dock Hallway"
 	})
 "uaC" = (
 /obj/effect/decal/cleanable/dirt,
@@ -45026,6 +45374,15 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/brig{
 	name = "K13 Brig Maintenance"
+	})
+"ucH" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/floor,
+/turf/open/floor/mineral/plastitanium/red,
+/area/station/hallway/secondary/dock{
+	ambience_index = "ruins";
+	name = "\improper K13 Secondary Station Dock Hallway"
 	})
 "ucL" = (
 /obj/machinery/door/poddoor/preopen{
@@ -45197,12 +45554,11 @@
 	name = "K13 Lesser Aft Maintenance"
 	})
 "ugQ" = (
-/obj/effect/spawner/structure/window/reinforced/indestructible,
-/obj/effect/mapping_helpers/damaged_window,
-/turf/open/floor/plating,
-/area/station/security/breakroom{
-	ambience_index = "ruins";
-	name = "\improper K13 Security Break Room"
+/turf/open/floor/iron/dark/smooth_large,
+/area/station/ai/satellite/interior{
+	default_gravity = 1;
+	requires_power = 0;
+	name = "\improper K13 AI Satellite Antechamber"
 	})
 "ugR" = (
 /obj/effect/decal/cleanable/dirt,
@@ -46670,6 +47026,15 @@
 	ambience_index = "ruins";
 	name = "K13 Engineering"
 	})
+"uRV" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/dark,
+/area/station/security/checkpoint/arrivals{
+	ambience_index = "ruins";
+	name = "\improper K13 Arrivals Security Checkpoint"
+	})
 "uRW" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -46849,6 +47214,12 @@
 /area/station/engineering/engine_smes{
 	name = "\improper K13 Engineering SMES"
 	})
+"uUV" = (
+/turf/open/floor/iron/dark,
+/area/station/security/office{
+	ambience_index = "ruins";
+	name = "\improper K13 Security Office"
+	})
 "uUX" = (
 /obj/effect/decal/cleanable/glass,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -47020,15 +47391,14 @@
 	name = "\improper K13 Security Office"
 	})
 "uZh" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/turf/open/floor/iron/dark/textured_large,
-/area/station/hallway/secondary/exit/escape_pod{
-	requires_power = 0;
-	default_gravity = 1;
-	name = "\improper K13 Escape Pod Bay";
-	ambience_index = "ruins"
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/station/security/checkpoint/arrivals{
+	ambience_index = "ruins";
+	name = "\improper K13 Arrivals Security Checkpoint"
 	})
 "uZp" = (
 /obj/effect/decal/cleanable/dirt,
@@ -47169,11 +47539,11 @@
 	name = "\improper K13 Diner"
 	})
 "vdE" = (
-/obj/effect/spawner/structure/window/reinforced/indestructible,
-/turf/open/floor/plating,
-/area/station/security/checkpoint/arrivals{
-	ambience_index = "ruins";
-	name = "\improper K13 Arrivals Security Checkpoint"
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/white,
+/area/station/escapepodbay{
+	name = "\improper K13 Pod Bay"
 	})
 "vdR" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -47375,6 +47745,7 @@
 	dir = 4;
 	plane = -3
 	},
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/iron/dark,
 /area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
@@ -47823,7 +48194,6 @@
 	})
 "vtE" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/light/floor,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/hallway/secondary/dock{
 	ambience_index = "ruins";
@@ -47974,6 +48344,12 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Laundry Room"
 	})
+"vxe" = (
+/turf/closed/indestructible/riveted,
+/area/station/security/armory{
+	ambience_index = "ruins";
+	name = "\improper K13 Armory"
+	})
 "vxp" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -48113,6 +48489,14 @@
 	default_gravity = 1;
 	ambience_index = "ruins";
 	name = "\improper K13 AI Satellite Foyer"
+	})
+"vAe" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table,
+/turf/open/floor/wood,
+/area/station/security/breakroom{
+	ambience_index = "ruins";
+	name = "\improper K13 Security Break Room"
 	})
 "vAC" = (
 /obj/structure/cable,
@@ -48603,6 +48987,13 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Fore Operating Room"
 	})
+"vKM" = (
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/white,
+/area/station/security/office{
+	ambience_index = "ruins";
+	name = "\improper K13 Security Office"
+	})
 "vKS" = (
 /obj/machinery/newscaster/directional/north,
 /obj/effect/decal/cleanable/dirt,
@@ -48705,6 +49096,7 @@
 	ambience_index = "ruins"
 	})
 "vMx" = (
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron,
 /area/station/engineering/main{
 	ambience_index = "ruins";
@@ -48993,6 +49385,12 @@
 	ambience_index = "ruins";
 	name = "\improper K13 Prison Wing Cells"
 	})
+"vSw" = (
+/turf/closed/indestructible/riveted,
+/area/station/security/checkpoint/first{
+	ambience_index = "ruins";
+	name = "K13 Security Post - First Floor"
+	})
 "vSH" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/gibspawner/human/bodypartless,
@@ -49076,13 +49474,10 @@
 	name = "\improper K13 Mining Office"
 	})
 "vVT" = (
-/turf/closed/wall/r_wall/rust{
-	explosive_resistance = 50;
-	rust_resistance = 5
-	},
-/area/station/medical/psychology{
+/turf/closed/wall/r_wall/rust,
+/area/station/security/breakroom{
 	ambience_index = "ruins";
-	name = "\improper K13 durka"
+	name = "\improper K13 Security Conference Room"
 	})
 "vWl" = (
 /obj/structure/bedsheetbin,
@@ -50605,6 +51000,7 @@
 	})
 "wCW" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/mineral/plastitanium/red,
 /area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
@@ -51634,10 +52030,12 @@
 	name = "\improper K13 Cargo Bay"
 	})
 "xcq" = (
-/turf/closed/wall,
-/area/station/security/lockers{
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/glass,
+/turf/open/floor/iron/dark,
+/area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
-	name = "\improper K13 Security Locker Room"
+	name = "\improper K13 Arrivals Security Checkpoint"
 	})
 "xcs" = (
 /obj/effect/decal/cleanable/dirt,
@@ -52608,12 +53006,11 @@
 	})
 "xzg" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/closed/indestructible/riveted,
-/area/station/ai/satellite/foyer{
-	requires_power = 0;
-	default_gravity = 1;
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/dark,
+/area/station/security/checkpoint/arrivals{
 	ambience_index = "ruins";
-	name = "\improper K13 AI Satellite Foyer"
+	name = "\improper K13 Arrivals Security Checkpoint"
 	})
 "xzL" = (
 /obj/effect/turf_decal/stripes/line{
@@ -52864,6 +53261,15 @@
 /area/station/security/office{
 	ambience_index = "ruins";
 	name = "\improper K13 Security Office"
+	})
+"xFo" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/iron,
+/area/station/engineering/main{
+	ambience_index = "ruins";
+	name = "K13 Engineering"
 	})
 "xFx" = (
 /obj/effect/decal/cleanable/dirt,
@@ -53598,6 +54004,14 @@
 	ambience_index = "ruins";
 	name = "K13 Security Post - First Floor"
 	})
+"xUg" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/grime,
+/turf/open/floor/iron/dark/small,
+/area/station/service/kitchen/kitchen_backroom{
+	ambience_index = "ruins";
+	name = "\improper K13 Kitchen Backroom"
+	})
 "xUr" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -53697,7 +54111,7 @@
 	name = "\improper K13 AI Satellite Hallway"
 	})
 "xXm" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor/broken,
 /turf/open/floor/iron,
 /area/station/medical/abandoned{
 	ambience_index = "ruins";
@@ -76354,7 +76768,7 @@ opG
 opG
 opG
 bhc
-eTZ
+fIl
 leV
 leV
 leV
@@ -76599,7 +77013,7 @@ xCs
 xCs
 xCs
 xCs
-jFX
+vSw
 pid
 kAs
 fCM
@@ -76609,9 +77023,9 @@ opG
 hGn
 hGn
 hGn
-eTZ
+fIl
 ufO
-eTZ
+fIl
 leV
 leV
 leV
@@ -76856,7 +77270,7 @@ fMx
 fMx
 xCs
 xCs
-jFX
+vSw
 xKv
 vrR
 uih
@@ -76866,9 +77280,9 @@ opG
 hGn
 hGn
 gFy
-eTZ
+fIl
 uhX
-eTZ
+fIl
 leV
 leV
 leV
@@ -77123,9 +77537,9 @@ opG
 gFy
 vVv
 pMA
-eTZ
+fIl
 ufO
-eTZ
+fIl
 leV
 leV
 leV
@@ -77370,7 +77784,7 @@ xCs
 xCs
 hnR
 xCs
-jFX
+vSw
 jmk
 uoG
 fXD
@@ -77380,9 +77794,9 @@ opG
 sLx
 ePP
 wKq
-eTZ
+fIl
 ufO
-eTZ
+fIl
 leV
 leV
 leV
@@ -77627,7 +78041,7 @@ vdR
 xCs
 hnR
 bpl
-jFX
+vSw
 oGh
 uEU
 rNA
@@ -77639,7 +78053,7 @@ cvE
 kue
 bxc
 hSA
-eTZ
+fIl
 leV
 leV
 leV
@@ -77894,7 +78308,7 @@ opG
 fsA
 ejw
 nrt
-eTZ
+fIl
 sAk
 sAk
 sAk
@@ -78141,7 +78555,7 @@ uGK
 xCs
 jmu
 bXo
-jFX
+vSw
 uSP
 vti
 pBb
@@ -78151,7 +78565,7 @@ opG
 wNe
 ilP
 sVu
-eTZ
+fIl
 mAe
 xhM
 bVF
@@ -78398,17 +78812,17 @@ kNE
 kNE
 mkx
 cgE
-jFX
-jFX
+vSw
+vSw
 vqp
 art
 kCh
-jFX
+vSw
 opG
 fTg
 oCD
 nrt
-eTZ
+fIl
 qFq
 stw
 tJW
@@ -78655,7 +79069,7 @@ kNE
 btZ
 yaP
 fbH
-jFX
+vSw
 xPN
 vti
 pFi
@@ -78922,7 +79336,7 @@ opG
 qbj
 ffa
 sBS
-eTZ
+fIl
 sAk
 sAk
 sAk
@@ -79436,7 +79850,7 @@ opG
 jHm
 bsD
 pNK
-eTZ
+fIl
 sAk
 sAk
 sAk
@@ -79683,17 +80097,17 @@ kNE
 fPL
 mFV
 mLJ
-jFX
+vSw
 swL
 vti
 cil
 vti
 vti
 opG
-eTZ
-eTZ
+fIl
+fIl
 uYG
-eTZ
+fIl
 leV
 leV
 sAk
@@ -79940,7 +80354,7 @@ kNE
 kNE
 bDO
 kNE
-jFX
+vSw
 vqp
 vqp
 nHk
@@ -79950,7 +80364,7 @@ opG
 pmV
 tpX
 dZk
-eTZ
+fIl
 leV
 leV
 sAk
@@ -80197,7 +80611,7 @@ skN
 kWE
 fID
 rXp
-jFX
+vSw
 aJd
 jhQ
 dVp
@@ -80207,7 +80621,7 @@ opG
 qmF
 tpX
 taP
-eTZ
+fIl
 leV
 leV
 sAk
@@ -80454,17 +80868,17 @@ djl
 pZp
 nOw
 fpw
-jFX
+vSw
 cpj
 pfy
 xko
 pfy
 qZu
 opG
-eTZ
+fIl
 uYG
-eTZ
-eTZ
+fIl
+fIl
 leV
 leV
 sAk
@@ -80711,7 +81125,7 @@ ccT
 ikM
 ubv
 owm
-jFX
+vSw
 gaV
 mDA
 kcQ
@@ -80968,7 +81382,7 @@ pyU
 vmO
 lAl
 owm
-jFX
+vSw
 vGk
 kdN
 qen
@@ -81225,7 +81639,7 @@ kIE
 bFg
 lAl
 wsb
-jFX
+vSw
 wmJ
 mDA
 cph
@@ -81290,7 +81704,7 @@ gBA
 gBA
 gBA
 gBA
-gBA
+kyd
 agP
 gBA
 agP
@@ -81482,7 +81896,7 @@ gUt
 tUO
 pnO
 gMq
-jFX
+vSw
 cpj
 lFh
 jSX
@@ -81739,7 +82153,7 @@ gVY
 bMA
 mgL
 gek
-jFX
+vSw
 wYS
 kuG
 kuG
@@ -81994,17 +82408,17 @@ kNE
 kNE
 kNE
 nwK
-jFX
-jFX
-jFX
+vSw
+vSw
+vSw
 kCh
 oek
 oek
 oek
 kCh
-jFX
-jFX
-jFX
+vSw
+vSw
+vSw
 lxu
 opG
 leV
@@ -82251,7 +82665,7 @@ rtX
 gXg
 jKW
 chE
-jFX
+vSw
 awf
 awf
 nuG
@@ -82261,7 +82675,7 @@ awf
 tNk
 nuG
 awf
-jFX
+vSw
 jwn
 opG
 leV
@@ -82495,13 +82909,13 @@ leV
 leV
 leV
 leV
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
 kNE
 mzF
 jPK
@@ -82518,7 +82932,7 @@ bva
 pEv
 eRK
 rBL
-jFX
+vSw
 lxu
 opG
 opG
@@ -82562,10 +82976,10 @@ esf
 wYy
 wsy
 xSr
-sai
-sai
-sai
-sai
+vtE
+vtE
+vtE
+vtE
 fAQ
 fJp
 hJD
@@ -82752,7 +83166,7 @@ leV
 leV
 leV
 leV
-jFX
+vSw
 vnw
 lFD
 tYm
@@ -82775,7 +83189,7 @@ lYZ
 bva
 bEY
 rBL
-jFX
+vSw
 wuc
 ffc
 opG
@@ -82817,13 +83231,13 @@ eWQ
 iFE
 tPs
 wYy
-sai
+vtE
 aAD
 wYy
 wYy
 wYy
-wYy
-sai
+lWG
+vtE
 fJp
 jvn
 xZk
@@ -83009,7 +83423,7 @@ leV
 leV
 leV
 leV
-jFX
+vSw
 vGH
 obM
 tNk
@@ -83022,7 +83436,7 @@ jPK
 ckx
 ccT
 gfy
-jFX
+vSw
 ogc
 omT
 pDP
@@ -83032,7 +83446,7 @@ sNB
 eRK
 eRK
 tfe
-jFX
+vSw
 clY
 dCU
 opG
@@ -83074,13 +83488,13 @@ eWQ
 iFE
 esf
 wYy
-sai
+vtE
 gBA
 vtE
-sai
+vtE
 vtE
 wYy
-sai
+vtE
 fJp
 nGf
 xZk
@@ -83266,7 +83680,7 @@ olT
 olT
 olT
 olT
-jFX
+vSw
 jXf
 uSs
 nuG
@@ -83279,7 +83693,7 @@ erD
 iYi
 ccT
 dDP
-jFX
+vSw
 ebL
 bEY
 cSp
@@ -83289,7 +83703,7 @@ sNB
 cuc
 kwO
 oBY
-jFX
+vSw
 wuc
 dFy
 opG
@@ -83333,11 +83747,11 @@ egS
 wYy
 aHM
 gBA
-sai
+vtE
 qHZ
-sai
+vtE
 wYy
-sai
+vtE
 fJp
 siP
 xZk
@@ -83523,7 +83937,7 @@ olT
 ovO
 fsk
 iar
-jFX
+vSw
 kYM
 cVA
 tuM
@@ -83536,7 +83950,7 @@ qOB
 lBm
 sVd
 cFu
-jFX
+vSw
 nuG
 pfa
 eRK
@@ -83546,7 +83960,7 @@ nuG
 bva
 eRK
 awf
-jFX
+vSw
 uUX
 ffW
 opG
@@ -83588,13 +84002,13 @@ eWQ
 iFE
 esf
 wYy
-sai
+vtE
 gBA
 vtE
-sai
+vtE
 vtE
 wYy
-sai
+vtE
 fJp
 nGf
 xZk
@@ -83720,18 +84134,18 @@ leV
 tCZ
 tCZ
 tCZ
-dvK
+jXw
 tCZ
-dvK
-tCZ
-tCZ
-tCZ
-dvK
-dvK
+jXw
 tCZ
 tCZ
-dvK
-dvK
+tCZ
+jXw
+jXw
+tCZ
+tCZ
+jXw
+jXw
 leV
 leV
 leV
@@ -83780,7 +84194,7 @@ olT
 fcO
 rmo
 guZ
-jFX
+vSw
 qHd
 bAN
 xXW
@@ -83803,7 +84217,7 @@ bva
 pAM
 vQw
 xRW
-jFX
+vSw
 eOs
 dFy
 opG
@@ -83845,13 +84259,13 @@ eWQ
 iFE
 tPs
 wYy
-sai
-gBA
+vtE
+ucH
 wYy
 wYy
 wYy
-wYy
-sai
+lWG
+vtE
 fJp
 sfQ
 jHB
@@ -84037,7 +84451,7 @@ olT
 fcO
 iDq
 guZ
-jFX
+vSw
 klG
 awf
 qyr
@@ -84050,7 +84464,7 @@ lAl
 jPK
 cRb
 cFu
-jFX
+vSw
 nTd
 pfa
 eRK
@@ -84060,7 +84474,7 @@ cdm
 eRK
 eRK
 awf
-jFX
+vSw
 eOs
 opG
 wKS
@@ -84102,12 +84516,12 @@ eWQ
 iFE
 esf
 wYy
-sai
+vtE
 xSr
-sai
-sai
-sai
-sai
+vtE
+vtE
+vtE
+vtE
 bVN
 fJp
 mkq
@@ -84294,7 +84708,7 @@ olT
 gLQ
 vfR
 vfR
-jFX
+vSw
 jUr
 trC
 nuG
@@ -84307,7 +84721,7 @@ drv
 gLZ
 pVX
 cWO
-jFX
+vSw
 mla
 bVj
 nuG
@@ -84317,7 +84731,7 @@ nuG
 awf
 awf
 rVa
-jFX
+vSw
 eOs
 eva
 leV
@@ -84502,7 +84916,7 @@ lXn
 lXn
 hFJ
 lXn
-dvK
+jXw
 leV
 leV
 leV
@@ -84564,17 +84978,17 @@ eCx
 jPK
 nLd
 cFu
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
 lxu
 eva
 leV
@@ -84759,7 +85173,7 @@ uKX
 iJa
 lXn
 lXn
-dvK
+jXw
 leV
 leV
 leV
@@ -84996,13 +85410,13 @@ czY
 czY
 czY
 czY
-dvK
-dvK
-dvK
-dvK
-dvK
-xzg
-dvK
+jXw
+jXw
+jXw
+jXw
+jXw
+igw
+jXw
 lXn
 lXn
 eZL
@@ -85016,7 +85430,7 @@ uKX
 lXn
 lXn
 lXn
-dvK
+jXw
 leV
 leV
 leV
@@ -85079,7 +85493,7 @@ nFB
 xAj
 lAl
 jst
-jFX
+vSw
 clY
 opG
 hSs
@@ -85253,13 +85667,13 @@ czY
 czY
 czY
 czY
-dvK
-dvK
-dvK
-dvK
-dvK
-xzg
-dvK
+jXw
+jXw
+jXw
+jXw
+jXw
+igw
+jXw
 pSb
 lXn
 lrD
@@ -85336,7 +85750,7 @@ lBm
 hwV
 lBm
 tXL
-jFX
+vSw
 clY
 opG
 hSs
@@ -85402,7 +85816,7 @@ dkC
 dkC
 dkC
 dkC
-dkC
+iDO
 aAo
 dkC
 aAo
@@ -85516,7 +85930,7 @@ ogi
 nhR
 apR
 lXn
-dvK
+jXw
 lXn
 lXn
 aNK
@@ -85593,7 +86007,7 @@ lhJ
 xlC
 iYi
 bHv
-jFX
+vSw
 ccp
 opG
 hSs
@@ -85850,7 +86264,7 @@ ery
 xlC
 ojB
 pRA
-jFX
+vSw
 kvX
 eOs
 clY
@@ -86107,7 +86521,7 @@ hnZ
 sfy
 hnZ
 yiu
-jFX
+vSw
 opG
 opG
 oAr
@@ -86280,10 +86694,10 @@ glr
 czY
 czY
 czY
-dvK
-dvK
-dvK
-dvK
+jXw
+jXw
+jXw
+jXw
 ibJ
 xaz
 mGn
@@ -86304,7 +86718,7 @@ lXn
 tCZ
 tCZ
 tCZ
-dvK
+jXw
 ibJ
 xaz
 ibJ
@@ -86364,7 +86778,7 @@ gXg
 eqO
 vpp
 cFu
-jFX
+vSw
 leV
 opG
 opG
@@ -86414,11 +86828,11 @@ rHq
 leV
 iFE
 eGX
+uaa
 nsd
-nsd
 eGE
 eGE
-eGE
+rle
 eGE
 eGE
 htg
@@ -86616,12 +87030,12 @@ nuG
 owY
 kNE
 lup
-jFX
+vSw
 qxE
 irb
 qxE
-jFX
-jFX
+vSw
+vSw
 leV
 leV
 leV
@@ -86864,7 +87278,7 @@ iZm
 qRY
 ssq
 olT
-jFX
+vSw
 aOr
 dMp
 lhJ
@@ -87121,14 +87535,14 @@ kAr
 nEs
 uvX
 fhS
-jFX
+vSw
 xAB
 jIA
 obM
 nuG
 lBm
 awf
-jFX
+vSw
 sDJ
 goG
 pci
@@ -87308,7 +87722,7 @@ vKg
 vKg
 leV
 leV
-dvK
+jXw
 jhe
 ybI
 qyH
@@ -87329,7 +87743,7 @@ iJa
 lXn
 iJa
 iJa
-dvK
+jXw
 leV
 leV
 leV
@@ -87378,14 +87792,14 @@ fcn
 kYp
 mim
 ivc
-jFX
+vSw
 dgf
 nuG
 ueH
 lob
 iDa
 glg
-jFX
+vSw
 wsw
 qxi
 mzL
@@ -87565,7 +87979,7 @@ vKg
 vKg
 leV
 leV
-dvK
+jXw
 qdX
 lXn
 iJa
@@ -87586,7 +88000,7 @@ rZv
 lXn
 lXn
 lXn
-dvK
+jXw
 leV
 leV
 leV
@@ -87635,14 +88049,14 @@ gSz
 eZf
 mko
 dja
-jFX
+vSw
 jio
 ueH
 ueH
 bdQ
 pDF
 vKo
-jFX
+vSw
 ldN
 goG
 tpc
@@ -87822,23 +88236,23 @@ vKg
 vKg
 leV
 leV
-dvK
-dvK
-dvK
-dvK
+jXw
+jXw
+jXw
+jXw
 tCZ
-dvK
+jXw
 tCZ
-dvK
-dvK
+jXw
+jXw
 tCZ
-dvK
-dvK
+jXw
+jXw
 tCZ
-dvK
+jXw
 tCZ
 tCZ
-dvK
+jXw
 tCZ
 tCZ
 tCZ
@@ -87892,14 +88306,14 @@ mBL
 sZJ
 rSm
 ilY
-jFX
+vSw
 xUe
 tKs
 orS
 lDJ
 mIT
 awY
-jFX
+vSw
 wsw
 qxi
 paL
@@ -88149,14 +88563,14 @@ olT
 olT
 olT
 olT
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
-jFX
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
+vSw
 wsw
 goG
 hhD
@@ -90456,12 +90870,12 @@ mhx
 oaQ
 lek
 mJw
-pBN
-pBN
-pBN
+izM
+izM
+izM
 xTd
-pBN
-pBN
+izM
+izM
 fhB
 fhB
 muR
@@ -90713,7 +91127,7 @@ ymg
 oaQ
 lxJ
 fVS
-pBN
+izM
 pXs
 uaC
 dKP
@@ -91038,7 +91452,7 @@ rHq
 rHq
 rHq
 azq
-baa
+aEa
 hWB
 baa
 azq
@@ -91998,7 +92412,7 @@ dMu
 rzT
 wKb
 fVS
-pBN
+izM
 tgc
 xlW
 npJ
@@ -92256,11 +92670,11 @@ lxJ
 iEm
 fVS
 xTd
-pBN
+izM
 xTd
 xTd
 xTd
-pBN
+izM
 hwX
 hwX
 hwX
@@ -93045,7 +93459,7 @@ see
 vIz
 xvZ
 nUi
-xXm
+see
 bhG
 tmc
 edj
@@ -93812,7 +94226,7 @@ mir
 mir
 goG
 lpt
-xXm
+hhW
 nnC
 cqr
 nnC
@@ -94565,7 +94979,7 @@ vlB
 vlB
 vlB
 vlB
-vVT
+bXH
 uvk
 rsk
 qEs
@@ -94872,7 +95286,7 @@ wYP
 wYP
 wYP
 wYP
-wYP
+jDS
 gZR
 leV
 vlB
@@ -101573,7 +101987,7 @@ nrR
 qhl
 iuH
 qWE
-rvz
+cSy
 jCU
 fqy
 sQx
@@ -102867,7 +103281,7 @@ vMF
 ctf
 jAq
 bQY
-vMx
+aPP
 ubA
 qHa
 vvk
@@ -105435,7 +105849,7 @@ sFO
 cKb
 wpX
 jXa
-vMx
+aPP
 vOs
 ubA
 jFi
@@ -105951,7 +106365,7 @@ uxE
 vWJ
 mJV
 mBR
-vMx
+aPP
 ubA
 qHa
 xzL
@@ -106205,7 +106619,7 @@ aGI
 sFO
 oqr
 wpX
-ubA
+xFo
 ubA
 lyB
 jFi
@@ -106463,15 +106877,15 @@ aVI
 rvz
 lWT
 vMx
-vMx
+aPP
 qVC
 jFi
-vMx
-vMx
+aPP
+aPP
 jAq
 jAq
 jAq
-vMx
+aPP
 xDK
 jFi
 pzj
@@ -106981,7 +107395,7 @@ ubA
 hQS
 vOs
 jFi
-vMx
+aPP
 ehw
 jAq
 uZQ
@@ -107983,7 +108397,7 @@ xhh
 cNb
 sWK
 dIt
-jls
+nys
 mpP
 qLU
 jls
@@ -109525,7 +109939,7 @@ xYv
 gmK
 xqv
 dIt
-kvb
+omD
 vWH
 uMH
 qgs
@@ -110033,7 +110447,7 @@ gqU
 gqU
 dWx
 etK
-xqv
+lUY
 pIi
 vOr
 gmK
@@ -134649,10 +135063,10 @@ aXW
 nty
 nty
 nty
-tGi
-tGi
-tGi
-tGi
+vxe
+vxe
+vxe
+vxe
 lUi
 ych
 ych
@@ -134661,7 +135075,7 @@ mCv
 xnE
 mCv
 ych
-xcq
+jRz
 qys
 rib
 sxn
@@ -134968,7 +135382,7 @@ ssD
 tnB
 itD
 tnB
-tnB
+vdE
 tnB
 rmS
 snH
@@ -135432,7 +135846,7 @@ jQn
 cyp
 cyp
 dGF
-xcq
+jRz
 myc
 ykB
 htV
@@ -136460,7 +136874,7 @@ bJj
 mkf
 cyp
 gMu
-xcq
+jRz
 qpd
 vpH
 qpd
@@ -136768,7 +137182,7 @@ jga
 jga
 eTn
 tnB
-bTh
+jMK
 snH
 leV
 leV
@@ -136964,9 +137378,9 @@ hkx
 ylN
 nty
 ylN
-tGi
-tGi
-tGi
+vxe
+vxe
+vxe
 ych
 sDe
 mkf
@@ -137275,7 +137689,7 @@ leV
 leV
 snH
 nNv
-tnB
+vdE
 tnB
 jaJ
 jaJ
@@ -137738,14 +138152,14 @@ seE
 seE
 leV
 leV
-xcq
-xcq
-xcq
-xcq
-xcq
-xcq
-xcq
-xcq
+jRz
+jRz
+jRz
+jRz
+jRz
+jRz
+jRz
+jRz
 qpd
 fzP
 qpd
@@ -138048,11 +138462,11 @@ tnB
 nNv
 tnB
 tnB
+vdE
 tnB
 tnB
 tnB
-tnB
-tnB
+vdE
 tnB
 tnB
 gyC
@@ -139537,7 +139951,7 @@ gYU
 dfG
 dOo
 qUI
-ugQ
+cGn
 ogI
 rUf
 rUf
@@ -139590,7 +140004,7 @@ xxz
 sHg
 tnB
 tnB
-tnB
+oPs
 tnB
 tnB
 tnB
@@ -139794,14 +140208,14 @@ iEW
 nYO
 xuT
 uQY
-ugQ
+cGn
 rUf
-anX
+vAe
 ivD
 waA
 atu
 olG
-ugQ
+cGn
 qpd
 qYg
 htV
@@ -140315,7 +140729,7 @@ anX
 kBQ
 xiD
 xJd
-ugQ
+cGn
 sxn
 aoC
 pJA
@@ -140651,14 +141065,14 @@ mie
 jVf
 sHC
 uhb
-egq
-egq
-egq
-egq
+uZh
+uZh
+uZh
+uZh
 kyS
 wZZ
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -140905,7 +141319,7 @@ iAV
 aeS
 oPe
 oPe
-vdE
+dXF
 sHC
 und
 oYH
@@ -140913,9 +141327,9 @@ cMG
 oYH
 cMG
 aYV
-tDa
+uRV
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -141078,7 +141492,7 @@ eNC
 fLA
 dFW
 qUI
-lEl
+lzz
 doX
 rQs
 rUf
@@ -141130,7 +141544,7 @@ yki
 snH
 lpk
 sHg
-fRP
+pjF
 snH
 iAV
 iAV
@@ -141162,7 +141576,7 @@ iAV
 xdC
 vTg
 oPe
-vdE
+dXF
 sHC
 und
 oYH
@@ -141172,7 +141586,7 @@ cMG
 oYH
 tDa
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -141343,7 +141757,7 @@ gCD
 kia
 ube
 bXO
-ugQ
+cGn
 rBV
 rib
 qpd
@@ -141419,7 +141833,7 @@ iAV
 ehd
 oPe
 oPe
-vdE
+dXF
 sHC
 bIJ
 oYH
@@ -141429,7 +141843,7 @@ wxA
 oYH
 tDa
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -141676,7 +142090,7 @@ iAV
 rme
 oPe
 oPe
-vdE
+dXF
 sHC
 und
 oYH
@@ -141686,7 +142100,7 @@ wxA
 aYV
 tDa
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -141857,7 +142271,7 @@ qZe
 rUf
 krs
 bXO
-ugQ
+cGn
 sxn
 sIo
 qpd
@@ -141910,8 +142324,8 @@ rUx
 oPe
 mSY
 atz
-cgA
-cgA
+oPe
+oPe
 iAV
 uEs
 dPC
@@ -141932,15 +142346,15 @@ iAV
 iAV
 yiU
 oPe
-oPe
-vdE
+oXM
+dXF
 sHC
 und
 oYH
 cMG
 oYH
 wxA
-oYH
+bjo
 pOs
 vyx
 jVf
@@ -142157,7 +142571,7 @@ hhI
 hmg
 hhI
 hhI
-hhI
+chO
 hhI
 ukQ
 hhI
@@ -142168,7 +142582,7 @@ lTX
 jhH
 rom
 fTe
-oPe
+oXM
 lPL
 iAV
 iAV
@@ -142176,7 +142590,7 @@ iAV
 iAV
 iAV
 omN
-cgA
+oPe
 iKy
 oPe
 oPe
@@ -142193,7 +142607,7 @@ oPe
 gME
 sHC
 und
-oYH
+xcq
 cMG
 oYH
 xen
@@ -142206,13 +142620,13 @@ jVf
 jVf
 jVf
 jVf
-vdE
-vdE
-vdE
-vdE
-vdE
-vdE
-vdE
+dXF
+dXF
+dXF
+dXF
+dXF
+dXF
+dXF
 jVf
 jVf
 jVf
@@ -142472,7 +142886,7 @@ sHC
 sHC
 iXp
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -142729,7 +143143,7 @@ oYH
 oYH
 eaS
 oYH
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -142964,11 +143378,11 @@ fyr
 hjD
 sHC
 uhb
+uZh
 egq
-egq
-egq
+uZh
 cXh
-egq
+uZh
 cXh
 wZZ
 sHC
@@ -142977,16 +143391,16 @@ hoq
 fDk
 rou
 sDu
-vdE
+dXF
 jqq
-vdE
+dXF
 uyL
 nWW
 fDk
 ecx
-vdE
+dXF
 jqq
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -143222,28 +143636,28 @@ hjD
 rqu
 und
 oYH
-fke
+gRZ
 oYH
 xen
 vGh
 wxA
 qoT
 wZZ
-cSy
+aZB
 jVf
 jVf
-vdE
+dXF
 jVf
-vdE
+dXF
 pCq
-vdE
-vdE
+dXF
+dXF
 jVf
-vdE
+dXF
 jVf
-vdE
+dXF
 nqA
-vdE
+dXF
 ydW
 ikq
 ikq
@@ -143388,15 +143802,15 @@ aXW
 aXW
 seE
 seE
-jDS
-jDS
-njM
-njM
-njM
-njM
-njM
-jDS
-jDS
+sYO
+sYO
+vVT
+vVT
+vVT
+vVT
+vVT
+sYO
+sYO
 hLo
 hLo
 hLo
@@ -143487,20 +143901,20 @@ wxA
 oYH
 tDa
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
-vdE
+dXF
 jLt
-vdE
+dXF
 aXW
 aXW
 aXW
 aXW
-vdE
+dXF
 jLt
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -143645,14 +144059,14 @@ aXW
 aXW
 seE
 seE
-jDS
+sYO
 nhG
-jXw
+lEl
 jkC
 fZR
 jIJ
 oDD
-jRz
+njl
 ppo
 sJy
 sVA
@@ -143744,7 +144158,7 @@ wxA
 qJW
 swQ
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -143902,14 +144316,14 @@ aXW
 aXW
 seE
 seE
-jDS
+sYO
 bPX
-lzz
-jXw
+dvK
+lEl
 gvV
 gvV
 dBl
-njl
+njM
 ppo
 sVA
 sVA
@@ -143993,7 +144407,7 @@ wKI
 sHC
 sHC
 sHC
-sHC
+aNa
 ygP
 cMG
 mVJ
@@ -144001,7 +144415,7 @@ iSg
 tDa
 sHC
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -144073,7 +144487,7 @@ kjj
 kjj
 kjj
 iMb
-uZh
+jWO
 uuI
 kjj
 vlB
@@ -144161,13 +144575,13 @@ aXW
 aXW
 ppo
 vGi
-lzz
+dvK
 lrq
 dBl
-lzz
-lzz
-njl
-jDS
+dvK
+dvK
+njM
+sYO
 wha
 gkc
 gkc
@@ -144247,9 +144661,9 @@ vJL
 kNN
 kNN
 wKI
-wCW
-wCW
-wCW
+tGi
+tGi
+tGi
 sHC
 und
 cMG
@@ -144258,7 +144672,7 @@ iSg
 tDa
 sHC
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -144330,7 +144744,7 @@ vlB
 vlB
 kjj
 nRP
-uZh
+jWO
 vpb
 kjj
 vlB
@@ -144514,7 +144928,7 @@ iHG
 hCK
 tDa
 lZA
-sHC
+naS
 jVf
 aXW
 aXW
@@ -144587,7 +145001,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 vpb
 kjj
 vlB
@@ -144675,13 +145089,13 @@ aXW
 aXW
 ppo
 qqe
-lzz
-lzz
+dvK
+dvK
 pKn
 dBl
 laT
-lzz
-njM
+dvK
+vVT
 gkc
 gkc
 rTd
@@ -144772,7 +145186,7 @@ iSg
 tDa
 sHC
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -144844,7 +145258,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 vpb
 kjj
 vlB
@@ -144931,8 +145345,8 @@ aXW
 aXW
 aXW
 ppo
-lzz
-jXw
+dvK
+lEl
 gvV
 iFO
 cOF
@@ -145019,8 +145433,8 @@ kNN
 kug
 hjD
 sHC
-sHC
-sHC
+mny
+mny
 gYx
 und
 cMG
@@ -145029,7 +145443,7 @@ iSg
 tDa
 sHC
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -145101,7 +145515,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 hGE
 kjj
 vlB
@@ -145192,7 +145606,7 @@ oqL
 pHF
 pHF
 iFO
-lzz
+dvK
 eHR
 gSZ
 ppo
@@ -145278,7 +145692,7 @@ hjD
 sHC
 gGK
 kyS
-egq
+uZh
 thi
 iSg
 gEG
@@ -145286,7 +145700,7 @@ iSg
 qoT
 wZZ
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -145358,7 +145772,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 iTR
 kjj
 vlB
@@ -145444,15 +145858,15 @@ aXW
 aXW
 aXW
 aXW
-jDS
-jDS
+sYO
+sYO
 rVi
 rVi
 klS
 ppo
 ppo
-jDS
-njM
+sYO
+vVT
 sVA
 gkc
 rTd
@@ -145543,20 +145957,20 @@ iSg
 oYH
 tDa
 sHC
-vdE
+dXF
 aXW
 aXW
 aXW
-vdE
+dXF
 ibb
-vdE
+dXF
 aXW
 aXW
 aXW
 aXW
-vdE
+dXF
 jXH
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -145615,7 +146029,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 vpb
 kjj
 vlB
@@ -145703,13 +146117,13 @@ aXW
 rVi
 ppo
 lRT
-lzz
-jXw
+dvK
+lEl
 iFO
-njl
-njl
-njl
 njM
+njM
+njM
+vVT
 wiE
 dSr
 xcU
@@ -145792,7 +146206,7 @@ fwE
 sHC
 ecW
 oYH
-fke
+gRZ
 hoq
 cMG
 sQe
@@ -145802,18 +146216,18 @@ pCY
 aZB
 jVf
 jVf
-vdE
+dXF
 jVf
-vdE
+dXF
 bcd
-vdE
-vdE
+dXF
+dXF
 jVf
-vdE
+dXF
 jVf
-vdE
+dXF
 bcd
-vdE
+dXF
 ydW
 ikq
 ikq
@@ -145872,7 +146286,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 vpb
 kjj
 vlB
@@ -145958,9 +146372,9 @@ aXW
 aXW
 rVi
 rVi
-lzz
+dvK
 lTk
-lzz
+dvK
 uUy
 tMU
 uUy
@@ -146033,7 +146447,7 @@ eof
 qrL
 qrL
 qrL
-qnM
+fyr
 fyr
 fyr
 nra
@@ -146061,16 +146475,16 @@ oYH
 uyL
 mCa
 oiv
-vdE
+dXF
 xei
-vdE
+dXF
 fDk
 tWt
 fDk
 hYA
-vdE
+dXF
 raX
-vdE
+dXF
 aXW
 aXW
 aXW
@@ -146129,7 +146543,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 vpb
 kjj
 vlB
@@ -146222,7 +146636,7 @@ iDn
 ajO
 hrB
 uUy
-njl
+njM
 ppo
 sVA
 gkc
@@ -146284,10 +146698,10 @@ oPe
 rWh
 oPe
 oPe
-cgA
-cgA
-cgA
-cgA
+oPe
+oPe
+oPe
+oPe
 oPe
 qrL
 qrL
@@ -146327,7 +146741,7 @@ vBc
 oYH
 oYH
 oYH
-vdE
+dXF
 seE
 seE
 aXW
@@ -146386,7 +146800,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 hGE
 kjj
 vlB
@@ -146479,8 +146893,8 @@ hrB
 tMU
 dbV
 uUy
-njl
-jDS
+njM
+sYO
 wSw
 gkc
 eCj
@@ -146561,11 +146975,11 @@ vZT
 cgA
 jVf
 tNi
-gGK
+dei
 cXh
 cXh
-egq
-egq
+uZh
+uZh
 kyS
 wZZ
 sHC
@@ -146584,7 +146998,7 @@ tgP
 oAz
 cAR
 sHC
-vdE
+dXF
 seE
 seE
 seE
@@ -146643,7 +147057,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 vpb
 kjj
 vlB
@@ -146736,7 +147150,7 @@ uUy
 rvf
 uUy
 uUy
-njl
+njM
 ppo
 sVA
 gkc
@@ -146802,7 +147216,7 @@ qrL
 qrL
 qrL
 brZ
-cgA
+oPe
 atz
 oPe
 oPe
@@ -146832,13 +147246,13 @@ jVf
 jVf
 jVf
 jVf
-vdE
-vdE
-vdE
-vdE
-vdE
-vdE
-vdE
+dXF
+dXF
+dXF
+dXF
+dXF
+dXF
+dXF
 jVf
 jVf
 jVf
@@ -146900,7 +147314,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 vpb
 kjj
 vlB
@@ -146991,8 +147405,8 @@ orA
 fVX
 lrq
 hNc
-lzz
-lzz
+dvK
+dvK
 jqy
 cai
 oxp
@@ -147075,7 +147489,7 @@ fTe
 vTg
 jVf
 sHC
-und
+sai
 oYH
 wxA
 oYH
@@ -147157,7 +147571,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 vpb
 kjj
 vlB
@@ -147250,7 +147664,7 @@ uUy
 uuW
 wzb
 uUy
-lzz
+dvK
 ppo
 sVA
 gkc
@@ -147330,17 +147744,17 @@ qrL
 ifC
 gdD
 oPe
-vdE
-sHC
-und
+dXF
+mny
+sai
 oYH
 wxA
 oYH
 cMG
-oYH
+xzg
 tDa
 sHC
-vdE
+dXF
 seE
 seE
 seE
@@ -147414,7 +147828,7 @@ vlB
 vlB
 kjj
 vpb
-uZh
+jWO
 vpb
 kjj
 vlB
@@ -147507,8 +147921,8 @@ uUy
 uuW
 uUy
 hTV
-jXw
-jDS
+lEl
+sYO
 krE
 yaQ
 mlN
@@ -147584,11 +147998,11 @@ leV
 leV
 leV
 qrL
-cgA
-gdD
-oPe
+bBh
+eTZ
+vJL
 eeO
-sHC
+mny
 bIJ
 oYH
 wxA
@@ -147597,7 +148011,7 @@ cMG
 oYH
 tDa
 sHC
-vdE
+dXF
 seE
 seE
 seE
@@ -147764,7 +148178,7 @@ hrB
 uuW
 hrB
 uUy
-lzz
+dvK
 ppo
 sVA
 aEY
@@ -147843,10 +148257,10 @@ leV
 qrL
 oPe
 gdD
-oPe
+vJL
 eeO
-sHC
-und
+mny
+arD
 oYH
 wxA
 oYH
@@ -147854,7 +148268,7 @@ cMG
 oYH
 tDa
 sHC
-vdE
+dXF
 seE
 seE
 seE
@@ -147934,11 +148348,11 @@ jwO
 flx
 bMG
 flx
-iDO
-iDO
+ugQ
+ugQ
 oID
-iDO
-iDO
+ugQ
+ugQ
 kzI
 flx
 bMG
@@ -147947,15 +148361,15 @@ lJH
 flx
 uHU
 flx
-iDO
-iDO
+ugQ
+ugQ
 ptK
 bos
 uHU
 bos
 kzI
 bos
-iDO
+ugQ
 bos
 ptK
 ptK
@@ -148014,14 +148428,14 @@ aXW
 aXW
 rVi
 ppo
-jXw
-lzz
-lzz
+lEl
+dvK
+dvK
 uUy
 bkm
 uUy
 hUO
-lzz
+dvK
 ppo
 elL
 qpd
@@ -148101,7 +148515,7 @@ qrL
 oPe
 gdD
 hqb
-vdE
+dXF
 sHC
 und
 oYH
@@ -148109,7 +148523,7 @@ wxA
 oYH
 cMG
 oYH
-tDa
+ilV
 sHC
 dVs
 seE
@@ -148186,17 +148600,17 @@ vlB
 ptK
 vJD
 rST
-iDO
-iDO
+ugQ
+ugQ
 aHU
 lJH
 aHU
-iDO
-iDO
+ugQ
+ugQ
 oID
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
 aHU
 lJH
 aHU
@@ -148204,15 +148618,15 @@ lJH
 aHU
 lJH
 aHU
-iDO
-iDO
+ugQ
+ugQ
 ptK
 bos
 jHt
 bos
-iDO
+pXh
 bos
-iDO
+ugQ
 bos
 ptK
 ptK
@@ -148274,12 +148688,12 @@ ppo
 ppo
 xRM
 qcb
-lzz
+dvK
 cYw
-lzz
+dvK
 gYm
 uEK
-jDS
+sYO
 vvv
 qpd
 rib
@@ -148368,7 +148782,7 @@ hiX
 hiX
 swQ
 sHC
-vdE
+dXF
 seE
 seE
 seE
@@ -148441,19 +148855,19 @@ vlB
 vlB
 vlB
 ptK
-iDO
+ugQ
 rST
-iDO
-iDO
+ugQ
+ugQ
 flx
 lJH
 flx
-iDO
-iDO
+ugQ
+ugQ
 oID
-iDO
+ugQ
 asR
-iDO
+ugQ
 flx
 lJH
 flx
@@ -148461,11 +148875,11 @@ lJH
 flx
 lJH
 flx
-iDO
-iDO
+ugQ
+ugQ
 ptK
 bos
-iDO
+ugQ
 bjg
 kBi
 uPy
@@ -148528,15 +148942,15 @@ aXW
 aXW
 aXW
 aXW
-jDS
-jDS
-jDS
-jDS
-jDS
-jDS
-jDS
-jDS
-jDS
+sYO
+sYO
+sYO
+sYO
+sYO
+sYO
+sYO
+sYO
+sYO
 sVA
 glt
 rib
@@ -148698,19 +149112,19 @@ vlB
 vlB
 vlB
 ptK
-iDO
+ugQ
 rST
-iDO
-iDO
+ugQ
+ugQ
 aHU
 lJH
 aHU
-iDO
-iDO
+ugQ
+ugQ
 oID
-iDO
+ugQ
 kds
-iDO
+ugQ
 aHU
 lJH
 aHU
@@ -148718,15 +149132,15 @@ lJH
 aHU
 lJH
 aHU
-iDO
-lFz
+ugQ
+dCb
 ptK
 bos
-iDO
+jFX
 bjg
-iDO
+ugQ
 bos
-iDO
+ugQ
 bos
 awA
 ptK
@@ -148955,19 +149369,19 @@ vlB
 vlB
 vlB
 ptK
-iDO
+ugQ
 rST
-iDO
-iDO
+ugQ
+ugQ
 flx
 lJH
 flx
-iDO
-iDO
+ugQ
+ugQ
 oID
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
 flx
 lJH
 flx
@@ -148975,17 +149389,17 @@ lJH
 flx
 lJH
 flx
-iDO
-iDO
+ugQ
+ugQ
 ptK
 bos
-jHt
+jFX
 bjg
-iDO
+pXh
 bos
-iDO
+ugQ
 bos
-iDO
+ugQ
 ptK
 vlB
 vlB
@@ -149086,7 +149500,7 @@ leV
 leV
 vwT
 hxw
-nYF
+rtr
 cVs
 cVs
 kWq
@@ -149212,12 +149626,12 @@ bpo
 pTu
 vlB
 ptK
-iDO
+ugQ
 rST
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
 gkO
 gUG
 gUG
@@ -149231,14 +149645,14 @@ gUG
 gUG
 gUG
 pEK
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
 ptK
 lKS
-iDO
+ugQ
 bjg
-iDO
+ugQ
 bos
 jHt
 bos
@@ -149346,8 +149760,8 @@ aRW
 kxG
 iIf
 nYF
-nYF
-nYF
+rtr
+rtr
 vwT
 leV
 leV
@@ -149469,7 +149883,7 @@ bpo
 caM
 vlB
 ptK
-iDO
+ugQ
 rST
 oID
 oID
@@ -149497,9 +149911,9 @@ rST
 rST
 mWf
 agQ
-iDO
+ugQ
 kds
-iDO
+ugQ
 ptK
 ptK
 ptK
@@ -149726,8 +150140,8 @@ bpo
 pTu
 vlB
 ptK
-iDO
-iDO
+ugQ
+ugQ
 oID
 agQ
 gkO
@@ -149747,16 +150161,16 @@ tBs
 tzq
 gUG
 qBW
-iDO
+ugQ
 iEq
-iDO
-iDO
+ugQ
+ugQ
 oID
-iDO
-iDO
+ugQ
+ugQ
 nqM
-iDO
-iDO
+ugQ
+ugQ
 ptK
 lud
 gfb
@@ -149857,11 +150271,11 @@ leV
 leV
 vwT
 fPm
-nYF
+rtr
 hYw
-nYF
+rtr
 tqT
-nYF
+rtr
 vwT
 leV
 leV
@@ -149983,10 +150397,10 @@ bpo
 caM
 vlB
 ptK
-iDO
-iDO
+ugQ
+ugQ
 oID
-iDO
+ugQ
 uMy
 tBs
 tBs
@@ -150004,7 +150418,7 @@ iOA
 tBs
 tBs
 mHz
-iDO
+ugQ
 iEq
 iEq
 iEq
@@ -150241,9 +150655,9 @@ vlB
 vlB
 ptK
 clb
-iDO
+ugQ
 oID
-iDO
+ugQ
 wGU
 tBs
 bfx
@@ -150261,16 +150675,16 @@ bfx
 bfx
 tBs
 wkE
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
 oID
-iDO
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
+ugQ
 ptK
 ptK
 aAe
@@ -150374,7 +150788,7 @@ pGS
 mPq
 pll
 ejp
-nYF
+rtr
 qct
 vwT
 leV
@@ -150498,9 +150912,9 @@ pTu
 vlB
 ptK
 jkT
-iDO
+ugQ
 oID
-iDO
+ugQ
 wGU
 tBs
 bfx
@@ -150518,16 +150932,16 @@ cns
 bfx
 dtZ
 tzq
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
 oID
-iDO
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
+ugQ
 ptK
 ptK
 aAe
@@ -150628,7 +151042,7 @@ dUa
 leV
 vwT
 ict
-nYF
+rtr
 nLM
 cVs
 nuM
@@ -150755,9 +151169,9 @@ caM
 vlB
 ptK
 jkT
-iDO
+ugQ
 oID
-iDO
+ugQ
 wGU
 vOC
 hTz
@@ -150775,15 +151189,15 @@ cns
 hTz
 jTk
 tBs
-iDO
+ugQ
 tBs
-iDO
+ugQ
 tBs
 oID
 tBs
-iDO
+ugQ
 tBs
-iDO
+ugQ
 vOC
 ptK
 ptK
@@ -150885,10 +151299,10 @@ dUa
 leV
 vwT
 ict
-nYF
+rtr
 hYw
-nYF
-nYF
+rtr
+rtr
 swZ
 vwT
 leV
@@ -151012,9 +151426,9 @@ pTu
 vlB
 ptK
 jkT
-iDO
+ugQ
 oID
-iDO
+ugQ
 wGU
 tBs
 bfx
@@ -151031,19 +151445,19 @@ voM
 cns
 gtb
 ptK
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
 kds
 oID
-iDO
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
+ugQ
 isf
-iDO
+ugQ
 nEn
 lNH
 mtI
@@ -151108,9 +151522,9 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 omp
-uaa
+iys
 nIp
 leV
 leV
@@ -151269,9 +151683,9 @@ caM
 vlB
 wdI
 clb
-iDO
+ugQ
 oID
-iDO
+ugQ
 wGU
 tBs
 nWj
@@ -151365,9 +151779,9 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 wDj
-uaa
+iys
 nIp
 nIp
 nIp
@@ -151526,9 +151940,9 @@ pTu
 vlB
 ptK
 jkT
-iDO
+ugQ
 oID
-iDO
+ugQ
 wGU
 tBs
 bfx
@@ -151545,19 +151959,19 @@ voM
 cns
 gtb
 ptK
-iDO
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
+ugQ
 oID
-iDO
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
+ugQ
 isf
-iDO
+ugQ
 vzY
 rZz
 csj
@@ -151625,8 +152039,8 @@ nIp
 iZk
 wDj
 iaK
-uaa
-uaa
+iys
+iys
 xts
 nIp
 leV
@@ -151783,7 +152197,7 @@ caM
 vlB
 ptK
 jkT
-iDO
+ugQ
 oID
 lQy
 wGU
@@ -151803,15 +152217,15 @@ cns
 hTz
 tBs
 tBs
-iDO
+ugQ
 tBs
-iDO
+ugQ
 tBs
 oID
 tBs
-iDO
+ugQ
 tBs
-iDO
+ugQ
 vOC
 ptK
 ptK
@@ -151879,9 +152293,9 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 wDj
-chO
+uUV
 jDv
 urm
 fwm
@@ -151915,7 +152329,7 @@ leV
 vwT
 dhc
 kEB
-vel
+fzz
 vwT
 leV
 leV
@@ -152040,9 +152454,9 @@ pTu
 vlB
 ptK
 jkT
-iDO
+ugQ
 rST
-iDO
+ugQ
 wGU
 tBs
 bfx
@@ -152060,15 +152474,15 @@ cns
 bfx
 dtZ
 lZu
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
 oID
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
 eJj
 ptK
 ptK
@@ -152136,7 +152550,7 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 xfi
 ovd
 ovd
@@ -152297,9 +152711,9 @@ vlB
 vlB
 ptK
 clb
-iDO
+ugQ
 rST
-iDO
+ugQ
 wGU
 tBs
 bfx
@@ -152317,10 +152731,10 @@ bfx
 bfx
 tBs
 wkE
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
 oID
 wli
 wli
@@ -152395,9 +152809,9 @@ leV
 nIp
 udS
 xfi
-uaa
+iys
 sqZ
-ilV
+edJ
 cmo
 nIp
 leV
@@ -152553,10 +152967,10 @@ bpo
 caM
 vlB
 ptK
-iDO
-iDO
+ugQ
+ugQ
 rST
-iDO
+ugQ
 wGU
 tBs
 tBs
@@ -152574,7 +152988,7 @@ tBs
 tBs
 tBs
 wkE
-iDO
+ugQ
 iEq
 iEq
 iEq
@@ -152650,11 +153064,11 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 ioN
 xfX
-uaa
-uaa
+iys
+iys
 jDv
 nIp
 leV
@@ -152810,10 +153224,10 @@ bpo
 pTu
 vlB
 ptK
-iDO
-iDO
+ugQ
+ugQ
 rST
-iDO
+ugQ
 wGw
 pgC
 qpA
@@ -152831,16 +153245,16 @@ tBs
 lZu
 pgC
 vqq
-iDO
+ugQ
 iEq
 aKi
-iDO
+ugQ
 oID
-iDO
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
+ugQ
 ptK
 vlB
 vlB
@@ -152911,7 +153325,7 @@ hhw
 xfi
 jDv
 cxx
-uaa
+iys
 gYy
 nIp
 leV
@@ -153067,12 +153481,12 @@ bpo
 caM
 vlB
 ptK
-iDO
-iDO
+ugQ
+ugQ
 rST
 qye
-iDO
-iDO
+ugQ
+ugQ
 wGU
 tBs
 tBs
@@ -153086,18 +153500,18 @@ tBs
 tBs
 tBs
 wkE
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
 iEq
 aKi
-iDO
+ugQ
 lmv
 mWf
 mWf
 mWf
-iDO
-iDO
+ugQ
+ugQ
 ptK
 vlB
 vlB
@@ -153164,11 +153578,11 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 wDj
 jky
 xzP
-uaa
+iys
 xkJ
 nIp
 leV
@@ -153324,12 +153738,12 @@ bpo
 pTu
 vlB
 ptK
-iDO
-iDO
-iDO
-iDO
-iDO
-iDO
+ugQ
+ugQ
+ugQ
+ugQ
+ugQ
+ugQ
 wGw
 pgC
 pgC
@@ -153344,17 +153758,17 @@ pgC
 pgC
 vqq
 asR
-iDO
-iDO
+ugQ
+ugQ
 ptK
 tHR
 wli
 sFK
-iDO
-iDO
+ugQ
+ugQ
 mWf
-iDO
-lFz
+ugQ
+dCb
 ptK
 vlB
 vlB
@@ -153421,12 +153835,12 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 jVd
-uaa
-ilV
-uaa
-uaa
+iys
+edJ
+iys
+iys
 nIp
 leV
 asV
@@ -153605,13 +154019,13 @@ rrD
 aNH
 ptK
 wuk
-iDO
+ugQ
 kBi
 jHt
 aHU
 mWf
 aHU
-iDO
+ugQ
 ptK
 vlB
 vlB
@@ -153678,11 +154092,11 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 jVd
-uaa
+iys
 tQC
-chO
+uUV
 tzY
 nIp
 leV
@@ -153839,15 +154253,13 @@ vlB
 vlB
 ptK
 aHU
-iDO
+ugQ
 aHU
-iDO
+ugQ
 aHU
-iDO
+ugQ
 aHU
-iDO
-aHU
-lJH
+ugQ
 aHU
 lJH
 aHU
@@ -153859,16 +154271,18 @@ lJH
 aHU
 lJH
 aHU
-iDO
+lJH
+aHU
+ugQ
 ptK
 tWC
-iDO
+ugQ
 mNc
-iDO
+ugQ
 aHU
 uWt
 aHU
-iDO
+ugQ
 ptK
 vlB
 vlB
@@ -153935,9 +154349,9 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 fMG
-chO
+uUV
 nIp
 nIp
 nIp
@@ -154096,15 +154510,13 @@ vlB
 vlB
 ptK
 gEp
-iDO
+ugQ
 flx
 asR
 flx
-iDO
+ugQ
 flx
-iDO
-flx
-lJH
+ugQ
 flx
 lJH
 flx
@@ -154116,14 +154528,16 @@ lJH
 flx
 lJH
 flx
-iDO
+lJH
+flx
+ugQ
 iEq
 aHU
-iDO
+ugQ
 kds
-iDO
+ugQ
 aHU
-iDO
+ugQ
 aHU
 ptK
 ptK
@@ -154353,15 +154767,13 @@ vlB
 vlB
 ptK
 aHU
-iDO
+ugQ
 aHU
-iDO
+ugQ
 aHU
-iDO
+ugQ
 aHU
-iDO
-aHU
-lJH
+ugQ
 aHU
 lJH
 aHU
@@ -154373,14 +154785,16 @@ lJH
 aHU
 lJH
 aHU
-iDO
+lJH
+aHU
+ugQ
 iEq
 hXE
 hXE
 hXE
-iDO
+ugQ
 aHU
-iDO
+ugQ
 ptK
 ptK
 ptK
@@ -154449,9 +154863,9 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 wDj
-uaa
+iys
 nIp
 leV
 leV
@@ -154610,13 +155024,13 @@ vlB
 vlB
 ptK
 nBp
-iDO
+ugQ
 flx
-iDO
+ugQ
 cyA
-iDO
+ugQ
 flx
-iDO
+ugQ
 flx
 lJH
 flx
@@ -154630,12 +155044,12 @@ lJH
 flx
 lJH
 flx
-iDO
+ugQ
 iEq
 aHU
 jft
 giW
-iDO
+ugQ
 aHU
 ptK
 ptK
@@ -154706,9 +155120,9 @@ kkV
 kkV
 kkV
 nIp
-uaa
+iys
 gwG
-uaa
+iys
 nIp
 nIp
 nIp
@@ -155269,10 +155683,10 @@ leV
 leV
 leV
 leV
-hhW
-hhW
-hhW
-hhW
+dRT
+dRT
+dRT
+dRT
 leV
 leV
 leV
@@ -155526,10 +155940,10 @@ leV
 leV
 leV
 leV
-hhW
+dRT
 qGl
 fxV
-hhW
+dRT
 leV
 leV
 leV
@@ -155750,15 +156164,15 @@ nyE
 uXH
 wbc
 aot
-uaa
+iys
 tIs
 eOH
 pSY
-uaa
+iys
 iBN
-uaa
-uaa
-uaa
+iys
+iys
+iys
 eNV
 nIp
 leV
@@ -155783,10 +156197,10 @@ leV
 leV
 leV
 leV
-hhW
+dRT
 qGl
 qGl
-hhW
+dRT
 leV
 leV
 leV
@@ -156002,9 +156416,9 @@ dVX
 fOf
 tiF
 qVg
-uaa
-uaa
-chO
+iys
+rkG
+uUV
 wbc
 nIp
 nIp
@@ -156016,7 +156430,7 @@ nIp
 nIp
 nIp
 nIp
-uaa
+iys
 nIp
 leV
 leV
@@ -156033,14 +156447,14 @@ tcU
 tcU
 tcU
 tcU
-hhW
-hhW
-hhW
-hhW
-hhW
-hhW
-hhW
-hhW
+dRT
+dRT
+dRT
+dRT
+dRT
+dRT
+dRT
+dRT
 qGl
 qGl
 oPx
@@ -156258,10 +156672,10 @@ hzS
 dVX
 wbc
 tiF
-uaa
-uaa
-chO
-chO
+iys
+iys
+uUV
+uUV
 wbc
 rfe
 nIp
@@ -156273,7 +156687,7 @@ pjC
 nyE
 cBp
 nIp
-uaa
+iys
 nIp
 leV
 leV
@@ -156516,10 +156930,10 @@ dVX
 wbc
 tiF
 cLE
-uaa
-chO
-chO
-chO
+jDv
+uUV
+uUV
+uUV
 jJW
 nIp
 wbc
@@ -156530,7 +156944,7 @@ ovG
 gLV
 wbc
 nIp
-chO
+uUV
 nIp
 leV
 leV
@@ -156772,11 +157186,11 @@ hzS
 dVX
 wbc
 pHH
-uaa
+iys
 cLE
 lYR
 iaK
-uaa
+rkG
 fIr
 nIp
 ldy
@@ -156787,7 +157201,7 @@ pwx
 eNQ
 wbc
 nvT
-uaa
+iys
 nIp
 leV
 leV
@@ -157029,11 +157443,11 @@ awm
 dVX
 urm
 kfR
-uaa
-uaa
-uaa
-uaa
-uaa
+rkG
+iys
+iys
+iys
+iys
 wbc
 nIp
 wbc
@@ -157075,7 +157489,7 @@ oPx
 nul
 wOn
 idU
-wOn
+xUg
 rGh
 oPx
 leV
@@ -157290,7 +157704,7 @@ gXx
 gXx
 gXx
 bCg
-chO
+uUV
 wbc
 nIp
 uDe
@@ -157543,11 +157957,11 @@ hzS
 dVX
 wbc
 tiF
-uaa
-uaa
+iys
+iys
 xfX
-uaa
-chO
+iys
+uUV
 wbc
 nIp
 nhD
@@ -157803,8 +158217,8 @@ pQW
 xfX
 urm
 iaK
-chO
-uaa
+uUV
+jDv
 wbc
 nIp
 jFS
@@ -157827,7 +158241,7 @@ dAo
 buu
 myP
 viz
-wgV
+tQT
 hOK
 buu
 kBq
@@ -158057,11 +158471,11 @@ hzS
 qig
 wbc
 jky
-chO
-uaa
-uaa
+uUV
+hVD
+iys
 cLE
-uaa
+iys
 wbc
 nIp
 wbc
@@ -158314,11 +158728,11 @@ lGb
 dVX
 wbc
 jky
-uaa
-uaa
-uaa
-uaa
-uaa
+iys
+iys
+iys
+iys
+iys
 wbc
 nIp
 wbc
@@ -158350,7 +158764,7 @@ pQw
 fRm
 fhK
 bWq
-mlZ
+pBN
 pBt
 hNe
 cIf
@@ -158571,11 +158985,11 @@ lGb
 dVX
 wbc
 jky
-uaa
+iys
 cLE
 cLE
 enX
-uaa
+iys
 wbc
 nIp
 qAD
@@ -158829,8 +159243,8 @@ hby
 wbc
 wij
 urm
-uaa
-uaa
+iys
+iys
 urm
 ugR
 wbc
@@ -159086,10 +159500,10 @@ dVX
 lJg
 jky
 xdB
-uaa
-uaa
-uaa
-chO
+iys
+iys
+iys
+uUV
 wbc
 nIp
 uDe
@@ -159341,7 +159755,7 @@ hzS
 hzS
 dVX
 uXH
-uaa
+iys
 wbc
 wbc
 oGX
@@ -159374,16 +159788,16 @@ wgV
 buu
 cag
 tcU
-hhW
-hhW
-hhW
-hhW
-hhW
-hhW
-hhW
-hhW
-hhW
-hhW
+dRT
+dRT
+dRT
+dRT
+dRT
+dRT
+dRT
+dRT
+dRT
+dRT
 kmU
 kmU
 kmU
@@ -159598,7 +160012,7 @@ ujv
 hzS
 dVX
 wbc
-uaa
+iys
 vNc
 nIp
 nIp
@@ -160112,7 +160526,7 @@ ujv
 lGb
 dVX
 wbc
-uaa
+iys
 wbc
 mys
 wbc
@@ -160656,7 +161070,7 @@ myP
 buu
 wgV
 wgV
-buu
+pzT
 dPn
 tcU
 leV
@@ -161131,9 +161545,9 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 wDj
-uaa
+iys
 nIp
 bzM
 wbc
@@ -161388,16 +161802,16 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 iih
-uaa
+iys
 nIp
 nsn
 uIa
 wbc
 wbc
 oIX
-wbc
+bwf
 wbc
 bZx
 nIp
@@ -161647,7 +162061,7 @@ leV
 nIp
 xcs
 wDj
-chO
+uUV
 nIp
 vki
 wbc
@@ -161902,9 +162316,9 @@ leV
 leV
 leV
 nIp
-chO
+uUV
 wDj
-uaa
+iys
 nIp
 idL
 wbc
@@ -162159,9 +162573,9 @@ leV
 leV
 leV
 nIp
-chO
+uUV
 wDj
-uaa
+iys
 nIp
 cqy
 rGC
@@ -162416,9 +162830,9 @@ leV
 leV
 leV
 nIp
-uaa
+iys
 wDj
-chO
+uUV
 nIp
 nIp
 nIp
@@ -162675,16 +163089,16 @@ leV
 nIp
 cEW
 wDj
-uaa
-ilV
-uaa
-uaa
-uaa
-uaa
+iys
+edJ
+iys
+iys
+iys
+iys
 yiy
-uaa
-uaa
-chO
+iys
+iys
+uUV
 nDS
 gEk
 fFM
@@ -163189,16 +163603,16 @@ leV
 nIp
 ruN
 lDG
-chO
+uUV
 iUL
-chO
-ilV
-uaa
-uaa
-uaa
-uaa
-chO
-uaa
+uUV
+edJ
+iys
+iys
+iys
+iys
+uUV
+iys
 nDS
 uXH
 dVX
@@ -163976,7 +164390,7 @@ bso
 wbc
 xFg
 wbc
-uXH
+vKM
 wbc
 xFg
 wbc
@@ -213466,31 +213880,31 @@ nTl
 cYL
 cYL
 cYL
-bBh
-bBh
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
+dzd
+dzd
 cYL
-bBh
-bBh
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
+dzd
+dzd
 cYL
 afB
 cYL
-bBh
-bBh
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
+dzd
+dzd
 cYL
-bBh
-bBh
+dzd
+dzd
 fSy
-bBh
-bBh
+dzd
+dzd
 cYL
 cYL
 cYL
@@ -213977,7 +214391,7 @@ euw
 vlZ
 ikq
 nTl
-bBh
+dzd
 hmi
 eTl
 cQt
@@ -214006,8 +214420,8 @@ eFj
 xpv
 xpN
 urx
-bBh
-bBh
+dzd
+dzd
 nTl
 vlB
 vlB
@@ -214234,7 +214648,7 @@ euw
 vlZ
 ikq
 nTl
-bBh
+dzd
 hmi
 aAH
 xpv
@@ -214253,17 +214667,17 @@ fEq
 mwB
 gyV
 cYL
-bBh
-bBh
-bBh
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
+dzd
+dzd
+dzd
 cYL
 tbT
 xpv
 kCe
-bBh
+dzd
 pAl
 nTl
 vlB
@@ -214498,9 +214912,9 @@ xWu
 cYL
 cYL
 cYL
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
 cYL
 cYL
 cYL
@@ -214512,16 +214926,16 @@ noK
 cYL
 cYL
 cYL
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
 cYL
 cYL
 cwa
 xpv
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 vlB
 vlB
@@ -214748,15 +215162,15 @@ euw
 vlZ
 aXW
 nTl
-bBh
+dzd
 hmi
 aAH
 xWu
-bBh
+dzd
 cYL
 cYL
 cYL
-bBh
+dzd
 cYL
 cYL
 noK
@@ -214770,15 +215184,15 @@ noK
 noK
 cYL
 cYL
-bBh
+dzd
 cYL
 cYL
 cYL
 hmi
 xpv
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 vlB
 vlB
@@ -215005,12 +215419,12 @@ euw
 vlZ
 aXW
 nTl
-bBh
+dzd
 hmi
 jEz
 xWu
-bBh
-bBh
+dzd
+dzd
 cYL
 cYL
 cYL
@@ -215030,12 +215444,12 @@ cYL
 cYL
 cYL
 cYL
-bBh
+dzd
 hmi
 xpv
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 qCz
 qCz
@@ -215262,13 +215676,13 @@ euw
 vlZ
 aXW
 nTl
-bBh
+dzd
 leT
 aAH
 xWu
 kdJ
-bBh
-bBh
+dzd
+dzd
 cYL
 cYL
 noK
@@ -215286,13 +215700,13 @@ noK
 noK
 cYL
 cYL
-bBh
-bBh
+dzd
+dzd
 hmi
 xpv
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 wBw
 bFi
@@ -215544,12 +215958,12 @@ noK
 noK
 cYL
 cYL
-bBh
+dzd
 hmi
 xpv
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 rWB
 lSi
@@ -215805,8 +216219,8 @@ cYL
 hmi
 tYO
 aTb
-bBh
-bBh
+dzd
+dzd
 nTl
 qCz
 bBT
@@ -217861,8 +218275,8 @@ cYL
 hmi
 xpv
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 qCz
 qCz
@@ -218114,12 +218528,12 @@ noK
 noK
 cYL
 cYL
-bBh
+dzd
 hmi
 xpv
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 vlB
 vlB
@@ -218346,13 +218760,13 @@ euw
 vlZ
 aXW
 nTl
-bBh
+dzd
 nFI
 iQu
 xWu
 fSy
-bBh
-bBh
+dzd
+dzd
 cYL
 cYL
 noK
@@ -218370,13 +218784,13 @@ noK
 noK
 cYL
 cYL
-bBh
-bBh
+dzd
+dzd
 hmi
 xpv
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 vlB
 vlB
@@ -218603,12 +219017,12 @@ euw
 vlZ
 aXW
 nTl
-bBh
+dzd
 hmi
 iQu
 xWu
-bBh
-bBh
+dzd
+dzd
 cYL
 cYL
 cYL
@@ -218628,12 +219042,12 @@ cYL
 cYL
 cYL
 cYL
-bBh
+dzd
 hmi
 omf
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 vlB
 vlB
@@ -218860,15 +219274,15 @@ euw
 vlZ
 aXW
 nTl
-bBh
+dzd
 hmi
 iQu
 xWu
-bBh
+dzd
 cYL
 cYL
 cYL
-bBh
+dzd
 cYL
 cYL
 noK
@@ -218882,15 +219296,15 @@ noK
 noK
 cYL
 cYL
-bBh
+dzd
 cYL
 cYL
 cYL
 hmi
 xpv
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 vlB
 vlB
@@ -219124,9 +219538,9 @@ xWu
 cYL
 cYL
 cYL
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
 cYL
 cYL
 cYL
@@ -219138,15 +219552,15 @@ noK
 cYL
 cYL
 cYL
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
 cYL
 cYL
 iEn
 xpv
 kCe
-bBh
+dzd
 pAl
 nTl
 vlB
@@ -219374,7 +219788,7 @@ euw
 vlZ
 ikq
 nTl
-bBh
+dzd
 hmi
 iQu
 xpv
@@ -219393,18 +219807,18 @@ ort
 xpv
 qtE
 cYL
-bBh
-bBh
-bBh
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
+dzd
+dzd
+dzd
 cYL
 tbT
 xpv
 kCe
-bBh
-bBh
+dzd
+dzd
 nTl
 vlB
 vlB
@@ -219631,7 +220045,7 @@ euw
 vlZ
 ikq
 nTl
-bBh
+dzd
 hmi
 qyp
 csN
@@ -219660,8 +220074,8 @@ kFF
 xpv
 xpN
 urx
-bBh
-bBh
+dzd
+dzd
 nTl
 vlB
 vlB
@@ -220148,31 +220562,31 @@ nTl
 cYL
 cYL
 cYL
-bBh
-bBh
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
+dzd
+dzd
 cYL
-bBh
-bBh
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
+dzd
+dzd
 cYL
 dAf
 cYL
-bBh
-bBh
-bBh
-bBh
-bBh
+dzd
+dzd
+dzd
+dzd
+dzd
 cYL
-bBh
-bBh
+dzd
+dzd
 kdJ
-bBh
-bBh
+dzd
+dzd
 cYL
 cYL
 cYL
