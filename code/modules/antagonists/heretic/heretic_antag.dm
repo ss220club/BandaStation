@@ -457,7 +457,7 @@
 	if(!should_show_aura())
 		return
 	var/mob/heretic_mob = owner.current
-	var/potential_string = "[heretic_mob.ru_p_they()] потрескивает водоворотом излучая зеленый вихрь энергии."
+	var/potential_string = "[heretic_mob.ru_p_they()] потрескивает от кружащегося зелёного вихря энергии."
 	if(can_ascend() == HERETIC_CAN_ASCEND)
 		potential_string += " [heretic_mob.ru_p_they()] сбрасывает свою смертную оболочку!"
 	text += span_green(potential_string)
