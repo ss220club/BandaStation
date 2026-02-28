@@ -52,7 +52,7 @@
 			return TRUE
 		// BANDASTATION ADDITION START - Mentors
 		if(MENTOR_CHANNEL)
-			SSadmin_verbs.dynamic_invoke_verb(client, /datum/admin_verb/cmd_mentor_say, entry)
+			INVOKE_ASYNC(SSadmin_verbs, TYPE_PROC_REF(/datum/controller/subsystem/admin_verbs, dynamic_invoke_verb), client, /datum/admin_verb/cmd_mentor_say, entry)
 			return TRUE
 		// BANDASTATION ADDITION END - Mentors
 	return FALSE
