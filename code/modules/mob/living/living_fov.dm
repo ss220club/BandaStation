@@ -146,6 +146,6 @@
 	icon_state = "90"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	plane = FIELD_OF_VISION_BLOCKER_PLANE
-	appearance_flags = RESET_TRANSFORM
+	appearance_flags = RESET_TRANSFORM | PIXEL_SCALE
 	color = list(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 1,1,1,0)
 // BANDASTATION ADDITION END: FOV

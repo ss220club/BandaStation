@@ -287,12 +287,14 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 	if(isnull(angle_deg))
 		angle_deg = get_angle_from_map_cursor_pixels(user_client)
 	if(!isnull(angle_deg))
-		mob_parent.fov_view_direction_angle = angle_deg
+		// quantize to 45 deg
+		var/discrete_angle = SIMPLIFY_DEGREES(round(angle_deg / 45) * 45)
+		mob_parent.fov_view_direction_angle = discrete_angle
 		if(mob_parent.combat_mode || mob_parent.fov_free_look)
-			var/dir_angle = SIMPLIFY_DEGREES(90 - angle_deg) // quantize to match the angle
+			var/dir_angle = SIMPLIFY_DEGREES(90 - discrete_angle)
 			mob_parent.setDir(angle2dir(dir_angle))
 		if(applied_mask)
-			target_fov_mask_angle = 270 - angle_deg
+			target_fov_mask_angle = 270 - discrete_angle
 			var/diff = target_fov_mask_angle - current_fov_mask_angle
 			while(diff > 180)
 				diff -= 360
