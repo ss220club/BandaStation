@@ -213,28 +213,12 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/breakfast, 32)
 // Music
 
 /obj/structure/sign/poster/official/selected_ambient_works
-	name = "Selected Ambient Works"
+	name = "Selected Ambient Works 85–92"
 	desc = "Плакат странно выглядящего водопроводного крана."
 	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
 	icon_state = "selected_ambient_works"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/selected_ambient_works, 32)
-
-/obj/structure/sign/poster/official/richard_d_james
-	name = "Richard D. James"
-	desc = "Какой красивый молодой мужчина. Интересно, какую музыку он слушает?"
-	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
-	icon_state = "richard_d_james"
-
-MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/richard_d_james, 32)
-
-/obj/structure/sign/poster/official/alberto_balsalm
-	name = "Alberto Balsalm"
-	desc = "Лучший бальзам для волос во всей галактике!"
-	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
-	icon_state = "alberto_balsalm"
-
-MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/alberto_balsalm, 32)
 
 /obj/structure/sign/poster/official/tell_all_the_people
 	name = "Tell All The People"
