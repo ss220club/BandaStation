@@ -1,7 +1,7 @@
 /obj/item/gun/ballistic/automatic/pistol/ebony
-	name = "\improper Ebony"
-	desc = "A DMC handgun."
-	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	name = "\improper E-42"
+	desc = "«E-42» — не просто оружие, а воплощение мрачной элегантности и демонической силы. Увеличинный ствол и продвинутый надульник придаёт внушительный вид. Jackpot!"
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic40x32.dmi'
 	icon_state = "ebony"
 	force = 14
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m50

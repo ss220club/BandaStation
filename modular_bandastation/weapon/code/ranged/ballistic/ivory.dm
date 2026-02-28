@@ -1,7 +1,7 @@
 /obj/item/gun/ballistic/automatic/pistol/ivory
-	name = "\improper Ivory"
-	desc = "A DMC handgun."
-	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	name = "\improper I-451"
+	desc = "«I-451» - Полная идентичность с его собратом E-42, однако блеск посеребрённого ствола и, возможно, слоновья кость, придаёт некую завораживающую загадку. Jackpot!"
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic40x32.dmi'
 	icon_state = "ivory"
 	force = 14
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m50
