@@ -214,7 +214,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/breakfast, 32)
 
 /obj/structure/sign/poster/official/selected_ambient_works
 	name = "Selected Ambient Works 85–92"
-	desc = "Плакат странно выглядящего водопроводного крана."
+	desc = "Плакат странно выглядящего водопроводного крана. Или это лошадь?.."
 	icon = 'modular_bandastation/objects/icons/obj/structures/posters.dmi'
 	icon_state = "selected_ambient_works"
 
