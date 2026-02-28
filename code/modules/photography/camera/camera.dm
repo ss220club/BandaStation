@@ -195,7 +195,12 @@
 
 /// Check whether a mob could take a picture of the target turf.
 /obj/item/camera/proc/can_mob_target(turf/target_turf, mob/user)
-	return (target_turf in get_hear_turfs(user.client?.view || world.view, user.client?.eye || user))
+	// BANDASTATION TEMP FIX (shpuld be fixed with next upstream)
+	var/view = user.client?.view || world.view
+	var/list/viewlist = getviewsize(view)
+	var/range = max(viewlist[1], viewlist[2])
+	return (target_turf in get_hear_turfs(range, user.client?.eye || user))
+	// BANDASTATION TEMP FIX EMD
 
 /obj/item/camera/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	// Always skip on storage and tables
