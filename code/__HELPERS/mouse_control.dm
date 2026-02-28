@@ -21,7 +21,7 @@
 // BANDASTATION ADDITION START: FOV
 // tries to get mouse pos and size from map, then mapwindow
 /proc/_get_map_cursor_winget(client/client)
-	if(!client)
+	if(!client || !client.mob)
 		return null
 	var/mouse_pos = winget(client, "mapwindow.map", "mouse-pos")
 	var/size_str = winget(client, "mapwindow.map", "size")

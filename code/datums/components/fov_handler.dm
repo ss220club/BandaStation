@@ -58,7 +58,7 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 	// BANDASTATION ADDITION END: FOV
 
 /datum/component/fov_handler/Destroy()
-	// BANDASTATION ADDITION START: FOV — unregister map RMB free look
+	// BANDASTATION ADDITION START: FOV
 	if(fov_client)
 		UnregisterSignal(fov_client, list(COMSIG_CLIENT_MOUSEDOWN, COMSIG_CLIENT_MOUSEUP))
 	// BANDASTATION ADDITION END: FOV
@@ -81,7 +81,7 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 	blocker_mask.icon_state = state
 	// BANDASTATION ADDITION END: FOV
 
-// texture offset per cardinal so cutout aligns with character, so its direction dependent because we rotate around icon center but cutout is offset in texture but interpolating cardinals compensates
+// texture offset per cardinal so cutout aligns with character (mask angles are 0 = S, 90 = W, 180 = N, 270 = E)
 /datum/component/fov_handler/proc/get_fov_mask_texture_offset(angle_deg)
 	var/angle = angle_deg
 	while(angle < 0)
@@ -117,7 +117,7 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 		oy = east_y + (south_y - east_y) * t
 	return list(ox, oy)
 
-/datum/component/fov_handler/proc/apply_fov_transform(angle_override = null)
+/datum/component/fov_handler/proc/apply_fov_transform()
 	var/state = "[fov_angle > 0 ? fov_angle : (360 + fov_angle)]"
 	blocker_mask.icon_state = state
 	var/matrix/base = matrix()
@@ -126,22 +126,21 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 	if(fov_angle < 0)
 		x_scale *= -1
 		y_scale *= -1
-	blocker_mask.dir = SOUTH
-	var/angle_for_matrix = isnull(angle_override) ? current_fov_mask_angle : angle_override
 	var/list/dim = get_icon_dimensions(blocker_mask.icon)
 	var/icon_center_x = dim ? (dim["width"] / 2) : (BASE_FOV_MASK_X_DIMENSION * (ICON_SIZE_X / 2))
 	var/icon_center_y = dim ? (dim["height"] / 2) : (BASE_FOV_MASK_Y_DIMENSION * (ICON_SIZE_Y / 2))
 	base.Scale(x_scale, y_scale * FOV_MASK_SCALE)
-	base.Turn(angle_for_matrix)
 	base.Translate(-icon_center_x, -icon_center_y)
-	var/list/texture_off = get_fov_mask_texture_offset(angle_for_matrix)
-	var/tex_off_x = texture_off[1]
-	var/tex_off_y = texture_off[2]
-	if(tex_off_x != 0 || tex_off_y != 0)
-		base.Translate(tex_off_x, tex_off_y)
+	var/dir_angle = dir2angle(blocker_mask.dir)
+	if(!isnull(dir_angle))
+		var/mask_angle = (dir_angle + 180) % 360
+		var/list/texture_off = get_fov_mask_texture_offset(mask_angle)
+		var/tex_off_x = texture_off[1]
+		var/tex_off_y = texture_off[2]
+		if(tex_off_x != 0 || tex_off_y != 0)
+			base.Translate(tex_off_x, tex_off_y)
 	blocker_mask.transform = base
-	animate(blocker_mask, transform = base, time = FOV_MASK_ANIMATE_TIME SECONDS, flags = ANIMATION_END_NOW)
-	//update_mask_attachment_position()
+	//animate(blocker_mask, transform = base, time = FOV_MASK_ANIMATE_TIME SECONDS, flags = ANIMATION_END_NOW)
 
 /datum/component/fov_handler/proc/update_mask_attachment_position()
 	blocker_mask.pixel_x = 0
@@ -199,6 +198,7 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 		return
 	applied_mask = TRUE
 	update_mask_attachment_position()
+	blocker_mask.dir = parent_mob.dir
 	parent_client.images += blocker_mask
 	// sync immediately so FOV follows from first frame
 	apply_fov_transform() // BANDASTATION ADDITION: FOV
@@ -217,6 +217,7 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 		current_fov_mask_angle = (dir_angle + 180) % 360
 		target_fov_mask_angle = current_fov_mask_angle
 	if(applied_mask)
+		blocker_mask.dir = new_dir
 		apply_fov_transform()
 // BANDASTATION ADDITION END: FOV
 
@@ -262,8 +263,9 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 	if(!isnull(dir_angle))
 		current_fov_mask_angle = (dir_angle + 180) % 360
 		target_fov_mask_angle = current_fov_mask_angle
-		if(applied_mask)
-			apply_fov_transform()
+	if(applied_mask)
+		blocker_mask.dir = mob_parent.dir
+		apply_fov_transform()
 
 // lotta checks to do, but we should be fine
 /datum/component/fov_handler/process(seconds_per_tick)
@@ -278,7 +280,7 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 		return
 	// so we refetching client right before use so we don't use a destroyed client and get runtimes
 	var/client/user_client = mob_parent.client
-	if(!user_client)
+	if(!user_client || user_client.mob != mob_parent)
 		stop_combat_cursor_follow()
 		mob_parent.fov_view_direction_angle = null
 		return
@@ -294,14 +296,8 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 			var/dir_angle = SIMPLIFY_DEGREES(90 - discrete_angle)
 			mob_parent.setDir(angle2dir(dir_angle))
 		if(applied_mask)
-			target_fov_mask_angle = 270 - discrete_angle
-			var/diff = target_fov_mask_angle - current_fov_mask_angle
-			while(diff > 180)
-				diff -= 360
-			while(diff < -180)
-				diff += 360
-			current_fov_mask_angle += diff * FOV_MASK_ANGLE_SMOOTHING_FACTOR
-			apply_fov_transform(current_fov_mask_angle)
+			blocker_mask.dir = mob_parent.dir
+			apply_fov_transform()
 	else
 		mob_parent.fov_view_direction_angle = null
 // BANDASTATION ADDITION END: FOV
