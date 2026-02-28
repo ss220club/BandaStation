@@ -424,7 +424,7 @@
 	var/mob/heretic_mob = owner.current
 	unlimited_blades = TRUE
 	to_chat(heretic_mob, span_boldwarning("Вы обрели значительное могущество, Мансус больше не позволит вам ломать свои клинки, но теперь вы можете сделать их столько, сколько пожелаете."))
-	heretic_mob.balloon_alert(heretic_mob, "blade breaking disabled!")
+	heretic_mob.balloon_alert(heretic_mob, "ломание клинка отключено!")
 	update_heretic_aura()
 	var/datum/action/cooldown/spell/shadow_cloak/cloak_spell = locate() in heretic_mob.actions
 	cloak_spell.Remove(heretic_mob)
