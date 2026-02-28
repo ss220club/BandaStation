@@ -30,6 +30,14 @@
 	var/selected_species = preferences.read_preference(/datum/preference/choiced/species)
 	data["is_ipc"] = (selected_species == SPECIES_IPC)
 
+	// Экраны фильтруются по бренду (zeng_hu/cybersun = пусто, hesp = только hesp, остальные = без hesp)
+	var/brand = customization["chassis_brand"] || "unbranded"
+	var/list/allowed_faces = get_ipc_face_options_for_brand(brand)
+	var/list/face_list = list(list("key" = "", "name" = "Нет (по умолчанию)"))
+	for(var/state in allowed_faces)
+		face_list += list(list("key" = state, "name" = allowed_faces[state]))
+	data["face_options"] = face_list
+
 	return data
 
 /// Append constant data to ui_static_data
@@ -78,12 +86,6 @@
 		head_acc_list += list(list("key" = state, "name" = GLOB.ipc_head_accessory_options[state]))
 	data["head_accessories"] = head_acc_list
 
-	// Экраны/лица
-	var/list/face_list = list(list("key" = "", "name" = "Нет (по умолчанию)"))
-	for(var/state in GLOB.ipc_face_options)
-		face_list += list(list("key" = state, "name" = GLOB.ipc_face_options[state]))
-	data["face_options"] = face_list
-
 	return data
 
 /datum/preference_middleware/ipc_customization/proc/set_head_accessory(list/params, mob/user)
@@ -111,9 +113,12 @@
 	var/face = params["face"]
 	if(isnull(face))
 		return FALSE
-	if(face != "" && !(face in GLOB.ipc_face_options))
-		return FALSE
 	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
+	if(face != "")
+		var/brand = customization["chassis_brand"] || "unbranded"
+		var/list/allowed = get_ipc_face_options_for_brand(brand)
+		if(!(face in allowed))
+			return FALSE
 	customization["face_state"] = face
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
 	return TRUE

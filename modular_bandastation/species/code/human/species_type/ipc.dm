@@ -184,9 +184,10 @@
 	os_action.os_system = ipc_os
 	os_action.Grant(H)
 
-	// Абилка смены экрана
-	var/datum/action/innate/ipc_change_face/face_action = new()
-	face_action.Grant(H)
+	// Абилка смены экрана — только для брендов, поддерживающих экраны
+	if(ipc_brand_key != "zeng_hu" && ipc_brand_key != "cybersun")
+		var/datum/action/innate/ipc_change_face/face_action = new()
+		face_action.Grant(H)
 
 	// ПРИМЕЧАНИЕ:
 	// - Chassis brand применяется через body_modifications автоматически
@@ -207,6 +208,11 @@
 	var/datum/action/innate/ipc_open_os/os_action = locate() in H.actions
 	if(os_action)
 		os_action.Remove(H)
+
+	// Удаляем кнопку смены экрана
+	var/datum/action/innate/ipc_change_face/face_action = locate() in H.actions
+	if(face_action)
+		face_action.Remove(H)
 
 	// Удаляем ОС
 	QDEL_NULL(ipc_os)

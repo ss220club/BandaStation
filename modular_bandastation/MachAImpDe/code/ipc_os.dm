@@ -1897,7 +1897,8 @@
 /datum/action/innate/ipc_open_os
 	name = "Открыть ОС"
 	desc = "Открыть операционную систему IPC."
-	button_icon_state = "yourface"
+	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
+	button_icon_state = "ipc_os"
 	background_icon_state = "bg_default"
 	/// Ссылка на ОС
 	var/datum/ipc_operating_system/os_system

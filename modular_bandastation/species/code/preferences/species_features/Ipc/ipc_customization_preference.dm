@@ -69,8 +69,12 @@
 	S.ipc_tail_enabled = tail
 	apply_ipc_tail(target, tail)
 
-	// Косметика: начальный экран (в игре может быть сменён через action)
+	// Косметика: начальный экран — только если бренд поддерживает и выбранный экран разрешён
 	var/face = customization["face_state"] || ""
+	if(face)
+		var/list/allowed_faces = get_ipc_face_options_for_brand(chassis_brand)
+		if(!(face in allowed_faces))
+			face = ""
 	S.ipc_face_state = face
 	apply_ipc_face(target, face)
 

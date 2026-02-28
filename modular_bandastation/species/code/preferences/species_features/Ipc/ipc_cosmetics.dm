@@ -173,6 +173,25 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	chest.add_bodypart_overlay(overlay)
 
 // ============================================
+// BRAND FACE FILTERING
+// ============================================
+
+/// Возвращает список разрешённых экранов для данного бренда.
+/// zeng_hu и cybersun — пустой список (экраны не поддерживаются).
+/// hesphiastos — только HESP-варианты (_hesp_alt_s).
+/// Все остальные — только обычные экраны (без _hesp_alt_s).
+/proc/get_ipc_face_options_for_brand(brand_key)
+	if(brand_key == "zeng_hu" || brand_key == "cybersun")
+		return list()
+	var/list/result = list()
+	var/is_hesp = (brand_key == "hesphiastos")
+	for(var/state in GLOB.ipc_face_options)
+		var/hesp_face = findtext(state, "_hesp_alt_s") > 0
+		if(is_hesp == hesp_face)
+			result[state] = GLOB.ipc_face_options[state]
+	return result
+
+// ============================================
 // ACTION: СМЕНА ЭКРАНА (раундовая)
 // ============================================
 
@@ -188,22 +207,27 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	if(!istype(H))
 		return
 
-	// Формируем список имён → стейтов
+	var/datum/species/ipc/S = H.dna?.species
+	if(!istype(S))
+		return
+
+	// Получаем разрешённые экраны для бренда
+	var/list/allowed = get_ipc_face_options_for_brand(S.ipc_brand_key)
+	if(!length(allowed))
+		to_chat(H, span_warning("Этот бренд шасси не поддерживает смену экрана."))
+		return
+
+	// Формируем список: имя → стейт
 	var/list/display_names = list("Нет (убрать)" = "")
-	for(var/state in GLOB.ipc_face_options)
-		display_names[GLOB.ipc_face_options[state]] = state
+	for(var/state in allowed)
+		display_names[allowed[state]] = state
 
 	var/chosen_name = tgui_input_list(H, "Выберите изображение экрана:", "Смена экрана КПБ", display_names)
 	if(!chosen_name || QDELETED(H) || !istype(H))
 		return
 
 	var/chosen_state = display_names[chosen_name]
-
-	// Сохраняем в species var
-	var/datum/species/ipc/S = H.dna?.species
-	if(istype(S))
-		S.ipc_face_state = chosen_state
-
+	S.ipc_face_state = chosen_state
 	apply_ipc_face(H, chosen_state)
 
 #undef IPC_HEAD_ACC_ICON
