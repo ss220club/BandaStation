@@ -120,6 +120,14 @@
 	// Список модификаторов: "overheat_rate", "healing_time", "melee_damage", "implant_slots", и т.д.
 	var/list/ipc_chassis_modifiers = list()
 
+	// ---- Косметика ----
+	/// Аксессуар на голове (state из ipc_head_accessories.dmi, "" = нет)
+	var/ipc_head_accessory = ""
+	/// Текущее выражение экрана (state из ipc_face.dmi, "" = нет оверлея)
+	var/ipc_face_state = ""
+	/// Включён ли хвост
+	var/ipc_tail_enabled = FALSE
+
 /datum/species/ipc/get_species_description()
 	return "IPC (Integrated Positronic Chassis) — искусственные синтетики на основе позитронного ядра. \
 	Их корпус полностью заменяет биологическую плоть — это модульная кибернетическая система, \
@@ -175,6 +183,10 @@
 	var/datum/action/innate/ipc_open_os/os_action = new()
 	os_action.os_system = ipc_os
 	os_action.Grant(H)
+
+	// Абилка смены экрана
+	var/datum/action/innate/ipc_change_face/face_action = new()
+	face_action.Grant(H)
 
 	// ПРИМЕЧАНИЕ:
 	// - Chassis brand применяется через body_modifications автоматически

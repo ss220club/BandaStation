@@ -75,6 +75,7 @@
 #include "code/preferences/species_features/Ipc/ipc_brain_body_modification.dm"
 #include "code/preferences/species_features/Ipc/ipc_customization_preference.dm"
 #include "code/preferences/species_features/Ipc/ipc_customization_middleware.dm"
+#include "code/preferences/species_features/Ipc/ipc_cosmetics.dm"
 
 #include "code/reagents/mutation.dm"
 

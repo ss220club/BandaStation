@@ -9,10 +9,13 @@
 
 /datum/preference_middleware/ipc_customization
 	action_delegations = list(
-		"set_chassis_brand" = PROC_REF(set_chassis_brand),
-		"set_brain_type" = PROC_REF(set_brain_type),
-		"set_hef_part" = PROC_REF(set_hef_part),
-		"set_os_password" = PROC_REF(set_os_password),
+		"set_chassis_brand"    = PROC_REF(set_chassis_brand),
+		"set_brain_type"       = PROC_REF(set_brain_type),
+		"set_hef_part"         = PROC_REF(set_hef_part),
+		"set_os_password"      = PROC_REF(set_os_password),
+		"set_head_accessory"   = PROC_REF(set_head_accessory),
+		"set_tail_enabled"     = PROC_REF(set_tail_enabled),
+		"set_face_state"       = PROC_REF(set_face_state),
 	)
 
 /// Append data to ui_data
@@ -69,7 +72,51 @@
 		list("key" = "cybersun", "name" = "Cybersun Industries"),
 	)
 
+	// Аксессуары головы
+	var/list/head_acc_list = list(list("key" = "", "name" = "Нет"))
+	for(var/state in GLOB.ipc_head_accessory_options)
+		head_acc_list += list(list("key" = state, "name" = GLOB.ipc_head_accessory_options[state]))
+	data["head_accessories"] = head_acc_list
+
+	// Экраны/лица
+	var/list/face_list = list(list("key" = "", "name" = "Нет (по умолчанию)"))
+	for(var/state in GLOB.ipc_face_options)
+		face_list += list(list("key" = state, "name" = GLOB.ipc_face_options[state]))
+	data["face_options"] = face_list
+
 	return data
+
+/datum/preference_middleware/ipc_customization/proc/set_head_accessory(list/params, mob/user)
+	var/acc = params["accessory"]
+	if(isnull(acc))
+		return FALSE
+	// "" разрешён (убрать аксессуар), иначе проверяем что стейт существует
+	if(acc != "" && !(acc in GLOB.ipc_head_accessory_options))
+		return FALSE
+	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
+	customization["head_accessory"] = acc
+	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
+	return TRUE
+
+/datum/preference_middleware/ipc_customization/proc/set_tail_enabled(list/params, mob/user)
+	var/enabled = params["enabled"]
+	if(isnull(enabled))
+		return FALSE
+	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
+	customization["tail_enabled"] = !!enabled
+	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
+	return TRUE
+
+/datum/preference_middleware/ipc_customization/proc/set_face_state(list/params, mob/user)
+	var/face = params["face"]
+	if(isnull(face))
+		return FALSE
+	if(face != "" && !(face in GLOB.ipc_face_options))
+		return FALSE
+	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
+	customization["face_state"] = face
+	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
+	return TRUE
 
 /datum/preference_middleware/ipc_customization/proc/set_chassis_brand(list/params, mob/user)
 	var/brand = params["brand"]

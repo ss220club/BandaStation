@@ -59,6 +59,21 @@
 	if(os_password && length(os_password) >= 1)
 		S.ipc_preset_os_password = os_password
 
+	// Косметика: аксессуар на голове
+	var/head_acc = customization["head_accessory"] || ""
+	S.ipc_head_accessory = head_acc
+	apply_ipc_head_accessory(target, head_acc)
+
+	// Косметика: хвост
+	var/tail = customization["tail_enabled"] || FALSE
+	S.ipc_tail_enabled = tail
+	apply_ipc_tail(target, tail)
+
+	// Косметика: начальный экран (в игре может быть сменён через action)
+	var/face = customization["face_state"] || ""
+	S.ipc_face_state = face
+	apply_ipc_face(target, face)
+
 	target.update_body()
 
 /datum/preference/ipc_customization/deserialize(input, datum/preferences/preferences)
@@ -82,6 +97,9 @@
 		"hef_r_arm" = "unbranded",
 		"hef_l_leg" = "unbranded",
 		"hef_r_leg" = "unbranded",
+		"head_accessory" = "",
+		"tail_enabled" = FALSE,
+		"face_state" = "",
 	)
 
 // ============================================
