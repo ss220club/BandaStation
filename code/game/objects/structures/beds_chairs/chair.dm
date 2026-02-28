@@ -153,8 +153,10 @@
 /obj/structure/chair/proc/handle_layer()
 	if(has_buckled_mobs() && dir == NORTH)
 		layer = ABOVE_MOB_LAYER
+		plane = GAME_PLANE_ABOVE_MOB // BANDASTATION ADDITION: FOV
 	else
 		layer = OBJ_LAYER
+		plane = FOV_CULLED_MOB_PLANE // BANDASTATION ADDITION: FOV
 
 /obj/structure/chair/post_buckle_mob(mob/living/M)
 	. = ..()

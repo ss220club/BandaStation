@@ -38,69 +38,18 @@
 	name = "FOV-culled mobs"
 	documentation = "Mobs relay to GAME when FOV off (lit). When FOV on relay to GAME_UNMASKED only (cone) and apply layering_filter with lighting so mobs are lit and hidden outside cone"
 	plane = FOV_CULLED_MOB_PLANE
-	render_relay_planes = list()
+	// relay into game world so mobs get lighting and sit between GAME_PLANE and ABOVE_GAME_PLANE (below trees, above objects), so we can use alpha masking to hides mobs using texture
+	render_relay_planes = list(RENDER_PLANE_GAME_WORLD)
 
 /atom/movable/screen/plane_master/fov_culled_mob/Initialize(mapload, datum/hud/hud_owner, datum/plane_master_group/home, offset)
 	. = ..()
-	// Relay to GAME so mobs go through game_plate and get lighting; layer below lighting so they get darkened
-	add_relay_to(GET_NEW_PLANE(RENDER_PLANE_GAME, offset), relay_layer = FOV_CULLED_MOB_LAYER_UNDER_LIGHTING)
+	add_filter("vision_cone", 1, alpha_mask_filter(render_source = OFFSET_RENDER_TARGET(FIELD_OF_VISION_BLOCKER_RENDER_TARGET, offset), flags = MASK_INVERSE))
 
-/atom/movable/screen/plane_master/fov_culled_mob/show_to(mob/mymob)
-	. = ..()
-	if(!. || !mymob)
-		return .
-	RegisterSignal(mymob, SIGNAL_ADDTRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_enabled), override = TRUE)
-	RegisterSignal(mymob, SIGNAL_REMOVETRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_disabled), override = TRUE)
-	if(HAS_TRAIT(mymob, TRAIT_FOV_APPLIED))
-		fov_enabled(mymob)
-	else
-		fov_disabled(mymob)
-
-/atom/movable/screen/plane_master/fov_culled_mob/proc/fov_enabled(mob/source)
-	SIGNAL_HANDLER
-	remove_relay_from(GET_NEW_PLANE(RENDER_PLANE_GAME, offset))
-	add_relay_to(GET_NEW_PLANE(RENDER_PLANE_GAME_UNMASKED, offset), relay_layer = FOV_CULLED_MOB_LAYER_OVER_UNMASKED)
-	// fucking ugly - multiply mob output by lighting so they're lit while only visible in cone
-	add_filter("fov_mob_lighting", 1, layering_filter(render_source = OFFSET_RENDER_TARGET(LIGHTING_PLATE_RENDER_TARGET, offset), blend_mode = BLEND_MULTIPLY))
-
-/atom/movable/screen/plane_master/fov_culled_mob/proc/fov_disabled(mob/source)
-	SIGNAL_HANDLER
-	remove_filter("fov_mob_lighting")
-	remove_relay_from(GET_NEW_PLANE(RENDER_PLANE_GAME_UNMASKED, offset))
-	add_relay_to(GET_NEW_PLANE(RENDER_PLANE_GAME, offset), relay_layer = FOV_CULLED_MOB_LAYER_UNDER_LIGHTING)
-
-// /atom/movable/screen/plane_master/fov_viewer_mob
-// 	name = "FOV viewer mob"
-// 	documentation = "Only the mob that has the FOV component (the client's mob)"
-// 	plane = FOV_VIEWER_MOB_PLANE
-// 	render_relay_planes = list()
-
-// /atom/movable/screen/plane_master/fov_viewer_mob/Initialize(mapload, datum/hud/hud_owner, datum/plane_master_group/home, offset)
-// 	. = ..()
-// 	add_relay_to(GET_NEW_PLANE(RENDER_PLANE_GAME, offset), relay_layer = FOV_CULLED_MOB_LAYER_UNDER_LIGHTING)
-
-// /atom/movable/screen/plane_master/fov_viewer_mob/show_to(mob/mymob)
-// 	. = ..()
-// 	if(!. || !mymob)
-// 		return .
-// 	RegisterSignal(mymob, SIGNAL_ADDTRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_enabled), override = TRUE)
-// 	RegisterSignal(mymob, SIGNAL_REMOVETRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_disabled), override = TRUE)
-// 	if(HAS_TRAIT(mymob, TRAIT_FOV_APPLIED))
-// 		fov_enabled(mymob)
-// 	else
-// 		fov_disabled(mymob)
-
-// /atom/movable/screen/plane_master/fov_viewer_mob/proc/fov_enabled(mob/source)
-// 	SIGNAL_HANDLER
-// 	remove_relay_from(GET_NEW_PLANE(RENDER_PLANE_GAME, offset))
-// 	add_relay_to(GET_NEW_PLANE(RENDER_PLANE_MASTER, offset), relay_layer = FOV_VIEWER_MOB_LAYER_OVER_MASTER)
-// 	add_filter("fov_viewer_lighting", 1, layering_filter(render_source = OFFSET_RENDER_TARGET(LIGHTING_PLATE_RENDER_TARGET, offset), blend_mode = BLEND_MULTIPLY))
-
-// /atom/movable/screen/plane_master/fov_viewer_mob/proc/fov_disabled(mob/source)
-// 	SIGNAL_HANDLER
-// 	remove_filter("fov_viewer_lighting")
-// 	remove_relay_from(GET_NEW_PLANE(RENDER_PLANE_MASTER, offset))
-// 	add_relay_to(GET_NEW_PLANE(RENDER_PLANE_GAME, offset), relay_layer = FOV_CULLED_MOB_LAYER_UNDER_LIGHTING)
+/atom/movable/screen/plane_master/game_world/above_mob
+	name = "game world above mob plane master"
+	documentation = "Objects with layer = ABOVE_MOB_LAYER draw here so they render above mobs on FOV_CULLED_MOB_PLANE"
+	plane = GAME_PLANE_ABOVE_MOB
+	render_relay_planes = list(RENDER_PLANE_GAME_WORLD)
 // BANDASTATION ADDITION END: FOV
 
 /atom/movable/screen/plane_master/clickcatcher
