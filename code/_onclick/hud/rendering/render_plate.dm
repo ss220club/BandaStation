@@ -410,6 +410,7 @@ GLOBAL_VAR_INIT(fov_matrix, list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0))
 
 /client/var/fov_alpha
 /client/var/fov_color
+/client/var/fov_blur
 /client/var/list/fov_matrix
 
 /proc/fov_update_client_matrix(client/C)
@@ -455,15 +456,25 @@ GLOBAL_VAR_INIT(fov_matrix, list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0))
 	for(var/atom/movable/screen/plane_master/rendering_plate/masked_game_plate/plate as anything in H.get_true_plane_masters(RENDER_PLANE_GAME_MASKED))
 		plate.modify_filter("fov_matrix", color_matrix_filter(C.fov_matrix))
 
+/proc/fov_refresh_client_blur(client/C)
+	if(!C?.mob?.hud_used)
+		return
+	var/blur_val = (C.fov_blur != null) ? C.fov_blur : GLOB.fov_gaussblur
+	var/datum/hud/H = C.mob.hud_used
+	for(var/atom/movable/screen/plane_master/rendering_plate/masked_game_plate/plate as anything in H.get_true_plane_masters(RENDER_PLANE_GAME_MASKED))
+		plate.modify_filter("fov_blur", gauss_blur_filter(blur_val))
+
 /proc/fov_load_client_prefs(client/C)
 	if(!C)
 		return
 	if(!C.prefs)
 		C.fov_alpha = GLOB.fov_alpha
 		C.fov_color = GLOB.fov_color
+		C.fov_blur = GLOB.fov_gaussblur
 	else
 		var/datum/preference/alpha_pref = GLOB.preference_entries_by_key["fov_alpha"]
 		var/datum/preference/color_pref = GLOB.preference_entries_by_key["fov_color"]
+		var/datum/preference/blur_pref = GLOB.preference_entries_by_key["fov_blur"]
 		if(alpha_pref && color_pref)
 			var/list/save_data = C.prefs.get_save_data_for_savefile_identifier(PREFERENCE_PLAYER)
 			var/alpha_val = alpha_pref.read(save_data, C.prefs)
@@ -473,10 +484,17 @@ GLOBAL_VAR_INIT(fov_matrix, list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0))
 		else
 			C.fov_alpha = GLOB.fov_alpha
 			C.fov_color = GLOB.fov_color
+		if(blur_pref)
+			var/list/save_data = C.prefs.get_save_data_for_savefile_identifier(PREFERENCE_PLAYER)
+			var/blur_val = blur_pref.read(save_data, C.prefs)
+			C.fov_blur = !isnull(blur_val) ? (blur_val / 100) : GLOB.fov_gaussblur
+		else
+			C.fov_blur = GLOB.fov_gaussblur
 	if(!C.fov_matrix)
 		C.fov_matrix = list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0)
 	fov_update_client_matrix(C)
 	fov_refresh_client_plane(C)
+	fov_refresh_client_blur(C)
 
 /proc/fov_update_glob_matrix_from_color() // ughm...
 	var/list/rgb = rgb2num(GLOB.fov_color)
@@ -530,8 +548,12 @@ GLOBAL_VAR_INIT(fov_matrix, list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0))
 		else if(!C.fov_matrix)
 			C.fov_matrix = list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0)
 			fov_update_client_matrix(C)
+			fov_refresh_client_plane(C)
+			fov_refresh_client_blur(C)
 		if(C.fov_matrix)
 			modify_filter("fov_matrix", color_matrix_filter(C.fov_matrix))
+		var/blur_val = (C.fov_blur != null) ? C.fov_blur : GLOB.fov_gaussblur
+		modify_filter("fov_blur", gauss_blur_filter(blur_val))
 	// BANDASTATION ADDITION END: FOV
 	RegisterSignal(mymob, SIGNAL_ADDTRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_enabled), override = TRUE)
 	RegisterSignal(mymob, SIGNAL_REMOVETRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_disabled), override = TRUE)

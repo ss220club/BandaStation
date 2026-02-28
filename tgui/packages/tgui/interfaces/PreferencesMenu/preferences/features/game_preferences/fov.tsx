@@ -7,6 +7,13 @@ export const fov_alpha: Feature<number> = {
   component: FeatureSliderInput,
 };
 
+export const fov_blur: Feature<number> = {
+  name: 'Размытие маски',
+  category: 'FOV',
+  description: 'Уровень размытия за пределами поля зрения.',
+  component: FeatureSliderInput,
+};
+
 export const fov_color: Feature<string> = {
   name: 'Цвет затемнения',
   category: 'FOV',
