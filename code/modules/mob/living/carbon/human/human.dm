@@ -107,7 +107,7 @@
 		if(!same_id || (text2num(href_list["examine_time"]) + viable_time) < world.time)
 			to_chat(viewer, span_notice("У вас не настолько хорошая память. Осмотрите [ru_p_them()] еще раз."))
 			return
-		if(HAS_TRAIT(src, TRAIT_UNKNOWN_APPEARANCE))
+		if(!isobserver(viewer) && HAS_TRAIT(src, TRAIT_UNKNOWN_APPEARANCE))
 			to_chat(viewer, span_notice("Вы больше не можете разобрать ID-карту."))
 			return
 		if(!isobserver(viewer) && get_dist(viewer, src) > ID_EXAMINE_DISTANCE + 1) // leeway, ignored if the viewer is a ghost
