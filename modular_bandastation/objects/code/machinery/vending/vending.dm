@@ -231,6 +231,7 @@
 				/obj/item/ammo_box/magazine/wt550m9 = 10,
 				/obj/item/ammo_box/magazine/wt550m9/wtrubber = 10,
 				/obj/item/ammo_box/magazine/wt550m9/wtap = 5,
+				/obj/item/ammo_box/magazine/wt550m9/wthp = 5,
 				/obj/item/ammo_box/magazine/wt550m9/wtic = 5,
 				/obj/item/grenade/chem_grenade/teargas = 7,
 				/obj/item/grenade/flashbang = 7,

@@ -566,6 +566,25 @@
 	sharpness = NONE
 	embed_type = null
 
+/obj/projectile/bullet/c46x30mm/hp
+	name = "4.6x30mm hollow-point bullet"
+	damage = 25
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+	wound_bonus = 20
+	exposed_wound_bonus = 20
+	embed_type = /datum/embedding/bullet/c46x30mm/hp
+
+/datum/embedding/bullet/c46x30mm/hp
+	embed_chance = 75
+	fall_chance = 3
+	jostle_chance = 4
+	ignore_throwspeed_threshold = TRUE
+	pain_stam_pct = 0.4
+	pain_mult = 5
+	jostle_pain_mult = 6
+	rip_time = 1 SECONDS
+
 // MARK: .310 Strilka
 /obj/projectile/bullet/strilka310/rubber
 	name = ".310 Strilka rubber bullet"

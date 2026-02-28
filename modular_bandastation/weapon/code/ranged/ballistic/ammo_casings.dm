@@ -357,6 +357,13 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "sa-casing"
 
+/obj/item/ammo_casing/c46x30mm/hp
+	name = "4.6x30mm hollow-point bullet casing"
+	desc = "Экспансивный патрон калибра 4.6x30мм. Наносит целям режущие раны, но слаб против брони."
+	projectile_type = /obj/projectile/bullet/c46x30mm/hp
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sh-casing"
+
 /obj/item/ammo_casing/c46x30mm/inc
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "si-casing"

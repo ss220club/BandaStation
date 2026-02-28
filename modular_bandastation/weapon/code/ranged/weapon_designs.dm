@@ -238,16 +238,24 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
 /datum/design/mag_autorifle/rubber_mag
-	name = "WT-550 Autorifle Rubber Magazine (4.6x30mm rubber) (Non-lethal)"
-	desc = "A 20 round magazine for the out of date WT-550 Autorifle."
+	name = "WT-550 Autorifle Rubber Magazine (4.6x30mm rubber) (Less-lethal)"
+	desc = "A 20 round rubber magazine for the out of date WT-550 Autorifle."
 	id = "mag_autorifle_rubber"
 	build_path = /obj/item/ammo_box/magazine/wt550m9/wtrubber
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/mag_autorifle/hp_mag
+	name = "WT-550 Autorifle Hollow-point Magazine (4.6x30mm HP) (Very-lethal)"
+	desc = "A 20 round hollow-point magazine for the out of date WT-550 Autorifle."
+	id = "mag_autorifle_hp"
+	build_path = /obj/item/ammo_box/magazine/wt550m9/wthp
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
 /datum/techweb_node/syndicate_basic/New()
 	. = ..()
 	design_ids += list(
 		"mag_autorifle_rubber",
+		"mag_autorifle_hp",
 		"c9mm_mag",
 		"c10mm_mag",
 		"c9mm",
