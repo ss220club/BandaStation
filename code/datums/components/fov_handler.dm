@@ -26,10 +26,12 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 	// fullscreen cursor_catcher/combat used to track cursor turf and update mob dir
 	var/atom/movable/screen/fullscreen/cursor_catcher/combat/combat_cursor_tracker
 	var/cursor_follow_timer_id
+	var/darkness_update_timer_id
 	var/current_fov_mask_angle = 0
 	var/target_fov_mask_angle = 0
 	/// Client we registered for map RMB (MouseDown/MouseUp) to drive fov_free_look
 	var/client/fov_client
+	var/image/fov_blocker_720/dark_mask
 // BANDASTATION EDIT END: FOV
 
 /datum/component/fov_handler/Initialize(fov_type = FOV_180_DEGREES)
@@ -45,6 +47,8 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 
 	blocker_mask = new /image/fov_blocker_720(loc = mob_parent)
 	blocker_mask.alpha = 255
+	dark_mask = new /image/fov_blocker_720(loc = mob_parent)
+	dark_mask.alpha = 0
 	set_fov_angle(fov_type)
 	on_dir_change(mob_parent, mob_parent.dir, mob_parent.dir)
 	update_fov_size()
@@ -72,6 +76,11 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 		remove_mask()
 	if(blocker_mask) // In a case of early deletion due to volatile client
 		QDEL_NULL(blocker_mask)
+	if(dark_mask)
+		QDEL_NULL(dark_mask)
+	if(darkness_update_timer_id)
+		deltimer(darkness_update_timer_id)
+		darkness_update_timer_id = null
 	return ..()
 
 /datum/component/fov_handler/proc/set_fov_angle(new_angle)
@@ -141,10 +150,43 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 			base.Translate(tex_off_x, tex_off_y)
 	blocker_mask.transform = base
 	//animate(blocker_mask, transform = base, time = FOV_MASK_ANIMATE_TIME SECONDS, flags = ANIMATION_END_NOW)
+	var/state_d = "[fov_angle > 0 ? fov_angle : (360 + fov_angle)]_d"
+	dark_mask.icon_state = state_d
+	dark_mask.dir = blocker_mask.dir
+	dark_mask.transform = base
+	sample_light()
+
+/datum/component/fov_handler/proc/sample_light()
+	// sample light on two tiles infront of owner
+	var/mob/living/owner = parent
+	if(!istype(owner))
+		return
+	var/turf/my_turf = get_turf(owner)
+	if(!my_turf)
+		dark_mask.alpha = 0
+		return
+	var/turf/t1 = get_step(my_turf, owner.dir)
+	var/turf/t2 = t1 ? get_step(t1, owner.dir) : null
+	var/lum = 0
+	var/count = 0
+	if(t1)
+		lum += t1.get_lumcount()
+		count++
+	if(t2)
+		lum += t2.get_lumcount()
+		count++
+	lum = count ? (lum / count) : 0.5
+	var/factor = 1 - lum  // 0 = bright, 1 = dark
+	dark_mask.alpha = round(factor * 255)
+
+/datum/component/fov_handler/proc/_tick_light_sampling()
+	sample_light()
 
 /datum/component/fov_handler/proc/update_mask_attachment_position()
 	blocker_mask.pixel_x = 0
 	blocker_mask.pixel_y = 0
+	dark_mask.pixel_x = 0
+	dark_mask.pixel_y = 0
 
 /// Updates the size of the FOV masks by comparing them to client view size.
 /datum/component/fov_handler/proc/update_fov_size()
@@ -189,6 +231,10 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 	var/client/parent_client = parent_mob.client
 	if(parent_client)
 		parent_client.images -= blocker_mask
+		parent_client.images -= dark_mask
+	if(darkness_update_timer_id)
+		deltimer(darkness_update_timer_id)
+		darkness_update_timer_id = null
 	applied_mask = FALSE
 
 /datum/component/fov_handler/proc/add_mask()
@@ -197,11 +243,15 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 	if(!parent_client) //Love client volatility!!
 		return
 	applied_mask = TRUE
-	update_mask_attachment_position()
+	update_mask_attachment_position() // BANDASTATION ADDITION: FOV
 	blocker_mask.dir = parent_mob.dir
 	parent_client.images += blocker_mask
+	// BANDASTATION ADDITION START: FOV
+	parent_client.images += dark_mask
 	// sync immediately so FOV follows from first frame
-	apply_fov_transform() // BANDASTATION ADDITION: FOV
+	apply_fov_transform()
+	darkness_update_timer_id = addtimer(CALLBACK(src, PROC_REF(_tick_light_sampling)), 0.5 SECONDS, TIMER_LOOP | TIMER_STOPPABLE)
+	// BANDASTATION ADDITION END: FOV
 
 // BANDASTATION ADDITION START: FOV
 // when dir changes, masks follow (for now non-combat only combat uses cursor)
