@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/aoe/void_pull
-	name = "Void Pull"
-	desc = "Вызывает пустоту, нанося урон, сбивая с ног, притягивая и оглушая находящихся рядом людей."
+	name = "Притяжение Пустоты"
+	desc = "Вызывает Пустоту, нанося урон, сбивая с ног, притягивая и оглушая находящихся рядом людей."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
