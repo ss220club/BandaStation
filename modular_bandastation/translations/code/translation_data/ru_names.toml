@@ -15815,6 +15815,9 @@ nominative = "МОДуль \"ДНК-замок\""
 ["MOD plasma stabilizer module"]
 nominative = "МОДуль \"стабилизатор плазмы\""
 
+["MOD rave visor module"]
+nominative = "МОДуль \"рейв\""
+
 ["MOD glove translator module"]
 nominative = "МОДуль \"перчатки-переводчики\""
 
