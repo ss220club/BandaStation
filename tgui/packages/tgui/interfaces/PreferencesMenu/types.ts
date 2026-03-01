@@ -219,6 +219,7 @@ export type PreferencesMenuData = {
   chassis_brands?: IPCChassisBrand[];
   brain_types?: IPCBrainType[];
   hef_manufacturers?: IPCHEFManufacturer[];
+  face_options?: IPCCosmeticOption[];
   // BANDASTATION ADDITION END
 };
 
@@ -271,6 +272,11 @@ export type IPCHEFManufacturer = {
   name: string;
 };
 
+export type IPCCosmeticOption = {
+  key: string;
+  name: string;
+};
+
 export type IPCCustomization = {
   chassis_brand: string;
   brain_type: string;
@@ -281,6 +287,10 @@ export type IPCCustomization = {
   hef_r_arm: string;
   hef_l_leg: string;
   hef_r_leg: string;
+  // Cosmetics
+  head_accessory: string;
+  tail_enabled: BooleanLike;
+  face_state: string;
 };
 // BANDASTATION ADDITION END
 
@@ -292,6 +302,7 @@ export type ServerData = {
     chassis_brands: IPCChassisBrand[];
     brain_types: IPCBrainType[];
     hef_manufacturers: IPCHEFManufacturer[];
+    head_accessories: IPCCosmeticOption[];
   };
   // BANDASTATION ADDITION END
   jobs: {
