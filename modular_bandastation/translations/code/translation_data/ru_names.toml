@@ -27869,12 +27869,12 @@ prepositional = "космоналичке"
 gender = "female"
 
 ["Nanotrasen Space-Coin Market"]
-nominative = "Маркет Космокоин Нанотрейзен"
-genitive = "Маркета Космокоин Нанотрейзен"
-dative = "Мартеку Космокоин Нанотрейзен"
-accusative = "Маркет Космокоин Нанотрейзен"
-instrumental = "Маркетом Космокоин Нанотрейзен"
-prepositional = "Маркете Космокоин Нанотрейзен"
+nominative = "маркет космокоин Нанотрейзен"
+genitive = "маркета космокоин Нанотрейзен"
+dative = "маркету космокоин Нанотрейзен"
+accusative = "маркет космокоин Нанотрейзен"
+instrumental = "маркетом космокоин Нанотрейзен"
+prepositional = "маркете космокоин Нанотрейзен"
 gender = "male"
 
 ["suspicious phone"]
