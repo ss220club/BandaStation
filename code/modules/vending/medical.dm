@@ -6,12 +6,12 @@
 	panel_type = "panel11"
 	product_ads = "Спасите пару жизней!;Лучшие вещи для вашего меда.;Только самые лучшие инструменты.;Натуральные химикаты!;Эти вещи спасают жизни.;Разве вы не хотите это?;Пинг!"
 	products = list(
-		/obj/item/stack/medical/gauze = 8,
+		/obj/item/stack/medical/wrap/gauze = 8,
 		/obj/item/reagent_containers/syringe = 12,
 		/obj/item/reagent_containers/dropper = 3,
 		/obj/item/healthanalyzer = 4,
 		/obj/item/wrench/medical = 1,
-		/obj/item/stack/sticky_tape/surgical = 3,
+		/obj/item/stack/medical/wrap/sticky_tape/surgical = 3,
 		/obj/item/healthanalyzer/simple = 4,
 		/obj/item/stack/medical/ointment = 2,
 		/obj/item/stack/medical/suture = 2,
@@ -33,6 +33,7 @@
 		/obj/item/sensor_device = 2,
 		/obj/item/storage/medkit/advanced = 2,
 		/obj/item/shears = 1,
+		/obj/item/tourniquet = 6,
 		/obj/item/storage/organbox = 1,
 	)
 	refill_canister = /obj/item/vending_refill/medical
@@ -52,12 +53,12 @@
 
 /obj/machinery/vending/medical/infested_frigate
 	products = list(
-		/obj/item/stack/medical/gauze = 0,
+		/obj/item/stack/medical/wrap/gauze = 0,
 		/obj/item/reagent_containers/syringe = 7,
 		/obj/item/reagent_containers/dropper = 3,
 		/obj/item/healthanalyzer = 0,
 		/obj/item/wrench/medical = 0,
-		/obj/item/stack/sticky_tape/surgical = 0,
+		/obj/item/stack/medical/wrap/sticky_tape/surgical = 0,
 		/obj/item/healthanalyzer/simple = 0,
 		/obj/item/stack/medical/ointment = 0,
 		/obj/item/stack/medical/suture = 1,

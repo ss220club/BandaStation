@@ -122,9 +122,9 @@ export function PreviewView(props: PreviewViewProps) {
           fontBold,
           advanced_html_user,
         ),
-        replacements,
+        Array.isArray(replacements) ? replacements : [],
       ),
-    [textAreaTextForPreview, fontFace, fontColor, fontBold, advanced_html_user],
+    [textAreaTextForPreview, fontFace, fontColor, fontBold, advanced_html_user, replacements],
   );
 
   // Wraps the given raw text in a font span based on the supplied props.
@@ -238,8 +238,13 @@ export function PreviewView(props: PreviewViewProps) {
       return;
     }
 
-    const replacement = usedReplacementsRef.current.find(
-      (replacement) => replacement.key === autofillType,
+    const replacements = usedReplacementsRef.current;
+    if (!Array.isArray(replacements)) {
+      return;
+    }
+
+    const replacement = replacements.find(
+      (r) => r.key === autofillType,
     );
 
     if (!replacement) {
@@ -442,7 +447,7 @@ export function PreviewView(props: PreviewViewProps) {
   }, [previewText, activeWriteButtonId]);
 
   useEffect(() => {
-    usedReplacementsRef.current = replacements;
+    usedReplacementsRef.current = Array.isArray(replacements) ? replacements : [];
     return () => {
       usedReplacementsRef.current = [];
     };

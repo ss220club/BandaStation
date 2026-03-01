@@ -1530,6 +1530,15 @@ instrumental = "разгрузкой охраны"
 prepositional = "разгрузке охраны"
 gender = "female"
 
+["Allergy dogtag"]
+nominative = "жетон аллергика"
+genitive = "жетона аллергика"
+dative = "жетону аллергика"
+accusative = "жетон аллергика"
+instrumental = "жетоном аллергика"
+prepositional = "жетоне аллергика"
+gender = "male"
+
 ["antag token"]
 nominative = "жетон антагониста"
 genitive = "жетона антагониста"
@@ -7424,6 +7433,15 @@ gender = "female"
 
 # MARK: Food
 
+["meat"]
+nominative = "мясо"
+genitive = "мяса"
+dative = "мясу"
+accusative = "мясо"
+instrumental = "мясом"
+prepositional = "мясе"
+gender = "neuter"
+
 ["double rat-kebab"]
 nominative = "двойной крышлык"
 genitive = "двойного крышлыка"
@@ -7667,6 +7685,114 @@ instrumental = "Терияки-покетом"
 prepositional = "Терияки-покете"
 gender = "male"
 
+["Donk-roll"]
+nominative = "Донк-ролл"
+genitive = "Донк-ролла"
+dative = "Донк-роллу"
+accusative = "Донк-ролл"
+instrumental = "Донк-роллом"
+prepositional = "Донк-ролле"
+gender = "male"
+
+["warm donk-pocket"]
+nominative = "горячий Донк-покет"
+genitive = "горячего Донк-покета"
+dative = "горячему Донк-покету"
+accusative = "горячий Донк-покет"
+instrumental = "горячим Донк-покетом"
+prepositional = "горячем Донк-покете"
+gender = "male"
+
+["warm dank-pocket"]
+nominative = "горячий Данк-покет"
+genitive = "горячего Данк-покета"
+dative = "горячему Данк-покету"
+accusative = "горячий Данк-покет"
+instrumental = "горячим Данк-покетом"
+prepositional = "горячем Данк-покете"
+gender = "male"
+
+["warm spicy-pocket"]
+nominative = "горячий Острый-покет"
+genitive = "горячего Острого-покета"
+dative = "горячему Острому-покету"
+accusative = "горячий Острый-покет"
+instrumental = "горячим Острым-покетом"
+prepositional = "горячем Остром-покете"
+gender = "male"
+
+["warm teriyaki-pocket"]
+nominative = "горячий Терияки-покет"
+genitive = "горячего Терияки-покета"
+dative = "горячему Терияки-покету"
+accusative = "горячий Терияки-покет"
+instrumental = "горячим Терияки-покетом"
+prepositional = "горячем Терияки-покете"
+gender = "male"
+
+["warm pizza-pocket"]
+nominative = "горячий Пицца-покет"
+genitive = "горячего Пицца-покета"
+dative = "горячему Пицца-покету"
+accusative = "горячий Пицца-покет"
+instrumental = "горячим Пицца-покетом"
+prepositional = "горячем Пицца-покете"
+gender = "male"
+
+["warm honk-pocket"]
+nominative = "горячий Хонк-покет"
+genitive = "горячего Хонк-покета"
+dative = "горячему Хонк-покету"
+accusative = "горячий Хонк-покет"
+instrumental = "горячим Хонк-покетом"
+prepositional = "горячем Хонк-покете"
+gender = "male"
+
+["warm berry-pocket"]
+nominative = "горячий Ягодный-покет"
+genitive = "горячего Ягодного-покета"
+dative = "горячему Ягодному-покету"
+accusative = "горячий Ягодный-покет"
+instrumental = "горячим Ягодным-покетом"
+prepositional = "горячем Ягодном-покете"
+gender = "male"
+
+["warm gondola-pocket"]
+nominative = "горячий Гондола-покет"
+genitive = "горячего Гондола-покета"
+dative = "горячему Гондола-покету"
+accusative = "горячий Гондола-покет"
+instrumental = "горячим Гондола-покетом"
+prepositional = "горячем Гондола-покете"
+gender = "male"
+
+["warm donk-pocket deluxe"]
+nominative = "горячий Донк-покет делюкс"
+genitive = "горячего Донк-покета делюкс"
+dative = "горячему Донк-покету делюкс"
+accusative = "горячий Донк-покет делюкс"
+instrumental = "горячим Донк-покетом делюкс"
+prepositional = "горячем Донк-покете делюкс"
+gender = "male"
+
+["warm meat-pocket"]
+nominative = "горячий Мясной-покет"
+genitive = "горячего Мясного-покета"
+dative = "горячему Мясному-покету"
+accusative = "горячий Мясной-покет"
+instrumental = "горячим Мясным-покетом"
+prepositional = "горячем Мясном-покете"
+gender = "male"
+
+["warm donk-roll"]
+nominative = "горячий Донк-ролл"
+genitive = "горячего Донк-ролла"
+dative = "горячему Донк-роллу"
+accusative = "горячий Донк-ролл"
+instrumental = "горячим Донк-роллом"
+prepositional = "горячем Донк-ролле"
+gender = "male"
+
 ["tator tot"]
 nominative = "предокартофель"
 genitive = "предокартофеля"
@@ -7704,57 +7830,66 @@ prepositional = "Гондола-покете"
 gender = "male"
 
 ["box of donk-pockets"]
-nominative = "коробка донк-покетов"
-genitive = "коробки донк-покетов"
-dative = "коробке донк-покетов"
-accusative = "коробку донк-покетов"
-instrumental = "коробкой донк-покетов"
-prepositional = "коробке донк-покетов"
+nominative = "коробка Донк-покетов"
+genitive = "коробки Донк-покетов"
+dative = "коробке Донк-покетов"
+accusative = "коробку Донк-покетов"
+instrumental = "коробкой Донк-покетов"
+prepositional = "коробке Донк-покетов"
 gender = "female"
 
 ["box of berry-flavoured donk-pockets"]
-nominative = "коробка донк-покетов со вкусом ягод"
-genitive = "коробки донк-покетов со вкусом ягод"
-dative = "коробке донк-покетов со вкусом ягод"
-accusative = "коробку донк-покетов со вкусом ягод"
-instrumental = "коробкой донк-покетов со вкусом ягод"
-prepositional = "коробке донк-покетов со вкусом ягод"
+nominative = "коробка Донк-покетов со вкусом ягод"
+genitive = "коробки Донк-покетов со вкусом ягод"
+dative = "коробке Донк-покетов со вкусом ягод"
+accusative = "коробку Донк-покетов со вкусом ягод"
+instrumental = "коробкой Донк-покетов со вкусом ягод"
+prepositional = "коробке Донк-покетов со вкусом ягод"
 gender = "female"
 
 ["box of banana-flavoured donk-pockets"]
-nominative = "коробка донк-покетов со вкусом банана"
-genitive = "коробки донк-покетов со вкусом банана"
-dative = "коробке донк-покетов со вкусом банана"
-accusative = "коробку донк-покетов со вкусом банана"
-instrumental = "коробкой донк-покетов со вкусом банана"
-prepositional = "коробке донк-покетов со вкусом банана"
+nominative = "коробка Донк-покетов со вкусом банана"
+genitive = "коробки Донк-покетов со вкусом банана"
+dative = "коробке Донк-покетов со вкусом банана"
+accusative = "коробку Донк-покетов со вкусом банана"
+instrumental = "коробкой Донк-покетов со вкусом банана"
+prepositional = "коробке Донк-покетов со вкусом банана"
 gender = "female"
 
 ["box of pizza-flavoured donk-pockets"]
-nominative = "коробка донк-покетов со вкусом пиццы"
-genitive = "коробки донк-покетов со вкусом пиццы"
-dative = "коробке донк-покетов со вкусом пиццы"
-accusative = "коробку донк-покетов со вкусом пиццы"
-instrumental = "коробкой донк-покетов со вкусом пиццы"
-prepositional = "коробке донк-покетов со вкусом пиццы"
+nominative = "коробка Донк-покетов со вкусом пиццы"
+genitive = "коробки Донк-покетов со вкусом пиццы"
+dative = "коробке Донк-покетов со вкусом пиццы"
+accusative = "коробку Донк-покетов со вкусом пиццы"
+instrumental = "коробкой Донк-покетов со вкусом пиццы"
+prepositional = "коробке Донк-покетов со вкусом пиццы"
 gender = "female"
 
 ["box of spicy-flavoured donk-pockets"]
-nominative = "коробка острых донк-покетов"
-genitive = "коробки острых донк-покетов"
-dative = "коробке острых донк-покетов"
-accusative = "коробку острых донк-покетов"
-instrumental = "коробкой острых донк-покетов"
-prepositional = "коробке острых донк-покетов"
+nominative = "коробка острых Донк-покетов"
+genitive = "коробки острых Донк-покетов"
+dative = "коробке острых Донк-покетов"
+accusative = "коробку острых Донк-покетов"
+instrumental = "коробкой острых Донк-покетов"
+prepositional = "коробке острых Донк-покетов"
 gender = "female"
 
 ["box of teriyaki-flavoured donk-pockets"]
-nominative = "коробка донк-покетов со вкусом терияки"
-genitive = "коробки донк-покетов со вкусом терияки"
-dative = "коробке донк-покетов со вкусом терияки"
-accusative = "коробку донк-покетов со вкусом терияки"
-instrumental = "коробкой донк-покетов со вкусом терияки"
-prepositional = "коробке донк-покетов со вкусом терияки"
+nominative = "коробка Донк-покетов со вкусом терияки"
+genitive = "коробки Донк-покетов со вкусом терияки"
+dative = "коробке Донк-покетов со вкусом терияки"
+accusative = "коробку Донк-покетов со вкусом терияки"
+instrumental = "коробкой Донк-покетов со вкусом терияки"
+prepositional = "коробке Донк-покетов со вкусом терияки"
+gender = "female"
+
+["box of gondola-flavoured donk-pockets"]
+nominative = "коробка Донк-покетов со вкусом гондолы"
+genitive = "коробки Донк-покетов со вкусом гондолы"
+dative = "коробке Донк-покетов со вкусом гондолы"
+accusative = "коробку Донк-покетов со вкусом гондолы"
+instrumental = "коробкой Донк-покетов со вкусом гондолы"
+prepositional = "коробке Донк-покетов со вкусом гондолы"
 gender = "female"
 
 ["tactical snack rig"]
@@ -7983,6 +8118,15 @@ accusative = "вихревой леденец"
 instrumental = "вихревым леденцом"
 prepositional = "вихревом леденце"
 gender = "male"
+
+["pizza"]
+nominative = "пицца"
+genitive = "пиццы"
+dative = "пицце"
+accusative = "пиццу"
+instrumental = "пиццей"
+prepositional = "пицце"
+gender = "female"
 
 ["plain burger"]
 nominative = "обычный бургер"
@@ -11031,6 +11175,87 @@ accusative = "медицинскую марлю"
 instrumental = "медицинской марлей"
 prepositional = "медицинской марле"
 gender = "female"
+
+["improvised gauze"]
+nominative = "импровизированная марля"
+genitive = "импровизированной марли"
+dative = "импровизированной марле"
+accusative = "импровизированную марлю"
+instrumental = "импровизированной марлей"
+prepositional = "импровизированной марле"
+gender = "female"
+
+["bruise pack"]
+nominative = "набор от ушибов"
+genitive = "набора от ушибов"
+dative = "набору от ушибов"
+accusative = "набор от ушибов"
+instrumental = "набором от ушибов"
+prepositional = "наборе от ушибов"
+gender = "male"
+
+["first aid bandage"]
+nominative = "лейкопластырь первой помощи"
+genitive = "лейкопластыря первой помощи"
+dative = "лейкопластырю первой помощи"
+accusative = "лейкопластырь первой помощи"
+instrumental = "лейкопластырем первой помощи"
+prepositional = "лейкопластыре первой помощи"
+gender = "male"
+
+["mourning poultices"]
+nominative = "траурные припарки"
+genitive = "траурных припарок"
+dative = "траурным припаркам"
+accusative = "траурные припарки"
+instrumental = "траурными припарками"
+prepositional = "траурных припарках"
+gender = "plural"
+
+["makeshift bandage"]
+nominative = "самодельный лейкопластырь"
+genitive = "самодельного лейкопластыря"
+dative = "самодельному лейкопластырю"
+accusative = "самодельный лейкопластырь"
+instrumental = "самодельным лейкопластырем"
+prepositional = "самодельном лейкопластыре"
+gender = "male"
+
+["advanced regenerative mesh"]
+nominative = "продвинутая регенеративная сетка"
+genitive = "продвинутой регенеративной сетки"
+dative = "продвинутой регенеративной сетке"
+accusative = "продвинутую регенеративную сетку"
+instrumental = "продвинутой регенеративной сеткой"
+prepositional = "продвинутой регенеративной сетке"
+gender = "female"
+
+["aloe cream"]
+nominative = "крем алоэ"
+genitive = "крема алоэ"
+dative = "крему алоэ"
+accusative = "крем алоэ"
+instrumental = "кремом алоэ"
+prepositional = "креме алоэ"
+gender = "male"
+
+["regenerative mesh"]
+nominative = "регенеративная сетка"
+genitive = "регенеративной сетки"
+dative = "регенеративной сетке"
+accusative = "регенеративную сетку"
+instrumental = "регенеративной сеткой"
+prepositional = "регенеративной сетке"
+gender = "female"
+
+["medicated suture"]
+nominative = "лечебный шов"
+genitive = "лечебного шва"
+dative = "лечебному шву"
+accusative = "лечебный шов"
+instrumental = "лечебным швом"
+prepositional = "лечебном шве"
+gender = "male"
 
 ["wound analyzer"]
 nominative = "анализатор травм"
@@ -18727,12 +18952,12 @@ prepositional = "алмазе"
 gender = "male"
 
 ["bluespace polycrystal"]
-nominative = "блюспейс поликристал"
-genitive = "блюспейс поликристала"
-dative = "блюспейс поликристалу"
-accusative = "блюспейс поликристал"
-instrumental = "блюспейс поликристалом"
-prepositional = "блюспейс поликристале"
+nominative = "блюспейс поликристалл"
+genitive = "блюспейс поликристалла"
+dative = "блюспейс поликристаллу"
+accusative = "блюспейс поликристалл"
+instrumental = "блюспейс поликристаллом"
+prepositional = "блюспейс поликристалле"
 gender = "male"
 
 ["bluespace crystal"]
@@ -18896,6 +19121,150 @@ accusative = "бумагу"
 instrumental = "бумагой"
 prepositional = "бумаге"
 gender = "female"
+
+["coal"]
+nominative = "уголь"
+genitive = "угля"
+dative = "углю"
+accusative = "уголь"
+instrumental = "углем"
+prepositional = "угле"
+gender = "male"
+
+["bronze"]
+nominative = "бронза"
+genitive = "бронзы"
+dative = "бронзе"
+accusative = "бронзу"
+instrumental = "бронзой"
+prepositional = "бронзе"
+gender = "female"
+
+["metal hydrogen"]
+nominative = "металлический водород"
+genitive = "металлического водорода"
+dative = "металлическому водороду"
+accusative = "металлический водород"
+instrumental = "металлическим водородом"
+prepositional = "металлическом водороде"
+gender = "male"
+
+["runed metal"]
+nominative = "рунический металл"
+genitive = "рунического металла"
+dative = "руническому металлу"
+accusative = "рунический металл"
+instrumental = "руническим металлом"
+prepositional = "руническом металле"
+gender = "male"
+
+["paper frames"]
+nominative = "бумажные каркасы"
+genitive = "бумажных каркасов"
+dative = "бумажным каркасам"
+accusative = "бумажные каркасы"
+instrumental = "бумажными каркасами"
+prepositional = "бумажных каркасах"
+gender = "plural"
+
+["meat sheets"]
+nominative = "мясные листы"
+genitive = "мясных листов"
+dative = "мясным листам"
+accusative = "мясные листы"
+instrumental = "мясными листами"
+prepositional = "мясных листах"
+gender = "plural"
+
+["zaukerite"]
+nominative = "заукерит"
+genitive = "заукерита"
+dative = "заукериту"
+accusative = "заукерит"
+instrumental = "заукеритом"
+prepositional = "заукерите"
+gender = "male"
+
+["sandbags"]
+nominative = "мешки с песком"
+genitive = "мешков с песком"
+dative = "мешкам с песком"
+accusative = "мешки с песком"
+instrumental = "мешками с песком"
+prepositional = "мешках с песком"
+gender = "plural"
+
+["hot ice"]
+nominative = "горячий лёд"
+genitive = "горячего льда"
+dative = "горячему льду"
+accusative = "горячий лёд"
+instrumental = "горячим льдом"
+prepositional = "горячем льде"
+gender = "male"
+
+["bedsheet"]
+nominative = "простыня"
+genitive = "простыни"
+dative = "простыне"
+accusative = "простыню"
+instrumental = "простыней"
+prepositional = "простыне"
+gender = "female"
+
+["raw cotton bundle"]
+nominative = "связка сырого хлопка"
+genitive = "связки сырого хлопка"
+dative = "связке сырого хлопка"
+accusative = "связку сырого хлопка"
+instrumental = "связкой сырого хлопка"
+prepositional = "связке сырого хлопка"
+gender = "female"
+
+["sheet pizza"]
+nominative = "пицца-лист"
+genitive = "пиццы-листа"
+dative = "пицце-листу"
+accusative = "пиццу-лист"
+instrumental = "пиццей-листом"
+prepositional = "пицце-листе"
+gender = "female"
+
+["bones"]
+nominative = "кости"
+genitive = "костей"
+dative = "костям"
+accusative = "кости"
+instrumental = "костями"
+prepositional = "костях"
+gender = "plural"
+
+["bone"]
+nominative = "кость"
+genitive = "кости"
+dative = "кости"
+accusative = "кость"
+instrumental = "костью"
+prepositional = "кости"
+gender = "female"
+
+["bamboo"]
+nominative = "бамбук"
+genitive = "бамбука"
+dative = "бамбуку"
+accusative = "бамбук"
+instrumental = "бамбуком"
+prepositional = "бамбуке"
+gender = "male"
+
+["bamboo cuttings"]
+nominative = "бамбуковые обрезки"
+genitive = "бамбуковых обрезок"
+dative = "бамбуковым обрезкам"
+accusative = "бамбуковые обрезки"
+instrumental = "бамбуковыми обрезками"
+prepositional = "бамбуковых обрезках"
+gender = "plural"
 
 # MARK: Structures
 ["water tank"]
@@ -31125,6 +31494,144 @@ instrumental = "алтарём Божеств"
 prepositional = "алтаре Божеств"
 gender = "neuter"
 
+# MARK:  Heretic common items
+
+["Amber Focus"]
+nominative = "янтарный фокусировщик"
+genitive = "янтарного фокусировщика"
+dative = "янтарному фокусировщику"
+accusative = "янтарный фокусировщик"
+instrumental = "янтарным фокусировщиком"
+prepositional = "янтарном фокусировщике"
+gender ="male"
+
+["Codex Cicatrix"]
+nominative = "кодекс Цикатрикс"
+genitive = "кодекса Цикатрикс"
+dative = "кодексу Цикатрикс"
+accusative = "кодекс Цикатрикс"
+instrumental = "кодексом Цикатрикс"
+prepositional = "кодексе Цикатрикс"
+gender = "male"
+
+# MARK: Cosmic heretic items
+
+["Starwoven Cloak"]
+nominative = "Сотканный из звёзд"
+genitive = "Сотканного из звёзд"
+dative = "Сотканному из звёзд"
+accusative = "Сотканный из звёзд"
+instrumental = "Сотканным из звёзд"
+prepositional = "Сотканном из звёзд"
+gender = "neuter"
+
+["Cosmic Blade"]
+nominative = "Космический клинок"
+genitive = "Космического клинка"
+dative = "Космическому клинку"
+accusative = "Космический клинок"
+instrumental = "Космическим клинком"
+prepositional = "Космическом клинке"
+gender = "male"
+
+["knit flesh"]
+nominative = "переплетение плоти"
+genitive = "переплетения плоти"
+dative = "переплетению плоти"
+accusative = "переплетение плоти"
+instrumental = "переплетением плоти"
+prepositional = "переплетении плоти"
+gender = "neuter"
+
+# MARK: Moon heretic items
+
+["Resplendent Regalia"]
+nominative = "Блистательное облачение"
+genitive = "Блистательного облачения"
+dative = "Блистательному облачению"
+accusative = "Блистательное облачение"
+instrumental = "Блистательным облачением"
+prepositional = "Блистательном облачении"
+gender = "neuter"
+
+["Moonlight Amulet"]
+nominative = "Лунный амулет"
+genitive = "Лунного амулета"
+dative = "Лунному амулету"
+accusative = "Лунный амулет"
+instrumental = "Лунным амулетом"
+prepositional = "Лунном амулете"
+gender = "male"
+
+["Moonlight Blade"]
+nominative = "Закалённый клинок"
+genitive = "Закалённого клинка"
+dative = "Закалённому клинку"
+accusative = "Закалённый клинок"
+instrumental = "Закалённым клинком"
+prepositional = "Закалённом клинке"
+gender = "male"
+
+# MARK: Blade heretic items
+
+["Sundered Blade"]
+nominative = "Лунный клинок"
+genitive = "Лунного клинка"
+dative = "Лунному клинку"
+accusative = "Лунный клинок"
+instrumental = "Лунным клинком"
+prepositional = "Лунном клинке"
+gender = "male"
+
+# MARK: Void heretic items
+
+["Hollow Weave"]
+nominative = "Сплетение Пустоты"
+genitive = "Сплетения Пустоты"
+dative = "Сплетению Пустоты"
+accusative = "Сплетение Пустоты"
+instrumental = "Сплетением Пустоты"
+prepositional = "Сплетении Пустоты"
+gender = "neuter"
+
+["Void Cloak"]
+nominative = "Накидка Пустоты"
+genitive = "Накидки Пустоты"
+dative = "Накидке Пустоты"
+accusative = "Накидку Пустоты"
+instrumental = "Накидкой Пустоты"
+prepositional = "Накидке Пустоты"
+gender = "female"
+
+["Phylactery of Damnation"]
+nominative = "филактерия проклятия"
+genitive = "филактерии проклятия"
+dative = "филактерии проклятия"
+accusative = "филактерию проклятия"
+instrumental = "филактерией проклятия"
+prepositional = "филактерии проклятия"
+gender = "female"
+
+["mawed crucible"]
+nominative = "зубастый тигель"
+genitive = "зубастого тигеля"
+dative = "зубастому тигелю"
+accusative = "зубастый тигель"
+instrumental = "зубастым тигелем"
+prepositional = "зубастом тигеле"
+gender = "male"
+
+["Eldritch Coin"]
+nominative = "Потусторонняя монета"
+genitive = "Потусторонней монете"
+dative = "Потусторонней монете"
+accusative = "Потусторонюю монету"
+instrumental = "Потусторонней монетой"
+prepositional = "Потусторонней монете"
+gender = "female"
+
+# MARK: Swords Prime
+
 ["Malice"]
 nominative = "Злоба"
 genitive = "Злобы"
@@ -31352,3 +31859,12 @@ accusative = "деревянную раму стола"
 instrumental = "деревянной рамой стола"
 prepositional = "деревянной раме стола"
 gender = "female"
+
+["stenciled letter"]
+nominative = "большой символ"
+genitive = "большого символа"
+dative = "большому символу"
+accusative = "большого символа"
+instrumental = "большим символом"
+prepositional = "большом символе"
+gender = "male"
