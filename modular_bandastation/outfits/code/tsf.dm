@@ -43,7 +43,7 @@
 	suit = /obj/item/clothing/suit/armor/centcom_formal/tsf_commander
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
-		/obj/item/storage/box/survival/security,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/reagent_containers/hypospray/combat/nanites,
 		/obj/item/storage/fancy/cigarettes/cigars/havana,
 		/obj/item/reagent_containers/cup/glass/bottle/whiskey,
@@ -55,7 +55,7 @@
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/thermal/eyepatch/tsf_commander
-	r_pocket = /obj/item/lighter
+	r_pocket = /obj/item/lighter/skull
 
 /datum/id_trim/tsf/commander
 	assignment = "TSF - Commanding Officer"
@@ -73,7 +73,7 @@
 	uniform = /obj/item/clothing/under/rank/tsf/marine
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf,
 		/obj/item/storage/fancy/cigarettes/cigpack_robust,
 		/obj/item/lighter/greyscale,
 	)
@@ -99,14 +99,14 @@
 	uniform = /obj/item/clothing/under/rank/tsf/marine_officer
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/storage/fancy/cigarettes/cigpack_robust,
 		/obj/item/lighter/greyscale,
 	)
 	head = /obj/item/clothing/head/beret/tsf_marine_officer
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	shoes = /obj/item/clothing/shoes/jackboots
-	belt = /obj/item/storage/belt/military/army/tsf/full
+	belt = /obj/item/storage/belt/military/army/tsf/full_pistol
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 
 /datum/id_trim/tsf/marine/officer
@@ -115,19 +115,20 @@
 	big_pointer = TRUE
 
 // TSF Marine
-//Rifleman
+// Rifleman
 /datum/outfit/tsf/marine
 	name = "TSF - Marine Rifleman"
 	id = /obj/item/card/id/advanced/tsf
 	id_trim = /datum/id_trim/tsf/marine
 	uniform = /obj/item/clothing/under/rank/tsf/marine
 	suit = /obj/item/clothing/suit/armor/vest/marine/security
-	suit_store = /obj/item/gun/ballistic/automatic/sindano
+	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
-		/obj/item/grenade/smokebomb,
-		/obj/item/shield/riot/tele,
+		/obj/item/storage/box/survival/tsf,
+		/obj/item/storage/medkit/regular,
+		/obj/item/grenade/frag,
+		/obj/item/clothing/head/beret/tsf_marine,
 	)
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
@@ -135,102 +136,157 @@
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 	mask = /obj/item/clothing/mask/gas/sechailer
 	head = /obj/item/clothing/head/helmet/marine/security
-	belt = /obj/item/storage/belt/military/army/tsf/full_submachine
-	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
+	belt = /obj/item/storage/belt/military/army/tsf/full_autorifle_carwo
+	l_pocket = /obj/item/knife/combat
 
-//Officer
+// Officer
 /datum/outfit/tsf/marine/officer
 	name = "TSF - Marine Officer"
 	id_trim = /datum/id_trim/tsf/marine/officer
 	uniform = /obj/item/clothing/under/rank/tsf/marine_officer
 	suit = /obj/item/clothing/suit/armor/vest/marine
-	suit_store = /obj/item/gun/ballistic/automatic/carwo
+	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/black
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/ussp/officer,
 		/obj/item/storage/box/zipties,
-		/obj/item/storage/medkit/emergency,
+		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
-		/obj/item/melee/baton/telescopic/silver,
+		/obj/item/clothing/head/beret/tsf_marine_officer,
 	)
-	belt = /obj/item/storage/belt/military/army/tsf/full_rifle_standart
+	belt = /obj/item/storage/belt/military/army/tsf/full_autorifle_carwo_officer
 	glasses = /obj/item/clothing/glasses/hud/security/night
 	neck = /obj/item/binoculars
 	head = /obj/item/clothing/head/helmet/marine
 
-//Medic
+// Medic
 /datum/outfit/tsf/marine/medic
 	name = "TSF - Marine Corpsman"
 	id_trim = /datum/id_trim/tsf/marine/corpsman
 	suit = /obj/item/clothing/suit/armor/vest/marine/medic
-	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/wooden
+	suit_store = /obj/item/gun/ballistic/automatic/sindano
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
-		/obj/item/storage/medkit/regular = 1,
-		/obj/item/storage/medkit/advanced = 1,
-		/obj/item/storage/medkit/tactical = 1,
-		/obj/item/defibrillator/compact/loaded
+		/obj/item/storage/box/survival/tsf,
+		/obj/item/storage/medkit/o2,
+		/obj/item/storage/medkit/toxin,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/defibrillator/compact/loaded,
+		/obj/item/clothing/head/beret/tsf_marine,
 	)
-	belt = /obj/item/storage/belt/military/army/tsf/full_rifle_short
+	belt = /obj/item/storage/belt/military/army/tsf/full_smg_sindano
 	head = /obj/item/clothing/head/helmet/marine/medic
 	glasses = /obj/item/clothing/glasses/hud/health/sunglasses
-	l_pocket = /obj/item/healthanalyzer/advanced
 
 	skillchips = list(/obj/item/skillchip/entrails_reader)
 
 /datum/id_trim/tsf/marine/corpsman
 	assignment = "TSF - Marine Corpsman"
 
-//Engineer
+// Engineer
 /datum/outfit/tsf/marine/engineer
-	name = "TSF - Marine Weapon Specialist"
+	name = "TSF - Marine Combat Techician"
 	id_trim = /datum/id_trim/tsf/marine/engineer
 	suit = /obj/item/clothing/suit/armor/vest/marine/engineer
-	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun // Я об этом еще пожалею
-	back = /obj/item/deployable_turret_folded
+	suit_store = /obj/item/gun/ballistic/shotgun/riot/renoster
+	back = /obj/item/mounted_machine_gun_folded
 	backpack_contents = null
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 	head = /obj/item/clothing/head/helmet/marine/engineer
 	belt = /obj/item/storage/belt/military/army/tsf/full_engineer
 	l_pocket = /obj/item/wrench
+	r_pocket = /obj/item/tank/internals/emergency_oxygen/engi
 
 /datum/id_trim/tsf/marine/engineer
-	assignment = "TSF - Marine Weapon Specialist"
+	assignment = "TSF - Marine Combat Techician"
 
-//Riot
+// Grenadier
+/datum/outfit/tsf/marine/grenadier
+	name = "TSF - Marine Grenadier"
+	id_trim = /datum/id_trim/tsf/marine/grenadier
+	suit = /obj/item/clothing/suit/armor/vest/marine/engineer
+	suit_store = /obj/item/gun/ballistic/rocketlauncher/unrestricted
+	back = /obj/item/storage/backpack/tsf
+	backpack_contents = list(
+		/obj/item/storage/box/survival/tsf,
+		/obj/item/storage/medkit/regular,
+		/obj/item/ammo_box/rocket = 2,
+		/obj/item/ammo_casing/rocket/weak = 2,
+		/obj/item/clothing/head/beret/tsf_marine,
+	)
+	belt = /obj/item/storage/belt/military/army/tsf/full_rpg
+
+/datum/id_trim/tsf/marine/grenadier
+	assignment = "TSF - Marine Grenadier"
+
+// Snipers
+/datum/outfit/tsf/marine/sniper
+	name = "TSF - Marine Marksman"
+	id_trim = /datum/id_trim/tsf/marine/sniper
+	suit_store = /obj/item/gun/ballistic/automatic/carwo/marksman
+	back = /obj/item/storage/backpack/tsf
+	backpack_contents = list(
+		/obj/item/storage/box/survival/tsf,
+		/obj/item/storage/medkit/regular,
+		/obj/item/clothing/head/beret/tsf_marine,
+	)
+	belt = /obj/item/storage/belt/military/army/tsf/full_sniper_carwo
+	glasses = /obj/item/clothing/glasses/hud/security/night
+	neck = /obj/item/binoculars
+
+/datum/id_trim/tsf/marine/sniper
+	assignment = "TSF - Marine Marksman"
+
+// Riot
 /datum/outfit/tsf/marine/riot
 	name = "TSF - Riot Specialist"
 	id = /obj/item/card/id/advanced/tsf
 	id_trim = /datum/id_trim/tsf/marine/riot
 	uniform = /obj/item/clothing/under/rank/tsf/marine
 	suit = /obj/item/clothing/suit/armor/riot
-	suit_store = /obj/item/gun/ballistic/shotgun/riot_one_hand
+	suit_store = /obj/item/gun/ballistic/shotgun/automatic/combat/compact
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
-		/obj/item/storage/box/teargas,
-		/obj/item/grenade/flashbang = 2,
+		/obj/item/storage/box/survival/tsf,
+		/obj/item/grenade/chem_grenade/teargas,
 		/obj/item/megaphone/sec,
-		/obj/item/storage/box/rubbershot,
-		/obj/item/storage/box/rubbershot,
-		/obj/item/storage/box/rubbershot,
+		/obj/item/storage/medkit/regular,
+		/obj/item/storage/box/zipties,
+		/obj/item/ammo_box/c12ga/rubbershot,
+		/obj/item/ammo_box/c12ga/beanbag,
 	)
 	head = /obj/item/clothing/head/helmet/toggleable/riot
 	mask = /obj/item/clothing/mask/gas/sechailer/swat
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
 	belt = /obj/item/storage/belt/security/full
+	l_hand = /obj/item/melee/baton/security/loaded/ert
 	r_hand = /obj/item/shield/riot/flash
-	l_pocket = /obj/item/restraints/handcuffs
-	r_pocket = /obj/item/restraints/handcuffs
-
-/obj/item/gun/ballistic/shotgun/riot_one_hand
-	name = "one-hand riot shotgun"
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot
-	weapon_weight = WEAPON_MEDIUM
+	l_pocket = /obj/item/assembly/flash
+	r_pocket = /obj/item/grenade/flashbang
 
 /datum/id_trim/tsf/marine/riot
 	assignment = "TSF - Riot Specialist"
+
+// TSF Heavy Troopers
+/datum/outfit/tsf/marine/machinegunner
+	name = "TSF - Marine Machinegunner"
+	id = /obj/item/card/id/advanced/tsf
+	id_trim = /datum/id_trim/tsf/marine/machinegunner
+	uniform = /obj/item/clothing/under/rank/tsf/marine
+	suit = /obj/item/clothing/suit/armor/vest/marine/security
+	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun
+	back = /obj/item/storage/backpack/tsf
+	backpack_contents = list(
+		/obj/item/storage/box/survival/tsf,
+		/obj/item/storage/medkit/tactical_lite,
+		/obj/item/grenade/smokebomb = 2,
+	)
+	belt = /obj/item/storage/belt/military/army/tsf/full_machinegun
+	ears = /obj/item/radio/headset/heads/captain/alt/tsf
+	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
+
+/datum/id_trim/tsf/marine/machinegunner
+	assignment = "TSF - Marine Machinegunner"
 
 // TSF MARSOC (Unarmed)
 /datum/outfit/tsf/marsoc_unarmed
@@ -240,13 +296,13 @@
 	uniform = /obj/item/clothing/under/rank/tsf/marsoc
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf/officer,
 	)
 	head = /obj/item/clothing/head/beret/tsf_marsoc
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
-	belt = /obj/item/storage/belt/military/army/tsf/full
+	belt = /obj/item/storage/belt/military/army/tsf/full_pistol
 
 /datum/id_trim/tsf/marsoc
 	assignment = "TSF - MARSOC"
@@ -261,6 +317,7 @@
 	id_trim = /datum/id_trim/tsf/marsoc/officer
 	uniform = /obj/item/clothing/under/rank/tsf/marsoc_officer
 	head = /obj/item/clothing/head/beret/tsf_marsoc_officer
+	belt = /obj/item/storage/belt/military/army/tsf/full_pistol
 
 /datum/id_trim/tsf/marsoc/officer
 	assignment = "TSF - MARSOC Officer"
@@ -270,12 +327,12 @@
 /datum/outfit/tsf/marsoc
 	name = "TSF - MARSOC"
 	id = /obj/item/card/id/advanced/tsf
-	id_trim = /datum/id_trim/tsf/marsoc
+	id_trim = /datum/id_trim/tsf/marsoc/breacher
 	uniform = /obj/item/clothing/under/rank/tsf/marsoc
-	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto
+	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/black/suppressed
 	back = /obj/item/mod/control/pre_equipped/tsf_standart
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf,
 		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
@@ -286,31 +343,64 @@
 	mask = /obj/item/clothing/mask/gas/sechailer
 	glasses = /obj/item/clothing/glasses/hud/security/night
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
-	belt = /obj/item/storage/belt/military/army/tsf/full_rifle_standart
-	r_pocket = /obj/item/flashlight/seclite
+	belt = /obj/item/storage/belt/military/army/tsf/full_autorifle_carwo_marsok
+	l_pocket = /obj/item/knife/combat
 
-// TSF MARSOC Officer (MOD)
-/datum/outfit/tsf/marsoc/officer
-	name = "TSF - MARSOC Officer"
-	id_trim = /datum/id_trim/tsf/marsoc/officer
-	uniform = /obj/item/clothing/under/rank/tsf/marsoc_officer
-	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun
-	back = /obj/item/mod/control/pre_equipped/tsf_elite
+/datum/outfit/tsf/marsoc/breacher
+	name = "TSF - MARSOC (Breacher)"
+	id = /obj/item/card/id/advanced/tsf
+	id_trim = /datum/id_trim/tsf/marsoc/breacher
+	uniform = /obj/item/clothing/under/rank/tsf/marsoc
+	suit_store = /obj/item/gun/ballistic/shotgun/riot/renoster/black/sawoff
+	back = /obj/item/mod/control/pre_equipped/tsf_standart
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf,
 		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
-		/obj/item/grenade/c4 = 2,
-		/obj/item/clothing/head/beret/tsf_marsoc_officer
+		/obj/item/grenade/c4/x4 = 2,
+		/obj/item/clothing/head/beret/tsf_marsoc,
 	)
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
 	mask = /obj/item/clothing/mask/gas/sechailer
 	glasses = /obj/item/clothing/glasses/hud/security/night
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
-	belt = /obj/item/storage/belt/military/army/tsf/full_machinegun
-	r_pocket = /obj/item/flashlight/seclite
+	belt = /obj/item/storage/belt/military/army/tsf/full_engineer
+
+/datum/id_trim/tsf/marsoc/breacher
+	assignment = "TSF - MARSOC Breaching Specialist"
+
+// TSF MARSOC Officer (MOD)
+/datum/outfit/tsf/marsoc/officer
+	name = "TSF - MARSOC Officer"
+	id_trim = /datum/id_trim/tsf/marsoc/officer
+	uniform = /obj/item/clothing/under/rank/tsf/marsoc_officer
+	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun/top_fed
+	back = /obj/item/mod/control/pre_equipped/tsf_elite
+	backpack_contents = list(
+		/obj/item/storage/box/survival/tsf/officer,
+		/obj/item/storage/medkit/tactical_lite,
+		/obj/item/grenade/frag = 2,
+		/obj/item/grenade/c4 = 2,
+	)
+	shoes = /obj/item/clothing/shoes/jackboots
+	gloves = /obj/item/clothing/gloves/combat
+	mask = /obj/item/clothing/mask/gas/sechailer
+	glasses = /obj/item/clothing/glasses/hud/security/night
+	ears = /obj/item/radio/headset/heads/captain/alt/tsf
+	belt = /obj/item/storage/belt/military/army/tsf/full_autorifle_carwo_marsok
 	neck = /obj/item/binoculars
+
+/datum/outfit/tsf/marsoc/officer/post_equip(mob/living/carbon/human/squaddie, visuals_only = FALSE)
+	. = ..()
+	var/obj/item/mod/control/mod = squaddie.back
+	if(!istype(mod))
+		return
+	var/obj/item/clothing/helmet = mod.get_part_from_slot(ITEM_SLOT_HEAD)
+	var/obj/item/clothing/head/beret/tsf_marsoc_officer/beret = new(helmet)
+	var/datum/component/hat_stabilizer/component = helmet.GetComponent(/datum/component/hat_stabilizer)
+	component.attach_hat(beret)
+	squaddie.update_clothing(helmet.slot_flags)
 
 // TSF infiltrator
 /datum/outfit/tsf/infiltrator
@@ -319,11 +409,11 @@
 	id_trim = /datum/id_trim/tsf/infiltrator
 	uniform = /obj/item/clothing/under/syndicate
 	suit = /obj/item/clothing/suit/hooded/stealth_cloak/black
-	suit_store = /obj/item/gun/ballistic/automatic/carwo/marksman/suppressed
+	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/black/suppressed
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
-		/obj/item/storage/medkit/emergency,
+		/obj/item/storage/box/survival/tsf/officer,
+		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/smokebomb = 2,
 		/obj/item/grenade/c4 = 2,
 		/obj/item/clothing/head/beret/tsf_infiltrator
@@ -357,7 +447,7 @@
 	suit = /obj/item/clothing/suit/armor/vest/tsf_overcoat
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/lighter/greyscale,
 		/obj/item/storage/fancy/cigarettes/cigars/cohiba,
 		/obj/item/stamp/tsf,
@@ -386,7 +476,7 @@
 	suit = /obj/item/clothing/suit/tsf_suitjacket
 	back = /obj/item/storage/backpack/satchel/leather
 	backpack_contents = list(
-		/obj/item/storage/box/survival/radio,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/lighter,
 		/obj/item/storage/fancy/cigarettes/cigars/cohiba,
 		/obj/item/stamp/tsf,
@@ -410,3 +500,25 @@
 	. = ..()
 	access = list(ACCESS_CENT_CAPTAIN, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_SECURITY - ACCESS_CAPTAIN - ACCESS_AI_UPLOAD)
 
+/obj/item/storage/box/survival/tsf
+	mask_type = /obj/item/clothing/mask/gas/sechailer
+	internal_type = /obj/item/tank/internals/emergency_oxygen/engi
+
+/obj/item/storage/box/survival/tsf/PopulateContents()
+	. = ..()
+	new /obj/item/crowbar(src)
+	new /obj/item/food/rationpack(src)
+	new /obj/item/radio/off(src)
+	new /obj/item/flashlight/seclite(src)
+
+/obj/item/storage/box/survival/tsf/officer
+	medipen_type =  /obj/item/reagent_containers/hypospray/medipen/atropine
+	internal_type = /obj/item/tank/internals/emergency_oxygen/double
+
+/datum/outfit/tsf/post_equip(mob/living/carbon/human/translator, visuals_only = FALSE)
+	. = ..()
+	if(visuals_only)
+		return
+	translator.grant_language(/datum/language/uncommon)
+	translator.remove_blocked_language(/datum/language/uncommon)
+	translator.set_active_language(/datum/language/uncommon)

@@ -31,12 +31,16 @@
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
+	slowdown = 1
+	item_flags = NEEDS_PERMIT | SLOWS_WHILE_IN_HAND
 	var/cover_open = FALSE
 
 /obj/item/gun/ballistic/automatic/dshk/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/automatic_fire, 0.2 SECONDS)
+	AddElement(/datum/element/drag_pickup)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/dshk/examine(mob/user)
 	. = ..()
@@ -102,6 +106,7 @@
 	base_icon_state = "dshk12"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/dshk/c12ga
 	spread = 15
+	pb_knockback = 2
 
 /obj/item/gun/ballistic/automatic/dshk/shotgun/examine_more(mob/user)
 	. = ..()

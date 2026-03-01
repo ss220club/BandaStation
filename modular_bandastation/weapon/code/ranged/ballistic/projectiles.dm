@@ -171,7 +171,7 @@
 /obj/projectile/bullet/c762x39/gauss/on_hit(atom/target, blocked = 0, pierce_hit)
 	. = ..()
 	if(isliving(target))
-		if(blocked > 50 || pierces > 2)
+		if(blocked > 80 || pierces > 2)
 			projectile_piercing = NONE
 			damage = max(0, damage - 20)
 			armour_penetration = max(0, armour_penetration - 20)
@@ -310,6 +310,42 @@
 	armour_penetration = 40
 	shrapnel_type = null
 	embed_type = null
+
+/obj/projectile/bullet/c9x25mm/bs
+	name = "9x25mm NT bluespace bullet"
+	damage = 15
+	wound_bonus = -5
+	exposed_wound_bonus = 5
+	embed_falloff_tile = 0
+	armour_penetration = 15
+	shrapnel_type = null
+	embed_type = null
+	speed = 2
+
+/obj/projectile/bullet/c9x25mm/bs/admin
+	name = "9x25mm NT bluespace-moth bullet"
+	icon = 'icons/obj/toys/plushes.dmi'
+	hitsound = 'sound/mobs/humanoids/moth/scream_moth.ogg'
+	icon_state = "moffplush"
+	damage = 100
+	wound_bonus = 50
+	exposed_wound_bonus = 50
+	embed_falloff_tile = 0
+	armour_penetration = 50
+	speed = 2
+	embed_type = /datum/embedding/moth_bullet
+
+/datum/embedding/moth_bullet
+	pain_mult = 4
+	embed_chance = 100
+	fall_chance = 0
+
+/obj/projectile/bullet/c9x25mm/bs/admin/rubber
+	name = "9x25mm NT bluespace-moth rubber bullet"
+	damage = 0
+	stamina = 30
+	wound_bonus = 0
+	exposed_wound_bonus = 0
 
 // MARK: .223 aka 5.56mm
 /obj/projectile/bullet/a223
@@ -470,6 +506,9 @@
 	sharpness = NONE
 	embed_type = null
 
+/obj/projectile/bullet/incendiary/c9mm
+	leaves_fire_trail = FALSE
+
 // MARK: 10mm
 /obj/projectile/bullet/c10mm/rubber
 	name = "10mm rubber bullet"
@@ -506,6 +545,9 @@
 	sharpness = NONE
 	embed_type = null
 
+/obj/projectile/bullet/incendiary/c45
+	leaves_fire_trail = FALSE
+
 // MARK: 4.6x30mm
 /obj/projectile/bullet/c46x30mm/rubber
 	name = "4.6x30mm rubber bullet"
@@ -523,6 +565,25 @@
 	shrapnel_type = null
 	sharpness = NONE
 	embed_type = null
+
+/obj/projectile/bullet/c46x30mm/hp
+	name = "4.6x30mm hollow-point bullet"
+	damage = 25
+	weak_against_armour = TRUE
+	sharpness = SHARP_EDGED
+	wound_bonus = 20
+	exposed_wound_bonus = 20
+	embed_type = /datum/embedding/bullet/c46x30mm/hp
+
+/datum/embedding/bullet/c46x30mm/hp
+	embed_chance = 75
+	fall_chance = 3
+	jostle_chance = 4
+	ignore_throwspeed_threshold = TRUE
+	pain_stam_pct = 0.4
+	pain_mult = 5
+	jostle_pain_mult = 6
+	rip_time = 1 SECONDS
 
 // MARK: .310 Strilka
 /obj/projectile/bullet/strilka310/rubber
@@ -640,3 +701,10 @@
 	damage = 60
 	armour_penetration = 40
 	wound_falloff_tile = -1
+
+//MARK: Shotgun shells
+/obj/projectile/bullet/shotgun_breaching/on_hit(atom/target, blocked = 0, pierce_hit)
+	if(istype(target, /obj/structure/blob) || istype(target, /obj/structure/carp_rift))
+		target.take_damage(30, damage_type, 0)
+		return TRUE
+	return ..()

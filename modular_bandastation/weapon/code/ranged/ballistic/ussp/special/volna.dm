@@ -29,6 +29,8 @@
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
+	slowdown = 1
+	item_flags = NEEDS_PERMIT | SLOWS_WHILE_IN_HAND
 	var/cover_open = FALSE
 
 /datum/atom_skin/volna
@@ -48,6 +50,8 @@
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/volna)
 	AddComponent(/datum/component/automatic_fire, 0.2 SECONDS)
+	AddElement(/datum/element/drag_pickup)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/volna/examine(mob/user)
 	. = ..()

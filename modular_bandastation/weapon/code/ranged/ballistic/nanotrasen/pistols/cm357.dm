@@ -19,6 +19,7 @@
 	can_suppress = TRUE
 	suppressor_x_offset = 0
 	suppressor_y_offset = 0
+	recoil = 1
 
 /obj/item/gun/ballistic/automatic/pistol/cm357/add_seclight_point()
 	AddComponent(\

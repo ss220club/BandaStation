@@ -31,6 +31,7 @@
 /obj/item/gun/ballistic/automatic/as32/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/as32/add_seclight_point()
 	AddComponent(\

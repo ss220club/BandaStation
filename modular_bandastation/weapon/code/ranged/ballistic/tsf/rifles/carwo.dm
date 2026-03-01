@@ -29,6 +29,7 @@
 /obj/item/gun/ballistic/automatic/carwo/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/carwo/add_seclight_point()
 	AddComponent(\
@@ -157,6 +158,12 @@
 	icon_state = "infanterie_black"
 	worn_icon_state = "infanterie_black"
 	inhand_icon_state = "infanterie_black"
+
+/obj/item/gun/ballistic/automatic/carwo/auto/black/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	spawnwithmagazine = /obj/item/ammo_box/magazine/c40sol_rifle/long
 
 /obj/item/gun/ballistic/automatic/carwo/auto/black/no_mag
 	spawnwithmagazine = FALSE
