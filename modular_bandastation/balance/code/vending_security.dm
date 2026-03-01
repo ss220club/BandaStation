@@ -12,5 +12,4 @@
 		/obj/item/holosign_creator/security = 2,
 		/obj/item/gun_maintenance_supplies = 2,
 		/obj/item/storage/belt/judobelt = 3,
-		/obj/item/clothing/accessory/bodycam = 4,
 	)
