@@ -9,6 +9,8 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_north_x, FOV_MASK_CARDINAL_NORTH_X)
 GLOBAL_VAR_INIT(fov_mask_cardinal_north_y, FOV_MASK_CARDINAL_NORTH_Y)
 GLOBAL_VAR_INIT(fov_mask_cardinal_east_x, FOV_MASK_CARDINAL_EAST_X)
 GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
+GLOBAL_VAR_INIT(fov_darkness_blend_threshold, 0.5)
+GLOBAL_VAR_INIT(fov_darkness_blend_animate_time, 3)
 // BANDASTATION ADDITION END: FOV
 
 // BANDASTATION EDIT START: FOV
@@ -157,27 +159,33 @@ GLOBAL_VAR_INIT(fov_mask_cardinal_east_y, FOV_MASK_CARDINAL_EAST_Y)
 	sample_light()
 
 /datum/component/fov_handler/proc/sample_light()
-	// sample light on two tiles infront of owner
+	// sample light: own turf + tile in front + tile behind (3 tiles total), average brightness
 	var/mob/living/owner = parent
 	if(!istype(owner))
 		return
 	var/turf/my_turf = get_turf(owner)
 	if(!my_turf)
-		dark_mask.alpha = 0
+		animate(dark_mask, alpha = 0, time = GLOB.fov_darkness_blend_animate_time, easing = LINEAR_EASING)
 		return
-	var/turf/t1 = get_step(my_turf, owner.dir)
-	var/turf/t2 = t1 ? get_step(t1, owner.dir) : null
-	var/lum = 0
-	var/count = 0
-	if(t1)
-		lum += t1.get_lumcount()
+	var/turf/t_front = get_step(my_turf, owner.dir)
+	//var/turf/t_behind = get_step(my_turf, turn(owner.dir, 180))
+	var/lum = my_turf.get_lumcount()
+	var/count = 1
+	if(t_front)
+		lum += t_front.get_lumcount()
 		count++
-	if(t2)
-		lum += t2.get_lumcount()
-		count++
-	lum = count ? (lum / count) : 0.5
-	var/factor = 1 - lum  // 0 = bright, 1 = dark
-	dark_mask.alpha = round(factor * 255)
+	// if(t_behind)
+	// 	lum += t_behind.get_lumcount()
+	// 	count++
+	lum = lum / count
+	var/threshold = GLOB.fov_darkness_blend_threshold
+	var/factor = 0
+	if(lum < threshold)
+		// lerp from 0 (at lum = threshold) to 1 (at lum = 0)
+		factor = threshold > 0 ? (1 - lum / threshold) : 1
+	factor = clamp(factor, 0, 1)
+	var/target_alpha = round(factor * 255)
+	animate(dark_mask, alpha = target_alpha, time = GLOB.fov_darkness_blend_animate_time, easing = LINEAR_EASING)
 
 /datum/component/fov_handler/proc/_tick_light_sampling()
 	sample_light()
