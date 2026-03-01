@@ -14,6 +14,7 @@
 	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT)
 	layer = OBJ_LAYER
 	interaction_flags_mouse_drop = ALLOW_RESTING
+	plane = FOV_CULLED_MOB_PLANE // BANDASTATION EDIT: FOV
 
 	var/buildstacktype = /obj/item/stack/sheet/iron
 	var/buildstackamount = 1
