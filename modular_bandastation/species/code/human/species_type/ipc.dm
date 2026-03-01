@@ -121,12 +121,8 @@
 	var/list/ipc_chassis_modifiers = list()
 
 	// ---- Косметика ----
-	/// Аксессуар на голове (state из ipc_head_accessories.dmi, "" = нет)
-	var/ipc_head_accessory = ""
-	/// Текущее выражение экрана (state из ipc_face.dmi, "" = нет оверлея)
+	/// Текущее выражение экрана (задаётся только в игре через абилку, не сохраняется)
 	var/ipc_face_state = ""
-	/// Включён ли хвост
-	var/ipc_tail_enabled = FALSE
 
 /datum/species/ipc/get_species_description()
 	return "IPC (Integrated Positronic Chassis) — искусственные синтетики на основе позитронного ядра. \

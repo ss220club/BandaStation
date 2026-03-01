@@ -5,7 +5,6 @@ import { useBackend } from '../../../backend';
 import type {
   IPCBrainType,
   IPCChassisBrand,
-  IPCCosmeticOption,
   IPCCustomization,
   IPCHEFManufacturer,
   PreferencesMenuData,
@@ -94,32 +93,8 @@ type SlotConfig = {
   label: string;
   icon: string;
   color: string;
-  type: 'chassis' | 'brain' | 'hef' | 'cosmetic_acc' | 'cosmetic_tail' | 'cosmetic_face';
+  type: 'chassis' | 'brain' | 'hef';
 };
-
-const COSMETIC_SLOTS: SlotConfig[] = [
-  {
-    key: 'head_accessory',
-    label: 'АКСЕССУАР',
-    icon: 'hat-cowboy',
-    color: CYBER_COLORS.cyan,
-    type: 'cosmetic_acc',
-  },
-  {
-    key: 'tail',
-    label: 'ХВОСТ',
-    icon: 'fish',
-    color: CYBER_COLORS.magenta,
-    type: 'cosmetic_tail',
-  },
-  {
-    key: 'face',
-    label: 'ЭКРАН',
-    icon: 'tv',
-    color: CYBER_COLORS.green,
-    type: 'cosmetic_face',
-  },
-];
 
 // Все слоты в одном списке - основные и HEF
 const MAIN_SLOTS: SlotConfig[] = [
@@ -212,10 +187,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   const brainTypes: IPCBrainType[] = ipcData?.brain_types || [];
   const hefManufacturers: IPCHEFManufacturer[] =
     ipcData?.hef_manufacturers || [];
-  const headAccessories: IPCCosmeticOption[] =
-    ipcData?.head_accessories || [];
-  // face_options приходит из get_ui_data (фильтрация по бренду)
-  const faceOptions: IPCCosmeticOption[] = data.face_options || [];
 
   const isHEF = customization.chassis_brand === 'hef';
 
@@ -235,23 +206,10 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     if (slot.type === 'brain') {
       return currentBrain?.name || 'Positronic';
     }
-    if (slot.type === 'cosmetic_acc') {
-      const acc = customization.head_accessory || '';
-      if (!acc) return 'Нет';
-      return headAccessories.find((o) => o.key === acc)?.name || acc;
-    }
-    if (slot.type === 'cosmetic_tail') {
-      return customization.tail_enabled ? 'Включён' : 'Выключен';
-    }
-    if (slot.type === 'cosmetic_face') {
-      const face = customization.face_state || '';
-      if (!face) return 'По умолчанию';
-      return faceOptions.find((o) => o.key === face)?.name || face;
-    }
     const manufacturerKey =
       customization[slot.key as keyof IPCCustomization] || 'unbranded';
     const manufacturer = hefManufacturers.find(
-      (m) => m.key === String(manufacturerKey),
+      (m) => m.key === manufacturerKey,
     );
     return manufacturer?.name || 'Unbranded';
   };
@@ -264,17 +222,10 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     if (slot.type === 'brain') {
       return BRAIN_COLORS[customization.brain_type] || BRAIN_COLORS.positronic;
     }
-    if (
-      slot.type === 'cosmetic_acc' ||
-      slot.type === 'cosmetic_tail' ||
-      slot.type === 'cosmetic_face'
-    ) {
-      return slot.color;
-    }
     const manufacturerKey =
       customization[slot.key as keyof IPCCustomization] || 'unbranded';
     // Normalize key for color lookup
-    const normalizedKey = String(manufacturerKey).toLowerCase().replace(/[\s-]/g, '_');
+    const normalizedKey = manufacturerKey.toLowerCase().replace(/[\s-]/g, '_');
     return BRAND_COLORS[normalizedKey] || BRAND_COLORS.general || '#888888';
   };
 
@@ -411,63 +362,10 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
       );
     }
 
-    const slot = [...MAIN_SLOTS, ...HEF_SLOTS, ...COSMETIC_SLOTS].find(
+    const slot = [...MAIN_SLOTS, ...HEF_SLOTS].find(
       (s) => s.key === activeSlot,
     );
     if (!slot) return null;
-
-    // Хвост — особый случай: просто две кнопки вкл/выкл
-    if (slot.type === 'cosmetic_tail') {
-      const tailEnabled = !!customization.tail_enabled;
-      return (
-        <Box style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-          <Box
-            style={{
-              padding: '0.75rem 1rem',
-              background: `linear-gradient(90deg, rgba(0,240,255,0.15), transparent)`,
-              borderBottom: `2px solid ${slot.color}`,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-            }}
-          >
-            <Icon name={slot.icon} style={{ color: slot.color, fontSize: '1.1rem' }} />
-            <Box style={{ fontSize: '1rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: slot.color }}>
-              {slot.label}
-            </Box>
-          </Box>
-          <Box style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {[{ val: false, label: 'Выключен' }, { val: true, label: 'Включён' }].map(({ val, label }) => (
-              <Box
-                key={String(val)}
-                style={{
-                  background: tailEnabled === val
-                    ? `linear-gradient(135deg, rgba(57,255,20,0.15) 0%, rgba(0,0,0,0.4) 100%)`
-                    : 'rgba(0,0,0,0.3)',
-                  border: tailEnabled === val
-                    ? `2px solid ${CYBER_COLORS.green}`
-                    : '1px solid rgba(0,240,255,0.2)',
-                  borderRadius: '4px',
-                  padding: '0.75rem 1rem',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
-                onClick={() => act('set_tail_enabled', { enabled: val })}
-              >
-                <Box style={{ fontSize: '0.9rem', color: tailEnabled === val ? CYBER_COLORS.green : CYBER_COLORS.textPrimary, fontWeight: 600 }}>
-                  {label}
-                </Box>
-                {tailEnabled === val && (
-                  <Icon name="check" style={{ color: CYBER_COLORS.green, fontSize: '1.1rem' }} />
-                )}
-              </Box>
-            ))}
-          </Box>
-        </Box>
-      );
-    }
 
     // Определяем опции для выбора
     let options: { key: string; name: string; description?: string }[] = [];
@@ -484,10 +382,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
         name: b.name,
         description: b.description,
       }));
-    } else if (slot.type === 'cosmetic_acc') {
-      options = headAccessories.map((o) => ({ key: o.key, name: o.name }));
-    } else if (slot.type === 'cosmetic_face') {
-      options = faceOptions.map((o) => ({ key: o.key, name: o.name }));
     } else {
       options = hefManufacturers.map((m) => ({
         key: m.key,
@@ -501,12 +395,8 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
       currentValue = customization.chassis_brand;
     } else if (slot.type === 'brain') {
       currentValue = customization.brain_type;
-    } else if (slot.type === 'cosmetic_acc') {
-      currentValue = customization.head_accessory || '';
-    } else if (slot.type === 'cosmetic_face') {
-      currentValue = customization.face_state || '';
     } else {
-      currentValue = String(customization[slot.key as keyof IPCCustomization] || '');
+      currentValue = customization[slot.key as keyof IPCCustomization] || '';
     }
 
     return (
@@ -548,11 +438,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                 ? BRAND_ICONS[option.key] || 'robot'
                 : slot.type === 'brain'
                   ? BRAIN_ICONS[option.key] || 'brain'
-                  : slot.type === 'cosmetic_acc'
-                    ? 'hat-cowboy'
-                    : slot.type === 'cosmetic_face'
-                      ? 'desktop'
-                      : 'industry';
+                  : 'industry';
             const optionColor = getOptionColor(option.key);
 
             return (
@@ -578,10 +464,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     act('set_chassis_brand', { brand: option.key });
                   } else if (slot.type === 'brain') {
                     act('set_brain_type', { brain_type: option.key });
-                  } else if (slot.type === 'cosmetic_acc') {
-                    act('set_head_accessory', { accessory: option.key });
-                  } else if (slot.type === 'cosmetic_face') {
-                    act('set_face_state', { face: option.key });
                   } else {
                     act('set_hef_part', {
                       part: slot.key,
@@ -772,37 +654,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
             >
               {/* Основные слоты */}
               {MAIN_SLOTS.map(renderSlot)}
-
-              {/* Разделитель косметики */}
-              <Box
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '0.5rem 0',
-                  margin: '0.25rem 0',
-                }}
-              >
-                <Box
-                  style={{
-                    fontSize: '0.7rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    color: CYBER_COLORS.cyan,
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  Косметика
-                </Box>
-                <Box
-                  style={{
-                    flex: 1,
-                    height: '1px',
-                    background: `linear-gradient(90deg, rgba(0,240,255,0.4), transparent)`,
-                    marginLeft: '0.5rem',
-                  }}
-                />
-              </Box>
-              {COSMETIC_SLOTS.map(renderSlot)}
 
               {/* HEF слоты - только если HEF режим */}
               {isHEF && (

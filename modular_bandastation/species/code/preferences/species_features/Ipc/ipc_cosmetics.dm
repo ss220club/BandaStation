@@ -173,6 +173,64 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	chest.add_bodypart_overlay(overlay)
 
 // ============================================
+// PREFERENCES: КОСМЕТИКА КПБ
+// Отображаются в стандартном меню фичей расы.
+// ============================================
+
+/datum/preference/choiced/ipc_head_accessory
+	savefile_key = "feature_ipc_head_accessory"
+	savefile_identifier = PREFERENCE_CHARACTER
+	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+	main_feature_name = "Аксессуар головы"
+	can_randomize = FALSE
+
+/datum/preference/choiced/ipc_head_accessory/init_possible_values()
+	var/list/values = list("")
+	for(var/key in GLOB.ipc_head_accessory_options)
+		values += key
+	return values
+
+/datum/preference/choiced/ipc_head_accessory/create_default_value()
+	return ""
+
+/datum/preference/choiced/ipc_head_accessory/is_accessible(datum/preferences/preferences)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/selected_species = preferences.read_preference(/datum/preference/choiced/species)
+	return selected_species == SPECIES_IPC
+
+/datum/preference/choiced/ipc_head_accessory/apply_to_human(mob/living/carbon/human/target, value)
+	if(!istype(target.dna?.species, /datum/species/ipc))
+		return
+	apply_ipc_head_accessory(target, value)
+
+/datum/preference/choiced/ipc_tail
+	savefile_key = "feature_ipc_tail"
+	savefile_identifier = PREFERENCE_CHARACTER
+	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+	main_feature_name = "Хвост"
+	can_randomize = FALSE
+
+/datum/preference/choiced/ipc_tail/init_possible_values()
+	return list("none", "plug")
+
+/datum/preference/choiced/ipc_tail/create_default_value()
+	return "none"
+
+/datum/preference/choiced/ipc_tail/is_accessible(datum/preferences/preferences)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/selected_species = preferences.read_preference(/datum/preference/choiced/species)
+	return selected_species == SPECIES_IPC
+
+/datum/preference/choiced/ipc_tail/apply_to_human(mob/living/carbon/human/target, value)
+	if(!istype(target.dna?.species, /datum/species/ipc))
+		return
+	apply_ipc_tail(target, value == "plug")
+
+// ============================================
 // BRAND FACE FILTERING
 // ============================================
 
