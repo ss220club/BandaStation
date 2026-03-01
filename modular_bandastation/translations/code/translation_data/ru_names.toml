@@ -28051,15 +28051,6 @@ instrumental = "комнатой отдыха шахтеров"
 prepositional = "комнате отдыха шахтеров"
 gender = "male"
 
-["Bitrunning Den"]
-nominative = "битраннерская"
-genitive = "битраннерской"
-dative = "битраннерской"
-accusative = "битраннерскую"
-instrumental = "битраннерской"
-prepositional = "битраннерской"
-gender = "female"
-
 ["Cargo Bay Lower Floor"]
 nominative = "нижний этаж отдела снабжения"
 genitive = "нижнего этажа отдела снабжения"
@@ -31867,4 +31858,556 @@ dative = "большому символу"
 accusative = "большого символа"
 instrumental = "большим символом"
 prepositional = "большом символе"
+gender = "male"
+
+# MARK: Bitrun
+
+["oval sunglasses"]
+nominative = "овальные солнцезащитные очки"
+genitive = "овальных солнцезащитных очков"
+dative = "овальным солнцезащитным очкам"
+accusative = "овальные солнцезащитные очки"
+instrumental = "овальными солнцезащитными очками"
+prepositional = "овальных солнцезащитных очках"
+gender = "plural"
+
+["leather trenchcoat"]
+nominative = "кожаный тренч"
+genitive = "кожаного тренча"
+dative = "кожаному тренчу"
+accusative = "кожаное тренч"
+instrumental = "кожаным тренчем"
+prepositional = "кожаном тренче"
+gender = "neuter"
+
+["bitrunning debug item"]
+nominative = "битранерский отладочный предмет"
+genitive = "битранерского отладочного предмета"
+dative = "битранерскому отладочному предмету"
+accusative = "битранерский отладочный предмет"
+instrumental = "битранерским отладочным предметом"
+prepositional = "битранерском отладочном предмете"
+gender = "male"
+
+["hololadder"]
+nominative = "голографическая лестница"
+genitive = "голографической лестницы"
+dative = "голографической лестнице"
+accusative = "голографическую лестницу"
+instrumental = "голографической лестницой"
+prepositional = "голографической лестнице"
+gender = "female"
+
+["host monitor"]
+nominative = "главный монитор"
+genitive = "главного монитора"
+dative = "главному монитору"
+accusative = "главный монитор"
+instrumental = "главным монитором"
+prepositional = "главном мониторе"
+gender = "male"
+
+["base class cache"]
+nominative = "кэш базового класса"
+genitive = "кэша базового класса"
+dative = "кэшу базового класса"
+accusative = "кэш базового класса"
+instrumental = "кэшом базового класса"
+prepositional = "кэше базового класса"
+gender = "male"
+
+["encrypted cache"]
+nominative = "зашифрованный кэш"
+genitive = "зашифрованного кэша"
+dative = "зашифрованному кэшу"
+accusative = "зашифрованный кэш"
+instrumental = "зашифрованным кэшом"
+prepositional = "зашифрованном кэше"
+gender = "male"
+
+["decrypted cache"]
+nominative = "расшифрованный кэш"
+genitive = "расшифрованного кэша"
+dative = "расшифрованному кэшу"
+accusative = "расшифрованный кэш"
+instrumental = "расшифрованным кэшом"
+prepositional = "расшифрованном кэше"
+gender = "male"
+
+["bitrunning supplies order console"]
+nominative = "консоль заказа расходных материалов битрана"
+genitive = "консоли заказа расходных материалов битрана"
+dative = "консоли заказа расходных материалов битрана"
+accusative = "консоль заказа расходных материалов битрана"
+instrumental = "консолью заказа расходных материалов битрана"
+prepositional = "консоли заказа расходных материалов битрана"
+gender = "female"
+
+["quantum server"]
+nominative = "квантовый сервер"
+genitive = "квантового сервера"
+dative = "квантовуму серверу"
+accusative = "квантовый сервер"
+instrumental = "квантовым сервером"
+prepositional = "квантовом сервере"
+gender = "male"
+
+["lockbox"]
+nominative = "запирающийся ящик"
+genitive = "запирающегося ящика"
+dative = "запирающемуся ящику"
+accusative = "запирающийся ящик"
+instrumental = "запирающимся ящиком"
+prepositional = "запирающемся ящике"
+gender = "male"
+
+["lockbox of clusterbangs"]
+nominative = "запертый контейнер с кластерными гранатами"
+genitive = "запертого контейнера с кластерными гранатами"
+dative = "запертому контейнеру с кластерными гранатами"
+accusative = "запертый контейнер с кластерными гранатами"
+instrumental = "запертым контейнером с кластерными гранатами"
+prepositional = "запертом контейнере с кластерными гранатами"
+gender = "male"
+
+["order lockbox"]
+nominative = "запирающийся ящик для заказов"
+genitive = "запирающегося ящика для заказов"
+dative = "запирающемуся ящику для заказов"
+accusative = "запирающийся ящик для заказов"
+instrumental = "запирающимся ящиком для заказов"
+prepositional = "зопирающимся ящике для заказов"
+gender = "male"
+
+["dueling pistol case"]
+nominative = "футляр для дуэльного пистолета"
+genitive = "футляра для дуэльного пистолета"
+dative = "футляру для дуэльного пистолета"
+accusative = "футляр для дуэльного пистолета"
+instrumental = "футляром для дуэльного пистолета"
+prepositional = "футляре для дуэльного пистолета"
+gender = "male"
+
+["base class curiosity"]
+nominative = "редкость базового класса"
+genitive = "редкости базового класса"
+dative = "редкости базового класса"
+accusative = "редкость базового класса"
+instrumental = "редкостью базового класса"
+prepositional = "редкости базового класса"
+gender = "female"
+
+["encrypted curiosity"]
+nominative = "зашифрованная редкость"
+genitive = "зашифрованной редкости"
+dative = "зашифрованной редкости"
+accusative = "зашифрованную редкость"
+instrumental = "зашифрованной редкостью"
+prepositional = "зашифрованной редкости"
+gender = "female"
+
+["decrypted curiosity"]
+nominative = "расшифрованная редкость"
+genitive = "расшифрованной редкости"
+dative = "расшифрованной редкости"
+accusative = "расшифрованную редкость"
+instrumental = "расшифрованной редкостью"
+prepositional = "расшифрованной редкости"
+gender = "female"
+
+["crewmember"]
+nominative = "член экипажа"
+genitive = "члена экипажа"
+dative = "члену экипажа"
+accusative = "члена экипажа"
+instrumental = "членом экипажа"
+prepositional = "члене экипажа"
+gender = "male"
+
+["medical doctor"]
+nominative = "врач"
+genitive = " врача"
+dative = "врачу"
+accusative = "врача"
+instrumental = "врачём"
+prepositional = "враче"
+gender = "male"
+
+["security officer"]
+nominative = "офицер слудбы безопасности"
+genitive = " офицера слудбы безопасности"
+dative = "офицеру слудбы безопасности"
+accusative = "офицера слудбы безопасности"
+instrumental = "офицером слудбы безопасности"
+prepositional = "офицере слудбы безопасности"
+gender = "male"
+
+["engineer"]
+nominative = "инженер"
+genitive = " инженера"
+dative = "инженеру"
+accusative = "инженера"
+instrumental = "инженером"
+prepositional = "инженере"
+gender = "male"
+
+["assistant"]
+nominative = "ассистент"
+genitive = " ассистента"
+dative = "ассистенту"
+accusative = "ассистента"
+instrumental = "ассистентом"
+prepositional = "ассистенте"
+gender = "male"
+
+["senior crewmember"]
+nominative = "старший член экипажа"
+genitive = " старшего член экипажа"
+dative = "старшему член экипажа"
+accusative = "старшего член экипажа"
+instrumental = "старшим член экипажа"
+prepositional = "старшем член экипажа"
+gender = "male"
+
+
+["chief medical officer"]
+nominative = "главный врач"
+genitive = "главного варча"
+dative = "главному врачу"
+accusative = "главного врача"
+instrumental = "главным врачом"
+prepositional = "главном враче"
+gender = "male"
+
+["chief engineer"]
+nominative = "старший инженер"
+genitive = "старшего инженера"
+dative = "старшему инженеру"
+accusative = "старшего инженера"
+instrumental = "старшим инженером"
+prepositional = "старшем инженере"
+gender = "male"
+
+["head of security"]
+nominative = "глава службы безопасности"
+genitive = "главы службы безопасности"
+dative = "главе службы безопасности"
+accusative = "главу службы безопасности"
+instrumental = "главой службы безопасности"
+prepositional = "главе службы безопасности"
+gender = "male"
+
+["Islander"]
+nominative = "островитянин"
+genitive = "островитянина"
+dative = "островитянину"
+accusative = "островитянина"
+instrumental = "островитянином"
+prepositional = "островитянине"
+gender = "male"
+
+["Mysterious aura"]
+nominative = "мистическая аура"
+genitive = "мистической ауры"
+dative = "мистической ауре"
+accusative = "мистическую ауру"
+instrumental = "мистической аурой"
+prepositional = "мистической ауре"
+gender = "female"
+
+["Bitrunning hololadder spawn"]
+nominative = "место появления голографичесской лестницы битрана"
+genitive = "места появления голографичесской лестницы битрана"
+dative = "месту появления голографичесской лестницы битрана"
+accusative = "место появления голографичесской лестницы битрана"
+instrumental = "местом появления голографичесской лестницы битрана"
+prepositional = "месте появления голографичесской лестницы битрана"
+gender = "neuter"
+
+["Bitrunning permanent exit"]
+nominative = "постоянный выход из битрана"
+genitive = "постоянного выхода из битрана"
+dative = "постоянному выходу из битрана"
+accusative = "постоянный выход из битрана"
+instrumental = "постоянным выходом из битрана"
+prepositional = "постоянном выходе из битрана"
+gender = "male"
+
+["Bitrunning goal turf"]
+nominative = "место для целей битрана"
+genitive = "места для целей битрана"
+dative = "месту для целей битрана"
+accusative = "место для целей битрана"
+instrumental = "местом для целей битрана"
+prepositional = "месте для целей битрана"
+gender = "neuter"
+
+["Bitrunning crate spawn"]
+nominative = "место появления ящиков битрана"
+genitive = "места появления ящиков битрана"
+dative = "месту появления ящиков битрана"
+accusative = "место появления ящиков битрана"
+instrumental = "местом появления ящиков битрана"
+prepositional = "месте появления ящиков битрана"
+gender = "neuter"
+
+["Bitrunning curiosity spawn"]
+nominative = "место появления точек интереса битрана"
+genitive = "места появления точек интереса битрана"
+dative = "месту появления точек интереса битрана"
+accusative = "место появления точек интереса битрана"
+instrumental = "местом появления точек интереса битрана"
+prepositional = "месте появления точек интереса битрана"
+gender = "neuter"
+
+["Bitrunning Goal Crate Randomizer"]
+nominative = "рандомизатор ящиков с целями битрана"
+genitive = "рандомизатора ящиков с целями битрана"
+dative = "рандомизатору ящиков с целями битрана"
+accusative = "рандомизатор ящиков с целями битрана"
+instrumental = "рандомизатором ящиков с целями битрана"
+prepositional = "рандомизаторе ящиков с целями битрана"
+gender = "male"
+
+["Bitrunning modular mob segment"]
+nominative = "модульный сегмент с мобами битрана"
+genitive = "модульного сегмента с мобами битрана"
+dative = "модульному сегменту с мобами битрана"
+accusative = "модульный сегмент с мобами битрана"
+instrumental = "модульным сегментом с мобами битрана"
+prepositional = "модульном сегменте с мобами битрана"
+gender = "male"
+
+["factory worker ID"]
+nominative = "ID-карта работника завода"
+genitive = "ID-карты работника завода"
+dative = "ID-карте работника завода"
+accusative = "ID-карту работника завода"
+instrumental = "ID-картой работника завода"
+prepositional = "ID-карте работника завода"
+gender = "female"
+
+["factory quartermaster ID"]
+nominative = "ID-карта заводского квартермейстера"
+genitive = "ID-карты заводского квартермейстера"
+dative = "ID-карте заводского квартермейстера"
+accusative = "ID-карту заводского квартермейстера"
+instrumental = "ID-картой заводского квартермейстера"
+prepositional = "ID-карте заводского квартермейстера"
+gender = "female"
+
+["Factory Worker"]
+nominative = "заводчанин"
+genitive = "заводчанина"
+dative = "заводчанину"
+accusative = "заводчанина"
+instrumental = "заводчанином"
+prepositional = "заводчанине"
+gender = "male"
+
+["Factory Guard"]
+nominative = "охранник завода"
+genitive = "охранника завода"
+dative = "охраннику завода"
+accusative = "охранника завода"
+instrumental = "охранником завода"
+prepositional = "охраннике завода"
+gender = "male"
+
+["Factory Quartermaster"]
+nominative = "заводской квартермейстер"
+genitive = "заводского квартермейстер"
+dative = "заводскому квартермейстер"
+accusative = "заводского квартермейстер"
+instrumental = "заводским квартермейстер"
+prepositional = "заводском квартермейстер"
+gender = "male"
+
+["icy cliff"]
+nominative = "ледяной шпиль"
+genitive = "ледяного шпиля"
+dative = "ледяному шпилю"
+accusative = "ледяной шпиль"
+instrumental = "ледяным шпилем"
+prepositional = "ледяном шпиле"
+gender = "male"
+
+["plasma lake"]
+nominative = "плазменное озеро"
+genitive = "плазменного озера"
+dative = "плазменному озеру"
+accusative = "плазменное озеро"
+instrumental = "плазменным озером"
+prepositional = "плазменном озере"
+gender = "male"
+
+["Ice Climber"]
+nominative = "альпинист"
+genitive = "альпиниста"
+dative = "альпинисту"
+accusative = "альпиниста"
+instrumental = "альпинистом"
+prepositional = "альпинисте"
+gender = "male"
+
+["Bitrunning"]
+nominative = "битранерская"
+genitive = "битранерской"
+dative = "битранерской"
+accusative = "битранерскую"
+instrumental = "битранерской"
+prepositional = "битранерской"
+gender = "female"
+
+["Bitrunning Den"]
+nominative = "битранерское помещение"
+genitive = "битранерского помещения"
+dative = "битранерскому помещению"
+accusative = "битранерское помещение"
+instrumental = "битранерским помещением"
+prepositional = "битранерском помещении"
+gender = "neuter"
+
+["Virtual Domain Ruins"]
+nominative = "виртуальный домен руин"
+genitive = "виртуального домена руин"
+dative = "виртуальному домену руин"
+accusative = "виртуальный домен руин"
+instrumental = "виртуальным доменом руин"
+prepositional = "виртуальном домене руин"
+gender = "plural"
+
+["Virtual Domain Safehouse"]
+nominative = "виртуальный домен убежища"
+genitive = "виртуального домена убежища"
+dative = "виртуальному домену убежища"
+accusative = "виртуальный домен убежища"
+instrumental = "виртуальным доменом убежища"
+prepositional = "виртуальном домене убежища"
+gender = "male"
+
+["Virtual Domain Lava Ruins"]
+nominative = "виртуальный домен лавовые руины"
+genitive = "виртуального домена лавовые руины"
+dative = "виртуальному домену лавовые руины"
+accusative = "виртуальный домен лавовые руины"
+instrumental = "виртуальным доменом лавовые руины"
+prepositional = "виртуальном домене лавовые руины"
+gender = "male"
+
+["Virtual Domain Ice Ruins"]
+nominative = "виртуальный домен ледяные руины"
+genitive = "виртуального домена ледяные руины"
+dative = "виртуальному домену ледяные руины"
+accusative = "виртуальный домен ледяные руины"
+instrumental = "виртуальным доменом ледяные руины"
+prepositional = "виртуальном домене ледяные руины"
+gender = "male"
+
+["Virtual Domain Unexplored Location"]
+nominative = "виртуальный домен неиследованное пространсво"
+genitive = "виртуального домена неиследованное пространсво"
+dative = "виртуальному домену неиследованное пространсво"
+accusative = "виртуальный домен неиследованное пространсво"
+instrumental = "виртуальным доменом лнеиследованное пространсво"
+prepositional = "виртуальном домене неиследованное пространсво"
+gender = "male"
+
+["Virtual Domain Space"]
+nominative = "виртуальный домен космос"
+genitive = "виртуального домена космос"
+dative = "виртуальному домену космос"
+accusative = "виртуальный домен космос"
+instrumental = "виртуальным доменом космос"
+prepositional = "виртуальном домене космос"
+gender = "male"
+
+["Virtual Domain Safe Zone"]
+nominative = "виртуальный домен безопасная зона"
+genitive = "виртуального домена безопасная зона"
+dative = "виртуальному домену безопасная зона"
+accusative = "виртуальный домен безопасная зона"
+instrumental = "виртуальным доменом безопасная зона"
+prepositional = "виртуальном домене безопасная зона"
+gender = "male"
+
+["a virtual beach bum"]
+nominative = "виртуальный пляжный бомж"
+genitive = "виртуального пляжного бомжа"
+dative = "виртуальному пляжному бомжу"
+accusative = "виртуального пляжного бомжа"
+instrumental = "виртуальным пляжным бомжом"
+prepositional = "виртуальном пляжном бомже"
+gender = "male"
+
+["virtual lifeguard sleeper"]
+nominative = "виртуальный спящий спасатель"
+genitive = "виртуального спящего спасателя"
+dative = "виртуальному спящему спасателю"
+accusative = "виртуального спящего спасателя"
+instrumental = "виртуальным спящим спасателем"
+prepositional = "виртуальном спящем спасателе"
+gender = "male"
+
+["virtual bartender sleeper"]
+nominative = "виртуальный спящий бармен"
+genitive = "виртуального спящего бармена"
+dative = "виртуальному спящему бармену"
+accusative = "виртуального спящего бармена"
+instrumental = "виртуальным спящим барменом"
+prepositional = "виртуальном спящем бармене"
+gender = "male"
+
+["Virtual Pirate Remains"]
+nominative = "виртуальные останки пирата"
+genitive = "виртуальных останков пирата"
+dative = "виртуальным останкам пирата"
+accusative = "виртуальные останки пирата"
+instrumental = "виртуальными останками пирата"
+prepositional = "виртуальных останках пирата"
+gender = "plural"
+
+["Virtual Pirate"]
+nominative = "виртуальный пират"
+genitive = "виртуального пирата"
+dative = "виртуальному пирату"
+accusative = "виртуального пирата"
+instrumental = "виртуальным пиратом"
+prepositional = "виртуальном пирате"
+gender = "male"
+
+["Virtual Syndicate Sleeper"]
+nominative = "виртуальный спящий оперативник Синдиката"
+genitive = "виртуального спящего оперативника Синдиката"
+dative = "виртуальному спящему оперативнику Синдиката"
+accusative = "виртуального спящего оперативника Синдиката"
+instrumental = "виртуальным спящим оперативником Синдиката"
+prepositional = "виртуальном спящем оперативнике Синдиката"
+gender = "male"
+
+["circuit floor"]
+nominative = "контурный пол"
+genitive = "контурного пола"
+dative = "контурному полу"
+accusative = "контурный пол"
+instrumental = "контурным полом"
+prepositional = "контурном поле"
+gender = "male"
+
+["tear in the fabric of reality"]
+nominative = "разрыв в ткани реальности"
+genitive = "разрыва в ткани реальности"
+dative = "разрыву в ткани реальности"
+accusative = "разрыв в ткани реальности"
+instrumental = "разрывом в ткани реальности"
+prepositional = "разрыве в ткани реальности"
+gender = "male"
+
+["virtual domain baseturf editor"]
+nominative = "редактор базового пространства виртуального домена"
+genitive = "редактора базового пространства виртуального домена"
+dative = "редактору базового пространства виртуального домена"
+accusative = "редактор базового пространства виртуального домена"
+instrumental = "редактором базового пространства виртуального домена"
+prepositional = "редакторе базового пространства виртуального домена"
 gender = "male"
