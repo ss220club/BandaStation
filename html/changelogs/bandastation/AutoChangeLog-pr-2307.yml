@@ -1,0 +1,4 @@
+author: "RosSample"
+delete-after: True
+changes:
+  - rscadd: "Свинцовая труба вернулась в техи!"
