@@ -1,0 +1,10 @@
+#include "_contraband.dm"
+
+#include "code/mod_types.dm"
+#include "code/energy.dm"
+#include "code/fireaxe.dm"
+#include "code/melee_weapon.dm"
+#include "code/energy_katana.dm"
+#include "code/ninja_explosive.dm"
+#include "code/defib.dm"
+#include "code/collar_bomb.dm"

@@ -4,10 +4,6 @@
 	timeout = 2 MINUTES
 
 /datum/mood_event/hug/add_effects()
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
-		mood_change = -1
-		description = "Объятия? Зовите отдел кадров!"
-		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = -1
 		description = "Я бы хотел, чтобы меня не трогали."
@@ -23,8 +19,7 @@
 	timeout = 2 MINUTES
 
 /datum/mood_event/bear_hug/add_effects()
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic) \
-		|| HAS_PERSONALITY(owner, /datum/personality/aloof) \
+	if(HAS_PERSONALITY(owner, /datum/personality/aloof) \
 		|| HAS_PERSONALITY(owner, /datum/personality/callous) \
 	)
 		mood_change = -2
@@ -37,10 +32,6 @@
 	timeout = 4 MINUTES
 
 /datum/mood_event/betterhug/add_effects(mob/friend)
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
-		mood_change = 1
-		description = "[friend.name] приятный человек, но на этом всё."
-		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = 1
 		description = "[friend.name] приятный человек, но мне хотелось бы, чтобы он перестал меня трогать"
@@ -58,10 +49,6 @@
 	timeout = 4 MINUTES
 
 /datum/mood_event/besthug/add_effects(mob/friend)
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
-		mood_change = 2
-		description = "Приятно находиться с [friend.name], но на этом всё."
-		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = 2
 		description = "Приятно находиться с [friend.name], но хочу, чтобы меня перестали трогать."
@@ -79,10 +66,6 @@
 	timeout = 2 MINUTES
 
 /datum/mood_event/warmhug/add_effects()
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
-		mood_change = 0
-		description = "Я не люблю объятия, но тепло - это приятно...."
-		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = 0
 		description = "Я бы предпочел, чтобы ко мне не прикасались, но тепло - это приятно...."
@@ -99,7 +82,6 @@
 
 /datum/mood_event/tailpulled/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof) \
-		|| HAS_PERSONALITY(owner, /datum/personality/aromantic) \
 		|| HAS_PERSONALITY(owner, /datum/personality/callous) \
 	)
 		mood_change = -2
@@ -425,10 +407,6 @@
 	timeout = 2 MINUTES
 
 /datum/mood_event/kiss/add_effects(mob/beau, direct)
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
-		mood_change = -2
-		description = "Поцелуй? Зовите отдел кадров!"
-		return
 	if(!beau)
 		return
 	if(direct)

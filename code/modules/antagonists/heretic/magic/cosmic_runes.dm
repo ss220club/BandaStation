@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/cosmic_rune
-	name = "Cosmic Rune"
+	name = "Космическая руна"
 	desc = "Создает космическую руну под вами, только две могут существовать. Вызов одной руны перемещает к другой. \
 		Все, кто имеет Метку звезды, также перемещаются вместе с вами."
 	background_icon_state = "bg_heretic"

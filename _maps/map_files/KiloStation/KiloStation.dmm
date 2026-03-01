@@ -2111,9 +2111,11 @@
 /obj/effect/turf_decal/tile/neutral/anticorner/contrasted{
 	dir = 8
 	},
-/obj/machinery/stasis,
-/obj/machinery/vitals_reader/directional/east,
 /obj/effect/turf_decal/box,
+/obj/structure/bed/medical{
+	dir = 4
+	},
+/obj/structure/curtain,
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
 "aHD" = (
@@ -2876,7 +2878,7 @@
 /obj/structure/table,
 /obj/machinery/light/small/directional/west,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "aUW" = (
@@ -12228,19 +12230,14 @@
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 4
 	},
+/obj/structure/sign/poster/random/directional/south,
 /obj/structure/table,
-/obj/item/stack/medical/mesh{
-	pixel_x = -4;
-	pixel_y = 3
-	},
-/obj/item/stack/medical/gauze{
-	pixel_x = 8
-	},
+/obj/item/healthanalyzer,
 /obj/item/reagent_containers/chem_pack{
 	pixel_x = 10;
 	pixel_y = 10
 	},
-/obj/structure/sign/poster/random/directional/south,
+/obj/item/crowbar/red,
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
 "een" = (
@@ -22577,14 +22574,12 @@
 /turf/open/floor/iron/showroomfloor,
 /area/station/commons/storage/art)
 "hsW" = (
-/obj/machinery/stasis{
-	dir = 4
-	},
 /obj/effect/turf_decal/box,
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 4
 	},
 /obj/machinery/vitals_reader/directional/west,
+/obj/structure/bed/medical,
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
 "htJ" = (
@@ -25583,10 +25578,8 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/box,
-/obj/machinery/stasis{
-	dir = 4
-	},
 /obj/machinery/vitals_reader/directional/west,
+/obj/structure/bed/medical,
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
 "imS" = (
@@ -37589,7 +37582,7 @@
 /area/station/cargo/office)
 "mlz" = (
 /obj/structure/table,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/suture,
 /obj/effect/turf_decal/tile/neutral{
@@ -47666,7 +47659,6 @@
 /turf/open/floor/iron/dark,
 /area/station/commons/fitness/recreation)
 "pJr" = (
-/obj/structure/table,
 /obj/effect/turf_decal/tile/neutral/anticorner/contrasted,
 /obj/item/storage/box/rxglasses{
 	pixel_x = 6;
@@ -47684,6 +47676,7 @@
 	pixel_x = -6
 	},
 /obj/machinery/light/directional/north,
+/obj/structure/table,
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
 "pJs" = (
@@ -49601,16 +49594,17 @@
 /turf/closed/wall/r_wall,
 /area/station/ai/satellite/interior)
 "qqB" = (
-/obj/structure/table,
-/obj/item/healthanalyzer,
-/obj/item/crowbar/red,
 /obj/machinery/airalarm/directional/north,
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 4
 	},
-/obj/item/book/manual/wiki/medicine{
-	pixel_x = -9;
-	pixel_y = 6
+/obj/structure/table,
+/obj/item/stack/medical/mesh{
+	pixel_x = -4;
+	pixel_y = 3
+	},
+/obj/item/stack/medical/wrap/gauze{
+	pixel_x = 8
 	},
 /turf/open/floor/iron/dark,
 /area/station/medical/exam_room)
@@ -63838,7 +63832,7 @@
 /area/space/nearstation)
 "uWS" = (
 /obj/structure/rack,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/bruise_pack,
 /obj/effect/turf_decal/bot,
 /obj/machinery/light/small/directional/north,
@@ -70016,10 +70010,6 @@
 /area/station/medical/medbay/central)
 "wOy" = (
 /obj/effect/turf_decal/tile/neutral/anticorner/contrasted,
-/obj/structure/bed/medical{
-	dir = 4
-	},
-/obj/structure/curtain,
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
