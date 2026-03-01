@@ -45,7 +45,7 @@
 		return
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(update_cam))
 	RegisterSignal(parent, COMSIG_ATOM_DIR_CHANGE, PROC_REF(rotate_cam))
-	do_update_cam()
+	do_update_cam(null)
 	if(isliving(parent))
 		var/mob/living/L = parent
 		L.throw_alert(ALERT_BODYCAM_VIEWED, /atom/movable/screen/alert/bodycam_viewed)
@@ -65,13 +65,14 @@
 /datum/component/pausable_bodycam/proc/update_cam(datum/source, atom/old_loc, ...)
 	SIGNAL_HANDLER
 	if(get_turf(old_loc) != get_turf(parent))
-		do_update_cam()
+		do_update_cam(old_loc)
 
-/datum/component/pausable_bodycam/proc/do_update_cam()
+/datum/component/pausable_bodycam/proc/do_update_cam(atom/old_loc)
 	if(!bodycam || QDELETED(bodycam))
 		return
-	SScameras.update_portable_camera(bodycam, camera_update_time)
-	// so here we could just cache the list of watchers but whatever
+	if(!bodycam.can_use())
+		return
+	SScameras.camera_moved(bodycam, get_turf(old_loc), get_turf(bodycam), camera_update_time)
 	notify_watchers_refresh()
 
 /datum/component/pausable_bodycam/proc/rotate_cam(datum/source, old_dir, new_dir)
