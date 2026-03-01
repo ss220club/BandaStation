@@ -12754,12 +12754,12 @@ prepositional = "сервере R&D"
 gender = "male"
 
 ["Slime management console"]
-nominative = "консоль ксенобиологии управления слизнями"
-genitive = "консоли ксенобиологии управления слизнями"
-dative = "консоли ксенобиологии управления слизнями"
-accusative = "консоль ксенобиологии управления слизнями"
-instrumental = "консолью ксенобиологии управления слизнями"
-prepositional = "консоли ксенобиологии управления слизнями"
+nominative = "консоль ксенобиологии управления слаймами"
+genitive = "консоли ксенобиологии управления слаймами"
+dative = "консоли ксенобиологии управления слаймами"
+accusative = "консоль ксенобиологии управления слаймами"
+instrumental = "консолью ксенобиологии управления слаймами"
+prepositional = "консоли ксенобиологии управления слаймами"
 gender = "female"
 
 ["DNA scanner"]
@@ -31867,4 +31867,33 @@ dative = "большому символу"
 accusative = "большого символа"
 instrumental = "большим символом"
 prepositional = "большом символе"
+gender = "male"
+
+# MARK: XENOBILOGY
+
+["industrial extract"]
+nominative = "промышленный экстракт"
+genitive = "промышленного экстракта"
+dative = "промышленному экстракту"
+accusative = "промышленный экстракт"
+instrumental = "промышленным экстрактом"
+prepositional = "промышленном экстракте"
+gender = "male"
+
+["stabilized extract"]
+nominative = "стабилизированный экстракт"
+genitive = "стабилизированного экстракта"
+dative = "стабилизированному экстракту"
+accusative = "стабилизированный экстракт"
+instrumental = "стабилизированным экстрактом"
+prepositional = "стабилизированном экстракте"
+gender = "male"
+
+["burning extract"]
+nominative = "горящий экстракт"
+genitive = "горящего экстракта"
+dative = "горящему экстракту"
+accusative = "горящий экстракт"
+instrumental = "горящим экстрактом"
+prepositional = "горящем экстракте"
 gender = "male"

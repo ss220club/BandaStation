@@ -5,7 +5,7 @@ Burning extracts:
 */
 /obj/item/slimecross/burning
 	name = "burning extract"
-	desc = "It's boiling over with barely-contained energy."
+	desc = "Он кипит от едва сдерживаемой энергии."
 	effect = "burning"
 	icon_state = "burning"
 
@@ -15,10 +15,10 @@ Burning extracts:
 
 /obj/item/slimecross/burning/attack_self(mob/user)
 	if(!reagents.has_reagent(/datum/reagent/toxin/plasma, 10))
-		to_chat(user, span_warning("This extract needs to be full of plasma to activate!"))
+		to_chat(user, span_warning("Для активации этот экстракт должен быть насыщен плазмой!"))
 		return
 	reagents.remove_reagent(/datum/reagent/toxin/plasma, 10)
-	to_chat(user, span_notice("You squeeze the extract, and it absorbs the plasma!"))
+	to_chat(user, span_notice("Вы сжимаете экстракт и он впитывает плазму!"))
 	playsound(src, 'sound/effects/bubbles/bubbles.ogg', 50, TRUE)
 	playsound(src, 'sound/effects/magic/fireball.ogg', 50, TRUE)
 	do_effect(user)
@@ -29,11 +29,11 @@ Burning extracts:
 
 /obj/item/slimecross/burning/grey
 	colour = SLIME_TYPE_GREY
-	effect_desc = "Creates a hungry and speedy slime that will love you forever."
+	effect_desc = "Создает голодного и быстрого слайма, который будет любить вас вечно."
 
 /obj/item/slimecross/burning/grey/do_effect(mob/user)
 	var/mob/living/basic/slime/new_slime = new(get_turf(user),/datum/slime_type/grey)
-	new_slime.visible_message(span_danger("A baby slime emerges from [src], and it nuzzles [user] before burbling hungrily!"))
+	new_slime.visible_message(span_danger("Из [src.declent_ru(GENETIVE)] появляется детеныш слизи, который утыкается носом в [user.declent_ru(ACCUSATIVE)] и начинает жадно булькать!"))
 	new_slime.befriend(user) //Gas, gas, gas
 	new_slime.bodytemperature = T0C + 400 //We gonna step on the gas.
 	new_slime.set_nutrition(SLIME_HUNGER_NUTRITION) //Tonight, we fight!
@@ -41,7 +41,7 @@ Burning extracts:
 
 /obj/item/slimecross/burning/orange
 	colour = SLIME_TYPE_ORANGE
-	effect_desc = "Expels pepperspray in a radius when activated."
+	effect_desc = "При активации распыляет перцовый аэрозоль в большом радиусе."
 
 /obj/item/slimecross/burning/orange/do_effect(mob/user)
 	user.visible_message(span_danger("[src] boils over with a caustic gas!"))
@@ -50,44 +50,44 @@ Burning extracts:
 
 /obj/item/slimecross/burning/purple
 	colour = SLIME_TYPE_PURPLE
-	effect_desc = "Creates a clump of invigorating gel, it has healing properties and makes you feel good."
+	effect_desc = "Образует комок бодрящего геля, который обладает целебными свойствами и дарит вам хорошее самочувствие."
 
 /obj/item/slimecross/burning/purple/do_effect(mob/user)
-	user.visible_message(span_notice("[src] fills with a bubbling liquid!"))
+	user.visible_message(span_notice("[src.declent_ru(NOMINATIVE)] наполняется пузырящейся жидкостью!"))
 	new /obj/item/slimecrossbeaker/autoinjector/slimestimulant(get_turf(user))
 	..()
 
 /obj/item/slimecross/burning/blue
 	colour = SLIME_TYPE_BLUE
-	effect_desc = "Freezes the floor around you and chills nearby people."
+	effect_desc = "Кратковременно замораживает пол вокруг вас и снижает температуру тела находящихся рядом, кроме использовавшего."
 
 /obj/item/slimecross/burning/blue/do_effect(mob/user)
-	user.visible_message(span_danger("[src] flash-freezes the area!"))
+	user.visible_message(span_danger("[src.declent_ru(NOMINATIVE)] вспыхивая, замораживает область!"))
 	for(var/turf/open/T in range(3, get_turf(user)))
 		T.MakeSlippery(TURF_WET_PERMAFROST, min_wet_time = 10, wet_time_to_add = 5)
 	for(var/mob/living/carbon/M in range(5, get_turf(user)))
 		if(M != user)
 			M.bodytemperature = BODYTEMP_COLD_DAMAGE_LIMIT + 10 //Not quite cold enough to hurt.
-			to_chat(M, span_danger("You feel a chill run down your spine, and the floor feels a bit slippery with frost..."))
+			to_chat(M, span_danger("Вы чувствуете, как по спине пробегает холодок, а пол кажется немного скользким от мороза..."))
 	..()
 
 /obj/item/slimecross/burning/metal
 	colour = SLIME_TYPE_METAL
-	effect_desc = "Instantly destroys walls around you."
+	effect_desc = "Мгновенно разрушает стены вокруг вас."
 
 /obj/item/slimecross/burning/metal/do_effect(mob/user)
 	for(var/turf/closed/wall/W in range(1,get_turf(user)))
 		W.dismantle_wall(1)
 		playsound(W, 'sound/effects/break_stone.ogg', 50, TRUE)
-	user.visible_message(span_danger("[src] pulses violently, and shatters the walls around it!"))
+	user.visible_message(span_danger("[src.declent_ru(NOMINATIVE)] яростно пульсирует и разрушает стены вокруг себя!"))
 	..()
 
 /obj/item/slimecross/burning/yellow
 	colour = SLIME_TYPE_YELLOW
-	effect_desc = "Electrocutes people near you."
+	effect_desc = "Бьёт током людей рядом с вами."
 
 /obj/item/slimecross/burning/yellow/do_effect(mob/user)
-	user.visible_message(span_danger("[src] explodes into an electrical field!"))
+	user.visible_message(span_danger("[src.declent_ru(NOMINATIVE)] взрывается в электрическом поле!"))
 	playsound(get_turf(src), 'sound/items/weapons/zapbang.ogg', 50, TRUE)
 	for(var/mob/living/M in range(4,get_turf(user)))
 		if(M != user)
@@ -96,22 +96,22 @@ Burning extracts:
 				C.electrocute_act(25,src)
 			else
 				M.adjust_fire_loss(25)
-			to_chat(M, span_danger("You feel a sharp electrical pulse!"))
+			to_chat(M, span_danger("Вы чувствуете резкий электрический импульс!"))
 	..()
 
 /obj/item/slimecross/burning/darkpurple
 	colour = SLIME_TYPE_DARK_PURPLE
-	effect_desc = "Creates a cloud of plasma."
+	effect_desc = "Создает облако плазмы."
 
 /obj/item/slimecross/burning/darkpurple/do_effect(mob/user)
-	user.visible_message(span_danger("[src] sublimates into a cloud of plasma!"))
+	user.visible_message(span_danger("[src.declent_ru(NOMINATIVE)] превращается в облако плазмы!"))
 	var/turf/T = get_turf(user)
 	T.atmos_spawn_air("[GAS_PLASMA]=60")
 	return ..()
 
 /obj/item/slimecross/burning/darkblue
 	colour = SLIME_TYPE_DARK_BLUE
-	effect_desc = "Expels a burst of chilling smoke while also filling you with regenerative jelly."
+	effect_desc = "Выпускает облако леденящего дыма, одновременно наполняя вас регенерирующим желе."
 
 /obj/item/slimecross/burning/darkblue/do_effect(mob/user)
 	user.visible_message(span_danger("[src] releases a burst of chilling smoke!"))

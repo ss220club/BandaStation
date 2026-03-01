@@ -27,7 +27,7 @@
 
 /obj/machinery/computer/camera_advanced/xenobio
 	name = "Slime management console"
-	desc = "A computer used for remotely handling slimes."
+	desc = "Компьютер, используемый для удаленного управления слаймами."
 	networks = list(CAMERANET_NETWORK_SS13)
 	circuit = /obj/item/circuitboard/computer/xenobiology
 
@@ -84,16 +84,16 @@
 	. = ..()
 
 	if(istype(held_item, /obj/item/slimepotion/slime))
-		context[SCREENTIP_CONTEXT_LMB] = "[current_potion ? "Swap" : "Insert"] potion"
+		context[SCREENTIP_CONTEXT_LMB] = "[current_potion ? "Заменить" : "Вставить] зелье"
 		return CONTEXTUAL_SCREENTIP_SET
 	if(istype(held_item, /obj/item/food/monkeycube))
-		context[SCREENTIP_CONTEXT_LMB] = "Insert monkey cubes"
+		context[SCREENTIP_CONTEXT_LMB] = "Вставить обезьяньи кубики"
 		return CONTEXTUAL_SCREENTIP_SET
 	if(istype(held_item, /obj/item/storage/bag) || istype(held_item, /obj/item/storage/box/monkeycubes))
-		context[SCREENTIP_CONTEXT_LMB] = "Load monkey cubes"
+		context[SCREENTIP_CONTEXT_LMB] = "Загрузить обезьяньи кубики"
 		return CONTEXTUAL_SCREENTIP_SET
 	if(istype(held_item, /obj/item/multitool))
-		context[SCREENTIP_CONTEXT_LMB] = "Link monkey recycler"
+		context[SCREENTIP_CONTEXT_LMB] = "Подключить переработчик обезьян"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/computer/camera_advanced/xenobio/Exited(atom/movable/gone, direction)
@@ -146,14 +146,14 @@
 /// Handles inserting a slime potion into the console, potentially swapping out an existing one.
 /obj/machinery/computer/camera_advanced/xenobio/proc/slimepotion_act(mob/living/user, obj/item/slimepotion/slime/used_potion)
 	if(!user.transferItemToLoc(used_potion, src))
-		balloon_alert(user, "can't insert!")
+		balloon_alert(user, "не вставить!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(!QDELETED(current_potion))
 		try_put_in_hand(current_potion, user)
-		balloon_alert(user, "swapped")
+		balloon_alert(user, "заменено")
 	else
-		balloon_alert(user, "inserted")
+		balloon_alert(user, "вставлено")
 
 	current_potion = used_potion
 	xeno_hud.update_potion(current_potion)
@@ -187,26 +187,26 @@
 	if(!istype(tool)) // Needed as long as this uses a var on the multitool.
 		return NONE
 	if(QDELETED(tool.buffer))
-		balloon_alert(user, "buffer empty!")
+		balloon_alert(user, "буфер пустой!")
 		return ITEM_INTERACT_BLOCKING
 	if(!istype(tool.buffer, /obj/machinery/monkey_recycler))
-		balloon_alert(user, "can only link recyclers!")
+		balloon_alert(user, "можно подключить только переработчик!")
 		return ITEM_INTERACT_BLOCKING
 
-	balloon_alert(user, "linked recycler")
+	balloon_alert(user, "переработчик подключён")
 	connected_recycler_ref = WEAKREF(tool.buffer)
 	return ITEM_INTERACT_SUCCESS
 
 /// Validates whether the target turf can be interacted with.
 /obj/machinery/computer/camera_advanced/xenobio/proc/validate_turf(mob/living/user, turf/open/target_turf)
 	if(!SScameras.is_visible_by_cameras(target_turf))
-		target_turf.balloon_alert(user, "outside of view!")
+		target_turf.balloon_alert(user, "вне поля зрения!")
 		return FALSE
 
 	var/area/turfarea = get_area(target_turf)
 	var/mob/eye/camera/remote/xenobio/remote_eye = user.remote_control
 	if(turfarea.name != remote_eye.allowed_area && !(turfarea.area_flags & XENOBIOLOGY_COMPATIBLE))
-		target_turf.balloon_alert(user, "invalid area!")
+		target_turf.balloon_alert(user, "недопустимая область!")
 		return FALSE
 
 	return TRUE
@@ -234,8 +234,8 @@
 		// so we need to check whether we already have to avoid duplicate entries.
 		return FALSE
 	if(stored_slimes.len >= max_slimes)
-		to_chat(user, span_warning("Slime storage is full."))
-		target_slime.balloon_alert(user, "storage full")
+		to_chat(user, span_warning("Хранилище слаймов полное."))
+		target_slime.balloon_alert(user, "хранилище полное")
 		return TRUE
 	if(target_slime.ckey)
 		to_chat(user, span_warning("The slime wiggled free!"))
@@ -285,11 +285,11 @@
 	PRIVATE_PROC(TRUE)
 	if(!ismonkey(target_human))
 		if(user)
-			target_human.balloon_alert(user, "not a monkey!")
+			target_human.balloon_alert(user, "не обезьяна!")
 		return FALSE
 	if(target_human.stat < DEAD)
 		if(user)
-			target_human.balloon_alert(user, "not dead!")
+			target_human.balloon_alert(user, "не мертво!")
 		return FALSE
 	return TRUE
 

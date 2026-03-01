@@ -236,17 +236,17 @@
 
 	switch(powerlevel)
 		if(SLIME_MIN_POWER to SLIME_EXTRA_SHOCK_COST)
-			. += "It is flickering gently with harmless levels of electrical activity."
+			. += "Он мягко мерцает, демонстрируя безвредный уровень электрической активности."
 
 		if(SLIME_EXTRA_SHOCK_COST to SLIME_MEDIUM_POWER)
-			. += "It is glowing brightly with medium levels electrical activity."
+			. += "Он ярко светится со средним уровнем электрической активности."
 
 
 		if(SLIME_MEDIUM_POWER to SLIME_MAX_POWER)
-			. += "It is glowing alarmingly with high levels of electrical activity."
+			. += "Он тревожно светится из-за высокого уровня электрической активности."
 
 		if(SLIME_MAX_POWER)
-			. += span_boldwarning("It is radiating with massive levels of electrical activity!")
+			. += span_boldwarning("Он излучает огромный уровень электрической активности!")
 	if(overcrowded)
 		. += span_warning("It seems too overcroweded to properly reproduce!")
 
