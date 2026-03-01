@@ -595,11 +595,11 @@
 /obj/item/organ/tongue/snail/modify_speech(datum/source, list/speech_args)
 	var/new_message
 	var/message = speech_args[SPEECH_MESSAGE]
-	for(var/i in 1 to length(message))
-		if(findtext("ABCDEFGHIJKLMNOPWRSTUVWXYZabcdefghijklmnopqrstuvwxyz", message[i])) //Im open to suggestions
-			new_message += message[i] + message[i] + message[i] //aaalllsssooo ooopppeeennn tttooo sssuuuggggggeeessstttiiiooonsss
+	for(var/i in 1 to length_char(message)) // BANDASTATION EDIT
+		if(findtext("ABCDEFGHIJKLMNOPWRSTUVWXYZabcdefghijklmnopqrstuvwxyz", copytext_char(message, i, i + 1))) //Im open to suggestions // BANDASTATION EDIT
+			new_message += copytext_char(message, i, i + 1) + copytext_char(message, i, i + 1) + copytext_char(message, i, i + 1) //aaalllsssooo ooopppeeennn tttooo sssuuuggggggeeessstttiiiooonsss // BANDASTATION EDIT
 		else
-			new_message += message[i]
+			new_message += copytext_char(message, i, i + 1) // BANDASTATION EDIT
 	speech_args[SPEECH_MESSAGE] = new_message
 
 /obj/item/organ/tongue/ethereal

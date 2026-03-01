@@ -338,7 +338,7 @@ SUBSYSTEM_DEF(tts220)
 	rustutils_file_write_b64decode(voice, "[filename].ogg")
 
 	if(!CONFIG_GET(flag/tts_cache_enabled))
-		addtimer(CALLBACK(src, PROC_REF(cleanup_tts_file), "[filename].ogg"), FILE_CLEANUP_DELAY)
+		add_tts_file_to_cleanup("[filename].ogg")
 
 	for(var/datum/callback/cb in tts_queue[filename])
 		cb.InvokeAsync()
@@ -374,8 +374,6 @@ SUBSYSTEM_DEF(tts220)
 			break
 
 		filename_suffixes |= effect.suffix
-
-	sortTim(filename_suffixes, GLOBAL_PROC_REF(cmp_text_asc))
 
 	var/filename2play = "[pure_filename][filename_suffixes.Join()].ogg"
 
@@ -471,6 +469,9 @@ SUBSYSTEM_DEF(tts220)
 	SIGNAL_HANDLER
 
 	tts_local_channels_by_owner -= owner
+
+/datum/controller/subsystem/tts220/proc/add_tts_file_to_cleanup(filename)
+	addtimer(CALLBACK(src, PROC_REF(cleanup_tts_file), filename), FILE_CLEANUP_DELAY)
 
 /datum/controller/subsystem/tts220/proc/cleanup_tts_file(filename)
 	fdel(filename)
