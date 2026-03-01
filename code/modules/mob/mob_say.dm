@@ -169,9 +169,12 @@
 	var/displayed_key = key
 	if(client?.holder?.fakekey)
 		displayed_key = null
-	// BANDASTATION EDIT START - ghost runechat
-	deadchat_broadcast(rendered, source, follow_target = src, speaker_key = displayed_key, raw_message = message)
-	// BANDASTATION EDIT END - ghost runechat
+	deadchat_broadcast(rendered, source, follow_target = src, speaker_key = displayed_key, raw_message = message) // BANDASTATION EDIT - ghost runechat
+	for(var/mob/mobs_hearing as anything in GLOB.player_list)
+		if(SSticker.current_state != GAME_STATE_FINISHED && (mobs_hearing.see_invisible < invisibility || !isdead(mobs_hearing)))
+			continue
+		if(runechat_prefs_check(mobs_hearing))
+			mobs_hearing.create_chat_message(src, /datum/language/common, message)
 
 ///Check if this message is an emote
 /mob/proc/check_emote(message, forced)
