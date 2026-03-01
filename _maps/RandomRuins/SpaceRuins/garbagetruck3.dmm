@@ -299,7 +299,6 @@
 /turf/open/floor/plating/dumpsterair,
 /area/ruin/space/has_grav/garbagetruck/squat)
 "pM" = (
-/obj/item/lead_pipe,
 /obj/structure/door_assembly/door_assembly_mhatch,
 /obj/effect/decal/cleanable/glass,
 /obj/item/restraints/handcuffs/cable/zipties/used,
@@ -332,7 +331,7 @@
 /obj/item/boxcutter{
 	pixel_x = 10
 	},
-/obj/item/stack/sticky_tape{
+/obj/item/stack/medical/wrap/sticky_tape{
 	pixel_x = -5
 	},
 /obj/structure/closet/crate/preopen,

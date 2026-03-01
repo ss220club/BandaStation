@@ -17,7 +17,7 @@
 		linked_alert.overlay_state = "food_buff_[strength]"
 
 /atom/movable/screen/alert/status_effect/food
-	name = "Hand-crafted meal"
-	desc = "Eating it made me feel better."
+	name = "Еда ручного приготовления"
+	desc = "Съев это, я ощущаю себя лучше."
 	use_user_hud_icon = TRUE
 	overlay_state = "food_buff_1"

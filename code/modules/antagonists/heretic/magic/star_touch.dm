@@ -1,9 +1,9 @@
 /datum/action/cooldown/spell/touch/star_touch
-	name = "Star Touch"
-	desc = "Can be used to apply a star mark to a target. \
-		If your victim is already star marked, tethers you to your target with a cosmic ray. \
-		If the tether remains unbroken for 8 seconds, they will be put to sleep and teleported to you. \
-		Star Touch can also remove Cosmic Runes, or teleport you to your Star Gazer when used in hand."
+	name = "Касание Звезды"
+	desc = "Может быть использовано для наложения «Метки Звезды» на цель. \
+		Если ваша жертва уже помечена Звездой, свяжет вас с целью космическим лучом. \
+		Если связь не будет разорвана в течение 8 секунд, цель уснёт и будет телепортирована к вам. \
+		«Касание Звезды» также может удалять «Космические руны», и телепортировать вас к Звездочёту, при активации в руке."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'

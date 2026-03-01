@@ -339,8 +339,8 @@
 
 /datum/reagent/water/holywater/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
-
-	data["deciseconds_metabolized"] += (seconds_per_tick * 1 SECONDS * REM)
+	// Microdosing holy water is less effective than just gulping it down
+	data["deciseconds_metabolized"] += seconds_per_tick * 1 SECONDS * metabolization_ratio
 
 	affected_mob.adjust_jitter_up_to(2 SECONDS * metabolization_ratio * seconds_per_tick, 20 SECONDS)
 	var/need_mob_update = FALSE
@@ -524,10 +524,20 @@
 
 /datum/reagent/lube/expose_turf(turf/open/exposed_turf, reac_volume)
 	. = ..()
-	if(!istype(exposed_turf))
-		return
-	if(reac_volume >= 1)
-		exposed_turf.MakeSlippery(lube_kind, 15 SECONDS, min(reac_volume * 2 SECONDS, 120))
+	if(isopenturf(exposed_turf) && reac_volume >= 1)
+		exposed_turf.MakeSlippery(lube_kind, 15 SECONDS, min(reac_volume * 2 SECONDS, 12 SECONDS))
+
+/datum/reagent/lube/expose_obj(obj/exposed_obj, reac_volume, methods, show_message)
+	. = ..()
+	if(isitem(exposed_obj) && reac_volume >= 1)
+		exposed_obj.AddComponent( \
+			/datum/component/slippery_item, \
+			fall_chance = (lube_kind == TURF_WET_SUPERLUBE ? 80 : 50), \
+			fall_catch_chance = (lube_kind == TURF_WET_SUPERLUBE ? 10 : 30), \
+			examine_msg = span_info("It's coated in a slippery substance!"), \
+			wash_flags = CLEAN_TYPE_HARD_DECAL, \
+			duration = min(reac_volume * 3 SECONDS, 30 SECONDS), \
+		)
 
 /datum/reagent/lube/used_on_fish(obj/item/fish/fish)
 	ADD_TRAIT(fish, TRAIT_FISH_FED_LUBE, type) //required for the lubefish mutation
@@ -703,7 +713,7 @@
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/human/felinid
 	taste_description = "something nyat good"
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/mutationtoxin/lizard
 	name = "Lizard Mutation Toxin"
@@ -727,7 +737,15 @@
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/moth
 	taste_description = "ткани"
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+
+/datum/reagent/mutationtoxin/ethereal
+	name = "Ethereal Mutation Toxin"
+	description = "An electrifying toxin."
+	color = "#5EFF3B" //RGB: 94, 255, 59
+	race = /datum/species/ethereal
+	taste_description = "static"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/mutationtoxin/pod
 	name = "Podperson Mutation Toxin"
@@ -811,6 +829,14 @@
 	color = "#5EFF3B" //RGB: 94, 255, 59
 	race = /datum/species/lizard/ashwalker
 	taste_description = "savagery"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
+
+/datum/reagent/mutationtoxin/ghost
+	name = "Ghost Mutation Toxin"
+	description = "A spiritual toxin."
+	color = "#5EFF3B" //RGB: 94, 255, 59
+	race = /datum/species/ghost
+	taste_description = "ectoplasm"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
 
 //DANGEROUS RACES
@@ -1016,7 +1042,7 @@
 
 /datum/reagent/chlorine/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
-	if(affected_mob.take_bodypart_damage(0.5*REM*seconds_per_tick, 0))
+	if(affected_mob.take_bodypart_damage(0.25 * metabolization_ratio * seconds_per_tick, 0))
 		return UPDATE_MOB_HEALTH
 
 /datum/reagent/fluorine
@@ -1036,7 +1062,7 @@
 
 /datum/reagent/fluorine/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
-	if(affected_mob.adjust_tox_loss(0.5*REM*seconds_per_tick, updating_health = FALSE))
+	if(affected_mob.adjust_tox_loss(0.25 * metabolization_ratio * seconds_per_tick, updating_health = FALSE))
 		return UPDATE_MOB_HEALTH
 
 /datum/reagent/sodium
@@ -1137,7 +1163,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	default_container = /obj/effect/decal/cleanable/greenglow
 	/// How much tox damage to deal per tick
-	var/tox_damage = 0.5
+	var/tox_damage = 0.25
 	/// How radioactive is this reagent
 	var/rad_power = 1
 
@@ -1147,7 +1173,8 @@
 		var/chance = min(volume / (20 - rad_power * 5), rad_power)
 		if(SPT_PROB(chance, seconds_per_tick)) // ignore rad protection calculations bc it's inside of us
 			affected_mob.AddComponent(/datum/component/irradiated)
-	if(affected_mob.adjust_tox_loss(tox_damage * seconds_per_tick * REM, updating_health = FALSE))
+
+	if(affected_mob.adjust_tox_loss(tox_damage * seconds_per_tick * metabolization_rate, updating_health = FALSE))
 		return UPDATE_MOB_HEALTH
 
 /datum/reagent/uranium/expose_obj(obj/exposed_obj, reac_volume, methods=TOUCH, show_message=TRUE)
@@ -1205,16 +1232,16 @@
 
 //Mutagenic chem side-effects.
 /datum/reagent/uranium/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
-	mytray.mutation_roll(user)
-	mytray.adjust_plant_health(-round(volume))
-	mytray.adjust_toxic(round(volume / tox_damage)) // more damage = more
+	mytray.radioactive_exposure(modifier = volume * 0.1)
+	mytray.myseed?.adjust_instability(round(volume * 0.1))
+	mytray.adjust_toxic(round(0.5 * volume * tox_damage))
 
 /datum/reagent/uranium/radium
 	name = "Radium"
 	description = "Radium is an alkaline earth metal. It is extremely radioactive."
 	color = "#00CC00" // ditto
 	taste_description = "the colour blue and regret"
-	tox_damage = 1
+	tox_damage = 0.5
 	material = null
 	ph = 10
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
@@ -1273,7 +1300,7 @@
 	burning_temperature = 1725 //more refined than oil
 	burning_volume = 0.2
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	addiction_types = list(/datum/addiction/alcohol = 4)
+	addiction_types = list(/datum/addiction/alcohol = 300)
 
 /datum/glass_style/drinking_glass/fuel
 	required_drink_type = /datum/reagent/fuel
@@ -1298,7 +1325,6 @@
 
 /datum/reagent/fuel/expose_turf(turf/exposed_turf, reac_volume)
 	. = ..()
-
 	if(!istype(exposed_turf) || isspaceturf(exposed_turf))
 		return
 
@@ -1308,6 +1334,20 @@
 	var/obj/effect/decal/cleanable/fuel_pool/pool = exposed_turf.spawn_unique_cleanable(/obj/effect/decal/cleanable/fuel_pool)
 	if(pool)
 		pool.burn_amount = max(min(round(reac_volume / 5), 10), 1)
+
+/datum/reagent/fuel/on_spark_act(power_charge, spark_flags)
+	// Doesn't go boom in open air unless we pass a REALLY high current or if we're hot enough
+	if (!(spark_flags & SPARK_ACT_ENCLOSED) && power_charge < STANDARD_BATTERY_VALUE && holder.chem_temp < 474)
+		var/turf/our_turf = get_turf(holder.my_atom)
+		our_turf?.hotspot_expose(holder.chem_temp * 10, volume)
+		return NONE
+
+	var/strengthdiv = 10
+	if (spark_flags & SPARK_ACT_WEAKEN_COMMON)
+		strengthdiv *= 3 // Noticeably weaker than waterpot, at least put some effort in, cmon
+
+	reagent_explode(holder, volume, strengthdiv = strengthdiv, clear_holder_reagents = FALSE, flame_factor = 1)
+	return SPARK_ACT_DESTRUCTIVE | SPARK_ACT_CLEAR_ALL
 
 /datum/reagent/space_cleaner
 	name = "Space Cleaner"
@@ -1407,7 +1447,7 @@
 	taste_description = "numbness"
 	ph = 9.1
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	addiction_types = list(/datum/addiction/opioids = 10)
+	addiction_types = list(/datum/addiction/opioids = 120)
 
 /datum/reagent/impedrezene/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
@@ -2629,7 +2669,6 @@
 	taste_description = "acrid cinnamon"
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
-	metabolized_traits = list(TRAIT_CHANGELING_HIVEMIND_MUTE)
 
 /datum/reagent/bz_metabolites/on_mob_life(mob/living/carbon/target, seconds_per_tick, metabolization_ratio)
 	. = ..()
@@ -2797,11 +2836,15 @@
 
 /datum/reagent/metalgen/expose_obj(obj/exposed_obj, reac_volume, methods=TOUCH, show_message=TRUE)
 	. = ..()
-	metal_morph(exposed_obj)
+	// Don't morph holographic or abstract objects
+	if (!(exposed_obj.flags_1 & HOLOGRAM_1) && exposed_obj.invisibility < INVISIBILITY_ABSTRACT)
+		metal_morph(exposed_obj)
 
 /datum/reagent/metalgen/expose_turf(turf/exposed_turf, volume)
 	. = ..()
-	metal_morph(exposed_turf)
+	// Or non-real turfs
+	if (isclosedturf(exposed_turf) || isopenturf(exposed_turf))
+		metal_morph(exposed_turf)
 
 ///turn an object into a special material
 /datum/reagent/metalgen/proc/metal_morph(atom/target)
@@ -2820,6 +2863,9 @@
 	if(!metal_amount)
 		metal_amount = default_material_amount //some stuff doesn't have materials at all. To still give them properties, we give them a material. Basically doesn't exist
 
+	// Delete existing materials first before changing the material flags
+	if(length(target.custom_materials))
+		target.set_custom_materials()
 	var/list/metal_dat = list((metal_ref) = metal_amount)
 	target.material_flags = applied_material_flags
 	target.set_custom_materials(metal_dat)
@@ -3087,7 +3133,7 @@
 	color = "#228f63"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	addiction_types = list(/datum/addiction/stimulants = 5)
+	addiction_types = list(/datum/addiction/stimulants = 120)
 
 /datum/reagent/kronkus_extract/on_mob_life(mob/living/carbon/kronkus_enjoyer, seconds_per_tick, metabolization_ratio)
 	. = ..()

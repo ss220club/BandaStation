@@ -15,9 +15,9 @@
 
 /// The heretic antagonist itself.
 /datum/antagonist/heretic
-	name = "\improper Heretic"
+	name = "\improper Еретик"
 	roundend_category = "Еретики"
-	antagpanel_category = "Heretic"
+	antagpanel_category = "Еретик"
 	ui_name = "AntagInfoHeretic"
 	antag_moodlet = /datum/mood_event/heretics
 	pref_flag = ROLE_HERETIC
@@ -26,7 +26,7 @@
 	suicide_cry = "МАНСУС УЛЫБАЕТСЯ МНЕ!!"
 	preview_outfit = /datum/outfit/heretic
 	can_assign_self_objectives = TRUE
-	default_custom_objective = "Turn a department into a testament for your dark knowledge."
+	default_custom_objective = "Превратите отдел в свидетельство ваших темных знаний."
 	hardcore_random_bonus = TRUE
 	stinger_sound = 'sound/music/antag/heretic/heretic_gain.ogg'
 	antag_flags = parent_type::antag_flags | ANTAG_OBSERVER_VISIBLE_PANEL
@@ -337,7 +337,7 @@
 
 /datum/antagonist/heretic/farewell()
 	if(!silent && owner.current)
-		to_chat(owner.current, span_userdanger("Ваш разум начинает разгораться, когда потусторонние знания ускользают от вас!"))
+		to_chat(owner.current, span_userdanger("Ваш разум начинает гореть, когда потусторонние знания ускользают от вас!"))
 	return ..()
 
 /datum/antagonist/heretic/on_gain()
@@ -376,7 +376,7 @@
 /datum/antagonist/heretic/apply_innate_effects(mob/living/mob_override)
 	var/mob/living/our_mob = mob_override || owner.current
 	handle_clown_mutation(our_mob, "Древнее знание, данное вам, позволило преодолеть свою клоунскую натуру, позволяя вам владеть оружием без вреда для себя.")
-	our_mob.faction |= FACTION_HERETIC
+	our_mob.add_faction(FACTION_HERETIC)
 
 	if(!issilicon(our_mob))
 		GLOB.reality_smash_track.add_tracked_mind(owner)
@@ -397,7 +397,7 @@
 /datum/antagonist/heretic/remove_innate_effects(mob/living/mob_override)
 	var/mob/living/our_mob = mob_override || owner.current
 	handle_clown_mutation(our_mob, removing = FALSE)
-	our_mob.faction -= FACTION_HERETIC
+	our_mob.remove_faction(FACTION_HERETIC)
 
 	if(owner in GLOB.reality_smash_track.tracked_heretics)
 		GLOB.reality_smash_track.remove_tracked_mind(owner)
@@ -423,8 +423,8 @@
 		return
 	var/mob/heretic_mob = owner.current
 	unlimited_blades = TRUE
-	to_chat(heretic_mob, span_boldwarning("You have gained a lot of power, the mansus will no longer allow you to break your blades, but you can now make as many as you wish."))
-	heretic_mob.balloon_alert(heretic_mob, "blade breaking disabled!")
+	to_chat(heretic_mob, span_boldwarning("Вы обрели значительное могущество, Мансус больше не позволит вам ломать свои клинки, но теперь вы можете сделать их столько, сколько пожелаете."))
+	heretic_mob.balloon_alert(heretic_mob, "ломание клинка отключено!")
 	update_heretic_aura()
 	var/datum/action/cooldown/spell/shadow_cloak/cloak_spell = locate() in heretic_mob.actions
 	cloak_spell.Remove(heretic_mob)
@@ -457,9 +457,9 @@
 	if(!should_show_aura())
 		return
 	var/mob/heretic_mob = owner.current
-	var/potential_string = "[heretic_mob.p_They()] [heretic_mob.p_are()] crackling with a swirling green vortex of energy."
+	var/potential_string = "[heretic_mob.ru_p_they()] потрескивает от кружащегося зелёного вихря энергии."
 	if(can_ascend() == HERETIC_CAN_ASCEND)
-		potential_string += " [heretic_mob.p_They()] [heretic_mob.p_are()] shedding [heretic_mob.p_their()] mortal shell!"
+		potential_string += " [heretic_mob.ru_p_they()] сбрасывает свою смертную оболочку!"
 	text += span_green(potential_string)
 
 /datum/antagonist/heretic/on_body_transfer(mob/living/old_body, mob/living/new_body)
@@ -623,7 +623,7 @@
 	haunted_blade.gender_reveal(outline_color = null, ray_color = COLOR_HERETIC_GREEN)
 
 	for(var/mob/living/culto as anything in invokers)
-		to_chat(culto, span_cult_large("\"A follower of the forgotten gods! You must be rewarded for such a valuable sacrifice.\""))
+		to_chat(culto, span_cult_large("\"Последователь забытых богов! Ты должен быть вознагражден за столь ценную жертву.\""))
 
 	// Locate a cultist team (Is there a better way??)
 	var/mob/living/random_cultist = pick(invokers)
@@ -644,7 +644,7 @@
 		for(var/datum/mind/mind as anything in cult_team.members)
 			if(mind.current)
 				SEND_SOUND(mind.current, 'sound/effects/magic/clockwork/narsie_attack.ogg')
-				to_chat(mind.current, span_cult_large(span_warning("Arcane and forbidden knowledge floods your forges and archives. The cult has learned how to create the ")) + span_cult_large(span_hypnophrase("[result]!")))
+				to_chat(mind.current, span_cult_large(span_warning("Тайные, запретные знания переполняют ваши кузницы и архивы. Культ научился создавать ")) + span_cult_large(span_hypnophrase("[result]!")))
 
 	return SILENCE_SACRIFICE_MESSAGE|DUST_SACRIFICE
 
@@ -799,7 +799,7 @@
 			parts += "<b>Задача #[count]</b>: [objective.explanation_text] [objective.get_roundend_success_suffix()]"
 			count++
 	if(feast_of_owls)
-		parts += span_greentext("Ascension Forsaken")
+		parts += span_greentext("Вознесение Забытого")
 	if(ascended)
 		parts += span_greentext(span_big("ЕРЕТИК ВОЗНЕССЯ!"))
 
@@ -919,7 +919,7 @@
 
 	var/mob/living/pawn = owner.current
 	pawn.equip_to_slot_if_possible(new /obj/item/clothing/neck/heretic_focus(get_turf(pawn)), ITEM_SLOT_NECK, TRUE, TRUE)
-	to_chat(pawn, span_hypnophrase("The Mansus has manifested you a focus."))
+	to_chat(pawn, span_hypnophrase("Мансус даровал вам фокусировку."))
 
 /datum/antagonist/heretic/antag_panel_data()
 	var/list/string_of_knowledge = list()
@@ -1056,17 +1056,17 @@
  */
 /datum/antagonist/heretic/proc/can_ascend()
 	if(feast_of_owls)
-		return "The owls have taken your right of ascension (denied ascension)." // We sold our ambition for immediate power :/
+		return "Совы отняли у вас право на восхождение (отказано в вознесении)." // We sold our ambition for immediate power :/
 	if(!can_assign_self_objectives)
-		return "The mansus has spurned you (denied ascension)."
+		return "Мансус отверг вас (отказано в вознесении)."
 	for(var/datum/objective/must_be_done as anything in objectives)
 		if(!must_be_done.check_completion())
-			return "Must complete all objectives before ascending."
+			return "Необходимо выполнить все задания для возвышения."
 	var/config_time = CONFIG_GET(number/minimum_ascension_time) MINUTES
 
 	var/time_passed = STATION_TIME_PASSED()
 	if(config_time >= time_passed)
-		return "Too early, must wait [DisplayTimeText(config_time - time_passed)] before ascending."
+		return "Слишком рано, необходимо прождать [DisplayTimeText(config_time - time_passed)] перед возвышением."
 	return HERETIC_CAN_ASCEND
 
 /**

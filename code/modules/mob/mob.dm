@@ -245,7 +245,7 @@
 				type = alt_type
 				. = FALSE
 
-		if(type & MSG_AUDIBLE && !can_hear())//Hearing related
+		if(type & MSG_AUDIBLE && HAS_TRAIT(src, TRAIT_DEAF))//Hearing related
 			if(!alt_msg)
 				return FALSE
 			else
@@ -371,7 +371,7 @@
 			continue
 		if(self_message && hearing_mob == src)
 			continue
-		if(audible_message_flags & EMOTE_MESSAGE && runechat_prefs_check(hearing_mob, audible_message_flags) && hearing_mob.can_hear())
+		if(audible_message_flags & EMOTE_MESSAGE && runechat_prefs_check(hearing_mob, audible_message_flags) && !HAS_TRAIT(hearing_mob, TRAIT_DEAF))
 			hearing_mob.create_chat_message(src, raw_message = raw_msg, runechat_flags = audible_message_flags)
 		hearing_mob.show_message(message, MSG_AUDIBLE, deaf_message, MSG_VISUAL)
 
@@ -439,6 +439,12 @@
 		return FALSE
 	return TRUE
 
+/mob/dead/observer/runechat_prefs_check(mob/target, visible_message_flags = NONE)
+	if(!..())
+		return FALSE
+	if(!target.client?.prefs.read_preference(/datum/preference/toggle/enable_runechat_ghosts))
+		return FALSE
+	return TRUE
 
 ///Get the item on the mob in the storage slot identified by the id passed in
 /mob/proc/get_item_by_slot(slot_id) as /obj/item
@@ -946,7 +952,7 @@
 
 	var/result = perform_hand_swap(held_index)
 	if (result)
-		SEND_SIGNAL(src, COMSIG_MOB_SWAP_HANDS)
+		SEND_SIGNAL(src, COMSIG_MOB_SWAP_HANDS, get_active_held_item(), held_item)
 
 	return result
 
@@ -1163,24 +1169,6 @@
 ///Can this mob use storage
 /mob/proc/canUseStorage()
 	return FALSE
-
-/*
- * Compare two lists of factions, returning true if any match
- *
- * If exact match is passed through we only return true if both faction lists match equally
- */
-/proc/faction_check(list/faction_A, list/faction_B, exact_match)
-	var/list/match_list
-	if(exact_match)
-		match_list = faction_A&faction_B //only items in both lists
-		var/length = LAZYLEN(match_list)
-		if(length)
-			return (length == LAZYLEN(faction_A)) //if they're not the same len(gth) or we don't have a len, then this isn't an exact match.
-	else
-		match_list = faction_A&faction_B
-		return LAZYLEN(match_list)
-	return FALSE
-
 
 /**
  * Fully update the name of a mob

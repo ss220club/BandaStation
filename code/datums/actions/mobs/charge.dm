@@ -2,7 +2,7 @@
 	name = "Charge"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	desc = "Allows you to charge at a chosen position."
+	desc = "Позволяет вам совершить стремительную атаку в выбранную позицию."
 	cooldown_time = 1.5 SECONDS
 	/// Delay before the charge actually occurs
 	var/charge_delay = 0.3 SECONDS
@@ -245,7 +245,7 @@
 
 /datum/action/cooldown/mob_cooldown/charge/triple_charge
 	name = "Triple Charge"
-	desc = "Allows you to charge three times at a chosen position."
+	desc = "Позволяет вам совершить три стремительных атаки в выбранную позицию."
 	charge_delay = 0.6 SECONDS
 
 /datum/action/cooldown/mob_cooldown/charge/triple_charge/charge_sequence(atom/movable/charger, atom/target_atom, delay, past)
@@ -256,7 +256,7 @@
 	name = "Hallucination Charge"
 	button_icon = 'icons/effects/bubblegum.dmi'
 	button_icon_state = "smack ya one"
-	desc = "Allows you to create hallucinations that charge around your target."
+	desc = "Позволяет создавать галлюцинации, которые окружают вашу цель."
 	cooldown_time = 2 SECONDS
 	charge_delay = 0.6 SECONDS
 	/// The damage the hallucinations in our charge do
@@ -315,7 +315,7 @@
 	name = "Surround Target"
 	button_icon = 'icons/mob/actions/actions_animal.dmi'
 	button_icon_state = "expand"
-	desc = "Allows you to create hallucinations that charge around your target."
+	desc = "Позволяет создавать галлюцинации, которые окружают вашу цель."
 	charge_delay = 0.6 SECONDS
 	charge_past = 2
 

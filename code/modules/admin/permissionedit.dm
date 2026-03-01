@@ -28,13 +28,13 @@ GLOBAL_LIST_INIT(permission_action_types, list(
 
 	output += {"
 		<a href='byond://?_src_=holder;[HrefToken()];editrightsbrowser=1'>\
-			[action == PERMISSIONS_PAGE_PERMISSIONS ? "<b>\[Permissions\]</b": "\[Permissions\]"]
+			[action == PERMISSIONS_PAGE_PERMISSIONS ? "<b>\[Permissions\]</b>": "\[Permissions\]"]
 		</a>
 		[new_line]<a href='byond://?_src_=holder;[HrefToken()];editrightsbrowserranks=1'>
-			[action == PERMISSIONS_PAGE_RANKS ? "<b>\[Ranks\]</b": "\[Ranks\]"]
+			[action == PERMISSIONS_PAGE_RANKS ? "<b>\[Ranks\]</b>": "\[Ranks\]"]
 		</a>
 		[new_line]<a href='byond://?_src_=holder;[HrefToken()];editrightsbrowserlogging=1;editrightslogpage=0'>
-			[action == PERMISSIONS_PAGE_LOGGING ? "<b>\[Logging\]</b": "\[Logging\]"]
+			[action == PERMISSIONS_PAGE_LOGGING ? "<b>\[Logging\]</b>": "\[Logging\]"]
 		</a>
 		[new_line]<a href='byond://?_src_=holder;[HrefToken()];editrightsbrowserhousekeep=1'>
 			[action == PERMISSIONS_PAGE_HOUSEKEEPING ? "<b>\[Housekeeping\]</b>": "\[Housekeeping\]"]
@@ -626,6 +626,22 @@ GLOBAL_LIST_INIT(permission_action_types, list(
 		var/next_rank = input("Please select a rank, or select [RANK_DONE] if you are finished.") as null|anything in display_rank_names
 
 		if (isnull(next_rank))
+			// SS220 EDIT START - FIX
+			// Если это НОВЫЙ админ и запись уже создана в БД,
+			// не оставляем NEW ADMIN висеть
+			if(use_db && !target_holder)
+				var/datum/db_query/query_remove_admin = SSdbcore.NewQuery(
+					"DELETE FROM [format_table_name(CONFIG_GET(string/admin_table))] WHERE ckey = :ckey",
+					list("ckey" = admin_ckey)
+				)
+				if(!query_remove_admin.warn_execute()){
+					qdel(query_remove_admin)
+					to_chat(usr, span_danger("Ошибка в запросе чистки при некорректной записи добавления нового администратора. Попробуйте добавить его еще раз, если права не выданы - сообщите разработчику с правами к БД, он разберется. Наверное. \[PERMISSIONEDIT next_rank\]"), confidential = TRUE)
+					return
+				}
+				QDEL_NULL(query_remove_admin)
+				to_chat(usr, span_danger("Запись о новом администраторе была удалена, так как ему не был присвоен ранг. Попробуйте еще раз. \[PERMISSIONEDIT next_rank\]"), confidential = TRUE)
+			// SS220 EDIT START - FIX
 			return
 
 		if (next_rank == RANK_DONE)

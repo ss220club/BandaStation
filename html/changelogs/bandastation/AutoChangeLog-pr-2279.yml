@@ -1,0 +1,4 @@
+author: "Selenion"
+delete-after: True
+changes:
+  - rscadd: "Добавлен негативный квирк \"Limp\" (Хромота), который запрещает персонажу бегать."

@@ -96,10 +96,10 @@
 		to_chat(user, span_warning("You must be holding the camera to continue!"))
 		return FALSE
 	var/desired_x = tgui_input_number(user, "How wide do you want the camera to shoot?", "Zoom", picture_size_x, picture_size_x_max, picture_size_x_min)
-	if(!desired_x || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH) || loc != user)
+	if(!desired_x || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH|ALLOW_PAI) || loc != user)
 		return FALSE
 	var/desired_y = tgui_input_number(user, "How high do you want the camera to shoot", "Zoom", picture_size_y, picture_size_y_max, picture_size_y_min)
-	if(!desired_y || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH) || loc != user)
+	if(!desired_y || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH|ALLOW_PAI) || loc != user)
 		return FALSE
 	picture_size_x = min(clamp(desired_x, picture_size_x_min, picture_size_x_max), CAMERA_PICTURE_SIZE_HARD_LIMIT)
 	picture_size_y = min(clamp(desired_y, picture_size_y_min, picture_size_y_max), CAMERA_PICTURE_SIZE_HARD_LIMIT)
@@ -195,7 +195,12 @@
 
 /// Check whether a mob could take a picture of the target turf.
 /obj/item/camera/proc/can_mob_target(turf/target_turf, mob/user)
-	return (target_turf in get_hear_turfs(user.client?.view || world.view, user.client?.eye || user))
+	// BANDASTATION TEMP FIX (shpuld be fixed with next upstream)
+	var/view = user.client?.view || world.view
+	var/list/viewlist = getviewsize(view)
+	var/range = max(viewlist[1], viewlist[2])
+	return (target_turf in get_hear_turfs(range, user.client?.eye || user))
+	// BANDASTATION TEMP FIX EMD
 
 /obj/item/camera/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	// Always skip on storage and tables
@@ -256,7 +261,7 @@
 	var/list/dead_spotted = list()
 	var/list/viewlist = getviewsize(user?.client?.view || world.view)
 	var/view_range = max(viewlist[1], viewlist[2]) + max(size_x, size_y)
-	var/viewer = user?.client?.eye || user || target // not sure why target is a fallback
+	var/viewer = get_turf(user?.client?.eye || user || target) // not sure why target is a fallback
 	var/list/seen = get_hear_turfs(view_range, viewer)
 	var/list/turfs = list()
 	var/list/mobs = list()

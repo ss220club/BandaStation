@@ -226,7 +226,7 @@
 	music_player = user
 	START_PROCESSING(SSinstruments, src)
 	if(id)
-		sync_play()
+		sync_play(user)
 
 /**
  * Attempts to find other instruments with the same ID and syncs them to our song.
@@ -423,6 +423,10 @@
 	if(new_bpm == bpm)
 		return
 	bpm = new_bpm
+
+	// BANDASTATION ADD: legacy tempo = deciseconds per beat
+	tempo = sanitize_tempo((60 SECONDS) / bpm, TRUE)
+
 	SEND_SIGNAL(parent, COMSIG_INSTRUMENT_TEMPO_CHANGE, src)
 	delay_residual = 0.0
 	// BANDASTATION EDIT END - BPM unlock
@@ -514,7 +518,7 @@
 /datum/song/stationary/should_stop_playing(atom/player)
 	. = ..()
 	if(. == STOP_PLAYING || . == IGNORE_INSTRUMENT_CHECKS)
-		return TRUE
+		return
 	var/obj/structure/musician/M = parent
 	return M.can_play(player) ? NONE : STOP_PLAYING
 

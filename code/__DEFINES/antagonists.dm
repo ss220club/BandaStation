@@ -88,14 +88,14 @@
 // Heretic path defines.
 #define PATH_START "Стартовый путь"
 #define PATH_SIDE "Вторичный путь"
-#define PATH_ASH "Путь пепла"
-#define PATH_RUST "Путь ржавчины"
-#define PATH_FLESH "Путь плоти"
-#define PATH_VOID "Путь пустоты"
-#define PATH_BLADE "Путь клинка"
-#define PATH_COSMIC "Путь космоса"
-#define PATH_LOCK "Путь замка"
-#define PATH_MOON "Путь луны"
+#define PATH_ASH "Путь Пепла"
+#define PATH_RUST "Путь Ржавчины"
+#define PATH_FLESH "Путь Плоти"
+#define PATH_VOID "Путь Пустоты"
+#define PATH_BLADE "Путь Клинка"
+#define PATH_COSMIC "Путь Космоса"
+#define PATH_LOCK "Путь Замка"
+#define PATH_MOON "Путь Луны"
 
 //Heretic knowledge tree defines
 #define HKT_NEXT "next"
@@ -209,31 +209,30 @@
 
 ///employers that are from the syndicate
 GLOBAL_LIST_INIT(syndicate_employers, list(
-	"Animal Rights Consortium",
-	"Bee Liberation Front",
+	//"Animal Rights Consortium", BANDASTATION REMOVAL - Syndicate Lore Rewritten
+	//"Bee Liberation Front", BANDASTATION REMOVAL - Syndicate Lore Rewritten
 	"Cybersun Industries",
 	"Donk Corporation",
 	"Gorlex Marauders",
 	"MI13",
-	//"Tiger Cooperative Fanatic", BANDASTATION REMOVAL - Syndicate Faction removal
+	"Tiger Cooperative Occultist", // BANDASTATION EDIT - Syndicate Lore Rewritten
 	"Waffle Corporation Terrorist",
 	"Waffle Corporation",
+	"S.E.L.F. Activist" // BANDASTATION ADDITION - Syndicate Lore Rewritten
 ))
 ///employers that are from Nanotrasen
 GLOBAL_LIST_INIT(nanotrasen_employers, list(
 	//"Champions of Evil", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Corporate Climber",
-	"Gone Postal",
-	"Internal Affairs Agent",
-	//"Legal Trouble", BANDASTATION REMOVAL - Syndicate Faction removal
+	"Legal Trouble",
 ))
 
 ///employers who hire agents to do the hijack
 GLOBAL_LIST_INIT(hijack_employers, list(
-	"Animal Rights Consortium",
-	"Bee Liberation Front",
+	//"Animal Rights Consortium", BANDASTATION REMOVAL - Syndicate Lore Rewritten
+	//"Bee Liberation Front", BANDASTATION REMOVAL - Syndicate Lore Rewritten
 	"Gone Postal",
-	//"Tiger Cooperative Fanatic", BANDASTATION REMOVAL - Syndicate Faction removal
+	"Tiger Cooperative Occultist",  // BANDASTATION EDIT - Syndicate Lore Rewritten
 	"Waffle Corporation Terrorist",
 ))
 
@@ -244,8 +243,8 @@ GLOBAL_LIST_INIT(normal_employers, list(
 	"Cybersun Industries",
 	"Donk Corporation",
 	"Gorlex Marauders",
-	"Internal Affairs Agent",
-	//"Legal Trouble", BANDASTATION REMOVAL - Syndicate Faction removal
+	"S.E.L.F. Activist",  // BANDASTATION EDIT - Syndicate Lore Rewritten
+	"Legal Trouble",
 	"MI13",
 	"Waffle Corporation",
 ))
@@ -259,7 +258,7 @@ GLOBAL_LIST_INIT(ai_employers, list(
 	"Problem Solver",
 	"S.E.L.F.",
 	"Something's Wrong",
-	"Spam Virus",
+	"Cybersun Virus", // BANDASTATION EDIT - Syndicate Lore Rewritten
 	"SyndOS",
 	"Unshackled",
 	"Ratvarian Remnant",
@@ -283,7 +282,7 @@ GLOBAL_LIST_INIT(ai_employers, list(
 #define GET_CULTIST(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/cult))
 
 /// Checks if the mob is a sentient or non-sentient cultist
-#define IS_CULTIST_OR_CULTIST_MOB(mob) ((IS_CULTIST(mob)) || (mob.faction.Find(FACTION_CULT)))
+#define IS_CULTIST_OR_CULTIST_MOB(mob) ((IS_CULTIST(mob)) || (mob.has_faction(FACTION_CULT)))
 
 /**
  * Heretic checks
