@@ -7,7 +7,7 @@
 /turf/open/space/basic,
 /area/space/nearstation{
 	ambience_index = "ruins";
-    name = "K13 nearstation"
+	name = "K13 nearstation"
 	})
 "aav" = (
 /obj/item/banner/ussp,
@@ -20375,7 +20375,6 @@
 	})
 "iZW" = (
 /obj/machinery/camera/motion/directional/south{
-	c_tag = s;
 	network = list("aicore")
 	},
 /obj/structure/lattice,
@@ -20435,7 +20434,6 @@
 	})
 "jaE" = (
 /obj/structure/table/glass,
-/obj/item/stack/sticky_tape/surgical,
 /obj/item/stack/medical/bone_gel,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/white,
@@ -39386,10 +39384,6 @@
 	})
 "rnl" = (
 /obj/structure/table/reinforced/rglass,
-/obj/item/stack/medical/gauze{
-	pixel_x = 7;
-	pixel_y = 6
-	},
 /obj/item/stack/medical/mesh{
 	pixel_x = -8;
 	pixel_y = 3
@@ -45994,7 +45988,6 @@
 	})
 "urr" = (
 /obj/structure/table/glass,
-/obj/item/stack/sticky_tape/surgical,
 /obj/item/stack/medical/bone_gel,
 /obj/effect/spawner/random/medical/surgery_tool,
 /turf/open/floor/iron/white,
@@ -48945,7 +48938,6 @@
 	})
 "vKH" = (
 /obj/structure/table/glass,
-/obj/item/stack/sticky_tape/surgical,
 /obj/item/stack/medical/bone_gel,
 /turf/open/floor/iron/white,
 /area/station/medical/surgery/fore{
@@ -52253,7 +52245,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/reagent_containers/blood/random,
-/obj/item/stack/medical/gauze/twelve,
 /turf/open/floor/wood,
 /area/station/engineering/main{
 	ambience_index = "ruins";
