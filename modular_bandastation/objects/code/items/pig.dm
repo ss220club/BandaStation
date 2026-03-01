@@ -12,3 +12,18 @@
 	use_delay_override = 4 SECONDS
 	w_class = WEIGHT_CLASS_SMALL
 	resistance_flags = FLAMMABLE
+
+/obj/item/toy/plush/cool_pig
+	name = "Крутой хряк"
+	desc = "Свинья в соллнечных очках ахуеть не встать!"
+	icon = 'modular_bandastation/objects/icons/obj/items/pig.dmi'
+	icon_state = "cool_pig"
+	inhand_icon_state = "cool_pig"
+	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/pig_lefthand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/pig_righthand.dmi'
+	attack_verb_continuous = list("хрюкает")
+	attack_verb_simple = list("хрюкаете")
+	squeak_override = list('modular_bandastation/objects/sounds/oink.ogg' = 1)
+	use_delay_override = 4 SECONDS
+	w_class = WEIGHT_CLASS_SMALL
+	resistance_flags = FLAMMABLE
