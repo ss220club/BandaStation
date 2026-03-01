@@ -1,6 +1,7 @@
 /datum/component/tts_component
 	var/datum/tts_seed/tts_seed = null
 	var/list/effects = list()
+	var/list/registered_voice_items = list()
 
 /datum/component/tts_component/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ATOM_TTS_SEED_CHANGE, PROC_REF(tts_seed_change))
@@ -17,6 +18,11 @@
 		UnregisterSignal(parent, COMSIG_MOB_EQUIPPED_ITEM)
 		UnregisterSignal(parent, COMSIG_CARBON_GAIN_ORGAN)
 		UnregisterSignal(parent, COMSIG_CARBON_LOSE_ORGAN)
+		for(var/obj/item/I as anything in registered_voice_items)
+			UnregisterSignal(I, COMSIG_ITEM_POST_UNEQUIP)
+			UnregisterSignal(I, COMSIG_MOVABLE_UPDATE_VOICE_EFFECT)
+			UnregisterSignal(I, COMSIG_QDELETING)
+		registered_voice_items.Cut()
 
 /datum/component/tts_component/Initialize(datum/tts_seed/new_tts_seed, list/effects)
 	if(!isatom(parent))
@@ -241,15 +247,19 @@
 		return
 	if(equipped_item.should_apply_voice_effect())
 		tts_effects_add(equipped_item.voice_effect)
+	registered_voice_items |= equipped_item
 	RegisterSignal(equipped_item, COMSIG_ITEM_POST_UNEQUIP, PROC_REF(on_item_unequip))
 	RegisterSignal(equipped_item, COMSIG_MOVABLE_UPDATE_VOICE_EFFECT, PROC_REF(on_item_update_voice_effect))
+	RegisterSignal(equipped_item, COMSIG_QDELETING, PROC_REF(on_registered_item_qdeleting))
 
 // Item got removed from us
 /datum/component/tts_component/proc/on_item_unequip(obj/item/item_dropping, force, newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
 	tts_effects_remove(item_dropping.voice_effect)
+	registered_voice_items -= item_dropping
 	UnregisterSignal(item_dropping, COMSIG_ITEM_POST_UNEQUIP)
 	UnregisterSignal(item_dropping, COMSIG_MOVABLE_UPDATE_VOICE_EFFECT)
+	UnregisterSignal(item_dropping, COMSIG_QDELETING)
 
 /datum/component/tts_component/proc/on_item_update_voice_effect(obj/item/item_affecting, should_apply)
 	SIGNAL_HANDLER
@@ -257,6 +267,10 @@
 		tts_effects_add(item_affecting.voice_effect)
 	else
 		tts_effects_remove(item_affecting.voice_effect)
+
+/datum/component/tts_component/proc/on_registered_item_qdeleting(obj/item/source)
+	SIGNAL_HANDLER
+	registered_voice_items -= source
 
 /datum/component/tts_component/proc/on_organ_gain(mob/living/carbon/user, obj/item/organ/organ_gained, special)
 	SIGNAL_HANDLER
