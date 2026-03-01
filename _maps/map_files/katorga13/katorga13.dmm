@@ -6,7 +6,8 @@
 /obj/structure/lattice,
 /turf/open/space/basic,
 /area/space/nearstation{
-	ambience_index = "ruins"
+	ambience_index = "ruins";
+    name = "K13 naerstation"
 	})
 "aav" = (
 /obj/item/banner/ussp,
