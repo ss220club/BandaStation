@@ -3,7 +3,9 @@
 	"map_name": "katorga13",
 	"map_path": "map_files/katorga13",
 	"map_file": "katorga13.dmm",
-	"main_floor": 1,
+	"space_ruin_levels": 0,
+	"space_empty_levels": 0,
+	"main_floor": 2,
 	"shuttles": {
 		"emergency": "emergency_kilo",
 		"ferry": "ferry_kilo",
@@ -12,6 +14,15 @@
 	},
 	"traits": [
 		{
+			"Baseturf": "/turf/open/misc/asteroid/basalt/airless",
+			"Linkage": "Cross"
+		},
+		{
+			"Baseturf": "/turf/open/space/openspace",
+			"Linkage": "Cross"
+		},
+		{
+			"Baseturf": "/turf/open/space/openspace",
 			"Linkage": "Cross"
 		}
 	],
