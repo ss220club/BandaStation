@@ -156,8 +156,8 @@
 		return ITEM_INTERACT_BLOCKING
 
 	visible_message(
-		span_notice("[declent_ru(NOMINATIVE)] закрывает [ru_p_theirs()] [limb.ru_plaintext_zone[PREPOSITIONAL]] с помощью [tool.declent_ru(GENITIVE)]."),
-		span_notice("Вы закрываете свою [limb.ru_plaintext_zone[PREPOSITIONAL]] с помощью [tool.declent_ru(GENITIVE)]."),
+		span_notice("[declent_ru(NOMINATIVE)] закрывает [ru_p_theirs()] [limb.ru_plaintext_zone[ACCUSATIVE]] с помощью [tool.declent_ru(GENITIVE)]."),
+		span_notice("Вы закрываете свою [limb.ru_plaintext_zone[ACCUSATIVE]] с помощью [tool.declent_ru(GENITIVE)]."),
 		span_hear("Вы слышите [tool?.get_temperature() ? "шипение" : "шуршание"]"),
 		vision_distance = 5,
 		visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
@@ -759,7 +759,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 		basemod *= mod_amt
 	if(HAS_TRAIT(patient, TRAIT_SURGICALLY_ANALYZED))
 		basemod *= 0.8
-	if(HAS_TRAIT(patient, TRAIT_ANALGESIA))
+	if(HAS_TRAIT(patient, TRAIT_ANALGESIA) || HAS_TRAIT(patient, TRAIT_STASIS) || patient.stat >= 2) // BANDASTATION EDIT
 		basemod *= 0.8
 	return basemod
 
@@ -890,7 +890,8 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 		if(HAS_TRAIT(surgeon, TRAIT_IGNORE_SURGERY_MODIFIERS) && !(operation_flags & OPERATION_ALWAYS_FAILABLE))
 			operation_args[OPERATION_SPEED] = 0
 
-		if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(GET_FAILURE_CHANCE(time, operation_args[OPERATION_SPEED]), 0, 99)))
+		var/failure_chance = get_modified_failure_chance(time, patient, surgeon, tool, operation_args) // BANDASTATION EDIT
+		if(operation_args[OPERATION_FORCE_FAIL] || prob(clamp(failure_chance, 0, 99))) // BANDASTATION EDIT
 			failure(operating_on, surgeon, tool, operation_args)
 			result |= ITEM_INTERACT_FAILURE
 			if (patient)
@@ -1014,8 +1015,8 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 
 	if(target.stat >= UNCONSCIOUS || HAS_TRAIT(target, TRAIT_KNOCKEDOUT))
 		return
-	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || drunken_patient && prob(drunken_ignorance_probability))
-		to_chat(target, span_notice("Вы испытываете тупое, онемевшее ощущение, когда на вашем теле делают хирургическую операцию."))
+	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || HAS_TRAIT(target, TRAIT_STASIS) || drunken_patient && prob(drunken_ignorance_probability)) // BANDASTATION EDIT
+		to_chat(target, span_notice("Вы испытываете притупленное покалывание, пока ваше тело оперируют."))
 		return
 	to_chat(target, span_userdanger(pain_message))
 	if(prob(30) && !mechanical_surgery)
@@ -1073,7 +1074,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	// Create a probability to ignore the pain based on drunkenness level
 	var/drunk_ignore_prob = clamp(patient.get_drunk_amount(), 0, 90)
 
-	if(HAS_TRAIT(patient, TRAIT_ANALGESIA) || prob(drunk_ignore_prob))
+	if(HAS_TRAIT(patient, TRAIT_ANALGESIA) || HAS_TRAIT(patient, TRAIT_STASIS) || prob(drunk_ignore_prob))
 		patient.clear_mood_event(SURGERY_MOOD_CATEGORY) //incase they gained the trait mid-surgery (or became drunk). has the added side effect that if someone has a bad surgical memory/mood and gets drunk & goes back to surgery, they'll forget they hated it, which is kinda funny imo.
 		return
 	if(patient.stat >= UNCONSCIOUS)
@@ -1136,7 +1137,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 
 	if(operation_flags & OPERATION_NOTABLE)
 		SSblackbox.record_feedback("tally", "surgeries_completed", 1, type)
-		surgeon.add_mob_memory(/datum/memory/surgery, deuteragonist = surgeon, surgery_type = name)
+		surgeon.add_mob_memory(/datum/memory/surgery, deuteragonist = get_patient(operating_on) || operating_on, surgery_type = name)
 
 	SEND_SIGNAL(surgeon, COMSIG_ATOM_SURGERY_SUCCESS, src, operating_on, tool)
 	play_operation_sound(operating_on, surgeon, tool, success_sound)
@@ -1188,7 +1189,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	var/screwedmessage = ""
 	switch(operation_args[OPERATION_SPEED])
 		if(2.5 to 3)
-			screwedmessage = " У вас почти получилось"
+			screwedmessage = " А ведь у вас почти получилось..."
 		if(3 to 4)
 			pass()
 		if(4 to 5)
