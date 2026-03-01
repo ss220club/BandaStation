@@ -654,7 +654,21 @@
 "gobbles" = "пожирает"
 "chomp" = "лопаете"
 "chomps" = "лопает"
-
+# Raw eggs' eat verb is "gulp down". "He gulp downS a raw egg." in result. Coding is fun but dumb.
+"gulp down" = "выпиваете"
+"gulp downs" = "выпивает"
+"slurp" = "отхлебываете"
+"slurps" = "отхлебывает"
+"sip" = "потягиваете"
+"sips" = "потягивает"
+"guzzle" = "заливаете в себя"
+"guzzles" = "заливает в себя"
+"drink" = "пьете"
+"drinks" = "пьет"
+"quaff" = "отпиваете"
+"quaffs" = "отпивает"
+"suck" = "втягиваете"
+"sucks" = "втягивает"
 # MARK: Say Verbs
 [say_verbs]
 # atom/movable
