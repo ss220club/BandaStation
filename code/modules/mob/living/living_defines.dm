@@ -1,6 +1,7 @@
 /mob/living
 	see_invisible = SEE_INVISIBLE_LIVING
 	abstract_type = /mob/living
+	plane = FOV_CULLED_MOB_PLANE // BANDASTATION ADDITION: FOV
 	hud_possible = list(HEALTH_HUD,STATUS_HUD,BLOOD_HUD,ANTAG_HUD)
 	pressure_resistance = 10
 	hud_type = /datum/hud/living
@@ -224,6 +225,10 @@
 
 	/// FOV view that is applied from either nativeness or traits
 	var/fov_view
+
+	var/fov_view_direction_angle = null // BANDASTATION ADDITION: FOV
+	var/fov_free_look = FALSE // BANDASTATION ADDITION: FOV
+
 	/// Lazy list of FOV traits that will apply a FOV view when handled.
 	var/list/fov_traits
 	///what multiplicative slowdown we get from turfs currently.

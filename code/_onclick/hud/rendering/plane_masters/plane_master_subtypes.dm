@@ -33,6 +33,25 @@
 	SIGNAL_HANDLER
 	hide_plane(source)
 
+// BANDASTATION ADDITION START: FOV
+/atom/movable/screen/plane_master/fov_culled_mob
+	name = "FOV-culled mobs"
+	documentation = "Mobs relay to GAME when FOV off (lit). When FOV on relay to GAME_UNMASKED only (cone) and apply layering_filter with lighting so mobs are lit and hidden outside cone"
+	plane = FOV_CULLED_MOB_PLANE
+	// relay into game world so mobs get lighting and sit between GAME_PLANE and ABOVE_GAME_PLANE (below trees, above objects), so we can use alpha masking to hides mobs using texture
+	render_relay_planes = list(RENDER_PLANE_GAME_WORLD)
+
+/atom/movable/screen/plane_master/fov_culled_mob/Initialize(mapload, datum/hud/hud_owner, datum/plane_master_group/home, offset)
+	. = ..()
+	add_filter("vision_cone", 1, alpha_mask_filter(render_source = OFFSET_RENDER_TARGET(FIELD_OF_VISION_BLOCKER_RENDER_TARGET, offset), flags = MASK_INVERSE))
+
+/atom/movable/screen/plane_master/game_world/above_mob
+	name = "game world above mob plane master"
+	documentation = "Objects with layer = ABOVE_MOB_LAYER draw here so they render above mobs on FOV_CULLED_MOB_PLANE"
+	plane = GAME_PLANE_ABOVE_MOB
+	render_relay_planes = list(RENDER_PLANE_GAME_WORLD)
+// BANDASTATION ADDITION END: FOV
+
 /atom/movable/screen/plane_master/clickcatcher
 	name = "Click Catcher"
 	documentation = "Contains the screen object we use as a backdrop to catch clicks on portions of the screen that would otherwise contain nothing else. \

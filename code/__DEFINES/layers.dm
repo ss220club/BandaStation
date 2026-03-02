@@ -20,11 +20,17 @@
 
 #define TRANSPARENT_FLOOR_PLANE -10
 
-#define FLOOR_PLANE -6
+// BANDASTATION EDIT START: FOV (reorder)
+#define FLOOR_PLANE -8
+#define WALL_PLANE -7
+#define GAME_PLANE -6
+#define FOV_CULLED_MOB_PLANE -5
+// that's how we can handle objects that use layer ABOVE_MOB_LAYER relay after mobs so they draw on top (for instance - chairs)
+#define GAME_PLANE_ABOVE_MOB -4
+// BANDASTATION EDIT END: FOV
 
-#define WALL_PLANE -5
-#define GAME_PLANE -4
 #define ABOVE_GAME_PLANE -3
+
 ///Slightly above the game plane but does not catch mouse clicks. Useful for certain visuals that should be clicked through, like seethrough trees
 #define SEETHROUGH_PLANE -2
 
@@ -73,6 +79,10 @@
 #define RENDER_PLANE_UNLIT_GAME 19
 
 #define RENDER_PLANE_LIGHTING 20
+// BANDASTATION FOV
+// so this is fucking sucks - this rt is for the lighting plate so FOV mob plane can multiply by it when drawing to GAME_UNMASKED (lit mobs in cone only)
+#define LIGHTING_PLATE_RENDER_TARGET "*LIGHTING_PLATE_RENDER_TARGET"
+// BANDASTATION FOV
 
 /// Masks the lighting plane with turfs, so we never light up the void
 /// Failing that, masks emissives and the overlay lighting plane

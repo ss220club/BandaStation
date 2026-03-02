@@ -67,6 +67,9 @@
 						to_chat(usr, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
 						return
 
+		if(CONFIG_GET(flag/native_fov))
+			fov_show_lobby_notice(client)
+
 		ready = PLAYER_READY_TO_PLAY
 		SStitle.title_output(client, TRUE, "toggleReady")
 
@@ -74,6 +77,9 @@
 		if(SSticker.current_state == GAME_STATE_FINISHED)
 			to_chat(usr, span_warning("Невозможно присоединиться, игра уже окончена!"))
 			return
+
+		if(CONFIG_GET(flag/native_fov))
+			fov_show_lobby_notice(client)
 
 		GLOB.latejoin_menu.ui_interact(usr)
 

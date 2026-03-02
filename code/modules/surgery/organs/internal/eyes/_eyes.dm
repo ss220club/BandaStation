@@ -54,7 +54,7 @@
 	/// Glasses cannot be worn over these eyes. Currently unused
 	var/no_glasses = FALSE
 	/// Native FOV that will be applied if a config is enabled
-	var/native_fov = FOV_90_DEGREES
+	var/native_fov = FOV_145_DEGREES // BANDASTATION EDIT: FOV
 	/// Scarring on this organ
 	var/scarring = NONE
 

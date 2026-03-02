@@ -183,6 +183,7 @@
 	blend_mode_override = BLEND_MULTIPLY
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	critical = PLANE_CRITICAL_DISPLAY
+	render_target = LIGHTING_PLATE_RENDER_TARGET // BANDASTATION ADDITION: FOV
 	render_relay_planes = list(RENDER_PLANE_GAME)
 	/// A list of light cutoffs we're actively using, (mass, r, g, b) to avoid filter churn
 	var/list/light_cutoffs
@@ -400,16 +401,160 @@
 	plane = RENDER_PLANE_GAME_MASKED
 	render_relay_planes = list(RENDER_PLANE_MASTER)
 
+// BANDASTATION ADDITION START: FOV
+GLOBAL_VAR_INIT(fov_gaussblur, 0.5)
+GLOBAL_VAR_INIT(fov_color, "#000000")
+GLOBAL_VAR_INIT(fov_alpha, 0.2)
+// filled by fov_update_glob_matrix_from_color()
+GLOBAL_VAR_INIT(fov_matrix, list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0))
+
+/client/var/fov_alpha
+/client/var/fov_color
+/client/var/fov_blur
+/client/var/list/fov_matrix
+
+/proc/fov_update_client_matrix(client/C)
+	if(!C)
+		return
+	var/list/rgb = rgb2num(C.fov_color || GLOB.fov_color)
+	if(length(rgb) < 3)
+		return
+	var/a = C.fov_alpha
+	if(isnull(a))
+		a = GLOB.fov_alpha
+	if(!C.fov_matrix)
+		C.fov_matrix = list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0)
+	var/tr = (rgb[1] / 255) * a
+	var/tg = (rgb[2] / 255) * a
+	var/tb = (rgb[3] / 255) * a
+	var/list/m = C.fov_matrix
+	m[1] = 1 - a
+	m[2] = 0
+	m[3] = 0
+	m[4] = 0
+	m[5] = 0
+	m[6] = 1 - a
+	m[7] = 0
+	m[8] = 0
+	m[9] = 0
+	m[10] = 0
+	m[11] = 1 - a
+	m[12] = 0
+	m[13] = 0
+	m[14] = 0
+	m[15] = 0
+	m[16] = 1
+	m[17] = tr
+	m[18] = tg
+	m[19] = tb
+	m[20] = 0
+
+/proc/fov_refresh_client_plane(client/C)
+	if(!C?.mob?.hud_used)
+		return
+	var/datum/hud/H = C.mob.hud_used
+	for(var/atom/movable/screen/plane_master/rendering_plate/masked_game_plate/plate as anything in H.get_true_plane_masters(RENDER_PLANE_GAME_MASKED))
+		plate.modify_filter("fov_matrix", color_matrix_filter(C.fov_matrix))
+
+/proc/fov_refresh_client_blur(client/C)
+	if(!C?.mob?.hud_used)
+		return
+	var/blur_val = (C.fov_blur != null) ? C.fov_blur : GLOB.fov_gaussblur
+	var/datum/hud/H = C.mob.hud_used
+	for(var/atom/movable/screen/plane_master/rendering_plate/masked_game_plate/plate as anything in H.get_true_plane_masters(RENDER_PLANE_GAME_MASKED))
+		plate.modify_filter("fov_blur", gauss_blur_filter(blur_val))
+
+/proc/fov_load_client_prefs(client/C)
+	if(!C)
+		return
+	if(!C.prefs)
+		C.fov_alpha = GLOB.fov_alpha
+		C.fov_color = GLOB.fov_color
+		C.fov_blur = GLOB.fov_gaussblur
+	else
+		var/datum/preference/alpha_pref = GLOB.preference_entries_by_key["fov_alpha"]
+		var/datum/preference/color_pref = GLOB.preference_entries_by_key["fov_color"]
+		var/datum/preference/blur_pref = GLOB.preference_entries_by_key["fov_blur"]
+		if(alpha_pref && color_pref)
+			var/list/save_data = C.prefs.get_save_data_for_savefile_identifier(PREFERENCE_PLAYER)
+			var/alpha_val = alpha_pref.read(save_data, C.prefs)
+			var/color_val = color_pref.read(save_data, C.prefs)
+			C.fov_alpha = !isnull(alpha_val) ? (alpha_val / 100) : GLOB.fov_alpha
+			C.fov_color = (color_val && !isnull(color_val)) ? color_val : GLOB.fov_color
+		else
+			C.fov_alpha = GLOB.fov_alpha
+			C.fov_color = GLOB.fov_color
+		if(blur_pref)
+			var/list/save_data = C.prefs.get_save_data_for_savefile_identifier(PREFERENCE_PLAYER)
+			var/blur_val = blur_pref.read(save_data, C.prefs)
+			C.fov_blur = !isnull(blur_val) ? (blur_val / 100) : GLOB.fov_gaussblur
+		else
+			C.fov_blur = GLOB.fov_gaussblur
+	if(!C.fov_matrix)
+		C.fov_matrix = list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0)
+	fov_update_client_matrix(C)
+	fov_refresh_client_plane(C)
+	fov_refresh_client_blur(C)
+
+/proc/fov_update_glob_matrix_from_color() // ughm...
+	var/list/rgb = rgb2num(GLOB.fov_color)
+	if(length(rgb) < 3)
+		return
+	var/a = GLOB.fov_alpha
+	var/tr = (rgb[1] / 255) * a
+	var/tg = (rgb[2] / 255) * a
+	var/tb = (rgb[3] / 255) * a
+	var/list/m = GLOB.fov_matrix
+	m[1] = 1 - a
+	m[2] = 0
+	m[3] = 0
+	m[4] = 0
+	m[5] = 0
+	m[6] = 1 - a
+	m[7] = 0
+	m[8] = 0
+	m[9] = 0
+	m[10] = 0
+	m[11] = 1 - a
+	m[12] = 0
+	m[13] = 0
+	m[14] = 0
+	m[15] = 0
+	m[16] = 1
+	m[17] = tr
+	m[18] = tg
+	m[19] = tb
+	m[20] = 0
+// BANDASTATION ADDITION END: FOV
+
+// BANDASTATION EDIT START: FOV
 /atom/movable/screen/plane_master/rendering_plate/masked_game_plate/Initialize(mapload, datum/hud/hud_owner, datum/plane_master_group/home, offset)
 	. = ..()
-	add_filter("fov_blur", 1, gauss_blur_filter(1.8))
+	//fov_update_glob_matrix_from_color()
+	add_filter("fov_blur", 1, gauss_blur_filter(GLOB.fov_gaussblur))
 	add_filter("fov_handled_space", 2, alpha_mask_filter(render_source = OFFSET_RENDER_TARGET(FIELD_OF_VISION_BLOCKER_RENDER_TARGET, offset)))
-	add_filter("fov_matrix", 3, color_matrix_filter(list(0.5,-0.15,-0.15,0, -0.15,0.5,-0.15,0, -0.15,-0.15,0.5,0, 0,0,0,1, 0,0,0,0)))
+	add_filter("fov_matrix", 3, color_matrix_filter(GLOB.fov_matrix))
+// BANDASTATION ADDITION END: FOV
 
 /atom/movable/screen/plane_master/rendering_plate/masked_game_plate/show_to(mob/mymob)
 	. = ..()
 	if(!. || !mymob)
 		return .
+	// BANDASTATION ADDITION START: FOV
+	var/client/C = mymob.client
+	if(C)
+		if(isnull(C.fov_alpha))
+			fov_load_client_prefs(C)
+		else if(!C.fov_matrix)
+			C.fov_matrix = list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0)
+			fov_update_client_matrix(C)
+			fov_refresh_client_plane(C)
+			fov_refresh_client_blur(C)
+		if(C.fov_matrix)
+			modify_filter("fov_matrix", color_matrix_filter(C.fov_matrix))
+		var/blur_val = (C.fov_blur != null) ? C.fov_blur : GLOB.fov_gaussblur
+		modify_filter("fov_blur", gauss_blur_filter(blur_val))
+	// BANDASTATION ADDITION END: FOV
 	RegisterSignal(mymob, SIGNAL_ADDTRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_enabled), override = TRUE)
 	RegisterSignal(mymob, SIGNAL_REMOVETRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_disabled), override = TRUE)
 	if(HAS_TRAIT(mymob, TRAIT_FOV_APPLIED))

@@ -8,8 +8,10 @@
 	..()
 	return TRUE
 
-/mob/living/carbon/Move(NewLoc, direct)
-	. = ..()
+// BANDASTATION EDIT START: FOV
+/mob/living/carbon/Move(NewLoc, direct, glide_size_override = 0, update_dir = TRUE)
+	. = ..(NewLoc, direct, glide_size_override, update_dir)
+// BANDASTATION EDIT END: FOV
 	if(!. || (movement_type & FLOATING)) //floating is easy
 		return
 	if(nutrition <= 0 || stat == DEAD)

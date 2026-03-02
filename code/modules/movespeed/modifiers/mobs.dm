@@ -21,6 +21,14 @@
 /datum/movespeed_modifier/slaughter
 	multiplicative_slowdown = -1
 
+// BANDASTATION ADDITION START: FOV
+/// Slower when moving in the direction opposite to mob.dir (walking backwards).
+/datum/movespeed_modifier/walking_backwards
+	id = MOVESPEED_ID_WALKING_BACKWARDS
+	multiplicative_slowdown = 0.5
+	blacklisted_movetypes = (FLYING|FLOATING)
+// BANDASTATION ADDITION END: FOV
+
 /datum/movespeed_modifier/resonance
 	multiplicative_slowdown = 0.75
 

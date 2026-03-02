@@ -14,6 +14,7 @@
 	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT)
 	layer = OBJ_LAYER
 	interaction_flags_mouse_drop = ALLOW_RESTING
+	plane = FOV_CULLED_MOB_PLANE // BANDASTATION EDIT: FOV
 
 	var/buildstacktype = /obj/item/stack/sheet/iron
 	var/buildstackamount = 1
@@ -153,8 +154,10 @@
 /obj/structure/chair/proc/handle_layer()
 	if(has_buckled_mobs() && dir == NORTH)
 		layer = ABOVE_MOB_LAYER
+		plane = GAME_PLANE_ABOVE_MOB // BANDASTATION ADDITION: FOV
 	else
 		layer = OBJ_LAYER
+		plane = FOV_CULLED_MOB_PLANE // BANDASTATION ADDITION: FOV
 
 /obj/structure/chair/post_buckle_mob(mob/living/M)
 	. = ..()
