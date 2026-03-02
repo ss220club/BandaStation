@@ -31,6 +31,13 @@
 /obj/structure/grille/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/atmos_sensitive, mapload)
+	// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+	for(var/atom/movable/los_proxy/proxy as anything in vis_contents)
+		proxy.layer = 2.85
+		proxy.blend_mode = BLEND_INSET_OVERLAY
+#endif
+// BANDASTATION MOD END: LOS
 
 /obj/structure/grille/Destroy()
 	update_cable_icons_on_turf(get_turf(src))

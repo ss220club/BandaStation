@@ -29,6 +29,12 @@
 
 /obj/machinery/door/poddoor/Initialize(mapload)
 	. = ..()
+	// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+	shadowcaster_ref = new /atom/movable/shadowcaster_dynamic(loc, src, SHADOW_ANIM_DOOR)
+	shadowcaster_ref.animated_shadow = FALSE
+#endif
+	// BANDASTATION MOD END: LOS
 	if(show_nav_computer_icon)
 		AddElement(/datum/element/nav_computer_icon, 'icons/effects/nav_computer_indicators.dmi', "airlock", TRUE)
 

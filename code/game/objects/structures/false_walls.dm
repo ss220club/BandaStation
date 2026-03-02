@@ -25,6 +25,11 @@
 	var/walltype = /turf/closed/wall
 	var/girder_type = /obj/structure/girder/displaced
 	var/opening = FALSE
+	// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+	var/atom/movable/shadowcaster_dynamic/shadowcaster_ref
+#endif
+	// BANDASTATION MOD END: LOS
 
 /obj/structure/falsewall/get_save_vars()
 	. = ..()
@@ -33,11 +38,24 @@
 
 /obj/structure/falsewall/Initialize(mapload)
 	. = ..()
+	// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+	shadowcaster_ref = new /atom/movable/shadowcaster_dynamic(loc, src, SHADOW_ANIM_FALSE_WALL)
+#endif
+	// BANDASTATION MOD END: LOS
 	var/obj/item/stack/initialized_mineral = new mineral // Okay this kinda sucks.
 	set_custom_materials(initialized_mineral.mats_per_unit, mineral_amount)
 	qdel(initialized_mineral)
 	air_update_turf(TRUE, TRUE)
 	update_appearance()
+
+	// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+/obj/structure/falsewall/Destroy()
+	QDEL_NULL(shadowcaster_ref)
+	return ..()
+#endif
+	// BANDASTATION MOD END: LOS
 
 /obj/structure/falsewall/attack_hand(mob/user, list/modifiers)
 	if(opening)
@@ -77,6 +95,12 @@
 	if(opening)
 		icon = initial(icon)
 		icon_state = "[base_icon_state]-[density ? "opening" : "closing"]"
+		// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+		if(shadowcaster_ref)
+			shadowcaster_ref.update_from_door(src)
+#endif
+	// BANDASTATION MOD END: LOS
 		return ..()
 	if(density)
 		icon = fake_icon
@@ -84,6 +108,12 @@
 	else
 		icon = initial(icon)
 		icon_state = "[base_icon_state]-open"
+		// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+	if(shadowcaster_ref)
+		shadowcaster_ref.update_from_door(src)
+#endif
+	// BANDASTATION MOD END: LOS
 	return ..()
 
 /obj/structure/falsewall/proc/ChangeToWall(delete = 1)

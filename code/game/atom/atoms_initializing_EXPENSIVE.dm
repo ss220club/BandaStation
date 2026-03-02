@@ -112,6 +112,7 @@
  * * [/turf/proc/Initialize]
  * * [/turf/open/space/proc/Initialize]
  */
+
 /atom/proc/Initialize(mapload, ...)
 	SHOULD_NOT_SLEEP(TRUE)
 	SHOULD_CALL_PARENT(TRUE)
@@ -121,6 +122,16 @@
 	flags_1 |= INITIALIZED_1
 
 	SET_PLANE_IMPLICIT(src, plane)
+
+	// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+	// retarded double work but i don't give a shit
+	if(((plane - GAME_PLANE) % PLANE_RANGE == 0) && istype(src, /obj) && !render_target) // modulo check to handle multiz offsets without relying on SSmapping tables
+		render_target = "rt_\ref[src]"
+		var/atom/movable/los_proxy/proxy = new(null)
+		proxy.attach_to(src)
+	// BANDASTATION MOD END: LOS
+#endif
 
 	if(LAZYLEN(hud_possible))
 		hud_possible = string_assoc_list(hud_possible)
