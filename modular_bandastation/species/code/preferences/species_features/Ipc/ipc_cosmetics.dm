@@ -194,6 +194,13 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 /datum/preference/choiced/ipc_head_accessory/create_default_value()
 	return ""
 
+/datum/preference/choiced/ipc_head_accessory/compile_constant_data()
+	. = ..()
+	var/list/display_names = list("" = "Нет")
+	for(var/key in GLOB.ipc_head_accessory_options)
+		display_names[key] = GLOB.ipc_head_accessory_options[key]
+	.[CHOICED_PREFERENCE_DISPLAY_NAMES] = display_names
+
 /datum/preference/choiced/ipc_head_accessory/is_accessible(datum/preferences/preferences)
 	. = ..()
 	if(!.)
@@ -213,6 +220,13 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	main_feature_name = "Хвост"
 	can_randomize = FALSE
+
+/datum/preference/choiced/ipc_tail/compile_constant_data()
+	. = ..()
+	.[CHOICED_PREFERENCE_DISPLAY_NAMES] = list(
+		"none" = "Нет",
+		"plug" = "Заглушка"
+	)
 
 /datum/preference/choiced/ipc_tail/init_possible_values()
 	return list("none", "plug")
@@ -245,6 +259,13 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	main_feature_name = "Рука зарядника"
 	can_randomize = FALSE
+
+/datum/preference/choiced/ipc_charger_arm/compile_constant_data()
+	. = ..()
+	.[CHOICED_PREFERENCE_DISPLAY_NAMES] = list(
+		"left" = "Левая рука",
+		"right" = "Правая рука"
+	)
 
 /datum/preference/choiced/ipc_charger_arm/init_possible_values()
 	return list("left", "right")
