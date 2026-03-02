@@ -192,7 +192,7 @@
 	if(real && !sterile)
 		victim.Paralyze(1 SECONDS)
 		victim.adjust_confusion(20 SECONDS)
-		victim.Knockdown(10 SECONDS)
+		victim.Knockdown(15 SECONDS) //BANDASTATION EDIT - было 5 SECONDS
 	GoIdle() //so it doesn't jump the people that tear it off
 
 	addtimer(CALLBACK(src, PROC_REF(Impregnate), victim), rand(MIN_IMPREGNATION_TIME, MAX_IMPREGNATION_TIME))
