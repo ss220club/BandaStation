@@ -1,5 +1,5 @@
-/datum/asset/spritesheet/simple/paper
-	name = "paper"
+/datum/asset/spritesheet/simple/stamps
+	name = "stamps"
 	assets = list(
 		"stamp-clown" = 'icons/stamp_icons/large_stamp-clown.png',
 		"stamp-deny" = 'icons/stamp_icons/large_stamp-deny.png',
@@ -29,4 +29,10 @@
 	assets = list(
 		"ntlogo.png" = 'icons/paper_icons/ntlogo.png',
 		"syndielogo.png" ='icons/paper_icons/syndielogo.png',
+	)
+
+// Contains 256x128 versions of various in game company logos
+/datum/asset/simple/logos
+	assets = list(
+		"nanotrasen-logo" = 'icons/ui/logos/nanotrasen-logo.png',
 	)

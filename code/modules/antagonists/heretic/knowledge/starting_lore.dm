@@ -17,9 +17,9 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * The base heretic knowledge. Grants the Mansus Grasp spell.
  */
 /datum/heretic_knowledge/spell/basic
-	name = "Break of Dawn"
+	name = "Рассвет"
 	desc = "Начните свое путешествие в Мансус. \
-		Дарует вам Хватку Мансуса, мощное и улучшаемое обездвиживающее заклинание, \
+		Дарует вам «Хватку Мансуса», мощное и улучшаемое обездвиживающее заклинание, \
 		которое может быть применено независимо от наличия фокусировки."
 	action_to_add = /datum/action/cooldown/spell/touch/mansus_grasp
 	cost = 0
@@ -44,7 +44,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 	INVOKE_ASYNC(cast_on, TYPE_PROC_REF(/atom/movable, say), message = "R'CH T'H F'SH!", forced = "fishing rod infusion invocation")
 	playsound(cast_on, /datum/action/cooldown/spell/touch/mansus_grasp::sound, 15)
-	cast_on.visible_message(span_notice("[cast_on] snaps [cast_on.p_their()] fingers next to [held_rod], covering it in a burst of purple flames!"))
+	cast_on.visible_message(span_notice("[cast_on] щёлкает пальцами рядом с [held_rod], окутывая его вспышкой фиолетового пламени!"))
 
 	ADD_TRAIT(held_rod, TRAIT_ROD_MANSUS_INFUSED, REF(held_rod))
 	held_rod.difficulty_modifier -= 20
@@ -65,8 +65,8 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * Also includes a ritual to turn their heart into a living heart.
  */
 /datum/heretic_knowledge/living_heart
-	name = "The Living Heart"
-	desc = "Дарует вам Живое сердце, позволяющее отслеживать жертвенные цели. \
+	name = "Живое сердце"
+	desc = "Дарует вам «Живое сердце», позволяющее отслеживать жертвенные цели. \
 		Если вы потеряете сердце, вы можете трансмутировать мак и лужу крови, \
 		чтобы пробудить свое сердце в Живое сердце. Если ваше сердце кибернетическое, \
 		вы не сможете возродить его."
@@ -111,7 +111,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 	if(where_to_put_our_heart)
 		where_to_put_our_heart.AddComponent(/datum/component/living_heart)
-		desc = "Дарует вам Живое сердце, привязанное к вашему [where_to_put_our_heart.name], позволяя отслеживать жертвенные цели. \
+		desc = "Дарует вам «Живое сердце», привязанное к вашему [where_to_put_our_heart.name], позволяя отслеживать жертвенные цели. \
 			Если вы потеряете [where_to_put_our_heart.ru_p_own(ACCUSATIVE)] [where_to_put_our_heart.declent_ru(ACCUSATIVE)], вы можете трансмутировать мак и лужу крови, \
 			чтобы пробудить [where_to_put_our_heart.ru_p_own(ACCUSATIVE)] [where_to_put_our_heart.declent_ru(ACCUSATIVE)] в Живое сердце. \
 			Если [where_to_put_our_heart.ru_p_yours()] [where_to_put_our_heart.declent_ru(NOMINATIVE)] кибернетическое, ритуал будет невозможен!"
@@ -178,7 +178,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * They require a focus to cast advanced spells.
  */
 /datum/heretic_knowledge/amber_focus
-	name = "Amber Focus"
+	name = "Янтарный фокусировщик"
 	desc = "Позволяет трансмутировать лист стекла и пару глаз, чтобы создать Янтарную фокусировку. \
 		Для того чтобы произносить более сложные заклинания, необходимо носить фокусировку."
 	required_atoms = list(
@@ -193,8 +193,8 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	research_tree_icon_state = "eldritch_necklace"
 
 /datum/heretic_knowledge/spell/cloak_of_shadows
-	name = "Cloak of Shadow"
-	desc = "Дарует вам заклинание Cloak of Shadow. Это заклинание полностью скрывает вашу личность в фиолетовой дымке \
+	name = "Покров Тени"
+	desc = "Дарует вам заклинание «Покров Тени». Это заклинание полностью скрывает вашу личность в фиолетовой дымке \
 		на три минуты, помогая вам сохранять секретность. Для наложения заклинания требуется фокусировка."
 	action_to_add = /datum/action/cooldown/spell/shadow_cloak
 	cost = 0
@@ -208,11 +208,11 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * Overall, it's a tradeoff between speed and stealth or power.
  */
 /datum/heretic_knowledge/codex_cicatrix
-	name = "Codex Cicatrix"
-	desc = "Позволяет трансмутировать книгу, любую ручку, любое тело (животного или человека) и шкуру или кожу, чтобы создать Codex Cicatrix. \
-		Codex Cicatrix можно использовать при истощении влияний для получения дополнительных знаний, но при этом возрастает риск быть замеченным. \
+	name = "Кодекс Цикатрикс"
+	desc = "Позволяет трансмутировать книгу, любую ручку, любое тело (животного или человека) и шкуру или кожу, чтобы создать кодекс Цикатрикс. \
+		Кодекс Цикатрикс можно использовать при извлечении влияний для получения дополнительных знаний, но при этом возрастает риск быть замеченным. \
 		Его также можно использовать для того, чтобы легче рисовать и удалять руны трансмутации, и использоваться в качестве фокусировки"
-	gain_text = "Оккультизм оставляет фрагменты знаний и силы везде и всюду. Codex Cicatrix - один из таких примеров. \
+	gain_text = "Оккультизм оставляет фрагменты знаний и силы везде и всюду. Кодекс Цикатрикс - один из таких примеров. \
 		В кожаном переплете и на старых страницах открывается путь к Мансусу."
 	required_atoms = list(
 		list(/obj/item/toy/eldritch_book, /obj/item/book) = 1,
@@ -275,13 +275,13 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		stack_trace("Somehow, no book in codex cicatrix selected atoms! [english_list(selected_atoms)]")
 	playsound(body, 'sound/items/poster/poster_ripped.ogg', 100, TRUE)
 	body.do_jitter_animation()
-	body.visible_message(span_danger("An awful ripping sound is heard as [ripped_thing]'s [exterior_text] is ripped straight out, wrapping around [le_book || "the book"], turning into an eldritch shade of blue!"))
+	body.visible_message(span_danger("Ужасный рвущийся звук раздается, когда [ripped_thing.declent_ru(ACCUSATIVE)] [exterior_text] вырывается наружу, обволакивая всё вокруг [le_book || "книги"], приобретая жуткий, потусторонний оттенок!"))
 	return ..()
 
 /datum/heretic_knowledge/feast_of_owls
-	name = "Feast of Owls"
-	desc = "Allows you to undergo a ritual that gives you 5 knowledge points but locks you out of ascension. This can only be done once and cannot be reverted."
-	gain_text = "Under the soft glow of unreason there is a beast that stalks the night. I shall bring it forth and let it enter my presence. It will feast upon my amibitions and leave knowledge in its wake."
+	name = "Пир для Сов"
+	desc = "Позволяет вам пройти ритуал, который дает вам 5 очков знаний, но не даёт возможности совершить вознесение. Это можно сделать только один раз и эффект нельзя отменить."
+	gain_text = "Под мягким сиянием безрассудства скрывается Зверь, крадущийся в ночи. Я выведу его на свет и позволю ему предстать предо мной. Он насытится моими амбициями и оставит после себя знания."
 	is_starting_knowledge = TRUE
 	required_atoms = list()
 	research_tree_icon_path = 'icons/mob/actions/actions_animal.dmi'
@@ -293,8 +293,8 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	return !invoker.feast_of_owls
 
 /datum/heretic_knowledge/feast_of_owls/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
-	var/alert = tgui_alert(user,"Do you really want to forsake your ascension? This action cannot be reverted.", "Feast of Owls", list("Yes I'm sure", "No"), 30 SECONDS)
-	if(alert != "Yes I'm sure" || QDELETED(user) || QDELETED(src) || get_dist(user, loc) > 2)
+	var/alert = tgui_alert(user,"Вы действительно хотите отказаться от своего вознесения? Это действие невозможно отменить.", "Пир для Сов", list("Да, я уверен", "Нет"), 30 SECONDS)
+	if(alert != "Да, я уверен" || QDELETED(user) || QDELETED(src) || get_dist(user, loc) > 2)
 		return FALSE
 	var/datum/antagonist/heretic/heretic_datum = GET_HERETIC(user)
 	if(QDELETED(heretic_datum) || heretic_datum.feast_of_owls)
@@ -312,13 +312,13 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		playsound(loc, 'sound/items/eatfood.ogg', 100, TRUE)
 		heretic_datum.adjust_knowledge_points(1)
 
-		to_chat(user, span_danger("You feel something invisible tearing away at your very essence!"))
+		to_chat(user, span_danger("Вы чувствуете, как что-то невидимое разрушает саму вашу сущность!"))
 		user.do_jitter_animation()
 		sleep(1 SECONDS)
 		if(QDELETED(user) || QDELETED(heretic_datum))
 			return FALSE
 
-	to_chat(user, span_danger(span_big("Your ambition is ravaged, but something powerful remains in its wake...")))
+	to_chat(user, span_danger(span_big("Ваши амбиции разрушены, но на их месте пробуждается нечто могущественное...")))
 	var/drain_message = pick_list(HERETIC_INFLUENCE_FILE, "drain_message")
 	to_chat(user, span_hypnophrase(span_big("[drain_message]")))
 	return .
@@ -329,11 +329,11 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  * Gives access to solars since those doors are especially useful to get in or out of space.
  */
 /datum/heretic_knowledge/bookworm
-	name = "Warren King's Welcome"
-	desc = "Allows you to transmute 5 cable pieces and a piece of paper to infuse any ID with maintenace and external airlock access."
-	gain_text = "Gnawed into vicious-stained fingerbones, my grim invitation snaps my nauseous and clouded mind towards the heavy-set door. \
-	Slowly, the light dances between a crawling darkness, blanketing the fetid promenade with infinite machinations. \
-	But the King will soon take his pound of flesh. Even here, the taxman takes their cut. For there are a thousands mouths to feed."
+	name = "Приветствие Уоррена Кинга"
+	desc = "Позволяет трансмутировать 5 обрезков провода и лист бумаги, чтобы наделить любую ID-карту доступом в технические туннели и к внешним шлюзам"
+	gain_text = "Впившееся в осквернённые жестокостью кости пальцев, моё мрачное приглашение рывком обращает мой мутный, подташнивающий разум к массивной двери. \
+	Свет медленно пляшет в ползущей тьме, укрывая зловонный променад бесконечными кознями. \
+	Но Король скоро получит свой фунт плоти. Даже здесь налоговик требует свою долю. Ибо есть тысяча ртов, ждущих пищи."
 	required_atoms = list(
 		/obj/item/stack/cable_coil = 5,
 		/obj/item/paper = 1,
@@ -352,7 +352,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		selected_atoms += used_id
 		return TRUE
 
-	user.balloon_alert(user, "ritual failed, no ID lacking access!")
+	user.balloon_alert(user, "Ритуал провален, ID не имеет доступа!")
 	return FALSE
 
 /datum/heretic_knowledge/bookworm/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
