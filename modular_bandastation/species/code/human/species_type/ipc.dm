@@ -123,6 +123,8 @@
 	// ---- Косметика ----
 	/// Текущее выражение экрана (задаётся только в игре через абилку, не сохраняется)
 	var/ipc_face_state = ""
+	/// Зона установки зарядного порта (задаётся из настроек персонажа)
+	var/ipc_charger_arm_zone = BODY_ZONE_L_ARM
 
 /datum/species/ipc/get_species_description()
 	return "IPC (Integrated Positronic Chassis) — искусственные синтетики на основе позитронного ядра. \
@@ -166,9 +168,14 @@
 	var/datum/action/cooldown/ipc_overclock/overclock = new()
 	overclock.Grant(H)
 
-	// Выдаём встроенный зарядный порт всем IPC (roundstart implant)
+	// Выдаём встроенный зарядный порт в левую руку по умолчанию.
+	// Настройка руки через ipc_charger_arm preference переставит его при загрузке.
 	var/obj/item/implant/ipc/charger/charger_impl = new()
-	charger_impl.implant(H, BODY_ZONE_CHEST, null, TRUE, TRUE)
+	charger_impl.implant(H, BODY_ZONE_L_ARM, null, TRUE, TRUE)
+
+	// Регистрируем обработчик применения настроек персонажа
+	// (используется для установки брендовых имплантов в нужные руки после загрузки всех настроек)
+	RegisterSignal(H, COMSIG_HUMAN_PREFS_APPLIED, PROC_REF(on_prefs_applied))
 
 	// Регистрируем обработчик электрошока
 	RegisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT, PROC_REF(on_electrocute))
@@ -218,7 +225,25 @@
 	QDEL_NULL(ipc_os)
 
 	// Отменяем регистрацию сигналов
-	UnregisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT)
+	UnregisterSignal(H, list(COMSIG_LIVING_ELECTROCUTE_ACT, COMSIG_HUMAN_PREFS_APPLIED))
+
+/// Вызывается после загрузки всех настроек персонажа.
+/// Устанавливает брендовые импланты в нужные руки.
+/datum/species/ipc/proc/on_prefs_applied(mob/living/carbon/human/H)
+	SIGNAL_HANDLER
+
+	// Для Shellguard: силовой щит в руку, противоположную зарядному порту
+	if(ipc_brand_key == "shellguard")
+		if(!(locate(/obj/item/implant/ipc/force_shield) in H.implants))
+			// Находим руку зарядника
+			var/charger_zone = ipc_charger_arm_zone
+			var/obj/item/implant/ipc/charger/charger_impl = locate(/obj/item/implant/ipc/charger) in H.implants
+			if(charger_impl)
+				charger_zone = charger_impl.installed_in_zone
+			// Устанавливаем щит в противоположную руку
+			var/shield_zone = (charger_zone == BODY_ZONE_L_ARM) ? BODY_ZONE_R_ARM : BODY_ZONE_L_ARM
+			var/obj/item/implant/ipc/force_shield/shield_impl = new()
+			shield_impl.implant(H, shield_zone, null, TRUE, TRUE)
 
 /datum/species/ipc/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	. = ..()

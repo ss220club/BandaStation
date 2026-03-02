@@ -720,7 +720,8 @@
 	name = "Integrated Charging Port"
 	desc = "Встроенный зарядный порт. Позволяет IPC заряжаться от источников питания станции."
 	icon_state = "reactive_repair"
-	allowed_zones = list(BODY_ZONE_CHEST)
+	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+	arm_visual_state = "ipc_charger"
 	actions_types = list(/datum/action/item_action/hands_free/ipc_charge)
 
 /obj/item/implant/ipc/charger/get_data()
@@ -732,14 +733,25 @@
 	<b>Integrity:</b> Active"}
 	return dat
 
+/obj/item/implant/ipc/charger/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
+	. = ..()
+	if(!.)
+		return FALSE
+	// Показываем оверлей на руке
+	if(ishuman(target))
+		apply_arm_visual(target)
+	return TRUE
+
 /obj/item/implant/ipc/charger/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
 
 	if(!ishuman(source))
 		return
 
-	// Отключаем режим зарядки при извлечении
 	var/mob/living/carbon/human/H = source
+	// Убираем оверлей с руки
+	remove_arm_visual(H)
+	// Отключаем режим зарядки при извлечении
 	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
 	if(battery)
 		battery.charging = FALSE
@@ -775,6 +787,109 @@
 		to_chat(H, span_notice("Режим зарядки активирован. Ищем источник питания..."))
 	else
 		to_chat(H, span_notice("Режим зарядки деактивирован."))
+
+	build_all_button_icons()
+	return TRUE
+
+// ============================================
+// 8. FORCE SHIELD IMPLANT (SHELLGUARD ROUNDSTART)
+// ============================================
+// Встроенный силовой щит. Выдаётся Shellguard IPC в руку,
+// противоположную зарядному порту. Снижает входящий урон когда активен.
+
+/obj/item/implant/ipc/force_shield
+	name = "Force Shield Emitter"
+	desc = "Встроенный генератор силового поля. Создаёт защитное поле, снижающее входящий урон."
+	icon_state = "reactive_repair"
+	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+	arm_visual_state = "ipc_shield"
+	actions_types = list(/datum/action/item_action/hands_free/ipc_force_shield)
+	var/shield_active = FALSE
+	/// Процент снижения урона (0.3 = 30%)
+	var/damage_reduction = 0.3
+	/// Стоимость активного щита за тик (charge/sec)
+	var/shield_power_cost = 5
+
+/obj/item/implant/ipc/force_shield/get_data()
+	var/dat = {"<b>Implant Specifications:</b><BR>
+	<b>Name:</b> Force Shield Emitter<BR>
+	<b>Life:</b> Permanent<BR>
+	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
+	<b>Function:</b> Reduces incoming brute/burn damage by [damage_reduction * 100]% while active.<BR>
+	<b>Status:</b> [shield_active ? "ACTIVE" : "STANDBY"]"}
+	return dat
+
+/obj/item/implant/ipc/force_shield/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
+	. = ..()
+	if(!.)
+		return FALSE
+	if(ishuman(target))
+		apply_arm_visual(target)
+		RegisterSignal(target, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS, PROC_REF(on_damage_modifiers))
+	START_PROCESSING(SSobj, src)
+	return TRUE
+
+/obj/item/implant/ipc/force_shield/removed(mob/living/source, silent = FALSE, special = FALSE)
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
+	shield_active = FALSE
+	if(!ishuman(source))
+		return
+	var/mob/living/carbon/human/H = source
+	remove_arm_visual(H)
+	UnregisterSignal(H, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS)
+
+/obj/item/implant/ipc/force_shield/proc/on_damage_modifiers(mob/living/carbon/human/source, list/damage_mods, damage_amount, damagetype, def_zone, sharpness, attack_direction, obj/item/attacking_item)
+	SIGNAL_HANDLER
+	if(!shield_active)
+		return
+	if(damagetype != BRUTE && damagetype != BURN)
+		return
+	damage_mods += (1 - damage_reduction)
+
+/obj/item/implant/ipc/force_shield/process(seconds_per_tick)
+	if(!imp_in || !shield_active)
+		return
+	if(!ishuman(imp_in))
+		return
+	var/mob/living/carbon/human/H = imp_in
+	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!battery)
+		return
+	// Расходуем заряд батареи
+	if(battery.charge < shield_power_cost * seconds_per_tick)
+		shield_active = FALSE
+		to_chat(H, span_warning("Силовой щит отключён: недостаточно заряда батареи!"))
+		return
+	battery.charge = max(0, battery.charge - (shield_power_cost * seconds_per_tick))
+
+// Кнопка переключения силового щита
+/datum/action/item_action/hands_free/ipc_force_shield
+	name = "Силовой щит"
+	desc = "Активировать/деактивировать встроенный силовой щит."
+	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
+	button_icon_state = "ipc_shield"
+	check_flags = AB_CHECK_INCAPACITATED
+
+/datum/action/item_action/hands_free/ipc_force_shield/Trigger(mob/clicker, trigger_flags)
+	. = ..()
+	if(!.)
+		return FALSE
+
+	var/obj/item/implant/ipc/force_shield/shield_implant = target
+	if(!istype(shield_implant))
+		return FALSE
+
+	var/mob/living/carbon/human/H = owner
+	if(!istype(H))
+		return FALSE
+
+	shield_implant.shield_active = !shield_implant.shield_active
+
+	if(shield_implant.shield_active)
+		to_chat(H, span_notice("Силовой щит активирован. Снижение урона: [shield_implant.damage_reduction * 100]%."))
+	else
+		to_chat(H, span_notice("Силовой щит деактивирован."))
 
 	build_all_button_icons()
 	return TRUE

@@ -181,6 +181,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	savefile_key = "feature_ipc_head_accessory"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+	priority = PREFERENCE_PRIORITY_BODYPARTS
 	main_feature_name = "Аксессуар головы"
 	can_randomize = FALSE
 
@@ -209,6 +210,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	savefile_key = "feature_ipc_tail"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+	priority = PREFERENCE_PRIORITY_BODYPARTS
 	main_feature_name = "Хвост"
 	can_randomize = FALSE
 
@@ -229,6 +231,51 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	if(!istype(target.dna?.species, /datum/species/ipc))
 		return
 	apply_ipc_tail(target, value == "plug")
+
+// ============================================
+// PREFERENCE: РУКА ЗАРЯДНИКА
+// Выбирает, в какую руку установлен встроенный зарядный порт.
+// Если выбрана не та рука, зарядник переустанавливается.
+// ============================================
+
+/datum/preference/choiced/ipc_charger_arm
+	savefile_key = "feature_ipc_charger_arm"
+	savefile_identifier = PREFERENCE_CHARACTER
+	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+	priority = PREFERENCE_PRIORITY_BODYPARTS
+	main_feature_name = "Рука зарядника"
+	can_randomize = FALSE
+
+/datum/preference/choiced/ipc_charger_arm/init_possible_values()
+	return list("left", "right")
+
+/datum/preference/choiced/ipc_charger_arm/create_default_value()
+	return "left"
+
+/datum/preference/choiced/ipc_charger_arm/is_accessible(datum/preferences/preferences)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/selected_species = preferences.read_preference(/datum/preference/choiced/species)
+	return selected_species == SPECIES_IPC
+
+/datum/preference/choiced/ipc_charger_arm/apply_to_human(mob/living/carbon/human/target, value)
+	if(!istype(target.dna?.species, /datum/species/ipc))
+		return
+	var/datum/species/ipc/S = target.dna.species
+	var/zone = (value == "right") ? BODY_ZONE_R_ARM : BODY_ZONE_L_ARM
+	S.ipc_charger_arm_zone = zone
+
+	// Переставляем зарядник в нужную руку если он уже установлен не там
+	for(var/obj/item/implant/ipc/charger/existing in target.implants)
+		if(existing.installed_in_zone == zone)
+			return  // Уже в правильной руке
+		// Удаляем и переустанавливаем в нужной руке
+		qdel(existing)
+		break
+
+	var/obj/item/implant/ipc/charger/impl = new()
+	impl.implant(target, zone, null, TRUE, TRUE)
 
 // ============================================
 // BRAND FACE FILTERING
