@@ -709,3 +709,72 @@
 	name = "implant case - 'Bio-Generator'"
 	desc = "Стеклянный кейс содержащий имплант био-генератора для IPC."
 	imp_type = /obj/item/implant/ipc/bio_generator
+
+// ============================================
+// 7. CHARGER IMPLANT (ROUNDSTART)
+// ============================================
+// Встроенный зарядный порт — позволяет зарядиться от ближайшего АРС.
+// Выдаётся всем IPC автоматически при создании персонажа.
+
+/obj/item/implant/ipc/charger
+	name = "Integrated Charging Port"
+	desc = "Встроенный зарядный порт. Позволяет IPC заряжаться от источников питания станции."
+	icon_state = "reactive_repair"
+	allowed_zones = list(BODY_ZONE_CHEST)
+	actions_types = list(/datum/action/item_action/hands_free/ipc_charge)
+
+/obj/item/implant/ipc/charger/get_data()
+	var/dat = {"<b>Implant Specifications:</b><BR>
+	<b>Name:</b> Integrated Charging Port<BR>
+	<b>Life:</b> Permanent<BR>
+	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
+	<b>Function:</b> Charges IPC battery from nearby APC.<BR>
+	<b>Integrity:</b> Active"}
+	return dat
+
+/obj/item/implant/ipc/charger/removed(mob/living/source, silent = FALSE, special = FALSE)
+	. = ..()
+
+	if(!ishuman(source))
+		return
+
+	// Отключаем режим зарядки при извлечении
+	var/mob/living/carbon/human/H = source
+	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(battery)
+		battery.charging = FALSE
+
+// Кнопка переключения режима зарядки
+/datum/action/item_action/hands_free/ipc_charge
+	name = "Зарядиться от сети"
+	desc = "Подключиться к ближайшему АРС для зарядки батареи."
+	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
+	button_icon_state = "ipc_charger"
+	check_flags = AB_CHECK_INCAPACITATED
+
+/datum/action/item_action/hands_free/ipc_charge/Trigger(mob/clicker, trigger_flags)
+	. = ..()
+	if(!.)
+		return FALSE
+
+	var/obj/item/implant/ipc/charger/charger_implant = target
+	if(!istype(charger_implant))
+		return FALSE
+
+	var/mob/living/carbon/human/H = owner
+	if(!istype(H))
+		return FALSE
+
+	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!battery)
+		return FALSE
+
+	battery.charging = !battery.charging
+
+	if(battery.charging)
+		to_chat(H, span_notice("Режим зарядки активирован. Ищем источник питания..."))
+	else
+		to_chat(H, span_notice("Режим зарядки деактивирован."))
+
+	build_all_button_icons()
+	return TRUE

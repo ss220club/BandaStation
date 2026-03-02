@@ -108,8 +108,10 @@
 			S.ipc_chassis_modifiers = list()
 		S.ipc_chassis_modifiers["melee_damage"] = 1.1
 
-	// Имплант щита в случайной руке - TODO при раундстарте
-	// Требует реализации системы имплантов
+	// ЭМП-протектор раундстартом (если ещё не установлен)
+	if(!(locate(/obj/item/implant/emp_protector) in H.implants))
+		var/obj/item/implant/emp_protector/impl = new()
+		impl.implant(H, BODY_ZONE_CHEST, null, TRUE, TRUE)
 
 // ============================================
 // 5. WARD-TAKAHASHI
@@ -175,12 +177,12 @@
 // Биогенератор раундстартом
 // Синт кожа с особенностями лечения
 /proc/apply_effect_zeng_hu(mob/living/carbon/human/H)
-	// Биогенератор — добавляем в инвентарь или встроенно
-	// TODO: Реализовать биогенератор как встроенный имплант или предмет раундстарта
+	// Биогенератор — встроенный имплант раундстартом (если ещё не установлен)
+	if(!(locate(/obj/item/implant/ipc/bio_generator) in H.implants))
+		var/obj/item/implant/ipc/bio_generator/impl = new()
+		impl.implant(H, BODY_ZONE_CHEST, null, TRUE, TRUE)
 	// Синт кожа
 	// TODO: Реализовать через trait/модификатор лечения синт плоти
-	// FIX: убран bare `pass`
-	return
 
 // ============================================
 // 8. SHELLGUARD MUNITIONS
@@ -222,8 +224,10 @@
 			ipc_bp.brute_reduction = 0.5
 			ipc_bp.burn_reduction = 0.33
 
-	// Одноразовый ЭМП-протектор - TODO при раундстарте
-	// Требует реализации системы имплантов
+	// ЭМП-протектор раундстартом (если ещё не установлен)
+	if(!(locate(/obj/item/implant/emp_protector) in H.implants))
+		var/obj/item/implant/emp_protector/impl = new()
+		impl.implant(H, BODY_ZONE_CHEST, null, TRUE, TRUE)
 
 // ============================================
 // 9. UNBRANDED
