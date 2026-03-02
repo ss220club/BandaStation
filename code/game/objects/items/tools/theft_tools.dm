@@ -33,7 +33,7 @@
 	if(cooldown < world.time - 60)
 		cooldown = world.time
 		flick(pulseicon, src)
-		radiation_pulse(src, max_range = 2, threshold = RAD_EXTREME_INSULATION)
+		radiation_pulse(get_turf(src), max_range = 2, threshold = RAD_EXTREME_INSULATION)
 
 /obj/item/nuke_core/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[capitalize(user.declent_ru(NOMINATIVE))] трет [declent_ru(ACCUSATIVE)] об себя! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
@@ -70,7 +70,7 @@
 		icon_state = "core_container_sealed"
 		playsound(src, 'sound/items/deconstruct.ogg', 60, TRUE)
 		if(ismob(loc))
-			to_chat(loc, span_warning("[capitalize(declent_ru(NOMINATIVE))] надежно запечатывается, радиация [core.declent_ru(GENITIVE)] сдерживается."))
+			to_chat(loc, span_warning("[src] надежно запечатывается, радиация [core.declent_ru(GENITIVE)] сдерживается."))
 
 /obj/item/nuke_core_container/attackby(obj/item/nuke_core/core, mob/user)
 	if(istype(core))
