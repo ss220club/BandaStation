@@ -57,8 +57,6 @@
 #include "code/ranged/ballistic/ussp/special/pmk.dm"
 #include "code/ranged/ballistic/ussp/special/dshk.dm"
 #include "code/ranged/ballistic/ussp/special/volna.dm"
-#include "code/ranged/ballistic/ebony.dm"
-#include "code/ranged/ballistic/ivory.dm"
 
 // MARK: Ranged - Energy
 #include "code/ranged/energy/awaymission_gun.dm"
@@ -71,4 +69,6 @@
 // END_FILE_DIR
 // BEGIN_PREFERENCES
 // END_PREFERENCES
+// END_INCLUDE
+// BEGIN_INCLUDE
 // END_INCLUDE

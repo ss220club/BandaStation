@@ -2,3 +2,4 @@
 
 #include "detective_tweak/code/outfit.dm"
 #include "fish_portal_rebalance/code/machine_circuitboards.dm"
+#include "dmc_pistols/code/dmc_pistols.dm"
