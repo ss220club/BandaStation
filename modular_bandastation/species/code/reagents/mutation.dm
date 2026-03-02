@@ -10,6 +10,11 @@
 	results = list(/datum/reagent/mutationtoxin/vulpkanin = 1)
 	required_reagents = list(/datum/reagent/consumable/nutriment/protein = 1)
 	required_container = /obj/item/slime_extract/green
+	reaction_display_name = "Вульпо-токсин"
+	recipe_variants = list(
+		list(/obj/item/slime_extract/green, list(/datum/reagent/consumable/nutriment/protein = 1), 0),
+		list(/obj/item/slime_extract/black, list(/datum/reagent/consumable/nutriment = 10), 0),
+	)
 
 /datum/reagent/mutationtoxin/tajaran
 	name = "Tajaran Mutation Toxin"
@@ -22,4 +27,9 @@
 /datum/chemical_reaction/slime/slimetajaran
 	results = list(/datum/reagent/mutationtoxin/tajaran = 1)
 	required_reagents = list(/datum/reagent/consumable/cream = 1)
+	reaction_display_name = "Таяро-токсин"
 	required_container = /obj/item/slime_extract/green
+	recipe_variants = list(
+		list(/obj/item/slime_extract/green, list(/datum/reagent/consumable/cream = 1), 0),
+		list(/obj/item/slime_extract/grey, list(/datum/reagent/consumable/nutriment = 10), 0),
+	)
