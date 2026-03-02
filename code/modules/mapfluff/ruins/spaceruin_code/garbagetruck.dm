@@ -1,4 +1,5 @@
-/obj/item/eyesnatcher
+//  BANDASTATION REMOVAL START:
+/*/obj/item/eyesnatcher
 	name = "portable eyeball extractor"
 	desc = "An overly complicated device that can pierce target's skull and extract their eyeballs if enough brute force is applied."
 	icon = 'icons/obj/medical/surgery_tools.dmi'
@@ -101,3 +102,4 @@
 		return FALSE
 
 	return TRUE
+*///  BANDASTATION REMOVAL END
