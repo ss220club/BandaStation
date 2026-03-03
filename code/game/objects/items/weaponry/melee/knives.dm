@@ -377,10 +377,12 @@
 /obj/item/switchblade/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
+	/*// BANDASTATION REMOVAL START: no more buggy attack
 	AddComponent(/datum/component/butchering, \
 	speed = 7 SECONDS, \
 	effectiveness = 100, \
 	)
+	*/// BANDASTATION REMOVAL END: no more buggy attack
 
 	AddComponent( \
 		/datum/component/transforming, \
@@ -398,6 +400,7 @@
 	alt_continuous = string_list(alt_continuous)
 	alt_simple = string_list(alt_simple)
 	AddComponent(/datum/component/alternative_sharpness, SHARP_POINTY, alt_continuous, alt_simple, -5, TRAIT_TRANSFORM_ACTIVE)
+	AddComponent(/datum/component/backstabs, 2, 2 SECONDS) // 40 damage, 2s CD // BANDASTATION ADDITION: BACKSTABS PORT
 
 	RegisterSignal(src, COMSIG_TRANSFORMING_ON_TRANSFORM, PROC_REF(on_transform))
 
