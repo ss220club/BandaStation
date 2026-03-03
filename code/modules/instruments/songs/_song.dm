@@ -423,6 +423,10 @@
 	if(new_bpm == bpm)
 		return
 	bpm = new_bpm
+
+	// BANDASTATION ADD: legacy tempo = deciseconds per beat
+	tempo = sanitize_tempo((60 SECONDS) / bpm, TRUE)
+
 	SEND_SIGNAL(parent, COMSIG_INSTRUMENT_TEMPO_CHANGE, src)
 	delay_residual = 0.0
 	// BANDASTATION EDIT END - BPM unlock

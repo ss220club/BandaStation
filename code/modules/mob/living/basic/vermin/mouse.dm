@@ -51,6 +51,7 @@
 	// SS220 ADD - END
 
 /datum/emote/mouse
+	abstract_type = /datum/emote/mouse
 	mob_type_allowed_typecache = /mob/living/basic/mouse
 	mob_type_blacklist_typecache = list()
 

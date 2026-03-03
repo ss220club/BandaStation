@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/pointed/burglar_finesse
-	name = "Burglar's Finesse"
+	name = "Ловкость грабителя"
 	desc = "Крадет случайны предмет из сумки жертвы."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"

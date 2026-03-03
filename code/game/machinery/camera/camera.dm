@@ -25,7 +25,7 @@
 
 /obj/machinery/camera
 	name = "security camera"
-	desc = "It's used to monitor rooms."
+	desc = "Она <b>смотрит</b>."
 	icon = 'icons/obj/machines/camera.dmi'
 	icon_state = "camera"
 	base_icon_state = "camera"
@@ -144,7 +144,6 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 /obj/machinery/camera/Destroy(force)
 	if(can_use())
 		toggle_cam(null, 0) //kick anyone viewing out and remove from the camera chunks
-	SScameras.remove_camera_from_chunk(src)
 	SScameras.cameras -= src
 	cancelCameraAlarm()
 	if(isarea(myarea))
@@ -154,6 +153,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	QDEL_NULL(xray_module)
 	QDEL_NULL(emp_module)
 	QDEL_NULL(proximity_monitor)
+	// moveToNullspace will clear us from our current chunks
 	return ..()
 
 /obj/machinery/camera/connect_to_shuttle(mapload, obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
@@ -180,6 +180,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 		emp_module = null
 		removeMotion()
 
+/obj/machinery/camera/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change)
+	. = ..()
+	SScameras.camera_moved(src, get_turf(old_loc), get_turf(loc))
+
 /obj/machinery/camera/proc/create_prox_monitor()
 	if(!proximity_monitor)
 		proximity_monitor = new(src, 1)
@@ -197,29 +201,29 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	. = ..()
 
 	if(isEmpProof(TRUE)) //don't reveal it's upgraded if was done via MALF AI Upgrade Camera Network ability
-		. += span_info("It has electromagnetic interference shielding installed.")
+		. += span_info("Она защищена от электромагнитных помех.")
 	else
-		. += span_info("It can be shielded against electromagnetic interference with some <b>plasma</b>.")
+		. += span_info("Она может быть защищена от электромагнитных помех с помощью <b>плазмы</b>.")
 
 	if(isXRay(TRUE)) //don't reveal it's upgraded if was done via MALF AI Upgrade Camera Network ability
-		. += span_info("It has an X-ray photodiode installed.")
+		. += span_info("Она оборудована рентгеновским фотодиодом.")
 	else
-		. += span_info("It can be upgraded with an X-ray photodiode with an <b>analyzer</b>.")
+		. += span_info("Она может быть оборудована рентгеновским фотодиодом с помощью <b>газового анализатора</b>.")
 
 	if(isMotion())
-		. += span_info("It has a proximity sensor installed.")
+		. += span_info("Она оборудована датчиком движения.")
 	else
-		. += span_info("It can be upgraded with a <b>proximity sensor</b>.")
+		. += span_info("Она может быть улучшена с помощью <b>датчика движения</b>.")
 
 	if(!camera_enabled)
-		. += span_info("It's currently deactivated.")
+		. += span_info("Она сейчас выключена.")
 		if(!panel_open && powered())
-			. += span_notice("You'll need to open its maintenance panel with a <b>screwdriver</b> to turn it back on.")
+			. += span_notice("Вам придётся открыть панель техобслуживания с помощью <b>отвёртки</b>, чтобы включить её.")
 
 	if(panel_open)
-		. += span_info("Its maintenance panel is currently open.")
+		. += span_info("Панель техобслуживания открыта.")
 		if(!camera_enabled && powered())
-			. += span_info("It can reactivated with <b>wirecutters</b>.")
+			. += span_info("Она может быть перезапущена с помощью <b>кусачек</b>.")
 
 /obj/machinery/camera/emp_act(severity, reset_time = 90 SECONDS)
 	. = ..()
@@ -240,7 +244,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	for(var/mob/M as anything in GLOB.player_list)
 		if (M.client?.eye == src)
 			M.reset_perspective(null)
-			to_chat(M, span_warning("The screen bursts into static!"))
+			to_chat(M, span_warning("Статика покрывает экран!"))
 
 /obj/machinery/camera/on_saboteur(datum/source, disrupt_duration)
 	. = ..()
@@ -271,13 +275,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	user.switchCamera(src)
 
 /obj/machinery/camera/proc/setViewRange(num = 7)
+	if(num > MAX_CAMERA_RANGE)
+		CRASH("Attempted to set camera view range to something ([num]) greater then we support ([MAX_CAMERA_RANGE]).\
+			This would break chunk updating. If you really need to do this, update MAX_CAMERA_RANGE")
 	src.view_range = num
 	SScameras.update_visibility(src)
-
-/obj/machinery/camera/proc/shock(mob/living/user)
-	if(!istype(user))
-		return
-	user.electrocute_act(10, src)
 
 /obj/machinery/camera/singularity_pull(atom/singularity, current_size)
 	if (camera_enabled && current_size >= STAGE_FIVE) // If the singulo is strong enough to pull anchored objects and the camera is still active, turn off the camera as it gets ripped off the wall.
@@ -361,9 +363,9 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 		if (isarea(myarea))
 			LAZYREMOVE(myarea.cameras, src)
 	// We are not guarenteed that the camera will be on a turf. account for that
-	var/change_msg = "deactivates"
+	var/change_msg = "отключается"
 	if(camera_enabled)
-		change_msg = "reactivates"
+		change_msg = "включается"
 		triggerCameraAlarm()
 		if(!QDELETED(src)) //We'll be doing it anyway in destroy
 			addtimer(CALLBACK(src, PROC_REF(cancelCameraAlarm)), 10 SECONDS)
@@ -384,7 +386,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	for(var/mob/O as anything in GLOB.player_list)
 		if (O.client?.eye == src)
 			O.reset_perspective(null)
-			to_chat(O, span_warning("The screen bursts into static!"))
+			to_chat(O, span_warning("Статика покрывает экран!"))
 
 /obj/machinery/camera/proc/triggerCameraAlarm()
 	alarm_on = TRUE
@@ -424,10 +426,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 		// Haha datum var access KILL ME
 		for(var/turf/seen as anything in see)
 			if(check_lower)
-				var/turf/below = GET_TURF_BELOW(seen)
+				var/turf/below = seen
 				while(below && istransparentturf(below))
-					see += RANGE_TURFS(1, below)
 					below = GET_TURF_BELOW(below)
+					see += RANGE_TURFS(1, below)
 			if(check_higher)
 				var/turf/above = GET_TURF_ABOVE(seen)
 				while(above && istransparentturf(above))

@@ -20,9 +20,7 @@
 			unbuckle_mob(buckled_mob)
 
 	playsound(loc, 'sound/effects/magic/Repulse.ogg', 50, TRUE)
-	var/datum/effect_system/spark_spread/quantum/sparks = new
-	sparks.set_up(10, TRUE, loc)
-	sparks.start()
+	do_sparks(10, TRUE, loc, null, /datum/effect_system/basic/spark_spread/quantum)
 
 	if(with_paper)
 		var/obj/item/paper/cryo_paper = new /obj/item/paper(loc)

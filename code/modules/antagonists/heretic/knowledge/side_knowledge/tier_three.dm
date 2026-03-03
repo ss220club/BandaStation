@@ -1,12 +1,11 @@
 /*!
  * Tier 3 knowledge: Summons
  */
-
 /datum/heretic_knowledge/summon/rusty
-	name = "Rusted Ritual"
-	desc = "Allows you to transmute a pool of vomit, some cable coil, and 10 sheets of iron into a Rust Walker. \
-		Rust Walkers excel at spreading rust and are moderately strong in combat."
-	gain_text = "I combined my knowledge of creation with my desire for corruption. The Marshal knew my name, and the Rusted Hills echoed out."
+	name = "Ритуал Ржавчины"
+	desc = "Позволяет трансмутировать лужу рвоты, несколько мотков провода, и 10 листов железа, чтобы создать Ржавохода. \
+		Ржавоход превосходно распространяет ржавчину и умеренно силён в бою."
+	gain_text = "Я объединил свои знания о созидании с моим стремлением к разрушению. Маршал знал моё имя, и Ржавые Холмы отозвались эхом."
 	required_atoms = list(
 		/obj/effect/decal/cleanable/vomit = 1,
 		/obj/item/stack/sheet/iron = 10,
@@ -18,12 +17,12 @@
 	drafting_tier = 3
 
 /datum/heretic_knowledge/summon/maid_in_mirror
-	name = "Maid in the Mirror"
-	desc = "Allows you to transmute five sheets of glass, any suit, and a pair of lungs to create a Maid in the Mirror. \
-			Maid in the Mirrors are decent combatants that can become incorporeal by phasing in and out of the mirror realm, serving as powerful scouts and ambushers. \
-			Their attacks also apply a stack of void chill."
-	gain_text = "Within each reflection, lies a gateway into an unimaginable world of colors never seen and \
-		people never met. The ascent is glass, and the walls are knives. Each step is blood, if you do not have a guide."
+	name = "Горничная из Зазеркалья"
+	desc = "Позволяет трансмутировать осколок стекла, любой костюм и лёгкие, чтобы создать Горничную из Зазеркалья. \
+			Горничные из Зазеркалья сильные бойцы, способные становиться бестелесными, входя в Зазеркальное царство и выходя из него, они выполняют роль разведчиков и мастеров засад.\
+			Их атаки также накладывают Холод Пустоты."
+	gain_text = "В каждом отражении скрыты врата в невообразимый мир невиданных цветов и людей, что никогда не встречались.\
+			Подъём сделан из стекла, а стены - из ножей. И каждый шаг - это кровь, если у вас нет проводника."
 
 	required_atoms = list(
 		/obj/item/stack/sheet/glass = 5,
@@ -37,12 +36,12 @@
 	drafting_tier = 3
 
 /datum/heretic_knowledge/summon/ashy
-	name = "Ashen Ritual"
-	desc = "Allows you to transmute a Bonfire and a book to create an Ash Spirit. \
-		Ash Spirits have a short range jaunt and the ability to cause bleeding in foes at range. \
-		They also have the ability to create a ring of fire around themselves for a length of time. \
-		They have a low amount of health, but will passively recover given enough time to do so."
-	gain_text = "I combined my principle of hunger with my desire for destruction. The Marshal knew my name, and the Nightwatcher gazed on."
+	name = "Пепельный ритуал"
+	desc = "Позволяет трансмутировать костёр и книгу для создания Духа Пепла. \
+		Духи Пепла обладают рывком на короткую дистанцию и способны дистанционно вызывать кровотечение у врагов. \
+		Также они могут, на некоторое время, создать вокруг себя кольцо огня. \
+		И хотя их запас здоровья довольно мал, они могут пассивно восстанавливать его со временем."
+	gain_text = "Я объединил свой голод с жаждой разрушения. Маршал знал моё имя, а Ночной Дозорный наблюдал за происходящим."
 	required_atoms = list(
 		/obj/effect/decal/cleanable/ash = 1,
 		/obj/item/book = 1,
@@ -58,7 +57,7 @@
 #define RISEN_MAX_HEALTH 125
 
 /datum/heretic_knowledge/limited_amount/risen_corpse
-	name = "Shattered Ritual"
+	name = "Разбитый ритуал"
 	desc = "Позволяет трансмутировать труп с душой, пару латексных или нитриловых перчаток, \
 		и любой костюм, чтобы создать Разбитого восставшего. \
 		Разбитые восставшие это сильные гули с 125 здоровья, но не могут держать предметы, \
@@ -158,11 +157,11 @@
 	sharpness = SHARP_EDGED
 
 /datum/heretic_knowledge/summon/fire_shark
-	name = "Scorching Shark"
-	desc = "Allows you to transmute a pool of ash, a liver, and a sheet of plasma into a Fire Shark. \
-		Fire Sharks are fast and strong in groups, but die quickly. They are also highly resistant against fire attacks. \
-		Fire Sharks inject phlogiston into its victims and spawn plasma once they die."
-	gain_text = "The cradle of the nebula was cold, but not dead. Light and heat flits even through the deepest darkness, and is hunted by its own predators."
+	name = "Испепеляющая акула"
+	desc = "Позволяет трансмутировать горку пепла, печень и лист плазмы, чтобы создать огненную акулу. \
+		Огненные акулы быстры и сильны в группах, но быстро погибают. Они также обладают высокой устойчивостью к огненным атакам. \
+		Огненные акулы впрыскивают флогистон в своих жертв и извергают плазму после своей смерти."
+	gain_text = "Колыбель туманности была холодной, но не мертвой. Свет и тепло проникают даже в самую глубокую тьму, и за ними охотятся их собственные хищники."
 
 	required_atoms = list(
 		/obj/effect/decal/cleanable/ash = 1,

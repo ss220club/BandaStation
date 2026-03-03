@@ -75,33 +75,42 @@
  *
  * where "item" is pulled from [/atom/proc/examine_descriptor]
  */
+// BANDASTATION EDIT START — род тегов
 /atom/proc/examine_tags(mob/user)
 	. = list()
 	if(abstract_type == type)
 		.[span_hypnophrase("abstract")] = "This is an abstract concept, you should report this to a strange entity called GITHUB!"
 
+	var/is_female = ((examine_descriptor()) in list("структура", "машина") )
+	var/he_she_it = is_female ? "Она" : "Он"
+	var/he_she_it_low = is_female ? "она" : "он"
+	var/adj_very = is_female ? "прочная" : "прочный"
+	var/verb_made = is_female ? "сделана" : "сделан"
+	var/verb_looks = is_female ? "выглядит довольно прочной" : "выглядит довольно прочным"
+
 	if(resistance_flags & INDESTRUCTIBLE)
-		.["неразрушаемый"] = "Предмет очень прочный! Он выдержит всё, что с ним может случиться!"
+		.[is_female ? "неразрушаемая" : "неразрушаемый"] = "[he_she_it] очень [adj_very]! [capitalize(he_she_it)] выдержит всё, что с [is_female ? "ней" : "ним"] может случиться!"
 	else
 		if(resistance_flags & LAVA_PROOF)
-			.["лавастойкий"] = "Предмет сделан из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
+			.[is_female ? "лавастойкая" : "лавастойкий"] = "[he_she_it] [verb_made] из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
 		if(resistance_flags & (ACID_PROOF | UNACIDABLE))
-			.["кислотостойкий"] = "Предмет выглядит довольно прочным! Возможно, он выдержит воздействие кислоты!"
+			.[is_female ? "кислотостойкая" : "кислотостойкий"] = "[he_she_it] [verb_looks]! Возможно, [he_she_it_low] выдержит воздействие кислоты!"
 		if(resistance_flags & FREEZE_PROOF)
-			.["морозостойкий"] = "Предмет изготовлен из моростойких материалов."
+			.[is_female ? "морозостойкая" : "морозостойкий"] = "[he_she_it] [verb_made] из моростойких материалов."
 		if(resistance_flags & FIRE_PROOF)
-			.["огнестойкий"] = "Предмет изготовлен из огнестойких материалов."
+			.[is_female ? "огнестойкая" : "огнестойкий"] = "[he_she_it] [verb_made] из огнестойких материалов."
 		if(resistance_flags & SHUTTLE_CRUSH_PROOF)
-			.["очень прочный"] = "Предмет невероятно прочный. Должен выдержать даже наезд шаттла!"
+			.[is_female ? "очень прочная" : "очень прочный"] = "[he_she_it] невероятно [adj_very]. Выдержит даже приземление шаттла!"
 		if(resistance_flags & BOMB_PROOF)
-			.["взрывоустойчивый"] = "Предмет способен пережить взрыв!"
+			.[is_female ? "взрывоустойчивая" : "взрывоустойчивый"] = "[he_she_it] переживёт взрыв!"
 		if(resistance_flags & FLAMMABLE)
-			.["легковоспламеняющийся"] = "Предмет может легко загореться."
+			.[is_female ? "легковоспламеняющаяся" : "легковоспламеняющийся"] = "[capitalize(he_she_it)] может легко загореться."
 
 	if(flags_1 & HOLOGRAM_1)
 		.["голографический"] = "Похоже на голограмму."
 
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE_TAGS, user, .)
+// BANDASTATION EDIT END
 
 /// What this atom should be called in examine tags
 /atom/proc/examine_descriptor(mob/user)
@@ -114,9 +123,9 @@
 		return
 	var/mats_list = list()
 	for(var/custom_material in custom_materials)
-		var/datum/material/current_material = GET_MATERIAL_REF(custom_material)
+		var/datum/material/current_material = SSmaterials.get_material(custom_material)
 		mats_list += span_tooltip("Объект сделан из [current_material.declent_ru(GENITIVE)].", current_material.declent_ru(GENITIVE))
-	. += "из: [english_list(mats_list)]"
+	. += "из [english_list(mats_list)]"
 
 /**
  * Called when a mob examines (shift click or verb) this atom twice (or more) within EXAMINE_MORE_WINDOW (default 1 second)
@@ -133,6 +142,23 @@
 	. = list()
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE_MORE, user, .)
 	SEND_SIGNAL(user, COMSIG_MOB_EXAMINING_MORE, src, .)
+
+	if (!length(custom_materials) || (material_flags & MATERIAL_NO_DESCRIPTORS) || !HAS_TRAIT(user, TRAIT_RESEARCH_SCANNER))
+		return
+
+	for (var/datum/material/material as anything in custom_materials)
+		var/list/material_string = list()
+		for (var/prop_id in material.mat_properties)
+			var/datum/material_property/property = SSmaterials.properties[prop_id]
+			var/prop_value = material.get_property(prop_id)
+			if (isnull(prop_value)) // Error?
+				continue
+			var/descriptor = property?.get_descriptor(prop_value)
+			if (descriptor) // Overriden derivative property?
+				material_string += span_tooltip("[property]: [prop_value < 0 ? "-" : ""]\Roman[round(abs(prop_value), 1)]", descriptor)
+
+		if (length(material_string))
+			. += span_info("[capitalize(material.name)] is [english_list(material_string)].")
 
 /**
  * Get the name of this object for examine

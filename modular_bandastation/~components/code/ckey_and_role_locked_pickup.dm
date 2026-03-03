@@ -3,12 +3,14 @@
 	var/list/ckeys = list()
 	var/offstation_role
 	var/refusal_text
+	var/binded
 
-/datum/component/ckey_and_role_locked_pickup/Initialize(offstation_role = TRUE, ckey_whitelist, pickup_damage = 0, refusal_text)
+/datum/component/ckey_and_role_locked_pickup/Initialize(offstation_role = TRUE, ckey_whitelist, pickup_damage = 0, refusal_text, binded = FALSE)
 	src.offstation_role = offstation_role
 	src.ckeys = ckey_whitelist
 	src.pickup_damage = pickup_damage
 	src.refusal_text = refusal_text
+	src.binded = binded
 
 /datum/component/ckey_and_role_locked_pickup/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
@@ -18,7 +20,8 @@
 
 /datum/component/ckey_and_role_locked_pickup/proc/on_equip(obj/item/I, mob/living/user)
 	SIGNAL_HANDLER
-	if(check_role_and_ckey(user))
+	if(check_role_and_ckey(user) || !binded)
+		binded = TRUE
 		return
 	user.Knockdown(10 SECONDS)
 	user.dropItemToGround(I, force = TRUE)

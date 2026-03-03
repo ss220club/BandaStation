@@ -78,6 +78,8 @@
 	/// Welcome sound that will play on round start instead of the announcer's one.
 	var/sound/welcome_sound_override = null
 	// BANDASTATION ADDITION END - Station Fluff
+	/// Number of additional weakpoints to spawn for SSminor_mapping
+	var/bonus_weakpoints = 0
 
 /**
  * Proc that simply loads the default map config, which should always be functional.
@@ -246,6 +248,9 @@
 		else
 			welcome_sound_override = file(file_path)
 	// BANDASTATION ADDITION END - Station Fluff
+	if ("bonus_weakpoints" in json)
+		bonus_weakpoints = json["bonus_weakpoints"]
+
 
 	allow_custom_shuttles = json["allow_custom_shuttles"] != FALSE
 
