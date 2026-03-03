@@ -716,13 +716,35 @@
 // Встроенный зарядный порт — позволяет зарядиться от ближайшего АРС.
 // Выдаётся всем IPC автоматически при создании персонажа.
 
+/// Кабель, появляющийся в слоте руки когда зарядка активна.
+/// Правая рука — стандартный вариант.
+/obj/item/ipc_charging_cable
+	name = "charging cable"
+	desc = "Встроенный зарядный кабель КПБ."
+	icon = 'icons/obj/stack_objects.dmi'
+	icon_state = "coil"
+	inhand_icon_state = "coil_yellow"
+	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
+	item_flags = HAND_ITEM | ABSTRACT
+	force = 0
+	throwforce = 0
+	throw_range = 0
+	w_class = WEIGHT_CLASS_TINY
+
+/// Левая рука — те же спрайты, BYOND сам зеркалит.
+/obj/item/ipc_charging_cable/left
+	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
+
 /obj/item/implant/ipc/charger
 	name = "Integrated Charging Port"
-	desc = "Встроенный зарядный порт. Позволяет IPC заряжаться от источников питания станции."
+	desc = "Встроенный зарядный порт. Позволяет IPC заряждаться от источников питания станции."
 	icon_state = "reactive_repair"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-	arm_visual_state = "ipc_charger"
 	actions_types = list(/datum/action/item_action/hands_free/ipc_charge)
+	/// Кабель в слоте руки когда зарядка активна
+	var/obj/item/ipc_charging_cable/cable_item = null
 
 /obj/item/implant/ipc/charger/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
@@ -737,21 +759,17 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	// Показываем оверлей на руке
-	if(ishuman(target))
-		apply_arm_visual(target)
 	return TRUE
 
 /obj/item/implant/ipc/charger/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
-
 	if(!ishuman(source))
 		return
-
 	var/mob/living/carbon/human/H = source
-	// Убираем оверлей с руки
-	remove_arm_visual(H)
-	// Отключаем режим зарядки при извлечении
+	// Убираем кабель из руки и сбрасываем режим зарядки
+	if(cable_item)
+		REMOVE_TRAIT(cable_item, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
+		QDEL_NULL(cable_item)
 	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
 	if(battery)
 		battery.charging = FALSE
@@ -784,9 +802,31 @@
 	battery.charging = !battery.charging
 
 	if(battery.charging)
-		to_chat(H, span_notice("Режим зарядки активирован. Ищем источник питания..."))
+		// Определяем слот руки по зоне установки импланта
+		var/cable_type = (charger_implant.installed_in_zone == BODY_ZONE_R_ARM) ? /obj/item/ipc_charging_cable : /obj/item/ipc_charging_cable/left
+		var/obj/item/ipc_charging_cable/cable = new cable_type(null)
+		ADD_TRAIT(cable, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
+		charger_implant.cable_item = cable
+		var/side = (charger_implant.installed_in_zone == BODY_ZONE_R_ARM) ? RIGHT_HANDS : LEFT_HANDS
+		var/hand = H.get_empty_held_index_for_side(side)
+		if(hand)
+			H.put_in_hand(cable, hand)
+		else
+			// Если рука занята — роняем предмет и занимаем слот
+			var/list/hand_items = H.get_held_items_for_side(side, all = TRUE)
+			for(var/obj/item/hand_item as anything in hand_items)
+				if(!H.dropItemToGround(hand_item))
+					continue
+				to_chat(H, span_notice("Вы роняете [hand_item], чтобы подключить зарядный кабель!"))
+				H.put_in_hand(cable, H.get_empty_held_index_for_side(side))
+				break
+		to_chat(H, span_notice("Зарядный кабель подключён. Ищем источник питания..."))
 	else
-		to_chat(H, span_notice("Режим зарядки деактивирован."))
+		// Убираем кабель из руки
+		if(charger_implant.cable_item)
+			REMOVE_TRAIT(charger_implant.cable_item, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
+			QDEL_NULL(charger_implant.cable_item)
+		to_chat(H, span_notice("Зарядный кабель убран."))
 
 	build_all_button_icons()
 	return TRUE
@@ -918,7 +958,8 @@
 /obj/item/implant/ipc/kebab
 	name = "Integrated Kebab Module"
 	desc = "Встроенный кебаб-модуль. При развёрнутых клинках богомола позволяет насаживать мясо на лезвия и готовить кебаб (3 сек, кулдаун 30 сек)."
-	icon_state = "reactive_repair"
+	icon = 'icons/obj/food/meat.dmi'
+	icon_state = "kebab"
 	allowed_zones = list(BODY_ZONE_CHEST)
 	actions_types = list(/datum/action/item_action/hands_free/ipc_make_kebab)
 	/// Кулдаун между приготовлениями
