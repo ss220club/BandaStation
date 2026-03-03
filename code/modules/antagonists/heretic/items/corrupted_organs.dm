@@ -221,7 +221,7 @@
 		hearer.adjust_timed_status_effect(15 SECONDS, /datum/status_effect/speech/slurring/heretic)
 		var/obj/item/bodypart/head/regret = hearer.get_bodypart(BODY_ZONE_HEAD)
 		regret?.force_wound_upwards(/datum/wound/pierce/bleed/severe/magicalearpain, wound_source = "stethoscoped a corrupted heart")
-	return "[owner.ru_p_Their()] сердце производит [span_hypnophrase(beat_noise)]"
+	return "[owner.ru_p_them()] сердце производит [span_hypnophrase(beat_noise)]"
 
 /// Sometimes cough out some kind of dangerous gas
 /obj/item/organ/lungs/corrupt
@@ -265,7 +265,7 @@
 		hearer.emote("scream")
 		hearer.add_mood_event("gates_of_mansus", /datum/mood_event/gates_of_mansus)
 		hearer.sound_damage(10, 40 SECONDS)
-	return "[owner.ru_p_Their()] лёгкие испускают [span_hypnophrase(breath_noise)]"
+	return "[owner.ru_p_them()] лёгкие испускают [span_hypnophrase(breath_noise)]"
 
 /// It's full of worms
 /obj/item/organ/appendix/corrupt

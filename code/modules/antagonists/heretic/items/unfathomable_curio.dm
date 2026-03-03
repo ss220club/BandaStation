@@ -60,7 +60,7 @@
 		/datum/brain_trauma/severe/paralysis,
 		/datum/brain_trauma/severe/monophobia
 	)
-	wearer.visible_message(span_danger("Вуаль вокруг [wearer.declent_ru(GENITIVE)] заставляет [attack_text.declent_ru(ACCUSATIVE)] промазать, но сила удара заставляет ее рассеяться!"))
+	wearer.visible_message(span_danger("Вуаль вокруг [wearer.declent_ru(GENITIVE)] заставляет [attack_text] промазать, но сила удара заставляет ее рассеяться!"))
 	if(IS_HERETIC(wearer))
 		return
 
