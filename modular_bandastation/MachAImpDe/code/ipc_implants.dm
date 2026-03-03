@@ -846,7 +846,7 @@
 	actions_types = list(/datum/action/item_action/hands_free/ipc_force_shield)
 	var/shield_active = FALSE
 	/// Шанс полного блока атаки (0–100)
-	var/block_chance = 60
+	var/shield_block_chance = 60
 	/// Урон по руке за каждый успешный блок
 	var/arm_damage_per_block = 2
 	/// Стоимость активного щита в заряде батареи за секунду
@@ -857,7 +857,7 @@
 	<b>Name:</b> Force Shield Emitter<BR>
 	<b>Life:</b> Permanent<BR>
 	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
-	<b>Function:</b> [block_chance]% chance to fully block incoming brute/burn damage; each block deals [arm_damage_per_block] brute to the arm.<BR>
+	<b>Function:</b> [shield_block_chance]% chance to fully block incoming brute/burn damage; each block deals [arm_damage_per_block] brute to the arm.<BR>
 	<b>Status:</b> [shield_active ? "ACTIVE" : "STANDBY"]"}
 	return dat
 
@@ -889,7 +889,7 @@
 		return
 	if(damage_amount <= 0)
 		return
-	if(!prob(block_chance))
+	if(!prob(shield_block_chance))
 		return
 	// Успешный блок — полностью поглощаем удар
 	damage_mods += 0
@@ -942,7 +942,7 @@
 	shield_implant.shield_active = !shield_implant.shield_active
 
 	if(shield_implant.shield_active)
-		to_chat(H, span_notice("Силовой щит развёрнут. Шанс блока: [shield_implant.block_chance]%. Каждый блок наносит [shield_implant.arm_damage_per_block] ур. руке."))
+		to_chat(H, span_notice("Силовой щит развёрнут. Шанс блока: [shield_implant.shield_block_chance]%. Каждый блок наносит [shield_implant.arm_damage_per_block] ур. руке."))
 	else
 		to_chat(H, span_notice("Силовой щит сложен."))
 
