@@ -94,7 +94,7 @@
 		. += span_infoplain("Имеется система безопасности, оповещающая пользователя, если начнётся вмешательство с подом.")
 		if(copy_body)
 			. += span_infoplain("В настоящее время включено сканирование пользователя, благодаря чему аватары будут выглядят как пользователь при первом его создании.")
-		. += span_infoplain("Alt-click to [copy_body ? "выключить" : "включить"] сканирование пользователя.")
+		. += span_infoplain("Альт-клие чтобы [copy_body ? "выключить" : "включить"] сканирование пользователя.")
 
 	if(isnull(occupant))
 		. += span_infoplain("Сейчас внутри пусто.")
@@ -162,7 +162,7 @@
 	copy_body = !copy_body
 	scanning_can_toggle = world.time + SCANNING_TOGGLE_COOLDOWN
 	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
-	user.balloon_alert_to_viewers(user, "scanning [copy_body ? "enabled" : "disabled"]")
+	user.balloon_alert_to_viewers(user, "сканирование [copy_body ? "включено" : "выключено"]")
 	return CLICK_ACTION_SUCCESS
 
 #undef BASE_DISCONNECT_DAMAGE
