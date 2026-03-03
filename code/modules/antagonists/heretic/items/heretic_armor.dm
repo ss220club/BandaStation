@@ -419,7 +419,7 @@
 // Emits a healing aura that affects any heretic summons (excluding the heretic himself)
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/flesh
 	name = "Writhing Embrace"
-	desc = "Гниющая туша - возможео, несколько, скрученная в мясистые полипы, переплетения кишок и сломанных костей. \
+	desc = "Гниющая туша - возможно, несколько, скрученная в мясистые полипы, переплетения кишок и сломанных костей. \
 			Как ЭТО возможно носить, выходит за пределы здравого понимания. Оно движется, когда думает, что на него никто не смотрит."
 	icon_state = "flesh_armor"
 	hoodtype = /obj/item/clothing/head/hooded/cult_hoodie/eldritch/flesh
@@ -475,7 +475,7 @@
 // Gives you digital camo, silences your footsteps and makes you un-examineable
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/lock
 	name = "Shifting Guise"
-	desc = "Причудливые узоры путающие и пугающие обывателя, украшаю скромное одеяние, всегда пунктуального, скрытного, учтивого стюарда Хранителя. \
+	desc = "Причудливые узоры путающие и пугающие обывателя, украшают скромное одеяние, всегда пунктуального, скрытного, учтивого стюарда Хранителя. \
 			Обслуживание должно быть на высоте, а сервис с улыбкой." //тут ничего не было, и я спиздил часть из лора, а часть из описания doorman дедлока ;)
 	icon_state = "lock_armor"
 	hoodtype = /obj/item/clothing/head/hooded/cult_hoodie/eldritch/lock
@@ -519,7 +519,7 @@
 // Moon
 // Converts all damage into brain damage, nullifying the attack in the process
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/moon
-	name = "Resplendеnt Regalia"
+	name = "Resplendent Regalia"
 	desc = "Обманчивая сущность этого роскошного одеяния искривляет само восприятие. \
 			Наблюдателя неизбежно настигает леденящее откровение; \
 			увиденное им столь же подлинно, как любое иное лицо"
@@ -548,15 +548,15 @@
 	)
 	/// Message sent to the wearer who got attacked
 	var/static/list/self_message_list = list(
-		"Выше тело охватывают мурашки, как водная рябь покрывает воду в потревоженном водоёме. Это ощущение настолько прекрасно, что вам хочется поблагодарить %ATTACKER.",
+		"Ваше тело охватывают мурашки, как водная рябь покрывает воду в потревоженном водоёме. Это ощущение настолько прекрасно, что вам хочется поблагодарить %ATTACKER.",
 		"Раздался звон колокола. Пробил час %ATTACKER и отныне вы тикаете в такт этому звону.",
 		//"Вы должны бить в [area name]. Вам необходимо там оказаться. %ATTACKER может хочет, чтобы вы остались, но вы нужны в [area name].",
 		//"Вы видите %ATTACKER бьёт [name of animal]. Морда зверя - это отражение твоего собственного лица. Как странно.",
 		"%ATTACKER толкает вас, и вы проливаете свой чай. Всё в порядке. У вас полно чашек.",
-		"Вы слышите оглушительный грохот. Волны бьются о лодку. Море огромное и темное. Вы видите %ATTACKER бъёт по воде, проклиная своего мастера.",
+		"Вы слышите оглушительный грохот. Волны бьются о лодку. Море огромное и темное. Вы видите %ATTACKER бьёт по воде, проклиная своего мастера.",
 		"Блёстки разлетаются в воздухе вокруг %ATTACKER. Блёстки...",
 		"Вы заметили, что на вашем воротнике недостаёт пуговиц. Как это произошло? Возможно в этом виноват %ATTACKER.",
-		"%ATTACKER шутит так себе, вам тяжело понять почему эта шутка должны быть убийственной.",
+		"%ATTACKER шутит так себе, вам тяжело понять почему эта шутка должна быть убийственной.",
 	)
 	/// Message sent to blind people nearby
 	var/static/list/blind_message_list = list(
@@ -845,7 +845,7 @@
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/rust
 	name = "Salvaged Remains"
 	desc = "Прикосновение к складкам этого простого одеяния, кажется, вызывает у вас беспокойство. \
-			Даже взляд на него вызывает у вас головокружение.  \
+			Даже взгляд на него вызывает у вас головокружение.  \
 			Какой-то пульс, угрожающий затянуть вас внутрь."
 	icon_state = "rust_armor"
 	hoodtype = /obj/item/clothing/head/hooded/cult_hoodie/eldritch/rust
@@ -1180,7 +1180,7 @@
 
 	// Let examiners know this works as a focus only if the hood is down
 	. += span_notice("Позволяет произносить еретические заклинания, пока капюшон опущен.")
-	. += span_notice("Занимает много места, пока капюшон опущен.")
+	. += span_notice("Защищает от космоса, пока капюшон опущен.")
 
 /obj/item/clothing/suit/hooded/cultrobes/void/on_hood_down(obj/item/clothing/head/hooded/hood)
 	make_visible()

@@ -11,7 +11,7 @@
 
 /obj/item/clothing/neck/heretic_focus/crimson_medallion
 	name = "crimson medallion"
-	desc = "Кроваво-краснаялинза, обеспечивающая связь с потусторонним миром и даже хуже. Его глаз постоянно дергается и смотрит во все стороны. Кажется, что он беззвучно кричит..."
+	desc = "Кроваво-красная линза, обеспечивающая связь с потусторонним миром и даже хуже. Его глаз постоянно дергается и смотрит во все стороны. Кажется, что он беззвучно кричит..."
 	icon_state = "crimson_medallion"
 	/// The aura healing component. Used to delete it when taken off.
 	var/datum/component/component
@@ -58,7 +58,7 @@
 		return
 
 	if(HAS_TRAIT_FROM(user, TRAIT_MANSUS_TOUCHED, REF(src)))
-		to_chat(user, span_notice("Ваше сердце и кровь возвращаются к своему прежнему нормальному ритму и тякучести."))
+		to_chat(user, span_notice("Ваше сердце и кровь возвращаются к своему прежнему нормальному ритму и текучести."))
 
 	if(IS_HERETIC_OR_MONSTER(user) && active)
 		for(var/datum/action/cooldown/spell/spell_action in user.actions)
@@ -284,7 +284,7 @@
 
 	var/list/attack_list = list(
 		"Вы направляете [weapon.declent_ru(NOMINATIVE)] на [victim.declent_ru(ACCUSATIVE)], разделяя [victim.ru_p_them()] изображение на две части.",
-		"Вы бъёте [victim.declent_ru(NOMINATIVE)] [weapon.declent_ru(INSTRUMENTAL)], изливаясь неудержимым потоком изнутри. Безупречно.",
+		"Вы бьёте [victim.declent_ru(NOMINATIVE)] [weapon.declent_ru(INSTRUMENTAL)], изливаясь неудержимым потоком изнутри. Безупречно.",
 		"Когда оно вгрызается глубоко, [weapon.declent_ru(NOMINATIVE)] освобождает [victim].declent_ru(NOMINATIVE) от ненужных мыслей.",
 	)
 	to_chat(attacker, span_danger(pick(attack_list)))

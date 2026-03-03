@@ -76,7 +76,7 @@
 // Upgraded version of the codex cicatrix that allows us to cast curses
 /obj/item/codex_cicatrix/morbus // I'm morbing all over
 	name = "Codex Morbus"
-	desc = "Омерзительная, истрёпанная книга,покрытая отдельно моргающими глазами, смотрящими на вас. Вы даже не представляете, как держать ЭТО - и откровенно говоря, не уверенеы что вам это хочется."
+	desc = "Омерзительная, истрёпанная книга, покрытая отдельно моргающими глазами, смотрящими на вас. Вы даже не представляете, как держать ЭТО - и откровенно говоря, не уверены что вам это хочется."
 	base_icon_state = "book_morbus"
 	icon_state = "book_morbus"
 	drain_speed = 2.5 SECONDS

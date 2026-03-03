@@ -1,6 +1,6 @@
 /obj/effect/lock_portal
 	name = "crack in reality"
-	desc = "Необъяснимо глубокая трещина в пространстве, один взляд на неё звставялег глаза болеть. Определенно небезопасная"
+	desc = "Необъяснимо глубокая трещина в пространстве, один взляд на неё заставялет глаза болеть. Определенно небезопасная"
 	icon = 'icons/effects/eldritch.dmi'
 	icon_state = "realitycrack"
 	light_system = COMPLEX_LIGHT

@@ -62,7 +62,7 @@
 /obj/item/organ/tongue/corrupt/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/corrupted_organ)
-	AddElement(/datum/element/noticable_organ, "Рот полностю заполнен звёздами.", BODY_ZONE_PRECISE_MOUTH)
+	AddElement(/datum/element/noticable_organ, "Рот полностью заполнен звёздами.", BODY_ZONE_PRECISE_MOUTH)
 
 /obj/item/organ/tongue/corrupt/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
@@ -181,10 +181,10 @@
 		"Кровь...",
 		"Внезапно все стали такими аппетитными.",
 		"Эта кровь...",
-		"В тебе есть пустота, которую может заполнить только кровь.",
+		"Внутри есть пустота, которую может заполнить только кровь.",
 		"Прямо сейчас вы бы не отказались от крови.",
-		"Ты чувствуешь, как кровь бежит по твоим венам.",
-		"Ты думаешь о том, как-бы перегрызть кому-нибудь глотку.",
+		"Вы чувствуете, как кровь бежит по твоим венам.",
+		"Вы думаете о том, как бы перегрызть кому-нибудь глотку.",
 		"Ваш живот урчит и вы чувствуете металлический привкус во рту.",
 	)
 	to_chat(human, span_cult_italic(pick(blood_messages)))

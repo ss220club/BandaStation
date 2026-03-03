@@ -23,7 +23,7 @@
 
 /obj/item/reagent_containers/cup/phylactery/interact_with_atom_secondary(atom/target, mob/living/user, list/modifiers)
 	if(!COOLDOWN_FINISHED(src, drain_cooldown))
-		user.balloon_alert(user, "нельяз похитить так быстро!")
+		user.balloon_alert(user, "нельзя похитить так быстро!")
 		return NONE
 	if(!isliving(target))
 		return NONE
@@ -46,7 +46,7 @@
 		COOLDOWN_START(src, drain_cooldown, 5 SECONDS)
 		playsound(src, 'sound/effects/chemistry/catalyst.ogg', 20, TRUE, extrarange = SILENCED_SOUND_EXTRARANGE, falloff_exponent = 10)
 	else
-		to_chat(user, span_warning("Вы неможете похитить кровь у [living_target.declent_ru(GENITIVE)]!"))
+		to_chat(user, span_warning("Вы не можете похитить кровь у [living_target.declent_ru(GENITIVE)]!"))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/cup/phylactery/ranged_interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
