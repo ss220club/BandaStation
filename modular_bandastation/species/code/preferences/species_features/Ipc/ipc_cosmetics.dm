@@ -205,8 +205,8 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	. = ..()
 	if(!.)
 		return FALSE
-	var/selected_species = preferences.read_preference(/datum/preference/choiced/species)
-	return selected_species == SPECIES_IPC
+	var/datum/species/species = GLOB.species_prototypes[preferences.read_preference(/datum/preference/choiced/species)]
+	return istype(species, /datum/species/ipc)
 
 /datum/preference/choiced/ipc_head_accessory/apply_to_human(mob/living/carbon/human/target, value)
 	if(!istype(target.dna?.species, /datum/species/ipc))
@@ -238,8 +238,8 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	. = ..()
 	if(!.)
 		return FALSE
-	var/selected_species = preferences.read_preference(/datum/preference/choiced/species)
-	return selected_species == SPECIES_IPC
+	var/datum/species/species = GLOB.species_prototypes[preferences.read_preference(/datum/preference/choiced/species)]
+	return istype(species, /datum/species/ipc)
 
 /datum/preference/choiced/ipc_tail/apply_to_human(mob/living/carbon/human/target, value)
 	if(!istype(target.dna?.species, /datum/species/ipc))
@@ -277,8 +277,8 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	. = ..()
 	if(!.)
 		return FALSE
-	var/selected_species = preferences.read_preference(/datum/preference/choiced/species)
-	return selected_species == SPECIES_IPC
+	var/datum/species/species = GLOB.species_prototypes[preferences.read_preference(/datum/preference/choiced/species)]
+	return istype(species, /datum/species/ipc)
 
 /datum/preference/choiced/ipc_charger_arm/apply_to_human(mob/living/carbon/human/target, value)
 	if(!istype(target.dna?.species, /datum/species/ipc))
