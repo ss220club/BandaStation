@@ -7550,15 +7550,6 @@ instrumental = "датским хот-догом"
 prepositional = "датском хот-доге"
 gender = "male"
 
-["Little Hawaii hotdog"]
-nominative = "гавайский мини хот-дог"
-genitive = "гавайского мини хот-дога"
-dative = "гавайскому мини хот-догу"
-accusative = "гавайский мини хот-дог"
-instrumental = "гавайским мини хот-догом"
-prepositional = "гавайском мини хот-доге"
-gender = "male"
-
 ["butterdog"]
 nominative = "масло-дог"
 genitive = "масла-дога"
@@ -7566,15 +7557,6 @@ dative = "маслу-догу"
 accusative = "масло-дог"
 instrumental = "маслом-догом"
 prepositional = "масле-доге"
-gender = "male"
-
-["Plasma Dog Supreme"]
-nominative = "плазма-дог Суприм"
-genitive = "плазмы-дога Суприм"
-dative = "плазме-догу Суприм"
-accusative = "плазма-дог Суприм"
-instrumental = "плазмой-догом Суприм"
-prepositional = "плазме-доге Суприм"
 gender = "male"
 
 ["sausage"]
@@ -10710,6 +10692,693 @@ dative = "корнебургеру \"Рассстяпа Мо\""
 accusative = "корнебургер \"Рассстяпа Мо\""
 instrumental = "корнебургером \"Рассстяпа Мо\""
 prepositional = "корнебургере \"Рассстяпа Мо\""
+gender = "male"
+
+# MARK: Food - Martian Foods
+
+["kimchi"]
+nominative = "кимчи"
+gender = "neuter"
+
+["inferno kimchi"]
+nominative = "кимчи инферно"
+gender = "neuter"
+
+["garlic kimchi"]
+nominative = "кимчи с чесноком"
+gender = "neuter"
+
+["surimi"]
+nominative = "мясо сурими"
+genitive = "мяса сурими"
+dative = "мясу сурими"
+accusative = "мясо сурими"
+instrumental = "мясом сурими"
+prepositional = "мясе сурими"
+gender = "neuter"
+
+["kamaboko"]
+nominative = "камабоко"
+gender = "neuter"
+
+["smiling kamaboko"]
+nominative = "камабоко (улыбка)"
+gender = "neuter"
+
+["spiral kamaboko"]
+nominative = "камабоко (спираль)"
+gender = "neuter"
+
+["star kamaboko"]
+nominative = "камабоко (звезда)"
+gender = "neuter"
+
+["sunrise kamaboko"]
+nominative = "камабоко (восход)"
+gender = "neuter"
+
+["kamaboko slice"]
+nominative = "ломтик камабоко"
+genitive = "ломтика камабоко"
+dative = "ломтику камабоко"
+accusative = "ломтик камабоко"
+instrumental = "ломтиком камабоко"
+prepositional = "ломтике камабоко"
+gender = "male"
+
+["sambal"]
+nominative = "самбал"
+genitive = "самбала"
+dative = "самбалу"
+accusative = "самбал"
+instrumental = "самбалом"
+prepositional = "самбале"
+gender = "male"
+
+["katsu fillet"]
+nominative = "филе катсу"
+gender = "neuter"
+
+["rice dough"]
+nominative = "рисовое тесто"
+genitive = "рисового теста"
+dative = "рисовому тесту"
+accusative = "рисовое тесто"
+instrumental = "рисовым тестом"
+prepositional = "рисовом тесте"
+gender = "neuter"
+
+["fresh noodles"]
+nominative = "сырая лапша"
+genitive = "сырой лапши"
+dative = "сырой лапше"
+accusative = "сырую лапшу"
+instrumental = "сырой лапшой"
+prepositional = "сырой лапше"
+gender = "female"
+
+["cooked noodles"]
+nominative = "лапша"
+genitive = "лапши"
+dative = "лапше"
+accusative = "лапшу"
+instrumental = "лапшой"
+prepositional = "лапше"
+gender = "female"
+
+["reispan"]
+nominative = "рисовый хлеб"
+genitive = "рисового хлеба"
+dative = "рисовому хлебу"
+accusative = "рисовый хлеб"
+instrumental = "рисовым хлебом"
+prepositional = "рисовом хлебе"
+gender = "male"
+
+["reispan slice"]
+nominative = "ломтик рисового хлеба"
+genitive = "ломтика рисового хлеба"
+dative = "ломтику рисового хлеба"
+accusative = "ломтик рисового хлеба"
+instrumental = "ломтиком рисового хлеба"
+prepositional = "ломтике рисового хлеба"
+gender = "male"
+
+["hurricane fried rice"]
+nominative = "ураганный жареный рис"
+genitive = "ураганного жареного риса"
+dative = "ураганному жареному рису"
+accusative = "ураганный жареный рис"
+instrumental = "ураганным жареным рисом"
+prepositional = "ураганном жареном рисе"
+gender = "male"
+
+["ikareis"]
+nominative = "икарис"
+genitive = "икариса"
+dative = "икарису"
+accusative = "икарис"
+instrumental = "икарисом"
+prepositional = "икарисе"
+gender = "male"
+
+["Hawaiian fried rice"]
+nominative = "жареный рис по-гавайски"
+genitive = "жареного риса по-гавайски"
+dative = "жареному рису по-гавайски"
+accusative = "жареный рис по-гавайски"
+instrumental = "жареным рисом по-гавайски"
+prepositional = "жареном рисе по-гавайски"
+gender = "male"
+
+["ketchup fried rice"]
+nominative = "жареный рис с кетчупом"
+genitive = "жареного риса с кетчупом"
+dative = "жареному рису с кетчупом"
+accusative = "жареный рис с кетчупом"
+instrumental = "жареным рисом с кетчупом"
+prepositional = "жареном рисе с кетчупом"
+gender = "male"
+
+["mediterranean fried rice"]
+nominative = "средиземноморский жареный рис"
+genitive = "средиземноморского жареного риса"
+dative = "средиземноморскому жареному рису"
+accusative = "средиземноморский жареный рис"
+instrumental = "средиземноморским жареным рисом"
+prepositional = "средиземноморском жареном рисе"
+gender = "male"
+
+["egg fried rice"]
+nominative = "жареный рис с яйцом"
+genitive = "жареного риса с яйцом"
+dative = "жареному рису с яйцом"
+accusative = "жареный рис с яйцом"
+instrumental = "жареным рисом с яйцом"
+prepositional = "жареном рисе с яйцом"
+gender = "male"
+
+["bibimbap"]
+nominative = "бибимбап"
+genitive = "бибимбапа"
+dative = "бибимбапу"
+accusative = "бибимбап"
+instrumental = "бибимбапом"
+prepositional = "бибимбапе"
+gender = "male"
+
+["bulgogi noodles"]
+nominative = "лапша с булгоги"
+genitive = "лапши с булгоги"
+dative = "лапше с булгоги"
+accusative = "лапшу с булгоги"
+instrumental = "лапшой с булгоги"
+prepositional = "лапше с булгоги"
+gender = "female"
+
+["yakisoba katsu"]
+nominative = "якисоба катсу"
+genitive = "якисобы катсу"
+dative = "якисобе катсу"
+accusative = "якисобу катсу"
+instrumental = "якисобой катсу"
+prepositional = "якисобе катсу"
+gender = "female"
+
+["Martian fried noodles"]
+nominative = "марсианская жареная лапша"
+genitive = "марсианской жареной лапши"
+dative = "марсианской жареной лапше"
+accusative = "марсианскую жареную лапшу"
+instrumental = "марсианской жареной лапшой"
+prepositional = "марсианской жареной лапше"
+gender = "female"
+
+["simple fried noodles"]
+nominative = "простая жареная лапша"
+genitive = "простой жареной лапши"
+dative = "простой жареной лапше"
+accusative = "простую жареную лапшу"
+instrumental = "простой жареной лапшой"
+prepositional = "простой жареной лапше"
+gender = "female"
+
+["Setagaya curry"]
+nominative = "карри сэтагая"
+gender = "male"
+
+["Big Blue burger"]
+nominative = "бургер \"Биг Блю\""
+genitive = "бургера \"Биг Блю\""
+dative = "бургеру \"Биг Блю\""
+accusative = "бургер \"Биг Блю\""
+instrumental = "бургером \"Биг Блю\""
+prepositional = "бургере \"Биг Блю\""
+gender = "male"
+
+["Chappy patty"]
+nominative = "бургер \"Чаппи-Патти\""
+genitive = "бургера \"Чаппи-Патти\""
+dative = "бургеру \"Чаппи-Патти\""
+accusative = "бургер \"Чаппи-Патти\""
+instrumental = "бургером \"Чаппи-Патти\""
+prepositional = "бургере \"Чаппи-Патти\""
+gender = "male"
+
+["King Katsu sandwich"]
+nominative = "сэндвич «Кинг Катсу»"
+genitive = "сэндвича «Кинг Катсу»"
+dative = "сэндвичу «Кинг Катсу»"
+accusative = "сэндвич «Кинг Катсу»"
+instrumental = "сэндвичем «Кинг Катсу»"
+prepositional = "сэндвиче «Кинг Катсу»"
+gender = "male"
+
+["Marte Cubano sandwich"]
+nominative = "сэндвич «Марте Кубано»"
+genitive = "сэндвича «Марте Кубано»"
+dative = "сэндвичу «Марте Кубано»"
+accusative = "сэндвич «Марте Кубано»"
+instrumental = "сэндвичем «Марте Кубано»"
+prepositional = "сэндвиче «Марте Кубано»"
+gender = "male"
+
+["Little Shiro sandwich"]
+nominative = "сэндвич «Крошка Сиро»"
+genitive = "сэндвича «Крошка Сиро»"
+dative = "сэндвичу «Крошка Сиро»"
+accusative = "сэндвич «Крошка Сиро»"
+instrumental = "сэндвичем «Крошка Сиро»"
+prepositional = "сэндвиче «Крошка Сиро»"
+gender = "male"
+
+["croque-martienne"]
+nominative = "крок-мартьен"
+genitive = "крок-мартьена"
+dative = "крок-мартьену"
+accusative = "крок-мартьен"
+instrumental = "крок-мартьеном"
+prepositional = "крок-мартьене"
+gender = "male"
+
+["Prospect Sunrise"]
+nominative = "сэндвич «Проспект Санрайз»"
+genitive = "сэндвича «Проспект Санрайз»"
+dative = "сэндвичу «Проспект Санрайз»"
+accusative = "сэндвич «Проспект Санрайз»"
+instrumental = "сэндвичем «Проспект Санрайз»"
+prepositional = "сэндвиче «Проспект Санрайз»"
+gender = "male"
+
+["takoyaki"]
+nominative = "такояки"
+gender = "male"
+
+["Russian takoyaki"]
+nominative = "такояки по-славянски"
+gender = "male"
+
+# тако такояки?
+["tacoyaki"]
+nominative = "такояки по-мексикански"
+gender = "male"
+
+["okonomiyaki"]
+nominative = "окономияки"
+gender = "neutral"
+
+["brat-kimchi"]
+nominative = "брат-кимчи"
+gender = "neutral"
+
+["tonkatsuwurst"]
+nominative = "тонкацу-вурст"
+genitive = "тонкацу-вурста"
+dative = "тонкацу-вурсту"
+accusative = "тонкацу-вурст"
+instrumental = "тонкацу-вурстом"
+prepositional = "тонкацу-вурсте"
+gender = "male"
+
+["ti hoeh koe skewer"]
+nominative = "шашлык «Ти Хоэ Кое»"
+genitive = "шашлыка «Ти Хоэ Кое»"
+dative = "шашлыку «Ти Хоэ Кое»"
+accusative = "шашлык «Ти Хоэ Кое»"
+instrumental = "шашлыком «Ти Хоэ Кое»"
+prepositional = "шашлыке «Ти Хоэ Кое»"
+gender = "male"
+
+["kitzushi"]
+nominative = "кицуши"
+gender = "neutral"
+
+["epok-epok"]
+nominative = "эпок-эпок"
+genitive = "эпок-эпока"
+dative = "эпок-эпоку"
+accusative = "эпок-эпок"
+instrumental = "эпок-эпоком"
+prepositional = "эпок-эпоке"
+gender = "male"
+
+["roti john"]
+nominative = "сэндвич «Роти Джон»"
+genitive = "сэндвича «Роти Джон»"
+dative = "сэндвичу «Роти Джон»"
+accusative = "сэндвич «Роти Джон»"
+instrumental = "сэндвичем «Роти Джон»"
+prepositional = "сэндвиче «Роти Джон»"
+gender = "male"
+
+["izakaya fries"]
+nominative = "картофель фри идзакая"
+genitive = "картофеля фри идзакая"
+dative = "картофелю фри идзакая"
+accusative = "картофель фри идзакая"
+instrumental = "картофелем фри идзакая"
+prepositional = "картофеле фри идзакая"
+gender = "male"
+
+["kurry-ok subsando"]
+nominative = "карри-ок сабсандо"
+gender = "neutral"
+
+["loco moco"]
+nominative = "локо моко"
+gender = "male"
+
+["wild duck fries"]
+nominative = "картофель фри с дикой уткой"
+genitive = "картофеля фри с дикой уткой"
+dative = "картофелю фри с дикой уткой"
+accusative = "картофель фри с дикой уткой"
+instrumental = "картофелем фри с дикой уткой"
+prepositional = "картофеле фри с дикой уткой"
+gender = "male"
+
+["Little Hawaii hotdog"]
+nominative = "хот-дог «Маленькие Гавайи»"
+genitive = "хот-дога «Маленькие Гавайи»"
+dative = "хот-догу «Маленькие Гавайи»"
+accusative = "хот-дог «Маленькие Гавайи»"
+instrumental = "хот-догом «Маленькие Гавайи»"
+prepositional = "хот-доге «Маленькие Гавайи»"
+gender = "male"
+
+["salt n' chilli fries"]
+nominative = "картофель фри с солью и чили"
+genitive = "картофеля фри с солью и чили"
+dative = "картофелю фри с солью и чили"
+accusative = "картофель фри с солью и чили"
+instrumental = "картофелем фри с солью и чили"
+prepositional = "картофеле фри с солью и чили"
+gender = "male"
+
+["grilled octopus tentacle"]
+nominative = "жареное щупальце осьминога"
+genitive = "жареного щупальца осьминога"
+dative = "жареному щупальцу осьминога"
+accusative = "жареное щупальце осьминога"
+instrumental = "жареным щупальцем осьминога"
+prepositional = "жареном щупальце осьминога"
+gender = "neutral"
+
+["steak croquette"]
+nominative = "стейк-крокет"
+genitive = "стейк-крокета"
+dative = "стейк-крокету"
+accusative = "стейк-крокет"
+instrumental = "стейк-крокетом"
+prepositional = "стейк-крокете"
+gender = "male"
+
+["chapsilog"]
+nominative = "чапсилог"
+genitive = "чапсилога"
+dative = "чапсилогу"
+accusative = "чапсилог"
+instrumental = "чапсилогом"
+prepositional = "чапсилоге"
+gender = "male"
+
+["chap hash"]
+nominative = "чап-хэш"
+genitive = "чап-хэша"
+dative = "чап-хэшу"
+accusative = "чап-хэш"
+instrumental = "чап-хэшем"
+prepositional = "чап-хэше"
+gender = "male"
+
+["agedashi tofu"]
+nominative = "агедаши тофу"
+gender = "male"
+
+["po kok gai"]
+nominative = "по кок гай"
+gender = "neutral"
+
+["Huoxing tofu"]
+nominative = "тофу Хуосин"
+gender = "neutral"
+
+["fēizhōu jī"]
+nominative = "фэйчжоу цзи"
+gender = "neutral"
+
+["galinha de cabidela"]
+nominative = "галинья де кабидела"
+genitive = "галиньи де кабидела"
+dative = "галинье де кабидела"
+accusative = "галинью де кабидела"
+instrumental = "галиньей де кабидела"
+prepositional = "галинье де кабидела"
+gender = "female"
+
+["katsu curry"]
+nominative = "карри катсу"
+gender = "neutral"
+
+["beef bowl"]
+nominative = "говяжий боул"
+genitive = "говяжьего боула"
+dative = "говяжьему боулу"
+accusative = "говяжий боул"
+instrumental = "говяжьим боулом"
+prepositional = "говяжьем боуле"
+gender = "male"
+
+["salt n' chilli octopus bowl"]
+nominative = "боул с осьминогом, солью и чили"
+genitive = "боула с осьминогом, солью и чили"
+dative = "боулу с осьминогом, солью и чили"
+accusative = "боул с осьминогом, солью и чили"
+instrumental = "боулом с осьминогом, солью и чили"
+prepositional = "боуле с осьминогом, солью и чили"
+gender = "male"
+
+["Kansai bowl"]
+nominative = "боул Кансай"
+genitive = "боула Кансай"
+dative = "боулу Кансай"
+accusative = "боул Кансай"
+instrumental = "боулом Кансай"
+prepositional = "боуле Кансай"
+gender = "male"
+
+["Eigamudo curry"]
+nominative = "карри Эйгамудо"
+gender = "neutral"
+
+["çilbir"]
+nominative = "чилбир"
+genitive = "чилбира"
+dative = "чилбиру"
+accusative = "чилбир"
+instrumental = "чилбиром"
+prepositional = "чилбире"
+gender = "male"
+
+["Peking duck crepes a l'orange"]
+nominative = "блинчики с пекинской уткой а-ля оранж"
+genitive = "блинчиков с пекинской уткой а-ля оранж"
+dative = "блинчикам с пекинской уткой а-ля оранж"
+accusative = "блинчики с пекинской уткой а-ля оранж"
+instrumental = "блинчиками с пекинской уткой а-ля оранж"
+prepositional = "блинчиках с пекинской уткой а-ля оранж"
+gender = "plural"
+
+["vulgaris spekkoek"]
+nominative = "спеккук вульгарис"
+genitive = "спеккука вульгарис"
+dative = "спеккуку вульгарис"
+accusative = "спеккук вульгарис"
+instrumental = "спеккуком вульгарис"
+prepositional = "спеккуке вульгарис"
+gender = "male"
+
+["vulgaris spekkoek slice"]
+nominative = "кусок спеккука вульгарис"
+genitive = "куска спеккука вульгарис"
+dative = "куску спеккука вульгарис"
+accusative = "кусок спеккука вульгарис"
+instrumental = "куском спеккука вульгарис"
+prepositional = "куске спеккука вульгарис"
+gender = "male"
+
+["pineapple foster"]
+nominative = "ананасовый фостер"
+genitive = "ананасового фостера"
+dative = "ананасовому фостеру"
+accusative = "ананасовый фостер"
+instrumental = "ананасовым фостером"
+prepositional = "ананасовом фостере"
+gender = "male"
+
+["pastel de nata"]
+nominative = "паштел де ната"
+genitive = "паштела де ната"
+dative = "паштeлу де ната"
+accusative = "паштел де ната"
+instrumental = "паштeлом де ната"
+prepositional = "паштеле де ната"
+gender = "male"
+
+["boh loh yah"]
+nominative = "бо ло йа"
+gender = "neutral"
+
+["banana fritter"]
+nominative = "банановый фриттер"
+genitive = "бананового фриттера"
+dative = "банановому фриттеру"
+accusative = "банановый фриттер"
+instrumental = "банановым фриттером"
+prepositional = "банановом фриттере"
+gender = "male"
+
+["pineapple fritter"]
+nominative = "ананасовый фриттер"
+genitive = "ананасового фриттера"
+dative = "ананасовому фриттеру"
+accusative = "ананасовый фриттер"
+instrumental = "ананасовым фриттером"
+prepositional = "ананасовом фриттере"
+gender = "male"
+
+["kasei dango"]
+nominative = "касэй данго"
+genitive = "касэй данго"
+dative = "касэй данго"
+accusative = "касэй данго"
+instrumental = "касэй данго"
+prepositional = "касэй данго"
+gender = "neutral"
+
+["peanut butter ice cream mochi"]
+nominative = "моти с мороженым и арахисовой пастой"
+genitive = "моти с мороженым и арахисовой пастой"
+dative = "моти с мороженым и арахисовой пастой"
+accusative = "моти с мороженым и арахисовой пастой"
+instrumental = "моти с мороженым и арахисовой пастой"
+prepositional = "моти с мороженым и арахисовой пастой"
+gender = "neutral"
+
+["frozen pineapple pop"]
+nominative = "ананасовый лёд"
+genitive = "ананасового льда"
+dative = "ананасовому льду"
+accusative = "ананасовый лёд"
+instrumental = "ананасовым льдом"
+prepositional = "ананасовом льде"
+gender = "male"
+
+["sea salt ice-cream bar"]
+nominative = "брикет мороженого с морской солью"
+genitive = "брикета мороженого с морской солью"
+dative = "брикету мороженого с морской солью"
+accusative = "брикет мороженого с морской солью"
+instrumental = "брикетом мороженого с морской солью"
+prepositional = "брикете мороженого с морской солью"
+gender = "male"
+
+["berry topsicle"]
+nominative = "ягодный топсик"
+genitive = "ягодного топсика"
+dative = "ягодному топсику"
+accusative = "ягодный топсик"
+instrumental = "ягодным топсиком"
+prepositional = "ягодном топсике"
+gender = "male"
+
+["banana topsicle"]
+nominative = "банановый топсик"
+genitive = "бананового топсика"
+dative = "банановому топсику"
+accusative = "банановый топсик"
+instrumental = "банановым топсиком"
+prepositional = "банановом топсике"
+gender = "male"
+
+["pineapple topsicle"]
+nominative = "банановый топсик"
+genitive = "бананового топсика"
+dative = "банановому топсику"
+accusative = "банановый топсик"
+instrumental = "банановым топсиком"
+prepositional = "банановом топсике"
+gender = "male"
+
+["Plasma Dog Supreme"]
+nominative = "плазма-дог Суприм"
+genitive = "плазмы-дога Суприм"
+dative = "плазме-догу Суприм"
+accusative = "плазма-дог Суприм"
+instrumental = "плазмой-догом Суприм"
+prepositional = "плазме-доге Суприм"
+gender = "male"
+
+["frickles"]
+nominative = "огурфри"
+gender = "plural"
+
+["raw pretzel"]
+nominative = "сырой крендель"
+genitive = "сырого кренделя"
+dative = "сырому кренделю"
+accusative = "сырой крендель"
+instrumental = "сырым кренделем"
+prepositional = "сыром кренделе"
+gender = "male"
+
+["ballpark pretzel"]
+nominative = "крендель"
+genitive = "кренделя"
+dative = "кренделю"
+accusative = "крендель"
+instrumental = "кренделем"
+prepositional = "кренделе"
+gender = "male"
+
+["raw tsukune"]
+nominative = "сырые цукунэ"
+genitive = "сырых цукунэ"
+dative = "сырым цукунэ"
+accusative = "сырые цукунэ"
+instrumental = "сырыми цукунэ"
+prepositional = "сырых цукунэ"
+gender = "plural"
+
+["ballpark tsukune"]
+nominative = "цукунэ"
+gender = "plural"
+
+["pickled voltvine"]
+nominative = "вольт-стебли в маринаде"
+genitive = "вольт-стеблей в маринаде"
+dative = "вольт-стеблям в маринаде"
+accusative = "вольт-стебли в маринаде"
+instrumental = "вольт-стеблями в маринаде"
+prepositional = "вольт-стеблях в маринаде"
+gender = "plural"
+
+["24-volt fish"]
+nominative = "24-вольтовая рыба"
+genitive = "24-вольтовой рыбы"
+dative = "24-вольтовой рыбе"
+accusative = "24-вольтовую рыбу"
+instrumental = "24-вольтовой рыбой"
+prepositional = "24-вольтовой рыбе"
+gender = "female"
+
+["Sprout bowl"]
+nominative = "боул Спраут"
+genitive = "боула Спраут"
+dative = "боулу Спраут"
+accusative = "боул Спраут"
+instrumental = "боулом Спраут"
+prepositional = "боуле Спраут"
 gender = "male"
 
 # MARK: Food - Other
