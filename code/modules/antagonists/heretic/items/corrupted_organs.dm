@@ -56,7 +56,7 @@
 /// Sometimes speak in incomprehensible tongues
 /obj/item/organ/tongue/corrupt
 	name = "corrupt tongue"
-	desc = "Он говорил только лож."
+	desc = "Он говорил только ложь."
 	organ_flags = parent_type::organ_flags | ORGAN_HAZARDOUS
 
 /obj/item/organ/tongue/corrupt/Initialize(mapload)
