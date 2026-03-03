@@ -286,3 +286,13 @@ export const feature_ipc_charger_arm: FeatureChoiced = {
     return <FeatureDropdownInput buttons {...props} />;
   },
 };
+
+export const ipc_head_accessory_color: Feature<string> = {
+  name: 'Аксессуар головы - цвет',
+  component: FeatureColorInput,
+};
+
+export const ipc_tail_color: Feature<string> = {
+  name: 'Хвост - цвет',
+  component: FeatureColorInput,
+};

@@ -72,16 +72,23 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	blocks_emissive = EMISSIVE_BLOCK_NONE
 	/// Имя стейта из ipc_head_accessories.dmi
 	var/state = ""
+	/// Цвет тонирования (null = без тонирования)
+	var/icon_color = null
 
 /datum/bodypart_overlay/ipc_head_accessory/generate_icon_cache()
 	. = ..()
 	. += state
+	if(icon_color)
+		. += icon_color
 
 /datum/bodypart_overlay/ipc_head_accessory/get_overlay(layer, obj/item/bodypart/limb)
 	layer = bitflag_to_layer(layer)
 	. = list()
 	if(!state) return
-	. += image(IPC_HEAD_ACC_ICON, icon_state = state, layer = layer)
+	var/image/img = image(IPC_HEAD_ACC_ICON, icon_state = state, layer = layer)
+	if(icon_color)
+		img.color = icon_color
+	. += img
 
 // ============================================
 // BODYPART OVERLAY: FACE / ЭКРАН
@@ -111,18 +118,28 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 /datum/bodypart_overlay/ipc_tail
 	layers = EXTERNAL_BEHIND | EXTERNAL_FRONT
 	blocks_emissive = EMISSIVE_BLOCK_NONE
+	/// Цвет тонирования (null = без тонирования)
+	var/icon_color = null
 
 /datum/bodypart_overlay/ipc_tail/generate_icon_cache()
 	. = ..()
 	. += "ipc_tail"
+	if(icon_color)
+		. += icon_color
 
 /datum/bodypart_overlay/ipc_tail/get_overlay(layer, obj/item/bodypart/limb)
 	. = list()
 	switch(layer)
 		if(EXTERNAL_BEHIND)
-			. += image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
+			var/image/img_behind = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
+			if(icon_color)
+				img_behind.color = icon_color
+			. += img_behind
 		if(EXTERNAL_FRONT)
-			. += image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_FRONT",  layer = bitflag_to_layer(EXTERNAL_FRONT))
+			var/image/img_front = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
+			if(icon_color)
+				img_front.color = icon_color
+			. += img_front
 
 // ============================================
 // APPLY PROCS
@@ -142,6 +159,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 		return
 	var/datum/bodypart_overlay/ipc_head_accessory/overlay = new()
 	overlay.state = state
+	overlay.icon_color = H.dna?.features["ipc_head_accessory_color"]
 	head.add_bodypart_overlay(overlay)
 
 /// Устанавливает изображение экрана/лица IPC.
@@ -170,6 +188,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	if(!enabled)
 		return
 	var/datum/bodypart_overlay/ipc_tail/overlay = new()
+	overlay.icon_color = H.dna?.features["ipc_tail_color"]
 	chest.add_bodypart_overlay(overlay)
 
 // ============================================
@@ -211,6 +230,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 /datum/preference/choiced/ipc_head_accessory/apply_to_human(mob/living/carbon/human/target, value)
 	if(!istype(target.dna?.species, /datum/species/ipc))
 		return
+	target.dna.features["feature_ipc_head_accessory"] = value
 	apply_ipc_head_accessory(target, value)
 
 /datum/preference/choiced/ipc_tail
@@ -244,6 +264,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 /datum/preference/choiced/ipc_tail/apply_to_human(mob/living/carbon/human/target, value)
 	if(!istype(target.dna?.species, /datum/species/ipc))
 		return
+	target.dna.features["feature_ipc_tail"] = value
 	apply_ipc_tail(target, value == "plug")
 
 // ============================================
@@ -355,6 +376,56 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	var/chosen_state = display_names[chosen_name]
 	S.ipc_face_state = chosen_state
 	apply_ipc_face(H, chosen_state)
+
+// ============================================
+// COLOR PREFERENCES: ЦВЕТ АКСЕССУАРА ГОЛОВЫ И ХВОСТА
+// ============================================
+
+/datum/preference/color/ipc_head_accessory_color
+	priority = PREFERENCE_PRIORITY_BODYPARTS
+	savefile_key = "ipc_head_accessory_color"
+	savefile_identifier = PREFERENCE_CHARACTER
+	category = PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES
+
+/datum/preference/color/ipc_head_accessory_color/create_default_value()
+	return COLOR_WHITE
+
+/datum/preference/color/ipc_head_accessory_color/is_accessible(datum/preferences/preferences)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/datum/species/species = GLOB.species_prototypes[preferences.read_preference(/datum/preference/choiced/species)]
+	return istype(species, /datum/species/ipc)
+
+/datum/preference/color/ipc_head_accessory_color/apply_to_human(mob/living/carbon/human/target, value)
+	if(!istype(target.dna?.species, /datum/species/ipc))
+		return
+	target.dna.features["ipc_head_accessory_color"] = value
+	// Перерисовываем аксессуар с новым цветом
+	apply_ipc_head_accessory(target, target.dna.features["feature_ipc_head_accessory"])
+
+/datum/preference/color/ipc_tail_color
+	priority = PREFERENCE_PRIORITY_BODYPARTS
+	savefile_key = "ipc_tail_color"
+	savefile_identifier = PREFERENCE_CHARACTER
+	category = PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES
+
+/datum/preference/color/ipc_tail_color/create_default_value()
+	return COLOR_WHITE
+
+/datum/preference/color/ipc_tail_color/is_accessible(datum/preferences/preferences)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/datum/species/species = GLOB.species_prototypes[preferences.read_preference(/datum/preference/choiced/species)]
+	return istype(species, /datum/species/ipc)
+
+/datum/preference/color/ipc_tail_color/apply_to_human(mob/living/carbon/human/target, value)
+	if(!istype(target.dna?.species, /datum/species/ipc))
+		return
+	target.dna.features["ipc_tail_color"] = value
+	// Перерисовываем хвост с новым цветом
+	apply_ipc_tail(target, target.dna.features["feature_ipc_tail"] == "plug")
 
 #undef IPC_HEAD_ACC_ICON
 #undef IPC_FACE_ICON
