@@ -5,7 +5,7 @@
 // The ammo it uses takes time to "charge" before firing,
 // releasing a homing, very damaging projectile
 /obj/item/gun/ballistic/rifle/lionhunter
-	name = "\improper Lionhunter's Rifle"
+	name = "Lionhunter's Rifle"
 	desc = "Антикварная винтовка, которая выглядит безупречно, несмотря на то свою явную старость."
 	slot_flags = ITEM_SLOT_BACK
 	icon_state = "lionhunter"

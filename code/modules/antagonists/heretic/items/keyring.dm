@@ -1,6 +1,6 @@
 /obj/effect/lock_portal
 	name = "crack in reality"
-	desc = "A crack in space, impossibly deep and painful to the eyes. Definitely not safe."
+	desc = "Необъяснимо глубокая трещина в пространстве, один взляд на неё звставялег глаза болеть. Определенно небезопасная"
 	icon = 'icons/effects/eldritch.dmi'
 	icon_state = "realitycrack"
 	light_system = COMPLEX_LIGHT
@@ -68,7 +68,7 @@
 
 	if(!IS_HERETIC_OR_MONSTER(teleportee))
 		teleportee.apply_damage(20, BRUTE) //so they dont roll it like a jackpot machine to see if they can land in the armory
-		to_chat(teleportee, span_userdanger("You stumble through [src], battered by forces beyond your comprehension, landing anywhere but where you thought you were going."))
+		to_chat(teleportee, span_userdanger("Вы проваливаетесь в [src.declent_ru(NOMINATIVE)] сраженный силами, недоступными вашему пониманию, приземляясь совсем не там, куда, как вы думали, направлялись. "))
 
 	INVOKE_ASYNC(src, PROC_REF(async_opendoor), doorstination)
 
@@ -120,7 +120,7 @@
 	. = ..()
 	if(!IS_HERETIC(user))
 		return
-	var/cardname = tgui_input_list(user, "В какую карту превратить?", "Shapeshift", fused_ids)
+	var/cardname = tgui_input_list(user, "В какую карту превратить?", "Смена облика", fused_ids)
 	if(!cardname)
 		balloon_alert(user, "нет других вариантов!")
 		return ..()

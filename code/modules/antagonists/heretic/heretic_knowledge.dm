@@ -648,7 +648,7 @@
 	)
 
 	if(EMERGENCY_IDLE_OR_RECALLED)
-		SSshuttle.call_evac_shuttle("Critical reality rupture detected on supranatural casuality long-range scanners. Mass crew casualty and possible station destruction determined to be beyond acceptable probability. Priority evacuation shuttle dispatched.")
+		SSshuttle.call_evac_shuttle("Сканерами дальнего действия зафиксирован критичесский разрыв в реальности, вызванный потусторонними силами. Вероятность массовых потерь экипажа и уничтожения станции превышает допустимые рассчётные вероятности. Запущен приоритетный эвакуационный шаттл.")
 	SSshuttle.emergency_no_recall = TRUE
 
 	if(!isnull(ascension_achievement))

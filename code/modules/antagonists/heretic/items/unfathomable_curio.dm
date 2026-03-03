@@ -32,7 +32,7 @@
 	RegisterSignal(user, COMSIG_LIVING_CHECK_BLOCK, PROC_REF(shield_reaction))
 
 	if(!IS_HERETIC(user))
-		to_chat(user, span_warning("Диковинка обвивает вас, и вы чувствуете, как внутри нее бьется что-то темное..."))
+		to_chat(user, span_warning("Реликвия обвивает вас, и вы чувствуете, как внутри нее бьется что-то темное..."))
 
 /obj/item/storage/belt/unfathomable_curio/dropped(mob/user)
 	. = ..()
@@ -60,7 +60,7 @@
 		/datum/brain_trauma/severe/paralysis,
 		/datum/brain_trauma/severe/monophobia
 	)
-	wearer.visible_message(span_danger("Вуаль вокруг [wearer.declent_ru(GENITIVE)] заставляет [attack_text] промазать, но сила удара заставляет ее рассеяться!"))
+	wearer.visible_message(span_danger("Вуаль вокруг [wearer.declent_ru(GENITIVE)] заставляет [attack_text.declent_ru(ACCUSATIVE)] промазать, но сила удара заставляет ее рассеяться!"))
 	if(IS_HERETIC(wearer))
 		return
 

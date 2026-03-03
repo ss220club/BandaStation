@@ -1,7 +1,7 @@
 // The basic eldritch painting
 /obj/item/wallframe/painting/eldritch
 	name = "The Blank Canvas: A Study in Default Subtypes"
-	desc = "An impossible painting made of impossible paint. It should not exist in this reality."
+	desc = "Картина невозможного, созданная невозможной краской. Ей не место в этой реальности."
 	icon = 'icons/obj/signs.dmi'
 	resistance_flags = FLAMMABLE
 	flags_1 = NONE
@@ -11,7 +11,7 @@
 
 /obj/structure/sign/painting/eldritch
 	name = "The Blank Canvas: A Study in Default Subtypes"
-	desc = "An impossible painting made of impossible paint. It should not exist in this reality."
+	desc = "Картина невозможного, созданная невозможной краской. Ей не место в этой реальности."
 	icon = 'icons/obj/signs.dmi'
 	icon_state = "eldritch_painting_debug"
 	custom_materials = list(/datum/material/wood =SHEET_MATERIAL_AMOUNT)
@@ -198,13 +198,13 @@
 
 // Lady out of gates, gives a brain trauma causing the person to scratch themselves
 /obj/item/wallframe/painting/eldritch/beauty
-	name = "\improper Lady of the Gate"
+	name = "Lady of the Gate"
 	desc = "Картина с изображением потустороннего существа. Его тонкая кожа цвета фарфора плотно натянута на странную костную структуру. Оно обладает странной красотой."
 	icon_state = "eldritch_painting_beauty"
 	result_path = /obj/structure/sign/painting/eldritch/beauty
 
 /obj/structure/sign/painting/eldritch/beauty
-	name = "\improper Lady of the Gate"
+	name = "Lady of the Gate"
 	desc = "Картина с изображением потустороннего существа. Его тонкая кожа цвета фарфора плотно натянута на странную костную структуру. Оно обладает странной красотой."
 	icon_state = "eldritch_painting_beauty"
 	applied_status_effect = /datum/status_effect/eldritch_painting/beauty
@@ -228,13 +228,13 @@
 
 // Climb over the rusted mountain, gives a brain trauma causing the person to randomly rust tiles beneath them
 /obj/item/wallframe/painting/eldritch/rust
-	name = "\improper Master of the Rusted Mountain"
+	name = "Master of the Rusted Mountain"
 	desc = "Картина, изображающая странное существо, взбирающееся на гору цвета ржавчины. Работа кистью неестественна и нервирующая."
 	icon_state = "eldritch_painting_rust"
 	result_path = /obj/structure/sign/painting/eldritch/rust
 
 /obj/structure/sign/painting/eldritch/rust
-	name = "\improper Master of the Rusted Mountain"
+	name = "Master of the Rusted Mountain"
 	desc = "Картина, изображающая странное существо, взбирающееся на гору цвета ржавчины. Работа кистью неестественна и нервирующая. Снимается кусачками."
 	icon_state = "eldritch_painting_rust"
 	applied_status_effect = /datum/status_effect/eldritch_painting/rusting

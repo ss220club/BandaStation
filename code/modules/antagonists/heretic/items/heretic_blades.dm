@@ -1,6 +1,6 @@
 
 /obj/item/melee/sickly_blade
-	name = "\improper sickly blade"
+	name = "sickly blade"
 	desc = "Болезненно-зеленый полумесячный клинок, украшенный декоративным глазом. Вы чувствуете, что за вами наблюдают..."
 	icon = 'icons/obj/weapons/khopesh.dmi'
 	icon_state = "eldritch_blade"
@@ -58,9 +58,9 @@
 	if(heretic_datum?.unlimited_blades)
 		return
 	if(HAS_TRAIT(user, TRAIT_ELDRITCH_ARENA_PARTICIPANT))
-		user.balloon_alert(user, "can't escape!")
+		user.balloon_alert(user, "невозможно сбежать!")
 		if(escape_attempts > 2)
-			to_chat(user, span_hypnophrase(span_big("Cowardly sheep will be slaughtered!")))
+			to_chat(user, span_hypnophrase(span_big("Трусливые овцы будут зарезаны!")))
 			playsound(src, SFX_SHATTER, 70, TRUE)
 			var/obj/item/bodypart/to_remove = user.get_active_hand()
 			to_remove.dismember()
@@ -71,7 +71,7 @@
 		escape_timer = addtimer(CALLBACK(src, PROC_REF(reset_attempts)), 2 SECONDS, TIMER_STOPPABLE)
 		return
 	if(HAS_TRAIT(user, TRAIT_NO_TELEPORT))
-		user.balloon_alert(user, "can't break!")
+		user.balloon_alert(user, "невозможно сломать!")
 		return
 	seek_safety(user)
 
@@ -101,7 +101,7 @@
 
 // Path of Rust's blade
 /obj/item/melee/sickly_blade/rust
-	name = "\improper rusted blade"
+	name = "rusted blade"
 	desc = "Этот полумесячный клинок обветшал и заржавел. \
 		И все же он кусается, разрывая плоть и кости зазубренными гнилыми зубами."
 	icon_state = "rust_blade"
@@ -110,7 +110,7 @@
 
 // Path of Ash's blade
 /obj/item/melee/sickly_blade/ash
-	name = "\improper ashen blade"
+	name = "ashen blade"
 	desc = "Расплавленный и необработанный кусок металла, искореженный в труху и шлак. \
 		Несделанный, он стремится быть большим, чем он является, и срезает тупым краем раны, заполняя их сажей."
 	icon_state = "ash_blade"
@@ -120,7 +120,7 @@
 
 // Path of Flesh's blade
 /obj/item/melee/sickly_blade/flesh
-	name = "\improper bloody blade"
+	name = "bloody blade"
 	desc = "Полумесячный клинок, рожденный из искореженного существа. \
 		Он стремится передать другим те страдания, которые он пережил от своего ужасного происхождения."
 	icon_state = "flesh_blade"
@@ -144,7 +144,7 @@
 
 // Path of Void's blade
 /obj/item/melee/sickly_blade/void
-	name = "\improper void blade"
+	name = "void blade"
 	desc = "Лишенный всякой субстанции, этот клинок отражает небытие. \
 		Это настоящее отображение чистоты, и хаоса, который наступает после его применения."
 	icon_state = "void_blade"
@@ -154,7 +154,7 @@
 // Path of the Blade's... blade.
 // Opting for /dark instead of /blade to avoid "sickly_blade/blade".
 /obj/item/melee/sickly_blade/dark
-	name = "\improper sundered blade"
+	name = "sundered blade"
 	desc = "Галантный клинок, раздробленный и разорванный. \
 		Клинок режет яростно. Серебряные шрамы навечно связывают его с темной целью."
 	icon_state = "dark_blade"
@@ -207,7 +207,7 @@
 
 // Path of Cosmos's blade
 /obj/item/melee/sickly_blade/cosmic
-	name = "\improper cosmic blade"
+	name = "cosmic blade"
 	desc = "Соринка небесного резонанса, сформированная в клинок, сотканный из звезд. \
 		Радужный изгнанник, прокладывающий лучистые тропы, отчаянно стремящихся к объединению."
 	icon_state = "cosmic_blade"
@@ -216,7 +216,7 @@
 
 // Path of Knock's blade
 /obj/item/melee/sickly_blade/lock
-	name = "\improper key blade"
+	name = "key blade"
 	desc = "Клинок и ключ, ключ к чему? \
 		Какие великие врата он открывает?"
 	icon_state = "key_blade"
@@ -227,7 +227,7 @@
 
 // Path of Moon's blade
 /obj/item/melee/sickly_blade/moon
-	name = "\improper moon blade"
+	name = "moon blade"
 	desc = "Клинок из железа, отражающий правду земли: Все однажды присоединятся к труппе. \
 		Труппе приносящей радость, вырезающая улыбки на их лицах, хотят они того или нет."
 	icon_state = "moon_blade"
@@ -238,9 +238,9 @@
 // What!? This blade is given to cultists as an altar item when they sacrifice a heretic.
 // It is also given to the heretic themself if they sacrifice a cultist.
 /obj/item/melee/sickly_blade/cursed
-	name = "\improper cursed blade"
-	desc = "A dark blade, cursed to bleed forever. In constant struggle between the eldritch and the dark, it is forced to accept any wielder as its master. \
-		Its eye's cornea drips blood endlessly into the ground, yet its piercing gaze remains on you."
+	name = "cursed blade"
+	desc = "Темный клинок, проклятый пускать кровь вечность. В постоянной борьбе между потусторонним и тьмой, он вынужден признавать своим хозяином любого, кто им владеет. \
+		С роговицы его глаза на землю бесконечно капает кровь, но его пронзительный взгляд остается прикованным к вам."
 	force = 25
 	throwforce = 15
 	block_chance = 35
@@ -253,10 +253,10 @@
 /obj/item/melee/sickly_blade/cursed/Initialize(mapload)
 	. = ..()
 
-	var/examine_text = {"Allows the scribing of blood runes of the cult of Nar'Sie.
-	The combination of eldritch power and Nar'Sie's might allows for vastly increased rune drawing speed,
-	alongside the vicious strength of the blade being more powerful than usual.\n
-	<b>It can also be shattered in-hand by cultists (via right-click), teleporting them to relative safety.<b>"}
+	var/examine_text = {"«Позволяет начертать кровавые руны культа Нар’Си.
+	Сочетание потусторонней силы и могущества Нар’Си значительно увеличивает скорость начертания рун,
+	а жестокая мощь клинка делает его удары сильнее обычного.\n
+	<b>Культисты могут разбить его прямо в руке (ПКМ), мгновенно переместившись в относительно безопасное место.<b>"}
 
 	AddComponent(/datum/component/cult_ritual_item, span_cult(examine_text), turfs_that_boost_us = /turf) // Always fast to draw!
 
@@ -272,22 +272,22 @@
 	if(IS_HERETIC_OR_MONSTER(user) || IS_CULTIST(user))
 		return TRUE
 	if(prob(15))
-		to_chat(user, span_cult_large(pick("\"An untouched mind? Amusing.\"", "\" I suppose it isn't worth the effort to stop you.\"", "\"Go ahead. I don't care.\"", "\"You'll be mine soon enough.\"")))
+		to_chat(user, span_cult_large(pick("\"Нетронутый разум? Забавно.\"", "\" Я думаю, что не стоит прилагать усилий, чтобы остановить тебя.\"", "\"Продолжай. Мне всё равно.\"", "\"Скоро, ты будешь принадлежать мне.\"")))
 		user.apply_damage(5, BURN, user.get_active_hand())
 		playsound(src, SFX_SEAR, 25, TRUE)
-		to_chat(user, span_danger("Your hand sizzles.")) // Nar nar might not care but their essence still doesn't like you
+		to_chat(user, span_danger("Ваша рука обжигается.")) // Nar nar might not care but their essence still doesn't like you
 	else if(prob(15))
 		to_chat(user, span_big(span_hypnophrase("LW'NAFH'NAHOR UH'ENAH'YMG EPGOKA AH NAFL MGEMPGAH'EHYE")))
-		to_chat(user, span_danger("Horrible, unintelligible utterances flood your mind!"))
+		to_chat(user, span_danger("Ужасные, неразборчивые выкрики переполняют ваш разум!"))
 		user.adjust_organ_loss(ORGAN_SLOT_BRAIN, 15) // This can kill you if you ignore it
 	return TRUE
 
 /obj/item/melee/sickly_blade/cursed/equipped(mob/user, slot)
 	. = ..()
 	if(IS_HERETIC_OR_MONSTER(user))
-		after_use_message = "The Mansus hears your call..."
+		after_use_message = "Мансус услышал твой зов..."
 	else if(IS_CULTIST(user))
-		after_use_message = "Nar'Sie hears your call..."
+		after_use_message = "Нар’Си услышал твой зов..."
 	else
 		after_use_message = null
 
@@ -311,7 +311,7 @@
 
 // Weaker blade variant given to people so they can participate in the heretic arena spell
 /obj/item/melee/sickly_blade/training
-	name = "\improper imperfect blade"
+	name = "imperfect blade"
 	desc = "A blade given to those who cannot accept the truth, out of pity. \
 		May it act as a blessing in the short time it remains alongside you."
 	force = 17
