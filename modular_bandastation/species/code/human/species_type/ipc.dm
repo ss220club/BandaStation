@@ -43,6 +43,7 @@
 		TRAIT_LIMBATTACHMENT,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_NOHUNGER,  // IPC не едят, нет HUD голода
+		TRAIT_NOBLOOD,   // ИПС не имеет крови (масло не является кровью для игровых механик)
 	)
 
 	// Урон модификаторы
