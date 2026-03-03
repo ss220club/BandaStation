@@ -799,23 +799,25 @@
 
 /obj/item/implant/ipc/force_shield
 	name = "Force Shield Emitter"
-	desc = "Встроенный генератор силового поля. Создаёт защитное поле, снижающее входящий урон."
+	desc = "Встроенный генератор силового щита. В активном состоянии действует как раскладываемый щит — блокирует атаки с определённым шансом, но каждый блок немного повреждает руку с имплантом."
 	icon_state = "reactive_repair"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
 	arm_visual_state = "ipc_shield"
 	actions_types = list(/datum/action/item_action/hands_free/ipc_force_shield)
 	var/shield_active = FALSE
-	/// Процент снижения урона (0.3 = 30%)
-	var/damage_reduction = 0.3
-	/// Стоимость активного щита за тик (charge/sec)
-	var/shield_power_cost = 5
+	/// Шанс полного блока атаки (0–100)
+	var/block_chance = 60
+	/// Урон по руке за каждый успешный блок
+	var/arm_damage_per_block = 2
+	/// Стоимость активного щита в заряде батареи за секунду
+	var/shield_power_cost = 3
 
 /obj/item/implant/ipc/force_shield/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Force Shield Emitter<BR>
 	<b>Life:</b> Permanent<BR>
 	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
-	<b>Function:</b> Reduces incoming brute/burn damage by [damage_reduction * 100]% while active.<BR>
+	<b>Function:</b> [block_chance]% chance to fully block incoming brute/burn damage; each block deals [arm_damage_per_block] brute to the arm.<BR>
 	<b>Status:</b> [shield_active ? "ACTIVE" : "STANDBY"]"}
 	return dat
 
@@ -845,7 +847,20 @@
 		return
 	if(damagetype != BRUTE && damagetype != BURN)
 		return
-	damage_mods += (1 - damage_reduction)
+	if(damage_amount <= 0)
+		return
+	if(!prob(block_chance))
+		return
+	// Успешный блок — полностью поглощаем удар
+	damage_mods += 0
+	// Рука с имплантом получает небольшой урон от нагрузки на щит
+	var/obj/item/bodypart/arm = source.get_bodypart(installed_in_zone)
+	if(arm)
+		arm.receive_damage(arm_damage_per_block, 0)
+	source.visible_message(
+		span_warning("[source] блокирует удар встроенным силовым щитом!"),
+		span_warning("Вы блокируете удар силовым щитом! ([round(damage_amount)] ур. поглощено, рука повреждена на [arm_damage_per_block])."),
+	)
 
 /obj/item/implant/ipc/force_shield/process(seconds_per_tick)
 	if(!imp_in || !shield_active)
@@ -887,9 +902,126 @@
 	shield_implant.shield_active = !shield_implant.shield_active
 
 	if(shield_implant.shield_active)
-		to_chat(H, span_notice("Силовой щит активирован. Снижение урона: [shield_implant.damage_reduction * 100]%."))
+		to_chat(H, span_notice("Силовой щит развёрнут. Шанс блока: [shield_implant.block_chance]%. Каждый блок наносит [shield_implant.arm_damage_per_block] ур. руке."))
 	else
-		to_chat(H, span_notice("Силовой щит деактивирован."))
+		to_chat(H, span_notice("Силовой щит сложен."))
 
 	build_all_button_icons()
 	return TRUE
+
+// ============================================
+// 9. KEBAB IMPLANT
+// ============================================
+// При активных клинках богомола позволяет за 3 секунды приготовить кебаб.
+// Кулдаун 30 секунд.
+
+/obj/item/implant/ipc/kebab
+	name = "Integrated Kebab Module"
+	desc = "Встроенный кебаб-модуль. При развёрнутых клинках богомола позволяет насаживать мясо на лезвия и готовить кебаб (3 сек, кулдаун 30 сек)."
+	icon_state = "reactive_repair"
+	allowed_zones = list(BODY_ZONE_CHEST)
+	actions_types = list(/datum/action/item_action/hands_free/ipc_make_kebab)
+	/// Кулдаун между приготовлениями
+	var/kebab_cooldown = 30 SECONDS
+	/// Время последнего приготовления
+	var/last_kebab_time = 0
+
+/obj/item/implant/ipc/kebab/get_data()
+	return {"<b>Implant Specifications:</b><BR>
+	<b>Name:</b> Integrated Kebab Module<BR>
+	<b>Life:</b> Permanent<BR>
+	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
+	<b>Function:</b> Produces kebab using deployed mantis blades (3s cast, 30s cooldown).<BR>
+	<b>Integrity:</b> Active"}
+
+/obj/item/implant/ipc/kebab/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
+	. = ..()
+	if(!.)
+		return FALSE
+	if(!silent)
+		to_chat(target, span_notice("Кебаб-модуль активирован. Используйте клинки богомола для приготовления еды."))
+		if(user)
+			to_chat(user, span_notice("Вы успешно установили кебаб-модуль."))
+	return TRUE
+
+/obj/item/implant/ipc/kebab/removed(mob/living/source, silent = FALSE, special = FALSE)
+	. = ..()
+	if(!silent)
+		to_chat(source, span_warning("Кебаб-модуль деактивирован."))
+
+/obj/item/implantcase/ipc/kebab
+	name = "implant case - 'Kebab Module'"
+	desc = "Стеклянный кейс содержащий встроенный кебаб-модуль для IPC."
+	imp_type = /obj/item/implant/ipc/kebab
+
+// Кнопка приготовления кебаба
+/datum/action/item_action/hands_free/ipc_make_kebab
+	name = "Приготовить кебаб"
+	desc = "Насадить мясо на клинки богомола и приготовить кебаб (3 сек, кулдаун 30 сек)."
+	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
+	button_icon_state = "ipc_kebab"
+	check_flags = AB_CHECK_INCAPACITATED
+
+/datum/action/item_action/hands_free/ipc_make_kebab/Trigger(mob/clicker, trigger_flags)
+	. = ..()
+	if(!.)
+		return FALSE
+
+	var/obj/item/implant/ipc/kebab/kebab_implant = target
+	if(!istype(kebab_implant))
+		return FALSE
+
+	var/mob/living/carbon/human/H = owner
+	if(!istype(H))
+		return FALSE
+
+	// Проверяем кулдаун
+	if(world.time < kebab_implant.last_kebab_time + kebab_implant.kebab_cooldown)
+		var/remaining = round((kebab_implant.last_kebab_time + kebab_implant.kebab_cooldown - world.time) / 10)
+		to_chat(H, span_warning("Кебаб-модуль перезаряжается. Осталось: [remaining] сек."))
+		return FALSE
+
+	// Нужны активные (развёрнутые) клинки богомола
+	var/has_active_mantis = FALSE
+	for(var/obj/item/implant/ipc/mantis/blade in H.implants)
+		if(blade.blades_active)
+			has_active_mantis = TRUE
+			break
+
+	if(!has_active_mantis)
+		to_chat(H, span_warning("Разверните клинки богомола для приготовления кебаба!"))
+		return FALSE
+
+	// Процесс готовки требует времени — запускаем асинхронно
+	INVOKE_ASYNC(src, PROC_REF(do_make_kebab), H, kebab_implant)
+	return TRUE
+
+/datum/action/item_action/hands_free/ipc_make_kebab/proc/do_make_kebab(mob/living/carbon/human/H, obj/item/implant/ipc/kebab/kebab_implant)
+	to_chat(H, span_notice("Начинаю нанизывать мясо на лезвия..."))
+
+	if(!do_after(H, 3 SECONDS, target = H, timed_action_flags = IGNORE_HELD_ITEM))
+		to_chat(H, span_warning("Приготовление прервано!"))
+		return
+
+	// После паузы проверяем что лезвия всё ещё развёрнуты
+	var/still_active = FALSE
+	for(var/obj/item/implant/ipc/mantis/blade in H.implants)
+		if(blade.blades_active)
+			still_active = TRUE
+			break
+
+	if(!still_active)
+		to_chat(H, span_warning("Клинки убраны — кебаб не удалось приготовить!"))
+		return
+
+	// Ставим кулдаун и создаём кебаб
+	kebab_implant.last_kebab_time = world.time
+	var/obj/item/food/kebab/monkey/kebab = new(H.drop_location())
+	kebab.name = "кебаб КПБ"
+	if(!H.put_in_hands(kebab))
+		kebab.forceMove(H.drop_location())
+
+	H.visible_message(
+		span_notice("[H] нанизывает куски мяса на лезвия богомола и подаёт готовый кебаб!"),
+		span_notice("Кебаб готов!"),
+	)
