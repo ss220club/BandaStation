@@ -39,7 +39,7 @@
 /datum/orderable_item/bitrunning_tech/gimmick_dungeon_crawling
 	cost_per_order = 1250
 	purchase_path = /obj/item/disk/bitrunning/gimmick/dungeon
-	desc = "Этот диск содержит программу, которая позволяет активировать тематический «подземельный» набор экипировки."
+	desc = "Этот диск содержит программу, которая позволяет активировать тематический «подземный» набор экипировки."
 
 /datum/orderable_item/bitrunning_tech/flip_skillchip
 	purchase_path = /obj/item/skillchip/matrix_taunt
