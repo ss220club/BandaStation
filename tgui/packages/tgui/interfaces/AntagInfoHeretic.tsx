@@ -246,7 +246,7 @@ const GuideSection = () => {
           <br />
           Держите в уме, что использование&nbsp;
           <span style={hereticPurple}> кодекса Цикатрикс</span> при поглощении
-          &nbsp;<span style={hereticYellow}> разлома </span>
+          &nbsp;<span style={hereticYellow}>разлома </span>
             сделает довольно очевидной, вашу приверженность еретическому пути
         </Stack.Item>
       </Stack>
