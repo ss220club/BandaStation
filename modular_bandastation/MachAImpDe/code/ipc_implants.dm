@@ -792,11 +792,11 @@
 
 /obj/item/implant/ipc/charger
 	name = "Integrated Charging Port"
-	desc = "Встроенный зарядный порт. Позволяет IPC заряждаться от настенных источников питания: АРС, переговорников, экранов. Кабель всегда в руке — нажмите им на устройство."
+	desc = "Встроенный зарядный порт. Позволяет IPC заряждаться от настенных источников питания: АРС, переговорников, экранов. Достаньте кабель кнопкой действия, затем нажмите им на устройство."
 	icon_state = "reactive_repair"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-	actions_types = null
-	/// Кабель в слоте руки
+	actions_types = list(/datum/action/item_action/hands_free/ipc_charge)
+	/// Кабель в слоте руки (null если убран)
 	var/obj/item/ipc_charging_cable/cable_item = null
 	/// Заряд батареи в единицах за секунду при подключении
 	var/charge_per_second = 20
@@ -814,33 +814,7 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(!ishuman(target))
-		return TRUE
-	var/mob/living/carbon/human/H = target
-	// Создаём кабель и помещаем в нужную руку
-	var/cable_type = (installed_in_zone == BODY_ZONE_R_ARM) ? /obj/item/ipc_charging_cable : /obj/item/ipc_charging_cable/left
-	var/obj/item/ipc_charging_cable/cable = new cable_type(null)
-	cable.charger_implant = src
-	ADD_TRAIT(cable, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
-	cable_item = cable
-	var/side = (installed_in_zone == BODY_ZONE_R_ARM) ? RIGHT_HANDS : LEFT_HANDS
-	var/hand = H.get_empty_held_index_for_side(side)
-	if(hand)
-		H.put_in_hand(cable, hand)
-	else
-		// Если рука занята — роняем предмет и подставляем кабель
-		var/list/hand_items = H.get_held_items_for_side(side, all = TRUE)
-		var/success = FALSE
-		for(var/i in 1 to length(hand_items))
-			var/obj/item/hand_item = hand_items[i]
-			if(!H.dropItemToGround(hand_item))
-				continue
-			to_chat(H, span_notice("Вы роняете [hand_item], чтобы кабель занял руку."))
-			success = H.put_in_hand(cable, H.get_empty_held_index_for_side(side))
-			break
 	START_PROCESSING(SSobj, src)
-	if(!silent)
-		to_chat(H, span_notice("Зарядный порт активирован. Нажмите кабелем на АРС или настенное устройство для зарядки."))
 	return TRUE
 
 /obj/item/implant/ipc/charger/process(seconds_per_tick)
@@ -871,6 +845,56 @@
 			cable_item.disconnect_from_device(H)
 		REMOVE_TRAIT(cable_item, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
 		QDEL_NULL(cable_item)
+
+// Кнопка достать/убрать зарядный кабель
+/datum/action/item_action/hands_free/ipc_charge
+	name = "Зарядный кабель"
+	desc = "Достать/убрать встроенный зарядный кабель. Нажмите кабелем на АРС или настенное устройство для зарядки."
+	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
+	button_icon_state = "ipc_charger"
+	check_flags = AB_CHECK_INCAPACITATED
+
+/datum/action/item_action/hands_free/ipc_charge/Trigger(mob/clicker, trigger_flags)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/obj/item/implant/ipc/charger/charger_implant = target
+	if(!istype(charger_implant))
+		return FALSE
+	var/mob/living/carbon/human/H = owner
+	if(!istype(H))
+		return FALSE
+	if(charger_implant.cable_item)
+		// Убираем кабель (и отключаемся если были подключены)
+		if(charger_implant.cable_item.connected_device)
+			charger_implant.cable_item.disconnect_from_device(H)
+		REMOVE_TRAIT(charger_implant.cable_item, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
+		QDEL_NULL(charger_implant.cable_item)
+		to_chat(H, span_notice("Зарядный кабель убран."))
+	else
+		// Достаём кабель и помещаем в нужную руку
+		var/cable_type = (charger_implant.installed_in_zone == BODY_ZONE_R_ARM) ? /obj/item/ipc_charging_cable : /obj/item/ipc_charging_cable/left
+		var/obj/item/ipc_charging_cable/cable = new cable_type(null)
+		cable.charger_implant = charger_implant
+		ADD_TRAIT(cable, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
+		charger_implant.cable_item = cable
+		var/side = (charger_implant.installed_in_zone == BODY_ZONE_R_ARM) ? RIGHT_HANDS : LEFT_HANDS
+		var/hand = H.get_empty_held_index_for_side(side)
+		if(hand)
+			H.put_in_hand(cable, hand)
+		else
+			var/list/hand_items = H.get_held_items_for_side(side, all = TRUE)
+			var/success = FALSE
+			for(var/i in 1 to length(hand_items))
+				var/obj/item/hand_item = hand_items[i]
+				if(!H.dropItemToGround(hand_item))
+					continue
+				to_chat(H, span_notice("Вы роняете [hand_item], чтобы достать зарядный кабель."))
+				success = H.put_in_hand(cable, H.get_empty_held_index_for_side(side))
+				break
+		to_chat(H, span_notice("Зарядный кабель извлечён. Нажмите им на АРС или настенное устройство для зарядки."))
+	build_all_button_icons()
+	return TRUE
 
 // ============================================
 // 8. FORCE SHIELD IMPLANT (SHELLGUARD ROUNDSTART)

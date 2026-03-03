@@ -385,7 +385,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	savefile_key = "ipc_head_accessory_color"
 	savefile_identifier = PREFERENCE_CHARACTER
-	category = PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES
+	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
 
 /datum/preference/color/ipc_head_accessory_color/create_default_value()
 	return COLOR_WHITE
@@ -408,7 +408,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	savefile_key = "ipc_tail_color"
 	savefile_identifier = PREFERENCE_CHARACTER
-	category = PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES
+	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
 
 /datum/preference/color/ipc_tail_color/create_default_value()
 	return COLOR_WHITE
