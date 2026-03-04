@@ -6,7 +6,9 @@ import type {
   IPCBrainType,
   IPCChassisBrand,
   IPCCustomization,
+  IPCGeneration,
   IPCHEFManufacturer,
+  IPCModule,
   PreferencesMenuData,
 } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
@@ -43,21 +45,7 @@ const BRAND_COLORS: Record<string, string> = {
   shellguard: '#795548',
   cybersun: '#ff9800',
   hef: '#ffc107',
-  // HEF производители
   general: '#888888',
-  hephaestus: '#ff5722',
-  hephaestus_titan: '#d84315',
-  interdyne: '#e91e63',
-  wardtakahashi: '#ffeb3b',
-  wardtakahashi_pro: '#ffd600',
-  xion_light: '#ce93d8',
-  gromtech: '#8bc34a',
-  bishop_mk2: '#66bb6a',
-  bishop_nano: '#81c784',
-  etamin_industry: '#29b6f6',
-  etamin_industry_lumineux: '#4fc3f7',
-  shellguard_brand: '#795548',
-  zeng_hu_brand: '#00bcd4',
 };
 
 const BRAIN_ICONS: Record<string, string> = {
@@ -70,6 +58,37 @@ const BRAIN_COLORS: Record<string, string> = {
   positronic: '#00d4ff',
   mmi: '#ff5722',
   borg: '#9c27b0',
+};
+
+// Иконки для поколений
+const GENERATION_ICONS: Record<string, string> = {
+  gen1_modular: 'puzzle-piece',
+  gen2_standard: 'robot',
+  gen3_humanity: 'heart',
+  gen4_cyberdeck: 'network-wired',
+};
+
+// Цвета для поколений
+const GENERATION_COLORS: Record<string, string> = {
+  gen1_modular: '#ffeb3b',
+  gen2_standard: '#00d4ff',
+  gen3_humanity: '#ff4081',
+  gen4_cyberdeck: '#39ff14',
+};
+
+// Иконки для модулей (Gen I)
+const MODULE_ICONS: Record<string, string> = {
+  medical: 'plus-square',
+  engineering: 'wrench',
+  security: 'shield-alt',
+  research: 'flask',
+};
+
+const MODULE_COLORS: Record<string, string> = {
+  medical: '#4caf50',
+  engineering: '#ff9800',
+  security: '#f44336',
+  research: '#9c27b0',
 };
 
 // Цвета в стиле Cyberpunk 2077
@@ -88,15 +107,16 @@ const CYBER_COLORS = {
 };
 
 // Конфигурация слотов
+type SlotType = 'chassis' | 'brain' | 'hef' | 'generation' | 'gen1module';
+
 type SlotConfig = {
   key: string;
   label: string;
   icon: string;
   color: string;
-  type: 'chassis' | 'brain' | 'hef';
+  type: SlotType;
 };
 
-// Все слоты в одном списке - основные и HEF
 const MAIN_SLOTS: SlotConfig[] = [
   {
     key: 'chassis',
@@ -111,6 +131,13 @@ const MAIN_SLOTS: SlotConfig[] = [
     icon: 'brain',
     color: CYBER_COLORS.purple,
     type: 'brain',
+  },
+  {
+    key: 'generation',
+    label: 'ПОКОЛЕНИЕ',
+    icon: 'microchip',
+    color: CYBER_COLORS.cyan,
+    type: 'generation',
   },
 ];
 
@@ -159,14 +186,21 @@ const HEF_SLOTS: SlotConfig[] = [
   },
 ];
 
+// Слот выбора модуля для Gen I — добавляется в список слева когда gen = gen1_modular
+const GEN1_MODULE_SLOT: SlotConfig = {
+  key: 'gen1module',
+  label: 'МОДУЛЬ',
+  icon: 'puzzle-piece',
+  color: CYBER_COLORS.yellow,
+  type: 'gen1module',
+};
+
 export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   const { act, data } = useBackend<PreferencesMenuData>();
   const serverData = useServerPrefs();
 
-  // Какой слот сейчас выбран для редактирования
   const [activeSlot, setActiveSlot] = useState<string | null>('chassis');
 
-  // Получаем данные IPC из middleware (ui_data)
   const customization: IPCCustomization = data.ipc_customization || {
     chassis_brand: 'unbranded',
     brain_type: 'positronic',
@@ -176,69 +210,57 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     hef_r_arm: 'unbranded',
     hef_l_leg: 'unbranded',
     hef_r_leg: 'unbranded',
+    generation: 'gen2_standard',
+    gen1_module: 'security',
   };
 
-  // Проверяем species напрямую из character_preferences
   const isIPC = data.character_preferences?.misc?.species === 'ipc';
 
-  // Получаем статические данные из serverData (preferences.json)
   const ipcData = serverData?.ipc_customization;
   const chassisBrands: IPCChassisBrand[] = ipcData?.chassis_brands || [];
   const brainTypes: IPCBrainType[] = ipcData?.brain_types || [];
-  const hefManufacturers: IPCHEFManufacturer[] =
-    ipcData?.hef_manufacturers || [];
+  const hefManufacturers: IPCHEFManufacturer[] = ipcData?.hef_manufacturers || [];
+  const generations: IPCGeneration[] = ipcData?.generations || [];
+  const gen1Modules: IPCModule[] = ipcData?.gen1_modules || [];
 
   const isHEF = customization.chassis_brand === 'hef';
+  const isGen1 = customization.generation === 'gen1_modular';
 
-  // Находим текущие значения
-  const currentChassis = chassisBrands.find(
-    (b) => b.key === customization.chassis_brand,
-  );
-  const currentBrain = brainTypes.find(
-    (b) => b.key === customization.brain_type,
-  );
+  const currentChassis = chassisBrands.find((b) => b.key === customization.chassis_brand);
+  const currentBrain = brainTypes.find((b) => b.key === customization.brain_type);
+  const currentGeneration = generations.find((g) => g.key === customization.generation);
+  const currentModule = gen1Modules.find((m) => m.key === customization.gen1_module);
 
-  // Получить значение слота
   const getSlotValue = (slot: SlotConfig): string => {
-    if (slot.type === 'chassis') {
-      return currentChassis?.name || 'Unbranded';
-    }
-    if (slot.type === 'brain') {
-      return currentBrain?.name || 'Positronic';
-    }
-    const manufacturerKey =
-      customization[slot.key as keyof IPCCustomization] || 'unbranded';
-    const manufacturer = hefManufacturers.find(
-      (m) => m.key === manufacturerKey,
-    );
+    if (slot.type === 'chassis') return currentChassis?.name || 'Unbranded';
+    if (slot.type === 'brain') return currentBrain?.name || 'Positronic';
+    if (slot.type === 'generation') return currentGeneration?.name || 'Gen II: Standard';
+    if (slot.type === 'gen1module') return currentModule?.name || 'Security';
+    const manufacturerKey = customization[slot.key as keyof IPCCustomization] || 'unbranded';
+    const manufacturer = hefManufacturers.find((m) => m.key === manufacturerKey);
     return manufacturer?.name || 'Unbranded';
   };
 
-  // Получить цвет для слота
   const getSlotColor = (slot: SlotConfig): string => {
-    if (slot.type === 'chassis') {
+    if (slot.type === 'chassis')
       return BRAND_COLORS[customization.chassis_brand] || BRAND_COLORS.unbranded;
-    }
-    if (slot.type === 'brain') {
+    if (slot.type === 'brain')
       return BRAIN_COLORS[customization.brain_type] || BRAIN_COLORS.positronic;
-    }
-    const manufacturerKey =
-      customization[slot.key as keyof IPCCustomization] || 'unbranded';
-    // Normalize key for color lookup
-    const normalizedKey = manufacturerKey.toLowerCase().replace(/[\s-]/g, '_');
-    return BRAND_COLORS[normalizedKey] || BRAND_COLORS.general || '#888888';
+    if (slot.type === 'generation')
+      return GENERATION_COLORS[customization.generation] || CYBER_COLORS.cyan;
+    if (slot.type === 'gen1module')
+      return MODULE_COLORS[customization.gen1_module] || CYBER_COLORS.yellow;
+    const manufacturerKey = customization[slot.key as keyof IPCCustomization] || 'unbranded';
+    return BRAND_COLORS[manufacturerKey.toLowerCase().replace(/[\s-]/g, '_')] || '#888888';
   };
 
-  // Получить цвет для опции
-  const getOptionColor = (key: string): string => {
-    const normalizedKey = key.toLowerCase().replace(/[\s-]/g, '_');
-    return BRAND_COLORS[normalizedKey] || BRAIN_COLORS[normalizedKey] || '#888888';
-  };
+  // Собираем видимые слоты
+  const visibleSlots: SlotConfig[] = [
+    ...MAIN_SLOTS,
+    ...(isGen1 ? [GEN1_MODULE_SLOT] : []),
+    ...(isHEF ? HEF_SLOTS : []),
+  ];
 
-  // Собираем все видимые слоты
-  const visibleSlots = isHEF ? [...MAIN_SLOTS, ...HEF_SLOTS] : MAIN_SLOTS;
-
-  // Рендер слота
   const renderSlot = (slot: SlotConfig) => {
     const isActive = activeSlot === slot.key;
     const value = getSlotValue(slot);
@@ -265,7 +287,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
         }}
         onClick={() => setActiveSlot(slot.key)}
       >
-        {/* Цветовой индикатор бренда */}
         <Box
           style={{
             position: 'absolute',
@@ -277,14 +298,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
             boxShadow: `0 0 8px ${brandColor}`,
           }}
         />
-        <Box
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.6rem',
-            marginLeft: '0.5rem',
-          }}
-        >
+        <Box style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginLeft: '0.5rem' }}>
           <Box
             style={{
               width: '32px',
@@ -338,7 +352,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     );
   };
 
-  // Рендер панели выбора
   const renderSelectionPanel = () => {
     if (!activeSlot) {
       return (
@@ -362,46 +375,62 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
       );
     }
 
-    const slot = [...MAIN_SLOTS, ...HEF_SLOTS].find(
-      (s) => s.key === activeSlot,
-    );
+    const slot = visibleSlots.find((s) => s.key === activeSlot);
     if (!slot) return null;
 
-    // Определяем опции для выбора
-    let options: { key: string; name: string; description?: string }[] = [];
+    type Option = { key: string; name: string; description?: string; icon?: string; color?: string };
+    let options: Option[] = [];
 
     if (slot.type === 'chassis') {
       options = chassisBrands.map((b) => ({
         key: b.key,
         name: b.name,
         description: b.description,
+        icon: BRAND_ICONS[b.key] || 'robot',
+        color: BRAND_COLORS[b.key] || '#888',
       }));
     } else if (slot.type === 'brain') {
       options = brainTypes.map((b) => ({
         key: b.key,
         name: b.name,
         description: b.description,
+        icon: BRAIN_ICONS[b.key] || 'brain',
+        color: BRAIN_COLORS[b.key] || '#888',
+      }));
+    } else if (slot.type === 'generation') {
+      options = generations.map((g) => ({
+        key: g.key,
+        name: g.name,
+        description: g.description,
+        icon: GENERATION_ICONS[g.key] || 'microchip',
+        color: GENERATION_COLORS[g.key] || CYBER_COLORS.cyan,
+      }));
+    } else if (slot.type === 'gen1module') {
+      options = gen1Modules.map((m) => ({
+        key: m.key,
+        name: m.name,
+        description: m.description,
+        icon: MODULE_ICONS[m.key] || 'cog',
+        color: MODULE_COLORS[m.key] || '#888',
       }));
     } else {
       options = hefManufacturers.map((m) => ({
         key: m.key,
         name: m.name,
+        icon: 'industry',
+        color: BRAND_COLORS[m.key] || '#888',
       }));
     }
 
-    // Текущее выбранное значение
     let currentValue = '';
-    if (slot.type === 'chassis') {
-      currentValue = customization.chassis_brand;
-    } else if (slot.type === 'brain') {
-      currentValue = customization.brain_type;
-    } else {
-      currentValue = customization[slot.key as keyof IPCCustomization] || '';
-    }
+    if (slot.type === 'chassis') currentValue = customization.chassis_brand;
+    else if (slot.type === 'brain') currentValue = customization.brain_type;
+    else if (slot.type === 'generation') currentValue = customization.generation;
+    else if (slot.type === 'gen1module') currentValue = customization.gen1_module;
+    else currentValue = customization[slot.key as keyof IPCCustomization] || '';
 
     return (
       <Box style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        {/* Заголовок выбора */}
         <Box
           style={{
             padding: '0.75rem 1rem',
@@ -412,10 +441,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
             gap: '0.5rem',
           }}
         >
-          <Icon
-            name={slot.icon}
-            style={{ color: slot.color, fontSize: '1.1rem' }}
-          />
+          <Icon name={slot.icon} style={{ color: slot.color, fontSize: '1.1rem' }} />
           <Box
             style={{
               fontSize: '1rem',
@@ -429,17 +455,10 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
           </Box>
         </Box>
 
-        {/* Список опций */}
         <Box style={{ flex: 1, overflow: 'auto', padding: '0.5rem' }}>
           {options.map((option) => {
             const isSelected = option.key === currentValue;
-            const optionIcon =
-              slot.type === 'chassis'
-                ? BRAND_ICONS[option.key] || 'robot'
-                : slot.type === 'brain'
-                  ? BRAIN_ICONS[option.key] || 'brain'
-                  : 'industry';
-            const optionColor = getOptionColor(option.key);
+            const optionColor = option.color || '#888';
 
             return (
               <Box
@@ -464,15 +483,15 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     act('set_chassis_brand', { brand: option.key });
                   } else if (slot.type === 'brain') {
                     act('set_brain_type', { brain_type: option.key });
+                  } else if (slot.type === 'generation') {
+                    act('set_generation', { generation: option.key });
+                  } else if (slot.type === 'gen1module') {
+                    act('set_gen1_module', { module: option.key });
                   } else {
-                    act('set_hef_part', {
-                      part: slot.key,
-                      manufacturer: option.key,
-                    });
+                    act('set_hef_part', { part: slot.key, manufacturer: option.key });
                   }
                 }}
               >
-                {/* Цветовая полоса бренда */}
                 <Box
                   style={{
                     position: 'absolute',
@@ -492,7 +511,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     marginLeft: '0.5rem',
                   }}
                 >
-                  {/* Иконка с цветом бренда */}
                   <Box
                     style={{
                       width: '36px',
@@ -507,18 +525,15 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                       fontSize: '1rem',
                     }}
                   >
-                    <Icon name={optionIcon} />
+                    <Icon name={option.icon || 'cog'} />
                   </Box>
 
-                  {/* Текст */}
                   <Box style={{ flex: 1, minWidth: 0 }}>
                     <Box
                       style={{
                         fontSize: '0.9rem',
                         fontWeight: 600,
-                        color: isSelected
-                          ? CYBER_COLORS.green
-                          : CYBER_COLORS.textPrimary,
+                        color: isSelected ? CYBER_COLORS.green : CYBER_COLORS.textPrimary,
                       }}
                     >
                       {option.name}
@@ -537,7 +552,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     )}
                   </Box>
 
-                  {/* Галочка */}
                   {isSelected && (
                     <Icon
                       name="check"
@@ -557,8 +571,10 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     );
   };
 
+  const genColor = GENERATION_COLORS[customization.generation] || CYBER_COLORS.cyan;
+
   return (
-    <Modal width="750px" height="550px">
+    <Modal width="800px" height="570px">
       <Box
         style={{
           background: `linear-gradient(135deg, ${CYBER_COLORS.bgDark} 0%, #12121a 100%)`,
@@ -641,21 +657,23 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
           </Box>
         ) : (
           <Box style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-            {/* Левая панель - ВСЕ слоты */}
+            {/* Левая панель - слоты */}
             <Box
               style={{
-                width: '200px',
-                minWidth: '200px',
+                width: '215px',
+                minWidth: '215px',
                 background: 'rgba(0,0,0,0.3)',
                 borderRight: `1px solid rgba(0,128,255,0.25)`,
                 padding: '0.75rem',
                 overflowY: 'auto',
               }}
             >
-              {/* Основные слоты */}
               {MAIN_SLOTS.map(renderSlot)}
 
-              {/* HEF слоты - только если HEF режим */}
+              {/* Слот модуля — только для Gen I */}
+              {isGen1 && renderSlot(GEN1_MODULE_SLOT)}
+
+              {/* HEF слоты */}
               {isHEF && (
                 <>
                   <Box
@@ -768,7 +786,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                   </Box>
                 </Box>
 
-                {/* Шасси - вертикальный блок */}
+                {/* Шасси */}
                 <Box
                   style={{
                     padding: '0.5rem',
@@ -790,19 +808,12 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     <Icon name="microchip" style={{ marginRight: '0.3rem' }} />
                     Шасси
                   </Box>
-                  <Box
-                    bold
-                    style={{
-                      fontSize: '0.85rem',
-                      color: BRAND_COLORS[customization.chassis_brand] || CYBER_COLORS.textPrimary,
-                      lineHeight: 1.2,
-                    }}
-                  >
+                  <Box bold style={{ fontSize: '0.85rem', color: BRAND_COLORS[customization.chassis_brand] || CYBER_COLORS.textPrimary, lineHeight: 1.2 }}>
                     {currentChassis?.name || 'Standard'}
                   </Box>
                 </Box>
 
-                {/* Ядро - вертикальный блок */}
+                {/* Ядро */}
                 <Box
                   style={{
                     padding: '0.5rem',
@@ -824,17 +835,66 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     <Icon name="brain" style={{ marginRight: '0.3rem' }} />
                     Ядро
                   </Box>
-                  <Box
-                    bold
-                    style={{
-                      fontSize: '0.85rem',
-                      color: BRAIN_COLORS[customization.brain_type] || CYBER_COLORS.textPrimary,
-                      lineHeight: 1.2,
-                    }}
-                  >
+                  <Box bold style={{ fontSize: '0.85rem', color: BRAIN_COLORS[customization.brain_type] || CYBER_COLORS.textPrimary, lineHeight: 1.2 }}>
                     {currentBrain?.name || 'Positronic'}
                   </Box>
                 </Box>
+
+                {/* Поколение */}
+                <Box
+                  style={{
+                    padding: '0.5rem',
+                    background: 'rgba(0,0,0,0.3)',
+                    borderRadius: '4px',
+                    marginBottom: '0.5rem',
+                    borderLeft: `3px solid ${genColor}`,
+                  }}
+                >
+                  <Box
+                    style={{
+                      fontSize: '0.6rem',
+                      color: '#8a8a9a',
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                      marginBottom: '0.2rem',
+                    }}
+                  >
+                    <Icon name="microchip" style={{ marginRight: '0.3rem' }} />
+                    Поколение
+                  </Box>
+                  <Box bold style={{ fontSize: '0.85rem', color: genColor, lineHeight: 1.2 }}>
+                    {currentGeneration?.name || 'Gen II: Standard'}
+                  </Box>
+                </Box>
+
+                {/* Модуль Gen I */}
+                {isGen1 && (
+                  <Box
+                    style={{
+                      padding: '0.5rem',
+                      background: 'rgba(255,200,0,0.06)',
+                      borderRadius: '4px',
+                      marginBottom: '0.5rem',
+                      borderLeft: `3px solid ${MODULE_COLORS[customization.gen1_module] || CYBER_COLORS.yellow}`,
+                    }}
+                  >
+                    <Box
+                      style={{
+                        fontSize: '0.6rem',
+                        color: '#8a8a9a',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        marginBottom: '0.2rem',
+                      }}
+                    >
+                      <Icon name="puzzle-piece" style={{ marginRight: '0.3rem' }} />
+                      Профессиональный модуль
+                    </Box>
+                    <Box bold style={{ fontSize: '0.85rem', color: MODULE_COLORS[customization.gen1_module] || CYBER_COLORS.yellow, lineHeight: 1.2 }}>
+                      {currentModule?.name || 'Security'}
+                    </Box>
+                  </Box>
+                )}
 
                 {/* HEF статус */}
                 <Box
@@ -843,62 +903,24 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: '0.4rem 0.5rem',
-                    background: isHEF
-                      ? 'rgba(255,200,0,0.15)'
-                      : 'rgba(100,100,100,0.1)',
+                    background: isHEF ? 'rgba(255,200,0,0.15)' : 'rgba(100,100,100,0.1)',
                     border: `1px solid ${isHEF ? 'rgba(255,200,0,0.5)' : 'rgba(100,100,100,0.3)'}`,
                     borderRadius: '3px',
                   }}
                 >
-                  <Box
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.3rem',
-                    }}
-                  >
+                  <Box style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                     <Icon
                       name="puzzle-piece"
                       style={{ color: isHEF ? CYBER_COLORS.yellow : '#666', fontSize: '0.9rem' }}
                     />
-                    <Box
-                      style={{
-                        fontSize: '0.7rem',
-                        color: '#8a8a9a',
-                        textTransform: 'uppercase',
-                      }}
-                    >
+                    <Box style={{ fontSize: '0.7rem', color: '#8a8a9a', textTransform: 'uppercase' }}>
                       HEF
                     </Box>
                   </Box>
-                  <Box
-                    bold
-                    style={{
-                      fontSize: '0.8rem',
-                      color: isHEF ? CYBER_COLORS.yellow : '#666',
-                      textTransform: 'uppercase',
-                    }}
-                  >
+                  <Box bold style={{ fontSize: '0.8rem', color: isHEF ? CYBER_COLORS.yellow : '#666', textTransform: 'uppercase' }}>
                     {isHEF ? 'АКТИВЕН' : 'НЕАКТИВЕН'}
                   </Box>
                 </Box>
-
-                {/* HEF инфо */}
-                {isHEF && (
-                  <Box
-                    mt={0.75}
-                    style={{
-                      textAlign: 'center',
-                      fontSize: '0.7rem',
-                      color: CYBER_COLORS.yellow,
-                      padding: '0.4rem',
-                      background: 'rgba(255,200,0,0.05)',
-                      borderRadius: '3px',
-                    }}
-                  >
-                    <Icon name="info-circle" /> Модульная система: {HEF_SLOTS.length} частей
-                  </Box>
-                )}
               </Box>
 
               {/* Пароль ОС */}
@@ -924,10 +946,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
                     marginBottom: '0.4rem',
                   }}
                 >
-                  <Icon
-                    name="lock"
-                    style={{ color: CYBER_COLORS.cyan, fontSize: '0.8rem' }}
-                  />
+                  <Icon name="lock" style={{ color: CYBER_COLORS.cyan, fontSize: '0.8rem' }} />
                   <Box
                     style={{
                       fontSize: '0.6rem',
@@ -964,8 +983,8 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
             {/* Правая панель - выбор */}
             <Box
               style={{
-                width: '240px',
-                minWidth: '240px',
+                width: '255px',
+                minWidth: '255px',
                 background: 'rgba(0,0,0,0.25)',
                 borderLeft: `1px solid rgba(0,128,255,0.25)`,
                 display: 'flex',
@@ -991,7 +1010,9 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
         >
           {isHEF
             ? 'HEF режим: выберите производителя для каждой части тела'
-            : 'Выберите шасси "HEF (Frankensteinian)" для модульной настройки'}
+            : isGen1
+              ? 'Gen I: выберите профессиональный модуль — без него эффективность -40%'
+              : 'Выберите шасси "HEF" для модульной настройки или поколение для особых механик'}
         </Box>
       </Box>
     </Modal>

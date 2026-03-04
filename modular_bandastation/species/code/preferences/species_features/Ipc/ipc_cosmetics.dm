@@ -118,14 +118,18 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 /datum/bodypart_overlay/ipc_tail
 	layers = EXTERNAL_BEHIND | EXTERNAL_FRONT
 	blocks_emissive = EMISSIVE_BLOCK_NONE
-	/// Цвет тонирования (null = без тонирования)
+	/// Основной цвет хвоста (null = без тонирования)
 	var/icon_color = null
+	/// Вторичный цвет хвоста для secondary-спрайтов (null = без тонирования)
+	var/secondary_icon_color = null
 
 /datum/bodypart_overlay/ipc_tail/generate_icon_cache()
 	. = ..()
 	. += "ipc_tail"
 	if(icon_color)
 		. += icon_color
+	if(secondary_icon_color)
+		. += secondary_icon_color
 
 /datum/bodypart_overlay/ipc_tail/get_overlay(layer, obj/item/bodypart/limb)
 	. = list()
@@ -135,11 +139,19 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 			if(icon_color)
 				img_behind.color = icon_color
 			. += img_behind
+			if(secondary_icon_color)
+				var/image/img_sec = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
+				img_sec.color = secondary_icon_color
+				. += img_sec
 		if(EXTERNAL_FRONT)
 			var/image/img_front = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
 			if(icon_color)
 				img_front.color = icon_color
 			. += img_front
+			if(secondary_icon_color)
+				var/image/img_sec = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
+				img_sec.color = secondary_icon_color
+				. += img_sec
 
 // ============================================
 // APPLY PROCS
@@ -189,6 +201,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 		return
 	var/datum/bodypart_overlay/ipc_tail/overlay = new()
 	overlay.icon_color = H.dna?.features["ipc_tail_color"]
+	overlay.secondary_icon_color = H.dna?.features["ipc_tail_secondary_color"]
 	chest.add_bodypart_overlay(overlay)
 
 // ============================================
@@ -425,6 +438,31 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 		return
 	target.dna.features["ipc_tail_color"] = value
 	// Перерисовываем хвост с новым цветом
+	apply_ipc_tail(target, target.dna.features["feature_ipc_tail"] == "plug")
+
+/datum/preference/color/ipc_tail_secondary_color
+	priority = PREFERENCE_PRIORITY_BODYPARTS
+	savefile_key = "ipc_tail_secondary_color"
+	savefile_identifier = PREFERENCE_CHARACTER
+	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+
+/datum/preference/color/ipc_tail_secondary_color/create_default_value()
+	return null  // null = не применять вторичный цвет (secondary-спрайт не рендерится)
+
+/datum/preference/color/ipc_tail_secondary_color/is_accessible(datum/preferences/preferences)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/datum/species/species = GLOB.species_prototypes[preferences.read_preference(/datum/preference/choiced/species)]
+	if(!istype(species, /datum/species/ipc))
+		return FALSE
+	// Показываем только если хвост включён
+	return preferences.read_preference(/datum/preference/choiced/ipc_tail) == "plug"
+
+/datum/preference/color/ipc_tail_secondary_color/apply_to_human(mob/living/carbon/human/target, value)
+	if(!istype(target.dna?.species, /datum/species/ipc))
+		return
+	target.dna.features["ipc_tail_secondary_color"] = value
 	apply_ipc_tail(target, target.dna.features["feature_ipc_tail"] == "plug")
 
 #undef IPC_HEAD_ACC_ICON

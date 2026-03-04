@@ -20,6 +20,7 @@
 /datum/action/innate/ipc_cyberdeck
 	name = "Кибердека"
 	desc = "Открыть интерфейс кибердеки для взлома устройств."
+	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
 	button_icon_state = "ipc_os"
 	/// Ссылка на вид КПБ
 	var/datum/species/ipc/ipc_species = null

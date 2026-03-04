@@ -271,6 +271,18 @@ export type IPCHEFManufacturer = {
   name: string;
 };
 
+export type IPCGeneration = {
+  key: string;
+  name: string;
+  description: string;
+};
+
+export type IPCModule = {
+  key: string;
+  name: string;
+  description: string;
+};
+
 export type IPCCustomization = {
   chassis_brand: string;
   brain_type: string;
@@ -281,6 +293,8 @@ export type IPCCustomization = {
   hef_r_arm: string;
   hef_l_leg: string;
   hef_r_leg: string;
+  generation: string;
+  gen1_module: string;
 };
 // BANDASTATION ADDITION END
 
@@ -292,6 +306,8 @@ export type ServerData = {
     chassis_brands: IPCChassisBrand[];
     brain_types: IPCBrainType[];
     hef_manufacturers: IPCHEFManufacturer[];
+    generations: IPCGeneration[];
+    gen1_modules: IPCModule[];
   };
   // BANDASTATION ADDITION END
   jobs: {

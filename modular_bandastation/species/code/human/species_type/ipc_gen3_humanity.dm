@@ -43,12 +43,16 @@
 	RegisterSignal(H, COMSIG_MOB_ATTACK_HAND, PROC_REF(gen3_on_attack))
 	RegisterSignal(H, COMSIG_LIVING_REVIVE, PROC_REF(gen3_on_revive))
 
+	// HUD индикатор человечности
+	add_gen3_hud(H)
+
 /datum/species/ipc/proc/remove_gen3_humanity(mob/living/carbon/human/H)
 	emp_vulnerability = 2
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen3_peak)
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen3_low)
 	REMOVE_TRAIT(H, TRAIT_CLUMSY, IPC_GEN3_TRAIT_SOURCE)
 	UnregisterSignal(H, list(COMSIG_MOB_ATTACK_HAND, COMSIG_LIVING_REVIVE))
+	remove_gen3_hud(H)
 
 // ============================================
 // ТИКОВАЯ ЛОГИКА (вызывается из handle_generation_life)
