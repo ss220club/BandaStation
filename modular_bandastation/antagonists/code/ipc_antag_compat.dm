@@ -149,3 +149,149 @@
 		living_user.log_message("made [human_target] insane.", LOG_GAME)
 		human_target.log_message("was driven insane by [living_user]", LOG_GAME)
 	return TRUE
+
+// ============================================
+// КАРТИНА «ПЛАЧУЩАЯ»: NULL-SAFETY ДЛЯ mob_mood
+// ============================================
+
+// examine_effects: mob_mood.mood_events.Remove() без проверки на null.
+/obj/structure/sign/painting/eldritch/weeping/examine_effects(mob/living/carbon/examiner)
+	if(!IS_HERETIC(examiner))
+		to_chat(examiner, span_hypnophrase("Передохни, пока что..."))
+		examiner.mob_mood?.mood_events?.Remove("eldritch_weeping")
+		examiner.add_mood_event("weeping_withdrawal", /datum/mood_event/eldritch_painting/weeping_withdrawal)
+		return
+
+	to_chat(examiner, span_notice("О, какое искусство! Один только взгляд на него проясняет ваши мысли."))
+	examiner.remove_status_effect(/datum/status_effect/hallucination)
+	examiner.add_mood_event("heretic_eldritch_painting", /datum/mood_event/eldritch_painting/weeping_heretic)
+
+// ============================================
+// БРОНЯ ЛУНЫ: NULL-SAFETY ДЛЯ mob_mood
+// ============================================
+
+// on_hud_created/on_hud_remove вызывают mob_mood.unmodify/modify_hud()
+// без проверки — ИПС (carbon/human) вызывает крэш при надевании брони.
+/obj/item/clothing/suit/hooded/cultrobes/eldritch/moon/on_hud_created(mob/living/carbon/human/wearer)
+	SIGNAL_HANDLER
+	var/datum/hud/original_hud = wearer.hud_used
+	var/list/to_remove = list(/atom/movable/screen/stamina, /atom/movable/screen/healths, /atom/movable/screen/healthdoll/human)
+	for(var/removing in original_hud.infodisplay)
+		if(is_type_in_list(removing, to_remove))
+			original_hud.infodisplay -= removing
+			QDEL_NULL(removing)
+	wearer.mob_mood?.unmodify_hud()
+	health_hud = new(null, original_hud)
+	original_hud.infodisplay += health_hud
+	original_hud.show_hud(original_hud.hud_version)
+	UnregisterSignal(wearer, COMSIG_MOB_HUD_CREATED)
+	signal_registered -= COMSIG_MOB_HUD_CREATED
+
+/obj/item/clothing/suit/hooded/cultrobes/eldritch/moon/on_hud_remove(mob/living/carbon/human/wearer)
+	var/datum/hud/original_hud = wearer.hud_used
+	original_hud.infodisplay -= health_hud
+	QDEL_NULL(health_hud)
+	var/atom/movable/screen/stamina/stamina_hud = new(null, original_hud)
+	var/atom/movable/screen/healths/old_health_hud = new(null, original_hud)
+	var/atom/movable/screen/healthdoll/human/health_doll_hud = new(null, original_hud)
+	original_hud.infodisplay += stamina_hud
+	original_hud.infodisplay += old_health_hud
+	original_hud.infodisplay += health_doll_hud
+	wearer.mob_mood?.modify_hud()
+	original_hud.show_hud(original_hud.hud_version)
+
+// ============================================
+// МАСКА БЕЗУМИЯ: NULL-SAFETY ДЛЯ mob_mood
+// ============================================
+
+// process(): direct_sanity_drain() вызывается на всех human_in_range,
+// включая ИПС (subtype carbon/human), у которых mob_mood = null.
+/obj/item/clothing/mask/madness_mask/process(seconds_per_tick)
+	if(!local_user)
+		return PROCESS_KILL
+
+	if(IS_HERETIC_OR_MONSTER(local_user) && HAS_TRAIT(src, TRAIT_NODROP))
+		REMOVE_TRAIT(src, TRAIT_NODROP, CLOTHING_TRAIT)
+
+	for(var/mob/living/carbon/human/human_in_range in view(local_user))
+		if(IS_HERETIC_OR_MONSTER(human_in_range) || human_in_range.stat > SOFT_CRIT || human_in_range.is_blind())
+			continue
+
+		if(human_in_range.can_block_magic(MAGIC_RESISTANCE|MAGIC_RESISTANCE_MIND))
+			continue
+
+		if(!human_in_range.mob_mood)
+			continue
+
+		human_in_range.mob_mood.direct_sanity_drain(rand(-2, -20) * seconds_per_tick)
+
+		if(SPT_PROB(60, seconds_per_tick))
+			human_in_range.adjust_hallucinations_up_to(10 SECONDS, 120 SECONDS)
+
+		if(SPT_PROB(40, seconds_per_tick))
+			human_in_range.set_jitter_if_lower(10 SECONDS)
+
+		if(human_in_range.get_stamina_loss() <= 85 && SPT_PROB(30, seconds_per_tick))
+			human_in_range.emote(pick("giggle", "laugh"))
+			human_in_range.adjust_stamina_loss(10)
+
+		if(SPT_PROB(25, seconds_per_tick))
+			human_in_range.set_dizzy_if_lower(10 SECONDS)
+
+// ============================================
+// СТАТУС «MOON_CONVERTED»: NULL-SAFETY ДЛЯ mob_mood
+// ============================================
+
+// on_apply(): -150 + mob_mood.sanity без проверки.
+// При mob_mood = null используем sanity = 0 (максимальное исцеление).
+/datum/status_effect/moon_converted/on_apply()
+	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_damaged))
+	owner.adjust_brute_loss(-150 + (owner.mob_mood?.sanity ?? 0))
+	owner.adjust_fire_loss(-150 + (owner.mob_mood?.sanity ?? 0))
+
+	to_chat(owner, span_hypnophrase(("ЛУНА УКАЗЫВАЕТ ТЕБЕ ПРАВДУ И ЛЖЕЦЫ ПЫТАЮТСЯ СКРЫТЬ ЕЕ, УБЕЙ ИХ ВСЕХ!!!</span>")))
+	owner.balloon_alert(owner, "они лгут... ОНИ ВСЕ ЛГУТ!!!")
+	owner.SetUnconscious(60 SECONDS, ignore_canstun = FALSE)
+	ADD_TRAIT(owner, TRAIT_MUTE, TRAIT_STATUS_EFFECT(id))
+	RegisterSignal(owner, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(update_owner_overlay))
+	owner.update_appearance(UPDATE_OVERLAYS)
+	owner.cause_hallucination(/datum/hallucination/delusion/preset/moon, "[id] status effect", duration = duration, affects_us = FALSE, affects_others = TRUE)
+	return TRUE
+
+// ============================================
+// СНАРЯД ЛУННОГО ПАРАДА и ЗАКЛИНАНИЕ РАЗРЫВ РАЗУМА
+// ============================================
+// Эти два проца начинают с . = ..() — полный оверрайд в модуле потеряет
+// важную логику родительских проков (стандартная обработка снаряда / спелла).
+// Минимальные ?. фиксы остаются в базовых файлах:
+//   code/modules/antagonists/heretic/magic/moon_parade.dm:85
+//   code/modules/antagonists/heretic/magic/mind_gate.dm:47,58,61
+
+// ============================================
+// КРОВЯНЫЕ ЧЕРВИ: ВЗАИМОДЕЙСТВИЕ С ИПС
+// ============================================
+
+// Попытка укусить металлический корпус КПБ ломает зубы червю.
+// Зубы отрастают обратно через минуту.
+/mob/living/basic/blood_worm
+	var/teeth_broken = FALSE
+
+/mob/living/basic/blood_worm/UnarmedAttack(atom/target, proximity_flag, list/modifiers)
+	if(isliving(target) && HAS_TRAIT(target, TRAIT_NOBLOOD))
+		if(teeth_broken)
+			to_chat(src, span_warning("Ваши зубы ещё не отросли — нельзя кусать металлический корпус."))
+			return
+		visible_message(
+			span_danger("[src] вонзает зубы в металлическое тело [target] — и отскакивает с хрустом!"),
+			span_userdanger("Вы вгрызаетесь в металлический корпус КПБ — ваши зубы ломаются!"),
+		)
+		playsound(src, 'sound/items/weapons/bite.ogg', 50)
+		apply_damage(5, BRUTE)
+		teeth_broken = TRUE
+		addtimer(CALLBACK(src, PROC_REF(regrow_teeth)), 1 MINUTES)
+		return
+	return ..()
+
+/mob/living/basic/blood_worm/proc/regrow_teeth()
+	teeth_broken = FALSE
+	to_chat(src, span_notice("Ваши зубы отросли — вы снова можете кусать."))
