@@ -25,7 +25,7 @@
 // ============================================
 
 /datum/component/cult_ritual_item/do_scribe_rune(obj/item/tool, mob/living/cultist)
-	if(istype(cultist.dna?.species, /datum/species/ipc))
+	if(HAS_TRAIT(cultist, TRAIT_NOBLOOD))
 		to_chat(cultist, span_warning("Масло КПБ не является жертвенной субстанцией — руна не может быть начертана."))
 		return FALSE
 	return ..()
