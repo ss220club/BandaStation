@@ -85,7 +85,7 @@
 	var/mob/living/carbon/carbon_target = target
 	to_chat(carbon_target, span_danger("Сверху доносится смех, отдающийся эхом."))
 	carbon_target.cause_hallucination(/datum/hallucination/delusion/preset/moon, "delusion/preset/moon hallucination caused by mansus grasp")
-	carbon_target.mob_mood?.adjust_sanity(-30)
+	carbon_target.mob_mood.adjust_sanity(-30)
 
 /datum/heretic_knowledge/spell/mind_gate
 	name = "Врата Разума"
@@ -272,8 +272,6 @@
 	)
 
 	for(var/mob/living/carbon/carbon_view in range(7, source))
-		if(!carbon_view.mob_mood)
-			continue
 		var/carbon_sanity = carbon_view.mob_mood.sanity
 		if(carbon_view.stat != CONSCIOUS)
 			continue
