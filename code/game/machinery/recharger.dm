@@ -51,11 +51,11 @@
 
 	var/obj/item/stock_parts/power_store/charging_cell = charging.get_cell()
 	if(charging_cell)
-		. += span_notice("- Заряд питания [charging.declent_ru(GENITIVE)]: <b>[charging_cell.percent()]%</b>.")
+		. += span_notice("- Заряд батареи [charging.declent_ru(GENITIVE)]: <b>[charging_cell.percent()]%</b>.")
 		return
 	if(istype(charging, /obj/item/ammo_box/magazine/recharge))
 		var/obj/item/ammo_box/magazine/recharge/power_pack = charging
-		. += span_notice("- Заряд питания [charging.declent_ru(GENITIVE)]: <b>[PERCENT(power_pack.stored_ammo.len/power_pack.max_ammo)]%</b>.")
+		. += span_notice("- Заряд батареи [charging.declent_ru(GENITIVE)]: <b>[PERCENT(power_pack.stored_ammo.len/power_pack.max_ammo)]%</b>.")
 		return
 	if(istype(charging, /obj/item/gun/ballistic/automatic/battle_rifle))
 		var/obj/item/gun/ballistic/automatic/battle_rifle/recalibrating_gun = charging

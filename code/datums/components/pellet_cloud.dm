@@ -343,7 +343,7 @@
 			limb_hit_text = " по [hit_part.ru_plaintext_zone[PREPOSITIONAL]]"
 
 		if(num_hits > 1)
-			target.visible_message(span_danger("В [target.declent_ru(ACCUSATIVE)] попадают [num_hits] [proj_name][limb_hit_text][damage ? \"\" : \", не оставляя следов\"]!"), null, null, COMBAT_MESSAGE_RANGE, target)
+			target.visible_message(span_danger("В [target.declent_ru(ACCUSATIVE)] попадают [num_hits] [proj_name][limb_hit_text][damage ? "" : ", не оставляя следов"]!"), null, null, COMBAT_MESSAGE_RANGE, target)
 			to_chat(target, span_userdanger("В вас попадают [num_hits] [proj_name][limb_hit_text]!"))
 		else
 			target.visible_message(span_danger("В [target.declent_ru(ACCUSATIVE)] попадает [proj_name][limb_hit_text][damage ? "" : ", не оставляя следов"]!"), null, null, COMBAT_MESSAGE_RANGE, target)
