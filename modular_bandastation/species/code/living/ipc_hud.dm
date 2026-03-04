@@ -1,12 +1,39 @@
 // ============================================
 // IPC HUD MODIFICATIONS
 // ============================================
-// Отключает mood для IPC и добавляет кастомные HUD элементы
-// для батареи и температуры процессора
+// ИПС имеет нейтральный неизменяемый муд вместо обычного.
+// Все sanity-проки — no-op. mob_mood никогда не null,
+// поэтому прямые обращения из еретического кода работают без патчей.
+
+/// Нейтральный муд ИПС: рассудок зафиксирован на SANITY_NEUTRAL.
+/// Все изменения санити игнорируются. Процессинг отключён.
+/datum/mood/ipc_neutral
+	sanity = SANITY_NEUTRAL
+
+/datum/mood/ipc_neutral/process()
+	return
+
+/datum/mood/ipc_neutral/add_mood_event()
+	return
+
+/datum/mood/ipc_neutral/add_conditional_mood_event()
+	return
+
+/datum/mood/ipc_neutral/adjust_sanity()
+	return
+
+/datum/mood/ipc_neutral/direct_sanity_drain()
+	return
+
+/datum/mood/ipc_neutral/modify_hud()
+	return
+
+/datum/mood/ipc_neutral/unmodify_hud()
+	return
 
 /mob/living/carbon/human/setup_mood()
-	// Если IPC - не создаем mood datum
 	if(istype(dna?.species, /datum/species/ipc))
+		mob_mood = new /datum/mood/ipc_neutral(src)
 		return
 	return ..()
 
@@ -264,10 +291,6 @@
 	replace_body(H, src)
 	H.update_body()
 	H.update_body_parts()
-
-	// Удаляем mood datum если он есть
-	if(H.mob_mood)
-		QDEL_NULL(H.mob_mood)
 
 	// Добавляем кастомные HUD элементы
 	RegisterSignal(H, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
