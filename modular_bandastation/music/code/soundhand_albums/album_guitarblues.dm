@@ -84,7 +84,7 @@
 
 /datum/track/soundhand/b12
 	song_path = 'sound/music/soundhand/guitarblues/12.ogg'
-	song_name = "12 Здрасьте"
+	song_name = "12 Бойня"
 	song_length = 5 MINUTES
 	song_beat_deciseconds = 1 SECONDS
 
