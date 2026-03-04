@@ -295,3 +295,14 @@
 /mob/living/basic/blood_worm/proc/regrow_teeth()
 	teeth_broken = FALSE
 	to_chat(src, span_notice("Ваши зубы отросли — вы снова можете кусать."))
+
+// Leech: leech_living_start_check проверяет get_blood_volume() <= 0,
+// но у ИПС blood_volume существует как var (carbon/human наследник) и может
+// быть > 0 при инициализации. Без явной проверки червь начнёт сосать ИПС:
+// либо зациклится (no-op drain), либо осушит переменную до смерти.
+/datum/action/cooldown/mob_cooldown/blood_worm/leech/leech_living_start_check(mob/living/basic/blood_worm/leech, mob/living/target)
+	if(HAS_TRAIT(target, TRAIT_NOBLOOD))
+		target.balloon_alert(leech, "нет крови!")
+		return FALSE
+	return ..()
+
