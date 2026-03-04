@@ -63,23 +63,23 @@
 	back = /obj/item/storage/backpack/satchel/leather
 
 /datum/outfit/h1132/base
-	uniform = /obj/item/clothing/under/frontier_colonist
-	shoes = /obj/item/clothing/shoes/jackboots/frontier_colonist
+	uniform = /obj/item/clothing/under/color/black
+	shoes = /obj/item/clothing/shoes/jackboots
 
 /datum/outfit/h1132/sec_chop
 	name = "Security (chopped)"
-	uniform = /obj/item/clothing/under/colonial
+	uniform = /obj/item/clothing/under/color/black
 	suit = /obj/item/clothing/suit/armor/vest
 	head = /obj/item/clothing/head/helmet/sec
 	gloves = /obj/item/clothing/gloves/color/black
-	shoes = /obj/item/clothing/shoes/jackboots/frontier_colonist
-	mask = /obj/item/clothing/mask/balaclava/threehole
+	shoes = /obj/item/clothing/shoes/jackboots
+	mask = /obj/item/clothing/mask/balaclava
 	r_hand = /obj/item/radio
 
 /datum/outfit/h1132/doctor
 	name = "Doctor"
-	uniform = /obj/item/clothing/under/colonial
-	suit = /obj/item/clothing/suit/toggle/labcoat/medical
+	uniform = /obj/item/clothing/under/color/black
+	suit = /obj/item/clothing/suit/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/sneakers/white
 	gloves = /obj/item/clothing/gloves/latex
 	back = /obj/item/storage/backpack/satchel/leather
@@ -87,31 +87,31 @@
 
 /datum/outfit/h1132/scientist
 	name = "Scientist"
-	uniform = /obj/item/clothing/under/colonial
+	uniform = /obj/item/clothing/under/color/black
 	suit = /obj/item/clothing/suit/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/sneakers/white
 	back = /obj/item/storage/backpack/satchel/leather
 
 /datum/outfit/h1132/cannibal
 	name = "Cannibal"
-	uniform = /obj/item/clothing/under/frontier_colonist
+	uniform = /obj/item/clothing/under/color/black
 	suit = /obj/item/clothing/suit/armor/vest/marine/security
 	head = /obj/item/clothing/head/helmet/swat
-	mask = /obj/item/clothing/mask/balaclava/threehole
+	mask = /obj/item/clothing/mask/balaclava
 	shoes = /obj/item/clothing/shoes/combat/coldres
 	r_hand = /obj/item/radio
 
 /datum/outfit/h1132/bezdelnik
 	name = "Bezdelnik"
-	uniform = /obj/item/clothing/under/frontier_colonist
-	shoes = /obj/item/clothing/shoes/jackboots/colonial
+	uniform = /obj/item/clothing/under/color/black
+	shoes = /obj/item/clothing/shoes/jackboots
 	r_hand = /obj/item/radio
 
 /datum/outfit/h1132/sniper
 	name = "Sniper"
 	belt = /obj/item/storage/belt/military
 	suit = /obj/item/clothing/suit/hooded/wintercoat/eva
-	shoes = /obj/item/clothing/shoes/jackboots/frontier_colonist
+	shoes = /obj/item/clothing/shoes/jackboots
 	mask = /obj/item/clothing/mask/balaclava
 	gloves = /obj/item/clothing/gloves/color/grey/protects_cold
 	head = /obj/item/clothing/head/helmet/rus_ushanka

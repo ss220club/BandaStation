@@ -127,12 +127,12 @@
 /datum/outfit/train_raider
 	name = "Train raider - basic"
 
-	uniform = /obj/item/clothing/under/rank/security/officer/hecu
+	uniform = /obj/item/clothing/under/rank/centcom/military
 	shoes = /obj/item/clothing/shoes/combat
 	gloves = /obj/item/clothing/gloves/combat
-	back = /obj/item/storage/backpack/industrial/cin_surplus
+	back = /obj/item/storage/backpack
 	ears = /obj/item/radio/headset/syndicate/alt
-	suit = /obj/item/clothing/suit/armor/vest/hecu
+	suit = /obj/item/clothing/suit/armor/vest/alt
 	r_pocket = /obj/item/knife/combat
 	l_pocket = /obj/item/ammo_box/magazine/c35sol_pistol
 	id = /obj/item/card/id/advanced/chameleon/black
@@ -143,9 +143,9 @@
 	box = /obj/item/storage/box/survival/syndie
 	id_trim = /datum/id_trim/chameleon/operative
 	backpack_contents = list(
-		/obj/item/gun/ballistic/automatic/pistol/sol = 1,
-		/obj/item/ammo_box/magazine/c35sol_pistol = 2,
-		/obj/item/storage/medkit/frontier/stocked = 1,
+		/obj/item/gun/ballistic/automatic/pistol/aps = 1,
+		/obj/item/ammo_box/magazine/m9mm_aps/ap = 2,
+		/obj/item/storage/medkit/regular = 1,
 		/obj/item/stack/medical/suture = 2,
 	)
 
@@ -184,12 +184,12 @@
 
 /datum/outfit/train_raider/rifleman
 	name = "Train raider - rifleman"
-	suit_store = /obj/item/gun/ballistic/automatic/sol_smg/evil
+	suit_store = /obj/item/gun/ballistic/automatic/mini_uzi
 
 
 /datum/outfit/train_raider/rifleman/New()
 	backpack_contents += list(
-		/obj/item/ammo_box/magazine/c35sol_pistol/stendo = 3,
+		/obj/item/ammo_box/magazine/smgm9mm/ap = 3,
 	)
 	. = ..()
 

@@ -564,7 +564,7 @@
 /obj/machinery/power/train_heater
 	name = "train plasma heater"
 	desc = "A heater that burns plasma sheets to boil water into steam for the train turbine. Insert plasma sheets, connect plumbing for water input and gas pipes for steam output."
-	icon = 'modular_skyrat/modules/colony_fabricator/icons/thermomachine.dmi'
+	icon = 'modular_bandastation/fenysha_events/icons/machinery/thermomachine.dmi'
 	icon_state = "thermo_base"
 	base_icon_state = "thermo_base"
 	density = TRUE

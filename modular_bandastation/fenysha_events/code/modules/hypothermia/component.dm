@@ -536,7 +536,6 @@
 	icon_state = "template"
 	use_user_hud_icon = TRUE
 
-
 /atom/movable/screen/fullscreen/cold_effect
 	icon = 'modular_bandastation/fenysha_events/icons/fullscreen/fullscreen_effects.dmi'
 	icon_state = "hypothermiaoverlay"

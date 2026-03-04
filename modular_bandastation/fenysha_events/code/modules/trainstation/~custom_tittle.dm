@@ -201,15 +201,15 @@ img.bg {
 "}
 
 /datum/controller/subsystem/train_controller/proc/update_tittle_screen()
-	// SStitle.title_html = TRAINSTATION_TITLE_HTML
-	// SStitle.show_title_screen()
+	/*
+	SStitle.title_html = TRAINSTATION_TITLE_HTML
+	SStitle.show_title_screen()
+	*/
 	return
-
 #undef TRAINSTATION_TITLE_HTML
 
 /datum/asset/simple/lobby
 	assets = list(
-		"FixedsysExcelsior3.01Regular.ttf" = 'html/browser/FixedsysExcelsior3.01Regular.ttf',
 		"OCRAExtended.ttf" = 'modular_bandastation/fenysha_events/html/OCRAEXT.TTF',
 	)
 

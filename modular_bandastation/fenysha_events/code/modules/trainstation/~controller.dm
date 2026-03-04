@@ -59,7 +59,7 @@ SUBSYSTEM_DEF(train_controller)
 	var/minimum_travel_time = 7 MINUTES
 	var/maximum_travel_time = 30 MINUTES
 	/// Сколько времени занимает одна единица расстояния на глобальной карте
-	var/time_per_map_unit = 3 SECONDS
+	var/time_per_map_unit = 4 SECONDS
 	var/time_to_next_station
 	var/total_travel_time
 	var/stations_visited = 0
@@ -105,6 +105,7 @@ SUBSYSTEM_DEF(train_controller)
 	running_events = list()
 	soundloop = new(start_immediately = FALSE)
 	RegisterSignal(SSticker, COMSIG_TICKER_ENTER_PREGAME, PROC_REF(on_enter_pregame))
+	// add_startup_message("Trainstation: loading game map...")
 	load_stations()
 	connect_stations()
 	global_map.generate()
@@ -302,6 +303,7 @@ SUBSYSTEM_DEF(train_controller)
 			[station_abstract ? "" : "Please prepare to depart from [loaded_station.name]."]"
 	priority_announce(msg, "Train Departure")
 	tain_starting = TRUE
+	loaded_station.pre_unload()
 	addtimer(CALLBACK(src, PROC_REF(start_moving), FALSE, TRUE, 0), delay)
 
 

@@ -251,7 +251,7 @@
 /obj/machinery/hypothermia/heater
 	name = "Heater"
 	desc = "A soviet-made simple heater. Runs on a standard power cell."
-	icon = 'modular_skyrat/modules/colony_fabricator/icons/thermomachine.dmi'
+	icon = 'modular_bandastation/fenysha_events/icons/machinery/thermomachine.dmi'
 	icon_state = "thermo_base"
 	base_icon_state = "thermo_base"
 	density = TRUE

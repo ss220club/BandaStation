@@ -247,7 +247,7 @@
 	name = "Arctic Mutant"
 	desc = "A bare, feral mutant from the ice caves."
 	outfit = /datum/outfit/arctic_survivor
-	r_hand = /obj/item/claymore/bone
+	r_hand = /obj/item/knife/combat/bone
 	l_hand = /obj/item/flashlight/lantern/on
 
 	light_power = 2
@@ -285,8 +285,6 @@
 /datum/outfit/arctic_survivor
 	name = "Arctic Survivor Corpse"
 	head = /obj/item/clothing/head/helmet/skull
-	uniform = /obj/item/clothing/under/misc/skyrat/gear_harness
-	shoes = /obj/item/clothing/shoes/bone_greaves
 	gloves = /obj/item/clothing/gloves/bracer
 
 
@@ -294,16 +292,12 @@
 	name = "Armored Arctic Mutant"
 	head = /obj/item/clothing/head/helmet/skull
 	suit = /obj/item/clothing/suit/armor/bone
-	uniform = /obj/item/clothing/under/misc/skyrat/gear_harness
-	shoes = /obj/item/clothing/shoes/bone_greaves
 	gloves = /obj/item/clothing/gloves/bracer
 
 /datum/outfit/arctic_spear
 	name = "Spear Arctic Mutant"
 	head = /obj/item/clothing/head/helmet/skull
-	shoes = /obj/item/clothing/shoes/bone_greaves
 	gloves = /obj/item/clothing/gloves/bracer
-	uniform = /obj/item/clothing/under/misc/skyrat/gear_harness
 
 #define BB_TEMP_TARGET "bb_temp_target"
 #define BB_GROUP_LEADER "bb_formation_leader"
@@ -426,7 +420,7 @@
 	name = "arctic mutant pod"
 	desc = "A frozen pod containing a dormant mutant. Ghosts can enter to play as it."
 	icon_state = "cryostasis_pod"
-	mob_species = /datum/species/mutant
+	mob_species = /datum/species/arctic_mutant
 	mob_name = "Arctic Mutant"
 	you_are_text = "You are an arctic mutant awakened from cryosleep."
 	flavour_text = "Survive in the caves of Zvezda, hunt intruders."
@@ -498,7 +492,7 @@
 	name = "corrupted mutant boss"
 	real_name = "corrupted mutant boss"
 	desc = "A massive, horrifying mutant leader. It commands lesser mutants and unleashes devastating attacks."
-	icon = 'modular_skyrat/modules/horrorform/icons/animal.dmi'
+	icon = 'modular_bandastation/fenysha_events/icons/mob/horror.dmi'
 	icon_state = "horror"
 	icon_living = "horror"
 	icon_dead = "horror_dead"
