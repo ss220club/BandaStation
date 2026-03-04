@@ -7,11 +7,6 @@
 /obj/effect/spawner/random/trash/garbage,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/indoors/station)
-"ae" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/start/bouncer,
-/turf/open/misc/asphalt,
-/area/trainstation/outdoor)
 "ap" = (
 /obj/effect/turf_decal/siding/thinplating_new/light{
 	dir = 8
@@ -268,23 +263,12 @@
 "ep" = (
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/trainstation/indoors/station)
-"er" = (
-/obj/effect/turf_decal/siding/dark{
-	dir = 4
-	},
-/obj/machinery/camera/autoname/engineering/directional/east,
-/turf/open/floor/iron/dark/small,
-/area/trainstation/indoors/station)
 "et" = (
 /obj/machinery/door/train/train_door,
 /obj/structure/cable,
 /obj/effect/spawner/random/structure/barricade,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/station)
-"eO" = (
-/obj/effect/spawner/random/burgerstation/liquid,
-/turf/open/misc/asphalt/no_border,
-/area/trainstation/outdoor)
 "eY" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/start/security_officer,
@@ -464,11 +448,6 @@
 	},
 /turf/open/misc/asphalt,
 /area/trainstation/outdoor)
-"iA" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/spawner/random/burgerstation/power,
-/turf/open/misc/asphalt/no_border,
-/area/trainstation/outdoor)
 "iE" = (
 /obj/structure/flora/rock/style_random,
 /obj/structure/flora/bush/snow/style_random,
@@ -637,14 +616,6 @@
 /obj/structure/flora/bush/snow/style_random,
 /turf/open/misc/asteroid/snow/indestructible,
 /area/trainstation/outdoor)
-"kT" = (
-/obj/effect/turf_decal/siding/dark{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/camera/autoname/engineering/directional/west,
-/turf/open/floor/iron/dark/small,
-/area/trainstation/indoors/station)
 "kU" = (
 /obj/machinery/door/airlock/shuttle/ferry,
 /turf/open/floor/wood,
@@ -860,7 +831,6 @@
 	},
 /obj/machinery/light/red/directional/west,
 /obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/syndicate/skyrat/overalls/unarmoured,
 /obj/effect/spawner/random/medical/minor_healing,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/entertainment/musical_instrument,
@@ -1501,21 +1471,6 @@
 /area/trainstation/indoors/station)
 "wl" = (
 /obj/effect/turf_decal/siding/thinplating_new/light/corner,
-/obj/effect/landmark/start/science_guard,
-/turf/open/misc/asphalt,
-/area/trainstation/outdoor)
-"wm" = (
-/obj/effect/turf_decal/siding/dark{
-	dir = 4
-	},
-/obj/machinery/camera/autoname/engineering/directional/east,
-/turf/open/floor/catwalk_floor/iron_dark,
-/area/trainstation/indoors/station)
-"ws" = (
-/obj/effect/turf_decal/siding/thinplating_new/light/corner{
-	dir = 8
-	},
-/obj/effect/landmark/start/telecomms_specialist,
 /turf/open/misc/asphalt,
 /area/trainstation/outdoor)
 "wA" = (
@@ -1621,10 +1576,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/start/captain,
 /turf/open/floor/iron/dark,
-/area/trainstation/outdoor)
-"zd" = (
-/obj/effect/landmark/start/stowaway,
-/turf/open/misc/asteroid/snow/indestructible,
 /area/trainstation/outdoor)
 "zj" = (
 /obj/structure/closet/crate/engineering,
@@ -1754,14 +1705,6 @@
 /obj/structure/fence/door/opened,
 /turf/open/misc/asphalt,
 /area/trainstation/outdoor)
-"AG" = (
-/obj/effect/turf_decal/siding/dark{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/camera/autoname/engineering/directional/west,
-/turf/open/floor/plating,
-/area/trainstation/indoors/station)
 "AN" = (
 /obj/structure/fluff/bus/passable,
 /turf/open/floor/iron/dark,
@@ -1855,7 +1798,6 @@
 "Cq" = (
 /obj/effect/turf_decal/siding/thinplating_new/light/corner,
 /obj/effect/decal/cleanable/glitter,
-/obj/effect/landmark/start/orderly,
 /turf/open/misc/asphalt,
 /area/trainstation/outdoor)
 "Cv" = (
@@ -2042,7 +1984,6 @@
 	dir = 10
 	},
 /obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/syndicate/skyrat/overalls/unarmoured,
 /obj/effect/spawner/random/special_lighter,
 /obj/effect/spawner/random/entertainment/plushie_delux,
 /turf/open/indestructible/dark/textured,
@@ -2257,11 +2198,6 @@
 	dir = 8
 	},
 /area/trainstation/indoors/station/controll)
-"Ks" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/start/telecomms_specialist,
-/turf/open/misc/asphalt,
-/area/trainstation/outdoor)
 "KB" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/start/chemist,
@@ -2575,13 +2511,6 @@
 /obj/effect/landmark/start/janitor,
 /turf/open/misc/asphalt,
 /area/trainstation/outdoor)
-"PN" = (
-/obj/effect/turf_decal/siding/dark{
-	dir = 4
-	},
-/obj/machinery/camera/autoname/engineering/directional/east,
-/turf/open/floor/plating,
-/area/trainstation/indoors/station)
 "PP" = (
 /obj/structure/railing{
 	dir = 1;
@@ -2644,13 +2573,6 @@
 	dir = 8
 	},
 /area/trainstation/indoors/station/controll)
-"QN" = (
-/obj/effect/turf_decal/siding/thinplating_new/light/corner{
-	dir = 8
-	},
-/obj/effect/landmark/start/corrections_officer,
-/turf/open/misc/asphalt,
-/area/trainstation/outdoor)
 "Rd" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 10
@@ -2826,11 +2748,6 @@
 /obj/effect/decal/cleanable/glitter,
 /turf/open/floor/iron,
 /area/trainstation/indoors/station)
-"TL" = (
-/obj/structure/fluff/bus/passable,
-/obj/effect/landmark/start/nanotrasen_consultant,
-/turf/open/floor/iron/dark,
-/area/trainstation/outdoor)
 "TN" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
@@ -2886,7 +2803,6 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/camera/autoname/engineering/directional/west,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/trainstation/indoors/station)
 "UI" = (
@@ -3047,22 +2963,11 @@
 /obj/effect/landmark/start/assistant,
 /turf/open/misc/asphalt,
 /area/trainstation/outdoor)
-"Xk" = (
-/obj/effect/turf_decal/siding/thinplating_new/light{
-	dir = 8
-	},
-/obj/effect/landmark/start/security_medic,
-/turf/open/misc/asphalt,
-/area/trainstation/outdoor)
 "Xn" = (
 /obj/effect/turf_decal/trimline,
 /obj/structure/marker_beacon/burgundy,
 /turf/open/indestructible/train_platform,
 /area/trainstation/indoors/station)
-"Xp" = (
-/obj/effect/landmark/start/barber,
-/turf/open/misc/asphalt,
-/area/trainstation/outdoor)
 "Xw" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/start/cargo_technician,
@@ -3077,11 +2982,6 @@
 /obj/effect/spawner/random/trash/garbage,
 /turf/open/indestructible/train_platform/top,
 /area/trainstation/indoors/station)
-"XN" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/start/blacksmith,
-/turf/open/misc/asphalt,
-/area/trainstation/outdoor)
 "Yo" = (
 /obj/structure/window/reinforced/shuttle/survival_pod,
 /turf/open/floor/plating,
@@ -3446,7 +3346,7 @@ Qo
 LD
 RN
 rU
-kT
+jO
 lM
 EM
 qY
@@ -4286,7 +4186,7 @@ TN
 Aj
 RN
 Nk
-er
+TN
 Wl
 qB
 cX
@@ -4683,7 +4583,7 @@ OJ
 KD
 XA
 GI
-Ks
+Nd
 Az
 GI
 Cv
@@ -5267,7 +5167,7 @@ mi
 xM
 aR
 qH
-Xp
+Az
 Az
 EF
 MW
@@ -5391,7 +5291,7 @@ fo
 Az
 mi
 dT
-TL
+AN
 qH
 Nd
 Nj
@@ -5435,7 +5335,7 @@ mi
 Kh
 jN
 td
-XN
+Nd
 jk
 Az
 EF
@@ -5462,7 +5362,7 @@ Pb
 RQ
 Sk
 jj
-PN
+Tb
 Wl
 qB
 cX
@@ -5733,7 +5633,7 @@ Nd
 RF
 Az
 LZ
-ae
+Nd
 Az
 GI
 Cv
@@ -5798,7 +5698,7 @@ LK
 LD
 RN
 rU
-AG
+mD
 gq
 nq
 qY
@@ -5934,13 +5834,13 @@ My
 My
 fM
 fo
-ws
+zS
 hq
 xn
 zu
 Yz
 EX
-Xk
+cF
 cF
 qF
 aT
@@ -6065,7 +5965,7 @@ cF
 NN
 NN
 Yz
-QN
+zS
 ap
 cF
 xn
@@ -6638,7 +6538,7 @@ TN
 Aj
 RN
 Nk
-wm
+Pb
 nJ
 ep
 cX
@@ -6785,7 +6685,7 @@ WG
 WG
 WG
 Jh
-zd
+WG
 dC
 pU
 NV
@@ -8988,8 +8888,8 @@ nx
 Bh
 Dy
 hO
-eO
-iA
+Cv
+wH
 vk
 WG
 WG

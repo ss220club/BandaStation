@@ -2,3 +2,6 @@
 #define SMOOTH_GROUP_TALL_GRASS S_OBJ(102)
 #define SMOOTH_GROUP_WALLS_SHINNY S_OBJ(104)
 #define SMOOTH_GROUP_FLOOR_ASPHALT S_OBJ(105)
+
+
+#define SMOOTH_GROUP_EXPLORATION_FLOOR S_TURF(67) //turf/open/floor/iron/shuttle/exploration/smooth
