@@ -1,0 +1,4 @@
+author: "Ez-Briz"
+delete-after: True
+changes:
+  - bugfix: "СБшная маска (sechailer) снова защищает от перцовки в поднятом состоянии."

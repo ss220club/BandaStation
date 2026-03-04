@@ -117,7 +117,7 @@
 	return TRUE
 
 /datum/keybinding/admin/deadmin
-	hotkey_keys = list("Unbound")
+	hotkey_keys = list(UNBOUND_KEY)
 	name = "deadmin"
 	full_name = "Deadmin"
 	description = "Избавиться от своих админских сил"
@@ -131,7 +131,7 @@
 	return TRUE
 
 /datum/keybinding/admin/readmin
-	hotkey_keys = list("Unbound")
+	hotkey_keys = list(UNBOUND_KEY)
 	name = "readmin"
 	full_name = "Readmin"
 	description = "Вернуть свои админские силы"

@@ -1,8 +1,8 @@
 /datum/action/cooldown/spell/pointed/mind_gate
-	name = "Mind Gate"
-	desc = "Наносит вам 20 урона мозгу, и накладывает галлюцинации на цель, \
-			замешательство на 10 секунд, потерю дыхания и урон мозгу. \
-			It also blinds, mutes and deafens your target, if their sanity is low enough, they will be knocked down as well."
+	name = "Врата разума"
+	desc = "Наносит вам 20 урона мозгу, накладывает на цель галлюцинации и \
+			замешательство на 10 секунд, также вызывает удушение и наносит урон мозгу цели. \
+			Помимо этого навык ослепляет, лишает голоса и оглушает вашу цель, если её рассудок достаточно низок, она также будет сбита с ног."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -38,14 +38,14 @@
 
 	cast_on.adjust_confusion(10 SECONDS)
 	cast_on.adjust_oxy_loss(30)
-	cast_on.cause_hallucination(get_random_valid_hallucination_subtype(/datum/hallucination/body), "Mind gate, cast by [owner]")
-	cast_on.cause_hallucination(/datum/hallucination/delusion/preset/heretic/gate, "Caused by mindgate")
+	cast_on.cause_hallucination(get_random_valid_hallucination_subtype(/datum/hallucination/body), "Врата разума открыты [owner.declent_ru(INSTRUMENTAL)]")
+	cast_on.cause_hallucination(/datum/hallucination/delusion/preset/heretic/gate, "Вызваны вратами разума")
 	cast_on.adjust_organ_loss(ORGAN_SLOT_BRAIN, 30)
 
 	/// The duration of these effects are based on sanity, mainly for flavor but also to make it a weaker alpha strike
 	var/maximum_duration = 15 SECONDS
 	var/mind_gate_duration = ((SANITY_MAXIMUM - cast_on.mob_mood.sanity) / (SANITY_MAXIMUM - SANITY_INSANE)) * maximum_duration  + 1 SECONDS
-	to_chat(cast_on, span_warning("Your eyes cry out in pain, your ears bleed and your lips seal! THE MOON SMILES UPON YOU!"))
+	to_chat(cast_on, span_warning("Твои глаза кричат от боли, из ушей течет кровь, а губы сжимаются! ЛУНА УЛЫБАЕТСЯ ТЕБЕ!"))
 	cast_on.adjust_temp_blindness(mind_gate_duration)
 	cast_on.set_eye_blur_if_lower(mind_gate_duration + 1 SECONDS)
 

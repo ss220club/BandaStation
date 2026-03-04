@@ -1,7 +1,7 @@
 /datum/heretic_knowledge_tree_column/cosmic
 	route = PATH_COSMIC
 	ui_bgr = "node_cosmos"
-	complexity = "Hard"
+	complexity = "Высокая"
 	complexity_color = COLOR_RED
 	icon = list(
 		"icon" = 'icons/obj/weapons/khopesh.dmi',
@@ -28,7 +28,7 @@
 	tips = list(
 		"«Хватка Мансуса» помечает вашего противника «Звездной Меткой», а также запоминает место, где он её получил. При активации, помеченый враг перемещается в место, где метка была нанесена и ненадолго лишается способности двигаться.",
 		"«Космические руны» позволяют мгновенно переноситься между ними. Однако стоит быть осторожным, так как ими могут воспользоваться и неверные. Будьте креативны, заставьте своих противников перенестись прямо в ловушку. После перемещения, они также получат «Звездную Метку»!",
-		"Когда вы стоите на «Космической Руне», вы можете нажать на себя пустой рукой и активировать её.",
+		"Когда вы стоите на «Космической руне», вы можете нажать на себя пустой рукой и активировать её.",
 		"Противники помеченные Звездой не могут самостоятельно пересечь границу звездного поля. Однако, ничто не помешает их оттуда вытащить!",
 		"«Звёздный взрыв» одновременно является способностью повышающей вашу подвижность, а также неплохим способом выйти или вывести кого-то из боя. Используйте её, чтобы поймать в своё звездное поле сразу несколько человек.",
 		"«Касание Звезды» не даст цели телепортироваться от вас. Если они не смогут разорвать связь, то будут усыплены, а после телепортируются к вашим ногам.",
@@ -50,7 +50,7 @@
 /datum/heretic_knowledge/limited_amount/starting/base_cosmic
 	name = "Вечные врата"
 	desc = "Открывает перед вами Путь Космоса. \
-		Позволяет трансмутировать лист плазмы и нож в Космический Клинок. \
+		Позволяет трансмутировать лист плазмы и нож в Космический клинок. \
 		Одновременно можно иметь только два."
 	gain_text = "Туманность появилась в небе, ее пламенное рождение озарило меня. Это было начало великой трансценденции"
 	required_atoms = list(
@@ -83,7 +83,7 @@
 	drafting_tier = 5
 
 /datum/heretic_knowledge/spell/star_blast
-	name = "Звездный взрыв"
+	name = "Звёздный взрыв"
 	desc = "Дарует вам «Звёздный взрыв» - заклинание, пускающее медленно движущийся снаряд, создающий космические поля на своем пути. \
 		Любой, пораженный снарядом, получит урон от огня, потеряет сознание и распространит на людей в радиусе трёх клеток от себя Звёздную Метку."
 	gain_text = "С каждой новой жертвой, как никогда ранее четко, слышу я слова Зверя, стоящего за мной."
@@ -91,7 +91,7 @@
 	cost = 2
 
 /datum/heretic_knowledge/armor/cosmic
-
+	name = "Сотканный из Звёзд плащ"
 	desc = "Позволяет трансмутировать стол (или костюм), маску и лист плазмы в Сотканный из звёзд плащ, дающий защиту от космического пространства, а также способность левитировать по желанию. \
 			Действует как фокусировка, пока надет капюшон."
 	gain_text = "Подобно сияющим нитям, сияли звезды, соединяясь в шелковистую форму развевающегося плаща, который одновременно окутывает и обнажает мои плечи. \
@@ -116,7 +116,7 @@
 	cost = 2
 
 /datum/heretic_knowledge/blade_upgrade/cosmic
-	name = "Космический Клинок"
+	name = "Космический клинок"
 	desc = "Теперь ваш клинок своими ударами наносит «Метку Звезды» своим жертвам, позволяя атаковать язычников с меткой на расстоянии. \
 		Ваши атаки также наносят бонусный урон к двум предыдущим жертвам.\
 		Комбо сбрасывается после двух секунд без атаки, или если вы атакуете кого-то уже отмеченного. \
@@ -207,7 +207,7 @@
 		combo_duration += increase_amount
 
 /datum/heretic_knowledge/spell/cosmic_expansion
-	name = "Космическая Экспансия"
+	name = "Космическая экспансия"
 	desc = "Дарует вам «Космическая Экспансия» - заклинание, создающее вокруг вас область космических полей размером 5x5. \
 		Ближайшие существа также будут отмечены «Меткой Звезды»."
 	gain_text = "Теперь земля содрогалась подо мной. Зверь вселился во меня, и голос его опьянял меня."
@@ -295,8 +295,8 @@
 
 /// Replace an annoying griefer you were paired up to with a different but probably no less annoying player.
 /datum/action/cooldown/mob_cooldown/replace_star_gazer
-	name = "Reset Star Gazer Consciousness"
-	desc = "Replaces the mind of your summon with that of a different ghost."
+	name = "Перезагрузка сознания Звездочета"
+	desc = "Заменяет разум вызванного вами призрака разумом другого призрака."
 	button_icon = 'icons/mob/simple/mob.dmi'
 	button_icon_state = "ghost"
 	background_icon_state = "bg_heretic"
@@ -314,15 +314,15 @@
 
 	var/mob/living/to_reset = bad_dog.resolve()
 
-	to_chat(owner, span_hierophant("You prompt [to_reset] to shift it\'s personality..."))
-	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Do you want to play as [span_danger("[owner.real_name]'s")] [span_notice(to_reset.name)]?", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, alert_pic = to_reset, jump_target = owner, role_name_text = to_reset.name, amount_to_pick = 1)
+	to_chat(owner, span_hierophant("Вы предлагаете изменить личность [to_reset]..."))
+	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Хотите ли вы играть за [span_danger("[owner.real_name]")] [span_notice(to_reset.name)]?", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, alert_pic = to_reset, jump_target = owner, role_name_text = to_reset.name, amount_to_pick = 1)
 	if(isnull(chosen_one))
-		to_chat(owner, span_hierophant("Your request to shift [to_reset]'\s personality appears to have been denied... Looks like you're stuck with it for now."))
+		to_chat(owner, span_hierophant("Ваш запрос о смене личности [to_reset], судя по всему, был отклонён... Похоже пока придётся мириться с этим."))
 		StartCooldown()
 		return FALSE
-	to_chat(to_reset, span_hierophant("Your summoner reset you, and your body was taken over by a ghost. Looks like they weren't happy with your performance."))
-	to_chat(owner, span_hierophant("The mind of [to_reset] has twisted itself to suit you better."))
-	message_admins("[key_name_admin(chosen_one)] has taken control of ([ADMIN_LOOKUPFLW(to_reset)])")
+	to_chat(to_reset, span_hierophant("Ваш призыватель перезагрузил вас, и вашим телом завладел призрак. Похоже, он был не очень доволен вашими действиями."))
+	to_chat(owner, span_hierophant("Разум [to_reset] изменился, чтобы лучше подходить вам."))
+	message_admins("[key_name_admin(chosen_one)] взял контроль над ([ADMIN_LOOKUPFLW(to_reset)])")
 	to_reset.ghostize(FALSE)
 	to_reset.PossessByPlayer(chosen_one.key)
 	StartCooldown()
