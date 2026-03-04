@@ -712,7 +712,7 @@
 		// you need earmuffs, inacusiate, or replacement
 		ears.set_organ_damage(ears.maxHealth)
 	else if(ears.damage >= 5)
-		to_chat(src, span_warning("У вас начинает звенеть в ушах[ears.damage >= 15 ? " очень сильно!":"!"]"))
+		to_chat(src, span_warning("У вас начинает[ears.damage >= 15 ? " очень сильно":""] звенеть в ушах!"))
 
 
 //to damage the clothes worn by a mob

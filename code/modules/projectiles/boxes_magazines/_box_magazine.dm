@@ -259,7 +259,7 @@
 	if(!user.is_holding(src) || !user.put_in_hands(A)) //incase they're using TK
 		A.bounce_away(FALSE, NONE)
 	playsound(src, 'sound/items/weapons/gun/general/mag_bullet_insert.ogg', 60, TRUE)
-	to_chat(user, span_notice("Вы вытаскиваете патрон из [declent_ru(GENITIVE)]!"))
+	to_chat(user, span_notice("Вы извлекаете патрон из [declent_ru(GENITIVE)]!"))
 	update_appearance()
 
 /obj/item/ammo_box/examine(mob/user)
@@ -268,7 +268,7 @@
 	var/obj/item/ammo_casing/top_round = get_round()
 	if(!top_round)
 		return
-	. += "В нём осталось <b>[shells_left]</b> патрон[declension_ru(shells_left, "", "а", "ов")]."
+	. += "Внутри осталось <b>[shells_left]</b> патрон[declension_ru(shells_left, "", "а", "ов")]."
 	// this is kind of awkward phrasing, but it's the top/ready ammo in the box
 	// intended for people who have like three mislabeled magazines
 	. += span_notice("<b>[top_round]</b> готов[genderize_ru(top_round, "", "а", "о", "ы")] к стрельбе.")

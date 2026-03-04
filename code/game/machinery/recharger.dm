@@ -155,7 +155,7 @@
 			charge_cell(charging_cell.chargerate * recharge_coeff * seconds_per_tick, charging_cell)
 			if(charging_cell.charge >= charging_cell.maxcharge) //Inserted thing is at max charge/ammo, notify those around us
 				playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
-				say("[capitalize(charging.declent_ru(NOMINATIVE))] закончил[genderize_ru(charging.gender, "", "а", "о", "и")] зарядку!")
+				say("[capitalize(charging.declent_ru(NOMINATIVE))] заряжен[genderize_ru(charging.gender, "", "а", "о", "ы")]!")
 			else
 				using_power = TRUE
 		update_appearance()
@@ -169,7 +169,7 @@
 				use_energy(active_power_usage * seconds_per_tick)
 				if(power_pack.stored_ammo.len >= power_pack.max_ammo)
 					playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
-					say("[capitalize(charging.declent_ru(NOMINATIVE))] закончил[genderize_ru(charging.gender, "", "а", "о", "и")] зарядку!")
+					say("[capitalize(charging.declent_ru(NOMINATIVE))] заряжен[genderize_ru(charging.gender, "", "а", "о", "ы")]!")
 				else
 					using_power = TRUE
 		update_appearance()
@@ -188,7 +188,7 @@
 			use_energy(active_power_usage * recharge_coeff * seconds_per_tick)
 			if(recalibrating_gun.shots_before_degradation == recalibrating_gun.max_shots_before_degradation)
 				playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
-				say("[capitalize(charging.declent_ru(NOMINATIVE))] закончил[genderize_ru(charging.gender, "", "а", "о", "и")] рекалибровку!")
+				say("[capitalize(charging.declent_ru(NOMINATIVE))] рекалиброван[genderize_ru(charging.gender, "", "а", "о", "ы")]!")
 			else
 				using_power = TRUE
 		update_appearance()
