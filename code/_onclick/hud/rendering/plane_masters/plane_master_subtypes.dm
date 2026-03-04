@@ -248,9 +248,31 @@
 
 /atom/movable/screen/plane_master/game_world_above
 	name = "Upper Game"
-	documentation = "For stuff you want to draw like the game plane, but not ever below its contents"
+	documentation = "For stuff you want to draw like the game plane, but not ever below its contents. When FOV is on, masked by vision cone so objects hide outside cone."
 	plane = ABOVE_GAME_PLANE
 	render_relay_planes = list(RENDER_PLANE_GAME_WORLD)
+
+// BANDASTATION ADDITION START: FOV
+/atom/movable/screen/plane_master/game_world_above/Initialize(mapload, datum/hud/hud_owner, datum/plane_master_group/home, offset)
+	. = ..()
+
+/atom/movable/screen/plane_master/game_world_above/show_to(mob/mymob)
+	. = ..()
+	if(!. || !mymob)
+		return .
+	RegisterSignal(mymob, SIGNAL_ADDTRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_above_enabled), override = TRUE)
+	RegisterSignal(mymob, SIGNAL_REMOVETRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_above_disabled), override = TRUE)
+	if(HAS_TRAIT(mymob, TRAIT_FOV_APPLIED))
+		fov_above_enabled(mymob)
+
+/atom/movable/screen/plane_master/game_world_above/proc/fov_above_enabled(mob/source)
+	SIGNAL_HANDLER
+	add_filter("vision_cone", 1, alpha_mask_filter(render_source = OFFSET_RENDER_TARGET(FIELD_OF_VISION_BLOCKER_RENDER_TARGET, offset), flags = MASK_INVERSE))
+
+/atom/movable/screen/plane_master/game_world_above/proc/fov_above_disabled(mob/source)
+	SIGNAL_HANDLER
+	remove_filter("vision_cone")
+// BANDASTATION ADDITION END: FOV
 
 /atom/movable/screen/plane_master/seethrough
 	name = "Seethrough"

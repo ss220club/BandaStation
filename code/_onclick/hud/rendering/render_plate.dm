@@ -157,7 +157,7 @@
 
 /atom/movable/screen/plane_master/rendering_plate/specular
 	name = "Specular plate"
-	documentation = "Plate used to artificially increase lighting on certain pixels to poorly mimic shiny surfaces."
+	documentation = "Plate used to artificially increase lighting on certain pixels to poorly mimic shiny surfaces. When FOV is on, masked by vision cone."
 	plane = RENDER_PLANE_SPECULAR
 	appearance_flags = PLANE_MASTER|NO_CLIENT_COLOR
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -168,6 +168,25 @@
 /atom/movable/screen/plane_master/rendering_plate/specular/Initialize(mapload, datum/hud/hud_owner, datum/plane_master_group/home, offset)
 	. = ..()
 	add_filter("specular_mask", 1, alpha_mask_filter(render_source = OFFSET_RENDER_TARGET(SPECULAR_MASK_RENDER_TARGET, offset)))
+
+// BANDASTATION ADDITION START: FOV
+/atom/movable/screen/plane_master/rendering_plate/specular/show_to(mob/mymob)
+	. = ..()
+	if(!. || !mymob)
+		return .
+	RegisterSignal(mymob, SIGNAL_ADDTRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_specular_enabled), override = TRUE)
+	RegisterSignal(mymob, SIGNAL_REMOVETRAIT(TRAIT_FOV_APPLIED), PROC_REF(fov_specular_disabled), override = TRUE)
+	if(HAS_TRAIT(mymob, TRAIT_FOV_APPLIED))
+		fov_specular_enabled(mymob)
+
+/atom/movable/screen/plane_master/rendering_plate/specular/proc/fov_specular_enabled(mob/source)
+	SIGNAL_HANDLER
+	add_filter("vision_cone", 2, alpha_mask_filter(render_source = OFFSET_RENDER_TARGET(FIELD_OF_VISION_BLOCKER_RENDER_TARGET, offset), flags = MASK_INVERSE))
+
+/atom/movable/screen/plane_master/rendering_plate/specular/proc/fov_specular_disabled(mob/source)
+	SIGNAL_HANDLER
+	remove_filter("vision_cone")
+// BANDASTATION ADDITION END: FOV
 
 ///Contains all lighting objects
 /atom/movable/screen/plane_master/rendering_plate/lighting
