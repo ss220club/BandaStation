@@ -409,3 +409,4 @@
 	handle_temperature(H)
 	handle_battery(H)
 	update_ipc_temperature_icon(H)
+	handle_generation_life(H, seconds_per_tick, times_fired)

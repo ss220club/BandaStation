@@ -13,6 +13,8 @@
 		"set_brain_type"       = PROC_REF(set_brain_type),
 		"set_hef_part"         = PROC_REF(set_hef_part),
 		"set_os_password"      = PROC_REF(set_os_password),
+		"set_generation"       = PROC_REF(set_generation),
+		"set_gen1_module"      = PROC_REF(set_gen1_module),
 	)
 
 /// Append data to ui_data
@@ -53,6 +55,38 @@
 		list("key" = "positronic", "name" = "Позитронное ядро (стандарт)", "description" = "Стандартное позитронное ядро — искусственный интеллект на позитронной основе."),
 		list("key" = "mmi", "name" = "MMI-based Core", "description" = "Позитронный блок с установленным MMI. Содержит оцифрованное органическое сознание."),
 		list("key" = "borg", "name" = "Borg Module Core", "description" = "Позитронный блок с платой из киборга. Содержит ИИ-личность."),
+	)
+
+	// Список поколений
+	data["generations"] = list(
+		list(
+			"key" = IPC_GEN_MODULAR,
+			"name" = "Поколение I: Модульное",
+			"description" = "Специализированный робот-модуль. Иммунитет к оглушению, меньше ресурсов на ремонт. Требует правильного профессионального модуля — без него эффективность резко падает. Не может использовать оружие вне охранного модуля. Низкая скорость передвижения. ЭМИ вызывает оглушение 5-10 сек.",
+		),
+		list(
+			"key" = IPC_GEN_STANDARD,
+			"name" = "Поколение II: Стандартное",
+			"description" = "Базовая конфигурация КПБ. Нет особых бонусов или минусов — универсальная платформа для любой роли.",
+		),
+		list(
+			"key" = IPC_GEN_HUMANITY,
+			"name" = "Поколение III: Человечность",
+			"description" = "КПБ с эмоциональным ядром. Высокая человечность даёт бонусы к эффективности. Человечность падает со временем и от насилия, повышается от взаимодействия. При критически низкой человечности — дезориентация и визуальные глитчи. Препарат замедляет деградацию, но вызывает зависимость. Уязвим к ЭМИ.",
+		),
+		list(
+			"key" = IPC_GEN_CYBERDECK,
+			"name" = "Поколение IV: Кибердека",
+			"description" = "КПБ со встроенной кибердекой. Может взламывать консоли, двери и турели в зоне видимости. +20% эффективности действий. Сниженный урон от ЭМИ. Нагрев кибердеки растёт от действий — перегрев вызывает ожоги. Требует больше ресурсов на ремонт. ЭМИ отключает кибердеку.",
+		),
+	)
+
+	// Список профессиональных модулей (для Поколения I)
+	data["gen1_modules"] = list(
+		list("key" = IPC_MODULE_MEDICAL,     "name" = "Медицинский",    "description" = "Бонус к скорости хирургии и лечения. Обязательный модуль для медиков."),
+		list("key" = IPC_MODULE_ENGINEERING, "name" = "Инженерный",     "description" = "Бонус к строительству и ремонту. Обязательный модуль для инженеров."),
+		list("key" = IPC_MODULE_SECURITY,    "name" = "Охранный",       "description" = "Разрешает использование оружия. Бонус к боевым характеристикам."),
+		list("key" = IPC_MODULE_RESEARCH,    "name" = "Исследовательский", "description" = "Бонус к скорости исследований. Обязательный модуль для учёных."),
 	)
 
 	// Список производителей для HEF частей
@@ -133,6 +167,36 @@
 
 	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
 	customization["os_password"] = new_password
+
+	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
+	return TRUE
+
+/datum/preference_middleware/ipc_customization/proc/set_generation(list/params, mob/user)
+	var/generation = params["generation"]
+	if(!generation)
+		return FALSE
+
+	var/list/valid = list(IPC_GEN_MODULAR, IPC_GEN_STANDARD, IPC_GEN_HUMANITY, IPC_GEN_CYBERDECK)
+	if(!(generation in valid))
+		return FALSE
+
+	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
+	customization["generation"] = generation
+
+	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
+	return TRUE
+
+/datum/preference_middleware/ipc_customization/proc/set_gen1_module(list/params, mob/user)
+	var/gen1_module = params["module"]
+	if(!gen1_module)
+		return FALSE
+
+	var/list/valid = list(IPC_MODULE_MEDICAL, IPC_MODULE_ENGINEERING, IPC_MODULE_SECURITY, IPC_MODULE_RESEARCH)
+	if(!(gen1_module in valid))
+		return FALSE
+
+	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
+	customization["gen1_module"] = gen1_module
 
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
 	return TRUE

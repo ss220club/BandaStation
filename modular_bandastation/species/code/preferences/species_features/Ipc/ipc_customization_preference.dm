@@ -59,6 +59,18 @@
 	if(os_password && length(os_password) >= 1)
 		S.ipc_preset_os_password = os_password
 
+	// Применяем поколение и модуль
+	var/generation = customization["generation"]
+	if(generation && (generation in list(IPC_GEN_MODULAR, IPC_GEN_STANDARD, IPC_GEN_HUMANITY, IPC_GEN_CYBERDECK)))
+		S.ipc_generation = generation
+	else
+		S.ipc_generation = IPC_GEN_STANDARD
+	var/gen1_module = customization["gen1_module"]
+	if(gen1_module && (gen1_module in list(IPC_MODULE_MEDICAL, IPC_MODULE_ENGINEERING, IPC_MODULE_SECURITY, IPC_MODULE_RESEARCH)))
+		S.ipc_gen1_module = gen1_module
+	else
+		S.ipc_gen1_module = IPC_MODULE_SECURITY
+
 	target.update_body()
 
 /datum/preference/ipc_customization/deserialize(input, datum/preferences/preferences)
@@ -82,6 +94,8 @@
 		"hef_r_arm" = "unbranded",
 		"hef_l_leg" = "unbranded",
 		"hef_r_leg" = "unbranded",
+		"generation" = IPC_GEN_STANDARD,
+		"gen1_module" = IPC_MODULE_SECURITY,
 	)
 
 // ============================================

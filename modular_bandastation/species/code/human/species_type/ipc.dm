@@ -127,6 +127,36 @@
 	/// Зона установки зарядного порта (задаётся из настроек персонажа)
 	var/ipc_charger_arm_zone = BODY_ZONE_L_ARM
 
+	// ---- Поколение ----
+	/// Поколение КПБ: gen1_modular / gen2_standard / gen3_humanity / gen4_cyberdeck
+	var/ipc_generation = IPC_GEN_STANDARD
+	/// Для gen1: модуль профессии (medical / engineering / security / research)
+	var/ipc_gen1_module = IPC_MODULE_SECURITY
+
+	// ---- Gen 3: Человечность ----
+	/// Текущий уровень человечности (0-100)
+	var/humanity = 100
+	/// Время последнего снижения человечности (world.time)
+	var/last_humanity_decay_time = 0
+	/// Препарат активен — заморозка снижения
+	var/humanity_drug_active = FALSE
+	/// Время окончания действия препарата
+	var/humanity_drug_end_time = 0
+	/// Количество использований препарата (для зависимости)
+	var/humanity_drug_uses = 0
+
+	// ---- Gen 4: Кибердека ----
+	/// Тепловая нагрузка кибердеки (0-100)
+	var/cyberdeck_heat = 0
+	/// Кибердека отключена (ЭМИ)
+	var/cyberdeck_disabled = FALSE
+	/// Время повторного включения кибердеки после ЭМИ
+	var/cyberdeck_reenable_time = 0
+	/// Время последнего рассеивания тепла
+	var/last_heat_dissipate_time = 0
+	/// Кибердека в состоянии перегрева
+	var/cyberdeck_overheated = FALSE
+
 /datum/species/ipc/get_species_description()
 	return "IPC (Integrated Positronic Chassis) — искусственные синтетики на основе позитронного ядра. \
 	Их корпус полностью заменяет биологическую плоть — это модульная кибернетическая система, \
@@ -197,6 +227,9 @@
 		var/datum/action/innate/ipc_change_face/face_action = new()
 		face_action.Grant(H)
 
+	// Применяем механики поколения
+	apply_generation(H)
+
 	// ПРИМЕЧАНИЕ:
 	// - Chassis brand применяется через body_modifications автоматически
 	// - Тип мозга тоже через body_modifications
@@ -221,6 +254,9 @@
 	var/datum/action/innate/ipc_change_face/face_action = locate() in H.actions
 	if(face_action)
 		face_action.Remove(H)
+
+	// Убираем механики поколения
+	remove_generation(H)
 
 	// Удаляем ОС
 	QDEL_NULL(ipc_os)
@@ -503,6 +539,12 @@
 	to_chat(source, span_warning("Удар током повысил температуру процессора на 10°C!"))
 
 /datum/species/ipc/proc/handle_emp(mob/living/carbon/human/H, severity)
+	// Поколение I — особый ЭМИ (оглушение вместо паралича)
+	if(ipc_generation == IPC_GEN_MODULAR)
+		gen1_handle_emp(H, severity)
+		// Gen1 уязвим к ЭМИ-стану, но не получает базового урона/паралича
+		return
+
 	var/emp_damage = 0
 	switch(severity)
 		if(EMP_HEAVY)
@@ -517,6 +559,10 @@
 	H.apply_damage(emp_damage * 0.5, BRUTE, forced = TRUE)
 	H.apply_damage(emp_damage * 0.5, BURN, forced = TRUE)
 	cpu_temperature = min(cpu_temperature + (emp_damage * 0.5), cpu_temp_critical)
+
+	// Поколение IV — кибердека отключается от ЭМИ
+	if(ipc_generation == IPC_GEN_CYBERDECK)
+		gen4_emp_disable_cyberdeck(H, severity)
 
 /obj/item/organ/brain/positronic/emp_act(severity)
 	. = ..()
