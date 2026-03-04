@@ -31,11 +31,6 @@
 /datum/mood/ipc_neutral/unmodify_hud()
 	return
 
-/mob/living/carbon/human/setup_mood()
-	if(istype(dna?.species, /datum/species/ipc))
-		mob_mood = new /datum/mood/ipc_neutral(src)
-		return
-	return ..()
 
 // ============================================
 // HUD ИНДИКАТОРЫ ДЛЯ IPC
@@ -292,6 +287,11 @@
 	H.update_body()
 	H.update_body_parts()
 
+	// Заменяем обычный муд нейтральным (setup_mood() вызывается до dna.species)
+	if(H.mob_mood)
+		QDEL_NULL(H.mob_mood)
+	H.mob_mood = new /datum/mood/ipc_neutral(H)
+
 	// Добавляем кастомные HUD элементы
 	RegisterSignal(H, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
 	if(H.hud_used)
@@ -301,6 +301,10 @@
 	. = ..()
 	UnregisterSignal(H, COMSIG_MOB_HUD_CREATED)
 	remove_ipc_hud_elements(H, new_species)
+	// Восстанавливаем обычный муд при смене вида
+	if(istype(H.mob_mood, /datum/mood/ipc_neutral))
+		QDEL_NULL(H.mob_mood)
+		H.setup_mood()
 
 /datum/species/ipc/proc/on_hud_created(datum/source)
 	SIGNAL_HANDLER
