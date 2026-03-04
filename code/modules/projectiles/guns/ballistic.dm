@@ -287,7 +287,7 @@
 	if(!burst_fire_selection)
 		burst_size = 1
 		fire_delay = 0 SECONDS
-		balloon_alert(user, "режим - полу-автомат")
+		balloon_alert(user, "режим - полуавтомат")
 	else
 		burst_size = initial(burst_size)
 		fire_delay = initial(fire_delay)
@@ -493,7 +493,7 @@
 		if (insert_magazine(user, tac_load, FALSE))
 			balloon_alert(user, "извлечение [magazine_wording]")
 		else
-			to_chat(user, span_warning("Вы извлекаете [magazine_wording], но не можете вставить новый. Как неловко."))
+			to_chat(user, span_warning("Вы извлекаете магазин, но не можете вставить новый. Как неловко."))
 			magazine = null
 	else
 		magazine = null
@@ -534,22 +534,22 @@
 
 	if(istype(tool, /obj/item/suppressor))
 		if(!can_suppress)
-			balloon_alert(user, "[tool.name] doesn't fit!")
+			balloon_alert(user, "не подходит!")
 			return ITEM_INTERACT_FAILURE
 
 		if(!user.is_holding(src))
-			balloon_alert(user, "not in hand!")
+			balloon_alert(user, "не в руке!")
 			return ITEM_INTERACT_FAILURE
 
 		if(suppressed)
-			balloon_alert(user, "already has a suppressor!")
+			balloon_alert(user, "уже имеет глушитель!")
 			return ITEM_INTERACT_FAILURE
 
 		if(!user.transferItemToLoc(tool, src))
-			balloon_alert(user, "cannot attach!")
+			balloon_alert(user, "нельзя прикрепить!")
 			return ITEM_INTERACT_FAILURE
 
-		balloon_alert(user, "[tool.name] attached")
+		balloon_alert(user, "глушитель прикреплён")
 		install_suppressor(tool)
 		return ITEM_INTERACT_SUCCESS
 
@@ -567,7 +567,7 @@
 	if (!num_loaded)
 		return FALSE
 
-	balloon_alert(user, "[num_loaded] [cartridge_wording]\s loaded")
+	balloon_alert(user, "[num_loaded] патрон[declension_ru(num_loaded, "", "а", "ов")] заряжен[declension_ru(num_loaded, "", "о", "ы")]")
 	playsound(src, load_sound, load_sound_volume, load_sound_vary)
 	if (chambered == null && bolt_type == BOLT_TYPE_NO_BOLT)
 		chamber_round()
@@ -583,7 +583,7 @@
 /obj/item/gun/ballistic/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	var/could_it_misfire = can_misfire || chambered.can_misfire
 	if(target != user && chambered.loaded_projectile && could_it_misfire && prob(misfire_probability) && blow_up(user))
-		to_chat(user, span_userdanger("[capitalize(declent_ru(NOMINATIVE))] дает осечку!"))
+		to_chat(user, span_userdanger("[capitalize(declent_ru(NOMINATIVE))] даёт осечку!"))
 		return
 
 	if (sawn_off)
@@ -689,11 +689,11 @@
 
 	if (!num_unloaded)
 		if (!forced)
-			balloon_alert(user, "it's empty!")
+			balloon_alert(user, "пуст!")
 		return
 
 	if (!forced)
-		balloon_alert(user, "[num_unloaded] [cartridge_wording]\s unloaded")
+		balloon_alert(user, "[num_unloaded] патрон[declension_ru(num_unloaded, "", "а", "ов")] разряжен[declension_ru(num_unloaded, "", "о", "ы")]")
 	playsound(user, eject_sound, eject_sound_volume, eject_sound_vary)
 	update_appearance()
 
@@ -881,7 +881,7 @@ GLOBAL_LIST_INIT(gun_saw_types, typecacheof(list(
 
 /obj/item/suppressor
 	name = "suppressor"
-	desc = "A syndicate small-arms suppressor for maximum espionage."
+	desc = "Глушитель Синдиката для малокалиберного оружия, предназначенный для максимальной скрытности."
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	icon_state = "suppressor"
 	w_class = WEIGHT_CLASS_TINY

@@ -133,7 +133,7 @@
 		if (SUPPRESSED_QUIET)
 			to_chat(src, span_userdanger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по вам[organ_hit_text]!"))
 		if (SUPPRESSED_NONE)
-			visible_message(span_danger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по [declent_ru(DATIVE)][organ_hit_text]!"), \
+			visible_message(span_danger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает[organ_hit_text] [declent_ru(DATIVE)]!"), \
 					span_userdanger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по вам[organ_hit_text]!"), null, COMBAT_MESSAGE_RANGE)
 			if(is_blind())
 				to_chat(src, span_userdanger("Вы чувствуете, как что-то попадает по вам[organ_hit_text]!"))
@@ -707,12 +707,12 @@
 		SEND_SOUND(src, sound('sound/items/weapons/flash_ring.ogg',0, 1, 0, 250))
 
 	if(ears.damage >= 15 && prob(ears.damage - 5))
-		to_chat(src, span_userdanger("You can't hear anything!"))
+		to_chat(src, span_userdanger("Вы ничего не слышите!"))
 		// Makes you deaf, enough that you need a proper source of healing, it won't self heal
 		// you need earmuffs, inacusiate, or replacement
 		ears.set_organ_damage(ears.maxHealth)
 	else if(ears.damage >= 5)
-		to_chat(src, span_warning("Your ears start to ring[ears.damage >= 15 ? " badly!":"!"]"))
+		to_chat(src, span_warning("У вас начинает звенеть в ушах[ears.damage >= 15 ? " очень сильно!":"!"]"))
 
 
 //to damage the clothes worn by a mob

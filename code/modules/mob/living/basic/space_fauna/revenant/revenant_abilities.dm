@@ -336,8 +336,8 @@
 		haunt_color = "#823abb", \
 		haunt_duration = rand(1 MINUTES, 3 MINUTES), \
 		aggro_radius = aoe_radius - 1, \
-		spawn_message = span_revenwarning("[victim.declent_ru(NOMINATIVE)] начинает парить и кружиться в воздухе, светясь ужасным фиолетовым светом!"), \
-		despawn_message = span_revenwarning("[victim.declent_ru(NOMINATIVE)] падает обратно на землю и снова замирает."), \
+		spawn_message = span_revenwarning("[capitalize(victim.declent_ru(NOMINATIVE))] начинает парить и кружиться в воздухе, светясь ужасным фиолетовым светом!"), \
+		despawn_message = span_revenwarning("[capitalize(victim.declent_ru(NOMINATIVE))] падает обратно на землю и снова замирает."), \
 	)
 
 #undef REVENANT_DEFILE_MIN_DAMAGE

@@ -1,6 +1,6 @@
 /obj/item/ammo_casing
 	name = "bullet casing"
-	desc = "A bullet casing."
+	desc = "Гильза от пули."
 	icon = 'icons/obj/weapons/guns/ammo.dmi'
 	icon_state = "s-casing"
 	worn_icon_state = "bullet"
@@ -114,7 +114,7 @@
 	return ..()
 
 /obj/item/ammo_casing/update_desc()
-	desc = "[initial(desc)][loaded_projectile ? null : " This one is spent."]"
+	desc = "[initial(desc)][loaded_projectile ? null : " Этот уже стрелянный."]"
 	return ..()
 
 /*
@@ -149,9 +149,9 @@
 					continue
 			if (boolets > 0)
 				box.update_appearance()
-				to_chat(user, span_notice("You collect [boolets] [box.casing_phrasing]\s. [box] now contains [box.stored_ammo.len] [box.casing_phrasing]\s."))
+				to_chat(user, span_notice("Вы собрали [boolets] патрон[declension_ru(boolets, "", "а", "ов")]. [capitalize(box.declent_ru(NOMINATIVE))] теперь содержит [box.stored_ammo.len] патрон[declension_ru(box.stored_ammo.len, "", "а", "ов")]."))
 			else
-				to_chat(user, span_warning("You fail to collect anything!"))
+				to_chat(user, span_warning("Вам не удаётся ничего собрать!"))
 	else
 		return ..()
 

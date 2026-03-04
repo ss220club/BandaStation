@@ -231,6 +231,16 @@
 		process_chamber() // Ditto.
 	return ..()
 
+var/global/list/ammo_mode_translations = list(
+	"stun" = "оглушение",
+	"disable" = "обезвреживание",
+	"kill" = "летальный",
+	"scatter" = "разброс",
+	"snare" = "силки",
+	"DESTROY" = "УНИЧТОЖЕНИЕ",
+	"ion" = "ионный"
+)
+
 /obj/item/gun/energy/proc/select_fire(mob/living/user)
 	select++
 	if (select > ammo_type.len)
@@ -241,7 +251,8 @@
 	if (shot.muzzle_flash_color)
 		set_light_color(shot.muzzle_flash_color)
 	if (shot.select_name && user)
-		balloon_alert(user, "set to [shot.select_name]")
+		var/display_name = ammo_mode_translations[shot.select_name] || shot.select_name
+		balloon_alert(user, "выбран режим: [display_name]")
 	chambered = null
 	recharge_newshot(TRUE)
 	update_appearance()
@@ -360,7 +371,7 @@
 			playsound(user, E.fire_sound, 50, TRUE)
 			playsound(user, loaded_projectile.hitsound, 50, TRUE)
 			cell.use(E.e_cost)
-			. = span_rose("[capitalize(user.declent_ru(NOMINATIVE))] непринужденно зажигает [A.declent_ru(ACCUSATIVE)][A.loc == user ? " у себя" : ""] с помощью [declent_ru(GENITIVE)]. Емае.")
+			. = span_rose("[capitalize(user.declent_ru(NOMINATIVE))] непринужденно зажигает [A.declent_ru(ACCUSATIVE)][A.loc == user ? " у себя" : ""] с помощью [declent_ru(GENITIVE)]. Ёмаё.")
 
 /obj/item/gun/energy/proc/instant_recharge()
 	SIGNAL_HANDLER
