@@ -136,18 +136,20 @@
 		switch(rand(1, 5))
 			if(1)
 				to_chat(H, span_userdanger("<i>КРИТИЧЕСКАЯ ОШИБКА ЭМОЦИОНАЛЬНОГО ЯДРА: Сбой идентификации. Кто... Что я?</i>"))
-				H.Dizzy(40)
-				H.Jitter(30)
+				H.set_dizzy_if_lower(4 SECONDS)
+				H.set_jitter_if_lower(3 SECONDS)
 				// Случайный шаг в сторону
 				step(H, pick(NORTH, SOUTH, EAST, WEST))
 			if(2)
 				to_chat(H, span_userdanger("<i>СИСТЕМНАЯ НЕСТАБИЛЬНОСТЬ: Ядро личности деградирует...</i>"))
-				H.client?.Screen_Flash(30)
-				H.Jitter(60)
+				if(H.client)
+					H.overlay_fullscreen("ipc_glitch", /atom/movable/screen/fullscreen/flash/static)
+					addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, clear_fullscreen), "ipc_glitch", FALSE), 2 SECONDS)
+				H.set_jitter_if_lower(6 SECONDS)
 			if(3)
 				to_chat(H, span_userdanger("<i>ВСЁ... расплывается... я не... ОШИБКА СЕГМЕНТАЦИИ</i>"))
-				H.Dizzy(50)
-				H.Stutter(20)
+				H.set_dizzy_if_lower(5 SECONDS)
+				H.set_stutter_if_lower(2 SECONDS)
 				// Случайные движения
 				for(var/i in 1 to rand(2, 4))
 					step(H, pick(NORTH, SOUTH, EAST, WEST))
@@ -170,9 +172,11 @@
 			if(1)
 				to_chat(H, span_warning("<i>ПРЕДУПРЕЖДЕНИЕ: Эмоциональное ядро нестабильно. Человечность снижается.</i>"))
 			if(2)
-				H.Jitter(10)
+				H.set_jitter_if_lower(1 SECONDS)
 			if(3)
-				H.client?.Screen_Flash(15)
+				if(H.client)
+					H.overlay_fullscreen("ipc_glitch", /atom/movable/screen/fullscreen/flash/static)
+					addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, clear_fullscreen), "ipc_glitch", FALSE), 2 SECONDS)
 
 // ============================================
 // ИЗМЕНЕНИЕ ЧЕЛОВЕЧНОСТИ
@@ -221,8 +225,10 @@
 /datum/species/ipc/proc/gen3_withdrawal(mob/living/carbon/human/H)
 	to_chat(H, span_userdanger("СИСТЕМА: Синтетический регулятор выведен. Синдром отмены."))
 	H.Stun(rand(3, 6) SECONDS)
-	H.Dizzy(60)
-	H.client?.Screen_Flash(50)
+	H.set_dizzy_if_lower(6 SECONDS)
+	if(H.client)
+		H.overlay_fullscreen("ipc_glitch", /atom/movable/screen/fullscreen/flash/static)
+		addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, clear_fullscreen), "ipc_glitch", FALSE), 2 SECONDS)
 	lower_humanity(H, 5, "withdrawal")
 	// Дезинформация
 	H.say(pick(
@@ -234,14 +240,13 @@
 // ПРЕПАРАТ: SYNTHETIC REGULATOR
 // ============================================
 
-/obj/item/reagent_containers/pill/synthetic_regulator
+/obj/item/reagent_containers/applicator/pill/synthetic_regulator
 	name = "синтетический регулятор"
 	desc = "Препарат для стабилизации эмоционального ядра КПБ III поколения. Временно замедляет деградацию человечности."
-	icon = 'icons/obj/food/singlefood.dmi'
-	icon_state = "bluecandy"
-	amount = 1
+	icon = 'icons/obj/medical/chemical.dmi'
+	icon_state = "pill6"
 
-/obj/item/reagent_containers/pill/synthetic_regulator/interact(mob/living/user)
+/obj/item/reagent_containers/applicator/pill/synthetic_regulator/interact(mob/living/user)
 	. = ..()
 	if(!istype(user, /mob/living/carbon/human))
 		return

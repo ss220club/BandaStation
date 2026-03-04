@@ -11,6 +11,9 @@
 // - Не может использовать Перегрузку
 
 #define IPC_GEN1_TRAIT_SOURCE "ipc_gen1"
+#define TRAIT_MEDICAL_ACES    "ipc_medical_aces"
+#define TRAIT_ENGINEERING_ACES "ipc_engineering_aces"
+#define TRAIT_SCIENCE_ACES    "ipc_science_aces"
 
 /datum/movespeed_modifier/ipc_gen1_slow
 	id = "ipc_gen1_slow"
@@ -102,11 +105,11 @@
 	var/obj/item/held = source.get_active_held_item()
 	if(!held)
 		return
-	// Блокируем только если это оружие (имеет force > 0 и не является инструментом)
-	if(held.force > 0 && !istype(held, /obj/item/melee/transforming) && !istype(held, /obj/item/surgical))
+	// Блокируем только если это оружие (имеет force > 0)
+	if(held.force > 0)
 		source.balloon_alert(source, "охранный модуль не установлен!")
-		playsound(source, 'sound/machines/buzz-two.ogg', 30, FALSE)
-		return COMSIG_MOB_CANCEL_ATTACK_CHAIN
+		playsound(source, 'sound/machines/buzz/buzz-two.ogg', 30, FALSE)
+		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 // ============================================
 // ЭМИ: ОГЛУШЕНИЕ ДЛЯ ПОКОЛЕНИЯ I

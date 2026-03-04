@@ -29,12 +29,12 @@
 	if(!istype(H) || !ipc_species)
 		return
 	if(ipc_species.cyberdeck_disabled)
-		balloon_alert(H, "кибердека отключена (ЭМИ)")
-		playsound(H, 'sound/machines/buzz-two.ogg', 30, FALSE)
+		H.balloon_alert(H, "кибердека отключена (ЭМИ)")
+		playsound(H, 'sound/machines/buzz/buzz-two.ogg', 30, FALSE)
 		return
 	if(ipc_species.cyberdeck_heat >= CYBERDECK_MAX_HEAT)
-		balloon_alert(H, "перегрев кибердеки!")
-		playsound(H, 'sound/machines/buzz-two.ogg', 30, FALSE)
+		H.balloon_alert(H, "перегрев кибердеки!")
+		playsound(H, 'sound/machines/buzz/buzz-two.ogg', 30, FALSE)
 		return
 	// Открываем TGUI
 	ipc_species.cyberdeck_ui_interact(H)
@@ -127,8 +127,10 @@
 
 	// Визуальные помехи
 	if(prob(10 * seconds_per_tick))
-		H.Jitter(10)
-		H.client?.Screen_Flash(20)
+		H.set_jitter_if_lower(1 SECONDS)
+		if(H.client)
+			H.overlay_fullscreen("ipc_glitch", /atom/movable/screen/fullscreen/flash/static)
+			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, clear_fullscreen), "ipc_glitch", FALSE), 2 SECONDS)
 
 // ============================================
 // ЭМИ: ОТКЛЮЧЕНИЕ КИБЕРДЕКИ
@@ -204,7 +206,7 @@
 		return TRUE
 
 	if(cyberdeck_disabled)
-		balloon_alert(user, "кибердека отключена!")
+		user.balloon_alert(user, "кибердека отключена!")
 		return TRUE
 
 	if(action == "hack")
@@ -227,14 +229,14 @@
 			"heat_cost" = CYBERDECK_HEAT_HACK_DOOR,
 			"status" = door.density ? "закрыта" : "открыта",
 		)
-	if(istype(A, /obj/machinery/turret))
-		var/obj/machinery/turret/turret = A
+	if(istype(A, /obj/machinery/porta_turret))
+		var/obj/machinery/porta_turret/turret = A
 		return list(
 			"uid" = "\ref[turret]",
 			"type" = "turret",
 			"name" = turret.name,
 			"heat_cost" = CYBERDECK_HEAT_HACK_TURRET,
-			"status" = turret.active ? "активна" : "неактивна",
+			"status" = turret.on ? "активна" : "неактивна",
 		)
 	if(istype(A, /obj/machinery/computer))
 		var/obj/machinery/computer/console = A
@@ -243,7 +245,7 @@
 			"type" = "console",
 			"name" = console.name,
 			"heat_cost" = CYBERDECK_HEAT_HACK_CONSOLE,
-			"status" = console.stat == NOPOWER ? "без питания" : "активна",
+			"status" = (console.machine_stat & NOPOWER) ? "без питания" : "активна",
 		)
 	return null
 
@@ -251,7 +253,7 @@
 	// Находим объект по ref
 	var/atom/target = locate(uid)
 	if(!target || get_dist(H, target) > CYBERDECK_SCAN_RANGE)
-		balloon_alert(H, "цель вне зоны досягаемости")
+		H.balloon_alert(H, "цель вне зоны досягаемости")
 		return
 
 	// Добавляем тепло
@@ -275,8 +277,8 @@
 		if("console")
 			hack_console(H, target, hack_action)
 
-	playsound(H, 'sound/machines/terminal_prompt.ogg', 40, FALSE)
-	SStgui.update_uis(locate() in H.actions)  // обновляем интерфейс
+	playsound(H, 'sound/machines/terminal/terminal_alert.ogg', 40, FALSE)
+	SStgui.update_uis(src)  // обновляем интерфейс
 
 /datum/species/ipc/proc/hack_door(mob/living/carbon/human/H, obj/machinery/door/airlock/door, action)
 	if(!istype(door))
@@ -295,18 +297,16 @@
 			to_chat(H, span_notice("КИБЕРДЕКА: Взлом шлюза [door.name] — снимаю блокировку."))
 			door.bolt(FALSE)
 
-/datum/species/ipc/proc/hack_turret(mob/living/carbon/human/H, obj/machinery/turret/turret, action)
+/datum/species/ipc/proc/hack_turret(mob/living/carbon/human/H, obj/machinery/porta_turret/turret, action)
 	if(!istype(turret))
 		return
 	switch(action)
 		if("disable")
 			to_chat(H, span_notice("КИБЕРДЕКА: Взлом турели [turret.name] — деактивирую."))
-			turret.active = FALSE
-			turret.update_appearance()
+			turret.toggle_on(FALSE)
 		if("enable")
 			to_chat(H, span_notice("КИБЕРДЕКА: Взлом турели [turret.name] — активирую."))
-			turret.active = TRUE
-			turret.update_appearance()
+			turret.toggle_on(TRUE)
 
 /datum/species/ipc/proc/hack_console(mob/living/carbon/human/H, obj/machinery/computer/console, action)
 	if(!istype(console))
