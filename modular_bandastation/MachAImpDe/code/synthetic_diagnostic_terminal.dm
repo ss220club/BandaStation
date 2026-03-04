@@ -717,10 +717,12 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 
 	return system_messages
 
-/obj/machinery/computer/operating/synthetic/ui_act(action, list/params)
+/obj/machinery/computer/operating/synthetic/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
 		return
+
+	var/mob/user = ui.user
 
 	switch(action)
 		if("change_zone")
@@ -743,7 +745,7 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 				return FALSE
 			var/datum/ipc_virus/target_virus = ipc_species.ipc_os.viruses[virus_index]
 			if(ipc_species.ipc_os.remove_virus_by_roboticist(target_virus))
-				to_chat(usr, span_notice("Вирус успешно удалён из системы пациента."))
+				to_chat(user, span_notice("Вирус успешно удалён из системы пациента."))
 				to_chat(patient, span_notice("ОС: Обнаружено внешнее вмешательство. Вирус удалён роботехником."))
 			return TRUE
 
@@ -757,7 +759,7 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			var/datum/species/ipc/ipc_species = patient.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
-			ipc_species.ipc_os.request_remote_access(usr)
+			ipc_species.ipc_os.request_remote_access(user)
 			return TRUE
 
 		if("login_os_password")
@@ -773,7 +775,7 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			var/input_password = params["password"]
 			if(!input_password)
 				return FALSE
-			ipc_species.ipc_os.remote_login(usr, input_password)
+			ipc_species.ipc_os.remote_login(user, input_password)
 			return TRUE
 
 		if("disconnect_os_remote")
@@ -814,7 +816,7 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 					new_virus = new /datum/ipc_virus/neural_hijack()
 			if(new_virus)
 				ipc_species.ipc_os.infect(new_virus)
-				to_chat(usr, span_notice("Тестовый вирус внедрён."))
+				to_chat(user, span_notice("Тестовый вирус внедрён."))
 			return TRUE
 
 // ============================================
