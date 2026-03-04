@@ -357,13 +357,13 @@ GLOBAL_LIST_INIT(ammo_mode_translations, list(
 		if(!loaded_projectile)
 			. = ""
 		else if(loaded_projectile.damage <= 0 || loaded_projectile.damage_type == STAMINA)
-			user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается зажечь [A.declent_ru(ACCUSATIVE)][A.loc == user ? " у себя" : ""] с помощью [declent_ru(GENITIVE)], но ничего не происходит. Тупица."))
+			user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается зажечь [A.loc == user ? "свою " : " "][A.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)], но ничего не происходит. Тупица."))
 			playsound(user, E.fire_sound, 50, TRUE)
 			playsound(user, loaded_projectile.hitsound, 50, TRUE)
 			cell.use(E.e_cost)
 			. = ""
 		else if(loaded_projectile.damage_type != BURN)
-			user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается зажечь [A.declent_ru(ACCUSATIVE)][A.loc == user ? " у себя" : ""] с помощью [declent_ru(GENITIVE)], но создает лишь разрушение. Тупица."))
+			user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается зажечь [A.declent_ru(ACCUSATIVE)][A.loc == user ? "свою " : " "][A.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)], но создает лишь разрушение. Тупица."))
 			playsound(user, E.fire_sound, 50, TRUE)
 			playsound(user, loaded_projectile.hitsound, 50, TRUE)
 			cell.use(E.e_cost)
@@ -373,7 +373,7 @@ GLOBAL_LIST_INIT(ammo_mode_translations, list(
 			playsound(user, E.fire_sound, 50, TRUE)
 			playsound(user, loaded_projectile.hitsound, 50, TRUE)
 			cell.use(E.e_cost)
-			. = span_rose("[capitalize(user.declent_ru(NOMINATIVE))] непринужденно зажигает [A.declent_ru(ACCUSATIVE)][A.loc == user ? " у себя" : ""] с помощью [declent_ru(GENITIVE)]. Ёмаё.")
+			. = span_rose("[capitalize(user.declent_ru(NOMINATIVE))] непринужденно зажигает [A.declent_ru(ACCUSATIVE)][A.loc == user ? "свою " : " "][A.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]. Ёмаё.")
 
 /obj/item/gun/energy/proc/instant_recharge()
 	SIGNAL_HANDLER

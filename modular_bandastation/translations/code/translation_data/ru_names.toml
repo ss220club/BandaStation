@@ -4864,7 +4864,7 @@ prepositional = "экспансивной пуле 9мм"
 gender = "female"
 
 ["9mm incendiary bullet"]
-nominative = "зажигательная пуля 9 м"
+nominative = "зажигательная пуля 9мм"
 genitive = "зажигательной пули 9мм"
 dative = "зажигательной пуле 9мм"
 accusative = "зажигательную пулю 9мм"
@@ -4918,12 +4918,12 @@ prepositional = "дробинке «Жнец» 10мм"
 gender = "female"
 
 [".160 smart bullet"]
-nominative = "самонаводящаяся пуля .160"
-genitive = "самонаводящейся пули .160"
-dative = "самонаводящейся пуле .160"
-accusative = "самонаводящуюся пулю .160"
-instrumental = "самонаводящейся пулей .160"
-prepositional = "самонаводящейся пуле .160"
+nominative = "самонаводящаяся пуля .160 калибра"
+genitive = "самонаводящейся пули .160 калибра"
+dative = "самонаводящейся пуле .160 калибра"
+accusative = "самонаводящуюся пулю .160 калибра"
+instrumental = "самонаводящейся пулей .160 калибра"
+prepositional = "самонаводящейся пуле .160 калибра"
 gender = "female"
 
 # MARK: Ammo
