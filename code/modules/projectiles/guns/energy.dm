@@ -231,7 +231,8 @@
 		process_chamber() // Ditto.
 	return ..()
 
-var/global/list/ammo_mode_translations = list(
+//BANDASTATION ADDITION: START
+GLOBAL_LIST_INIT(ammo_mode_translations, list(
 	"stun" = "оглушение",
 	"disable" = "обезвреживание",
 	"kill" = "летальный",
@@ -239,7 +240,8 @@ var/global/list/ammo_mode_translations = list(
 	"snare" = "силки",
 	"DESTROY" = "УНИЧТОЖЕНИЕ",
 	"ion" = "ионный"
-)
+))
+//BANDASTATION ADDITION: END
 
 /obj/item/gun/energy/proc/select_fire(mob/living/user)
 	select++
@@ -251,7 +253,7 @@ var/global/list/ammo_mode_translations = list(
 	if (shot.muzzle_flash_color)
 		set_light_color(shot.muzzle_flash_color)
 	if (shot.select_name && user)
-		var/display_name = ammo_mode_translations[shot.select_name] || shot.select_name
+		var/display_name = GLOB.ammo_mode_translations[shot.select_name] || shot.select_name // BANDASTATION ADDITION
 		balloon_alert(user, "выбран режим: [display_name]")
 	chambered = null
 	recharge_newshot(TRUE)

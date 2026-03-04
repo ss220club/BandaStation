@@ -133,7 +133,7 @@
 		if (SUPPRESSED_QUIET)
 			to_chat(src, span_userdanger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по вам[organ_hit_text]!"))
 		if (SUPPRESSED_NONE)
-			visible_message(span_danger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает[organ_hit_text] [declent_ru(DATIVE)]!"), \
+			visible_message(span_danger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает [declent_ru(DATIVE)][organ_hit_text]!"), \
 					span_userdanger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по вам[organ_hit_text]!"), null, COMBAT_MESSAGE_RANGE)
 			if(is_blind())
 				to_chat(src, span_userdanger("Вы чувствуете, как что-то попадает по вам[organ_hit_text]!"))

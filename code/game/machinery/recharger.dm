@@ -29,7 +29,7 @@
 /obj/machinery/recharger/examine(mob/user)
 	. = ..()
 	if(!in_range(user, src) && !issilicon(user) && !isobserver(user))
-		. += span_warning("Вы слишком далеко, что рассмотреть содержимое и дисплей [declent_ru(GENITIVE)]!")
+		. += span_warning("Вы слишком далеко, чтобы рассмотреть содержимое и дисплей [declent_ru(GENITIVE)]!")
 		return
 
 	if(charging)
