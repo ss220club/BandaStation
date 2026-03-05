@@ -68,7 +68,7 @@
 
 	if(!IS_HERETIC_OR_MONSTER(teleportee))
 		teleportee.apply_damage(20, BRUTE) //so they dont roll it like a jackpot machine to see if they can land in the armory
-		to_chat(teleportee, span_userdanger("Вы проваливаетесь в [src.declent_ru(NOMINATIVE)] сраженный силами, недоступными вашему пониманию, приземляясь совсем не там, куда, как вы думали, направлялись. "))
+		to_chat(teleportee, span_userdanger("Вы проваливаетесь в [src.declent_ru(NOMINATIVE)], сражённый силами, недоступными вашему пониманию, приземляясь совсем не там, куда, как вы думали, направлялись. "))
 
 	INVOKE_ASYNC(src, PROC_REF(async_opendoor), doorstination)
 
