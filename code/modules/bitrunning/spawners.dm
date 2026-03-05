@@ -92,7 +92,7 @@
 	spawner_job_path = /datum/job/space_syndicate
 
 /datum/outfit/virtual_syndicate
-	name = "Виртуальный Синдикат"
+	name = "Virtual Syndie"
 	id = /obj/item/card/id/advanced/chameleon
 	id_trim = /datum/id_trim/chameleon/operative
 	uniform = /obj/item/clothing/under/syndicate
