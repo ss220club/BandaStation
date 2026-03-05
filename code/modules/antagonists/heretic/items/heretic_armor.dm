@@ -339,7 +339,7 @@
 // Cosmic
 // Allows you to toggle gravity for yourself at will
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/cosmic
-	name = "Starwoven Cloak"
+	name = "\improper Starwoven Cloak"
 	desc = "Сияющие самоцветы призывают струйки силы, кружащиеся вокруг и озаряющие носителя тусклым сиянием. \
 			Глядя на эту мантию, вас не покидает тревожное чувство, что за вами наблюдают"
 	icon_state = "cosmic_armor"
