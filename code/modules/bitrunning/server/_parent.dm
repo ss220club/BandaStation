@@ -149,7 +149,7 @@
 	if(!istype(tool, /obj/item/bitrunning_debug))
 		return NONE
 
-	balloon_alert(user, "*hacker voice* я внутри")
+	balloon_alert(user, "*голос хакера* я внутри")
 	obj_flags |= EMAGGED
 	glitch_chance = 0.5
 	capacitor_coefficient = 0.1
