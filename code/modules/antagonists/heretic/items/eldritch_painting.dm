@@ -234,7 +234,7 @@
 	result_path = /obj/structure/sign/painting/eldritch/rust
 
 /obj/structure/sign/painting/eldritch/rust
-	name = "Master of the Rusted Mountain"
+	name = "\improper Master of the Rusted Mountain"
 	desc = "Картина, изображающая странное существо, взбирающееся на гору цвета ржавчины. Работа кистью неестественна и нервирующая. Снимается кусачками."
 	icon_state = "eldritch_painting_rust"
 	applied_status_effect = /datum/status_effect/eldritch_painting/rusting
