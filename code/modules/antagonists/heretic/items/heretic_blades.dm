@@ -101,7 +101,7 @@
 
 // Path of Rust's blade
 /obj/item/melee/sickly_blade/rust
-	name = "rusted blade"
+	name = "\improper rusted blade"
 	desc = "Этот полумесячный клинок обветшал и заржавел. \
 		И все же он кусается, разрывая плоть и кости зазубренными гнилыми зубами."
 	icon_state = "rust_blade"
