@@ -728,7 +728,7 @@
 	var/obj/item/bodypart/head/to_explode = human_wearer.get_bodypart(BODY_ZONE_HEAD)
 	if(!to_explode)
 		return
-	human_wearer.visible_message(span_warning("голова [human_wearer.declent_ru(ACCUSATIVE)] разлетается вдребезги с тошнотворным хрустом!"), ignored_mobs = list(human_wearer))
+	human_wearer.visible_message(span_warning("Голова [human_wearer.declent_ru(ACCUSATIVE)] разлетается вдребезги с тошнотворным хрустом!"), ignored_mobs = list(human_wearer))
 	new /obj/effect/gibspawner/generic(get_turf(human_wearer), human_wearer)
 	to_explode.dismember(dam_type = BRUTE, silent = TRUE)
 	to_explode.drop_organs()
