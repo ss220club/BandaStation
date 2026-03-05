@@ -15,7 +15,7 @@
 		return
 	var/throwtarget = get_edge_target_turf(loc, get_dir(loc, get_step_away(bumpee, loc)))
 	bumpee.safe_throw_at(throwtarget, 10, 10, src, force = MOVE_FORCE_EXTREMELY_STRONG)
-	visible_message(span_danger("[src.declent_ru(NOMINATIVE)] отбрасывает [bumpee.declent_ru(ACCUSATIVE)] прочь в вихре страниц!"))
+	visible_message(span_danger("[capitalize(src.declent_ru(NOMINATIVE))] отбрасывает [bumpee.declent_ru(ACCUSATIVE)] прочь в вихре страниц!"))
 
 ///A heretic item that spawns a barrier at the clicked turf, 3 uses
 /obj/item/heretic_labyrinth_handbook
