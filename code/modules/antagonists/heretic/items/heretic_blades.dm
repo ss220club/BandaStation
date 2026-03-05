@@ -287,7 +287,7 @@
 	if(IS_HERETIC_OR_MONSTER(user))
 		after_use_message = "Мансус услышал твой зов..."
 	else if(IS_CULTIST(user))
-		after_use_message = "Нар’Си услышал твой зов..."
+		after_use_message = "Нар'Си услышал твой зов..."
 	else
 		after_use_message = null
 
