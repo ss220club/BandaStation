@@ -542,7 +542,10 @@
 	// Поколение I — особый ЭМИ (оглушение вместо паралича)
 	if(ipc_generation == IPC_GEN_MODULAR)
 		gen1_handle_emp(H, severity)
-		// Gen1 уязвим к ЭМИ-стану, но не получает базового урона/паралича
+		return
+	// Поколение II — Stun 1-3 сек + ожоги (без Paralyze)
+	if(ipc_generation == IPC_GEN_STANDARD)
+		gen2_handle_emp(H, severity)
 		return
 
 	var/emp_damage = 0
@@ -595,7 +598,7 @@
 	if(!do_after(user, 3 SECONDS, target = H))
 		return FALSE
 
-	if(!welder.use_tool(H, user, 0, volume = 50, amount = 1))
+	if(!welder.use_tool(H, user, 0, volume = 50, amount = ipc_repair_cost_mod))
 		return FALSE
 
 	var/heal_amount = rand(15, 25)
@@ -620,8 +623,9 @@
 		to_chat(user, span_notice("[H] не имеет электрических повреждений."))
 		return FALSE
 
-	if(cable.get_amount() < 1)
-		to_chat(user, span_warning("Недостаточно кабеля!"))
+	var/cable_cost = max(1, round(ipc_repair_cost_mod))
+	if(cable.get_amount() < cable_cost)
+		to_chat(user, span_warning("Недостаточно кабеля! Нужно [cable_cost] ед."))
 		return FALSE
 
 	user.visible_message(
@@ -632,7 +636,7 @@
 	if(!do_after(user, 3 SECONDS, target = H))
 		return FALSE
 
-	if(!cable.use(1))
+	if(!cable.use(cable_cost))
 		return FALSE
 
 	var/heal_amount = rand(10, 20)

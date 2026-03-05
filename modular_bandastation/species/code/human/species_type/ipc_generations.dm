@@ -60,6 +60,8 @@
 	switch(ipc_generation)
 		if(IPC_GEN_MODULAR)
 			remove_gen1_modular(H)
+		if(IPC_GEN_STANDARD)
+			remove_gen2_standard(H)
 		if(IPC_GEN_HUMANITY)
 			remove_gen3_humanity(H)
 		if(IPC_GEN_CYBERDECK)
@@ -68,9 +70,52 @@
 // ============================================
 // ПОКОЛЕНИЕ II: СТАНДАРТНОЕ
 // ============================================
+// + Обе руки (next_move_modifier * 0.5 = мгновенная смена рук)
+// + Повышенная скорость передвижения (+10%) и действий (+15%)
+// - ЭМИ оглушает 1-3 сек и наносит ожоги (без паралича)
+
+#define IPC_GEN2_TRAIT_SOURCE "ipc_gen2"
+
+/datum/actionspeed_modifier/ipc_gen2_speed
+	id = "ipc_gen2_speed"
+	variable = FALSE
+	multiplicative_slowdown = -0.15  // +15% скорости действий
+
+/datum/movespeed_modifier/ipc_gen2_speed
+	id = "ipc_gen2_speed"
+	multiplicative_slowdown = -0.1   // +10% скорости передвижения
 
 /datum/species/ipc/proc/apply_gen2_standard(mob/living/carbon/human/H)
-	return  // Нет особых механик — базовый КПБ
+	// Обе руки — сокращаем задержку кликов вдвое
+	H.next_move_modifier *= 0.5
+	// Скорость передвижения и действий
+	H.add_movespeed_modifier(/datum/movespeed_modifier/ipc_gen2_speed)
+	H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen2_speed)
+
+/datum/species/ipc/proc/remove_gen2_standard(mob/living/carbon/human/H)
+	H.next_move_modifier /= 0.5
+	H.remove_movespeed_modifier(/datum/movespeed_modifier/ipc_gen2_speed)
+	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen2_speed)
+
+/// ЭМИ для Gen II: оглушение 1-3 сек + ожоги. Без паралича и брутального урона.
+/datum/species/ipc/proc/gen2_handle_emp(mob/living/carbon/human/H, severity)
+	var/stun_duration
+	var/burn_damage
+	switch(severity)
+		if(EMP_HEAVY)
+			stun_duration = rand(1, 3) SECONDS
+			burn_damage = rand(10, 20) * emp_vulnerability
+			to_chat(H, span_userdanger("ЭМИ: Стандартная система управления перегружена! Кратковременное оглушение."))
+		if(EMP_LIGHT)
+			stun_duration = rand(1, 2) SECONDS
+			burn_damage = rand(3, 8) * emp_vulnerability
+			to_chat(H, span_danger("ЭМИ: Незначительное электромагнитное возмущение."))
+		else
+			stun_duration = 1 SECONDS
+			burn_damage = 5
+	H.Stun(stun_duration)
+	H.apply_damage(burn_damage, BURN, forced = TRUE)
+	cpu_temperature = min(cpu_temperature + (burn_damage * 0.5), cpu_temp_critical)
 
 // ============================================
 // ИНТЕГРАЦИЯ С spec_life И on_species_loss

@@ -13,6 +13,11 @@
 // Должен быть в своём #define файле проекта, но для компиляции определяем здесь.
 #define TRAIT_IPC_NO_COMBAT_IMPLANTS "ipc_no_combat_implants"
 
+/datum/actionspeed_modifier/ipc_etamin
+	id = "ipc_etamin"
+	variable = FALSE
+	multiplicative_slowdown = -0.1  // +10% скорости взаимодействия
+
 /// Главная точка входа — применяет эффекты бренда
 /proc/apply_ipc_brand_effects(mob/living/carbon/human/H, brand_key)
 	if(!H || !istype(H.dna?.species, /datum/species/ipc))
@@ -61,11 +66,11 @@
 // Термическая релаксация понижена
 /proc/apply_effect_etamin(mob/living/carbon/human/H)
 	// +10% скорости взаимодействия
-	// TODO: Реализовать через модификатор do_after или аналогичный
+	H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_etamin)
 	// Термическая релаксация понижена
 	var/datum/species/ipc/S = H.dna.species
 	if(S)
-		S.ipc_thermal_relaxation_mod = -0.2  // TODO: добавить эту переменную на species и использовать в температурной логике
+		S.ipc_thermal_relaxation_mod = -0.2  // TODO: интегрировать в температурную логику ipc_life
 
 // ============================================
 // 3. BISHOP CYBERNETICS
