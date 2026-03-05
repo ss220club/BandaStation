@@ -391,7 +391,7 @@
 	weightless_enabled = !weightless_enabled
 
 /obj/item/clothing/head/hooded/cult_hoodie/eldritch/cosmic
-	name = "Starwoven Hood"
+	name = "\improper Starwoven Hood"
 	desc = "Сияющие самоцветы призывают струйки силы, кружащиеся вокруг и озаряющие носителя тусклым сиянием. \
 			Глядя на эту мантию, вас не покидает тревожное чувство, что за вами наблюдают"
 	icon_state = "cosmic_armor"
