@@ -238,7 +238,7 @@
 // What!? This blade is given to cultists as an altar item when they sacrifice a heretic.
 // It is also given to the heretic themself if they sacrifice a cultist.
 /obj/item/melee/sickly_blade/cursed
-	name = "cursed blade"
+	name = "\improper cursed blade"
 	desc = "Темный клинок, проклятый пускать кровь вечность. В постоянной борьбе между потусторонним и тьмой, он вынужден признавать своим хозяином любого, кто им владеет. \
 		С роговицы его глаза на землю бесконечно капает кровь, но его пронзительный взгляд остается прикованным к вам."
 	force = 25
