@@ -1035,7 +1035,7 @@
 // Void
 // Gives you a short stealth when you are hit
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/void
-	name = "Hollow Weave"
+	name = "\improper Hollow Weave"
 	desc = "По началу, пустое полотно этого одеяния, кажется, мерцает слабым холодным светом. \
 			Однако, если приглядеться к формам складок, то лучшим описанием будет - ничего."
 	icon_state = "void_armor"
