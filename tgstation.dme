@@ -4928,7 +4928,7 @@
 #include "code\modules\mapfluff\ruins\lavalandruin_code\biodome_winter.dm"
 #include "code\modules\mapfluff\ruins\lavalandruin_code\elephantgraveyard.dm"
 #include "code\modules\mapfluff\ruins\lavalandruin_code\puzzle.dm"
-#include "code\modules\mapfluff\ruins\lavalandruin_code\sloth.dm"
+//#include "code\modules\mapfluff\ruins\lavalandruin_code\sloth.dm" BANDASTATION EDIT
 #include "code\modules\mapfluff\ruins\lavalandruin_code\surface.dm"
 #include "code\modules\mapfluff\ruins\lavalandruin_code\syndicate_base.dm"
 #include "code\modules\mapfluff\ruins\lavalandruin_code\watcher_grave.dm"
