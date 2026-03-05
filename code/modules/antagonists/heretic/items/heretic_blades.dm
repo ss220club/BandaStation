@@ -227,7 +227,7 @@
 
 // Path of Moon's blade
 /obj/item/melee/sickly_blade/moon
-	name = "moon blade"
+	name = "\improper moon blade"
 	desc = "Клинок из железа, отражающий правду земли: Все однажды присоединятся к труппе. \
 		Труппе приносящей радость, вырезающая улыбки на их лицах, хотят они того или нет."
 	icon_state = "moon_blade"
