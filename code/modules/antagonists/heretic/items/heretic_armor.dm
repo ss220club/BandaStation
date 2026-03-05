@@ -318,7 +318,7 @@
 	QDEL_IN(knife, delete_delay + appear_delay + throw_delay)
 
 /obj/item/clothing/head/hooded/cult_hoodie/eldritch/blade
-	name = "Shattered Panoply"
+	name = "\improper Shattered Panoply"
 	desc = "Заострённые края этого древнего доспеха являют собой откровение, известное тем, кто стремится к битве: \
 			истинного воина невозможно отличить от клинка, которым он владеет."
 	icon_state = "blade_armor"
