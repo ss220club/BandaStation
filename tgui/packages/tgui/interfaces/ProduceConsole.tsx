@@ -313,7 +313,7 @@ function CheckoutTab(props) {
                 color="yellow"
                 disabled={total_cost <= 0}
                 tooltip={
-                  total_cost <= 0 ? 'Закадите хотябы 1 предмет' : express_tooltip
+                  total_cost <= 0 ? 'Закажите хотя бы 1 предмет' : express_tooltip
                 }
                 tooltipPosition="top-start"
                 onClick={() => act('express')}
