@@ -1,6 +1,6 @@
 /obj/item/storage/lockbox
 	name = "lockbox"
-	desc = "закрытый ящик."
+	desc = "Закрытый ящик."
 	icon = 'icons/obj/storage/case.dmi'
 	icon_state = "lockbox+l"
 	inhand_icon_state = "lockbox"
