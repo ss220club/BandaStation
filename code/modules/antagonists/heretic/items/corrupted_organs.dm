@@ -265,7 +265,7 @@
 		hearer.emote("scream")
 		hearer.add_mood_event("gates_of_mansus", /datum/mood_event/gates_of_mansus)
 		hearer.sound_damage(10, 40 SECONDS)
-	return "[owner.ru_p_them()] лёгкие испускают [span_hypnophrase(breath_noise)]"
+	return "[capitalize(owner.ru_p_them())] лёгкие испускают [span_hypnophrase(breath_noise)]"
 
 /// It's full of worms
 /obj/item/organ/appendix/corrupt
