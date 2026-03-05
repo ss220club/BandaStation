@@ -9,7 +9,7 @@
 	cooldown_time = 10 SECONDS
 	cargo_cost_multiplier = 0.65
 	express_cost_multiplier = 1
-	purchase_tooltip = @{"Ваши покупки прибудут в карго,
+	purchase_tooltip = @{"Ваши покупки прибудут в отдел снабжения,
 	можете понадеятся, что ваши коллеги доставят их вам.
 	На 35% дешевле, чем экспресс-доставка."}
 	express_tooltip = @{"Отправляет ваши покупки мгновенно."}
