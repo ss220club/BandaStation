@@ -198,7 +198,7 @@
 
 // Lady out of gates, gives a brain trauma causing the person to scratch themselves
 /obj/item/wallframe/painting/eldritch/beauty
-	name = "Lady of the Gate"
+	name = "\improper Lady of the Gate"
 	desc = "Картина с изображением потустороннего существа. Его тонкая кожа цвета фарфора плотно натянута на странную костную структуру. Оно обладает странной красотой."
 	icon_state = "eldritch_painting_beauty"
 	result_path = /obj/structure/sign/painting/eldritch/beauty
