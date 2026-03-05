@@ -54,7 +54,7 @@ f
 		return
 
 	if(current_mass > 0)
-		. += span_notice("Вы можете пополнять потустороннюю флягу из него")
+		. += span_notice("Вы можете пополнять потустороннюю флягу из него.")
 
 	if(current_mass < max_mass)
 		var/to_fill = max_mass - current_mass
