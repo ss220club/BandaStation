@@ -32,7 +32,7 @@
 	if(living_target == user)
 		return ITEM_INTERACT_BLOCKING
 	if(reagents.total_volume >= reagents.maximum_volume)
-		to_chat(user, span_notice("[src.declent_ru(NOMINATIVE)] полон."))
+		to_chat(user, span_notice("[capitalize(src.declent_ru(NOMINATIVE))] полон."))
 		return ITEM_INTERACT_BLOCKING
 	if(living_target.can_block_magic(MAGIC_RESISTANCE_HOLY))
 		to_chat(user, span_warning("Вы не можете похитить кровь у [living_target.declent_ru(GENITIVE)]!"))
