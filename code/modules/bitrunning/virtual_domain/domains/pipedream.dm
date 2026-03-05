@@ -28,7 +28,7 @@
 		)
 
 /datum/id_trim/factory/qm
-	assignment = "Заводской квартермейстер"
+	assignment = "Заводской квартирмейстер"
 	trim_state = "trim_quartermaster"
 	department_color = COLOR_COMMAND_BLUE
 	subdepartment_color = COLOR_CARGO_BROWN
@@ -75,7 +75,7 @@
 	r_pocket = /obj/item/assembly/flash/handheld
 
 /datum/outfit/factory/qm
-	name = "Заводской квартермейстер"
+	name = "Заводской квартирмейстер"
 
 	id_trim = /datum/id_trim/factory/qm
 	id = /obj/item/card/id/advanced/silver

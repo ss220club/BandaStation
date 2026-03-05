@@ -2,8 +2,8 @@
 	outfit = /datum/outfit/virtual_pirate
 	prompt_name = "a virtual domain debug entity"
 	flavour_text = "Вам, наверное, не стоит этого видеть, обратитесь к администратору или программисту!"
-	you_are_text = "Тебя не должно было здесь быть. Как ты вообще умудрился это?"
-	important_text = "Битранинг - это преступление и ваша главная угроза."
+	you_are_text = "Тебя не должно было здесь быть. Как ты вообще умудрился?"
+	important_text = "Битранинг - это преступление и ваша прямая угроза."
 	temp_body = TRUE
 	///Does this bit-entity get an antag datum with the goal of hunting bitrunners? TRUE by default
 	var/antag = TRUE
