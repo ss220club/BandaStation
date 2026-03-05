@@ -144,7 +144,7 @@
 
 // Path of Void's blade
 /obj/item/melee/sickly_blade/void
-	name = "void blade"
+	name = "\improper void blade"
 	desc = "Лишенный всякой субстанции, этот клинок отражает небытие. \
 		Это настоящее отображение чистоты, и хаоса, который наступает после его применения."
 	icon_state = "void_blade"
