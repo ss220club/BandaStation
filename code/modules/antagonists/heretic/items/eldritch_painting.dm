@@ -228,7 +228,7 @@
 
 // Climb over the rusted mountain, gives a brain trauma causing the person to randomly rust tiles beneath them
 /obj/item/wallframe/painting/eldritch/rust
-	name = "Master of the Rusted Mountain"
+	name = "\improper Master of the Rusted Mountain"
 	desc = "Картина, изображающая странное существо, взбирающееся на гору цвета ржавчины. Работа кистью неестественна и нервирующая."
 	icon_state = "eldritch_painting_rust"
 	result_path = /obj/structure/sign/painting/eldritch/rust
