@@ -223,7 +223,7 @@
 		return FALSE
 	var/mob/living/living_user = user
 	if(!IS_HERETIC_OR_MONSTER(living_user))
-		living_user.balloon_alert(living_user, "вы чувствуете чье-то присутствие, наблюдающее за вами")
+		living_user.balloon_alert(living_user, "вы чувствуете чьё-то присутствие, наблюдающее за вами")
 		living_user.add_mood_event("Moon Amulet Insanity", /datum/mood_event/amulet_insanity)
 		living_user.mob_mood.adjust_sanity(-50)
 		return FALSE
