@@ -80,7 +80,7 @@
 		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(held_item.tool_behaviour == TOOL_CROWBAR && panel_open)
-		context[SCREENTIP_CONTEXT_LMB] = "разборка"
+		context[SCREENTIP_CONTEXT_LMB] = "Разбор"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/quantum_server/examine(mob/user)
