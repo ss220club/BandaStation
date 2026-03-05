@@ -1077,7 +1077,7 @@
 	animate(owner, time = 1 SECONDS, alpha = initial(owner.alpha))
 
 /obj/item/clothing/head/hooded/cult_hoodie/eldritch/void
-	name = "Hollow Weave"
+	name = "\improper Hollow Weave"
 	desc = "По началу, пустое полотно этого одеяния, кажется, мерцает слабым холодным светом. \
 			Однако, если приглядеться к формам складок, то лучшим описанием будет - ничего."
 	icon_state = "void_armor"
