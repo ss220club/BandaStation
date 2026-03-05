@@ -39,7 +39,7 @@
 
 	. += span_notice("Эта панель технического обслуживания может быть [EXAMINE_HINT("screwed")] [panel_open ? "закрыта" : "открыта"].")
 	if(panel_open)
-		. += span_notice("Это может быть [EXAMINE_HINT("pried")] отдельно.")
+		. += span_notice("Это может быть [EXAMINE_HINT("снято")] отдельно.")
 
 /obj/machinery/byteforge/update_appearance(updates)
 	. = ..()
