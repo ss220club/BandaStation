@@ -110,7 +110,7 @@
 
 // Path of Ash's blade
 /obj/item/melee/sickly_blade/ash
-	name = "ashen blade"
+	name = "\improper ashen blade"
 	desc = "Расплавленный и необработанный кусок металла, искореженный в труху и шлак. \
 		Несделанный, он стремится быть большим, чем он является, и срезает тупым краем раны, заполняя их сажей."
 	icon_state = "ash_blade"
