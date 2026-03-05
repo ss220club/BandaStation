@@ -451,7 +451,7 @@
 	name = "humanity"
 	icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
 	icon_state = "humanity"
-	screen_loc = ui_zas  // Используем слот воздуха — у IPC нет дыхания
+	screen_loc = ui_internal  // Используем слот воздуха — у IPC нет дыхания
 	mouse_over_pointer = MOUSE_HAND_POINTER
 	var/humanity_value = 100
 

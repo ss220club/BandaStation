@@ -884,13 +884,12 @@
 			H.put_in_hand(cable, hand)
 		else
 			var/list/hand_items = H.get_held_items_for_side(side, all = TRUE)
-			var/success = FALSE
 			for(var/i in 1 to length(hand_items))
 				var/obj/item/hand_item = hand_items[i]
 				if(!H.dropItemToGround(hand_item))
 					continue
 				to_chat(H, span_notice("Вы роняете [hand_item], чтобы достать зарядный кабель."))
-				success = H.put_in_hand(cable, H.get_empty_held_index_for_side(side))
+				H.put_in_hand(cable, H.get_empty_held_index_for_side(side))
 				break
 		to_chat(H, span_notice("Зарядный кабель извлечён. Нажмите им на АРС или настенное устройство для зарядки."))
 	build_all_button_icons()
