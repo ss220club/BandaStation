@@ -311,7 +311,7 @@
 
 // Weaker blade variant given to people so they can participate in the heretic arena spell
 /obj/item/melee/sickly_blade/training
-	name = "imperfect blade"
+	name = "\improper imperfect blade"
 	desc = "A blade given to those who cannot accept the truth, out of pity. \
 		May it act as a blessing in the short time it remains alongside you."
 	force = 17
