@@ -781,7 +781,7 @@
 	addtimer(CALLBACK(src, PROC_REF(kill_wearer), wearer), 5 SECONDS)
 
 /obj/item/clothing/head/hooded/cult_hoodie/eldritch/moon
-	name = "Resplendant Hood"
+	name = "\improper Resplendant Hood"
 	icon_state = "moon_armor"
 	armor_type = /datum/armor/eldritch_armor/moon
 
