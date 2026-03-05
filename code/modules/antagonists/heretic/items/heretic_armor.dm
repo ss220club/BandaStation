@@ -190,7 +190,7 @@
 	wearer.ignite_mob(TRUE)
 
 /obj/item/clothing/head/hooded/cult_hoodie/eldritch/ash
-	name = "Scorched Mantle"
+	name = "\improper Scorched Mantle"
 	desc = "Оставленная сгорать до лохмотьев, она превратилась лишь в почерневшее эхо одеяния Дозора. \
 		И всё же складки, пропитанные сажей, отводят клинок и пламя от того, кто скрыт внутри. Недолгая отсрочка - прежде чем её взгляд обратится вовнутрь."
 	icon_state = "ash_armor"
