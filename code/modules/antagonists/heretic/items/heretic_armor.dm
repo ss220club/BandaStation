@@ -843,7 +843,7 @@
 // Rust
 // Gains more armor while standing on top of rust. Has an animated overlay
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/rust
-	name = "Salvaged Remains"
+	name = "\improper Salvaged Remains"
 	desc = "Прикосновение к складкам этого простого одеяния, кажется, вызывает у вас беспокойство. \
 			Даже взгляд на него вызывает у вас головокружение.  \
 			Какой-то пульс, угрожающий затянуть вас внутрь."
