@@ -1,5 +1,5 @@
 /datum/lazy_template/virtual_domain/meta_central
-	name = "Мета Центральное Коммандование"
+	name = "ИСН Цереброн-централ"
 	cost = BITRUNNER_COST_LOW
 	desc = "Время от времени работники требуют соблюдения прав от Nanotrasen. Это невыгодно."
 	difficulty = BITRUNNER_DIFFICULTY_LOW
