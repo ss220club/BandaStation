@@ -337,6 +337,7 @@
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
 		/obj/item/clothing/head/beret/tsf_marsoc,
+		/obj/item/gun/ballistic/rocketlauncher/oneuse,
 	)
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
@@ -359,6 +360,7 @@
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4/x4 = 2,
 		/obj/item/clothing/head/beret/tsf_marsoc,
+		/obj/item/gun/ballistic/rocketlauncher/oneuse,
 	)
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
@@ -382,6 +384,7 @@
 		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
+		/obj/item/gun/ballistic/rocketlauncher/oneuse,
 	)
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
