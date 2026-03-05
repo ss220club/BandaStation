@@ -55,7 +55,7 @@
 
 /datum/reagent/heretic_rust
 	name = "Eldritch Rust"
-	description = "Суспензия из вязкой, плотной коричневой жидкости."
+	description = "Суспензия из вязкой плотной коричневой жидкости."
 	color = COLOR_CARGO_BROWN // Rust color
 	taste_description = "rotten copper"
 	penetrates_skin = NONE
