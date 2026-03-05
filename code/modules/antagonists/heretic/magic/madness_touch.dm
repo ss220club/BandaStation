@@ -1,7 +1,7 @@
 // Currently unused
 /datum/action/cooldown/spell/touch/mad_touch
-	name = "Touch of Madness"
-	desc = "Заклинание косания, которая лишает врага рассудка и сбивает его с ног."
+	name = "Касание безумия"
+	desc = "Заклинание касания, лишающее врага рассудка и сбивающее его с ног."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'

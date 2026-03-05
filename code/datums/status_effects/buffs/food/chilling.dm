@@ -8,8 +8,8 @@
 		owner.adjust_bodytemperature(-2.75 * strength * seconds_between_ticks, min_temp = minimum_temp)
 
 /atom/movable/screen/alert/status_effect/icecream_chilling
-	name = "Cooling Off"
-	desc = "Nothing beats a cup of ice cream during hot, plasma-flooded day..."
+	name = "Остывание"
+	desc = "Ничто не сравнится со стаканчиком мороженого в жаркий, насыщенный плазмой день..."
 	use_user_hud_icon = TRUE
 	overlay_state = "food_icecream"
 
