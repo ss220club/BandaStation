@@ -28,7 +28,7 @@
 		)
 
 /datum/id_trim/factory/qm
-	assignment = "Заводской квартермейстер"
+	assignment = "Заводской квартирмейстер"
 	trim_state = "trim_quartermaster"
 	department_color = COLOR_COMMAND_BLUE
 	subdepartment_color = COLOR_CARGO_BROWN
