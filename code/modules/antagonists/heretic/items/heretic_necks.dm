@@ -283,7 +283,7 @@
 	SIGNAL_HANDLER
 
 	var/list/attack_list = list(
-		"Вы направляете [weapon.declent_ru(NOMINATIVE)] на [victim.declent_ru(ACCUSATIVE)], разделяя [victim.ru_p_them()] изображение на две части.",
+		"Вы направляете [weapon.declent_ru(ACCUSATIVE)] на [victim.declent_ru(ACCUSATIVE)], разделяя [victim.ru_p_them()] изображение на две части.",
 		"Вы бьёте [victim.declent_ru(NOMINATIVE)] [weapon.declent_ru(INSTRUMENTAL)], изливаясь неудержимым потоком изнутри. Безупречно.",
 		"Когда оно вгрызается глубоко, [weapon.declent_ru(NOMINATIVE)] освобождает [victim].declent_ru(NOMINATIVE) от ненужных мыслей.",
 	)
