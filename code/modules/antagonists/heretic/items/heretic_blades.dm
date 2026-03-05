@@ -154,7 +154,7 @@
 // Path of the Blade's... blade.
 // Opting for /dark instead of /blade to avoid "sickly_blade/blade".
 /obj/item/melee/sickly_blade/dark
-	name = "sundered blade"
+	name = "\improper sundered blade"
 	desc = "Галантный клинок, раздробленный и разорванный. \
 		Клинок режет яростно. Серебряные шрамы навечно связывают его с темной целью."
 	icon_state = "dark_blade"
