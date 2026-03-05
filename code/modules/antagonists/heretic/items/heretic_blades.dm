@@ -207,7 +207,7 @@
 
 // Path of Cosmos's blade
 /obj/item/melee/sickly_blade/cosmic
-	name = "cosmic blade"
+	name = "\improper cosmic blade"
 	desc = "Соринка небесного резонанса, сформированная в клинок, сотканный из звезд. \
 		Радужный изгнанник, прокладывающий лучистые тропы, отчаянно стремящихся к объединению."
 	icon_state = "cosmic_blade"
