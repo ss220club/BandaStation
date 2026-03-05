@@ -8,6 +8,16 @@
 /obj/item/reagent_containers/blood/skrell
 	blood_type = BLOOD_TYPE_SKRELL
 
+/datum/blood_type/kidan
+	name = BLOOD_TYPE_KIDAN
+	color = BLOOD_COLOR_KIDAN
+	compatible_types = list(
+		/datum/blood_type/kidan,
+	)
+
+/obj/item/reagent_containers/blood/kidan
+	blood_type = BLOOD_TYPE_KIDAN
+
 /datum/blood_type/moth
 	name = BLOOD_TYPE_MOTH
 	color = BLOOD_COLOR_MOTH

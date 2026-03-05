@@ -31,6 +31,7 @@ AI_SECRETARY_TOKEN my_secret_token
 ## Bandastation Races
 ROUNDSTART_RACES vulpkanin
 ROUNDSTART_RACES tajaran
+ROUNDSTART_RACES kidan
 
 ## Automatic crew transfer
 

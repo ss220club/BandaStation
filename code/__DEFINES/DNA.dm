@@ -104,6 +104,7 @@
 #define FEATURE_TAJARAN_FACIAL_HAIR_COLOR "tajaran_facial_hair_color"
 
 #define FEATURE_SKRELL_HEAD_TENTACLE "skrell_head_tentacle"
+#define FEATURE_KIDAN_ANTENNAE "kidan_antennae"
 // BANDASTATION ADDITION END - Species Features
 
 ///flag for the transfer_flag argument from dna/proc/copy_dna(). This one makes it so the SE is copied too.
@@ -157,6 +158,7 @@
 #define ORGAN_SLOT_EXTERNAL_POD_HAIR "pod_hair"
 /// BADNASTATION ADDITION START - Species
 #define ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE "head_tentacles"
+#define ORGAN_SLOT_EXTERNAL_HEAD_ANTENNAE "kidan_antennae"
 /// BADNASTATION ADDITION END - Species
 
 /// Xenomorph organ slots
