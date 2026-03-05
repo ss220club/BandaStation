@@ -982,7 +982,7 @@
 	. += rust_appearance
 
 /obj/item/clothing/head/hooded/cult_hoodie/eldritch/rust
-	name = "Salvaged Remains"
+	name = "\improper Salvaged Remains"
 	desc = "Прикосновение к складкам этого простого одеяния, кажется, вызывает у вас беспокойство. \
 			Даже взляд на него вызывает у вас головокружение.  \
 			Какой-то пульс, угрожающий затянуть вас внутрь."
