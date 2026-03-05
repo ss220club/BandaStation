@@ -11,7 +11,7 @@
 
 /obj/item/clothing/neck/heretic_focus/crimson_medallion
 	name = "crimson medallion"
-	desc = "Кроваво-красная линза, обеспечивающая связь с потусторонним миром и даже хуже. Его глаз постоянно дергается и смотрит во все стороны. Кажется, что он беззвучно кричит..."
+	desc = "Кроваво-красная линза, обеспечивающая связь с потусторонним миром и даже хуже. Его глаз постоянно дёргается и смотрит во все стороны. Кажется, что он беззвучно кричит..."
 	icon_state = "crimson_medallion"
 	/// The aura healing component. Used to delete it when taken off.
 	var/datum/component/component
