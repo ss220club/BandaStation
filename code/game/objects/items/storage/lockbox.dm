@@ -128,7 +128,7 @@
 /obj/item/storage/lockbox/medal/examine(mob/user)
 	. = ..()
 	if(!atom_storage.locked)
-		. += span_notice("Alt-клик чтобы [open ? "закрыть":"открыть"] контейнер.")
+		. += span_notice("Alt-ЛКМ чтобы [open ? "закрыть":"открыть"] контейнер.")
 
 /obj/item/storage/lockbox/medal/click_alt(mob/user)
 	if(!atom_storage.locked)
