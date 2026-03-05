@@ -120,7 +120,7 @@
 
 // Path of Flesh's blade
 /obj/item/melee/sickly_blade/flesh
-	name = "bloody blade"
+	name = "\improper bloody blade"
 	desc = "Полумесячный клинок, рожденный из искореженного существа. \
 		Он стремится передать другим те страдания, которые он пережил от своего ужасного происхождения."
 	icon_state = "flesh_blade"
