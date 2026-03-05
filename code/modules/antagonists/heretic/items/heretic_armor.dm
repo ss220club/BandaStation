@@ -522,7 +522,7 @@
 	name = "\improper Resplendent Regalia"
 	desc = "Обманчивая сущность этого роскошного одеяния искривляет само восприятие. \
 			Наблюдателя неизбежно настигает леденящее откровение; \
-			увиденное им столь же подлинно, как любое иное лицо"
+			увиденное им столь же подлинно, как любое иное лицо."
 	icon_state = "moon_armor"
 	hoodtype = /obj/item/clothing/head/hooded/cult_hoodie/eldritch/moon
 	armor_type = /datum/armor/eldritch_armor/moon
