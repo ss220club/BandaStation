@@ -210,7 +210,7 @@
 // Blade
 // Is shock-proof and gives you baton resistance
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/blade
-	name = "Shattered Panoply"
+	name = "\improper Shattered Panoply"
 	desc = "Заострённые края этого древнего доспеха являют собой откровение, известное тем, кто стремится к битве: \
 			истинного воина невозможно отличить от клинка, которым он владеет."
 	icon_state = "blade_armor"
