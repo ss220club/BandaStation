@@ -4,7 +4,7 @@
  */
 
 /obj/item/grenade/chem_grenade/rust_sower
-	name = "Rust sower"
+	name = "\improper Rust sower"
 	desc = "Изящная вещица, распространяющая ржавчину при подрыве. Приводит к полному уничтожению боргов и мехов."
 	possible_fuse_time = list("5")
 	stage = GRENADE_READY
