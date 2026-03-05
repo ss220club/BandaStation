@@ -216,7 +216,7 @@
 
 // Path of Knock's blade
 /obj/item/melee/sickly_blade/lock
-	name = "key blade"
+	name = "\improper key blade"
 	desc = "Клинок и ключ, ключ к чему? \
 		Какие великие врата он открывает?"
 	icon_state = "key_blade"
