@@ -69,34 +69,56 @@
 // 2. ETAMIN INDUSTRY
 // ============================================
 
+#define IPC_DMI_ETAMIN 'icons/bandastation/mob/species/ipc/bodyparts_etamin.dmi'
+
 /obj/item/bodypart/chest/ipc/etamin
 	name = "Etamin Industry IPC chassis"
 	desc = "Корпус IPC производства Etamin Industry. Оптимизирован для боевого применения."
+	icon = IPC_DMI_ETAMIN
+	icon_static = IPC_DMI_ETAMIN
+	icon_greyscale = null
 	chassis_type = "Etamin"
 
 /obj/item/bodypart/head/ipc/etamin
 	name = "Etamin Industry IPC head"
 	desc = "Голова IPC производства Etamin Industry."
+	icon = IPC_DMI_ETAMIN
+	icon_static = IPC_DMI_ETAMIN
+	icon_greyscale = null
 
 /obj/item/bodypart/arm/left/ipc/etamin
 	name = "Etamin Industry IPC left arm"
 	desc = "Левая рука IPC производства Etamin Industry."
+	icon = IPC_DMI_ETAMIN
+	icon_static = IPC_DMI_ETAMIN
+	icon_greyscale = null
 	chassis_type = "Etamin"
 
 /obj/item/bodypart/arm/right/ipc/etamin
 	name = "Etamin Industry IPC right arm"
 	desc = "Правая рука IPC производства Etamin Industry."
+	icon = IPC_DMI_ETAMIN
+	icon_static = IPC_DMI_ETAMIN
+	icon_greyscale = null
 	chassis_type = "Etamin"
 
 /obj/item/bodypart/leg/left/ipc/etamin
 	name = "Etamin Industry IPC left leg"
 	desc = "Левая нога IPC производства Etamin Industry."
+	icon = IPC_DMI_ETAMIN
+	icon_static = IPC_DMI_ETAMIN
+	icon_greyscale = null
 	chassis_type = "Etamin"
 
 /obj/item/bodypart/leg/right/ipc/etamin
 	name = "Etamin Industry IPC right leg"
 	desc = "Правая нога IPC производства Etamin Industry."
+	icon = IPC_DMI_ETAMIN
+	icon_static = IPC_DMI_ETAMIN
+	icon_greyscale = null
 	chassis_type = "Etamin"
+
+#undef IPC_DMI_ETAMIN
 
 // ============================================
 // 3. BISHOP CYBERNETICS
@@ -157,67 +179,111 @@
 // 4. HESPHIASTOS INDUSTRIES
 // ============================================
 
+#define IPC_DMI_HESPHIASTOS 'icons/bandastation/mob/species/ipc/bodyparts_hephaestus.dmi'
+
 /obj/item/bodypart/chest/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC chassis"
 	desc = "Корпус IPC производства Hesphiastos Industries. Повышенная прочность и боевые характеристики."
+	icon = IPC_DMI_HESPHIASTOS
+	icon_static = IPC_DMI_HESPHIASTOS
+	icon_greyscale = null
 	chassis_type = "Hesphiastos"
 
 /obj/item/bodypart/head/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC head"
 	desc = "Голова IPC производства Hesphiastos Industries."
+	icon = IPC_DMI_HESPHIASTOS
+	icon_static = IPC_DMI_HESPHIASTOS
+	icon_greyscale = null
 
 /obj/item/bodypart/arm/left/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC left arm"
 	desc = "Левая рука IPC производства Hesphiastos Industries."
+	icon = IPC_DMI_HESPHIASTOS
+	icon_static = IPC_DMI_HESPHIASTOS
+	icon_greyscale = null
 	chassis_type = "Hesphiastos"
 
 /obj/item/bodypart/arm/right/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC right arm"
 	desc = "Правая рука IPC производства Hesphiastos Industries."
+	icon = IPC_DMI_HESPHIASTOS
+	icon_static = IPC_DMI_HESPHIASTOS
+	icon_greyscale = null
 	chassis_type = "Hesphiastos"
 
 /obj/item/bodypart/leg/left/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC left leg"
 	desc = "Левая нога IPC производства Hesphiastos Industries."
+	icon = IPC_DMI_HESPHIASTOS
+	icon_static = IPC_DMI_HESPHIASTOS
+	icon_greyscale = null
 	chassis_type = "Hesphiastos"
 
 /obj/item/bodypart/leg/right/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC right leg"
 	desc = "Правая нога IPC производства Hesphiastos Industries."
+	icon = IPC_DMI_HESPHIASTOS
+	icon_static = IPC_DMI_HESPHIASTOS
+	icon_greyscale = null
 	chassis_type = "Hesphiastos"
+
+#undef IPC_DMI_HESPHIASTOS
 
 // ============================================
 // 5. WARD-TAKAHASHI
 // ============================================
 
+#define IPC_DMI_WARD 'icons/bandastation/mob/species/ipc/bodyparts_wardtakahashi.dmi'
+
 /obj/item/bodypart/chest/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC chassis"
 	desc = "Корпус IPC производства Ward-Takahashi. Ускоренный саморемонт и высокая надёжность компонентов."
+	icon = IPC_DMI_WARD
+	icon_static = IPC_DMI_WARD
+	icon_greyscale = null
 	chassis_type = "Ward-Takahashi"
 
 /obj/item/bodypart/head/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC head"
 	desc = "Голова IPC производства Ward-Takahashi."
+	icon = IPC_DMI_WARD
+	icon_static = IPC_DMI_WARD
+	icon_greyscale = null
 
 /obj/item/bodypart/arm/left/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC left arm"
 	desc = "Левая рука IPC производства Ward-Takahashi."
+	icon = IPC_DMI_WARD
+	icon_static = IPC_DMI_WARD
+	icon_greyscale = null
 	chassis_type = "Ward-Takahashi"
 
 /obj/item/bodypart/arm/right/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC right arm"
 	desc = "Правая рука IPC производства Ward-Takahashi."
+	icon = IPC_DMI_WARD
+	icon_static = IPC_DMI_WARD
+	icon_greyscale = null
 	chassis_type = "Ward-Takahashi"
 
 /obj/item/bodypart/leg/left/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC left leg"
 	desc = "Левая нога IPC производства Ward-Takahashi."
+	icon = IPC_DMI_WARD
+	icon_static = IPC_DMI_WARD
+	icon_greyscale = null
 	chassis_type = "Ward-Takahashi"
 
 /obj/item/bodypart/leg/right/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC right leg"
 	desc = "Правая нога IPC производства Ward-Takahashi."
+	icon = IPC_DMI_WARD
+	icon_static = IPC_DMI_WARD
+	icon_greyscale = null
 	chassis_type = "Ward-Takahashi"
+
+#undef IPC_DMI_WARD
 
 // ============================================
 // 6. XION MANUFACTURING GROUP
@@ -388,31 +454,53 @@
 // 9. CYBERSUN INDUSTRIES
 // ============================================
 
+#define IPC_DMI_CYBERSUN 'icons/bandastation/mob/species/ipc/bodyparts_cybersun.dmi'
+
 /obj/item/bodypart/chest/ipc/cybersun
 	name = "Cybersun Industries IPC chassis"
 	desc = "Корпус IPC производства Cybersun Industries. Улучшенные шумопоглотители и расширенные карманные модули."
+	icon = IPC_DMI_CYBERSUN
+	icon_static = IPC_DMI_CYBERSUN
+	icon_greyscale = null
 	chassis_type = "Cybersun"
 
 /obj/item/bodypart/head/ipc/cybersun
 	name = "Cybersun Industries IPC head"
 	desc = "Голова IPC производства Cybersun Industries."
+	icon = IPC_DMI_CYBERSUN
+	icon_static = IPC_DMI_CYBERSUN
+	icon_greyscale = null
 
 /obj/item/bodypart/arm/left/ipc/cybersun
 	name = "Cybersun Industries IPC left arm"
 	desc = "Левая рука IPC производства Cybersun Industries."
+	icon = IPC_DMI_CYBERSUN
+	icon_static = IPC_DMI_CYBERSUN
+	icon_greyscale = null
 	chassis_type = "Cybersun"
 
 /obj/item/bodypart/arm/right/ipc/cybersun
 	name = "Cybersun Industries IPC right arm"
 	desc = "Правая рука IPC производства Cybersun Industries."
+	icon = IPC_DMI_CYBERSUN
+	icon_static = IPC_DMI_CYBERSUN
+	icon_greyscale = null
 	chassis_type = "Cybersun"
 
 /obj/item/bodypart/leg/left/ipc/cybersun
 	name = "Cybersun Industries IPC left leg"
 	desc = "Левая нога IPC производства Cybersun Industries."
+	icon = IPC_DMI_CYBERSUN
+	icon_static = IPC_DMI_CYBERSUN
+	icon_greyscale = null
 	chassis_type = "Cybersun"
 
 /obj/item/bodypart/leg/right/ipc/cybersun
 	name = "Cybersun Industries IPC right leg"
 	desc = "Правая нога IPC производства Cybersun Industries."
+	icon = IPC_DMI_CYBERSUN
+	icon_static = IPC_DMI_CYBERSUN
+	icon_greyscale = null
 	chassis_type = "Cybersun"
+
+#undef IPC_DMI_CYBERSUN
