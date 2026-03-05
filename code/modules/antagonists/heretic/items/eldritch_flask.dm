@@ -103,6 +103,6 @@
 	owner.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_ELDRITCH_ETHER)
 
 /atom/movable/screen/alert/status_effect/eldritch_sleep
-	name = "Паранормальная дремота"
+	name = "Жуткая спячка"
 	desc = "Вы чувствуете неописуемое тепло, которое оберегает вас..."
 	icon_state = "eldritch_slumber"
