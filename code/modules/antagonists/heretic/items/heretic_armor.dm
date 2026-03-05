@@ -519,7 +519,7 @@
 // Moon
 // Converts all damage into brain damage, nullifying the attack in the process
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/moon
-	name = "Resplendent Regalia"
+	name = "\improper Resplendent Regalia"
 	desc = "Обманчивая сущность этого роскошного одеяния искривляет само восприятие. \
 			Наблюдателя неизбежно настигает леденящее откровение; \
 			увиденное им столь же подлинно, как любое иное лицо"
