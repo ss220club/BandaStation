@@ -1,6 +1,6 @@
 
 /obj/item/melee/sickly_blade
-	name = "sickly blade"
+	name = "\improper sickly blade"
 	desc = "Болезненно-зеленый полумесячный клинок, украшенный декоративным глазом. Вы чувствуете, что за вами наблюдают..."
 	icon = 'icons/obj/weapons/khopesh.dmi'
 	icon_state = "eldritch_blade"
