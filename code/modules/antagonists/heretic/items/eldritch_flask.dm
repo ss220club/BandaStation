@@ -67,7 +67,7 @@
 // Funny potion that is basically an aheal. The downside is that it puts you to sleep for a minute.
 /obj/item/ether
 	name = "ether of the newborn"
-	desc = "Фляжка с густой зеленой жидкостью, вызывающей тошноту. Она полностью восстанавливает ваш организм, а затем погружает вас в крепкий сон на одну минуту."
+	desc = "Фляжка с густой зелёной жидкостью, вызывающей тошноту. Она полностью восстанавливает ваш организм, а затем погружает вас в крепкий сон на одну минуту."
 	icon = 'icons/obj/antags/eldritch.dmi'
 	icon_state = "poison_flask"
 
