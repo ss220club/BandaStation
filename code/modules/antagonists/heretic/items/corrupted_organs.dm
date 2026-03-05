@@ -270,7 +270,7 @@
 /// It's full of worms
 /obj/item/organ/appendix/corrupt
 	name = "corrupt appendix"
-	desc = "Что за темная космическая сила вообще потратила силы на то, чтобы проклясть аппендикс?"
+	desc = "Что за тёмная космическая сила вообще потратила силы на то, чтобы проклясть аппендикс?"
 	organ_flags = parent_type::organ_flags | ORGAN_HAZARDOUS
 	/// How likely are we to spawn worms?
 	var/worm_chance = 2
