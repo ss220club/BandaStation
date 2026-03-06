@@ -37,8 +37,12 @@ Regenerative extracts:
 		/datum/reagent/medicine/c2/tirimol = 5,
 	)
 	extract_reagents += isjellyperson(H) ? list(/datum/reagent/toxin/amanitin = 7) :  list(/datum/reagent/medicine/c2/multiver = 15)
-	H.reagents.add_reagent_list(extract_reagents)
+	if(H.reagents)
+		H.reagents.add_reagent_list(extract_reagents)
+	else
+		H.adjust_brute_loss(-25)
 		H.adjust_fire_loss(-25)
+		H.adjust_tox_loss(-25)
 	// BANDASTATION EDIT END
 	core_effect(H, user)
 	playsound(H, 'sound/effects/splat.ogg', 40, TRUE)
