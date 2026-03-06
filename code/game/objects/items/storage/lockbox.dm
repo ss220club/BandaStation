@@ -252,7 +252,7 @@
 
 /obj/item/storage/lockbox/order
 	name = "order lockbox"
-	desc = "Ящик, используемый для защиты небольших заказов от кражи. Да грузчик, речь именно о тебе."
+	desc = "Ящик, используемый для защиты небольших заказов от кражи. Да, грузчик, речь именно о тебе."
 	icon_state = "secure"
 	icon_closed = "secure"
 	icon_locked = "secure_locked"
