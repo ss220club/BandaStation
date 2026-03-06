@@ -135,32 +135,19 @@
 		else
 			transition_filter("ipc_battery_bar_mask", alpha_mask_filter(0, bar_offset), 0.5 SECONDS)
 
-/// Индикатор температуры CPU IPC (аналог hunger bar)
+/// Индикатор температуры CPU IPC — только цветная полоска, без иконки.
 /atom/movable/screen/ipc_temperature
 	name = "CPU temperature"
-	icon_state = "hungerbar"  // Используем ту же основу
-	screen_loc = ui_hunger  // Позиция где обычно hunger
+	icon_state = "hungerbar"
+	screen_loc = ui_hunger
 	mouse_over_pointer = MOUSE_HAND_POINTER
 	/// Текущая температура
 	var/temperature = 30
-	/// Иконка термометра рядом с баром
-	var/image/temp_image
 	/// Сам бар
 	var/atom/movable/screen/ipc_temperature_bar/temp_bar
 
 /atom/movable/screen/ipc_temperature/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
-
-	// Иконка температуры из ipc_ui.dmi.
-	// pixel_x = 5: сдвиг ВПРАВО, т.к. ui_hunger = "EAST-1:2" — слишком мало места влево
-	// (в отличие от ui_mood = "EAST-1:28" у батареи, где отрицательный сдвиг безопасен).
-	temp_image = image(icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi', icon_state = "ipc_monitor", pixel_x = 5)
-	temp_image.plane = plane
-	temp_image.appearance_flags |= KEEP_APART
-	temp_image.add_filter("simple_outline", 2, outline_filter(1, COLOR_BLACK, OUTLINE_SHARP))
-	underlays += temp_image
-
-	// Создаем бар
 	temp_bar = new(src, hud_owner)
 	vis_contents += temp_bar
 
@@ -494,8 +481,7 @@
 		return
 	if(locate(/atom/movable/screen/ipc_humanity) in H.hud_used.infodisplay)
 		return
-	// Убираем ZAS HUD если есть (IPC не дышат, но на всякий случай)
-	var/atom/movable/screen/ipc_humanity/hum = new()
+	var/atom/movable/screen/ipc_humanity/hum = new(null, H.hud_used)
 	H.hud_used.infodisplay += hum
 	H.client?.screen += hum
 
