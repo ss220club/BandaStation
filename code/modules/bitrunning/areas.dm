@@ -5,7 +5,7 @@
 
 /area/station/cargo/bitrunning/den
 	name = "Bitrunning Den"
-	desc = "Офис битранеров, в котором находится их оборудование."
+	desc = "Офис битраннеров, в котором находится их оборудование."
 	icon_state = "bit_den"
 
 /// VDOM
