@@ -5,7 +5,7 @@
 /* НАРУЖНИЕ ЗОНЫ */
 
 /area/trainstation/outdoor
-	name = "Railways"
+	name = "Железная дорога" // Railways
 	outdoors = TRUE
 	requires_power = FALSE
 	always_unpowered = TRUE
@@ -16,7 +16,7 @@
 	daylight = TRUE
 
 /area/trainstation/outdoor/powered_light
-	name = "Train station"
+	name = "Вокзал" // Train station
 	requires_power = FALSE
 	always_unpowered = TRUE
 	power_light = TRUE
@@ -27,15 +27,15 @@
 	daylight = TRUE
 
 /area/trainstation/outdoor/rails
-	name = "Railways"
+	name = "Железная дорога" // Railways
 	icon_state = "rails"
 
 
 /area/trainstation/outdoor/station
-	name = "Station"
+	name = "Станция" // Station
 
 /area/trainstation/outdoor/station/radiosphere
-	name = "The Radiosphere"
+	name = "Радиосфера" // The Radiosphere
 	icon_state = "radio"
 	min_ambience_cooldown = 30 SECONDS
 	max_ambience_cooldown = 1 MINUTES
@@ -56,7 +56,7 @@
 	daylight = FALSE
 
 /area/trainstation/indoors/radiosphere
-	name = "The Radiosphere"
+	name = "Радиосфера" // The Radiosphere
 	icon_state = "radio"
 	min_ambience_cooldown = 15 SECONDS
 	max_ambience_cooldown = 30 SECONDS
@@ -66,10 +66,10 @@
 	)
 
 /area/trainstation/indoors/station
-	name = "Station"
+	name = "Станция" // Station
 
 /area/trainstation/indoors/station/controll
-	name = "Magnetic interlock controll"
+	name = "Магнитный контроллер" // Magnetic interlock controll
 	requires_power = FALSE
 	always_unpowered = FALSE
 	power_environ = TRUE
@@ -79,7 +79,7 @@
 	max_ambience_cooldown = 6 MINUTES
 
 /area/trainstation/indoors/station/powered
-	name = "Trainstation"
+	name = "Вокзал" // Trainstation
 	requires_power = FALSE
 	always_unpowered = FALSE
 	power_environ = TRUE
@@ -89,7 +89,7 @@
 	max_ambience_cooldown = 6 MINUTES
 
 /area/trainstation/indoors/station/collapsed_lab
-	name = "Collapsed Laboratory"
+	name = "Обрушенная лаборатория" // Collapsed Laboratory
 	icon_state = "soyuz"
 	always_unpowered = FALSE
 	power_environ = FALSE
@@ -98,7 +98,7 @@
 	requires_power = FALSE
 
 /area/trainstation/indoors/station/collapsed_lab/caves
-	name = "Caves"
+	name = "Пещеры" // Caves
 	sound_environment = SOUND_ENVIRONMENT_CAVE
 	min_ambience_cooldown = 45 SECONDS
 	ambientsounds = list(
@@ -112,10 +112,10 @@
 	)
 
 /area/trainstation/indoors/station/collapsed_lab/cargo
-	name = "Collapsed Cargo Bay"
+	name = "Обрушенный грузовой отсек" // Collapsed Cargo Bay
 
 /area/trainstation/indoors/station/collapsed_lab/facility
-	name = "Facility Ruins"
+	name = "Руины объекта" // Facility Ruins
 
 
 /*ЗОНЫ СВЯЗАННЫЕ С ПОЕЗДОМ */
@@ -127,43 +127,43 @@
 	icon_state = "bathroom"
 
 /area/trainstation/indoors/train/kitchen
-	name = "Train kitchen"
+	name = "Кухня поезда" // Train kitchen
 	icon_state = "kitchen"
 
 /area/trainstation/indoors/train/reustoran
-	name = "Restauran car"
+	name = "Вагон-ресторан" // Restauran car
 	icon_state = "tea"
 
 /area/trainstation/indoors/train/cook
 
-	name = "Train kitchen"
+	name = "Кухня поезда" // Train kitchen
 	icon_state = "chef"
 
 /area/trainstation/indoors/train/vip
 	icon_state = "vip"
 
 /area/trainstation/indoors/train/security
-	name = "Security car"
+	name = "Вагон охраны" // Security car
 	icon_state = "security"
 
 /area/trainstation/indoors/train/medical
-	name = "Medical car"
+	name = "Медицинский вагон" // Medical car
 	icon_state = "medic"
 
 /area/trainstation/indoors/train/cargo
-	name = "Cargo car"
+	name = "Грузовой вагон" // Cargo car
 	icon_state = "maintenance"
 
 /area/trainstation/indoors/train/containment
-	name = "Containment car"
+	name = "Вагон содержания" // Containment car
 	icon_state = "maintenance"
 
 /area/trainstation/indoors/train/reserch
-	name = "Research car"
+	name = "Исследовательский вагон" // Research car
 	icon_state = "soyuz"
 
 /area/trainstation/indoors/train/server
-	name = "Research car"
+	name = "Исследовательский вагон" // Research car
 	icon_state = "soyuz"
 
 // Индивидуальные зоны вагонов

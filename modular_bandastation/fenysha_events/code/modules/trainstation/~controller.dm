@@ -1,5 +1,5 @@
 /datum/map_config
-	// Является ли эта карта - поездом
+	// Является ли эта карта картой поезда
 	var/trainstation = FALSE
 
 SUBSYSTEM_DEF(train_controller)
@@ -10,15 +10,15 @@ SUBSYSTEM_DEF(train_controller)
 		/datum/controller/subsystem/mapping,
 		/datum/controller/subsystem/daylight,
 	)
-	/// Глобальная карта по которой двигается поезд
+	/// Глобальная карта, по которой движется поезд
 	VAR_FINAL/datum/train_global_map/global_map = null
-	/// Известные, загруженные станции
+	/// Список всех известных и загруженных станций
 	VAR_FINAL/list/known_stations = list()
-	/// Известные станции отсортированные по регионам, включает в себя только не абстрактные станции
+	/// Станции, отсортированные по регионам (только видимые и не абстрактные)
 	VAR_FINAL/list/stations_by_regions = list()
-	/// Порядок регионов для прогрессии (случайный при каждом connect_stations)
+	/// Порядок регионов для прохождения (перемешивается при каждом подключении станций)
 	VAR_FINAL/list/region_order = list()
-	/// Уровни угрозы по циферным обозначениям
+	/// Уровни угрозы в числовом виде для сортировки
 	VAR_FINAL/threat_levels_by_number = list(
 		THREAT_LEVEL_SAFE = 0,
 		THREAT_LEVEL_RISKY = 1,
@@ -26,57 +26,57 @@ SUBSYSTEM_DEF(train_controller)
 		THREAT_LEVEL_HAZARDOUS = 3,
 		THREAT_LEVEL_DEADLY = 4,
 	)
-	/// Станция запланированная для загрузки
+	/// Станция, на которую поезд планирует прибыть следующей
 	var/datum/train_station/planned_to_load = null
 	/// Текущая загруженная станция
 	var/datum/train_station/loaded_station = null
 
-
-
-	/// В какую сторону якобы двигается наш поезд
+	/// Направление движения поезда (визуальное, для эффектов)
 	var/abstract_moving_direction = EAST
-	/// Может ли наш поезд двигаться без рабочего двигателя?
+	/// Разрешено ли движение без работающего двигателя
 	VAR_PRIVATE/no_engine_mode = FALSE
 	VAR_PRIVATE/moving = FALSE
 	VAR_PRIVATE/datum/looping_sound/global_sound/train_sound_loop/soundloop
 
+	/// Активен ли режим поезда (выключается при завершении раунда и т.д.)
 	var/mode_active = TRUE
 
+	/// Список активных событий поезда
 	var/list/running_events
 
+	/// Список терминалов управления станциями
 	var/list/station_terminals
-	/// Теущая выбранная тема для окружения поезда в движении
+	/// Текущая выбранная тема для объектов/эффектов во время движения поезда
 	var/datum/train_object_spawner_theme/selected_theme = null
-	/// Ссылка на двигатель поезда!
+	/// Ссылка на двигатель поезда (ядро турбины)
 	var/obj/machinery/power/train_turbine/core_rotor/train_engine = null
-	// Загружается или выгружается в данный момент станция
+	/// Флаг: станция сейчас загружается или выгружается
 	var/loading = FALSE
 
-
-
 	var/tain_starting = FALSE
-	/// Минимальное время между станциями (даже при маленьком расстоянии)
+	/// Минимальное время между станциями (даже при коротком расстоянии на карте)
 	var/minimum_travel_time = 7 MINUTES
 	var/maximum_travel_time = 30 MINUTES
-	/// Сколько времени занимает одна единица расстояния на глобальной карте
+	/// Сколько времени занимает перемещение на 1 единицу расстояния на глобальной карте
 	var/time_per_map_unit = 4 SECONDS
+	/// Оставшееся время до следующей станции
 	var/time_to_next_station
+	/// Общее время путешествия до следующей станции
 	var/total_travel_time
+	/// Сколько станций уже посещено за раунд
 	var/stations_visited = 0
-	/// Последняя реальная станция, с которой отправился поезд (для глобальной карты)
+	/// Последняя реальная станция, с которой поезд отправился (для корректного отображения на карте)
 	var/datum/train_station/last_departed_station = null
 
-
-
 /**
- * Geters
+ * Геттеры
  */
 
 /datum/controller/subsystem/train_controller/proc/is_moving()
 	return moving
 
 /datum/controller/subsystem/train_controller/proc/allow_spawning()
-	if(loaded_station.station_flags & TRAINSTATION_NO_SPAWNING)
+	if(loaded_station?.station_flags & TRAINSTATION_NO_SPAWNING)
 		return FALSE
 	return TRUE
 
@@ -85,10 +85,10 @@ SUBSYSTEM_DEF(train_controller)
 		return FALSE
 	if(!SSmapping.current_map.trainstation)
 		return FALSE
-	return FALSE
+	return TRUE
 
 /**
- * Loading and inititialization
+ * Инициализация и загрузка
  */
 
 /datum/controller/subsystem/train_controller/Initialize()
@@ -105,7 +105,6 @@ SUBSYSTEM_DEF(train_controller)
 	running_events = list()
 	soundloop = new(start_immediately = FALSE)
 	RegisterSignal(SSticker, COMSIG_TICKER_ENTER_PREGAME, PROC_REF(on_enter_pregame))
-	// add_startup_message("Trainstation: loading game map...")
 	load_stations()
 	connect_stations()
 	global_map.generate()
@@ -156,9 +155,9 @@ SUBSYSTEM_DEF(train_controller)
 	for(var/r in stations_by_regions)
 		region_keys += r
 	region_order = shuffle(region_keys)
+
 	for(var/datum/train_station/TS in known_stations)
 		TS.connect_stations()
-
 
 /datum/controller/subsystem/train_controller/proc/pick_final_station()
 	var/list/candidates = list()
@@ -182,7 +181,6 @@ SUBSYSTEM_DEF(train_controller)
 	for(var/obj/machinery/light/light in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/light))
 		light.update()
 
-
 /datum/controller/subsystem/train_controller/proc/load_train()
 	var/datum/map_template/train/train_template = new()
 	var/obj/effect/landmark/trainstation/train_spawnpoint/spawnpoint = locate() in GLOB.landmarks_list
@@ -200,13 +198,13 @@ SUBSYSTEM_DEF(train_controller)
 
 /datum/controller/subsystem/train_controller/proc/on_enter_pregame()
 	SIGNAL_HANDLER
-	// Сперва на перво сообщим об правилах игры
+	// Сначала объявляем правила игры
 	announce_game()
 	set_station_name("Trainstation 13")
 	addtimer(CALLBACK(src, PROC_REF(set_lobby_screen)), 5 SECONDS)
 
 /**
- * Station handling
+ * Работа со станциями
  */
 
 /datum/controller/subsystem/train_controller/proc/connect_terminals()
@@ -215,15 +213,12 @@ SUBSYSTEM_DEF(train_controller)
 	for(var/obj/machinery/computer/trainstation_control/control in station_terminals)
 		control.set_station(loaded_station)
 
-
-
 /datum/controller/subsystem/train_controller/proc/on_station_unloaded()
 
 /datum/controller/subsystem/train_controller/proc/unload_station(datum/train_station/to_unload, hide_for_players = TRUE)
 	if(!to_unload)
 		return
 	to_unload.unload_station(CALLBACK(src, PROC_REF(on_station_unloaded)))
-
 
 /datum/controller/subsystem/train_controller/proc/on_station_loaded()
 
@@ -242,31 +237,36 @@ SUBSYSTEM_DEF(train_controller)
 
 	if(loaded_station)
 		unload_station(loaded_station, hide_for_players)
+
 	loading = TRUE
 	loaded_station = to_load
 	loaded_station.pre_load()
+
 	var/result = to_load.load_station(CALLBACK(src, PROC_REF(on_station_loaded)))
 	if(!result)
 		return
+
 	if(stop_moving)
 		stop_moving()
+
 	for(var/mob/living/L in GLOB.alive_player_list)
 		L.clear_fullscreen("station_loading", animated = 5 SECONDS)
+
 	if(announce && !(loaded_station.station_flags & TRAINSTATION_ABSCTRACT))
 		show_station_logo(to_load)
+
 	connect_terminals()
 	SEND_SIGNAL(src, COMSIG_TRAINSTATION_LOADED, loaded_station)
 	loading = FALSE
+
 	if(loaded_station.station_flags & TRAINSTATION_NO_FORKS)
 		return
-
 
 /datum/controller/subsystem/train_controller/proc/show_station_logo(datum/train_station/station, silent = FALSE)
 	for(var/mob/player in GLOB.player_list)
 		if(!silent)
 			SEND_SOUND(player, 'modular_bandastation/fenysha_events/sounds/effects/station_logo.ogg')
 		new /atom/movable/screen/station_logo(null, null, station.name, station.creator, player.client)
-
 
 /datum/controller/subsystem/train_controller/proc/set_movement_theme(datum/train_object_spawner_theme/new_theme)
 	var/datum/train_object_spawner_theme/selected = null
@@ -278,15 +278,18 @@ SUBSYSTEM_DEF(train_controller)
 	if(!selected)
 		stack_trace("Trying set null movement theme!")
 		return
+
 	if(selected_theme)
 		selected_theme.on_deselected()
+
 	selected_theme = selected
 	selected_theme.on_selected()
+
 	for(var/obj/effect/landmark/trainstation/object_spawner/spawner in GLOB.train_object_spawners)
 		spawner.set_theme(selected)
 
 /**
- * Movement handling
+ * Управление движением
  */
 
 /datum/controller/subsystem/train_controller/proc/attempt_start(delay = 15 SECONDS)
@@ -298,14 +301,14 @@ SUBSYSTEM_DEF(train_controller)
 		return
 	if(!planned_to_load)
 		return
+
 	var/station_abstract = (loaded_station.station_flags & TRAINSTATION_ABSCTRACT) ? TRUE : FALSE
-	var/msg = "The train will begin moving in [DisplayTimeText(delay)]! \
-			[station_abstract ? "" : "Please prepare to depart from [loaded_station.name]."]"
-	priority_announce(msg, "Train Departure")
+	var/msg = "Поезд начнёт движение через [DisplayTimeText(delay)]! \
+			[station_abstract ? "" : "Приготовьтесь к отправлению со станции [loaded_station.name]."]"
+	priority_announce(msg, "Отправление поезда")
 	tain_starting = TRUE
 	loaded_station.pre_unload()
 	addtimer(CALLBACK(src, PROC_REF(start_moving), FALSE, TRUE, 0), delay)
-
 
 /datum/controller/subsystem/train_controller/proc/check_start()
 	if(SEND_SIGNAL(src, COMSIG_TRAIN_TRY_MOVE) & COMPONENT_BLOCK_TRAIN_MOVEMENT)
@@ -335,7 +338,7 @@ SUBSYSTEM_DEF(train_controller)
 			return
 		planned_to_load = pick(loaded_station.possible_next)
 
-	// Запоминаем, с какой реальной станции мы уехали, чтобы корректно отображать поезд на глобальной карте
+	// Запоминаем последнюю реальную станцию отправления (для глобальной карты)
 	if(loaded_station && !(loaded_station.station_flags & TRAINSTATION_ABSCTRACT) && !istype(loaded_station, /datum/train_station/train_backstage))
 		last_departed_station = loaded_station
 
@@ -357,10 +360,13 @@ SUBSYSTEM_DEF(train_controller)
 		total_travel_time = time_to_next
 		time_to_next_station = time_to_next
 		stations_visited += 1
+
 	set_movement_theme(pick_theme())
 	moving = TRUE
+
 	if(unload_station && !istype(loaded_station, /datum/train_station/train_backstage))
 		load_station(/datum/train_station/train_backstage, FALSE, TRUE, FALSE)
+
 	SSmoving_turfs.on_train_start()
 	soundloop.start()
 	sound_to_playing_players('modular_bandastation/fenysha_events/sounds/steam_short.ogg', volume = 60)
@@ -385,6 +391,7 @@ SUBSYSTEM_DEF(train_controller)
 
 	if(!moving)
 		return
+
 	if((!train_engine || !train_engine.is_active()) && !no_engine_mode)
 		stop_moving()
 		return
@@ -397,7 +404,6 @@ SUBSYSTEM_DEF(train_controller)
 			load_station(planned_to_load, stop_moving = TRUE, hide_for_players = TRUE, announce = TRUE)
 			planned_to_load = null
 
-
 /datum/controller/subsystem/train_controller/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -405,14 +411,14 @@ SUBSYSTEM_DEF(train_controller)
 		ui.open()
 
 /datum/controller/subsystem/train_controller/ui_state(mob/user)
-	return GLOB.admin_states
+	return ADMIN_STATE(R_ADMIN)
 
 /datum/controller/subsystem/train_controller/ui_data(mob/user)
 	var/list/data = list()
 	data["moving"] = moving
 	data["num_turfs"] = length(SSmoving_turfs.to_process)
 	data["stations"] = list()
-	data["planned_station"] = planned_to_load?.name || "None"
+	data["planned_station"] = planned_to_load?.name || "Нет"
 	data["time_to_next_station"] = time_to_next_station
 	data["total_travel_time"] = total_travel_time
 	data["possible_next"] = list()
@@ -423,9 +429,9 @@ SUBSYSTEM_DEF(train_controller)
 			list(
 				"name" = station.name,
 				"type" = station.type,
-				)
 			)
-	data["current_station"] = loaded_station?.name || "None"
+		)
+	data["current_station"] = loaded_station?.name || "Нет"
 	data["blocking"] = loaded_station?.blocking_moving || FALSE
 	return data
 
@@ -457,7 +463,7 @@ SUBSYSTEM_DEF(train_controller)
 				planned_to_load = next
 			return TRUE
 		if("start_moving")
-			if(!train_engine && !train_engine.is_active())
+			if(!train_engine || !train_engine.is_active())
 				no_engine_mode = TRUE
 			start_moving(force = TRUE)
 			return TRUE
@@ -515,7 +521,7 @@ ADMIN_VERB(open_train_controller, R_ADMIN, "Open train controller", "Open active
 	parent = to_show
 	parent.screen += src
 	var/icon_size = world.icon_size
-	maptext = {"<div style="font:'Small Fonts'">[station_name] \n mady by [creator]</div>"}
+	maptext = {"<div style="font:'Small Fonts'">[station_name]\nсоздано [creator]</div>"}
 	maptext_height = icon_size * 6
 	maptext_width = icon_size * 24
 	var/list/client_view = splittext(parent.view, "x")

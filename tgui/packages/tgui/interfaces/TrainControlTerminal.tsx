@@ -68,7 +68,7 @@ export interface TrainControlData {
   map_data: MapData;
 }
 
-/** Region color (stable hash) */
+/** Цвет региона (стабильный хэш) */
 function getRegionColor(region: string): string {
   let hash = 0;
   for (let i = 0; i < region.length; i++) {
@@ -78,7 +78,7 @@ function getRegionColor(region: string): string {
   return `hsl(${hue}, 70%, 52%)`;
 }
 
-/** Quadratic Bezier control point (metro kink style) */
+/** Точка изгиба пути (в стиле метро) */
 function getPathKinkPoint(
   startX: number,
   startY: number,
@@ -186,7 +186,7 @@ export const TrainMapCanvas = (props: TrainMapCanvasProps) => {
     }
     ctx.stroke();
 
-    // ─── Metro-style rail lines ──────────────────────────────────────────────
+    // ─── Линии путей в стиле метро ──────────────────────────────────────────
     for (const path of map_data.paths) {
       const { cx, cy } = getPathKinkPoint(
         path.start_x,
@@ -209,7 +209,7 @@ export const TrainMapCanvas = (props: TrainMapCanvasProps) => {
       const perpX = -dy / len;
       const perpY = dx / len;
 
-      // Left rail
+      // Левый рельс
       ctx.beginPath();
       ctx.moveTo(
         path.start_x + perpX * railGap,
@@ -219,7 +219,7 @@ export const TrainMapCanvas = (props: TrainMapCanvasProps) => {
       ctx.lineTo(path.end_x + perpX * railGap, path.end_y + perpY * railGap);
       ctx.stroke();
 
-      // Right rail
+      // Правый рельс
       ctx.beginPath();
       ctx.moveTo(
         path.start_x - perpX * railGap,
@@ -466,37 +466,37 @@ const StatusPanel = (props: StatusPanelProps) => {
     !props.station_blocked;
 
   const getDepartReason = () => {
-    if (!props.train_engine_active) return 'Train engine is not active';
-    if (props.station_blocked) return 'Magnet lock engaged';
-    if (props.is_moving) return 'Train is already moving';
-    if (!props.planned_station) return 'No destination station selected';
+    if (!props.train_engine_active) return 'Двигатель поезда не запущен';
+    if (props.station_blocked) return 'Магнитный блокиратор включён';
+    if (props.is_moving) return 'Поезд уже в движении';
+    if (!props.planned_station) return 'Не выбрана станция назначения';
     return '';
   };
 
   return (
-    <Section title="Train Status">
+    <Section title="Статус поезда">
       <LabeledList>
-        <LabeledList.Item label="Current Station">
+        <LabeledList.Item label="Текущая станция">
           {props.current_station || '—'}
         </LabeledList.Item>
-        <LabeledList.Item label="Next Station">
+        <LabeledList.Item label="Следующая станция">
           {props.planned_station || '—'}
         </LabeledList.Item>
-        <LabeledList.Item label="Movement">
+        <LabeledList.Item label="Движение">
           <ProgressBar
             value={props.progress}
             color={props.is_moving ? 'good' : 'average'}
           >
             {props.is_moving
-              ? `${Math.ceil(props.time_remaining / 10)} sec remaining`
-              : 'Stopped'}
+              ? `До прибытия ~${Math.ceil(props.time_remaining / 10)} сек`
+              : 'Остановлен'}
           </ProgressBar>
         </LabeledList.Item>
       </LabeledList>
 
       {props.station_blocked && (
         <Box mt={1} color="bad" bold>
-          Magnet lock engaged — station blocked
+          Магнитный блокиратор активен — станция заблокирована
         </Box>
       )}
 
@@ -509,17 +509,17 @@ const StatusPanel = (props: StatusPanelProps) => {
             tooltip={canDepart ? undefined : getDepartReason()}
             onClick={canDepart ? props.onStart : undefined}
           >
-            Depart Train
+            Отправить поезд
           </Button>
 
           <Button
             icon="stop"
             color="bad"
             disabled={!props.is_moving}
-            tooltip={props.is_moving ? undefined : 'Train is not moving'}
+            tooltip={props.is_moving ? undefined : 'Поезд не движется'}
             onClick={props.onStop}
           >
-            Stop Train
+            Остановить поезд
           </Button>
         </Stack>
       )}
@@ -536,9 +536,9 @@ const StatusPanel = (props: StatusPanelProps) => {
             textAlign: 'center',
           }}
         >
-          <strong>Cannot depart:</strong>
+          <strong>Отправка невозможна:</strong>
           <br />
-          {getDepartReason() || 'Check train status'}
+          {getDepartReason() || 'Проверьте статус поезда'}
         </Box>
       )}
     </Section>
@@ -556,26 +556,26 @@ type SelectedStationPanelProps = {
 
 const SelectedStationPanel = (props: SelectedStationPanelProps) => (
   <Section
-    title={`Selected: ${props.selectedObject.name}`}
+    title={`Выбрана станция: ${props.selectedObject.name}`}
     buttons={
       <Button icon="times" color="transparent" onClick={props.onClose} />
     }
   >
     <LabeledList>
-      <LabeledList.Item label="Region">
+      <LabeledList.Item label="Регион">
         {props.selectedObject.region}
       </LabeledList.Item>
       <LabeledList.Item
-        label="Type"
+        label="Тип"
         color={getStationColor(props.selectedObject)}
       >
         {props.selectedObject.station_type}
       </LabeledList.Item>
-      <LabeledList.Item label="Visits">
-        {props.selectedObject.visited} times
+      <LabeledList.Item label="Посещений">
+        {props.selectedObject.visited} раз
       </LabeledList.Item>
-      <LabeledList.Item label="Description">
-        {props.selectedObject.desc || 'No description'}
+      <LabeledList.Item label="Описание">
+        {props.selectedObject.desc || 'Описание отсутствует'}
       </LabeledList.Item>
     </LabeledList>
     {!props.read_only &&
@@ -591,7 +591,7 @@ const SelectedStationPanel = (props: SelectedStationPanelProps) => (
           color="good"
           onClick={props.onSetAsNext}
         >
-          Set as Next Destination
+          Установить как следующую станцию
         </Button>
       )}
   </Section>
@@ -603,7 +603,7 @@ type PossibleNextListProps = {
 };
 
 const PossibleNextList = (props: PossibleNextListProps) => (
-  <Section title="Possible Directions">
+  <Section title="Возможные направления">
     {props.possible_next.map((st) => (
       <Button
         key={st.type}
@@ -693,7 +693,7 @@ export const TrainControlTerminal = () => {
   };
 
   return (
-    <Window title="Train Control Terminal" width={1280} height={720}>
+    <Window title="Пульт управления поездом" width={1280} height={720}>
       <Window.Content
         style={{
           background: 'linear-gradient(180deg, #1e2433 0%, #151a24 100%)',
@@ -729,7 +729,7 @@ export const TrainControlTerminal = () => {
               />
             </Box>
 
-            {/* Controls overlay */}
+            {/* Панель управления видом */}
             <Box
               position="absolute"
               top="10px"
@@ -744,7 +744,7 @@ export const TrainControlTerminal = () => {
                 flexWrap: 'wrap',
               }}
             >
-              <Button onClick={resetView}>Reset View</Button>
+              <Button onClick={resetView}>Сброс вида</Button>
               <Button
                 icon="plus"
                 onClick={() => setScale((s) => Math.min(4, s * 1.25))}
@@ -763,7 +763,7 @@ export const TrainControlTerminal = () => {
               p={1}
               style={{ borderRadius: '6px', zIndex: 30 }}
             >
-              Zoom: {Math.round(scale * 100)}%
+              Масштаб: {Math.round(scale * 100)}%
             </Box>
           </Stack.Item>
 

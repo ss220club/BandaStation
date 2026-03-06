@@ -1,12 +1,12 @@
 /obj/structure/sign/shuttleg250
-	name = "Transfer Shuttle G250"
-	desc = "Transfer Shuttle G250."
+	name = "Трансферный шаттл G250" // Transfer Shuttle G250
+	desc = "Трансферный шаттл G250." // Transfer Shuttle G250.
 	icon = 'modular_bandastation/fenysha_events/icons/unique/shuttles/g250.dmi' //LARGE icon
 	icon_state = "g250"
 
 /obj/structure/fans/tiny/forcefield
-	name = "forcefield"
-	desc = "A fluctuating forcefield for ships to cross."
+	name = "силовое поле" // forcefield
+	desc = "Пульсирующее силовое поле для кораблей." // A fluctuating forcefield for ships to cross.
 	icon = 'modular_bandastation/fenysha_events/icons/unique/shuttles/effects.dmi'
 	icon_state = "forcefield"
 

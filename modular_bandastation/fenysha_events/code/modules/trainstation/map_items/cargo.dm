@@ -5,8 +5,8 @@
 #define CARGO_STORAGE_ATMOS GAS_N2 + "=100;TEMP=233.15"
 
 /obj/machinery/train_cargo_dock
-	name = "Cargo dock port"
-	desc = "Metal port where reinforced cargo can be placed."
+	name = "Порт грузовой стыковки"
+	desc = "Металлический порт для размещения усиленных контейнеров с грузом."
 	icon = 'icons/obj/machines/bitrunning.dmi'
 	icon_state = "byteforge"
 	density = FALSE
@@ -34,8 +34,8 @@
 	idle_power_usage = 0
 
 /obj/machinery/train_cargo
-	name = "Strange cargo container"
-	desc = "A large, sealed container with no markings. It hums with an unknown energy."
+	name = "Странный грузовой контейнер"
+	desc = "Большой герметичный контейнер без каких-либо маркировок. От него исходит низкий гул неизвестной природы."
 	icon = 'modular_bandastation/fenysha_events/icons/machinery/train_cargo.dmi'
 	icon_state = "main"
 	density = TRUE
@@ -51,17 +51,17 @@
 	idle_power_usage = 2000 WATTS
 	layer = ABOVE_TREE_LAYER
 
-	// Основные параметры
+	// Основные параметры контейнера
 	var/container_health = 100
 	var/container_max_health = 100
 
-	// Температура
+	// Температурный режим
 	var/max_temperature = TM15C
 	var/minimal_temperature = TM70C
 	var/container_temperature = TM40C
 	var/heat_expose = 10
 
-	// ГИРОСКОП
+	// Гироскопическая стабилизация
 	var/gyroscope_position = 0
 	var/gyroscope_required = 0
 	var/gyroscope_desired = 0
@@ -100,12 +100,13 @@
 	var/has_power = powered()
 	var/moving = SStrain_controller?.is_moving() || FALSE
 
-
+	// Естественный дрейф гироскопа (усилен во время движения)
 	if(SPT_PROB(5, seconds_per_tick))
 		var/drift_step = rand(-2.5, 2.5) * (moving ? 2 : 1)
 		gyroscope_desired += drift_step
 		gyroscope_desired = clamp(gyroscope_desired, -GYROSCOPE_MAX_ANGLE, GYROSCOPE_MAX_ANGLE)
 
+	// Плавное следование за целевым углом + шум
 	var/max_change = 1.5 * seconds_per_tick
 	var/direction_to_target = gyroscope_required - gyroscope_position
 	var/actual_change = clamp(direction_to_target * gyroscope_follow_speed, -max_change, max_change)
@@ -115,6 +116,7 @@
 	gyroscope_position += noise
 	gyroscope_position = clamp(gyroscope_position, -GYROSCOPE_MAX_ANGLE, GYROSCOPE_MAX_ANGLE)
 
+	// Теплообмен с окружающей средой
 	var/turf/T = get_turf(src)
 	var/datum/gas_mixture/air = T?.return_air()
 	if(air)
@@ -122,6 +124,7 @@
 		if(abs(temp_diff) > MINIMAL_TEMPETURE_DIFF)
 			container_temperature -= temp_diff * 0.60 * seconds_per_tick
 
+	// Расчёт повреждений
 	var/gyro_dev = abs(gyroscope_position - gyroscope_desired)
 	var/temp_bad = container_temperature > max_temperature || container_temperature < minimal_temperature
 	var/should_damage = temp_bad || gyro_dev > MINIMAL_GYRO_DIFF || !has_power
@@ -154,23 +157,25 @@
 			reg += 0.9
 		container_health = min(container_max_health, container_health + reg * seconds_per_tick)
 
+	// Постоянный нагрев окружающей среды
 	if(COOLDOWN_FINISHED(src, heat_cd))
 		if(air)
 			air.temperature += heat_expose / air.heat_capacity()
 			air_update_turf(FALSE, FALSE)
 		COOLDOWN_START(src, heat_cd, heat_expose_cooldown)
 
+	// Случайные аномалии
 	if(COOLDOWN_FINISHED(src, temp_anomaly_cd))
 		if(prob(60))
 			container_temperature += rand(15, 35)
-			balloon_alert_to_viewers("Temperature anomaly detected!")
+			balloon_alert_to_viewers("Обнаружена температурная аномалия!")
 			playsound(src, 'sound/machines/engine_alert/engine_alert1.ogg', 70, TRUE)
 		COOLDOWN_START(src, temp_anomaly_cd, temp_anomaly_cooldown)
 
 	if(COOLDOWN_FINISHED(src, gyro_anomaly_cd))
 		if(prob(70))
 			gyroscope_desired = rand(-45, 45)
-			balloon_alert_to_viewers("Gyroscope anomaly detected!")
+			balloon_alert_to_viewers("Обнаружена аномалия гироскопа!")
 			Shake(4, 4, 2 SECONDS)
 			playsound(src, 'sound/machines/engine_alert/engine_alert1.ogg', 90, TRUE)
 		COOLDOWN_START(src, gyro_anomaly_cd, gyro_anomaly_cooldown)
@@ -187,11 +192,11 @@
 /obj/machinery/train_cargo/proc/connect_to_dock(dock)
 	if(!istype(dock, /obj/machinery/train_cargo_dock))
 		return FALSE
-	balloon_alert_to_viewers("Connecting to dock!")
+	balloon_alert_to_viewers("Подключение к стыковочному порту...")
 	var/failed = FALSE
 	for(var/turf/T in orange(1, src))
 		if(isclosedturf(T))
-			T.balloon_alert_to_viewers("Blocked by closed turf!")
+			T.balloon_alert_to_viewers("Заблокировано закрытой поверхностью!")
 			failed = TRUE
 	if(failed)
 		return FALSE
@@ -202,7 +207,7 @@
 	return TRUE
 
 /obj/machinery/train_cargo/proc/after_connect()
-	balloon_alert_to_viewers("Initialize the containment procedure!")
+	balloon_alert_to_viewers("Запуск процедуры удержания!")
 	for(var/turf/T in orange(1, src))
 		var/obj/machinery/train_cargo_part/part = new(T)
 		part.name = name
@@ -213,11 +218,12 @@
 	sleep(5 SECONDS)
 	begin_processing()
 	set_light(6, 2, COLOR_CARP_DARK_BLUE, l_on = TRUE)
-	balloon_alert_to_viewers("Initialized!")
+	balloon_alert_to_viewers("Процедура удержания активирована!")
+
 
 /obj/machinery/computer/train_cargo_control
-	name = "Cargo control console"
-	desc = "Abnormal cargo control console."
+	name = "Пульт управления грузом"
+	desc = "Консоль управления аномальным грузом."
 	icon_state = "computer"
 	density = TRUE
 	uses_integrity = FALSE

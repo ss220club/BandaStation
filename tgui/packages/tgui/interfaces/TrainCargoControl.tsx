@@ -41,7 +41,7 @@ const safeToFixed = (
 export const TrainCargoControl = () => {
   const { act, data } = useBackend<CargoData>();
 
-  // Safe values with fallbacks
+  // Безопасные значения с запасными
   const connected = !!data.connected;
   const health = safeNum(data.container_health, 100);
   const temperature = safeNum(data.container_temperature, 40);
@@ -62,14 +62,14 @@ export const TrainCargoControl = () => {
 
   return (
     <Window
-      title="CARGO CONTROL SYSTEM • CLASSIFIED"
+      title="СИСТЕМА УПРАВЛЕНИЯ ГРУЗОМ • СЕКРЕТНО"
       width={460}
       height={800}
       theme="abductor"
     >
       <Window.Content backgroundColor="#0a0a12" scrollable>
         <Stack fill vertical>
-          {/* === Контейнер (круглый визуализатор) === */}
+          {/* === Визуализатор контейнера (круглый) === */}
           <Stack.Item>
             <Box
               style={{
@@ -165,10 +165,10 @@ export const TrainCargoControl = () => {
                 }}
               >
                 <Box fontSize="28px" bold fontFamily="Courier New">
-                  CARGO
+                  ГРУЗ
                 </Box>
                 <Box fontSize="11px" opacity={0.6} mt={-0.5}>
-                  ANOMALOUS CONTAINMENT
+                  АНОМАЛЬНОЕ СОДЕРЖИМОЕ
                 </Box>
               </Box>
             </Box>
@@ -176,7 +176,7 @@ export const TrainCargoControl = () => {
 
           {/* === Гироскоп (полукруглая шкала) === */}
           <Stack.Item>
-            <Section title="Gyroscope Control" textAlign="center">
+            <Section title="Управление гироскопом" textAlign="center">
               <Box
                 style={{
                   position: 'relative',
@@ -203,7 +203,7 @@ export const TrainCargoControl = () => {
 
                 {/* Метки градусов по дуге */}
                 {[-50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50].map((deg) => {
-                  const angle = deg * (180 / 100); // от -50 до 50 → -90° .. +90°
+                  const angle = deg * (180 / 100);
                   const rad = (angle * Math.PI) / 180;
                   const radius = 125;
                   const x = 170 + Math.cos(rad - Math.PI / 2) * radius;
@@ -238,6 +238,7 @@ export const TrainCargoControl = () => {
                   );
                 })}
 
+                {/* Индикатор целевого положения (жёлтый треугольник) */}
                 {(() => {
                   const angleDeg = gyroReq * (180 / 100);
                   const rad = (angleDeg * Math.PI) / 180;
@@ -299,7 +300,7 @@ export const TrainCargoControl = () => {
                   />
                 </Box>
 
-                {/* Текст Current / Target */}
+                {/* Текст: Текущее / Целевое / Требуемое */}
                 <Box
                   style={{
                     position: 'absolute',
@@ -313,26 +314,26 @@ export const TrainCargoControl = () => {
                     whiteSpace: 'nowrap',
                   }}
                 >
-                  Current:{' '}
+                  Текущее:{' '}
                   <span
                     style={{ color: gyroDiff > 25 ? '#ff4444' : '#00ffcc' }}
                   >
                     {safeToFixed(data.gyro_position)}°
                   </span>
                   {'  •  '}
-                  Target:{' '}
+                  Цель:{' '}
                   <span style={{ color: '#ffcc00' }}>
                     {safeToFixed(data.gyro_required)}°
                   </span>
                   {'  •  '}
-                  Required:{' '}
+                  Требуется:{' '}
                   <span style={{ color: '#88ccff' }}>
                     {safeToFixed(data.gyro_desired)}°
                   </span>
                 </Box>
               </Box>
 
-              {/* Скрытый/полупрозрачный слайдер для управления */}
+              {/* Скрытый слайдер для управления (полупрозрачный) */}
               <Slider
                 value={gyroReq}
                 minValue={-50}
@@ -357,7 +358,7 @@ export const TrainCargoControl = () => {
           <Stack.Item grow>
             <Flex fill>
               <Flex.Item grow basis={0}>
-                <Section title="Temperature" textAlign="center">
+                <Section title="Температура" textAlign="center">
                   <ProgressBar
                     value={temperature}
                     minValue={minTemp - 30}
@@ -378,7 +379,7 @@ export const TrainCargoControl = () => {
               </Flex.Item>
 
               <Flex.Item grow basis={0}>
-                <Section title="Containment Integrity" textAlign="center">
+                <Section title="Целостность удержания" textAlign="center">
                   <ProgressBar
                     value={health}
                     minValue={0}
@@ -396,17 +397,17 @@ export const TrainCargoControl = () => {
           {isCritical && (
             <Stack.Item>
               <Section
-                title="⚠ CRITICAL DESTABILIZATION"
+                title="⚠ КРИТИЧЕСКАЯ ДЕСТАБИЛИЗАЦИЯ"
                 color="bad"
                 bold
                 textAlign="center"
               >
-                {health < 30 && <Box>Field integrity critical!</Box>}
-                {gyroDiff > 25 && <Box>Gyroscope severely unbalanced!</Box>}
+                {health < 30 && <Box>Целостность поля критически низкая!</Box>}
+                {gyroDiff > 25 && <Box>Гироскоп сильно разбалансирован!</Box>}
                 {(temperature < minTemp - 5 || temperature > maxTemp + 5) && (
-                  <Box>Temperature anomaly detected!</Box>
+                  <Box>Обнаружена температурная аномалия!</Box>
                 )}
-                {!isPowered && <Box>Stabilizer power failure!</Box>}
+                {!isPowered && <Box>Отказ питания стабилизатора!</Box>}
               </Section>
             </Stack.Item>
           )}
@@ -414,8 +415,8 @@ export const TrainCargoControl = () => {
           {/* === Статус поезда === */}
           <Stack.Item>
             <Box textAlign="center" opacity={0.7} fontSize="12px">
-              Train: <b>{isMoving ? 'MOVING' : 'STATIONARY'}</b> • Power:{' '}
-              <b>{isPowered ? 'STABLE' : 'FAIL'}</b>
+              Поезд: <b>{isMoving ? 'В ДВИЖЕНИИ' : 'НА СТАНЦИИ'}</b> • Питание:{' '}
+              <b>{isPowered ? 'НОРМА' : 'ОТКАЗ'}</b>
             </Box>
           </Stack.Item>
         </Stack>

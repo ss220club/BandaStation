@@ -1,12 +1,12 @@
 /datum/train_station/near_station/cargo_station
-	name = "Nearstation - Cargo station"
+	name = "Пристанционная зона — Грузовой терминал"
 	map_path = "_maps/modular_events/trainstation/nearstations/static_cargo_station.dmm"
 
 /datum/train_station/cargo_station
-	name = "Cargo station"
+	name = "Грузовой терминал"
 	map_path = "_maps/modular_events/trainstation/cargo_station.dmm"
-	desc = "An old but reliable station for loading cargo onto freight trains. \
-			This particular one is located inside a mountain range."
+	desc = "Старая, но надёжная станция для погрузки грузов на товарные поезда. \
+			Эта конкретная расположена внутри горного массива."
 
 	possible_nearstations = list(/datum/train_station/near_station/cargo_station)
 	station_flags = TRAINSTATION_NO_SELECTION
@@ -19,13 +19,14 @@
 	creator = "Fenysha"
 
 /datum/train_station/cargo_station/thundra_1
-	name = "Emergency Cargo station"
+	name = "Аварийный грузовой терминал"
 
 /datum/train_station/cargo_station/thundra_2
-	name = "River Cargo station"
+	name = "Речной грузовой терминал"
 	map_path = "_maps/modular_events/trainstation/cargo_station_river.dmm"
-	desc = "An old but reliable station for loading cargo onto freight trains. \
-			This particular one is located inside a mountain range."
+	desc = "Старая, но надёжная станция для погрузки грузов на товарные поезда. \
+			Эта конкретная расположена внутри горного массива."
+
 
 /datum/train_station/cargo_station/after_load()
 	. = ..()
@@ -37,31 +38,35 @@
 		if(SSshuttle.load_template(new /datum/map_template/shuttle/cargo/cargo_train()))
 			SSshuttle.moveShuttle(SSshuttle.supply, "cargo_away", TRUE)
 
+
 /datum/train_station/cargo_station/pre_unload()
 	. = ..()
 	if(SSshuttle.supply && SSshuttle.supply.getDockedId() != "cargo_away")
 		SSshuttle.moveShuttle(SSshuttle.supply, "cargo_away", TRUE)
 
+
 /obj/machinery/computer/cargo
 	var/is_train_cargo = FALSE
 
 /obj/machinery/computer/cargo/train_cargo
-	name = "Cargo train console"
-	desc = "Used to order supplies, approve requests, and control the cargo train."
-	safety_warning = "For safety and ethical reasons, the automated cargo train cannot transport live organisms, \
-		human remains, classified nuclear weaponry, mail, undelivered departmental order crates, syndicate bombs, \
-		homing beacons, unstable eigenstates, fax machines, or machinery housing any form of artificial intelligence."
+	name = "Пульт управления грузовым поездом"
+	desc = "Используется для заказа поставок, утверждения запросов и управления грузовым поездом."
+	safety_warning = "По соображениям безопасности и этики автоматизированный грузовой поезд не может перевозить живые организмы, \
+		человеческие останки, засекреченное ядерное вооружение, почту, нераспакованные departmental-заказы, бомбы Синдиката, \
+		маяки наведения, нестабильные эйген-состояния, факс-машины или любое оборудование, содержащее формы искусственного интеллекта."
 	is_train_cargo = TRUE
+
 
 /obj/machinery/computer/cargo/interact(mob/user, special_state)
 	if(SStrain_controller.mode_active && !is_train_cargo)
-		balloon_alert_to_viewers("Cargo shuttl will not work on this planet!")
+		balloon_alert_to_viewers("Грузовой шаттл не работает на этой планете!")
 		return
 	return ..()
 
+
 /obj/structure/train_car_blank
-	name = "Train cargo"
-	desc = "Moving train cargo, better not to stay on it's way!"
+	name = "Вагон поезда"
+	desc = "Движущийся грузовой вагон. Лучше не стоять у него на пути!"
 	icon = 'modular_bandastation/fenysha_events/icons/structures/train_blank.dmi'
 	icon_state = "normal"
 	density = TRUE
@@ -77,7 +82,7 @@
 	var/car_width = 17
 	var/car_height = 12
 
-	/// How often fake wagons move, in deciseconds
+	/// Как часто фейковые вагоны делают шаг, в децисекундах
 	var/step_delay = 2
 
 /obj/structure/train_car_blank/proc/get_length_for_dir(direction)
@@ -159,10 +164,11 @@
 /datum/map_template/shuttle/cargo/cargo_train
 	prefix = "_maps/modular_events/"
 	suffix = "trainstation"
-	name = "Cargo train"
+	name = "Грузовой поезд"
+
 
 /obj/docking_port/mobile/supply/cargo_train
-	name = "Cargo train"
+	name = "Грузовой поезд"
 	callTime = 3 MINUTES
 
 	var/fake_car_count = 3
@@ -293,7 +299,6 @@
 
 
 /obj/docking_port/stationary/cargo_station
-	name = "Cargo train dock"
+	name = "Стыковочный узел грузового поезда"
 	override_can_dock_checks = TRUE
 	shuttle_id = "cargo_home"
-

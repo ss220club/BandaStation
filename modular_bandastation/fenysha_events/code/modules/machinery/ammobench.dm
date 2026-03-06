@@ -151,7 +151,7 @@
 			var/amt = raw[mat_ref] * creation_efficiency
 			eff_cost[mat_ref] = amt
 
-			var/datum/material/M = GET_MATERIAL_REF(mat_ref)
+			var/datum/material/M = SSmaterials.get_material(mat_ref)
 			tooltip += "[amt / SHEET_MATERIAL_AMOUNT] × [M.name]"
 			if(length(eff_cost) < length(raw))
 				tooltip += ", "
@@ -166,8 +166,10 @@
 		ui = new(user, src, "AmmoWorkbench")
 		ui.open()
 
+
 	if(shocked)
 		shock(user, 80)
+
 
 /obj/machinery/ammo_workbench/ui_data(mob/user)
 	var/list/data = list()
@@ -475,13 +477,15 @@
 	disk_error_type = ""
 	SStgui.update_uis(src)
 
-/obj/machinery/ammo_workbench/proc/shock(mob/user, prb)
+/obj/machinery/ammo_workbench/shock(mob/living/shocking, chance, shock_source, siemens_coeff)
+	. = ..()
+
 	if(machine_stat & (BROKEN|NOPOWER))
 		return FALSE
-	if(!prob(prb))
+	if(!prob(chance))
 		return FALSE
 	do_sparks(5, TRUE, src)
-	return electrocute_mob(user, get_area(src), src, 0.7, TRUE)
+	return electrocute_mob(shocking, get_area(src), src, 0.7, TRUE)
 
 /datum/wires/ammo_workbench
 	holder_type = /obj/machinery/ammo_workbench

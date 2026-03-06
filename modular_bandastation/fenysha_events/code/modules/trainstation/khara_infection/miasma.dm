@@ -1,9 +1,9 @@
 /datum/reagent/toxin/khara
-	name = "Khara spores"
-	description = "Microscopic bioengineered spores of alien origin. They aggressively colonize \
-					organic tissues, inducing rapid, tumor-like growths that eventually birth a new predatory lifeform."
+	name = "Споры Кхара"
+	description = "Микроскопические биоинженерные споры внеземного происхождения. Они агрессивно колонизируют \
+					органические ткани, вызывая стремительный рост опухолеподобных образований, которые в итоге рождают новую хищную форму жизни."
 	color = COLOR_MAROON
-	taste_description = "bitter iron and rot"
+	taste_description = "горькое железо и гниль"
 	taste_mult = 1.4
 	chemical_flags = REAGENT_IGNORE_STASIS | REAGENT_INVISIBLE
 	metabolization_rate = REAGENTS_METABOLISM * 4
@@ -19,6 +19,7 @@
 	if(!L || !(L.organ_flags & ORGAN_ORGANIC))
 		return
 
+	// Пространственный антибиотик полностью блокирует заражение спорами Кхара
 	if(affected_mob.reagents.has_reagent(/datum/reagent/medicine/spaceacillin))
 		return
 

@@ -1,5 +1,5 @@
 /obj/effect/overlay/water
-	name = "water"
+	name = "вода" // water
 	icon = 'modular_bandastation/fenysha_events/icons/unique/pool.dmi'
 	icon_state = "bottom"
 	density = FALSE
@@ -13,11 +13,10 @@
 	layer = BELOW_MOB_LAYER
 	plane = GAME_PLANE
 
-//standard
-/obj/effect/turf_decal/stripes
+//стандартный //standard
 	icon = 'modular_bandastation/fenysha_events/icons/turf/decals/bubber.dmi'
 
-//SIDING
+//ОБШИВКА //SIDING
 
 /obj/effect/turf_decal/siding
 	icon = 'modular_bandastation/fenysha_events/icons/turf/decals/bubber.dmi'
@@ -41,7 +40,7 @@
 /obj/effect/turf_decal/siding/wideplating_new
 	color = "#757476"
 
-//dark
+//темный //темный //dark
 
 /obj/effect/turf_decal/siding/dark
 	color = "#3d3e44"
@@ -58,7 +57,7 @@
 /obj/effect/turf_decal/siding/wideplating_new/dark
 	color = "#3d3e44"
 
-//light
+//светлый //light
 
 /obj/effect/turf_decal/siding/light
 	color = "#e2e2e2"
@@ -125,17 +124,17 @@
 	icon_state = "caution_blue"
 
 
-// Full credit goes to VG station for these assets. https://github.com/vgstation-coders/vgstation13
-// All items in this .dm and the associated .dmi were made by VG station and all credit should go to them.
+// Полная заслуга принадлежит VG station за эти ассеты. https://github.com/vgstation-coders/vgstation13
+// Все предметы в этом .dm и связанном .dmi были созданы VG station и вся заслуга принадлежит им.
 
-// -<| IMPORTANT MAPPER NOTE |>-
-// Change the 'color' variable on any white sprite to simply recolour it!
+// -<| ВАЖНАЯ ЗАМЕТКА МАППЕРА |>-
+// Измените переменную 'color' на любом белом спрайте, чтобы просто перекрасить его!
 
 /obj/effect/turf_decal/vg_decals
 	icon = 'modular_bandastation/fenysha_events/icons/turf/decals/vgstation_decals.dmi'
 	icon_state = "no"
 
-// NUMBERS START
+// НАЧАЛО НОМЕРОВ // NUMBERS START
 
 /obj/effect/turf_decal/vg_decals/numbers
 	icon_state = "no"
@@ -170,9 +169,9 @@
 /obj/effect/turf_decal/vg_decals/numbers/zero
 	icon_state = "0"
 
-// NUMBERS END
+// КОНЕЦ НОМЕРОВ // NUMBERS END
 
-// ATMOS START
+// НАЧАЛО АТМОСФЕРЫ // ATMOS START
 
 /obj/effect/turf_decal/vg_decals/atmos
 	icon_state = "no"
@@ -198,9 +197,9 @@
 /obj/effect/turf_decal/vg_decals/atmos/mix
 	icon_state = "mix"
 
-// ATMOS END
+// КОНЕЦ АТМОСФЕРЫ // ATMOS END
 
-// DEPARTMENT START
+// НАЧАЛО ОТДЕЛА // DEPARTMENT START
 
 /obj/effect/turf_decal/vg_decals/department/hop
 	icon_state = "hop"
@@ -226,9 +225,9 @@
 /obj/effect/turf_decal/vg_decals/department/zoo
 	icon_state = "zoo"
 
-// DEPARTMENT END
+// КОНЕЦ ОТДЕЛА // DEPARTMENT END
 
-// MISC START
+// РАЗНОЕ НАЧАЛО // MISC START
 
 /obj/effect/turf_decal/vg_decals/no
 	icon_state = "no"
@@ -242,4 +241,4 @@
 /obj/effect/turf_decal/vg_decals/radiation_custom
 	icon_state = "radiation-w"
 
-// MISC END
+// РАЗНОЕ КОНЕЦ // MISC END

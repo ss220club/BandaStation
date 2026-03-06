@@ -2,15 +2,13 @@
 	color = COLOR_GOLD
 
 /obj/item/keycard/important/trainstation/lab_key
-	name = "Lab Keycard"
-	desc = "A keycard granting access to the laboratory."
-
+	name = "Ключ-карта лаборатории"
+	desc = "Ключ-карта с высоким уровнем допуска, открывающая доступ в лабораторный комплекс."
 
 
 /obj/structure/prop/big/bigdice/radiosphere
-	name = "The Radiosphere"
-	desc = "A massive array of sensors and signal amplifiers enclosed in a \
-			shell resembling a symmetrical octahedron. A faint noise emanates from this object."
+	name = "Радиосфера"
+	desc = "Огромный комплекс датчиков и усилителей сигнала, заключённый в оболочку, напоминающую идеально симметричный октаэдр. От объекта исходит едва уловимый, постоянный шум — словно далёкий шёпот эфира."
 	icon = 'modular_bandastation/fenysha_events/icons/structures/radiosphere.dmi'
 	icon_state = "main"
 	density = TRUE
@@ -18,10 +16,9 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	flags_1 = SUPERMATTER_IGNORES_1
 	pixel_x = -240
-	pixel_x = -32
+	pixel_y = -32
 
 	plane = MASSIVE_OBJ_PLANE
-	plane = ABOVE_LIGHTING_PLANE
 	appearance_flags = LONG_GLIDE
 
 

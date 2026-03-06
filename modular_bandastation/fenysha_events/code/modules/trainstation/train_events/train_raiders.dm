@@ -1,7 +1,7 @@
-
 /obj/item/tank/jump_jetpack
-	name = "Jump jetpack"
-	desc = "A tank of compressed gas for use as propulsion in zero-gravity areas. Use with caution."
+	name = "Реактивный ранец-прыгун"
+	desc = "Баллон со сжатым газом для использования в качестве реактивного ранца в условиях невесомости. \
+			Использовать с осторожностью — резкие манёвры могут закончиться плохо."
 	icon_state = "jetpack-mini"
 	inhand_icon_state = "jetpack-black"
 	lefthand_file = 'icons/mob/inhands/equipment/jetpacks_lefthand.dmi'
@@ -11,12 +11,12 @@
 	distribute_pressure = ONE_ATMOSPHERE * O2STANDARD
 	actions_types = list(/datum/action/cooldown/jetpack_jump)
 
-	var/jump_range = 7
-	var/jump_speed = 1
+	var/jump_range = 7          // Максимальная дистанция прыжка (в тайлах)
+	var/jump_speed = 1          // Скорость анимации прыжка (множитель)
 
 /datum/action/cooldown/jetpack_jump
-	name = "Jump with jetpack"
-	desc = "Click this ability to attack."
+	name = "Прыжок с реактивным ранцем"
+	desc = "Кликните по цели, чтобы совершить мощный прыжок в указанную точку."
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "jetboot"
 	background_icon = 'icons/mob/actions/actions_items.dmi'
@@ -30,25 +30,28 @@
 /datum/action/cooldown/jetpack_jump/Activate(atom/target)
 	if(!target)
 		return FALSE
+
 	var/mob/living/carbon/human/jumper = owner
 	var/obj/item/tank/jump_jetpack/jetpack = locate() in owner.contents
 	if(!jetpack)
-		jumper.balloon_alert(jumper, "Your jump jetpack is missing!")
+		jumper.balloon_alert(jumper, "Ранец пропал!")
 		return FALSE
+
 	if(isclosedturf(target))
-		jumper.balloon_alert(jumper, "Can't jump there!")
+		jumper.balloon_alert(jumper, "Туда нельзя прыгнуть!")
 		return FALSE
 
 	var/turf/target_turf = target
 	if(!can_see(target_turf, jumper, jetpack.jump_range))
-		jumper.balloon_alert(jumper, "Can't jump there!")
+		jumper.balloon_alert(jumper, "Слишком далеко!")
 		return FALSE
+
 	new /obj/effect/temp_visual/telegraphing/boss_hit(target_turf)
 
 	var/ignores = IGNORE_SLOWDOWNS|IGNORE_TARGET_LOC_CHANGE|IGNORE_USER_LOC_CHANGE
 	if(!do_after(jumper, 1 SECONDS, jumper, ignores, max_interact_count = 1))
 		StartCooldown(3 SECONDS)
-		jumper.balloon_alert(jumper, "Interupted!")
+		jumper.balloon_alert(jumper, "Прыжок прерван!")
 		return FALSE
 
 	INVOKE_ASYNC(src, PROC_REF(perform_jump), jumper, target_turf)
@@ -71,7 +74,8 @@
 
 	var/dist_to_turf = get_dist(jumper, target_turf)
 	var/steps = dist_to_turf * 4
-	var/apex_height = 60 + dist_to_turf * 9
+	var/apex_height = 60 + dist_to_turf * 9  // Высота дуги прыжка
+
 	for(var/i in 1 to steps)
 		if(get_turf(jumper) == target_turf)
 			break
@@ -93,7 +97,9 @@
 		jumper.transform = matrix(jumper.transform) * matrix(lean, MATRIX_ROTATE)
 		jumper.pixel_z = current_z
 		jumper.pixel_y = current_y
+
 		new /obj/effect/temp_visual/decoy/fading/halfsecond(get_turf(jumper), jumper, 200)
+
 		if(i % 4 == 0)
 			var/turf/next_turf = get_step_towards(jumper, target_turf)
 
@@ -112,20 +118,21 @@
 	jumper.set_anchored(FALSE)
 	jumper.movement_type = GROUND
 
-
 	jumper.pixel_z = start_z
 	jumper.pixel_y = start_y
 	jumper.transform = initial(jumper.transform)
 
 	playsound(jumper, 'sound/items/weapons/kinetic_accel.ogg', 100, TRUE)
 
+	// Удар по приземлению
 	for(var/mob/living/L in get_turf(jumper))
 		if(L == jumper)
 			continue
 		L.Knockdown(2 SECONDS)
 
+
 /datum/outfit/train_raider
-	name = "Train raider - basic"
+	name = "Рейдер поезда — базовый"
 
 	uniform = /obj/item/clothing/under/rank/centcom/military
 	shoes = /obj/item/clothing/shoes/combat
@@ -137,8 +144,6 @@
 	l_pocket = /obj/item/ammo_box/magazine/c35sol_pistol
 	id = /obj/item/card/id/advanced/chameleon/black
 	belt = /obj/item/tank/jump_jetpack
-
-
 
 	box = /obj/item/storage/box/survival/syndie
 	id_trim = /datum/id_trim/chameleon/operative
@@ -160,6 +165,7 @@
 
 	var/obj/item/implant/weapons_auth/weapons_implant = new/obj/item/implant/weapons_auth(user)
 	weapons_implant.implant(user)
+
 	var/obj/item/clothing/suit/coat = new winter_coat()
 	if(istype(coat, /obj/item/clothing/suit))
 		coat.slot_flags = ITEM_SLOT_NECK
@@ -168,13 +174,14 @@
 		coat.slowdown = 0
 		coat.set_armor(/datum/armor/none)
 		user.equip_to_slot_or_del(coat, ITEM_SLOT_NECK)
+
 	user.add_faction(ROLE_SYNDICATE)
 	user.update_icons()
 
-/datum/outfit/train_raider/shotgun
-	name = "Train raider - shotgun"
-	suit_store = /obj/item/gun/ballistic/shotgun/automatic/combat
 
+/datum/outfit/train_raider/shotgun
+	name = "Рейдер поезда — дробовик"
+	suit_store = /obj/item/gun/ballistic/shotgun/automatic/combat
 
 /datum/outfit/train_raider/shotgun/New()
 	backpack_contents += list(
@@ -182,10 +189,10 @@
 	)
 	. = ..()
 
-/datum/outfit/train_raider/rifleman
-	name = "Train raider - rifleman"
-	suit_store = /obj/item/gun/ballistic/automatic/mini_uzi
 
+/datum/outfit/train_raider/rifleman
+	name = "Рейдер поезда — автоматчик"
+	suit_store = /obj/item/gun/ballistic/automatic/mini_uzi
 
 /datum/outfit/train_raider/rifleman/New()
 	backpack_contents += list(
@@ -193,19 +200,21 @@
 	)
 	. = ..()
 
+
 /datum/job/train_raider
-	title = "Train raider"
+	title = "Рейдер поезда"
+
 
 /datum/antagonist/train_raider
-	name = "Train raider"
-	roundend_category = "raiders"
+	name = "Рейдер поезда"
+	roundend_category = "рейдеры"
 	antagpanel_category = ANTAG_GROUP_SYNDICATE
 	pref_flag = ROLE_TRAITOR
 	antag_hud_name = "synd"
 	antag_moodlet = /datum/mood_event/focused
 	show_to_ghosts = TRUE
-	hijack_speed = 2 //If you can't take out the station, take the shuttle instead.
-	suicide_cry = "FOR THE SYNDICATE!!"
+	hijack_speed = 2
+	suicide_cry = "ЗА СИНДИКАТ!!"
 
 	var/static/list/possible_outfits = list(
 		/datum/outfit/train_raider/rifleman,
@@ -219,9 +228,10 @@
 
 /datum/antagonist/train_raider/forge_objectives()
 	var/datum/objective/custom/destroy_cargo = new()
-	destroy_cargo.name = "Destroy the cargo"
-	destroy_cargo.explanation_text = "Break the integrity of the cargo transported by train and seize the resources!"
+	destroy_cargo.name = "Уничтожить груз"
+	destroy_cargo.explanation_text = "Разрушь целостность перевозимого поезда груза и захвати ресурсы!"
 	objectives += destroy_cargo
+
 
 /datum/antagonist/train_raider/proc/equip_raider()
 	var/outfit = pick(possible_outfits)
@@ -235,12 +245,13 @@
 		return
 	raider.equip_species_outfit(outfit)
 
+
 /datum/round_event_control/train_raiders
-	name = "Train raiders"
+	name = "Рейдеры поезда"
 	category = EVENT_CATEGORY_INVASION
-	description = "Raiders gathered around the train to break into it and destroy the cargo."
+	description = "Группа рейдеров окружила поезд, чтобы ворваться внутрь и уничтожить груз."
 	typepath = /datum/round_event/ghost_role/train_raiders
-	weight = 0
+	weight = 0  // По умолчанию выключено, включается вручную или через админку
 
 /datum/round_event/ghost_role/train_raiders
 	minimum_required = 1
@@ -255,7 +266,14 @@
 
 
 /datum/round_event/ghost_role/train_raiders/spawn_role()
-	var/list/chosen = SSpolling.poll_ghost_candidates(check_jobban = ROLE_TRAITOR, role = ROLE_TRAITOR, role_name_text = "Train raider", alert_pic = /obj/vehicle/ridden/trainstation, amount_to_pick = 4)
+	var/list/chosen = SSpolling.poll_ghost_candidates(
+		check_jobban = ROLE_TRAITOR,
+		role = ROLE_TRAITOR,
+		role_name_text = "Рейдер поезда",
+		alert_pic = /obj/vehicle/ridden/trainstation,
+		amount_to_pick = 4
+	)
+
 	if(!islist(chosen))
 		chosen = list(chosen)
 
@@ -265,37 +283,49 @@
 	var/list/spawn_points = null
 	for(var/obj/effect/landmark/trainstation/raider_spawnpoint/spawn_point in GLOB.landmarks_list)
 		LAZYADD(spawn_points, spawn_point)
+
 	if(!length(spawn_points))
 		return MAP_ERROR
+
 	for(var/mob/mob in chosen)
 		var/turf/spawn_location = get_turf(pick(spawn_points))
 		spawn_bad_guy(spawn_location, mob.client)
+
 	return SUCCESSFUL_SPAWN
+
 
 /datum/round_event/ghost_role/train_raiders/proc/spawn_bad_guy(turf/spawn_turf, client/bad_guy)
 	var/mob/living/carbon/human/raider = new(spawn_turf)
 	raider.randomize_human_appearance(~RANDOMIZE_SPECIES)
 	raider.dna.update_dna_identity()
+
 	var/datum/mind/mind = new /datum/mind(bad_guy.key)
 	mind.set_assigned_role(SSjob.get_job_type(/datum/job/train_raider))
 	mind.active = TRUE
 	mind.transfer_to(raider)
+
 	if(!raider.client?.prefs.read_preference(/datum/preference/toggle/nuke_ops_species))
 		var/species_type = raider.client.prefs.read_preference(/datum/preference/choiced/species)
 		raider.set_species(species_type)
+
 	mind.add_antag_datum(/datum/antagonist/train_raider)
+
 	var/bike_type = pick(possible_vehicles)
 	var/obj/vehicle/ridden/trainstation/raider_bike = new bike_type(spawn_turf)
 	raider_bike.dir = SStrain_controller.abstract_moving_direction
 	raider_bike.buckle_mob(raider)
+
 	INVOKE_ASYNC(src, PROC_REF(strike_raider), raider, raider_bike)
+
 	spawned_mobs += raider
-	message_admins("[ADMIN_LOOKUPFLW(raider)] has been made into lone train raider by an event.")
-	raider.log_message("was spawned as a train raider by an event.", LOG_GAME)
+	message_admins("[ADMIN_LOOKUPFLW(raider)] стал одиночным рейдером поезда через событие.")
+	raider.log_message("был заспавнен как рейдер поезда через событие.", LOG_GAME)
+
 
 /datum/round_event/ghost_role/train_raiders/proc/strike_raider(mob/living/raider, obj/vehicle/ridden/trainstation/raider_bike)
 	if(!raider || !raider_bike)
 		return
+
 	if(raider.open_uis)
 		for(var/datum/tgui/ui in raider.open_uis)
 			ui.close(FALSE)
@@ -303,13 +333,15 @@
 	var/turf/target_turf = get_ranged_target_turf(raider_bike, raider_bike.dir, 15)
 	if(!target_turf)
 		return
-	for(var/i = 1 to 15)
+
+	for(var/i in 1 to 15)
 		raider_bike.Shake()
 		new /obj/effect/temp_visual/decoy/fading/halfsecond(get_turf(raider_bike), raider_bike, 200)
 		new /obj/effect/temp_visual/decoy/fading/halfsecond(get_turf(raider_bike), raider, 200)
 		raider_bike.forceMove(get_step_towards(raider_bike, target_turf))
 		sleep(3 TICKS)
 		CHECK_TICK
+
 	if(station_time() > 18 HOURS)
 		raider_bike.set_light_on(TRUE)
 		raider_bike.last_real_move = world.time + 10 SECONDS

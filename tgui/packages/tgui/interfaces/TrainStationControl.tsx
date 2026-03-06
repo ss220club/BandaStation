@@ -1,4 +1,11 @@
-import { Section, Stack, Box, Icon, Button, Divider } from 'tgui-core/components';
+import {
+  Box,
+  Button,
+  Divider,
+  Icon,
+  Section,
+  Stack,
+} from 'tgui-core/components';
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
@@ -11,44 +18,54 @@ type TrainStationControlData = {
 
 export const TrainStationControl = (props: any, context: any) => {
   const { act, data } = useBackend<TrainStationControlData>();
-  const {
-    unlocked,
-    requires_password,
-    station_name,
-    entered_code = '',
-  } = data;
+  const { unlocked, requires_password, station_name, entered_code = '' } = data;
 
   const displayCode = entered_code || '_____';
 
   return (
-    <Window title={station_name + " - Control Terminal"} width={380} height={600}>
+    <Window
+      title={`${station_name} — терминал управления`}
+      width={380}
+      height={600}
+    >
       <Window.Content scrollable>
         {unlocked ? (
-          <Section title="Access Status" backgroundColor="#1e3a2f">
-            <Box textAlign="center" fontSize="20px" color="good" bold mt={3} mb={3}>
+          <Section title="Статус доступа" backgroundColor="#1e3a2f">
+            <Box
+              textAlign="center"
+              fontSize="20px"
+              color="good"
+              bold
+              mt={3}
+              mb={3}
+            >
               <Icon name="lock-open" mr={1} />
-              STATION UNLOCKED
+              СТАНЦИЯ РАЗБЛОКИРОВАНА
             </Box>
             <Box textAlign="center" color="grey">
-              The train may now proceed to the next destination.
+              Поезд может продолжить движение к следующей станции.
             </Box>
           </Section>
         ) : (
-          <Section title="Security Lock">
+          <Section title="Система блокировки">
             <Box textAlign="center" mt={2} mb={3}>
-              <Icon name="shield-halved" size={3} color={requires_password ? 'yellow' : 'grey'} />
+              <Icon
+                name="shield-halved"
+                size={3}
+                color={requires_password ? 'yellow' : 'grey'}
+              />
             </Box>
 
             {!requires_password ? (
               <Stack vertical align="center">
                 <Stack.Item mb={2}>
                   <Box fontSize="14px" color="average">
-                    This station does not require authorization code
+                    Эта станция не требует ввода кода доступа
                   </Box>
                 </Stack.Item>
                 <Stack.Item>
                   <Button
-                    content="Unlock Station"
+                    content="Разблокировать станцию"
                     color="good"
                     textAlign="center"
                     fontSize="16px"
@@ -60,7 +77,7 @@ export const TrainStationControl = (props: any, context: any) => {
             ) : (
               <>
                 <Box textAlign="center" bold fontSize="16px" mb={2}>
-                  Enter Access Code
+                  Введите код доступа
                 </Box>
 
                 <Box
@@ -71,7 +88,6 @@ export const TrainStationControl = (props: any, context: any) => {
                   textAlign="center"
                   p={2}
                   mb={3}
-
                 >
                   {displayCode.split('').map((char, i) => (
                     <Box as="span" key={i} mx={1}>
@@ -179,7 +195,8 @@ export const TrainStationControl = (props: any, context: any) => {
         <Divider />
 
         <Box textAlign="center" color="grey" italic mt={2}>
-          Station Control Terminal v2.4 • Authorized Personnel Only
+          Терминал управления станцией v2.4 • Только для уполномоченного
+          персонала
         </Box>
       </Window.Content>
     </Window>

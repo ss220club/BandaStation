@@ -1,6 +1,6 @@
 /obj/machinery/cell_charger_multi
-	name = "multi-cell charging rack"
-	desc = "A cell charging rack for multiple batteries."
+	name = "многозарядная стойка для батарей"
+	desc = "Зарядная стойка, способная одновременно заряжать несколько аккумуляторов."
 	icon = 'modular_bandastation/fenysha_events/icons/machinery/multicharger.dmi'
 	icon_state = "cchargermulti"
 	base_icon_state = "cchargermulti"
@@ -10,11 +10,11 @@
 	power_channel = AREA_USAGE_EQUIP
 	circuit = /obj/item/circuitboard/machine/cell_charger_multi
 	pass_flags = PASSTABLE
-	/// The list of batteries we are gonna charge!
+	/// Список батарей, которые сейчас заряжаются
 	var/list/charging_batteries = list()
-	/// Number of concurrent batteries that can be charged
+	/// Максимальное количество одновременно заряжаемых батарей
 	var/max_batteries = 4
-	/// The base charge rate when spawned
+	/// Базовая скорость заряда (при спавне)
 	var/charge_rate = STANDARD_CELL_RATE
 
 /obj/machinery/cell_charger_multi/update_overlays()
@@ -36,7 +36,7 @@
 /obj/machinery/cell_charger_multi/click_alt(mob/user)
 	if(!can_interact(user) || !charging_batteries.len)
 		return
-	to_chat(user, span_notice("You activate the quick release as all the cells pop out!"))
+	to_chat(user, span_notice("Вы нажимаете кнопку быстрого извлечения — все аккумуляторы вылетают наружу!"))
 	for(var/i in charging_batteries)
 		removecell()
 	return CLICK_ACTION_SUCCESS
@@ -44,42 +44,42 @@
 /obj/machinery/cell_charger_multi/examine(mob/user)
 	. = ..()
 	if(!charging_batteries.len)
-		. += "There are no cells in [src]."
+		. += "В устройстве нет ни одного аккумулятора."
 	else
-		. += "There are [charging_batteries.len] cells in [src]."
+		. += "В устройстве находится [charging_batteries.len] [declent_ru(charging_batteries.len, "аккумулятор", "аккумулятора", "аккумуляторов")]."
 		for(var/obj/item/stock_parts/power_store/cell/charging in charging_batteries)
-			. += "There's [charging] cell in the charger, current charge: [round(charging.percent(), 1)]%."
+			. += "В слоте находится [charging], текущий заряд: [round(charging.percent(), 1)]%."
 	if(in_range(user, src) || isobserver(user))
-		. += span_notice("The status display reads: Charging power: <b>[display_power(charge_rate, convert = FALSE)]</b> per cell.")
-	. += span_notice("Alt click it to remove all the cells at once!")
+		. += span_notice("На индикаторе отображается: Мощность зарядки <b>[display_power(charge_rate, convert = FALSE)]</b> на ячейку.")
+	. += span_notice("Alt+клик — мгновенно извлечь все аккумуляторы!")
 
 /obj/machinery/cell_charger_multi/attackby(obj/item/tool, mob/user, params)
 	if(istype(tool, /obj/item/stock_parts/power_store/cell) && !panel_open)
 		if(machine_stat & BROKEN)
-			to_chat(user, span_warning("[src] is broken!"))
+			to_chat(user, span_warning("[src] сломано!"))
 			return
 		if(!anchored)
-			to_chat(user, span_warning("[src] isn't attached to the ground!"))
+			to_chat(user, span_warning("[src] не прикручено к полу!"))
 			return
 		var/obj/item/stock_parts/power_store/cell/inserting_cell = tool
 		if(inserting_cell.chargerate <= 0)
-			to_chat(user, span_warning("[inserting_cell] cannot be recharged!"))
+			to_chat(user, span_warning("[inserting_cell] невозможно зарядить!"))
 			return
 		if(length(charging_batteries) >= max_batteries)
-			to_chat(user, span_warning("[src] is full, and cannot hold anymore cells!"))
+			to_chat(user, span_warning("[src] полностью заполнено, больше батарей не поместится!"))
 			return
 		else
-			var/area/current_area = loc.loc // Gets our locations location, like a dream within a dream
+			var/area/current_area = loc.loc
 			if(!isarea(current_area))
 				return
-			if(current_area.power_equip == 0) // There's no APC in this area, don't try to cheat power!
-				to_chat(user, span_warning("[src] blinks red as you try to insert the cell!"))
+			if(current_area.power_equip == 0)
+				to_chat(user, span_warning("[src] мигает красным при попытке вставить аккумулятор!"))
 				return
-			if(!user.transferItemToLoc(tool,src))
+			if(!user.transferItemToLoc(tool, src))
 				return
 
 			charging_batteries += tool
-			user.visible_message(span_notice("[user] inserts a cell into [src]."), span_notice("You insert a cell into [src]."))
+			user.visible_message(span_notice("[user] вставляет аккумулятор в [src]."), span_notice("Вы вставляете аккумулятор в [src]."))
 			update_appearance()
 	else
 		if(!charging_batteries.len && default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
@@ -94,7 +94,7 @@
 	if(!charging_batteries.len || !anchored || (machine_stat & (BROKEN|NOPOWER)))
 		return
 
-	// create a charging queue, we only want cells that require charging to use the power budget
+	// Формируем очередь только из тех батарей, которые ещё не полностью заряжены
 	var/list/charging_queue
 	for(var/obj/item/stock_parts/power_store/cell/battery_slot in charging_batteries)
 		if(battery_slot.percent() >= 100)
@@ -104,7 +104,7 @@
 	if(!LAZYLEN(charging_queue))
 		return
 
-	//use a small bit for the charger itself, but power usage scales up with the part tier
+	// Небольшое потребление на саму стойку + масштабирование в зависимости от количества батарей
 	use_energy(charge_rate / length(charging_queue) * seconds_per_tick * 0.01)
 
 	for(var/obj/item/stock_parts/power_store/cell/charging_cell in charging_queue)
@@ -117,7 +117,7 @@
 	if(!charging_batteries.len)
 		return
 
-	to_chat(user, span_notice("You telekinetically remove [removecell(user)] from [src]."))
+	to_chat(user, span_notice("Вы телекинезом извлекаете [removecell(user)] из [src]."))
 
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -143,7 +143,6 @@
 	charging_batteries = null
 	return ..()
 
-
 /obj/machinery/cell_charger_multi/attack_ai(mob/user)
 	return
 
@@ -160,7 +159,7 @@
 	user.put_in_hands(charging)
 	charging.add_fingerprint(user)
 
-	user.visible_message(span_notice("[user] removes [charging] from [src]."), span_notice("You remove [charging] from [src]."))
+	user.visible_message(span_notice("[user] извлекает [charging] из [src]."), span_notice("Вы извлекаете [charging] из [src]."))
 
 /obj/machinery/cell_charger_multi/proc/removecell(mob/user)
 	if(!charging_batteries.len)
@@ -170,7 +169,7 @@
 		var/list/buttons = list()
 		for(var/obj/item/stock_parts/power_store/cell/battery in charging_batteries)
 			buttons["[battery.name] ([round(battery.percent(), 1)]%)"] = battery
-		var/cell_name = tgui_input_list(user, "Please choose what cell you'd like to remove.", "Remove a cell", buttons)
+		var/cell_name = tgui_input_list(user, "Выберите аккумулятор для извлечения.", "Извлечь аккумулятор", buttons)
 		if(!in_range(loc, user))
 			return FALSE
 		charging = buttons[cell_name]
@@ -191,7 +190,7 @@
 	return ..()
 
 /obj/item/circuitboard/machine/cell_charger_multi
-	name = "Multi-Cell Charger (Machine Board)"
+	name = "Многозарядная стойка (плата)"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
 	build_path = /obj/machinery/cell_charger_multi
 	req_components = list(/datum/stock_part/capacitor = 6)
@@ -199,8 +198,8 @@
 
 
 /datum/design/board/cell_charger_multi
-	name = "Machine Design (Multi-Cell Charger Board)"
-	desc = "The circuit board for a multi-cell charger."
+	name = "Чертеж машины (плата многозарядной стойки)"
+	desc = "Плата для создания многозарядной стойки для аккумуляторов."
 	id = "multi_cell_charger"
 	build_path = /obj/item/circuitboard/machine/cell_charger_multi
 	category = list(
@@ -210,13 +209,12 @@
 
 
 /**
- * Такой же чардж но устанавливаемый на стену
+ * Настенная версия
  */
 
-
 /obj/machinery/cell_charger_multi/wall_mounted
-	name = "mounted multi-cell charging rack"
-	desc = "The innovative technology of a cell charging rack, but mounted neatly on a wall out of the way!"
+	name = "настенная многозарядная стойка"
+	desc = "Инновационная зарядная стойка для аккумуляторов, аккуратно закреплённая на стене и не занимающая место на полу!"
 	icon = 'modular_bandastation/fenysha_events/icons/machinery/wallmounted/cell_charger.dmi'
 	icon_state = "wall_charger"
 	base_icon_state = "wall_charger"
@@ -234,14 +232,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/cell_charger_multi/wall_mounted, 29)
 
 /obj/machinery/cell_charger_multi/wall_mounted/wrench_act(mob/living/user, obj/item/tool)
 	. = ..()
-	user.balloon_alert(user, "deconstructing...")
+	user.balloon_alert(user, "разбирается...")
 	tool.play_tool_sound(src)
 	if(tool.use_tool(src, user, 1 SECONDS))
 		playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
 		deconstruct(TRUE)
 		return
 
-// previously NO_DECONSTRUCTION
+// Отключаем стандартные способы разборки
 /obj/machinery/cell_charger_multi/wall_mounted/default_deconstruction_screwdriver(mob/user, icon_state_open, icon_state_closed, obj/item/screwdriver)
 	return NONE
 
@@ -260,8 +258,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/cell_charger_multi/wall_mounted, 29)
 	charge_rate = STANDARD_CELL_RATE * 3
 
 /obj/item/wallframe/cell_charger_multi
-	name = "unmounted wall multi-cell charging rack"
-	desc = "The innovative technology of a cell charging rack, but able to be mounted neatly on a wall out of the way!"
+	name = "нераспакованная настенная многозарядная стойка"
+	desc = "Инновационная зарядная стойка для аккумуляторов в упаковке — готова к креплению на стену."
 	icon = 'modular_bandastation/fenysha_events/icons/machinery/wallmounted/cell_charger.dmi'
 	icon_state = "packed"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -272,4 +270,4 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/cell_charger_multi/wall_mounted, 29)
 		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 1,
 	)
 
-MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/cell_charger_multi/wall_mountederence, 27)
+MAPPING_DIRECTIONAL_HELPERS(/obj/item/wallframe/cell_charger_multi, 27)

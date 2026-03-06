@@ -7,26 +7,26 @@
 
 // Базовый класс для частей турбины поезда
 /obj/machinery/power/train_turbine
-	name = "train turbine part"
-	desc = "Part of a steam-fed train turbine. Consists of inlet, core, and outlet. Uses hot water vapor, outputs CO2 to atmosphere and cooled water through liquid pipe."
+	name = "часть паровой турбины поезда"
+	desc = "Элемент паровой турбины поезда. Состоит из входного компрессора, ядра и выходного статора. Работает на горячем водяном паре, выбрасывает CO₂ в атмосферу и охлаждённую воду через жидкостные трубы."
 	icon = 'icons/obj/machines/engine/turbine.dmi'
 	density = TRUE
 	resistance_flags = FIRE_PROOF
 	can_atmos_pass = ATMOS_PASS_DENSITY
 	processing_flags = START_PROCESSING_MANUALLY
 
-	/// Эффективность этой части (от апгрейдов)
+	/// Эффективность этой части (зависит от установленных апгрейдов)
 	var/efficiency = 0.5
-	/// Установленная часть (если есть апгрейды)
+	/// Установленный модуль (апгрейд)
 	var/obj/item/turbine_parts/installed_part
-	/// Путь к части для установки
+	/// Путь к модулю, который можно установить
 	var/obj/item/turbine_parts/part_path
 	/// Внутренняя газовая смесь
 	var/datum/gas_mixture/machine_gasmix
-	/// Объем газа
-	var/gas_theoretical_volume = 1000  // Базовый, переопределяется
+	/// Теоретический объём газа внутри части
+	var/gas_theoretical_volume = 1000  // Базовое значение, переопределяется в дочерних
 
-	/// Ссылка на ядро (для всех частей)
+	/// Ссылка на ядро турбины (общая для всех частей)
 	var/obj/machinery/power/train_turbine/core_rotor/rotor
 
 /obj/machinery/power/train_turbine/Initialize(mapload)
@@ -53,6 +53,7 @@
 /obj/machinery/power/train_turbine/proc/is_active()
 	return rotor?.active || FALSE
 
+/// Перекачивает газы из одной смеси в другую с учётом работы и тепловых эффектов
 /obj/machinery/power/train_turbine/proc/transfer_gases(datum/gas_mixture/input_mix, datum/gas_mixture/output_mix, work_amount_to_remove = 0, intake_size = 1)
 	var/output_pressure = PRESSURE_MAX(output_mix.return_pressure())
 	var/datum/gas_mixture/transferred_gases = input_mix.pump_gas_to(output_mix, input_mix.return_pressure() * intake_size)
@@ -72,21 +73,20 @@
 
 
 /obj/machinery/power/train_turbine/inlet_compressor
-	name = "train turbine inlet compressor"
-	desc = "Inlet part of the train turbine. Connects to pipes for hot water vapor intake."
+	name = "входной компрессор турбины поезда"
+	desc = "Входная часть паровой турбины поезда. Подключается к трубам для подачи горячего водяного пара."
 	icon_state = "inlet_compressor"
 	base_icon_state = "inlet_compressor"
-	// circuit = /obj/item/circuitboard/machine/train_turbine_inlet
 	part_path = /obj/item/turbine_parts/compressor
 	gas_theoretical_volume = 1000
 
-	/// Регулятор впуска (0.01 - 1)
+	/// Регулятор впуска пара (0.01–1.0)
 	var/intake_regulator = 0.5
-	/// Работа компрессора на текущем тике
+	/// Работа компрессора за текущий тик
 	var/compressor_work = 0
 	/// Давление после компрессора
 	var/compressor_pressure = MINIMUM_TURBINE_PRESSURE
-	/// Atmos connector для труб
+	/// Atmos-коннектор для входных труб
 	var/datum/gas_machine_connector/connector
 
 /obj/machinery/power/train_turbine/inlet_compressor/post_machine_initialize()
@@ -121,6 +121,7 @@
 
 	return temperature
 
+
 /datum/looping_sound/turbine_loop
 	mid_sounds = 'modular_bandastation/fenysha_events/sounds/turbine_loop.ogg'
 	mid_length = 3 SECONDS
@@ -128,12 +129,12 @@
 	falloff_exponent = 3
 	ignore_walls = FALSE
 
+
 /obj/machinery/power/train_turbine/core_rotor
-	name = "train turbine core rotor"
-	desc = "Core part of the train turbine. Controls RPM, temperature, and power."
+	name = "ядро турбины поезда (ротор)"
+	desc = "Центральная часть паровой турбины поезда. Управляет оборотами, температурой и выработкой энергии. Чем выше обороты — тем больше мощности, но и риск перегрева и разрушения."
 	icon_state = "core_rotor"
 	base_icon_state = "core_rotor"
-	// circuit = /obj/item/circuitboard/machine/train_turbine_core
 	part_path = /obj/item/turbine_parts/rotor
 	gas_theoretical_volume = 3000
 
@@ -151,11 +152,11 @@
 	var/steam_consumption_rate = 0.1
 	var/water_production_rate = 0.6
 
-	/// Целевые обороты в % от максимума (0-1). Управляется из UI.
+	/// Целевые обороты в % от максимума (0–1). Задаётся с панели управления.
 	var/target_rpm = 0
 
 	var/datum/looping_sound/turbine_loop/soundloop
-	/// Ссылки на части
+	/// Ссылки на соседние части
 	var/obj/machinery/power/train_turbine/inlet_compressor/compressor
 	var/obj/machinery/power/train_turbine/turbine_outlet/turbine
 
@@ -192,7 +193,7 @@
 	. = ITEM_INTERACT_FAILURE
 	multitool.buffer = src
 	activate_parts(user)
-	balloon_alert(user, "You store the [src] in the [multitool]'s buffer.")
+	balloon_alert(user, "Ядро турбины сохранено в буфере мультитула.")
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/power/train_turbine/core_rotor/proc/update_effects()
@@ -227,6 +228,7 @@
 		work_time = 0
 		deactivate_parts()
 		return PROCESS_KILL
+
 	var/target_flow_multiplier = target_rpm / max_rpm
 	var/inlet_temperature = compressor.compress_gases()
 	if(!inlet_temperature || inlet_temperature < MIN_STEAM_TEMPERATURE)
@@ -260,13 +262,14 @@
 	var/total_efficiency = (compressor.efficiency + efficiency + turbine.efficiency) / 3
 	base_power *= total_efficiency
 
-	// rpm increases based on pressure and target modifies it up to a degree
+	// Увеличение оборотов в зависимости от давления и цели
 	var/rpm_change = base_power - rpm
 	rpm += rpm_change * 0.1
-	// modify it towards target rpm
+	// Плавное приближение к целевым оборотам
 	rpm = lerp(rpm, target_rpm, 0.05)
-	// output is only based on current rpm
+	// Выходная мощность зависит только от текущих оборотов
 	produced_energy = rpm * efficiency_rate * total_efficiency
+
 	turbine.produce_water(steam_consumed * water_production_rate * 0.9)
 	machine_gasmix.temperature = lerp(machine_gasmix.temperature, inlet_temperature * 0.8 + T20C * 0.2, 0.05)
 
@@ -276,14 +279,15 @@
 		if(damage > damage_archived + 1 && COOLDOWN_FINISHED(src, turbine_damage_alert))
 			COOLDOWN_START(src, turbine_damage_alert, 10 SECONDS)
 			playsound(src, 'sound/machines/engine_alert/engine_alert1.ogg', 100, FALSE)
-			balloon_alert_to_viewers("overheating! integrity [get_integrity()]%")
+			balloon_alert_to_viewers("ПЕРЕГРЕВ! Целостность [get_integrity()]%")
+
 	var/safe_threshold = max_rpm * 0.9
 	if(rpm > safe_threshold)
 		damage += (rpm - safe_threshold) * 0.001 * seconds_per_tick
 		if(damage > damage_archived + 1 && COOLDOWN_FINISHED(src, turbine_damage_alert))
 			COOLDOWN_START(src, turbine_damage_alert, 10 SECONDS)
 			playsound(src, 'sound/machines/engine_alert/engine_alert1.ogg', 100, FALSE)
-			balloon_alert_to_viewers("high RPM! integrity [get_integrity()]%")
+			balloon_alert_to_viewers("Критические обороты! Целостность [get_integrity()]%")
 
 	if(COOLDOWN_FINISHED(src, turbine_effects_update))
 		COOLDOWN_START(src, turbine_effects_update, 3 SECONDS)
@@ -299,8 +303,10 @@
 	add_avail(produced_energy * (1 + 0.1 * (work_time / (15 * 60))))
 	apply_thrust_to_train()
 
+
 /obj/machinery/power/train_turbine/core_rotor/get_integrity()
 	return max(round(100 - (damage / 500) * 100, 0.01), 0)
+
 
 /obj/machinery/power/train_turbine/core_rotor/proc/activate_parts(mob/user, check_only = FALSE)
 	if(!check_only)
@@ -308,10 +314,12 @@
 		turbine = locate() in orange(1, src)
 
 	if(QDELETED(compressor) || QDELETED(turbine))
-		balloon_alert(user, "missing parts!")
+		balloon_alert(user, "отсутствуют части!")
 		return FALSE
+
 	target_rpm = min(target_rpm, max_rpm)
 	all_parts_connected = TRUE
+
 	if(!check_only)
 		compressor.rotor = src
 		turbine.rotor = src
@@ -320,6 +328,7 @@
 		efficiency = (compressor.efficiency + turbine.efficiency) / 3
 
 	return TRUE
+
 
 /obj/machinery/power/train_turbine/core_rotor/proc/deactivate_parts()
 	active = FALSE
@@ -331,6 +340,7 @@
 	compressor = null
 	turbine = null
 	end_processing()
+
 
 /obj/machinery/power/train_turbine/core_rotor/proc/toggle_power(force_off = FALSE)
 	if(force_off || active)
@@ -347,27 +357,29 @@
 	compressor?.update_appearance(UPDATE_OVERLAYS)
 	turbine?.update_appearance(UPDATE_OVERLAYS)
 
+
 /obj/machinery/power/train_turbine/core_rotor/proc/emergency_vent()
 	if(!active || !turbine)
 		return
-/*
+	/*
 	if(full_dump)
 		rpm *= 0.5  // Резкое падение оборотов
-		balloon_alert_to_viewers("emergency vent activated!")
-*/
+		balloon_alert_to_viewers("аварийный сброс активирован!")
+	*/
+
 
 /obj/machinery/power/train_turbine/core_rotor/proc/apply_thrust_to_train()
+	// Здесь должна быть логика толчка поезда
 
 
 // ====================================================================
-// Выходная часть: Turbine Outlet
+// Выходная часть: Статор (Turbine Outlet)
 // ====================================================================
 /obj/machinery/power/train_turbine/turbine_outlet
-	name = "train turbine outlet"
-	desc = "Outlet part of the train turbine. Expels CO2 to the turf and cooled water through plumbing pipe."
+	name = "выходной статор турбины поезда"
+	desc = "Выходная часть паровой турбины поезда. Выбрасывает CO₂ в атмосферу и направляет охлаждённую воду через жидкостные трубы."
 	icon_state = "inlet_compressor"
 	base_icon_state = "inlet_compressor"
-	// circuit = /obj/item/circuitboard/machine/train_turbine_outlet
 	part_path = /obj/item/turbine_parts/stator
 	gas_theoretical_volume = 6000
 
@@ -403,13 +415,13 @@
 
 
 /obj/machinery/computer/train_turbine_computer
-	name = "train turbine control computer"
-	desc = "Computer to control the train's steam turbine. Monitor RPM, temperature, and more like a Barotrauma nuclear reactor."
+	name = "пульт управления турбиной поезда"
+	desc = "Компьютер для контроля паровой турбины поезда. Отслеживает обороты, температуру, давление и целостность — как ядерный реактор из Barotrauma, только на паровом ходу."
 	icon_screen = "train_turbine_comp"
 	icon_keyboard = "tech_key"
-	// circuit = /obj/item/circuitboard/computer/train_turbine_computer
 	var/datum/weakref/rotor_ref
 	var/mapping_id
+
 
 /obj/machinery/computer/train_turbine_computer/post_machine_initialize()
 	. = ..()
@@ -421,23 +433,26 @@
 		register_machine(main)
 		break
 
+
 /obj/machinery/computer/train_turbine_computer/multitool_act(mob/living/user, obj/item/multitool/multitool)
 	. = ITEM_INTERACT_FAILURE
 	if(!istype(multitool.buffer, /obj/machinery/power/train_turbine/core_rotor))
-		to_chat(user, span_notice("Wrong machine type in [multitool] buffer..."))
+		to_chat(user, span_notice("В буфере мультитула находится неподходящее устройство..."))
 		return
 	if(rotor_ref)
-		to_chat(user, span_notice("Changing [src] bluespace network..."))
+		to_chat(user, span_notice("Меняю bluespace-сеть пульта..."))
 	if(!do_after(user, 0.2 SECONDS, src))
 		return
 
 	playsound(get_turf(user), 'sound/machines/click.ogg', 10, TRUE)
 	register_machine(multitool.buffer)
-	to_chat(user, span_notice("You link [src] to the console in [multitool]'s buffer."))
+	to_chat(user, span_notice("Вы связали пульт с ядром турбины из буфера мультитула."))
 	return ITEM_INTERACT_SUCCESS
+
 
 /obj/machinery/computer/train_turbine_computer/proc/register_machine(obj/machinery/power/train_turbine/core_rotor/machine)
 	rotor_ref = WEAKREF(machine)
+
 
 /obj/machinery/computer/train_turbine_computer/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()
@@ -448,6 +463,7 @@
 	if(!ui)
 		ui = new(user, src, "TrainTurbineComputer", name)
 		ui.open()
+
 
 /obj/machinery/computer/train_turbine_computer/ui_data(mob/user)
 	. = list()
@@ -466,12 +482,12 @@
 	.["max_rpm"] = main_control.max_rpm
 	.["max_temperature"] = main_control.max_temperature
 
-	// Температуры по стадиям
+	// Температуры по секциям
 	.["inlet_temp"] = main_control.compressor?.machine_gasmix?.temperature || T20C
 	.["rotor_temp"] = main_control.machine_gasmix?.temperature || T20C
 	.["outlet_temp"] = main_control.turbine?.machine_gasmix?.temperature || T20C
 
-	// Давления по стадиям
+	// Давления по секциям
 	.["compressor_pressure"] = main_control.compressor?.compressor_pressure || MINIMUM_TURBINE_PRESSURE
 	.["rotor_pressure"] = main_control.machine_gasmix?.return_pressure() || MINIMUM_TURBINE_PRESSURE
 	.["outlet_water_volume"] = main_control.turbine?.reagents.total_volume || 0
@@ -480,6 +496,7 @@
 	.["target_rpm"] = main_control.target_rpm
 	.["steam_consumption"] = main_control.steam_consumption_rate
 	.["water_production"] = main_control.water_production_rate
+
 
 /obj/machinery/computer/train_turbine_computer/ui_act(action, list/params)
 	. = ..()
@@ -527,43 +544,41 @@
 
 
 /obj/item/paper/guides/jobs/atmos/train_turbine
-	name = "paper- 'Quick guide on the train turbine!'"
-	default_raw_text = "<B>How to operate the train turbine</B><BR>\
-	- Wrench and secure your buffer water vapor canister<BR>\
-	- Turn on the temperature control units to heat, and enable the pump, set the pressure based on how much power you will need.<BR>\
-	- For recycling the water vapor from steam, crowbar open the floor and ensure the fluid duct is connected<BR>\
-	- Unsecure it with a wrench and replace it to the same spot in front of the turbine outlet.<BR>\
-	- Fill the plasma heaters with sheets of plasma, and ensure they are connected to plumbed water from the north.<BR>\
-	- The heaters will recycle the liquid reagent water back into gas water vapour.<BR>\
-	- Use the control computer to set target RPM, regulate intake, and monitor temperatures/pressures.<BR>\
-	- Balance power output with temperature — overheating causes damage!<BR>\
-	- Emergency vent available for rapid cooling.<BR>\
-	- Outputs CO2 to atmosphere and cooled water for recirculation.<BR>\
-	- Hot water vapor must be hot enough or the compressor won't accept it. <BR> \
-	The turbine is equipped with a special acceleration mechanism that will increase output by 10% every 15 minutes of continuous operation."
+	name = "Бумага — «Краткое руководство по турбине поезда!»"
+	default_raw_text = "<B>Как управлять паровой турбиной поезда</B><BR>\
+	- Закрепите баллон с горячим водяным паром гаечным ключом перед входным компрессором.<BR>\
+	- Включите нагреватели температуры, активируйте насос, установите нужное давление в зависимости от требуемой мощности.<BR>\
+	- Для рециркуляции воды: вскройте ломом пол и убедитесь, что жидкостные трубы подключены к выходу статора.<BR>\
+	- Замените обычный выход на специальный выход турбины (с помощью гаечного ключа).<BR>\
+	- Загрузите плазмовые листы в нагреватели, подключите подачу воды с севера.<BR>\
+	- Нагреватели преобразуют жидкую воду обратно в пар.<BR>\
+	- Используйте пульт управления: задайте целевые обороты, отрегулируйте впуск, следите за температурой и давлением.<BR>\
+	- Балансируйте мощность и температуру — перегрев быстро разрушает турбину!<BR>\
+	- Есть аварийный сброс для экстренного охлаждения.<BR>\
+	- Турбина выбрасывает CO₂ в атмосферу и возвращает охлаждённую воду для повторного использования.<BR>\
+	- Пар должен быть достаточно горячим (>400K), иначе компрессор его не примет.<BR>\
+	- Специальный механизм ускорения: каждые 15 минут непрерывной работы мощность увеличивается на 10%."
 
 #undef PRESSURE_MAX
 #undef MINIMUM_TURBINE_PRESSURE
 #undef MIN_STEAM_TEMPERATURE
 
 
-
-
 /// Минимальная температура для сгорания плазмы
-#define MIN_PLASMA_COMBUSTION_TEMP 373 // K (100C)
-/// Коэффициент энергии от сгорания плазмы (джоули на лист)
-#define PLASMA_SHEET_BURN_ENERGY 100000 // Больше, так как лист - это "блок" ресурса
-/// Объем внутренней камеры для воды (реагенты)
+#define MIN_PLASMA_COMBUSTION_TEMP 373 // K (100°C)
+/// Энергия, выделяемая при сгорании одного листа плазмы (джоули)
+#define PLASMA_SHEET_BURN_ENERGY 100000
+/// Объём камеры для воды (реагенты)
 #define HEATER_WATER_VOLUME 1000
-/// Минимальная температура для кипения воды в пар
+/// Температура кипения воды в пар
 #define WATER_BOIL_TEMP 373 // K
-/// Скорость потребления плазмы (листы/тик, дробная)
-#define PLASMA_SHEET_CONSUMPTION_RATE 0.01 // Медленно "сжигает" лист
+/// Скорость расхода плазмы (листы/тик, дробное значение)
+#define PLASMA_SHEET_CONSUMPTION_RATE 0.01 // Медленное «сгорание» листа
 
-// Нагреватель для поезда: сжигает плазмовые листы для кипячения воды в пар
+// Нагреватель для поезда: сжигает плазмовые листы для превращения воды в пар
 /obj/machinery/power/train_heater
-	name = "train plasma heater"
-	desc = "A heater that burns plasma sheets to boil water into steam for the train turbine. Insert plasma sheets, connect plumbing for water input and gas pipes for steam output."
+	name = "плазменный нагреватель поезда"
+	desc = "Устройство, сжигающее плазмовые листы для кипячения воды в пар, который затем подаётся в турбину поезда. Вставьте плазму, подключите жидкостные трубы для подачи воды и газовые трубы для выхода пара."
 	icon = 'modular_bandastation/fenysha_events/icons/machinery/thermomachine.dmi'
 	icon_state = "thermo_base"
 	base_icon_state = "thermo_base"
@@ -580,9 +595,9 @@
 	var/target_temperature = 500 // K
 	/// Внутренняя газовая смесь для выхода пара
 	var/datum/gas_mixture/internal_gasmix
-	/// Atmos connector для выхода пара
+	/// Atmos-коннектор для выхода пара
 	var/datum/gas_machine_connector/steam_output
-	/// Plumbing для входа воды
+	/// Plumbing-компонент для входа воды
 	var/datum/component/plumbing/heater_plumbing
 	/// Стек плазмовых листов внутри
 	var/obj/item/stack/sheet/mineral/plasma/plasma_stack
@@ -595,12 +610,12 @@
 	reagents = new(HEATER_WATER_VOLUME)
 	reagents.my_atom = src
 
-	// Plumbing для воды (вход)
+	// Plumbing — вход воды
 	heater_plumbing = AddComponent(/datum/component/plumbing/heater_plumbing, custom_receiver = reagents)
 	heater_plumbing.enable()
 
-	// Atmos connector только для выхода пара
-	steam_output = new(loc, src, dir, CELL_VOLUME * 0.5) // Выход пара вперед
+	// Atmos-коннектор — только выход пара
+	steam_output = new(loc, src, dir, CELL_VOLUME * 0.5)
 
 	air_update_turf(TRUE)
 	update_appearance(UPDATE_OVERLAYS)
@@ -619,21 +634,22 @@
 /obj/machinery/power/train_heater/examine(mob/user)
 	. = ..()
 	if(plasma_stack)
-		. += span_notice("It has [plasma_stack.amount] plasma sheets inserted.")
+		. += span_notice("Внутри находится [plasma_stack.amount] [declent_ru(plasma_stack.amount, "лист плазмы", "листа плазмы", "листов плазмы")].")
 	else
-		. += span_notice("It has no plasma sheets. Insert some to fuel it.")
-	. += span_notice("It is [active ? "currently active" : "currently inactive"].")
-	. += span_notice("Thermostat shows : [round(temperature, 1)] K.([round(temperature, 1) - T0C]°C)")
+		. += span_notice("Плазмовые листы не загружены. Вставьте топливо для работы.")
+	. += span_notice("Устройство [active ? "активно" : "выключено"].")
+	. += span_notice("Термостат показывает: [round(temperature, 1)] K ([round(temperature - T0C, 1)]°C).")
+
 
 /obj/machinery/power/train_heater/attackby(obj/item/item, mob/user, params)
 	if(istype(item, /obj/item/stack/sheet/mineral/plasma))
 		if(plasma_stack)
-			balloon_alert(user, "already has plasma!")
+			balloon_alert(user, "плазма уже загружена!")
 			return TRUE
 		if(!user.transferItemToLoc(item, src))
 			return TRUE
 		plasma_stack = item
-		balloon_alert(user, "inserted plasma sheets")
+		balloon_alert(user, "плазмовые листы загружены")
 		update_appearance(UPDATE_OVERLAYS)
 		return TRUE
 	return ..()
@@ -643,20 +659,22 @@
 	toggle_active(user)
 	return TRUE
 
+
 /obj/machinery/power/train_heater/proc/toggle_active(mob/user)
 	if(!plasma_stack || plasma_stack.amount <= 0)
-		balloon_alert(user, "no plasma fuel!")
+		balloon_alert(user, "нет плазмового топлива!")
 		return
 	if(!reagents.has_reagent(/datum/reagent/water, 10))
-		balloon_alert(user, "no water to heat!")
+		balloon_alert(user, "нет воды для нагрева!")
 		return
 	active = !active
 	if(active)
 		begin_processing()
 	else
 		active = FALSE
-	balloon_alert(user, active ? "activated" : "deactivated")
+	balloon_alert(user, active ? "активировано" : "выключено")
 	update_appearance(UPDATE_OVERLAYS)
+
 
 /obj/machinery/power/train_heater/process(seconds_per_tick)
 	if(!active && temperature > T20C)
@@ -671,10 +689,10 @@
 		end_processing()
 		return PROCESS_KILL
 
-
 	var/plasma_consumed = min(PLASMA_SHEET_CONSUMPTION_RATE * seconds_per_tick, plasma_stack.amount)
 	plasma_stack.use(plasma_consumed)
 	var/energy_generated = plasma_consumed * PLASMA_SHEET_BURN_ENERGY
+
 	if(temperature < target_temperature)
 		temperature += energy_generated / reagents.heat_capacity() * 5 * seconds_per_tick
 
@@ -694,6 +712,7 @@
 			internal_gasmix.pump_gas_to(steam_mix, internal_gasmix.return_pressure())
 		Shake(pixelshiftx = 1, pixelshifty = 0, duration = 1 SECONDS)
 
+
 /datum/component/plumbing/heater_plumbing
 	demand_connects = NORTH
 
@@ -702,39 +721,26 @@
 	if(!istype(parent, /obj/machinery/power/train_heater))
 		return COMPONENT_INCOMPATIBLE
 
-/datum/component/plumbing/heater_plumbing/Destroy()
-	return ..()
-
-/datum/component/plumbing/heater_plumbing/send_request(dir)
-	var/obj/machinery/power/train_heater/heater = parent
-	if(!heater.reagents)
-		return
-
-	var/space = heater.reagents.maximum_volume - heater.reagents.total_volume
-	if(space > 0)
-		process_request(
-			amount = min(space, MACHINE_REAGENT_TRANSFER),
-			reagent = /datum/reagent/water,
-			dir = dir
-		)
 
 /obj/machinery/computer/train_heater_computer
-	name = "train heater control computer"
-	desc = "Controls the plasma heater for steam production."
+	name = "пульт управления нагревателем поезда"
+	desc = "Панель управления плазменным нагревателем для производства пара."
 	icon_screen = "heater_comp"
 	icon_keyboard = "tech_key"
 	var/datum/weakref/heater_ref
 	var/mapping_id
 
-// Бумажка
+
+// Бумажка с инструкцией
 /obj/item/paper/guides/jobs/atmos/train_heater
-	name = "paper- 'Quick guide on the train heater!'"
-	default_raw_text = "<B>How to operate the train heater</B><BR>\
-	- Insert plasma sheets as fuel.<BR>\
-	- Connect plumbing pipes for water input.<BR>\
-	- Connect gas pipes for steam output.<BR>\
-	- Activate to start burning plasma and boiling water.<BR>\
-	- Monitor temperature via computer."
+	name = "Бумага — «Краткое руководство по нагревателю поезда!»"
+	default_raw_text = "<B>Как управлять плазменным нагревателем поезда</B><BR>\
+	- Загрузите плазмовые листы в качестве топлива.<BR>\
+	- Подключите жидкостные трубы для подачи воды.<BR>\
+	- Подключите газовые трубы для выхода пара.<BR>\
+	- Активируйте устройство — плазма начнёт гореть, а вода превращаться в пар.<BR>\
+	- Следите за температурой через пульт управления.<BR>\
+	- Не допускайте перегрева — плазма горит стабильно только выше 100°C."
 
 #undef MIN_PLASMA_COMBUSTION_TEMP
 #undef PLASMA_SHEET_BURN_ENERGY

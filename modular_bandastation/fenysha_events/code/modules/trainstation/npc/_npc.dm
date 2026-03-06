@@ -2,7 +2,7 @@
 	return istype(thing, /mob/living/basic/npc)
 
 /mob/living/basic/npc
-	name = "Civilian"
+	name = "Гражданский"
 	desc = ""
 	icon = 'icons/mob/simple/simple_human.dmi'
 	health = 150
@@ -11,8 +11,8 @@
 	mob_biotypes = MOB_ORGANIC | MOB_HUMANOID
 	basic_mob_flags = FLAMMABLE_MOB | SENDS_DEATH_MOODLETS
 	sentience_type = SENTIENCE_HUMANOID
-	attack_verb_continuous = "punches"
-	attack_verb_simple = "punch"
+	attack_verb_continuous = "бьёт кулаком"
+	attack_verb_simple = "ударить кулаком"
 	attack_sound = 'sound/items/weapons/punch1.ogg'
 	melee_damage_lower = 10
 	melee_damage_upper = 10
@@ -52,47 +52,46 @@
 	var/burst_shots
 	var/ranged_cooldown = 1 SECONDS
 
-
 	var/speech_chance = 20
 	var/list/speech_phrases = list(
-		"Quiet… the walls are listening.",
-		"Sirens all night again…",
-		"Never believe the announcements.",
-		"%MOBNAME%, are you coughing too?",
-		"They say it'll be over soon…",
-		"I forgot what clean air smells like.",
-		"They took someone again last night.",
-		"Dont go near the checkpoint without a mask.",
-		"Yesterday there was a neighbor… today — gone.",
-		"Everythings under control, right? Heh…",
-		"Another lockdowns coming, I can feel it.",
-		"My eyes hurt… that dust again.",
-		"Anyone seen the sun without filters?",
-		"Dont ask where this scar came from.",
-		"Just stay away from the news."
+		"Тише… стены слушают.",
+		"Сирены всю ночь напролёт… опять.",
+		"Никогда не верь объявлениям.",
+		"%MOBNAME%, ты тоже кашляешь?",
+		"Говорят, скоро всё закончится…",
+		"Я уже забыл, как пахнет чистый воздух.",
+		"Прошлой ночью кого-то снова забрали.",
+		"Не подходи к блокпосту без маски.",
+		"Вчера был сосед… сегодня — пусто.",
+		"Всё под контролем, да? Хех…",
+		"Скоро опять локдаун, чувствую.",
+		"Глаза болят… эта пыль опять.",
+		"Кто-нибудь видел солнце без фильтров?",
+		"Не спрашивай, откуда этот шрам.",
+		"Просто держись подальше от новостей."
 	)
 
 	var/list/speech_emote_see = list(
-		"nervously looks around.",
-		"presses a hand to their mouth and coughs.",
-		"flinches at a distant siren.",
-		"clenches their fists and stares into nothing.",
-		"quickly pulls the mask up over their nose.",
-		"rubs red, irritated eyes and winces.",
-		"freezes, listening hard.",
-		"hides their hands in sleeves and hunches over.",
-		"keeps touching their throat unconsciously."
+		"нервно оглядывается по сторонам.",
+		"прижимает руку ко рту и кашляет.",
+		"вздрагивает от далёкой сирены.",
+		"сжимает кулаки и смотрит в пустоту.",
+		"быстро натягивает маску на нос.",
+		"трёт покрасневшие глаза и морщится.",
+		"замирает, напряжённо прислушиваясь.",
+		"прячет руки в рукава и сутулится.",
+		"бессознательно трогает горло."
 	)
 
 	var/list/speech_emote_hear = list(
-		"whispers barely audible: «they’re watching…»",
-		"mumbles curses in a low, rough voice.",
-		"coughs hoarsely and spits to the side.",
-		"mutters: «one more day… one more…»",
-		"lets out a short, choked sob and goes silent.",
-		"breathes out slowly through clenched teeth.",
-		"whispers a three-word prayer and stops.",
-		"quietly repeats: «don’t look back… don’t look back…»"
+		"шепчет почти неслышно: «они следят…»",
+		"бормочет проклятия низким хриплым голосом.",
+		"хрипло кашляет и сплёвывает в сторону.",
+		"бормочет: «ещё один день… ещё один…»",
+		"издаёт короткий сдавленный всхлип и замолкает.",
+		"медленно выдыхает сквозь стиснутые зубы.",
+		"шепчет трёхсловную молитву и умолкает.",
+		"тихо повторяет: «не оглядывайся… не оглядывайся…»"
 	)
 
 	var/save_data = TRUE
@@ -149,16 +148,18 @@
 	. = ..()
 	if(item_r_hand)
 		var/obj/item/I = item_r_hand
-		. += span_notice("[I::name] in [p_their()] right hand.")
+		. += span_notice("В правой руке [p_their()] [I::name].")
 	if(item_l_hand)
 		var/obj/item/I = item_l_hand
-		. += span_notice("[I::name] in [p_their()] left hand.")
+		. += span_notice("В левой руке [p_their()] [I::name].")
+
 
 /mob/living/basic/npc/death(gibbed)
 	if(gibbed)
 		return ..()
 	INVOKE_ASYNC(src, PROC_REF(spawn_real_corpse_and_destroy))
 	return ..()
+
 
 /mob/living/basic/npc/proc/spawn_real_corpse_and_destroy()
 	if(!save_data)
@@ -207,24 +208,27 @@
 	corpse.death(TRUE)
 	qdel(src)
 
+
 /mob/living/basic/npc/proc/pick_outfit()
 	outfit = pick(possible_outfits)
+
 
 /mob/living/basic/npc/proc/generate_desc_based_on_species()
 	switch(species)
 		if(/datum/species/human)
-			desc = "A regular human civilian. Nothing particularly stands out about them."
+			desc = "Обычный человек-гражданский. Ничем особенно не выделяется."
 		if(/datum/species/vulpkanin)
-			desc = "A furred vulpkanin with expressive ears and a bushy tail. This canine-like civilian has keen senses and an alert posture."
+			desc = "Меховой вульпканин с выразительными ушами и пушистым хвостом. Этот похожий на собаку гражданский настороженно осматривается."
 		if(/datum/species/tajaran)
-			desc = "A feline tajaran with soft fur, expressive ears, and a swaying tail. Their sharp eyes scan the surroundings with quiet curiosity."
+			desc = "Кошачий таяран с мягкой шерстью, выразительными ушами и покачивающимся хвостом. Острые глаза внимательно сканируют окружение."
 		if(/datum/species/lizard)
-			desc = "A scaled lizardperson with a proud posture and a flicking tail. Their tough hide and sharp features mark them as a hardy civilian."
+			desc = "Чешуйчатый ящер с гордой осанкой и подёргивающимся хвостом. Твёрдая шкура и резкие черты говорят о выносливости."
 		else
 			var/datum/species/path = species
-			desc = "A civilian of unusual species. [path ? "([path::name])" : "Unknown race."]"
+			desc = "Гражданский необычной расы. [path ? "([path::name])" : "Неизвестная раса."]"
 	if(prob(30))
-		desc += pick(" They seem a bit lost.", " They look tired from the long shift.", " They're quietly humming something.", " A faint smell of [pick("coffee","machine oil","fish","wet fur")] lingers around them.")
+		desc += pick(" Кажется немного потерянным.", " Выглядит уставшим после долгой смены.", " Тихо напевает что-то себе под нос.", " Вокруг витает слабый запах [pick("кофе","машинного масла","рыбы","мокрой шерсти")].")
+
 
 /mob/living/basic/npc/proc/randomize_colors()
 	var/preset = rand(1, 7)
@@ -265,16 +269,20 @@
 /mob/living/basic/npc/proc/generate_name()
 	return generate_random_name_species_based(gender, TRUE, species)
 
+
 /mob/living/basic/npc/proc/get_mutant_colors()
 	return list(mutant_color_1, mutant_color_2, mutant_color_3)
 
+
 /mob/living/basic/npc/proc/get_default_features()
 	return list()
+
 
 #define ARGS_FEATURES "mut_features"
 #define ARGS_COLORS "mut_colors"
 #define ARG_FEATURE "mut_feature"
 #define ARG_FEATURE_NAME "mut_feat_name"
+
 
 /mob/living/basic/npc/proc/generate_dynamic_appearance()
 	var/skin_tone = pick(GLOB.skin_tones)
@@ -354,7 +362,7 @@
 
 
 /mob/living/basic/npc/civilian
-	name = "Civilian"
+	name = "Гражданский"
 	possible_outfits = list(
 		/datum/outfit/trainstation_civilian,
 		/datum/outfit/trainstation_civilian/style_1,
@@ -362,6 +370,7 @@
 		/datum/outfit/trainstation_civilian/style_3,
 		/datum/outfit/trainstation_civilian/style_4,
 	)
+
 
 /mob/living/basic/npc/civilian/human
 	species = /datum/species/human
@@ -378,6 +387,7 @@
 	species = /datum/species/lizard
 	randomize_mutant_colors = TRUE
 
+
 #undef ARGS_FEATURES
 #undef ARGS_COLORS
 #undef ARG_FEATURE
@@ -388,7 +398,7 @@
 	name = "Police patrol point"
 
 /mob/living/basic/npc/police
-	name = "Police officer"
+	name = "Офицер полиции"
 	health = 250
 	maxHealth = 250
 	faction = list(FACTION_CIVILIAN, FACTION_POLICE, FACTION_NEUTRAL)
@@ -406,28 +416,29 @@
 
 	speech_chance = 15
 	speech_phrases = list(
-		"Move along!",
-		"Everything under control here.",
-		"Keep your hands visible.",
-		"Suspicious activity will be reported.",
-		"Stay safe out there.",
+		"Проходите, не задерживайтесь!",
+		"Здесь всё под контролем.",
+		"Руки держите на виду.",
+		"Подозрительное поведение будет доложено.",
+		"Будьте осторожны.",
 	)
 	speech_emote_see = list(
-		"adjusts %PTHEIR% beret.",
-		"scans the surroundings.",
-		"rests hand on baton.",
+		"поправляет берет.",
+		"осматривает окрестности.",
+		"кладёт руку на дубинку.",
 	)
 	speech_emote_hear = list(
-		"mutters into radio.",
-		"clears %PTHEIR% throat.",
+		"бормочет что-то в рацию.",
+		"прочищает горло.",
 	)
+
 
 /mob/living/basic/npc/police/generate_name()
 	var/static/ranks = list(
-		"Officer",
-		"Corporal",
-		"Sergeant",
-		"Lieutenant",
+		"Офицер",
+		"Капрал",
+		"Сержант",
+		"Лейтенант",
 	)
 	var/base = ..()
 	return "[pick(ranks)] [base]"
@@ -444,6 +455,7 @@
 	. = ..()
 	do_sparks(1, TRUE, src)
 
+
 /mob/living/basic/npc/police/disabler
 	attack_sound = 'sound/items/weapons/egloves.ogg'
 	melee_damage_lower = 40
@@ -457,8 +469,10 @@
 	casingtype = /obj/projectile/beam/disabler
 	burst_shots = 2
 
+
 /obj/effect/landmark/military_patrol_point
-	name = "Military patrol point"
+	name = "Точка патрулирования военных"
+
 
 /mob/living/basic/npc/police/military
 	health = 300
@@ -480,50 +494,51 @@
 
 	speech_chance = 15
 	speech_phrases = list(
-		"Move along.",
-		"Keep moving.",
-		"You shouldn't be here.",
-		"Clear the area.",
-		"Hands where I can see them.",
-		"This zone is restricted.",
-		"Disperse, now.",
-		"Not your business.",
-		"Back off.",
-		"Get out of here.",
-		"Area's off-limits.",
-		"Keep walking.",
-		"Step aside.",
-		"No loitering.",
-		"Move it, civilian."
+		"Проходи.",
+		"Двигайся дальше.",
+		"Тебе здесь не место.",
+		"Очисти территорию.",
+		"Руки на виду.",
+		"Зона ограниченного доступа.",
+		"Расходитесь, живо.",
+		"Не твоё дело.",
+		"Отойди.",
+		"Вали отсюда.",
+		"Территория закрыта.",
+		"Иди дальше.",
+		"Посторонись.",
+		"Без лоитеринга.",
+		"Шевелись, гражданский."
 	)
 
 	speech_emote_see = list(
-		"scans the surroundings.",
-		"levels their weapon slightly.",
-		"steps forward one pace.",
-		"keeps a hand on their rifle.",
-		"narrows their eyes at you.",
-		"gestures sharply to move.",
-		"stands blocking the path.",
-		"turns their head to scan behind.",
-		"rests a hand near their holster.",
-		"watches you without blinking."
+		"осматривает окрестности.",
+		"слегка поднимает оружие.",
+		"делает шаг вперёд.",
+		"держит руку на винтовке.",
+		"прищуривается, глядя на тебя.",
+		"резко машет рукой — двигайся.",
+		"становится поперёк пути.",
+		"поворачивает голову, проверяя тыл.",
+		"держит руку возле кобуры.",
+		"смотрит не мигая."
 	)
 
 	speech_emote_hear = list(
-		"mutters into radio.",
-		"speaks low into comms.",
-		"grunts something unintelligible.",
-		"barks a short code word.",
-		"whispers coordinates.",
-		"reports quietly: «one civilian»",
-		"mutters: «another straggler»",
-		"clicks tongue and keys the radio.",
-		"breathes heavily into the mic.",
-		"repeats a curt order under breath."
+		"бормочет в рацию.",
+		"говорит тихо в гарнитуру.",
+		"издаёт невнятный рык.",
+		"лает короткий код.",
+		"шепчет координаты.",
+		"тихо докладывает: «один гражданский»",
+		"бормочет: «ещё один бродяга»",
+		"цокает языком и включает рацию.",
+		"тяжело дышит в микрофон.",
+		"повторяет короткий приказ под нос."
 	)
 
 	possible_outfits = list(/datum/outfit/trainstation_military)
+
 
 /mob/living/basic/npc/police/military/sniper
 	item_r_hand = /obj/item/gun/ballistic/rifle/sniper_rifle
@@ -533,9 +548,8 @@
 	ranged_cooldown = 7 SECONDS
 
 
-
 /mob/living/basic/npc/police/military/bad_guys
-	name = "Marauder"
+	name = "Мародёр"
 	faction = list(FACTION_HOSTILE)
 	make_random_name = FALSE
 

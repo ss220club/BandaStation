@@ -1,5 +1,5 @@
 /obj/machinery/door/train
-	name = "Train door"
+	name = "Дверь вагона"
 
 /obj/machinery/door/train/lock()
 	. = ..()
@@ -12,22 +12,23 @@
 /obj/machinery/door/train/open(forced)
 	if(locked)
 		if(usr)
-			balloon_alert(usr, "Locked!")
-			to_chat(usr, "Door is locked from other side!")
+			balloon_alert(usr, "Заперто!")
+			to_chat(usr, span_warning("Дверь заперта с другой стороны!"))
 		return
 	return ..()
 
 /obj/machinery/door/train/close(forced)
 	if(locked)
 		if(usr)
-			balloon_alert(usr, "Locked!")
-			to_chat(usr, "Door is locked!")
+			balloon_alert(usr, "Заперто!")
+			to_chat(usr, span_warning("Дверь заперта!"))
 		return
 	return ..()
 
+
 /obj/machinery/door/train/train_door
-	name = "Train door"
-	desc = "A solid metal door, often used in train carriages."
+	name = "Дверь вагона"
+	desc = "Прочная металлическая дверь, типичная для пассажирских вагонов поезда."
 	icon = 'modular_bandastation/fenysha_events/icons/doors/train_door.dmi'
 	has_access_panel = FALSE
 	opacity = FALSE
@@ -37,6 +38,7 @@
 	AddComponent(/datum/component/redirect_attack_hand_from_turf, interact_check = CALLBACK(src, PROC_REF(drag_check)))
 
 /obj/machinery/door/train/train_door/proc/drag_check(mob/user)
+	// Если игрок тащит кого-то/что-то — нельзя взаимодействовать с дверью рукой
 	if(user.pulling)
 		return FALSE
 	return TRUE
@@ -61,9 +63,10 @@
 		if(DOOR_CLOSING_FINISHED)
 			return 0.7 SECONDS
 
+
 /obj/machinery/door/airlock/train_locomotive
-	name = "Train locomotive"
-	desc = "A solid metal door, often used in train carriages."
+	name = "Дверь локомотива"
+	desc = "Массивная герметичная дверь локомотива. Выглядит гораздо прочнее обычных вагонных."
 	icon = 'modular_bandastation/fenysha_events/icons/doors/locomotive_door.dmi'
 	aiControlDisabled = AI_WIRE_DISABLED
 	air_tight = TRUE
@@ -73,14 +76,15 @@
 
 
 /obj/machinery/door/train/coupe_door
-	name = "Coupe door"
-	desc = "A solid metal door, often used in train carriages."
+	name = "Дверь купе"
+	desc = "Узкая металлическая дверь купе. Прочная, но лёгкая — чтобы быстро открыть в случае необходимости."
 	icon = 'modular_bandastation/fenysha_events/icons/doors/coupe_door.dmi'
 	has_access_panel = FALSE
 
+
 /obj/structure/table/train_table
-	name = "Train table"
-	desc = "A square piece of iron standing on metal leg. It can not move."
+	name = "Вагонный столик"
+	desc = "Квадратный металлический столик на одной ножке. Прикручен к полу намертво — не сдвинешь."
 	icon = 'modular_bandastation/fenysha_events/icons/structures/trainstructures.dmi'
 	icon_state = "table"
 	base_icon_state = "table"
@@ -89,7 +93,7 @@
 	pass_flags_self = PASSTABLE | LETPASSTHROW
 	layer = TABLE_LAYER
 	obj_flags = CAN_BE_HIT | IGNORE_DENSITY
-	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT)
 	max_integrity = 250
 	integrity_failure = 0.33
 	smoothing_flags = NONE
@@ -97,9 +101,10 @@
 	canSmoothWith = NONE
 	can_flip = FALSE
 
+
 /obj/structure/table/train_shelf
-	name = "Train shelf"
-	desc = "A metal simple shelf for storing things."
+	name = "Вагонная полка"
+	desc = "Простая металлическая полка для хранения вещей в вагоне."
 	icon = 'modular_bandastation/fenysha_events/icons/structures/trainstructures.dmi'
 	icon_state = "shelf_metal"
 	base_icon_state = "shelf_metal"
@@ -108,7 +113,7 @@
 	pass_flags_self = LETPASSTHROW
 	layer = TABLE_LAYER
 	obj_flags = CAN_BE_HIT | IGNORE_DENSITY
-	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT)
 	max_integrity = 250
 	integrity_failure = 0.33
 	smoothing_flags = NONE
@@ -117,16 +122,16 @@
 	can_flip = FALSE
 
 /obj/structure/table/train_shelf/wood
-	name = "Train wooden shelf"
+	name = "Деревянная вагонная полка"
 	icon_state = "shelf_wood"
 	base_icon_state = "shelf_wood"
 	max_integrity = 150
-	custom_materials = list(/datum/material/wood =SHEET_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/wood = SHEET_MATERIAL_AMOUNT)
 
 
 /obj/structure/gangway
-	name = "Train gangway"
-	desc = "A durable insulated cover connecting two railcars together."
+	name = "Гармошка вагона"
+	desc = "Прочный изолированный переходной рукав, соединяющий два вагона поезда. Выдерживает сильную тряску и перепады давления."
 	icon = 'modular_bandastation/fenysha_events/icons/structures/trainstructures.dmi'
 	icon_state = "gangway_still"
 	base_icon_state = "gangway_still"
@@ -147,29 +152,25 @@
 
 /obj/structure/gangway/proc/on_train_begin_moving()
 	SIGNAL_HANDLER
-
 	icon_state = "gangway_moving"
 
 /obj/structure/gangway/proc/on_train_stop_moving()
 	SIGNAL_HANDLER
-
 	icon_state = "gangway_still"
 
 
-
 /obj/machinery/button/auto_detect
-	// Устройство к которому мы подключены
+	/// Устройства, к которым мы подключены
 	var/list/atom/connected_device = null
-	// Предустановленный билд
+	/// Предустановленный тип устройства (если задан — только он)
 	var/prebuild_type = null
-	// Радиус поиска цели для коннекта
+	/// Радиус поиска устройств для автоподключения
 	var/find_range = 1
-	// Список всех типов устройст к которым мы можем быть подключены
+	/// Список типов устройств, которые можно подключить
 	var/static/connectable_devices = list(
 		/obj/machinery/door,
 		/obj/structure/curtain,
 	)
-
 
 /obj/machinery/button/auto_detect/Initialize(mapload)
 	. = ..()
@@ -214,10 +215,9 @@
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 
 
-
 /obj/machinery/computer/trainstation_control
-	name = "Station control"
-	desc = "This computer is used to control the station's locking system. Use it to continue on your way."
+	name = "Пульт управления станцией"
+	desc = "Компьютер для управления магнитными блокираторами станции. Используйте его, чтобы продолжить путь."
 	icon_screen = "command"
 	icon_keyboard = "id_key"
 
@@ -238,7 +238,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 
 /obj/machinery/computer/trainstation_control/proc/set_station(datum/train_station/new_station)
 	station = new_station
-	name = "[station.name] - control terminal"
+	name = "[station.name] — терминал управления"
 	SSpoints_of_interest.make_point_of_interest(src)
 	add_filter("story_outline", 2, list("type" = "outline", "color" = "#fa3b3b", "size" = 1))
 
@@ -277,6 +277,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 
 	if(unlocked)
 		return TRUE
+
 	playsound(src, SFX_KEYBOARD_CLICKS, 40)
 
 	switch(action)
@@ -315,7 +316,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 				return TRUE
 
 			if(!station.is_right_code(current_code))
-				balloon_alert(usr, "incorrect code!")
+				balloon_alert(usr, "Неверный код!")
 				current_code = ""
 				return TRUE
 
@@ -323,36 +324,37 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 			current_code = ""
 			return TRUE
 
+
 /obj/machinery/computer/trainstation_control/proc/unlock_station()
 	station.blocking_moving = FALSE
-	balloon_alert_to_viewers("Station unlocked!")
-	priority_announce("Station's magnetic locks were disabled. Traffic permitted.", station?.name)
+	balloon_alert_to_viewers("Блокировка снята!")
+	priority_announce("Магнитные блокираторы станции отключены. Движение разрешено.", station?.name)
 	SEND_SIGNAL(SStrain_controller, COMSIG_TRAINSTATION_UNLOCKED)
 	unlocked = TRUE
 	remove_filter("story_outline")
 
+
 /obj/item/paper/trainstation_password
-	name = "station security update"
+	name = "обновление системы безопасности станции"
 	default_raw_text = \
-	"<center><b>York-3 Higher Chamber Directive</b></center>\
+	"<center><b>Директива Высшей Палаты Йорк-3</b></center>\
 	<BR>\
-	Station: <b>%STATIONNAME%</b>\
+	Станция: <b>%STATIONNAME%</b>\
 	<BR><BR>\
-	Magnetic interlock password has been changed.\
+	Пароль магнитной блокировки изменён.\
 	<BR>\
-	New code: <b>%STATIONPASSWORD%</b>\
+	Новый код: <b>%STATIONPASSWORD%</b>\
 	<BR><BR>\
-	<b>CLASSIFIED – LEVEL III</b><BR>\
-	This document is confidential.<BR>\
-	Do not copy. Do not discuss. Do not leave unsecured.\
+	<b>СЕКРЕТНО — УРОВЕНЬ III</b><BR>\
+	Документ является конфиденциальным.<BR>\
+	Запрещено копирование. Запрещено обсуждение. Запрещено оставлять без охраны.\
 	<BR><BR>\
-	<BR>\
-	— York-3 Metropolitan Council"
+	— Совет Метрополии Йорк-3"
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
 /obj/item/paper/trainstation_password/Initialize(mapload)
 	var/datum/train_station/current_station = SStrain_controller?.loaded_station
-	name = "[current_station.name] - security update"
+	name = "[current_station.name] — обновление безопасности"
 	default_raw_text = replacetext(default_raw_text, "%STATIONNAME%", current_station.name)
 	default_raw_text = replacetext(default_raw_text, "%STATIONPASSWORD%", current_station.get_password())
 	SSpoints_of_interest.make_point_of_interest(src)
@@ -360,8 +362,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 
 
 /obj/machinery/computer/train_control_terminal
-	name = "Train control terminal"
-	desc = "This computer is used to control the train and its movement from station to station."
+	name = "Пульт управления поездом"
+	desc = "Компьютер для управления движением поезда и выбора следующей станции."
 	icon_screen = "command"
 	icon_keyboard = "id_key"
 
@@ -385,8 +387,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 	data["read_only"] = read_only
 	data["is_moving"] = TC.is_moving()
 	data["train_engine_active"] = TC.train_engine?.is_active() || FALSE
-	data["current_station"] = TC.loaded_station?.name || "Unknown"
-	data["planned_station"] = TC.planned_to_load?.name || "None"
+	data["current_station"] = TC.loaded_station?.name || "Неизвестно"
+	data["planned_station"] = TC.planned_to_load?.name || "Не выбрано"
 	data["is_blocked"] = TC.loaded_station?.blocking_moving || FALSE
 	data["progress"] = TC.is_moving() && TC.total_travel_time > 0 ? 1 - (TC.time_to_next_station / TC.total_travel_time) : 0
 	data["time_remaining"] = TC.time_to_next_station || 0
@@ -421,10 +423,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 	switch(action)
 		if("start_moving")
 			if(!TC.train_engine.is_active())
-				balloon_alert_to_viewers("Train engine is not active!")
+				balloon_alert_to_viewers("Двигатель поезда не запущен!")
 				return TRUE
 			if(!COOLDOWN_FINISHED(src, toggle_moving_cd))
-				balloon_alert_to_viewers("Please wait before toggling movement again.")
+				balloon_alert_to_viewers("Подождите перед повторным запуском.")
 				return TRUE
 			if(!TC.is_moving() && TC.planned_to_load && !TC.loaded_station?.blocking_moving)
 				TC.attempt_start()
@@ -432,7 +434,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 			return TRUE
 		if("stop_moving")
 			if(!COOLDOWN_FINISHED(src, toggle_moving_cd))
-				balloon_alert_to_viewers("Please wait before toggling movement again.")
+				balloon_alert_to_viewers("Подождите перед повторной остановкой.")
 				return TRUE
 			if(TC.is_moving())
 				COOLDOWN_START(src, toggle_moving_cd, 60 SECONDS)
@@ -443,11 +445,9 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 			if(!istext(raw_id))
 				return
 
-			// Поддержка как "чистого" типа (/datum/train_station/...), так и id вида "/datum/train_station/...#N"
 			var/station_path_text = raw_id
 			var/hash_pos = findtext(raw_id, "#")
 			if(hash_pos)
-				// copytext конец не включителен, берём часть до '#'
 				station_path_text = copytext(raw_id, 1, hash_pos)
 
 			var/station_type = text2path(station_path_text)
@@ -460,13 +460,15 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 			TC.planned_to_load = next
 			return TRUE
 
+
 /obj/machinery/computer/train_control_terminal/read_only
-	name = "Train terminal"
+	name = "Терминал поезда"
 	read_only = TRUE
 
+
 /obj/machinery/recharge_station/train
-	name = "train recharging station"
-	desc = "A specialized recharging station for synthetics only. It slowly recharges and repairs silicon-based lifeforms."
+	name = "Зарядная станция поезда"
+	desc = "Специализированная зарядная станция только для синтетиков. Медленно восстанавливает заряд и ремонтирует кремниевые формы жизни."
 	active_power_usage = BASE_MACHINE_ACTIVE_CONSUMPTION * 0.05
 	density = FALSE
 	req_access = null
@@ -495,7 +497,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 
 /obj/machinery/recharge_station/train/examine(mob/user)
 	. = ..()
-	. += span_notice("This station slowly recharges and repairs synthetics only.")
+	. += span_notice("Эта станция медленно заряжает и ремонтирует только синтетиков.")
 
 /obj/machinery/recharge_station/train/process(seconds_per_tick)
 	if(QDELETED(occupant) || !is_operational)
@@ -514,38 +516,41 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 			var/mob/living/silicon/silicon = occupant
 			silicon.adjust_brute_loss(-0.5 * seconds_per_tick)
 			silicon.adjust_fire_loss(-0.5 * seconds_per_tick)
-	// No restocking or extra features
+	// Без пополнения материалов и лишних функций
 	sendmats = FALSE
 
+
 /obj/item/key/master_key
-	name = "train master key"
-	desc = "A large key used to unlock train doors."
+	name = "Мастер-ключ поезда"
+	desc = "Большой ключ, открывающий практически все двери вагонов поезда."
 
 /obj/item/key/master_key/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	. = ..()
 	if(istype(interacting_with, /obj/machinery/door/train))
 		var/obj/machinery/door/train/D = interacting_with
-		D.balloon_alert_to_viewers("Begin opening!")
-		D.visible_message(span_notice("[user] uses \the [src] on \the [D]."))
+		D.balloon_alert_to_viewers("Начинается открытие...")
+		D.visible_message(span_notice("[user] использует [src] на [D]."))
 		if(!do_after(user, 5 SECONDS, D))
-			D.balloon_alert_to_viewers("Opening cancelled!")
+			D.balloon_alert_to_viewers("Открытие отменено!")
 			return TRUE
 		if(D.locked)
 			D.unlock()
-			balloon_alert(user, "You unlock the train door with the master key.")
+			balloon_alert(user, "Вы открыли дверь мастер-ключом.")
 		else
 			D.lock()
-			balloon_alert(user, "You lock the train door with the master key.")
+			balloon_alert(user, "Вы заперли дверь мастер-ключом.")
 		return TRUE
 
+
 /obj/effect/turf_decal/train_sigh
-	name = "Train sigh"
+	name = "Знак поезда"
 	icon = 'modular_bandastation/fenysha_events/icons/structures/train_sigh.dmi'
 	icon_state = "sigh"
 
+
 /obj/structure/prop/big/military_nuke
-	name = "Military container"
-	desc = "An incredibly sturdy, locked container. What could be inside?"
+	name = "Военный контейнер"
+	desc = "Невероятно прочный запертый контейнер. Что может быть внутри?"
 	icon = 'modular_bandastation/fenysha_events/icons/structures/props/goon/64x48.dmi'
 	anchored = FALSE
 	opacity = FALSE
@@ -558,7 +563,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 
 /obj/structure/prop/big/military_nuke/examine(mob/user)
 	. = ..()
-	. += span_purple("This is an important cargo - it should not be lost.")
+	. += span_purple("Это важный груз — его нельзя потерять.")
 
 /obj/structure/prop/big/military_nuke/Initialize(mapload)
 	. = ..()

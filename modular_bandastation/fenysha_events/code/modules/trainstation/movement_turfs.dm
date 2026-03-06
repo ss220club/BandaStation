@@ -8,8 +8,8 @@
 
 
 /turf/open/moving
-	name = "Matrix"
-	desc = "You probably shouldn't see this"
+	name = "Матрица" // Matrix
+	desc = "Вы, вероятно, не должны это видеть" // You probably shouldn't see this
 	icon = 'modular_bandastation/fenysha_events/icons/turf/trainturf.dmi'
 	turf_flags = NO_RUST | IS_SOLID | NOJAUNT
 	gender = PLURAL
@@ -156,8 +156,8 @@
 
 
 /turf/open/moving/snow
-	name = "Snow"
-	desc = "It looks cold"
+	name = "Снег" // Snow
+	desc = "Выглядит холодно" // It looks cold
 	icon_state = "snow_still"
 	base_icon_state = "snow"
 
@@ -170,8 +170,8 @@
 	density = TRUE
 
 /turf/open/moving/rails
-	name = "Rails"
-	desc = "It's better not to stand in the way of a train."
+	name = "Рельсы" // Rails
+	desc = "Лучше не стойте на пути поезда." // It's better not to stand in the way of a train.
 
 	slowdown = 2
 
@@ -282,8 +282,8 @@
 
 
 /turf/open/indestructible/train_platform
-	name = "Platform"
-	desc = "Railway station platform."
+	name = "Платформа" // Platform
+	desc = "Платформа железнодорожной станции." // Railway station platform.
 	icon = 'modular_bandastation/fenysha_events/icons/turf/trainturf.dmi'
 	icon_state = "platform_middle_still"
 

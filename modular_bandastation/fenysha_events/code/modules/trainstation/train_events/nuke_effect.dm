@@ -1,56 +1,55 @@
 /datum/round_event_control/train_event/nuke_effect
-	name = "Nuclear explosion"
-	description = "Creates effcets of nuclear explosion"
+	name = "Ядерный взрыв"
+	description = "Создаёт эффекты ядерного взрыва на расстоянии от поезда"
+	category = "Trainstation"
 	typepath = /datum/round_event/train_event/nuke
 
 /datum/round_event/train_event/nuke
-	announce_when = 10
-	end_when = 1000
+	announce_when = 10     // Объявление через 10 секунд после старта события
+	end_when = 1000        // Длительность эффектов (достаточно, чтобы всё отыгралось)
 
 /datum/round_event/train_event/nuke/setup()
 	. = ..()
-	start_when = announce_when + 13
+	start_when = announce_when + 13  // Основные эффекты начинаются через ~23 секунды после объявления
 
 /datum/round_event/train_event/nuke/announce(fake)
-	priority_announce("We have detected the activation of a portable nuclear device 15 kilometers away from you. Prepare for impact!", \
-					"Nuclear alarm" ,'modular_bandastation/fenysha_events/sounds/mobs/sirenhead/siren_alarm_air.ogg')
+	priority_announce("Зафиксирована активация портативного ядерного устройства в 15 километрах от вас. \
+						Готовьтесь к воздействию ударной волны!", \
+					"ЯДЕРНАЯ ТРЕВОГА", 'modular_bandastation/fenysha_events/sounds/mobs/sirenhead/siren_alarm_air.ogg')
 
 /datum/round_event/train_event/nuke/start()
 	INVOKE_ASYNC(src, PROC_REF(caboom))
 	addtimer(CALLBACK(src, PROC_REF(run_postnuke)), 38 SECONDS)
 
 /datum/round_event/train_event/nuke/proc/caboom()
+	// Яркая вспышка на горизонте
 	SSdaylight.flash("#fcc95b", 15 SECONDS, 0.3 SECONDS)
 	sleep(0.8 SECONDS)
 
-	flash_peoples()
+	flash_peoples()           // Ослепление и ожоги
 	sleep(10 SECONDS)
-	sound_wave()
+	sound_wave()              // Звуковая волна + разбитые окна
 	sleep(1 SECONDS)
-	impact_wave()
+	impact_wave()             // Ударная волна + тряска
 
 /datum/round_event/train_event/nuke/proc/flash_peoples()
 	for(var/mob/living/player in GLOB.alive_player_list)
 		if(QDELETED(player))
 			continue
-		to_chat(player, span_danger("You see a flash of light!"))
+		to_chat(player, span_danger("Ослепительная вспышка света с горизонта!"))
 		for(var/turf/open/T in view(player, 5))
 			var/area/turf_area = get_area(T)
 			if(!turf_area.outdoors || !can_see(player, T))
 				continue
 			flash_and_burn(player, T)
 			break
-	return
-
 
 /datum/round_event/train_event/nuke/proc/flash_and_burn(mob/living/target, turf/affect_turf)
 	var/flash_result = target.flash_act(4, override_blindness_check = TRUE, affect_silicon = TRUE, length = 5 SECONDS)
 	if(flash_result)
-		to_chat(target, span_userdanger("A massive flash of light from afar blinds you!"))
+		to_chat(target, span_userdanger("Мощнейшая вспышка ослепляет вас!"))
 	if(prob(20 * max(1, (5 - get_dist(target, affect_turf)))))
 		target.adjust_fire_stacks(rand(3, 4))
-	return
-
 
 /datum/round_event/train_event/nuke/proc/sound_wave()
 	sound_to_playing_players('modular_bandastation/fenysha_events/sounds/thefinalstation/nuke_ex.ogg')
@@ -80,7 +79,7 @@
 /datum/round_event/train_event/nuke/proc/impact_wave()
 	if(SStrain_controller.is_moving())
 		SStrain_controller.stop_moving()
-		priority_announce("Attention! Emergency braking activated!", "Train control", 'sound/effects/alert.ogg')
+		priority_announce("Внимание! Активировано экстренное торможение!", "Управление поездом", 'sound/effects/alert.ogg')
 
 	for(var/obj/machinery/light/light in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/light))
 		if(!is_station_level(light.z))
@@ -89,8 +88,9 @@
 			light.break_light_tube()
 		else
 			light.flicker(rand(3, 8))
+
 	for(var/mob/living/player in GLOB.alive_player_list)
-		to_chat(player, span_userdanger("A strong shock wave hits you!"))
+		to_chat(player, span_userdanger("Мощная ударная волна обрушивается на вас!"))
 		shake_camera(player, 1 SECONDS, 2)
 		if(prob(60))
 			player.Knockdown(3 SECONDS)
@@ -101,23 +101,25 @@
 	addtimer(CALLBACK(src, PROC_REF(start_fallout_and_kill)), rand(30, 60) SECONDS)
 	kill()
 
+
 /datum/round_event/train_event/nuke/proc/start_fallout_and_kill()
 	SSweather.run_weather(/datum/weather/nuclear_fallout)
 
-/datum/weather/nuclear_fallout
-	name = "Nuclear fallout"
-	desc = "Nuclear fallout occurs after a recent nuclear explosion.."
 
-	telegraph_message = span_warning("Nuclear fallout incomming!")
+/datum/weather/nuclear_fallout
+	name = "Ядерные осадки"
+	desc = "Радиоактивные осадки после недавнего ядерного взрыва. Небо затянуто серым пеплом."
+
+	telegraph_message = span_warning("Приближаются ядерные осадки!")
 	telegraph_duration = 15 SECONDS
 
-	weather_message = span_danger("Nuclear fallout is falling from the sky, find shelter under a roof!")
+	weather_message = span_danger("Радиоактивный пепел падает с неба. Найдите укрытие под крышей!")
 	weather_duration_lower = 5 MINUTES
 	weather_duration_upper = 15 MINUTES
 	weather_overlay = "light_ash"
 	weather_color = COLOR_GOLEM_GRAY
 
-	end_message = span_danger("Nuclear fallout no longer falls!")
+	end_message = span_danger("Ядерные осадки прекратились!")
 	end_duration = 0 SECONDS
 
 	area_type = /area
@@ -132,4 +134,3 @@
 		radiation_pulse(victim, 1, RAD_MEDIUM_INSULATION, 60)
 		SEND_SOUND(victim, 'modular_bandastation/fenysha_events/sounds/rad_counter.ogg')
 	return ..()
-

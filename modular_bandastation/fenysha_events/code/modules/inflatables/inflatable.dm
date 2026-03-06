@@ -1,4 +1,3 @@
-
 #define TAPE_REQUIRED_TO_FIX 2
 #define INFLATABLE_DOOR_OPENED FALSE
 #define INFLATABLE_DOOR_CLOSED TRUE
@@ -6,23 +5,23 @@
 #define BOX_WALL_AMOUNT 14
 
 /obj/structure/inflatable
-	name = "inflatable wall"
-	desc = "An inflated membrane. Do not puncture. Alt+Click to deflate."
+	name = "надувная стена"
+	desc = "Надувная мембрана. Не прокалывать. Alt+Клик — сдуть."
 	can_atmos_pass = ATMOS_PASS_DENSITY
 	density = TRUE
 	anchored = TRUE
 	max_integrity = 40
 	icon = 'modular_bandastation/fenysha_events/icons/unique/inflatable.dmi'
 	icon_state = "wall"
-	/// The type we drop when damaged.
+	/// Какой предмет выпадает при повреждении.
 	var/torn_type = /obj/item/inflatable/torn
-	/// The type we drop when deflated.
+	/// Какой предмет выпадает при нормальном сдувании.
 	var/deflated_type = /obj/item/inflatable
-	/// The hitsound made when we're... hit...
+	/// Звук удара по надувной конструкции.
 	var/hit_sound = 'sound/effects/glass/glasshit.ogg'
-	/// How quickly we deflate when manually deflated.
+	/// Сколько времени занимает ручное спокойное сдувание.
 	var/manual_deflation_time = 3 SECONDS
-	/// Whether or not the inflatable has been deflated
+	/// Была ли конструкция уже сдута (защита от повторного сдувания).
 	var/has_been_deflated = FALSE
 
 /obj/structure/inflatable/Initialize(mapload)
@@ -48,7 +47,7 @@
 
 /obj/structure/inflatable/attackby(obj/item/attacking_item, mob/user, params)
 	if(attacking_item.sharpness)
-		visible_message(span_danger("<b>[user] pierces [src] with [attacking_item]!</b>"))
+		visible_message(span_danger("<b>[user] протыкает [src] с помощью [attacking_item]!</b>"))
 		deflate(TRUE)
 		return
 	return ..()
@@ -60,34 +59,35 @@
 /obj/structure/inflatable/play_attack_sound(damage_amount, damage_type, damage_flag)
 	playsound(src, hit_sound, 75, TRUE)
 
-// Deflates the airbag and drops a deflated airbag item. If violent, drops a broken item instantly.
+// Сдувает надувную стену/дверь и выбрасывает соответствующий предмет.
+// Если violent = TRUE — мгновенно рвётся и выпадает порванный вариант.
 /obj/structure/inflatable/proc/deflate(violent)
-	if(has_been_deflated) // We do not ever want to deflate more than once.
+	if(has_been_deflated) // Защита от повторного сдувания
 		return
 
 	has_been_deflated = TRUE
 
 	playsound(src, 'sound/machines/hiss.ogg', 75, 1)
 	if(!violent)
-		balloon_alert_to_viewers("slowly deflates!")
+		balloon_alert_to_viewers("медленно сдувается!")
 		addtimer(CALLBACK(src, PROC_REF(slow_deflate_finish)), manual_deflation_time)
 		return
 
 	var/turf/inflatable_loc = get_turf(src)
-	inflatable_loc.balloon_alert_to_viewers("[src] rapidly deflates!") // just so we don't balloon alert from the qdeleted inflatable object
+	inflatable_loc.balloon_alert_to_viewers("[src] стремительно сдувается!") // чтобы не показывало алерт от уже удалённого объекта
 	if(torn_type)
 		new torn_type(get_turf(src))
 	qdel(src)
 
-// Called when the airbag is calmly deflated, drops a non-broken item.
+// Вызывается при спокойном (ручном) сдувании — выпадает целый (не порванный) предмет
 /obj/structure/inflatable/proc/slow_deflate_finish()
 	if(deflated_type)
 		new deflated_type(get_turf(src))
 	qdel(src)
 
 /obj/structure/inflatable/verb/hand_deflate()
-	set name = "Deflate"
-	set category = "Object"
+	set name = "Сдуть"
+	set category = "Объект"
 	set src in oview(1)
 
 	if(usr.stat || usr.can_interact())
@@ -96,14 +96,14 @@
 
 
 /obj/structure/inflatable/door
-	name = "inflatable door"
+	name = "надувная дверь"
 	can_atmos_pass = ATMOS_PASS_DENSITY
 	icon = 'modular_bandastation/fenysha_events/icons/unique/inflatable.dmi'
 	icon_state = "door_closed"
 	base_icon_state = "door"
 	torn_type = /obj/item/inflatable/door/torn
 	deflated_type = /obj/item/inflatable/door
-	/// Are we open(FALSE), or are we closed(TRUE)?
+	/// Открыта (FALSE) или закрыта (TRUE)?
 	var/door_state = INFLATABLE_DOOR_CLOSED
 
 /obj/structure/inflatable/door/Initialize(mapload)
@@ -115,17 +115,18 @@
 	if(!user.can_interact_with(src))
 		return
 	toggle_door()
-	to_chat(user, span_notice("You [door_state ? "close" : "open"] [src]!"))
+	to_chat(user, span_notice("Вы [door_state ? "закрываете" : "открываете"] [src]!"))
+
 
 /obj/structure/inflatable/door/update_icon_state()
 	. = ..()
 	icon_state = "[base_icon_state]_[door_state ? "closed" : "open"]"
 
 /obj/structure/inflatable/door/proc/toggle_door()
-	if(door_state) // opening
+	if(door_state) // была закрыта → открываем
 		door_state = INFLATABLE_DOOR_OPENED
 		flick("[base_icon_state]_opening", src)
-	else // Closing
+	else // была открыта → закрываем
 		door_state = INFLATABLE_DOOR_CLOSED
 		flick("[base_icon_state]_closing", src)
 	density = door_state
@@ -133,17 +134,17 @@
 	update_appearance()
 
 
-// The deployable item
+// Развёртываемый предмет (стена или дверь)
 /obj/item/inflatable
-	name = "inflatable wall"
-	desc = "A folded membrane which rapidly expands into a large cubical shape on activation."
+	name = "надувная стена"
+	desc = "Сложенная мембрана, которая при активации быстро разворачивается в большую кубическую форму."
 	icon = 'modular_bandastation/fenysha_events/icons/unique/inflatable.dmi'
 	icon_state = "folded_wall"
 	base_icon_state = "folded_wall"
 	w_class = WEIGHT_CLASS_SMALL
-	/// The structure we deploy when used.
+	/// Какую структуру развёртываем при использовании.
 	var/structure_type = /obj/structure/inflatable
-	/// Are we torn?
+	/// Порвана ли мембрана.
 	var/torn = FALSE
 
 /obj/item/inflatable/Initialize(mapload)
@@ -156,33 +157,32 @@
 /obj/item/inflatable/attack_self(mob/user)
 	. = ..()
 	if(torn)
-		to_chat(user, span_warning("[src] is too damaged to function!"))
+		to_chat(user, span_warning("[src] слишком сильно повреждена и не работает!"))
 		return
 	if(locate(structure_type) in get_turf(user))
-		to_chat(user, span_warning("There is already a wall here!"))
+		to_chat(user, span_warning("Здесь уже установлена стена!"))
 		return
 	playsound(loc, 'sound/items/zip/zip.ogg', 75, 1)
-	to_chat(user, span_notice("You inflate [src]."))
+	to_chat(user, span_notice("Вы надуваете [src]."))
 	if(do_after(user, 1 SECONDS, src))
 		new structure_type(get_turf(user))
 		qdel(src)
-
 
 
 /obj/item/inflatable/attackby(obj/item/attacking_item, mob/user)
 	if(!istype(attacking_item, /obj/item/stack/medical/wrap/sticky_tape/duct))
 		return ..()
 	if(!torn)
-		to_chat(user, span_notice("[src] does not need repairing!"))
+		to_chat(user, span_notice("[src] не нуждается в ремонте!"))
 		return
 	var/obj/item/stack/medical/wrap/sticky_tape/duct/attacking_tape = attacking_item
 	if(attacking_tape.use(TAPE_REQUIRED_TO_FIX, check = TRUE))
-		to_chat(user, span_danger("There is not enough of [attacking_tape]! You need at least [TAPE_REQUIRED_TO_FIX] pieces!"))
+		to_chat(user, span_danger("Недостаточно [attacking_tape]! Нужно минимум [TAPE_REQUIRED_TO_FIX] штук!"))
 		return
 	if(!do_after(user, 2 SECONDS, src))
 		return
 	playsound(user, 'modular_bandastation/fenysha_events/sounds/effects/ducttape1.ogg', 50, 1)
-	to_chat(user, span_notice("You fix [src] using [attacking_tape]!"))
+	to_chat(user, span_notice("Вы заклеиваете [src] с помощью [attacking_tape]!"))
 	attacking_tape.use(TAPE_REQUIRED_TO_FIX)
 	torn = FALSE
 	update_appearance()
@@ -194,18 +194,18 @@
 /obj/item/inflatable/examine(mob/user)
 	. = ..()
 	if(torn)
-		. += span_warning("It is badly torn, and cannot be used! The damage looks like it could be repaired with some <b>tape</b>.")
+		. += span_warning("Мембрана сильно порвана и не может быть использована! Повреждение выглядит так, будто его можно починить с помощью <b>скотча</b>.")
 
 /obj/item/inflatable/suicide_act(mob/living/user)
-	visible_message(user, span_danger("[user] starts shoving the [src] up [user.p_their()] ass! It looks like [user.p_their()] going to pull the cord, oh shit!"))
+	visible_message(user, span_danger("[user] начинает засовывать [src] себе в зад! Кажется, сейчас он дёрнет шнур, о нет!"))
 	playsound(user.loc, 'sound/machines/hiss.ogg', 75, 1)
 	new structure_type(user.loc)
 	user.gib()
 	return BRUTELOSS
 
 /obj/item/inflatable/door
-	name = "inflatable door"
-	desc = "A folded membrane which rapidly expands into a simple door on activation."
+	name = "надувная дверь"
+	desc = "Сложенная мембрана, которая при активации быстро разворачивается в простую дверь."
 	icon = 'modular_bandastation/fenysha_events/icons/unique/inflatable.dmi'
 	icon_state = "folded_door"
 	base_icon_state = "folded_door"
@@ -215,18 +215,18 @@
 	torn = TRUE
 
 
-/// The storage for the inflatables box.
+/// Хранилище для коробки с надувными стенами и дверями
 /datum/storage/inflatables_box
 	max_slots = (BOX_DOOR_AMOUNT + BOX_WALL_AMOUNT)
 	max_specific_storage = WEIGHT_CLASS_SMALL
 	max_total_storage = (BOX_DOOR_AMOUNT + BOX_WALL_AMOUNT) * WEIGHT_CLASS_SMALL
 
 
-/// The box full of inflatables
+/// Коробка, полная надувных стен и дверей
 /obj/item/storage/inflatable
 	icon = 'modular_bandastation/fenysha_events/icons/unique/inflatable.dmi'
-	name = "inflatable barrier box"
-	desc = "Contains inflatable walls and doors."
+	name = "коробка с надувными барьерами"
+	desc = "Содержит надувные стены и двери."
 	icon_state = "inf"
 	w_class = WEIGHT_CLASS_NORMAL
 	storage_type = /datum/storage/inflatables_box
@@ -238,7 +238,7 @@
 /obj/item/storage/inflatable/PopulateContents()
 	for(var/i = 0, i < BOX_DOOR_AMOUNT, i++)
 		new /obj/item/inflatable/door(src)
-	for(var/i = 0, i < BOX_WALL_AMOUNT, i ++)
+	for(var/i = 0, i < BOX_WALL_AMOUNT, i++)
 		new /obj/item/inflatable(src)
 
 #undef TAPE_REQUIRED_TO_FIX

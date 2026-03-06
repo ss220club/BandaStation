@@ -1,8 +1,4 @@
-// THIS IS A SKYRAT UI FILE
-import { toTitleCase } from 'tgui-core/string';
 import { useState } from 'react';
-
-import { useBackend, useSharedState } from '../backend';
 import {
   Box,
   Button,
@@ -17,6 +13,8 @@ import {
   Tabs,
   Tooltip,
 } from 'tgui-core/components';
+import { toTitleCase } from 'tgui-core/string';
+import { useBackend, useSharedState } from '../backend';
 import { Window } from '../layouts';
 
 export const AmmoWorkbench = (props) => {
@@ -26,18 +24,18 @@ export const AmmoWorkbench = (props) => {
       width={600}
       height={600}
       theme="hackerman"
-      title="Ammunitions Workbench"
+      title="Верстак боеприпасов"
     >
       <Window.Content scrollable>
         <Tabs>
           <Tabs.Tab selected={tab === 1} onClick={() => setTab(1)}>
-            Ammunitions
+            Боеприпасы
           </Tabs.Tab>
           <Tabs.Tab selected={tab === 2} onClick={() => setTab(2)}>
-            Materials
+            Материалы
           </Tabs.Tab>
           <Tabs.Tab selected={tab === 3} onClick={() => setTab(3)}>
-            Datadisks
+            Диски данных
           </Tabs.Tab>
         </Tabs>
         {tab === 1 && <AmmunitionsTab />}
@@ -72,9 +70,9 @@ export const AmmunitionsTab = (props) => {
           {error}
         </NoticeBox>
       )}
-      <Section title="Machine Settings">
+      <Section title="Настройки станка">
         <Box inline mr={4}>
-          Current Efficiency:{' '}
+          Текущая эффективность:{' '}
           <RoundGauge
             value={efficiency}
             minValue={1.6}
@@ -82,17 +80,17 @@ export const AmmunitionsTab = (props) => {
             format={() => null}
           />
         </Box>
-        <Box>Time Per Round: {time} seconds</Box>
+        <Box>Время на один патрон: {time} сек.</Box>
         <Button.Checkbox
           textAlign="right"
           checked={turboBoost}
           onClick={() => act('turboBoost')}
         >
-          Turbo Boost
+          Турбо-режим
         </Button.Checkbox>
       </Section>
       <Section
-        title="Loaded Magazine"
+        title="Установленный магазин"
         buttons={
           <>
             {!!mag_loaded && (
@@ -106,7 +104,7 @@ export const AmmunitionsTab = (props) => {
             )}
             <Button
               icon="eject"
-              content="Eject"
+              content="Извлечь"
               disabled={!mag_loaded}
               onClick={() => act('EjectMag')}
             />
@@ -120,7 +118,7 @@ export const AmmunitionsTab = (props) => {
           </Box>
         )}
       </Section>
-      <Section title="Available Ammunition Types">
+      <Section title="Доступные типы боеприпасов">
         {!!mag_loaded && (
           <Flex.Item grow={1} basis={0}>
             {available_rounds.map((available_round) => (
@@ -153,9 +151,11 @@ export const AmmunitionsTab = (props) => {
       </Section>
       {!!hacked && (
         <NoticeBox textAlign="center" color="bad">
-          !WARNING! - ARMADYNE SAFETY PROTOCOLS ARE NOT ENGAGED! MISUSE IS NOT
-          COVERED UNDER WARRANTY. SOME MUNITION TYPES MAY CONSTITUTE A WAR CRIME
-          IN YOUR AREA. PLEASE CONTACT AN ARMADYNE ADMINISTRATOR IMMEDIATELY.
+          !ВНИМАНИЕ! — ПРОТОКОЛЫ БЕЗОПАСНОСТИ LAPLAS ОТКЛЮЧЕНЫ! \
+          НЕСАНКЦИОНИРОВАННОЕ ИСПОЛЬЗОВАНИЕ НЕ ПОКРЫВАЕТСЯ ГАРАНТИЕЙ. \
+          НЕКОТОРЫЕ ТИПЫ БОЕПРИПАСОВ МОГУТ ЯВЛЯТЬСЯ ВОЕННЫМ ПРЕСТУПЛЕНИЕМ \ В
+          ВАШЕЙ ЗОНЕ ЮРИСДИКЦИИ. НЕМЕДЛЕННО СВЯЖИТЕСЬ С АДМИНИСТРАТОРОМ
+          ARMADYNE.
         </NoticeBox>
       )}
     </>
@@ -166,7 +166,7 @@ export const MaterialsTab = (props) => {
   const { act, data } = useBackend();
   const { materials = [] } = data;
   return (
-    <Section title="Materials">
+    <Section title="Материалы">
       <Table>
         {materials.map((material) => (
           <MaterialRow
@@ -203,18 +203,18 @@ export const DatadiskTab = (props) => {
         </NoticeBox>
       )}
       <Section
-        title="Datadisk"
+        title="Диск данных"
         buttons={
           <>
             <Button
               icon="save"
-              content="Load Disk"
+              content="Считать диск"
               disabled={!datadisk_loaded}
               onClick={() => act('ReadDisk')}
             />
             <Button
               icon="eject"
-              content="Eject"
+              content="Извлечь"
               disabled={!datadisk_loaded}
               onClick={() => act('EjectDisk')}
             />
@@ -223,18 +223,18 @@ export const DatadiskTab = (props) => {
       >
         {!!datadisk_loaded && (
           <Box>
-            Inserted Datadisk: {datadisk_name}
-            <Box>Description: {datadisk_desc}</Box>
+            Вставленный диск: {datadisk_name}
+            <Box>Описание: {datadisk_desc}</Box>
           </Box>
         )}
       </Section>
-      <Section title="Loaded Datadisks">
+      <Section title="Загруженные диски данных">
         <Table>
           {loaded_datadisks.map((loaded_datadisk) => (
             <Box key={loaded_datadisk.loaded_disk_name}>
               {loaded_datadisk.loaded_disk_name}
               <Box textAlign="right">
-                Description: {loaded_datadisk.loaded_disk_desc}
+                Описание: {loaded_datadisk.loaded_disk_desc}
               </Box>
             </Box>
           ))}
@@ -255,7 +255,7 @@ const MaterialRow = (props) => {
       <Table.Cell>{toTitleCase(material.name)}</Table.Cell>
       <Table.Cell collapsing textAlign="right">
         <Box mr={2} color="label" inline>
-          {amountAvailable} sheets
+          {amountAvailable} листов
         </Box>
       </Table.Cell>
       <Table.Cell collapsing>
@@ -270,7 +270,7 @@ const MaterialRow = (props) => {
         />
         <Button
           disabled={amountAvailable < 1}
-          content="Release"
+          content="Выдать"
           onClick={() => onRelease(amount)}
         />
       </Table.Cell>

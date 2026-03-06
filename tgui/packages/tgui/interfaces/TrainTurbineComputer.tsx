@@ -59,10 +59,10 @@ export const TrainTurbineComputer = () => {
     return (
       <Window width={800} height={500}>
         <Window.Content>
-          <Section title="Connection Error">
+          <Section title="Ошибка соединения">
             <Box color="bad" fontSize="1.4rem" textAlign="center" mt={4}>
               <Icon name="exclamation-triangle" mr={2} />
-              Turbine not detected or not fully assembled!
+              Турбина не обнаружена или собрана не полностью!
             </Box>
           </Section>
         </Window.Content>
@@ -84,13 +84,13 @@ export const TrainTurbineComputer = () => {
     <Window width={1000} height={550} theme="retro">
       <Window.Content scrollable>
         <Flex direction="row" spacing={2} height="100%">
-          {/* Left column */}
+          {/* Левая колонка — статус и управление */}
           <Flex.Item grow={1} basis={0} minWidth="290px">
-            <Section title="Turbine Status" mb={2}>
+            <Section title="Статус турбины" mb={2}>
               <LabeledList>
-                <LabeledList.Item label="Power">
+                <LabeledList.Item label="Питание">
                   <Button
-                    content={active ? 'ON' : 'OFF'}
+                    content={active ? 'ВКЛ' : 'ВЫКЛ'}
                     color={active ? 'good' : 'bad'}
                     icon={active ? 'power-off' : 'power-off'}
                     iconRotation={active ? 0 : 180}
@@ -101,18 +101,18 @@ export const TrainTurbineComputer = () => {
                   {!!active && rpm > 0 && (
                     <Box inline color="bad" ml={1} fontSize="0.9rem">
                       <Icon name="lock" rotation={45} />
-                      Stop rotation before turning off
+                      Остановите вращение перед выключением
                     </Box>
                   )}
                   {!!compressor_too_cold && (
                     <Box inline color="bad" ml={1} fontSize="0.9rem">
                       <Icon name="circle-exclamation" rotation={45} />
-                      Compressor water vapour/steam too cold!
+                      Пар/водяной пар на входе слишком холодный!
                     </Box>
                   )}
                 </LabeledList.Item>
 
-                <LabeledList.Item label="Integrity">
+                <LabeledList.Item label="Целостность">
                   <ProgressBar
                     value={integrity / 100}
                     color={
@@ -131,22 +131,22 @@ export const TrainTurbineComputer = () => {
                   </ProgressBar>
                 </LabeledList.Item>
 
-                <LabeledList.Item label="Output Power">
+                <LabeledList.Item label="Выходная мощность">
                   <Box fontSize="1.6rem" color="good">
                     <Icon name="bolt" mr={1} />
                     <AnimatedNumber
                       value={power}
                       format={(v) => Math.round(v).toLocaleString()}
                     />{' '}
-                    kW
+                    кВт
                   </Box>
                 </LabeledList.Item>
               </LabeledList>
             </Section>
 
-            <Section title="Steam Intake Control">
+            <Section title="Управление впуском пара">
               <LabeledList>
-                <LabeledList.Item label="Regulator">
+                <LabeledList.Item label="Регулятор впуска">
                   <Slider
                     minValue={0.01}
                     maxValue={1}
@@ -160,7 +160,7 @@ export const TrainTurbineComputer = () => {
                   />
                 </LabeledList.Item>
 
-                <LabeledList.Item labelWrap label="Steam Consumption">
+                <LabeledList.Item labelWrap label="Расход пара">
                   <Flex direction="row" align="center">
                     <Button
                       icon="minus"
@@ -185,13 +185,13 @@ export const TrainTurbineComputer = () => {
                     />
                   </Flex>
                   <Box fontSize="0.8rem" opacity={0.7} textAlign="center">
-                    mol/tick (condensation → water)
+                    моль/тик (конденсация → вода)
                   </Box>
                 </LabeledList.Item>
 
                 <LabeledList.Item>
                   <Button
-                    content="EMERGENCY GAS VENT"
+                    content="АВАРИЙНЫЙ СБРОС ГАЗА"
                     color="bad"
                     icon="exclamation-triangle"
                     onClick={() => act('emergency_vent')}
@@ -203,7 +203,7 @@ export const TrainTurbineComputer = () => {
             </Section>
           </Flex.Item>
 
-          {/* Central visualization */}
+          {/* Центральная визуализация турбины */}
           <Flex.Item grow={1.3} basis={0}>
             <Flex
               direction="column"
@@ -212,7 +212,7 @@ export const TrainTurbineComputer = () => {
               height="100%"
             >
               <Section
-                title="Steam Turbine"
+                title="Паровая турбина"
                 backgroundColor={integrity < 30 ? '#330000' : undefined}
                 p={4}
                 textAlign="center"
@@ -237,7 +237,7 @@ export const TrainTurbineComputer = () => {
                   <br />
                   {'     ██═════════════██     '}
                   <br />
-                  {'    ██═══ ROTOR ════██    '}
+                  {'    ██═══ РОТОР ════██    '}
                   <br />
                   {'     ██═════════════██     '}
                   <br />
@@ -260,7 +260,7 @@ export const TrainTurbineComputer = () => {
                     value={rpm}
                     format={(v) => Math.round(v).toLocaleString()}
                   />{' '}
-                  RPM
+                  об/мин
                 </Box>
 
                 <Box mt={2} width="280px">
@@ -274,7 +274,7 @@ export const TrainTurbineComputer = () => {
                           : 'good'
                     }
                   >
-                    {overload ? 'OVERLOAD!' : 'Normal operation'}
+                    {overload ? 'ПЕРЕГРУЗКА!' : 'Нормальная работа'}
                   </ProgressBar>
                 </Box>
 
@@ -284,17 +284,17 @@ export const TrainTurbineComputer = () => {
                     mr={1}
                     color={tempWarning ? 'bad' : undefined}
                   />
-                  Rotor Temperature: <AnimatedNumber value={rotor_temp} /> K
+                  Температура ротора: <AnimatedNumber value={rotor_temp} /> K
                 </Box>
               </Section>
             </Flex>
           </Flex.Item>
 
-          {/* Right column */}
+          {/* Правая колонка — температуры, давление, целевые обороты */}
           <Flex.Item grow={1} basis={0} minWidth="290px">
-            <Section title="Temperatures" mb={2}>
+            <Section title="Температуры" mb={2}>
               <LabeledList>
-                <LabeledList.Item label="Inlet (K)">
+                <LabeledList.Item label="Вход (K)">
                   <ProgressBar
                     value={(inlet_temp - 273) / (max_temperature - 273)}
                     color="teal"
@@ -302,7 +302,7 @@ export const TrainTurbineComputer = () => {
                     <AnimatedNumber value={inlet_temp} /> K
                   </ProgressBar>
                 </LabeledList.Item>
-                <LabeledList.Item label="Rotor (K)">
+                <LabeledList.Item label="Ротор (K)">
                   <ProgressBar
                     value={rotor_temp / max_temperature}
                     color={tempWarning ? 'bad' : 'orange'}
@@ -310,43 +310,27 @@ export const TrainTurbineComputer = () => {
                     <AnimatedNumber value={rotor_temp} /> / {max_temperature} K
                   </ProgressBar>
                 </LabeledList.Item>
-                {/* <LabeledList.Item label="Outlet (K)">
-                  <ProgressBar
-                    value={(outlet_temp - 273) / (800 - 273)}
-                    color="blue"
-                  >
-                    <AnimatedNumber value={outlet_temp} /> K
-                  </ProgressBar>
-                </LabeledList.Item> */}
               </LabeledList>
             </Section>
 
-            <Section title="Pressure" mb={2}>
+            <Section title="Давление" mb={2}>
               <LabeledList>
-                <LabeledList.Item label="Compressor">
+                <LabeledList.Item label="Компрессор">
                   <ProgressBar value={compressor_pressure / 1000} color="good">
-                    <AnimatedNumber value={compressor_pressure} /> kPa
+                    <AnimatedNumber value={compressor_pressure} /> кПа
                   </ProgressBar>
                 </LabeledList.Item>
-                {/* <LabeledList.Item label="Rotor">
-                  <ProgressBar
-                    value={rotor_pressure / 800}
-                    color={pressureWarning ? 'bad' : 'average'}
-                  >
-                    <AnimatedNumber value={rotor_pressure} /> kPa
-                  </ProgressBar>
-                </LabeledList.Item> */}
-                <LabeledList.Item label="Outlet">
+                <LabeledList.Item label="Выход воды">
                   <ProgressBar value={outlet_water_volume} color="blue">
-                    <AnimatedNumber value={outlet_water_volume} /> units
+                    <AnimatedNumber value={outlet_water_volume} /> ед.
                   </ProgressBar>
                 </LabeledList.Item>
               </LabeledList>
             </Section>
 
-            <Section title="Target RPM">
+            <Section title="Целевые обороты">
               <Box textAlign="center" fontSize="1.3rem" mb={1}>
-                <AnimatedNumber value={target_rpm} /> RPM
+                <AnimatedNumber value={target_rpm} /> об/мин
               </Box>
               <Slider
                 minValue={0}
@@ -357,22 +341,22 @@ export const TrainTurbineComputer = () => {
                 onChange={(_, value) =>
                   act('set_target_rpm', { target: value })
                 }
-                unit="RPM"
+                unit="об/мин"
                 height="28px"
                 fontSize="1.1rem"
               />
               <Box textAlign="center" mt={1} opacity={0.8}>
-                {((target_rpm / max_rpm) * 100).toFixed(1)}% of maximum (
-                {max_rpm} RPM)
+                {((target_rpm / max_rpm) * 100).toFixed(1)}% от максимума (
+                {max_rpm} об/мин)
               </Box>
             </Section>
           </Flex.Item>
         </Flex>
 
-        {/* Critical warnings */}
+        {/* Критические предупреждения */}
         {(tempWarning || pressureWarning || integrityWarning || overload) && (
           <Section
-            title="WARNING!"
+            title="ВНИМАНИЕ!"
             backgroundColor="#660000"
             mt={2}
             textAlign="center"
@@ -381,25 +365,25 @@ export const TrainTurbineComputer = () => {
               {overload && (
                 <Box color="bad" bold>
                   <Icon name="bomb" mr={1} />
-                  RPM OVERLOAD!
+                  ПЕРЕГРУЗКА ОБОРОТОВ!
                 </Box>
               )}
               {tempWarning && (
                 <Box color="bad" bold>
                   <Icon name="fire" mr={1} />
-                  ROTOR OVERHEATING!
+                  ПЕРЕГРЕВ РОТОРА!
                 </Box>
               )}
               {pressureWarning && (
                 <Box color="bad" bold>
                   <Icon name="gauge-high" mr={1} />
-                  CRITICAL PRESSURE!
+                  КРИТИЧЕСКОЕ ДАВЛЕНИЕ!
                 </Box>
               )}
               {integrityWarning && (
                 <Box color="bad" bold>
                   <Icon name="heart-crack" mr={1} />
-                  STRUCTURAL DAMAGE!
+                  СТРУКТУРНЫЕ ПОВРЕЖДЕНИЯ!
                 </Box>
               )}
             </Flex>
