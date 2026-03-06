@@ -714,7 +714,7 @@
 
 
 /datum/component/plumbing/heater_plumbing
-	demand_connects = NORTH
+	demand_connects = NORTH | SOUTH
 
 /datum/component/plumbing/heater_plumbing/Initialize(start = TRUE, ducting_layer, turn_connects = TRUE, datum/reagents/custom_receiver, extend_pipe_to_edge)
 	. = ..()

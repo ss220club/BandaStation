@@ -26,7 +26,7 @@
 	var/infect_chance = 10
 	if(human.all_wounds && islist(human.all_wounds))
 		for(var/datum/wound/wound in human.all_wounds)
-			if(wound.severity >= WOUND_SEVERITY_SEVERE)
+			if(wound.severity >= WOUND_SEVERITY_MODERATE)
 				infect_chance += 10
 
 	infect_chance = clamp(infect_chance, 10, 40)
@@ -51,7 +51,7 @@
 	you_are_text = "Ты — паук из плоти и крови."
 	flavour_text = "Ты — паук из плоти и крови! Защищай своё гнездо любой ценой и пожирай всех, кто посмеет приблизиться!"
 	important_text = "Ни при каких обстоятельствах не покидай своё гнездо!"
-	faction = list(FACTION_HOSTILE)
+	faction = list(FACTION_KHARA)
 	light_range = 2
 	light_power = 3
 
@@ -84,6 +84,7 @@
 	armour_penetration = 30
 	melee_damage_lower = 20
 	melee_damage_upper = 20
+	wound_bonus = 20
 	obj_damage = 50
 	melee_attack_cooldown = CLICK_CD_MELEE
 	attack_verb_continuous = "вгрызается"
@@ -107,6 +108,9 @@
 	stamina_recovery = 5
 	max_stamina_slowdown = 12
 	habitable_atmos = null
+
+	var/cast = KHARA_CAST_LESSER
+	var/datum/component/khara_hivemind/hivemind_link = null
 
 	var/spread_miasma_amount = 12
 	var/spread_miasma_chance = 5
@@ -143,6 +147,10 @@
 		chance_on_infection = 10, \
 		only_with_wounds = TRUE, \
 	)
+	hivemind_link = AddComponent(\
+		/datum/component/khara_hivemind, \
+		cast = src.cast, \
+	)
 	apply_wibbly_filters(src)
 
 	if(innate_actions && islist(innate_actions))
@@ -155,6 +163,12 @@
 	if(spreads_miasma && SPT_PROB(spread_miasma_chance, seconds_per_tick) && COOLDOWN_FINISHED(src, spread_cd))
 		COOLDOWN_START(src, spread_cd, spread_minimal_cooldown)
 		spread_miasma()
+
+/mob/living/basic/khara_mutant/say(message, bubble_type, list/spans, sanitize, datum/language/language, ignore_spam, forced, filterproof, message_range, datum/saymode/saymode, list/message_mods)
+	if(hivemind_link && client)
+		var/datum/action/cooldown/khara_hivemind_talk/hivemind = hivemind_link.action
+		hivemind.talk_to_hivemind(message)
+	return
 
 /mob/living/basic/khara_mutant/proc/spread_miasma()
 	var/datum/reagents/R = new(spread_miasma_amount)
@@ -215,6 +229,7 @@
 /mob/living/basic/khara_mutant/arachnid
 	name = "Искажённый арахнид"
 	desc = "Несмотря на внушительные размеры, предпочитает нападать из засады и атаковать только уже искалеченную жертву."
+	cast = KHARA_CAST_ADAPTED
 	icon = 'icons/mob/simple/jungle/arachnid.dmi'
 	icon_state = "arachnid"
 	icon_living = "arachnid"
@@ -223,6 +238,7 @@
 	armour_penetration = 50
 	melee_damage_lower = 25
 	melee_damage_upper = 35
+	wound_bonus = -100
 	maxHealth = 350
 	health = 350
 
@@ -248,6 +264,7 @@
 /mob/living/basic/khara_mutant/reaper
 	name = "Жнец"
 	desc = "Ужасающая мерзость на тонких окровавленных ногах. Конечности двигаются хаотично и неестественно."
+	cast = KHARA_CAST_ADAPTED
 	icon = 'modular_bandastation/fenysha_events/icons/mob/64x64.dmi'
 	icon_state = "reaper"
 	icon_living = "reaper"
@@ -255,6 +272,7 @@
 	armour_penetration = 20
 	melee_damage_lower = 30
 	melee_damage_upper = 30
+	wound_bonus = 35
 	maxHealth = 150
 	health = 150
 
@@ -301,6 +319,7 @@
 /mob/living/basic/khara_mutant/spreader
 	name = "Распространитель"
 	desc = "Огромная мерзость, напоминающая живое лёгкое. Извергает колоссальные объёмы заражённого миазмами Кхара тумана."
+	cast = KHARA_CAST_ASSIMILATING
 	icon = 'modular_bandastation/fenysha_events/icons/mob/256x256.dmi'
 	icon_state = "spreader"
 	icon_living = "spreader"

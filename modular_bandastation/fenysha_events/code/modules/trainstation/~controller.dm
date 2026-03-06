@@ -39,7 +39,7 @@ SUBSYSTEM_DEF(train_controller)
 	VAR_PRIVATE/datum/looping_sound/global_sound/train_sound_loop/soundloop
 
 	/// Активен ли режим поезда (выключается при завершении раунда и т.д.)
-	var/mode_active = TRUE
+	var/mode_active = FALSE
 
 	/// Список активных событий поезда
 	var/list/running_events
@@ -105,10 +105,30 @@ SUBSYSTEM_DEF(train_controller)
 	running_events = list()
 	soundloop = new(start_immediately = FALSE)
 	RegisterSignal(SSticker, COMSIG_TICKER_ENTER_PREGAME, PROC_REF(on_enter_pregame))
+	RegisterSignal(SSdcs, COMSIG_GLOBAL_PLAYER_SETUP_FINISHED, PROC_REF(on_player_join))
 	load_stations()
 	connect_stations()
 	global_map.generate()
 	load_map()
+
+
+/datum/controller/subsystem/train_controller/proc/on_player_join(datum/dcs, mob/living/joining)
+	INVOKE_ASYNC(src, PROC_REF(teleport_to_train), joining)
+
+/datum/controller/subsystem/train_controller/proc/teleport_to_train(mob/living/joining)
+	var/job_spawn_title = joining?.mind?.assigned_role?.title
+	var/obj/effect/landmark/start/spawnpoint
+	var/obj/effect/landmark/reserv_spawnpoint = null
+	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
+		if(spawn_point.name == job_spawn_title)
+			spawnpoint = spawn_point
+	if(!spawnpoint)
+		reserv_spawnpoint = locate(/obj/effect/landmark/trainstation/crew_spawnpoint) in GLOB.landmarks_list
+	var/turf/target_turf = spawnpoint ? get_turf(spawnpoint) : get_turf(reserv_spawnpoint)
+	if(!target_turf)
+		message_admins("Failed to spawn new character for [ADMIN_LOOKUPFLW(joining)]")
+		return
+	joining.forceMove(target_turf)
 
 /datum/controller/subsystem/train_controller/proc/load_stations()
 	for(var/path in subtypesof(/datum/train_station))

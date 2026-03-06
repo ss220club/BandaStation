@@ -12,7 +12,7 @@
 		return TRUE
 	if(dir != SStrain_controller.abstract_moving_direction)
 		return TRUE
-	if(world.time <= last_real_move + 1.5 SECONDS)
+	if(world.time <= last_real_move + 6 SECONDS)
 		return FALSE
 	return TRUE
 

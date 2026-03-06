@@ -16,7 +16,7 @@
 
 /datum/action/cooldown/jetpack_jump
 	name = "Прыжок с реактивным ранцем"
-	desc = "Кликните по цели, чтобы совершить мощный прыжок в указанную точку."
+	desc = "Активируй и выбери це ль, чтобы совершить мощный прыжок к ней!"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "jetboot"
 	background_icon = 'icons/mob/actions/actions_items.dmi'
@@ -45,11 +45,16 @@
 	if(!can_see(target_turf, jumper, jetpack.jump_range))
 		jumper.balloon_alert(jumper, "Слишком далеко!")
 		return FALSE
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human_owner = owner
+		if(human_owner.resting)
+			jumper.balloon_alert(jumper, "Невозможно в таком положении!")
+			return FALSE
 
 	new /obj/effect/temp_visual/telegraphing/boss_hit(target_turf)
 
 	var/ignores = IGNORE_SLOWDOWNS|IGNORE_TARGET_LOC_CHANGE|IGNORE_USER_LOC_CHANGE
-	if(!do_after(jumper, 1 SECONDS, jumper, ignores, max_interact_count = 1))
+	if(!do_after(jumper, 0.2 SECONDS, jumper, ignores, max_interact_count = 1))
 		StartCooldown(3 SECONDS)
 		jumper.balloon_alert(jumper, "Прыжок прерван!")
 		return FALSE
@@ -104,11 +109,9 @@
 			var/turf/next_turf = get_step_towards(jumper, target_turf)
 
 			if(isclosedturf(next_turf))
-				jumper.Knockdown(3 SECONDS)
 				break
 
 			if(next_turf.is_blocked_turf(TRUE, jumper))
-				jumper.Knockdown(1 SECONDS)
 				break
 
 			jumper.forceMove(next_turf)
@@ -122,6 +125,7 @@
 	jumper.pixel_y = start_y
 	jumper.transform = initial(jumper.transform)
 
+	unset_click_ability(jumper, refund_cooldown = FALSE)
 	playsound(jumper, 'sound/items/weapons/kinetic_accel.ogg', 100, TRUE)
 
 	// Удар по приземлению
@@ -149,9 +153,8 @@
 	id_trim = /datum/id_trim/chameleon/operative
 	backpack_contents = list(
 		/obj/item/gun/ballistic/automatic/pistol/aps = 1,
-		/obj/item/ammo_box/magazine/m9mm_aps/ap = 2,
+		/obj/item/ammo_box/magazine/m9mm_aps/ap = 1,
 		/obj/item/storage/medkit/regular = 1,
-		/obj/item/stack/medical/suture = 2,
 	)
 
 	var/winter_coat = /obj/item/clothing/suit/hooded/wintercoat
@@ -181,22 +184,23 @@
 
 /datum/outfit/train_raider/shotgun
 	name = "Рейдер поезда — дробовик"
-	suit_store = /obj/item/gun/ballistic/shotgun/automatic/combat
+	r_hand = /obj/item/gun/ballistic/shotgun/automatic/combat/compact
 
 /datum/outfit/train_raider/shotgun/New()
 	backpack_contents += list(
 		/obj/item/storage/box/lethalshot = 1,
+		/obj/item/grenade/c4 = 1,
 	)
 	. = ..()
 
 
 /datum/outfit/train_raider/rifleman
 	name = "Рейдер поезда — автоматчик"
-	suit_store = /obj/item/gun/ballistic/automatic/mini_uzi
+	r_hand = /obj/item/gun/ballistic/automatic/mini_uzi
 
 /datum/outfit/train_raider/rifleman/New()
 	backpack_contents += list(
-		/obj/item/ammo_box/magazine/smgm9mm/ap = 3,
+		/obj/item/ammo_box/magazine/uzim9mm = 3,
 	)
 	. = ..()
 
@@ -344,4 +348,7 @@
 
 	if(station_time() > 18 HOURS)
 		raider_bike.set_light_on(TRUE)
-		raider_bike.last_real_move = world.time + 10 SECONDS
+	raider_bike.last_real_move = world.time + 10 SECONDS
+
+	var/reminder = span_big(span_boldnotice("Не забудь использовать свой прыжковый ранец! Иконка в левом верхнем углу!"))
+	to_chat(raider, reminder)

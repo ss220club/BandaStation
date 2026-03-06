@@ -63,6 +63,9 @@
 
 #define BB_MEMORY_ENEMIES_LIST "enemies_list"
 
+#define KHARA_CAST_LESSER "cast_lesser"
+#define KHARA_CAST_ADAPTED "cast_adapted"
+#define KHARA_CAST_ASSIMILATING "cast_assimilating"
 
 /proc/find_nearest_ally(atom/source, faction, range = 12)
 	var/closest

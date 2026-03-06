@@ -21,7 +21,7 @@
 				Токсин анацеа крайне эффективно уничтожает споры. Технеций-99 значительно усиливает действие анацеа."
 	viable_mobtypes = list(/mob/living/carbon/human)
 	bypasses_immunity = TRUE
-	severity = DISEASE_SEVERITY_UNCURABLE
+	severity = DISEASE_SEVERITY_BIOHAZARD
 	process_dead = FALSE
 	spreading_modifier = KHARA_SPREADING_MODIFIER
 	cures = list()
@@ -65,7 +65,6 @@
 			spreading_modifier *= 0.6
 			process_dead = TRUE
 		if(5)
-			visibility_flags = NONE
 			to_chat(affected_mob, span_userdanger("Кожа вздувается и шевелится — что-то растёт слишком быстро!"))
 		if(6)
 			to_chat(affected_mob, span_bolddanger("Кости трещат и ломаются под немыслимым внутренним давлением!"))
