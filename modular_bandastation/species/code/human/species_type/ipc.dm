@@ -133,6 +133,14 @@
 	/// Для gen1: модуль профессии (medical / engineering / security / research)
 	var/ipc_gen1_module = IPC_MODULE_SECURITY
 
+	// ---- Gen 1: Переключение модуля ----
+	/// Целевой модуль во время переконфигурации (пуст если не идёт)
+	var/module_switch_target = ""
+	/// Время начала переконфигурации (world.time)
+	var/module_switch_start_time = 0
+	/// Последний порог предупреждения (секунд до конца) чтобы не дублировать сообщения
+	var/module_switch_last_threshold = 999
+
 	// ---- Gen 3: Человечность ----
 	/// Текущий уровень человечности (0-100)
 	var/humanity = 100

@@ -124,6 +124,8 @@
 // Хук в spec_life — вызываем логику поколения каждый тик
 /datum/species/ipc/proc/handle_generation_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	switch(ipc_generation)
+		if(IPC_GEN_MODULAR)
+			handle_gen1_life(H, seconds_per_tick, times_fired)
 		if(IPC_GEN_HUMANITY)
 			handle_gen3_life(H, seconds_per_tick, times_fired)
 		if(IPC_GEN_CYBERDECK)
