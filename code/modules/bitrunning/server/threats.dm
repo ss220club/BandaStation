@@ -133,7 +133,7 @@
 	chosen_forge.setup_particles(angry = TRUE)
 	var/obj/machinery/announcement_system/aas = get_announcement_system(null, src, list(RADIO_CHANNEL_SUPPLY))
 	if (aas)
-		aas.broadcast("ПРЕДУПРЕЖДЕНИЕ КВАНТОВОГО СЕРВЕРА: Обнаружено нарушение безопасности. Выполняется несанкционированная последовательность доступа…", list(RADIO_CHANNEL_SUPPLY))
+		aas.broadcast("ПРЕДУПРЕЖДЕНИЕ КВАНТОВОГО СЕРВЕРА: обнаружено нарушение безопасности. Выполняется несанкционированная последовательность доступа…", list(RADIO_CHANNEL_SUPPLY))
 	SEND_SIGNAL(src, COMSIG_BITRUNNER_STATION_SPAWN)
 
 	var/timeout = 2 SECONDS
