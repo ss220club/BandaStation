@@ -170,7 +170,7 @@
 		return
 
 	// Отменяем переконфигурацию если персонаж оглушён или мёртв
-	if(H.stat == DEAD || H.IsStunned())
+	if(H.stat == DEAD || H.IsStun())
 		cancel_module_switch(H)
 		return
 
