@@ -914,7 +914,8 @@
 /turf/open/floor/iron/dark,
 /area/station/command/corporate_showroom)
 "Dq" = (
-/obj/item/kirbyplants/random,
+/obj/structure/bed/dogbed/ian,
+/mob/living/basic/pet/dog/corgi/ian,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hop)
 "Du" = (
@@ -1145,6 +1146,22 @@
 /obj/machinery/photocopier/prebuilt,
 /obj/effect/turf_decal/siding/wood/ebonite{
 	dir = 1
+	},
+/obj/machinery/button/door/directional/north{
+	normaldoorcontrol = 1;
+	specialfunctions = 4;
+	id = "ntr_door";
+	req_access = list("nanotrasen_representative");
+	name = "Door Control";
+	pixel_x = 8;
+	pixel_y = 24
+	},
+/obj/machinery/button/door/directional/north{
+	pixel_x = -8;
+	pixel_y = 24;
+	id = "ntr_privacy";
+	name = "Privacy Shutters Control";
+	req_access = list("nanotrasen_representative")
 	},
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
@@ -1404,6 +1421,16 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
+"Tx" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/cable,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "ntr_privacy";
+	name = "Privacy Shutters";
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/command/heads_quarters/nanotrasen_representative)
 "TD" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
@@ -1459,6 +1486,9 @@
 	},
 /obj/effect/turf_decal/siding/wood/ebonite{
 	dir = 4
+	},
+/mob/living/basic/pet/cat/floppa{
+	dir = 8
 	},
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)
@@ -1970,10 +2000,10 @@ dx
 nl
 tI
 KO
-nD
+Tx
 cp
-nD
-nD
+Tx
+Tx
 KO
 nz
 wo

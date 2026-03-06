@@ -154,7 +154,7 @@
 /obj/machinery/button/curtain{
 	id = "mag";
 	pixel_x = -26;
-	pixel_y = -8
+	pixel_y = 4
 	},
 /obj/item/book/manual/wiki/security_space_law,
 /obj/item/pen/red,
@@ -169,7 +169,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/disposalpipe/junction/flip,
 /turf/open/floor/iron,
-/area/template_noop)
+/area/station/hallway/primary/fore)
 "U" = (
 /obj/machinery/disposal/bin,
 /obj/structure/disposalpipe/trunk{
