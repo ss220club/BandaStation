@@ -140,6 +140,7 @@
 	name = "CPU temperature"
 	icon_state = "hungerbar"
 	screen_loc = ui_hunger
+	pixel_y = 18
 	mouse_over_pointer = MOUSE_HAND_POINTER
 	/// Текущая температура
 	var/temperature = 30
