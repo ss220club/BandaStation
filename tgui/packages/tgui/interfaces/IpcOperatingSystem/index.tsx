@@ -83,6 +83,7 @@ type IpcOsData = {
   brand_key: string;
   has_password: boolean;
   logged_in: boolean;
+  login_failed: boolean;
   current_app: string;
   scan_in_progress: boolean;
   scan_progress: number;
@@ -493,9 +494,18 @@ const LoginScreen = () => {
 
   const os_version = safeStr(data.os_version, '2.4.1');
   const has_password = safeBool(data.has_password);
+  const login_failed = safeBool(data.login_failed);
 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  // Показываем ошибку из бэкенда когда логин провалился
+  useEffect(() => {
+    if (login_failed) {
+      setError('Неверный пароль. Попробуйте ещё раз.');
+      setPassword('');
+    }
+  }, [login_failed]);
 
   const handleSubmit = () => {
     if (!has_password) {
@@ -505,6 +515,7 @@ const LoginScreen = () => {
       }
       act('set_password', { password });
     } else {
+      setError('');
       act('login', { password });
     }
     setPassword('');

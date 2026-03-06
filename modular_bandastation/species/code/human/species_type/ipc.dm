@@ -265,9 +265,23 @@
 	UnregisterSignal(H, list(COMSIG_LIVING_ELECTROCUTE_ACT, COMSIG_HUMAN_PREFS_APPLIED))
 
 /// Вызывается после загрузки всех настроек персонажа.
-/// Устанавливает брендовые импланты в нужные руки.
+/// К этому моменту все preferences уже применены (ipc_generation, ipc_preset_os_password и т.д.).
 /datum/species/ipc/proc/on_prefs_applied(mob/living/carbon/human/H)
 	SIGNAL_HANDLER
+
+	// ---- Переприменяем поколение ----
+	// on_species_gain вызывается ДО apply_to_human, поэтому apply_generation
+	// там срабатывает с дефолтным значением (gen2_standard).
+	// Здесь мы убираем дефолтное поколение и применяем нужное.
+	remove_generation(H)
+	apply_generation(H)
+
+	// ---- Применяем пароль ОС ----
+	// on_species_gain создаёт ipc_os до того как apply_to_human выставил пароль.
+	// Применяем пароль здесь, когда он уже известен.
+	if(ipc_os && ipc_preset_os_password && length(ipc_preset_os_password) >= 1)
+		ipc_os.set_password(ipc_preset_os_password)
+		ipc_os.logged_in = TRUE
 
 	// Для Shellguard: силовой щит в руку, противоположную зарядному порту
 	if(ipc_brand_key == "shellguard")

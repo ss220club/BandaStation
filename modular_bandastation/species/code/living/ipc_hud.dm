@@ -151,8 +151,10 @@
 /atom/movable/screen/ipc_temperature/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
 
-	// Иконка температуры из ipc_ui.dmi
-	temp_image = image(icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi', icon_state = "ipc_monitor", pixel_x = -5)
+	// Иконка температуры из ipc_ui.dmi.
+	// pixel_x = 5: сдвиг ВПРАВО, т.к. ui_hunger = "EAST-1:2" — слишком мало места влево
+	// (в отличие от ui_mood = "EAST-1:28" у батареи, где отрицательный сдвиг безопасен).
+	temp_image = image(icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi', icon_state = "ipc_monitor", pixel_x = 5)
 	temp_image.plane = plane
 	temp_image.appearance_flags |= KEEP_APART
 	temp_image.add_filter("simple_outline", 2, outline_filter(1, COLOR_BLACK, OUTLINE_SHARP))
@@ -421,12 +423,11 @@
 		var/datum/species/ipc/S = H.dna.species
 		S.update_ipc_battery_icon(H)
 
-// Вызываем обновление HUD при изменении температуры в spec_life
+// Расширяем spec_life: добавляем HUD-обновления и логику поколений.
+// Базовые вызовы (handle_self_repair, handle_temperature, handle_battery и т.д.)
+// уже выполняются в родительском spec_life в ipc.dm — здесь их НЕ дублируем.
 /datum/species/ipc/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	. = ..()
-	handle_self_repair(H)
-	handle_temperature(H)
-	handle_battery(H)
 	update_ipc_temperature_icon(H)
 	handle_generation_life(H, seconds_per_tick, times_fired)
 	update_ipc_generation_hud(H)
