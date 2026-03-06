@@ -60,3 +60,16 @@ endmap
 
 map runtimestation
 endmap
+
+# Эвентовые карты начинаются тут
+
+map hypothermia
+endmap
+
+map trainstation
+	maxplayers 100
+	votable
+endmap
+
+map silentstation
+endmap

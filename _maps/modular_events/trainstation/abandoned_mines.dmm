@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aZ" = (
 /obj/item/clothing/head/beret,
-/turf/open/space/basic,
+/turf/open/misc/dirt/station,
 /area/trainstation/indoors)
 "bt" = (
 /obj/effect/decal/cleanable/blood/old,
@@ -35,10 +35,6 @@
 "ei" = (
 /obj/effect/light_emitter/daylight,
 /obj/effect/light_emitter/daylight,
-/turf/open/misc/dirt/station,
-/area/trainstation/indoors)
-"ex" = (
-/obj/structure/medieval/bed_1x2,
 /turf/open/misc/dirt/station,
 /area/trainstation/indoors)
 "ft" = (
@@ -380,7 +376,6 @@
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "JQ" = (
-/turf/closed/indestructible/normal_wall,
 /area/trainstation/indoors)
 "KF" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -774,7 +769,7 @@ PE
 PE
 PE
 ME
-ex
+ME
 ME
 ME
 ME
@@ -838,7 +833,7 @@ PE
 PE
 PE
 ME
-ex
+ME
 ME
 QX
 bt
@@ -902,7 +897,7 @@ PE
 PE
 PE
 aZ
-ex
+ME
 oD
 iC
 Eb

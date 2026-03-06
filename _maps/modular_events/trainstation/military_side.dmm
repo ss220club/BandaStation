@@ -66,7 +66,6 @@
 /turf/open/indestructible/vault,
 /area/trainstation/outdoor)
 "bl" = (
-/obj/machinery/space_heater/wall_mounted/directional/north,
 /obj/effect/turf_decal/tile/dark/opposingcorners,
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 9
@@ -94,7 +93,6 @@
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 4
 	},
-/obj/structure/rack/wooden,
 /turf/open/indestructible/vault,
 /area/trainstation/outdoor)
 "cn" = (
@@ -434,10 +432,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/indestructible/vault,
 /area/trainstation/outdoor)
-"lr" = (
-/mob/living/basic/khara_mutant/spreader,
-/turf/open/floor/asphalt,
-/area/trainstation/outdoor)
 "lv" = (
 /obj/structure/fluff/clockwork/alloy_shards/large,
 /obj/effect/turf_decal/weather/dirt{
@@ -471,17 +465,6 @@
 	dir = 4
 	},
 /turf/open/floor/iron/stairs/medium,
-/area/trainstation/outdoor)
-"lT" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/machinery/computer/cargo{
-	dir = 4
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/box,
-/turf/open/floor/plating,
 /area/trainstation/outdoor)
 "md" = (
 /obj/structure/flora/tree/pine/style_random,
@@ -717,10 +700,6 @@
 /obj/machinery/light/directional/north,
 /turf/open/indestructible/vault,
 /area/trainstation/outdoor)
-"sg" = (
-/obj/structure/rack/wooden,
-/turf/open/indestructible/vault,
-/area/trainstation/outdoor)
 "sl" = (
 /obj/structure/chair/sofa/bench/right,
 /turf/open/indestructible/train_platform,
@@ -741,10 +720,6 @@
 /obj/effect/turf_decal/tile/yellow/anticorner{
 	dir = 4
 	},
-/turf/open/indestructible/vault,
-/area/trainstation/outdoor)
-"sF" = (
-/obj/machinery/space_heater/wall_mounted/directional/north,
 /turf/open/indestructible/vault,
 /area/trainstation/outdoor)
 "sS" = (
@@ -794,7 +769,6 @@
 	dir = 10
 	},
 /obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/syndicate/skyrat/overalls/unarmoured,
 /obj/effect/spawner/random/special_lighter,
 /obj/effect/spawner/random/entertainment/plushie_delux,
 /turf/open/indestructible/dark/textured,
@@ -1115,13 +1089,6 @@
 "Aw" = (
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor)
-"AB" = (
-/obj/effect/turf_decal/siding/dark{
-	dir = 1
-	},
-/obj/structure/rack/wooden,
-/turf/open/indestructible/vault,
-/area/trainstation/outdoor)
 "AO" = (
 /obj/structure/reagent_dispensers/beerkeg,
 /obj/effect/turf_decal/weather/dirt,
@@ -1131,14 +1098,6 @@
 /obj/effect/turf_decal/tile/dark/opposingcorners,
 /obj/effect/turf_decal/siding/thinplating/dark,
 /obj/machinery/light/directional/south,
-/turf/open/indestructible/vault,
-/area/trainstation/outdoor)
-"AV" = (
-/obj/machinery/space_heater/wall_mounted/directional/north,
-/obj/effect/turf_decal/tile/yellow/opposingcorners,
-/obj/effect/turf_decal/siding/thinplating/dark{
-	dir = 1
-	},
 /turf/open/indestructible/vault,
 /area/trainstation/outdoor)
 "Bh" = (
@@ -1325,7 +1284,6 @@
 /turf/open/indestructible/vault,
 /area/trainstation/outdoor)
 "EQ" = (
-/obj/machinery/space_heater/wall_mounted/directional/north,
 /obj/effect/turf_decal/tile/dark/opposingcorners,
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 5
@@ -1602,11 +1560,6 @@
 	},
 /obj/machinery/light/small/dim/directional/east,
 /turf/open/floor/iron,
-/area/trainstation/outdoor)
-"Kn" = (
-/obj/structure/rack/wooden,
-/obj/effect/turf_decal/siding/dark,
-/turf/open/indestructible/vault,
 /area/trainstation/outdoor)
 "Kq" = (
 /obj/structure/fluff/clockwork/alloy_shards/medium,
@@ -2172,7 +2125,6 @@
 	},
 /obj/machinery/light/red/directional/west,
 /obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/syndicate/skyrat/overalls/unarmoured,
 /obj/effect/spawner/random/medical/minor_healing,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/entertainment/musical_instrument,
@@ -2206,18 +2158,6 @@
 	},
 /obj/structure/table/reinforced,
 /turf/open/indestructible/vault,
-/area/trainstation/outdoor)
-"VV" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/docking_port/stationary{
-	dir = 8;
-	dwidth = 5;
-	height = 7;
-	name = "Cargo Bay";
-	shuttle_id = "cargo_home";
-	width = 12
-	},
-/turf/open/floor/plating,
 /area/trainstation/outdoor)
 "VZ" = (
 /turf/closed/indestructible/meat,
@@ -2376,11 +2316,6 @@
 	pixel_y = -14
 	},
 /turf/open/indestructible/plating,
-/area/trainstation/outdoor)
-"Zq" = (
-/obj/structure/closet/crate/bin,
-/obj/machinery/space_heater/wall_mounted/directional/north,
-/turf/open/indestructible/vault,
 /area/trainstation/outdoor)
 "ZJ" = (
 /obj/effect/turf_decal/siding/dark{
@@ -5072,7 +5007,7 @@ uF
 Aw
 Aw
 Ng
-sF
+sS
 sS
 lq
 oV
@@ -5138,7 +5073,7 @@ Aw
 Ng
 cY
 sS
-Kn
+fu
 sS
 nX
 Ng
@@ -5170,7 +5105,7 @@ Aw
 Ng
 cY
 EG
-Kn
+fu
 sS
 fO
 Ng
@@ -5401,7 +5336,7 @@ je
 je
 je
 je
-AB
+qe
 Ng
 Aw
 Aw
@@ -5490,7 +5425,7 @@ bp
 sS
 Ro
 Ng
-sF
+sS
 fu
 Wy
 Wy
@@ -5518,11 +5453,11 @@ wo
 wo
 dK
 Ng
-sg
+sS
 sS
 Ro
 Ng
-Zq
+fO
 Cl
 Xl
 Xl
@@ -5853,7 +5788,7 @@ Oj
 Oj
 Oj
 Oj
-lr
+Oj
 Oj
 Oj
 rY
@@ -6522,7 +6457,7 @@ kw
 kw
 kw
 kw
-VV
+kw
 kw
 kw
 kw
@@ -6554,7 +6489,7 @@ Wl
 Wl
 Wl
 Wl
-lT
+Wl
 Wl
 Wl
 Wl
@@ -6893,7 +6828,7 @@ Ng
 kO
 Ng
 Ng
-AV
+gN
 dR
 iP
 aK

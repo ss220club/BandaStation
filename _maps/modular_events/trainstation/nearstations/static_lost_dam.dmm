@@ -28,7 +28,7 @@
 	pixel_x = -7;
 	pixel_y = 14
 	},
-/turf/open/floor/fake_snow/safe,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor/rails)
 "g" = (
 /turf/open/floor/plating/snowed/smoothed,
@@ -129,7 +129,7 @@
 /turf/open/floor/plating/snowed/smoothed,
 /area/trainstation/outdoor/rails)
 "K" = (
-/turf/open/floor/fake_snow/safe,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor/rails)
 "L" = (
 /turf/open/water/deep_beach/lethal,
@@ -156,7 +156,7 @@
 /area/trainstation/outdoor/rails)
 "Q" = (
 /obj/structure/sign/warning/directional/north,
-/turf/open/floor/fake_snow/safe,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor/rails)
 "U" = (
 /turf/closed/indestructible/train_border,
@@ -165,7 +165,7 @@
 /obj/machinery/light/floor{
 	pixel_y = 10
 	},
-/turf/open/floor/fake_snow/safe,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor/rails)
 
 (1,1,1) = {"
@@ -3447,7 +3447,7 @@ L
 L
 c
 K
-g
+K
 "}
 (194,1,1) = {"
 U
@@ -3464,7 +3464,7 @@ L
 L
 c
 K
-g
+K
 "}
 (195,1,1) = {"
 U

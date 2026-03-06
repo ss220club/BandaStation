@@ -105,7 +105,7 @@
 			if(L.stat == DEAD)
 				L.gib()
 		else
-			qdel(ram)
+			POOL_ASYNC_RELEASE(ram)
 		return
 
 	if(target.density)
@@ -116,7 +116,7 @@
 			if(L.stat == DEAD && isclosedturf(target))
 				L.gib()
 		else
-			qdel(ram)
+			POOL_ASYNC_RELEASE(ram)
 		return
 
 

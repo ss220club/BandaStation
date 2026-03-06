@@ -7,6 +7,8 @@
 	icon = 'modular_bandastation/fenysha_events/icons/machinery/airlocks/shuttle2/wagon.dmi'
 	overlays_file = 'modular_bandastation/fenysha_events/icons/machinery/airlocks/shuttle2/overlays.dmi'
 
+/obj/machinery/door/airlock/hos
+	icon = 'modular_bandastation/fenysha_events/icons/machinery/airlocks/hos.dmi'
 
 // Переключатели
 

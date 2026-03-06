@@ -21,16 +21,9 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-old";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 4
-	},
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/iron/stairs/old{
-	dir = 4
-	},
+/obj/structure/fake_stairs/directional/east,
+/turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/powered)
 "al" = (
 /obj/effect/turf_decal/lunar_sand/plating,
@@ -70,16 +63,6 @@
 	},
 /turf/open/water/deep_beach/lethal,
 /area/trainstation/outdoor)
-"aM" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-m";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "aO" = (
 /obj/machinery/door/airlock/shuttle/ferry{
 	name = "Magnetic Airlock"
@@ -111,9 +94,7 @@
 /area/trainstation/indoors/station/powered)
 "aS" = (
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
+	alpha = 200
 	},
 /obj/effect/overlay/water{
 	alpha = 90
@@ -123,9 +104,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -188,9 +166,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -203,19 +178,10 @@
 /area/trainstation/indoors/station/powered)
 "bQ" = (
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
-	},
-/obj/structure/drain/big{
-	color = "#FFFFFF";
-	alpha = 155
+	alpha = 200
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -328,13 +294,6 @@
 	dir = 4
 	},
 /area/trainstation/indoors/station/powered)
-"cL" = (
-/obj/item/rack_parts/shelf,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/iron/dark/smooth_large,
-/area/trainstation/indoors/station/powered)
 "cN" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/railing,
@@ -347,9 +306,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -374,10 +330,6 @@
 /obj/item/storage/pill_bottle/psicodine{
 	pixel_x = -7;
 	pixel_y = 4
-	},
-/obj/item/reagent_containers/cup/bottle/rezadone{
-	pixel_x = 6;
-	pixel_y = 2
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -408,7 +360,7 @@
 /obj/machinery/door/airlock/shuttle/ferry{
 	name = "Magnetic Airlock"
 	},
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/indoors/station/powered)
 "dC" = (
 /obj/structure/fluff/paper/stack,
@@ -454,11 +406,6 @@
 /obj/structure/fans/tiny/invisible{
 	density = 1
 	},
-/obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
-	},
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 1
 	},
@@ -468,11 +415,11 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 8
 	},
+/obj/effect/turf_decal/tile/dark/full{
+	alpha = 200
+	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -496,9 +443,7 @@
 	density = 1
 	},
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
+	alpha = 200
 	},
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 1
@@ -511,9 +456,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -527,9 +469,6 @@
 /obj/effect/turf_decal/siding/wideplating/dark,
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -590,7 +529,7 @@
 "eR" = (
 /obj/structure/flora/bush/snow/style_random,
 /mob/living/basic/bear/snow,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "eU" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -632,9 +571,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -742,9 +678,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -815,7 +748,7 @@
 /turf/open/floor/plating,
 /area/trainstation/indoors/station/powered)
 "gz" = (
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "gJ" = (
 /obj/structure/curtain,
@@ -885,9 +818,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -941,9 +871,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -974,17 +901,6 @@
 	dir = 8;
 	pixel_y = 0
 	},
-/obj/structure/decorative/fluff{
-	name = "broken console";
-	desc = "Ruthlessly broken.";
-	icon_state = "computer_broken";
-	icon = 'icons/obj/machines/computer.dmi';
-	anchored = 1;
-	color = "#ecd6c9";
-	density = 1;
-	can_be_unanchored = 1;
-	dir = 1
-	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/smooth_large,
@@ -1012,35 +928,19 @@
 /area/trainstation/outdoor)
 "iM" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/decorative/fluff{
-	name = "broken console";
-	desc = "Ruthlessly broken.";
-	icon_state = "computer_broken";
-	icon = 'icons/obj/machines/computer.dmi';
-	anchored = 1;
-	color = "#ecd6c9";
-	density = 1;
-	can_be_unanchored = 1;
-	dir = 2
-	},
 /turf/open/floor/iron/dark/side{
 	dir = 9
 	},
 /area/trainstation/indoors/station/powered)
 "iQ" = (
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
+	alpha = 200
 	},
 /obj/effect/overlay/water{
 	alpha = 90
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -1111,16 +1011,6 @@
 /area/trainstation/indoors/station/powered)
 "jC" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/decorative/fluff{
-	name = "metal barrel";
-	desc = "So metal.";
-	icon_state = "vat";
-	icon = 'icons/obj/medical/chemical_tanks.dmi';
-	anchored = 1;
-	color = "#ecd6c9";
-	density = 1;
-	can_be_unanchored = 1
-	},
 /turf/open/floor/iron/dark/side{
 	dir = 4
 	},
@@ -1203,7 +1093,7 @@
 /obj/structure/railing{
 	dir = 5
 	},
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "kn" = (
 /obj/structure/railing/unbreakable{
@@ -1288,9 +1178,6 @@
 /obj/effect/turf_decal/weather/snow,
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -1316,7 +1203,7 @@
 /obj/structure/railing{
 	dir = 9
 	},
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "lr" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1346,17 +1233,6 @@
 /turf/open/water/deep_beach/lethal,
 /area/trainstation/outdoor)
 "lL" = (
-/obj/structure/decorative/fluff{
-	name = "broken console";
-	desc = "Ruthlessly broken.";
-	icon_state = "computer_broken";
-	icon = 'icons/obj/machines/computer.dmi';
-	anchored = 1;
-	color = "#ecd6c9";
-	density = 1;
-	can_be_unanchored = 1;
-	dir = 8
-	},
 /obj/structure/extinguisher_cabinet/directional/south,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark/side{
@@ -1451,9 +1327,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -1506,9 +1379,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -1670,16 +1540,6 @@
 /obj/effect/turf_decal/weather/snow,
 /turf/open/floor/plating,
 /area/trainstation/outdoor)
-"on" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-l";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "oo" = (
 /obj/structure/fluff/paper/stack{
 	dir = 1;
@@ -1769,9 +1629,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -1920,7 +1777,7 @@
 /obj/structure/railing/corner{
 	dir = 1
 	},
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "qv" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2027,9 +1884,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -2225,13 +2079,8 @@
 /area/trainstation/outdoor)
 "tB" = (
 /obj/structure/flora/bush/snow/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
-"tI" = (
-/obj/structure/trash_pile,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/plating,
-/area/trainstation/indoors/station/powered)
 "tK" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/fluff/paper/stack{
@@ -2246,9 +2095,7 @@
 	density = 1
 	},
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
+	alpha = 200
 	},
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 1
@@ -2258,9 +2105,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -2306,9 +2150,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -2331,7 +2172,7 @@
 "uv" = (
 /obj/structure/flora/tree/pine/style_random,
 /obj/structure/railing/corner,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "uy" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2344,9 +2185,7 @@
 	density = 1
 	},
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
+	alpha = 200
 	},
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 1
@@ -2356,9 +2195,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -2454,9 +2290,6 @@
 /obj/effect/turf_decal/siding/wideplating/dark,
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -2490,7 +2323,6 @@
 /turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/indoors/station/controll)
 "vM" = (
-/obj/item/rack_parts/cargo_shelf,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -2520,9 +2352,6 @@
 /obj/effect/turf_decal/weather/snow,
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -2623,7 +2452,6 @@
 	dir = 8;
 	pixel_y = 0
 	},
-/obj/structure/sign/flag/nri/directional/north,
 /turf/open/floor/iron/dark/side{
 	dir = 5
 	},
@@ -2637,30 +2465,19 @@
 /obj/structure/railing/corner{
 	dir = 8
 	},
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "xi" = (
 /obj/structure/railing/corner{
 	dir = 1
 	},
 /obj/structure/flora/tree/pine/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "xt" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/decorative/fluff{
-	name = "broken console";
-	desc = "Ruthlessly broken.";
-	icon_state = "computer_broken";
-	icon = 'icons/obj/machines/computer.dmi';
-	anchored = 1;
-	color = "#ecd6c9";
-	density = 1;
-	can_be_unanchored = 1;
-	dir = 4
-	},
 /obj/machinery/light/small/red/directional/west,
 /turf/open/floor/iron/dark/side{
 	dir = 10
@@ -2821,7 +2638,7 @@
 /area/trainstation/indoors/station/powered)
 "yI" = (
 /obj/structure/flora/tree/pine/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "yJ" = (
 /obj/item/flashlight/flare{
@@ -2857,9 +2674,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -2885,7 +2699,7 @@
 "zz" = (
 /obj/structure/flora/tree/pine/style_random,
 /obj/structure/flora/bush/snow/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "zE" = (
 /obj/structure/prop/city/buildingventbig11_off{
@@ -2922,13 +2736,6 @@
 /turf/closed/indestructible/steel,
 /area/trainstation/outdoor)
 "Aa" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-m";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 8
-	},
 /turf/open/floor/plating,
 /area/trainstation/outdoor)
 "Ac" = (
@@ -2973,7 +2780,6 @@
 	},
 /obj/machinery/light/red/directional/west,
 /obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/syndicate/skyrat/overalls/unarmoured,
 /obj/effect/spawner/random/medical/minor_healing,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/entertainment/musical_instrument,
@@ -3053,9 +2859,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
+	alpha = 200
 	},
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor)
@@ -3077,18 +2881,6 @@
 	dir = 8
 	},
 /turf/open/floor/iron/dark/smooth_large,
-/area/trainstation/outdoor)
-"AX" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/docking_port/stationary{
-	dir = 8;
-	dwidth = 5;
-	height = 7;
-	name = "Cargo Bay";
-	shuttle_id = "cargo_home";
-	width = 12
-	},
-/turf/open/floor/plating,
 /area/trainstation/outdoor)
 "Ba" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3234,24 +3026,9 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 9
 	},
-/obj/machinery/dryer{
-	pixel_y = 3;
-	dir = 4;
-	pixel_x = -6
-	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/white/small,
 /area/trainstation/indoors/station/powered)
-"Cc" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-l";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "Cf" = (
 /obj/structure/railing/corner{
 	dir = 1
@@ -3267,16 +3044,6 @@
 	},
 /area/trainstation/indoors/station/powered)
 "Cm" = (
-/obj/structure/decorative/fluff{
-	name = "broken thermomachine";
-	desc = "Wouldn't have ended up here if it worked correctly.";
-	icon_state = "thermo_base-o";
-	icon = 'icons/obj/machines/atmospherics/thermomachine.dmi';
-	anchored = 1;
-	color = "#ecd6c9";
-	density = 1;
-	can_be_unanchored = 1
-	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/red/directional/west,
@@ -3376,16 +3143,9 @@
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor)
 "Di" = (
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-old";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 8
-	},
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/iron/stairs/old{
-	dir = 8
-	},
+/obj/structure/fake_stairs/directional/west,
+/turf/open/floor/plating,
 /area/trainstation/indoors/station/powered)
 "Dj" = (
 /turf/open/indestructible/meat,
@@ -3400,21 +3160,8 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
-/area/trainstation/outdoor)
-"Dp" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-r";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 8
-	},
-/turf/open/floor/plating,
 /area/trainstation/outdoor)
 "Dr" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3448,9 +3195,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -3473,17 +3217,6 @@
 "DT" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/decorative/fluff{
-	name = "broken console";
-	desc = "Ruthlessly broken.";
-	icon_state = "computer_broken";
-	icon = 'icons/obj/machines/computer.dmi';
-	anchored = 1;
-	color = "#ecd6c9";
-	density = 1;
-	can_be_unanchored = 1;
-	dir = 8
-	},
 /turf/open/floor/iron/dark/side{
 	dir = 4
 	},
@@ -3632,20 +3365,11 @@
 /area/trainstation/outdoor)
 "FB" = (
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
-	},
-/obj/structure/drain/big{
-	color = "#FFFFFF";
-	alpha = 155
+	alpha = 200
 	},
 /obj/effect/particle_effect/water,
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -3767,7 +3491,7 @@
 /area/trainstation/indoors/station/powered)
 "Hm" = (
 /mob/living/basic/bear/snow,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "Hq" = (
 /obj/structure/railing/unbreakable{
@@ -3869,7 +3593,7 @@
 /area/trainstation/indoors/station/powered)
 "Id" = (
 /mob/living/basic/pet/fox,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "Ii" = (
 /obj/structure/statue/bone/rib{
@@ -3940,20 +3664,6 @@
 	},
 /turf/open/misc/ice/coldroom,
 /area/trainstation/outdoor)
-"IS" = (
-/obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
-	},
-/turf/open/indestructible/tram{
-	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
-	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
-	},
-/area/trainstation/outdoor)
 "IV" = (
 /turf/closed/indestructible/hotelwall{
 	name = "boundary";
@@ -4005,22 +3715,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/mob_spawn/corpse/human,
 /turf/open/floor/iron/white/small,
-/area/trainstation/indoors/station/powered)
-"Jh" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/decorative/fluff{
-	name = "scrapped cyborg";
-	desc = "Poor thing.";
-	icon_state = "fmekacargo-wreck";
-	icon = 'modular_skyrat\modules\borgs\icons\tallrobot_cargo.dmi';
-	anchored = 1;
-	color = "#ffffff";
-	density = 1;
-	can_be_unanchored = 1;
-	pixel_x = 0;
-	pixel_y = 10
-	},
-/turf/open/floor/iron,
 /area/trainstation/indoors/station/powered)
 "Jo" = (
 /obj/structure/fluff/paper/stack{
@@ -4095,7 +3789,6 @@
 	name = "cable";
 	color = "#222222"
 	},
-/obj/structure/trash_pile,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plating,
 /area/trainstation/indoors/station/powered)
@@ -4125,17 +3818,17 @@
 "Kd" = (
 /obj/structure/flora/rock/style_random,
 /obj/structure/flora/bush/snow/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "Kf" = (
 /obj/item/restraints/legcuffs/beartrap/prearmed,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "Kl" = (
 /obj/structure/railing/corner{
 	dir = 4
 	},
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "Ku" = (
 /obj/machinery/computer/security{
@@ -4182,9 +3875,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -4223,22 +3913,6 @@
 	},
 /turf/open/water/deep_beach/lethal,
 /area/trainstation/outdoor)
-"Lv" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/decorative/fluff{
-	name = "broken thermomachine";
-	desc = "Wouldn't have ended up here if it worked correctly.";
-	icon_state = "thermo_base-o";
-	icon = 'icons/obj/machines/atmospherics/thermomachine.dmi';
-	anchored = 1;
-	color = "#ecd6c9";
-	density = 1;
-	can_be_unanchored = 1
-	},
-/turf/open/floor/iron/dark/side{
-	dir = 4
-	},
-/area/trainstation/indoors/station/powered)
 "LH" = (
 /obj/structure/railing/unbreakable{
 	dir = 5
@@ -4268,7 +3942,7 @@
 /obj/structure/railing{
 	dir = 4
 	},
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "LU" = (
 /obj/effect/turf_decal/siding/dark{
@@ -4390,9 +4064,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -4449,23 +4120,6 @@
 	dir = 8
 	},
 /area/trainstation/indoors/station/controll)
-"ND" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/decorative/fluff{
-	name = "broken console";
-	desc = "Ruthlessly broken.";
-	icon_state = "computer_broken";
-	icon = 'icons/obj/machines/computer.dmi';
-	anchored = 1;
-	color = "#ecd6c9";
-	density = 1;
-	can_be_unanchored = 1;
-	dir = 8
-	},
-/turf/open/floor/iron/dark/side{
-	dir = 5
-	},
-/area/trainstation/indoors/station/powered)
 "NE" = (
 /obj/structure/decorative{
 	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
@@ -4627,7 +4281,7 @@
 /area/trainstation/indoors/station/powered)
 "OC" = (
 /obj/structure/flora/rock/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "OH" = (
 /obj/effect/turf_decal/weather/snow,
@@ -4649,7 +4303,7 @@
 /obj/structure/railing/corner{
 	dir = 8
 	},
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "OP" = (
 /obj/effect/turf_decal/lunar_sand/plating,
@@ -4711,31 +4365,13 @@
 	density = 1
 	},
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
+	alpha = 200
 	},
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 1
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
-	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
-	},
-/area/trainstation/outdoor)
-"PF" = (
-/obj/structure/drain/big{
-	color = "#FFFFFF";
-	alpha = 155
-	},
-/turf/open/indestructible/tram{
-	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -4829,7 +4465,6 @@
 	dir = 10
 	},
 /obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/syndicate/skyrat/overalls/unarmoured,
 /obj/effect/spawner/random/special_lighter,
 /obj/effect/spawner/random/entertainment/plushie_delux,
 /turf/open/indestructible/dark/textured,
@@ -4861,9 +4496,6 @@
 /obj/effect/turf_decal/siding/wideplating/dark,
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -4871,7 +4503,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "QC" = (
 /obj/structure/railing/corner{
@@ -4924,7 +4556,6 @@
 /area/trainstation/indoors/station/powered)
 "QN" = (
 /obj/machinery/light/warm/directional/south,
-/obj/structure/trash_pile,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plating,
 /area/trainstation/indoors/station/powered)
@@ -4954,27 +4585,6 @@
 	dir = 4
 	},
 /area/trainstation/indoors/station/powered)
-"Rk" = (
-/obj/item/reagent_containers/syringe{
-	pixel_x = 7;
-	pixel_y = -11
-	},
-/obj/item/reagent_containers/syringe{
-	pixel_x = -10;
-	pixel_y = -4
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/item/storage/pill_bottle{
-	pixel_x = 0;
-	pixel_y = 17
-	},
-/obj/item/storage/pill_bottle{
-	pixel_x = -10;
-	pixel_y = 19
-	},
-/obj/structure/holosign/treatment_zone_warning,
-/turf/open/floor/iron/dark/side,
-/area/trainstation/indoors/station/powered)
 "Rl" = (
 /obj/structure/railing{
 	dir = 6
@@ -4998,7 +4608,6 @@
 	pixel_y = 0
 	},
 /obj/structure/reagent_dispensers/watertank,
-/obj/structure/sign/flag/nri/directional/north,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/powered)
@@ -5093,27 +4702,12 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
+	alpha = 200
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
-/area/trainstation/outdoor)
-"Sj" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-r";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 4
-	},
-/turf/open/floor/plating,
 /area/trainstation/outdoor)
 "So" = (
 /obj/effect/turf_decal/siding/dark{
@@ -5150,17 +4744,6 @@
 	dir = 8
 	},
 /area/trainstation/indoors/station/controll)
-"SK" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/machinery/computer/cargo{
-	dir = 4
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/box,
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "SP" = (
 /obj/structure/fans/tiny/invisible{
 	density = 1
@@ -5226,7 +4809,7 @@
 	dir = 10;
 	pixel_y = 0
 	},
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "TC" = (
 /obj/effect/turf_decal/weather/snow/corner{
@@ -5459,10 +5042,6 @@
 	pixel_x = -2;
 	pixel_y = 7
 	},
-/obj/item/stack/sticky_tape/super{
-	pixel_x = 5;
-	pixel_y = -6
-	},
 /obj/item/spear,
 /obj/item/shard{
 	pixel_x = -16;
@@ -5476,18 +5055,13 @@
 /area/trainstation/indoors/station/powered)
 "Wr" = (
 /obj/effect/turf_decal/tile/dark/full{
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	icon_state = "black";
-	color = "#FFFFFF"
+	alpha = 200
 	},
 /obj/effect/turf_decal/tile/dark/half{
 	dir = 4
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -5578,9 +5152,6 @@
 "XB" = (
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -5622,12 +5193,6 @@
 	dir = 1
 	},
 /area/trainstation/indoors/station/powered)
-"Ye" = (
-/obj/structure/trash_pile,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/iron/dark/smooth_large,
-/area/trainstation/indoors/station/powered)
 "Yf" = (
 /obj/structure/fans/tiny/invisible{
 	density = 1
@@ -5656,7 +5221,7 @@
 	dir = 8
 	},
 /obj/structure/flora/tree/pine/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "Yp" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -5700,9 +5265,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -5740,9 +5302,6 @@
 	},
 /turf/open/indestructible/tram{
 	name = "dam wall";
-	icon = 'modular_bandastation/fenysha_events/icons/turf/city/siding.dmi';
-	icon_state = "wall-0";
-	base_icon_state = "wall";
 	desc = "The wall of this now-frozen dam. Looks nigh-impenetrable to damage."
 	},
 /area/trainstation/outdoor)
@@ -6037,9 +5596,9 @@ gz
 Kd
 gz
 EH
-on
-Aa
-Dp
+oc
+oc
+oc
 dN
 oq
 mm
@@ -6047,9 +5606,9 @@ oq
 oq
 mm
 OP
-on
+oc
 Aa
-Dp
+oc
 sq
 AK
 tB
@@ -6380,7 +5939,7 @@ oc
 oc
 oc
 oc
-AX
+oc
 oc
 oc
 oc
@@ -6422,7 +5981,7 @@ ai
 ai
 ai
 ai
-SK
+ai
 ai
 ai
 ai
@@ -6457,9 +6016,9 @@ gz
 gz
 gz
 bR
-Sj
-aM
-Cc
+oc
+oc
+oc
 fa
 al
 al
@@ -6467,9 +6026,9 @@ al
 al
 al
 JW
-Sj
-aM
-Cc
+oc
+oc
+oc
 ca
 AK
 gz
@@ -7464,7 +7023,7 @@ fP
 PD
 XB
 XB
-PF
+XB
 XB
 XB
 Qs
@@ -7588,7 +7147,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -7630,7 +7189,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -7672,7 +7231,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -7714,8 +7273,8 @@ cg
 KT
 fP
 PD
-IS
-PF
+bQ
+XB
 XB
 XB
 Qs
@@ -7756,7 +7315,7 @@ cg
 KT
 cN
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -7798,7 +7357,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -7840,7 +7399,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -7882,7 +7441,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -7924,7 +7483,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -7966,8 +7525,8 @@ cg
 KT
 fP
 PD
-IS
-PF
+bQ
+XB
 XB
 XB
 Qs
@@ -8008,7 +7567,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -8050,7 +7609,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -8092,7 +7651,7 @@ cg
 KT
 cN
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -8134,7 +7693,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -8176,7 +7735,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -8218,8 +7777,8 @@ cg
 KT
 fP
 PD
-IS
-PF
+bQ
+XB
 XB
 XB
 Qs
@@ -8260,7 +7819,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -8302,7 +7861,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -8344,7 +7903,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -8386,7 +7945,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 qZ
@@ -8470,8 +8029,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 ok
@@ -8512,8 +8071,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 Oc
@@ -8555,7 +8114,7 @@ KT
 fP
 PD
 bQ
-IS
+bQ
 XB
 Qs
 Jf
@@ -8596,8 +8155,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 Wi
@@ -8638,8 +8197,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 AN
@@ -8680,8 +8239,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 aV
@@ -8722,8 +8281,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 aV
@@ -8764,8 +8323,8 @@ cg
 KT
 cN
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -8848,8 +8407,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -8890,8 +8449,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -8932,8 +8491,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -8974,8 +8533,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 HH
@@ -9016,8 +8575,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 ok
@@ -9100,8 +8659,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 Oc
@@ -9142,8 +8701,8 @@ cg
 Fj
 cN
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 Oc
@@ -9184,8 +8743,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 Wi
@@ -9226,8 +8785,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 Oz
@@ -9268,8 +8827,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 HH
@@ -9352,8 +8911,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 Nt
@@ -9394,8 +8953,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 wD
@@ -9436,8 +8995,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 mb
@@ -9478,8 +9037,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 xW
@@ -9520,8 +9079,8 @@ cg
 KT
 cN
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 Oz
@@ -9604,8 +9163,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -9646,8 +9205,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -9688,8 +9247,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -9730,8 +9289,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -9772,8 +9331,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -9856,8 +9415,8 @@ cg
 KT
 cN
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -9898,8 +9457,8 @@ cg
 KT
 fP
 PD
-IS
-IS
+bQ
+bQ
 XB
 Qs
 tu
@@ -9982,7 +9541,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 qZ
@@ -10024,7 +9583,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10066,8 +9625,8 @@ cg
 KT
 fP
 PD
-IS
-PF
+bQ
+XB
 XB
 XB
 Qs
@@ -10108,7 +9667,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10150,7 +9709,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10192,7 +9751,7 @@ cg
 KT
 cN
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10234,7 +9793,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10276,7 +9835,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10318,8 +9877,8 @@ cg
 KT
 fP
 PD
-IS
-PF
+bQ
+XB
 XB
 XB
 Qs
@@ -10360,7 +9919,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10402,7 +9961,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10444,7 +10003,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10486,7 +10045,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10528,7 +10087,7 @@ cg
 KT
 cN
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10570,8 +10129,8 @@ cg
 KT
 fP
 PD
-IS
-PF
+bQ
+XB
 XB
 XB
 Qs
@@ -10612,7 +10171,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10654,7 +10213,7 @@ cg
 KT
 fP
 PD
-IS
+bQ
 XB
 XB
 XB
@@ -10824,7 +10383,7 @@ fP
 PD
 XB
 XB
-PF
+XB
 XB
 XB
 Qs
@@ -11978,7 +11537,7 @@ oo
 Fa
 Fa
 Zk
-Rk
+Qr
 OA
 RK
 RK
@@ -12492,7 +12051,7 @@ cn
 cn
 cn
 Th
-tI
+cn
 RK
 Px
 RK
@@ -12521,7 +12080,7 @@ yW
 xD
 FH
 MX
-cL
+VJ
 ed
 cd
 hY
@@ -12660,7 +12219,7 @@ fo
 px
 mU
 lW
-Ye
+nc
 RK
 Px
 RK
@@ -12949,7 +12508,7 @@ RK
 Gu
 RK
 XO
-Jh
+qv
 Iu
 hA
 kY
@@ -12990,9 +12549,9 @@ ow
 RK
 Gu
 RK
-ND
+uy
 DT
-Lv
+Yp
 jC
 Mg
 RK

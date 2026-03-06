@@ -3,7 +3,7 @@
 	icon_state = "ship_walls-0"
 	base_icon_state = "ship_walls"
 	sheet_type = /obj/item/stack/sheet/spaceship
-	smoothing_groups = SMOOTH_GROUP_CLOSED_TURFS
+	smoothing_groups = SMOOTH_GROUP_CLOSED_TURFS + SMOOTH_GROUP_SHUTTLE_PARTS
 	canSmoothWith = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_SURVIVAL_TITANIUM_POD
 
 /turf/closed/wall/mineral/titanium/spaceship/nodiagonal
@@ -64,3 +64,11 @@
 	desc = "The latest in Nanotrasen development: A reinforced metal fence. This'll keep those pesky assistants out!"
 	cuttable = FALSE
 	invulnerable = TRUE
+
+/turf/closed/indestructible/steel
+	icon = 'icons/turf/walls/wall.dmi'
+	icon_state = "wall-0"
+	base_icon_state = "wall"
+	smoothing_flags = SMOOTH_BITMASK
+	smoothing_groups = SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
+	canSmoothWith =  SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS

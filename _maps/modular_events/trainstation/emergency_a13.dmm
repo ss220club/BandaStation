@@ -73,7 +73,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -186,7 +186,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8;
@@ -318,7 +318,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -326,7 +326,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -380,7 +380,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8;
@@ -459,7 +459,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8;
@@ -469,7 +469,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8;
@@ -483,7 +483,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -590,7 +590,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -952,7 +952,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -1080,7 +1080,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1;
@@ -1111,9 +1111,6 @@
 /obj/effect/mob_spawn/corpse/human/charredskeleton,
 /turf/open/floor/iron/white,
 /area/trainstation/indoors/station/powered)
-"nO" = (
-/turf/open/space/basic,
-/area/trainstation/outdoor/powered_light)
 "nZ" = (
 /obj/effect/gibspawner/human,
 /obj/effect/decal/cleanable/blood,
@@ -1265,7 +1262,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8;
@@ -1282,12 +1279,6 @@
 	},
 /turf/open/indestructible/meat,
 /area/trainstation/indoors/station)
-"qB" = (
-/obj/structure/closet/crate/freezer/blood,
-/obj/item/storage/backpack/duffelbag/deforest_medkit/stocked,
-/obj/item/storage/medkit/frontier/stocked,
-/turf/open/floor/iron/white,
-/area/trainstation/indoors/station/powered)
 "qE" = (
 /obj/machinery/light/cold/directional/south,
 /turf/open/misc/asteroid/snow/indestructible,
@@ -1459,8 +1450,6 @@
 /area/trainstation/outdoor/powered_light)
 "tb" = (
 /obj/structure/closet/crate/freezer/blood,
-/obj/item/storage/medkit/civil_defense/stocked,
-/obj/item/storage/medkit/frontier/stocked,
 /turf/open/floor/iron/white,
 /area/trainstation/indoors/station/powered)
 "th" = (
@@ -1590,7 +1579,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -1658,7 +1647,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -1758,7 +1747,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8;
@@ -1784,7 +1773,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -1856,7 +1845,6 @@
 	dir = 10
 	},
 /obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/syndicate/skyrat/overalls/unarmoured,
 /obj/effect/spawner/random/special_lighter,
 /obj/effect/spawner/random/entertainment/plushie_delux,
 /turf/open/indestructible/dark/textured,
@@ -1908,7 +1896,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -1994,7 +1982,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -2005,7 +1993,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8;
@@ -2034,7 +2022,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -2069,10 +2057,6 @@
 	},
 /turf/open/floor/iron/stairs/medium,
 /area/trainstation/outdoor/powered_light)
-"Dq" = (
-/mob/living/basic/npc/civilian/teshari,
-/turf/open/floor/iron/white,
-/area/trainstation/indoors/station/powered)
 "Dw" = (
 /obj/structure/decorative{
 	anchored = 1;
@@ -2165,16 +2149,12 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/indestructible/meat,
 /area/trainstation/indoors/station)
-"EZ" = (
-/obj/structure/prop/smelter,
-/turf/open/misc/dirt/icy_planet,
-/area/trainstation/indoors/station)
 "Fc" = (
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1;
@@ -2231,7 +2211,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8;
@@ -2743,7 +2723,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -2753,7 +2733,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1;
@@ -2830,10 +2810,6 @@
 /obj/effect/turf_decal/lunar_sand/plating,
 /turf/open/misc/asteroid/snow/indestructible,
 /area/trainstation/outdoor/powered_light)
-"Pb" = (
-/mob/living/basic/khara_mutant/flesh_spider,
-/turf/open/misc/asteroid/snow/indestructible,
-/area/trainstation/indoors/station)
 "Ph" = (
 /obj/effect/turf_decal/lunar_sand/plating,
 /obj/effect/turf_decal/weather/snow/corner,
@@ -3259,7 +3235,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -3393,7 +3369,6 @@
 	},
 /obj/machinery/light/red/directional/west,
 /obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/syndicate/skyrat/overalls/unarmoured,
 /obj/effect/spawner/random/medical/minor_healing,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/entertainment/musical_instrument,
@@ -3441,7 +3416,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1;
@@ -3900,7 +3875,7 @@ Hm
 Hm
 Hm
 Hm
-EZ
+mg
 LS
 mK
 lD
@@ -4319,7 +4294,7 @@ Fr
 Fr
 Hm
 Hm
-Pb
+JK
 Wm
 sY
 sK
@@ -4413,8 +4388,8 @@ Hf
 pW
 Ij
 Qu
-qB
-Dq
+tb
+pW
 pW
 pW
 Qu
@@ -7786,7 +7761,7 @@ Mo
 Mo
 LU
 dv
-nO
+Fr
 Fr
 Fr
 Fr

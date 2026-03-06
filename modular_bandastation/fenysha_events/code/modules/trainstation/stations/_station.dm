@@ -227,7 +227,7 @@
 					continue
 			if(isobserver(AM))
 				continue
-			qdel(AM)
+			POOL_ASYNC_RELEASE(AM)
 		T.ChangeTurf(/turf/baseturf_bottom)
 		T.baseturfs = /turf/baseturf_bottom
 	docking_turfs.Cut()

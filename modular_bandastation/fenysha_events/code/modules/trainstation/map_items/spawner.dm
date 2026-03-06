@@ -15,6 +15,12 @@ GLOBAL_LIST_EMPTY(train_object_spawners)
 	var/accuracy_max = 1
 	var/allow_selection = TRUE
 
+/datum/train_object_spawner_theme/New()
+	. = ..()
+	if(weighted_spawnlist && islist(weighted_spawnlist))
+		for(var/object_type in weighted_spawnlist)
+			POOL_REGISTER(object_type)
+
 /datum/train_object_spawner_theme/proc/on_selected()
 	return
 
@@ -115,7 +121,8 @@ GLOBAL_LIST_EMPTY(train_object_spawners)
 				target_turf = T
 				break
 	var/selected = pick_weight(theme.weighted_spawnlist)
-	var/atom/movable/new_obj = new selected(src)
+	var/atom/movable/new_obj = POOL_TAKE(selected, src)
+	new_obj.forceMove(src)
 	if(new_obj)
 		ASYNC
 			new_obj.Move(target_turf, update_dir = FALSE)

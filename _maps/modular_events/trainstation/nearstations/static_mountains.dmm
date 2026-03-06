@@ -1,6 +1,9 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/open/floor/fake_snow/safe,
+/turf/open/misc/asteroid/snow/indestructible/planet,
+/area/trainstation/outdoor/rails)
+"o" = (
+/obj/structure/flora/tree/pine/style_random,
 /area/trainstation/outdoor/rails)
 "q" = (
 /turf/closed/mineral/random/icy_planet,
@@ -10,14 +13,16 @@
 /area/trainstation/outdoor/rails)
 "B" = (
 /obj/structure/flora/grass/green/style_3,
-/turf/open/floor/fake_snow/safe,
+/turf/open/misc/asteroid/snow/indestructible/planet,
+/area/trainstation/outdoor/rails)
+"L" = (
 /area/trainstation/outdoor/rails)
 "N" = (
 /turf/closed/mineral/random/icy_planet/snow,
 /area/trainstation/outdoor/rails)
 "U" = (
 /obj/structure/flora/tree/pine/style_random,
-/turf/open/floor/fake_snow/safe,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor/rails)
 
 (1,1,1) = {"
@@ -865,8 +870,8 @@ q
 q
 N
 N
-a
-U
+L
+o
 U
 a
 "}
@@ -2069,7 +2074,7 @@ q
 q
 q
 q
-q
+a
 a
 a
 a
@@ -2494,7 +2499,7 @@ q
 q
 q
 q
-a
+L
 U
 U
 a
@@ -3343,7 +3348,7 @@ q
 q
 q
 q
-q
+a
 a
 a
 a

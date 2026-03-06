@@ -1,10 +1,10 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /obj/structure/flora/tree/pine/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "e" = (
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "f" = (
 /mob/living/basic/mining/wolf,
@@ -15,11 +15,11 @@
 /area/trainstation/outdoor)
 "o" = (
 /obj/structure/flora/tree/dead/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "r" = (
 /mob/living/basic/mining/wolf,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "w" = (
 /mob/living/basic/bear/snow,
@@ -27,25 +27,25 @@
 /area/trainstation/outdoor)
 "E" = (
 /obj/structure/flora/rock/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "I" = (
 /obj/structure/flora/tree/pine/style_random,
 /mob/living/basic/mining/wolf,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "M" = (
 /mob/living/basic/bear/snow,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "N" = (
 /obj/structure/flora/tree/pine/style_random,
 /mob/living/basic/bear/snow,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "P" = (
 /obj/structure/flora/bush/snow/style_random,
-/turf/open/misc/asteroid/snow/indestructible,
+/turf/open/misc/asteroid/snow/indestructible/planet,
 /area/trainstation/outdoor)
 "X" = (
 /turf/open/misc/asteroid/snow/standard_air,
