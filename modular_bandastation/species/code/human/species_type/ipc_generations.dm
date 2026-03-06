@@ -34,7 +34,6 @@
 // Тепло от хака
 #define CYBERDECK_HEAT_HACK_DOOR    10
 #define CYBERDECK_HEAT_HACK_CONSOLE 15
-#define CYBERDECK_HEAT_HACK_TURRET  20
 // Радиус сканирования целей
 #define CYBERDECK_SCAN_RANGE 7
 

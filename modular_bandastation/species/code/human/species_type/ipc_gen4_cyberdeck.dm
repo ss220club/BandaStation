@@ -1,11 +1,11 @@
 // ============================================
 // IPC ПОКОЛЕНИЕ IV: КИБЕРДЕКА
 // ============================================
-// + Кибердека: взлом дверей, консолей, турелей в радиусе CYBERDECK_SCAN_RANGE
+// + Кибердека: удалённый доступ к дверям (только при наличии доступа) и консолям в радиусе CYBERDECK_SCAN_RANGE
 // + Сниженный урон от ЭМИ (emp_vulnerability = 1)
 // + +20% эффективности действий
 // + Охлаждение в покое / у АПЦ / в холодных зонах
-// - Нагрузка (heat) растёт от действий и взломов
+// - Нагрузка (heat) растёт от действий
 // - При heat >= CYBERDECK_OVERHEAT_AT: ожоги + перебои
 // - Требует больше ресурсов (ipc_repair_cost_mod = 1.5)
 // - ЭМИ временно отключает кибердеку
@@ -189,7 +189,7 @@
 	var/list/targets = list()
 	if(istype(H))
 		for(var/atom/A in view(CYBERDECK_SCAN_RANGE, H))
-			var/target_data = get_cyberdeck_target_data(A)
+			var/target_data = get_cyberdeck_target_data(A, H)
 			if(target_data)
 				targets += list(target_data)
 	data["targets"] = targets
@@ -219,25 +219,18 @@
 		do_cyberdeck_hack(user, uid, hack_type, hack_action)
 		return TRUE
 
-/// Возвращает данные цели для кибердеки, или null если цель не взламываемая.
-/datum/species/ipc/proc/get_cyberdeck_target_data(atom/A)
+/// Возвращает данные цели для кибердеки, или null если цель недоступна.
+/datum/species/ipc/proc/get_cyberdeck_target_data(atom/A, mob/living/carbon/human/H)
 	if(istype(A, /obj/machinery/door/airlock))
 		var/obj/machinery/door/airlock/door = A
+		if(!door.allowed(H))
+			return null  // Нет доступа — дверь невидима для кибердеки
 		return list(
 			"uid" = "\ref[door]",
 			"type" = "door",
 			"name" = door.name,
 			"heat_cost" = CYBERDECK_HEAT_HACK_DOOR,
 			"status" = door.density ? "закрыта" : "открыта",
-		)
-	if(istype(A, /obj/machinery/porta_turret))
-		var/obj/machinery/porta_turret/turret = A
-		return list(
-			"uid" = "\ref[turret]",
-			"type" = "turret",
-			"name" = turret.name,
-			"heat_cost" = CYBERDECK_HEAT_HACK_TURRET,
-			"status" = turret.on ? "активна" : "неактивна",
 		)
 	if(istype(A, /obj/machinery/computer))
 		var/obj/machinery/computer/console = A
@@ -262,19 +255,15 @@
 	switch(hack_type)
 		if("door")
 			heat_cost = CYBERDECK_HEAT_HACK_DOOR
-		if("turret")
-			heat_cost = CYBERDECK_HEAT_HACK_TURRET
 		if("console")
 			heat_cost = CYBERDECK_HEAT_HACK_CONSOLE
 
 	cyberdeck_heat = min(CYBERDECK_MAX_HEAT, cyberdeck_heat + heat_cost)
 
-	// Выполняем взлом
+	// Выполняем действие
 	switch(hack_type)
 		if("door")
 			hack_door(H, target, hack_action)
-		if("turret")
-			hack_turret(H, target, hack_action)
 		if("console")
 			hack_console(H, target, hack_action)
 
@@ -284,30 +273,16 @@
 /datum/species/ipc/proc/hack_door(mob/living/carbon/human/H, obj/machinery/door/airlock/door, action)
 	if(!istype(door))
 		return
-	switch(action)
-		if("open")
-			to_chat(H, span_notice("КИБЕРДЕКА: Взлом шлюза [door.name] — открываю."))
-			door.open(2)
-		if("close")
-			to_chat(H, span_notice("КИБЕРДЕКА: Взлом шлюза [door.name] — закрываю."))
-			door.close(2)
-		if("bolt")
-			to_chat(H, span_notice("КИБЕРДЕКА: Взлом шлюза [door.name] — блокирую засовы."))
-			door.bolt(TRUE)
-		if("unbolt")
-			to_chat(H, span_notice("КИБЕРДЕКА: Взлом шлюза [door.name] — снимаю блокировку."))
-			door.bolt(FALSE)
-
-/datum/species/ipc/proc/hack_turret(mob/living/carbon/human/H, obj/machinery/porta_turret/turret, action)
-	if(!istype(turret))
+	if(!door.allowed(H))
+		H.balloon_alert(H, "нет доступа к [door.name]")
 		return
 	switch(action)
-		if("disable")
-			to_chat(H, span_notice("КИБЕРДЕКА: Взлом турели [turret.name] — деактивирую."))
-			turret.toggle_on(FALSE)
-		if("enable")
-			to_chat(H, span_notice("КИБЕРДЕКА: Взлом турели [turret.name] — активирую."))
-			turret.toggle_on(TRUE)
+		if("open")
+			to_chat(H, span_notice("КИБЕРДЕКА: Удалённый доступ — открываю [door.name]."))
+			door.open(2)
+		if("close")
+			to_chat(H, span_notice("КИБЕРДЕКА: Удалённый доступ — закрываю [door.name]."))
+			door.close(2)
 
 /datum/species/ipc/proc/hack_console(mob/living/carbon/human/H, obj/machinery/computer/console, action)
 	if(!istype(console))

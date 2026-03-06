@@ -14,7 +14,7 @@ import { Window } from '../../layouts';
 
 type Target = {
   uid: string;
-  type: 'door' | 'turret' | 'console';
+  type: 'door' | 'console';
   name: string;
   heat_cost: number;
   status: string;
@@ -31,26 +31,17 @@ type CyberdeckData = {
 
 const TYPE_ICON: Record<string, string> = {
   door: 'door-open',
-  turret: 'crosshairs',
   console: 'desktop',
 };
 
 const TYPE_LABEL: Record<string, string> = {
   door: 'Шлюз',
-  turret: 'Турель',
   console: 'Консоль',
 };
 
 const DOOR_ACTIONS = [
   { action: 'open', label: 'Открыть', color: 'good' },
   { action: 'close', label: 'Закрыть', color: 'average' },
-  { action: 'bolt', label: 'Засов ▼', color: 'bad' },
-  { action: 'unbolt', label: 'Засов ▲', color: 'average' },
-];
-
-const TURRET_ACTIONS = [
-  { action: 'disable', label: 'Отключить', color: 'bad' },
-  { action: 'enable', label: 'Включить', color: 'good' },
 ];
 
 const CONSOLE_ACTIONS = [
@@ -59,7 +50,6 @@ const CONSOLE_ACTIONS = [
 
 function getActions(type: string) {
   if (type === 'door') return DOOR_ACTIONS;
-  if (type === 'turret') return TURRET_ACTIONS;
   return CONSOLE_ACTIONS;
 }
 
@@ -118,16 +108,14 @@ export function IpcCyberdeck() {
           {/* Фильтр */}
           <Stack.Item>
             <Flex gap={1}>
-              {['all', 'door', 'turret', 'console'].map((f) => (
+              {['all', 'door', 'console'].map((f) => (
                 <Flex.Item key={f}>
                   <Button
                     selected={filter === f}
                     onClick={() => setFilter(f)}
                     icon={f === 'all' ? 'list' : TYPE_ICON[f]}
                   >
-                    {f === 'all'
-                      ? 'Все'
-                      : TYPE_LABEL[f] + 's'}
+                    {f === 'all' ? 'Все' : TYPE_LABEL[f]}
                   </Button>
                 </Flex.Item>
               ))}

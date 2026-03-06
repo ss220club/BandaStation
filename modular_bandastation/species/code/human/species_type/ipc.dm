@@ -329,9 +329,6 @@
 		last_repair_time = world.time
 
 /datum/species/ipc/proc/handle_temperature(mob/living/carbon/human/H, seconds_per_tick)
-	// DEBUG: Вывод температуры до модификаторов
-	var/temp_before = cpu_temperature
-
 	// Проверяем истечение эффектов охлаждения
 	if(thermal_paste_active && world.time > thermal_paste_end_time)
 		thermal_paste_active = FALSE
@@ -447,11 +444,6 @@
 
 	// Ограничиваем температуру
 	cpu_temperature = clamp(cpu_temperature, 0, 200)
-
-	// DEBUG: Выводим изменение температуры если значительное
-	var/temp_change = cpu_temperature - temp_before
-	if(abs(temp_change) > 0.5) // Выводим только если изменение больше 0.5°C
-		to_chat(H, span_small("DEBUG: T: [round(temp_before, 0.1)]°C → [round(cpu_temperature, 0.1)]°C ([temp_change > 0 ? "+" : ""][round(temp_change, 0.1)]°C)"))
 
 /// Обрабатывает эффекты температуры: урон, стамину, модификаторы скорости
 /datum/species/ipc/proc/handle_temperature_effects(mob/living/carbon/human/H)
