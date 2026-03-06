@@ -124,7 +124,7 @@
 	suffix = "lavaland_surface_sloth.dmm"
 	// Generates nothing but atmos runtimes and salt
 	cost = 0
-	unpickable = TRUE
+	unpickable = TRUE //BANDASTATION EDIT
 
 /datum/map_template/ruin/lavaland/ratvar
 	name = "Lava-Ruin Dead God"
