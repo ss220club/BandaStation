@@ -279,7 +279,7 @@
 
 /obj/item/storage/lockbox/dueling
 	name = "dueling pistol case"
-	desc = "Давайте решим это как цивилизованные космолюди."
+	desc = "Давайте решим это как цивилизованные космонавтики."
 	icon_state = "medalbox+l"
 	inhand_icon_state = "syringe_kit"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
