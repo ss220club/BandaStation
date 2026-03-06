@@ -2,11 +2,11 @@
 "a" = (
 /obj/machinery/cryopod/prison/directional/west,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 "M" = (
 /obj/machinery/computer/cryopod/directional/west,
 /turf/template_noop,
-/area/template_noop)
+/area/space/nearstation)
 
 (1,1,1) = {"
 M

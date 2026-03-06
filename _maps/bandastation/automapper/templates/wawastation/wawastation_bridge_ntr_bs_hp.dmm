@@ -88,6 +88,10 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/command/corporate_showroom)
+"cK" = (
+/obj/machinery/firealarm/directional/east,
+/turf/open/floor/iron,
+/area/station/hallway/secondary/command)
 "cQ" = (
 /obj/machinery/door/airlock/multi_tile/command/glass,
 /obj/effect/mapping_helpers/airlock/access/all/command/general,
@@ -136,9 +140,7 @@
 /area/station/maintenance/department/bridge)
 "fa" = (
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/corporate{
-	id_tag = "ntr_door"
-	},
+/obj/machinery/door/airlock/corporate,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -780,6 +782,7 @@
 /obj/structure/chair/sofa/corp/left{
 	dir = 4
 	},
+/obj/machinery/firealarm/directional/west,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
 "yn" = (
@@ -1149,7 +1152,7 @@
 	},
 /obj/machinery/button/door/directional/north{
 	normaldoorcontrol = 1;
-	specialfunctions = 4;
+	specialfunctions = null;
 	id = "ntr_door";
 	req_access = list("nanotrasen_representative");
 	name = "Door Control";
@@ -1962,7 +1965,7 @@ yY
 EP
 Vu
 qw
-ow
+cK
 rs
 je
 Gj
