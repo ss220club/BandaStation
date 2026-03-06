@@ -79,6 +79,6 @@
 
 /datum/supply_pack/bitrunning/New(purchaser, cost, list/contains)
 	. = ..()
-	name = "Битранерский заказ [purchaser]"
+	name = "Битраннерский заказ [purchaser]"
 	src.cost = cost
 	src.contains = contains
