@@ -313,7 +313,7 @@
 
 /obj/item/storage/lockbox/bitrunning/encrypted
 	name = "encrypted curiosity"
-	desc = "Для открытия, необходимо расшифровать данные в убежище."
+	desc = "Для открытия необходимо расшифровать данные в убежище."
 	resistance_flags =  INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	/// Path for the loot we are assigned
 	var/loot_path
