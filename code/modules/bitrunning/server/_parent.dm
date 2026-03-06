@@ -90,7 +90,7 @@
 
 	. += span_notice("Панель технического обслуживания может быть [panel_open ? "закрыта" : "открыта"] [EXAMINE_HINT("с помощью гаечного ключа")].")
 	if(panel_open)
-		. += span_notice("Может быть [EXAMINE_HINT("pried")] отдельно.")
+		. += span_notice("Может быть разобран, если [EXAMINE_HINT("поддеть")] чем-то.")
 
 	var/upgraded = FALSE
 	if(capacitor_coefficient < 1)
