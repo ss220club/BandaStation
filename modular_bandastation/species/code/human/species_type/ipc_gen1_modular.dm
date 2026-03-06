@@ -11,7 +11,7 @@
 // - Смена модуля занимает 2.5 минуты
 //
 // ПЕРКИ ПО МОДУЛЮ:
-//   Медицинский:       +20% действий, Мед HUD
+//   Медицинский:       +20% действий, Мед HUD, +25% скорость операций (хирург)
 //   Инженерный:        +20% действий, иммунитет к удару током (провода)
 //   Охранный:          +20% действий, HUD безопасности, оружие разрешено
 //   Исследовательский: +20% действий, химический анализатор
@@ -75,6 +75,7 @@
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_wrong_module)
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
 	REMOVE_TRAIT(H, TRAIT_MEDICAL_HUD, IPC_GEN1_TRAIT_SOURCE)
+	REMOVE_TRAIT(H, TRAIT_MEDICAL_ACES, IPC_GEN1_TRAIT_SOURCE)
 	REMOVE_TRAIT(H, TRAIT_SECURITY_HUD, IPC_GEN1_TRAIT_SOURCE)
 	REMOVE_TRAIT(H, TRAIT_REAGENT_SCANNER, IPC_GEN1_TRAIT_SOURCE)
 	UnregisterSignal(H, COMSIG_MOB_ATTACK_HAND)
@@ -92,6 +93,7 @@
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_wrong_module)
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
 	REMOVE_TRAIT(H, TRAIT_MEDICAL_HUD, IPC_GEN1_TRAIT_SOURCE)
+	REMOVE_TRAIT(H, TRAIT_MEDICAL_ACES, IPC_GEN1_TRAIT_SOURCE)
 	REMOVE_TRAIT(H, TRAIT_SECURITY_HUD, IPC_GEN1_TRAIT_SOURCE)
 	REMOVE_TRAIT(H, TRAIT_REAGENT_SCANNER, IPC_GEN1_TRAIT_SOURCE)
 	siemens_coeff = 1
@@ -100,6 +102,7 @@
 		if(IPC_MODULE_MEDICAL)
 			H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
 			ADD_TRAIT(H, TRAIT_MEDICAL_HUD, IPC_GEN1_TRAIT_SOURCE)
+			ADD_TRAIT(H, TRAIT_MEDICAL_ACES, IPC_GEN1_TRAIT_SOURCE)
 
 		if(IPC_MODULE_ENGINEERING)
 			H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
@@ -158,6 +161,7 @@
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_wrong_module)
 	REMOVE_TRAIT(H, TRAIT_MEDICAL_HUD, IPC_GEN1_TRAIT_SOURCE)
+	REMOVE_TRAIT(H, TRAIT_MEDICAL_ACES, IPC_GEN1_TRAIT_SOURCE)
 	REMOVE_TRAIT(H, TRAIT_SECURITY_HUD, IPC_GEN1_TRAIT_SOURCE)
 	REMOVE_TRAIT(H, TRAIT_REAGENT_SCANNER, IPC_GEN1_TRAIT_SOURCE)
 	siemens_coeff = 1
@@ -233,7 +237,7 @@
 			current_name = "Исследовательский"
 
 	var/list/choices = list(
-		"Медицинский — мед HUD"                    = IPC_MODULE_MEDICAL,
+		"Медицинский — мед HUD, +25% скорость операций" = IPC_MODULE_MEDICAL,
 		"Инженерный — иммунитет к проводам"        = IPC_MODULE_ENGINEERING,
 		"Охранный — HUD безопасности, оружие"      = IPC_MODULE_SECURITY,
 		"Исследовательский — хим. анализатор"      = IPC_MODULE_RESEARCH,

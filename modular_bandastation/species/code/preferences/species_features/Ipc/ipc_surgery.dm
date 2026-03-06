@@ -3,6 +3,12 @@
 // ОПЕРАЦИИ ДЛЯ IPC - ПОЛНАЯ ВЕРСИЯ
 // ============================================
 
+// Медицинский модуль Gen I: TRAIT_MEDICAL_ACES даёт -25% времени каждого шага операции.
+/datum/surgery_operation/get_surgeon_surgery_speed_mod(mob/living/patient, mob/living/surgeon, tool)
+	. = ..()
+	if(HAS_TRAIT(surgeon, TRAIT_MEDICAL_ACES))
+		. *= 0.75
+
 // Константы состояний панели
 #define IPC_PANEL_CLOSED 0
 #define IPC_PANEL_OPEN 1
