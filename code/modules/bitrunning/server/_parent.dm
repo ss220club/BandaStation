@@ -198,5 +198,5 @@
 	name = "Карго оповещение: квантовый сервер битрана готов к работе"
 	general_tooltip = "Announces when the quantum server is ready to be used. No variables provided"
 	announcement_lines_map = list(
-		"Message" = "Отчёт квантового сервера: Тепловые системы в рабочем состоянии. Переходим к настройке домена."
+		"Message" = "Отчёт квантового сервера: тепловые системы в рабочем состоянии. Переходим к настройке домена."
 	)
