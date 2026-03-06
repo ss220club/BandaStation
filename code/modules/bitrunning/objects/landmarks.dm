@@ -54,7 +54,7 @@
 			for(var/obj/structure/closet/crate/crate_to_check in area_turf)
 				if(istype(crate_to_check, /obj/structure/closet/crate/secure/bitrunning/encrypted))
 					encrypted_crate = crate_to_check
-					crate_to_check.desc += span_hypnophrase("Похоже, это тот самый ящик, который мы ищем!")
+					crate_to_check.desc += span_hypnophrase(" Похоже, это тот самый ящик, который мы ищем!")
 				else
 					crate_list += crate_to_check
 				crate_to_check.name = "Неопознанный ящик"
