@@ -755,6 +755,8 @@
 	var/password = ""
 	/// Залогинен ли пользователь в текущей сессии
 	var/logged_in = FALSE
+	/// Флаг провала последней попытки входа (для UI-уведомления)
+	var/login_failed = FALSE
 
 	// --- Приложения ---
 	/// Какое приложение сейчас открыто: "desktop", "diagnostics", "antivirus", "net", "installed_app"
@@ -1575,6 +1577,7 @@
 	// Безопасность
 	data["has_password"] = (password != "")
 	data["logged_in"] = logged_in
+	data["login_failed"] = login_failed
 	data["current_app"] = current_app
 
 	// Диагностика
@@ -1703,14 +1706,17 @@
 			var/new_pass = params["password"]
 			if(set_password(new_pass))
 				logged_in = TRUE
+				login_failed = FALSE
 			return TRUE
 
 		if("login")
 			var/input_pass = params["password"]
 			if(try_login(input_pass))
+				login_failed = FALSE
+				SStgui.update_uis(src)
 				return TRUE
-			if(owner)
-				to_chat(owner, span_warning("Неверный пароль!"))
+			login_failed = TRUE
+			SStgui.update_uis(src)
 			return TRUE
 
 		if("logout")
@@ -1897,7 +1903,8 @@
 /datum/action/innate/ipc_open_os
 	name = "Открыть ОС"
 	desc = "Открыть операционную систему IPC."
-	button_icon_state = "yourface"
+	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
+	button_icon_state = "ipc_os"
 	background_icon_state = "bg_default"
 	/// Ссылка на ОС
 	var/datum/ipc_operating_system/os_system

@@ -20,8 +20,9 @@
 	name = "Arm Razor Implant"
 	desc = "Моноволоконная струна, встроенная в предплечье. Выдвигается для режущей атаки на ближнюю дистанцию. Способна отрезать конечности."
 	icon_state = "arm_razor"
+	arm_visual_state = "razorwire"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-	actions_types = list(/datum/action/item_action/activate_arm_razor)
+	actions_types = list(/datum/action/item_action/hands_free/activate_arm_razor)
 	/// Урон за удар
 	var/slash_damage = 20
 	/// Бонус к ранам (для dismember)
@@ -47,6 +48,8 @@
 	if(!ishuman(target))
 		return FALSE
 	var/mob/living/carbon/human/H = target
+
+	apply_arm_visual(H)
 
 	if(!silent)
 		to_chat(H, span_notice("Моноволоконная струна установлена в [installed_in_zone]. Используйте способность для атаки."))
@@ -97,6 +100,8 @@
 	return TRUE
 
 /obj/item/implant/ipc/arm_razor/removed(mob/living/source, silent = FALSE, special = FALSE)
+	if(ishuman(source))
+		remove_arm_visual(source)
 	. = ..()
 	if(!silent)
 		to_chat(source, span_warning("Струна извлечена."))
@@ -107,14 +112,14 @@
 	imp_type = /obj/item/implant/ipc/arm_razor
 
 // Action для атаки струной
-/datum/action/item_action/activate_arm_razor
+/datum/action/item_action/hands_free/activate_arm_razor
 	name = "Razor Slash"
 	desc = "Атаковать струной цель перед собой."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "deploy_nanites"
+	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	button_icon_state = "arm_razor"
 	background_icon_state = "bg_tech"
 
-/datum/action/item_action/activate_arm_razor/Trigger(trigger_flags)
+/datum/action/item_action/hands_free/activate_arm_razor/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -128,6 +133,75 @@
 	return TRUE
 
 // ============================================
+// WEAPON ITEMS FOR MANTIS BLADES
+// ============================================
+// Created by the implant and placed in the character's hand when blades are deployed.
+// Uses HAND_ITEM|ABSTRACT flags so they don't render extra inhand icons
+// (the visual is already handled by the arm bodypart overlay).
+
+/obj/item/mantis_blade
+	name = "mantis blade"
+	desc = "Выдвижное лезвие богомола."
+	icon = 'modular_bandastation/MachAImpDe/icons/implants_righthand.dmi'
+	icon_state = "mantis"
+	item_flags = HAND_ITEM | ABSTRACT
+	force = 15
+	throwforce = 0
+	throw_range = 0
+	wound_bonus = 20
+	sharpness = SHARP_EDGED
+	hitsound = 'sound/items/weapons/bladeslice.ogg'
+	attack_verb_continuous = list("attacks", "slashes", "slices", "cuts", "lacerates")
+	attack_verb_simple = list("attack", "slash", "slice", "cut", "lacerate")
+	/// Battery cost per attack (IPC only)
+	var/power_per_attack = 10
+
+/// Cancel attack if IPC battery is too low
+/obj/item/mantis_blade/pre_attack(atom/target, mob/living/user, modifiers, attack_modifiers)
+	. = ..()
+	if(.)
+		return
+	if(!isliving(target) || !istype(user, /mob/living/carbon/human))
+		return
+	var/mob/living/carbon/human/H = user
+	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(battery && battery.charge < power_per_attack)
+		to_chat(user, span_warning("Недостаточно заряда батареи для атаки лезвиями!"))
+		. = TRUE
+
+/// Drain IPC battery and attempt dismember after a successful hit
+/obj/item/mantis_blade/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+	. = ..()
+	if(!proximity_flag || !isliving(target) || !istype(user, /mob/living/carbon/human))
+		return
+	var/mob/living/carbon/human/H = user
+	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(battery)
+		battery.charge = max(battery.charge - power_per_attack, 0)
+	if(ishuman(target))
+		var/mob/living/carbon/human/V = target
+		var/obj/item/bodypart/target_part = V.get_bodypart(H.zone_selected)
+		if(target_part && target_part.body_zone != BODY_ZONE_CHEST && target_part.body_zone != BODY_ZONE_HEAD)
+			target_part.try_dismember(WOUND_SLASH, force, wound_bonus)
+
+/// Left-hand variant — uses mirrored lefthand sprite sheet
+/obj/item/mantis_blade/left
+	icon = 'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi'
+
+/// Military variant with higher stats
+/obj/item/mantis_blade/military
+	name = "military mantis blade"
+	desc = "Военное выдвижное лезвие богомола."
+	icon_state = "syndie_mantis"
+	force = 22
+	wound_bonus = 35
+	power_per_attack = 15
+
+/// Military left-hand variant
+/obj/item/mantis_blade/military/left
+	icon = 'modular_bandastation/MachAImpDe/icons/implants_lefthand.dmi'
+
+// ============================================
 // 2. MANTIS BLADES — ЛЕЗВИЯ БОГОМОЛА
 // ============================================
 // Переключаемый имплант. Левая/правая рука.
@@ -138,8 +212,12 @@
 	name = "Mantis Blade Implant"
 	desc = "Выдвижные лезвия богомола. В развёрнутом состоянии наносят тяжёлый режущий урон и могут отрезать конечности."
 	icon_state = "mantis_right"
+	arm_visual_state = "mantis"
 	allowed_zones = list(BODY_ZONE_R_ARM)
-	actions_types = list(/datum/action/item_action/toggle_mantis)
+	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis)
+	allow_multiple = TRUE
+	/// Тип создаваемого оружия при развёртывании
+	var/blade_type = /obj/item/mantis_blade
 	/// Урон в активном режиме
 	var/blade_damage = 15
 	/// Бонус к ранам для dismember
@@ -148,7 +226,9 @@
 	var/power_per_attack = 10
 	/// Лезвия развёрнуты?
 	var/blades_active = FALSE
-	/// Прыжок на кулдауне?
+	/// Оружие в руке (пока лезвия развёрнуты)
+	var/obj/item/mantis_blade/blade_item = null
+	/// Кулдаун прыжка
 	var/leap_cooldown_time = 15 SECONDS
 	/// Время последнего прыжка
 	var/last_leap_time = 0
@@ -158,15 +238,21 @@
 	var/leaping = FALSE
 
 /obj/item/implant/ipc/mantis/get_data()
-	var/dat = {"<b>Implant Specifications:</b><BR>
-	<b>Name:</b> Mantis Blade Implant<BR>
+	return {"<b>Implant Specifications:</b><BR>
+	<b>Name:</b> [name]<BR>
 	<b>Life:</b> Permanent<BR>
 	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
 	<b>Function:</b> Deployable blades (+[blade_damage] brute, dismember capable).<BR>
 	<b>Status:</b> [blades_active ? "DEPLOYED" : "RETRACTED"]"}
-	return dat
 
 /obj/item/implant/ipc/mantis/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
+	// Zone conflict check: prevent two mantis blades in the same arm
+	if(body_zone)
+		for(var/obj/item/implant/ipc/mantis/existing as anything in target.implants)
+			if(existing.installed_in_zone == body_zone)
+				if(user)
+					to_chat(user, span_warning("В [body_zone] уже установлено лезвие богомола."))
+				return FALSE
 	. = ..()
 	if(!.)
 		return FALSE
@@ -174,10 +260,10 @@
 		return FALSE
 	var/mob/living/carbon/human/H = target
 
-	RegisterSignal(H, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(on_unarmed_attack))
-
 	// Проверяем парные лезвия — если есть оба, даём прыжок
 	check_paired_mantis(H)
+
+	// Оверлей появляется только при развёртывании лезвий, не при установке
 
 	if(!silent)
 		to_chat(H, span_notice("Лезвия богомола установлены в [installed_in_zone]. Используйте способность для активации."))
@@ -195,43 +281,47 @@
 		if(BODY_ZONE_R_ARM in M.allowed_zones)
 			has_right = TRUE
 
-	var/datum/action/item_action/mantis_leap/existing_leap = locate() in H.actions
+	var/datum/action/item_action/hands_free/mantis_leap/existing_leap = locate() in H.actions
 	if(has_left && has_right)
 		if(!existing_leap)
-			var/datum/action/item_action/mantis_leap/leap_action = new(src)
+			var/datum/action/item_action/hands_free/mantis_leap/leap_action = new(src)
 			leap_action.Grant(H)
 	else
 		if(existing_leap)
 			existing_leap.Remove(H)
 
-/obj/item/implant/ipc/mantis/proc/on_unarmed_attack(mob/living/source, atom/target, proximity, modifiers)
-	SIGNAL_HANDLER
-	if(!blades_active || !proximity || !isliving(target))
-		return
-	var/mob/living/carbon/human/H = source
-	if(!istype(H))
-		return
-
-	// Расход батареи только для IPC
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(battery)
-		if(battery.charge < power_per_attack)
-			to_chat(H, span_warning("Недостаточно заряда для атаки лезвиями!"))
-			return
-		battery.charge = max(battery.charge - power_per_attack, 0)
-
-	var/mob/living/victim = target
-	// Урон с wound_bonus и sharpness для dismember
-	victim.apply_damage(blade_damage, BRUTE, H.zone_selected, wound_bonus = blade_wound_bonus, sharpness = SHARP_EDGED)
-
-	// Попытка dismember
-	if(ishuman(victim))
-		var/mob/living/carbon/human/V = victim
-		var/obj/item/bodypart/target_part = V.get_bodypart(H.zone_selected)
-		if(target_part && target_part.body_zone != BODY_ZONE_CHEST && target_part.body_zone != BODY_ZONE_HEAD)
-			target_part.try_dismember(WOUND_SLASH, blade_damage, blade_wound_bonus)
-
-	playsound(H, 'sound/items/weapons/bladeslice.ogg', 50, TRUE)
+/// Разворачивает или сворачивает лезвия, создавая/удаляя оружие в руке
+/obj/item/implant/ipc/mantis/proc/toggle_blades(mob/living/carbon/human/H)
+	blades_active = !blades_active
+	if(blades_active)
+		var/obj/item/mantis_blade/blade = new blade_type(null)
+		blade.force = blade_damage
+		blade.wound_bonus = blade_wound_bonus
+		blade.power_per_attack = power_per_attack
+		blade_item = blade
+		ADD_TRAIT(blade, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
+		var/side = (installed_in_zone == BODY_ZONE_R_ARM) ? RIGHT_HANDS : LEFT_HANDS
+		var/hand = H.get_empty_held_index_for_side(side)
+		if(hand)
+			H.put_in_hand(blade, hand)
+		else
+			var/list/hand_items = H.get_held_items_for_side(side, all = TRUE)
+			for(var/obj/item/hand_item as anything in hand_items)
+				if(!H.dropItemToGround(hand_item))
+					continue
+				to_chat(H, span_notice("Вы роняете [hand_item], чтобы развернуть лезвие!"))
+				H.put_in_hand(blade, H.get_empty_held_index_for_side(side))
+				break
+		apply_arm_visual(H)
+		to_chat(H, span_warning("Лезвия богомола развёрнуты!"))
+		playsound(H, 'sound/items/weapons/bladeslice.ogg', 50, TRUE)
+	else
+		if(blade_item)
+			REMOVE_TRAIT(blade_item, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
+			QDEL_NULL(blade_item)
+		remove_arm_visual(H)
+		to_chat(H, span_notice("Лезвия богомола свёрнуты."))
+		playsound(H, 'sound/items/weapons/bladeslice.ogg', 30, TRUE)
 
 /// Прыжок мантиса — прыжок в направлении взгляда
 /obj/item/implant/ipc/mantis/proc/do_leap(mob/living/carbon/human/user)
@@ -242,10 +332,8 @@
 		to_chat(user, span_warning("Сначала разверните лезвия!"))
 		return FALSE
 
-	// Кулдаун
+	// Кулдаун (таймер отображается на кнопке способности)
 	if(world.time < last_leap_time + leap_cooldown_time)
-		var/remaining = round((last_leap_time + leap_cooldown_time - world.time) / 10, 0.1)
-		to_chat(user, span_warning("Прыжок перезаряжается! Осталось [remaining]с."))
 		return FALSE
 
 	if(user.body_position == LYING_DOWN)
@@ -310,13 +398,16 @@
 /obj/item/implant/ipc/mantis/removed(mob/living/source, silent = FALSE, special = FALSE)
 	if(blades_active)
 		blades_active = FALSE
+	if(blade_item)
+		REMOVE_TRAIT(blade_item, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
+		QDEL_NULL(blade_item)
 	if(leaping && ishuman(source))
 		leaping = FALSE
 		UnregisterSignal(source, COMSIG_MOVABLE_IMPACT)
 	if(ishuman(source))
-		UnregisterSignal(source, COMSIG_LIVING_UNARMED_ATTACK)
-		// Убираем прыжок если больше нет пары
 		var/mob/living/carbon/human/H = source
+		remove_arm_visual(H)
+		// Убираем прыжок если больше нет пары
 		// Ждём удаления из списка имплантов перед проверкой
 		addtimer(CALLBACK(src, PROC_REF(check_paired_mantis), H), 1)
 	. = ..()
@@ -328,7 +419,10 @@
 	name = "Mantis Blade Implant (Left)"
 	desc = "Выдвижные лезвия богомола для левой руки."
 	icon_state = "mantis_left"
+	arm_visual_state = "mantis"
 	allowed_zones = list(BODY_ZONE_L_ARM)
+	blade_type = /obj/item/mantis_blade/left
+	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis/left)
 
 /obj/item/implantcase/ipc/mantis_right
 	name = "implant case - 'Mantis Blade (Right)'"
@@ -341,44 +435,26 @@
 	imp_type = /obj/item/implant/ipc/mantis/left
 
 // Action для переключения лезвий
-/datum/action/item_action/toggle_mantis
+/datum/action/item_action/hands_free/toggle_mantis
 	name = "Toggle Mantis Blades"
 	desc = "Развернуть/свернуть лезвия богомола."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "deploy_nanites"
+	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	button_icon_state = "mantis_right"
 	background_icon_state = "bg_tech"
 
-/datum/action/item_action/toggle_mantis/Trigger(trigger_flags)
-	. = ..()
-	if(!.)
-		return FALSE
-	var/obj/item/implant/ipc/mantis/mantis_implant = target
-	if(!istype(mantis_implant))
-		return FALSE
+// Вариант для левой руки — своя иконка
+/datum/action/item_action/hands_free/toggle_mantis/left
+	button_icon_state = "mantis_left"
 
-	mantis_implant.blades_active = !mantis_implant.blades_active
+// Военные варианты
+/datum/action/item_action/hands_free/toggle_mantis/military
+	name = "Toggle Military Mantis Blades"
+	button_icon_state = "military_mantis_right"
 
-	if(mantis_implant.blades_active)
-		to_chat(owner, span_warning("Лезвия богомола развёрнуты!"))
-		playsound(owner, 'sound/items/weapons/bladeslice.ogg', 50, TRUE)
-		button_icon_state = "deploy_nanites"
-	else
-		to_chat(owner, span_notice("Лезвия богомола свёрнуты."))
-		playsound(owner, 'sound/items/weapons/bladeslice.ogg', 30, TRUE)
-		button_icon_state = "recall_nanites"
+/datum/action/item_action/hands_free/toggle_mantis/military/left
+	button_icon_state = "military_mantis_left"
 
-	build_all_button_icons()
-	return TRUE
-
-// Action для прыжка (выдаётся при парных лезвиях)
-/datum/action/item_action/mantis_leap
-	name = "Mantis Leap"
-	desc = "Прыжок на врага с лезвиями богомола. Требуются парные лезвия."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "yourinjectors"
-	background_icon_state = "bg_tech"
-
-/datum/action/item_action/mantis_leap/Trigger(trigger_flags)
+/datum/action/item_action/hands_free/toggle_mantis/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -388,108 +464,92 @@
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return FALSE
-	mantis_implant.do_leap(H)
+	mantis_implant.toggle_blades(H)
+	return TRUE
+
+// Action для прыжка (выдаётся при парных лезвиях)
+/datum/action/item_action/hands_free/mantis_leap
+	name = "Mantis Leap"
+	desc = "Прыжок на врага с лезвиями богомола. Требуются парные лезвия."
+	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	button_icon_state = "mantis_right"
+	background_icon_state = "bg_tech"
+
+/datum/action/item_action/hands_free/mantis_leap/create_button()
+	var/atom/movable/screen/movable/action_button/button = ..()
+	button.maptext = ""
+	button.maptext_x = 4
+	button.maptext_y = 2
+	button.maptext_width = 32
+	button.maptext_height = 16
+	return button
+
+/datum/action/item_action/hands_free/mantis_leap/update_button_status(atom/movable/screen/movable/action_button/button, force = FALSE)
+	. = ..()
+	var/obj/item/implant/ipc/mantis/imp = target
+	if(!istype(imp) || !owner)
+		button.maptext = ""
+		return
+	var/time_left = max(imp.last_leap_time + imp.leap_cooldown_time - world.time, 0)
+	if(time_left <= 0)
+		button.maptext = ""
+	else
+		button.maptext = MAPTEXT_TINY_UNICODE("[round(time_left / 10, 0.1)]")
+
+/datum/action/item_action/hands_free/mantis_leap/process()
+	build_all_button_icons(UPDATE_BUTTON_STATUS)
+	var/obj/item/implant/ipc/mantis/imp = target
+	if(!istype(imp) || world.time >= imp.last_leap_time + imp.leap_cooldown_time)
+		STOP_PROCESSING(SSfastprocess, src)
+
+/datum/action/item_action/hands_free/mantis_leap/Trigger(mob/clicker, trigger_flags)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/obj/item/implant/ipc/mantis/mantis_implant = target
+	if(!istype(mantis_implant))
+		return FALSE
+	var/mob/living/carbon/human/H = owner
+	if(!istype(H))
+		return FALSE
+	if(mantis_implant.do_leap(H))
+		START_PROCESSING(SSfastprocess, src)
 	return TRUE
 
 // ============================================
 // 3. MILITARY MANTIS — ВОЕННЫЕ ЛЕЗВИЯ БОГОМОЛА
 // ============================================
-// Улучшенная версия: больше урона, больше dismember.
+// Подтип mantis с повышенными характеристиками.
 
-/obj/item/implant/ipc/military_mantis
+/obj/item/implant/ipc/mantis/military
 	name = "Military Mantis Blade Implant"
 	desc = "Военная модификация лезвий богомола. Увеличенный урон и способность пробивать броню. Высокий шанс отрезания конечностей."
 	icon_state = "military_mantis_right"
-	allowed_zones = list(BODY_ZONE_R_ARM)
-	actions_types = list(/datum/action/item_action/toggle_mantis)
-	/// Урон в активном режиме
-	var/blade_damage = 22
-	/// Бонус к ранам для dismember
-	var/blade_wound_bonus = 35
-	/// Расход батареи за атаку (только IPC)
-	var/power_per_attack = 15
-	/// Лезвия развёрнуты?
-	var/blades_active = FALSE
-
-/obj/item/implant/ipc/military_mantis/get_data()
-	var/dat = {"<b>Implant Specifications:</b><BR>
-	<b>Name:</b> Military Mantis Blade Implant<BR>
-	<b>Life:</b> Permanent<BR>
-	<b>Installed in:</b> [installed_in_zone ? installed_in_zone : "Not installed"]<BR>
-	<b>Function:</b> Military-grade blades (+[blade_damage] brute, armor-piercing, high dismember).<BR>
-	<b>Status:</b> [blades_active ? "DEPLOYED" : "RETRACTED"]"}
-	return dat
-
-/obj/item/implant/ipc/military_mantis/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!ishuman(target))
-		return FALSE
-	var/mob/living/carbon/human/H = target
-
-	RegisterSignal(H, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(on_unarmed_attack))
-
-	if(!silent)
-		to_chat(H, span_notice("Военные лезвия установлены в [installed_in_zone]."))
-		if(user)
-			to_chat(user, span_notice("Вы успешно установили военные лезвия богомола."))
-	return TRUE
-
-/obj/item/implant/ipc/military_mantis/proc/on_unarmed_attack(mob/living/source, atom/target, proximity, modifiers)
-	SIGNAL_HANDLER
-	if(!blades_active || !proximity || !isliving(target))
-		return
-	var/mob/living/carbon/human/H = source
-	if(!istype(H))
-		return
-
-	// Расход батареи только для IPC
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(battery)
-		if(battery.charge < power_per_attack)
-			to_chat(H, span_warning("Недостаточно заряда для атаки!"))
-			return
-		battery.charge = max(battery.charge - power_per_attack, 0)
-
-	var/mob/living/victim = target
-	// Военные лезвия — высокий wound_bonus + sharpness + пробитие
-	victim.apply_damage(blade_damage, BRUTE, H.zone_selected, wound_bonus = blade_wound_bonus, sharpness = SHARP_EDGED)
-
-	// Попытка dismember
-	if(ishuman(victim))
-		var/mob/living/carbon/human/V = victim
-		var/obj/item/bodypart/target_part = V.get_bodypart(H.zone_selected)
-		if(target_part && target_part.body_zone != BODY_ZONE_CHEST && target_part.body_zone != BODY_ZONE_HEAD)
-			target_part.try_dismember(WOUND_SLASH, blade_damage, blade_wound_bonus)
-
-	playsound(H, 'sound/items/weapons/bladeslice.ogg', 60, TRUE)
-
-/obj/item/implant/ipc/military_mantis/removed(mob/living/source, silent = FALSE, special = FALSE)
-	if(blades_active)
-		blades_active = FALSE
-	if(ishuman(source))
-		UnregisterSignal(source, COMSIG_LIVING_UNARMED_ATTACK)
-	. = ..()
-	if(!silent)
-		to_chat(source, span_warning("Военные лезвия извлечены."))
+	arm_visual_state = "syndie_mantis"
+	blade_type = /obj/item/mantis_blade/military
+	blade_damage = 22
+	blade_wound_bonus = 35
+	power_per_attack = 15
+	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis/military)
 
 // Левая рука
-/obj/item/implant/ipc/military_mantis/left
+/obj/item/implant/ipc/mantis/military/left
 	name = "Military Mantis Blade Implant (Left)"
 	desc = "Военная модификация лезвий богомола для левой руки."
 	icon_state = "military_mantis_left"
 	allowed_zones = list(BODY_ZONE_L_ARM)
+	blade_type = /obj/item/mantis_blade/military/left
+	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis/military/left)
 
 /obj/item/implantcase/ipc/military_mantis_right
 	name = "implant case - 'Military Mantis (Right)'"
 	desc = "Стеклянный кейс содержащий имплант военных лезвий богомола для правой руки."
-	imp_type = /obj/item/implant/ipc/military_mantis
+	imp_type = /obj/item/implant/ipc/mantis/military
 
 /obj/item/implantcase/ipc/military_mantis_left
 	name = "implant case - 'Military Mantis (Left)'"
 	desc = "Стеклянный кейс содержащий имплант военных лезвий богомола для левой руки."
-	imp_type = /obj/item/implant/ipc/military_mantis/left
+	imp_type = /obj/item/implant/ipc/mantis/military/left
 
 // ============================================
 // 4. ARM CANNON — ДРОБОВИК В РУКЕ
@@ -501,8 +561,9 @@
 	name = "Arm Cannon Implant"
 	desc = "Встроенный дробовик в руке. Заряжается дробовыми патронами. Выстрел рассеивает пеллеты по площади."
 	icon_state = "arm_cannon"
+	arm_visual_state = "shell_cannon"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-	actions_types = list(/datum/action/item_action/fire_arm_cannon)
+	actions_types = list(/datum/action/item_action/hands_free/fire_arm_cannon)
 	/// Макс. количество патронов
 	var/max_shells = 4
 	/// Текущее количество патронов
@@ -540,6 +601,8 @@
 
 	// Регистрируем сигнал для зарядки — когда патрон используют на владельце
 	RegisterSignal(H, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
+
+	apply_arm_visual(H)
 
 	if(!silent)
 		to_chat(H, span_notice("Дробовик установлен в [installed_in_zone]. Заряжайте дробовыми патронами, используя их на себе."))
@@ -612,6 +675,7 @@
 
 /obj/item/implant/ipc/arm_cannon/removed(mob/living/source, silent = FALSE, special = FALSE)
 	if(ishuman(source))
+		remove_arm_visual(source)
 		UnregisterSignal(source, COMSIG_ATOM_ATTACKBY)
 	. = ..()
 	if(!silent)
@@ -633,14 +697,14 @@
 	sharpness = SHARP_EDGED
 
 // Action для выстрела
-/datum/action/item_action/fire_arm_cannon
+/datum/action/item_action/hands_free/fire_arm_cannon
 	name = "Fire Arm Cannon"
 	desc = "Выстрелить из встроенного дробовика."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "deploy_nanites"
+	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	button_icon_state = "arm_cannon"
 	background_icon_state = "bg_tech"
 
-/datum/action/item_action/fire_arm_cannon/Trigger(trigger_flags)
+/datum/action/item_action/hands_free/fire_arm_cannon/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -664,7 +728,7 @@
 	desc = "Сандевистан — имплант рефлекторного ускорения. Временно повышает скорость перемещения на 50%. У IPC расходует батарею и нагревает процессор."
 	icon_state = "sandy"
 	allowed_zones = list(BODY_ZONE_CHEST)
-	actions_types = list(/datum/action/item_action/activate_sandevistan)
+	actions_types = list(/datum/action/item_action/hands_free/activate_sandevistan)
 	/// Бонус скорости (отрицательное = быстрее)
 	var/speed_bonus = -0.5
 	/// Длительность эффекта
@@ -773,14 +837,14 @@
 	multiplicative_slowdown = -0.5
 
 // Action для активации
-/datum/action/item_action/activate_sandevistan
+/datum/action/item_action/hands_free/activate_sandevistan
 	name = "Activate Sandevistan"
 	desc = "Активировать Сандевистан — временное рефлекторное ускорение."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "deploy_nanites"
+	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	button_icon_state = "sandy"
 	background_icon_state = "bg_tech"
 
-/datum/action/item_action/activate_sandevistan/Trigger(trigger_flags)
+/datum/action/item_action/hands_free/activate_sandevistan/Trigger(mob/clicker, trigger_flags)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -827,7 +891,7 @@
 
 /obj/item/autosurgeon/ipc/military_mantis_right/Initialize(mapload)
 	. = ..()
-	load_implant(new /obj/item/implant/ipc/military_mantis(src))
+	load_implant(new /obj/item/implant/ipc/mantis/military(src))
 
 /obj/item/autosurgeon/ipc/military_mantis_left
 	desc = "Одноразовый autosurgeon с имплантом военных лезвий для левой руки."
@@ -835,7 +899,7 @@
 
 /obj/item/autosurgeon/ipc/military_mantis_left/Initialize(mapload)
 	. = ..()
-	load_implant(new /obj/item/implant/ipc/military_mantis/left(src))
+	load_implant(new /obj/item/implant/ipc/mantis/military/left(src))
 
 /obj/item/autosurgeon/ipc/arm_cannon
 	desc = "Одноразовый autosurgeon с имплантом дробовика."

@@ -1,14 +1,36 @@
 // ============================================
 // IPC HUD MODIFICATIONS
 // ============================================
-// Отключает mood для IPC и добавляет кастомные HUD элементы
-// для батареи и температуры процессора
+// ИПС имеет нейтральный неизменяемый муд вместо обычного.
+// Все sanity-проки — no-op. mob_mood никогда не null,
+// поэтому прямые обращения из еретического кода работают без патчей.
 
-/mob/living/carbon/human/setup_mood()
-	// Если IPC - не создаем mood datum
-	if(istype(dna?.species, /datum/species/ipc))
-		return
-	return ..()
+/// Нейтральный муд ИПС: рассудок зафиксирован на SANITY_NEUTRAL.
+/// Все изменения санити игнорируются. Процессинг отключён.
+/datum/mood/ipc_neutral
+	sanity = SANITY_NEUTRAL
+
+/datum/mood/ipc_neutral/process()
+	return
+
+/datum/mood/ipc_neutral/add_mood_event()
+	return
+
+/datum/mood/ipc_neutral/add_conditional_mood_event()
+	return
+
+/datum/mood/ipc_neutral/adjust_sanity()
+	return
+
+/datum/mood/ipc_neutral/direct_sanity_drain()
+	return
+
+/datum/mood/ipc_neutral/modify_hud()
+	return
+
+/datum/mood/ipc_neutral/unmodify_hud()
+	return
+
 
 // ============================================
 // HUD ИНДИКАТОРЫ ДЛЯ IPC
@@ -30,8 +52,8 @@
 /atom/movable/screen/ipc_battery/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
 
-	// Иконка батареи рядом с баром
-	battery_image = image(icon = 'icons/obj/machines/cell_charger.dmi', icon_state = "cell", pixel_x = -5)
+	// Иконка батареи из ipc_ui.dmi (cell_full по умолчанию, обновляется динамически)
+	battery_image = image(icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi', icon_state = "cell_full", pixel_x = -5)
 	battery_image.plane = plane
 	battery_image.appearance_flags |= KEEP_APART
 	battery_image.add_filter("simple_outline", 2, outline_filter(1, COLOR_BLACK, OUTLINE_SHARP))
@@ -113,30 +135,19 @@
 		else
 			transition_filter("ipc_battery_bar_mask", alpha_mask_filter(0, bar_offset), 0.5 SECONDS)
 
-/// Индикатор температуры CPU IPC (аналог hunger bar)
+/// Индикатор температуры CPU IPC — только цветная полоска, без иконки.
 /atom/movable/screen/ipc_temperature
 	name = "CPU temperature"
-	icon_state = "hungerbar"  // Используем ту же основу
-	screen_loc = ui_hunger  // Позиция где обычно hunger
+	icon_state = "hungerbar"
+	screen_loc = ui_hunger
 	mouse_over_pointer = MOUSE_HAND_POINTER
 	/// Текущая температура
 	var/temperature = 30
-	/// Иконка термометра рядом с баром
-	var/image/temp_image
 	/// Сам бар
 	var/atom/movable/screen/ipc_temperature_bar/temp_bar
 
 /atom/movable/screen/ipc_temperature/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
-
-	// Иконка термометра рядом с баром
-	temp_image = image(icon = 'icons/obj/devices/tool.dmi', icon_state = "thermometer", pixel_x = -5)
-	temp_image.plane = plane
-	temp_image.appearance_flags |= KEEP_APART
-	temp_image.add_filter("simple_outline", 2, outline_filter(1, COLOR_BLACK, OUTLINE_SHARP))
-	underlays += temp_image
-
-	// Создаем бар
 	temp_bar = new(src, hud_owner)
 	vis_contents += temp_bar
 
@@ -265,9 +276,10 @@
 	H.update_body()
 	H.update_body_parts()
 
-	// Удаляем mood datum если он есть
+	// Заменяем обычный муд нейтральным (setup_mood() вызывается до dna.species)
 	if(H.mob_mood)
 		QDEL_NULL(H.mob_mood)
+	H.mob_mood = new /datum/mood/ipc_neutral(H)
 
 	// Добавляем кастомные HUD элементы
 	RegisterSignal(H, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
@@ -278,6 +290,10 @@
 	. = ..()
 	UnregisterSignal(H, COMSIG_MOB_HUD_CREATED)
 	remove_ipc_hud_elements(H, new_species)
+	// Восстанавливаем обычный муд при смене вида
+	if(istype(H.mob_mood, /datum/mood/ipc_neutral))
+		QDEL_NULL(H.mob_mood)
+		H.setup_mood()
 
 /datum/species/ipc/proc/on_hud_created(datum/source)
 	SIGNAL_HANDLER
@@ -353,9 +369,28 @@
 
 	var/charge_percent = (battery.charge / battery.maxcharge) * 100
 
+	// Выбираем иконку батареи по уровню заряда
+	var/battery_icon_state
+	if(charge_percent <= 0)
+		battery_icon_state = "no_cell"
+	else if(charge_percent <= 10)
+		battery_icon_state = "empty_cell"
+	else if(charge_percent <= 30)
+		battery_icon_state = "low_cell3"
+	else if(charge_percent <= 50)
+		battery_icon_state = "low_cell2"
+	else if(charge_percent <= 75)
+		battery_icon_state = "low_cell1"
+	else if(charge_percent >= 105)
+		battery_icon_state = "cell_overcharge"
+	else
+		battery_icon_state = "cell_full"
+
 	// Обновляем battery indicator
 	for(var/atom/movable/screen/ipc_battery/indicator in H.hud_used.infodisplay)
 		indicator.charge_percent = charge_percent
+		if(indicator.battery_image)
+			indicator.battery_image.icon_state = battery_icon_state
 		indicator.update_appearance()
 
 /datum/species/ipc/proc/update_ipc_temperature_icon(mob/living/carbon/human/H)
@@ -375,10 +410,86 @@
 		var/datum/species/ipc/S = H.dna.species
 		S.update_ipc_battery_icon(H)
 
-// Вызываем обновление HUD при изменении температуры в spec_life
+// Расширяем spec_life: добавляем HUD-обновления и логику поколений.
+// Базовые вызовы (handle_self_repair, handle_temperature, handle_battery и т.д.)
+// уже выполняются в родительском spec_life в ipc.dm — здесь их НЕ дублируем.
 /datum/species/ipc/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	. = ..()
-	handle_self_repair(H)
-	handle_temperature(H)
-	handle_battery(H)
 	update_ipc_temperature_icon(H)
+	handle_generation_life(H, seconds_per_tick, times_fired)
+	update_ipc_generation_hud(H)
+
+/// Обновляет HUD-элементы поколений (человечность Gen3, иконка модуля Gen1).
+/datum/species/ipc/proc/update_ipc_generation_hud(mob/living/carbon/human/H)
+	// Gen 3: обновляем иконку человечности
+	if(ipc_generation == IPC_GEN_HUMANITY)
+		for(var/atom/movable/screen/ipc_humanity/indicator in H.hud_used?.infodisplay)
+			indicator.humanity_value = humanity
+			indicator.update_appearance()
+	// Gen 1: иконка модуля не изменяется в рантайме, поэтому не требует обновления каждый тик
+
+// ============================================
+// HUD: ИНДИКАТОР ЧЕЛОВЕЧНОСТИ (GEN III)
+// Показывается в позиции ui_mood вместо батареи у Gen III.
+// Но батарея всё равно нужна, поэтому человечность идёт отдельно.
+// Используем пустой слот — pixel offset отдельной иконки.
+// ============================================
+
+/atom/movable/screen/ipc_humanity
+	name = "humanity"
+	icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
+	icon_state = "humanity"
+	screen_loc = ui_internal  // Используем слот воздуха — у IPC нет дыхания
+	mouse_over_pointer = MOUSE_HAND_POINTER
+	var/humanity_value = 100
+
+/atom/movable/screen/ipc_humanity/Click()
+	if(!ismob(usr))
+		return
+	var/mob/living/carbon/human/H = usr
+	var/datum/species/ipc/S = H.dna?.species
+	if(!istype(S) || S.ipc_generation != IPC_GEN_HUMANITY)
+		return
+	var/status
+	if(S.humanity >= HUMANITY_PEAK)
+		status = "ПИКОВОЕ — максимальная эффективность"
+	else if(S.humanity >= HUMANITY_NORMAL)
+		status = "НОРМАЛЬНОЕ — стабильная работа"
+	else if(S.humanity >= HUMANITY_LOW)
+		status = "НИЗКОЕ — эффективность снижена"
+	else if(S.humanity >= HUMANITY_CRIT)
+		status = "КРИТИЧЕСКОЕ — нестабильность нарастает"
+	else
+		status = "ПОТЕРЯ КОНТРОЛЯ — система рушится"
+	to_chat(H, span_notice("==== ДИАГНОСТИКА: ЭМОЦИОНАЛЬНОЕ ЯДРО ====\nЧеловечность: [round(S.humanity)]% ([status])\nДеградация: [S.humanity_drug_active ? "ПРИОСТАНОВЛЕНА (препарат)" : "АКТИВНА (-[HUMANITY_DECAY_AMOUNT]% каждые [HUMANITY_DECAY_INTERVAL] сек)"]"))
+
+/atom/movable/screen/ipc_humanity/update_appearance(updates)
+	. = ..()
+	// Переключаем иконку по порогу
+	if(humanity_value >= HUMANITY_LOW)
+		icon_state = "humanity"
+	else
+		icon_state = "lost_humanity"
+
+// ============================================
+// ИНТЕГРАЦИЯ: добавляем/убираем Gen-специфичные HUD элементы
+// ============================================
+
+/// Добавляет HUD-элементы поколения Gen III (человечность).
+/datum/species/ipc/proc/add_gen3_hud(mob/living/carbon/human/H)
+	if(!H.hud_used)
+		return
+	if(locate(/atom/movable/screen/ipc_humanity) in H.hud_used.infodisplay)
+		return
+	var/atom/movable/screen/ipc_humanity/hum = new(null, H.hud_used)
+	H.hud_used.infodisplay += hum
+	H.client?.screen += hum
+
+/// Убирает HUD-элементы поколения Gen III.
+/datum/species/ipc/proc/remove_gen3_hud(mob/living/carbon/human/H)
+	if(!H.hud_used)
+		return
+	for(var/atom/movable/screen/ipc_humanity/indicator in H.hud_used.infodisplay)
+		H.hud_used.infodisplay -= indicator
+		H.client?.screen -= indicator
+		qdel(indicator)

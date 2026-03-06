@@ -567,48 +567,49 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 /obj/machinery/computer/operating/synthetic/proc/get_implants_data(mob/living/carbon/human/patient)
 	var/list/implants = list()
 
-	// Проверяем импланты в каждой части тела
-	for(var/zone in list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
-		var/obj/item/bodypart/part = patient.get_bodypart(zone)
-		if(!part)
-			continue
+	// Импланты хранятся в patient.implants (не в bodypart.contents).
+	// Для IPC имплантов используем installed_in_zone для определения зоны.
+	for(var/obj/item/implant/imp in patient.implants)
+		var/implant_name = imp.name
+		var/implant_status = "Активен"
+		var/implant_color = "good"
 
-		// Ищем все импланты в этой части
-		for(var/obj/item/implant/imp in part.contents)
-			// Определяем тип импланта и его статус
-			var/implant_name = imp.name
-			var/implant_location = part.plaintext_zone
-			var/implant_status = "Активен"
-			var/implant_color = "good"
+		// Определяем зону установки
+		var/implant_location = "Неизвестно"
+		if(istype(imp, /obj/item/implant/ipc))
+			var/obj/item/implant/ipc/ipc_imp = imp
+			if(ipc_imp.installed_in_zone)
+				var/obj/item/bodypart/part = patient.get_bodypart(ipc_imp.installed_in_zone)
+				implant_location = part ? part.plaintext_zone : ipc_imp.installed_in_zone
 
-			// Для IPC имплантов проверяем специфичные состояния
-			if(istype(imp, /obj/item/implant/ipc))
-				var/obj/item/implant/ipc/ipc_imp = imp
+			// Reactive Repair
+			if(istype(ipc_imp, /obj/item/implant/ipc/reactive_repair))
+				var/obj/item/implant/ipc/reactive_repair/rr = ipc_imp
+				if(rr.repair_active)
+					implant_status = "Активно лечит"
+					implant_color = "average"
+				else
+					implant_status = "Ожидание"
 
-				// Reactive Repair
-				if(istype(ipc_imp, /obj/item/implant/ipc/reactive_repair))
-					var/obj/item/implant/ipc/reactive_repair/rr = ipc_imp
-					if(rr.repair_active)
-						implant_status = "Активно лечит"
-						implant_color = "average"
-					else
-						implant_status = "Ожидание"
+			// Magnetic Leg
+			else if(istype(ipc_imp, /obj/item/implant/ipc/magnetic_leg))
+				var/obj/item/implant/ipc/magnetic_leg/ml = ipc_imp
+				if(ml.magboots_active)
+					implant_status = "Магниты активны"
+					implant_color = "average"
+				else
+					implant_status = "Магниты отключены"
 
-				// Magnetic Leg
-				else if(istype(ipc_imp, /obj/item/implant/ipc/magnetic_leg))
-					var/obj/item/implant/ipc/magnetic_leg/ml = ipc_imp
-					if(ml.magboots_active)
-						implant_status = "Магниты активны"
-						implant_color = "average"
-					else
-						implant_status = "Магниты отключены"
+		else if(istype(imp, /obj/item/implant/emp_protector))
+			var/obj/item/implant/emp_protector/ep = imp
+			implant_location = ep.installed_in_zone ? ep.installed_in_zone : "Грудь"
 
-			implants += list(list(
-				"name" = implant_name,
-				"location" = implant_location,
-				"status" = implant_status,
-				"status_color" = implant_color
-			))
+		implants += list(list(
+			"name" = implant_name,
+			"location" = implant_location,
+			"status" = implant_status,
+			"status_color" = implant_color
+		))
 
 	if(implants.len == 0)
 		implants += list(list(
@@ -716,10 +717,12 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 
 	return system_messages
 
-/obj/machinery/computer/operating/synthetic/ui_act(action, list/params)
+/obj/machinery/computer/operating/synthetic/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
 		return
+
+	var/mob/user = ui.user
 
 	switch(action)
 		if("change_zone")
@@ -742,7 +745,7 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 				return FALSE
 			var/datum/ipc_virus/target_virus = ipc_species.ipc_os.viruses[virus_index]
 			if(ipc_species.ipc_os.remove_virus_by_roboticist(target_virus))
-				to_chat(usr, span_notice("Вирус успешно удалён из системы пациента."))
+				to_chat(user, span_notice("Вирус успешно удалён из системы пациента."))
 				to_chat(patient, span_notice("ОС: Обнаружено внешнее вмешательство. Вирус удалён роботехником."))
 			return TRUE
 
@@ -756,7 +759,7 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			var/datum/species/ipc/ipc_species = patient.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
-			ipc_species.ipc_os.request_remote_access(usr)
+			ipc_species.ipc_os.request_remote_access(user)
 			return TRUE
 
 		if("login_os_password")
@@ -772,7 +775,7 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			var/input_password = params["password"]
 			if(!input_password)
 				return FALSE
-			ipc_species.ipc_os.remote_login(usr, input_password)
+			ipc_species.ipc_os.remote_login(user, input_password)
 			return TRUE
 
 		if("disconnect_os_remote")
@@ -813,7 +816,7 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 					new_virus = new /datum/ipc_virus/neural_hijack()
 			if(new_virus)
 				ipc_species.ipc_os.infect(new_virus)
-				to_chat(usr, span_notice("Тестовый вирус внедрён."))
+				to_chat(user, span_notice("Тестовый вирус внедрён."))
 			return TRUE
 
 // ============================================

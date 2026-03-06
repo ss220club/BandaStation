@@ -9,11 +9,16 @@
 #include "code/human/species_type/skrell.dm"
 #include "code/human/species_type/tajaran.dm"
 #include "code/human/species_type/vulpkanin.dm"
+#include "code/human/species_type/ipc_generations.dm"
 #include "code/human/species_type/ipc.dm"
+#include "code/human/species_type/ipc_gen1_modular.dm"
+#include "code/human/species_type/ipc_gen3_humanity.dm"
+#include "code/human/species_type/ipc_gen4_cyberdeck.dm"
 
 #include "code/living/ipc_hud.dm"
 #include "code/living/ipc_actionspeed.dm"
 #include "code/living/ipc_abilities.dm"
+#include "code/living/ipc_quirk_block.dm"
 
 #include "code/human/sprite_accessories/skrell/skrell_head_tentacles.dm"
 
@@ -75,6 +80,7 @@
 #include "code/preferences/species_features/Ipc/ipc_brain_body_modification.dm"
 #include "code/preferences/species_features/Ipc/ipc_customization_preference.dm"
 #include "code/preferences/species_features/Ipc/ipc_customization_middleware.dm"
+#include "code/preferences/species_features/Ipc/ipc_cosmetics.dm"
 
 #include "code/reagents/mutation.dm"
 
@@ -82,6 +88,7 @@
 #include "code/surgery/bodyparts/tajaran_bodyparts.dm"
 #include "code/surgery/bodyparts/vulpkanin_bodyparts.dm"
 #include "code/surgery/bodyparts/ipc_bodyparts.dm"
+#include "code/surgery/bodyparts/ipc_branded_bodyparts.dm"
 
 #include "code/surgery/organs/external/skrell_external.dm"
 #include "code/surgery/organs/external/vulpkanin_external.dm"

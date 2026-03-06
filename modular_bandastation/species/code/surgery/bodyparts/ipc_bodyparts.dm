@@ -53,7 +53,7 @@
 	icon_state = "ipc_head"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
-	head_flags = HEAD_LIPS|HEAD_DEBRAIN
+	head_flags = HEAD_LIPS|HEAD_DEBRAIN|HEAD_HAIR
 	is_dimorphic = FALSE
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_IPC
@@ -103,10 +103,17 @@
 	max_damage = 70
 
 	var/grip_strength = 1.0
+	var/chassis_type = "Unbranded"
 
 	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
+
+/obj/item/bodypart/arm/left/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+	. = ..()
+	if(!. || lazy)
+		return
+	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // ПРАВАЯ РУКА
@@ -125,10 +132,17 @@
 	max_damage = 70
 
 	var/grip_strength = 1.0
+	var/chassis_type = "Unbranded"
 
 	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
+
+/obj/item/bodypart/arm/right/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+	. = ..()
+	if(!. || lazy)
+		return
+	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // ЛЕВАЯ НОГА
@@ -146,9 +160,17 @@
 	bodytype = BODYTYPE_IPC
 	max_damage = 70
 
+	var/chassis_type = "Unbranded"
+
 	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
+
+/obj/item/bodypart/leg/left/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+	. = ..()
+	if(!. || lazy)
+		return
+	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // ПРАВАЯ НОГА
@@ -166,9 +188,17 @@
 	bodytype = BODYTYPE_IPC
 	max_damage = 70
 
+	var/chassis_type = "Unbranded"
+
 	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
+
+/obj/item/bodypart/leg/right/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+	. = ..()
+	if(!. || lazy)
+		return
+	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // УРОН И СПАРКИ
@@ -262,6 +292,9 @@
 	playsound(get_turf(H), 'sound/items/deconstruct.ogg', 50, TRUE)
 	do_sparks(2, TRUE, H)
 	to_chat(H, span_notice("Системная диагностика: [name] подключена и функционирует нормально."))
+	// Обновляем суффикс пола в icon_state для правильного отображения
+	var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
+	icon_state = "ipc_chest_[gender_suffix]"
 	return TRUE
 
 /obj/item/bodypart/head/ipc/try_attach_limb(mob/living/carbon/human/H, special)

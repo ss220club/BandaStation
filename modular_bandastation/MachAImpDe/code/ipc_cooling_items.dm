@@ -9,8 +9,8 @@
 /obj/item/ipc_thermalpaste
 	name = "thermal paste applicator"
 	desc = "Специализированная термопаста для IPC. Обеспечивает постоянное охлаждение 1°C/сек в течение 5-10 минут. Одноразовая."
-	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
-	icon_state = "termapasta"
+	icon = 'modular_bandastation/MachAImpDe/icons/stack_medical.dmi'
+	icon_state = "termopaste_tube"
 	w_class = WEIGHT_CLASS_TINY
 	var/duration_min = 5 MINUTES
 	var/duration_max = 10 MINUTES
@@ -63,8 +63,8 @@
 /obj/item/ipc_coolingblock
 	name = "portable cooling block"
 	desc = "Высокотехнологичное устройство активного охлаждения для IPC. Обеспечивает активное охлаждение 1°C/сек в течение 5 минут."
-	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
-	icon_state = "ColdBlock"
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "ipc_cooler"
 	w_class = WEIGHT_CLASS_SMALL
 	var/max_charges = 3
 	var/charges = 3
@@ -141,8 +141,8 @@
 /obj/item/implant/ipc_cooling_system
 	name = "thermal stabilizer implant"
 	desc = "Улучшенная система охлаждения для IPC. При имплантации обеспечивает постоянное охлаждение 1°C/сек навсегда."
-	icon = 'modular_bandastation/MachAImpDe/icons/ImplantsAndItems.dmi'
-	icon_state = "TermaStabImp"
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "ipc_cooler"
 	w_class = WEIGHT_CLASS_TINY
 
 /obj/item/implant/ipc_cooling_system/get_data()

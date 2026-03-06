@@ -21,8 +21,11 @@
 	var/datum/species/ipc/S = H.dna.species
 	S.ipc_brand_key = brand_key
 
-	// DEBUG: Выводим информацию о применении бренда
-	to_chat(H, span_boldnotice("DEBUG: Применяется бренд [brand_key]"))
+	// Обновляем тему ОС если уже инициализирована (ОС создаётся до применения бренда)
+	if(S.ipc_os)
+		S.ipc_os.brand_key = brand_key
+		S.ipc_os.os_name = get_ipc_os_name(brand_key)
+		S.ipc_os.theme_color = get_ipc_os_theme_color(brand_key)
 
 	if(brand_key == "hef")
 		// HEF: каждая часть тела может быть от разного производителя.
@@ -33,10 +36,8 @@
 		// Обычный бренд: один визуальный префикс на всё тело
 		var/datum/ipc_brand/visual_brand = get_ipc_brand(brand_key)
 		if(!visual_brand)
-			to_chat(H, span_warning("DEBUG: Не удалось получить бренд [brand_key]!"))
 			return FALSE
 		S.ipc_visual_brand_key = brand_key
-		to_chat(H, span_notice("DEBUG: Применяем визуал с prefix=[visual_brand.visual_prefix], custom_icon=[visual_brand.custom_icon_file ? "YES" : "NO"]"))
 		apply_ipc_visual_prefix(H, visual_brand.visual_prefix, visual_brand.custom_icon_file)
 		qdel(visual_brand)
 
@@ -64,143 +65,196 @@
 	var/datum/ipc_brand/brand = get_ipc_brand(brand_key)
 	if(!brand)
 		return
-	var/prefix = brand.visual_prefix
 	var/custom_icon = brand.custom_icon_file
 	qdel(brand)
 
+	// Все файлы брендированных спрайтов используют ipc_* имена состояний.
+	// Меняем icon файл если есть custom_icon, icon_state всегда ipc_*.
 	switch(zone)
 		if(BODY_ZONE_HEAD)
 			var/obj/item/bodypart/head/ipc/head = H.get_bodypart(BODY_ZONE_HEAD)
-			if(head)
-				if(custom_icon)
-					head.icon = custom_icon
-					head.icon_static = custom_icon  // Важно для bodyparts!
-					head.icon_greyscale = null
-				head.icon_state = "[prefix]_head"
+			if(head && custom_icon)
+				head.icon = custom_icon
+				head.icon_static = custom_icon
+				head.icon_greyscale = null
+				head.icon_state = "ipc_head"
 		if(BODY_ZONE_CHEST)
 			var/obj/item/bodypart/chest/ipc/chest = H.get_bodypart(BODY_ZONE_CHEST)
-			if(chest)
-				if(custom_icon)
-					chest.icon = custom_icon
-					chest.icon_static = custom_icon
-					chest.icon_greyscale = null
+			if(chest && custom_icon)
+				chest.icon = custom_icon
+				chest.icon_static = custom_icon
+				chest.icon_greyscale = null
 				var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
-				chest.icon_state = "[prefix]_chest_[gender_suffix]"
+				chest.icon_state = "ipc_chest_[gender_suffix]"
 		if(BODY_ZONE_L_ARM)
 			var/obj/item/bodypart/arm/left/ipc/l_arm = H.get_bodypart(BODY_ZONE_L_ARM)
-			if(l_arm)
-				if(custom_icon)
-					l_arm.icon = custom_icon
-					l_arm.icon_static = custom_icon
-					l_arm.icon_greyscale = null
-				l_arm.icon_state = "[prefix]_l_arm"
+			if(l_arm && custom_icon)
+				l_arm.icon = custom_icon
+				l_arm.icon_static = custom_icon
+				l_arm.icon_greyscale = null
+				l_arm.icon_state = "ipc_l_arm"
 		if(BODY_ZONE_R_ARM)
 			var/obj/item/bodypart/arm/right/ipc/r_arm = H.get_bodypart(BODY_ZONE_R_ARM)
-			if(r_arm)
-				if(custom_icon)
-					r_arm.icon = custom_icon
-					r_arm.icon_static = custom_icon
-					r_arm.icon_greyscale = null
-				r_arm.icon_state = "[prefix]_r_arm"
+			if(r_arm && custom_icon)
+				r_arm.icon = custom_icon
+				r_arm.icon_static = custom_icon
+				r_arm.icon_greyscale = null
+				r_arm.icon_state = "ipc_r_arm"
 		if(BODY_ZONE_L_LEG)
 			var/obj/item/bodypart/leg/left/ipc/l_leg = H.get_bodypart(BODY_ZONE_L_LEG)
-			if(l_leg)
-				if(custom_icon)
-					l_leg.icon = custom_icon
-					l_leg.icon_static = custom_icon
-					l_leg.icon_greyscale = null
-				l_leg.icon_state = "[prefix]_l_leg"
+			if(l_leg && custom_icon)
+				l_leg.icon = custom_icon
+				l_leg.icon_static = custom_icon
+				l_leg.icon_greyscale = null
+				l_leg.icon_state = "ipc_l_leg"
 		if(BODY_ZONE_R_LEG)
 			var/obj/item/bodypart/leg/right/ipc/r_leg = H.get_bodypart(BODY_ZONE_R_LEG)
-			if(r_leg)
-				if(custom_icon)
-					r_leg.icon = custom_icon
-					r_leg.icon_static = custom_icon
-					r_leg.icon_greyscale = null
-				r_leg.icon_state = "[prefix]_r_leg"
+			if(r_leg && custom_icon)
+				r_leg.icon = custom_icon
+				r_leg.icon_static = custom_icon
+				r_leg.icon_greyscale = null
+				r_leg.icon_state = "ipc_r_leg"
 
-/// Устанавливает icon_state на всех частях тела по визуальному префиксу бренда
+/// Устанавливает icon/icon_state на всех частях тела по визуальному пресету бренда.
+/// Все файлы брендированных спрайтов используют ipc_* имена состояний.
+/// Для брендов без custom_icon_file уникальных спрайтов нет — визуал не меняется.
 /proc/apply_ipc_visual_prefix(mob/living/carbon/human/H, prefix, custom_icon_file = null)
-	to_chat(H, span_boldwarning("DEBUG VISUAL: apply_ipc_visual_prefix вызван! prefix=[prefix], custom=[custom_icon_file ? "YES" : "NO"]"))
+	// Без кастомного файла спрайтов — менять нечего
+	if(!custom_icon_file)
+		H.update_body()
+		H.update_body_parts()
+		return
 
 	// Грудь — зависит от пола
 	var/obj/item/bodypart/chest/ipc/chest = H.get_bodypart(BODY_ZONE_CHEST)
-	to_chat(H, span_notice("DEBUG VISUAL: chest bodypart = [chest ? "НАЙДЕН" : "НЕ НАЙДЕН"]"))
 	if(chest)
-		to_chat(H, span_notice("DEBUG VISUAL: chest.icon было = [chest.icon]"))
-		to_chat(H, span_notice("DEBUG VISUAL: chest.icon_static было = [chest.icon_static]"))
-		to_chat(H, span_notice("DEBUG VISUAL: chest.icon_greyscale было = [chest.icon_greyscale]"))
-		if(custom_icon_file)
-			chest.icon = custom_icon_file
-			chest.icon_static = custom_icon_file  // Важно для bodyparts!
-			chest.icon_greyscale = null  // Отключаем greyscale систему для кастомных иконок
-			to_chat(H, span_notice("DEBUG VISUAL: chest обновлён на custom_icon_file!"))
-			to_chat(H, span_notice("DEBUG VISUAL: chest.icon стало = [chest.icon]"))
-			to_chat(H, span_notice("DEBUG VISUAL: chest.icon_static стало = [chest.icon_static]"))
-			to_chat(H, span_notice("DEBUG VISUAL: chest.icon_greyscale стало = [chest.icon_greyscale]"))
+		chest.icon = custom_icon_file
+		chest.icon_static = custom_icon_file
+		chest.icon_greyscale = null
 		var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
-		chest.icon_state = "[prefix]_chest_[gender_suffix]"
-		to_chat(H, span_notice("DEBUG VISUAL: chest.icon_state установлен = [chest.icon_state]"))
+		chest.icon_state = "ipc_chest_[gender_suffix]"
 
 	// Голова
 	var/obj/item/bodypart/head/ipc/head = H.get_bodypart(BODY_ZONE_HEAD)
-	to_chat(H, span_notice("DEBUG VISUAL: head bodypart = [head ? "НАЙДЕН" : "НЕ НАЙДЕН"]"))
 	if(head)
-		if(custom_icon_file)
-			head.icon = custom_icon_file
-			head.icon_static = custom_icon_file
-			head.icon_greyscale = null
-			to_chat(H, span_notice("DEBUG VISUAL: head обновлён на custom_icon_file!"))
-		head.icon_state = "[prefix]_head"
-		to_chat(H, span_notice("DEBUG VISUAL: head.icon_state установлен = [head.icon_state]"))
+		head.icon = custom_icon_file
+		head.icon_static = custom_icon_file
+		head.icon_greyscale = null
+		head.icon_state = "ipc_head"
 
 	// Левая рука
 	var/obj/item/bodypart/arm/left/ipc/l_arm = H.get_bodypart(BODY_ZONE_L_ARM)
-	to_chat(H, span_notice("DEBUG VISUAL: l_arm bodypart = [l_arm ? "НАЙДЕН" : "НЕ НАЙДЕН"]"))
 	if(l_arm)
-		if(custom_icon_file)
-			l_arm.icon = custom_icon_file
-			l_arm.icon_static = custom_icon_file
-			l_arm.icon_greyscale = null
-			to_chat(H, span_notice("DEBUG VISUAL: l_arm обновлён на custom_icon_file!"))
-		l_arm.icon_state = "[prefix]_l_arm"
-		to_chat(H, span_notice("DEBUG VISUAL: l_arm.icon_state установлен = [l_arm.icon_state]"))
+		l_arm.icon = custom_icon_file
+		l_arm.icon_static = custom_icon_file
+		l_arm.icon_greyscale = null
+		l_arm.icon_state = "ipc_l_arm"
 
 	// Правая рука
 	var/obj/item/bodypart/arm/right/ipc/r_arm = H.get_bodypart(BODY_ZONE_R_ARM)
 	if(r_arm)
-		if(custom_icon_file)
-			r_arm.icon = custom_icon_file
-			r_arm.icon_static = custom_icon_file
-			r_arm.icon_greyscale = null
-		r_arm.icon_state = "[prefix]_r_arm"
+		r_arm.icon = custom_icon_file
+		r_arm.icon_static = custom_icon_file
+		r_arm.icon_greyscale = null
+		r_arm.icon_state = "ipc_r_arm"
 
 	// Левая нога
 	var/obj/item/bodypart/leg/left/ipc/l_leg = H.get_bodypart(BODY_ZONE_L_LEG)
 	if(l_leg)
-		if(custom_icon_file)
-			l_leg.icon = custom_icon_file
-			l_leg.icon_static = custom_icon_file
-			l_leg.icon_greyscale = null
-		l_leg.icon_state = "[prefix]_l_leg"
+		l_leg.icon = custom_icon_file
+		l_leg.icon_static = custom_icon_file
+		l_leg.icon_greyscale = null
+		l_leg.icon_state = "ipc_l_leg"
 
 	// Правая нога
 	var/obj/item/bodypart/leg/right/ipc/r_leg = H.get_bodypart(BODY_ZONE_R_LEG)
-	to_chat(H, span_notice("DEBUG VISUAL: r_leg bodypart = [r_leg ? "НАЙДЕН" : "НЕ НАЙДЕН"]"))
 	if(r_leg)
-		if(custom_icon_file)
-			r_leg.icon = custom_icon_file
-			r_leg.icon_static = custom_icon_file
-			r_leg.icon_greyscale = null
-			to_chat(H, span_notice("DEBUG VISUAL: r_leg обновлён на custom_icon_file!"))
-		r_leg.icon_state = "[prefix]_r_leg"
-		to_chat(H, span_notice("DEBUG VISUAL: r_leg.icon_state установлен = [r_leg.icon_state]"))
+		r_leg.icon = custom_icon_file
+		r_leg.icon_static = custom_icon_file
+		r_leg.icon_greyscale = null
+		r_leg.icon_state = "ipc_r_leg"
 
-	// Обновляем внешность моба целиком
-	to_chat(H, span_boldnotice("DEBUG VISUAL: Вызываем H.update_body() и H.update_body_parts()!"))
 	H.update_body()
 	H.update_body_parts()
-	to_chat(H, span_boldnotice("DEBUG VISUAL: apply_ipc_visual_prefix ЗАВЕРШЁН!"))
+
+// ============================================
+// ОПРЕДЕЛЕНИЕ БРЕНДА ПРИ СБОРКЕ ШАССИ
+// ============================================
+// Вызывается автоматически при прикреплении любой
+// небашенной конечности IPC (рука/нога).
+// Если все 5 небашенных частей (грудь + 2 руки + 2 ноги)
+// принадлежат одному бренду — применяем этот бренд.
+// ============================================
+
+/// Конвертирует chassis_type из bodypart в brand_key для apply_ipc_brand
+/proc/chassis_type_to_brand_key(chassis_type)
+	switch(chassis_type)
+		if("Morpheus")      return "morpheus"
+		if("Etamin")        return "etamin"
+		if("Bishop")        return "bishop"
+		if("Hesphiastos")   return "hesphiastos"
+		if("Ward-Takahashi") return "ward_takahashi"
+		if("Xion")          return "xion"
+		if("Zeng-Hu")       return "zeng_hu"
+		if("Shellguard")    return "shellguard"
+		if("Cybersun")      return "cybersun"
+	return "unbranded"
+
+/// Возвращает chassis_type для IPC-конечности (null если не IPC bodypart)
+/proc/ipc_get_bodypart_chassis_type(obj/item/bodypart/part)
+	if(istype(part, /obj/item/bodypart/chest/ipc))
+		var/obj/item/bodypart/chest/ipc/P = part
+		return P.chassis_type
+	if(istype(part, /obj/item/bodypart/arm/left/ipc))
+		var/obj/item/bodypart/arm/left/ipc/P = part
+		return P.chassis_type
+	if(istype(part, /obj/item/bodypart/arm/right/ipc))
+		var/obj/item/bodypart/arm/right/ipc/P = part
+		return P.chassis_type
+	if(istype(part, /obj/item/bodypart/leg/left/ipc))
+		var/obj/item/bodypart/leg/left/ipc/P = part
+		return P.chassis_type
+	if(istype(part, /obj/item/bodypart/leg/right/ipc))
+		var/obj/item/bodypart/leg/right/ipc/P = part
+		return P.chassis_type
+	return null
+
+/// Проверяет собранное шасси IPC и применяет бренд если все небашенные части совпадают.
+/// Вызывается из try_attach_limb у каждой небашенной конечности IPC.
+/proc/ipc_check_assembly_brand(mob/living/carbon/human/H)
+	if(!H || !istype(H.dna?.species, /datum/species/ipc))
+		return
+
+	var/list/required_zones = list(
+		BODY_ZONE_CHEST,
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_L_LEG,
+		BODY_ZONE_R_LEG,
+	)
+
+	var/detected_brand = null
+	var/all_match = TRUE
+
+	for(var/zone in required_zones)
+		var/obj/item/bodypart/part = H.get_bodypart(zone)
+		if(!part)
+			return  // Не все части ещё установлены
+
+		var/part_chassis_type = ipc_get_bodypart_chassis_type(part)
+		if(isnull(part_chassis_type))
+			return  // Не IPC bodypart
+
+		if(isnull(detected_brand))
+			detected_brand = part_chassis_type
+		else if(detected_brand != part_chassis_type)
+			all_match = FALSE
+			break
+
+	// Все 5 частей установлены — применяем бренд
+	var/brand_key = (all_match && detected_brand) ? chassis_type_to_brand_key(detected_brand) : "unbranded"
+	apply_ipc_brand(H, brand_key)
+	apply_ipc_brand_effects(H, brand_key)
 
 // ============================================
 // ВАЛИДАЦИЯ БРЕНДА ПО ПРОФЕССИИ

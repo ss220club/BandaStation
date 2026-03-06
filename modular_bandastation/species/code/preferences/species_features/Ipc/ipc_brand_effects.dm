@@ -13,6 +13,11 @@
 // Должен быть в своём #define файле проекта, но для компиляции определяем здесь.
 #define TRAIT_IPC_NO_COMBAT_IMPLANTS "ipc_no_combat_implants"
 
+/datum/actionspeed_modifier/ipc_etamin
+	id = "ipc_etamin"
+	variable = FALSE
+	multiplicative_slowdown = -0.1  // +10% скорости взаимодействия
+
 /// Главная точка входа — применяет эффекты бренда
 /proc/apply_ipc_brand_effects(mob/living/carbon/human/H, brand_key)
 	if(!H || !istype(H.dna?.species, /datum/species/ipc))
@@ -46,12 +51,17 @@
 // ============================================
 // 1. MORPHEUS CYBERKINETICS
 // ============================================
-// Расширенные слоты для имплантов и органов
+// Ускоренный саморемонт (быстрее тикает + больше лечения за тик)
+// Сниженная уязвимость к ЭМП (emp_vulnerability 2 -> 1)
 /proc/apply_effect_morpheus(mob/living/carbon/human/H)
-	// TODO: Реализовать расширение слотов имплантов и органов
-	// Предположительно через увеличение max слотов на species или через trait
-	// FIX: убран bare `pass` — пустое тело proc и без него компилируется корректно
-	return
+	var/datum/species/ipc/S = H.dna.species
+	if(!S)
+		return
+	// Ускоренный саморемонт: задержка 100 -> 60, лечение за тик 0.5 -> 0.9
+	S.self_repair_delay = 60
+	S.self_repair_amount = 0.9
+	// Сниженный урон от ЭМП
+	S.emp_vulnerability = 1
 
 // ============================================
 // 2. ETAMIN INDUSTRY
@@ -61,11 +71,11 @@
 // Термическая релаксация понижена
 /proc/apply_effect_etamin(mob/living/carbon/human/H)
 	// +10% скорости взаимодействия
-	// TODO: Реализовать через модификатор do_after или аналогичный
+	H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_etamin)
 	// Термическая релаксация понижена
 	var/datum/species/ipc/S = H.dna.species
 	if(S)
-		S.ipc_thermal_relaxation_mod = -0.2  // TODO: добавить эту переменную на species и использовать в температурной логике
+		S.ipc_thermal_relaxation_mod = -0.2  // TODO: интегрировать в температурную логику ipc_life
 
 // ============================================
 // 3. BISHOP CYBERNETICS
@@ -108,8 +118,10 @@
 			S.ipc_chassis_modifiers = list()
 		S.ipc_chassis_modifiers["melee_damage"] = 1.1
 
-	// Имплант щита в случайной руке - TODO при раундстарте
-	// Требует реализации системы имплантов
+	// ЭМП-протектор раундстартом (если ещё не установлен)
+	if(!(locate(/obj/item/implant/emp_protector) in H.implants))
+		var/obj/item/implant/emp_protector/impl = new()
+		impl.implant(H, BODY_ZONE_CHEST, null, TRUE, TRUE)
 
 // ============================================
 // 5. WARD-TAKAHASHI
@@ -175,12 +187,12 @@
 // Биогенератор раундстартом
 // Синт кожа с особенностями лечения
 /proc/apply_effect_zeng_hu(mob/living/carbon/human/H)
-	// Биогенератор — добавляем в инвентарь или встроенно
-	// TODO: Реализовать биогенератор как встроенный имплант или предмет раундстарта
+	// Биогенератор — встроенный имплант раундстартом (если ещё не установлен)
+	if(!(locate(/obj/item/implant/ipc/bio_generator) in H.implants))
+		var/obj/item/implant/ipc/bio_generator/impl = new()
+		impl.implant(H, BODY_ZONE_CHEST, null, TRUE, TRUE)
 	// Синт кожа
 	// TODO: Реализовать через trait/модификатор лечения синт плоти
-	// FIX: убран bare `pass`
-	return
 
 // ============================================
 // 8. SHELLGUARD MUNITIONS
@@ -222,8 +234,10 @@
 			ipc_bp.brute_reduction = 0.5
 			ipc_bp.burn_reduction = 0.33
 
-	// Одноразовый ЭМП-протектор - TODO при раундстарте
-	// Требует реализации системы имплантов
+	// ЭМП-протектор раундстартом (если ещё не установлен)
+	if(!(locate(/obj/item/implant/emp_protector) in H.implants))
+		var/obj/item/implant/emp_protector/impl = new()
+		impl.implant(H, BODY_ZONE_CHEST, null, TRUE, TRUE)
 
 // ============================================
 // 9. UNBRANDED

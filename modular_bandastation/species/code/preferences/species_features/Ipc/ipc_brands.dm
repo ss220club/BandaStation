@@ -50,6 +50,7 @@
 	desc = "Расширенные слоты для имплантов и органов."
 	brand_key = "morpheus"
 	visual_prefix = "morpheus"
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_morpheus.dmi'
 
 // 2. ETAMIN INDUSTRY
 /datum/ipc_brand/etamin
@@ -59,6 +60,8 @@
 	visual_prefix = "etamin"
 	allowed_departments = list(DEPARTMENT_BITFLAG_SECURITY)
 	requires_module = TRUE
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_etamin.dmi'
+
 
 // 3. BISHOP CYBERNETICS
 /datum/ipc_brand/bishop
@@ -76,6 +79,7 @@
 	brand_key = "hesphiastos"
 	visual_prefix = "hesphiastos"
 	allowed_departments = list(DEPARTMENT_BITFLAG_SECURITY)
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_hephaestus.dmi'
 
 // 5. WARD-TAKAHASHI
 /datum/ipc_brand/ward_takahashi
@@ -83,7 +87,7 @@
 	desc = "Ускоренный саморемонт. Увеличенный срок работы батарейки. Уменьшенное количество слотов имплантов."
 	brand_key = "ward_takahashi"
 	visual_prefix = "ward"
-
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_wardtakahashi.dmi'
 // 6. XION MANUFACTURING GROUP
 /datum/ipc_brand/xion
 	name = "Xion Manufacturing Group"
@@ -98,6 +102,7 @@
 	desc = "Биогенератор раундстартом. Синт кожа с особенностями лечения. При ожогах синт плоть менее эффективна НаноПастой. При брут — швы с синтплотью + нанопастой."
 	brand_key = "zeng_hu"
 	visual_prefix = "zenghu"
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_zenghu.dmi'
 
 // 8. SHELLGUARD MUNITIONS
 /datum/ipc_brand/shellguard
@@ -105,6 +110,7 @@
 	desc = "Резист к бруту 2x от стандарта. Берн резист 1.5x. Одноразовый ЭМП-протектор (вытащить и заменить нельзя нельзя)."
 	brand_key = "shellguard"
 	visual_prefix = "shellguard"
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_shellguard.dmi'
 	allowed_departments = list(DEPARTMENT_BITFLAG_SECURITY)
 
 // 9. UNBRANDED
@@ -121,6 +127,7 @@
 	brand_key = "cybersun"
 	visual_prefix = "cybersun"
 	requires_module = TRUE
+	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_cybersun.dmi'
 
 // 11. HEF
 // HEF не имеет собственного визуала — он берётся из фичи ipc_hef_visual

@@ -43,6 +43,7 @@
 		TRAIT_LIMBATTACHMENT,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_NOHUNGER,  // IPC не едят, нет HUD голода
+		TRAIT_NOBLOOD,   // ИПС не имеет крови (масло не является кровью для игровых механик)
 	)
 
 	// Урон модификаторы
@@ -120,6 +121,50 @@
 	// Список модификаторов: "overheat_rate", "healing_time", "melee_damage", "implant_slots", и т.д.
 	var/list/ipc_chassis_modifiers = list()
 
+	// ---- Косметика ----
+	/// Текущее выражение экрана (задаётся только в игре через абилку, не сохраняется)
+	var/ipc_face_state = ""
+	/// Зона установки зарядного порта (задаётся из настроек персонажа)
+	var/ipc_charger_arm_zone = BODY_ZONE_L_ARM
+
+	// ---- Поколение ----
+	/// Поколение КПБ: gen1_modular / gen2_standard / gen3_humanity / gen4_cyberdeck
+	var/ipc_generation = IPC_GEN_STANDARD
+	/// Для gen1: модуль профессии (medical / engineering / security / research)
+	var/ipc_gen1_module = IPC_MODULE_SECURITY
+
+	// ---- Gen 1: Переключение модуля ----
+	/// Целевой модуль во время переконфигурации (пуст если не идёт)
+	var/module_switch_target = ""
+	/// Время начала переконфигурации (world.time)
+	var/module_switch_start_time = 0
+	/// Последний порог предупреждения (секунд до конца) чтобы не дублировать сообщения
+	var/module_switch_last_threshold = 999
+
+	// ---- Gen 3: Человечность ----
+	/// Текущий уровень человечности (0-100)
+	var/humanity = 100
+	/// Время последнего снижения человечности (world.time)
+	var/last_humanity_decay_time = 0
+	/// Препарат активен — заморозка снижения
+	var/humanity_drug_active = FALSE
+	/// Время окончания действия препарата
+	var/humanity_drug_end_time = 0
+	/// Количество использований препарата (для зависимости)
+	var/humanity_drug_uses = 0
+
+	// ---- Gen 4: Кибердека ----
+	/// Тепловая нагрузка кибердеки (0-100)
+	var/cyberdeck_heat = 0
+	/// Кибердека отключена (ЭМИ)
+	var/cyberdeck_disabled = FALSE
+	/// Время повторного включения кибердеки после ЭМИ
+	var/cyberdeck_reenable_time = 0
+	/// Время последнего рассеивания тепла
+	var/last_heat_dissipate_time = 0
+	/// Кибердека в состоянии перегрева
+	var/cyberdeck_overheated = FALSE
+
 /datum/species/ipc/get_species_description()
 	return "IPC (Integrated Positronic Chassis) — искусственные синтетики на основе позитронного ядра. \
 	Их корпус полностью заменяет биологическую плоть — это модульная кибернетическая система, \
@@ -162,6 +207,15 @@
 	var/datum/action/cooldown/ipc_overclock/overclock = new()
 	overclock.Grant(H)
 
+	// Выдаём встроенный зарядный порт в левую руку по умолчанию.
+	// Настройка руки через ipc_charger_arm preference переставит его при загрузке.
+	var/obj/item/implant/ipc/charger/charger_impl = new()
+	charger_impl.implant(H, BODY_ZONE_L_ARM, null, TRUE, TRUE)
+
+	// Регистрируем обработчик применения настроек персонажа
+	// (используется для установки брендовых имплантов в нужные руки после загрузки всех настроек)
+	RegisterSignal(H, COMSIG_HUMAN_PREFS_APPLIED, PROC_REF(on_prefs_applied))
+
 	// Регистрируем обработчик электрошока
 	RegisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT, PROC_REF(on_electrocute))
 
@@ -175,6 +229,14 @@
 	var/datum/action/innate/ipc_open_os/os_action = new()
 	os_action.os_system = ipc_os
 	os_action.Grant(H)
+
+	// Абилка смены экрана — только для брендов, поддерживающих экраны
+	if(ipc_brand_key != "zeng_hu" && ipc_brand_key != "cybersun")
+		var/datum/action/innate/ipc_change_face/face_action = new()
+		face_action.Grant(H)
+
+	// Применяем механики поколения
+	apply_generation(H)
 
 	// ПРИМЕЧАНИЕ:
 	// - Chassis brand применяется через body_modifications автоматически
@@ -196,11 +258,51 @@
 	if(os_action)
 		os_action.Remove(H)
 
+	// Удаляем кнопку смены экрана
+	var/datum/action/innate/ipc_change_face/face_action = locate() in H.actions
+	if(face_action)
+		face_action.Remove(H)
+
+	// Убираем механики поколения
+	remove_generation(H)
+
 	// Удаляем ОС
 	QDEL_NULL(ipc_os)
 
 	// Отменяем регистрацию сигналов
-	UnregisterSignal(H, COMSIG_LIVING_ELECTROCUTE_ACT)
+	UnregisterSignal(H, list(COMSIG_LIVING_ELECTROCUTE_ACT, COMSIG_HUMAN_PREFS_APPLIED))
+
+/// Вызывается после загрузки всех настроек персонажа.
+/// К этому моменту все preferences уже применены (ipc_generation, ipc_preset_os_password и т.д.).
+/datum/species/ipc/proc/on_prefs_applied(mob/living/carbon/human/H)
+	SIGNAL_HANDLER
+
+	// ---- Переприменяем поколение ----
+	// on_species_gain вызывается ДО apply_to_human, поэтому apply_generation
+	// там срабатывает с дефолтным значением (gen2_standard).
+	// Здесь мы убираем дефолтное поколение и применяем нужное.
+	remove_generation(H)
+	apply_generation(H)
+
+	// ---- Применяем пароль ОС ----
+	// on_species_gain создаёт ipc_os до того как apply_to_human выставил пароль.
+	// Применяем пароль здесь, когда он уже известен.
+	if(ipc_os && ipc_preset_os_password && length(ipc_preset_os_password) >= 1)
+		ipc_os.set_password(ipc_preset_os_password)
+		ipc_os.logged_in = TRUE
+
+	// Для Shellguard: силовой щит в руку, противоположную зарядному порту
+	if(ipc_brand_key == "shellguard")
+		if(!(locate(/obj/item/implant/ipc/force_shield) in H.implants))
+			// Находим руку зарядника
+			var/charger_zone = ipc_charger_arm_zone
+			var/obj/item/implant/ipc/charger/charger_impl = locate(/obj/item/implant/ipc/charger) in H.implants
+			if(charger_impl)
+				charger_zone = charger_impl.installed_in_zone
+			// Устанавливаем щит в противоположную руку
+			var/shield_zone = (charger_zone == BODY_ZONE_L_ARM) ? BODY_ZONE_R_ARM : BODY_ZONE_L_ARM
+			var/obj/item/implant/ipc/force_shield/shield_impl = new()
+			shield_impl.implant(H, shield_zone, null, TRUE, TRUE)
 
 /datum/species/ipc/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
 	. = ..()
@@ -428,6 +530,18 @@
 		H.apply_damage(2, OXY, forced = TRUE)
 		return
 
+	// Зарядка от ближайшего АРС
+	if(battery.charging)
+		var/area/current_area = get_area(H)
+		if(current_area)
+			var/obj/machinery/power/apc/nearby_apc = locate(/obj/machinery/power/apc) in current_area
+			if(nearby_apc && nearby_apc.operating && nearby_apc.cell && nearby_apc.cell.charge > 0)
+				var/draw_amount = min(100, nearby_apc.cell.charge)
+				nearby_apc.cell.charge -= draw_amount
+				battery.charge_from_apc(25)
+			else if(prob(10))
+				to_chat(H, span_warning("Нет доступного источника питания для зарядки!"))
+
 	if(battery.charge <= 0)
 		to_chat(H, span_danger("ПРЕДУПРЕЖДЕНИЕ: Батарея разряжена. Требуется подзарядка."))
 		H.Unconscious(2 SECONDS)
@@ -447,6 +561,15 @@
 	to_chat(source, span_warning("Удар током повысил температуру процессора на 10°C!"))
 
 /datum/species/ipc/proc/handle_emp(mob/living/carbon/human/H, severity)
+	// Поколение I — особый ЭМИ (оглушение вместо паралича)
+	if(ipc_generation == IPC_GEN_MODULAR)
+		gen1_handle_emp(H, severity)
+		return
+	// Поколение II — Stun 1-3 сек + ожоги (без Paralyze)
+	if(ipc_generation == IPC_GEN_STANDARD)
+		gen2_handle_emp(H, severity)
+		return
+
 	var/emp_damage = 0
 	switch(severity)
 		if(EMP_HEAVY)
@@ -461,6 +584,10 @@
 	H.apply_damage(emp_damage * 0.5, BRUTE, forced = TRUE)
 	H.apply_damage(emp_damage * 0.5, BURN, forced = TRUE)
 	cpu_temperature = min(cpu_temperature + (emp_damage * 0.5), cpu_temp_critical)
+
+	// Поколение IV — кибердека отключается от ЭМИ
+	if(ipc_generation == IPC_GEN_CYBERDECK)
+		gen4_emp_disable_cyberdeck(H, severity)
 
 /obj/item/organ/brain/positronic/emp_act(severity)
 	. = ..()
@@ -493,7 +620,7 @@
 	if(!do_after(user, 3 SECONDS, target = H))
 		return FALSE
 
-	if(!welder.use_tool(H, user, 0, volume = 50, amount = 1))
+	if(!welder.use_tool(H, user, 0, volume = 50, amount = ipc_repair_cost_mod))
 		return FALSE
 
 	var/heal_amount = rand(15, 25)
@@ -518,8 +645,9 @@
 		to_chat(user, span_notice("[H] не имеет электрических повреждений."))
 		return FALSE
 
-	if(cable.get_amount() < 1)
-		to_chat(user, span_warning("Недостаточно кабеля!"))
+	var/cable_cost = max(1, round(ipc_repair_cost_mod))
+	if(cable.get_amount() < cable_cost)
+		to_chat(user, span_warning("Недостаточно кабеля! Нужно [cable_cost] ед."))
 		return FALSE
 
 	user.visible_message(
@@ -530,7 +658,7 @@
 	if(!do_after(user, 3 SECONDS, target = H))
 		return FALSE
 
-	if(!cable.use(1))
+	if(!cable.use(cable_cost))
 		return FALSE
 
 	var/heal_amount = rand(10, 20)
