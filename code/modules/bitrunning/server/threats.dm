@@ -162,7 +162,7 @@
 	if(ishuman(antag))
 		reset_equipment(antag)
 	else if (aas)
-		aas.broadcast("ТРЕВОГА КВАНТОВОГО СЕРВЕРА: Задействован незарегистрированный механический объект.", list())
+		aas.broadcast("ТРЕВОГА КВАНТОВОГО СЕРВЕРА: задействован незарегистрированный механический объект.", list())
 
 	var/datum/antagonist/antag_datum = antag.mind?.has_antag_datum(/datum/antagonist/bitrunning_glitch)
 	if(istype(antag_datum))
