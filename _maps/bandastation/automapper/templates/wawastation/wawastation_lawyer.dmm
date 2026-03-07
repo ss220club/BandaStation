@@ -77,12 +77,21 @@
 /area/station/service/lawoffice)
 "m" = (
 /obj/structure/table/wood,
-/obj/item/book/manual/wiki/security_space_law,
-/obj/item/stamp/law,
-/obj/item/pen/red,
+/obj/item/book/manual/wiki/security_space_law{
+	pixel_x = 3;
+	pixel_y = 2
+	},
+/obj/item/stamp/law{
+	pixel_x = 4;
+	pixel_y = 5
+	},
+/obj/item/pen/red{
+	pixel_x = 4;
+	pixel_y = 5
+	},
 /obj/item/flashlight/lamp/green{
-	pixel_x = -11;
-	pixel_y = 10
+	pixel_x = -9;
+	pixel_y = 1
 	},
 /turf/open/floor/carpet,
 /area/station/service/lawoffice)
@@ -141,8 +150,8 @@
 /obj/item/taperecorder,
 /obj/item/clothing/glasses/sunglasses,
 /obj/item/clothing/glasses/sunglasses/big,
-/obj/machinery/light/directional/south,
 /obj/machinery/firealarm/directional/south,
+/obj/machinery/camera/autoname/directional/south,
 /turf/open/floor/wood,
 /area/station/service/lawoffice)
 "y" = (
@@ -193,6 +202,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 9
 	},
+/obj/machinery/light/small/directional/south,
 /turf/open/floor/wood,
 /area/station/service/lawoffice)
 "H" = (
@@ -273,7 +283,7 @@
 /turf/closed/wall,
 /area/station/maintenance/central/lesser)
 "Z" = (
-/obj/machinery/camera/autoname/directional/west,
+/obj/machinery/light/directional/west,
 /turf/open/floor/carpet,
 /area/station/service/lawoffice)
 
