@@ -72,16 +72,3 @@
 
 	if(!QDELETED(src))
 		qdel(src)
-
-/datum/crafting_recipe/soundhand_summoner
-	name = "strange clicker"
-	result = /obj/item/soundhand_summoner
-	time = 4 SECONDS
-
-	reqs = list(
-		/obj/item/stack/cable_coil = 5,
-		/obj/item/stack/sheet/plastic = 2,
-		/obj/item/assembly/signaler = 1,
-	)
-
-	category = CAT_MISC
