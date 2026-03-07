@@ -1,3 +1,10 @@
+/obj/structure/sign/poster/apply_holiday()
+    var/old_state = icon_state
+    . = ..()
+
+    if(icon_state != old_state && icon == 'modular_bandastation/objects/icons/obj/structures/posters.dmi')
+        icon = 'icons/obj/poster.dmi'
+
 // Contraband
 /obj/structure/sign/poster/contraband/lady
 	name = "Соблазнительная Красотка"
