@@ -36,8 +36,8 @@
 	/// Строки с затратами материалов для интерфейса
 	var/list/casing_mat_strings = list()
 
-	var/allowed_harmful = FALSE
-	var/allowed_advanced = FALSE
+	var/allowed_harmful = TRUE
+	var/allowed_advanced = TRUE
 
 	var/list/loaded_datadisks = list()
 
@@ -71,7 +71,13 @@
 
 /obj/machinery/ammo_workbench/Initialize(mapload)
 	. = ..()
-	materials = new(src, max_amt = 0, _mat_container_flags = MATCONTAINER_EXAMINE, allowed_items = /obj/item/stack/sheet)
+	materials = new ( \
+		src, \
+		SSmaterials.flat_materials, \
+		0, \
+		MATCONTAINER_EXAMINE|MATCONTAINER_ACCEPT_ALLOYS, \
+		list(/datum/material/iron), \
+	)
 	RefreshParts()
 	set_wires(new /datum/wires/ammo_workbench(src))
 

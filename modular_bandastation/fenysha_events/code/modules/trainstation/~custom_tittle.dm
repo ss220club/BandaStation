@@ -209,10 +209,10 @@ img.bg {
 	if(custom_css)
 		SStitle.current_title_screen = new(styles = custom_css)
 		SStitle.current_title_screen.title_css = custom_css
-		SStitle.show_title_screen_to_all_new_players()
 	SStitle.set_title_image_silent('modular_bandastation/fenysha_events/icons/lobby/trainstation_v2.png')
 	SSticker.set_lobby_music('modular_bandastation/fenysha_events/sounds/trainstation_lobbymusic.ogg', override = TRUE)
 	for(var/client/C in GLOB.clients)
+		SStitle.show_title_screen_to(C)
 		C?.playtitlemusic(volume_multiplier = 1)
 
 #undef TRAINSTATION_TITLE_HTML

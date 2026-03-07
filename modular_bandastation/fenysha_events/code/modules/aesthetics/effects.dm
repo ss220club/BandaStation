@@ -13,8 +13,6 @@
 	layer = BELOW_MOB_LAYER
 	plane = GAME_PLANE
 
-//стандартный //standard
-	icon = 'modular_bandastation/fenysha_events/icons/turf/decals/bubber.dmi'
 
 //ОБШИВКА //SIDING
 
@@ -242,3 +240,4 @@
 	icon_state = "radiation-w"
 
 // РАЗНОЕ КОНЕЦ // MISC END
+

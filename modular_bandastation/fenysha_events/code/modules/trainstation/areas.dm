@@ -121,9 +121,11 @@
 /*ЗОНЫ СВЯЗАННЫЕ С ПОЕЗДОМ */
 
 /area/trainstation/indoors/train
+	name = "Вагон"
 	icon_state = "train"
 
 /area/trainstation/indoors/train/bathroom
+	name = "Уборная поезда"
 	icon_state = "bathroom"
 
 /area/trainstation/indoors/train/kitchen
@@ -143,7 +145,7 @@
 	icon_state = "vip"
 
 /area/trainstation/indoors/train/security
-	name = "Вагон охраны" // Security car
+	name = "Штабной вагон" // Security car
 	icon_state = "security"
 
 /area/trainstation/indoors/train/medical

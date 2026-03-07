@@ -1133,14 +1133,10 @@
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/tech_4)
 "er" = (
-/obj/effect/turf_decal/siding/dark/end{
-	dir = 8
+/obj/effect/turf_decal/siding/dark{
+	dir = 9
 	},
-/obj/structure/closet/generic/wall{
-	pixel_x = -28
-	},
-/obj/item/clothing/head/costume/bronze,
-/turf/open/floor/bronze/flat,
+/turf/open/floor/carpet/royalblack,
 /area/trainstation/indoors/train/vagon_1)
 "es" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
@@ -1459,16 +1455,14 @@
 /turf/open/floor/plating/cold_cargo_storage,
 /area/trainstation/indoors/train/containment)
 "ft" = (
-/obj/effect/turf_decal/siding/dark/end{
-	dir = 4
-	},
-/obj/structure/closet/generic/wall{
-	pixel_x = 30
-	},
 /obj/machinery/light/directional/east,
 /obj/machinery/button/auto_detect/directional/north,
-/obj/item/clothing/suit/costume/bronze,
-/turf/open/floor/bronze/flat,
+/obj/effect/turf_decal/siding/dark{
+	dir = 5
+	},
+/obj/structure/easel,
+/obj/item/canvas/nineteen_nineteen,
+/turf/open/floor/carpet/royalblack,
 /area/trainstation/indoors/train/vagon_1)
 "fu" = (
 /obj/machinery/door/train/train_door{
@@ -2093,13 +2087,17 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/trainstation/indoors/train/tech_7)
 "ie" = (
-/obj/machinery/door/train/train_door{
-	name = "Medbay"
-	},
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
 	},
 /obj/effect/turf_decal/trimline/blue/filled/line,
+/obj/machinery/door/airlock/medical{
+	name = "Treatment Center"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
+/obj/effect/mapping_helpers/airlock/unres{
+	dir = 4
+	},
 /turf/open/floor/iron/white,
 /area/trainstation/indoors/train/medical)
 "if" = (
@@ -2536,15 +2534,12 @@
 /turf/open/floor/iron/dark,
 /area/trainstation/indoors/train/reserch)
 "ki" = (
-/obj/structure/table/train_shelf{
-	dir = 1;
-	layer = 3.9;
-	pixel_y = -16
+/obj/effect/turf_decal/siding/dark{
+	dir = 10
 	},
-/obj/structure/chair/bronze{
-	dir = 4
-	},
-/turf/open/floor/iron/dark/smooth_large,
+/obj/structure/easel,
+/obj/item/canvas/nineteen_nineteen,
+/turf/open/floor/carpet/royalblack,
 /area/trainstation/indoors/train/vagon_1)
 "kk" = (
 /obj/structure/cable,
@@ -2760,11 +2755,11 @@
 /turf/open/floor/carpet/green/airless,
 /area/trainstation/indoors/train/vagon_2)
 "lc" = (
-/obj/structure/sign/poster/random/directional/north,
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
 /obj/effect/turf_decal/siding/wood,
+/obj/machinery/modular_computer/preset/curator,
 /turf/open/floor/wood,
 /area/trainstation/indoors/train/vagon_1)
 "le" = (
@@ -3661,12 +3656,7 @@
 /obj/effect/turf_decal/trimline/yellow/mid_joiner{
 	dir = 1
 	},
-/obj/effect/turf_decal/trimline/yellow/line{
-	dir = 1
-	},
-/turf/open/floor/iron/white/smooth_edge{
-	dir = 1
-	},
+/turf/open/floor/wood/large,
 /area/trainstation/indoors/train/vagon_1)
 "oJ" = (
 /obj/effect/turf_decal/siding/thinplating/dark{
@@ -3871,12 +3861,8 @@
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/tech_3)
 "pP" = (
-/obj/structure/statue/bronze/marx,
-/obj/structure/table/bronze,
-/obj/effect/turf_decal/trimline/dark/end{
-	dir = 1
-	},
-/turf/open/floor/iron/dark/smooth_large,
+/obj/effect/turf_decal/siding/dark,
+/turf/open/floor/carpet/royalblack,
 /area/trainstation/indoors/train/vagon_1)
 "pQ" = (
 /obj/effect/turf_decal/siding/blue/corner{
@@ -3941,6 +3927,7 @@
 	dir = 1
 	},
 /obj/structure/closet/secure_closet/blueshield,
+/obj/item/gun/energy/e_gun/lethal,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/security)
 "qf" = (
@@ -4404,11 +4391,6 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-old";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44"
-	},
 /turf/open/floor/iron/stairs/old,
 /area/trainstation/indoors/train/security)
 "sj" = (
@@ -4514,15 +4496,9 @@
 /turf/open/floor/plating,
 /area/trainstation/indoors/train/tech_2)
 "sP" = (
-/obj/effect/turf_decal/trimline/yellow/mid_joiner{
-	dir = 4
-	},
-/obj/effect/turf_decal/trimline/yellow/line{
-	dir = 4
-	},
-/turf/open/floor/iron/white/smooth_edge{
-	dir = 4
-	},
+/obj/structure/easel,
+/obj/item/canvas/nineteen_nineteen,
+/turf/open/floor/wood/large,
 /area/trainstation/indoors/train/vagon_1)
 "sR" = (
 /obj/machinery/computer/crew{
@@ -4726,15 +4702,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/tech_4)
-"tF" = (
-/obj/structure/weightmachine/weightlifter,
-/obj/effect/turf_decal/tile/yellow/anticorner{
-	dir = 8
-	},
-/turf/open/floor/iron/white/textured_corner{
-	dir = 4
-	},
-/area/trainstation/indoors/train/vagon_1)
 "tH" = (
 /turf/closed/wall/mineral/titanium/spaceship/nodiagonal,
 /area/trainstation/indoors/train/vagon_5)
@@ -4783,9 +4750,15 @@
 /turf/open/floor/plating,
 /area/trainstation/indoors/train/vagon_5)
 "tT" = (
-/obj/structure/punching_bag,
-/turf/open/floor/iron/white,
-/area/trainstation/indoors/train/vagon_1)
+/obj/effect/turf_decal/siding/blue{
+	dir = 8
+	},
+/obj/structure/chair/sofa/bench/right{
+	dir = 4;
+	pixel_x = -7
+	},
+/turf/open/floor/iron/white/small,
+/area/trainstation/indoors/train/tech_5)
 "tV" = (
 /obj/effect/turf_decal/tile/brown/diagonal_edge,
 /obj/structure/cable,
@@ -5392,12 +5365,6 @@
 /obj/item/ammo_box/magazine/c40sol_rifle/standard,
 /obj/item/ammo_box/magazine/c40sol_rifle/standard,
 /obj/item/ammo_box/magazine/c40sol_rifle/standard,
-/obj/item/ammo_box/magazine/c40sol_rifle/standard,
-/obj/item/ammo_box/magazine/c40sol_rifle/standard,
-/obj/item/ammo_box/magazine/c40sol_rifle/standard,
-/obj/item/ammo_box/magazine/c40sol_rifle/standard,
-/obj/item/ammo_box/magazine/c40sol_rifle/standard,
-/obj/item/ammo_box/magazine/c40sol_rifle/standard,
 /turf/open/floor/iron/dark,
 /area/trainstation/indoors/train/security)
 "wu" = (
@@ -5782,6 +5749,7 @@
 /obj/structure/closet/secure_closet/research_director,
 /obj/effect/turf_decal/tile/purple/full,
 /obj/item/stamp/head/rd,
+/obj/item/gun/energy/e_gun/mini,
 /turf/open/floor/iron/white/smooth_large,
 /area/trainstation/indoors/train/reserch)
 "xW" = (
@@ -5904,14 +5872,18 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/trainstation/indoors/train/vagon_6)
 "yK" = (
-/obj/machinery/door/train/train_door{
-	name = "Medbay"
-	},
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
 	},
 /obj/effect/turf_decal/trimline/blue/filled/line,
 /obj/structure/cable,
+/obj/machinery/door/airlock/medical{
+	name = "Treatment Center"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
+/obj/effect/mapping_helpers/airlock/unres{
+	dir = 8
+	},
 /turf/open/floor/iron/white,
 /area/trainstation/indoors/train/medical)
 "yL" = (
@@ -6142,13 +6114,10 @@
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/security)
 "zI" = (
-/obj/machinery/door/train/coupe_door{
-	name = "Passenger Room"
+/obj/structure/table/train_table{
+	dir = 1
 	},
-/obj/structure/barricade/wooden/crude,
-/turf/open/floor/iron/shuttle/evac{
-	icon_state = "flooreng1"
-	},
+/turf/closed/wall/mineral/titanium/spaceship/nodiagonal,
 /area/trainstation/indoors/train/vagon_1)
 "zL" = (
 /obj/structure/railing,
@@ -7716,11 +7685,7 @@
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/vagon_7)
 "FZ" = (
-/obj/structure/weightmachine,
-/obj/effect/turf_decal/tile/yellow/anticorner,
-/turf/open/floor/iron/white/textured_corner{
-	dir = 1
-	},
+/turf/open/floor/wood/large,
 /area/trainstation/indoors/train/vagon_1)
 "Gg" = (
 /obj/structure/chair/sofa/corp/right,
@@ -7795,9 +7760,7 @@
 	color = "#A9A9A9";
 	dir = 1
 	},
-/obj/machinery/vending/security{
-	products = list(/obj/item/restraints/handcuffs = 18, /obj/item/restraints/handcuffs/cable/zipties = 22, /obj/item/grenade/flashbang = 16, /obj/item/assembly/flash/handheld = 18, /obj/item/food/donut/plain = 12, /obj/item/storage/box/evidence = 16, /obj/item/flashlight/seclite = 16, /obj/item/restraints/legcuffs/bola/energy = 20, /obj/item/clothing/gloves/tackler/security = 5, /obj/item/ammo_box/advanced/s12gauge/bean = 2, /mob/living/basic/frog/suicide = 3)
-	},
+/obj/machinery/vending/security,
 /turf/open/floor/iron/dark,
 /area/trainstation/indoors/train/security)
 "GA" = (
@@ -8195,7 +8158,7 @@
 	},
 /obj/structure/bed/dogbed/renault,
 /mob/living/basic/chicken{
-	name = "Officer Soap";
+	name = "Офицер Окана";
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
@@ -8523,6 +8486,7 @@
 /obj/effect/spawner/random/armory/riot_armor,
 /obj/effect/spawner/random/armory/riot_helmet,
 /obj/effect/spawner/random/armory/riot_helmet,
+/obj/effect/spawner/random/contraband/armory,
 /obj/effect/spawner/random/contraband/armory,
 /turf/open/floor/iron/dark,
 /area/trainstation/indoors/train/security)
@@ -8916,12 +8880,22 @@
 /turf/open/floor/wood/large,
 /area/trainstation/indoors/train/reustoran)
 "LI" = (
-/obj/machinery/door/train/train_door{
-	name = "Medbay"
-	},
 /obj/structure/cable,
-/turf/open/floor/plating,
-/area/trainstation/indoors/train/vagon_5)
+/obj/effect/turf_decal/trimline/blue/filled/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/blue/filled/line{
+	dir = 8
+	},
+/obj/machinery/door/airlock/medical{
+	name = "Treatment Center"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
+/obj/effect/mapping_helpers/airlock/unres{
+	dir = 1
+	},
+/turf/open/floor/iron/white,
+/area/trainstation/indoors/train/medical)
 "LK" = (
 /obj/effect/turf_decal/tile/dark_blue/diagonal_centre,
 /obj/effect/turf_decal/siding/dark,
@@ -9579,11 +9553,6 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-old";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44"
-	},
 /turf/open/floor/iron/stairs/old,
 /area/trainstation/indoors/train/security)
 "Ou" = (
@@ -9859,12 +9828,9 @@
 /obj/effect/turf_decal/trimline/yellow/mid_joiner{
 	dir = 8
 	},
-/obj/effect/turf_decal/trimline/yellow/line{
-	dir = 8
-	},
-/turf/open/floor/iron/white/smooth_edge{
-	dir = 8
-	},
+/obj/structure/easel,
+/obj/item/canvas/nineteen_nineteen,
+/turf/open/floor/wood/large,
 /area/trainstation/indoors/train/vagon_1)
 "Pj" = (
 /obj/machinery/telecomms/bus/preset_one,
@@ -10361,13 +10327,8 @@
 /turf/open/floor/iron/dark/telecomms,
 /area/trainstation/indoors/train/server)
 "Ru" = (
-/obj/structure/weightmachine/weightlifter,
-/obj/effect/turf_decal/tile/yellow/anticorner{
-	dir = 4
-	},
-/turf/open/floor/iron/white/textured_corner{
-	dir = 8
-	},
+/obj/structure/sign/painting/library,
+/turf/closed/wall/mineral/titanium/spaceship/nodiagonal,
 /area/trainstation/indoors/train/vagon_1)
 "Rw" = (
 /obj/effect/turf_decal/siding/dark/corner{
@@ -10843,6 +10804,17 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/tech_3)
+"Tm" = (
+/obj/effect/turf_decal/siding/blue{
+	dir = 8
+	},
+/obj/structure/chair/sofa/bench/left{
+	dir = 4;
+	pixel_x = -7;
+	pixel_y = -1
+	},
+/turf/open/floor/iron/white/small,
+/area/trainstation/indoors/train/tech_5)
 "To" = (
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 8
@@ -10943,8 +10915,7 @@
 /area/trainstation/indoors/train/vagon_1)
 "TO" = (
 /obj/effect/turf_decal/trimline/yellow/mid_joiner,
-/obj/effect/turf_decal/trimline/yellow/line,
-/turf/open/floor/iron/white/smooth_edge,
+/turf/open/floor/wood/large,
 /area/trainstation/indoors/train/vagon_1)
 "TQ" = (
 /obj/effect/turf_decal/lunar_sand,
@@ -11060,6 +11031,7 @@
 /obj/structure/window/reinforced/survival_pod/spawner/directional/west,
 /obj/structure/closet/secure_closet/quartermaster,
 /obj/item/stamp/head/qm,
+/obj/item/gun/energy/e_gun/mini,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/train/cargo)
 "Ur" = (
@@ -11224,6 +11196,7 @@
 	},
 /obj/structure/closet/secure_closet/captains,
 /obj/item/stamp/head/captain,
+/obj/item/gun/energy/laser/captain,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/security)
 "UR" = (
@@ -11321,12 +11294,9 @@
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/tech_2)
 "Vk" = (
-/obj/structure/weightmachine,
-/obj/effect/turf_decal/tile/yellow/anticorner{
-	dir = 1
-	},
-/turf/open/floor/iron/white/textured_corner,
-/area/trainstation/indoors/train/vagon_1)
+/obj/structure/sign/painting/library,
+/turf/closed/wall/mineral/titanium/spaceship/nodiagonal,
+/area/trainstation/indoors/train/bathroom)
 "Vl" = (
 /obj/structure/window/reinforced/shuttle/survival_pod,
 /turf/open/floor/iron/dark/diagonal,
@@ -11437,6 +11407,7 @@
 	dir = 10
 	},
 /obj/structure/closet/secure_closet/hop,
+/obj/item/gun/energy/e_gun/mini,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/security)
 "VI" = (
@@ -11524,15 +11495,27 @@
 /turf/open/floor/iron/dark/diagonal,
 /area/trainstation/indoors/train/vagon_7)
 "VU" = (
-/obj/structure/table/train_shelf{
-	dir = 1;
-	layer = 3.9;
-	pixel_y = -16
+/obj/structure/table/wood,
+/obj/item/toy/crayon/spraycan{
+	pixel_x = 4;
+	pixel_y = 8
 	},
-/obj/structure/chair/bronze{
-	dir = 8
+/obj/item/chisel{
+	pixel_x = -15;
+	pixel_y = 6
 	},
-/turf/open/floor/iron/dark/smooth_large,
+/obj/item/toy/crayon/spraycan{
+	pixel_x = -4;
+	pixel_y = 8
+	},
+/obj/item/toy/crayon/spraycan{
+	pixel_y = 6
+	},
+/obj/item/paint_palette,
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/turf/open/floor/carpet/royalblack,
 /area/trainstation/indoors/train/vagon_1)
 "VV" = (
 /obj/structure/railing{
@@ -11590,6 +11573,9 @@
 "We" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
+	},
+/obj/effect/spawner/random/decoration/statue{
+	spawn_loot_chance = 35
 	},
 /turf/open/floor/wood/parquet,
 /area/trainstation/indoors/train/vagon_1)
@@ -11653,12 +11639,10 @@
 /turf/open/floor/iron/white,
 /area/trainstation/indoors/train/reserch)
 "Ws" = (
-/obj/item/clothing/shoes/bronze,
-/obj/effect/turf_decal/siding/dark,
 /obj/effect/turf_decal/siding/dark{
 	dir = 1
 	},
-/turf/open/floor/bronze/flat,
+/turf/open/floor/carpet/royalblack,
 /area/trainstation/indoors/train/vagon_1)
 "Wu" = (
 /turf/closed/wall/mineral/titanium/spaceship/nodiagonal,
@@ -11757,6 +11741,7 @@
 /obj/effect/turf_decal/bot,
 /obj/item/clothing/head/bio_hood/general,
 /obj/item/clothing/suit/bio_suit,
+/obj/item/gun/energy/e_gun/mini,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/train/vagon_7)
 "WF" = (
@@ -12187,6 +12172,7 @@
 /obj/machinery/recharger{
 	pixel_x = 11
 	},
+/obj/item/gun/energy/laser/awaymission_aeg,
 /turf/open/floor/iron/dark,
 /area/trainstation/indoors/train/security)
 "Yr" = (
@@ -12370,11 +12356,11 @@
 /turf/open/floor/wood,
 /area/trainstation/indoors/train/vagon_2)
 "Zk" = (
-/obj/structure/sign/poster/random/directional/north,
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
 /obj/effect/turf_decal/siding/wood,
+/obj/machinery/bookbinder,
 /turf/open/floor/wood/parquet,
 /area/trainstation/indoors/train/vagon_1)
 "Zl" = (
@@ -12565,6 +12551,7 @@
 /obj/item/stamp/head/cmo,
 /obj/item/clothing/head/bio_hood/cmo,
 /obj/item/clothing/suit/bio_suit/cmo,
+/obj/item/gun/energy/e_gun/mini,
 /turf/open/floor/iron/dark/diagonal,
 /area/trainstation/indoors/train/medical)
 "ZY" = (
@@ -13465,7 +13452,7 @@ JJ
 WR
 rz
 Fe
-Fm
+Ru
 er
 ki
 Fm
@@ -13480,7 +13467,7 @@ WA
 Pq
 XU
 tP
-zI
+fo
 Ws
 pP
 rf
@@ -13489,13 +13476,13 @@ rf
 Fm
 Xo
 Qh
-Fm
+Ru
 Zk
-Vk
+FZ
 Ph
-tF
+FZ
 gg
-Fm
+Ru
 ft
 VU
 Fm
@@ -13507,21 +13494,21 @@ Fm
 Fm
 hl
 oI
-tT
+FZ
 TO
 Mf
 Fm
-Fm
-Fm
+zI
+zI
 Fm
 "}
 (63,1,1) = {"
 Fm
 Nn
 QQ
-Fm
-lc
 Ru
+lc
+FZ
 sP
 FZ
 Vp
@@ -13598,7 +13585,7 @@ fo
 mv
 av
 ZQ
-DL
+Vk
 DL
 yL
 DL
@@ -15100,7 +15087,7 @@ Mq
 Mq
 GV
 ij
-tH
+mm
 cD
 Mm
 tQ
@@ -15130,7 +15117,7 @@ mm
 HM
 fx
 vo
-tH
+mm
 UV
 me
 tH
@@ -15199,8 +15186,8 @@ tH
 kX
 YZ
 UN
-UN
-UN
+Tm
+tT
 UI
 cB
 LL

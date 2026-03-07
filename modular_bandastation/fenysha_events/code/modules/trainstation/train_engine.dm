@@ -198,7 +198,7 @@
 
 /obj/machinery/power/train_turbine/core_rotor/proc/update_effects()
 	var/work_procentage = clamp(rpm / (max_rpm * 0.9), 0, 1)
-	if(work_procentage < 0.1 && soundloop.timer_id)
+	if(work_procentage < 0.1)
 		soundloop.stop()
 		return
 	if(!soundloop.timer_id)
@@ -546,7 +546,7 @@
 /obj/item/paper/guides/jobs/atmos/train_turbine
 	name = "Бумага — «Краткое руководство по турбине поезда!»"
 	default_raw_text = "<B>Как управлять паровой турбиной поезда</B><BR>\
-	- Закрепите баллон с горячим водяным паром гаечным ключом перед входным компрессором.<BR>\
+	- Закрепите канистру с горячим водяным паром гаечным ключом перед входным компрессором.<BR>\
 	- Включите нагреватели температуры, активируйте насос, установите нужное давление в зависимости от требуемой мощности.<BR>\
 	- Для рециркуляции воды: вскройте ломом пол и убедитесь, что жидкостные трубы подключены к выходу статора.<BR>\
 	- Замените обычный выход на специальный выход турбины (с помощью гаечного ключа).<BR>\
@@ -555,7 +555,7 @@
 	- Используйте пульт управления: задайте целевые обороты, отрегулируйте впуск, следите за температурой и давлением.<BR>\
 	- Балансируйте мощность и температуру — перегрев быстро разрушает турбину!<BR>\
 	- Есть аварийный сброс для экстренного охлаждения.<BR>\
-	- Турбина выбрасывает CO₂ в атмосферу и возвращает охлаждённую воду для повторного использования.<BR>\
+	- Турбина возвращает охлаждённую воду для повторного использования.<BR>\
 	- Пар должен быть достаточно горячим (>400K), иначе компрессор его не примет.<BR>\
 	- Специальный механизм ускорения: каждые 15 минут непрерывной работы мощность увеличивается на 10%."
 
@@ -611,7 +611,11 @@
 	reagents.my_atom = src
 
 	// Plumbing — вход воды
-	heater_plumbing = AddComponent(/datum/component/plumbing/heater_plumbing, custom_receiver = reagents)
+	heater_plumbing = AddComponent( \
+		/datum/component/plumbing/heater_plumbing, \
+		custom_receiver = reagents, \
+		ducting_layer = THIRD_DUCT_LAYER, \
+	)
 	heater_plumbing.enable()
 
 	// Atmos-коннектор — только выход пара
@@ -678,13 +682,13 @@
 
 /obj/machinery/power/train_heater/process(seconds_per_tick)
 	if(!active && temperature > T20C)
-		temperature = max(temperature - 5 * seconds_per_tick, T20C)
+		temperature = max(temperature - 1 * seconds_per_tick, T20C)
 		if(temperature <= T20C)
 			temperature = T20C
 			end_processing()
 		return
 
-	if(!active || !powered(ignore_use_power = TRUE) || !plasma_stack || plasma_stack.amount <= 0)
+	if((!active || !powered(ignore_use_power = TRUE) || !plasma_stack || plasma_stack.amount <= 0) && temperature <= T20C)
 		active = FALSE
 		end_processing()
 		return PROCESS_KILL
@@ -694,7 +698,7 @@
 	var/energy_generated = plasma_consumed * PLASMA_SHEET_BURN_ENERGY
 
 	if(temperature < target_temperature)
-		temperature += energy_generated / reagents.heat_capacity() * 5 * seconds_per_tick
+		temperature += 5 * energy_generated * seconds_per_tick
 
 	if(temperature < MIN_PLASMA_COMBUSTION_TEMP)
 		return
@@ -716,6 +720,7 @@
 /datum/component/plumbing/heater_plumbing
 	demand_connects = NORTH | SOUTH
 
+
 /datum/component/plumbing/heater_plumbing/Initialize(start = TRUE, ducting_layer, turn_connects = TRUE, datum/reagents/custom_receiver, extend_pipe_to_edge)
 	. = ..()
 	if(!istype(parent, /obj/machinery/power/train_heater))
@@ -730,7 +735,6 @@
 	var/datum/weakref/heater_ref
 	var/mapping_id
 
-
 // Бумажка с инструкцией
 /obj/item/paper/guides/jobs/atmos/train_heater
 	name = "Бумага — «Краткое руководство по нагревателю поезда!»"
@@ -738,9 +742,7 @@
 	- Загрузите плазмовые листы в качестве топлива.<BR>\
 	- Подключите жидкостные трубы для подачи воды.<BR>\
 	- Подключите газовые трубы для выхода пара.<BR>\
-	- Активируйте устройство — плазма начнёт гореть, а вода превращаться в пар.<BR>\
-	- Следите за температурой через пульт управления.<BR>\
-	- Не допускайте перегрева — плазма горит стабильно только выше 100°C."
+	- Активируйте устройство — плазма начнёт гореть, а вода превращаться в пар.<BR>"
 
 #undef MIN_PLASMA_COMBUSTION_TEMP
 #undef PLASMA_SHEET_BURN_ENERGY
