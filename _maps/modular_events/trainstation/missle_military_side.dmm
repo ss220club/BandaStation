@@ -68,11 +68,10 @@
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "ay" = (
-/obj/item/ammo_casing/c357{
-	dir = 8;
-	pixel_x = -1
+/obj/structure/window/reinforced/fulltile/ice{
+	dramatically_disappearing = 1
 	},
-/turf/open/floor/plating/cobblestone,
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "aA" = (
 /turf/closed/wall/city/siding/style,
@@ -121,7 +120,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -275,6 +274,14 @@
 	},
 /turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
+"bS" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/shuttle/exploration/doubleside{
+	dir = 8
+	},
+/area/trainstation/outdoor/station)
 "bU" = (
 /obj/item/gun/ballistic/automatic/c20r/sc_c20r,
 /turf/open/misc/asteroid/snow/standard_air,
@@ -369,6 +376,33 @@
 	pixel_y = 8
 	},
 /turf/open/misc/asphalt/no_border,
+/area/trainstation/outdoor/station)
+"cN" = (
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/obj/structure/emergency_shield/regenerating{
+	uses_integrity = 0;
+	pixel_y = 32;
+	name = "stasis field";
+	desc = "A stasis field that's holding the train in place. Seems to be projected by the stasis projector."
+	},
+/obj/structure/decorative{
+	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
+	icon_state = "l4-4-8";
+	anchored = 1;
+	name = "cable";
+	color = "#222222"
+	},
+/obj/structure/decorative{
+	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
+	icon_state = "l4-4-8";
+	anchored = 1;
+	name = "cable";
+	color = "#222222";
+	pixel_y = -14
+	},
+/turf/open/indestructible/plating,
 /area/trainstation/outdoor/station)
 "cR" = (
 /obj/effect/turf_decal/siding{
@@ -518,17 +552,28 @@
 /obj/structure/prop/general/bigroller_up2,
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
+"dY" = (
+/obj/structure/rack/shelf,
+/obj/effect/turf_decal/delivery,
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/obj/effect/spawner/random/engineering/material_cheap,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
+/area/trainstation/outdoor/station)
 "dZ" = (
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/starts_empty,
 /obj/effect/decal/cleanable/blood,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
-"eb" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = 13
+"ea" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 9
 	},
-/obj/structure/mecha_wreckage/durand,
-/turf/open/misc/asphalt/no_border,
+/obj/structure/table/reinforced,
+/obj/item/flashlight/lamp,
+/obj/effect/spawner/random/entertainment/deck,
+/turf/open/floor/iron/shuttle/exploration/corner_invcorner,
 /area/trainstation/outdoor/station)
 "ec" = (
 /obj/effect/decal/cleanable/blood,
@@ -575,6 +620,51 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
+"eo" = (
+/obj/structure/railing/unbreakable{
+	dir = 5
+	},
+/obj/structure/decorative{
+	density = 1;
+	anchored = 1;
+	name = "magnetic stasis emitter";
+	desc = "A machine that somehow fabricates hardlight using electrons. Seems to be impervious to conventional means of damage.";
+	icon = 'icons/obj/machines/modular_shield_generator.dmi';
+	icon_state = "charger_on_closed";
+	dir = 1;
+	uses_integrity = 0
+	},
+/obj/structure/emergency_shield/regenerating{
+	uses_integrity = 0;
+	pixel_y = 32;
+	name = "stasis field";
+	desc = "A stasis field that's holding the train in place. Seems to be projected by the stasis projector."
+	},
+/turf/open/indestructible/plating,
+/area/trainstation/outdoor/station)
+"ep" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/structure/closet/secure_closet/personal,
+/obj/effect/spawner/random/weapon,
+/obj/effect/spawner/random/medical/minor_healing,
+/turf/open/indestructible/dark/textured,
+/area/trainstation/outdoor/station)
+"er" = (
+/obj/structure/prop/city/buildingventbig11_off{
+	name = "Generator"
+	},
+/obj/structure/railing{
+	dir = 2;
+	color = "#666666";
+	pixel_y = 0
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/turf/open/indestructible/dark/textured,
+/area/trainstation/outdoor/station)
 "es" = (
 /obj/structure/decorative{
 	anchored = 1;
@@ -592,7 +682,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
@@ -600,14 +690,12 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
-	},
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "eu" = (
 /obj/structure/decorative{
@@ -730,12 +818,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
-"eR" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = 10
-	},
-/turf/open/misc/asphalt/no_border,
-/area/trainstation/outdoor/station)
 "fa" = (
 /obj/effect/decal/cleanable/blood/drip{
 	pixel_y = 11
@@ -758,6 +840,16 @@
 /obj/item/gun/ballistic/rifle/boltaction,
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
+"fm" = (
+/obj/effect/turf_decal/siding/dark/corner,
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/shuttle/exploration/corner_invcorner{
+	dir = 1
+	},
+/area/trainstation/outdoor/station)
 "fq" = (
 /obj/item/ammo_casing/a223,
 /obj/item/ammo_casing/c357{
@@ -778,9 +870,13 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
-"fv" = (
-/obj/item/ammo_casing/c357,
-/turf/open/floor/plating/cobblestone,
+"fy" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/shuttle/exploration/doubleinvertcorner_side{
+	dir = 4
+	},
 /area/trainstation/outdoor/station)
 "fz" = (
 /obj/structure/flora/tree/massive/dead/style_2,
@@ -828,7 +924,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -861,7 +957,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -1076,7 +1172,9 @@
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "hI" = (
-/turf/closed/wall/city/siding/red/style/style_1,
+/obj/effect/turf_decal/trimline/tram,
+/obj/machinery/light/floor/transport,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/outdoor/station)
 "hK" = (
 /obj/structure/window/reinforced/fulltile/ice{
@@ -1085,8 +1183,8 @@
 /turf/closed/wall/city/siding,
 /area/trainstation/outdoor/station)
 "hM" = (
-/obj/structure/prop/big/laser_beam_loaded,
-/turf/open/misc/asteroid/snow/standard_air,
+/mob/living/basic/khara_mutant/reaper,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
 "hQ" = (
 /obj/effect/mob_spawn/corpse/human/charredskeleton,
@@ -1121,7 +1219,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -1134,7 +1232,7 @@
 	anchored = 1;
 	name = "access point"
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor,
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "hW" = (
 /obj/effect/mob_spawn/corpse/human/charredskeleton,
@@ -1266,25 +1364,16 @@
 /obj/effect/decal/cleanable/blood/innards,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
-"iV" = (
-/obj/structure/decorative{
-	anchored = 1;
-	name = "flesh amoeba";
-	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
-	icon_state = "blob_wall";
-	color = "#d66569"
+"iT" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 9
 	},
-/obj/structure/decorative{
-	anchored = 1;
-	name = "flesh amoeba";
-	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
-	icon_state = "blob_wall";
-	color = "#d66569";
-	dir = 1
-	},
-/turf/closed/indestructible/hoteldoor/fakedoor,
+/obj/machinery/light/red/directional/west,
+/obj/structure/closet/secure_closet/personal,
+/obj/effect/spawner/random/medical/minor_healing,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/entertainment/musical_instrument,
+/turf/open/indestructible/dark/textured,
 /area/trainstation/outdoor/station)
 "iW" = (
 /obj/effect/mob_spawn/corpse/human/charredskeleton,
@@ -1302,7 +1391,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8
@@ -1359,12 +1448,24 @@
 /obj/effect/mob_spawn/ghost_role/flesh_spider,
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
+"jz" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/turf/open/floor/iron/shuttle/exploration/doubleside{
+	dir = 8
+	},
+/area/trainstation/outdoor/station)
 "jB" = (
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1
@@ -1395,7 +1496,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -1429,10 +1530,6 @@
 	name = "access point"
 	},
 /turf/closed/wall/city/siding/style/style_2,
-/area/trainstation/outdoor/station)
-"jU" = (
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
-/turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
 "jX" = (
 /obj/item/ammo_casing/shotgun/executioner{
@@ -1520,7 +1617,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
@@ -1528,7 +1625,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1
@@ -1582,34 +1679,12 @@
 	},
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
-"li" = (
-/obj/structure/decorative{
-	anchored = 1;
-	name = "flesh amoeba";
-	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
-	icon_state = "blob_wall";
-	color = "#d66569"
-	},
-/obj/structure/decorative{
-	anchored = 1;
-	name = "flesh amoeba";
-	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
-	icon_state = "blob_wall";
-	color = "#d66569";
-	dir = 1
-	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = s
-	},
-/area/trainstation/outdoor/station)
 "lm" = (
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
@@ -1617,7 +1692,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1
@@ -1648,7 +1723,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -1680,7 +1755,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -1731,7 +1806,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -1780,6 +1855,13 @@
 /obj/effect/mob_spawn/ghost_role/flesh_spider,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
+"mb" = (
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/obj/structure/prop/general/highvoltagegrille_off,
+/turf/open/indestructible/plating,
+/area/trainstation/outdoor/station)
 "mc" = (
 /mob/living/basic/khara_mutant/flesh_spider,
 /turf/open/misc/dirt/icy_planet,
@@ -1795,7 +1877,6 @@
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
 "mm" = (
-/obj/item/gun/ballistic/rifle/sniper_rifle,
 /turf/open/floor/iron/shuttle/exploration/corner,
 /area/trainstation/outdoor/station)
 "mn" = (
@@ -1873,7 +1954,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4
@@ -1896,7 +1977,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4
@@ -1905,21 +1986,19 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
-	},
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "nb" = (
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8
@@ -1928,7 +2007,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4
@@ -1940,7 +2019,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
@@ -1948,7 +2027,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1
@@ -1980,9 +2059,6 @@
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "nm" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = -13
-	},
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh cluster";
@@ -2025,6 +2101,10 @@
 	pixel_y = 12
 	},
 /turf/open/misc/asphalt/no_border,
+/area/trainstation/outdoor/station)
+"nE" = (
+/obj/structure/sign/warning/electric_shock,
+/turf/closed/wall/city/siding/style/style_1,
 /area/trainstation/outdoor/station)
 "nF" = (
 /turf/closed/wall/city/siding,
@@ -2070,7 +2150,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4
@@ -2148,7 +2228,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -2165,6 +2245,14 @@
 "oK" = (
 /obj/structure/prop/big/laser_beam_loaded,
 /turf/open/indestructible/meat,
+/area/trainstation/outdoor/station)
+"oR" = (
+/obj/effect/turf_decal/siding/dark,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table/reinforced,
+/obj/item/storage/fancy/donut_box,
+/obj/effect/spawner/random/engineering/tool,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/outdoor/station)
 "oS" = (
 /obj/structure/deployable_barricade/wooden{
@@ -2191,7 +2279,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1
@@ -2200,13 +2288,11 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
-	},
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "oW" = (
 /obj/item/ammo_casing/c38{
@@ -2270,7 +2356,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -2278,7 +2364,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -2324,10 +2410,11 @@
 	},
 /turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
-"pF" = (
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
-/obj/structure/flora/bush/fullgrass/style_random,
-/turf/open/misc/asteroid/snow/standard_air,
+"pB" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 9
+	},
+/turf/open/indestructible/dark/textured,
 /area/trainstation/outdoor/station)
 "pH" = (
 /obj/structure/deployable_barricade/wooden{
@@ -2398,13 +2485,6 @@
 /obj/item/ammo_casing/a223,
 /turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
-"qr" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = -13;
-	pixel_y = 18
-	},
-/turf/open/misc/asphalt/no_border,
-/area/trainstation/outdoor/station)
 "qs" = (
 /obj/item/ammo_casing/c38{
 	dir = 6;
@@ -2452,7 +2532,7 @@
 	pixel_x = 9
 	},
 /obj/effect/decal/cleanable/blood,
-/turf/open/floor/plating/cobblestone,
+/turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "qF" = (
 /obj/item/ammo_casing/c38{
@@ -2469,10 +2549,6 @@
 	pixel_y = -2
 	},
 /turf/open/indestructible/meat,
-/area/trainstation/outdoor/station)
-"qK" = (
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
-/turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
 "qN" = (
 /turf/open/floor/iron/shuttle/exploration/corner{
@@ -2521,6 +2597,36 @@
 /obj/effect/gibspawner/human,
 /turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
+"qZ" = (
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/obj/structure/decorative{
+	density = 1;
+	anchored = 1;
+	name = "magnetic stasis emitter";
+	desc = "A machine that somehow fabricates hardlight using electrons. Seems to be impervious to conventional means of damage.";
+	icon = 'icons/obj/machines/modular_shield_generator.dmi';
+	icon_state = "charger_on_closed";
+	dir = 1;
+	uses_integrity = 0
+	},
+/obj/structure/emergency_shield/regenerating{
+	uses_integrity = 0;
+	pixel_y = 32;
+	name = "stasis field";
+	desc = "A stasis field that's holding the train in place. Seems to be projected by the stasis projector."
+	},
+/obj/structure/decorative{
+	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
+	icon_state = "l4-4-8";
+	anchored = 1;
+	name = "cable";
+	color = "#222222";
+	pixel_y = -14
+	},
+/turf/open/indestructible/plating,
+/area/trainstation/outdoor/station)
 "rc" = (
 /obj/structure/decorative{
 	icon = 'icons/obj/machines/wallmounts.dmi';
@@ -2532,10 +2638,6 @@
 	name = "access point"
 	},
 /turf/open/floor/black,
-/area/trainstation/outdoor/station)
-"rg" = (
-/obj/effect/gibspawner/human,
-/turf/open/floor/plating/cobblestone,
 /area/trainstation/outdoor/station)
 "rj" = (
 /obj/item/ammo_casing/c38{
@@ -2559,28 +2661,25 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
+/turf/closed/indestructible/fakedoor,
+/area/trainstation/outdoor/station)
+"rx" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
 	},
+/obj/machinery/modular_computer/preset/civilian,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/outdoor/station)
 "rD" = (
 /obj/structure/prop/general/roadbarrierwood{
 	dir = 4
 	},
 /turf/open/misc/dirt/icy_planet,
-/area/trainstation/outdoor/station)
-"rF" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = -4;
-	pixel_y = 11
-	},
-/obj/item/ammo_box/magazine/c40sol_rifle/drum/starts_empty,
-/turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "rI" = (
 /obj/structure/prop/city/buildingventbig1{
@@ -2652,7 +2751,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -2663,7 +2762,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -2676,7 +2775,6 @@
 	pixel_y = 11;
 	pixel_x = -8
 	},
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
 "sw" = (
@@ -2839,11 +2937,6 @@
 /obj/item/stack/medical/suture,
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
-"tm" = (
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
-/mob/living/basic/khara_mutant/flesh_spider,
-/turf/open/indestructible/meat,
-/area/trainstation/outdoor/station)
 "tq" = (
 /obj/structure/decorative{
 	anchored = 1;
@@ -2858,10 +2951,6 @@
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "tr" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = -13;
-	pixel_y = 18
-	},
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh cluster";
@@ -2871,13 +2960,7 @@
 	pixel_x = -16;
 	pixel_y = 11
 	},
-/obj/item/gun/ballistic/automatic/c20r/sc_c20r,
 /turf/open/indestructible/meat,
-/area/trainstation/outdoor/station)
-"tt" = (
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
-	},
 /area/trainstation/outdoor/station)
 "tz" = (
 /obj/structure/decorative{
@@ -2904,7 +2987,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -2928,27 +3011,6 @@
 "tG" = (
 /obj/effect/mob_spawn/corpse/human/charredskeleton,
 /turf/open/misc/dirt/icy_planet,
-/area/trainstation/outdoor/station)
-"tI" = (
-/obj/structure/decorative{
-	anchored = 1;
-	name = "flesh amoeba";
-	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
-	icon_state = "blob_wall";
-	color = "#d66569";
-	dir = 4
-	},
-/obj/structure/decorative{
-	anchored = 1;
-	name = "flesh amoeba";
-	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
-	icon_state = "blob_wall";
-	color = "#d66569";
-	dir = 8
-	},
-/turf/closed/indestructible/fakedoor/blast_door,
 /area/trainstation/outdoor/station)
 "tJ" = (
 /obj/effect/decal/cleanable/blood/drip{
@@ -3011,7 +3073,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -3021,6 +3083,18 @@
 /obj/structure/flora/bush/fullgrass/style_random,
 /obj/effect/mob_spawn/ghost_role/flesh_spider,
 /turf/open/misc/asteroid/snow/standard_air,
+/area/trainstation/outdoor/station)
+"tX" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/structure/table/reinforced,
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/item/folder/blue,
+/turf/open/floor/iron/shuttle/exploration/doubleside{
+	dir = 8
+	},
 /area/trainstation/outdoor/station)
 "uc" = (
 /obj/effect/gibspawner/human,
@@ -3083,7 +3157,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1
@@ -3098,7 +3172,6 @@
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "ur" = (
-/turf/closed/indestructible/normal_wall,
 /area/trainstation/outdoor/station)
 "us" = (
 /obj/structure/decorative{
@@ -3169,7 +3242,6 @@
 /obj/item/ammo_casing/mm20x138{
 	pixel_x = 22
 	},
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "uS" = (
@@ -3226,7 +3298,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4
@@ -3284,25 +3356,16 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
-	},
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "vw" = (
 /obj/structure/prop/city/buildingventbig12,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/asphalt,
-/area/trainstation/outdoor/station)
-"vz" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = 2;
-	pixel_y = 13
-	},
-/turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "vD" = (
 /obj/structure/closet/body_bag,
@@ -3399,18 +3462,6 @@
 	},
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
-"wb" = (
-/obj/structure/decorative{
-	anchored = 1;
-	name = "flesh cluster";
-	desc = "Something's moving inside...";
-	icon = 'icons/mob/simple/animal.dmi';
-	icon_state = "fleshblob";
-	pixel_x = -8;
-	pixel_y = 1
-	},
-/turf/open/floor/plating/cobblestone,
-/area/trainstation/outdoor/station)
 "wc" = (
 /obj/structure/prop/vehicle/ambulance,
 /turf/open/floor/asphalt,
@@ -3457,7 +3508,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	pixel_x = 1;
@@ -3467,7 +3518,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	pixel_x = 2;
@@ -3511,17 +3562,12 @@
 	},
 /turf/open/indestructible/train_platform,
 /area/trainstation/outdoor/station)
-"wH" = (
-/obj/effect/decal/cleanable/blood,
-/obj/item/ammo_casing/b50cal,
-/turf/open/misc/asteroid/snow/standard_air,
-/area/trainstation/outdoor/station)
 "wI" = (
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -3529,6 +3575,14 @@
 	},
 /obj/structure/deployable_barricade/wooden,
 /turf/open/misc/asteroid/snow/standard_air,
+/area/trainstation/outdoor/station)
+"wK" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/shuttle/exploration/doubleside{
+	dir = 8
+	},
 /area/trainstation/outdoor/station)
 "wM" = (
 /obj/effect/mob_spawn/corpse/human/charredskeleton,
@@ -3617,19 +3671,6 @@
 	},
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
-"xi" = (
-/obj/structure/decorative{
-	anchored = 1;
-	name = "flesh amoeba";
-	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
-	icon_state = "blob_floor";
-	color = "#d66569"
-	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
-	},
-/area/trainstation/outdoor/station)
 "xn" = (
 /obj/machinery/porta_turret/syndicate{
 	dir = 9
@@ -3666,7 +3707,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
@@ -3725,7 +3766,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -3747,18 +3788,15 @@
 	},
 /turf/closed/wall/city/siding/style/style_1,
 /area/trainstation/outdoor/station)
-"xL" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = -4;
-	pixel_y = 11
-	},
-/turf/open/indestructible/meat,
-/area/trainstation/outdoor/station)
 "xM" = (
 /obj/machinery/door/poddoor/preopen{
 	id = "bridge blast";
 	name = "Blast Door"
 	},
+/turf/open/floor/iron/shuttle/exploration/blanktile,
+/area/trainstation/outdoor/station)
+"xP" = (
+/mob/living/basic/khara_mutant/arachnid,
 /turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
 "xT" = (
@@ -3787,15 +3825,17 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
 /turf/closed/wall/city/siding/red/style/style_3,
 /area/trainstation/outdoor/station)
 "yf" = (
-/obj/structure/prop/big/widowmaker,
-/turf/open/misc/asteroid/snow/standard_air,
+/obj/structure/chair/office/tactical{
+	dir = 1
+	},
+/turf/open/floor/catwalk_floor/iron_dark,
 /area/trainstation/outdoor/station)
 "yi" = (
 /obj/item/ammo_casing/mm20x138{
@@ -3856,6 +3896,13 @@
 "yA" = (
 /turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
+"yB" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/obj/machinery/photocopier/prebuilt,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
+/area/trainstation/outdoor/station)
 "yD" = (
 /turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
@@ -3881,11 +3928,21 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
 /turf/closed/indestructible/opshuttle,
+/area/trainstation/outdoor/station)
+"yM" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/effect/spawner/random/trash/box,
+/turf/open/floor/iron/shuttle/exploration/corner_invcorner,
 /area/trainstation/outdoor/station)
 "yR" = (
 /obj/structure/decorative{
@@ -3913,9 +3970,6 @@
 "yX" = (
 /obj/structure/mecha_wreckage/durand,
 /turf/open/misc/asphalt/no_border,
-/area/trainstation/outdoor/station)
-"yY" = (
-/turf/open/floor/plating/cobblestone,
 /area/trainstation/outdoor/station)
 "za" = (
 /obj/structure/window/reinforced/fulltile/ice{
@@ -3974,7 +4028,28 @@
 /area/trainstation/outdoor/station)
 "zi" = (
 /mob/living/basic/khara_mutant/flesh_spider,
-/turf/open/floor/plating/cobblestone,
+/area/trainstation/outdoor/station)
+"zk" = (
+/obj/structure/railing/unbreakable{
+	dir = 9
+	},
+/obj/structure/decorative{
+	density = 1;
+	anchored = 1;
+	name = "magnetic stasis emitter";
+	desc = "A machine that somehow fabricates hardlight using electrons. Seems to be impervious to conventional means of damage.";
+	icon = 'icons/obj/machines/modular_shield_generator.dmi';
+	icon_state = "charger_on_closed";
+	dir = 1;
+	uses_integrity = 0
+	},
+/obj/structure/emergency_shield/regenerating{
+	uses_integrity = 0;
+	pixel_y = 32;
+	name = "stasis field";
+	desc = "A stasis field that's holding the train in place. Seems to be projected by the stasis projector."
+	},
+/turf/open/indestructible/plating,
 /area/trainstation/outdoor/station)
 "zn" = (
 /obj/effect/turf_decal/siding,
@@ -3985,8 +4060,12 @@
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
 "zD" = (
-/obj/item/gun/ballistic/shotgun/riot/sol,
-/turf/open/indestructible/meat,
+/obj/effect/turf_decal/siding/dark{
+	dir = 5
+	},
+/turf/open/floor/iron/shuttle/exploration/corner_invcorner{
+	dir = 8
+	},
 /area/trainstation/outdoor/station)
 "zE" = (
 /obj/effect/decal/cleanable/blood/old,
@@ -4043,6 +4122,27 @@
 /obj/structure/prop/huge/tower/on,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
+"Al" = (
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/obj/structure/decorative{
+	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
+	icon_state = "l4-2-4";
+	anchored = 1;
+	name = "cable";
+	color = "#222222"
+	},
+/obj/structure/decorative{
+	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
+	icon_state = "l4-4-8";
+	anchored = 1;
+	name = "cable";
+	color = "#222222";
+	pixel_y = -14
+	},
+/turf/open/indestructible/plating,
+/area/trainstation/outdoor/station)
 "Am" = (
 /obj/item/ammo_casing/shotgun/incendiary{
 	pixel_x = -1;
@@ -4064,12 +4164,14 @@
 /obj/item/gun/ballistic/automatic/c20r/sc_c20r,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
-"Au" = (
-/obj/item/gun/ballistic/shotgun/riot/sol,
-/turf/open/misc/asteroid/snow/standard_air,
-/area/trainstation/outdoor/station)
 "Aw" = (
-/turf/closed/wall/city/siding/red,
+/obj/structure/rack/shelf,
+/obj/effect/turf_decal/delivery,
+/obj/effect/turf_decal/siding/dark{
+	dir = 10
+	},
+/obj/effect/spawner/random/engineering,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/outdoor/station)
 "Ax" = (
 /obj/effect/decal/cleanable/blood,
@@ -4089,13 +4191,11 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
-	},
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "AC" = (
 /obj/item/ammo_casing/shotgun/incendiary{
@@ -4157,7 +4257,6 @@
 	dir = 5;
 	pixel_y = 12
 	},
-/obj/item/gun/ballistic/shotgun/riot/sol,
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
 "AS" = (
@@ -4263,7 +4362,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	pixel_x = -31
@@ -4280,7 +4379,6 @@
 	pixel_y = -4;
 	pixel_x = 12
 	},
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "Bw" = (
@@ -4407,7 +4505,6 @@
 	pixel_y = -1;
 	pixel_x = 14
 	},
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
 "Cy" = (
@@ -4435,7 +4532,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	pixel_x = 1;
@@ -4445,7 +4542,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	pixel_x = -1;
@@ -4538,7 +4635,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
@@ -4546,7 +4643,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
@@ -4561,7 +4658,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -4589,10 +4686,6 @@
 /obj/structure/flora/tree/massive/dead/style_2,
 /obj/structure/flora/bush/fullgrass/style_random,
 /turf/open/misc/asteroid/snow/standard_air,
-/area/trainstation/outdoor/station)
-"Dx" = (
-/obj/structure/closet/crate/secure/weapon/milsim/medic,
-/turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
 "DB" = (
 /obj/structure/decorative{
@@ -4659,7 +4752,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -4682,6 +4775,12 @@
 	pixel_y = -6
 	},
 /turf/open/misc/asteroid/snow/standard_air,
+/area/trainstation/outdoor/station)
+"DZ" = (
+/obj/structure/window/reinforced/tinted/frosted/spawner/directional/east,
+/obj/structure/window/reinforced/tinted/frosted/spawner/directional/west,
+/obj/structure/grille/indestructible,
+/turf/open/floor/plating,
 /area/trainstation/outdoor/station)
 "Ec" = (
 /obj/structure/prop/general/zenithplatform3,
@@ -4743,20 +4842,26 @@
 	name = "Floor"
 	},
 /area/trainstation/outdoor/station)
-"EC" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = 8
+"EA" = (
+/obj/structure/railing/unbreakable{
+	dir = 1
 	},
 /obj/structure/decorative{
+	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
+	icon_state = "l4-2-8";
 	anchored = 1;
-	name = "flesh cluster";
-	desc = "Something's moving inside...";
-	icon = 'icons/mob/simple/animal.dmi';
-	icon_state = "fleshblob";
-	pixel_x = 7;
-	pixel_y = -17
+	name = "cable";
+	color = "#222222"
 	},
-/turf/open/indestructible/meat,
+/obj/structure/decorative{
+	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
+	icon_state = "l4-4-8";
+	anchored = 1;
+	name = "cable";
+	color = "#222222";
+	pixel_y = -14
+	},
+/turf/open/indestructible/plating,
 /area/trainstation/outdoor/station)
 "EG" = (
 /obj/item/ammo_casing/c357{
@@ -4819,15 +4924,12 @@
 	anchored = 1;
 	name = "access point"
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
-	},
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "EZ" = (
 /obj/effect/decal/cleanable/blood/trail_holder{
 	dir = 5
 	},
-/obj/item/ammo_box/magazine/m12g/empty,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "Fb" = (
@@ -4875,7 +4977,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -4916,13 +5018,31 @@
 	},
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
+"Fl" = (
+/obj/effect/turf_decal/siding/dark,
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/microwave/engineering/cell_included,
+/obj/structure/table/reinforced,
+/turf/open/floor/iron/shuttle/exploration/corner_invcorner{
+	dir = 4
+	},
+/area/trainstation/outdoor/station)
 "Fm" = (
 /obj/effect/gibspawner/human,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
+"Fn" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/obj/machinery/status_display/evac/directional/north,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
+/area/trainstation/outdoor/station)
 "Fo" = (
 /obj/effect/gibspawner/human,
-/obj/item/ammo_box/magazine/m12g/empty,
 /obj/effect/decal/cleanable/blood,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
@@ -4945,10 +5065,11 @@
 	},
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
-"Fw" = (
-/obj/structure/prop/general/wymanhole,
-/obj/item/ammo_box/magazine/m12g/empty,
-/turf/open/misc/dirt/icy_planet,
+"Ft" = (
+/obj/machinery/door/airlock/shuttle/ferry{
+	name = "Magnetic interlock control"
+	},
+/turf/open/indestructible/dark/textured,
 /area/trainstation/outdoor/station)
 "FD" = (
 /obj/effect/mob_spawn/corpse/human/charredskeleton,
@@ -5004,27 +5125,16 @@
 	},
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
-"FY" = (
-/obj/effect/decal/cleanable/blood,
-/obj/item/gun/ballistic/automatic/wt550/security,
-/turf/open/misc/asteroid/snow/standard_air,
-/area/trainstation/outdoor/station)
 "Gb" = (
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
 /turf/closed/wall/city/siding/style/style_1,
-/area/trainstation/outdoor/station)
-"Gd" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = -13
-	},
-/turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
 "Ge" = (
 /obj/structure/fence/interlink{
@@ -5033,8 +5143,7 @@
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
 "Gf" = (
-/obj/structure/prop/big/single,
-/turf/open/misc/asteroid/snow/standard_air,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/outdoor/station)
 "Gk" = (
 /obj/item/ammo_casing/shotgun/incendiary{
@@ -5074,11 +5183,25 @@
 	},
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
+"GC" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/obj/effect/spawner/random/structure/crate,
+/turf/open/indestructible/dark/textured,
+/area/trainstation/outdoor/station)
 "GJ" = (
 /obj/effect/decal/cleanable/blood/drip{
 	pixel_y = 11
 	},
 /turf/open/misc/asteroid/snow/standard_air,
+/area/trainstation/outdoor/station)
+"GK" = (
+/obj/effect/turf_decal/siding/dark,
+/obj/structure/table/reinforced,
+/obj/machinery/coffeemaker/impressa,
+/obj/item/storage/box/coffeepack,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/outdoor/station)
 "GO" = (
 /mob/living/basic/khara_mutant/flesh_spider,
@@ -5094,7 +5217,6 @@
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 6
 	},
-/obj/item/gun/ballistic/automatic/c20r/sc_c20r,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
 "GT" = (
@@ -5109,10 +5231,6 @@
 	},
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
-"GX" = (
-/obj/structure/prop/city/street_on_animated,
-/turf/open/floor/plating/cobblestone,
-/area/trainstation/outdoor/station)
 "GZ" = (
 /obj/structure/decorative{
 	anchored = 1;
@@ -5124,7 +5242,6 @@
 	pixel_y = -10
 	},
 /obj/effect/decal/cleanable/blood/old,
-/obj/item/ammo_box/magazine/m12g/empty,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "Ha" = (
@@ -5202,10 +5319,6 @@
 "Hx" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/misc/asphalt/no_border,
-/area/trainstation/outdoor/station)
-"HA" = (
-/obj/item/gun/ballistic/automatic/m6pdw,
-/turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "HB" = (
 /obj/item/ammo_casing/c38{
@@ -5287,6 +5400,13 @@
 	},
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
+"Ie" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 5
+	},
+/obj/effect/spawner/random/trash/graffiti,
+/turf/open/indestructible/dark/textured,
+/area/trainstation/outdoor/station)
 "If" = (
 /obj/effect/mob_spawn/corpse/human/nanotrasenelitesoldier,
 /obj/structure/flora/bush/fullgrass/style_random,
@@ -5315,10 +5435,6 @@
 	},
 /obj/effect/gibspawner/human,
 /turf/open/indestructible/meat,
-/area/trainstation/outdoor/station)
-"Ir" = (
-/obj/item/gun/ballistic/automatic/wt550/security,
-/turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "It" = (
 /obj/structure/decorative{
@@ -5355,9 +5471,17 @@
 /obj/structure/flora/bush/fullgrass/style_random,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
-"IH" = (
-/obj/item/ammo_box/magazine/m12g/empty,
-/turf/open/misc/asteroid/snow/standard_air,
+"IL" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/computer/trainstation_control{
+	dir = 8
+	},
+/turf/open/floor/iron/shuttle/exploration/doubleinvertcorner_side{
+	dir = 8
+	},
 /area/trainstation/outdoor/station)
 "IM" = (
 /obj/effect/decal/cleanable/blood/drip{
@@ -5381,6 +5505,15 @@
 	},
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
+"Je" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/structure/extinguisher_cabinet/directional/west,
+/turf/open/floor/iron/shuttle/exploration/doubleside{
+	dir = 8
+	},
+/area/trainstation/outdoor/station)
 "Jf" = (
 /obj/item/ammo_casing/c38/hotshot{
 	dir = 4;
@@ -5396,7 +5529,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	pixel_x = -32
@@ -5404,15 +5537,17 @@
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "Ji" = (
-/obj/machinery/computer/trainstation_control,
-/turf/open/floor/iron/shuttle/exploration/side,
+/obj/effect/turf_decal/siding/dark{
+	dir = 5
+	},
+/turf/open/indestructible/dark/textured,
 /area/trainstation/outdoor/station)
 "Jl" = (
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
@@ -5466,10 +5601,17 @@
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/starts_empty,
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
-"Jy" = (
-/obj/item/ammo_casing/c34_incendiary,
-/turf/open/indestructible/train_platform{
-	name = "Floor"
+"JA" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/structure/table/reinforced,
+/obj/machinery/fax{
+	fax_name = "Head of Personnel's Office";
+	name = "Head of Personnel's Fax Machine"
+	},
+/turf/open/floor/iron/shuttle/exploration/doubleside{
+	dir = 8
 	},
 /area/trainstation/outdoor/station)
 "JC" = (
@@ -5489,7 +5631,6 @@
 /area/trainstation/outdoor/station)
 "JF" = (
 /obj/effect/decal/cleanable/blood,
-/turf/open/floor/plating/cobblestone,
 /area/trainstation/outdoor/station)
 "JH" = (
 /mob/living/basic/khara_mutant/spreader,
@@ -5518,12 +5659,6 @@
 /obj/item/gun/ballistic/automatic/pistol/m1911,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
-"JV" = (
-/obj/item/ammo_casing/c300,
-/turf/open/indestructible/train_platform{
-	name = "Floor"
-	},
-/area/trainstation/outdoor/station)
 "Kd" = (
 /obj/structure/prop/general/zenithplatform3,
 /obj/structure/railing,
@@ -5549,6 +5684,22 @@
 	pixel_y = 2
 	},
 /turf/open/misc/asteroid/snow/standard_air,
+/area/trainstation/outdoor/station)
+"Kk" = (
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/obj/structure/emergency_shield/regenerating{
+	uses_integrity = 0;
+	pixel_y = 32;
+	name = "stasis field";
+	desc = "A stasis field that's holding the train in place. Seems to be projected by the stasis projector."
+	},
+/obj/structure/prop/general/zcomputermachine_off{
+	desc = "A relatively low-tech solution for internal computing, internal network mail, and logging. This model appears to be quite old.";
+	name = "locked down stasis control terminal"
+	},
+/turf/open/indestructible/plating,
 /area/trainstation/outdoor/station)
 "Kn" = (
 /obj/item/gun/ballistic/rifle/boltaction,
@@ -5616,8 +5767,7 @@
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "KO" = (
-/obj/structure/prop/big/napalm,
-/turf/open/misc/asteroid/snow/standard_air,
+/turf/open/floor/catwalk_floor/iron_dark,
 /area/trainstation/outdoor/station)
 "KT" = (
 /obj/effect/mob_spawn/corpse/human/nanotrasenelitesoldier,
@@ -5678,6 +5828,10 @@
 /obj/structure/prop/big/laser_beam,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
+"Lu" = (
+/obj/effect/turf_decal/siding/dark,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
+/area/trainstation/outdoor/station)
 "Lw" = (
 /obj/item/ammo_casing/shotgun/incendiary{
 	pixel_x = 15;
@@ -5727,7 +5881,6 @@
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 1
 	},
-/obj/structure/closet/crate/secure/weapon/milsim/medic,
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
 "LN" = (
@@ -5750,6 +5903,22 @@
 	pixel_y = 7
 	},
 /turf/open/misc/asteroid/snow/standard_air,
+/area/trainstation/outdoor/station)
+"LW" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/structure/table/reinforced,
+/obj/item/flashlight/lamp,
+/obj/item/papercutter,
+/obj/item/pen,
+/obj/effect/spawner/random/engineering/tool,
+/turf/open/floor/iron/shuttle/exploration/corner_invcorner{
+	dir = 8
+	},
 /area/trainstation/outdoor/station)
 "LY" = (
 /obj/structure/prop/city/street_dmg_animated,
@@ -5800,7 +5969,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -5835,10 +6004,6 @@
 	pixel_y = -3
 	},
 /turf/open/indestructible/meat,
-/area/trainstation/outdoor/station)
-"Mo" = (
-/obj/item/gun/ballistic/shotgun/riot/sol,
-/turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
 "Mq" = (
 /obj/structure/decorative{
@@ -5885,7 +6050,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -5953,6 +6118,14 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
+"MW" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/shuttle/exploration/corner_invcorner{
+	dir = 4
+	},
+/area/trainstation/outdoor/station)
 "MX" = (
 /obj/effect/mob_spawn/ghost_role/flesh_spider,
 /turf/open/indestructible/meat,
@@ -5964,13 +6137,18 @@
 /obj/effect/gibspawner/human,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
+"Nb" = (
+/obj/effect/turf_decal/siding/dark,
+/obj/item/radio/intercom/directional/south,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
+/area/trainstation/outdoor/station)
 "Nc" = (
 /obj/structure/prop/general/redalert,
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
@@ -5990,7 +6168,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -6067,6 +6245,44 @@
 	},
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
+"Nv" = (
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/obj/structure/emergency_shield/regenerating{
+	uses_integrity = 0;
+	pixel_y = 32;
+	name = "stasis field";
+	desc = "A stasis field that's holding the train in place. Seems to be projected by the stasis projector."
+	},
+/obj/structure/decorative{
+	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
+	icon_state = "l4-4-8";
+	anchored = 1;
+	name = "cable";
+	color = "#222222"
+	},
+/obj/structure/decorative{
+	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
+	icon_state = "l4-4-8";
+	anchored = 1;
+	name = "cable";
+	color = "#222222"
+	},
+/obj/structure/decorative{
+	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi';
+	icon_state = "l4-4-8";
+	anchored = 1;
+	name = "cable";
+	color = "#222222";
+	pixel_y = -14
+	},
+/turf/open/indestructible/plating,
+/area/trainstation/outdoor/station)
+"Nz" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/catwalk_floor/iron_dark,
+/area/trainstation/outdoor/station)
 "NB" = (
 /obj/structure/decorative{
 	anchored = 1;
@@ -6098,7 +6314,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -6162,7 +6378,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
@@ -6179,14 +6395,12 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
-	},
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "NZ" = (
 /obj/item/ammo_casing/c38{
@@ -6283,18 +6497,6 @@
 /obj/effect/gibspawner/human,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
-"Ov" = (
-/obj/item/gun/ballistic/shotgun/riot/sol,
-/turf/open/misc/asphalt/no_border,
-/area/trainstation/outdoor/station)
-"Ow" = (
-/obj/item/ammo_casing/b50cal,
-/obj/item/ammo_casing/b50cal{
-	pixel_x = 11;
-	pixel_y = -6
-	},
-/turf/open/misc/asphalt/no_border,
-/area/trainstation/outdoor/station)
 "OE" = (
 /obj/structure/decorative{
 	anchored = 1;
@@ -6383,9 +6585,16 @@
 /obj/structure/prop/general/redalert,
 /turf/closed/wall/city/siding,
 /area/trainstation/outdoor/station)
-"Pi" = (
-/obj/item/ammo_box/magazine/m12g/empty,
-/turf/open/misc/asphalt/no_border,
+"Pd" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/machinery/modular_computer/preset/civilian{
+	dir = 4
+	},
+/turf/open/floor/iron/shuttle/exploration/doubleside{
+	dir = 8
+	},
 /area/trainstation/outdoor/station)
 "Pm" = (
 /obj/item/ammo_casing/c357{
@@ -6409,11 +6618,22 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
 /turf/closed/wall/city/siding/style/style_2,
+/area/trainstation/outdoor/station)
+"Px" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/spawner/random/entertainment/lighter,
+/obj/effect/spawner/random/medical/medkit,
+/obj/structure/table/reinforced,
+/turf/open/floor/iron/shuttle/exploration/doubleside{
+	dir = 8
+	},
 /area/trainstation/outdoor/station)
 "Pz" = (
 /obj/structure/decorative{
@@ -6495,17 +6715,10 @@
 /obj/structure/prop/general/bigroller_up3,
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
-"Qm" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_y = 10
-	},
-/turf/open/misc/dirt/icy_planet,
-/area/trainstation/outdoor/station)
 "Qn" = (
 /obj/item/ammo_casing/c357{
 	dir = 9
 	},
-/obj/item/ammo_box/magazine/m12g/empty,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
 "Qq" = (
@@ -6540,6 +6753,10 @@
 	},
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
+"QD" = (
+/obj/item/paper/trainstation_password,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
+/area/trainstation/outdoor/station)
 "QI" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 8;
@@ -6559,7 +6776,6 @@
 	pixel_x = 24;
 	pixel_y = 15
 	},
-/obj/item/ammo_box/magazine/m12g/empty,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "QU" = (
@@ -6568,6 +6784,13 @@
 	pixel_x = -11
 	},
 /turf/open/misc/asteroid/snow/standard_air,
+/area/trainstation/outdoor/station)
+"QZ" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/obj/structure/filingcabinet/medical,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/outdoor/station)
 "Rb" = (
 /obj/item/ammo_casing/shotgun/incendiary{
@@ -6678,7 +6901,6 @@
 	pixel_y = 2
 	},
 /obj/item/ammo_box/magazine/c40sol_rifle/drum/starts_empty,
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "RP" = (
@@ -6839,7 +7061,6 @@
 	dir = 10;
 	pixel_y = -12
 	},
-/obj/item/ammo_box/magazine/m12g/empty,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
 "SS" = (
@@ -6877,11 +7098,11 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor,
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "SX" = (
 /obj/effect/mob_spawn/corpse/human/nanotrasenassaultsoldier,
@@ -6918,7 +7139,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8
@@ -6966,8 +7187,10 @@
 /turf/open/indestructible/train_platform,
 /area/trainstation/outdoor/station)
 "TV" = (
-/obj/item/gun/ballistic/rifle/boltaction,
-/turf/open/misc/asphalt/no_border,
+/obj/machinery/door/airlock/shuttle/ferry{
+	name = "Magnetic interlock control"
+	},
+/turf/open/indestructible/vault,
 /area/trainstation/outdoor/station)
 "TY" = (
 /obj/item/ammo_casing/shotgun/incendiary{
@@ -6992,20 +7215,20 @@
 /obj/structure/prop/general/redalert,
 /turf/closed/wall/city/siding/style/style_2,
 /area/trainstation/outdoor/station)
-"Uh" = (
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
-/mob/living/basic/khara_mutant/flesh_spider,
-/turf/open/misc/asphalt/no_border,
-/area/trainstation/outdoor/station)
 "Us" = (
-/turf/closed/wall/city/siding/red/style,
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/status_display/evac/directional/east,
+/turf/open/indestructible/dark/textured,
 /area/trainstation/outdoor/station)
 "Uw" = (
 /obj/structure/decorative{
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -7016,7 +7239,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4
@@ -7036,6 +7259,22 @@
 	pixel_y = 10
 	},
 /turf/open/floor/iron/shuttle/exploration/blanktile,
+/area/trainstation/outdoor/station)
+"UB" = (
+/obj/structure/prop/city/buildingventbig11_off{
+	name = "Generator";
+	dir = 1;
+	pixel_x = -16
+	},
+/obj/structure/railing{
+	dir = 2;
+	color = "#666666";
+	pixel_y = 0
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 10
+	},
+/turf/open/indestructible/dark/textured,
 /area/trainstation/outdoor/station)
 "UD" = (
 /obj/item/ammo_casing/c38{
@@ -7066,7 +7305,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -7105,10 +7344,8 @@
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "Vi" = (
-/obj/structure/prop/general/highvoltagegrille{
-	dir = 8
-	},
-/turf/open/misc/asteroid/snow/standard_air,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/outdoor/station)
 "Vn" = (
 /obj/effect/mob_spawn/corpse/human/charredskeleton,
@@ -7160,7 +7397,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -7213,7 +7450,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 1
@@ -7222,24 +7459,14 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569"
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor{
-	name = "Blocked door"
-	},
+/turf/closed/indestructible/fakedoor,
 /area/trainstation/outdoor/station)
 "Wh" = (
 /turf/open/floor/asphalt,
-/area/trainstation/outdoor/station)
-"Wj" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_x = -4;
-	pixel_y = 11
-	},
-/obj/effect/decal/cleanable/blood,
-/turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
 "Wk" = (
 /turf/open/misc/asphalt/no_border,
@@ -7249,7 +7476,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -7269,7 +7496,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 4;
@@ -7280,7 +7507,6 @@
 /area/trainstation/outdoor/station)
 "Wr" = (
 /obj/effect/mob_spawn/ghost_role/flesh_spider,
-/turf/open/floor/plating/cobblestone,
 /area/trainstation/outdoor/station)
 "WA" = (
 /obj/structure/prop/city/street_on_animated,
@@ -7306,7 +7532,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_wall";
 	color = "#d66569";
 	dir = 8
@@ -7380,7 +7606,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -7403,7 +7629,6 @@
 /area/trainstation/outdoor/station)
 "Xd" = (
 /obj/effect/gibspawner/human,
-/obj/item/ammo_box/magazine/m12g/empty,
 /mob/living/basic/khara_mutant/flesh_spider,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
@@ -7439,11 +7664,6 @@
 "Xv" = (
 /obj/structure/prop/city/street_on_animated,
 /obj/item/gun/ballistic/automatic/c20r/sc_c20r,
-/turf/open/misc/asteroid/snow/standard_air,
-/area/trainstation/outdoor/station)
-"Xw" = (
-/mob/living/basic/khara_mutant/flesh_spider,
-/obj/item/gun/ballistic/automatic/sniper_rifle,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "Xz" = (
@@ -7517,14 +7737,6 @@
 /obj/item/gun/medbeam,
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
-"XW" = (
-/obj/structure/table,
-/obj/item/stack/medical/gauze{
-	pixel_x = -3
-	},
-/obj/item/stack/medical/suture,
-/turf/open/floor/asphalt,
-/area/trainstation/outdoor/station)
 "XY" = (
 /obj/structure/decorative{
 	anchored = 1;
@@ -7557,15 +7769,6 @@
 	pixel_x = -5;
 	pixel_y = 2
 	},
-/turf/open/misc/asteroid/snow/standard_air,
-/area/trainstation/outdoor/station)
-"Ye" = (
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
-/obj/item/gun/ballistic/automatic/pistol/m1911,
-/turf/open/misc/asphalt/no_border,
-/area/trainstation/outdoor/station)
-"Yi" = (
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "Yn" = (
@@ -7603,7 +7806,7 @@
 	pixel_x = -4;
 	pixel_y = -2
 	},
-/turf/open/floor/plating/cobblestone,
+/turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
 "YD" = (
 /obj/item/gun/ballistic/automatic/pistol/m1911,
@@ -7647,7 +7850,7 @@
 	anchored = 1;
 	name = "flesh amoeba";
 	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
+	icon = 'modular_bandastation/fenysha_events/icons/_prefabs/blob_resin.dmi';
 	icon_state = "blob_floor";
 	color = "#d66569"
 	},
@@ -7676,6 +7879,15 @@
 	pixel_y = -3
 	},
 /turf/open/misc/asphalt/no_border,
+/area/trainstation/outdoor/station)
+"YS" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/obj/item/kirbyplants/random,
+/turf/open/floor/iron/shuttle/exploration/corner_invcorner{
+	dir = 1
+	},
 /area/trainstation/outdoor/station)
 "YT" = (
 /obj/structure/fence/interlink{
@@ -7711,16 +7923,17 @@
 	},
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
-"Zj" = (
-/obj/structure/decorative{
-	anchored = 1;
-	name = "flesh amoeba";
-	desc = "It's pulsing...";
-	icon = 'modular_skyrat/modules/mold/icons/blob_resin.dmi';
-	icon_state = "blob_wall";
-	color = "#d66569"
+"Zk" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
 	},
-/turf/closed/indestructible/hoteldoor/fakedoor,
+/obj/structure/chair/office/tactical{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/shuttle/exploration/doubleside{
+	dir = 8
+	},
 /area/trainstation/outdoor/station)
 "Zu" = (
 /obj/structure/prop/tgmc_console4{
@@ -7740,12 +7953,14 @@
 /obj/structure/flora/tree/massive/dead/style_1,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
-"ZE" = (
-/obj/item/ammo_casing/b50cal{
-	pixel_y = 2;
-	pixel_x = -20
+"ZH" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 10
 	},
-/turf/open/misc/asteroid/snow/standard_air,
+/obj/structure/closet/secure_closet/personal,
+/obj/effect/spawner/random/special_lighter,
+/obj/effect/spawner/random/entertainment/plushie_delux,
+/turf/open/indestructible/dark/textured,
 /area/trainstation/outdoor/station)
 "ZK" = (
 /obj/structure/fence/interlink{
@@ -7775,10 +7990,6 @@
 	pixel_y = -10
 	},
 /turf/open/indestructible/meat,
-/area/trainstation/outdoor/station)
-"ZS" = (
-/obj/item/ammo_box/magazine/miecz/spawns_empty,
-/turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "ZU" = (
 /obj/item/ammo_casing/a223,
@@ -7942,8 +8153,8 @@ Rl
 FD
 Rl
 tT
-xi
-xi
+SW
+SW
 nX
 mR
 mR
@@ -8005,7 +8216,7 @@ sh
 FQ
 SX
 yD
-yD
+hM
 qq
 yD
 fq
@@ -8045,12 +8256,12 @@ Rl
 Rl
 sh
 Ky
-yD
+QD
 qq
 px
 uS
 yD
-yD
+xP
 yD
 uZ
 xM
@@ -8086,7 +8297,7 @@ Rl
 Rl
 Rl
 sh
-Ji
+FQ
 yD
 yD
 HP
@@ -8191,7 +8402,7 @@ YX
 (10,1,1) = {"
 jt
 ec
-Zj
+vv
 ct
 ct
 ct
@@ -8218,7 +8429,7 @@ uf
 yD
 uS
 qq
-yD
+hM
 yD
 ov
 xM
@@ -8527,7 +8738,7 @@ YX
 (18,1,1) = {"
 oz
 Rl
-Zj
+vv
 ct
 ct
 ct
@@ -8995,9 +9206,9 @@ Tq
 tT
 Tq
 Tq
-xi
-xi
-xi
+SW
+SW
+SW
 Tq
 Tq
 WL
@@ -9045,7 +9256,7 @@ Rl
 Rl
 Rl
 Rl
-Ir
+Rl
 jn
 Rl
 Rl
@@ -9351,7 +9562,7 @@ Rl
 Rl
 pn
 jn
-Ir
+Rl
 Rl
 Rl
 Rl
@@ -9423,7 +9634,7 @@ ct
 ct
 wj
 Rn
-FY
+ec
 Rl
 Rl
 Rl
@@ -9456,7 +9667,7 @@ ct
 ct
 ct
 AB
-TV
+Wk
 Wk
 Wk
 Wg
@@ -9666,7 +9877,7 @@ aN
 kF
 zF
 Wk
-yY
+ur
 LN
 Mj
 Rl
@@ -9891,7 +10102,7 @@ Rl
 Rl
 lC
 kA
-JV
+kA
 Rl
 WA
 kA
@@ -9962,7 +10173,7 @@ ct
 vv
 Wk
 Pa
-yY
+ur
 AB
 ct
 ct
@@ -9975,7 +10186,7 @@ Rl
 Rl
 zn
 kA
-JV
+kA
 Rl
 Ek
 pa
@@ -10019,7 +10230,7 @@ kA
 Rl
 Rl
 kA
-Jy
+kA
 kA
 OT
 kA
@@ -10299,7 +10510,7 @@ hU
 YL
 gy
 YL
-tt
+yA
 ct
 ct
 ct
@@ -10379,7 +10590,7 @@ oz
 ct
 ct
 ct
-wj
+ay
 ie
 fJ
 Bo
@@ -10421,9 +10632,9 @@ oz
 ct
 ct
 ct
-oz
+SW
 YL
-zD
+YL
 yI
 oz
 ct
@@ -10463,7 +10674,7 @@ wj
 ct
 ct
 ct
-xi
+SW
 Wk
 BM
 mB
@@ -10591,7 +10802,7 @@ YL
 rJ
 ec
 Wk
-rg
+kF
 wf
 Rl
 Wk
@@ -10638,11 +10849,11 @@ yX
 Wk
 mu
 GO
-yY
+Wk
 LN
 aF
 GO
-ay
+zP
 Wk
 Hi
 Wk
@@ -10673,16 +10884,16 @@ zP
 hQ
 OG
 XA
-Au
+Rl
 Wk
 OQ
 aN
 Gm
-yY
+Wk
 Sg
 kf
 do
-fv
+do
 zP
 ih
 Wk
@@ -10799,7 +11010,7 @@ wj
 ct
 ct
 ct
-xi
+SW
 iH
 Wk
 Wk
@@ -10893,7 +11104,7 @@ ct
 ct
 wj
 gq
-ZS
+Wk
 kF
 Rl
 aN
@@ -10903,7 +11114,7 @@ gq
 Rl
 Rl
 Rl
-Ye
+YD
 Ei
 aN
 aN
@@ -10939,7 +11150,7 @@ Gr
 Wk
 NC
 Bm
-pF
+gq
 ec
 vU
 ec
@@ -10967,7 +11178,7 @@ wj
 ct
 ct
 ct
-xi
+SW
 Rl
 nz
 Rl
@@ -11033,7 +11244,7 @@ pY
 hX
 bm
 YL
-ZS
+Wk
 Rl
 Rl
 Rl
@@ -11054,7 +11265,7 @@ eG
 jt
 VE
 wy
-Ov
+Wk
 oz
 jt
 jt
@@ -11071,7 +11282,7 @@ ct
 Pw
 YL
 Ci
-jU
+YL
 It
 Kj
 ZM
@@ -11141,14 +11352,14 @@ Rl
 YR
 aM
 CZ
-yY
+Wk
 VM
 JT
 RG
 uM
 Kq
 bU
-li
+et
 ct
 ct
 ct
@@ -11156,7 +11367,7 @@ wd
 sB
 It
 tP
-jU
+YL
 ho
 Rl
 Wk
@@ -11182,10 +11393,10 @@ YL
 Lt
 Rl
 ML
-wb
+OK
 Wk
 Wk
-yY
+Wk
 iN
 Rl
 Rl
@@ -11406,7 +11617,7 @@ ct
 ct
 aA
 zI
-tm
+dy
 YL
 Rl
 Wk
@@ -11537,7 +11748,7 @@ pH
 pH
 hW
 tr
-xL
+YL
 qi
 By
 KX
@@ -11565,7 +11776,7 @@ PM
 GQ
 Pt
 YL
-Fw
+OP
 tz
 WZ
 qF
@@ -11578,7 +11789,7 @@ So
 Ap
 gJ
 YL
-Wj
+OG
 MX
 dy
 vU
@@ -11613,18 +11824,18 @@ eO
 Bk
 LR
 Tb
-jU
+YL
 Vv
 Kv
 GR
 jY
 PY
-EC
+jY
 SN
 YL
-Gd
+YL
 Wk
-IH
+Rl
 Rl
 Rl
 Pz
@@ -11682,7 +11893,7 @@ df
 Wh
 Wh
 Of
-eR
+Wk
 Kq
 nd
 ct
@@ -11766,9 +11977,9 @@ Lp
 Lp
 Lp
 NM
-rF
+uz
 aN
-iV
+et
 ct
 ct
 ct
@@ -11808,8 +12019,8 @@ Ge
 fs
 Ge
 fg
-Ow
-wH
+Wk
+ec
 nd
 ct
 ct
@@ -11823,7 +12034,7 @@ ct
 ct
 ct
 Va
-Uh
+GO
 Gb
 ct
 ct
@@ -11833,7 +12044,7 @@ Va
 Va
 Fk
 Wk
-yY
+aN
 qs
 Gb
 mX
@@ -11875,7 +12086,7 @@ ct
 Gb
 ui
 Rl
-Rl
+aN
 ZW
 Va
 ct
@@ -11891,8 +12102,8 @@ jH
 Gb
 jH
 nd
-Xw
-Qm
+Kq
+aN
 kF
 et
 ct
@@ -11928,14 +12139,14 @@ YX
 "}
 (99,1,1) = {"
 Va
-Rl
-Rl
-Rl
-Rl
+ct
+ct
+ct
+ct
 lm
 KN
 Wk
-yY
+Wk
 nd
 ct
 ct
@@ -11948,7 +12159,7 @@ ct
 ct
 ct
 ct
-tt
+yA
 Wk
 Va
 ct
@@ -11959,7 +12170,7 @@ ct
 Ld
 ec
 Fm
-yY
+aN
 Rl
 ik
 Gb
@@ -11970,10 +12181,10 @@ YX
 "}
 (100,1,1) = {"
 Va
-Rl
-Rl
-Rl
-Rl
+ct
+ct
+ct
+ct
 et
 tV
 wf
@@ -11992,7 +12203,7 @@ ct
 ct
 Va
 aN
-tt
+yA
 ct
 ct
 ct
@@ -12001,7 +12212,7 @@ ct
 Va
 sK
 sw
-yY
+aN
 Rl
 Rl
 Va
@@ -12012,10 +12223,10 @@ YX
 "}
 (101,1,1) = {"
 Gb
-Rl
-Rl
-Rl
-Rl
+ct
+ct
+ct
+ct
 kz
 bI
 Wk
@@ -12054,10 +12265,10 @@ YX
 "}
 (102,1,1) = {"
 Va
-Rl
-Rl
-Rl
-Rl
+ct
+ct
+ct
+ct
 nd
 nj
 Rl
@@ -12126,7 +12337,7 @@ ct
 ct
 Va
 Iz
-yY
+aN
 YL
 YL
 Va
@@ -12191,7 +12402,7 @@ WF
 Wk
 ij
 GO
-vz
+Wk
 XY
 Jx
 Oj
@@ -12235,7 +12446,7 @@ aN
 Rl
 kF
 GO
-Ov
+Wk
 YL
 bX
 Rl
@@ -12255,7 +12466,7 @@ Rl
 Yx
 Wk
 Rl
-xi
+SW
 ct
 ct
 ct
@@ -12274,7 +12485,7 @@ AC
 bV
 Rl
 BM
-HA
+Rl
 xh
 YL
 Dc
@@ -12293,7 +12504,7 @@ ct
 ct
 ct
 Va
-yY
+aN
 Fo
 YL
 EU
@@ -12364,7 +12575,7 @@ YL
 BZ
 Pr
 Wk
-ZE
+Rl
 et
 ct
 ct
@@ -12405,7 +12616,7 @@ YL
 pr
 uo
 YL
-eb
+yX
 Rl
 Va
 ct
@@ -12518,15 +12729,15 @@ YX
 oz
 wN
 wN
-tI
-tI
+mX
+mX
 pU
-tI
-tI
+mX
+mX
 pU
-tI
-tI
-tI
+mX
+mX
+mX
 wN
 tT
 Hx
@@ -12616,13 +12827,13 @@ tT
 jM
 zE
 NG
-qr
+Wk
 Va
 Va
 aA
 kl
 Hx
-Pi
+Wk
 GO
 Gb
 VX
@@ -12659,7 +12870,7 @@ cI
 zE
 vH
 GO
-Ov
+Wk
 kF
 aN
 Wk
@@ -12746,15 +12957,15 @@ GZ
 nF
 nF
 Uw
-xi
+SW
 nF
 Uw
 nF
 cG
 zc
-yY
+aN
 JC
-yY
+aN
 Va
 ct
 ct
@@ -12825,7 +13036,7 @@ ct
 wN
 Ni
 Wk
-ZS
+Wk
 Wk
 nF
 ct
@@ -12878,7 +13089,7 @@ ct
 nF
 Cy
 Hh
-qK
+Wh
 XM
 Wk
 VX
@@ -12918,9 +13129,9 @@ ct
 ct
 ct
 Pc
-Yi
+Rl
 Wh
-Mo
+aN
 mk
 LN
 Pw
@@ -13239,13 +13450,13 @@ Kd
 aO
 gq
 MJ
-Dx
+Wh
 MJ
 MJ
 MJ
 Tl
 Tl
-Dx
+Wh
 MJ
 Wh
 Wh
@@ -13281,7 +13492,7 @@ Kd
 gq
 Rl
 MJ
-Dx
+Wh
 MJ
 IN
 LL
@@ -13420,7 +13631,7 @@ FU
 Wh
 aN
 aN
-yY
+aN
 Rl
 al
 Rl
@@ -13453,14 +13664,14 @@ tf
 jx
 Wh
 Wh
-XW
+tl
 Wh
 at
 MJ
 Wh
 Wh
 Wh
-yY
+aN
 aN
 aN
 aN
@@ -13505,9 +13716,9 @@ Wh
 Rl
 Js
 aN
-yY
 aN
-yY
+aN
+aN
 aN
 Rl
 Rl
@@ -13547,10 +13758,10 @@ Wh
 Rl
 Rl
 aN
-yY
 aN
 aN
-yY
+aN
+aN
 Rl
 Rl
 CO
@@ -13589,9 +13800,9 @@ Wh
 Rl
 CO
 Rl
-yY
-yY
-yY
+aN
+aN
+aN
 Rl
 Rl
 Rl
@@ -13632,7 +13843,7 @@ gq
 Rl
 Rl
 aN
-yY
+aN
 aN
 qw
 Rl
@@ -13674,7 +13885,7 @@ Rl
 al
 lD
 Rl
-yY
+aN
 aN
 Rl
 du
@@ -13716,7 +13927,7 @@ Rl
 gq
 gq
 gq
-yY
+aN
 aN
 Rl
 Rl
@@ -13758,8 +13969,8 @@ Rl
 RX
 gq
 Ok
-yY
-yY
+aN
+aN
 al
 Rl
 Rl
@@ -13791,7 +14002,7 @@ Rl
 al
 Rl
 aN
-yY
+aN
 vU
 Rl
 al
@@ -13833,7 +14044,7 @@ Rl
 Rl
 Rl
 aN
-yY
+aN
 Rl
 Rl
 Rl
@@ -13874,8 +14085,8 @@ CO
 Rl
 Lt
 Rl
-yY
-yY
+aN
+aN
 Rl
 du
 gq
@@ -13884,8 +14095,8 @@ Rl
 aO
 Rl
 Rl
-yY
-yY
+aN
+aN
 Rl
 lD
 Rl
@@ -13908,7 +14119,7 @@ wG
 Lg
 TQ
 mJ
-yY
+aN
 aN
 aN
 Rl
@@ -13927,7 +14138,7 @@ vU
 aN
 aN
 aN
-yY
+aN
 aN
 BZ
 aN
@@ -13952,14 +14163,14 @@ TQ
 mJ
 Pa
 aN
-yY
+aN
 aN
 Rl
 Rl
 Rl
 Rl
-yY
-yY
+aN
+aN
 Rl
 Rl
 Rl
@@ -13969,11 +14180,11 @@ aN
 aN
 aN
 aN
-yY
 aN
 aN
 aN
-yY
+aN
+aN
 Rl
 Rl
 Rl
@@ -13992,11 +14203,11 @@ TQ
 TQ
 TQ
 mJ
-yY
-yY
-yY
 aN
-yY
+aN
+aN
+aN
+aN
 aN
 aN
 Ok
@@ -14008,15 +14219,15 @@ Rl
 al
 aN
 Pa
-yY
-GX
+aN
+dx
 aN
 aN
 aN
 dx
 aN
-JF
-yY
+Pa
+aN
 Rl
 Rl
 Rl
@@ -14034,11 +14245,11 @@ TQ
 UR
 Ha
 mJ
-yY
-yY
 aN
-yY
-yY
+aN
+aN
+aN
+aN
 aN
 aN
 aN
@@ -14049,14 +14260,14 @@ Rl
 Rl
 Ok
 aN
-yY
 aN
-yY
-Wr
+aN
+aN
+BZ
 mc
 aN
 aN
-yY
+aN
 aN
 aN
 Rl
@@ -14084,12 +14295,6 @@ dx
 aN
 aN
 mc
-yY
-yY
-aN
-aN
-yY
-yY
 aN
 aN
 aN
@@ -14098,7 +14303,13 @@ aN
 aN
 aN
 aN
-yY
+aN
+aN
+aN
+aN
+aN
+aN
+aN
 aN
 mn
 Rl
@@ -14118,19 +14329,19 @@ UJ
 dq
 TQ
 Kd
-yY
-aN
-aN
-yY
-aN
-yY
-yY
 aN
 aN
 aN
 aN
-yY
-yY
+aN
+aN
+aN
+aN
+aN
+aN
+aN
+aN
+aN
 aN
 aN
 aN
@@ -14162,18 +14373,18 @@ TQ
 NQ
 aN
 aN
-yY
+aN
 aN
 Pa
-yY
 aN
 aN
 aN
 aN
 aN
-zi
-yY
-yY
+aN
+mc
+aN
+aN
 aN
 aN
 aN
@@ -14181,8 +14392,8 @@ Pa
 aN
 aN
 mc
-yY
-yY
+aN
+aN
 aN
 ef
 Rl
@@ -14210,22 +14421,22 @@ aN
 aN
 aN
 aN
-JF
+Pa
 aN
 aN
 Rl
 Rl
 Rl
-yY
-zi
-yY
+aN
+mc
 aN
 aN
-yY
 aN
 aN
-yY
-yY
+aN
+aN
+aN
+aN
 aN
 Rl
 Rl
@@ -14244,12 +14455,12 @@ UJ
 dq
 TQ
 Kd
-yY
-yY
 aN
-yY
 aN
-yY
+aN
+aN
+aN
+aN
 aN
 aN
 BZ
@@ -14260,13 +14471,13 @@ al
 Rl
 aN
 aN
-yY
-GX
-yY
-yY
 aN
-GX
-yY
+dx
+aN
+aN
+aN
+dx
+aN
 aN
 aN
 Rl
@@ -14331,7 +14542,7 @@ rV
 aN
 dx
 aN
-yY
+aN
 dx
 aN
 Rl
@@ -14370,9 +14581,9 @@ TQ
 Ha
 TQ
 mJ
-yY
 aN
-yY
+aN
+aN
 aN
 aN
 aN
@@ -14415,7 +14626,7 @@ mJ
 aN
 aN
 mc
-yY
+aN
 aN
 aN
 Rl
@@ -14454,8 +14665,8 @@ TQ
 TQ
 TQ
 mJ
-yY
-yY
+aN
+aN
 aN
 aN
 aN
@@ -15419,11 +15630,11 @@ TQ
 TQ
 UR
 TQ
-Kd
-gq
-Rl
-Rl
-gq
+TQ
+TQ
+TQ
+TQ
+TQ
 YX
 YX
 YX
@@ -15461,11 +15672,11 @@ UR
 TQ
 TQ
 TQ
-Kd
-Rl
-Rl
-Rl
-Rl
+TQ
+TQ
+TQ
+TQ
+TQ
 YX
 YX
 YX
@@ -15497,18 +15708,18 @@ Rl
 YX
 "}
 (184,1,1) = {"
-YX
-YX
-YX
-YX
-YX
-YX
-YX
+FG
+nF
+Va
+nF
+nF
+nF
+Va
+nF
+TQ
+TQ
+TQ
 Rl
-Rl
-gq
-Rl
-YX
 YX
 YX
 YX
@@ -15539,18 +15750,18 @@ Rl
 YX
 "}
 (185,1,1) = {"
-YX
-YX
-YX
-YX
-YX
-YX
-YX
+zk
+VX
+pB
+UB
+iT
+ep
+ZH
+nF
+TQ
+TQ
+TQ
 Rl
-Rl
-Rl
-YX
-YX
 YX
 YX
 YX
@@ -15581,19 +15792,19 @@ Rl
 YX
 "}
 (186,1,1) = {"
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
+Kk
+VX
+Ji
+er
+Ie
+Us
+GC
+nF
+TQ
+TQ
+TQ
 Rl
 Rl
-YX
-YX
-YX
 YX
 YX
 YX
@@ -15623,19 +15834,19 @@ Rl
 YX
 "}
 (187,1,1) = {"
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
+Al
+Va
+nF
+nF
+Ft
+nF
+nF
+Va
+nF
+TQ
+TQ
+Rl
+Rl
 YX
 YX
 YX
@@ -15665,19 +15876,19 @@ Rl
 YX
 "}
 (188,1,1) = {"
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
+mb
+nF
+ea
+tX
+wK
+Je
+MW
+Aw
+nE
+TQ
+TQ
+Rl
+Rl
 YX
 YX
 YX
@@ -15707,19 +15918,19 @@ Rl
 YX
 "}
 (189,1,1) = {"
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
+cN
+nF
+rx
+yf
+Nz
+KO
+Gf
+Lu
+TV
+TQ
+TQ
+Rl
+Rl
 YX
 YX
 YX
@@ -15749,6 +15960,19 @@ Rl
 YX
 "}
 (190,1,1) = {"
+qZ
+VX
+LW
+Pd
+JA
+bS
+fm
+dY
+nF
+TQ
+TQ
+Rl
+Rl
 YX
 YX
 YX
@@ -15759,23 +15983,10 @@ YX
 YX
 YX
 YX
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
+YX
+YX
+YX
+YX
 YX
 YX
 YX
@@ -15791,6 +16002,19 @@ Rl
 YX
 "}
 (191,1,1) = {"
+Nv
+nF
+yM
+Zk
+fy
+wK
+Fl
+nF
+Va
+TQ
+TQ
+Rl
+Rl
 YX
 YX
 YX
@@ -15801,23 +16025,10 @@ YX
 YX
 YX
 YX
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Gf
-yf
-KO
-Rl
+YX
+YX
+YX
+YX
 YX
 YX
 YX
@@ -15833,6 +16044,18 @@ Rl
 YX
 "}
 (192,1,1) = {"
+mb
+nF
+QZ
+KO
+Gf
+KO
+GK
+nF
+Rl
+Rl
+Rl
+Rl
 YX
 YX
 YX
@@ -15843,23 +16066,11 @@ YX
 YX
 YX
 YX
-Rl
-Us
-hI
-jt
-eG
-Rl
-aA
-Va
-VX
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
+YX
+YX
+YX
+YX
+YX
 YX
 YX
 YX
@@ -15875,33 +16086,33 @@ YX
 YX
 "}
 (193,1,1) = {"
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-YX
-Rl
-Us
+EA
+nF
+yB
+Nz
 hI
-jt
-eG
-Rl
-aA
+KO
+oR
 Va
-VX
 Rl
 Rl
 Rl
 Rl
-Rl
-Rl
-Rl
-Rl
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
 YX
 YX
 YX
@@ -15917,6 +16128,17 @@ YX
 YX
 "}
 (194,1,1) = {"
+Kk
+nF
+Fn
+KO
+Vi
+KO
+Nb
+VX
+Rl
+Rl
+Rl
 YX
 YX
 YX
@@ -15927,23 +16149,12 @@ YX
 YX
 YX
 YX
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-hM
-Rl
+YX
+YX
+YX
+YX
+YX
+YX
 YX
 YX
 YX
@@ -15959,6 +16170,15 @@ YX
 YX
 "}
 (195,1,1) = {"
+eo
+VX
+zD
+Px
+IL
+jz
+YS
+nF
+Rl
 YX
 YX
 YX
@@ -15969,23 +16189,14 @@ YX
 YX
 YX
 YX
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Lt
-Rl
-Rl
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
 YX
 YX
 YX
@@ -16001,6 +16212,14 @@ YX
 YX
 "}
 (196,1,1) = {"
+FG
+nF
+nF
+DZ
+DZ
+DZ
+nF
+Va
 YX
 YX
 YX
@@ -16011,23 +16230,15 @@ YX
 YX
 YX
 YX
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
 YX
 YX
 YX
@@ -16053,23 +16264,23 @@ YX
 YX
 YX
 YX
-Rl
-wN
-Rl
-nF
-Rl
-Aw
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Vi
-Rl
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
 YX
 YX
 YX
@@ -16095,23 +16306,23 @@ YX
 YX
 YX
 YX
-Rl
-wN
-Rl
-nF
-Rl
-Aw
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Vi
-Rl
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
 YX
 YX
 YX
@@ -16137,23 +16348,23 @@ YX
 YX
 YX
 YX
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
-Rl
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
+YX
 YX
 YX
 YX

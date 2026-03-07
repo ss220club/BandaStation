@@ -620,12 +620,6 @@
 /obj/item/flashlight/lamp,
 /turf/open/floor/iron/white,
 /area/trainstation/indoors/station)
-"if" = (
-/obj/structure/sneak_pod/iced/enterence{
-	dir = 8
-	},
-/turf/open/indestructible/meat,
-/area/trainstation/outdoor)
 "ig" = (
 /obj/machinery/light/small/directional/west{
 	dir = 1
@@ -1480,10 +1474,6 @@
 /obj/item/shard,
 /turf/open/indestructible/meat,
 /area/trainstation/indoors/station)
-"rg" = (
-/obj/structure/sneak_pod/iced,
-/turf/open/indestructible/meat,
-/area/trainstation/outdoor)
 "rk" = (
 /obj/structure/railing/unbreakable{
 	dir = 1
@@ -3223,12 +3213,6 @@
 	},
 /turf/open/floor/iron/white,
 /area/trainstation/indoors/station)
-"Oo" = (
-/obj/structure/sneak_pod/iced/enterence{
-	dir = 4
-	},
-/turf/open/indestructible/meat,
-/area/trainstation/outdoor)
 "Op" = (
 /obj/effect/decal/cleanable/blood/drip{
 	pixel_x = 11
@@ -11574,7 +11558,7 @@ Ni
 GL
 gj
 gj
-if
+rT
 gj
 pb
 QX
@@ -11621,7 +11605,7 @@ gj
 gj
 gj
 gj
-rg
+rT
 gj
 gj
 Dk
@@ -11668,7 +11652,7 @@ gj
 gj
 gj
 gj
-rg
+rT
 gj
 gj
 lU
@@ -11715,7 +11699,7 @@ Ni
 GL
 rT
 gj
-Oo
+rT
 gj
 gj
 QX

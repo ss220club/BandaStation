@@ -17,24 +17,12 @@
 /area/trainstation/indoors)
 "cZ" = (
 /obj/structure/flora/tree/pine/style_random,
-/obj/effect/light_emitter/daylight,
 /turf/open/misc/asteroid/snow/indestructible,
 /area/trainstation/outdoor)
-"dq" = (
-/obj/structure/spacevine,
-/obj/effect/light_emitter/daylight,
-/obj/effect/light_emitter/daylight,
-/turf/open/floor/grass,
-/area/trainstation/indoors)
 "ef" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
 	},
-/turf/open/misc/dirt/station,
-/area/trainstation/indoors)
-"ei" = (
-/obj/effect/light_emitter/daylight,
-/obj/effect/light_emitter/daylight,
 /turf/open/misc/dirt/station,
 /area/trainstation/indoors)
 "ft" = (
@@ -78,14 +66,9 @@
 /obj/item/stack/sheet/mineral/gold/fifty,
 /turf/open/misc/dirt/station,
 /area/trainstation/indoors)
-"iO" = (
-/obj/effect/light_emitter/daylight,
-/turf/closed/indestructible/rock/snow/ice/ore,
-/area/trainstation/indoors)
 "iR" = (
 /obj/structure/flora/bush/grassy,
 /obj/structure/spacevine,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "jl" = (
@@ -119,7 +102,6 @@
 "mt" = (
 /obj/structure/spacevine,
 /obj/structure/flora/bush/grassy,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "oh" = (
@@ -137,30 +119,15 @@
 "pa" = (
 /obj/machinery/computer/trainstation_control,
 /obj/structure/flora/bush/lavendergrass,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "pe" = (
 /obj/structure/table/wood,
 /turf/open/floor/holofloor/wood,
 /area/trainstation/indoors)
-"pu" = (
-/obj/structure/spacevine,
-/obj/structure/flora/bush/fullgrass,
-/obj/effect/light_emitter/daylight,
-/obj/effect/light_emitter/daylight,
-/turf/open/floor/grass,
-/area/trainstation/indoors)
 "pB" = (
 /obj/structure/flora/bush/jungle,
 /obj/structure/spacevine,
-/obj/effect/light_emitter/daylight,
-/turf/open/floor/grass,
-/area/trainstation/indoors)
-"qm" = (
-/obj/structure/spacevine,
-/obj/structure/flora/bush/fullgrass,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "qG" = (
@@ -201,18 +168,15 @@
 /turf/open/misc/dirt/station,
 /area/trainstation/indoors)
 "sx" = (
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "wi" = (
 /obj/structure/flora/tree/dead/style_random,
-/obj/effect/light_emitter/daylight,
 /turf/open/misc/asteroid/snow/indestructible,
 /area/trainstation/outdoor)
 "wr" = (
 /obj/structure/flora/bush/leavy,
 /obj/structure/spacevine,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "xn" = (
@@ -230,13 +194,11 @@
 "xS" = (
 /obj/structure/spacevine,
 /obj/structure/spacevine,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "yd" = (
 /obj/structure/flora/bush/fullgrass,
 /mob/living/basic/mining/wolf,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "yi" = (
@@ -246,7 +208,6 @@
 "zc" = (
 /obj/structure/flora/bush/flowers_br,
 /obj/structure/spacevine,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "zg" = (
@@ -264,7 +225,6 @@
 /area/trainstation/indoors)
 "AU" = (
 /mob/living/basic/mining/wolf,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "BI" = (
@@ -285,7 +245,6 @@
 /obj/structure/flora/bush/grassy,
 /obj/structure/spacevine,
 /mob/living/basic/mining/wolf,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "Ch" = (
@@ -296,12 +255,6 @@
 /obj/effect/mine/gas/n2o,
 /obj/structure/spacevine,
 /turf/open/misc/dirt/station,
-/area/trainstation/indoors)
-"CI" = (
-/obj/structure/spacevine,
-/obj/structure/flora/bush/flowers_br,
-/obj/effect/light_emitter/daylight,
-/turf/open/floor/grass,
 /area/trainstation/indoors)
 "Dn" = (
 /turf/closed/indestructible/wood,
@@ -315,14 +268,12 @@
 	pixel_y = -5
 	},
 /obj/item/bedsheet,
-/obj/effect/light_emitter/daylight,
 /turf/open/misc/asteroid/snow/indestructible,
 /area/trainstation/outdoor)
 "Fq" = (
 /obj/structure/spacevine,
 /obj/structure/flora/bush/flowers_br,
 /obj/structure/flora/bush/sunny/style_random,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "FP" = (
@@ -344,7 +295,6 @@
 /obj/structure/flora/bush/fullgrass,
 /obj/structure/spacevine,
 /mob/living/basic/mining/wolf,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "GZ" = (
@@ -368,13 +318,6 @@
 /obj/structure/table/wood,
 /turf/open/misc/dirt/station,
 /area/trainstation/indoors)
-"Jo" = (
-/obj/structure/spacevine,
-/obj/structure/flora/bush/flowers_br,
-/obj/effect/light_emitter/daylight,
-/obj/effect/light_emitter/daylight,
-/turf/open/floor/grass,
-/area/trainstation/indoors)
 "JQ" = (
 /area/trainstation/indoors)
 "KF" = (
@@ -387,7 +330,6 @@
 /obj/structure/flora/bush/flowers_br,
 /obj/structure/spacevine,
 /mob/living/basic/mining/wolf,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "Lj" = (
@@ -395,12 +337,7 @@
 /obj/structure/spacevine,
 /obj/structure/spacevine,
 /mob/living/basic/mining/wolf,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
-/area/trainstation/indoors)
-"Mz" = (
-/obj/effect/light_emitter/daylight,
-/turf/open/misc/dirt/station,
 /area/trainstation/indoors)
 "ME" = (
 /turf/open/misc/dirt/station,
@@ -408,7 +345,6 @@
 "Ni" = (
 /obj/structure/spacevine,
 /obj/structure/flora/bush/jungle,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "NM" = (
@@ -460,7 +396,6 @@
 /area/trainstation/indoors)
 "RE" = (
 /obj/structure/flora/bush/fullgrass,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "SM" = (
@@ -470,7 +405,6 @@
 /turf/open/misc/dirt/station,
 /area/trainstation/indoors)
 "SO" = (
-/obj/effect/light_emitter/daylight,
 /turf/open/misc/asteroid/snow/indestructible,
 /area/trainstation/outdoor)
 "Ti" = (
@@ -480,37 +414,18 @@
 	},
 /turf/open/misc/dirt/station,
 /area/trainstation/indoors)
-"Ty" = (
-/obj/machinery/computer/trainstation_control{
-	dir = 1
-	},
-/obj/structure/spacevine,
-/turf/open/misc/dirt/station,
-/area/trainstation/indoors)
 "Tz" = (
 /obj/structure/spacevine,
 /mob/living/basic/mining/wolf,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
-/area/trainstation/indoors)
-"TY" = (
-/obj/structure/spacevine,
-/obj/effect/light_emitter/daylight,
-/turf/closed/indestructible/wood,
 /area/trainstation/indoors)
 "Wm" = (
 /obj/structure/flora/bush/grassy,
-/obj/effect/light_emitter/daylight,
 /turf/open/floor/grass,
 /area/trainstation/indoors)
 "WO" = (
 /obj/effect/turf_decal/weather/snow/corner,
 /turf/open/misc/dirt/station,
-/area/trainstation/indoors)
-"WV" = (
-/obj/structure/spacevine,
-/obj/effect/light_emitter/daylight,
-/turf/open/floor/grass,
 /area/trainstation/indoors)
 "Xf" = (
 /obj/effect/mine/gas/n2o,
@@ -743,7 +658,7 @@ ME
 ME
 ME
 ME
-Ty
+ME
 PE
 PE
 "}
@@ -777,7 +692,7 @@ ME
 bJ
 ME
 ME
-Rr
+PE
 "}
 (9,1,1) = {"
 SO
@@ -808,8 +723,8 @@ FP
 zF
 QX
 ME
-WO
-FV
+ME
+PE
 "}
 (10,1,1) = {"
 SO
@@ -840,8 +755,8 @@ bt
 SM
 lK
 ME
-WO
-Ch
+ME
+PE
 "}
 (11,1,1) = {"
 SO
@@ -873,7 +788,7 @@ ME
 Eb
 PE
 PE
-Dn
+PE
 "}
 (12,1,1) = {"
 SO
@@ -6264,14 +6179,14 @@ PE
 PE
 PE
 PE
-TY
-TY
-iO
+yi
+yi
 PE
-Mz
-Mz
-WV
-CI
+PE
+ME
+ME
+zg
+PI
 PE
 PE
 PE
@@ -6296,14 +6211,14 @@ PE
 PE
 PE
 PE
-TY
-qm
-CI
-WV
-Mz
-Mz
-Mz
-WV
+yi
+Hh
+PI
+zg
+ME
+ME
+ME
+zg
 PE
 PE
 PE
@@ -6328,15 +6243,15 @@ PE
 PE
 PE
 PE
-qm
-WV
-qm
-Mz
-Mz
-Mz
-Mz
+Hh
+zg
+Hh
+ME
+ME
+ME
+ME
 xS
-WV
+zg
 PE
 PE
 PE
@@ -6355,20 +6270,20 @@ SO
 SO
 PE
 PE
-Mz
-Mz
+ME
+ME
 PE
 yi
 yi
-qm
+Hh
 Ni
-Mz
-TY
-Mz
-Mz
-Mz
-Mz
-WV
+ME
+yi
+ME
+ME
+ME
+ME
+zg
 PE
 PE
 PE
@@ -6387,21 +6302,21 @@ SO
 SO
 PE
 PE
-Mz
-Mz
+ME
+ME
 ME
 yi
 Fq
-dq
-Mz
-Mz
-Mz
+zg
+ME
+ME
+ME
 zc
-Mz
-Mz
-Mz
-WV
-WV
+ME
+ME
+ME
+zg
+zg
 PE
 PE
 PE
@@ -6419,21 +6334,21 @@ SO
 PE
 PE
 PE
-Mz
-Mz
-Mz
-CI
-Jo
-ei
-Mz
-Mz
+ME
+ME
+ME
+PI
+PI
+ME
+ME
+ME
 KZ
-WV
+zg
 iR
-Mz
-Mz
-Mz
-WV
+ME
+ME
+ME
+zg
 PE
 yi
 yi
@@ -6451,21 +6366,21 @@ SO
 PE
 PE
 PE
-Mz
-Mz
-Mz
-Mz
-dq
-ei
-Mz
+ME
+ME
+ME
+ME
+zg
+ME
+ME
 GN
 sx
 RE
 yd
-WV
-Mz
-Mz
-WV
+zg
+ME
+ME
+zg
 Eb
 yi
 Eb
@@ -6483,21 +6398,21 @@ SO
 PE
 PE
 PE
-Mz
-Mz
-Mz
-Mz
-Mz
-TY
-Mz
+ME
+ME
+ME
+ME
+ME
+yi
+ME
 pB
 pa
 AU
 sx
-WV
-Mz
-TY
-WV
+zg
+ME
+yi
+zg
 zg
 ME
 ME
@@ -6517,19 +6432,19 @@ PE
 PE
 PE
 PE
-TY
-Mz
-Mz
-Mz
-Mz
+yi
+ME
+ME
+ME
+ME
 Lj
 Wm
 sx
 Tz
-Mz
-Mz
-Mz
-WV
+ME
+ME
+ME
+zg
 Eb
 ME
 ME
@@ -6549,19 +6464,19 @@ PE
 PE
 PE
 PE
-TY
-qm
-WV
-ei
-ei
-Mz
+yi
+Hh
+zg
+ME
+ME
+ME
 wr
 BV
-WV
-Mz
-Mz
-Mz
-WV
+zg
+ME
+ME
+ME
+zg
 PE
 ME
 ME
@@ -6585,15 +6500,15 @@ yi
 Hh
 PI
 Gl
-Mz
-Mz
-Mz
-Mz
-Mz
-Mz
-Mz
-Mz
-qm
+ME
+ME
+ME
+ME
+ME
+ME
+ME
+ME
+Hh
 PE
 PE
 yi
@@ -6616,16 +6531,16 @@ PE
 PE
 PE
 zg
-WV
-qm
-WV
-Mz
-Mz
-Mz
-Mz
-Mz
-Mz
-WV
+zg
+Hh
+zg
+ME
+ME
+ME
+ME
+ME
+ME
+zg
 PE
 PE
 yi
@@ -6648,15 +6563,15 @@ PE
 PE
 PE
 PE
-CI
-WV
+PI
 zg
-Mz
-Mz
-TY
-Mz
-Mz
-Mz
+zg
+ME
+ME
+yi
+ME
+ME
+ME
 PE
 PE
 PE
@@ -6682,13 +6597,13 @@ PE
 PE
 PE
 PE
-WV
-pu
-Mz
-Mz
-Mz
-Mz
-Mz
+zg
+Hh
+ME
+ME
+ME
+ME
+ME
 ME
 PE
 PE
@@ -6716,7 +6631,7 @@ PE
 PE
 PE
 mt
-Mz
+ME
 ME
 ME
 ME

@@ -1,6 +1,6 @@
 /// Получить экземпляр типа из пула или создать новый с указанными аргументами.
 /// Использование: POOL_TAKE(/obj/foo, loc, arg2)
-#define POOL_TAKE(type, ...) SSobject_pool.Take(type, ##__VA_ARGS__)
+#define POOL_TAKE(type, arguments...) SSobject_pool.Take(type, ##arguments)
 
 /// Вернуть экземпляр в пул (сбрасывает его переменные из шаблона и очищает ссылки).
 #define POOL_RELEASE(obj) SSobject_pool.Release(obj).
