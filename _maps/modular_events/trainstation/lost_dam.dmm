@@ -983,6 +983,13 @@
 	},
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor)
+"jt" = (
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "splatter3"
+	},
+/mob/living/basic/npc/police/military/bad_guys/meele,
+/turf/open/indestructible/meat,
+/area/trainstation/indoors/station/powered)
 "jv" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
@@ -1212,6 +1219,12 @@
 	dir = 5
 	},
 /area/trainstation/indoors/station/powered)
+"lv" = (
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "splatter3"
+	},
+/turf/open/floor/catwalk_floor,
+/area/trainstation/indoors/station/powered)
 "lA" = (
 /obj/item/chair{
 	pixel_x = 0;
@@ -1394,9 +1407,12 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/powered)
 "nd" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/item/paper/trainstation_password,
-/turf/open/floor/plating,
+/obj/structure/fluff/paper/stack{
+	dir = 8;
+	pixel_x = 1;
+	pixel_y = 6
+	},
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "nf" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -1494,6 +1510,10 @@
 "nU" = (
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor)
+"nW" = (
+/obj/effect/decal/cleanable/blood/oil,
+/turf/open/floor/catwalk_floor,
+/area/trainstation/indoors/station/powered)
 "ob" = (
 /obj/effect/turf_decal/weather/snow,
 /obj/effect/turf_decal/weather/snow/corner{
@@ -2518,6 +2538,11 @@
 	dir = 4
 	},
 /area/trainstation/indoors/station/controll)
+"xQ" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/mob/living/basic/npc/police/military/bad_guys/meele,
+/turf/open/floor/iron,
+/area/trainstation/indoors/station/powered)
 "xS" = (
 /obj/structure/rack/shelf,
 /obj/effect/turf_decal/delivery,
@@ -2558,6 +2583,7 @@
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 4
 	},
+/mob/living/basic/npc/police/military/bad_guys/meele,
 /turf/open/floor/carpet/black,
 /area/trainstation/indoors/station/powered)
 "yk" = (
@@ -2730,6 +2756,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/blood/tracks,
+/mob/living/basic/npc/police/military/bad_guys/meele,
 /turf/open/floor/iron/white/small,
 /area/trainstation/indoors/station/powered)
 "zT" = (
@@ -3221,6 +3248,17 @@
 	dir = 4
 	},
 /area/trainstation/indoors/station/powered)
+"Ef" = (
+/obj/structure/table,
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "vomit_2"
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/paper/trainstation_password,
+/turf/open/floor/iron/dark/side{
+	dir = 8
+	},
+/area/trainstation/indoors/station/powered)
 "Et" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 6
@@ -3432,6 +3470,11 @@
 /obj/machinery/suit_storage_unit,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark/smooth_large,
+/area/trainstation/indoors/station/powered)
+"FY" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/mob/living/basic/npc/police/military/bad_guys/meele,
+/turf/open/floor/plating,
 /area/trainstation/indoors/station/powered)
 "FZ" = (
 /obj/structure/flora/rock/style_random,
@@ -3762,6 +3805,7 @@
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 4
 	},
+/mob/living/basic/npc/police/military/bad_guys/meele,
 /turf/open/floor/iron/dark/side{
 	dir = 4
 	},
@@ -4351,6 +4395,10 @@
 "Px" = (
 /turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
+"PB" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/catwalk_floor,
+/area/trainstation/indoors/station/powered)
 "PC" = (
 /obj/item/radio/intercom/directional/west,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -4744,6 +4792,20 @@
 	dir = 8
 	},
 /area/trainstation/indoors/station/controll)
+"SK" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/ammo_casing/c357/spent{
+	dir = 5;
+	pixel_x = 12;
+	pixel_y = 8
+	},
+/obj/structure/chair/office{
+	dir = 4;
+	pixel_x = -6
+	},
+/mob/living/basic/npc/police/military/bad_guys/meele,
+/turf/open/floor/iron/dark/smooth_large,
+/area/trainstation/indoors/station/powered)
 "SP" = (
 /obj/structure/fans/tiny/invisible{
 	density = 1
@@ -11044,7 +11106,7 @@ gz
 yI
 RK
 Px
-Px
+nW
 Px
 RK
 cg
@@ -11075,7 +11137,7 @@ RK
 mD
 mD
 RK
-Px
+nd
 RK
 RK
 RK
@@ -11119,12 +11181,12 @@ mD
 Ak
 Px
 Px
+lv
+lv
 Px
 Px
 Px
-Px
-Px
-Px
+nd
 Px
 Px
 Px
@@ -11169,9 +11231,9 @@ dw
 RK
 RK
 Px
-Px
-Px
-Px
+nW
+lv
+nd
 RK
 cg
 "}
@@ -11205,7 +11267,7 @@ Px
 Px
 Px
 Px
-Px
+nd
 Px
 Px
 Px
@@ -11368,7 +11430,7 @@ UC
 UC
 UC
 UC
-UC
+jt
 UC
 Gv
 RK
@@ -11591,7 +11653,7 @@ gy
 de
 lQ
 RK
-Px
+PB
 RK
 cg
 "}
@@ -11633,7 +11695,7 @@ gy
 Sz
 Sz
 RK
-Px
+PB
 RK
 cg
 "}
@@ -11701,7 +11763,7 @@ RK
 RK
 RK
 PW
-nd
+cn
 oB
 Gu
 Gu
@@ -11744,7 +11806,7 @@ Qd
 tl
 Ou
 RL
-mp
+SK
 HA
 rx
 xt
@@ -11786,7 +11848,7 @@ Gb
 nr
 kq
 pv
-Od
+Ef
 zl
 vd
 EV
@@ -11801,7 +11863,7 @@ Vo
 Lh
 RK
 RK
-Px
+nd
 RK
 cg
 "}
@@ -11927,7 +11989,7 @@ cn
 yH
 RK
 RK
-Px
+PB
 RK
 cg
 "}
@@ -11969,7 +12031,7 @@ gy
 de
 lQ
 RK
-Px
+PB
 RK
 cg
 "}
@@ -12048,7 +12110,7 @@ nF
 Yj
 Ml
 cn
-cn
+FY
 cn
 Th
 cn
@@ -12389,7 +12451,7 @@ kY
 RK
 Px
 Px
-Px
+PB
 RK
 cg
 "}
@@ -12429,7 +12491,7 @@ cj
 qv
 kY
 RK
-Px
+nd
 Px
 Px
 RK
@@ -12508,13 +12570,13 @@ RK
 Gu
 RK
 XO
-qv
+xQ
 Iu
 hA
 kY
 Fv
 Px
-Px
+PB
 Px
 RK
 cg

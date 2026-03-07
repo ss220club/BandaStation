@@ -99,7 +99,7 @@
 
 /datum/train_station/mines
 	name = "Заброшенные шахты"
-	creator = "Kierri"
+	creator = "Fenysha"
 	map_path = "_maps/modular_events/trainstation/abandoned_mines.dmm"
 	desc = "Огромный заброшенный шахтный комплекс с десятками километров выработок и пещер. \
 			Радиомаяк станции не подаёт никаких сигналов уже очень давно. Только эхо капающей воды и редкие обвалы где-то в глубине."

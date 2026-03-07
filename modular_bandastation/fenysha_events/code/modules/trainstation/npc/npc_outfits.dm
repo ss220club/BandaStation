@@ -54,3 +54,31 @@
 	gloves = /obj/item/clothing/gloves/combat
 	shoes = /obj/item/clothing/shoes/combat/swat
 	back = /obj/item/storage/backpack
+
+
+/datum/outfit/trainstation_raider
+	name = "Trainstation raider 1"
+	mask = /obj/item/clothing/mask/bandana/skull
+	uniform = /obj/item/clothing/under/rank/centcom/military
+	suit = /obj/item/clothing/suit/armor/bulletproof
+	gloves = /obj/item/clothing/gloves/combat
+	shoes = /obj/item/clothing/shoes/combat/swat
+	back = /obj/item/storage/backpack
+
+/datum/outfit/trainstation_raider/alt
+	name = "Trainstation raider 2"
+	mask = /obj/item/clothing/mask/bandana/red
+	uniform = /obj/item/clothing/under/costume/tmc
+	suit = /obj/item/clothing/suit/armor/bulletproof
+	gloves = /obj/item/clothing/gloves/combat
+	shoes = /obj/item/clothing/shoes/combat/swat
+	back = /obj/item/storage/backpack
+
+/datum/outfit/trainstation_raider/alt_2
+	name = "Trainstation raider 3"
+	mask = /obj/item/clothing/mask/bandana/red
+	uniform = /obj/item/clothing/under/misc/assistantformal
+	suit = /obj/item/clothing/suit/costume/pg
+	gloves = /obj/item/clothing/gloves/combat
+	shoes = /obj/item/clothing/shoes/combat/swat
+	back = /obj/item/storage/backpack

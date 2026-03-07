@@ -34,6 +34,9 @@
 	var/item_r_hand
 	var/call_for_help = TRUE
 	var/make_random_name = TRUE
+	var/ghost_controlable = TRUE
+	var/join_text = "Вы NPC, соблюдайсте стандартвые правила RP, помните, что вы лишь часть истории - а не её центр."
+	var/important_text = "Не гриферите игроков!"
 
 	var/randomize_mutant_colors = FALSE
 	var/add_hair = TRUE
@@ -152,6 +155,25 @@
 	if(item_l_hand)
 		var/obj/item/I = item_l_hand
 		. += span_notice("В левой руке [p_their()] [I::name].")
+
+
+/mob/living/basic/npc/attack_ghost(mob/dead/observer/user)
+	. = ..()
+	if(!user.client || key || !ghost_controlable)
+		return
+	var/ask = tgui_alert(user, "Вы хотите сыграть за [name] - это будет требовать от вас соблюдения особых правил.", \
+	"Сыграть за NPC?", list("Да", "Никогда"), 15 SECONDS)
+	if(!ask || ask != "Да")
+		return
+	take_control(user)
+
+/mob/living/basic/npc/proc/take_control(mob/user)
+	key = user.key
+
+	to_chat(user, span_boldnotice(join_text))
+	to_chat(user, span_big(span_red(important_text)))
+	log_game("[key_name(src)] took control of [name].")
+	message_admins("[key_name(src)] too control of npc [ADMIN_LOOKUPFLW(src)]")
 
 
 /mob/living/basic/npc/death(gibbed)
@@ -402,6 +424,8 @@
 	health = 250
 	maxHealth = 250
 	faction = list(FACTION_CIVILIAN, FACTION_POLICE, FACTION_NEUTRAL)
+	join_text = "Вы - полицейский. Соблюдайте порядок в вашей зоне и защищайте гражданских."
+	important_text = "Не атакуйте игроков просто так а так же не покидайте свой город!"
 	melee_damage_lower = 15
 	melee_damage_upper = 30
 	melee_damage_type = STAMINA
@@ -478,6 +502,7 @@
 	health = 300
 	maxHealth = 300
 	faction = list(FACTION_POLICE, FACTION_NEUTRAL)
+	join_text = "Вы - военный. Вы должны поддерживать порядок в вашей зоне а так же защищать гражданских."
 	melee_damage_lower = 15
 	melee_damage_upper = 30
 	ai_controller = /datum/ai_controller/basic_controller/npc_police/ranged
@@ -550,10 +575,24 @@
 
 /mob/living/basic/npc/police/military/bad_guys
 	name = "Мародёр"
+
 	faction = list(FACTION_HOSTILE)
 	make_random_name = FALSE
+	join_text = "Вы - мародёр. Защищайте зону, где вы находитесь а так же атакуйте посторонних. Постарайтесь при этом оставить их в живых."
+	important_text = "Не атакуйте поезд, а так же не приследуйте игроков! Не выводите игроков из раунда целиком!"
+	possible_outfits = list(
+		/datum/outfit/trainstation_raider,
+		/datum/outfit/trainstation_raider/alt,
+		/datum/outfit/trainstation_raider/alt_2,
+	)
 
 	item_r_hand = /obj/item/gun/ballistic/automatic/as32
 	projectilesound = 'sound/items/weapons/gun/smg/shot_alt.ogg'
 	casingtype = /obj/item/ammo_casing/c35sol
+	ranged_cooldown = 2 SECONDS
 	burst_shots = 3
+
+/mob/living/basic/npc/police/military/bad_guys/meele
+	ranged = FALSE
+	item_r_hand = /obj/item/knife/combat
+	item_l_hand = /obj/item/shield/riot

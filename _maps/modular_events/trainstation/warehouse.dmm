@@ -83,16 +83,6 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/open/floor/iron/dark,
 /area/trainstation/indoors)
-"cl" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-m";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "cq" = (
 /turf/open/floor/iron/dark,
 /area/trainstation/indoors)
@@ -107,16 +97,6 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
-"cU" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 10
-	},
-/obj/structure/railing{
-	dir = 1
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "cX" = (
 /obj/effect/turf_decal/weather/snow,
 /turf/closed/indestructible/reinforced,
@@ -227,16 +207,6 @@
 /obj/effect/spawner/random/entertainment/musical_instrument,
 /turf/open/floor/iron/dark,
 /area/trainstation/indoors)
-"hp" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-l";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "hs" = (
 /obj/effect/spawner/random/entertainment/cigarette_pack,
 /turf/open/floor/iron/dark/smooth_large,
@@ -283,17 +253,6 @@
 "kl" = (
 /turf/open/indestructible/train_platform,
 /area/trainstation/outdoor)
-"ky" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/machinery/computer/cargo{
-	dir = 4
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/box,
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "kF" = (
 /obj/structure/fence/door,
 /turf/open/floor/asphalt,
@@ -317,18 +276,6 @@
 /obj/effect/spawner/random/structure/crate_loot,
 /turf/open/floor/asphalt,
 /area/trainstation/indoors)
-"lp" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/docking_port/stationary{
-	dir = 8;
-	dwidth = 5;
-	height = 7;
-	name = "Cargo Bay";
-	shuttle_id = "cargo_home";
-	width = 12
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "lq" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 8
@@ -366,13 +313,6 @@
 /obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
-"mQ" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "nm" = (
 /obj/machinery/door/poddoor/preopen,
 /obj/effect/turf_decal/stripes/full,
@@ -424,31 +364,6 @@
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors)
-"qs" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 5
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
-"qF" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 1
-	},
-/obj/effect/turf_decal/stripes/line,
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
-"rk" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-l";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "rr" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -468,14 +383,6 @@
 	},
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor)
-"rQ" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/effect/spawner/random/armory/laser_pistol,
-/obj/structure/rack/gunrack,
-/turf/open/floor/iron/dark/small,
-/area/trainstation/indoors)
 "rU" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -585,15 +492,6 @@
 	},
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
-"uM" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 1
-	},
-/obj/effect/turf_decal/trimline/white,
-/obj/machinery/light/floor,
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "uV" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
@@ -603,13 +501,6 @@
 	dir = 8
 	},
 /area/trainstation/indoors/station/controll)
-"vb" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 9
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "vw" = (
 /obj/structure/prop/city/buildingventbig11_off{
 	name = "Generator"
@@ -644,13 +535,6 @@
 /obj/effect/spawner/random/medical/medkit_rare,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
-"wB" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "xa" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/shuttle/exploration/doubleside,
@@ -672,13 +556,6 @@
 /obj/structure/sign/warning/electric_shock,
 /turf/closed/wall/city/siding/style/style_1,
 /area/trainstation/indoors/station/controll)
-"xS" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "ye" = (
 /obj/item/clothing/head/costume/ushanka/polar,
 /obj/structure/rack/shelf,
@@ -738,28 +615,6 @@
 /obj/effect/spawner/random/structure/crate_loot,
 /turf/open/floor/asphalt,
 /area/trainstation/indoors)
-"zf" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 9
-	},
-/obj/structure/railing,
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
-"zn" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
-"zu" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-m";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "zE" = (
 /obj/effect/spawner/random/contraband/narcotics,
 /turf/open/floor/iron/dark,
@@ -953,14 +808,6 @@
 	},
 /turf/open/indestructible/dark/textured,
 /area/trainstation/indoors/station/controll)
-"EX" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "EY" = (
 /obj/structure/filingcabinet,
 /obj/effect/turf_decal/box,
@@ -1004,14 +851,6 @@
 	dir = 4
 	},
 /turf/open/floor/asphalt,
-/area/trainstation/outdoor)
-"HZ" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 5
-	},
-/obj/structure/railing,
-/turf/open/floor/plating,
 /area/trainstation/outdoor)
 "If" = (
 /obj/effect/spawner/random/contraband/plus,
@@ -1200,14 +1039,6 @@
 	},
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor)
-"Mz" = (
-/obj/effect/decal/fakelattice,
-/obj/effect/turf_decal/siding/dark,
-/obj/effect/turf_decal/siding/dark{
-	dir = 1
-	},
-/turf/open/misc/asteroid/snow/standard_air,
-/area/trainstation/outdoor)
 "ME" = (
 /obj/machinery/door/airlock/mining{
 	name = "Warehouse office"
@@ -1282,27 +1113,12 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/structure/rack/gunrack,
 /obj/effect/spawner/random/armory/disablers,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
 "Qc" = (
 /obj/effect/turf_decal/weather/snow/corner,
 /turf/open/floor/asphalt,
-/area/trainstation/outdoor)
-"Qe" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 10
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
-"Qy" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 6
-	},
-/turf/open/floor/plating,
 /area/trainstation/outdoor)
 "QF" = (
 /obj/machinery/wall_healer/directional/east,
@@ -1341,26 +1157,6 @@
 /obj/effect/turf_decal/box,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors)
-"Sy" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing{
-	dir = 6
-	},
-/obj/structure/railing{
-	dir = 1
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
-"Sz" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-r";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "SG" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/spawner/random/maintenance,
@@ -1387,7 +1183,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/structure/rack/gunrack,
 /obj/effect/spawner/random/armory/laser_pistol,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
@@ -1547,13 +1342,6 @@
 /obj/effect/spawner/random/contraband/narcotics,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
-"Yk" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 "YR" = (
 /obj/structure/flora/tree/pine/style_random,
 /obj/structure/flora/bush/snow/style_random,
@@ -1573,23 +1361,6 @@
 /obj/item/storage/box/coffeepack,
 /turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/indoors/station/controll)
-"ZC" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/fake_stairs/directional/south{
-	icon_state = "stairs-r";
-	icon = 'modular_zubbers/icons/turf/floors/floors.dmi';
-	color = "#3d3e44";
-	dir = 8
-	},
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
-"ZJ" = (
-/obj/effect/turf_decal/lunar_sand/plating,
-/obj/structure/railing,
-/obj/effect/turf_decal/trimline/white,
-/obj/machinery/light/floor,
-/turf/open/floor/plating,
-/area/trainstation/outdoor)
 
 (1,1,1) = {"
 GG
@@ -4184,7 +3955,7 @@ Vw
 ye
 tN
 XF
-rQ
+TA
 TA
 Qb
 XF
@@ -5633,22 +5404,22 @@ GG
 GG
 GG
 GG
-zf
-hp
-zu
-ZC
-vb
-xS
-xS
-xS
-xS
-xS
-Qe
-hp
-zu
-ZC
-cU
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -5675,22 +5446,22 @@ GG
 GG
 GG
 GG
-uM
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-ZJ
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -5717,22 +5488,22 @@ GG
 GG
 GG
 GG
-qF
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-EX
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -5759,22 +5530,22 @@ GG
 GG
 GG
 GG
-qF
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-EX
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -5801,22 +5572,22 @@ GG
 GG
 GG
 GG
-qF
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-EX
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -5843,22 +5614,22 @@ GG
 GG
 GG
 GG
-qF
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-EX
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -5885,22 +5656,22 @@ GG
 GG
 GG
 GG
-qF
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-EX
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -5927,22 +5698,22 @@ GG
 GG
 GG
 GG
-qF
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-EX
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -5969,22 +5740,22 @@ GG
 GG
 GG
 GG
-qF
-zn
-zn
-zn
-zn
-zn
-zn
-zn
-lp
-zn
-zn
-zn
-zn
-zn
-EX
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -6011,22 +5782,22 @@ GG
 GG
 GG
 GG
-uM
-Yk
-Yk
-Yk
-Yk
-Yk
-Yk
-Yk
-ky
-Yk
-Yk
-Yk
-Yk
-Yk
-ZJ
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -6053,22 +5824,22 @@ GG
 GG
 GG
 GG
-HZ
-Sz
-cl
-rk
-qs
-wB
-wB
-wB
-wB
-wB
-Qy
-Sz
-cl
-rk
-Sy
-Mz
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
 GG
 GG
 tN
@@ -6095,7 +5866,7 @@ GG
 GG
 GG
 GG
-Fx
+GG
 GG
 GG
 GG
