@@ -32,6 +32,8 @@
 	icon = 'modular_bandastation/fenysha_events/icons/doors/train_door.dmi'
 	has_access_panel = FALSE
 	opacity = FALSE
+	var/open_sound = 'sound/machines/airlock/airlock.ogg'
+	var/close_sound = 'sound/machines/airlock/airlockclose.ogg'
 
 /obj/machinery/door/train/train_door/Initialize(mapload)
 	. = ..()
@@ -43,25 +45,32 @@
 		return FALSE
 	return TRUE
 
+/obj/machinery/door/train/train_door/animation_effects(animation, force_type = DEFAULT_DOOR_CHECKS)
+	switch(animation)
+		if(DOOR_OPENING_ANIMATION)
+			playsound(src, open_sound, 30, vary = TRUE)
+		if(DOOR_CLOSING_ANIMATION)
+			playsound(src, close_sound, 30, vary = TRUE)
+
 /obj/machinery/door/train/train_door/animation_length(animation)
 	switch(animation)
 		if(DOOR_OPENING_ANIMATION)
-			return 0.7 SECONDS
+			return 1.3 SECONDS
 		if(DOOR_CLOSING_ANIMATION)
-			return 0.8 SECONDS
+			return 1.3 SECONDS
 		if(DOOR_DENY_ANIMATION)
 			return 0.1 SECONDS
 
 /obj/machinery/door/train/train_door/animation_segment_delay(animation)
 	switch(animation)
 		if(DOOR_OPENING_PASSABLE)
-			return 0.7 SECONDS
-		if(DOOR_OPENING_FINISHED)
 			return 0.8 SECONDS
+		if(DOOR_OPENING_FINISHED)
+			return 1.3 SECONDS
 		if(DOOR_CLOSING_UNPASSABLE)
 			return 0.2 SECONDS
 		if(DOOR_CLOSING_FINISHED)
-			return 0.7 SECONDS
+			return 1.3 SECONDS
 
 
 /obj/machinery/door/airlock/train_locomotive
