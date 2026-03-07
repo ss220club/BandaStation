@@ -43,10 +43,6 @@ SUBSYSTEM_DEF(object_pool)
 		"layout_prefs_used", "abstract_type"
 	)
 
-/datum/controller/subsystem/object_pool/Initialize()
-	// Можно оставить пустым или добавить чистку, если нужно
-	return SS_INIT_SUCCESS
-
 /datum/controller/subsystem/object_pool/proc/RegisterType(datum/typepath)
 	if(!ispath(typepath) || templates[typepath])
 		return
