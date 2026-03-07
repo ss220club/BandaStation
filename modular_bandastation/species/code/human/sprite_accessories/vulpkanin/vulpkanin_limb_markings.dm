@@ -24,3 +24,12 @@
 		/obj/item/bodypart/leg/right/digitigrade,
 		/obj/item/bodypart/leg/left/digitigrade,
 	)
+
+/datum/bodypart_overlay/simple/body_marking/vulpkanin_limb/can_draw_on_bodypart(obj/item/bodypart/bodypart_owner)
+	. = ..()
+	if(!.)
+		return
+	var/mob/living/carbon/human/human = bodypart_owner.owner
+	if(!istype(human))
+		return TRUE
+	return !(human.shoes?.item_flags & IGNORE_DIGITIGRADE)
