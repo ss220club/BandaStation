@@ -224,12 +224,16 @@ img.bg {
 
 /datum/controller/subsystem/train_controller/proc/announce_game()
 	to_chat(world, span_boldnotice( \
-		"Trainstation mode - active \n \
-		The station will be replaced by train that will move between different stations. \
-		You and your colleagues will have to get from the starting station to the final destination, \
-		and in the process, you will have to make sure that the train provided to you remains in good working order and can \
-		continue your journey. \n \
-		Event by: Fenysha \
+		"[span_big("Trainstation режим - активен")] \n \
+		\n \
+		Станция будет заменена на поезд, которму приедстоит выполнить важное задание: доставить ценнй груз. \
+		Для этого экипажу поезда придется направить состав через транс-атлантическую желездную дорону. \
+		На пути к цели, поезду предстоит столкнуться с множеством угроз и препядствий. \
+		Управляйте поездом и доберитесь до финальной станции. \n \
+		\n \
+		Автор ивента: Fenysha, \n \
+		Специальное спасибо: Kierri, Mold, TYWONKA, V1S1Ti \n \
+		Вдохновленно: The final station, Far: Lone Sails\
 	"))
 
 

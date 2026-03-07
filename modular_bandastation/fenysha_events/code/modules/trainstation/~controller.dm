@@ -105,6 +105,7 @@ SUBSYSTEM_DEF(train_controller)
 	running_events = list()
 	soundloop = new(start_immediately = FALSE)
 	RegisterSignal(SSticker, COMSIG_TICKER_ENTER_PREGAME, PROC_REF(on_enter_pregame))
+	RegisterSignal(SSticker, COMSIG_TICKER_ROUND_STARTING, PROC_REF(on_round_start))
 	RegisterSignal(SSdcs, COMSIG_GLOBAL_PLAYER_SETUP_FINISHED, PROC_REF(on_player_join))
 	load_stations()
 	connect_stations()
@@ -113,6 +114,8 @@ SUBSYSTEM_DEF(train_controller)
 
 
 /datum/controller/subsystem/train_controller/proc/on_player_join(datum/dcs, mob/living/joining)
+	SIGNAL_HANDLER
+
 	INVOKE_ASYNC(src, PROC_REF(teleport_to_train), joining)
 
 /datum/controller/subsystem/train_controller/proc/teleport_to_train(mob/living/joining)
@@ -223,6 +226,10 @@ SUBSYSTEM_DEF(train_controller)
 	set_station_name("Trainstation 13")
 	addtimer(CALLBACK(src, PROC_REF(set_lobby_screen)), 5 SECONDS)
 
+/datum/controller/subsystem/train_controller/proc/on_round_start()
+	SIGNAL_HANDLER
+
+	addtimer(CALLBACK(src, PROC_REF(show_current_station_logo)), 15 SECONDS)
 /**
  * Работа со станциями
  */
@@ -255,8 +262,8 @@ SUBSYSTEM_DEF(train_controller)
 	if(hide_for_players)
 		for(var/mob/living/L in GLOB.alive_player_list)
 			L.overlay_fullscreen("station_loading", /atom/movable/screen/fullscreen/flash/black)
+			ADD_TRAIT(L, TRAIT_NO_TRANSFORM, REF(src))
 			LAZYADD(screens, L)
-
 	if(loaded_station)
 		unload_station(loaded_station, hide_for_players)
 
@@ -267,6 +274,7 @@ SUBSYSTEM_DEF(train_controller)
 	var/result = to_load.load_station(CALLBACK(src, PROC_REF(on_station_loaded)))
 	if(screens && islist(screens) && length(screens))
 		for(var/mob/living/L in screens)
+			REMOVE_TRAIT(L, TRAIT_NO_TRANSFORM, REF(src))
 			L.clear_fullscreen("station_loading", animated = 5 SECONDS)
 
 	if(!result)
@@ -284,6 +292,10 @@ SUBSYSTEM_DEF(train_controller)
 
 	if(loaded_station.station_flags & TRAINSTATION_NO_FORKS)
 		return
+
+/datum/controller/subsystem/train_controller/proc/show_current_station_logo(silent = FALSE)
+	if(loaded_station)
+		show_station_logo(loaded_station, silent)
 
 /datum/controller/subsystem/train_controller/proc/show_station_logo(datum/train_station/station, silent = FALSE)
 	for(var/mob/player in GLOB.player_list)
