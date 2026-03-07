@@ -91,6 +91,9 @@
 /area/station/command/corporate_showroom)
 "cK" = (
 /obj/machinery/firealarm/directional/east,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
 "cQ" = (
@@ -119,6 +122,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
+/obj/effect/landmark/start/head_of_personnel,
 /turf/open/floor/carpet,
 /area/station/command/heads_quarters/hop)
 "dW" = (
@@ -380,6 +384,7 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
+/obj/effect/landmark/start/nanotrasen_representative,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
 "mC" = (
@@ -454,6 +459,7 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
+/obj/effect/landmark/start/head_of_personnel,
 /turf/open/floor/carpet,
 /area/station/command/heads_quarters/hop)
 "pN" = (
@@ -883,6 +889,12 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
+"Bg" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/hallway/secondary/command)
 "BF" = (
 /obj/effect/turf_decal/siding/wood/ebonite,
 /obj/machinery/button/door/directional/south{
@@ -961,6 +973,13 @@
 "EP" = (
 /turf/closed/wall/r_wall,
 /area/station/command/bridge)
+"EQ" = (
+/obj/effect/turf_decal/tile/dark_blue/half/contrasted{
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
+/turf/open/floor/iron,
+/area/station/hallway/secondary/command)
 "FR" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -1193,6 +1212,11 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
+"JH" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron,
+/area/station/hallway/secondary/command)
 "JM" = (
 /obj/effect/turf_decal/tile/dark_blue/half/contrasted{
 	dir = 8
@@ -1254,6 +1278,9 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/dark_blue,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
 "Mm" = (
@@ -1375,6 +1402,7 @@
 /obj/effect/turf_decal/siding/wood/ebonite/corner{
 	dir = 1
 	},
+/obj/effect/landmark/start/blueshield,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)
 "Rk" = (
@@ -1931,7 +1959,7 @@ Sa
 EP
 Vu
 Te
-ow
+Bg
 rs
 xW
 JM
@@ -1965,7 +1993,7 @@ oP
 Zi
 ow
 Vv
-nf
+JH
 GR
 Gc
 nf
@@ -2008,7 +2036,7 @@ HW
 Du
 Du
 JU
-Du
+EQ
 bm
 Sa
 "}

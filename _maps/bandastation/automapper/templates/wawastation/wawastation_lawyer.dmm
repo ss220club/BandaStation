@@ -240,10 +240,10 @@
 /area/station/service/lawoffice)
 "R" = (
 /obj/structure/cable,
-/obj/structure/disposalpipe/sorting{
+/obj/effect/mapping_helpers/mail_sorting/service/law_office,
+/obj/structure/disposalpipe/sorting/mail{
 	dir = 4
 	},
-/obj/effect/mapping_helpers/mail_sorting/service/law_office,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
 "S" = (

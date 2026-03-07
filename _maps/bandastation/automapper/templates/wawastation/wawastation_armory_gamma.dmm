@@ -150,10 +150,6 @@
 /obj/effect/spawner/random/armory/barrier_grenades{
 	pixel_y = 3
 	},
-/obj/machinery/button/door/directional/west{
-	id = "armory";
-	name = "Armory Shutters"
-	},
 /obj/machinery/camera/motion/directional/south,
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
