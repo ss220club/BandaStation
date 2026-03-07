@@ -251,9 +251,11 @@ SUBSYSTEM_DEF(train_controller)
 
 	if(!to_load)
 		CRASH("Failed to load station [path_or_instance], invalid path!")
+	var/list/screens = null
 	if(hide_for_players)
 		for(var/mob/living/L in GLOB.alive_player_list)
 			L.overlay_fullscreen("station_loading", /atom/movable/screen/fullscreen/flash/black)
+			LAZYADD(screens, L)
 
 	if(loaded_station)
 		unload_station(loaded_station, hide_for_players)
@@ -263,14 +265,15 @@ SUBSYSTEM_DEF(train_controller)
 	loaded_station.pre_load()
 
 	var/result = to_load.load_station(CALLBACK(src, PROC_REF(on_station_loaded)))
+	if(screens && islist(screens) && length(screens))
+		for(var/mob/living/L in screens)
+			L.clear_fullscreen("station_loading", animated = 5 SECONDS)
+
 	if(!result)
 		return
 
 	if(stop_moving)
 		stop_moving()
-
-	for(var/mob/living/L in GLOB.alive_player_list)
-		L.clear_fullscreen("station_loading", animated = 5 SECONDS)
 
 	if(announce && !(loaded_station.station_flags & TRAINSTATION_ABSCTRACT))
 		show_station_logo(to_load)

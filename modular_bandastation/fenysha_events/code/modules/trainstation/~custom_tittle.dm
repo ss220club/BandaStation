@@ -205,7 +205,16 @@ img.bg {
 	SStitle.title_html = TRAINSTATION_TITLE_HTML
 	SStitle.show_title_screen()
 	*/
-	return
+	var/custom_css = file('modular_bandastation/fenysha_events/html/trainstation_tittle.css')
+	if(custom_css)
+		SStitle.current_title_screen = new(styles = custom_css)
+		SStitle.current_title_screen.title_css = custom_css
+		SStitle.show_title_screen_to_all_new_players()
+	SStitle.set_title_image_silent('modular_bandastation/fenysha_events/icons/lobby/trainstation_v2.png')
+	SSticker.set_lobby_music('modular_bandastation/fenysha_events/sounds/trainstation_lobbymusic.ogg', override = TRUE)
+	for(var/client/C in GLOB.clients)
+		C?.playtitlemusic(volume_multiplier = 1)
+
 #undef TRAINSTATION_TITLE_HTML
 
 /datum/asset/simple/lobby
@@ -223,8 +232,21 @@ img.bg {
 		Event by: Fenysha \
 	"))
 
+
 /datum/controller/subsystem/train_controller/proc/set_lobby_screen()
-	// SStitle.change_title_screen('modular_bandastation/fenysha_events/icons/lobby/trainstation_v2.png')
-	SSticker.set_lobby_music('modular_bandastation/fenysha_events/sounds/trainstation_lobbymusic.ogg', override = TRUE)
-	for(var/client/C in GLOB.clients)
-		C?.playtitlemusic(volume_multiplier = 1)
+	return
+
+/datum/controller/subsystem/title/proc/set_title_image_silent(desired_image_file)
+	if(desired_image_file)
+		if(!isfile(desired_image_file))
+			CRASH("Not a file passed to `/datum/controller/subsystem/title/proc/set_title_image`")
+	else
+		desired_image_file = pick_title_image()
+
+	if(!current_title_screen)
+		current_title_screen = new(screen_image_file = desired_image_file)
+	else
+		current_title_screen.set_screen_image(desired_image_file)
+
+	for(var/mob/dead/new_player/viewer as anything in GLOB.new_player_list)
+		INVOKE_ASYNC(src, PROC_REF(update_title_image_for_client), viewer.client)
