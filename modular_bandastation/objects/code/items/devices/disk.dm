@@ -173,7 +173,7 @@
 	desc = "Контейнер содержит альбомный диск группы Саундхенд."
 	contains = list(/obj/item/concert_disk/soundhand_10)
 
-//Закоментить/Удалить после ивента
+//For events only
 /obj/item/concert_disk/soundhand_concert
 	name = "Soundhand Concert"
 	album_id = "soundhand_10"
