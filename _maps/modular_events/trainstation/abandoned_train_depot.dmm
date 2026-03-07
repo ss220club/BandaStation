@@ -546,6 +546,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/station)
+"jQ" = (
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 1
+	},
+/obj/structure/prop/vehicle/meridiancar_5,
+/turf/open/misc/asphalt/no_border,
+/area/trainstation/outdoor)
 "jR" = (
 /obj/structure/shipping_container/gas/nthi,
 /turf/open/misc/asphalt/no_border,
@@ -1028,11 +1035,8 @@
 /obj/effect/turf_decal/siding/thinplating_new/light{
 	dir = 8
 	},
-/obj/structure/prop/vehicle/meridiancar_7{
-	pixel_x = 18;
-	pixel_y = 6
-	},
 /obj/effect/landmark/start/chemist,
+/obj/structure/prop/vehicle/meridiancar_2,
 /turf/open/misc/asphalt,
 /area/trainstation/outdoor)
 "qH" = (
@@ -1197,6 +1201,14 @@
 "sZ" = (
 /turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/indoors/station/controll)
+"tc" = (
+/obj/effect/turf_decal/siding/thinplating_new/light/corner,
+/obj/structure/prop/vehicle/meridiancar_7{
+	pixel_x = 18;
+	pixel_y = 6
+	},
+/turf/open/misc/asphalt/no_border,
+/area/trainstation/outdoor)
 "td" = (
 /obj/structure/fluff/bus/dense{
 	icon_state = "frontwallbottom"
@@ -5501,7 +5513,7 @@ Nd
 Az
 Az
 Cv
-NF
+tc
 NI
 Cv
 KD
@@ -5628,7 +5640,7 @@ Az
 GI
 Cv
 pU
-NV
+jQ
 Cv
 KD
 KD

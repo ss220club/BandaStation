@@ -173,12 +173,6 @@
 /obj/structure/rack/shelf,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
-"eM" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/rack/wooden,
-/obj/item/ammo_box/advanced/s12gauge/hunter,
-/turf/open/floor/wood,
-/area/trainstation/outdoor)
 "eZ" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 5
@@ -500,7 +494,6 @@
 	},
 /obj/machinery/light/red/directional/west,
 /obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/syndicate/skyrat/overalls/unarmoured,
 /obj/effect/spawner/random/medical/minor_healing,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/entertainment/musical_instrument,
@@ -888,7 +881,6 @@
 	dir = 10
 	},
 /obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/syndicate/skyrat/overalls/unarmoured,
 /obj/effect/spawner/random/special_lighter,
 /obj/effect/spawner/random/entertainment/plushie_delux,
 /turf/open/indestructible/dark/textured,
@@ -1406,7 +1398,6 @@
 /area/trainstation/indoors)
 "TP" = (
 /obj/structure/table/reinforced,
-/obj/item/ammo_box/advanced/s12gauge/hunter,
 /obj/item/gun/ballistic/shotgun/doublebarrel,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors)
@@ -3121,7 +3112,7 @@ GG
 oJ
 yk
 ub
-eM
+MX
 yk
 GG
 xx

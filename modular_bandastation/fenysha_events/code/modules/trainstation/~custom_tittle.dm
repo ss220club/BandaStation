@@ -232,7 +232,7 @@ img.bg {
 		Управляйте поездом и доберитесь до финальной станции. \n \
 		\n \
 		Автор ивента: Fenysha, \n \
-		Специальное спасибо: Kierri, Mold, TYWONKA, V1S1Ti \n \
+		Специальное спасибо: Kierri<3, Mold, TYWONKA, V1S1Ti \n \
 		Вдохновленно: The final station, Far: Lone Sails\
 	"))
 
