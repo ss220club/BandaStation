@@ -62,25 +62,17 @@
 	var/charge = (heart.get_ipc_charge() / heart.ipc_max_charge) * 100
 	to_chat(H, span_notice("Заряд источника питания: [round(charge)]% ([round(heart.get_ipc_charge())]/[heart.ipc_max_charge])"))
 
-/// Индикатор температуры CPU IPC — цветная полоска в стандартном слоте голода.
+/// Иконка температуры CPU IPC. cooler_cool = норма, cooler_fire = перегрев.
+/// Расположена выше иконки батареи (ui_mood + pixel_y 20).
 /atom/movable/screen/ipc_temperature
 	name = "CPU temperature"
-	icon_state = "hungerbar"
-	screen_loc = ui_hunger
+	icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
+	icon_state = "cooler_cool"
+	screen_loc = ui_mood
+	pixel_y = 20
 	mouse_over_pointer = MOUSE_HAND_POINTER
 	/// Текущая температура
 	var/temperature = 30
-	/// Сам бар
-	var/atom/movable/screen/ipc_temperature_bar/temp_bar
-
-/atom/movable/screen/ipc_temperature/Initialize(mapload, datum/hud/hud_owner)
-	. = ..()
-	temp_bar = new(src, hud_owner)
-	vis_contents += temp_bar
-
-/atom/movable/screen/ipc_temperature/Destroy()
-	QDEL_NULL(temp_bar)
-	return ..()
 
 /atom/movable/screen/ipc_temperature/Click()
 	if(!ismob(usr))
@@ -134,63 +126,6 @@
 
 	to_chat(H, span_notice(message))
 
-/atom/movable/screen/ipc_temperature/update_appearance(updates)
-	. = ..()
-	temp_bar?.update_temperature(temperature)
-
-/// Бар температуры процессора с градиентом
-/atom/movable/screen/ipc_temperature_bar
-	icon_state = "hungerbar_bar"
-	screen_loc = ui_hunger
-	vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE
-	/// Маска для бара
-	var/static/icon/bar_mask
-	/// Градиент цветов для температуры (от синего через зеленый до красного)
-	var/static/list/temp_gradient = list(
-		0.0,  "#0080FF",  // 0°C - синий (холодно)
-		0.1,  "#00FFFF",  // 20°C - голубой
-		0.2,  "#00FF00",  // 40°C - зеленый (оптимально)
-		0.4,  "#FFFF00",  // 80°C - желтый (тепло)
-		0.6,  "#FF8000",  // 120°C - оранжевый (перегрев)
-		0.75, "#FF3000",  // 150°C - красно-оранжевый (критично)
-		1.0,  "#FF0000",  // 200°C - красный (аварийно)
-	)
-	/// Текущий offset бара
-	var/bar_offset
-	/// Последняя температурная полоса
-	var/last_temp_band
-
-/atom/movable/screen/ipc_temperature_bar/Initialize(mapload, datum/hud/hud_owner)
-	. = ..()
-	var/atom/movable/movable_loc = ismovable(loc) ? loc : null
-	screen_loc = movable_loc?.screen_loc
-	bar_mask ||= icon(icon, "hungerbar_mask")
-
-/atom/movable/screen/ipc_temperature_bar/proc/update_temperature(new_temp, instant = FALSE)
-	// Нормализуем температуру в диапазон 0-1 (0°C -> 200°C)
-	var/normalized_temp = clamp(new_temp / 200, 0, 1)
-	// Округляем до 5°C для оптимизации
-	normalized_temp = round(normalized_temp, 0.05)
-
-	if(normalized_temp == last_temp_band)
-		return
-	last_temp_band = normalized_temp
-
-	// Обновляем цвет
-	var/new_color = gradient(temp_gradient, normalized_temp)
-	if(instant)
-		color = new_color
-	else
-		animate(src, color = new_color, time = 0.5 SECONDS)
-
-	// Обновляем маску (заполненность бара)
-	var/old_bar_offset = bar_offset
-	bar_offset = clamp(-20 + (20 * normalized_temp), -20, 0)
-	if(old_bar_offset != bar_offset)
-		if(instant || isnull(old_bar_offset))
-			add_filter("ipc_temperature_bar_mask", 1, alpha_mask_filter(0, bar_offset, bar_mask))
-		else
-			transition_filter("ipc_temperature_bar_mask", alpha_mask_filter(0, bar_offset), 0.5 SECONDS)
 
 // ============================================
 // ПРИМЕНЕНИЕ HUD ЭЛЕМЕНТОВ
@@ -324,9 +259,10 @@
 	if(!H.hud_used)
 		return
 
-	// Обновляем temperature indicator
+	var/new_icon_state = (cpu_temperature >= 80) ? "cooler_fire" : "cooler_cool"
 	for(var/atom/movable/screen/ipc_temperature/indicator in H.hud_used.infodisplay)
 		indicator.temperature = cpu_temperature
+		indicator.icon_state = new_icon_state
 		indicator.update_appearance()
 
 // Вызываем обновление HUD при изменении батареи

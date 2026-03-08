@@ -201,6 +201,9 @@
 	var/datum/action/cooldown/ipc_overclock/overclock = new()
 	overclock.Grant(H)
 
+	var/datum/action/cooldown/ipc_hack/hack = new()
+	hack.Grant(H)
+
 	// Выдаём встроенный зарядный порт в левую руку по умолчанию.
 	// Настройка руки через ipc_charger_arm preference переставит его при загрузке.
 	var/obj/item/implant/ipc/charger/charger_impl = new()
@@ -243,9 +246,13 @@
 	. = ..()
 
 	// Удаляем IPC абилки
-	var/datum/action/cooldown/ipc_overclock/overclock = locate() in H.actions
+	var/datum/action/cooldown/ipc_overclock/overclock = locate(/datum/action/cooldown/ipc_overclock) in H.actions
 	if(overclock)
 		overclock.Remove(H)
+
+	var/datum/action/cooldown/ipc_hack/hack = locate(/datum/action/cooldown/ipc_hack) in H.actions
+	if(hack)
+		hack.Remove(H)
 
 	// Удаляем кнопку ОС
 	var/datum/action/innate/ipc_open_os/os_action = locate() in H.actions
