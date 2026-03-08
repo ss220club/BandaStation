@@ -761,8 +761,9 @@
 	owner.visible_message(span_danger("[owner] hurls bone shards!"))
 	if(shard_sound)
 		playsound(owner, shard_sound, 50, TRUE)
+	var/turf/owner_turf = get_turf(owner)
 	for(var/i = 1 to 5)
-		owner.fire_projectile(/obj/projectile/bullet/pellet/bone_fragment, target, firer = owner)
+		owner_turf.fire_projectile(/obj/projectile/bullet/pellet/bone_fragment, target, firer = owner)
 		sleep(0.1 SECONDS)
 
 
