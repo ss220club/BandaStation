@@ -153,20 +153,22 @@
 	return heart && heart.ipc_max_charge > 0
 
 /// Автооживление КПБ при наличии позитронного мозга и нового источника питания.
+/// Возвращает TRUE если оживление произошло.
 /proc/ipc_heart_check_revive(mob/living/carbon/human/M)
 	var/obj/item/organ/brain/positronic/brain = M.get_organ_slot(ORGAN_SLOT_BRAIN)
 	if(!brain || !istype(brain))
-		return
-	if(M.stat == DEAD || M.stat == UNCONSCIOUS)
-		M.set_stat(CONSCIOUS)
-		M.SetUnconscious(0, FALSE)
-		M.losebreath = 0
-		M.failed_last_breath = FALSE
-		M.update_damage_hud()
-		M.updatehealth()
-		M.reload_fullscreen()
-		to_chat(M, span_boldnotice("СИСТЕМЫ ВОССТАНОВЛЕНЫ: Питание возобновлено!"))
-		do_sparks(8, TRUE, M)
+		return FALSE
+	if(M.stat != DEAD && M.stat != UNCONSCIOUS)
+		return FALSE
+	M.set_stat(CONSCIOUS)
+	M.SetUnconscious(0, FALSE)
+	M.losebreath = 0
+	M.failed_last_breath = FALSE
+	M.update_damage_hud()
+	M.updatehealth()
+	M.reload_fullscreen()
+	do_sparks(8, TRUE, M)
+	return TRUE
 
 /obj/item/organ/heart/cybernetic/on_mob_insert(mob/living/carbon/receiver, special, movement_flags)
 	. = ..()
@@ -175,7 +177,8 @@
 	if(ipc_charge <= 0)
 		ipc_charge = ipc_max_charge
 	to_chat(receiver, span_notice("Источник питания подключён. Заряд: [ipc_charge]/[ipc_max_charge]."))
-	ipc_heart_check_revive(receiver)
+	if(ipc_heart_check_revive(receiver))
+		to_chat(receiver, span_boldnotice("СИСТЕМЫ ВОССТАНОВЛЕНЫ: Питание возобновлено!"))
 
 /obj/item/organ/heart/cybernetic/on_mob_remove(mob/living/carbon/receiver, special, movement_flags)
 	. = ..()
@@ -190,7 +193,8 @@
 	if(ipc_charge <= 0)
 		ipc_charge = ipc_max_charge
 	to_chat(receiver, span_notice("Источник питания подключён. Заряд: [ipc_charge]/[ipc_max_charge]."))
-	ipc_heart_check_revive(receiver)
+	if(ipc_heart_check_revive(receiver))
+		to_chat(receiver, span_boldnotice("СИСТЕМЫ ВОССТАНОВЛЕНЫ: Питание возобновлено!"))
 
 /obj/item/organ/heart/freedom/on_mob_remove(mob/living/carbon/receiver, special, movement_flags)
 	. = ..()
@@ -211,11 +215,12 @@
 	if(!ipc_charging_flag)
 		ipc_charge = max(0, ipc_charge - (ipc_charge_rate_mod * seconds_per_tick))
 
-	// Аномалок: самозарядка от аномального ядра
+	// Аномалок: самозарядка от ядра флюкс (+1.5/сек, нетто +0.5 vs разряда 1.0/сек).
+	// istype здесь намеренно: anomalock/on_life уже определён в ваниле (heart_anomalock.dm),
+	// поэтому переопределять его модульно нельзя — добавляем IPC-логику в родителя.
 	if(istype(src, /obj/item/organ/heart/cybernetic/anomalock))
 		var/obj/item/organ/heart/cybernetic/anomalock/anomalock = src
 		if(anomalock.core)
-			// Пассивная генерация 1.5/сек: итого нетто +0.5/сек vs разряда 1.0/сек
 			ipc_charge = min(ipc_max_charge, ipc_charge + (1.5 * seconds_per_tick))
 
 	// Предупреждение о низком заряде

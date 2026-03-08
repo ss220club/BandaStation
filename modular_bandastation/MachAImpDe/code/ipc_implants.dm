@@ -513,7 +513,7 @@
 		return FALSE
 
 	// Даем абилку переключения магбутов только если это первая нога
-	var/datum/action/toggle_magboots/existing = locate() in H.actions
+	var/datum/action/toggle_magboots/existing = locate(/datum/action/toggle_magboots) in H.actions
 	if(!existing)
 		var/datum/action/toggle_magboots/toggle = new()
 		toggle.Grant(H)
@@ -547,7 +547,7 @@
 			REMOVE_TRAIT(H, TRAIT_NO_SLIP_ALL, "magnetic_leg")
 			REMOVE_TRAIT(H, TRAIT_NEGATES_GRAVITY, "magnetic_leg")
 
-		var/datum/action/toggle_magboots/action = locate() in H.actions
+		var/datum/action/toggle_magboots/action = locate(/datum/action/toggle_magboots) in H.actions
 		if(action)
 			action.Remove(H)
 

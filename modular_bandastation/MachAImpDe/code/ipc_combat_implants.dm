@@ -164,9 +164,9 @@
 	if(!isliving(target) || !istype(user, /mob/living/carbon/human))
 		return
 	var/mob/living/carbon/human/H = user
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(battery && battery.charge < power_per_attack)
-		to_chat(user, span_warning("Недостаточно заряда батареи для атаки лезвиями!"))
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(heart && heart.ipc_max_charge && heart.get_ipc_charge() < power_per_attack)
+		to_chat(user, span_warning("Недостаточно заряда для атаки лезвиями!"))
 		. = TRUE
 
 /// Drain IPC battery and attempt dismember after a successful hit
@@ -175,9 +175,9 @@
 	if(!proximity_flag || !isliving(target) || !istype(user, /mob/living/carbon/human))
 		return
 	var/mob/living/carbon/human/H = user
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(battery)
-		battery.charge = max(battery.charge - power_per_attack, 0)
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(heart && heart.ipc_max_charge)
+		heart.set_ipc_charge(max(heart.get_ipc_charge() - power_per_attack, 0))
 	if(ishuman(target))
 		var/mob/living/carbon/human/V = target
 		var/obj/item/bodypart/target_part = V.get_bodypart(H.zone_selected)
