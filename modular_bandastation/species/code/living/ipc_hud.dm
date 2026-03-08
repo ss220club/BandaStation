@@ -63,13 +63,13 @@
 	to_chat(H, span_notice("Заряд источника питания: [round(charge)]% ([round(heart.get_ipc_charge())]/[heart.ipc_max_charge])"))
 
 /// Иконка температуры CPU IPC. cooler_cool = норма, cooler_fire = перегрев.
-/// Расположена выше иконки батареи (ui_mood + pixel_y 20).
+/// Расположена правее иконки батареи (ui_mood + pixel_x 20).
 /atom/movable/screen/ipc_temperature
 	name = "CPU temperature"
 	icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
 	icon_state = "cooler_cool"
 	screen_loc = ui_mood
-	pixel_y = 20
+	pixel_x = 20
 	mouse_over_pointer = MOUSE_HAND_POINTER
 	/// Текущая температура
 	var/temperature = 30
@@ -253,7 +253,6 @@
 	for(var/atom/movable/screen/ipc_battery/indicator in H.hud_used.infodisplay)
 		indicator.charge_percent = charge_percent
 		indicator.icon_state = battery_icon_state
-		indicator.update_appearance()
 
 /datum/species/ipc/proc/update_ipc_temperature_icon(mob/living/carbon/human/H)
 	if(!H.hud_used)
@@ -263,7 +262,6 @@
 	for(var/atom/movable/screen/ipc_temperature/indicator in H.hud_used.infodisplay)
 		indicator.temperature = cpu_temperature
 		indicator.icon_state = new_icon_state
-		indicator.update_appearance()
 
 // Вызываем обновление HUD при изменении батареи
 /obj/item/organ/heart/ipc_battery/on_life(seconds_per_tick, times_fired)
