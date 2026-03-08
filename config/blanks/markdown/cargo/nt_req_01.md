@@ -1,5 +1,5 @@
 [blank_header
-id = NT-REQ-01;
+id = USSP-REQ-01;
 name = Запрос на поставку;
 category = Отдел снабжения;
 station = [station_name];

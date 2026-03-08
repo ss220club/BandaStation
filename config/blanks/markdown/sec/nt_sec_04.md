@@ -1,5 +1,5 @@
 [blank_header
-id = NT-SEC-04;
+id = USSP-SEC-04;
 name = Заявление о причинении вреда здоровью или имуществу;
 category = Служба безопасности;
 station = [station_name];

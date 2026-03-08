@@ -1,5 +1,5 @@
 [blank_header
-id = NT-RND-01;
+id = USSP-RND-01;
 name = Отчет о странном предмете;
 category = Отдел исследований;
 station = station_name;

@@ -1,7 +1,7 @@
 [blank_header
-id = NT-MD-01;
+id = USSP-MD-01;
 name = Постановление на поставку медикаментов;
-category = Медицинский отдел;
+category = Медицина;
 station = [station_name];
 ]
 

@@ -1,5 +1,5 @@
 [blank_header
-id = NT-HR-02;
+id = USSP-HR-02;
 name = Заявление на смену должности;
 station = [station_name];
 category = Отдел кадров
@@ -24,7 +24,7 @@ category = Отдел кадров
 
 ! Время: [input_field autofill_type=time]
 ! Подпись заявителя: [input_field autofill_type=sign]
-! Подпись главы персонала: [input_field autofill_type=sign]
+! Подпись управдома: [input_field autofill_type=sign]
 ! Подпись текущего главы: [input_field autofill_type=sign]
 ! Подпись будущего главы: [input_field autofill_type=sign]
 

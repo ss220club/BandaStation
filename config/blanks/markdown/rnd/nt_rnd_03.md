@@ -1,5 +1,5 @@
 [blank_header
-id = NT-RND-03;
+id = USSP-RND-03;
 name = Заявление на получение и установку импланта;
 category = Отдел исследований;
 station = station_name;

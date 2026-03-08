@@ -29,4 +29,7 @@
 	assets = list(
 		"ntlogo.png" = 'icons/paper_icons/ntlogo.png',
 		"syndielogo.png" ='icons/paper_icons/syndielogo.png',
+		// BANDASTATION EDIT START
+		"ussplogo.png" ='modular_bandastation/objects/icons/stamp_icons/ussp_logo.png',
+		// BANDASTATION EDIT END
 	)

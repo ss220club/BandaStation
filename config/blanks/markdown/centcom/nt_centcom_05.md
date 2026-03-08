@@ -1,5 +1,5 @@
 [blank_header
-id = NT-CENTCOM-05 (КОНФИДЕНЦИАЛЬНО);
+id = USSP-CENTCOM-05 (КОНФИДЕНЦИАЛЬНО);
 name = Запрос отчёта криминального статуса станции;
 station = [station_name];
 category = Центральное командование;

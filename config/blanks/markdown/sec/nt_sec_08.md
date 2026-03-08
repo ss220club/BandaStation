@@ -1,5 +1,5 @@
 [blank_header
-id = NT-SEC-08;
+id = USSP-SEC-08;
 name = Лицензирование вооружения и экипировки для исполнения деятельности;
 category = Служба безопасности;
 station = [station_name];
@@ -18,7 +18,7 @@ station = [station_name];
 
 ! Время: [input_field autofill_type=time]
 ! Подпись обладателя лицензии: [input_field autofill_type=sign]
-! Подпись главы службы безопасности: [input_field autofill_type=sign]
+! Подпись начальника милицейского участка: [input_field autofill_type=sign]
 
 ---
 

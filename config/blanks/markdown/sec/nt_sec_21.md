@@ -1,5 +1,5 @@
 [blank_header
-id = NT-SEC-21;
+id = USSP-SEC-21;
 name = Ордер на арест;
 category = Служба безопасности;
 station = [station_name];

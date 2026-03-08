@@ -1,5 +1,5 @@
 [blank_header
-id = NT-SEC-02;
+id = USSP-SEC-02;
 name = Отчёт по результатам расследования;
 category = Служба безопасности;
 station = [station_name];

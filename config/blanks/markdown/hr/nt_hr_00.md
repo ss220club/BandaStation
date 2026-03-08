@@ -1,5 +1,5 @@
 [blank_header
-id = NT-HR-00;
+id = USSP-HR-00;
 name = Бланк заявления;
 station = [station_name];
 category = Общие формы
@@ -22,7 +22,7 @@ category = Общие формы
 
 ! Время: [input_field autofill_type=time]
 ! Подпись заявителя: [input_field autofill_type=sign]
-! Подпись главы персонала: [input_field autofill_type=sign]
+! Подпись управдома: [input_field autofill_type=sign]
 ! Подпись (дополнительная): [input_field autofill_type=sign]
 
 [blank_footer

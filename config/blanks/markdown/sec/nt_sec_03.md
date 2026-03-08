@@ -1,5 +1,5 @@
 [blank_header
-id = NT-SEC-03;
+id = USSP-SEC-03;
 name = Заявление о краже;
 category = Служба безопасности;
 station = [station_name];

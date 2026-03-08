@@ -1,5 +1,5 @@
 [blank_header
-id = NT-SUP-01;
+id = USSP-SUP-01;
 name = Регистрационная форма для подтверждения заказа;
 category = Отдел снабжения;
 station = [station_name];

@@ -1,7 +1,7 @@
 [blank_header
-id = NT-MD-VRR;
+id = USSP-MD-VRR;
 name = Запрос на распространение вируса;
-category = Медицинский отдел;
+category = Медицина;
 station = [station_name];
 ]
 
@@ -20,8 +20,8 @@ station = [station_name];
 # === Подписи и штампы ===
 
 ! Подпись вирусолога: [input_field autofill_type=sign]
-! Подпись главновго врача: [input_field autofill_type=sign]
-! Подпись капитана: [input_field autofill_type=sign]
+! Подпись главного врача: [input_field autofill_type=sign]
+! Подпись представителя посёлка: [input_field autofill_type=sign]
 
 ---
 

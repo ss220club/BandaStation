@@ -13,6 +13,7 @@
 #include "avangarde17/code/obj/talon_machine.dm"
 #include "avangarde17/code/obj/talons.dm"
 #include "avangarde17/code/obj/decals.dm"
+#include "avangarde17/code/obj/photocopiers.dm"
 
 #include "avangarde17/code/turf/turf.dm"
 

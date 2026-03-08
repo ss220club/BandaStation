@@ -1,7 +1,7 @@
 [blank_header
-id = NT-MD-02;
+id = USSP-MD-02;
 name = Отчёт о вскрытии;
-category = Медицинский отдел;
+category = Медицина;
 station = [station_name];
 ]
 

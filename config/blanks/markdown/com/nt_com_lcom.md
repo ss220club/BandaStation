@@ -1,8 +1,8 @@
 [blank_header
-id = NT-COM-LCOM;
+id = USSP-COM-LCOM;
 name = Заявление об увольнении главы отдела;
 station = [station_name];
-category = Главы станции
+category = Руководство
 ]
 
 Я, [input_field autofill_type=name], в должности - [input_field autofill_type=job], заявляю об официальном увольнении действующего главы отделения [input_field].

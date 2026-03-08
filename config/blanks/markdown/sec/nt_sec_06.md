@@ -1,5 +1,5 @@
 [blank_header
-id = NT-SEC-06;
+id = USSP-SEC-06;
 name = Разрешение на присваивание канала связи;
 category = Служба безопасности;
 station = [station_name];
@@ -18,12 +18,12 @@ station = [station_name];
 
 ! Время: [input_field autofill_type=time]
 ! Подпись заявителя: [input_field autofill_type=sign]
-! Подпись главы персонала: [input_field autofill_type=sign]
-! Подпись главы службы безопасности: [input_field autofill_type=sign]
+! Подпись управдома: [input_field autofill_type=sign]
+! Подпись начальника милицейского участка: [input_field autofill_type=sign]
 
 ---
 
--# *Обязательно провести копирование документа для главы персонала, оригинал документа должен быть выдан заявителю.
+-# *Обязательно провести копирование документа для управдома, оригинал документа должен быть выдан заявителю.
 -# *Обязательно провести копирование документа для службы безопасности.
 
 [blank_footer

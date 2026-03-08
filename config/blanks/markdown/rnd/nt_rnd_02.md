@@ -1,5 +1,5 @@
 [blank_header
-id = NT-RND-02;
+id = USSP-RND-02;
 name = Заявление на киберизацию;
 category = Отдел исследований;
 station = station_name;

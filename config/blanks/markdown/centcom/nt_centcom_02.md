@@ -1,5 +1,5 @@
 [blank_header
-id = NT-CENTCOM-02 (КОНФИДЕНЦИАЛЬНО);
+id = USSP-CENTCOM-02 (КОНФИДЕНЦИАЛЬНО);
 name = Запрос от центрального командования;
 station = [station_name];
 category = Центральное командование;

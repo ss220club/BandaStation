@@ -1,8 +1,8 @@
 [blank_header
-id = NT-COM-ACOM;
+id = USSP-COM-ACOM;
 name = Заявление о повышении сотрудника до и.о. главы отдела;
 station = [station_name];
-category = Главы станции
+category = Руководство
 ]
 
 Я, [input_field autofill_type=name], в должности сотрудника отделения [input_field autofill_type=department], прошу согласовать нынешнее командование [station_name], в повышении меня до и.о. главы [input_field autofill_type=department].

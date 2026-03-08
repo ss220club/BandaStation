@@ -1,5 +1,5 @@
 [blank_header
-id = NT-HR-04;
+id = USSP-HR-04;
 name = Заявление на выдачу новой ID карты;
 station = [station_name];
 category = Отдел кадров
@@ -22,7 +22,7 @@ category = Отдел кадров
 
 ! Время: [input_field autofill_type=time]
 ! Подпись заявителя: [input_field autofill_type=sign]
-! Подпись главы персонала: [input_field autofill_type=sign]
+! Подпись управдома: [input_field autofill_type=sign]
 
 [blank_footer
 content = Подписи главы являются доказательством их согласия.

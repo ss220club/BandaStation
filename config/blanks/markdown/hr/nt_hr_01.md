@@ -1,5 +1,5 @@
 [blank_header
-id = NT-HR-01;
+id = USSP-HR-01;
 name = Заявление о приёме на работу;
 station = [station_name];
 category = Отдел кадров
@@ -23,7 +23,7 @@ category = Отдел кадров
 
 ! Время: [input_field autofill_type=time]
 ! Подпись заявителя: [input_field autofill_type=sign]
-! Подпись главы персонала: [input_field autofill_type=sign]
+! Подпись управдома: [input_field autofill_type=sign]
 ! Подпись будущего главы: [input_field autofill_type=sign]
 
 [blank_footer

@@ -1,5 +1,5 @@
 [blank_header
-id = NT-RND-04;
+id = USSP-RND-04;
 name = Запрос о постройке меха;
 station = [station_name];
 category = Отдел исследований

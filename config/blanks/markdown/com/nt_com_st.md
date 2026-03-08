@@ -1,8 +1,8 @@
 [blank_header
-id = NT-COM-ST;
+id = USSP-COM-ST;
 name = Отчет о ситуации на станции;
 station = [station_name];
-category = Главы станции
+category = Руководство
 ]
 
 # === Приветствую Центральное командование ===

@@ -1,7 +1,7 @@
 [blank_header
-id = NT-MD-04;
+id = USSP-MD-04;
 name = Сводка о вирусе;
-category = Медицинский отдел;
+category = Медицина;
 station = [station_name];
 ]
 

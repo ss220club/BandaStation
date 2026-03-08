@@ -1,7 +1,7 @@
 [blank_header
-id = NT-MD-05;
+id = USSP-MD-05;
 name = Отчет о психологическом состоянии;
-category = Медицинский отдел;
+category = Медицина;
 station = [station_name];
 ]
 

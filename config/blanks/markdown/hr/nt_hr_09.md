@@ -1,5 +1,5 @@
 [blank_header
-id = NT-HR-09;
+id = USSP-HR-09;
 name = Приказ об увольнении;
 station = [station_name];
 category = Отдел кадров
@@ -18,7 +18,7 @@ category = Отдел кадров
 
 ! Время: [input_field autofill_type=time]
 ! Подпись инициатора: [input_field autofill_type=sign]
-! Подпись главы персонала: [input_field autofill_type=sign]
+! Подпись управдома: [input_field autofill_type=sign]
 
 [blank_footer
 content = Подписи главы являются доказательством их согласия.

@@ -3,7 +3,7 @@
 	"map_name": "Avangarde17",
 	"map_path": "bandastation",
 	"map_file": "avangarde.dmm",
-	"fluff_name": "Авангард 17",
+	"fluff_name": "Зорька",
 	"welcome_sound_override": "modular_bandastation/events/avangarde17/audio/avantgarde_17.ogg",
 	"main_floor": 1,
 	"planetary": 1,

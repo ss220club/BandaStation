@@ -1,5 +1,5 @@
 [blank_header
-id = NT-HR-05;
+id = USSP-HR-05;
 name = Заявление на дополнительный доступ;
 station = [station_name];
 category = Отдел кадров
@@ -22,7 +22,7 @@ category = Отдел кадров
 
 ! Время: [input_field autofill_type=time]
 ! Подпись заявителя: [input_field autofill_type=sign]
-! Подпись главы персонала: [input_field autofill_type=sign]
+! Подпись управдома: [input_field autofill_type=sign]
 ! Подпись текущего главы: [input_field autofill_type=sign]
 
 [blank_footer

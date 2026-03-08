@@ -1,5 +1,5 @@
 [blank_header
-id = NT-CENTCOM-06 (КОНФИДЕНЦИАЛЬНО);
+id = USSP-CENTCOM-06 (КОНФИДЕНЦИАЛЬНО);
 name = Запрос отчёта здравоохранения станции;
 station = [station_name];
 category = Центральное командование;

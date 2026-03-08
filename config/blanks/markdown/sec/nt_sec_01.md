@@ -1,5 +1,5 @@
 [blank_header
-id = NT-SEC-01;
+id = USSP-SEC-01;
 name = Свидетельские показания;
 category = Служба безопасности;
 station = [station_name];
@@ -10,7 +10,7 @@ station = [station_name];
 Имя свидетеля: [input_field autofill_type=name]
 -# Полностью и без ошибок
 Номер аккаунта свидетеля: [input_field autofill_type=bank_id]
--# Эта информация есть у главы персонала
+-# Эта информация есть у управляющего посёлком
 Должность свидетеля: [input_field autofill_type=job]
 -# Указано на ID карте
 

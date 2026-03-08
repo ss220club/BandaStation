@@ -1,5 +1,5 @@
 [blank_header
-id = NT-CENTCOM-01 (КОНФИДЕНЦИАЛЬНО);
+id = USSP-CENTCOM-01 (КОНФИДЕНЦИАЛЬНО);
 name = Отдел Специальных Операций АКН “Трурль”;
 station = [station_name];
 category = Центральное командование;

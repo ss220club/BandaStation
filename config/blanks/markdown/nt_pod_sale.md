@@ -1,5 +1,5 @@
 [blank_header
-id = NT-POD;
+id = USSP-POD;
 name = Квитанция о продаже пода;
 station = [station_name];
 category = Общие формы

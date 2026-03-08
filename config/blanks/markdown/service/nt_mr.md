@@ -1,5 +1,5 @@
 [blank_header
-id = NT-MR;
+id = USSP-MR;
 name = Свидетельство о заключении брака;
 station = [station_name];
 category = Отдел сервиса

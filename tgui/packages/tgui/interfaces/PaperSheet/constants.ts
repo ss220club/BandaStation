@@ -18,14 +18,14 @@ export const SPECIAL_TOKENS = {
 		<div class='blank'>
 		  <div class='blank_header'>
 			<div class='blank_logo'>
-			  [nt_logo]
+			  [ussp_logo]
 			</div>
 			<div class='blank_content'>
 			  <span class='id'>Форма ${id || ''}</span>
 			  <span class='name'>${name || ''}</span>
 			  <hr>
 			  <span class='station'>
-				Научная станция Nanotrasen
+				Посёлок Городского Типа
 				<br>
 				<span class='station_name'>
           ${station || ''}
@@ -61,5 +61,10 @@ export const SPECIAL_TOKENS = {
     const matchArray = value.match(propRegex('width'));
     const widthValue = matchArray ? matchArray[1] : '';
     return `<img src='${resolveAsset('syndielogo.png')}' ${widthValue && `width='${widthValue}`}'>`;
+  },
+  ussp_logo: (value: string) => {
+    const matchArray = value.match(propRegex('width'));
+    const widthValue = matchArray ? matchArray[1] : '';
+    return `<img src='${resolveAsset('ussplogo.png')}' ${widthValue && `width='${widthValue}`}'>`;
   },
 };

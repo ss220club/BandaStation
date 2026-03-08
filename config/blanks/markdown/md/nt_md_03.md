@@ -1,7 +1,7 @@
 [blank_header
-id = NT-MD-03;
+id = USSP-MD-03;
 name = Постановление на изготовление химических препаратов;
-category = Медицинский отдел;
+category = Медицина;
 station = [station_name];
 ]
 

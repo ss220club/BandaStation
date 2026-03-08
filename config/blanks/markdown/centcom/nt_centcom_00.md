@@ -1,5 +1,5 @@
 [blank_header
-id = NT-CENTCOM-00 (КОНФИДЕНЦИАЛЬНО);
+id = USSP-CENTCOM-00 (КОНФИДЕНЦИАЛЬНО);
 name = Официальный Меморандум;
 station = [station_name];
 category = Центральное командование;

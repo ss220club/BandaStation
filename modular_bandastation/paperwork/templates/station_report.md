@@ -1,5 +1,5 @@
 [blank_header
-id = NT-INTEL-01 (КОНФИДЕНЦИАЛЬНО);
+id = USSP-INTEL-01 (КОНФИДЕНЦИАЛЬНО);
 name = Отчет департамента разведки и оценки угроз Nanotrasen;
 station = [station_name];
 category = Центральное командование;

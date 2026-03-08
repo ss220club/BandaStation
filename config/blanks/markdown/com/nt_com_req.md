@@ -1,8 +1,8 @@
 [blank_header
-id = NT-COM-REQ;
+id = USSP-COM-REQ;
 name = Запрос на поставку с центрального командования;
 station = [station_name];
-category = Главы станции
+category = Руководство
 ]
 
 # === Приветствую Центральное командование ===

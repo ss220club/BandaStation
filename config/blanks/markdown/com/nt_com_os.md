@@ -1,8 +1,8 @@
 [blank_header
-id = NT-COM-OS;
+id = USSP-COM-OS;
 name = Отчёт о выполнении цели;
 station = [station_name];
-category = Главы станции
+category = Руководство
 ]
 
 Цель станции: [input_field]

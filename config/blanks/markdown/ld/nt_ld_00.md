@@ -1,5 +1,5 @@
 [blank_header
-id = NT-LD-00;
+id = USSP-LD-00;
 name = Бланк заявления;
 station = [station_name];
 category = Юридический отдел
@@ -22,7 +22,7 @@ category = Юридический отдел
 
 ! Время: [input_field autofill_type=time]
 ! Подпись заявителя: [input_field autofill_type=sign]
-! Подпись главы персонала: [input_field autofill_type=sign]
+! Подпись управдома: [input_field autofill_type=sign]
 ! Подпись (дополнительная): [input_field autofill_type=sign]
 
 [blank_footer

@@ -1,5 +1,5 @@
 [blank_header
-id = NT-CENTCOM-07 (КОНФИДЕНЦИАЛЬНО);
+id = USSP-CENTCOM-07 (КОНФИДЕНЦИАЛЬНО);
 name = Запрос отчёта научно-технического прогресса станции;
 station = [station_name];
 category = Центральное командование;

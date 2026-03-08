@@ -1,5 +1,5 @@
 [blank_header
-id = NT-MRL;
+id = USSP-MRL;
 name = Свидетельство о расторжении брака;
 station = [station_name];
 category = Отдел сервиса
