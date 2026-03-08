@@ -36,36 +36,16 @@
 // HUD ИНДИКАТОРЫ ДЛЯ IPC
 // ============================================
 
-/// Индикатор заряда батареи IPC (аналог hunger bar)
+/// Иконка заряда батареи IPC — меняется в зависимости от уровня заряда.
+/// Нажмите чтобы узнать точный процент.
 /atom/movable/screen/ipc_battery
 	name = "battery charge"
-	icon_state = "hungerbar"  // Используем ту же основу что и hunger
-	screen_loc = ui_mood  // Позиция где обычно mood
+	icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
+	icon_state = "cell_full"
+	screen_loc = ui_mood
 	mouse_over_pointer = MOUSE_HAND_POINTER
-	/// Текущий заряд (процент)
+	/// Текущий заряд (процент) — используется для определения icon_state
 	var/charge_percent = 100
-	/// Иконка батареи рядом с баром
-	var/image/battery_image
-	/// Сам бар
-	var/atom/movable/screen/ipc_battery_bar/battery_bar
-
-/atom/movable/screen/ipc_battery/Initialize(mapload, datum/hud/hud_owner)
-	. = ..()
-
-	// Иконка батареи из ipc_ui.dmi (cell_full по умолчанию, обновляется динамически)
-	battery_image = image(icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi', icon_state = "cell_full", pixel_x = -5)
-	battery_image.plane = plane
-	battery_image.appearance_flags |= KEEP_APART
-	battery_image.add_filter("simple_outline", 2, outline_filter(1, COLOR_BLACK, OUTLINE_SHARP))
-	underlays += battery_image
-
-	// Создаем бар
-	battery_bar = new(src, hud_owner)
-	vis_contents += battery_bar
-
-/atom/movable/screen/ipc_battery/Destroy()
-	QDEL_NULL(battery_bar)
-	return ..()
 
 /atom/movable/screen/ipc_battery/Click()
 	if(!ismob(usr))
@@ -82,65 +62,11 @@
 	var/charge = (heart.get_ipc_charge() / heart.ipc_max_charge) * 100
 	to_chat(H, span_notice("Заряд источника питания: [round(charge)]% ([round(heart.get_ipc_charge())]/[heart.ipc_max_charge])"))
 
-/atom/movable/screen/ipc_battery/update_appearance(updates)
-	. = ..()
-	battery_bar?.update_charge(charge_percent)
-
-/// Бар заряда батареи с градиентом
-/atom/movable/screen/ipc_battery_bar
-	icon_state = "hungerbar_bar"
-	screen_loc = ui_mood
-	vis_flags = VIS_INHERIT_ID | VIS_INHERIT_PLANE
-	/// Маска для бара
-	var/static/icon/bar_mask
-	/// Градиент цветов для заряда (от красного до зеленого)
-	var/static/list/battery_gradient = list(
-		0.0, "#FF0000",  // 0% - красный (критично)
-		0.2, "#FF8000",  // 20% - оранжевый
-		0.5, "#FFFF00",  // 50% - желтый
-		0.8, "#00FF00",  // 80% - зеленый
-		1.0, "#00AA00",  // 100% - темно-зеленый
-	)
-	/// Текущий offset бара
-	var/bar_offset
-	/// Последний процент для оптимизации
-	var/last_charge_band
-
-/atom/movable/screen/ipc_battery_bar/Initialize(mapload, datum/hud/hud_owner)
-	. = ..()
-	var/atom/movable/movable_loc = ismovable(loc) ? loc : null
-	screen_loc = movable_loc?.screen_loc
-	bar_mask ||= icon(icon, "hungerbar_mask")
-
-/atom/movable/screen/ipc_battery_bar/proc/update_charge(new_charge, instant = FALSE)
-	// Округляем до 5% для оптимизации
-	new_charge = round(new_charge, 5) / 100
-	if(new_charge == last_charge_band)
-		return
-	last_charge_band = new_charge
-
-	// Обновляем цвет
-	var/new_color = gradient(battery_gradient, clamp(new_charge, 0, 1))
-	if(instant)
-		color = new_color
-	else
-		animate(src, color = new_color, time = 0.5 SECONDS)
-
-	// Обновляем маску (заполненность бара)
-	var/old_bar_offset = bar_offset
-	bar_offset = clamp(-20 + (20 * new_charge), -20, 0)
-	if(old_bar_offset != bar_offset)
-		if(instant || isnull(old_bar_offset))
-			add_filter("ipc_battery_bar_mask", 1, alpha_mask_filter(0, bar_offset, bar_mask))
-		else
-			transition_filter("ipc_battery_bar_mask", alpha_mask_filter(0, bar_offset), 0.5 SECONDS)
-
-/// Индикатор температуры CPU IPC — только цветная полоска, без иконки.
+/// Индикатор температуры CPU IPC — цветная полоска в стандартном слоте голода.
 /atom/movable/screen/ipc_temperature
 	name = "CPU temperature"
 	icon_state = "hungerbar"
 	screen_loc = ui_hunger
-	pixel_y = 18
 	mouse_over_pointer = MOUSE_HAND_POINTER
 	/// Текущая температура
 	var/temperature = 30
@@ -391,8 +317,7 @@
 	// Обновляем battery indicator
 	for(var/atom/movable/screen/ipc_battery/indicator in H.hud_used.infodisplay)
 		indicator.charge_percent = charge_percent
-		if(indicator.battery_image)
-			indicator.battery_image.icon_state = battery_icon_state
+		indicator.icon_state = battery_icon_state
 		indicator.update_appearance()
 
 /datum/species/ipc/proc/update_ipc_temperature_icon(mob/living/carbon/human/H)

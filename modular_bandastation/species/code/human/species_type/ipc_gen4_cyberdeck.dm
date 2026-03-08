@@ -87,6 +87,22 @@
 	playsound(H, 'sound/machines/terminal/terminal_alert.ogg', 25, FALSE)
 
 // ============================================
+// TGUI: УДАЛЁННЫЙ ДОСТУП К КОНСОЛЯМ
+// ============================================
+// reach_length расширяет физические клики (двери), но TGUI консолей
+// использует shared_living_ui_distance с хардкодным dist <= 1.
+// Переопределяем для IPC Gen 4 чтобы консоли тоже работали с расстояния.
+
+/mob/living/carbon/human/shared_living_ui_distance(atom/movable/src_object, viewcheck = TRUE, allow_tk = TRUE)
+	if(istype(src_object, /obj/machinery/computer) && istype(dna?.species, /datum/species/ipc))
+		var/datum/species/ipc/S = dna.species
+		if(S.ipc_generation == IPC_GEN_CYBERDECK && !S.cyberdeck_disabled)
+			var/dist = get_dist(src_object, src)
+			if(dist <= CYBERDECK_SCAN_RANGE && (src_object in view(src)))
+				return UI_INTERACTIVE
+	return ..()
+
+// ============================================
 // ЭМИ: ОТКЛЮЧЕНИЕ КИБЕРДЕКИ
 // ============================================
 
