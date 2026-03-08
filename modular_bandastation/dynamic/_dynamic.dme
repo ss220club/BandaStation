@@ -1,0 +1,5 @@
+#include "_dynamic.dm"
+
+#include "code/antag_activity.dm"
+#include "code/config.dm"
+#include "code/dynamic.dm"
