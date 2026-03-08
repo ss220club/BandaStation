@@ -95,7 +95,7 @@
 // При успехе: дверь открывается на 5 секунд + тратится заряд батареи.
 // Не работает на забальтованных и заваренных дверях.
 
-#define IPC_HACK_BATTERY_COST  150   // заряд за успешный взлом
+#define IPC_HACK_BATTERY_COST  250   // заряд за успешный взлом
 #define IPC_HACK_DURATION      20 SECONDS
 
 /// Абилка взлома дверей
@@ -199,7 +199,7 @@
 	// Визуальное сообщение: другие видят что кто-то взламывает
 	H.visible_message(
 		span_warning("[H] начинает взламывать [door]..."),
-		span_boldwarning("ВЗЛОМ: Начинается электронный взлом [door]. Не двигайтесь! (10 сек)"),
+		span_boldwarning("ВЗЛОМ: Начинается электронный взлом [door]. Не двигайтесь!"),
 	)
 	playsound(H, 'sound/machines/terminal/terminal_alert.ogg', 40, FALSE)
 
@@ -233,7 +233,7 @@
 
 	H.visible_message(
 		span_warning("[H] вскрывает [door]!"),
-		span_boldnotice("ВЗЛОМ: Успех! Система безопасности обойдена. Заряд -[IPC_HACK_BATTERY_COST]."),
+		span_boldnotice("ВЗЛОМ: Успех! Система безопасности обойдена."),
 	)
 	playsound(door, 'sound/machines/terminal/terminal_processing.ogg', 50, FALSE)
 
