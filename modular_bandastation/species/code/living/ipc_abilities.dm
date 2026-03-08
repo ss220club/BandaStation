@@ -9,8 +9,8 @@
 	desc = "Ускоряет процессы взаимодействия на 40% за счет повышения температуры процессора. Нагревает процессор на 10°C каждые 5 секунд."
 	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
 	button_icon_state = "ipc_overload_off"
-	background_icon_state = "bg_tech_blue"
-	overlay_icon_state = "bg_tech_blue_border"
+	background_icon_state = null
+	overlay_icon_state = null
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_INCAPACITATED
 	cooldown_time = 2 SECONDS
 	click_to_activate = FALSE
@@ -52,7 +52,7 @@
 /datum/action/cooldown/ipc_overclock/proc/activate_overclock(mob/living/carbon/human/H, datum/species/ipc/S)
 	S.overclock_active = TRUE
 	button_icon_state = "ipc_overload_on"
-	background_icon_state = "bg_tech_blue_active"
+	background_icon_state = null
 
 	// Проверяем установлен ли OverClock.exe — усиливает разгон
 	var/has_overclock_mod = FALSE
@@ -74,7 +74,7 @@
 /datum/action/cooldown/ipc_overclock/proc/deactivate_overclock(mob/living/carbon/human/H, datum/species/ipc/S)
 	S.overclock_active = FALSE
 	button_icon_state = "ipc_overload_off"
-	background_icon_state = "bg_tech_blue"
+	background_icon_state = null
 
 	// Убираем бонусы от OverClock.exe
 	S.overclock_speed_bonus = initial(S.overclock_speed_bonus)

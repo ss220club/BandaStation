@@ -35,8 +35,11 @@
 	// Бонус к скорости действий +20%
 	H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen4_bonus)
 
-	// Расширяем радиус взаимодействия
+	// Расширяем радиус взаимодействия:
+	// reach_length — диапазон кликов (двери, предметы)
+	// interaction_range — диапазон can_interact_with (консоли, машины)
 	H.reach_length = CYBERDECK_SCAN_RANGE
+	H.interaction_range = CYBERDECK_SCAN_RANGE
 
 	// Хук для добавления тепла CPU при удалённом использовании
 	RegisterSignal(H, COMSIG_MOB_CLICKON, PROC_REF(on_cyberdeck_clickon))
@@ -48,6 +51,7 @@
 
 	// Сброс радиуса взаимодействия
 	H.reach_length = initial(H.reach_length)
+	H.interaction_range = initial(H.interaction_range)
 
 	UnregisterSignal(H, COMSIG_MOB_CLICKON)
 
@@ -60,6 +64,7 @@
 	if(cyberdeck_disabled && world.time >= cyberdeck_reenable_time)
 		cyberdeck_disabled = FALSE
 		H.reach_length = CYBERDECK_SCAN_RANGE
+		H.interaction_range = CYBERDECK_SCAN_RANGE
 		to_chat(H, span_notice("КИБЕРДЕКА: Системы перезагружены. Дистанционный доступ активирован."))
 
 // ============================================
@@ -123,5 +128,6 @@
 
 	// ЭМИ сбрасывает радиус взаимодействия
 	H.reach_length = initial(H.reach_length)
+	H.interaction_range = initial(H.interaction_range)
 	// ЭМИ нагревает CPU
 	cpu_temperature = min(cpu_temp_critical, cpu_temperature + 20)
