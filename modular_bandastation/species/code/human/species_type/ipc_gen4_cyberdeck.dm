@@ -1,14 +1,16 @@
 // ============================================
 // IPC ПОКОЛЕНИЕ IV: КИБЕРДЕКА
 // ============================================
-// + Кибердека: удалённый доступ к дверям (только при наличии доступа) и консолям в радиусе CYBERDECK_SCAN_RANGE
+// Пассивно расширяет радиус взаимодействия с дверьми (при наличии доступа)
+// и консолями до CYBERDECK_SCAN_RANGE клеток.
+// Если объект дальше 1 клетки — использование добавляет температуру CPU.
+//
+// + Увеличенный радиус взаимодействия (reach_length = CYBERDECK_SCAN_RANGE)
 // + Сниженный урон от ЭМИ (emp_vulnerability = 1)
 // + +20% эффективности действий
-// + Охлаждение в покое / у АПЦ / в холодных зонах
-// - Нагрузка (heat) растёт от действий
-// - При heat >= CYBERDECK_OVERHEAT_AT: ожоги + перебои
+// - Удалённое использование дверей/консолей поднимает температуру CPU
 // - Требует больше ресурсов (ipc_repair_cost_mod = 1.5)
-// - ЭМИ временно отключает кибердеку
+// - ЭМИ временно отключает кибердеку (сбрасывает радиус)
 
 #define IPC_GEN4_TRAIT_SOURCE "ipc_gen4"
 
@@ -16,33 +18,6 @@
 	id = "ipc_gen4_bonus"
 	variable = FALSE
 	multiplicative_slowdown = -0.2  // +20% эффективности
-
-/datum/action/innate/ipc_cyberdeck
-	name = "Кибердека"
-	desc = "Открыть интерфейс кибердеки для взлома устройств."
-	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
-	button_icon_state = "ipc_os"
-	/// Ссылка на вид КПБ
-	var/datum/species/ipc/ipc_species = null
-
-/datum/action/innate/ipc_cyberdeck/Activate()
-	var/mob/living/carbon/human/H = owner
-	if(!istype(H) || !ipc_species)
-		return
-	if(ipc_species.cyberdeck_disabled)
-		H.balloon_alert(H, "кибердека отключена (ЭМИ)")
-		playsound(H, 'sound/machines/buzz/buzz-two.ogg', 30, FALSE)
-		return
-	if(ipc_species.cyberdeck_heat >= CYBERDECK_MAX_HEAT)
-		H.balloon_alert(H, "перегрев кибердеки!")
-		playsound(H, 'sound/machines/buzz/buzz-two.ogg', 30, FALSE)
-		return
-	// Открываем TGUI
-	ipc_species.cyberdeck_ui_interact(H)
-
-/datum/action/innate/ipc_cyberdeck/Remove(mob/M)
-	. = ..()
-	ipc_species = null
 
 // ============================================
 // ПРИМЕНЕНИЕ / СНЯТИЕ
@@ -53,27 +28,28 @@
 	emp_vulnerability = 1
 	// Повышенная стоимость ремонта
 	ipc_repair_cost_mod = 1.5
-	// Начальное тепло
-	cyberdeck_heat = 0
+	// Сброс состояния
 	cyberdeck_disabled = FALSE
-	last_heat_dissipate_time = world.time
+	cyberdeck_reenable_time = 0
 
-	// Бонус к действиям +20%
+	// Бонус к скорости действий +20%
 	H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen4_bonus)
 
-	// Выдаём абилку кибердеки
-	var/datum/action/innate/ipc_cyberdeck/cyberdeck_action = new()
-	cyberdeck_action.ipc_species = src
-	cyberdeck_action.Grant(H)
+	// Расширяем радиус взаимодействия
+	H.reach_length = CYBERDECK_SCAN_RANGE
+
+	// Хук для добавления тепла CPU при удалённом использовании
+	RegisterSignal(H, COMSIG_MOB_CLICKON, PROC_REF(on_cyberdeck_clickon))
 
 /datum/species/ipc/proc/remove_gen4_cyberdeck(mob/living/carbon/human/H)
 	emp_vulnerability = 2
 	ipc_repair_cost_mod = 1.0
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen4_bonus)
 
-	var/datum/action/innate/ipc_cyberdeck/cyberdeck_action = locate() in H.actions
-	if(cyberdeck_action)
-		cyberdeck_action.Remove(H)
+	// Сброс радиуса взаимодействия
+	H.reach_length = initial(H.reach_length)
+
+	UnregisterSignal(H, COMSIG_MOB_CLICKON)
 
 // ============================================
 // ТИКОВАЯ ЛОГИКА
@@ -83,55 +59,32 @@
 	// Повторно включаем кибердеку после ЭМИ
 	if(cyberdeck_disabled && world.time >= cyberdeck_reenable_time)
 		cyberdeck_disabled = FALSE
-		to_chat(H, span_notice("КИБЕРДЕКА: Системы перезагружены. Кибердека активна."))
+		H.reach_length = CYBERDECK_SCAN_RANGE
+		to_chat(H, span_notice("КИБЕРДЕКА: Системы перезагружены. Дистанционный доступ активирован."))
 
-	// Охлаждение кибердеки
-	handle_gen4_cooling(H, seconds_per_tick)
+// ============================================
+// СИГНАЛ: НАГРЕВ ПРИ УДАЛЁННОМ ИСПОЛЬЗОВАНИИ
+// ============================================
 
-	// Эффекты перегрева
-	if(cyberdeck_heat >= CYBERDECK_OVERHEAT_AT)
-		handle_gen4_overheat(H, seconds_per_tick)
-
-/// Рассеивание тепла кибердеки.
-/datum/species/ipc/proc/handle_gen4_cooling(mob/living/carbon/human/H, seconds_per_tick)
-	if(cyberdeck_heat <= 0)
-		cyberdeck_overheated = FALSE
+/// Срабатывает при каждом клике по объекту.
+/// Если КПБ кликает по двери/консоли дальше 1 клетки — добавляем тепло CPU.
+/datum/species/ipc/proc/on_cyberdeck_clickon(datum/source, atom/A, list/modifiers)
+	SIGNAL_HANDLER
+	if(cyberdeck_disabled)
 		return
-
-	var/dissipate_rate = CYBERDECK_IDLE_DISSIPATE * seconds_per_tick
-	var/turf/T = get_turf(H)
-
-	// Дополнительное охлаждение в холодных зонах
-	if(T && T.temperature < 200)  // < -73°C = холодная зона
-		dissipate_rate += 2 * seconds_per_tick
-
-	// Охлаждение у АПЦ (если есть рядом)
-	for(var/obj/machinery/power/apc/APC in range(1, H))
-		dissipate_rate += 3 * seconds_per_tick
-		break
-
-	cyberdeck_heat = max(0, cyberdeck_heat - dissipate_rate)
-
-	if(cyberdeck_heat < CYBERDECK_OVERHEAT_AT)
-		cyberdeck_overheated = FALSE
-
-/// Эффекты перегрева кибердеки.
-/datum/species/ipc/proc/handle_gen4_overheat(mob/living/carbon/human/H, seconds_per_tick)
-	if(!cyberdeck_overheated)
-		cyberdeck_overheated = TRUE
-		to_chat(H, span_userdanger("КИБЕРДЕКА: ПЕРЕГРЕВ! Термальная защита активирована!"))
-
-	// Ожоги каждые ~5 секунд при перегреве
-	if(prob(15 * seconds_per_tick))
-		H.apply_damage(rand(2, 5), BURN, forced = TRUE)
-		to_chat(H, span_danger("Кибердека перегревается — ожог внутренних цепей!"))
-
-	// Визуальные помехи
-	if(prob(10 * seconds_per_tick))
-		H.set_jitter_if_lower(1 SECONDS)
-		if(H.client)
-			H.overlay_fullscreen("ipc_glitch", /atom/movable/screen/fullscreen/flash/static)
-			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, clear_fullscreen), "ipc_glitch", FALSE), 2 SECONDS)
+	// Интересуют только двери и консоли
+	if(!istype(A, /obj/machinery/door/airlock) && !istype(A, /obj/machinery/computer))
+		return
+	var/mob/living/carbon/human/H = source
+	if(!istype(H))
+		return
+	// Только если дальше 1 клетки (иначе это обычное взаимодействие, без нагрева)
+	if(get_dist(H, A) <= 1)
+		return
+	// Нагрев CPU
+	var/heat_cost = istype(A, /obj/machinery/door/airlock) ? CYBERDECK_CPU_HEAT_DOOR : CYBERDECK_CPU_HEAT_CONSOLE
+	cpu_temperature = min(cpu_temp_critical, cpu_temperature + heat_cost)
+	playsound(H, 'sound/machines/terminal/terminal_alert.ogg', 25, FALSE)
 
 // ============================================
 // ЭМИ: ОТКЛЮЧЕНИЕ КИБЕРДЕКИ
@@ -142,151 +95,17 @@
 	switch(severity)
 		if(EMP_HEAVY)
 			disable_duration = rand(30, 60) SECONDS
-			to_chat(H, span_userdanger("ЭМИ: Кибердека отключена! Перезагрузка через [round(disable_duration/10)] сек."))
+			to_chat(H, span_userdanger("ЭМИ: Кибердека отключена! Дистанционный доступ заблокирован. Перезагрузка через [round(disable_duration/10)] сек."))
 		if(EMP_LIGHT)
 			disable_duration = rand(10, 25) SECONDS
-			to_chat(H, span_danger("ЭМИ: Кибердека временно отключена."))
+			to_chat(H, span_danger("ЭМИ: Кибердека временно отключена. Дистанционный доступ недоступен."))
 		else
 			disable_duration = 15 SECONDS
 
 	cyberdeck_disabled = TRUE
 	cyberdeck_reenable_time = world.time + disable_duration
-	// Добавляем тепло от ЭМИ
-	cyberdeck_heat = min(CYBERDECK_MAX_HEAT, cyberdeck_heat + 20)
 
-// ============================================
-// ИНТЕРФЕЙС КИБЕРДЕКИ (TGUI)
-// Используем сам /datum/species/ipc как TGUI источник —
-// он устойчивый, существует пока живёт персонаж.
-// ============================================
-
-/datum/species/ipc/proc/cyberdeck_ui_interact(mob/living/carbon/human/H)
-	ui_interact(H)
-
-/datum/species/ipc/ui_state(mob/user)
-	return GLOB.always_state
-
-/datum/species/ipc/ui_interact(mob/user, datum/tgui/ui)
-	if(ipc_generation != IPC_GEN_CYBERDECK)
-		return
-	ui = SStgui.try_update_ui(user, src, ui)
-	if(!ui)
-		ui = new(user, src, "IpcCyberdeck")
-		ui.open()
-
-/datum/species/ipc/ui_data(mob/user)
-	if(ipc_generation != IPC_GEN_CYBERDECK)
-		return list()
-	var/mob/living/carbon/human/H = user
-	var/list/data = list()
-	data["heat"] = round(cyberdeck_heat, 1)
-	data["max_heat"] = CYBERDECK_MAX_HEAT
-	data["overheat_at"] = CYBERDECK_OVERHEAT_AT
-	data["disabled"] = cyberdeck_disabled
-	data["overheated"] = cyberdeck_overheated
-
-	// Сканируем цели в радиусе
-	var/list/targets = list()
-	if(istype(H))
-		for(var/atom/A in view(CYBERDECK_SCAN_RANGE, H))
-			var/target_data = get_cyberdeck_target_data(A, H)
-			if(target_data)
-				targets += list(target_data)
-	data["targets"] = targets
-	return data
-
-/datum/species/ipc/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
-	. = ..()
-	if(.)
-		return
-	if(ipc_generation != IPC_GEN_CYBERDECK)
-		return
-
-	var/mob/user = ui.user
-	if(!istype(user, /mob/living/carbon/human))
-		return TRUE
-
-	if(cyberdeck_disabled)
-		user.balloon_alert(user, "кибердека отключена!")
-		return TRUE
-
-	if(action == "hack")
-		var/uid = params["uid"]
-		var/hack_type = params["type"]
-		var/hack_action = params["action"]
-		if(!uid || !hack_type)
-			return TRUE
-		do_cyberdeck_hack(user, uid, hack_type, hack_action)
-		return TRUE
-
-/// Возвращает данные цели для кибердеки, или null если цель недоступна.
-/datum/species/ipc/proc/get_cyberdeck_target_data(atom/A, mob/living/carbon/human/H)
-	if(istype(A, /obj/machinery/door/airlock))
-		var/obj/machinery/door/airlock/door = A
-		if(!door.allowed(H))
-			return null  // Нет доступа — дверь невидима для кибердеки
-		return list(
-			"uid" = "\ref[door]",
-			"type" = "door",
-			"name" = door.name,
-			"heat_cost" = CYBERDECK_HEAT_HACK_DOOR,
-			"status" = door.density ? "закрыта" : "открыта",
-		)
-	if(istype(A, /obj/machinery/computer))
-		var/obj/machinery/computer/console = A
-		return list(
-			"uid" = "\ref[console]",
-			"type" = "console",
-			"name" = console.name,
-			"heat_cost" = CYBERDECK_HEAT_HACK_CONSOLE,
-			"status" = (console.machine_stat & NOPOWER) ? "без питания" : "активна",
-		)
-	return null
-
-/datum/species/ipc/proc/do_cyberdeck_hack(mob/living/carbon/human/H, uid, hack_type, hack_action)
-	// Находим объект по ref
-	var/atom/target = locate(uid)
-	if(!target || get_dist(H, target) > CYBERDECK_SCAN_RANGE)
-		H.balloon_alert(H, "цель вне зоны досягаемости")
-		return
-
-	// Добавляем тепло
-	var/heat_cost = 0
-	switch(hack_type)
-		if("door")
-			heat_cost = CYBERDECK_HEAT_HACK_DOOR
-		if("console")
-			heat_cost = CYBERDECK_HEAT_HACK_CONSOLE
-
-	cyberdeck_heat = min(CYBERDECK_MAX_HEAT, cyberdeck_heat + heat_cost)
-
-	// Выполняем действие
-	switch(hack_type)
-		if("door")
-			hack_door(H, target, hack_action)
-		if("console")
-			hack_console(H, target, hack_action)
-
-	playsound(H, 'sound/machines/terminal/terminal_alert.ogg', 40, FALSE)
-	SStgui.update_uis(src)  // обновляем интерфейс
-
-/datum/species/ipc/proc/hack_door(mob/living/carbon/human/H, obj/machinery/door/airlock/door, action)
-	if(!istype(door))
-		return
-	if(!door.allowed(H))
-		H.balloon_alert(H, "нет доступа к [door.name]")
-		return
-	switch(action)
-		if("open")
-			to_chat(H, span_notice("КИБЕРДЕКА: Удалённый доступ — открываю [door.name]."))
-			door.open(2)
-		if("close")
-			to_chat(H, span_notice("КИБЕРДЕКА: Удалённый доступ — закрываю [door.name]."))
-			door.close(2)
-
-/datum/species/ipc/proc/hack_console(mob/living/carbon/human/H, obj/machinery/computer/console, action)
-	if(!istype(console))
-		return
-	// Открываем консоль как если бы пользователь подошёл к ней
-	to_chat(H, span_notice("КИБЕРДЕКА: Удалённый доступ к [console.name]."))
-	console.ui_interact(H)
+	// ЭМИ сбрасывает радиус взаимодействия
+	H.reach_length = initial(H.reach_length)
+	// ЭМИ нагревает CPU
+	cpu_temperature = min(cpu_temp_critical, cpu_temperature + 20)

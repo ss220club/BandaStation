@@ -139,19 +139,17 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 			if(icon_color)
 				img_behind.color = icon_color
 			. += img_behind
-			if(secondary_icon_color)
-				var/image/img_sec = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
-				img_sec.color = secondary_icon_color
-				. += img_sec
+			var/image/img_sec_behind = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
+			img_sec_behind.color = secondary_icon_color || COLOR_WHITE
+			. += img_sec_behind
 		if(EXTERNAL_FRONT)
 			var/image/img_front = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
 			if(icon_color)
 				img_front.color = icon_color
 			. += img_front
-			if(secondary_icon_color)
-				var/image/img_sec = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
-				img_sec.color = secondary_icon_color
-				. += img_sec
+			var/image/img_sec_front = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
+			img_sec_front.color = secondary_icon_color || COLOR_WHITE
+			. += img_sec_front
 
 // ============================================
 // APPLY PROCS
@@ -447,7 +445,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
 
 /datum/preference/color/ipc_tail_secondary_color/create_default_value()
-	return null  // null = не применять вторичный цвет (secondary-спрайт не рендерится)
+	return COLOR_WHITE
 
 /datum/preference/color/ipc_tail_secondary_color/is_accessible(datum/preferences/preferences)
 	. = ..()

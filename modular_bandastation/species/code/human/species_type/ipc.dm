@@ -154,16 +154,10 @@
 	var/humanity_drug_uses = 0
 
 	// ---- Gen 4: Кибердека ----
-	/// Тепловая нагрузка кибердеки (0-100)
-	var/cyberdeck_heat = 0
 	/// Кибердека отключена (ЭМИ)
 	var/cyberdeck_disabled = FALSE
 	/// Время повторного включения кибердеки после ЭМИ
 	var/cyberdeck_reenable_time = 0
-	/// Время последнего рассеивания тепла
-	var/last_heat_dissipate_time = 0
-	/// Кибердека в состоянии перегрева
-	var/cyberdeck_overheated = FALSE
 
 /datum/species/ipc/get_species_description()
 	return "IPC (Integrated Positronic Chassis) — искусственные синтетики на основе позитронного ядра. \

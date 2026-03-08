@@ -27,14 +27,10 @@
 #define HUMANITY_DECAY_AMOUNT   1
 
 // ---- Кибердека (Поколение IV) ----
-#define CYBERDECK_MAX_HEAT    100
-#define CYBERDECK_OVERHEAT_AT 80   // Выше этого: начинаются эффекты
-// Рассеивание тепла в покое (за тик spec_life)
-#define CYBERDECK_IDLE_DISSIPATE 3
-// Тепло от хака
-#define CYBERDECK_HEAT_HACK_DOOR    10
-#define CYBERDECK_HEAT_HACK_CONSOLE 15
-// Радиус сканирования целей
+// Прирост температуры CPU при удалённом использовании (дальше 1 клетки)
+#define CYBERDECK_CPU_HEAT_DOOR    5   // °C за удалённое открытие/закрытие двери
+#define CYBERDECK_CPU_HEAT_CONSOLE 10  // °C за удалённый доступ к консоли
+// Радиус дистанционного взаимодействия
 #define CYBERDECK_SCAN_RANGE 7
 
 // ============================================
