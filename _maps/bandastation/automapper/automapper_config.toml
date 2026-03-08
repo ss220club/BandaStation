@@ -675,3 +675,17 @@ directory = "_maps/bandastation/automapper/templates/wawastation/"
 required_map = "wawastation.dmm"
 coordinates = [51, 120, 1]
 trait_name = "Station"
+
+[templates.wawastation_stasis]
+map_files = ["wawastation_stasis.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [58, 71, 1]
+trait_name = "Station"
+
+[templates.wawastation_robo_core]
+map_files = ["wawastation_robo_core.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [133, 105, 1]
+trait_name = "Station"
