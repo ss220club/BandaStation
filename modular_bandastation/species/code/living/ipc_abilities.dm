@@ -96,7 +96,7 @@
 // Не работает на забальтованных и заваренных дверях.
 
 #define IPC_HACK_BATTERY_COST  150   // заряд за успешный взлом
-#define IPC_HACK_DURATION      10 SECONDS
+#define IPC_HACK_DURATION      20 SECONDS
 
 /// Абилка взлома дверей
 /datum/action/cooldown/ipc_hack

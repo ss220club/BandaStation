@@ -286,7 +286,7 @@
 	if(ipc_generation == IPC_GEN_HUMANITY)
 		for(var/atom/movable/screen/ipc_humanity/indicator in H.hud_used?.infodisplay)
 			indicator.humanity_value = humanity
-			indicator.update_appearance()
+			indicator.icon_state = (humanity >= HUMANITY_LOW) ? "humanity" : "lost_humanity"
 	// Gen 1: иконка модуля не изменяется в рантайме, поэтому не требует обновления каждый тик
 
 // ============================================
@@ -324,13 +324,6 @@
 		status = "ПОТЕРЯ КОНТРОЛЯ — система рушится"
 	to_chat(H, span_notice("==== ДИАГНОСТИКА: ЭМОЦИОНАЛЬНОЕ ЯДРО ====\nЧеловечность: [round(S.humanity)]% ([status])\nДеградация: [S.humanity_drug_active ? "ПРИОСТАНОВЛЕНА (препарат)" : "АКТИВНА (-[HUMANITY_DECAY_AMOUNT]% каждые [HUMANITY_DECAY_INTERVAL] сек)"]"))
 
-/atom/movable/screen/ipc_humanity/update_appearance(updates)
-	. = ..()
-	// Переключаем иконку по порогу
-	if(humanity_value >= HUMANITY_LOW)
-		icon_state = "humanity"
-	else
-		icon_state = "lost_humanity"
 
 // ============================================
 // ИНТЕГРАЦИЯ: добавляем/убираем Gen-специфичные HUD элементы
