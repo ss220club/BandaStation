@@ -27,6 +27,7 @@
 	spread = 2.5
 	recoil = 0.8
 	rack_sound = 'sound/items/weapons/gun/general/chunkyrack.ogg'
+	pb_knockback = 2
 
 /obj/item/gun/ballistic/automatic/as32/Initialize(mapload)
 	. = ..()
