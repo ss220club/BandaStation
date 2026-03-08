@@ -1,7 +1,12 @@
 /obj/item/clothing/gloves
-	var/max_number_of_accessories = 5
+	var/max_number_of_accessories = 1
 	var/list/obj/item/clothing/accessory/gloves_accessory/attached_accessories
 	var/mutable_appearance/accessory_overlay
+
+/obj/item/clothing/gloves/Initialize(mapload)
+	. = ..()
+	register_context()
+	AddElement(/datum/element/update_icon_updates_onmob)
 
 /obj/item/clothing/gloves/used_in_craft(atom/result, datum/crafting_recipe/current_recipe)
 	. = ..()
@@ -22,8 +27,23 @@
 
 	return changed ? CONTEXTUAL_SCREENTIP_SET : .
 
+/obj/item/clothing/gloves/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/clothing/accessory/gloves_accessory))
+		return attach_accessory(tool, user) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
+
+	return ..()
+
+/obj/item/clothing/gloves/click_alt_secondary(mob/user)
+	if(!LAZYLEN(attached_accessories))
+		balloon_alert(user, "нет аксессуара чтобы снять!")
+		return
+
+	pop_accessory(user)
+
 /obj/item/clothing/gloves/worn_overlays(mutable_appearance/standing, isinhands = FALSE)
 	. = ..()
+	if(isinhands)
+		return
 	if(accessory_overlay)
 		. += accessory_overlay
 
@@ -43,7 +63,7 @@
 	accessory.successful_attach(src)
 
 	if(user && attach_message)
-		balloon_alert(user, "accessory attached")
+		balloon_alert(user, "аксессуар прикреплён")
 
 	update_appearance()
 	return TRUE
@@ -101,8 +121,7 @@
 	. = ..()
 	if(LAZYLEN(attached_accessories))
 		var/list/accessories = list_accessories_with_icon(user)
-		. += "Имеет прикрепленные: [english_list(accessories)]."
-		. += "Альт-ПКМ для снятия [attached_accessories[1].declent_ru(GENITIVE)]."
+		. += "Имеет прикрепленное: [english_list(accessories)]."
 
 /obj/item/clothing/gloves/proc/list_accessories_with_icon(mob/user)
 	var/list/all_accessories = list()
