@@ -269,7 +269,7 @@
 	icon_state = "reaper"
 	icon_living = "reaper"
 	icon_dead = "reaper_dead"
-	armour_penetration = 20
+	armour_penetration = 30
 	melee_damage_lower = 30
 	melee_damage_upper = 30
 	wound_bonus = 35
@@ -287,7 +287,7 @@
 	speak_emote = list("ревёт")
 	attack_sound = 'sound/items/weapons/bladeslice.ogg'
 	attack_vis_effect = null
-	ai_controller = /datum/ai_controller/basic_controller/corrupted_arachnid
+	ai_controller = /datum/ai_controller/basic_controller/khara_reaper
 
 	innate_actions = list(
 		/datum/action/cooldown/mob_cooldown/aoe_slash = BB_MOB_AILITY_SLASH,

@@ -79,6 +79,7 @@
 #include "code\modules\trainstation\~process_controller.dm"
 #include "code\modules\trainstation\khara_infection\_khara.dm"
 #include "code\modules\trainstation\khara_infection\miasma.dm"
+#include "code\modules\trainstation\khara_infection\mutant_boss.dm"
 #include "code\modules\trainstation\khara_infection\mutants.dm"
 #include "code\modules\trainstation\khara_infection\mutants_abilities.dm"
 #include "code\modules\trainstation\khara_infection\mutants_ai.dm"

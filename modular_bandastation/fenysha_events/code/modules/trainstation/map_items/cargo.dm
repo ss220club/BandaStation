@@ -145,6 +145,7 @@
 		last_damage = damage
 		last_damage_time = world.time
 
+
 		if(prob(40))
 			Shake(2, 2, 1.5 SECONDS)
 			playsound(src, 'sound/machines/engine_alert/engine_alert1.ogg', 75, TRUE)
