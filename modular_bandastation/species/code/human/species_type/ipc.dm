@@ -510,26 +510,26 @@
 	H.add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/ipc_temperature, multiplicative_slowdown = (total_modifier - 1))
 
 /datum/species/ipc/proc/handle_battery(mob/living/carbon/human/H)
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
 		to_chat(H, span_userdanger("КРИТИЧЕСКАЯ ОШИБКА: Источник питания не обнаружен!"))
 		H.apply_damage(2, OXY, forced = TRUE)
 		return
 
-	// Зарядка от ближайшего АРС
-	if(battery.charging)
+	// Зарядка от ближайшего АРС (кабель подключён)
+	if(heart.get_ipc_charging())
 		var/area/current_area = get_area(H)
 		if(current_area)
 			var/obj/machinery/power/apc/nearby_apc = locate(/obj/machinery/power/apc) in current_area
 			if(nearby_apc && nearby_apc.operating && nearby_apc.cell && nearby_apc.cell.charge > 0)
 				var/draw_amount = min(100, nearby_apc.cell.charge)
 				nearby_apc.cell.charge -= draw_amount
-				battery.charge_from_apc(25)
+				heart.ipc_charge_from(25)
 			else if(prob(10))
 				to_chat(H, span_warning("Нет доступного источника питания для зарядки!"))
 
-	if(battery.charge <= 0)
-		to_chat(H, span_danger("ПРЕДУПРЕЖДЕНИЕ: Батарея разряжена. Требуется подзарядка."))
+	if(heart.get_ipc_charge() <= 0)
+		to_chat(H, span_danger("ПРЕДУПРЕЖДЕНИЕ: Источник питания разряжен. Требуется подзарядка."))
 		H.Unconscious(2 SECONDS)
 
 /datum/species/ipc/proc/set_chassis(mob/living/carbon/human/H, chassis_name)

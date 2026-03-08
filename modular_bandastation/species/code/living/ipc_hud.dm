@@ -74,13 +74,13 @@
 	if(!istype(H))
 		return
 
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
-		to_chat(H, span_notice("ОШИБКА: Батарея не обнаружена."))
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
+		to_chat(H, span_notice("ОШИБКА: Источник питания не обнаружен."))
 		return
 
-	var/charge = (battery.charge / battery.maxcharge) * 100
-	to_chat(H, span_notice("Заряд батареи: [round(charge)]% ([round(battery.charge)]/[battery.maxcharge])"))
+	var/charge = (heart.get_ipc_charge() / heart.ipc_max_charge) * 100
+	to_chat(H, span_notice("Заряд источника питания: [round(charge)]% ([round(heart.get_ipc_charge())]/[heart.ipc_max_charge])"))
 
 /atom/movable/screen/ipc_battery/update_appearance(updates)
 	. = ..()
@@ -365,11 +365,11 @@
 	if(!H.hud_used)
 		return
 
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
 		return
 
-	var/charge_percent = (battery.charge / battery.maxcharge) * 100
+	var/charge_percent = (heart.get_ipc_charge() / heart.ipc_max_charge) * 100
 
 	// Выбираем иконку батареи по уровню заряда
 	var/battery_icon_state

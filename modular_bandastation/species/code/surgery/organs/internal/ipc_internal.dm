@@ -31,16 +31,14 @@
 
 		// АВТОМАТИЧЕСКОЕ ОЖИВЛЕНИЕ: Если были без сознания и есть батарея
 		if(M.stat == UNCONSCIOUS)
-			var/obj/item/organ/heart/ipc_battery/battery = M.get_organ_slot(ORGAN_SLOT_HEART)
-			if(battery && istype(battery))
+			if(ipc_has_power_source(M))
 				M.set_stat(CONSCIOUS)
 				M.SetUnconscious(0)
 				to_chat(M, span_boldnotice("СИСТЕМЫ ВОССТАНОВЛЕНЫ: Контроль над телом возвращён!"))
 
 		// Если были мертвы и есть батарея - тоже оживаем
 		else if(M.stat == DEAD)
-			var/obj/item/organ/heart/ipc_battery/battery = M.get_organ_slot(ORGAN_SLOT_HEART)
-			if(battery && istype(battery))
+			if(ipc_has_power_source(M))
 				M.set_stat(CONSCIOUS)
 				M.SetUnconscious(0, FALSE)
 				M.losebreath = 0

@@ -319,10 +319,10 @@
 
 	var/mob/living/carbon/human/H = imp_in
 
-	// Проверяем батарейку
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery || battery.charge < power_cost)
-		to_chat(H, span_warning("Реактивный ремонт деактивирован: недостаточно заряда батарейки!"))
+	// Проверяем источник питания
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || heart.get_ipc_charge() < power_cost)
+		to_chat(H, span_warning("Реактивный ремонт деактивирован: недостаточно заряда источника питания!"))
 		repair_active = FALSE
 		return
 
@@ -339,15 +339,15 @@
 		return
 
 	// Расходуем заряд
-	battery.charge = max(battery.charge - power_cost, 0)
+	heart.set_ipc_charge(max(heart.get_ipc_charge() - power_cost, 0))
 
 	// Чиним наиболее поврежденную часть
 	if(damaged_part.brute_dam > damaged_part.burn_dam)
 		damaged_part.heal_damage(repair_amount, 0)
-		to_chat(H, span_notice("Реактивный ремонт устраняет механические повреждения [damaged_part.plaintext_zone]. Батарея: [round(battery.charge)]/[battery.maxcharge]"))
+		to_chat(H, span_notice("Реактивный ремонт устраняет механические повреждения [damaged_part.plaintext_zone]. Заряд: [round(heart.get_ipc_charge())]/[heart.ipc_max_charge]"))
 	else
 		damaged_part.heal_damage(0, repair_amount)
-		to_chat(H, span_notice("Реактивный ремонт устраняет термические повреждения [damaged_part.plaintext_zone]. Батарея: [round(battery.charge)]/[battery.maxcharge]"))
+		to_chat(H, span_notice("Реактивный ремонт устраняет термические повреждения [damaged_part.plaintext_zone]. Заряд: [round(heart.get_ipc_charge())]/[heart.ipc_max_charge]"))
 
 	last_repair_time = world.time
 
@@ -653,9 +653,9 @@
 	if(!istype(source.dna?.species, /datum/species/ipc))
 		return
 
-	// Получаем батарею IPC
-	var/obj/item/organ/heart/ipc_battery/battery = source.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
+	// Получаем источник питания IPC
+	var/obj/item/organ/heart/heart = source.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
 		return
 
 	// Получаем reagents из еды
@@ -672,15 +672,15 @@
 	if(total_nutrition <= 0)
 		return
 
-	// Конвертируем nutrition в заряд батарейки
+	// Конвертируем nutrition в заряд
 	// 1 nutrition ≈ 2 charge (можно регулировать коэффициент)
 	var/energy_gain = total_nutrition * 2
 
-	var/old_charge = battery.charge
-	battery.charge = min(battery.charge + energy_gain, battery.maxcharge)
-	var/actual_gain = battery.charge - old_charge
+	var/old_charge = heart.get_ipc_charge()
+	heart.ipc_charge_from(energy_gain)
+	var/actual_gain = heart.get_ipc_charge() - old_charge
 
-	to_chat(source, span_notice("Био-генератор переработал пищу и зарядил батарейку на [round(actual_gain)] единиц. Батарея: [round(battery.charge)]/[battery.maxcharge]"))
+	to_chat(source, span_notice("Био-генератор переработал пищу и зарядил источник питания на [round(actual_gain)] единиц. Заряд: [round(heart.get_ipc_charge())]/[heart.ipc_max_charge]"))
 
 /obj/item/implant/ipc/bio_generator/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
@@ -763,12 +763,12 @@
 		disconnect_from_device(H)
 	var/obj/machinery/M = target
 	connected_device = M
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
-		to_chat(H, span_warning("Батарея не обнаружена!"))
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
+		to_chat(H, span_warning("Совместимый источник питания не обнаружен!"))
 		connected_device = null
 		return
-	battery.charging = TRUE
+	heart.set_ipc_charging(TRUE)
 	RegisterSignal(H, COMSIG_MOVABLE_MOVED, PROC_REF(on_owner_moved))
 	to_chat(H, span_notice("Кабель подключён к [M.name]. Начинается зарядка..."))
 	H.visible_message(span_notice("[H] подключает зарядный кабель к [M.name]."))
@@ -781,9 +781,9 @@
 	if(!H || QDELETED(H))
 		return
 	UnregisterSignal(H, COMSIG_MOVABLE_MOVED)
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(battery)
-		battery.charging = FALSE
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(heart)
+		heart.set_ipc_charging(FALSE)
 	to_chat(H, span_notice("Зарядный кабель отключён от [old_device.name]."))
 
 /obj/item/ipc_charging_cable/proc/on_owner_moved(mob/living/carbon/human/H, old_loc, movement_dir, forced, old_locs, momentum_change)
@@ -823,8 +823,8 @@
 	if(!ishuman(imp_in))
 		return
 	var/mob/living/carbon/human/H = imp_in
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
 		return
 	// Если устройство удалено или слишком далеко — отключаемся
 	var/obj/machinery/device = cable_item.connected_device
@@ -832,7 +832,7 @@
 		cable_item.disconnect_from_device(H)
 		return
 	// Начисляем заряд
-	battery.charge_from_apc(charge_per_second * seconds_per_tick)
+	heart.ipc_charge_from(charge_per_second * seconds_per_tick)
 
 /obj/item/implant/ipc/charger/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
@@ -972,15 +972,15 @@
 	if(!ishuman(imp_in))
 		return
 	var/mob/living/carbon/human/H = imp_in
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
 		return
-	// Расходуем заряд батареи
-	if(battery.charge < shield_power_cost * seconds_per_tick)
+	// Расходуем заряд источника питания
+	if(heart.get_ipc_charge() < shield_power_cost * seconds_per_tick)
 		shield_active = FALSE
-		to_chat(H, span_warning("Силовой щит отключён: недостаточно заряда батареи!"))
+		to_chat(H, span_warning("Силовой щит отключён: недостаточно заряда источника питания!"))
 		return
-	battery.charge = max(0, battery.charge - (shield_power_cost * seconds_per_tick))
+	heart.set_ipc_charge(max(0, heart.get_ipc_charge() - (shield_power_cost * seconds_per_tick)))
 
 // Кнопка переключения силового щита
 /datum/action/item_action/hands_free/ipc_force_shield
