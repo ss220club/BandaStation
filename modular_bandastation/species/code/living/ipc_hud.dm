@@ -63,13 +63,12 @@
 	to_chat(H, span_notice("Заряд источника питания: [round(charge)]% ([round(heart.get_ipc_charge())]/[heart.ipc_max_charge])"))
 
 /// Иконка температуры CPU IPC. cooler_cool = норма, cooler_fire = перегрев.
-/// Расположена правее иконки батареи (ui_mood + pixel_x 20).
+/// Расположена в слоте ui_internal (тайл выше батарейки). IPC не дышит, слот свободен.
 /atom/movable/screen/ipc_temperature
 	name = "CPU temperature"
 	icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
 	icon_state = "cooler_cool"
-	screen_loc = ui_mood
-	pixel_x = 20
+	screen_loc = ui_internal
 	mouse_over_pointer = MOUSE_HAND_POINTER
 	/// Текущая температура
 	var/temperature = 30
