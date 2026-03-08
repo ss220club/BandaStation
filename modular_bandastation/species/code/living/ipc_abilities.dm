@@ -101,7 +101,7 @@
 /// Абилка взлома дверей
 /datum/action/cooldown/ipc_hack
 	name = "Взлом"
-	desc = "Активирует режим взлома. Нажмите на дверь без доступа — КПБ за 10 секунд вскроет её. Тратит [IPC_HACK_BATTERY_COST] единиц заряда."
+	desc = "Активирует режим взлома. Нажмите на дверь без доступа — КПБ за 10 секунд вскроет её. Тратит 150 единиц заряда."
 	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
 	button_icon_state = "ipc_hack"
 	background_icon_state = null
