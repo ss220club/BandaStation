@@ -10,7 +10,7 @@
 /// Абилка разгона системы - увеличивает скорость действий за счет нагрева процессора
 /datum/action/cooldown/ipc_overclock
 	name = "Разгон системы"
-	desc = "Ускоряет процессы взаимодействия на 40% за счет повышения температуры процессора. Нагревает процессор на 10°C каждые 5 секунд."
+	desc = "Переключает режим разгона процессора."
 	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
 	button_icon_state = "ipc_overload_off"
 	background_icon_state = null
@@ -101,7 +101,7 @@
 /// Абилка взлома дверей
 /datum/action/cooldown/ipc_hack
 	name = "Взлом"
-	desc = "Активирует режим взлома. Нажмите на дверь без доступа — КПБ за 10 секунд вскроет её. Тратит 150 единиц заряда."
+	desc = "Переключает режим взлома дверей."
 	button_icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
 	button_icon_state = "ipc_hack"
 	background_icon_state = null
@@ -141,16 +141,12 @@
 
 /datum/action/cooldown/ipc_hack/proc/activate_hack(mob/living/carbon/human/H, datum/species/ipc/S)
 	S.hack_mode_active = TRUE
-	button_icon_state = "ipc_hack"
-	// Подсвечиваем кнопку простым цветовым tint
-	add_filter("hack_active_glow", 1, outline_filter(1, "#FF4400", OUTLINE_SHARP))
 	RegisterSignal(H, COMSIG_MOB_CLICKON, PROC_REF(on_hack_clickon))
 	to_chat(H, span_boldwarning("ВЗЛОМ: Режим активен. Нажмите на дверь без доступа для взлома."))
 	build_all_button_icons()
 
 /datum/action/cooldown/ipc_hack/proc/deactivate_hack(mob/living/carbon/human/H, datum/species/ipc/S)
 	S.hack_mode_active = FALSE
-	remove_filter("hack_active_glow")
 	UnregisterSignal(H, COMSIG_MOB_CLICKON)
 	to_chat(H, span_notice("ВЗЛОМ: Режим отключен."))
 	build_all_button_icons()
