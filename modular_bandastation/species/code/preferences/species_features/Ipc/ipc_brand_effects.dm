@@ -305,7 +305,7 @@
 	// либо добавляем и сразу ищем в списке H.movespeed_modifiers.
 	// Простейший и надёжный способ — предопределить значение на самом datum:
 	var/datum/movespeed_modifier/ipc_cybersun/mod = new()
-	mod.multiplicative_slowdown = -0.2  // 10% быстрее
+	mod.multiplicative_slowdown = -0.1  // 10% быстрее
 	H.add_movespeed_modifier(mod, update = TRUE)
 
 	// Повышена цена починок

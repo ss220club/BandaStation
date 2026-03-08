@@ -140,10 +140,9 @@
 		to_chat(user, span_warning("Внутри [declent_ru(GENITIVE)] нет имплантов!"))
 	else
 		var/atom/drop_loc = user.drop_location()
-		for(var/atom/movable/stored_imp as anything in src)
-			stored_imp.forceMove(drop_loc)
-			to_chat(user, span_notice("Вы убираете [stored_implant.declent_ru(ACCUSATIVE)] из [declent_ru(GENITIVE)]."))
-			stored_implant = null
+		to_chat(user, span_notice("Вы убираете [stored_implant.declent_ru(ACCUSATIVE)] из [declent_ru(GENITIVE)]."))
+		stored_implant.forceMove(drop_loc)
+		stored_implant = null
 
 		screwtool.play_tool_sound(src)
 		uses--

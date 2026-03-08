@@ -130,33 +130,6 @@
 // ПРИМЕНЕНИЕ HUD ЭЛЕМЕНТОВ
 // ============================================
 
-/datum/species/ipc/on_species_gain(mob/living/carbon/human/H, datum/species/old_species, pref_load)
-	. = ..()
-
-	// ВАЖНО: Нужно вызвать replace_body, как в базовом ipc.dm
-	replace_body(H, src)
-	H.update_body()
-	H.update_body_parts()
-
-	// Заменяем обычный муд нейтральным (setup_mood() вызывается до dna.species)
-	if(H.mob_mood)
-		QDEL_NULL(H.mob_mood)
-	H.mob_mood = new /datum/mood/ipc_neutral(H)
-
-	// Добавляем кастомные HUD элементы
-	RegisterSignal(H, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
-	if(H.hud_used)
-		on_hud_created(H)
-
-/datum/species/ipc/on_species_loss(mob/living/carbon/human/H, datum/species/new_species, pref_load)
-	. = ..()
-	UnregisterSignal(H, COMSIG_MOB_HUD_CREATED)
-	remove_ipc_hud_elements(H, new_species)
-	// Восстанавливаем обычный муд при смене вида
-	if(istype(H.mob_mood, /datum/mood/ipc_neutral))
-		QDEL_NULL(H.mob_mood)
-		H.setup_mood()
-
 /datum/species/ipc/proc/on_hud_created(datum/source)
 	SIGNAL_HANDLER
 	var/mob/living/carbon/human/H = source
@@ -269,15 +242,6 @@
 	if(H && istype(H.dna?.species, /datum/species/ipc))
 		var/datum/species/ipc/S = H.dna.species
 		S.update_ipc_battery_icon(H)
-
-// Расширяем spec_life: добавляем HUD-обновления и логику поколений.
-// Базовые вызовы (handle_self_repair, handle_temperature, handle_battery и т.д.)
-// уже выполняются в родительском spec_life в ipc.dm — здесь их НЕ дублируем.
-/datum/species/ipc/spec_life(mob/living/carbon/human/H, seconds_per_tick, times_fired)
-	. = ..()
-	update_ipc_temperature_icon(H)
-	handle_generation_life(H, seconds_per_tick, times_fired)
-	update_ipc_generation_hud(H)
 
 /// Обновляет HUD-элементы поколений (человечность Gen3, иконка модуля Gen1).
 /datum/species/ipc/proc/update_ipc_generation_hud(mob/living/carbon/human/H)

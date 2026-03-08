@@ -235,12 +235,15 @@
 	// Применяем механики поколения
 	apply_generation(H)
 
-	// ПРИМЕЧАНИЕ:
-	// - Chassis brand применяется через body_modifications автоматически
-	// - Тип мозга тоже через body_modifications
-	// - Никакой дополнительной логики здесь не требуется
-	// - Body modifications применяются системой preferences ДО on_species_gain,
-	//   так что к этому моменту у IPC уже установлен правильный brain и chassis
+	// Заменяем муд нейтральным (setup_mood() вызывается до dna.species — нужна ручная замена)
+	if(H.mob_mood)
+		QDEL_NULL(H.mob_mood)
+	H.mob_mood = new /datum/mood/ipc_neutral(H)
+
+	// HUD: регистрируем сигнал создания HUD и сразу добавляем элементы если HUD уже есть
+	RegisterSignal(H, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
+	if(H.hud_used)
+		on_hud_created(H)
 
 /datum/species/ipc/on_species_loss(mob/living/carbon/human/H, datum/species/new_species, pref_load)
 	. = ..()
@@ -271,7 +274,13 @@
 	QDEL_NULL(ipc_os)
 
 	// Отменяем регистрацию сигналов
-	UnregisterSignal(H, list(COMSIG_LIVING_ELECTROCUTE_ACT, COMSIG_HUMAN_PREFS_APPLIED))
+	UnregisterSignal(H, list(COMSIG_LIVING_ELECTROCUTE_ACT, COMSIG_HUMAN_PREFS_APPLIED, COMSIG_MOB_HUD_CREATED))
+
+	// HUD: удаляем элементы и восстанавливаем муд
+	remove_ipc_hud_elements(H, new_species)
+	if(istype(H.mob_mood, /datum/mood/ipc_neutral))
+		QDEL_NULL(H.mob_mood)
+		H.setup_mood()
 
 /// Вызывается после загрузки всех настроек персонажа.
 /// К этому моменту все preferences уже применены (ipc_generation, ipc_preset_os_password и т.д.).
@@ -313,6 +322,10 @@
 	handle_battery(H)
 	// Применяем модификатор скорости действий от температуры и разгона
 	update_action_speed(H)
+	// HUD обновления
+	update_ipc_temperature_icon(H)
+	handle_generation_life(H, seconds_per_tick, times_fired)
+	update_ipc_generation_hud(H)
 
 /datum/species/ipc/proc/handle_self_repair(mob/living/carbon/human/H)
 	if(!self_repair_enabled)
