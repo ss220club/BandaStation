@@ -129,6 +129,8 @@ SUBSYSTEM_DEF(mapping)
 	preloadTemplates()
 
 #ifndef LOWMEMORYMODE
+// BANDASTATION EDIT REMOVAL - START
+/*
 	// Create space ruin levels
 	while (space_levels_so_far < current_map.space_ruin_levels)
 		add_new_zlevel("Ruin Area [space_levels_so_far+1]", ZTRAITS_SPACE)
@@ -157,6 +159,8 @@ SUBSYSTEM_DEF(mapping)
 	loading_ruins = TRUE
 	setup_ruins()
 	loading_ruins = FALSE
+*/
+// BANDASTATION EDIT REMOVAL - END
 
 #endif
 	// Run map generation after ruin generation to prevent issues
@@ -466,6 +470,10 @@ Used by the AI doomsday and the self-destruct nuke.
 
 	if(current_map.minetype == MINETYPE_LAVALAND)
 		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
+	// BANDASTATION EDIT ADDITION BEGIN
+	else if (current_map.minetype == MINETYPE_ROBASTOVO)
+		LoadGroup(FailedZs, "Robastovo", "bandastation", "robastovo.dmm", default_traits = ZTRAITS_ROBASTOVO)
+	// BANDASTATION EDIT ADDITION END
 	else if (!isnull(current_map.minetype) && current_map.minetype != MINETYPE_NONE && current_map.minetype != MINETYPE_ICE)
 		INIT_ANNOUNCE("WARNING: An unknown minetype '[current_map.minetype]' was set! This is being ignored! Update the maploader code!")
 #endif
