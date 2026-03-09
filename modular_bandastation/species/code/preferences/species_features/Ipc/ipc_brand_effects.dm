@@ -337,7 +337,7 @@
 
 /// Регистрирует обработчик глюков речи на species datum (не глобальный proc).
 /datum/species/ipc/proc/register_speech_glitch(mob/living/carbon/human/H)
-	RegisterSignal(H, COMSIG_MOB_SAY, PROC_REF(ipc_unbranded_speech_glitch))
+	RegisterSignal(H, COMSIG_MOB_SAY, PROC_REF(ipc_unbranded_speech_glitch), override = TRUE)
 
 /// Обработчик глюков речи для Unbranded КПБ.
 /datum/species/ipc/proc/ipc_unbranded_speech_glitch(datum/source, list/speech_args)
