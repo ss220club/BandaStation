@@ -1,0 +1,20 @@
+#include "_liquids.dm"
+
+#include "code/defines/compat_defines.dm"
+#include "code/defines/liquids.dm"
+
+#include "code/modules/liquids/drains.dm"
+#include "code/modules/liquids/height_floors.dm"
+#include "code/modules/liquids/liquid_barrier.dm"
+#include "code/modules/liquids/liquid_controller.dm"
+#include "code/modules/liquids/liquid_effect.dm"
+#include "code/modules/liquids/liquid_groups.dm"
+#include "code/modules/liquids/liquid_height.dm"
+#include "code/modules/liquids/liquid_interaction.dm"
+#include "code/modules/liquids/liquid_plumbers.dm"
+#include "code/modules/liquids/liquid_pump.dm"
+#include "code/modules/liquids/liquid_status_effect.dm"
+#include "code/modules/liquids/liquid_turf.dm"
+#include "code/modules/liquids/tools.dm"
+
+#include "code/game/objects/items/mop.dm"

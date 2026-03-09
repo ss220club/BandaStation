@@ -83,6 +83,36 @@
 		reagents.add_reagent(/datum/reagent/blood, disease_amount, data)
 	add_initial_reagents()
 	AddElement(/datum/element/reagents_exposed_on_fire)
+	AddComponent(/datum/component/liquids_interaction, TYPE_PROC_REF(/obj/item/reagent_containers/cup/beaker, attack_on_liquids_turf))
+
+/obj/item/reagent_containers/proc/attack_on_liquids_turf(obj/item/reagent_containers/my_beaker, turf/T, mob/living/user, obj/effect/abstract/liquid_turf/liquids)
+	if(!user.Adjacent(T))
+		return FALSE
+	if(!my_beaker.spillable)
+		return FALSE
+	if(!user.Adjacent(T))
+		return FALSE
+	if(user.combat_mode)
+		return FALSE
+
+	var/free_space = my_beaker.reagents.maximum_volume - my_beaker.reagents.total_volume
+	if(!free_space)
+		to_chat(user, "<span class='warning'>[my_beaker] is full!</span>")
+		return FALSE
+
+	if(liquids.liquid_group.expected_turf_height == 1)
+		to_chat(user, span_warning("There is not enough liquid to scoop up!"))
+		return FALSE
+
+	var/desired_transfer = my_beaker.amount_per_transfer_from_this
+	if(desired_transfer > free_space)
+		desired_transfer = free_space
+	if(desired_transfer > liquids.liquid_group.reagents_per_turf)
+		desired_transfer = liquids.liquid_group.reagents_per_turf
+	liquids.liquid_group.trans_to_seperate_group(my_beaker.reagents, desired_transfer, liquids)
+	to_chat(user, "<span class='notice'>You scoop up around [round(desired_transfer)] units of liquids with [my_beaker].</span>")
+	user.changeNext_move(CLICK_CD_MELEE)
+	return TRUE
 
 /obj/item/reagent_containers/examine(mob/user)
 	. = ..()
@@ -265,6 +295,20 @@
 			message_admins("[ADMIN_LOOKUPFLW(splasher)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] in [ADMIN_VERBOSEJMP(target)].")
 		visible_message(span_notice("[src] spills its contents all over [target]."))
 		reagents.expose(target, TOUCH)
+		if(istype(target, /turf/open))
+			var/turf/open/open_turf = target
+			open_turf.add_liquid_from_reagents(reagents, FALSE, reagents.chem_temp)
+		else
+			var/turf/targets_loc = target.loc
+			if(istype(targets_loc, /turf/open))
+				if(was_thrown && splasher && !target.can_atmos_pass)
+					var/turf/open/near_open = get_step(src, get_dir(src, splasher))
+					near_open?.add_liquid_from_reagents(reagents)
+				else
+					targets_loc.add_liquid_from_reagents(reagents)
+			else if(was_thrown && splasher)
+				targets_loc = get_step_towards(targets_loc, splasher)
+				targets_loc?.add_liquid_from_reagents(reagents)
 		if(QDELETED(src))
 			return
 

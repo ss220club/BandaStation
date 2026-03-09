@@ -82,6 +82,7 @@
 #include "translations/_translations.dme"
 #include "tts/_tts.dme"
 #include "turfs/_turfs.dme"
+#include "liquids/_liquids.dme"
 #include "weapon/_weapon.dme"
 #include "world_topics/_world_topics.dme"
 #include "movespeed_limit/_movespeed_limit.dme"
