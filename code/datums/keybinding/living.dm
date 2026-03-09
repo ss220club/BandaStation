@@ -152,7 +152,7 @@
 	return TRUE
 
 /datum/keybinding/living/toggle_move_intent_alternative
-	hotkey_keys = list("Unbound") // BANDASTATION EDIT
+	hotkey_keys = list(UNBOUND_KEY)
 	name = "toggle_move_intent_alt"
 	full_name = "Смена режима ходьбы (переключить)"
 	description = "Нажмите, чтобы поменять режим передвижения."
