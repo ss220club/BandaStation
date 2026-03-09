@@ -36,3 +36,9 @@
 	width = 200
 	height = 13
 	mappath = "_maps/modular_events/trainstation/train_general.dmm"
+
+/datum/map_template/train_export
+	name = "Train Template"
+	width = 200
+	height = 13
+	mappath = "_maps/modular_events/trainstation/train_general_export.dmm"

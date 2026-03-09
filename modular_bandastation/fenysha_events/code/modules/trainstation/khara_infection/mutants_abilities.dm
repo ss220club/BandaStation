@@ -4,6 +4,7 @@
 	speed = 0.5
 	range = 16
 	layer = LARGE_MOB_LAYER
+	can_hit_turfs = TRUE
 	var/mob_type
 
 /obj/projectile/meat_ball/on_hit(atom/target, blocked, pierce_hit)
@@ -18,6 +19,14 @@
 	new mob_type(get_turf(src))
 	. = ..()
 
+/obj/projectile/meat_ball/huge
+	speed = 0.4
+
+/obj/projectile/meat_ball/huge/Initialize(mapload)
+	. = ..()
+	var/matrix/new_transform = matrix()
+	new_transform.Scale(3, 3)
+	animate(src, transform = new_transform, time = 3 SECONDS)
 
 /datum/action/cooldown/mob_cooldown/throw_spider
 	name = "Throw meat spider ball"
@@ -25,6 +34,7 @@
 	cooldown_time = 6 SECONDS
 	shared_cooldown = NONE
 
+	var/projectile_type = /obj/projectile/meat_ball/huge
 	var/mob_type = /mob/living/basic/khara_mutant/flesh_spider/weaker
 
 /datum/action/cooldown/mob_cooldown/throw_spider/Activate(atom/target)
@@ -34,7 +44,8 @@
 /datum/action/cooldown/mob_cooldown/throw_spider/proc/launch_thing(atom/target)
 	new /obj/effect/temp_visual/telegraphing/boss_hit(get_turf(target))
 	sleep(1 SECONDS)
-	var/obj/projectile/meat_ball/ball = new /obj/projectile/meat_ball(owner.loc)
+
+	var/obj/projectile/meat_ball/ball = new projectile_type(get_turf(owner))
 	ball.mob_type = mob_type
 	ball.aim_projectile(target, owner)
 	playsound(get_turf(owner), 'sound/effects/splat.ogg', 30, TRUE, extrarange = SILENCED_SOUND_EXTRARANGE)

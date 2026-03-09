@@ -35,24 +35,26 @@
 		/datum/action/cooldown/mob_cooldown/heat_of_infection/hand_attack/rumbling = null,
 		/datum/action/cooldown/mob_cooldown/boss_bone_shard_wave = null,
 		/datum/action/cooldown/mob_cooldown/deadly_roar = null,
+		/datum/action/cooldown/mob_cooldown/throw_spider/strong = null,
 	)
 
-	var/mob/living/basic/khara_mutant/heat_of_infection_hand/left_hand = null
-	var/mob/living/basic/khara_mutant/heat_of_infection_hand/right_hand = null
+	var/list/mob/living/basic/khara_mutant/heat_of_infection_hand/hands = list()
 	var/addictional_view_range = 7
+	var/stage = 1
 
 /mob/living/basic/khara_mutant/heat_of_infection/Initialize(mapload)
 	. = ..()
-	left_hand = new /mob/living/basic/khara_mutant/heat_of_infection_hand/left(src)
-	right_hand = new /mob/living/basic/khara_mutant/heat_of_infection_hand(src)
+	for(var/i in 1 to 2)
+		var/hand_type = (i % 2 == 1 ? /mob/living/basic/khara_mutant/heat_of_infection_hand/left : /mob/living/basic/khara_mutant/heat_of_infection_hand)
+		hands += new hand_type(src)
 	SSpoints_of_interest.make_point_of_interest(src)
 	ADD_TRAIT(src, TRAIT_XRAY_VISION, INNATE_TRAIT)
 
 	AddElement(/datum/element/simple_flying)
 	notify_ghosts("Сердце инфекции только что появилось!", src, "Сердце инфекции")
 
-	animate(src, pixel_y = -80, time = 2 SECONDS, loop = -1, flags = ANIMATION_RELATIVE)
-	animate(pixel_y = -100, time = 2 SECONDS, flags = ANIMATION_RELATIVE)
+	animate(src, pixel_y = -10, time = 2 SECONDS, loop = -1, flags = ANIMATION_RELATIVE)
+	animate(pixel_y = -30, time = 2 SECONDS, flags = ANIMATION_RELATIVE)
 
 	addtimer(CALLBACK(src, PROC_REF(move_hands)), 1)
 	update_sight()
@@ -66,49 +68,114 @@
 	client.view_size.resetToDefault()
 
 /mob/living/basic/khara_mutant/heat_of_infection/Destroy()
-	if(left_hand && !QDELETED(left_hand))
-		qdel(left_hand)
-	if(right_hand && !QDELETED(right_hand))
-		qdel(right_hand)
+	for(var/mob/living/basic/khara_mutant/heat_of_infection_hand/hand as anything in hands)
+		if(hand && !QDELETED(hand))
+			qdel(hand)
+	hands = null
 	return ..()
 
 /mob/living/basic/khara_mutant/heat_of_infection/proc/move_hands()
-	if(!left_hand || QDELETED(left_hand) || !right_hand || QDELETED(right_hand))
+	if(!length(hands))
 		return
 
 	var/turf/boss_turf = get_turf(src)
-	var/turf/left_turf = boss_turf
-	var/turf/right_turf = boss_turf
+	var/left_index = 1
+	var/right_index = 1
+	var/num_left = 0
+	var/num_right = 0
 
-	for(var/i in 1 to 7)
-		left_turf = get_step(left_turf, WEST)
-		right_turf = get_step(right_turf, EAST)
+	for(var/mob/living/basic/khara_mutant/heat_of_infection_hand/hand as anything in hands)
+		if(QDELETED(hand))
+			continue
+		if(istype(hand, /mob/living/basic/khara_mutant/heat_of_infection_hand/left))
+			num_left++
+		else
+			num_right++
 
-	left_hand.forceMove(left_turf)
-	right_hand.forceMove(right_turf)
+	var/spacing = 3
+	var/min_dist = 1
+	var/left_max_dist = max(7, min_dist + (num_left - 1) * spacing)
+	var/right_max_dist = max(7, min_dist + (num_right - 1) * spacing)
 
-	left_hand.pixel_x = left_hand.base_pixel_x
-	left_hand.pixel_y = left_hand.base_pixel_y
-	right_hand.pixel_x = right_hand.base_pixel_x
-	right_hand.pixel_y = right_hand.base_pixel_y
+	for(var/mob/living/basic/khara_mutant/heat_of_infection_hand/hand as anything in hands)
+		if(QDELETED(hand))
+			continue
 
+		var/is_left = istype(hand, /mob/living/basic/khara_mutant/heat_of_infection_hand/left)
+		var/max_dist = is_left ? left_max_dist : right_max_dist
+		var/index = is_left ? left_index : right_index
+		var/dist = max_dist - (index - 1) * spacing
+		var/dir = is_left ? WEST : EAST
+		var/turf/hand_turf = boss_turf
+
+		for(var/j in 1 to dist)
+			hand_turf = get_step(hand_turf, dir)
+
+		hand.forceMove(hand_turf)
+		hand.home_turf = hand_turf
+
+		hand.pixel_x = hand.base_pixel_x
+		hand.pixel_y = hand.base_pixel_y
+
+		if(is_left)
+			left_index++
+		else
+			right_index++
 
 /mob/living/basic/khara_mutant/heat_of_infection/proc/get_free_hand()
-	if(!left_hand || QDELETED(left_hand))
-		left_hand = null
-	if(!right_hand || QDELETED(right_hand))
-		right_hand = null
-
 	var/list/available_hands = list()
-	if(left_hand && !left_hand.busy)
-		available_hands += left_hand
-	if(right_hand && !right_hand.busy)
-		available_hands += right_hand
 
-	if(!available_hands.len)
+	for(var/mob/living/basic/khara_mutant/heat_of_infection_hand/hand as anything in hands)
+		if(hand && !QDELETED(hand) && !hand.busy)
+			available_hands += hand
+
+	if(!length(available_hands))
 		return null
 
 	return pick(available_hands)
+
+/mob/living/basic/khara_mutant/heat_of_infection/proc/add_new_hand()
+	var/num_left = 0
+	var/num_right = 0
+
+	for(var/mob/living/basic/khara_mutant/heat_of_infection_hand/hand as anything in hands)
+		if(QDELETED(hand))
+			continue
+		if(istype(hand, /mob/living/basic/khara_mutant/heat_of_infection_hand/left))
+			num_left++
+		else
+			num_right++
+
+	var/left = (num_left <= num_right)
+	var/hand_type = left ? /mob/living/basic/khara_mutant/heat_of_infection_hand/left : /mob/living/basic/khara_mutant/heat_of_infection_hand
+	hands += new hand_type(src)
+	move_hands()
+
+/mob/living/basic/khara_mutant/heat_of_infection/proc/remove_hand()
+	if(!length(hands))
+		return
+	var/mob/living/basic/khara_mutant/heat_of_infection_hand/hand = pick(hands)
+	hands -= hand
+	qdel(hand)
+	move_hands()
+
+/mob/living/basic/khara_mutant/heat_of_infection/proc/get_hands_count()
+	return length(hands)
+
+/mob/living/basic/khara_mutant/heat_of_infection/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armour_penetration)
+	. = ..()
+
+	if(health <= 10000 && stage == 1)
+		stage++
+		for(var/i = get_hands_count() to 4)
+			add_new_hand()
+		for(var/datum/action/cooldown/ability in actions)
+			ability.cooldown_time *= 0.5
+
+	if(health <= 3000 && stage == 2)
+		stage++
+		for(var/i = get_hands_count() to 6)
+			add_new_hand()
 
 /mob/living/basic/khara_mutant/heat_of_infection_hand
 	name = "Конечность"
@@ -118,7 +185,7 @@
 	icon_living = "scream_hand_r"
 	icon_dead = "scream_hand_r"
 
-	speed = -1
+	speed = -5
 	maxHealth = 5000
 	health = 5000
 
@@ -145,6 +212,7 @@
 	var/mob/living/basic/khara_mutant/heat_of_infection/owner
 	var/busy = FALSE
 	var/turf/home_turf
+	var/maximum_distance = 40
 
 /mob/living/basic/khara_mutant/heat_of_infection_hand/Initialize(mapload)
 	. = ..()
@@ -154,7 +222,7 @@
 
 /mob/living/basic/khara_mutant/heat_of_infection_hand/Destroy()
 	if(owner && !QDELETED(owner))
-		owner.take_damage(maxHealth, BRUTE)
+		owner.take_damage(1000, BRUTE)
 	return ..()
 
 /mob/living/basic/khara_mutant/heat_of_infection_hand/proc/prepare_for_attack()
@@ -179,21 +247,19 @@
 	if(!prepare_for_attack())
 		reset_busy()
 		return
-	home_turf = get_turf(src)
-	var/distance = get_dist(home_turf, target_turf)
-	for(var/i = 1 to distance)
-		if(get_turf(src) == target_turf)
-			break
+
+	var/safety = maximum_distance
+	while(get_turf(src) != target_turf && safety > 0)
+		safety--
 		forceMove(get_step_towards(src, target_turf))
-		sleep(0.3 SECONDS)
+		sleep(0.2 SECONDS)
 
 	addtimer(CALLBACK(src, PROC_REF(lower_to_turf), target_turf), 0.2 SECONDS)
 	if(reset)
 		reset_busy()
-		home_turf = null
 
 /mob/living/basic/khara_mutant/heat_of_infection_hand/proc/lower_to_turf(turf/target_turf)
-	if(QDELETED(src) || get_turf(src) != target_turf)
+	if(QDELETED(src))
 		reset_busy()
 		return
 
@@ -260,7 +326,7 @@
 	for(var/turf/T in view(1, target_turf))
 		new /obj/effect/temp_visual/telegraphing/boss_hit(T)
 	ASYNC
-		hand.move_to_target(target)
+		hand.move_to_target(target_turf)
 	CHECK_TICK
 
 /datum/action/cooldown/mob_cooldown/heat_of_infection/hand_attack/proc/on_attack(mob/living/basic/khara_mutant/heat_of_infection_hand/hand, turf/attacked_turf)
@@ -404,3 +470,173 @@
 /datum/action/cooldown/mob_cooldown/deadly_roar
 	name = "Смертоносный крик"
 	desc = "Испустить истошный крик!"
+	button_icon = 'icons/mob/actions/actions_spells.dmi'
+	button_icon_state = "the_traps"
+
+	cooldown_time = 30 SECONDS
+	var/max_dist = 60
+
+/datum/action/cooldown/mob_cooldown/deadly_roar/Activate(atom/target)
+	for(var/mob/living/player in GLOB.alive_player_list)
+		if(get_dist(owner, player) > max_dist)
+			continue
+		flash_color(player, flash_color = "#FF0000", flash_time = 50)
+		shake_camera(player, 2 SECONDS, 1)
+		to_chat(player, span_userdanger("[owner] истошно рычит, погружая вас в отчаянье!"))
+		player.Stun(10)
+	StartCooldown()
+
+/datum/action/cooldown/mob_cooldown/throw_spider/strong
+	name = "Мясной шар"
+	desc = "Выпускает мясной шар с существом внутри"
+
+	projectile_type = /obj/projectile/meat_ball/huge
+	cooldown_time = 7 SECONDS
+
+/datum/action/cooldown/mob_cooldown/throw_spider/strong/Activate(atom/target)
+	mob_type = pick(/mob/living/basic/khara_mutant/reaper, /mob/living/basic/khara_mutant/arachnid)
+	. = ..()
+
+GLOBAL_LIST_EMPTY(infection_lasers)
+
+/obj/machinery/infection_laser
+	name = "S-Jok лазер"
+	desc = "Специальный лазер, предназначенный для борьбы с сердцем инфекции. Активируйте его, чтобы подготовить к атаке."
+	icon = 'icons/obj/machines/research.dmi'
+	icon_state = "explosive_compressor"
+	density = TRUE
+	anchored = TRUE
+	use_power = NO_POWER_USE
+	uses_integrity = FALSE
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
+	flags_1 = SUPERMATTER_IGNORES_1
+
+	var/active = FALSE
+	var/datum/beam/current_beam = null
+	var/cooldown_time = 0
+
+/obj/machinery/infection_laser/Initialize(mapload)
+	. = ..()
+	GLOB.infection_lasers += src
+	update_visuals()
+
+/obj/machinery/infection_laser/Destroy()
+	GLOB.infection_lasers -= src
+	qdel(current_beam)
+	return ..()
+
+/obj/machinery/infection_laser/proc/update_visuals()
+	update_icon_state()
+	if(!active)
+		add_filter("story_outline", 2, list("type" = "outline", "color" = "#fa3b3b", "size" = 1))
+	else
+		remove_filter("story_outline")
+
+/obj/machinery/infection_laser/update_icon_state()
+	. = ..()
+	icon_state = active ? "explosive_compressor-off" : "explosive_compressor"
+
+/obj/machinery/infection_laser/attack_hand(mob/user)
+	. = ..()
+	if(.)
+		return
+	if(active)
+		to_chat(user, span_notice("Лазер уже активирован."))
+		return
+	if(world.time < cooldown_time)
+		to_chat(user, span_warning("Лазер на перезарядке! Осталось [round((cooldown_time - world.time) / 10)] секунд."))
+		return
+	active = TRUE
+	update_visuals()
+	to_chat(user, span_notice("Вы активируете [src]."))
+	check_all_active()
+
+/obj/machinery/infection_laser/proc/check_all_active()
+	for(var/obj/machinery/infection_laser/laser as anything in GLOB.infection_lasers)
+		if(!laser.active)
+			return FALSE
+	activate_attack()
+	return TRUE
+
+/obj/machinery/infection_laser/proc/activate_attack()
+	for(var/obj/machinery/infection_laser/laser as anything in GLOB.infection_lasers)
+		laser.perform_attack()
+
+/obj/machinery/infection_laser/proc/perform_attack()
+	var/mob/living/basic/khara_mutant/heat_of_infection/target = null
+	var/min_dist = INFINITY
+	for(var/mob/living/basic/khara_mutant/heat_of_infection/heart in GLOB.mob_living_list)
+		if(!istype(heart))
+			continue
+		var/dist = get_dist(src, heart)
+		if(dist < min_dist)
+			min_dist = dist
+			target = heart
+	if(!target)
+		return
+	playsound(src, 'sound/effects/magic/lightning_chargeup.ogg', 100)
+	current_beam = Beam(get_turf(target), icon_state = "blood_beam", time = 11 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(deal_damage), target), 11 SECONDS)
+
+/obj/machinery/infection_laser/proc/deal_damage(mob/living/basic/khara_mutant/heat_of_infection/target)
+	if(QDELETED(target) || !target)
+		return
+	target.take_damage(100, BRUTE, "laser")
+	qdel(current_beam)
+	current_beam = null
+	active = FALSE
+	cooldown_time = world.time + 2 MINUTES
+	addtimer(CALLBACK(src, PROC_REF(cooldown_end)), 2 MINUTES)
+	for(var/obj/machinery/infection_laser/laser as anything in GLOB.infection_lasers)
+		laser.after_shoot()
+
+/obj/machinery/infection_laser/proc/cooldown_end()
+	update_visuals()
+
+/obj/machinery/infection_laser/proc/after_shoot()
+	playsound(src, 'sound/items/weapons/beam_sniper.ogg', 100)
+
+
+/obj/item/gun/energy/anti_khara
+	name = "Анти-Кхара винтовка"
+	desc = "Особая лазерная винтовка испускающую пучки энергии колебающиеся на особой частоте. \
+			Тонкая настройка позволяет им атаковать исключительно абоминации Кхары. Перезаряжается автоматически."
+	icon_state = "meteor_gun"
+	inhand_icon_state = "chemsprayer"
+	w_class = WEIGHT_CLASS_BULKY
+	ammo_type = list(/obj/item/ammo_casing/energy/anti_khara)
+	cell_type = /obj/item/stock_parts/power_store/cell/high
+	clumsy_check = FALSE
+	selfcharge = TRUE
+	automatic_charge_overlays = FALSE
+
+/obj/item/gun/energy/anti_khara/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/scope, range_modifier = 2)
+
+/obj/item/ammo_casing/energy/anti_khara
+	projectile_type = /obj/projectile/energy/anti_khara
+	select_name = "anti-khara"
+	e_cost = LASER_SHOTS(10, STANDARD_CELL_CHARGE)
+
+/obj/projectile/energy/anti_khara
+	name = "anti-khara bolt"
+	icon_state = "ion"
+	damage = 45
+	damage_type = BRUTE
+	armor_flag = ENERGY
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/ion
+
+/obj/projectile/energy/anti_khara/on_hit(atom/target, blocked = 0, pierce_hit)
+	if(isliving(target))
+		var/mob/living/L = target
+		if(!is_khara_creature(L))
+			return FALSE
+	return ..()
+
+/obj/projectile/energy/anti_khara/Bump(atom/A)
+	if(isliving(A))
+		var/mob/living/L = A
+		if(!is_khara_creature(L))
+			return FALSE
+	return ..()

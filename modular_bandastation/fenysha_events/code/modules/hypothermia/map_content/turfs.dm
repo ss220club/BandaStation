@@ -24,7 +24,18 @@
 	planetary_atmos = TRUE
 	baseturfs = /turf/open/chasm/icy_planet
 
+/turf/open/chasm/icy_planet/TerraformTurf(path, new_baseturf, flags)
+	return
 
+/turf/open/chasm/icy_planet/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
+	return
+
+/turf/open/chasm/icy_planet/Melt()
+	to_be_destroyed = FALSE
+	return src
+
+/turf/open/chasm/icy_planet/build_with_rods(obj/item/stack/rods/used_rods, mob/user)
+	return
 
 /turf/open/misc/icy_planet/snow
 	gender = PLURAL

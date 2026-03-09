@@ -205,7 +205,7 @@ SUBSYSTEM_DEF(train_controller)
 		light.update()
 
 /datum/controller/subsystem/train_controller/proc/load_train()
-	var/datum/map_template/train/train_template = new()
+	var/datum/map_template/train_export/train_template = new()
 	var/obj/effect/landmark/trainstation/train_spawnpoint/spawnpoint = locate() in GLOB.landmarks_list
 	if(!spawnpoint || !istype(spawnpoint))
 		stack_trace("Failed to load train, no available spawnpoints!")

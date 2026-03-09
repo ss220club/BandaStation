@@ -42,6 +42,14 @@
 	region = TRAINSTATION_REGION_THUNDRA
 	required_stations = 8
 
+/datum/train_station/heart_of_infections
+	name = "Сердце инфекции"
+	map_path = "_maps/modular_events/trainstation/bossfight_map.dmm"
+	creator = "V1SITY"
+	visible = FALSE
+	station_type = TRAINSTATION_TYPE_MILITARY
+	threat_level = THREAT_LEVEL_DEADLY
+	region = TRAINSTATION_REGION_THUNDRA
 
 /datum/train_station/military_house
 	name = "Военная база Гайдзинь"
