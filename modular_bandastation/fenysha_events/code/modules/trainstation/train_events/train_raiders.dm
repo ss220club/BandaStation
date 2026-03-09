@@ -11,8 +11,93 @@
 	distribute_pressure = ONE_ATMOSPHERE * O2STANDARD
 	actions_types = list(/datum/action/cooldown/jetpack_jump)
 
-	var/jump_range = 7          // Максимальная дистанция прыжка (в тайлах)
-	var/jump_speed = 1          // Скорость анимации прыжка (множитель)
+	// Максимальная дистанция прыжка (в тайлах)
+	var/jump_range = 7
+	// Время колдауна
+	var/jump_cooldown = 10 SECONDS
+
+	// Пропасть в которую мы падаем
+	var/turf/open/chasm/felling_chasm = null
+	// Спасаемся ли мы в данный момент
+	var/attempting = FALSE
+
+/obj/item/tank/jump_jetpack/examine(mob/user)
+	. = ..()
+	. += span_boldnicegreen("Ранец-прыгун, может спасти вас от падения в пропасть, \
+							давая время на то, чтобы вылетить из неё в случае падения.")
+
+/obj/item/tank/jump_jetpack/equipped(mob/living/user, slot, initial)
+	. = ..()
+	if(slot == ITEM_SLOT_BELT && isliving(user))
+		RegisterSignal(user, COMSIG_MOVABLE_CHASM_DROPPED, PROC_REF(on_chasm_drop))
+
+/obj/item/tank/jump_jetpack/dropped(mob/user, silent)
+	. = ..()
+	UnregisterSignal(user, COMSIG_MOVABLE_CHASM_DROPPED)
+
+/obj/item/tank/jump_jetpack/proc/on_chasm_drop(mob/living/user, turf/chasm_turf)
+	SIGNAL_HANDLER
+	if(user.stat == DEAD || attempting)
+		return
+	attempting = TRUE
+	felling_chasm = chasm_turf
+	rescue_process(user, chasm_turf)
+	RegisterSignal(user, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(on_user_pre_move))
+	return COMPONENT_NO_CHASM_DROP
+
+/obj/item/tank/jump_jetpack/proc/on_user_pre_move(mob/living/user, atom/new_loc)
+	SIGNAL_HANDLER
+
+	if(!attempting)
+		UnregisterSignal(user, COMSIG_MOVABLE_PRE_MOVE)
+		return
+
+	if(felling_chasm || attempting)
+		return COMPONENT_MOVABLE_BLOCK_PRE_MOVE
+
+/obj/item/tank/jump_jetpack/proc/rescue_process(mob/living/user, turf/chasm_turf)
+	var/datum/component/chasm/chasm = chasm_turf.GetComponent(/datum/component/chasm)
+	chasm?.falling_atoms -= WEAKREF(user)
+
+	var/matrix/drop_transfrom = matrix()
+	drop_transfrom.Scale(0.1, 0.1)
+	animate(user, alpha = 100, transform = drop_transfrom, time = 5 SECONDS)
+	to_chat(user, span_userdanger("Ты падешь в безду, срочно найди цель, чтобы выпрыгнуть!"))
+	addtimer(CALLBACK(src, PROC_REF(check_rescue), user), 5 SECONDS)
+
+/obj/item/tank/jump_jetpack/proc/check_rescue(mob/living/user)
+	if(!attempting || !felling_chasm)
+		return // Мы спаслись
+
+	UnregisterSignal(user, COMSIG_MOVABLE_PRE_MOVE)
+	var/rescued = FALSE
+	var/turf/user_turf = get_turf(user)
+
+	if(!ischasm(user_turf))
+		rescued = TRUE
+	else if(HAS_TRAIT(user_turf, TRAIT_CHASM_STOPPED))
+		rescued = FALSE
+
+	if(rescued)
+		attempting = FALSE
+		felling_chasm = null
+	else
+		drop_back(user, user_turf)
+
+/obj/item/tank/jump_jetpack/proc/drop_back(mob/living/user, turf/chasm_turf)
+	var/datum/component/chasm/chasm = chasm_turf.GetComponent(/datum/component/chasm)
+	chasm.drop(user)
+	user.alpha = initial(user.alpha)
+	user.transform = initial(user.transform)
+	attempting = FALSE
+	felling_chasm = null
+
+/obj/item/tank/jump_jetpack/proc/jumped(mob/living/user, turf/jump_from)
+	if(attempting && felling_chasm)
+		UnregisterSignal(user, COMSIG_MOVABLE_PRE_MOVE)
+		animate(user, alpha = 255, transform = initial(user.transform), time = 1 SECONDS)
+		attempting = FALSE
+		felling_chasm = null
 
 /datum/action/cooldown/jetpack_jump
 	name = "Прыжок с реактивным ранцем"
@@ -55,19 +140,28 @@
 
 	var/ignores = IGNORE_SLOWDOWNS|IGNORE_TARGET_LOC_CHANGE|IGNORE_USER_LOC_CHANGE
 	if(!do_after(jumper, 0.2 SECONDS, jumper, ignores, max_interact_count = 1))
-		StartCooldown(3 SECONDS)
+		StartCooldown(2 SECONDS)
 		jumper.balloon_alert(jumper, "Прыжок прерван!")
 		return FALSE
 
-	INVOKE_ASYNC(src, PROC_REF(perform_jump), jumper, target_turf)
-	return ..()
+	INVOKE_ASYNC(src, PROC_REF(perform_jump), jumper, target_turf, jetpack)
+	StartCooldown(jetpack.jump_cooldown)
 
-/datum/action/cooldown/jetpack_jump/proc/perform_jump(mob/living/carbon/human/jumper, turf/target_turf)
+/datum/action/cooldown/jetpack_jump/proc/perform_jump(mob/living/carbon/human/jumper, turf/target_turf, obj/item/tank/jump_jetpack/jetpack)
+	if(!jetpack)
+		return
+
 	jumper.movement_type = FLYING
+	// Подготовка
+	var/saved_passflags = jumper.pass_flags
+	var/given_traits = list(TRAIT_CHASM_STOPPER, TRAIT_TURF_IGNORE_SLOWDOWN)
+	jumper.pass_flags = PASSTABLE|PASSGRILLE|PASSBLOB|PASSMOB|LETPASSTHROW|PASSMACHINE|PASSSTRUCTURE|PASSVEHICLE|LETPASSCLICKS
+	jumper.add_traits(given_traits, REF(jetpack))
 
 	if(jumper.buckled)
 		var/atom/movable/our_vehicle = jumper.buckled
 		our_vehicle.unbuckle_mob(jumper, TRUE, FALSE)
+
 
 	playsound(jumper, 'sound/items/weapons/resonator_blast.ogg', 100, TRUE)
 	new /obj/effect/temp_visual/fire(get_turf(jumper))
@@ -81,8 +175,12 @@
 	var/steps = dist_to_turf * 4
 	var/apex_height = 60 + dist_to_turf * 9  // Высота дуги прыжка
 
+	jetpack.jumped(jumper, get_turf(jumper))
+
 	for(var/i in 1 to steps)
 		if(get_turf(jumper) == target_turf)
+			break
+		if(!jetpack)
 			break
 
 		var/t = i / steps
@@ -108,18 +206,24 @@
 		if(i % 4 == 0)
 			var/turf/next_turf = get_step_towards(jumper, target_turf)
 
-			if(isclosedturf(next_turf))
-				break
-
-			if(next_turf.is_blocked_turf(TRUE, jumper))
+			var/pass = TRUE
+			if(!next_turf.CanPass(jumper, jumper.dir))
+				pass = FALSE
+			if(pass)
+				for(var/atom/thing in next_turf.contents)
+					if(!thing.CanPass(jumper, jumper.dir))
+						pass = FALSE
+						break
+			if(!pass)
 				break
 
 			jumper.forceMove(next_turf)
-
 		sleep(2 TICKS)
 
 	jumper.set_anchored(FALSE)
 	jumper.movement_type = GROUND
+	jumper.pass_flags = saved_passflags
+	jumper.remove_traits(given_traits, REF(jetpack))
 
 	jumper.pixel_z = start_z
 	jumper.pixel_y = start_y
@@ -127,12 +231,18 @@
 
 	unset_click_ability(jumper, refund_cooldown = FALSE)
 	playsound(jumper, 'sound/items/weapons/kinetic_accel.ogg', 100, TRUE)
+	var/turf/jumper_turf = get_turf(jumper)
+	jumper_turf.Entered(jumper)
 
 	// Удар по приземлению
 	for(var/mob/living/L in get_turf(jumper))
 		if(L == jumper)
 			continue
 		L.Knockdown(2 SECONDS)
+
+/obj/item/tank/jump_jetpack/fast
+	jump_cooldown = 3 SECONDS
+	jump_range = 10
 
 
 /datum/outfit/train_raider

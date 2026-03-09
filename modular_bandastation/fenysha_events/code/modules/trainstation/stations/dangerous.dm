@@ -30,7 +30,7 @@
 
 /datum/train_station/start_point
 	name = "Юнион Плаза"
-	map_path = "_maps/modular_events/trainstation/startpoint.dmm"
+	map_path = "_maps/modular_events/trainstation/plasa.dmm"
 	creator = "Fenysha"
 	station_flags = TRAINSTATION_NO_SELECTION | TRAINSTATION_BLOCKING | TRAINSTATION_FINAL_STATION
 	desc = "Крупнейший научно-исследовательский комплекс вблизи густонаселённого мегаполиса. \

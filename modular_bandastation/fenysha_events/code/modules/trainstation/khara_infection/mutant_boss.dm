@@ -398,7 +398,6 @@
 		current = get_step(current, perp_dir2)
 		if(current && get_dist(start, current) <= max_range)
 			turfs += current
-
 	return turfs
 
 
