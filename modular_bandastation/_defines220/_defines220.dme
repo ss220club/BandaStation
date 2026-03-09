@@ -6,6 +6,7 @@
 #include "code/signals_item.dm"
 #include "code/defines/automapper.dm"
 #include "code/defines/combat.dm"
+#include "code/defines/emote_defines.dm"
 #include "code/defines/jobs.dm"
 #include "code/defines/keybindings.dm"
 #include "code/defines/misc.dm"
