@@ -137,9 +137,9 @@
 	S.self_repair_delay = 50
 	S.self_repair_amount = 1.0
 	// Увеличенный срок работы батарейки: медленнее разряжается
-	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(heart && heart.ipc_max_charge)
-		heart.charge_rate *= 0.7
+	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(istype(battery, /obj/item/organ/heart/ipc_battery))
+		battery.charge_rate *= 0.7
 	// Уменьшенное количество слотов имплантов (-1 слот)
 	S.ipc_extra_implant_slots = max(-1, S.ipc_extra_implant_slots - 1)
 
@@ -294,8 +294,8 @@
 		// Запрет боевых имплантов
 		if(!(TRAIT_IPC_NO_COMBAT_IMPLANTS in S.inherent_traits))
 			S.inherent_traits += TRAIT_IPC_NO_COMBAT_IMPLANTS
-		// Глюки речи — регистрируем через сигнал
-		RegisterSignal(H, COMSIG_MOB_SAY, PROC_REF(ipc_unbranded_speech_glitch))
+		// Глюки речи — регистрируем через сигнал на species datum
+		S.register_speech_glitch(H)
 
 // ============================================
 // 10. CYBERSUN INDUSTRIES
@@ -334,8 +334,13 @@
 // ============================================
 // Срабатывает на COMSIG_MOB_SAY — с шансом 15% искажает фразу.
 // Случайно заменяет несколько символов на hex-код или повторяет слово.
+
+/// Регистрирует обработчик глюков речи на species datum (не глобальный proc).
+/datum/species/ipc/proc/register_speech_glitch(mob/living/carbon/human/H)
+	RegisterSignal(H, COMSIG_MOB_SAY, PROC_REF(ipc_unbranded_speech_glitch))
+
 /// Обработчик глюков речи для Unbranded КПБ.
-/proc/ipc_unbranded_speech_glitch(datum/source, list/speech_args)
+/datum/species/ipc/proc/ipc_unbranded_speech_glitch(datum/source, list/speech_args)
 	SIGNAL_HANDLER
 	if(speech_args[SPEECH_FORCED])
 		return
