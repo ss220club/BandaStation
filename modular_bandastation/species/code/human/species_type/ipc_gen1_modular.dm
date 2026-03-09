@@ -243,10 +243,11 @@
 		"Исследовательский" = IPC_MODULE_RESEARCH,
 	)
 
-	var/choice_name = input(H,
-		"Текущий модуль: [current_name]\n\nПереконфигурация займёт 2.5 минуты.\nВо время процесса скорость действий снижена.\nПрерывается при оглушении.\n\nВыберите новый модуль:",
-		"Смена модуля", null
-	) as null|anything in choices
+	var/choice_name = tgui_input_list(H,
+		"Текущий модуль: [current_name]\n\nПереконфигурация займёт 2.5 минуты.\nВо время процесса скорость действий снижена.\nПрерывается при оглушении.",
+		"Смена модуля",
+		choices,
+	)
 
 	if(isnull(choice_name) || QDELETED(H) || !ipc_species)
 		return
