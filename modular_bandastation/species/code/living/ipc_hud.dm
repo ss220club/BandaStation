@@ -136,6 +136,9 @@
 	if(!istype(H))
 		return
 	add_ipc_hud_elements(H)
+	// Добавляем HUD-элементы поколения (если нужны)
+	if(ipc_generation == IPC_GEN_HUMANITY)
+		add_gen3_hud(H)
 
 /datum/species/ipc/proc/add_ipc_hud_elements(mob/living/carbon/human/H)
 	if(!H.hud_used)
@@ -249,7 +252,12 @@
 	if(ipc_generation == IPC_GEN_HUMANITY)
 		for(var/atom/movable/screen/ipc_humanity/indicator in H.hud_used?.infodisplay)
 			indicator.humanity_value = humanity
-			indicator.icon_state = (humanity >= HUMANITY_LOW) ? "humanity" : "lost_humanity"
+			if(humanity >= HUMANITY_PEAK)
+				indicator.icon_state = "humanity"
+			else if(humanity >= HUMANITY_LOW)
+				indicator.icon_state = "humanity_half"
+			else
+				indicator.icon_state = "humanity_lost"
 	// Gen 1: иконка модуля не изменяется в рантайме, поэтому не требует обновления каждый тик
 
 // ============================================
