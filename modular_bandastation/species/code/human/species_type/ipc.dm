@@ -202,8 +202,7 @@
 	var/datum/action/cooldown/ipc_overclock/overclock = new()
 	overclock.Grant(H)
 
-	var/datum/action/cooldown/ipc_hack/hack = new()
-	hack.Grant(H)
+	// ipc_hack НЕ выдаётся автоматически — покупается в аплинке трейтора.
 
 	// Выдаём встроенный зарядный порт в левую руку по умолчанию.
 	// Настройка руки через ipc_charger_arm preference переставит его при загрузке.
@@ -254,6 +253,7 @@
 	if(overclock)
 		overclock.Remove(H)
 
+	// ipc_hack — если была куплена в аплинке, удаляем при смене вида
 	var/datum/action/cooldown/ipc_hack/hack = locate(/datum/action/cooldown/ipc_hack) in H.actions
 	if(hack)
 		hack.Remove(H)
