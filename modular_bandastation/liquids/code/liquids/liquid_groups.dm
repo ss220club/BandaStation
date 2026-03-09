@@ -149,7 +149,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 
 	otherg.merging = TRUE
 	var/list/created_reagent_list = list()
-	for(var/datum/reagent/reagent in otherg.reagents.reagent_list)
+	for(var/datum/reagent/reagent as anything in otherg.reagents.reagent_list)
 		created_reagent_list |= reagent.type
 		created_reagent_list[reagent.type] = reagent.volume
 
@@ -252,8 +252,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 
 	exposure = FALSE
 	slippery = FALSE
-	for(var/reagent_type in reagents.reagent_list)
-		var/datum/reagent/pulled_reagent = reagent_type
+	for(var/datum/reagent/pulled_reagent as anything in reagents.reagent_list)
 		var/amount = pulled_reagent.volume / length(members)
 		if(!amount)
 			continue
@@ -378,7 +377,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 	member.liquid_group = new(1, member)
 	member.liquid_group.copy_properties(src)
 	var/remove_amount = reagents_per_turf / length(reagents.reagent_list)
-	for(var/datum/reagent/reagent_type in reagents.reagent_list)
+	for(var/datum/reagent/reagent_type as anything in reagents.reagent_list)
 		member.liquid_group.reagents.add_reagent(reagent_type, remove_amount, no_react = TRUE)
 		remove_specific(amount = remove_amount, reagent_type = reagent_type)
 
@@ -408,7 +407,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 		transfer = new()
 	if(QDELETED(transfer.liquid_group))
 		transfer.liquid_group = new(1, transfer)
-	for(var/datum/reagent/reagent_type in reagents.reagent_list)
+	for(var/datum/reagent/reagent_type as anything in reagents.reagent_list)
 		transfer.liquid_group.reagents.add_reagent(reagent_type.type, remove_amount, no_react = TRUE)
 		remove_specific(amount = remove_amount, reagent_type = reagent_type)
 		total_removed += remove_amount
@@ -430,7 +429,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 		return
 	var/total_hits = 0
 	var/total_volume = 0
-	for(var/datum/reagent/reagent_type in reagents.reagent_list)
+	for(var/datum/reagent/reagent_type as anything in reagents.reagent_list)
 		if(!(reagent_type.type in reagents_to_check))
 			continue
 		total_hits++
@@ -439,7 +438,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 		return
 
 	var/precent = (amount / total_volume)
-	for(var/datum/reagent/reagent_type in reagents.reagent_list)
+	for(var/datum/reagent/reagent_type as anything in reagents.reagent_list)
 		if(!(reagent_type.type in reagents_to_check))
 			continue
 		secondary_reagent.add_reagent(reagent_type.type, reagent_type.volume * precent, no_react = TRUE)
@@ -476,8 +475,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 	var/alpha_setting = 1
 	var/alpha_divisor = 1
 
-	for(var/r in reagents.reagent_list)
-		var/datum/reagent/R = r
+	for(var/datum/reagent/R as anything in reagents.reagent_list)
 		alpha_setting += max((1 * R.volume), 1)
 		alpha_divisor += max((1 * R.volume), 1)
 
@@ -497,7 +495,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 /datum/liquid_group/proc/get_group_burn()
 	var/total_burn_power = 0
 	var/total_burn_rate = 0
-	for(var/datum/reagent/reagent_type in reagents.reagent_list)
+	for(var/datum/reagent/reagent_type as anything in reagents.reagent_list)
 		var/burn_power = isnull(reagent_type.burning_temperature) ? 0 : (reagent_type.burning_temperature / 100)
 		if(burn_power)
 			total_burn_power += burn_power * reagent_type.volume

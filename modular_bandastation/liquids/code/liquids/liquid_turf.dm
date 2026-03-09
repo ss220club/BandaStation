@@ -26,8 +26,7 @@
 /turf/proc/add_liquid_from_reagents(datum/reagents/giver, no_react = FALSE, chem_temp, amount)
 	var/list/compiled_list = list()
 	var/multiplier = amount ? amount / giver.total_volume : 1
-	for(var/r in giver.reagent_list)
-		var/datum/reagent/R = r
+	for(var/datum/reagent/R as anything in giver.reagent_list)
 		if(!(R.type in GLOB.liquid_blacklist))
 			compiled_list[R.type] = R.volume * multiplier
 	if(!compiled_list.len) //No reagents to add, don't bother going further

@@ -4,7 +4,8 @@
 	icon_state = "water-0"
 	base_icon_state = "water"
 	anchored = TRUE
-	plane = FLOOR_PLANE
+	plane = GAME_PLANE
+	layer = WATER_LEVEL_LAYER
 	color = "#DDF"
 	alpha = 175
 	//For being on fire
@@ -288,6 +289,5 @@
 
 /obj/effect/abstract/fire/big_fire
 	icon_state = "fire_big"
-
 
 
