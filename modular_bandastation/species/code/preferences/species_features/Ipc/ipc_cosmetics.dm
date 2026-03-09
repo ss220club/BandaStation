@@ -112,12 +112,13 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 
 // ============================================
 // BODYPART OVERLAY: ХВОСТ
-// Рендерится только за спрайтом персонажа (EXTERNAL_BEHIND).
-// EXTERNAL_FRONT убран — он рендерился поверх тела и давал двойной спрайт.
+// BEHIND — рендерится за телом (север/восток/запад).
+// FRONT  — рендерится перед телом только при виде с юга,
+//           чтобы хвост не перекрывал тело в других направлениях.
 // ============================================
 
 /datum/bodypart_overlay/ipc_tail
-	layers = EXTERNAL_BEHIND
+	layers = EXTERNAL_BEHIND | EXTERNAL_FRONT
 	blocks_emissive = EMISSIVE_BLOCK_NONE
 	/// Основной цвет хвоста (null = без тонирования)
 	var/icon_color = null
@@ -134,16 +135,28 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 
 /datum/bodypart_overlay/ipc_tail/get_overlay(layer, obj/item/bodypart/limb)
 	. = list()
-	if(layer != EXTERNAL_BEHIND)
-		return .
-	var/image/img_behind = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
-	if(icon_color)
-		img_behind.color = icon_color
-	. += img_behind
-	if(secondary_icon_color)
-		var/image/img_sec_behind = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
-		img_sec_behind.color = secondary_icon_color
-		. += img_sec_behind
+	switch(layer)
+		if(EXTERNAL_BEHIND)
+			var/image/img_behind = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
+			if(icon_color)
+				img_behind.color = icon_color
+			. += img_behind
+			if(secondary_icon_color)
+				var/image/img_sec_behind = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
+				img_sec_behind.color = secondary_icon_color
+				. += img_sec_behind
+		if(EXTERNAL_FRONT)
+			// Рендерим FRONT только при виде с юга — иначе хвост перекрывает тело
+			if(!limb?.owner || limb.owner.dir != SOUTH)
+				return .
+			var/image/img_front = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
+			if(icon_color)
+				img_front.color = icon_color
+			. += img_front
+			if(secondary_icon_color)
+				var/image/img_sec_front = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
+				img_sec_front.color = secondary_icon_color
+				. += img_sec_front
 
 // ============================================
 // APPLY PROCS
