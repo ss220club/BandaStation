@@ -115,6 +115,8 @@
 	var/ipc_overheat_rate_mod = 1.0
 	// Модификатор стоимости ремонта (Cybersun: 1.5)
 	var/ipc_repair_cost_mod = 1.0
+	// Дополнительные слоты IPC-имплантов: >0 = больше, <0 = меньше (Ward: -1, Cybersun: -1)
+	var/ipc_extra_implant_slots = 0
 
 	// Дополнительные модификаторы от шасси
 	// Список модификаторов: "overheat_rate", "healing_time", "melee_damage", "implant_slots", и т.д.
@@ -273,7 +275,9 @@
 	QDEL_NULL(ipc_os)
 
 	// Отменяем регистрацию сигналов
-	UnregisterSignal(H, list(COMSIG_LIVING_ELECTROCUTE_ACT, COMSIG_HUMAN_PREFS_APPLIED, COMSIG_MOB_HUD_CREATED))
+	UnregisterSignal(H, list(COMSIG_LIVING_ELECTROCUTE_ACT, COMSIG_HUMAN_PREFS_APPLIED, COMSIG_MOB_HUD_CREATED, COMSIG_MOB_SAY))
+	// Удаляем трейты от брендов
+	REMOVE_TRAIT(H, TRAIT_SILENT_FOOTSTEPS, "cybersun_brand")
 
 	// HUD: удаляем элементы и восстанавливаем муд
 	remove_ipc_hud_elements(H, new_species)
@@ -379,7 +383,9 @@
 		passive_cooling_rate += 1  // еще 1°C/сек
 
 	if(passive_cooling_rate > 0)
-		cpu_temperature = max(cpu_temperature - (passive_cooling_rate * seconds_per_tick), 0)
+		// ipc_thermal_relaxation_mod < 0 = медленнее охлаждается (Etamin: -0.2)
+		var/cooling_mult = 1 + ipc_thermal_relaxation_mod
+		cpu_temperature = max(cpu_temperature - (passive_cooling_rate * cooling_mult * seconds_per_tick), 0)
 
 	// Охлаждение от баллона с холодным газом (через маску) - активное
 	// Эффективность зависит от температуры газа И теплоемкости (specific_heat)

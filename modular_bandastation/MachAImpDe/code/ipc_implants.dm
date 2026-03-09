@@ -52,6 +52,9 @@
 // ============================================
 
 // Базовый класс для IPC имплантов
+/// Количество необязательных IPC-имплантов по умолчанию (без бонусов/штрафов брендов)
+#define IPC_DEFAULT_IMPLANT_SLOTS 3
+
 /obj/item/implant/ipc
 	name = "IPC implant"
 	desc = "Базовый имплант для IPC."
@@ -68,6 +71,8 @@
 	var/arm_visual = null
 	/// Название состояния в implants_lefthand/righthand.dmi (null = оверлей не показывается)
 	var/arm_visual_state = null
+	/// Если FALSE — не учитывается в лимите слотов (встроенные импланты типа charger)
+	var/counts_toward_slots = TRUE
 
 /// Возвращает icon_state для bodypart overlay
 /obj/item/implant/ipc/proc/get_overlay_state()
@@ -115,6 +120,21 @@
 		if(!silent && user)
 			to_chat(user, span_warning("[capitalize(src.name)] не может быть установлен в [body_zone]!"))
 		return FALSE
+
+	// Проверяем лимит слотов (только для необязательных имплантов, не для force-установки)
+	if(!force && counts_toward_slots && istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = target
+		if(istype(H.dna?.species, /datum/species/ipc))
+			var/datum/species/ipc/S = H.dna.species
+			var/max_slots = IPC_DEFAULT_IMPLANT_SLOTS + S.ipc_extra_implant_slots
+			var/current = 0
+			for(var/obj/item/implant/ipc/imp in H.implants)
+				if(imp.counts_toward_slots)
+					current++
+			if(current >= max_slots)
+				if(!silent && user)
+					to_chat(user, span_warning("Слоты имплантов заполнены! Максимум [max_slots]."))
+				return FALSE
 
 	// Сохраняем зону установки
 	installed_in_zone = body_zone
@@ -606,6 +626,7 @@
 	desc = "Биологический генератор для IPC. Позволяет перерабатывать органическую пищу в энергию. Устанавливается в грудную клетку."
 	icon_state = "bio_generator"
 	allowed_zones = list(BODY_ZONE_CHEST)
+	counts_toward_slots = FALSE  // встроенный (Zeng-Hu) — не занимает слот
 
 /obj/item/implant/ipc/bio_generator/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
@@ -795,6 +816,7 @@
 	desc = "Встроенный зарядный порт. Позволяет IPC заряждаться от настенных источников питания: АРС, переговорников, экранов. Достаньте кабель кнопкой действия, затем нажмите им на устройство."
 	icon_state = "reactive_repair"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+	counts_toward_slots = FALSE  // встроенный — не занимает слот
 	actions_types = list(/datum/action/item_action/hands_free/ipc_charge)
 	/// Кабель в слоте руки (null если убран)
 	var/obj/item/ipc_charging_cable/cable_item = null
