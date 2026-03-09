@@ -95,6 +95,13 @@
 /obj/effect/turf_decal/siding/wood/cherry,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/gov/hop)
+"adK" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "adT" = (
 /turf/open/floor/engine/co2,
 /area/awaymission/avangarde17/outside)
@@ -717,7 +724,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "awU" = (
 /turf/closed/wall,
@@ -759,6 +766,26 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/wood/tile/oak,
 /area/awaymission/avangarde17/inside/base)
+"ayK" = (
+/obj/structure/filingcabinet/white{
+	pixel_x = -10;
+	pixel_y = 2
+	},
+/obj/structure/filingcabinet/white{
+	pixel_x = 1;
+	pixel_y = 2
+	},
+/obj/structure/filingcabinet/white{
+	pixel_x = 12;
+	pixel_y = 2
+	},
+/obj/item/kirbyplants/organic/plant6{
+	pixel_x = 1;
+	pixel_y = 26
+	},
+/obj/effect/turf_decal/siding/wood/cherry,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "azo" = (
 /obj/machinery/shower/directional/south,
 /obj/structure/fluff/shower_drain,
@@ -829,7 +856,7 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "aAi" = (
 /obj/structure/sign/poster/contraband/communist_state/directional/north,
@@ -983,9 +1010,10 @@
 /area/awaymission/avangarde17/outside/city)
 "aGl" = (
 /obj/structure/closet/secure_closet/engineering_electrical,
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/effect/turf_decal/bot/left,
-/turf/open/floor/iron,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/outside)
 "aGC" = (
 /obj/structure/mineral_door/wood,
@@ -1284,11 +1312,18 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/gov/radio)
 "aSr" = (
-/obj/effect/turf_decal/siding{
-	dir = 4
-	},
+/obj/effect/turf_decal/road,
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
+"aSw" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 8
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "aSO" = (
 /obj/structure/toys/style_5{
 	dir = 1
@@ -1337,6 +1372,15 @@
 "aUL" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/militia)
+"aUN" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 10
+	},
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "aVv" = (
 /obj/structure/steps/directional/north,
 /turf/open/misc/asteroid/moon,
@@ -1943,6 +1987,14 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/wood/tile/oak,
 /area/awaymission/avangarde17/inside/base_kitchen)
+"bgL" = (
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/obj/machinery/door/window/left/directional/south,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "bgU" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Этаж 2 - Квартира 2"
@@ -2341,6 +2393,12 @@
 	},
 /obj/machinery/computer/atmos_control/oxygen_tank,
 /turf/open/floor/iron,
+/area/awaymission/avangarde17/outside)
+"bnY" = (
+/obj/effect/turf_decal/road/dotted_line/continuous{
+	dir = 1
+	},
+/turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside)
 "boy" = (
 /obj/structure/mineral_door/wood,
@@ -2751,6 +2809,13 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"byh" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 8
+	},
+/obj/structure/closet/firecloset,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "byx" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/wood/cherry,
@@ -2790,6 +2855,11 @@
 /obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_4/six_apartment)
+"bAB" = (
+/obj/structure/hedge,
+/obj/effect/turf_decal/siding/wood/cherry,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "bAO" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
@@ -2815,7 +2885,7 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/components/unary/thermomachine/freezer/on,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "bBP" = (
 /obj/effect/decal/cleanable/blood/oil,
@@ -2903,12 +2973,11 @@
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/militia/garage)
 "bDw" = (
-/obj/effect/turf_decal/stripes/white/full,
-/obj/effect/turf_decal/siding{
-	dir = 9
+/obj/machinery/door/airlock/highsecurity{
+	name = "Вахтёрская"
 	},
-/turf/open/floor/asphalt/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "bDJ" = (
 /obj/effect/turf_decal/weather/snow,
 /turf/open/floor/plating,
@@ -3148,12 +3217,15 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "bJR" = (
 /obj/item/trash/semki,
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside/city)
+"bKb" = (
+/turf/open/floor/carpet/red,
+/area/awaymission/avangarde17/outside)
 "bKj" = (
 /obj/effect/turf_decal/tile/bar/half/contrasted{
 	dir = 8
@@ -3513,6 +3585,12 @@
 /obj/structure/flora/tree/pine/style_random,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
+"bRY" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/awaymission/avangarde17/outside)
 "bSu" = (
 /obj/structure/cable,
 /turf/open/floor/carpet,
@@ -3664,6 +3742,10 @@
 /obj/effect/landmark/start/ussp/town/workless,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_4/third_apartment)
+"bWF" = (
+/obj/structure/table/reinforced,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "bWG" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
@@ -4695,14 +4777,14 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/stripes/line,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "cEo" = (
 /obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "cEX" = (
 /obj/structure/cable,
@@ -4715,6 +4797,17 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside/roofs)
+"cGc" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 9
+	},
+/obj/machinery/space_heater,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
+"cGj" = (
+/obj/effect/turf_decal/road/dotted_line/continuous,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside)
 "cGB" = (
 /obj/structure/chair/office,
 /obj/structure/sign/flag/ussp/directional/north,
@@ -4938,6 +5031,10 @@
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside/mountains)
+"cNn" = (
+/obj/structure/shelves/metal/style2,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "cNA" = (
 /obj/structure/closet/crate/bin,
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -4998,7 +5095,7 @@
 	dir = 4
 	},
 /obj/machinery/meter,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "cPf" = (
 /obj/effect/turf_decal/siding/wood/cherry,
@@ -5070,6 +5167,12 @@
 /obj/structure/cable,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_3/eighth_apartment)
+"cRD" = (
+/obj/structure/table,
+/turf/open/floor/iron/dark/smooth_edge{
+	dir = 8
+	},
+/area/awaymission/avangarde17/outside)
 "cRI" = (
 /obj/machinery/shower/directional/south,
 /obj/structure/fluff/shower_drain,
@@ -5340,6 +5443,12 @@
 /obj/machinery/light_switch/directional/west,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/second_apartment)
+"cZa" = (
+/obj/machinery/door/airlock/highsecurity{
+	name = "Склад"
+	},
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "cZq" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/box/matches{
@@ -5444,6 +5553,18 @@
 	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/gov/hop)
+"dcw" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/obj/machinery/door/airlock/highsecurity{
+	name = "Вахтёрская"
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "dcE" = (
 /obj/structure/sign/flag/ussp/directional/west,
 /turf/open/floor/wood/oak,
@@ -5856,6 +5977,12 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating/reinforced,
 /area/awaymission/avangarde17/inside/base_garage)
+"dlN" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "dmh" = (
 /obj/structure/table/wood,
 /obj/structure/spider/stickyweb,
@@ -5919,9 +6046,18 @@
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "don" = (
-/obj/structure/flora/grass/brown/style_random,
-/turf/open/floor/asphalt/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/obj/effect/turf_decal/stripes/corner{
+	dir = 8
+	},
+/turf/closed/wall/mineral/iron,
+/area/awaymission/avangarde17/outside)
+"doB" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "doD" = (
 /obj/machinery/button/door/directional/west{
 	id = "warehouse_shutters";
@@ -5935,7 +6071,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "dpz" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -6440,6 +6576,16 @@
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/hangar/second_floor)
+"dyk" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/obj/structure/shelves/metal/style2,
+/obj/item/stack/sheet/glass/fifty,
+/obj/item/stack/rods/fifty,
+/obj/item/stack/sheet/mineral/plasma/thirty,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "dym" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/neck/large_scarf/blue,
@@ -6649,10 +6795,8 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside/mountains)
 "dBL" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/turf/open/floor/iron/dark,
+/obj/effect/turf_decal/siding/wood/cherry,
+/turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside)
 "dBM" = (
 /obj/effect/turf_decal/siding/thinplating/corner{
@@ -6713,10 +6857,9 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/city)
 "dEe" = (
-/obj/structure/closet/secure_closet/engineering_personal,
-/obj/structure/window/reinforced/spawner/directional/south,
-/obj/effect/turf_decal/bot/right,
-/turf/open/floor/iron,
+/obj/structure/tank_dispenser,
+/obj/effect/turf_decal/siding/wood/cherry,
+/turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/outside)
 "dEf" = (
 /obj/machinery/power/port_gen/pacman/pre_loaded{
@@ -6866,6 +7009,15 @@
 	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
+"dJb" = (
+/obj/structure/table/reinforced,
+/obj/structure/window/spawner/directional/east,
+/obj/item/kirbyplants/organic/plant8{
+	pixel_x = -4;
+	pixel_y = 10
+	},
+/turf/open/floor/wood/oak,
+/area/awaymission/avangarde17/outside)
 "dJd" = (
 /obj/effect/mapping_helpers/broken_floor,
 /obj/structure/spider/stickyweb,
@@ -7118,6 +7270,19 @@
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
+"dPX" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 4
+	},
+/obj/structure/shelves/metal/style2,
+/obj/item/stock_parts/power_store/cell/high,
+/obj/item/electronics/airlock,
+/obj/item/electronics/airlock,
+/obj/item/gps,
+/obj/item/gps,
+/obj/item/gps,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "dQv" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -7194,6 +7359,12 @@
 "dRB" = (
 /turf/open/floor/iron/white/small,
 /area/awaymission/avangarde17/inside/militia/investigator)
+"dRD" = (
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 1
+	},
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "dRO" = (
 /obj/structure/shipping_container/kosmologistika,
 /obj/effect/turf_decal/stripes/line{
@@ -7288,6 +7459,13 @@
 "dSJ" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_3)
+"dSV" = (
+/obj/effect/turf_decal/siding/thinplating/corner{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "dTj" = (
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 4
@@ -7336,6 +7514,11 @@
 	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
+"dUL" = (
+/obj/machinery/suit_storage_unit/engine,
+/obj/effect/turf_decal/siding/wood/cherry,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "dUS" = (
 /obj/effect/turf_decal/siding/wood/cherry,
 /turf/open/floor/wood/large/cherry,
@@ -7642,7 +7825,7 @@
 /obj/machinery/atmospherics/components/unary/thermomachine/freezer/on{
 	dir = 8
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "ebb" = (
 /obj/structure/closet/secure_closet/omon{
@@ -8362,12 +8545,9 @@
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/second_floor)
 "eyu" = (
-/obj/effect/turf_decal/stripes/white/full,
-/obj/effect/turf_decal/siding{
-	dir = 8
-	},
+/obj/effect/turf_decal/road/trim,
 /turf/open/floor/asphalt/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/area/awaymission/avangarde17/outside)
 "eyv" = (
 /obj/structure/table/wood,
 /obj/machinery/microwave{
@@ -8586,6 +8766,13 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/white/small,
 /area/awaymission/avangarde17/inside/base_hospital)
+"eES" = (
+/obj/structure/sibirskiy/lasarys{
+	pixel_x = 0;
+	pixel_y = 32
+	},
+/turf/open/floor/carpet/orange,
+/area/awaymission/avangarde17/outside)
 "eFi" = (
 /obj/effect/turf_decal/siding/wood/cherry/corner,
 /obj/machinery/light/small/directional/north,
@@ -8848,6 +9035,11 @@
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside/city)
+"eMP" = (
+/obj/machinery/suit_storage_unit/engine,
+/obj/effect/turf_decal/siding/wood/cherry/corner,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "eMV" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 5
@@ -9745,6 +9937,12 @@
 	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/militia/warden)
+"fpz" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 8
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "fpA" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -10385,6 +10583,17 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/base_barracs)
+"fGh" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/obj/structure/bookcase/random/fiction,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
+"fGx" = (
+/obj/structure/closet/crate/bin,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "fGA" = (
 /obj/machinery/power/smes/magical{
 	name = "коммунистический трансформатор";
@@ -10619,12 +10828,14 @@
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_4/seven_apartment/bathroom)
 "fMF" = (
-/obj/item/kirbyplants/organic/plant8{
-	pixel_x = 63;
-	pixel_y = 52
+/obj/structure/table/wood,
+/obj/item/reagent_containers/cup/glass/bottle/vodka{
+	pixel_x = 7;
+	pixel_y = 40
 	},
-/turf/open/floor/iron/white,
-/area/awaymission/avangarde17/outside/city)
+/obj/item/book/manual/wiki/engineering_construction,
+/turf/open/floor/carpet/orange,
+/area/awaymission/avangarde17/outside)
 "fML" = (
 /obj/structure/table/bronze,
 /obj/effect/turf_decal/siding/wood/oak{
@@ -10867,6 +11078,12 @@
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/outside/city)
+"fVo" = (
+/obj/machinery/door/airlock/bathroom{
+	name = "Уборная"
+	},
+/turf/open/floor/iron/showroomfloor,
+/area/awaymission/avangarde17/outside)
 "fVB" = (
 /obj/structure/table/wood,
 /obj/effect/turf_decal/siding/wood/cherry,
@@ -11070,6 +11287,10 @@
 /obj/machinery/microwave,
 /turf/open/floor/pod,
 /area/awaymission/avangarde17/inside/shop_2)
+"gfq" = (
+/obj/structure/reflector/single,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "gfz" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
@@ -11504,6 +11725,10 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/awaymission/avangarde17/outside/roofs)
+"grY" = (
+/obj/machinery/light/directional/east,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "grZ" = (
 /obj/item/trash/semki,
 /turf/open/floor/wood/cherry,
@@ -11522,7 +11747,8 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside/city)
 "gsk" = (
-/turf/open/floor/plating/reinforced,
+/obj/structure/hedge,
+/turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/outside)
 "gsn" = (
 /obj/effect/turf_decal/siding/wood/cherry/corner,
@@ -11711,9 +11937,6 @@
 /obj/machinery/atmospherics/components/binary/pump/on{
 	dir = 1;
 	name = "Mix to Filter"
-	},
-/obj/effect/turf_decal/stripes/corner{
-	dir = 8
 	},
 /turf/open/floor/iron/dark,
 /area/awaymission/avangarde17/outside)
@@ -11924,6 +12147,10 @@
 /obj/structure/cable,
 /turf/open/floor/wood,
 /area/awaymission/avangarde17/inside/militia/head)
+"gEC" = (
+/obj/effect/turf_decal/road/dotted_line,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside)
 "gEJ" = (
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/gov/second_floor)
@@ -12060,6 +12287,13 @@
 /obj/structure/cable,
 /turf/open/floor/iron/diagonal,
 /area/awaymission/avangarde17/inside/house_4/fourth_apartment/bathroom)
+"gLc" = (
+/obj/machinery/suit_storage_unit/atmos,
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "gLo" = (
 /obj/structure/table/wood,
 /obj/item/radio/entertainment/speakers/physical{
@@ -12186,6 +12420,13 @@
 /obj/structure/lamppost,
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"gON" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 9
+	},
+/obj/machinery/portable_atmospherics/canister/plasma,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "gPa" = (
 /obj/structure/sign/clock/directional/south,
 /turf/open/floor/wood/tile/cherry,
@@ -12530,9 +12771,12 @@
 /area/awaymission/avangarde17/outside)
 "heL" = (
 /obj/effect/turf_decal/siding/wood/cherry/corner{
-	dir = 4
+	dir = 8
 	},
-/turf/open/floor/wood/oak,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 5
+	},
+/turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside)
 "hfa" = (
 /obj/effect/turf_decal/siding/wood/cherry,
@@ -12960,8 +13204,8 @@
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_2/first_apartment)
 "hsH" = (
-/obj/machinery/vending/tool,
-/turf/open/floor/wood/oak,
+/obj/machinery/rnd/production/protolathe/department/engineering,
+/turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/outside)
 "hsN" = (
 /obj/structure/railing/corner{
@@ -13353,6 +13597,7 @@
 /obj/effect/turf_decal/siding/wood/cherry/corner{
 	dir = 8
 	},
+/obj/machinery/door/window/right/directional/east,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/gov)
 "hBh" = (
@@ -13547,6 +13792,10 @@
 "hGT" = (
 /obj/structure/table/wood,
 /obj/item/megaphone,
+/obj/structure/sibirskiy{
+	pixel_y = 32
+	},
+/obj/item/clothing/glasses/meson,
 /turf/open/floor/carpet/orange,
 /area/awaymission/avangarde17/outside)
 "hGY" = (
@@ -13693,6 +13942,12 @@
 /obj/effect/turf_decal/siding/wood/cherry,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_4/third_apartment)
+"hLR" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/light/directional/north,
+/obj/structure/reagent_dispensers/fueltank/large,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "hLS" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -14009,7 +14264,9 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_1/second_apartment)
 "hRO" = (
-/obj/effect/turf_decal/road/trim/corner,
+/obj/effect/turf_decal/road/double_solid{
+	dir = 4
+	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "hRU" = (
@@ -14253,6 +14510,10 @@
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
+"hXU" = (
+/obj/machinery/light/directional/west,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "hXZ" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/right/directional/west{
@@ -14654,7 +14915,7 @@
 /obj/machinery/atmospherics/pipe/multiz/cyan/visible{
 	dir = 1
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "ilS" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
@@ -14678,6 +14939,14 @@
 	},
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar)
+"ini" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_x = -5;
+	pixel_y = 10
+	},
+/turf/open/floor/carpet/orange,
+/area/awaymission/avangarde17/outside)
 "ino" = (
 /turf/open/floor/engine/n2,
 /area/awaymission/avangarde17/outside)
@@ -14993,11 +15262,9 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_1/first_apartment)
 "izi" = (
-/obj/effect/turf_decal/road/trim/corner{
-	dir = 4
-	},
-/turf/open/floor/asphalt/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/obj/structure/chair/comfy/red,
+/turf/open/floor/carpet/red,
+/area/awaymission/avangarde17/outside)
 "izk" = (
 /obj/effect/baseturf_helper{
 	baseturf = /turf/open/openspace
@@ -15132,8 +15399,8 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_2/third_apartment)
 "iEr" = (
-/obj/effect/turf_decal/siding{
-	dir = 9
+/obj/effect/turf_decal/road{
+	dir = 4
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
@@ -15689,6 +15956,14 @@
 /obj/structure/table/wood,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside)
+"iRW" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 1
+	},
+/obj/structure/cable,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "iSy" = (
 /obj/structure/fence/corner{
 	dir = 6
@@ -16338,6 +16613,13 @@
 /obj/structure/marker_beacon/burgundy,
 /turf/open/floor/plating/reinforced,
 /area/awaymission/avangarde17/outside)
+"jlj" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/obj/structure/table/wood,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "jlF" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
@@ -16385,6 +16667,10 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/base)
+"jnh" = (
+/obj/structure/closet/firecloset,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "jnq" = (
 /obj/machinery/light_switch/directional/west,
 /obj/structure/cable,
@@ -16699,6 +16985,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
+"juw" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/obj/structure/hedge,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "jux" = (
 /obj/structure/cable,
 /obj/machinery/power/terminal{
@@ -17350,7 +17643,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "jHT" = (
 /obj/structure/chair/wood{
@@ -17534,6 +17827,11 @@
 /obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/old_hangar/first_floor)
+"jMY" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/structure/hedge,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "jOa" = (
 /obj/effect/turf_decal/siding/wood/cherry,
 /obj/effect/turf_decal/siding/wood/cherry/corner{
@@ -17857,6 +18155,16 @@
 /obj/structure/flora/rock/pile/icy/style_random,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
+"jXz" = (
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/obj/machinery/light/directional/west,
+/obj/item/flashlight/lamp/green,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "jXB" = (
 /obj/machinery/atmospherics/pipe/smart/simple/green/visible{
 	dir = 10
@@ -17895,6 +18203,7 @@
 	dir = 4
 	},
 /obj/structure/sign/warning/radiation/directional/north,
+/obj/structure/cable/layer1,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/awaymission/avangarde17/outside)
 "jYC" = (
@@ -18087,6 +18396,15 @@
 /obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside/city)
+"kcK" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "kdn" = (
 /obj/structure/chair/wood{
 	dir = 1
@@ -18215,6 +18533,21 @@
 /obj/structure/fence/corner,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/base)
+"khI" = (
+/obj/machinery/door/airlock/highsecurity{
+	name = "Комната экипировки"
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
+"khR" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_x = 7;
+	pixel_y = 8
+	},
+/obj/item/food/grown/cucumber,
+/turf/open/floor/carpet/orange,
+/area/awaymission/avangarde17/outside)
 "khT" = (
 /obj/structure/stairs/east{
 	color = "gray"
@@ -18571,7 +18904,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "kry" = (
 /obj/structure/hedge,
@@ -18653,7 +18986,7 @@
 	dir = 6
 	},
 /obj/effect/turf_decal/stripes/corner,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "kuE" = (
 /turf/open/floor/wood/tile/oak,
@@ -19242,10 +19575,8 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/base)
 "kKi" = (
-/obj/effect/turf_decal/siding/wood/cherry{
-	dir = 1
-	},
-/turf/open/floor/wood/oak,
+/obj/machinery/rnd/production/circuit_imprinter,
+/turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/outside)
 "kKm" = (
 /obj/machinery/washing_machine,
@@ -19399,7 +19730,7 @@
 /area/awaymission/avangarde17/outside/base)
 "kPm" = (
 /obj/structure/table/wood,
-/obj/structure/window/spawner/directional/east,
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/gov)
 "kPp" = (
@@ -19481,6 +19812,12 @@
 	},
 /turf/open/floor/iron/kitchen/small,
 /area/awaymission/avangarde17/inside/bar)
+"kQp" = (
+/obj/machinery/door/airlock/bathroom{
+	name = "Туалет"
+	},
+/turf/open/floor/iron/showroomfloor,
+/area/awaymission/avangarde17/outside)
 "kQI" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Регистратура"
@@ -19489,11 +19826,11 @@
 /turf/open/floor/iron/white,
 /area/awaymission/avangarde17/outside/city)
 "kQY" = (
-/obj/effect/turf_decal/siding{
-	dir = 8
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
 	},
-/turf/open/floor/asphalt/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "kRo" = (
 /obj/structure/flora/lunar_plant/style_1,
 /turf/open/floor/grass/fairy,
@@ -19766,7 +20103,7 @@
 /area/awaymission/avangarde17/outside/city)
 "lar" = (
 /obj/structure/fence/door,
-/obj/effect/turf_decal/siding/thinplating{
+/obj/effect/turf_decal/siding/thinplating/corner{
 	dir = 4
 	},
 /turf/open/floor/stone,
@@ -20315,8 +20652,10 @@
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/shop_2)
 "lpL" = (
-/obj/machinery/atmospherics/components/unary/portables_connector/visible,
-/turf/open/floor/wood/large/cherry,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "lpM" = (
 /obj/effect/baseturf_helper{
@@ -20344,6 +20683,12 @@
 	},
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar/second_floor)
+"lqj" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "lqk" = (
 /obj/structure/closet/secure_closet/freezer/kitchen/all_access,
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
@@ -20856,7 +21201,7 @@
 /obj/machinery/atmospherics/components/trinary/mixer{
 	color = "#FFFF00"
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "lEY" = (
 /obj/effect/turf_decal/siding/wood/cherry,
@@ -21033,6 +21378,12 @@
 /obj/effect/landmark/start/ussp/town/workless,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_1/fourth_apartment)
+"lKS" = (
+/obj/effect/turf_decal/road/trim{
+	dir = 10
+	},
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside)
 "lKW" = (
 /obj/structure/table,
 /obj/item/paper_bin{
@@ -21159,6 +21510,14 @@
 "lOo" = (
 /turf/closed/wall/ice,
 /area/awaymission/avangarde17/inside/mine)
+"lOq" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "lOE" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Этаж 1 - Квартира 4"
@@ -21365,6 +21724,12 @@
 /obj/effect/landmark/start/ussp/town/workless,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_2/fifth_apartment)
+"lVa" = (
+/obj/structure/shelves/metal/style2,
+/turf/open/floor/iron/dark/smooth_edge{
+	dir = 8
+	},
+/area/awaymission/avangarde17/outside)
 "lVz" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
 /obj/structure/spider/stickyweb,
@@ -21464,6 +21829,9 @@
 /obj/machinery/space_heater,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_3)
+"lYD" = (
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "lZi" = (
 /obj/structure/mineral_door/wood,
 /obj/structure/cable,
@@ -21493,6 +21861,12 @@
 /obj/structure/cable,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_1/first_apartment/bathroom)
+"mal" = (
+/obj/structure/table,
+/turf/open/floor/iron/dark/smooth_edge{
+	dir = 4
+	},
+/area/awaymission/avangarde17/outside)
 "mam" = (
 /obj/machinery/photocopier/prebuilt,
 /turf/open/floor/carpet/green,
@@ -21800,6 +22174,7 @@
 	name = "Radiation Shutters Control";
 	req_access = list("engineering")
 	},
+/obj/structure/cable/layer1,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/awaymission/avangarde17/outside)
 "miM" = (
@@ -22050,7 +22425,7 @@
 /area/awaymission/avangarde17/outside/city)
 "mrA" = (
 /obj/effect/turf_decal/stripes/corner,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "mrC" = (
 /obj/structure/closet/crate/bin,
@@ -22133,6 +22508,10 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"mtZ" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "mud" = (
 /obj/machinery/door/airlock/medical{
 	name = "Кабинет 25"
@@ -22282,11 +22661,11 @@
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "mys" = (
-/obj/effect/turf_decal/road/trim/corner{
-	dir = 8
+/obj/effect/turf_decal/road/dotted_line/continuous{
+	dir = 10
 	},
 /turf/open/floor/asphalt/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/area/awaymission/avangarde17/outside)
 "myF" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -22379,6 +22758,13 @@
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside/city)
+"mAJ" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "mAM" = (
 /obj/structure/table/reinforced,
 /obj/structure/window/spawner/directional/north,
@@ -22425,6 +22811,12 @@
 	},
 /turf/open/floor/pod,
 /area/awaymission/avangarde17/inside/shop_2)
+"mCW" = (
+/obj/machinery/door/airlock/highsecurity{
+	name = "Выход на крышу"
+	},
+/turf/open/floor/iron/dark,
+/area/awaymission/avangarde17/outside)
 "mCY" = (
 /obj/structure/chair/pew/left{
 	dir = 1
@@ -22434,6 +22826,11 @@
 	},
 /turf/open/floor/wood/oak,
 /area/awaymission/avangarde17/inside/base)
+"mDD" = (
+/obj/machinery/computer/monitor,
+/obj/structure/cable/layer1,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "mDN" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 1
@@ -23023,10 +23420,21 @@
 /obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/gov)
+"mRI" = (
+/obj/effect/turf_decal/road/double_solid/continuous{
+	dir = 8
+	},
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside/city)
 "mRJ" = (
 /obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_4/eighth_apartment)
+"mSa" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/item/banner/ussp,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "mSc" = (
 /obj/structure/table/wood,
 /obj/item/paper_bin/carbon{
@@ -23168,6 +23576,12 @@
 /obj/structure/shipping_container/kosmologistika/crates,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/base)
+"mVP" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/awaymission/avangarde17/outside)
 "mVS" = (
 /obj/effect/turf_decal/trimline/green/filled/corner,
 /turf/open/floor/iron/white/small,
@@ -23410,6 +23824,9 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_3)
+"ndp" = (
+/turf/open/floor/iron/showroomfloor,
+/area/awaymission/avangarde17/outside)
 "nds" = (
 /obj/effect/turf_decal/tile/bar/opposingcorners,
 /obj/effect/turf_decal/tile/brown/opposingcorners{
@@ -24060,8 +24477,10 @@
 /area/awaymission/avangarde17/outside/city)
 "nvk" = (
 /obj/structure/closet/toolcloset,
-/obj/effect/turf_decal/bot/left,
-/turf/open/floor/iron,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/outside)
 "nvu" = (
 /obj/structure/table/wood,
@@ -24209,6 +24628,16 @@
 /obj/structure/flora/rock/pile/icy/style_random,
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside/city)
+"nBT" = (
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/obj/machinery/light/directional/south,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "nCd" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
@@ -24555,6 +24984,7 @@
 "nLY" = (
 /obj/structure/table/wood,
 /obj/effect/turf_decal/siding/wood/cherry/corner,
+/obj/machinery/door/window/left/directional/west,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/gov)
 "nLZ" = (
@@ -24883,7 +25313,7 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "nWG" = (
 /obj/machinery/pdapainter/engineering,
@@ -24988,6 +25418,15 @@
 /obj/machinery/light/small/directional/west,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/gov/engi)
+"nZr" = (
+/obj/structure/table/reinforced,
+/obj/structure/window/spawner/directional/east,
+/obj/item/kirbyplants/organic/plant8{
+	pixel_x = -3;
+	pixel_y = 18
+	},
+/turf/open/floor/iron/white,
+/area/awaymission/avangarde17/outside/city)
 "nZR" = (
 /obj/effect/turf_decal/trimline/green/filled/line{
 	dir = 1
@@ -25231,10 +25670,10 @@
 /turf/closed/wall,
 /area/awaymission/avangarde17/inside/base_cargo)
 "ohT" = (
-/obj/effect/turf_decal/siding/wood/oak{
+/obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
 	},
-/turf/open/floor/wood/oak,
+/turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside)
 "oif" = (
 /obj/effect/turf_decal/siding/wood/cherry/corner,
@@ -25765,6 +26204,12 @@
 /obj/machinery/power/apc/auto_name/directional/north,
 /turf/open/floor/iron/showroomfloor,
 /area/awaymission/avangarde17/inside/gov/toilet)
+"owv" = (
+/obj/effect/turf_decal/road/dotted_line{
+	dir = 5
+	},
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside)
 "owy" = (
 /obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
@@ -25897,6 +26342,11 @@
 /obj/structure/hedge,
 /turf/open/floor/wood/oak,
 /area/awaymission/avangarde17/inside/base)
+"oBp" = (
+/obj/effect/turf_decal/siding/wood/cherry/corner,
+/obj/machinery/light/directional/west,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "oBH" = (
 /obj/machinery/light/small/directional/west,
 /obj/machinery/light_switch/directional/west,
@@ -25907,6 +26357,11 @@
 /obj/structure/cable,
 /turf/open/floor/wood/tile/oak,
 /area/awaymission/avangarde17/inside/base_smokeroom)
+"oBW" = (
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/wood/cherry,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "oBZ" = (
 /obj/effect/turf_decal/siding/thinplating/corner{
 	dir = 8
@@ -26100,7 +26555,7 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
 /obj/machinery/meter,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "oIP" = (
 /obj/machinery/door/airlock/hatch{
@@ -26186,9 +26641,11 @@
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/house_1/third_apartment/bathroom)
 "oLU" = (
-/obj/effect/turf_decal/stripes/white/full,
+/obj/effect/turf_decal/road/trim/corner{
+	dir = 5
+	},
 /turf/open/floor/asphalt/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/area/awaymission/avangarde17/outside)
 "oMi" = (
 /obj/structure/table/reinforced,
 /obj/structure/window/spawner/directional/east,
@@ -26427,6 +26884,17 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"oSA" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/structure/shelves/metal/style2,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/electrical,
+/obj/item/storage/toolbox/emergency,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "oSD" = (
 /obj/effect/turf_decal/siding/wood/cherry,
 /obj/structure/sibirskiy/lasarys{
@@ -26591,6 +27059,7 @@
 "oZA" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
 /obj/machinery/meter,
+/obj/structure/cable/layer1,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/awaymission/avangarde17/outside)
 "oZF" = (
@@ -26914,7 +27383,7 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "phe" = (
 /turf/closed/wall/mineral/iron,
@@ -26930,15 +27399,11 @@
 /turf/open/floor/iron/showroomfloor,
 /area/awaymission/avangarde17/outside/city)
 "phn" = (
-/obj/structure/cable,
-/obj/effect/turf_decal/siding/thinplating{
+/obj/effect/turf_decal/road/trim{
 	dir = 1
 	},
-/obj/structure/walk_sign{
-	density = 0
-	},
-/turf/open/floor/stone,
-/area/awaymission/avangarde17/outside/city)
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside)
 "phD" = (
 /obj/structure/flora/ash/seraka,
 /turf/open/misc/asteroid/moon,
@@ -27846,6 +28311,12 @@
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/gov/library)
+"pHc" = (
+/obj/machinery/modular_computer/preset/id{
+	dir = 1
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "pHd" = (
 /obj/structure/hedge,
 /obj/structure/sign/flag/ussp/directional/north,
@@ -27989,9 +28460,15 @@
 /obj/structure/flora/bush/lavendergrass/style_random,
 /turf/open/floor/grass/fairy,
 /area/awaymission/avangarde17/inside)
+"pLL" = (
+/obj/effect/turf_decal/road/trim{
+	dir = 5
+	},
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside)
 "pLP" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
-/turf/open/floor/catwalk_floor/iron_dark,
+/obj/effect/turf_decal/stripes/line,
+/turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/outside)
 "pLW" = (
 /obj/effect/turf_decal/tile/bar/half/contrasted{
@@ -28268,8 +28745,10 @@
 /area/awaymission/avangarde17/inside/hangar/second_floor)
 "pRb" = (
 /obj/structure/closet/secure_closet/engineering_personal,
-/obj/effect/turf_decal/bot/right,
-/turf/open/floor/iron,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 8
+	},
+/turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/outside)
 "pRv" = (
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -28342,6 +28821,10 @@
 	},
 /turf/open/floor/carpet/green,
 /area/awaymission/avangarde17/inside/gov/library)
+"pSH" = (
+/obj/machinery/vending/tool,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "pSY" = (
 /obj/structure/railing/platform/reinforced{
 	dir = 8
@@ -28736,7 +29219,7 @@
 	dir = 9
 	},
 /obj/effect/turf_decal/stripes/line,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "qda" = (
 /obj/structure/mineral_door/wood,
@@ -28776,6 +29259,13 @@
 	},
 /turf/open/floor/iron/white,
 /area/awaymission/avangarde17/outside/city)
+"qdO" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 5
+	},
+/obj/structure/table/wood,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "qdT" = (
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/machinery/door/window/brigdoor/right/directional/east,
@@ -29355,12 +29845,11 @@
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar)
 "qsu" = (
-/obj/effect/turf_decal/stripes/white/full,
-/obj/effect/turf_decal/siding{
-	dir = 1
+/obj/machinery/power/emitter{
+	dir = 8
 	},
-/turf/open/floor/asphalt/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "qsv" = (
 /obj/structure/table/reinforced,
 /obj/structure/window/spawner/directional/south,
@@ -29571,6 +30060,10 @@
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside/city)
+"qAe" = (
+/obj/structure/chair/stool,
+/turf/open/floor/carpet/orange,
+/area/awaymission/avangarde17/outside)
 "qAk" = (
 /obj/structure/platform/wood{
 	color = "#A1662F"
@@ -29748,6 +30241,13 @@
 /obj/structure/cable,
 /turf/open/floor/carpet/green,
 /area/awaymission/avangarde17/inside/house_1/second_apartment)
+"qGr" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "qGs" = (
 /obj/effect/turf_decal/tile/brown/half/contrasted,
 /obj/effect/turf_decal/tile/brown/half/contrasted{
@@ -29967,6 +30467,12 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/base_garage)
+"qMQ" = (
+/obj/machinery/door/airlock/highsecurity{
+	name = "Реактор"
+	},
+/turf/open/floor/iron/dark,
+/area/awaymission/avangarde17/outside)
 "qMW" = (
 /obj/structure/filingcabinet/security{
 	pixel_x = -10;
@@ -30370,7 +30876,7 @@
 /obj/machinery/atmospherics/pipe/multiz/scrubbers/visible{
 	dir = 1
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "qYw" = (
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
@@ -30378,6 +30884,12 @@
 /obj/machinery/door/airlock/freezer,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/base_kitchen)
+"qYA" = (
+/obj/structure/chair/stool{
+	dir = 8
+	},
+/turf/open/floor/carpet/orange,
+/area/awaymission/avangarde17/outside)
 "qYJ" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
@@ -30444,6 +30956,13 @@
 	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/city)
+"raL" = (
+/obj/machinery/suit_storage_unit/atmos,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "raN" = (
 /turf/open/openspace,
 /area/awaymission/avangarde17/outside/mountains)
@@ -30501,6 +31020,11 @@
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside/city)
+"rcG" = (
+/obj/machinery/computer/monitor,
+/obj/structure/cable,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "rda" = (
 /obj/structure/dresser,
 /obj/machinery/power/apc/auto_name/directional/south,
@@ -30750,8 +31274,7 @@
 /turf/open/floor/pod,
 /area/awaymission/avangarde17/inside/shop_2)
 "rlv" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/visible,
-/turf/open/floor/iron/dark/diagonal,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
 "rmz" = (
 /obj/effect/turf_decal/siding/dark/corner{
@@ -30908,6 +31431,10 @@
 "rqu" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/gov)
+"rqE" = (
+/obj/effect/turf_decal/stripes/corner,
+/turf/closed/wall/mineral/iron,
+/area/awaymission/avangarde17/outside)
 "rrg" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
@@ -30931,6 +31458,16 @@
 "rrz" = (
 /obj/structure/table/reinforced,
 /obj/structure/window/spawner/directional/north,
+/obj/item/storage/box/matches{
+	pixel_x = -8;
+	pixel_y = -1
+	},
+/obj/item/storage/fancy/cigarettes/cigpack_robust{
+	pixel_x = 11;
+	pixel_y = 2;
+	name = "Прима";
+	desc = "Как в детстве."
+	},
 /turf/open/floor/iron/dark/smooth_edge{
 	dir = 8
 	},
@@ -31009,6 +31546,12 @@
 "rup" = (
 /turf/open/floor/iron/showroomfloor,
 /area/awaymission/avangarde17/inside/militia/bathroom)
+"ruz" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "rva" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector{
 	dir = 8
@@ -31047,6 +31590,14 @@
 	},
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside/city)
+"rwm" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/machinery/power/port_gen/pacman,
+/obj/item/stack/sheet/mineral/plasma/thirty,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "rwB" = (
 /obj/structure/table/reinforced,
 /obj/structure/window/spawner/directional/west,
@@ -31085,6 +31636,12 @@
 /obj/structure/cable,
 /turf/open/floor/plating/reinforced,
 /area/awaymission/avangarde17/outside/base)
+"rxz" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 5
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "rxT" = (
 /obj/structure/railing{
 	dir = 4;
@@ -31249,6 +31806,14 @@
 /obj/effect/mapping_helpers/airlock/access/all/security/armory,
 /turf/open/floor/iron/smooth,
 /area/awaymission/avangarde17/inside/militia/armory)
+"rBg" = (
+/obj/structure/closet/secure_closet/engineering_personal,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 8
+	},
+/obj/machinery/light/directional/east,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "rBh" = (
 /obj/structure/light_fake/small/directional,
 /turf/open/misc/asteroid/moon,
@@ -31387,15 +31952,19 @@
 /obj/structure/table,
 /turf/open/floor/iron/white/small,
 /area/awaymission/avangarde17/inside/militia/investigator)
+"rDw" = (
+/obj/effect/turf_decal/road/trim/corner{
+	dir = 10
+	},
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside)
 "rDy" = (
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_1/second_apartment)
 "rDH" = (
-/obj/effect/turf_decal/siding{
-	dir = 1
-	},
-/turf/open/floor/asphalt/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/obj/structure/cable,
+/turf/open/floor/iron/dark,
+/area/awaymission/avangarde17/outside)
 "rDO" = (
 /obj/structure/railing/platform{
 	dir = 10
@@ -31615,9 +32184,13 @@
 /turf/open/floor/iron/white/smooth_large,
 /area/awaymission/avangarde17/inside/base_research)
 "rHb" = (
-/obj/structure/closet/secure_closet/engineering_electrical,
-/obj/effect/turf_decal/bot/left,
-/turf/open/floor/iron,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside)
 "rHe" = (
 /obj/structure/table/reinforced,
@@ -31690,6 +32263,10 @@
 /obj/machinery/light/small/burned/directional/north,
 /turf/open/floor/wood/tile/oak,
 /area/awaymission/avangarde17/inside/base_smokeroom)
+"rJl" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "rJA" = (
 /obj/effect/mapping_helpers/broken_floor,
 /obj/effect/mapping_helpers/broken_floor,
@@ -32001,6 +32578,12 @@
 /obj/structure/sign/poster/contraband/random/directional/north,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_3/seven_apartment/bedroom)
+"rSN" = (
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "rSR" = (
 /obj/effect/turf_decal/siding/wood/cherry,
 /obj/structure/sign/poster/contraband/random/directional/north,
@@ -32376,12 +32959,7 @@
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_3/third_apartment)
 "sdm" = (
-/obj/effect/turf_decal/trimline/yellow/filled/line{
-	dir = 4
-	},
-/turf/open/floor/iron/dark/smooth_edge{
-	dir = 8
-	},
+/turf/open/floor/carpet,
 /area/awaymission/avangarde17/outside)
 "sdv" = (
 /obj/effect/turf_decal/siding/wood/cherry,
@@ -32391,12 +32969,12 @@
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside)
 "sdO" = (
-/obj/effect/turf_decal/trimline/yellow/filled/line{
-	dir = 8
+/obj/structure/table/wood,
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_x = 7;
+	pixel_y = 4
 	},
-/turf/open/floor/iron/dark/smooth_edge{
-	dir = 4
-	},
+/turf/open/floor/carpet/orange,
 /area/awaymission/avangarde17/outside)
 "sdR" = (
 /obj/structure/bookcase/random,
@@ -32560,6 +33138,11 @@
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/house_4/six_apartment/bedroom)
+"shI" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/structure/closet/crate/bin,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "shK" = (
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside/city)
@@ -33128,7 +33711,7 @@
 /obj/machinery/atmospherics/pipe/multiz/scrubbers/visible{
 	dir = 1
 	},
-/turf/open/floor/iron/dark/diagonal,
+/turf/open/floor/iron/dark,
 /area/awaymission/avangarde17/outside)
 "sDo" = (
 /obj/structure/flora/grass/both,
@@ -33498,6 +34081,25 @@
 /obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_4/six_apartment)
+"sPm" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/structure/shelves/metal/style2,
+/obj/item/clothing/gloves/color/yellow,
+/obj/item/clothing/gloves/color/yellow,
+/obj/item/clothing/gloves/color/yellow,
+/obj/item/clothing/gloves/color/yellow,
+/obj/item/clothing/head/collectable/welding,
+/obj/item/clothing/head/collectable/welding,
+/obj/item/clothing/head/collectable/welding,
+/obj/item/clothing/head/collectable/welding,
+/obj/item/clothing/glasses/welding,
+/obj/item/clothing/glasses/welding,
+/obj/item/clothing/glasses/welding,
+/obj/item/clothing/glasses/welding,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "sPq" = (
 /obj/structure/chair/stool{
 	dir = 4
@@ -33790,11 +34392,18 @@
 	},
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_1/first_apartment)
+"sWD" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/structure/shelves/metal/style2,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "sWF" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "sWU" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
@@ -33924,11 +34533,27 @@
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/base_mining)
 "tdJ" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/cable,
-/obj/effect/turf_decal/siding/thinplating,
-/turf/open/floor/stone,
-/area/awaymission/avangarde17/outside/city)
+/obj/structure/closet/crate{
+	name = "solar pack crate"
+	},
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/item/solar_assembly,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "tdY" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -34010,6 +34635,16 @@
 /obj/effect/turf_decal/tile/brown/fourcorners,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/house_4)
+"tix" = (
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "tiJ" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
@@ -34481,6 +35116,10 @@
 "ttS" = (
 /obj/structure/table/reinforced,
 /obj/structure/window/spawner/directional/north,
+/obj/item/kirbyplants/organic/plant6{
+	pixel_x = -5;
+	pixel_y = 12
+	},
 /turf/open/floor/iron/dark/smooth_edge{
 	dir = 4
 	},
@@ -34507,6 +35146,15 @@
 /obj/structure/chair/sofa/bench/left,
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"tuL" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/obj/machinery/light/directional/south,
+/obj/structure/fireaxecabinet/directional/south,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "tvr" = (
 /obj/structure/railing/platform/corner{
 	dir = 4
@@ -34580,6 +35228,12 @@
 /obj/machinery/light/small/directional/west,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/bar)
+"tvS" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "tvY" = (
 /obj/structure/shelves,
 /obj/item/plate/small{
@@ -34966,11 +35620,11 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "tEL" = (
-/obj/effect/turf_decal/road/trim/corner{
-	dir = 1
+/obj/effect/turf_decal/road/double_solid/continuous{
+	dir = 4
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
@@ -35738,6 +36392,11 @@
 /obj/effect/landmark/start/ussp/town/workless,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/house_4/seven_apartment)
+"ucG" = (
+/turf/open/floor/iron/dark/smooth_edge{
+	dir = 4
+	},
+/area/awaymission/avangarde17/outside)
 "ucX" = (
 /obj/structure/chair/sofa/left/brown{
 	dir = 4
@@ -35851,7 +36510,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/visible,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "uhq" = (
 /obj/structure/table,
@@ -36418,7 +37077,7 @@
 /area/awaymission/avangarde17/outside/ruin/second)
 "uyn" = (
 /obj/structure/cable/layer1,
-/turf/open/floor/iron/dark/diagonal,
+/turf/open/floor/iron/dark,
 /area/awaymission/avangarde17/outside)
 "uyC" = (
 /obj/effect/turf_decal/siding/wood/cherry,
@@ -36946,6 +37605,12 @@
 /obj/machinery/light/small/burned/directional/west,
 /turf/open/floor/iron/white/small,
 /area/awaymission/avangarde17/inside/base_hospital)
+"uLX" = (
+/obj/machinery/door/airlock/highsecurity{
+	name = "Атмосферный отдел"
+	},
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "uLZ" = (
 /obj/machinery/oven/range,
 /obj/machinery/light/small/directional/east,
@@ -37249,6 +37914,15 @@
 /obj/effect/decal/cleanable/vomit,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin/second)
+"uRt" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 8
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "uRx" = (
 /obj/effect/turf_decal/siding/wood/cherry/corner{
 	dir = 4
@@ -37430,7 +38104,10 @@
 /area/awaymission/avangarde17/inside/old_hangar/first_floor)
 "uVy" = (
 /obj/structure/table/wood,
-/obj/structure/window/spawner/directional/west,
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/item/flashlight/lamp/green{
+	pixel_y = 8
+	},
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/gov)
 "uVK" = (
@@ -37534,6 +38211,11 @@
 /obj/structure/sign/calendar/ussp/directional/north,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/outside/city)
+"uYL" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/structure/chair/sofa/left/brown,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "uZf" = (
 /obj/machinery/shower/directional/south,
 /obj/structure/fluff/shower_drain,
@@ -37739,6 +38421,10 @@
 	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_1/first_apartment/bedroom)
+"vdM" = (
+/obj/structure/hedge,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "veb" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
@@ -37851,6 +38537,10 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"vhG" = (
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "vhP" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
@@ -37943,6 +38633,10 @@
 /obj/structure/closet/crate/large,
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar)
+"vmr" = (
+/obj/structure/closet/radiation,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "vmE" = (
 /obj/structure/table/bronze,
 /obj/item/flashlight/lamp{
@@ -38062,6 +38756,12 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/inside/base_barracs)
+"vqF" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/structure/chair/sofa/right/brown,
+/obj/machinery/light/directional/north,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "vqS" = (
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin/second)
@@ -38144,6 +38844,10 @@
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/hangar/cabinet)
+"vuk" = (
+/obj/machinery/modular_computer/preset/engineering,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "vur" = (
 /obj/structure/table/wood,
 /obj/structure/showcase/machinery/tv/broken{
@@ -38485,6 +39189,10 @@
 	dir = 4
 	},
 /turf/open/floor/engine,
+/area/awaymission/avangarde17/outside)
+"vFQ" = (
+/obj/structure/reflector/double,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
 "vFW" = (
 /obj/machinery/door/airlock/hatch{
@@ -38907,7 +39615,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "vTF" = (
 /obj/effect/turf_decal/siding/thinplating{
@@ -38972,7 +39680,7 @@
 	dir = 1;
 	name = "Unfiltered to Filter"
 	},
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "vVy" = (
 /obj/effect/turf_decal/siding/wood/cherry/corner{
@@ -39601,10 +40309,11 @@
 /turf/open/floor/wood/tile/oak,
 /area/awaymission/avangarde17/inside/base_barracs)
 "wkA" = (
-/obj/effect/turf_decal/siding/wood/oak{
-	dir = 5
+/obj/machinery/pipedispenser/disposal,
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 1
 	},
-/turf/open/floor/wood/oak,
+/turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/outside)
 "wkD" = (
 /obj/structure/shelves/style2,
@@ -40207,6 +40916,14 @@
 	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/bar)
+"wCd" = (
+/obj/structure/railing/corner{
+	dir = 4;
+	pixel_x = 0;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark,
+/area/awaymission/avangarde17/outside)
 "wCg" = (
 /obj/structure/flora/grass/both/style_random,
 /obj/structure/lep,
@@ -40822,6 +41539,10 @@
 /obj/structure/sign/warning/no_smoking/directional/north,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/base_hangar)
+"wMW" = (
+/obj/structure/reflector/box,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "wMY" = (
 /obj/structure/railing/corner/end/flip{
 	dir = 4;
@@ -41096,6 +41817,16 @@
 	},
 /turf/open/floor/iron/dark,
 /area/awaymission/avangarde17/outside)
+"wUZ" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/obj/structure/table/wood,
+/obj/item/storage/belt/utility,
+/obj/item/storage/belt/utility,
+/obj/item/storage/belt/utility,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "wVc" = (
 /obj/structure/railing/platform,
 /obj/structure/table/reinforced,
@@ -41210,13 +41941,6 @@
 /obj/structure/cable,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/house_1/fourth_apartment)
-"wWB" = (
-/obj/structure/railing/platform,
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 4
-	},
-/turf/open/floor/stone,
-/area/awaymission/avangarde17/outside/city)
 "wWJ" = (
 /obj/structure/bed{
 	dir = 8
@@ -41526,6 +42250,19 @@
 	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/outside/city)
+"xfj" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/obj/machinery/power/port_gen/pacman,
+/obj/item/stack/sheet/mineral/plasma/thirty,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
+"xfq" = (
+/obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "xfI" = (
 /obj/structure/closet/secure_closet/freezer/empty,
 /obj/item/reagent_containers/condiment/enzyme,
@@ -41597,7 +42334,7 @@
 /area/awaymission/avangarde17/inside/gov/radio)
 "xhc" = (
 /obj/machinery/vending/engivend,
-/turf/open/floor/wood/oak,
+/turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/outside)
 "xhl" = (
 /obj/machinery/light/small/burned/directional/north,
@@ -42150,6 +42887,11 @@
 /obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/house_4/eighth_apartment)
+"xtt" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/structure/chair/sofa/right/brown,
+/turf/open/floor/wood/tile/cherry,
+/area/awaymission/avangarde17/outside)
 "xty" = (
 /obj/structure/flora/grass/both/style_random,
 /obj/structure/light_fake/directional/north,
@@ -42227,11 +42969,11 @@
 /turf/closed/wall/mineral/wood/nonmetal,
 /area/awaymission/avangarde17/inside/bar)
 "xvj" = (
-/obj/effect/turf_decal/siding{
-	dir = 5
+/obj/effect/turf_decal/road/dotted_line{
+	dir = 8
 	},
 /turf/open/floor/asphalt/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/area/awaymission/avangarde17/outside)
 "xvO" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/green/visible/layer4,
@@ -42523,6 +43265,14 @@
 /obj/effect/turf_decal/bot_white,
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/hangar)
+"xEB" = (
+/obj/structure/curtain/bounty/start_closed{
+	layer = 4.2
+	},
+/obj/structure/table/reinforced,
+/obj/structure/window/spawner/directional/east,
+/turf/open/floor/iron/dark/smooth_large,
+/area/awaymission/avangarde17/outside)
 "xEH" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 9
@@ -42606,6 +43356,13 @@
 /area/awaymission/avangarde17/inside/house_4/third_apartment)
 "xHx" = (
 /turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
+"xHK" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/machinery/portable_atmospherics/canister/plasma,
+/turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/outside)
 "xIg" = (
 /turf/closed/indestructible/reinforced,
@@ -42874,6 +43631,16 @@
 /obj/structure/sign/clock/directional/south,
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/base_controlroom)
+"xNI" = (
+/obj/effect/turf_decal/stripes/corner,
+/obj/structure/shelves/metal/style2,
+/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/glass/fifty,
+/obj/item/stack/sheet/glass/fifty,
+/turf/open/floor/iron/dark/small,
+/area/awaymission/avangarde17/outside)
 "xNS" = (
 /obj/structure/sink/directional/west,
 /obj/structure/mirror/directional/east,
@@ -42978,6 +43745,12 @@
 /obj/structure/barricade/wooden/snowed,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
+"xPM" = (
+/obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/structure/cable,
+/obj/structure/cable/layer1,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "xPP" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Этаж 2 - Квартира 1"
@@ -43281,6 +44054,12 @@
 /obj/machinery/light/small/directional/west,
 /turf/open/floor/wood,
 /area/awaymission/avangarde17/inside/militia/head)
+"xXF" = (
+/obj/structure/shelves/metal/style2,
+/turf/open/floor/iron/dark/smooth_edge{
+	dir = 4
+	},
+/area/awaymission/avangarde17/outside)
 "xXG" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible,
 /obj/effect/decal/cleanable/dirt,
@@ -43397,7 +44176,7 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/stripes/line,
-/turf/open/floor/iron/dark,
+/turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside)
 "yaV" = (
 /obj/machinery/atmospherics/components/binary/pump{
@@ -43425,6 +44204,13 @@
 	},
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside/city)
+"ybE" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/cable/layer1,
+/turf/open/floor/iron/dark,
+/area/awaymission/avangarde17/outside)
 "ycj" = (
 /obj/effect/mapping_helpers/broken_floor,
 /obj/structure/cable,
@@ -75530,7 +76316,7 @@ oIg
 iFc
 iFc
 oIg
-oIg
+fwj
 oIg
 oIg
 oIg
@@ -75787,7 +76573,7 @@ oIg
 iFc
 iFc
 oIg
-oIg
+fwj
 oIg
 oIg
 oIg
@@ -76536,7 +77322,7 @@ lNs
 vyY
 rVU
 oIg
-jLI
+tEL
 oIg
 oIg
 oIg
@@ -76793,7 +77579,7 @@ oSz
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 bCU
@@ -77059,22 +77845,22 @@ stO
 stO
 stO
 lar
-stO
-stO
-stO
-stO
-stO
-stO
-stO
-stO
-stO
-stO
-stO
-stO
-stO
-stO
-stO
-wWB
+tzW
+tzW
+tzW
+tzW
+tzW
+tzW
+tzW
+tzW
+tzW
+tzW
+tzW
+tzW
+tzW
+tzW
+tzW
+azJ
 mAc
 jnZ
 hoU
@@ -77564,7 +78350,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -77821,7 +78607,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -78078,7 +78864,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -78335,7 +79121,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -78592,7 +79378,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -78849,7 +79635,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -79106,7 +79892,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -79363,7 +80149,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -79620,7 +80406,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -79877,7 +80663,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -80134,7 +80920,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -80391,16 +81177,16 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
 vyY
 gVl
 oXc
-bDw
-eyu
-eyu
+srQ
+mqu
+mqu
 mqu
 oIg
 oIg
@@ -80648,17 +81434,17 @@ eqn
 xoI
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
 vyY
 gVl
 gVl
-qsu
-oLU
-oLU
 oIg
+aSr
+aSr
+aSr
 oIg
 oIg
 oIg
@@ -80905,16 +81691,16 @@ iFc
 iFc
 oIg
 oIg
-pKA
+hRO
 oIg
 drg
 syP
 vyY
 rgL
 gVl
-bDw
-eyu
-eyu
+iEr
+oIg
+oIg
 oIg
 oIg
 oIg
@@ -81162,17 +81948,17 @@ iFc
 iFc
 oIg
 oIg
-pKA
+hRO
 oIg
 drg
 syP
 vyY
 rgL
 rgL
-qsu
-oLU
-oLU
 oIg
+aSr
+aSr
+aSr
 oIg
 oIg
 oIg
@@ -81419,7 +82205,7 @@ iFc
 iFc
 oIg
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -81427,8 +82213,8 @@ vyY
 rgL
 rgL
 iEr
-kQY
-kQY
+oIg
+oIg
 oIg
 oIg
 oIg
@@ -81676,17 +82462,17 @@ iFc
 iFc
 oIg
 oIg
-pKA
+hRO
 oIg
 drg
 syP
 vyY
 rgL
 rgL
-rDH
 oIg
-oIg
-oIg
+aSr
+aSr
+aSr
 oIg
 oIg
 oIg
@@ -81933,7 +82719,7 @@ iFc
 iFc
 oIg
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -81941,8 +82727,8 @@ vyY
 rgL
 gVl
 iEr
-kQY
-kQY
+oIg
+oIg
 oIg
 oIg
 oIg
@@ -82190,17 +82976,17 @@ fVQ
 uMU
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
 vyY
 gVl
 gVl
-rDH
 oIg
-oIg
-oIg
+aSr
+aSr
+aSr
 oIg
 oIg
 oIg
@@ -82216,7 +83002,7 @@ thq
 rqq
 eBp
 hes
-fMF
+lsF
 tmq
 rqq
 aRm
@@ -82447,7 +83233,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -82455,8 +83241,8 @@ vyY
 gVl
 gVl
 iEr
-kQY
-kQY
+oIg
+oIg
 oIg
 oIg
 oIg
@@ -82704,17 +83490,17 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
 vyY
 gVl
 oXc
-rDH
 oIg
-oIg
-oIg
+aSr
+aSr
+aSr
 oIg
 oIg
 oIg
@@ -82729,7 +83515,7 @@ rqq
 rqq
 rqq
 rqq
-lWW
+nZr
 lWW
 rqq
 rqq
@@ -82961,7 +83747,7 @@ lNs
 bWq
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 xlL
@@ -82969,8 +83755,8 @@ vyY
 oXc
 oXc
 iEr
-kQY
-kQY
+oIg
+oIg
 oIg
 oIg
 oIg
@@ -83225,10 +84011,10 @@ syP
 vyY
 oXc
 oXc
-xvj
-aSr
-aSr
 oIg
+aSr
+aSr
+aSr
 oIg
 oIg
 oIg
@@ -83732,7 +84518,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 baJ
@@ -83987,11 +84773,11 @@ nqV
 iFc
 iFc
 nqV
-tEL
+bje
 oIg
-uEH
+mRI
 oIg
-oIg
+kVF
 llY
 iFc
 iFc
@@ -85015,11 +85801,11 @@ wRK
 iFc
 iFc
 wRK
-izi
+mSt
 oIg
-jLI
+tEL
 oIg
-oIg
+sID
 aXt
 iFc
 iFc
@@ -85274,7 +86060,7 @@ spF
 uMU
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 xEH
@@ -86045,7 +86831,7 @@ tzW
 bbc
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 gOy
@@ -86302,7 +87088,7 @@ tzW
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -86559,7 +87345,7 @@ tzW
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -86816,7 +87602,7 @@ brv
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -87073,7 +87859,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -87307,7 +88093,7 @@ rVU
 oIg
 aZo
 oIg
-oIg
+drg
 gVl
 qrA
 qQl
@@ -87330,7 +88116,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -87564,7 +88350,7 @@ rVU
 oIg
 aZo
 oIg
-oIg
+drg
 gVl
 qrA
 xNX
@@ -87587,7 +88373,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -87816,12 +88602,12 @@ gVl
 gVl
 gVl
 gVl
-oIg
-oIg
+jil
+bje
 oIg
 aZo
 oIg
-oIg
+drg
 gVl
 qrA
 qrA
@@ -87844,7 +88630,7 @@ oSz
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -88072,13 +88858,13 @@ gVl
 gVl
 gVl
 gVl
-oIg
-oIg
+jil
+bje
 oIg
 oIg
 aZo
 oIg
-oIg
+drg
 gVl
 hko
 gVl
@@ -88101,7 +88887,7 @@ brv
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -88311,31 +89097,31 @@ qPg
 qPg
 oXc
 oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-don
-oIg
-oIg
-oIg
-oIg
-fwj
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+jFS
+nqV
+nqV
+nqV
+nqV
+llY
+nqV
+nqV
+nqV
+nqV
+nqV
+bje
 oIg
 oIg
 scS
 vho
 oIg
-oIg
+drg
 bnn
 gVl
 gVl
@@ -88358,7 +89144,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -88592,7 +89378,7 @@ scS
 vho
 oIg
 oIg
-oIg
+drg
 gVl
 bnn
 gVl
@@ -88615,7 +89401,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -88848,8 +89634,8 @@ enB
 vho
 oIg
 oIg
-oIg
-oIg
+sID
+nTj
 dex
 bXG
 gVl
@@ -88872,7 +89658,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -89104,8 +89890,8 @@ oIg
 oIg
 oIg
 oIg
-oIg
-oIg
+sID
+nTj
 oXc
 oXc
 oXc
@@ -89129,7 +89915,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -89339,29 +90125,29 @@ oIg
 oIg
 oIg
 oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-fwj
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+aXt
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+nTj
 oXc
 oXc
 oXc
@@ -89386,7 +90172,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -89643,7 +90429,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -89900,7 +90686,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -90157,7 +90943,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -90414,7 +91200,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -90671,7 +91457,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -90928,7 +91714,7 @@ lNs
 bWq
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 gOy
@@ -91185,7 +91971,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -91442,7 +92228,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -91699,7 +92485,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 umc
@@ -91956,7 +92742,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 oIg
 fwj
@@ -92213,7 +92999,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 oIg
 fwj
@@ -92470,7 +93256,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 oIg
 fwj
@@ -92727,7 +93513,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 emu
@@ -92984,7 +93770,7 @@ lNs
 bWq
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 qKK
@@ -93241,7 +94027,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 mtR
@@ -93498,7 +94284,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -93755,7 +94541,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -94012,7 +94798,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
@@ -94269,11 +95055,11 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 syP
-oBZ
+dSV
 spF
 spF
 nQJ
@@ -94526,10 +95312,10 @@ uEw
 uEw
 oIg
 oIg
-pKA
+hRO
 oIg
 drg
-syP
+iRW
 tfS
 stO
 stO
@@ -94783,11 +95569,11 @@ kin
 kin
 oIg
 oIg
-pKA
+hRO
 oIg
 drg
-syP
-tdJ
+iRW
+vyY
 oXc
 oXc
 rqq
@@ -95040,7 +95826,7 @@ lNs
 bWq
 rVU
 wKO
-pKA
+hRO
 oIg
 drg
 syP
@@ -95297,7 +96083,7 @@ lNs
 vyY
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 xil
@@ -96065,10 +96851,10 @@ rAN
 mbn
 eqn
 xoI
-oRh
+gVl
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 qKK
@@ -96273,59 +97059,59 @@ tzW
 tzW
 rVU
 oIg
+uEH
 oIg
+kVF
+nqV
+iFc
+iFc
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+iFc
+iFc
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+nqV
+iFc
+iFc
+nqV
+bje
 oIg
-mys
-nqV
-iFc
-iFc
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-iFc
-iFc
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-nqV
-iFc
-iFc
-nqV
-oIg
-oIg
-oIg
+mRI
 oIg
 drg
 qKK
@@ -96448,15 +97234,15 @@ bRf
 jQJ
 jRm
 mrA
-dBL
+dmN
 pgI
-jQJ
-wTH
-jQJ
-jQJ
 eEx
-xHx
-xHx
+pLP
+eEx
+eEx
+eEx
+eEx
+eEx
 xHx
 xHx
 nqq
@@ -96564,18 +97350,18 @@ oIg
 oIg
 oIg
 oIg
+oIg
+oIg
+oIg
+oIg
+oIg
+oIg
+oIg
+oIg
+oIg
+oIg
+oIg
 lqG
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
-oIg
 oIg
 iFc
 iFc
@@ -96704,25 +97490,25 @@ doE
 bRf
 jQJ
 jRm
-wTH
+vhG
 rry
-udd
+lpL
 eEx
+xxr
+xxr
+rqE
+xxr
+xxr
 eEx
-pwe
-eEx
-eEx
-haj
 xHx
-xGd
 xHx
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -96789,7 +97575,7 @@ rVU
 oIg
 oIg
 oIg
-oIg
+lFP
 enB
 iFc
 iFc
@@ -96837,7 +97623,7 @@ enB
 iFc
 iFc
 enB
-oIg
+pqL
 oIg
 oIg
 oIg
@@ -96957,29 +97743,29 @@ bnF
 vIq
 cEj
 rry
-udd
+lpL
 bRf
 jQJ
 ccc
-wTH
+vhG
 rry
-udd
+lpL
 eEx
-jQJ
-jQJ
-jQJ
+xxr
+xxr
+pLP
+xxr
+xxr
 eEx
-eEx
-haj
 xHx
 tPM
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -97214,29 +98000,29 @@ cfs
 rWG
 cEj
 rry
-udd
+lpL
 bRf
 jQJ
 lWE
 qXx
 rry
-udd
+lpL
 eEx
-jQJ
-jQJ
-jQJ
-jQJ
-eEx
+xxr
+xxr
+don
+xxr
+xxr
 eEx
 xHx
 tPM
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -97301,59 +98087,59 @@ tzW
 tzW
 rVU
 oIg
+jLI
 oIg
+sID
+wRK
+iFc
+iFc
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+iFc
+iFc
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+wRK
+iFc
+iFc
+wRK
+mSt
 oIg
-hRO
-wRK
-iFc
-iFc
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-iFc
-iFc
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-wRK
-iFc
-iFc
-wRK
-oIg
-oIg
-oIg
+tEL
 oIg
 drg
 qKK
@@ -97471,29 +98257,29 @@ jQJ
 vIq
 cEj
 rry
-udd
+lpL
 bRf
 jQJ
 lWE
-wTH
+vhG
 rry
-udd
-eEx
-jQJ
-jQJ
-jQJ
-jQJ
-jQJ
+lpL
+uLX
+xxr
+xxr
+xxr
+xxr
+xxr
 eEx
 wrS
 dkk
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -97607,13 +98393,13 @@ oXc
 gVl
 fVQ
 uMU
-nuS
+wCE
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
-phn
+qKK
 fVG
 oXc
 oXc
@@ -97728,29 +98514,29 @@ dDJ
 pqp
 qcU
 rry
-udd
+lpL
 bRf
 tMb
 wUY
 ilj
 rry
-udd
-eEx
-jQJ
-jQJ
-jQJ
-jQJ
-jQJ
+lpL
+uLX
+wAf
+wAf
+xxr
+xxr
+xxr
 qsv
 rac
 pPf
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -97983,31 +98769,31 @@ xxr
 sFd
 wEt
 vIq
-wTH
-rry
-udd
+aAc
+spP
+lqj
 bRf
 jQJ
 lWE
-wTH
+vhG
 rry
-udd
+lpL
 eEx
 ogM
 ogM
-jQJ
-jQJ
-jQJ
+xxr
+xxr
+xxr
 qsv
 rac
 xHx
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -98240,31 +99026,31 @@ wbI
 glY
 mLX
 mwb
-wTH
-rry
-udd
+jQJ
+jQJ
+jQJ
 bRf
 jQJ
 lWE
-wTH
+vhG
 rry
-udd
+lpL
 eEx
 aKQ
 aKQ
-jQJ
-jQJ
-jQJ
+xxr
+xxr
+xxr
 eEx
 gTo
 gTo
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -98381,7 +99167,7 @@ lNs
 dQE
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 qKK
@@ -98498,30 +99284,30 @@ eEx
 jQJ
 hev
 gxK
-vTh
-nWF
+bRf
+bRf
 bRf
 jQJ
 lWE
-wTH
+vhG
 rry
-udd
+lpL
 eEx
 eEx
 eEx
 eEx
-jQJ
-jQJ
+bDw
+bDw
 eEx
 eEx
 xHx
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -98638,7 +99424,7 @@ lNs
 orH
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 qKK
@@ -98746,7 +99532,7 @@ xHx
 tPM
 eEx
 tNy
-nWG
+fGx
 mFr
 usH
 byH
@@ -98755,30 +99541,30 @@ eEx
 eEx
 qCk
 mrA
-dBL
-dBL
-dBL
-dBL
+dmN
+dmN
+dmN
+dmN
 uhg
 bJm
 rry
-udd
+lpL
 eEx
-bss
-bss
-bss
-bss
-bss
-bss
+ayK
+bKb
+jXz
+dlN
+dlN
+rSN
 eEx
 xHx
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -98895,7 +99681,7 @@ lNs
 orH
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 qKK
@@ -99019,23 +99805,23 @@ dkB
 dkB
 rry
 rry
-udd
+lpL
 eEx
-bss
-bss
-bss
-bss
-bss
-bss
+oBW
+izi
+bgL
+xIN
+xIN
+tvS
 bss
 xHx
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -99152,7 +99938,7 @@ lNs
 orH
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 lNs
@@ -99269,30 +100055,30 @@ gES
 eEx
 jQJ
 aAc
-wyo
+spP
 eaQ
 eaQ
-wyo
-wyo
-wyo
-wyo
-pSo
+spP
+spP
+spP
+spP
+lqj
 eEx
-bss
-bss
-bss
-bss
-bss
-bss
+bAB
+bKb
+tix
+xIN
+xIN
+tvS
 bss
 xHx
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -99409,7 +100195,7 @@ lNs
 orH
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 lNs
@@ -99516,7 +100302,7 @@ xHx
 xHx
 xHx
 eEx
-xIN
+eES
 xIN
 tnv
 aCJ
@@ -99524,9 +100310,9 @@ dXu
 sdv
 iRx
 eEx
-sFd
-sFd
-sFd
+eEx
+eEx
+eEx
 eEx
 eEx
 pwe
@@ -99535,21 +100321,21 @@ pwe
 eEx
 eEx
 eEx
-bss
-bss
-bss
-bss
-bss
-bss
+eEx
+dcw
+eEx
+xIN
+xIN
+tvS
 bss
 xHx
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
 xHx
@@ -99666,7 +100452,7 @@ lNs
 orH
 rVU
 oIg
-pKA
+hRO
 oIg
 drg
 cMW
@@ -99779,37 +100565,37 @@ rxY
 vmW
 dXu
 sdv
-lfC
+pHc
 eEx
-dwV
-dwV
-dwV
+eMP
+wUZ
+gLc
 eEx
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
+jMY
+npk
+hXU
+npk
+kQY
+lYD
+lYD
+lYD
+lYD
+mtZ
+rzo
+rzo
+dRD
 eEx
 xHx
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
-xHx
+nqq
 xHx
 xHx
 xHx
@@ -99923,9 +100709,9 @@ lNs
 orH
 rVU
 oIg
+mRI
 oIg
-oIg
-oIg
+kVF
 nqV
 iFc
 iFc
@@ -100036,38 +100822,38 @@ sak
 atk
 rzo
 feX
-lfC
+nWG
 eEx
-dwV
-dwV
-dwV
+dEe
+sdm
+tuL
 eEx
+xtt
+ruz
+ruz
+ruz
+kQY
+lYD
+lYD
+lYD
+grY
+mtZ
 bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
+vdM
 eEx
 eEx
 xHx
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
+eyu
 nqq
 nqq
-xHx
-xHx
+nqq
+nqq
 xHx
 xHx
 xHx
@@ -100295,14 +101081,14 @@ eEx
 dsJ
 eEx
 eEx
-dwV
-dwV
-dwV
+dUL
+sdm
+raL
 eEx
-bss
-bss
-bss
-bss
+uYL
+dXu
+dXu
+jlj
 eEx
 eEx
 eEx
@@ -100316,12 +101102,12 @@ xHx
 xHx
 nqq
 nqq
+phn
 pnO
+xvj
 pnO
-pnO
-pnO
-pnO
-nqq
+rDw
+pLL
 nqq
 nqq
 nqq
@@ -100439,7 +101225,7 @@ rVU
 oIg
 oIg
 oIg
-oIg
+lFP
 enB
 iFc
 iFc
@@ -100547,39 +101333,39 @@ xHx
 eEx
 nvk
 nvk
-rHb
+aGl
 aGl
 ohT
-dwV
-dwV
-dwV
-dwV
-dwV
+oBp
+uRt
+aSw
+aSw
+rHb
 eEx
-bss
-bss
-bss
-bss
+mSa
+dXu
+dXu
+qdO
 eEx
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-qsv
+xNI
+mAJ
+mAJ
+mAJ
+doB
+lOq
+dPX
+eEx
 tPM
 xHx
 nqq
 nqq
+phn
+pnO
+xvj
 pnO
 pnO
-pnO
-pnO
-pnO
-pnO
-nqq
+rDw
+pLL
 nqq
 nqq
 nqq
@@ -100802,50 +101588,50 @@ xHx
 xHx
 xHx
 ttS
-sdO
-sdO
-sdO
-sdO
+sdm
+sdm
+sdm
+sdm
 ohT
-dwV
-dwV
-dwV
-dwV
-dwV
-dwV
-bss
-bss
-lpL
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
+dBL
+qAe
+ini
+fMF
+ohT
+khI
+mtZ
+dXu
+dXu
+ohT
+cZa
+vhG
+rry
+rry
+rry
+rry
+rry
+tdJ
 qsv
-wrS
+xHx
 xHx
 nqq
 nqq
+phn
+pnO
+mys
+owv
 pnO
 pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
+rDw
+tgf
+tgf
+tgf
+tgf
+tgf
+tgf
+tgf
+tgf
+tgf
 pnO
 pnO
 pnO
@@ -100951,9 +101737,9 @@ lNs
 orH
 rVU
 oIg
+jLI
 oIg
-oIg
-oIg
+sID
 wRK
 iFc
 iFc
@@ -101063,35 +101849,35 @@ sdm
 sdm
 sdm
 sdm
+rxz
+qGr
+qAe
+khR
+sdO
 ohT
-dwV
-dwV
-dwV
-dwV
-dwV
-dwV
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
-bss
+khI
+mtZ
+dXu
+dXu
+ohT
+cZa
+vhG
+rry
+sWF
+spP
+spP
+spP
+dyk
 eEx
 xHx
 xHx
 nqq
 nqq
+phn
 pnO
 pnO
-pnO
-pnO
-pnO
+mys
+owv
 pnO
 pnO
 pnO
@@ -101317,54 +102103,54 @@ xHx
 xHx
 eEx
 pRb
+rBg
 pRb
 pRb
-dEe
 wkA
 heL
-dwV
-dwV
-dwV
-dwV
+aUN
+qYA
+qYA
+ohT
 eEx
-bss
-bss
-bss
-bss
+shI
+dXu
+dXu
+cGc
 eEx
-bss
-bss
-bss
-bss
-bss
-bss
+hLR
+rry
+rwm
+gON
+xHK
+sWD
 eEx
 eEx
 wrS
 xHx
 nqq
 nqq
-nqq
+lKS
+oLU
 pnO
 pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
-pnO
+mys
+gEC
+gEC
+gEC
+gEC
+gEC
+gEC
+gEC
 xZZ
 xZZ
 xZZ
 xZZ
-xZZ
-xZZ
+bnY
 pnO
 pnO
 pnO
+cGj
 xZZ
 xZZ
 xZZ
@@ -101579,21 +102365,21 @@ eEx
 eEx
 gsk
 kKi
-dwV
-dwV
-dwV
-dwV
+heL
+kcK
+kcK
+nBT
 eEx
-bss
-bss
-bss
-bss
+vqF
+fpz
+fpz
+fGh
 eEx
-bss
-bss
-bss
-bss
-bss
+byh
+spP
+xfj
+adK
+rJl
 eEx
 eEx
 xHx
@@ -101602,8 +102388,8 @@ xHx
 nqq
 nqq
 nqq
-nqq
-pnO
+lKS
+oLU
 pnO
 pnO
 pnO
@@ -101838,21 +102624,20 @@ eEx
 eEx
 xhc
 hsH
-dwV
-dwV
+pSH
+gsk
 eEx
-bss
-bss
-bss
-bss
+uYL
+npk
+npk
+juw
 eEx
-bss
-bss
-eEx
-eEx
+sPm
+oSA
 eEx
 eEx
-xHx
+xEB
+eEx
 xHx
 xHx
 xHx
@@ -101861,7 +102646,7 @@ nqq
 nqq
 nqq
 nqq
-pnO
+lKS
 aTu
 aTu
 aTu
@@ -101885,6 +102670,7 @@ aTu
 aTu
 aTu
 aTu
+aTu
 wRK
 wRK
 wRK
@@ -101909,11 +102695,11 @@ wRK
 wRK
 wRK
 wRK
-izi
+mSt
 oIg
 jLI
 oIg
-hRO
+sID
 wRK
 wRK
 wRK
@@ -102094,7 +102880,7 @@ wrS
 xHx
 eEx
 eEx
-jez
+dJb
 jez
 eEx
 eEx
@@ -102114,7 +102900,7 @@ tPM
 rac
 rac
 xHx
-xHx
+nqq
 nqq
 nqq
 nqq
@@ -102372,7 +103158,7 @@ xHx
 xHx
 xHx
 pPf
-xHx
+nqq
 nqq
 nqq
 nqq
@@ -138482,31 +139268,31 @@ bkv
 bQx
 bQx
 bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
 bQx
 bQx
 bQx
@@ -138738,33 +139524,33 @@ bkv
 bkv
 bQx
 bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
 bQx
 bQx
 bQx
@@ -138995,33 +139781,33 @@ bkv
 bkv
 bQx
 bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
 bQx
 bQx
 bQx
@@ -139252,33 +140038,33 @@ bkv
 bkv
 bQx
 bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
+hNV
 bQx
 bQx
 bQx
@@ -139509,7 +140295,6 @@ bkv
 bkv
 bQx
 bQx
-bQx
 hNV
 hNV
 hNV
@@ -139535,7 +140320,8 @@ hNV
 hNV
 hNV
 hNV
-bQx
+hNV
+hNV
 bQx
 bQx
 bQx
@@ -140280,6 +141066,7 @@ bkv
 bkv
 bkv
 bkv
+bQx
 hNV
 hNV
 hNV
@@ -140305,8 +141092,7 @@ hNV
 hNV
 hNV
 hNV
-hNV
-hNV
+bQx
 bQx
 bQx
 bQx
@@ -140537,33 +141323,33 @@ bkv
 bkv
 bkv
 bkv
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
 bQx
 bQx
 bQx
@@ -140794,33 +141580,33 @@ bkv
 bkv
 bkv
 bkv
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
 bQx
 bQx
 bQx
@@ -141051,33 +141837,33 @@ bkv
 bkv
 bkv
 bkv
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
 bQx
 bQx
 bQx
@@ -141309,31 +142095,31 @@ bkv
 bkv
 bkv
 bkv
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
-tXh
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
+bkv
 bkv
 bQx
 bQx
@@ -157607,7 +158393,7 @@ loM
 loM
 loM
 loM
-jyH
+xHx
 jyH
 jyH
 jyH
@@ -157862,6 +158648,10 @@ loM
 loM
 loM
 loM
+xHx
+xHx
+xHx
+xHx
 jyH
 jyH
 jyH
@@ -157870,13 +158660,9 @@ jyH
 jyH
 jyH
 jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
+xHx
+xHx
+xHx
 loM
 loM
 loM
@@ -158115,27 +158901,27 @@ loM
 loM
 loM
 loM
-jyH
-jyH
+xHx
+xHx
 loM
+xHx
+xHx
+xHx
+xHx
+xHx
+xHx
 jyH
 jyH
 jyH
 jyH
 jyH
 jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
+xHx
+xHx
+xHx
+xHx
+xHx
+xHx
 loM
 loM
 loM
@@ -158370,14 +159156,14 @@ loM
 loM
 loM
 loM
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
+xHx
+xHx
+xHx
+xHx
+xHx
+xHx
+xHx
+xHx
 nYu
 mBt
 afF
@@ -158391,10 +159177,10 @@ mBt
 mBt
 mBt
 lHy
-jyH
-jyH
-jyH
-jyH
+xHx
+xHx
+xHx
+xHx
 loM
 loM
 loM
@@ -158626,15 +159412,15 @@ loM
 loM
 loM
 jyH
+xHx
+xHx
+xHx
+xHx
+xHx
 jyH
 jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
+xHx
+xHx
 wiw
 skV
 skV
@@ -158649,7 +159435,7 @@ skV
 skV
 pvT
 bQx
-jyH
+xHx
 jyH
 jyH
 loM
@@ -158884,14 +159670,14 @@ loM
 loM
 jyH
 jyH
+xHx
+jyH
+xHx
+xHx
 jyH
 jyH
 jyH
-jyH
-jyH
-jyH
-jyH
-jyH
+xHx
 wiw
 skV
 skV
@@ -159143,12 +159929,12 @@ jyH
 jyH
 jyH
 jyH
+xHx
+xHx
+xHx
 jyH
 jyH
-jyH
-jyH
-jyH
-jyH
+xHx
 wiw
 skV
 skV
@@ -159395,13 +160181,13 @@ jyH
 jyH
 jyH
 jyH
+xHx
 jyH
 jyH
 jyH
-jyH
-jyH
-jyH
-jyH
+xHx
+xHx
+xHx
 qfd
 pVt
 pXn
@@ -159651,14 +160437,14 @@ jyH
 jyH
 jyH
 jyH
+xHx
+xHx
 jyH
 jyH
 jyH
 jyH
-jyH
-jyH
-jyH
-jyH
+xHx
+xHx
 kis
 hNV
 xxr
@@ -159907,10 +160693,10 @@ bQx
 jyH
 jyH
 jyH
-jyH
-jyH
-jyH
-jyH
+xHx
+xHx
+xHx
+xHx
 jyH
 jyH
 jyH
@@ -160165,8 +160951,8 @@ bQx
 jyH
 jyH
 jyH
-jyH
-jyH
+xHx
+xHx
 wrS
 xHx
 jyH
@@ -160423,11 +161209,11 @@ jyH
 jyH
 jyH
 jyH
-jyH
+xHx
 tPM
-jyH
-jyH
-jyH
+xHx
+xHx
+xHx
 jyH
 jyH
 kis
@@ -160681,12 +161467,12 @@ jyH
 bQx
 jyH
 jyH
-jyH
-jyH
-jyH
-jyH
-jyH
-jyH
+xHx
+xHx
+xHx
+xHx
+xHx
+xHx
 kis
 hNV
 xxr
@@ -161975,24 +162761,24 @@ pVt
 sbG
 hNV
 eEx
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+eEx
+eEx
+mCW
+mCW
 eEx
 eEx
 eEx
 eEx
 eEx
-hNV
-oVc
-bQx
-bQx
 bQx
 bQx
 bQx
@@ -162232,24 +163018,24 @@ hNV
 eEx
 eEx
 eEx
-hNV
-hNV
+jQJ
+jQJ
 uyn
 uyn
 uyn
 uyn
 uyn
 uyn
-hNV
-hNV
-hNV
-hNV
-hNV
-eEx
-eEx
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
 eEx
 bQx
 bQx
+eEx
 bQx
 bQx
 bQx
@@ -162487,26 +163273,26 @@ eEx
 eEx
 eEx
 eEx
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
 uyn
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-eEx
-eEx
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+rqE
 bQx
+bQx
+eEx
 bQx
 bQx
 bQx
@@ -162740,13 +163526,13 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
-hNV
-rlv
-rlv
-rlv
+jQJ
+jQJ
+jQJ
+jQJ
+lWE
+lWE
+lWE
 acX
 dkB
 dkB
@@ -162756,13 +163542,13 @@ dkB
 fpn
 sDm
 eEx
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-eEx
+jQJ
+jQJ
+jQJ
+jQJ
+pLP
+bQx
+bQx
 eEx
 bQx
 bQx
@@ -162997,9 +163783,9 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
+jQJ
+jQJ
+jQJ
 eEx
 rTG
 eEx
@@ -163013,13 +163799,13 @@ sFd
 izv
 eEx
 eEx
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
 eEx
 bQx
 bQx
@@ -163254,9 +164040,9 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
+jQJ
+jQJ
+jQJ
 eEx
 fZk
 dmN
@@ -163270,13 +164056,13 @@ jlh
 lZx
 arC
 eEx
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+jQJ
+jQJ
+mVP
+mVP
+wCd
+jQJ
+jQJ
 eEx
 bQx
 bQx
@@ -163513,7 +164299,7 @@ bQx
 eEx
 eEx
 eEx
-hNV
+rlv
 eEx
 rsv
 jiv
@@ -163527,13 +164313,13 @@ jiv
 jiv
 fpA
 eEx
-hNV
-hNV
+jQJ
+jQJ
 bQx
 bQx
-hNV
-hNV
-hNV
+bRY
+jQJ
+jQJ
 eEx
 bQx
 bQx
@@ -163768,9 +164554,9 @@ bQx
 bQx
 eEx
 eEx
-hNV
-hNV
-hNV
+rlv
+gfq
+rlv
 eEx
 ioX
 jiv
@@ -163781,16 +164567,16 @@ uMX
 awi
 khd
 khd
-pLP
+jiv
 udd
 eEx
-hNV
-hNV
+jQJ
+jQJ
 bQx
 bQx
-hNV
-hNV
-hNV
+bRY
+jQJ
+jQJ
 eEx
 bQx
 bQx
@@ -164024,10 +164810,10 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
-hNV
+gfq
+rlv
+rlv
+rlv
 eEx
 rsv
 esL
@@ -164045,8 +164831,8 @@ eEx
 eEx
 eEx
 eEx
-hNV
-hNV
+jQJ
+jQJ
 eEx
 eEx
 hNV
@@ -164281,10 +165067,10 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
-hNV
+rlv
+rlv
+rlv
+wMW
 eEx
 ioX
 jiv
@@ -164297,14 +165083,14 @@ bSF
 bSF
 jXV
 udd
-sFd
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+xfq
+bWF
+lVa
+cRD
+cRD
+jQJ
+jQJ
+jnh
 eEx
 hNV
 bQx
@@ -164538,10 +165324,10 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
-hNV
+qsu
+vFQ
+rlv
+rlv
 sFd
 rsv
 esL
@@ -164553,15 +165339,15 @@ bSF
 qWi
 bSF
 miF
-udd
-sFd
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+ybE
+xPM
+mDD
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+cNn
 eEx
 hNV
 bQx
@@ -164795,10 +165581,10 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
-hNV
+qsu
+rlv
+rlv
+rlv
 sFd
 fZk
 jiv
@@ -164811,14 +165597,14 @@ jxp
 xvO
 oLh
 udd
-sFd
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+xfq
+vuk
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
+cNn
 eEx
 hNV
 bQx
@@ -165052,10 +165838,10 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
-hNV
+qsu
+rlv
+vFQ
+rlv
 sFd
 rsv
 esL
@@ -165068,14 +165854,14 @@ qWi
 bSF
 vwk
 udd
-sFd
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+xfq
+rcG
+rDH
+rDH
+rDH
+rDH
+rDH
+vmr
 eEx
 hNV
 bQx
@@ -165309,10 +166095,10 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
-hNV
+rlv
+wMW
+rlv
+rlv
 eEx
 uFH
 jiv
@@ -165325,14 +166111,14 @@ bSF
 bSF
 oEt
 udd
-sFd
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+xfq
+bWF
+xXF
+mal
+mal
+ucG
+rDH
+vmr
 eEx
 hNV
 bQx
@@ -165566,10 +166352,10 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
-hNV
+rlv
+rlv
+rlv
+rlv
 eEx
 rsv
 esL
@@ -165587,8 +166373,8 @@ eEx
 eEx
 eEx
 eEx
-hNV
-hNV
+jQJ
+jQJ
 eEx
 eEx
 hNV
@@ -165824,9 +166610,9 @@ bQx
 bQx
 eEx
 eEx
-hNV
-hNV
-hNV
+rlv
+rlv
+rlv
 eEx
 glN
 jiv
@@ -165839,14 +166625,14 @@ dJA
 dJA
 pJr
 udd
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+qMQ
+jQJ
+jQJ
+qMQ
+jQJ
+jQJ
+jQJ
+jQJ
 eEx
 bQx
 bQx
@@ -166083,7 +166869,7 @@ bQx
 eEx
 eEx
 eEx
-hNV
+rlv
 eEx
 wHS
 kzw
@@ -166096,14 +166882,14 @@ pJr
 pJr
 pJr
 udd
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+qMQ
+jQJ
+jQJ
+qMQ
+jQJ
+jQJ
+jQJ
+jQJ
 eEx
 bQx
 bQx
@@ -166338,9 +167124,9 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
+jQJ
+jQJ
+jQJ
 eEx
 wTH
 spP
@@ -166357,10 +167143,10 @@ eEx
 eEx
 eEx
 eEx
-hNV
-hNV
-hNV
-hNV
+jQJ
+jQJ
+jQJ
+jQJ
 eEx
 bQx
 bQx
@@ -166595,9 +167381,9 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
+jQJ
+jQJ
+jQJ
 eEx
 eEx
 eEx
@@ -166611,13 +167397,13 @@ sFd
 pZY
 eEx
 eEx
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+ndp
+ndp
+eEx
+jQJ
+jQJ
+jQJ
+jQJ
 eEx
 bQx
 bQx
@@ -166852,11 +167638,11 @@ bQx
 bQx
 bQx
 eEx
-hNV
-hNV
-hNV
-hNV
-hNV
+jQJ
+jQJ
+jQJ
+jQJ
+jQJ
 eEx
 rry
 pZY
@@ -166868,12 +167654,12 @@ rry
 pZY
 rry
 eEx
-hNV
-hNV
-hNV
-hNV
-hNV
-hNV
+ndp
+ndp
+fVo
+jQJ
+jQJ
+jQJ
 eEx
 eEx
 bQx
@@ -167113,7 +167899,7 @@ eEx
 eEx
 eEx
 eEx
-hNV
+jQJ
 eEx
 rry
 pZY
@@ -167125,11 +167911,11 @@ pZY
 pZY
 rry
 eEx
-hNV
-hNV
-hNV
-hNV
-hNV
+eEx
+kQp
+eEx
+jQJ
+jQJ
 eEx
 eEx
 bQx
@@ -167382,8 +168168,8 @@ mUc
 nGg
 rry
 eEx
-hNV
-hNV
+ndp
+ndp
 eEx
 eEx
 eEx

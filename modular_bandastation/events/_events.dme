@@ -14,6 +14,7 @@
 #include "avangarde17/code/obj/talons.dm"
 #include "avangarde17/code/obj/decals.dm"
 #include "avangarde17/code/obj/photocopiers.dm"
+#include "avangarde17/code/obj/shelfs.dm"
 
 #include "avangarde17/code/turf/turf.dm"
 
