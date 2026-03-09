@@ -37,14 +37,14 @@
 /// Weight penalty per recent antagonist role assignment.
 /datum/config_entry/number/antag_weight_penalty
 	protection = CONFIG_ENTRY_LOCKED
-	default = 20
+	default = 10
 	min_val = 0
 	max_val = 100
 
 /// Minimum weight a candidate can have (prevents complete exclusion).
 /datum/config_entry/number/antag_min_weight
 	protection = CONFIG_ENTRY_LOCKED
-	default = 10
+	default = 1
 	min_val = 0
 	max_val = 100
 
