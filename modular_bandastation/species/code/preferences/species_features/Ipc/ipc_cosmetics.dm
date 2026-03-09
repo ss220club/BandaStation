@@ -202,12 +202,23 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	for(var/datum/bodypart_overlay/ipc_tail/old in chest.bodypart_overlays)
 		chest.remove_bodypart_overlay(old)
 		qdel(old)
+	// Отписываемся от смены направления в любом случае
+	UnregisterSignal(H, COMSIG_ATOM_DIR_CHANGE)
 	if(!enabled)
 		return
 	var/datum/bodypart_overlay/ipc_tail/overlay = new()
 	overlay.icon_color = H.dna?.features["ipc_tail_color"]
 	overlay.secondary_icon_color = H.dna?.features["ipc_tail_secondary_color"]
 	chest.add_bodypart_overlay(overlay)
+	// Перестраиваем оверлей при смене направления, чтобы FRONT-слой обновлялся
+	RegisterSignal(H, COMSIG_ATOM_DIR_CHANGE, TYPE_PROC_REF(/proc, _ipc_tail_on_dir_change), override = TRUE)
+
+/// Вспомогательный сигнал: перестраивает оверлей хвоста при смене направления.
+/proc/_ipc_tail_on_dir_change(mob/living/carbon/human/H, old_dir, new_dir)
+	SIGNAL_HANDLER
+	if(!istype(H) || !istype(H.dna?.species, /datum/species/ipc))
+		return
+	H.update_body_parts()
 
 // ============================================
 // PREFERENCES: КОСМЕТИКА КПБ
