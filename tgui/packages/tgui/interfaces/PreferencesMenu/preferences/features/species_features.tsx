@@ -296,3 +296,8 @@ export const ipc_tail_color: Feature<string> = {
   name: 'Хвост - цвет',
   component: FeatureColorInput,
 };
+
+export const ipc_tail_secondary_color: Feature<string> = {
+  name: 'Хвост - вторичный цвет',
+  component: FeatureColorInput,
+};

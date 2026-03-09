@@ -122,6 +122,10 @@
 	// Список модификаторов: "overheat_rate", "healing_time", "melee_damage", "implant_slots", и т.д.
 	var/list/ipc_chassis_modifiers = list()
 
+	// Ментанил (препарат человечности Gen III)
+	/// Счётчик использований ментанила (для механики зависимости)
+	var/mentalin_uses = 0
+
 	// ---- Косметика ----
 	/// Текущее выражение экрана (задаётся только в игре через абилку, не сохраняется)
 	var/ipc_face_state = ""

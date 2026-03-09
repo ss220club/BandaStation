@@ -13,6 +13,7 @@
 #include "code/human/species_type/ipc.dm"
 #include "code/human/species_type/ipc_gen1_modular.dm"
 #include "code/human/species_type/ipc_gen3_humanity.dm"
+#include "code/human/species_type/ipc_mentalin.dm"
 #include "code/human/species_type/ipc_gen4_cyberdeck.dm"
 
 #include "code/living/ipc_hud.dm"

@@ -263,7 +263,8 @@
 	name = "humanity"
 	icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
 	icon_state = "humanity"
-	screen_loc = ui_internal  // Используем слот воздуха — у IPC нет дыхания
+	// ui_internal занят температурой, используем следующий слот выше (IPC не дышит и не ест)
+	screen_loc = "EAST-1:28,CENTER+2:21"
 	mouse_over_pointer = MOUSE_HAND_POINTER
 	var/humanity_value = 100
 
