@@ -303,7 +303,7 @@
 			stun_duration = 5 SECONDS
 
 	H.Stun(stun_duration)
-	addtimer(CALLBACK(src, PROC_REF(gen1_restore_stun_immunity), H), stun_duration + 1 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(gen1_restore_stun_immunity), H), stun_duration + 1 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 /datum/species/ipc/proc/gen1_restore_stun_immunity(mob/living/carbon/human/H)
 	if(!H || !istype(H.dna?.species, /datum/species/ipc))

@@ -74,7 +74,6 @@
 	var/improved_cooling_installed = FALSE
 	var/cooling_block_active = FALSE
 	var/cooling_block_end_time = 0
-	var/cooled_tank_active = FALSE
 
 	// Разгон системы
 	var/overclock_active = FALSE
