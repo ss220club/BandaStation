@@ -237,10 +237,10 @@
 			current_name = "Исследовательский"
 
 	var/list/choices = list(
-		"Медицинский — мед HUD, +25% скорость операций" = IPC_MODULE_MEDICAL,
-		"Инженерный — иммунитет к проводам"        = IPC_MODULE_ENGINEERING,
-		"Охранный — HUD безопасности, оружие"      = IPC_MODULE_SECURITY,
-		"Исследовательский — хим. анализатор"      = IPC_MODULE_RESEARCH,
+		"Медицинский"      = IPC_MODULE_MEDICAL,
+		"Инженерный"       = IPC_MODULE_ENGINEERING,
+		"Охранный"         = IPC_MODULE_SECURITY,
+		"Исследовательский" = IPC_MODULE_RESEARCH,
 	)
 
 	var/choice_name = input(H,
