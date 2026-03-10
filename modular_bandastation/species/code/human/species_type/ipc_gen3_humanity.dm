@@ -65,8 +65,8 @@
 	// Применяем эффекты текущего уровня
 	handle_gen3_effects(H)
 
-	// Случайные события при низкой человечности
-	if(humanity <= HUMANITY_LOW && prob(3))
+	// Случайные события при низкой человечности (< 60: LOW, CRIT, LOSS)
+	if(humanity < HUMANITY_NORMAL && prob(3))
 		gen3_random_event(H)
 
 /// Снижает человечность каждые HUMANITY_DECAY_INTERVAL секунд.

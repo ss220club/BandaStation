@@ -46,19 +46,12 @@
 		TRAIT_NOBLOOD,   // ИПС не имеет крови (масло не является кровью для игровых механик)
 	)
 
-	// Урон модификаторы
-	var/brute_mod = 0.8
-	var/burn_mod = 1.5
-	var/heat_mod = 1.3
-	var/cold_mod = 0.5
-
 	// Переменные для температурной системы
 	var/cpu_temperature = 30
 	var/cpu_temp_optimal_min = 20
 	var/cpu_temp_optimal_max = 40
 	var/cpu_temp_critical = 130
 	var/cpu_cooling_rate = 0.1
-	var/cpu_heating_from_environment = TRUE
 
 	// Модификатор скорости взаимодействия от температуры
 	var/temp_interaction_speed_mod = 1.0
@@ -567,13 +560,6 @@
 	if(heart.get_ipc_charge() <= 0)
 		to_chat(H, span_danger("ПРЕДУПРЕЖДЕНИЕ: Источник питания разряжен. Требуется подзарядка."))
 		H.Unconscious(2 SECONDS)
-
-/datum/species/ipc/proc/set_chassis(mob/living/carbon/human/H, chassis_name)
-	chassis_manufacturer = chassis_name
-	to_chat(H, span_notice("Шасси установлено: [chassis_name]"))
-
-/datum/species/ipc/spec_stun(mob/living/carbon/human/H, amount)
-	. = ..()
 
 /// Обработчик сигнала электрошока - повышает температуру процессора
 /datum/species/ipc/proc/on_electrocute(mob/living/carbon/human/source, shock_damage, siemens_coeff, flags)
