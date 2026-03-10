@@ -135,6 +135,7 @@ type SyntheticDiagnosticData = {
   table_cooling_rate?: number;
   surgeries?: Surgery[];
   zones?: Zone[];
+  self_mode?: boolean;
 };
 
 // ============================================
@@ -153,7 +154,14 @@ function getStatusColor(color: string): string {
 
 export const SyntheticDiagnostic = () => {
   const { act, data } = useBackend<SyntheticDiagnosticData>();
-  const { patient, error, patient_name, patient_species, has_table } = data;
+  const {
+    patient,
+    error,
+    patient_name,
+    patient_species,
+    has_table,
+    self_mode,
+  } = data;
 
   const [selectedTab, setSelectedTab] = useLocalState(
     'syntheticDiagnosticTab',
@@ -175,6 +183,27 @@ export const SyntheticDiagnostic = () => {
               <Icon name="unlink" mr={1} />
               Диагностический стол не подключён
             </NoticeBox>
+          </Box>
+        )}
+
+        {/* Self-mode banner */}
+        {self_mode && (
+          <Box
+            p={0.5}
+            style={{
+              background: 'rgba(40, 120, 200, 0.12)',
+              borderBottom: '1px solid rgba(40, 120, 200, 0.3)',
+            }}
+          >
+            <Box
+              textAlign="center"
+              fontSize="0.8em"
+              color="#6699cc"
+              bold
+            >
+              <Icon name="user-circle" mr={0.5} />
+              РЕЖИМ САМОДИАГНОСТИКИ — данные текущего оператора
+            </Box>
           </Box>
         )}
 
@@ -210,10 +239,19 @@ export const SyntheticDiagnostic = () => {
               >
                 ОС
               </Tabs.Tab>
+              <Tabs.Tab
+                icon="bug"
+                color="average"
+                selected={selectedTab === 2}
+                onClick={() => setSelectedTab(2)}
+              >
+                DEBUG
+              </Tabs.Tab>
             </Tabs>
 
             {selectedTab === 0 && <MainDiagnosticsView />}
             {selectedTab === 1 && <OsTab />}
+            {selectedTab === 2 && <DebugTab />}
           </>
         )}
       </Window.Content>
@@ -1010,6 +1048,267 @@ const OsTab = () => {
             DARK INDUSTRIES
           </Box>
         </Box>
+      </Stack.Item>
+    </Stack>
+  );
+};
+
+// ============================================
+// DEBUG TAB
+// ============================================
+
+const VIRUS_TYPES: { id: string; label: string; severity: string }[] = [
+  { id: 'display_glitch', label: 'Display Glitch', severity: 'low' },
+  { id: 'memory_leak', label: 'Memory Leak', severity: 'medium' },
+  { id: 'sensor_noise', label: 'Sensor Noise', severity: 'low' },
+  { id: 'core_corruption', label: 'Core Corruption', severity: 'high' },
+  { id: 'neural_hijack', label: 'Neural Hijack', severity: 'high' },
+];
+
+const DebugTab = () => {
+  const { act, data } = useBackend<SyntheticDiagnosticData>();
+  const patient = data.patient!;
+  const virusCount = patient.os_viruses?.length || 0;
+  const hasOs = !!patient.os_version;
+  const remoteActive = !!patient.os_remote_active;
+  const accessPending = !!patient.os_access_pending;
+
+  return (
+    <Stack vertical>
+      {/* Warning */}
+      <Stack.Item>
+        <Box
+          p={0.5}
+          m={0.5}
+          style={{
+            border: '1px solid rgba(200, 150, 0, 0.4)',
+            background: 'rgba(200, 150, 0, 0.07)',
+            borderRadius: '3px',
+          }}
+        >
+          <Box fontSize="0.8em" color="average" bold textAlign="center">
+            <Icon name="exclamation-triangle" mr={0.5} />
+            DEBUG ПАНЕЛЬ — только для тестирования
+          </Box>
+        </Box>
+      </Stack.Item>
+
+      {/* OS connection status */}
+      <Stack.Item>
+        <Section title="Статус ОС-подключения">
+          <Stack vertical>
+            <Stack.Item>
+              <LabeledList>
+                <LabeledList.Item label="ОС инициализирована">
+                  <Box bold color={hasOs ? 'good' : 'bad'}>
+                    {hasOs ? (
+                      <>
+                        <Icon name="check-circle" mr={0.5} />
+                        ДА — {patient.os_version}
+                      </>
+                    ) : (
+                      <>
+                        <Icon name="times-circle" mr={0.5} />
+                        НЕТ — ОС отсутствует
+                      </>
+                    )}
+                  </Box>
+                </LabeledList.Item>
+                <LabeledList.Item label="Удалённый сеанс">
+                  <Box
+                    color={
+                      remoteActive
+                        ? 'good'
+                        : accessPending
+                          ? 'average'
+                          : 'label'
+                    }
+                  >
+                    {remoteActive
+                      ? `Активен (${patient.os_remote_viewer_name})`
+                      : accessPending
+                        ? 'Ожидание подтверждения'
+                        : 'Нет активного сеанса'}
+                  </Box>
+                </LabeledList.Item>
+                <LabeledList.Item label="Вирусов в ОС">
+                  <Box bold color={virusCount > 0 ? 'bad' : 'good'}>
+                    {virusCount}
+                  </Box>
+                </LabeledList.Item>
+              </LabeledList>
+            </Stack.Item>
+
+            {/* OS access buttons */}
+            <Stack.Item mt={0.5}>
+              <Stack>
+                <Stack.Item>
+                  <Button
+                    icon="paper-plane"
+                    color="good"
+                    disabled={remoteActive || accessPending}
+                    onClick={() => act('request_os_access')}
+                  >
+                    Запрос доступа к ОС
+                  </Button>
+                </Stack.Item>
+                {remoteActive && (
+                  <Stack.Item>
+                    <Button
+                      icon="times"
+                      color="bad"
+                      onClick={() => act('disconnect_os_remote')}
+                    >
+                      Отключить
+                    </Button>
+                  </Stack.Item>
+                )}
+              </Stack>
+            </Stack.Item>
+          </Stack>
+        </Section>
+      </Stack.Item>
+
+      {/* Virus injection */}
+      <Stack.Item>
+        <Section
+          title="Инъекция тестовых вирусов"
+          buttons={
+            virusCount > 0 ? (
+              <Button
+                compact
+                icon="trash"
+                color="bad"
+                onClick={() => act('remove_all_viruses')}
+              >
+                Удалить все ({virusCount})
+              </Button>
+            ) : null
+          }
+        >
+          <Stack wrap>
+            {VIRUS_TYPES.map((v) => (
+              <Stack.Item key={v.id} m={0.3}>
+                <Button
+                  compact
+                  icon="virus"
+                  color={
+                    v.severity === 'high'
+                      ? 'bad'
+                      : v.severity === 'medium'
+                        ? 'average'
+                        : 'label'
+                  }
+                  onClick={() =>
+                    act('inject_test_virus', { virus_type: v.id })
+                  }
+                >
+                  {v.label}
+                  <Box
+                    as="span"
+                    ml={0.3}
+                    fontSize="0.8em"
+                    style={{ opacity: 0.7 }}
+                  >
+                    [{v.severity.toUpperCase()}]
+                  </Box>
+                </Button>
+              </Stack.Item>
+            ))}
+          </Stack>
+
+          {virusCount > 0 && (
+            <Box mt={0.5}>
+              <Box fontSize="0.8em" color="label" mb={0.3}>
+                Активные вирусы:
+              </Box>
+              {patient.os_viruses?.map((virus, idx) => (
+                <Box
+                  key={idx}
+                  p={0.3}
+                  mb={0.2}
+                  fontFamily="monospace"
+                  fontSize="0.8em"
+                  backgroundColor="rgba(200, 0, 0, 0.1)"
+                >
+                  <Stack justify="space-between" align="center">
+                    <Stack.Item>
+                      <Box
+                        bold
+                        color={
+                          virus.severity === 'high'
+                            ? 'bad'
+                            : virus.severity === 'medium'
+                              ? 'average'
+                              : 'label'
+                        }
+                      >
+                        [{virus.severity.toUpperCase()}] {virus.name}
+                      </Box>
+                      <Box color="label" fontSize="0.9em">
+                        {virus.desc}
+                      </Box>
+                    </Stack.Item>
+                    <Stack.Item>
+                      <Button
+                        compact
+                        icon="trash"
+                        color={virus.removable ? 'bad' : 'transparent'}
+                        disabled={!virus.removable}
+                        tooltip={
+                          !virus.removable ? 'Руткит — нельзя удалить' : ''
+                        }
+                        onClick={() =>
+                          act('remove_virus', { virus_index: virus.index })
+                        }
+                      >
+                        {virus.removable ? 'RM' : '🔒'}
+                      </Button>
+                    </Stack.Item>
+                  </Stack>
+                </Box>
+              ))}
+            </Box>
+          )}
+        </Section>
+      </Stack.Item>
+
+      {/* Raw OS info */}
+      <Stack.Item>
+        <Section title="Сырые данные ОС">
+          <Box
+            fontFamily="monospace"
+            fontSize="0.8em"
+            p={0.5}
+            backgroundColor="rgba(0,0,0,0.4)"
+          >
+            <Box color="label">os_version: {patient.os_version || 'null'}</Box>
+            <Box color="label">
+              os_brand_key: {patient.os_brand_key || 'null'}
+            </Box>
+            <Box color="label">
+              os_theme_color: {patient.os_theme_color || 'null'}
+            </Box>
+            <Box color="label">
+              os_logged_in: {String(!!patient.os_logged_in)}
+            </Box>
+            <Box color="label">
+              os_has_password: {String(!!patient.os_has_password)}
+            </Box>
+            <Box color="label">
+              os_remote_active: {String(!!patient.os_remote_active)}
+            </Box>
+            <Box color="label">
+              os_access_pending: {String(!!patient.os_access_pending)}
+            </Box>
+            <Box color="label">
+              os_virus_count: {patient.os_virus_count ?? 'null'}
+            </Box>
+            <Box color="label">
+              os_apps: {patient.os_installed_apps?.length ?? 0}
+            </Box>
+          </Box>
+        </Section>
       </Stack.Item>
     </Stack>
   );

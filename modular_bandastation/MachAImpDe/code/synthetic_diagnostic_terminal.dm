@@ -727,6 +727,21 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 
 	return system_messages
 
+/// Возвращает IPC-цель для debug/OS-экшнов:
+/// — пациент на столе (если есть и является IPC)
+/// — сам пользователь (если IPC и пациента нет — self-mode)
+/obj/machinery/computer/operating/synthetic/proc/get_ipc_target(mob/user)
+	if(table?.patient)
+		var/mob/living/carbon/human/H = table.patient
+		if(istype(H.dna?.species, /datum/species/ipc))
+			return H
+	// self-mode
+	if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(istype(H.dna?.species, /datum/species/ipc))
+			return H
+	return null
+
 /obj/machinery/computer/operating/synthetic/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
@@ -741,13 +756,10 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			return TRUE
 
 		if("remove_virus")
-			// Роботехник удаляет вирус через терминал
-			if(!table?.patient)
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
 				return FALSE
-			var/mob/living/carbon/human/patient = table.patient
-			if(!istype(patient.dna?.species, /datum/species/ipc))
-				return FALSE
-			var/datum/species/ipc/ipc_species = patient.dna.species
+			var/datum/species/ipc/ipc_species = target.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
 			var/virus_index = text2num(params["virus_index"])
@@ -755,31 +767,25 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 				return FALSE
 			var/datum/ipc_virus/target_virus = ipc_species.ipc_os.viruses[virus_index]
 			if(ipc_species.ipc_os.remove_virus_by_roboticist(target_virus))
-				to_chat(user, span_notice("Вирус успешно удалён из системы пациента."))
-				to_chat(patient, span_notice("ОС: Обнаружено внешнее вмешательство. Вирус удалён роботехником."))
+				to_chat(user, span_notice("Вирус успешно удалён из системы."))
+				to_chat(target, span_notice("ОС: Вирус удалён внешним инструментом."))
 			return TRUE
 
 		if("request_os_access")
-			// Роботехник запрашивает доступ к ОС пациента
-			if(!table?.patient)
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
 				return FALSE
-			var/mob/living/carbon/human/patient = table.patient
-			if(!istype(patient.dna?.species, /datum/species/ipc))
-				return FALSE
-			var/datum/species/ipc/ipc_species = patient.dna.species
+			var/datum/species/ipc/ipc_species = target.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
 			ipc_species.ipc_os.request_remote_access(user)
 			return TRUE
 
 		if("login_os_password")
-			// Роботехник входит в ОС по паролю
-			if(!table?.patient)
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
 				return FALSE
-			var/mob/living/carbon/human/patient = table.patient
-			if(!istype(patient.dna?.species, /datum/species/ipc))
-				return FALSE
-			var/datum/species/ipc/ipc_species = patient.dna.species
+			var/datum/species/ipc/ipc_species = target.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
 			var/input_password = params["password"]
@@ -789,13 +795,10 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			return TRUE
 
 		if("disconnect_os_remote")
-			// Роботехник отключает удалённый доступ
-			if(!table?.patient)
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
 				return FALSE
-			var/mob/living/carbon/human/patient = table.patient
-			if(!istype(patient.dna?.species, /datum/species/ipc))
-				return FALSE
-			var/datum/species/ipc/ipc_species = patient.dna.species
+			var/datum/species/ipc/ipc_species = target.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
 			ipc_species.ipc_os.revoke_remote_access()
@@ -803,12 +806,10 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 
 		if("inject_test_virus")
 			// DEBUG: Внедрение тестового вируса (для тестирования)
-			if(!table?.patient)
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
 				return FALSE
-			var/mob/living/carbon/human/patient = table.patient
-			if(!istype(patient.dna?.species, /datum/species/ipc))
-				return FALSE
-			var/datum/species/ipc/ipc_species = patient.dna.species
+			var/datum/species/ipc/ipc_species = target.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
 			var/virus_type = params["virus_type"]
@@ -826,7 +827,23 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 					new_virus = new /datum/ipc_virus/neural_hijack()
 			if(new_virus)
 				ipc_species.ipc_os.infect(new_virus)
-				to_chat(user, span_notice("Тестовый вирус внедрён."))
+				to_chat(user, span_notice("DEBUG: Тестовый вирус [new_virus.name] внедрён."))
+				to_chat(target, span_warning("ОС: Обнаружена новая угроза — [new_virus.name]."))
+			return TRUE
+
+		if("remove_all_viruses")
+			// DEBUG: Удалить все вирусы из ОС
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
+				return FALSE
+			var/datum/species/ipc/ipc_species = target.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			var/removed = 0
+			for(var/datum/ipc_virus/v in ipc_species.ipc_os.viruses)
+				if(ipc_species.ipc_os.remove_virus_by_roboticist(v))
+					removed++
+			to_chat(user, span_notice("DEBUG: Удалено вирусов: [removed]."))
 			return TRUE
 
 // ============================================
