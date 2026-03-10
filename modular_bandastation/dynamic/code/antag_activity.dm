@@ -1,4 +1,4 @@
-/// Cache for count_player_antag_episodes() proc that performs a complex database query.
+/// Cache for select_player_antag_episodes() proc that performs a complex database query.
 GLOBAL_ALIST_EMPTY(player_antag_episodes_cache)
 GLOBAL_PROTECT(player_antag_episodes_cache)
 
@@ -7,30 +7,30 @@ GLOBAL_PROTECT(player_antag_episodes_cache)
  *
  * * ckey - The player's ckey
  * * days_back - How many days back to check
- * * ignored_antagonists - List of antagonist types to ignore
+ * * tracked_antagonists - List of antagonist types to track
  *
- * Returns the count of times the player was assigned an antagonist role excluding the ones in ignored_antagonists.
+ * Returns the count of times the player was assigned an antagonist role that is in tracked_antagonists.
  * Returns 0 if arguments are invalid or database is unavailable.
  */
-/proc/count_player_antag_episodes(ckey, days_back, list/ignored_antagonists = list())
+/proc/select_player_antag_episodes(ckey, days_back, list/tracked_antagonists = list())
 	if(!ckey || !IS_FINITE(days_back) || days_back <= 0)
 		return 0
 
 	var/alist/cache = GLOB.player_antag_episodes_cache;
-	cache[ckey] = (ckey in cache) ? cache[ckey] : alist()
-	cache[ckey][days_back] = (days_back in cache[ckey]) ? cache[ckey][days_back] : alist()
-	var/cache_key = jointext(sort_list(ignored_antagonists), ",")
+	var/cache_key = jointext(sort_list(tracked_antagonists), ",")
+	cache[cache_key] = (cache_key in cache) ? cache[cache_key] : alist()
+	cache[cache_key][days_back] = (days_back in cache[cache_key]) ? cache[cache_key][days_back] : alist()
 
-	if(cache_key in cache[ckey][days_back])
+	if(ckey in cache[cache_key][days_back])
 		// We have cached value for the provided args, return it
-		return cache[ckey][days_back][cache_key]
+		return cache[cache_key][days_back][ckey]
 
 	if(!SSdbcore.Connect())
 		return 0
 
-	var/ignored_antagonists_clause = "TRUE"
-	if(length(ignored_antagonists))
-		ignored_antagonists_clause = "antagonist.antagonist_type NOT IN (\"[jointext(ignored_antagonists, "\", \"")]\")"
+	var/tracked_antagonists_clause = "TRUE"
+	if(length(tracked_antagonists))
+		tracked_antagonists_clause = "antagonist.antagonist_type IN (\"[jointext(tracked_antagonists, "\", \"")]\")"
 
 	var/datum/db_query/query = SSdbcore.NewQuery({"
 		SELECT COUNT(*) as role_count
@@ -45,7 +45,7 @@ GLOBAL_PROTECT(player_antag_episodes_cache)
 		WHERE f.key_name = 'antagonists'
 			AND f.datetime >= NOW() - INTERVAL :days_back DAY
 			AND antagonist.ckey_field = :ckey
-			AND [ignored_antagonists_clause]
+			AND [tracked_antagonists_clause]
 	"}, list(
 		"days_back" = days_back,
 		"ckey" = ckey
@@ -62,5 +62,5 @@ GLOBAL_PROTECT(player_antag_episodes_cache)
 	qdel(query)
 
 	// Cache the result
-	cache[ckey][days_back][cache_key] = count
+	cache[cache_key][days_back][ckey] = count
 	return count

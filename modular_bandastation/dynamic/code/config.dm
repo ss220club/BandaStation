@@ -48,8 +48,16 @@
 	min_val = 0
 	max_val = 100
 
-/// List of antagonist datums that are ignored when calculating weights.
-/datum/config_entry/str_list/ignored_antagonists
+/// List of antagonist datums that are tracked for roundstart selection.
+/datum/config_entry/str_list/tracked_antagonists_roundstart
+	protection = CONFIG_ENTRY_LOCKED
+
+/// List of antagonist datums that are tracked for midround selection.
+/datum/config_entry/str_list/tracked_antagonists_midround
+	protection = CONFIG_ENTRY_LOCKED
+
+/// List of antagonist datums that are tracked for latejoin selection.
+/datum/config_entry/str_list/tracked_antagonists_latejoin
 	protection = CONFIG_ENTRY_LOCKED
 
 /datum/config_entry/flag/log_antag_candidate_weight

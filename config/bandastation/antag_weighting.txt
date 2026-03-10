@@ -21,11 +21,17 @@ ANTAG_WEIGHT_PENALTY 10
 ## Setting this too HIGH reduces the effectiveness of the weighting system.
 ANTAG_MIN_WEIGHT 1
 
-## List of antagonist types that should be ignored when calculating candidate weight.
-## These roles will not count toward the penalty.
-#IGNORED_ANTAGONISTS /datum/antagonist/cult
-#IGNORED_ANTAGONISTS /datum/antagonist/cult/construct
-#IGNORED_ANTAGONISTS /datum/antagonist/cult/shade
+## List of antagonists whose activity should be tracked for roundstart selection.
+## These roles will count toward the penalty.
+TRACKED_ANTAGONISTS_ROUNDSTART /datum/antagonist/traitor
+
+## List of antagonist types that should be tracked for midround selection.
+## These roles will count toward the penalty.
+TRACKED_ANTAGONISTS_MIDROUND /datum/antagonist/blob
+
+## List of antagonists whose activity should be tracked for latejoin selection.
+## These roles will count toward the penalty.
+TRACKED_ANTAGONISTS_LATEJOIN /datum/antagonist/traitor
 
 ## Log candidate weight calculations to the server log.
 ## Useful for debugging and monitoring the weighting system.
