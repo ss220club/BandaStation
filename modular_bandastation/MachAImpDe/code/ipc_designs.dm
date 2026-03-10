@@ -261,8 +261,8 @@
 	id = "ipc_implant_sealed_joints"
 	build_path = /obj/item/implantcase/ipc/sealed_joints
 	materials = list(
-		/datum/material/iron      = SHEET_MATERIAL_AMOUNT * 2,
-		/datum/material/plasteel  = SHEET_MATERIAL_AMOUNT * 0.5,
+		/datum/material/iron   = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.5,
 	)
 	category = list(RND_CATEGORY_IPC + RND_SUBCATEGORY_IPC_IMPLANTS)
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
@@ -298,8 +298,8 @@
 	id = "ipc_implant_arm_razor"
 	build_path = /obj/item/implantcase/ipc/arm_razor
 	materials = list(
-		/datum/material/iron      = SHEET_MATERIAL_AMOUNT * 2,
-		/datum/material/plasteel  = SHEET_MATERIAL_AMOUNT,
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/gold = SHEET_MATERIAL_AMOUNT,
 	)
 	category = list(RND_CATEGORY_IPC + RND_SUBCATEGORY_IPC_IMPLANTS)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
@@ -310,8 +310,8 @@
 	id = "ipc_implant_mantis_right"
 	build_path = /obj/item/implantcase/ipc/mantis_right
 	materials = list(
-		/datum/material/iron      = SHEET_MATERIAL_AMOUNT * 2,
-		/datum/material/plasteel  = SHEET_MATERIAL_AMOUNT,
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/gold = SHEET_MATERIAL_AMOUNT,
 	)
 	category = list(RND_CATEGORY_IPC + RND_SUBCATEGORY_IPC_IMPLANTS)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
@@ -322,8 +322,8 @@
 	id = "ipc_implant_mantis_left"
 	build_path = /obj/item/implantcase/ipc/mantis_left
 	materials = list(
-		/datum/material/iron      = SHEET_MATERIAL_AMOUNT * 2,
-		/datum/material/plasteel  = SHEET_MATERIAL_AMOUNT,
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/gold = SHEET_MATERIAL_AMOUNT,
 	)
 	category = list(RND_CATEGORY_IPC + RND_SUBCATEGORY_IPC_IMPLANTS)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
@@ -334,8 +334,8 @@
 	id = "ipc_implant_arm_cannon"
 	build_path = /obj/item/implantcase/ipc/arm_cannon
 	materials = list(
-		/datum/material/iron      = SHEET_MATERIAL_AMOUNT * 3,
-		/datum/material/plasteel  = SHEET_MATERIAL_AMOUNT,
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3,
+		/datum/material/gold = SHEET_MATERIAL_AMOUNT,
 	)
 	category = list(RND_CATEGORY_IPC + RND_SUBCATEGORY_IPC_IMPLANTS)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE

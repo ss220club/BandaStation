@@ -1,8 +1,3 @@
-/obj/item/circuitboard/computer/operating/synthetic
-	name = "Synthetic Diagnostic Terminal"
-	greyscale_colors = CIRCUIT_COLOR_MEDICAL
-	build_path = /obj/machinery/computer/operating/synthetic
-
 /obj/item/circuitboard/machine/teapot
 	name = "Чайник"
 	greyscale_colors = CIRCUIT_COLOR_SERVICE
