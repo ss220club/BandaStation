@@ -791,13 +791,13 @@
 
 	return ..() // Вызываем родительский метод для остальных взаимодействий
 
-// Генерация и валидация имён для IPC (цифры в именах разрешены)
+// Разрешаем цифры в именах для всех рас — нужно для IPC (ARC-908 и т.д.)
+// Не ломает человеческие/лизардские имена: в них цифр нет
+/datum/preference/name/real_name
+	allow_numbers = TRUE
+
+// Генерация случайного имени при выборе расы IPC
 /datum/preference/name/real_name/create_informed_default_value(datum/preferences/preferences)
 	if(preferences.read_preference(/datum/preference/choiced/species) == /datum/species/ipc)
 		return pick(GLOB.ipc_names)
 	return ..()
-
-/datum/preference/name/real_name/deserialize(input, datum/preferences/preferences)
-	if(preferences.read_preference(/datum/preference/choiced/species) == /datum/species/ipc)
-		return reject_bad_name("[input]", TRUE)
-	return ..(input, preferences)
