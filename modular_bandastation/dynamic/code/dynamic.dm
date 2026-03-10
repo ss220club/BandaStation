@@ -36,14 +36,14 @@
 /datum/dynamic_ruleset/proc/count_player_antag_episodes(ckey, days_back)
 	return 0
 
-/datum/dynamic_ruleset/roundstart/proc/count_player_antag_episodes(ckey, days_back)
+/datum/dynamic_ruleset/roundstart/count_player_antag_episodes(ckey, days_back)
 	var/list/tracked_antagonists = CONFIG_GET(str_list/tracked_antagonists_roundstart)
 	return select_player_antag_episodes(ckey, days_back, tracked_antagonists)
 
-/datum/dynamic_ruleset/midround/from_ghosts/proc/count_player_antag_episodes(ckey, days_back)
+/datum/dynamic_ruleset/midround/from_ghosts/count_player_antag_episodes(ckey, days_back)
 	var/list/tracked_antagonists = CONFIG_GET(str_list/tracked_antagonists_midround)
 	return select_player_antag_episodes(ckey, days_back, tracked_antagonists)
 
-/datum/dynamic_ruleset/latejoin/proc/count_player_antag_episodes(ckey, days_back)
+/datum/dynamic_ruleset/latejoin/count_player_antag_episodes(ckey, days_back)
 	var/list/tracked_antagonists = CONFIG_GET(str_list/tracked_antagonists_latejoin)
 	return select_player_antag_episodes(ckey, days_back, tracked_antagonists)
