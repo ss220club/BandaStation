@@ -711,10 +711,8 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 	return null
 
 /obj/machinery/computer/operating/synthetic/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
-	. = ..()
-	if(.)
-		return
-
+	// ВАЖНО: Родительский operating/ui_act всегда возвращает TRUE (даже для необработанных действий),
+	// поэтому наши кейсы должны быть ПЕРЕД вызовом родителя, иначе они никогда не выполнятся.
 	var/mob/user = ui.user
 
 	switch(action)
@@ -825,6 +823,10 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 					removed++
 			to_chat(user, span_notice("DEBUG: Удалено вирусов: [removed]."))
 			return TRUE
+
+	// Для всех остальных действий — передаём родителю
+	return ..()
+
 
 // ============================================
 // БЛОКИРОВКА ОБЫЧНОГО ТЕРМИНАЛА ДЛЯ IPC
