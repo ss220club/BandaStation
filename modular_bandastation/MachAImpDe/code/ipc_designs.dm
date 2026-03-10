@@ -244,10 +244,10 @@
 // ============================================================
 
 /datum/design/ipc_implant_magnetic_joints
-	name = "Магнитные суставы КПБ (кейс)"
-	desc = "Имплант-кейс: магнитные суставы, препятствующие отрыву конечностей."
+	name = "Магнитные суставы КПБ"
+	desc = "Имплант: магнитные суставы, препятствующие отрыву конечностей."
 	id = "ipc_implant_magnetic_joints"
-	build_path = /obj/item/implantcase/ipc/magnetic_joints
+	build_path = /obj/item/implant/ipc/magnetic_joints
 	materials = list(
 		/datum/material/iron   = SHEET_MATERIAL_AMOUNT * 1.5,
 		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.5,
@@ -256,10 +256,10 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_sealed_joints
-	name = "Запечатанные суставы КПБ (кейс)"
-	desc = "Имплант-кейс: запечатанные суставы повышенной прочности."
+	name = "Запечатанные суставы КПБ"
+	desc = "Имплант: запечатанные суставы повышенной прочности."
 	id = "ipc_implant_sealed_joints"
-	build_path = /obj/item/implantcase/ipc/sealed_joints
+	build_path = /obj/item/implant/ipc/sealed_joints
 	materials = list(
 		/datum/material/iron   = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.5,
@@ -268,10 +268,10 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_reactive_repair
-	name = "Реактивный ремонт КПБ (кейс)"
-	desc = "Имплант-кейс: система автоматического восстановления повреждений."
+	name = "Реактивный ремонт КПБ"
+	desc = "Имплант: система автоматического восстановления повреждений."
 	id = "ipc_implant_reactive_repair"
-	build_path = /obj/item/implantcase/ipc/reactive_repair
+	build_path = /obj/item/implant/ipc/reactive_repair
 	materials = list(
 		/datum/material/iron    = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/silver  = SHEET_MATERIAL_AMOUNT,
@@ -281,10 +281,10 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_magnetic_leg
-	name = "Магнитная нога КПБ (кейс)"
-	desc = "Имплант-кейс: магнитные ботинки для фиксации на металлических поверхностях."
+	name = "Магнитная нога КПБ"
+	desc = "Имплант: магнитные ботинки для фиксации на металлических поверхностях."
 	id = "ipc_implant_magnetic_leg"
-	build_path = /obj/item/implantcase/ipc/magnetic_leg
+	build_path = /obj/item/implant/ipc/magnetic_leg
 	materials = list(
 		/datum/material/iron   = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.5,
@@ -293,10 +293,10 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_arm_razor
-	name = "Моновайер КПБ (кейс)"
-	desc = "Имплант-кейс: монофиламентная режущая струна в предплечье."
+	name = "Моновайер КПБ"
+	desc = "Имплант: монофиламентная режущая струна в предплечье."
 	id = "ipc_implant_arm_razor"
-	build_path = /obj/item/implantcase/ipc/arm_razor
+	build_path = /obj/item/implant/ipc/arm_razor
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/gold = SHEET_MATERIAL_AMOUNT,
@@ -305,10 +305,10 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_mantis_right
-	name = "Лезвие богомола (правое, кейс)"
-	desc = "Имплант-кейс: выдвижное лезвие богомола в правое предплечье."
+	name = "Лезвие богомола (правое)"
+	desc = "Имплант: выдвижное лезвие богомола в правое предплечье."
 	id = "ipc_implant_mantis_right"
-	build_path = /obj/item/implantcase/ipc/mantis_right
+	build_path = /obj/item/implant/ipc/mantis
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/gold = SHEET_MATERIAL_AMOUNT,
@@ -317,10 +317,10 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_mantis_left
-	name = "Лезвие богомола (левое, кейс)"
-	desc = "Имплант-кейс: выдвижное лезвие богомола в левое предплечье."
+	name = "Лезвие богомола (левое)"
+	desc = "Имплант: выдвижное лезвие богомола в левое предплечье."
 	id = "ipc_implant_mantis_left"
-	build_path = /obj/item/implantcase/ipc/mantis_left
+	build_path = /obj/item/implant/ipc/mantis/left
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/gold = SHEET_MATERIAL_AMOUNT,
@@ -329,10 +329,10 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_arm_cannon
-	name = "Дробовик в руке КПБ (кейс)"
-	desc = "Имплант-кейс: встроенный дробовик в предплечье IPC."
+	name = "Дробовик в руке КПБ"
+	desc = "Имплант: встроенный дробовик в предплечье IPC."
 	id = "ipc_implant_arm_cannon"
-	build_path = /obj/item/implantcase/ipc/arm_cannon
+	build_path = /obj/item/implant/ipc/arm_cannon
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3,
 		/datum/material/gold = SHEET_MATERIAL_AMOUNT,
@@ -341,10 +341,10 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_sandevistan
-	name = "Сандевистан КПБ (кейс)"
-	desc = "Имплант-кейс: ускоритель реакции — кратковременное ускорение всех систем."
+	name = "Сандевистан КПБ"
+	desc = "Имплант: ускоритель реакции — кратковременное ускорение всех систем."
 	id = "ipc_implant_sandevistan"
-	build_path = /obj/item/implantcase/ipc/sandevistan
+	build_path = /obj/item/implant/ipc/sandevistan
 	materials = list(
 		/datum/material/iron    = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/gold    = SHEET_MATERIAL_AMOUNT,
