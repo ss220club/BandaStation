@@ -25,7 +25,7 @@ ANTAG_MIN_WEIGHT 1
 ## These roles will count toward the penalty.
 TRACKED_ANTAGONISTS_ROUNDSTART /datum/antagonist/traitor
 
-## List of antagonist types that should be tracked for midround selection.
+## List of antagonists whose activity should be tracked for midround selection.
 ## These roles will count toward the penalty.
 TRACKED_ANTAGONISTS_MIDROUND /datum/antagonist/blob
 
