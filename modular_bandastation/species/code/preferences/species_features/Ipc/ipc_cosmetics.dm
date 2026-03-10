@@ -112,9 +112,8 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 
 // ============================================
 // BODYPART OVERLAY: ХВОСТ
-// BEHIND — рендерится за телом при виде сбоку (восток/запад).
-// FRONT  — рендерится перед телом при виде спереди (юг) и сзади (север).
-// При виде с севера хвост находится лицом к игроку — нужен FRONT.
+// BEHIND и FRONT рендерятся всегда — прозрачность фреймов в DMI
+// определяет что видно в каждом направлении.
 // ============================================
 
 /datum/bodypart_overlay/ipc_tail
@@ -135,12 +134,8 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 
 /datum/bodypart_overlay/ipc_tail/get_overlay(layer, obj/item/bodypart/limb)
 	. = list()
-	var/owner_dir = limb?.owner?.dir
 	switch(layer)
 		if(EXTERNAL_BEHIND)
-			// BEHIND виден только сбоку — восток/запад
-			if(owner_dir == NORTH || owner_dir == SOUTH)
-				return .
 			var/image/img_behind = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
 			if(icon_color)
 				img_behind.color = icon_color
@@ -150,9 +145,6 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 				img_sec_behind.color = secondary_icon_color
 				. += img_sec_behind
 		if(EXTERNAL_FRONT)
-			// FRONT виден спереди (юг) и сзади (север) — хвост смотрит на зрителя
-			if(owner_dir != SOUTH && owner_dir != NORTH)
-				return .
 			var/image/img_front = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
 			if(icon_color)
 				img_front.color = icon_color
@@ -206,23 +198,12 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	for(var/datum/bodypart_overlay/ipc_tail/old in chest.bodypart_overlays)
 		chest.remove_bodypart_overlay(old)
 		qdel(old)
-	// Отписываемся от смены направления в любом случае
-	H.UnregisterSignal(H, COMSIG_ATOM_POST_DIR_CHANGE)
 	if(!enabled)
 		return
 	var/datum/bodypart_overlay/ipc_tail/overlay = new()
 	overlay.icon_color = H.dna?.features["ipc_tail_color"]
 	overlay.secondary_icon_color = H.dna?.features["ipc_tail_secondary_color"]
 	chest.add_bodypart_overlay(overlay)
-	// Перестраиваем оверлей после смены направления, чтобы dir уже обновился
-	H.RegisterSignal(H, COMSIG_ATOM_POST_DIR_CHANGE, GLOBAL_PROC_REF(_ipc_tail_on_dir_change), override = TRUE)
-
-/// Вспомогательный сигнал: перестраивает оверлей хвоста после смены направления.
-/proc/_ipc_tail_on_dir_change(mob/living/carbon/human/H, old_dir, new_dir)
-	SIGNAL_HANDLER
-	if(!istype(H) || !istype(H.dna?.species, /datum/species/ipc))
-		return
-	H.update_body_parts()
 
 // ============================================
 // PREFERENCES: КОСМЕТИКА КПБ

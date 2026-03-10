@@ -1353,11 +1353,20 @@
 	pending_access_request = TRUE
 	requesting_user = requester
 
+	// DEBUG: Уведомляем запрашивающего что запрос отправлен
+	to_chat(requester, span_notice("DEBUG: Запрос на удалённый доступ отправлен владельцу ОС ([owner.name])."))
+
 	// Уведомляем IPC
 	to_chat(owner, span_notice("СИСТЕМА: Получен запрос на удалённый доступ к ОС от [requester.name]. Проверьте вашу ОС."))
 
 	// Открываем ОС у IPC если не открыта
 	ui_interact(owner)
+
+	// DEBUG: Если IPC без клиента (кукла/NPC) — авто-одобряем запрос
+	if(!owner.client)
+		to_chat(requester, span_notice("DEBUG: IPC без клиента — запрос авто-одобрен."))
+		approve_access()
+		return TRUE
 
 	SStgui.update_uis(src)
 	return TRUE

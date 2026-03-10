@@ -239,19 +239,10 @@ export const SyntheticDiagnostic = () => {
               >
                 ОС
               </Tabs.Tab>
-              <Tabs.Tab
-                icon="bug"
-                color="average"
-                selected={selectedTab === 2}
-                onClick={() => setSelectedTab(2)}
-              >
-                DEBUG
-              </Tabs.Tab>
             </Tabs>
 
             {selectedTab === 0 && <MainDiagnosticsView />}
             {selectedTab === 1 && <OsTab />}
-            {selectedTab === 2 && <DebugTab />}
           </>
         )}
       </Window.Content>
