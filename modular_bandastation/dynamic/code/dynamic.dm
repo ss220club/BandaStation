@@ -47,3 +47,20 @@
 /datum/dynamic_ruleset/latejoin/count_player_antag_episodes(ckey, days_back)
 	var/list/tracked_antagonists = CONFIG_GET(str_list/tracked_antagonists_latejoin)
 	return select_player_antag_episodes(ckey, days_back, tracked_antagonists)
+
+/datum/dynamic_ruleset/latejoin/is_valid_candidate(mob/candidate, client/candidate_client)
+	if(!..())
+		return FALSE
+
+	if(!CONFIG_GET(flag/antag_weighted_selection))
+		return TRUE
+
+	var/base_weight = CONFIG_GET(number/antag_base_weight)
+	var/current_weight = calculate_candidate_weight(candidate.ckey)
+	var/selection_chance = 100 * current_weight / base_weight
+
+	if(prob(selection_chance))
+		return TRUE
+
+	log_data = "Reason: Candidate failed latejoin weight check ([selection_chance]%)."
+	return FALSE
