@@ -790,3 +790,14 @@
 				return ITEM_INTERACT_SUCCESS
 
 	return ..() // Вызываем родительский метод для остальных взаимодействий
+
+// Генерация и валидация имён для IPC (цифры в именах разрешены)
+/datum/preference/name/real_name/create_informed_default_value(datum/preferences/preferences)
+	if(preferences.read_preference(/datum/preference/choiced/species) == /datum/species/ipc)
+		return pick(GLOB.ipc_names)
+	return ..()
+
+/datum/preference/name/real_name/deserialize(input, datum/preferences/preferences)
+	if(preferences.read_preference(/datum/preference/choiced/species) == /datum/species/ipc)
+		return reject_bad_name("[input]", TRUE)
+	return ..(input, preferences)
