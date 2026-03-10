@@ -68,7 +68,7 @@ SUBSYSTEM_DEF(liquids)
 					group_process_work_queue -= liquid_group
 					continue
 				liquid_group.process_group(TRUE)
-				if(populate_evaporation && (liquid_group.always_evaporates || liquid_group.expected_turf_height < LIQUID_STATE_ANKLES) && liquid_group.evaporates)
+				if(populate_evaporation && (liquid_group.always_evaporates || liquid_group.expected_turf_height < LIQUID_ANKLES_LEVEL_HEIGHT) && liquid_group.evaporates)
 					for(var/turf/listed_turf as anything in liquid_group.members)
 						if(!listed_turf || isoceanturf(listed_turf))
 							continue
