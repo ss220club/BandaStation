@@ -5,7 +5,6 @@
 /obj/machinery/computer/operating/synthetic
 	name = "synthetic diagnostic terminal"
 	desc = "Специализированный терминал для диагностики синтетических организмов - IPC и андроидов."
-	icon = 'modular_bandastation/MachAImpDe/icons/computer.dmi'
 	icon_screen = "ipc_crew"
 	icon_keyboard = "tech_key"
 	light_color = COLOR_BLUE_LIGHT
@@ -433,32 +432,6 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			"details" = "КРИТИЧНО: Требуется установка"
 		))
 
-	// Система охлаждения
-	var/obj/item/organ/lungs/ipc/cooling = patient.get_organ_slot(ORGAN_SLOT_LUNGS)
-	if(cooling)
-		var/efficiency_percent = round(cooling.cooling_efficiency * 100)
-		var/status_color = "good"
-		if(efficiency_percent < 50)
-			status_color = "bad"
-		else if(efficiency_percent < 80)
-			status_color = "average"
-
-		components += list(list(
-			"name" = "Система охлаждения",
-			"status" = "Установлена",
-			"status_color" = status_color,
-			"damage" = cooling.damage,
-			"details" = "Эффективность: [efficiency_percent]%"
-		))
-	else
-		components += list(list(
-			"name" = "Система охлаждения",
-			"status" = "ОТСУТСТВУЕТ",
-			"status_color" = "average",
-			"damage" = 0,
-			"details" = "ПРЕДУПРЕЖДЕНИЕ: Риск перегрева"
-		))
-
 	// Оптические сенсоры
 	var/obj/item/organ/eyes/robotic/ipc/eyes = patient.get_organ_slot(ORGAN_SLOT_EYES)
 	if(eyes)
@@ -636,7 +609,6 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 
 	var/obj/item/organ/brain/positronic/brain = patient.get_organ_slot(ORGAN_SLOT_BRAIN)
 	var/obj/item/organ/heart/ipc_battery/battery = patient.get_organ_slot(ORGAN_SLOT_HEART)
-	var/obj/item/organ/lungs/ipc/cooling = patient.get_organ_slot(ORGAN_SLOT_LUNGS)
 
 	// Проверка температуры процессора
 	var/datum/species/ipc/ipc_species = patient.dna.species
@@ -687,12 +659,6 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 		system_messages += list(list(
 			"type" = "warning",
 			"message" = "ПРЕДУПРЕЖДЕНИЕ: Заряд батареи ниже 30%."
-		))
-
-	if(!cooling)
-		system_messages += list(list(
-			"type" = "warning",
-			"message" = "ПРЕДУПРЕЖДЕНИЕ: Система охлаждения отсутствует. Риск перегрева."
 		))
 
 	if(patient.get_brute_loss() > 50)

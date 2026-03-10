@@ -112,9 +112,9 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 
 // ============================================
 // BODYPART OVERLAY: ХВОСТ
-// BEHIND — рендерится за телом (север/восток/запад).
-// FRONT  — рендерится перед телом только при виде с юга,
-//           чтобы хвост не перекрывал тело в других направлениях.
+// BEHIND — рендерится за телом при виде сбоку (восток/запад).
+// FRONT  — рендерится перед телом при виде спереди (юг) и сзади (север).
+// При виде с севера хвост находится лицом к игроку — нужен FRONT.
 // ============================================
 
 /datum/bodypart_overlay/ipc_tail
@@ -135,8 +135,12 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 
 /datum/bodypart_overlay/ipc_tail/get_overlay(layer, obj/item/bodypart/limb)
 	. = list()
+	var/owner_dir = limb?.owner?.dir
 	switch(layer)
 		if(EXTERNAL_BEHIND)
+			// BEHIND виден только сбоку — восток/запад
+			if(owner_dir == NORTH || owner_dir == SOUTH)
+				return .
 			var/image/img_behind = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
 			if(icon_color)
 				img_behind.color = icon_color
@@ -146,8 +150,8 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 				img_sec_behind.color = secondary_icon_color
 				. += img_sec_behind
 		if(EXTERNAL_FRONT)
-			// Рендерим FRONT только при виде с юга — иначе хвост перекрывает тело
-			if(!limb?.owner || limb.owner.dir != SOUTH)
+			// FRONT виден спереди (юг) и сзади (север) — хвост смотрит на зрителя
+			if(owner_dir != SOUTH && owner_dir != NORTH)
 				return .
 			var/image/img_front = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
 			if(icon_color)

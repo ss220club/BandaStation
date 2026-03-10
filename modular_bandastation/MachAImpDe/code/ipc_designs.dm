@@ -36,7 +36,6 @@
 		// Органы
 		"ipc_organ_positronic",
 		"ipc_organ_battery",
-		"ipc_organ_cooling",
 		"ipc_organ_eyes",
 		"ipc_organ_ears",
 		"ipc_organ_tongue",
@@ -187,18 +186,6 @@
 	materials = list(
 		/datum/material/iron   = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/silver = SHEET_MATERIAL_AMOUNT,
-	)
-	category = list(RND_CATEGORY_IPC + RND_SUBCATEGORY_IPC_ORGANS)
-	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
-
-/datum/design/ipc_organ_cooling
-	name = "Система охлаждения КПБ"
-	desc = "Система охлаждения процессора IPC. Предотвращает перегрев."
-	id = "ipc_organ_cooling"
-	build_path = /obj/item/organ/lungs/ipc
-	materials = list(
-		/datum/material/iron   = SHEET_MATERIAL_AMOUNT * 2,
-		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.5,
 	)
 	category = list(RND_CATEGORY_IPC + RND_SUBCATEGORY_IPC_ORGANS)
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
