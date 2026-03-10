@@ -72,9 +72,6 @@
 	var/overclock_active = FALSE
 	var/overclock_speed_bonus = 0.4  // 40% ускорение по умолчанию
 
-	// Переменные для шасси
-	var/chassis_manufacturer = "Unbranded"
-
 	// Лечение
 	var/self_repair_enabled = TRUE
 	var/self_repair_amount = 0.5
@@ -370,7 +367,7 @@
 			if(env_temp < cpu_temperature)
 				var/cooling_amount = min((cpu_temperature - env_temp) * 0.01, cpu_cooling_rate * 2)
 				cpu_temperature = max(cpu_temperature - cooling_amount, env_temp)
-			else if(env_temp > cpu_temperature && cpu_heating_from_environment)
+			else if(env_temp > cpu_temperature)
 				var/heating_amount = min((env_temp - cpu_temperature) * 0.005, cpu_cooling_rate)
 				cpu_temperature = min(cpu_temperature + heating_amount, env_temp)
 
