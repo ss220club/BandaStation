@@ -7,7 +7,6 @@
  */
 /datum/dynamic_ruleset/proc/calculate_candidate_weight(candidate_ckey)
 	SHOULD_NOT_OVERRIDE(TRUE)
-	PRIVATE_PROC(TRUE)
 
 	if(!candidate_ckey)
 		return CONFIG_GET(number/antag_base_weight)
