@@ -169,7 +169,7 @@
 	var/displayed_key = key
 	if(client?.holder?.fakekey)
 		displayed_key = null
-	deadchat_broadcast(rendered, source, follow_target = src, speaker_key = displayed_key, raw_message = message) // BANDASTATION EDIT - ghost runechat
+	deadchat_broadcast(rendered, source, follow_target = src, speaker_key = displayed_key)
 	for(var/mob/mobs_hearing as anything in GLOB.player_list)
 		if(SSticker.current_state != GAME_STATE_FINISHED && (mobs_hearing.see_invisible < invisibility || !isdead(mobs_hearing)))
 			continue

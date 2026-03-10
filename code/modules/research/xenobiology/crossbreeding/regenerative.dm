@@ -37,7 +37,12 @@ Regenerative extracts:
 		/datum/reagent/medicine/c2/tirimol = 5,
 	)
 	extract_reagents += isjellyperson(H) ? list(/datum/reagent/toxin/amanitin = 7) :  list(/datum/reagent/medicine/c2/multiver = 15)
-	H.reagents.add_reagent_list(extract_reagents)
+	if(H.reagents)
+		H.reagents.add_reagent_list(extract_reagents)
+	else
+		H.adjust_brute_loss(-25)
+		H.adjust_fire_loss(-25)
+		H.adjust_tox_loss(-25)
 	// BANDASTATION EDIT END
 	core_effect(H, user)
 	playsound(H, 'sound/effects/splat.ogg', 40, TRUE)
@@ -251,7 +256,8 @@ Regenerative extracts:
 
 /obj/item/slimecross/regenerative/black/core_effect_before(mob/living/target, mob/user)
 	var/dummytype = target.type
-	if(target.mob_biotypes & MOB_SPECIAL) //Prevents megafauna and voidwalker duping in a lame way
+	// BANDASTATION EDIT: clone fix
+	if((target.mob_biotypes & MOB_SPECIAL) || !iscarbon(target)) //Prevents megafauna and voidwalker duping in a lame way
 		dummytype = /mob/living/basic/slime
 		to_chat(user, span_warning("Молочное желе обтекает по [target.declent_ru(DATIVE)], стекая в маленькую лужицу."))
 	var/mob/living/dummy = new dummytype(target.loc)
