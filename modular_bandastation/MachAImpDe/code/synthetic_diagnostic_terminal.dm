@@ -6,9 +6,10 @@
 	name = "synthetic diagnostic terminal"
 	desc = "Специализированный терминал для диагностики синтетических организмов - IPC и андроидов."
 	icon = 'modular_bandastation/MachAImpDe/icons/computer.dmi'
-	icon_screen = "computer_robo"
+	icon_screen = "ipc_crew"
 	icon_keyboard = "tech_key"
 	light_color = COLOR_BLUE_LIGHT
+	circuit = /obj/item/circuitboard/computer/operating/synthetic
 
 /// Переопределяем поиск стола — приоритет synthetic diagnostic table
 /obj/machinery/computer/operating/synthetic/find_table()
@@ -69,6 +70,15 @@
 
 	// Поиск пациента
 	if(!table.patient)
+		// Если сам пользователь IPC — режим самодиагностики
+		if(istype(user, /mob/living/carbon/human))
+			var/mob/living/carbon/human/self_user = user
+			if(istype(self_user.dna?.species, /datum/species/ipc))
+				data["patient"] = get_patient_data(self_user)
+				data["target_zone"] = target_zone
+				data["surgeries"] = list()  // Операции над собой недоступны
+				data["self_mode"] = TRUE
+				return data
 		data["patient"] = null
 		data["error"] = "Пациент не обнаружен на столе"
 		return data

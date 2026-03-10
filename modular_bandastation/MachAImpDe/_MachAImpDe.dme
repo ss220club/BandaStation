@@ -10,6 +10,7 @@
 #include "code/nanopaste.dm"
 #include "code/synthetic_diagnostic_table.dm"
 #include "code/synthetic_diagnostic_terminal.dm"
+#include "code/ipc_designs.dm"
 // BEGIN_INTERNALS
 // END_INTERNALS
 // BEGIN_FILE_DIR
