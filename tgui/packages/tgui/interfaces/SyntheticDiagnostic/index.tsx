@@ -1366,14 +1366,28 @@ const RemoteAccessSection = () => {
                 </Box>
               </Stack.Item>
               <Stack.Item>
-                <Button
-                  compact
-                  color="bad"
-                  icon="times"
-                  onClick={() => act('disconnect_os_remote')}
-                >
-                  Отключить
-                </Button>
+                <Stack>
+                  <Stack.Item>
+                    <Button
+                      compact
+                      color="good"
+                      icon="desktop"
+                      onClick={() => act('open_os_window')}
+                    >
+                      Открыть ОС
+                    </Button>
+                  </Stack.Item>
+                  <Stack.Item>
+                    <Button
+                      compact
+                      color="bad"
+                      icon="times"
+                      onClick={() => act('disconnect_os_remote')}
+                    >
+                      Отключить
+                    </Button>
+                  </Stack.Item>
+                </Stack>
               </Stack.Item>
             </Stack>
           </Box>

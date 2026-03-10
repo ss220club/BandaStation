@@ -5,6 +5,7 @@
 /obj/machinery/computer/operating/synthetic
 	name = "synthetic diagnostic terminal"
 	desc = "Специализированный терминал для диагностики синтетических организмов - IPC и андроидов."
+	icon = 'modular_bandastation/MachAImpDe/icons/computer.dmi'
 	icon_state = "computer_robo"
 	icon_screen = "ipc_crew"
 	icon_keyboard = "tech_key"
@@ -759,6 +760,18 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			if(!input_password)
 				return FALSE
 			ipc_species.ipc_os.remote_login(user, input_password)
+			return TRUE
+
+		if("open_os_window")
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
+				return FALSE
+			var/datum/species/ipc/ipc_species = target.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			// Открываем окно ОС для текущего пользователя (роботехника или самого IPC)
+			to_chat(user, span_notice("DEBUG: Открываем окно ОС..."))
+			ipc_species.ipc_os.ui_interact(user)
 			return TRUE
 
 		if("disconnect_os_remote")
