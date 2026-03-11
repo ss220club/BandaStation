@@ -32,6 +32,18 @@
 	name = "Breathscarf (Worn)"
 	icon_file = 'modular_bandastation/objects/icons/mob/clothing/head/masks.dmi'
 
+/obj/item/clothing/mask/gas/sechailer/ntci
+	name = "tactical breathscarf system"
+	desc = "Стильный и тактический шарф, в который встроена маской СБ, создан для оперативной работы в экстремальных ситуациях."
+	icon = 'icons/map_icons/clothing/mask.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/masks.dmi'
+	icon_state = "/obj/item/clothing/mask/breath/breathscarf"
+	post_init_icon_state = "breathscarf"
+	greyscale_colors = COLOR_PRISONER_BLACK
+	greyscale_config = /datum/greyscale_config/breathscarf
+	greyscale_config_worn = /datum/greyscale_config/breathscarf/worn
+	flags_1 = IS_PLAYER_COLORABLE_1
+
 // MARK: TSF
 /obj/item/clothing/mask/breath/breathscarf/tsf_infiltrator
 	greyscale_colors = COLOR_OLIVE

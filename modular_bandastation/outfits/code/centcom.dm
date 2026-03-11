@@ -200,7 +200,7 @@
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses
 	gloves = /obj/item/clothing/gloves/combat
 	head = /obj/item/clothing/head/beret/ert/ntci
-	mask = /obj/item/clothing/mask/breath/breathscarf
+	mask = /obj/item/clothing/mask/gas/sechailer/ntci
 	shoes = /obj/item/clothing/shoes/combat/swat
 	r_pocket = /obj/item/knife/combat
 	l_pocket = /obj/item/reagent_containers/hypospray/combat/nanites
@@ -258,10 +258,10 @@
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom/ntci,
 		/obj/item/clothing/head/beret/ert/ntci,
-		/obj/item/storage/medkit/tactical/premium,
+		/obj/item/storage/medkit/tactical = 2,
 		/obj/item/defibrillator/compact/combat/loaded/nanotrasen,
-		/obj/item/grenade/smokebomb = 2,
-		/obj/item/ammo_box/magazine/c762x39mm/ap,
+		/obj/item/grenade/smokebomb =1,
+		/obj/item/gun/medbeam,
 		/obj/item/ammo_box/magazine/c762x39mm/ap,
 		/obj/item/ammo_box/magazine/c762x39mm/incendiary,
 		/obj/item/ammo_box/magazine/c762x39mm/emp,
@@ -290,7 +290,7 @@
 		/obj/item/ammo_box/magazine/cm40/hp,
 		/obj/item/gun/ballistic/rocketlauncher/oneuse,
 	)
-	suit = /obj/item/clothing/suit/armor/vest/ntci_chestplate // Make heavy armor
+	suit = /obj/item/clothing/suit/armor/vest/ntci_chestplate
 	suit_store = /obj/item/gun/ballistic/automatic/cm40
 	belt = /obj/item/storage/belt/military/holster/ntci/full_machinegun
 
