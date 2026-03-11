@@ -11,6 +11,9 @@
 	if(visuals_only)
 		return
 
+	var/datum/action/cooldown/spell/dodge_mode/dodge = new()
+	dodge.Grant(H)
+
 	// Удаляем существующие руки и заменяем на протезы Strongarm
 	var/obj/item/bodypart/arm/left/strongarm/left_arm = new()
 	var/obj/item/bodypart/arm/right/strongarm/right_arm = new()

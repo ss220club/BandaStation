@@ -20,8 +20,8 @@
 /// Movespeed modifier for strongleg prosthesis
 /datum/movespeed_modifier/strongleg_prosthesis
 	movetypes = GROUND
-	variable_multiplier = TRUE
-	modifier_slowdown = -0.3
+	variable = TRUE
+	multiplicative_slowdown = -0.3
 
 /// Component for Strongleg prosthesis combat abilities
 /// Handles enhanced kicks and stomp attacks

@@ -54,6 +54,7 @@
 	button_icon = 'icons/mob/actions/actions_spells.dmi'
 	button_icon_state = "blink"
 	cooldown_time = 3 SECONDS
+	spell_requirements = SPELL_CASTABLE_WITHOUT_INVOCATION
 	/// Whether dodge mode is active
 	var/dodge_active = FALSE
 	var/datum/element/dodge_shift/shift_type = /datum/element/dodge_shift/ultimate
