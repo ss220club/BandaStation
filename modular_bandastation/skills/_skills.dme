@@ -5,4 +5,5 @@
 #include "code/dodge_shift/dodge_shift_examples.dm"
 #include "code/prosthetics/strongarm_bodypart.dm"
 #include "code/prosthetics/strongarm_prosthesis.dm"
+#include "code/prosthetics/strongleg_bodypart.dm"
 #include "code/outfit/outfit.dm"
