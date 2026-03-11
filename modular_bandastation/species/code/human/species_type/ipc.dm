@@ -121,6 +121,8 @@
 	var/ipc_face_state = ""
 	/// Зона установки зарядного порта (задаётся из настроек персонажа)
 	var/ipc_charger_arm_zone = BODY_ZONE_L_ARM
+	/// Тип головы: "monitor" = монитор-экран, "head" = обычная голова (без экрана)
+	var/ipc_head_type = "monitor"
 
 	// ---- Поколение ----
 	/// Поколение КПБ: gen1_modular / gen2_standard / gen3_humanity / gen4_cyberdeck

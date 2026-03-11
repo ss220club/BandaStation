@@ -190,6 +190,37 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	overlay.state = state
 	head.add_bodypart_overlay(overlay)
 
+// Бренды поддерживающие выбор типа головы (monitor vs head)
+// Для этих брендов в DMI есть два стейта: "ipc_monitor" (экран) и "ipc_head" (обычная голова)
+GLOBAL_LIST_INIT(ipc_dual_head_brands, list("morpheus", "bishop", "hesphiastos", "ward_takahashi", "xion", "shellguard"))
+
+/// Применяет тип головы КПБ.
+/// head_type = "monitor" → icon_state = "ipc_monitor" (монитор-голова с экраном)
+/// head_type = "head"    → icon_state = "ipc_head" (обычная голова, без экрана)
+/// Работает только для брендов из ipc_dual_head_brands.
+/proc/apply_ipc_head_type(mob/living/carbon/human/H, head_type)
+	var/datum/species/ipc/S = H.dna?.species
+	if(!istype(S))
+		return
+	S.ipc_head_type = head_type
+
+	// Только для брендов с поддержкой двух типов головы
+	if(!(S.ipc_brand_key in GLOB.ipc_dual_head_brands))
+		return
+
+	var/obj/item/bodypart/head/ipc/head = H.get_bodypart(BODY_ZONE_HEAD)
+	if(!head)
+		return
+
+	switch(head_type)
+		if("monitor")
+			head.icon_state = "ipc_monitor"
+		if("head")
+			head.icon_state = "ipc_head"
+			apply_ipc_face(H, "")  // Нет экрана — убираем face overlay
+
+	H.update_body()
+
 /// Включает или убирает хвост на груди IPC.
 /proc/apply_ipc_tail(mob/living/carbon/human/H, enabled)
 	var/obj/item/bodypart/chest = H.get_bodypart(BODY_ZONE_CHEST)
@@ -370,6 +401,11 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 
 	var/datum/species/ipc/S = H.dna?.species
 	if(!istype(S))
+		return
+
+	// Обычная голова — экран не поддерживается
+	if(S.ipc_head_type == "head")
+		to_chat(H, span_warning("Этот тип головы не поддерживает смену экрана."))
 		return
 
 	// Получаем разрешённые экраны для бренда
