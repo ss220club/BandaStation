@@ -309,8 +309,6 @@
 /obj/item/bodypart/chest/ipc/try_attach_limb(mob/living/carbon/human/H, special)
 	if(!..())
 		return FALSE
-	playsound(get_turf(H), 'sound/items/deconstruct.ogg', 50, TRUE)
-	do_sparks(2, TRUE, H)
 	to_chat(H, span_notice("Системная диагностика: [name] подключена и функционирует нормально."))
 	// Обновляем суффикс пола в icon_state для правильного отображения
 	var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
@@ -320,39 +318,29 @@
 /obj/item/bodypart/head/ipc/try_attach_limb(mob/living/carbon/human/H, special)
 	if(!..())
 		return FALSE
-	playsound(get_turf(H), 'sound/items/deconstruct.ogg', 50, TRUE)
-	do_sparks(2, TRUE, H)
 	to_chat(H, span_notice("Системная диагностика: [name] подключена и функционирует нормально."))
 	return TRUE
 
 /obj/item/bodypart/arm/left/ipc/try_attach_limb(mob/living/carbon/human/H, special)
 	if(!..())
 		return FALSE
-	playsound(get_turf(H), 'sound/items/deconstruct.ogg', 50, TRUE)
-	do_sparks(2, TRUE, H)
 	to_chat(H, span_notice("Системная диагностика: [name] подключена и функционирует нормально."))
 	return TRUE
 
 /obj/item/bodypart/arm/right/ipc/try_attach_limb(mob/living/carbon/human/H, special)
 	if(!..())
 		return FALSE
-	playsound(get_turf(H), 'sound/items/deconstruct.ogg', 50, TRUE)
-	do_sparks(2, TRUE, H)
 	to_chat(H, span_notice("Системная диагностика: [name] подключена и функционирует нормально."))
 	return TRUE
 
 /obj/item/bodypart/leg/left/ipc/try_attach_limb(mob/living/carbon/human/H, special)
 	if(!..())
 		return FALSE
-	playsound(get_turf(H), 'sound/items/deconstruct.ogg', 50, TRUE)
-	do_sparks(2, TRUE, H)
 	to_chat(H, span_notice("Системная диагностика: [name] подключена и функционирует нормально."))
 	return TRUE
 
 /obj/item/bodypart/leg/right/ipc/try_attach_limb(mob/living/carbon/human/H, special)
 	if(!..())
 		return FALSE
-	playsound(get_turf(H), 'sound/items/deconstruct.ogg', 50, TRUE)
-	do_sparks(2, TRUE, H)
 	to_chat(H, span_notice("Системная диагностика: [name] подключена и функционирует нормально."))
 	return TRUE
