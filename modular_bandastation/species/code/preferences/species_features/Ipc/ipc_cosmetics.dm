@@ -220,6 +220,11 @@ GLOBAL_LIST_INIT(ipc_dual_head_brands, list("bishop", "hesphiastos", "ward_takah
 			head.icon_state = "ipc_head"
 			apply_ipc_face(H, "")  // Нет экрана — убираем face overlay
 
+	// icon_state не входит в generate_icon_key() → кэш не инвалидируется автоматически.
+	// Сбрасываем ключ головы вручную, чтобы update_body_parts() перегенерировал спрайт.
+	if(H.icon_render_keys)
+		H.icon_render_keys.Remove(BODY_ZONE_HEAD)
+	H.update_body_parts()
 	H.update_body()
 
 /// Включает или убирает хвост на груди IPC.
