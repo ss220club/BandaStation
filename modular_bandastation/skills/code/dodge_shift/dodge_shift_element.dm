@@ -32,6 +32,11 @@
 	/// Afterimage lifetime
 	var/afterimage_duration = 0.5 SECONDS
 
+	/// Stores original positions for mobs currently dodging: list(mob = list(x, y))
+	var/list/original_positions = list()
+	/// Stores active return timers for cancellation: list(mob = timer_id)
+	var/list/return_timers = list()
+
 /datum/element/dodge_shift/Attach(datum/target, _dodge_chance = null, _shift_distance = null, _return_delay = null, _cooldown_time = null, _dodge_attack_types = null)
 	. = ..()
 	if(!isliving(target))
@@ -55,6 +60,11 @@
 
 /datum/element/dodge_shift/Detach(datum/target)
 	UnregisterSignal(target, list(COMSIG_LIVING_CHECK_BLOCK, COMSIG_ATOM_PRE_BULLET_ACT))
+	// Clean up any stored position data
+	original_positions -= target
+	if(return_timers[target])
+		deltimer(return_timers[target])
+		return_timers -= target
 	return ..()
 
 /datum/element/dodge_shift/proc/on_check_block(mob/living/source, atom/hit_by, damage, attack_text, attack_type, armour_penetration, damage_type)
@@ -133,8 +143,26 @@
 	var/blur_y = shift_y > 0 ? 2 : (shift_y < 0 ? -2 : 0)
 	dodger.add_filter("dodge_blur", 1, motion_blur_filter(x = blur_x, y = blur_y))
 
-	var/original_pixel_x = dodger.pixel_x
-	var/original_pixel_y = dodger.pixel_y
+	// Store original position only if not already dodging
+	// This ensures we always return to the TRUE original position
+	var/original_pixel_x
+	var/original_pixel_y
+
+	if(original_positions[dodger])
+		// Already dodging - use stored original position
+		var/list/stored_pos = original_positions[dodger]
+		original_pixel_x = stored_pos[1]
+		original_pixel_y = stored_pos[2]
+	else
+		// First dodge - store current position as original
+		original_pixel_x = dodger.pixel_x
+		original_pixel_y = dodger.pixel_y
+		original_positions[dodger] = list(original_pixel_x, original_pixel_y)
+
+	// Cancel any existing return timer to prevent conflicts
+	if(return_timers[dodger])
+		deltimer(return_timers[dodger])
+		return_timers[dodger] = null
 
 	animate(dodger, pixel_x = original_pixel_x + shift_x, pixel_y = original_pixel_y + shift_y, time = shift_time, easing = CIRCULAR_EASING | EASE_OUT)
 
@@ -146,7 +174,8 @@
 	if(dodge_sound)
 		playsound(dodger, dodge_sound, 25, TRUE, -1)
 
-	addtimer(CALLBACK(src, PROC_REF(return_to_position), dodger, original_pixel_x, original_pixel_y), return_delay)
+	// Store the timer ID for potential cancellation
+	return_timers[dodger] = addtimer(CALLBACK(src, PROC_REF(return_to_position), dodger, original_pixel_x, original_pixel_y), return_delay, TIMER_STOPPABLE)
 
 /datum/element/dodge_shift/proc/get_dodge_direction(mob/living/dodger, atom/attacker)
 	if(!attacker)
@@ -167,6 +196,15 @@
 	if(QDELETED(dodger))
 		return
 
+	// Clear the stored position - dodge sequence complete
+	original_positions -= dodger
+	return_timers -= dodger
+
+	// Force snap to exact original position to ensure accuracy
+	dodger.pixel_x = original_x
+	dodger.pixel_y = original_y
+
+	// Small visual animation for smooth return feel
 	animate(dodger, pixel_x = original_x, pixel_y = original_y, time = return_time, easing = CIRCULAR_EASING | EASE_IN)
 
 	addtimer(CALLBACK(src, PROC_REF(remove_blur_filter), dodger), return_time)
