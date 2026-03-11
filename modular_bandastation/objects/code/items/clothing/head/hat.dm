@@ -110,7 +110,7 @@
 /obj/item/clothing/head/beret/ert/ntci
 	name = "NTCI Operative beret"
 	desc = "Берет оперативника НТКР."
-	icon_state = "/obj/item/clothing/head/beret/militia"
+	icon_state = "/obj/item/clothing/head/beret/ert/ntci"
 	armor_type = /datum/armor/beret_centcom_formal
 
 /obj/item/clothing/head/caphat/beret_black
