@@ -52,6 +52,10 @@
 					to_chat(chooser, span_warning("Отсутствует tts_seed для значения \"[prefs_tts_seed]\". Текущий голос - [tts_seed]"))
 					return null
 				new_tts_seed = SStts220.tts_seeds[prefs_tts_seed]
+				if(!check_rights(R_ADMIN, FALSE, chooser) && !(overrides & TTS_OVERRIDE_TIER))
+					if(new_tts_seed.required_donator_level > chooser.client.get_donator_level())
+						to_chat(chooser, span_warning("Голос \"[prefs_tts_seed]\" требует уровень подписки [new_tts_seed.required_donator_level]. Текущий голос - [tts_seed.name]"))
+						return null
 				if(length(new_sound_effects))
 					effects = new_sound_effects
 				INVOKE_ASYNC(SStts220, TYPE_PROC_REF(/datum/controller/subsystem/tts220, get_tts), null, chooser, tts_test_str, new_tts_seed, FALSE, get_effects())
@@ -119,7 +123,13 @@
 
 /datum/component/tts_component/proc/get_random_tts_seed_by_gender()
 	var/atom/being_changed = parent
-	var/tts_choice = SStts220.pick_tts_seed_by_gender(being_changed.gender)
+	var/tts_choice
+	if(ismob(being_changed))
+		var/mob/owner_mob = being_changed
+		if(owner_mob.client)
+			tts_choice = SStts220.pick_tts_seed_by_gender_and_level(owner_mob.gender, owner_mob.client.get_donator_level())
+	if(!tts_choice)
+		tts_choice = SStts220.pick_tts_seed_by_gender(being_changed.gender)
 	var/datum/tts_seed/seed = SStts220.tts_seeds[tts_choice]
 	if(!seed)
 		return null

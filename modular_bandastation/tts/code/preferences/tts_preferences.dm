@@ -5,15 +5,34 @@
 
 /datum/preference/text/tts_seed/apply_to_human(mob/living/carbon/human/target, value)
 	var/datum/tts_seed/seed = SStts220.tts_seeds[value]
+	var/user_level = BASIC_DONATOR_LEVEL
+	var/fallback_name
+	if(target.client)
+		user_level = target.client.get_donator_level()
+	if(seed && seed.required_donator_level > user_level)
+		seed = null
 	if(!seed)
-		seed = SStts220.tts_seeds[SStts220.get_random_seed(target)]
+		fallback_name = SStts220.get_random_seed(target)
+		seed = fallback_name ? SStts220.tts_seeds[fallback_name] : null
+	if(!seed)
+		fallback_name = SStts220.pick_tts_seed_by_gender_and_level(target.gender, user_level)
+		seed = fallback_name ? SStts220.tts_seeds[fallback_name] : null
+	if(!seed)
+		return
 
 	target.AddComponent(/datum/component/tts_component, seed)
 	target.dna.tts_seed_dna = seed
 	GLOB.human_to_tts["[target.real_name]"] = seed
 
 /datum/preference/text/tts_seed/create_informed_default_value(datum/preferences/preferences)
-	return SStts220.pick_tts_seed_by_gender(preferences.read_preference(/datum/preference/choiced/gender))
+	var/level = BASIC_DONATOR_LEVEL
+	if(preferences.parent)
+		level = preferences.parent.get_donator_level()
+	var/chosen = SStts220.pick_tts_seed_by_gender_and_level(preferences.read_preference(/datum/preference/choiced/gender), level)
+	if(chosen)
+		return chosen
+	// apply_to_human will validate on spawn anyway
+	return SStts220.pick_tts_seed_by_gender(preferences.read_preference(/datum/preference/choiced/gender)) || SStts220.get_any_seed_name()
 
 /datum/preference/numeric/volume/sound_tts_volume_radio
 	category = PREFERENCE_CATEGORY_GAME_PREFERENCES

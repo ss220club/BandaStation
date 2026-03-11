@@ -51,6 +51,8 @@ GLOBAL_LIST_EMPTY(human_to_tts)
 	var/datum/tts_seed/seed = SStts220.tts_seeds[seed_name]
 	if(!seed)
 		return FALSE
+	if(user.client && seed.required_donator_level > user.client.get_donator_level())
+		return FALSE
 
 	var/phrase = params["phrase"]
 	if(!phrase || !(phrase in TTS_PHRASES))
@@ -63,6 +65,10 @@ GLOBAL_LIST_EMPTY(human_to_tts)
 /datum/preference_middleware/text_to_speech/proc/select_voice(list/params, mob/user)
 	var/seed_name = params["seed"]
 	if(!seed_name || !SStts220.tts_seeds[seed_name])
+		return FALSE
+
+	var/datum/tts_seed/seed = SStts220.tts_seeds[seed_name]
+	if(user.client && seed.required_donator_level > user.client.get_donator_level())
 		return FALSE
 
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/text/tts_seed], seed_name)
