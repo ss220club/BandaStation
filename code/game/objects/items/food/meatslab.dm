@@ -146,6 +146,7 @@
 	venue_value = FOOD_MEAT_MUTANT
 
 /obj/item/food/meat/slab/human/mutant/kidan
+	name ="Мясо кидана"
 	icon_state = "kidanmeat"
 	desc = "Unpleasantly powdery and dry. Kind of pretty, though."
 	tastes = list("nutriment" = 1, "meat" = 2)
@@ -628,7 +629,7 @@
 	foodtypes = MEAT | GORE
 
 /obj/item/food/meat/steak/plain/human/kidan
-	name = "kidan steak"
+	name = "Стейк из кидана"
 	icon_state = "kidansteak"
 	tastes = list("juicy bugs" = 3, "scales" = 1)
 	foodtypes = MEAT | BUGS
