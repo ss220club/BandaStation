@@ -195,6 +195,10 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 // Morpheus исключён — в его DMI только ipc_monitor, нет ipc_head.
 GLOBAL_LIST_INIT(ipc_dual_head_brands, list("bishop", "hesphiastos", "ward_takahashi", "xion", "shellguard"))
 
+// Бренды у которых голова-монитор находится под стейтом "ipc_monitor" (а не "ipc_head").
+// Включает все dual-head бренды + morpheus (у него только ipc_monitor, нет ipc_head).
+GLOBAL_LIST_INIT(ipc_brands_with_monitor, list("morpheus", "bishop", "hesphiastos", "ward_takahashi", "xion", "shellguard"))
+
 /// Применяет тип головы КПБ.
 /// head_type = "monitor" → icon_state = "ipc_monitor" (монитор-голова с экраном)
 /// head_type = "head"    → icon_state = "ipc_head" (обычная голова, без экрана)
@@ -213,17 +217,15 @@ GLOBAL_LIST_INIT(ipc_dual_head_brands, list("bishop", "hesphiastos", "ward_takah
 	if(!head)
 		return
 
+	// ipc_visual_state входит в generate_icon_key() → при изменении ключ меняется
+	// и update_body_parts() автоматически перегенерирует спрайт.
 	switch(head_type)
 		if("monitor")
-			head.icon_state = "ipc_monitor"
+			head.ipc_visual_state = "monitor"
 		if("head")
-			head.icon_state = "ipc_head"
+			head.ipc_visual_state = null
 			apply_ipc_face(H, "")  // Нет экрана — убираем face overlay
 
-	// icon_state не входит в generate_icon_key() → кэш не инвалидируется автоматически.
-	// Сбрасываем ключ головы вручную, чтобы update_body_parts() перегенерировал спрайт.
-	if(H.icon_render_keys)
-		H.icon_render_keys.Remove(BODY_ZONE_HEAD)
 	H.update_body_parts()
 	H.update_body()
 

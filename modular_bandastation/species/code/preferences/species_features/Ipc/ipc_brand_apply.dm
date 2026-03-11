@@ -77,7 +77,9 @@
 				head.icon = custom_icon
 				head.icon_static = custom_icon
 				head.icon_greyscale = null
-				head.icon_state = (brand_key in GLOB.ipc_dual_head_brands) ? "ipc_monitor" : "ipc_head"
+				head.icon_state = "ipc_head"
+				// ipc_visual_state определяет реальный стейт в get_limb_icon()
+				head.ipc_visual_state = (brand_key in GLOB.ipc_brands_with_monitor) ? "monitor" : null
 		if(BODY_ZONE_CHEST)
 			var/obj/item/bodypart/chest/ipc/chest = H.get_bodypart(BODY_ZONE_CHEST)
 			if(chest && custom_icon)
@@ -140,9 +142,9 @@
 		head.icon = custom_icon_file
 		head.icon_static = custom_icon_file
 		head.icon_greyscale = null
-		// Для брендов с двумя типами головы — дефолтный стейт ipc_monitor (экран).
-		// Остальные бренды используют ipc_head (единственный стейт в их DMI).
-		head.icon_state = (brand_key && (brand_key in GLOB.ipc_dual_head_brands)) ? "ipc_monitor" : "ipc_head"
+		head.icon_state = "ipc_head"
+		// ipc_visual_state определяет реальный стейт в get_limb_icon()
+		head.ipc_visual_state = (brand_key && (brand_key in GLOB.ipc_brands_with_monitor)) ? "monitor" : null
 
 	// Левая рука
 	var/obj/item/bodypart/arm/left/ipc/l_arm = H.get_bodypart(BODY_ZONE_L_ARM)

@@ -66,6 +66,26 @@
 	var/brute_reduction = 0
 	var/burn_reduction = 0
 
+	/// Суффикс тела для get_limb_icon() вместо стандартного body_zone.
+	/// null = использует "ipc_head" (стандарт).
+	/// "monitor" = использует "ipc_monitor" (голова-монитор с экраном).
+	var/ipc_visual_state = null
+
+/obj/item/bodypart/head/ipc/generate_icon_key()
+	. = ..()
+	if(ipc_visual_state)
+		. += "-[ipc_visual_state]"
+
+/obj/item/bodypart/head/ipc/get_limb_icon(dropped, mob/living/carbon/update_on)
+	if(isnull(ipc_visual_state))
+		return ..()
+	// Временно меняем body_zone чтобы get_limb_icon() использовал нужный стейт.
+	// used_state = "[limb_id]_[body_zone]", поэтому body_zone="monitor" → "ipc_monitor".
+	var/old_body_zone = body_zone
+	body_zone = ipc_visual_state
+	. = ..()
+	body_zone = old_body_zone
+
 /obj/item/bodypart/head/ipc/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/ipc_panel)
