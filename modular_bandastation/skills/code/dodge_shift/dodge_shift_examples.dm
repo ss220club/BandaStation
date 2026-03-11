@@ -51,8 +51,8 @@
 /datum/action/cooldown/spell/dodge_mode
 	name = "Dodge Mode"
 	desc = "Toggles dodge mode."
-	button_icon = 'icons/mob/actions/actions_items.dmi'
-	button_icon_state = "sniper_zoom"
+	button_icon = 'icons/mob/actions/actions_spells.dmi'
+	button_icon_state = "blink"
 	cooldown_time = 3 SECONDS
 	/// Whether dodge mode is active
 	var/dodge_active = FALSE
