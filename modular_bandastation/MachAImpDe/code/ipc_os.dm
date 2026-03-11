@@ -1226,23 +1226,25 @@
 // ============================================
 
 /// Проверка подключения к сети (нужен сетевой кабель рядом)
+/// Если уже подключён (например, через синтетический стол) — не сбрасываем
 /datum/ipc_operating_system/proc/check_network_connection()
 	if(!owner)
 		network_connected = FALSE
 		return FALSE
 
-	// Ищем сетевой кабель под IPC или рядом
+	// Уже подключён через стол или другой источник — не переопределяем
+	if(network_connected)
+		return TRUE
+
+	// Ищем сетевой кабель под IPC
 	var/turf/T = get_turf(owner)
 	if(!T)
-		network_connected = FALSE
 		return FALSE
 
-	// Ищем кабель на тайле где стоит IPC
 	for(var/obj/structure/cable/C in T)
 		network_connected = TRUE
 		return TRUE
 
-	network_connected = FALSE
 	return FALSE
 
 /// Начать загрузку приложения (имитация)
