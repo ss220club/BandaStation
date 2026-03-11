@@ -3,7 +3,7 @@
 #define PRESET_SHORT (5 MINUTES)
 #define PRESET_MEDIUM (10 MINUTES)
 #define PRESET_LONG (15 MINUTES)
-// BASDASTATION EDIT END
+// BANDASTATION EDIT END
 
 /**
  * Brig Door control displays.
