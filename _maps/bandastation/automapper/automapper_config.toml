@@ -609,7 +609,7 @@ trait_name = "Station"
 map_files = ["wawastation_perma_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/wawastation/"
 required_map = "wawastation.dmm"
-coordinates = [57, 143, 2]
+coordinates = [61, 149, 1]
 trait_name = "Station"
 
 [templates.wawastation_armory_gamma]
