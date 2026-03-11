@@ -74,20 +74,7 @@
 		list("key" = IPC_MODULE_RESEARCH,    "name" = "Исследовательский"),
 	)
 
-	/datum/preference_middleware/ipc_customization/proc/set_head_type(list/params, mob/user)
-	var/head_type = params["head_type"]
-	if(!head_type)
-		return FALSE
-	if(!(head_type in list("monitor", "head")))
-		return FALSE
-
-	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
-	customization["head_type"] = head_type
-
-	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
-	return TRUE
-
-// Список производителей для HEF частей
+	// Список производителей для HEF частей
 	data["hef_manufacturers"] = list(
 		list("key" = "unbranded", "name" = "Unbranded"),
 		list("key" = "morpheus", "name" = "Morpheus Cyberkinetics"),
@@ -195,6 +182,19 @@
 
 	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
 	customization["gen1_module"] = gen1_module
+
+	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
+	return TRUE
+
+/datum/preference_middleware/ipc_customization/proc/set_head_type(list/params, mob/user)
+	var/head_type = params["head_type"]
+	if(!head_type)
+		return FALSE
+	if(!(head_type in list("monitor", "head")))
+		return FALSE
+
+	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
+	customization["head_type"] = head_type
 
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
 	return TRUE
