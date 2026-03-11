@@ -15,7 +15,6 @@
 		"set_os_password"      = PROC_REF(set_os_password),
 		"set_generation"       = PROC_REF(set_generation),
 		"set_gen1_module"      = PROC_REF(set_gen1_module),
-		"set_head_type"        = PROC_REF(set_head_type),
 	)
 
 /// Append data to ui_data
@@ -186,15 +185,3 @@
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
 	return TRUE
 
-/datum/preference_middleware/ipc_customization/proc/set_head_type(list/params, mob/user)
-	var/head_type = params["head_type"]
-	if(!head_type)
-		return FALSE
-	if(!(head_type in list("monitor", "head")))
-		return FALSE
-
-	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
-	customization["head_type"] = head_type
-
-	preferences.update_preference(GLOB.preference_entries[/datum/preference/ipc_customization], customization)
-	return TRUE

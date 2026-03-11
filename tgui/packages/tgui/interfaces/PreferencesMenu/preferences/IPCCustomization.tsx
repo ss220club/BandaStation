@@ -205,7 +205,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
     chassis_brand: 'unbranded',
     brain_type: 'positronic',
     os_password: '',
-    head_type: 'monitor',
     hef_head: 'unbranded',
     hef_chest: 'unbranded',
     hef_l_arm: 'unbranded',
@@ -227,11 +226,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
 
   const isHEF = customization.chassis_brand === 'hef';
   const isGen1 = customization.generation === 'gen1_modular';
-
-  // Бренды с поддержкой двух типов головы
-  const DUAL_HEAD_BRANDS = ['morpheus', 'bishop', 'hesphiastos', 'ward_takahashi', 'xion', 'shellguard'];
-  const supportsDualHead = DUAL_HEAD_BRANDS.includes(customization.chassis_brand);
-  const currentHeadType = customization.head_type || 'monitor';
 
   const currentChassis = chassisBrands.find((b) => b.key === customization.chassis_brand);
   const currentBrain = brainTypes.find((b) => b.key === customization.brain_type);
@@ -679,97 +673,6 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
 
               {/* Слот модуля — только для Gen I */}
               {isGen1 && renderSlot(GEN1_MODULE_SLOT)}
-
-              {/* Выбор типа головы — только для поддерживаемых брендов */}
-              {supportsDualHead && (
-                <Box mt={0.5}>
-                  <Box
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      padding: '0.5rem 0',
-                      margin: '0.25rem 0',
-                    }}
-                  >
-                    <Box
-                      style={{
-                        fontSize: '0.7rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '1px',
-                        color: CYBER_COLORS.cyan,
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      Голова
-                    </Box>
-                    <Box
-                      style={{
-                        flex: 1,
-                        height: '1px',
-                        background: `linear-gradient(90deg, rgba(0,240,255,0.4), transparent)`,
-                        marginLeft: '0.5rem',
-                      }}
-                    />
-                  </Box>
-                  <Box
-                    style={{
-                      display: 'flex',
-                      gap: '0.4rem',
-                    }}
-                  >
-                    {[
-                      { key: 'monitor', label: 'Экран', icon: 'desktop', color: CYBER_COLORS.cyan },
-                      { key: 'head', label: 'Голова', icon: 'head-side', color: CYBER_COLORS.magenta },
-                    ].map((opt) => {
-                      const isActive = currentHeadType === opt.key;
-                      return (
-                        <Box
-                          key={opt.key}
-                          style={{
-                            flex: 1,
-                            background: isActive
-                              ? `linear-gradient(135deg, rgba(0,240,255,0.2) 0%, ${CYBER_COLORS.bgPanel} 100%)`
-                              : 'rgba(0,0,0,0.3)',
-                            border: isActive
-                              ? `2px solid ${opt.color}`
-                              : '1px solid rgba(0,240,255,0.2)',
-                            borderRadius: '4px',
-                            padding: '0.5rem 0.4rem',
-                            cursor: 'pointer',
-                            textAlign: 'center',
-                            transition: 'all 0.15s ease',
-                            boxShadow: isActive ? `0 0 10px ${opt.color}60` : 'none',
-                          }}
-                          onClick={() =>
-                            act('set_head_type', { head_type: opt.key })
-                          }
-                        >
-                          <Icon
-                            name={opt.icon}
-                            style={{
-                              color: isActive ? opt.color : CYBER_COLORS.textSecondary,
-                              fontSize: '1.1rem',
-                              display: 'block',
-                              marginBottom: '0.2rem',
-                            }}
-                          />
-                          <Box
-                            style={{
-                              fontSize: '0.65rem',
-                              color: isActive ? opt.color : CYBER_COLORS.textSecondary,
-                              fontWeight: isActive ? 700 : 400,
-                              textTransform: 'uppercase',
-                              letterSpacing: '0.5px',
-                            }}
-                          >
-                            {opt.label}
-                          </Box>
-                        </Box>
-                      );
-                    })}
-                  </Box>
-                </Box>
-              )}
 
               {/* HEF слоты */}
               {isHEF && (

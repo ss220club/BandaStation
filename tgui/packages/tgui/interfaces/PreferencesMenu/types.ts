@@ -287,7 +287,6 @@ export type IPCCustomization = {
   chassis_brand: string;
   brain_type: string;
   os_password: string;
-  head_type: string;
   hef_head: string;
   hef_chest: string;
   hef_l_arm: string;

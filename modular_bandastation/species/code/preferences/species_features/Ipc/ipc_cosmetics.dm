@@ -192,7 +192,8 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 
 // Бренды поддерживающие выбор типа головы (monitor vs head)
 // Для этих брендов в DMI есть два стейта: "ipc_monitor" (экран) и "ipc_head" (обычная голова)
-GLOBAL_LIST_INIT(ipc_dual_head_brands, list("morpheus", "bishop", "hesphiastos", "ward_takahashi", "xion", "shellguard"))
+// Morpheus исключён — в его DMI только ipc_monitor, нет ipc_head.
+GLOBAL_LIST_INIT(ipc_dual_head_brands, list("bishop", "hesphiastos", "ward_takahashi", "xion", "shellguard"))
 
 /// Применяет тип головы КПБ.
 /// head_type = "monitor" → icon_state = "ipc_monitor" (монитор-голова с экраном)
@@ -363,6 +364,52 @@ GLOBAL_LIST_INIT(ipc_dual_head_brands, list("morpheus", "bishop", "hesphiastos",
 
 	var/obj/item/implant/ipc/charger/impl = new()
 	impl.implant(target, zone, null, TRUE, TRUE)
+
+// ============================================
+// PREFERENCE: ТИП ГОЛОВЫ IPC (монитор / обычная)
+// Отображается только для брендов из ipc_dual_head_brands.
+// Запускается на приоритете BODYPARTS+1, чтобы бренд уже был применён.
+// ============================================
+
+/datum/preference/choiced/ipc_head_type
+	savefile_key = "feature_ipc_head_type"
+	savefile_identifier = PREFERENCE_CHARACTER
+	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+	priority = PREFERENCE_PRIORITY_BODYPARTS + 1
+	main_feature_name = "Тип головы"
+	can_randomize = FALSE
+
+/datum/preference/choiced/ipc_head_type/compile_constant_data()
+	. = ..()
+	.[CHOICED_PREFERENCE_DISPLAY_NAMES] = list(
+		"monitor" = "Монитор",
+		"head"    = "Голова",
+	)
+
+/datum/preference/choiced/ipc_head_type/init_possible_values()
+	return list("monitor", "head")
+
+/datum/preference/choiced/ipc_head_type/create_default_value()
+	return "monitor"
+
+/datum/preference/choiced/ipc_head_type/is_accessible(datum/preferences/preferences)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/datum/species/species = GLOB.species_prototypes[preferences.read_preference(/datum/preference/choiced/species)]
+	if(!istype(species, /datum/species/ipc))
+		return FALSE
+	// Показываем только для брендов с поддержкой двух типов головы
+	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
+	if(!islist(customization))
+		return FALSE
+	var/brand = customization["chassis_brand"]
+	return brand && (brand in GLOB.ipc_dual_head_brands)
+
+/datum/preference/choiced/ipc_head_type/apply_to_human(mob/living/carbon/human/target, value)
+	if(!istype(target.dna?.species, /datum/species/ipc))
+		return
+	apply_ipc_head_type(target, value)
 
 // ============================================
 // BRAND FACE FILTERING

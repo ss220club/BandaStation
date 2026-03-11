@@ -53,8 +53,6 @@
 		// Обычный бренд: единый визуал + эффекты
 		apply_ipc_brand(target, chassis_brand)
 		apply_ipc_brand_effects(target, chassis_brand)
-		// Применяем тип головы ПОСЛЕ бренда (нужен custom icon файл уже установлен)
-		apply_ipc_head_type(target, customization["head_type"] || "monitor")
 
 	// Сохраняем пароль ОС для применения при инициализации ОС (on_species_gain)
 	var/os_password = customization["os_password"]
@@ -90,7 +88,6 @@
 		"chassis_brand" = "unbranded",
 		"brain_type" = "positronic",
 		"os_password" = "",
-		"head_type" = "monitor",
 		"hef_head" = "unbranded",
 		"hef_chest" = "unbranded",
 		"hef_l_arm" = "unbranded",
