@@ -95,6 +95,8 @@
 	var/datum/species/ipc/ipc_species = current_ipc_patient.dna?.species
 	if(istype(ipc_species) && ipc_species.ipc_os)
 		ipc_species.ipc_os.network_connected = FALSE
+		// Обрываем удалённый доступ роботехника — пациент покинул стол
+		ipc_species.ipc_os.revoke_remote_access()
 	current_ipc_patient = null
 
 /// Переопределяем set_patient чтобы отслеживать смену пациента

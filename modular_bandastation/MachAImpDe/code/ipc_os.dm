@@ -1353,8 +1353,8 @@
 	pending_access_request = TRUE
 	requesting_user = requester
 
-	// DEBUG: Уведомляем запрашивающего что запрос отправлен
-	to_chat(requester, span_notice("DEBUG: Запрос на удалённый доступ отправлен владельцу ОС ([owner.name])."))
+	// Уведомляем запрашивающего что запрос отправлен
+	to_chat(requester, span_notice("Запрос на удалённый доступ к ОС отправлен пациенту ([owner.name]). Ожидайте ответа."))
 
 	// Уведомляем IPC
 	to_chat(owner, span_notice("СИСТЕМА: Получен запрос на удалённый доступ к ОС от [requester.name]. Проверьте вашу ОС."))
@@ -1362,11 +1362,9 @@
 	// Открываем ОС у IPC если не открыта
 	ui_interact(owner)
 
-	// DEBUG: Если IPC без клиента (кукла/NPC) — авто-одобряем запрос
+	// Если IPC без клиента (кукла/NPC) — авто-одобряем запрос
 	if(!owner.client)
-		to_chat(requester, span_notice("DEBUG: IPC без клиента — авто-одобряем доступ..."))
 		approve_access()
-		to_chat(requester, span_notice("DEBUG: Доступ одобрен. Откройте окно ОС кнопкой 'Открыть ОС'."))
 		return TRUE
 
 	SStgui.update_uis(src)
@@ -1390,8 +1388,10 @@
 	to_chat(owner, span_notice("ОС: Удалённый доступ предоставлен [requester.name] (режим разрешений)."))
 	to_chat(requester, span_notice("Удалённый доступ к ОС пациента одобрен (режим разрешений — действия требуют подтверждения)."))
 
-	// Открываем ОС для роботехника
+	// Открываем ОС для роботехника и для самого IPC
 	ui_interact(requester)
+	if(owner)
+		ui_interact(owner)
 
 	SStgui.update_uis(src)
 	return TRUE
@@ -1418,19 +1418,14 @@
 	// Если уже подключены — просто переоткрываем окно ОС
 	if(remote_viewer)
 		if(remote_viewer == requester)
-			to_chat(requester, span_notice("DEBUG: Уже подключены — переоткрываем окно ОС."))
 			ui_interact(requester)
 			return TRUE
 		to_chat(requester, span_warning("Удалённый доступ уже активен другим пользователем."))
 		return FALSE
 
-	to_chat(requester, span_notice("DEBUG: Проверяем пароль ОС..."))
-
 	if(!check_password(input_password))
 		to_chat(requester, span_warning("Неверный пароль ОС."))
 		return FALSE
-
-	to_chat(requester, span_notice("DEBUG: Пароль принят — подключаемся..."))
 
 	remote_viewer = requester
 	remote_access_mode = "password"  // Доступ по паролю = полный доступ
@@ -1442,15 +1437,12 @@
 	to_chat(owner, span_warning("ОС: Обнаружен удалённый вход в систему по паролю от [requester.name]!"))
 	to_chat(requester, span_notice("Доступ к ОС пациента получен по паролю (полный доступ)."))
 
-	// Открываем ОС для роботехника
-	to_chat(requester, span_notice("DEBUG: Открываем окно IpcOperatingSystem..."))
+	// Открываем ОС для роботехника и для самого IPC
 	ui_interact(requester)
-	// Также открываем для IPC
 	if(owner)
 		ui_interact(owner)
 
 	SStgui.update_uis(src)
-	to_chat(requester, span_notice("DEBUG: remote_login завершён успешно."))
 	return TRUE
 
 /// Получить описание действия для подтверждения

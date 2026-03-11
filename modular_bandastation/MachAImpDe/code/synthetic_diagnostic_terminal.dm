@@ -767,9 +767,11 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			var/datum/species/ipc/ipc_species = target.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
-			// Открываем окно ОС для текущего пользователя (роботехника или самого IPC)
-			to_chat(user, span_notice("DEBUG: Открываем окно ОС..."))
+			// Открываем окно ОС для роботехника
 			ipc_species.ipc_os.ui_interact(user)
+			// И для самого IPC чтобы он видел что происходит
+			if(target.client && target != user)
+				ipc_species.ipc_os.ui_interact(target)
 			return TRUE
 
 		if("disconnect_os_remote")
@@ -780,48 +782,6 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			if(!ipc_species.ipc_os)
 				return FALSE
 			ipc_species.ipc_os.revoke_remote_access()
-			return TRUE
-
-		if("inject_test_virus")
-			// DEBUG: Внедрение тестового вируса (для тестирования)
-			var/mob/living/carbon/human/target = get_ipc_target(user)
-			if(!target)
-				return FALSE
-			var/datum/species/ipc/ipc_species = target.dna.species
-			if(!ipc_species.ipc_os)
-				return FALSE
-			var/virus_type = params["virus_type"]
-			var/datum/ipc_virus/new_virus
-			switch(virus_type)
-				if("display_glitch")
-					new_virus = new /datum/ipc_virus/display_glitch()
-				if("memory_leak")
-					new_virus = new /datum/ipc_virus/memory_leak()
-				if("sensor_noise")
-					new_virus = new /datum/ipc_virus/sensor_noise()
-				if("core_corruption")
-					new_virus = new /datum/ipc_virus/core_corruption()
-				if("neural_hijack")
-					new_virus = new /datum/ipc_virus/neural_hijack()
-			if(new_virus)
-				ipc_species.ipc_os.infect(new_virus)
-				to_chat(user, span_notice("DEBUG: Тестовый вирус [new_virus.name] внедрён."))
-				to_chat(target, span_warning("ОС: Обнаружена новая угроза — [new_virus.name]."))
-			return TRUE
-
-		if("remove_all_viruses")
-			// DEBUG: Удалить все вирусы из ОС
-			var/mob/living/carbon/human/target = get_ipc_target(user)
-			if(!target)
-				return FALSE
-			var/datum/species/ipc/ipc_species = target.dna.species
-			if(!ipc_species.ipc_os)
-				return FALSE
-			var/removed = 0
-			for(var/datum/ipc_virus/v in ipc_species.ipc_os.viruses)
-				if(ipc_species.ipc_os.remove_virus_by_roboticist(v))
-					removed++
-			to_chat(user, span_notice("DEBUG: Удалено вирусов: [removed]."))
 			return TRUE
 
 	// Для всех остальных действий — передаём родителю
