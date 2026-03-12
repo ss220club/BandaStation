@@ -94,7 +94,7 @@ export function QuantumConsole(props) {
   const { data } = useBackend<Data>();
 
   return (
-    <Window title="Quantum Console" width={500} height={500}>
+    <Window title="Квантовая консоль" width={500} height={500}>
       <Window.Content>
         {!!data.connected && !data.ready && <LoadingScreen />}
         <AccessView />
