@@ -7443,15 +7443,6 @@ gender = "female"
 
 # MARK: Food
 
-["meat"]
-nominative = "мясо"
-genitive = "мяса"
-dative = "мясу"
-accusative = "мясо"
-instrumental = "мясом"
-prepositional = "мясе"
-gender = "neuter"
-
 ["slice of"]
 nominative = "кусочек"
 genitive = "кусочка"
@@ -12182,6 +12173,521 @@ instrumental = "кусочком ролла Филадельфия"
 prepositional = "кусочке ролла Филадельфия"
 gender = "male"
 
+# MARK: Food - Meat & Slabs
+
+["meat"]
+nominative = "мясо"
+genitive = "мяса"
+dative = "мясу"
+accusative = "мясо"
+instrumental = "мясом"
+prepositional = "мясе"
+gender = "neuter"
+
+["meat (rotten)"]
+nominative = "гнилое мясо"
+genitive = "гнилого мяса"
+dative = "гнилому мясу"
+accusative = "гнилое мясо"
+instrumental = "гнилым мясом"
+prepositional = "гнилом мясе"
+gender = "neuter"
+
+["synthmeat"]
+nominative = "синтмясо"
+genitive = "синтмяса"
+dative = "синтмясу"
+accusative = "синтмясо"
+instrumental = "синтмясом"
+prepositional = "синтмясе"
+gender = "neuter"
+
+["meat product"]
+nominative = "мясной продукт"
+genitive = "мясного продукта"
+dative = "мясному продукту"
+accusative = "мясной продукт"
+instrumental = "мясным продуктом"
+prepositional = "мясном продукте"
+gender = "male"
+
+["monkey meat"]
+nominative = "мясо обезьяны"
+genitive = "мяса обезьяны"
+dative = "мясу обезьяны"
+accusative = "мясо обезьяны"
+instrumental = "мясом обезьяны"
+prepositional = "мясе обезьяны"
+gender = "neuter"
+
+["bug meat"]
+nominative = "мясо насекомого"
+genitive = "мяса насекомого"
+dative = "мясу насекомого"
+accusative = "мясо насекомого"
+instrumental = "мясом насекомого"
+prepositional = "мясе насекомого"
+gender = "neuter"
+
+["mouse meat"]
+nominative = "мясо мыши"
+genitive = "мяса мыши"
+dative = "мясу мыши"
+accusative = "мясо мыши"
+instrumental = "мясом мыши"
+prepositional = "мясе мыши"
+gender = "neuter"
+
+["corgi meat"]
+nominative = "мясо корги"
+genitive = "мяса корги"
+dative = "мясу корги"
+accusative = "мясо корги"
+instrumental = "мясом корги"
+prepositional = "мясе корги"
+gender = "neuter"
+
+["mothroach meat"]
+nominative = "мясо таракамоли"
+genitive = "мяса таракамоли"
+dative = "мясу таракамоли"
+accusative = "мясо таракамоли"
+instrumental = "мясом таракамоли"
+prepositional = "мясе таракамоли"
+gender = "neuter"
+
+["pug meat"]
+nominative = "мясо мопса"
+genitive = "мяса мопса"
+dative = "мясу мопса"
+accusative = "мясо мопса"
+instrumental = "мясом мопса"
+prepositional = "мясе мопса"
+gender = "neuter"
+
+["killer tomato meat"]
+nominative = "мякоть томата-гиганта"
+genitive = "мякоти томата-гиганта"
+dative = "мякоти томата-гиганта"
+accusative = "мякоть томата-гиганта"
+instrumental = "мякотью томата-гиганта"
+prepositional = "мякоть томата-гиганта"
+gender = "female"
+
+["bear meat"]
+nominative = "медвежатина"
+genitive = "медвежатины"
+dative = "медвежатине"
+accusative = "медвежатину"
+instrumental = "медвежатиной"
+prepositional = "медвежатине"
+gender = "female"
+
+["xeno meat"]
+nominative = "мясо ксеноморфа"
+genitive = "мяса ксеноморфа"
+dative = "мясу ксеноморфа"
+accusative = "мясо ксеноморфа"
+instrumental = "мясом ксеноморфа"
+prepositional = "мясе ксеноморфа"
+gender = "neuter"
+
+["spider meat"]
+nominative = "паучье мясо"
+genitive = "паучьего мяса"
+dative = "паучьему мясу"
+accusative = "паучье мясо"
+instrumental = "паучьим мясом"
+prepositional = "паучьем мясе"
+gender = "neuter"
+
+["goliath meat"]
+nominative = "мясо голиафа"
+genitive = "мяса голиафа"
+dative = "мясу голиафа"
+accusative = "мясо голиафа"
+instrumental = "мясом голиафа"
+prepositional = "мясе голиафа"
+gender = "neuter"
+
+["meatwheat clump"]
+nominative = "ком из мясной пшеницы"
+genitive = "кома из мясной пшеницы"
+dative = "кому из мясной пшеницы"
+accusative = "ком из мясной пшеницы"
+instrumental = "комом из мясной пшеницы"
+prepositional = "коме из мясной пшеницы"
+gender = "male"
+
+["gorilla meat"]
+nominative = "мясо гориллы"
+genitive = "мяса гориллы"
+dative = "мясу гориллы"
+accusative = "мясо гориллы"
+instrumental = "мясом гориллы"
+prepositional = "мясе гориллы"
+gender = "neuter"
+
+["raw piece of bacon"]
+nominative = "сырой бекон"
+genitive = "сырого бекона"
+dative = "сырому бекону"
+accusative = "сырой бекон"
+instrumental = "сырым беконом"
+prepositional = "сыром беконе"
+gender = "male"
+
+["piece of bacon"]
+nominative = "бекон"
+genitive = "бекона"
+dative = "бекону"
+accusative = "бекон"
+instrumental = "беконом"
+prepositional = "беконе"
+gender = "male"
+
+["gondola meat"]
+nominative = "мясо гондолы"
+genitive = "мяса гондолы"
+dative = "мясу гондолы"
+accusative = "мясо гондолы"
+instrumental = "мясом гондолы"
+prepositional = "мясе гондолы"
+gender = "neuter"
+
+["penguin meat"]
+nominative = "мясо пингвина"
+genitive = "мяса пингвина"
+dative = "мясу пингвина"
+accusative = "мясо пингвина"
+instrumental = "мясом пингвина"
+prepositional = "мясе пингвина"
+gender = "neuter"
+
+["raw crab meat"]
+nominative = "сырое крабовое мясо"
+genitive = "сырого крабового мяса"
+dative = "сырому крабовому мясу"
+accusative = "сырое крабовое мясо"
+instrumental = "сырым крабовым мясом"
+prepositional = "сыром крабовом мясе"
+gender = "neuter"
+
+["crab meat"]
+nominative = "крабовое мясо"
+genitive = "крабового мяса"
+dative = "крабовому мясу"
+accusative = "крабовое мясо"
+instrumental = "крабовым мясом"
+prepositional = "крабовом мясе"
+gender = "neuter"
+
+["chicken meat"]
+nominative = "курятина"
+genitive = "курятины"
+dative = "курятине"
+accusative = "курятину"
+instrumental = "курятиной"
+prepositional = "курятине"
+gender = "female"
+
+["raw pork"]
+nominative = "сырая свинина"
+genitive = "сырой свинины"
+dative = "сырой свинине"
+accusative = "сырую свинину"
+instrumental = "сырой свининой"
+prepositional = "сырой свинине"
+gender = "female"
+
+["eco meat"]
+nominative = "фермерское мясо"
+genitive = "фермерского мяса"
+dative = "фермерскому мясу"
+accusative = "фермерское мясо"
+instrumental = "фермерским мясом"
+prepositional = "фермерском мясе"
+gender = "neuter"
+
+["blood worm meat"]
+nominative = "мясо кровяного червя"
+genitive = "мяса кровяного червя"
+dative = "мясу кровяного червя"
+accusative = "мясо кровяного червя"
+instrumental = "мясом кровяного червя"
+prepositional = "мясе кровяного червя"
+gender = "neuter"
+
+["steak"]
+nominative = "стейк"
+genitive = "стейка"
+dative = "стейку"
+accusative = "стейк"
+instrumental = "стейком"
+prepositional = "стейке"
+gender = "male"
+
+["killer tomato steak"]
+nominative = "томатный стейк"
+genitive = "томатного стейка"
+dative = "томатному стейку"
+accusative = "томатный стейк"
+instrumental = "томатным стейком"
+prepositional = "томатном стейке"
+gender = "male"
+
+["bear steak"]
+nominative = "стейк из медвежатины"
+genitive = "стейка из медвежатины"
+dative = "стейку из медвежатины"
+accusative = "стейк из медвежатины"
+instrumental = "стейком из медвежатины"
+prepositional = "стейке из медвежатины"
+gender = "male"
+
+["xeno steak"]
+nominative = "ксено-стейк"
+genitive = "ксено-стейка"
+dative = "ксено-стейку"
+accusative = "ксено-стейк"
+instrumental = "ксено-стейком"
+prepositional = "ксено-стейке"
+gender = "male"
+
+["spider steak"]
+nominative = "паучий стейк"
+genitive = "паучьего стейка"
+dative = "паучьему стейку"
+accusative = "паучий стейк"
+instrumental = "паучьим стейком"
+prepositional = "паучьем стейке"
+gender = "male"
+
+["goliath steak"]
+nominative = "стейк из голиафа"
+genitive = "стейка из голиафа"
+dative = "стейку из голиафа"
+accusative = "стейк из голиафа"
+instrumental = "стейком из голиафа"
+prepositional = "стейке из голиафа"
+gender = "male"
+
+["gondola steak"]
+nominative = "стейк из гондолы"
+genitive = "стейка из гондолы"
+dative = "стейку из гондолы"
+accusative = "стейк из гондолы"
+instrumental = "стейком из гондолы"
+prepositional = "стейке из гондолы"
+gender = "male"
+
+["penguin steak"]
+nominative = "стейк из пингвина"
+genitive = "стейка из пингвина"
+dative = "стейку из пингвина"
+accusative = "стейк из пингвина"
+instrumental = "стейком из пингвина"
+prepositional = "стейке из пингвина"
+gender = "male"
+
+["chicken steak"]
+nominative = "стейк из курицы"
+genitive = "стейка из курицы"
+dative = "стейку из курицы"
+accusative = "стейк из курицы"
+instrumental = "стейком из курицы"
+prepositional = "стейке из курицы"
+gender = "male"
+
+["lizard steak"]
+nominative = "стейк из ящера"
+genitive = "стейка из ящера"
+dative = "стейку из ящера"
+accusative = "стейк из ящера"
+instrumental = "стейком из ящера"
+prepositional = "стейке из ящера"
+gender = "male"
+
+["thermally processed meat product"]
+nominative = "термически обработанный мясной продукт"
+genitive = "термически обработанного мясного продукта"
+dative = "термически обработанному мясному продукту"
+accusative = "термически обработанный мясной продукт"
+instrumental = "термически обработанным мясным продуктом"
+prepositional = "термически обработанном мясном продукте"
+gender = "male"
+
+["synthsteak"]
+nominative = "синтстейк"
+genitive = "синтстейка"
+dative = "синтстейку"
+accusative = "синтстейк"
+instrumental = "синтстейком"
+prepositional = "синтстейке"
+gender = "male"
+
+["pork chops"]
+nominative = "жареная свинина"
+genitive = "жареной свинины"
+dative = "жареной свинине"
+accusative = "жареную свинину"
+instrumental = "жареной свининой"
+prepositional = "жареной свинине"
+gender = "female"
+
+["blood worm steak"]
+nominative = "стейк из кровяного червя"
+genitive = "стейка из кровяного червя"
+dative = "стейку из кровяного червя"
+accusative = "стейк из кровяного червя"
+instrumental = "стейком из кровяного червя"
+prepositional = "стейке из кровяного червя"
+gender = "male"
+
+["raw cutlet"]
+nominative = "сырая отбивная"
+genitive = "сырой отбивной"
+dative = "сырой отбивной"
+accusative = "сырую отбивную"
+instrumental = "сырой отбивной"
+prepositional = "сырой отбивной"
+gender = "female"
+
+["raw killer tomato cutlet"]
+nominative = "сырая отбивная из томата"
+genitive = "сырой отбивной из томата"
+dative = "сырой отбивной из томата"
+accusative = "сырую отбивную из томата"
+instrumental = "сырой отбивной из томата"
+prepositional = "сырой отбивной из томата"
+gender = "female"
+
+["raw bear cutlet"]
+nominative = "сырая отбивная из медвежатины"
+genitive = "сырой отбивной из медвежатины"
+dative = "сырой отбивной из медвежатины"
+accusative = "сырую отбивную из медвежатины"
+instrumental = "сырой отбивной из медвежатины"
+prepositional = "сырой отбивной из медвежатины"
+gender = "female"
+
+["raw xeno cutlet"]
+nominative = "сырая отбивная из ксеноморфа"
+genitive = "сырой отбивной из ксеноморфа"
+dative = "сырой отбивной из ксеноморфа"
+accusative = "сырую отбивную из ксеноморфа"
+instrumental = "сырой отбивной из ксеноморфа"
+prepositional = "сырой отбивной из ксеноморфа"
+gender = "female"
+
+["raw spider cutlet"]
+nominative = "сырая паучья отбивная"
+genitive = "сырой паучьей отбивной"
+dative = "сырой паучьей отбивной"
+accusative = "сырую паучью отбивную"
+instrumental = "сырой паучьей отбивной"
+prepositional = "сырой паучьей отбивной"
+gender = "female"
+
+["raw gondola cutlet"]
+nominative = "сырая отбивная из гондолы"
+genitive = "сырой отбивной из гондолы"
+dative = "сырой отбивной из гондолы"
+accusative = "сырую отбивную из гондолы"
+instrumental = "сырой отбивной из гондолы"
+prepositional = "сырой отбивной из гондолы"
+gender = "female"
+
+["raw penguin cutlet"]
+nominative = "сырая отбивная из пингвина"
+genitive = "сырой отбивной из пингвина"
+dative = "сырой отбивной из пингвина"
+accusative = "сырую отбивную из пингвина"
+instrumental = "сырой отбивной из пингвина"
+prepositional = "сырой отбивной из пингвина"
+gender = "female"
+
+["raw chicken cutlet"]
+nominative = "сырая отбивная из курицы"
+genitive = "сырой отбивной из курицы"
+dative = "сырой отбивной из курицы"
+accusative = "сырую отбивную из курицы"
+instrumental = "сырой отбивной из курицы"
+prepositional = "сырой отбивной из курицы"
+gender = "female"
+
+["cutlet"]
+nominative = "отбивная"
+genitive = "отбивной"
+dative = "отбивной"
+accusative = "отбивную"
+instrumental = "отбивной"
+prepositional = "отбивной"
+gender = "female"
+
+["killer tomato cutlet"]
+nominative = "отбивная из томата"
+genitive = "отбивной из томата"
+dative = "отбивной из томата"
+accusative = "отбивную из томата"
+instrumental = "отбивной из томата"
+prepositional = "отбивной из томата"
+gender = "female"
+
+["bear cutlet"]
+nominative = "отбивная из медвежатины"
+genitive = "отбивной из медвежатины"
+dative = "отбивной из медвежатины"
+accusative = "отбивную из медвежатины"
+instrumental = "отбивной из медвежатины"
+prepositional = "отбивной из медвежатины"
+gender = "female"
+
+["xeno cutlet"]
+nominative = "отбивная из ксеноморфа"
+genitive = "отбивной из ксеноморфа"
+dative = "отбивной из ксеноморфа"
+accusative = "отбивную из ксеноморфа"
+instrumental = "отбивной из ксеноморфа"
+prepositional = "отбивной из ксеноморфа"
+gender = "female"
+
+["spider cutlet"]
+nominative = "паучья отбивная"
+genitive = "паучьей отбивной"
+dative = "паучьей отбивной"
+accusative = "паучью отбивную"
+instrumental = "паучьей отбивной"
+prepositional = "паучьей отбивной"
+gender = "female"
+
+["gondola cutlet"]
+nominative = "отбивная из гондолы"
+genitive = "отбивной из гондолы"
+dative = "отбивной из гондолы"
+accusative = "отбивную из гондолы"
+instrumental = "отбивной из гондолы"
+prepositional = "отбивной из гондолы"
+gender = "female"
+
+["penguin cutlet"]
+nominative = "отбивная из пингвина"
+genitive = "отбивной из пингвина"
+dative = "отбивной из пингвина"
+accusative = "отбивную из пингвина"
+instrumental = "отбивной из пингвина"
+prepositional = "отбивной из пингвина"
+gender = "female"
+
+["chicken cutlet"]
+nominative = "отбивная из курицы"
+genitive = "отбивной из курицы"
+dative = "отбивной из курицы"
+accusative = "отбивную из курицы"
+instrumental = "отбивной из курицы"
+prepositional = "отбивной из курицы"
+gender = "female"
+
 # MARK: Food - Other
 
 ["space fries"]
@@ -12341,10 +12847,6 @@ gender = "plural"
 ["peanuts"]
 nominative = "арахис"
 gender = "male"
-
-["sushi"]
-nominative = "суши"
-gender = "plural"
 
 ["spiced apples"]
 nominative = "яблочные дольки"
