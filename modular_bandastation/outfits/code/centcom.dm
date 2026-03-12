@@ -150,41 +150,35 @@
 	var/obj/item/bodypart/leg/right/strongleg/right_leg = new()
 
 	var/obj/item/bodypart/old_left_arm = H.get_bodypart(BODY_ZONE_L_ARM)
-	if(old_left_arm)
-		old_left_arm.drop_limb(special = TRUE)
-		qdel(old_left_arm)
 	left_arm.replace_limb(H, TRUE)
+	if(old_left_arm)
+		qdel(old_left_arm)
 
 	var/obj/item/bodypart/old_right_arm = H.get_bodypart(BODY_ZONE_R_ARM)
-	if(old_right_arm)
-		old_right_arm.drop_limb(special = TRUE)
-		qdel(old_right_arm)
 	right_arm.replace_limb(H, TRUE)
+	if(old_right_arm)
+		qdel(old_right_arm)
 
 	var/obj/item/bodypart/old_left_leg = H.get_bodypart(BODY_ZONE_L_LEG)
-	if(old_left_leg)
-		old_left_leg.drop_limb(special = TRUE)
-		qdel(old_left_leg)
 	left_leg.replace_limb(H, TRUE)
+	if(old_left_leg)
+		qdel(old_left_leg)
 
 	var/obj/item/bodypart/old_right_leg = H.get_bodypart(BODY_ZONE_R_LEG)
-	if(old_right_leg)
-		old_right_leg.drop_limb(special = TRUE)
-		qdel(old_right_leg)
 	right_leg.replace_limb(H, TRUE)
+	if(old_right_leg)
+		qdel(old_right_leg)
 
 	// cyberimps
-	var/obj/item/organ/cyberimp/chest/pump/centcom/pump = new()
-	pump.Insert(H, special = TRUE)
-
-	var/obj/item/organ/cyberimp/eyes/hud/security/shielded/hud_eyes = new()
-	hud_eyes.Insert(H, special = TRUE)
-
-	var/obj/item/organ/cyberimp/chest/reviver/reviver = new()
-	reviver.Insert(H, special = TRUE)
-
-	var/obj/item/organ/cyberimp/brain/anti_stun/anti_stun = new()
-	anti_stun.Insert(H, special = TRUE)
+	var/list/implants_to_add = list(
+		/obj/item/organ/cyberimp/chest/pump/centcom,
+		/obj/item/organ/cyberimp/eyes/hud/security/shielded,
+		/obj/item/organ/cyberimp/chest/reviver,
+		/obj/item/organ/cyberimp/brain/anti_stun
+	)
+	for(var/imp_type in implants_to_add)
+		var/obj/item/organ/cyberimp/imp = new imp_type()
+		imp.Insert(H, special = TRUE)
 
 // CentCom Diplomat
 /datum/outfit/centcom/diplomat

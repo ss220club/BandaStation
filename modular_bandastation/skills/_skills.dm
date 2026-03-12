@@ -5,12 +5,3 @@
 	desc = "used for abstract abilities and spells"
 	/// A string with authors of this modpack.
 	author = "grombila"
-
-/datum/modpack/skills/pre_initialize()
-	. = ..()
-
-/datum/modpack/skills/initialize()
-	. = ..()
-
-/datum/modpack/skills/post_initialize()
-	. = ..()
