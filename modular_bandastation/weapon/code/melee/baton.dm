@@ -34,7 +34,7 @@
 		return
 
 	if(user && target && !user.Adjacent(target))
-		user.balloon_alert(user, "Not loaded!")
+		user.balloon_alert(user, "not loaded!")
 		return
 	return ..()
 
@@ -56,12 +56,12 @@
 
 /obj/item/melee/baton/nt_cane/gun/examine(mob/user)
 	. = ..()
-	. += "Safety: [safety_on ? "on" : "false"]."
-	. += "Ammo: [diamond_loaded ? "full" : "empty"]."
+	. += "safety: [safety_on ? "on" : "false"]."
+	. += "ammo: [diamond_loaded ? "full" : "empty"]."
 
 /obj/item/melee/baton/nt_cane/gun/proc/try_load_diamond(obj/item/item, mob/user)
 	if(diamond_loaded)
-		user?.balloon_alert(user, "Already lodaed!")
+		user?.balloon_alert(user, "already lodaed!")
 		return TRUE
 
 	if(istype(item, /obj/item/stack/sheet/mineral/diamond))
@@ -89,7 +89,7 @@
 		return TRUE
 
 	if(!COOLDOWN_FINISHED(src, fire_cooldown))
-		user.balloon_alert(user, "Reloading!")
+		user.balloon_alert(user, "reloading!")
 		return TRUE
 
 	COOLDOWN_START(src, fire_cooldown, 1.5 SECONDS)
@@ -106,12 +106,12 @@
 		return FALSE
 
 	if(!COOLDOWN_FINISHED(src, safety_toggle_cooldown))
-		user.balloon_alert(user, "Reloading!")
+		user.balloon_alert(user, "reloading!")
 		return FALSE
 	COOLDOWN_START(src, safety_toggle_cooldown, 3 SECONDS)
 
 	safety_on = !safety_on
-	user.balloon_alert(user, "Safety: [safety_on ? "on" : "false"].")
+	user.balloon_alert(user, "safety: [safety_on ? "on" : "false"].")
 	add_fingerprint(user)
 	update_item_action_buttons()
 	INVOKE_ASYNC(src, PROC_REF(play_safety_sound), user)

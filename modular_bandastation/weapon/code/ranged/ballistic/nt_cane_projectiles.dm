@@ -2,7 +2,7 @@
 	name = "diamond shot"
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
 	icon_state = "energy2"
-	damage = 50
+	damage = 35
 	speed = 2.5
 	armour_penetration = 10
 	paralyze = 20
