@@ -1,6 +1,5 @@
 /// Element for enhanced movement with strongleg prosthesis
 /datum/element/strongleg_movement
-	/// Speed bonus per leg
 	var/speed_bonus = -0.3
 
 /datum/element/strongleg_movement/Attach(datum/target)
@@ -17,20 +16,15 @@
 		living_target.remove_movespeed_modifier(/datum/movespeed_modifier/strongleg_prosthesis)
 	return ..()
 
-/// Movespeed modifier for strongleg prosthesis
 /datum/movespeed_modifier/strongleg_prosthesis
 	movetypes = GROUND
 	variable = TRUE
 	multiplicative_slowdown = -0.2
 
 /// Component for Strongleg prosthesis combat abilities
-/// Handles enhanced kicks and stomp attacks
 /datum/component/strongleg_combat
-	/// Knockback distance on kick
 	var/kick_knockback_distance = 2
-	/// Stomp knockdown duration
 	var/stomp_knockdown_time = 2 SECONDS
-	/// Stomp damage multiplier
 	var/stomp_damage_multiplier = 1.5
 
 /datum/component/strongleg_combat/Initialize(_kick_knockback_distance, _stomp_knockdown_time, _stomp_damage_multiplier)
@@ -51,11 +45,14 @@
 	. = ..()
 	UnregisterSignal(parent, list(COMSIG_HUMAN_PUNCHED, COMSIG_LIVING_UNARMED_ATTACK))
 
-/// Kick handler - adds knockback when kicking (attacking downed targets)
 /datum/component/strongleg_combat/proc/on_kick(mob/living/carbon/human/source, mob/living/carbon/human/target, damage, attack_type, obj/item/bodypart/affecting, final_armor_block, kicking, limb_sharpness)
 	SIGNAL_HANDLER
 
 	if(!kicking)
+		return
+
+	// Лежачие цели обрабатываются в on_stomp
+	if(target.body_position == LYING_DOWN)
 		return
 
 	if(!istype(source.get_bodypart(BODY_ZONE_L_LEG), /obj/item/bodypart/leg/left/strongleg) && !istype(source.get_bodypart(BODY_ZONE_R_LEG), /obj/item/bodypart/leg/right/strongleg))
@@ -74,7 +71,6 @@
 	)
 	to_chat(source, span_danger("Ваш пинок отбрасывает [target.declent_ru(ACCUSATIVE)]!"))
 
-/// Stomp handler - enhanced damage and knockdown when stomping downed targets
 /datum/component/strongleg_combat/proc/on_stomp(mob/living/source, atom/target, proximity, modifiers)
 	SIGNAL_HANDLER
 
@@ -83,7 +79,6 @@
 
 	var/mob/living/living_target = target
 
-	// Only enhanced when target is downed (stomping)
 	if(living_target.body_position != LYING_DOWN)
 		return NONE
 
@@ -94,7 +89,6 @@
 	if(!istype(human_source.get_bodypart(BODY_ZONE_L_LEG), /obj/item/bodypart/leg/left/strongleg) && !istype(human_source.get_bodypart(BODY_ZONE_R_LEG), /obj/item/bodypart/leg/right/strongleg))
 		return NONE
 
-	// Apply knockdown
 	living_target.Knockdown(stomp_knockdown_time)
 
 	living_target.visible_message(
@@ -108,7 +102,17 @@
 
 	log_combat(source, living_target, "strongleg stomp")
 
-	return NONE // Don't cancel the attack, just add effects
+	return NONE
+
+/proc/setup_strongleg(mob/living/carbon/owner)
+	owner.AddElement(/datum/element/strongleg_movement)
+	owner.AddComponent(/datum/component/strongleg_combat, 2, 2 SECONDS, 1.5)
+
+/proc/cleanup_strongleg(mob/living/carbon/owner)
+	owner.RemoveElement(/datum/element/strongleg_movement)
+	var/datum/component/strongleg_combat/combat_component = owner.GetComponent(/datum/component/strongleg_combat)
+	if(combat_component)
+		qdel(combat_component)
 
 /obj/item/bodypart/leg/left/strongleg
 	name = "augmented leg"
@@ -137,15 +141,11 @@
 /obj/item/bodypart/leg/left/strongleg/try_attach_limb(mob/living/carbon/new_owner, special)
 	. = ..()
 	if(. && istype(new_owner))
-		new_owner.AddElement(/datum/element/strongleg_movement)
-		new_owner.AddComponent(/datum/component/strongleg_combat, 2, 2 SECONDS, 1.5)
+		setup_strongleg(new_owner)
 
 /obj/item/bodypart/leg/left/strongleg/on_removal(mob/living/carbon/old_owner)
 	if(old_owner)
-		old_owner.RemoveElement(/datum/element/strongleg_movement)
-		var/datum/component/strongleg_combat/combat_component = old_owner.GetComponent(/datum/component/strongleg_combat)
-		if(combat_component)
-			qdel(combat_component)
+		cleanup_strongleg(old_owner)
 	return ..()
 
 /obj/item/bodypart/leg/right/strongleg
@@ -175,13 +175,9 @@
 /obj/item/bodypart/leg/right/strongleg/try_attach_limb(mob/living/carbon/new_owner, special)
 	. = ..()
 	if(. && istype(new_owner))
-		new_owner.AddElement(/datum/element/strongleg_movement)
-		new_owner.AddComponent(/datum/component/strongleg_combat, 2, 2 SECONDS, 1.5)
+		setup_strongleg(new_owner)
 
 /obj/item/bodypart/leg/right/strongleg/on_removal(mob/living/carbon/old_owner)
 	if(old_owner)
-		old_owner.RemoveElement(/datum/element/strongleg_movement)
-		var/datum/component/strongleg_combat/combat_component = old_owner.GetComponent(/datum/component/strongleg_combat)
-		if(combat_component)
-			qdel(combat_component)
+		cleanup_strongleg(old_owner)
 	return ..()

@@ -13,15 +13,10 @@
 	return ..()
 
 /// Component for Strongarm prosthesis combat abilities
-/// Handles knockback on punches and enhanced shoving
 /datum/component/strongarm_combat
-	/// Knockback distance on punch
 	var/knockback_distance = 3
-	/// Throw distance on shove
 	var/shove_throw_distance = 5
-	/// Throw speed on shove
 	var/shove_throw_speed = 3
-	/// Knockdown duration on shove
 	var/shove_knockdown_time = 3 SECONDS
 
 /datum/component/strongarm_combat/Initialize(_knockback_distance, _shove_throw_distance, _shove_throw_speed, _shove_knockdown_time)
@@ -44,7 +39,6 @@
 	. = ..()
 	UnregisterSignal(parent, list(COMSIG_HUMAN_PUNCHED, COMSIG_LIVING_UNARMED_ATTACK))
 
-/// Punch handler - adds knockback
 /datum/component/strongarm_combat/proc/on_punch(mob/living/carbon/human/source, mob/living/carbon/human/target, damage, attack_type, obj/item/bodypart/affecting, final_armor_block, kicking, limb_sharpness)
 	SIGNAL_HANDLER
 
@@ -68,7 +62,6 @@
 	)
 	to_chat(source, span_danger("Ваш удар отбрасывает [target.declent_ru(ACCUSATIVE)]!"))
 
-/// Unarmed attack handler - intercepts disarm/shove (right click)
 /datum/component/strongarm_combat/proc/on_unarmed_attack(mob/living/source, atom/target, proximity, modifiers)
 	SIGNAL_HANDLER
 
@@ -120,6 +113,16 @@
 
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
+/proc/setup_strongarm(mob/living/carbon/owner)
+	owner.AddElement(/datum/element/strongarm_throw)
+	owner.AddComponent(/datum/component/strongarm_combat, 3, 5, 3, 3 SECONDS)
+
+/proc/cleanup_strongarm(mob/living/carbon/owner)
+	owner.RemoveElement(/datum/element/strongarm_throw)
+	var/datum/component/strongarm_combat/combat_component = owner.GetComponent(/datum/component/strongarm_combat)
+	if(combat_component)
+		qdel(combat_component)
+
 /obj/item/bodypart/arm/left/strongarm
 	name = "augmented arm"
 	desc = "Combat prosthesis with enhanced hydraulics for crushing blows, grabs and throws. \
@@ -155,15 +158,11 @@
 /obj/item/bodypart/arm/left/strongarm/try_attach_limb(mob/living/carbon/new_owner, special)
 	. = ..()
 	if(. && istype(new_owner))
-		new_owner.AddElement(/datum/element/strongarm_throw)
-		new_owner.AddComponent(/datum/component/strongarm_combat, 3, 5, 3, 3 SECONDS)
+		setup_strongarm(new_owner)
 
 /obj/item/bodypart/arm/left/strongarm/on_removal(mob/living/carbon/old_owner)
 	if(old_owner)
-		old_owner.RemoveElement(/datum/element/strongarm_throw)
-		var/datum/component/strongarm_combat/combat_component = old_owner.GetComponent(/datum/component/strongarm_combat)
-		if(combat_component)
-			qdel(combat_component)
+		cleanup_strongarm(old_owner)
 	return ..()
 
 /obj/item/bodypart/arm/right/strongarm
@@ -201,13 +200,9 @@
 /obj/item/bodypart/arm/right/strongarm/try_attach_limb(mob/living/carbon/new_owner, special)
 	. = ..()
 	if(. && istype(new_owner))
-		new_owner.AddElement(/datum/element/strongarm_throw)
-		new_owner.AddComponent(/datum/component/strongarm_combat, 3, 5, 3, 3 SECONDS)
+		setup_strongarm(new_owner)
 
 /obj/item/bodypart/arm/right/strongarm/on_removal(mob/living/carbon/old_owner)
 	if(old_owner)
-		old_owner.RemoveElement(/datum/element/strongarm_throw)
-		var/datum/component/strongarm_combat/combat_component = old_owner.GetComponent(/datum/component/strongarm_combat)
-		if(combat_component)
-			qdel(combat_component)
+		cleanup_strongarm(old_owner)
 	return ..()
