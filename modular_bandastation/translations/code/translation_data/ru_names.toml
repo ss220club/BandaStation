@@ -12628,12 +12628,12 @@ prepositional = "квантовой платформе"
 gender = "female"
 
 ["Quantum Console"]
-nominative = "квантовая консоль"
-genitive = "квантовой консоли"
-dative = "квантовой консоли"
-accusative = "квантовую консоль"
-instrumental = "квантовой консолью"
-prepositional = "квантовой консоли"
+nominative = "Квантовая консоль"
+genitive = "Квантовой консоли"
+dative = "Квантовой консоли"
+accusative = "Квантовую консоль"
+instrumental = "Квантовой консолью"
+prepositional = "Квантовой консоли"
 gender = "female"
 
 ["quantum console"]
