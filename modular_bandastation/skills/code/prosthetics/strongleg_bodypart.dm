@@ -179,7 +179,6 @@
 		TRAIT_NODISMEMBER,
 	)
 
-
 /obj/item/bodypart/leg/right/strongleg/try_attach_limb(mob/living/carbon/new_owner, special)
 	. = ..()
 	if(. && istype(new_owner))

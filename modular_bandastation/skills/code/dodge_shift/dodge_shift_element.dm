@@ -21,6 +21,8 @@
 	var/return_time = 0.25 SECONDS
 	/// Cooldown between dodges
 	var/cooldown_time = 2 SECONDS
+	/// Stamina cost per dodge
+	var/stamina_cost = 0
 	/// Attack types that can be dodged (bitflags)
 	var/dodge_attack_types = MELEE_ATTACK | UNARMED_ATTACK | THROWN_PROJECTILE_ATTACK
 	/// Sound on dodge
@@ -82,6 +84,10 @@
 	if(!(source.mobility_flags & MOBILITY_MOVE))
 		return FAILED_BLOCK
 
+	// Check if we have enough stamina to dodge
+	if(stamina_cost > 0 && (source.maxHealth - (source.get_stamina_loss() + stamina_cost)) <= source.crit_threshold)
+		return FAILED_BLOCK
+
 	perform_dodge(source, hit_by, attack_text)
 
 	if(cooldown_time > 0)
@@ -105,6 +111,10 @@
 	if(!(source.mobility_flags & MOBILITY_MOVE))
 		return NONE
 
+	// Check if we have enough stamina to dodge
+	if(stamina_cost > 0 && (source.maxHealth - (source.get_stamina_loss() + stamina_cost)) <= source.crit_threshold)
+		return NONE
+
 	perform_dodge(source, hitting_projectile, hitting_projectile.name)
 
 	if(cooldown_time > 0)
@@ -114,6 +124,10 @@
 	return COMPONENT_BULLET_PIERCED
 
 /datum/element/dodge_shift/proc/perform_dodge(mob/living/dodger, atom/hit_by, attack_text)
+	// Spend stamina for the dodge
+	if(stamina_cost > 0)
+		dodger.adjust_stamina_loss(stamina_cost)
+
 	var/dodge_dir = get_dodge_direction(dodger, hit_by)
 
 	var/shift_x = 0
@@ -259,35 +273,13 @@
  * Predefined dodge element variants
  */
 
-/// Basic dodge - 20% chance, short cooldown
-/datum/element/dodge_shift/basic
-	dodge_chance = 20
-	shift_distance = 16
-	return_delay = 0.3 SECONDS
-	cooldown_time = 1.5 SECONDS
-
-/// Advanced dodge - 35% chance, medium cooldown
-/datum/element/dodge_shift/advanced
-	dodge_chance = 35
-	shift_distance = 24
-	return_delay = 0.4 SECONDS
-	cooldown_time = 2 SECONDS
-
-/// Dodge master - 50% chance, but long cooldown
-/datum/element/dodge_shift/master
-	dodge_chance = 50
-	shift_distance = 32
-	return_delay = 0.5 SECONDS
-	cooldown_time = 4 SECONDS
-	create_afterimage = TRUE
-	afterimage_alpha = 100
-
 /// You have 7 minutes
 /datum/element/dodge_shift/ultimate
 	dodge_chance = 100
 	shift_distance = 24
 	return_delay = 0.3 SECONDS
 	cooldown_time = 0
+	stamina_cost = 4
 	dodge_attack_types = MELEE_ATTACK | UNARMED_ATTACK | PROJECTILE_ATTACK | THROWN_PROJECTILE_ATTACK | LEAP_ATTACK | OVERWHELMING_ATTACK
 	create_afterimage = TRUE
 	afterimage_alpha = 100
