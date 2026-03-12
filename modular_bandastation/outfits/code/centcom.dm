@@ -137,7 +137,7 @@
 
 	if(visuals_only)
 		return
-	H.maxHealth = 150
+	H.maxHealth = MAX_LIVING_HEALTH * 1.5
 
 	// skills
 	var/datum/action/cooldown/spell/dodge_mode/dodge = new()

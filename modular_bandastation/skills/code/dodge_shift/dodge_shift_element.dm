@@ -261,7 +261,6 @@
 	overlays.Cut()
 	underlays.Cut()
 
-	// Add bluish tint for mirage effect
 	color = list(
 		1, 0, 0,
 		0, 0.8, 0,
