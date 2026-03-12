@@ -46,6 +46,7 @@
 #define FACTION_KHARA "khara"
 
 #define TRAIT_KHARAMUTANT "khara_mutant"
+#define TRAIT_GRANTEDKHARA_REBORN "granted_khara_reborn"
 
 #define BB_MOB_ABILITY_BONESHARD "bb_ability_boneshard"
 #define BB_MOB_ABILITY_LEAP "bb_ability_leap"
