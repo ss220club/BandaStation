@@ -51,7 +51,7 @@ ADMIN_VERB(cmd_mentor_say, R_MENTOR, "MSay", "Send a message to other mentors", 
 	var/holders = get_holders_with_rights(target_permissions)
 	for(var/holder in holders)
 		to_chat(
-			target = holders,
+			target = holder,
 			type = message_type,
 			html = message,
 			avoid_highlighting = (holder == user),
