@@ -295,7 +295,7 @@ const MainDiagnosticsView = () => {
                 </Box>
               </Stack.Item>
             )}
-            {patient.overclock_active && (
+            {!!patient.overclock_active && (
               <Stack.Item ml={1}>
                 <Box color="average" fontSize="0.85em" bold>
                   <Icon name="bolt" mr={0.5} />
