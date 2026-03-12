@@ -689,3 +689,10 @@ directory = "_maps/bandastation/automapper/templates/wawastation/"
 required_map = "wawastation.dmm"
 coordinates = [133, 105, 1]
 trait_name = "Station"
+
+[templates.wawastation_zoo]
+map_files = ["wawastation_zoo.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [94, 95, 1]
+trait_name = "Station"
