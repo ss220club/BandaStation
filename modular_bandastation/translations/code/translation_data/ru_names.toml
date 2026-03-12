@@ -31868,3 +31868,57 @@ accusative = "большого символа"
 instrumental = "большим символом"
 prepositional = "большом символе"
 gender = "male"
+
+["Example wall"]
+nominative = "пример стены"
+genitive = "примера стены"
+dative = "примеру стены"
+accusative = "пример стены"
+instrumental = "примером стены"
+prepositional = "примере стены"
+gender = "male"
+
+["Dodge Mode"]
+nominative = "режим уклонения"
+genitive = "режима уклонения"
+dative = "режиму уклонения"
+accusative = "режим уклонения"
+instrumental = "режимом уклонения"
+prepositional = "режиме уклонения"
+gender = "male"
+
+["Dodge Mode (Active)"]
+nominative = "режим уклонения (активен)"
+genitive = "режима уклонения (активен)"
+dative = "режиму уклонения (активен)"
+accusative = "режим уклонения (активен)"
+instrumental = "режимом уклонения (активен)"
+prepositional = "режиме уклонения (активен)"
+gender = "male"
+
+["Apex Nanotrasen Navy Field Officer"]
+nominative = "элитный полевой офицер флота Нанотрейзен"
+genitive = "элитного полевого офицера флота Нанотрейзен"
+dative = "элитному полевому офицеру флота Нанотрейзен"
+accusative = "элитного полевого офицера флота Нанотрейзен"
+instrumental = "элитным полевым офицером флота Нанотрейзен"
+prepositional = "элитном полевом офицере флота Нанотрейзен"
+gender = "male"
+
+["augmented arm"]
+nominative = "аугментированная рука"
+genitive = "аугментированной руки"
+dative = "аугментированной руке"
+accusative = "аугментированную руку"
+instrumental = "аугментированной рукой"
+prepositional = "аугментированной руке"
+gender = "female"
+
+["augmented leg"]
+nominative = "аугментированная нога"
+genitive = "аугментированной ноги"
+dative = "аугментированной ноге"
+accusative = "аугментированную ногу"
+instrumental = "аугментированной ногой"
+prepositional = "аугментированной ноге"
+gender = "female"
