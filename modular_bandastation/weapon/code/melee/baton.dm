@@ -61,7 +61,7 @@
 
 /obj/item/melee/baton/nt_cane/gun/proc/try_load_diamond(obj/item/item, mob/user)
 	if(diamond_loaded)
-		user?.balloon_alert(user, "already lodaed!")
+		user?.balloon_alert(user, "already loaded!")
 		return TRUE
 
 	if(istype(item, /obj/item/stack/sheet/mineral/diamond))
