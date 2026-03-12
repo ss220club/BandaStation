@@ -179,7 +179,7 @@
 /obj/item/reagent_containers/cup/bottle/potion/flight
 	name = "strange elixir"
 	desc = "A flask with an almost-holy aura emitting from it. The label on the bottle says: 'erqo'hyy tvi'rf lbh jv'atf'."
-	list_reagents = list(/datum/reagent/flightpotion = 5)
+	list_reagents = list(/datum/reagent/mutationtoxin/fly = 5) ///BANDASTATION EDIT ORIGINAL datum/reagent/flightpotion = 5
 
 /datum/reagent/flightpotion
 	name = "Flight Potion"
