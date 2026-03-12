@@ -18,18 +18,19 @@
 		name = "Dodge Mode"
 		desc = "Enable dodge mode."
 		to_chat(cast_on, span_warning("Dodge mode disabled."))
+		cast_on.balloon_alert(cast_on, "dodge mode disabled")
 	else
 		cast_on.AddElement(shift_type)
 		dodge_active = TRUE
 		name = "Dodge Mode (Active)"
 		desc = "Disable dodge mode."
 		to_chat(cast_on, span_notice("Dodge mode enabled!"))
+		cast_on.balloon_alert(cast_on, "dodge mode enabled")
 
 	build_all_button_icons()
 
 /datum/action/cooldown/spell/dodge_mode/Remove(mob/living/remove_from)
 	. = ..()
-	// Disable dodge mode when ability is removed
 	if(dodge_active && !QDELETED(remove_from))
 		remove_from.RemoveElement(shift_type)
 		dodge_active = FALSE

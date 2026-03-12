@@ -31922,3 +31922,21 @@ accusative = "аугментированную ногу"
 instrumental = "аугментированной ногой"
 prepositional = "аугментированной ноге"
 gender = "female"
+
+["field officer's reinforced cape"]
+nominative = "усиленный плащ офицера флота"
+genitive = "усиленного плаща офицера флота"
+dative = "усиленному плащу офицера флота"
+accusative = "усиленный плащ офицера флота"
+instrumental = "усиленным плащом офицера флота"
+prepositional = "усиленном плаще офицера флота"
+gender = "male"
+
+["fleet officer's formal suit"]
+nominative = "официальный костюм офицера флота"
+genitive = "официального костюма офицера флота"
+dative = "официальному костюму офицера флота"
+accusative = "официальный костюм офицера флота"
+instrumental = "официальным костюмом офицера флота"
+prepositional = "официальном костюме офицера флота"
+gender = "male"
