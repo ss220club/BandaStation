@@ -1,6 +1,6 @@
 /// Element for enhanced movement with strongleg prosthesis
 /datum/element/strongleg_movement
-	var/speed_bonus = -0.3
+	var/speed_bonus = -0.15
 
 /datum/element/strongleg_movement/Attach(datum/target)
 	. = ..()
@@ -19,41 +19,33 @@
 /datum/movespeed_modifier/strongleg_prosthesis
 	movetypes = GROUND
 	variable = TRUE
-	multiplicative_slowdown = -0.2
+	multiplicative_slowdown = -0.15
 
 /// Component for Strongleg prosthesis combat abilities
 /datum/component/strongleg_combat
 	var/kick_knockback_distance = 2
-	var/stomp_knockdown_time = 2 SECONDS
-	var/stomp_damage_multiplier = 1.5
 
-/datum/component/strongleg_combat/Initialize(_kick_knockback_distance, _stomp_knockdown_time, _stomp_damage_multiplier)
+/datum/component/strongleg_combat/Initialize(_kick_knockback_distance)
 	. = ..()
 	if(_kick_knockback_distance)
 		kick_knockback_distance = _kick_knockback_distance
-	if(_stomp_knockdown_time)
-		stomp_knockdown_time = _stomp_knockdown_time
-	if(_stomp_damage_multiplier)
-		stomp_damage_multiplier = _stomp_damage_multiplier
 
 /datum/component/strongleg_combat/RegisterWithParent()
 	. = ..()
 	RegisterSignal(parent, COMSIG_HUMAN_PUNCHED, PROC_REF(on_kick))
-	RegisterSignal(parent, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(on_stomp))
 
 /datum/component/strongleg_combat/UnregisterFromParent()
 	. = ..()
-	UnregisterSignal(parent, list(COMSIG_HUMAN_PUNCHED, COMSIG_LIVING_UNARMED_ATTACK))
+	UnregisterSignal(parent, COMSIG_HUMAN_PUNCHED)
 
 /datum/component/strongleg_combat/proc/on_kick(mob/living/carbon/human/source, mob/living/carbon/human/target, damage, attack_type, obj/item/bodypart/affecting, final_armor_block, kicking, limb_sharpness)
 	SIGNAL_HANDLER
 
 	if(!kicking)
-		return
+		return NONE
 
-	// Лежачие цели обрабатываются в on_stomp
 	if(target.body_position == LYING_DOWN)
-		return
+		return NONE
 
 	if(!istype(source.get_bodypart(BODY_ZONE_L_LEG), /obj/item/bodypart/leg/left/strongleg) && !istype(source.get_bodypart(BODY_ZONE_R_LEG), /obj/item/bodypart/leg/right/strongleg))
 		return
@@ -71,42 +63,9 @@
 	)
 	to_chat(source, span_danger("Ваш пинок отбрасывает [target.declent_ru(ACCUSATIVE)]!"))
 
-/datum/component/strongleg_combat/proc/on_stomp(mob/living/source, atom/target, proximity, modifiers)
-	SIGNAL_HANDLER
-
-	if(!isliving(target))
-		return NONE
-
-	var/mob/living/living_target = target
-
-	if(living_target.body_position != LYING_DOWN)
-		return NONE
-
-	var/mob/living/carbon/human/human_source = source
-	if(!istype(human_source))
-		return NONE
-
-	if(!istype(human_source.get_bodypart(BODY_ZONE_L_LEG), /obj/item/bodypart/leg/left/strongleg) && !istype(human_source.get_bodypart(BODY_ZONE_R_LEG), /obj/item/bodypart/leg/right/strongleg))
-		return NONE
-
-	living_target.Knockdown(stomp_knockdown_time)
-
-	living_target.visible_message(
-		span_danger("[capitalize(source.declent_ru(NOMINATIVE))] с силой топчет [living_target.declent_ru(ACCUSATIVE)]!"),
-		span_userdanger("[capitalize(source.declent_ru(NOMINATIVE))] с огромной силой топчет вас!"),
-		span_hear("Вы слышите глухой удар!"),
-		COMBAT_MESSAGE_RANGE,
-		source
-	)
-	to_chat(source, span_danger("Вы с силой топчете [living_target.declent_ru(ACCUSATIVE)]!"))
-
-	log_combat(source, living_target, "strongleg stomp")
-
-	return NONE
-
 /proc/setup_strongleg(mob/living/carbon/owner)
 	owner.AddElement(/datum/element/strongleg_movement)
-	owner.AddComponent(/datum/component/strongleg_combat, 2, 2 SECONDS, 1.5)
+	owner.AddComponent(/datum/component/strongleg_combat, 2)
 
 /proc/cleanup_strongleg(mob/living/carbon/owner)
 	owner.RemoveElement(/datum/element/strongleg_movement)
