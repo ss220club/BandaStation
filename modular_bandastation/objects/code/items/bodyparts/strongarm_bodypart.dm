@@ -198,13 +198,6 @@
 		TRAIT_GRABRESISTANCE,
 	)
 
-/// EMP protection - prosthesis has shielding
-/obj/item/bodypart/arm/right/strongarm/emp_effect(severity, protection)
-	do_sparks(number = 2, cardinal_only = FALSE, source = owner || src)
-	if(owner)
-		to_chat(owner, span_notice("Ваш [plaintext_zone] слегка искрит, но защита от ЭМИ срабатывает!"))
-	return TRUE
-
 /obj/item/bodypart/arm/right/strongarm/try_attach_limb(mob/living/carbon/new_owner, special)
 	. = ..()
 	if(. && istype(new_owner))

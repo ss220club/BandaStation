@@ -21,7 +21,7 @@
 /datum/movespeed_modifier/strongleg_prosthesis
 	movetypes = GROUND
 	variable = TRUE
-	multiplicative_slowdown = -0.3
+	multiplicative_slowdown = -0.2
 
 /// Component for Strongleg prosthesis combat abilities
 /// Handles enhanced kicks and stomp attacks
@@ -147,13 +147,6 @@
 		if(combat_component)
 			qdel(combat_component)
 	return ..()
-
-/// EMP protection - prosthesis has shielding
-/obj/item/bodypart/leg/left/strongleg/emp_effect(severity, protection)
-	do_sparks(number = 2, cardinal_only = FALSE, source = owner || src)
-	if(owner)
-		to_chat(owner, span_notice("Ваш [plaintext_zone] слегка искрит, но защита от ЭМИ срабатывает!"))
-	return TRUE
 
 /obj/item/bodypart/leg/right/strongleg
 	name = "augmented leg"
