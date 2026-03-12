@@ -10,6 +10,9 @@
 #include "code/melee/centcom/legendary_swords.dm"
 #include "code/melee/centcom/rapier.dm"
 
+// MARK: Crafting
+#include "code/crafting/nt_cane.dm"
+
 // MARK: Ranged - General
 #include "code/ranged/supply_packs.dm"
 #include "code/ranged/weapon_designs.dm"
@@ -23,6 +26,7 @@
 #include "code/ranged/ballistic/magazines.dm"
 #include "code/ranged/ballistic/mounted_machine_gun.dm"
 #include "code/ranged/ballistic/projectiles.dm"
+#include "code/ranged/ballistic/nt_cane_projectiles.dm"
 #include "code/ranged/ballistic/nanotrasen/pistols/gp9.dm"
 #include "code/ranged/ballistic/nanotrasen/pistols/1911.dm"
 #include "code/ranged/ballistic/nanotrasen/pistols/cm23.dm"
