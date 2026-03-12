@@ -3,6 +3,11 @@
 
 /datum/outfit/centcom/commander/field/strongarm
 	name = "Apex Nanotrasen Navy Field Officer"
+	suit = null
+	head = /obj/item/clothing/head/helmet/space/beret/soo
+	neck = /obj/item/clothing/neck/cloak/centcom/gr_cape
+	uniform = /obj/item/clothing/under/rank/centcom/gr_under
+	gloves = /obj/item/clothing/gloves/combat
 
 	// Добавляем протезы обеих рук через post_equip
 /datum/outfit/centcom/commander/field/strongarm/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
@@ -48,4 +53,3 @@
 		qdel(old_right_leg)
 	right_leg.replace_limb(H, TRUE)
 
-	to_chat(H, span_notice("Ваши боевые протезы 'Strongarm' активированы и готовы к использованию."))

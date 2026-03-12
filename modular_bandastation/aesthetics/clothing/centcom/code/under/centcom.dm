@@ -41,6 +41,12 @@
 	name = "SRT commander's suitskirt"
 	desc = "Униформа, выполненная в темных цветах с опозновательными знаками подразделений СРТ."
 
+/obj/item/clothing/under/rank/centcom/gr_under
+	name = "fleet officer's formal suit"
+	desc = "Сделанный на заказ роскошный костюм с вышитыми логотипами корпорации."
+	icon_state = "gr_under"
+	worn_icon_state = "gr_under"
+
 /obj/item/clothing/under/rank/centcom/military/eng
 	name = "SRT tactical engineering uniform"
 	desc = "Униформа, выполненная в темных цветах с опозновательными знаками инженерных подразделений СРТ."
