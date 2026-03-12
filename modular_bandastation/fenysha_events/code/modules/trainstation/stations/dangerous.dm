@@ -46,7 +46,8 @@
 	name = "Сердце инфекции"
 	map_path = "_maps/modular_events/trainstation/bossfight_map.dmm"
 	creator = "V1SITY"
-	visible = FALSE
+
+	station_flags = TRAINSTATION_ABSCTRACT | TRAINSTATION_BLOCKING
 	station_type = TRAINSTATION_TYPE_MILITARY
 	threat_level = THREAT_LEVEL_DEADLY
 	region = TRAINSTATION_REGION_THUNDRA

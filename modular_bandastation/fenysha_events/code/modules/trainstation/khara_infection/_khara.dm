@@ -12,9 +12,9 @@
 			После полного развития тело носителя будет разрушено новой формой жизни, сформировавшейся внутри него."
 	form = "Биоинженерная болезнь"
 	agent = "Споры Veral khara"
-	visibility_flags = NONE
-	spread_flags = DISEASE_SPREAD_SPECIAL
-	stage_prob = 12
+	visibility_flags = HIDDEN_SCANNER|HIDDEN_PANDEMIC
+	spread_flags = DISEASE_SPREAD_SPECIAL|DISEASE_SPREAD_AIRBORNE|DISEASE_SPREAD_CONTACT_FLUIDS|DISEASE_SPREAD_BLOOD
+	stage_prob = 13
 	max_stages = 7
 	spread_text = "Споры Veral khara (контакт + миазмы на поздних стадиях)"
 	cure_text = "Неизлечимо. Резадон и галоперидол могут замедлить / частично обратить прогрессию. \
@@ -50,7 +50,11 @@
 	. = ..()
 	stage = 1
 	stage_process = 0
-
+	var/obj/item/organ/brain/brain = infectee.get_organ_slot(ORGAN_SLOT_BRAIN)
+	if(!brain)
+		cure(FALSE)
+		return
+	brain.AddComponent(/datum/component/khara_disease)
 
 /datum/disease/khara/update_stage(new_stage)
 	if(stage_process < 100 && new_stage > stage)
@@ -60,16 +64,32 @@
 		return
 	stage_process = 0
 	switch(new_stage)
+		if(1 to 3)
+			visibility_flags = HIDDEN_SCANNER|HIDDEN_PANDEMIC
+			base_stage_speed = 0.8
+			process_dead = FALSE
+			spreading_modifier = KHARA_SPREADING_MODIFIER
 		if(4)
 			to_chat(affected_mob, span_userdanger("Что-то тяжёлое и неправильное пульсирует глубоко внутри живота…"))
 			spreading_modifier *= 0.6
+			base_stage_speed = 1.2
 			process_dead = TRUE
+			visibility_flags = HIDDEN_PANDEMIC
+			spreading_modifier = KHARA_SPREADING_MODIFIER * 1.2
 		if(5)
 			to_chat(affected_mob, span_userdanger("Кожа вздувается и шевелится — что-то растёт слишком быстро!"))
+			base_stage_speed = 1.6
+			spreading_modifier = KHARA_SPREADING_MODIFIER * 1.4
 		if(6)
-			to_chat(affected_mob, span_bolddanger("Кости трещат и ломаются под немыслимым внутренним давлением!"))
+			to_chat(affected_mob, span_userdanger("Кости трещат и ломаются под немыслимым внутренним давлением!"))
+			visibility_flags = NONE
+			base_stage_speed = 1.8
+			spreading_modifier = KHARA_SPREADING_MODIFIER * 1.6
 		if(7)
-			to_chat(affected_mob, span_bolddanger("Всё внутри шевелится. Оно хочет наружу."))
+			base_stage_speed = 2
+			to_chat(affected_mob, span_userdanger("Всё внутри шевелится. Оно хочет наружу."))
+			affected_mob.Shake(duration = 2 SECONDS)
+			spreading_modifier = KHARA_SPREADING_MODIFIER * 2
 
 
 /datum/disease/khara/proc/stage_evolution_process(seconds_per_tick)
@@ -85,6 +105,8 @@
 
 	if(healing > 0 && stage >= 4 && !has_invert_catalyst)
 		healing *= 0.5
+	if(stage >= 7)
+		healing = 0
 
 	var/stage_step = base - healing
 	stage_process = min(stage_process + (stage_step * seconds_per_tick), 100)
@@ -102,54 +124,99 @@
 
 	if(COOLDOWN_FINISHED(src, stage_process_cd))
 		stage_evolution_process(seconds_per_tick)
-		COOLDOWN_START(src, stage_process_cd, 3 SECONDS)
+		COOLDOWN_START(src, stage_process_cd, 2 SECONDS)
 
 	switch(stage)
 		if(1)
 			if(SPT_PROB(5, seconds_per_tick))
 				affected_mob.emote("cough")
-			if(SPT_PROB(5, seconds_per_tick))
+			if(SPT_PROB(6, seconds_per_tick))
 				to_chat(affected_mob, span_warning("Вы чувствуете странное тепло, распространяющееся под кожей…"))
+			if(SPT_PROB(4, seconds_per_tick))
+				to_chat(affected_mob, span_notice("В [pick("запястьях","пальцах","коленях")] будто лёгкое покалывание…"))
 
 		if(2 to 3)
 			if(SPT_PROB(5 + stage, seconds_per_tick))
 				to_chat(affected_mob, span_warning("Тупая, пульсирующая боль расцветает где-то внутри."))
+			if(SPT_PROB(4, seconds_per_tick))
+				to_chat(affected_mob, span_warning("Голова тяжёлая, в висках стучит…"))
+				affected_mob.adjust_confusion(4)
+
 			if(SPT_PROB(3, seconds_per_tick))
-				affected_mob.adjust_tox_loss(1.2, forced = TRUE)
+				affected_mob.adjust_brute_loss(1.2, forced = TRUE)
+
+			if(SPT_PROB(3.5, seconds_per_tick))
+				to_chat(affected_mob, span_warning("Суставы [pick("ноют","скрипят","будто ржавые")]…"))
+				affected_mob.adjust_stamina_loss(6)
 
 		if(4)
 			if(SPT_PROB(3, seconds_per_tick))
 				to_chat(affected_mob, span_danger("Вы чувствуете, как внутри [pick("грудной клетки", "живота", "бока")] растёт что-то твёрдое и неправильное."))
+
+			if(SPT_PROB(6, seconds_per_tick))
+				var/obj/item/bodypart/affecting = affected_mob.get_bodypart(pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+				if(affecting)
+					to_chat(affected_mob, span_warning("В [affecting.name] вспыхивает резкая боль!"))
+					affecting.receive_damage(5, 0, wound_bonus = CANT_WOUND)
+
 			if(SPT_PROB(5, seconds_per_tick))
 				affected_mob.adjust_brute_loss(rand(2,5), forced = TRUE)
 
+			// Дрожь в руках → роняние предметов
+			if(SPT_PROB(4.5, seconds_per_tick) && affected_mob.get_active_hand())
+				to_chat(affected_mob, span_warning("Пальцы внезапно онемели и не слушаются…"))
+				affected_mob.dropItemToGround(affected_mob.get_active_held_item())
+				affected_mob.emote("gasp")
+
 			if(SPT_PROB(5, seconds_per_tick) && COOLDOWN_FINISHED(src, tumor_pain_cd))
 				affected_mob.emote("scream")
+				to_chat(affected_mob, span_userdanger("Вы чувствуете как что-то в внутри [pick("грудной клетки", "правой руке", "левой руке")] болезненно пульсирует."))
 				affected_mob.adjust_brute_loss(rand(10, 20), forced = TRUE)
-				COOLDOWN_START(src, tumor_pain_cd, 25 SECONDS)
+				COOLDOWN_START(src, tumor_pain_cd, rand(25, 45) SECONDS)
 
 		if(5)
 			if(SPT_PROB(5, seconds_per_tick))
-				to_chat(affected_mob, span_userdanger("Плоть grotesquely вздувается — внутри что-то живое!"))
+				to_chat(affected_mob, span_userdanger("Плоть чудовищно вздувается — внутри что-то живое!"))
+				affected_mob.adjust_brute_loss(rand(5, 10), forced = TRUE)
+
+			if(SPT_PROB(4, seconds_per_tick))
+				to_chat(affected_mob, span_warning("Голова раскалывается, в глазах мелькают вспышки…"))
+				affected_mob.adjust_confusion(6)
+				affected_mob.adjust_eye_blur(8)
+
+			if(SPT_PROB(3.5, seconds_per_tick))
+				to_chat(affected_mob, span_warning("Ноги подкашиваются, суставы будто плавятся…"))
+				affected_mob.AdjustKnockdown(rand(15, 30))
+				affected_mob.adjust_stamina_loss(10)
+
 			if(SPT_PROB(3, seconds_per_tick))
 				damage_random_organ(rand(8, 14))
+
 			if(SPT_PROB(5, seconds_per_tick) && COOLDOWN_FINISHED(src, miasma_spread_cd))
 				spread_khara_miasma()
-				COOLDOWN_START(src, miasma_spread_cd, 35 SECONDS)
+				COOLDOWN_START(src, miasma_spread_cd, rand(20, 45) SECONDS)
 
 		if(6)
 			if(SPT_PROB(4, seconds_per_tick))
 				to_chat(affected_mob, span_bolddanger("Рёбра стонут и смещаются — что-то раздвигает их!"))
-			if(SPT_PROB(5, seconds_per_tick))
+
+			if(SPT_PROB(6, seconds_per_tick))
 				affected_mob.adjust_brute_loss(rand(6,11), forced = TRUE)
+
+			if(SPT_PROB(4.5, seconds_per_tick))
+				to_chat(affected_mob, span_warning("Руки дрожат так сильно, что невозможно ничего удержать…"))
+				if(affected_mob.get_active_held_item())
+					affected_mob.dropItemToGround(affected_mob.get_active_held_item(), TRUE)
+
 			if(SPT_PROB(3, seconds_per_tick))
 				affected_mob.vomit(VOMIT_CATEGORY_BLOOD|VOMIT_CATEGORY_KNOCKDOWN, lost_nutrition = FALSE)
+
 			if(SPT_PROB(5, seconds_per_tick) && COOLDOWN_FINISHED(src, crack_bones_cd))
 				affected_mob.emote("scream")
 				affected_mob.adjust_brute_loss(8, forced = TRUE)
 				COOLDOWN_START(src, crack_bones_cd, 28 SECONDS)
 
-			if(SPT_PROB(2, seconds_per_tick))
+			if(SPT_PROB(2.5, seconds_per_tick))
 				spread_khara_miasma()
 
 		if(7)
@@ -184,8 +251,7 @@
 	affected_mob.spill_organs(DROP_ORGANS)
 	if(thing_emerg)
 		new thing_emerg(get_turf(affected_mob))
-	stage = 1
-	process_dead = FALSE
+	update_stage(1)
 
 	log_virus("[key_name(affected_mob)] был поглощён и разорван Кхара в [loc_name(affected_mob)]")
 	affected_mob.investigate_log("погиб от инфекции Кхара (поглощён и разорван).", INVESTIGATE_DEATHS)
@@ -222,6 +288,66 @@
 #undef KHARA_EMERGENCE_BRUTE_DAMAGE
 #undef KHARA_TUMOR_THRESHOLD_STAGE
 
+
+
+/datum/component/khara_disease
+	VAR_PRIVATE/mob/living/carbon/current_mob = null
+	VAR_PRIVATE/obj/item/organ/brain/brain_parent = null
+
+/datum/component/khara_disease/Initialize()
+	if(!istype(parent, /obj/item/organ/brain))
+		return COMPONENT_INCOMPATIBLE
+	brain_parent = parent
+	if(!brain_parent.owner || !iscarbon(brain_parent.owner))
+		return COMPONENT_INCOMPATIBLE
+	register_to_mob(current_mob)
+
+/datum/component/khara_disease/RegisterWithParent()
+	RegisterSignals(brain_parent, list(COMSIG_ORGAN_REMOVED, COMSIG_ORGAN_BEING_REPLACED), PROC_REF(on_brain_removed))
+	RegisterSignal(brain_parent, COMSIG_ORGAN_IMPLANTED, PROC_REF(on_brain_implanted))
+
+/datum/component/khara_disease/UnregisterFromParent()
+	UnregisterSignal(brain_parent, list(COMSIG_ORGAN_REMOVED, COMSIG_ORGAN_BEING_REPLACED, COMSIG_ORGAN_IMPLANTED))
+
+/datum/component/khara_disease/proc/register_to_mob(mob/living/carbon/new_host)
+	if(!new_host || !iscarbon(new_host))
+		return
+
+	current_mob = new_host
+	new_host.ForceContractDisease(new /datum/disease/khara(), del_on_fail = TRUE)
+	RegisterSignal(current_mob, COMSIG_LIVING_REVIVE, PROC_REF(on_host_revived))
+
+/datum/component/khara_disease/proc/unregister_from_host(mob/living/carbon/old_host)
+	UnregisterSignal(old_host, COMSIG_LIVING_REVIVE)
+	current_mob = null
+
+/datum/component/khara_disease/proc/on_host_revived(mob/living/source, full_heal, admin_revive)
+	SIGNAL_HANDLER
+	current_mob.ForceContractDisease(new /datum/disease/khara(), del_on_fail = TRUE)
+
+/datum/component/khara_disease/proc/on_brain_removed()
+	SIGNAL_HANDLER
+
+	if(!current_mob)
+		return
+
+	current_mob.visible_message(span_userdanger("Это была плохая идея!"))
+	current_mob.apply_damage(500, BRUTE, forced = TRUE, spread_damage = TRUE, wound_bonus = 100)
+	var/datum/disease/khara/khara = null
+	for(var/datum/disease/D in current_mob.diseases)
+		if(istype(D, /datum/disease/khara))
+			khara = D
+			break
+	khara.emerging = TRUE
+	khara.stage = 7
+	khara.stage_process = 100
+	ASYNC
+		khara.perform_emergence()
+	unregister_from_host(current_mob)
+
+/datum/component/khara_disease/proc/on_brain_implanted()
+	SIGNAL_HANDLER
+	register_to_mob(brain_parent.owner)
 
 
 /datum/weather/khara_infection
