@@ -1,4 +1,13 @@
 // ============================================
+// ПЛАТА СИНТЕТИЧЕСКОГО ДИАГНОСТИЧЕСКОГО ТЕРМИНАЛА
+// ============================================
+
+/obj/item/circuitboard/computer/operating/synthetic
+	name = "Synthetic Diagnostic Terminal"
+	greyscale_colors = CIRCUIT_COLOR_SCIENCE
+	build_path = /obj/machinery/computer/operating/synthetic
+
+// ============================================
 // ДИАГНОСТИЧЕСКИЙ ТЕРМИНАЛ ДЛЯ СИНТЕТИКОВ
 // ============================================
 
