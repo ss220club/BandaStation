@@ -67,7 +67,7 @@
 
 	var/obj/item/paper/certificate = new()
 	certificate.add_raw_text(get_completion_certificate(time_difference, grade))
-	certificate.name = "certificate of domain completion"
+	certificate.name = "Сертификат о прохождении домена"
 	certificate.update_appearance()
 
 	var/obj/structure/closet/crate/secure/bitrunning/decrypted/reward_cache = new(src, generated_domain, bonus)
