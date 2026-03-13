@@ -268,7 +268,7 @@
 	var/obj/item/ammo_casing/top_round = get_round()
 	if(!top_round)
 		return
-	. += "Внутри осталось <b>[shells_left]</b> патрон[declension_ru(shells_left, "", "а", "ов")]."
+	. += "Внутри остал[declension_ru(shells_left, "ся", "ось", "ись")] <b>[shells_left]</b> патрон[declension_ru(shells_left, "", "а", "ов")]."
 	// this is kind of awkward phrasing, but it's the top/ready ammo in the box
 	// intended for people who have like three mislabeled magazines
 	. += span_notice("<b>[top_round]</b> готов[genderize_ru(top_round, "", "а", "о", "ы")] к стрельбе.")
