@@ -6,6 +6,26 @@
 // - Охлаждение CPU
 // - Сетевое подключение (для NET-door приложения ОС)
 // Терминал — см. synthetic_terminal.dm
+//
+// СБОРКА: распечатать synthetic_table_kit в протоколярном → применить к раме стола.
+// ============================================
+
+// ============================================
+// СБОРОЧНЫЙ НАБОР — печатается в прото, применяется к раме стола
+// ============================================
+
+/obj/item/stack/synthetic_table_kit
+	name = "набор синтетического диагностического стола"
+	singular_name = "набор"
+	desc = "Набор компонентов для сборки синтетического диагностического стола. Примените к раме стола."
+	icon = 'modular_bandastation/MachAImpDe/icons/net_table.dmi'
+	icon_state = "ipc_net_table"
+	w_class = WEIGHT_CLASS_NORMAL
+	table_type = /obj/structure/table/optable/synthetic
+	merge_type = /obj/item/stack/synthetic_table_kit
+
+// ============================================
+// САМ СТОЛ
 // ============================================
 
 /obj/structure/table/optable/synthetic
@@ -13,6 +33,12 @@
 	desc = "Специализированный диагностический стол для синтетических организмов. Оснащён системами зарядки, охлаждения и сетевым портом."
 	icon = 'modular_bandastation/MachAImpDe/icons/net_table.dmi'
 	icon_state = "ipc_net_table"
+	buildstack = /obj/item/stack/synthetic_table_kit
+	custom_materials = list(
+		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/iron   = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/glass  = SHEET_MATERIAL_AMOUNT,
+	)
 
 	/// Скорость зарядки батареи (units/тик)
 	var/charge_rate = 50

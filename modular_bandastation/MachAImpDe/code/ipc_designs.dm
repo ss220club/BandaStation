@@ -71,11 +71,11 @@
 // ============================================================
 
 /datum/design/synthetic_diagnostic_table
-	name = "Синтетический диагностический стол"
-	desc = "Специализированный операционный стол для синтетических организмов с зарядкой, охлаждением и сетевым портом."
+	name = "Набор синтетического диагностического стола"
+	desc = "Компоненты для сборки синтетического диагностического стола. Примените к раме стола для окончательной сборки."
 	id = "synthetic_diagnostic_table"
 	build_type = PROTOLATHE | AWAY_LATHE
-	build_path = /obj/structure/table/optable/synthetic
+	build_path = /obj/item/stack/synthetic_table_kit
 	materials = list(
 		/datum/material/silver  = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/iron    = SHEET_MATERIAL_AMOUNT * 2,
