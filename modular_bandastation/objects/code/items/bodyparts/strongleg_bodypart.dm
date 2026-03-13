@@ -74,7 +74,7 @@
 		qdel(combat_component)
 
 /obj/item/bodypart/leg/left/strongleg
-	name = "augmented leg"
+	name = "augmented left leg"
 	desc = "Combat prosthesis with enhanced hydraulics for powerful kicks and rapid movement. \
 		Kicks knockback enemies, stomps keep them down. \
 		Based on technology similar to the Strongarm implant, but implemented as a full prosthesis."
@@ -108,7 +108,7 @@
 	return ..()
 
 /obj/item/bodypart/leg/right/strongleg
-	name = "augmented leg"
+	name = "augmented right leg"
 	desc = "Combat prosthesis with enhanced hydraulics for powerful kicks and rapid movement. \
 		Kicks knockback enemies, stomps keep them down. \
 		Based on technology similar to the Strongarm implant, but implemented as a full prosthesis."

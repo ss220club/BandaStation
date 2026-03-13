@@ -32528,22 +32528,40 @@ instrumental = "элитным полевым офицером флота Нан
 prepositional = "элитном полевом офицере флота Нанотрейзен"
 gender = "male"
 
-["augmented arm"]
-nominative = "аугментированная рука"
-genitive = "аугментированной руки"
-dative = "аугментированной руке"
-accusative = "аугментированную руку"
-instrumental = "аугментированной рукой"
-prepositional = "аугментированной руке"
+["augmented left arm"]
+nominative = "аугментированная левая рука"
+genitive = "аугментированной левой руки"
+dative = "аугментированной левой руке"
+accusative = "аугментированную левую руку"
+instrumental = "аугментированной левой рукой"
+prepositional = "аугментированной левой руке"
 gender = "female"
 
-["augmented leg"]
-nominative = "аугментированная нога"
-genitive = "аугментированной ноги"
-dative = "аугментированной ноге"
-accusative = "аугментированную ногу"
-instrumental = "аугментированной ногой"
-prepositional = "аугментированной ноге"
+["augmented right arm"]
+nominative = "аугментированная правая рука"
+genitive = "аугментированной правой руки"
+dative = "аугментированной правой руке"
+accusative = "аугментированную правую руку"
+instrumental = "аугментированной правой рукой"
+prepositional = "аугментированной правой руке"
+gender = "female"
+
+["augmented left leg"]
+nominative = "аугментированная левая нога"
+genitive = "аугментированной левой ноги"
+dative = "аугментированной левой ноге"
+accusative = "аугментированную левую ногу"
+instrumental = "аугментированной левой ногой"
+prepositional = "аугментированной левой ноге"
+gender = "female"
+
+["augmented right leg"]
+nominative = "аугментированная правая нога"
+genitive = "аугментированной правой ноги"
+dative = "аугментированной правой ноге"
+accusative = "аугментированную правую ногу"
+instrumental = "аугментированной правой ногой"
+prepositional = "аугментированной правой ноге"
 gender = "female"
 
 ["field officer's reinforced cape"]

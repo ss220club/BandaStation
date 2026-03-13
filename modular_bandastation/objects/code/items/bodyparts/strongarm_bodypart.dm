@@ -124,7 +124,7 @@
 		qdel(combat_component)
 
 /obj/item/bodypart/arm/left/strongarm
-	name = "augmented arm"
+	name = "augmented left arm"
 	desc = "Combat prosthesis with enhanced hydraulics for crushing blows, grabs and throws. \
 		Punches knockback enemies, shoves knock them down. \
 		Based on technology similar to the Strongarm implant, but implemented as a full prosthesis."
@@ -166,7 +166,7 @@
 	return ..()
 
 /obj/item/bodypart/arm/right/strongarm
-	name = "augmented arm"
+	name = "augmented right arm"
 	desc = "Combat prosthesis with enhanced hydraulics for crushing blows, grabs and throws. \
 		Punches knockback enemies, shoves knock them down. \
 		Based on technology similar to the Strongarm implant, but implemented as a full prosthesis."
