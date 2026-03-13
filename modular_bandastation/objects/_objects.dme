@@ -97,6 +97,7 @@
 #include "code/items/storage/ringbox.dm"
 #include "code/items/machine_designs.dm"
 #include "code/items/maintenance_loot.dm"
+#include "code/items/puzzle_items.dm"
 
 #include "code/machinery/nuclear_bomb.dm"
 #include "code/machinery/papershredder.dm"
@@ -118,5 +119,15 @@
 #include "code/structures/crates_lockers/closets/secure/lawyer.dm"
 #include "code/structures/crates_lockers/closets/secure/magistrate.dm"
 #include "code/structures/crates_lockers/closets/secure/nanotrasen_representative.dm"
+#include "code/structures/custom_puzzles/altar_puzzle.dm"
 
 #include "code/mecha/mecha.dm"
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+// END_INCLUDE
