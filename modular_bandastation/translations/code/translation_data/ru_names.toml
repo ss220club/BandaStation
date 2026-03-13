@@ -6245,13 +6245,13 @@ prepositional = "магазине для пистолета (.456 Магнум)"
 gender = "male"
 
 ["bullet casing"]
-nominative = "гильза"
-genitive = "гильзы"
-dative = "гильзе"
-accusative = "гильзу"
-instrumental = "гильзой"
-prepositional = "гильзе"
-gender = "female"
+nominative = "патрон"
+genitive = "патрона"
+dative = "патрону"
+accusative = "патрон"
+instrumental = "патроном"
+prepositional = "патроне"
+gender = "male"
 
 ["spent bullet casing"]
 nominative = "стреляная гильза"
