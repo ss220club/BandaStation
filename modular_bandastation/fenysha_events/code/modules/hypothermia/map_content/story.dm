@@ -1,5 +1,5 @@
 /obj/item/keycard/important
-	name = "Important story key"
+	name = "Важный сюжетный ключ"
 	color = COLOR_RED
 	max_integrity = 250
 	armor_type = /datum/armor/disk_nuclear
@@ -16,19 +16,19 @@
 
 
 /obj/item/keycard/important/hypothermia/amory_key
-	name = "Zvezda heavy armory key"
+	name = "Ключ от тяжёлого арсенала «Звезда»"
 
 /obj/item/keycard/important/hypothermia/ship_control_key
-	name = "Buran helm key"
+	name = "Ключ управления «Буран»"
 	color = COLOR_GOLD
-	desc = "This is the key to the control console of the colonial-class shuttle 'Buran'. Without it, the shuttle simply cannot be launched!"
+	desc = "Это ключ от консоли управления колониального шаттла класса «Буран». Без него шаттл просто не запустится!"
 
 /obj/item/story_item
-	name = "Important story item"
+	name = "Важный сюжетный предмет"
 	max_integrity = 250
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
-	var/important_text = "This is an important story item! Do not lose it!"
+	var/important_text = "Это важный сюжетный предмет! Не теряйте его!"
 
 /obj/item/story_item/Initialize(mapload)
 	. = ..()
@@ -41,22 +41,22 @@
 
 
 /obj/item/story_item/hypothermia_applied_ai_core
-	name = "applied AI core"
-	desc = "An old positronic brain in a cracked casing. Someone scratched \"TYVOZHKA\" on it with a nail. It's barely still working."
+	name = "установленный ИИ-ядро"
+	desc = "Старый позитронный мозг в потрескавшемся корпусе. Кто-то ногтем нацарапал на нём «ТЫВОЖКА». Еле-еле работает."
 	icon = 'icons/obj/devices/assemblies.dmi'
 	icon_state = "spheribrain-searching"
 	w_class = WEIGHT_CLASS_BULKY
-	important_text = "This is the only AI module capable of controlling the colonial shuttle. Without it, the ship won't take off!"
+	important_text = "Это единственный модуль ИИ, способный управлять колониальным шаттлом. Без него корабль не взлетит!"
 
 
 /obj/item/story_item/hypothermia_fusion_core
-	name = "depleted fusion core"
-	desc = "A heavy micro-fusion core of the RBMK class. The last one in the colony. It's cold, but the containment rings are intact. Refuel it with plasma or uranium sheets — it might work again."
+	name = "разряженный термоядерный сердечник"
+	desc = "Тяжёлый микро-термоядерный сердечник класса РБМК. Последний на колонии. Холодный, но кольца удержания целы. Заправьте его листами плазмы или урана — возможно, снова заработает."
 	icon = 'icons/obj/devices/assemblies.dmi'
 	icon_state = "syndicate-bomb-inactive-wires"
 	w_class = WEIGHT_CLASS_HUGE
 	throwforce = 20
-	important_text = "Without a working fusion core, the shuttle's engines won't get power. You won't escape the planet!"
+	important_text = "Без работающего термоядерного сердечника двигатели шаттла не получат питания. Вы не сможете покинуть планету!"
 
 	var/refueled = FALSE
 
@@ -70,63 +70,63 @@
 			P.use(50)
 			refueled = TRUE
 			icon_state = "syndicate-bomb-active-wires"
-			desc = "A heavy micro-fusion core of the RBMK class. Now operational — someone stuffed plasma sheets into it and prayed."
-			visible_message(span_notice("[user] stuffs plasma sheets into [src]. The core begins to hum quietly."))
+			desc = "Тяжёлый микро-термоядерный сердечник класса РБМК. Теперь работает — кто-то засунул в него листы плазмы и помолился."
+			visible_message(span_notice("[user] засовывает листы плазмы в [src]. Сердечник начинает тихо гудеть."))
 			return
 		else
-			balloon_alert(user, "Not enough material!")
+			balloon_alert(user, "Недостаточно материала!")
 	if(istype(W, /obj/item/stack/sheet/mineral/uranium))
 		var/obj/item/stack/sheet/mineral/uranium/U = W
 		if(U.amount >= 50)
 			U.use(50)
 			refueled = TRUE
 			icon_state = "syndicate-bomb-active-wires"
-			desc = "A heavy micro-fusion core of the RBMK class. Someone welded uranium plates onto it. It's dangerously heating up... but it will provide power!"
-			visible_message(span_danger("[user] inserts uranium sheets into [src]. The core begins to hum quietly!"))
+			desc = "Тяжёлый микро-термоядерный сердечник класса РБМК. Кто-то приварил к нему пластины урана. Он опасно разогревается... но даст энергию!"
+			visible_message(span_danger("[user] вставляет листы урана в [src]. Сердечник начинает тихо гудеть!"))
 			return
 		else
-			balloon_alert(user, "Not enough material!")
+			balloon_alert(user, "Недостаточно материала!")
 	return ..()
 
 
 /obj/item/story_item/hypothermia_navigation_tape
-	name = "navigation tape cassette"
-	desc = "A dusty magnetic tape labeled \"H1132 → EARTH\". The only copy of the jump coordinates out of this system. Without it, the autopilot will simply steer the shuttle into the sun."
+	name = "кассета с навигационной лентой"
+	desc = "Пыльная магнитная лента с надписью «H1132 → ЗЕМЛЯ». Единственная копия координат прыжка из этой системы. Без неё автопилот просто направит шаттл в Солнце."
 	icon = 'icons/obj/devices/circuitry_n_data.dmi'
 	icon_state = "tape_yellow"
 	w_class = WEIGHT_CLASS_SMALL
-	important_text = "This is the only tape with Earth's coordinates! Without it, the shuttle will fly nowhere and you'll burn up in hyperspace!"
+	important_text = "Это единственная лента с координатами Земли! Без неё шаттл никуда не полетит и вы сгорите в гиперпространстве!"
 
 
 /obj/item/story_item/hypothermia_thermal_regulator
-	name = "main thermal regulator valve"
-	desc = "A huge brass valve torn from the colony's thermal regulation system. Without it, the shuttle's engines will overheat and explode 30 seconds after launch."
+	name = "главный клапан терморегуляции"
+	desc = "Огромный латунный клапан, вырванный из системы терморегуляции колонии. Без него двигатели шаттла перегреются и взорвутся через 30 секунд после старта."
 	icon = 'icons/obj/devices/assemblies.dmi'
 	icon_state = "valve_1"
 	w_class = WEIGHT_CLASS_HUGE
 	throwforce = 15
-	important_text = "A critically important thermal regulation valve! Without it, the shuttle's engines will explode half a minute into flight!"
+	important_text = "Критически важный клапан терморегуляции! Без него двигатели шаттла взорвутся через полминуты полёта!"
 
 
-// Shuttle template
+// Шаблон шаттла
 /datum/map_template/shuttle/zvezda
 	port_id = "event"
 	prefix = "_maps/modular_events/"
 	suffix = "buran"
-	name = "Buran-class Colonial Shuttle"
-	description = "A colonial shuttle of the \"Buran\" class. The only chance to escape the planet."
+	name = "Колониальный шаттл класса «Буран»"
+	description = "Колониальный шаттл класса «Буран». Единственный шанс покинуть планету."
 	width = 23
 	height = 30
 
 /obj/docking_port/mobile/buran
-	name = "Buran-class Colonial Shuttle"
+	name = "Колониальный шаттл класса «Буран»"
 	shuttle_id = "event"
 	width = 23
 	height = 30
 	movement_force = list("KNOCKDOWN" = 0,"THROW" = 0)
 
 /obj/docking_port/stationary/zvezda_buran
-	name = "Buran docking port"
+	name = "Стыковочный порт «Буран»"
 	hidden = FALSE
 	dir = WEST
 	dheight = 50
@@ -136,13 +136,14 @@
 	roundstart_template = /datum/map_template/shuttle/zvezda
 
 /obj/machinery/shuttle_launch_terminal
-	name = "shuttle launch terminal"
-	desc = "The launch terminal for the 'Buran' shuttle. It can only be activated if all critical modules are inserted and authorization is confirmed."
+	name = "терминал запуска шаттла"
+	desc = "Терминал запуска шаттла «Буран». Активировать его можно только после вставки всех критических модулей и подтверждения авторизации."
 	icon = 'icons/obj/machines/computer.dmi'
 	icon_state = "computer"
 	density = TRUE
 	anchored = TRUE
-	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
+	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
+	max_integrity = 700
 
 	var/obj/item/story_item/hypothermia_applied_ai_core/ai_core
 	var/obj/item/story_item/hypothermia_fusion_core/fusion_core
@@ -169,7 +170,7 @@
 		break
 
 	if(!connected_port)
-		stack_trace("Launch terminal placed without mobile docking port nearby!")
+		stack_trace("Терминал запуска размещён без мобильного стыковочного порта поблизости!")
 	add_filter("story_outline", 2, list("type" = "outline", "color" = "#fa3b3b", "size" = 1))
 
 
@@ -177,17 +178,17 @@
 	. = ..()
 	check_modules()
 	if(!ready_ai)
-		. += span_warning("Missing applied AI core!")
+		. += span_warning("Отсутствует установленный ИИ-ядро!")
 	if(!ready_core)
-		. += span_warning("Missing refueled fusion core!")
+		. += span_warning("Отсутствует заправленный термоядерный сердечник!")
 	if(!ready_nav)
-		. += span_warning("Missing navigation tape!")
+		. += span_warning("Отсутствует навигационная лента!")
 	if(!ready_therm)
-		. += span_warning("Missing thermal regulator!")
+		. += span_warning("Отсутствует клапан терморегуляции!")
 	if(key_inserted)
-		. += span_notice("Key inserted.")
+		. += span_notice("Ключ вставлен.")
 	else
-		. += span_warning("Key not inserted.")
+		. += span_warning("Ключ не вставлен.")
 
 
 /obj/machinery/shuttle_launch_terminal/proc/check_modules()
@@ -201,84 +202,84 @@
 /obj/machinery/shuttle_launch_terminal/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/keycard/important/hypothermia/ship_control_key))
 		if(key_inserted)
-			to_chat(user, span_warning("The key is already inserted."))
+			to_chat(user, span_warning("Ключ уже вставлен."))
 			return
 
 		if(!check_modules())
-			to_chat(user, span_warning("Insert all critical modules first!"))
+			to_chat(user, span_warning("Сначала вставьте все критические модули!"))
 			return
 
-		balloon_alert(user, "Initiating launch procedure!")
-		visible_message(span_notice("[user] begins the launch procedure."))
+		balloon_alert(user, "Запускается процедура старта!")
+		visible_message(span_notice("[user] начинает процедуру запуска."))
 		if(!do_after(user, 15 SECONDS, src))
-			balloon_alert(user, "Procedure interrupted!")
+			balloon_alert(user, "Процедура прервана!")
 			return
-		balloon_alert(user, "Launching shuttle!")
+		balloon_alert(user, "Запуск шаттла!")
 		if(!user.transferItemToLoc(W, src))
 			return
 
 		key_inserted = TRUE
-		to_chat(user, span_notice("You insert the key into the terminal."))
-		visible_message(span_notice("[user] inserts the control key into the launch terminal."))
+		to_chat(user, span_notice("Вы вставляете ключ в терминал."))
+		visible_message(span_notice("[user] вставляет ключ управления в терминал запуска."))
 
 		start_launch_countdown(user)
 		return
 
 	if(istype(W, /obj/item/story_item/hypothermia_applied_ai_core))
 		if(ai_core)
-			to_chat(user, span_warning("AI core already inserted!"))
+			to_chat(user, span_warning("ИИ-ядро уже установлено!"))
 			return
 
 		if(!user.transferItemToLoc(W, src))
 			return
 
 		ai_core = W
-		to_chat(user, span_notice("You insert [W] into the terminal."))
-		visible_message(span_notice("[user] inserts [W] into the terminal."))
+		to_chat(user, span_notice("Вы вставляете [W] в терминал."))
+		visible_message(span_notice("[user] вставляет [W] в терминал."))
 		return
 
 	if(istype(W, /obj/item/story_item/hypothermia_fusion_core))
 		var/obj/item/story_item/hypothermia_fusion_core/core = W
 		if(fusion_core)
-			to_chat(user, span_warning("Fusion core already inserted!"))
+			to_chat(user, span_warning("Термоядерный сердечник уже установлен!"))
 			return
 
 		if(!core.refueled)
-			to_chat(user, span_warning("Fusion core is not refueled!"))
+			to_chat(user, span_warning("Термоядерный сердечник не заправлен!"))
 			return
 
 		if(!user.transferItemToLoc(W, src))
 			return
 
 		fusion_core = W
-		to_chat(user, span_notice("You insert [W] into the terminal."))
-		visible_message(span_notice("[user] inserts [W] into the terminal."))
+		to_chat(user, span_notice("Вы вставляете [W] в терминал."))
+		visible_message(span_notice("[user] вставляет [W] в терминал."))
 		return
 
 	if(istype(W, /obj/item/story_item/hypothermia_navigation_tape))
 		if(nav_tape)
-			to_chat(user, span_warning("Navigation tape already inserted!"))
+			to_chat(user, span_warning("Навигационная лента уже вставлена!"))
 			return
 
 		if(!user.transferItemToLoc(W, src))
 			return
 
 		nav_tape = W
-		to_chat(user, span_notice("You insert [W] into the terminal."))
-		visible_message(span_notice("[user] inserts [W] into the terminal."))
+		to_chat(user, span_notice("Вы вставляете [W] в терминал."))
+		visible_message(span_notice("[user] вставляет [W] в терминал."))
 		return
 
 	if(istype(W, /obj/item/story_item/hypothermia_thermal_regulator))
 		if(thermal_reg)
-			to_chat(user, span_warning("Thermal regulator already inserted!"))
+			to_chat(user, span_warning("Клапан терморегуляции уже установлен!"))
 			return
 
 		if(!user.transferItemToLoc(W, src))
 			return
 
 		thermal_reg = W
-		to_chat(user, span_notice("You insert [W] into the terminal."))
-		visible_message(span_notice("[user] inserts [W] into the terminal."))
+		to_chat(user, span_notice("Вы вставляете [W] в терминал."))
+		visible_message(span_notice("[user] вставляет [W] в терминал."))
 		return
 
 	return ..()
@@ -292,11 +293,10 @@
 	launching = TRUE
 	time_left = launch_time
 
-	priority_announce("Shuttle launch sequence initiated. Launch in 15 minutes.", "Priority Alert", 'sound/effects/alert.ogg')
+	priority_announce("Запущена последовательность старта шаттла. Взлёт через 15 минут.", "Приоритетное оповещение", 'sound/effects/alert.ogg')
 
 	addtimer(CALLBACK(src, PROC_REF(announce_remaining), 10), launch_time - 10 MINUTES)
 	addtimer(CALLBACK(src, PROC_REF(announce_remaining), 5), launch_time - 5 MINUTES)
-	addtimer(CALLBACK(src, PROC_REF(announce_remaining), 3), launch_time - 3 MINUTES)
 	addtimer(CALLBACK(src, PROC_REF(announce_remaining), 1), launch_time - 1 MINUTES)
 	addtimer(CALLBACK(src, PROC_REF(launch_shuttle)), launch_time)
 
@@ -305,15 +305,15 @@
 		hypo.on_buran_startup()
 
 /obj/machinery/shuttle_launch_terminal/proc/announce_remaining(minutes)
-	priority_announce("Shuttle launch in [minutes] minute[minutes > 1 ? "s" : ""].", "Priority Alert", 'sound/effects/alert.ogg')
+	priority_announce("До запуска шаттла [minutes] минут[minutes > 1 ? "а" : ""].", "Приоритетное оповещение", 'sound/effects/alert.ogg')
 	if(minutes <= 1)
-		var/message = "The shuttle is almost launched, just a little more and I'll survive!"
+		var/message = "Шаттл почти стартует, ещё чуть-чуть и я выживу!"
 		for(var/mob/living/player in GLOB.alive_player_list)
 			if(ishuman(player))
 				to_chat(player, span_boldnotice(message))
 
 /obj/machinery/shuttle_launch_terminal/proc/launch_shuttle()
-	priority_announce("WARNING! WARNING! STARTUP SEQUENCE COMPLETED. STARTING THE SHUTTLE!", "Priority Alert", 'sound/effects/alert.ogg')
+	priority_announce("ВНИМАНИЕ! ВНИМАНИЕ! ПОСЛЕДОВАТЕЛЬНОСТЬ ЗАПУСКА ЗАВЕРШЕНА. ЗАПУСК ШАТТЛА!", "Приоритетное оповещение", 'sound/effects/alert.ogg')
 	connected_port.destination = null
 	connected_port.mode = SHUTTLE_IGNITING
 	connected_port.setTimer(connected_port.ignitionTime)
@@ -323,16 +323,16 @@
 		hypo.on_buran_launch()
 
 /obj/item/climbing_hook/emergency/safeguard
-	name = "safeguard climbing hook"
-	desc = "An emergency climbing hook that automatically deploys when falling into a chasm, pulling the user to safety but causing injury."
+	name = "страховочный крюк-страховка"
+	desc = "Аварийный страховочный крюк, который автоматически срабатывает при падении в пропасть, вытаскивая владельца в безопасное место, но нанося травмы."
 	icon_state = "climbingrope_s"
 	slot_flags = ITEM_SLOT_BELT
-	var/attempting = FALSE	// To prevent infinite loops
+	var/attempting = FALSE	// Чтобы избежать бесконечных циклов
 	var/dropping = FALSE
 
 /obj/item/climbing_hook/emergency/safeguard/examine(mob/user)
 	. = ..()
-	. += span_warning("[name] should be worn on the belt to save the wearer from falling!")
+	. += span_warning("[name] нужно носить на поясе, чтобы он спас владельца от падения!")
 
 /obj/item/climbing_hook/emergency/safeguard/equipped(mob/user, slot)
 	. = ..()
@@ -369,7 +369,7 @@
 /obj/item/climbing_hook/emergency/safeguard/proc/rescue_user(mob/living/user, turf/chasm_turf, turf/safe_turf)
 	chasm_turf.Beam(safe_turf, icon_state = "zipline_hook", time = 1 SECONDS)
 	playsound(user, 'sound/items/weapons/zipline_fire.ogg', 50)
-	chasm_turf.visible_message(span_warning("A climbing rope shoots out from [user] and latches onto [safe_turf]! [user] is pulled to safety!"))
+	chasm_turf.visible_message(span_warning("Из [user] выстреливает страховочный трос и цепляется за [safe_turf]! [user] вытаскивает[genderize_decode(user, "ся")] в безопасное место!"))
 	user.take_bodypart_damage(20)
 	user.throw_at(safe_turf, get_dist(user, safe_turf), 1, src, FALSE, TRUE)
 	user.forceMove(safe_turf)

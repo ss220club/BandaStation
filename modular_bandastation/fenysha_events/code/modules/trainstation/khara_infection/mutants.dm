@@ -1,3 +1,10 @@
+/obj/effect/particle_effect/fluid/smoke/chem/khara
+	opacity = FALSE
+	alpha = 190
+
+/datum/effect_system/fluid_spread/smoke/chem/khara
+	effect_type = /obj/effect/particle_effect/fluid/smoke/chem/khara
+
 /datum/component/infection_attack
 	var/chance_on_infection = 10
 	var/only_with_wounds = TRUE
@@ -65,7 +72,7 @@
 		new /obj/effect/decal/cleanable/blood(blood_turf)
 		for(var/mob/living/mob_in_turf in blood_turf)
 			mob_in_turf.visible_message(span_danger("[mob_in_turf] обрызган кровью!"), span_userdanger("Ты обрызган кровью!"))
-			mob_in_turf.add_blood_DNA(list("Не-человеческая ДНК" = random_human_blood_type()))
+			mob_in_turf.add_blood_DNA(list("Не-человеческая ДНК" = random_human_blood_type()), list(/datum/disease/khara))
 			playsound(mob_in_turf, 'sound/effects/splat.ogg', 50, TRUE, extrarange = SILENCED_SOUND_EXTRARANGE)
 	return ..()
 
@@ -171,12 +178,7 @@
 	return
 
 /mob/living/basic/khara_mutant/proc/spread_miasma()
-	var/datum/reagents/R = new(spread_miasma_amount)
-	R.my_atom = src
-	R.add_reagent(/datum/reagent/toxin/khara, spread_miasma_amount)
-
-	var/datum/effect_system/fluid_spread/smoke/chem/S = new(location = get_turf(src), range = spread_miasma_amount, holder = R)
-	S.start()
+	do_chem_smoke(spread_miasma_amount / 2, src, get_turf(src), /datum/reagent/toxin/khara, 10, log = FALSE, amount = spread_miasma_amount, smoke_type = /datum/effect_system/fluid_spread/smoke/chem/khara)
 
 /mob/living/basic/khara_mutant/death(gibbed)
 	inflate_gib()
@@ -187,7 +189,7 @@
 		new /obj/effect/decal/cleanable/blood(blood_turf)
 		for(var/mob/living/mob_in_turf in blood_turf)
 			mob_in_turf.visible_message(span_danger("[mob_in_turf] обрызган кровью!"), span_userdanger("Ты обрызган кровью!"))
-			mob_in_turf.add_blood_DNA(list("Не-человеческая ДНК" = random_human_blood_type()))
+			mob_in_turf.add_blood_DNA(list("Не-человеческая ДНК" = random_human_blood_type()), list(/datum/disease/khara))
 			playsound(mob_in_turf, 'sound/effects/splat.ogg', 50, TRUE, extrarange = SILENCED_SOUND_EXTRARANGE)
 	return ..()
 
@@ -346,10 +348,10 @@
 	move_resist = MOVE_FORCE_OVERPOWERING
 	pull_force = MOVE_FORCE_OVERPOWERING
 
-	spread_miasma_amount = 36
+	spread_miasma_amount = 40
 	spreads_miasma = TRUE
 	spread_miasma_chance = 100
-	spread_minimal_cooldown = 25 SECONDS
+	spread_minimal_cooldown = 50 SECONDS
 
 	ai_controller = /datum/ai_controller/basic_controller/boss_spreader
 	innate_actions = list(

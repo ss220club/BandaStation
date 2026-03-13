@@ -158,7 +158,7 @@
 
 	var/new_level = HYPOTHERMIA_COLDLEVEL_SAFE
 	var/list/new_data
-	for(var/list/data in thresholds)  // sorted descending, find deepest level
+	for(var/list/data in thresholds)  // ищем самый глубокий уровень
 		if(stored_bodytemperature < data["temp"])
 			new_level = data["level"]
 			new_data = data
@@ -232,17 +232,17 @@
 
 			if(COOLDOWN_FINISHED(src, mild_message_cooldown))
 				var/list/messages = is_synth ? list(
-					"Alert: Cooling detected in chassis...",
-					"Warning: Circuitry temperature dropping.",
-					"Alert: Hydraulic fluid viscosity increasing.",
-					"System notice: Minor power fluctuations due to cold.",
-					"Warning: External temperature impacting efficiency."
+					"Внимание: обнаружено охлаждение корпуса...",
+					"Предупреждение: температура схем падает.",
+					"Внимание: повышается вязкость гидравлической жидкости.",
+					"Замечание системы: небольшие колебания питания из-за холода.",
+					"Предупреждение: внешняя температура снижает эффективность."
 				) : list(
-					"You feel the cold creeping under your skin...",
-					"Your teeth begin to chatter uncontrollably.",
-					"Your fingertips are starting to go numb.",
-					"Goosebumps cover your arms.",
-					"A deep chill settles in your chest."
+					"Холод начинает пробираться под кожу...",
+					"Зубы начинают стучать сами по себе.",
+					"Кончики пальцев начинают неметь.",
+					"Мурашки покрывают руки.",
+					"Глубокий озноб поселяется в груди."
 				)
 				to_chat(L, span_warning(pick(messages)))
 				COOLDOWN_START(src, mild_message_cooldown, rand(60, 180) SECONDS)
@@ -252,17 +252,17 @@
 			if(COOLDOWN_FINISHED(src, confusion_cooldown))
 				L.adjust_jitter(10 SECONDS)
 				var/list/messages = is_synth ? list(
-					"Error: Processing delay due to low temperature...",
-					"Warning: System glitches detected.",
-					"Alert: Sensor data corrupted by cold.",
-					"Error: Logic circuits slowing.",
-					"Warning: Memory access delayed."
+					"Ошибка: задержка обработки из-за низкой температуры...",
+					"Предупреждение: обнаружены сбои в системе.",
+					"Внимание: данные датчиков искажены холодом.",
+					"Ошибка: логические схемы замедляются.",
+					"Предупреждение: задержка доступа к памяти."
 				) : list(
-					"Your thoughts are becoming sluggish and foggy...",
-					"The world feels distant and unreal.",
-					"You can't remember why you came here...",
-					"Everything is starting to blur together.",
-					"It's getting harder to focus your eyes."
+					"Мысли становятся вялыми и мутными...",
+					"Мир кажется далёким и нереальным.",
+					"Ты уже не помнишь, зачем сюда пришёл...",
+					"Всё начинает сливаться в одно...",
+					"Становится всё труднее сфокусировать взгляд."
 				)
 				to_chat(L, span_warning(pick(messages)))
 				COOLDOWN_START(src, confusion_cooldown, rand(30, 60) SECONDS)
@@ -281,19 +281,19 @@
 		if(HYPOTHERMIA_COLDLEVEL_HIGH)
 			if(SPT_PROB(10, seconds_per_tick) && COOLDOWN_FINISHED(src, paradox_cooldown))
 				var/list/messages = is_synth ? list(
-					"ERROR: OVERHEAT DETECTED! EMERGENCY VENTING!",
-					"SYSTEM FAULT: THERMAL OVERLOAD!",
-					"CRITICAL ERROR: REMOVE EXTERNAL LAYERS!"
+					"ОШИБКА: ОБНАРУЖЕН ПЕРЕГРЕВ! АВАРИЙНЫЙ СБРОС ТЕПЛА!",
+					"СИСТЕМНАЯ НЕИСПРАВНОСТЬ: ТЕРМИЧЕСКАЯ ПЕРЕГРУЗКА!",
+					"КРИТИЧЕСКАЯ ОШИБКА: СНИМИТЕ ВНЕШНИЕ СЛОИ!"
 				) : list(
-					"IT'S TOO HOT! GET THIS IS BURNING ME!",
-					"GET IT OFF! I'M ON FIRE!",
-					"CLOTHES ARE SUFFOCATING ME!"
+					"СЛИШКОМ ЖАРКО! ЭТО ЖЖЁТ МЕНЯ!",
+					"СНИМИТЕ ЭТО! Я ГОРЮ!",
+					"ОДЕЖДА ДУШИТ МЕНЯ!"
 				)
 				to_chat(L, span_userdanger(pick(messages)))
 				paradox_undress(L)
 				COOLDOWN_START(src, paradox_cooldown, rand(120 SECONDS, 300 SECONDS))
 
-			if(SPT_PROB(10, seconds_per_tick)&& COOLDOWN_FINISHED(src, frostbite_cooldown))
+			if(SPT_PROB(10, seconds_per_tick) && COOLDOWN_FINISHED(src, frostbite_cooldown))
 				apply_frostbite(L, rand(10, 18) * cold_mod)
 				COOLDOWN_START(src, frostbite_cooldown, rand(30, 90) SECONDS)
 
@@ -317,15 +317,15 @@
 
 			if(SPT_PROB(1, seconds_per_tick))
 				var/list/messages = is_synth ? list(
-					"Critical: All systems freezing...",
-					"Error: Power failure imminent.",
-					"Shutdown sequence initiated...",
-					"Alert: Core temperature critical."
+					"Критично: все системы замерзают...",
+					"Ошибка: неминуем отказ питания.",
+					"Запущена последовательность отключения...",
+					"Внимание: критическая температура ядра."
 				) : list(
-					"You can't feel anything anymore...",
-					"The cold has swallowed everything.",
-					"It's so quiet... so peaceful...",
-					"Your heart barely beats..."
+					"Ты больше ничего не чувствуешь...",
+					"Холод поглотил всё вокруг.",
+					"Так тихо... так спокойно...",
+					"Сердце едва бьётся..."
 				)
 				to_chat(L, span_userdanger(pick(messages)))
 
@@ -419,7 +419,7 @@
 	limb.update_disabled()
 	disabled_limbs[limb] = world.time + rand(60 SECONDS, 150 SECONDS)
 
-	to_chat(C, span_userdanger("Your [limb.name] goes completely numb — you can't feel or move it!"))
+	to_chat(C, span_userdanger("Ваша [limb.name] полностью онемела — вы ничего не чувствуете и не можете ей двигать!"))
 
 /datum/component/hypothermia/proc/apply_frostbite(mob/living/L, damage)
 	if(!iscarbon(L))
@@ -430,14 +430,15 @@
 	if(!affecting)
 		return
 	affecting.receive_damage(burn = max(1, round(damage * 0.6)), wound_bonus = 8)
-	to_chat(L, span_danger("Your [affecting.name] burns with freezing pain and turns black!"))
+	to_chat(L, span_danger("Ваша [affecting.name] горит от ледяной боли и чернеет!"))
+
 
 /datum/component/hypothermia/proc/paradox_undress(mob/living/carbon/C)
 	var/list/items = C.get_equipped_items()
 	items += C.held_items
 	for(var/obj/item/I in shuffle(items))
-		to_chat(C, span_userdanger("[I.name] burns you, you want to take it off!"))
-		to_chat(C, span_notice("Too hot... must... cool down..."))
+		to_chat(C, span_userdanger("[I.name] обжигает вас, вы хотите это снять!"))
+		to_chat(C, span_notice("Слишком жарко... нужно... охладиться..."))
 		break
 
 /datum/movespeed_modifier/hypothermia_mild
@@ -520,7 +521,7 @@
 	if(heat_range > 0)
 		for(var/mob/living/L in range(heat_range, parent))
 			var/atom/movable/screen/alert/heating/alert = L.throw_alert(alert_category, /atom/movable/screen/alert/heating, new_master = parent)
-			alert.desc = "You are heating by [parent]."
+			alert.desc = "Вас греет [parent]."
 			alerts[L] = TRUE
 
 			var/dist = get_dist(AM, L)
@@ -532,7 +533,7 @@
 
 
 /atom/movable/screen/alert/heating
-	name = "Heating"
+	name = "Нагрев"
 	icon_state = "template"
 	use_user_hud_icon = TRUE
 

@@ -1,5 +1,5 @@
 #define KHARA_SPREADING_MODIFIER 1.4
-#define KHARA_FINAL_EMERGENCE_DELAY (90 SECONDS)
+#define KHARA_FINAL_EMERGENCE_DELAY (30 SECONDS)
 #define KHARA_EMERGENCE_BRUTE_DAMAGE 200
 #define KHARA_TUMOR_THRESHOLD_STAGE 5
 
@@ -36,6 +36,7 @@
 	)
 	var/invert_catalyst = /datum/reagent/inverse/technetium
 	var/thing_emerg = /mob/living/basic/khara_mutant/reaper
+	var/emerged = FALSE
 
 	COOLDOWN_DECLARE(stage_process_cd)
 	COOLDOWN_DECLARE(organ_failure_cd)
@@ -43,7 +44,6 @@
 	COOLDOWN_DECLARE(tumor_pain_cd)
 	COOLDOWN_DECLARE(crack_bones_cd)
 
-	var/list/khara_tumors = list()
 	var/emerging = FALSE
 
 
@@ -57,8 +57,6 @@
 	if(!.)
 		return
 	if(make_reborn_roll())
-		cure()
-		infectee.ForceContractDisease(new /datum/disease/true_khara(), del_on_fail = TRUE)
 		return
 
 	stage = 1
@@ -68,11 +66,11 @@
 		brain.AddComponent(/datum/component/khara_disease, /datum/disease/khara)
 
 /datum/disease/khara/cure(add_resistance)
-	. = ..()
 	var/obj/item/organ/brain/brain = affected_mob.get_organ_slot(ORGAN_SLOT_BRAIN)
 	if(brain && brain.GetComponent(/datum/component/khara_disease))
 		qdel(brain.GetComponent(/datum/component/khara_disease))
 	to_chat(affected_mob, span_big(span_boldnicegreen("Кхара отступает... пока.")))
+	. = ..()
 
 /datum/disease/khara/update_stage(new_stage)
 	if(stage_process < 100 && new_stage > stage)
@@ -108,7 +106,7 @@
 			to_chat(affected_mob, span_userdanger("Всё внутри шевелится. Оно хочет наружу."))
 			affected_mob.Shake(duration = 2 SECONDS)
 			spreading_modifier = KHARA_SPREADING_MODIFIER * 2
-
+	affected_mob.update_health_hud()
 
 /datum/disease/khara/proc/stage_evolution_process(seconds_per_tick)
 	var/base = base_stage_speed
@@ -146,7 +144,7 @@
 
 	if(COOLDOWN_FINISHED(src, stage_process_cd))
 		stage_evolution_process(seconds_per_tick)
-		COOLDOWN_START(src, stage_process_cd, 2 SECONDS)
+		COOLDOWN_START(src, stage_process_cd, 3 SECONDS)
 
 	switch(stage)
 		if(1)
@@ -245,11 +243,11 @@
 			if(!COOLDOWN_FINISHED(src, organ_failure_cd) && stage_process < 100)
 				return
 			if(make_reborn_roll())
-				cure()
 				return
 
 			to_chat(affected_mob, span_boldnicegreen("Боль отступает! Всё в порядке."))
 			visibility_flags = HIDDEN_SCANNER|HIDDEN_PANDEMIC
+			affected_mob.update_health_hud()
 
 			emerging = TRUE
 			addtimer(CALLBACK(src, PROC_REF(perform_emergence)), KHARA_FINAL_EMERGENCE_DELAY)
@@ -305,8 +303,9 @@
 
 	for(var/i = 1 to roll_attempts)
 		if(prob(roll_chance))
+			addtimer(CALLBACK(affected_mob, TYPE_PROC_REF(/mob/living, ForceContractDisease), new /datum/disease/true_khara(), TRUE, TRUE), 1)
 			message_admins("[ADMIN_LOOKUPFLW(affected_mob)] was converted to reborn via khara infection with chance [roll_chance]%.")
-			affected_mob.ForceContractDisease(new /datum/disease/true_khara(), del_on_fail = TRUE)
+			cure()
 			return TRUE
 	return FALSE
 
@@ -315,42 +314,53 @@
 		return
 	visibility_flags = NONE
 	affected_mob.visible_message(span_userdanger("Тело [affected_mob] бьётся в страшных судорогах — что-то рвётся наружу!"), span_userdanger("Всё кончено."))
-	affected_mob.Paralyze(8 SECONDS)
-	affected_mob.Knockdown(12 SECONDS)
-	for(var/i = 1 to rand(5, 8))
+	affected_mob.Paralyze(30 SECONDS)
+	affected_mob.Knockdown(30 SECONDS)
+	affected_mob.Shake(duration = 10 SECONDS)
+	var/mob/dead/observer/chosen = SSpolling.poll_ghost_candidates(
+		poll_time = 10 SECONDS,
+		role_name_text = "Перерожденный [affected_mob]",
+		alert_pic = thing_emerg,
+		amount_to_pick = 1
+	)
+	if(chosen)
+		chosen.ManualFollow(affected_mob)
+
+	for(var/i = 1 to rand(3, 6))
 		affected_mob.spray_blood(rand(GLOB.cardinals), rand(2, 3))
 		sleep(1.5 SECONDS)
 		affected_mob.apply_damage(KHARA_EMERGENCE_BRUTE_DAMAGE/10, BRUTE, wound_bonus = 70, spread_damage = TRUE)
 		affected_mob.Shake()
 
 	affected_mob.visible_message(
-		span_userdanger("Грудная клетка [affected_mob] разрывается фонтаном крови и чёрной жижи, наружу вырывается уродливое существо!"),
+		span_userdanger("Грудная клетка [affected_mob] разрывается фонтаном крови и внутренностей, наружу вырывается уродливое существо!"),
 		span_userdanger("Ваше тело взрывается изнутри — вас больше нет.")
 	)
-
+	sleep(0.2 SECONDS)
+	emerged = TRUE
 	affected_mob.apply_damage(KHARA_EMERGENCE_BRUTE_DAMAGE, BRUTE, wound_bonus = 70, spread_damage = TRUE)
-	affected_mob.spill_organs(DROP_ORGANS|DROP_BODYPARTS)
 	if(thing_emerg)
-		new thing_emerg(get_turf(affected_mob))
-	update_stage(1)
+		var/mob/living/creature = new thing_emerg(get_turf(affected_mob))
+		if(chosen && chosen.client)
+			creature.key = chosen.key
 
 	log_virus("[key_name(affected_mob)] был поглощён и разорван Кхара в [loc_name(affected_mob)]")
 	affected_mob.investigate_log("погиб от инфекции Кхара (поглощён и разорван).", INVESTIGATE_DEATHS)
+	affected_mob.gib(DROP_ALL_REMAINS)
+	spread_khara_miasma(TRUE)
 
+/datum/disease/khara/proc/spread_khara_miasma(force = FALSE)
+	if(!force)
+		var/obj/item/organ/lungs/l = affected_mob.get_organ_slot(ORGAN_SLOT_LUNGS)
+		if(!l || !(l.organ_flags & ORGAN_ORGANIC))
+			return FALSE
+		var/obj/item/clothing/mask/mask = affected_mob.wear_mask
+		if(mask && mask.flags_cover & MASKCOVERSMOUTH)
+			return FALSE
 
-/datum/disease/khara/proc/spread_khara_miasma()
-	var/obj/item/organ/lungs/l = affected_mob.get_organ_slot(ORGAN_SLOT_LUNGS)
-	if(!l || !(l.organ_flags & ORGAN_ORGANIC))
-		return FALSE
-
-	var/datum/reagents/R = new(12)
-	R.my_atom = affected_mob
-	R.add_reagent(/datum/reagent/toxin/khara, 12)
-
-	var/datum/effect_system/fluid_spread/smoke/chem/S = new(get_turf(affected_mob), range = 3, holder = R)
-	S.start()
-
+	do_chem_smoke(3, affected_mob, get_turf(affected_mob), /datum/reagent/toxin/khara, 10, log = FALSE, amount = 12, smoke_type = /datum/effect_system/fluid_spread/smoke/chem/khara)
 	affected_mob.emote("cough")
+	affected_mob.Shake()
 	return TRUE
 
 
@@ -392,12 +402,14 @@
 	register_to_mob(brain_parent.owner)
 
 /datum/component/khara_disease/RegisterWithParent()
-	RegisterSignal(brain_parent, COMSIG_ORGAN_REMOVED, PROC_REF(on_brain_removed))
-	RegisterSignal(brain_parent, COMSIG_ORGAN_IMPLANTED, PROC_REF(on_brain_implanted))
-	RegisterSignal(brain_parent, COMSIG_ORGAN_BEING_REPLACED, PROC_REF(oh_brain_replaced))
+	RegisterSignal(brain_parent, COMSIG_ORGAN_BEING_REPLACED, PROC_REF(on_brain_replaced))
+	START_PROCESSING(SSprocessing, src)
 
 /datum/component/khara_disease/UnregisterFromParent()
-	UnregisterSignal(brain_parent, list(COMSIG_ORGAN_REMOVED, COMSIG_ORGAN_BEING_REPLACED, COMSIG_ORGAN_IMPLANTED))
+	if(current_mob)
+		unregister_from_host(current_mob)
+	UnregisterSignal(brain_parent, list(COMSIG_ORGAN_BEING_REPLACED))
+	STOP_PROCESSING(SSprocessing, src)
 
 /datum/component/khara_disease/proc/register_to_mob(mob/living/carbon/new_host)
 	if(!new_host || !iscarbon(new_host))
@@ -416,15 +428,29 @@
 	if(current_mob)
 		current_mob.ForceContractDisease(new disease_type(), del_on_fail = TRUE)
 
-/datum/component/khara_disease/proc/oh_brain_replaced(obj/item/organ/brain/old_brain, obj/item/organ/brain/new_brain)
+/datum/component/khara_disease/proc/on_brain_replaced(obj/item/organ/brain/old_brain, obj/item/organ/brain/new_brain)
 	SIGNAL_HANDLER
 
 	new_brain.AddComponent(/datum/component/khara_disease, disease_path = disease_type)
 	qdel(src)
 
-/datum/component/khara_disease/proc/on_brain_removed()
-	SIGNAL_HANDLER
+/datum/component/khara_disease/process(seconds_per_tick)
+	if(!current_mob)
+		if(!brain_parent || QDELETED(brain_parent))
+			qdel(src)
+			return PROCESS_KILL
 
+		var/mob/living/current = brain_parent.owner
+		if(!current || iscameramob(current))
+			return
+		register_to_mob(current)
+		return
+	else if((!brain_parent.owner && current_mob) || (brain_parent.owner != current_mob))
+		on_brain_removed()
+		register_to_mob(brain_parent.owner)
+		return
+
+/datum/component/khara_disease/proc/on_brain_removed()
 	if(!current_mob)
 		return
 
@@ -437,8 +463,7 @@
 			if(istype(D, /datum/disease/khara))
 				khara = D
 				break
-
-		if(khara)
+		if(khara && !khara.emerged)
 			khara.emerging = TRUE
 			khara.stage = 7
 			khara.stage_process = 100
@@ -498,7 +523,6 @@
 	viable_mobtypes = list(/mob/living/carbon/human)
 	bypasses_immunity = TRUE
 	severity = DISEASE_SEVERITY_POSITIVE
-	process_dead = FALSE
 	spreading_modifier = 0
 
 	var/static/given_traits = list(
@@ -532,9 +556,13 @@
 	COOLDOWN_DECLARE(heal_cd)
 
 /datum/disease/true_khara/cure(add_resistance)
+	var/obj/item/organ/brain/brain = affected_mob.get_organ_slot(ORGAN_SLOT_BRAIN)
+	if(brain)
+		return // Только отсечение головы позволяет излечиться, вот так вот
+
 	affected_mob.visible_message(span_danger("Симбиоз с истинной Кхарой разрушен! Тело слабеет..."))
 	affected_mob.apply_damage(300, BRUTE, forced = TRUE, spread_damage = TRUE)
-	affected_mob.remove_traits(src, given_traits, REF(src))
+	affected_mob.remove_traits(given_traits, REF(src))
 
 	if(affected_mob?.mind)
 		affected_mob?.mind?.remove_antag_datum(/datum/antagonist/khara_member)
@@ -544,7 +572,7 @@
 		H.dna.species.name = initial(H.dna.species.name)
 		H.set_eye_color(COLOR_RED, COLOR_WHITE)
 	qdel(affected_mob.GetComponent(/datum/component/khara_hivemind))
-	return ..()
+	return ..(FALSE)
 
 /datum/disease/true_khara/infect(mob/living/infectee, make_copy)
 	. = ..()
@@ -588,21 +616,34 @@
 		heal *= 0.5
 
 	affected_mob.heal_overall_damage(heal, heal, heal, updating_health = TRUE, forced = TRUE)
+	if(affected_mob.get_oxy_loss() != 0)
+		affected_mob.set_oxy_loss(0)
 	for(var/obj/item/organ/O in affected_mob.organs)
 		if(O.damage >= 5)
 			O.set_organ_damage(clamp(max(0, O.damage - heal), 0, 100))
+		if(isbrain(O))
+			var/obj/item/organ/brain/brain = O
+			if(brain.traumas)
+				for(var/datum/brain_trauma/T in brain.get_traumas_type())
+					if(prob(15))
+						qdel(T)
 
 	if(affected_mob.get_blood_volume() < affected_mob.default_blood_volume)
 		affected_mob.adjust_blood_volume(5 * heal)
+
+	if(affected_mob.all_wounds)
+		for(var/datum/wound/W in affected_mob.all_wounds)
+			if(prob(15))
+				W.remove_wound_from_victim()
 
 	for(var/datum/disease/D in affected_mob.diseases)
 		if(!D == src)
 			D.cure()
 
 	if(host_dead)
-		tru_revive()
+		try_revive()
 
-/datum/disease/true_khara/proc/tru_revive()
+/datum/disease/true_khara/proc/try_revive()
 	var/should_revive = TRUE
 	if(!affected_mob.get_organ_slot(ORGAN_SLOT_BRAIN))
 		should_revive = FALSE
@@ -667,12 +708,12 @@
 		if(lungs && (lungs.organ_flags & ORGAN_ORGANIC))
 			does_breath = TRUE
 
-	var/obj/item/clothing/suit = human.is_mouth_covered(ITEM_SLOT_OCLOTHING)
+	var/obj/item/clothing/suit = human.wear_suit
 	var/obj/item/clothing/mask = human.is_mouth_covered(ITEM_SLOT_MASK)
 	var/total_prot = (suit?.get_armor_rating(BIO) + mask?.get_armor_rating(BIO))
-	if(!does_breath && total_prot >= 50)
+	if(!does_breath && total_prot >= 80)
 		return
 	if(human.has_reagent(/datum/reagent/toxin/khara, 10))
 		return // уже достаточно
 
-	weather_reagent_holder.reagents.expose(human, VAPOR, show_message = TRUE)
+	weather_reagent_holder.reagents.expose(human, VAPOR|INHALE, show_message = TRUE)

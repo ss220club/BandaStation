@@ -1,15 +1,15 @@
 /obj/machinery/door/poddoor/story
-	name = "hardened blast door"
-	desc = "A heavy duty blast door that only opens for dire emergencies."
+	name = "укреплённая взрывозащитная дверь"
+	desc = "Тяжёлая бронированная дверь, которая открывается только в случае крайней необходимости."
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
 /obj/machinery/door/poddoor/story/crowbar_act(mob/living/user, obj/item/tool)
 	return
 
 /obj/machinery/door/manual_airlock
-	name = "manual airlock"
-	desc = "An old-fashioned airlock with a manual valve that needs to be turned multiple times to unlock. \
-			Right-click to start turning the valve, left-click to open once fully turned. Right-click to close."
+	name = "ручной шлюз"
+	desc = "Старомодный шлюз с ручным клапаном, который нужно несколько раз провернуть, чтобы разблокировать. \
+			ПКМ — начать крутить клапан, ЛКМ — открыть дверь после полного проворота. ПКМ — закрыть."
 	icon = 'modular_bandastation/fenysha_events/icons/doors/manual_airlock.dmi'
 	icon_state = "door_closed"
 	base_icon_state = "door"
@@ -45,8 +45,8 @@
 		turns = max_turns
 	AddElement( \
 		/datum/element/contextual_screentip_bare_hands, \
-		lmb_text = "Open/close door", \
-		rmb_text = "Turn the valve", \
+		lmb_text = "Открыть/закрыть дверь", \
+		rmb_text = "Провернуть клапан", \
 	)
 	update_overlays()
 
@@ -75,26 +75,25 @@
 
 	var/right_click = modifiers[RIGHT_CLICK]
 
-
 	if(right_click)
 		if(valve_blocked)
-			to_chat(user, span_warning("The valve is blocked and won't turn!"))
+			to_chat(user, span_warning("Клапан заблокирован и не поворачивается!"))
 			return
 		if(auto_turning)
 			stop_turning(user)
 			return
 
 		var/open = TRUE
-		// let's chose what we gona do
-		if (turns != max_turns && turns != 0)
+		// Определяем, что будем делать
+		if(turns != max_turns && turns != 0)
 			var/list/radial_options = list()
-			radial_options["Lock"] = image(icon = 'icons/hud/radial.dmi', icon_state = "radial_lock")
-			radial_options["Unlock"] = image(icon = 'icons/hud/radial.dmi', icon_state = "radial_unlock")
+			radial_options["Запереть"] = image(icon = 'icons/hud/radial.dmi', icon_state = "radial_lock")
+			radial_options["Отпереть"] = image(icon = 'icons/hud/radial.dmi', icon_state = "radial_unlock")
 
 			var/choice = show_radial_menu(user, src, radial_options, radius = 38, require_near = TRUE)
 			if(!choice || get_dist(src, user) > 1)
 				return
-			if(choice == "Lock")
+			if(choice == "Запереть")
 				open = FALSE
 
 		if(turns == 0)
@@ -104,7 +103,7 @@
 		return
 	else
 		if(turns != 0)
-			balloon_alert(user, "Locked!")
+			balloon_alert(user, "Заперто!")
 			return
 		open()
 		return
@@ -129,16 +128,14 @@
 	else
 		turns++
 
-
-	playsound(src, 'modular_bandastation/fenysha_events/sounds/gatedoor_valve.ogg', 50, TRUE)  // Custom sound
-	balloon_alert(user,"Turn the valve ([turns]/[max_turns]).")
+	playsound(src, 'modular_bandastation/fenysha_events/sounds/gatedoor_valve.ogg', 50, TRUE)  // Кастомный звук
+	balloon_alert(user, "Провернуть клапан ([turns]/[max_turns])")
 	update_icon()
 	update_overlays()
 
 	if(turns >= max_turns)
-		to_chat(user, span_notice("The valve is fully turned!"))
+		to_chat(user, span_notice("Клапан полностью провернут!"))
 		return
-
 
 	auto_turning = TRUE
 	addtimer(CALLBACK(src, PROC_REF(continue_turning), user, opening), turn_delay)
@@ -147,10 +144,8 @@
 /obj/machinery/door/manual_airlock/proc/stop_turning(mob/user)
 	auto_turning = FALSE
 
-
-
 	playsound(src, 'modular_bandastation/fenysha_events/sounds/gatedoor_valve.ogg', 50, TRUE)
-	balloon_alert(user, "Stop turning!")
+	balloon_alert(user, "Кручение остановлено!")
 	update_icon()
 	update_overlays()
 
@@ -163,7 +158,6 @@
 		stop_turning(user)
 		return
 
-
 	if(!do_after(user, turn_delay, src, extra_checks = CALLBACK(src, PROC_REF(can_continue_turning), user)))
 		stop_turning(user)
 		return
@@ -174,10 +168,10 @@
 		turns++
 
 	playsound(src, 'modular_bandastation/fenysha_events/sounds/gatedoor_valve.ogg', 50, TRUE)
-	balloon_alert(user,"Turn the valve ([turns]/[max_turns]).")
+	balloon_alert(user, "Провернуть клапан ([turns]/[max_turns])")
 	update_icon()
 
-	// Continue auto-turning
+	// Продолжаем автоматическое кручение
 	addtimer(CALLBACK(src, PROC_REF(continue_turning), user, opening), turn_delay)
 
 /obj/machinery/door/manual_airlock/proc/can_continue_turning(mob/user)
@@ -186,35 +180,35 @@
 
 /obj/machinery/door/manual_airlock/attackby(obj/item/I, mob/user, params)
 	. = ..()
-	if(density && turns >= max_turns && !valve_blocked)  // Closed and fully turned
+	if(density && turns >= max_turns && !valve_blocked)  // Закрыто и полностью провернуто
 		if(istype(I, /obj/item/pipe) || istype(I, /obj/item/stack/rods))
 			if(!do_after(user, 2 SECONDS, src))
-				to_chat(user, span_warning("You stop jamming the valve."))
+				to_chat(user, span_warning("Вы прекращаете заклинивать клапан."))
 				return
 			valve_blocked = TRUE
 			// playsound(src, 'sound/effects/metal_jam.ogg', 50, TRUE)
-			to_chat(user, span_notice("You jam the valve with [I], blocking it!"))
+			to_chat(user, span_notice("Вы заклиниваете клапан с помощью [I]!"))
 			update_icon()
 			update_overlays()
 			return
 	if(valve_blocked && istype(I, /obj/item/crowbar))
 		if(!do_after(user, 3 SECONDS, src))
-			to_chat(user, span_warning("You stop prying the jam."))
+			to_chat(user, span_warning("Вы прекращаете выдирать заклинивание."))
 			return
 		valve_blocked = FALSE
 		// playsound(src, 'sound/effects/metal_unjam.ogg', 50, TRUE)
-		to_chat(user, span_notice("You pry out the jam, unblocking the valve."))
+		to_chat(user, span_notice("Вы выдираете заклинивание, разблокируя клапан."))
 		update_icon()
 		update_overlays()
 		return
 
 
 /obj/machinery/door/manual_airlock/open(forced = FALSE)
-	if(operating || welded || locked)  // Inherit parent checks
+	if(operating || welded || locked)
 		return FALSE
 
 	if(valve_blocked)
-		to_chat(usr, span_warning("The valve is blocked; the door won't budge!"))
+		to_chat(usr, span_warning("Клапан заблокирован — дверь не поддаётся!"))
 		return FALSE
 
 	if(turns != 0 && !forced)
@@ -238,7 +232,7 @@
 
 
 /obj/item/circuitboard/machine/heater
-	name = "Heater"
+	name = "Обогреватель"
 	greyscale_colors = CIRCUIT_COLOR_GENERIC
 	build_path = /obj/machinery/hypothermia/heater
 	req_components = list(
@@ -249,8 +243,8 @@
 
 
 /obj/machinery/hypothermia/heater
-	name = "Heater"
-	desc = "A soviet-made simple heater. Runs on a standard power cell."
+	name = "Обогреватель"
+	desc = "Простой советский обогреватель. Работает от стандартного элемента питания."
 	icon = 'modular_bandastation/fenysha_events/icons/machinery/thermomachine.dmi'
 	icon_state = "thermo_base"
 	base_icon_state = "thermo_base"
@@ -284,14 +278,14 @@
 
 	// soundloop = new(src, FALSE)
 
-	AddElement(/datum/element/contextual_screentip_bare_hands, rmb_text = "Toggle power")
+	AddElement(/datum/element/contextual_screentip_bare_hands, rmb_text = "Вкл/выкл питание")
 
 	var/static/list/tool_behaviors = list(
-		TOOL_SCREWDRIVER = list(SCREENTIP_CONTEXT_LMB = "Open hatch"),
+		TOOL_SCREWDRIVER = list(SCREENTIP_CONTEXT_LMB = "Открыть крышку"),
 		TOOL_WRENCH = list(
-			SCREENTIP_CONTEXT_LMB = "Anchor",
-			SCREENTIP_CONTEXT_CTRL_LMB = "Increase target temperature",
-			SCREENTIP_CONTEXT_CTRL_RMB = "Decrease target temperature"
+			SCREENTIP_CONTEXT_LMB = "Закрепить/открепить",
+			SCREENTIP_CONTEXT_CTRL_LMB = "Увеличить целевую температуру",
+			SCREENTIP_CONTEXT_CTRL_RMB = "Уменьшить целевую температуру"
 		)
 	)
 	AddElement(/datum/element/contextual_screentip_tools, tool_behaviors)
@@ -312,14 +306,13 @@
 	var/energy_used = (heating_energy/100) * seconds_per_tick
 	var/power_source_used = FALSE
 
-
 	if(anchored && powered() && use_energy(energy_used / efficiency, channel = AREA_USAGE_EQUIP))
 		power_source_used = TRUE
 	else if(cell && cell.charge && cell.use(energy_used / efficiency))
 		power_source_used = TRUE
 	if(!power_source_used)
 		if(on)
-			balloon_alert_to_viewers("No power!")
+			balloon_alert_to_viewers("Нет питания!")
 			turn_off()
 		return
 
@@ -341,21 +334,21 @@
 /obj/machinery/hypothermia/heater/examine(mob/user)
 	. = ..()
 	if(cell)
-		. += span_notice("Power cell charge: [cell.percent()]%.")
+		. += span_notice("Заряд элемента питания: [cell.percent()]%.")
 	else
-		. += span_warning("No power cell installed.")
-	. += span_notice("Target temperature: [target_temperature - T0C]°C.")
+		. += span_warning("Элемент питания не установлен.")
+	. += span_notice("Целевая температура: [target_temperature - T0C]°C.")
 
 /obj/machinery/hypothermia/heater/wrench_act(mob/living/user, obj/item/tool)
 	tool.play_tool_sound(src)
 	anchored = !anchored
-	balloon_alert(user, anchored ? "secured" : "unsecured")
+	balloon_alert(user, anchored ? "закреплён" : "откреплён")
 	return TRUE
 
 
 /obj/machinery/hypothermia/heater/default_deconstruction_screwdriver(mob/user, icon_state_open, icon_state_closed, obj/item/screwdriver)
 	if(on)
-		balloon_alert(user, "Disable first!")
+		balloon_alert(user, "Сначала выключите!")
 		return
 	..()
 
@@ -363,15 +356,15 @@
 /obj/machinery/hypothermia/heater/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/stock_parts/power_store/cell))
 		if(!panel_open)
-			balloon_alert(user, "open hatch first")
+			balloon_alert(user, "Сначала откройте крышку")
 			return TRUE
 		if(cell)
-			balloon_alert(user, "cell already installed")
+			balloon_alert(user, "Элемент уже установлен")
 			return TRUE
 		if(!user.transferItemToLoc(I, src))
 			return
 		cell = I
-		user.visible_message(span_notice("[user] inserts [I] into [src]."), span_notice("You insert [I] into [src]."))
+		user.visible_message(span_notice("[user] вставляет [I] в [src]."), span_notice("Вы вставляете [I] в [src]."))
 		update_appearance()
 		return TRUE
 
@@ -388,11 +381,11 @@
 	if(panel_open)
 		if(RIGHT_CLICK in modifiers)
 			target_temperature = max(target_temperature - 5, T0C + 10)
-			balloon_alert(user, "target temp: [target_temperature - T0C]°C")
+			balloon_alert(user, "цель: [target_temperature - T0C]°C")
 			return TRUE
 		else if(!(CTRL_CLICK in modifiers))
 			target_temperature = min(target_temperature + 5, T0C + 60)
-			balloon_alert(user, "target temp: [target_temperature - T0C]°C")
+			balloon_alert(user, "цель: [target_temperature - T0C]°C")
 			return TRUE
 		else if(ishuman(user))
 			var/mob/living/carbon/human/human = user
@@ -407,21 +400,21 @@
 /obj/machinery/hypothermia/heater/proc/turn_on()
 	if(!anchored)
 		if(!cell)
-			balloon_alert(usr, "no cell")
+			balloon_alert(usr, "нет элемента питания")
 			return
 		if(!cell?.charge)
-			balloon_alert(usr, "no charge")
+			balloon_alert(usr, "элемент разряжен")
 			return
 	else
 		if(use_energy(heating_energy / efficiency, channel = AREA_USAGE_EQUIP))
-			balloon_alert(usr, "Running on APC")
+			balloon_alert(usr, "Работает от сети")
 		else
-			balloon_alert(usr, "No power in APC")
+			balloon_alert(usr, "Нет питания в сети")
 			return
 
 	on = TRUE
 	update_appearance()
-	balloon_alert(usr, "heater on")
+	balloon_alert(usr, "обогреватель включён")
 
 	if(on && !soundloop.loop_started)
 		soundloop.start()
@@ -437,7 +430,7 @@
 /obj/machinery/hypothermia/heater/proc/turn_off()
 	on = FALSE
 	update_appearance()
-	balloon_alert(usr, "heater off")
+	balloon_alert(usr, "обогреватель выключен")
 
 	if(heat_comp)
 		qdel(heat_comp)
@@ -449,4 +442,3 @@
 	update_light()
 
 #undef BASE_HEATING_ENERGY
-

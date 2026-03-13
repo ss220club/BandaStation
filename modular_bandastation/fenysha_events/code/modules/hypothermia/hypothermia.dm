@@ -1,38 +1,38 @@
 #define HYPOTHERMIA_TITLE_SCREEN 'modular_bandastation/fenysha_events/icons/lobby/hypothermia.png'
 
 /datum/award/achievement/safe_landing
-	name = "Soft Landing"
-	desc = "You survived the shipwreck. Maybe you should've taken the Interlink shuttle after all?"
+	name = "Мягкая посадка"
+	desc = "Вы выжили после кораблекрушения. Может, вам стоило воспользоваться шаттлом интерлинка в этот раз?"
 	database_id = "evt_hypothermia_safelanding"
 
 /datum/award/achievement/very_safe_landing
-	name = "Truly Soft Landing"
-	desc = "You survived the shipwreck without a single scratch — what a miracle!"
+	name = "По-настоящему мягкая посадка"
+	desc = "Вы выжили после кораблекрушения без единой царапины — настоящее чудо!"
 	database_id = "evt_hypothermia_safelanding_sup"
 
 /datum/award/achievement/petrov_kill
-	name = "Final Favor"
-	desc = "You defeated the chief engineer and obtained the key to salvation. Great job!"
+	name = "Последняя услуга"
+	desc = "Вы победили главного инженера и получили ключ к спасению. Отличная работа!"
 	database_id = "evt_hypothermia_petrov_kill"
 
 /datum/award/achievement/laststand
-	name = "The City Must Survive"
-	desc = "A big storm is coming — the city must survive!"
+	name = "Город должен выжить"
+	desc = "Надвигается большая буря — город должен выжить!"
 	database_id = "evt_hypothermia_c150fp"
 
 /datum/award/achievement/safe_launch
-	name = "Let's Go!"
-	desc = "You escaped using the Buran shuttle — it finally took off!"
+	name = "Поехали!"
+	desc = "Вы сбежали с помощью шаттла Буран — он наконец взлетел!"
 	database_id = "evt_hypothermia_escape"
 
 
 /datum/full_round_event/hypothermia
-	name = "Hypothermia"
-	short_desc = "You and your crew have crashed on this frozen planet. \
-				You are cut off from communication and left to fend for yourselves. \
-				But that's not your biggest problem. Beware of the freezing cold and the locals."
+	name = "Гипотермия"
+	short_desc = "Вы и ваша команда разбились на этой замерзшей планете. \
+				Вы отрезаны от связи и предоставлены самим себе. \
+				Но это не ваша главная проблема. Остерегайтесь леденящего холода и местных жителей."
 	extended_desc = ""
-	round_start_massage = "Stay alive until the end."
+	round_start_massage = "Выживите до конца."
 	disable_dynamic = TRUE
 	lock_respawn = TRUE
 	only_related_observe = FALSE
@@ -54,7 +54,7 @@ ADMIN_VERB(setup_hypothermia_event, R_DEBUG|R_FUN, "setup hypothermia event", "S
 
 /datum/full_round_event/hypothermia/lobby_loaded(mob/user)
 	addtimer(CALLBACK(src, PROC_REF(update_lobby_screen)), 10 SECONDS)
-	// RegisterSignal(SSdcs, COMSIG_GLOBAL_PLAYER_SETUP_FINISHED, PROC_REF(on_player_spawn))
+	RegisterSignal(SSdcs, COMSIG_GLOBAL_PLAYER_SETUP_FINISHED, PROC_REF(on_player_spawn))
 	CONFIG_SET(flag/allow_random_events, 0)
 
 /datum/full_round_event/hypothermia/proc/update_lobby_screen()
@@ -79,15 +79,15 @@ ADMIN_VERB(setup_hypothermia_event, R_DEBUG|R_FUN, "setup hypothermia event", "S
 	victim.AddComponent(/datum/component/hypothermia)
 	victim.Stun(50 SECONDS)
 
-	victim.dispatch_personal_announcement("WARNING! CRITICAL HULL BREACH DETECTED! EMERGENCY CRASH LANDING IN 45 SECONDS! BRACE FOR IMPACT!", 'sound/announcer/intern/meteors.ogg')
+	victim.dispatch_personal_announcement("ВНИМАНИЕ! ОБНАРУЖЕНА КРИТИЧЕСКАЯ ДЕГЕРМЕТИЗАЦИЯ КОРПУСА! АВАРИЙНАЯ ПОСАДКА ЧЕРЕЗ 45 СЕКУНД! ГОТОВЬТЕСЬ К УДАРУ!", 'sound/announcer/intern/meteors.ogg')
 	sleep(10 SECONDS)
 
-	victim.dispatch_personal_announcement("30 SECONDS TO IMPACT! ALL HANDS TO CRASH SEATS!", 'sound/effects/explosion/explosion_distant.ogg', volume = 60)
+	victim.dispatch_personal_announcement("30 СЕКУНД ДО УДАРА! ВСЕМ ЗАНЯТЬ КРЕСЛА ДЛЯ АВАРИЙНОЙ ПОСАДКИ!", 'sound/effects/explosion/explosion_distant.ogg', volume = 60)
 	sleep(6 SECONDS)
 	SEND_SOUND(victim, 'sound/effects/explosion/explosionfar.ogg')
 
 	sleep(4 SECONDS)
-	victim.dispatch_personal_announcement("20 SECONDS REMAINING! BRACE FOR IMPACT!")
+	victim.dispatch_personal_announcement("ОСТАЛОСЬ 20 СЕКУНД! ГОТОВЬТЕСЬ К УДАРУ!")
 	sleep(3 SECONDS)
 	SEND_SOUND(victim, 'sound/effects/explosion/explosionfar.ogg')
 
@@ -95,11 +95,11 @@ ADMIN_VERB(setup_hypothermia_event, R_DEBUG|R_FUN, "setup hypothermia event", "S
 
 	shake_camera(victim, 25, 2)
 
-	victim.dispatch_personal_announcement("10 SECONDS... BRACE! BRACE! BRACE!", volume = 70)
+	victim.dispatch_personal_announcement("10 СЕКУНД... ГОТОВЬТЕСЬ! ГОТОВЬТЕСЬ! ГОТОВЬТЕСЬ!", volume = 70)
 	sleep(3 SECONDS)
 	SEND_SOUND(victim, 'sound/effects/explosion/explosion_distant.ogg')
 	sleep(3 SECONDS)
-	victim.dispatch_personal_announcement("5 SECONDS...", 'sound/effects/explosion/explosion_distant.ogg', volume = 80)
+	victim.dispatch_personal_announcement("5 СЕКУНД...", 'sound/effects/explosion/explosion_distant.ogg', volume = 80)
 	INVOKE_ASYNC(src, PROC_REF(teleport_to_crashsite), victim)
 	sleep(5 SECONDS)
 
@@ -107,7 +107,7 @@ ADMIN_VERB(setup_hypothermia_event, R_DEBUG|R_FUN, "setup hypothermia event", "S
 	shake_camera(victim, 50, 5)
 
 	sleep(6 SECONDS)
-	victim.dispatch_personal_announcement("Impact confirmed. All primary systems offline. External temperature: -15°C and falling fast.", 'sound/effects/explosion/explosion_distant.ogg', volume = 85)
+	victim.dispatch_personal_announcement("Удар подтверждён. Все основные системы отключены. Внешняя температура: -15°C и быстро падает.", 'sound/effects/explosion/explosion_distant.ogg', volume = 85)
 
 
 /datum/full_round_event/hypothermia/proc/teleport_to_crashsite(mob/living/victim)
@@ -121,7 +121,7 @@ ADMIN_VERB(setup_hypothermia_event, R_DEBUG|R_FUN, "setup hypothermia event", "S
 
 	if(isnull(spawnpoint))
 		spawnpoint = locate() in available
-		if(!spawnpoint) //last try
+		if(!spawnpoint) // последняя попытка
 			spawnpoint = pick(available)
 	if(!spawnpoint)
 		message_admins("[victim] could not find a job based spawn point, please help [ADMIN_FLW(victim)]")
@@ -155,7 +155,7 @@ ADMIN_VERB(setup_hypothermia_event, R_DEBUG|R_FUN, "setup hypothermia event", "S
 	victim.Knockdown(25 SECONDS)
 	victim.Stun(20 SECONDS)
 	shake_camera(victim, 50, 5)
-	to_chat(victim, span_userdanger("IMPACT! THE SHIP SMASHES INTO THE ICE! YOU'RE THROWN VIOLENTLY ACROSS THE WRECKAGE!"))
+	to_chat(victim, span_userdanger("УДАР! КОРАБЛЬ ВРЕЗАЕТСЯ В ЛЁД! ВАС ЖЕСТОКО РАЗБРОСАЛО ПО ОБЛОМКАМ!"))
 	var/injured = FALSE
 
 	if(prob(40))
@@ -163,14 +163,14 @@ ADMIN_VERB(setup_hypothermia_event, R_DEBUG|R_FUN, "setup hypothermia event", "S
 		var/obj/item/bodypart/limb = victim.get_bodypart(pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
 		if(limb)
 			limb.receive_damage(brute = rand(15, 25), wound_bonus = 20)
-			to_chat(victim, span_userdanger("Your [limb.name] SHATTERS against twisted steel!"))
+			to_chat(victim, span_userdanger("Ваша [limb.name] РАЗБИВАЕТСЯ о скрученную сталь!"))
 
 	if(prob(40))
 		injured = TRUE
 		var/obj/item/bodypart/chest = victim.get_bodypart(BODY_ZONE_CHEST)
 		if(chest)
 			chest.receive_damage(brute = rand(15, 25), burn = rand(15, 25))
-			to_chat(victim, span_userdanger("Your ribs CRUSH inward — breathing becomes agony!"))
+			to_chat(victim, span_userdanger("Ваши рёбра СДАВЛИВАЮТСЯ внутрь — дыхание превращается в агонию!"))
 
 	if(prob(40))
 		injured = TRUE
@@ -178,10 +178,10 @@ ADMIN_VERB(setup_hypothermia_event, R_DEBUG|R_FUN, "setup hypothermia event", "S
 		if(head)
 			head.receive_damage(brute = rand(15, 25))
 			victim.adjust_organ_loss(ORGAN_SLOT_BRAIN, rand(5, 25))
-			to_chat(victim, span_userdanger("Your skull SLAMS into metal — blood pours into your eyes!"))
+			to_chat(victim, span_userdanger("Ваш череп УДАРЯЕТСЯ о металл — кровь заливает глаза!"))
 
 	if(!injured)
-		to_chat(victim, span_notice("Against all odds... you crawl from the wreckage completely unharmed. A miracle."))
+		to_chat(victim, span_notice("Наперекор всему... вы выбираетесь из обломков совершенно невредимыми. Чудо."))
 		victim.client.give_award(/datum/award/achievement/very_safe_landing, victim)
 
 /datum/full_round_event/hypothermia/proc/setup_hypothermia_fluff(mob/living/victim)
@@ -192,13 +192,13 @@ ADMIN_VERB(setup_hypothermia_event, R_DEBUG|R_FUN, "setup hypothermia event", "S
 	if(isnull(victim.mind) || isnull(victim.client))
 		message_admins("Hypothermia event could not setup fluff for [victim], no mind found. Please help [ADMIN_FLW(victim)]")
 		return
-	to_chat(victim, span_boldwarning("The freezing darkness closes in... the cold is absolute..."))
+	to_chat(victim, span_boldwarning("Ледяная тьма смыкается... холод абсолютен..."))
 	victim.client.give_award(/datum/award/achievement/safe_landing, victim)
 	var/datum/antagonist/custom/crashland_antag = new()
 	var/datum/objective/custom/survive_objective = new()
-	crashland_antag.name = "Survivor"
-	crashland_antag.roundend_category = "Shipwreck Survivors"
-	survive_objective.explanation_text = "Find a way to survive and escape the planet."
+	crashland_antag.name = "Выживший"
+	crashland_antag.roundend_category = "Выжившие после кораблекрушения"
+	survive_objective.explanation_text = "Найдите способ выжить и сбежать с планеты."
 	crashland_antag.show_in_antagpanel = FALSE
 	crashland_antag.objectives += survive_objective
 	victim.mind.add_antag_datum(crashland_antag)
@@ -208,20 +208,20 @@ ADMIN_VERB(setup_hypothermia_event, R_DEBUG|R_FUN, "setup hypothermia event", "S
 		eventual_death.wind_down()
 
 /datum/full_round_event/hypothermia/proc/on_buran_startup()
-	priority_announce("Attention! Weather sensors have detected a shift in the storm front. \
-						Temperature drop to -150 recorded... Sensors damaged, shutdown!", "Weather report", 'sound/effects/alert.ogg')
+	priority_announce("Внимание! Метеорологические датчики зафиксировали сдвиг фронта бури. \
+						Падение температуры до -150 зарегистрировано... Датчики повреждены, отключение!", "Прогноз погоды", 'sound/effects/alert.ogg')
 	for(var/mob/living/carbon/human/crew in GLOB.alive_player_list)
 		crew.client.give_award(/datum/award/achievement/laststand, crew)
 		if(length(crew.mind.antag_datums))
 			var/datum/antagonist/custom/survivor = locate() in crew.mind.antag_datums
 			if(!survivor)
 				survivor = new()
-				survivor.name = "Survivor"
-				survivor.roundend_category = "Shipwreck Survivors"
+				survivor.name = "Выживший"
+				survivor.roundend_category = "Выжившие после кораблекрушения"
 				crew.mind.add_antag_datum(survivor)
 			survivor.objectives = null
 			var/datum/objective/custom/survive_objective = new()
-			survive_objective.explanation_text = "Survive the storm!"
+			survive_objective.explanation_text = "Выживите в буре!"
 			survivor.objectives += survive_objective
 			to_chat(crew, span_boldwarning(survive_objective.explanation_text))
 
