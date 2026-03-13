@@ -56,8 +56,8 @@
 #define IPC_DEFAULT_IMPLANT_SLOTS 3
 
 /obj/item/implant/ipc
-	name = "IPC implant"
-	desc = "Базовый имплант для IPC."
+	name = "Имплант КПБ"
+	desc = "Базовый имплант для КПБ."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "reactive_repair"
 	w_class = WEIGHT_CLASS_TINY
@@ -148,7 +148,7 @@
 // Позволяет прикреплять конечность обратно без хирургии
 
 /obj/item/implant/ipc/magnetic_joints
-	name = "Magnetic Joints Implant"
+	name = "Имплант магнитных суставов"
 	desc = "Магнитные суставы для конечностей IPC. Позволяют быстро прикрепить оторванную конечность без хирургии. Устанавливается в руки или ноги."
 	icon_state = "magnetic_joints"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
@@ -205,8 +205,8 @@
 		to_chat(H, span_warning("Магнитные суставы деактивированы."))
 
 /obj/item/implantcase/ipc/magnetic_joints
-	name = "implant case - 'Magnetic Joints'"
-	desc = "Стеклянный кейс содержащий имплант магнитных суставов для IPC."
+	name = "Кейс импланта — «Магнитные суставы»"
+	desc = "Стеклянный кейс содержащий имплант магнитных суставов для КПБ."
 	imp_type = /obj/item/implant/ipc/magnetic_joints
 
 // ============================================
@@ -215,7 +215,7 @@
 // Предотвращает dismemberment конечности
 
 /obj/item/implant/ipc/sealed_joints
-	name = "Sealed Joints Implant"
+	name = "Имплант запечатанных суставов"
 	desc = "Укрепленные герметичные суставы. Предотвращают отрывание конечности без операции. Устанавливается в руки или ноги."
 	icon_state = "sealed_joints"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
@@ -272,8 +272,8 @@
 		to_chat(H, span_warning("Герметичные суставы удалены. Конечность больше не защищена."))
 
 /obj/item/implantcase/ipc/sealed_joints
-	name = "implant case - 'Sealed Joints'"
-	desc = "Стеклянный кейс содержащий имплант укрепленных суставов."
+	name = "Кейс импланта — «Запечатанные суставы»"
+	desc = "Стеклянный кейс содержащий имплант укреплённых суставов."
 	imp_type = /obj/item/implant/ipc/sealed_joints
 
 // ============================================
@@ -282,7 +282,7 @@
 // Автоматический ремонт всего тела, устанавливается в грудь
 
 /obj/item/implant/ipc/reactive_repair
-	name = "Reactive Repair Implant"
+	name = "Имплант реактивного ремонта"
 	desc = "Система автоматического ремонта для IPC. Чинит все тело. Устанавливается в грудную клетку и расходует заряд батарейки."
 	icon_state = "reactive_repair"
 	allowed_zones = list(BODY_ZONE_CHEST)
@@ -383,7 +383,7 @@
 		to_chat(source, span_warning("Система реактивного ремонта деактивирована."))
 
 /datum/action/item_action/hands_free/toggle_repair
-	name = "Toggle Reactive Repair"
+	name = "Реактивный ремонт (вкл/выкл)"
 	desc = "Включить/выключить систему реактивного ремонта."
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "bci_repair"
@@ -409,7 +409,7 @@
 	return TRUE
 
 /obj/item/implantcase/ipc/reactive_repair
-	name = "implant case - 'Reactive Repair'"
+	name = "Кейс импланта — «Реактивный ремонт»"
 	desc = "Стеклянный кейс содержащий имплант реактивного ремонта."
 	imp_type = /obj/item/implant/ipc/reactive_repair
 
@@ -419,7 +419,7 @@
 // Защита от ЕМП для ВСЕХ РАС, устанавливается в грудь
 
 /obj/item/implant/emp_protector
-	name = "EMP-Protector Implant"
+	name = "Имплант ЕМП-защиты"
 	desc = "Защита от ЕМП ударов. Устанавливается в грудную клетку. Для IPC - нагревает процессор при блокировке, для других - наносит burn урон."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "emp_protector"
@@ -493,7 +493,7 @@
 		to_chat(source, span_warning("EMP-протектор деактивирован."))
 
 /obj/item/implantcase/emp_protector
-	name = "implant case - 'EMP-Protector'"
+	name = "Кейс импланта — «ЕМП-защита»"
 	desc = "Стеклянный кейс содержащий имплант защиты от ЕМП."
 	imp_type = /obj/item/implant/emp_protector
 
@@ -503,7 +503,7 @@
 // Встроенные магбуты - только в ноги
 
 /obj/item/implant/ipc/magnetic_leg
-	name = "Magnetic Leg Implant"
+	name = "Имплант магнитных ботинок"
 	desc = "Магнитные модули для ног IPC. Функционируют как встроенные магнитные ботинки."
 	icon_state = "magnetic_leg"
 	allowed_zones = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
@@ -527,10 +527,6 @@
 		return FALSE
 
 	var/mob/living/carbon/human/H = target
-	if(!istype(H.dna?.species, /datum/species/ipc))
-		if(!silent && user)
-			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
-		return FALSE
 
 	// Даем абилку переключения магбутов только если это первая нога
 	var/datum/action/toggle_magboots/existing = locate(/datum/action/toggle_magboots) in H.actions
@@ -575,13 +571,13 @@
 		to_chat(H, span_warning("Магнитные модули удалены из [installed_in_zone]."))
 
 /obj/item/implantcase/ipc/magnetic_leg
-	name = "implant case - 'Magnetic Leg'"
-	desc = "Стеклянный кейс содержащий имплант встроенных магнитных ботинок для IPC."
+	name = "Кейс импланта — «Магнитные ботинки»"
+	desc = "Стеклянный кейс содержащий имплант магнитных ботинок."
 	imp_type = /obj/item/implant/ipc/magnetic_leg
 
 // Абилка переключения магбутов
 /datum/action/toggle_magboots
-	name = "Toggle Magnetic Boots"
+	name = "Магнитные ботинки (вкл/выкл)"
 	desc = "Активировать/деактивировать встроенные магнитные ботинки."
 	button_icon = 'icons/obj/clothing/shoes.dmi'
 	button_icon_state = "magboots0"
@@ -629,7 +625,7 @@
 // Позволяет IPC есть еду, но сам не перерабатывает её — это делает bio-generator.
 
 /obj/item/organ/stomach/ipc_bio
-	name = "bio-generator stomach"
+	name = "Желудок био-генератора"
 	desc = "Виртуальный желудок IPC, работающий на основе bio-generator импланта. Перерабатывает органическую пищу в энергию для батарейки."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "stomach-ipc"
@@ -645,7 +641,7 @@
 	return
 
 /obj/item/implant/ipc/bio_generator
-	name = "Bio-Generator Implant"
+	name = "Имплант био-генератора"
 	desc = "Биологический генератор для IPC. Позволяет перерабатывать органическую пищу в энергию. Устанавливается в грудную клетку."
 	icon_state = "bio_generator"
 	allowed_zones = list(BODY_ZONE_CHEST)
@@ -750,8 +746,8 @@
 		to_chat(H, span_warning("Био-генератор деактивирован."))
 
 /obj/item/implantcase/ipc/bio_generator
-	name = "implant case - 'Bio-Generator'"
-	desc = "Стеклянный кейс содержащий имплант био-генератора для IPC."
+	name = "Кейс импланта — «Био-генератор»"
+	desc = "Стеклянный кейс содержащий имплант био-генератора."
 	imp_type = /obj/item/implant/ipc/bio_generator
 
 // ============================================
@@ -765,7 +761,7 @@
 /// Кабель зарядника, постоянно находящийся в руке.
 /// Правая рука — стандартный вариант.
 /obj/item/ipc_charging_cable
-	name = "charging cable"
+	name = "Зарядный кабель"
 	desc = "Встроенный зарядный кабель КПБ. Нажмите на АРС или настенное устройство для подключения."
 	icon = 'icons/obj/stack_objects.dmi'
 	icon_state = "coil"
@@ -835,7 +831,7 @@
 	disconnect_from_device(H)
 
 /obj/item/implant/ipc/charger
-	name = "Integrated Charging Port"
+	name = "Встроенный зарядный порт"
 	desc = "Встроенный зарядный порт. Позволяет IPC заряждаться от настенных источников питания: АРС, переговорников, экранов. Достаньте кабель кнопкой действия, затем нажмите им на устройство."
 	icon_state = "reactive_repair"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
@@ -947,7 +943,7 @@
 // противоположную зарядному порту. Снижает входящий урон когда активен.
 
 /obj/item/implant/ipc/force_shield
-	name = "Force Shield Emitter"
+	name = "Генератор силового щита"
 	desc = "Встроенный генератор силового щита. В активном состоянии действует как раскладываемый щит — блокирует атаки с определённым шансом, но каждый блок немного повреждает руку с имплантом."
 	icon_state = "reactive_repair"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
@@ -1065,7 +1061,7 @@
 // Кулдаун 30 секунд.
 
 /obj/item/implant/ipc/kebab
-	name = "Integrated Kebab Module"
+	name = "Встроенный кебаб-модуль"
 	desc = "Встроенный кебаб-модуль. При развёрнутых клинках богомола позволяет насаживать мясо на лезвия и готовить кебаб (3 сек, кулдаун 30 сек)."
 	icon = 'icons/obj/food/meat.dmi'
 	icon_state = "kebab"
@@ -1100,8 +1096,8 @@
 		to_chat(source, span_warning("Кебаб-модуль деактивирован."))
 
 /obj/item/implantcase/ipc/kebab
-	name = "implant case - 'Kebab Module'"
-	desc = "Стеклянный кейс содержащий встроенный кебаб-модуль для IPC."
+	name = "Кейс импланта — «Кебаб-модуль»"
+	desc = "Стеклянный кейс содержащий встроенный кебаб-модуль для КПБ."
 	imp_type = /obj/item/implant/ipc/kebab
 
 // Кнопка приготовления кебаба
@@ -1175,3 +1171,74 @@
 		span_notice("[H] нанизывает куски мяса на лезвия богомола и подаёт готовый кебаб!"),
 		span_notice("Кебаб готов!"),
 	)
+
+// ============================================
+// УЛУЧШЕННАЯ СИСТЕМА ОХЛАЖДЕНИЯ — имплант
+// ============================================
+// Устанавливается через autosurgeon или хирургию.
+// После имплантации постоянно снижает температуру CPU на 1°C/сек.
+
+/obj/item/implant/ipc_cooling_system
+	name = "Имплант термостабилизатора"
+	desc = "Улучшенная система охлаждения для IPC. При имплантации обеспечивает постоянное охлаждение 1°C/сек навсегда."
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "ipc_cooler"
+	w_class = WEIGHT_CLASS_TINY
+
+/obj/item/implant/ipc_cooling_system/get_data()
+	var/dat = {"<b>Implant Specifications:</b><BR>
+	<b>Name:</b> Thermal Stabilizer Implant<BR>
+	<b>Life:</b> Permanent<BR>
+	<b>Function:</b> Provides passive cooling for IPC chassis.<BR>
+	<b>Integrity:</b> Активен"}
+	return dat
+
+/obj/item/implant/ipc_cooling_system/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+	. = ..()
+	if(!.)
+		return FALSE
+
+	if(!ishuman(target))
+		return FALSE
+
+	var/mob/living/carbon/human/H = target
+	if(!istype(H.dna?.species, /datum/species/ipc))
+		if(!silent)
+			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
+		return FALSE
+
+	var/datum/species/ipc/S = H.dna.species
+
+	if(S.improved_cooling_installed)
+		if(!silent)
+			to_chat(user, span_warning("У [H] уже установлена улучшенная система охлаждения!"))
+		return FALSE
+
+	S.improved_cooling_installed = TRUE
+
+	if(!silent)
+		to_chat(H, span_boldnotice("Улучшенная система охлаждения установлена и активирована!"))
+		to_chat(user, span_notice("Вы успешно установили имплант термостабилизатора в [H]."))
+
+	return TRUE
+
+/obj/item/implant/ipc_cooling_system/removed(mob/living/source, silent = FALSE, special = FALSE)
+	. = ..()
+
+	if(!ishuman(source))
+		return
+
+	var/mob/living/carbon/human/H = source
+	if(!istype(H.dna?.species, /datum/species/ipc))
+		return
+
+	var/datum/species/ipc/S = H.dna.species
+	S.improved_cooling_installed = FALSE
+
+	if(!silent)
+		to_chat(H, span_warning("Ваша улучшенная система охлаждения деактивирована!"))
+
+/obj/item/implantcase/ipc_cooling_system
+	name = "Кейс импланта — «Термостабилизатор»"
+	desc = "Стеклянный кейс содержащий имплант термостабилизатора для КПБ."
+	imp_type = /obj/item/implant/ipc_cooling_system

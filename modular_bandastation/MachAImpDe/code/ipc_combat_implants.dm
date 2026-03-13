@@ -17,7 +17,7 @@
 // Высокий шанс dismember (отрезание конечности).
 
 /obj/item/implant/ipc/arm_razor
-	name = "Arm Razor Implant"
+	name = "Имплант моновайера"
 	desc = "Моноволоконная струна, встроенная в предплечье. Выдвигается для режущей атаки на ближнюю дистанцию. Способна отрезать конечности."
 	icon_state = "arm_razor"
 	arm_visual_state = "razorwire"
@@ -107,13 +107,13 @@
 		to_chat(source, span_warning("Струна извлечена."))
 
 /obj/item/implantcase/ipc/arm_razor
-	name = "implant case - 'Arm Razor'"
+	name = "Кейс импланта — «Моновайер»"
 	desc = "Стеклянный кейс содержащий имплант моноволоконной струны."
 	imp_type = /obj/item/implant/ipc/arm_razor
 
 // Action для атаки струной
 /datum/action/item_action/hands_free/activate_arm_razor
-	name = "Razor Slash"
+	name = "Удар моновайером"
 	desc = "Атаковать струной цель перед собой."
 	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	button_icon_state = "arm_razor"
@@ -140,7 +140,7 @@
 // (the visual is already handled by the arm bodypart overlay).
 
 /obj/item/mantis_blade
-	name = "mantis blade"
+	name = "Лезвие богомола"
 	desc = "Выдвижное лезвие богомола."
 	icon = 'modular_bandastation/MachAImpDe/icons/implants_righthand.dmi'
 	icon_state = "mantis"
@@ -190,7 +190,7 @@
 
 /// Military variant with higher stats
 /obj/item/mantis_blade/military
-	name = "military mantis blade"
+	name = "Военное лезвие богомола"
 	desc = "Военное выдвижное лезвие богомола."
 	icon_state = "syndie_mantis"
 	force = 22
@@ -209,7 +209,7 @@
 // При парных лезвиях (L+R) — способность прыжка.
 
 /obj/item/implant/ipc/mantis
-	name = "Mantis Blade Implant"
+	name = "Имплант лезвий богомола"
 	desc = "Выдвижные лезвия богомола. В развёрнутом состоянии наносят тяжёлый режущий урон и могут отрезать конечности."
 	icon_state = "mantis_right"
 	arm_visual_state = "mantis"
@@ -416,7 +416,7 @@
 
 // Левая рука
 /obj/item/implant/ipc/mantis/left
-	name = "Mantis Blade Implant (Left)"
+	name = "Имплант лезвий богомола (левый)"
 	desc = "Выдвижные лезвия богомола для левой руки."
 	icon_state = "mantis_left"
 	arm_visual_state = "mantis"
@@ -425,18 +425,18 @@
 	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis/left)
 
 /obj/item/implantcase/ipc/mantis_right
-	name = "implant case - 'Mantis Blade (Right)'"
+	name = "Кейс импланта — «Лезвие богомола (правое)»"
 	desc = "Стеклянный кейс содержащий имплант лезвий богомола для правой руки."
 	imp_type = /obj/item/implant/ipc/mantis
 
 /obj/item/implantcase/ipc/mantis_left
-	name = "implant case - 'Mantis Blade (Left)'"
+	name = "Кейс импланта — «Лезвие богомола (левое)»"
 	desc = "Стеклянный кейс содержащий имплант лезвий богомола для левой руки."
 	imp_type = /obj/item/implant/ipc/mantis/left
 
 // Action для переключения лезвий
 /datum/action/item_action/hands_free/toggle_mantis
-	name = "Toggle Mantis Blades"
+	name = "Лезвия богомола (вкл/выкл)"
 	desc = "Развернуть/свернуть лезвия богомола."
 	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	button_icon_state = "mantis_right"
@@ -448,7 +448,7 @@
 
 // Военные варианты
 /datum/action/item_action/hands_free/toggle_mantis/military
-	name = "Toggle Military Mantis Blades"
+	name = "Военные лезвия богомола (вкл/выкл)"
 	button_icon_state = "military_mantis_right"
 
 /datum/action/item_action/hands_free/toggle_mantis/military/left
@@ -469,7 +469,7 @@
 
 // Action для прыжка (выдаётся при парных лезвиях)
 /datum/action/item_action/hands_free/mantis_leap
-	name = "Mantis Leap"
+	name = "Прыжок богомола"
 	desc = "Прыжок на врага с лезвиями богомола. Требуются парные лезвия."
 	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	button_icon_state = "mantis_right"
@@ -522,7 +522,7 @@
 // Подтип mantis с повышенными характеристиками.
 
 /obj/item/implant/ipc/mantis/military
-	name = "Military Mantis Blade Implant"
+	name = "Имплант военных лезвий богомола"
 	desc = "Военная модификация лезвий богомола. Увеличенный урон и способность пробивать броню. Высокий шанс отрезания конечностей."
 	icon_state = "military_mantis_right"
 	arm_visual_state = "syndie_mantis"
@@ -534,7 +534,7 @@
 
 // Левая рука
 /obj/item/implant/ipc/mantis/military/left
-	name = "Military Mantis Blade Implant (Left)"
+	name = "Имплант военных лезвий богомола (левый)"
 	desc = "Военная модификация лезвий богомола для левой руки."
 	icon_state = "military_mantis_left"
 	allowed_zones = list(BODY_ZONE_L_ARM)
@@ -542,12 +542,12 @@
 	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis/military/left)
 
 /obj/item/implantcase/ipc/military_mantis_right
-	name = "implant case - 'Military Mantis (Right)'"
+	name = "Кейс импланта — «Военное лезвие богомола (правое)»"
 	desc = "Стеклянный кейс содержащий имплант военных лезвий богомола для правой руки."
 	imp_type = /obj/item/implant/ipc/mantis/military
 
 /obj/item/implantcase/ipc/military_mantis_left
-	name = "implant case - 'Military Mantis (Left)'"
+	name = "Кейс импланта — «Военное лезвие богомола (левое)»"
 	desc = "Стеклянный кейс содержащий имплант военных лезвий богомола для левой руки."
 	imp_type = /obj/item/implant/ipc/mantis/military/left
 
@@ -558,7 +558,7 @@
 // У IPC дополнительно расходует батарею.
 
 /obj/item/implant/ipc/arm_cannon
-	name = "Arm Cannon Implant"
+	name = "Имплант встроенного дробовика"
 	desc = "Встроенный дробовик в руке. Заряжается дробовыми патронами. Выстрел рассеивает пеллеты по площади."
 	icon_state = "arm_cannon"
 	arm_visual_state = "shell_cannon"
@@ -682,13 +682,13 @@
 		to_chat(source, span_warning("Дробовик извлечён."))
 
 /obj/item/implantcase/ipc/arm_cannon
-	name = "implant case - 'Arm Cannon'"
-	desc = "Стеклянный кейс содержащий имплант дробовика."
+	name = "Кейс импланта — «Встроенный дробовик»"
+	desc = "Стеклянный кейс содержащий имплант встроенного дробовика."
 	imp_type = /obj/item/implant/ipc/arm_cannon
 
 // Пеллет дробовика
 /obj/projectile/bullet/pellet/arm_cannon_pellet
-	name = "buckshot pellet"
+	name = "Картечина"
 	damage = 5
 	wound_bonus = 5
 	exposed_wound_bonus = 5
@@ -698,7 +698,7 @@
 
 // Action для выстрела
 /datum/action/item_action/hands_free/fire_arm_cannon
-	name = "Fire Arm Cannon"
+	name = "Выстрелить из встроенного дробовика"
 	desc = "Выстрелить из встроенного дробовика."
 	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	button_icon_state = "arm_cannon"
@@ -724,7 +724,7 @@
 // У IPC: расход батареи + нагрев CPU.
 
 /obj/item/implant/ipc/sandevistan
-	name = "Sandevistan Implant"
+	name = "Имплант Сандевистан"
 	desc = "Сандевистан — имплант рефлекторного ускорения. Временно повышает скорость перемещения на 50%. У IPC расходует батарею и нагревает процессор."
 	icon_state = "sandy"
 	allowed_zones = list(BODY_ZONE_CHEST)
@@ -828,7 +828,7 @@
 		to_chat(source, span_warning("Сандевистан извлечён."))
 
 /obj/item/implantcase/ipc/sandevistan
-	name = "implant case - 'Sandevistan'"
+	name = "Кейс импланта — «Сандевистан»"
 	desc = "Стеклянный кейс содержащий имплант Сандевистан — систему рефлекторного ускорения."
 	imp_type = /obj/item/implant/ipc/sandevistan
 
@@ -838,7 +838,7 @@
 
 // Action для активации
 /datum/action/item_action/hands_free/activate_sandevistan
-	name = "Activate Sandevistan"
+	name = "Активировать Сандевистан"
 	desc = "Активировать Сандевистан — временное рефлекторное ускорение."
 	button_icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	button_icon_state = "sandy"

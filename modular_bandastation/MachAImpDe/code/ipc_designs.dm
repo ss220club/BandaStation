@@ -20,7 +20,7 @@
 	id = "ipc_parts"
 	starting_node = TRUE
 	display_name = "Детали КПБ"
-	description = "Компоненты для создания и ремонта синтетических организмов IPC: части тела, органы, импланты и оборудование."
+	description = "Компоненты для создания и ремонта синтетических организмов IPC: части тела, органы, базовые импланты и оборудование."
 	design_ids = list(
 		// Плата терминала
 		"synthetic_diagnostic_terminal_board",
@@ -44,13 +44,26 @@
 		"ipc_implant_sealed_joints",
 		"ipc_implant_reactive_repair",
 		"ipc_implant_magnetic_leg",
-		// Импланты (боевые)
+	)
+
+// ============================================================
+// TECHWEB НОДА — боевые импланты КПБ (требует исследования)
+// ============================================================
+
+/datum/techweb_node/ipc_combat_implants
+	id = "ipc_combat_implants"
+	display_name = "Боевые импланты КПБ"
+	description = "Наступательные модули для синтетических организмов IPC: встроенное оружие, ускорители реакции."
+	prereq_ids = list(TECHWEB_NODE_COMBAT_IMPLANTS)
+	design_ids = list(
 		"ipc_implant_arm_razor",
 		"ipc_implant_mantis_right",
 		"ipc_implant_mantis_left",
 		"ipc_implant_arm_cannon",
 		"ipc_implant_sandevistan",
 	)
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_3_POINTS)
+	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 // ============================================================
 // ПЛАТА СИНТЕТИЧЕСКОГО ДИАГНОСТИЧЕСКОГО ТЕРМИНАЛА
@@ -71,11 +84,11 @@
 // ============================================================
 
 /datum/design/synthetic_diagnostic_table
-	name = "Синтетический диагностический стол"
-	desc = "Специализированный операционный стол для синтетических организмов с зарядкой, охлаждением и сетевым портом."
+	name = "Набор синтетического диагностического стола"
+	desc = "Компоненты для сборки синтетического диагностического стола. Примените к раме стола для окончательной сборки."
 	id = "synthetic_diagnostic_table"
 	build_type = PROTOLATHE | AWAY_LATHE
-	build_path = /obj/structure/table/optable/synthetic
+	build_path = /obj/item/stack/synthetic_table_kit
 	materials = list(
 		/datum/material/silver  = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/iron    = SHEET_MATERIAL_AMOUNT * 2,
@@ -91,10 +104,10 @@
 // ============================================================
 
 /datum/design/ipc_bodypart_head
-	name = "Голова КПБ"
-	desc = "Корпусная часть головы для синтетического организма IPC."
+	name = "Голова КПБ (монитор)"
+	desc = "Голова-монитор для синтетического организма IPC с встроенным дисплеем."
 	id = "ipc_bodypart_head"
-	build_path = /obj/item/bodypart/head/ipc
+	build_path = /obj/item/bodypart/head/ipc/monitor
 	materials = list(
 		/datum/material/iron  = SHEET_MATERIAL_AMOUNT * 3,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT,
@@ -232,7 +245,7 @@
 // ============================================================
 
 /datum/design/ipc_implant_magnetic_joints
-	name = "Магнитные суставы КПБ"
+	name = "Магнитные суставы"
 	desc = "Имплант: магнитные суставы, препятствующие отрыву конечностей."
 	id = "ipc_implant_magnetic_joints"
 	build_path = /obj/item/implant/ipc/magnetic_joints
@@ -244,7 +257,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_sealed_joints
-	name = "Запечатанные суставы КПБ"
+	name = "Запечатанные суставы"
 	desc = "Имплант: запечатанные суставы повышенной прочности."
 	id = "ipc_implant_sealed_joints"
 	build_path = /obj/item/implant/ipc/sealed_joints
@@ -256,7 +269,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_reactive_repair
-	name = "Реактивный ремонт КПБ"
+	name = "Реактивный ремонт"
 	desc = "Имплант: система автоматического восстановления повреждений."
 	id = "ipc_implant_reactive_repair"
 	build_path = /obj/item/implant/ipc/reactive_repair
@@ -269,7 +282,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_magnetic_leg
-	name = "Магнитная нога КПБ"
+	name = "Магнитные ботинки"
 	desc = "Имплант: магнитные ботинки для фиксации на металлических поверхностях."
 	id = "ipc_implant_magnetic_leg"
 	build_path = /obj/item/implant/ipc/magnetic_leg
@@ -281,7 +294,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_arm_razor
-	name = "Моновайер КПБ"
+	name = "Моновайер"
 	desc = "Имплант: монофиламентная режущая струна в предплечье."
 	id = "ipc_implant_arm_razor"
 	build_path = /obj/item/implant/ipc/arm_razor
@@ -317,8 +330,8 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_arm_cannon
-	name = "Дробовик в руке КПБ"
-	desc = "Имплант: встроенный дробовик в предплечье IPC."
+	name = "Встроенный дробовик"
+	desc = "Имплант: встроенный дробовик в предплечье."
 	id = "ipc_implant_arm_cannon"
 	build_path = /obj/item/implant/ipc/arm_cannon
 	materials = list(
@@ -329,7 +342,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_sandevistan
-	name = "Сандевистан КПБ"
+	name = "Сандевистан"
 	desc = "Имплант: ускоритель реакции — кратковременное ускорение всех систем."
 	id = "ipc_implant_sandevistan"
 	build_path = /obj/item/implant/ipc/sandevistan
