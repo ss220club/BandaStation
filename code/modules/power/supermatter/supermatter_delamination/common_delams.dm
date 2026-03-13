@@ -11,7 +11,7 @@
 		return FALSE
 	sm.radio.talk_into(
 		sm,
-		"Предупреждение: Достигнута критическая масса охлаждающего вещества.",
+		"Предупреждение: достигнута критическая масса охлаждающего вещества.",
 		sm.damage > sm.emergency_point ? sm.emergency_channel : sm.warning_channel
 	)
 	return TRUE
