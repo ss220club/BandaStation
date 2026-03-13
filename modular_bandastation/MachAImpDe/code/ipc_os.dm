@@ -1226,23 +1226,25 @@
 // ============================================
 
 /// Проверка подключения к сети (нужен сетевой кабель рядом)
+/// Если уже подключён (например, через синтетический стол) — не сбрасываем
 /datum/ipc_operating_system/proc/check_network_connection()
 	if(!owner)
 		network_connected = FALSE
 		return FALSE
 
-	// Ищем сетевой кабель под IPC или рядом
+	// Уже подключён через стол или другой источник — не переопределяем
+	if(network_connected)
+		return TRUE
+
+	// Ищем сетевой кабель под IPC
 	var/turf/T = get_turf(owner)
 	if(!T)
-		network_connected = FALSE
 		return FALSE
 
-	// Ищем кабель на тайле где стоит IPC
 	for(var/obj/structure/cable/C in T)
 		network_connected = TRUE
 		return TRUE
 
-	network_connected = FALSE
 	return FALSE
 
 /// Начать загрузку приложения (имитация)
@@ -1353,11 +1355,19 @@
 	pending_access_request = TRUE
 	requesting_user = requester
 
+	// Уведомляем запрашивающего что запрос отправлен
+	to_chat(requester, span_notice("Запрос на удалённый доступ к ОС отправлен пациенту ([owner.name]). Ожидайте ответа."))
+
 	// Уведомляем IPC
 	to_chat(owner, span_notice("СИСТЕМА: Получен запрос на удалённый доступ к ОС от [requester.name]. Проверьте вашу ОС."))
 
 	// Открываем ОС у IPC если не открыта
 	ui_interact(owner)
+
+	// Если IPC без клиента (кукла/NPC) — авто-одобряем запрос
+	if(!owner.client)
+		approve_access()
+		return TRUE
 
 	SStgui.update_uis(src)
 	return TRUE
@@ -1380,8 +1390,10 @@
 	to_chat(owner, span_notice("ОС: Удалённый доступ предоставлен [requester.name] (режим разрешений)."))
 	to_chat(requester, span_notice("Удалённый доступ к ОС пациента одобрен (режим разрешений — действия требуют подтверждения)."))
 
-	// Открываем ОС для роботехника
+	// Открываем ОС для роботехника и для самого IPC
 	ui_interact(requester)
+	if(owner)
+		ui_interact(owner)
 
 	SStgui.update_uis(src)
 	return TRUE
@@ -1404,8 +1416,13 @@
 /datum/ipc_operating_system/proc/remote_login(mob/requester, input_password)
 	if(!requester)
 		return FALSE
+
+	// Если уже подключены — просто переоткрываем окно ОС
 	if(remote_viewer)
-		to_chat(requester, span_warning("Удалённый доступ уже активен."))
+		if(remote_viewer == requester)
+			ui_interact(requester)
+			return TRUE
+		to_chat(requester, span_warning("Удалённый доступ уже активен другим пользователем."))
 		return FALSE
 
 	if(!check_password(input_password))
@@ -1422,9 +1439,8 @@
 	to_chat(owner, span_warning("ОС: Обнаружен удалённый вход в систему по паролю от [requester.name]!"))
 	to_chat(requester, span_notice("Доступ к ОС пациента получен по паролю (полный доступ)."))
 
-	// Открываем ОС для роботехника
+	// Открываем ОС для роботехника и для самого IPC
 	ui_interact(requester)
-	// Также открываем для IPC
 	if(owner)
 		ui_interact(owner)
 

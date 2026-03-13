@@ -1,4 +1,135 @@
 // ============================================
+// СИНТЕТИЧЕСКАЯ ДИАГНОСТИЧЕСКАЯ СИСТЕМА
+// ============================================
+// Стол + терминал — одна система для диагностики IPC.
+// Стол заряжает батарею, охлаждает CPU, подключает к сети.
+// Терминал считывает данные со стола и предоставляет UI.
+// ============================================
+
+// ============================================
+// ДИАГНОСТИЧЕСКИЙ СТОЛ ДЛЯ СИНТЕТИКОВ
+// ============================================
+// Специализированный стол для IPC с дополнительными функциями:
+// - Зарядка батареи
+// - Охлаждение CPU
+// - Сетевое подключение (для NET-door приложения ОС)
+// ============================================
+
+/obj/structure/table/optable/synthetic
+	name = "synthetic diagnostic table"
+	desc = "Специализированный диагностический стол для синтетических организмов. Оснащён системами зарядки, охлаждения и сетевым портом."
+	icon = 'modular_bandastation/MachAImpDe/icons/net_table.dmi'
+	icon_state = "ipc_net_table"
+
+	/// Скорость зарядки батареи (units/тик)
+	var/charge_rate = 50
+	/// Скорость охлаждения CPU (°C/тик)
+	var/cooling_rate = 2
+	/// Текущий IPC-пациент (для отслеживания сетевого подключения)
+	var/mob/living/carbon/human/current_ipc_patient = null
+
+/obj/structure/table/optable/synthetic/Initialize(mapload, obj/structure/table_frame/frame_used, obj/item/stack/stack_used)
+	. = ..()
+
+	// Переопределяем привязку к компьютеру — ищем synthetic terminal
+	if(computer)
+		// Родительский Initialize уже нашёл обычный operating computer
+		// Если это не synthetic — сбрасываем
+		if(!istype(computer, /obj/machinery/computer/operating/synthetic))
+			computer.table = null
+			computer = null
+
+	// Ищем synthetic diagnostic terminal рядом
+	if(!computer)
+		for(var/direction in GLOB.alldirs)
+			var/obj/machinery/computer/operating/synthetic/synth_comp = locate(/obj/machinery/computer/operating/synthetic) in get_step(src, direction)
+			if(synth_comp)
+				computer = synth_comp
+				synth_comp.table = src
+				break
+
+	START_PROCESSING(SSmachines, src)
+
+/obj/structure/table/optable/synthetic/Destroy()
+	// Сбрасываем сетевое подключение если IPC уходит
+	disconnect_ipc_network()
+	STOP_PROCESSING(SSmachines, src)
+	return ..()
+
+/obj/structure/table/optable/synthetic/process(seconds_per_tick)
+	if(!patient)
+		// Пациент ушёл — отключаем сеть
+		if(current_ipc_patient)
+			disconnect_ipc_network()
+		return
+
+	// Проверяем что пациент — IPC
+	var/mob/living/carbon/human/H = patient
+	if(!istype(H) || !istype(H.dna?.species, /datum/species/ipc))
+		if(current_ipc_patient)
+			disconnect_ipc_network()
+		return
+
+	var/datum/species/ipc/ipc_species = H.dna.species
+
+	// Запоминаем текущего IPC-пациента
+	if(current_ipc_patient != H)
+		disconnect_ipc_network() // Отключаем предыдущего
+		current_ipc_patient = H
+		connect_ipc_network(H) // Подключаем нового
+
+	// --- ЗАРЯДКА БАТАРЕИ ---
+	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(battery && battery.charge < battery.maxcharge)
+		battery.charge = min(battery.charge + charge_rate * seconds_per_tick, battery.maxcharge)
+
+	// --- ОХЛАЖДЕНИЕ CPU ---
+	if(ipc_species.cpu_temperature > ipc_species.cpu_temp_optimal_min)
+		ipc_species.cpu_temperature = max(ipc_species.cpu_temperature - cooling_rate * seconds_per_tick, ipc_species.cpu_temp_optimal_min)
+
+/// Подключаем IPC к сети через стол
+/obj/structure/table/optable/synthetic/proc/connect_ipc_network(mob/living/carbon/human/H)
+	if(!H)
+		return
+	var/datum/species/ipc/ipc_species = H.dna?.species
+	if(!istype(ipc_species) || !ipc_species.ipc_os)
+		return
+	ipc_species.ipc_os.network_connected = TRUE
+
+/// Отключаем IPC от сети при уходе со стола
+/obj/structure/table/optable/synthetic/proc/disconnect_ipc_network()
+	if(!current_ipc_patient)
+		return
+	var/datum/species/ipc/ipc_species = current_ipc_patient.dna?.species
+	if(istype(ipc_species) && ipc_species.ipc_os)
+		ipc_species.ipc_os.network_connected = FALSE
+		// Обрываем удалённый доступ роботехника — пациент покинул стол
+		ipc_species.ipc_os.revoke_remote_access()
+	current_ipc_patient = null
+
+/// Переопределяем set_patient чтобы отслеживать смену пациента
+/obj/structure/table/optable/synthetic/set_patient(mob/living/carbon/new_patient)
+	// Отключаем старого IPC-пациента от сети
+	if(current_ipc_patient && current_ipc_patient != new_patient)
+		disconnect_ipc_network()
+	. = ..()
+	// Если новый пациент — IPC, подключаем к сети
+	if(new_patient)
+		var/mob/living/carbon/human/H = new_patient
+		if(istype(H) && istype(H.dna?.species, /datum/species/ipc))
+			current_ipc_patient = H
+			connect_ipc_network(H)
+
+// ============================================
+// ПЛАТА СИНТЕТИЧЕСКОГО ДИАГНОСТИЧЕСКОГО ТЕРМИНАЛА
+// ============================================
+
+/obj/item/circuitboard/computer/operating/synthetic
+	name = "Synthetic Diagnostic Terminal"
+	greyscale_colors = CIRCUIT_COLOR_SCIENCE
+	build_path = /obj/machinery/computer/operating/synthetic
+
+// ============================================
 // ДИАГНОСТИЧЕСКИЙ ТЕРМИНАЛ ДЛЯ СИНТЕТИКОВ
 // ============================================
 
@@ -6,9 +137,11 @@
 	name = "synthetic diagnostic terminal"
 	desc = "Специализированный терминал для диагностики синтетических организмов - IPC и андроидов."
 	icon = 'modular_bandastation/MachAImpDe/icons/computer.dmi'
-	icon_screen = "computer_robo"
+	icon_state = "computer_robo"
+	icon_screen = "ipc_crew"
 	icon_keyboard = "tech_key"
 	light_color = COLOR_BLUE_LIGHT
+	circuit = /obj/item/circuitboard/computer/operating/synthetic
 
 /// Переопределяем поиск стола — приоритет synthetic diagnostic table
 /obj/machinery/computer/operating/synthetic/find_table()
@@ -69,6 +202,15 @@
 
 	// Поиск пациента
 	if(!table.patient)
+		// Если сам пользователь IPC — режим самодиагностики
+		if(istype(user, /mob/living/carbon/human))
+			var/mob/living/carbon/human/self_user = user
+			if(istype(self_user.dna?.species, /datum/species/ipc))
+				data["patient"] = get_patient_data(self_user)
+				data["target_zone"] = target_zone
+				data["surgeries"] = list()  // Операции над собой недоступны
+				data["self_mode"] = TRUE
+				return data
 		data["patient"] = null
 		data["error"] = "Пациент не обнаружен на столе"
 		return data
@@ -423,32 +565,6 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			"details" = "КРИТИЧНО: Требуется установка"
 		))
 
-	// Система охлаждения
-	var/obj/item/organ/lungs/ipc/cooling = patient.get_organ_slot(ORGAN_SLOT_LUNGS)
-	if(cooling)
-		var/efficiency_percent = round(cooling.cooling_efficiency * 100)
-		var/status_color = "good"
-		if(efficiency_percent < 50)
-			status_color = "bad"
-		else if(efficiency_percent < 80)
-			status_color = "average"
-
-		components += list(list(
-			"name" = "Система охлаждения",
-			"status" = "Установлена",
-			"status_color" = status_color,
-			"damage" = cooling.damage,
-			"details" = "Эффективность: [efficiency_percent]%"
-		))
-	else
-		components += list(list(
-			"name" = "Система охлаждения",
-			"status" = "ОТСУТСТВУЕТ",
-			"status_color" = "average",
-			"damage" = 0,
-			"details" = "ПРЕДУПРЕЖДЕНИЕ: Риск перегрева"
-		))
-
 	// Оптические сенсоры
 	var/obj/item/organ/eyes/robotic/ipc/eyes = patient.get_organ_slot(ORGAN_SLOT_EYES)
 	if(eyes)
@@ -626,7 +742,6 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 
 	var/obj/item/organ/brain/positronic/brain = patient.get_organ_slot(ORGAN_SLOT_BRAIN)
 	var/obj/item/organ/heart/ipc_battery/battery = patient.get_organ_slot(ORGAN_SLOT_HEART)
-	var/obj/item/organ/lungs/ipc/cooling = patient.get_organ_slot(ORGAN_SLOT_LUNGS)
 
 	// Проверка температуры процессора
 	var/datum/species/ipc/ipc_species = patient.dna.species
@@ -679,12 +794,6 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			"message" = "ПРЕДУПРЕЖДЕНИЕ: Заряд батареи ниже 30%."
 		))
 
-	if(!cooling)
-		system_messages += list(list(
-			"type" = "warning",
-			"message" = "ПРЕДУПРЕЖДЕНИЕ: Система охлаждения отсутствует. Риск перегрева."
-		))
-
 	if(patient.get_brute_loss() > 50)
 		system_messages += list(list(
 			"type" = "warning",
@@ -717,11 +826,24 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 
 	return system_messages
 
-/obj/machinery/computer/operating/synthetic/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
-	. = ..()
-	if(.)
-		return
+/// Возвращает IPC-цель для debug/OS-экшнов:
+/// — пациент на столе (если есть и является IPC)
+/// — сам пользователь (если IPC и пациента нет — self-mode)
+/obj/machinery/computer/operating/synthetic/proc/get_ipc_target(mob/user)
+	if(table?.patient)
+		var/mob/living/carbon/human/H = table.patient
+		if(istype(H.dna?.species, /datum/species/ipc))
+			return H
+	// self-mode
+	if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(istype(H.dna?.species, /datum/species/ipc))
+			return H
+	return null
 
+/obj/machinery/computer/operating/synthetic/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	// ВАЖНО: Родительский operating/ui_act всегда возвращает TRUE (даже для необработанных действий),
+	// поэтому наши кейсы должны быть ПЕРЕД вызовом родителя, иначе они никогда не выполнятся.
 	var/mob/user = ui.user
 
 	switch(action)
@@ -731,13 +853,10 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			return TRUE
 
 		if("remove_virus")
-			// Роботехник удаляет вирус через терминал
-			if(!table?.patient)
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
 				return FALSE
-			var/mob/living/carbon/human/patient = table.patient
-			if(!istype(patient.dna?.species, /datum/species/ipc))
-				return FALSE
-			var/datum/species/ipc/ipc_species = patient.dna.species
+			var/datum/species/ipc/ipc_species = target.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
 			var/virus_index = text2num(params["virus_index"])
@@ -745,31 +864,25 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 				return FALSE
 			var/datum/ipc_virus/target_virus = ipc_species.ipc_os.viruses[virus_index]
 			if(ipc_species.ipc_os.remove_virus_by_roboticist(target_virus))
-				to_chat(user, span_notice("Вирус успешно удалён из системы пациента."))
-				to_chat(patient, span_notice("ОС: Обнаружено внешнее вмешательство. Вирус удалён роботехником."))
+				to_chat(user, span_notice("Вирус успешно удалён из системы."))
+				to_chat(target, span_notice("ОС: Вирус удалён внешним инструментом."))
 			return TRUE
 
 		if("request_os_access")
-			// Роботехник запрашивает доступ к ОС пациента
-			if(!table?.patient)
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
 				return FALSE
-			var/mob/living/carbon/human/patient = table.patient
-			if(!istype(patient.dna?.species, /datum/species/ipc))
-				return FALSE
-			var/datum/species/ipc/ipc_species = patient.dna.species
+			var/datum/species/ipc/ipc_species = target.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
 			ipc_species.ipc_os.request_remote_access(user)
 			return TRUE
 
 		if("login_os_password")
-			// Роботехник входит в ОС по паролю
-			if(!table?.patient)
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
 				return FALSE
-			var/mob/living/carbon/human/patient = table.patient
-			if(!istype(patient.dna?.species, /datum/species/ipc))
-				return FALSE
-			var/datum/species/ipc/ipc_species = patient.dna.species
+			var/datum/species/ipc/ipc_species = target.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
 			var/input_password = params["password"]
@@ -778,46 +891,33 @@ GLOBAL_LIST_INIT(ipc_all_operations, list(
 			ipc_species.ipc_os.remote_login(user, input_password)
 			return TRUE
 
+		if("open_os_window")
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
+				return FALSE
+			var/datum/species/ipc/ipc_species = target.dna.species
+			if(!ipc_species.ipc_os)
+				return FALSE
+			// Открываем окно ОС для роботехника
+			ipc_species.ipc_os.ui_interact(user)
+			// И для самого IPC чтобы он видел что происходит
+			if(target.client && target != user)
+				ipc_species.ipc_os.ui_interact(target)
+			return TRUE
+
 		if("disconnect_os_remote")
-			// Роботехник отключает удалённый доступ
-			if(!table?.patient)
+			var/mob/living/carbon/human/target = get_ipc_target(user)
+			if(!target)
 				return FALSE
-			var/mob/living/carbon/human/patient = table.patient
-			if(!istype(patient.dna?.species, /datum/species/ipc))
-				return FALSE
-			var/datum/species/ipc/ipc_species = patient.dna.species
+			var/datum/species/ipc/ipc_species = target.dna.species
 			if(!ipc_species.ipc_os)
 				return FALSE
 			ipc_species.ipc_os.revoke_remote_access()
 			return TRUE
 
-		if("inject_test_virus")
-			// DEBUG: Внедрение тестового вируса (для тестирования)
-			if(!table?.patient)
-				return FALSE
-			var/mob/living/carbon/human/patient = table.patient
-			if(!istype(patient.dna?.species, /datum/species/ipc))
-				return FALSE
-			var/datum/species/ipc/ipc_species = patient.dna.species
-			if(!ipc_species.ipc_os)
-				return FALSE
-			var/virus_type = params["virus_type"]
-			var/datum/ipc_virus/new_virus
-			switch(virus_type)
-				if("display_glitch")
-					new_virus = new /datum/ipc_virus/display_glitch()
-				if("memory_leak")
-					new_virus = new /datum/ipc_virus/memory_leak()
-				if("sensor_noise")
-					new_virus = new /datum/ipc_virus/sensor_noise()
-				if("core_corruption")
-					new_virus = new /datum/ipc_virus/core_corruption()
-				if("neural_hijack")
-					new_virus = new /datum/ipc_virus/neural_hijack()
-			if(new_virus)
-				ipc_species.ipc_os.infect(new_virus)
-				to_chat(user, span_notice("Тестовый вирус внедрён."))
-			return TRUE
+	// Для всех остальных действий — передаём родителю
+	return ..()
+
 
 // ============================================
 // БЛОКИРОВКА ОБЫЧНОГО ТЕРМИНАЛА ДЛЯ IPC

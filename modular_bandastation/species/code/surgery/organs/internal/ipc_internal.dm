@@ -18,39 +18,14 @@
 	var/max_damage = 100
 	var/obj/item/mmi/linked_mmi = null
 
-/obj/item/organ/brain/positronic/Initialize(mapload)
-	. = ..()
-	// Убедимся что иконка правильная
-	if(!icon_state)
-		icon_state = "posibrain"
-
 /obj/item/organ/brain/positronic/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, movement_flags)
 	. = ..()
 	if(.)
 		to_chat(M, span_notice("Позитронное ядро активировано."))
-
-		// АВТОМАТИЧЕСКОЕ ОЖИВЛЕНИЕ: Если были без сознания и есть батарея
-		if(M.stat == UNCONSCIOUS)
-			var/obj/item/organ/heart/ipc_battery/battery = M.get_organ_slot(ORGAN_SLOT_HEART)
-			if(battery && istype(battery))
-				M.set_stat(CONSCIOUS)
-				M.SetUnconscious(0)
-				to_chat(M, span_boldnotice("СИСТЕМЫ ВОССТАНОВЛЕНЫ: Контроль над телом возвращён!"))
-
-		// Если были мертвы и есть батарея - тоже оживаем
-		else if(M.stat == DEAD)
-			var/obj/item/organ/heart/ipc_battery/battery = M.get_organ_slot(ORGAN_SLOT_HEART)
-			if(battery && istype(battery))
-				M.set_stat(CONSCIOUS)
-				M.SetUnconscious(0, FALSE)
-				M.losebreath = 0
-				M.failed_last_breath = FALSE
-				M.update_damage_hud()
-				M.updatehealth()
-				M.reload_fullscreen()
-
-				to_chat(M, span_boldnotice("СИСТЕМЫ ВОССТАНОВЛЕНЫ: Позитронное ядро онлайн!"))
-				do_sparks(8, TRUE, M)
+		if(M.stat == DEAD || M.stat == UNCONSCIOUS)
+			if(ipc_has_power_source(M))
+				if(ipc_heart_check_revive(M))
+					to_chat(M, span_boldnotice("СИСТЕМЫ ВОССТАНОВЛЕНЫ: Позитронное ядро онлайн!"))
 
 /obj/item/organ/brain/positronic/Remove(mob/living/carbon/M, special = FALSE, movement_flags)
 	if(owner)
@@ -113,11 +88,6 @@
 	var/charging = FALSE
 	var/charge_efficiency = 1.0
 
-/obj/item/organ/heart/ipc_battery/Initialize(mapload)
-	. = ..()
-	// НЕ вызываем update_appearance() чтобы не ломать иконку
-	icon_state = "ipc_cell"
-
 /obj/item/organ/heart/ipc_battery/examine(mob/user)
 	. = ..()
 	. += span_notice("Заряд: [charge]/[maxcharge] ([round((charge/maxcharge)*100)]%)")
@@ -126,22 +96,9 @@
 	. = ..()
 	if(.)
 		to_chat(M, span_notice("Источник питания подключен. Заряд: [charge]/[maxcharge]."))
-
-		// АВТОМАТИЧЕСКОЕ ОЖИВЛЕНИЕ: Если есть и мозг и батарея
-		if(M.stat == DEAD)
-			var/obj/item/organ/brain/positronic/brain = M.get_organ_slot(ORGAN_SLOT_BRAIN)
-			if(brain && istype(brain))
-				// Оживляем без лечения урона
-				M.set_stat(CONSCIOUS)
-				M.SetUnconscious(0, FALSE)
-				M.losebreath = 0
-				M.failed_last_breath = FALSE
-				M.update_damage_hud()
-				M.updatehealth()
-				M.reload_fullscreen()
-
+		if(M.stat == DEAD || M.stat == UNCONSCIOUS)
+			if(ipc_heart_check_revive(M))
 				to_chat(M, span_boldnotice("СИСТЕМЫ ВОССТАНОВЛЕНЫ: Питание возобновлено. Инициализация..."))
-				do_sparks(8, TRUE, M)
 
 /obj/item/organ/heart/ipc_battery/Remove(mob/living/carbon/M, special = FALSE, movement_flags)
 	if(owner)
@@ -204,13 +161,6 @@
 
 	var/cooling_power = 1.0
 	var/cooling_efficiency = 1.0
-	var/damaged = FALSE
-
-/obj/item/organ/lungs/ipc/Initialize(mapload)
-	. = ..()
-	if(!icon_state)
-		icon_state = "ipc_cooler"
-	update_appearance()
 
 /obj/item/organ/lungs/ipc/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, movement_flags)
 	. = ..()
@@ -241,7 +191,6 @@
 	switch(severity)
 		if(1) // EMP_HEAVY
 			cooling_efficiency = max(0.1, cooling_efficiency - 0.5)
-			damaged = TRUE
 			to_chat(owner, span_danger("ОШИБКА: Система охлаждения повреждена!"))
 		if(2) // EMP_LIGHT
 			cooling_efficiency = max(0.5, cooling_efficiency - 0.2)
@@ -258,12 +207,6 @@
 	icon_state = "ipc_eyes"
 	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
-
-/obj/item/organ/eyes/robotic/ipc/Initialize(mapload)
-	. = ..()
-	if(!icon_state)
-		icon_state = "ipc_eyes"
-	update_appearance()
 
 /obj/item/organ/eyes/robotic/ipc/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, movement_flags)
 	. = ..()
@@ -284,12 +227,6 @@
 	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
 
-/obj/item/organ/ears/robot/ipc/Initialize(mapload)
-	. = ..()
-	if(!icon_state)
-		icon_state = "ears-c"
-	update_appearance()
-
 // ============================================
 // ЯЗЫК
 // ============================================
@@ -304,12 +241,6 @@
 	organ_flags = ORGAN_ROBOTIC
 
 	modifies_speech = TRUE
-
-/obj/item/organ/tongue/robot/ipc/Initialize(mapload)
-	. = ..()
-	if(!icon_state)
-		icon_state = "ipc_voicebox"
-	update_appearance()
 
 /obj/item/organ/tongue/robot/ipc/handle_speech(datum/source, list/speech_args)
 	// Можно добавить роботический фильтр речи

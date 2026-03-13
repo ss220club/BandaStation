@@ -204,6 +204,7 @@ export const IPCCustomizationPage = (props: IPCCustomizationProps) => {
   const customization: IPCCustomization = data.ipc_customization || {
     chassis_brand: 'unbranded',
     brain_type: 'positronic',
+    os_password: '',
     hef_head: 'unbranded',
     hef_chest: 'unbranded',
     hef_l_arm: 'unbranded',

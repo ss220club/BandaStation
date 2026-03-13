@@ -1,6 +1,5 @@
 import React, {
   useCallback,
-  useContext,
   useEffect,
   useRef,
   useState,
@@ -120,38 +119,14 @@ type IpcOsData = {
   pda_id_name: string;
 };
 
-// ============================================
-// DEBUG STYLE CONTEXT
-// ============================================
-
-type DebugStyleContextType = {
-  debugBrand: string | null;
-  setDebugBrand: (brand: string | null) => void;
-};
-
-const DebugStyleContext = React.createContext<DebugStyleContextType>({
-  debugBrand: null,
-  setDebugBrand: () => {},
-});
-
-/**
- * Хук для получения активной темы ОС.
- * Если активен дебаг-оверрайд — возвращает его стиль, иначе — реальный из backend.
- */
+/** Хук для получения активной темы ОС из backend. */
 function useOsTheme() {
   const { data } = useBackend<IpcOsData>();
-  const { debugBrand } = useContext(DebugStyleContext);
-
-  const effectiveBrand = debugBrand ?? safeStr(data.brand_key, 'unbranded');
-  const theme_color = debugBrand
-    ? getOsBrandColor(debugBrand)
-    : safeStr(data.theme_color, '#6a6a6a');
-  const os_name = debugBrand
-    ? getOsStyleName(debugBrand)
-    : safeStr(data.os_name, 'IPC-OS');
-  const style = getOsStyle(effectiveBrand);
-
-  return { theme_color, brand_key: effectiveBrand, os_name, style };
+  const brand_key = safeStr(data.brand_key, 'unbranded');
+  const theme_color = safeStr(data.theme_color, '#6a6a6a');
+  const os_name = safeStr(data.os_name, 'IPC-OS');
+  const style = getOsStyle(brand_key);
+  return { theme_color, brand_key, os_name, style };
 }
 
 // ============================================
@@ -180,25 +155,13 @@ function safeBool(val: boolean | number | null | undefined): boolean {
 
 export const IpcOperatingSystem = () => {
   const { data } = useBackend<IpcOsData>();
-  const [debugBrand, setDebugBrand] = useState<string | null>(null);
-
-  const effectiveBrand = debugBrand ?? safeStr(data.brand_key, 'unbranded');
-  const theme_color = debugBrand
-    ? getOsBrandColor(debugBrand)
-    : safeStr(data.theme_color, '#6a6a6a');
-  const os_name = debugBrand
-    ? getOsStyleName(debugBrand)
-    : safeStr(data.os_name, 'IPC-OS');
-  const style = getOsStyle(effectiveBrand);
+  const { theme_color, os_name, style } = useOsTheme();
 
   const logged_in = safeBool(data.logged_in);
   const current_app = safeStr(data.current_app, 'desktop');
 
-  // Высота дебаг-бара в пикселях — контент ниже него сдвигается на это значение
-  const DEBUG_BAR_H = 28;
-
   return (
-    <DebugStyleContext.Provider value={{ debugBrand, setDebugBrand }}>
+    <>
       <Window width={700} height={650} title={os_name}>
         {/*
           fitted — убирает Window__contentPadding-обёртку, дети рендерятся
@@ -262,24 +225,11 @@ export const IpcOperatingSystem = () => {
             />
           )}
 
-          {/* Дебаг-бар — абсолютно позиционирован у верхней границы, z=200 */}
+          {/* Основной контент */}
           <Box
             style={{
               position: 'absolute',
               top: 0,
-              left: 0,
-              right: 0,
-              zIndex: 200,
-            }}
-          >
-            <DebugStyleBar />
-          </Box>
-
-          {/* Основной контент — ниже дебаг-бара, заполняет остаток окна */}
-          <Box
-            style={{
-              position: 'absolute',
-              top: DEBUG_BAR_H,
               left: 0,
               right: 0,
               bottom: 0,
@@ -302,122 +252,10 @@ export const IpcOperatingSystem = () => {
           </Box>
         </Window.Content>
       </Window>
-    </DebugStyleContext.Provider>
+    </>
   );
 };
 
-// ============================================
-// DEBUG STYLE BAR
-// ============================================
-
-/** Дебаг-панель сверху для переключения стилей ОС на лету. */
-const DebugStyleBar = () => {
-  const { debugBrand, setDebugBrand } = useContext(DebugStyleContext);
-  const { data } = useBackend<IpcOsData>();
-  const realBrand = safeStr(data.brand_key, 'unbranded');
-
-  const brands = [...ALL_BRAND_KEYS];
-  const currentIdx = debugBrand ? brands.indexOf(debugBrand as (typeof ALL_BRAND_KEYS)[number]) : -1;
-
-  const cycleNext = () => {
-    const nextIdx = (currentIdx + 1) % brands.length;
-    setDebugBrand(brands[nextIdx]);
-  };
-
-  const cyclePrev = () => {
-    const prevIdx = (currentIdx - 1 + brands.length) % brands.length;
-    setDebugBrand(brands[prevIdx]);
-  };
-
-  const reset = () => setDebugBrand(null);
-
-  const activeStyle = debugBrand ? getOsStyle(debugBrand) : null;
-  const activeColor = debugBrand ? getOsBrandColor(debugBrand) : '#aaa';
-
-  return (
-    <Box
-      style={{
-        background: 'rgba(40,30,0,0.85)',
-        borderBottom: '1px dashed rgba(255,200,0,0.45)',
-        padding: '2px 6px',
-        fontSize: '0.7em',
-      }}
-    >
-      <Flex align="center" justify="space-between">
-        <Flex.Item>
-          <Box bold color="average">
-            <Icon name="bug" mr={0.4} />
-            DEV
-          </Box>
-        </Flex.Item>
-
-        <Flex.Item grow ml={1} mr={1}>
-          {debugBrand ? (
-            <Flex align="center">
-              <Flex.Item>
-                <Box
-                  as="span"
-                  bold
-                  style={{ color: activeColor }}
-                >
-                  {getOsStyleName(debugBrand)}
-                </Box>
-              </Flex.Item>
-              <Flex.Item ml={0.5}>
-                <Box as="span" color="label">
-                  — {activeStyle?.styleDesc}
-                </Box>
-              </Flex.Item>
-              <Flex.Item ml={0.5}>
-                <Box as="span" color="label">
-                  [{currentIdx + 1}/{brands.length}]
-                </Box>
-              </Flex.Item>
-            </Flex>
-          ) : (
-            <Box color="label">
-              реальный:{' '}
-              <Box as="span" color="average">
-                {getOsStyleName(realBrand)}
-              </Box>
-            </Box>
-          )}
-        </Flex.Item>
-
-        <Flex.Item>
-          <Flex align="center">
-            <Button
-              compact
-              color="transparent"
-              icon="chevron-left"
-              tooltip="Предыдущий стиль"
-              onClick={cyclePrev}
-            />
-            <Button
-              compact
-              color="average"
-              icon="sync"
-              mr={0.3}
-              tooltip="Следующий стиль"
-              onClick={cycleNext}
-            >
-              Стиль
-            </Button>
-            {debugBrand && (
-              <Button
-                compact
-                color="transparent"
-                icon="times"
-                tooltip="Сбросить к реальному стилю"
-                onClick={reset}
-              />
-            )}
-          </Flex>
-        </Flex.Item>
-      </Flex>
-    </Box>
-  );
-};
 
 // ============================================
 // UTILITIES

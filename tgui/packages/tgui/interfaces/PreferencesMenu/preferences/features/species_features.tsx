@@ -287,6 +287,15 @@ export const feature_ipc_charger_arm: FeatureChoiced = {
   },
 };
 
+export const feature_ipc_head_type: FeatureChoiced = {
+  name: 'Тип головы',
+  component: (
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
+  ) => {
+    return <FeatureDropdownInput buttons {...props} />;
+  },
+};
+
 export const ipc_head_accessory_color: Feature<string> = {
   name: 'Аксессуар головы - цвет',
   component: FeatureColorInput,
@@ -294,5 +303,10 @@ export const ipc_head_accessory_color: Feature<string> = {
 
 export const ipc_tail_color: Feature<string> = {
   name: 'Хвост - цвет',
+  component: FeatureColorInput,
+};
+
+export const ipc_tail_secondary_color: Feature<string> = {
+  name: 'Хвост - вторичный цвет',
   component: FeatureColorInput,
 };

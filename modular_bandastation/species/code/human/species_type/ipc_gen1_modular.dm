@@ -11,10 +11,10 @@
 // - Смена модуля занимает 2.5 минуты
 //
 // ПЕРКИ ПО МОДУЛЮ:
-//   Медицинский:       +20% действий, саморемонт x3, ускоренный ремонт интервал
-//   Инженерный:        +20% действий, -50% стоимость ремонта, лучше бронирование от брута
-//   Охранный:          +20% действий, оружие разрешено, emp_vulnerability снижена, лучшая защита от брута
-//   Исследовательский: +20% действий, выше порог оптимальной температуры, повышенный крит-порог нагрева
+//   Медицинский:       +20% действий, Мед HUD, +25% скорость операций (хирург)
+//   Инженерный:        +20% действий, иммунитет к удару током (провода)
+//   Охранный:          +20% действий, HUD безопасности, оружие разрешено
+//   Исследовательский: +20% действий, химический анализатор
 
 #define IPC_GEN1_TRAIT_SOURCE  "ipc_gen1"
 #define TRAIT_MEDICAL_ACES     "ipc_medical_aces"
@@ -69,21 +69,15 @@
 
 	REMOVE_TRAIT(H, TRAIT_STUNIMMUNE, IPC_GEN1_TRAIT_SOURCE)
 	ipc_repair_cost_mod = 1.0
-
-	// Возвращаем базовые температурные параметры
-	cpu_temp_optimal_max = 40
-	cpu_temp_critical = 130
-	brute_mod = 0.8
-	emp_vulnerability = 2
-	self_repair_amount = 0.5
-	self_repair_delay = 100
+	siemens_coeff = 1
 
 	H.remove_movespeed_modifier(/datum/movespeed_modifier/ipc_gen1_slow)
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_wrong_module)
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
+	REMOVE_TRAIT(H, TRAIT_MEDICAL_HUD, IPC_GEN1_TRAIT_SOURCE)
 	REMOVE_TRAIT(H, TRAIT_MEDICAL_ACES, IPC_GEN1_TRAIT_SOURCE)
-	REMOVE_TRAIT(H, TRAIT_ENGINEERING_ACES, IPC_GEN1_TRAIT_SOURCE)
-	REMOVE_TRAIT(H, TRAIT_SCIENCE_ACES, IPC_GEN1_TRAIT_SOURCE)
+	REMOVE_TRAIT(H, TRAIT_SECURITY_HUD, IPC_GEN1_TRAIT_SOURCE)
+	REMOVE_TRAIT(H, TRAIT_REAGENT_SCANNER, IPC_GEN1_TRAIT_SOURCE)
 	UnregisterSignal(H, COMSIG_MOB_ATTACK_HAND)
 
 	var/datum/action/innate/ipc_module_swap/swap_action = locate() in H.actions
@@ -95,50 +89,32 @@
 // ============================================
 
 /datum/species/ipc/proc/apply_gen1_module_effects(mob/living/carbon/human/H)
-	// Убираем старые модификаторы и трейты
+	// Убираем трейты и модификаторы предыдущего модуля
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_wrong_module)
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
+	REMOVE_TRAIT(H, TRAIT_MEDICAL_HUD, IPC_GEN1_TRAIT_SOURCE)
 	REMOVE_TRAIT(H, TRAIT_MEDICAL_ACES, IPC_GEN1_TRAIT_SOURCE)
-	REMOVE_TRAIT(H, TRAIT_ENGINEERING_ACES, IPC_GEN1_TRAIT_SOURCE)
-	REMOVE_TRAIT(H, TRAIT_SCIENCE_ACES, IPC_GEN1_TRAIT_SOURCE)
-
-	// Возвращаем базовые значения перед применением нового модуля
-	brute_mod = 0.8
-	emp_vulnerability = 2
-	cpu_temp_optimal_max = 40
-	cpu_temp_critical = 130
-	self_repair_amount = 0.5
-	self_repair_delay = 100
-	ipc_repair_cost_mod = 0.7
+	REMOVE_TRAIT(H, TRAIT_SECURITY_HUD, IPC_GEN1_TRAIT_SOURCE)
+	REMOVE_TRAIT(H, TRAIT_REAGENT_SCANNER, IPC_GEN1_TRAIT_SOURCE)
+	siemens_coeff = 1
 
 	switch(ipc_gen1_module)
 		if(IPC_MODULE_MEDICAL)
-			// Медицинский: максимальная скорость саморемонта
 			H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
+			ADD_TRAIT(H, TRAIT_MEDICAL_HUD, IPC_GEN1_TRAIT_SOURCE)
 			ADD_TRAIT(H, TRAIT_MEDICAL_ACES, IPC_GEN1_TRAIT_SOURCE)
-			self_repair_amount = 1.5   // 3x от базового (0.5)
-			self_repair_delay = 50     // Чинится вдвое быстрее
 
 		if(IPC_MODULE_ENGINEERING)
-			// Инженерный: дешевле ремонт, лучше переносит физический урон
 			H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
-			ADD_TRAIT(H, TRAIT_ENGINEERING_ACES, IPC_GEN1_TRAIT_SOURCE)
-			ipc_repair_cost_mod = 0.4  // На 60% дешевле чинить
-			brute_mod = 0.65           // Упрочнённый корпус
+			siemens_coeff = 0  // Полная изоляция: провода не наносят урон
 
 		if(IPC_MODULE_SECURITY)
-			// Охранный: оружие + военное укрепление
 			H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
-			brute_mod = 0.6            // Бронированный корпус
-			emp_vulnerability = 1.5    // Военная защита от ЭМИ
+			ADD_TRAIT(H, TRAIT_SECURITY_HUD, IPC_GEN1_TRAIT_SOURCE)
 
 		if(IPC_MODULE_RESEARCH)
-			// Исследовательский: термостойкость + ЭМИ-защита
 			H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
-			ADD_TRAIT(H, TRAIT_SCIENCE_ACES, IPC_GEN1_TRAIT_SOURCE)
-			cpu_temp_optimal_max = 60  // Работает эффективно до 60°C вместо 40°C
-			cpu_temp_critical = 160    // Критический перегрев позже
-			emp_vulnerability = 1.5    // Экранированная лабораторная электроника
+			ADD_TRAIT(H, TRAIT_REAGENT_SCANNER, IPC_GEN1_TRAIT_SOURCE)
 
 	gen1_update_weapon_block(H)
 
@@ -157,7 +133,7 @@
 		return
 
 	// Отменяем переконфигурацию если персонаж оглушён или мёртв
-	if(H.stat == DEAD || H.IsStunned())
+	if(H.stat == DEAD || H.IsStun())
 		cancel_module_switch(H)
 		return
 
@@ -181,20 +157,14 @@
 	module_switch_start_time = world.time
 	module_switch_last_threshold = 999
 
-	// Сбрасываем текущие перки модуля, оставляем только базовые Gen 1
+	// Сбрасываем текущие перки модуля
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_module_bonus)
 	H.remove_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_wrong_module)
+	REMOVE_TRAIT(H, TRAIT_MEDICAL_HUD, IPC_GEN1_TRAIT_SOURCE)
 	REMOVE_TRAIT(H, TRAIT_MEDICAL_ACES, IPC_GEN1_TRAIT_SOURCE)
-	REMOVE_TRAIT(H, TRAIT_ENGINEERING_ACES, IPC_GEN1_TRAIT_SOURCE)
-	REMOVE_TRAIT(H, TRAIT_SCIENCE_ACES, IPC_GEN1_TRAIT_SOURCE)
-	// Сброс статов до базового значения
-	brute_mod = 0.8
-	emp_vulnerability = 2
-	cpu_temp_optimal_max = 40
-	cpu_temp_critical = 130
-	self_repair_amount = 0.5
-	self_repair_delay = 100
-	ipc_repair_cost_mod = 0.7
+	REMOVE_TRAIT(H, TRAIT_SECURITY_HUD, IPC_GEN1_TRAIT_SOURCE)
+	REMOVE_TRAIT(H, TRAIT_REAGENT_SCANNER, IPC_GEN1_TRAIT_SOURCE)
+	siemens_coeff = 1
 	// Штраф скорости действий во время переконфигурации
 	H.add_actionspeed_modifier(/datum/actionspeed_modifier/ipc_gen1_wrong_module)
 	// Снимаем блок оружия пока идёт переконфигурация (нет активного модуля)
@@ -267,16 +237,17 @@
 			current_name = "Исследовательский"
 
 	var/list/choices = list(
-		"Медицинский — саморемонт x3, ускоренное лечение"                   = IPC_MODULE_MEDICAL,
-		"Инженерный — ремонт -60% дешевле, укреплённый корпус"              = IPC_MODULE_ENGINEERING,
-		"Охранный — оружие разрешено, броня, защита от ЭМИ"                 = IPC_MODULE_SECURITY,
-		"Исследовательский — выше порог тепла, ЭМИ-экран, науч. работы"     = IPC_MODULE_RESEARCH,
+		"Медицинский"      = IPC_MODULE_MEDICAL,
+		"Инженерный"       = IPC_MODULE_ENGINEERING,
+		"Охранный"         = IPC_MODULE_SECURITY,
+		"Исследовательский" = IPC_MODULE_RESEARCH,
 	)
 
-	var/choice_name = input(H,
-		"Текущий модуль: [current_name]\n\nПереконфигурация займёт 2.5 минуты.\nВо время процесса скорость действий снижена.\nПрерывается при оглушении.\n\nВыберите новый модуль:",
-		"Смена модуля", null
-	) as null|anything in choices
+	var/choice_name = tgui_input_list(H,
+		"Текущий модуль: [current_name]\n\nПереконфигурация займёт 2.5 минуты.\nВо время процесса скорость действий снижена.\nПрерывается при оглушении.",
+		"Смена модуля",
+		choices,
+	)
 
 	if(isnull(choice_name) || QDELETED(H) || !ipc_species)
 		return
@@ -333,7 +304,7 @@
 			stun_duration = 5 SECONDS
 
 	H.Stun(stun_duration)
-	addtimer(CALLBACK(src, PROC_REF(gen1_restore_stun_immunity), H), stun_duration + 1 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(gen1_restore_stun_immunity), H), stun_duration + 1 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 /datum/species/ipc/proc/gen1_restore_stun_immunity(mob/living/carbon/human/H)
 	if(!H || !istype(H.dna?.species, /datum/species/ipc))

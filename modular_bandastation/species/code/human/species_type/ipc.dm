@@ -46,19 +46,12 @@
 		TRAIT_NOBLOOD,   // ИПС не имеет крови (масло не является кровью для игровых механик)
 	)
 
-	// Урон модификаторы
-	var/brute_mod = 0.8
-	var/burn_mod = 1.5
-	var/heat_mod = 1.3
-	var/cold_mod = 0.5
-
 	// Переменные для температурной системы
 	var/cpu_temperature = 30
 	var/cpu_temp_optimal_min = 20
 	var/cpu_temp_optimal_max = 40
 	var/cpu_temp_critical = 130
 	var/cpu_cooling_rate = 0.1
-	var/cpu_heating_from_environment = TRUE
 
 	// Модификатор скорости взаимодействия от температуры
 	var/temp_interaction_speed_mod = 1.0
@@ -74,14 +67,10 @@
 	var/improved_cooling_installed = FALSE
 	var/cooling_block_active = FALSE
 	var/cooling_block_end_time = 0
-	var/cooled_tank_active = FALSE
 
 	// Разгон системы
 	var/overclock_active = FALSE
 	var/overclock_speed_bonus = 0.4  // 40% ускорение по умолчанию
-
-	// Переменные для шасси
-	var/chassis_manufacturer = "Unbranded"
 
 	// Лечение
 	var/self_repair_enabled = TRUE
@@ -116,16 +105,24 @@
 	var/ipc_overheat_rate_mod = 1.0
 	// Модификатор стоимости ремонта (Cybersun: 1.5)
 	var/ipc_repair_cost_mod = 1.0
+	// Дополнительные слоты IPC-имплантов: >0 = больше, <0 = меньше (Ward: -1, Cybersun: -1)
+	var/ipc_extra_implant_slots = 0
 
 	// Дополнительные модификаторы от шасси
 	// Список модификаторов: "overheat_rate", "healing_time", "melee_damage", "implant_slots", и т.д.
 	var/list/ipc_chassis_modifiers = list()
+
+	// Ментанил (препарат человечности Gen III)
+	/// Счётчик использований ментанила (для механики зависимости)
+	var/mentalin_uses = 0
 
 	// ---- Косметика ----
 	/// Текущее выражение экрана (задаётся только в игре через абилку, не сохраняется)
 	var/ipc_face_state = ""
 	/// Зона установки зарядного порта (задаётся из настроек персонажа)
 	var/ipc_charger_arm_zone = BODY_ZONE_L_ARM
+	/// Тип головы: "monitor" = монитор-экран, "head" = обычная голова (без экрана)
+	var/ipc_head_type = "monitor"
 
 	// ---- Поколение ----
 	/// Поколение КПБ: gen1_modular / gen2_standard / gen3_humanity / gen4_cyberdeck
@@ -154,47 +151,48 @@
 	var/humanity_drug_uses = 0
 
 	// ---- Gen 4: Кибердека ----
-	/// Тепловая нагрузка кибердеки (0-100)
-	var/cyberdeck_heat = 0
 	/// Кибердека отключена (ЭМИ)
 	var/cyberdeck_disabled = FALSE
 	/// Время повторного включения кибердеки после ЭМИ
 	var/cyberdeck_reenable_time = 0
-	/// Время последнего рассеивания тепла
-	var/last_heat_dissipate_time = 0
-	/// Кибердека в состоянии перегрева
-	var/cyberdeck_overheated = FALSE
 
 /datum/species/ipc/get_species_description()
-	return "IPC (Integrated Positronic Chassis) — искусственные синтетики на основе позитронного ядра. \
-	Их корпус полностью заменяет биологическую плоть — это модульная кибернетическая система, \
-	способная к частичной саморегенерации и адаптации к различным условиям работы. \
-	Каждый IPC — уникальная machine, собранная или конвейерно, или в ручную из компонентов разных производителей."
+	return "IPC (Integrated Positronic Construct) — синтетические гуманоидные формы жизни, управляемые позитронным вычислительным блоком (КПБ). \
+	В отличие от обычных роботов, КПБ способны обеспечивать различный уровень автономии и самосознания, \
+	благодаря чему IPC занимают промежуточное положение между машиной и личностью."
 
 /datum/species/ipc/get_species_lore()
 	return list(
-		"Позитронные синтетики появились как коммерческий продукт крупных кибернетических корпораций, \
-		изначально созданные для промышленных и исследовательских миссий там, где биологический экипаж был бы непрактичен. \
-		Со временем позитронное ядро стало достаточно развитым, чтобы развивать нейронные паттерны, неотличимые от сознания — \
-		и тогда вопрос об их правовом статусе перестал быть абстрактным.",
+		"Хотя крупнейшие корпорации остаются основными производителями позитронных процессоров и шасси, технология создания КПБ со временем \
+		распространилась далеко за пределы корпоративных лабораторий. Сегодня такие системы могут быть собраны не только промышленными предприятиями, \
+		но и независимыми инженерами, на частных верфях и даже в небольших мастерских. IPC широко используются в космической индустрии — \
+		от технического персонала станций до экипажей кораблей и автономных экспедиционных групп.",
 
-		"Каждый производитель закладывает в свои модели собственную специализацию. \
-		Morpheus Cyberkinetics ориентируется на когнитивные системы и нейроинтерфейсы — их головные модули считаются эталонными. \
-		Etamin Industry специализируется на термальной архитектуре корпуса, а их торсы оборудованы передовыми системами охлаждения. \
-		Bishop Cybernetics разработала манипуляторы с медицинской точностью, чьи руки способны выполнять тонкие хирургические операции. \
-		Hesphiastos Industries и Ward-Takahashi предпочитают кинематику и защищённость нижних конечностей — их ноги рассчитаны на тяжёлую среду.",
+		"Поколения КПБ:\n\
+		I поколение — простейшие позитронные системы с крайне ограниченной автономией. Такие IPC способны выполнять сложные задачи, \
+		но их деятельность обычно контролируется оператором. Именно из-за этой необходимости постоянного наблюдения закрепился термин «оператор».\n\
+		II поколение — более развитые системы, обладающие базовым самосознанием и способностью принимать самостоятельные решения. \
+		Несмотря на это, юридически они всё ещё считаются оборудованием.\n\
+		III поколение — КПБ, содержащие оцифрованное человеческое сознание. На территории ТСФ и Скрелианской Империи создание таких КПБ является тяжким преступлением. \
+		Несмотря на запреты, подпольные лаборатории продолжают заниматься подобными экспериментами.\n\
+		IV поколение — самые современные позитронные архитектуры, создающие полностью искусственную личность без использования человеческого сознания. \
+		После активации такие IPC юридически считаются имуществом своего владельца и обязаны служить ему в течение десяти лет. \
+		По окончании срока синтетик может продлить контракт, сменить владельца или получить полную автономию.",
 
-		"Xion Manufacturing Group делает лёгкие каркасы для конечностей — их руки ценятся за соотношение силы к массе. \
-		Zeng-Hu Pharmaceuticals вывели биосинтетические оболочки для торса, позволяющие IPC частично интегрироваться в медикаментозные протоколы. \
-		Shellguard Munitions — единственный производитель, изначально ориентированный на боевое применение: \
-		их бронированные головные и торсовые модули развитиеы для поглощения ударов и энергетического оружия.",
+		"Операторы:\n\
+		Лица, владеющие или курирующие КПБ, традиционно называются операторами — термин, сохранившийся со времён первого поколения. \
+		Внутри этой системы сложилась неформальная иерархия: Мейн-оператор — основной владелец или юридический хозяин КПБ. \
+		Оператор — человек с административным доступом или временным контролем. \
+		Куратор — специалист, обслуживающий КПБ без права собственности. \
+		Суб-оператор — любой органик, взаимодействующий через интерфейсы без формальной власти.",
 
-		"HEF — не бренд в традиционном смысле. Это обозначение для IPC, собранных из деталей разных производителей — \
-		так называемых «Frankensteinian» шасси. Обычно это вынужденная мера: запчасти из разных каталогов ставятся \
-		после полевых ремонтов, экономии бюджета или просто отсутствия оригинальных комплектов. \
-		Визуально такие IPC выглядят эклектично — каждая часть тела от своего завода, со своей конструктивной идеей. \
-		Но никаких геймплейных бонусов это не даёт: без единой интеграционной прошивки компоненты работают \
-		только в базовом режиме, без специализированных эффектов ни одного из производителей.",
+		"Независимые IPC и «Призрачные флоты»:\n\
+		Помимо официально зарегистрированных синтетиков существует большое количество незарегистрированных КПБ. \
+		Многие из них объединяются в небольшие сообщества кораблей, известные как Призрачные флоты — флотилии, полностью состоящие из машин, \
+		без систем жизнеобеспечения для органических существ. IPC в таких флотах называют «призраками». \
+		Они предпочитают взаимодействовать с другими КПБ и плохо чувствуют себя на планетах. \
+		Многие призрачные флоты объявлены в розыск за пиратство, контрабанду и мародёрство, \
+		хотя существует и небольшая прослойка сертифицированных коммерческих компаний из независимых IPC.",
 	)
 
 /datum/species/ipc/on_species_gain(mob/living/carbon/human/H, datum/species/old_species, pref_load)
@@ -206,6 +204,8 @@
 	// Даем IPC абилки
 	var/datum/action/cooldown/ipc_overclock/overclock = new()
 	overclock.Grant(H)
+
+	// ipc_hack НЕ выдаётся автоматически — покупается в аплинке трейтора.
 
 	// Выдаём встроенный зарядный порт в левую руку по умолчанию.
 	// Настройка руки через ipc_charger_arm preference переставит его при загрузке.
@@ -238,20 +238,28 @@
 	// Применяем механики поколения
 	apply_generation(H)
 
-	// ПРИМЕЧАНИЕ:
-	// - Chassis brand применяется через body_modifications автоматически
-	// - Тип мозга тоже через body_modifications
-	// - Никакой дополнительной логики здесь не требуется
-	// - Body modifications применяются системой preferences ДО on_species_gain,
-	//   так что к этому моменту у IPC уже установлен правильный brain и chassis
+	// Заменяем муд нейтральным (setup_mood() вызывается до dna.species — нужна ручная замена)
+	if(H.mob_mood)
+		QDEL_NULL(H.mob_mood)
+	H.mob_mood = new /datum/mood/ipc_neutral(H)
+
+	// HUD: регистрируем сигнал создания HUD и сразу добавляем элементы если HUD уже есть
+	RegisterSignal(H, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
+	if(H.hud_used)
+		on_hud_created(H)
 
 /datum/species/ipc/on_species_loss(mob/living/carbon/human/H, datum/species/new_species, pref_load)
 	. = ..()
 
 	// Удаляем IPC абилки
-	var/datum/action/cooldown/ipc_overclock/overclock = locate() in H.actions
+	var/datum/action/cooldown/ipc_overclock/overclock = locate(/datum/action/cooldown/ipc_overclock) in H.actions
 	if(overclock)
 		overclock.Remove(H)
+
+	// ipc_hack — если была куплена в аплинке, удаляем при смене вида
+	var/datum/action/cooldown/ipc_hack/hack = locate(/datum/action/cooldown/ipc_hack) in H.actions
+	if(hack)
+		hack.Remove(H)
 
 	// Удаляем кнопку ОС
 	var/datum/action/innate/ipc_open_os/os_action = locate() in H.actions
@@ -270,7 +278,15 @@
 	QDEL_NULL(ipc_os)
 
 	// Отменяем регистрацию сигналов
-	UnregisterSignal(H, list(COMSIG_LIVING_ELECTROCUTE_ACT, COMSIG_HUMAN_PREFS_APPLIED))
+	UnregisterSignal(H, list(COMSIG_LIVING_ELECTROCUTE_ACT, COMSIG_HUMAN_PREFS_APPLIED, COMSIG_MOB_HUD_CREATED, COMSIG_MOB_SAY))
+	// Удаляем трейты от брендов
+	REMOVE_TRAIT(H, TRAIT_SILENT_FOOTSTEPS, "cybersun_brand")
+
+	// HUD: удаляем элементы и восстанавливаем муд
+	remove_ipc_hud_elements(H, new_species)
+	if(istype(H.mob_mood, /datum/mood/ipc_neutral))
+		QDEL_NULL(H.mob_mood)
+		H.setup_mood()
 
 /// Вызывается после загрузки всех настроек персонажа.
 /// К этому моменту все preferences уже применены (ipc_generation, ipc_preset_os_password и т.д.).
@@ -312,6 +328,10 @@
 	handle_battery(H)
 	// Применяем модификатор скорости действий от температуры и разгона
 	update_action_speed(H)
+	// HUD обновления
+	update_ipc_temperature_icon(H)
+	handle_generation_life(H, seconds_per_tick, times_fired)
+	update_ipc_generation_hud(H)
 
 /datum/species/ipc/proc/handle_self_repair(mob/living/carbon/human/H)
 	if(!self_repair_enabled)
@@ -329,9 +349,6 @@
 		last_repair_time = world.time
 
 /datum/species/ipc/proc/handle_temperature(mob/living/carbon/human/H, seconds_per_tick)
-	// DEBUG: Вывод температуры до модификаторов
-	var/temp_before = cpu_temperature
-
 	// Проверяем истечение эффектов охлаждения
 	if(thermal_paste_active && world.time > thermal_paste_end_time)
 		thermal_paste_active = FALSE
@@ -352,7 +369,7 @@
 			if(env_temp < cpu_temperature)
 				var/cooling_amount = min((cpu_temperature - env_temp) * 0.01, cpu_cooling_rate * 2)
 				cpu_temperature = max(cpu_temperature - cooling_amount, env_temp)
-			else if(env_temp > cpu_temperature && cpu_heating_from_environment)
+			else if(env_temp > cpu_temperature)
 				var/heating_amount = min((env_temp - cpu_temperature) * 0.005, cpu_cooling_rate)
 				cpu_temperature = min(cpu_temperature + heating_amount, env_temp)
 
@@ -369,7 +386,9 @@
 		passive_cooling_rate += 1  // еще 1°C/сек
 
 	if(passive_cooling_rate > 0)
-		cpu_temperature = max(cpu_temperature - (passive_cooling_rate * seconds_per_tick), 0)
+		// ipc_thermal_relaxation_mod < 0 = медленнее охлаждается (Etamin: -0.2)
+		var/cooling_mult = 1 + ipc_thermal_relaxation_mod
+		cpu_temperature = max(cpu_temperature - (passive_cooling_rate * cooling_mult * seconds_per_tick), 0)
 
 	// Охлаждение от баллона с холодным газом (через маску) - активное
 	// Эффективность зависит от температуры газа И теплоемкости (specific_heat)
@@ -448,11 +467,6 @@
 	// Ограничиваем температуру
 	cpu_temperature = clamp(cpu_temperature, 0, 200)
 
-	// DEBUG: Выводим изменение температуры если значительное
-	var/temp_change = cpu_temperature - temp_before
-	if(abs(temp_change) > 0.5) // Выводим только если изменение больше 0.5°C
-		to_chat(H, span_small("DEBUG: T: [round(temp_before, 0.1)]°C → [round(cpu_temperature, 0.1)]°C ([temp_change > 0 ? "+" : ""][round(temp_change, 0.1)]°C)"))
-
 /// Обрабатывает эффекты температуры: урон, стамину, модификаторы скорости
 /datum/species/ipc/proc/handle_temperature_effects(mob/living/carbon/human/H)
 	// Расчет модификатора скорости взаимодействия по температуре
@@ -524,34 +538,27 @@
 	H.add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/ipc_temperature, multiplicative_slowdown = (total_modifier - 1))
 
 /datum/species/ipc/proc/handle_battery(mob/living/carbon/human/H)
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
 		to_chat(H, span_userdanger("КРИТИЧЕСКАЯ ОШИБКА: Источник питания не обнаружен!"))
 		H.apply_damage(2, OXY, forced = TRUE)
 		return
 
-	// Зарядка от ближайшего АРС
-	if(battery.charging)
+	// Зарядка от ближайшего АРС (кабель подключён)
+	if(heart.get_ipc_charging())
 		var/area/current_area = get_area(H)
 		if(current_area)
 			var/obj/machinery/power/apc/nearby_apc = locate(/obj/machinery/power/apc) in current_area
 			if(nearby_apc && nearby_apc.operating && nearby_apc.cell && nearby_apc.cell.charge > 0)
 				var/draw_amount = min(100, nearby_apc.cell.charge)
 				nearby_apc.cell.charge -= draw_amount
-				battery.charge_from_apc(25)
+				heart.ipc_charge_from(25)
 			else if(prob(10))
 				to_chat(H, span_warning("Нет доступного источника питания для зарядки!"))
 
-	if(battery.charge <= 0)
-		to_chat(H, span_danger("ПРЕДУПРЕЖДЕНИЕ: Батарея разряжена. Требуется подзарядка."))
+	if(heart.get_ipc_charge() <= 0)
+		to_chat(H, span_danger("ПРЕДУПРЕЖДЕНИЕ: Источник питания разряжен. Требуется подзарядка."))
 		H.Unconscious(2 SECONDS)
-
-/datum/species/ipc/proc/set_chassis(mob/living/carbon/human/H, chassis_name)
-	chassis_manufacturer = chassis_name
-	to_chat(H, span_notice("Шасси установлено: [chassis_name]"))
-
-/datum/species/ipc/spec_stun(mob/living/carbon/human/H, amount)
-	. = ..()
 
 /// Обработчик сигнала электрошока - повышает температуру процессора
 /datum/species/ipc/proc/on_electrocute(mob/living/carbon/human/source, shock_damage, siemens_coeff, flags)
@@ -768,3 +775,14 @@
 				return ITEM_INTERACT_SUCCESS
 
 	return ..() // Вызываем родительский метод для остальных взаимодействий
+
+// Разрешаем цифры в именах для всех рас — нужно для IPC (ARC-908 и т.д.)
+// Не ломает человеческие/лизардские имена: в них цифр нет
+/datum/preference/name/real_name
+	allow_numbers = TRUE
+
+// Генерация случайного имени при выборе расы IPC
+/datum/preference/name/real_name/create_informed_default_value(datum/preferences/preferences)
+	if(preferences.read_preference(/datum/preference/choiced/species) == /datum/species/ipc)
+		return pick(GLOB.ipc_names)
+	return ..()

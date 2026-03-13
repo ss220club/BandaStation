@@ -112,7 +112,8 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 
 // ============================================
 // BODYPART OVERLAY: ХВОСТ
-// Один датум рендерит ОБА слоя: BEHIND и FRONT.
+// BEHIND и FRONT рендерятся всегда — прозрачность фреймов в DMI
+// определяет что видно в каждом направлении.
 // ============================================
 
 /datum/bodypart_overlay/ipc_tail
@@ -140,18 +141,18 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 				img_behind.color = icon_color
 			. += img_behind
 			if(secondary_icon_color)
-				var/image/img_sec = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
-				img_sec.color = secondary_icon_color
-				. += img_sec
+				var/image/img_sec_behind = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_BEHIND", layer = bitflag_to_layer(EXTERNAL_BEHIND))
+				img_sec_behind.color = secondary_icon_color
+				. += img_sec_behind
 		if(EXTERNAL_FRONT)
 			var/image/img_front = image(IPC_TAILS_ICON, icon_state = "ipc_tail_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
 			if(icon_color)
 				img_front.color = icon_color
 			. += img_front
 			if(secondary_icon_color)
-				var/image/img_sec = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
-				img_sec.color = secondary_icon_color
-				. += img_sec
+				var/image/img_sec_front = image(IPC_TAILS_ICON, icon_state = "ipc_tail_secondary_plug_FRONT", layer = bitflag_to_layer(EXTERNAL_FRONT))
+				img_sec_front.color = secondary_icon_color
+				. += img_sec_front
 
 // ============================================
 // APPLY PROCS
@@ -188,6 +189,45 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	var/datum/bodypart_overlay/ipc_face_overlay/overlay = new()
 	overlay.state = state
 	head.add_bodypart_overlay(overlay)
+
+// Бренды поддерживающие выбор типа головы (monitor vs head)
+// Для этих брендов в DMI есть два стейта: "ipc_monitor" (экран) и "ipc_head" (обычная голова)
+// Morpheus исключён — в его DMI только ipc_monitor, нет ipc_head.
+GLOBAL_LIST_INIT(ipc_dual_head_brands, list("bishop", "hesphiastos", "ward_takahashi", "xion", "shellguard"))
+
+// Бренды у которых голова-монитор находится под стейтом "ipc_monitor" (а не "ipc_head").
+// Включает все dual-head бренды + morpheus (у него только ipc_monitor, нет ipc_head).
+GLOBAL_LIST_INIT(ipc_brands_with_monitor, list("morpheus", "bishop", "hesphiastos", "ward_takahashi", "xion", "shellguard"))
+
+/// Применяет тип головы КПБ.
+/// head_type = "monitor" → icon_state = "ipc_monitor" (монитор-голова с экраном)
+/// head_type = "head"    → icon_state = "ipc_head" (обычная голова, без экрана)
+/// Работает только для брендов из ipc_dual_head_brands.
+/proc/apply_ipc_head_type(mob/living/carbon/human/H, head_type)
+	var/datum/species/ipc/S = H.dna?.species
+	if(!istype(S))
+		return
+	S.ipc_head_type = head_type
+
+	// Только для брендов с поддержкой двух типов головы
+	if(!(S.ipc_brand_key in GLOB.ipc_dual_head_brands))
+		return
+
+	var/obj/item/bodypart/head/ipc/head = H.get_bodypart(BODY_ZONE_HEAD)
+	if(!head)
+		return
+
+	// ipc_visual_state входит в generate_icon_key() → при изменении ключ меняется
+	// и update_body_parts() автоматически перегенерирует спрайт.
+	switch(head_type)
+		if("monitor")
+			head.ipc_visual_state = "monitor"
+		if("head")
+			head.ipc_visual_state = null
+			apply_ipc_face(H, "")  // Нет экрана — убираем face overlay
+
+	H.update_body_parts()
+	H.update_body()
 
 /// Включает или убирает хвост на груди IPC.
 /proc/apply_ipc_tail(mob/living/carbon/human/H, enabled)
@@ -333,6 +373,52 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	impl.implant(target, zone, null, TRUE, TRUE)
 
 // ============================================
+// PREFERENCE: ТИП ГОЛОВЫ IPC (монитор / обычная)
+// Отображается только для брендов из ipc_dual_head_brands.
+// Запускается на приоритете BODYPARTS+1, чтобы бренд уже был применён.
+// ============================================
+
+/datum/preference/choiced/ipc_head_type
+	savefile_key = "feature_ipc_head_type"
+	savefile_identifier = PREFERENCE_CHARACTER
+	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+	priority = PREFERENCE_PRIORITY_BODYPARTS + 1
+	main_feature_name = "Тип головы"
+	can_randomize = FALSE
+
+/datum/preference/choiced/ipc_head_type/compile_constant_data()
+	. = ..()
+	.[CHOICED_PREFERENCE_DISPLAY_NAMES] = list(
+		"monitor" = "Монитор",
+		"head"    = "Голова",
+	)
+
+/datum/preference/choiced/ipc_head_type/init_possible_values()
+	return list("monitor", "head")
+
+/datum/preference/choiced/ipc_head_type/create_default_value()
+	return "monitor"
+
+/datum/preference/choiced/ipc_head_type/is_accessible(datum/preferences/preferences)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/datum/species/species = GLOB.species_prototypes[preferences.read_preference(/datum/preference/choiced/species)]
+	if(!istype(species, /datum/species/ipc))
+		return FALSE
+	// Показываем только для брендов с поддержкой двух типов головы
+	var/list/customization = preferences.read_preference(/datum/preference/ipc_customization)
+	if(!islist(customization))
+		return FALSE
+	var/brand = customization["chassis_brand"]
+	return brand && (brand in GLOB.ipc_dual_head_brands)
+
+/datum/preference/choiced/ipc_head_type/apply_to_human(mob/living/carbon/human/target, value)
+	if(!istype(target.dna?.species, /datum/species/ipc))
+		return
+	apply_ipc_head_type(target, value)
+
+// ============================================
 // BRAND FACE FILTERING
 // ============================================
 
@@ -369,6 +455,11 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 
 	var/datum/species/ipc/S = H.dna?.species
 	if(!istype(S))
+		return
+
+	// Обычная голова — экран не поддерживается
+	if(S.ipc_head_type == "head")
+		to_chat(H, span_warning("Этот тип головы не поддерживает смену экрана."))
 		return
 
 	// Получаем разрешённые экраны для бренда
@@ -447,7 +538,7 @@ GLOBAL_LIST_INIT(ipc_face_options, list(
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
 
 /datum/preference/color/ipc_tail_secondary_color/create_default_value()
-	return null  // null = не применять вторичный цвет (secondary-спрайт не рендерится)
+	return COLOR_WHITE
 
 /datum/preference/color/ipc_tail_secondary_color/is_accessible(datum/preferences/preferences)
 	. = ..()

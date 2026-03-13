@@ -52,6 +52,9 @@
 // ============================================
 
 // Базовый класс для IPC имплантов
+/// Количество необязательных IPC-имплантов по умолчанию (без бонусов/штрафов брендов)
+#define IPC_DEFAULT_IMPLANT_SLOTS 3
+
 /obj/item/implant/ipc
 	name = "IPC implant"
 	desc = "Базовый имплант для IPC."
@@ -68,6 +71,8 @@
 	var/arm_visual = null
 	/// Название состояния в implants_lefthand/righthand.dmi (null = оверлей не показывается)
 	var/arm_visual_state = null
+	/// Если FALSE — не учитывается в лимите слотов (встроенные импланты типа charger)
+	var/counts_toward_slots = TRUE
 
 /// Возвращает icon_state для bodypart overlay
 /obj/item/implant/ipc/proc/get_overlay_state()
@@ -115,6 +120,21 @@
 		if(!silent && user)
 			to_chat(user, span_warning("[capitalize(src.name)] не может быть установлен в [body_zone]!"))
 		return FALSE
+
+	// Проверяем лимит слотов (только для необязательных имплантов, не для force-установки)
+	if(!force && counts_toward_slots && istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = target
+		if(istype(H.dna?.species, /datum/species/ipc))
+			var/datum/species/ipc/S = H.dna.species
+			var/max_slots = IPC_DEFAULT_IMPLANT_SLOTS + S.ipc_extra_implant_slots
+			var/current = 0
+			for(var/obj/item/implant/ipc/imp in H.implants)
+				if(imp.counts_toward_slots)
+					current++
+			if(current >= max_slots)
+				if(!silent && user)
+					to_chat(user, span_warning("Слоты имплантов заполнены! Максимум [max_slots]."))
+				return FALSE
 
 	// Сохраняем зону установки
 	installed_in_zone = body_zone
@@ -319,10 +339,10 @@
 
 	var/mob/living/carbon/human/H = imp_in
 
-	// Проверяем батарейку
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery || battery.charge < power_cost)
-		to_chat(H, span_warning("Реактивный ремонт деактивирован: недостаточно заряда батарейки!"))
+	// Проверяем источник питания
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || heart.get_ipc_charge() < power_cost)
+		to_chat(H, span_warning("Реактивный ремонт деактивирован: недостаточно заряда источника питания!"))
 		repair_active = FALSE
 		return
 
@@ -339,15 +359,15 @@
 		return
 
 	// Расходуем заряд
-	battery.charge = max(battery.charge - power_cost, 0)
+	heart.set_ipc_charge(max(heart.get_ipc_charge() - power_cost, 0))
 
 	// Чиним наиболее поврежденную часть
 	if(damaged_part.brute_dam > damaged_part.burn_dam)
 		damaged_part.heal_damage(repair_amount, 0)
-		to_chat(H, span_notice("Реактивный ремонт устраняет механические повреждения [damaged_part.plaintext_zone]. Батарея: [round(battery.charge)]/[battery.maxcharge]"))
+		to_chat(H, span_notice("Реактивный ремонт устраняет механические повреждения [damaged_part.plaintext_zone]. Заряд: [round(heart.get_ipc_charge())]/[heart.ipc_max_charge]"))
 	else
 		damaged_part.heal_damage(0, repair_amount)
-		to_chat(H, span_notice("Реактивный ремонт устраняет термические повреждения [damaged_part.plaintext_zone]. Батарея: [round(battery.charge)]/[battery.maxcharge]"))
+		to_chat(H, span_notice("Реактивный ремонт устраняет термические повреждения [damaged_part.plaintext_zone]. Заряд: [round(heart.get_ipc_charge())]/[heart.ipc_max_charge]"))
 
 	last_repair_time = world.time
 
@@ -513,7 +533,7 @@
 		return FALSE
 
 	// Даем абилку переключения магбутов только если это первая нога
-	var/datum/action/toggle_magboots/existing = locate() in H.actions
+	var/datum/action/toggle_magboots/existing = locate(/datum/action/toggle_magboots) in H.actions
 	if(!existing)
 		var/datum/action/toggle_magboots/toggle = new()
 		toggle.Grant(H)
@@ -547,7 +567,7 @@
 			REMOVE_TRAIT(H, TRAIT_NO_SLIP_ALL, "magnetic_leg")
 			REMOVE_TRAIT(H, TRAIT_NEGATES_GRAVITY, "magnetic_leg")
 
-		var/datum/action/toggle_magboots/action = locate() in H.actions
+		var/datum/action/toggle_magboots/action = locate(/datum/action/toggle_magboots) in H.actions
 		if(action)
 			action.Remove(H)
 
@@ -600,12 +620,36 @@
 // 6. BIO-GENERATOR
 // ============================================
 // Позволяет IPC переваривать еду - устанавливается в грудь
+// Требует виртуальный желудок (определён ниже)
+
+// ============================================
+// ВИРТУАЛЬНЫЙ ЖЕЛУДОК ДЛЯ BIO-GENERATOR
+// ============================================
+// Вставляется автоматически при установке bio-generator импланта.
+// Позволяет IPC есть еду, но сам не перерабатывает её — это делает bio-generator.
+
+/obj/item/organ/stomach/ipc_bio
+	name = "bio-generator stomach"
+	desc = "Виртуальный желудок IPC, работающий на основе bio-generator импланта. Перерабатывает органическую пищу в энергию для батарейки."
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "stomach-ipc"
+	metabolism_efficiency = 0
+	hunger_modifier = 0
+	organ_flags = ORGAN_ROBOTIC | ORGAN_UNREMOVABLE
+
+/obj/item/organ/stomach/ipc_bio/on_life(seconds_per_tick)
+	if(reagents && reagents.total_volume > 100)
+		reagents.clear_reagents()
+
+/obj/item/organ/stomach/ipc_bio/handle_hunger(mob/living/carbon/human/human, seconds_per_tick)
+	return
 
 /obj/item/implant/ipc/bio_generator
 	name = "Bio-Generator Implant"
 	desc = "Биологический генератор для IPC. Позволяет перерабатывать органическую пищу в энергию. Устанавливается в грудную клетку."
 	icon_state = "bio_generator"
 	allowed_zones = list(BODY_ZONE_CHEST)
+	counts_toward_slots = FALSE  // встроенный (Zeng-Hu) — не занимает слот
 
 /obj/item/implant/ipc/bio_generator/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
@@ -653,9 +697,9 @@
 	if(!istype(source.dna?.species, /datum/species/ipc))
 		return
 
-	// Получаем батарею IPC
-	var/obj/item/organ/heart/ipc_battery/battery = source.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
+	// Получаем источник питания IPC
+	var/obj/item/organ/heart/heart = source.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
 		return
 
 	// Получаем reagents из еды
@@ -672,15 +716,15 @@
 	if(total_nutrition <= 0)
 		return
 
-	// Конвертируем nutrition в заряд батарейки
+	// Конвертируем nutrition в заряд
 	// 1 nutrition ≈ 2 charge (можно регулировать коэффициент)
 	var/energy_gain = total_nutrition * 2
 
-	var/old_charge = battery.charge
-	battery.charge = min(battery.charge + energy_gain, battery.maxcharge)
-	var/actual_gain = battery.charge - old_charge
+	var/old_charge = heart.get_ipc_charge()
+	heart.ipc_charge_from(energy_gain)
+	var/actual_gain = heart.get_ipc_charge() - old_charge
 
-	to_chat(source, span_notice("Био-генератор переработал пищу и зарядил батарейку на [round(actual_gain)] единиц. Батарея: [round(battery.charge)]/[battery.maxcharge]"))
+	to_chat(source, span_notice("Био-генератор переработал пищу и зарядил источник питания на [round(actual_gain)] единиц. Заряд: [round(heart.get_ipc_charge())]/[heart.ipc_max_charge]"))
 
 /obj/item/implant/ipc/bio_generator/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
@@ -763,12 +807,12 @@
 		disconnect_from_device(H)
 	var/obj/machinery/M = target
 	connected_device = M
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
-		to_chat(H, span_warning("Батарея не обнаружена!"))
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
+		to_chat(H, span_warning("Совместимый источник питания не обнаружен!"))
 		connected_device = null
 		return
-	battery.charging = TRUE
+	heart.set_ipc_charging(TRUE)
 	RegisterSignal(H, COMSIG_MOVABLE_MOVED, PROC_REF(on_owner_moved))
 	to_chat(H, span_notice("Кабель подключён к [M.name]. Начинается зарядка..."))
 	H.visible_message(span_notice("[H] подключает зарядный кабель к [M.name]."))
@@ -781,9 +825,9 @@
 	if(!H || QDELETED(H))
 		return
 	UnregisterSignal(H, COMSIG_MOVABLE_MOVED)
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(battery)
-		battery.charging = FALSE
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(heart)
+		heart.set_ipc_charging(FALSE)
 	to_chat(H, span_notice("Зарядный кабель отключён от [old_device.name]."))
 
 /obj/item/ipc_charging_cable/proc/on_owner_moved(mob/living/carbon/human/H, old_loc, movement_dir, forced, old_locs, momentum_change)
@@ -795,6 +839,7 @@
 	desc = "Встроенный зарядный порт. Позволяет IPC заряждаться от настенных источников питания: АРС, переговорников, экранов. Достаньте кабель кнопкой действия, затем нажмите им на устройство."
 	icon_state = "reactive_repair"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+	counts_toward_slots = FALSE  // встроенный — не занимает слот
 	actions_types = list(/datum/action/item_action/hands_free/ipc_charge)
 	/// Кабель в слоте руки (null если убран)
 	var/obj/item/ipc_charging_cable/cable_item = null
@@ -823,8 +868,8 @@
 	if(!ishuman(imp_in))
 		return
 	var/mob/living/carbon/human/H = imp_in
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
 		return
 	// Если устройство удалено или слишком далеко — отключаемся
 	var/obj/machinery/device = cable_item.connected_device
@@ -832,7 +877,7 @@
 		cable_item.disconnect_from_device(H)
 		return
 	// Начисляем заряд
-	battery.charge_from_apc(charge_per_second * seconds_per_tick)
+	heart.ipc_charge_from(charge_per_second * seconds_per_tick)
 
 /obj/item/implant/ipc/charger/removed(mob/living/source, silent = FALSE, special = FALSE)
 	. = ..()
@@ -972,15 +1017,15 @@
 	if(!ishuman(imp_in))
 		return
 	var/mob/living/carbon/human/H = imp_in
-	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(!battery)
+	var/obj/item/organ/heart/heart = H.get_organ_slot(ORGAN_SLOT_HEART)
+	if(!heart || !heart.ipc_max_charge)
 		return
-	// Расходуем заряд батареи
-	if(battery.charge < shield_power_cost * seconds_per_tick)
+	// Расходуем заряд источника питания
+	if(heart.get_ipc_charge() < shield_power_cost * seconds_per_tick)
 		shield_active = FALSE
-		to_chat(H, span_warning("Силовой щит отключён: недостаточно заряда батареи!"))
+		to_chat(H, span_warning("Силовой щит отключён: недостаточно заряда источника питания!"))
 		return
-	battery.charge = max(0, battery.charge - (shield_power_cost * seconds_per_tick))
+	heart.set_ipc_charge(max(0, heart.get_ipc_charge() - (shield_power_cost * seconds_per_tick)))
 
 // Кнопка переключения силового щита
 /datum/action/item_action/hands_free/ipc_force_shield

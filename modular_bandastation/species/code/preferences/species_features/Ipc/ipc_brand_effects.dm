@@ -130,14 +130,18 @@
 // Увеличенный срок работы батарейки
 // Уменьшенное количество слотов имплантов
 /proc/apply_effect_ward_takahashi(mob/living/carbon/human/H)
-	// Ускоренный саморемонт
-	// TODO: Реализовать через модификатор скорости саморемонта (если есть такой)
-	// Увеличенный срок работы батарейки
+	var/datum/species/ipc/S = H.dna.species
+	if(!S)
+		return
+	// Ускоренный саморемонт: задержка 100 -> 50, лечение за тик 0.5 -> 1.0
+	S.self_repair_delay = 50
+	S.self_repair_amount = 1.0
+	// Увеличенный срок работы батарейки: медленнее разряжается
 	var/obj/item/organ/heart/ipc_battery/battery = H.get_organ_slot(ORGAN_SLOT_HEART)
-	if(battery)
-		battery.charge_rate *= 0.7  // Медленнее разряжается = дольше работает
-	// Уменьшенное количество слотов имплантов
-	// TODO: Реализовать через уменьшение max implant slots
+	if(istype(battery, /obj/item/organ/heart/ipc_battery))
+		battery.charge_rate *= 0.7
+	// Уменьшенное количество слотов имплантов (-1 слот)
+	S.ipc_extra_implant_slots = max(-1, S.ipc_extra_implant_slots - 1)
 
 // ============================================
 // 6. XION MANUFACTURING GROUP
@@ -191,8 +195,14 @@
 	if(!(locate(/obj/item/implant/ipc/bio_generator) in H.implants))
 		var/obj/item/implant/ipc/bio_generator/impl = new()
 		impl.implant(H, BODY_ZONE_CHEST, null, TRUE, TRUE)
-	// Синт кожа
-	// TODO: Реализовать через trait/модификатор лечения синт плоти
+	// Синт кожа: лечение внешней обработкой занимает на 25% дольше
+	// (увеличивает self_repair_delay пропорционально healing_time модификатору)
+	var/datum/species/ipc/S = H.dna.species
+	if(S)
+		if(!S.ipc_chassis_modifiers)
+			S.ipc_chassis_modifiers = list()
+		S.ipc_chassis_modifiers["healing_time"] = 1.25
+		S.self_repair_delay = round(S.self_repair_delay * 1.25)
 
 // ============================================
 // 8. SHELLGUARD MUNITIONS
@@ -280,12 +290,12 @@
 		if(!S.ipc_chassis_modifiers)
 			S.ipc_chassis_modifiers = list()
 		// Увеличенные слоты имплантов (+2 слота)
-		S.ipc_chassis_modifiers["implant_slots"] = 2
-		// Глюки при речи - трейт
+		S.ipc_extra_implant_slots += 2
+		// Запрет боевых имплантов
 		if(!(TRAIT_IPC_NO_COMBAT_IMPLANTS in S.inherent_traits))
 			S.inherent_traits += TRAIT_IPC_NO_COMBAT_IMPLANTS
-		// TODO: Добавить глюки речи через speech filter
-		// TODO: Магнетик джоинтс - притяжение к металлам
+		// Глюки речи — регистрируем через сигнал на species datum
+		S.register_speech_glitch(H)
 
 // ============================================
 // 10. CYBERSUN INDUSTRIES
@@ -298,25 +308,69 @@
 // Антаг-функции (реализуются отдельно через аплинк)
 /proc/apply_effect_cybersun(mob/living/carbon/human/H)
 	// Тихие шаги
-	// TODO: Реализовать через trait
+	ADD_TRAIT(H, TRAIT_SILENT_FOOTSTEPS, "cybersun_brand")
 	// 10% скорости (быстрее)
 	// FIX: get_movespeed_modifier не существует в tg/station.
 	// Правильный паттерн: создаём модификатор с нужным значением ПЕРЕД добавлением,
 	// либо добавляем и сразу ищем в списке H.movespeed_modifiers.
 	// Простейший и надёжный способ — предопределить значение на самом datum:
 	var/datum/movespeed_modifier/ipc_cybersun/mod = new()
-	mod.multiplicative_slowdown = -0.2  // 10% быстрее
+	mod.multiplicative_slowdown = -0.1  // 10% быстрее
 	H.add_movespeed_modifier(mod, update = TRUE)
 
 	// Повышена цена починок
 	var/datum/species/ipc/S = H.dna.species
 	if(S)
-		S.ipc_repair_cost_mod = 1.5  // TODO: добавить эту переменную и использовать при ремонте
-	// -слот имплантов
-	// TODO: Реализовать через уменьшение max implant slots
-	// +слот инвентаря
-	// TODO: Реализовать через расширение инвентаря
+		S.ipc_repair_cost_mod = 1.5
+		// -слот имплантов
+		S.ipc_extra_implant_slots = max(-1, S.ipc_extra_implant_slots - 1)
 
 /datum/movespeed_modifier/ipc_cybersun
 	variable = TRUE
 	multiplicative_slowdown = 0
+
+// ============================================
+// UNBRANDED: ГЛЮКИ РЕЧИ
+// ============================================
+// Срабатывает на COMSIG_MOB_SAY — с шансом 15% искажает фразу.
+// Случайно заменяет несколько символов на hex-код или повторяет слово.
+
+/// Регистрирует обработчик глюков речи на species datum (не глобальный proc).
+/datum/species/ipc/proc/register_speech_glitch(mob/living/carbon/human/H)
+	RegisterSignal(H, COMSIG_MOB_SAY, PROC_REF(ipc_unbranded_speech_glitch), override = TRUE)
+
+/// Обработчик глюков речи для Unbranded КПБ.
+/datum/species/ipc/proc/ipc_unbranded_speech_glitch(datum/source, list/speech_args)
+	SIGNAL_HANDLER
+	if(speech_args[SPEECH_FORCED])
+		return
+	if(prob(85))
+		return  // 15% шанс глюка
+
+	var/message = speech_args[SPEECH_MESSAGE]
+	if(!message || length(message) < 3)
+		return
+
+	// Выбираем тип глюка случайно
+	switch(rand(1, 3))
+		if(1)
+			// Вставляем hex-мусор в середину
+			var/pos = rand(1, length(message))
+			var/hex = num2hex(rand(0, 255), 2)
+			message = copytext(message, 1, pos) + " \[0x[hex]\] " + copytext(message, pos)
+		if(2)
+			// Повторяем случайное слово
+			var/list/words = splittext(message, " ")
+			if(length(words) >= 2)
+				var/idx = rand(1, length(words))
+				words.Insert(idx + 1, words[idx])
+				message = jointext(words, " ")
+		if(3)
+			// Заменяем несколько символов на нижний регистр/верхний хаотично
+			var/result = ""
+			for(var/i = 1 to length(message))
+				var/ch = copytext(message, i, i + 1)
+				result += prob(30) ? uppertext(ch) : lowertext(ch)
+			message = result
+
+	speech_args[SPEECH_MESSAGE] = message

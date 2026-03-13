@@ -38,7 +38,7 @@
 		if(!visual_brand)
 			return FALSE
 		S.ipc_visual_brand_key = brand_key
-		apply_ipc_visual_prefix(H, visual_brand.visual_prefix, visual_brand.custom_icon_file)
+		apply_ipc_visual_prefix(H, visual_brand.visual_prefix, visual_brand.custom_icon_file, brand_key)
 		qdel(visual_brand)
 
 	return TRUE
@@ -78,6 +78,8 @@
 				head.icon_static = custom_icon
 				head.icon_greyscale = null
 				head.icon_state = "ipc_head"
+				// ipc_visual_state определяет реальный стейт в get_limb_icon()
+				head.ipc_visual_state = (brand_key in GLOB.ipc_brands_with_monitor) ? "monitor" : null
 		if(BODY_ZONE_CHEST)
 			var/obj/item/bodypart/chest/ipc/chest = H.get_bodypart(BODY_ZONE_CHEST)
 			if(chest && custom_icon)
@@ -118,7 +120,7 @@
 /// Устанавливает icon/icon_state на всех частях тела по визуальному пресету бренда.
 /// Все файлы брендированных спрайтов используют ipc_* имена состояний.
 /// Для брендов без custom_icon_file уникальных спрайтов нет — визуал не меняется.
-/proc/apply_ipc_visual_prefix(mob/living/carbon/human/H, prefix, custom_icon_file = null)
+/proc/apply_ipc_visual_prefix(mob/living/carbon/human/H, prefix, custom_icon_file = null, brand_key = null)
 	// Без кастомного файла спрайтов — менять нечего
 	if(!custom_icon_file)
 		H.update_body()
@@ -141,6 +143,8 @@
 		head.icon_static = custom_icon_file
 		head.icon_greyscale = null
 		head.icon_state = "ipc_head"
+		// ipc_visual_state определяет реальный стейт в get_limb_icon()
+		head.ipc_visual_state = (brand_key && (brand_key in GLOB.ipc_brands_with_monitor)) ? "monitor" : null
 
 	// Левая рука
 	var/obj/item/bodypart/arm/left/ipc/l_arm = H.get_bodypart(BODY_ZONE_L_ARM)
