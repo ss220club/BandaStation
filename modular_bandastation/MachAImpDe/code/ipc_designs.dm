@@ -294,7 +294,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_arm_razor
-	name = "Моновайер КПБ"
+	name = "Моновайер"
 	desc = "Имплант: монофиламентная режущая струна в предплечье."
 	id = "ipc_implant_arm_razor"
 	build_path = /obj/item/implant/ipc/arm_razor
@@ -330,8 +330,8 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_arm_cannon
-	name = "Дробовик в руке КПБ"
-	desc = "Имплант: встроенный дробовик в предплечье IPC."
+	name = "Дробовик в руке"
+	desc = "Имплант: встроенный дробовик в предплечье."
 	id = "ipc_implant_arm_cannon"
 	build_path = /obj/item/implant/ipc/arm_cannon
 	materials = list(
@@ -342,7 +342,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_sandevistan
-	name = "Сандевистан КПБ"
+	name = "Сандевистан"
 	desc = "Имплант: ускоритель реакции — кратковременное ускорение всех систем."
 	id = "ipc_implant_sandevistan"
 	build_path = /obj/item/implant/ipc/sandevistan
