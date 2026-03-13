@@ -51,8 +51,6 @@ GLOBAL_LIST_EMPTY(human_to_tts)
 	var/datum/tts_seed/seed = SStts220.tts_seeds[seed_name]
 	if(!seed)
 		return FALSE
-	if(user.client && seed.required_donator_level > user.client.get_donator_level())
-		return FALSE
 
 	var/phrase = params["phrase"]
 	if(!phrase || !(phrase in TTS_PHRASES))
