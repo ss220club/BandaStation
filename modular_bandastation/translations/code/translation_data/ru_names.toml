@@ -7461,6 +7461,51 @@ instrumental = "кубом обезьяны"
 prepositional = "кубе обезьяны"
 gender = "male"
 
+["gorilla cube"]
+nominative = "куб гориллы"
+genitive = "куба гориллы"
+dative = "кубу гориллы"
+accusative = "куб гориллы"
+instrumental = "кубом гориллы"
+prepositional = "кубе гориллы"
+gender = "male"
+
+["chicken cube"]
+nominative = "куб курицы"
+genitive = "куба курицы"
+dative = "кубу курицы"
+accusative = "куб курицы"
+instrumental = "кубом курицы"
+prepositional = "кубе курицы"
+gender = "male"
+
+["bee cube"]
+nominative = "куб пчелы"
+genitive = "куба пчелы"
+dative = "кубу пчелы"
+accusative = "куб пчелы"
+instrumental = "кубом пчелы"
+prepositional = "кубе пчелы"
+gender = "male"
+
+["a pony cube"]
+nominative = "куб пони"
+genitive = "куба пони"
+dative = "кубу пони"
+accusative = "куб пони"
+instrumental = "кубом пони"
+prepositional = "кубе пони"
+gender = "male"
+
+["monster cube"]
+nominative = "куб чудовища"
+genitive = "куба чудовища"
+dative = "кубу чудовища"
+accusative = "куб чудовища"
+instrumental = "кубом чудовища"
+prepositional = "кубе чудовища"
+gender = "male"
+
 ["moldy 'bread' slice"]
 nominative = "плесневый ломтик 'хлеба'"
 genitive = "плесневого ломтика 'хлеба'"
@@ -12688,7 +12733,672 @@ instrumental = "отбивной из курицы"
 prepositional = "отбивной из курицы"
 gender = "female"
 
+# MARK: Food - Mexican
+
+["tortilla"]
+nominative = "тортилья"
+genitive = "тортильи"
+dative = "тортилье"
+accusative = "тортилью"
+instrumental = "тортильей"
+prepositional = "тортилье"
+gender = "female"
+
+["burrito"]
+nominative = "буррито"
+gender = "male"
+
+["cheesy burrito"]
+nominative = "сырный буррито"
+genitive = "сырного буррито"
+dative = "сырному буррито"
+accusative = "сырный буррито"
+instrumental = "сырным буррито"
+prepositional = "сырном буррито"
+gender = "male"
+
+["carne asada burrito"]
+nominative = "буррито Карне Асада"
+gender = "male"
+
+["fuego plasma burrito"]
+nominative = "буррито Фуего Плазма"
+gender = "male"
+
+["nachos"]
+nominative = "начос"
+gender = "plural"
+
+["cheesy nachos"]
+nominative = "сырные начос"
+genitive = "сырных начос"
+dative = "сырным начос"
+accusative = "сырные начос"
+instrumental = "сырными начос"
+prepositional = "сырных начос"
+gender = "plural"
+
+["Cuban nachos"]
+nominative = "кубинские начос"
+genitive = "кубинских начос"
+dative = "кубинским начос"
+accusative = "кубинские начос"
+instrumental = "кубинскими начос"
+prepositional = "кубинских начос"
+gender = "plural"
+
+["classic taco"]
+nominative = "классический тако"
+genitive = "классического тако"
+dative = "классическому тако"
+accusative = "классический тако"
+instrumental = "классическим тако"
+prepositional = "классическом тако"
+gender = "male"
+
+["plain taco"]
+nominative = "простой тако"
+genitive = "простого тако"
+dative = "простому тако"
+accusative = "простой тако"
+instrumental = "простым тако"
+prepositional = "простом тако"
+gender = "male"
+
+["fish taco"]
+nominative = "рыбный тако"
+genitive = "рыбного тако"
+dative = "рыбному тако"
+accusative = "рыбный тако"
+instrumental = "рыбным тако"
+prepositional = "рыбном тако"
+gender = "male"
+
+["enchiladas"]
+nominative = "энчиладас"
+gender = "plural"
+
+["stuffed legion"]
+nominative = "фаршированный легион"
+genitive = "фаршированного легиона"
+dative = "фаршированному легиону"
+accusative = "фаршированный легион"
+instrumental = "фаршированным легионом"
+prepositional = "фаршированном легионе"
+gender = "male"
+
+["chips and salsa"]
+nominative = "начос с сальсой"
+gender = "plural"
+
+["classic chimichanga"]
+nominative = "классическая чимичанга"
+genitive = "классической чимичанги"
+dative = "классической чимичанге"
+accusative = "классическую чимичангу"
+instrumental = "классической чимичангой"
+prepositional = "классической чимичанге"
+gender = "female"
+
+["vegetarian chimichanga"]
+nominative = "вегетерианскиая чимичанга"
+genitive = "вегетерианской чимичанги"
+dative = "вегетерианской чимичанге"
+accusative = "вегетерианскую чимичангу"
+instrumental = "вегетерианской чимичангой"
+prepositional = "вегетерианской чимичанге"
+gender = "female"
+
+["hard taco shell"]
+nominative = "жёсткая тортилья для тако"
+genitive = "жёсткой тортильи для тако"
+dative = "жёсткой тортилье для тако"
+accusative = "жёсткую тортилью для тако"
+instrumental = "жёсткой тортильей для тако"
+prepositional = "жёсткой тортилье для тако"
+gender = "male"
+
+["hard-shell taco"]
+nominative = "тако в жёсткой обертке"
+gender = "male"
+
+["classic hard-shell taco"]
+nominative = "классический тако в жёсткой обертке"
+genitive = "классического тако в жёсткой обертке"
+dative = "классическому тако в жёсткой обертке"
+accusative = "классический тако в жёсткой обертке"
+instrumental = "классическим тако в жёсткой обертке"
+prepositional = "классическом тако в жёсткой обертке"
+gender = "male"
+
+["plain hard-shell taco"]
+nominative = "простой тако в жёсткой обертке"
+genitive = "простого тако в жёсткой обертке"
+dative = "простому тако в жёсткой обертке"
+accusative = "простой тако в жёсткой обертке"
+instrumental = "простым тако в жёсткой обертке"
+prepositional = "простом тако в жёсткой обертке"
+gender = "male"
+
+["refried beans"]
+nominative = "тушёные бобы"
+genitive = "тушёных бобов"
+dative = "тушёным бобам"
+accusative = "тушёные бобы"
+instrumental = "тушёными бобами"
+prepositional = "тушёных бобах"
+gender = "plural"
+
+["spanish rice"]
+nominative = "испанский рис"
+genitive = "испанского риса"
+dative = "испанскому рису"
+accusative = "испанский рис"
+instrumental = "испанским рисом"
+prepositional = "испанском рисе"
+gender = "male"
+
+["pineapple salsa"]
+nominative = "сальса с ананасами"
+genitive = "сальсы с ананасами"
+dative = "сальсе с ананасами"
+accusative = "сальсу с ананасами"
+instrumental = "сальсой с ананасами"
+prepositional = "сальсе с ананасами"
+gender = "female"
+
 # MARK: Food - Other
+
+["watermelon slice"]
+nominative = "долька арбуза"
+genitive = "дольки арбуза"
+dative = "дольке арбуза"
+accusative = "дольку арбуза"
+instrumental = "долькой арбуза"
+prepositional = "дольке арбуза"
+gender = "female"
+
+["watermelon mush"]
+nominative = "арбузное пюре"
+genitive = "арбузного пюре"
+dative = "арбузному пюре"
+accusative = "арбузное пюре"
+instrumental = "арбузным пюре"
+prepositional = "арбузном пюре"
+gender = "neuter"
+
+["holymelon slice"]
+nominative = "долька святого арбуза"
+genitive = "дольки святого арбуза"
+dative = "дольке святого арбуза"
+accusative = "дольку святого арбуза"
+instrumental = "долькой святого арбуза"
+prepositional = "дольке святого арбуза"
+gender = "female"
+
+["holymelon mush"]
+nominative = "святое арбузное пюре"
+genitive = "святого арбузного пюре"
+dative = "святому арбузному пюре"
+accusative = "святое арбузное пюре"
+instrumental = "святым арбузным пюре"
+prepositional = "святом арбузном пюре"
+gender = "neuter"
+
+["barrelmelon slice"]
+nominative = "долька бочкарбуза"
+genitive = "дольки бочкарбуза"
+dative = "дольке бочкарбуза"
+accusative = "дольку бочкарбуза"
+instrumental = "долькой бочкарбуза"
+prepositional = "дольке бочкарбуза"
+gender = "female"
+
+["barrelmelon mush"]
+nominative = "пивное арбузное пюре"
+genitive = "пивного арбузного пюре"
+dative = "пивному арбузному пюре"
+accusative = "пивное арбузное пюре"
+instrumental = "пивным арбузным пюре"
+prepositional = "пивном арбузном пюре"
+gender = "neuter"
+
+["apple slice"]
+nominative = "долька яблока"
+genitive = "дольки яблока"
+dative = "дольке яблока"
+accusative = "дольку яблока"
+instrumental = "долькой яблока"
+prepositional = "дольке яблока"
+gender = "female"
+
+["huge mushroom slice"]
+nominative = "кусок огромного гриба"
+genitive = "куска огромного гриба"
+dative = "куску огромного гриба"
+accusative = "кусок огромного гриба рта"
+instrumental = "куском огромного гриба"
+prepositional = "куске огромного гриба"
+gender = "male"
+
+["popcorn"]
+nominative = "попкорн"
+genitive = "попкорна"
+dative = "попкорну"
+accusative = "попкорн"
+instrumental = "попкорном"
+prepositional = "попкорне"
+gender = "male"
+
+["salty popcorn"]
+nominative = "солёный попкорн"
+genitive = "солёного попкорна"
+dative = "солёному попкорну"
+accusative = "солёный попкорн"
+instrumental = "солёным попкорном"
+prepositional = "солёном попкорне"
+gender = "male"
+
+["caramel popcorn"]
+nominative = "карамельный попкорн"
+genitive = "карамельного попкорна"
+dative = "карамельному попкорну"
+accusative = "карамельный попкорн"
+instrumental = "карамельным попкорном"
+prepositional = "карамельном попкорне"
+gender = "male"
+
+["soy dope"]
+nominative = "соевое пюре"
+genitive = "соевого пюре"
+dative = "соевому пюре"
+accusative = "соевое пюре"
+instrumental = "соевым пюре"
+prepositional = "соевом пюре"
+gender = "neuter"
+
+["burned mess"]
+nominative = "горелое месиво"
+genitive = "горелого месива"
+dative = "горелому месиву"
+accusative = "горелое месиво"
+instrumental = "горелым месивом"
+prepositional = "горелом месиве"
+gender = "neuter"
+
+["moldy mess"]
+nominative = "заплесневелое месиво"
+genitive = "заплесневелого месива"
+dative = "заплесневелому месиву"
+accusative = "заплесневелое месиво"
+instrumental = "заплесневелым месивом"
+prepositional = "заплесневелом месиве"
+gender = "neuter"
+
+["bacteria rich moldy mess"]
+nominative = "заплесневелое месиво с бактериями"
+genitive = "заплесневелого месива с бактериями"
+dative = "заплесневелому месиву с бактериями"
+accusative = "заплесневелое месиво с бактериями"
+instrumental = "заплесневелым месивом с бактериями"
+prepositional = "заплесневелом месиве с бактериями"
+gender = "neuter"
+
+["spider eggs"]
+nominative = "паучьи яйца"
+genitive = "паучьих яиц"
+dative = "паучьим яйцам"
+accusative = "паучьи яйца"
+instrumental = "паучьими яйцами"
+prepositional = "паучьих яйцах"
+gender = "plural"
+
+["processed spider eggs"]
+nominative = "перемолотые паучьи яйца"
+genitive = "перемолотых паучьих яиц"
+dative = "перемолотым паучьим яйцам"
+accusative = "перемолотые паучьи яйца"
+instrumental = "перемолотыми паучьими яйцами"
+prepositional = "перемолотых паучьих яйцах"
+gender = "plural"
+
+["spiderling"]
+nominative = "паучок"
+genitive = "паучка"
+dative = "паучку"
+accusative = "паучка"
+instrumental = "паучком"
+prepositional = "паучке"
+gender = "male"
+
+["melon fruit bowl"]
+nominative = "фруктовый салат в арбузе"
+genitive = "фруктового салата в арбузе"
+dative = "фруктовому салату в арбузе"
+accusative = "фруктовый салат в арбузе"
+instrumental = "фруктовым салатом в арбузе"
+prepositional = "фруктовом салате в арбузе"
+gender = "male"
+
+["melon keg"]
+nominative = "арбузная фляга"
+genitive = "арбузной фляги"
+dative = "арбузной фляге"
+accusative = "арбузную флягу"
+instrumental = "арбузной флягой"
+prepositional = "арбузной фляге"
+gender = "female"
+
+["honey nut bar"]
+nominative = "медовый батончик с орехами"
+genitive = "медового батончика с орехами"
+dative = "медовому батончику с орехами"
+accusative = "медовый батончик с орехами"
+instrumental = "медовым батончиком с орехами"
+prepositional = "медовом батончике с орехами"
+gender = "male"
+
+["Powercrepe"]
+nominative = "ударный блинчик"
+genitive = "ударного блинчика"
+dative = "ударному блинчику"
+accusative = "ударный блинчик"
+instrumental = "ударным блинчиком"
+prepositional = "ударном блинчике"
+gender = "male"
+
+# вероятно игра слов
+["bran requests cereal"]
+nominative = "сухие хлопья \"Приказ: Отруби\""
+genitive = "сухих хлопьев \"Приказ: Отруби\""
+dative = "сухим хлопьям \"Приказ: Отруби\""
+accusative = "сухие хлопья \"Приказ: Отруби\""
+instrumental = "сухими хлопьями \"Приказ: Отруби\""
+prepositional = "сухих хлопьях \"Приказ: Отруби\""
+gender = "plural"
+
+["stick of butter"]
+nominative = "брусок масла"
+genitive = "бруска масла"
+dative = "бруску масла"
+accusative = "брусок масла"
+instrumental = "бруском масла"
+prepositional = "бруске масла"
+gender = "male"
+
+["butter on a stick"]
+nominative = "масло на палочке"
+genitive = "масла на палочке"
+dative = "маслу на палочке"
+accusative = "масло на палочке"
+instrumental = "маслом на палочке"
+prepositional = "масле на палочке"
+gender = "neuter"
+
+["butter slice"]
+nominative = "кусочек масла"
+genitive = "кусочка масла"
+dative = "кусочку масла"
+accusative = "кусочек масла"
+instrumental = "кусочком масла"
+prepositional = "кусочке масла"
+gender = "male"
+
+["onion rings"]
+nominative = "луковые кольца"
+genitive = "луковых колец"
+dative = "луковым кольцам"
+accusative = "луковые кольца"
+instrumental = "луковыми кольцами"
+prepositional = "луковых кольцах"
+gender = "plural"
+
+["pineapple slice"]
+nominative = "кольцо ананаса"
+genitive = "кольца ананаса"
+dative = "кольцу ананаса"
+accusative = "кольцо ананаса"
+instrumental = "кольцом ананаса"
+prepositional = "кольце ананаса"
+gender = "neuter"
+
+["crab rangoon"]
+nominative = "крабовый рангун"
+genitive = "крабового рангуна"
+dative = "крабовому рангуну"
+accusative = "крабовый рангун"
+instrumental = "крабовым рангуном"
+prepositional = "крабовом рангуне"
+gender = "male"
+
+["pesto"]
+nominative = "соус песто"
+genitive = "соуса пусто"
+dative = "соусу песто"
+accusative = "соус песто"
+instrumental = "соусом песто"
+prepositional = "соусе песто"
+gender = "male"
+
+["tomato sauce"]
+nominative = "томатный соус"
+genitive = "томатного соуса"
+dative = "томатному соусу"
+accusative = "томатный соус"
+instrumental = "томатным соусом"
+prepositional = "томатном соусе"
+gender = "male"
+
+["béchamel sauce"]
+nominative = "соус бешамель"
+genitive = "соуса бешамель"
+dative = "соусу бешамель"
+accusative = "соус бешамель"
+instrumental = "соусом бешамель"
+prepositional = "соусе бешамель"
+gender = "male"
+
+["roasted bell pepper"]
+nominative = "запечённый болгарский перец"
+genitive = "запечённого болгарского перца"
+dative = "запечённому болгарскому перцу"
+accusative = "запечённый болгарский перец"
+instrumental = "запечённым болгарским перцем"
+prepositional = "запечённом болгарском перце"
+gender = "male"
+
+["pierogi"]
+nominative = "вареник"
+genitive = "вареника"
+dative = "варенику"
+accusative = "вареник"
+instrumental = "вареником"
+prepositional = "варенике"
+gender = "male"
+
+["cheese pierogi"]
+nominative = "сырный вареник"
+genitive = "сырного вареника"
+dative = "сырному варенику"
+accusative = "сырный вареник"
+instrumental = "сырным вареником"
+prepositional = "сырном варенике"
+gender = "male"
+
+["meat pierogi"]
+nominative = "мясной вареник"
+genitive = "мясного вареника"
+dative = "мясному варенику"
+accusative = "мясной вареник"
+instrumental = "мясным вареником"
+prepositional = "мясном варенике"
+gender = "male"
+
+["stuffed cabbage"]
+nominative = "голубцы"
+genitive = "голубцов"
+dative = "голубцам"
+accusative = "голубцы"
+instrumental = "голубцами"
+prepositional = "голубцах"
+gender = "plural"
+
+["seaweed sheet"]
+nominative = "лист нори"
+genitive = "листа нори"
+dative = "листу нори"
+accusative = "лист нори"
+instrumental = "листом нори"
+prepositional = "листе нори"
+gender = "male"
+
+["dried saltcane sheathe"]
+nominative = "лист соляного тростника"
+genitive = "листа соляного тростника"
+dative = "листу соляного тростника"
+accusative = "лист соляного тростника"
+instrumental = "листом соляного тростника"
+prepositional = "листе соляного тростника"
+gender = "male"
+
+["granola bar"]
+nominative = "батончик мюсли"
+genitive = "батончика мюсли"
+dative = "батончику мюсли"
+accusative = "батончик мюсли"
+instrumental = "батончиком мюсли"
+prepositional = "батончике мюсли"
+gender = "male"
+
+["onigiri"]
+nominative = "онигири"
+gender = "male"
+
+["paçoca"]
+nominative = "пасока"
+genitive = "пасоки"
+dative = "пасоке"
+accusative = "пасоку"
+instrumental = "пасокой"
+prepositional = "пасоке"
+gender = "female"
+
+["pickle"]
+nominative = "маринованный огурчик"
+genitive = "маринованного огурчика"
+dative = "маринованному огурчику"
+accusative = "маринованный огурчик"
+instrumental = "маринованным огурчиком"
+prepositional = "маринованном огурчике"
+gender = "male"
+
+["spring roll"]
+nominative = "спринг-ролл"
+genitive = "спринг-ролла"
+dative = "спринг-роллу"
+accusative = "спринг-ролл"
+instrumental = "спринг-роллом"
+prepositional = "спринг-ролле"
+gender = "female"
+
+["stuffed eggplant"]
+nominative = "фаршированный баклажан"
+genitive = "фаршированного баклажана"
+dative = "фаршированному баклажану"
+accusative = "фаршированный баклажан"
+instrumental = "фаршированным баклажаном"
+prepositional = "фаршированном баклажане"
+gender = "male"
+
+["moussaka"]
+nominative = "мусака"
+genitive = "мусаки"
+dative = "мусаке"
+accusative = "мусаку"
+instrumental = "мусакой"
+prepositional = "мусаке"
+gender = "female"
+
+["moussaka slice"]
+nominative = "кусок мусаки"
+genitive = "куска мусаки"
+dative = "куску мусаки"
+accusative = "кусок мусаки"
+instrumental = "куском мусаки"
+prepositional = "куске мусаки"
+gender = "male"
+
+["candied pineapple"]
+nominative = "засахаренный ананас"
+genitive = "засахаренного ананаса"
+dative = "засахаренному ананасу"
+accusative = "засахаренный ананас"
+instrumental = "засахаренным ананасом"
+prepositional = "засахаренном ананасе"
+gender = "male"
+
+["raw pita bread"]
+nominative = "сырая пита"
+genitive = "сырой питы"
+dative = "сырой пите"
+accusative = "сырую питу"
+instrumental = "сырой питой"
+prepositional = "сырой пите"
+gender = "female"
+
+["pita bread"]
+nominative = "пита"
+genitive = "питы"
+dative = "пите"
+accusative = "питу"
+instrumental = "питой"
+prepositional = "пите"
+gender = "female"
+
+["tzatziki sauce"]
+nominative = "соус дзадзики"
+genitive = "соуса дзадзики"
+dative = "соусу дзадзики"
+accusative = "соус дзадзики"
+instrumental = "соусом дзадзики"
+prepositional = "соусе дзадзики"
+gender = "male"
+
+["tzatziki and pita bread"]
+nominative = "пита c соусом дзадзики"
+genitive = "питы c соусом дзадзики"
+dative = "пите c соусом дзадзики"
+accusative = "питу c соусом дзадзики"
+instrumental = "питой c соусом дзадзики"
+prepositional = "пите c соусом дзадзики"
+gender = "female"
+
+["grilled beef gyro"]
+nominative = "гирос с говядиной на гриле"
+genitive = "гироса с говядиной на гриле"
+dative = "гиросу с говядиной на гриле"
+accusative = "гирос с говядиной на гриле"
+instrumental = "гиросом с говядиной на гриле"
+prepositional = "гиросе с говядиной на гриле"
+gender = "male"
+
+["vegetarian gyro"]
+nominative = "вегетерианский гирос"
+genitive = "вегетерианского гироса"
+dative = "вегетерианскому гиросу"
+accusative = "вегетерианский гирос"
+instrumental = "вегетерианским гиросом"
+prepositional = "вегетерианском гиросе"
+gender = "male"
+
+["ink sac"]
+nominative = "чернильный мешочек"
+genitive = "чернильного мешочка"
+dative = "чернильному мешочку"
+accusative = "чернильный мешочек"
+instrumental = "чернильным мешочком"
+prepositional = "чернильном мешочке"
+gender = "male"
 
 ["space fries"]
 nominative = "космический картофель фри"
