@@ -33,7 +33,4 @@
 	. = ..()
 	if(!.)
 		return
-	var/mob/living/carbon/human/human = bodypart_owner.owner
-	if(!istype(human))
-		return TRUE
-	return !(human.shoes?.item_flags & IGNORE_DIGITIGRADE)
+	return CHECK_DIGI_LEGS(bodypart_owner.owner)
