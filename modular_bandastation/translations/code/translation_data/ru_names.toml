@@ -28695,22 +28695,67 @@ prepositional = "лобби инженерного отдела"
 gender = "neuter"
 
 ["Supermatter Engine"]
-nominative = "двигатель Суперматерии"
-genitive = "двигателя Суперматерии"
-dative = "двигателю Суперматерии"
-accusative = "двигатель Суперматерии"
-instrumental = "двигателем Суперматерии"
-prepositional = "двигателе Суперматерии"
+nominative = "двигатель суперматерии"
+genitive = "двигателя суперматерии"
+dative = "двигателю суперматерии"
+accusative = "двигатель суперматерии"
+instrumental = "двигателем суперматерии"
+prepositional = "двигателе суперматерии"
 gender = "male"
 
 ["Supermatter Engine Room"]
-nominative = "машинное отделение Суперматерии"
-genitive = "машинного отделения Суперматерии"
-dative = "машинному отделению Суперматерии"
-accusative = "машинное отделение Суперматерии"
-instrumental = "машинным отделением Суперматерии"
-prepositional = "машинном отделении Суперматерии"
+nominative = "машинное отделение суперматерии"
+genitive = "машинного отделения суперматерии"
+dative = "машинному отделению суперматерии"
+accusative = "машинное отделение суперматерии"
+instrumental = "машинным отделением суперматерии"
+prepositional = "машинном отделении суперматерии"
 gender = "neuter"
+
+["supermatter crystal"]
+nominative = "кристалл суперматерии"
+genitive = "кристалла суперматерии"
+dative = "кристаллу суперматерии"
+accusative = "кристалл суперматерии"
+instrumental = "кристаллом суперматерии"
+prepositional = "кристалле суперматерии"
+gender = "male"
+
+["supermatter shard"]
+nominative = "осколок суперматерии"
+genitive = "осколка суперматерии"
+dative = "осколку суперматерии"
+accusative = "осколок суперматерии"
+instrumental = "осколком суперматерии"
+prepositional = "осколке суперматерии"
+gender = "male"
+
+["anchored supermatter shard"]
+nominative = "закрепленный осколок суперматерии"
+genitive = "закрепленного осколка суперматерии"
+dative = "закрепленному осколку суперматерии"
+accusative = "закрепленный осколок суперматерии"
+instrumental = "закрепленным осколком суперматерии"
+prepositional = "закрепленном осколке суперматерии"
+gender = "male"
+
+["strangely small supermatter crystal"]
+nominative = "необычайно малый кристалл суперматерии"
+genitive = "необычайно малого кристалла суперматерии"
+dative = "необычайно малому кристаллу суперматерии"
+accusative = "необычайно малый кристалл суперматерии"
+instrumental = "необычайно малым кристаллом суперматерии"
+prepositional = "необычайно малом кристалле суперматерии"
+gender = "male"
+
+["adamantine pedestal"]
+nominative = "адамантиновый пьедестал"
+genitive = "адамантинового пьедестала"
+dative = "адамантиновому пьедесталу"
+accusative = "адамантиновый пьедестал"
+instrumental = "адамантиновым пьедесталом"
+prepositional = "адамантиновом пьедестале"
+gender = "male"
 
 ["Gravity Generator Room"]
 nominative = "комната генератора гравитации"

@@ -18,15 +18,15 @@
 
 	sm.radio.talk_into(
 		sm,
-		"DANGER: HYPERSTRUCTURE OSCILLATION FREQUENCY OUT OF BOUNDS.",
+		"ОПАСНОСТЬ: ЧАСТОТА ОСЦИЛЛЯЦИИ ГИПЕРСТРУКТУРЫ ВЫШЛА ЗА ГРАНИЦЫ.",
 		sm.damage >= sm.emergency_point ? sm.emergency_channel : sm.warning_channel
 	)
 	var/list/messages = list(
-		"Space seems to be shifting around you...",
-		"You hear a high-pitched ringing sound.",
-		"You feel tingling going down your back.",
-		"Something feels very off.",
-		"A drowning sense of dread washes over you.",
+		"Просранство, кажется, искажается вокруг вас...",
+		"Вы слышите пронзительный звон.",
+		"Вы ощущаете покалывание, бегущее по спине.",
+		"Что-то определённо не так.",
+		"Вас накрывает волна тревожного предчувствия.",
 	)
 	dispatch_announcement_to_players(span_danger(pick(messages)), should_play_sound = FALSE)
 
