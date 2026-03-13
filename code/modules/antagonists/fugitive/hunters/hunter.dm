@@ -7,7 +7,7 @@
 	show_to_ghosts = TRUE
 	antagpanel_category = ANTAG_GROUP_HUNTERS
 	antag_hud_name = "fugitive_hunter"
-	suicide_cry = "ЗА СЛАВУ!!"
+	suicide_cry = "ЗА ЧЕСТЬ!!"
 	antag_flags = ANTAG_SKIP_GLOBAL_LIST
 	var/datum/team/fugitive_hunters/hunter_team
 	var/backstory = "error"

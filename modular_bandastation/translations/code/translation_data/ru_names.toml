@@ -26188,6 +26188,10 @@ instrumental = "рвотой туманности"
 prepositional = "рвоте туманности"
 gender = "female"
 
+["Waldo"]
+nominative = "Вальдо"
+gender = "male"
+
 # MARK: Colonial Marines
 ["flare pouch"]
 nominative = "подсумок осветительных огней"
