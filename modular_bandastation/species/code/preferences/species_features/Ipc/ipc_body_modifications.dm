@@ -188,7 +188,7 @@
 	return TRUE
 
 // ============================================
-// HEF: FRANKENSTEINIAN CHASSIS
+// HEF CHASSIS
 // ============================================
 // HEF — это НЕ bodypart_prosthesis (т.к. у нас свои переменные).
 // Вместо этого делаем свою реализацию с поддержкой manufacturers
@@ -312,7 +312,7 @@
 
 /datum/body_modification/ipc_chassis/hef
 	key = "ipc_chassis_hef"
-	name = "HEF (Frankensteinian) Chassis"
+	name = "HEF Chassis"
 	// Несовместима со всеми другими chassis
 	incompatible_body_modifications = list(
 		"ipc_chassis_morpheus",
@@ -328,7 +328,7 @@
 	)
 
 /datum/body_modification/ipc_chassis/hef/get_description()
-	return "Frankensteinian шасси из деталей разных производителей. \
+	return "HEF шасси из деталей разных производителей. \
 	После выбора этой опции можно будет настроить каждую часть тела отдельно. \
 	Без геймплейных бонусов — только визуал."
 

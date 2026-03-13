@@ -30,6 +30,8 @@
 	icon = IPC_DMI_MORPHEUS
 	icon_static = IPC_DMI_MORPHEUS
 	icon_greyscale = null
+	icon_state = "ipc_monitor"
+	ipc_visual_state = "monitor"
 
 /obj/item/bodypart/arm/left/ipc/morpheus
 	name = "Morpheus Cyberkinetics IPC left arm"
@@ -140,6 +142,8 @@
 	icon = IPC_DMI_BISHOP
 	icon_static = IPC_DMI_BISHOP
 	icon_greyscale = null
+	icon_state = "ipc_monitor"
+	ipc_visual_state = "monitor"
 
 /obj/item/bodypart/arm/left/ipc/bishop
 	name = "Bishop Cybernetics IPC left arm"
@@ -195,6 +199,8 @@
 	icon = IPC_DMI_HESPHIASTOS
 	icon_static = IPC_DMI_HESPHIASTOS
 	icon_greyscale = null
+	icon_state = "ipc_monitor"
+	ipc_visual_state = "monitor"
 
 /obj/item/bodypart/arm/left/ipc/hesphiastos
 	name = "Hesphiastos Industries IPC left arm"
@@ -250,6 +256,8 @@
 	icon = IPC_DMI_WARD
 	icon_static = IPC_DMI_WARD
 	icon_greyscale = null
+	icon_state = "ipc_monitor"
+	ipc_visual_state = "monitor"
 
 /obj/item/bodypart/arm/left/ipc/ward_takahashi
 	name = "Ward-Takahashi IPC left arm"
@@ -305,6 +313,8 @@
 	icon = IPC_DMI_XION
 	icon_static = IPC_DMI_XION
 	icon_greyscale = null
+	icon_state = "ipc_monitor"
+	ipc_visual_state = "monitor"
 
 /obj/item/bodypart/arm/left/ipc/xion
 	name = "Xion Manufacturing Group IPC left arm"
@@ -415,6 +425,8 @@
 	icon = IPC_DMI_SHELLGUARD
 	icon_static = IPC_DMI_SHELLGUARD
 	icon_greyscale = null
+	icon_state = "ipc_monitor"
+	ipc_visual_state = "monitor"
 
 /obj/item/bodypart/arm/left/ipc/shellguard
 	name = "Shellguard Munitions IPC left arm"
