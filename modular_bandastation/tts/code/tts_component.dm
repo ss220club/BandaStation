@@ -127,7 +127,10 @@
 	if(ismob(being_changed))
 		var/mob/owner_mob = being_changed
 		if(owner_mob.client)
-			tts_choice = SStts220.pick_tts_seed_by_gender_and_level(owner_mob.gender, owner_mob.client.get_donator_level())
+			var/level = owner_mob.client.get_donator_level()
+			if(check_rights(R_ADMIN, FALSE, owner_mob))
+				level = MAX_DONATOR_LEVEL
+			tts_choice = SStts220.pick_tts_seed_by_gender_and_level(owner_mob.gender, level)
 	if(!tts_choice)
 		tts_choice = SStts220.pick_tts_seed_by_gender(being_changed.gender)
 	var/datum/tts_seed/seed = SStts220.tts_seeds[tts_choice]

@@ -484,6 +484,9 @@ SUBSYSTEM_DEF(tts220)
 	if(!M.client)
 		return tts_seeds_names.Copy()
 
+	if(check_rights(R_ADMIN, FALSE, M))
+		return tts_seeds_names.Copy()
+
 	return get_seed_names_for_donator_level(M.client.get_donator_level())
 
 /datum/controller/subsystem/tts220/proc/get_seed_names_for_donator_level(level)
