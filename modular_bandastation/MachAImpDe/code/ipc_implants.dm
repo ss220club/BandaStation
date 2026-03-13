@@ -620,6 +620,29 @@
 // 6. BIO-GENERATOR
 // ============================================
 // Позволяет IPC переваривать еду - устанавливается в грудь
+// Требует виртуальный желудок (определён ниже)
+
+// ============================================
+// ВИРТУАЛЬНЫЙ ЖЕЛУДОК ДЛЯ BIO-GENERATOR
+// ============================================
+// Вставляется автоматически при установке bio-generator импланта.
+// Позволяет IPC есть еду, но сам не перерабатывает её — это делает bio-generator.
+
+/obj/item/organ/stomach/ipc_bio
+	name = "bio-generator stomach"
+	desc = "Виртуальный желудок IPC, работающий на основе bio-generator импланта. Перерабатывает органическую пищу в энергию для батарейки."
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "stomach-ipc"
+	metabolism_efficiency = 0
+	hunger_modifier = 0
+	organ_flags = ORGAN_ROBOTIC | ORGAN_UNREMOVABLE
+
+/obj/item/organ/stomach/ipc_bio/on_life(seconds_per_tick)
+	if(reagents && reagents.total_volume > 100)
+		reagents.clear_reagents()
+
+/obj/item/organ/stomach/ipc_bio/handle_hunger(mob/living/carbon/human/human, seconds_per_tick)
+	return
 
 /obj/item/implant/ipc/bio_generator
 	name = "Bio-Generator Implant"
