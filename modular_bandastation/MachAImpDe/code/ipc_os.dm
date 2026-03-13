@@ -405,7 +405,7 @@
 
 /// Внутренний КПК для IPC — не тратит заряд, показывает заряд батареи КПБ
 /obj/item/modular_computer/pda/ipc_internal
-	name = "IPC Internal PDA"
+	name = "Внутренний КПК КПБ"
 
 /// Не тратим заряд — питание идёт от батареи КПБ напрямую
 /obj/item/modular_computer/pda/ipc_internal/check_power_override()

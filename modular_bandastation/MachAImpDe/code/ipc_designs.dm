@@ -245,7 +245,7 @@
 // ============================================================
 
 /datum/design/ipc_implant_magnetic_joints
-	name = "Магнитные суставы КПБ"
+	name = "Магнитные суставы"
 	desc = "Имплант: магнитные суставы, препятствующие отрыву конечностей."
 	id = "ipc_implant_magnetic_joints"
 	build_path = /obj/item/implant/ipc/magnetic_joints
@@ -257,7 +257,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_sealed_joints
-	name = "Запечатанные суставы КПБ"
+	name = "Запечатанные суставы"
 	desc = "Имплант: запечатанные суставы повышенной прочности."
 	id = "ipc_implant_sealed_joints"
 	build_path = /obj/item/implant/ipc/sealed_joints
@@ -269,7 +269,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_reactive_repair
-	name = "Реактивный ремонт КПБ"
+	name = "Реактивный ремонт"
 	desc = "Имплант: система автоматического восстановления повреждений."
 	id = "ipc_implant_reactive_repair"
 	build_path = /obj/item/implant/ipc/reactive_repair
@@ -282,7 +282,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_magnetic_leg
-	name = "Магнитная нога КПБ"
+	name = "Магнитные ботинки"
 	desc = "Имплант: магнитные ботинки для фиксации на металлических поверхностях."
 	id = "ipc_implant_magnetic_leg"
 	build_path = /obj/item/implant/ipc/magnetic_leg
@@ -330,7 +330,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_arm_cannon
-	name = "Дробовик в руке"
+	name = "Встроенный дробовик"
 	desc = "Имплант: встроенный дробовик в предплечье."
 	id = "ipc_implant_arm_cannon"
 	build_path = /obj/item/implant/ipc/arm_cannon

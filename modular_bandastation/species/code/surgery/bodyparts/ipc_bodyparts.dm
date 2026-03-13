@@ -3,8 +3,8 @@
 // ============================================
 
 /obj/item/bodypart/chest/ipc
-	name = "IPC chassis"
-	desc = "Основной корпус IPC, содержащий все жизненно важные системы."
+	name = "Корпус КПБ"
+	desc = "Основной корпус КПБ, содержащий все жизненно важные системы."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_chest_m"
@@ -46,8 +46,8 @@
 // ============================================
 
 /obj/item/bodypart/head/ipc
-	name = "IPC head"
-	desc = "Голова IPC с оптическими и аудио сенсорами."
+	name = "Голова КПБ"
+	desc = "Голова КПБ с оптическими и аудио-сенсорами."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_head"
@@ -108,10 +108,12 @@
 
 // Голова-монитор (экран вместо обычной головы)
 // Используется фабрикатором по умолчанию — наиболее распространённый тип.
+// icon_state намеренно не переопределяем — наследуем "ipc_head" от родителя.
+// ipc_visual_state = "monitor" заставляет get_limb_icon() использовать стейт "ipc_monitor"
+// из DMI бренда, который его поддерживает (generic bodyparts.dmi имеет только "ipc_head").
 /obj/item/bodypart/head/ipc/monitor
-	name = "IPC monitor head"
-	desc = "Голова-монитор IPC с встроенным дисплеем вместо лица."
-	icon_state = "ipc_monitor"
+	name = "Голова-монитор КПБ"
+	desc = "Голова-монитор КПБ с встроенным дисплеем вместо лица."
 	ipc_visual_state = "monitor"
 
 // ============================================
@@ -119,8 +121,8 @@
 // ============================================
 
 /obj/item/bodypart/arm/left/ipc
-	name = "IPC left arm"
-	desc = "Левая рука IPC."
+	name = "Левая рука КПБ"
+	desc = "Левая рука КПБ."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_l_arm"
@@ -148,8 +150,8 @@
 // ============================================
 
 /obj/item/bodypart/arm/right/ipc
-	name = "IPC right arm"
-	desc = "Правая рука IPC."
+	name = "Правая рука КПБ"
+	desc = "Правая рука КПБ."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_r_arm"
@@ -177,8 +179,8 @@
 // ============================================
 
 /obj/item/bodypart/leg/left/ipc
-	name = "IPC left leg"
-	desc = "Левая нога IPC."
+	name = "Левая нога КПБ"
+	desc = "Левая нога КПБ."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_l_leg"
@@ -205,8 +207,8 @@
 // ============================================
 
 /obj/item/bodypart/leg/right/ipc
-	name = "IPC right leg"
-	desc = "Правая нога IPC."
+	name = "Правая нога КПБ"
+	desc = "Правая нога КПБ."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_state = "ipc_r_leg"

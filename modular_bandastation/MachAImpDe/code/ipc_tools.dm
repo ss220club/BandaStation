@@ -13,8 +13,8 @@
 // Работает с /obj/item/implant вместо /obj/item/organ
 
 /obj/item/autosurgeon/ipc
-	name = "IPC autosurgeon"
-	desc = "Специализированное устройство для автоматической установки IPC имплантов. Работает только с имплантами для синтетиков. \
+	name = "Автохирург КПБ"
+	desc = "Специализированное устройство для автоматической установки КПБ-имплантов. Работает только с имплантами для синтетиков. \
 		У него есть гнездо для установки импланта, и гнездо для отвертки, чтобы доставать случайно вставленные вещи."
 	icon = 'icons/obj/devices/tool.dmi'
 	icon_state = "autosurgeon"
@@ -221,7 +221,7 @@
 // ============================================
 
 /obj/item/ipc_thermalpaste
-	name = "thermal paste applicator"
+	name = "Аппликатор термопасты"
 	desc = "Специализированная термопаста для IPC. Обеспечивает постоянное охлаждение 1°C/сек в течение 5-10 минут. Одноразовая."
 	icon = 'modular_bandastation/MachAImpDe/icons/stack_medical.dmi'
 	icon_state = "termopaste_tube"
@@ -275,7 +275,7 @@
 // ============================================
 
 /obj/item/ipc_coolingblock
-	name = "portable cooling block"
+	name = "Переносной охлаждающий блок"
 	desc = "Высокотехнологичное устройство активного охлаждения для IPC. Обеспечивает активное охлаждение 1°C/сек в течение 5 минут."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "ipc_cooler"
@@ -457,7 +457,7 @@
 // ============================================
 
 /obj/item/organ/brain/mmi_core
-	name = "MMI core"
+	name = "Ядро ММИ"
 	desc = "Компактный носитель оцифрованного сознания, извлечённый из MMI. Содержит загруженный разум существа. Может быть вставлен в MMI или установлен в подходящий корпус."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "mmi_core"
