@@ -9,7 +9,7 @@
 //   КПБ/Оборудование — стол и прочее оборудование (механфаб)
 //
 //   Платы компьютеров/Медицинские консоли — плата терминала (прототокарный)
-//   Платы машин/Медицинские машины        — синтетический стол (механфаб)
+//   Оборудование/Медицинское оборудование  — синтетический стол (прототокарный)
 // ============================================
 
 // ============================================================
@@ -74,6 +74,7 @@
 	name = "Синтетический диагностический стол"
 	desc = "Специализированный операционный стол для синтетических организмов с зарядкой, охлаждением и сетевым портом."
 	id = "synthetic_diagnostic_table"
+	build_type = PROTOLATHE | AWAY_LATHE
 	build_path = /obj/structure/table/optable/synthetic
 	materials = list(
 		/datum/material/silver  = SHEET_MATERIAL_AMOUNT * 2,
@@ -81,7 +82,7 @@
 		/datum/material/glass   = SHEET_MATERIAL_AMOUNT,
 	)
 	category = list(
-		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_MEDICAL
+		RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_EQUIPMENT_MEDICAL
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
