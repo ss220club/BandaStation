@@ -20,7 +20,7 @@
 	id = "ipc_parts"
 	starting_node = TRUE
 	display_name = "Детали КПБ"
-	description = "Компоненты для создания и ремонта синтетических организмов IPC: части тела, органы, импланты и оборудование."
+	description = "Компоненты для создания и ремонта синтетических организмов IPC: части тела, органы, базовые импланты и оборудование."
 	design_ids = list(
 		// Плата терминала
 		"synthetic_diagnostic_terminal_board",
@@ -44,13 +44,26 @@
 		"ipc_implant_sealed_joints",
 		"ipc_implant_reactive_repair",
 		"ipc_implant_magnetic_leg",
-		// Импланты (боевые)
+	)
+
+// ============================================================
+// TECHWEB НОДА — боевые импланты КПБ (требует исследования)
+// ============================================================
+
+/datum/techweb_node/ipc_combat_implants
+	id = "ipc_combat_implants"
+	display_name = "Боевые импланты КПБ"
+	description = "Наступательные модули для синтетических организмов IPC: встроенное оружие, ускорители реакции."
+	prereq_ids = list(TECHWEB_NODE_COMBAT_IMPLANTS)
+	design_ids = list(
 		"ipc_implant_arm_razor",
 		"ipc_implant_mantis_right",
 		"ipc_implant_mantis_left",
 		"ipc_implant_arm_cannon",
 		"ipc_implant_sandevistan",
 	)
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_3_POINTS)
+	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 // ============================================================
 // ПЛАТА СИНТЕТИЧЕСКОГО ДИАГНОСТИЧЕСКОГО ТЕРМИНАЛА
@@ -91,10 +104,10 @@
 // ============================================================
 
 /datum/design/ipc_bodypart_head
-	name = "Голова КПБ"
-	desc = "Корпусная часть головы для синтетического организма IPC."
+	name = "Голова КПБ (монитор)"
+	desc = "Голова-монитор для синтетического организма IPC с встроенным дисплеем."
 	id = "ipc_bodypart_head"
-	build_path = /obj/item/bodypart/head/ipc
+	build_path = /obj/item/bodypart/head/ipc/monitor
 	materials = list(
 		/datum/material/iron  = SHEET_MATERIAL_AMOUNT * 3,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT,

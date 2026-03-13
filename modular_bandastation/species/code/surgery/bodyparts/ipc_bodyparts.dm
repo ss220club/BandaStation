@@ -106,6 +106,14 @@
 		internal_organ.Remove(owner)
 		internal_organ.forceMove(drop_location)
 
+// Голова-монитор (экран вместо обычной головы)
+// Используется фабрикатором по умолчанию — наиболее распространённый тип.
+/obj/item/bodypart/head/ipc/monitor
+	name = "IPC monitor head"
+	desc = "Голова-монитор IPC с встроенным дисплеем вместо лица."
+	icon_state = "ipc_monitor"
+	ipc_visual_state = "monitor"
+
 // ============================================
 // ЛЕВАЯ РУКА
 // ============================================
