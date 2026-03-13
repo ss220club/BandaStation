@@ -1,11 +1,11 @@
 #include "_MachAImpDe.dm"
 
-#include "code/medical_misc.dm"
 #include "code/ipc_tools.dm"
 #include "code/ipc_combat_implants.dm"
 #include "code/ipc_implants.dm"
 #include "code/ipc_os.dm"
-#include "code/synthetic_diagnostics.dm"
+#include "code/synthetic_table.dm"
+#include "code/synthetic_terminal.dm"
 #include "code/ipc_designs.dm"
 // BEGIN_INTERNALS
 // END_INTERNALS

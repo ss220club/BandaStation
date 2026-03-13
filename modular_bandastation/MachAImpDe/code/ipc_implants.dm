@@ -1175,3 +1175,74 @@
 		span_notice("[H] нанизывает куски мяса на лезвия богомола и подаёт готовый кебаб!"),
 		span_notice("Кебаб готов!"),
 	)
+
+// ============================================
+// УЛУЧШЕННАЯ СИСТЕМА ОХЛАЖДЕНИЯ — имплант
+// ============================================
+// Устанавливается через autosurgeon или хирургию.
+// После имплантации постоянно снижает температуру CPU на 1°C/сек.
+
+/obj/item/implant/ipc_cooling_system
+	name = "thermal stabilizer implant"
+	desc = "Улучшенная система охлаждения для IPC. При имплантации обеспечивает постоянное охлаждение 1°C/сек навсегда."
+	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
+	icon_state = "ipc_cooler"
+	w_class = WEIGHT_CLASS_TINY
+
+/obj/item/implant/ipc_cooling_system/get_data()
+	var/dat = {"<b>Implant Specifications:</b><BR>
+	<b>Name:</b> Thermal Stabilizer Implant<BR>
+	<b>Life:</b> Permanent<BR>
+	<b>Function:</b> Provides passive cooling for IPC chassis.<BR>
+	<b>Integrity:</b> Активен"}
+	return dat
+
+/obj/item/implant/ipc_cooling_system/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+	. = ..()
+	if(!.)
+		return FALSE
+
+	if(!ishuman(target))
+		return FALSE
+
+	var/mob/living/carbon/human/H = target
+	if(!istype(H.dna?.species, /datum/species/ipc))
+		if(!silent)
+			to_chat(user, span_warning("Этот имплант предназначен только для IPC!"))
+		return FALSE
+
+	var/datum/species/ipc/S = H.dna.species
+
+	if(S.improved_cooling_installed)
+		if(!silent)
+			to_chat(user, span_warning("У [H] уже установлена улучшенная система охлаждения!"))
+		return FALSE
+
+	S.improved_cooling_installed = TRUE
+
+	if(!silent)
+		to_chat(H, span_boldnotice("Улучшенная система охлаждения установлена и активирована!"))
+		to_chat(user, span_notice("Вы успешно установили имплант термостабилизатора в [H]."))
+
+	return TRUE
+
+/obj/item/implant/ipc_cooling_system/removed(mob/living/source, silent = FALSE, special = FALSE)
+	. = ..()
+
+	if(!ishuman(source))
+		return
+
+	var/mob/living/carbon/human/H = source
+	if(!istype(H.dna?.species, /datum/species/ipc))
+		return
+
+	var/datum/species/ipc/S = H.dna.species
+	S.improved_cooling_installed = FALSE
+
+	if(!silent)
+		to_chat(H, span_warning("Ваша улучшенная система охлаждения деактивирована!"))
+
+/obj/item/implantcase/ipc_cooling_system
+	name = "implant case - 'Thermal Stabilizer'"
+	desc = "Стеклянный кейс содержащий имплант термостабилизатора для IPC."
+	imp_type = /obj/item/implant/ipc_cooling_system
