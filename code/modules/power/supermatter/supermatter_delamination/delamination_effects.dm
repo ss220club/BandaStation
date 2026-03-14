@@ -40,12 +40,12 @@
 			var/message = ""
 			var/location = victim.loc
 			if(istype(location, /obj/structure/disposalholder)) // sometimes your loc can be a disposalsholder when you're inside a disposals type, so let's just pass a message that makes sense.
-				message = "You hear a lot of rattling in the disposal pipes around you as reality itself distorts. Yet, you feel safe."
+				message = "Вы слышите много грохота в трубах утилизации вокруг вас, когда сама реальность искажается. Тем не менее, вы чувствуете себя в безопасности."
 			else
-				message = "You hold onto \the [victim.loc] as hard as you can, as reality distorts around you. You feel safe."
+				message = "Вы крепко держитесь за [victim.loc], когда реальность искажается вокруг вас. Вы чувствуете себя в безопасности."
 			to_chat(victim, span_bolddanger(message))
 			continue
-		to_chat(victim, span_bolddanger("You feel reality distort for a moment..."))
+		to_chat(victim, span_bolddanger("Вы чувствуете, как реальность искажается на мгновение..."))
 		if (isliving(victim))
 			var/mob/living/living_victim = victim
 			living_victim.add_mood_event("delam", /datum/mood_event/delam)
@@ -148,8 +148,8 @@
 	// say goodbye to that shuttle of yours
 	if(SSshuttle.emergency.mode != SHUTTLE_ESCAPE)
 		priority_announce(
-			text = "Fatal error occurred in emergency shuttle uplink during transit. Unable to reestablish connection.",
-			title = "Shuttle Failure",
+			text = "Произошла фатальная ошибка в аплинке аварийного шаттла во время транзита. Невозможно восстановить соединение.",
+			title = "Отказ шаттла",
 			sound =  'sound/announcer/announcement/announce_dig.ogg',
 			sender_override = "Система оповещения эвакуационного шаттла",
 			color_override = "grey",
@@ -171,7 +171,7 @@
 	for(var/mob/player as anything in GLOB.player_list)
 		if(!isdead(player))
 			var/mob/living/living_player = player
-			to_chat(player, span_bolddanger("Everything around you is resonating with a powerful energy. This can't be good."))
+			to_chat(player, span_bolddanger("Всё вокруг вас резонирует с мощной энергией. Это не к добру."))
 			living_player.add_mood_event("cascade", /datum/mood_event/cascade)
 		SEND_SOUND(player, 'sound/effects/magic/charge.ogg')
 
