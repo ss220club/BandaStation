@@ -637,7 +637,7 @@
 				W.remove_wound_from_victim()
 
 	for(var/datum/disease/D in affected_mob.diseases)
-		if(!D == src)
+		if(D != src)
 			D.cure()
 
 	if(host_dead)

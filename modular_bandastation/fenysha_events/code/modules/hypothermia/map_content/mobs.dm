@@ -6,15 +6,17 @@
 	name = "bone fragment"
 	icon = 'modular_bandastation/fenysha_events/icons/projectiles/bone_fragment.dmi'
 	icon_state = "bone_fragment"
-	damage = 8
+	damage = 15
 	ricochets_max = 3
-	ricochet_chance = 66
+	ricochet_chance = 40
 	ricochet_decay_chance = 1
 	ricochet_decay_damage = 0.9
 	ricochet_auto_aim_angle = 10
 	ricochet_auto_aim_range = 2
 	ricochet_incidence_leeway = 0
 	embed_falloff_tile = -2
+	hit_prone_targets = TRUE
+	ignore_range_hit_prone_targets = TRUE
 	shrapnel_type = /obj/item/shrapnel/bone_fragment
 	embed_type = /datum/embedding/tomahawk
 
@@ -492,10 +494,10 @@
 	name = "corrupted mutant boss"
 	real_name = "corrupted mutant boss"
 	desc = "A massive, horrifying mutant leader. It commands lesser mutants and unleashes devastating attacks."
-	icon = 'modular_bandastation/fenysha_events/icons/mob/horror.dmi'
-	icon_state = "horror"
-	icon_living = "horror"
-	icon_dead = "horror_dead"
+	icon = 'modular_bandastation/fenysha_events/icons/mob/128x128.dmi'
+	icon_state = "corrupted_boss"
+	icon_living = "corrupted_boss"
+	icon_dead = "corrupted_boss"
 	mob_biotypes = MOB_ORGANIC
 	speed = 1
 	maxHealth = 1500
@@ -508,10 +510,16 @@
 	attack_verb_simple = "smash"
 	attack_sound = 'sound/effects/blob/blobattack.ogg'
 	gold_core_spawnable = FALSE
+	base_pixel_x = -52
+	pixel_x = -52
+
 
 	var/playstyle_string = span_infoplain("<b><font size=3 color='red'>We are the Corrupted Mutant Boss!</font> We are extremely powerful with multiple abilities: charge, tentacles, bone shards, and leap. Use them wisely via action buttons. We regenerate health over time but watch our health!</b>")
-	var/projectile_evade_cooldown = 2 SECONDS
+	var/projectile_evade_cooldown = 3.5 SECONDS
 	var/evade_steps = 3
+	var/can_chance_stage = FALSE
+	var/evade_chance = 50
+	var/stage = 1
 	var/drop
 	var/list/innate_actions = list(
 		/datum/action/cooldown/mob_cooldown/boss_charge = MUTANT_ABILITY_CHARGE,
@@ -522,7 +530,7 @@
 
 	ai_controller = /datum/ai_controller/basic_controller/corrupted_mutant_boss
 	COOLDOWN_DECLARE(projectile_evade)
-
+	COOLDOWN_DECLARE(black_cd)
 
 
 /mob/living/basic/corrupted_mutant_boss/Initialize(mapload)
@@ -538,6 +546,9 @@
 
 /mob/living/basic/corrupted_mutant_boss/Life()
 	. = ..()
+	if(stage >= 4 && COOLDOWN_FINISHED(src, black_cd))
+		new /obj/effect/temp_visual/decoy/fading/halfsecond(loc, src)
+		COOLDOWN_START(src, black_cd, 1.5 SECONDS)
 
 /mob/living/basic/corrupted_mutant_boss/death()
 	. = ..()
@@ -546,9 +557,9 @@
 
 
 /mob/living/basic/corrupted_mutant_boss/bullet_act(obj/projectile/proj, def_zone, piercing_hit, blocked)
-	if(!prob(80))
+	if(!prob(evade_chance))
 		return ..()
-	if(!COOLDOWN_FINISHED(src, projectile_evade))
+	if(!COOLDOWN_FINISHED(src, projectile_evade) || stat == DEAD)
 		return ..()
 	var/evade_dir = angle2dir(proj.dir)
 
@@ -581,11 +592,75 @@
 	new /obj/effect/temp_visual/decoy/fading/halfsecond(loc, src)
 	playsound(src, 'sound/effects/bang.ogg', 50, TRUE, -1)
 
+/mob/living/basic/corrupted_mutant_boss/apply_damage(damage, damagetype, def_zone, blocked, forced, spread_damage, wound_bonus, exposed_wound_bonus, sharpness, attack_direction, attacking_item, wound_clothing)
+	. = ..()
+	if(!can_chance_stage)
+		return
+
+	var/health_percentage = health / maxHealth
+
+	var/target_stage = stage
+	if(health_percentage <= 0.11)
+		target_stage = 4
+	else if(health_percentage <= 0.41)
+		target_stage = 3
+	else if(health_percentage <= 0.71)
+		target_stage = 2
+
+	if(target_stage > stage)
+		update_stage(target_stage)
+
+/mob/living/basic/corrupted_mutant_boss/proc/update_stage(new_stage)
+	switch(new_stage)
+		if(2)
+			grant_actions_by_list(list(/datum/action/cooldown/mob_cooldown/boss_bone_shard_wave = null))
+			visible_message(span_userdanger("[src] издает истошный вопль - оно в ярости!"))
+			playsound(src, 'modular_bandastation/fenysha_events/sounds/mobs/mutant_boss_death.ogg', 60, TRUE)
+			Shake()
+		if(3)
+			heal_overall_damage(300)
+			visible_message(span_userdanger("[src] издает истошный вопль - оно в ярости!"))
+			grant_actions_by_list(list(/datum/action/cooldown/mob_cooldown/crushing_charge = null))
+			speed = speed - 0.3
+			playsound(src, 'modular_bandastation/fenysha_events/sounds/mobs/mutant_boss_death.ogg', 80, TRUE)
+			projectile_evade_cooldown *= 0.7
+			evade_chance = 65
+			Shake()
+		if(4)
+			heal_overall_damage(600)
+			visible_message(span_userdanger("[src] издает истошный вопль - оно кричит ярости!"))
+			grant_actions_by_list(list(/datum/action/cooldown/mob_cooldown/crush_wave = null))
+			speed = speed - 0.4
+			animate(src, color = COLOR_BUBBLEGUM_RED, time = 3 SECONDS)
+			playsound(src, 'modular_bandastation/fenysha_events/sounds/mobs/mutant_boss_death.ogg', 100, TRUE)
+			projectile_evade_cooldown *= 0.5
+			evade_chance = 85
+			Shake()
+			for(var/datum/action/cooldown/action in actions)
+				action.cooldown_time *= 0.5
+		else
+			speed = initial(speed)
+			color = initial(color)
+			projectile_evade_cooldown = initial(projectile_evade_cooldown)
+			evade_chance = initial(evade_chance)
+			for(var/datum/action/cooldown/action in actions)
+				action.cooldown_time = initial(action.cooldown_time)
 
 /mob/living/basic/corrupted_mutant_boss/real
 	drop = list(/obj/item/keycard/important/hypothermia/ship_control_key, /obj/item/storage/belt/utility/chief/full)
 	maxHealth = 1800
 	health = 1800
+
+/mob/living/basic/corrupted_mutant_boss/all_bilities
+	innate_actions = list(
+		/datum/action/cooldown/mob_cooldown/boss_charge = MUTANT_ABILITY_CHARGE,
+		/datum/action/cooldown/mob_cooldown/boss_tentacle = MUTANT_ABILITY_TENTACLE,
+		/datum/action/cooldown/mob_cooldown/boss_bone_shard = MUTANT_ABILITY_BONE,
+		/datum/action/cooldown/mob_cooldown/boss_leap = MUTANT_ABILITY_BONE,
+		/datum/action/cooldown/mob_cooldown/boss_bone_shard_wave = null,
+		/datum/action/cooldown/mob_cooldown/crush_wave = null,
+		/datum/action/cooldown/mob_cooldown/crushing_charge = null,
+	)
 
 
 /mob/living/basic/corrupted_mutant_boss/real/death()
@@ -718,7 +793,7 @@
 		return
 	if(target.check_block(owner, armour_penetration = 50) == SUCCESSFUL_BLOCK)
 		return
-	owner.Beam(target, icon_state = "tentacle", time = 5)
+	owner.Beam(target, icon_state = "tentacle", time = 5, override_origin_pixel_x = 0)
 	sleep(5)
 	CHECK_TICK
 	target.Knockdown(3 SECONDS)
@@ -813,6 +888,242 @@
 		L.take_bodypart_damage(30, 10)
 		L.Knockdown(3 SECONDS)
 		shake_camera(L)
+
+/datum/action/cooldown/mob_cooldown/crush_wave
+	name = "Crush wave"
+	desc = "Create crush wave to target location."
+	background_icon_state = "bg_alien"
+	overlay_icon_state = "bg_alien_border"
+	click_to_activate = TRUE
+	cooldown_time = 10 SECONDS
+	melee_cooldown_time = 0
+	shared_cooldown = NONE
+
+	var/max_range = 15
+	var/warning_time = 0.5 SECONDS
+	var/step_delay = 0.2 SECONDS
+	var/damage_amount = 25
+	var/knockdown_time = 3 SECONDS
+	var/throw_distance = 4
+
+/datum/action/cooldown/mob_cooldown/crush_wave/PreActivate(atom/target)
+	target = get_turf(target)
+	if(get_dist(owner, target) > max_range || get_dist(owner, target) < 3)
+		return FALSE
+	return ..()
+
+/datum/action/cooldown/mob_cooldown/crush_wave/Activate(atom/target)
+	INVOKE_ASYNC(src, PROC_REF(do_crush_wave), target)
+	StartCooldown()
+	return TRUE
+
+/datum/action/cooldown/mob_cooldown/crush_wave/proc/do_crush_wave(turf/target)
+	var/main_dir = get_dir(owner, target)
+	owner.setDir(main_dir)
+
+	owner.visible_message(
+		span_danger("[owner] rears up and prepares a crushing wave towards [target]!"),
+		span_userdanger("You prepare a crushing wave!")
+	)
+
+	var/list/path = get_line(get_turf(owner), target)
+
+	var/list/perp_dirs
+	if(main_dir & (NORTH|SOUTH))
+		perp_dirs = list(EAST, WEST)
+	else
+		perp_dirs = list(NORTH, SOUTH)
+
+	var/list/wave_path = list()
+	for(var/turf/T in path)
+		wave_path |= T
+		for(var/pdir in perp_dirs)
+			var/turf/side = get_step(T, pdir)
+			if(side)
+				wave_path |= side
+
+
+	for(var/turf/T in wave_path)
+		new /obj/effect/temp_visual/telegraphing/boss_hit(T)
+
+	playsound(owner, 'sound/effects/bang.ogg', 50, TRUE, frequency = 0.9)
+	sleep(warning_time)
+
+	playsound(owner, 'sound/effects/bang.ogg', 70, TRUE, frequency = 0.9)
+	var/list/affected_mobs = list()
+
+	for(var/i = 2 to length(path))
+		sleep(step_delay)
+
+		var/turf/current_center = path[i]
+		var/list/current_slice = list(current_center)
+		for(var/pdir in perp_dirs)
+			var/turf/side = get_step(current_center, pdir)
+			if(side)
+				current_slice += side
+			for(var/turf/T in range(1, side))
+				if(T in current_slice)
+					continue
+				current_slice += T
+
+		for(var/turf/T in current_slice)
+			animate(T, pixel_x = rand(-3,3), pixel_y = rand(-3,3), time = 2, easing = JUMP_EASING)
+			animate(pixel_x = 0, pixel_y = 0, time = 3)
+
+
+		var/volume = clamp(85 - (i * 4), 30, 85)
+		playsound(current_center, 'sound/effects/bang.ogg', volume, TRUE, frequency = 0.75 + (i * 0.03))
+
+
+		for(var/mob/living/L in range(1, current_center))
+			if(L == owner)
+				continue
+			if(L in affected_mobs || L.incorporeal_move)
+				continue
+			affected_mobs += L
+
+			L.apply_damage(damage_amount, BRUTE, BODY_ZONE_CHEST, wound_bonus = CANT_WOUND)
+			L.Knockdown(knockdown_time)
+			L.Paralyze(0.5 SECONDS)
+
+			if(!L.anchored)
+				var/throw_dir = main_dir || get_dir(current_center, L)
+				var/turf/throw_target = get_ranged_target_turf(L, throw_dir, throw_distance)
+				L.throw_at(throw_target, throw_distance, 2, src, spin = FALSE)
+
+		CHECK_TICK
+
+/datum/action/cooldown/mob_cooldown/crushing_charge
+	name = "Crushing Charge"
+	desc = "Slam the ground twice and charge forward, crushing everything in the path."
+	button_icon = 'icons/mob/simple/lavaland/lavaland_monsters.dmi'
+	button_icon_state = "goliath_baby"
+	background_icon_state = "bg_alien"
+	overlay_icon_state = "bg_alien_border"
+	click_to_activate = TRUE
+	cooldown_time = 12 SECONDS
+	melee_cooldown_time = 0
+	shared_cooldown = NONE
+
+	var/max_range = 10
+	var/slam_count = 2
+	var/charge_delay = 5
+	var/charge_sound = 'modular_bandastation/fenysha_events/sounds/mobs/mutant_boss_attack_01.ogg'
+
+/datum/action/cooldown/mob_cooldown/crushing_charge/PreActivate(atom/target)
+	target = get_turf(target)
+	if(get_dist(owner, target) > max_range)
+		return FALSE
+	return ..()
+
+/datum/action/cooldown/mob_cooldown/crushing_charge/Activate(atom/target)
+	var/dist = get_dist(owner, target) - 1
+	if(dist <= 1)
+		owner.balloon_alert(owner, "Too close!")
+		return
+	INVOKE_ASYNC(src, PROC_REF(do_crushing_charge), target)
+	StartCooldown()
+	return TRUE
+
+/datum/action/cooldown/mob_cooldown/crushing_charge/proc/do_crushing_charge(turf/target)
+	owner.visible_message(
+		span_danger("[owner] slams the ground twice, preparing a devastating charge!"),
+		span_userdanger("You slam the ground twice and prepare to charge!")
+	)
+
+	for(var/i = 1 to slam_count)
+		playsound(owner, 'sound/effects/bang.ogg', 65, TRUE, frequency = 0.85)
+		new /obj/effect/temp_visual/telegraphing/boss_hit(owner.loc)
+
+		animate(owner, pixel_y = 6, time = 1.5, easing = BOUNCE_EASING)
+		animate(pixel_y = 0, time = 2)
+
+		sleep(0.9 SECONDS)
+
+	if(charge_delay)
+		var/main_dir = get_dir(owner, target)
+		var/list/path = get_line(get_turf(owner), target)
+		var/list/perp_dirs
+		if(main_dir & (NORTH|SOUTH))
+			perp_dirs = list(EAST, WEST)
+		else
+			perp_dirs = list(NORTH, SOUTH)
+
+		var/list/wave_path = list()
+		for(var/turf/T in path)
+			wave_path |= T
+			for(var/pdir in perp_dirs)
+				var/turf/side = get_step(T, pdir)
+				if(side)
+					wave_path |= side
+
+
+		for(var/turf/T in wave_path)
+			new /obj/effect/temp_visual/telegraphing/boss_hit(T)
+		sleep(charge_delay)
+
+	owner.visible_message(span_danger("[owner] charges forward with crushing force!"))
+	if(charge_sound)
+		playsound(owner, charge_sound, 45)
+
+	var/dist = get_dist(owner, target) - 1
+	var/turf/damage_turf
+	for(var/i = 1 to dist)
+		if(get_dist(owner, target) <= 1)
+			break
+
+		new /obj/effect/temp_visual/decoy/fading/halfsecond(owner.loc, owner)
+		var/turf/next_turf = get_step_towards(owner, target)
+		owner.setDir(get_dir(owner, next_turf))
+		damage_turf == next_turf
+		if(next_turf.is_blocked_turf(TRUE, owner) || next_turf == target)
+			break
+		owner.forceMove(next_turf)
+		for(var/mob/living/L in range(1, owner.loc))
+			if(L == owner || L.incorporeal_move)
+				continue
+			L.apply_damage(25, BRUTE, BODY_ZONE_CHEST, wound_bonus = CANT_WOUND)
+			L.Knockdown(2 SECONDS)
+			L.Paralyze(0.5 SECONDS)
+
+			if(!L.anchored)
+				var/dir_to_throw = get_dir(owner, L)
+				if(!dir_to_throw) dir_to_throw = pick(GLOB.cardinals)
+				var/turf/throw_target = get_ranged_target_turf(L, dir_to_throw, 3)
+				L.throw_at(throw_target, 3, 1.8, src, spin = FALSE)
+		for(var/turf/T in range(1, owner.loc))
+			T.Shake()
+		sleep(0.2 SECONDS)
+		CHECK_TICK
+
+	for(var/mob/living/L in range(1, target))
+		if(get_dist(owner, L) <= 1 && L != owner)
+			var/damage = rand(15, 30)
+			if(!(L.check_block(owner, damage * 0.5, armour_penetration = 50) == SUCCESSFUL_BLOCK))
+				L.take_bodypart_damage(damage * 0.5)
+				L.Knockdown(3 SECONDS)
+				L.Paralyze(1 SECONDS)
+				shake_camera(L, 2, 2)
+
+	for(var/atom/movable/AM in damage_turf.contents)
+		if(AM == owner) // Just for sure
+			continue
+		if(isobj(AM) && AM.uses_integrity)
+			AM.take_damage(200, BRUTE, attack_dir = src, armour_penetration = 50)
+			AM.Shake()
+		if(isliving(AM))
+			var/mob/living/living_target = AM
+			living_target.apply_damage(50, BRUTE, wound_bonus = 20, sharpness = -100)
+			living_target.Knockdown(10 SECONDS)
+			living_target.Paralyze(5 SECONDS)
+		if(!AM.anchored)
+			var/dir_to_throw = get_dir(owner, AM)
+			if(!dir_to_throw) dir_to_throw = pick(GLOB.cardinals)
+			var/turf/throw_target = get_ranged_target_turf(AM, dir_to_throw, 5)
+			AM.throw_at(throw_target, 5, 1.8, src, spin = FALSE)
+
+	playsound(owner, 'sound/effects/blob/blobattack.ogg', 100, TRUE)
+
 
 #define MIN_TIME_TO_ABILITY (1 SECONDS)
 

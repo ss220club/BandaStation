@@ -418,7 +418,9 @@
 	var/shard_delay = 3 SECONDS
 	var/shard_sound = 'sound/effects/splat.ogg'
 	var/wave_width = 11
-	var/shards_per_turf = 3
+	var/shards_per_turf = 1
+	var/shard_waves = 3
+	var/wave_delay = 1 SECONDS
 
 /datum/action/cooldown/mob_cooldown/boss_bone_shard_wave/PreActivate(atom/target)
 	target = get_turf(target)
@@ -442,10 +444,12 @@
 	if(shard_sound)
 		playsound(owner, shard_sound, 50, TRUE)
 	var/turf/owner_turf = get_turf(owner)
-	for(var/turf/T in target_turfs)
-		for(var/i = 1 to shards_per_turf)
-			owner_turf.fire_projectile(/obj/projectile/bullet/pellet/bone_fragment, T, firer = owner)
-			sleep(0.1 SECONDS)
+	for(var/i = 1 to shard_waves)
+		for(var/turf/T in target_turfs)
+			for(var/j = 1 to shards_per_turf)
+				owner_turf.fire_projectile(/obj/projectile/bullet/pellet/bone_fragment, T, firer = owner)
+		sleep(wave_delay)
+	CHECK_TICK
 
 /datum/action/cooldown/mob_cooldown/boss_bone_shard_wave/proc/get_wave_turfs(turf/start, turf/target, width)
 	var/list/turfs = list()
