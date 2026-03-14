@@ -30,6 +30,7 @@
 	icon = IPC_DMI_MORPHEUS
 	icon_static = IPC_DMI_MORPHEUS
 	icon_greyscale = null
+	icon_state = "ipc_monitor"
 	ipc_visual_state = "monitor"
 
 /obj/item/bodypart/arm/left/ipc/morpheus
