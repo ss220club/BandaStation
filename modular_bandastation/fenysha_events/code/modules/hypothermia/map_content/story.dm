@@ -1,3 +1,207 @@
+GLOBAL_LIST_EMPTY(important_items)
+
+/obj/item/story_pointer
+	name = "Поисковик важных вещей"
+	desc = "Ручной поисковой датчик -  спосбен находить важные вещи. Удобно в вашей ситуации."
+	icon = 'icons/obj/devices/tracker.dmi'
+	icon_state = "pinpointer"
+	obj_flags = CONDUCTS_ELECTRICITY
+	slot_flags = ITEM_SLOT_BELT
+	w_class = WEIGHT_CLASS_SMALL
+	icon_state = "pinpointer_hunter"
+	worn_icon_state = "pinpointer_black"
+	lefthand_file = 'icons/mob/inhands/items/devices_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
+	throw_speed = 3
+	throw_range = 7
+	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 5, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 2.5)
+	sound_vary = TRUE
+	pickup_sound = SFX_GENERIC_DEVICE_PICKUP
+	drop_sound = SFX_GENERIC_DEVICE_DROP
+
+	/// Максимальная дистанция обнаружения сигнала.
+	var/detection_range = 200
+	/// Кулдаун между использованиями.
+	var/cooldown_time = 4 SECONDS
+	/// Время следующего возможного использования.
+	var/next_use_time = 0
+	/// Имя последнего выбранного объекта
+	var/last_tracked_name
+	/// Защита от спама радиального меню.
+	var/radial_open = FALSE
+
+/obj/item/story_pointer/examine(mob/user)
+	. = ..()
+	. += span_notice("Альт клик для сброса текущей цели.")
+	. += span_notice("Текущее расстояние поиска: [detection_range] метров.")
+
+/obj/item/story_pointer/click_alt(mob/user)
+	if(last_tracked_name)
+		last_tracked_name = null
+		user.balloon_alert(user, "Цель сброшена!")
+	else ..()
+
+/obj/item/story_pointer/attack_self(mob/living/user)
+	if(world.time < next_use_time)
+		user.balloon_alert(user, "слишком быстро!")
+		return
+
+	if(radial_open)
+		user.balloon_alert(user, "уже выбираете цель!")
+		next_use_time = world.time + 1 SECONDS
+		return
+
+	var/list/important_items = get_important_items()
+	if(!LAZYLEN(important_items))
+		user.balloon_alert(user, "нет важных объектов!")
+		next_use_time = world.time + 1 SECONDS
+		return
+
+	var/list/choosable_targets = list()
+	var/list/possible_tracked_atoms = list()
+
+	for(var/atom/item as anything in important_items)
+		if(QDELETED(item))
+			continue
+		var/dist = get_dist(get_turf(src), get_turf(item))
+		if(dist > detection_range)
+			continue // Слишком далеко
+		var/display_name = ismob(item) ? item:real_name : item.name
+
+		choosable_targets[display_name] = image(icon = item.icon, icon_state = item.icon_state)
+		possible_tracked_atoms[display_name] = item
+
+	if(!length(choosable_targets))
+		user.balloon_alert(user, "нет важных объектов поблизости!")
+		next_use_time = world.time + 1 SECONDS
+		return
+
+	if(length(choosable_targets) == 1)
+		for(var/name in choosable_targets)
+			last_tracked_name = name
+			break
+
+	else if(isnull(last_tracked_name) || !(last_tracked_name in choosable_targets))
+		radial_open = TRUE
+		last_tracked_name = show_radial_menu(
+			user,
+			user,
+			choosable_targets,
+			custom_check = CALLBACK(src, PROC_REF(check_menu)),
+			radius = 40,
+			require_near = TRUE,
+			tooltips = TRUE,
+		)
+		radial_open = FALSE
+
+	if(isnull(last_tracked_name) || !(last_tracked_name in choosable_targets))
+		next_use_time = world.time + 1 SECONDS
+		if(last_tracked_name)
+			user.balloon_alert(user, "Цель - потеряна!")
+		return
+
+	var/atom/tracked_thing = possible_tracked_atoms[last_tracked_name]
+	if(QDELETED(tracked_thing))
+		last_tracked_name = null
+		next_use_time = world.time + 1 SECONDS
+		user.balloon_alert(user, "Цель - потеряна!")
+		return
+
+	var/dist = get_dist(get_turf(src), get_turf(tracked_thing))
+	if(dist > detection_range)
+		last_tracked_name = null
+		next_use_time = world.time + 1 SECONDS
+		user.balloon_alert(user, "Цель - потеряна, слишком далеко!")
+		return
+
+	playsound(user, 'sound/effects/singlebeat.ogg', 50, TRUE, SILENCED_SOUND_EXTRARANGE)
+
+	var/list/tracking_info = get_tracking_info(tracked_thing, user)
+	user.balloon_alert(user, tracking_info["message"])
+
+	if(tracking_info["arrow_color"] && user.hud_used)
+		new /atom/movable/screen/navigate_arrow(null, user.hud_used, get_turf(tracked_thing), tracking_info["arrow_color"])
+
+	next_use_time = world.time + cooldown_time
+
+/obj/item/story_pointer/proc/get_important_items()
+	return list()
+
+/obj/item/story_pointer/proc/check_menu()
+	if(QDELETED(src))
+		return FALSE
+	return TRUE
+
+/obj/item/story_pointer/proc/get_tracking_info(atom/tracked_thing, mob/user)
+	var/list/info = list("message" = "error text!", "arrow_color" = null)
+
+	var/turf/their_turf = get_turf(tracked_thing)
+	var/turf/our_turf = get_turf(user)
+	var/their_z = their_turf?.z
+	var/our_z = our_turf?.z
+
+	if(!our_z || !their_z)
+		info["message"] = "в другом мире!"
+		return info
+
+	if(our_z != their_z)
+		if(is_station_level(their_z))
+			if(is_station_level(our_z))
+				if(our_z > their_z)
+					info["message"] = "под вами!"
+				else
+					info["message"] = "над вами!"
+			else
+				info["message"] = "на станции!"
+		else if(is_mining_level(their_z))
+			info["message"] = "на лавалэнде!"
+		else if(is_away_level(their_z) || is_secret_level(their_z))
+			info["message"] = "во вратах!"
+		else
+			info["message"] = "в другом мире!"
+		return info
+
+	var/dist = get_dist(our_turf, their_turf)
+	var/dir = get_dir(our_turf, their_turf)
+	var/half_range = detection_range / 2
+
+	if(dist > half_range)
+		info["message"] = "примерно в направлении [dir2text(dir)]!"
+		return info
+	if(dist > 1)
+		var/arrow_color
+		switch(dist)
+			if(0 to 15)
+				info["message"] = "очень близко, [dir2text(dir)]!"
+				arrow_color = COLOR_GREEN
+			if(16 to 31)
+				info["message"] = "близко, [dir2text(dir)]!"
+				arrow_color = COLOR_YELLOW
+			if(32 to 127)
+				info["message"] = "далеко, [dir2text(dir)]!"
+				arrow_color = COLOR_ORANGE
+			else
+				info["message"] = "очень далеко!"
+				arrow_color = COLOR_RED
+
+		info["arrow_color"] = arrow_color
+	else
+		info["message"] = "На месте!"
+
+	if(ismob(tracked_thing))
+		var/mob/tracked_mob = tracked_thing
+		if(tracked_mob.stat == DEAD)
+			info["message"] = "мертвы, " + info["message"]
+
+	return info
+
+/obj/item/story_pointer/story
+	detection_range = 60
+
+/obj/item/story_pointer/story/get_important_items()
+	return GLOB.important_items.Copy()
+
+
 /obj/item/keycard/important
 	name = "Важный сюжетный ключ"
 	color = COLOR_RED
@@ -34,6 +238,11 @@
 	. = ..()
 	AddComponent(/datum/component/stationloving, TRUE)
 	SSpoints_of_interest.make_point_of_interest(src)
+	GLOB.important_items += src
+
+/obj/item/story_item/Destroy(force)
+	. = ..()
+	GLOB.important_items -= src
 
 /obj/item/story_item/examine(mob/user)
 	. = ..()
@@ -143,7 +352,7 @@
 	density = TRUE
 	anchored = TRUE
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
-	max_integrity = 700
+	max_integrity = 2500
 
 	var/obj/item/story_item/hypothermia_applied_ai_core/ai_core
 	var/obj/item/story_item/hypothermia_fusion_core/fusion_core
@@ -173,6 +382,9 @@
 		stack_trace("Терминал запуска размещён без мобильного стыковочного порта поблизости!")
 	add_filter("story_outline", 2, list("type" = "outline", "color" = "#fa3b3b", "size" = 1))
 
+/obj/machinery/shuttle_launch_terminal/Destroy(force)
+	priority_announce("ТРЕВОГА! ТРЕВОГА! Терминал управления - разрушен. Взлет невозможен.", "Приоритетное оповещение", 'sound/effects/alert.ogg')
+	. = ..()
 
 /obj/machinery/shuttle_launch_terminal/examine(mob/user)
 	. = ..()
@@ -293,7 +505,8 @@
 	launching = TRUE
 	time_left = launch_time
 
-	priority_announce("Запущена последовательность старта шаттла. Взлёт через 15 минут.", "Приоритетное оповещение", 'sound/effects/alert.ogg')
+	priority_announce("Запущена последовательность старта шаттла. Взлёт через 15 минут. \
+						Обеспечьте безопасность консоли управления.", "Приоритетное оповещение", 'sound/effects/alert.ogg')
 
 	addtimer(CALLBACK(src, PROC_REF(announce_remaining), 10), launch_time - 10 MINUTES)
 	addtimer(CALLBACK(src, PROC_REF(announce_remaining), 5), launch_time - 5 MINUTES)

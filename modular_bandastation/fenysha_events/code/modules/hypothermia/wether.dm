@@ -28,6 +28,11 @@
 	var/weather_temperature_indoor = T0C
 	var/area_cooling_multiplier = 0.7
 
+	/// FOV restriction applied to mobs in outdoor impacted areas (larger value = narrower visible cone).
+	var/fov_restriction = FOV_180_DEGREES
+	/// Mobs that currently have our FOV trait (tracked so we can remove when they leave the zone or weather ends).
+	var/list/fov_affected_mobs = list()
+
 	outdoor_sound_type = /datum/looping_sound/snowstorm
 
 	indoor_sound_type = /datum/looping_sound/snowstorm/indoor
@@ -39,12 +44,28 @@
 		var/sound_type = impacted_area.outdoors ? outdoor_sound_type : indoor_sound_type
 		area_sound_types[impacted_area] = sound_type
 	START_PROCESSING(SSprocessing, src)
+	if(fov_restriction)
+		update_fov_for_mobs()
 	return ..()
 
 /datum/weather/snow_storm/snow_blizzard/end()
 	area_sound_types = null
 	STOP_PROCESSING(SSprocessing, src)
+	if(fov_restriction)
+		remove_all_fov()
 	return ..()
+
+/datum/weather/snow_storm/snow_blizzard/process(seconds_per_tick)
+	for(var/area/hypothermia/HA in impacted_areas)
+		if(HA.outdoors)
+			HA.set_temperature(weather_temperature)
+		else
+			if(HA.area_min_temperature > weather_temperature_indoor)
+				HA.area_min_temperature = weather_temperature_indoor
+			HA.decrease_temperature_scaled(weather_temperature_indoor * seconds_per_tick * area_cooling_multiplier, HA.area_min_temperature)
+
+	if(fov_restriction)
+		update_fov_for_mobs()
 
 /datum/weather/snow_storm/snow_blizzard/update_areas()
 	var/list/new_overlay_cache = generate_overlay_cache()
@@ -66,37 +87,58 @@
 /datum/weather/snow_storm/snow_blizzard/can_get_alert(mob/player)
 	return TRUE
 
-/datum/weather/snow_storm/snow_blizzard/process(seconds_per_tick)
-	for(var/area/hypothermia/HA in impacted_areas)
-		if(HA.outdoors)
-			HA.set_temperature(weather_temperature)
-		else
-			if(HA.area_min_temperature > weather_temperature_indoor)
-				HA.area_min_temperature = weather_temperature_indoor
-			HA.decrease_temperature_scaled(weather_temperature_indoor * seconds_per_tick * area_cooling_multiplier, HA.area_min_temperature)
+/// Applies/removes FOV trait dynamically for any player who enters or leaves an outdoor impacted area.
+/datum/weather/snow_storm/snow_blizzard/proc/update_fov_for_mobs()
+	if(!fov_restriction)
+		return
+
+	var/list/mobs_to_remove = fov_affected_mobs.Copy()
+	for(var/mob/living/carbon/human/crew in GLOB.alive_player_list)
+		if(!is_station_level(crew.z))
+			continue
+		var/area/A = get_area(crew)
+		if(A && (A in impacted_areas) && A.outdoors)
+			if(!(crew in fov_affected_mobs))
+				crew.add_fov_trait(REF(src), fov_restriction)
+				fov_affected_mobs += crew
+			mobs_to_remove -= crew
+
+	for(var/mob/living/carbon/human/crew in mobs_to_remove)
+		crew.remove_fov_trait(REF(src), fov_restriction)
+		fov_affected_mobs -= crew
+
+/// Cleans up all FOV traits when the weather ends (or for safety).
+/datum/weather/snow_storm/snow_blizzard/proc/remove_all_fov()
+	for(var/mob/living/carbon/human/crew in fov_affected_mobs)
+		crew.remove_fov_trait(REF(src), fov_restriction)
+	fov_affected_mobs.Cut()
 
 /datum/weather/snow_storm/snow_blizzard/heavy
 	weather_temperature_indoor = TM15C
 	weather_temperature = TM40C
-	area_cooling_multiplier = 1.0
+	area_cooling_multiplier = 5
+	fov_restriction = FOV_270_DEGREES
 
 /datum/weather/snow_storm/snow_blizzard/insane
 	weather_temperature_indoor = TM15C
 	weather_temperature = TM70C
 	weather_overlay = "snow_storm"
-	area_cooling_multiplier = 1.3
+	area_cooling_multiplier = 7
+	fov_restriction = FOV_270_DEGREES
 
 /datum/weather/snow_storm/snow_blizzard/extreme
 	weather_temperature_indoor = TM70C
 	weather_temperature = TM90C
 	weather_overlay = "snow_storm"
-	area_cooling_multiplier = 1.5
+	area_cooling_multiplier = 13
+	fov_restriction = FOV_270_DEGREES
 
 /datum/weather/snow_storm/snow_blizzard/endgame
 	weather_temperature_indoor = TM90C
 	weather_temperature = TM150C
 	weather_overlay = "snow_storm"
-	area_cooling_multiplier = 5
+	area_cooling_multiplier = 20
+	fov_restriction = FOV_270_DEGREES
 	// Amout of time the storm has been active
 	var/storm_time = 0
 	var/cooldown_accumulator = 10 SECONDS

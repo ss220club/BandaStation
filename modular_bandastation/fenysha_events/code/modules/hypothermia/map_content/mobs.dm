@@ -229,8 +229,8 @@
 /mob/living/basic/arctic_mutant/proc/take_control(mob/user)
 	color = COLOR_RED
 	maxHealth = 250
-	name = "Evolved [name]"
-	AddComponent(/datum/component/regenerator, regeneration_delay = 6 SECONDS, brute_per_second = 5)
+	name = "Evolved [initial(name)]"
+	AddComponent(/datum/component/regenerator, regeneration_delay = 15 SECONDS, brute_per_second = 3)
 	AddComponent(/datum/component/seethrough_mob)
 	lighting_cutoff_red = 22
 	lighting_cutoff_green = 5
@@ -242,7 +242,7 @@
 	grant_actions_by_list(list(/datum/action/cooldown/mob_cooldown/boss_charge/cheap))
 
 /datum/movespeed_modifier/arctic_mutant_player
-	multiplicative_slowdown = -1
+	multiplicative_slowdown = -0.5
 
 
 /mob/living/basic/arctic_mutant/light
@@ -535,7 +535,7 @@
 
 /mob/living/basic/corrupted_mutant_boss/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/regenerator, regeneration_delay = 0, brute_per_second = MUTANT_BOSS_PASSIVE_HEAL)
+	AddComponent(/datum/component/regenerator, regeneration_delay = 10 SECONDS, brute_per_second = MUTANT_BOSS_PASSIVE_HEAL)
 	if(length(innate_actions))
 		grant_actions_by_list(innate_actions)
 	add_traits(list(TRAIT_NO_TELEPORT, TRAIT_MARTIAL_ARTS_IMMUNE, TRAIT_LAVA_IMMUNE,TRAIT_ASHSTORM_IMMUNE, TRAIT_NO_FLOATING_ANIM), MEGAFAUNA_TRAIT)
@@ -547,8 +547,8 @@
 /mob/living/basic/corrupted_mutant_boss/Life()
 	. = ..()
 	if(stage >= 4 && COOLDOWN_FINISHED(src, black_cd))
-		new /obj/effect/temp_visual/decoy/fading/halfsecond(loc, src)
-		COOLDOWN_START(src, black_cd, 1.5 SECONDS)
+		new /obj/effect/temp_visual/decoy/fading(loc, src)
+
 
 /mob/living/basic/corrupted_mutant_boss/death()
 	. = ..()
@@ -627,10 +627,10 @@
 			evade_chance = 65
 			Shake()
 		if(4)
-			heal_overall_damage(600)
+			heal_overall_damage(300)
 			visible_message(span_userdanger("[src] издает истошный вопль - оно кричит ярости!"))
 			grant_actions_by_list(list(/datum/action/cooldown/mob_cooldown/crush_wave = null))
-			speed = speed - 0.4
+			speed = speed - 0.7
 			animate(src, color = COLOR_BUBBLEGUM_RED, time = 3 SECONDS)
 			playsound(src, 'modular_bandastation/fenysha_events/sounds/mobs/mutant_boss_death.ogg', 100, TRUE)
 			projectile_evade_cooldown *= 0.5
@@ -645,6 +645,8 @@
 			evade_chance = initial(evade_chance)
 			for(var/datum/action/cooldown/action in actions)
 				action.cooldown_time = initial(action.cooldown_time)
+
+	stage = new_stage
 
 /mob/living/basic/corrupted_mutant_boss/real
 	drop = list(/obj/item/keycard/important/hypothermia/ship_control_key, /obj/item/storage/belt/utility/chief/full)
@@ -662,13 +664,55 @@
 		/datum/action/cooldown/mob_cooldown/crushing_charge = null,
 	)
 
-
 /mob/living/basic/corrupted_mutant_boss/real/death()
 	. = ..()
 	for(var/mob/living/player in orange(20, src))
 		if(!player.client)
 			continue
 		player.client.give_award(/datum/award/achievement/petrov_kill, player)
+
+
+/mob/living/basic/arctic_crusher_mutant
+	name = "Scorpion mutant"
+	real_name = "Scorpion mutant"
+	desc = "A massive mutant that looks like a giant scorpion from a distance. A repulsive abomination."
+	icon = 'modular_bandastation/fenysha_events/icons/mob/128x128.dmi'
+	icon_state = "scorpion"
+	icon_living = "scorpion"
+	icon_dead = "scorpion"
+	mob_biotypes = MOB_ORGANIC
+	speed = 1
+	maxHealth = 700
+	health = 700
+	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
+	armour_penetration = 50
+	melee_damage_lower = 30
+	melee_damage_upper = 30
+	attack_verb_continuous = "smashes"
+	attack_verb_simple = "smash"
+	attack_sound = 'sound/effects/blob/blobattack.ogg'
+	gold_core_spawnable = FALSE
+	base_pixel_x = -56
+	pixel_x = -56
+	lighting_cutoff_red = 22
+	lighting_cutoff_green = 5
+	lighting_cutoff_blue = 5
+
+	var/list/innate_actions = list(
+		/datum/action/cooldown/mob_cooldown/crush_wave = null,
+		/datum/action/cooldown/mob_cooldown/crushing_charge = null,
+	)
+
+	ai_controller = null
+
+/mob/living/basic/arctic_crusher_mutant/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/regenerator, regeneration_delay = 20 SECONDS, brute_per_second = 5)
+	if(length(innate_actions))
+		grant_actions_by_list(innate_actions)
+	add_traits(list(TRAIT_NO_TELEPORT, TRAIT_MARTIAL_ARTS_IMMUNE, TRAIT_LAVA_IMMUNE,TRAIT_ASHSTORM_IMMUNE, TRAIT_NO_FLOATING_ANIM), MEGAFAUNA_TRAIT)
+	AddComponent(/datum/component/seethrough_mob)
+
 
 /datum/action/cooldown/mob_cooldown/boss_charge
 	name = "Charge"
@@ -1075,7 +1119,7 @@
 		new /obj/effect/temp_visual/decoy/fading/halfsecond(owner.loc, owner)
 		var/turf/next_turf = get_step_towards(owner, target)
 		owner.setDir(get_dir(owner, next_turf))
-		damage_turf == next_turf
+		damage_turf = next_turf
 		if(next_turf.is_blocked_turf(TRUE, owner) || next_turf == target)
 			break
 		owner.forceMove(next_turf)
