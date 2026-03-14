@@ -33,7 +33,7 @@
 	if(!can_use(cqc_user))
 		return
 	cqc_user.visible_message(
-		span_danger("[cqc_user.declent_ru(NOMINATIVE)] выворачивает руку [attacker.declent_ru(ACCUSATIVE)], перенаправляя [attack_weapon.declent_ru(ACCUSATIVE)] в сторону [genderize_ru (gender.attacker, "атакующего", "атакующей", "атакующего", "атакующих")]!"),
+		span_danger("[cqc_user.declent_ru(NOMINATIVE)] выворачивает руку [attacker.declent_ru(ACCUSATIVE)], перенаправляя [attack_weapon.declent_ru(ACCUSATIVE)] в сторону [genderize_ru(attacker.gender, "атакующего", "атакующей", "атакующего", "атакующих")]!"),
 		span_userdanger("Стараясь избежать [attack_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(ACCUSATIVE)] , вы выкручиваете [attacker.ru_p_them()] руку, направляя оружие обратно в [attacker.ru_p_theirs()]!"),
 	)
 	var/obj/item/melee/touch_attack/touch_weapon = attack_weapon
@@ -303,7 +303,7 @@
 
 	playsound(defender, (picked_hit_type == "пинать" || picked_hit_type == "топтать") ? 'sound/items/weapons/cqchit2.ogg' : 'sound/items/weapons/cqchit1.ogg', 50, TRUE, -1)
 	switch(picked_hit_type)
-		if (picked_hit_type == "пинать")
+		if (picked_hit_type == "пинать") {
 			defender.visible_message(
 				span_danger("[attacker.declent_ru(NOMINATIVE)] пинает [defender.declent_ru(ACCUSATIVE)]!"),
 				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] пнул вас!"),
@@ -312,7 +312,7 @@
 					attacker,
 			)
 			to_chat(attacker, span_danger("Вы пинаете [defender.declent_ru(ACCUSATIVE)]!"))
-			else
+			} else {
 				defender.visible_message(
 					span_danger("[attacker.declent_ru(NOMINATIVE)] топчет [defender.declent_ru(GENITIVE)]!"),
 					span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] растоптал вас!"),
@@ -321,6 +321,7 @@
 					attacker,
 				)
 			to_chat(attacker, span_danger("Вы топчите [defender.declent_ru(GENITIVE)]!"))
+			}
 	log_combat(attacker, defender, "attacked ([picked_hit_type]'d)(CQC)")
 	return MARTIAL_ATTACK_SUCCESS
 
