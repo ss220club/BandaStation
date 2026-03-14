@@ -475,53 +475,22 @@ SUBSYSTEM_DEF(tts220)
 /datum/controller/subsystem/tts220/proc/cleanup_tts_file(filename)
 	fdel(filename)
 
-// required_donator_level <= user's donator level)
 /datum/controller/subsystem/tts220/proc/get_available_seeds(owner)
+	var/list/_tts_seeds_names = list()
+	_tts_seeds_names |= tts_seeds_names
+
 	if(!ismob(owner))
-		return tts_seeds_names.Copy()
+		return _tts_seeds_names
 
 	var/mob/M = owner
+
 	if(!M.client)
-		return tts_seeds_names.Copy()
+		return _tts_seeds_names
 
-	return get_seed_names_for_donator_level(M.client.get_donator_level())
-
-/datum/controller/subsystem/tts220/proc/get_seed_names_for_donator_level(level)
-	var/list/_tts_seeds_names = list()
-	level = clamp(level, BASIC_DONATOR_LEVEL, MAX_DONATOR_LEVEL)
-	for(var/_name in tts_seeds)
-		var/datum/tts_seed/S = tts_seeds[_name]
-		if(S.required_donator_level <= level)
-			_tts_seeds_names += S.name
 	return _tts_seeds_names
 
 /datum/controller/subsystem/tts220/proc/get_random_seed(owner)
 	return pick(get_available_seeds(owner))
-
-/datum/controller/subsystem/tts220/proc/get_any_seed_name()
-	if(!length(tts_seeds_names))
-		return null
-	return tts_seeds_names[1]
-
-/datum/controller/subsystem/tts220/proc/pick_tts_seed_by_gender_and_level(gender, level)
-	var/list/allowed = get_seed_names_for_donator_level(level)
-	var/tts_gender = get_tts_gender(gender)
-	var/list/by_gender = LAZYACCESS(tts_seeds_by_gender, tts_gender)
-	var/list/candidates = list()
-	if(length(by_gender))
-		for(var/seed_name in by_gender)
-			if(seed_name in allowed)
-				candidates += seed_name
-	var/list/any_gender = LAZYACCESS(tts_seeds_by_gender, TTS_GENDER_ANY)
-	if(length(any_gender))
-		for(var/seed_name in any_gender)
-			if(seed_name in allowed)
-				candidates |= seed_name
-	if(!length(candidates) && length(allowed))
-		return pick(allowed)
-	if(!length(candidates))
-		return null
-	return pick(candidates)
 
 /datum/controller/subsystem/tts220/proc/sanitize_tts_input(message)
 	var/hash
