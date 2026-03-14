@@ -104,7 +104,7 @@
 			return
 		inserted_bomb = tool
 		tank_to_target = inserted_bomb.tank_two
-		to_chat(user, span_notice("Вы вставляете [tool.declent_ru(ACCUSATIVE)] в [src.declent_ru(ACCUSATIVE)]"))
+		to_chat(user, span_notice("Вы вставляете [tool.declent_ru(ACCUSATIVE)] в [src.declent_ru(ACCUSATIVE)]."))
 		return
 	update_appearance()
 	return ..()
@@ -149,7 +149,7 @@
 		return
 
 	if(!inserted_bomb?.tank_one || !inserted_bomb?.tank_two || !(tank_to_target == inserted_bomb?.tank_one || tank_to_target == inserted_bomb?.tank_two))
-		end_test("ОШИБКА: неисправность клапан перекачки. Предметы выброшены.")
+		end_test("ОШИБКА: неисправность клапана перекачки. Предметы выброшены.")
 		return
 
 	say("Начинается проверка на сжатие. Открытие клапана перекачки.")
