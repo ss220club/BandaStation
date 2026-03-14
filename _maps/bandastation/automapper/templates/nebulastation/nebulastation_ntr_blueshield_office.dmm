@@ -12,15 +12,21 @@
 /obj/machinery/button/door{
 	id = "ntr_bs_privacy";
 	name = "Privacy Shutters Control";
-	req_access = list("command")
+	req_access = list("command");
+	pixel_y = -3
 	},
 /obj/item/flashlight/lamp/green{
 	pixel_y = 8;
 	pixel_x = 15
 	},
+/obj/machinery/button/door{
+	id = "ntr_privacy";
+	name = "Privacy Shutters Control";
+	req_access = list("nanotrasen_representative");
+	pixel_y = 6
+	},
 /obj/effect/spawner/random/special_lighter{
-	pixel_x = -6;
-	pixel_y = 4
+	pixel_x = -9
 	},
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
@@ -89,13 +95,15 @@
 	},
 /obj/machinery/modular_computer/preset/command,
 /obj/machinery/button/door/directional/east{
-	pixel_y = 6;
-	name = "Privacy Shutters Control";
-	id = "ntr_privacy";
-	req_access = list("nanotrasen_representative")
+	pixel_y = -7;
+	name = "Door Control";
+	id = "ntr_door";
+	req_access = list("nanotrasen_representative");
+	normaldoorcontrol = 1;
+	specialfunctions = 3
 	},
 /obj/machinery/button/door/directional/east{
-	pixel_y = -6;
+	pixel_y = 5;
 	name = "Door Control";
 	id = "ntr_door";
 	req_access = list("nanotrasen_representative");
@@ -151,6 +159,10 @@
 	dir = 10
 	},
 /obj/item/paper_bin{
+	pixel_y = 4
+	},
+/obj/effect/spawner/random/special_lighter{
+	pixel_x = -9;
 	pixel_y = 4
 	},
 /obj/item/pen/blue{
@@ -259,19 +271,22 @@
 /obj/machinery/button/door{
 	id = "ntr_bs_privacy";
 	name = "Privacy Shutters Control";
-	req_access = list("command")
+	req_access = list("command");
+	pixel_y = -3
 	},
 /obj/item/flashlight/lamp{
 	pixel_x = -15;
 	pixel_y = 4
 	},
+/obj/machinery/button/door{
+	id = "blueshield_privacy";
+	name = "Privacy Shutters Control";
+	req_access = list("blueshield");
+	pixel_y = 6
+	},
 /obj/item/cigarette/cigar/cohiba{
 	pixel_x = 6;
 	pixel_y = -2
-	},
-/obj/effect/spawner/random/special_lighter{
-	pixel_x = -6;
-	pixel_y = 4
 	},
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)
@@ -295,18 +310,20 @@
 	},
 /obj/machinery/computer/crew,
 /obj/machinery/button/door/directional/west{
-	pixel_y = 6;
-	id = "blueshield_privacy";
-	name = "Privacy Shutters Control";
-	req_access = list("blueshield")
+	pixel_y = -7;
+	id = "blueshield_door";
+	name = "Door Control";
+	req_access = list("blueshield");
+	specialfunctions = 3;
+	normaldoorcontrol = 1
 	},
 /obj/machinery/button/door/directional/west{
-	pixel_y = -6;
 	id = "blueshield_door";
 	name = "Door Control";
 	req_access = list("blueshield");
 	specialfunctions = 4;
-	normaldoorcontrol = 1
+	normaldoorcontrol = 1;
+	pixel_y = 5
 	},
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)

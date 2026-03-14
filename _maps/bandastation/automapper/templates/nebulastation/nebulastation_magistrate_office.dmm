@@ -71,9 +71,9 @@
 	dir = 9
 	},
 /obj/structure/table/wood,
-/obj/item/folder/documents{
-	pixel_y = 5;
-	pixel_x = -5
+/obj/item/folder{
+	pixel_x = -5;
+	pixel_y = 5
 	},
 /obj/item/folder/blue,
 /obj/item/folder/red{

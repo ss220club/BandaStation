@@ -618,7 +618,7 @@
 "NO" = (
 /obj/docking_port/stationary{
 	shuttle_id = "argos_home";
-	name = "port bay 4";
+	name = "SS13: Fourth Port Bay";
 	height = 17;
 	width = 12;
 	dwidth = 5;
@@ -771,7 +771,7 @@
 /obj/docking_port/stationary{
 	dwidth = 2;
 	height = 11;
-	name = "port bay 3";
+	name = "SS13: Second Port Bay";
 	shuttle_id = "specops_home";
 	width = 5
 	},
