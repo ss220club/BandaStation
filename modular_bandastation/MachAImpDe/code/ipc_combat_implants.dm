@@ -18,11 +18,12 @@
 
 /obj/item/implant/ipc/arm_razor
 	name = "Имплант моновайера"
-	desc = "Моноволоконная струна, встроенная в предплечье. Выдвигается для режущей атаки на ближнюю дистанцию. Способна отрезать конечности."
+	desc = "Моноволоконная струна, встроенная в предплечье. Выдвигается для режущей атаки на ближнюю дистанцию. Способна отрезать конечности. Совместима с любым гуманоидом."
 	icon_state = "arm_razor"
 	arm_visual_state = "razorwire"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
 	actions_types = list(/datum/action/item_action/hands_free/activate_arm_razor)
+	counts_toward_slots = FALSE
 	/// Урон за удар
 	var/slash_damage = 20
 	/// Бонус к ранам (для dismember)
@@ -42,10 +43,10 @@
 	return dat
 
 /obj/item/implant/ipc/arm_razor/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
+	if(!ishuman(target))
+		return FALSE
 	. = ..()
 	if(!.)
-		return FALSE
-	if(!ishuman(target))
 		return FALSE
 	var/mob/living/carbon/human/H = target
 
@@ -210,12 +211,13 @@
 
 /obj/item/implant/ipc/mantis
 	name = "Имплант лезвий богомола"
-	desc = "Выдвижные лезвия богомола. В развёрнутом состоянии наносят тяжёлый режущий урон и могут отрезать конечности."
+	desc = "Выдвижные лезвия богомола. В развёрнутом состоянии наносят тяжёлый режущий урон и могут отрезать конечности. Совместим с любым гуманоидом."
 	icon_state = "mantis_right"
 	arm_visual_state = "mantis"
 	allowed_zones = list(BODY_ZONE_R_ARM)
 	actions_types = list(/datum/action/item_action/hands_free/toggle_mantis)
 	allow_multiple = TRUE
+	counts_toward_slots = FALSE
 	/// Тип создаваемого оружия при развёртывании
 	var/blade_type = /obj/item/mantis_blade
 	/// Урон в активном режиме
@@ -246,6 +248,8 @@
 	<b>Status:</b> [blades_active ? "DEPLOYED" : "RETRACTED"]"}
 
 /obj/item/implant/ipc/mantis/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
+	if(!ishuman(target))
+		return FALSE
 	// Zone conflict check: prevent two mantis blades in the same arm
 	if(body_zone)
 		for(var/obj/item/implant/ipc/mantis/existing as anything in target.implants)
@@ -255,8 +259,6 @@
 				return FALSE
 	. = ..()
 	if(!.)
-		return FALSE
-	if(!ishuman(target))
 		return FALSE
 	var/mob/living/carbon/human/H = target
 
@@ -559,11 +561,12 @@
 
 /obj/item/implant/ipc/arm_cannon
 	name = "Имплант встроенного дробовика"
-	desc = "Встроенный дробовик в руке. Заряжается дробовыми патронами. Выстрел рассеивает пеллеты по площади."
+	desc = "Встроенный дробовик в руке. Заряжается дробовыми патронами. Выстрел рассеивает пеллеты по площади. Совместим с любым гуманоидом."
 	icon_state = "arm_cannon"
 	arm_visual_state = "shell_cannon"
 	allowed_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
 	actions_types = list(/datum/action/item_action/hands_free/fire_arm_cannon)
+	counts_toward_slots = FALSE
 	/// Макс. количество патронов
 	var/max_shells = 4
 	/// Текущее количество патронов
@@ -592,10 +595,10 @@
 	return dat
 
 /obj/item/implant/ipc/arm_cannon/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
+	if(!ishuman(target))
+		return FALSE
 	. = ..()
 	if(!.)
-		return FALSE
-	if(!ishuman(target))
 		return FALSE
 	var/mob/living/carbon/human/H = target
 
@@ -725,10 +728,11 @@
 
 /obj/item/implant/ipc/sandevistan
 	name = "Имплант Сандевистан"
-	desc = "Сандевистан — имплант рефлекторного ускорения. Временно повышает скорость перемещения на 50%. У IPC расходует батарею и нагревает процессор."
+	desc = "Сандевистан — имплант рефлекторного ускорения. Временно повышает скорость перемещения на 50%. Совместим с любым гуманоидом. У КПБ дополнительно расходует батарею и нагревает процессор."
 	icon_state = "sandy"
 	allowed_zones = list(BODY_ZONE_CHEST)
 	actions_types = list(/datum/action/item_action/hands_free/activate_sandevistan)
+	counts_toward_slots = FALSE
 	/// Бонус скорости (отрицательное = быстрее)
 	var/speed_bonus = -0.5
 	/// Длительность эффекта
@@ -755,10 +759,10 @@
 	return dat
 
 /obj/item/implant/ipc/sandevistan/implant(mob/living/target, body_zone, mob/user, silent = FALSE, force = FALSE)
+	if(!ishuman(target))
+		return FALSE
 	. = ..()
 	if(!.)
-		return FALSE
-	if(!ishuman(target))
 		return FALSE
 	var/mob/living/carbon/human/H = target
 	if(!silent)
