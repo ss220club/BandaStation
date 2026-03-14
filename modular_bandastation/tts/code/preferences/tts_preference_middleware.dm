@@ -10,6 +10,9 @@ GLOBAL_LIST_EMPTY(human_to_tts)
 	var/list/data = list()
 	data["tts_seed"] = preferences.read_preference(/datum/preference/text/tts_seed)
 	data["tts_enabled"] = CONFIG_GET(flag/tts_enabled)
+	#ifdef TTS_MOCKING
+	data["tts_enabled"] = TRUE
+	#endif
 	return data
 
 /datum/preference_middleware/text_to_speech/get_constant_data()
@@ -63,6 +66,10 @@ GLOBAL_LIST_EMPTY(human_to_tts)
 /datum/preference_middleware/text_to_speech/proc/select_voice(list/params, mob/user)
 	var/seed_name = params["seed"]
 	if(!seed_name || !SStts220.tts_seeds[seed_name])
+		return FALSE
+
+	var/list/available_seeds = SStts220.get_available_seeds(user)
+	if(!(seed_name in available_seeds))
 		return FALSE
 
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/text/tts_seed], seed_name)

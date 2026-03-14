@@ -117,9 +117,13 @@ SUBSYSTEM_DEF(tts220)
 	tts_seeds_names = sortTim(tts_seeds_names, GLOBAL_PROC_REF(cmp_text_asc))
 
 /datum/controller/subsystem/tts220/Initialize(start_timeofday)
+	#ifdef TTS_MOCKING
+	is_enabled = TRUE
+	#else
 	if(!CONFIG_GET(flag/tts_enabled))
 		is_enabled = FALSE
 		return SS_INIT_NO_NEED
+	#endif
 
 	load_replacements()
 
@@ -475,19 +479,30 @@ SUBSYSTEM_DEF(tts220)
 /datum/controller/subsystem/tts220/proc/cleanup_tts_file(filename)
 	fdel(filename)
 
-/datum/controller/subsystem/tts220/proc/get_available_seeds(owner)
+/datum/controller/subsystem/tts220/proc/get_available_seeds(atom/owner)
 	var/list/_tts_seeds_names = list()
-	_tts_seeds_names |= tts_seeds_names
 
 	if(!ismob(owner))
+		_tts_seeds_names |= tts_seeds_names
 		return _tts_seeds_names
 
 	var/mob/M = owner
 
 	if(!M.client)
+		_tts_seeds_names |= tts_seeds_names
 		return _tts_seeds_names
 
-	return _tts_seeds_names
+	if(M.client.holder)
+		_tts_seeds_names |= tts_seeds_names
+		return _tts_seeds_names
+
+	var/donator_level = M.client.get_donator_level()
+
+	for(var/level in tts_seeds_names_by_donator_levels)
+		if(text2num(level) <= donator_level)
+			_tts_seeds_names |= tts_seeds_names_by_donator_levels[level]
+	
+	return sortTim(_tts_seeds_names, GLOBAL_PROC_REF(cmp_text_asc))
 
 /datum/controller/subsystem/tts220/proc/get_random_seed(owner)
 	return pick(get_available_seeds(owner))
@@ -537,10 +552,24 @@ SUBSYSTEM_DEF(tts220)
 
 	return tts_gender
 
-/datum/controller/subsystem/tts220/proc/pick_tts_seed_by_gender(gender)
+/datum/controller/subsystem/tts220/proc/pick_tts_seed_by_gender(gender, list/allowed_seeds)
 	var/tts_gender = SStts220.get_tts_gender(gender)
-	var/tts_by_gender = LAZYACCESS(SStts220.tts_seeds_by_gender, tts_gender)
+	var/list/tts_by_gender = LAZYACCESS(SStts220.tts_seeds_by_gender, tts_gender)
+
+	if(tts_by_gender)
+		tts_by_gender = tts_by_gender.Copy()
+	else
+		tts_by_gender = list()
+
 	tts_by_gender |= LAZYACCESS(SStts220.tts_seeds_by_gender, TTS_GENDER_ANY)
+
+	if(!isnull(allowed_seeds))
+		var/list/valid_seeds = list()
+		for(var/seed in tts_by_gender)
+			if(seed in allowed_seeds)
+				valid_seeds += seed
+		tts_by_gender = valid_seeds
+
 	if(!length(tts_by_gender))
 		logger.Log(LOG_CATEGORY_DEBUG, "No tts for gender `[gender]`, tts_gender: `[tts_gender]`")
 		return null

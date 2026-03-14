@@ -6,6 +6,15 @@
 	if(throttle_check())
 		return FALSE
 
+	#ifdef TTS_MOCKING
+	var/datum/http_response/response = new
+	response.status_code = 200
+	response.body = "{\"results\": \[{\"audio\": \"\"}\], \"timings\": {\"003_tts_time\": 0.1}}"
+	if(proc_callback)
+		proc_callback.InvokeAsync(response)
+	return TRUE
+	#endif
+
 	var/ssml_text = {"<speak>[text]</speak>"}
 
 	var/list/req_body = list()
