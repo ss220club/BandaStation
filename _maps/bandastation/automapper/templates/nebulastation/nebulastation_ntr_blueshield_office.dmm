@@ -13,20 +13,20 @@
 	id = "ntr_bs_privacy";
 	name = "Privacy Shutters Control";
 	req_access = list("command");
-	pixel_y = -3
+	pixel_y = 6
 	},
 /obj/item/flashlight/lamp/green{
 	pixel_y = 8;
 	pixel_x = 15
 	},
+/obj/effect/spawner/random/special_lighter{
+	pixel_x = -9
+	},
 /obj/machinery/button/door{
 	id = "ntr_privacy";
 	name = "Privacy Shutters Control";
 	req_access = list("nanotrasen_representative");
-	pixel_y = 6
-	},
-/obj/effect/spawner/random/special_lighter{
-	pixel_x = -9
+	pixel_y = -3
 	},
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/nanotrasen_representative)
@@ -104,7 +104,7 @@
 	},
 /obj/machinery/button/door/directional/east{
 	pixel_y = 5;
-	name = "Door Control";
+	name = "Door Bolt Control";
 	id = "ntr_door";
 	req_access = list("nanotrasen_representative");
 	normaldoorcontrol = 1;
@@ -272,21 +272,21 @@
 	id = "ntr_bs_privacy";
 	name = "Privacy Shutters Control";
 	req_access = list("command");
-	pixel_y = -3
+	pixel_y = 6
 	},
 /obj/item/flashlight/lamp{
 	pixel_x = -15;
 	pixel_y = 4
 	},
+/obj/item/cigarette/cigar/cohiba{
+	pixel_x = 6;
+	pixel_y = -2
+	},
 /obj/machinery/button/door{
 	id = "blueshield_privacy";
 	name = "Privacy Shutters Control";
 	req_access = list("blueshield");
-	pixel_y = 6
-	},
-/obj/item/cigarette/cigar/cohiba{
-	pixel_x = 6;
-	pixel_y = -2
+	pixel_y = -3
 	},
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/blueshield)
@@ -319,7 +319,7 @@
 	},
 /obj/machinery/button/door/directional/west{
 	id = "blueshield_door";
-	name = "Door Control";
+	name = "Door Bolts Control";
 	req_access = list("blueshield");
 	specialfunctions = 4;
 	normaldoorcontrol = 1;
