@@ -66,7 +66,7 @@ GLOBAL_LIST_EMPTY(human_to_tts)
 		return FALSE
 
 	var/datum/tts_seed/seed = SStts220.tts_seeds[seed_name]
-	if(user.client && !check_rights(R_ADMIN, FALSE, user) && seed.required_donator_level > user.client.get_donator_level())
+	if(user.client && seed.required_donator_level > user.client.get_donator_level())
 		return FALSE
 
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/text/tts_seed], seed_name)

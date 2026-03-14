@@ -9,8 +9,6 @@
 	var/fallback_name
 	if(target.client)
 		user_level = target.client.get_donator_level()
-		if(check_rights(R_ADMIN, FALSE, target))
-			user_level = MAX_DONATOR_LEVEL
 	if(seed && seed.required_donator_level > user_level)
 		seed = null
 	if(!seed)
