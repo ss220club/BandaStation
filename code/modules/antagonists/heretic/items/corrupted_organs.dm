@@ -83,7 +83,7 @@
 /// Randomly secretes alcohol or hallucinogens when you're drinking something
 /obj/item/organ/liver/corrupt
 	name = "corrupt liver"
-	desc = "После того, свидетелем чего вы стали, вам действительно не помешало бы выпить."
+	desc = "После увиденного вам действительно не помешало бы выпить."
 	organ_flags = parent_type::organ_flags | ORGAN_HAZARDOUS
 	/// How much extra ingredients to add?
 	var/amount_added = 5
