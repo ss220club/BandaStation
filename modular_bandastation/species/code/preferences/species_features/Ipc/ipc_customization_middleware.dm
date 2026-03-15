@@ -47,7 +47,7 @@
 		list("key" = "zeng_hu", "name" = "Zeng-Hu Pharmaceuticals", "description" = "Специализация: биосинтетические оболочки."),
 		list("key" = "shellguard", "name" = "Shellguard Munitions", "description" = "Специализация: бронированные корпуса для боевого применения."),
 		list("key" = "cybersun", "name" = "Cybersun Industries", "description" = "Специализация: энергоэффективные компоненты."),
-		list("key" = "hef", "name" = "HEF (Frankensteinian)", "description" = "Шасси из деталей разных производителей. Можно настроить каждую часть тела отдельно. Без геймплейных бонусов."),
+		list("key" = "hef", "name" = "HEF", "description" = "Шасси из деталей разных производителей. Можно настроить каждую часть тела отдельно. Без геймплейных бонусов."),
 	)
 
 	// Список типов мозга

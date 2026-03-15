@@ -294,7 +294,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_arm_razor
-	name = "Моновайер"
+	name = "Monowire"
 	desc = "Имплант: монофиламентная режущая струна в предплечье."
 	id = "ipc_implant_arm_razor"
 	build_path = /obj/item/implant/ipc/arm_razor
@@ -306,7 +306,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_mantis_right
-	name = "Лезвие богомола (правое)"
+	name = "Mantis Blade (Right)"
 	desc = "Имплант: выдвижное лезвие богомола в правое предплечье."
 	id = "ipc_implant_mantis_right"
 	build_path = /obj/item/implant/ipc/mantis
@@ -318,7 +318,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_mantis_left
-	name = "Лезвие богомола (левое)"
+	name = "Mantis Blade (Left)"
 	desc = "Имплант: выдвижное лезвие богомола в левое предплечье."
 	id = "ipc_implant_mantis_left"
 	build_path = /obj/item/implant/ipc/mantis/left
@@ -330,7 +330,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_arm_cannon
-	name = "Встроенный дробовик"
+	name = "Arm Cannon"
 	desc = "Имплант: встроенный дробовик в предплечье."
 	id = "ipc_implant_arm_cannon"
 	build_path = /obj/item/implant/ipc/arm_cannon
@@ -342,7 +342,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/ipc_implant_sandevistan
-	name = "Сандевистан"
+	name = "Sandevistan"
 	desc = "Имплант: ускоритель реакции — кратковременное ускорение всех систем."
 	id = "ipc_implant_sandevistan"
 	build_path = /obj/item/implant/ipc/sandevistan

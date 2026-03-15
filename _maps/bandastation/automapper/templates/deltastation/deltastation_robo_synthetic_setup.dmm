@@ -20,5 +20,9 @@
 /area/station/science/robotics/lab)
 
 (1,1,1) = {"
-ab
+a
+"}
+
+(2,1,1) = {"
+b
 "}
