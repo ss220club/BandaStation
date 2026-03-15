@@ -1,24 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/obj/machinery/computer/operating/synthetic{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/purple{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/blue/opposingcorners,
-/turf/open/floor/iron/white,
-/area/station/science/robotics/lab)
-
-"b" = (
-/obj/structure/table/optable/synthetic,
-/obj/effect/turf_decal/tile/purple,
-/obj/effect/turf_decal/tile/blue/opposingcorners{
-	dir = 1
-	},
 /turf/open/floor/iron/white,
 /area/station/science/robotics/lab)
 
 (1,1,1) = {"
-ab
+aa
 "}
