@@ -623,7 +623,7 @@ trait_name = "Station"
 map_files = ["iceboxstation_robo_synthetic_setup.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
-coordinates = [170, 133, 3]
+coordinates = [166, 118, 4]
 trait_name = "Station"
 
 [templates.tramstation_robo_synthetic_setup]
