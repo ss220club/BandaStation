@@ -303,33 +303,25 @@
 
 	playsound(defender, (picked_hit_type == "пинать" || picked_hit_type == "топтать") ? 'sound/items/weapons/cqchit2.ogg' : 'sound/items/weapons/cqchit1.ogg', 50, TRUE, -1)
 	switch(picked_hit_type)
-		case "пинать":
+		if ("пинать")
 			defender.visible_message(
 				span_danger("[attacker.declent_ru(NOMINATIVE)] пинает [defender.declent_ru(ACCUSATIVE)]!"),
-				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] пнул вас!"),
+				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] [genderize_ru(attacker.gender,"пнул","пнула","пнуло","отпинали")] вас!"),
 				span_hear("Вы слышите противный звук удара плоти о плоть!"),
 					COMBAT_MESSAGE_RANGE,
 					attacker,
 			)
 			to_chat(attacker, span_danger("Вы пинаете [defender.declent_ru(ACCUSATIVE)]!"))
-		case "топтать":
+
+		if ("топтать")
 			defender.visible_message(
 				span_danger("[attacker.declent_ru(NOMINATIVE)] топчет [defender.declent_ru(ACCUSATIVE)]!"),
-				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] растоптал вас!"),
+				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] [genderize_ru(attacker.gender,"растоптал","растоптала","растоптало","растоптали")] вас!"),
 				span_hear("Вы слышите противный звук удара плоти о плоть!"),
 				COMBAT_MESSAGE_RANGE,
 				attacker,
 			)
-			to_chat(attacker, span_danger("Вы топчите [defender.declent_ru(GENITIVE)]!"))
-		else:
-			defender.visible_message(
-				span_danger("[attacker.declent_ru(NOMINATIVE)] атакует [defender.declent_ru(ACCUSATIVE)] приёмом '[picked_hit_type]'!"),
-				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] атаковал вас приёмом '[picked_hit_type]'!"),
-				span_hear("Вы слышите противный звук удара плоти о плоть!"),
-				COMBAT_MESSAGE_RANGE,
-				attacker,
-			)
-			to_chat(attacker, span_danger("Вы атакуете [defender.declent_ru(ACCUSATIVE)] приёмом '[picked_hit_type]'!"))
+			to_chat(attacker, span_danger("Вы топчите [defender.declent_ru(ACCUSATIVE)]!"))
 	log_combat(attacker, defender, "attacked ([picked_hit_type])(CQC)")
 	return MARTIAL_ATTACK_SUCCESS
 
@@ -372,7 +364,7 @@
 			COMBAT_MESSAGE_RANGE,
 			attacker,
 		)
-		to_chat(attacker, span_danger("Вы бьёте в челюсть [defender.declent_ru(ACCUSATIVE )],[disarmed_item ? " выбивая из [defender.ru_p_them()] рук [disarmed_item] и" : ""] оставляя [defender.ru_p_them()] дезориентированным!"))
+		to_chat(attacker, span_danger("Вы бьёте в челюсть [defender.declent_ru(ACCUSATIVE)],[disarmed_item ? " выбивая из [defender.ru_p_them()] рук [disarmed_item] и" : ""] оставляя [defender.ru_p_them()] дезориентированным!"))
 		playsound(defender, 'sound/items/weapons/cqchit1.ogg', 50, TRUE, -1)
 		defender.set_jitter_if_lower(4 SECONDS)
 		defender.apply_damage(5, attacker.get_attack_type())
