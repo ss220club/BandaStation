@@ -609,7 +609,7 @@ trait_name = "Station"
 map_files = ["deltastation_robo_synthetic_setup.dmm"]
 directory = "_maps/bandastation/automapper/templates/deltastation/"
 required_map = "DeltaStation2.dmm"
-coordinates = [124, 108, 1]
+coordinates = [124, 147, 1]
 trait_name = "Station"
 
 [templates.metastation_robo_synthetic_setup]
@@ -623,7 +623,7 @@ trait_name = "Station"
 map_files = ["iceboxstation_robo_synthetic_setup.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
-coordinates = [166, 118, 3]
+coordinates = [170, 133, 3]
 trait_name = "Station"
 
 [templates.tramstation_robo_synthetic_setup]
