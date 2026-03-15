@@ -1597,7 +1597,7 @@
 /area/trainstation/indoors/train/reustoran)
 "gb" = (
 /obj/structure/railing,
-/obj/machinery/recharge_station/train,
+/obj/machinery/announcement_system,
 /turf/open/floor/iron/dark/textured_large,
 /area/trainstation/indoors/train/reserch)
 "gc" = (
@@ -3265,7 +3265,6 @@
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 1
 	},
-/obj/effect/mapping_helpers/airlock/access/all/science/genetics,
 /turf/open/floor/iron/dark/textured_large,
 /area/trainstation/indoors/train/reserch)
 "nk" = (
@@ -6852,7 +6851,6 @@
 	req_one_access = list("science, tcomms")
 	},
 /obj/effect/mapping_helpers/airlock/unres,
-/obj/effect/mapping_helpers/airlock/access/all/science/genetics,
 /turf/open/floor/iron/dark/textured_large,
 /area/trainstation/indoors/train/reserch)
 "CP" = (

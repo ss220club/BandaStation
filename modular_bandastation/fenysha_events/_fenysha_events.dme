@@ -78,6 +78,8 @@
 #include "code\modules\trainstation\~global_map.dm"
 #include "code\modules\trainstation\~process_controller.dm"
 #include "code\modules\trainstation\khara_infection\_khara.dm"
+#include "code\modules\trainstation\khara_infection\khara_research.dm"
+#include "code\modules\trainstation\khara_infection\khara_weapons.dm"
 #include "code\modules\trainstation\khara_infection\miasma.dm"
 #include "code\modules\trainstation\khara_infection\mutant_boss.dm"
 #include "code\modules\trainstation\khara_infection\mutants.dm"

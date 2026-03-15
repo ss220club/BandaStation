@@ -38,6 +38,7 @@
 
 	var/allowed_harmful = TRUE
 	var/allowed_advanced = TRUE
+	var/allowed_antikhara = FALSE
 
 	var/list/loaded_datadisks = list()
 
@@ -76,7 +77,6 @@
 		SSmaterials.flat_materials, \
 		0, \
 		MATCONTAINER_EXAMINE|MATCONTAINER_ACCEPT_ALLOYS, \
-		list(/datum/material/iron), \
 	)
 	RefreshParts()
 	set_wires(new /datum/wires/ammo_workbench(src))
@@ -144,6 +144,8 @@
 
 	for(var/path in possible_ammo_types)
 		if(!initial(path:projectile_type))
+			continue
+		if(initial(path:anti_khara) && !allowed_antikhara)
 			continue
 
 		// Получаем материалы
@@ -326,6 +328,11 @@
 
 	if(initial(C.harmful) && !allowed_harmful && !hacked)
 		error_message = "ОБНАРУЖЕНО НАРУШЕНИЕ БЕЗОПАСНОСТИ"
+		error_type = "bad"
+		return
+
+	if(initial(C.anti_khara) && !allowed_antikhara)
+		error_message = "НЕВОЗМОЖНО ПЕЧАТАТЬ БЕЗ УЛУЧШЕНИЯ"
 		error_type = "bad"
 		return
 
@@ -551,3 +558,4 @@
 /obj/item/disk/ammo_workbench/advanced/proc/on_bench_install(obj/machinery/ammo_workbench/bench)
 	bench.allowed_harmful = TRUE
 	bench.allowed_advanced = TRUE
+	bench.update_ammotypes()

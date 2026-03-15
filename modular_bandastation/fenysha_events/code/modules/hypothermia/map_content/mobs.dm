@@ -512,7 +512,7 @@
 	gold_core_spawnable = FALSE
 	base_pixel_x = -52
 	pixel_x = -52
-
+	faction = list(FACTION_HOSTILE)
 
 	var/playstyle_string = span_infoplain("<b><font size=3 color='red'>We are the Corrupted Mutant Boss!</font> We are extremely powerful with multiple abilities: charge, tentacles, bone shards, and leap. Use them wisely via action buttons. We regenerate health over time but watch our health!</b>")
 	var/projectile_evade_cooldown = 3.5 SECONDS
@@ -692,8 +692,8 @@
 	attack_verb_simple = "smash"
 	attack_sound = 'sound/effects/blob/blobattack.ogg'
 	gold_core_spawnable = FALSE
-	base_pixel_x = -56
-	pixel_x = -56
+	base_pixel_x = -44
+	pixel_x = -44
 	lighting_cutoff_red = 22
 	lighting_cutoff_green = 5
 	lighting_cutoff_blue = 5
@@ -704,6 +704,7 @@
 	)
 
 	ai_controller = null
+	faction = list(FACTION_HOSTILE)
 
 /mob/living/basic/arctic_crusher_mutant/Initialize(mapload)
 	. = ..()

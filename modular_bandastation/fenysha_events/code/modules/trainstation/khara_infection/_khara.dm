@@ -90,7 +90,7 @@
 			spreading_modifier *= 0.6
 			base_stage_speed = 1.2
 			process_dead = TRUE
-			visibility_flags = HIDDEN_PANDEMIC
+			visibility_flags = NONE
 			spreading_modifier = KHARA_SPREADING_MODIFIER * 1.2
 		if(5)
 			to_chat(affected_mob, span_userdanger("Кожа вздувается и шевелится — что-то растёт слишком быстро!"))
@@ -98,7 +98,6 @@
 			spreading_modifier = KHARA_SPREADING_MODIFIER * 1.4
 		if(6)
 			to_chat(affected_mob, span_userdanger("Кости трещат и ломаются под немыслимым внутренним давлением!"))
-			visibility_flags = NONE
 			base_stage_speed = 1.8
 			spreading_modifier = KHARA_SPREADING_MODIFIER * 1.6
 		if(7)
