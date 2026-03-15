@@ -31,14 +31,6 @@
 	// Если пустой — используется 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	var/custom_icon_file = null
 
-	// --- Ограничения по профессии ---
-	// Пустой список = нет ограничений, доступен всем
-	// Иначе — список department bitflags или job titles
-	var/list/allowed_departments = list()
-
-	// --- Требует модуля? ---
-	// Если TRUE — бренд требует установки специального модуля для полной функциональности
-	var/requires_module = FALSE
 
 // ============================================
 // КОНКРЕТНЫЕ БРЕНДЫ
@@ -55,11 +47,9 @@
 // 2. ETAMIN INDUSTRY
 /datum/ipc_brand/etamin
 	name = "Etamin Industry"
-	desc = "+10% скорости взаимодействия, +точность. Рейдж раз в раунд (требует спец модуль). Термическая релаксация понижена."
+	desc = "+10% скорости взаимодействия. Термическая релаксация понижена."
 	brand_key = "etamin"
 	visual_prefix = "etamin"
-	allowed_departments = list(DEPARTMENT_BITFLAG_SECURITY)
-	requires_module = TRUE
 	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_etamin.dmi'
 
 
@@ -70,7 +60,6 @@
 	brand_key = "bishop"
 	visual_prefix = "ipc"
 	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_bishop.dmi'
-	allowed_departments = list(DEPARTMENT_BITFLAG_MEDICAL, DEPARTMENT_BITFLAG_SCIENCE)
 
 // 4. HESPHIASTOS INDUSTRIES
 /datum/ipc_brand/hesphiastos
@@ -78,7 +67,6 @@
 	desc = "120% здоровья. Имплант щита раундстартом в случайной руке. 110% melee damage."
 	brand_key = "hesphiastos"
 	visual_prefix = "hesphiastos"
-	allowed_departments = list(DEPARTMENT_BITFLAG_SECURITY)
 	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_hephaestus.dmi'
 
 // 5. WARD-TAKAHASHI
@@ -111,7 +99,6 @@
 	brand_key = "shellguard"
 	visual_prefix = "shellguard"
 	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_shellguard.dmi'
-	allowed_departments = list(DEPARTMENT_BITFLAG_SECURITY)
 
 // 9. UNBRANDED
 /datum/ipc_brand/unbranded

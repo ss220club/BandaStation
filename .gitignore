@@ -257,13 +257,4 @@ define_sanity_output.txt
 tgstation.json
 rust_g64.dll
 
-# Auto Claude data directory
-.auto-claude/
 
-# Auto Claude generated files
-.auto-claude-security.json
-.auto-claude-status
-.claude_settings.json
-.worktrees/
-.security-key
-logs/security/

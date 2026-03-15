@@ -728,7 +728,9 @@
 
 /obj/item/implant/ipc/sandevistan
 	name = "Имплант Сандевистан"
-	desc = "Сандевистан — имплант рефлекторного ускорения. Временно повышает скорость перемещения на 50%. Совместим с любым гуманоидом. У КПБ дополнительно расходует батарею и нагревает процессор."
+	desc = "Сандевистан — имплант рефлекторного ускорения. Временно повышает скорость перемещения на 50%. \
+		Совместим с любым гуманоидом. У КПБ расходует 500 единиц заряда и нагревает процессор на 50°C. \
+		У органиков перегружает нейросеть, вызывая повреждения мозга при каждом использовании."
 	icon_state = "sandy"
 	allowed_zones = list(BODY_ZONE_CHEST)
 	actions_types = list(/datum/action/item_action/hands_free/activate_sandevistan)
@@ -737,10 +739,12 @@
 	var/speed_bonus = -0.5
 	/// Длительность эффекта
 	var/effect_duration = 5 SECONDS
-	/// Стоимость активации в заряде батареи (только IPC)
-	var/power_cost = 250
-	/// Нагрев CPU при активации (только IPC)
-	var/heat_on_use = 20
+	/// Стоимость активации в заряде батареи (только КПБ)
+	var/power_cost = 500
+	/// Нагрев CPU при активации (только КПБ)
+	var/heat_on_use = 50
+	/// Урон мозгу при активации (только органики)
+	var/brain_damage_on_use = 15
 	/// Кулдаун
 	var/ability_cooldown = 30 SECONDS
 	/// Время последнего использования
@@ -797,10 +801,13 @@
 	last_use_time = world.time
 	is_active = TRUE
 
-	// Нагрев CPU только для IPC
+	// Нагрев CPU для КПБ, урон мозгу для органиков
 	var/datum/species/ipc/ipc_species = user.dna?.species
 	if(istype(ipc_species))
 		ipc_species.cpu_temperature = min(ipc_species.cpu_temperature + heat_on_use, 200)
+	else
+		user.adjust_organ_loss(ORGAN_SLOT_BRAIN, brain_damage_on_use)
+		to_chat(user, span_danger("Вы чувствуете пульсирующую боль в голове."))
 
 	// Ускорение
 	user.add_movespeed_modifier(/datum/movespeed_modifier/ipc_sandevistan)
