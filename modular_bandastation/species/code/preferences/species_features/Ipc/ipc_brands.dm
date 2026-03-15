@@ -113,7 +113,6 @@
 	desc = "Если облатель — антаг, может купить апгрейд в аплинке. Удалённый эмаг и абилка смены визуала деталей. +слот инвентаря (2 маленьких / 1 средний). Тихие шаги. 10% скорости. Повышена цена починок. -слот имплантов."
 	brand_key = "cybersun"
 	visual_prefix = "cybersun"
-	requires_module = TRUE
 	custom_icon_file = 'icons/bandastation/mob/species/ipc/bodyparts_cybersun.dmi'
 
 // 11. HEF
