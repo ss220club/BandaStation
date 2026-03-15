@@ -254,9 +254,9 @@
 	while((get_turf(src) != target_turf) && safety > 0)
 		safety--
 		forceMove(get_step_towards(src, target_turf))
-		sleep(0.2 SECONDS)
+		sleep(0.1 SECONDS)
 
-	addtimer(CALLBACK(src, PROC_REF(lower_to_turf), target_turf), 0.2 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(lower_to_turf), target_turf), 0.1 SECONDS)
 	if(reset)
 		reset_busy()
 
@@ -265,8 +265,8 @@
 		reset_busy()
 		return
 
-	animate(src, pixel_y = base_pixel_y, time = 0.3 SECONDS)
-	sleep(0.3 SECONDS)
+	animate(src, pixel_y = base_pixel_y, time = 0.2 SECONDS)
+	sleep(0.2 SECONDS)
 	if(attack_callback)
 		ASYNC
 			attack_callback.Invoke(src, get_turf(src))
@@ -278,8 +278,10 @@
 	if(QDELETED(src) || !home_turf)
 		reset_busy()
 		return
+
 	reset_busy()
-	move_to_target(home_turf, TRUE)
+	if(get_turf(src) != home_turf)
+		move_to_target(home_turf, FALSE)
 
 /mob/living/basic/khara_mutant/heat_of_infection_hand/left
 	icon_state = "scream_hand_l"
