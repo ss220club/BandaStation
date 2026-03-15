@@ -34,7 +34,7 @@
 		return
 	cqc_user.visible_message(
 		span_danger("[cqc_user.declent_ru(NOMINATIVE)] выворачивает руку [attacker.declent_ru(ACCUSATIVE)], перенаправляя [attack_weapon.declent_ru(ACCUSATIVE)] в сторону [genderize_ru(attacker.gender, "атакующего", "атакующей", "атакующего", "атакующих")]!"),
-		span_userdanger("Стараясь избежать [attack_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(ACCUSATIVE)] , вы выкручиваете [attacker.ru_p_them()] руку, направляя оружие обратно в [attacker.ru_p_theirs()]!"),
+		span_userdanger("Стараясь избежать [attack_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(ACCUSATIVE)], вы выкручиваете [attacker.ru_p_them()] руку, направляя оружие обратно в [attacker.ru_p_theirs()]!"),
 	)
 	var/obj/item/melee/touch_attack/touch_weapon = attack_weapon
 	var/datum/action/cooldown/spell/touch/touch_spell = touch_weapon.spell_which_made_us?.resolve()
@@ -108,7 +108,7 @@
 	attacker.do_attack_animation(defender)
 	defender.visible_message(
 		span_danger("[attacker.declent_ru(NOMINATIVE)] швыряет [defender.declent_ru(ACCUSATIVE)] на землю!"),
-		span_userdanger("[capitalize(attacker)] швырнул вас на землю!"),
+		span_userdanger("[capitalize(attacker)] швыряет вас на землю!"),
 		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		null,
 		attacker,
@@ -144,7 +144,7 @@
 
 	else
 		defender.visible_message(
-			span_danger("[capitalize(attacker.declent_ru(NOMINATIVE))] отбрасывает [defender.declent_ru(GENITIVE)] назад!"),
+			span_danger("[capitalize(attacker.declent_ru(NOMINATIVE))] отбрасывает [defender.declent_ru(ACCUSATIVE)] назад!"),
 			span_userdanger("Вы были отброшены [attacker.declent_ru(INSTRUMENTAL)]!"),
 			span_hear("Вы слышите противный звук удара плоти о плоть!"),
 			COMBAT_MESSAGE_RANGE,
@@ -204,7 +204,7 @@
 	attacker.do_attack_animation(defender)
 	log_combat(attacker, defender, "consecutive CQC'd (CQC)")
 	defender.visible_message(
-		span_danger("[attacker.declent_ru(NOMINATIVE)] последовательно наносит удары в живот, шею и спину [defender.declent_ru(GENITIVE)]."), \
+		span_danger("[attacker.declent_ru(NOMINATIVE)] последовательно наносит удары в живот, шею и спину [defender.declent_ru(DATIVE)]."), \
 		span_userdanger("Вы чувствуете, как [attacker.declent_ru(NOMINATIVE)] наносит последовательные удары в ваш живот, шею и спину!"),
 		span_hear("Вы слышите противный звук удара плоти о плоть!"),
 		COMBAT_MESSAGE_RANGE,
@@ -258,7 +258,7 @@
 			playsound(defender, 'sound/effects/wounds/crack1.ogg', 100)
 			defender.visible_message(
 				span_danger("[attacker.declent_ru(NOMINATIVE)] сворачивает шею [defender.declent_ru(DATIVE)]!"),
-				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] свернул вашу шею!"),
+				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] [genderize_ru(attacker.gender,"свернул","свернула","свернуло","свернули")] вашу шею!"),
 				span_hear("Вы слышите мерзкий хруст!"),
 				ignored_mobs = attacker
 			)
@@ -303,7 +303,7 @@
 
 	playsound(defender, (picked_hit_type == "пинать" || picked_hit_type == "топтать") ? 'sound/items/weapons/cqchit2.ogg' : 'sound/items/weapons/cqchit1.ogg', 50, TRUE, -1)
 	switch(picked_hit_type)
-		case (picked_hit_type == "пинать"):
+		case "пинать":
 			defender.visible_message(
 				span_danger("[attacker.declent_ru(NOMINATIVE)] пинает [defender.declent_ru(ACCUSATIVE)]!"),
 				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] пнул вас!"),
@@ -312,9 +312,9 @@
 					attacker,
 			)
 			to_chat(attacker, span_danger("Вы пинаете [defender.declent_ru(ACCUSATIVE)]!"))
-		case (picked_hit_type == "топтать"):
+		case "топтать":
 			defender.visible_message(
-				span_danger("[attacker.declent_ru(NOMINATIVE)] топчет [defender.declent_ru(GENITIVE)]!"),
+				span_danger("[attacker.declent_ru(NOMINATIVE)] топчет [defender.declent_ru(ACCUSATIVE)]!"),
 				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] растоптал вас!"),
 				span_hear("Вы слышите противный звук удара плоти о плоть!"),
 				COMBAT_MESSAGE_RANGE,
@@ -330,7 +330,7 @@
 				attacker,
 			)
 			to_chat(attacker, span_danger("Вы атакуете [defender.declent_ru(ACCUSATIVE)] приёмом '[picked_hit_type]'!"))
-	log_combat(attacker, defender, "attacked ([picked_hit_type]'d)(CQC)")
+	log_combat(attacker, defender, "attacked ([picked_hit_type])(CQC)")
 	return MARTIAL_ATTACK_SUCCESS
 
 /datum/martial_art/cqc/disarm_act(mob/living/attacker, mob/living/defender)
@@ -372,7 +372,7 @@
 			COMBAT_MESSAGE_RANGE,
 			attacker,
 		)
-		to_chat(attacker, span_danger("Вы бьёте в челюсть [defender.declent_ru(GENITIVE)],[disarmed_item ? " выбивая из [defender.ru_p_them()] рук [disarmed_item] и" : ""] оставляя [defender.ru_p_them()] дезориентированным!"))
+		to_chat(attacker, span_danger("Вы бьёте в челюсть [defender.declent_ru(ACCUSATIVE )],[disarmed_item ? " выбивая из [defender.ru_p_them()] рук [disarmed_item] и" : ""] оставляя [defender.ru_p_them()] дезориентированным!"))
 		playsound(defender, 'sound/items/weapons/cqchit1.ogg', 50, TRUE, -1)
 		defender.set_jitter_if_lower(4 SECONDS)
 		defender.apply_damage(5, attacker.get_attack_type())
@@ -396,7 +396,7 @@
 	set name = "Помните об основах"
 	set desc = "Вы пытаетесь запомнить некоторые основы CQC."
 	set category = "CQC"
-	to_chat(usr, "<b><i>Вы пытаетесь запомнить некоторые основы CQC..</i></b>")
+	to_chat(usr, "<b><i>Вы пытаетесь запомнить некоторые основы CQC.</i></b>")
 
 	to_chat(usr, "[span_notice("Бросок")]: Захват Удар. Впечатайте оппонента в землю, опрокидывая его.")
 	to_chat(usr, "[span_notice("CQC пинок")]: Удар Удар. Отбросьте оппонента от себя. Отбрасывание оглушённого противника наносит урон выносливости.")
