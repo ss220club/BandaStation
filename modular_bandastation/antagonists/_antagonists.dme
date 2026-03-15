@@ -1,4 +1,3 @@
 #include "_antagonists.dm"
 
 #include "code/ert.dm"
-#include "code/ipc_antag_compat.dm"
