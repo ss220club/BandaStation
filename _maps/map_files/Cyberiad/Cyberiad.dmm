@@ -3156,10 +3156,6 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /turf/open/floor/iron,
 /area/station/security/prison)
-"aOt" = (
-/obj/structure/lattice,
-/turf/closed/wall,
-/area/station/hallway/secondary/exit/departure_lounge)
 "aOu" = (
 /obj/structure/transit_tube/horizontal,
 /obj/effect/spawner/structure/window/reinforced,
@@ -6408,7 +6404,6 @@
 /turf/closed/wall,
 /area/station/commons/storage/emergency/port)
 "bCn" = (
-/obj/machinery/duct,
 /obj/structure/table,
 /obj/effect/spawner/random/maintenance/two,
 /obj/machinery/duct,
@@ -23235,17 +23230,12 @@
 /turf/open/floor/iron,
 /area/station/security/office)
 "fFs" = (
-/obj/structure/window/reinforced/spawner/directional/south{
-	dir = 8
-	},
-/obj/structure/window/reinforced/spawner/directional/north{
-	dir = 4
-	},
-/obj/machinery/door/window/right/directional/west{
-	req_access = list("science");
-	dir = 1
-	},
 /obj/effect/turf_decal/delivery,
+/obj/machinery/door/window/right/directional/north{
+	req_access = list("science")
+	},
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "fFu" = (
@@ -73106,12 +73096,6 @@
 /obj/item/kirbyplants/random,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/ghetto/fore/starboard)
-"rMy" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/station/maintenance/starboard/aft)
 "rML" = (
 /obj/machinery/suit_storage_unit/ce,
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
@@ -73657,10 +73641,6 @@
 	},
 /turf/open/floor/plating,
 /area/station/engineering/supermatter/room)
-"rTR" = (
-/obj/structure/lattice/catwalk,
-/turf/closed/wall,
-/area/station/maintenance/ghetto/starboard)
 "rTW" = (
 /obj/machinery/door/airlock/security/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -95433,11 +95413,6 @@
 "xmG" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/window/right/directional/east{
-	name = "Research and Development Desk";
-	req_access = list("science");
-	dir = 2
-	},
 /obj/structure/desk_bell{
 	pixel_x = 7;
 	pixel_y = 3
@@ -95457,6 +95432,10 @@
 /obj/item/pen{
 	pixel_x = -5;
 	pixel_y = -3
+	},
+/obj/machinery/door/window/right/directional/south{
+	name = "Genetics Desk";
+	req_access = list("genetics")
 	},
 /turf/open/floor/plating,
 /area/station/science/genetics)
@@ -149935,7 +149914,7 @@ doz
 doz
 ceC
 ceC
-rTR
+ipz
 vDb
 weu
 gwz
@@ -214716,7 +214695,7 @@ uOq
 rnj
 eLd
 lzr
-rMy
+fki
 lzr
 lzr
 jqC
@@ -219321,7 +219300,7 @@ hqA
 mcT
 snW
 dna
-aOt
+dna
 kJd
 kJd
 kJd
