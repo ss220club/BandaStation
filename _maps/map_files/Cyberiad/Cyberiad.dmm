@@ -3159,6 +3159,11 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /turf/open/floor/iron,
 /area/station/security/prison)
+"aOt" = (
+/obj/machinery/duct,
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/iron,
+/area/station/science/genetics)
 "aOu" = (
 /obj/structure/transit_tube/horizontal,
 /obj/effect/spawner/structure/window/reinforced,
@@ -13248,6 +13253,15 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/ai/satellite/service)
+"dgR" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/structure/disposalpipe/segment{
+	dir = 10
+	},
+/turf/open/floor/iron,
+/area/station/science/genetics)
 "dgS" = (
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -26850,10 +26864,12 @@
 /turf/open/floor/plating,
 /area/station/service/chapel/monastery)
 "gzI" = (
-/obj/machinery/duct,
-/obj/structure/disposalpipe/segment,
-/turf/open/floor/iron,
-/area/station/science/genetics)
+/obj/effect/mapping_helpers/broken_floor,
+/obj/structure/disposalpipe/trunk/multiz{
+	dir = 4
+	},
+/turf/open/floor/wood/ebonite,
+/area/station/maintenance/ghetto/starboard)
 "gzQ" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -53337,12 +53353,12 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "mUa" = (
-/obj/effect/mapping_helpers/broken_floor,
-/obj/structure/disposalpipe/trunk/multiz{
-	dir = 4
+/obj/structure/reagent_dispensers/plumbed{
+	dir = 1;
+	name = "genetics water tank"
 	},
-/turf/open/floor/wood/ebonite,
-/area/station/maintenance/ghetto/starboard)
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/aft)
 "mUd" = (
 /obj/effect/spawner/random/structure/tank_holder,
 /turf/open/floor/iron,
@@ -56189,14 +56205,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "nFH" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
 /obj/structure/disposalpipe/segment{
-	dir = 8
+	dir = 10
 	},
-/turf/open/floor/iron/white,
-/area/station/science/lab)
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/upper)
 "nFI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/chair/wood,
@@ -73093,11 +73106,15 @@
 /turf/open/floor/iron/dark,
 /area/station/maintenance/ghetto/fore/starboard)
 "rMy" = (
-/obj/structure/disposalpipe/segment{
-	dir = 10
+/obj/effect/turf_decal/tile/purple/half{
+	dir = 1
 	},
-/turf/open/floor/plating,
-/area/station/maintenance/starboard/upper)
+/obj/machinery/disposal/bin,
+/obj/structure/disposalpipe/trunk{
+	dir = 2
+	},
+/turf/open/floor/iron/white,
+/area/station/science/lab)
 "rML" = (
 /obj/machinery/suit_storage_unit/ce,
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
@@ -73643,13 +73660,6 @@
 	},
 /turf/open/floor/plating,
 /area/station/engineering/supermatter/room)
-"rTR" = (
-/obj/structure/reagent_dispensers/plumbed{
-	dir = 1;
-	name = "genetics water tank"
-	},
-/turf/open/floor/plating,
-/area/station/maintenance/starboard/aft)
 "rTW" = (
 /obj/machinery/door/airlock/security/glass,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -74474,6 +74484,7 @@
 	dir = 2;
 	name = "Genetics Junction"
 	},
+/obj/effect/mapping_helpers/mail_sorting/science/genetics,
 /turf/open/floor/iron,
 /area/station/science/genetics)
 "sdv" = (
@@ -76525,11 +76536,9 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/structure/disposalpipe/sorting/mail/flip{
-	dir = 4;
-	name = "Research Junction"
+/obj/structure/disposalpipe/segment{
+	dir = 8
 	},
-/obj/effect/mapping_helpers/mail_sorting/science/research,
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "sCV" = (
@@ -83730,13 +83739,6 @@
 "usX" = (
 /turf/closed/wall/rust,
 /area/station/maintenance/ghetto/garden)
-"uta" = (
-/obj/machinery/duct,
-/obj/structure/disposalpipe/segment{
-	dir = 5
-	},
-/turf/open/floor/iron,
-/area/station/science/genetics)
 "utg" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/chair/office{
@@ -89393,11 +89395,9 @@
 /turf/open/floor/wood/parquet,
 /area/station/hallway/secondary/service)
 "vNn" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
+/obj/machinery/duct,
 /obj/structure/disposalpipe/segment{
-	dir = 10
+	dir = 5
 	},
 /turf/open/floor/iron,
 /area/station/science/genetics)
@@ -93256,13 +93256,14 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "wMk" = (
-/obj/effect/turf_decal/tile/purple/half{
-	dir = 1
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
+/obj/structure/disposalpipe/sorting/mail/flip{
+	dir = 4;
+	name = "Research Junction"
 	},
-/obj/machinery/disposal/bin,
-/obj/structure/disposalpipe/trunk{
-	dir = 2
-	},
+/obj/effect/mapping_helpers/mail_sorting/science/research,
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "wMn" = (
@@ -146337,7 +146338,7 @@ nSN
 ipz
 hRA
 ipz
-mUa
+gzI
 ijq
 cys
 kql
@@ -207249,7 +207250,7 @@ nnU
 soI
 kYb
 nPZ
-rMy
+nFH
 hFm
 gqS
 hFm
@@ -213419,9 +213420,9 @@ pbx
 qPc
 tvB
 xsG
-wMk
+rMy
 arz
-sCT
+wMk
 rFU
 iLA
 gZl
@@ -213678,7 +213679,7 @@ whT
 hzz
 tqy
 nEE
-nFH
+sCT
 gUB
 jqC
 jqC
@@ -213935,7 +213936,7 @@ iXk
 hzz
 bSX
 nEE
-nFH
+sCT
 fFs
 igh
 ccZ
@@ -215214,17 +215215,17 @@ pwQ
 bMM
 xmG
 qKu
-vNn
+dgR
 sdq
 isV
 qQF
 boI
 ouP
-uta
+vNn
 nzQ
 jqC
 gfa
-rTR
+mUa
 htd
 gUu
 pBU
@@ -215478,7 +215479,7 @@ saU
 saU
 hbB
 rnh
-gzI
+aOt
 xke
 wPb
 xhE
