@@ -40,12 +40,12 @@
 			var/message = ""
 			var/location = victim.loc
 			if(istype(location, /obj/structure/disposalholder)) // sometimes your loc can be a disposalsholder when you're inside a disposals type, so let's just pass a message that makes sense.
-				message = "Вы слышите много грохота в трубах утилизации вокруг вас, когда сама реальность искажается. Тем не менее, вы чувствуете себя в безопасности."
+				message = "Вы слышите грохот в трубах утилизации вокруг вас, когда сама реальность искажается. Тем не менее, вы чувствуете себя в безопасности."
 			else
 				message = "Вы крепко держитесь за [victim.loc], когда реальность искажается вокруг вас. Вы чувствуете себя в безопасности."
 			to_chat(victim, span_bolddanger(message))
 			continue
-		to_chat(victim, span_bolddanger("Вы чувствуете, как реальность искажается на мгновение..."))
+		to_chat(victim, span_bolddanger("Вы чувствуете, как реальность на мгновение искажается..."))
 		if (isliving(victim))
 			var/mob/living/living_victim = victim
 			living_victim.add_mood_event("delam", /datum/mood_event/delam)
@@ -148,7 +148,7 @@
 	// say goodbye to that shuttle of yours
 	if(SSshuttle.emergency.mode != SHUTTLE_ESCAPE)
 		priority_announce(
-			text = "Произошла фатальная ошибка в аплинке аварийного шаттла во время транзита. Невозможно восстановить соединение.",
+			text = "Произошла критическая ошибка систем связи аварийного шаттла во время транзита. Невозможно восстановить соединение.",
 			title = "Отказ шаттла",
 			sound =  'sound/announcer/announcement/announce_dig.ogg',
 			sender_override = "Система оповещения эвакуационного шаттла",
