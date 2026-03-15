@@ -98,3 +98,10 @@
 
 /// Sent from [/datum/element/burn_on_item_ignition] to an atom being ignited by something: (mob/living/user, obj/item/burning_thing)
 #define COMSIG_ATOM_IGNITED_BY_ITEM "atom_ignited_by_item"
+
+// BANDASTATION EDIT START - modular signals
+/// from base of atom/base_ranged_item_interaction(): (mob/living/user, atom/target, modifiers)
+#define COMSIG_MOB_RANGED_ITEM_INTERACTION "mob_ranged_item_interaction"
+/// from base of atom/base_ranged_item_interaction(): (mob/living/user, atom/target, modifiers)
+#define COMSIG_MOB_RANGED_ITEM_INTERACTION_SECONDARY "mob_ranged_item_interaction_secondary"
+// BANDASTATION EDIT END
