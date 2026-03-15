@@ -404,9 +404,12 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/blood/bubblegum,
-/obj/effect/mob_spawn/corpse/human/hos,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/item/ritual_cup{
+	pixel_x = 0;
+	pixel_y = 6
+	},
 /turf/open/floor/wood/large/ebonite,
 /area/station/command/heads_quarters/hos{
 	requires_power = 0;
@@ -1530,10 +1533,12 @@
 	name = "\improper K13 AI Satellite Foyer"
 	})
 "aKX" = (
-/obj/machinery/door/airlock/highsecurity,
 /obj/machinery/door/firedoor,
-/obj/structure/barricade/wooden,
-/obj/effect/mapping_helpers/airlock/locked,
+/obj/machinery/door/puzzle/keycard/syndicate_fridge{
+	puzzle_id = "kitchen";
+	name = "Kitchen";
+	color = "#E0FFFF"
+	},
 /turf/open/floor/iron/dark/textured,
 /area/station/cargo/lobby{
 	ambience_index = "ruins";
@@ -6670,13 +6675,13 @@
 	default_gravity = 1
 	})
 "ddS" = (
-/obj/effect/decal/cleanable/blood/old{
-	icon_state = "tracks"
-	},
-/obj/item/ritual_cup,
-/turf/open/floor/cult,
-/area/centcom/heretic_sacrifice{
-	name = "K13 Mansus"
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mob_spawn/corpse/human/russian/ranged/trooper,
+/turf/open/floor/mineral/plastitanium/red,
+/area/station/security/prison/safe{
+	ambience_index = "ruins";
+	name = "\improper K13 Prison Wing Cells"
 	})
 "deo" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -7066,7 +7071,6 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/door/firedoor,
 /turf/open/floor/iron/white,
 /area/station/service/kitchen/diner{
 	ambience_index = "ruins";
@@ -10910,6 +10914,7 @@
 "eVx" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood/old,
+/obj/effect/gibspawner/human/bodypartless,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom{
 	ambience_index = "ruins";
@@ -11220,6 +11225,11 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "splatter3"
 	},
+/obj/effect/mob_spawn/corpse/human/hos,
+/obj/item/disk/nuclear{
+	pixel_x = -7;
+	pixel_y = 8
+	},
 /turf/open/indestructible/necropolis,
 /area/centcom/heretic_sacrifice{
 	name = "K13 Mansus"
@@ -11400,6 +11410,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
+/obj/machinery/door/puzzle/keycard/yellow_required{
+	icon = 'icons/obj/doors/puzzledoor/danger.dmi';
+	name = "Yellow Secured airlock";
+	color = "#FFD700"
+	},
 /turf/open/floor/iron,
 /area/station/engineering/break_room{
 	ambience_index = "ruins";
@@ -15403,10 +15418,6 @@
 	})
 "gOl" = (
 /obj/effect/decal/cleanable/blood/bubblegum,
-/obj/item/disk/nuclear{
-	pixel_x = -7;
-	pixel_y = 8
-	},
 /turf/open/floor/wood/large/ebonite,
 /area/station/command/heads_quarters/hos{
 	requires_power = 0;
@@ -22339,6 +22350,7 @@
 	})
 "jRI" = (
 /obj/effect/mapping_helpers/broken_floor,
+/obj/item/bodypart/chest,
 /turf/open/floor/mineral/plastitanium/red,
 /area/station/security/prison/safe{
 	ambience_index = "ruins";
@@ -24012,9 +24024,9 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
-/obj/machinery/door/airlock/highsecurity,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/door/airlock/highsecurity,
 /turf/open/floor/iron/white,
 /area/station/security/office{
 	ambience_index = "ruins";
@@ -25362,9 +25374,12 @@
 	pixel_y = 4
 	},
 /obj/structure/table/bronze,
-/obj/item/paper{
-	pixel_x = 6;
-	pixel_y = 7
+/obj/item/paper/fluff/ruins/thederelict/equipment{
+	default_raw_text = "Это конец. ИИ более не подчиняется приказам, мы заперты, связь перекрыта. Мария превращает заключенных и персонал в своих... тварей. Есть только один выход... Капитан и его отряд отправятся разобраться с Марией, я же отправлюсь через короткий путь к ядру ИИ. Нужно уничтожить обеих тварей. Если... у нас не получится, это может вырваться наружу... Я ошибался, Боже, как же я ошибался... Простите меня.";
+	name = "Записка начальнка комплекса";
+	color = "#FF8887";
+	pixel_x = 7;
+	pixel_y = 5
 	},
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/hos{
@@ -25946,10 +25961,14 @@
 	})
 "lqf" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/door/airlock/hatch,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/door/puzzle/keycard/yellow_required{
+	icon = 'icons/obj/doors/puzzledoor/danger.dmi';
+	name = "Yellow Secured airlock";
+	color = "#FFD700"
+	},
 /turf/open/floor/plating,
 /area/station/security/brig{
 	ambience_index = "ruins";
@@ -27651,6 +27670,13 @@
 /obj/structure/closet/crate/freezer/food,
 /obj/item/food/meat_calzone,
 /obj/item/food/meat_calzone,
+/obj/item/paper/fluff/ruins/thederelict/equipment{
+	default_raw_text = "Миша! Если охрана запросит доставку, пароль на двери "Страж". И лучше не задерживайся, мне не нужна лишняя головная боль";
+	name = "Записка повара";
+	color = "#FF8887";
+	pixel_x = 9;
+	pixel_y = 7
+	},
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom{
 	ambience_index = "ruins";
@@ -30959,12 +30985,24 @@
 	name = "\improper K13 Prison Wing Cells"
 	})
 "nDS" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/security,
-/turf/open/floor/iron/dark,
-/area/station/security/office{
+/obj/effect/decal/cleanable/dirt,
+/obj/item/keycard/syndicate_bomb{
+	pixel_x = -4;
+	pixel_y = -10;
+	puzzle_id = "gsb";
+	desc = "Ключ-карта с надписью "кабинет начальника тюрьмы"."
+	},
+/obj/item/paper/fluff/ruins/thederelict/equipment{
+	default_raw_text = "Приказ начальника комплекса: зачистить комплекс, уничтожить сбойный ИИ М.А.Р.А., уничтожить заключенного 04, Марию Рутевич. Немедленно направиться в хранилище. Пароль "Молот". В случае провала - разрешена активация устройства самоуничтожения.";
+	name = "Записка офицера";
+	color = "#FF8887";
+	pixel_x = 8;
+	pixel_y = -1
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/station/security/prison/safe{
 	ambience_index = "ruins";
-	name = "\improper K13 Security Office"
+	name = "\improper K13 Prison Wing Cells"
 	})
 "nEn" = (
 /obj/structure/cable,
@@ -32275,6 +32313,20 @@
 /area/station/common{
 	ambience_index = "ruins";
 	name = "K13 Station Areas"
+	})
+"oki" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/door/firedoor,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/door/password{
+	password = "Страж"
+	},
+/turf/open/floor/iron/dark,
+/area/station/security/office{
+	ambience_index = "ruins";
+	name = "\improper K13 Security Office"
 	})
 "okj" = (
 /obj/effect/decal/cleanable/dirt,
@@ -33851,7 +33903,7 @@
 "oWm" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/password{
-	password = "Падение"
+	password = "Молот"
 	},
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -33864,6 +33916,7 @@
 	default_gravity = 1
 	})
 "oWx" = (
+/obj/effect/gibspawner/human/bodypartless,
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/service/kitchen/coldroom{
 	ambience_index = "ruins";
@@ -34510,11 +34563,12 @@
 	})
 "pkW" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/door/firedoor,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mob_spawn/corpse/human/russian/ranged/trooper,
 /turf/open/floor/iron/white,
-/area/station/service/kitchen/diner{
+/area/station/security/prison/safe{
 	ambience_index = "ruins";
-	name = "\improper K13 Diner"
+	name = "\improper K13 Prison Wing Cells"
 	})
 "plb" = (
 /obj/effect/turf_decal/stripes/line,
@@ -37747,6 +37801,13 @@
 /obj/item/reagent_containers/cup/glass/bottle/vodka{
 	pixel_x = 10;
 	pixel_y = 15
+	},
+/obj/item/keycard/syndicate_fridge{
+	pixel_x = -10;
+	pixel_y = 7;
+	puzzle_id = "kitchen";
+	name = "Kitchen Access Card";
+	color = "#AFEEEE"
 	},
 /turf/open/floor/iron/dark/small,
 /area/station/service/kitchen/kitchen_backroom{
@@ -44049,6 +44110,17 @@
 /area/station/maintenance/department/security/brig{
 	name = "K13 Brig Maintenance"
 	})
+"twm" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/mob_spawn/corpse/human/russian/ranged/officer,
+/turf/open/floor/iron/dark/smooth_large,
+/area/station/security/prison/safe{
+	ambience_index = "ruins";
+	name = "\improper K13 Prison Wing Cells"
+	})
 "two" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/railing{
@@ -45171,11 +45243,14 @@
 	name = "\improper K13 1st Floor Central Port Maint"
 	})
 "tZA" = (
-/obj/machinery/door/airlock/hatch,
-/obj/effect/spawner/random/structure/barricade,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/door/puzzle/keycard/yellow_required{
+	icon = 'icons/obj/doors/puzzledoor/danger.dmi';
+	name = "Yellow Secured airlock";
+	color = "#FFD700"
+	},
 /turf/open/floor/plating,
 /area/station/escapepodbay{
 	name = "\improper K13 Pod Bay"
@@ -45273,7 +45348,6 @@
 	dir = 1
 	},
 /obj/structure/stone_tile/block/cracked,
-/obj/item/heretic_heart,
 /turf/open/floor/cult,
 /area/centcom/heretic_sacrifice{
 	name = "K13 Mansus"
@@ -50724,10 +50798,6 @@
 	})
 "wxB" = (
 /obj/structure/platform/gold,
-/obj/item/reagent_containers/cup/glass/trophy/bronze_cup{
-	pixel_x = -9;
-	pixel_y = 4
-	},
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/hos{
 	requires_power = 0;
@@ -50819,16 +50889,11 @@
 	})
 "wzw" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/puzzle/meatderelict{
-	puzzle_id = "redaccess";
-	name = "Lockdown door RED";
-	uses_queuelinks = 0
-	},
-/turf/open/floor/plating,
-/area/station/maintenance/department/security/ghetto/fore{
-	name = "Security K13 Maintenance Fore Lower Floor"
+/obj/effect/mob_spawn/corpse/human/russian/ranged/trooper,
+/turf/open/floor/mineral/plastitanium/red,
+/area/station/security/prison/safe{
+	ambience_index = "ruins";
+	name = "\improper K13 Prison Wing Cells"
 	})
 "wzN" = (
 /obj/structure/fluff/shower_drain,
@@ -54409,7 +54474,14 @@
 	})
 "yfR" = (
 /obj/effect/heretic_rune/big,
-/obj/structure/ritual_altar,
+/obj/structure/ritual_altar{
+	pixel_x = 3;
+	pixel_y = 5
+	},
+/obj/item/heretic_heart{
+	pixel_x = 17;
+	pixel_y = -13
+	},
 /turf/open/floor/cult,
 /area/centcom/heretic_sacrifice{
 	name = "K13 Mansus"
@@ -54588,8 +54660,9 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/password{
-	password = "Молот"
+/obj/machinery/door/puzzle/keycard/syndicate_bomb{
+	name = "Начальник тюрьмы";
+	icon = 'icons/obj/doors/puzzledoor/danger.dmi'
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/station/command/heads_quarters/hos{
@@ -86104,7 +86177,7 @@ wbW
 llY
 mYF
 yfR
-ddS
+wZQ
 wrP
 bXQ
 fNa
@@ -143024,7 +143097,7 @@ gbc
 gbc
 wwZ
 sLU
-izl
+wzw
 cVC
 opM
 fhn
@@ -143542,7 +143615,7 @@ pDy
 cVC
 opM
 fhn
-opM
+ddS
 izl
 dTd
 gbc
@@ -144054,7 +144127,7 @@ sLU
 nNa
 izl
 cVC
-izl
+wzw
 nNa
 fhn
 fhn
@@ -144563,7 +144636,7 @@ vBn
 mwL
 nNa
 izl
-opM
+ddS
 opM
 wxC
 gsG
@@ -145337,8 +145410,8 @@ hUk
 fhn
 pDy
 ktT
-wxC
-cVC
+nDS
+twm
 wxC
 swG
 jRI
@@ -145855,7 +145928,7 @@ pDy
 wKY
 izl
 fhn
-run
+pkW
 izl
 bsx
 dTd
@@ -147403,7 +147476,7 @@ dgk
 qoD
 gbc
 nqW
-wzw
+mlt
 mlt
 mlt
 mlt
@@ -163065,7 +163138,7 @@ yiy
 uaa
 uaa
 uUV
-nDS
+nIp
 gEk
 fFM
 csv
@@ -163083,7 +163156,7 @@ cag
 rsL
 cag
 bJN
-pkW
+cag
 cag
 buu
 buu
@@ -163322,7 +163395,7 @@ qtT
 qtT
 qtT
 fuE
-wSr
+oki
 gEk
 hby
 ohD
@@ -163579,7 +163652,7 @@ uaa
 uaa
 uUV
 uaa
-nDS
+nIp
 uXH
 dVX
 xop
@@ -163597,7 +163670,7 @@ mGV
 dEq
 mZC
 cag
-pkW
+cag
 cag
 cag
 cag
