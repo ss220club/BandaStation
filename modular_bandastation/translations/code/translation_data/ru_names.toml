@@ -4197,60 +4197,6 @@ gender = "male"
 nominative = "НТ-АРГ \"Пограничник\""
 gender = "male"
 
-["AMK rifle"]
-nominative = "автомат AMK"
-genitive = "автомата AMK"
-dative = "автомату AMK"
-accusative = "автомат AMK"
-instrumental = "автоматом AMK"
-prepositional = "автомате AMK"
-gender = "male"
-
-["Sabel-42 carbine"]
-nominative = "карабин \"Сабля-42\""
-genitive = "карабина \"Сабля-42\""
-dative = "карабину \"Сабля-42\""
-accusative = "карабин \"Сабля-42\""
-instrumental = "карабином \"Сабля-42\""
-prepositional = "карабине \"Сабля-42\""
-gender = "male"
-
-["AMK-462 rifle"]
-nominative = "автомат AMK-462"
-genitive = "автомата AMK-462"
-dative = "автомату AMK-462"
-accusative = "автомат AMK-462"
-instrumental = "автоматом AMK-462"
-prepositional = "автомате AMK-462"
-gender = "male"
-
-["modern AMK rifle"]
-nominative = "модернизированный автомат AMK"
-genitive = "модернизированного автомата AMK"
-dative = "модернизированному автомату AMK"
-accusative = "модернизированный автомат AMK"
-instrumental = "модернизированным автоматом AMK"
-prepositional = "модернизированном автомате AMK"
-gender = "male"
-
-["gauss AMK rifle"]
-nominative = "гаусс-автомат AMK"
-genitive = "гаусс-автомата AMK"
-dative = "гаусс-автомату AMK"
-accusative = "гаусс-автомат AMK"
-instrumental = "гаусс-автоматом AMK"
-prepositional = "гаусс-автомате AMK"
-gender = "male"
-
-["tactical gauss AMK rifle"]
-nominative = "тактический гаусс-автомат AMK"
-genitive = "тактического гаусс-автомата AMK"
-dative = "тактическому гаусс-автомату AMK"
-accusative = "тактический гаусс-автомат AMK"
-instrumental = "тактическим гаусс-автоматом AMK"
-prepositional = "тактическом гаусс-автомате AMK"
-gender = "male"
-
 ["gyrojet pistol"]
 nominative = "реактивный пистолет"
 genitive = "реактивного пистолета"
