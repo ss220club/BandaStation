@@ -42,13 +42,10 @@
 /area/trainstation/indoors/station/powered)
 "br" = (
 /obj/structure/lattice/catwalk,
-/obj/structure/railing{
-	dir = 8
-	},
-/turf/open/floor/plating{
-	icon_state = "black"
-	},
-/area/trainstation/outdoor)
+/obj/structure/railing,
+/obj/item/climbing_hook/emergency/safeguard,
+/turf/open/floor/catwalk_floor,
+/area/trainstation/indoors/station/powered)
 "bt" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 1
@@ -110,7 +107,7 @@
 	pixel_y = 0
 	},
 /mob/living/basic/npc/police/military/bad_guys/meele,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "dL" = (
 /obj/structure/lattice/catwalk,
@@ -125,16 +122,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/shuttle/exploration/doubleside,
 /area/trainstation/indoors/station/controll)
-"eC" = (
-/obj/structure/lattice/catwalk,
-/obj/structure/fluff/big_chain,
-/obj/structure/railing{
-	dir = 9
-	},
-/turf/open/floor/plating{
-	icon_state = "black"
-	},
-/area/trainstation/outdoor)
 "ft" = (
 /obj/machinery/door/poddoor/story,
 /turf/open/indestructible/dark/textured,
@@ -158,7 +145,7 @@
 /obj/structure/railing{
 	dir = 6
 	},
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "gD" = (
 /obj/structure/lattice,
@@ -176,7 +163,7 @@
 /area/trainstation/indoors/station/powered)
 "gZ" = (
 /turf/open/floor/catwalk_floor/iron_dark,
-/area/trainstation/outdoor)
+/area/trainstation/indoors/station/powered)
 "hC" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 4
@@ -223,16 +210,6 @@
 "iR" = (
 /turf/closed/wall/city/siding/style/style_1,
 /area/trainstation/indoors/station/controll)
-"iT" = (
-/obj/structure/lattice/catwalk,
-/obj/structure/fluff/big_chain,
-/obj/structure/railing{
-	dir = 6
-	},
-/turf/open/floor/plating{
-	icon_state = "black"
-	},
-/area/trainstation/outdoor)
 "iX" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
@@ -308,7 +285,7 @@
 	name = "Внимание - защищенное хранилище"
 	},
 /obj/machinery/light/red/directional/south,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "ky" = (
 /obj/effect/spawner/random/weapon,
@@ -359,18 +336,13 @@
 "lW" = (
 /obj/structure/lattice/catwalk,
 /obj/effect/decal/cleanable/blood/old,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "mb" = (
 /obj/structure/lattice/catwalk,
-/obj/structure/fluff/big_chain,
-/obj/structure/railing{
-	dir = 10
-	},
-/turf/open/floor/plating{
-	icon_state = "black"
-	},
-/area/trainstation/outdoor)
+/obj/item/climbing_hook/emergency/safeguard,
+/turf/open/floor/catwalk_floor,
+/area/trainstation/indoors/station/powered)
 "ml" = (
 /obj/machinery/modular_computer/preset/civilian{
 	dir = 1
@@ -428,28 +400,19 @@
 	dir = 4;
 	pixel_y = 0
 	},
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "oD" = (
 /obj/structure/fluff/big_chain{
 	pixel_x = 16
 	},
 /obj/structure/lattice/catwalk,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "oY" = (
 /obj/effect/spawner/random/structure/shipping_container,
 /turf/open/misc/dirt/station,
 /area/trainstation/indoors/station/powered)
-"pa" = (
-/obj/structure/lattice/catwalk,
-/obj/structure/railing{
-	dir = 1
-	},
-/turf/open/floor/plating{
-	icon_state = "black"
-	},
-/area/trainstation/outdoor)
 "pe" = (
 /obj/structure/prop/stalagmite/style_random,
 /turf/open/misc/dirt/station,
@@ -461,7 +424,7 @@
 "pB" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/railing,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "pR" = (
 /obj/structure/railing/unbreakable{
@@ -501,7 +464,7 @@
 /obj/structure/lattice/catwalk,
 /obj/structure/lattice/catwalk,
 /obj/structure/marker_beacon/bronze,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "qu" = (
 /obj/effect/spawner/random/structure/closet_maintenance,
@@ -510,7 +473,7 @@
 "qG" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/lattice/catwalk,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "qO" = (
 /obj/structure/sneak_pod/iced,
@@ -577,16 +540,6 @@
 "rW" = (
 /turf/open/indestructible/dark/textured,
 /area/trainstation/indoors/station/powered)
-"sa" = (
-/obj/structure/lattice/catwalk,
-/obj/structure/fluff/big_chain,
-/obj/structure/railing{
-	dir = 5
-	},
-/turf/open/floor/plating{
-	icon_state = "black"
-	},
-/area/trainstation/outdoor)
 "sc" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/fluff/big_chain,
@@ -648,7 +601,7 @@
 	pixel_y = 0
 	},
 /mob/living/basic/npc/police/military/bad_guys/meele,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "tD" = (
 /obj/structure/fluff/big_chain{
@@ -656,7 +609,7 @@
 	pixel_x = 16
 	},
 /obj/structure/lattice/catwalk,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "tR" = (
 /obj/structure/chair/office/tactical{
@@ -718,12 +671,16 @@
 /obj/effect/portal/permanent{
 	id = "mines_1";
 	icon = 'icons/obj/structures.dmi';
-	icon_state = "ladder11"
+	icon_state = "ladder11";
+	sparkless = 0;
+	wibbles = 0;
+	light_on = 0;
+	name = "Ladder"
 	},
 /turf/open/floor/plating{
 	icon_state = "black"
 	},
-/area/trainstation/outdoor)
+/area/trainstation/indoors/station/powered)
 "wN" = (
 /obj/structure/lattice,
 /obj/effect/spawner/random/structure/grille,
@@ -748,7 +705,11 @@
 /obj/effect/portal/permanent{
 	id = "mines_1";
 	icon = 'icons/obj/structures.dmi';
-	icon_state = "ladder11"
+	icon_state = "ladder11";
+	wibbles = 0;
+	sparkless = 0;
+	light_on = 0;
+	name = "Ladder"
 	},
 /turf/open/floor/plating{
 	icon_state = "black"
@@ -816,20 +777,22 @@
 	pixel_x = -16
 	},
 /obj/structure/lattice/catwalk,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "yz" = (
 /obj/machinery/door/airlock/shuttle/ferry{
 	name = "Magnetic interlock control"
 	},
 /turf/open/indestructible/dark/smooth_large,
-/area/trainstation/outdoor)
+/area/trainstation/indoors/station/powered)
 "zc" = (
 /obj/structure/lattice/catwalk,
-/turf/open/floor/plating{
-	icon_state = "black"
+/obj/structure/railing{
+	dir = 1
 	},
-/area/trainstation/outdoor)
+/obj/item/climbing_hook/emergency/safeguard,
+/turf/open/floor/catwalk_floor,
+/area/trainstation/indoors/station/powered)
 "zg" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
@@ -855,7 +818,7 @@
 /obj/structure/railing{
 	dir = 9
 	},
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "zW" = (
 /obj/effect/spawner/random/maintenance/two,
@@ -953,25 +916,16 @@
 /turf/closed/indestructible/steel,
 /area/trainstation/indoors/station/powered)
 "BL" = (
-/turf/open/indestructible/dark/textured,
-/area/trainstation/outdoor)
-"BS" = (
-/obj/structure/lattice/catwalk,
-/obj/structure/railing{
-	dir = 4;
-	pixel_y = 0
-	},
-/turf/open/floor/plating{
-	icon_state = "black"
-	},
-/area/trainstation/outdoor)
+/obj/item/climbing_hook/emergency/safeguard,
+/turf/open/misc/dirt/station,
+/area/trainstation/indoors/station/powered)
 "BV" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/railing{
 	dir = 8;
 	pixel_y = 0
 	},
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "Ch" = (
 /turf/open/floor/catwalk_floor/iron_dark,
@@ -1083,18 +1037,15 @@
 /obj/structure/railing{
 	dir = 5
 	},
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "FP" = (
 /turf/open/indestructible/train_platform,
 /area/trainstation/outdoor)
 "FV" = (
 /obj/structure/lattice/catwalk,
-/obj/structure/railing,
-/turf/open/floor/plating{
-	icon_state = "black"
-	},
-/area/trainstation/outdoor)
+/turf/open/floor/catwalk_floor,
+/area/trainstation/indoors/station/powered)
 "Gc" = (
 /obj/effect/spawner/random/structure/girder,
 /turf/open/misc/dirt/station,
@@ -1416,7 +1367,7 @@
 	dir = 1
 	},
 /obj/structure/marker_beacon/bronze,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "Qd" = (
 /obj/machinery/door/airlock/shuttle/ferry{
@@ -1451,7 +1402,7 @@
 /area/trainstation/indoors/station/controll)
 "QX" = (
 /turf/open/indestructible/dark/smooth_large,
-/area/trainstation/outdoor)
+/area/trainstation/indoors/station/powered)
 "Ro" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 5
@@ -1467,9 +1418,6 @@
 	dir = 8
 	},
 /area/trainstation/indoors/station/controll)
-"Rr" = (
-/turf/closed/wall/city/siding,
-/area/trainstation/outdoor)
 "Rs" = (
 /obj/structure/flora/ash,
 /turf/open/misc/dirt/station,
@@ -1479,7 +1427,7 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "Sd" = (
 /obj/effect/turf_decal/weather/snow/corner,
@@ -1574,7 +1522,7 @@
 	pixel_y = 32
 	},
 /obj/structure/lattice/catwalk,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "VM" = (
 /obj/structure/fence/interlink{
@@ -1616,7 +1564,7 @@
 "VW" = (
 /obj/effect/spawner/random/structure/shipping_container,
 /turf/open/indestructible/dark/smooth_large,
-/area/trainstation/outdoor)
+/area/trainstation/indoors/station/powered)
 "Wd" = (
 /obj/structure/fence/corner{
 	dir = 5
@@ -1634,7 +1582,7 @@
 	name = "Внимание - защищенное хранилище"
 	},
 /obj/machinery/light/red/directional/south,
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "Wm" = (
 /obj/effect/turf_decal/lunar_sand/plating,
@@ -1702,14 +1650,14 @@
 /obj/structure/railing{
 	dir = 4
 	},
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "Ye" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/railing{
 	dir = 10
 	},
-/turf/open/chasm/icy_planet,
+/turf/open/floor/catwalk_floor,
 /area/trainstation/indoors/station/powered)
 "YC" = (
 /obj/structure/spider/stickyweb/genetic{
@@ -2596,7 +2544,7 @@ ty
 BV
 BV
 BV
-rG
+FV
 ME
 ya
 ME
@@ -5650,7 +5598,7 @@ Hw
 sI
 MO
 PE
-mt
+ME
 PE
 ME
 ME
@@ -5697,7 +5645,7 @@ ps
 ps
 ps
 PE
-qO
+ME
 PE
 PE
 ME
@@ -5744,7 +5692,7 @@ PE
 PE
 PE
 PE
-qO
+ME
 PE
 PE
 PE
@@ -5791,7 +5739,7 @@ dt
 PE
 dt
 PE
-Gl
+ME
 PE
 dt
 dt
@@ -5838,7 +5786,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -5885,7 +5833,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -5932,7 +5880,7 @@ GN
 GN
 GN
 Qc
-rG
+FV
 pB
 GN
 GN
@@ -5952,16 +5900,16 @@ Er
 SO
 SO
 SO
-Rr
-Rr
-Rr
-Rr
-Rr
-Rr
-Rr
-Rr
-Rr
-Rr
+iv
+iv
+iv
+iv
+iv
+iv
+iv
+iv
+iv
+iv
 PE
 PE
 PE
@@ -5979,7 +5927,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -5999,16 +5947,16 @@ Er
 SO
 SO
 SO
-Rr
-BL
-BL
-BL
-BL
-BL
-BL
-BL
-BL
-Rr
+iv
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+iv
 PE
 PE
 PE
@@ -6026,7 +5974,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -6051,11 +5999,11 @@ QX
 QX
 QX
 VW
-BL
+rW
 VW
 QX
 QX
-Rr
+iv
 PE
 PE
 PE
@@ -6073,7 +6021,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -6093,16 +6041,16 @@ Er
 SO
 SO
 SO
-Rr
-BL
-BL
-BL
-BL
-BL
-BL
-BL
-BL
-Rr
+iv
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+iv
 PE
 PE
 PE
@@ -6120,7 +6068,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -6143,13 +6091,13 @@ SO
 yz
 QX
 QX
-BL
-BL
+rW
+rW
 QX
-BL
-BL
-BL
-Rr
+rW
+rW
+rW
+iv
 PE
 PE
 PE
@@ -6167,7 +6115,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -6187,16 +6135,16 @@ Er
 SO
 SO
 SO
-Rr
-BL
-BL
-BL
-BL
+iv
+rW
+rW
+rW
+rW
 QX
-BL
-BL
-BL
-Rr
+rW
+rW
+rW
+iv
 PE
 PE
 PE
@@ -6207,14 +6155,14 @@ iv
 ME
 ME
 ME
-ME
+BL
 ME
 ke
 GN
 GN
 zS
 Vt
-rG
+FV
 ys
 Ye
 GN
@@ -6234,16 +6182,16 @@ Er
 SO
 SO
 SO
-Rr
-Rr
-Rr
-Rr
-Rr
+iv
+iv
+iv
+iv
+iv
 yz
-Rr
-Rr
-Rr
-Rr
+iv
+iv
+iv
+iv
 PE
 PE
 PE
@@ -6260,10 +6208,10 @@ ke
 GN
 GN
 RE
-rG
-rG
-rG
-rG
+FV
+FV
+FV
+FV
 Wh
 PI
 mB
@@ -6282,7 +6230,7 @@ SO
 SO
 SO
 SO
-Rr
+iv
 gZ
 gZ
 gZ
@@ -6290,7 +6238,7 @@ gZ
 gZ
 gZ
 gZ
-Rr
+iv
 PE
 PE
 PE
@@ -6307,9 +6255,9 @@ PI
 GN
 GN
 RE
-rG
-rG
-rG
+FV
+FV
+FV
 rW
 rW
 ft
@@ -6329,15 +6277,15 @@ SO
 SO
 SO
 SO
-Rr
+iv
 gZ
-eC
-br
-zc
-br
-mb
+KN
+Uf
+HJ
+Uf
+jm
 gZ
-Rr
+iv
 PE
 PE
 PE
@@ -6376,15 +6324,15 @@ SO
 SO
 SO
 SO
-Rr
+iv
 gZ
-pa
-zc
-zc
-zc
-FV
+dL
+HJ
+HJ
+HJ
+Ov
 gZ
-Rr
+iv
 PE
 PE
 PE
@@ -6398,8 +6346,8 @@ Mo
 ME
 xT
 LV
-rG
-rG
+FV
+FV
 qG
 qG
 qi
@@ -6423,15 +6371,15 @@ SO
 SO
 SO
 SO
-Rr
+iv
 gZ
-zc
-zc
+HJ
+HJ
 wv
-zc
-zc
+HJ
+HJ
 gZ
-Rr
+iv
 PE
 PE
 PE
@@ -6470,15 +6418,15 @@ SO
 SO
 SO
 SO
-Rr
+iv
 gZ
-pa
-zc
-zc
-zc
-FV
+dL
+HJ
+HJ
+HJ
+Ov
 gZ
-Rr
+iv
 PE
 PE
 PE
@@ -6495,9 +6443,9 @@ PI
 GN
 GN
 RE
-rG
-rG
-rG
+FV
+FV
+FV
 rW
 rW
 ft
@@ -6517,15 +6465,15 @@ SO
 SO
 SO
 SO
-Rr
+iv
 gZ
-sa
-BS
-zc
-BS
-iT
+sc
+gT
+HJ
+gT
+Cm
 gZ
-Rr
+iv
 PE
 PE
 PE
@@ -6536,16 +6484,16 @@ ME
 ME
 ME
 ME
-ME
+BL
 ME
 ke
 GN
 GN
 RE
 lW
-rG
-rG
-rG
+FV
+FV
+FV
 kt
 PI
 ul
@@ -6564,7 +6512,7 @@ SO
 SO
 SO
 SO
-Rr
+iv
 gZ
 gZ
 gZ
@@ -6572,7 +6520,7 @@ gZ
 gZ
 gZ
 gZ
-Rr
+iv
 PE
 PE
 PE
@@ -6590,7 +6538,7 @@ GN
 GN
 FJ
 tD
-rG
+FV
 oD
 gt
 GN
@@ -6611,15 +6559,15 @@ SO
 SO
 SO
 SO
-Rr
-Rr
-Rr
-Rr
-Rr
-Rr
-Rr
-Rr
-Rr
+iv
+iv
+iv
+iv
+iv
+iv
+iv
+iv
+iv
 PE
 PE
 PE
@@ -6637,7 +6585,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -6684,7 +6632,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -6731,7 +6679,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -6778,7 +6726,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -6825,7 +6773,7 @@ GN
 GN
 GN
 RE
-rG
+mb
 pB
 GN
 GN
@@ -6872,7 +6820,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -6919,7 +6867,7 @@ GN
 GN
 GN
 Qc
-rG
+FV
 pB
 GN
 GN
@@ -6965,9 +6913,9 @@ GN
 GN
 GN
 GN
-RE
-rG
-pB
+zc
+FV
+br
 GN
 GN
 GN
@@ -7013,7 +6961,7 @@ GN
 GN
 GN
 RE
-rG
+FV
 pB
 GN
 GN
@@ -7060,7 +7008,7 @@ GN
 GN
 GN
 RE
-rG
+mb
 pB
 GN
 GN
@@ -7297,7 +7245,7 @@ sF
 xT
 ME
 ME
-ME
+BL
 ME
 xT
 ME
@@ -7339,7 +7287,7 @@ PE
 PE
 PE
 ps
-ME
+BL
 xT
 pe
 vx
@@ -7390,7 +7338,7 @@ ps
 Tn
 ME
 ME
-ME
+BL
 ME
 ME
 ME

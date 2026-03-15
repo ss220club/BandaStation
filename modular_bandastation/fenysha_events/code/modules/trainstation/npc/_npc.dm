@@ -170,8 +170,8 @@
 /mob/living/basic/npc/proc/take_control(mob/user)
 	key = user.key
 
-	to_chat(user, span_boldnotice(join_text))
-	to_chat(user, span_big(span_red(important_text)))
+	to_chat(src, span_boldnotice(join_text))
+	to_chat(src, span_big(span_red(important_text)))
 	log_game("[key_name(src)] took control of [name].")
 	message_admins("[key_name(src)] too control of npc [ADMIN_LOOKUPFLW(src)]")
 
@@ -505,11 +505,13 @@
 	join_text = "Вы - военный. Вы должны поддерживать порядок в вашей зоне а так же защищать гражданских."
 	melee_damage_lower = 15
 	melee_damage_upper = 30
+	melee_damage_type = BRUTE
 	ai_controller = /datum/ai_controller/basic_controller/npc_police/ranged
 	mapping_anchor = /obj/effect/landmark/military_patrol_point
 	lighting_cutoff_red = 22
 	lighting_cutoff_green = 5
 	lighting_cutoff_blue = 5
+
 
 	ranged = TRUE
 	item_r_hand = /obj/item/gun/ballistic/automatic/m90
@@ -589,10 +591,13 @@
 	item_r_hand = /obj/item/gun/ballistic/automatic/as32
 	projectilesound = 'sound/items/weapons/gun/smg/shot_alt.ogg'
 	casingtype = /obj/item/ammo_casing/c35sol
-	ranged_cooldown = 2 SECONDS
+	ranged_cooldown = 3 SECONDS
 	burst_shots = 3
 
 /mob/living/basic/npc/police/military/bad_guys/meele
+
+	melee_damage_lower = 30
+	melee_damage_upper = 30
 	ranged = FALSE
 	item_r_hand = /obj/item/knife/combat
 	item_l_hand = /obj/item/shield/riot

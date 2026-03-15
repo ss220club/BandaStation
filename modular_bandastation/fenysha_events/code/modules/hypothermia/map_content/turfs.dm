@@ -34,6 +34,9 @@
 	to_be_destroyed = FALSE
 	return src
 
+/turf/open/chasm/icy_planet/attackby(obj/item/C, mob/user, params, area/area_restriction)
+	return
+
 /turf/open/chasm/icy_planet/build_with_rods(obj/item/stack/rods/used_rods, mob/user)
 	return
 

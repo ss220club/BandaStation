@@ -252,6 +252,10 @@
 			addtimer(CALLBACK(src, PROC_REF(perform_emergence)), KHARA_FINAL_EMERGENCE_DELAY)
 
 
+/datum/disease/khara/proc/make_garanted_reborn()
+	ADD_TRAIT(affected_mob, TRAIT_GRANTEDKHARA_REBORN, REF(src))
+	make_reborn_roll()
+
 /// Запускает ролии того, что больной переродится в совершенного человека вместо смерти
 /datum/disease/khara/proc/make_reborn_roll()
 	var/roll_chance = 3
@@ -511,7 +515,7 @@
 			повышает силу, скорость и выносливость, полностью исцеляет другие болезни и делает тело совершеннее."
 	form = "Биоинженерная симбиотическая инфекция"
 	agent = "Симбиотические споры Veral khara"
-	visibility_flags = NONE
+	visibility_flags = HIDDEN_SCANNER
 	spread_flags = DISEASE_SPREAD_SPECIAL
 	cure_chance = 0
 	stage_prob = 100
@@ -554,6 +558,23 @@
 
 	COOLDOWN_DECLARE(heal_cd)
 
+
+/datum/disease/true_khara/register_disease_signals()
+	. = ..()
+	if(isnull(affected_mob))
+		return
+	RegisterSignal(affected_mob, COMSIG_ATOM_EXAMINE, PROC_REF(on_host_examine))
+
+/datum/disease/true_khara/unregister_disease_signals()
+	. = ..()
+	if(affected_mob)
+		UnregisterSignal(affected_mob, COMSIG_ATOM_EXAMINE)
+
+/datum/disease/true_khara/proc/on_host_examine(source, mob/examiner, list/examine_text)
+	SIGNAL_HANDLER
+	if(!affected_mob.is_eyes_covered())
+		examine_text += span_notice("[affected_mob.ru_p_theirs()] глаза <b>белые</b>.")
+
 /datum/disease/true_khara/cure(add_resistance)
 	var/obj/item/organ/brain/brain = affected_mob.get_organ_slot(ORGAN_SLOT_BRAIN)
 	if(brain)
@@ -582,7 +603,6 @@
 		brain.AddComponent(/datum/component/khara_disease, /datum/disease/true_khara)
 
 	var/mob/living/carbon/human/perfect_human = infectee
-	perfect_human?.dna?.species.name = "Идеальный [perfect_human.dna.species.name]"
 	perfect_human.add_traits(given_traits, REF(src))
 	perfect_human.set_eye_color(COLOR_GNOME_WHITE, COLOR_GNOME_WHITE)
 	perfect_human.add_faction(FACTION_KHARA)

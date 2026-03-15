@@ -44,6 +44,8 @@
 		'modular_bandastation/fenysha_events/sounds/radiosphere_ambience2.ogg'
 	)
 
+/area/trainstation/outdoor/station/no_build
+	area_flags = NOTELEPORT
 
 
 /* ВНУТРЕННИЕ ЗОНЫ */

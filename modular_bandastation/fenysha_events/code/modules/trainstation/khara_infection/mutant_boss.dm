@@ -38,10 +38,11 @@
 		/datum/action/cooldown/mob_cooldown/boss_bone_shard_wave = null,
 		/datum/action/cooldown/mob_cooldown/deadly_roar = null,
 		/datum/action/cooldown/mob_cooldown/throw_spider/strong = null,
+		/datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep = null,
 	)
 
 	var/list/mob/living/basic/khara_mutant/heat_of_infection_hand/hands = list()
-	var/addictional_view_range = 7
+	var/addictional_view_range = 8
 	var/stage = 1
 
 /mob/living/basic/khara_mutant/heat_of_infection/Initialize(mapload)
@@ -163,6 +164,47 @@
 
 /mob/living/basic/khara_mutant/heat_of_infection/proc/get_hands_count()
 	return length(hands)
+
+
+/mob/living/basic/khara_mutant/heat_of_infection/apply_damage(damage, damagetype, def_zone, blocked, forced, spread_damage, wound_bonus, exposed_wound_bonus, sharpness, attack_direction, attacking_item, wound_clothing)
+	. = ..()
+	var/health_percentage = health / maxHealth
+
+	var/target_stage = stage
+	if(health_percentage <= 0.11)
+		target_stage = 4
+	else if(health_percentage <= 0.41)
+		target_stage = 3
+	else if(health_percentage <= 0.71)
+		target_stage = 2
+
+	if(target_stage > stage)
+		update_stage(target_stage)
+
+/mob/living/basic/khara_mutant/heat_of_infection/proc/update_stage(new_stage)
+	switch(new_stage)
+		if(2)
+			visible_message(span_userdanger("[src] издает истошный вопль - оно в ярости!"))
+			playsound(src, 'modular_bandastation/fenysha_events/sounds/mobs/mutant_boss_death.ogg', 60, TRUE)
+			for(var/i = get_hands_count() to 4)
+				add_new_hand()
+		if(3)
+			heal_overall_damage(4500)
+			visible_message(span_userdanger("[src] издает истошный вопль - оно в ярости!"))
+			for(var/i = get_hands_count() to 4)
+				add_new_hand()
+		if(4)
+			heal_overall_damage(3500)
+			visible_message(span_userdanger("[src] издает истошный вопль - оно кричит ярости!"))
+			for(var/i = get_hands_count() to 6)
+				add_new_hand()
+			for(var/datum/action/cooldown/action in actions)
+				action.cooldown_time *= 0.5
+		else
+			for(var/datum/action/cooldown/action in actions)
+				action.cooldown_time = initial(action.cooldown_time)
+
+	stage = new_stage
 
 /mob/living/basic/khara_mutant/heat_of_infection/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armour_penetration)
 	. = ..()
@@ -504,6 +546,99 @@
 /datum/action/cooldown/mob_cooldown/throw_spider/strong/Activate(atom/target)
 	mob_type = pick(/mob/living/basic/khara_mutant/reaper, /mob/living/basic/khara_mutant/arachnid)
 	. = ..()
+
+/datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep
+	name = "Круговая лазерная атака"
+	desc = "Запускает 1–3 вращающихся широких лазера."
+	cooldown_time = 60 SECONDS
+	click_to_activate = FALSE
+
+/datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep/Activate(atom/target)
+	. = ..()
+	if(!.)
+		return
+	INVOKE_ASYNC(src, PROC_REF(do_laser_sweep))
+	StartCooldown()
+	return TRUE
+
+/datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep/proc/do_laser_sweep()
+	var/num = rand(1, 3)
+	owner.visible_message(span_danger("[owner] начинает заряжать круговые лазеры!"))
+	playsound(owner, 'sound/effects/magic/lightning_chargeup.ogg', 80, TRUE)
+
+	for(var/i in 1 to num)
+		INVOKE_ASYNC(src, PROC_REF(sweep_single_laser))
+		sleep(0.7 SECONDS)
+
+/datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep/proc/sweep_single_laser()
+	var/angle = rand(0, 359)
+	var/rotation_sign = pick(-1, 1)
+	var/angle_step = 2
+	var/sleep_time = 0.15 SECONDS
+
+	var/turf/boss_turf = get_turf(owner)
+	var/list/warning_path = get_ray_path(boss_turf, angle)
+	for(var/turf/T in warning_path)
+		new /obj/effect/temp_visual/telegraphing/boss_hit(T)
+
+	for(var/offset in list(-8, 8))
+		var/list/side_path = get_ray_path(boss_turf, angle + offset)
+		for(var/turf/T in side_path)
+			new /obj/effect/temp_visual/telegraphing/boss_hit(T)
+
+	owner.visible_message(span_danger("[owner] наводит лазеры!"))
+	sleep(3 SECONDS)
+
+	var/datum/beam/center_beam = null
+	var/datum/beam/left_beam = null
+	var/datum/beam/right_beam = null
+
+	for(var/i in 1 to (360 / angle_step))
+		var/turf/main_end_now = get_farthest_turf_at_angle(boss_turf, angle)
+		var/turf/left_end = get_farthest_turf_at_angle(boss_turf, angle - 8)
+		var/turf/right_end = get_farthest_turf_at_angle(boss_turf, angle + 8)
+
+		QDEL_NULL(center_beam)
+		QDEL_NULL(left_beam)
+		QDEL_NULL(right_beam)
+
+		if(main_end_now)
+			center_beam = boss_turf.Beam(main_end_now, icon_state = "blood_beam", time = sleep_time)
+		if(left_end)
+			left_beam = boss_turf.Beam(left_end, icon_state = "blood_beam", time = sleep_time)
+		if(right_end)
+			right_beam = boss_turf.Beam(right_end, icon_state = "blood_beam", time = sleep_time)
+
+		if(main_end_now)
+			damage_laser_line(boss_turf, main_end_now)
+		if(left_end)
+			damage_laser_line(boss_turf, left_end)
+		if(right_end)
+			damage_laser_line(boss_turf, right_end)
+
+		angle = (angle + angle_step * rotation_sign) % 360
+		sleep(sleep_time)
+
+	QDEL_NULL(center_beam)
+	QDEL_NULL(left_beam)
+	QDEL_NULL(right_beam)
+
+/datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep/proc/damage_laser_line(turf/start, turf/end)
+	if(!start || !end)
+		return
+	var/list/path = get_ray_path(start, get_angle_between(start, end))
+	for(var/turf/T in path)
+		for(var/mob/living/L in T)
+			if((L == owner) || L.incorporeal_move || is_khara_creature(L))
+				continue
+			L.take_overall_damage(rand(18, 28), BURN)
+			L.Knockdown(3 SECONDS)
+			L.adjust_fire_stacks(3)
+			if(prob(30))
+				L.Paralyze(0.5 SECONDS)
+			playsound(T, 'sound/effects/stealthoff.ogg', 40, TRUE)
+	CHECK_TICK
+
 
 GLOBAL_LIST_EMPTY(infection_lasers)
 

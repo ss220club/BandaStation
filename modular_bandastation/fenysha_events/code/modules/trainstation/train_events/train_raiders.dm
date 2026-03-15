@@ -133,8 +133,7 @@
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		if(human_owner.resting)
-			jumper.balloon_alert(jumper, "Невозможно в таком положении!")
-			return FALSE
+			human_owner.set_resting(FALSE, TRUE, TRUE)
 
 	new /obj/effect/temp_visual/telegraphing/boss_hit(target_turf)
 

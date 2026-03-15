@@ -109,7 +109,7 @@
 	lighting_cutoff_red = 22
 	lighting_cutoff_green = 5
 	lighting_cutoff_blue = 5
-	butcher_results = list(/obj/item/food/meat/slab/spider = 2, /obj/item/food/spiderleg = 8)
+	// butcher_results = list(/obj/item/food/meat/slab/spider = 2, /obj/item/food/spiderleg = 8)
 	max_stamina = 250
 	stamina_crit_threshold = 90
 	stamina_recovery = 5
@@ -318,6 +318,44 @@
 	to_cut.dismember(silent=FALSE)
 
 
+
+/mob/living/basic/khara_mutant/crusher
+	name = "Скорпион"
+	desc = "Огромная мерзость перемещающаяся на неуклюжем подобии ног, лучше не стоять у этого на пути."
+	cast = KHARA_CAST_ASSIMILATING
+	icon = 'modular_bandastation/fenysha_events/icons/mob/128x128.dmi'
+	icon_state = "scorpion_khara"
+	icon_living = "scorpion_khara"
+	icon_dead = "scorpion_khara"
+
+	speed = 0.5
+	maxHealth = 750
+	health = 750
+
+	regeneration_delay = 30 SECONDS
+	health_regen_per_second = 10
+
+	pixel_x = -46
+	base_pixel_x = -46
+
+
+	mob_size = MOB_SIZE_HUGE
+	plane = MASSIVE_OBJ_PLANE
+	layer = LARGE_MOB_LAYER
+	mouse_opacity = MOUSE_OPACITY_OPAQUE
+
+	move_force = MOVE_FORCE_OVERPOWERING
+	move_resist = MOVE_FORCE_OVERPOWERING
+	pull_force = MOVE_FORCE_OVERPOWERING
+
+
+	ai_controller = /datum/ai_controller/basic_controller/crusher
+	innate_actions = list(
+		/datum/action/cooldown/mob_cooldown/crush_wave = BB_MOB_ABILITY_CRUSH_WAVE,
+		/datum/action/cooldown/mob_cooldown/crushing_charge = BB_MOB_ABILITY_CRUSH_CHARGE,
+	)
+
+
 /mob/living/basic/khara_mutant/spreader
 	name = "Распространитель"
 	desc = "Огромная мерзость, напоминающая живое лёгкое. Извергает колоссальные объёмы заражённого миазмами Кхара тумана."
@@ -365,7 +403,7 @@
 	. = ..()
 	SSweather.run_weather(/datum/weather/khara_infection)
 
-/mob/living/basic/khara_mutant/spreader/death(gibbed)
+/mob/living/basic/khara_mutant/spreader/Destroy()
 	for(var/datum/weather/weather in SSweather.processing)
 		if(istype(weather, /datum/weather/khara_infection) && (z in weather.impacted_z_levels))
 			weather.wind_down()

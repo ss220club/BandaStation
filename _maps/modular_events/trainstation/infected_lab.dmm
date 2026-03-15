@@ -108,6 +108,19 @@
 	},
 /turf/closed/wall/city/siding,
 /area/trainstation/indoors/station)
+"bL" = (
+/obj/structure/decorative{
+	anchored = 1;
+	name = "flesh cluster";
+	desc = "Something's moving inside...";
+	icon = 'icons/mob/simple/animal.dmi';
+	icon_state = "fleshblob";
+	pixel_x = 6;
+	pixel_y = -1
+	},
+/obj/effect/gibspawner/human,
+/turf/open/indestructible/meat,
+/area/trainstation/indoors/station)
 "bV" = (
 /obj/effect/gibspawner/human,
 /turf/open/floor/iron/white,
@@ -1411,6 +1424,10 @@
 	},
 /turf/open/floor/iron/white,
 /area/trainstation/indoors/station)
+"qN" = (
+/obj/effect/mob_spawn/ghost_role/flesh_spider,
+/turf/open/floor/iron/white,
+/area/trainstation/indoors/station)
 "qR" = (
 /obj/structure/railing/unbreakable{
 	dir = 5
@@ -1950,6 +1967,10 @@
 "wV" = (
 /turf/closed/wall/city/siding,
 /area/trainstation/indoors/station)
+"wX" = (
+/obj/structure/sign/warning/directional/east,
+/turf/open/indestructible/meat,
+/area/trainstation/outdoor)
 "wY" = (
 /obj/structure/flora/bush/snow/style_random,
 /turf/open/misc/asteroid/snow/indestructible,
@@ -2684,6 +2705,12 @@
 	},
 /turf/open/floor/iron/white,
 /area/trainstation/indoors/station)
+"Gg" = (
+/obj/structure/sneak_pod/iced/enterence{
+	dir = 8
+	},
+/turf/open/indestructible/meat,
+/area/trainstation/outdoor)
 "Gs" = (
 /obj/machinery/computer/security/telescreen/med_sec/directional/west,
 /obj/effect/turf_decal/trimline/blue/filled/line{
@@ -2999,8 +3026,10 @@
 /turf/open/indestructible/plating,
 /area/trainstation/outdoor)
 "Lj" = (
-/obj/effect/decal/cleanable/blood,
-/turf/open/space/basic,
+/obj/structure/sneak_pod/iced/enterence{
+	dir = 4
+	},
+/turf/open/indestructible/meat,
 /area/trainstation/outdoor)
 "Ln" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
@@ -3162,6 +3191,10 @@
 /obj/effect/spawner/random/entertainment/plushie_delux,
 /turf/open/indestructible/dark/textured,
 /area/trainstation/indoors/station/controll)
+"Nq" = (
+/mob/living/basic/khara_mutant/crusher,
+/turf/open/floor/iron/white,
+/area/trainstation/indoors/station)
 "Nw" = (
 /obj/structure/deployable_barricade/guardrail{
 	dir = 4
@@ -3205,6 +3238,7 @@
 	pixel_x = 14
 	},
 /obj/effect/decal/cleanable/blood,
+/obj/effect/mob_spawn/ghost_role/flesh_spider,
 /turf/open/floor/plating,
 /area/trainstation/indoors/station)
 "Ok" = (
@@ -3288,9 +3322,8 @@
 /turf/open/indestructible/meat,
 /area/trainstation/indoors/station)
 "ON" = (
-/obj/structure/sign/warning/directional/east,
-/obj/effect/decal/cleanable/blood,
-/turf/open/indestructible/meat,
+/mob/living/basic/khara_mutant/crusher,
+/turf/open/floor/asphalt,
 /area/trainstation/outdoor)
 "OQ" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
@@ -3552,6 +3585,10 @@
 "RU" = (
 /obj/effect/turf_decal/trimline/blue/corner,
 /turf/open/floor/iron/white,
+/area/trainstation/indoors/station)
+"RX" = (
+/obj/effect/gibspawner/human,
+/turf/open/indestructible/meat,
 /area/trainstation/indoors/station)
 "Sb" = (
 /obj/structure/broken_flooring/pile{
@@ -6054,7 +6091,7 @@ Pa
 uf
 il
 TY
-QL
+sY
 eu
 fr
 eu
@@ -6099,7 +6136,7 @@ rA
 nC
 Kx
 eu
-eu
+qN
 NV
 kq
 nO
@@ -6150,7 +6187,7 @@ nO
 kq
 eu
 eu
-eu
+Nq
 eu
 BR
 wV
@@ -6700,7 +6737,7 @@ kf
 wV
 sg
 eu
-eu
+bV
 aX
 kf
 kf
@@ -7890,11 +7927,11 @@ kf
 wV
 eu
 eu
+wV
 eu
 eu
 eu
-eu
-eu
+wV
 eu
 eu
 wV
@@ -7936,13 +7973,13 @@ kf
 kf
 wV
 eu
+wV
+wV
 eu
 eu
 eu
-eu
-eu
-eu
-eu
+wV
+wV
 eu
 wV
 kf
@@ -8126,7 +8163,7 @@ eu
 eu
 eu
 eu
-eu
+Nq
 eu
 eu
 eu
@@ -8177,7 +8214,7 @@ eu
 eu
 Wk
 eu
-qT
+RX
 rS
 qT
 aX
@@ -8222,7 +8259,7 @@ eu
 eu
 eu
 eu
-eu
+bV
 eu
 hi
 qT
@@ -8273,7 +8310,7 @@ eu
 eu
 qT
 xj
-qT
+RX
 aX
 kf
 kf
@@ -8405,7 +8442,7 @@ gj
 aX
 aX
 qT
-qT
+RX
 ML
 eu
 eu
@@ -8502,7 +8539,7 @@ qT
 hi
 qT
 eu
-eu
+bV
 eu
 eu
 eu
@@ -8556,7 +8593,7 @@ eu
 eu
 eu
 hi
-qT
+RX
 aX
 kf
 kf
@@ -8591,7 +8628,7 @@ gj
 gj
 gj
 aX
-rS
+bL
 qT
 qT
 tO
@@ -8733,7 +8770,7 @@ gj
 gj
 wV
 qT
-qT
+RX
 eu
 eu
 eu
@@ -8743,7 +8780,7 @@ eu
 eu
 eu
 eu
-eu
+Wk
 qT
 wV
 kf
@@ -8781,15 +8818,15 @@ gj
 wV
 eu
 eu
-eu
-Wk
-eu
-eu
-eu
+wV
+wV
+wV
 eu
 eu
-Wk
-eu
+bV
+wV
+wV
+wV
 eu
 eu
 wV
@@ -8826,16 +8863,16 @@ gj
 gj
 gj
 wV
+Wk
+eu
+eu
+qN
+wV
 eu
 eu
 eu
-eu
-eu
-eu
-eu
-eu
-eu
-eu
+wV
+qN
 eu
 eu
 eu
@@ -9065,12 +9102,12 @@ eu
 eu
 qT
 xj
-qT
+RX
 bB
 qT
 qT
 qT
-qT
+RX
 qT
 xj
 qT
@@ -10101,7 +10138,7 @@ Ni
 GL
 pb
 pb
-Lj
+fC
 pb
 pb
 QX
@@ -10386,10 +10423,10 @@ pb
 pb
 pb
 pb
+ON
 pb
 pb
-sX
-pb
+vb
 Dk
 Ni
 gj
@@ -11463,7 +11500,7 @@ gj
 Ni
 GL
 jQ
-ON
+jQ
 jQ
 nX
 oR
@@ -11510,9 +11547,9 @@ gj
 Ni
 GL
 jQ
-gj
+wX
 jQ
-ON
+jQ
 fC
 QX
 Ni
@@ -11559,7 +11596,7 @@ GL
 gj
 gj
 rT
-gj
+wX
 pb
 QX
 gj
@@ -11605,7 +11642,7 @@ gj
 gj
 gj
 gj
-rT
+Gg
 gj
 gj
 Dk
@@ -11652,7 +11689,7 @@ gj
 gj
 gj
 gj
-rT
+Lj
 gj
 gj
 lU
@@ -11698,7 +11735,7 @@ gj
 Ni
 GL
 rT
-gj
+rT
 rT
 gj
 gj
@@ -11744,9 +11781,9 @@ gj
 gj
 Ni
 GL
-rT
-pb
-pb
+jQ
+jQ
+jQ
 rT
 rT
 QX
@@ -11791,7 +11828,7 @@ gj
 gj
 Ni
 GL
-rT
+jQ
 rT
 pb
 jQ
@@ -11838,7 +11875,7 @@ gj
 gj
 Ni
 GL
-rT
+jQ
 rT
 rT
 jQ
@@ -11885,7 +11922,7 @@ gj
 gj
 Ni
 GL
-rT
+jQ
 rT
 NH
 jQ
