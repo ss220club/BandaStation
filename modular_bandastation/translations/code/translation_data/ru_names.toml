@@ -26188,8 +26188,185 @@ instrumental = "рвотой туманности"
 prepositional = "рвоте туманности"
 gender = "female"
 
+# MARK: Fugitive/Hunter
+
+["Prison Escapee"]
+nominative = "cбежавший из тюрьмы"
+genitive = "сбежавшего из тюрьмы"
+dative = "сбежавшему из тюрьмы"
+accusative = "сбежавшего из тюрьмы"
+instrumental = "сбежавшим из тюрьмы"
+prepositional = "сбежавшем из тюрьмы"
+gender = "male"
+
+["Cultist of Yalp Elor"]
+nominative = "культист ырги йовелор"
+genitive = "культиста ырги йовелор"
+dative = "культисту ырги йовелор"
+accusative = "культиста ырги йовелор"
+instrumental = "культистом ырги йовелор"
+prepositional = "культисте ырги йовелор"
+gender = "male"
+
 ["Waldo"]
 nominative = "Вальдо"
+gender = "male"
+
+["Factory Error Synth"]
+nominative = "синт с заводской ошибкой"
+genitive = "синта с заводской ошибкой"
+dative = "синту с заводской ошибкой"
+accusative = "синта с заводской ошибкой"
+instrumental = "синтом с заводской ошибкой"
+prepositional = "синте с заводской ошибкой"
+gender = "male"
+
+["Invisible Man"]
+nominative = "человек-невидимка"
+genitive = "человека-невидимки"
+dative = "человеку-невидимке"
+accusative = "человека-невидимку"
+instrumental = "человеком-невидимкой"
+prepositional = "человеке-невидимке"
+gender = "male"
+
+["Spacepol Officer"]
+nominative = "офицер Космопола"
+genitive = "офицера Космопола"
+dative = "офицеру Космопола"
+accusative = "офицера Космопола"
+instrumental = "офицером Космопола"
+prepositional = "офицере Космопола"
+gender = "male"
+
+["Police Officer"]
+nominative = "офицер полиции"
+genitive = "офицера полиции"
+dative = "офицеру полиции"
+accusative = "офицера полиции"
+instrumental = "офицером полиции"
+prepositional = "офицере полиции"
+gender = "male"
+
+["Russian Hunter"]
+nominative = "русский охотник"
+genitive = "русского охотника"
+dative = "русскому охотнику"
+accusative = "русского охотника"
+instrumental = "русским охотником"
+prepositional = "русском охотнике"
+gender = "male"
+
+["Russian Hunter Leader"]
+nominative = "лидер русских охотников"
+genitive = "лидера русских охотников"
+dative = "лидеру русских охотников"
+accusative = "лидера русских охотников"
+instrumental = "лидером русских охотников"
+prepositional = "лидере русских охотников"
+gender = "male"
+
+["Bounty Hunter"]
+nominative = "охотник за головами"
+genitive = "охотника за головами"
+dative = "охотнику за головами"
+accusative = "охотника за головы"
+instrumental = "охотником за головами"
+prepositional = "охотнике за головами"
+gender = "male"
+
+["Bounty Hunter - Armored"]
+nominative = "охотник за головами - бронированный"
+genitive = "охотника за головами - бронированного"
+dative = "охотнику за головами - бронированному"
+accusative = "охотника за головы - бронированного"
+instrumental = "охотником за головами - бронированным"
+prepositional = "охотнике за головами - бронированном"
+gender = "male"
+
+["Bounty Hunter - Hook"]
+nominative = "охотник за головами - крюк"
+genitive = "охотника за головами - крюка"
+dative = "охотнику за головами - крюку"
+accusative = "охотника за головы - крюк"
+instrumental = "охотником за головами - крюком"
+prepositional = "охотнике за головами - крюке"
+gender = "male"
+
+["Bounty Hunter - Synth"]
+nominative = "охотник за головами - синт"
+genitive = "охотника за головами - синта"
+dative = "охотнику за головами - синту"
+accusative = "охотника за головы - синта"
+instrumental = "охотником за головами - синтом"
+prepositional = "охотнике за головами - синте"
+gender = "male"
+
+["Psyker-gang Shikari"]
+nominative = "шикари из банды псайкеров"
+gender = "male"
+
+["Psyker-gang Shikari Captain"]
+nominative = "шикари капитан из банды псайкеров"
+genitive = "шикари капитана из банды псайкеров"
+dative = "шикари капитану из банды псайкеров"
+accusative = "шикари капитана из банды псайкеров"
+instrumental = "шикари капитаном из банды псайкеров"
+prepositional = "шикари капитане из банды псайкеров"
+gender = "male"
+
+["Psyker-gang Shikari Seer"]
+nominative = "шикари провидец из банды псайкеров"
+genitive = "шикари провидца из банды псайкеров"
+dative = "шикари провидцу из банды псайкеров"
+accusative = "шикари провидца из банды псайкеров"
+instrumental = "шикари провидцем из банды псайкеров"
+prepositional = "шикари провидце из банды псайкеров"
+gender = "male"
+
+["Psyker-Shikari Leader"]
+nominative = "лидер шикари-псайкеров"
+genitive = "лидера шикари-псайкеров"
+dative = "лидеру шикари-псайкеров"
+accusative = "лидера шикари-псайкеров"
+instrumental = "лидером шикари-псайкеров"
+prepositional = "лидере шикари-псайкеров"
+gender = "male"
+
+["Psyker-Shikari Hunter"]
+nominative = "охотник шикари-псайкеров"
+genitive = "охотника шикари-псайкеров"
+dative = "охотнику шикари-псайкеров"
+accusative = "охотника шикари-псайкеров"
+instrumental = "охотником шикари-псайкеров"
+prepositional = "охотнике шикари-псайкеров"
+gender = "male"
+
+["Psyker-Shikari Seer"]
+nominative = "провидец шикари-псайкеров"
+genitive = "провидца шикари-псайкеров"
+dative = "провидцу шикари-псайкеров"
+accusative = "провидца шикари-псайкеров"
+instrumental = "провидцем шикари-псайкеров"
+prepositional = "провидце шикари-псайкеров"
+gender = "male"
+
+["MI13 Fugitive Retrieval Agent"]
+nominative = "агент MI13 по розыску беглецов"
+genitive = "агента MI13 по розыску беглецов"
+dative = "агенту MI13 по розыску беглецов"
+accusative = "агента MI13 по розыску беглецов"
+instrumental = "агентом MI13 по розыску беглецов"
+prepositional = "агенте MI13 по розыску беглецов"
+gender = "male"
+
+["MI13 Fugitive Retrieval Agent - Chef Disguise"]
+nominative = "агент MI13 по розыску беглецов - маскировка шефа"
+genitive = "агента MI13 по розыску беглецов - маскировки шефа"
+dative = "агенту MI13 по розыску беглецов - маскировке шефа"
+accusative = "агента MI13 по розыску беглецов - маскировку шефа"
+instrumental = "агентом MI13 по розыску беглецов - маскировкой шефа"
+prepositional = "агенте MI13 по розыску беглецов - маскировке шефа"
 gender = "male"
 
 # MARK: Colonial Marines
