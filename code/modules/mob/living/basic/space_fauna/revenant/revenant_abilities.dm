@@ -3,8 +3,7 @@
 
 //Transmit: the revemant's only direct way to communicate. Sends a single message silently to a single mob
 /datum/action/cooldown/spell/list_target/telepathy/revenant
-	name = "Передача сообщения"
-	panel = "Revenant Abilities"
+	name = "Revenant Transmit"
 	background_icon_state = "bg_revenant"
 	overlay_icon_state = "bg_revenant_border"
 
@@ -14,7 +13,6 @@
 	antimagic_flags = MAGIC_RESISTANCE_HOLY|MAGIC_RESISTANCE_MIND
 
 /datum/action/cooldown/spell/aoe/revenant
-	panel = "Revenant Abilities (Locked)"
 	background_icon_state = "bg_revenant"
 	overlay_icon_state = "bg_revenant_border"
 	button_icon = 'icons/mob/actions/actions_revenant.dmi'
@@ -78,9 +76,8 @@
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
 
-		name = "[initial(name)] ([cast_amount]Э)"
+		name = "[initial(name)] ([cast_amount]E)"
 		to_chat(cast_on, span_revennotice("Вы разблокировали «[initial(name)]»!"))
-		// panel = "Способности Ревенанта" // BANDASTATION REMOVAL
 		locked = FALSE
 		reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
