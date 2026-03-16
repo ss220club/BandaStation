@@ -106,11 +106,6 @@
 		internal_organ.Remove(owner)
 		internal_organ.forceMove(drop_location)
 
-// Голова-монитор (экран вместо обычной головы)
-// Используется фабрикатором по умолчанию — наиболее распространённый тип.
-// icon_state намеренно не переопределяем — наследуем "ipc_head" от родителя.
-// ipc_visual_state = "monitor" заставляет get_limb_icon() использовать стейт "ipc_monitor"
-// из DMI бренда, который его поддерживает (generic bodyparts.dmi имеет только "ipc_head").
 /obj/item/bodypart/head/ipc/monitor
 	name = "Голова-монитор КПБ"
 	desc = "Голова-монитор КПБ с встроенным дисплеем вместо лица."
