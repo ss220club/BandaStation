@@ -213,12 +213,6 @@ export type PreferencesMenuData = {
   manufacturers: Record<string, string[]>;
   selected_manufacturer: Record<string, string>;
 
-  // IPC Customization data (from middleware)
-  ipc_customization?: IPCCustomization;
-  is_ipc?: boolean;
-  chassis_brands?: IPCChassisBrand[];
-  brain_types?: IPCBrainType[];
-  hef_manufacturers?: IPCHEFManufacturer[];
   // BANDASTATION ADDITION END
 };
 
@@ -253,62 +247,12 @@ export type BodyModification = {
   selectedManufacturer?: string;
 };
 
-// IPC Customization Types
-export type IPCChassisBrand = {
-  key: string;
-  name: string;
-  description: string;
-};
-
-export type IPCBrainType = {
-  key: string;
-  name: string;
-  description: string;
-};
-
-export type IPCHEFManufacturer = {
-  key: string;
-  name: string;
-};
-
-export type IPCGeneration = {
-  key: string;
-  name: string;
-  description: string;
-};
-
-export type IPCModule = {
-  key: string;
-  name: string;
-  description: string;
-};
-
-export type IPCCustomization = {
-  chassis_brand: string;
-  brain_type: string;
-  os_password: string;
-  hef_head: string;
-  hef_chest: string;
-  hef_l_arm: string;
-  hef_r_arm: string;
-  hef_l_leg: string;
-  hef_r_leg: string;
-  generation: string;
-  gen1_module: string;
-};
 // BANDASTATION ADDITION END
 
 export type ServerData = {
   // BANDASTATION ADDITION START
   text_to_speech: TtsData;
   body_modifications: BodyModification[];
-  ipc_customization: {
-    chassis_brands: IPCChassisBrand[];
-    brain_types: IPCBrainType[];
-    hef_manufacturers: IPCHEFManufacturer[];
-    generations: IPCGeneration[];
-    gen1_modules: IPCModule[];
-  };
   // BANDASTATION ADDITION END
   jobs: {
     departments: Record<string, Department>;

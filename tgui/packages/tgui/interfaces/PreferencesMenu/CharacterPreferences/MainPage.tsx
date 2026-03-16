@@ -1,8 +1,7 @@
 import { sortBy } from 'es-toolkit';
 import { filter, map } from 'es-toolkit/compat';
 import { useState } from 'react';
-import { useBackend } from 'tgui/backend';
-import { sendAct } from 'tgui/events/act';
+import { type sendAct, useBackend } from 'tgui/backend';
 import {
   Box,
   Button,
@@ -14,6 +13,7 @@ import {
   Stack,
 } from 'tgui-core/components';
 import { capitalize, createSearch } from 'tgui-core/string';
+
 import { CharacterPreview } from '../../common/CharacterPreview';
 import { Preference } from '../components/Preference';
 import { RandomizationButton } from '../components/RandomizationButton';
@@ -24,7 +24,6 @@ import {
   FeatureValueInput,
 } from '../preferences/features/base';
 import { GENDERS, Gender } from '../preferences/gender';
-import { IPCCustomizationPage } from '../preferences/IPCCustomization';
 import {
   createSetPreference,
   type PreferencesMenuData,
@@ -45,7 +44,6 @@ type CharacterControlsProps = {
   showGender: boolean;
   canDeleteCharacter: boolean;
   handleDeleteCharacter: () => void;
-  isIPC?: boolean;
 };
 
 function CharacterControls(props: CharacterControlsProps) {
@@ -68,7 +66,7 @@ function CharacterControls(props: CharacterControlsProps) {
       )}
       <Button
         icon="robot"
-        tooltip={props.isIPC ? 'IPC Customization' : 'Модификации тела'}
+        tooltip="Модификации тела"
         tooltipPosition="top"
         onClick={() => props.handleOpenAugmentations()}
       />
@@ -267,8 +265,8 @@ function MainFeature(props: MainFeatureProps) {
 }
 
 const createSetRandomization =
-  (preference: string) => (newSetting: RandomSetting) => {
-    sendAct('set_random_preference', {
+  (act: typeof sendAct, preference: string) => (newSetting: RandomSetting) => {
+    act('set_random_preference', {
       preference,
       value: newSetting,
     });
@@ -316,7 +314,7 @@ export function PreferenceList(props: PreferenceListProps) {
               />
               {randomSetting && (
                 <RandomizationButton
-                  setValue={createSetRandomization(featureId)}
+                  setValue={createSetRandomization(act, featureId)}
                   value={randomSetting}
                 />
               )}
@@ -343,8 +341,12 @@ export function getRandomization(
   serverData: ServerData | undefined,
   randomBodyEnabled: boolean,
 ): Record<string, RandomSetting> {
+  if (!serverData) {
+    return {};
+  }
+
   const { data } = useBackend<PreferencesMenuData>();
-  if (!randomBodyEnabled || !serverData) {
+  if (!randomBodyEnabled) {
     return {};
   }
 
@@ -367,15 +369,12 @@ type MainPageProps = {
 
 export function MainPage(props: MainPageProps) {
   const { act, data } = useBackend<PreferencesMenuData>();
-
   const [deleteCharacterPopupOpen, setDeleteCharacterPopupOpen] =
     useState(false);
   const [randomToggleEnabled] = useRandomToggleState();
   const [augmentationInputOpen, setAugmentationInputOpen] = useState(false);
-  const [ipcCustomizationOpen, setIpcCustomizationOpen] = useState(false);
 
   const serverData = useServerPrefs();
-  const isIPC = data.character_preferences.misc.species === 'ipc';
 
   const currentSpeciesData =
     serverData?.species[data.character_preferences.misc.species];
@@ -422,13 +421,7 @@ export function MainPage(props: MainPageProps) {
           <CharacterControls
             gender={data.character_preferences.misc.gender}
             handleOpenSpecies={props.openSpecies}
-            handleOpenAugmentations={() =>
-              // BANDASTATION ADDITION - Feat: Augmentations
-              isIPC
-                ? setIpcCustomizationOpen(true)
-                : setAugmentationInputOpen(true)
-            }
-            isIPC={isIPC}
+            handleOpenAugmentations={() => setAugmentationInputOpen(true)} // BANDASTATION ADDITION - Feat: Augmentations
             handleRotate={() => {
               act('rotate');
             }}
@@ -476,7 +469,7 @@ export function MainPage(props: MainPageProps) {
                   currentValue={clothing}
                   handleSelect={createSetPreference(act, clothingKey)}
                   randomization={randomizationOfMainFeatures[clothingKey]}
-                  setRandomization={createSetRandomization(clothingKey)}
+                  setRandomization={createSetRandomization(act, clothingKey)}
                 />
               )}
             </Stack.Item>
@@ -493,11 +486,7 @@ export function MainPage(props: MainPageProps) {
           handleClose={() => setAugmentationInputOpen(false)}
         />
       )}
-      {ipcCustomizationOpen && (
-        <IPCCustomizationPage
-          handleClose={() => setIpcCustomizationOpen(false)}
-        />
-      )}
+
       {deleteCharacterPopupOpen && (
         <DeleteCharacterPopup
           close={() => setDeleteCharacterPopupOpen(false)}
@@ -505,65 +494,7 @@ export function MainPage(props: MainPageProps) {
       )}
       <Stack.Item>
         <Stack fill vertical>
-          <Stack.Item basis="50%">
-            {/* Hide character preview when modal is open to avoid conflicts */}
-            {!augmentationInputOpen && !ipcCustomizationOpen && Character}
-            {(augmentationInputOpen || ipcCustomizationOpen) && (
-              <Section fill className="PreferencesMenu__Character">
-                <Stack fill vertical>
-                  <Stack.Item>
-                    <CharacterControls
-                      gender={data.character_preferences.misc.gender}
-                      handleOpenSpecies={props.openSpecies}
-                      handleOpenAugmentations={() =>
-                        isIPC
-                          ? setIpcCustomizationOpen(true)
-                          : setAugmentationInputOpen(true)
-                      }
-                      isIPC={isIPC}
-                      handleRotate={() => {
-                        act('rotate');
-                      }}
-                      setGender={createSetPreference(act, 'gender')}
-                      showGender={
-                        currentSpeciesData ? !!currentSpeciesData.sexes : true
-                      }
-                      canDeleteCharacter={
-                        Object.values(data.character_profiles).filter(
-                          (name) => !!name,
-                        ).length > 1
-                      }
-                      handleDeleteCharacter={() =>
-                        setDeleteCharacterPopupOpen(true)
-                      }
-                    />
-                  </Stack.Item>
-                  <Stack.Item grow style={{ alignSelf: 'center' }}>
-                    {/* Placeholder when modal is open */}
-                    <Box
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: '100%',
-                        color: 'rgba(255,255,255,0.3)',
-                      }}
-                    >
-                      <Icon name="user-edit" size={4} />
-                    </Box>
-                  </Stack.Item>
-                  <Stack.Item>
-                    <NameInput
-                      large
-                      canRandomize
-                      name={data.character_preferences.names[data.name_to_use]}
-                      nameType={data.name_to_use}
-                    />
-                  </Stack.Item>
-                </Stack>
-              </Section>
-            )}
-          </Stack.Item>
+          <Stack.Item basis="50%">{Character}</Stack.Item>
           <Stack.Item grow mr={1}>
             <AlternativeNames names={data.character_preferences.names} />
           </Stack.Item>

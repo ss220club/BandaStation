@@ -9,17 +9,7 @@
 #include "code/human/species_type/skrell.dm"
 #include "code/human/species_type/tajaran.dm"
 #include "code/human/species_type/vulpkanin.dm"
-#include "code/human/species_type/ipc_generations.dm"
 #include "code/human/species_type/ipc.dm"
-#include "code/human/species_type/ipc_gen1_modular.dm"
-#include "code/human/species_type/ipc_gen3_humanity.dm"
-#include "code/human/species_type/ipc_gen4_cyberdeck.dm"
-
-#include "code/living/ipc_hud.dm"
-#include "code/living/ipc_actionspeed.dm"
-#include "code/living/ipc_abilities.dm"
-#include "code/living/ipc_quirk_block.dm"
-#include "code/living/ipc_traitor_uplink.dm"
 
 #include "code/human/sprite_accessories/skrell/skrell_head_tentacles.dm"
 
@@ -71,25 +61,12 @@
 #include "code/preferences/species_features/vulpkanin/tail_markings/vulpkanin_tail_markings_color.dm"
 
 
-#include "code/preferences/species_features/Ipc/ipc_chassis.dm"
-#include "code/preferences/species_features/Ipc/ipc_surgery.dm"
-#include "code/preferences/species_features/Ipc/ipc_bodytype_system.dm"
-#include "code/preferences/species_features/Ipc/ipc_brands.dm"
-#include "code/preferences/species_features/Ipc/ipc_brand_effects.dm"
-#include "code/preferences/species_features/Ipc/ipc_brand_apply.dm"
-#include "code/preferences/species_features/Ipc/ipc_body_modifications.dm"
-#include "code/preferences/species_features/Ipc/ipc_brain_body_modification.dm"
-#include "code/preferences/species_features/Ipc/ipc_customization_preference.dm"
-#include "code/preferences/species_features/Ipc/ipc_customization_middleware.dm"
-#include "code/preferences/species_features/Ipc/ipc_cosmetics.dm"
-
 #include "code/reagents/mutation.dm"
 
 #include "code/surgery/bodyparts/skrell_bodyparts.dm"
 #include "code/surgery/bodyparts/tajaran_bodyparts.dm"
 #include "code/surgery/bodyparts/vulpkanin_bodyparts.dm"
 #include "code/surgery/bodyparts/ipc_bodyparts.dm"
-#include "code/surgery/bodyparts/ipc_branded_bodyparts.dm"
 
 #include "code/surgery/organs/external/skrell_external.dm"
 #include "code/surgery/organs/external/vulpkanin_external.dm"
@@ -99,7 +76,6 @@
 #include "code/surgery/organs/internal/skrell_internal.dm"
 #include "code/surgery/organs/limbgrower_designs.dm"
 #include "code/surgery/organs/internal/ipc_internal.dm"
-#include "code/surgery/organs/internal/ipc_heart_compat.dm"
 
 
 #include "code/human/sprite_accessories/vulpkanin/hair_masks.dm"

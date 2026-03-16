@@ -1,4 +1,25 @@
 // ============================================
+// ВСПОМОГАТЕЛЬНЫЕ ПРОКЕДУРЫ
+// ============================================
+
+/// Автооживление КПБ при установке мозга или батареи.
+/proc/ipc_heart_check_revive(mob/living/carbon/human/M)
+	var/obj/item/organ/brain/positronic/brain = M.get_organ_slot(ORGAN_SLOT_BRAIN)
+	if(!brain)
+		return FALSE
+	if(M.stat != DEAD && M.stat != UNCONSCIOUS)
+		return FALSE
+	M.set_stat(CONSCIOUS)
+	M.SetUnconscious(0, FALSE)
+	M.losebreath = 0
+	M.failed_last_breath = FALSE
+	M.update_damage_hud()
+	M.updatehealth()
+	M.reload_fullscreen()
+	do_sparks(8, TRUE, M)
+	return TRUE
+
+// ============================================
 // ПОЗИТРОННЫЙ МОЗГ
 // ============================================
 
@@ -9,21 +30,16 @@
 	icon_state = "posibrain"
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_BRAIN
-
-	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
-
-	var/brain_type = "positronic"
 	var/positronic_damage = 0
 	var/max_damage = 100
-	var/obj/item/mmi/linked_mmi = null
 
 /obj/item/organ/brain/positronic/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, movement_flags)
 	. = ..()
 	if(.)
 		to_chat(M, span_notice("Позитронное ядро активировано."))
 		if(M.stat == DEAD || M.stat == UNCONSCIOUS)
-			if(ipc_has_power_source(M))
+			if(istype(M.get_organ_slot(ORGAN_SLOT_HEART), /obj/item/organ/heart/ipc_battery))
 				if(ipc_heart_check_revive(M))
 					to_chat(M, span_boldnotice("СИСТЕМЫ ВОССТАНОВЛЕНЫ: Позитронное ядро онлайн!"))
 
@@ -34,24 +50,18 @@
 
 /obj/item/organ/brain/positronic/on_life(seconds_per_tick, times_fired)
 	. = ..()
-
-	if(!owner)
-		return
-
-	// Проверка повреждений
-	if(positronic_damage >= max_damage)
+	if(owner && positronic_damage >= max_damage)
 		owner.death()
 
 /obj/item/organ/brain/positronic/emp_act(severity)
 	. = ..()
 	if(!owner)
 		return
-
 	switch(severity)
-		if(1) // EMP_HEAVY
+		if(EMP_HEAVY)
 			positronic_damage += rand(20, 40)
 			to_chat(owner, span_userdanger("ОШИБКА ПАМЯТИ: Критическое повреждение позитронного ядра!"))
-		if(2) // EMP_LIGHT
+		if(EMP_LIGHT)
 			positronic_damage += rand(10, 20)
 			to_chat(owner, span_danger("Предупреждение: Обнаружено повреждение данных."))
 
@@ -59,13 +69,34 @@
 /obj/item/organ/brain/positronic/mmi
 	name = "MMI-based positronic core"
 	desc = "Позитронный блок с установленным MMI. Содержит оцифрованное органическое сознание."
-	brain_type = "mmi"
 
 // Вариант с платой борга
 /obj/item/organ/brain/positronic/borg
 	name = "borg module positronic core"
 	desc = "Позитронный блок с платой из киборга. Содержит ИИ-личность."
-	brain_type = "borg_module"
+
+// ============================================
+// ПРОКСИ-ЯЧЕЙКА для зарядной станции боргов
+// ============================================
+// Адаптер между ipc_battery и системой charge_cell.Invoke()
+// зарядной станции. Позволяет IPC заряжаться на реcharge_station
+// точно так же, как борги.
+
+/obj/item/stock_parts/power_store/ipc_battery_proxy
+	/// Батарея-владелец
+	var/obj/item/organ/heart/ipc_battery/battery_ref
+
+/obj/item/stock_parts/power_store/ipc_battery_proxy/used_charge()
+	if(!battery_ref)
+		return 0
+	return battery_ref.maxcharge - battery_ref.charge
+
+/obj/item/stock_parts/power_store/ipc_battery_proxy/give(amount)
+	if(!battery_ref || !amount)
+		return 0
+	var/power_used = min(battery_ref.maxcharge - battery_ref.charge, amount)
+	battery_ref.charge += power_used
+	return power_used
 
 // ============================================
 // БАТАРЕЯ (СЕРДЦЕ)
@@ -78,15 +109,18 @@
 	icon_state = "ipc_cell"
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_HEART
-
-	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
 
 	var/charge = 5000
 	var/maxcharge = 5000
-	var/charge_rate = 1
-	var/charging = FALSE
-	var/charge_efficiency = 1.0
+	/// Прокси для зарядной станции (создаётся при Initialize)
+	var/obj/item/stock_parts/power_store/ipc_battery_proxy/proxy_cell
+
+/obj/item/organ/heart/ipc_battery/Initialize(mapload)
+	. = ..()
+	proxy_cell = new(src)
+	proxy_cell.battery_ref = src
+	proxy_cell.maxcharge = maxcharge
 
 /obj/item/organ/heart/ipc_battery/examine(mob/user)
 	. = ..()
@@ -107,40 +141,38 @@
 
 /obj/item/organ/heart/ipc_battery/on_life(seconds_per_tick, times_fired)
 	. = ..()
-
 	if(!owner)
 		return
-
-	// Разряжаем батарею
-	if(!charging)
-		charge = max(0, charge - (charge_rate * seconds_per_tick))
-
-	// Проверяем уровень заряда
-	if(charge <= 0)
-		owner.Unconscious(2 SECONDS)
-		if(prob(10))
-			to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критически низкий заряд батареи!"))
-	else if(charge < maxcharge * 0.1 && prob(5))
-		to_chat(owner, span_warning("Предупреждение: Заряд батареи ниже 10%."))
-
-/obj/item/organ/heart/ipc_battery/proc/charge_from_apc(amount)
-	if(charge >= maxcharge)
-		return FALSE
-
-	var/charge_amount = min(amount * charge_efficiency, maxcharge - charge)
-	charge += charge_amount
-	return charge_amount
+	// Трата заряда: 0.5 Вт — полный заряд (5000 Дж) держится ~2.7 часа
+	charge = max(0, charge - 0.5 * seconds_per_tick)
+	// Алерты заряда (как у боргов)
+	var/charge_ratio = charge / maxcharge
+	switch(charge_ratio)
+		if(0.75 to INFINITY)
+			owner.clear_alert(ALERT_CHARGE)
+		if(0.5 to 0.75)
+			owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 1)
+		if(0.25 to 0.5)
+			owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 2)
+		if(0.01 to 0.25)
+			owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 3)
+		else
+			owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/emptycell)
+	// Обновляем иконку HUD
+	var/mob/living/carbon/human/H = owner
+	if(istype(H) && istype(H.dna?.species, /datum/species/ipc))
+		var/datum/species/ipc/S = H.dna.species
+		S.update_ipc_battery_hud(H)
 
 /obj/item/organ/heart/ipc_battery/emp_act(severity)
 	. = ..()
 	if(!owner)
 		return
-
 	switch(severity)
-		if(1) // EMP_HEAVY
+		if(EMP_HEAVY)
 			charge = max(0, charge - (maxcharge * 0.5))
 			to_chat(owner, span_userdanger("КРИТИЧЕСКАЯ ОШИБКА: Батарея разряжена на 50%!"))
-		if(2) // EMP_LIGHT
+		if(EMP_LIGHT)
 			charge = max(0, charge - (maxcharge * 0.25))
 			to_chat(owner, span_danger("Предупреждение: Батарея разряжена на 25%."))
 
@@ -155,46 +187,7 @@
 	icon_state = "ipc_cooler"
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_LUNGS
-
-	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
-
-	var/cooling_power = 1.0
-	var/cooling_efficiency = 1.0
-
-/obj/item/organ/lungs/ipc/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, movement_flags)
-	. = ..()
-	if(.)
-		to_chat(M, span_notice("Система охлаждения активирована."))
-
-/obj/item/organ/lungs/ipc/Remove(mob/living/carbon/M, special = FALSE, movement_flags)
-	if(owner)
-		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Система охлаждения отключена! Риск перегрева!"))
-	. = ..()
-
-/obj/item/organ/lungs/ipc/on_life(seconds_per_tick, times_fired)
-	. = ..()
-
-	if(!owner)
-		return
-
-	// Пассивное охлаждение
-	if(istype(owner.dna?.species, /datum/species/ipc))
-		var/datum/species/ipc/S = owner.dna.species
-		S.cpu_temperature = max(S.cpu_temp_optimal_min, S.cpu_temperature - (cooling_power * cooling_efficiency * seconds_per_tick))
-
-/obj/item/organ/lungs/ipc/emp_act(severity)
-	. = ..()
-	if(!owner)
-		return
-
-	switch(severity)
-		if(1) // EMP_HEAVY
-			cooling_efficiency = max(0.1, cooling_efficiency - 0.5)
-			to_chat(owner, span_danger("ОШИБКА: Система охлаждения повреждена!"))
-		if(2) // EMP_LIGHT
-			cooling_efficiency = max(0.5, cooling_efficiency - 0.2)
-			to_chat(owner, span_warning("Предупреждение: Эффективность охлаждения снижена."))
 
 // ============================================
 // ГЛАЗА
@@ -205,13 +198,7 @@
 	desc = "Оптические сенсоры IPC. Позволяют видеть в различных спектрах."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "ipc_eyes"
-	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
-
-/obj/item/organ/eyes/robotic/ipc/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, movement_flags)
-	. = ..()
-	if(.)
-		to_chat(M, span_notice("Оптические сенсоры активированы."))
 
 // ============================================
 // УШИ
@@ -223,8 +210,6 @@
 	icon = 'icons/obj/medical/organs/organs.dmi'
 	icon_state = "ears-c"
 	base_icon_state = "ears-c"
-
-	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
 
 // ============================================
@@ -236,12 +221,5 @@
 	desc = "Голосовой синтезатор IPC."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "ipc_voicebox"
-
-	// КРИТИЧНО: Указываем что это роботический орган
 	organ_flags = ORGAN_ROBOTIC
-
 	modifies_speech = TRUE
-
-/obj/item/organ/tongue/robot/ipc/handle_speech(datum/source, list/speech_args)
-	// Можно добавить роботический фильтр речи
-	return
