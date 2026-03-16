@@ -143,7 +143,6 @@
 	. = ..()
 	if(!. || lazy)
 		return
-	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // ПРАВАЯ РУКА
@@ -172,7 +171,6 @@
 	. = ..()
 	if(!. || lazy)
 		return
-	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // ЛЕВАЯ НОГА
@@ -200,7 +198,6 @@
 	. = ..()
 	if(!. || lazy)
 		return
-	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // ПРАВАЯ НОГА
@@ -228,7 +225,6 @@
 	. = ..()
 	if(!. || lazy)
 		return
-	ipc_check_assembly_brand(new_limb_owner)
 
 // ============================================
 // УРОН И СПАРКИ
