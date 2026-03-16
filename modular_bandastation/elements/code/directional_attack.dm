@@ -27,7 +27,6 @@
 
 	if(!user.combat_mode)
 		return
-
 	if(QDELETED(target))
 		return
 
@@ -37,8 +36,6 @@
 
 	for(var/mob/living/target_mob in turf_to_check)
 		if(target_mob.stat == DEAD)
-			continue
-		if(target_mob == user)
 			continue
 		// This is here to undo the +1 click cooldown on ClickOn()
 		user.next_click = world.time - 1
