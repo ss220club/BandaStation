@@ -449,6 +449,8 @@ export class KeybindingsPage extends Component<any, KeybindingsPageState> {
                         {range(0, 3).map((key) => (
                           <Stack.Item key={key} grow>
                             <KeybindingButton
+                              can_edit={keybinding.can_edit}
+                              defaults={keybinding.default}
                               currentHotkey={keys[key]}
                               typingHotkey={this.getTypingHotkey?.(
                                 keybindingId,
