@@ -640,3 +640,10 @@
 	damage = 60
 	armour_penetration = 40
 	wound_falloff_tile = -1
+
+//MARK: Shotgun shells
+/obj/projectile/bullet/shotgun_breaching/on_hit(atom/target, blocked = 0, pierce_hit)
+	if(istype(target, /obj/structure/blob) || istype(target, /obj/structure/carp_rift))
+		target.take_damage(30, damage_type, 0)
+		return TRUE
+	return ..()
