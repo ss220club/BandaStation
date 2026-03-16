@@ -114,7 +114,7 @@
 	return ..()
 
 /obj/item/ammo_casing/update_desc()
-	desc = "[initial(desc)][loaded_projectile ? null : " Эта уже стрелянная."]"
+	desc = "[initial(desc)][loaded_projectile ? null : " Эта уже стреляная."]"
 	return ..()
 
 /*
