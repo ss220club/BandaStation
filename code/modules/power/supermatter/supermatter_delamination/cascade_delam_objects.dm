@@ -79,7 +79,7 @@
 	visible_message(
 		span_warning(capitalize("[hitting_projectile.declent_ru(NOMINATIVE)] влетает в [src.declent_ru(ACCUSATIVE)] с громким треском, прежде чем быстро вспыхнуть и превратиться в пепел.")),
 		null,
-		span_hear("Вы слышите громкий треск, когда вас обдает волной жара."),
+		span_hear("Вы слышите громкий треск, когда вас обдаёт волной жара."),
 	)
 
 	playsound(src, 'sound/effects/supermatter.ogg', 50, TRUE)
