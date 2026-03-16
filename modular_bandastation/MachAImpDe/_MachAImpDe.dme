@@ -1,6 +1,5 @@
 #include "_MachAImpDe.dm"
 
-#include "code/ipc_designs.dm"
 // BEGIN_INTERNALS
 // END_INTERNALS
 // BEGIN_FILE_DIR
