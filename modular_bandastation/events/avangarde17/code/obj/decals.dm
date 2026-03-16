@@ -26,3 +26,6 @@
 
 /obj/effect/turf_decal/road/crosswalk
 	icon_state = "crosswalk"
+
+/obj/effect/turf_decal/road/t_like
+	icon_state = "solid_t-like"

@@ -121,6 +121,8 @@
 	name = "Шаурмечная"
 	icon_state = "awaycontent20"
 
+// MARK: Администрация
+
 /area/awaymission/avangarde17/inside/gov
 	name = "Райком"
 	icon_state = "awaycontent21"
@@ -168,6 +170,156 @@
 /area/awaymission/avangarde17/inside/gov/engi
 	name = "Райком - Подсобка Техников"
 	icon_state = "awaycontent19"
+
+// MARK: Поликлиника
+
+/area/awaymission/avangarde17/inside/clinic
+	name = "Поликлиника - Первый этаж"
+	icon_state = "awaycontent1"
+
+/area/awaymission/avangarde17/inside/clinic/entrance
+	name = "Поликлиника - Прихожая"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/clinic/pharmacy
+	name = "Поликлиника - Аптека"
+	icon_state = "awaycontent3"
+
+/area/awaymission/avangarde17/inside/clinic/surgery_one
+	name = "Поликлиника - Первая хирургия"
+	icon_state = "awaycontent4"
+
+/area/awaymission/avangarde17/inside/clinic/surgery_two
+	name = "Поликлиника - Вторая хирургия"
+	icon_state = "awaycontent5"
+
+/area/awaymission/avangarde17/inside/clinic/paramedic
+	name = "Поликлиника - Фельдшерская"
+	icon_state = "awaycontent6"
+
+/area/awaymission/avangarde17/inside/clinic/staff
+	name = "Поликлиника - Комната персонала"
+	icon_state = "awaycontent7"
+
+/area/awaymission/avangarde17/inside/clinic/second_floor
+	name = "Поликлиника - Второй этаж"
+	icon_state = "awaycontent8"
+
+/area/awaymission/avangarde17/inside/clinic/cmo
+	name = "Поликлиника - Кабинет главного врача"
+	icon_state = "awaycontent9"
+
+/area/awaymission/avangarde17/inside/clinic/patients
+	name = "Поликлиника - Палаты пациентов"
+	icon_state = "awaycontent10"
+
+/area/awaymission/avangarde17/inside/clinic/virology
+	name = "Поликлиника - Вирусология"
+	icon_state = "awaycontent10"
+
+/area/awaymission/avangarde17/inside/clinic/toilet
+	name = "Поликлиника - Уборная"
+	icon_state = "awaycontent11"
+
+/area/awaymission/avangarde17/inside/clinic/doctor_room_first
+	name = "Поликлиника - Первый приёмный кабинет"
+	icon_state = "awaycontent12"
+
+/area/awaymission/avangarde17/inside/clinic/doctor_room_second
+	name = "Поликлиника - Первый приёмный кабинет"
+	icon_state = "awaycontent13"
+
+/area/awaymission/avangarde17/inside/clinic/doctor_room_third
+	name = "Поликлиника - Первый приёмный кабинет"
+	icon_state = "awaycontent14"
+
+/area/awaymission/avangarde17/inside/clinic/storage
+	name = "Поликлиника - Склад"
+	icon_state = "awaycontent15"
+
+/area/awaymission/avangarde17/inside/clinic/morgue
+	name = "Поликлиника - Морг"
+	icon_state = "awaycontent16"
+
+/area/awaymission/avangarde17/inside/clinic/coroner
+	name = "Поликлиника - Офис Патологоанатома"
+	icon_state = "awaycontent17"
+
+/area/awaymission/avangarde17/inside/clinic/maints
+	name = "Поликлиника - Подсобка"
+	icon_state = "awaycontent18"
+
+// MARK: Электростанция
+
+/area/awaymission/avangarde17/inside/reactor
+	name = "Электростанция - КПП"
+	icon_state = "awaycontent1"
+
+/area/awaymission/avangarde17/inside/reactor/entrance
+	name = "Электростанция - Вход"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/reactor/ladder
+	name = "Электростанция - Лестница"
+	icon_state = "awaycontent3"
+
+/area/awaymission/avangarde17/inside/reactor/atmos
+	name = "Электростанция - Атмосферный отдел"
+	icon_state = "awaycontent4"
+
+/area/awaymission/avangarde17/inside/reactor/storage
+	name = "Электростанция - Склад"
+	icon_state = "awaycontent5"
+
+/area/awaymission/avangarde17/inside/reactor/equipment
+	name = "Электростанция - Комната экипировки"
+	icon_state = "awaycontent6"
+
+/area/awaymission/avangarde17/inside/reactor/ce
+	name = "Электростанция - Кабинет главного инженера"
+	icon_state = "awaycontent7"
+
+/area/awaymission/avangarde17/inside/reactor/second_floor
+	name = "Электростанция - Второй этаж"
+	icon_state = "awaycontent8"
+
+/area/awaymission/avangarde17/inside/reactor/control_room
+	name = "Электростанция - Комната управления"
+	icon_state = "awaycontent9"
+
+/area/awaymission/avangarde17/inside/reactor/preparations
+	name = "Электростанция - Комната управления"
+	icon_state = "awaycontent10"
+
+/area/awaymission/avangarde17/inside/reactor/toilet
+	name = "Электростанция - Уборная"
+	icon_state = "awaycontent11"
+
+/area/awaymission/avangarde17/inside/reactor/smes
+	name = "Электростанция - Трансформаторная"
+	icon_state = "awaycontent12"
+
+/area/awaymission/avangarde17/inside/reactor/emitter
+	name = "Электростанция - Излучательная"
+	icon_state = "awaycontent13"
+
+/area/awaymission/avangarde17/inside/reactor/smoking
+	name = "Электростанция - Курилка"
+	icon_state = "awaycontent14"
+
+/area/awaymission/avangarde17/inside/reactor/sm_zone
+	name = "Электростанция - Зона Реактора"
+	icon_state = "awaycontent15"
+
+/area/awaymission/avangarde17/inside/reactor/sm_inside
+	name = "Электростанция - Внутри реактора"
+	icon_state = "awaycontent16"
+
+/area/awaymission/avangarde17/inside/reactor/cooling
+	name = "Электростанция - Внутри реактора"
+	icon_state = "awaycontent17"
+
+// MARK: Милиция
 
 /area/awaymission/avangarde17/inside/militia
 	name = "Участковый Пункт Милиции"
@@ -697,6 +849,9 @@
 /area/awaymission/avangarde17/inside/house_4/eighth_apartment/bathroom
 	name = "Туалет"
 	icon_state = "awaycontent5"
+
+/area/awaymission/avangarde17/inside/house_4/eighth_apartment/bathroom
+
 
 /*
 // Скорее всего удалить луп музыки, трансляция будет по радио
