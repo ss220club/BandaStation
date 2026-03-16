@@ -4247,7 +4247,7 @@
 /area/station/cargo/storage)
 "beF" = (
 /obj/structure/table/wood/fancy,
-/obj/item/banhammer{
+/obj/item/lead_pipe{
 	desc = "Revolutionary! Really makes your head hurt thinking about it.";
 	name = "Dadaist Art Exposition"
 	},
