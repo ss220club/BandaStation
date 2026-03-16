@@ -6865,6 +6865,12 @@
 #include "interface\fonts\spess_font.dm"
 #include "interface\fonts\tiny_unicode.dm"
 #include "interface\fonts\vcr_osd_mono.dm"
+#include "modular_bandastation\engines\code\constrictor\constrictor.dm"
+#include "modular_bandastation\engines\code\decals\plutonium_sludge.dm"
+#include "modular_bandastation\engines\code\gases\gases.dm"
+#include "modular_bandastation\engines\code\landmarks\custom_landmarks.dm"
+#include "modular_bandastation\engines\code\rods\control_rods.dm"
+#include "modular_bandastation\engines\code\stormdrive\stormdrive.dm"
 // END_INCLUDE
 
 // BANDASTATION

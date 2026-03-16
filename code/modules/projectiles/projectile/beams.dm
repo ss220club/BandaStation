@@ -272,6 +272,8 @@
 	var/energy_reduction
 	// Add this to SM psi coefficient on hit for lasers
 	var/psi_change
+	// Energy for storm drive start
+	var/energy = 10 // BANDASTATION ADDITION: STORM DRIVE
 
 /obj/projectile/beam/emitter/hitscan/bluelens
 	name = "electrodisruptive beam"
@@ -285,6 +287,7 @@
 	damage_type = STAMINA
 	integrity_heal = 0.25
 	energy_reduction = 60
+	energy = 5 // BANDASTATION ADDITION: STORM DRIVE
 
 /obj/projectile/beam/emitter/hitscan/bioregen
 	name = "bioregenerative beam"
@@ -298,6 +301,7 @@
 	damage_type = STAMINA
 	damage = 0
 	var/healing_done = 5
+	energy = 0 // BANDASTATION ADDITION: STORM DRIVE
 
 /obj/projectile/beam/emitter/hitscan/bioregen/on_hit(atom/target, blocked, pierce_hit)
 	. = ..()
@@ -319,6 +323,7 @@
 	integrity_heal = -0.15
 	energy_reduction = -150
 	psi_change = -0.1
+	energy = 20 // BANDASTATION ADDITION: STORM DRIVE
 
 /obj/projectile/beam/emitter/hitscan/incend/on_hit(atom/target, blocked, pierce_hit)
 	. = ..()
@@ -340,6 +345,7 @@
 	damage = 0
 	energy_reduction = -25
 	psi_change = 0.25
+	energy = 10 // BANDASTATION ADDITION: STORM DRIVE
 
 /obj/projectile/beam/emitter/hitscan/psy/on_hit(atom/target, blocked, pierce_hit)
 	. = ..()
@@ -359,6 +365,7 @@
 	muzzle_flash_color_override = COLOR_SILVER
 	impact_light_color_override = COLOR_SILVER
 	damage = 0
+	energy = 0 // BANDASTATION ADDITION: STORM DRIVE
 
 /obj/projectile/beam/emitter/hitscan/magnetic/on_hit(atom/target, blocked, pierce_hit)
 	. = ..()
@@ -377,6 +384,7 @@
 	damage = 0
 	integrity_heal = -2
 	energy_reduction = -500
+	energy = 50 // BANDASTATION ADDITION: STORM DRIVE
 
 
 /obj/projectile/beam/emitter/hitscan/blast/on_hit(atom/target, blocked, pierce_hit)
