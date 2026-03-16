@@ -1070,6 +1070,15 @@ instrumental = "серым комбинезоном"
 prepositional = "сером комбинезоне"
 gender = "male"
 
+["death alarm implant"]
+nominative = "имплант оповещения о смерти"
+genitive = "импланта оповещения о смерти"
+dative = "импланту оповещения о смерти"
+accusative = "имплант оповещения о смерти"
+instrumental = "имплантом оповещения о смерти"
+prepositional = "импланте оповещения о смерти"
+gender = "male"
+
 ["CQC implant"]
 nominative = "CQC имплант"
 genitive = "CQC импланта"
@@ -3496,6 +3505,168 @@ instrumental = "миниатюрным энергетическим пистол
 prepositional = "миниатюрном энергетическом пистолете"
 gender = "male"
 
+["inferno pistol"]
+nominative = "инферно-пистолет"
+genitive = "инферно-пистолета"
+dative = "инферно-пистолету"
+accusative = "инферно-пистолет"
+instrumental = "инферно-пистолетом"
+prepositional = "инферно-пистолете"
+gender = "male"
+
+["cryo pistol"]
+nominative = "крио-пистолет"
+genitive = "крио-пистолета"
+dative = "крио-пистолету"
+accusative = "крио-пистолет"
+instrumental = "крио-пистолетом"
+prepositional = "крио-пистолете"
+gender = "male"
+
+["Type 5/C laser pistol"]
+nominative = "лазерный пистолет Тип 5/C"
+genitive = "лазерного пистолета Тип 5/C"
+dative = "лазерному пистолету Тип 5/C"
+accusative = "лазерный пистолет Тип 5/C"
+instrumental = "лазерным пистолетом Тип 5/C"
+prepositional = "лазерном пистолете Тип 5/C"
+gender = "male"
+
+["Type 5 laser gun"]
+nominative = "лазерный карабин Тип 5"
+genitive = "лазерного карабина Тип 5"
+dative = "лазерному карабину Тип 5"
+accusative = "лазерный карабин Тип 5"
+instrumental = "лазерным карабином Тип 5"
+prepositional = "лазерном карабине Тип 5"
+gender = "male"
+
+["Type 1 laser gun"]
+nominative = "лазерный карабин Тип 1"
+genitive = "лазерного карабина Тип 1"
+dative = "лазерному карабину Тип 1"
+accusative = "лазерный карабин Тип 1"
+instrumental = "лазерным карабином Тип 1"
+prepositional = "лазерном карабине Тип 1"
+gender = "male"
+
+["Type 6 X-ray laser gun"]
+nominative = "рентгеновский лазерный карабин Тип 6"
+genitive = "рентгеновского лазерного карабина Тип 6"
+dative = "рентгеновскому лазерному карабину Тип 6"
+accusative = "рентгеновский лазерный карабин Тип 6"
+instrumental = "рентгеновским лазерным карабином Тип 6"
+prepositional = "рентгеновском лазерном карабине Тип 6"
+gender = "male"
+
+["Type 5/A assault laser rifle"]
+nominative = "штурмовая лазерная винтовка Тип 5/A"
+genitive = "штурмовой лазерной винтовки Тип 5/A"
+dative = "штурмовой лазерной винтовке Тип 5/A"
+accusative = "штурмовую лазерную винтовку Тип 5/A"
+instrumental = "штурмовой лазерной винтовкой Тип 5/A"
+prepositional = "штурмовой лазерной винтовке Тип 5/A"
+gender = "female"
+
+["Type 3 laser gun"]
+nominative = "лазерный карабин Тип 3"
+genitive = "лазерного карабина Тип 3"
+dative = "лазерному карабину Тип 3"
+accusative = "лазерный карабин Тип 3"
+instrumental = "лазерным карабином Тип 3"
+prepositional = "лазерном карабине Тип 3"
+gender = "male"
+
+["Type 5/R laser carbine"]
+nominative = "лазерный карабин Тип 5/R"
+genitive = "лазерного карабина Тип 5/R"
+dative = "лазерному карабину Тип 5/R"
+accusative = "лазерный карабин Тип 5/R"
+instrumental = "лазерным карабином Тип 5/R"
+prepositional = "лазерном карабине Тип 5/R"
+gender = "male"
+
+["Type 4 'hellfire' laser gun"]
+nominative = "лазерный карабин «Адское пламя» Тип 4"
+genitive = "лазерного карабина «Адское пламя» Тип 4"
+dative = "лазерному карабину «Адское пламя» Тип 4"
+accusative = "лазерный карабин «Адское пламя» Тип 4"
+instrumental = "лазерным карабином «Адское пламя» Тип 4"
+prepositional = "лазерном карабине «Адское пламя» Тип 4"
+gender = "male"
+
+["NT BR-38 battle rifle"]
+nominative = "боевая винтовка NT BR-38"
+genitive = "боевой винтовки NT BR-38"
+dative = "боевой винтовке NT BR-38"
+accusative = "боевую винтовку NT BR-38"
+instrumental = "боевой винтовкой NT BR-38"
+prepositional = "боевой винтовке NT BR-38"
+gender = "female"
+
+["DRAGnet translocation shotgun"]
+nominative = "транслокационный дробовик ДРАГнет"
+genitive = "транслокационного дробовика ДРАГнет"
+dative = "транслокационному дробовику ДРАГнет"
+accusative = "транслокационный дробовик ДРАГнет"
+instrumental = "транслокационным дробовиком ДРАГнет"
+prepositional = "транслокационном дробовике ДРАГнет"
+gender = "male"
+
+["EG-14 advanced energy revolver"]
+nominative = "продвинутый энергетический револьвер EG-14"
+genitive = "продвинутого энергетического револьвера EG-14"
+dative = "продвинутому энергетическому револьверу EG-14"
+accusative = "продвинутый энергетический револьвер EG-14"
+instrumental = "продвинутым энергетическим револьвером EG-14"
+prepositional = "продвинутом энергетическом револьвере EG-14"
+gender = "male"
+
+["pulse rifle"]
+nominative = "импульсная винтовка"
+genitive = "импульсной винтовки"
+dative = "импульсной винтовке"
+accusative = "импульсную винтовку"
+instrumental = "импульсной винтовкой"
+prepositional = "импульсной винтовке"
+gender = "female"
+
+["pulse carbine"]
+nominative = "импульсный карабин"
+genitive = "импульсного карабина"
+dative = "импульсному карабину"
+accusative = "импульсный карабин"
+instrumental = "импульсным карабином"
+prepositional = "импульсном карабине"
+gender = "male"
+
+["pulse pistol"]
+nominative = "импульсный пистолет"
+genitive = "импульсного пистолета"
+dative = "импульсному пистолету"
+accusative = "импульсный пистолет"
+instrumental = "импульсным пистолетом"
+prepositional = "импульсном пистолете"
+gender = "male"
+
+["pulse destroyer"]
+nominative = "импульсный разрушитель"
+genitive = "импульсного разрушителя"
+dative = "импульсному разрушителю"
+accusative = "импульсный разрушитель"
+instrumental = "импульсным разрушителем"
+prepositional = "импульсном разрушителе"
+gender = "male"
+
+["peashooter"]
+nominative = "горохострел"
+genitive = "горохострела"
+dative = "горохострелу"
+accusative = "горохострел"
+instrumental = "горохострелом"
+prepositional = "горохостреле"
+gender = "male"
+
 ["antique laser gun"]
 nominative = "антикварный лазерный пистолет"
 genitive = "антикварного лазерного пистолета"
@@ -3550,15 +3721,6 @@ instrumental = "энергетическим мини-арбалетом"
 prepositional = "энергетическом мини-арбалете"
 gender = "male"
 
-["pulse rifle"]
-nominative = "пульсовый карабин"
-genitive = "пульсового карабина"
-dative = "пульсовому карабину"
-accusative = "пульсовый карабин"
-instrumental = "пульсовым карабином"
-prepositional = "пульсовом карабине"
-gender = "male"
-
 ["laser musket"]
 nominative = "лазерный мушкет"
 genitive = "лазерного мушкета"
@@ -3593,6 +3755,24 @@ dative = "элитному гладкоствольному дизейблеру
 accusative = "элитный гладкоствольный дизейблер"
 instrumental = "элитным гладкоствольным дизейблером"
 prepositional = "элитном гладкоствольном дизейблере"
+gender = "male"
+
+["taser gun"]
+nominative = "электрошоковый пистолет"
+genitive = "электрошокового пистолета"
+dative = "электрошоковому пистолету"
+accusative = "электрошоковый пистолет"
+instrumental = "электрошоковым пистолетом"
+prepositional = "электрошоковом пистолете"
+gender = "male"
+
+["hybrid taser"]
+nominative = "гибридный электрошокер"
+genitive = "гибридного электрошокера"
+dative = "гибридному электрошокеру"
+accusative = "гибридный электрошокер"
+instrumental = "гибридным электрошокером"
+prepositional = "гибридном электрошокере"
 gender = "male"
 
 ["alien pistol"]
@@ -4251,6 +4431,566 @@ instrumental = "поцелуем повара"
 prepositional = "поцелуе повара"
 gender = "male"
 
+["laser"]
+nominative = "лазерный луч"
+genitive = "лазерного луча"
+dative = "лазерному лучу"
+accusative = "лазерный луч"
+instrumental = "лазерным лучом"
+prepositional = "лазерном луче"
+gender = "male"
+
+["rapid fire laser"]
+nominative = "скорострельный лазерный луч"
+genitive = "скорострельного лазерного луча"
+dative = "скорострельному лазерному лучу"
+accusative = "скорострельный лазерный луч"
+instrumental = "скорострельным лазерным лучом"
+prepositional = "скорострельном лазерном луче"
+gender = "male"
+
+["practice rapid fire laser"]
+nominative = "учебный скорострельный лазерный луч"
+genitive = "учебного скорострельного лазерного луча"
+dative = "учебному скорострельному лазерному лучу"
+accusative = "учебный скорострельный лазерный луч"
+instrumental = "учебным скорострельным лазерным лучом"
+prepositional = "учебном скорострельном лазерном луче"
+gender = "male"
+
+["red plasma beam"]
+nominative = "красный плазменный луч"
+genitive = "красного плазменного луча"
+dative = "красному плазменному лучу"
+accusative = "красный плазменный луч"
+instrumental = "красным плазменным лучом"
+prepositional = "красном плазменном луче"
+gender = "male"
+
+["accelerator laser"]
+nominative = "ускорительный лазерный луч"
+genitive = "ускорительного лазерного луча"
+dative = "ускорительному лазерному лучу"
+accusative = "ускорительный лазерный луч"
+instrumental = "ускорительным лазерным лучом"
+prepositional = "ускорительном лазерном луче"
+gender = "male"
+
+["hellfire laser"]
+nominative = "адский лазерный луч"
+genitive = "адского лазерного луча"
+dative = "адскому лазерному лучу"
+accusative = "адский лазерный луч"
+instrumental = "адским лазерным лучом"
+prepositional = "адском лазерном луче"
+gender = "male"
+
+["flare particle"]
+nominative = "осветительная частица"
+genitive = "осветительной частицы"
+dative = "осветительной частице"
+accusative = "осветительную частицу"
+instrumental = "осветительной частицей"
+prepositional = "осветительной частице"
+gender = "female"
+
+["heavy laser"]
+nominative = "тяжёлый лазерный луч"
+genitive = "тяжёлого лазерного луча"
+dative = "тяжёлому лазерному лучу"
+accusative = "тяжёлый лазерный луч"
+instrumental = "тяжёлым лазерным лучом"
+prepositional = "тяжёлом лазерном луче"
+gender = "male"
+
+["low-power laser"]
+nominative = "маломощный лазерный луч"
+genitive = "маломощного лазерного луча"
+dative = "маломощному лазерному лучу"
+accusative = "маломощный лазерный луч"
+instrumental = "маломощным лазерным лучом"
+prepositional = "маломощном лазерном луче"
+gender = "male"
+
+["mid-power laser"]
+nominative = "среднемощный лазерный луч"
+genitive = "среднемощного лазерного луча"
+dative = "среднемощному лазерному лучу"
+accusative = "среднемощный лазерный луч"
+instrumental = "среднемощным лазерным лучом"
+prepositional = "среднемощном лазерном луче"
+gender = "male"
+
+["clockwork laser"]
+nominative = "шестерёнчатый лазерный луч"
+genitive = "шестерёнчатого лазерного луча"
+dative = "шестерёнчатому лазерному лучу"
+accusative = "шестерёнчатый лазерный луч"
+instrumental = "шестерёнчатым лазерным лучом"
+prepositional = "шестерёнчатом лазерном луче"
+gender = "male"
+
+["practice laser"]
+nominative = "учебный лазерный луч"
+genitive = "учебного лазерного луча"
+dative = "учебному лазерному лучу"
+accusative = "учебный лазерный луч"
+instrumental = "учебным лазерным лучом"
+prepositional = "учебном лазерном луче"
+gender = "male"
+
+["laser pellet"]
+nominative = "лазерная дробинка"
+genitive = "лазерной дробинки"
+dative = "лазерной дробинке"
+accusative = "лазерную дробинку"
+instrumental = "лазерной дробинкой"
+prepositional = "лазерной дробинке"
+gender = "female"
+
+["X-ray beam"]
+nominative = "рентгеновский луч"
+genitive = "рентгеновского луча"
+dative = "рентгеновскому лучу"
+accusative = "рентгеновский луч"
+instrumental = "рентгеновским лучом"
+prepositional = "рентгеновском луче"
+gender = "male"
+
+["disabler beam"]
+nominative = "обезвреживающий луч"
+genitive = "обезвреживающего луча"
+dative = "обезвреживающему лучу"
+accusative = "обезвреживающий луч"
+instrumental = "обезвреживающим лучом"
+prepositional = "обезвреживающем луче"
+gender = "male"
+
+["scatter disabler"]
+nominative = "рассеянный обезвреживающий луч"
+genitive = "рассеянного обезвреживающего луча"
+dative = "рассеянному обезвреживающему лучу"
+accusative = "рассеянный обезвреживающий луч"
+instrumental = "рассеянным обезвреживающим лучом"
+prepositional = "рассеянном обезвреживающем луче"
+gender = "male"
+
+["unfocused disabler beam"]
+nominative = "несфокусированный обезвреживающий луч"
+genitive = "несфокусированного обезвреживающего луча"
+dative = "несфокусированному обезвреживающему лучу"
+accusative = "несфокусированный обезвреживающий луч"
+instrumental = "несфокусированным обезвреживающим лучом"
+prepositional = "несфокусированном обезвреживающем луче"
+gender = "male"
+
+["focused disabler beam"]
+nominative = "сфокусированный обезвреживающий луч"
+genitive = "сфокусированного обезвреживающего луча"
+dative = "сфокусированному обезвреживающему лучу"
+accusative = "сфокусированный обезвреживающий луч"
+instrumental = "сфокусированным обезвреживающим лучом"
+prepositional = "сфокусированном обезвреживающем луче"
+gender = "male"
+
+["frozen nanite bullet"]
+nominative = "замороженная нанитная пуля"
+genitive = "замороженной нанитной пули"
+dative = "замороженной нанитной пуле"
+accusative = "замороженную нанитную пулю"
+instrumental = "замороженной нанитной пулей"
+prepositional = "замороженной нанитной пуле"
+gender = "female"
+
+["molten nanite bullet"]
+nominative = "расплавленная нанитная пуля"
+genitive = "расплавленной нанитной пули"
+dative = "расплавленной нанитной пуле"
+accusative = "расплавленную нанитную пулю"
+instrumental = "расплавленной нанитной пулей"
+prepositional = "расплавленной нанитной пуле"
+gender = "female"
+
+["pulse"]
+nominative = "импульсный луч"
+genitive = "импульсного луча"
+dative = "импульсному лучу"
+accusative = "импульсный луч"
+instrumental = "импульсным лучом"
+prepositional = "импульсном луче"
+gender = "male"
+
+["ion bolt"]
+nominative = "ионный заряд"
+genitive = "ионного заряда"
+dative = "ионному заряду"
+accusative = "ионный заряд"
+instrumental = "ионным зарядом"
+prepositional = "ионном заряде"
+gender = "male"
+
+["electrode"]
+nominative = "электрод"
+genitive = "электрода"
+dative = "электроду"
+accusative = "электрод"
+instrumental = "электродом"
+prepositional = "электроде"
+gender = "male"
+
+["heavy pulse laser"]
+nominative = "тяжёлый импульсный лазерный луч"
+genitive = "тяжёлого импульсного лазерного луча"
+dative = "тяжёлому импульсному лазерному лучу"
+accusative = "тяжёлый импульсный лазерный луч"
+instrumental = "тяжёлым импульсным лазерным лучом"
+prepositional = "тяжёлом импульсном лазерном луче"
+gender = "male"
+
+["emitter beam"]
+nominative = "эмиттерный луч"
+genitive = "эмиттерного луча"
+dative = "эмиттерному лучу"
+accusative = "эмиттерный луч"
+instrumental = "эмиттерным лучом"
+prepositional = "эмиттерном луче"
+gender = "male"
+
+["electrodisruptive beam"]
+nominative = "электроразрядный луч"
+genitive = "электроразрядного луча"
+dative = "электроразрядному лучу"
+accusative = "электроразрядный луч"
+instrumental = "электроразрядным лучом"
+prepositional = "электроразрядном луче"
+gender = "male"
+
+["bioregenerative beam"]
+nominative = "биорегенерирующий луч"
+genitive = "биорегенерирующего луча"
+dative = "биорегенерирующему лучу"
+accusative = "биорегенерирующий луч"
+instrumental = "биорегенерирующим лучом"
+prepositional = "биорегенерирующем луче"
+gender = "male"
+
+["conflagratory beam"]
+nominative = "воспламеняющий луч"
+genitive = "воспламеняющего луча"
+dative = "воспламеняющему лучу"
+accusative = "воспламеняющий луч"
+instrumental = "воспламеняющим лучом"
+prepositional = "воспламеняющем луче"
+gender = "male"
+
+["psychosiphoning beam"]
+nominative = "психически истощающий луч"
+genitive = "психически истощающего луча"
+dative = "психически истощающему лучу"
+accusative = "психически истощающий луч"
+instrumental = "психически истощающим лучом"
+prepositional = "психически истощающем луче"
+gender = "male"
+
+["magnetogenerative beam"]
+nominative = "магнитогенерирующий луч"
+genitive = "магнитогенерирующего луча"
+dative = "магнитогенерирующему лучу"
+accusative = "магнитогенерирующий луч"
+instrumental = "магнитогенерирующим лучом"
+prepositional = "магнитогенерирующем луче"
+gender = "male"
+
+["hyperconcussive beam"]
+nominative = "гиперконтузивный луч"
+genitive = "гиперконтузивного луча"
+dative = "гиперконтузивному лучу"
+accusative = "гиперконтузивный луч"
+instrumental = "гиперконтузивным лучом"
+prepositional = "гиперконтузивном луче"
+gender = "male"
+
+["laser tag beam"]
+nominative = "лазертаговый луч"
+genitive = "лазертагового луча"
+dative = "лазертаговому лучу"
+accusative = "лазертаговый луч"
+instrumental = "лазертаговым лучом"
+prepositional = "лазертаговом луче"
+gender = "male"
+
+["anti-existential beam"]
+nominative = "антиэкзистенциальный луч"
+genitive = "антиэкзистенциального луча"
+dative = "антиэкзистенциальному лучу"
+accusative = "антиэкзистенциальный луч"
+instrumental = "антиэкзистенциальным лучом"
+prepositional = "антиэкзистенциальном луче"
+gender = "male"
+
+[".38 bullet"]
+nominative = "пуля .38 калибра"
+genitive = "пули .38 калибра"
+dative = "пуле .38 калибра"
+accusative = "пулю .38 калибра"
+instrumental = "пулей .38 калибра"
+prepositional = "пуле .38 калибра"
+gender = "female"
+
+["7.62x38mmR bullet"]
+nominative = "пуля 7,62×38ммR"
+genitive = "пули 7,62×38ммR"
+dative = "пуле 7,62×38ммR"
+accusative = "пулю 7,62×38ммR"
+instrumental = "пулей 7,62×38ммR"
+prepositional = "пуле 7,62×38ммR"
+gender = "female"
+
+[".50AE bullet"]
+nominative = "пуля .50AE"
+genitive = "пули .50AE"
+dative = "пуле .50AE"
+accusative = "пулю .50AE"
+instrumental = "пулей .50AE"
+prepositional = "пуле .50AE"
+gender = "female"
+
+[".38 Match bullet"]
+nominative = "высокоточная пуля .38 калибра"
+genitive = "высокоточной пули .38 калибра"
+dative = "высокоточной пуле .38 калибра"
+accusative = "высокоточную пулю .38 калибра"
+instrumental = "высокоточной пулей .38 калибра"
+prepositional = "высокоточной пуле .38 калибра"
+gender = "female"
+
+[".38 Rubber bullet"]
+nominative = "резиновая пуля .38 калибра"
+genitive = "резиновой пули .38 калибра"
+dative = "резиновой пуле .38 калибра"
+accusative = "резиновую пулю .38 калибра"
+instrumental = "резиновой пулей .38 калибра"
+prepositional = "резиновой пуле .38 калибра"
+gender = "female"
+
+[".38 True Strike bullet"]
+nominative = "пуля .38 калибра «Точный выстрел»"
+genitive = "пули .38 калибра «Точный выстрел»"
+dative = "пуле .38 калибра «Точный выстрел»"
+accusative = "пулю .38 калибра «Точный выстрел»"
+instrumental = "пулей .38 калибра «Точный выстрел»"
+prepositional = "пуле .38 калибра «Точный выстрел»"
+gender = "female"
+
+[".38 DumDum bullet"]
+nominative = "пуля .38 калибра дум-дум"
+genitive = "пули .38 калибра дум-дум"
+dative = "пуле .38 калибра дум-дум"
+accusative = "пулю .38 калибра дум-дум"
+instrumental = "пулей .38 калибра дум-дум"
+prepositional = "пуле .38 калибра дум-дум"
+gender = "female"
+
+[".38 TRAC bullet"]
+nominative = "пуля .38 калибра ТРЭК"
+genitive = "пули .38 калибра ТРЭК"
+dative = "пуле .38 калибра ТРЭК"
+accusative = "пулю .38 калибра ТРЭК"
+instrumental = "пулей .38 калибра ТРЭК"
+prepositional = "пуле .38 калибра ТРЭК"
+gender = "female"
+
+[".38 Hot Shot bullet"]
+nominative = "зажигательная пуля .38 калибра"
+genitive = "зажигательной пули .38 калибра"
+dative = "зажигательной пуле .38 калибра"
+accusative = "зажигательную пулю .38 калибра"
+instrumental = "зажигательной пулей .38 калибра"
+prepositional = "зажигательной пуле .38 калибра"
+gender = "female"
+
+[".38 Iceblox bullet"]
+nominative = "замораживающая пуля .38 калибра"
+genitive = "замораживающей пули .38 калибра"
+dative = "замораживающей пуле .38 калибра"
+accusative = "замораживающую пулю .38 калибра"
+instrumental = "замораживающей пулей .38 калибра"
+prepositional = "замораживающей пуле .38 калибра"
+gender = "female"
+
+[".357 bullet"]
+nominative = "пуля .357 калибра"
+genitive = "пули .357 калибра"
+dative = "пуле .357 калибра"
+accusative = "пулю .357 калибра"
+instrumental = "пулей .357 калибра"
+prepositional = "пуле .357 калибра"
+gender = "female"
+
+[".357 phasic bullet"]
+nominative = "фазовая пуля .357 калибра"
+genitive = "фазовой пули .357 калибра"
+dative = "фазовой пуле .357 калибра"
+accusative = "фазовую пулю .357 калибра"
+instrumental = "фазовой пулей .357 калибра"
+prepositional = "фазовой пуле .357 калибра"
+gender = "female"
+
+[".357 heartseeker bullet"]
+nominative = "пуля .357 калибра «Сердцестрел»"
+genitive = "пули .357 калибра «Сердцестрел»"
+dative = "пуле .357 калибра «Сердцестрел»"
+accusative = "пулю .357 калибра «Сердцестрел»"
+instrumental = "пулей .357 калибра «Сердцестрел»"
+prepositional = "пуле .357 калибра «Сердцестрел»"
+gender = "female"
+
+[".357 match bullet"]
+nominative = "высокоточная пуля .357 калибра"
+genitive = "высокоточной пули .357 калибра"
+dative = "высокоточной пуле .357 калибра"
+accusative = "высокоточную пулю .357 калибра"
+instrumental = "высокоточной пулей .357 калибра"
+prepositional = "высокоточной пуле .357 калибра"
+gender = "female"
+
+["pea bullet"]
+nominative = "гороховая пуля"
+genitive = "гороховой пули"
+dative = "гороховой пуле"
+accusative = "гороховую пулю"
+instrumental = "гороховой пулей"
+prepositional = "гороховой пуле"
+gender = "female"
+
+["9x25mm NT rubber bullet"]
+nominative = "резиновая пуля 9×25мм NT"
+genitive = "резиновой пули 9×25мм NT"
+dative = "резиновой пуле 9×25мм NT"
+accusative = "резиновую пулю 9×25мм NT"
+instrumental = "резиновой пулей 9×25мм NT"
+prepositional = "резиновой пуле 9×25мм NT"
+gender = "female"
+
+["9x25mm NT hollow-point bullet"]
+nominative = "экспансивная пуля 9×25мм NT"
+genitive = "экспансивной пули 9×25мм NT"
+dative = "экспансивной пуле 9×25мм NT"
+accusative = "экспансивную пулю 9×25мм NT"
+instrumental = "экспансивной пулей 9×25мм NT"
+prepositional = "экспансивной пуле 9×25мм NT"
+gender = "female"
+
+["9x25mm NT armor-piercing bullet"]
+nominative = "бронебойная пуля 9×25мм NT"
+genitive = "бронебойной пули 9×25мм NT"
+dative = "бронебойной пуле 9×25мм NT"
+accusative = "бронебойную пулю 9×25мм NT"
+instrumental = "бронебойной пулей 9×25мм NT"
+prepositional = "бронебойной пуле 9×25мм NT"
+gender = "female"
+
+["9x25mm NT bullet"]
+nominative = "пуля 9×25мм NT"
+genitive = "пули 9×25мм NT"
+dative = "пуле 9×25мм NT"
+accusative = "пулю 9×25мм NT"
+instrumental = "пулей 9×25мм NT"
+prepositional = "пуле 9×25мм NT"
+gender = "female"
+
+["9mm bullet"]
+nominative = "пуля 9мм"
+genitive = "пули 9мм"
+dative = "пуле 9мм"
+accusative = "пулю 9мм"
+instrumental = "пулей 9мм"
+prepositional = "пуле 9мм"
+gender = "female"
+
+["9mm armor-piercing bullet"]
+nominative = "бронебойная пуля 9мм"
+genitive = "бронебойной пули 9мм"
+dative = "бронебойной пуле 9мм"
+accusative = "бронебойную пулю 9мм"
+instrumental = "бронебойной пулей 9мм"
+prepositional = "бронебойной пуле 9мм"
+gender = "female"
+
+["9mm hollow-point bullet"]
+nominative = "экспансивная пуля 9мм"
+genitive = "экспансивной пули 9мм"
+dative = "экспансивной пуле 9мм"
+accusative = "экспансивную пулю 9мм"
+instrumental = "экспансивной пулей 9мм"
+prepositional = "экспансивной пуле 9мм"
+gender = "female"
+
+["9mm incendiary bullet"]
+nominative = "зажигательная пуля 9мм"
+genitive = "зажигательной пули 9мм"
+dative = "зажигательной пуле 9мм"
+accusative = "зажигательную пулю 9мм"
+instrumental = "зажигательной пулей 9мм"
+prepositional = "зажигательной пуле 9мм"
+gender = "female"
+
+["10mm bullet"]
+nominative = "пуля 10мм"
+genitive = "пули 10мм"
+dative = "пуле 10мм"
+accusative = "пулю 10мм"
+instrumental = "пулей 10мм"
+prepositional = "пуле 10мм"
+gender = "female"
+
+["10mm armor-piercing bullet"]
+nominative = "бронебойная пуля 10мм"
+genitive = "бронебойной пули 10мм"
+dative = "бронебойной пуле 10мм"
+accusative = "бронебойную пулю 10мм"
+instrumental = "бронебойной пулей 10мм"
+prepositional = "бронебойной пуле 10мм"
+gender = "female"
+
+["10mm hollow-point bullet"]
+nominative = "экспансивная пуля 10мм"
+genitive = "экспансивной пули 10мм"
+dative = "экспансивной пуле 10мм"
+accusative = "экспансивную пулю 10мм"
+instrumental = "экспансивной пулей 10мм"
+prepositional = "экспансивной пуле 10мм"
+gender = "female"
+
+["10mm incendiary bullet"]
+nominative = "зажигательная пуля 10мм"
+genitive = "зажигательной пули 10мм"
+dative = "зажигательной пуле 10мм"
+accusative = "зажигательную пулю 10мм"
+instrumental = "зажигательной пулей 10мм"
+prepositional = "зажигательной пуле 10мм"
+gender = "female"
+
+["10mm reaper pellet"]
+nominative = "дробинка «Жнец» 10мм"
+genitive = "дробинки «Жнец» 10мм"
+dative = "дробинке «Жнец» 10мм"
+accusative = "дробинку «Жнец» 10мм"
+instrumental = "дробинкой «Жнец» 10мм"
+prepositional = "дробинке «Жнец» 10мм"
+gender = "female"
+
+[".160 smart bullet"]
+nominative = "самонаводящаяся пуля .160 калибра"
+genitive = "самонаводящейся пули .160 калибра"
+dative = "самонаводящейся пуле .160 калибра"
+accusative = "самонаводящуюся пулю .160 калибра"
+instrumental = "самонаводящейся пулей .160 калибра"
+prepositional = "самонаводящейся пуле .160 калибра"
+gender = "female"
+
+# MARK: Ammo
+
 ["Ammo Box (10mm) (Lethal)"] # Unique Design Name
 nominative = "коробка патронов (10мм) (Летальное)"
 
@@ -4288,63 +5028,63 @@ prepositional = "коробке патронов (9мм)"
 gender = "female"
 
 ["Speed Loader (.38) (Lethal)"] # Unique Design Name
-nominative = "сменный барабан (.38) (летальное)"
+nominative = "спидлоадер (.38) (летальный)"
 
 ["speed loader (.38)"]
-nominative = "сменный барабан (.38)"
-genitive = "сменного барабана (.38)"
-dative = "сменному барабану (.38)"
-accusative = "сменный барабан (.38)"
-instrumental = "сменным барабаном (.38)"
-prepositional = "сменном барабане (.38)"
+nominative = "спидлоадер (.38)"
+genitive = "спидлоадера (.38)"
+dative = "спидлоадеру (.38)"
+accusative = "спидлоадер (.38)"
+instrumental = "спидлоадером (.38)"
+prepositional = "спидлоадере (.38)"
 gender = "male"
 
 ["Speed Loader (.38 TRAC) (Less Lethal)"] # Unique Design Name
-nominative = "сменный барабан (.38 ТРЭК) (менее летально)"
+nominative = "спидлоадер (.38 ТРЭК) (менее летальный)"
 
 ["speed loader (.38 TRAC)"]
-nominative = "сменный барабан (.38 ТРЭК)"
-genitive = "сменного барабана (.38 ТРЭК)"
-dative = "сменному барабану (.38 ТРЭК)"
-accusative = "сменный барабан (.38 ТРЭК)"
-instrumental = "сменным барабаном (.38 ТРЭК)"
-prepositional = "сменном барабане (.38 ТРЭК)"
+nominative = "спидлоадер (.38 ТРЭК)"
+genitive = "спидлоадера (.38 ТРЭК)"
+dative = "спидлоадеру (.38 ТРЭК)"
+accusative = "спидлоадер (.38 ТРЭК)"
+instrumental = "спидлоадером (.38 ТРЭК)"
+prepositional = "спидлоадере (.38 ТРЭК)"
 gender = "male"
 
 ["Speed Loader (.38 Hot Shot) (Very Lethal)"] # Unique Design Name
-nominative = "сменный барабан (.38 зажигательный) (очень летальное)"
+nominative = "спидлоадер (.38 зажигательный) (очень летальный)"
 
 ["speed loader (.38 Hot Shot)"]
-nominative = "сменный барабан (.38 зажигательный)"
-genitive = "сменного барабана (.38 зажигательный)"
-dative = "сменному барабану (.38 зажигательный)"
-accusative = "сменный барабан (.38 зажигательный)"
-instrumental = "сменным барабаном (.38 зажигательный)"
-prepositional = "сменном барабане (.38 зажигательный)"
+nominative = "спидлоадер (.38 зажигательный)"
+genitive = "спидлоадера (.38 зажигательный)"
+dative = "спидлоадеру (.38 зажигательный)"
+accusative = "спидлоадер (.38 зажигательный)"
+instrumental = "спидлоадером (.38 зажигательный)"
+prepositional = "спидлоадере (.38 зажигательный)"
 gender = "male"
 
 ["Speed Loader (.38 Iceblox) (Lethal/Very Lethal (Lizardpeople))"] # Unique Design Name
-nominative = "сменный барабан (.38 замораживающий) (летальное/очень летальное для ящеров)"
+nominative = "спидлоадер (.38 замораживающий) (летальный/очень летальный для ящеров)"
 
 ["speed loader (.38 Iceblox)"]
-nominative = "сменный барабан (.38 замораживающий)"
-genitive = "сменного барабана (.38 замораживающий)"
-dative = "сменному барабану (.38 замораживающий)"
-accusative = "сменный барабан (.38 замораживающий)"
-instrumental = "сменным барабаном (.38 замораживающий)"
-prepositional = "сменном барабане (.38 замораживающий)"
+nominative = "спидлоадер (.38 замораживающий)"
+genitive = "спидлоадера (.38 замораживающий)"
+dative = "спидлоадеру (.38 замораживающий)"
+accusative = "спидлоадер (.38 замораживающий)"
+instrumental = "спидлоадером (.38 замораживающий)"
+prepositional = "спидлоадере (.38 замораживающий)"
 gender = "male"
 
 ["Speed Loader (.38 Rubber) (Less Lethal)"] # Unique Design Name
-nominative = "сменный барабан (.38 резина) (менее летально)"
+nominative = "спидлоадер (.38 резиновый) (менее летальный)"
 
 ["speed loader (.38 Rubber)"]
-nominative = "сменный барабан (.38 резина)"
-genitive = "сменного барабана (.38 резина)"
-dative = "сменному барабану (.38 резина)"
-accusative = "сменный барабан (.38 резина)"
-instrumental = "сменным барабаном (.38 резина)"
-prepositional = "сменном барабане (.38 резина)"
+nominative = "спидлоадер (.38 резиновый)"
+genitive = "спидлоадера (.38 резиновый)"
+dative = "спидлоадеру (.38 резиновый)"
+accusative = "спидлоадер (.38 резиновый)"
+instrumental = "спидлоадером (.38 резиновый)"
+prepositional = "спидлоадере (.38 резиновый)"
 gender = "male"
 
 ["Rubber Shot (Less Lethal)"] # Unique Design Name
@@ -4393,6 +5133,251 @@ dative = "зажигательному патрону"
 accusative = "зажигательный патрон"
 instrumental = "зажигательным патроном"
 prepositional = "зажигательном патроне"
+gender = "male"
+
+["Flechette Shotgun Shell (Lethal)"] # Unique Design Name
+nominative = "патрон с флешеттами (летальный)"
+gender = "male"
+
+["flechette shell"]
+nominative = "патрон с флешеттами"
+genitive = "патрона с флешеттами"
+dative = "патрону с флешеттами"
+accusative = "патрон с флешеттами"
+instrumental = "патроном с флешеттами"
+prepositional = "патроне с флешеттами"
+gender = "male"
+
+["Donk Co. 'Donk Spike' Flechette Shotgun Shell (Lethal)"] # Unique Design Name
+nominative = "патрон с флешеттами «Донк Шип» от Donk Co. (летальный)"
+gender = "male"
+
+["Donk Co. 'Donk Spike' Shell"]
+nominative = "патрон «Донк Шип» от Donk Co."
+genitive = "патрона «Донк Шип» от Donk Co."
+dative = "патрону «Донк Шип» от Donk Co."
+accusative = "патрон «Донк Шип» от Donk Co."
+instrumental = "патроном «Донк Шип» от Donk Co."
+prepositional = "патроне «Донк Шип» от Donk Co."
+gender = "male"
+
+["FRAG-12 slug"]
+nominative = "патрон FRAG-12"
+genitive = "патрона FRAG-12"
+dative = "патрону FRAG-12"
+accusative = "патрон FRAG-12"
+instrumental = "патроном FRAG-12"
+prepositional = "патроне FRAG-12"
+gender = "male"
+
+["executioner slug"]
+nominative = "патрон «Палач»"
+genitive = "патрона «Палач»"
+dative = "патрону «Палач»"
+accusative = "патрон «Палач»"
+instrumental = "патроном «Палач»"
+prepositional = "патроне «Палач»"
+gender = "male"
+
+["pulverizer slug"]
+nominative = "патрон «Дробитель»"
+genitive = "патрона «Дробитель»"
+dative = "патрону «Дробитель»"
+accusative = "патрон «Дробитель»"
+instrumental = "патроном «Дробитель»"
+prepositional = "патроне «Дробитель»"
+gender = "male"
+
+["dragonsbreath shell"]
+nominative = "патрон «Дыхание дракона»"
+genitive = "патрона «Дыхание дракона»"
+dative = "патрону «Дыхание дракона»"
+accusative = "патрон «Дыхание дракона»"
+instrumental = "патроном «Дыхание дракона»"
+prepositional = "патроне «Дыхание дракона»"
+gender = "male"
+
+["meteorslug shell"]
+nominative = "патрон «Метеор»"
+genitive = "патрона «Метеор»"
+dative = "патрону «Метеор»"
+accusative = "патрон «Метеор»"
+instrumental = "патроном «Метеор»"
+prepositional = "патроне «Метеор»"
+gender = "male"
+
+["pulse slug"]
+nominative = "импульсный патрон"
+genitive = "импульсного патрона"
+dative = "импульсному патрону"
+accusative = "импульсный патрон"
+instrumental = "импульсным патроном"
+prepositional = "импульсном патроне"
+gender = "male"
+
+["buckshot shell"]
+nominative = "картечный патрон"
+genitive = "картечного патрона"
+dative = "картечному патрону"
+accusative = "картечный патрон"
+instrumental = "картечным патроном"
+prepositional = "картечном патроне"
+gender = "male"
+
+["milspec buckshot shell"]
+nominative = "военный картечный патрон"
+genitive = "военного картечного патрона"
+dative = "военному картечному патрону"
+accusative = "военный картечный патрон"
+instrumental = "военным картечным патроном"
+prepositional = "военном картечном патроне"
+gender = "male"
+
+["shotgun milspec slug"]
+nominative = "военный пулевой патрон"
+genitive = "военного пулевого патрона"
+dative = "военному пулевому патрону"
+accusative = "военный пулевой патрон"
+instrumental = "военным пулевым патроном"
+prepositional = "военном пулевом патроне"
+gender = "male"
+
+["custom incapacitating shot"]
+nominative = "самодельный иммобилизирующий патрон"
+genitive = "самодельного иммобилизирующего патрона"
+dative = "самодельному иммобилизирующему патрону"
+accusative = "самодельный иммобилизирующий патрон"
+instrumental = "самодельным иммобилизирующим патроном"
+prepositional = "самодельном иммобилизирующем патроне"
+gender = "male"
+
+["ion shell"]
+nominative = "ионный патрон"
+genitive = "ионного патрона"
+dative = "ионному патрону"
+accusative = "ионный патрон"
+instrumental = "ионным патроном"
+prepositional = "ионном патроне"
+gender = "male"
+
+["Breaching Slug (Non-Lethal/Highly Destructive)"] # Unique Design Name
+nominative = "пробивной патрон (нелетальный/высокоразрушительный)"
+
+["breaching slug"]
+nominative = "пробивной патрон"
+genitive = "пробивного патрона"
+dative = "пробивному патрону"
+accusative = "пробивной патрон"
+instrumental = "пробивным патроном"
+prepositional = "пробивном патроне"
+gender = "male"
+
+["Magazine (.38 Flare) (VERY Lethal)"] # Unique Design Name
+nominative = "магазин боевой винтовки (.38 осветительная метка) (ОЧЕНЬ летальный)"
+
+["battle rifle magazine (.38 Flare)"]
+nominative = "магазин боевой винтовки (.38 осветительная метка)"
+genitive = "магазина боевой винтовки (.38 осветительная метка)"
+dative = "магазину боевой винтовки (.38 осветительная метка)"
+accusative = "магазин боевой винтовки (.38 осветительная метка)"
+instrumental = "магазином боевой винтовки (.38 осветительная метка)"
+prepositional = "магазине боевой винтовки (.38 осветительная метка)"
+gender = "male"
+
+["Magazine (.38 Hot Shot) (Very Lethal)"] # Unique Design Name
+nominative = "магазин боевой винтовки (.38 зажигательный) (очень летальный)"
+
+["battle rifle magazine (.38 Hot Shot)"]
+nominative = "магазин боевой винтовки (.38 зажигательный)"
+genitive = "магазина боевой винтовки (.38 зажигательный)"
+dative = "магазину боевой винтовки (.38 зажигательный)"
+accusative = "магазин боевой винтовки (.38 зажигательный)"
+instrumental = "магазином боевой винтовки (.38 зажигательный)"
+prepositional = "магазине боевой винтовки (.38 зажигательный)"
+gender = "male"
+
+["Magazine (.38 Iceblox) (Lethal/Very Lethal (Lizardpeople))"] # Unique Design Name
+nominative = "магазин боевой винтовки (.38 замораживающий) (летальный/очень летальный для ящеров)"
+
+["battle rifle magazine (.38 Iceblox)"]
+nominative = "магазин боевой винтовки (.38 замораживающий)"
+genitive = "магазина боевой винтовки (.38 замораживающий)"
+dative = "магазину боевой винтовки (.38 замораживающий)"
+accusative = "магазин боевой винтовки (.38 замораживающий)"
+instrumental = "магазином боевой винтовки (.38 замораживающий)"
+prepositional = "магазине боевой винтовки (.38 замораживающий)"
+gender = "male"
+
+["Magazine (.38 Rubber) (Less Lethal)"] # Unique Design Name
+nominative = "магазин боевой винтовки (.38 резиновый) (менее летальный)"
+
+["battle rifle magazine (.38 Rubber)"]
+nominative = "магазин боевой винтовки (.38 резиновый)"
+genitive = "магазина боевой винтовки (.38 резиновый)"
+dative = "магазину боевой винтовки (.38 резиновый)"
+accusative = "магазин боевой винтовки (.38 резиновый)"
+instrumental = "магазином боевой винтовки (.38 резиновый)"
+prepositional = "магазине боевой винтовки (.38 резиновый)"
+gender = "male"
+
+["Magazine (.38 TRAC) (Less Lethal)"] # Unique Design Name
+nominative = "магазин боевой винтовки (.38 ТРЭК) (менее летальный)"
+
+["battle rifle magazine (.38 TRAC)"]
+nominative = "магазин боевой винтовки (.38 ТРЭК)"
+genitive = "магазина боевой винтовки (.38 ТРЭК)"
+dative = "магазину боевой винтовки (.38 ТРЭК)"
+accusative = "магазин боевой винтовки (.38 ТРЭК)"
+instrumental = "магазином боевой винтовки (.38 ТРЭК)"
+prepositional = "магазине боевой винтовки (.38 ТРЭК)"
+gender = "male"
+
+["Magazine (.38 True Strike) (Lethal)"] # Unique Design Name
+nominative = "магазин боевой винтовки (.38 точный выстрел) (летальный)"
+
+["battle rifle magazine (.38 True Strike)"]
+nominative = "магазин боевой винтовки (.38 точный выстрел)"
+genitive = "магазина боевой винтовки (.38 точный выстрел)"
+dative = "магазину боевой винтовки (.38 точный выстрел)"
+accusative = "магазин боевой винтовки (.38 точный выстрел)"
+instrumental = "магазином боевой винтовки (.38 точный выстрел)"
+prepositional = "магазине боевой винтовки (.38 точный выстрел)"
+gender = "male"
+
+["Magazine (.38) (Lethal)"] # Unique Design Name
+nominative = "магазин боевой винтовки (.38) (летальный)"
+
+["battle rifle magazine (.38)"]
+nominative = "магазин боевой винтовки (.38)"
+genitive = "магазина боевой винтовки (.38)"
+dative = "магазину боевой винтовки (.38)"
+accusative = "магазин боевой винтовки (.38)"
+instrumental = "магазином боевой винтовки (.38)"
+prepositional = "магазине боевой винтовки (.38)"
+gender = "male"
+
+["Speedloader (.38 Flare) (VERY Lethal)"] # Unique Design Name
+nominative = "спидлоадер (.38 осветительная метка) (ОЧЕНЬ летальный)"
+
+["speed loader (.38 Flare)"]
+nominative = "спидлоадер (.38 осветительная метка)"
+genitive = "спидлоадера (.38 осветительная метка)"
+dative = "спидлоадеру (.38 осветительная метка)"
+accusative = "спидлоадер (.38 осветительная метка)"
+instrumental = "спидлоадером (.38 осветительная метка)"
+prepositional = "спидлоадере (.38 осветительная метка)"
+gender = "male"
+
+["Speedloader (.38 True Strike) (Lethal)"] # Unique Design Name
+nominative = "спидлоадер (.38 точный выстрел) (летальный)"
+
+["speed loader (.38 True Strike)"]
+nominative = "спидлоадер (.38 точный выстрел)"
+genitive = "спидлоадера (.38 точный выстрел)"
+dative = "спидлоадеру (.38 точный выстрел)"
+accusative = "спидлоадер (.38 точный выстрел)"
+instrumental = "спидлоадером (.38 точный выстрел)"
+prepositional = "спидлоадере (.38 точный выстрел)"
 gender = "male"
 
 ["WT-550 Autorifle Magazine (4.6x30mm) (Lethal)"] # Unique Design Name
@@ -4945,12 +5930,12 @@ prepositional = "магазине для винтовки (7.62x39мм)"
 gender = "male"
 
 ["rifle magazine (7.62x39mm match)"]
-nominative = "магазин для винтовки (7.62x39мм спортивные)"
-genitive = "магазина для винтовки (7.62x39мм спортивные)"
-dative = "магазину для винтовки (7.62x39мм спортивные)"
-accusative = "магазин для винтовки (7.62x39мм спортивные)"
-instrumental = "магазином для винтовки (7.62x39мм спортивные)"
-prepositional = "магазине для винтовки (7.62x39мм спортивные)"
+nominative = "магазин для винтовки (7.62x39мм высокоточная)"
+genitive = "магазина для винтовки (7.62x39мм высокоточная)"
+dative = "магазину для винтовки (7.62x39мм высокоточная)"
+accusative = "магазин для винтовки (7.62x39мм высокоточная)"
+instrumental = "магазином для винтовки (7.62x39мм высокоточная)"
+prepositional = "магазине для винтовки (7.62x39мм высокоточная)"
 gender = "male"
 
 ["rifle magazine (7.62x39mm incendiary)"]
@@ -5204,6 +6189,24 @@ accusative = "магазин для пистолета (.456 Магнум)"
 instrumental = "магазином для пистолета (.456 Магнум)"
 prepositional = "магазине для пистолета (.456 Магнум)"
 gender = "male"
+
+["bullet casing"]
+nominative = "патрон"
+genitive = "патрона"
+dative = "патрону"
+accusative = "патрон"
+instrumental = "патроном"
+prepositional = "патроне"
+gender = "male"
+
+["spent bullet casing"]
+nominative = "стреляная гильза"
+genitive = "стреляной гильзы"
+dative = "стреляной гильзе"
+accusative = "стреляную гильзу"
+instrumental = "стреляной гильзой"
+prepositional = "стреляной гильзе"
+gender = "female"
 
 # MARK: Service
 ["fish-porter 3000"]
@@ -12372,6 +13375,15 @@ dative = "импланту дыхательной трубки"
 accusative = "имплант дыхательной трубки"
 instrumental = "имплантом дыхательной трубки"
 prepositional = "импланте дыхательной трубки"
+gender = "male"
+
+["surgical processor implant"]
+nominative = "хирургический процессорный имплант"
+genitive = "хирургического процессорного импланта"
+dative = "хирургическому процессорному импланту"
+accusative = "хирургический процессорный имплант"
+instrumental = "хирургическим процессорным имплантом"
+prepositional = "хирургическом процессорном импланте"
 gender = "male"
 
 ["surgical toolset implant"]
@@ -24933,6 +25945,33 @@ instrumental = "револьвером .357 калибра"
 prepositional = "револьвере .357 калибра"
 gender = "male"
 
+["Unica 6 auto-revolver"]
+nominative = "авто-револьвер \"Unica 6\""
+genitive = "авто-револьвера \"Unica 6\""
+dative = "авто-револьверу \"Unica 6\""
+accusative = "авто-револьвер \"Unica 6\""
+instrumental = "авто-револьвером \"Unica 6\""
+prepositional = "авто-револьвере \"Unica 6\""
+gender = "male"
+
+["Golden revolver"]
+nominative = "Золотой револьвер"
+genitive = "Золотого револьвера"
+dative = "Золотому револьверу"
+accusative = "Золотой револьвер"
+instrumental = "Золотым револьвером"
+prepositional = "Золотом револьвере"
+gender = "male"
+
+["Nagant revolver"]
+nominative = "револьвер Нагана"
+genitive = "револьвера Нагана"
+dative = "револьверу Нагана"
+accusative = "револьвер Нагана"
+instrumental = "револьвером Нагана"
+prepositional = "револьвере Нагана"
+gender = "male"
+
 ["Badass Revolver"]
 nominative = "крутой револьвер"
 genitive = "крутого револьвера"
@@ -24958,6 +25997,15 @@ dative = "спидлоадеру (.357)"
 accusative = "спидлоадер (.357)"
 instrumental = "спидлоадером (.357)"
 prepositional = "спидлоадере (.357)"
+gender = "male"
+
+["speed loader (.357 Match)"]
+nominative = "спидлоадер (.357 высокоточный)"
+genitive = "спидлоадера (.357 высокоточный)"
+dative = "спидлоадеру (.357 высокоточный)"
+accusative = "спидлоадер (.357 высокоточный)"
+instrumental = "спидлоадером (.357 высокоточный)"
+prepositional = "спидлоадере (.357 высокоточный)"
 gender = "male"
 
 ["speed loader (.357 Heartseeker)"]
@@ -24994,6 +26042,24 @@ dative = "пистолету Ансем"
 accusative = "пистолет Ансем"
 instrumental = "пистолетом Ансем"
 prepositional = "пистолете Ансем"
+gender = "male"
+
+["Ansem/SC pistol"]
+nominative = "пистолет Ансем/SC"
+genitive = "пистолета Ансем/SC"
+dative = "пистолету Ансем/SC"
+accusative = "пистолет Ансем/SC"
+instrumental = "пистолетом Ансем/SC"
+prepositional = "пистолете Ансем/SC"
+gender = "male"
+
+["Stechkin APS machine pistol"]
+nominative = "автоматический пистолет Стечкина"
+genitive = "автоматического пистолета Стечкина"
+dative = "автоматическому пистолету Стечкина"
+accusative = "автоматический пистолет Стечкина"
+instrumental = "автоматическим пистолетом Стечкина"
+prepositional = "автоматическом пистолете Стечкина"
 gender = "male"
 
 ["pistol magazine (10mm)"]
