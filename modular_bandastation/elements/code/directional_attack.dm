@@ -30,7 +30,7 @@
 	if(QDELETED(target))
 		return
 
-	var/turf/turf_to_check = get_step(user, angle_to_dir(get_angle(user, parse_caught_click_modifiers(modifiers, get_turf(user), user.client))))
+	var/turf/turf_to_check = get_step(user, angle2dir(get_angle(user, parse_caught_click_modifiers(modifiers, get_turf(user), user.client))))
 	if(!turf_to_check?.IsReachableBy(user))
 		return
 
