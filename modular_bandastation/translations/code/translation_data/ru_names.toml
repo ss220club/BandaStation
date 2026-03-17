@@ -5207,7 +5207,7 @@ nominative = "магазин ВТ-550 (4.6x30мм) (летальное)"
 nominative = "магазин ВТ-550 (бронебойные 4.6x30мм) (летальное)"
 
 ["WT-550 Autorifle Hollow-point Magazine (4.6x30mm HP) (Very-lethal)"] # Unique Design Name
-nominative = "магазин ВТ-550 (травматические 4.6x30мм) (очень летально)"
+nominative = "магазин ВТ-550 (экспансивные 4.6x30мм) (очень летально)"
 
 ["WT-550 Autorifle Incendiary Magazine (4.6x30mm IC) (Lethal/Highly Destructive)"] # Unique Design Name
 nominative = "магазин ВТ-550 (зажигательные 4.6x30мм) (летальное/очень разрушительное)"
