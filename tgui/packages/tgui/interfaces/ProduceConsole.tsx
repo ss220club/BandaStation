@@ -299,7 +299,7 @@ function CheckoutTab(props) {
                       : purchase_tooltip
                   }
                   tooltipPosition="top"
-                  onClick={() => act('Заказать')}
+                  onClick={() => act('purchase')}
                 >
                   Покупки: {total_cargo_cost}{' '}
                   <CreditIcon credit_type={credit_type} color="white" />
