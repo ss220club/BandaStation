@@ -61,6 +61,21 @@
 /obj/item/gun/ballistic/automatic/bow
 	recoil = 0
 
+/obj/item/gun/ballistic/automatic/pistol/toy
+	recoil = 0
+
+/obj/item/gun/ballistic/automatic/toy
+	recoil = 0
+
+/obj/item/gun/ballistic/shotgun/toy
+	recoil = 0
+
+/obj/item/gun/ballistic/automatic/c20r/toy
+	recoil = 0
+
+/obj/item/gun/ballistic/automatic/l6_saw/toy
+	recoil = 0
+
 /obj/item/gun/ballistic/shotgun/riot/lethal
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot/lethal
 
