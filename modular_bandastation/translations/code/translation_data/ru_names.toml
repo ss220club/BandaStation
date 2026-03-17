@@ -3334,6 +3334,25 @@ prepositional = "перчатках криминалиста"
 gender = "plural"
 
 # MARK: Weapons
+
+["carp gloves"]
+nominative = "перчатки карпа"
+genitive = "пперчаток карпа"
+dative = "перчаткам карпа"
+accusative = "перчатки карпа"
+instrumental = "перчатками карпа"
+prepositional = "перчатках карпа"
+gender = "plural"
+
+["bo staff"]
+nominative = "посох бо"
+genitive = "посоха бо"
+dative = "посоху бо"
+accusative = "посох бо"
+instrumental = "посохом бо"
+prepositional = "посохе бо"
+gender = "male"
+
 ["temperature gun"]
 nominative = "температурная винтовка"
 genitive = "температурной винтовки"
