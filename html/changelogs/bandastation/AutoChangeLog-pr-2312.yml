@@ -1,0 +1,4 @@
+author: "CallmeHouston"
+delete-after: True
+changes:
+  - balance: "Ядро для мехов теперь имеет размер bulky, в карго ящике при заказе теперь 1 ядро вместо двух"

@@ -417,6 +417,10 @@ GLOBAL_PROTECT(href_token)
 
 /// Get the rank name of the admin
 /datum/admins/proc/rank_names()
+	// BANDASTATION EDIT START - Allow loading admin datums w/o ranks
+	if(!length(ranks))
+		return "!EMPTY!"
+	// BANDASTATION EDIT END
 	return join_admin_ranks(ranks)
 
 /// Get the rank flags of the admin
