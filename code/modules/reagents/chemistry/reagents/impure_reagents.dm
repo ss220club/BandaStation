@@ -102,7 +102,7 @@
 	if((methods & INGEST) || !ishuman(human_thing))
 		return
 
-	// SS220 BANDASTATION EDIT - START
+	// BANDASTATION MOD START - Cryogelidia fix
 	// I can't make this modular because we have a SHOULD_CALL_PARENT macro in the parent proc.
 	// The problem is that this reagent applies the effect even if its volume hasn't been passed.
 	// The effect is persistent and is linked to a signal, but since volume = 0, the signal isn't registered
@@ -113,7 +113,7 @@
 	if(touch_protection >= 1)
 		return
 
-	// SS220 BANDASTATION EDIT - END
+	// BANDASTATION MOD END - Cryogelidia fix
 
 	if(HAS_TRAIT(human_thing, TRAIT_RESISTCOLD))
 		holder.del_reagent(type)
