@@ -36,6 +36,7 @@ GLOBAL_LIST_INIT(new_special_firearms, list(
 	/obj/item/gun/ballistic/revolver/dvoystvol/low_caliber,
 	/obj/item/gun/ballistic/rocketlauncher/rpg,
 	/obj/item/gun/ballistic/automatic/pmk,
+	/obj/item/gun/ballistic/automatic/volna,
 	/obj/item/gun/ballistic/automatic/dshk,
 	/obj/item/gun/ballistic/automatic/dshk/shotgun,
 	/obj/item/gun/ballistic/automatic/lanca,
