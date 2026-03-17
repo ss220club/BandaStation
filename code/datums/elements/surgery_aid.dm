@@ -114,7 +114,7 @@
 	if(movement_counter < 4)
 		return
 	// "The surgical drapes and bedsheets adorning John fall off!"
-	owner.visible_message(span_warning("[capitalize(declent_ru(surgical_aids, NOMINATIVE))] спадают с [owner]!"))
+	owner.visible_message(span_warning("Простынь спадает с [owner.declent_ru(GENITIVE)]!"))
 	qdel(src)
 
 /datum/status_effect/surgery_prepped/proc/on_attach_limb(datum/source, obj/item/bodypart/limb)
