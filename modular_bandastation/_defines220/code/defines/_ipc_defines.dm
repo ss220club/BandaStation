@@ -15,5 +15,6 @@
 
 #define IPC_PANEL_CLOSED 0
 #define IPC_PANEL_OPEN   1
+#define IPC_ELECTRONICS_PREPARED 2
 
 #define COMSIG_IPC_BATTERY_UPDATED "ipc_battery_updated"

@@ -4,21 +4,20 @@
 
 /datum/component/ipc_bodypart
 	dupe_mode = COMPONENT_DUPE_UNIQUE
-	var/datum/component/ipc_panel/panel
 
 /datum/component/ipc_bodypart/Initialize(mapload)
 	. = ..()
-	var/obj/item/bodypart/BP = parent
-	if(!istype(BP))
+	if(!istype(parent, /obj/item/bodypart))
 		return COMPONENT_INCOMPATIBLE
-	panel = BP.AddComponent(/datum/component/ipc_panel)
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/component/ipc_bodypart/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
-	examine_list += panel?.is_panel_open() \
-		? span_notice("Панель доступа открыта.") \
-		: span_notice("Панель доступа закрыта.")
+	var/datum/component/ipc_panel/panel = parent.GetComponent(/datum/component/ipc_panel)
+	if(panel?.is_panel_open())
+		examine_list += span_notice("Панель доступа открыта.")
+	else
+		examine_list += span_notice("Панель доступа закрыта.")
 
 // ============================================
 // БАЗОВЫЕ ЧАСТИ ТЕЛА IPC
@@ -43,6 +42,7 @@
 
 /obj/item/bodypart/chest/ipc/Initialize(mapload)
 	. = ..()
+	AddComponent(/datum/component/ipc_panel)
 	AddComponent(/datum/component/ipc_bodypart)
 
 /obj/item/bodypart/chest/ipc/drop_organs(mob/user, violent_removal)
@@ -95,6 +95,7 @@
 
 /obj/item/bodypart/head/ipc/Initialize(mapload)
 	. = ..()
+	AddComponent(/datum/component/ipc_panel)
 	AddComponent(/datum/component/ipc_bodypart)
 
 /obj/item/bodypart/head/ipc/drop_organs(mob/user, violent_removal)
@@ -132,6 +133,7 @@
 
 /obj/item/bodypart/arm/left/ipc/Initialize(mapload)
 	. = ..()
+	AddComponent(/datum/component/ipc_panel)
 	AddComponent(/datum/component/ipc_bodypart)
 
 // ============================================
@@ -157,6 +159,7 @@
 
 /obj/item/bodypart/arm/right/ipc/Initialize(mapload)
 	. = ..()
+	AddComponent(/datum/component/ipc_panel)
 	AddComponent(/datum/component/ipc_bodypart)
 
 // ============================================
@@ -181,6 +184,7 @@
 
 /obj/item/bodypart/leg/left/ipc/Initialize(mapload)
 	. = ..()
+	AddComponent(/datum/component/ipc_panel)
 	AddComponent(/datum/component/ipc_bodypart)
 
 // ============================================
@@ -205,6 +209,7 @@
 
 /obj/item/bodypart/leg/right/ipc/Initialize(mapload)
 	. = ..()
+	AddComponent(/datum/component/ipc_panel)
 	AddComponent(/datum/component/ipc_bodypart)
 
 // ============================================
