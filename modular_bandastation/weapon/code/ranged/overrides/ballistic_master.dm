@@ -78,13 +78,6 @@
 	w_class = initial(w_class)
 	return ..()
 
-// MARK: Visual effect after firing (muzzle flash)
-/obj/effect/temp_visual/dir_setting/firing_effect
-	light_system = OVERLAY_LIGHT
-	light_range = 2
-	light_power = 1
-	light_color = LIGHT_COLOR_FIRE
-
 /obj/item/firing_pin/alert_level
 	name = "alert level firing pin"
 	var/desired_minimum_alert = SEC_LEVEL_GREEN
