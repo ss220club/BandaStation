@@ -5033,63 +5033,63 @@ prepositional = "спидлоадере (.357 фазовый)"
 gender = "male"
 
 ["Speed Loader (.38) (Lethal)"] # Unique Design Name
-nominative = "сменный барабан (.38) (летальное)"
+nominative = "спидлоадер (.38) (летальное)"
 
 ["speed loader (.38)"]
-nominative = "сменный барабан (.38)"
-genitive = "сменного барабана (.38)"
-dative = "сменному барабану (.38)"
-accusative = "сменный барабан (.38)"
-instrumental = "сменным барабаном (.38)"
-prepositional = "сменном барабане (.38)"
+nominative = "спидлоадер (.38)"
+genitive = "спидлоадера (.38)"
+dative = "спидлоадеру (.38)"
+accusative = "спидлоадер (.38)"
+instrumental = "спидлоадером (.38)"
+prepositional = "спидлоадере (.38)"
 gender = "male"
 
 ["Speed Loader (.38 TRAC) (Less Lethal)"] # Unique Design Name
-nominative = "сменный барабан (.38 ТРЭК) (менее летально)"
+nominative = "спидлоадер (.38 ТРЭК) (менее летально)"
 
 ["speed loader (.38 TRAC)"]
-nominative = "сменный барабан (.38 ТРЭК)"
-genitive = "сменного барабана (.38 ТРЭК)"
-dative = "сменному барабану (.38 ТРЭК)"
-accusative = "сменный барабан (.38 ТРЭК)"
-instrumental = "сменным барабаном (.38 ТРЭК)"
-prepositional = "сменном барабане (.38 ТРЭК)"
+nominative = "спидлоадер (.38 ТРЭК)"
+genitive = "спидлоадера (.38 ТРЭК)"
+dative = "спидлоадеру (.38 ТРЭК)"
+accusative = "спидлоадер (.38 ТРЭК)"
+instrumental = "спидлоадером (.38 ТРЭК)"
+prepositional = "спидлоадере (.38 ТРЭК)"
 gender = "male"
 
 ["Speed Loader (.38 Hot Shot) (Very Lethal)"] # Unique Design Name
-nominative = "сменный барабан (.38 зажигательный) (очень летальное)"
+nominative = "спидлоадер (.38 зажигательный) (очень летальное)"
 
 ["speed loader (.38 Hot Shot)"]
-nominative = "сменный барабан (.38 зажигательный)"
-genitive = "сменного барабана (.38 зажигательный)"
-dative = "сменному барабану (.38 зажигательный)"
-accusative = "сменный барабан (.38 зажигательный)"
-instrumental = "сменным барабаном (.38 зажигательный)"
-prepositional = "сменном барабане (.38 зажигательный)"
+nominative = "спидлоадер (.38 зажигательный)"
+genitive = "спидлоадера (.38 зажигательный)"
+dative = "спидлоадеру (.38 зажигательный)"
+accusative = "спидлоадер (.38 зажигательный)"
+instrumental = "спидлоадером (.38 зажигательный)"
+prepositional = "спидлоадере (.38 зажигательный)"
 gender = "male"
 
 ["Speed Loader (.38 Iceblox) (Lethal/Very Lethal (Lizardpeople))"] # Unique Design Name
-nominative = "сменный барабан (.38 замораживающий) (летальное/очень летальное для ящеров)"
+nominative = "спидлоадер (.38 замораживающий) (летальное/очень летальное для ящеров)"
 
 ["speed loader (.38 Iceblox)"]
-nominative = "сменный барабан (.38 замораживающий)"
-genitive = "сменного барабана (.38 замораживающий)"
-dative = "сменному барабану (.38 замораживающий)"
-accusative = "сменный барабан (.38 замораживающий)"
-instrumental = "сменным барабаном (.38 замораживающий)"
-prepositional = "сменном барабане (.38 замораживающий)"
+nominative = "спидлоадер (.38 замораживающий)"
+genitive = "спидлоадера (.38 замораживающий)"
+dative = "спидлоадеру (.38 замораживающий)"
+accusative = "спидлоадер (.38 замораживающий)"
+instrumental = "спидлоадером (.38 замораживающий)"
+prepositional = "спидлоадере (.38 замораживающий)"
 gender = "male"
 
 ["Speed Loader (.38 Rubber) (Less Lethal)"] # Unique Design Name
-nominative = "сменный барабан (.38 резина) (менее летально)"
+nominative = "спидлоадер (.38 резина) (менее летально)"
 
 ["speed loader (.38 Rubber)"]
-nominative = "сменный барабан (.38 резина)"
-genitive = "сменного барабана (.38 резина)"
-dative = "сменному барабану (.38 резина)"
-accusative = "сменный барабан (.38 резина)"
-instrumental = "сменным барабаном (.38 резина)"
-prepositional = "сменном барабане (.38 резина)"
+nominative = "спидлоадер (.38 резина)"
+genitive = "спидлоадера (.38 резина)"
+dative = "спидлоадеру (.38 резина)"
+accusative = "спидлоадер (.38 резина)"
+instrumental = "спидлоадером (.38 резина)"
+prepositional = "спидлоадере (.38 резина)"
 gender = "male"
 
 ["Speedloader (.38 Flare) (VERY Lethal)"] # Unique Design Name
