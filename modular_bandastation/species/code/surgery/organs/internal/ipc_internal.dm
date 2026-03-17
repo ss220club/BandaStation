@@ -2,7 +2,6 @@
 // ВСПОМОГАТЕЛЬНЫЕ ПРОКЕДУРЫ
 // ============================================
 
-/// Автооживление КПБ при установке мозга или батареи.
 /proc/ipc_heart_check_revive(mob/living/carbon/human/M)
 	var/obj/item/organ/brain/positronic/brain = M.get_organ_slot(ORGAN_SLOT_BRAIN)
 	if(!brain)
@@ -76,11 +75,8 @@
 	desc = "Позитронный блок с платой из киборга. Содержит ИИ-личность."
 
 // ============================================
-// ПРОКСИ-ЯЧЕЙКА для зарядной станции боргов
+//  Борг зарядка
 // ============================================
-// Адаптер между ipc_battery и системой charge_cell.Invoke()
-// зарядной станции. Позволяет IPC заряжаться на реcharge_station
-// точно так же, как борги.
 
 /obj/item/stock_parts/power_store/ipc_battery_proxy
 	/// Батарея-владелец
@@ -143,26 +139,20 @@
 	. = ..()
 	if(!owner)
 		return
-	// Трата заряда: 0.5 Вт — полный заряд (5000 Дж) держится ~2.7 часа
-	charge = max(0, charge - 0.5 * seconds_per_tick)
+	charge = max(0, charge - 2.78 * seconds_per_tick)
 	// Алерты заряда (как у боргов)
 	var/charge_ratio = charge / maxcharge
-	switch(charge_ratio)
-		if(0.75 to INFINITY)
-			owner.clear_alert(ALERT_CHARGE)
-		if(0.5 to 0.75)
-			owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 1)
-		if(0.25 to 0.5)
-			owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 2)
-		if(0.01 to 0.25)
-			owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 3)
-		else
-			owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/emptycell)
-	// Обновляем иконку HUD
-	var/mob/living/carbon/human/H = owner
-	if(istype(H) && istype(H.dna?.species, /datum/species/ipc))
-		var/datum/species/ipc/S = H.dna.species
-		S.update_ipc_battery_hud(H)
+	if(charge_ratio >= 0.75)
+		owner.clear_alert(ALERT_CHARGE)
+	else if(charge_ratio >= 0.5)
+		owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 1)
+	else if(charge_ratio >= 0.25)
+		owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 2)
+	else if(charge_ratio > 0)
+		owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 3)
+	else
+		owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/emptycell)
+	SEND_SIGNAL(owner, COMSIG_IPC_BATTERY_UPDATED)
 
 /obj/item/organ/heart/ipc_battery/emp_act(severity)
 	. = ..()

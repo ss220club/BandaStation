@@ -1,3 +1,9 @@
+// ============================================
+// ХЕЛПЕР
+// ============================================
+/mob/living/carbon/human/proc/is_ipc()
+	return istype(dna?.species, /datum/species/ipc)
+
 /datum/species/ipc
 	name = "IPC"
 	id = SPECIES_IPC
@@ -68,6 +74,8 @@
 	RegisterSignal(H, COMSIG_PROCESS_BORGCHARGER_OCCUPANT, PROC_REF(on_borg_charge))
 	// HUD батареи
 	RegisterSignal(H, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
+	// Обновление HUD при изменении заряда батареи — сигнал от органа
+	RegisterSignal(H, COMSIG_IPC_BATTERY_UPDATED, PROC_REF(on_battery_updated))
 	if(H.hud_used)
 		add_ipc_battery_hud(H)
 
@@ -78,8 +86,11 @@
 
 /datum/species/ipc/on_species_loss(mob/living/carbon/human/H, datum/species/new_species, pref_load)
 	. = ..()
-	UnregisterSignal(H, COMSIG_PROCESS_BORGCHARGER_OCCUPANT)
-	UnregisterSignal(H, COMSIG_MOB_HUD_CREATED)
+	UnregisterSignal(H, list(
+		COMSIG_PROCESS_BORGCHARGER_OCCUPANT,
+		COMSIG_MOB_HUD_CREATED,
+		COMSIG_IPC_BATTERY_UPDATED,
+	))
 	remove_ipc_battery_hud(H)
 	if(istype(H.mob_mood, /datum/mood/ipc_neutral))
 		QDEL_NULL(H.mob_mood)
@@ -110,9 +121,10 @@
 
 /obj/item/organ/brain/positronic/emp_act(severity)
 	. = ..()
-	if(owner && istype(owner.dna?.species, /datum/species/ipc))
-		var/datum/species/ipc/S = owner.dna.species
-		S.handle_emp(owner, severity)
+	var/mob/living/carbon/human/H = owner
+	if(istype(H) && H.is_ipc())
+		var/datum/species/ipc/S = H.dna.species
+		S.handle_emp(H, severity)
 
 // ============================================
 // ВНЕШНИЙ РЕМОНТ: сваркой и кабелем
@@ -173,25 +185,26 @@
 	return TRUE
 
 /mob/living/carbon/human/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(istype(dna?.species, /datum/species/ipc))
-		var/datum/species/ipc/S = dna.species
-		var/obj/item/bodypart/target_part = get_bodypart(check_zone(user.zone_selected))
-		if(target_part)
-			var/datum/component/ipc_panel/panel = target_part.GetComponent(/datum/component/ipc_panel)
-			if(panel)
-				if(istype(tool, /obj/item/screwdriver))
-					panel.toggle_panel(user, tool)
-					return ITEM_INTERACT_SUCCESS
-				if(panel.is_panel_open())
-					var/surgery_ret = user.perform_surgery(src, tool, LAZYACCESS(modifiers, RIGHT_CLICK))
-					if(surgery_ret)
-						return surgery_ret
-		if(istype(tool, /obj/item/weldingtool))
-			if(S.try_repair_brute(src, tool, user))
+	if(!is_ipc())
+		return ..()
+	var/datum/species/ipc/S = dna.species
+	var/obj/item/bodypart/target_part = get_bodypart(check_zone(user.zone_selected))
+	if(target_part)
+		var/datum/component/ipc_panel/panel = target_part.GetComponent(/datum/component/ipc_panel)
+		if(panel)
+			if(istype(tool, /obj/item/screwdriver))
+				panel.toggle_panel(user, tool)
 				return ITEM_INTERACT_SUCCESS
-		else if(istype(tool, /obj/item/stack/cable_coil))
-			if(S.try_repair_burn(src, tool, user))
-				return ITEM_INTERACT_SUCCESS
+			if(panel.is_panel_open())
+				var/surgery_ret = user.perform_surgery(src, tool, LAZYACCESS(modifiers, RIGHT_CLICK))
+				if(surgery_ret)
+					return surgery_ret
+	if(istype(tool, /obj/item/weldingtool))
+		if(S.try_repair_brute(src, tool, user))
+			return ITEM_INTERACT_SUCCESS
+	else if(istype(tool, /obj/item/stack/cable_coil))
+		if(S.try_repair_burn(src, tool, user))
+			return ITEM_INTERACT_SUCCESS
 	return ..()
 
 // Разрешаем цифры в именах (нужно для IPC-имён типа ARC-908)
@@ -207,45 +220,49 @@
 // СОВМЕСТИМОСТЬ С АНТАГОНИСТАМИ
 // ============================================
 
-// Чейнджлинг не может взять IPC — нет ДНК
 /datum/dynamic_ruleset/roundstart/changeling/is_valid_candidate(mob/living/candidate, client/candidate_client)
 	if(!..())
 		return FALSE
 	var/species_type = candidate_client.prefs.read_preference(/datum/preference/choiced/species)
 	var/datum/species/species = GLOB.species_prototypes[species_type]
-	if(istype(species, /datum/species/ipc))
+	if(species?.inherent_biotypes & MOB_ROBOTIC)
 		return FALSE
 	return TRUE
 
-// Культ: масло не является жертвенной субстанцией
-/datum/component/cult_ritual_item/do_scribe_rune(obj/item/tool, mob/living/cultist)
+/datum/component/cult_ritual_item/can_scribe_rune(obj/item/tool, mob/living/cultist)
 	if(HAS_TRAIT(cultist, TRAIT_NOBLOOD))
 		to_chat(cultist, span_warning("Масло КПБ не является жертвенной субстанцией — руна не может быть начертана."))
 		return FALSE
 	return ..()
 
+// ============================================
+// КОМПОНЕНТ ПАНЕЛИ IPC
+// ============================================
+
 /datum/component/ipc_panel
 	dupe_mode = COMPONENT_DUPE_UNIQUE
 
-	/// 0 = закрыта, 1 = открыта
-	var/panel_state = 0
+	var/panel_state = IPC_PANEL_CLOSED
 
 /datum/component/ipc_panel/Initialize(mapload)
 	. = ..()
-	if(!istype(parent, /obj/item/bodypart))
+	var/obj/item/bodypart/BP = parent
+	if(!istype(BP))
+		return COMPONENT_INCOMPATIBLE
+	if(!(BP.bodytype & BODYTYPE_IPC))
 		return COMPONENT_INCOMPATIBLE
 
 /datum/component/ipc_panel/proc/is_panel_open()
-	return panel_state == 1
+	return panel_state == IPC_PANEL_OPEN
 
 /datum/component/ipc_panel/proc/toggle_panel(mob/living/user, obj/item/tool)
-	panel_state = !panel_state
+	panel_state = panel_state == IPC_PANEL_OPEN ? IPC_PANEL_CLOSED : IPC_PANEL_OPEN
 	if(tool)
 		tool.play_tool_sound(parent)
 	var/obj/item/bodypart/part = parent
 	user.visible_message(
-		span_notice("[user] [panel_state ? "откручивает болты и открывает" : "закрывает"] панель доступа [part]."),
-		span_notice("Вы [panel_state ? "открыли" : "закрыли"] панель доступа [part].")
+		span_notice("[user] [panel_state == IPC_PANEL_OPEN ? "откручивает болты и открывает" : "закрывает"] панель доступа [part]."),
+		span_notice("Вы [panel_state == IPC_PANEL_OPEN ? "открыли" : "закрыли"] панель доступа [part].")
 	)
 
 // ============================================
@@ -308,6 +325,12 @@
 		return
 	add_ipc_battery_hud(H)
 
+/// Вызывается по COMSIG_IPC_BATTERY_UPDATED — орган сообщает об изменении заряда.
+/// Вид обновляет HUD. Так орган ничего не знает о виде.
+/datum/species/ipc/proc/on_battery_updated(mob/living/carbon/human/H)
+	SIGNAL_HANDLER
+	update_ipc_battery_hud(H)
+
 /datum/species/ipc/proc/add_ipc_battery_hud(mob/living/carbon/human/H)
 	if(!H.hud_used)
 		return
@@ -344,17 +367,19 @@
 	var/obj/item/organ/heart/ipc_battery/bat = H.get_organ_slot(ORGAN_SLOT_HEART)
 	var/pct = bat ? round((bat.charge / bat.maxcharge) * 100) : 0
 	var/new_state
-	if(pct <= 0)
-		new_state = "no_cell"
-	else if(pct <= 10)
-		new_state = "empty_cell"
-	else if(pct <= 30)
-		new_state = "low_cell3"
-	else if(pct <= 50)
-		new_state = "low_cell2"
-	else if(pct <= 75)
-		new_state = "low_cell1"
-	else
-		new_state = "cell_full"
+	switch(pct)
+		if(0)
+			new_state = "no_cell"
+		if(1 to 10)
+			new_state = "empty_cell"
+		if(11 to 30)
+			new_state = "low_cell3"
+		if(31 to 50)
+			new_state = "low_cell2"
+		if(51 to 75)
+			new_state = "low_cell1"
+		else
+			new_state = "cell_full"
 	for(var/atom/movable/screen/ipc_battery_hud/indicator in H.hud_used.infodisplay)
 		indicator.icon_state = new_state
+

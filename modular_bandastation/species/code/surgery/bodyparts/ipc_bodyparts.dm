@@ -1,5 +1,27 @@
 // ============================================
-// БАЗОВЫЕ ЧАСТИ ТЕЛА IPC С ПРАВИЛЬНЫМИ ИКОНКАМИ
+// КОМПОНЕНТ IPC БОДИПАРТА
+// ============================================
+
+/datum/component/ipc_bodypart
+	dupe_mode = COMPONENT_DUPE_UNIQUE
+	var/datum/component/ipc_panel/panel
+
+/datum/component/ipc_bodypart/Initialize(mapload)
+	. = ..()
+	var/obj/item/bodypart/BP = parent
+	if(!istype(BP))
+		return COMPONENT_INCOMPATIBLE
+	panel = BP.AddComponent(/datum/component/ipc_panel)
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+
+/datum/component/ipc_bodypart/proc/on_examine(datum/source, mob/user, list/examine_list)
+	SIGNAL_HANDLER
+	examine_list += panel?.is_panel_open() \
+		? span_notice("Панель доступа открыта.") \
+		: span_notice("Панель доступа закрыта.")
+
+// ============================================
+// БАЗОВЫЕ ЧАСТИ ТЕЛА IPC
 // ============================================
 
 /obj/item/bodypart/chest/ipc
@@ -16,23 +38,12 @@
 	max_damage = 120
 
 	var/chassis_type = "Unbranded"
-
-	// Модификаторы урона от шасси
-	var/brute_reduction = 0  // Процент редукции brute урона (0.3 = 30% меньше урона)
-	var/burn_reduction = 0   // Процент редукции burn урона (0.3 = 30% меньше урона)
+	var/brute_reduction = 0
+	var/burn_reduction = 0
 
 /obj/item/bodypart/chest/ipc/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/ipc_panel)
-
-/obj/item/bodypart/chest/ipc/examine(mob/user)
-	. = ..()
-	var/datum/component/ipc_panel/panel = GetComponent(/datum/component/ipc_panel)
-	if(panel)
-		if(panel.panel_state == 1) // IPC_PANEL_OPEN
-			. += span_notice("Панель доступа открыта.")
-		else
-			. += span_notice("Панель доступа закрыта.")
+	AddComponent(/datum/component/ipc_bodypart)
 
 /obj/item/bodypart/chest/ipc/drop_organs(mob/user, violent_removal)
 	. = ..()
@@ -61,8 +72,6 @@
 
 	var/screen_icon = "BSOD"
 	var/antenna_type = "None"
-
-	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
 
@@ -79,8 +88,6 @@
 /obj/item/bodypart/head/ipc/get_limb_icon(dropped, mob/living/carbon/update_on)
 	if(isnull(ipc_visual_state))
 		return ..()
-	// Временно меняем body_zone чтобы get_limb_icon() использовал нужный стейт.
-	// used_state = "[limb_id]_[body_zone]", поэтому body_zone="monitor" → "ipc_monitor".
 	var/old_body_zone = body_zone
 	body_zone = ipc_visual_state
 	. = ..()
@@ -88,16 +95,7 @@
 
 /obj/item/bodypart/head/ipc/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/ipc_panel)
-
-/obj/item/bodypart/head/ipc/examine(mob/user)
-	. = ..()
-	var/datum/component/ipc_panel/panel = GetComponent(/datum/component/ipc_panel)
-	if(panel)
-		if(panel.panel_state == 1)
-			. += span_notice("Панель доступа открыта.")
-		else
-			. += span_notice("Панель доступа закрыта.")
+	AddComponent(/datum/component/ipc_bodypart)
 
 /obj/item/bodypart/head/ipc/drop_organs(mob/user, violent_removal)
 	. = ..()
@@ -129,15 +127,12 @@
 
 	var/grip_strength = 1.0
 	var/chassis_type = "Unbranded"
-
-	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
 
-/obj/item/bodypart/arm/left/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+/obj/item/bodypart/arm/left/ipc/Initialize(mapload)
 	. = ..()
-	if(!. || lazy)
-		return
+	AddComponent(/datum/component/ipc_bodypart)
 
 // ============================================
 // ПРАВАЯ РУКА
@@ -157,15 +152,12 @@
 
 	var/grip_strength = 1.0
 	var/chassis_type = "Unbranded"
-
-	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
 
-/obj/item/bodypart/arm/right/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+/obj/item/bodypart/arm/right/ipc/Initialize(mapload)
 	. = ..()
-	if(!. || lazy)
-		return
+	AddComponent(/datum/component/ipc_bodypart)
 
 // ============================================
 // ЛЕВАЯ НОГА
@@ -184,15 +176,12 @@
 	max_damage = 70
 
 	var/chassis_type = "Unbranded"
-
-	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
 
-/obj/item/bodypart/leg/left/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+/obj/item/bodypart/leg/left/ipc/Initialize(mapload)
 	. = ..()
-	if(!. || lazy)
-		return
+	AddComponent(/datum/component/ipc_bodypart)
 
 // ============================================
 // ПРАВАЯ НОГА
@@ -211,93 +200,20 @@
 	max_damage = 70
 
 	var/chassis_type = "Unbranded"
-
-	// Модификаторы урона от шасси
 	var/brute_reduction = 0
 	var/burn_reduction = 0
 
-/obj/item/bodypart/leg/right/ipc/try_attach_limb(mob/living/carbon/new_limb_owner, special, lazy)
+/obj/item/bodypart/leg/right/ipc/Initialize(mapload)
 	. = ..()
-	if(!. || lazy)
-		return
+	AddComponent(/datum/component/ipc_bodypart)
 
 // ============================================
 // УРОН И СПАРКИ
 // ============================================
 
-/obj/item/bodypart/chest/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
-	// Применяем редукцию урона от шасси
-	if(brute_reduction > 0)
-		brute = brute * (1 - brute_reduction)
-	if(burn_reduction > 0)
-		burn = burn * (1 - burn_reduction)
-
-	. = ..()
-	if(brute > 10 || burn > 10)
-		do_sparks(3, TRUE, src)
-	if(get_damage() >= max_damage * 0.8 && owner && prob(20))
-		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
-
-/obj/item/bodypart/head/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
-	// Применяем редукцию урона от шасси
-	if(brute_reduction > 0)
-		brute = brute * (1 - brute_reduction)
-	if(burn_reduction > 0)
-		burn = burn * (1 - burn_reduction)
-
-	. = ..()
-	if(brute > 10 || burn > 10)
-		do_sparks(3, TRUE, src)
-	if(get_damage() >= max_damage * 0.8 && owner && prob(20))
-		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
-
-/obj/item/bodypart/arm/left/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
-	// Применяем редукцию урона от шасси
-	if(brute_reduction > 0)
-		brute = brute * (1 - brute_reduction)
-	if(burn_reduction > 0)
-		burn = burn * (1 - burn_reduction)
-
-	. = ..()
-	if(brute > 10 || burn > 10)
-		do_sparks(3, TRUE, src)
-	if(get_damage() >= max_damage * 0.8 && owner && prob(20))
-		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
-
-/obj/item/bodypart/arm/right/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
-	// Применяем редукцию урона от шасси
-	if(brute_reduction > 0)
-		brute = brute * (1 - brute_reduction)
-	if(burn_reduction > 0)
-		burn = burn * (1 - burn_reduction)
-
-	. = ..()
-	if(brute > 10 || burn > 10)
-		do_sparks(3, TRUE, src)
-	if(get_damage() >= max_damage * 0.8 && owner && prob(20))
-		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
-
-/obj/item/bodypart/leg/left/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
-	// Применяем редукцию урона от шасси
-	if(brute_reduction > 0)
-		brute = brute * (1 - brute_reduction)
-	if(burn_reduction > 0)
-		burn = burn * (1 - burn_reduction)
-
-	. = ..()
-	if(brute > 10 || burn > 10)
-		do_sparks(3, TRUE, src)
-	if(get_damage() >= max_damage * 0.8 && owner && prob(20))
-		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
-
-/obj/item/bodypart/leg/right/ipc/receive_damage(brute, burn, blocked, updating_health, required_bodytype, forced, attack_direction, damage_source, wound_clothing, sharpness, wound_bonus, bare_wound_bonus, exposed_wound_bonus)
-	// Применяем редукцию урона от шасси
-	if(brute_reduction > 0)
-		brute = brute * (1 - brute_reduction)
-	if(burn_reduction > 0)
-		burn = burn * (1 - burn_reduction)
-
-	. = ..()
+/// Общая логика IPC урона
+/// Вызывается из каждого receive_damage вместо дублирования кода.
+/obj/item/bodypart/proc/ipc_on_receive_damage(brute, burn)
 	if(brute > 10 || burn > 10)
 		do_sparks(3, TRUE, src)
 	if(get_damage() >= max_damage * 0.8 && owner && prob(20))
@@ -311,7 +227,6 @@
 	if(!..())
 		return FALSE
 	to_chat(H, span_notice("Системная диагностика: [name] подключена и функционирует нормально."))
-	// Обновляем суффикс пола в icon_state для правильного отображения
 	var/gender_suffix = (H.gender == FEMALE) ? "f" : "m"
 	icon_state = "ipc_chest_[gender_suffix]"
 	return TRUE
