@@ -224,7 +224,7 @@
 	SSexplosions.shake_the_room(location, explosion_range, (capped_heavy * 15) + (capped_medium * 20), capped_heavy, capped_medium)
 
 	if(explosion_range < required_range)
-		test_status = "В результате взрыва мощность взрыва не была достаточной для сжатия [inserted_core.declent_ru(ACCUSATIVE)]. Предметы выброшены."
+		test_status = "В результате взрыва мощность не была достаточной для сжатия [inserted_core.declent_ru(ACCUSATIVE)]. Предметы выброшены."
 		return COMSIG_CANCEL_EXPLOSION
 
 	if(test_status)
