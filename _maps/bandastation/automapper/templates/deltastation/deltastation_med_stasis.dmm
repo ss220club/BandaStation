@@ -26,7 +26,7 @@
 /obj/machinery/vitals_reader/directional/west,
 /obj/structure/table/reinforced/rglass,
 /obj/item/stack/medical/mesh,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /turf/open/floor/iron,
 /area/station/medical/treatment_center)
 "f" = (
@@ -183,7 +183,7 @@
 /obj/machinery/vitals_reader/directional/east,
 /obj/structure/table/reinforced/rglass,
 /obj/item/stack/medical/suture,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /turf/open/floor/iron,
 /area/station/medical/treatment_center)
 "Z" = (

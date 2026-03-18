@@ -1,4 +1,4 @@
-/datum/saymode/changeling/handle_message/russian
+/datum/saymode/changeling/russian
 	key = "п"
 
 /datum/saymode/xeno/handle_message/russian

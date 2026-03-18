@@ -6,14 +6,14 @@
 	return null
 
 /mob/living/carbon/examine(mob/user)
-	if(HAS_TRAIT(src, TRAIT_UNKNOWN_APPEARANCE))
-		return list(span_warning("Вам сложно разглядеть какие либо детали..."))
+	if(HAS_TRAIT(src, TRAIT_UNKNOWN_APPEARANCE) && !isobserver(user))
+		return list(span_warning("Вам сложно разглядеть какие-либо детали..."))
 
 	var/t_He = ru_p_they(TRUE)
 	var/t_His = ru_p_them(TRUE)
 	var/t_his = ru_p_them()
 	var/t_him = ru_p_them()
-	// var/t_has = ru_p_have()
+	var/t_has = ru_p_have()
 	// var/t_is = ru_p_are()
 
 	. = list()
@@ -53,19 +53,32 @@
 	for(var/obj/item/bodypart/body_part as anything in bodyparts)
 		if(body_part.bodypart_disabled)
 			disabled += body_part
+
+		var/treatment_distance = isliving(user) && get_dist(src, user) <= CARBON_EXAMINE_EMBEDDING_MAX_DIST
 		for(var/obj/item/embedded as anything in body_part.embedded_objects)
 			if(embedded.get_embed().stealthy_embed)
 				continue
 			var/harmless = embedded.get_embed().is_harmless()
 			var/stuck_wordage = harmless ? "застревает" : "впивается"
-			var/embed_line = "[capitalize(embedded.declent_ru(ACCUSATIVE))]"
-			if (get_dist(src, user) <= CARBON_EXAMINE_EMBEDDING_MAX_DIST)
-				embed_line = "<a href='byond://?src=[REF(src)];embedded_object=[REF(embedded)];embedded_limb=[REF(body_part)]'>[embedded]</a>"
+			var/embed_line = "\a [embedded]"
+			if (treatment_distance)
+				embed_line = "<a href='byond://?src=[REF(src)];embedded_object=[REF(embedded)];embedded_limb=[REF(body_part)]'>\a [embedded]</a>"
 			var/embed_text = "[icon2html(embedded, user)] [embed_line] [stuck_wordage] в [t_his] [body_part.ru_plaintext_zone[ACCUSATIVE] || body_part.plaintext_zone]!"
 			if (harmless)
 				. += span_italics(span_notice(embed_text))
 			else
 				. += span_boldwarning(embed_text)
+
+		var/obj/item/tourniquet/current_tourniquet = LAZYACCESS(body_part.applied_items, LIMB_ITEM_TOURNIQUET)
+		if(current_tourniquet)
+			var/tourniquet_href = "\a [current_tourniquet]"
+			if(treatment_distance)
+				tourniquet_href = "<a href='byond://?src=[REF(src)];remove_tourniquet=[REF(body_part)]'>[tourniquet_href]</a>"
+			var/tourniquet_msg = "[t_He] [t_has] [icon2html(current_tourniquet, user)] [tourniquet_href] tightly secured around [t_his] [body_part.body_zone == BODY_ZONE_HEAD ? "neck" : body_part.plaintext_zone]."
+			if(body_part.body_zone == BODY_ZONE_HEAD)
+				. += span_boldwarning(tourniquet_msg)
+			else
+				. += span_notice(tourniquet_msg)
 
 		for(var/datum/wound/iter_wound as anything in body_part.wounds)
 			. += span_danger(iter_wound.get_examine_description(user))
@@ -83,7 +96,7 @@
 			damage_text = "обмякла и безжизненна"
 		else
 			damage_text = (body_part.brute_dam >= body_part.burn_dam) ? body_part.heavy_brute_msg : body_part.heavy_burn_msg
-		. += span_boldwarning("[body_part.ru_plaintext_zone[NOMINATIVE] || body_part.plaintext_zone] [capitalize(t_His)] выглядит [damage_text]!")
+		. += span_boldwarning("[capitalize(t_His)] [body_part.ru_plaintext_zone[NOMINATIVE] || body_part.plaintext_zone] выглядит [damage_text]!")
 
 	//stores missing limbs
 	var/l_limbs_missing = 0
@@ -566,7 +579,7 @@
 		if(undershirt.has_sensor == BROKEN_SENSORS)
 			. += list(span_notice("\The [undershirt]'s medical sensors are sparking."))
 
-	if(HAS_TRAIT(src, TRAIT_UNKNOWN_APPEARANCE) || HAS_TRAIT(src, TRAIT_INVISIBLE_MAN))
+	if((HAS_TRAIT(src, TRAIT_UNKNOWN_APPEARANCE) || HAS_TRAIT(src, TRAIT_INVISIBLE_MAN)) && !isobserver(user))
 		return
 
 	var/limbs_text = get_mismatched_limb_text()

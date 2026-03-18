@@ -4751,7 +4751,6 @@
 	area_type = /area/centcom/syndicate_base;
 	height = 22;
 	name = "Syndicate Mothership Dock";
-	roundstart_template = /datum/map_template/shuttle/infiltrator/basic;
 	shuttle_id = "syndicate_away";
 	width = 18;
 	dwidth = 8
@@ -5548,7 +5547,7 @@
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/stack/cable_coil,
 /obj/item/stack/cable_coil,
-/obj/item/stack/sticky_tape,
+/obj/item/stack/medical/wrap/sticky_tape,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)
 "mRd" = (
