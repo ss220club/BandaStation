@@ -277,7 +277,7 @@
 		return
 	var/obj/item/melee/touch_attack/touch_weapon = attack_weapon
 	carp_user.visible_message(
-		span_danger("[capitalize(carp_user.declent_ru(NOMINATIVE))] аккуратно избегает [touch_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(GENITIVE)] !"),
+		span_danger("[capitalize(carp_user.declent_ru(NOMINATIVE))] аккуратно избегает [touch_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(GENITIVE)]!"),
 		span_userdanger("Вы прилагаете значительные усилия чтобы избежать [touch_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(GENITIVE)]!"),
 	)
 	return COMPONENT_NO_AFTERATTACK
@@ -462,7 +462,7 @@
 			var/total_health = (H.health - H.staminaloss)
 			if(total_health <= HEALTH_THRESHOLD_CRIT && !H.stat)
 				H.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] наносит сокрушительный удар голове [H.declent_ru(GENITIVE)], вырубая [H.ru_p_them()]!"), \
-								span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] вырубает вас !"), span_hear("Вы слышите противный звук удара плоти о плоть!"), null, user)
+								span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] вырубает вас!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), null, user)
 				to_chat(user, span_danger("Вы наносите сокрушительный удар голове [H.declent_ru(GENITIVE)], вырубая [H.ru_p_them()]!"))
 				H.SetSleeping(60 SECONDS)
 				H.adjust_organ_loss(ORGAN_SLOT_BRAIN, 15, 150)
