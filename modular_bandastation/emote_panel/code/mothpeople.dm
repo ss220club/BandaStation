@@ -27,5 +27,3 @@
 /datum/species/moth/get_scream_sound(mob/living/carbon/human/moth)
 	return 'modular_bandastation/emote_panel/audio/moth/moth_scream.ogg'
 
-/datum/species/moth/get_chitter_sound(mob/living/carbon/human/moth)
-	return 'modular_bandastation/emote_panel/audio/moth/moth_chitter.ogg'
