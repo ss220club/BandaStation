@@ -47,6 +47,8 @@
 
 #define TRAIT_KHARAMUTANT "khara_mutant"
 #define TRAIT_GRANTEDKHARA_REBORN "granted_khara_reborn"
+#define TRAIT_CURED_KHARA "khara_cured"
+#define TRAIT_AREA_MORPENGINE "area_under_morhengine"
 
 #define BB_MOB_ABILITY_BONESHARD "bb_ability_boneshard"
 #define BB_MOB_ABILITY_LEAP "bb_ability_leap"

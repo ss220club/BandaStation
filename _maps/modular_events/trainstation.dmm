@@ -33,7 +33,7 @@
 /area/trainstation/outdoor/rails)
 "N" = (
 /obj/effect/landmark/trainstation/train_spawnpoint,
-/turf/open/moving/rails/l12,
+/turf/open/moving/rails/l13,
 /area/trainstation/outdoor/rails)
 "O" = (
 /obj/effect/landmark/trainstation/nearstation_spawnpoint,
@@ -1711,8 +1711,8 @@ b
 R
 b
 b
+Q
 N
-p
 a
 a
 a

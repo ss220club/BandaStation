@@ -13,7 +13,7 @@
 	form = "Биоинженерная болезнь"
 	agent = "Споры Veral khara"
 	visibility_flags = HIDDEN_SCANNER|HIDDEN_PANDEMIC
-	spread_flags = DISEASE_SPREAD_SPECIAL|DISEASE_SPREAD_AIRBORNE|DISEASE_SPREAD_CONTACT_FLUIDS|DISEASE_SPREAD_BLOOD
+	spread_flags = DISEASE_SPREAD_SPECIAL|DISEASE_SPREAD_AIRBORNE
 	stage_prob = 13
 	max_stages = 7
 	spread_text = "Споры Veral khara (контакт + миазмы на поздних стадиях)"
@@ -107,20 +107,39 @@
 			spreading_modifier = KHARA_SPREADING_MODIFIER * 2
 	affected_mob.update_health_hud()
 
+
+/datum/disease/khara/proc/get_slowing_modifier()
+	var/base = 1
+
+	if(HAS_TRAIT(affected_mob, TRAIT_VIRUS_RESISTANCE))
+		base -= 0.2
+
+	if(affected_mob.has_reagent(invert_catalyst, 1, TRUE))
+		base -= 0.4
+
+	var/area/our_area = get_area(affected_mob)
+	if(HAS_TRAIT(our_area, TRAIT_AREA_MORPENGINE))
+		base -= 0.5
+
+	return base
+
+
 /datum/disease/khara/proc/stage_evolution_process(seconds_per_tick)
-	var/base = base_stage_speed
-	var/has_invert_catalyst = affected_mob.has_reagent(invert_catalyst, 1, TRUE)
-	if(has_invert_catalyst || HAS_TRAIT(affected_mob, TRAIT_VIRUS_RESISTANCE))
-		base *= 0.5
+	var/base = get_slowing_modifier()
+	var/area/our_area = get_area(affected_mob)
+	var/protected_area = HAS_TRAIT(our_area, TRAIT_AREA_MORPENGINE)
 
 	var/healing = 0
 	for(var/inverter in inverters)
 		if(affected_mob.has_reagent(inverter, 1, TRUE))
 			healing += inverters[inverter]
 
-	if(healing > 0 && stage >= 4 && !has_invert_catalyst)
-		healing *= 0.5
-	if(stage >= 7)
+	if(healing > 0 && stage >= 4 && !protected_area)
+		healing *= 0.6
+	else if(protected_area)
+		healing *= 1.2
+
+	if(stage >= 7 && base > 0.1)
 		healing = 0
 
 	var/stage_step = base - healing
@@ -144,6 +163,9 @@
 	if(COOLDOWN_FINISHED(src, stage_process_cd))
 		stage_evolution_process(seconds_per_tick)
 		COOLDOWN_START(src, stage_process_cd, 3 SECONDS)
+
+	var/area/our_area = get_area(affected_mob)
+	var/protected_area = HAS_TRAIT(our_area, TRAIT_AREA_MORPENGINE)
 
 	switch(stage)
 		if(1)
@@ -190,7 +212,7 @@
 			if(SPT_PROB(5, seconds_per_tick) && COOLDOWN_FINISHED(src, tumor_pain_cd))
 				affected_mob.emote("scream")
 				to_chat(affected_mob, span_userdanger("Вы чувствуете как что-то в внутри [pick("грудной клетки", "правой руке", "левой руке")] болезненно пульсирует."))
-				affected_mob.adjust_brute_loss(rand(10, 20), forced = TRUE)
+				affected_mob.adjust_brute_loss(rand(5, 15), forced = TRUE)
 				COOLDOWN_START(src, tumor_pain_cd, rand(25, 45) SECONDS)
 
 		if(5)
@@ -212,8 +234,12 @@
 				damage_random_organ(rand(8, 14))
 
 			if(SPT_PROB(5, seconds_per_tick) && COOLDOWN_FINISHED(src, miasma_spread_cd))
-				spread_khara_miasma()
-				COOLDOWN_START(src, miasma_spread_cd, rand(20, 45) SECONDS)
+				if(protected_area)
+					to_chat(affected_mob, span_userdanger("Ты ощущает, как густая миазма подступает к горлу, но что-то мешает ей выйти наружу!"))
+					affected_mob.adjust_stamina_loss(5)
+				else
+					spread_khara_miasma()
+				COOLDOWN_START(src, miasma_spread_cd, rand(60, 180) SECONDS)
 
 		if(6)
 			if(SPT_PROB(4, seconds_per_tick))
@@ -227,19 +253,31 @@
 				if(affected_mob.get_active_held_item())
 					affected_mob.dropItemToGround(affected_mob.get_active_held_item(), TRUE)
 
-			if(SPT_PROB(3, seconds_per_tick))
+			if(SPT_PROB(2, seconds_per_tick))
 				affected_mob.vomit(VOMIT_CATEGORY_BLOOD|VOMIT_CATEGORY_KNOCKDOWN, lost_nutrition = FALSE)
 
 			if(SPT_PROB(5, seconds_per_tick) && COOLDOWN_FINISHED(src, crack_bones_cd))
 				affected_mob.emote("scream")
 				affected_mob.adjust_brute_loss(8, forced = TRUE)
-				COOLDOWN_START(src, crack_bones_cd, 28 SECONDS)
+				COOLDOWN_START(src, crack_bones_cd, rand(30, 60) SECONDS)
 
-			if(SPT_PROB(2.5, seconds_per_tick))
-				spread_khara_miasma()
+			if(SPT_PROB(2.5, seconds_per_tick) && COOLDOWN_FINISHED(src, miasma_spread_cd))
+				if(protected_area)
+					to_chat(affected_mob, span_userdanger("Ты ощущает, как густая миазма подступает к горлу, но что-то мешает ей выйти наружу!"))
+					affected_mob.adjust_stamina_loss(5)
+				else
+					spread_khara_miasma()
+				COOLDOWN_START(src, miasma_spread_cd, rand(60, 180) SECONDS)
 
 		if(7)
 			if(!COOLDOWN_FINISHED(src, organ_failure_cd) && stage_process < 100)
+				return
+			if(protected_area && (affected_mob.stat != DEAD))
+				if(SPT_PROB(5, seconds_per_tick))
+					to_chat(affected_mob, span_userdanger("Ты ощущаешь, что твело готово взорваться, но что-то не дает этому случиться!"))
+					affected_mob.emote("scream")
+					affected_mob.adjust_brute_loss(5, forced = TRUE)
+					new /obj/effect/temp_visual/morph_engine_block(get_turf(affected_mob))
 				return
 			if(make_reborn_roll())
 				return
@@ -294,7 +332,7 @@
 		roll_chance += 5
 		roll_attempts += 1
 	if(HAS_TRAIT(affected_mob, TRAIT_PACIFISM))
-		roll_chance += 3
+		roll_chance += 15
 	if(HAS_TRAIT(affected_mob, TRAIT_GRANTEDKHARA_REBORN))
 		roll_chance += 100
 
@@ -302,7 +340,7 @@
 	if(languages)
 		var/understood = languages.understood_languages ? length(languages.understood_languages) : 0
 		if(understood > 3)
-			roll_chance += min(10, understood)
+			roll_chance += min(20, understood)
 
 	for(var/i = 1 to roll_attempts)
 		if(prob(roll_chance))

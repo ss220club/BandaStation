@@ -470,3 +470,16 @@
 		if(!is_khara_creature(L))
 			return FALSE
 	return ..()
+
+
+/obj/item/melee/baseball_bat/metal
+	name = "metal baseball bat"
+	desc = "This bat is made of highly armored material."
+	icon_state = "baseball_bat_metal"
+	inhand_icon_state = "baseball_bat_metal"
+	custom_materials = list(/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 3.5)
+	resistance_flags = NONE
+	force = 25
+	throwforce = 25
+	mob_thrower = FALSE
+	block_sound = 'sound/items/weapons/effects/batreflect.ogg'

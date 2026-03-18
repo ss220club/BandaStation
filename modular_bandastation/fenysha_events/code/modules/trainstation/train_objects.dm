@@ -577,3 +577,4 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/button/auto_detect, 24)
 /obj/structure/prop/big/military_nuke/Initialize(mapload)
 	. = ..()
 	SSpoints_of_interest.make_point_of_interest(src)
+

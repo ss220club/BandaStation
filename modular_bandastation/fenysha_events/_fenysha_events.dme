@@ -69,6 +69,7 @@
 #include "code\modules\toys\aesthetic_toys.dm"
 #include "code\modules\trainstation\areas.dm"
 #include "code\modules\trainstation\landmarks.dm"
+#include "code\modules\trainstation\morphological_engine.dm"
 #include "code\modules\trainstation\movement_turfs.dm"
 #include "code\modules\trainstation\train_engine.dm"
 #include "code\modules\trainstation\train_objects.dm"

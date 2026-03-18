@@ -154,6 +154,11 @@
 		chance_on_infection = 10, \
 		only_with_wounds = TRUE, \
 	)
+	AddComponent(\
+		/datum/component/morph_engine_tracker, \
+		engine = GLOB.main_morph_engine, \
+	)
+
 	hivemind_link = AddComponent(\
 		/datum/component/khara_hivemind, \
 		cast = src.cast, \
