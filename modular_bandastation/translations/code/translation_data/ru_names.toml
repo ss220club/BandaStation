@@ -2331,15 +2331,6 @@ instrumental = "баллистическим щитом"
 prepositional = "баллистическом щите"
 gender = "male"
 
-["DRAGnet"]
-nominative = "ДРАГнет"
-genitive = "ДРАГнета"
-dative = "ДРАГнету"
-accusative = "ДРАГнет"
-instrumental = "ДРАГнетом"
-prepositional = "ДРАГнете"
-gender = "male"
-
 ["DRAGnet beacon"]
 nominative = "маячок ДРАГнета"
 genitive = "маячка ДРАГнета"
@@ -2756,12 +2747,12 @@ prepositional = "корпоративной кепке службы безопа
 gender = "female"
 
 ["marine's holster"]
-nominative = "кобура морского пехотинца"
-genitive = "кобуры морского пехотинца"
-dative = "кобуре морского пехотинца"
-accusative = "кобуру морского пехотинца"
-instrumental = "кобурой морского пехотинца"
-prepositional = "кобуре морского пехотинца"
+nominative = "кобура морпеха"
+genitive = "кобуры морпеха"
+dative = "кобуре морпеха"
+accusative = "кобуру морпеха"
+instrumental = "кобурой морпеха"
+prepositional = "кобуре морпеха"
 gender = "female"
 
 ["the veteran security advisor headset"]
@@ -3296,15 +3287,6 @@ accusative = "кусок мела"
 instrumental = "кусочком мела"
 prepositional = "кусоке мела"
 gender = "male"
-
-["police baton"]
-nominative = "полицейская дубинка"
-genitive = "полицейской дубинки"
-dative = "полицейской дубинке"
-accusative = "полицейскую дубинку"
-instrumental = "полицейской дубинкой"
-prepositional = "полицейской дубинке"
-gender = "female"
 
 ["loose tie"]
 nominative = "свободный галстук"
@@ -4247,12 +4229,12 @@ nominative = "НТ-АРГ \"Пограничник\""
 gender = "male"
 
 ["NT BR-38 battle rifle"]
-nominative = "боевая винтовка \"NT BR-38\""
-genitive = "боевой винтовки \"NT BR-38\""
-dative = "боевой винтовке \"NT BR-38\""
-accusative = "боевую винтовку \"NT BR-38\""
-instrumental = "боевой винтовкой \"NT BR-38\""
-prepositional = "боевой винтовке \"NT BR-38\""
+nominative = "боевая винтовка НТ \"BR-38\""
+genitive = "боевой винтовки НТ \"BR-38\""
+dative = "боевой винтовке НТ \"BR-38\""
+accusative = "боевую винтовку НТ \"BR-38\""
+instrumental = "боевой винтовкой НТ \"BR-38\""
+prepositional = "боевой винтовке НТ \"BR-38\""
 gender = "female"
 
 ["M-90gl Carbine"]
@@ -4783,6 +4765,33 @@ accusative = "перчатки Полярной звезды"
 instrumental = "перчатками Полярной звезды"
 prepositional = "перчатках Полярной звезды"
 gender = "plural"
+
+["sledgehammer"]
+nominative = "кувалда"
+genitive = "кувалды"
+dative = "кувалде"
+accusative = "кувалду"
+instrumental = "кувалдой"
+prepositional = "кувалде"
+gender = "female"
+
+["D-4 tactical breaching hammer"]
+nominative = "тактическая штурмовая кувалда D-4"
+genitive = "тактической штурмовой кувалды D-4"
+dative = "тактической штурмовой кувалде D-4"
+accusative = "тактическую штурмовую кувалду D-4"
+instrumental = "тактической штурмовой кувалдой D-4"
+prepositional = "тактической штурмовой кувалде D-4"
+gender = "female"
+
+["D-6 tactical breaching hammer"]
+nominative = "тактическая штурмовая кувалда D-6"
+genitive = "тактической штурмовой кувалды D-6"
+dative = "тактической штурмовой кувалде D-6"
+accusative = "тактическую штурмовую кувалду D-6"
+instrumental = "тактической штурмовой кувалдой D-6"
+prepositional = "тактической штурмовой кувалде D-6"
+gender = "female"
 
 # MARK: Ammo
 
@@ -6748,12 +6757,12 @@ prepositional = "антиэкзистенциальном луче"
 gender = "male"
 
 [".38 bullet"]
-nominative = "пуля .38 калибра"
-genitive = "пули .38 калибра"
-dative = "пуле .38 калибра"
-accusative = "пулю .38 калибра"
-instrumental = "пулей .38 калибра"
-prepositional = "пуле .38 калибра"
+nominative = "пуля .38-го калибра"
+genitive = "пули .38-го калибра"
+dative = "пуле .38-го калибра"
+accusative = "пулю .38-го калибра"
+instrumental = "пулей .38-го калибра"
+prepositional = "пуле .38-го калибра"
 gender = "female"
 
 ["7.62x38mmR bullet"]
@@ -6775,102 +6784,102 @@ prepositional = "пуле .50AE"
 gender = "female"
 
 [".38 Match bullet"]
-nominative = "высокоточная пуля .38 калибра"
-genitive = "высокоточной пули .38 калибра"
-dative = "высокоточной пуле .38 калибра"
-accusative = "высокоточную пулю .38 калибра"
-instrumental = "высокоточной пулей .38 калибра"
-prepositional = "высокоточной пуле .38 калибра"
+nominative = "высокоточная пуля .38-го калибра"
+genitive = "высокоточной пули .38-го калибра"
+dative = "высокоточной пуле .38-го калибра"
+accusative = "высокоточную пулю .38-го калибра"
+instrumental = "высокоточной пулей .38-го калибра"
+prepositional = "высокоточной пуле .38-го калибра"
 gender = "female"
 
 [".38 Rubber bullet"]
-nominative = "резиновая пуля .38 калибра"
-genitive = "резиновой пули .38 калибра"
-dative = "резиновой пуле .38 калибра"
-accusative = "резиновую пулю .38 калибра"
-instrumental = "резиновой пулей .38 калибра"
-prepositional = "резиновой пуле .38 калибра"
+nominative = "резиновая пуля .38-го калибра"
+genitive = "резиновой пули .38-го калибра"
+dative = "резиновой пуле .38-го калибра"
+accusative = "резиновую пулю .38-го калибра"
+instrumental = "резиновой пулей .38-го калибра"
+prepositional = "резиновой пуле .38-го калибра"
 gender = "female"
 
 [".38 True Strike bullet"]
-nominative = "пуля .38 калибра «Точный выстрел»"
-genitive = "пули .38 калибра «Точный выстрел»"
-dative = "пуле .38 калибра «Точный выстрел»"
-accusative = "пулю .38 калибра «Точный выстрел»"
-instrumental = "пулей .38 калибра «Точный выстрел»"
-prepositional = "пуле .38 калибра «Точный выстрел»"
+nominative = "пуля .38-го калибра «Точный выстрел»"
+genitive = "пули .38-го калибра «Точный выстрел»"
+dative = "пуле .38-го калибра «Точный выстрел»"
+accusative = "пулю .38-го калибра «Точный выстрел»"
+instrumental = "пулей .38-го калибра «Точный выстрел»"
+prepositional = "пуле .38-го калибра «Точный выстрел»"
 gender = "female"
 
 [".38 DumDum bullet"]
-nominative = "пуля .38 калибра дум-дум"
-genitive = "пули .38 калибра дум-дум"
-dative = "пуле .38 калибра дум-дум"
-accusative = "пулю .38 калибра дум-дум"
-instrumental = "пулей .38 калибра дум-дум"
-prepositional = "пуле .38 калибра дум-дум"
+nominative = "пуля .38-го калибра дум-дум"
+genitive = "пули .38-го калибра дум-дум"
+dative = "пуле .38-го калибра дум-дум"
+accusative = "пулю .38-го калибра дум-дум"
+instrumental = "пулей .38-го калибра дум-дум"
+prepositional = "пуле .38-го калибра дум-дум"
 gender = "female"
 
 [".38 TRAC bullet"]
-nominative = "пуля .38 калибра ТРЭК"
-genitive = "пули .38 калибра ТРЭК"
-dative = "пуле .38 калибра ТРЭК"
-accusative = "пулю .38 калибра ТРЭК"
-instrumental = "пулей .38 калибра ТРЭК"
-prepositional = "пуле .38 калибра ТРЭК"
+nominative = "пуля .38-го калибра ТРЭК"
+genitive = "пули .38-го калибра ТРЭК"
+dative = "пуле .38-го калибра ТРЭК"
+accusative = "пулю .38-го калибра ТРЭК"
+instrumental = "пулей .38-го калибра ТРЭК"
+prepositional = "пуле .38-го калибра ТРЭК"
 gender = "female"
 
 [".38 Hot Shot bullet"]
-nominative = "зажигательная пуля .38 калибра"
-genitive = "зажигательной пули .38 калибра"
-dative = "зажигательной пуле .38 калибра"
-accusative = "зажигательную пулю .38 калибра"
-instrumental = "зажигательной пулей .38 калибра"
-prepositional = "зажигательной пуле .38 калибра"
+nominative = "зажигательная пуля .38-го калибра"
+genitive = "зажигательной пули .38-го калибра"
+dative = "зажигательной пуле .38-го калибра"
+accusative = "зажигательную пулю .38-го калибра"
+instrumental = "зажигательной пулей .38-го калибра"
+prepositional = "зажигательной пуле .38-го калибра"
 gender = "female"
 
 [".38 Iceblox bullet"]
-nominative = "замораживающая пуля .38 калибра"
-genitive = "замораживающей пули .38 калибра"
-dative = "замораживающей пуле .38 калибра"
-accusative = "замораживающую пулю .38 калибра"
-instrumental = "замораживающей пулей .38 калибра"
-prepositional = "замораживающей пуле .38 калибра"
+nominative = "замораживающая пуля .38-го калибра"
+genitive = "замораживающей пули .38-го калибра"
+dative = "замораживающей пуле .38-го калибра"
+accusative = "замораживающую пулю .38-го калибра"
+instrumental = "замораживающей пулей .38-го калибра"
+prepositional = "замораживающей пуле .38-го калибра"
 gender = "female"
 
 [".357 bullet"]
-nominative = "пуля .357 калибра"
-genitive = "пули .357 калибра"
-dative = "пуле .357 калибра"
-accusative = "пулю .357 калибра"
-instrumental = "пулей .357 калибра"
-prepositional = "пуле .357 калибра"
+nominative = "пуля .357-го калибра"
+genitive = "пули .357-го калибра"
+dative = "пуле .357-го калибра"
+accusative = "пулю .357-го калибра"
+instrumental = "пулей .357-го калибра"
+prepositional = "пуле .357-го калибра"
 gender = "female"
 
 [".357 phasic bullet"]
-nominative = "фазовая пуля .357 калибра"
-genitive = "фазовой пули .357 калибра"
-dative = "фазовой пуле .357 калибра"
-accusative = "фазовую пулю .357 калибра"
-instrumental = "фазовой пулей .357 калибра"
-prepositional = "фазовой пуле .357 калибра"
+nominative = "фазовая пуля .357-го калибра"
+genitive = "фазовой пули .357-го калибра"
+dative = "фазовой пуле .357-го калибра"
+accusative = "фазовую пулю .357-го калибра"
+instrumental = "фазовой пулей .357-го калибра"
+prepositional = "фазовой пуле .357-го калибра"
 gender = "female"
 
 [".357 heartseeker bullet"]
-nominative = "пуля .357 калибра «Сердцестрел»"
-genitive = "пули .357 калибра «Сердцестрел»"
-dative = "пуле .357 калибра «Сердцестрел»"
-accusative = "пулю .357 калибра «Сердцестрел»"
-instrumental = "пулей .357 калибра «Сердцестрел»"
-prepositional = "пуле .357 калибра «Сердцестрел»"
+nominative = "пуля .357-го калибра «Сердцестрел»"
+genitive = "пули .357-го калибра «Сердцестрел»"
+dative = "пуле .357-го калибра «Сердцестрел»"
+accusative = "пулю .357-го калибра «Сердцестрел»"
+instrumental = "пулей .357-го калибра «Сердцестрел»"
+prepositional = "пуле .357-го калибра «Сердцестрел»"
 gender = "female"
 
 [".357 match bullet"]
-nominative = "высокоточная пуля .357 калибра"
-genitive = "высокоточной пули .357 калибра"
-dative = "высокоточной пуле .357 калибра"
-accusative = "высокоточную пулю .357 калибра"
-instrumental = "высокоточной пулей .357 калибра"
-prepositional = "высокоточной пуле .357 калибра"
+nominative = "высокоточная пуля .357-го калибра"
+genitive = "высокоточной пули .357-го калибра"
+dative = "высокоточной пуле .357-го калибра"
+accusative = "высокоточную пулю .357-го калибра"
+instrumental = "высокоточной пулей .357-го калибра"
+prepositional = "высокоточной пуле .357-го калибра"
 gender = "female"
 
 ["pea bullet"]
@@ -7000,12 +7009,12 @@ prepositional = "дробинке «Жнец» 10мм"
 gender = "female"
 
 [".160 smart bullet"]
-nominative = "самонаводящаяся пуля .160 калибра"
-genitive = "самонаводящейся пули .160 калибра"
-dative = "самонаводящейся пуле .160 калибра"
-accusative = "самонаводящуюся пулю .160 калибра"
-instrumental = "самонаводящейся пулей .160 калибра"
-prepositional = "самонаводящейся пуле .160 калибра"
+nominative = "самонаводящаяся пуля калибра .160"
+genitive = "самонаводящейся пули калибра .160"
+dative = "самонаводящейся пуле калибра .160"
+accusative = "самонаводящуюся пулю калибра .160"
+instrumental = "самонаводящейся пулей калибра .160"
+prepositional = "самонаводящейся пуле калибра .160"
 gender = "female"
 
 ["bullet casing"]
@@ -32179,33 +32188,6 @@ accusative = "невидимый спаскомплект"
 instrumental = "невидимым спаскомплектом"
 prepositional = "невидимом спаскомплекте"
 
-["sledgehammer"]
-nominative = "кувалда"
-genitive = "кувалды"
-dative = "кувалде"
-accusative = "кувалду"
-instrumental = "кувалдой"
-prepositional = "кувалде"
-gender = "female"
-
-["D-4 tactical breaching hammer"]
-nominative = "тактическая штурмовая кувалда D-4"
-genitive = "тактической штурмовой кувалды D-4"
-dative = "тактической штурмовой кувалде D-4"
-accusative = "тактическую штурмовую кувалду D-4"
-instrumental = "тактической штурмовой кувалдой D-4"
-prepositional = "тактической штурмовой кувалде D-4"
-gender = "female"
-
-["D-6 tactical breaching hammer"]
-nominative = "тактическая штурмовая кувалда D-6"
-genitive = "тактической штурмовой кувалды D-6"
-dative = "тактической штурмовой кувалде D-6"
-accusative = "тактическую штурмовую кувалду D-6"
-instrumental = "тактической штурмовой кувалдой D-6"
-prepositional = "тактической штурмовой кувалде D-6"
-gender = "female"
-
 ## Station Goals
 
 ["DNA Vault"]
@@ -32649,6 +32631,7 @@ dative = "резиновой печати ОТКАЗАНО"
 accusative = "резиновую печать ОТКАЗАНО"
 instrumental = "резиновой печатью ОТКАЗАНО"
 prepositional = "резиновой печати ОТКАЗАНО"
+
 [" centcom combat implant"]
 nominative = "боевой имплант центрального командования"
 genitive = "боевого импланта центрального командования"
