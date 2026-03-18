@@ -80,7 +80,7 @@
 	to_chat(user, span_danger("Вы начинаете крепко сжимать [src.declent_ru(NOMINATIVE)]..."))
 	if(!do_after(user, 1.25 SECONDS, src))
 		return
-	to_chat(user, span_danger("[src.declent_ru(NOMINATIVE)] взрывается, заливая вашу руку кровью. Вы чувствуете, как кровь впитывается в вашу кожу. Вы сразу же начинаете чувствовать себя лучше, но вскоре ваши вены начинают зудеть и это ощущение сменяется ощущением пустоты."))
+	to_chat(user, span_danger("[capitalize(src.declent_ru(NOMINATIVE))] взрывается, заливая вашу руку кровью. Вы чувствуете, как кровь впитывается в вашу кожу. Вы сразу же начинаете чувствовать себя лучше, но вскоре ваши вены начинают зудеть и это ощущение сменяется ощущением пустоты."))
 	new /obj/effect/gibspawner/generic(get_turf(src))
 	var/heal_amt = user.adjust_brute_loss(-50)
 	user.adjust_fire_loss( -(50 - abs(heal_amt)) ) // no double dipping
