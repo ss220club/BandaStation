@@ -59,11 +59,11 @@
 
 	for(var/atom/movable/checked_atom as anything in next_turf)
 		if(isliving(checked_atom))
-			sm_comp.dust_mob(src, checked_atom, span_danger(capitalize("[src.declent_ru(NOMINATIVE)] бросается на [checked_atom.declent_ru(ACCUSATIVE)], касаясь [checked_atom.ru_p_them()]... \
-					Тело начинает сиять ярким светом, прежде чем начать кристаллизоваться изнутри наружу и присоединиться к [src.declent_ru(DATIVE)]!")),
-				span_userdanger(capitalize("[src.declent_ru(NOMINATIVE)] бросается на вас и бьёт вас в грудь. Ваше зрение наполняется ослепительным светом, и вы думаете про себя \"Чёрт возьми.\"")))
+			sm_comp.dust_mob(src, checked_atom, span_danger("[capitalize(src.declent_ru(NOMINATIVE))] бросается на [checked_atom.declent_ru(ACCUSATIVE)], касаясь [checked_atom.ru_p_them()]... \
+					Тело начинает сиять ярким светом, прежде чем начать кристаллизоваться изнутри наружу и присоединиться к [src.declent_ru(DATIVE)]!"),
+				span_userdanger("Кристаллическая масса бросается на вас и бьёт вас в грудь. Ваше зрение наполняется ослепительным светом, и вы думаете про себя \"Чёрт возьми.\""))
 		else if(istype(checked_atom, /obj/cascade_portal))
-			checked_atom.visible_message(span_userdanger(capitalize("[checked_atom.declent_ru(NOMINATIVE)] визжит и закрывается, когда его поражает [src.declent_ru(NOMINATIVE)]! Слишком поздно!")))
+			checked_atom.visible_message(span_userdanger("[capitalize(checked_atom.declent_ru(NOMINATIVE))] визжит и закрывается, когда его поражает [src.declent_ru(NOMINATIVE)]! Слишком поздно!"))
 			playsound(get_turf(checked_atom), 'sound/effects/magic/charge.ogg', 50, TRUE)
 			playsound(get_turf(checked_atom), 'sound/effects/supermatter.ogg', 50, TRUE)
 			qdel(checked_atom)
@@ -77,7 +77,7 @@
 	SIGNAL_HANDLER
 
 	visible_message(
-		span_warning(capitalize("[hitting_projectile.declent_ru(NOMINATIVE)] влетает в [src.declent_ru(ACCUSATIVE)] с громким треском, прежде чем быстро вспыхнуть и превратиться в пепел.")),
+		span_warning(capitalize("[capitalize(hitting_projectile.declent_ru(NOMINATIVE))] влетает в [src.declent_ru(ACCUSATIVE)] с громким треском, прежде чем быстро вспыхнуть и превратиться в пепел.")),
 		null,
 		span_hear("Вы слышите громкий треск, когда вас обдаёт волной жара."),
 	)
@@ -151,10 +151,10 @@
  */
 /obj/cascade_portal/proc/consume(atom/movable/consumed_object)
 	if(isliving(consumed_object))
-		consumed_object.visible_message(span_danger(capitalize("[consumed_object.declent_ru(NOMINATIVE)] входит в [src.declent_ru(ACCUSATIVE)]... \
-			Ослепительный свет окутывает [consumed_object.ru_p_them()] тело, прежде чем оно полностью исчезает!")),
-			span_userdanger(capitalize("Вы входите в [src.declent_ru(ACCUSATIVE)], и ваше тело омывается мощным синим светом. \
-				Вы размышляете об этом решении, прежде чем приземлиться лицом вниз на холодный, твёрдый пол.")),
+		consumed_object.visible_message(span_danger("[capitalize(consumed_object.declent_ru(NOMINATIVE))] входит в [src.declent_ru(ACCUSATIVE)]... \
+			Ослепительный свет окутывает [consumed_object.ru_p_them()] тело, прежде чем оно полностью исчезает!"),
+			span_userdanger("Вы входите в [src.declent_ru(ACCUSATIVE)], и ваше тело омывается мощным синим светом. \
+				Вы размышляете об этом решении, прежде чем приземлиться лицом вниз на холодный, твёрдый пол."),
 			span_hear("Вы слышите громкий треск, когда искажение проходит сквозь вас."))
 
 		var/list/arrival_turfs = get_area_turfs(/area/centcom/central_command_areas/evacuation)
@@ -174,7 +174,7 @@
 		new /obj/effect/particle_effect/sparks(consumed_object)
 		playsound(consumed_object, SFX_SPARKS, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	else if(isitem(consumed_object))
-		consumed_object.visible_message(span_danger(capitalize("[consumed_object.declent_ru(NOMINATIVE)] ударяется о [src.declent_ru(ACCUSATIVE)] и исчезает из виду.")), null,
+		consumed_object.visible_message(span_danger("[capitalize(consumed_object.declent_ru(NOMINATIVE))] ударяется о [src.declent_ru(ACCUSATIVE)] и исчезает из виду."), null,
 			span_hear("Вы слышите громкий треск, когда небольшое искажение проходит сквозь вас."))
 
 		qdel(consumed_object)

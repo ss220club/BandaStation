@@ -281,7 +281,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	if(isclosedturf(local_turf))
 		var/turf/did_it_melt = local_turf.Melt()
 		if(!isclosedturf(did_it_melt)) //In case some joker finds way to place these on indestructible walls
-			visible_message(span_warning("[src.declent_ru(NOMINATIVE)] плавится сквозь [local_turf.declent_ru(ACCUSATIVE)]!"))
+			visible_message(span_warning("[capitalize(src.declent_ru(NOMINATIVE))] плавится сквозь [local_turf.declent_ru(ACCUSATIVE)]!"))
 		return
 
 	// PART 2: GAS PROCESSING
@@ -567,7 +567,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	final_countdown = TRUE
 
 	notify_ghosts(
-		"[src.declent_ru(NOMINATIVE)] начал процесс расслоения!",
+		"[capitalize(src.declent_ru(NOMINATIVE))] начал процесс расслоения!",
 		source = src,
 		header = "Плавление начинается!",
 	)
