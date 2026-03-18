@@ -127,6 +127,9 @@
 /area/centcom/central_command_areas/hospital
 	name = "ЦК - Госпиталь"
 
+/area/centcom/central_command_areas/rnd
+	name = "ЦК - Исследовательский Отдел"
+
 /area/centcom/central_command_areas/engine
 	name = "ЦК - Машинный Отсек"
 
