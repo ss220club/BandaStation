@@ -31,9 +31,9 @@
 	resistance_flags = INDESTRUCTIBLE | FIRE_PROOF | FREEZE_PROOF | UNACIDABLE | ACID_PROOF
 
 /datum/armor/armor_centcom_cloak
-	melee = 80
-	bullet = 80
-	laser = 80
+	melee = 50
+	bullet = 50
+	laser = 50
 	energy = 60
 	wound = 30
 

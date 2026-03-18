@@ -1,6 +1,6 @@
 /// Element for enhanced movement with strongleg prosthesis
 /datum/element/strongleg_movement
-	var/speed_bonus = -0.15
+	var/speed_bonus = -0.1
 
 /datum/element/strongleg_movement/Attach(datum/target)
 	. = ..()
@@ -19,7 +19,7 @@
 /datum/movespeed_modifier/strongleg_prosthesis
 	movetypes = GROUND
 	variable = TRUE
-	multiplicative_slowdown = -0.15
+	multiplicative_slowdown = -0.1
 
 /// Component for Strongleg prosthesis combat abilities
 /datum/component/strongleg_combat

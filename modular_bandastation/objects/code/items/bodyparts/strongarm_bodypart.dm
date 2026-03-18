@@ -81,6 +81,9 @@
 	if(!istype(active_arm, /obj/item/bodypart/arm/left/strongarm) && !istype(active_arm, /obj/item/bodypart/arm/right/strongarm))
 		return NONE
 
+	if(living_target.check_block(human_source, 0, "[human_source.declent_ru(ACCUSATIVE)]", UNARMED_ATTACK))
+		return COMPONENT_CANCEL_ATTACK_CHAIN
+
 	var/throw_dir = get_dir(source, living_target)
 	var/turf/throw_target = get_edge_target_turf(living_target, throw_dir)
 

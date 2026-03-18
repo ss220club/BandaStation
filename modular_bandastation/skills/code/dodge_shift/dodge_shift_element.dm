@@ -278,7 +278,7 @@
 	shift_distance = 24
 	return_delay = 0.3 SECONDS
 	cooldown_time = 0
-	stamina_cost = 4
+	stamina_cost = 5
 	dodge_attack_types = MELEE_ATTACK | UNARMED_ATTACK | PROJECTILE_ATTACK | THROWN_PROJECTILE_ATTACK | LEAP_ATTACK | OVERWHELMING_ATTACK
 	create_afterimage = TRUE
 	afterimage_alpha = 100
