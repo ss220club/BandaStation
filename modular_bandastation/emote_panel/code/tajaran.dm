@@ -77,6 +77,21 @@
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_2.ogg',
 	)
 
+/datum/species/tajaran/get_giggle_sound(mob/living/carbon/human/tajaran)
+	if(!ishuman(tajaran))
+		return
+	if(tajaran.physique == FEMALE)
+		return pick(
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_1.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_2.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_3.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_4.ogg',
+		)
+	return pick(
+		'modular_bandastation/emote_panel/audio/human/male/giggle_male_1.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/giggle_male_2.ogg',
+	)
+
 // MARK: Emotes
 /datum/emote/living/carbon/human/tajaran
 	species_type_whitelist_typecache = list(/datum/species/tajaran)

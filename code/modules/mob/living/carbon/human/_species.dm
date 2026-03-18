@@ -1444,7 +1444,11 @@ GLOBAL_LIST_EMPTY(features_by_species)
 /// Returns the species' cough sound.
 /datum/species/proc/get_cough_sound(mob/living/carbon/human/human)
 	return
-
+// BANDASTATION ADDITION: START
+/// Returns the species' giggle sound.
+/datum/species/proc/get_giggle_sound(mob/living/carbon/human/human)
+	return
+// BANDASTATION ADDITION: END
 /// Returns the species' laugh sound
 /datum/species/proc/get_laugh_sound(mob/living/carbon/human/human)
 	return

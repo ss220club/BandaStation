@@ -49,6 +49,19 @@
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_2.ogg',
 	)
 
+/datum/species/pod/get_giggle_sound(mob/living/carbon/human/pod)
+	if(pod.physique == FEMALE)
+		return pick(
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_1.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_2.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_3.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_4.ogg',
+		)
+	return pick(
+		'modular_bandastation/emote_panel/audio/human/male/giggle_male_1.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/giggle_male_2.ogg',
+	)
+
 /datum/species/pod/get_sneeze_sound(mob/living/carbon/human/pod)
 	if(pod.physique == FEMALE)
 		return 'sound/mobs/humanoids/human/sneeze/female_sneeze1.ogg'
