@@ -97,7 +97,7 @@
 			return
 		var/obj/item/transfer_valve/valve = tool
 		if(!valve.ready())
-			to_chat(user, span_warning("[valve.declent_ru(NOMINATIVE)] не завершен."))
+			to_chat(user, span_warning("[capitalize(valve.declent_ru(NOMINATIVE))] не завершён."))
 			return
 		if(!user.transferItemToLoc(tool, src))
 			to_chat(user, span_warning("[capitalize(tool.declent_ru(NOMINATIVE))] застревает в вашей руке."))
