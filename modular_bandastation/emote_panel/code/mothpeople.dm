@@ -16,7 +16,7 @@
 	)
 
 /datum/species/moth/get_giggle_sound(mob/living/carbon/human/moth)
-	return 'modular_bandastation/emote_panel/audio/moth/moth_laugh.ogg'
+	return 'modular_bandastation/emote_panel/audio/moth/moth_chitter.ogg'
 
 /datum/species/moth/get_laugh_sound(mob/living/carbon/human/moth)
 	return 'modular_bandastation/emote_panel/audio/moth/moth_laugh.ogg'
@@ -27,3 +27,5 @@
 /datum/species/moth/get_scream_sound(mob/living/carbon/human/moth)
 	return 'modular_bandastation/emote_panel/audio/moth/moth_scream.ogg'
 
+/datum/species/moth/get_sneeze_sound(mob/living/carbon/human/moth)
+	return 'modular_bandastation/emote_panel/audio/moth/moth_sneeze.ogg'
