@@ -446,7 +446,7 @@
 // MARK: 9mm
 /obj/item/ammo_box/c9mm
 	name = "ammo box (9mm)"
-	desc = "Коробка с пистолетными патронами калибра 9мм, вмещает 20 патронов."
+	desc = "Коробка с пистолетными патронами калибра 9мм, вмещает 30 патронов."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "9mmbox-surplus"
 	w_class = WEIGHT_CLASS_SMALL
