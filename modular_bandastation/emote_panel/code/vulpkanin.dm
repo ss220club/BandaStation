@@ -57,8 +57,6 @@
 	)
 
 /datum/species/vulpkanin/get_giggle_sound(mob/living/carbon/human/human)
-	if(!ishuman(human))
-		return
 	if(human.physique == FEMALE)
 		return pick(
 			'modular_bandastation/emote_panel/audio/human/female/giggle_female_1.ogg',

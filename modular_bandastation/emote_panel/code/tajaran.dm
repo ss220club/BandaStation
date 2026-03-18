@@ -78,8 +78,6 @@
 	)
 
 /datum/species/tajaran/get_giggle_sound(mob/living/carbon/human/tajaran)
-	if(!ishuman(tajaran))
-		return
 	if(tajaran.physique == FEMALE)
 		return pick(
 			'modular_bandastation/emote_panel/audio/human/female/giggle_female_1.ogg',

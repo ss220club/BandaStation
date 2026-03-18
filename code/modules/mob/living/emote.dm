@@ -237,12 +237,7 @@ BANDASTATION REMOVAL - END */
 	message = "giggles."
 	message_mime = "giggles silently!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
-// BANDASTATION ADDITION: START
-/datum/emote/living/giggle/get_sound(mob/living/carbon/human/user)
-	if(!istype(user))
-		return
-	return user.dna.species.get_giggle_sound(user)
-// BANDASTATION ADDITION: END
+
 /datum/emote/living/glare
 	key = "glare"
 	key_third_person = "glares"
