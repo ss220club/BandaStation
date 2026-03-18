@@ -82,7 +82,7 @@
 			to_chat(user, span_warning("Уже есть ядро в [src.declent_ru(ACCUSATIVE)]."))
 			return
 		if(!user.transferItemToLoc(tool, src))
-			to_chat(user, span_warning("[tool.declent_ru(NOMINATIVE)] прилипает к вашей руке."))
+			to_chat(user, span_warning("[capitalize(tool.declent_ru(NOMINATIVE))] застревает в вашей руке."))
 			return
 		var/obj/item/raw_anomaly_core/raw_core = tool
 		if(!get_required_radius(raw_core.anomaly_type))
