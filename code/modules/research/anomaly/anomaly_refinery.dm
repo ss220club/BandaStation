@@ -100,7 +100,7 @@
 			to_chat(user, span_warning("[valve.declent_ru(NOMINATIVE)] не завершен."))
 			return
 		if(!user.transferItemToLoc(tool, src))
-			to_chat(user, span_warning("[tool.declent_ru(NOMINATIVE)] прилипает к вашей руке."))
+			to_chat(user, span_warning("[capitalize(tool.declent_ru(NOMINATIVE))] застревает в вашей руке."))
 			return
 		inserted_bomb = tool
 		tank_to_target = inserted_bomb.tank_two
