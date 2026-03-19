@@ -799,13 +799,13 @@
 			parts += "<b>Задача #[count]</b>: [objective.explanation_text] [objective.get_roundend_success_suffix()]"
 			count++
 	if(feast_of_owls)
-		parts += span_greentext("Вознесение Забытого")
+		parts += span_greentext("Вознесение отринуто")
 	if(ascended)
 		parts += span_greentext(span_big("ЕРЕТИК ВОЗНЕССЯ!"))
 
 	else
 		if(succeeded)
-			parts += span_greentext("Еретик преуспел, но не возносся!")
+			parts += span_greentext("Еретик преуспел, но не вознёсся!")
 		else
 			parts += span_redtext("Еретик провалился.")
 
