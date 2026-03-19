@@ -98,7 +98,7 @@
 	defender.visible_message(
 		span_warning("[capitalize(attacker.declent_ru(NOMINATIVE))] пинает [defender.declent_ru(ACCUSATIVE)] прямо в грудь, отправляя [defender.ru_p_them()]!"),
 		span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] запустил вас в полёт ударом в грудь!"),
-		span_hear("Вы слышите противный звук удара плоти о плоть!"),
+		span_hear("Вы слышите противный звук удара по телу!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
@@ -117,14 +117,14 @@
 		defender.Knockdown(4 SECONDS)
 		defender.visible_message(span_warning("[capitalize(attacker.declent_ru(NOMINATIVE))] пинает [defender.declent_ru(ACCUSATIVE)] в голову, швыряя [defender.ru_p_them()] лицом в пол!"), \
 					span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] бьёт вас по голове, швыряя вас лицом в пол!"),
-					span_hear("Вы слышите противный звук удара плоти о плоть!"),
+					span_hear("Вы слышите противный звук удара по телу!"),
 					COMBAT_MESSAGE_RANGE,
 					attacker,
 		)
 	else
 		defender.drop_all_held_items()
 		defender.visible_message(span_warning("[capitalize(attacker.declent_ru(NOMINATIVE))] бьёт [defender.declent_ru(ACCUSATIVE)] в голову!"), \
-					span_userdanger("Вы получили удар по голове от [attacker.declent_ru(GENITIVE)]!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), COMBAT_MESSAGE_RANGE, attacker)
+					span_userdanger("Вы получили удар по голове от [attacker.declent_ru(GENITIVE)]!"), span_hear("Вы слышите противный звук удара по телу!"), COMBAT_MESSAGE_RANGE, attacker)
 	defender.apply_damage(40, STAMINA)
 	defender.adjust_dizzy_up_to(10 SECONDS, 10 SECONDS)
 	defender.adjust_temp_blindness_up_to(2 SECONDS, 10 SECONDS)
@@ -138,7 +138,7 @@
 	defender.visible_message(
 		span_warning("[capitalize(attacker.declent_ru(NOMINATIVE))] яростно бьёт коленом [defender.declent_ru(ACCUSATIVE)]!"),
 		span_userdanger("Вы бьёте [defender.declent_ru(ACCUSATIVE)] коленом!"),
-		span_hear("Вы слышите противный звук удара плоти о плоть!"),
+		span_hear("Вы слышите противный звук удара по телу!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
@@ -450,7 +450,7 @@
 		var/mob/living/carbon/human/H = target
 		var/list/fluffmessages = list("стучит", "огревает", "колотит", "бьёт", "впечатывает")
 		H.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] [pick(fluffmessages)] [H.declent_ru(ACCUSATIVE)] [src]!"), \
-						span_userdanger("[user.declent_ru(NOMINATIVE)] [pick(fluffmessages)] вас [src]!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), null, user)
+						span_userdanger("[user.declent_ru(NOMINATIVE)] [pick(fluffmessages)] вас [src]!"), span_hear("Вы слышите противный звук удара по телу!"), null, user)
 		to_chat(user, span_danger("Вы [pick(fluffmessages)]е [H.declent_ru(ACCUSATIVE)] [src]!"))
 		playsound(get_turf(user), 'sound/effects/woodhit.ogg', 75, TRUE, -1)
 		H.adjust_stamina_loss(rand(13,20))
@@ -462,7 +462,7 @@
 			var/total_health = (H.health - H.staminaloss)
 			if(total_health <= HEALTH_THRESHOLD_CRIT && !H.stat)
 				H.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] наносит сокрушительный удар голове [H.declent_ru(GENITIVE)], вырубая [H.ru_p_them()]!"), \
-								span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] вырубает вас!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), null, user)
+								span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] вырубает вас!"), span_hear("Вы слышите противный звук удара по телу!"), null, user)
 				to_chat(user, span_danger("Вы наносите сокрушительный удар голове [H.declent_ru(GENITIVE)], вырубая [H.ru_p_them()]!"))
 				H.SetSleeping(60 SECONDS)
 				H.adjust_organ_loss(ORGAN_SLOT_BRAIN, 15, 150)
