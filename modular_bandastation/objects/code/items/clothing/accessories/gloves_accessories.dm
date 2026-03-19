@@ -54,7 +54,6 @@
 	pixel_z = -pixel_z
 	return .
 
-/obj/item/clothing/accessory/gloves_accessory/successful_attach(obj/item/clothing/gloves/attached_to)
 	return ..()
 
 	return ..()
