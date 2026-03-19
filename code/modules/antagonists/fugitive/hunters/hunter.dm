@@ -168,7 +168,7 @@
 			result += "<B>[capitalize(backstory)] удалось поймать беглеца, живого или мёртвого.</B>"
 		if(FUGITIVE_RESULT_MINOR_HUNTER)
 			result += "<span class='greentext big'>Незначительная победа [capitalize(backstory)]</span>"
-			result += "<B>Все [backstory] погибли, но им удалось поймать беглеца, живого или мёртвого.</B>"
+			result += "<B>Все [capitalize(backstory)] погибли, но им удалось поймать беглеца, живого или мёртвого.</B>"
 		if(FUGITIVE_RESULT_STALEMATE)
 			result += "<span class='neutraltext big'>Кровавый тупик</span>"
 			result += "<B>Все погибли, и никого из беглецов не удалось вернуть.</B>"
