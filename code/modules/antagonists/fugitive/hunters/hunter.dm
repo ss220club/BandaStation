@@ -174,7 +174,7 @@
 			result += "<B>Все погибли, и никого из беглецов не удалось вернуть.</B>"
 		if(FUGITIVE_RESULT_MINOR_FUGITIVE)
 			result += "<span class='redtext big'>Незначительная победа беглецов</span>"
-			result += "<B>Все беглецы погибли, но ни один из них не был возвращен!</B>"
+			result += "<B>Все беглецы погибли, но ни один из них не был возвращён!</B>"
 		if(FUGITIVE_RESULT_FUGITIVE_VICTORY)
 			result += "<span class='redtext big'>Победа беглецов</span>"
 			result += "<B>Беглец выжил, и ни одно тело не было забрано [capitalize(backstory)].</B>"
