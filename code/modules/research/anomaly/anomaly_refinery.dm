@@ -145,7 +145,7 @@
 		return
 
 	if(!istype(inserted_core) || !istype(inserted_bomb))
-		end_test("ОШИБКА: отсутствие оборудования. Предметы выброшены.")
+		end_test("ОШИБКА: отсутствует оборудование. Предметы извлечены.")
 		return
 
 	if(!inserted_bomb?.tank_one || !inserted_bomb?.tank_two || !(tank_to_target == inserted_bomb?.tank_one || tank_to_target == inserted_bomb?.tank_two))
