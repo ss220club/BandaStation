@@ -177,7 +177,7 @@
 			result += "<B>Все беглецы погибли, но ни один из них не был возвращен!</B>"
 		if(FUGITIVE_RESULT_FUGITIVE_VICTORY)
 			result += "<span class='redtext big'>Победа беглецов</span>"
-			result += "<B>Беглец выжил, и ни одно тело не было забрано [backstory].</B>"
+			result += "<B>Беглец выжил, и ни одно тело не было забрано [capitalize(backstory)].</B>"
 		if(FUGITIVE_RESULT_MAJOR_FUGITIVE)
 			result += "<span class='redtext big'>Разгромная победа беглецов</span>"
 			result += "<B>Все беглецы выжили и избежали поимки!</B>"
