@@ -32,7 +32,7 @@
 	RegisterSignal(user, COMSIG_LIVING_CHECK_BLOCK, PROC_REF(shield_reaction))
 
 	if(!IS_HERETIC(user))
-		to_chat(user, span_warning("Диковинка обвивает вас, и вы чувствуете, как внутри нее бьется что-то темное..."))
+		to_chat(user, span_warning("Реликвия обвивает вас, и вы чувствуете, как внутри неё бьется что-то темное..."))
 
 /obj/item/storage/belt/unfathomable_curio/dropped(mob/user)
 	. = ..()
