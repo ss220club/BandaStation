@@ -184,7 +184,7 @@
 
 	log_combat(attacker, defender, "restrained (CQC)")
 	defender.visible_message(
-		span_warning("[attacker.declent_ru(NOMINATIVE)] берет [defender.declent_ru(ACCUSATIVE)] в захват!"),
+		span_warning("[attacker.declent_ru(NOMINATIVE)] берёт [defender.declent_ru(ACCUSATIVE)] в захват!"),
 		span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] берёт вас в захват!"),
 		span_hear("Вы слышите шарканье и приглушенный стон!"),
 		null,
