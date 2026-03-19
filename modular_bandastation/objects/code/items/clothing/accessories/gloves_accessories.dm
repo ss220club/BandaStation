@@ -54,7 +54,6 @@
 	pixel_z = -pixel_z
 	return .
 
-	return ..()
 
 	return ..()
 
