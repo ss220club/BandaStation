@@ -306,7 +306,7 @@
 		if ("пинать")
 			defender.visible_message(
 				span_danger("[attacker.declent_ru(NOMINATIVE)] пинает [defender.declent_ru(ACCUSATIVE)]!"),
-				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] [genderize_ru(attacker.gender,"пнул","пнула","пнуло","отпинали")] вас!"),
+				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] [genderize_ru(attacker.gender, "пнул", "пнула", "пнуло", "пнули")] вас!"),
 				span_hear("Вы слышите противный звук удара плоти о плоть!"),
 					COMBAT_MESSAGE_RANGE,
 					attacker,
