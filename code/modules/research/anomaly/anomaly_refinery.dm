@@ -239,7 +239,7 @@
 /obj/machinery/research/anomaly_refinery/proc/timeout_test()
 	timeout_timer = null
 	if(!test_status)
-		test_status = "Клапан перекачки привел к незначительной мощности взрыва. Предметы выброшены."
+		test_status = "Клапан перекачки привел к незначительной мощности взрыва. Предметы извлечены."
 	end_test(test_status)
 
 /// This is not the real valve opening process. This is the simulated one used for displaying reactions.
