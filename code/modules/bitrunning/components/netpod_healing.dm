@@ -62,7 +62,7 @@
 
 /atom/movable/screen/alert/status_effect/embryonic
 	name = "Эмбриональный стазис"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "netpod_stasis"
 	desc = "Вам кажется, словно вы во сне."
 
