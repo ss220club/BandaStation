@@ -57,7 +57,6 @@
 /obj/item/clothing/accessory/gloves_accessory/successful_attach(obj/item/clothing/gloves/attached_to)
 	return ..()
 
-/obj/item/clothing/accessory/gloves_accessory/generate_accessory_overlay(obj/item/clothing/gloves/attached_to)
 	return ..()
 
 /obj/item/clothing/accessory/gloves_accessory/detach(obj/item/clothing/gloves/detach_from)
