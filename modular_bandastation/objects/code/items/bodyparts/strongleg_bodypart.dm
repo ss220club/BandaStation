@@ -1,26 +1,3 @@
-/// Element for enhanced movement with strongleg prosthesis
-/datum/element/strongleg_movement
-	var/speed_bonus = -0.1
-
-/datum/element/strongleg_movement/Attach(datum/target)
-	. = ..()
-	if(!isliving(target))
-		return ELEMENT_INCOMPATIBLE
-
-	var/mob/living/living_target = target
-	living_target.add_movespeed_modifier(/datum/movespeed_modifier/strongleg_prosthesis)
-
-/datum/element/strongleg_movement/Detach(datum/target)
-	if(isliving(target))
-		var/mob/living/living_target = target
-		living_target.remove_movespeed_modifier(/datum/movespeed_modifier/strongleg_prosthesis)
-	return ..()
-
-/datum/movespeed_modifier/strongleg_prosthesis
-	movetypes = GROUND
-	variable = TRUE
-	multiplicative_slowdown = -0.1
-
 /// Component for Strongleg prosthesis combat abilities
 /datum/component/strongleg_combat
 	var/kick_knockback_distance = 2
@@ -64,11 +41,9 @@
 	to_chat(source, span_danger("Ваш пинок отбрасывает [target.declent_ru(ACCUSATIVE)]!"))
 
 /proc/setup_strongleg(mob/living/carbon/owner)
-	owner.AddElement(/datum/element/strongleg_movement)
 	owner.AddComponent(/datum/component/strongleg_combat, 2)
 
 /proc/cleanup_strongleg(mob/living/carbon/owner)
-	owner.RemoveElement(/datum/element/strongleg_movement)
 	var/datum/component/strongleg_combat/combat_component = owner.GetComponent(/datum/component/strongleg_combat)
 	if(combat_component)
 		qdel(combat_component)
@@ -85,7 +60,7 @@
 	max_damage = 80
 	can_be_disabled = FALSE
 
-	speed_modifier = -0.3
+	speed_modifier = -0.2
 
 	unarmed_damage_low = 15
 	unarmed_damage_high = 30
@@ -119,7 +94,7 @@
 	max_damage = 80
 	can_be_disabled = FALSE
 
-	speed_modifier = -0.3
+	speed_modifier = -0.2
 
 	unarmed_damage_low = 15
 	unarmed_damage_high = 30
