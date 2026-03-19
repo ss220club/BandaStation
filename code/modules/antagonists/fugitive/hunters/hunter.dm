@@ -162,7 +162,7 @@
 			result += "<B>[backstory] удалось поймать каждого беглеца, но все они погибли! Ужас!</B>"
 		if(FUGITIVE_RESULT_MAJOR_HUNTER)
 			result += "<span class='greentext big'>Разгромная победа [capitalize(backstory)]</span>"
-			result += "<B>[backstory] удалось поймать каждого беглеца, живого или мёртвого.</B>"
+			result += "<B>[capitalize(backstory)] удалось поймать каждого беглеца, живого или мёртвого.</B>"
 		if(FUGITIVE_RESULT_HUNTER_VICTORY)
 			result += "<span class='greentext big'>Победа [capitalize(backstory)]</span>"
 			result += "<B>[capitalize(backstory)] удалось поймать беглеца, живого или мёртвого.</B>"
