@@ -2119,7 +2119,7 @@
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
-/turf/open/floor/iron,
+/turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod)
 "aji" = (
 /obj/structure/light_fake/spot/directional/west,
@@ -3578,8 +3578,9 @@
 /obj/machinery/door/airlock/centcom,
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cutaiwire,
-/turf/closed/indestructible/riveted,
+/turf/open/floor/iron/dark{
+	initial_gas_mix = "o2=22;n2=82;TEMP=170.15"
+	},
 /area/centcom/central_command_areas/rnd)
 "aqP" = (
 /obj/vehicle/ridden/janicart,
@@ -21436,7 +21437,7 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
-/turf/closed/indestructible/riveted,
+/turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod)
 "tSB" = (
 /obj/effect/turf_decal/siding/wood{
