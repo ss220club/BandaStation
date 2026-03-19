@@ -149,7 +149,7 @@
 		return
 
 	if(!inserted_bomb?.tank_one || !inserted_bomb?.tank_two || !(tank_to_target == inserted_bomb?.tank_one || tank_to_target == inserted_bomb?.tank_two))
-		end_test("ОШИБКА: неисправность клапана перекачки. Предметы выброшены.")
+		end_test("ОШИБКА: неисправность клапана перекачки. Предметы извлечены.")
 		return
 
 	say("Начинается проверка на сжатие. Открытие клапана перекачки.")
