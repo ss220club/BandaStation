@@ -156,7 +156,7 @@
 	switch(get_result())
 		if(FUGITIVE_RESULT_BADASS_HUNTER)//use defines
 			result += "<span class='greentext big'>Безупречная победа [capitalize(backstory)]!</span>"
-			result += "<B>[backstory] захватили всех беглецов живыми!</B>"
+			result += "<B>[capitalize(backstory)] захватили всех беглецов живыми!</B>"
 		if(FUGITIVE_RESULT_POSTMORTEM_HUNTER)
 			result += "<span class='greentext big'>Посмертная победа [capitalize(backstory)]!</span>"
 			result += "<B>[backstory] удалось поймать каждого беглеца, но все они погибли! Ужас!</B>"
