@@ -55,7 +55,6 @@
 	return .
 
 
-	return ..()
 
 /obj/item/clothing/accessory/gloves_accessory/detach(obj/item/clothing/gloves/detach_from)
 	return ..()
