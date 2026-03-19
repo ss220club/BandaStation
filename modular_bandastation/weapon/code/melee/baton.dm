@@ -56,7 +56,7 @@
 
 /obj/item/melee/baton/nt_cane/gun/examine(mob/user)
 	. = ..()
-	. += "safety: [safety_on ? "on" : "false"]."
+	. += "safety: [safety_on ? "on" : "off"]."
 	. += "ammo: [diamond_loaded ? "full" : "empty"]."
 
 /obj/item/melee/baton/nt_cane/gun/proc/try_load_diamond(obj/item/item, mob/user)
@@ -111,7 +111,7 @@
 	COOLDOWN_START(src, safety_toggle_cooldown, 3 SECONDS)
 
 	safety_on = !safety_on
-	user.balloon_alert(user, "safety: [safety_on ? "on" : "false"].")
+	user.balloon_alert(user, "safety: [safety_on ? "on" : "off"].")
 	add_fingerprint(user)
 	update_item_action_buttons()
 	INVOKE_ASYNC(src, PROC_REF(play_safety_sound), user)

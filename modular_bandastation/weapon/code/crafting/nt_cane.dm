@@ -10,6 +10,6 @@
 		/obj/item/stock_parts/micro_laser/quadultra = 4,
 		/obj/item/stack/cable_coil = 5,
 	)
-	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
+	crafting_flags = CRAFT_NO_MATERIALS
 	blacklist = list(/obj/item/melee/baton/nt_cane/gun)
 	category = CAT_EQUIPMENT
