@@ -47,14 +47,12 @@
 	)
 
 /// Returns the species' giggle sound.
-/datum/species/proc/get_giggle_sound(mob/living/carbon/human/human)
-	return
 /datum/emote/living/giggle/get_sound(mob/living/carbon/human/user)
 	if(!istype(user))
 		return
 	return user.dna.species.get_giggle_sound(user)
-/datum/species/human/get_giggle_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
+/datum/species/proc/get_giggle_sound(mob/living/carbon/human/user)
+	if(user.physique == FEMALE)
 		return pick(
 			'modular_bandastation/emote_panel/audio/human/female/giggle_female_1.ogg',
 			'modular_bandastation/emote_panel/audio/human/female/giggle_female_2.ogg',

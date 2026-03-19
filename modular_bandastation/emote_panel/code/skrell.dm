@@ -77,12 +77,8 @@
 
 /datum/species/skrell/get_giggle_sound(mob/living/carbon/human/skrell)
 	if(skrell.physique == FEMALE)
-		return pick(
-			'modular_bandastation/emote_panel/audio/skrell/giggle_female_1.ogg',
-		)
-	return pick(
-		'modular_bandastation/emote_panel/audio/skrell/giggle_male_1.ogg',
-	)
+		return 'modular_bandastation/emote_panel/audio/skrell/giggle_female_1.ogg'
+	return 'modular_bandastation/emote_panel/audio/skrell/giggle_male_1.ogg'
 
 /datum/species/skrell/get_sneeze_sound(mob/living/carbon/human/skrell)
 	if(skrell.physique == FEMALE)

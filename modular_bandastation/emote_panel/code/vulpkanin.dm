@@ -56,19 +56,6 @@
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_2.ogg',
 	)
 
-/datum/species/vulpkanin/get_giggle_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return pick(
-			'modular_bandastation/emote_panel/audio/human/female/giggle_female_1.ogg',
-			'modular_bandastation/emote_panel/audio/human/female/giggle_female_2.ogg',
-			'modular_bandastation/emote_panel/audio/human/female/giggle_female_3.ogg',
-			'modular_bandastation/emote_panel/audio/human/female/giggle_female_4.ogg',
-		)
-	return pick(
-		'modular_bandastation/emote_panel/audio/human/male/giggle_male_1.ogg',
-		'modular_bandastation/emote_panel/audio/human/male/giggle_male_2.ogg',
-	)
-
 // MARK: Emotes
 /datum/emote/living/carbon/human/vulpkanin
 	species_type_whitelist_typecache = list(/datum/species/vulpkanin)
