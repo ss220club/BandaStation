@@ -56,7 +56,7 @@
 
 /// Called when the user starts to read the granter.
 /obj/item/book/granter/proc/on_reading_start(mob/living/user)
-	to_chat(user, span_notice("Вы начинаете читать [name]..."))
+	to_chat(user, span_notice("Вы начинаете читать [declent_ru(name, ACCUSATIVE)]..."))
 	return TRUE
 
 /// Called when the reading is interrupted without finishing.
@@ -65,7 +65,7 @@
 
 /// Called when the reading is completely finished. This is where the actual granting should happen.
 /obj/item/book/granter/proc/on_reading_finished(mob/living/user)
-	to_chat(user, span_notice("Вы закончили прочтение [name]!"))
+	to_chat(user, span_notice("Вы закончили прочтение [declent_ru(name, ACCUSATIVE)]!"))
 
 /// The actual "turning over of the page" flavor bit that happens while someone is reading the granter.
 /obj/item/book/granter/proc/turn_page(mob/living/user)

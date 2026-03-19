@@ -12,18 +12,18 @@
 	if(!isliving(user))
 		return FALSE
 	if(locate(martial) in user.martial_arts)
-		to_chat(user, span_warning("Вы уже обучены [martial_name]!"))
+		to_chat(user, span_warning("Вы уже обучены [declent_ru(martial_name, DATIVE)]!"))
 		return FALSE
 	return TRUE
 
 /obj/item/book/granter/martial/on_reading_start(mob/user)
-	to_chat(user, span_notice("Вы начинаете читать о [martial_name]..."))
+	to_chat(user, span_notice("Вы начинаете читать [declent_ru(martial_name, ACCUSATIVE)]..."))
 	return TRUE
 
 /obj/item/book/granter/martial/on_reading_finished(mob/user)
 	if(user.mind)
 		if(!user.mind.AddComponent(/datum/component/mindbound_martial_arts, martial))
-			to_chat(user, span_warning("Вы пытаетесь выучить [martial_name] из [src], но у вас не получается запомнить прочитанное."))
+			to_chat(user, span_warning("Вы пытаетесь выучить [declent_ru(martial_name, ACCUSATIVE)] из [src.declent_ru(NOMINATIVE)], но у вас не получается запомнить прочитанное."))
 			uses += 1 // Return the use
 			return
 	else
