@@ -26,7 +26,6 @@
 #include "code/ranged/ballistic/magazines.dm"
 #include "code/ranged/ballistic/mounted_machine_gun.dm"
 #include "code/ranged/ballistic/projectiles.dm"
-#include "code/ranged/ballistic/nt_cane_projectiles.dm"
 #include "code/ranged/ballistic/nanotrasen/pistols/gp9.dm"
 #include "code/ranged/ballistic/nanotrasen/pistols/1911.dm"
 #include "code/ranged/ballistic/nanotrasen/pistols/cm23.dm"
