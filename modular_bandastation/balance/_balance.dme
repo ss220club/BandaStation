@@ -28,6 +28,7 @@
 #include "code/vending.dm"
 #include "code/vending_security.dm"
 #include "code/weapons/baton.dm"
+#include "code/weapons/disabler.dm"
 #include "code/weapons/dragnet.dm"
 #include "code/weapons/rifle.dm"
 #include "code/wounds/cranial_fissure.dm"
