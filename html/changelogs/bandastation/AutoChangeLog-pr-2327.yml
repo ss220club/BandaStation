@@ -1,0 +1,4 @@
+author: "kyunkyunkyun"
+delete-after: True
+changes:
+  - bugfix: "Исправлено отображение аксессуаров диги ног поверх одежды."

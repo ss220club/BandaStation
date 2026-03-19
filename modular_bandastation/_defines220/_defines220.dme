@@ -10,6 +10,7 @@
 #include "code/defines/jobs.dm"
 #include "code/defines/keybindings.dm"
 #include "code/defines/misc.dm"
+#include "code/defines/mob_defines.dm"
 #include "code/defines/preferences.dm"
 #include "code/defines/spans.dm"
 #include "code/defines/subsystems.dm"
