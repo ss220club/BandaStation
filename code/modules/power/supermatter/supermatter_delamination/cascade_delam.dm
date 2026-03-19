@@ -18,7 +18,7 @@
 
 	sm.radio.talk_into(
 		sm,
-		"ОПАСНОСТЬ: ЧАСТОТА ОСЦИЛЛЯЦИИ ГИПЕРСТРУКТУРЫ ВЫШЛА ЗА ГРАНИЦЫ.",
+		"ОПАСНОСТЬ: ЧАСТОТА КОЛЕБАНИЙ ГИПЕРСТРУКТУРЫ ВЫШЛА ЗА ГРАНИЦЫ.",
 		sm.damage >= sm.emergency_point ? sm.emergency_channel : sm.warning_channel
 	)
 	var/list/messages = list(
