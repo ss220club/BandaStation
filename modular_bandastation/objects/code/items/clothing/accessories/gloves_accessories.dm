@@ -54,9 +54,6 @@
 	pixel_z = -pixel_z
 	return .
 
-
-
-
 /obj/item/clothing/accessory/gloves_accessory/on_uniform_equipped(obj/item/clothing/gloves/source, mob/living/user, slot)
 	if(slot & source.slot_flags)
 		accessory_equipped(source, user)
