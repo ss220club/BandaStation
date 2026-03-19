@@ -385,7 +385,7 @@
 
 
 /mob/living/proc/CQC_help()
-	set name = "Помните об основах"
+	set name = "Вспомнить основы"
 	set desc = "Вы пытаетесь запомнить некоторые основы CQC."
 	set category = "CQC"
 	to_chat(usr, "<b><i>Вы пытаетесь запомнить некоторые основы CQC.</i></b>")
