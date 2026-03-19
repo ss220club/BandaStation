@@ -321,7 +321,7 @@
 				COMBAT_MESSAGE_RANGE,
 				attacker,
 			)
-			to_chat(attacker, span_danger("Вы топчите [defender.declent_ru(ACCUSATIVE)]!"))
+			to_chat(attacker, span_danger("Вы топчете [defender.declent_ru(ACCUSATIVE)]!"))
 	log_combat(attacker, defender, "attacked ([picked_hit_type])(CQC)")
 	return MARTIAL_ATTACK_SUCCESS
 
