@@ -150,23 +150,19 @@
 
 	var/obj/item/bodypart/old_left_arm = H.get_bodypart(BODY_ZONE_L_ARM)
 	left_arm.replace_limb(H, TRUE)
-	if(old_left_arm)
-		qdel(old_left_arm)
+	qdel(old_left_arm)
 
 	var/obj/item/bodypart/old_right_arm = H.get_bodypart(BODY_ZONE_R_ARM)
 	right_arm.replace_limb(H, TRUE)
-	if(old_right_arm)
-		qdel(old_right_arm)
+	qdel(old_right_arm)
 
 	var/obj/item/bodypart/old_left_leg = H.get_bodypart(BODY_ZONE_L_LEG)
 	left_leg.replace_limb(H, TRUE)
-	if(old_left_leg)
-		qdel(old_left_leg)
+	qdel(old_left_leg)
 
 	var/obj/item/bodypart/old_right_leg = H.get_bodypart(BODY_ZONE_R_LEG)
 	right_leg.replace_limb(H, TRUE)
-	if(old_right_leg)
-		qdel(old_right_leg)
+	qdel(old_right_leg)
 
 	// cyberimps
 	var/list/implants_to_add = list(
