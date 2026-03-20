@@ -3,6 +3,7 @@
 #define SURGERY_TOOL_MOD_ALIEN 1
 #define SURGERY_TOOL_MOD_AUGMENT 0
 #define SURGERY_TOOL_MOD_BASIC 5
+#define SURGERY_RING_FAIL_MOD 10
 
 /datum/surgery_operation/proc/get_modified_failure_chance(operation_time, mob/living/patient, mob/living/surgeon, tool, list/operation_args)
 	var/fail_chance = clamp(GET_FAILURE_CHANCE(operation_time, operation_args[OPERATION_SPEED]), 0, 99)
@@ -37,10 +38,16 @@
 
 	fail_chance += tool_mod
 
+	// Кольцо на перчатках ухудшает точность работы
+	var/obj/item/clothing/gloves/worn_gloves = surgeon.get_item_by_slot(ITEM_SLOT_GLOVES)
+	if(istype(worn_gloves) && locate(/obj/item/clothing/accessory/gloves_accessory/ring) in worn_gloves.attached_accessories)
+		fail_chance += SURGERY_RING_FAIL_MOD - 5
+
 	return fail_chance
-	
+
 #undef SURGERY_TOOL_MOD_GHETTO
 #undef SURGERY_TOOL_MOD_ADVANCED
 #undef SURGERY_TOOL_MOD_ALIEN
 #undef SURGERY_TOOL_MOD_AUGMENT
 #undef SURGERY_TOOL_MOD_BASIC
+#undef SURGERY_RING_FAIL_MOD
