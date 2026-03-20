@@ -6,6 +6,7 @@
 	if(throttle_check())
 		return FALSE
 
+
 	var/ssml_text = {"<speak>[text]</speak>"}
 
 	var/list/req_body = list()
