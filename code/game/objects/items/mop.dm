@@ -36,6 +36,7 @@
 /obj/item/mop/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/cleaner, mopspeed, pre_clean_callback=CALLBACK(src, PROC_REF(should_clean)), on_cleaned_callback=CALLBACK(src, PROC_REF(apply_reagents)))
+	AddComponent(/datum/component/liquids_interaction, TYPE_PROC_REF(/obj/item/mop, attack_on_liquids_turf))
 	create_reagents(max_reagent_volume)
 	GLOB.janitor_devices += src
 
@@ -45,6 +46,10 @@
 
 ///Checks whether or not we should clean.
 /obj/item/mop/proc/should_clean(datum/cleaning_source, atom/atom_to_clean, mob/living/cleaner)
+	var/turf/turf_to_clean = atom_to_clean
+	if(isturf(atom_to_clean) && turf_to_clean.liquids)
+		to_chat(cleaner, span_warning("It would be quite difficult to clean this with a pool of liquids on top!"))
+		return CLEAN_BLOCKED
 	if(clean_blacklist[atom_to_clean.type])
 		return CLEAN_BLOCKED|CLEAN_DONT_BLOCK_INTERACTION
 	if(reagents.total_volume < 0.1)

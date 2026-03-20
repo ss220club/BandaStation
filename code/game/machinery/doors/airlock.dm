@@ -1416,6 +1416,20 @@
 	if(killthis)
 		SSexplosions.med_mov_atom += killthis
 	SEND_SIGNAL(src, COMSIG_AIRLOCK_CLOSE, forced)
+
+	var/turf/open/open_turf = get_turf(src)
+	if(!QDELETED(open_turf.liquids))
+		var/datum/liquid_group/turfs_group = open_turf.liquids.liquid_group
+		if(!QDELETED(turfs_group))
+			turfs_group.remove_from_group(open_turf)
+			turfs_group.try_split(open_turf)
+			for(var/dir in GLOB.cardinals)
+				var/turf/open/direction_turf = get_step(open_turf, dir)
+				if(!isopenturf(direction_turf) || QDELING(direction_turf) || QDELETED(direction_turf.liquids))
+					continue
+				turfs_group.check_edges(direction_turf)
+		QDEL_NULL(open_turf.liquids)
+
 	set_airlock_state(AIRLOCK_CLOSING, animated = TRUE, force_type = forced)
 	layer = CLOSED_DOOR_LAYER
 	if(air_tight)
