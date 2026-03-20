@@ -85,7 +85,7 @@
 		span_danger("[capitalize(attacker.declent_ru(NOMINATIVE))] яростно выкручивает [affecting.declent_ru(ACCUSATIVE)] [defender.declent_ru(GENITIVE)]!"),
 		span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] яростно выкручивает вам [affecting.declent_ru(ACCUSATIVE)]!"),
 		span_hear("Вы слышите мерзкий звук ломающейся кости!"), null, attacker)
-	to_chat(attacker, span_danger("Вы жестоко выкручиваете [affecting.declent_ru(ACCUSATIVE)] [defender.declent_ru(GENITIVE)]!"))
+	to_chat(attacker, span_danger("Вы яростно выкручиваете [affecting.declent_ru(ACCUSATIVE)] [defender.declent_ru(GENITIVE)]!"))
 	playsound(defender, 'sound/items/weapons/punch1.ogg', 25, TRUE, -1)
 	log_combat(attacker, defender, "wrist wrenched (Sleeping Carp)")
 	defender.apply_damage(20, BRUTE, affecting, wound_bonus = 30)
@@ -96,7 +96,7 @@
 /datum/martial_art/the_sleeping_carp/proc/launch_kick(mob/living/attacker, mob/living/defender)
 	attacker.do_attack_animation(defender, ATTACK_EFFECT_KICK)
 	defender.visible_message(
-		span_warning("[capitalize(attacker.declent_ru(NOMINATIVE))] пинает [defender.declent_ru(ACCUSATIVE)] прямо в грудь, отправляя [defender.ru_p_them()]!"),
+		span_warning("[capitalize(attacker.declent_ru(NOMINATIVE))] пинает [defender.declent_ru(ACCUSATIVE)] прямо в грудь, отправляя [defender.ru_p_them()] в полёт!"),
 		span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] запустил вас в полёт ударом в грудь!"),
 		span_hear("Вы слышите противный звук удара по телу!"),
 		COMBAT_MESSAGE_RANGE,
@@ -123,8 +123,8 @@
 		)
 	else
 		defender.drop_all_held_items()
-		defender.visible_message(span_warning("[capitalize(attacker.declent_ru(NOMINATIVE))] бьёт [defender.declent_ru(ACCUSATIVE)] в голову!"), \
-					span_userdanger("Вы получили удар по голове от [attacker.declent_ru(GENITIVE)]!"), span_hear("Вы слышите противный звук удара по телу!"), COMBAT_MESSAGE_RANGE, attacker)
+		defender.visible_message(span_warning("[capitalize(attacker.declent_ru(NOMINATIVE))] пинает [defender.declent_ru(ACCUSATIVE)] в голову!"), \
+					span_userdanger("[capitalize(attacker.declent_ru(GENITIVE))] пинает вас по голове!"), span_hear("Вы слышите противный звук удара по телу!"), COMBAT_MESSAGE_RANGE, attacker)
 	defender.apply_damage(40, STAMINA)
 	defender.adjust_dizzy_up_to(10 SECONDS, 10 SECONDS)
 	defender.adjust_temp_blindness_up_to(2 SECONDS, 10 SECONDS)
@@ -277,8 +277,8 @@
 		return
 	var/obj/item/melee/touch_attack/touch_weapon = attack_weapon
 	carp_user.visible_message(
-		span_danger("[capitalize(carp_user.declent_ru(NOMINATIVE))] аккуратно избегает [touch_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(GENITIVE)]!"),
-		span_userdanger("Вы прилагаете значительные усилия чтобы избежать [touch_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(GENITIVE)]!"),
+		span_danger("[capitalize(carp_user.declent_ru(NOMINATIVE))] аккуратно уклоняется от [touch_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(GENITIVE)]!"),
+		span_userdanger("Вы прилагаете значительные усилия чтобы уклониться от [touch_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(GENITIVE)]!"),
 	)
 	return COMPONENT_NO_AFTERATTACK
 
@@ -298,7 +298,7 @@
 		return NONE
 
 	carp_user.visible_message(
-		span_danger("[capitalize(carp_user.declent_ru(NOMINATIVE))] чисто уворачивается от [attack_text] с невероятной скоростью!"), //может тут чисто на изящно заменить, дословно не правильно но по контексту лучше?
+		span_danger("[capitalize(carp_user.declent_ru(NOMINATIVE))] чисто уворачивается от [attack_text] с невероятной скоростью!"),
 		span_userdanger("Вы уворачиваетесь от [attack_text]"),
 	)
 	playsound(carp_user.loc, 'sound/items/weapons/punchmiss.ogg', 25, TRUE, -1)
@@ -381,10 +381,10 @@
 	set category = "Sleeping Carp"
 
 	to_chat(usr, span_info("<b><i>Вы уходите в себя и вспоминаете учения Спящего Карпа...</i></b>\n\
-	[span_notice("Скрежещущие зубы")]: Удар Захват. Яростно выкручивайте руку противника, выворачивая или даже ломая кость, заставляя противника выронить удерживаемый предмет.\n\
-	[span_notice("Сокрушительный удар волны")]: Удар Толчок. Оттолкните вашего противника с невероятной силой!\n\
-	[span_notice("Под килем")]: Толчок Толчок. Несмертельный удар ногой по полу, сбивающий противника с ног, приводящий его в замешательство и наносящий существенный урон выносливости. Если противник уже лежит ничком, обезоруживает его.\n\
-	[span_notice("Крушение Кракена")]: Захват Удар. Нанесите удар коленом по противнику, нанося высокий урон выносливости, ненадолго оглушая его, сбивая дыхание и затрудняя речь.\n\
+	[span_notice("Скрежещущие зубы")]: Удар, Захват. Яростно выкручивайте руку противника, выворачивая или даже ломая кость, заставляя противника выронить удерживаемый предмет.\n\
+	[span_notice("Сокрушительный удар волны")]: Удар, Толчок. Оттолкните вашего противника с невероятной силой!\n\
+	[span_notice("Под килем")]: Толчок, Толчок. Несмертельный удар ногой по полу, сбивающий противника с ног, приводящий его в замешательство и наносящий существенный урон выносливости. Если противник уже лежит ничком, обезоруживает его.\n\
+	[span_notice("Крушение Кракена")]: Захват, Удар. Нанесите удар коленом по противнику, нанося высокий урон выносливости, ненадолго оглушая его, сбивая дыхание и затрудняя речь.\n\
 	[span_notice("Захваты и броски")]: В боевом режиме обычные захваты и толчки наносят значительный урон выносливости, и от них труднее отбиться. Если вы захватываете кого-то, с низким уровнем выносливости, вы вырубаете его!\n\
 	<span class='notice'>Находясь в боевом режиме (и не будучи оглушенным, халком, и не находясь в мехе), вы можете отражать все снаряды, летящие в вашу сторону, посылая их обратно в тех, кто запустил их в вас! \n\
 	Однако ваша способность уклоняться от снарядов ухудшается, когда вы обременены броней или когда вы несёте в руках предметы обычного, или более крупного, размера. \n\
@@ -426,7 +426,7 @@
 /obj/item/staff/bostaff/attack(mob/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	add_fingerprint(user)
 	if((HAS_TRAIT(user, TRAIT_CLUMSY)) && prob(50))
-		to_chat(user, span_warning("Вы огреваете себя по голове [src]."))
+		to_chat(user, span_warning("Вы огреваете себя по голове [src.declent_ru(INSTRUMENTAL)]."))
 		user.Paralyze(6 SECONDS)
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user

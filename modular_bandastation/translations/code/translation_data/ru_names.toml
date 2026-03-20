@@ -26837,6 +26837,15 @@ instrumental = "таинственным свитком"
 prepositional = "таинственном свитке"
 gender = "male"
 
+["empty scroll"]
+nominative = "пустой свиток"
+genitive = "пустого свитка"
+dative = "пустому свитку"
+accusative = "пустой свиток"
+instrumental = "пустым свитком"
+prepositional = "пустом свитке"
+gender = "male"
+
 ["suspicious looking toolbox"]
 nominative = "подозрительный ящик для инструментов"
 genitive = "подозрительного ящика для инструментов"
