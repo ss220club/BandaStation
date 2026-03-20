@@ -1135,10 +1135,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This target has recently been shot by a marksman coin and is very briefly immune to being hit by one again to prevent recursion
 #define TRAIT_RECENTLY_COINED "recently_coined"
 
-/// Receives echolocation images.
-#define TRAIT_ECHOLOCATION_RECEIVER "echolocation_receiver"
-/// Echolocation has a higher range.
-#define TRAIT_ECHOLOCATION_EXTRA_RANGE "echolocation_extra_range"
+/// Mob is an echolocator
+#define TRAIT_ECHOLOCATOR "echolocator"
 
 /// Trait given to a living mob and any observer mobs that stem from them if they suicide.
 /// For clarity, this trait should always be associated/tied to a reference to the mob that suicided- not anything else.
@@ -1242,6 +1240,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_ELEVATING_OBJECT "elevating_object"
 /// From [/datum/element/elevation_core] for purpose of checking if the turf has the trait from an instance of the element
 #define TRAIT_ELEVATED_TURF "elevated_turf"
+/// From [/datum/component/defaceable] marks that something has been... marked
+#define TRAIT_DEFACED "defaced"
 
 /// This item is currently under the control of telekinesis
 #define TRAIT_TELEKINESIS_CONTROLLED "telekinesis_controlled"
@@ -1466,6 +1466,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STUBBY_BODY "stubby_body" // you have a stubby body that lessens your agility
 #define TRAIT_BEAST_EMPATHY "beast_empathy" // you're good with animals, such as with taming them
 #define TRAIT_STURDY_FRAME "sturdy_frame" // you suffer much lesser effects from equipment that slows you down
+
+/// Has this mob been tamed?
+#define TRAIT_TAMED "tamed"
 
 /// This item cannot be selected for or used by a theft objective (Spies, Traitors, etc.)
 #define TRAIT_ITEM_OBJECTIVE_BLOCKED "item_objective_blocked"

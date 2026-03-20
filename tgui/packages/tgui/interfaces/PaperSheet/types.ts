@@ -14,7 +14,7 @@ export type PaperContext = {
   // ui_data
   held_item_details?: WritingImplement;
   advanced_html_user: boolean;
-  replacements: PaperReplacement[];
+  replacements?: PaperReplacement[];
 };
 
 export type PaperInput = {

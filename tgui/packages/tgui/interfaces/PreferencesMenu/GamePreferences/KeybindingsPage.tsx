@@ -11,6 +11,7 @@ import {
 import type { KeyEvent } from 'tgui-core/events';
 import { fetchRetry } from 'tgui-core/http';
 import { isEscape, KEY } from 'tgui-core/keys';
+import type { BooleanLike } from 'tgui-core/react';
 
 import { LoadingScreen } from '../../common/LoadingScreen';
 import { Preference } from '../components/Preference';
@@ -20,6 +21,8 @@ import { TabbedMenu } from './TabbedMenu';
 type Keybinding = {
   name: string;
   description?: string;
+  can_edit: BooleanLike;
+  default?: string[];
 };
 
 type Keybindings = Record<string, Record<string, Keybinding>>;
@@ -98,9 +101,11 @@ function formatKeyboardEvent(event: KeyboardEvent): string {
 }
 
 class KeybindingButton extends Component<{
+  can_edit: BooleanLike;
   currentHotkey?: string;
   onClick?: () => void;
   typingHotkey?: string;
+  defaults?: string[];
 }> {
   shouldComponentUpdate(nextProps) {
     return (
@@ -110,7 +115,10 @@ class KeybindingButton extends Component<{
   }
 
   render() {
-    const { currentHotkey, onClick, typingHotkey } = this.props;
+    const { can_edit, currentHotkey, onClick, typingHotkey, defaults } =
+      this.props;
+
+    const keyText = typingHotkey || currentHotkey || 'Пусто';
     const child = (
       <Button
         fluid
@@ -118,11 +126,21 @@ class KeybindingButton extends Component<{
         captureKeys={typingHotkey === undefined}
         selected={typingHotkey !== undefined}
         onClick={(event) => {
-          event.stopPropagation();
-          onClick?.();
+          if (can_edit) {
+            event.stopPropagation();
+            onClick?.();
+          }
         }}
+        textColor={keyText === 'Пусто' ? 'grey' : undefined}
+        color={
+          !can_edit
+            ? 'transparent'
+            : keyText === 'Пусто' || !defaults || defaults.includes(keyText)
+              ? undefined
+              : 'green'
+        }
       >
-        {typingHotkey || currentHotkey || 'Пусто'}
+        {keyText}
       </Button>
     );
 
@@ -160,6 +178,53 @@ function ResetToDefaultButton(props: ResetToDefaultButtonProps) {
   );
 }
 
+// Generates react nodes for keybindings
+function getKeybindingNodes(
+  input: Record<string, Keybinding>,
+  searchText: string | undefined,
+  selectedKeybindings: PreferencesMenuData['keybindings'] | undefined,
+  getTypingHotkey: (keybindingId: string, slot: number) => string | undefined,
+  getKeybindingOnClick: (keybindingId: string, slot: number) => () => void,
+) {
+  return sortKeybindings(Object.entries(input))
+    .map(([keybindingId, keybinding]) => {
+      if (
+        searchText &&
+        searchText.length >= 2 &&
+        !keybinding.name.toLowerCase().includes(searchText.toLowerCase())
+      ) {
+        return null;
+      }
+      const keys = selectedKeybindings![keybindingId] || [];
+
+      const name = <Stack.Item basis="25%">{keybinding.name}</Stack.Item>;
+
+      return (
+        <Stack.Item key={keybindingId} mb={1}>
+          <Stack fill>
+            {name}
+            {range(0, keybinding.can_edit ? 3 : 1).map((key) => (
+              <Stack.Item key={key} grow basis="10%">
+                <KeybindingButton
+                  can_edit={keybinding.can_edit}
+                  currentHotkey={keys[key]}
+                  typingHotkey={getTypingHotkey(keybindingId, key)}
+                  onClick={getKeybindingOnClick(keybindingId, key)}
+                  defaults={keybinding.default}
+                />
+              </Stack.Item>
+            ))}
+            {!!keybinding.can_edit && (
+              <Stack.Item shrink>
+                <ResetToDefaultButton keybindingId={keybindingId} />
+              </Stack.Item>
+            )}
+          </Stack>
+        </Stack.Item>
+      );
+    })
+    .filter((node) => node !== null);
+}
 export class KeybindingsPage extends Component<any, KeybindingsPageState> {
   cancelNextKeyUp?: number;
   keybindingOnClicks: Record<string, (() => void)[]> = {};
@@ -384,6 +449,8 @@ export class KeybindingsPage extends Component<any, KeybindingsPageState> {
                         {range(0, 3).map((key) => (
                           <Stack.Item key={key} grow>
                             <KeybindingButton
+                              can_edit={keybinding.can_edit}
+                              defaults={keybinding.default}
                               currentHotkey={keys[key]}
                               typingHotkey={this.getTypingHotkey?.(
                                 keybindingId,

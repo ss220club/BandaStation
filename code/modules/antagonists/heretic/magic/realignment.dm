@@ -1,8 +1,8 @@
 // Realignment. It's like Fleshmend but solely for stamina damage and stuns. Sec meta
 /datum/action/cooldown/spell/realignment
-	name = "Realignment"
-	desc = "Выровняйте себя, быстро восстанавливая стамину и уменьшая любые оглушения и сбивания с ног. \
-		Вы не можете атаковать во время выравнивания. Можно применять несколько раз подряд, но каждое применение удлиняет перезярядку."
+	name = "Реорганизация"
+	desc = "Реорганизуетесь, быстро восстанавливая выносливость и уменьшая любые оглушения и сбивания с ног. \
+		Вы не можете атаковать во время реорганизации. Можно применять несколько раз подряд, но каждое применение удлиняет перезарядку."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/hud/implants.dmi'
@@ -77,6 +77,6 @@
 	owner.AdjustAllImmobility(-1 SECONDS)
 
 /atom/movable/screen/alert/status_effect/realignment
-	name = "Realignment"
-	desc = "Вы выравниваете себя. Вы не можете атаковать, но быстро восстанавливаете стамину."
+	name = "Реорганизация"
+	desc = "Вы не можете атаковать, но быстро восстанавливаете выносливость."
 	icon_state = "realignment"
