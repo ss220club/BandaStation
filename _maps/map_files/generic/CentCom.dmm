@@ -1419,12 +1419,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/catwalk_floor,
 /area/centcom/central_command_areas/evacuation/ship)
-"afX" = (
-/obj/effect/turf_decal/tile/blue,
-/turf/open/floor/iron/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=170.15"
-	},
-/area/centcom/central_command_areas/rnd)
 "afY" = (
 /obj/structure/chair{
 	dir = 8
@@ -3610,8 +3604,8 @@
 /area/centcom/central_command_areas/engine)
 "aqN" = (
 /obj/machinery/door/airlock/centcom,
-/obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /turf/open/floor/iron/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=170.15"
 	},
@@ -11887,6 +11881,14 @@
 "aYN" = (
 /obj/structure/light_fake/small/directional/east,
 /obj/structure/closet/secure_closet/medical3,
+/obj/item/storage/box/syringes{
+	pixel_x = -2;
+	pixel_y = 5
+	},
+/obj/item/storage/box/syringes{
+	pixel_x = -2;
+	pixel_y = 5
+	},
 /turf/open/floor/iron/freezer,
 /area/centcom/central_command_areas/rnd)
 "aYR" = (
@@ -11955,12 +11957,24 @@
 	},
 /area/centcom/central_command_areas/bar)
 "aZg" = (
-/obj/effect/turf_decal/tile/blue{
-	dir = 4
+/obj/structure/table/glass,
+/obj/structure/microscope{
+	pixel_x = -1;
+	pixel_y = 4
 	},
-/turf/open/floor/iron/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=170.15"
+/obj/item/biopsy_tool{
+	pixel_x = -10;
+	pixel_y = 3
 	},
+/obj/item/reagent_containers/dropper{
+	pixel_x = 10;
+	pixel_y = 7
+	},
+/obj/item/reagent_containers/dropper{
+	pixel_x = 10;
+	pixel_y = 10
+	},
+/turf/open/floor/iron/freezer,
 /area/centcom/central_command_areas/rnd)
 "aZh" = (
 /obj/structure/tank_dispenser/oxygen,
@@ -18942,11 +18956,11 @@
 /area/centcom/central_command_areas/cabin/captain)
 "oSS" = (
 /obj/item/pizzabox,
-/obj/item/food/pizzaslice/vegetable,
 /obj/item/food/pizzaslice/mothic_pesto{
 	pixel_y = -5;
 	pixel_x = -3
 	},
+/obj/item/food/pizzaslice/vegetable,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/rnd)
 "oTc" = (
@@ -22164,13 +22178,15 @@
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "uBp" = (
-/obj/effect/turf_decal/tile/blue/half/contrasted{
+/obj/effect/turf_decal/loading_area{
 	dir = 4
 	},
-/turf/open/floor/iron/dark{
-	initial_gas_mix = "o2=22;n2=82;TEMP=170.15"
+/obj/item/biopsy_tool{
+	pixel_x = -10;
+	pixel_y = 3
 	},
-/area/centcom/central_command_areas/rnd)
+/turf/open/floor/pod,
+/area/centcom/central_command_areas/supply)
 "uBI" = (
 /obj/structure/chair/comfy/corp{
 	dir = 1
@@ -71497,10 +71513,10 @@ aJp
 aJp
 aJp
 xJo
-uBp
-aZg
-afX
-uBp
+dyE
+hpv
+aNb
+aYB
 xJo
 aUY
 aRg
@@ -71754,10 +71770,10 @@ ahC
 aYL
 acx
 xJo
-dyE
-hpv
-aNb
-aYB
+aDP
+hBM
+atx
+aDP
 xJo
 adY
 aRg
@@ -72011,10 +72027,10 @@ aSs
 agk
 acH
 xJo
-aDP
-hBM
-atx
-aDP
+xJo
+xJo
+aqN
+xJo
 xJo
 aHh
 avp
@@ -72268,10 +72284,10 @@ aGq
 afO
 acH
 xJo
-xJo
-xJo
-aqN
-xJo
+aZg
+aKc
+aKc
+abT
 xJo
 aHn
 aTr
@@ -72522,13 +72538,13 @@ aQE
 asj
 acH
 asj
-asj
+uBp
 acH
 xJo
 hVd
 iIJ
 ttB
-abT
+aKc
 xJo
 xJo
 xJo
@@ -75097,7 +75113,7 @@ aMc
 aWD
 auT
 fra
-dKx
+oSS
 dKx
 xGD
 dKx
@@ -75354,7 +75370,7 @@ aMc
 aWD
 pRu
 dKx
-oSS
+dKx
 xeV
 dKx
 dKx
