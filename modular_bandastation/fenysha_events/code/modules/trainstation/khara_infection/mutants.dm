@@ -82,7 +82,7 @@
 	desc = "Мерзкая, окровавленная мерзость..."
 	mob_biotypes = MOB_ORGANIC|MOB_BUG|MOB_SPECIAL
 	speak_emote = list("рычит")
-	damage_coeff = list(BRUTE = 1.5, BURN = 0.5, TOX = 0, STAMINA = 1, OXY = 0)
+	damage_coeff = list(BRUTE = 1.3, BURN = 0.7, TOX = 0, STAMINA = 1, OXY = 0)
 	basic_mob_flags = FLAMMABLE_MOB|IMMUNE_TO_FISTS|REMAIN_DENSE_WHILE_DEAD
 	status_flags = CANSTUN
 	speed = 1
@@ -100,7 +100,7 @@
 	attack_vis_effect = ATTACK_EFFECT_SLASH
 	unsuitable_cold_damage = 10
 	unsuitable_heat_damage = 0
-	maximum_survivable_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
+	maximum_survivable_temperature = SPACE_SUIT_MAX_TEMP_PROTECT
 	minimum_survivable_temperature = T0C - 25
 	combat_mode = TRUE
 	faction = list(FACTION_KHARA)
@@ -116,15 +116,34 @@
 	max_stamina_slowdown = 12
 	habitable_atmos = null
 
+	/// Каста этого мутанта
 	var/cast = KHARA_CAST_LESSER
-	var/datum/component/khara_hivemind/hivemind_link = null
+	/// Ссылка на компонент колеективного разума этого мутанта
+	VAR_FINAL/datum/component/khara_hivemind/hivemind_link = null
+	/// Сила этого мутанта
+	var/mutant_power = KHARA_POWER_WEAK
+
+	/// Минимальный урон в ближнем бою, необходимый, чтобы пробить этого мутанта
+	var/minimum_melee_damage_treshold = 10
+	/// Модификатор дополнительного урона в ближнем бою, где - 1 - это 2х урон
+	var/addictional_melee_damage_multiplier = 1
+
+	/// Должен ли этот мутант лопаться при смерти
+	var/gib_on_death = TRUE
+	/// Радиус распыления крови, при гибе мутанта
+	var/spread_blood_radius = 3
 
 	var/spread_miasma_amount = 12
 	var/spread_miasma_chance = 5
 	var/spreads_miasma = FALSE
 	var/regeneration_delay = 4 SECONDS
 	var/health_regen_per_second = 4
+	/// Способности этого мутанта
 	var/list/innate_actions
+	/// Способности всех мутантов по умолчанию
+	VAR_PRIVATE/list/default_actions = list(
+		/datum/action/cooldown/mob_cooldown/consume = BB_MOB_ABILITY_CONSUME
+	)
 
 	var/spread_minimal_cooldown = 5 SECONDS
 	COOLDOWN_DECLARE(spread_cd)
@@ -164,10 +183,46 @@
 		cast = src.cast, \
 	)
 	apply_wibbly_filters(src)
+	give_powers()
 
 	if(innate_actions && islist(innate_actions))
 		grant_actions_by_list(innate_actions)
 	update_sight()
+
+/mob/living/basic/khara_mutant/proc/give_powers()
+	PRIVATE_PROC(TRUE)
+	grant_actions_by_list(default_actions)
+
+	if(mutant_power >= KHARA_POWER_STRONG)
+		grant_actions_by_list(list(
+			/datum/action/cooldown/mob_cooldown/mech_crush = BB_MOB_ABILITY_CRUSH_MECH
+		))
+
+
+/mob/living/basic/khara_mutant/attack_hand(mob/living/carbon/human/user, list/modifiers)
+	return ATTACK_FAILED
+
+/mob/living/basic/khara_mutant/attacked_by(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
+	if(attacking_item.force < minimum_melee_damage_treshold)
+		attacking_item.visible_message("[attacking_item], отскакивает от тела [src], не в силах пробить его.")
+		user.do_attack_animation(src, used_item = attacking_item)
+		return ATTACK_FAILED
+
+	. = ..()
+
+	if(!.)
+		return
+	var/addictional_damage = . * addictional_melee_damage_multiplier
+
+	apply_damage(
+		damage = addictional_damage,
+		damagetype = attacking_item.damtype,
+		def_zone = check_zone(user.zone_selected),
+		blocked = FALSE,
+		sharpness = attacking_item.get_sharpness(),
+		attack_direction = get_dir(user, src),
+		attacking_item = attacking_item,
+	)
 
 
 /mob/living/basic/khara_mutant/Life(seconds_per_tick, times_fired)
@@ -186,11 +241,12 @@
 	do_chem_smoke(spread_miasma_amount / 2, src, get_turf(src), /datum/reagent/toxin/khara, 10, log = FALSE, amount = spread_miasma_amount, smoke_type = /datum/effect_system/fluid_spread/smoke/chem/khara)
 
 /mob/living/basic/khara_mutant/death(gibbed)
-	inflate_gib()
+	if(gib_on_death)
+		inflate_gib()
 	. = ..()
 
 /mob/living/basic/khara_mutant/gib()
-	for(var/turf/blood_turf in view(src, 3))
+	for(var/turf/blood_turf in circle_range(src, spread_blood_radius))
 		new /obj/effect/decal/cleanable/blood(blood_turf)
 		for(var/mob/living/mob_in_turf in blood_turf)
 			mob_in_turf.visible_message(span_danger("[mob_in_turf] обрызган кровью!"), span_userdanger("Ты обрызган кровью!"))
@@ -214,6 +270,8 @@
 	ai_controller = /datum/ai_controller/basic_controller/giant_spider
 	health = 125
 	maxHealth = 125
+	spread_blood_radius = 1
+	minimum_melee_damage_treshold = 5
 	innate_actions = list(
 		/datum/action/cooldown/mob_cooldown/boss_bone_shard = BB_MOB_ABILITY_BONESHARD
 	)
@@ -233,19 +291,46 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 
+
+/mob/living/basic/khara_mutant/flesh_human
+	name = "Мясной гуманоид"
+	desc = "Страшное гуманоидное существо, что яво еще недавно было человеком. Все тело существа дрожит неестственно изгибаясь, \
+			пока четыре отростка за спиной быстро колыхаются."
+	icon = 'modular_bandastation/fenysha_events/icons/mob/horror.dmi'
+	icon_state = "khara_creature"
+	icon_living = "khara_creature"
+	icon_dead = "khara_creature"
+	speak_emote = list("извивается")
+	response_help_continuous = "гладит"
+	response_help_simple = "погладить"
+	response_disarm_continuous = "осторожно отталкивает"
+	response_disarm_simple = "оттолкнуть"
+	ai_controller = /datum/ai_controller/basic_controller/giant_spider
+	melee_damage_upper = 20
+	melee_damage_lower = 20
+	armour_penetration = 40
+
+	speed = 0
+	health = 150
+	maxHealth = 150
+	spread_blood_radius = 1
+	minimum_melee_damage_treshold = 15
+
+
 /mob/living/basic/khara_mutant/arachnid
 	name = "Искажённый арахнид"
 	desc = "Несмотря на внушительные размеры, предпочитает нападать из засады и атаковать только уже искалеченную жертву."
 	cast = KHARA_CAST_ADAPTED
+	mutant_power = KHARA_POWER_STRONG
 	icon = 'icons/mob/simple/jungle/arachnid.dmi'
 	icon_state = "arachnid"
 	icon_living = "arachnid"
 	icon_dead = "arachnid_dead"
 	color = COLOR_RED
-	armour_penetration = 50
-	melee_damage_lower = 25
-	melee_damage_upper = 35
-	wound_bonus = -100
+	armour_penetration = 60
+	melee_damage_lower = 15
+	melee_damage_upper = 25
+	wound_bonus = 15
 	maxHealth = 350
 	health = 350
 
@@ -272,6 +357,7 @@
 	name = "Жнец"
 	desc = "Ужасающая мерзость на тонких окровавленных ногах. Конечности двигаются хаотично и неестественно."
 	cast = KHARA_CAST_ADAPTED
+	mutant_power = KHARA_POWER_STRONG
 	icon = 'modular_bandastation/fenysha_events/icons/mob/64x64.dmi'
 	icon_state = "reaper"
 	icon_living = "reaper"
@@ -328,6 +414,7 @@
 	name = "Скорпион"
 	desc = "Огромная мерзость перемещающаяся на неуклюжем подобии ног, лучше не стоять у этого на пути."
 	cast = KHARA_CAST_ASSIMILATING
+	mutant_power = KHARA_POWER_VERY_STRONG
 	icon = 'modular_bandastation/fenysha_events/icons/mob/128x128.dmi'
 	icon_state = "scorpion_khara"
 	icon_living = "scorpion_khara"
@@ -360,11 +447,11 @@
 		/datum/action/cooldown/mob_cooldown/crushing_charge = BB_MOB_ABILITY_CRUSH_CHARGE,
 	)
 
-
 /mob/living/basic/khara_mutant/spreader
 	name = "Распространитель"
 	desc = "Огромная мерзость, напоминающая живое лёгкое. Извергает колоссальные объёмы заражённого миазмами Кхара тумана."
 	cast = KHARA_CAST_ASSIMILATING
+	mutant_power = KHARA_POWER_VERY_STRONG
 	icon = 'modular_bandastation/fenysha_events/icons/mob/256x256.dmi'
 	icon_state = "spreader"
 	icon_living = "spreader"

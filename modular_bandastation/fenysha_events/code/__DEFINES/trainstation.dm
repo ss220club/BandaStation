@@ -58,6 +58,8 @@
 #define BB_MOB_ABILITY_FAST_CHARGE "bb_ability_fast_charge"
 #define BB_MOB_ABILITY_CRUSH_CHARGE "bb_ability_crush_charge"
 #define BB_MOB_ABILITY_CRUSH_WAVE "bb_ability_crush_wave"
+#define BB_MOB_ABILITY_CRUSH_MECH "bb_ability_crush_mech"
+#define BB_MOB_ABILITY_CONSUME "bb_ability_consume"
 
 #define BB_NPC_PATROL_POINT "bb_npc_patrol_point"
 #define BB_BASIC_MOB_CUFF_TYPE "bb_cuff_type"
@@ -71,6 +73,11 @@
 #define KHARA_CAST_LESSER "Низшие"
 #define KHARA_CAST_ADAPTED "Адаптированные"
 #define KHARA_CAST_ASSIMILATING "Ассмилирующие"
+
+#define KHARA_POWER_WEAK 1
+#define KHARA_POWER_STRONG 2
+#define KHARA_POWER_VERY_STRONG 3
+
 
 /proc/find_nearest_ally(atom/source, faction, range = 12)
 	var/closest

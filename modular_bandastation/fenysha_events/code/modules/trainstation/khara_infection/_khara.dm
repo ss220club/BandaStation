@@ -27,7 +27,7 @@
 	cures = list()
 
 	var/stage_process = 0
-	var/base_stage_speed = 0.8
+	var/base_stage_speed = 0.9
 
 	var/list/inverters = list(
 		/datum/reagent/medicine/rezadone = 1,
@@ -35,7 +35,7 @@
 		/datum/reagent/toxin/anacea = 6.5,
 	)
 	var/invert_catalyst = /datum/reagent/inverse/technetium
-	var/thing_emerg = /mob/living/basic/khara_mutant/reaper
+	var/thing_emerg = /mob/living/basic/khara_mutant/flesh_human
 	var/emerged = FALSE
 
 	COOLDOWN_DECLARE(stage_process_cd)
@@ -82,26 +82,21 @@
 	switch(new_stage)
 		if(1 to 3)
 			visibility_flags = HIDDEN_SCANNER|HIDDEN_PANDEMIC
-			base_stage_speed = 0.8
 			process_dead = FALSE
 			spreading_modifier = KHARA_SPREADING_MODIFIER
 		if(4)
 			to_chat(affected_mob, span_userdanger("Что-то тяжёлое и неправильное пульсирует глубоко внутри живота…"))
 			spreading_modifier *= 0.6
-			base_stage_speed = 1.2
 			process_dead = TRUE
 			visibility_flags = NONE
 			spreading_modifier = KHARA_SPREADING_MODIFIER * 1.2
 		if(5)
 			to_chat(affected_mob, span_userdanger("Кожа вздувается и шевелится — что-то растёт слишком быстро!"))
-			base_stage_speed = 1.6
 			spreading_modifier = KHARA_SPREADING_MODIFIER * 1.4
 		if(6)
 			to_chat(affected_mob, span_userdanger("Кости трещат и ломаются под немыслимым внутренним давлением!"))
-			base_stage_speed = 1.8
 			spreading_modifier = KHARA_SPREADING_MODIFIER * 1.6
 		if(7)
-			base_stage_speed = 2
 			to_chat(affected_mob, span_userdanger("Всё внутри шевелится. Оно хочет наружу."))
 			affected_mob.Shake(duration = 2 SECONDS)
 			spreading_modifier = KHARA_SPREADING_MODIFIER * 2
@@ -109,7 +104,7 @@
 
 
 /datum/disease/khara/proc/get_slowing_modifier()
-	var/base = 1
+	var/base = base_stage_speed
 
 	if(HAS_TRAIT(affected_mob, TRAIT_VIRUS_RESISTANCE))
 		base -= 0.2
@@ -121,7 +116,7 @@
 	if(HAS_TRAIT(our_area, TRAIT_AREA_MORPENGINE))
 		base -= 0.5
 
-	return base
+	return max(base, 0.1)
 
 
 /datum/disease/khara/proc/stage_evolution_process(seconds_per_tick)
@@ -160,9 +155,12 @@
 	if(emerging)
 		return
 
+	var/host_dead = affected_mob.stat == DEAD
+
 	if(COOLDOWN_FINISHED(src, stage_process_cd))
 		stage_evolution_process(seconds_per_tick)
-		COOLDOWN_START(src, stage_process_cd, 3 SECONDS)
+		var/next_tick = host_dead ? 5 SECONDS : 3 SECONDS
+		COOLDOWN_START(src, stage_process_cd, next_tick)
 
 	var/area/our_area = get_area(affected_mob)
 	var/protected_area = HAS_TRAIT(our_area, TRAIT_AREA_MORPENGINE)

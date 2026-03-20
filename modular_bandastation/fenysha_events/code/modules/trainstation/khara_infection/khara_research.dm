@@ -7,6 +7,81 @@
 #define TECHWEB_NODE_KHARA_POSITIVE_ADVANCED "evt_khara_med_advanced"
 
 
+/datum/design/anti_khara_ammunition
+	name = "Экспресс тест 'Кхара'"
+	desc = "Дизайн простой лаборатории, способной быстро определить наличие анти-тел Кхары в крови."
+	id = "khara_test"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(
+		/datum/material/iron = SMALL_MATERIAL_AMOUNT * 2,
+		/datum/material/silver = SMALL_MATERIAL_AMOUNT * 1.5,
+		/datum/material/glass = SMALL_MATERIAL_AMOUNT * 2,
+	)
+	build_path = /obj/item/khara_express_test
+	category = list(
+		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_MEDICAL_ADVANCED
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
+
+/obj/item/khara_express_test
+	name = "Экспресс Тест 'Кхара'"
+	desc = "Простой девайс представляющий из себя микроскопическую лабораторию, \
+			способную проверку реакцию органики на клетки зараженные вирусом 'Кхара'"
+	force = 0
+	throwforce = 0
+	icon = 'modular_bandastation/fenysha_events/icons/items/devices.dmi'
+	icon_state = "kharatest"
+
+	w_class = WEIGHT_CLASS_TINY
+
+	var/disease_path = /datum/disease/khara
+	VAR_PRIVATE/used = FALSE
+
+/obj/item/khara_express_test/attacked_by(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
+	if(!is_reagent_container(attacking_item))
+		return ..()
+	if(used)
+		balloon_alert_to_viewers("Тестер уже использован!")
+		return
+	perform_test(attacking_item, user)
+
+/obj/item/khara_express_test/proc/perform_test(obj/item/reagent_containers/container, mob/living/user)
+	if(container.reagents.total_volume == 0)
+		balloon_alert_to_viewers("Образец пуст!")
+		return
+
+	if(!container.reagents.has_reagent(/datum/reagent/blood))
+		balloon_alert_to_viewers("В образце отсутствует кровь!")
+		return
+
+	if(!do_after(user, 3 SECONDS, src))
+		return
+
+	var/has_khara = FALSE
+	for(var/datum/reagent/blood/blood_reagent as anything in container.reagents.reagent_list)
+		if(!istype(blood_reagent))
+			continue
+
+		var/list/viruses = blood_reagent.data?["viruses"]
+		if(!length(viruses))
+			continue
+
+		for(var/datum/disease/D as anything in viruses)
+			if(istype(D, disease_path))
+				has_khara = TRUE
+
+	used = TRUE
+	if(has_khara)
+		balloon_alert_to_viewers("Обнаружен враждебный патоген!")
+		icon_state = "kharatest_bad"
+		playsound(src, 'sound/machines/beep/twobeep.ogg', vol = 50, vary = TRUE)
+	else
+		balloon_alert_to_viewers("Образец чист!")
+		icon_state = "kharatest_good"
+		playsound(src, 'sound/machines/buzz/buzz-two.ogg', vol = 40, vary = TRUE)
+
+	update_appearance()
+
 /**
  * Эксперимент: Сканирование образцов крови с вирусом Кхара
  */
@@ -218,6 +293,10 @@
 	display_name = "Базовая информация о вирусе Кхара"
 	description = "Получены первичные данные о вирусе Кхара и его характеристиках."
 	prereq_ids = list(TECHWEB_NODE_CHEM_SYNTHESIS, TECHWEB_NODE_KHARA_START)
+	design_ids = list(
+		"khara_test",
+	)
+
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_5_POINTS)
 	required_experiments = list(/datum/experiment/scanning/blood_khara)
 	announce_channels = list(RADIO_CHANNEL_MEDICAL, RADIO_CHANNEL_SCIENCE)
@@ -273,8 +352,13 @@
 /datum/techweb_node/khara/khara_ammunition_basic
 	id = TECHWEB_NODE_KHARA_AMMUNITION_BASIC
 	display_name = "Базовое вооружение против заражённых Кхара"
-	description = "Получены чертежи специальных боеприпасов для борьбы с поражёнными."
-	design_ids = list("anti_khara_ammunition")
+	description = "Получены чертежи специальных боеприпасов и оружия для борьбы с поражёнными."
+	design_ids = list(
+		"anti_khara_ammunition",
+		"anti_khara_weapon_sword",
+		"anti_khara_weapon_greatsword",
+		"anti_khara_weapon_spear",
+	)
 	prereq_ids = list(TECHWEB_NODE_KHARA_INITIAL_INFECTION, TECHWEB_NODE_BEAM_WEAPONS)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_5_POINTS * 3)
 	required_experiments = list(/datum/experiment/scanning/khara_creature/adapted)
@@ -284,7 +368,7 @@
 
 	research_text = "Дальнейшие исследования мутантов высоких каст показали, что все поражённые Кхара обладают коллективным сознанием и способны \
 					обмениваться информацией на расстоянии. Это позволило создать боеприпасы, улавливающие данный сигнал и наносящие \
-					урон исключительно созданиям Кхара, игнорируя обычных людей."
+					урон исключительно созданиям Кхара, игнорируя обычных людей. Кроме того, теперь для создания доступна линейка особенного Анти-кхара оружия."
 
 /obj/item/paper/khara_ammunition_basic_research
 	name = "Отчёт: Базовое вооружение против Кхара"
@@ -293,7 +377,7 @@
 	<BR>\
 	<b>Тема:</b> Базовое вооружение против заражённых Кхара<BR>\
 	<BR>\
-	Дальнейшие исследования мутантов высоких каст показали, что все поражённые Кхара обладают коллективным сознанием и способны обмениваться информацией на расстоянии. Это позволило создать боеприпасы, улавливающие данный сигнал и наносящие урон исключительно созданиям Кхара, игнорируя обычных людей.\
+	Дальнейшие исследования мутантов высоких каст показали, что все поражённые Кхара обладают коллективным сознанием и способны обмениваться информацией на расстоянии. Это позволило создать боеприпасы, улавливающие данный сигнал и наносящие урон исключительно созданиям Кхара, игнорируя обычных людей. Кроме того, теперь для создания доступна линейка особенного Анти-кхара оружия.\
 	<BR><BR>\
 	<b>СЕКРЕТНО — УРОВЕНЬ IV</b><BR>\
 	Документ является конфиденциальным. Запрещено копирование. Запрещено обсуждение вне научного и охранного персонала. Запрещено оставлять без охраны.\

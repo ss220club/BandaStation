@@ -472,6 +472,302 @@
 	return ..()
 
 
+/datum/design/anti_khara_weapon
+	id = "anti_khara_weapon_debug"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 15,
+		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 3,
+		/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 3,
+		/datum/material/diamond = SHEET_MATERIAL_AMOUNT * 1.5,
+	)
+	build_path = /obj/item/melee/anti_khara
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_MELEE
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_CARGO | DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/anti_khara_weapon/sword
+	id = "anti_khara_weapon_sword"
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 15,
+		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 5,
+		/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 5,
+		/datum/material/diamond = SHEET_MATERIAL_AMOUNT * 3,
+	)
+	build_path = /obj/item/melee/anti_khara/sword
+
+/datum/design/anti_khara_weapon/great_sword
+	id = "anti_khara_weapon_greatsword"
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 25,
+		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 10,
+		/datum/material/diamond = SHEET_MATERIAL_AMOUNT * 5,
+	)
+	build_path = /obj/item/melee/anti_khara/great_sword
+
+/datum/design/anti_khara_weapon/great_sword
+	id = "anti_khara_weapon_spear"
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
+		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 8,
+		/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 3,
+		/datum/material/diamond = SHEET_MATERIAL_AMOUNT * 1,
+	)
+	build_path = /obj/item/melee/anti_khara/spear
+
+
+/// Я интегрировал компонент transormating в оружие, потому что да
+/obj/item/melee/anti_khara
+	name = "Анти-Кхара оружие"
+	desc = "Специализированное оружие против созданий Кхары. Изготовлено из высокопрочного армированного титана с уникальным сплавом, \
+			который позволяет наносить дополнительные разрушительные эффекты этим существам."
+	icon = 'modular_bandastation/fenysha_events/icons/items/melee/anti_khara.dmi'
+	lefthand_file = 'modular_bandastation/fenysha_events/icons/items/inhand/melee/anti_khara_left.dmi'
+	righthand_file = 'modular_bandastation/fenysha_events/icons/items/inhand/melee/anti_khara_right.dmi'
+	custom_materials = list(/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 3.5)
+	item_flags = SLOWS_WHILE_IN_HAND | NEEDS_PERMIT
+	resistance_flags = NONE
+	force = 0
+	throwforce = 0
+
+	/// Развёрнуто ли оружие (активное состояние)
+	var/deployed = FALSE
+
+	var/active_force = 30
+	var/khara_damage = 35
+	var/active_throwforce = 30
+	var/active_throw_speed = 3
+	var/active_sharpness = SHARP_EDGED
+	var/active_hitsound = 'sound/items/weapons/bladeslice.ogg'
+	var/active_w_class = WEIGHT_CLASS_HUGE
+
+	var/list/active_attack_verb_continuous = list("attacks", "slashes", "slices", "tears", "lacerates", "rips", "dices", "cuts")
+	var/list/active_attack_verb_simple = list("attack", "slash", "slice", "tear", "lacerate", "rip", "dice", "cut")
+
+	var/force_off
+	var/throwforce_off
+	var/throw_speed_off
+	var/w_class_off
+	var/sharpness_off
+	var/hitsound_off
+	var/list/attack_verb_continuous_off
+	var/list/attack_verb_simple_off
+
+	var/special_des = \
+	"Это — <b>Анти-Кхара оружие</b>. \
+	Специальная настройка лезвия и уникальный сплав материала позволяют эффективно атаковать создания Кхары, \
+	нанося им дополнительные повреждения и визуальные эффекты пробития."
+
+/obj/item/melee/anti_khara/examine(mob/user)
+	. = ..()
+	. += span_notice("Альт. клик - для того, чтобы развернуть")
+	. += span_notice(special_des)
+
+
+/obj/item/melee/anti_khara/get_all_tool_behaviours()
+	return list(TOOL_SAW)
+
+/obj/item/melee/anti_khara/Initialize(mapload)
+	. = ..()
+
+
+	force_off = force
+	throwforce_off = throwforce
+	throw_speed_off = throw_speed
+	w_class_off = w_class
+	sharpness_off = sharpness
+	hitsound_off = hitsound
+	attack_verb_continuous_off = attack_verb_continuous?.Copy()
+	attack_verb_simple_off = attack_verb_simple?.Copy()
+
+	AddElement(/datum/element/update_icon_updates_onmob)
+	AddComponent(
+		/datum/component/butchering, \
+		speed = 5 SECONDS, \
+		butcher_sound = active_hitsound, \
+	)
+
+/obj/item/melee/anti_khara/update_icon_state()
+	. = ..()
+	if(deployed)
+		icon_state = "[base_icon_state]_deployed"
+		inhand_icon_state = icon_state
+	else
+		icon_state = base_icon_state
+		inhand_icon_state = base_icon_state
+
+
+/obj/item/melee/anti_khara/click_alt(mob/user)
+	if(!istype(user) || loc != user || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+		return
+
+	toggle_deploy(user)
+
+/obj/item/melee/anti_khara/proc/toggle_deploy(mob/user)
+	deployed = !deployed
+
+	if(deployed)
+		set_deployed()
+	else
+		set_undeployed()
+
+	tool_behaviour = (deployed ? TOOL_SAW : NONE)
+
+	if(user)
+		balloon_alert(user, "[name] [deployed ? "развёрнуто" : "свёрнуто"]")
+
+	update_appearance(UPDATE_ICON_STATE)
+
+/obj/item/melee/anti_khara/proc/set_deployed()
+	ADD_TRAIT(src, TRAIT_TRANSFORM_ACTIVE, REF(src))
+
+	sharpness = active_sharpness
+	force = active_force
+	throwforce = active_throwforce
+	throw_speed = active_throw_speed
+	hitsound = active_hitsound
+	update_weight_class(active_w_class)
+
+	if(LAZYLEN(active_attack_verb_continuous))
+		attack_verb_continuous = active_attack_verb_continuous
+	if(LAZYLEN(active_attack_verb_simple))
+		attack_verb_simple = active_attack_verb_simple
+
+/obj/item/melee/anti_khara/proc/set_undeployed()
+	REMOVE_TRAIT(src, TRAIT_TRANSFORM_ACTIVE, REF(src))
+
+	sharpness = sharpness_off
+	force = force_off
+	throwforce = throwforce_off
+	throw_speed = throw_speed_off
+	hitsound = hitsound_off
+	update_weight_class(w_class_off)
+
+	if(LAZYLEN(attack_verb_continuous_off))
+		attack_verb_continuous = attack_verb_continuous_off
+	if(LAZYLEN(attack_verb_simple_off))
+		attack_verb_simple = attack_verb_simple_off
+
+/obj/item/melee/anti_khara/afterattack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
+	if(!deployed)
+		return
+	if(is_khara_creature(target) && isliving(target))
+		var/mob/living/khara_mob = target
+		khara_mob.take_overall_damage(khara_damage)
+		new /obj/effect/temp_visual/impact_effect/anti_khara(get_turf(target))
+
+/obj/item/melee/anti_khara/sword
+	name = "Анти-кхара клинок"
+	desc = "Длинный, элегантный клинок из усиленного титана с анти-кхара покрытием. \
+			Рукоять идеально лежит в ладони, а лезвие издаёт тихий, угрожающий гул энергии. "
+	base_icon_state = "sword"
+	icon_state = "sword"
+	inhand_icon_state = "sword"
+
+	attack_speed = 1.3 SECONDS
+	active_force = 20
+	khara_damage = 20
+	active_sharpness = 40
+	active_throwforce = 20
+	armour_penetration = 20
+	wound_bonus = 20
+
+/obj/item/melee/anti_khara/great_sword
+	name = "Усиленный Анти-кхара клинок"
+	desc = "Массивный двуручный клинок из титана и пластали, созданный для сокрушительных ударов. \
+			Каждый взмах требует силы, но в развёрнутом состоянии он пробивает любую защиту созданий Кхары."
+	base_icon_state = "greatsword"
+	icon_state = "greatsword"
+	inhand_icon_state = "greatsword"
+
+	attack_speed = CLICK_CD_MELEE * 3
+	demolition_mod = 3
+	active_force = 40
+	khara_damage = 50
+	active_sharpness = 50
+	active_throwforce = 30
+	armour_penetration = 50
+	wound_bonus = 45
+
+	var/attack_cooldown = 2 SECONDS
+	COOLDOWN_DECLARE(attack_cd)
+
+#define CHECKFLAGS (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE)
+
+/obj/item/melee/anti_khara/great_sword/set_deployed()
+	. = ..()
+	slowdown = 1
+
+/obj/item/melee/anti_khara/great_sword/set_undeployed()
+	. = ..()
+	slowdown = initial(slowdown)
+
+/obj/item/melee/anti_khara/great_sword/attack(mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
+	if(!deployed)
+		return FALSE
+
+	if(!COOLDOWN_FINISHED(src, attack_cd))
+		return FALSE
+
+	user.adjust_stamina_loss(10)
+	new /obj/effect/temp_visual/telegraphing/boss_hit(get_turf(target_mob))
+	if(!do_after(user, 0.5 SECONDS, target_mob, CHECKFLAGS, \
+		extra_checks = CALLBACK(src, PROC_REF(check_adjacent), user, target_mob), \
+		max_interact_count = 1))
+
+		user.adjust_stamina_loss(20)
+		COOLDOWN_START(src, attack_cd, 0.5 SECONDS)
+		return FALSE
+	if(!user.Adjacent(target_mob))
+		return FALSE
+
+	. = ..()
+	if(.)
+		user.Knockdown()
+		user.visible_message(span_warning("[user] валится на пол, провалив тяжёлый взмах [src]!"))
+		return
+
+	COOLDOWN_START(src, attack_cd, attack_cooldown)
+	target_mob.Knockdown()
+	target_mob.Stun(1 SECONDS)
+	user.adjust_stamina_loss(35)
+
+#undef CHECKFLAGS
+
+/obj/item/melee/anti_khara/great_sword/proc/check_adjacent(mob/living/user, mob/living/target_mob)
+	if(!deployed)
+		return FALSE
+	if(QDELETED(user) || QDELETED(target_mob))
+		return FALSE
+	if(!user.Adjacent(target_mob))
+		return FALSE
+	return TRUE
+
+/obj/item/melee/anti_khara/spear
+	name = "Анти-кхара копьё"
+	desc = "Лёгкое, идеально сбалансированное копьё с длинным острым наконечником из специального анти-кхара сплава. \
+			Позволяет атаковать на расстоянии, нанося точные колющие удары, которые особенно эффективны против созданий Кхары."
+	base_icon_state = "spear"
+	icon_state = "spear"
+	inhand_icon_state = "spear"
+
+	attack_speed = CLICK_CD_MELEE * 2
+	active_force = 15
+	reach = 2
+	khara_damage = 15
+	armour_penetration = 50
+	wound_bonus = 20
+
+/obj/item/melee/anti_khara/spear/set_deployed()
+	. = ..()
+	reach = 2
+
+/obj/item/melee/anti_khara/spear/set_undeployed()
+	. = ..()
+	reach = 1
+
 /obj/item/melee/baseball_bat/metal
 	name = "metal baseball bat"
 	desc = "This bat is made of highly armored material."

@@ -5,6 +5,7 @@
 #include "code\__DEFINES\hypothermia.dm"
 #include "code\__DEFINES\mapping.dm"
 #include "code\__DEFINES\object_pool.dm"
+#include "code\__DEFINES\outdoors.dm"
 #include "code\__DEFINES\signals.dm"
 #include "code\__DEFINES\spawning.dm"
 #include "code\__DEFINES\trainstation.dm"
