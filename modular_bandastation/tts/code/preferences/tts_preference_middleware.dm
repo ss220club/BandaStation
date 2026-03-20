@@ -10,9 +10,6 @@ GLOBAL_LIST_EMPTY(human_to_tts)
 	var/list/data = list()
 	data["tts_seed"] = preferences.read_preference(/datum/preference/text/tts_seed)
 	data["tts_enabled"] = CONFIG_GET(flag/tts_enabled)
-	#ifdef TTS_MOCKING
-	data["tts_enabled"] = TRUE
-	#endif
 	return data
 
 /datum/preference_middleware/text_to_speech/get_constant_data()

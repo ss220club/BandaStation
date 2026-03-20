@@ -117,13 +117,9 @@ SUBSYSTEM_DEF(tts220)
 	tts_seeds_names = sortTim(tts_seeds_names, GLOBAL_PROC_REF(cmp_text_asc))
 
 /datum/controller/subsystem/tts220/Initialize(start_timeofday)
-	#ifdef TTS_MOCKING
-	is_enabled = TRUE
-	#else
 	if(!CONFIG_GET(flag/tts_enabled))
 		is_enabled = FALSE
 		return SS_INIT_NO_NEED
-	#endif
 
 	load_replacements()
 
