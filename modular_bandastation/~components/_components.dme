@@ -1,5 +1,7 @@
 #include "_components.dm"
 
+#include "code/bodycam_camera.dm"
+#include "code/pausable_bodycam.dm"
 #include "code/backstab.dm"
 #include "code/ckey_and_role_locked_pickup.dm"
 #include "code/stamina_cost_per_hit.dm"

@@ -1,5 +1,12 @@
 //MARK: Vending Machines
 
+// SecTech
+/obj/machinery/vending/security/Initialize(mapload)
+	products += list(
+		/obj/item/clothing/accessory/bodycam = 4,
+	)
+	. = ..()
+
 // Robotics Wardrobe
 /obj/machinery/vending/wardrobe/robo_wardrobe
 	icon = 'modular_bandastation/objects/icons/obj/machines/vending.dmi'
