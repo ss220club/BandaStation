@@ -20,16 +20,17 @@
 	var/shove_knockdown_time = 3 SECONDS
 	var/is_active = FALSE
 
-/datum/component/strongarm_combat/Initialize(_knockback_distance, _shove_throw_distance, _shove_throw_speed, _shove_knockdown_time)
+/datum/component/strongarm_combat/Initialize(
+	knockback_distance = 3,
+	shove_throw_distance = 5,
+	shove_throw_speed = 3,
+	shove_knockdown_time = 3 SECONDS,
+)
 	. = ..()
-	if(_knockback_distance)
-		knockback_distance = _knockback_distance
-	if(_shove_throw_distance)
-		shove_throw_distance = _shove_throw_distance
-	if(_shove_throw_speed)
-		shove_throw_speed = _shove_throw_speed
-	if(_shove_knockdown_time)
-		shove_knockdown_time = _shove_knockdown_time
+	src.knockback_distance = knockback_distance
+	src.shove_throw_distance = shove_throw_distance
+	src.shove_throw_speed = shove_throw_speed
+	src.shove_knockdown_time = shove_knockdown_time
 
 /datum/component/strongarm_combat/RegisterWithParent()
 	. = ..()

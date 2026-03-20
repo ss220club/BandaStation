@@ -39,21 +39,28 @@
 	/// Stores active return timers for cancellation: list(mob = timer_id)
 	var/list/return_timers = list()
 
-/datum/element/dodge_shift/Attach(datum/target, _dodge_chance = null, _shift_distance = null, _return_delay = null, _cooldown_time = null, _dodge_attack_types = null)
+/datum/element/dodge_shift/Attach(
+	datum/target,
+	dodge_chance,
+	shift_distance,
+	return_delay,
+	cooldown_time,
+	dodge_attack_types,
+)
 	. = ..()
 	if(!isliving(target))
 		return ELEMENT_INCOMPATIBLE
 
-	if(_dodge_chance != null)
-		src.dodge_chance = _dodge_chance
-	if(_shift_distance != null)
-		src.shift_distance = _shift_distance
-	if(_return_delay != null)
-		src.return_delay = _return_delay
-	if(_cooldown_time != null)
-		src.cooldown_time = _cooldown_time
-	if(_dodge_attack_types != null)
-		src.dodge_attack_types = _dodge_attack_types
+	if(!isnull(dodge_chance))
+		src.dodge_chance = dodge_chance
+	if(!isnull(shift_distance))
+		src.shift_distance = shift_distance
+	if(!isnull(return_delay))
+		src.return_delay = return_delay
+	if(!isnull(cooldown_time))
+		src.cooldown_time = cooldown_time
+	if(!isnull(dodge_attack_types))
+		src.dodge_attack_types = dodge_attack_types
 
 	RegisterSignal(target, COMSIG_LIVING_CHECK_BLOCK, PROC_REF(on_check_block))
 	// Projectiles require a separate signal since COMSIG_LIVING_CHECK_BLOCK doesn't catch them

@@ -3,10 +3,9 @@
 	var/kick_knockback_distance = 2
 	var/is_active = FALSE
 
-/datum/component/strongleg_combat/Initialize(_kick_knockback_distance)
+/datum/component/strongleg_combat/Initialize(kick_knockback_distance = 2)
 	. = ..()
-	if(_kick_knockback_distance)
-		kick_knockback_distance = _kick_knockback_distance
+	src.kick_knockback_distance = kick_knockback_distance
 
 /datum/component/strongleg_combat/RegisterWithParent()
 	. = ..()
