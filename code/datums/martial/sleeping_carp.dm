@@ -449,9 +449,9 @@
 			return ..()
 		var/mob/living/carbon/human/H = target
 		var/list/fluffmessages = list("стучит", "огревает", "колотит", "бьёт", "впечатывает")
-		H.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] [pick(fluffmessages)] [H.declent_ru(ACCUSATIVE)] [src]!"), \
-						span_userdanger("[user.declent_ru(NOMINATIVE)] [pick(fluffmessages)] вас [src]!"), span_hear("Вы слышите противный звук удара по телу!"), null, user)
-		to_chat(user, span_danger("Вы [pick(fluffmessages)]е [H.declent_ru(ACCUSATIVE)] [src]!"))
+		H.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] [pick(fluffmessages)] [H.declent_ru(ACCUSATIVE)] с помощью [src.declent_ru(INSTRUMENTAL)]!"), \
+						span_userdanger("[user.declent_ru(NOMINATIVE)] [pick(fluffmessages)] вас с помощью [src.declent_ru(INSTRUMENTAL)]!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), null, user)
+		to_chat(user, span_danger("Вы [pick(fluffmessages)]е [H.declent_ru(ACCUSATIVE)] с помощью [src.declent_ru(INSTRUMENTAL)]!"))
 		playsound(get_turf(user), 'sound/effects/woodhit.ogg', 75, TRUE, -1)
 		H.adjust_stamina_loss(rand(13,20))
 		if(prob(10))
