@@ -18,6 +18,7 @@
 	var/shove_throw_distance = 5
 	var/shove_throw_speed = 3
 	var/shove_knockdown_time = 3 SECONDS
+	var/is_active = FALSE
 
 /datum/component/strongarm_combat/Initialize(_knockback_distance, _shove_throw_distance, _shove_throw_speed, _shove_knockdown_time)
 	. = ..()
@@ -39,15 +40,18 @@
 	. = ..()
 	UnregisterSignal(parent, list(COMSIG_HUMAN_PUNCHED, COMSIG_LIVING_UNARMED_ATTACK))
 
+/// Sets the active state of the component. Call this externally to enable/disable abilities.
+/datum/component/strongarm_combat/proc/set_active(active)
+	is_active = active
+
 /datum/component/strongarm_combat/proc/on_punch(mob/living/carbon/human/source, mob/living/carbon/human/target, damage, attack_type, obj/item/bodypart/affecting, final_armor_block, kicking, limb_sharpness)
 	SIGNAL_HANDLER
 
 	if(kicking || target.body_position == LYING_DOWN)
-		return
+		return NONE
 
-	var/obj/item/bodypart/arm/active_arm = source.get_active_hand()
-	if(!istype(active_arm, /obj/item/bodypart/arm/left/strongarm) && !istype(active_arm, /obj/item/bodypart/arm/right/strongarm))
-		return
+	if(!is_active)
+		return NONE
 
 	var/throw_dir = get_dir(source, target)
 	var/turf/throw_target = get_edge_target_turf(target, throw_dir)
@@ -72,14 +76,16 @@
 		return NONE
 
 	var/mob/living/living_target = target
+	if(source == living_target)
+		return NONE
 
 	var/mob/living/carbon/human/human_source = source
 	if(!istype(human_source))
 		return NONE
 
-	var/obj/item/bodypart/arm/active_arm = human_source.get_active_hand()
-	if(!istype(active_arm, /obj/item/bodypart/arm/left/strongarm) && !istype(active_arm, /obj/item/bodypart/arm/right/strongarm))
+	if(!is_active)
 		return NONE
+
 
 	if(living_target.check_block(human_source, 0, "[human_source.declent_ru(ACCUSATIVE)]", UNARMED_ATTACK))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
@@ -116,15 +122,45 @@
 
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
-/proc/setup_strongarm(mob/living/carbon/owner)
-	owner.AddElement(/datum/element/strongarm_throw)
-	owner.AddComponent(/datum/component/strongarm_combat, 3, 5, 3, 3 SECONDS)
+/// Counts installed strongarm limbs
+/proc/count_strongarm_limbs(mob/living/carbon/owner)
+	var/count = 0
+	if(istype(owner.get_bodypart(BODY_ZONE_L_ARM), /obj/item/bodypart/arm/left/strongarm))
+		count++
+	if(istype(owner.get_bodypart(BODY_ZONE_R_ARM), /obj/item/bodypart/arm/right/strongarm))
+		count++
+	return count
 
-/proc/cleanup_strongarm(mob/living/carbon/owner)
-	owner.RemoveElement(/datum/element/strongarm_throw)
+/// Creates component if needed and updates active state
+/proc/setup_strongarm(mob/living/carbon/owner)
+	var/limbs_count = count_strongarm_limbs(owner)
+
+	// Only add element when both arms are installed
+	if(limbs_count >= 2)
+		owner.AddElement(/datum/element/strongarm_throw)
+
 	var/datum/component/strongarm_combat/combat_component = owner.GetComponent(/datum/component/strongarm_combat)
-	if(combat_component)
+	if(!combat_component)
+		combat_component = owner.AddComponent(/datum/component/strongarm_combat, 3, 5, 3, 3 SECONDS)
+
+	combat_component.set_active(limbs_count >= 2)
+
+/// Updates active state, removes component and element if no limbs left
+/proc/cleanup_strongarm(mob/living/carbon/owner)
+	var/datum/component/strongarm_combat/combat_component = owner.GetComponent(/datum/component/strongarm_combat)
+	if(!combat_component)
+		return
+
+	var/limbs_count = count_strongarm_limbs(owner)
+
+	// Remove element when less than 2 arms
+	if(limbs_count < 2)
+		owner.RemoveElement(/datum/element/strongarm_throw)
+
+	if(limbs_count == 0)
 		qdel(combat_component)
+	else
+		combat_component.set_active(limbs_count >= 2)
 
 /obj/item/bodypart/arm/left/strongarm
 	name = "augmented left arm"
