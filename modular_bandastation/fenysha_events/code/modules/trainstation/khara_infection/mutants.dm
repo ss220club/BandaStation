@@ -42,6 +42,75 @@
 		human.ForceContractDisease(new disease, del_on_fail = TRUE)
 
 
+/datum/component/projectile_evade
+
+	var/projectile_evade_chance = 100
+	var/projectile_evade_cooldown = 2 SECONDS
+	var/projectile_evade_steps = 1
+	var/datum/callback/callback_check = null
+	COOLDOWN_DECLARE(projectile_evade_cd)
+
+
+/datum/component/projectile_evade/Initialize(evade_chance = 100, evade_cooldown = 2 SECONDS, evade_steps = 1, callback_check = null)
+	if(!ismovable(parent))
+		return COMPONENT_INCOMPATIBLE
+	if(callback_check)
+		src.callback_check = callback_check
+	src.projectile_evade_chance = evade_chance
+	src.projectile_evade_cooldown = evade_cooldown
+	src.projectile_evade_steps = evade_steps
+
+/datum/component/projectile_evade/RegisterWithParent()
+	. = ..()
+	RegisterSignal(parent, COMSIG_ATOM_PRE_BULLET_ACT, PROC_REF(on_projectile_hit))
+
+/datum/component/projectile_evade/UnregisterFromParent()
+	. = ..()
+	UnregisterSignal(parent, list(COMSIG_ATOM_PRE_BULLET_ACT))
+
+/datum/component/projectile_evade/proc/on_projectile_hit(atom/source, obj/projectile/hitting_projectile, def_zone, piercing_hit)
+	SIGNAL_HANDLER
+
+	if(QDELETED(parent) || !COOLDOWN_FINISHED(src, projectile_evade_cd))
+		return
+
+	if(projectile_evade_chance < 100 && !prob(projectile_evade_chance))
+		return
+
+	if(callback_check && !callback_check.Invoke(source, hitting_projectile, def_zone, piercing_hit))
+		return
+
+	INVOKE_ASYNC(src, PROC_REF(do_strafe_evade), source, hitting_projectile)
+	COOLDOWN_START(src, projectile_evade_cd, projectile_evade_cooldown)
+	return COMPONENT_BULLET_PIERCED
+
+/datum/component/projectile_evade/proc/do_strafe_evade(atom/movable/source, obj/projectile/proj)
+	var/evade_dir = angle2dir(proj.dir)
+
+	if(proj.dir & (proj.dir - 1))
+		evade_dir = prob(50) ? turn(proj.dir, 90) : turn(proj.dir, -90)
+	else
+		evade_dir = prob(50) ? turn(proj.dir, 90) : turn(proj.dir, -90)
+
+	source.visible_message(span_warning("[source] straifes!"))
+	var/step_count = 0
+	while(step_count <= projectile_evade_steps)
+		var/turf/next_turf = get_step(source, evade_dir)
+		if(!next_turf || next_turf.density || next_turf.is_blocked_turf(TRUE))
+			evade_dir = turn(evade_dir, 180)
+			next_turf = get_step(source, evade_dir)
+			if(!next_turf || next_turf.density || next_turf.is_blocked_turf(TRUE))
+				break
+		new /obj/effect/temp_visual/decoy/fading/halfsecond(source.loc, source)
+		source.forceMove(next_turf)
+		step_count++
+		CHECK_TICK
+		sleep(0.1)
+	new /obj/effect/temp_visual/decoy/fading/halfsecond(source.loc, source)
+	playsound(source, 'sound/effects/bang.ogg', 50, TRUE, -1)
+
+
+
 /proc/is_khara_creature(datum/thing)
 	return istype(thing, /mob/living/basic/khara_mutant) || HAS_TRAIT(thing, TRAIT_KHARAMUTANT)
 
@@ -114,6 +183,7 @@
 	stamina_crit_threshold = 90
 	stamina_recovery = 5
 	max_stamina_slowdown = 12
+	unsuitable_cold_damage = 10
 	habitable_atmos = null
 
 	/// Каста этого мутанта
@@ -148,11 +218,13 @@
 	var/spread_minimal_cooldown = 5 SECONDS
 	COOLDOWN_DECLARE(spread_cd)
 
+/datum/element/footstep
+
 /mob/living/basic/khara_mutant/Initialize(mapload)
 	. = ..()
 	add_traits(list(TRAIT_NO_TELEPORT, TRAIT_LAVA_IMMUNE, TRAIT_ASHSTORM_IMMUNE, TRAIT_NO_FLOATING_ANIM, TRAIT_THERMAL_VISION, TRAIT_KHARAMUTANT), MEGAFAUNA_TRAIT)
 	AddElement(/datum/element/prevent_attacking_of_types, GLOB.typecache_general_bad_hostile_attack_targets, "это бессмысленно!")
-	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
+	AddElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY)
 	AddElement(/datum/element/ai_retaliate)
 
 	AddComponent(/datum/component/seethrough_mob)
@@ -203,7 +275,7 @@
 	return ATTACK_FAILED
 
 /mob/living/basic/khara_mutant/attacked_by(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
-	if(attacking_item.force < minimum_melee_damage_treshold)
+	if((attacking_item.force < minimum_melee_damage_treshold) && !HAS_TRAIT(attacking_item, TRAIT_ALWAYS_PENETRAIT_KHARA))
 		attacking_item.visible_message("[attacking_item], отскакивает от тела [src], не в силах пробить его.")
 		user.do_attack_animation(src, used_item = attacking_item)
 		return ATTACK_FAILED
@@ -224,6 +296,11 @@
 		attacking_item = attacking_item,
 	)
 
+/mob/living/basic/khara_mutant/melee_attack(atom/target, list/modifiers, ignore_cooldown)
+	if(is_khara_creature(target))
+		to_chat(src, span_warning("Ты не можешь атаковать подобных себе!"))
+		return ATTACK_FAILED
+	. = ..()
 
 /mob/living/basic/khara_mutant/Life(seconds_per_tick, times_fired)
 	. = ..()
@@ -316,6 +393,25 @@
 	spread_blood_radius = 1
 	minimum_melee_damage_treshold = 15
 
+	var/evade_cooldown = 1.5 SECONDS
+	var/evade_steps = 1
+	var/evade_chance = 80
+
+/mob/living/basic/khara_mutant/flesh_human/Initialize(mapload)
+	. = ..()
+	AddComponent( \
+		/datum/component/projectile_evade, \
+		evade_chance = evade_chance, \
+		evade_cooldown = evade_cooldown, \
+		callback_check = CALLBACK(src, PROC_REF(try_evade)) \
+	)
+
+/mob/living/basic/khara_mutant/flesh_human/proc/try_evade(atom/source, obj/projectile/hitting_projectile, def_zone, piercing_hit)
+	if(stat == DEAD)
+		return FALSE
+	if(istype(hitting_projectile, /obj/projectile/energy/anti_khara))
+		return FALSE
+	return TRUE
 
 /mob/living/basic/khara_mutant/arachnid
 	name = "Искажённый арахнид"
@@ -333,6 +429,8 @@
 	wound_bonus = 15
 	maxHealth = 350
 	health = 350
+	addictional_melee_damage_multiplier = 0.5
+	minimum_melee_damage_treshold = 20
 
 	regeneration_delay = 7 SECONDS
 	health_regen_per_second = 10
@@ -372,6 +470,8 @@
 	speed = 0
 	regeneration_delay = 15 SECONDS
 	health_regen_per_second = 10
+	addictional_melee_damage_multiplier = 0.7
+	minimum_melee_damage_treshold = 15
 
 	pixel_x = -16
 	base_pixel_x = -16
@@ -423,6 +523,8 @@
 	speed = 0.5
 	maxHealth = 750
 	health = 750
+	addictional_melee_damage_multiplier = 0.8
+	minimum_melee_damage_treshold = 30
 
 	regeneration_delay = 30 SECONDS
 	health_regen_per_second = 10
@@ -463,6 +565,8 @@
 
 	regeneration_delay = 30 SECONDS
 	health_regen_per_second = 10
+	minimum_melee_damage_treshold = 30
+	addictional_melee_damage_multiplier = 0.7
 
 	pixel_x = -112
 	base_pixel_x = -112

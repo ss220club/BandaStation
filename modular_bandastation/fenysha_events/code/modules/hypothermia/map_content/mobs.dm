@@ -20,6 +20,11 @@
 	shrapnel_type = /obj/item/shrapnel/bone_fragment
 	embed_type = /datum/embedding/tomahawk
 
+/obj/projectile/bullet/pellet/bone_fragment/can_hit_target(atom/target, direct_target, ignore_loc, cross_failed)
+	if(is_khara_creature(target))
+		return FALSE
+	return ..()
+
 /datum/embedding/tomahawk
 	embed_chance = 55
 	fall_chance = 2

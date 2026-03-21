@@ -425,7 +425,7 @@
 		crushing = FALSE
 		return
 
-	if(damage && prob(rip_chance))
+	if(damage && prob(rip_chance) && mech.flat_equipment)
 		for(var/obj/item/mecha_parts/mecha_equipment/qeuipment in shuffle(mech.flat_equipment.Copy()))
 			qeuipment.detach()
 			do_sparks(rand(3, 4), TRUE, mech)

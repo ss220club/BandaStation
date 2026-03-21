@@ -581,6 +581,7 @@
 	hitsound_off = hitsound
 	attack_verb_continuous_off = attack_verb_continuous?.Copy()
 	attack_verb_simple_off = attack_verb_simple?.Copy()
+	ADD_TRAIT(src, TRAIT_ALWAYS_PENETRAIT_KHARA, INNATE_TRAIT)
 
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(

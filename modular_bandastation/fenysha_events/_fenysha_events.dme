@@ -19,6 +19,7 @@
 #include "code\modules\aesthetics\machinery.dm"
 #include "code\modules\aesthetics\open_turfs.dm"
 #include "code\modules\barricades\barricades.dm"
+#include "code\modules\bossbar\bossbar.dm"
 #include "code\modules\daylight\ssdaylight.dm"
 #include "code\modules\dynamic_area\dynamic_area.dm"
 #include "code\modules\event_apps\custom_interaction\program.dm"

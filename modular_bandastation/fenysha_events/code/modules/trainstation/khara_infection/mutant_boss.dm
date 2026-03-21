@@ -10,8 +10,8 @@
 	icon_dead = "screamer"
 
 	speed = 16
-	maxHealth = 15000
-	health = 15000
+	maxHealth = 100000 // Это - самый жирный моб в игре
+	health = 100000
 
 	anchored = TRUE
 	regeneration_delay = 240 SECONDS
@@ -33,6 +33,7 @@
 
 	ai_controller = null
 	innate_actions = list(
+		/datum/action/cooldown/mob_cooldown/heat_of_infection/hello = null,
 		/datum/action/cooldown/mob_cooldown/heat_of_infection/hand_attack/bones = null,
 		/datum/action/cooldown/mob_cooldown/heat_of_infection/hand_attack/rumbling = null,
 		/datum/action/cooldown/mob_cooldown/boss_bone_shard_wave = null,
@@ -52,6 +53,7 @@
 		hands += new hand_type(src)
 	SSpoints_of_interest.make_point_of_interest(src)
 	ADD_TRAIT(src, TRAIT_XRAY_VISION, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_MOVE_FLYING, INNATE_TRAIT)
 
 	AddElement(/datum/element/simple_flying)
 	notify_ghosts("Сердце инфекции только что появилось!", src, "Сердце инфекции")
@@ -61,6 +63,22 @@
 
 	addtimer(CALLBACK(src, PROC_REF(move_hands)), 1)
 	update_sight()
+
+/mob/living/basic/khara_mutant/heat_of_infection/proc/into_cutscene()
+
+	for(var/mob/living/player in GLOB.alive_player_list)
+		flash_color(player, flash_color = "#FF0000", flash_time = 50)
+		shake_camera(player, 2 SECONDS, 1)
+		to_chat(player, span_userdanger("Сердце инфекции - пробудилось!"))
+		player.Shake(duration = 1 SECONDS)
+
+	AddComponent( \
+		/datum/component/bossbar, \
+		port_state = "screamer", \
+		name_override = "Сердце инфекции", \
+		range = 30, \
+	)
+
 
 /mob/living/basic/khara_mutant/heat_of_infection/Login()
 	. = ..()
@@ -184,19 +202,20 @@
 /mob/living/basic/khara_mutant/heat_of_infection/proc/update_stage(new_stage)
 	switch(new_stage)
 		if(2)
+			heal_overall_damage(10000)
 			visible_message(span_userdanger("[src] издает истошный вопль - оно в ярости!"))
 			playsound(src, 'modular_bandastation/fenysha_events/sounds/mobs/mutant_boss_death.ogg', 60, TRUE)
-			for(var/i = get_hands_count() to 4)
+			while(get_hands_count() < 4)
 				add_new_hand()
 		if(3)
-			heal_overall_damage(4500)
+			heal_overall_damage(10000)
 			visible_message(span_userdanger("[src] издает истошный вопль - оно в ярости!"))
-			for(var/i = get_hands_count() to 4)
+			while(get_hands_count() < 4)
 				add_new_hand()
 		if(4)
-			heal_overall_damage(3500)
+			heal_overall_damage(15000)
 			visible_message(span_userdanger("[src] издает истошный вопль - оно кричит ярости!"))
-			for(var/i = get_hands_count() to 6)
+			while(get_hands_count() < 6)
 				add_new_hand()
 			for(var/datum/action/cooldown/action in actions)
 				action.cooldown_time *= 0.5
@@ -205,21 +224,6 @@
 				action.cooldown_time = initial(action.cooldown_time)
 
 	stage = new_stage
-
-/mob/living/basic/khara_mutant/heat_of_infection/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armour_penetration)
-	. = ..()
-
-	if(health <= 10000 && stage == 1)
-		stage++
-		for(var/i = get_hands_count() to 4)
-			add_new_hand()
-		for(var/datum/action/cooldown/ability in actions)
-			ability.cooldown_time *= 0.5
-
-	if(health <= 3000 && stage == 2)
-		stage++
-		for(var/i = get_hands_count() to 6)
-			add_new_hand()
 
 /mob/living/basic/khara_mutant/heat_of_infection_hand
 	name = "Конечность"
@@ -230,8 +234,8 @@
 	icon_dead = "scream_hand_r"
 
 	speed = -5
-	maxHealth = 5000
-	health = 5000
+	maxHealth = 7500
+	health = 7500
 
 	regeneration_delay = 240 SECONDS
 	health_regen_per_second = 10
@@ -266,7 +270,7 @@
 
 /mob/living/basic/khara_mutant/heat_of_infection_hand/Destroy()
 	if(owner && !QDELETED(owner))
-		owner.take_damage(1000, BRUTE)
+		owner.apply_damage(4000, BRUTE)
 	return ..()
 
 /mob/living/basic/khara_mutant/heat_of_infection_hand/proc/prepare_for_attack()
@@ -547,6 +551,15 @@
 	mob_type = pick(/mob/living/basic/khara_mutant/reaper, /mob/living/basic/khara_mutant/arachnid)
 	. = ..()
 
+/datum/action/cooldown/mob_cooldown/heat_of_infection/hello
+	name = "Поприветствовать своих опонентов"
+	desc = "Одноразовое! Запускает катсцену, после чего добавляет компонент боссбара!"
+	click_to_activate = FALSE
+
+/datum/action/cooldown/mob_cooldown/heat_of_infection/hello/Activate(atom/target)
+	boss_owner.into_cutscene()
+	qdel(src)
+
 /datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep
 	name = "Круговая лазерная атака"
 	desc = "Запускает 1–3 вращающихся широких лазера."
@@ -555,31 +568,31 @@
 
 /datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep/Activate(atom/target)
 	. = ..()
-	if(!.)
-		return
+
 	INVOKE_ASYNC(src, PROC_REF(do_laser_sweep))
 	StartCooldown()
 	return TRUE
 
 /datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep/proc/do_laser_sweep()
-	var/num = rand(1, 3)
-	owner.visible_message(span_danger("[owner] начинает заряжать круговые лазеры!"))
+	owner.visible_message(span_userdanger("[owner] начинает заряжать круговые лазеры!"))
 	playsound(owner, 'sound/effects/magic/lightning_chargeup.ogg', 80, TRUE)
 
-	for(var/i in 1 to num)
-		INVOKE_ASYNC(src, PROC_REF(sweep_single_laser))
-		sleep(0.7 SECONDS)
+	INVOKE_ASYNC(src, PROC_REF(sweep_single_laser))
+
+
 
 /datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep/proc/sweep_single_laser()
 	var/angle = rand(0, 359)
 	var/rotation_sign = pick(-1, 1)
-	var/angle_step = 2
+	var/angle_step = 1
 	var/sleep_time = 0.15 SECONDS
 
 	var/turf/boss_turf = get_turf(owner)
 	var/list/warning_path = get_ray_path(boss_turf, angle)
+
 	for(var/turf/T in warning_path)
 		new /obj/effect/temp_visual/telegraphing/boss_hit(T)
+
 
 	for(var/offset in list(-8, 8))
 		var/list/side_path = get_ray_path(boss_turf, angle + offset)
@@ -654,6 +667,7 @@ GLOBAL_LIST_EMPTY(infection_lasers)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	flags_1 = SUPERMATTER_IGNORES_1
 
+	var/laser_damage = 1500
 	var/active = FALSE
 	var/datum/beam/current_beam = null
 	var/cooldown_time = 0
@@ -724,7 +738,7 @@ GLOBAL_LIST_EMPTY(infection_lasers)
 /obj/machinery/infection_laser/proc/deal_damage(mob/living/basic/khara_mutant/heat_of_infection/target)
 	if(QDELETED(target) || !target)
 		return
-	target.take_damage(100, BRUTE, "laser")
+	target.apply_damage(laser_damage, BRUTE)
 	qdel(current_beam)
 	current_beam = null
 	active = FALSE
