@@ -105,7 +105,7 @@ GLOBAL_VAR(main_morph_engine)
 	idle_power_usage = 1 KILO WATTS
 	critical_machine = TRUE
 
-	var/protect_power_usage = 0
+	var/enabled_power_usage = 0
 
 	VAR_PRIVATE/list/protected_areas = null
 	/// Список всех зон, что находятся под нашей защитой
@@ -186,7 +186,7 @@ GLOBAL_VAR(main_morph_engine)
 							значительно повышает энергопотребление и может навредить всем больным.")
 
 	if(on)
-		. += span_warning("\n Текущее энергопотребление: [round(protect_power_usage / KILO)] киловатт")
+		. += span_warning("\n Текущее энергопотребление: [round(enabled_power_usage / KILO)] киловатт")
 
 /obj/machinery/morphological_engine/proc/build_area_cache()
 	if(!protected_area_types || !islist(protected_area_types) || !length(protected_area_types))
@@ -224,14 +224,14 @@ GLOBAL_VAR(main_morph_engine)
 	if(!COOLDOWN_FINISHED(src, turn_power_cd))
 		to_chat(user, span_warning("Двигатель ещё не остыл после предыдущего включения!"))
 		return FALSE
-	protect_power_usage = 0
+	enabled_power_usage = 0
 
 	if(mode & MORPH_ENGINE_MODE_BARRIER)
-		protect_power_usage += 20 KILO WATTS
+		enabled_power_usage += 20 KILO WATTS
 	if(mode & MORPH_ENGINE_MODE_CONTAINMENT)
-		protect_power_usage += 40 KILO WATTS
+		enabled_power_usage += 40 KILO WATTS
 	if(mode & MORPH_ENGINE_MODE_ISOLATION)
-		protect_power_usage += 100 KILO WATTS
+		enabled_power_usage += 100 KILO WATTS
 
 	on = TRUE
 	protect_areas()
@@ -267,7 +267,7 @@ GLOBAL_VAR(main_morph_engine)
 		list(SPAN_COMMAND)
 	)
 
-	protect_power_usage = 0
+	enabled_power_usage = 0
 	on = FALSE
 	update_appearance()
 	end_processing()
@@ -300,7 +300,7 @@ GLOBAL_VAR(main_morph_engine)
 	if(!on)
 		return PROCESS_KILL
 
-	if(!powered() || !use_energy(protect_power_usage))
+	if(!powered() || !use_energy(enabled_power_usage))
 		balloon_alert_to_viewers("Недостаточное питание - отключение!")
 		turn_off()
 		return
