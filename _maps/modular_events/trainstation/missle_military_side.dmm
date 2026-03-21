@@ -33,6 +33,7 @@
 	pixel_y = -4;
 	pixel_x = 12
 	},
+/obj/effect/mapping_helpers/broken_machine,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
 "al" = (
@@ -325,6 +326,7 @@
 	pixel_y = -4;
 	pixel_x = 12
 	},
+/obj/effect/mapping_helpers/broken_machine,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "cq" = (
@@ -870,6 +872,11 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
+"fu" = (
+/obj/structure/rack/shelf,
+/obj/item/stack/sheet/plasteel/twenty,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
+/area/trainstation/outdoor/station)
 "fy" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
@@ -1012,7 +1019,13 @@
 	pixel_y = -12;
 	pixel_x = -10
 	},
+/obj/effect/mapping_helpers/broken_machine,
 /turf/open/indestructible/meat,
+/area/trainstation/outdoor/station)
+"gl" = (
+/obj/effect/spawner/random/structure/grille,
+/obj/effect/spawner/random/structure/grille,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
 "gq" = (
 /obj/structure/flora/bush/fullgrass/style_random,
@@ -1503,8 +1516,10 @@
 /turf/closed/wall/city/siding/style/style_1,
 /area/trainstation/outdoor/station)
 "jJ" = (
-/obj/machinery/door/poddoor,
-/turf/open/misc/asteroid/snow/standard_air,
+/obj/structure/rack,
+/obj/effect/spawner/random/weapon/full_gun,
+/obj/effect/spawner/random/weapon/full_gun,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
 "jL" = (
 /obj/effect/decal/cleanable/blood/drip{
@@ -1655,6 +1670,7 @@
 	pixel_y = 4;
 	pixel_x = 10
 	},
+/obj/effect/mapping_helpers/broken_machine,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
 "kP" = (
@@ -2538,6 +2554,7 @@
 /obj/item/ammo_casing/c38{
 	dir = 5
 	},
+/obj/item/stack/sheet/mineral/uranium,
 /turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "qG" = (
@@ -2595,6 +2612,12 @@
 "qW" = (
 /obj/effect/mob_spawn/corpse/human/charredskeleton,
 /obj/effect/gibspawner/human,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
+/area/trainstation/outdoor/station)
+"qX" = (
+/obj/structure/rack/shelf,
+/obj/item/stack/sheet/mineral/uranium/half,
+/obj/item/stack/sheet/mineral/uranium/half,
 /turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
 "qZ" = (
@@ -3096,6 +3119,10 @@
 	dir = 8
 	},
 /area/trainstation/outdoor/station)
+"tZ" = (
+/obj/effect/spawner/random/structure/grille,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
+/area/trainstation/outdoor/station)
 "uc" = (
 /obj/effect/gibspawner/human,
 /obj/structure/decorative{
@@ -3419,6 +3446,7 @@
 	dir = 5;
 	pixel_y = 12
 	},
+/obj/effect/mapping_helpers/broken_machine,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "vR" = (
@@ -3460,6 +3488,7 @@
 	pixel_y = -12;
 	pixel_x = -10
 	},
+/obj/effect/mapping_helpers/broken_machine,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "wc" = (
@@ -3685,6 +3714,7 @@
 	pixel_y = -4;
 	pixel_x = 12
 	},
+/obj/effect/mapping_helpers/broken_machine,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "xq" = (
@@ -3749,6 +3779,10 @@
 	},
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
+"xv" = (
+/obj/effect/spawner/random/structure/tank_holder,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
+/area/trainstation/outdoor/station)
 "xx" = (
 /obj/structure/decorative{
 	anchored = 1;
@@ -3804,6 +3838,10 @@
 	dir = 10
 	},
 /turf/open/floor/asphalt,
+/area/trainstation/outdoor/station)
+"xU" = (
+/obj/item/stack/sheet/mineral/uranium,
+/turf/open/misc/asphalt/no_border,
 /area/trainstation/outdoor/station)
 "xW" = (
 /obj/effect/decal/cleanable/blood/drip{
@@ -4328,6 +4366,7 @@
 	pixel_y = -12;
 	pixel_x = -10
 	},
+/obj/effect/mapping_helpers/broken_machine,
 /turf/open/indestructible/meat,
 /area/trainstation/outdoor/station)
 "Bm" = (
@@ -4550,6 +4589,10 @@
 	dir = 4
 	},
 /turf/open/misc/asphalt/no_border,
+/area/trainstation/outdoor/station)
+"CH" = (
+/obj/machinery/power/port_gen/pacman/pre_loaded,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
 "CN" = (
 /obj/item/ammo_casing/shotgun/executioner{
@@ -4781,6 +4824,10 @@
 /obj/structure/window/reinforced/tinted/frosted/spawner/directional/west,
 /obj/structure/grille/indestructible,
 /turf/open/floor/plating,
+/area/trainstation/outdoor/station)
+"Eb" = (
+/obj/item/stack/sheet/mineral/uranium,
+/turf/open/misc/dirt/icy_planet,
 /area/trainstation/outdoor/station)
 "Ec" = (
 /obj/structure/prop/general/zenithplatform3,
@@ -5739,6 +5786,11 @@
 /obj/item/ammo_casing/a223,
 /turf/open/floor/iron/shuttle/exploration/side,
 /area/trainstation/outdoor/station)
+"KA" = (
+/obj/structure/rack/shelf,
+/obj/item/stack/sheet/mineral/silver/fifty,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
+/area/trainstation/outdoor/station)
 "KC" = (
 /obj/item/ammo_casing/shotgun/incendiary{
 	pixel_x = -1;
@@ -6061,6 +6113,7 @@
 	pixel_y = 11;
 	pixel_x = -8
 	},
+/obj/effect/mapping_helpers/broken_machine,
 /turf/open/misc/asteroid/snow/standard_air,
 /area/trainstation/outdoor/station)
 "MH" = (
@@ -6710,6 +6763,10 @@
 	},
 /turf/open/floor/asphalt,
 /area/trainstation/outdoor/station)
+"Qf" = (
+/obj/item/stack/sheet/mineral/uranium,
+/turf/open/misc/asteroid/snow/standard_air,
+/area/trainstation/outdoor/station)
 "Qk" = (
 /obj/effect/decal/cleanable/blood,
 /obj/structure/prop/general/bigroller_up3,
@@ -6791,6 +6848,11 @@
 	},
 /obj/structure/filingcabinet/medical,
 /turf/open/floor/iron/shuttle/exploration/doubleside,
+/area/trainstation/outdoor/station)
+"Ra" = (
+/obj/structure/rack/shelf,
+/obj/item/stack/sheet/mineral/diamond/five,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
 "Rb" = (
 /obj/item/ammo_casing/shotgun/incendiary{
@@ -7036,6 +7098,10 @@
 	pixel_y = -3
 	},
 /turf/open/indestructible/meat,
+/area/trainstation/outdoor/station)
+"SJ" = (
+/obj/item/stack/sheet/plastic/fifty,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
 "SK" = (
 /obj/structure/flora/rock/style_random,
@@ -7296,6 +7362,11 @@
 	},
 /turf/open/indestructible/train_platform,
 /area/trainstation/outdoor/station)
+"UK" = (
+/obj/structure/rack/shelf,
+/obj/item/stack/sheet/mineral/uranium/half,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
+/area/trainstation/outdoor/station)
 "UR" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/indestructible/train_platform,
@@ -7346,6 +7417,10 @@
 "Vi" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/shuttle/exploration/doubleside,
+/area/trainstation/outdoor/station)
+"Vm" = (
+/obj/machinery/suit_storage_unit/security,
+/turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/outdoor/station)
 "Vn" = (
 /obj/effect/mob_spawn/corpse/human/charredskeleton,
@@ -8759,16 +8834,16 @@ Rl
 Rl
 Rl
 sh
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-jJ
+xv
+yD
+UK
+qX
+KA
+fu
+yD
+yD
+tZ
+xM
 Rl
 Wh
 cR
@@ -8801,16 +8876,16 @@ Rl
 Rl
 Rl
 sh
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
 jJ
+yD
+yD
+yD
+yD
+yD
+CH
+gl
+yD
+xM
 Rl
 Wh
 Wh
@@ -8843,16 +8918,16 @@ Rl
 Rl
 jn
 hv
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-jJ
+yD
+yD
+yD
+Nl
+yD
+Nl
+yD
+yD
+yD
+xM
 Rl
 Wh
 Wh
@@ -8885,16 +8960,16 @@ Rl
 Rl
 Rl
 hv
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-jJ
+Vm
+yD
+yD
+yD
+yD
+yD
+yD
+gl
+yD
+xM
 Rl
 Wh
 Wh
@@ -8927,16 +9002,16 @@ Rl
 Rl
 Rl
 sh
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-jJ
+Vm
+yD
+Nl
+yD
+tZ
+yD
+yD
+yD
+yD
+xM
 Rl
 Wh
 cR
@@ -8969,16 +9044,16 @@ Rl
 Rl
 Rl
 sh
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-jJ
+yD
+yD
+yD
+yD
+yD
+tZ
+yD
+yD
+yD
+xM
 Rl
 Wh
 Wh
@@ -9011,16 +9086,16 @@ Rl
 Rl
 Rl
 hv
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-jJ
+yD
+yD
+yD
+SJ
+Nl
+yD
+yD
+Nl
+yD
+xM
 Rl
 Wh
 Wh
@@ -9053,16 +9128,16 @@ Rl
 Rl
 Rl
 sh
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
 jJ
+yD
+Nl
+yD
+yD
+tZ
+yD
+yD
+yD
+xM
 Rl
 Wh
 Wh
@@ -9095,16 +9170,16 @@ Rl
 Rl
 Rl
 sh
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
 jJ
+yD
+yD
+yD
+yD
+tZ
+yD
+gl
+yD
+xM
 Rl
 Wh
 cR
@@ -9137,16 +9212,16 @@ Rl
 Rl
 Rl
 hv
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
 jJ
+yD
+yD
+yD
+yD
+yD
+yD
+tZ
+yD
+xM
 Rl
 Wh
 Wh
@@ -9179,16 +9254,16 @@ Rl
 Rl
 Rl
 sh
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-ct
-jJ
+CH
+KA
+Ra
+yD
+xv
+yD
+yD
+tZ
+yD
+xM
 Rl
 Wh
 Wh
@@ -11391,12 +11466,12 @@ SK
 al
 YL
 Lt
-Rl
+Qf
 ML
 OK
 Wk
 Wk
-Wk
+xU
 iN
 Rl
 Rl
@@ -11738,7 +11813,7 @@ gH
 NZ
 Qq
 Xd
-aN
+Eb
 Tb
 Mx
 oc
@@ -12093,7 +12168,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (98,1,1) = {"
 Gb
@@ -12135,7 +12210,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (99,1,1) = {"
 Va
@@ -12177,7 +12252,7 @@ Gb
 ct
 ct
 ct
-YX
+Va
 "}
 (100,1,1) = {"
 Va
@@ -12219,7 +12294,7 @@ Va
 ct
 ct
 ct
-YX
+Va
 "}
 (101,1,1) = {"
 Gb
@@ -12261,7 +12336,7 @@ Va
 ct
 ct
 ct
-YX
+Va
 "}
 (102,1,1) = {"
 Va
@@ -12303,7 +12378,7 @@ Va
 ct
 ct
 ct
-YX
+Va
 "}
 (103,1,1) = {"
 Va
@@ -12345,7 +12420,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (104,1,1) = {"
 oz
@@ -12387,7 +12462,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (105,1,1) = {"
 jt
@@ -12429,7 +12504,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (106,1,1) = {"
 jt
@@ -12471,7 +12546,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (107,1,1) = {"
 oz
@@ -12513,7 +12588,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (108,1,1) = {"
 jt
@@ -12555,7 +12630,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (109,1,1) = {"
 jt
@@ -12597,7 +12672,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (110,1,1) = {"
 oz
@@ -12639,7 +12714,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (111,1,1) = {"
 jt
@@ -12681,7 +12756,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (112,1,1) = {"
 jt
@@ -12723,7 +12798,7 @@ ct
 ct
 ct
 ct
-YX
+Va
 "}
 (113,1,1) = {"
 oz

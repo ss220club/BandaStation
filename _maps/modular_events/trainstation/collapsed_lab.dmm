@@ -700,6 +700,11 @@
 /obj/structure/railing/corner,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/facility)
+"cu" = (
+/obj/structure/table,
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/iron/dark/smooth_large,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "cv" = (
 /obj/structure/fake_stairs/directional/south{
 	icon_state = "stairs-m";
@@ -1050,6 +1055,7 @@
 	},
 /obj/structure/noticeboard/directional/east,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/medical/medkit,
 /turf/open/floor/iron/white/smooth_corner{
 	dir = 1
 	},
@@ -1146,6 +1152,7 @@
 /obj/item/stack/medical/suture,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/medical/medkit,
 /turf/open/floor/iron/white/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "dV" = (
@@ -1267,6 +1274,7 @@
 	dir = 4
 	},
 /obj/structure/marker_beacon/burgundy,
+/obj/effect/spawner/random/contraband/narcotics,
 /turf/open/indestructible/meat,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "eE" = (
@@ -1293,6 +1301,12 @@
 /turf/open/floor/iron/shuttle/exploration/corner{
 	dir = 8
 	},
+/area/trainstation/indoors/station/collapsed_lab/cargo)
+"eJ" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/small/red/dim/directional/south,
+/obj/effect/spawner/random/engineering/material_cheap,
+/turf/open/floor/plating,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "eK" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -1530,6 +1544,7 @@
 	},
 /obj/structure/mirror/directional/east,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/engineering/tool_alien,
 /turf/open/floor/iron/white/small,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "fH" = (
@@ -1629,6 +1644,7 @@
 "gd" = (
 /obj/structure/table,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/decoration,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "ge" = (
@@ -1812,6 +1828,14 @@
 	planetary_atmos = 0
 	},
 /area/trainstation/indoors/station/collapsed_lab/caves)
+"gQ" = (
+/obj/structure/rack/shelf,
+/obj/effect/spawner/random/maintenance,
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/iron/shuttle/exploration/uside{
+	dir = 8
+	},
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "gR" = (
 /obj/structure/decorative/shelf/crates1{
 	anchored = 1;
@@ -1880,6 +1904,7 @@
 	dir = 6
 	},
 /obj/effect/decal/cleanable/blood/old,
+/obj/effect/spawner/random/medical/minor_healing,
 /turf/open/floor/iron/dark/smooth_corner{
 	dir = 1
 	},
@@ -2333,6 +2358,10 @@
 /obj/machinery/light/red/directional/south,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors/station/collapsed_lab)
+"is" = (
+/obj/effect/spawner/random/engineering/canister,
+/turf/open/floor/iron/dark/smooth_large,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "it" = (
 /obj/structure/table,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2552,6 +2581,16 @@
 	},
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/indoors/station/collapsed_lab/caves)
+"ji" = (
+/obj/effect/turf_decal/trimline/blue/filled/warning{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/medical/surgery_tool_advanced,
+/turf/open/floor/iron/white/smooth_edge{
+	dir = 1
+	},
+/area/trainstation/indoors/station/collapsed_lab/facility)
 "jk" = (
 /obj/structure/table,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2628,6 +2667,9 @@
 "jB" = (
 /obj/effect/decal/cleanable/glass,
 /obj/machinery/light/small/directional/south,
+/obj/item/stack/sheet/mineral/titanium{
+	amount = 13
+	},
 /turf/open/floor/iron/shuttle/exploration/corner{
 	dir = 1
 	},
@@ -2821,6 +2863,7 @@
 /obj/structure/railing{
 	dir = 1
 	},
+/obj/effect/spawner/random/medical/medkit_rare,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "km" = (
@@ -3166,6 +3209,7 @@
 	pixel_y = 2
 	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/medical/medkit,
 /turf/open/floor/iron/white/smooth_corner{
 	dir = 1
 	},
@@ -3493,6 +3537,7 @@
 	dir = 4;
 	icon_state = "siding_plain_end"
 	},
+/obj/effect/spawner/random/medical/medkit_rare,
 /turf/open/floor/carpet/black,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "mL" = (
@@ -3807,6 +3852,7 @@
 	pixel_y = 12
 	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/medical/medkit,
 /turf/open/floor/iron/white/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "nK" = (
@@ -3901,6 +3947,15 @@
 	dir = 5
 	},
 /area/trainstation/indoors/station/collapsed_lab/caves)
+"ob" = (
+/obj/effect/turf_decal/box/corners{
+	dir = 1
+	},
+/obj/effect/turf_decal/box/corners,
+/obj/effect/turf_decal/delivery,
+/obj/effect/spawner/random/engineering/tank,
+/turf/open/floor/iron/large,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "oc" = (
 /obj/structure/prop/stalagmite/style_4,
 /turf/open/misc/dirt/icy_planet,
@@ -3926,6 +3981,16 @@
 	},
 /turf/open/indestructible/plating,
 /area/trainstation/outdoor)
+"of" = (
+/obj/effect/turf_decal/trimline/blue/filled/warning{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/structure/chair_flipped,
+/turf/open/floor/iron/white/smooth_edge{
+	dir = 1
+	},
+/area/trainstation/indoors/station/collapsed_lab/facility)
 "og" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
@@ -4228,6 +4293,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/turf_decal/siding/wideplating_new/dark/corner,
+/obj/effect/spawner/random/medical/minor_healing,
 /turf/open/indestructible/meat,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "pc" = (
@@ -4799,6 +4865,7 @@
 /obj/effect/turf_decal/siding/wideplating_new/dark{
 	dir = 4
 	},
+/obj/effect/spawner/random/medical/minor_healing,
 /turf/open/indestructible/meat,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "rd" = (
@@ -5187,6 +5254,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "splatter3"
 	},
+/obj/effect/spawner/random/medical/minor_healing,
 /turf/open/floor/iron/dark/smooth_edge,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "ss" = (
@@ -5538,6 +5606,7 @@
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "tJ" = (
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/item/stack/sheet/mineral/plasma/five,
 /turf/open/floor/carpet/black,
 /area/trainstation/indoors/station/collapsed_lab/caves)
 "tL" = (
@@ -5837,6 +5906,7 @@
 /area/trainstation/indoors/station/collapsed_lab)
 "uV" = (
 /obj/structure/rack/shelf,
+/obj/effect/spawner/random/maintenance,
 /turf/open/floor/iron/shuttle/exploration/uside{
 	dir = 8
 	},
@@ -5956,6 +6026,7 @@
 	pixel_y = 7
 	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/medical/medkit,
 /turf/open/floor/iron/white/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "vn" = (
@@ -6366,6 +6437,12 @@
 /obj/effect/spawner/random/entertainment/musical_instrument,
 /turf/open/indestructible/dark/textured,
 /area/trainstation/indoors/station/controll)
+"wj" = (
+/obj/structure/closet/secure_closet/personal,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/engineering/material,
+/turf/open/floor/iron/dark/smooth_large,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "wk" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 9
@@ -6549,6 +6626,10 @@
 	},
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
+"xn" = (
+/obj/item/stack/sheet/mineral/plasma/five,
+/turf/open/misc/dirt/icy_planet,
+/area/trainstation/indoors/station/collapsed_lab/caves)
 "xo" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 1
@@ -6732,6 +6813,14 @@
 "yf" = (
 /mob/living/basic/khara_mutant/reaper,
 /turf/closed/indestructible/meat,
+/area/trainstation/indoors/station/collapsed_lab/facility)
+"yg" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/medical/medkit,
+/turf/open/floor/iron/white/smooth_edge{
+	dir = 8
+	},
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "yh" = (
 /obj/effect/turf_decal/box/corners,
@@ -7001,6 +7090,8 @@
 /area/trainstation/indoors/station/collapsed_lab)
 "yY" = (
 /obj/structure/rack/shelf,
+/obj/effect/spawner/random/maintenance,
+/obj/effect/spawner/random/maintenance,
 /turf/open/floor/iron/shuttle/exploration/corner{
 	dir = 1
 	},
@@ -7113,6 +7204,7 @@
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "zC" = (
 /obj/structure/rack/shelf,
+/obj/effect/spawner/random/contraband/armory,
 /turf/open/floor/iron/shuttle/exploration/uside{
 	dir = 4
 	},
@@ -7510,6 +7602,7 @@
 /turf/open/floor/plating/reinforced,
 /area/trainstation/indoors/station/collapsed_lab/caves)
 "Bq" = (
+/obj/item/stack/sheet/mineral/plasma/five,
 /turf/open/floor/iron/dark/side{
 	dir = 4
 	},
@@ -7533,6 +7626,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
+"Bv" = (
+/obj/item/stack/sheet/mineral/gold/fifty{
+	amount = 12
+	},
+/turf/open/misc/dirt/icy_planet,
+/area/trainstation/indoors/station/collapsed_lab/caves)
 "Bx" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 10
@@ -8122,6 +8221,7 @@
 	pixel_x = -2;
 	pixel_y = 7
 	},
+/obj/effect/spawner/random/decoration,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "Dw" = (
@@ -8304,6 +8404,8 @@
 	pixel_x = 0;
 	pixel_y = 5
 	},
+/obj/effect/spawner/random/engineering/material_cheap,
+/obj/effect/spawner/random/engineering/material_cheap,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "Ef" = (
@@ -8797,6 +8899,7 @@
 "Gc" = (
 /obj/structure/rack/shelf,
 /obj/machinery/light/small/red/dim/directional/south,
+/obj/effect/spawner/random/contraband/narcotics,
 /turf/open/floor/iron/shuttle/exploration/uside{
 	dir = 1
 	},
@@ -8923,6 +9026,11 @@
 	},
 /turf/open/floor/iron/shuttle/exploration/blanktile,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
+"GC" = (
+/obj/structure/broken_flooring/plating/directional/north,
+/obj/item/stack/sheet/mineral/plasma/five,
+/turf/open/misc/dirt/icy_planet,
+/area/trainstation/indoors/station/collapsed_lab/caves)
 "GD" = (
 /obj/structure/railing{
 	dir = 1;
@@ -9041,6 +9149,10 @@
 	dir = 1
 	},
 /area/trainstation/indoors/station/collapsed_lab/facility)
+"GV" = (
+/obj/effect/spawner/random/engineering/canister,
+/turf/open/floor/iron/shuttle/exploration/smooth,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "GW" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -9248,6 +9360,10 @@
 	},
 /turf/closed/indestructible/meat,
 /area/trainstation/indoors/station/collapsed_lab/facility)
+"HV" = (
+/obj/machinery/suit_storage_unit/medical,
+/turf/open/floor/iron/shuttle/exploration/smooth,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "HW" = (
 /obj/structure/mirror/directional/north,
 /obj/structure/sink/directional/south,
@@ -9459,6 +9575,7 @@
 "IX" = (
 /obj/structure/table,
 /obj/structure/sign/departments/restroom/directional/west,
+/obj/effect/spawner/random/engineering/material,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "IY" = (
@@ -9685,6 +9802,10 @@
 	},
 /turf/open/misc/dirt/icy_planet,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
+"JR" = (
+/obj/effect/spawner/random/structure/chair_flipped,
+/turf/open/floor/iron/white,
+/area/trainstation/indoors/station/collapsed_lab/facility)
 "JS" = (
 /obj/structure/fake_stairs/directional/south{
 	icon_state = "stairs-old";
@@ -9798,6 +9919,7 @@
 /obj/effect/turf_decal/box/corners,
 /obj/effect/turf_decal/delivery,
 /obj/structure/rack/shelf,
+/obj/effect/spawner/random/engineering/material_rare,
 /turf/open/floor/iron/large,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "Km" = (
@@ -9860,6 +9982,7 @@
 "Kx" = (
 /obj/structure/table,
 /obj/machinery/light/red/directional/south,
+/obj/effect/spawner/random/maintenance,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "Ky" = (
@@ -9894,6 +10017,13 @@
 /obj/effect/turf_decal/siding/dark_blue,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/caves)
+"KD" = (
+/obj/structure/table,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/engineering/toolbox,
+/turf/open/floor/iron/dark/smooth_large,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "KG" = (
 /turf/open/misc/asteroid/moon,
 /area/trainstation/indoors/station/collapsed_lab/facility)
@@ -9978,6 +10108,7 @@
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "KX" = (
 /obj/structure/rack/shelf,
+/obj/effect/spawner/random/contraband/narcotics,
 /turf/open/floor/iron/shuttle/exploration/uside,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "KY" = (
@@ -10326,6 +10457,7 @@
 "Mj" = (
 /obj/structure/table,
 /obj/machinery/light/small/red/dim/directional/east,
+/obj/effect/spawner/random/maintenance,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "Mk" = (
@@ -10750,6 +10882,11 @@
 /obj/effect/spawner/random/structure/crate_abandoned,
 /turf/open/floor/iron/shuttle/evac/airless,
 /area/trainstation/outdoor)
+"NR" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/engineering/material_cheap,
+/turf/open/floor/iron/dark/smooth_large,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "NT" = (
 /obj/item/bot_assembly/cleanbot,
 /turf/open/misc/dirt/icy_planet,
@@ -10790,6 +10927,7 @@
 	color = "#d66569";
 	dir = 1
 	},
+/obj/effect/spawner/random/medical/medkit,
 /turf/open/floor/iron/white/smooth_corner{
 	dir = 1
 	},
@@ -10807,6 +10945,11 @@
 /turf/open/water{
 	planetary_atmos = 0
 	},
+/area/trainstation/indoors/station/collapsed_lab/cargo)
+"Oi" = (
+/obj/effect/decal/cleanable/blood/old,
+/obj/effect/spawner/random/engineering/canister,
+/turf/open/floor/iron/shuttle/exploration/smooth,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "Oj" = (
 /obj/structure/fake_stairs/directional/south{
@@ -10903,6 +11046,12 @@
 	dir = 4
 	},
 /area/trainstation/indoors/station/controll)
+"OM" = (
+/obj/structure/table,
+/obj/effect/spawner/random/maintenance,
+/obj/effect/spawner/random/decoration,
+/turf/open/floor/iron/dark/smooth_large,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "OO" = (
 /turf/open/floor/iron/dark/corner{
 	dir = 8
@@ -11019,6 +11168,7 @@
 /area/trainstation/indoors/station/collapsed_lab)
 "Pm" = (
 /obj/structure/rack/shelf,
+/obj/effect/spawner/random/maintenance,
 /turf/open/floor/iron/shuttle/exploration/uside{
 	dir = 1
 	},
@@ -11050,6 +11200,7 @@
 "Py" = (
 /obj/structure/table,
 /obj/item/radio/intercom/directional/west,
+/obj/effect/spawner/random/food_or_drink/donuts,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "Pz" = (
@@ -11252,6 +11403,7 @@
 	pixel_y = 15
 	},
 /obj/structure/marker_beacon/burgundy,
+/obj/effect/spawner/random/medical/minor_healing,
 /turf/open/indestructible/meat,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "Qk" = (
@@ -11392,6 +11544,7 @@
 "QP" = (
 /obj/structure/rack/shelf,
 /obj/effect/decal/cleanable/blood/old,
+/obj/effect/spawner/random/contraband/narcotics,
 /turf/open/floor/iron/shuttle/exploration/uside,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "QQ" = (
@@ -11639,6 +11792,10 @@
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
+"RN" = (
+/obj/effect/spawner/random/medical/medkit,
+/turf/open/floor/iron/white,
+/area/trainstation/indoors/station/collapsed_lab/facility)
 "RP" = (
 /obj/structure/broken_flooring/plating/directional/west,
 /turf/open/misc/dirt/icy_planet,
@@ -11653,6 +11810,7 @@
 /obj/structure/closet/secure_closet/personal/wall{
 	pixel_y = 29
 	},
+/obj/effect/spawner/random/engineering/tank,
 /turf/open/floor/carpet/black,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "RW" = (
@@ -11996,6 +12154,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/structure/chair_flipped,
 /turf/open/floor/iron/white,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "Tu" = (
@@ -12112,6 +12271,17 @@
 	planetary_atmos = 0
 	},
 /area/trainstation/indoors/station/collapsed_lab/cargo)
+"TP" = (
+/obj/effect/turf_decal/lunar_sand/plating,
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/obj/effect/spawner/random/engineering/material_rare,
+/turf/open/floor/iron/shuttle/evac/airless,
+/area/trainstation/outdoor)
 "TQ" = (
 /obj/structure/table,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -12250,6 +12420,12 @@
 	},
 /turf/open/indestructible/meat,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
+"UE" = (
+/obj/structure/broken_flooring/plating/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stack/sheet/mineral/plasma/five,
+/turf/open/misc/dirt/icy_planet,
+/area/trainstation/indoors/station/collapsed_lab/caves)
 "UF" = (
 /obj/structure/railing{
 	dir = 8
@@ -12342,6 +12518,8 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/sign/calendar/directional/north,
+/obj/machinery/suit_storage_unit/medical,
+/obj/machinery/suit_storage_unit/medical,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/caves)
 "Vh" = (
@@ -12923,6 +13101,16 @@
 	dir = 1
 	},
 /area/trainstation/indoors/station/collapsed_lab/facility)
+"Xh" = (
+/obj/effect/turf_decal/trimline/blue/filled/warning{
+	dir = 10
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/medical/surgery_tool_advanced,
+/turf/open/floor/iron/white/smooth_corner{
+	dir = 4
+	},
+/area/trainstation/indoors/station/collapsed_lab/facility)
 "Xj" = (
 /obj/structure/decorative{
 	anchored = 1;
@@ -13186,6 +13374,10 @@
 	dir = 1
 	},
 /area/trainstation/indoors/station/collapsed_lab/facility)
+"Yo" = (
+/obj/effect/spawner/random/engineering/tank,
+/turf/open/floor/iron/shuttle/exploration/doubleside,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
 "Yp" = (
 /obj/effect/turf_decal/trimline/blue/filled/warning{
 	dir = 1
@@ -13263,6 +13455,12 @@
 	dir = 8
 	},
 /area/trainstation/indoors/station/collapsed_lab/facility)
+"Yy" = (
+/obj/item/stack/sheet/mineral/titanium{
+	amount = 13
+	},
+/turf/open/misc/dirt/icy_planet,
+/area/trainstation/indoors/station/collapsed_lab/caves)
 "Yz" = (
 /obj/structure/fake_stairs/directional/south{
 	icon_state = "stairs-r";
@@ -13294,6 +13492,7 @@
 /obj/structure/prop/nt_optable_active{
 	pixel_y = -2
 	},
+/obj/effect/spawner/random/contraband/narcotics,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors/station/collapsed_lab/facility)
 "YI" = (
@@ -13331,6 +13530,10 @@
 	pixel_y = -8
 	},
 /turf/open/floor/iron/shuttle/exploration/doubleside,
+/area/trainstation/indoors/station/collapsed_lab/cargo)
+"YL" = (
+/obj/effect/spawner/random/engineering/material,
+/turf/closed/indestructible/steel,
 /area/trainstation/indoors/station/collapsed_lab/cargo)
 "YN" = (
 /obj/machinery/door/airlock/medical/glass{
@@ -13825,7 +14028,7 @@ bT
 Ae
 Ae
 Ae
-Ae
+TP
 Hc
 HZ
 Ar
@@ -14023,7 +14226,7 @@ Ot
 uh
 bm
 Uc
-Uc
+HV
 Hn
 Ar
 fs
@@ -14231,7 +14434,7 @@ Ot
 uh
 ZJ
 DH
-Uc
+GV
 Hn
 Ar
 fs
@@ -14333,11 +14536,11 @@ Ar
 Ot
 Ot
 uh
-Wj
+Oi
 Uc
 Ir
 Hn
-GF
+ob
 nf
 iA
 Qa
@@ -14349,7 +14552,7 @@ ra
 DI
 Yd
 uh
-PS
+wj
 Ky
 IX
 rk
@@ -14395,12 +14598,12 @@ YK
 QJ
 ud
 kG
-SI
+Yo
 QJ
 wR
 pN
 uV
-uh
+YL
 DL
 pf
 ey
@@ -14456,7 +14659,7 @@ uh
 uh
 uh
 RS
-ME
+NR
 Zf
 dA
 Ap
@@ -14561,7 +14764,7 @@ PS
 vk
 rk
 ME
-jk
+KD
 uh
 JW
 fE
@@ -14660,7 +14863,7 @@ uh
 uh
 uh
 uh
-Ew
+cu
 uh
 df
 Zf
@@ -14723,7 +14926,7 @@ NC
 ny
 ny
 ny
-Tv
+eJ
 uh
 gC
 Ot
@@ -14766,7 +14969,7 @@ yG
 Fu
 Gv
 uh
-rk
+is
 rk
 ME
 uh
@@ -14863,7 +15066,7 @@ tf
 OE
 qS
 KO
-uV
+gQ
 FY
 aM
 yW
@@ -14968,10 +15171,10 @@ kF
 ST
 mi
 uh
-Ew
+OM
 Ub
 tD
-Ew
+cu
 Mj
 uh
 VZ
@@ -16584,7 +16787,7 @@ ss
 sT
 mR
 vL
-Er
+xn
 kV
 Er
 Er
@@ -16689,7 +16892,7 @@ JB
 pu
 RP
 sy
-Er
+Yy
 lA
 Gg
 Dw
@@ -16940,7 +17143,7 @@ TQ
 tR
 yA
 io
-Lh
+UE
 nk
 Er
 EW
@@ -17165,7 +17368,7 @@ Ec
 Ec
 Ec
 Er
-Er
+Bv
 vL
 Ec
 Er
@@ -17220,7 +17423,7 @@ Er
 vL
 Ec
 Ec
-Er
+Yy
 Er
 Er
 bC
@@ -17308,7 +17511,7 @@ Er
 Er
 Er
 Ec
-St
+GC
 pu
 Ec
 Ec
@@ -17726,7 +17929,7 @@ Er
 Er
 bU
 BP
-Er
+Bv
 Er
 zm
 Ec
@@ -23126,7 +23329,7 @@ rV
 Ka
 YN
 Bc
-kC
+JR
 zX
 AV
 jW
@@ -23435,11 +23638,11 @@ Ar
 Ot
 PX
 Jv
-li
+yg
 WS
 wf
 Bc
-kC
+RN
 kC
 pe
 oR
@@ -23696,9 +23899,9 @@ Ar
 gj
 sC
 pz
-kE
+of
 wW
-Uf
+Xh
 tu
 fj
 gj
@@ -23852,7 +24055,7 @@ Ar
 gj
 sC
 pz
-kE
+ji
 po
 yN
 gj

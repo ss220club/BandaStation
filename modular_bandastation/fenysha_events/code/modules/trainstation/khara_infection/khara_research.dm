@@ -7,7 +7,7 @@
 #define TECHWEB_NODE_KHARA_POSITIVE_ADVANCED "evt_khara_med_advanced"
 
 
-/datum/design/anti_khara_ammunition
+/datum/design/khara_express_test
 	name = "Экспресс тест 'Кхара'"
 	desc = "Дизайн простой лаборатории, способной быстро определить наличие анти-тел Кхары в крови."
 	id = "khara_test"
@@ -82,6 +82,62 @@
 
 	update_appearance()
 
+/datum/design/ranged_experi_scanner
+	name = "Дистанционный сканер"
+	desc = "Продвинутый дистанционный сканер, позволяющий сканировать цели на расстоянии. Как удобно!"
+	id = "ranged_experiscaner"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(
+		/datum/material/iron = COIN_MATERIAL_AMOUNT * 2,
+		/datum/material/silver = SMALL_MATERIAL_AMOUNT * 3,
+	)
+	build_path = /obj/item/ranged_experi_scanner
+	category = list(
+		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_MEDICAL_ADVANCED
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
+
+
+/obj/item/ranged_experi_scanner
+	name = "Experi-Scanner"
+	desc = "A handheld scanner used for completing the many experiments of modern science."
+	w_class = WEIGHT_CLASS_NORMAL
+	icon = 'modular_bandastation/fenysha_events/icons/items/devices.dmi'
+	icon_state = "ranged_scaner"
+	inhand_icon_state = "export_scanner"
+	lefthand_file = 'icons/mob/inhands/items/devices_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
+	sound_vary = TRUE
+	pickup_sound = SFX_GENERIC_DEVICE_PICKUP
+	drop_sound = SFX_GENERIC_DEVICE_DROP
+
+	var/max_distance = 5
+	var/datum/component/experiment_handler/handler = null
+
+/obj/item/ranged_experi_scanner/Initialize(mapload)
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/ranged_experi_scanner/LateInitialize()
+	var/static/list/handheld_signals = list(
+		COMSIG_ITEM_PRE_ATTACK = TYPE_PROC_REF(/datum/component/experiment_handler, try_run_handheld_experiment),
+		COMSIG_ITEM_AFTERATTACK = TYPE_PROC_REF(/datum/component/experiment_handler, ignored_handheld_experiment_attempt),
+	)
+	handler = AddComponent(/datum/component/experiment_handler, \
+		allowed_experiments = list(/datum/experiment/scanning, /datum/experiment/physical), \
+		disallowed_traits = EXPERIMENT_TRAIT_DESTRUCTIVE, \
+		config_flags = EXPERIMENT_CONFIG_ALWAYS_ANNOUNCE, \
+		experiment_signals = handheld_signals, \
+	)
+
+/obj/item/ranged_experi_scanner/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(QDELETED(interacting_with) || QDELETED(user) || user.stat != CONSCIOUS)
+		return
+	if(get_dist(get_turf(src), interacting_with) > max_distance)
+		balloon_alert(user, "Слишком далеко!")
+		return
+	handler.try_run_handheld_experiment(src, interacting_with, user, modifiers)
+
 /**
  * Эксперимент: Сканирование образцов крови с вирусом Кхара
  */
@@ -89,7 +145,7 @@
 	name = "Сканирование образцов крови с вирусом Кхара"
 	description = "Проведите сканирование образцов крови, содержащих вирус Кхара."
 	exp_tag = "Сканирование крови"
-	allowed_experimentors = list(/obj/item/experi_scanner, /obj/item/scanner_wand)
+	allowed_experimentors = list(/obj/item/experi_scanner, /obj/item/ranged_experi_scanner, /obj/item/scanner_wand)
 	required_atoms = list(/obj/item/reagent_containers = 1)
 	/// Требуемый вирус
 	var/datum/disease/required_disease = /datum/disease/khara
@@ -137,7 +193,7 @@
 /datum/experiment/scanning/infected_human
 	name = "Сканирование заражённого человека"
 	description = "Проведите сканирование живого человека, поражённого вирусом Кхара."
-	allowed_experimentors = list(/obj/item/experi_scanner, /obj/item/scanner_wand)
+	allowed_experimentors = list(/obj/item/experi_scanner, /obj/item/ranged_experi_scanner, /obj/item/scanner_wand)
 	required_atoms = list(/mob/living/carbon/human = 1)
 	/// Требуемый вирус
 	var/datum/disease/required_disease = /datum/disease/khara
@@ -200,7 +256,7 @@
 	name = "Сканирование пораженных Кхара существ"
 	description = "Проведите сканирование существ, обращённых вирусом Кхара."
 	performance_hint = "Поражённые Кхара в основном состоят из мышечной ткани. Их легко замедлить шоковым оружием."
-	allowed_experimentors = list(/obj/item/experi_scanner, /obj/item/scanner_wand)
+	allowed_experimentors = list(/obj/item/experi_scanner, /obj/item/ranged_experi_scanner, /obj/item/scanner_wand)
 
 	var/required_count = 3
 	var/required_cast = KHARA_CAST_LESSER
@@ -295,6 +351,7 @@
 	prereq_ids = list(TECHWEB_NODE_CHEM_SYNTHESIS, TECHWEB_NODE_KHARA_START)
 	design_ids = list(
 		"khara_test",
+		"ranged_experiscaner",
 	)
 
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_5_POINTS)
@@ -356,13 +413,11 @@
 	design_ids = list(
 		"anti_khara_ammunition",
 		"anti_khara_weapon_sword",
-		"anti_khara_weapon_greatsword",
-		"anti_khara_weapon_spear",
 	)
 	prereq_ids = list(TECHWEB_NODE_KHARA_INITIAL_INFECTION, TECHWEB_NODE_BEAM_WEAPONS)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_5_POINTS * 3)
 	required_experiments = list(/datum/experiment/scanning/khara_creature/adapted)
-	announce_channels = list(RADIO_CHANNEL_MEDICAL, RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_SECURITY, RADIO_CHANNEL_COMMON)
+	announce_channels = list(RADIO_CHANNEL_MEDICAL, RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_SECURITY, RADIO_CHANNEL_COMMON, RADIO_CHANNEL_SUPPLY)
 	document_to_spawn = /obj/item/paper/khara_ammunition_basic_research
 	experiments_to_unlock = list(/datum/experiment/scanning/khara_creature/assimilating)
 
@@ -389,13 +444,18 @@
 	display_name = "Продвинутое анти-Кхара вооружение"
 	description = "Получены чертежи продвинутого оружия для уничтожения крупных колоний заражённых."
 	prereq_ids = list(TECHWEB_NODE_KHARA_AMMUNITION_BASIC)
+	design_ids = list(
+		"anti_khara_grenade",
+		"anti_khara_weapon_greatsword",
+		"anti_khara_weapon_spear",
+	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_5_POINTS * 4)
 	required_experiments = list(/datum/experiment/scanning/khara_creature/assimilating)
-	announce_channels = list(RADIO_CHANNEL_MEDICAL, RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_SECURITY)
+	announce_channels = list(RADIO_CHANNEL_SUPPLY, RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_SECURITY)
 	document_to_spawn = /obj/item/paper/khara_ammunition_advanced_research
 
 	research_text = "Исследования самых массивных мутантов позволили синтезировать чертежи продвинутых гранат, генерирующих особое энергетическое поле, \
-					в котором инфекция Кхара не способна существовать."
+					в котором инфекция Кхара не способна существовать. А так же самого продвинутого оружия ближнего боя."
 
 /obj/item/paper/khara_ammunition_advanced_research
 	name = "Отчёт: Продвинутое анти-Кхара вооружение"

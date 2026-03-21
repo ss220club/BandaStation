@@ -102,8 +102,10 @@ GLOBAL_VAR(main_morph_engine)
 	base_pixel_x = -16
 	pixel_x = -16
 
-	idle_power_usage = 20 KILO WATTS
+	idle_power_usage = 1 KILO WATTS
 	critical_machine = TRUE
+
+	var/protect_power_usage = 0
 
 	VAR_PRIVATE/list/protected_areas = null
 	/// Список всех зон, что находятся под нашей защитой
@@ -184,7 +186,7 @@ GLOBAL_VAR(main_morph_engine)
 							значительно повышает энергопотребление и может навредить всем больным.")
 
 	if(on)
-		. += span_warning("\n Текущее энергопотребление: [round(idle_power_usage / KILO)] киловатт")
+		. += span_warning("\n Текущее энергопотребление: [round(protect_power_usage / KILO)] киловатт")
 
 /obj/machinery/morphological_engine/proc/build_area_cache()
 	if(!protected_area_types || !islist(protected_area_types) || !length(protected_area_types))
@@ -222,14 +224,14 @@ GLOBAL_VAR(main_morph_engine)
 	if(!COOLDOWN_FINISHED(src, turn_power_cd))
 		to_chat(user, span_warning("Двигатель ещё не остыл после предыдущего включения!"))
 		return FALSE
-	idle_power_usage = 0
+	protect_power_usage = 0
 
 	if(mode & MORPH_ENGINE_MODE_BARRIER)
-		idle_power_usage += 20 KILO WATTS
+		protect_power_usage += 20 KILO WATTS
 	if(mode & MORPH_ENGINE_MODE_CONTAINMENT)
-		idle_power_usage += 40 KILO WATTS
+		protect_power_usage += 40 KILO WATTS
 	if(mode & MORPH_ENGINE_MODE_ISOLATION)
-		idle_power_usage += 100 KILO WATTS
+		protect_power_usage += 100 KILO WATTS
 
 	on = TRUE
 	protect_areas()
@@ -265,7 +267,7 @@ GLOBAL_VAR(main_morph_engine)
 		list(SPAN_COMMAND)
 	)
 
-	idle_power_usage = 0
+	protect_power_usage = 0
 	on = FALSE
 	update_appearance()
 	end_processing()
@@ -284,18 +286,21 @@ GLOBAL_VAR(main_morph_engine)
 				continue
 			if(should_slow_khara())
 				ADD_TRAIT(instance, TRAIT_AREA_MORPENGINE, REF(src))
+			if(should_kill_khara())
+				ADD_TRAIT(instance, TRAIT_AREA_MORPENGINE_HAZARD, REF(src))
 			LAZYADDASSOC(protected_areas, instance, TRUE)
 
 /obj/machinery/morphological_engine/proc/cleanup_areas()
 	for(var/area/A in protected_areas)
 		REMOVE_TRAIT(A, TRAIT_AREA_MORPENGINE, REF(src))
+		REMOVE_TRAIT(A, TRAIT_AREA_MORPENGINE_HAZARD, REF(src))
 	protected_areas = null
 
 /obj/machinery/morphological_engine/process()
 	if(!on)
 		return PROCESS_KILL
 
-	if(!powered())
+	if(!powered() || !use_energy(protect_power_usage))
 		balloon_alert_to_viewers("Недостаточное питание - отключение!")
 		turn_off()
 		return
@@ -461,3 +466,42 @@ GLOBAL_VAR(main_morph_engine)
 	visible_message(span_danger("[src] внезапно перегружается! Искры вылетают из панели!"))
 	do_sparks(5, FALSE, src)
 	calibration_step = 0
+
+
+/obj/item/paper/guides/fenysha_events/morph_engine
+	name = "Бумага — «Краткое руководство по Морфологическому двигателю!»"
+	default_raw_text = "<B>Морфологический двигатель — полное руководство</B><BR>\
+	<HR>\
+	<B>Назначение</B><BR>\
+	Двигатель защищает внутренние помещения поезда от мутации Кхары.<BR>\
+	Создаёт силовые поля, аномальную радиацию и волны, блокируя, замедляя и уничтожая клетки Кхары.<BR>\
+	Это главный (и единственный) двигатель поезда.<BR>\
+	<HR>\
+	<B>Три режима работы(совмещаются)</B><BR>\
+	- <B>Барьер</B> (20 кВт): физический энергетический барьер.<BR>\
+	  Мутанты Кхары НЕ МОГУТ войти в зону, силовая волна выбрасывает назад.<BR>\
+	  Внутри помещений и выход — свободны.<BR>\
+	- <B>Сдерживание</B> (40 кВт): аномальная радиация.<BR>\
+	  Замедляет развитие и распространение клеток Кхары в зоне.<BR>\
+	- <B>Изоляция</B> (100 кВт): силовые волны.<BR>\
+	  Активно разрушает клетки Кхары, сильно снижая заражение.<BR>\
+	  <B>ВНИМАНИЕ:</B> очень высокое потребление энергии + может навредить ВСЕМ заражённым в зоне!<BR>\
+	<HR>\
+	<B>Как изменить режимы (только когда двигатель ВЫКЛЮЧЕН)</B><BR>\
+	1. Отвёрткой — открутить панель.<BR>\
+	2. Гаечным ключом — подтянуть внутренние болты.<BR>\
+	3. Сваркой — заварить герметичные соединения.<BR>\
+	4. В меню: нажмите на нужные режимы (Барьер / Сдерживание / Изоляция) — они переключаются.<BR>\
+		Нажмите «Подтвердить изменения».<BR>\
+	5. Калибровка (после подтверждения):<BR>\
+		- Отвёртка<BR>\
+		- Гаечный ключ<BR>\
+		- Сварка<BR>\
+	<B>ВНИМАНИЕ:</B> на каждом шаге калибровки — есть шанс провала!<BR>\
+	После успешной калибровки режимы зафиксированы.<BR>\
+	<HR>\
+	<B>Дополнительно</B><BR>\
+	- При включении все живые в зоне действия, могут получть легкое недомагание.<BR>\
+	- Если панель открыта — сначала завершите настройку или калибровку.<BR>\
+	- Главный двигатель один на всю станцию.<BR>\
+	Удачи, инженер! Не дайте Кхаре прорваться."

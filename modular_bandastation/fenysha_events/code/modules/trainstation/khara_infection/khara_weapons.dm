@@ -712,13 +712,13 @@
 	if(!COOLDOWN_FINISHED(src, attack_cd))
 		return FALSE
 
-	user.adjust_stamina_loss(10)
+	user.adjust_stamina_loss(5)
 	new /obj/effect/temp_visual/telegraphing/boss_hit(get_turf(target_mob))
 	if(!do_after(user, 0.5 SECONDS, target_mob, CHECKFLAGS, \
 		extra_checks = CALLBACK(src, PROC_REF(check_adjacent), user, target_mob), \
 		max_interact_count = 1))
 
-		user.adjust_stamina_loss(20)
+		user.adjust_stamina_loss(15)
 		COOLDOWN_START(src, attack_cd, 0.5 SECONDS)
 		return FALSE
 	if(!user.Adjacent(target_mob))
@@ -733,7 +733,7 @@
 	COOLDOWN_START(src, attack_cd, attack_cooldown)
 	target_mob.Knockdown()
 	target_mob.Stun(1 SECONDS)
-	user.adjust_stamina_loss(35)
+	user.adjust_stamina_loss(20)
 
 #undef CHECKFLAGS
 
@@ -780,3 +780,41 @@
 	throwforce = 25
 	mob_thrower = FALSE
 	block_sound = 'sound/items/weapons/effects/batreflect.ogg'
+
+/datum/design/anti_khara_grenade
+	id = "anti_khara_grenade"
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 1,
+		/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 1,
+		/datum/material/diamond = SHEET_MATERIAL_AMOUNT * 1.5,
+	)
+	build_path = /obj/item/grenade/anti_khara
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_RANGED
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_CARGO | DEPARTMENT_BITFLAG_SECURITY | DEPARTMENT_BITFLAG_SCIENCE
+
+/obj/item/grenade/anti_khara
+	name = "Анти-Кхара граната"
+	desc = "Экстремально эффективная граната испускающая низко-волновую радиацию, что эффективно пораждает клетки Кхары."
+	icon_state = "timeg"
+	inhand_icon_state = "emp"
+
+/obj/item/grenade/anti_khara/detonate(mob/living/lanced_by)
+	. = ..()
+	if(!.)
+		return
+	var/turf/kaboom_turf = get_turf(src)
+
+	for(var/atom/movable/AM in circle_range(kaboom_turf, 4))
+		new /obj/effect/temp_visual/impact_effect/anti_khara(get_turf(AM))
+		if(is_khara_creature(AM))
+			var/mob/living/khara_mutant= AM
+			var/dist = get_dist(kaboom_turf, AM)
+
+			khara_mutant.take_overall_damage(round(150 / dist), round(50 / dist), 45)
+			to_chat(khara_mutant, span_userdanger("Энергетическая волна - терзает твое тело!"))
+
+	qdel(src)

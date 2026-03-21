@@ -42,6 +42,7 @@
 		/datum/action/cooldown/mob_cooldown/heat_of_infection/laser_sweep = null,
 	)
 
+	var/should_change_stages = TRUE
 	var/list/mob/living/basic/khara_mutant/heat_of_infection_hand/hands = list()
 	var/addictional_view_range = 8
 	var/stage = 1
@@ -94,6 +95,11 @@
 			qdel(hand)
 	hands = null
 	return ..()
+
+/mob/living/basic/khara_mutant/heat_of_infection/Life(seconds_per_tick, times_fired)
+	. = ..()
+	if(should_change_stages)
+		update_stage_tresholds()
 
 /mob/living/basic/khara_mutant/heat_of_infection/proc/move_hands()
 	if(!length(hands))
@@ -183,9 +189,7 @@
 /mob/living/basic/khara_mutant/heat_of_infection/proc/get_hands_count()
 	return length(hands)
 
-
-/mob/living/basic/khara_mutant/heat_of_infection/apply_damage(damage, damagetype, def_zone, blocked, forced, spread_damage, wound_bonus, exposed_wound_bonus, sharpness, attack_direction, attacking_item, wound_clothing)
-	. = ..()
+/mob/living/basic/khara_mutant/heat_of_infection/proc/update_stage_tresholds()
 	var/health_percentage = health / maxHealth
 
 	var/target_stage = stage
@@ -667,7 +671,7 @@ GLOBAL_LIST_EMPTY(infection_lasers)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	flags_1 = SUPERMATTER_IGNORES_1
 
-	var/laser_damage = 1500
+	var/laser_damage = 1750
 	var/active = FALSE
 	var/datum/beam/current_beam = null
 	var/cooldown_time = 0

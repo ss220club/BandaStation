@@ -49,6 +49,7 @@
 #define TRAIT_GRANTEDKHARA_REBORN "granted_khara_reborn"
 #define TRAIT_CURED_KHARA "khara_cured"
 #define TRAIT_AREA_MORPENGINE "area_under_morhengine"
+#define TRAIT_AREA_MORPENGINE_HAZARD "area_under_morhenginehazard"
 #define TRAIT_ALWAYS_PENETRAIT_KHARA "always_penetrate_khara"
 
 #define BB_MOB_ABILITY_BONESHARD "bb_ability_boneshard"

@@ -42,6 +42,7 @@
 /area/trainstation/indoors)
 "bi" = (
 /obj/effect/turf_decal/delivery,
+/obj/effect/spawner/random/medical/medkit_rare,
 /turf/open/floor/iron/dark,
 /area/trainstation/indoors)
 "bO" = (
@@ -263,6 +264,7 @@
 	},
 /obj/structure/rack/shelf,
 /obj/effect/spawner/random/medical/medkit,
+/obj/effect/spawner/random/medical/medkit_rare,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
 "lj" = (
@@ -490,6 +492,7 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
 	},
+/obj/effect/spawner/random/structure/crate_loot,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
 "uV" = (
@@ -534,6 +537,11 @@
 /obj/structure/rack/shelf,
 /obj/effect/spawner/random/medical/medkit_rare,
 /turf/open/floor/iron/dark/small,
+/area/trainstation/indoors)
+"wR" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/structure/crate_loot,
+/turf/open/floor/iron/dark,
 /area/trainstation/indoors)
 "xa" = (
 /obj/effect/decal/cleanable/dirt,
@@ -754,6 +762,14 @@
 	},
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
+"Dt" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/rack/shelf,
+/obj/item/stack/sheet/iron{
+	amount = 30
+	},
+/turf/open/floor/iron/dark/small,
+/area/trainstation/indoors)
 "DJ" = (
 /obj/effect/spawner/random/engineering/flashlight,
 /obj/effect/turf_decal/stripes/line{
@@ -836,6 +852,12 @@
 /obj/structure/chair/sofa/bench,
 /turf/open/floor/asphalt,
 /area/trainstation/indoors)
+"Gk" = (
+/obj/item/stack/sheet/iron{
+	amount = 30
+	},
+/turf/open/floor/iron/dark,
+/area/trainstation/indoors)
 "GB" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 10
@@ -845,6 +867,10 @@
 "GG" = (
 /turf/open/misc/asteroid/snow/indestructible,
 /area/trainstation/outdoor)
+"Hn" = (
+/obj/effect/spawner/random/structure/crate_loot,
+/turf/open/floor/iron/dark,
+/area/trainstation/indoors)
 "Hv" = (
 /obj/effect/turf_decal/weather/snow,
 /obj/structure/fence{
@@ -1057,6 +1083,13 @@
 	dir = 8
 	},
 /area/trainstation/indoors/station/controll)
+"MM" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/spawner/random/structure/crate_abandoned,
+/turf/open/floor/iron/dark/small,
+/area/trainstation/indoors)
 "MX" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood,
@@ -1138,6 +1171,7 @@
 /obj/effect/turf_decal/bot,
 /obj/structure/table/reinforced,
 /obj/item/paper/trainstation_password,
+/obj/effect/spawner/random/medical/medkit_rare,
 /turf/open/floor/iron/dark/smooth_large,
 /area/trainstation/indoors)
 "Rl" = (
@@ -1325,6 +1359,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
+/obj/effect/spawner/random/structure/crate_loot,
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
 "XM" = (
@@ -1340,6 +1375,15 @@
 "Yj" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/spawner/random/contraband/narcotics,
+/turf/open/floor/iron/dark/small,
+/area/trainstation/indoors)
+"Yx" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/rack/shelf,
+/obj/item/stack/sheet/plastic/fifty,
+/obj/item/stack/sheet/iron{
+	amount = 30
+	},
 /turf/open/floor/iron/dark/small,
 /area/trainstation/indoors)
 "YR" = (
@@ -3958,7 +4002,7 @@ XF
 TA
 TA
 Qb
-XF
+MM
 uJ
 cX
 dC
@@ -4042,7 +4086,7 @@ cq
 ek
 gh
 cq
-cq
+Gk
 JX
 cX
 dC
@@ -4080,7 +4124,7 @@ tN
 tN
 tN
 tN
-cq
+Gk
 cq
 sh
 cq
@@ -4244,7 +4288,7 @@ GG
 dC
 dC
 tN
-cQ
+Yx
 gh
 cq
 cq
@@ -4286,7 +4330,7 @@ GG
 dC
 dC
 tN
-cQ
+Dt
 Ua
 cq
 cq
@@ -4371,8 +4415,8 @@ dC
 dC
 tN
 Yj
-ek
-ek
+wR
+wR
 ek
 ek
 ej
@@ -4540,12 +4584,12 @@ dC
 tN
 cQ
 cq
+Hn
 cq
-cq
-cq
-cq
+Hn
+Hn
 ek
-cq
+Hn
 Vl
 lY
 cX
