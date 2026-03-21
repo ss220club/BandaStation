@@ -234,8 +234,8 @@
 		qdel(src)
 
 /atom/movable/screen/alert/status_effect/anomalock_active
-	name = "гальваническая перегрузка"
-	use_user_hud_icon = TRUE
+	name = "voltaic overdrive"
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "anomalock_heart"
 	desc = "Поступление гальванической энергии в кровь, которая будет поддерживать ваше тело на протяжении 30 секунд, прежде чем эффект закончится!"
 

@@ -1,8 +1,10 @@
-// // BANDASTATION REMOVAL START - Feat: Augmentations
+// BANDASTATION MODIFICATION START - Feat: Augmentations
 // /datum/preference/choiced/prosthetic_organ
 // 	category = PREFERENCE_CATEGORY_MANUALLY_RENDERED
 // 	savefile_key = "prosthetic_organ"
 // 	savefile_identifier = PREFERENCE_CHARACTER
+// 	should_update_preview = FALSE
+// BANDASTATION MODIFICATION END
 
 // /datum/preference/choiced/prosthetic_organ/create_default_value()
 // 	return "Random"

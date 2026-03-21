@@ -7,7 +7,7 @@
 
 /mob/living/carbon/examine(mob/user)
 	if(HAS_TRAIT(src, TRAIT_UNKNOWN_APPEARANCE) && !isobserver(user))
-		return list(span_warning("Вам сложно разглядеть какие либо детали..."))
+		return list(span_warning("Вам сложно разглядеть какие-либо детали..."))
 
 	var/t_He = ru_p_they(TRUE)
 	var/t_His = ru_p_them(TRUE)
@@ -96,7 +96,7 @@
 			damage_text = "обмякла и безжизненна"
 		else
 			damage_text = (body_part.brute_dam >= body_part.burn_dam) ? body_part.heavy_brute_msg : body_part.heavy_burn_msg
-		. += span_boldwarning("[body_part.ru_plaintext_zone[NOMINATIVE] || body_part.plaintext_zone] [capitalize(t_His)] выглядит [damage_text]!")
+		. += span_boldwarning("[capitalize(t_His)] [body_part.ru_plaintext_zone[NOMINATIVE] || body_part.plaintext_zone] выглядит [damage_text]!")
 
 	//stores missing limbs
 	var/l_limbs_missing = 0
