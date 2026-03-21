@@ -2819,15 +2819,6 @@ instrumental = "перчатками Каза Рук"
 prepositional = "перчатках Каза Рук"
 gender = "plural"
 
-["compact combat shotgun"]
-nominative = "компактный боевой дробовик"
-genitive = "компактного боевого дробовика"
-dative = "компактному боевому дробовику"
-accusative = "компактный боевой дробовик"
-instrumental = "компактным боевым дробовиком"
-prepositional = "компактном боевом дробовике"
-gender = "male"
-
 ["warden's jacket"]
 nominative = "куртка смотрителя"
 genitive = "куртки смотрителя"
@@ -4465,7 +4456,7 @@ instrumental = "цветочным соматолучом"
 prepositional = "цветочном соматолуче"
 gender = "male"
 
-№ MARK: Grenades
+# MARK: Grenades
 
 ["large grenade"]
 nominative = "большая граната"
@@ -6068,8 +6059,8 @@ nominative = "удлиненный магазин для винтовки (.40 S
 genitive = "удлиненного магазина для винтовки (.40 Sol Long осколочно-травматические)"
 dative = "удлиненному магазину для винтовки (.40 Sol Long осколочно-травматические)"
 accusative = "удлиненный магазин для винтовки (.40 Sol Long осколочно-травматические)"
-instrumental = "удлинеинным магазином для винтовки (.40 Sol Long осколочно-травматические)"
-prepositional = "удлинеинном магазине для винтовки (.40 Sol Long осколочно-травматические)"
+instrumental = "удлиненным магазином для винтовки (.40 Sol Long осколочно-травматические)"
+prepositional = "удлиненном магазине для винтовки (.40 Sol Long осколочно-травматические)"
 gender = "male"
 
 ["rifle drum magazine (.40 Sol Long)"]
@@ -26607,15 +26598,6 @@ accusative = "музыкальную моль"
 instrumental = "музыкальной молью"
 prepositional = "музыкальной моли"
 gender = "female"
-
-["Russian revolver"]
-nominative = "русский револьвер"
-genitive = "русского револьвера"
-dative = "русскому револьверу"
-accusative = "русский револьвер"
-instrumental = "русским револьвером"
-prepositional = "русском револьвере"
-gender = "male"
 
 ["old F058UR7 skillchip"]
 nominative = "старый скилл-чип \"Ф0С63РИ\""
