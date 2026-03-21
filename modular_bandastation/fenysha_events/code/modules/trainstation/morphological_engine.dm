@@ -186,7 +186,7 @@ GLOBAL_VAR(main_morph_engine)
 							значительно повышает энергопотребление и может навредить всем больным.")
 
 	if(on)
-		. += span_warning("\n Текущее энергопотребление: [round(enabled_power_usage / KILO)] киловатт")
+		. += span_warning("Текущее энергопотребление: [enabled_power_usage] ватт")
 
 /obj/machinery/morphological_engine/proc/build_area_cache()
 	if(!protected_area_types || !islist(protected_area_types) || !length(protected_area_types))
