@@ -760,6 +760,12 @@
 	pixel_x = 7;
 	pixel_y = 4
 	},
+/obj/machinery/button/door/directional/north{
+	pixel_x = -8;
+	name = "R&D Shutters Button";
+	id = "CC_RND_2";
+	req_access = list("cent_captain")
+	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "adt" = (
@@ -3606,6 +3612,7 @@
 /obj/machinery/door/airlock/centcom,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
+/obj/effect/mapping_helpers/airlock/cutaiwire,
 /turf/open/floor/iron/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=170.15"
 	},
@@ -4670,6 +4677,14 @@
 "awu" = (
 /obj/structure/closet/crate/freezer/surplus_limbs,
 /obj/structure/window/reinforced/unanchored/spawner/directional/north,
+/obj/item/reagent_containers/cup/glass/coffee/no_lid{
+	pixel_x = -3;
+	pixel_y = 2
+	},
+/obj/item/reagent_containers/cup/glass/coffee{
+	pixel_x = 5;
+	pixel_y = 4
+	},
 /turf/open/floor/iron/freezer,
 /area/centcom/central_command_areas/rnd)
 "awA" = (
@@ -7063,7 +7078,6 @@
 /area/centcom/central_command_areas/engine)
 "aGn" = (
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/right/directional/west,
 /obj/structure/desk_bell{
 	pixel_y = 8
 	},
@@ -7075,6 +7089,12 @@
 	pixel_x = 9;
 	pixel_y = 8
 	},
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "CC_RND_2";
+	dir = 4;
+	name = "R&D Centcom Shutters"
+	},
+/obj/machinery/door/window/right/directional/west,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/rnd)
 "aGo" = (
@@ -11334,6 +11354,11 @@
 /area/centcom/central_command_areas/ferry)
 "aWD" = (
 /obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "CC_RND_2";
+	dir = 4;
+	name = "R&D Centcom Shutters"
+	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/rnd)
 "aWE" = (
@@ -11422,6 +11447,9 @@
 	},
 /obj/machinery/chem_heater/withbuffer,
 /obj/structure/window/reinforced/unanchored/spawner/directional/north,
+/obj/item/reagent_containers/cup/glass/coffee/no_lid{
+	pixel_x = 1
+	},
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/rnd)
 "aXg" = (
@@ -14232,13 +14260,13 @@
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/planetary_port/club)
 "eTH" = (
-/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
-/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
-/obj/structure/cable/layer3,
-/obj/machinery/duct,
-/obj/effect/spawner/random/vending/colavend,
-/turf/open/floor/catwalk_floor/iron_dark,
-/area/centcom/central_command_areas/hallway)
+/obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/machinery/door/poddoor/shutters/preopen{
+	name = "R&D Centcom shutters";
+	id = "CC_RND_2"
+	},
+/turf/open/floor/plating,
+/area/centcom/central_command_areas/rnd)
 "eUZ" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
@@ -18986,13 +19014,6 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "bloodyhands_left"
 	},
-/obj/item/reagent_containers/cup/glass/coffee/no_lid{
-	pixel_x = -3;
-	pixel_y = -2
-	},
-/obj/item/reagent_containers/cup/glass/coffee{
-	pixel_x = 5
-	},
 /obj/effect/decal/cleanable/fuel_pool,
 /turf/open/floor/iron/freezer,
 /area/centcom/central_command_areas/rnd)
@@ -20433,10 +20454,6 @@
 /area/centcom/central_command_areas/arboretum)
 "ryy" = (
 /obj/item/reagent_containers/cup/glass/coffee,
-/obj/item/reagent_containers/cup/glass/coffee/no_lid{
-	pixel_x = -3;
-	pixel_y = -6
-	},
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/rnd)
 "ryP" = (
@@ -74082,7 +74099,7 @@ aDR
 aKJ
 aKJ
 aMc
-aWD
+eTH
 fcB
 aAH
 ryy
@@ -74339,7 +74356,7 @@ aDR
 aKJ
 aPQ
 aMc
-aWD
+eTH
 aEG
 sIG
 qfM
@@ -75110,7 +75127,7 @@ aDR
 aAB
 afz
 aMc
-aWD
+eTH
 auT
 fra
 oSS
@@ -75367,7 +75384,7 @@ aDR
 ans
 aXm
 aMc
-aWD
+eTH
 pRu
 dKx
 dKx
@@ -75624,7 +75641,7 @@ aDR
 aQK
 aNL
 aMc
-aWD
+eTH
 aiI
 cKh
 dKx
@@ -76919,7 +76936,7 @@ aDS
 aDS
 aDS
 aEU
-eTH
+aEU
 aEU
 aEU
 aEU
