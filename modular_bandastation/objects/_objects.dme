@@ -105,6 +105,7 @@
 #include "code/machinery/suit_storage_unit.dm"
 #include "code/machinery/vending/vending.dm"
 #include "code/machinery/teapot.dm"
+#include "code/machinery/bluespace_beacon.dm"
 
 #include "code/structures/chairs.dm"
 #include "code/structures/displaycase.dm"
