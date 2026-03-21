@@ -2828,11 +2828,28 @@
 /turf/closed/indestructible/rock,
 /area/space/nearstation)
 "amZ" = (
-/obj/machinery/computer/mech_bay_power_console{
+/obj/effect/turf_decal/tile/purple/half/contrasted{
 	dir = 4
 	},
-/obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
-	dir = 8
+/obj/structure/table/reinforced,
+/obj/item/stock_parts/power_store/cell/bluespace/empty{
+	pixel_y = -4;
+	pixel_x = 2
+	},
+/obj/machinery/cell_charger{
+	pixel_x = 2;
+	pixel_y = -3
+	},
+/obj/machinery/recharger{
+	pixel_y = 10;
+	pixel_x = 8
+	},
+/obj/machinery/recharger{
+	pixel_y = 10;
+	pixel_x = -5
+	},
+/obj/item/food/candy{
+	pixel_x = -5
 	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
@@ -7067,24 +7084,12 @@
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/engine)
 "aGn" = (
-/obj/structure/table/reinforced,
-/obj/structure/desk_bell{
-	pixel_y = 8
-	},
-/obj/item/food/burger{
-	pixel_x = 1;
-	pixel_y = -7
-	},
-/obj/item/reagent_containers/cup/glass/coffee{
-	pixel_x = 9;
-	pixel_y = 8
-	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "CC_RND_2";
 	dir = 4;
 	name = "R&D Centcom Shutters"
 	},
-/obj/machinery/door/window/right/directional/west,
+/obj/effect/spawner/structure/window/reinforced/plasma,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/rnd)
 "aGo" = (
@@ -10936,27 +10941,7 @@
 /turf/open/floor/catwalk_floor,
 /area/centcom/central_command_areas/engine)
 "aVk" = (
-/obj/machinery/cell_charger{
-	pixel_x = 2;
-	pixel_y = -3
-	},
-/obj/machinery/recharger{
-	pixel_y = 10;
-	pixel_x = -5
-	},
-/obj/machinery/recharger{
-	pixel_y = 10;
-	pixel_x = 8
-	},
-/obj/structure/table/reinforced,
 /obj/effect/turf_decal/tile/purple/anticorner/contrasted,
-/obj/item/stock_parts/power_store/cell/bluespace/empty{
-	pixel_y = -4;
-	pixel_x = 2
-	},
-/obj/item/food/candy{
-	pixel_x = -5
-	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "aVm" = (
@@ -11928,6 +11913,14 @@
 	pixel_y = 6
 	},
 /obj/item/assembly/flash/handheld,
+/obj/item/reagent_containers/cup/glass/coffee/no_lid{
+	pixel_x = 5;
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/cup/glass/coffee{
+	pixel_y = 10;
+	pixel_x = -5
+	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "aYW" = (
@@ -12485,6 +12478,15 @@
 /obj/effect/turf_decal/line/dark_green/anticorner/stripes/contrasted,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
+"bzJ" = (
+/obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
+	dir = 1
+	},
+/obj/machinery/computer/mech_bay_power_console{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/small,
+/area/centcom/central_command_areas/rnd)
 "bAC" = (
 /obj/structure/railing{
 	dir = 9
@@ -12556,6 +12558,27 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod/loading/two)
+"bGf" = (
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "CC_RND_2";
+	dir = 4;
+	name = "R&D Centcom Shutters"
+	},
+/obj/structure/table/reinforced,
+/obj/machinery/door/window/right/directional/west,
+/obj/item/food/burger{
+	pixel_x = 1;
+	pixel_y = -7
+	},
+/obj/item/reagent_containers/cup/glass/coffee{
+	pixel_x = 9;
+	pixel_y = 8
+	},
+/obj/structure/desk_bell{
+	pixel_y = 8
+	},
+/turf/open/floor/plating,
+/area/centcom/central_command_areas/rnd)
 "bGY" = (
 /obj/effect/turf_decal/delivery,
 /obj/effect/light_emitter/podbay,
@@ -15161,11 +15184,11 @@
 /turf/open/floor/iron/dark/herringbone,
 /area/centcom/central_command_areas/cabin)
 "gFA" = (
-/obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
-	dir = 1
-	},
 /obj/machinery/computer/mech_bay_power_console{
 	dir = 4
+	},
+/obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
+	dir = 8
 	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
@@ -16488,34 +16511,17 @@
 	},
 /area/centcom/central_command_areas/hallway)
 "jzf" = (
-/obj/structure/table,
-/obj/item/stack/sheet/iron/fifty,
-/obj/item/stack/sheet/iron/fifty,
-/obj/item/stack/sheet/glass{
-	amount = 20;
-	pixel_x = -3;
-	pixel_y = 6
-	},
-/obj/item/stack/sheet/glass{
-	amount = 20;
-	pixel_x = -3;
-	pixel_y = 6
-	},
-/obj/item/storage/belt/utility,
-/obj/item/mecha_parts/core{
-	pixel_y = 10;
-	pixel_x = 5
-	},
-/obj/item/reagent_containers/cup/glass/coffee/no_lid{
-	pixel_x = 10;
-	pixel_y = 1
-	},
-/obj/item/reagent_containers/cup/glass/coffee{
-	pixel_x = -9;
-	pixel_y = 5
-	},
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 1
+	},
+/obj/machinery/mecha_part_fabricator,
+/obj/item/reagent_containers/cup/glass/coffee/no_lid{
+	pixel_x = 10;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/cup/glass/coffee/no_lid{
+	pixel_x = -10;
+	pixel_y = 8
 	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
@@ -19745,18 +19751,35 @@
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/conference_room)
 "qaE" = (
-/obj/machinery/mecha_part_fabricator,
 /obj/structure/light_fake/small/directional/north,
-/obj/item/reagent_containers/cup/glass/coffee/no_lid{
-	pixel_x = -10;
-	pixel_y = 8
+/obj/effect/turf_decal/tile/yellow/half/contrasted{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/glass{
+	amount = 20;
+	pixel_x = -3;
+	pixel_y = 6
+	},
+/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/glass{
+	amount = 20;
+	pixel_x = -3;
+	pixel_y = 6
+	},
+/obj/item/storage/belt/utility,
+/obj/item/reagent_containers/cup/glass/coffee{
+	pixel_x = -9;
+	pixel_y = 5
 	},
 /obj/item/reagent_containers/cup/glass/coffee/no_lid{
 	pixel_x = 10;
-	pixel_y = 4
+	pixel_y = 1
 	},
-/obj/effect/turf_decal/tile/yellow/half/contrasted{
-	dir = 1
+/obj/item/mecha_parts/core{
+	pixel_y = 10;
+	pixel_x = 5
 	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
@@ -20343,14 +20366,6 @@
 "rqj" = (
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 8
-	},
-/obj/item/reagent_containers/cup/glass/coffee/no_lid{
-	pixel_x = 5;
-	pixel_y = 8
-	},
-/obj/item/reagent_containers/cup/glass/coffee{
-	pixel_y = 10;
-	pixel_x = -5
 	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
@@ -23666,6 +23681,12 @@
 /obj/structure/sign/departments/science/alt/directional/north,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
+"xeV" = (
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/small,
+/area/centcom/central_command_areas/rnd)
 "xgW" = (
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/flashlight/flare/candle/infinite{
@@ -23876,12 +23897,6 @@
 	},
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/cabin/captain)
-"xGD" = (
-/obj/effect/turf_decal/tile/yellow{
-	dir = 8
-	},
-/turf/open/floor/iron/dark/small,
-/area/centcom/central_command_areas/rnd)
 "xGU" = (
 /obj/structure/table/glass,
 /obj/effect/turf_decal/trimline/yellow/filled/line{
@@ -72520,10 +72535,10 @@ iIJ
 ttB
 aKc
 xJo
+bzJ
+aGO
+aGO
 gFA
-aGO
-aGO
-amZ
 xJo
 xJo
 awA
@@ -72780,7 +72795,7 @@ xJo
 aEa
 atZ
 aDz
-xGD
+xeV
 rqj
 aYS
 xJo
@@ -75857,7 +75872,7 @@ akk
 aMc
 xJo
 adr
-aXh
+amZ
 aaR
 aVk
 ahL
@@ -76116,7 +76131,7 @@ qnr
 xJo
 aGn
 aWD
-aWD
+bGf
 xJo
 xJo
 xJo
