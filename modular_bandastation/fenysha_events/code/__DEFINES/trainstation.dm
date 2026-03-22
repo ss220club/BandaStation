@@ -3,14 +3,6 @@
 #define ZTRAIT_TRAINSTATION "Trainstation"
 #define NO_TURF_MOVEMENT_1 (1<<32)
 
-#define COMSIG_TRAIN_BEGIN_MOVING "train_begin_moving"
-#define COMSIG_TRAIN_STOP_MOVING "train_stop_moving"
-#define COMSIG_TRAIN_TRY_MOVE "train_try_move"
-	#define COMPONENT_BLOCK_TRAIN_MOVEMENT (1 << 2)
-#define COMSIG_TRAINSTATION_UNLOCKED "trainstation_unlocked"
-#define COMSIG_TRAINSTATION_LOADED "trainstation_loaded"
-#define COMSIG_TRAINSTATION_UNLOADED "trainstation_unloaded"
-
 #define TRAIT_NO_STATION_UNLOAD "!no_unload"
 
 /// Абстрактная станция, не будет отображаться в меню train_controll'ера, не будет связана с другими станциями

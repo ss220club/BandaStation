@@ -34,6 +34,7 @@
 #include "code\modules\eventing\hooks\client.dm"
 #include "code\modules\eventing\hooks\living.dm"
 #include "code\modules\eventing\hooks\player_joining.dm"
+#include "code\modules\gmod\tools\_phystool.dm"
 #include "code\modules\horror_effects\global_looping_sound.dm"
 #include "code\modules\horror_effects\patches.dm"
 #include "code\modules\hypothermia\component.dm"
