@@ -89,3 +89,12 @@
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10)
 	build_path = /obj/item/organ/tongue/skrell
 	category = list(RND_CATEGORY_LIMBS_OTHER, RND_CATEGORY_INITIAL, SPECIES_SKRELL)
+
+// MARK: Kidan designs
+/datum/design/kidan_tongue
+	name = "Kidan Tongue"
+	id = "kidantongue"
+	build_type = LIMBGROWER
+	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10)
+	build_path = /obj/item/organ/tongue/kidan
+	category = list(RND_CATEGORY_LIMBS_OTHER, RND_CATEGORY_INITIAL, SPECIES_KIDAN)

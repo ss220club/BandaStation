@@ -139,6 +139,7 @@ GLOBAL_LIST_INIT(turfs_pass_meteor, typecacheof(list(
 #define isvulpkanin(A) (is_species(A, /datum/species/vulpkanin))
 #define istajaran(A) (is_species(A, /datum/species/tajaran))
 #define isskrell(A) (is_species(A, /datum/species/skrell))
+#define iskidan(A) (is_species(A, /datum/species/kidan))
 /// BANDASTATION ADDITION END - Species
 
 

@@ -145,6 +145,17 @@
 	foodtypes = MEAT | RAW | BUGS | GORE
 	venue_value = FOOD_MEAT_MUTANT
 
+/obj/item/food/meat/slab/human/mutant/kidan
+	name ="Мясо кидана"
+	icon_state = "kidanmeat"
+	desc = "Unpleasantly powdery and dry. Kind of pretty, though."
+	tastes = list("nutriment" = 1, "meat" = 2)
+	foodtypes = MEAT | RAW | BUGS | GORE
+	venue_value = FOOD_MEAT_MUTANT
+
+/obj/item/food/meat/slab/human/mutant/kidan/make_grillable()
+	AddComponent(/datum/component/grillable, /obj/item/food/meat/steak/plain/human/kidan, rand(60 SECONDS, 90 SECONDS), TRUE, TRUE)
+
 /obj/item/food/meat/slab/human/mutant/skeleton
 	name = "bone"
 	icon_state = "skeletonmeat"
@@ -616,6 +627,12 @@
 	icon_state = "birdsteak"
 	tastes = list("juicy chicken" = 3, "scales" = 1)
 	foodtypes = MEAT | GORE
+
+/obj/item/food/meat/steak/plain/human/kidan
+	name = "Стейк из кидана"
+	icon_state = "kidansteak"
+	tastes = list("juicy bugs" = 3, "scales" = 1)
+	foodtypes = MEAT | BUGS
 
 /obj/item/food/meat/steak/meatproduct
 	name = "thermally processed meat product"
