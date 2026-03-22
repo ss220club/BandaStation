@@ -192,6 +192,14 @@
 	RegisterSignal(src, COMSIG_MACHINERY_BROKEN, PROC_REF(on_break))
 
 	RegisterSignal(SSdcs, COMSIG_GLOB_GREY_TIDE, PROC_REF(grey_tide))
+	// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+	shadowcaster_ref = new /atom/movable/shadowcaster_dynamic(loc, src, SHADOW_ANIM_DOOR)
+	shadowcaster_ref.animated_shadow = TRUE
+	if(airlock_material)
+		QDEL_NULL(shadowcaster_ref)
+#endif
+	// BANDASTATION MOD END: LOS
 
 // if dragging, block 'Click on the floor to close airlocks'
 /obj/machinery/door/airlock/proc/drag_check(mob/user)
@@ -548,8 +556,11 @@
 /obj/machinery/door/airlock/update_icon(updates = ALL)
 	if(!airlock_state)
 		airlock_state = icon_state
-
-	return ..()
+	. = ..()
+#ifdef LOS_ENABLED
+	if(shadowcaster_ref)
+		shadowcaster_ref.update_from_door(src)
+#endif
 
 /obj/machinery/door/airlock/update_icon_state()
 	. = ..()
@@ -2263,6 +2274,12 @@
 	opacity = FALSE
 	glass = TRUE
 
+#ifdef LOS_ENABLED
+/obj/machinery/door/airlock/public/glass/Initialize(mapload)
+	. = ..()
+	QDEL_NULL(shadowcaster_ref)
+#endif
+
 /obj/machinery/door/airlock/public/glass/incinerator
 	autoclose = FALSE
 	heat_proof = TRUE
@@ -2562,6 +2579,12 @@
 	multi_tile = TRUE
 	opacity = FALSE
 	glass = TRUE
+
+#ifdef LOS_ENABLED
+/obj/machinery/door/airlock/multi_tile/Initialize(mapload)
+	. = ..()
+	QDEL_NULL(shadowcaster_ref)
+#endif
 
 /obj/machinery/door/airlock/multi_tile/setDir(newdir)
 	. = ..()

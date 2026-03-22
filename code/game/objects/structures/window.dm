@@ -78,6 +78,14 @@
 	if (flags_1 & ON_BORDER_1)
 		AddElement(/datum/element/connect_loc, loc_connections)
 
+	// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+	if(fulltile)
+		for(var/atom/movable/los_proxy/proxy as anything in vis_contents)
+			proxy.layer = 3.25
+#endif
+	// BANDASTATION MOD END: LOS
+
 /obj/structure/window/mouse_drop_receive(atom/dropping, mob/user, params)
 	. = ..()
 	if (flags_1 & ON_BORDER_1)
