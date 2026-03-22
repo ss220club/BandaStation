@@ -11,7 +11,6 @@
 #include "code/containers/reagent_containers.dm"
 #include "code/blob.dm"
 #include "code/crew_manifest.dm"
-#include "code/dynamic.dm"
 #include "code/events.dm"
 #include "code/headslug.dm"
 #include "code/heretic_knife.dm"
