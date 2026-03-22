@@ -1,6 +1,3 @@
-// ============================================
-// ВСПОМОГАТЕЛЬНЫЕ ПРОКЕДУРЫ
-// ============================================
 
 /proc/ipc_heart_check_revive(mob/living/carbon/human/M)
 	var/obj/item/organ/brain/positronic/brain = M.get_organ_slot(ORGAN_SLOT_BRAIN)
@@ -18,9 +15,8 @@
 	do_sparks(8, TRUE, M)
 	return TRUE
 
-// ============================================
 // ПОЗИТРОННЫЙ МОЗГ
-// ============================================
+
 
 /obj/item/organ/brain/positronic
 	name = "positronic brain"
@@ -74,9 +70,7 @@
 	name = "borg module positronic core"
 	desc = "Позитронный блок с платой из киборга. Содержит ИИ-личность."
 
-// ============================================
 //  Борг зарядка
-// ============================================
 
 /obj/item/stock_parts/power_store/ipc_battery_proxy
 	/// Батарея-владелец
@@ -94,9 +88,7 @@
 	battery_ref.charge += power_used
 	return power_used
 
-// ============================================
 // БАТАРЕЯ (СЕРДЦЕ)
-// ============================================
 
 /obj/item/organ/heart/ipc_battery
 	name = "IPC power cell"
@@ -140,18 +132,6 @@
 	if(!owner)
 		return
 	charge = max(0, charge - 2.78 * seconds_per_tick)
-	// Алерты заряда (как у боргов)
-	var/charge_ratio = charge / maxcharge
-	if(charge_ratio >= 0.75)
-		owner.clear_alert(ALERT_CHARGE)
-	else if(charge_ratio >= 0.5)
-		owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 1)
-	else if(charge_ratio >= 0.25)
-		owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 2)
-	else if(charge_ratio > 0)
-		owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/lowcell, 3)
-	else
-		owner.throw_alert(ALERT_CHARGE, /atom/movable/screen/alert/emptycell)
 	SEND_SIGNAL(owner, COMSIG_IPC_BATTERY_UPDATED)
 
 /obj/item/organ/heart/ipc_battery/emp_act(severity)
@@ -166,9 +146,7 @@
 			charge = max(0, charge - (maxcharge * 0.25))
 			to_chat(owner, span_danger("Предупреждение: Батарея разряжена на 25%."))
 
-// ============================================
 // ЛЕГКИЕ (СИСТЕМА ОХЛАЖДЕНИЯ)
-// ============================================
 
 /obj/item/organ/lungs/ipc
 	name = "cooling system"
@@ -179,9 +157,7 @@
 	slot = ORGAN_SLOT_LUNGS
 	organ_flags = ORGAN_ROBOTIC
 
-// ============================================
 // ГЛАЗА
-// ============================================
 
 /obj/item/organ/eyes/robotic/ipc
 	name = "IPC optical sensors"
@@ -190,9 +166,8 @@
 	icon_state = "ipc_eyes"
 	organ_flags = ORGAN_ROBOTIC
 
-// ============================================
+
 // УШИ
-// ============================================
 
 /obj/item/organ/ears/robot/ipc
 	name = "IPC audio sensors"
@@ -202,9 +177,8 @@
 	base_icon_state = "ears-c"
 	organ_flags = ORGAN_ROBOTIC
 
-// ============================================
+
 // ЯЗЫК
-// ============================================
 
 /obj/item/organ/tongue/robot/ipc
 	name = "IPC vocal synthesizer"

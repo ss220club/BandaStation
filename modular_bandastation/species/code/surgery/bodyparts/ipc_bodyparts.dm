@@ -1,7 +1,3 @@
-// ============================================
-// КОМПОНЕНТ IPC БОДИПАРТА
-// ============================================
-
 /datum/component/ipc_bodypart
 	dupe_mode = COMPONENT_DUPE_UNIQUE
 
@@ -19,9 +15,6 @@
 	else
 		examine_list += span_notice("Панель доступа закрыта.")
 
-// ============================================
-// БАЗОВЫЕ ЧАСТИ ТЕЛА IPC
-// ============================================
 
 /obj/item/bodypart/chest/ipc
 	name = "Корпус КПБ"
@@ -52,9 +45,6 @@
 		internal_organ.Remove(owner)
 		internal_organ.forceMove(drop_location)
 
-// ============================================
-// ГОЛОВА
-// ============================================
 
 /obj/item/bodypart/head/ipc
 	name = "Голова КПБ"
@@ -64,7 +54,7 @@
 	icon_state = "ipc_head"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
-	head_flags = HEAD_LIPS|HEAD_DEBRAIN|HEAD_HAIR
+	head_flags = HEAD_LIPS|HEAD_DEBRAIN
 	is_dimorphic = FALSE
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_IPC
@@ -75,7 +65,7 @@
 	var/brute_reduction = 0
 	var/burn_reduction = 0
 
-	/// Суффикс тела для get_limb_icon() вместо стандартного body_zone.
+	/// для get_limb_icon() вместо стандартного body_zone.
 	/// null = использует "ipc_head" (стандарт).
 	/// "monitor" = использует "ipc_monitor" (голова-монитор с экраном).
 	var/ipc_visual_state = null
@@ -110,9 +100,6 @@
 	desc = "Голова-монитор КПБ с встроенным дисплеем вместо лица."
 	ipc_visual_state = "monitor"
 
-// ============================================
-// ЛЕВАЯ РУКА
-// ============================================
 
 /obj/item/bodypart/arm/left/ipc
 	name = "Левая рука КПБ"
@@ -136,9 +123,7 @@
 	AddComponent(/datum/component/ipc_panel)
 	AddComponent(/datum/component/ipc_bodypart)
 
-// ============================================
-// ПРАВАЯ РУКА
-// ============================================
+
 
 /obj/item/bodypart/arm/right/ipc
 	name = "Правая рука КПБ"
@@ -162,9 +147,6 @@
 	AddComponent(/datum/component/ipc_panel)
 	AddComponent(/datum/component/ipc_bodypart)
 
-// ============================================
-// ЛЕВАЯ НОГА
-// ============================================
 
 /obj/item/bodypart/leg/left/ipc
 	name = "Левая нога КПБ"
@@ -187,9 +169,7 @@
 	AddComponent(/datum/component/ipc_panel)
 	AddComponent(/datum/component/ipc_bodypart)
 
-// ============================================
-// ПРАВАЯ НОГА
-// ============================================
+
 
 /obj/item/bodypart/leg/right/ipc
 	name = "Правая нога КПБ"
@@ -212,21 +192,8 @@
 	AddComponent(/datum/component/ipc_panel)
 	AddComponent(/datum/component/ipc_bodypart)
 
-// ============================================
-// УРОН И СПАРКИ
-// ============================================
-
-/// Общая логика IPC урона
-/// Вызывается из каждого receive_damage вместо дублирования кода.
-/obj/item/bodypart/proc/ipc_on_receive_damage(brute, burn)
-	if(brute > 10 || burn > 10)
-		do_sparks(3, TRUE, src)
-	if(get_damage() >= max_damage * 0.8 && owner && prob(20))
-		to_chat(owner, span_danger("ПРЕДУПРЕЖДЕНИЕ: Критическое повреждение [name]!"))
-
-// ============================================
 // ПРИСОЕДИНЕНИЕ КОНЕЧНОСТЕЙ
-// ============================================
+
 
 /obj/item/bodypart/chest/ipc/try_attach_limb(mob/living/carbon/human/H, special)
 	if(!..())
