@@ -402,6 +402,13 @@
 	))
 
 // MARK: NTCI
+/obj/item/storage/belt/military/holster/ntci
+	storage_type = /datum/storage/military_belt/holster/ntci
+
+/datum/storage/military_belt/holster/ntci
+	max_specific_storage = WEIGHT_CLASS_HUGE
+	max_slots = 7
+
 /obj/item/storage/belt/military/holster/ntci/full/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/cm23(src)
 	new /obj/item/ammo_box/magazine/c38(src)
@@ -429,6 +436,15 @@
 	new /obj/item/ammo_box/magazine/cm40(src)
 	new /obj/item/ammo_box/magazine/cm40(src)
 
+/obj/item/storage/belt/military/holster/ntci/full_shotgun/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/cm23(src)
+	new /obj/item/ammo_box/magazine/c38/true(src)
+	new /obj/item/ammo_box/magazine/c38/hp(src)
+	new /obj/item/ammo_box/magazine/cm15/drum(src)
+	new /obj/item/ammo_box/magazine/cm15/drum/frag12(src)
+	new /obj/item/ammo_box/magazine/cm15/drum/dragonsbreath(src)
+	new /obj/item/ammo_box/magazine/cm15/drum/slug(src)
+
 /obj/item/storage/belt/military/holster/ntci/full_sniper/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/gp9/spec(src)
 	new /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap(src)
@@ -450,7 +466,6 @@
 	inhand_icon_state = "mb_belt"
 	worn_icon_state = "mb_belt"
 	storage_type = /datum/storage/military_belt/syndicate
-
 
 /datum/storage/military_belt/syndicate
 	max_specific_storage = WEIGHT_CLASS_NORMAL

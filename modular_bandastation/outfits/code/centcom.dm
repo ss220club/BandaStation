@@ -203,7 +203,7 @@
 	mask = /obj/item/clothing/mask/gas/sechailer/ntci
 	shoes = /obj/item/clothing/shoes/combat/swat
 	r_pocket = /obj/item/knife/combat
-	l_pocket = /obj/item/reagent_containers/hypospray/combat/nanites
+	l_pocket = /obj/item/reagent_containers/hypospray/combat/nanites/less
 	implants = list(/obj/item/implant/weapons_auth, /obj/item/implant/empprotection, /obj/item/implant/cqc)
 
 /datum/id_trim/centcom/ntci/New()
@@ -222,6 +222,9 @@
 	new /obj/item/radio/off(src)
 	new /obj/item/flashlight/seclite(src)
 	new /obj/item/food/rationpack(src)
+
+/obj/item/reagent_containers/hypospray/combat/nanites/less
+	list_reagents = list(/datum/reagent/medicine/oculine = 10, /datum/reagent/medicine/inacusiate = 10, /datum/reagent/medicine/synaptizine = 20, /datum/reagent/medicine/atropine = 20, /datum/reagent/medicine/syndicate_nanites = 40)
 
 /datum/outfit/centcom/ntci/equipped
 	name = "NTCI - Operative (Rifleman)"
@@ -247,6 +250,8 @@
 	name = "NTCI - Unknown Operative (Rifleman)"
 	id_trim = /datum/id_trim/centcom/ntci/unmarked
 	uniform = /obj/item/clothing/under/shirt_black
+	suit = /obj/item/clothing/suit/armor/vest/ntci_chestplate/parka
+	head = /obj/item/clothing/head/helmet/toggleable/nvg
 
 /datum/id_trim/centcom/ntci/unmarked
 	assignment = "Operative"
@@ -274,6 +279,8 @@
 	name = "NTCI - Unknown Operative (Medic)"
 	id_trim = /datum/id_trim/centcom/ntci/unmarked
 	uniform = /obj/item/clothing/under/shirt_white
+	suit = /obj/item/clothing/suit/armor/vest/ntci_chestplate/parka
+	head = /obj/item/clothing/head/helmet/toggleable/nvg
 
 /datum/outfit/centcom/ntci/equipped/machinegunner
 	name = "NTCI - Operative (Machinegunner)"
@@ -288,9 +295,9 @@
 		/obj/item/ammo_box/magazine/cm40/ap,
 		/obj/item/ammo_box/magazine/cm40/incendiary,
 		/obj/item/ammo_box/magazine/cm40/hp,
-		/obj/item/gun/ballistic/rocketlauncher/oneuse,
+		/obj/item/gun/ballistic/rocketlauncher/oneuse/heap,
 	)
-	suit = /obj/item/clothing/suit/armor/vest/ntci_chestplate
+	suit = /obj/item/clothing/suit/armor/swat/ntci
 	suit_store = /obj/item/gun/ballistic/automatic/cm40
 	belt = /obj/item/storage/belt/military/holster/ntci/full_machinegun
 
@@ -301,6 +308,37 @@
 	name = "NTCI - Unknown Operative (Machinegunner)"
 	id_trim = /datum/id_trim/centcom/ntci/unmarked
 	uniform = /obj/item/clothing/under/tshirt_black
+	suit = /obj/item/clothing/suit/hardsuit/ntci
+	head = /obj/item/clothing/head/helmet/toggleable/nvg
+
+/datum/outfit/centcom/ntci/equipped/breacher
+	name = "NTCI - Operative (Breacher)"
+	id_trim = /datum/id_trim/centcom/ntci/breacher
+	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/ammo
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom/ntci,
+		/obj/item/clothing/head/beret/ert/ntci,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/grenade/c4,
+		/obj/item/grenade/c4/x4,
+		/obj/item/ammo_box/magazine/cm15/drum/breacher,
+		/obj/item/ammo_box/magazine/cm15/drum/executioner,
+		/obj/item/ammo_box/magazine/cm15/drum/flechette,
+		/obj/item/gun/ballistic/rocketlauncher/oneuse,
+	)
+	suit = /obj/item/clothing/suit/armor/swat/ntci
+	suit_store = /obj/item/gun/ballistic/automatic/cm15
+	belt = /obj/item/storage/belt/military/holster/ntci/full_shotgun
+
+/datum/id_trim/centcom/ntci/breacher
+	assignment = "NTCI Operative Breacher"
+
+/datum/outfit/centcom/ntci/equipped/breacher/unmarked
+	name = "NTCI - Unknown Operative (Breacher)"
+	id_trim = /datum/id_trim/centcom/ntci/unmarked
+	uniform = /obj/item/clothing/under/tshirt_black
+	suit = /obj/item/clothing/suit/armor/vest/ntci_chestplate/parka
+	head = /obj/item/clothing/head/helmet/toggleable/nvg
 
 /datum/outfit/centcom/ntci/equipped/sniper
 	name = "NTCI - Operative (Sniper)"
@@ -327,3 +365,5 @@
 	name = "NTCI - Unknown Operative (Sniper)"
 	id_trim = /datum/id_trim/centcom/ntci/unmarked
 	uniform = /obj/item/clothing/under/hoodie_black
+	suit = /obj/item/clothing/suit/armor/vest/ntci_chestplate/parka
+	head = /obj/item/clothing/head/helmet/toggleable/nvg
