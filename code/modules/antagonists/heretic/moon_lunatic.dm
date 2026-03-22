@@ -1,6 +1,6 @@
 // A type of antagonist created by the moon ascension
 /datum/antagonist/lunatic
-	name = "\improper Lunatic"
+	name = "\improper Лунатик"
 	hijack_speed = 0
 	antagpanel_category = ANTAG_GROUP_HORRORS
 	show_in_antagpanel = FALSE
@@ -60,7 +60,7 @@
 	mood_change = 10
 
 /datum/objective/lunatic
-	explanation_text = "Assist your ringleader. If you are seeing this, scroll up in chat for who that is and report this"
+	explanation_text = "Помогите вашему Шпрехшталмейстеру. Если вы видите это сообщение, найдите в чате, кто это, и сообщите об этом"
 	var/datum/mind/master
 	// If the person with this objective is a lunatic master
 	var/is_master = FALSE
@@ -74,7 +74,7 @@
 
 // Lunatic master
 /datum/antagonist/lunatic/master
-	name = "\improper Ringleader"
+	name = "\improper Шпрехшталмейсер"
 	antag_hud_name = "lunatic_master"
 
 /datum/antagonist/lunatic/master/on_gain()

@@ -9774,6 +9774,15 @@ gender = "male"
 
 # MARK: Chaplain
 
+["Occult Practitioner Kit"]
+nominative = "Набор практикующего оккультиста"
+genitive = "Набора практикующего оккультиста"
+dative = "Набору практикующего оккультиста"
+accusative = "Набор практикующего оккультиста"
+instrumental = "Набором практикующего оккультиста"
+prepositional = "Наборе практикующего оккультиста"
+gender = "male"
+
 ["armaments beacon"]
 nominative = "маяк вооружения"
 genitive = "маяка вооружения"
@@ -25075,6 +25084,7 @@ instrumental = "одеждой Lost M.C."
 prepositional = "одежде Lost M.C."
 gender = "female"
 
+
 ["decker hoodie"]
 nominative = "худи Декер"
 genitive = "худи Декер"
@@ -32563,6 +32573,70 @@ gender = "neuter"
 
 # MARK:  Heretic common items
 
+["Fire Shark"]
+nominative = "огненная акула"
+genitive = "огненной акулы"
+dative = "огненной акуле"
+accusative = "огненную акулу"
+instrumental = "огненной акулой"
+prepositional = "огненной акуле"
+gender = "female"
+
+["Maid in the Mirror"]
+nominative = "горничная из Зазеркалья"
+genitive = "горничной из Зазеркалья"
+dative = "горничной из Зазеркалья"
+accusative = "горничную из Зазеркалья"
+instrumental = "горничной из Зазеркалья"
+prepositional = "горничной из Зазеркалья"
+gender = "female"
+
+["Eldritch Demon"]
+nominative = "потусторонний демон"
+genitive = "потустороннего демона"
+dative = "потустороннему демону"
+accusative = "потустороннего демона"
+instrumental = "потусторонним демоном"
+prepositional = "потусторонном демоне"
+gender = "male"
+
+["Ash Spirit"]
+nominative = "дух Пепла"
+genitive = "духа Пепла"
+dative = "духу Пепла"
+accusative = "духа Пепла"
+instrumental = "духом Пепла"
+prepositional = "духе Пепла"
+gender = "male"
+
+["transmutation rune"]
+nominative = "руна трансмутации"
+genitive = "руны трансмутации"
+dative = "руне трансмутации"
+accusative = "руну трансмутации"
+instrumental = "руной трансмутации"
+prepositional = "руне трансмутации"
+gender = "female"
+
+["pierced reality"]
+nominative = "пронзённая реальность"
+genitive = "пронзённой реальности"
+dative = "пронзённой реальности"
+accusative = "пронзённую реальность"
+instrumental = "пронзённой реальностью"
+prepositional = "пронзённой реальности"
+gender = "female"
+
+
+["carving knife"]
+nominative = "резной нож"
+genitive = "резного ножа"
+dative = "резному ножу"
+accusative = "резной нож"
+instrumental = "резным ножом"
+prepositional = "резном ноже"
+gender = "male"
+
 ["amber focus"]
 nominative = "янтарный фокусировщик"
 genitive = "янтарного фокусировщика"
@@ -32863,6 +32937,33 @@ instrumental = "зубастым тигелем"
 prepositional = "зубастом тигеле"
 gender = "male"
 
+["brew of the crucible soul"]
+nominative = "отвар из души тигеля"
+genitive = "отвара из души тигеля"
+dative = "отвару из души тигеля"
+accusative = "отвар из души тигеля"
+instrumental = "отваром из души тигеля"
+prepositional = "отваре из души тигеля"
+gender = "male"
+
+["brew of dusk and dawn"]
+nominative = "отвар заката и рассвета"
+genitive = "отвара заката и рассвета"
+dative = "отвару заката и рассвета"
+accusative = "отвар заката и рассвета"
+instrumental = "отваром заката и рассвета"
+prepositional = "отваре заката и рассветая"
+gender = "male"
+
+["brew of the wounded soldier"]
+nominative = "отвар раненого солдата"
+genitive = "отвара раненого солдата"
+dative = "отвару раненого солдата"
+accusative = "отвар раненого солдата"
+instrumental = "отваром раненого солдата"
+prepositional = "отваре раненого солдата"
+gender = "male"
+
 ["Eldritch Coin"]
 nominative = "Потусторонняя монета"
 genitive = "Потусторонней монете"
@@ -32989,6 +33090,15 @@ gender = "plural"
 
 # MARK: Void heretic items
 
+["voidball"]
+nominative = "сфера Пустоты"
+genitive = "сферы Пустоты"
+dative = "сфере Пустоты"
+accusative = "сферы Пустоты"
+instrumental = "сферой Пустоты"
+prepositional = "сфере Пустоты"
+gender = "female"
+
 ["Hollow Weave"]
 nominative = "Сплетение Пустоты"
 genitive = "Сплетения Пустоты"
@@ -33026,6 +33136,15 @@ prepositional = "Пустотном клинке"
 gender = "male"
 
 # MARK: Rust heretic items
+
+["Rust Walker"]
+nominative = "ржавоход"
+genitive = "ржавохода"
+dative = "ржавоходу"
+accusative = "ржавоход"
+instrumental = "ржавоходом"
+prepositional = "ржавоходе"
+gender = "male"
 
 ["Salvaged Remains"]
 nominative = "Уцелевшие обломки"
@@ -33069,6 +33188,79 @@ gender = "male"
 
 # MARK: Cosmic heretic items
 
+["Cosmic Field"]
+nominative = "космическое поле"
+genitive = "космического поля"
+dative = "космическому полю"
+accusative = "космическое поле"
+instrumental = "космическим полем"
+prepositional = "космическом поле"
+gender = "neuter"
+
+["Star Gazer"]
+nominative = "Звездочёт"
+genitive = "Звездочёта"
+dative = "Звездочёту"
+accusative = "Звездочёта"
+instrumental = "Звездочётом"
+prepositional = "Звездочёте"
+gender = "male"
+
+["cosmic rune"]
+nominative = "космическая руна"
+genitive = "космической руны"
+dative = "космической руне"
+accusative = "космическую руну"
+instrumental = "космической руной"
+prepositional = "космической руне"
+gender = "female"
+
+["Cosmic Diamond"]
+nominative = "Космический бриллиант"
+genitive = "Космического бриллианта"
+dative = "Космическому бриллианту"
+accusative = "Космический бриллиант"
+instrumental = "Космическим бриллиантом"
+prepositional = "Космическом бриллианте"
+gender = "male"
+
+["Cosmic Cloud"]
+nominative = "Космическое облако"
+genitive = "Космического облака"
+dative = "Космическому облаку"
+accusative = "Космическое облако"
+instrumental = "Космическим облаком"
+prepositional = "Космическом облаке"
+gender = "neuter"
+
+["Cosmic Explosion"]
+nominative = "Космический взрыв"
+genitive = "Космического взрыва"
+dative = "Космическому взрыву"
+accusative = "Космический взрыв"
+instrumental = "Космическим взрывом"
+prepositional = "Космическом взрывы"
+gender = "male"
+
+["Cosmic Domain"]
+nominative = "область Космоса"
+genitive = "области Космоса"
+dative = "области Космоса"
+accusative = "область Космоса"
+instrumental = "областью Космоса"
+prepositional = "области Космоса"
+gender = "female"
+
+["cosmic gem"]
+nominative = "космический самоцвет"
+genitive = "космического самоцвета"
+dative = "космическому самоцвету"
+accusative = "космический самоцвет"
+instrumental = "космическим самоцветом"
+prepositional = "космическом самоцвете"
+gender = "male"
+
+
 ["cosmic blade"]
 nominative = "Космический клинок"
 genitive = "Космического клинка"
@@ -33088,6 +33280,33 @@ prepositional = "«Сотканном из звёзд»"
 gender = "neuter"
 
 # MARK: Flesh heretic items
+
+["Raw Prophet"]
+nominative = "сырой пророк"
+genitive = "сырого пророка"
+dative = "сырому пророку"
+accusative = "сырого пророка"
+instrumental = "сырым пророком"
+prepositional = "сыром пророке"
+gender = "male"
+
+["Lord of the Night"]
+nominative = "Ночной лорд"
+genitive = "Ночного лорда"
+dative = "Ночнму лорду"
+accusative = "Ночного лорда"
+instrumental = "Ночным лордом"
+prepositional = "Ночном лорде"
+gender = "male"
+
+["Flesh Stalker"]
+nominative = "охотник за плотью"
+genitive = "охотника за плотью"
+dative = "охотнику за плотью"
+accusative = "охотника за плотью"
+instrumental = "охотником за плотью"
+prepositional = "охотнике за плотью"
+gender = "male"
 
 ["bloody blade"]
 nominative = "Кровавый клинок"
