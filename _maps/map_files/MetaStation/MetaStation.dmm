@@ -21818,7 +21818,6 @@
 	name = "Visitation Shutters"
 	},
 /obj/machinery/door/window/right/directional/east,
-/obj/structure/table,
 /turf/open/floor/iron,
 /area/station/security/prison/visit)
 "hAW" = (
