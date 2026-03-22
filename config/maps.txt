@@ -50,6 +50,11 @@ map kilostation
 	votable
 endmap
 
+map katorga13
+	maxplayers 40
+	votable
+endmap
+
 # Debug-only maps.
 
 map gateway_test
