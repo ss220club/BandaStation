@@ -57,6 +57,12 @@
 	luminosity = 1
 	var/list/obj/structure/fillers = list()
 
+	var/current_charge = 0
+	var/actual_power_usage = 0
+	var/maximum_charge = 100
+	var/input_level = 50 KILO WATTS
+	var/input_level_max = 200 KILO WATTS
+
 /obj/machinery/bluespace_beacon/Initialize(mapload)
 
 	var/list/occupied = list()
@@ -69,3 +75,22 @@
 		fillers += F
 
 	return ..()
+
+/obj/machinery/power/smes/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "Bsb", name)
+		ui.open()
+
+/obj/machinery/power/smes/ui_static_data(mob/user)
+	. = list(
+		"charge" = maximum_charge,
+		"inputLevelMax" = input_level_max,
+	)
+
+/obj/machinery/bluespace_beacon/ui_data()
+	. = list(
+		"charge" = current_charge
+		"power_usage" = actual_power_usage
+		"input_level" = input_level
+	)
