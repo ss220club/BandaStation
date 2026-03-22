@@ -21,7 +21,7 @@
 	response_disarm_simple = "цепляется за"
 	response_harm_continuous = "разрывает"
 	response_harm_simple = "рвёт"
-	death_message = "implodes into itself."
+	death_message = "схлопывается в себя."
 
 	unsuitable_atmos_damage = 0
 	unsuitable_cold_damage = 0
