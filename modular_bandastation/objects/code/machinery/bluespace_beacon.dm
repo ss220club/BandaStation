@@ -60,6 +60,8 @@
 	var/current_charge = 0
 	var/actual_power_usage = 0
 	var/maximum_charge = 100
+	var/input_attempt = FALSE
+	var/inputting = FALSE
 	var/input_level = 50 KILO WATTS
 	var/input_level_max = 200 KILO WATTS
 
@@ -84,16 +86,46 @@
 
 /obj/machinery/bluespace_beacon/ui_static_data(mob/user)
 	. = list(
-		"maximum_charge" = maximum_charge,
+		"maximumCharge" = maximum_charge,
 		"inputLevelMax" = input_level_max,
 	)
 
 /obj/machinery/bluespace_beacon/ui_data()
 	. = list(
+		"inputting" = inputting,
+		"inputAttempt" = input_attempt,
+		"inputAvailable" = energy_to_power(actual_power_usage),
 		"charge" = current_charge,
-		"power_usage" = actual_power_usage,
-		"input_level" = input_level,
+		"powerUsage" = actual_power_usage,
+		"inputLevel" = input_level,
 	)
 
 /obj/machinery/bluespace_beacon/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+	if(.)
+		return
+
+	switch(action)
+		if("tryinput")
+			input_attempt = !input_attempt
+			update_appearance(UPDATE_OVERLAYS)
+			return TRUE
+
+		if("input")
+			var/target = params["target"]
+			var/adjust = text2num(params["adjust"])
+			if(target == "min")
+				target = 0
+				. = TRUE
+			else if(target == "max")
+				target = input_level_max
+				. = TRUE
+			else if(adjust)
+				target = input_level + adjust
+				. = TRUE
+			else if(text2num(target) != null)
+				target = text2num(target)
+				. = TRUE
+			if(.)
+				input_level = clamp(target, 0, input_level_max)
+				return
