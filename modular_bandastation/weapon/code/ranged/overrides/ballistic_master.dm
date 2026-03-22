@@ -122,6 +122,10 @@
 	inhand_y_dimension = 64
 	SET_BASE_PIXEL(0, 0)
 
+/obj/item/gun/ballistic/shotgun/china_lake
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
+	SET_BASE_PIXEL(0, 0)
+
 // Other guns stuff
 /obj/item/gun/ballistic/revolver
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
@@ -153,6 +157,9 @@
 /obj/item/gun/ballistic/revolver/c38
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	recoil = 0.3
+
+/obj/item/gun/ballistic/revolver/grenadelauncher
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 
 /obj/item/gun/ballistic/automatic/pistol
 	recoil = 0.2
