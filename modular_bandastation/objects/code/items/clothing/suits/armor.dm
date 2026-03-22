@@ -353,6 +353,11 @@
 /obj/item/clothing/suit/hardsuit/proc/on_helmet_down(obj/item/clothing/head/helmet/hardsuit/helmet)
 	return
 
+/obj/item/clothing/suit/hardsuit/Initialize(mapload)
+	. = ..()
+	if(!allowed)
+		allowed = GLOB.security_vest_allowed
+
 /obj/item/clothing/suit/toggle
 	abstract_type = /obj/item/clothing/suit/toggle
 	var/toggle_helmet_noun = "helmet"
