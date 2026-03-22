@@ -31,7 +31,7 @@
 	AddComponent(/datum/component/focused_attacker)
 	var/on_link_message = "Вы чувствуете, как что-то новое проникает в сферу вашего сознания... \
 		Вы слышите далёкий шёпот людей, пронзительные крики ужаса и гул, словно приглашающий вас в связь Мансуса [src.declent_ru(GENITIVE)]."
-	var/on_unlink_message = "Ваш разум разлетается вдребезги, когда связь мансуса с [src.declent_ru(INSTRUMENTAL)] покидает ваш разум."
+	var/on_unlink_message = "Ваш разум разлетается вдребезги, когда связь Мансуса с [src.declent_ru(INSTRUMENTAL)] покидает ваш разум."
 	AddComponent( \
 		/datum/component/mind_linker/active_linking, \
 		network_name = "Mansus Link", \

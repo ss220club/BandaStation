@@ -1,6 +1,6 @@
 /// Scout and assassin who can appear and disappear from glass surfaces. Damaged by being examined.
 /mob/living/basic/heretic_summon/maid_in_the_mirror
-	name = "Горничная из Зазеркаль"
+	name = "Maid in the Mirror"
 	real_name = "Maid in the Mirror"
 	desc = "Парящий и струящийся поток холодного воздуха. При взгляде на него он слегка мерцает."
 	icon = 'icons/mob/simple/mob.dmi'

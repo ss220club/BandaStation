@@ -97,7 +97,7 @@
 /mob/living/basic/heretic_summon/armsy/melee_attack(atom/target, list/modifiers, ignore_cooldown)
 	if(!istype(target, /obj/item/bodypart/arm))
 		return ..()
-	visible_message(span_warning("[src.declent_ru(NOMINATIVE)] поглощает [target.declent_ru(GENITIVE)]!"))
+	visible_message(span_warning("[src.declent_ru(NOMINATIVE)] поглощает [target.declent_ru(ACCUSATIVE)]!"))
 	playsound(src, 'sound/effects/magic/demon_consume.ogg', 50, TRUE)
 	qdel(target)
 	on_arm_eaten()

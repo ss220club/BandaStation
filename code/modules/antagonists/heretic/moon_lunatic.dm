@@ -74,7 +74,7 @@
 
 // Lunatic master
 /datum/antagonist/lunatic/master
-	name = "\improper Шпрехшталмейсер"
+	name = "\improper Шпрехшталмейстер"
 	antag_hud_name = "lunatic_master"
 
 /datum/antagonist/lunatic/master/on_gain()

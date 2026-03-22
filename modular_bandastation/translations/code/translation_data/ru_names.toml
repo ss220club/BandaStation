@@ -32573,6 +32573,42 @@ gender = "neuter"
 
 # MARK:  Heretic common items
 
+["elder carving"]
+nominative = "древняя резьба"
+genitive = "древней резьбы"
+dative = "древней резьбе"
+accusative = "древнюю резьбу"
+instrumental = "древней резьбой"
+prepositional = "древней резьбе"
+gender = "female"
+
+["alert carving"]
+nominative = "предупреждающая резьба"
+genitive = "предупреждающей резьбы"
+dative = "предупреждающей резьбе"
+accusative = "предупреждающюю резьбу"
+instrumental = "предупреждающей резьбой"
+prepositional = "предупреждающей резьбе"
+gender = "female"
+
+["grasping carving"]
+nominative = "захватывающая резьба"
+genitive = "захватывающей резьбы"
+dative = "захватывающей резьбе"
+accusative = "захватывающую резьбу"
+instrumental = "захватывающей резьбой"
+prepositional = "захватывающей резьбе"
+gender = "female"
+
+["mad carving"]
+nominative = "безумная резьба"
+genitive = "безумной резьбы"
+dative = "безумной резьбе"
+accusative = "безумную резьбу"
+instrumental = "безумной резьбой"
+prepositional = "безумной резьбе"
+gender = "female"
+
 ["Fire Shark"]
 nominative = "огненная акула"
 genitive = "огненной акулы"

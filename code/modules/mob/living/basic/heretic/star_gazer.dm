@@ -96,7 +96,7 @@
 		return
 	begging_timer = addtimer(CALLBACK(src, PROC_REF(beg_for_ghost)), 2 MINUTES, TIMER_STOPPABLE | TIMER_UNIQUE) // Keep begging until someone accepts
 	var/mob/chosen_ghost = SSpolling.poll_ghost_candidates(
-		"Вы хотите сыграть за Звездочёта вознесшегося еретика?",
+		"Вы хотите сыграть за Звездочёта вознёсшегося еретика?",
 		check_jobban = ROLE_HERETIC,
 		poll_time = 20 SECONDS,
 		ignore_category = POLL_IGNORE_HERETIC_MONSTER,

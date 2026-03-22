@@ -1,6 +1,6 @@
 ///a heretic that got soultrapped by cultists. does nothing, other than signify they suck
 /datum/antagonist/soultrapped_heretic
-	name = "\improper заключённая душа еретика"
+	name = "\improper Заключённая душа еретика"
 	roundend_category = "Еретики"
 	antagpanel_category = "Heretic"
 	pref_flag = ROLE_HERETIC

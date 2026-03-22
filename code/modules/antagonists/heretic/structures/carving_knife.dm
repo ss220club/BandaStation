@@ -165,7 +165,7 @@
 
 // The actual rune traps the knife draws.
 /obj/structure/trap/eldritch
-	name = "потусторонняя резьба"
+	name = "elder carving"
 	desc = "Коллекция неизвестных символов, они напоминают о давно ушедших днях..."
 	icon = 'icons/obj/service/hand_of_god_structures.dmi'
 	max_integrity = 60
@@ -199,7 +199,7 @@
 	return NONE
 
 /obj/structure/trap/eldritch/alert
-	name = "предупреждающая резьба"
+	name = "alert carving"
 	icon_state = "alert_rune"
 	alpha = 10
 	time_between_triggers = 5 SECONDS
@@ -213,7 +213,7 @@
 		real_owner.playsound_local(get_turf(real_owner), 'sound/effects/magic/curse.ogg', 50, TRUE)
 
 /obj/structure/trap/eldritch/tentacle
-	name = "захватывающая резьба"
+	name = "grasping carving"
 	icon_state = "tentacle_rune"
 	time_between_triggers = 45 SECONDS
 	charges = 1
@@ -229,7 +229,7 @@
 	playsound(src, 'sound/effects/magic/demon_attack1.ogg', 75, TRUE)
 
 /obj/structure/trap/eldritch/mad
-	name = "безумная резьба"
+	name = "mad carving"
 	icon_state = "madness_rune"
 	time_between_triggers = 20 SECONDS
 	charges = 2

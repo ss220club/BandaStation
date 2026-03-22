@@ -379,7 +379,7 @@
 
 /atom/movable/screen/alert/status_effect/heretic_lastresort
 	name = "Last Resort"
-	desc = "Ваша голова кружитится, а сердце бьётся так быстро, как только может!"
+	desc = "Ваша голова кружится, а сердце бьётся так быстро, как только может!"
 	icon_state = "lastresort"
 
 /datum/status_effect/heretic_lastresort/on_apply()

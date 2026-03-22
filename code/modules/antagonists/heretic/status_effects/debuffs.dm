@@ -309,7 +309,7 @@
 
 /atom/movable/screen/alert/status_effect/eldritch_painting/weeping
 	name = "Сестра и Тот, Кто плакал"
-	desc = "Плач эхом отдаётся в вашем сознании, разрушая вашу психику! Быть может, если ещё раз взлянуть на картину, вам станет легче..."
+	desc = "Плач эхом отдаётся в вашем сознании, разрушая вашу психику! Быть может, если ещё раз взглянуть на картину, вам станет легче..."
 	icon_state = "eldritch_painting_weeping"
 
 //"The First Desire": /obj/structure/sign/painting/eldritch/desire
