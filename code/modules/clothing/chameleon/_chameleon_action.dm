@@ -136,6 +136,13 @@
 
 	if(ismob(chameleon_item.loc))
 		var/mob/wearer = chameleon_item.loc
+		// BANDASTATION EDIT START - support digi clothing
+		if(ishuman(wearer))
+			var/mob/living/carbon/human/human = wearer
+			var/slot = human.get_slot_by_item(chameleon_item)
+			if(!chameleon_item.mob_can_equip(human, slot, bypass_equip_delay_self = TRUE, ignore_equipped = TRUE))
+				human.put_in_hands(chameleon_item)
+		// BANDASTATION EDIT END
 		wearer.update_clothing(chameleon_item.slot_flags | ITEM_SLOT_HANDS)
 		wearer.refresh_obscured()
 
@@ -156,6 +163,7 @@
 
 		item_target.worn_icon_state = picked_item::worn_icon_state
 		item_target.inhand_icon_state = picked_item::inhand_icon_state
+		item_target.supports_variations_flags = picked_item::supports_variations_flags // BANDASTATION EDIT - support digi clothing
 
 		if(picked_item::greyscale_colors)
 			if(picked_item.greyscale_config_worn)
@@ -181,6 +189,7 @@
 			var/obj/item/clothing/clothing_target = item_target
 			var/obj/item/clothing/picked_clothing = picked_item
 			clothing_target.flags_cover = picked_clothing::flags_cover
+			clothing_target.digitigrade_worn_icon_state = picked_clothing::digitigrade_worn_icon_state // BANDASTATION EDIT - support digi clothing
 
 
 	if((picked_item::greyscale_config) && picked_item::greyscale_colors)

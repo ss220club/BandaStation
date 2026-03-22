@@ -1,4 +1,25 @@
 // MARK: Shoes //
+/obj/item/clothing/shoes
+	digitigrade_worn_icon_state = DIGI_BOOTS_WORN
+
+/obj/item/clothing/shoes/sneakers
+	digitigrade_worn_icon_state = DIGI_SNEAKERS_WORN
+
+/obj/item/clothing/shoes/chameleon
+	supports_variations_flags = /obj/item/clothing/shoes/sneakers/black::supports_variations_flags
+	digitigrade_worn_icon_state = /obj/item/clothing/shoes/sneakers/black::digitigrade_worn_icon_state
+
+/obj/item/clothing/shoes/chameleon/get_general_color(icon/base_icon)
+	var/datum/action/item_action/chameleon/change/action = locate() in actions
+	var/target_type = action?.active_type
+	if(!target_type)
+		return ..()
+	var/obj/item/target_item = SSwardrobe.provide_type(target_type)
+	if(target_item)
+		var/result = target_item.get_general_color(base_icon)
+		qdel(target_item)
+		return result
+	return ..()
 
 // MARK: Misc shoes
 /obj/item/clothing/shoes/shark

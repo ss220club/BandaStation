@@ -113,7 +113,7 @@
 		M.update_worn_shoes()
 
 /obj/item/clothing/shoes/generate_digitigrade_icons(icon/base_icon, greyscale_colors)
-	return icon(SSgreyscale.GetColoredIconByType(/datum/greyscale_config/digitigrade, greyscale_colors), "boots_worn")
+	return icon(SSgreyscale.GetColoredIconByType(/datum/greyscale_config/digitigrade, greyscale_colors), digitigrade_worn_icon_state) // BANDASTATION EDIT - icon state is var
 
 /**
  * adjust_laces adjusts whether our shoes (assuming they can be tied) and tied, untied, or knotted
