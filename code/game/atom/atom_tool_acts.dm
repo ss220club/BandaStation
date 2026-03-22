@@ -195,11 +195,17 @@
 	if(is_left_clicking)
 		// See [base_item_interaction] for defails on why this is using `||` (TL;DR it's short circuiting)
 		early_sig_return = SEND_SIGNAL(src, COMSIG_ATOM_RANGED_ITEM_INTERACTION, user, tool, modifiers) \
-			|| SEND_SIGNAL(tool, COMSIG_RANGED_ITEM_INTERACTING_WITH_ATOM, user, src, modifiers)
+			/* BANDASTATION EDIT START - modular signal */ \
+			|| SEND_SIGNAL(tool, COMSIG_RANGED_ITEM_INTERACTING_WITH_ATOM, user, src, modifiers) \
+			|| SEND_SIGNAL(user, COMSIG_MOB_RANGED_ITEM_INTERACTION, src, modifiers)
+			// BANDASTATION EDIT END
 	else
 		// See above
 		early_sig_return = SEND_SIGNAL(src, COMSIG_ATOM_RANGED_ITEM_INTERACTION_SECONDARY, user, tool, modifiers) \
-			|| SEND_SIGNAL(tool, COMSIG_RANGED_ITEM_INTERACTING_WITH_ATOM_SECONDARY, user, src, modifiers)
+			/* BANDASTATION EDIT START - modular signal */ \
+			|| SEND_SIGNAL(tool, COMSIG_RANGED_ITEM_INTERACTING_WITH_ATOM_SECONDARY, user, src, modifiers) \
+			|| SEND_SIGNAL(user, COMSIG_MOB_RANGED_ITEM_INTERACTION_SECONDARY, src, modifiers)
+			// BANDASTATION EDIT END
 	if(early_sig_return)
 		return early_sig_return
 

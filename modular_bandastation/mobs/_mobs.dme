@@ -2,6 +2,7 @@
 
 #include "code/mobs_resting.dm"
 #include "code/ai_controller.dm"
+#include "code/living.dm"
 // #include "code/mob_spawner.dm"
 #include "code/simple_animal/mobs.dm"
 #include "code/simple_animal/items.dm"
