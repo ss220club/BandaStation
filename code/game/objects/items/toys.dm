@@ -1550,7 +1550,7 @@
  */
 /obj/item/toy/reality_pierce
 	name = "Pierced reality"
-	desc = "Hah. You thought it was the real deal!"
+	desc = "Ха! Поверил, что он настоящий?"
 	icon = 'icons/effects/eldritch.dmi'
 	icon_state = "pierced_illusion"
 	item_flags = NO_PIXEL_RANDOM_DROP

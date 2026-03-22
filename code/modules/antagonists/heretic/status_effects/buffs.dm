@@ -32,7 +32,7 @@
 
 /datum/action/cancel_crucible_soul
 	name = "Recall"
-	desc = "Use to end the blessing early"
+	desc = "Используйте для досрочного завершения благословения."
 	button_icon = 'icons/obj/antags/eldritch.dmi'
 	button_icon_state = "crucible_soul"
 
@@ -92,7 +92,7 @@
 			found_wound.remove_wound()
 	if(length(drinker.get_missing_limbs()))
 		drinker.regenerate_limbs()
-		to_chat(drinker, span_hypnophrase("The mansus has given you new limbs."))
+		to_chat(drinker, span_hypnophrase("Мансус даровал вам новые конечности."))
 	playsound(drinker, 'sound/effects/chemistry/ahaha.ogg', 50, TRUE, -1, extrarange = SILENCED_SOUND_EXTRARANGE, frequency = 0.5)
 
 /datum/status_effect/marshal/tick(seconds_between_ticks)
@@ -129,7 +129,7 @@
 	icon_state = "crucible"
 
 /atom/movable/screen/alert/status_effect/crucible_soul/cooldown
-	desc = "You have recently phased through reality. You must wait before you can do so once more."
+	desc = "Вы недавно прошли сквозь реальность. Вам нужно подождать, прежде чем сможете сделать это ещё раз."
 	icon_state = "crucible_cooldown"
 
 /atom/movable/screen/alert/status_effect/duskndawn
@@ -336,7 +336,7 @@
 
 /datum/status_effect/caretaker_refuge/proc/no_strip(atom/source, mob/user, obj/item/equipping)
 	SIGNAL_HANDLER
-	to_chat(user, span_warning("You fail to put anything on [source] as they are incorporeal!"))
+	to_chat(user, span_warning("У вас не выходить ничего надеть на [source.declent_ru(ACCUSATIVE)], так как они бестелесны!"))
 	return COMPONENT_CANT_STRIP
 
 /datum/status_effect/caretaker_refuge/proc/prevent_spell_usage(datum/source, datum/spell)
@@ -379,12 +379,12 @@
 
 /atom/movable/screen/alert/status_effect/heretic_lastresort
 	name = "Last Resort"
-	desc = "Your head spins, heart pumping as fast as it can!"
+	desc = "Ваша голова кружится, а сердце бьётся так быстро, как только может!"
 	icon_state = "lastresort"
 
 /datum/status_effect/heretic_lastresort/on_apply()
 	ADD_TRAIT(owner, TRAIT_IGNORESLOWDOWN, TRAIT_STATUS_EFFECT(id))
-	to_chat(owner, span_userdanger("You won't give up that easily!"))
+	to_chat(owner, span_userdanger("Вы не сдадитесь так просто!"))
 	return TRUE
 
 /datum/status_effect/heretic_lastresort/on_remove()

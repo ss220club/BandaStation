@@ -12,9 +12,9 @@
 	/// The abstract parent type of the knowledge, used in determine mutual exclusivity in some cases
 	abstract_type = /datum/heretic_knowledge
 	/// Name of the knowledge, shown to the heretic.
-	var/name = "Basic knowledge"
+	var/name = "Базовые знания"
 	/// Description of the knowledge, shown to the heretic. Describes what it unlocks / does.
-	var/desc = "Basic knowledge of forbidden arts."
+	var/desc = "Базовые знания о запретных искусствах."
 	/// What's shown to the heretic when the knowledge is acquired
 	var/gain_text
 	/// Assoc list of [typepaths we need] to [amount needed].
@@ -135,9 +135,9 @@
 /datum/heretic_knowledge/proc/parse_required_item(atom/item_path, number_of_things)
 	// If we need a human, there is a high likelihood we actually need a (dead) body
 	if(ispath(item_path, /mob/living/carbon/human))
-		return "bod[number_of_things > 1 ? "ies" : "y"]"
+		return "тел[number_of_things > 1 ? "а" : "о"]"
 	if(ispath(item_path, /mob/living))
-		return "carcass[number_of_things > 1 ? "es" : ""] of any kind"
+		return "каркас[number_of_things > 1 ? "ы" : ""] любого типа"
 	return "[initial(item_path.name)]\s"
 /**
  * Called whenever the knowledge's associated ritual is completed successfully.
@@ -242,7 +242,7 @@
 			LAZYREMOVE(created_items, ref)
 
 	if(LAZYLEN(created_items) >= limit)
-		loc.balloon_alert(user, "ritual failed, at limit!")
+		loc.balloon_alert(user, "ритуал провален на пределе возможностей!")
 		return FALSE
 
 	return TRUE
@@ -279,7 +279,7 @@
 		our_heretic.heretic_path = new column_path()
 	if(!our_heretic.heretic_path)
 		// If we don't have a path, we can't continue.
-		to_chat(user, span_warning("Oh shit, something broke, no path found!"))
+		to_chat(user, span_warning("От блядь, что-то сломалось, путь не найден!"))
 		stack_trace("failed to find valid path [our_heretic.heretic_shops[HERETIC_KNOWLEDGE_TREE][type][HKT_ROUTE]] from researching [src]")
 		return
 	SSblackbox.record_feedback("tally", "heretic_path_taken", 1, our_heretic.heretic_path.route)

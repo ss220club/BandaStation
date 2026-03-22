@@ -931,7 +931,7 @@
 		else
 			string_of_knowledge += knowledge.name
 
-	return "<br><b>Исследованые знания:</b><br>[english_list(string_of_knowledge, and_text = ", and ")]<br>"
+	return "<br><b>Исследованые знания:</b><br>[english_list(string_of_knowledge, and_text = ", и ")]<br>"
 
 /datum/antagonist/heretic/antag_panel_objectives()
 	. = ..()

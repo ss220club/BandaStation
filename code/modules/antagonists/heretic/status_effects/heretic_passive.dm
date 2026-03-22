@@ -15,9 +15,9 @@
 	/// Name of the passive, used by the UI
 	var/name = "Heretic Passive"
 	var/list/passive_descriptions = list(
-		"Grants you a passive ability based on your heretic type. This ability will upgrade as you gain more power.",
-		"Your passive ability has been upgraded, doing something else.",
-		"Your passive ability has been upgraded to its final form, granting you a powerful new ability.",
+		"Предоставляет вам пассивную способность, зависящую от пути вашего еретика. Эта способность будет улучшаться по мере того, как вы будете набирать больше силы.",
+		"Ваша пассивная способность была улучшена, и теперь делает что-то ещё.",
+		"Ваша пассивная способность была улучшена до её финальной формы, что дарует вам новую мощную способность.",
 	)
 
 /datum/status_effect/heretic_passive/on_apply()
@@ -131,7 +131,7 @@
 /datum/status_effect/heretic_passive/blade/proc/z_impact_react(datum/source, levels, turf/fell_on)
 	SIGNAL_HANDLER
 	new /obj/effect/temp_visual/mook_dust(fell_on)
-	owner.visible_message(span_notice("[owner] lands on [fell_on] safely, and quite stylishly on [p_their()] feet!"))
+	owner.visible_message(span_notice("[owner.declent_ru(NOMINATIVE)] безопасно, и весьма стильно, приземляется на [fell_on.declent_ru(ACCUSATIVE)]!"))
 	INVOKE_ASYNC(owner, TYPE_PROC_REF(/atom, SpinAnimation), 0.5 SECONDS, 0)
 	INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob/, emote), "flip")
 	return ZIMPACT_CANCEL_DAMAGE | ZIMPACT_NO_MESSAGE | ZIMPACT_NO_SPIN
@@ -198,16 +198,16 @@
 	playsound(get_turf(source), 'sound/items/weapons/parry.ogg', 100, TRUE)
 	source.balloon_alert(source, "riposte used")
 	source.visible_message(
-		span_warning("[source] leans into [attack_text] and delivers a sudden riposte back at [target]!"),
-		span_warning("You lean into [attack_text] and deliver a sudden riposte back at [target]!"),
-		span_hear("You hear a clink, followed by a stab."),
+		span_warning("[source.declent_ru(NOMINATIVE)] подаётся навстречу [attack_text] и наносит внезапный ответный удар по [target.declent_ru(DATIVE)]!"),
+		span_warning("Вы подаётесь навстречу [attack_text] и наносите внезапный ответный удар по [target.declent_ru(DATIVE)]!"),
+		span_hear("Вы слышите звон, за которым следует удар."),
 	)
 	weapon.melee_attack_chain(source, target)
 
 /// Gives feedback to the user
 /datum/status_effect/heretic_passive/blade/proc/reset_riposte(mob/living/carbon/human/source)
 	riposte_ready = TRUE
-	source.balloon_alert(source, "riposte ready")
+	source.balloon_alert(source, "Ответный удар готов")
 
 //---- Cosmic Passive
 // Level 1 Cosmic fields will speed up the caster and provide stamina regen
