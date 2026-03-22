@@ -76,21 +76,24 @@
 
 	return ..()
 
-/obj/machinery/power/smes/ui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/bluespace_beacon/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, "Bsb", name)
+		ui = new(user, src, "BluespaceBeacon", name)
 		ui.open()
 
-/obj/machinery/power/smes/ui_static_data(mob/user)
+/obj/machinery/bluespace_beacon/ui_static_data(mob/user)
 	. = list(
-		"charge" = maximum_charge,
+		"maximum_charge" = maximum_charge,
 		"inputLevelMax" = input_level_max,
 	)
 
 /obj/machinery/bluespace_beacon/ui_data()
 	. = list(
-		"charge" = current_charge
-		"power_usage" = actual_power_usage
-		"input_level" = input_level
+		"charge" = current_charge,
+		"power_usage" = actual_power_usage,
+		"input_level" = input_level,
 	)
+
+/obj/machinery/bluespace_beacon/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
