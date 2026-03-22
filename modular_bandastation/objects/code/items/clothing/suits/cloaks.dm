@@ -31,9 +31,9 @@
 	resistance_flags = INDESTRUCTIBLE | FIRE_PROOF | FREEZE_PROOF | UNACIDABLE | ACID_PROOF
 
 /datum/armor/armor_centcom_cloak
-	melee = 80
-	bullet = 80
-	laser = 80
+	melee = 50
+	bullet = 50
+	laser = 50
 	energy = 60
 	wound = 30
 
@@ -54,6 +54,12 @@
 	desc = "Свободная накидка из дюраткани, укрепленной пластитановой нитью. Сочетает в себе два основных качества \
 	офицерского убранства - пафос и защиту. Линейка этих дорогих плащей встречается у крайне состоятельных членов старшего офицерского состава."
 	icon_state = "centcom_admiral"
+
+/obj/item/clothing/neck/cloak/centcom/gr_cape
+	name = "field officer's reinforced cape"
+	desc = "Свободная накидка из дюраткани, укрепленной пластитановой нитью, выполненная на заказ. Сочетает в себе два основных качества \
+	офицерского убранства - пафос и защиту. Линейка этих дорогих плащей встречается у крайне состоятельных членов старшего офицерского состава."
+	icon_state = "gr_cape"
 
 // Blueshield
 /obj/item/clothing/neck/cloak/blueshield
