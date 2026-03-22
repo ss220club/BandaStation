@@ -7087,7 +7087,7 @@
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "CC_RND_2";
 	dir = 4;
-	name = "R&D Centcom Shutters"
+	name = "RnD Centcom Shutters"
 	},
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /turf/open/floor/plating,
@@ -11333,7 +11333,7 @@
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "CC_RND_2";
 	dir = 4;
-	name = "R&D Centcom Shutters"
+	name = "RnD Centcom Shutters"
 	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/rnd)
@@ -12565,7 +12565,6 @@
 	name = "R&D Centcom Shutters"
 	},
 /obj/structure/table/reinforced,
-/obj/machinery/door/window/right/directional/west,
 /obj/item/food/burger{
 	pixel_x = 1;
 	pixel_y = -7
@@ -12577,6 +12576,12 @@
 /obj/structure/desk_bell{
 	pixel_y = 8
 	},
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "CC_RND_2";
+	dir = 4;
+	name = "RnD Centcom Shutters"
+	},
+/obj/machinery/door/window/right/directional/west,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/rnd)
 "bGY" = (
@@ -14268,7 +14273,7 @@
 "eTH" = (
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /obj/machinery/door/poddoor/shutters/preopen{
-	name = "R&D Centcom shutters";
+	name = "RnD Centcom shutters";
 	id = "CC_RND_2"
 	},
 /turf/open/floor/plating,
