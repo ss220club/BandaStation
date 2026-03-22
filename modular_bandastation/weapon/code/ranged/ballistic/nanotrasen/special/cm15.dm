@@ -31,6 +31,7 @@
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/ar_unload.ogg'
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/ar_unload.ogg'
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/ar_cock.ogg'
+	pb_knockback = 2
 
 /obj/item/gun/ballistic/automatic/cm15/Initialize(mapload)
 	. = ..()

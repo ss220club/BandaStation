@@ -33,6 +33,7 @@
 /obj/item/gun/ballistic/rifle/hlrm/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 4)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/rifle/hlrm/no_mag
 	spawnwithmagazine = FALSE

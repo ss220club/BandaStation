@@ -138,6 +138,24 @@
 	icon_state = "sa-casing"
 	projectile_type = /obj/projectile/bullet/c9x25mm/ap
 
+/obj/item/ammo_casing/c9x25mm/bs
+	name = "9x25mm NT bluespace bullet casing"
+	desc = "Экспериментальный пистолетный блюспейс патрон НТ калибра 9x25мм. Пробивает броню и движется быстрее чем другие пули."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "srr-casing"
+	projectile_type = /obj/projectile/bullet/c9x25mm/bs
+
+/obj/item/ammo_casing/c9x25mm/bs/admin
+	name = "9x25mm NT bluespace-M bullet casing"
+	desc = "Эксперементальный пистолетный блюспейс патрон НТ калибра 9x25мм. Пробивает броню и движется быстрее чем другие пули."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "srr-casing"
+	projectile_type = /obj/projectile/bullet/c9x25mm/bs/admin
+
+/obj/item/ammo_casing/c9x25mm/bs/admin/rubber
+	name = "9x25mm NT bluespace-M rubber bullet casing"
+	projectile_type = /obj/projectile/bullet/c9x25mm/bs/admin/rubber
+
 // MARK: .223 aka 5.56mm
 /obj/item/ammo_casing/a223
 	name = "5.56x45mm bullet casing"
@@ -339,6 +357,13 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "sa-casing"
 
+/obj/item/ammo_casing/c46x30mm/hp
+	name = "4.6x30mm hollow-point bullet casing"
+	desc = "Экспансивный патрон калибра 4.6x30мм. Наносит целям режущие раны, но слаб против брони."
+	projectile_type = /obj/projectile/bullet/c46x30mm/hp
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sh-casing"
+
 /obj/item/ammo_casing/c46x30mm/inc
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "si-casing"
@@ -347,7 +372,7 @@
 /obj/item/ammo_casing/strilka310/rubber
 	name = ".310 Strilka rubber bullet casing"
 	desc = "Травматический безгильзовый винтовочный патрон c резиновой пулей калибра .310 Стрилка."
-	icon_state = "762x51r-casing"
+	icon_state = "310r-casing"
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	projectile_type = /obj/projectile/bullet/strilka310/rubber
 

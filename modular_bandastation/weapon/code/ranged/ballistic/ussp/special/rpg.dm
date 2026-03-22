@@ -24,10 +24,17 @@
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/rpg_load.ogg'
 	dry_fire_sound = 'modular_bandastation/weapon/sound/ranged/launcher_empty.ogg'
 	recoil = 0.5
+	slowdown = 0.5
+	item_flags = NEEDS_PERMIT | SLOWS_WHILE_IN_HAND
 
 /obj/item/gun/ballistic/rocketlauncher/rpg/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
+
+/obj/item/gun/ballistic/rocketlauncher/rpg/update_overlays()
+	. = ..()
+	if(get_ammo())
+		. += "rpg_loaded"
 
 /obj/item/gun/ballistic/rocketlauncher/rpg/update_icon_state()
 	. = ..()

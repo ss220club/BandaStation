@@ -85,6 +85,7 @@
 		/obj/item/ammo_box/speedloader/strilka310/surplus = 80,
 		/obj/item/ammo_box/speedloader/strilka310 = 10,
 		/obj/item/food/rationpack = 1,
+		/obj/item/ammo_box/speedloader/strilka310/rubber = 5,
 		/obj/item/ammo_box/speedloader/strilka310/ap = 5,
 		/obj/item/ammo_box/speedloader/strilka310/incendiary = 5,
 		/obj/item/ammo_box/speedloader/strilka310/hp = 5,

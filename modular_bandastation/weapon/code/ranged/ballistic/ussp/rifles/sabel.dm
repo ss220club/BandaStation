@@ -18,6 +18,7 @@
 	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/heavy_shot_suppressed.ogg'
 	burst_size = 1
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c762x39mm/small/civ
 	special_mags = TRUE
 	can_suppress = TRUE
 	suppressor_x_offset = 3
@@ -59,6 +60,7 @@
 	icon_state = "amk"
 	inhand_icon_state = "amk"
 	worn_icon_state = "amk"
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
 	fire_delay = 0.25 SECONDS
 	recoil = 0.7
 	spread = 6.5
@@ -66,6 +68,7 @@
 /obj/item/gun/ballistic/automatic/sabel/auto/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/sabel/auto/examine(mob/user)
 	. = ..()

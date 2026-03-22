@@ -3,3 +3,6 @@
 
 /obj/item/gun/energy/pulse/pistol/taserless/loyal
 	pin = /obj/item/firing_pin/implant/mindshield
+
+/obj/item/gun/energy/lasercannon
+	pin = /obj/item/firing_pin

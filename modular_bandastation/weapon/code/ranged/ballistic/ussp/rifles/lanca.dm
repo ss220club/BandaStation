@@ -45,6 +45,7 @@
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 1.5)
 	AddElement(/datum/element/update_icon_updates_onmob)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/lanca/update_icon_state()
 	. = ..()

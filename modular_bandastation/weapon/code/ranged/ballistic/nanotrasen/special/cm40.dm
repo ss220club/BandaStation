@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/cm40
 	name = "CM-40"
-	desc = "Легкий пулемет под калибр 7.62x51mm, используемый группами тяжелого вооружения Нанотрейзен, способный вести интенсивный подавляющий огонь."
+	desc = "Пулемет под калибр 7.62x51мм, способный вести интенсивный подавляющий огонь, используется тяжелого вооруженными отрядами Нанотрейзен."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "cm40"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
@@ -19,10 +19,10 @@
 	can_suppress = TRUE
 	suppressor_x_offset = 8
 	burst_size = 1
-	fire_delay = 0.1 SECONDS
+	fire_delay = 0.2 SECONDS
 	actions_types = list()
 	spread = 10
-	recoil = 1
+	recoil = 0.7
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/cm40_cocked.ogg'
 	load_sound = 'modular_bandastation/weapon/sound/ranged/cm40_reload.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/cm40_reload.ogg'

@@ -54,10 +54,12 @@
 	icon_state = "m45a5"
 	w_class = WEIGHT_CLASS_NORMAL
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m45a5
-	can_suppress = FALSE
-	fire_sound = 'sound/items/weapons/gun/pistol/shot_alt.ogg'
+	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/suppressed_heavy.ogg'
+	fire_sound = 'modular_bandastation/weapon/sound/ranged/pistol_heavy.ogg'
 	rack_sound = 'sound/items/weapons/gun/pistol/rack.ogg'
 	lock_back_sound = 'sound/items/weapons/gun/pistol/slide_lock.ogg'
 	bolt_drop_sound = 'sound/items/weapons/gun/pistol/slide_drop.ogg'
+	suppressor_x_offset = 14
+	suppressor_y_offset = 0
 	recoil = 1
 	fire_sound_volume = 100

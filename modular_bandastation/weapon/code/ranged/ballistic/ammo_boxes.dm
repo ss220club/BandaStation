@@ -132,22 +132,33 @@
 	ammo_band_icon = "+357_ammo_band"
 	ammo_band_color = null
 
+/obj/item/ammo_box/speedloader/c38/ap
+	name = "speed loader (.38 AP)"
+	desc = parent_type::desc + "<br>Бронебойные пули хорошо пробивают броню, но наносят мало увечий."
+	ammo_type = /obj/item/ammo_casing/c38/ap
+	ammo_band_color = COLOR_AMMO_ARMORPIERCE
+
+// MARK: .310
 /obj/item/ammo_box/speedloader/strilka310_cylinder
 	name = "speed loader (.310 Strilka)"
 	desc = "Предназначен для быстрой перезарядки револьверов калибра .310 Стрилка. Произведено в СССП, не удивительно."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "310speedload"
 	ammo_type = /obj/item/ammo_casing/strilka310
-	max_ammo = 7
+	max_ammo = 8
 	caliber = CALIBER_STRILKA310
 	multiple_sprites = AMMO_BOX_PER_BULLET
 	item_flags = NO_MAT_REDEMPTION
 	ammo_band_icon = "+357_ammo_band"
 	ammo_band_color = null
 
-// MARK: .310
 /obj/item/ammo_box/speedloader/strilka310
 	desc = "Пятизарядная обойма для винтовок калибра .310 Strilka."
+
+/obj/item/ammo_box/speedloader/strilka310/rubber
+	name = "stripper clip (.310 Strilka rubber)"
+	desc = parent_type::desc + " В этой должны находиться травматические патроны."
+	ammo_type = /obj/item/ammo_casing/strilka310/rubber
 
 /obj/item/ammo_box/speedloader/strilka310/ap
 	name = "stripper clip (.310 Strilka armor-piercing)"
@@ -393,6 +404,12 @@
 	desc = parent_type::desc + "<br>Серая полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
 	icon_state = "45box-ap"
 	ammo_type = /obj/item/ammo_casing/c45/ap
+
+/obj/item/ammo_box/c45/incendiary
+	name = "ammo box (.45 incendiary)"
+	desc = parent_type::desc + "<br>Красная полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
+	icon_state = "45box-incendiary"
+	ammo_type = /obj/item/ammo_casing/c45/inc
 
 // MARK: 10mm
 /obj/item/ammo_box/c10mm

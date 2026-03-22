@@ -23,7 +23,7 @@
 	fire_delay = 0.18 SECONDS
 	actions_types = list()
 	spread = 2.5
-	recoil = 0.2
+	recoil = 0.3
 	load_sound = 'modular_bandastation/weapon/sound/ranged/cm82_reload.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/cm82_reload.ogg'
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/cm82_unload.ogg'

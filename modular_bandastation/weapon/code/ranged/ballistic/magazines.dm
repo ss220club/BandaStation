@@ -386,6 +386,28 @@
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c9x25mm/hp
 
+/obj/item/ammo_box/magazine/c9x25mm_pistol/bs
+	name = "pistol magazine (9x25mm NT BS)"
+	desc = parent_type::desc + "<br>Содержит экспериментальные патроны с БС пулями."
+	ammo_band_color = COLOR_AMMO_ICEBLOX
+	ammo_type = /obj/item/ammo_casing/c9x25mm/bs
+
+/obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/bs
+	name = "extended pistol magazine (9x25mm NT BS)"
+	desc = parent_type::desc + "<br>Содержит эксперементальные патроны с БС пулями."
+	ammo_band_color = COLOR_AMMO_ICEBLOX
+	ammo_type = /obj/item/ammo_casing/c9x25mm/bs
+
+/obj/item/ammo_box/magazine/c9x25mm_pistol/bs/admin
+	name = "pistol magazine (9x25mm NT BS-M)"
+	desc = parent_type::desc + "<br>Содержит эксперементальные патроны с БС пулями. Почему-то они пушистые и кажется, жужжат как моли? Странно."
+	ammo_band_color = COLOR_ADMIN_PINK
+	ammo_type = /obj/item/ammo_casing/c9x25mm/bs/admin
+
+/obj/item/ammo_box/magazine/c9x25mm_pistol/bs/admin/rubber
+	name = "pistol magazine (9x25mm NT BS-MR)"
+	ammo_type = /obj/item/ammo_casing/c9x25mm/bs/admin/rubber
+
 // MARK: CM5 - SMG
 /obj/item/ammo_box/magazine/cm5
 	name = "SMG magazine (9x25mm NT)"
@@ -417,6 +439,12 @@
 	name = "SMG magazine (9x25mm NT AP)"
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c9x25mm/ap
+
+/obj/item/ammo_box/magazine/cm5/bs
+	name = "SMG magazine (9x25mm NT BS)"
+	desc = parent_type::desc + "<br>Содержит эксперементальные патроны с БС пулями."
+	ammo_band_color = COLOR_AMMO_TRUESTRIKE
+	ammo_type = /obj/item/ammo_casing/c9x25mm/bs
 
 // MARK: CM82 - assault rifle
 /obj/item/ammo_box/magazine/c223
@@ -1097,6 +1125,9 @@
 	caliber = CALIBER_SHOTGUN
 	max_ammo = 4
 
+/obj/item/ammo_box/magazine/internal/cylinder/rev12ga/less_lethal
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+
 // MARK: RPG
 
 /obj/item/ammo_box/magazine/internal/rocketlauncher/rpg
@@ -1160,6 +1191,22 @@
 	name = "SMG magazine (9mm incendiary)"
 	MAGAZINE_TYPE_INCENDIARY
 	ammo_type = /obj/item/ammo_casing/c9mm/fire
+
+/obj/item/ammo_box/magazine/smgm9mm
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	ammo_band_icon = "+smg9mm_ammo_band"
+	ammo_band_color = null
+
+/obj/item/ammo_box/magazine/smgm9mm/rubber
+	name = "SMG magazine (9mm rubber)"
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c9mm/rubber
+
+/obj/item/ammo_box/magazine/smgm9mm/hp
+	name = "SMG magazine (9mm HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c9mm/hp
 
 // MARK: AS32 - auto shotgun
 /obj/item/ammo_box/magazine/as32
@@ -1287,3 +1334,8 @@
 	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c46x30mm/rubber
+
+/obj/item/ammo_box/magazine/wt550m9/wthp
+	name = "WT-550 magazine (4.6x30mm HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c46x30mm/hp

@@ -51,6 +51,7 @@
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/miecz/update_icon_state()
 	. = ..()

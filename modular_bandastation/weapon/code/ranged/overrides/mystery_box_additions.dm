@@ -30,6 +30,7 @@ GLOBAL_LIST_INIT(new_special_firearms, list(
 	/obj/item/gun/ballistic/automatic/vityaz,
 	/obj/item/gun/ballistic/automatic/pistol/zashch,
 	/obj/item/gun/ballistic/revolver/bobr,
+	/obj/item/gun/ballistic/revolver/bobr/short,
 	/obj/item/gun/ballistic/revolver/dvoystvol,
 	/obj/item/gun/ballistic/revolver/dvoystvol/high_caliber,
 	/obj/item/gun/ballistic/revolver/dvoystvol/low_caliber,

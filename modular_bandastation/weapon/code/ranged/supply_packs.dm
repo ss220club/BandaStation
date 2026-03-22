@@ -111,6 +111,15 @@
 		/obj/item/sledgehammer/tactical = 1,
 	)
 
-// MARK: GUNCASE
+// MARK: GUNCASEs
 /obj/item/storage/toolbox/guncase/soviet
 	desc = "Оружейный кейс. Символ СССП отпечатан на боковой стороне."
+
+/obj/item/storage/toolbox/guncase/syndiesledge
+	name = "syndicate sledgehammer case"
+	weapon_to_spawn = /obj/item/sledgehammer/syndie
+	extra_to_spawn = /obj/item/clothing/head/utility/welding
+
+/obj/item/storage/toolbox/guncase/syndiesledge/PopulateContents()
+	new weapon_to_spawn(src)
+	new extra_to_spawn(src)
