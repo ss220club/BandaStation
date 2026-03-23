@@ -42,7 +42,7 @@ export const BluespaceBeacon = () => {
   return (
     <Window width={340} height={300}>
       <Window.Content>
-        <Section title="Charge status">
+        <Section title="Статус зарядки">
           <ProgressBar
             value={charge}
             ranges={{
@@ -56,21 +56,21 @@ export const BluespaceBeacon = () => {
         </Section>
 
         <LabeledList>
-          <LabeledList.Item label="Charge mode">
+          <LabeledList.Item label="Режим зарядки">
             <Box color={inputState}>
-              {(charge >= 100 && 'Charged') ||
-                (inputting && 'Charging') ||
-                'Not charging'}
+              {(charge >= 100 && 'Заряжено') ||
+                (inputting && 'Заржяется') ||
+                'Нет питания'}
             </Box>
           </LabeledList.Item>
 
-          <LabeledList.Item label="Input mode">
+          <LabeledList.Item label="Режим потребления">
             <Box color={inputLocked ? 'average' : 'label'}>
-              {inputLocked ? 'Locked: 2 MW' : 'Adjustable'}
+              {inputLocked ? 'Заблокировано: 2 MW' : 'Настраиваемое'}
             </Box>
           </LabeledList.Item>
 
-          <LabeledList.Item label="Input power">
+          <LabeledList.Item label="Потребляемая мощность">
             <Stack fill>
               <Stack.Item>
                 <Button
@@ -134,11 +134,11 @@ export const BluespaceBeacon = () => {
             </Stack>
           </LabeledList.Item>
 
-          <LabeledList.Item label="Current consumption">
+          <LabeledList.Item label="Текущее энергоснабжение">
             {formatPower(powerUsage)}
           </LabeledList.Item>
 
-          <LabeledList.Item label="Available">
+          <LabeledList.Item label="Доступно">
             {formatPower(inputAvailable)}
           </LabeledList.Item>
         </LabeledList>

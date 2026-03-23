@@ -16,7 +16,7 @@
 
 /datum/supply_pack/engineering/bluespace_beacon
 	name = "Части маяка реальности"
-	desc = "Тут нихуя нет"
+	desc = "Ящик с платой маяка реальности"
 	cost = CARGO_CRATE_VALUE * 24
 	order_flags = ORDER_SPECIAL
 	access_view = ACCESS_COMMAND
@@ -84,7 +84,7 @@
 	/// Prevents repeating completion announcements each tick.
 	var/completion_announced = FALSE
 	/// Completion announcement message.
-	var/completion_announcement_text = "Устройство полностью заряжено и готово к работе. Переход на пассивное питание \
+	var/completion_announcement_text = "Устройство полностью заряжено и готово к работе. Переход на пассивное питание. \
 	Модулирование беспричинного изменения реальности завершено. Инициализация поля подавления Горизонта."
 	/// Locked base draw after full completion.
 	var/post_completion_input_level = 2 MEGA WATTS
@@ -159,7 +159,7 @@
 /obj/machinery/power/bluespace_beacon/examine(mob/user)
 	. = ..()
 	if(powernet)
-		. += span_notice("Подключен к электросети. Доступно: [display_power(surplus())].")
+		. += span_notice("Подключен к электросети.")
 	else
 		. += span_warning("Не подключен к электросети.")
 
