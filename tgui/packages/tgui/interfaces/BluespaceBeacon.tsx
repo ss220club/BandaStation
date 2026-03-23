@@ -17,23 +17,19 @@ type Data = {
   charge: number;
   powerUsage: number;
   inputLevel: number;
-  inputAttempt: number;
   inputting: number;
   inputAvailable: number;
 };
 
-// Common power multiplier
 const POWER_MUL = 1e3;
 
 export const BluespaceBeacon = () => {
   const { act, data } = useBackend<Data>();
   const {
-    maximumCharge,
     inputLevelMax,
     charge,
     powerUsage,
     inputLevel,
-    inputAttempt,
     inputting,
     inputAvailable,
   } = data;
@@ -42,39 +38,31 @@ export const BluespaceBeacon = () => {
     (charge >= 100 && 'good') || (inputting && 'average') || 'bad';
 
   return (
-    <Window width={340} height={350}>
+    <Window width={340} height={280}>
       <Window.Content>
-        <Section title="Charge status">
+        <Section title="Статус зарядки">
           <ProgressBar
-            value={charge / 100}
+            value={charge}
             ranges={{
               good: [50, Infinity],
               average: [15, 50],
               bad: [-Infinity, 15],
             }}
-          />
+          >
+            {Math.round(charge)}%
+          </ProgressBar>
         </Section>
-        <Section
-          title="Input"
-          buttons={
-            <Button
-              icon={inputAttempt ? 'sync-alt' : 'times'}
-              selected={inputAttempt}
-              onClick={() => act('tryinput')}
-            >
-              {inputAttempt ? 'On' : 'Off'}
-            </Button>
-          }
-        />
+
         <LabeledList>
-          <LabeledList.Item label="Charge Mode">
+          <LabeledList.Item label="Режим зарядки">
             <Box color={inputState}>
-              {(charge >= 100 && 'Fully Charged') ||
-                (inputting && 'Charging') ||
-                'Not Charging'}
+              {(charge >= 100 && 'Заряжно') ||
+                (inputting && 'Заряжется') ||
+                'Не заряжается'}
             </Box>
           </LabeledList.Item>
-          <LabeledList.Item label="Target Input">
+
+          <LabeledList.Item label="Входная мощность">
             <Stack fill>
               <Stack.Item>
                 <Button
@@ -91,18 +79,19 @@ export const BluespaceBeacon = () => {
                   disabled={inputLevel === 0}
                   onClick={() =>
                     act('input', {
-                      adjust: -10000,
+                      adjust: -1000000,
                     })
                   }
                 />
               </Stack.Item>
+
               <Stack.Item grow={1} mx={1}>
                 <Slider
                   value={inputLevel / POWER_MUL}
                   fillValue={inputAvailable / POWER_MUL}
                   minValue={0}
                   maxValue={inputLevelMax / POWER_MUL}
-                  step={5}
+                  step={1000}
                   stepPixelSize={4}
                   format={(value) => formatPower(value * POWER_MUL, 1)}
                   onChange={(e, value) =>
@@ -112,13 +101,14 @@ export const BluespaceBeacon = () => {
                   }
                 />
               </Stack.Item>
+
               <Stack.Item>
                 <Button
                   icon="forward"
                   disabled={inputLevel === inputLevelMax}
                   onClick={() =>
                     act('input', {
-                      adjust: 10000,
+                      adjust: 1000000,
                     })
                   }
                 />
@@ -134,7 +124,12 @@ export const BluespaceBeacon = () => {
               </Stack.Item>
             </Stack>
           </LabeledList.Item>
-          <LabeledList.Item label="Available">
+
+          <LabeledList.Item label="Текущее потребление">
+            {formatPower(powerUsage)}
+          </LabeledList.Item>
+
+          <LabeledList.Item label="Допустно">
             {formatPower(inputAvailable)}
           </LabeledList.Item>
         </LabeledList>
