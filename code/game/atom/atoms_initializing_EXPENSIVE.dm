@@ -126,7 +126,7 @@
 	// BANDASTATION MOD START: LOS
 #ifdef LOS_ENABLED
 	// retarded double work but i don't give a shit
-	if(((plane - GAME_PLANE) % PLANE_RANGE == 0) && istype(src, /obj) && !render_target) // modulo check to handle multiz offsets without relying on SSmapping tables
+	if(((plane - GAME_PLANE) % PLANE_RANGE == 0) && istype(src, /obj) && !istype(src, /obj/item) && !render_target) // modulo check to handle multiz offsets without relying on SSmapping tables
 		render_target = "rt_\ref[src]"
 		var/atom/movable/los_proxy/proxy = new(null)
 		proxy.attach_to(src)
