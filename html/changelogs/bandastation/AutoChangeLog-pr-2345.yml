@@ -1,4 +1,0 @@
-author: "PetyaFX"
-delete-after: True
-changes:
-  - bugfix: "Подписка игрока на бусти теперь снова учитывается при выборе ТТС сида в игре."
