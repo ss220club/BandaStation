@@ -697,11 +697,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment,
-/obj/structure/disposalpipe/sorting/mail/flip{
-	dir = 1;
-	name = "Research Junction"
-	},
-/obj/effect/mapping_helpers/mail_sorting/science/research,
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "ajz" = (
@@ -1333,6 +1328,9 @@
 "arz" = (
 /obj/effect/landmark/start/hangover,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
+/obj/structure/disposalpipe/segment{
+	dir = 8
+	},
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "arD" = (
@@ -3167,8 +3165,7 @@
 /obj/machinery/duct,
 /obj/effect/mapping_helpers/mail_sorting/science/genetics,
 /obj/structure/disposalpipe/sorting/mail{
-	dir = 2;
-	name = "Genetics Junction"
+	dir = 2
 	},
 /turf/open/floor/iron,
 /area/station/science/genetics)
@@ -10942,9 +10939,6 @@
 /obj/effect/landmark/start/scientist,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 9
-	},
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "cGg" = (
@@ -12082,14 +12076,11 @@
 /area/station/maintenance/department/medical/ghetto)
 "cTB" = (
 /obj/structure/cable,
-/obj/structure/table/reinforced,
-/obj/machinery/recharger,
-/obj/effect/turf_decal/tile/purple/half{
-	dir = 8
+/obj/structure/disposalpipe/segment{
+	dir = 5
 	},
-/obj/item/radio/intercom/directional/west,
-/turf/open/floor/iron/white,
-/area/station/science/auxlab/firing_range)
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/upper)
 "cTF" = (
 /obj/structure/sign/warning/vacuum/directional/east,
 /turf/open/floor/catwalk_floor/iron_smooth,
@@ -41954,7 +41945,9 @@
 /obj/effect/landmark/start/hangover,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
-/obj/structure/disposalpipe/segment,
+/obj/structure/disposalpipe/segment{
+	dir = 9
+	},
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "kiG" = (
@@ -49216,12 +49209,15 @@
 /turf/open/floor/iron/freezer,
 /area/station/maintenance/port/aft)
 "lTG" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/disposalpipe/segment{
+/obj/structure/cable,
+/obj/structure/table/reinforced,
+/obj/machinery/recharger,
+/obj/effect/turf_decal/tile/purple/half{
 	dir = 8
 	},
-/turf/open/floor/plating,
-/area/station/maintenance/starboard/aft)
+/obj/item/radio/intercom/directional/west,
+/turf/open/floor/iron/white,
+/area/station/science/auxlab/firing_range)
 "lTO" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/mapping_helpers/broken_floor,
@@ -56165,6 +56161,9 @@
 /turf/open/floor/iron/grimy,
 /area/station/command/heads_quarters/hop)
 "nEE" = (
+/obj/structure/disposalpipe/segment{
+	dir = 8
+	},
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "nET" = (
@@ -59535,9 +59534,10 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/disposalpipe/segment{
-	dir = 6
+/obj/structure/disposalpipe/sorting/mail/flip{
+	dir = 1
 	},
+/obj/effect/mapping_helpers/mail_sorting/science/research,
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "otN" = (
@@ -69136,12 +69136,12 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "qOx" = (
-/obj/structure/cable,
+/obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment{
-	dir = 5
+	dir = 8
 	},
 /turf/open/floor/plating,
-/area/station/maintenance/starboard/upper)
+/area/station/maintenance/starboard/aft)
 "qOG" = (
 /obj/effect/turf_decal/tile/yellow/fourcorners,
 /obj/machinery/status_display/evac/directional/north,
@@ -70817,8 +70817,9 @@
 /area/station/engineering/transit_tube)
 "rjj" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
+/obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment,
-/turf/open/floor/plating,
+/turf/open/floor/iron,
 /area/station/maintenance/starboard/aft)
 "rjm" = (
 /obj/item/soap/nanotrasen,
@@ -76543,9 +76544,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/structure/disposalpipe/segment{
-	dir = 8
-	},
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "sCV" = (
@@ -77154,6 +77152,9 @@
 "sJI" = (
 /obj/effect/landmark/start/scientist,
 /obj/structure/cable,
+/obj/structure/disposalpipe/segment{
+	dir = 6
+	},
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "sJK" = (
@@ -77852,10 +77853,10 @@
 /obj/effect/turf_decal/tile/purple/anticorner{
 	dir = 8
 	},
-/obj/machinery/disposal/bin,
 /obj/structure/disposalpipe/trunk{
-	dir = 4
+	dir = 1
 	},
+/obj/machinery/disposal/bin,
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "sUv" = (
@@ -83507,9 +83508,8 @@
 /area/station/command/eva)
 "uov" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
-/obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment,
-/turf/open/floor/iron,
+/turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "uoQ" = (
 /obj/structure/chair/wood{
@@ -90309,6 +90309,9 @@
 /obj/machinery/light/directional/west,
 /obj/effect/turf_decal/tile/purple/half{
 	dir = 8
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 6
 	},
 /turf/open/floor/iron/white,
 /area/station/science/lab)
@@ -208291,7 +208294,7 @@ hFm
 hFm
 hFm
 hFm
-qOx
+cTB
 nPZ
 nnU
 nnU
@@ -209318,7 +209321,7 @@ kWk
 htm
 eNk
 xMv
-cTB
+lTG
 nnT
 ogS
 jpD
@@ -214699,17 +214702,17 @@ lsE
 qNk
 jqC
 cQE
-rjj
-rjj
+uov
+uov
 nwC
-rjj
-rjj
-rjj
+uov
+uov
+uov
 pTg
 pTg
 pTg
 gjd
-uov
+rjj
 uOq
 rnj
 eLd
@@ -214955,7 +214958,7 @@ fCh
 tda
 kIB
 jqC
-lTG
+qOx
 tLv
 htd
 bTH
