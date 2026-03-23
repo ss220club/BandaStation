@@ -59,7 +59,7 @@ export function BluespaceBeacon() {
           <LabeledList.Item label="Режим зарядки">
             <Box color={inputState}>
               {(charge >= 100 && 'Заряжено') ||
-                (inputting && 'Заржяется') ||
+                (inputting && 'Заряжается') ||
                 'Нет питания'}
             </Box>
           </LabeledList.Item>
