@@ -59,6 +59,7 @@
 	desc = "Стационарное устройство, предназначенное для локализации и подавления \
 	экспансии аномальных зон с нарушенной онтологической консистентностью. Стабилизирует объективную действительность от \
 	уничтожения последней опасной аномалией Горизонт."
+	circuit = /obj/item/circuitboard/machine/bluespace_beacon
 	icon = 'modular_bandastation/objects/icons/obj/machines/bluespace_tap.dmi'
 	icon_state = "bluespace_tap"
 	base_icon_state = "bluespace_tap"
@@ -80,6 +81,15 @@
 	var/actual_power_usage = 0
 	/// Goal threshold, shown in UI.
 	var/maximum_charge = 45000
+	/// Prevents repeating completion announcements each tick.
+	var/completion_announced = FALSE
+	/// Completion announcement message.
+	var/completion_announcement_text = "Устройство полностью заряжено и готово к работе. Переход на пассивное питание \
+	Модулирование беспричинного изменения реальности завершено. Инициализация поля подавления Горизонта."
+	/// Locked base draw after full completion.
+	var/post_completion_input_level = 2 MEGA WATTS
+	/// Whether input controls are locked.
+	var/input_locked = FALSE
 	/// TRUE when we can draw some power now.
 	var/inputting = FALSE
 	/// Requested input draw from network (W).
@@ -177,17 +187,17 @@
 
 /obj/machinery/power/bluespace_beacon/update_overlays()
 	. = ..()
-	underlays.Cut()
 
 	if(machine_stat & (BROKEN|NOPOWER))
 		set_light(0)
+	else if(actual_power_usage > 0)
+		set_light(2, 1, "#6fa8ff")
 	else
 		set_light(1, 1, "#353535")
 
-	if(get_available_power())
+	if(actual_power_usage > 0)
 		. += "screen"
-		if(light)
-			underlays += emissive_appearance(icon, "light_mask")
+		. += emissive_appearance(icon, "light_mask", src)
 
 /obj/machinery/power/bluespace_beacon/power_change()
 	. = ..()
@@ -215,11 +225,6 @@
 			update_appearance()
 			return TRUE
 
-		var/obj/machinery/power/terminal/terminal = locate(/obj/machinery/power/terminal) in check_turf
-		if(terminal?.powernet)
-			terminal.powernet.add_machine(src)
-			update_appearance()
-			return TRUE
 
 	update_appearance()
 	return FALSE
@@ -230,7 +235,22 @@
 		update_appearance()
 
 /obj/machinery/power/bluespace_beacon/proc/get_available_power()
-	return min(surplus(), input_level)
+	// Keep high-draw behavior while respecting existing net accounting.
+	return min(max(newavail(), surplus()), input_level)
+
+/obj/machinery/power/bluespace_beacon/proc/announce_completion()
+	if(completion_announced)
+		return
+	completion_announced = TRUE
+	priority_announce(completion_announcement_text, sound = "sound/effects/magic/lightning_chargeup.ogg", sender_override = "Система оповещений Маяка")
+
+/obj/machinery/power/bluespace_beacon/proc/lock_to_base_consumption()
+	if(input_locked)
+		return
+	input_locked = TRUE
+	input_level = post_completion_input_level
+	input_level_max = post_completion_input_level
+	update_static_data_for_all_viewers()
 
 /obj/machinery/power/bluespace_beacon/process(seconds_per_tick)
 	if(machine_stat & (BROKEN|NOPOWER) || !anchored)
@@ -261,10 +281,13 @@
 	if(actual_power_usage > 0)
 		mined_points = min(BEACON_BASE_POINTS * (actual_power_usage / (50 KILO WATTS)), 20) + actual_power_usage * BEACON_POINTS_PER_W
 		current_charge = min(maximum_charge, current_charge + mined_points)
+		if(current_charge >= maximum_charge)
+			lock_to_base_consumption()
+			announce_completion()
 	else
 		mined_points = 0
 
-	update_appearance()
+	update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
 
 /obj/machinery/power/bluespace_beacon/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -286,6 +309,7 @@
 		"charge" = charge_percent,
 		"powerUsage" = actual_power_usage,
 		"inputLevel" = input_level,
+		"inputLocked" = input_locked,
 	)
 
 /obj/machinery/power/bluespace_beacon/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -295,6 +319,8 @@
 
 	switch(action)
 		if("input")
+			if(input_locked)
+				return TRUE
 			var/target = params["target"]
 			var/adjust = text2num(params["adjust"])
 			if(target == "min")
@@ -310,6 +336,7 @@
 				target = text2num(target)
 				. = TRUE
 			if(.)
+				target = round(target / (1 MEGA WATTS)) * (1 MEGA WATTS)
 				input_level = clamp(target, 0, input_level_max)
 				update_appearance()
 				return TRUE

@@ -19,9 +19,10 @@ type Data = {
   inputLevel: number;
   inputting: number;
   inputAvailable: number;
+  inputLocked: number;
 };
 
-const POWER_MUL = 1e3;
+const POWER_MUL = 1e6;
 
 export const BluespaceBeacon = () => {
   const { act, data } = useBackend<Data>();
@@ -32,15 +33,16 @@ export const BluespaceBeacon = () => {
     inputLevel,
     inputting,
     inputAvailable,
+    inputLocked,
   } = data;
 
   const inputState =
     (charge >= 100 && 'good') || (inputting && 'average') || 'bad';
 
   return (
-    <Window width={340} height={280}>
+    <Window width={340} height={300}>
       <Window.Content>
-        <Section title="Статус зарядки">
+        <Section title="Charge status">
           <ProgressBar
             value={charge}
             ranges={{
@@ -54,20 +56,26 @@ export const BluespaceBeacon = () => {
         </Section>
 
         <LabeledList>
-          <LabeledList.Item label="Режим зарядки">
+          <LabeledList.Item label="Charge mode">
             <Box color={inputState}>
-              {(charge >= 100 && 'Заряжно') ||
-                (inputting && 'Заряжется') ||
-                'Не заряжается'}
+              {(charge >= 100 && 'Charged') ||
+                (inputting && 'Charging') ||
+                'Not charging'}
             </Box>
           </LabeledList.Item>
 
-          <LabeledList.Item label="Входная мощность">
+          <LabeledList.Item label="Input mode">
+            <Box color={inputLocked ? 'average' : 'label'}>
+              {inputLocked ? 'Locked: 2 MW' : 'Adjustable'}
+            </Box>
+          </LabeledList.Item>
+
+          <LabeledList.Item label="Input power">
             <Stack fill>
               <Stack.Item>
                 <Button
                   icon="fast-backward"
-                  disabled={inputLevel === 0}
+                  disabled={!!inputLocked || inputLevel === 0}
                   onClick={() =>
                     act('input', {
                       target: 'min',
@@ -76,10 +84,10 @@ export const BluespaceBeacon = () => {
                 />
                 <Button
                   icon="backward"
-                  disabled={inputLevel === 0}
+                  disabled={!!inputLocked || inputLevel === 0}
                   onClick={() =>
                     act('input', {
-                      adjust: -1000000,
+                      adjust: -POWER_MUL,
                     })
                   }
                 />
@@ -91,9 +99,10 @@ export const BluespaceBeacon = () => {
                   fillValue={inputAvailable / POWER_MUL}
                   minValue={0}
                   maxValue={inputLevelMax / POWER_MUL}
-                  step={1000}
+                  disabled={!!inputLocked}
+                  step={1}
                   stepPixelSize={4}
-                  format={(value) => formatPower(value * POWER_MUL, 1)}
+                  format={(value) => formatPower(value * POWER_MUL)}
                   onChange={(e, value) =>
                     act('input', {
                       target: value * POWER_MUL,
@@ -105,16 +114,16 @@ export const BluespaceBeacon = () => {
               <Stack.Item>
                 <Button
                   icon="forward"
-                  disabled={inputLevel === inputLevelMax}
+                  disabled={!!inputLocked || inputLevel === inputLevelMax}
                   onClick={() =>
                     act('input', {
-                      adjust: 1000000,
+                      adjust: POWER_MUL,
                     })
                   }
                 />
                 <Button
                   icon="fast-forward"
-                  disabled={inputLevel === inputLevelMax}
+                  disabled={!!inputLocked || inputLevel === inputLevelMax}
                   onClick={() =>
                     act('input', {
                       target: 'max',
@@ -125,11 +134,11 @@ export const BluespaceBeacon = () => {
             </Stack>
           </LabeledList.Item>
 
-          <LabeledList.Item label="Текущее потребление">
+          <LabeledList.Item label="Current consumption">
             {formatPower(powerUsage)}
           </LabeledList.Item>
 
-          <LabeledList.Item label="Допустно">
+          <LabeledList.Item label="Available">
             {formatPower(inputAvailable)}
           </LabeledList.Item>
         </LabeledList>
