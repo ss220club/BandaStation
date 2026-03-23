@@ -55,6 +55,12 @@
 #define BEACON_NEAREST_MW(power) ((power) - (power) % (1 MEGA WATTS))
 #define BEACON_RANDOM_SPAWN_CHANCE 5
 #define BEACON_RANDOM_SPAWN_RADIUS 7
+#define BEACON_PORTAL_EVENT_COOLDOWN (20 SECONDS)
+#define BEACON_PORTAL_CHANCE_MIN 2
+#define BEACON_PORTAL_CHANCE_MAX 35
+#define BEACON_DEMONIC_INCURSION_CHANCE 1
+#define BEACON_DEMONIC_INCURSION_PORTALS_MIN 1
+#define BEACON_DEMONIC_INCURSION_PORTALS_MAX 2
 
 /obj/machinery/power/bluespace_beacon
 	name = "Маяк реальности"
@@ -104,24 +110,18 @@
 	var/radio_key = /obj/item/encryptionkey/headset_eng
 	/// Engineering channel key.
 	var/engineering_channel = RADIO_CHANNEL_ENGINEERING
+	/// Next world.time when hostile portal event may trigger.
+	var/next_portal_event_at = 0
 	/// Weighted random outcomes that may appear around the beacon while charging.
-	var/static/list/random_spawn_weights = list(
-		/mob/living/basic/pet/cat = 6,
-		/mob/living/basic/pet/dog/corgi = 4,
-		/mob/living/basic/pet/fox = 3,
-		/mob/living/basic/pet/penguin = 2,
-		/mob/living/basic/possum = 2,
-		/obj/item/stack/ore/bluespace_crystal = 8,
-		/obj/item/stack/sheet/mineral/plasma = 6,
-		/obj/item/food/grown/banana = 4,
-		/obj/item/food/pie/cream = 2,
-	)
+	var/static/list/random_spawn_weights
 
 /obj/machinery/power/bluespace_beacon/should_have_node()
 	return TRUE
 
 /obj/machinery/power/bluespace_beacon/Initialize(mapload)
 	. = ..()
+	if(!length(random_spawn_weights))
+		random_spawn_weights = get_bluespace_beacon_random_spawn_weights()
 
 	radio = new(src)
 	radio.keyslot = new radio_key
@@ -285,6 +285,106 @@
 	input_level_max = post_completion_input_level
 	update_static_data_for_all_viewers()
 
+/obj/machinery/power/bluespace_beacon/proc/radio_engineering_notice(message)
+	if(!length(message))
+		return
+	if(length(radio?.channels) && !(engineering_channel in radio.channels))
+		if(RADIO_CHANNEL_ENGINEERING in radio.channels)
+			engineering_channel = RADIO_CHANNEL_ENGINEERING
+		else if(length(radio.channels))
+			engineering_channel = radio.channels[1]
+	radio?.talk_into(src, message, engineering_channel)
+
+/obj/machinery/power/bluespace_beacon/proc/get_portal_event_chance()
+	if(input_level_max <= 0)
+		return BEACON_PORTAL_CHANCE_MIN
+	var/progress_ratio = clamp(input_level / input_level_max, 0, 1)
+	return clamp(round(BEACON_PORTAL_CHANCE_MIN + (BEACON_PORTAL_CHANCE_MAX - BEACON_PORTAL_CHANCE_MIN) * progress_ratio), BEACON_PORTAL_CHANCE_MIN, BEACON_PORTAL_CHANCE_MAX)
+
+/obj/machinery/power/bluespace_beacon/proc/get_portal_spawn_turf()
+	var/turf/target_turf = get_safe_random_station_turf_equal_weight()
+	if(!target_turf || target_turf.density || isspaceturf(target_turf))
+		return null
+	return target_turf
+
+/obj/machinery/power/bluespace_beacon/proc/trigger_demonic_incursion()
+	var/list/demon_spawners = get_bluespace_beacon_demonic_incursion_spawners()
+	if(!length(demon_spawners))
+		return FALSE
+
+	var/created_portals = 0
+	var/to_spawn = rand(BEACON_DEMONIC_INCURSION_PORTALS_MIN, BEACON_DEMONIC_INCURSION_PORTALS_MAX)
+	for(var/i in 1 to to_spawn)
+		var/turf/spawn_turf = get_portal_spawn_turf()
+		if(!spawn_turf)
+			continue
+		var/spawn_type = pick_weight(demon_spawners)
+		if(!spawn_type)
+			continue
+		new spawn_type(spawn_turf)
+		created_portals++
+
+	if(!created_portals)
+		return FALSE
+
+	radio_engineering_notice("Внимание: зафиксирован демонический прорыв! Обнаружено порталов: [created_portals].")
+	return TRUE
+
+/obj/machinery/power/bluespace_beacon/proc/trigger_hostile_portal_faction()
+	var/list/factions = get_bluespace_beacon_portal_factions()
+	if(!length(factions))
+		return FALSE
+
+	var/list/faction_weights = list()
+	for(var/faction_name in factions)
+		var/list/faction_data = factions[faction_name]
+		if(!islist(faction_data))
+			continue
+		faction_weights[faction_name] = max(1, faction_data["weight"] || 1)
+
+	var/faction_name = pick_weight(faction_weights)
+	var/list/faction_data = factions[faction_name]
+	if(!islist(faction_data))
+		return FALSE
+
+	var/turf/spawn_turf = get_portal_spawn_turf()
+	if(!spawn_turf)
+		return FALSE
+
+	var/portal_name = faction_data["portal_name"]
+	var/list/portal_mob_types = faction_data["mob_types"]
+	var/portal_spawn_time = faction_data["spawn_time"]
+	var/portal_max_mobs = faction_data["max_mobs"]
+	var/list/portal_faction = faction_data["faction"]
+	var/portal_lifetime = faction_data["lifetime"]
+
+	new /obj/structure/spawner/bluespace_beacon_event(
+		spawn_turf,
+		portal_name,
+		portal_mob_types,
+		portal_spawn_time,
+		portal_max_mobs,
+		portal_faction,
+		portal_lifetime,
+	)
+
+	radio_engineering_notice("Внимание: пространственный разрыв. Тип: [faction_name]. Локация: [get_area_name(spawn_turf)].")
+	return TRUE
+
+/obj/machinery/power/bluespace_beacon/proc/try_trigger_hostile_portal_event()
+	if(input_locked || current_charge >= maximum_charge)
+		return
+	if(world.time < next_portal_event_at)
+		return
+	if(!prob(get_portal_event_chance()))
+		return
+
+	next_portal_event_at = world.time + BEACON_PORTAL_EVENT_COOLDOWN
+	if(prob(BEACON_DEMONIC_INCURSION_CHANCE))
+		if(trigger_demonic_incursion())
+			return
+	trigger_hostile_portal_faction()
+
 /obj/machinery/power/bluespace_beacon/proc/get_random_spawn_turf()
 	var/list/possible_turfs = list()
 	for(var/turf/target_turf as anything in RANGE_TURFS(BEACON_RANDOM_SPAWN_RADIUS, src))
@@ -323,6 +423,8 @@
 		else
 			engineering_channel = radio.channels[1]
 	radio?.talk_into(src, "Внимание: зафиксирован локальный аномальный выброс. Объект: [spawned_name].", engineering_channel)
+
+	try_trigger_hostile_portal_event()
 
 /obj/machinery/power/bluespace_beacon/process(seconds_per_tick)
 	if(machine_stat & (BROKEN|NOPOWER) || !anchored)
@@ -421,3 +523,9 @@
 #undef BEACON_NEAREST_MW
 #undef BEACON_RANDOM_SPAWN_CHANCE
 #undef BEACON_RANDOM_SPAWN_RADIUS
+#undef BEACON_PORTAL_EVENT_COOLDOWN
+#undef BEACON_PORTAL_CHANCE_MIN
+#undef BEACON_PORTAL_CHANCE_MAX
+#undef BEACON_DEMONIC_INCURSION_CHANCE
+#undef BEACON_DEMONIC_INCURSION_PORTALS_MIN
+#undef BEACON_DEMONIC_INCURSION_PORTALS_MAX
