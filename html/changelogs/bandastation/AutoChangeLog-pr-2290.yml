@@ -1,4 +1,0 @@
-author: "PetyaFX"
-delete-after: True
-changes:
-  - bugfix: "Исправлена проблема выпадения heavy roundstart рулсетов."

@@ -21,6 +21,12 @@
 		new_tts_seed = SStts220.tts_seeds[initial(new_tts_seed.name)]
 	if(istype(new_tts_seed))
 		tts_seed = new_tts_seed
+
+	if(tts_seed)
+		var/list/available_seeds = SStts220.get_available_seeds(parent)
+		if(!(tts_seed.name in available_seeds))
+			tts_seed = null
+
 	if(!tts_seed)
 		tts_seed = get_random_tts_seed_by_gender()
 	if(!tts_seed) // Something went terribly wrong
@@ -119,7 +125,8 @@
 
 /datum/component/tts_component/proc/get_random_tts_seed_by_gender()
 	var/atom/being_changed = parent
-	var/tts_choice = SStts220.pick_tts_seed_by_gender(being_changed.gender)
+	var/list/available_seeds = SStts220.get_available_seeds(being_changed)
+	var/tts_choice = SStts220.pick_tts_seed_by_gender(being_changed.gender, available_seeds)
 	var/datum/tts_seed/seed = SStts220.tts_seeds[tts_choice]
 	if(!seed)
 		return null

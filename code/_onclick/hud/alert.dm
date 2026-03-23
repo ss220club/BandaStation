@@ -111,7 +111,7 @@
 	var/click_master = TRUE
 
 	///If set true, instead of using the default icon file for screen alerts, it will use the hud's ui style
-	var/use_user_hud_icon = FALSE
+	var/use_user_hud_icon = USER_HUD_STYLE_IGNORE
 	///If set, this overlay will be added to the icon.
 	var/overlay_state
 	///The file to fetch the overlay from
@@ -260,32 +260,32 @@
 	name = "Bronchodilated"
 	desc = "You feel like your lungs are larger than usual! You're taking deeper breaths!"
 	icon_state = "bronchodilated"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_icon = 'icons/obj/medical/organs/organs.dmi'
 	overlay_state = "lungs"
 
 /atom/movable/screen/alert/bronchoconstricted
 	name = "Bronchocontracted"
 	desc = "You feel like your lungs are smaller than usual! You might need a higher pressure environment/internals to breathe!"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "bronchoconstricted"
 
 /atom/movable/screen/alert/gross
 	name = "Мерзко"
 	desc = "Это было довольно противно..."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "gross"
 
 /atom/movable/screen/alert/verygross
 	name = "Очень мерзко"
 	desc = "Вы чувствуете себя не очень хорошо..."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "gross2"
 
 /atom/movable/screen/alert/disgusted
 	name = "ОТВРАЩЕНИЕ"
 	desc = "Вас очень сильно мутит и, кажется, сейчас вас стошнит..."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "gross3"
 
 /atom/movable/screen/alert/hot
@@ -311,14 +311,14 @@
 /atom/movable/screen/alert/hypnosis
 	name = "Гипноз"
 	desc = "Что-то гипнотизирует вас, но вы не уверены, что именно."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "hypnosis"
 	var/phrase
 
 /atom/movable/screen/alert/mind_control
 	name = "Контроль разума"
 	desc = "Ваш разум захвачен! Нажмите, чтобы просмотреть команду контроля разума."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "mind_control"
 	clickable_glow = TRUE
 	var/command
@@ -333,7 +333,7 @@
 	name = "Застрявший предмет"
 	desc = "Что-то застряло в вашей плоти и вызывает сильное кровотечение. Со временем оно может выпасть, но хирургическое вмешательство - \
 		самый безопасный способ. Если готовы рискнуть, то осмотрите себя и нажмите на подчеркнутый пункт, чтобы извлечь предмет."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "embeddedobject"
 	clickable_glow = TRUE
 
@@ -348,7 +348,7 @@
 /atom/movable/screen/alert/negative
 	name = "Отрицательная гравитация"
 	desc = "Вас тянет вверх. Хотя Вам больше не придется беспокоиться о том, что упадете вниз, но можете случайно упасть вверх!"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "negative"
 
 /atom/movable/screen/alert/weightless
@@ -357,19 +357,19 @@
 		стена или решетка, чтобы оттолкнуться, если захотите двигаться. Реактивный ранец обеспечит свободу движений. Пара магбутсов \
 		позволит вам нормально передвигаться по полу. Если их нет, вы можете бросать предметы, пользоваться огнетушителем \
 		или стрелять из оружия, чтобы передвигаться в соответствии с 3-м законом Ньютона."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "weightless"
 
 /atom/movable/screen/alert/highgravity
 	name = "Высокая гравитация"
 	desc = "Вас давит высокая гравитация, из-за чего подбор предметов и передвижение замедлятся."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "paralysis"
 
 /atom/movable/screen/alert/veryhighgravity
 	name = "Сокрушительная гравитация"
 	desc = "Вас давит высокая гравитация, из-за чего подбор предметов и передвижение замедлятся. Также вы чувствуете как ваши кости начинают трещать!"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "paralysis"
 
 /atom/movable/screen/alert/fire
@@ -398,7 +398,7 @@
 
 /atom/movable/screen/alert/give // information set when the give alert is made
 	icon_state = "template"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	clickable_glow = TRUE
 	/// The offer we're linked to, yes this is suspiciously like a status effect alert
 	var/datum/status_effect/offering/offer
@@ -569,7 +569,7 @@
 /atom/movable/screen/alert/succumb
 	name = "Сдаться"
 	desc = "Покиньте этот бренный мир."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_icon = 'icons/mob/simple/mob.dmi'
 	overlay_state = "ghost"
 	clickable_glow = TRUE
@@ -922,7 +922,7 @@
 	name = "Происходит что-то интересное!"
 	desc = "Сюда можно нажать, чтобы посмотреть на происходящее."
 	icon_state = "template"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_PREFS
 	timeout = 30 SECONDS
 	clickable_glow = TRUE
 	/// Weakref to the target atom to use the action on
@@ -950,7 +950,7 @@
 /atom/movable/screen/alert/poll_alert
 	name = "Ищем кандидатов"
 	icon_state = "template"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_PREFS
 	timeout = 30 SECONDS
 	ghost_screentips = TRUE
 	/// If true you need to call START_PROCESSING manually
@@ -1102,7 +1102,7 @@
 /atom/movable/screen/alert/buckled
 	name = "Пристёгнуты"
 	desc = "Вы были к чему-то пристёгнуты. Нажмите на это уведомление, чтобы отстегнуться, если вы не в наручниках."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "buckled"
 	click_master = FALSE
 	clickable_glow = TRUE
@@ -1122,7 +1122,7 @@
 
 /atom/movable/screen/alert/restrained
 	icon_state = "template"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	clickable_glow = TRUE
 
 /atom/movable/screen/alert/restrained/handcuffed
@@ -1150,7 +1150,7 @@
 		return living_owner.resist_restraints()
 
 /atom/movable/screen/alert/shoes
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_icon = /obj/item/clothing/shoes/sneakers::icon
 	overlay_state = /obj/item/clothing/shoes/sneakers::icon_state
 	clickable_glow = TRUE
@@ -1171,7 +1171,7 @@
 /atom/movable/screen/alert/shoes/untied
 	name = "Развязаны шнурки"
 	desc = "Ваши шнурки на обуви развязаны! Нажмите на уведомление или обувь, чтобы завязать их."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_icon = /obj/item/clothing/shoes/sneakers::icon
 	overlay_state = /obj/item/clothing/shoes/sneakers::icon_state
 
@@ -1182,7 +1182,7 @@
 /atom/movable/screen/alert/unpossess_object
 	name = "Отвязаться"
 	desc = "Вы вселились в объект. Нажмите на уведомление, чтобы отвязаться от предмета."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "buckled"
 	clickable_glow = TRUE
 
@@ -1213,10 +1213,15 @@
 		for(var/i in 1 to alerts.len)
 			screenmob.client.screen -= alerts[alerts[i]]
 		return TRUE
+	var/user_pref_hud = ui_style2icon(mymob.client?.prefs?.read_preference(/datum/preference/choiced/ui_style))
 	for(var/i in 1 to length(alerts))
 		var/atom/movable/screen/alert/alert = alerts[alerts[i]]
-		if(alert.use_user_hud_icon)
-			alert.icon = ui_style
+		switch(alert.use_user_hud_icon)
+			if(USER_HUD_STYLE_INHERIT)
+				alert.icon = ui_style
+			if(USER_HUD_STYLE_PREFS)
+				if(user_pref_hud)
+					alert.icon = user_pref_hud
 		alert.screen_loc = get_ui_alert_placement(i)
 		screenmob.client.screen |= alert
 	if(!viewmob)

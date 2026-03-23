@@ -234,7 +234,7 @@ const GuideSection = () => {
         </Stack.Item>
         <Stack.Item>
           <span style={hereticRed}>ВНИМАНИЕ!</span>
-          <br /> При накоплении в общем<b>{points_to_aura}</b>&nbsp;
+          <br /> При накоплении в общем <b>{points_to_aura}</b>&nbsp;
           <span style={hereticBlue}> очков знаний,</span>
           &nbsp; вас окружит&nbsp;
           <span style={hereticPurple}>энергия Мансуса</span>. Для получения ауры
@@ -246,7 +246,7 @@ const GuideSection = () => {
           <br />
           Держите в уме, что использование&nbsp;
           <span style={hereticPurple}> кодекса Цикатрикс</span> при поглощении
-          &nbsp;<span style={hereticYellow}> разлома</span>
+          &nbsp;<span style={hereticYellow}>разлома </span>
             сделает довольно очевидной, вашу приверженность еретическому пути
         </Stack.Item>
       </Stack>
