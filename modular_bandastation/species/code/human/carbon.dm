@@ -6,3 +6,6 @@
 
 /mob/living/carbon/human/species/skrell
 	race = /datum/species/skrell
+
+/mob/living/carbon/human/species/ipc
+	race = /datum/species/ipc
