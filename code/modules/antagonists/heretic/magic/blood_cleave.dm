@@ -44,7 +44,7 @@
 			span_danger("Ваши вены лопаются изнутри, и нечестивое пламя вырывается из крови!")
 		)
 
-		var/obj/item/bodypart/bodypart = pick(victim.bodyparts)
+		var/obj/item/bodypart/bodypart = pick(victim.get_bodyparts())
 		var/datum/wound/slash/flesh/crit_wound = new wound_type()
 		crit_wound.apply_wound(bodypart)
 		victim.apply_damage(20, BURN, wound_bonus = CANT_WOUND)
