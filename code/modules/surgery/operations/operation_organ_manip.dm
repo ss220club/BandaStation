@@ -106,7 +106,7 @@
 		var/datum/radial_menu_choice/option = LAZYACCESS(cached_organ_manipulation_options, "[organ.type]_remove")
 		if(!option)
 			option = new()
-			option.image = get_generic_limb_radial_image(limb.body_zone)
+			option.image = image('icons/hud/surgery_radial.dmi', "base")
 			option.image.overlays += add_radial_overlays(organ.type)
 			option.name = "Извлечь [initial(organ.name)]."
 			option.info = "Извлечь [initial(organ.name)] из пациента."
@@ -120,7 +120,7 @@
 	var/datum/radial_menu_choice/option = LAZYACCESS(cached_organ_manipulation_options, "[organ.type]_insert")
 	if(!option)
 		option = new()
-		option.image = get_generic_limb_radial_image(limb.body_zone)
+		option.image = image('icons/hud/surgery_radial.dmi', "base")
 		option.image.overlays += add_radial_overlays(list(image('icons/hud/screen_gen.dmi', "arrow_large_still"), organ.type))
 		option.name = "Вставить [initial(organ.name)]."
 		option.info = "Вставить [initial(organ.name)] в пациента."

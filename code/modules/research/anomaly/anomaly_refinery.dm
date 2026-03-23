@@ -73,41 +73,49 @@
 	var/radius = clamp(round(MIN_RADIUS_REQUIRED + radius_increase_per_core * already_made, 1), MIN_RADIUS_REQUIRED, MAX_RADIUS_REQUIRED)
 	return radius
 
-/obj/machinery/research/anomaly_refinery/attackby(obj/item/tool, mob/living/user, list/modifiers, list/attack_modifiers)
+/obj/machinery/research/anomaly_refinery/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(active)
 		to_chat(user, span_warning("Вы не можете вставить [tool.declent_ru(ACCUSATIVE)] в [src.declent_ru(ACCUSATIVE)], пока [ru_p_they()] активен в данный момент."))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(istype(tool, /obj/item/raw_anomaly_core))
 		if(inserted_core)
 			to_chat(user, span_warning("Уже есть ядро в [src.declent_ru(ACCUSATIVE)]."))
-			return
+			return ITEM_INTERACT_BLOCKING
+
 		if(!user.transferItemToLoc(tool, src))
 			to_chat(user, span_warning("[capitalize(tool.declent_ru(NOMINATIVE))] застревает в вашей руке."))
-			return
+			return ITEM_INTERACT_BLOCKING
+
 		var/obj/item/raw_anomaly_core/raw_core = tool
 		if(!get_required_radius(raw_core.anomaly_type))
 			say("К сожалению, из-за уменьшения запасов сжатой аномальной материи, [raw_core.declent_ru(ACCUSATIVE)] и любые ядра такого типа больше не имеют достаточного уровня качества для сжатия в рабочее ядро.")
-			return
+			return ITEM_INTERACT_BLOCKING
+
 		inserted_core = raw_core
 		to_chat(user, span_notice("Вы вставляете [raw_core.declent_ru(ACCUSATIVE)] в [src.declent_ru(ACCUSATIVE)]."))
-		return
-	if(istype(tool, /obj/item/transfer_valve))
-		if(inserted_bomb)
-			to_chat(user, span_warning("Уже есть бомба в [src.declent_ru(ACCUSATIVE)]."))
-			return
-		var/obj/item/transfer_valve/valve = tool
-		if(!valve.ready())
-			to_chat(user, span_warning("[capitalize(valve.declent_ru(NOMINATIVE))] не завершён."))
-			return
-		if(!user.transferItemToLoc(tool, src))
-			to_chat(user, span_warning("[capitalize(tool.declent_ru(NOMINATIVE))] застревает в вашей руке."))
-			return
-		inserted_bomb = tool
-		tank_to_target = inserted_bomb.tank_two
-		to_chat(user, span_notice("Вы вставляете [tool.declent_ru(ACCUSATIVE)] в [src.declent_ru(ACCUSATIVE)]."))
-		return
-	update_appearance()
-	return ..()
+		return ITEM_INTERACT_SUCCESS
+
+	if(!istype(tool, /obj/item/transfer_valve))
+		return NONE
+
+	if(inserted_bomb)
+		to_chat(user, span_warning("Уже есть бомба в [src.declent_ru(ACCUSATIVE)]."))
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/transfer_valve/valve = tool
+	if(!valve.ready())
+		to_chat(user, span_warning("[capitalize(valve.declent_ru(NOMINATIVE))] не завершён."))
+		return ITEM_INTERACT_BLOCKING
+
+	if(!user.transferItemToLoc(tool, src))
+		to_chat(user, span_warning("[capitalize(tool.declent_ru(NOMINATIVE))] застревает в вашей руке."))
+		return ITEM_INTERACT_BLOCKING
+
+	inserted_bomb = tool
+	tank_to_target = inserted_bomb.tank_two
+	to_chat(user, span_notice("Вы вставляете [tool] into [src]"))
+	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/research/anomaly_refinery/wrench_act(mob/living/user, obj/item/tool)
 	. = ..()
