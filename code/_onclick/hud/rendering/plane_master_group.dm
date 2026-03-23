@@ -167,8 +167,15 @@
 
 		var/visual_offset = plane.offset - new_offset
 
+		// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+		// why not this TG??
+		if(visual_offset < 0 || (multiz_boundary != MULTIZ_PERFORMANCE_DISABLE && visual_offset > multiz_boundary))
+#else
 		// Basically uh, if we're showing something down X amount of levels, or up any amount of levels
 		if(multiz_boundary != MULTIZ_PERFORMANCE_DISABLE && (visual_offset > multiz_boundary || visual_offset < 0))
+#endif
+		// BANDASTATION MOD END: LOS
 			plane.outside_bounds(our_mob)
 		else if(plane.is_outside_bounds)
 			plane.inside_bounds(our_mob)
