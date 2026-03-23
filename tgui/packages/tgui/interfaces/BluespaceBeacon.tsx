@@ -24,7 +24,7 @@ type Data = {
 
 const POWER_MUL = 1e6;
 
-export const BluespaceBeacon = () => {
+export function BluespaceBeacon() {
   const { act, data } = useBackend<Data>();
   const {
     inputLevelMax,
