@@ -53,6 +53,8 @@
 #define BEACON_POINTS_PER_W 4e-6
 #define BEACON_BASE_POINTS 2
 #define BEACON_NEAREST_MW(power) ((power) - (power) % (1 MEGA WATTS))
+#define BEACON_RANDOM_SPAWN_CHANCE 5
+#define BEACON_RANDOM_SPAWN_RADIUS 7
 
 /obj/machinery/power/bluespace_beacon
 	name = "Маяк реальности"
@@ -96,12 +98,42 @@
 	var/input_level = 50 KILO WATTS
 	/// UI cap for input target.
 	var/input_level_max = 30 MEGA WATTS
+	/// Internal radio for engineering anomaly notifications.
+	var/obj/item/radio/radio
+	/// Encryption key used by the internal radio.
+	var/radio_key = /obj/item/encryptionkey/headset_eng
+	/// Engineering channel key.
+	var/engineering_channel = RADIO_CHANNEL_ENGINEERING
+	/// Weighted random outcomes that may appear around the beacon while charging.
+	var/static/list/random_spawn_weights = list(
+		/mob/living/basic/pet/cat = 6,
+		/mob/living/basic/pet/dog/corgi = 4,
+		/mob/living/basic/pet/fox = 3,
+		/mob/living/basic/pet/penguin = 2,
+		/mob/living/basic/possum = 2,
+		/obj/item/stack/ore/bluespace_crystal = 8,
+		/obj/item/stack/sheet/mineral/plasma = 6,
+		/obj/item/food/grown/banana = 4,
+		/obj/item/food/pie/cream = 2,
+	)
 
 /obj/machinery/power/bluespace_beacon/should_have_node()
 	return TRUE
 
 /obj/machinery/power/bluespace_beacon/Initialize(mapload)
 	. = ..()
+
+	radio = new(src)
+	radio.keyslot = new radio_key
+	radio.set_on(TRUE)
+	radio.set_broadcasting(TRUE)
+	radio.set_listening(FALSE)
+	radio.recalculateChannels()
+	if(!islist(radio.channels) || !(engineering_channel in radio.channels))
+		if(RADIO_CHANNEL_ENGINEERING in radio.channels)
+			engineering_channel = RADIO_CHANNEL_ENGINEERING
+		else if(length(radio.channels))
+			engineering_channel = radio.channels[1]
 
 	var/list/occupied = list()
 	for(var/direct in list(EAST, WEST, SOUTHEAST, SOUTHWEST, NORTH, NORTHWEST, NORTHEAST))
@@ -119,6 +151,7 @@
 
 /obj/machinery/power/bluespace_beacon/Destroy()
 	STOP_PROCESSING(SSmachines, src)
+	QDEL_NULL(radio)
 	for(var/obj/structure/filler/filler as anything in fillers)
 		qdel(filler)
 	fillers.Cut()
@@ -242,7 +275,7 @@
 	if(completion_announced)
 		return
 	completion_announced = TRUE
-	priority_announce(completion_announcement_text, sound = "sound/effects/magic/lightning_chargeup.ogg", sender_override = "Система оповещений Маяка")
+	priority_announce(completion_announcement_text, sound = 'sound/effects/magic/lightning_chargeup.ogg', sender_override = "Система оповещений Маяка")
 
 /obj/machinery/power/bluespace_beacon/proc/lock_to_base_consumption()
 	if(input_locked)
@@ -251,6 +284,45 @@
 	input_level = post_completion_input_level
 	input_level_max = post_completion_input_level
 	update_static_data_for_all_viewers()
+
+/obj/machinery/power/bluespace_beacon/proc/get_random_spawn_turf()
+	var/list/possible_turfs = list()
+	for(var/turf/target_turf as anything in RANGE_TURFS(BEACON_RANDOM_SPAWN_RADIUS, src))
+		if(target_turf == get_turf(src))
+			continue
+		if(target_turf.density || isspaceturf(target_turf))
+			continue
+		var/is_blocked = FALSE
+		for(var/atom/movable/thing as anything in target_turf)
+			if(thing.density)
+				is_blocked = TRUE
+				break
+		if(is_blocked)
+			continue
+		possible_turfs += target_turf
+	if(!length(possible_turfs))
+		return null
+	return pick(possible_turfs)
+
+/obj/machinery/power/bluespace_beacon/proc/try_spawn_random_effect()
+	if(input_locked || current_charge >= maximum_charge)
+		return
+	if(!prob(BEACON_RANDOM_SPAWN_CHANCE))
+		return
+	var/turf/spawn_turf = get_random_spawn_turf()
+	if(!spawn_turf)
+		return
+	var/spawn_type = pick_weight(random_spawn_weights)
+	if(!spawn_type)
+		return
+	var/atom/movable/spawned = new spawn_type(spawn_turf)
+	var/spawned_name = spawned?.name || "неизвестный объект"
+	if(length(radio?.channels) && !(engineering_channel in radio.channels))
+		if(RADIO_CHANNEL_ENGINEERING in radio.channels)
+			engineering_channel = RADIO_CHANNEL_ENGINEERING
+		else
+			engineering_channel = radio.channels[1]
+	radio?.talk_into(src, "Внимание: зафиксирован локальный аномальный выброс. Объект: [spawned_name].", engineering_channel)
 
 /obj/machinery/power/bluespace_beacon/process(seconds_per_tick)
 	if(machine_stat & (BROKEN|NOPOWER) || !anchored)
@@ -280,10 +352,13 @@
 
 	if(actual_power_usage > 0)
 		mined_points = min(BEACON_BASE_POINTS * (actual_power_usage / (50 KILO WATTS)), 20) + actual_power_usage * BEACON_POINTS_PER_W
+		var/previous_charge = current_charge
 		current_charge = min(maximum_charge, current_charge + mined_points)
 		if(current_charge >= maximum_charge)
 			lock_to_base_consumption()
 			announce_completion()
+		else if(current_charge > previous_charge)
+			try_spawn_random_effect()
 	else
 		mined_points = 0
 
@@ -344,3 +419,5 @@
 #undef BEACON_POINTS_PER_W
 #undef BEACON_BASE_POINTS
 #undef BEACON_NEAREST_MW
+#undef BEACON_RANDOM_SPAWN_CHANCE
+#undef BEACON_RANDOM_SPAWN_RADIUS
