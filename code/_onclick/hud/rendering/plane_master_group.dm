@@ -83,6 +83,14 @@
 
 /// This is mostly a proc so it can be overriden by popups, since they have unique behavior they want to do
 /datum/plane_master_group/proc/show_plane(atom/movable/screen/plane_master/plane)
+	// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+	if(our_hud?.mymob && (istype(plane, /atom/movable/screen/plane_master/los_master) || istype(plane, /atom/movable/screen/plane_master/los_visible_plane)))
+		if(plane.offset != our_hud.current_plane_offset)
+			plane.hide_from(our_hud.mymob)
+			return
+#endif
+	// BANDASTATION MOD END: LOS
 	plane.show_to(our_hud.mymob)
 
 /// Nice wrapper for the "[]"ing
@@ -189,6 +197,12 @@
 			continue
 
 		animate(plane, transform = offsets[visual_offset + offset_offset], 0.05 SECONDS, easing = LINEAR_EASING)
+
+	// BANDASTATION MOD START: LOS
+#ifdef LOS_ENABLED
+	sync_los_plane_visibility(source)
+#endif
+	// BANDASTATION MOD END: LOS
 
 /// Holds plane masters for popups, like camera windows
 /// Note: We do not scale this plane, even though we could
