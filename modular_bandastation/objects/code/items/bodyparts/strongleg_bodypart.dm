@@ -1,9 +1,9 @@
 /// Component for Strongleg prosthesis combat abilities
 /datum/component/strongleg_combat
-	var/kick_knockback_distance = 2
+	var/kick_knockback_distance
 	var/is_active = FALSE
 
-/datum/component/strongleg_combat/Initialize(kick_knockback_distance = 2)
+/datum/component/strongleg_combat/Initialize(kick_knockback_distance = 3)
 	. = ..()
 	src.kick_knockback_distance = kick_knockback_distance
 

@@ -14,11 +14,11 @@
 
 /// Component for Strongarm prosthesis combat abilities
 /datum/component/strongarm_combat
-	var/knockback_distance = 3
-	var/shove_throw_distance = 5
-	var/shove_throw_speed = 3
-	var/shove_knockdown_time = 3 SECONDS
-	var/is_active = FALSE
+	var/knockback_distance
+	var/shove_throw_distance
+	var/shove_throw_speed
+	var/shove_knockdown_time
+	var/is_active
 
 /datum/component/strongarm_combat/Initialize(
 	knockback_distance = 3,
