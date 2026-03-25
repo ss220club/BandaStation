@@ -12,7 +12,7 @@
 	if(!isliving(user))
 		return FALSE
 	if(locate(martial) in user.martial_arts)
-		to_chat(user, span_warning("Вы уже освоили [declent_ru(martial_name, ACCUSATIVE)]!"))
+		to_chat(user, span_warning("Вы уже освоили всё из [src.declent_ru(GENITIVE)]!"))
 		return FALSE
 	return TRUE
 
