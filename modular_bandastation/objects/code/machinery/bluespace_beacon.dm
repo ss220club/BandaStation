@@ -576,7 +576,7 @@
 	if(!spawn_type)
 		return
 	var/atom/movable/spawned = new spawn_type(spawn_turf)
-	var/spawned_name = spawned?.name || "неизвестный объект"
+	var/spawned_name = spawned?.declent_ru(NOMINATIVE) || spawned?.name || "неизвестный объект"
 	radio_engineering_notice("Внимание: зафиксирован локальный аномальный выброс. Объект: [spawned_name].")
 
 	try_trigger_hostile_portal_event()
