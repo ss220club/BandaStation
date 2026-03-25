@@ -2,7 +2,7 @@
 	var/static/list/factions = list(
 		"Lavaland fauna" = list(
 			"weight" = 5,
-			"portal_name" = "разлом фауны Лаваленда",
+			"portal_name" = "lavaland fauna rift",
 			"spawn_time" = 20 SECONDS,
 			"max_mobs" = 6,
 			"mob_types" = list(
@@ -16,7 +16,7 @@
 		),
 		"Netherworld" = list(
 			"weight" = 3,
-			"portal_name" = "разлом Незера",
+			"portal_name" = "netherworld breach",
 			"spawn_time" = 18 SECONDS,
 			"max_mobs" = 6,
 			"mob_types" = list(
@@ -29,7 +29,7 @@
 		),
 		"Carp migration" = list(
 			"weight" = 4,
-			"portal_name" = "карповый разлом",
+			"portal_name" = "carp rift",
 			"spawn_time" = 15 SECONDS,
 			"max_mobs" = 7,
 			"mob_types" = list(
@@ -94,7 +94,7 @@
 	beacon_owner?.unregister_active_portal(src)
 
 /obj/structure/spawner/bluespace_beacon_event
-	name = "нестабильный блюспейс-портал"
+	name = "unstable bluespace portal"
 	desc = "Яростно флуктуирующий разрыв в реальности."
 	icon = 'icons/mob/simple/lavaland/nest.dmi'
 	icon_state = "nether"

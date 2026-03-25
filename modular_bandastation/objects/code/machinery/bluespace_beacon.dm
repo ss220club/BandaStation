@@ -1,10 +1,10 @@
 /datum/station_goal/bluespace_beacon
-	name = "Маяк реальности"
+	name = "Reality beacon"
 	var/goal = 45000
 	VAR_PRIVATE/cached_points
 
 /obj/item/circuitboard/machine/bluespace_beacon
-	name = "Маяк реальности"
+	name = "Reality beacon board"
 	greyscale_colors = CIRCUIT_COLOR_COMMAND
 	build_path = /obj/machinery/power/bluespace_beacon
 	specific_parts = TRUE
@@ -15,24 +15,24 @@
 	)
 
 /datum/supply_pack/engineering/bluespace_beacon
-	name = "Части маяка реальности"
+	name = "Reality beacon parts"
 	desc = "Ящик с платой маяка реальности"
 	cost = CARGO_CRATE_VALUE * 24
 	order_flags = ORDER_SPECIAL
 	access_view = ACCESS_COMMAND
 	contains = list(/obj/item/circuitboard/machine/bluespace_beacon)
-	crate_name = "Ящик с частями маяка реальности"
+	crate_name = "reality beacon parts crate"
 
 /datum/station_goal/bluespace_beacon/get_report()
 	return {"<b>Установка маяка реальности</b><br>
-	Общими усилиями НаноТрейзен было разработано устройство Маяк Реальности.
-	Оно удерживает нашу реальность от поглощения опасной аномалией Горизонт, что может поглотить всю Вселенную.<br>
-	Данная станция находится в зоне досягаемости так называемой Зоны сдерживания Горизонта и входит в кольцо содержания, поэтому Центральным Командованием принято решение об установке на активе Маяка.
-	Установка и запуск данного изобретения - крайне важная задача не только для НаноТрейзен, но и всех разумных существ.
+	Общими усилиями Нанотрейзен было разработано устройство маяк реальности.
+	Оно удерживает нашу реальность от поглощения опасной аномалией Горизонт, что может поглотить всю вселенную.<br>
+	Данная станция находится досягаемости так называемой зоны сдерживания "Горизонта" и входит в кольцо содержания, поэтому Центральным Командованием принято решение об установке на активе Маяка.
+	Установка и запуск данного изобретения - крайне важная задача не только для Нанотрейзен, но и всех разумных существ.
 	<br><br>
 	Учтите, что устройство является экспериментальным и устанавливается из-за крайней необходимости. При его работе возможны неожиданные явления.
 	<br>
-	Департамент активов НаноТрейзен"}
+	Департамент активов Нанотрейзен"}
 
 /datum/station_goal/bluespace_beacon/on_report()
 	var/datum/supply_pack/P = SSshuttle.supply_packs[/datum/supply_pack/engineering/bluespace_beacon]
@@ -59,19 +59,19 @@
 #define BEACON_PORTAL_CHANCE_MIN 2
 #define BEACON_PORTAL_CHANCE_MAX 35
 #define BEACON_DEMONIC_INCURSION_CHANCE_MIN 1
-#define BEACON_DEMONIC_INCURSION_CHANCE_MAX 12
+#define BEACON_DEMONIC_INCURSION_CHANCE_MAX 1
 #define BEACON_DEMONIC_INCURSION_PORTALS_MIN 1
 #define BEACON_DEMONIC_INCURSION_PORTALS_MAX 2
-#define BEACON_GLOBAL_INVASION_CHANCE_MIN 15
-#define BEACON_GLOBAL_INVASION_CHANCE_MAX 95
+#define BEACON_GLOBAL_INVASION_CHANCE_MIN 1
+#define BEACON_GLOBAL_INVASION_CHANCE_MAX 6
 #define BEACON_GLOBAL_INVASION_PORTALS_MIN 2
 #define BEACON_GLOBAL_INVASION_PORTALS_MAX 8
 
 /obj/machinery/power/bluespace_beacon
-	name = "Маяк реальности"
+	name = "Reality beacon"
 	desc = "Стационарное устройство, предназначенное для локализации и подавления \
 	экспансии аномальных зон с нарушенной онтологической консистентностью. Стабилизирует объективную действительность от \
-	уничтожения последней опасной аномалией Горизонт."
+	уничтожения последней опасной аномалией «Горизонт»."
 	circuit = /obj/item/circuitboard/machine/bluespace_beacon
 	icon = 'modular_bandastation/objects/icons/obj/machines/bluespace_tap.dmi'
 	icon_state = "bluespace_tap"
@@ -98,7 +98,7 @@
 	var/completion_announced = FALSE
 	/// Completion announcement message.
 	var/completion_announcement_text = "Устройство полностью заряжено и готово к работе. Переход на пассивное питание. \
-	Модулирование беспричинного изменения реальности завершено. Инициализация поля подавления Горизонта."
+	Модулирование беспричинного изменения реальности завершено. Инициализация поля подавления «Горизонта»."
 	/// Locked base draw after full completion.
 	var/post_completion_input_level = 2 MEGA WATTS
 	/// Whether input controls are locked.
@@ -337,7 +337,7 @@
 		return
 	priority_announce(
 		"Массовое вторжение локализовано. Блокировка протоколов блюспейс перемещения снята.",
-		sender_override = "Система оповещений Маяка",
+		sender_override = "Система оповещений маяка",
 		has_important_message = TRUE,
 		color_override = "green",
 	)
@@ -362,7 +362,7 @@
 	if(completion_announced)
 		return
 	completion_announced = TRUE
-	priority_announce(completion_announcement_text, sound = 'sound/effects/magic/lightning_chargeup.ogg', sender_override = "Система оповещений Маяка")
+	priority_announce(completion_announcement_text, sound = 'sound/effects/magic/lightning_chargeup.ogg', sender_override = "Система оповещений маяка")
 
 /obj/machinery/power/bluespace_beacon/proc/lock_to_base_consumption()
 	if(input_locked)
@@ -449,9 +449,9 @@
 	return clamp(target_count, BEACON_GLOBAL_INVASION_PORTALS_MIN, BEACON_GLOBAL_INVASION_PORTALS_MAX)
 
 /obj/machinery/power/bluespace_beacon/proc/announce_global_invasion()
-	var/announcement_text = "Фиксируется каскадный пробой реальности. Обнаружен прорыв ткани реальности. Фиксация числинности сущностей иных миров невозможна. \
+	var/announcement_text = "Обнаружен прорыв ткани реальности. Фиксация числинности сущностей иных миров невозможна. \
 	Протоколы блюспейс перемещений заблокированы во избежание разрыва объективной действительности и пространственно-временного континуума."
-	var/announcement_sender = "Система оповещений Маяка"
+	var/announcement_sender = "Система оповещений маяка"
 	priority_announce(
 		announcement_text,
 		sound = 'modular_bandastation/objects/sounds/bsb_alarm.ogg',

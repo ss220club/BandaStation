@@ -34061,3 +34061,75 @@ accusative = "блюспейс разлом"
 instrumental = "блюспейс разломом"
 prepositional = "блюспейс разломе"
 gender = "male"
+
+["Reality beacon"]
+nominative = "маяк реальности"
+genitive = "маяка реальности"
+dative = "маяку реальности"
+accusative = "маяк реальности"
+instrumental = "маяком реальности"
+prepositional = "маяке реальности"
+gender = "male"
+
+["Reality beacon board"]
+nominative = "плата маяка реальности"
+genitive = "платы маяка реальности"
+dative = "плате маяка реальности"
+accusative = "плату маяка реальности"
+instrumental = "платой маяка реальности"
+prepositional = "плате маяка реальности"
+gender = "female"
+
+["reality beacon parts crate"]
+nominative = "ящик с частями маяка реальности"
+genitive = "ящика с частями маяка реальности"
+dative = "ящику с частями маяка реальности"
+accusative = "ящик с частями маяка реальности"
+instrumental = "ящиком с частями маяка реальности"
+prepositional = "ящике с частями маяка реальности"
+gender = "male"
+
+["unstable bluespace portal"]
+nominative = "нестабильный блюспейс-портал"
+genitive = "нестабильного блюспейс-портала"
+dative = "нестабильному блюспейс-порталу"
+accusative = "нестабильный блюспейс-портал"
+instrumental = "нестабильным блюспейс-порталом"
+prepositional = "нестабильном блюспейс-портале"
+gender = "male"
+
+["lavaland fauna rift"]
+nominative = "разлом фауны Лаваленда"
+genitive = "разлома фауны Лаваленда"
+dative = "разлому фауны Лаваленда"
+accusative = "разлом фауны Лаваленда"
+instrumental = "разломом фауны Лаваленда"
+prepositional = "разломе фауны Лаваленда"
+gender = "male"
+
+["netherworld breach"]
+nominative = "разлом Незера"
+genitive = "разлома Незера"
+dative = "разлому Незера"
+accusative = "разлом Незера"
+instrumental = "разломом Незера"
+prepositional = "разломе Незера"
+gender = "male"
+
+["carp rift"]
+nominative = "карповый разлом"
+genitive = "карпового разлома"
+dative = "карповому разлому"
+accusative = "карповый разлом"
+instrumental = "карповым разломом"
+prepositional = "карповом разломе"
+gender = "male"
+
+["Reality beacon parts"]
+nominative = "части маяка реальности"
+genitive = "частей маяка реальности"
+dative = "частям маяка реальности"
+accusative = "части маяка реальности"
+instrumental = "частями маяка реальности"
+prepositional = "частях маяка реальности"
+gender = "plural"

@@ -40,7 +40,7 @@ export function BluespaceBeacon() {
     (charge >= 100 && 'good') || (inputting && 'average') || 'bad';
 
   return (
-    <Window width={340} height={300}>
+    <Window width={440} height={300}>
       <Window.Content>
         <Section title="Статус зарядки">
           <ProgressBar
@@ -145,4 +145,4 @@ export function BluespaceBeacon() {
       </Window.Content>
     </Window>
   );
-};
+}
