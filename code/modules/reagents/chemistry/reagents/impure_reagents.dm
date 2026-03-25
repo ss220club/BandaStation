@@ -121,6 +121,12 @@
 
 	human_thing.apply_status_effect(/datum/status_effect/reagent_effect/freeze, type)
 
+// BANDASTATION MOD START: Cryogelidia fix
+// /datum/reagent/inverse/cryostylane/on_mob_end_metabolize(mob/living/affected_mob)
+// 	. = ..()
+// 	affected_mob.remove_status_effect(/datum/status_effect/reagent_effect/freeze)
+// BANDASTATION MOD END: Cryogelidia fix
+
 /datum/reagent/inverse/cryostylane/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
 	metabolization_rate += 0.05 * REAGENTS_METABOLISM //speed up our metabolism over time. Chop chop.
