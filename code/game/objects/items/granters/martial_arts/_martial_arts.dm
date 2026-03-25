@@ -17,7 +17,7 @@
 	return TRUE
 
 /obj/item/book/granter/martial/on_reading_start(mob/user)
-	to_chat(user, span_notice("Вы начинаете читать [declent_ru(martial_name, ACCUSATIVE)]..."))
+	to_chat(user, span_notice("Вы начинаете читать [src.declent_ru(ACCUSATIVE)]..."))
 	return TRUE
 
 /obj/item/book/granter/martial/on_reading_finished(mob/user)
