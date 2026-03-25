@@ -231,6 +231,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	/* all inputs should be fully figured out past this point */
 
 	var/processed_input = apply_message_emphasis(input) //This MUST be done first so that we don't get clipped by spans
+	processed_input = emoji_parse(processed_input)
 	processed_input = attach_spans(processed_input, spans)
 
 	var/processed_say_mod = apply_message_emphasis(say_mod)

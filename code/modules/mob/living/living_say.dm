@@ -169,6 +169,8 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	if(!try_speak(original_message, ignore_spam, forced, filterproof))
 		return
 
+	message = emoji_append_random(message)
+
 	language ||= message_mods[LANGUAGE_EXTENSION] || get_selected_language()
 
 	var/succumbed = FALSE
