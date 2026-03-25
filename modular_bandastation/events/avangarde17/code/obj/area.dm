@@ -249,6 +249,64 @@
 	name = "Поликлиника - Подсобка"
 	icon_state = "awaycontent18"
 
+// MARK: Склад
+
+/area/awaymission/avangarde17/inside/cargo
+	name = "Склад - Почтовое отделение"
+	icon_state = "awaycontent1"
+
+/area/awaymission/avangarde17/inside/cargo/closet
+	name = "Склад - Подсобка"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/cargo/hangar
+	name = "Склад - Ангар (первый этаж)"
+	icon_state = "awaycontent3"
+
+/area/awaymission/avangarde17/inside/cargo/hangar/second_floor
+	name = "Склад - Ангар (второй этаж)"
+	icon_state = "awaycontent4"
+
+/area/awaymission/avangarde17/inside/cargo/toilet
+	name = "Склад - Уборная"
+	icon_state = "awaycontent5"
+
+/area/awaymission/avangarde17/inside/cargo/elevator
+	name = "Склад - Лифт"
+	icon_state = "awaycontent6"
+
+/area/awaymission/avangarde17/inside/cargo/qm
+	name = "Склад - Кабинет завхоза"
+	icon_state = "awaycontent7"
+
+/area/awaymission/avangarde17/inside/cargo/storage/
+	name = "Склад - Хранилище (первый этаж)"
+	icon_state = "awaycontent8"
+
+/area/awaymission/avangarde17/inside/cargo/storage/second_floor
+	name = "Склад - Хранилище (второй этаж)"
+	icon_state = "awaycontent9"
+
+/area/awaymission/avangarde17/inside/cargo/storage/minerals
+	name = "Склад - Хранилище ресурсов"
+	icon_state = "awaycontent10"
+
+/area/awaymission/avangarde17/inside/cargo/staff
+	name = "Склад - Комната отдыха"
+	icon_state = "awaycontent11"
+
+/area/awaymission/avangarde17/inside/cargo/bitrun
+	name = "Склад - Бегущие по потоку"
+	icon_state = "awaycontent12"
+
+/area/awaymission/avangarde17/inside/cargo/miners
+	name = "Склад - Шахтёрский отдел"
+	icon_state = "awaycontent13"
+
+/area/awaymission/avangarde17/inside/cargo/miners/shaft
+	name = "Склад - Выход к шахте"
+	icon_state = "awaycontent14"
+
 // MARK: Электростанция
 
 /area/awaymission/avangarde17/inside/reactor
@@ -502,356 +560,247 @@
 	name = "ГРК-4 - Гараж"
 	icon_state = "awaycontent19"
 
-// MARK: Дом 1 - Подъезд 1
-/area/awaymission/avangarde17/inside/house_1
-	name = "Советская 2 - Подъезд 1"
+// MARK: Советская Д 1 П 1
+
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_1
+	name = "Советская - 1 - Подъезд 1 (первый этаж)"
 	icon_state = "awaycontent1"
 
-/area/awaymission/avangarde17/inside/house_1/first_apartment
-	name = "Этаж 1 - Квартира 1"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_1/apartment_1
+	name = "Советская - 1 - Подъезд 1, Этаж 1, Квартира 1"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_1/apartment_2
+	name = "Советская - 1 - Подъезд 1, Этаж 1, Квартира 2"
 	icon_state = "awaycontent3"
 
-/area/awaymission/avangarde17/inside/house_1/first_apartment/bedroom
-	name = "Спальня"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_1/second_floor
+	name = "Советская - 1 - Подъезд 1 (второй этаж)"
 	icon_state = "awaycontent4"
 
-/area/awaymission/avangarde17/inside/house_1/first_apartment/bathroom
-	name = "Туалет"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_1/second_floor/apartment_1
+	name = "Советская - 1 - Подъезд 1, Этаж 2, Квартира 1"
 	icon_state = "awaycontent5"
 
-/area/awaymission/avangarde17/inside/house_1/second_apartment
-	name = "Этаж 1 - Квартира 2"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_1/second_apartment/first_bedroom
-	name = "Спальня 1"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_1/second_apartment/second_bedroom
-	name = "Спальня 2"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_1/second_apartment/third_bedroom
-	name = "Спальня 3"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_1/second_floor/apartment_2
+	name = "Советская - 1 - Подъезд 1, Этаж 2, Квартира 2"
 	icon_state = "awaycontent6"
 
-/area/awaymission/avangarde17/inside/house_1/second_apartment/bathroom
-	name = "Туалет"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_1/second_floor/apartment_3
+	name = "Советская - 1 - Подъезд 1, Этаж 2, Квартира 3"
 	icon_state = "awaycontent7"
 
-/area/awaymission/avangarde17/inside/house_1/third_apartment
-	name = "Этаж 2 - Квартира 1"
-	icon_state = "awaycontent3"
+// MARK: Советская Д 1 П 2
 
-/area/awaymission/avangarde17/inside/house_1/third_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_1/third_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_1/fourth_apartment
-	name = "Этаж 2 - Квартира 2"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_1/fourth_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_1/fourth_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_1/fifth_apartment
-	name = "Этаж 2 - Квартира 3"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_1/fifth_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_1/fifth_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-// MARK: Дом 1 - Подъезд 2
-/area/awaymission/avangarde17/inside/house_2
-	name = "Советская 2 - Подъезд 2"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_2
+	name = "Советская - 1 - Подъезд 2 (первый этаж)"
 	icon_state = "awaycontent1"
 
-/area/awaymission/avangarde17/inside/house_2/first_apartment
-	name = "Этаж 1 - Квартира 1"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_2/apartment_1
+	name = "Советская - 1 - Подъезд 2, Этаж 1, Квартира 1"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_2/apartment_2
+	name = "Советская - 1 - Подъезд 2, Этаж 1, Квартира 2"
 	icon_state = "awaycontent3"
 
-/area/awaymission/avangarde17/inside/house_2/first_apartment/bedroom
-	name = "Спальня"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_2/second_floor
+	name = "Советская - 1 - Подъезд 2 (второй этаж)"
 	icon_state = "awaycontent4"
 
-/area/awaymission/avangarde17/inside/house_2/first_apartment/bathroom
-	name = "Туалет"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_2/second_floor/apartment_1
+	name = "Советская - 1 - Подъезд 2, Этаж 2, Квартира 1"
 	icon_state = "awaycontent5"
 
-/area/awaymission/avangarde17/inside/house_2/second_apartment
-	name = "Этаж 1 - Квартира 2"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_2/second_apartment/first_bedroom
-	name = "Спальня 1"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_2/second_apartment/second_bedroom
-	name = "Спальня 2"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_2/second_apartment/third_bedroom
-	name = "Спальня 3"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_2/second_floor/apartment_2
+	name = "Советская - 1 - Подъезд 2, Этаж 2, Квартира 2"
 	icon_state = "awaycontent6"
 
-/area/awaymission/avangarde17/inside/house_2/second_apartment/bathroom
-	name = "Туалет"
+/area/awaymission/avangarde17/inside/living/sovetskaya_1_2/second_floor/apartment_3
+	name = "Советская - 1 - Подъезд 2, Этаж 2, Квартира 3"
 	icon_state = "awaycontent7"
 
-/area/awaymission/avangarde17/inside/house_2/third_apartment
-	name = "Этаж 2 - Квартира 1"
-	icon_state = "awaycontent3"
+// MARK: Ленина Д 1 П 1
 
-/area/awaymission/avangarde17/inside/house_2/third_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_2/third_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_2/fourth_apartment
-	name = "Этаж 2 - Квартира 2"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_2/fourth_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_2/fourth_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_2/fifth_apartment
-	name = "Этаж 2 - Квартира 3"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_2/fifth_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_2/fifth_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-// MARK: Дом 2 - Подъезд 1
-/area/awaymission/avangarde17/inside/house_3
-	name = "Ленина 1 - Подъезд 1"
+/area/awaymission/avangarde17/inside/living/lenina_1_1
+	name = "Ленина - 1 - Подъезд 1 (первый этаж)"
 	icon_state = "awaycontent1"
 
-/area/awaymission/avangarde17/inside/house_3/first_apartment
-	name = "Этаж 1 - Квартира 1"
+/area/awaymission/avangarde17/inside/living/lenina_1_1/apartment_1
+	name = "Ленина - 1 - Подъезд 1, Этаж 1, Квартира 1"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/living/lenina_1_1/apartment_2
+	name = "Ленина - 1 - Подъезд 1, Этаж 1, Квартира 2"
 	icon_state = "awaycontent3"
 
-/area/awaymission/avangarde17/inside/house_3/first_apartment/bedroom
-	name = "Спальня"
+/area/awaymission/avangarde17/inside/living/lenina_1_1/apartment_3
+	name = "Ленина - 1 - Подъезд 1, Этаж 1, Квартира 3"
 	icon_state = "awaycontent4"
 
-/area/awaymission/avangarde17/inside/house_3/first_apartment/bathroom
-	name = "Туалет"
+/area/awaymission/avangarde17/inside/living/lenina_1_1/apartment_4
+	name = "Ленина - 1 - Подъезд 1, Этаж 1, Квартира 4"
 	icon_state = "awaycontent5"
 
-/area/awaymission/avangarde17/inside/house_3/second_apartment
-	name = "Этаж 1 - Квартира 2"
-	icon_state = "awaycontent3"
+/area/awaymission/avangarde17/inside/living/lenina_1_1/second_floor
+	name = "Ленина - 1 - Подъезд 1 (второй этаж)"
+	icon_state = "awaycontent6"
 
-/area/awaymission/avangarde17/inside/house_3/second_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_3/second_apartment/bathroom
-	name = "Туалет"
+/area/awaymission/avangarde17/inside/living/lenina_1_1/second_floor/apartment_1
+	name = "Ленина - 1 - Подъезд 1, Этаж 2, Квартира 1"
 	icon_state = "awaycontent7"
 
-/area/awaymission/avangarde17/inside/house_3/third_apartment
-	name = "Этаж 1 - Квартира 3"
-	icon_state = "awaycontent3"
+/area/awaymission/avangarde17/inside/living/lenina_1_1/second_floor/apartment_2
+	name = "Ленина - 1 - Подъезд 1, Этаж 2, Квартира 2"
+	icon_state = "awaycontent8"
 
-/area/awaymission/avangarde17/inside/house_3/third_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
+/area/awaymission/avangarde17/inside/living/lenina_1_1/second_floor/apartment_3
+	name = "Ленина - 1 - Подъезд 1, Этаж 2, Квартира 3"
+	icon_state = "awaycontent9"
 
-/area/awaymission/avangarde17/inside/house_3/third_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent7"
+/area/awaymission/avangarde17/inside/living/lenina_1_1/second_floor/apartment_4
+	name = "Ленина - 1 - Подъезд 1, Этаж 2, Квартира 4"
+	icon_state = "awaycontent10"
 
-/area/awaymission/avangarde17/inside/house_3/fourth_apartment
-	name = "Этаж 1 - Квартира 4"
-	icon_state = "awaycontent3"
+// MARK: Ленина Д 2 П 1
 
-/area/awaymission/avangarde17/inside/house_3/fourth_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_3/fourth_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent7"
-
-/area/awaymission/avangarde17/inside/house_3/fifth_apartment
-	name = "Этаж 2 - Квартира 1"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_3/fifth_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_3/fifth_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_3/six_apartment
-	name = "Этаж 2 - Квартира 2"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_3/six_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_3/six_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_3/seven_apartment
-	name = "Этаж 2 - Квартира 3"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_3/seven_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_3/seven_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_3/eighth_apartment
-	name = "Этаж 2 - Квартира 4"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_3/eighth_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_3/eighth_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-// MARK: Дом 3 - Подъезд 1
-/area/awaymission/avangarde17/inside/house_4
-	name = "Ленина 1 - Подъезд 1"
+/area/awaymission/avangarde17/inside/living/lenina_2_1
+	name = "Ленина - 2 - Подъезд 1 (первый этаж)"
 	icon_state = "awaycontent1"
 
-/area/awaymission/avangarde17/inside/house_4/first_apartment
-	name = "Этаж 1 - Квартира 1"
+/area/awaymission/avangarde17/inside/living/lenina_2_1/apartment_1
+	name = "Ленина - 2 - Подъезд 1, Этаж 1, Квартира 1"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/living/lenina_2_1/apartment_2
+	name = "Ленина - 2 - Подъезд 1, Этаж 1, Квартира 2"
 	icon_state = "awaycontent3"
 
-/area/awaymission/avangarde17/inside/house_4/first_apartment/bedroom
-	name = "Спальня"
+/area/awaymission/avangarde17/inside/living/lenina_2_1/apartment_3
+	name = "Ленина - 2 - Подъезд 1, Этаж 1, Квартира 3"
 	icon_state = "awaycontent4"
 
-/area/awaymission/avangarde17/inside/house_4/first_apartment/bathroom
-	name = "Туалет"
+/area/awaymission/avangarde17/inside/living/lenina_2_1/apartment_4
+	name = "Ленина - 2 - Подъезд 1, Этаж 1, Квартира 4"
 	icon_state = "awaycontent5"
 
-/area/awaymission/avangarde17/inside/house_4/second_apartment
-	name = "Этаж 1 - Квартира 2"
-	icon_state = "awaycontent3"
+/area/awaymission/avangarde17/inside/living/lenina_2_1/second_floor
+	name = "Ленина - 2 - Подъезд 1 (второй этаж)"
+	icon_state = "awaycontent6"
 
-/area/awaymission/avangarde17/inside/house_4/second_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_4/second_apartment/bathroom
-	name = "Туалет"
+/area/awaymission/avangarde17/inside/living/lenina_2_1/second_floor/apartment_1
+	name = "Ленина - 2 - Подъезд 1, Этаж 2, Квартира 1"
 	icon_state = "awaycontent7"
 
-/area/awaymission/avangarde17/inside/house_4/third_apartment
-	name = "Этаж 1 - Квартира 3"
+/area/awaymission/avangarde17/inside/living/lenina_2_1/second_floor/apartment_2
+	name = "Ленина - 2 - Подъезд 1, Этаж 2, Квартира 2"
+	icon_state = "awaycontent8"
+
+/area/awaymission/avangarde17/inside/living/lenina_2_1/second_floor/apartment_3
+	name = "Ленина - 2 - Подъезд 1, Этаж 2, Квартира 3"
+	icon_state = "awaycontent9"
+
+/area/awaymission/avangarde17/inside/living/lenina_2_1/second_floor/apartment_4
+	name = "Ленина - 2 - Подъезд 1, Этаж 2, Квартира 4"
+	icon_state = "awaycontent10"
+
+// MARK: Лазаря Д 1 П 1
+
+/area/awaymission/avangarde17/inside/living/lazarya_1_1
+	name = "Лазаря - 1 - Подъезд 1 (первый этаж)"
+	icon_state = "awaycontent1"
+
+/area/awaymission/avangarde17/inside/living/lazarya_1_1/apartment_1
+	name = "Лазаря - 1 - Подъезд 1, Этаж 1, Квартира 1"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/living/lazarya_1_1/apartment_2
+	name = "Лазаря - 1 - Подъезд 1, Этаж 1, Квартира 2"
 	icon_state = "awaycontent3"
 
-/area/awaymission/avangarde17/inside/house_4/third_apartment/bedroom
-	name = "Спальня"
+/area/awaymission/avangarde17/inside/living/lazarya_1_1/apartment_3
+	name = "Лазаря - 1 - Подъезд 1, Этаж 1, Квартира 3"
 	icon_state = "awaycontent4"
 
-/area/awaymission/avangarde17/inside/house_4/third_apartment/bathroom
-	name = "Туалет"
+/area/awaymission/avangarde17/inside/living/lazarya_1_1/apartment_4
+	name = "Лазаря - 1 - Подъезд 1, Этаж 1, Квартира 4"
+	icon_state = "awaycontent5"
+
+/area/awaymission/avangarde17/inside/living/lazarya_1_1/second_floor
+	name = "Лазаря - 1 - Подъезд 1 (второй этаж)"
+	icon_state = "awaycontent6"
+
+/area/awaymission/avangarde17/inside/living/lazarya_1_1/second_floor/apartment_1
+	name = "Лазаря - 1 - Подъезд 1, Этаж 2, Квартира 1"
 	icon_state = "awaycontent7"
 
-/area/awaymission/avangarde17/inside/house_4/fourth_apartment
-	name = "Этаж 1 - Квартира 4"
+/area/awaymission/avangarde17/inside/living/lazarya_1_1/second_floor/apartment_2
+	name = "Лазаря - 1 - Подъезд 1, Этаж 2, Квартира 2"
+	icon_state = "awaycontent8"
+
+/area/awaymission/avangarde17/inside/living/lazarya_1_1/second_floor/apartment_3
+	name = "Лазаря - 1 - Подъезд 1, Этаж 2, Квартира 3"
+	icon_state = "awaycontent9"
+
+/area/awaymission/avangarde17/inside/living/lazarya_1_1/second_floor/apartment_4
+	name = "Лазаря - 1 - Подъезд 1, Этаж 2, Квартира 4"
+	icon_state = "awaycontent10"
+
+// MARK: Лазаря Д 2 П 1
+
+/area/awaymission/avangarde17/inside/living/lazarya_2_1
+	name = "Лазаря - 2 - Подъезд 1 (первый этаж)"
+	icon_state = "awaycontent1"
+
+/area/awaymission/avangarde17/inside/living/lazarya_2_1/apartment_1
+	name = "Лазаря - 2 - Подъезд 1, Этаж 1, Квартира 1"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/living/lazarya_2_1/apartment_2
+	name = "Лазаря - 2 - Подъезд 1, Этаж 1, Квартира 2"
 	icon_state = "awaycontent3"
 
-/area/awaymission/avangarde17/inside/house_4/fourth_apartment/bedroom
-	name = "Спальня"
+/area/awaymission/avangarde17/inside/living/lazarya_2_1/apartment_3
+	name = "Лазаря - 2 - Подъезд 1, Этаж 1, Квартира 3"
 	icon_state = "awaycontent4"
 
-/area/awaymission/avangarde17/inside/house_4/fourth_apartment/bathroom
-	name = "Туалет"
+/area/awaymission/avangarde17/inside/living/lazarya_2_1/apartment_4
+	name = "Лазаря - 2 - Подъезд 1, Этаж 1, Квартира 4"
+	icon_state = "awaycontent5"
+
+/area/awaymission/avangarde17/inside/living/lazarya_2_1/second_floor
+	name = "Лазаря - 2 - Подъезд 1 (второй этаж)"
+	icon_state = "awaycontent6"
+
+/area/awaymission/avangarde17/inside/living/lazarya_2_1/second_floor/apartment_1
+	name = "Лазаря - 2 - Подъезд 1, Этаж 2, Квартира 1"
 	icon_state = "awaycontent7"
 
-/area/awaymission/avangarde17/inside/house_4/fifth_apartment
-	name = "Этаж 2 - Квартира 1"
+/area/awaymission/avangarde17/inside/living/lazarya_2_1/second_floor/apartment_2
+	name = "Лазаря - 2 - Подъезд 1, Этаж 2, Квартира 2"
+	icon_state = "awaycontent8"
+
+/area/awaymission/avangarde17/inside/living/lazarya_2_1/second_floor/apartment_3
+	name = "Лазаря - 2 - Подъезд 1, Этаж 2, Квартира 3"
+	icon_state = "awaycontent9"
+
+/area/awaymission/avangarde17/inside/living/lazarya_2_1/second_floor/apartment_4
+	name = "Лазаря - 2 - Подъезд 1, Этаж 2, Квартира 4"
+	icon_state = "awaycontent10"
+
+// MARK: Домики
+
+/area/awaymission/avangarde17/inside/living/cabin/communism_1
+	name = "Ул. Коммунизма - 1"
+	icon_state = "awaycontent1"
+
+/area/awaymission/avangarde17/inside/living/cabin/communism_2
+	name = "Ул. Коммунизма - 2"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/living/cabin/communism_3
+	name = "Ул. Коммунизма - 3"
 	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_4/fifth_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_4/fifth_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_4/six_apartment
-	name = "Этаж 2 - Квартира 2"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_4/six_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_4/six_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_4/seven_apartment
-	name = "Этаж 2 - Квартира 3"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_4/seven_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_4/seven_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_4/eighth_apartment
-	name = "Этаж 2 - Квартира 4"
-	icon_state = "awaycontent3"
-
-/area/awaymission/avangarde17/inside/house_4/eighth_apartment/bedroom
-	name = "Спальня"
-	icon_state = "awaycontent4"
-
-/area/awaymission/avangarde17/inside/house_4/eighth_apartment/bathroom
-	name = "Туалет"
-	icon_state = "awaycontent5"
-
-/area/awaymission/avangarde17/inside/house_4/eighth_apartment/bathroom
-
 
 /*
 // Скорее всего удалить луп музыки, трансляция будет по радио

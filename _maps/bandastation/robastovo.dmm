@@ -129,7 +129,7 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside)
 "lM" = (
-/turf/closed/indestructible/rock/avangarde,
+/turf/closed/indestructible/binary,
 /area/awaymission/avangarde17/outside/mountains)
 "ma" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
@@ -3168,8 +3168,6 @@ ZK
 ZK
 ZK
 ZK
-GE
-GE
 lM
 lM
 lM
@@ -3179,8 +3177,10 @@ lM
 lM
 lM
 lM
-GE
-GE
+lM
+lM
+lM
+lM
 ZK
 ZK
 ZK
