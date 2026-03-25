@@ -54,13 +54,18 @@
 #define BEACON_BASE_POINTS 2
 #define BEACON_NEAREST_MW(power) ((power) - (power) % (1 MEGA WATTS))
 #define BEACON_RANDOM_SPAWN_CHANCE 5
-#define BEACON_RANDOM_SPAWN_RADIUS 7
+#define BEACON_RANDOM_SPAWN_RADIUS 4
 #define BEACON_PORTAL_EVENT_COOLDOWN (20 SECONDS)
 #define BEACON_PORTAL_CHANCE_MIN 2
 #define BEACON_PORTAL_CHANCE_MAX 35
-#define BEACON_DEMONIC_INCURSION_CHANCE 1
+#define BEACON_DEMONIC_INCURSION_CHANCE_MIN 1
+#define BEACON_DEMONIC_INCURSION_CHANCE_MAX 12
 #define BEACON_DEMONIC_INCURSION_PORTALS_MIN 1
 #define BEACON_DEMONIC_INCURSION_PORTALS_MAX 2
+#define BEACON_GLOBAL_INVASION_CHANCE_MIN 15
+#define BEACON_GLOBAL_INVASION_CHANCE_MAX 95
+#define BEACON_GLOBAL_INVASION_PORTALS_MIN 2
+#define BEACON_GLOBAL_INVASION_PORTALS_MAX 8
 
 /obj/machinery/power/bluespace_beacon
 	name = "Маяк реальности"
@@ -112,6 +117,12 @@
 	var/engineering_channel = RADIO_CHANNEL_ENGINEERING
 	/// Next world.time when hostile portal event may trigger.
 	var/next_portal_event_at = 0
+	/// Active hostile portals currently linked to this beacon.
+	var/list/datum/weakref/active_portals = list()
+	/// Portals that belong specifically to the active mass invasion.
+	var/list/datum/weakref/global_invasion_portals = list()
+	/// TRUE while mass invasion is active.
+	var/global_invasion_active = FALSE
 	/// Weighted random outcomes that may appear around the beacon while charging.
 	var/static/list/random_spawn_weights
 
@@ -129,11 +140,7 @@
 	radio.set_broadcasting(TRUE)
 	radio.set_listening(FALSE)
 	radio.recalculateChannels()
-	if(!islist(radio.channels) || !(engineering_channel in radio.channels))
-		if(RADIO_CHANNEL_ENGINEERING in radio.channels)
-			engineering_channel = RADIO_CHANNEL_ENGINEERING
-		else if(length(radio.channels))
-			engineering_channel = radio.channels[1]
+	ensure_engineering_channel()
 
 	var/list/occupied = list()
 	for(var/direct in list(EAST, WEST, SOUTHEAST, SOUTHWEST, NORTH, NORTHWEST, NORTHEAST))
@@ -151,6 +158,9 @@
 
 /obj/machinery/power/bluespace_beacon/Destroy()
 	STOP_PROCESSING(SSmachines, src)
+	end_global_invasion(silent = TRUE)
+	active_portals.Cut()
+	global_invasion_portals.Cut()
 	QDEL_NULL(radio)
 	for(var/obj/structure/filler/filler as anything in fillers)
 		qdel(filler)
@@ -198,6 +208,9 @@
 
 /obj/machinery/power/bluespace_beacon/update_icon_state()
 	. = ..()
+	if(has_active_portals())
+		icon_state = "cascade_tap"
+		return
 	if(actual_power_usage <= 0)
 		icon_state = base_icon_state
 	else
@@ -223,12 +236,17 @@
 
 	if(machine_stat & (BROKEN|NOPOWER))
 		set_light(0)
+	else if(has_active_portals())
+		set_light(2, 1, "#ff4f4f")
 	else if(actual_power_usage > 0)
 		set_light(2, 1, "#6fa8ff")
 	else
 		set_light(1, 1, "#353535")
 
-	if(actual_power_usage > 0)
+	if(has_active_portals())
+		. += "cascade"
+		. += emissive_appearance(icon, "cascade_light_mask", src)
+	else if(actual_power_usage > 0)
 		. += "screen"
 		. += emissive_appearance(icon, "light_mask", src)
 
@@ -271,6 +289,75 @@
 	// Keep high-draw behavior while respecting existing net accounting.
 	return min(max(newavail(), surplus()), input_level)
 
+/obj/machinery/power/bluespace_beacon/proc/cleanup_portal_refs(list/datum/weakref/portal_refs)
+	if(!length(portal_refs))
+		return FALSE
+	for(var/datum/weakref/portal_ref as anything in portal_refs.Copy())
+		var/obj/structure/spawner/portal = portal_ref.resolve()
+		if(QDELETED(portal))
+			portal_refs -= portal_ref
+	return length(portal_refs) > 0
+
+/obj/machinery/power/bluespace_beacon/proc/has_active_portals()
+	return cleanup_portal_refs(active_portals)
+
+/obj/machinery/power/bluespace_beacon/proc/register_active_portal(obj/structure/spawner/portal)
+	if(QDELETED(portal))
+		return
+	var/datum/weakref/new_ref = WEAKREF(portal)
+	if(new_ref in active_portals)
+		return
+	active_portals += new_ref
+	update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
+
+/obj/machinery/power/bluespace_beacon/proc/has_global_invasion_portals()
+	return cleanup_portal_refs(global_invasion_portals)
+
+/obj/machinery/power/bluespace_beacon/proc/register_global_invasion_portal(obj/structure/spawner/portal)
+	if(QDELETED(portal))
+		return
+	var/datum/weakref/new_ref = WEAKREF(portal)
+	if(new_ref in global_invasion_portals)
+		return
+	global_invasion_portals += new_ref
+
+/obj/machinery/power/bluespace_beacon/proc/start_global_invasion()
+	if(global_invasion_active)
+		return
+	global_invasion_active = TRUE
+	SSshuttle.registerHostileEnvironment(src)
+
+/obj/machinery/power/bluespace_beacon/proc/end_global_invasion(silent = FALSE)
+	if(!global_invasion_active)
+		return
+	global_invasion_active = FALSE
+	global_invasion_portals.Cut()
+	SSshuttle.clearHostileEnvironment(src)
+	if(silent)
+		return
+	priority_announce(
+		"Массовое вторжение локализовано. Блокировка эвакуационного шаттла снята.",
+		sender_override = "Система оповещений Маяка",
+		has_important_message = TRUE,
+		color_override = "green",
+	)
+
+/obj/machinery/power/bluespace_beacon/proc/unregister_active_portal(obj/structure/spawner/portal)
+	if(!length(active_portals))
+		if(global_invasion_active && !has_global_invasion_portals())
+			end_global_invasion()
+		return
+	var/datum/weakref/target_ref = WEAKREF(portal)
+	if(target_ref in global_invasion_portals)
+		global_invasion_portals -= target_ref
+	for(var/datum/weakref/portal_ref as anything in active_portals.Copy())
+		var/obj/structure/spawner/current_portal = portal_ref.resolve()
+		if(QDELETED(current_portal) || current_portal == portal)
+			active_portals -= portal_ref
+	if(global_invasion_active && !has_global_invasion_portals())
+		end_global_invasion()
+	update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
+
 /obj/machinery/power/bluespace_beacon/proc/announce_completion()
 	if(completion_announced)
 		return
@@ -288,18 +375,42 @@
 /obj/machinery/power/bluespace_beacon/proc/radio_engineering_notice(message)
 	if(!length(message))
 		return
-	if(length(radio?.channels) && !(engineering_channel in radio.channels))
-		if(RADIO_CHANNEL_ENGINEERING in radio.channels)
-			engineering_channel = RADIO_CHANNEL_ENGINEERING
-		else if(length(radio.channels))
-			engineering_channel = radio.channels[1]
+	ensure_engineering_channel()
 	radio?.talk_into(src, message, engineering_channel)
 
+/obj/machinery/power/bluespace_beacon/proc/ensure_engineering_channel()
+	if(!length(radio?.channels))
+		return
+	if(engineering_channel in radio.channels)
+		return
+	if(RADIO_CHANNEL_ENGINEERING in radio.channels)
+		engineering_channel = RADIO_CHANNEL_ENGINEERING
+	else
+		engineering_channel = radio.channels[1]
+
 /obj/machinery/power/bluespace_beacon/proc/get_portal_event_chance()
+	return get_scaled_input_chance(BEACON_PORTAL_CHANCE_MIN, BEACON_PORTAL_CHANCE_MAX)
+
+/obj/machinery/power/bluespace_beacon/proc/get_demonic_incursion_chance()
+	return get_scaled_input_chance(BEACON_DEMONIC_INCURSION_CHANCE_MIN, BEACON_DEMONIC_INCURSION_CHANCE_MAX)
+
+/obj/machinery/power/bluespace_beacon/proc/get_global_invasion_chance()
+	return get_scaled_input_chance(BEACON_GLOBAL_INVASION_CHANCE_MIN, BEACON_GLOBAL_INVASION_CHANCE_MAX)
+
+/obj/machinery/power/bluespace_beacon/proc/get_scaled_input_chance(min_chance, max_chance)
+	if(!isnum(min_chance) || !isnum(max_chance))
+		return 0
+	if(max_chance < min_chance)
+		var/tmp = min_chance
+		min_chance = max_chance
+		max_chance = tmp
+	var/progress_ratio = get_input_ratio()
+	return clamp(round(min_chance + (max_chance - min_chance) * progress_ratio), min_chance, max_chance)
+
+/obj/machinery/power/bluespace_beacon/proc/get_input_ratio()
 	if(input_level_max <= 0)
-		return BEACON_PORTAL_CHANCE_MIN
-	var/progress_ratio = clamp(input_level / input_level_max, 0, 1)
-	return clamp(round(BEACON_PORTAL_CHANCE_MIN + (BEACON_PORTAL_CHANCE_MAX - BEACON_PORTAL_CHANCE_MIN) * progress_ratio), BEACON_PORTAL_CHANCE_MIN, BEACON_PORTAL_CHANCE_MAX)
+		return 0
+	return clamp(input_level / input_level_max, 0, 1)
 
 /obj/machinery/power/bluespace_beacon/proc/get_portal_spawn_turf()
 	var/turf/target_turf = get_safe_random_station_turf_equal_weight()
@@ -321,7 +432,7 @@
 		var/spawn_type = pick_weight(demon_spawners)
 		if(!spawn_type)
 			continue
-		new spawn_type(spawn_turf)
+		new spawn_type(spawn_turf, src)
 		created_portals++
 
 	if(!created_portals)
@@ -330,7 +441,47 @@
 	radio_engineering_notice("Внимание: зафиксирован демонический прорыв! Обнаружено порталов: [created_portals].")
 	return TRUE
 
-/obj/machinery/power/bluespace_beacon/proc/trigger_hostile_portal_faction()
+/obj/machinery/power/bluespace_beacon/proc/get_global_invasion_portal_count()
+	var/alive_crew = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
+	if(alive_crew <= 0)
+		return BEACON_GLOBAL_INVASION_PORTALS_MIN
+	var/target_count = round(alive_crew / 4)
+	return clamp(target_count, BEACON_GLOBAL_INVASION_PORTALS_MIN, BEACON_GLOBAL_INVASION_PORTALS_MAX)
+
+/obj/machinery/power/bluespace_beacon/proc/announce_global_invasion()
+	var/announcement_text = "Фиксируется каскадный пробой реальности. Обнаружен прорыв ткани реальности. Фиксация числинности сущностей иных миров невозможна. \
+	Протоколы блюспейс перемещений заблокированы во избежание разрыва объективной действительности и пространственно-временного континуума."
+	var/announcement_sender = "Система оповещений Маяка"
+	priority_announce(
+		announcement_text,
+		sound = 'modular_bandastation/objects/sounds/bsb_alarm.ogg',
+		sender_override = announcement_sender,
+		has_important_message = TRUE,
+		color_override = "red",
+	)
+	minor_announce(
+		announcement_text,
+		title = announcement_sender,
+		alert = TRUE,
+		color_override = "red",
+	)
+
+/obj/machinery/power/bluespace_beacon/proc/trigger_global_invasion()
+	if(global_invasion_active)
+		return TRUE
+	start_global_invasion()
+	var/portals_target = get_global_invasion_portal_count()
+	var/spawned_portals = 0
+	for(var/i in 1 to portals_target)
+		if(trigger_hostile_portal_faction(max_mobs_override = INFINITY, announce_radio = FALSE, invasion_portal = TRUE))
+			spawned_portals++
+	if(!spawned_portals)
+		end_global_invasion(silent = TRUE)
+		return FALSE
+	announce_global_invasion()
+	return TRUE
+
+/obj/machinery/power/bluespace_beacon/proc/trigger_hostile_portal_faction(max_mobs_override = null, announce_radio = TRUE, invasion_portal = FALSE)
 	var/list/factions = get_bluespace_beacon_portal_factions()
 	if(!length(factions))
 		return FALSE
@@ -355,10 +506,12 @@
 	var/list/portal_mob_types = faction_data["mob_types"]
 	var/portal_spawn_time = faction_data["spawn_time"]
 	var/portal_max_mobs = faction_data["max_mobs"]
+	if(isnum(max_mobs_override))
+		portal_max_mobs = max_mobs_override
 	var/list/portal_faction = faction_data["faction"]
 	var/portal_lifetime = faction_data["lifetime"]
 
-	new /obj/structure/spawner/bluespace_beacon_event(
+	var/obj/structure/spawner/bluespace_beacon_event/new_portal = new /obj/structure/spawner/bluespace_beacon_event(
 		spawn_turf,
 		portal_name,
 		portal_mob_types,
@@ -366,9 +519,13 @@
 		portal_max_mobs,
 		portal_faction,
 		portal_lifetime,
+		src,
 	)
+	if(invasion_portal)
+		register_global_invasion_portal(new_portal)
 
-	radio_engineering_notice("Внимание: пространственный разрыв. Тип: [faction_name]. Локация: [get_area_name(spawn_turf)].")
+	if(announce_radio)
+		radio_engineering_notice("Внимание: обнаружен пространственный разрыв. Локация: [get_area_name(spawn_turf)].")
 	return TRUE
 
 /obj/machinery/power/bluespace_beacon/proc/try_trigger_hostile_portal_event()
@@ -380,8 +537,11 @@
 		return
 
 	next_portal_event_at = world.time + BEACON_PORTAL_EVENT_COOLDOWN
-	if(prob(BEACON_DEMONIC_INCURSION_CHANCE))
+	if(prob(get_demonic_incursion_chance()))
 		if(trigger_demonic_incursion())
+			return
+	if(prob(get_global_invasion_chance()))
+		if(trigger_global_invasion())
 			return
 	trigger_hostile_portal_faction()
 
@@ -417,12 +577,7 @@
 		return
 	var/atom/movable/spawned = new spawn_type(spawn_turf)
 	var/spawned_name = spawned?.name || "неизвестный объект"
-	if(length(radio?.channels) && !(engineering_channel in radio.channels))
-		if(RADIO_CHANNEL_ENGINEERING in radio.channels)
-			engineering_channel = RADIO_CHANNEL_ENGINEERING
-		else
-			engineering_channel = radio.channels[1]
-	radio?.talk_into(src, "Внимание: зафиксирован локальный аномальный выброс. Объект: [spawned_name].", engineering_channel)
+	radio_engineering_notice("Внимание: зафиксирован локальный аномальный выброс. Объект: [spawned_name].")
 
 	try_trigger_hostile_portal_event()
 
@@ -443,6 +598,14 @@
 				inputting = FALSE
 				update_appearance()
 			return
+
+	if(has_active_portals())
+		if(actual_power_usage || inputting || mined_points)
+			actual_power_usage = 0
+			inputting = FALSE
+			mined_points = 0
+			update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
+		return
 
 	var/mining_power = get_available_power()
 	if(mining_power > 1 MEGA WATTS)
@@ -498,25 +661,30 @@
 		if("input")
 			if(input_locked)
 				return TRUE
-			var/target = params["target"]
-			var/adjust = text2num(params["adjust"])
-			if(target == "min")
-				target = 0
-				. = TRUE
-			else if(target == "max")
-				target = input_level_max
-				. = TRUE
-			else if(adjust)
-				target = input_level + adjust
-				. = TRUE
-			else if(text2num(target) != null)
-				target = text2num(target)
-				. = TRUE
-			if(.)
-				target = round(target / (1 MEGA WATTS)) * (1 MEGA WATTS)
-				input_level = clamp(target, 0, input_level_max)
-				update_appearance()
-				return TRUE
+			var/target_param = params["target"]
+			var/adjust_param = params["adjust"]
+			var/target_value = null
+
+			if(target_param == "min")
+				target_value = 0
+			else if(target_param == "max")
+				target_value = input_level_max
+			else if(isnum(adjust_param))
+				target_value = input_level + adjust_param
+			else if(!isnull(text2num("[adjust_param]")))
+				target_value = input_level + text2num("[adjust_param]")
+			else if(isnum(target_param))
+				target_value = target_param
+			else if(!isnull(text2num("[target_param]")))
+				target_value = text2num("[target_param]")
+
+			if(isnull(target_value))
+				return FALSE
+
+			target_value = round(target_value / (1 MEGA WATTS)) * (1 MEGA WATTS)
+			input_level = clamp(target_value, 0, input_level_max)
+			update_appearance()
+			return TRUE
 
 #undef BEACON_POINTS_PER_W
 #undef BEACON_BASE_POINTS
@@ -526,6 +694,11 @@
 #undef BEACON_PORTAL_EVENT_COOLDOWN
 #undef BEACON_PORTAL_CHANCE_MIN
 #undef BEACON_PORTAL_CHANCE_MAX
-#undef BEACON_DEMONIC_INCURSION_CHANCE
+#undef BEACON_DEMONIC_INCURSION_CHANCE_MIN
+#undef BEACON_DEMONIC_INCURSION_CHANCE_MAX
 #undef BEACON_DEMONIC_INCURSION_PORTALS_MIN
 #undef BEACON_DEMONIC_INCURSION_PORTALS_MAX
+#undef BEACON_GLOBAL_INVASION_CHANCE_MIN
+#undef BEACON_GLOBAL_INVASION_CHANCE_MAX
+#undef BEACON_GLOBAL_INVASION_PORTALS_MIN
+#undef BEACON_GLOBAL_INVASION_PORTALS_MAX
