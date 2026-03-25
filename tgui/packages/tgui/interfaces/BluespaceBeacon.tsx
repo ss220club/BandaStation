@@ -24,7 +24,7 @@ type Data = {
 
 const POWER_MUL = 1e6;
 
-export const BluespaceBeacon = () => {
+export function BluespaceBeacon() {
   const { act, data } = useBackend<Data>();
   const {
     inputLevelMax,
@@ -59,7 +59,7 @@ export const BluespaceBeacon = () => {
           <LabeledList.Item label="Режим зарядки">
             <Box color={inputState}>
               {(charge >= 100 && 'Заряжено') ||
-                (inputting && 'Заржяется') ||
+                (inputting && 'Заряжается') ||
                 'Нет питания'}
             </Box>
           </LabeledList.Item>

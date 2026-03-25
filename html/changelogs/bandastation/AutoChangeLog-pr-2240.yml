@@ -1,4 +1,0 @@
-author: "adskipups"
-delete-after: True
-changes:
-  - image: "Добавлен новый визуал для огня, он стал более ярким и с заметной анимацией. Частичный порт с BeeStation."

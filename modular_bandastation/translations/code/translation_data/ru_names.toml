@@ -29761,21 +29761,21 @@ prepositional = "лобби инженерного отдела"
 gender = "neuter"
 
 ["Supermatter Engine"]
-nominative = "двигатель Суперматерии"
-genitive = "двигателя Суперматерии"
-dative = "двигателю Суперматерии"
-accusative = "двигатель Суперматерии"
-instrumental = "двигателем Суперматерии"
-prepositional = "двигателе Суперматерии"
+nominative = "двигатель суперматерии"
+genitive = "двигателя суперматерии"
+dative = "двигателю суперматерии"
+accusative = "двигатель суперматерии"
+instrumental = "двигателем суперматерии"
+prepositional = "двигателе суперматерии"
 gender = "male"
 
 ["Supermatter Engine Room"]
-nominative = "машинное отделение Суперматерии"
-genitive = "машинного отделения Суперматерии"
-dative = "машинному отделению Суперматерии"
-accusative = "машинное отделение Суперматерии"
-instrumental = "машинным отделением Суперматерии"
-prepositional = "машинном отделении Суперматерии"
+nominative = "машинное отделение суперматерии"
+genitive = "машинного отделения суперматерии"
+dative = "машинному отделению суперматерии"
+accusative = "машинное отделение суперматерии"
+instrumental = "машинным отделением суперматерии"
+prepositional = "машинном отделении суперматерии"
 gender = "neuter"
 
 ["Gravity Generator Room"]
@@ -33999,76 +33999,65 @@ instrumental = "редактором базового пространства �
 prepositional = "редакторе базового пространства виртуального домена"
 gender = "male"
 
-# MARK: Bluespace Beacon
-
-["Маяк реальности"]
-nominative = "маяк реальности"
-genitive = "маяка реальности"
-dative = "маяку реальности"
-accusative = "маяк реальности"
-instrumental = "маяком реальности"
-prepositional = "маяке реальности"
+["supermatter crystal"]
+nominative = "кристалл суперматерии"
+genitive = "кристалла суперматерии"
+dative = "кристаллу суперматерии"
+accusative = "кристалл суперматерии"
+instrumental = "кристаллом суперматерии"
+prepositional = "кристалле суперматерии"
 gender = "male"
 
-["плата маяка реальности"]
-nominative = "плата маяка реальности"
-genitive = "платы маяка реальности"
-dative = "плате маяка реальности"
-accusative = "плату маяка реальности"
-instrumental = "платой маяка реальности"
-prepositional = "плате маяка реальности"
+["supermatter shard"]
+nominative = "осколок суперматерии"
+genitive = "осколка суперматерии"
+dative = "осколку суперматерии"
+accusative = "осколок суперматерии"
+instrumental = "осколком суперматерии"
+prepositional = "осколке суперматерии"
+gender = "male"
+
+["crystal mass"]
+nominative = "кристаллическая масса"
+genitive = "кристаллической массы"
+dative = "кристаллической массе"
+accusative = "кристаллическую массу"
+instrumental = "кристаллической массой"
+prepositional = "кристаллической массе"
 gender = "female"
 
-["ящик с частями маяка реальности"]
-nominative = "ящик с частями маяка реальности"
-genitive = "ящика с частями маяка реальности"
-dative = "ящику с частями маяка реальности"
-accusative = "ящик с частями маяка реальности"
-instrumental = "ящиком с частями маяка реальности"
-prepositional = "ящике с частями маяка реальности"
+["anchored supermatter shard"]
+nominative = "закрепленный осколок суперматерии"
+genitive = "закрепленного осколка суперматерии"
+dative = "закрепленному осколку суперматерии"
+accusative = "закрепленный осколок суперматерии"
+instrumental = "закрепленным осколком суперматерии"
+prepositional = "закрепленном осколке суперматерии"
 gender = "male"
 
-["нестабильный блюспейс-портал"]
-nominative = "нестабильный блюспейс-портал"
-genitive = "нестабильного блюспейс-портала"
-dative = "нестабильному блюспейс-порталу"
-accusative = "нестабильный блюспейс-портал"
-instrumental = "нестабильным блюспейс-порталом"
-prepositional = "нестабильном блюспейс-портале"
+["strangely small supermatter crystal"]
+nominative = "необычайно малый кристалл суперматерии"
+genitive = "необычайно малого кристалла суперматерии"
+dative = "необычайно малому кристаллу суперматерии"
+accusative = "необычайно малый кристалл суперматерии"
+instrumental = "необычайно малым кристаллом суперматерии"
+prepositional = "необычайно малом кристалле суперматерии"
 gender = "male"
 
-["демонический портал"]
-nominative = "демонический портал"
-genitive = "демонического портала"
-dative = "демоническому порталу"
-accusative = "демонический портал"
-instrumental = "демоническим порталом"
-prepositional = "демоническом портале"
+["adamantine pedestal"]
+nominative = "адамантиновый пьедестал"
+genitive = "адамантинового пьедестала"
+dative = "адамантиновому пьедесталу"
+accusative = "адамантиновый пьедестал"
+instrumental = "адамантиновым пьедесталом"
+prepositional = "адамантиновом пьедестале"
 gender = "male"
 
-["разлом фауны Лаваленда"]
-nominative = "разлом фауны Лаваленда"
-genitive = "разлома фауны Лаваленда"
-dative = "разлому фауны Лаваленда"
-accusative = "разлом фауны Лаваленда"
-instrumental = "разломом фауны Лаваленда"
-prepositional = "разломе фауны Лаваленда"
-gender = "male"
-
-["разлом Незера"]
-nominative = "разлом Незера"
-genitive = "разлома Незера"
-dative = "разлому Незера"
-accusative = "разлом Незера"
-instrumental = "разломом Незера"
-prepositional = "разломе Незера"
-gender = "male"
-
-["карповый разлом"]
-nominative = "карповый разлом"
-genitive = "карпового разлома"
-dative = "карповому разлому"
-accusative = "карповый разлом"
-instrumental = "карповым разломом"
-prepositional = "карповом разломе"
+["Bluespace Rift"]
+nominative = "блюспейс разлом"
+genitive = "блюспейс разлома"
+dative = "блюспейс разлому"
+accusative = "блюспейс разлом"
+instrumental = "блюспейс разломом"
+prepositional = "блюспейс разломе"
 gender = "male"

@@ -105,6 +105,9 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 	if(!has_space())
 		return "Недостаточно свободного места!"
 
+/**
+ * Proc to check if the BSA has the required 10 x 1 block space to deploy.
+ */
 /obj/machinery/bsa/middle/proc/has_space()
 	var/cannon_dir = get_cannon_direction()
 	var/width = 10
@@ -118,9 +121,14 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 			return FALSE
 
 	var/turf/base = get_turf(src)
+	var/blocked = FALSE
 	for(var/turf/T as anything in CORNER_BLOCK_OFFSET(base, width, 3, offset, -1))
 		if(T.density || isspaceturf(T))
-			return FALSE
+			blocked = TRUE
+			new /obj/effect/temp_visual/point(T)
+	if(blocked)
+		return FALSE
+
 	return TRUE
 
 /obj/machinery/bsa/middle/proc/get_cannon_direction()
