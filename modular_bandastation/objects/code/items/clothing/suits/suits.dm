@@ -107,6 +107,7 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "voskhod_suit"
 	armor_type = /datum/armor/suit_armor
+
 // MARK: MB Coat
 /obj/item/clothing/suit/mb_coat
 	name = "elegant coat"
@@ -117,3 +118,140 @@
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_left_hand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_right_hand.dmi'
 	body_parts_covered = CHEST | GROIN | ARMS
+
+// MARK: Port NovaSector
+// Security
+/obj/item/clothing/under/security/alt_skirt
+	name = "security alternative skirt"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
+	icon_state = "security_skirt"
+	body_parts_covered = CHEST|GROIN|ARMS
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_security
+
+/obj/item/clothing/under/security/formal
+	name = "security formal uniform"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
+	icon_state = "formal"
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_security
+
+/obj/item/clothing/under/security/black
+	name = "security black uniform"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
+	icon_state = "security_black"
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_security
+
+/obj/item/clothing/under/security/turtleneck
+	name = "security turtleneck"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
+	icon_state = "secturtleneck"
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_security
+
+/obj/item/clothing/under/security/alternative_black
+	name = "security alternative black uniform"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
+	icon_state = "warden_black"
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_security
+
+// Blueshield
+/obj/item/clothing/under/blueshield/skirt/blue
+	name = "blueshield's blue skirt"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/blueshield.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/blueshield.dmi'
+	icon_state = "plain_skirt_blue"
+	inhand_icon_state = null
+	body_parts_covered = CHEST|GROIN|ARMS
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_blueshield
+
+/obj/item/clothing/under/blueshield/skirt/black
+	name = "blueshield's black skirt"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/blueshield.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/blueshield.dmi'
+	icon_state = "plain_skirt_black"
+	inhand_icon_state = null
+	body_parts_covered = CHEST|GROIN|ARMS
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_blueshield
+
+// Warden
+/obj/item/clothing/under/rank/security/warden/alt_skirt/blue
+	name = "warden's alternative blue skirt"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
+	icon_state = "security_skirt_blue"
+	inhand_icon_state = null
+	body_parts_covered = CHEST|GROIN|ARMS
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_security
+
+/obj/item/clothing/under/rank/security/warden/formal_blue
+	name = "warden's formal blue uniform"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
+	icon_state = "formal_blue"
+	inhand_icon_state = null
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_security
+
+// Engineering
+/obj/item/clothing/under/engineering/telecomm
+	name = "engineering alternative jumpsuit"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/engineering.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/engineering.dmi'
+	icon_state = "telecomm"
+	can_adjust = TRUE
+
+/obj/item/clothing/under/engineering/telecomm/skirt
+	name = "engineering alternative jumpskirt"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/engineering.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/engineering.dmi'
+	icon_state = "telecomm_skirt"
+	can_adjust = TRUE
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+
+/obj/item/clothing/under/engineering/mechanic
+	name = "mechanic uniform"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/engineering.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/engineering.dmi'
+	icon_state = "engineering_guard_uniform"
+
+// Research
+/obj/item/clothing/under/scientist/utility
+	name = "science utility uniform"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/rnd.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/rnd.dmi'
+	icon_state = "util_sci"
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+
+// Medical
+/obj/item/clothing/under/medical/paramed_light
+	name = "light paramedic uniform"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/medical.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/medical.dmi'
+	icon_state = "paramedic_light"
+
+/obj/item/clothing/under/medical/paramed_light/skirt
+	name = "light paramedic skirt"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/medical.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/medical.dmi'
+	icon_state = "paramedic_light_skirt"
+	body_parts_covered = CHEST|GROIN|ARMS
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY

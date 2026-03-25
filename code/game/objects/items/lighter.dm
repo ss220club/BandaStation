@@ -38,9 +38,15 @@
 	)
 	/// Whether the lighter starts with fuel
 	var/spawns_with_reagent = TRUE
+	/// Lighting middleman, lets us do a flicker effect
+	var/datum/light_middleman/middleman
 
 /obj/item/lighter/Initialize(mapload)
 	. = ..()
+	if(IS_OVERLAY_LIGHT_SYSTEM(light_system))
+		middleman = new(src, "flashlight")
+		RegisterSignal(middleman, COMSIG_LIGHT_MIDDLEMAN_UPDATED, PROC_REF(light_updated))
+		middleman.being_overriding_light()
 	create_reagents(maximum_fuel, REFILLABLE | DRAINABLE)
 	if(spawns_with_reagent)
 		reagents.add_reagent(/datum/reagent/fuel, maximum_fuel)
@@ -54,6 +60,11 @@
 	)
 	update_appearance()
 
+/obj/item/lighter/Destroy(force)
+	if(!isnull(middleman))
+		QDEL_NULL(middleman)
+	return ..()
+
 /obj/item/lighter/grind_results()
 	return list(/datum/reagent/iron = 1, /datum/reagent/fuel = 5, /datum/reagent/fuel/oil = 5)
 
@@ -63,6 +74,10 @@
 		. += span_warning("It is out of lighter fluid! Refill it with welder fuel.")
 	else
 		. += span_notice("It contains [get_fuel()] units of fuel out of [maximum_fuel].")
+
+/obj/item/lighter/proc/light_updated(datum/source)
+	SIGNAL_HANDLER
+	fire_flicker_middleman(middleman)
 
 /// Destroy the lighter when it's shot by a bullet
 /obj/item/lighter/proc/on_intercepted_bullet(mob/living/victim, obj/projectile/bullet)
@@ -245,6 +260,10 @@
 	if(!lit)
 		return FALSE
 
+	if (reagents.spark_act(0, SPARK_ACT_ENCLOSED, banned_reagents = /datum/reagent/fuel) & SPARK_ACT_DESTRUCTIVE)
+		qdel(src)
+		return FALSE
+
 	if(used > 0)
 		burned_fuel_for = 0
 
@@ -257,7 +276,7 @@
 
 ///Returns the amount of fuel
 /obj/item/lighter/proc/get_fuel()
-	return reagents.get_reagent_amount(/datum/reagent/fuel)
+	return reagents.get_reagent_amount(/datum/reagent/fuel) + reagents.get_reagent_amount(/datum/reagent/toxin/plasma)
 
 /obj/item/lighter/greyscale
 	name = "cheap lighter"

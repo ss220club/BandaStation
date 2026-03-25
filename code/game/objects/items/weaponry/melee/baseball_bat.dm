@@ -40,7 +40,7 @@
 
 /obj/item/melee/baseball_bat/attack_self(mob/user)
 	// BANDASTATION EDIT START: Centcom homerun
-	if(!always_homerun || !homerun_able)
+	if(always_homerun || !homerun_able)
 		return ..()
 	if(homerun_ready)
 		to_chat(user, span_warning("You're already ready to do a home run!"))

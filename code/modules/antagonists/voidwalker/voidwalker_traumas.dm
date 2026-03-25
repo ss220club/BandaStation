@@ -1,7 +1,7 @@
 /// Curse brain trauma that makes someone space textured, mute, pacifist and forbids them from entering space
 /datum/brain_trauma/voided
 	name = "Voided"
-	desc = "They've seen the secrets of the cosmos, in exchange for a curse that keeps them chained."
+	desc = "Они узрели тайны космоса, заплатив за это проклятием, которое держит их в плену."
 	scan_desc = "cosmic neural pattern"
 	gain_text = ""
 	lose_text = ""
@@ -45,7 +45,7 @@
 	RegisterSignal(owner, COMSIG_CARBON_ATTACH_LIMB, PROC_REF(texture_limb)) //also catch new limbs being attached
 	RegisterSignal(owner, COMSIG_CARBON_REMOVE_LIMB, PROC_REF(untexture_limb)) //and remove it from limbs if they go away
 
-	for(var/obj/item/bodypart as anything in owner.bodyparts)
+	for(var/obj/item/bodypart as anything in owner.get_bodyparts())
 		texture_limb(owner, bodypart)
 
 	if(ishuman(owner))
@@ -75,7 +75,7 @@
 		var/mob/living/carbon/human/human = owner
 		human.physiology.brute_mod /= brute_mod
 
-	for(var/obj/item/bodypart/bodypart as anything in owner.bodyparts)
+	for(var/obj/item/bodypart/bodypart as anything in owner.get_bodyparts())
 		untexture_limb(owner, bodypart)
 	owner.update_body()
 

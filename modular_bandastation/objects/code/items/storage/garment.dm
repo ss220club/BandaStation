@@ -11,6 +11,8 @@
 		/obj/item/clothing/head/beret/blueshield/navy = 1,
 		/obj/item/clothing/mask/gas/sechailer = 1,
 		/obj/item/clothing/under/rank/blueshield = 1,
+		/obj/item/clothing/under/blueshield/skirt/blue = 1,
+		/obj/item/clothing/under/blueshield/skirt/black = 1,
 		/obj/item/clothing/under/rank/blueshield/skirt = 1,
 		/obj/item/clothing/under/rank/blueshield/casual = 1,
 		/obj/item/clothing/under/rank/blueshield/casual/skirt = 1,

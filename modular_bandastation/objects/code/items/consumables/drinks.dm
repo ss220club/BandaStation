@@ -805,25 +805,25 @@
 	)
 	required_temp = 303
 
-/datum/reagent/consumable/pumpkin_latte
-	name = "Pumpkin latte"
-	description = "Латте с содержанием тыквенного сока."
+/datum/reagent/consumable/pumpkin_raf
+	name = "Pumpkin raf"
+	description = "Раф с содержанием тыквенного сока."
 	color = "#e48648"
-	taste_description = "сладкий латте с привкусом тыквы"
+	taste_description = "сладкий раф с привкусом тыквы"
 	nutriment_factor = 1
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	quality = DRINK_NICE
 	glass_price = DRINK_PRICE_MEDIUM
 
-/datum/glass_style/drinking_glass/pumpkin_latte
-	required_drink_type = /datum/reagent/consumable/pumpkin_latte
-	name = "Pumpkin latte"
-	desc = "Латте с содержанием тыквенного сока."
+/datum/glass_style/drinking_glass/pumpkin_raf
+	required_drink_type = /datum/reagent/consumable/pumpkin_raf
+	name = "Pumpkin raf"
+	desc = "Раф с содержанием тыквенного сока."
 	icon = 'modular_bandastation/objects/icons/obj/items/drinks.dmi'
-	icon_state = "pumpkin_latte"
+	icon_state = "pumpkin_raf"
 
-/datum/chemical_reaction/drink/pumpkin_latte
-	results = list(/datum/reagent/consumable/pumpkin_latte = 5)
+/datum/chemical_reaction/drink/pumpkin_raf
+	results = list(/datum/reagent/consumable/pumpkin_raf = 5)
 	required_reagents = list(
 		/datum/reagent/toxin/coffeepowder = 2,
 		/datum/reagent/consumable/cream = 2,

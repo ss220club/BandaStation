@@ -44,7 +44,7 @@
 	mood_change = max(mood_change, calculate_mood_change(quality))
 	// if mood_change is the same, we don't need to update the description
 	if(old_mood != mood_change)
-		description = "That food was [GLOB.food_quality_description[quality]]."
+		description = "Эта еда была [GLOB.food_quality_description[quality]]."
 	return ..()
 
 /datum/mood_event/food/proc/calculate_mood_change(base_quality)
@@ -57,7 +57,7 @@
 	return ceil(quality)
 
 /datum/mood_event/pacifist_eating_fish_item
-	description = "I shouldn't be eating living creatures..."
+	description = "Я не должен был есть живых существ..."
 	mood_change = -1 //The disgusting food moodlet already has a pretty big negative value, this is just for context.
 	timeout = 4 MINUTES
 	event_flags = MOOD_EVENT_FOOD

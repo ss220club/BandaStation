@@ -494,7 +494,7 @@
 	candidate.current.move_into_vent(vent)
 
 /datum/dynamic_ruleset/midround/from_ghosts/blood_worms/proc/announce_worms()
-	priority_announce("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", ANNOUNCER_ALIENS)
+	priority_announce("На борту [station_name()] обнаружены неопознанные формы жизни. Перекройте все внешние шлюзы, включая трубы и вентиляции.", "Неопознанные формы жизни", ANNOUNCER_ALIENS)
 
 /datum/dynamic_ruleset/midround/from_ghosts/blood_worms/false_alarm()
 	announce_worms()

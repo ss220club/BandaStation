@@ -1,7 +1,7 @@
 #define LEGENDARY_SWORDS_CKEY_WHITELIST list("mooniverse")
 
 /obj/item/dualsaber/legendary_saber
-	name = "Злоба"
+	name = "Malice"
 	desc = "\"Злоба\" - один из легендарных энергетических мечей Галактики. Словно источая мистическую энергию, \"Злоба\" является олицетворением самой Тьмы, вызывающей трепет и ужас врагов её владельца. Гладкая и простая рукоять меча не может похвастаться орнаментами, узорами или древними рунами, но способна выплескивать рванный энергетический клинок кроваво-красного света, словно кричащий о непокорности и ярости своего владельца.  Некоторые истории гласят, что в этом клинке прибывает сама темная сущность могущества и бесконечного гнева, готовая исполнить волю своего хозяина даже за пределами пространства и времени. \n Создатель: Согда К'Трим. Текущий владелец: Миднайт Блэк."
 	icon = 'modular_bandastation/weapon/icons/melee/legendary.dmi'
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
@@ -10,6 +10,7 @@
 	inhand_icon_state = "mid_dualsaber0"
 	saber_color = "midnight"
 	light_color = LIGHT_COLOR_INTENSE_RED
+	hit_wield = 'modular_bandastation/weapon/sound/melee/mid_saberhit.ogg'
 	var/wieldsound = 'modular_bandastation/weapon/sound/melee/mid_saberon.ogg'
 	var/unwieldsound = 'modular_bandastation/weapon/sound/melee/mid_saberoff.ogg'
 	var/saber_name = "mid"
@@ -36,7 +37,7 @@
 	icon_state = inhand_icon_state = HAS_TRAIT(src, TRAIT_WIELDED) ? "[saber_name]_dualsaber[saber_color][HAS_TRAIT(src, TRAIT_WIELDED)]" : "[saber_name]_dualsaber0"
 
 /obj/item/dualsaber/legendary_saber/sorrow_catcher
-	name = "Ловец Скорби"
+	name = "Sorrow Catcher"
 	desc = "\"Ловец  Скорби\" -  один из легендарных энергетических мечей Галактики. \
 	Согласно легенде, предсмертные крики тех, кого сразило это оружие вырываются при каждой его активации, создавая специфических \"плачущий\" звук. "
 	icon_state = "gr_dualsaber0"
@@ -50,7 +51,7 @@
 	hit_wield = 'modular_bandastation/weapon/sound/melee/gr_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/flame
-	name = "Пламя"
+	name = "Flame"
 	desc = "\"Пламя\" - один из легендарных энергетических мечей Галактики. \
 	Согласно легенде, этот меч - оружие завоевателей и праведников, долго время являвшийся фамильной реликвией одного знатного Эллизианского дома."
 	icon_state = "sh_dualsaber0"
@@ -64,7 +65,7 @@
 	hit_wield = 'modular_bandastation/weapon/sound/melee/sh_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/devotion
-	name = "Верность клятве"
+	name = "Oath's Fidelity"
 	desc = "\"Верность Клятве\" - один из легендарных энергетических мечей Галактики. \
 	В настоящий момент утерян."
 	icon_state = "kir_dualsaber0"
@@ -78,7 +79,7 @@
 	hit_wield = 'modular_bandastation/weapon/sound/melee/kir_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/sister
-	name = "Светлая Сестра"
+	name = "Light Sister"
 	desc = "\"Светлая Сестра\" - один из легендарных энергетических мечей Галактики. \
 	Согласно легенде, этот элегантный меч был создан для одного из лидеров Синдиката прошлого, что по иронии судьбы была им же и убита."
 	icon_state = "norm_dualsaber0"
@@ -92,7 +93,7 @@
 	hit_wield = 'modular_bandastation/weapon/sound/melee/norm_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/flee_catcher
-	name = "Ловец Бегущих"
+	name = "Flee Catcher"
 	desc = "\"Ловец Бегущих\" - один из легендарных энергетических мечей Галактики. \
 	Согласно легенде, это потрепанное временем оружие есть страшная кара всех беглецов и предателей, всегда находящая цель."
 	icon_state = "kel_dualsaber0"
@@ -106,7 +107,7 @@
 	hit_wield = 'modular_bandastation/weapon/sound/melee/kel_saberhit.ogg'
 
 /obj/item/dualsaber/legendary_saber/orphan
-	name = "Сирота"
+	name = "Orphan"
 	desc = "\"Сирота\" -  один из легендарных энергетических мечей Галактики. \
 	Элегантное на вид, но вселяющее ужас орудие неизвестного происхождения."
 	icon_state = "lex_dualsaber0"

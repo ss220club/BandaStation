@@ -55,7 +55,7 @@ export const SPECIAL_TOKENS = {
   nt_logo: (value: string) => {
     const matchArray = value.match(propRegex('width'));
     const widthValue = matchArray ? matchArray[1] : '';
-    return `<img src='${resolveAsset('ntlogo.png')}' ${widthValue && `width='${widthValue}`}'>`;
+    return `<img src='${resolveAsset('nanotrasen-logo')}' ${widthValue ? `width='${widthValue}'` : ''}>`;
   },
   syndie_logo: (value: string) => {
     const matchArray = value.match(propRegex('width'));

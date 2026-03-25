@@ -276,13 +276,13 @@
 	if(!id.registered_account)
 		to_chat(user, span_warning("ОШИБКА: ID-карта не имеет зарегистрированного банковского счета!"))
 		return ITEM_INTERACT_BLOCKING
-	if(id.registered_account != pin_owner)
+	if(pin_owner && id.registered_account != pin_owner)
 		to_chat(user, span_warning("ОШИБКА: Этот ударник уже имеет привязанный счет!"))
 		return ITEM_INTERACT_BLOCKING
 	if(id.registered_account == pin_owner)
 		to_chat(user, span_notice("Вы отвязываете ID-карту от ударника."))
 		gun_owners -= user.get_bank_account()
-		pin_owner = NUTRITION_LEVEL_START_MIN
+		pin_owner = null
 		return ITEM_INTERACT_SUCCESS
 	var/transaction_amount = tgui_input_number(user, "Введите допустимую сумму оплаты оружия", "Сумма оплаты")
 	if(!transaction_amount || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH))

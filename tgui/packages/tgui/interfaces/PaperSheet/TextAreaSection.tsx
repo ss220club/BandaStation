@@ -83,7 +83,7 @@ export function TextAreaSection(props: TextAreaSectionProps) {
 
     const textAreaTextWithReplacements = parseReplacements(
       `${textAreaText}${!activeWriteButtonId ? '<br>' : ''}`,
-      usedReplacementsRef.current,
+      Array.isArray(usedReplacementsRef.current) ? usedReplacementsRef.current : [],
     );
     const addTextData = activeWriteButtonId
       ? (() => {
@@ -138,12 +138,12 @@ export function TextAreaSection(props: TextAreaSectionProps) {
     }
 
     if (match[0] === '[') {
-      return replacements.sort((a, b) => a.key.length - b.key.length);
+      return (replacements ?? []).slice().sort((a, b) => a.key.length - b.key.length);
     }
 
     const tokenKey = match[1];
 
-    return replacements
+    return (replacements ?? [])
       .filter((value) => value.key.startsWith(tokenKey))
       .sort((a, b) => a.key.length - b.key.length);
   }

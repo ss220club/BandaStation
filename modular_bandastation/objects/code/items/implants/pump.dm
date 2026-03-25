@@ -22,7 +22,7 @@
 
 /obj/item/organ/cyberimp/chest/pump/on_life(seconds_per_tick, times_fired)
 	if(!TIMER_COOLDOWN_FINISHED(src, COOLDOWN_PUMP))
-		return
+		return ..()
 
 	for(var/key,value in reagent_data)
 		var/reagent_type = key
@@ -35,6 +35,7 @@
 		custom_effect(seconds_per_tick, times_fired)
 
 	TIMER_COOLDOWN_START(src, COOLDOWN_PUMP, cooldown_time)
+	return ..()
 
 /**
  * This is a stub, it should be overridden by the implant

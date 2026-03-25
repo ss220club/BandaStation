@@ -21,6 +21,7 @@
 /area/station/security/detectives_office)
 "g" = (
 /obj/machinery/vending/wardrobe/det_wardrobe,
+/obj/structure/sign/poster/official/sweet_ginger_green/directional/north,
 /turf/open/floor/iron/grimy,
 /area/station/security/detectives_office)
 "j" = (

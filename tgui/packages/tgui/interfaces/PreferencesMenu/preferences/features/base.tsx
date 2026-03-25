@@ -18,7 +18,11 @@ import {
 } from 'tgui-core/components';
 import { type BooleanLike, classes } from 'tgui-core/react';
 
-import { createSetPreference, type PreferencesMenuData } from '../../types';
+import {
+  type CharacterPreferencesData,
+  createSetPreference,
+  type PreferencesMenuData,
+} from '../../types';
 import { useServerPrefs } from '../../useServerPrefs';
 
 export function sortChoices(array: [string, ReactNode][]) {
@@ -58,38 +62,8 @@ export type FeatureValueProps<
   serverData: TServerData | undefined;
   shrink?: boolean;
   value: TReceiving;
+  character_preferences: CharacterPreferencesData;
 }>;
-
-type FeatureValueInputProps = {
-  feature: Feature<unknown>;
-  featureId: string;
-  shrink?: boolean;
-  value: unknown;
-};
-
-export function FeatureValueInput(props: FeatureValueInputProps) {
-  const { act, data } = useBackend<PreferencesMenuData>();
-  const [predictedValue, setPredictedValue] = useState(props.value);
-
-  const feature = props.feature;
-  function changeValue(newValue: unknown) {
-    setPredictedValue(newValue);
-    createSetPreference(act, props.featureId)(newValue);
-  }
-
-  useEffect(() => {
-    setPredictedValue(props.value);
-  }, [data.active_slot, props.value]);
-
-  const serverData = useServerPrefs();
-  return createElement(feature.component, {
-    featureId: props.featureId,
-    serverData: serverData?.[props.featureId] as any,
-    shrink: props.shrink,
-    handleSetValue: changeValue,
-    value: predictedValue,
-  });
-}
 
 type ToggleProps = {
   checked: boolean;
@@ -222,7 +196,42 @@ export function FeatureSliderInput(
   );
 }
 
-export type FeatureShortTextData = {
+type FeatureValueInputProps = {
+  feature: Feature<unknown>;
+  featureId: string;
+  shrink?: boolean;
+  value: unknown;
+};
+
+export function FeatureValueInput(props: FeatureValueInputProps) {
+  const { act, data } = useBackend<PreferencesMenuData>();
+
+  const feature = props.feature;
+
+  const [predictedValue, setPredictedValue] = useState(props.value);
+
+  function changeValue(newValue: unknown) {
+    setPredictedValue(newValue);
+    createSetPreference(act, props.featureId)(newValue);
+  }
+
+  useEffect(() => {
+    setPredictedValue(props.value);
+  }, [data.active_slot, props.value]);
+
+  const serverData = useServerPrefs();
+
+  return createElement(feature.component, {
+    featureId: props.featureId,
+    serverData: serverData?.[props.featureId] as any,
+    shrink: props.shrink,
+    handleSetValue: changeValue,
+    value: predictedValue,
+    character_preferences: data.character_preferences,
+  });
+}
+
+type FeatureShortTextData = {
   maximum_length: number;
 };
 

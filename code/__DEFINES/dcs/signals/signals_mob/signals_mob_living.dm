@@ -22,6 +22,16 @@
 ///Called when movement intent is toggled.
 #define COMSIG_MOVE_INTENT_TOGGLED "move_intent_toggled"
 
+// BANDASTATION ADDITION: Limp Quirk
+
+//Checks if anyone (components/elements/quirks) is listening to the specified signal on this object
+#define HAS_SIGNAL_LISTENERS(target, signal) (target.signal_procs?[signal])
+///Called BEFORE movement intent is toggled.
+#define COMSIG_MOB_PRE_TOGGLE_MOVE_INTENT "mob_pre_toggle_move_intent"
+	/// Return this flag to prevent the toggle
+	#define COMPONENT_PREVENT_TOGGLE_MOVE_INTENT (1<<0)
+// BANDASTATION ADDITION: END
+
 /// Called when combat mode is toggled.
 #define COMSIG_COMBAT_MODE_TOGGLED "combat_mode_toggled"
 
@@ -381,3 +391,6 @@
 
 /// Sent to a mob when one of their bodypart's surgery state changes, OR sent from the basic_surgery_state holder when its surgery state changes (old_state, new_state, changed_states)
 #define COMSIG_LIVING_UPDATING_SURGERY_STATE "carbon_updating_surgery_state"
+
+/// Sent to a mob when its player DNRs
+#define COMSIG_LIVING_DNR "living_dnr"

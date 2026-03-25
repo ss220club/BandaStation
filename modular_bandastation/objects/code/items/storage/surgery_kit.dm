@@ -30,7 +30,7 @@
 		/obj/item/shears,
 		/obj/item/bodybag,
 		/obj/item/reagent_containers/medigel,
-		/obj/item/stack/sticky_tape,
+		/obj/item/stack/medical/wrap/sticky_tape,
 		/obj/item/stack/medical,
 		/obj/item/storage/pill_bottle,
 		/obj/item/reagent_containers/syringe,
@@ -49,7 +49,7 @@
 		/obj/item/stack/sheet/plasteel = 5,
 		/obj/item/stack/sheet/iron = 5,
 		/obj/item/stack/sheet/plastic = 10,
-		/obj/item/stack/sticky_tape = 2
+		/obj/item/stack/medical/wrap/sticky_tape = 2
 	)
 	category = CAT_CONTAINERS
 	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY

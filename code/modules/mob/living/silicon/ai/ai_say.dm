@@ -223,7 +223,7 @@
 			for(var/mob/player_mob as anything in GLOB.player_list)
 				var/pref_volume = safe_read_pref(player_mob.client, /datum/preference/numeric/volume/sound_ai_vox)
 				pref_volume *= vox_volume_modifier // BANDASTATION EDIT
-				if(!player_mob.can_hear() || !pref_volume)
+				if(HAS_TRAIT(player_mob, TRAIT_DEAF) || !pref_volume)
 					continue
 
 				var/turf/player_turf = get_turf(player_mob)

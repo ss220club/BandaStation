@@ -1,6 +1,6 @@
 /// Space antagonist that harasses people near space and cursed them if they get the chance
 /datum/antagonist/voidwalker
-	name = "\improper Voidwalker"
+	name = "\improper Войдволкер"
 	antagpanel_category = ANTAG_GROUP_ABOMINATIONS
 	pref_flag = ROLE_VOIDWALKER
 
@@ -22,8 +22,8 @@
 
 /datum/antagonist/voidwalker/get_preview_icon()
 	var/mob/living/basic/voidwalker/walker_type = /mob/living/basic/voidwalker
-	var/icon/icon = icon(walker_type::icon, walker_type::icon_state)
-	icon.Crop(5, 18, 30, 44)
+	var/datum/universal_icon/icon = uni_icon(walker_type::icon, walker_type::icon_state)
+	icon.crop(5, 18, 30, 44)
 	return finish_preview_icon(icon)
 
 /datum/antagonist/voidwalker/forge_objectives()
@@ -35,14 +35,14 @@
 
 /datum/objective/voidwalker_objective/New()
 	var/list/explanation_texts = list(
-		"Show them the beauty of the void. Drag them into the cosmic abyss, then impart the truth of the void unto them. Seek to enlighten, not destroy.",
-		"They must see what you have seen. They must walk where you have walked. Bring them to the void and show them the truth. The dead cannot know what you know.",
-		"Recover what you have lost. Bring your children into the inky black and return them to your flock.",
+		"Покажи им красоту пустоты. Увлеки их в космическую бездну, а затем передай им истину о пустоте. Стремись просвещать, а не разрушать.",
+		"Они должны увидеть то, что видели вы. Они должны пройти там, где прошли вы. Отведите их в пустоту и покажите им правду. Мёртвые не могут знать того, что знаете вы.",
+		"Верните себе утраченное. Приведите своих детей чернильную тьму и верните их в свою паству.",
 	)
 	explanation_text = pick(explanation_texts)
 
 	if(prob(5))
-		explanation_text = "Man I fucking love glass."
+		explanation_text = "Чувак, я чертовски люблю стекло."
 	..()
 
 /datum/objective/voidwalker_objective/check_completion()

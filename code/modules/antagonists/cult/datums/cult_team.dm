@@ -65,7 +65,6 @@
 				SEND_SOUND(mind.current, sound(SFX_HALLUCINATION_I_SEE_YOU)) /// BANDASTATION EDIT - Cult Sounds
 				to_chat(mind.current, span_cult_large(span_warning("Покров слабеет с ростом культа - ваши глаза начинают светиться...")))
 				mind.current.AddElement(/datum/element/cult_eyes)
-				ADD_TRAIT(mind.current, TRAIT_DESENSITIZED, CULT_TRAIT)
 		cult_risen = TRUE
 		log_game("The blood cult has risen with [cultplayers] players.")
 

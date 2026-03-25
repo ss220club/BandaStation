@@ -53410,7 +53410,7 @@
 /area/station/medical/lower)
 "hRk" = (
 /obj/structure/table,
-/obj/item/toy/katana,
+/obj/item/storage/belt/sheath/katana/toy,
 /obj/item/gun/ballistic/shotgun/toy/crossbow,
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
@@ -72120,8 +72120,8 @@
 	dir = 4
 	},
 /obj/structure/table/glass,
-/obj/item/stack/medical/gauze,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/suture,
@@ -80632,7 +80632,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/item/toy/katana,
+/obj/item/storage/belt/sheath/katana/toy,
 /turf/open/floor/bamboo/tatami/black,
 /area/station/maintenance/starboard/central)
 "lTG" = (
@@ -116905,7 +116905,7 @@
 	pixel_y = 12;
 	pixel_x = 8
 	},
-/obj/item/stack/medical/gauze{
+/obj/item/stack/medical/wrap/gauze{
 	pixel_x = 5
 	},
 /obj/effect/turf_decal/tile/blue/full,
@@ -138208,7 +138208,7 @@
 /obj/effect/turf_decal/siding/dark,
 /obj/effect/turf_decal/trimline/dark_blue/filled/line,
 /obj/structure/rack,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/suture,
 /obj/item/reagent_containers/syringe/epinephrine{
@@ -147443,7 +147443,7 @@
 	dir = 6
 	},
 /obj/structure/table/glass,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/suture,
 /obj/effect/turf_decal/trimline/blue/corner{
@@ -152840,7 +152840,7 @@
 /obj/machinery/door/airlock/wood{
 	name = "Abandoned Theater"
 	},
-/obj/effect/spawner/random/structure/barricade,
+/obj/effect/spawner/random/structure/barricade/crude,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/wood/tile,

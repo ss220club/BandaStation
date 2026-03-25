@@ -212,7 +212,7 @@
 			new /obj/item/toy/cards/deck/syndicate(src) // 1 tc, for poker
 
 		if(KIT_NINJA)
-			new /obj/item/katana(src) // Unique , hard to tell how much tc this is worth. 8 tc?
+			new /obj/item/storage/belt/sheath/katana(src) // Unique , hard to tell how much tc this is worth. 8 tc?
 			new /obj/item/reagent_containers/hypospray/medipen/stimulants(src) // 5 tc
 			for(var/i in 1 to 6)
 				new /obj/item/throwing_star(src) // 1 tc
@@ -478,7 +478,7 @@
 	new /obj/item/reagent_containers/cup/bottle/polonium(src)
 	new /obj/item/reagent_containers/cup/bottle/venom(src)
 	new /obj/item/reagent_containers/cup/bottle/fentanyl(src)
-	new /obj/item/reagent_containers/cup/bottle/formaldehyde(src)
+	new /obj/item/reagent_containers/cup/bottle/anacea(src)
 	new /obj/item/reagent_containers/cup/bottle/spewium(src)
 	new /obj/item/reagent_containers/cup/bottle/syndol(src)
 	new /obj/item/reagent_containers/cup/bottle/cyanide(src)

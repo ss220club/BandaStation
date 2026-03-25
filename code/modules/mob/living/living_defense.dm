@@ -133,7 +133,7 @@
 		if (SUPPRESSED_QUIET)
 			to_chat(src, span_userdanger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по вам[organ_hit_text]!"))
 		if (SUPPRESSED_NONE)
-			visible_message(span_danger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по [declent_ru(DATIVE)][organ_hit_text]!"), \
+			visible_message(span_danger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает [declent_ru(DATIVE)][organ_hit_text]!"), \
 					span_userdanger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по вам[organ_hit_text]!"), null, COMBAT_MESSAGE_RANGE)
 			if(is_blind())
 				to_chat(src, span_userdanger("Вы чувствуете, как что-то попадает по вам[organ_hit_text]!"))
@@ -142,7 +142,7 @@
 		apply_projectile_effects(proj, def_zone, blocked)
 
 /mob/living/proc/apply_projectile_effects(obj/projectile/proj, def_zone, armor_check)
-	apply_damage(
+	var/damage_dealt = apply_damage(
 		damage = proj.damage,
 		damagetype = proj.damage_type,
 		def_zone = def_zone,
@@ -153,6 +153,10 @@
 		attack_direction = get_dir(proj.starting, src),
 		attacking_item = proj,
 	)
+
+	if(proj.damage_type == BRUTE && damage_dealt >= 10 && proj.speed >= 1 && prob(0.1))
+		var/obj/item/organ/brain/a_brain = locate() in get_bodypart(def_zone)
+		a_brain?.cure_trauma_type(resilience = TRAUMA_RESILIENCE_LOBOTOMY)
 
 	apply_effects(
 		stun = proj.stun,
@@ -174,6 +178,10 @@
 
 	if (proj.damage && armor_check < 100)
 		create_projectile_hit_effects(proj, def_zone, armor_check)
+
+	if(proj.fired_from)
+		SEND_SIGNAL(proj.fired_from, COMSIG_PROJECTILE_POST_HIT_LIVING, src, def_zone, armor_check)
+	SEND_SIGNAL(proj, COMSIG_PROJECTILE_SELF_POST_HIT_LIVING, src, def_zone, armor_check)
 
 /mob/living/proc/create_projectile_hit_effects(obj/projectile/proj, def_zone, blocked)
 	if (proj.damage_type != BRUTE)
@@ -473,7 +481,7 @@
 	if(.)
 		return TRUE
 
-	if(!combat_mode && HAS_TRAIT(src, TRAIT_READY_TO_OPERATE) && user.perform_surgery(src))
+	if(!user.combat_mode && HAS_TRAIT(src, TRAIT_READY_TO_OPERATE) && user.perform_surgery(src))
 		return TRUE
 
 	return FALSE
@@ -674,7 +682,7 @@
 	return TRUE
 
 //called when the mob receives a loud bang
-/mob/living/proc/soundbang_act(intensity = SOUNDBANG_NORMAL, stun_pwr = 20, damage_pwr = 5, deafen_pwr = 15, ignore_deafness = FALSE, send_sound = TRUE)
+/mob/living/proc/soundbang_act(intensity = SOUNDBANG_NORMAL, stun_pwr = 2 SECONDS, damage_pwr = 5, deafen_pwr = 1.5 SECONDS, ignore_deafness = FALSE, send_sound = TRUE)
 	var/protection = get_ear_protection(ignore_deafness)
 	if(protection >= intensity)
 		return FALSE
@@ -699,12 +707,12 @@
 		SEND_SOUND(src, sound('sound/items/weapons/flash_ring.ogg',0, 1, 0, 250))
 
 	if(ears.damage >= 15 && prob(ears.damage - 5))
-		to_chat(src, span_userdanger("You can't hear anything!"))
+		to_chat(src, span_userdanger("Вы ничего не слышите!"))
 		// Makes you deaf, enough that you need a proper source of healing, it won't self heal
 		// you need earmuffs, inacusiate, or replacement
 		ears.set_organ_damage(ears.maxHealth)
 	else if(ears.damage >= 5)
-		to_chat(src, span_warning("Your ears start to ring[ears.damage >= 15 ? " badly!":"!"]"))
+		to_chat(src, span_warning("У вас начинает[ears.damage >= 15 ? " очень сильно":""] звенеть в ушах!"))
 
 
 //to damage the clothes worn by a mob

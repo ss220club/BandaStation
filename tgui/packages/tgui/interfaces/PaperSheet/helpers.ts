@@ -16,10 +16,11 @@ export function canEdit(heldItemDetails?: WritingImplement): boolean {
 
 export function parseReplacements(
   text: string,
-  replacements: PaperReplacement[],
+  replacements: PaperReplacement[] | undefined,
 ) {
+  const list = Array.isArray(replacements) ? replacements : [];
   return text.replace(replacementRegex, (match, p1) => {
-    return replacements.find((value) => p1 === value.key)?.value || match;
+    return list.find((value) => p1 === value.key)?.value || match;
   });
 }
 
