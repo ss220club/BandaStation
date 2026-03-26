@@ -192,8 +192,7 @@
 				var/status = ""
 				if(get_brute_loss())
 					to_chat(human_user, "<b>Анализ ушибов на коже:</b>")
-					for(var/X in bodyparts)
-						var/obj/item/bodypart/BP = X
+					for(var/obj/item/bodypart/BP as anything in get_bodyparts())
 						var/brutedamage = BP.brute_dam
 						if(brutedamage > 0)
 							status = "имеет незначительные ушибы."
@@ -208,8 +207,7 @@
 							to_chat(human_user, "<span class='[span]'>[capitalize(BP.declent_ru(NOMINATIVE))] [status]</span>")
 				if(get_fire_loss())
 					to_chat(human_user, "<b>Анализ ожогов на коже:</b>")
-					for(var/X in bodyparts)
-						var/obj/item/bodypart/BP = X
+					for(var/obj/item/bodypart/BP as anything in get_bodyparts())
 						var/burndamage = BP.burn_dam
 						if(burndamage > 0)
 							status = "имеет незначительные ожоги."
