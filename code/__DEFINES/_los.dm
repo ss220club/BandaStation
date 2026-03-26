@@ -14,6 +14,7 @@
 #define LOS_PROXY_INIT_BLOCK_TYPES list( \
 	/obj/item, \
 	/obj/effect, \
+	/obj/machinery/power/supermatter_crystal, \
 )
 
 #define LOS_PROXY_NO_OVERLAY_MIRROR_TYPES list( \
