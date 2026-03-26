@@ -66,7 +66,6 @@
 
 	if(istype(item, /obj/item/stack/sheet/mineral/diamond))
 		var/obj/item/stack/stack_item = item
-			return TRUE
 		if(!user)
 			return TRUE
 		if(!stack_item.use(1))
