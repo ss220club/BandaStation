@@ -66,7 +66,6 @@
 
 	if(istype(item, /obj/item/stack/sheet/mineral/diamond))
 		var/obj/item/stack/stack_item = item
-		if(stack_item.amount < 1)
 			return TRUE
 		if(!user)
 			return TRUE
