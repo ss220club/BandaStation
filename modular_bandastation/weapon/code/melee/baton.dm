@@ -1,6 +1,6 @@
 /obj/item/melee/baton/nt_cane
 	name = "fancy cane"
-	desc = "A cane with special engraving on it. It seems well suited for fending off assailants..."
+	desc = "Трость со специальной гравировкой. Кажется, она хорошо подходит для защиты от нападающих..."
 	icon = 'modular_bandastation/weapon/icons/melee/baton.dmi'
 	icon_state = "cane_nt"
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
@@ -8,13 +8,13 @@
 	inhand_icon_state = "cane_nt"
 
 /datum/action/item_action/toggle_nt_cane_safety
-	name = "Toggle Safety"
-	desc = "Toggles the cane's safety. Requires holding it in your active hand."
+	name = "toggle safety"
+	desc = "Переключает предохранитель на вашей трости. Требуется держать в активной руке для активации."
 
 /obj/item/melee/baton/nt_cane/gun
-	desc = "A cane with special engraving on it. It seems well suited for fending off assailants... \n\
-			It has a small button under the index finger on the handle.\n\
-			There's a hole on top of the handle for loading something valuable into the cane."
+	desc = "Трость со специальной гравировкой. Кажется, она хорошо подходит для защиты от нападающих... \n\
+			Под указательным пальцем на рукоятке есть небольшая кнопка.\n\
+			В верхней части рукояти имеется отверстие для чего-то ценного."
 	var/load_sound = 'sound/effects/clock_tick.ogg'
 	var/shot_sound = 'sound/items/weapons/effects/ric1.ogg'
 	var/safety_on = TRUE
@@ -34,7 +34,7 @@
 		return
 
 	if(user && target && !user.Adjacent(target))
-		user.balloon_alert(user, "not loaded!")
+		user.balloon_alert(user, "нет заряда!")
 		return
 	return ..()
 
@@ -56,22 +56,22 @@
 
 /obj/item/melee/baton/nt_cane/gun/examine(mob/user)
 	. = ..()
-	. += "safety: [safety_on ? "on" : "off"]."
-	. += "ammo: [diamond_loaded ? "full" : "empty"]."
+	. += "предохранитель: [safety_on ? "включен" : "выключен"]."
+	. += "заряд: [diamond_loaded ? "есть" : "отсутствует"]."
 
 /obj/item/melee/baton/nt_cane/gun/proc/try_load_diamond(obj/item/item, mob/user)
 	if(diamond_loaded)
-		user?.balloon_alert(user, "already loaded!")
+		user?.balloon_alert(user, "уже заряжена!")
 		return TRUE
 
 	if(istype(item, /obj/item/stack/sheet/mineral/diamond))
 		var/obj/item/stack/stack_item = item
-			return TRUE
-		if(!stack_item.use(1))
-		diamond_loaded = TRUE
+
+		if(stack_item.use(1))
+			diamond_loaded = TRUE
 		if(load_sound)
 			playsound(src, load_sound, 50, TRUE)
-		user.balloon_alert(user, "loaded")
+		user.balloon_alert(user, "заряжено")
 		update_item_action_buttons()
 		return TRUE
 
@@ -86,7 +86,7 @@
 		return TRUE
 
 	if(!COOLDOWN_FINISHED(src, fire_cooldown))
-		user.balloon_alert(user, "reloading!")
+		user.balloon_alert(user, "перезарядка!")
 		return TRUE
 
 	COOLDOWN_START(src, fire_cooldown, 1.5 SECONDS)
@@ -99,16 +99,16 @@
 	if(!user)
 		return FALSE
 	if(user.get_active_held_item() != src)
-		user.balloon_alert(user, "in active hand!")
+		user.balloon_alert(user, "возьмите в активную руку!")
 		return FALSE
 
 	if(!COOLDOWN_FINISHED(src, safety_toggle_cooldown))
-		user.balloon_alert(user, "reloading!")
+		user.balloon_alert(user, "перезарядка!")
 		return FALSE
 	COOLDOWN_START(src, safety_toggle_cooldown, 3 SECONDS)
 
 	safety_on = !safety_on
-	user.balloon_alert(user, "safety: [safety_on ? "on" : "off"].")
+	user.balloon_alert(user, "предохранитель: [safety_on ? "включен" : "выключен"].")
 	add_fingerprint(user)
 	update_item_action_buttons()
 	INVOKE_ASYNC(src, PROC_REF(play_safety_sound), user)

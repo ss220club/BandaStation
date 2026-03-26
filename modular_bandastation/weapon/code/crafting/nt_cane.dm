@@ -1,5 +1,5 @@
 /datum/crafting_recipe/nt_cane_gun
-	name = "Fancy Cane Gun"
+	name = "fancy cane gun"
 	result = /obj/item/melee/baton/nt_cane/gun
 	time = 10 SECONDS
 	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_MULTITOOL)
