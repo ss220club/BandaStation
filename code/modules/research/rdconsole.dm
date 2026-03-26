@@ -70,31 +70,38 @@ Nothing else in the console has ID requirements.
 		d_disk = null
 	return ..()
 
-/obj/machinery/computer/rdconsole/attackby(obj/item/D, mob/user, list/modifiers, list/attack_modifiers)
-	//Loading a disk into it.
-	if(istype(D, /obj/item/disk))
-		if(istype(D, /obj/item/disk/tech_disk))
-			if(t_disk)
-				to_chat(user, span_warning("Диск с технологией уже загружен!"))
-				return
-			if(!user.transferItemToLoc(D, src))
-				to_chat(user, span_warning("[D.declent_ru(NOMINATIVE)] застрял в вашей руке!"))
-				return
-			t_disk = D
-		else if (istype(D, /obj/item/disk/design_disk))
-			if(d_disk)
-				to_chat(user, span_warning("Диск с дизайном уже загружен!"))
-				return
-			if(!user.transferItemToLoc(D, src))
-				to_chat(user, span_warning("[D.declent_ru(NOMINATIVE)] застрял в вашей руке!"))
-				return
-			d_disk = D
-		else
-			to_chat(user, span_warning("Консоль не принимает диски такого формата."))
-			return
-		to_chat(user, span_notice("Вы вставляете [D.declent_ru(NOMINATIVE)] в [declent_ru(ACCUSATIVE)]!"))
-		return
-	return ..()
+/obj/machinery/computer/rdconsole/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/disk))
+		return NONE
+
+	if(istype(tool, /obj/item/disk/tech_disk))
+		if(t_disk)
+			to_chat(user, span_warning("Диск с технологией уже загружен!"))
+			return ITEM_INTERACT_BLOCKING
+
+		if(!user.transferItemToLoc(tool, src))
+			to_chat(user, span_warning("[tool] застрял в вашей руке!"))
+			return ITEM_INTERACT_BLOCKING
+
+		t_disk = tool
+		to_chat(user, span_notice("Вы вставляете [tool] в [src]!"))
+		return ITEM_INTERACT_SUCCESS
+
+	if (!istype(tool, /obj/item/disk/design_disk))
+		to_chat(user, span_warning("Консоль не принимает диски такого формата."))
+		return ITEM_INTERACT_BLOCKING
+
+	if(d_disk)
+		to_chat(user, span_warning("Диск с технологией уже загружен!"))
+		return ITEM_INTERACT_BLOCKING
+
+	if(!user.transferItemToLoc(tool, src))
+		to_chat(user, span_warning("[tool] застрял в вашей руке!"))
+		return ITEM_INTERACT_BLOCKING
+
+	d_disk = tool
+	to_chat(user, span_notice("Вы вставляете [tool] в [src]!"))
+	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/computer/rdconsole/multitool_act(mob/living/user, obj/item/multitool/tool)
 	. = ..()

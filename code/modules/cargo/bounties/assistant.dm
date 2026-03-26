@@ -213,7 +213,7 @@
 
 /datum/bounty/item/assistant/pneumatic_cannon
 	name = "Пневматическая пушка"
-	description = "Мы выясняем, как сильно мы можем запускать осколки суперматтерии из пневматической пушки. Отправьте нам одну как можно скорее."
+	description = "Мы выясняем, как сильно мы можем запускать осколки суперматерии из пневматической пушки. Отправьте нам одну как можно скорее."
 	reward = CARGO_CRATE_VALUE * 4
 	wanted_types = list(/obj/item/pneumatic_cannon/ghetto = TRUE)
 
