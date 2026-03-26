@@ -68,7 +68,6 @@
 		var/obj/item/stack/stack_item = item
 			return TRUE
 		if(!stack_item.use(1))
-			return TRUE
 		diamond_loaded = TRUE
 		if(load_sound)
 			playsound(src, load_sound, 50, TRUE)
