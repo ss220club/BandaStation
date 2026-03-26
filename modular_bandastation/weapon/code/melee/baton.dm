@@ -70,7 +70,8 @@
 			return TRUE
 		if(!user)
 			return TRUE
-		stack_item.use(1)
+		if(!stack_item.use(1))
+			return TRUE
 		diamond_loaded = TRUE
 		if(load_sound)
 			playsound(src, load_sound, 50, TRUE)
