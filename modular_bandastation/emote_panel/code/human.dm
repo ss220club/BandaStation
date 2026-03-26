@@ -46,6 +46,23 @@
 		'modular_bandastation/emote_panel/audio/human/male/laugh_male_2.ogg',
 	)
 
+/// Returns the species' giggle sound.
+/datum/emote/living/giggle/get_sound(mob/living/carbon/human/user)
+	if(!istype(user))
+		return
+	return user.dna.species.get_giggle_sound(user)
+/datum/species/proc/get_giggle_sound(mob/living/carbon/human/user)
+	if(user.physique == FEMALE)
+		return pick(
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_1.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_2.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_3.ogg',
+			'modular_bandastation/emote_panel/audio/human/female/giggle_female_4.ogg',
+		)
+	return pick(
+		'modular_bandastation/emote_panel/audio/human/male/giggle_male_1.ogg',
+		'modular_bandastation/emote_panel/audio/human/male/giggle_male_2.ogg',
+	)
 // MARK: Emotes
 /datum/emote/living/sniffle
 	key = "sniffle"
@@ -140,23 +157,6 @@
 		'modular_bandastation/emote_panel/audio/human/male/moan_male_1.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/moan_male_2.ogg',
 		'modular_bandastation/emote_panel/audio/human/male/moan_male_3.ogg',
-	)
-
-/datum/emote/living/giggle/get_sound(mob/living/user)
-	if(!ishuman(user))
-		return
-
-	var/mob/living/carbon/human/human_user = user
-	if(human_user.physique == FEMALE)
-		return pick(
-			'modular_bandastation/emote_panel/audio/human/female/giggle_female_1.ogg',
-			'modular_bandastation/emote_panel/audio/human/female/giggle_female_2.ogg',
-			'modular_bandastation/emote_panel/audio/human/female/giggle_female_3.ogg',
-			'modular_bandastation/emote_panel/audio/human/female/giggle_female_4.ogg',
-		)
-	return pick(
-		'modular_bandastation/emote_panel/audio/human/male/giggle_male_1.ogg',
-		'modular_bandastation/emote_panel/audio/human/male/giggle_male_2.ogg',
 	)
 
 /datum/emote/living/dance
