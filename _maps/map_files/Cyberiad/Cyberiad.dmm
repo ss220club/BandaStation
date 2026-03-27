@@ -1810,12 +1810,6 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/fore/starboard)
 "axO" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/purple{
-	dir = 8
-	},
 /obj/machinery/firealarm/directional/west,
 /turf/open/floor/iron/white,
 /area/station/science/research)
@@ -2536,7 +2530,7 @@
 	dir = 8
 	},
 /turf/open/space/openspace,
-/area/space/nearstation)
+/area/space)
 "aFT" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/chair/stool{
@@ -21141,6 +21135,7 @@
 /obj/effect/turf_decal/tile/purple/half{
 	dir = 4
 	},
+/obj/machinery/firealarm/directional/east,
 /turf/open/floor/iron/white,
 /area/station/science/auxlab/firing_range)
 "fgX" = (
@@ -33219,11 +33214,11 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "hZc" = (
-/obj/machinery/power/apc/auto_name/directional/west,
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/purple/half{
 	dir = 8
 	},
+/obj/machinery/firealarm/directional/west,
 /turf/open/floor/iron/white,
 /area/station/science/circuits)
 "hZf" = (
@@ -39371,7 +39366,6 @@
 "jCp" = (
 /obj/structure/ladder,
 /obj/effect/turf_decal/stripes/box,
-/obj/machinery/firealarm/directional/east,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
 "jCv" = (
@@ -49342,7 +49336,8 @@
 /obj/effect/turf_decal/tile/purple/half{
 	dir = 8
 	},
-/obj/machinery/firealarm/directional/west,
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/west,
 /turf/open/floor/iron/white,
 /area/station/science/circuits)
 "lVo" = (
@@ -49609,10 +49604,10 @@
 /turf/open/floor/stone,
 /area/station/service/hydroponics/ghetto)
 "lYf" = (
-/obj/machinery/firealarm/directional/east,
 /obj/effect/turf_decal/tile/purple/half{
 	dir = 4
 	},
+/obj/machinery/light_switch/directional/east,
 /turf/open/floor/iron/white,
 /area/station/science/auxlab/firing_range)
 "lYr" = (
@@ -208807,7 +208802,7 @@ fZm
 nPZ
 nnU
 jCp
-nPZ
+wvQ
 blE
 pPG
 nnU
@@ -211888,10 +211883,10 @@ uUN
 lYW
 eyE
 eyE
-axO
+reB
 vbv
 uUN
-uUN
+axO
 sDE
 eyE
 cLI
