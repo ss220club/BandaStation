@@ -318,7 +318,7 @@
 		var/client/candidate_client = GET_CLIENT(candidate)
 		if(!candidate_client)
 			continue
-		var/weight = calculate_candidate_weight(candidate_client.ckey)
+		var/weight = get_candidate_weight(candidate_client.ckey)
 		weighted_candidates[candidate] = weight
 
 	if(!length(weighted_candidates))
