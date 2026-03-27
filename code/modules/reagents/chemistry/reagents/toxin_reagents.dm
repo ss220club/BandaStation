@@ -335,7 +335,7 @@
 	. = ..()
 	// BANDASTATION EDIT - START
 	affected_mob.cure_fakedeath(type)
-	// BANDASTASTION EDIT - END
+	// BANDASTATION EDIT - END
 
 /datum/reagent/toxin/zombiepowder/on_mob_life(mob/living/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
