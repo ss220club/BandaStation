@@ -91,8 +91,8 @@
 // БАТАРЕЯ (СЕРДЦЕ)
 
 /obj/item/organ/heart/ipc_battery
-	name = "IPC power cell"
-	desc = "Высокоемкая батарея, обеспечивающая питание всех систем IPC."
+	name = "ipc power cell"
+	desc = "Высокоемкая батарея, обеспечивающая питание всех систем КПБ."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "ipc_cell"
 	zone = BODY_ZONE_CHEST
@@ -141,16 +141,16 @@
 	switch(severity)
 		if(EMP_HEAVY)
 			charge = max(0, charge - (maxcharge * 0.5))
-			to_chat(owner, span_userdanger("КРИТИЧЕСКАЯ ОШИБКА: Батарея разряжена на 50%!"))
+			to_chat(owner, span_userdanger("КРИТИЧЕСКАЯ ОШИБКА: Нестабильное поведение батареи!"))
 		if(EMP_LIGHT)
 			charge = max(0, charge - (maxcharge * 0.25))
-			to_chat(owner, span_danger("Предупреждение: Батарея разряжена на 25%."))
+			to_chat(owner, span_danger("Предупреждение: Повреждение батареи."))
 
 // ЛЕГКИЕ (СИСТЕМА ОХЛАЖДЕНИЯ)
 
 /obj/item/organ/lungs/ipc
 	name = "cooling system"
-	desc = "Система охлаждения IPC. Регулирует температуру вычислительных блоков."
+	desc = "Система охлаждения КПБ. Регулирует температуру вычислительных блоков."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "ipc_cooler"
 	zone = BODY_ZONE_CHEST
@@ -160,8 +160,8 @@
 // ГЛАЗА
 
 /obj/item/organ/eyes/robotic/ipc
-	name = "IPC optical sensors"
-	desc = "Оптические сенсоры IPC. Позволяют видеть в различных спектрах."
+	name = "ipc optical sensors"
+	desc = "Оптические сенсоры кпб. Позволяют видеть в различных спектрах."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "ipc_eyes"
 	organ_flags = ORGAN_ROBOTIC
@@ -170,8 +170,8 @@
 // УШИ
 
 /obj/item/organ/ears/robot/ipc
-	name = "IPC audio sensors"
-	desc = "Аудио сенсоры IPC."
+	name = "ipc audio sensors"
+	desc = "Аудио сенсоры КПБ."
 	icon = 'icons/obj/medical/organs/organs.dmi'
 	icon_state = "ears-c"
 	base_icon_state = "ears-c"
@@ -181,8 +181,8 @@
 // ЯЗЫК
 
 /obj/item/organ/tongue/robot/ipc
-	name = "IPC vocal synthesizer"
-	desc = "Голосовой синтезатор IPC."
+	name = "ipc vocal synthesizer"
+	desc = "Голосовой синтезатор КПБ."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "ipc_voicebox"
 	organ_flags = ORGAN_ROBOTIC

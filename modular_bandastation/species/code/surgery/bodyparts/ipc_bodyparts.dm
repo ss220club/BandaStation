@@ -17,7 +17,7 @@
 
 
 /obj/item/bodypart/chest/ipc
-	name = "Корпус КПБ"
+	name = "ipc chassis"
 	desc = "Основной корпус КПБ, содержащий все жизненно важные системы."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
@@ -47,7 +47,7 @@
 
 
 /obj/item/bodypart/head/ipc
-	name = "Голова КПБ"
+	name = "ipc head"
 	desc = "Голова КПБ с оптическими и аудио-сенсорами."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
@@ -96,13 +96,13 @@
 		internal_organ.forceMove(drop_location)
 
 /obj/item/bodypart/head/ipc/monitor
-	name = "Голова-монитор КПБ"
+	name = "ipc head-monitor"
 	desc = "Голова-монитор КПБ с встроенным дисплеем вместо лица."
 	ipc_visual_state = "monitor"
 
 
 /obj/item/bodypart/arm/left/ipc
-	name = "Левая рука КПБ"
+	name = "ipc left arm"
 	desc = "Левая рука КПБ."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
@@ -126,7 +126,7 @@
 
 
 /obj/item/bodypart/arm/right/ipc
-	name = "Правая рука КПБ"
+	name = "ipc right arm"
 	desc = "Правая рука КПБ."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
@@ -149,7 +149,7 @@
 
 
 /obj/item/bodypart/leg/left/ipc
-	name = "Левая нога КПБ"
+	name = "ipc left leg"
 	desc = "Левая нога КПБ."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
@@ -172,7 +172,7 @@
 
 
 /obj/item/bodypart/leg/right/ipc
-	name = "Правая нога КПБ"
+	name = "ipc right leg"
 	desc = "Правая нога КПБ."
 	icon = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	icon_static = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'

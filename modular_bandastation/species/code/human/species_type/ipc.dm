@@ -436,3 +436,9 @@
 			new_state = "cell_full"
 	for(var/atom/movable/screen/ipc_battery_hud/indicator in H.hud_used.infodisplay)
 		indicator.icon_state = new_state
+
+//Квирки
+/datum/quirk/is_species_appropriate(datum/species/mob_species)
+	if(mob_species == /datum/species/ipc)
+		return FALSE
+	return ..()
