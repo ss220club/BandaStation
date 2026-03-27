@@ -20,7 +20,7 @@
 
 /obj/item/organ/brain/positronic
 	name = "positronic brain"
-	desc = "Комплексный позитронный блок, содержащий искусственное сознание. Основа любого IPC."
+	desc = "Комплексный позитронный блок, содержащий искусственное сознание. Основа любого КПБ."
 	icon = 'icons/obj/devices/assemblies.dmi'
 	icon_state = "posibrain"
 	zone = BODY_ZONE_CHEST
