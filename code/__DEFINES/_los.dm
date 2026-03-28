@@ -20,6 +20,10 @@
 	/obj/structure/fence/door, \
 )
 
+#define LOS_PROXY_PERSISTENT_OVERLAY_MIRROR_TYPES list( \
+	/obj/structure/closet, \
+)
+
 #define LOS_PROXY_INIT_ALLOW_TYPES list( \
 )
 
