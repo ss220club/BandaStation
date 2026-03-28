@@ -35,7 +35,7 @@
 #ifdef LOS_ENABLED
 	for(var/atom/movable/los_proxy/proxy as anything in vis_contents)
 		proxy.layer = 2.85
-		proxy.blend_mode = BLEND_INSET_OVERLAY
+		proxy.blend_mode = BLEND_DEFAULT
 #endif
 // BANDASTATION MOD END: LOS
 
