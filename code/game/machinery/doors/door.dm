@@ -76,7 +76,7 @@
 
 	// BANDASTATION MOD START: LOS
 #ifdef LOS_ENABLED
-	var/atom/movable/shadowcaster_dynamic/shadowcaster_ref
+	var/atom/movable/shadowcaster/shadowcaster_ref
 #endif
 	// BANDASTATION MOD END: LOS
 
@@ -535,8 +535,8 @@
 		else
 			icon_state = "[base_icon_state]_[density ? "closed" : "open"]"
 #ifdef LOS_ENABLED
-	if(istype(shadowcaster_ref, /atom/movable/shadowcaster_dynamic))
-		shadowcaster_ref.update_from_door(src)
+	if(shadowcaster_ref)
+		sync_los_shadowcaster_for_door(shadowcaster_ref, src)
 #endif
 
 /obj/machinery/door/update_overlays()

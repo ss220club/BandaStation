@@ -8,9 +8,6 @@
 // kills half pixel blur from displace
 #define SHADOW_PLANES_BLACK_OPAQUE_MATRIX list(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,2550, 0,0,0,0)
 
-#define SHADOW_ANIM_DOOR 0
-#define SHADOW_ANIM_FALSE_WALL 1
-
 #define LOS_PROXY_INIT_BLOCK_TYPES list( \
 	/obj/item, \
 	/obj/effect, \

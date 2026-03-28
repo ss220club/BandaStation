@@ -27,7 +27,8 @@
 	var/opening = FALSE
 	// BANDASTATION MOD START: LOS
 #ifdef LOS_ENABLED
-	var/atom/movable/shadowcaster_dynamic/shadowcaster_ref
+	plane = WALL_PLANE
+	var/atom/movable/shadowcaster/shadowcaster_ref
 #endif
 	// BANDASTATION MOD END: LOS
 
@@ -40,7 +41,8 @@
 	. = ..()
 	// BANDASTATION MOD START: LOS
 #ifdef LOS_ENABLED
-	shadowcaster_ref = new /atom/movable/shadowcaster_dynamic(loc, src, SHADOW_ANIM_FALSE_WALL)
+	shadowcaster_ref = new /atom/movable/shadowcaster(loc, src)
+	sync_los_shadowcaster_for_falsewall(shadowcaster_ref, src)
 #endif
 	// BANDASTATION MOD END: LOS
 	var/obj/item/stack/initialized_mineral = new mineral // Okay this kinda sucks.
@@ -98,7 +100,7 @@
 		// BANDASTATION MOD START: LOS
 #ifdef LOS_ENABLED
 		if(shadowcaster_ref)
-			shadowcaster_ref.update_from_door(src)
+			sync_los_shadowcaster_for_falsewall(shadowcaster_ref, src)
 #endif
 	// BANDASTATION MOD END: LOS
 		return ..()
@@ -111,7 +113,7 @@
 		// BANDASTATION MOD START: LOS
 #ifdef LOS_ENABLED
 	if(shadowcaster_ref)
-		shadowcaster_ref.update_from_door(src)
+		sync_los_shadowcaster_for_falsewall(shadowcaster_ref, src)
 #endif
 	// BANDASTATION MOD END: LOS
 	return ..()

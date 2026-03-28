@@ -194,8 +194,8 @@
 	RegisterSignal(SSdcs, COMSIG_GLOB_GREY_TIDE, PROC_REF(grey_tide))
 	// BANDASTATION MOD START: LOS
 #ifdef LOS_ENABLED
-	shadowcaster_ref = new /atom/movable/shadowcaster_dynamic(loc, src, SHADOW_ANIM_DOOR)
-	shadowcaster_ref.animated_shadow = TRUE
+	shadowcaster_ref = new /atom/movable/shadowcaster(loc, src)
+	sync_los_shadowcaster_for_door(shadowcaster_ref, src)
 	if(airlock_material)
 		QDEL_NULL(shadowcaster_ref)
 #endif
@@ -561,7 +561,7 @@
 	. = ..()
 #ifdef LOS_ENABLED
 	if(shadowcaster_ref)
-		shadowcaster_ref.update_from_door(src)
+		sync_los_shadowcaster_for_door(shadowcaster_ref, src)
 #endif
 
 /obj/machinery/door/airlock/update_icon_state()
