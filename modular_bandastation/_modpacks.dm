@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(modpacks)
 	name = "Modpacks"
 	init_stage = INITSTAGE_FIRST
-	flags = SS_NO_FIRE
+	ss_flags = SS_NO_FIRE
 	var/list/loaded_modpacks = list()
 
 /datum/controller/subsystem/modpacks/Initialize()

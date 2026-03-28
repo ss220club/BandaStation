@@ -333,7 +333,9 @@
 
 /datum/reagent/toxin/zombiepowder/on_mob_end_metabolize(mob/living/affected_mob)
 	. = ..()
-	affected_mob.remove_status_effect(/datum/status_effect/reagent_effect/fakedeath)
+	// BANDASTATION EDIT - START
+	affected_mob.cure_fakedeath(type)
+	// BANDASTATION EDIT - END
 
 /datum/reagent/toxin/zombiepowder/on_mob_life(mob/living/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
@@ -785,15 +787,9 @@
 		if(affected_mob.adjust_tox_loss(-1 * metabolization_ratio * seconds_per_tick, updating_health = FALSE, required_biotype = affected_biotype)) //it counteracts its own toxin damage.
 			return UPDATE_MOB_HEALTH
 		return
-	else if(SPT_PROB(2.5, seconds_per_tick) && !HAS_TRAIT(affected_mob, TRAIT_BLOCK_FORMALDEHYDE_METABOLISM))
+	else if(SPT_PROB(2.5, seconds_per_tick))
 		holder.add_reagent(/datum/reagent/toxin/histamine, pick(5,15))
 		holder.remove_reagent(/datum/reagent/toxin/formaldehyde, 2.4 * metabolization_ratio * seconds_per_tick)
-	return ..()
-
-/datum/reagent/toxin/formaldehyde/metabolize_reagent(mob/living/carbon/affected_mob, seconds_per_tick, metabolized_volume)
-	if(HAS_TRAIT(affected_mob, TRAIT_BLOCK_FORMALDEHYDE_METABOLISM))
-		return
-
 	return ..()
 
 /datum/reagent/toxin/venom

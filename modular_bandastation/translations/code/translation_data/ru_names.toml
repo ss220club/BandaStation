@@ -3307,6 +3307,25 @@ prepositional = "перчатках криминалиста"
 gender = "plural"
 
 # MARK: Weapons
+
+["carp gloves"]
+nominative = "перчатки карпа"
+genitive = "пперчаток карпа"
+dative = "перчаткам карпа"
+accusative = "перчатки карпа"
+instrumental = "перчатками карпа"
+prepositional = "перчатках карпа"
+gender = "plural"
+
+["bo staff"]
+nominative = "посох бо"
+genitive = "посоха бо"
+dative = "посоху бо"
+accusative = "посох бо"
+instrumental = "посохом бо"
+prepositional = "посохе бо"
+gender = "male"
+
 ["proto-kinetic accelerator"]
 nominative = "протокинетический акселератор"
 genitive = "протокинетического акселератора"
@@ -13159,6 +13178,15 @@ instrumental = "белой тростью"
 prepositional = "белой трости"
 gender = "female"
 
+["fancy cane"]
+nominative = "изящная трость"
+genitive = "изящной трости"
+dative = "изящной трости"
+accusative = "изящную трость"
+instrumental = "изящной тростью"
+prepositional = "изящной трости"
+gender = "female"
+
 ["medical eyepatch"]
 nominative = "медицинская повязка на глаз"
 genitive = "медицинской повязки на глаз"
@@ -20790,6 +20818,15 @@ instrumental = "алмазом"
 prepositional = "алмазе"
 gender = "male"
 
+["diamond shot"]
+nominative = "алмазный заряд"
+genitive = "алмазного заряда"
+dative = "алмазному заряду"
+accusative = "алмазный заряд"
+instrumental = "алмазным зарядом"
+prepositional = "алмазном заряде"
+gender = "male"
+
 ["bluespace polycrystal"]
 nominative = "блюспейс поликристалл"
 genitive = "блюспейс поликристалла"
@@ -24219,6 +24256,24 @@ instrumental = "тростью"
 prepositional = "трости"
 gender = "female"
 
+["fancy cane gun"]
+nominative = "трость-пистолет"
+genitive = "трости-пистолета"
+dative = "трости-пистолету"
+accusative = "трость-пистолет"
+instrumental = "тростью-пистолетом"
+prepositional = "трости-пистолете"
+gender = "female"
+
+["toggle safety"]
+nominative = "переключение предохранителя"
+genitive = "переключения предохранителя"
+dative = "переключению предохранителя"
+accusative = "переключение предохранителя"
+instrumental = "переключением предохранителя"
+prepositional = "переключении предохранителя"
+gender = "neuter"
+
 ["sundress"]
 nominative = "летнее платье"
 genitive = "летнего платья"
@@ -27031,6 +27086,15 @@ dative = "таинственному свитку"
 accusative = "таинственный свиток"
 instrumental = "таинственным свитком"
 prepositional = "таинственном свитке"
+gender = "male"
+
+["empty scroll"]
+nominative = "пустой свиток"
+genitive = "пустого свитка"
+dative = "пустому свитку"
+accusative = "пустой свиток"
+instrumental = "пустым свитком"
+prepositional = "пустом свитке"
 gender = "male"
 
 ["suspicious looking toolbox"]
@@ -29967,21 +30031,21 @@ prepositional = "лобби инженерного отдела"
 gender = "neuter"
 
 ["Supermatter Engine"]
-nominative = "двигатель Суперматерии"
-genitive = "двигателя Суперматерии"
-dative = "двигателю Суперматерии"
-accusative = "двигатель Суперматерии"
-instrumental = "двигателем Суперматерии"
-prepositional = "двигателе Суперматерии"
+nominative = "двигатель суперматерии"
+genitive = "двигателя суперматерии"
+dative = "двигателю суперматерии"
+accusative = "двигатель суперматерии"
+instrumental = "двигателем суперматерии"
+prepositional = "двигателе суперматерии"
 gender = "male"
 
 ["Supermatter Engine Room"]
-nominative = "машинное отделение Суперматерии"
-genitive = "машинного отделения Суперматерии"
-dative = "машинному отделению Суперматерии"
-accusative = "машинное отделение Суперматерии"
-instrumental = "машинным отделением Суперматерии"
-prepositional = "машинном отделении Суперматерии"
+nominative = "машинное отделение суперматерии"
+genitive = "машинного отделения суперматерии"
+dative = "машинному отделению суперматерии"
+accusative = "машинное отделение суперматерии"
+instrumental = "машинным отделением суперматерии"
+prepositional = "машинном отделении суперматерии"
 gender = "neuter"
 
 ["Gravity Generator Room"]
@@ -34177,4 +34241,67 @@ dative = "редактору базового пространства вирт�
 accusative = "редактор базового пространства виртуального домена"
 instrumental = "редактором базового пространства виртуального домена"
 prepositional = "редакторе базового пространства виртуального домена"
+gender = "male"
+
+["supermatter crystal"]
+nominative = "кристалл суперматерии"
+genitive = "кристалла суперматерии"
+dative = "кристаллу суперматерии"
+accusative = "кристалл суперматерии"
+instrumental = "кристаллом суперматерии"
+prepositional = "кристалле суперматерии"
+gender = "male"
+
+["supermatter shard"]
+nominative = "осколок суперматерии"
+genitive = "осколка суперматерии"
+dative = "осколку суперматерии"
+accusative = "осколок суперматерии"
+instrumental = "осколком суперматерии"
+prepositional = "осколке суперматерии"
+gender = "male"
+
+["crystal mass"]
+nominative = "кристаллическая масса"
+genitive = "кристаллической массы"
+dative = "кристаллической массе"
+accusative = "кристаллическую массу"
+instrumental = "кристаллической массой"
+prepositional = "кристаллической массе"
+gender = "female"
+
+["anchored supermatter shard"]
+nominative = "закрепленный осколок суперматерии"
+genitive = "закрепленного осколка суперматерии"
+dative = "закрепленному осколку суперматерии"
+accusative = "закрепленный осколок суперматерии"
+instrumental = "закрепленным осколком суперматерии"
+prepositional = "закрепленном осколке суперматерии"
+gender = "male"
+
+["strangely small supermatter crystal"]
+nominative = "необычайно малый кристалл суперматерии"
+genitive = "необычайно малого кристалла суперматерии"
+dative = "необычайно малому кристаллу суперматерии"
+accusative = "необычайно малый кристалл суперматерии"
+instrumental = "необычайно малым кристаллом суперматерии"
+prepositional = "необычайно малом кристалле суперматерии"
+gender = "male"
+
+["adamantine pedestal"]
+nominative = "адамантиновый пьедестал"
+genitive = "адамантинового пьедестала"
+dative = "адамантиновому пьедесталу"
+accusative = "адамантиновый пьедестал"
+instrumental = "адамантиновым пьедесталом"
+prepositional = "адамантиновом пьедестале"
+gender = "male"
+
+["Bluespace Rift"]
+nominative = "блюспейс разлом"
+genitive = "блюспейс разлома"
+dative = "блюспейс разлому"
+accusative = "блюспейс разлом"
+instrumental = "блюспейс разломом"
+prepositional = "блюспейс разломе"
 gender = "male"

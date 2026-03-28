@@ -1,0 +1,4 @@
+author: "ThaumicNik"
+delete-after: True
+changes:
+  - bugfix: "Cryogelidia теперь корректно обрабатывает скафандры и газовые маски."
