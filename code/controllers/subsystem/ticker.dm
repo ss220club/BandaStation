@@ -396,7 +396,7 @@ SUBSYSTEM_DEF(ticker)
 			if(!failed && L.stat)
 				if(HAS_TRAIT(L, TRAIT_SUICIDED)) //Suicider
 					failed = TRUE //Disconnected client
-					builder.add_entry(L.name, L.key, L.job, "suicide", L.is_antag())
+					builder.add_entry(L.name, L.ckey, L.job, "suicide", L.is_antag())
 				if(!failed && (L.stat == UNCONSCIOUS || L.stat == HARD_CRIT))
 					failed = TRUE //Unconscious
 					builder.add_entry(L.name, L.ckey, L.job, "dying", L.is_antag())
@@ -421,7 +421,7 @@ SUBSYSTEM_DEF(ticker)
 						builder.add_entry(L.name, ckey(D.mind.key), L.job, "ghosted", L.is_antag())
 						continue //Ghosted while alive
 
-	var/list/msg = builder.to_formatted_text()
+	var/msg = builder.to_formatted_text()
 	log_admin(msg)
 	to_chat(get_holders_with_rights(R_ADMIN), msg) /// BANDASTATION EDIT: Proper permissions
 
