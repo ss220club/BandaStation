@@ -58,6 +58,9 @@
 	if(is_shifted)
 		var/mob/living/owner = parent
 		owner.remove_offsets(type)
+#ifdef LOS_ENABLED
+		los_refresh_cascade_pixel_shift(owner)
+#endif
 	qdel(src)
 
 /datum/component/pixel_shift/proc/pixel_shift(mob/source, direct)
@@ -93,3 +96,7 @@
 		passthroughable |= NORTH | SOUTH | WEST
 	else if(owner.pixel_w < -passable_shift_threshold)
 		passthroughable |= NORTH | EAST | SOUTH
+
+#ifdef LOS_ENABLED
+	los_refresh_cascade_pixel_shift(owner)
+#endif
