@@ -10,5 +10,5 @@
 	held_rh = 'modular_bandastation/mobs/icons/inhands/mobs_righthand.dmi'
 	head_icon = 'modular_bandastation/mobs/icons/inhead/head.dmi'
 
-/mob/living/basic/mothroach/wryn/add_tts_component()
+/mob/living/basic/mothroach/wrynroach/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/lillia)
