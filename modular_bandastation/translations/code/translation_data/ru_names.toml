@@ -3308,24 +3308,6 @@ gender = "plural"
 
 # MARK: Weapons
 
-["carp gloves"]
-nominative = "перчатки карпа"
-genitive = "пперчаток карпа"
-dative = "перчаткам карпа"
-accusative = "перчатки карпа"
-instrumental = "перчатками карпа"
-prepositional = "перчатках карпа"
-gender = "plural"
-
-["bo staff"]
-nominative = "посох бо"
-genitive = "посоха бо"
-dative = "посоху бо"
-accusative = "посох бо"
-instrumental = "посохом бо"
-prepositional = "посохе бо"
-gender = "male"
-
 ["proto-kinetic accelerator"]
 nominative = "протокинетический акселератор"
 genitive = "протокинетического акселератора"
@@ -4775,6 +4757,24 @@ accusative = "перчатки Полярной звезды"
 instrumental = "перчатками Полярной звезды"
 prepositional = "перчатках Полярной звезды"
 gender = "plural"
+
+["carp gloves"]
+nominative = "перчатки карпа"
+genitive = "пперчаток карпа"
+dative = "перчаткам карпа"
+accusative = "перчатки карпа"
+instrumental = "перчатками карпа"
+prepositional = "перчатках карпа"
+gender = "plural"
+
+["bo staff"]
+nominative = "посох бо"
+genitive = "посоха бо"
+dative = "посоху бо"
+accusative = "посох бо"
+instrumental = "посохом бо"
+prepositional = "посохе бо"
+gender = "male"
 
 ["sledgehammer"]
 nominative = "кувалда"
