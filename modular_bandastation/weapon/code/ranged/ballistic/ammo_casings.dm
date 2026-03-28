@@ -457,3 +457,16 @@
 	icon_state = "rpg_rocket_low_yield"
 	base_icon_state = "rpg_rocket_low_yield"
 	projectile_type = /obj/projectile/bullet/rocket/weak
+
+// MARK: Shotgun
+/obj/item/ammo_casing/shotgun/dragonsbreath
+	variance = 35
+
+/obj/item/ammo_casing/shotgun/buckshot
+	variance = 30
+
+/obj/item/ammo_casing/shotgun/rubbershot
+	variance = 30
+
+/obj/item/ammo_casing/shotgun/scatterlaser
+	variance = 30
