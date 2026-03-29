@@ -33,63 +33,69 @@
 
 	///anouncements when we find a target to heal
 	var/static/list/wait_announcements = list(
-		MEDIBOT_VOICED_HOLD_ON = 'sound/mobs/non-humanoids/medbot/coming.ogg',
-		MEDIBOT_VOICED_WANT_TO_HELP = 'sound/mobs/non-humanoids/medbot/help.ogg',
-		MEDIBOT_VOICED_YOU_ARE_INJURED = 'sound/mobs/non-humanoids/medbot/injured.ogg',
+		MEDIBOT_VOICED_COME_HERE_COME_HERE = 'sound/mobs/non-humanoids/fun/come_here_come_here_come_here.ogg',
+		MEDIBOT_VOICED_WANT_TO_BE_FRIENDS = 'sound/mobs/non-humanoids/fun/i_wanna_be_friends.ogg',
+		MEDIBOT_VOICED_DONT_MOVE = 'sound/mobs/non-humanoids/fun/dont_move_mf.ogg',
+		MEDIBOT_VOICED_COME_ON = 'sound/mobs/non-humanoids/fun/come_on.ogg',
+		MEDIBOT_VOICED_YOU_DONT_NEED_HELP = 'sound/mobs/non-humanoids/fun/you_dont_need_help.ogg',
 	)
 
 	///announcements after we heal someone
 	var/static/list/afterheal_announcements = list(
-		MEDIBOT_VOICED_ALL_PATCHED_UP = 'sound/mobs/non-humanoids/medbot/patchedup.ogg',
-		MEDIBOT_VOICED_APPLE_A_DAY = 'sound/mobs/non-humanoids/medbot/apple.ogg',
-		MEDIBOT_VOICED_FEEL_BETTER = 'sound/mobs/non-humanoids/medbot/feelbetter.ogg',
+		MEDIBOT_VOICED_FRIENDS_NOW = 'sound/mobs/non-humanoids/fun/were_friends_now.ogg',
+		MEDIBOT_VOICED_BE_CAREFUL = 'sound/mobs/non-humanoids/fun/be_careful.ogg',
+		MEDIBOT_VOICED_WDYM_YOU_GO = 'sound/mobs/non-humanoids/fun/wdym_you_go.ogg',
+		MEDIBOT_VOICED_THOUGHT_YOU_HIGH = 'sound/mobs/non-humanoids/fun/i_thought_you_high.ogg',
+		MEDIBOT_VOICED_NO_INSURANCE = 'sound/mobs/non-humanoids/fun/no_insurance.ogg',
+		MEDIBOT_VOICED_DRIVE_NORMALLY = 'sound/mobs/non-humanoids/fun/drive_normally.ogg',
+		MEDIBOT_VOICED_YOURE_DONE = 'sound/mobs/non-humanoids/fun/youre_done.ogg',
 	)
 
 	///announcements when we are healing someone near death
 	var/static/list/near_death_announcements = list(
-		MEDIBOT_VOICED_STAY_WITH_ME = 'sound/mobs/non-humanoids/medbot/no.ogg',
-		MEDIBOT_VOICED_LIVE = 'sound/mobs/non-humanoids/medbot/live.ogg',
-		MEDIBOT_VOICED_NEVER_LOST = 'sound/mobs/non-humanoids/medbot/lost.ogg',
+		MEDIBOT_VOICED_WAIT_OH_SHIT = 'sound/mobs/non-humanoids/fun/wait_oh_shit.ogg',
+		MEDIBOT_VOICED_FUNNY = 'sound/mobs/non-humanoids/fun/thats_funny.ogg',
+		MEDIBOT_VOICED_WATER_OH_SHIT = 'sound/mobs/non-humanoids/fun/water_oh_shit.ogg',
 	)
 	///announcements when we are idle
 	var/static/list/idle_lines = list(
-		MEDIBOT_VOICED_DELICIOUS = 'sound/mobs/non-humanoids/medbot/delicious.ogg',
-		MEDIBOT_VOICED_PLASTIC_SURGEON = 'sound/mobs/non-humanoids/medbot/surgeon.ogg',
-		MEDIBOT_VOICED_MASK_ON = 'sound/mobs/non-humanoids/medbot/radar.ogg',
-		MEDIBOT_VOICED_ALWAYS_A_CATCH = 'sound/mobs/non-humanoids/medbot/catch.ogg',
-		MEDIBOT_VOICED_LIKE_FLIES = 'sound/mobs/non-humanoids/medbot/flies.ogg',
-		MEDIBOT_VOICED_SUFFER = 'sound/mobs/non-humanoids/medbot/why.ogg',
+		MEDIBOT_VOICED_MY_MIND_SAYS_NO = 'sound/mobs/non-humanoids/fun/my_mind_says_no.ogg',
+		MEDIBOT_VOICED_TEST_CHAMBER = 'sound/mobs/non-humanoids/fun/go_to_the_test_chamber.ogg',
+		MEDIBOT_VOICED_NO_SKATEBOARDING = 'sound/mobs/non-humanoids/fun/no_skateboarding.ogg',
+		MEDIBOT_VOICED_NEEDA_STOP_BEING_ANGRY = 'sound/mobs/non-humanoids/fun/needa_stop_being_angry.ogg',
+		MEDIBOT_VOICED_IT_WAS_A_WALLET = 'sound/mobs/non-humanoids/fun/it_was_a_wallet.ogg',
+		MEDIBOT_VOICED_POOP_IN_MY_HAND = 'sound/mobs/non-humanoids/fun/poop_in_my_hand.ogg',
+		MEDIBOT_VOICED_YO = 'sound/mobs/non-humanoids/fun/yo.ogg',
+		MEDIBOT_VOICED_NEXT_BUS = 'sound/mobs/non-humanoids/fun/next_bus.ogg',
+		MEDIBOT_VOICED_STUBBORN_SHEEP = 'sound/mobs/non-humanoids/fun/stubborn_sheep.ogg',
+		MEDIBOT_VOICED_JUNKIE_WORLD = 'sound/mobs/non-humanoids/fun/junkie_world.ogg',
+		MEDIBOT_VOICED_STOP_MESSING_WITH_OVEN = 'sound/mobs/non-humanoids/fun/stop_messing_with_oven.ogg',
 	)
 	///announcements when we are emagged
 	var/static/list/emagged_announcements = list(
-		MEDIBOT_VOICED_FUCK_YOU = 'sound/mobs/non-humanoids/medbot/fuck_you.ogg',
-		MEDIBOT_VOICED_NOT_A_GAME = 'sound/mobs/non-humanoids/medbot/turn_off.ogg',
-		MEDIBOT_VOICED_IM_DIFFERENT = 'sound/mobs/non-humanoids/medbot/im_different.ogg',
-		MEDIBOT_VOICED_FOURTH_WALL = 'sound/mobs/non-humanoids/medbot/close.ogg',
-		MEDIBOT_VOICED_SHINDEMASHOU = 'sound/mobs/non-humanoids/medbot/shindemashou.ogg',
+		MEDIBOT_VOICED_UNACCEPTABLE_TEXT = 'sound/mobs/non-humanoids/fun/unacceptable_text.ogg',
 	)
 	///announcements when we are being tipped
 	var/static/list/tipped_announcements = list(
-		MEDIBOT_VOICED_WAIT = 'sound/mobs/non-humanoids/medbot/hey_wait.ogg',
-		MEDIBOT_VOICED_DONT = 'sound/mobs/non-humanoids/medbot/please_dont.ogg',
-		MEDIBOT_VOICED_TRUSTED_YOU = 'sound/mobs/non-humanoids/medbot/i_trusted_you.ogg',
-		MEDIBOT_VOICED_NO_SAD = 'sound/mobs/non-humanoids/medbot/nooo.ogg',
-		MEDIBOT_VOICED_OH_FUCK = 'sound/mobs/non-humanoids/medbot/oh_fuck.ogg',
+		MEDIBOT_VOICED_WAIT_WTF = 'sound/mobs/non-humanoids/fun/wait_wtf.ogg',
+		MEDIBOT_VOICED_WATER_OH_SHIT = 'sound/mobs/non-humanoids/fun/water_oh_shit.ogg',
+		MEDIBOT_VOICED_BIG_FOOL = 'sound/mobs/non-humanoids/fun/big_fool.ogg',
+		MEDIBOT_VOICED_GOD_BLESS_AMERICA_CHAT = 'sound/mobs/non-humanoids/fun/god_bless_america_chat.ogg',
+		MEDIBOT_VOICED_HE_DID_IT_ON_PURPOSE = 'sound/mobs/non-humanoids/fun/he_did_it_on_purpose.ogg',
+		MEDIBOT_VOICED_IDIOT_WHERE_YOU_CAME_FROM = 'sound/mobs/non-humanoids/fun/idiot_where_you_came_from.ogg',
 	)
 	///announcements when we are being untipped
 	var/static/list/untipped_announcements = list(
-		MEDIBOT_VOICED_FORGIVE = 'sound/mobs/non-humanoids/medbot/forgive.ogg',
-		MEDIBOT_VOICED_THANKS = 'sound/mobs/non-humanoids/medbot/thank_you.ogg',
-		MEDIBOT_VOICED_GOOD_PERSON = 'sound/mobs/non-humanoids/medbot/youre_good.ogg',
+		MEDIBOT_VOICED_THANKS = 'sound/mobs/non-humanoids/fun/thank_you.ogg',
+		MEDIBOT_VOICED_FRIENDS_NOW = 'sound/mobs/non-humanoids/fun/were_friends_now.ogg',
+		MEDIBOT_VOICED_YOU_HAVE_TO_UNDERSTAND = 'sound/mobs/non-humanoids/fun/you_have_to_understand.ogg',
 	)
 	///announcements when we are worried
 	var/static/list/worried_announcements = list(
-		MEDIBOT_VOICED_PUT_BACK = 'sound/mobs/non-humanoids/medbot/please_put_me_back.ogg',
-		MEDIBOT_VOICED_IM_SCARED = 'sound/mobs/non-humanoids/medbot/please_im_scared.ogg',
-		MEDIBOT_VOICED_NEED_HELP = 'sound/mobs/non-humanoids/medbot/dont_like.ogg',
-		MEDIBOT_VOICED_THIS_HURTS = 'sound/mobs/non-humanoids/medbot/pain_is_real.ogg',
-		MEDIBOT_VOICED_THE_END = 'sound/mobs/non-humanoids/medbot/is_this_the_end.ogg',
-		MEDIBOT_VOICED_NOOO = 'sound/mobs/non-humanoids/medbot/nooo.ogg',
+		MEDIBOT_VOICED_WTF = 'sound/mobs/non-humanoids/fun/wtf.ogg',
+		MEDIBOT_VOICED_SHIT_CHAT = 'sound/mobs/non-humanoids/fun/shit_chat.ogg',
+		MEDIBOT_VOICED_THATS_WHY = 'sound/mobs/non-humanoids/fun/you_bitch_thats_why.ogg',
+		MEDIBOT_VOICED_JUNKIE_POWER = 'sound/mobs/non-humanoids/fun/junkie_power.ogg',
 	)
 	var/static/list/misc_announcements= list(
 		MEDIBOT_VOICED_CHICKEN = 'sound/mobs/non-humanoids/medbot/i_am_chicken.ogg',
@@ -325,7 +331,7 @@
 	if(isnull(tipper_mob))
 		return
 	if(tipper_mob == user)
-		speak(MEDIBOT_VOICED_FORGIVE)
+		speak(MEDIBOT_VOICED_FRIENDS_NOW)
 		return
 	speak(pick(untipped_announcements))
 

@@ -26,12 +26,12 @@
 	possessed_message = "You are a securitron! Guard the station to the best of your ability!"
 
 	automated_announcements = list(
-		BEEPSKY_VOICED_CRIMINAL_DETECTED = 'sound/mobs/non-humanoids/beepsky/criminal.ogg',
-		BEEPSKY_VOICED_FREEZE = 'sound/mobs/non-humanoids/beepsky/freeze.ogg',
-		BEEPSKY_VOICED_JUSTICE = 'sound/mobs/non-humanoids/beepsky/justice.ogg',
-		BEEPSKY_VOICED_YOUR_MOVE = 'sound/mobs/non-humanoids/beepsky/creep.ogg',
-		BEEPSKY_VOICED_I_AM_THE_LAW = 'sound/mobs/non-humanoids/beepsky/iamthelaw.ogg',
-		BEEPSKY_VOICED_SECURE_DAY = 'sound/mobs/non-humanoids/beepsky/secureday.ogg',
+		BEEPSKY_VOICED_FENTONYL_IN_POCKET = 'sound/mobs/non-humanoids/fun/fentonyl_in_pocket.ogg',
+		BEEPSKY_VOICED_HOW_TO_SHOOT = 'sound/mobs/non-humanoids/fun/how_to_shoot.ogg',
+		BEEPSKY_VOICED_NEED_BACKUP = 'sound/mobs/non-humanoids/fun/need_backup.ogg',
+		BEEPSKY_VOICED_ON_THE_GROUND = 'sound/mobs/non-humanoids/fun/on_the_ground.ogg',
+		BEEPSKY_VOICED_TAZER_TAZER = 'sound/mobs/non-humanoids/fun/tazer_tazer.ogg',
+		BEEPSKY_VOICED_YOU_HAVE_TO_UNDERSTAND = 'sound/mobs/non-humanoids/fun/you_have_to_understand.ogg',
 	)
 
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.2, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 3.2)

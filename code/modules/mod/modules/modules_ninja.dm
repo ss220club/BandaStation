@@ -563,8 +563,8 @@
 
 /mob/living/basic/bot/medbot/ninjadrain_act(mob/living/carbon/human/ninja, obj/item/mod/module/hacker/hacking_module)
 	var/static/list/death_cry = list(
-		MEDIBOT_VOICED_NO_SAD,
-		MEDIBOT_VOICED_OH_FUCK,
+		MEDIBOT_VOICED_WAIT_WTF,
+		MEDIBOT_VOICED_WTF,
 	)
 	speak(pick(death_cry))
 	return ..()

@@ -161,8 +161,10 @@
 		speech_to_pick_from = controller.blackboard[BB_WORRIED_ANNOUNCEMENTS]
 	else if(cover_flags & BOT_COVER_EMAGGED)
 		speech_to_pick_from = controller.blackboard[BB_EMAGGED_SPEECH]
-	else if(mode == BOT_IDLE)
+	else if(mode == BOT_IDLE || mode == BOT_PATROL || mode == BOT_START_PATROL)
 		speech_to_pick_from = controller.blackboard[BB_IDLE_SPEECH]
+	else if(mode == BOT_HUNT)
+		speech_to_pick_from = controller.blackboard[BB_WAIT_SPEECH]
 	var/mob/living/living_pawn = controller.pawn
 
 	if(locate(/obj/item/clothing/head/costume/chicken) in living_pawn)
