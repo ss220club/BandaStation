@@ -76,7 +76,7 @@
 	gloves = /obj/item/clothing/gloves/captain
 	head = /obj/item/clothing/head/hats/caphat
 	shoes = /obj/item/clothing/shoes/laceup
-
+	l_pocket = /obj/item/money_button
 
 	backpack = /obj/item/storage/backpack/captain
 	satchel = /obj/item/storage/backpack/satchel/cap

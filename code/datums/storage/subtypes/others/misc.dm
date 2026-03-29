@@ -157,6 +157,14 @@
 		/obj/item/food/bait/natural,
 	))
 
+/datum/storage/pillbottle/open_storage(mob/living/to_show)
+	if(!isobserver(to_show) && ishuman(to_show))
+		var/mob/living/carbon/human/opener = to_show
+		if(opener.age > 18 && !HAS_TRAIT(opener, TRAIT_CLUMSY))
+			to_chat(opener, span_warning("Детская защита на крышке не поддаётся... Может быть клоун сможет помочь. Или ребёнок..."))
+			return FALSE
+	return ..()
+
 ///Six pack beer
 /datum/storage/sixcan
 	max_specific_storage = WEIGHT_CLASS_SMALL
