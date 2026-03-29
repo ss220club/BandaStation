@@ -3,6 +3,8 @@
 #include "code/_title_screen_defines.dm"
 #include "code/asset_lobby.dm"
 #include "code/new_player.dm"
+#include "code/lobby_messenger_promo.dm"
+#include "code/lobby_messenger_login.dm"
 #include "code/station_traits.dm"
 #include "code/title_screen_controls.dm"
 #include "code/title_screen_datum.dm"

@@ -10,6 +10,11 @@
 	if(href_list["focus"])
 		winset(client, "map", "focus=true")
 
+	// while promo exists we do not allow users to press lobby buttons
+	if(client.lobby_messenger_promo && SStgui.get_open_ui(src, client.lobby_messenger_promo))
+		if(length(href_list) > 1 || !href_list["focus"])
+			return
+
 	if(href_list["discord_oauth"])
 		client?.verify_in_discord_central()
 

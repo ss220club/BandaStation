@@ -38,6 +38,7 @@ type Props = Partial<{
   buttons: ReactNode;
   canClose: BooleanLike;
   height: number;
+  showStatusIcon: BooleanLike;
   theme: string;
   title: string;
   width: number;
@@ -47,6 +48,7 @@ type Props = Partial<{
 export function Window(props: Props) {
   const {
     canClose = true,
+    showStatusIcon = true,
     theme,
     title,
     children,
@@ -100,7 +102,7 @@ export function Window(props: Props) {
     return () => {
       logger.log('unmounting');
     };
-  }, [isReadyToRender, width, height, scale]);
+  }, [isReadyToRender, width, height, scale, canClose]);
 
   // Determine when to show dimmer
   const showDimmer =
@@ -117,6 +119,7 @@ export function Window(props: Props) {
         onDragStart={dragStartHandler}
         onClose={suspendStart}
         canClose={canClose}
+        showStatusIcon={showStatusIcon}
       >
         {buttons}
       </TitleBar>
