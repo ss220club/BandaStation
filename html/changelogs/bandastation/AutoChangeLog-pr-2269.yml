@@ -1,0 +1,5 @@
+author: "CallmeHouston"
+delete-after: True
+changes:
+  - config: "Минимальное количество игроков для Дельты изменено на 25, для Айсбокса на 40."
+  - map: "Nebula Station возвращена в ротацию карт с необходимыми доработками."

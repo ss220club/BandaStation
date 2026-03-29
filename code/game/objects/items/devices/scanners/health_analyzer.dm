@@ -447,30 +447,6 @@
 			Возможное лекарство: [cure_text]</div>\
 			</span>"
 
-	// Lungs
-	var/obj/item/organ/lungs/lungs = target.get_organ_slot(ORGAN_SLOT_LUNGS)
-	if (lungs)
-		var/initial_pressure_mult = lungs::received_pressure_mult
-		if (lungs.received_pressure_mult != initial_pressure_mult)
-			var/tooltip
-			var/dilation_text
-			var/beginning_text = "Расширение лёгких: "
-			if (lungs.received_pressure_mult > initial_pressure_mult) // higher than usual
-				beginning_text = span_blue("<b>[beginning_text]</b>")
-				dilation_text = span_blue("[(lungs.received_pressure_mult * 100) - 100]%")
-				tooltip = "Лёгкие субъекта расширены, и он вдыхает больше воздуха, чем обычно. Повышает эффективность гелия и других газов."
-			else
-				beginning_text = span_danger("<b>[beginning_text]</b>")
-				if (lungs.received_pressure_mult <= 0) // lethal
-					dilation_text = span_bolddanger("[lungs.received_pressure_mult * 100]%")
-					tooltip = "Лёгкие субъекта полностью закупорены. Субъект не может дышать, ему требуется экстренная операция. Если у пациента астма, проведите операцию по шунтированию и введите ингаляционный альбутерол. В противном случае замените лёгкие."
-				else
-					dilation_text = span_danger("[lungs.received_pressure_mult * 100]%")
-					tooltip = "Лёгкие субъекта частично закупорены. Если он не может дышать, подключите его к баллону с высоким давлением или замените лёгкие. Если у пациента астма, ему, скорее всего, помогут ингаляции с альбутеролом или шунтирование."
-
-			var/lung_message = beginning_text + conditional_tooltip(dilation_text, tooltip, TRUE)
-			render_list += lung_message
-
 	// Time of death
 	if(target.station_timestamp_timeofdeath && !target.appears_alive())
 		render_list += "<hr>"

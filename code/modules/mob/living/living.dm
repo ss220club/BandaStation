@@ -2024,8 +2024,12 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	real_name = declent_ru(NOMINATIVE)
 
 /mob/living/proc/mob_try_pickup(mob/living/user, instant=FALSE)
-	if(!ishuman(user))
-		return
+	if(!ishuman(user) && (user.mob_size <= mob_size || user.num_hands == 0))
+		if (!user.num_hands)
+			return
+		if (user.mob_size <= mob_size)
+			to_chat(user, span_warning("[src] is too big to pick up!"))
+			return
 	if(!user.get_empty_held_indexes())
 		to_chat(user, span_warning("Ваши руки заняты!"))
 		return FALSE
