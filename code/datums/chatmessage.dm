@@ -185,6 +185,7 @@
 		LAZYADD(prefixes, "\icon[language_icon]")
 
 	text = "[prefixes?.Join("&nbsp;")][text]"
+	text = emoji_parse_runechat(text)
 
 	// We dim italicized text to make it more distinguishable from regular text
 	var/tgt_color = extra_classes.Find("italics") ? target.chat_color_darkened : target.chat_color

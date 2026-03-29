@@ -32,6 +32,54 @@
 		break
 	return parsed
 
+/proc/emoji_parse_runechat(text) // turns :ai: into a maptext-safe icon for runechat
+	if(!text)
+		return text
+	. = text
+	if(!CONFIG_GET(flag/emojis))
+		return
+	var/static/list/emojis = icon_states(icon(EMOJI_SET))
+	var/static/list/emoji_icons = list()
+	var/parsed = ""
+	var/pos = 1
+	var/search = 0
+	var/emoji = ""
+	while(1)
+		search = findtext(text, ":", pos)
+		parsed += copytext(text, pos, search)
+		if(search)
+			pos = search
+			search = findtext(text, ":", pos + length(text[pos]))
+			if(search)
+				emoji = LOWER_TEXT(copytext(text, pos + length(text[pos]), search))
+				if(emoji in emojis)
+					var/icon/emoji_icon = emoji_icons[emoji]
+					if(isnull(emoji_icon))
+						emoji_icon = icon(EMOJI_SET, emoji)
+						emoji_icon.Scale(12, 12)
+						emoji_icons[emoji] = emoji_icon
+					parsed += "\icon[emoji_icon]"
+					pos = search + length(text[pos])
+				else
+					parsed += copytext(text, pos, search)
+					pos = search
+				emoji = ""
+				continue
+			else
+				parsed += copytext(text, pos, search)
+		break
+	return parsed
+
+/proc/emoji_append_random(text)
+	if(!text)
+		return text
+	if(!CONFIG_GET(flag/emojis))
+		return text
+	var/static/list/emojis = icon_states(icon(EMOJI_SET))
+	if(!length(emojis))
+		return text
+	return "[text] :[pick(emojis)]:"
+
 /proc/emoji_sanitize(text) //cuts any text that would not be parsed as an emoji
 	. = text
 	if(!CONFIG_GET(flag/emojis))
