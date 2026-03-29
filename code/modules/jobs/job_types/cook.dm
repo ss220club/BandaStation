@@ -94,6 +94,9 @@
 
 /datum/outfit/job/cook/post_equip(mob/living/carbon/human/user, visuals_only = FALSE)
 	. = ..()
+	if(!visuals_only && user.mind && !locate(/datum/action/cooldown/cook_rage) in user.actions)
+		var/datum/action/cooldown/cook_rage/rage = new(user.mind)
+		rage.Grant(user)
 	// Update PDA to match possible new trim.
 	var/obj/item/card/id/worn_id = user.wear_id
 	var/obj/item/modular_computer/pda/pda = user.get_item_by_slot(pda_slot)
@@ -107,3 +110,97 @@
 	. = ..()
 	. += /obj/item/clothing/suit/apron/chef
 	. += /obj/item/clothing/head/soft/mime
+
+/proc/cooks_cqc_area_contains(atom/movable/movable)
+	var/datum/martial_art/cqc/under_siege/kitchen_zone = new
+	kitchen_zone.refresh_valid_areas()
+	. = is_type_in_list(get_area(movable), kitchen_zone.kitchen_areas)
+	qdel(kitchen_zone)
+
+/proc/cook_rage_scatter_loose(mob/living/viktor_petrovich, radius = 3)
+	var/turf/epicenter = get_turf(viktor_petrovich)
+	if(!epicenter)
+		return
+	var/required_resist = MOVE_FORCE_STRONG
+	for(var/atom/movable/movable in orange(radius, epicenter))
+		if(QDELETED(movable) || movable == viktor_petrovich || isliving(movable))
+			continue
+		if(isliving(movable.loc))
+			continue
+		if(movable.anchored || movable.move_resist >= required_resist)
+			continue
+		var/atom_throw_range = rand(2, 4) + radius
+		var/turf/throw_at = get_ranged_target_turf_direct(movable, epicenter, atom_throw_range, 180)
+		movable.throw_at(throw_at, atom_throw_range, 4, viktor_petrovich, quickstart = FALSE)
+
+/datum/action/cooldown/cook_rage
+	name = "НУ ВСЁ ОГУЗОК, ТЫ МЕНЯ ДОСТАЛ"
+	desc = "ИНВАЛИДЫ!!! ОГУЗКИ!!! БЕЗДАРИ!!!"
+	cooldown_time = 5 MINUTES
+	check_flags = AB_CHECK_CONSCIOUS
+	button_icon = 'icons/mob/actions/actions_spells.dmi'
+	button_icon_state = "fireball0"
+
+/datum/action/cooldown/cook_rage/IsAvailable(feedback = FALSE)
+	. = ..()
+	if(!.)
+		return FALSE
+	if(!istype(owner, /mob/living/carbon))
+		return FALSE
+	if(!cooks_cqc_area_contains(owner))
+		if(feedback)
+			to_chat(owner, span_warning("Надо быть на кухне."))
+		return FALSE
+	return TRUE
+
+/datum/action/cooldown/cook_rage/Remove(mob/removed_from)
+	if(istype(removed_from, /mob/living/carbon))
+		var/mob/living/carbon/carbon = removed_from
+		carbon.remove_movespeed_modifier(/datum/movespeed_modifier/strained_muscles)
+	return ..()
+
+/datum/action/cooldown/cook_rage/Activate(atom/target)
+	var/mob/living/carbon/viktor_petrovich = owner
+	if(!istype(viktor_petrovich))
+		return
+	playsound(get_turf(viktor_petrovich), 'sound/misc/viktor_petrovich.ogg', 100, FALSE, 12)
+	var/oguzki = "ИНВАЛИДЫ!!! ОГУЗКИ!!! БЕЗДАРИ!!!"
+	for(var/mob/oguzok as anything in viewers(viktor_petrovich))
+		if(!oguzok.client)
+			continue
+		if(viktor_petrovich.runechat_prefs_check(oguzok, EMOTE_MESSAGE))
+			oguzok.create_chat_message(viktor_petrovich, raw_message = oguzki, runechat_flags = EMOTE_MESSAGE)
+		else
+			to_chat(oguzok, span_warning("<b>[viktor_petrovich]</b> орёт: \"[oguzki]\""))
+	to_chat(viktor_petrovich, span_notice("Я СЕЙЧАС ВАМ ВСЕМ ОБЪЯСНЮ!"))
+	..()
+	INVOKE_ASYNC(src, PROC_REF(rage_muscles_async), viktor_petrovich)
+	INVOKE_ASYNC(src, PROC_REF(rage_scatter_pulse), viktor_petrovich)
+
+/datum/action/cooldown/cook_rage/proc/rage_scatter_pulse(mob/living/carbon/viktor_petrovich)
+	var/burst_delay = (22 SECONDS) / 8
+	for(var/burst in 1 to 9)
+		if(QDELETED(viktor_petrovich) || viktor_petrovich.stat != CONSCIOUS || !cooks_cqc_area_contains(viktor_petrovich))
+			return
+		cook_rage_scatter_loose(viktor_petrovich)
+		if(burst < 9)
+			sleep(burst_delay)
+
+/datum/action/cooldown/cook_rage/proc/rage_muscles_async(mob/living/carbon/viktor_petrovich)
+	var/stacks = 0
+	var/end_time = world.time + 22 SECONDS
+	viktor_petrovich.add_movespeed_modifier(/datum/movespeed_modifier/strained_muscles)
+	while(world.time < end_time)
+		if(QDELETED(viktor_petrovich))
+			break
+		stacks++
+		if(viktor_petrovich.stat != CONSCIOUS || viktor_petrovich.staminaloss >= 90)
+			to_chat(viktor_petrovich, span_notice("Вы выдыхаетесь, и ноги перестают нести вас. Огузки получили по заслугам."))
+			viktor_petrovich.Paralyze(4 SECONDS)
+			break
+		viktor_petrovich.adjust_stamina_loss(stacks * 1.3)
+		if(stacks == 11)
+			to_chat(viktor_petrovich, span_warning("Ноги начинают ныть..."))
+		sleep(4 SECONDS)
+	if(!QDELETED(viktor_petrovich))
+		viktor_petrovich.remove_movespeed_modifier(/datum/movespeed_modifier/strained_muscles)
