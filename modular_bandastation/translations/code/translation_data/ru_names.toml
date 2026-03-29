@@ -3334,6 +3334,25 @@ prepositional = "перчатках криминалиста"
 gender = "plural"
 
 # MARK: Weapons
+
+["carp gloves"]
+nominative = "перчатки карпа"
+genitive = "пперчаток карпа"
+dative = "перчаткам карпа"
+accusative = "перчатки карпа"
+instrumental = "перчатками карпа"
+prepositional = "перчатках карпа"
+gender = "plural"
+
+["bo staff"]
+nominative = "посох бо"
+genitive = "посоха бо"
+dative = "посоху бо"
+accusative = "посох бо"
+instrumental = "посохом бо"
+prepositional = "посохе бо"
+gender = "male"
+
 ["temperature gun"]
 nominative = "температурная винтовка"
 genitive = "температурной винтовки"
@@ -12341,6 +12360,15 @@ instrumental = "белой тростью"
 prepositional = "белой трости"
 gender = "female"
 
+["fancy cane"]
+nominative = "изящная трость"
+genitive = "изящной трости"
+dative = "изящной трости"
+accusative = "изящную трость"
+instrumental = "изящной тростью"
+prepositional = "изящной трости"
+gender = "female"
+
 ["medical eyepatch"]
 nominative = "медицинская повязка на глаз"
 genitive = "медицинской повязки на глаз"
@@ -19972,6 +20000,15 @@ instrumental = "алмазом"
 prepositional = "алмазе"
 gender = "male"
 
+["diamond shot"]
+nominative = "алмазный заряд"
+genitive = "алмазного заряда"
+dative = "алмазному заряду"
+accusative = "алмазный заряд"
+instrumental = "алмазным зарядом"
+prepositional = "алмазном заряде"
+gender = "male"
+
 ["bluespace polycrystal"]
 nominative = "блюспейс поликристалл"
 genitive = "блюспейс поликристалла"
@@ -23401,6 +23438,24 @@ instrumental = "тростью"
 prepositional = "трости"
 gender = "female"
 
+["fancy cane gun"]
+nominative = "трость-пистолет"
+genitive = "трости-пистолета"
+dative = "трости-пистолету"
+accusative = "трость-пистолет"
+instrumental = "тростью-пистолетом"
+prepositional = "трости-пистолете"
+gender = "female"
+
+["toggle safety"]
+nominative = "переключение предохранителя"
+genitive = "переключения предохранителя"
+dative = "переключению предохранителя"
+accusative = "переключение предохранителя"
+instrumental = "переключением предохранителя"
+prepositional = "переключении предохранителя"
+gender = "neuter"
+
 ["sundress"]
 nominative = "летнее платье"
 genitive = "летнего платья"
@@ -26816,6 +26871,15 @@ dative = "таинственному свитку"
 accusative = "таинственный свиток"
 instrumental = "таинственным свитком"
 prepositional = "таинственном свитке"
+gender = "male"
+
+["empty scroll"]
+nominative = "пустой свиток"
+genitive = "пустого свитка"
+dative = "пустому свитку"
+accusative = "пустой свиток"
+instrumental = "пустым свитком"
+prepositional = "пустом свитке"
 gender = "male"
 
 ["suspicious looking toolbox"]
