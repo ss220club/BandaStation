@@ -52,29 +52,27 @@
 
 	id = /obj/item/card/id/advanced/rainbow
 	id_trim = /datum/id_trim/job/clown
-	uniform = /obj/item/clothing/under/rank/civilian/clown
+	uniform = /obj/item/clothing/under/rank/civilian/mime
+	suit = /obj/item/clothing/suit/toggle/suspenders
 	backpack_contents = list(
-		/obj/item/stamp/clown = 1,
-		/obj/item/reagent_containers/spray/waterflower = 1,
-		/obj/item/food/grown/banana = 1,
-		/obj/item/instrument/bikehorn = 1,
-		/obj/item/storage/box/balloons = 1,
+		/obj/item/book/granter/action/spell/mime/mimery = 1,
+		/obj/item/reagent_containers/cup/glass/bottle/bottleofnothing = 1,
+		/obj/item/stamp/mime = 1,
 		)
-	belt = /obj/item/modular_computer/pda/clown
+	belt = /obj/item/modular_computer/pda/mime
 	ears = /obj/item/radio/headset/headset_srv
-	shoes = /obj/item/clothing/shoes/clown_shoes
-	mask = /obj/item/clothing/mask/gas/clown_hat
-	l_pocket = /obj/item/bikehorn
+	gloves = /obj/item/clothing/gloves/color/white
+	head = /obj/item/clothing/head/beret/frenchberet
+	mask = /obj/item/clothing/mask/gas/mime
+	shoes = /obj/item/clothing/shoes/laceup
 
-	backpack = /obj/item/storage/backpack/clown
-	satchel = /obj/item/storage/backpack/clown
-	duffelbag = /obj/item/storage/backpack/duffelbag/clown //strangely has a duffel
-	messenger = /obj/item/storage/backpack/messenger/clown
+	backpack = /obj/item/storage/backpack/mime
+	satchel = /obj/item/storage/backpack/mime
 
-	box = /obj/item/storage/box/survival/hug
-	chameleon_extras = /obj/item/stamp/clown
-	implants = list(/obj/item/implant/sad_trombone)
-	skillchips = list(/obj/item/skillchip/job/clown)
+	box = /obj/item/storage/box/survival/hug/black
+	chameleon_extras = /obj/item/stamp/mime
+	implants = list()
+	skillchips = list()
 
 /datum/outfit/job/clown/mod
 	name = "Clown (MODsuit)"
@@ -99,6 +97,9 @@
 		return
 
 	H.fully_replace_character_name(H.real_name, pick(GLOB.clown_names)) //rename the mob AFTER they're equipped so their ID gets updated properly.
-	H.dna.add_mutation(/datum/mutation/clumsy, MUTATION_SOURCE_CLOWN_CLUMSINESS)
+	if(H.mind)
+		var/datum/action/cooldown/spell/vow_of_silence/vow = new(H.mind)
+		vow.Grant(H)
+
 	ADD_TRAIT(H, TRAIT_CLOWN_ENJOYER, INNATE_TRAIT)
 	H.add_faction(FACTION_CLOWN)

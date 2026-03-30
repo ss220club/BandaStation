@@ -86,12 +86,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "Bartender"
 
 /obj/effect/landmark/start/clown
-	name = "Clown"
-	icon_state = "Clown"
-
-/obj/effect/landmark/start/mime
 	name = "Mime"
 	icon_state = "Mime"
+
+/obj/effect/landmark/start/mime
+	name = "Clown"
+	icon_state = "Clown"
 
 /obj/effect/landmark/start/quartermaster
 	name = "Quartermaster"
