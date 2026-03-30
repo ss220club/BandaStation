@@ -32,7 +32,7 @@
 		var/damage_to_be = damage + external_damage_immediate * clamp((emergency_point - damage) / emergency_point, 0, 1)
 		if(damage_to_be > danger_point)
 			visible_message(span_notice("[src] compresses under stress, resisting further impacts!"))
-		playsound(src, 'sound/effects/supermatter.ogg', 50, TRUE)
+		playsound(src, 'sound/misc/scary_horn.ogg', 50, TRUE)
 	if(istype(projectile, /obj/projectile/beam/emitter/hitscan))
 		var/obj/projectile/beam/emitter/hitscan/mahlaser = projectile
 		if(mahlaser?.integrity_heal)
@@ -57,7 +57,7 @@
 	for(var/mob/hearing_mob as anything in GLOB.player_list)
 		if(!is_valid_z_level(get_turf(hearing_mob), sm_turf))
 			continue
-		SEND_SOUND(hearing_mob, 'sound/effects/supermatter.ogg') //everyone goan know bout this
+		SEND_SOUND(hearing_mob, 'sound/misc/scary_horn.ogg') //everyone goan know bout this
 		to_chat(hearing_mob, span_bolddanger("A horrible screeching fills your ears, and a wave of dread washes over you..."))
 	qdel(src)
 	return gain

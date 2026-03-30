@@ -192,7 +192,7 @@
 	else
 		to_chat(user, span_notice("[capitalize(W.declent_ru(NOMINATIVE))] и [declent_ru(NOMINATIVE)] обращаются в пыль от прикосновения друг с другом!"))
 		radiation_pulse(user, max_range = 2, threshold = RAD_EXTREME_INSULATION, chance = 40)
-		playsound(src, 'sound/effects/supermatter.ogg', 50, TRUE)
+		playsound(src, 'sound/misc/scary_horn.ogg', 50, TRUE)
 		qdel(W)
 		qdel(src)
 
@@ -216,7 +216,7 @@
 	victim.investigate_log("has been dusted by [src].", INVESTIGATE_DEATHS)
 	victim.dust()
 	radiation_pulse(src, max_range = 2, threshold = RAD_EXTREME_INSULATION, chance = 40)
-	playsound(src, 'sound/effects/supermatter.ogg', 50, TRUE)
+	playsound(src, 'sound/misc/scary_horn.ogg', 50, TRUE)
 	qdel(src)
 
 /obj/item/nuke_core/supermatter_sliver/pickup(mob/living/user)
@@ -227,7 +227,7 @@
 			span_userdanger("Вы тянетесь к [declent_ru(DATIVE)] руками. Это было глупо..."),\
 			span_hear("Все внезапно затихает."))
 	radiation_pulse(user, max_range = 2, threshold = RAD_EXTREME_INSULATION, chance = 40)
-	playsound(src, 'sound/effects/supermatter.ogg', 50, TRUE)
+	playsound(src, 'sound/misc/scary_horn.ogg', 50, TRUE)
 	user.investigate_log("has been dusted by [src].", INVESTIGATE_DEATHS)
 	user.dust()
 
@@ -343,6 +343,6 @@
 		user.investigate_log("has been dusted by [src].", INVESTIGATE_DEATHS)
 		user.dust()
 	radiation_pulse(src, max_range = 2, threshold = RAD_EXTREME_INSULATION, chance = 40)
-	playsound(src, 'sound/effects/supermatter.ogg', 50, TRUE)
+	playsound(src, 'sound/misc/scary_horn.ogg', 50, TRUE)
 	QDEL_NULL(sliver)
 	update_appearance()

@@ -107,7 +107,7 @@
 	var/turf/newT = turf.ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
 	if(newT.type == oldtype)
 		return
-	playsound(turf, 'sound/effects/supermatter.ogg', 50, TRUE)
+	playsound(turf, 'sound/misc/scary_horn.ogg', 50, TRUE)
 	turf.visible_message(
 		span_danger("[turf] smacks into [src] and rapidly flashes to ash."),
 		span_hear("You hear a loud crack as you are washed with a wave of heat."),

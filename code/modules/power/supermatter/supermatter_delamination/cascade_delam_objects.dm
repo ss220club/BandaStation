@@ -65,10 +65,10 @@
 		else if(istype(checked_atom, /obj/cascade_portal))
 			checked_atom.visible_message(span_userdanger("[capitalize(checked_atom.declent_ru(NOMINATIVE))] визжит и закрывается, когда его поражает [src.declent_ru(NOMINATIVE)]! Слишком поздно!"))
 			playsound(get_turf(checked_atom), 'sound/effects/magic/charge.ogg', 50, TRUE)
-			playsound(get_turf(checked_atom), 'sound/effects/supermatter.ogg', 50, TRUE)
+			playsound(get_turf(checked_atom), 'sound/misc/scary_horn.ogg', 50, TRUE)
 			qdel(checked_atom)
 		else if(isitem(checked_atom))
-			playsound(get_turf(checked_atom), 'sound/effects/supermatter.ogg', 50, TRUE)
+			playsound(get_turf(checked_atom), 'sound/misc/scary_horn.ogg', 50, TRUE)
 			qdel(checked_atom)
 
 	new /obj/crystal_mass(next_turf, get_dir(next_turf, src))
@@ -82,7 +82,7 @@
 		span_hear("Вы слышите громкий треск, когда вас обдаёт волной жара."),
 	)
 
-	playsound(src, 'sound/effects/supermatter.ogg', 50, TRUE)
+	playsound(src, 'sound/misc/scary_horn.ogg', 50, TRUE)
 	qdel(hitting_projectile)
 	return COMPONENT_BULLET_BLOCKED
 
