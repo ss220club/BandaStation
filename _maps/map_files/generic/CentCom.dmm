@@ -7085,9 +7085,9 @@
 /area/centcom/central_command_areas/engine)
 "aGn" = (
 /obj/machinery/door/poddoor/shutters/preopen{
+	name = "Research Centcom Shutters"
 	id = "CC_RND_2";
 	dir = 4;
-	name = "Research Centcom Shutters"
 	},
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /turf/open/floor/plating,
@@ -11331,9 +11331,9 @@
 "aWD" = (
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /obj/machinery/door/poddoor/shutters/preopen{
+	name = "Research Centcom Shutters"
 	id = "CC_RND_2";
 	dir = 4;
-	name = "Research Centcom Shutters"
 	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/rnd)
@@ -12572,9 +12572,9 @@
 	pixel_y = 8
 	},
 /obj/machinery/door/poddoor/shutters/preopen{
+	name = "Research Centcom Shutters"
 	id = "CC_RND_2";
 	dir = 4;
-	name = "Research Centcom Shutters"
 	},
 /obj/machinery/door/window/right/directional/west,
 /turf/open/floor/plating,
