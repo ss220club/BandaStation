@@ -342,7 +342,7 @@
 			null,
 			attacker,
 		)
-		to_chat(attacker, span_danger("Вы берете [defender.declent_ru(ACCUSATIVE)] в удушающий захват!"))
+		to_chat(attacker, span_danger("Вы берёте [defender.declent_ru(ACCUSATIVE)] в удушающий захват!"))
 		defender.SetSleeping(40 SECONDS)
 		restraining_mob = null
 		if(attacker.grab_state < GRAB_NECK && !HAS_TRAIT(attacker, TRAIT_PACIFISM))
