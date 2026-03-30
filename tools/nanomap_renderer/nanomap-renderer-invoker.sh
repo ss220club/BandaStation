@@ -28,4 +28,6 @@ cp "data/nanomaps/Tramstation_nanomap_z1.png" "icons/_nanomaps"
 cp "data/nanomaps/Tramstation_nanomap_z2.png" "icons/_nanomaps"
 cp "data/nanomaps/Lavaland_nanomap_z1.png" "icons/_nanomaps"
 cp "data/nanomaps/KiloStation_nanomap_z1.png" "icons/_nanomaps"
+cp "data/nanomaps/Dairebyc_nanomap_z1.png" "icons/_nanomaps"
+cp "data/nanomaps/Dairebyc_nanomap_z2.png" "icons/_nanomaps"
 

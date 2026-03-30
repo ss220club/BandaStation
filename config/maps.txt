@@ -50,6 +50,9 @@ map kilostation
 	votable
 endmap
 
+map dairebyc
+endmap
+
 # Debug-only maps.
 
 map gateway_test
