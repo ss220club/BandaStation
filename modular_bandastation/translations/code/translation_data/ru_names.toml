@@ -3334,6 +3334,25 @@ prepositional = "перчатках криминалиста"
 gender = "plural"
 
 # MARK: Weapons
+
+["carp gloves"]
+nominative = "перчатки карпа"
+genitive = "пперчаток карпа"
+dative = "перчаткам карпа"
+accusative = "перчатки карпа"
+instrumental = "перчатками карпа"
+prepositional = "перчатках карпа"
+gender = "plural"
+
+["bo staff"]
+nominative = "посох бо"
+genitive = "посоха бо"
+dative = "посоху бо"
+accusative = "посох бо"
+instrumental = "посохом бо"
+prepositional = "посохе бо"
+gender = "male"
+
 ["temperature gun"]
 nominative = "температурная винтовка"
 genitive = "температурной винтовки"
@@ -26854,6 +26873,15 @@ instrumental = "таинственным свитком"
 prepositional = "таинственном свитке"
 gender = "male"
 
+["empty scroll"]
+nominative = "пустой свиток"
+genitive = "пустого свитка"
+dative = "пустому свитку"
+accusative = "пустой свиток"
+instrumental = "пустым свитком"
+prepositional = "пустом свитке"
+gender = "male"
+
 ["suspicious looking toolbox"]
 nominative = "подозрительный ящик для инструментов"
 genitive = "подозрительного ящика для инструментов"
@@ -28433,6 +28461,15 @@ accusative = "крысу"
 instrumental = "крысой"
 prepositional = "крысе"
 gender = "female"
+
+["wrynroach"]
+nominative = "вринтаракан"
+genitive = "вринтаракана"
+dative = "вринтаракану"
+accusative = "вринтаракана"
+instrumental = "вринтараканом"
+prepositional = "вринтаракане"
+gender = "male"
 
 ["dead mouse"]
 nominative = "мёртвая мышь"

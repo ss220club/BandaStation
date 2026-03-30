@@ -153,13 +153,6 @@
 	H.apply_damage(emp_damage * 0.5, BRUTE, forced = TRUE)
 	H.apply_damage(emp_damage * 0.5, BURN, forced = TRUE)
 
-/obj/item/organ/brain/positronic/emp_act(severity)
-	. = ..()
-	var/mob/living/carbon/human/H = owner
-	if(istype(H) && H.is_ipc())
-		var/datum/species/ipc/S = H.dna.species
-		S.handle_emp(H, severity)
-
 // Разрешаем цифры в именах для IPC (типа ARC-908), не затрагивая остальные расы
 /datum/preference/name/real_name/deserialize(input, datum/preferences/preferences)
 	if(preferences?.read_preference(/datum/preference/choiced/species) == /datum/species/ipc)

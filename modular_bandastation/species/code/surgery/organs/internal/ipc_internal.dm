@@ -59,6 +59,11 @@
 		if(EMP_LIGHT)
 			positronic_damage += rand(10, 20)
 			to_chat(owner, span_danger("Предупреждение: Обнаружено повреждение данных."))
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		if(H.is_ipc())
+			var/datum/species/ipc/S = H.dna.species
+			S.handle_emp(H, severity)
 
 // Вариант с MMI
 /obj/item/organ/brain/positronic/mmi

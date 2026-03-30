@@ -212,7 +212,6 @@ export type PreferencesMenuData = {
   applied_body_modifications: string[];
   manufacturers: Record<string, string[]>;
   selected_manufacturer: Record<string, string>;
-
   // BANDASTATION ADDITION END
 };
 
@@ -246,7 +245,6 @@ export type BodyModification = {
   manufacturers?: Record<string, string>;
   selectedManufacturer?: string;
 };
-
 // BANDASTATION ADDITION END
 
 export type ServerData = {
