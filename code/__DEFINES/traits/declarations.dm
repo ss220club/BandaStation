@@ -49,6 +49,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define STATION_TRAIT_SPIKED_DRINKS "station_trait_spiked_drinks"
 #define STATION_TRAIT_XENOBUREAUCRACY_ERROR "station_trait_xenobureaucracy_error"
 #define STATION_TRAIT_SPAWN_WEAKPOINTS "station_trait_spawn_weakpoints"
+#define STATION_TRAIT_EVERYONE_DWARF "station_trait_everyone_dwarf"
+#define STATION_TRAIT_EVERYONE_GIANT "station_trait_everyone_giant"
 
 // Hud traits
 /// This hud is owned by a client with an open escape menu
