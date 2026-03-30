@@ -34134,3 +34134,12 @@ accusative = "блюспейс разлом"
 instrumental = "блюспейс разломом"
 prepositional = "блюспейс разломе"
 gender = "male"
+
+["crate of soviet kvas"]
+nominative = "ящик с советским квасом"
+genitive = "ящика с советским квасом"
+dative = "ящику с советским квасом"
+accusative = "ящик с советским квасом"
+instrumental = "ящиком с советским квасом"
+prepositional = "ящике с советским квасом"
+gender = "male"
