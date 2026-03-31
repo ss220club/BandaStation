@@ -97,6 +97,9 @@
 
 	controller.override_blackboard_key(blackboard_key, to_return)
 
+/datum/component/listen_and_repeat/proc/disable_learning()
+	UnregisterSignal(parent, COMSIG_MOVABLE_PRE_HEAR)
+
 /// Exports all the speech buffer data to a dedicated blackboard key on the source.
 /datum/component/listen_and_repeat/proc/on_write_memory(datum/source, dead, gibbed)
 	SIGNAL_HANDLER
