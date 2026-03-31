@@ -7084,12 +7084,12 @@
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/engine)
 "aGn" = (
-/obj/machinery/door/poddoor/shutters/preopen{
-	name = "Research Centcom Shutters"
-	id = "CC_RND_2";
-	dir = 4;
-	},
 /obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/machinery/door/poddoor/shutters/preopen{
+	name = "Research Centcom Shutters";
+	dir = 4;
+	id = "CC_RND_2"
+	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/rnd)
 "aGo" = (
@@ -11328,15 +11328,6 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/ferry)
-"aWD" = (
-/obj/effect/spawner/structure/window/reinforced/plasma,
-/obj/machinery/door/poddoor/shutters/preopen{
-	name = "Research Centcom Shutters"
-	id = "CC_RND_2";
-	dir = 4;
-	},
-/turf/open/floor/plating,
-/area/centcom/central_command_areas/rnd)
 "aWE" = (
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
@@ -12571,12 +12562,12 @@
 /obj/structure/desk_bell{
 	pixel_y = 8
 	},
-/obj/machinery/door/poddoor/shutters/preopen{
-	name = "Research Centcom Shutters"
-	id = "CC_RND_2";
-	dir = 4;
-	},
 /obj/machinery/door/window/right/directional/west,
+/obj/machinery/door/poddoor/shutters/preopen{
+	name = "Research Centcom Shutters";
+	dir = 4;
+	id = "CC_RND_2"
+	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/rnd)
 "bGY" = (
@@ -14268,7 +14259,7 @@
 "eTH" = (
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /obj/machinery/door/poddoor/shutters/preopen{
-	name = "Research Centcom shutters";
+	name = "Research Centcom Shutters";
 	id = "CC_RND_2"
 	},
 /turf/open/floor/plating,
@@ -76130,14 +76121,14 @@ aFW
 qnr
 xJo
 aGn
-aWD
+aGn
 bGf
 xJo
 xJo
 xJo
-aWD
-aWD
-aWD
+aGn
+aGn
+aGn
 xJo
 xJo
 aJc
