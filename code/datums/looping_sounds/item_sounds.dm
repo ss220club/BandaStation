@@ -59,3 +59,11 @@
 	end_volume = 15
 	ignore_walls = FALSE
 	reserve_random_channel = TRUE
+
+/datum/looping_sound/maxwell
+	mid_sounds = list('sound/items/maxwell.ogg' = 1)
+	mid_length = 7.1 SECONDS
+	extra_range = 10
+	volume = 30
+	falloff_distance = 4
+	falloff_exponent = 5

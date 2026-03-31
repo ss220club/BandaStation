@@ -832,3 +832,56 @@
 	playsound(src, 'sound/mobs/non-humanoids/gorilla/gorilla.ogg', 100, FALSE)
 	spasm_animation(5 SECONDS)
 	qdel(nana)
+
+/obj/item/toy/plush/maxwell
+	name = "Maxwell"
+	desc = "ЭТО МАКСВЕЛЛ!!!!!!! Какой глупый котик."
+	icon_state = "maxwell"
+	squeak_override = list('sound/mobs/non-humanoids/cat/cat_meow3.ogg' = 1)
+	var/is_active = FALSE
+	var/event_spawn = FALSE
+	var/datum/looping_sound/maxwell/soundloop
+
+/obj/item/toy/plush/maxwell/Initialize(mapload, set_active, is_event_spawn)
+	. = ..()
+	is_active = set_active
+	event_spawn = is_event_spawn
+	soundloop = new(list(src), FALSE)
+	if(is_active)
+		soundloop.start()
+		START_PROCESSING(SSobj, src)
+
+/obj/item/toy/plush/maxwell/Destroy()
+	priority_announce("Диссонирующий шепот наполняет ваш разум тысячей голосов. Каждый из них повторяет ваше имя, снова и снова. МАКСВЕЛЛ был уничтожен! Кто мог совершить такое?!", "МАКСВЕЛЛ... УНИЧТОЖЕН!?!??!!!", 'sound/items/nanyaaa.ogg', ANNOUNCEMENT_TYPE_PRIORITY)
+	remove_filter("ray")
+	STOP_PROCESSING(SSobj, src)
+	QDEL_NULL(soundloop)
+	return ..()
+
+/obj/item/toy/plush/maxwell/attack_self(mob/user)
+	. = ..()
+	if(!is_active)
+		soundloop.start()
+		is_active = TRUE
+		START_PROCESSING(SSobj, src)
+	else
+		soundloop.stop()
+		is_active = FALSE
+		remove_filter("ray")
+		STOP_PROCESSING(SSobj, src)
+
+/obj/item/toy/plush/maxwell/process()
+	. = ..()
+	if(is_active)
+		var/new_filter = isnull(get_filter("ray"))
+		add_filter(name = "ray", priority = 1, params = list(type = "rays", size = 40, color = "#ffffff", factor = 6, density = 20, y = 0))
+		if(new_filter)
+			animate(get_filter("ray"), offset = 10, time = 10 SECONDS, loop = -1)
+			animate(offset = 0, time = 10 SECONDS)
+
+/obj/item/toy/plush/maxwell/pickup(mob/user)
+	. = ..()
+	playsound(src, 'sound/mobs/non-humanoids/cat/cat_meow3.ogg', 50, TRUE)
+	if(event_spawn)
+		priority_announce("Легендарный МАКСВЕЛЛ был найден [user.name]! Какой глупый котик!", "МАКСВЕЛЛ НАЙДЕН!!!", 'sound/items/maxwell.ogg', ANNOUNCEMENT_TYPE_PRIORITY)
+		event_spawn = FALSE
