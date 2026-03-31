@@ -16,6 +16,7 @@
 #include "code/simple_animal/friendly/pigs.dm"
 #include "code/simple_animal/friendly/possum.dm"
 #include "code/simple_animal/friendly/snail.dm"
+#include "code/simple_animal/friendly/wrynroach.dm"
 #include "code/simple_animal/hostile/alien.dm"
 #include "code/simple_animal/hostile/bear.dm"
 #include "code/simple_animal/hostile/bee.dm"
