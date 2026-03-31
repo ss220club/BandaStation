@@ -55,6 +55,9 @@
 	update_appearance()
 
 /obj/item/clothing/head/utility/hardhat/update_icon_state()
+	if(type == /obj/item/clothing/head/utility/hardhat/welding/up)
+		update_greyscale()
+		return ..()
 	icon_state = inhand_icon_state = "hardhat[on]_[hat_type]"
 	return ..()
 
@@ -166,6 +169,14 @@
 
 /obj/item/clothing/head/utility/hardhat/welding/up
 	up = TRUE // for calls to worn_overlays before init (prefs)
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
+	icon_state = "/obj/item/clothing/head/beret/engi"
+	post_init_icon_state = "beret"
+	greyscale_config = /datum/greyscale_config/beret
+	greyscale_config_worn = /datum/greyscale_config/beret/worn
+	greyscale_colors = "#8D008F"
+	flags_1 = NONE
+	dog_fashion = /datum/dog_fashion/head/beret
 
 /obj/item/clothing/head/utility/hardhat/welding/up/Initialize(mapload)
 	. = ..()

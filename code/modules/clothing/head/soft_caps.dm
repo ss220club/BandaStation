@@ -122,7 +122,8 @@
 /obj/item/clothing/head/soft/sec
 	name = "security cap"
 	desc = "It's a robust baseball hat in tasteful red colour."
-	icon_state = "secsoft"
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
+	icon_state = "/obj/item/clothing/head/beret/medical"
 	soft_type = "sec"
 	armor_type = /datum/armor/cosmetic_sec
 	strip_delay = 6 SECONDS

@@ -109,7 +109,7 @@
 /obj/item/clothing/gloves/latex
 	name = "latex gloves"
 	desc = "Cheap sterile gloves made from latex. Provides quicker carrying from a good grip."
-	icon_state = "latex"
+	icon_state = "sec"
 	inhand_icon_state = "latex_gloves"
 	greyscale_colors = null
 	siemens_coefficient = 0.3
@@ -124,7 +124,7 @@
 /obj/item/clothing/gloves/latex/nitrile
 	name = "nitrile gloves"
 	desc = "Pricy sterile gloves that are thicker than latex. Excellent grip ensures very fast carrying of patients along with the faster use time of various chemical related items."
-	icon_state = "nitrile"
+	icon_state = "sec_blu"
 	inhand_icon_state = "greyscale_gloves"
 	greyscale_colors = "#99eeff"
 	clothing_traits = list(TRAIT_QUICKER_CARRY, TRAIT_FASTMED)
@@ -136,6 +136,7 @@
 /obj/item/clothing/gloves/latex/coroner
 	name = "coroner's gloves"
 	desc = "Black gloves made from latex with a superhydrophobic coating. Useful for picking bodies up instead of dragging blood behind."
+	icon = 'icons/obj/clothing/gloves.dmi'
 	icon_state = "latex_black"
 	inhand_icon_state = "greyscale_gloves"
 	greyscale_colors = "#15191a"

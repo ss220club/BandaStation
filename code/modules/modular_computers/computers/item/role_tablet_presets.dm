@@ -49,9 +49,9 @@
 
 /obj/item/modular_computer/pda/heads/hos
 	name = "head of security PDA"
-	icon_state = "/obj/item/modular_computer/pda/heads/hos"
-	greyscale_config = /datum/greyscale_config/tablet/head
-	greyscale_colors = "#EA3232#0000CC"
+	icon_state = "/obj/item/modular_computer/pda/heads/cmo"
+	greyscale_config = /datum/greyscale_config/tablet/stripe_thick/head
+	greyscale_colors = "#FAFAFA#000099#3F96CC"
 	inserted_item = /obj/item/pen/red/security
 	starting_programs = list(
 		/datum/computer_file/program/records/security,
@@ -59,9 +59,9 @@
 
 /obj/item/modular_computer/pda/heads/ce
 	name = "chief engineer PDA"
-	icon_state = "/obj/item/modular_computer/pda/heads/ce"
+	icon_state = "/obj/item/modular_computer/pda/heads/rd"
 	greyscale_config = /datum/greyscale_config/tablet/stripe_thick/head
-	greyscale_colors = "#D99A2E#69DBF3#FAFAFA"
+	greyscale_colors = "#FAFAFA#000099#B347BC"
 	starting_programs = list(
 		/datum/computer_file/program/atmosscan,
 		/datum/computer_file/program/alarm_monitor,
@@ -70,9 +70,9 @@
 
 /obj/item/modular_computer/pda/heads/cmo
 	name = "chief medical officer PDA"
-	icon_state = "/obj/item/modular_computer/pda/heads/cmo"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_thick/head
-	greyscale_colors = "#FAFAFA#000099#3F96CC"
+	icon_state = "/obj/item/modular_computer/pda/heads/hos"
+	greyscale_config = /datum/greyscale_config/tablet/head
+	greyscale_colors = "#EA3232#0000CC"
 	starting_programs = list(
 		/datum/computer_file/program/maintenance/phys_scanner,
 		/datum/computer_file/program/records/medical,
@@ -80,9 +80,9 @@
 
 /obj/item/modular_computer/pda/heads/rd
 	name = "research director PDA"
-	icon_state = "/obj/item/modular_computer/pda/heads/rd"
+	icon_state = "/obj/item/modular_computer/pda/heads/ce"
 	greyscale_config = /datum/greyscale_config/tablet/stripe_thick/head
-	greyscale_colors = "#FAFAFA#000099#B347BC"
+	greyscale_colors = "#D99A2E#69DBF3#FAFAFA"
 	inserted_item = /obj/item/pen/fountain
 	starting_programs = list(
 		/datum/computer_file/program/borg_monitor,
@@ -108,7 +108,9 @@
 
 /obj/item/modular_computer/pda/security
 	name = "security PDA"
-	greyscale_colors = "#EA3232#0000cc"
+	icon_state = "/obj/item/modular_computer/pda/medical"
+	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
+	greyscale_colors = "#FAFAFA#000099#3F96CC"
 	inserted_item = /obj/item/pen/red/security
 	starting_programs = list(
 		/datum/computer_file/program/records/security,
@@ -117,7 +119,9 @@
 
 /obj/item/modular_computer/pda/detective
 	name = "detective PDA"
-	greyscale_colors = "#805A2F#990202"
+	icon_state = "/obj/item/modular_computer/pda/coroner"
+	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
+	greyscale_colors = "#FAFAFA#000099#1f2026"
 	inserted_item = /obj/item/pen/red/security
 	starting_programs = list(
 		/datum/computer_file/program/records/security,
@@ -126,9 +130,9 @@
 
 /obj/item/modular_computer/pda/warden
 	name = "warden PDA"
-	icon_state = "/obj/item/modular_computer/pda/warden"
+	icon_state = "/obj/item/modular_computer/pda/medical/paramedic"
 	greyscale_config = /datum/greyscale_config/tablet/stripe_double
-	greyscale_colors = "#EA3232#0000CC#363636"
+	greyscale_colors = "#28334D#000099#3F96CC"
 	inserted_item = /obj/item/pen/red/security
 	starting_programs = list(
 		/datum/computer_file/program/records/security,
@@ -142,9 +146,9 @@
 
 /obj/item/modular_computer/pda/engineering
 	name = "engineering PDA"
-	icon_state = "/obj/item/modular_computer/pda/engineering"
+	icon_state = "/obj/item/modular_computer/pda/science"
 	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
-	greyscale_colors = "#D99A2E#69DBF3#E3DF3D"
+	greyscale_colors = "#FAFAFA#000099#B347BC"
 	starting_programs = list(
 		/datum/computer_file/program/alarm_monitor,
 		/datum/computer_file/program/atmosscan,
@@ -153,9 +157,9 @@
 
 /obj/item/modular_computer/pda/atmos
 	name = "atmospherics PDA"
-	icon_state = "/obj/item/modular_computer/pda/atmos"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
-	greyscale_colors = "#EEDC43#00E5DA#727272"
+	icon_state = "/obj/item/modular_computer/pda/roboticist"
+	greyscale_config = /datum/greyscale_config/tablet/stripe_double
+	greyscale_colors = "#484848#0099CC#D94927"
 	starting_programs = list(
 		/datum/computer_file/program/alarm_monitor,
 		/datum/computer_file/program/atmosscan,
@@ -168,9 +172,9 @@
 
 /obj/item/modular_computer/pda/science
 	name = "scientist PDA"
-	icon_state = "/obj/item/modular_computer/pda/science"
+	icon_state = "/obj/item/modular_computer/pda/engineering"
 	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
-	greyscale_colors = "#FAFAFA#000099#B347BC"
+	greyscale_colors = "#D99A2E#69DBF3#E3DF3D"
 	starting_programs = list(
 		/datum/computer_file/program/atmosscan,
 		/datum/computer_file/program/science,
@@ -180,9 +184,9 @@
 
 /obj/item/modular_computer/pda/roboticist
 	name = "roboticist PDA"
-	icon_state = "/obj/item/modular_computer/pda/roboticist"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_double
-	greyscale_colors = "#484848#0099CC#D94927"
+	icon_state = "/obj/item/modular_computer/pda/atmos"
+	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
+	greyscale_colors = "#EEDC43#00E5DA#727272"
 	starting_programs = list(
 		/datum/computer_file/program/science,
 		/datum/computer_file/program/robocontrol,
@@ -204,9 +208,8 @@
 
 /obj/item/modular_computer/pda/medical
 	name = "medical PDA"
-	icon_state = "/obj/item/modular_computer/pda/medical"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
-	greyscale_colors = "#FAFAFA#000099#3F96CC"
+	greyscale_config = /datum/greyscale_config/tablet
+	greyscale_colors = "#EA3232#0000cc"
 	starting_programs = list(
 		/datum/computer_file/program/records/medical,
 		/datum/computer_file/program/robocontrol,
@@ -214,9 +217,9 @@
 
 /obj/item/modular_computer/pda/medical/paramedic
 	name = "paramedic PDA"
-	icon_state = "/obj/item/modular_computer/pda/medical/paramedic"
+	icon_state = "/obj/item/modular_computer/pda/warden"
 	greyscale_config = /datum/greyscale_config/tablet/stripe_double
-	greyscale_colors = "#28334D#000099#3F96CC"
+	greyscale_colors = "#EA3232#0000CC#363636"
 	starting_programs = list(
 		/datum/computer_file/program/records/medical,
 		/datum/computer_file/program/radar/lifeline,
@@ -230,9 +233,7 @@
 
 /obj/item/modular_computer/pda/coroner
 	name = "coroner PDA"
-	icon_state = "/obj/item/modular_computer/pda/coroner"
-	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
-	greyscale_colors = "#FAFAFA#000099#1f2026"
+	greyscale_colors = "#805A2F#990202"
 	starting_programs = list(
 		/datum/computer_file/program/records/medical,
 	)

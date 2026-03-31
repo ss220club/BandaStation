@@ -567,7 +567,8 @@
 /obj/item/clothing/head/beret/sec
 	name = "security beret"
 	desc = "A robust beret with the security insignia emblazoned on it. Uses reinforced fabric to offer sufficient protection."
-	icon_state = "/obj/item/clothing/head/beret/sec"
+	icon = 'icons/obj/clothing/head/costume.dmi'
+	icon_state = "nursehat"
 	post_init_icon_state = "beret_badge"
 	greyscale_config = /datum/greyscale_config/beret_badge
 	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
@@ -590,12 +591,14 @@
 /obj/item/clothing/head/beret/sec/navywarden
 	name = "warden's beret"
 	desc = "A special beret with the Warden's insignia emblazoned on it. For wardens with class."
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
 	icon_state = "/obj/item/clothing/head/beret/sec/navywarden"
 	greyscale_colors = "#638799#ebebeb"
 	strip_delay = 6 SECONDS
 
 /obj/item/clothing/head/beret/sec/navyofficer
 	desc = "A special beret with the security insignia emblazoned on it. For officers with class."
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
 	icon_state = "/obj/item/clothing/head/beret/sec/navyofficer"
 	greyscale_colors = "#638799#294A98"
 
@@ -603,12 +606,13 @@
 /obj/item/clothing/head/beret/science
 	name = "science beret"
 	desc = "A science-themed beret for our hardworking scientists."
-	icon_state = "/obj/item/clothing/head/beret/science"
+	icon_state = "/obj/item/clothing/head/beret/engi"
 	greyscale_colors = "#8D008F"
 	flags_1 = NONE
 
 /obj/item/clothing/head/beret/science/rd
 	desc = "A purple badge with the insignia of the Research Director attached. For the paper-shuffler in you!"
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
 	icon_state = "/obj/item/clothing/head/beret/science/rd"
 	post_init_icon_state = "beret_badge"
 	greyscale_config = /datum/greyscale_config/beret_badge
@@ -619,25 +623,29 @@
 /obj/item/clothing/head/beret/medical
 	name = "medical beret"
 	desc = "A medical-flavored beret for the doctor in you!"
-	icon_state = "/obj/item/clothing/head/beret/medical"
+	icon = 'icons/obj/clothing/head/hats.dmi'
+	icon_state = "secsoft"
 	greyscale_colors = COLOR_WHITE
 	flags_1 = NONE
 
 /obj/item/clothing/head/beret/medical/paramedic
 	name = "paramedic beret"
 	desc = "For finding corpses in style!"
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
 	icon_state = "/obj/item/clothing/head/beret/medical/paramedic"
 	greyscale_colors = "#16313D"
 
 /obj/item/clothing/head/beret/medical/cmo
 	name = "chief medical officer beret"
 	desc = "A beret in a distinct surgical turquoise!"
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
 	icon_state = "/obj/item/clothing/head/beret/medical/cmo"
 	greyscale_colors = "#5EB8B8"
 
 /obj/item/clothing/head/utility/surgerycap
 	name = "blue surgery cap"
-	icon_state = "surgicalcap"
+	icon = 'icons/map_icons/clothing/head/_head.dmi'
+	icon_state = "/obj/item/clothing/head/costume/ushanka/sec"
 	desc = "A blue medical surgery cap to prevent the surgeon's hair from entering the insides of the patient!"
 	flags_inv = HIDEHAIR //Cover your head doctor!
 	w_class = WEIGHT_CLASS_SMALL //surgery cap can be easily crumpled
@@ -666,21 +674,25 @@
 
 /obj/item/clothing/head/utility/surgerycap/purple
 	name = "burgundy surgery cap"
+	icon = 'icons/obj/clothing/head/default.dmi'
 	icon_state = "surgicalcapwine"
 	desc = "A burgundy medical surgery cap to prevent the surgeon's hair from entering the insides of the patient!"
 
 /obj/item/clothing/head/utility/surgerycap/green
 	name = "green surgery cap"
+	icon = 'icons/obj/clothing/head/default.dmi'
 	icon_state = "surgicalcapgreen"
 	desc = "A green medical surgery cap to prevent the surgeon's hair from entering the insides of the patient!"
 
 /obj/item/clothing/head/utility/surgerycap/cmo
 	name = "turquoise surgery cap"
+	icon = 'icons/obj/clothing/head/default.dmi'
 	icon_state = "surgicalcapcmo"
 	desc = "The CMO's medical surgery cap to prevent their hair from entering the insides of the patient!"
 
 /obj/item/clothing/head/utility/surgerycap/black
 	name = "black surgery cap"
+	icon = 'icons/obj/clothing/head/default.dmi'
 	icon_state = "surgicalcapblack"
 	desc = "A black medical surgery cap to prevent the surgeon's hair from entering the insides of the patient!"
 
@@ -772,7 +784,7 @@
 /obj/item/clothing/head/beret/engi
 	name = "engineering beret"
 	desc = "Might not protect you from radiation, but definitely will protect you from looking unfashionable!"
-	icon_state = "/obj/item/clothing/head/beret/engi"
+	icon_state = "/obj/item/clothing/head/beret/science"
 	greyscale_colors = "#FFBC30"
 	flags_1 = NONE
 

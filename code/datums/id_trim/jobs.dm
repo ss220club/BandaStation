@@ -112,8 +112,8 @@
 /datum/id_trim/job/atmospheric_technician
 	assignment = JOB_ATMOSPHERIC_TECHNICIAN
 	trim_state = "trim_atmospherictechnician"
-	department_color = COLOR_ENGINEERING_ORANGE
-	subdepartment_color = COLOR_ENGINEERING_ORANGE
+	department_color = COLOR_SCIENCE_PINK
+	subdepartment_color = COLOR_SCIENCE_PINK
 	sechud_icon_state = SECHUD_ATMOSPHERIC_TECHNICIAN
 	minimal_access = list(
 		ACCESS_ATMOSPHERICS,
@@ -342,8 +342,8 @@
 /datum/id_trim/job/chemist
 	assignment = JOB_CHEMIST
 	trim_state = "trim_chemist"
-	department_color = COLOR_MEDICAL_BLUE
-	subdepartment_color = COLOR_MEDICAL_BLUE
+	department_color = COLOR_SECURITY_RED
+	subdepartment_color = COLOR_SECURITY_RED
 	sechud_icon_state = SECHUD_CHEMIST
 	minimal_access = list(
 		ACCESS_MECH_MEDICAL,
@@ -370,7 +370,7 @@
 	intern_alt_name = "Chief Engineer-in-Training"
 	trim_state = "trim_stationengineer"
 	department_color = COLOR_COMMAND_BLUE
-	subdepartment_color = COLOR_ENGINEERING_ORANGE
+	subdepartment_color = COLOR_SCIENCE_PINK
 	department_state = "departmenthead"
 	sechud_icon_state = SECHUD_CHIEF_ENGINEER
 	extra_wildcard_access = list()
@@ -416,7 +416,7 @@
 	intern_alt_name = "Chief Medical Officer-in-Training"
 	trim_state = "trim_medicaldoctor"
 	department_color = COLOR_COMMAND_BLUE
-	subdepartment_color = COLOR_MEDICAL_BLUE
+	subdepartment_color = COLOR_SECURITY_RED
 	department_state = "departmenthead"
 	sechud_icon_state = SECHUD_CHIEF_MEDICAL_OFFICER
 	extra_wildcard_access = list()
@@ -511,8 +511,8 @@
 /datum/id_trim/job/coroner
 	assignment = JOB_CORONER
 	trim_state = "trim_coroner"
-	department_color = COLOR_MEDICAL_BLUE
-	subdepartment_color = COLOR_SERVICE_LIME
+	department_color = COLOR_SECURITY_RED
+	subdepartment_color = COLOR_SECURITY_RED
 	sechud_icon_state = SECHUD_CORONER
 	minimal_access = list(
 		ACCESS_MEDICAL,
@@ -560,8 +560,8 @@
 /datum/id_trim/job/detective
 	assignment = JOB_DETECTIVE
 	trim_state = "trim_detective"
-	department_color = COLOR_SECURITY_RED
-	subdepartment_color = COLOR_SECURITY_RED
+	department_color = COLOR_MEDICAL_BLUE
+	subdepartment_color = COLOR_SERVICE_LIME
 	sechud_icon_state = SECHUD_DETECTIVE
 	minimal_access = list(
 		ACCESS_BRIG_ENTRANCE,
@@ -600,8 +600,8 @@
 /datum/id_trim/job/geneticist
 	assignment = JOB_GENETICIST
 	trim_state = "trim_geneticist"
-	department_color = COLOR_SCIENCE_PINK
-	subdepartment_color = COLOR_SCIENCE_PINK
+	department_color = COLOR_ENGINEERING_ORANGE
+	subdepartment_color = COLOR_ENGINEERING_ORANGE
 	sechud_icon_state = SECHUD_GENETICIST
 	minimal_access = list(
 		ACCESS_GENETICS,
@@ -686,7 +686,7 @@
 	intern_alt_name = "Head of Security-in-Training"
 	trim_state = "trim_securityofficer"
 	department_color = COLOR_COMMAND_BLUE
-	subdepartment_color = COLOR_SECURITY_RED
+	subdepartment_color = COLOR_MEDICAL_BLUE
 	department_state = "departmenthead"
 	sechud_icon_state = SECHUD_HEAD_OF_SECURITY
 	extra_access = list(ACCESS_TELEPORTER)
@@ -771,7 +771,7 @@
 	assignment = JOB_LAWYER
 	trim_state = "trim_lawyer"
 	department_color = COLOR_SERVICE_LIME
-	subdepartment_color = COLOR_SECURITY_RED
+	subdepartment_color = COLOR_MEDICAL_BLUE
 	sechud_icon_state = SECHUD_LAWYER
 	minimal_access = list(
 		ACCESS_BRIG_ENTRANCE,
@@ -793,8 +793,8 @@
 /datum/id_trim/job/medical_doctor
 	assignment = JOB_MEDICAL_DOCTOR
 	trim_state = "trim_medicaldoctor"
-	department_color = COLOR_MEDICAL_BLUE
-	subdepartment_color = COLOR_MEDICAL_BLUE
+	department_color = COLOR_SECURITY_RED
+	subdepartment_color = COLOR_SECURITY_RED
 	sechud_icon_state = SECHUD_MEDICAL_DOCTOR
 	extra_access = list(
 		ACCESS_PLUMBING,
@@ -842,8 +842,8 @@
 /datum/id_trim/job/paramedic
 	assignment = JOB_PARAMEDIC
 	trim_state = "trim_paramedic"
-	department_color = COLOR_MEDICAL_BLUE
-	subdepartment_color = COLOR_MEDICAL_BLUE
+	department_color = COLOR_SECURITY_RED
+	subdepartment_color = COLOR_SECURITY_RED
 	sechud_icon_state = SECHUD_PARAMEDIC
 	minimal_access = list(
 		ACCESS_EXTERNAL_AIRLOCKS,
@@ -925,7 +925,7 @@
 	assignment = JOB_PSYCHOLOGIST
 	trim_state = "trim_psychologist"
 	department_color = COLOR_SERVICE_LIME
-	subdepartment_color = COLOR_MEDICAL_BLUE
+	subdepartment_color = COLOR_SECURITY_RED
 	sechud_icon_state = SECHUD_PSYCHOLOGIST
 	minimal_access = list(
 		ACCESS_MEDICAL,
@@ -995,7 +995,7 @@
 	intern_alt_name = "Research Director-in-Training"
 	trim_state = "trim_scientist"
 	department_color = COLOR_COMMAND_BLUE
-	subdepartment_color = COLOR_SCIENCE_PINK
+	subdepartment_color = COLOR_ENGINEERING_ORANGE
 	department_state = "departmenthead"
 	sechud_icon_state = SECHUD_RESEARCH_DIRECTOR
 	minimal_access = list(
@@ -1046,8 +1046,8 @@
 /datum/id_trim/job/roboticist
 	assignment = JOB_ROBOTICIST
 	trim_state = "trim_roboticist"
-	department_color = COLOR_SCIENCE_PINK
-	subdepartment_color = COLOR_SCIENCE_PINK
+	department_color = COLOR_ENGINEERING_ORANGE
+	subdepartment_color = COLOR_ENGINEERING_ORANGE
 	sechud_icon_state = SECHUD_ROBOTICIST
 	minimal_access = list(
 		ACCESS_AUX_BASE,
@@ -1076,8 +1076,8 @@
 /datum/id_trim/job/scientist
 	assignment = JOB_SCIENTIST
 	trim_state = "trim_scientist"
-	department_color = COLOR_SCIENCE_PINK
-	subdepartment_color = COLOR_SCIENCE_PINK
+	department_color = COLOR_ENGINEERING_ORANGE
+	subdepartment_color = COLOR_ENGINEERING_ORANGE
 	sechud_icon_state = SECHUD_SCIENTIST
 	minimal_access = list(
 		ACCESS_AUX_BASE,
@@ -1106,8 +1106,8 @@
 /datum/id_trim/job/security_officer
 	assignment = JOB_SECURITY_OFFICER
 	trim_state = "trim_securityofficer"
-	department_color = COLOR_SECURITY_RED
-	subdepartment_color = COLOR_SECURITY_RED
+	department_color = COLOR_MEDICAL_BLUE
+	subdepartment_color = COLOR_MEDICAL_BLUE
 	sechud_icon_state = SECHUD_SECURITY_OFFICER
 	minimal_access = list(
 		ACCESS_BRIG,
@@ -1193,7 +1193,7 @@
 
 /datum/id_trim/job/security_officer/engineering
 	assignment = JOB_SECURITY_OFFICER_ENGINEERING
-	subdepartment_color = COLOR_ENGINEERING_ORANGE
+	subdepartment_color = COLOR_SCIENCE_PINK
 	department_access = list(
 		ACCESS_ATMOSPHERICS,
 		ACCESS_ENGINEERING,
@@ -1208,7 +1208,7 @@
 
 /datum/id_trim/job/security_officer/medical
 	assignment = JOB_SECURITY_OFFICER_MEDICAL
-	subdepartment_color = COLOR_MEDICAL_BLUE
+	subdepartment_color = COLOR_SECURITY_RED
 	department_access = list(
 		ACCESS_MEDICAL,
 		ACCESS_MORGUE,
@@ -1225,7 +1225,7 @@
 
 /datum/id_trim/job/security_officer/science
 	assignment = JOB_SECURITY_OFFICER_SCIENCE
-	subdepartment_color = COLOR_SCIENCE_PINK
+	subdepartment_color = COLOR_ENGINEERING_ORANGE
 	department_access = list(
 		ACCESS_RESEARCH,
 		ACCESS_SCIENCE,
@@ -1244,7 +1244,7 @@
 	assignment = JOB_SHAFT_MINER
 	trim_state = "trim_shaftminer"
 	department_color = COLOR_CARGO_BROWN
-	subdepartment_color = COLOR_SCIENCE_PINK
+	subdepartment_color = COLOR_ENGINEERING_ORANGE
 	sechud_icon_state = SECHUD_SHAFT_MINER
 	minimal_access = list(
 		ACCESS_AUX_BASE,
@@ -1280,8 +1280,8 @@
 /datum/id_trim/job/station_engineer
 	assignment = JOB_STATION_ENGINEER
 	trim_state = "trim_stationengineer"
-	department_color = COLOR_ENGINEERING_ORANGE
-	subdepartment_color = COLOR_ENGINEERING_ORANGE
+	department_color = COLOR_SCIENCE_PINK
+	subdepartment_color = COLOR_SCIENCE_PINK
 	sechud_icon_state = SECHUD_STATION_ENGINEER
 	minimal_access = list(
 		ACCESS_AUX_BASE,
@@ -1346,8 +1346,8 @@
 /datum/id_trim/job/warden
 	assignment = JOB_WARDEN
 	trim_state = "trim_warden"
-	department_color = COLOR_SECURITY_RED
-	subdepartment_color = COLOR_SECURITY_RED
+	department_color = COLOR_MEDICAL_BLUE
+	subdepartment_color = COLOR_MEDICAL_BLUE
 	sechud_icon_state = SECHUD_WARDEN
 	minimal_access = list(
 		ACCESS_ARMORY,

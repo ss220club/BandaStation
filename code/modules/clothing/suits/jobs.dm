@@ -174,9 +174,9 @@
 /obj/item/clothing/suit/hazardvest
 	name = "hazard vest"
 	desc = "A high-visibility vest used in work zones."
-	icon_state = "hazard"
-	icon = 'icons/obj/clothing/suits/utility.dmi'
-	worn_icon = 'icons/mob/clothing/suits/utility.dmi'
+	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
+	icon_state = "/obj/item/clothing/suit/toggle/labcoat/science"
+	worn_icon = 'icons/mob/clothing/suits/labcoat.dmi'
 	inhand_icon_state = null
 	blood_overlay_type = "armor"
 	allowed = list(
@@ -202,6 +202,7 @@
 /obj/item/clothing/suit/hazardvest/press // Variant used by the Curator
 	name = "press hazard vest"
 	desc = "A blue high-visibility vest used to distinguish <i>non-combatant</i> \"PRESS\" members, like if anyone cares."
+	icon = 'icons/obj/clothing/suits/utility.dmi'
 	icon_state = "hazard_press"
 
 //Lawyer

@@ -47,20 +47,28 @@
 /obj/item/clothing/suit/armor/vest
 	name = "armor vest"
 	desc = "A slim Type I armored vest that provides decent protection against most types of damage."
-	icon_state = "armoralt"
-	inhand_icon_state = "armor"
-	blood_overlay_type = "armor"
-	dog_fashion = /datum/dog_fashion/back/armorvest
+	icon = 'icons/obj/clothing/suits/labcoat.dmi'
+	worn_icon = 'icons/mob/clothing/suits/labcoat.dmi'
+	icon_state = "labcoat"
+	inhand_icon_state = "labcoat"
+	blood_overlay_type = "coat"
+	dog_fashion = null
 
 /obj/item/clothing/suit/armor/vest/alt
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	desc = "A Type I armored vest that provides decent protection against most types of damage."
 	icon_state = "armor"
 	inhand_icon_state = "armor"
 
 /obj/item/clothing/suit/armor/vest/alt/sec
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	icon_state = "armor_sec"
 
 /obj/item/clothing/suit/armor/vest/press
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "press armor vest"
 	desc = "A blue armor vest used to distinguish <i>non-combatant</i> \"PRESS\" members, like if anyone cares."
 	icon_state = "armor_press"
@@ -71,6 +79,8 @@
 		. += emissive_appearance(icon_file, "[icon_state]-emissive", src, alpha = src.alpha, effect_type = EMISSIVE_SPECULAR)
 
 /obj/item/clothing/suit/armor/vest/marine
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "tactical armor vest"
 	desc = "A set of the finest mass produced, stamped plasteel armor plates, containing an environmental protection unit for all-condition door kicking."
 	icon_state = "marine_command"
@@ -118,6 +128,8 @@
 	body_parts_covered = CHEST|GROIN
 
 /obj/item/clothing/suit/armor/vest/marine/pmc
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	desc = "A set of the finest mass produced, stamped plasteel armor plates, for an all-around door-kicking and ass-smashing. Its stellar survivability making up is for its lack of space worthiness"
 	min_cold_protection_temperature = HELMET_MIN_TEMP_PROTECT
 	max_heat_protection_temperature = HELMET_MAX_TEMP_PROTECT
@@ -126,6 +138,8 @@
 	armor_type = /datum/armor/pmc
 
 /obj/item/clothing/suit/armor/vest/old
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "degrading armor vest"
 	desc = "Older generation Type 1 armored vest. Due to degradation over time the vest is far less maneuverable to move in."
 	icon_state = "armor"
@@ -133,6 +147,8 @@
 	slowdown = 1
 
 /obj/item/clothing/suit/armor/vest/blueshirt
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "large armor vest"
 	desc = "A large, yet comfortable piece of armor, protecting you from some threats."
 	icon_state = "blueshift"
@@ -140,6 +156,8 @@
 	custom_premium_price = PAYCHECK_COMMAND
 
 /obj/item/clothing/suit/armor/vest/cuirass
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "cuirass"
 	desc = "A lighter plate armor used to still keep out those pesky arrows, while retaining the ability to move."
 	icon_state = "cuirass"
@@ -197,6 +215,8 @@
 	AddComponent(/datum/component/toggle_icon)
 
 /obj/item/clothing/suit/armor/vest/warden
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "warden's jacket"
 	desc = "A navy-blue armored jacket with blue shoulder designations and '/Warden/' stitched into one of the chest pockets."
 	icon_state = "warden_alt"
@@ -209,6 +229,8 @@
 	dog_fashion = null
 
 /obj/item/clothing/suit/armor/vest/warden/alt
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "warden's armored jacket"
 	desc = "A red jacket with silver rank pips and body armor strapped on top."
 	icon_state = "warden_jacket"
@@ -216,8 +238,10 @@
 /obj/item/clothing/suit/armor/vest/secjacket
 	name = "security jacket"
 	desc = "A red jacket in red Security colors. It has hi-vis stripes all over it."
-	icon_state = "secjacket"
-	inhand_icon_state = "armor"
+	icon = 'icons/obj/clothing/suits/labcoat.dmi'
+	worn_icon = 'icons/mob/clothing/suits/labcoat.dmi'
+	icon_state = "labcoat"
+	inhand_icon_state = "labcoat"
 	armor_type = /datum/armor/armor_secjacket
 	body_parts_covered = CHEST|GROIN|ARMS
 	cold_protection = CHEST|GROIN|ARMS|HANDS
@@ -241,6 +265,8 @@
 	wound = 5
 
 /obj/item/clothing/suit/armor/vest/leather
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "security overcoat"
 	desc = "Lightly armored leather overcoat meant as casual wear for high-ranking officers. Bears the crest of Nanotrasen Security."
 	icon_state = "leathercoat-sec"
@@ -251,6 +277,8 @@
 	dog_fashion = null
 
 /obj/item/clothing/suit/armor/vest/capcarapace
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "captain's carapace"
 	desc = "A fireproof armored chestpiece reinforced with ceramic plates and plasteel pauldrons to provide additional protection whilst still offering maximum mobility and flexibility. Issued only to the station's finest, although it does chafe your nipples."
 	icon_state = "capcarapace"
@@ -271,11 +299,15 @@
 	wound = 10
 
 /obj/item/clothing/suit/armor/vest/capcarapace/syndicate
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "syndicate captain's vest"
 	desc = "A sinister looking vest of advanced armor worn over a black and red fireproof jacket. The gold collar and shoulders denote that this belongs to a high ranking syndicate officer."
 	icon_state = "syndievest"
 
 /obj/item/clothing/suit/armor/vest/capcarapace/captains_formal
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "captain's parade coat"
 	desc = "For when an armoured vest isn't fashionable enough."
 	icon_state = "capformal"
@@ -398,6 +430,8 @@
 		return TRUE
 
 /obj/item/clothing/suit/armor/vest/det_suit
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "detective's flak vest"
 	desc = "An armored vest with a detective's badge on it."
 	icon_state = "detective-armor"
@@ -566,6 +600,8 @@
 	acid = 40
 
 /obj/item/clothing/suit/armor/vest/durathread
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "durathread vest"
 	desc = "A vest made of durathread with strips of leather acting as trauma plates."
 	icon_state = "durathread"
@@ -591,6 +627,8 @@
 	acid = 50
 
 /obj/item/clothing/suit/armor/vest/russian
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "russian vest"
 	desc = "A bulletproof vest with forest camo. Good thing there's plenty of forests to hide in around here, right?"
 	icon_state = "rus_armor"
@@ -608,6 +646,8 @@
 	wound = 10
 
 /obj/item/clothing/suit/armor/vest/russian_coat
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "russian battle coat"
 	desc = "Used in extremely cold fronts, made out of real bears."
 	icon_state = "rus_coat"
@@ -680,6 +720,8 @@
 	AddComponent(/datum/component/toggle_icon)
 
 /obj/item/clothing/suit/armor/vest/hop
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "head of personnel's coat"
 	desc = "A stylish coat given to a Head of Personnel."
 	icon_state = "hop_coat"
@@ -708,6 +750,8 @@
 	wound = 30
 
 /obj/item/clothing/suit/armor/vest/military
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
 	name = "Crude chestplate"
 	desc = "It may look rough, rusty and battered, but it's also made out of junk and uncomfortable to wear."
 	icon_state = "military"

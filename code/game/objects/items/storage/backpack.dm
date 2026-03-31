@@ -137,8 +137,8 @@
 /obj/item/storage/backpack/medic
 	name = "medical backpack"
 	desc = "It's a backpack especially designed for use in a sterile environment."
-	icon_state = "backpack-medical"
-	inhand_icon_state = "medicalpack"
+	icon_state = "backpack-security"
+	inhand_icon_state = "securitypack"
 
 /obj/item/storage/backpack/chief_medic
 	name = "chief medical officer's backpack"
@@ -155,8 +155,8 @@
 /obj/item/storage/backpack/security
 	name = "security backpack"
 	desc = "It's a very robust backpack."
-	icon_state = "backpack-security"
-	inhand_icon_state = "securitypack"
+	icon_state = "backpack-medical"
+	inhand_icon_state = "medicalpack"
 
 /obj/item/storage/backpack/captain
 	name = "captain's backpack"
@@ -167,8 +167,8 @@
 /obj/item/storage/backpack/industrial
 	name = "industrial backpack"
 	desc = "It's a tough backpack for the daily grind of station life."
-	icon_state = "backpack-engineering"
-	inhand_icon_state = "engiepack"
+	icon_state = "backpack-science"
+	inhand_icon_state = "scipack"
 	resistance_flags = FIRE_PROOF
 
 /obj/item/storage/backpack/botany
@@ -192,8 +192,8 @@
 /obj/item/storage/backpack/science
 	name = "science backpack"
 	desc = "A specially designed backpack. It's fire resistant and smells vaguely of plasma."
-	icon_state = "backpack-science"
-	inhand_icon_state = "scipack"
+	icon_state = "backpack-engineering"
+	inhand_icon_state = "engiepack"
 
 /obj/item/storage/backpack/virology
 	name = "virology backpack"
@@ -311,15 +311,15 @@
 /obj/item/storage/backpack/satchel/eng
 	name = "industrial satchel"
 	desc = "A tough satchel with extra pockets."
-	icon_state = "satchel-engineering"
-	inhand_icon_state = "satchel-eng"
+	icon_state = "satchel-science"
+	inhand_icon_state = "satchel-sci"
 	resistance_flags = FIRE_PROOF
 
 /obj/item/storage/backpack/satchel/med
 	name = "medical satchel"
 	desc = "A sterile satchel used in medical departments."
-	icon_state = "satchel-medical"
-	inhand_icon_state = "satchel-med"
+	icon_state = "satchel-security"
+	inhand_icon_state = "satchel-sec"
 
 /obj/item/storage/backpack/satchel/chief_medic
 	name = "chief medical officer's satchel"
@@ -354,8 +354,8 @@
 /obj/item/storage/backpack/satchel/science
 	name = "scientist satchel"
 	desc = "Useful for holding research materials."
-	icon_state = "satchel-science"
-	inhand_icon_state = "satchel-sci"
+	icon_state = "satchel-engineering"
+	inhand_icon_state = "satchel-eng"
 
 /obj/item/storage/backpack/satchel/hyd
 	name = "botanist satchel"
@@ -366,8 +366,8 @@
 /obj/item/storage/backpack/satchel/sec
 	name = "security satchel"
 	desc = "A robust satchel for security related needs."
-	icon_state = "satchel-security"
-	inhand_icon_state = "satchel-sec"
+	icon_state = "satchel-medical"
+	inhand_icon_state = "satchel-med"
 
 /obj/item/storage/backpack/satchel/explorer
 	name = "explorer satchel"
@@ -422,15 +422,15 @@
 /obj/item/storage/backpack/messenger/eng
 	name = "industrial messenger bag"
 	desc = "A tough messenger bag made of advanced treated leather for fireproofing. It also has more pockets than usual."
-	icon_state = "messenger_engineering"
-	inhand_icon_state = "messenger_engineering"
+	icon_state = "messenger_science"
+	inhand_icon_state = "messenger_science"
 	resistance_flags = FIRE_PROOF
 
 /obj/item/storage/backpack/messenger/med
 	name = "medical messenger bag"
 	desc = "A sterile messenger bag well loved by medics for its portability and sleek profile."
-	icon_state = "messenger_medical"
-	inhand_icon_state = "messenger_medical"
+	icon_state = "messenger_security"
+	inhand_icon_state = "messenger_security"
 
 /obj/item/storage/backpack/messenger/chief_medic
 	name = "chief medical officer's messenger bag"
@@ -465,8 +465,8 @@
 /obj/item/storage/backpack/messenger/science
 	name = "scientist messenger bag"
 	desc = "Useful for holding research materials, and for speeding your way to different scan objectives."
-	icon_state = "messenger_science"
-	inhand_icon_state = "messenger_science"
+	icon_state = "messenger_engineering"
+	inhand_icon_state = "messenger_engineering"
 
 /obj/item/storage/backpack/messenger/hyd
 	name = "botanist messenger bag"
@@ -477,8 +477,8 @@
 /obj/item/storage/backpack/messenger/sec
 	name = "security messenger bag"
 	desc = "A robust messenger bag for security related needs."
-	icon_state = "messenger_security"
-	inhand_icon_state = "messenger_security"
+	icon_state = "messenger_medical"
+	inhand_icon_state = "messenger_medical"
 
 /obj/item/storage/backpack/messenger/explorer
 	name = "explorer messenger bag"
