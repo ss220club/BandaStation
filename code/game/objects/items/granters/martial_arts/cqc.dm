@@ -1,7 +1,7 @@
 /obj/item/book/granter/martial/cqc
 	martial = /datum/martial_art/cqc
 	name = "old manual"
-	martial_name = "close quarters combat"
+	martial_name = "основы CQC"
 	desc = "Небольшое чёрное руководство. В ней представлены наглядные инструкции по тактическому рукопашному бою."
 	greet = span_bolddanger("Вы освоили основы CQC.")
 	icon_state = "cqcmanual"
