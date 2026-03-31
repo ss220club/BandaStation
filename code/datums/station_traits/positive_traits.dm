@@ -458,7 +458,7 @@
 
 	found_poly.maxHealth = 20000
 	found_poly.fully_heal()
-	found_poly.desc = "Сегодня этот попугай находится под защитой могущественной сущности - НЕ стоит его трогать."
+	found_poly.desc = "Этот попугай явно находится под защитой могущественной сущности - НЕ стоит его трогать."
 
 	found_poly.transform = found_poly.transform.Scale(2.5, 2.5)
 	REMOVE_TRAIT(found_poly, TRAIT_CAN_MOUNT_HUMANS, INNATE_TRAIT)
