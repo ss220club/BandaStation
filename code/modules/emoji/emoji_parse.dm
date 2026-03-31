@@ -32,6 +32,37 @@
 		break
 	return parsed
 
+/proc/emoji_strip(text) // removes valid :emoji: codes while keeping invalid text intact
+	if(!text)
+		return text
+	. = text
+	if(!CONFIG_GET(flag/emojis))
+		return
+	var/static/list/emojis = icon_states(icon(EMOJI_SET))
+	var/parsed = ""
+	var/pos = 1
+	var/search = 0
+	var/emoji = ""
+	while(1)
+		search = findtext(text, ":", pos)
+		parsed += copytext(text, pos, search)
+		if(search)
+			pos = search
+			search = findtext(text, ":", pos + length(text[pos]))
+			if(search)
+				emoji = LOWER_TEXT(copytext(text, pos + length(text[pos]), search))
+				if(emoji in emojis)
+					pos = search + length(text[pos])
+				else
+					parsed += copytext(text, pos, search)
+					pos = search
+				emoji = ""
+				continue
+			else
+				parsed += copytext(text, pos, search)
+		break
+	return parsed
+
 /proc/emoji_parse_runechat(text) // turns :ai: into a maptext-safe icon for runechat
 	if(!text)
 		return text

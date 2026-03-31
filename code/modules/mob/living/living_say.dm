@@ -221,6 +221,10 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	if(message_mods[WHISPER_MODE]) // whisper away
 		spans |= SPAN_ITALICS
 
+	tts_message = emoji_strip(tts_message)
+	if(message_mods[MODE_TTS_MESSAGE_OVERRIDE])
+		message_mods[MODE_TTS_MESSAGE_OVERRIDE] = emoji_strip(message_mods[MODE_TTS_MESSAGE_OVERRIDE])
+
 	if(!message)
 		if(succumbed)
 			succumb()
@@ -376,7 +380,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	// BANDASTATION ADDITION START - TTS
 	if(show_message_success && radio_freq != FREQ_ENTERTAINMENT)
-		var/message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || raw_message
+		var/message_to_tts = emoji_strip(LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || raw_message)
 		speaker.cast_tts(
 			src,
 			message_to_tts,
@@ -450,6 +454,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		var/tts_message_to_use = tts_message
 		if(!tts_message_to_use)
 			tts_message_to_use = message_raw
+		tts_message_to_use = emoji_strip(tts_message_to_use)
 
 		var/list/filter = list()
 		var/list/special_filter = list()

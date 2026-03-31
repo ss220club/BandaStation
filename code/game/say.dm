@@ -128,6 +128,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	var/tts_message_to_use = tts_message
 	if(!tts_message_to_use)
 		tts_message_to_use = message
+	tts_message_to_use = emoji_strip(tts_message_to_use)
 
 	var/list/filter = list()
 	if(length(voice_filter) > 0)
