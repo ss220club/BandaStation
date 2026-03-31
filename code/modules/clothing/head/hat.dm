@@ -380,7 +380,7 @@
 	name = "security ushanka"
 	icon_state = "/obj/item/clothing/head/costume/ushanka/sec"
 	desc = "A warm and comfortable ushanka, dyed with 'all natural flavors' according to the tag."
-	greyscale_colors = "#C7B08B#A52F29"
+	greyscale_colors = "#C7B08B#294A98"
 	armor_type = /datum/armor/cosmetic_sec
 	flags_1 = null
 

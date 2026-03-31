@@ -1,6 +1,7 @@
 /obj/structure/closet/secure_closet/captains
 	name = "captain's locker"
-	icon_state = "cap"
+	icon_state = "hos"
+	icon_door = "hos"
 	req_access = list(ACCESS_CAPTAIN)
 
 /obj/structure/closet/secure_closet/captains/PopulateContents()
@@ -21,7 +22,8 @@
 
 /obj/structure/closet/secure_closet/hop
 	name = "head of personnel's locker"
-	icon_state = "hop"
+	icon_state = "warden"
+	icon_door = "warden"
 	req_access = list(ACCESS_HOP)
 
 /obj/structure/closet/secure_closet/hop/PopulateContents()
@@ -48,7 +50,8 @@
 
 /obj/structure/closet/secure_closet/hos
 	name = "head of security's locker"
-	icon_state = "hos"
+	icon_state = "cap"
+	icon_door = "cap"
 	req_access = list(ACCESS_HOS)
 
 /obj/structure/closet/secure_closet/hos/PopulateContents()
@@ -77,7 +80,8 @@
 
 /obj/structure/closet/secure_closet/warden
 	name = "warden's locker"
-	icon_state = "warden"
+	icon_state = "hop"
+	icon_door = "hop"
 	req_access = list(ACCESS_ARMORY)
 
 /obj/structure/closet/secure_closet/warden/PopulateContents()
@@ -102,7 +106,8 @@
 
 /obj/structure/closet/secure_closet/security
 	name = "security officer's locker"
-	icon_state = "sec"
+	icon_state = "med_secure"
+	icon_door = "med_secure"
 	req_access = list(ACCESS_BRIG)
 
 /obj/structure/closet/secure_closet/security/PopulateContents()
@@ -332,7 +337,8 @@
 
 /obj/structure/closet/secure_closet/labor_camp_security
 	name = "labor camp security locker"
-	icon_state = "sec"
+	icon_state = "med_secure"
+	icon_door = "med_secure"
 	req_access = list(ACCESS_SECURITY)
 
 /obj/structure/closet/secure_closet/labor_camp_security/PopulateContents()

@@ -40,9 +40,11 @@ SUBSYSTEM_DEF(overlays)
 /atom/proc/build_appearance_list(list/build_overlays)
 	if (!islist(build_overlays))
 		build_overlays = list(build_overlays)
-	for (var/overlay in build_overlays)
+	for (var/index in 1 to length(build_overlays))
+		var/overlay = build_overlays[index]
 		if(!overlay)
-			build_overlays -= overlay
+			build_overlays.Cut(index, index + 1)
+			index--
 			continue
 		if (istext(overlay))
 			// This is too expensive to run normally but running it during CI is a good test
@@ -52,11 +54,16 @@ SUBSYSTEM_DEF(overlays)
 					stack_trace("Invalid overlay: Icon object '[icon_file]' [REF(icon)] used in '[src]' [type] is missing icon state [overlay].")
 					continue
 
-			var/index = build_overlays.Find(overlay)
 			build_overlays[index] = iconstate2appearance(icon, overlay)
 		else if(isicon(overlay))
-			var/index = build_overlays.Find(overlay)
 			build_overlays[index] = icon2appearance(overlay)
+		var/mutable_appearance/overlay_appearance = build_overlays[index]
+		var/remapped_color = swap_palette_color(overlay_appearance.color)
+		if(remapped_color != overlay_appearance.color)
+			var/mutable_appearance/remapped_overlay = new()
+			remapped_overlay.appearance = overlay_appearance
+			remapped_overlay.color = remapped_color
+			build_overlays[index] = remapped_overlay
 	return build_overlays
 
 /atom/proc/cut_overlays()

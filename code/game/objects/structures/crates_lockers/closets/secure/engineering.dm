@@ -1,7 +1,8 @@
 /obj/structure/closet/secure_closet/engineering_chief
 	name = "chief engineer's locker"
 	req_access = list(ACCESS_CE)
-	icon_state = "ce"
+	icon_state = "rd"
+	icon_door = "rd"
 
 /obj/structure/closet/secure_closet/engineering_chief/PopulateContents()
 	..()
@@ -30,8 +31,8 @@
 /obj/structure/closet/secure_closet/engineering_electrical
 	name = "electrical supplies locker"
 	req_access = list(ACCESS_ENGINE_EQUIP)
-	icon_state = "eng"
-	icon_door = "eng_elec"
+	icon_state = "science"
+	icon_door = "science"
 
 /obj/structure/closet/secure_closet/engineering_electrical/PopulateContents()
 	..()
@@ -64,7 +65,8 @@
 /obj/structure/closet/secure_closet/engineering_personal
 	name = "engineer's locker"
 	req_access = list(ACCESS_ENGINE_EQUIP)
-	icon_state = "eng_secure"
+	icon_state = "science"
+	icon_door = "science"
 
 /obj/structure/closet/secure_closet/engineering_personal/PopulateContents()
 	..()

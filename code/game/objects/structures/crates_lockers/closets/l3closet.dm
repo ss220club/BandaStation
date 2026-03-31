@@ -1,7 +1,8 @@
 /obj/structure/closet/l3closet
 	name = "level 3 biohazard gear closet"
 	desc = "It's a storage unit for level 3 biohazard gear."
-	icon_state = "bio"
+	icon_state = "eng"
+	icon_door = "eng_tool"
 
 /obj/structure/closet/l3closet/PopulateContents()
 	new /obj/item/storage/bag/bio(src)
@@ -12,7 +13,7 @@
 	new /obj/item/reagent_containers/syringe/antiviral(src)
 
 /obj/structure/closet/l3closet/scientist
-	icon_door = "bio_sci"
+	icon_door = "eng_tool"
 
 /obj/structure/closet/l3closet/scientist/PopulateContents()
 	new /obj/item/storage/bag/xeno(src)

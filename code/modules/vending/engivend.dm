@@ -34,6 +34,7 @@
 	extra_price = PAYCHECK_COMMAND * 1.5
 	payment_department = ACCOUNT_ENG
 	light_mask = "engivend-light-mask"
+	color = "#6600cc"
 
 /obj/item/vending_refill/engivend
 	machine_name = "Engi-Vend"

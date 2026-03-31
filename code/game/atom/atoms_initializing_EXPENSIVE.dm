@@ -53,6 +53,24 @@
 
 	return qdeleted || QDELING(A)
 
+/proc/swap_palette_color(source_color)
+	if(!istext(source_color))
+		return source_color
+	switch(lowertext(source_color))
+		if("#d381c9")
+			return "#efb341"
+		if("#efb341")
+			return "#d381c9"
+		if("#9fed58")
+			return "#a46106"
+		if("#a46106")
+			return "#9fed58"
+		if("#52b4e9")
+			return "#de3a3a"
+		if("#de3a3a")
+			return "#52b4e9"
+	return source_color
+
 /**
  * Called when an atom is created in byond (built in engine proc)
  *
@@ -129,6 +147,7 @@
 		update_greyscale()
 
 	//atom color stuff
+	color = swap_palette_color(color)
 	if(color)
 		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 

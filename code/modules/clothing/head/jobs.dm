@@ -571,7 +571,7 @@
 	post_init_icon_state = "beret_badge"
 	greyscale_config = /datum/greyscale_config/beret_badge
 	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
-	greyscale_colors = "#a52f29#F2F2F2"
+	greyscale_colors = "#294A98#F2F2F2"
 	armor_type = /datum/armor/cosmetic_sec
 	strip_delay = 6 SECONDS
 	dog_fashion = null
@@ -597,7 +597,7 @@
 /obj/item/clothing/head/beret/sec/navyofficer
 	desc = "A special beret with the security insignia emblazoned on it. For officers with class."
 	icon_state = "/obj/item/clothing/head/beret/sec/navyofficer"
-	greyscale_colors = "#638799#a52f29"
+	greyscale_colors = "#638799#294A98"
 
 //Science
 /obj/item/clothing/head/beret/science

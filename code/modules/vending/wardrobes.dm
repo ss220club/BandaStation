@@ -72,6 +72,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	refill_canister = /obj/item/vending_refill/wardrobe/sec_wardrobe
 	payment_department = ACCOUNT_SEC
 	light_color = COLOR_MOSTLY_PURE_RED
+	color = "#1f78ff"
 
 /obj/item/vending_refill/wardrobe/sec_wardrobe
 	machine_name = "SecDrobe"
@@ -121,6 +122,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 
 /obj/item/vending_refill/wardrobe/medi_wardrobe
 	machine_name = "MediDrobe"
+	color = "#ae0c0c"
 
 /obj/machinery/vending/wardrobe/engi_wardrobe
 	name = "EngiDrobe"
@@ -147,7 +149,8 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/engi_wardrobe
 	payment_department = ACCOUNT_ENG
-	light_color = COLOR_VIVID_YELLOW
+	light_color = COLOR_PURPLE
+	color = "#6600cc"
 
 /obj/item/vending_refill/wardrobe/engi_wardrobe
 	machine_name = "EngiDrobe"

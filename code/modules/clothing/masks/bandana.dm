@@ -169,7 +169,7 @@
 	name = "striped security bandana"
 	desc = "A fine bandana with nanotech lining, a stripe across and security colors."
 	icon_state = "/obj/item/clothing/mask/bandana/striped/security"
-	greyscale_colors = "#A02525#2e2e2e"
+	greyscale_colors = "#294A98#2e2e2e"
 	flags_1 = NONE
 
 /obj/item/clothing/mask/bandana/striped/science
