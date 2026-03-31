@@ -7086,7 +7086,7 @@
 "aGn" = (
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /obj/machinery/door/poddoor/shutters/preopen{
-	name = "Research Centcom Shutters";
+	name = "Research Centcom";
 	dir = 4;
 	id = "CC_RND_2"
 	},
@@ -12550,7 +12550,6 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod/loading/two)
 "bGf" = (
-/obj/structure/table/reinforced,
 /obj/item/food/burger{
 	pixel_x = 1;
 	pixel_y = -7
@@ -12564,10 +12563,11 @@
 	},
 /obj/machinery/door/window/right/directional/west,
 /obj/machinery/door/poddoor/shutters/preopen{
-	name = "Research Centcom Shutters";
+	name = "Research Centcom";
 	dir = 4;
 	id = "CC_RND_2"
 	},
+/obj/structure/table/reinforced,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/rnd)
 "bGY" = (
@@ -14259,7 +14259,7 @@
 "eTH" = (
 /obj/effect/spawner/structure/window/reinforced/plasma,
 /obj/machinery/door/poddoor/shutters/preopen{
-	name = "Research Centcom Shutters";
+	name = "Research Centcom";
 	id = "CC_RND_2"
 	},
 /turf/open/floor/plating,
