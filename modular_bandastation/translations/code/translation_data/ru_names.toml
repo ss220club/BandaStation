@@ -28462,6 +28462,15 @@ instrumental = "крысой"
 prepositional = "крысе"
 gender = "female"
 
+["wrynroach"]
+nominative = "вринтаракан"
+genitive = "вринтаракана"
+dative = "вринтаракану"
+accusative = "вринтаракана"
+instrumental = "вринтараканом"
+prepositional = "вринтаракане"
+gender = "male"
+
 ["dead mouse"]
 nominative = "мёртвая мышь"
 genitive = "мёртвой мыши"
