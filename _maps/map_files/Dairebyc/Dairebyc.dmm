@@ -5695,8 +5695,6 @@
 /obj/machinery/light/broken/directional/north,
 /turf/open/floor/iron/small,
 /area/station/maintenance/ghetto/central)
-/turf/open/floor/carpet,
-/area/station/service/chapel)
 "btb" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -15558,8 +15556,6 @@
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/medical/morgue)
-/turf/open/floor/iron,
-/area/station/security/prison)
 "dKk" = (
 /obj/structure/table,
 /obj/machinery/computer/records/medical/laptop{
@@ -37659,13 +37655,6 @@
 /obj/structure/table,
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
-"jhz" = (
-/turf/open/floor/iron,
-/area/station/security/prison)
-/obj/machinery/door/airlock/multi_tile/public/glass,
-/obj/effect/mapping_helpers/airlock/autoname,
-/turf/open/floor/plating,
-/area/station/maintenance/ghetto/central)
 "jhD" = (
 /obj/effect/turf_decal/plaque{
 	icon_state = "L9"
@@ -133636,7 +133625,7 @@ vbK
 mOI
 bdf
 dlM
-jhz
+xRv
 vqy
 dGY
 pAp
