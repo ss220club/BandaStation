@@ -416,7 +416,7 @@
 	var/emote_icon = 'icons/mob/human/aprilfools_emotes.dmi'
 	var/emote_icon_state = null
 
-	cooldown = 60 SECONDS
+	cooldown = 30 SECONDS
 	emote_type = EMOTE_VISIBLE
 
 /datum/emote/living/carbon/human/aprilfools/run_emote(mob/user)
