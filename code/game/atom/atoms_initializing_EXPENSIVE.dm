@@ -56,7 +56,7 @@
 /proc/swap_palette_color(source_color)
 	if(!istext(source_color))
 		return source_color
-	switch(lowertext(source_color))
+	switch(LOWER_TEXT(source_color))
 		if("#d381c9")
 			return "#efb341"
 		if("#efb341")

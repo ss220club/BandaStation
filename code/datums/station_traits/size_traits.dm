@@ -4,7 +4,6 @@
 	weight = 100
 	show_in_report = TRUE
 	report_message = "Из-за ошибки в системе репликации пищевых автоматов, в рацион экипажа попали экспериментальные гормоны. Теперь все на станции немного... компактнее."
-	trait_to_give = STATION_TRAIT_EVERYONE_DWARF
 	blacklist = list(/datum/station_trait/everyone_giant)
 
 /datum/station_trait/everyone_dwarf/on_round_start()
@@ -29,7 +28,6 @@
 	weight = 100
 	show_in_report = TRUE
 	report_message = "Экспериментальная программа по увеличению физических показателей привела к неожиданным побочным эффектам. Экипаж стал значительно выше, чем планировалось."
-	trait_to_give = STATION_TRAIT_EVERYONE_GIANT
 	blacklist = list(/datum/station_trait/everyone_dwarf)
 
 /datum/station_trait/everyone_giant/on_round_start()
