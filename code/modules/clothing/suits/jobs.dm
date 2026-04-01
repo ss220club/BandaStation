@@ -176,7 +176,7 @@
 	desc = "A high-visibility vest used in work zones."
 	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
 	icon_state = "/obj/item/clothing/suit/toggle/labcoat/science"
-	worn_icon = 'icons/mob/clothing/suits/labcoat.dmi'
+	worn_icon = 'icons/mob/clothing/suits/utility.dmi'
 	inhand_icon_state = null
 	blood_overlay_type = "armor"
 	allowed = list(
