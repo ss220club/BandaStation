@@ -220,7 +220,7 @@
 
 	if(!gibbed)
 		if(death_sound || death_message || (living_flags & ALWAYS_DEATHGASP))
-			INVOKE_ASYNC(src, TYPE_PROC_REF(/mob, emote), "deathgasp")
+			INVOKE_ASYNC(src, TYPE_PROC_REF(/mob, emote), "fucking dies")
 		send_death_moodlets()
 
 	set_stat(DEAD)
