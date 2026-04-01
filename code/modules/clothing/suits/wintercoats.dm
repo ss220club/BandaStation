@@ -334,7 +334,7 @@
 /obj/item/clothing/suit/hooded/wintercoat/medical/cmo
 	name = "chief medical officer's winter coat"
 	desc = "A winter coat in a vibrant shade of blue with a small silver caduceus instead of a plastic zipper tab. The normal liner is replaced with an exceptionally thick, soft layer of fur."
-	icon = 'icons/obj/clothing/suits/default.dmi'
+	icon = 'icons/obj/clothing/suits/wintercoat.dmi'
 	icon_state = "coatcmo"
 	inhand_icon_state = null
 	armor_type = /datum/armor/medical_cmo
@@ -360,7 +360,7 @@
 /obj/item/clothing/suit/hooded/wintercoat/medical/chemistry
 	name = "chemistry winter coat"
 	desc = "A lab-grade winter coat made with acid resistant polymers. For the enterprising chemist who was exiled to a frozen wasteland on the go."
-	icon = 'icons/obj/clothing/suits/default.dmi'
+	icon = 'icons/obj/clothing/suits/wintercoat.dmi'
 	icon_state = "coatchemistry"
 	inhand_icon_state = null
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/medical/chemistry
@@ -377,7 +377,7 @@
 /obj/item/clothing/suit/hooded/wintercoat/medical/coroner
 	name = "coroner winter coat"
 	desc = "A winter coat made with acid resistant polymers, used when the cold dead bodies are too much."
-	icon = 'icons/obj/clothing/suits/default.dmi'
+	icon = 'icons/obj/clothing/suits/wintercoat.dmi'
 	icon_state = "coatcoroner"
 	inhand_icon_state = null
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/medical/coroner
@@ -400,7 +400,7 @@
 /obj/item/clothing/suit/hooded/wintercoat/medical/viro
 	name = "virology winter coat"
 	desc = "A white winter coat with green markings. Warm, but won't fight off the common cold or any other disease. Might make people stand far away from you in the hallway. The zipper tab looks like an oversized bacteriophage."
-	icon = 'icons/obj/clothing/suits/default.dmi'
+	icon = 'icons/obj/clothing/suits/wintercoat.dmi'
 	icon_state = "coatviro"
 	inhand_icon_state = null
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/medical/viro
@@ -417,7 +417,7 @@
 /obj/item/clothing/suit/hooded/wintercoat/medical/paramedic
 	name = "paramedic winter coat"
 	desc = "A winter coat with blue markings. Warm, but probably won't protect from biological agents. For the cozy doctor on the go."
-	icon = 'icons/obj/clothing/suits/default.dmi'
+	icon = 'icons/obj/clothing/suits/wintercoat.dmi'
 	icon_state = "coatparamed"
 	inhand_icon_state = null
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/medical/paramedic
@@ -472,7 +472,7 @@
 /obj/item/clothing/suit/hooded/wintercoat/science/rd
 	name = "research director's winter coat"
 	desc = "A thick arctic winter coat with an outdated atomic model instead of a plastic zipper tab. Most in the know are heavily aware that Bohr's model of the atom was outdated by the time of the 1930s when the Heisenbergian and Schrodinger models were generally accepted for true. Nevertheless, we still see its use in anachronism, roleplaying, and, in this case, as a zipper tab. At least it should keep you warm on your ivory pillar."
-	icon = 'icons/obj/clothing/suits/default.dmi'
+	icon = 'icons/obj/clothing/suits/wintercoat.dmi'
 	icon_state = "coatrd"
 	inhand_icon_state = null
 	armor_type = /datum/armor/science_rd
@@ -497,7 +497,7 @@
 /obj/item/clothing/suit/hooded/wintercoat/science/robotics
 	name = "robotics winter coat"
 	desc = "A black winter coat with a badass flaming robotic skull for the zipper tab. This one has bright red designs and a few useless buttons."
-	icon = 'icons/obj/clothing/suits/default.dmi'
+	icon = 'icons/obj/clothing/suits/wintercoat.dmi'
 	icon_state = "coatrobotics"
 	inhand_icon_state = null
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/science/robotics
@@ -510,7 +510,7 @@
 /obj/item/clothing/suit/hooded/wintercoat/science/genetics
 	name = "genetics winter coat"
 	desc = "A white winter coat with a DNA helix for the zipper tab."
-	icon = 'icons/obj/clothing/suits/default.dmi'
+	icon = 'icons/obj/clothing/suits/wintercoat.dmi'
 	icon_state = "coatgenetics"
 	inhand_icon_state = null
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/science/genetics
@@ -569,7 +569,7 @@
 /obj/item/clothing/suit/hooded/wintercoat/engineering/ce
 	name = "chief engineer's winter coat"
 	desc = "A white winter coat with reflective green and yellow stripes. Stuffed with asbestos, treated with fire retardant PBDE, lined with a micro thin sheet of lead foil and snugly fitted to your body's measurements. This baby's ready to save you from anything except the thyroid cancer and systemic fibrosis you'll get from wearing it. The zipper tab is a tiny golden wrench."
-	icon = 'icons/obj/clothing/suits/default.dmi'
+	icon = 'icons/obj/clothing/suits/wintercoat.dmi'
 	icon_state = "coatce"
 	inhand_icon_state = null
 	armor_type = /datum/armor/engineering_ce
@@ -594,7 +594,7 @@
 /obj/item/clothing/suit/hooded/wintercoat/engineering/atmos
 	name = "atmospherics winter coat"
 	desc = "A yellow and blue winter coat. The zipper pull-tab is made to look like a miniature breath mask."
-	icon = 'icons/obj/clothing/suits/default.dmi'
+	icon = 'icons/obj/clothing/suits/wintercoat.dmi'
 	icon_state = "coatatmos"
 	inhand_icon_state = "coatatmos"
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/engineering/atmos

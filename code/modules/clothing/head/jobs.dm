@@ -674,25 +674,25 @@
 
 /obj/item/clothing/head/utility/surgerycap/purple
 	name = "burgundy surgery cap"
-	icon = 'icons/obj/clothing/head/default.dmi'
+	icon = 'icons/obj/clothing/head/utility.dmi'
 	icon_state = "surgicalcapwine"
 	desc = "A burgundy medical surgery cap to prevent the surgeon's hair from entering the insides of the patient!"
 
 /obj/item/clothing/head/utility/surgerycap/green
 	name = "green surgery cap"
-	icon = 'icons/obj/clothing/head/default.dmi'
+	icon = 'icons/obj/clothing/head/utility.dmi'
 	icon_state = "surgicalcapgreen"
 	desc = "A green medical surgery cap to prevent the surgeon's hair from entering the insides of the patient!"
 
 /obj/item/clothing/head/utility/surgerycap/cmo
 	name = "turquoise surgery cap"
-	icon = 'icons/obj/clothing/head/default.dmi'
+	icon = 'icons/obj/clothing/head/utility.dmi'
 	icon_state = "surgicalcapcmo"
 	desc = "The CMO's medical surgery cap to prevent their hair from entering the insides of the patient!"
 
 /obj/item/clothing/head/utility/surgerycap/black
 	name = "black surgery cap"
-	icon = 'icons/obj/clothing/head/default.dmi'
+	icon = 'icons/obj/clothing/head/utility.dmi'
 	icon_state = "surgicalcapblack"
 	desc = "A black medical surgery cap to prevent the surgeon's hair from entering the insides of the patient!"
 
