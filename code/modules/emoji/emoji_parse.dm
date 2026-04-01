@@ -63,6 +63,43 @@
 		break
 	return parsed
 
+/proc/emoji_protect(text, list/protected_emojis) // swaps valid emoji codes for stable placeholders while speech effects mutate text
+	if(!text || !CONFIG_GET(flag/emojis))
+		return text
+	protected_emojis ||= list()
+	var/static/list/emojis = icon_states(icon(EMOJI_SET))
+	var/parsed = ""
+	var/pos = 1
+	var/search = 0
+	while(1)
+		search = findtext(text, ":", pos)
+		parsed += copytext(text, pos, search)
+		if(search)
+			pos = search
+			search = findtext(text, ":", pos + length(text[pos]))
+			if(search)
+				var/emoji = LOWER_TEXT(copytext(text, pos + length(text[pos]), search))
+				if(emoji in emojis)
+					var/placeholder = "[ascii2text(2)][length(protected_emojis) + 1][ascii2text(3)]"
+					protected_emojis[placeholder] = ":[emoji]:"
+					parsed += placeholder
+					pos = search + length(text[pos])
+				else
+					parsed += copytext(text, pos, search)
+					pos = search
+				continue
+			else
+				parsed += copytext(text, pos, search)
+		break
+	return parsed
+
+/proc/emoji_restore(text, list/protected_emojis) // restores placeholders inserted by emoji_protect
+	if(!text || !length(protected_emojis))
+		return text
+	for(var/placeholder in protected_emojis)
+		text = replacetext(text, placeholder, protected_emojis[placeholder])
+	return text
+
 /proc/emoji_parse_runechat(text) // turns :ai: into a maptext-safe icon for runechat
 	if(!text)
 		return text

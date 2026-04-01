@@ -191,6 +191,9 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	log_sayverb_talk(message, message_mods, forced_by = forced)
 
+	var/list/protected_emojis = list()
+	message = emoji_protect(message, protected_emojis)
+
 #ifdef UNIT_TESTS
 	// Saves a ref() to our arglist specifically.
 	// We do this because we need to check that COMSIG_MOB_SAY is getting EXACTLY this list.
@@ -206,6 +209,8 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	message = message_data["message"]
 	var/tts_message = message_data["tts_message"]
 	var/list/tts_filter = message_data["tts_filter"]
+	message = emoji_restore(message, protected_emojis)
+	tts_message = emoji_restore(tts_message, protected_emojis)
 
 	spans |= speech_span
 
