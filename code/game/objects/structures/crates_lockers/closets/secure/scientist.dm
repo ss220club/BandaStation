@@ -1,7 +1,8 @@
 /obj/structure/closet/secure_closet/research_director
 	name = "research director's locker"
 	req_access = list(ACCESS_RD)
-	icon_state = "rd"
+	icon_state = "ce"
+	icon_door = "ce"
 
 /obj/structure/closet/secure_closet/research_director/PopulateContents()
 	..()
@@ -28,7 +29,8 @@
 
 /obj/structure/closet/secure_closet/cytology
 	name = "cytology equipment locker"
-	icon_state = "science"
+	icon_state = "eng"
+	icon_door = "eng_secure"
 	req_access = list(ACCESS_RESEARCH)
 
 /obj/structure/closet/secure_closet/cytology/PopulateContents()

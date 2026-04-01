@@ -297,6 +297,7 @@ DEFINE_BITFIELD(janitor_mode_flags, list(
 #define BEEPSKY_VOICED_ON_THE_GROUND "Сэр, ложитесь! Сэр, ложитесь! Сэр, ложитесь! Ложитесь! Ложитесь! Ложитесь!"
 #define BEEPSKY_VOICED_TAZER_TAZER "Тейзер тейзер"
 #define BEEPSKY_VOICED_YOU_HAVE_TO_UNDERSTAND "Ты должен понять кое-что. Если ты будешь с нами шутить или сделаешь что-то плохое... Мы тебя изнасилуем и убъем"
+#define BEEPSKY_VOICED_COME_HERE_COME_HERE "Иди сюда! Иди сюда! Иди сюда! Иди сюда! Иди сюда! Иди сюда!"
 
 #define FIREBOT_VOICED_FIRE_DETECTED "Обнаружен пожар!"
 #define FIREBOT_VOICED_STOP_DROP "Остановитесь, упадите и катайтесь на месте!"

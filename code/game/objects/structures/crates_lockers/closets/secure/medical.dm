@@ -21,7 +21,8 @@
 /obj/structure/closet/secure_closet/medical2
 	name = "anesthetic closet"
 	desc = "Used to knock people out."
-	icon_state = "med_secure"
+	icon_state = "sec"
+	icon_door = "sec"
 	req_access = list(ACCESS_SURGERY)
 
 /obj/structure/closet/secure_closet/medical2/PopulateContents()
@@ -34,7 +35,8 @@
 /obj/structure/closet/secure_closet/medical3
 	name = "medical doctor's locker"
 	req_access = list(ACCESS_SURGERY)
-	icon_state = "med_secure"
+	icon_state = "sec"
+	icon_door = "sec"
 
 /obj/structure/closet/secure_closet/medical3/PopulateContents()
 	..()

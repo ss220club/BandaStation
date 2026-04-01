@@ -1,7 +1,8 @@
 /obj/structure/closet/secure_closet/blueshield
 	name = "blueshield's locker"
-	icon_state = "blueshield"
-	icon = 'modular_bandastation/objects/icons/obj/storage/closet.dmi'
+	icon_state = "sec"
+	icon_door = "sec"
+	icon = 'icons/obj/storage/closet.dmi'
 	req_access = list(ACCESS_BLUESHIELD)
 
 /obj/structure/closet/secure_closet/blueshield/PopulateContents()

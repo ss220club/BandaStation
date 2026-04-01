@@ -72,7 +72,8 @@
 /obj/item/clothing/head/costume/nursehat
 	name = "nurse's hat"
 	desc = "It allows quick identification of trained medical personnel."
-	icon_state = "nursehat"
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
+	icon_state = "/obj/item/clothing/head/beret/sec"
 	dog_fashion = /datum/dog_fashion/head/nurse
 
 /obj/item/clothing/head/hats/bowler
@@ -378,9 +379,10 @@
 
 /obj/item/clothing/head/costume/ushanka/sec
 	name = "security ushanka"
-	icon_state = "/obj/item/clothing/head/costume/ushanka/sec"
+	icon = 'icons/obj/clothing/head/default.dmi'
+	icon_state = "surgicalcap"
 	desc = "A warm and comfortable ushanka, dyed with 'all natural flavors' according to the tag."
-	greyscale_colors = "#C7B08B#A52F29"
+	greyscale_colors = "#C7B08B#294A98"
 	armor_type = /datum/armor/cosmetic_sec
 	flags_1 = null
 

@@ -846,7 +846,7 @@
 	. = ..()
 	is_active = set_active
 	event_spawn = is_event_spawn
-	soundloop = new(list(src), FALSE)
+	soundloop = new(src, FALSE)
 	if(is_active)
 		soundloop.start()
 		START_PROCESSING(SSobj, src)

@@ -66,7 +66,25 @@
 	slowdown = -1
 
 /obj/item/clothing/shoes/jackboots/sec
-	icon_state = "jackboots_sec"
+	icon = 'icons/map_icons/clothing/shoes.dmi'
+	icon_state = "/obj/item/clothing/shoes/sneakers/white"
+	post_init_icon_state = "sneakers"
+	inhand_icon_state = "sneakers_back"
+	greyscale_config = /datum/greyscale_config/sneakers
+	greyscale_config_worn = /datum/greyscale_config/sneakers/worn
+	greyscale_config_inhand_left = /datum/greyscale_config/sneakers/inhand_left
+	greyscale_config_inhand_right = /datum/greyscale_config/sneakers/inhand_right
+	greyscale_colors = "#ffffff#ffffff"
+	dying_key = DYE_REGISTRY_SNEAKERS
+	flags_1 = IS_PLAYER_COLORABLE_1
+	interaction_flags_mouse_drop = NEED_HANDS
+
+/obj/item/clothing/shoes/jackboots/sec/generate_digitigrade_icons(icon/base_icon, greyscale_colors)
+	return icon(SSgreyscale.GetColoredIconByType(/datum/greyscale_config/digitigrade, greyscale_colors), "sneakers_worn")
+
+/obj/item/clothing/shoes/jackboots/sec/get_general_color(icon/base_icon)
+	var/colors = SSgreyscale.ParseColorString(greyscale_colors)
+	return colors ? colors[1] : ..()
 
 /obj/item/clothing/shoes/jackboots/floortile
 	name = "floortile camouflage jackboots"

@@ -45,12 +45,122 @@
 	/// This is the overlay on the MOB, not the item itself.
 	var/mutable_appearance/accessory_overlay
 
+// fuck modularity
+/proc/swap_medsec_under_icon_file(icon_file)
+	switch(icon_file)
+		if('icons/obj/clothing/under/medical.dmi')
+			return 'icons/obj/clothing/under/security.dmi'
+		if('icons/obj/clothing/under/security.dmi')
+			return 'icons/obj/clothing/under/medical.dmi'
+		if('icons/mob/clothing/under/medical.dmi')
+			return 'icons/mob/clothing/under/security.dmi'
+		if('icons/mob/clothing/under/security.dmi')
+			return 'icons/mob/clothing/under/medical.dmi'
+		if('modular_bandastation/objects/icons/obj/clothing/under/medical.dmi')
+			return 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
+		if('modular_bandastation/objects/icons/obj/clothing/under/security.dmi')
+			return 'modular_bandastation/objects/icons/obj/clothing/under/medical.dmi'
+		if('modular_bandastation/objects/icons/mob/clothing/under/medical.dmi')
+			return 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
+		if('modular_bandastation/objects/icons/mob/clothing/under/security.dmi')
+			return 'modular_bandastation/objects/icons/mob/clothing/under/medical.dmi'
+	return icon_file
+
+/proc/swap_engrnd_under_icon_file(icon_file)
+	switch(icon_file)
+		if('icons/obj/clothing/under/engineering.dmi')
+			return 'icons/obj/clothing/under/rnd.dmi'
+		if('icons/obj/clothing/under/rnd.dmi')
+			return 'icons/obj/clothing/under/engineering.dmi'
+		if('icons/mob/clothing/under/engineering.dmi')
+			return 'icons/mob/clothing/under/rnd.dmi'
+		if('icons/mob/clothing/under/rnd.dmi')
+			return 'icons/mob/clothing/under/engineering.dmi'
+		if('modular_bandastation/objects/icons/obj/clothing/under/engineering.dmi')
+			return 'modular_bandastation/objects/icons/obj/clothing/under/rnd.dmi'
+		if('modular_bandastation/objects/icons/obj/clothing/under/rnd.dmi')
+			return 'modular_bandastation/objects/icons/obj/clothing/under/engineering.dmi'
+		if('modular_bandastation/objects/icons/mob/clothing/under/engineering.dmi')
+			return 'modular_bandastation/objects/icons/mob/clothing/under/rnd.dmi'
+		if('modular_bandastation/objects/icons/mob/clothing/under/rnd.dmi')
+			return 'modular_bandastation/objects/icons/mob/clothing/under/engineering.dmi'
+	return icon_file
+
+/proc/swap_april_under_department_icon_file(icon_file)
+	. = swap_medsec_under_icon_file(icon_file)
+	if(. != icon_file)
+		return .
+	return swap_engrnd_under_icon_file(icon_file)
+
+/proc/pick_under_swap_fallback_icon_state(icon_file)
+	var/list/states = icon_states_fast(icon_file)
+	if(!length(states))
+		return null
+	var/list/valid_states = list()
+	for(var/state in states)
+		if(!istext(state) || !length(trim(state)))
+			continue
+		if(state in valid_states)
+			continue
+		valid_states += state
+	if(!length(valid_states))
+		return null
+	return pick(valid_states)
+
+/proc/get_under_icon_swap_insert_missing_state(icon/original_icon_file, icon/swapped_icon_file, icon_state_to_preserve)
+	if(!istext(icon_state_to_preserve) || !length(icon_state_to_preserve))
+		return swapped_icon_file
+	if(icon_exists(swapped_icon_file, icon_state_to_preserve))
+		return swapped_icon_file
+
+	var/static/list/cached_swapped_icons = list()
+	var/cache_key = "[original_icon_file]|[swapped_icon_file]|[icon_state_to_preserve]"
+	if(cached_swapped_icons[cache_key])
+		return cached_swapped_icons[cache_key]
+
+	var/icon/swapped_icon = icon(swapped_icon_file)
+	var/icon/original_state = icon(original_icon_file, icon_state_to_preserve)
+	swapped_icon.Insert(original_state, icon_state_to_preserve)
+	cached_swapped_icons[cache_key] = swapped_icon
+	return swapped_icon
+
 /datum/armor/clothing_under
 	bio = 10
 	wound = 5
 
 /obj/item/clothing/under/Initialize(mapload)
 	. = ..()
+
+	var/icon/original_icon_file = icon
+	var/icon/swapped_icon_file = swap_april_under_department_icon_file(original_icon_file)
+	if(swapped_icon_file != original_icon_file)
+		var/state_to_try = post_init_icon_state || icon_state
+		if(icon_exists(swapped_icon_file, state_to_try))
+			icon = swapped_icon_file
+		else
+			var/random_obj_state = pick_under_swap_fallback_icon_state(swapped_icon_file)
+			if(random_obj_state)
+				icon = swapped_icon_file
+				icon_state = random_obj_state
+				if(post_init_icon_state)
+					post_init_icon_state = random_obj_state
+			else
+				icon = get_under_icon_swap_insert_missing_state(original_icon_file, swapped_icon_file, state_to_try)
+
+	var/icon/original_worn_icon_file = worn_icon
+	var/icon/swapped_worn_icon_file = swap_april_under_department_icon_file(original_worn_icon_file)
+	if(swapped_worn_icon_file != original_worn_icon_file)
+		var/worn_state_to_try = worn_icon_state || post_init_icon_state || icon_state
+		if(icon_exists(swapped_worn_icon_file, worn_state_to_try))
+			worn_icon = swapped_worn_icon_file
+		else
+			var/random_worn_state = pick_under_swap_fallback_icon_state(swapped_worn_icon_file)
+			if(random_worn_state)
+				worn_icon = swapped_worn_icon_file
+				worn_icon_state = random_worn_state
+			else
+				worn_icon = get_under_icon_swap_insert_missing_state(original_worn_icon_file, swapped_worn_icon_file, worn_state_to_try)
+
 	if(random_sensor)
 		//make the sensor mode favor higher levels, except coords.
 		set_sensor_mode(pick(SENSOR_VITALS, SENSOR_VITALS, SENSOR_VITALS, SENSOR_LIVING, SENSOR_LIVING, SENSOR_COORDS, SENSOR_COORDS, SENSOR_OFF))

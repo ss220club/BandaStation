@@ -32,6 +32,7 @@
 		BEEPSKY_VOICED_ON_THE_GROUND = 'sound/mobs/non-humanoids/fun/on_the_ground.ogg',
 		BEEPSKY_VOICED_TAZER_TAZER = 'sound/mobs/non-humanoids/fun/tazer_tazer.ogg',
 		BEEPSKY_VOICED_YOU_HAVE_TO_UNDERSTAND = 'sound/mobs/non-humanoids/fun/you_have_to_understand.ogg',
+		BEEPSKY_VOICED_COME_HERE_COME_HERE = 'sound/mobs/non-humanoids/fun/come_here_come_here_come_here.ogg',
 	)
 
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.2, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 3.2)
@@ -235,6 +236,7 @@
 	if(threatlevel >= THREAT_ASSESS_DANGEROUS)
 		target = attacking_human
 		mode = BOT_HUNT
+		threat_react(threatlevel)
 	if(threatlevel < 0 && prob(5))
 		manual_emote("salutes.")
 		speak("Thank you sir.")
@@ -349,7 +351,10 @@
 		return FALSE
 	if(!current_target.handcuffed)
 		current_target.set_handcuffed(new cuff_type(current_target))
-		playsound(src, SFX_LAW, 50, FALSE)
+		speak(pick(
+			BEEPSKY_VOICED_FENTONYL_IN_POCKET,
+			BEEPSKY_VOICED_YOU_HAVE_TO_UNDERSTAND,
+		))
 		back_to_idle()
 
 /mob/living/simple_animal/bot/secbot/proc/stun_attack(mob/living/carbon/current_target, harm = FALSE)
@@ -504,12 +509,13 @@
 
 /// React to detecting criminal scum by making some kind of noise
 /mob/living/simple_animal/bot/secbot/proc/threat_react(threatlevel)
-	speak("Level [threatlevel] infraction alert!")
-	playsound(src, pick(
-		'sound/mobs/non-humanoids/beepsky/criminal.ogg',
-		'sound/mobs/non-humanoids/beepsky/justice.ogg',
-		'sound/mobs/non-humanoids/beepsky/freeze.ogg',
-		), 50, FALSE)
+	speak(pick(
+		BEEPSKY_VOICED_HOW_TO_SHOOT,
+		BEEPSKY_VOICED_NEED_BACKUP,
+		BEEPSKY_VOICED_ON_THE_GROUND,
+		BEEPSKY_VOICED_TAZER_TAZER,
+		BEEPSKY_VOICED_COME_HERE_COME_HERE,
+	))
 
 /mob/living/simple_animal/bot/secbot/explode()
 	var/atom/Tsec = drop_location()

@@ -64,6 +64,7 @@ type Info = {
   memories: Memory[];
   objectives: Objective[];
   can_change_objective: BooleanLike;
+  absorbed_dna: number;
 };
 
 export const AntagInfoChangeling = (props) => {
@@ -81,9 +82,7 @@ export const AntagInfoChangeling = (props) => {
           <Stack.Item grow={4}>
             <AbilitiesSection />
           </Stack.Item>
-          <Stack.Item>
-            <HivemindSection />
-          </Stack.Item>
+          <BetrayalWarning />
           <Stack.Item grow={3}>
             <Stack fill>
               <Stack.Item grow>
@@ -100,39 +99,31 @@ export const AntagInfoChangeling = (props) => {
   );
 };
 
-const HivemindSection = (props) => {
-  const { act, data } = useBackend<Info>();
-  const { true_name } = data;
-  return (
-    <Section fill title="Коллективный разум">
-      <Stack vertical fill>
-        <Stack.Item textColor="label">
-          Все Генокрады, независимо от происхождения, связаны между собой{' '}
-          <span style={hivemindstyle}>коллективным разумом</span>. Вы можете
-          общаться с другими Генокрадами под вашем псевдонимом,{' '}
-          <span style={hivemindstyle}>{true_name}</span>, начав сообщение с{' '}
-          <span style={hivemindstyle}>:g</span>. Работайте вместе, и вы
-          приведете станцию к новым вершинам ужаса.
-        </Stack.Item>
-        <Stack.Item>
-          <NoticeBox danger>
-            Другие Генокрады - сильные союзники, но некоторые Генокрады могут
-            предать вас. Генокрады значительно увеличивают свою силу, поглощая
-            себе подобных, но будучи поглощенным другим генокрадом, вы станете{' '}
-            <span style={fallenstyle}>Падшим генокрадом</span>. Не существует
-            более ужасного унижения.
-          </NoticeBox>
-        </Stack.Item>
-      </Stack>
-    </Section>
-  );
-};
-
 const IntroductionSection = (props) => {
   const { act, data } = useBackend<Info>();
-  const { true_name, hive_name, objectives, can_change_objective } = data;
+  const {
+    true_name,
+    hive_name,
+    objectives,
+    can_change_objective,
+    absorbed_dna,
+  } = data;
   return (
-    <Section fill title="Введение" style={{ overflowY: 'auto' }}>
+    <Section
+      fill
+      title="Intro"
+      style={{ overflowY: 'auto' }}
+      buttons={
+        <Button
+          icon="dna"
+          tooltipPosition="left"
+          tooltip={`Absorbed DNA`}
+          color="purple"
+        >
+          {absorbed_dna}
+        </Button>
+      }
+    >
       <Stack vertical fill>
         <Stack.Item fontSize="25px">
           Вы {true_name} из
@@ -156,6 +147,8 @@ const IntroductionSection = (props) => {
 };
 
 const AbilitiesSection = () => {
+  const { act, data } = useBackend<Info>();
+  const { true_name } = data;
   return (
     <Section fill title="Способности">
       <Stack fill>
@@ -200,8 +193,43 @@ const AbilitiesSection = () => {
             </Stack.Item>
           </Stack>
         </Stack.Item>
+        <Stack.Divider />
+        <Stack.Item grow>
+          <Stack fill vertical>
+            <Stack.Item textColor="label" grow>
+              All abilities require using{' '}
+              <span style={hivemindstyle}>chemicals</span>, you can see how much
+              you have with the HUD on the left side of the screen. You may also
+              hover your cursor over it to see the maximum amount of chemicals
+              you can hold. This number can increase by
+              <span style={absorbstyle}>&ensp;absorbing</span> other
+              Changelings.
+            </Stack.Item>
+            <Stack.Divider />
+            <Stack.Item textColor="label" grow>
+              All Changelings, regardless of origin, are linked together by the{' '}
+              <span style={hivemindstyle}>hivemind</span>. You may communicate
+              to other Changelings under your mental alias,{' '}
+              <span style={hivemindstyle}>{true_name}</span>, by starting a
+              message with <span style={hivemindstyle}>:g</span>. Work together,
+              and you will bring the station to new heights of terror.
+            </Stack.Item>
+          </Stack>
+        </Stack.Item>
       </Stack>
     </Section>
+  );
+};
+
+const BetrayalWarning = (props) => {
+  return (
+    <NoticeBox danger>
+      Other Changelings are strong allies, but some Changelings may betray you.
+      Changelings grow in power greatly by absorbing their kind, and getting
+      absorbed by another Changeling will leave you as a{' '}
+      <span style={fallenstyle}>Fallen Changeling</span>. There is no greater
+      humiliation.
+    </NoticeBox>
   );
 };
 

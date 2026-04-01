@@ -3,7 +3,7 @@
 
 // MARK: Station airlocks
 /obj/machinery/door/airlock/command
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/heads/command.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/mining.dmi'
 
 /obj/machinery/door/airlock/command/cap
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/heads/cap.dmi'
@@ -34,13 +34,13 @@
 	assemblytype = /obj/structure/door_assembly/door_assembly_rd
 
 /obj/machinery/door/airlock/security
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/security.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/medical.dmi'
 
 /obj/machinery/door/airlock/engineering
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/engineering.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/research.dmi'
 
 /obj/machinery/door/airlock/medical
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/medical.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/security.dmi'
 
 /obj/machinery/door/airlock/maintenance
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/maintenance.dmi'
@@ -49,13 +49,13 @@
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/maintenanceexternal.dmi'
 
 /obj/machinery/door/airlock/mining
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/mining.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/heads/command.dmi'
 
 /obj/machinery/door/airlock/atmos
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/atmos.dmi'
 
 /obj/machinery/door/airlock/research
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/research.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/engineering.dmi'
 
 /obj/machinery/door/airlock/freezer
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/freezer.dmi'

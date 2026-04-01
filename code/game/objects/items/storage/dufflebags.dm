@@ -129,8 +129,8 @@
 /obj/item/storage/backpack/duffelbag/med
 	name = "medical duffel bag"
 	desc = "A large duffel bag for holding extra medical supplies."
-	icon_state = "duffel-medical"
-	inhand_icon_state = "duffel-med"
+	icon_state = "duffel-security"
+	inhand_icon_state = "duffel-sec"
 
 /obj/item/storage/backpack/duffelbag/chief_medic
 	name = "chief medical officer's duffel bag"
@@ -171,8 +171,8 @@
 /obj/item/storage/backpack/duffelbag/science
 	name = "scientist's duffel bag"
 	desc = "A large duffel bag for holding extra scientific components."
-	icon_state = "duffel-science"
-	inhand_icon_state = "duffel-sci"
+	icon_state = "duffel-engineering"
+	inhand_icon_state = "duffel-eng"
 
 /obj/item/storage/backpack/duffelbag/virology
 	name = "virologist's duffel bag"
@@ -183,8 +183,8 @@
 /obj/item/storage/backpack/duffelbag/sec
 	name = "security duffel bag"
 	desc = "A large duffel bag for holding extra security supplies and ammunition."
-	icon_state = "duffel-security"
-	inhand_icon_state = "duffel-sec"
+	icon_state = "duffel-medical"
+	inhand_icon_state = "duffel-med"
 
 /obj/item/storage/backpack/duffelbag/sec/surgery
 	name = "surgical duffel bag"
@@ -205,8 +205,8 @@
 /obj/item/storage/backpack/duffelbag/engineering
 	name = "industrial duffel bag"
 	desc = "A large duffel bag for holding extra tools and supplies."
-	icon_state = "duffel-engineering"
-	inhand_icon_state = "duffel-eng"
+	icon_state = "duffel-science"
+	inhand_icon_state = "duffel-sci"
 	resistance_flags = FIRE_PROOF
 
 /obj/item/storage/backpack/duffelbag/drone

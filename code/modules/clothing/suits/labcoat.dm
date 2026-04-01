@@ -1,11 +1,11 @@
 /obj/item/clothing/suit/toggle/labcoat
 	name = "labcoat"
 	desc = "A suit that protects against minor chemical spills."
-	icon_state = "labcoat"
-	icon = 'icons/obj/clothing/suits/labcoat.dmi'
-	worn_icon = 'icons/mob/clothing/suits/labcoat.dmi'
-	inhand_icon_state = "labcoat"
-	blood_overlay_type = "coat"
+	icon = 'icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'icons/mob/clothing/suits/armor.dmi'
+	icon_state = "armoralt"
+	inhand_icon_state = "armor"
+	blood_overlay_type = "armor"
 	body_parts_covered = CHEST|ARMS
 	allowed = list(
 		/obj/item/analyzer,
@@ -36,6 +36,7 @@
 /obj/item/clothing/suit/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"
 	desc = "Bluer than the standard model."
+	icon = 'icons/obj/clothing/suits/labcoat.dmi'
 	icon_state = "labcoat_cmo"
 	inhand_icon_state = null
 
@@ -57,6 +58,7 @@
 /obj/item/clothing/suit/toggle/labcoat/paramedic
 	name = "paramedic's jacket"
 	desc = "A dark blue jacket for paramedics with reflective stripes."
+	icon = 'icons/obj/clothing/suits/labcoat.dmi'
 	icon_state = "labcoat_paramedic"
 	inhand_icon_state = null
 
@@ -68,6 +70,7 @@
 /obj/item/clothing/suit/toggle/labcoat/mad
 	name = "\proper The Mad's labcoat"
 	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."
+	icon = 'icons/obj/clothing/suits/labcoat.dmi'
 	icon_state = "labgreen"
 	inhand_icon_state = null
 
@@ -136,12 +139,9 @@
 /obj/item/clothing/suit/toggle/labcoat/science
 	name = "scientist labcoat"
 	desc = "A suit that protects against minor chemical spills. Has a purple stripe on the shoulder."
-	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
-	icon_state = "/obj/item/clothing/suit/toggle/labcoat/science"
-	post_init_icon_state = "labcoat_job"
-	greyscale_config = /datum/greyscale_config/labcoat
-	greyscale_config_worn = /datum/greyscale_config/labcoat/worn
-	greyscale_colors = "#EEEEEE#7E1980#7E1980#B347A1"
+	icon = 'icons/obj/clothing/suits/utility.dmi'
+	worn_icon = 'icons/mob/clothing/suits/utility.dmi'
+	icon_state = "hazard"
 
 /obj/item/clothing/suit/toggle/labcoat/science/Initialize(mapload)
 	. = ..()
@@ -172,6 +172,7 @@
 /obj/item/clothing/suit/toggle/labcoat/research_director
 	name = "research director's coat"
 	desc = "A mix between a labcoat and just a regular coat. It's made out of a special antibacterial, anti-acidic, and anti-biohazardous synthetic fabric."
+	icon = 'icons/obj/clothing/suits/labcoat.dmi'
 	icon_state = "labcoat_rd"
 	armor_type = /datum/armor/jacket_research_director
 	body_parts_covered = CHEST|GROIN|ARMS

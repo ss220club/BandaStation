@@ -88,6 +88,7 @@
 	icon_state = "banner_security"
 	inhand_icon_state = "banner_security"
 	warcry = "ВСЕМ ЛЕЧЬ НА ЗЕМЛЮ!!"
+	color = "#0099ff"
 
 /obj/item/banner/security/Initialize(mapload)
 	. = ..()

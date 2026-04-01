@@ -79,8 +79,16 @@
 
 /obj/item/clothing/shoes/sneakers/white
 	name = "white shoes"
-	icon_state = "/obj/item/clothing/shoes/sneakers/white"
-	greyscale_colors = "#ffffff#ffffff"
+	icon = 'icons/obj/clothing/shoes.dmi'
+	icon_state = "jackboots_sec"
+	post_init_icon_state = null
+	inhand_icon_state = "jackboots"
+	greyscale_colors = null
+	greyscale_config = null
+	greyscale_config_inhand_left = null
+	greyscale_config_inhand_right = null
+	greyscale_config_worn = null
+	flags_1 = NONE
 	armor_type = /datum/armor/sneakers_white
 
 /datum/armor/sneakers_white

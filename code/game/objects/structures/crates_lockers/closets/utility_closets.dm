@@ -93,8 +93,8 @@
 /obj/structure/closet/toolcloset
 	name = "tool closet"
 	desc = "It's a storage unit for tools."
-	icon_state = "eng"
-	icon_door = "eng_tool"
+	icon_state = "bio"
+	icon_door = "bio_sci"
 
 /obj/structure/closet/toolcloset/PopulateContents()
 	..()

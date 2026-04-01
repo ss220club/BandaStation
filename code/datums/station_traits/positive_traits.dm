@@ -433,3 +433,98 @@
 	var/advisory_string = "Уровень предупреждения: <b>Серое небо</b></center><BR>"
 	advisory_string += "Уровень предупреждения в вашем секторе — Серое небо. Наши датчики фиксируют аномальную активность среди ассистентов, назначенных на вашу станцию. Рекомендуем вам внимательно следить за хранилищем инструментов, мостиком, техническим хранилищем и бригом на предмет скопления людей или мелкого воровства."
 	return advisory_string
+
+/datum/station_trait/comedian_poly
+	name = "Стендап Поли"
+	trait_type = STATION_TRAIT_POSITIVE
+	weight = 30
+	show_in_report = TRUE
+	report_message = "Сегодня особенный день и Поли намерен развеселить эту станцию как следует!"
+	var/mob/living/basic/parrot/poly/protected_poly = null
+
+/datum/station_trait/comedian_poly/Destroy()
+	if(!QDELETED(protected_poly))
+		UnregisterSignal(protected_poly, list(COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_ATTACK_HAND, COMSIG_MOUSEDROP_ONTO, COMSIG_QDELETING))
+	protected_poly = null
+	return ..()
+
+/datum/station_trait/comedian_poly/on_round_start()
+	. = ..()
+	var/mob/living/basic/parrot/poly/found_poly = locate(/mob/living/basic/parrot/poly) in GLOB.alive_mob_list
+	if(!found_poly)
+		return
+
+	protected_poly = found_poly
+
+	found_poly.maxHealth = 20000
+	found_poly.fully_heal()
+	found_poly.desc = "Этот попугай явно находится под защитой могущественной сущности - НЕ стоит его трогать."
+
+	found_poly.transform = found_poly.transform.Scale(2.5, 2.5)
+	REMOVE_TRAIT(found_poly, TRAIT_CAN_MOUNT_HUMANS, INNATE_TRAIT)
+
+	if(!QDELETED(found_poly.ears))
+		qdel(found_poly.ears)
+	found_poly.ears = new /obj/item/radio/headset(found_poly)
+
+	load_poly_jokes(found_poly)
+
+	RegisterSignal(found_poly, COMSIG_ATOM_ATTACKBY, PROC_REF(on_poly_attackedby))
+	RegisterSignal(found_poly, COMSIG_ATOM_ATTACK_HAND, PROC_REF(on_poly_attack_hand))
+	RegisterSignal(found_poly, COMSIG_MOUSEDROP_ONTO, PROC_REF(on_poly_mousedrop))
+	RegisterSignal(found_poly, COMSIG_QDELETING, PROC_REF(on_poly_deleted))
+
+/datum/station_trait/comedian_poly/proc/on_poly_mousedrop(datum/source, atom/over, mob/user)
+	SIGNAL_HANDLER
+	if(over != user || !isliving(user))
+		return
+	INVOKE_ASYNC(src, PROC_REF(zap_and_repel), source, user)
+
+/datum/station_trait/comedian_poly/proc/on_poly_attackedby(datum/source, obj/item/weapon, mob/living/attacker, list/modifiers)
+	SIGNAL_HANDLER
+	if(!isliving(attacker))
+		return
+	INVOKE_ASYNC(src, PROC_REF(zap_and_repel), source, attacker)
+
+/datum/station_trait/comedian_poly/proc/on_poly_attack_hand(datum/source, mob/living/attacker, list/modifiers)
+	SIGNAL_HANDLER
+	if(!isliving(attacker))
+		return
+	INVOKE_ASYNC(src, PROC_REF(zap_and_repel), source, attacker)
+
+/datum/station_trait/comedian_poly/proc/on_poly_deleted(datum/source, force)
+	SIGNAL_HANDLER
+	protected_poly = null
+
+/datum/station_trait/comedian_poly/proc/zap_and_repel(atom/movable/poly_target, mob/living/attacker)
+	if(QDELETED(poly_target) || QDELETED(attacker))
+		return
+	if(poly_target == attacker)
+		return
+
+	lightningbolt(attacker)
+
+	var/turf/poly_turf = get_turf(poly_target)
+	var/turf/attacker_turf = get_turf(attacker)
+	var/throw_dir = get_dir(poly_turf, attacker_turf)
+	if(!throw_dir)
+		throw_dir = pick(GLOB.cardinals)
+	var/turf/throw_target = get_edge_target_turf(poly_turf, throw_dir)
+	attacker.safe_throw_at(throw_target, 5, 1, force = MOVE_FORCE_EXTREMELY_STRONG)
+
+/datum/station_trait/comedian_poly/proc/load_poly_jokes(mob/living/basic/parrot/poly)
+	var/jokes_path = "strings/poly_jokes.json"
+	if(!fexists(jokes_path))
+		return
+	var/list/jokes = json_decode(file2text(jokes_path))
+	if(!islist(jokes) || !length(jokes))
+		return
+	var/datum/component/listen_and_repeat/repeat_comp = poly.GetComponent(/datum/component/listen_and_repeat)
+	if(!repeat_comp)
+		return
+	LAZYCLEARLIST(repeat_comp.speech_buffer)
+	for(var/joke in jokes)
+		if(!istext(joke))
+			continue
+		LAZYSET(repeat_comp.speech_buffer, joke, /datum/component/listen_and_repeat::invalid_voice)
+	repeat_comp.disable_learning()

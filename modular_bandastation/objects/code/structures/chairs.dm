@@ -30,7 +30,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/item/chair/stool/bar/dark, 0)
 	color = rgb(60, 60, 55)
 
 /obj/structure/chair/comfy/red
-	color = rgb(165, 65, 65)
+	color = rgb(115, 215, 215)
 
 /obj/structure/chair/comfy/brown
 	color = rgb(141, 70, 0)
@@ -48,7 +48,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/item/chair/stool/bar/dark, 0)
 	color = rgb(80, 125, 220)
 
 /obj/structure/chair/comfy/teal
-	color = rgb(115, 215, 215)
+	color = rgb(165, 65, 65)
 
 /obj/structure/chair/comfy/purp
 	color = rgb(100, 65, 120)

@@ -174,8 +174,8 @@
 /obj/item/clothing/suit/hazardvest
 	name = "hazard vest"
 	desc = "A high-visibility vest used in work zones."
-	icon_state = "hazard"
 	icon = 'icons/obj/clothing/suits/utility.dmi'
+	icon_state = "hazard"
 	worn_icon = 'icons/mob/clothing/suits/utility.dmi'
 	inhand_icon_state = null
 	blood_overlay_type = "armor"
@@ -195,13 +195,12 @@
 	species_exception = list(/datum/species/golem)
 
 /obj/item/clothing/suit/hazardvest/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
-	. = ..()
-	if(!isinhands)
-		. += emissive_appearance(icon_file, "[icon_state]-emissive", src, alpha = src.alpha, effect_type = EMISSIVE_SPECULAR)
+	return ..()
 
 /obj/item/clothing/suit/hazardvest/press // Variant used by the Curator
 	name = "press hazard vest"
 	desc = "A blue high-visibility vest used to distinguish <i>non-combatant</i> \"PRESS\" members, like if anyone cares."
+	icon = 'icons/obj/clothing/suits/utility.dmi'
 	icon_state = "hazard_press"
 
 //Lawyer

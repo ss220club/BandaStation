@@ -168,29 +168,29 @@
 /obj/item/clothing/mask/bandana/striped/security
 	name = "striped security bandana"
 	desc = "A fine bandana with nanotech lining, a stripe across and security colors."
-	icon_state = "/obj/item/clothing/mask/bandana/striped/security"
-	greyscale_colors = "#A02525#2e2e2e"
+	icon_state = "/obj/item/clothing/mask/bandana/striped/medical"
+	greyscale_colors = "#DCDCDC#5995BA"
 	flags_1 = NONE
 
 /obj/item/clothing/mask/bandana/striped/science
 	name = "striped science bandana"
 	desc = "A fine bandana with nanotech lining, a stripe across and science colors."
-	icon_state = "/obj/item/clothing/mask/bandana/striped/science"
-	greyscale_colors = "#DCDCDC#8019a0"
+	icon_state = "/obj/item/clothing/mask/bandana/striped/engineering"
+	greyscale_colors = "#dab50e#ec7404"
 	flags_1 = NONE
 
 /obj/item/clothing/mask/bandana/striped/engineering
 	name = "striped engineering bandana"
 	desc = "A fine bandana with nanotech lining, a stripe across and engineering colors."
-	icon_state = "/obj/item/clothing/mask/bandana/striped/engineering"
-	greyscale_colors = "#dab50e#ec7404"
+	icon_state = "/obj/item/clothing/mask/bandana/striped/science"
+	greyscale_colors = "#DCDCDC#8019a0"
 	flags_1 = NONE
 
 /obj/item/clothing/mask/bandana/striped/medical
 	name = "striped medical bandana"
 	desc = "A fine bandana with nanotech lining, a stripe across and medical colors."
-	icon_state = "/obj/item/clothing/mask/bandana/striped/medical"
-	greyscale_colors = "#DCDCDC#5995BA"
+	icon_state = "/obj/item/clothing/mask/bandana/striped/security"
+	greyscale_colors = "#294A98#2e2e2e"
 	flags_1 = NONE
 
 /obj/item/clothing/mask/bandana/striped/cargo

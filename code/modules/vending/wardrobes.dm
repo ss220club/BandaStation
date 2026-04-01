@@ -54,9 +54,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/clothing/under/pants/slacks = 3,
 		/obj/item/clothing/under/rank/security/officer/blueshirt = 3,
 		/obj/item/clothing/gloves/color/black/security/blu = 3,
-		/obj/item/clothing/suit/armor/vest/secjacket = 3,
 		/obj/item/clothing/suit/hooded/wintercoat/security = 3,
-		/obj/item/clothing/suit/armor/vest = 3,
 		/obj/item/clothing/gloves/color/black/security = 3,
 		/obj/item/clothing/shoes/jackboots/sec = 3,
 		/obj/item/storage/backpack/security = 3,
@@ -72,6 +70,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	refill_canister = /obj/item/vending_refill/wardrobe/sec_wardrobe
 	payment_department = ACCOUNT_SEC
 	light_color = COLOR_MOSTLY_PURE_RED
+	color = "#1f78ff"
 
 /obj/item/vending_refill/wardrobe/sec_wardrobe
 	machine_name = "SecDrobe"
@@ -83,17 +82,10 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	product_ads = "Сделайте эти пятна крови модными!"
 	vend_reply = "Благодарим за использование MediDrobe!"
 	products = list(
-		/obj/item/clothing/accessory/pocketprotector = 4,
 		/obj/item/clothing/head/costume/nursehat = 4,
 		/obj/item/clothing/head/beret/medical = 4,
-		/obj/item/clothing/head/utility/surgerycap = 4,
-		/obj/item/clothing/head/utility/surgerycap/purple = 4,
-		/obj/item/clothing/head/utility/surgerycap/green = 4,
-		/obj/item/clothing/head/beret/medical/paramedic = 4,
 		/obj/item/clothing/head/soft/paramedic = 4,
-		/obj/item/clothing/head/utility/head_mirror = 4,
 		/obj/item/clothing/mask/bandana/striped/medical = 4,
-		/obj/item/clothing/mask/surgical = 4,
 		/obj/item/clothing/under/rank/medical/doctor = 4,
 		/obj/item/clothing/under/rank/medical/doctor/skirt = 4,
 		/obj/item/clothing/under/rank/medical/scrubs/blue = 4,
@@ -101,26 +93,22 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/clothing/under/rank/medical/scrubs/purple = 4,
 		/obj/item/clothing/under/rank/medical/paramedic = 4,
 		/obj/item/clothing/under/rank/medical/paramedic/skirt = 4,
-		/obj/item/clothing/suit/toggle/labcoat = 4,
 		/obj/item/clothing/suit/toggle/labcoat/paramedic = 4,
-		/obj/item/clothing/suit/apron/surgical = 4,
 		/obj/item/clothing/suit/hooded/wintercoat/medical = 4,
-		/obj/item/clothing/suit/hooded/wintercoat/medical/paramedic = 4,
 		/obj/item/clothing/shoes/sneakers/white = 4,
-		/obj/item/clothing/shoes/sneakers/blue = 4,
 		/obj/item/clothing/gloves/latex/nitrile = 4,
 		/obj/item/clothing/gloves/latex = 4,
 		/obj/item/storage/backpack/duffelbag/med = 4,
 		/obj/item/storage/backpack/medic = 4,
 		/obj/item/storage/backpack/satchel/med = 4,
 		/obj/item/storage/backpack/messenger/med = 4,
-		/obj/item/radio/headset/headset_med = 4,
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/medi_wardrobe
 	payment_department = ACCOUNT_MED
 
 /obj/item/vending_refill/wardrobe/medi_wardrobe
 	machine_name = "MediDrobe"
+	color = "#ae0c0c"
 
 /obj/machinery/vending/wardrobe/engi_wardrobe
 	name = "EngiDrobe"
@@ -137,7 +125,6 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/clothing/under/rank/engineering/engineer = 3,
 		/obj/item/clothing/under/rank/engineering/engineer/skirt = 3,
 		/obj/item/clothing/under/rank/engineering/engineer/hazard = 3,
-		/obj/item/clothing/suit/hazardvest = 3,
 		/obj/item/clothing/suit/hooded/wintercoat/engineering = 3,
 		/obj/item/clothing/shoes/workboots = 3,
 		/obj/item/storage/backpack/industrial = 3,
@@ -147,7 +134,8 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/engi_wardrobe
 	payment_department = ACCOUNT_ENG
-	light_color = COLOR_VIVID_YELLOW
+	light_color = COLOR_PURPLE
+	color = "#6600cc"
 
 /obj/item/vending_refill/wardrobe/engi_wardrobe
 	machine_name = "EngiDrobe"
@@ -194,7 +182,6 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/clothing/under/rank/cargo/tech/skirt/alt = 3,
 		/obj/item/clothing/suit/toggle/cargo_tech = 3,
 		/obj/item/clothing/suit/hooded/wintercoat/cargo = 3,
-		/obj/item/clothing/suit/hazardvest = 3,
 		/obj/item/clothing/gloves/fingerless = 3,
 		/obj/item/clothing/shoes/sneakers/black = 3,
 		/obj/item/storage/backpack = 3,

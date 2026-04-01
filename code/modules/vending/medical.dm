@@ -5,6 +5,7 @@
 	icon_deny = "med-deny"
 	panel_type = "panel11"
 	product_ads = "Спасите пару жизней!;Лучшие вещи для вашего меда.;Только самые лучшие инструменты.;Натуральные химикаты!;Эти вещи спасают жизни.;Разве вы не хотите это?;Пинг!"
+	color = "#ae0c0c"
 	products = list(
 		/obj/item/stack/medical/wrap/gauze = 8,
 		/obj/item/reagent_containers/syringe = 12,
@@ -76,6 +77,7 @@
 	icon_state = "drug"
 	icon_deny = "drug-deny"
 	panel_type = "panel11"
+	color = "#ae0c0c"
 	product_ads = "Спасите пару жизней!;Лучшие вещи для вашего меда.;Только самые лучшие инструменты.;Натуральные химикаты!;Эти вещи спасают жизни.;Разве вы не хотите это?;Пинг!"
 	products = list(
 		/obj/item/reagent_containers/applicator/patch/libital = 5,

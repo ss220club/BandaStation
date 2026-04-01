@@ -8,7 +8,7 @@
 	overlays_file = 'modular_bandastation/aesthetics/airlocks/icons/station2/overlays.dmi'
 
 /obj/structure/door_assembly/door_assembly_com
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/heads/command.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/mining.dmi'
 
 /obj/structure/door_assembly/door_assembly_cap
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/heads/cap.dmi'
@@ -53,25 +53,25 @@
 	glass_type = /obj/machinery/door/airlock/command/ce/glass
 
 /obj/structure/door_assembly/door_assembly_sec
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/security.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/medical.dmi'
 
 /obj/structure/door_assembly/door_assembly_eng
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/engineering.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/research.dmi'
 
 /obj/structure/door_assembly/door_assembly_min
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/mining.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/heads/command.dmi'
 
 /obj/structure/door_assembly/door_assembly_atmo
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/atmos.dmi'
 
 /obj/structure/door_assembly/door_assembly_research
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/research.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/engineering.dmi'
 
 /obj/structure/door_assembly/door_assembly_science
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/science.dmi'
 
 /obj/structure/door_assembly/door_assembly_med
-	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/medical.dmi'
+	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/security.dmi'
 
 /obj/structure/door_assembly/door_assembly_viro
 	icon = 'modular_bandastation/aesthetics/airlocks/icons/station/virology.dmi'
