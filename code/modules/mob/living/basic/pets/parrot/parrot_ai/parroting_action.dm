@@ -28,7 +28,7 @@
 	var/mob/living/basic/parrot/speaking_pawn = controller.pawn
 	var/list/available_channels = speaking_pawn.get_available_channels()
 	var/modified_speech = speech["line"]
-	var/use_radio = prob(50) // we might not even use the radio if we even have a channel
+	var/use_radio = length(available_channels)
 
 	var/has_channel_prefix = (modified_speech[1] in GLOB.department_radio_prefixes) && (copytext_char(modified_speech, 2, 3) in GLOB.department_radio_keys) // determine if we need to crop the channel prefix
 
