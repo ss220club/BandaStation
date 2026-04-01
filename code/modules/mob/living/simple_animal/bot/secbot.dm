@@ -32,6 +32,7 @@
 		BEEPSKY_VOICED_ON_THE_GROUND = 'sound/mobs/non-humanoids/fun/on_the_ground.ogg',
 		BEEPSKY_VOICED_TAZER_TAZER = 'sound/mobs/non-humanoids/fun/tazer_tazer.ogg',
 		BEEPSKY_VOICED_YOU_HAVE_TO_UNDERSTAND = 'sound/mobs/non-humanoids/fun/you_have_to_understand.ogg',
+		BEEPSKY_VOICED_COME_HERE_COME_HERE = 'sound/mobs/non-humanoids/fun/come_here_come_here_come_here.ogg',
 	)
 
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.2, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 3.2)
@@ -513,6 +514,7 @@
 		BEEPSKY_VOICED_NEED_BACKUP,
 		BEEPSKY_VOICED_ON_THE_GROUND,
 		BEEPSKY_VOICED_TAZER_TAZER,
+		BEEPSKY_VOICED_COME_HERE_COME_HERE,
 	))
 
 /mob/living/simple_animal/bot/secbot/explode()
