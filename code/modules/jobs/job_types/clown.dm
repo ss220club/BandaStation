@@ -79,6 +79,7 @@
 
 	suit_store = /obj/item/tank/internals/oxygen
 	back = /obj/item/mod/control/pre_equipped/cosmohonk
+	suit = null
 	internals_slot = ITEM_SLOT_SUITSTORE
 
 /datum/outfit/job/clown/pre_equip(mob/living/carbon/human/H, visuals_only)
