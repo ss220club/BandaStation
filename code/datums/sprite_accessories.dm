@@ -222,9 +222,18 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 	name = "Long Bedhead"
 	icon_state = "hair_long_bedhead"
 
+/datum/sprite_accessory/hair/bedheadlong2
+	name = "Long Bedhead 2"
+	icon_state = "hair_long_bedheadv2"
+
 /datum/sprite_accessory/hair/bedheadfloorlength
 	name = "Floorlength Bedhead"
 	icon_state = "hair_floorlength_bedhead"
+	natural_spawn = FALSE
+
+/datum/sprite_accessory/hair/bedheadfloorlength2
+	name = "Floorlength Bedhead 2"
+	icon_state = "hair_floorlength_bedheadv2"
 	natural_spawn = FALSE
 
 /datum/sprite_accessory/hair/badlycut
