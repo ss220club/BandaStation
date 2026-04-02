@@ -9,7 +9,6 @@
 #define SHADOW_PLANES_BLACK_OPAQUE_MATRIX list(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,2550, 0,0,0,0)
 
 #define LOS_PROXY_INIT_BLOCK_TYPES list( \
-	/obj/item, \
 	/obj/effect, \
 	/obj/machinery/power/supermatter_crystal, \
 )
