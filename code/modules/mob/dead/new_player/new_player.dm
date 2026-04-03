@@ -106,7 +106,7 @@
 		observer.real_name = observer.client.prefs.read_preference(/datum/preference/name/real_name)
 		observer.name = observer.real_name
 		observer.client.init_verbs()
-		observer.persistent_client.time_of_death = world.time
+		observer.update_time_of_death(world.time) // BANDASTATION EDIT - Context-aware time_of_death updates
 
 	observer.update_appearance()
 	observer.stop_sound_channel(CHANNEL_LOBBYMUSIC)

@@ -291,7 +291,7 @@ Works together with spawning an observer, noted above.
 	if(isliving(former_mob))
 		recordable_time = former_mob.timeofdeath
 
-	ghost.persistent_client?.time_of_death = recordable_time
+	ghost.update_time_of_death(recordable_time) // BANDASTATION EDIT - Context-aware time_of_death updates
 	SEND_SIGNAL(src, COMSIG_MOB_GHOSTIZED)
 	return ghost
 
