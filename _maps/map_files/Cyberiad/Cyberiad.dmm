@@ -22335,7 +22335,7 @@
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
 	dir = 1
 	},
-/obj/structure/closet/secure_closet/security/sec,
+/obj/structure/closet/secure_closet/security,
 /turf/open/floor/iron,
 /area/station/security/checkpoint/arrivals)
 "fvw" = (
@@ -37572,7 +37572,8 @@
 /turf/open/floor/plating/reinforced,
 /area/station/cargo/storage)
 "jdw" = (
-/obj/structure/table,
+/obj/effect/turf_decal/bot_red,
+/obj/effect/landmark/secequipment,
 /turf/open/floor/iron,
 /area/station/security/office)
 "jdA" = (
@@ -64727,6 +64728,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/maintenance/port/greater)
+"pGp" = (
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/effect/turf_decal/delivery/red,
+/obj/structure/closet/secure_closet/security/sec,
+/obj/item/clothing/mask/balaclava,
+/turf/open/floor/iron/dark,
+/area/station/security/lockers)
 "pGr" = (
 /obj/structure/railing{
 	dir = 8
@@ -195604,7 +195612,7 @@ tqR
 wiz
 uYv
 ufm
-nkz
+pGp
 nkz
 nTy
 ghG
