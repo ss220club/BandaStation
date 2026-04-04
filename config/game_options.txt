@@ -123,6 +123,8 @@ CHANGELING_SCALING_COEFF 6
 ## Used as (Officers = Population / Coeff)
 ## Set to 0 to disable scaling and use default numbers instead.
 SECURITY_SCALING_COEFF 8
+SECURITY_MIN_POSITIONS 5
+SECURITY_MAX_POSITIONS 12
 
 ## The number of objectives traitors get.
 ## Not including escaping/hijacking.

@@ -83,6 +83,16 @@
 	integer = FALSE
 	min_val = 0
 
+// BANDASTATION EDIT START - Configurable officer positions
+/datum/config_entry/number/security_min_positions
+	default = 5
+	min_val = 0
+
+/datum/config_entry/number/security_max_positions
+	default = 12
+	min_val = 0
+// BANDASTATION EDIT END
+
 /datum/config_entry/number/traitor_objectives_amount
 	default = 2
 	min_val = 0
