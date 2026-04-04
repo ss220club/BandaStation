@@ -126,4 +126,13 @@
 // MARK: Skrell
 /datum/dna_block/feature/accessory/skrell_head_tentacle
 	feature_key = FEATURE_SKRELL_HEAD_TENTACLE
+
+/datum/dna_block/feature/accessory/skrell_tentacle_ornament
+	feature_key = FEATURE_SKRELL_HEAD_TENTACLE_ORNAMENT
+
+/datum/dna_block/feature/accessory/skrell_cloth_wrap
+	feature_key = FEATURE_SKRELL_CLOTH_WRAP
+
+/datum/dna_block/feature/accessory/skrell_cloth_wrap_toggle
+	feature_key = FEATURE_SKRELL_CLOTH_WRAP_TOGGLE
 // BANDASTATION ADD END - Species

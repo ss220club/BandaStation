@@ -112,6 +112,20 @@
 		'modular_bandastation/emote_panel/audio/skrell/warble_2.ogg',
 	)
 
+/datum/emote/living/carbon/human/skrell/warble/melodic
+	name = "Мелодично трелить"
+	key = "melodicwarble"
+	key_third_person = "melodicwarble"
+	message = "мелодично трелит."
+	message_param = "мелодично трелит на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	vary = TRUE
+
+/datum/emote/living/carbon/human/skrell/warble/melodic/get_sound(mob/living/user)
+	return pick(
+		'modular_bandastation/emote_panel/audio/skrell/melodicwarble.ogg',
+	)
+
 /datum/emote/living/carbon/human/skrell/croak
 	name = "Квакать"
 	key = "croak"
