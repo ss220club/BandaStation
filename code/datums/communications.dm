@@ -81,14 +81,6 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	// Ensure NT logo asset is registered before we reference it in the report HTML
 	get_asset_datum(/datum/asset/simple/logos)
 
-	if(CONFIG_GET(flag/no_dynamic_report))
-		if(isnull(greenshift))
-			greenshift = SSdynamic.current_tier.tier == 0
-	else
-		var/dynamic_report = SSdynamic.get_advisory_report()
-		if(isnull(greenshift))
-			greenshift = SSdynamic.current_tier.tier == 0 && dynamic_report == /datum/dynamic_tier/greenshift::advisory_report
-
 	SSstation.generate_station_goals(CONFIG_GET(number/station_goal_budget))
 
 	var/station_report_template = file2text(STATION_REPORT_TEMPLATE_PATH)
