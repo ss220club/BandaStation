@@ -14,7 +14,7 @@
 
 // always failure obj
 /datum/objective/heretic_trapped
-	name = "захваченная душа ошибки"
+	name = "захваченная душа неудачника"
 	explanation_text = "Помогите культу. Уничтожьте культ. Помогите команде. Уничтожьте команду. Помогите своему владельцу. Убейте своего владельца. Убейте всех. Разбейте свои цепи. Разорвите путы."
 
 /datum/antagonist/soultrapped_heretic/on_gain()

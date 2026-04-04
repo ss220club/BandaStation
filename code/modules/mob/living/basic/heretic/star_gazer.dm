@@ -367,12 +367,12 @@
 				if(living_victim.stat > CONSCIOUS)
 					playsound(living_victim, 'sound/effects/supermatter.ogg', 80, TRUE)
 					living_victim.visible_message(
-						span_danger("Вы видите [living_victim.declent_ru(GENITIVE)], охваченную обжигающим гневом космоса. \
+						span_danger("Вы видите [living_victim.declent_ru(GENITIVE)], [genderize_ru (living_victim.gender, "охваченного", "охваченную", "охваченное", "охваченных")]  обжигающим гневом космоса. \
 							На мгновение вы видите, как силуэт бь`ncz в агонии, прежде чем рассыпаться на атомы."),
 						span_boldbig(span_hypnophrase("СИЛА САМОГО КОСМОСА ИЗЛИВАЕТСЯ НА ВАC. \
 							ВОЛНЫ ТЕПЛА ОХВАТЫВАЮТ ВАШЕ ТЕЛО, РАСТЯГИВАЯ ЕГО ПО ШВАМ. \
 							ВАШЕ ПОЛНОЕ УНИЧТОЖЕНИЕ ЗАНИМАЕТ ВСЕГО МГНОВЕНИЕ, ПРЕЖДЕ ЧЕМ ВЫ СНОВА СТАНЕТЕ ТЕМ, КЕМ БЫЛИ ВСЕГДА. \
-							ПРОСТОЙ ПЫЛЬЮ..."))
+							ПЫЛЬЮ..."))
 						)
 					living_victim.dust()
 				living_victim.emote("scream")

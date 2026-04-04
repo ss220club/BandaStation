@@ -336,7 +336,7 @@
 
 /datum/status_effect/caretaker_refuge/proc/no_strip(atom/source, mob/user, obj/item/equipping)
 	SIGNAL_HANDLER
-	to_chat(user, span_warning("У вас не выходить ничего надеть на [source.declent_ru(ACCUSATIVE)], так как они бестелесны!"))
+	to_chat(user, span_warning("У вас не выходить ничего надеть на [source.declent_ru(ACCUSATIVE)], так как [source.declent_ru(NOMINATIVE)] не имеет тела!"))
 	return COMPONENT_CANT_STRIP
 
 /datum/status_effect/caretaker_refuge/proc/prevent_spell_usage(datum/source, datum/spell)
