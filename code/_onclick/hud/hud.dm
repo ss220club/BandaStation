@@ -211,7 +211,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	for(var/group_key in master_groups)
 		var/datum/plane_master_group/group = master_groups[group_key]
 		group.build_planes_offset(src, new_offset)
-		group.rebuild_hud() // BANDASTATION MOD: LOS
 
 /datum/hud/Destroy()
 	if(mymob.hud_used == src)

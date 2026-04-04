@@ -11,6 +11,7 @@
 #define LOS_PROXY_INIT_BLOCK_TYPES list( \
 	/obj/effect, \
 	/obj/machinery/power/supermatter_crystal, \
+	/obj/structure/holosign, \
 )
 
 #define LOS_PROXY_NO_OVERLAY_MIRROR_TYPES list( \

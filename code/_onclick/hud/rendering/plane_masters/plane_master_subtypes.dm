@@ -268,23 +268,11 @@
 	name = "Wall"
 	documentation = "Holds all walls. We render this onto the game world. Separate so we can use this + space and floor planes as a guide for where byond blackness is NOT."
 	plane = WALL_PLANE
-	// BANDASTATION MOD START: LOS
-#ifdef LOS_ENABLED
-	render_relay_planes = list(RENDER_PLANE_LIGHT_MASK)
-	render_target = WALL_RENDER_TARGET
-#else
 	render_relay_planes = list(RENDER_PLANE_GAME_WORLD, RENDER_PLANE_LIGHT_MASK)
-#endif
-	// BANDASTATION MOD END: LOS
 
 /atom/movable/screen/plane_master/wall/Initialize(mapload, datum/hud/hud_owner, datum/plane_master_group/home, offset)
 	. = ..()
-// 	// BANDASTATION MOD START: LOS
-#ifdef LOS_ENABLED
-	add_relay_to(GET_NEW_PLANE(RENDER_PLANE_GAME_WORLD, offset), relay_layer = WALL_BELOW_GAME_LAYER - (PLANE_RANGE * offset))
-#endif
 	add_relay_to(GET_NEW_PLANE(RENDER_PLANE_EMISSIVE, offset), relay_layer = EMISSIVE_WALL_LAYER, relay_color = GLOB.em_block_color)
-// 	// BANDASTATION MOD END: LOS
 
 /atom/movable/screen/plane_master/game
 	name = "Game"
@@ -298,7 +286,9 @@
 	. = ..()
 	if(!.)
 		return
-	if(los_shadows_disabled_for_mob(mymob))
+	var/datum/hud/owner_hud = home?.our_hud
+	// draw only for the active offset
+	if(GLOB.los_killswitch || los_shadows_disabled_for_mob(mymob) || !owner_hud || offset != owner_hud.current_plane_offset || !los_has_mask_plane_for_offset(home, offset))
 		remove_filter("shadow_mask")
 		remove_filter("fade_strength")
 	else
@@ -312,21 +302,7 @@
 	name = "Upper Game"
 	documentation = "For stuff you want to draw like the game plane, but not ever below its contents"
 	plane = ABOVE_GAME_PLANE
-	// BANDASTATION MOD START: LOS
-#ifdef LOS_ENABLED
-	render_relay_planes = list() // late relaying fixes multiz
-#else
 	render_relay_planes = list(RENDER_PLANE_GAME_WORLD)
-#endif
-	// BANDASTATION MOD START: LOS
-
-// BANDASTATION MOD START: LOS
-#ifdef LOS_ENABLED
-/atom/movable/screen/plane_master/game_world_above/Initialize(mapload, datum/hud/hud_owner, datum/plane_master_group/home, offset)
-	. = ..()
-	add_relay_to(GET_NEW_PLANE(RENDER_PLANE_GAME_WORLD, offset), relay_layer = WALL_MOUNTED_RELAY_LAYER - (PLANE_RANGE * offset))
-#endif
-// BANDASTATION MOD END: LOS
 
 /atom/movable/screen/plane_master/seethrough
 	name = "Seethrough"
