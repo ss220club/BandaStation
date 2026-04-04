@@ -632,7 +632,7 @@ SUBSYSTEM_DEF(job)
 	var/max_positions = CONFIG_GET(number/security_max_positions)
 	if(ssc > 0)
 		if(J.spawn_positions > 0)
-			var/officer_positions = min(max_positions, max(min_positions, round(unassigned.len / ssc))) //Scale between configured minimum and maximum officers
+			var/officer_positions = clamp(round(unassigned.len / ssc), min_positions, max_positions) //Scale between configured minimum and maximum officers
 			job_debug("SOP: Setting open security officer positions to [officer_positions]")
 			J.total_positions = officer_positions
 			J.spawn_positions = officer_positions
