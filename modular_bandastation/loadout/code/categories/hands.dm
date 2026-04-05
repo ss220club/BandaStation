@@ -84,8 +84,18 @@
 	item_path = /obj/item/clothing/gloves/etamin_gloves
 	donator_level = DONATOR_TIER_1
 
+/datum/loadout_item/gloves/etamin_gloves/white
+	name = "Перчатки Etamin Industries (Белые)"
+	item_path = /obj/item/clothing/gloves/etamin_gloves/white
+	donator_level = DONATOR_TIER_1
+
 // MARK: Tier 2
 /datum/loadout_item/gloves/gloves_rainbow
 	name = "Радужные перчатки"
 	item_path = /obj/item/clothing/gloves/color/rainbow
+	donator_level = DONATOR_TIER_2
+
+/datum/loadout_item/gloves/etamin_gloves/maid
+	name = "Рукавицы горничной Etamin Industries"
+	item_path = /obj/item/clothing/gloves/etamin_gloves/maid
 	donator_level = DONATOR_TIER_2

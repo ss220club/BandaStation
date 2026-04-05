@@ -159,3 +159,10 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/jacket.dmi'
 	icon_state = "ei_jacket"
 	body_parts_covered = CHEST | GROIN | ARMS
+
+/obj/item/clothing/suit/toggle/etamin_jacket/parka
+	name = "Etamin Ind. white parka"
+	desc = "Белая, межсезонная парка от Etamin Industries. Кажется тонкой, но хорошо хранит тепло. Возможно в ней было бы жарко, если бы не система регуляции температуры. На спине восточный иероглиф. Интересно, причем тут \"Небо\"?"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/jacket.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/jacket.dmi'
+	icon_state = "ei_parka"

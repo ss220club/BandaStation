@@ -273,3 +273,17 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 	flags_inv = HIDEEARS | HIDEHAIR
+
+/obj/item/clothing/neck/cloak/etamin_cloak
+	name = "Etamin Industries 'Sun' cloak"
+	desc = "Плащ от корпорации Etamin Industries. Это символ Солнца переливается красками злата. Как же дорого это выглядит, боже ты мой. Какая ткань, какая работа...."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/cloaks.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/cloaks.dmi'
+	icon_state = "ei_cloak"
+
+/obj/item/clothing/neck/cloak/etamin_cloak/blue
+	name = "Etamin Industries 'Medicine' cloak"
+	desc = "Рабочий плащ от корпорации Etamin Industries для медицинских отделов по всей системе. Если спасать жизни, то только стильно."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/cloaks.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/cloaks.dmi'
+	icon_state = "ei_cloak_med"

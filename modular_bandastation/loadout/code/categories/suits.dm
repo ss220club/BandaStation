@@ -85,6 +85,15 @@
 	item_path = /obj/item/clothing/suit/toggle/etamin_jacket
 	donator_level = DONATOR_TIER_1
 
+/datum/loadout_item/suits/etamin_jacket/parka
+	name = "Парка Etamin Industries"
+	item_path = /obj/item/clothing/suit/toggle/etamin_jacket/parka
+	donator_level = DONATOR_TIER_1
+
+/datum/loadout_item/suits/etamin_jacket/corporate
+	name = "Корпоративная куртка Etamin Industries"
+	item_path = /obj/item/clothing/suit/etamin_coat/jacket
+
 // MARK: Tier 2
 /datum/loadout_item/suits/shark_suit
 	name = "Костюм акулы"
@@ -113,7 +122,7 @@
 	donator_level = DONATOR_TIER_3
 
 /datum/loadout_item/suits/etamin_cloak
-	name = "Плащ Etamin Industries"
+	name = "Плащ с капюшоном Etamin Industries"
 	item_path = /obj/item/clothing/suit/hooded/etamin_cloak
 	donator_level = DONATOR_TIER_3
 
@@ -128,14 +137,13 @@
 	item_path = /obj/item/clothing/suit/katarina_cyberjacket
 	donator_level = DONATOR_TIER_4
 
+/datum/loadout_item/suits/etamin_coat
+	name = "Офицерское пальто Etamin Industries"
+	item_path = /obj/item/clothing/suit/etamin_coat
+	donator_level = DONATOR_TIER_4
+
 // MARK: Tier 5
 /datum/loadout_item/suits/soundhand_white_jacket
 	name = "Серебристая куртка Арии"
 	item_path = /obj/item/clothing/suit/soundhand_white_jacket/tag
 	donator_level = DONATOR_TIER_5
-
-/datum/loadout_item/suits/etamin_coat
-	name = "Офицерский плащ Etamin Industries"
-	item_path = /obj/item/clothing/suit/etamin_coat
-	donator_level = DONATOR_TIER_5
-

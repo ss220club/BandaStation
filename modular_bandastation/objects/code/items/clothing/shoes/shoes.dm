@@ -32,3 +32,10 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/shoes.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/shoes.dmi'
 	icon_state = "ei_shoes"
+
+/obj/item/clothing/shoes/etamin_shoes/white
+	name = "Gold On White shoes"
+	desc = "Белые ботинки в классическом стиле с легким золотым напылением от корпорации Etamin Industries. Вот в таких и по лужам крови. Привет медицинскому отделу!"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/shoes.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/shoes.dmi'
+	icon_state = "ei_shoes_white"

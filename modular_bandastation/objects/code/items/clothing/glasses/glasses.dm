@@ -18,6 +18,24 @@
 	clothing_traits = list(TRAIT_SECURITY_HUD)
 	vision_flags = SEE_TURFS|SEE_MOBS|SEE_OBJS
 
+// MARK: Etamin Ind.
+/obj/item/clothing/glasses/etamin_aviators
+	name = "Etamin Industries aviator shades"
+	desc = "Мне нужна твоя одежда, ботинки и мотоцикл... Очки будут прекрасным дополнением."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/glasses.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/eyes.dmi'
+	icon_state = "ei_sunglasses"
+	inhand_icon_state = "sunglasses"
+	worn_icon_state = "ei_sunglasses"
+
+/obj/item/clothing/glasses/sunglasses/etamin_aviators
+	name = "Etamin Industries aviator sunglasses"
+	desc = "Мне нужна твоя одежда, ботинки и мотоцикл... Очки будут прекрасным дополнением."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/glasses.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/eyes.dmi'
+	icon_state = "ei_sunglasses"
+	worn_icon_state = "ei_sunglasses"
+
 // MARK: Miscellaneous
 /obj/item/clothing/glasses/meson/sunglasses
 	name = "meson HUDSunglasses"

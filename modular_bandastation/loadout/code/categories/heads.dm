@@ -4,8 +4,18 @@
 	item_path = /obj/item/clothing/head/ratge
 	donator_level = DONATOR_TIER_1
 
+/datum/loadout_item/head/etamin_beret
+	name = "Берет Etamin Industries"
+	item_path = /obj/item/clothing/head/etamin_beret
+	donator_level = DONATOR_TIER_1
+
 // MARK: Tier 2
 /datum/loadout_item/head/biker_helmet
 	name = "Байкерский шлем"
 	item_path = /obj/item/clothing/head/helmet/biker_helmet/replica
+	donator_level = DONATOR_TIER_2
+
+/datum/loadout_item/head/etamin_maidband
+	name = "Чепчик горничной Etamin Industries"
+	item_path = /obj/item/clothing/head/etamin_maidband
 	donator_level = DONATOR_TIER_2

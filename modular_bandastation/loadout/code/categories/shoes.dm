@@ -50,6 +50,10 @@
 	item_path = /obj/item/clothing/shoes/etamin_shoes
 	donator_level = DONATOR_TIER_1
 
+/datum/loadout_item/shoes/etamin_shoes/white
+	name = "Ботинки Etamin Industries (Белые)"
+	item_path = /obj/item/clothing/shoes/etamin_shoes/white
+
 // MARK: Tier 2
 /datum/loadout_item/shoes/shark_shoes
 	name = "Акульи тапочки"

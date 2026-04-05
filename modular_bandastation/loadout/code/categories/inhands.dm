@@ -3,3 +3,7 @@
 	name = "Рюкзак Etamin Industries"
 	item_path = /obj/item/storage/backpack/etamin_ind
 	donator_level = DONATOR_TIER_2
+
+/datum/loadout_item/inhand/etamin_backpack/duffelbag
+	name = "Вещмешок Etamin Industries"
+	item_path = /obj/item/storage/backpack/duffelbag/etamin_ind

@@ -273,3 +273,17 @@
 	icon_state = "ussp_hat_komandir"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
 
+//MARK: Etamin Ind.
+/obj/item/clothing/head/etamin_beret
+	name = "Etamin Industries beret"
+	desc = "Всеми любимый берет с солнышком на лбу. Оно переливается на свету, словно пытаясь осветить путь перед собой."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+	icon_state = "ei_beret"
+
+/obj/item/clothing/head/etamin_maidband
+	name = "Etamin Industries maid band"
+	desc = "Как же он мило выглядит на голове и какой же он мягкий на ощупь."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+	icon_state = "ei_maidband"

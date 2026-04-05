@@ -175,3 +175,17 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/gloves.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/gloves.dmi'
 	icon_state = "ei_gloves"
+
+/obj/item/clothing/gloves/etamin_gloves/white
+	name = "Gold On White gloves"
+	desc = "Стильные, белые перчатки. Кто придумал делать перчатки белыми? Их же легко загадить..."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/gloves.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/gloves.dmi'
+	icon_state = "ei_gloves_white"
+
+/obj/item/clothing/gloves/etamin_gloves/maid
+	name = "Etamin Industries maid gloves"
+	desc = "Они запачкаются, но все равно останутся стильными."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/gloves.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/gloves.dmi'
+	icon_state = "ei_gloves_maid"
