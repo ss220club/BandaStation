@@ -48,6 +48,6 @@
 	inhand_icon_state = "ei_suit"
 
 /obj/item/clothing/under/rank/etamin_ind/combat/white
-	name = "Etamin Ind. tactical suit"
+	name = "Etamin Ind. white tactical suit"
 	desc = "Боевая тактическая униформа белого цвета охранного подразделения корпорации Etamin Industry. Она сохранит каждое пятнышко крови, а потому вас будет очень легко заштопать по следу вашей крови на ней."
 	icon_state = "ei_combat_white"

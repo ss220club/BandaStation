@@ -34,8 +34,9 @@
 // MARK: Etamin ind.
 /obj/item/storage/backpack/duffelbag/etamin_ind
 	name = "Gold on Black duffelbag"
-	desc = "Вместительный вещмешок от Etamin Industry. Вместительная, стильная, удобная, не забывайте закрывать застежку. "
+	desc = "Вместительный вещмешок от Etamin Industry. Вместительная, стильная, удобная, не забывайте закрывать застежку."
 	icon = 'modular_bandastation/objects/icons/obj/storage/duffelbag/duffelbag.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/obj/clothing/back/duffelbag.dmi'
 	icon_state = "duffel_ei"
 	worn_icon_state = "duffel_ei"
+	inhand_icon_state = "duffel_ei"

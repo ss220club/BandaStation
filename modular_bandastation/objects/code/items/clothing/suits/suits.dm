@@ -92,7 +92,7 @@
 // MARK: Etamin ind.
 /obj/item/clothing/suit/etamin_coat
 	name = "Etamin Ind. officer coat"
-	desc = "Это пальто был создан специально для офицеров корпорации Etamin Industries. Если вы видите его на ком-то, то либо перед вами офицер корпорации, либо тот, кто отдал бешеные бабки за этот плащ."
+	desc = "Это пальто было создано специально для офицеров корпорации Etamin Industries. Если вы видите его на ком-то, то либо перед вами офицер корпорации, либо тот, кто отдал бешеные бабки за это пальто."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "ei_coat"
@@ -100,7 +100,7 @@
 
 /obj/item/clothing/suit/etamin_coat/jacket
 	name = "Etamin Ind. corporate jacket"
-	desc = "Черная, межсезонная куртка. Кажется тонкой, но хорошо хранит тепло. Возможно в ней было бы жарко, если бы не система регуляции температуры.?"
+	desc = "Черная, межсезонная куртка. Кажется тонкой, но хорошо хранит тепло. Возможно в ней было бы жарко, если бы не система регуляции температуры."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/jacket.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/jacket.dmi'
 	icon_state = "ei_corp_jacket"
