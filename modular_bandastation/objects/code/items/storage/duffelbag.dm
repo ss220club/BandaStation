@@ -37,6 +37,8 @@
 	desc = "Вместительный вещмешок от Etamin Industry. Вместительная, стильная, удобная, не забывайте закрывать застежку."
 	icon = 'modular_bandastation/objects/icons/obj/storage/duffelbag/duffelbag.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/obj/clothing/back/duffelbag.dmi'
+	lefthand_file = 'modular_bandastation/objects/icons/obj/storage/duffelbag/duffelbag_lefthand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/obj/storage/duffelbag/duffelbag_righthand.dmi'
 	icon_state = "duffel_ei"
 	worn_icon_state = "duffel_ei"
 	inhand_icon_state = "duffel_ei"
