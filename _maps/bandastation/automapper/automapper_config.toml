@@ -820,5 +820,5 @@ trait_name = "Station"
 map_files = ["wawastation_sec_closet.dmm"]
 directory = "_maps/bandastation/automapper/templates/wawastation/"
 required_map = "wawastation.dmm"
-coordinates = [72, 141, 1]
+coordinates = [71, 141, 1]
 trait_name = "Station"
