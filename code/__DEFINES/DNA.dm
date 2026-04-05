@@ -104,6 +104,10 @@
 #define FEATURE_TAJARAN_FACIAL_HAIR_COLOR "tajaran_facial_hair_color"
 
 #define FEATURE_SKRELL_HEAD_TENTACLE "skrell_head_tentacle"
+#define FEATURE_SKRELL_HEAD_TENTACLE_ORNAMENT "skrell_tentacle_ornament"
+#define FEATURE_SKRELL_CLOTH_WRAP "skrell_cloth_wrap"
+#define FEATURE_SKRELL_CLOTH_WRAP_TOGGLE "skrell_cloth_wrap_toggle"
+#define FEATURE_SKRELL_CLOTH_WRAP_COLOR "skrell_cloth_wrap_color"
 // BANDASTATION ADDITION END - Species Features
 
 ///flag for the transfer_flag argument from dna/proc/copy_dna(). This one makes it so the SE is copied too.
@@ -157,6 +161,8 @@
 #define ORGAN_SLOT_EXTERNAL_POD_HAIR "pod_hair"
 /// BADNASTATION ADDITION START - Species
 #define ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE "head_tentacles"
+#define ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE_ORNAMENT "tentacle_ornament"
+#define ORGAN_SLOT_EXTERNAL_HEAD_CLOTH_WRAP "cloth_wrap"
 /// BADNASTATION ADDITION END - Species
 
 /// Xenomorph organ slots
