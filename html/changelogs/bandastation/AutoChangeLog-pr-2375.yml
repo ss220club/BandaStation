@@ -1,4 +1,0 @@
-author: "RosSample"
-delete-after: True
-changes:
-  - bugfix: "Флатпаки снова можно засовывать в БоХ (но развертывать нельзя!)"

@@ -121,7 +121,17 @@
 	..()
 	new /obj/item/storage/belt/security/full(src)
 
-/obj/structure/closet/secure_closet/security/cargo
+// BANDASTATION EDIT START - Track amount of security closets
+GLOBAL_VAR_INIT(security_closets_count, 0)
+
+/obj/structure/closet/secure_closet/security/sec/Initialize(mapload)
+	. = ..()
+	GLOB.security_closets_count++
+
+/obj/structure/closet/secure_closet/security/sec/Destroy()
+	GLOB.security_closets_count--
+	. = ..()
+// BANDASTATION EDIT END
 
 /obj/structure/closet/secure_closet/security/cargo/PopulateContents()
 	..()
