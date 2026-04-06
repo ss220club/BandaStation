@@ -130,7 +130,11 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 
 	station_report_template = replacetext(station_report_template, "%FOOTNOTES", footnote_section)
 
-	var/signing_officer = pick_list_replacements("signing_officers.json", "names")
+	var/signing_officer = generate_random_name_species_based(
+		gender = pick(list(MALE, FEMALE)),
+		unique = TRUE,
+		species_type = /datum/species/human
+	)
 	station_report_template = replacetext(station_report_template, "%SIGNING_OFFICER", signing_officer)
 
 #ifndef MAP_TEST
