@@ -96207,8 +96207,7 @@
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
 	dir = 8
 	},
-/obj/structure/closet,
-/obj/item/crowbar,
+/obj/structure/filingcabinet/chestdrawer,
 /turf/open/floor/iron,
 /area/station/security/checkpoint/arrivals)
 "xwC" = (
