@@ -75,7 +75,9 @@
 	if(prob(selection_chance))
 		return TRUE
 
-	log_data = "Reason: Candidate failed latejoin weight check ([selection_chance]%)."
+	if(CONFIG_GET(flag/log_antag_candidate_weight))
+		log_dynamic("[config_tag]: Candidate [candidate_client.ckey] failed latejoin weight check ([selection_chance]%)")
+
 	return FALSE
 
 /**
