@@ -3,9 +3,30 @@
 /obj/structure/fence/door,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
-"au" = (
-/obj/machinery/door/airlock/wood,
+"al" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
+"ar" = (
+/obj/effect/mapping_helpers/broken_floor,
+/mob/living/basic/mouse/rat{
+	dir = 4;
+	name = "Ragepie";
+	desc = "Не зли эту крысу."
+	},
+/obj/structure/cable,
 /turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
+"au" = (
+/obj/structure/fence{
+	pixel_x = 0;
+	pixel_y = 0
+	},
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
+"bv" = (
+/obj/structure/bonfire,
+/turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside)
 "bw" = (
 /obj/structure/flora/tree/dead/style_4{
@@ -14,21 +35,72 @@
 	},
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside)
+"bA" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/machinery/light/small/directional/north,
+/obj/effect/decal/cleanable/ants,
+/obj/structure/cable,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "bH" = (
 /obj/effect/turf_decal/road/trim{
 	dir = 8
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside)
+"bR" = (
+/obj/structure/closet/secure_closet/freezer/empty,
+/obj/item/reagent_containers/condiment/enzyme,
+/obj/item/reagent_containers/condiment/rice,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/potato,
+/obj/item/food/grown/redbeet,
+/obj/item/food/grown/redbeet,
+/obj/item/food/grown/redbeet,
+/obj/item/food/grown/redbeet,
+/obj/item/food/grown/whitebeet,
+/obj/item/food/grown/whitebeet,
+/obj/item/food/grown/tomato,
+/obj/item/food/grown/tomato,
+/obj/item/food/grown/tomato,
+/obj/item/food/grown/tomato,
+/obj/item/food/meat/slab/pig,
+/obj/item/food/meat/slab/pig,
+/obj/item/food/meat/slab/pig,
+/obj/item/food/meat/slab/pig,
+/obj/item/food/grown/cabbage,
+/obj/item/food/grown/carrot,
+/obj/item/food/grown/carrot,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "bS" = (
-/obj/structure/railing/platform/corner{
-	dir = 1
-	},
-/turf/open/misc/snow/avangarde,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/machinery/power/apc/auto_name/directional/south,
+/turf/open/floor/pod/dark,
 /area/awaymission/avangarde17/outside)
 "bT" = (
 /obj/structure/flora/grass/brown/style_random,
 /turf/open/misc/dirt/dark/station,
+/area/awaymission/avangarde17/outside)
+"cx" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/south,
+/obj/machinery/light_switch/directional/south,
+/turf/open/floor/pod/dark,
+/area/awaymission/avangarde17/outside)
+"cF" = (
+/obj/structure/flora/grass/green/style_random,
+/obj/structure/fence{
+	dir = 4
+	},
+/turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "cW" = (
 /obj/effect/turf_decal/siding/thinplating/corner{
@@ -37,12 +109,53 @@
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside)
 "di" = (
-/obj/machinery/oven/range,
-/turf/open/floor/wood/cherry,
+/obj/structure/flora/grass/both/style_random,
+/obj/structure/fence{
+	dir = 4
+	},
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
+"dy" = (
+/obj/structure/table/wood,
+/obj/item/kitchen/fork{
+	pixel_x = 10;
+	pixel_y = 5
+	},
+/obj/item/kitchen/fork{
+	pixel_x = 10;
+	pixel_y = 5
+	},
+/obj/item/kitchen/spoon{
+	pixel_x = 8;
+	pixel_y = 5
+	},
+/obj/item/kitchen/spoon{
+	pixel_x = 8;
+	pixel_y = 5
+	},
+/obj/item/reagent_containers/cup/bowl/soup/white_beet,
+/obj/item/reagent_containers/cup/bowl/soup/white_beet{
+	pixel_x = -4;
+	pixel_y = 11
+	},
+/turf/open/floor/carpet,
+/area/awaymission/avangarde17/outside)
+"dW" = (
+/obj/machinery/power/smes/full{
+	name = "трансформатор"
+	},
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
+"eb" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 8
+	},
+/turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside)
 "ey" = (
-/obj/machinery/door/airlock/wood,
-/turf/open/floor/wood/cherry,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/pod/dark,
 /area/awaymission/avangarde17/outside)
 "eJ" = (
 /obj/structure/flora/tree/pine/style_random,
@@ -58,19 +171,43 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/mountains)
+"fi" = (
+/obj/structure/flora/tree/stump,
+/obj/structure/flora/grass/both/style_random,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
 "fk" = (
 /obj/effect/turf_decal/road/trim{
 	dir = 4
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside)
+"fC" = (
+/obj/machinery/door/poddoor/shutters{
+	id = "avangarde_city_opg"
+	},
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "fR" = (
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/mountains)
+"gr" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "gA" = (
 /obj/structure/cable,
 /obj/machinery/light/small/directional/west,
 /turf/open/floor/catwalk_floor/iron_dark,
+/area/awaymission/avangarde17/outside)
+"gM" = (
+/obj/structure/flora/tree/dead/style_random,
+/obj/structure/flora/grass/both/style_random,
+/turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "gR" = (
 /obj/effect/bump_teleporter{
@@ -87,14 +224,61 @@
 /obj/structure/flora/grass/green/style_random,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
+"hR" = (
+/obj/structure/toilet{
+	pixel_y = 8;
+	dir = 8;
+	color = "#A1662F";
+	name = "сельский туалет";
+	desc = "Сельский туалет! - И лучше кайфа нет"
+	},
+/obj/effect/decal/cleanable/cobweb/cobweb2,
+/obj/machinery/light/small/directional/east,
+/obj/effect/decal/cleanable/obama,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "hT" = (
 /obj/effect/turf_decal/road/dotted_line/continuous{
 	dir = 4
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside)
+"ic" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 5
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
+"iN" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
+"iU" = (
+/obj/structure/window/spawner/directional/east,
+/obj/structure/platform/wood{
+	color = "#A1662F"
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "jf" = (
 /turf/open/floor/stone,
+/area/awaymission/avangarde17/outside)
+"jv" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/loading_area{
+	dir = 4
+	},
+/turf/open/floor/pod/dark,
+/area/awaymission/avangarde17/outside)
+"jC" = (
+/obj/effect/decal/fakelattice{
+	density = 0
+	},
+/obj/structure/cable,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
 "jR" = (
 /obj/effect/turf_decal/siding/thinplating/corner,
@@ -107,6 +291,15 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/mountains)
+"kl" = (
+/obj/item/stack/tile/wood/cherry{
+	pixel_x = 14;
+	pixel_y = 3
+	},
+/obj/effect/decal/cleanable/glass,
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "kr" = (
 /obj/structure/platform/wood{
 	color = "#A1662F"
@@ -114,9 +307,25 @@
 /obj/structure/window/spawner/directional/south,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside)
+"kQ" = (
+/obj/structure/shelves/style2,
+/obj/item/radio/entertainment/speakers/physical{
+	pixel_x = -3;
+	pixel_y = 14
+	},
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "kV" = (
 /obj/structure/flora/bush/snow/style_random,
 /turf/open/misc/dirt/dark/station,
+/area/awaymission/avangarde17/outside)
+"lb" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside)
 "le" = (
 /obj/effect/turf_decal/road/crosswalk,
@@ -132,11 +341,11 @@
 /turf/closed/indestructible/binary,
 /area/awaymission/avangarde17/outside/mountains)
 "ma" = (
-/obj/effect/turf_decal/tile/bar/diagonal_edge,
-/obj/effect/turf_decal/tile/brown/diagonal_centre,
-/obj/structure/sink/directional/east,
-/obj/structure/mirror/directional/west,
-/turf/open/floor/iron/diagonal,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/obj/machinery/door/airlock/wood,
+/turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside)
 "mr" = (
 /obj/effect/turf_decal/siding/thinplating{
@@ -144,14 +353,20 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside)
+"ms" = (
+/obj/structure/swings/style_2,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
+"mw" = (
+/obj/structure/railing/wooden_fence,
+/turf/open/misc/dirt/dark/station,
+/area/awaymission/avangarde17/outside)
 "mC" = (
-/obj/effect/turf_decal/tile/bar/diagonal_edge,
-/obj/effect/turf_decal/tile/brown/diagonal_centre,
-/obj/structure/light_fake/small/directional/east,
-/obj/structure/toilet{
-	dir = 4
+/obj/effect/decal/cleanable/generic,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
 	},
-/turf/open/floor/iron/diagonal,
+/turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside)
 "mN" = (
 /obj/structure/cable,
@@ -160,14 +375,43 @@
 	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
+"mO" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/fakelattice{
+	density = 0
+	},
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "mP" = (
 /obj/structure/flora/rock/pile/icy/style_random,
 /obj/structure/flora/grass/green/style_random,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
+"nq" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "nz" = (
-/obj/structure/dresser,
-/turf/open/floor/wood/large/cherry,
+/obj/structure/fence,
+/turf/open/misc/asteroid/moon,
+/area/awaymission/avangarde17/outside)
+"nT" = (
+/turf/open/floor/pod/dark,
+/area/awaymission/avangarde17/outside)
+"oc" = (
+/obj/effect/decal/cleanable/garbage{
+	pixel_x = -5;
+	pixel_y = 13
+	},
+/obj/effect/decal/cleanable/garbage{
+	pixel_x = 9;
+	pixel_y = 7
+	},
+/obj/effect/decal/cleanable/garbage{
+	pixel_x = -5;
+	pixel_y = 1
+	},
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
 "oh" = (
 /obj/effect/turf_decal/siding/thinplating/corner,
@@ -175,6 +419,16 @@
 	dir = 1
 	},
 /turf/open/floor/stone,
+/area/awaymission/avangarde17/outside)
+"oE" = (
+/obj/structure/shelves,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
+"oH" = (
+/obj/structure/railing/wooden_fence{
+	dir = 1
+	},
+/turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "oI" = (
 /obj/effect/baseturf_helper{
@@ -187,8 +441,11 @@
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside)
 "oU" = (
-/obj/structure/closet/cabinet,
-/turf/open/floor/wood/large/cherry,
+/obj/structure/flora/grass/brown/style_random,
+/obj/structure/fence{
+	dir = 4
+	},
+/turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "pe" = (
 /obj/structure/shelves/style2,
@@ -206,6 +463,15 @@
 	},
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
+"pk" = (
+/obj/structure/barricade/wooden,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
+"pK" = (
+/obj/machinery/oven/range,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "pU" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/outside)
@@ -214,14 +480,14 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside)
 "pZ" = (
-/obj/structure/fake_stairs/wood/directional/east,
+/obj/structure/light_fake/small/directional/south,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "qf" = (
 /obj/structure/chair/wood{
-	dir = 4
+	dir = 1
 	},
-/turf/open/floor/wood/cherry,
+/turf/open/floor/carpet,
 /area/awaymission/avangarde17/outside)
 "qg" = (
 /obj/structure/cable,
@@ -255,6 +521,19 @@
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
+"rz" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/structure/spider/stickyweb,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 5
+	},
+/mob/living/basic/mouse/rat{
+	dir = 4;
+	name = "Ragepie";
+	desc = "Не зли эту крысу."
+	},
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "rC" = (
 /obj/effect/turf_decal/road/dotted_line/continuous{
 	dir = 6
@@ -262,18 +541,43 @@
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside)
 "rF" = (
-/obj/machinery/shower/directional/east,
-/obj/effect/turf_decal/siding/thinplating/end{
-	dir = 4
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/button/door/directional/east{
+	id = "avangarde_city_opg"
 	},
-/obj/structure/fluff/shower_drain,
-/turf/open/floor/iron/small,
+/turf/open/floor/pod/dark,
 /area/awaymission/avangarde17/outside)
 "rY" = (
-/obj/structure/chair/wood{
-	dir = 8
+/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
+"sa" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
 	},
-/turf/open/floor/wood/cherry,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
+"sd" = (
+/obj/effect/decal/cleanable/obama/snow,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
+"sv" = (
+/obj/structure/railing{
+	dir = 4;
+	color = "#A1662F"
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/obj/structure/cable,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
+"sO" = (
+/obj/structure/barricade/wooden,
+/obj/structure/barricade/wooden/crude,
+/obj/effect/decal/cleanable/cobweb,
+/turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside)
 "sS" = (
 /obj/structure/table/reinforced,
@@ -304,6 +608,13 @@
 /obj/structure/fence,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
+"to" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "tz" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 8
@@ -313,6 +624,12 @@
 "ud" = (
 /turf/closed/wall/mineral/wood/nonmetal,
 /area/awaymission/avangarde17/outside)
+"ug" = (
+/obj/effect/decal/cleanable/generic,
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/structure/cable,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "uS" = (
 /obj/effect/bump_teleporter{
 	id = "car_tunnel2_4";
@@ -320,6 +637,21 @@
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
+"uT" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/cleanable/glass,
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/structure/cable,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
+"vb" = (
+/obj/structure/light_fake/small/directional/west,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
+"vf" = (
+/obj/structure/table/wood,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "vi" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
@@ -354,12 +686,26 @@
 	},
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside)
+"vR" = (
+/obj/structure/dresser,
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
 "vW" = (
 /obj/effect/turf_decal/siding/wideplating_new/end{
 	dir = 1
 	},
 /obj/structure/closet/crate/grave/filled,
 /turf/open/misc/dirt/dark/station,
+/area/awaymission/avangarde17/outside)
+"wI" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/effect/decal/cleanable/blood/old,
+/obj/structure/cable,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
+"xa" = (
+/obj/structure/girder,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
 "xn" = (
 /obj/effect/bump_teleporter{
@@ -369,12 +715,10 @@
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
 "xq" = (
-/obj/structure/table/wood,
-/obj/structure/showcase/machinery/tv/broken{
-	pixel_x = 0;
-	pixel_y = 9
+/obj/structure/chair/wood{
+	dir = 8
 	},
-/turf/open/floor/wood/cherry,
+/turf/open/floor/carpet,
 /area/awaymission/avangarde17/outside)
 "xt" = (
 /obj/structure/fence/corner{
@@ -383,15 +727,25 @@
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "xu" = (
-/obj/structure/table/wood,
-/obj/structure/sink/shell_only/directional/north,
-/turf/open/floor/wood/cherry,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/small/directional/south,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/pod/dark,
 /area/awaymission/avangarde17/outside)
 "xC" = (
 /obj/effect/turf_decal/road/dotted_line/continuous{
 	dir = 8
 	},
 /turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside)
+"xM" = (
+/obj/structure/flora/grass/both/style_random,
+/obj/structure/flora/tree/dead/style_random,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
+"yc" = (
+/obj/structure/light_fake/small/directional/north,
+/turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "yh" = (
 /turf/open/floor/carpet,
@@ -407,13 +761,17 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside)
 "zS" = (
-/obj/structure/chair/sofa/right/brown{
-	dir = 8
-	},
-/turf/open/floor/wood/cherry,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
 "Ag" = (
 /obj/structure/flora/grass/brown/style_random,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
+"Ax" = (
+/obj/structure/railing/wooden_fence{
+	dir = 10
+	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "Ay" = (
@@ -438,6 +796,13 @@
 /obj/structure/flora/tree/pine/style_random,
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside)
+"AS" = (
+/obj/structure/flora/bush/snow/style_random,
+/obj/structure/fence{
+	dir = 4
+	},
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
 "Bb" = (
 /obj/effect/turf_decal/road/trim{
 	dir = 1
@@ -448,9 +813,36 @@
 /obj/structure/cable,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/awaymission/avangarde17/outside)
+"Bj" = (
+/obj/structure/table/reinforced,
+/obj/structure/window/spawner/directional/south,
+/obj/structure/barricade/wooden/crude/snow,
+/obj/structure/curtain/bounty/start_closed,
+/turf/open/floor/iron,
+/area/awaymission/avangarde17/outside)
+"Bw" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/pod/dark,
+/area/awaymission/avangarde17/outside)
 "BD" = (
 /obj/structure/flora/grass/green/style_random,
 /turf/open/misc/asteroid/moon,
+/area/awaymission/avangarde17/outside)
+"BH" = (
+/obj/structure/cable,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
+"Cq" = (
+/obj/structure/closet/crate/large,
+/obj/item/stack/sheet/iron/five,
+/obj/item/stack/sheet/iron/five,
+/obj/item/stack/sheet/glass,
+/obj/item/stack/sheet/glass,
+/obj/item/stack/sheet/glass,
+/obj/item/stack/sheet/glass,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/pod/dark,
 /area/awaymission/avangarde17/outside)
 "CE" = (
 /obj/effect/turf_decal/road/trim/corner{
@@ -462,6 +854,10 @@
 /obj/machinery/power/tracker,
 /turf/open/floor/iron/solarpanel/airless,
 /area/awaymission/avangarde17/outside)
+"CH" = (
+/obj/structure/light_fake/small/directional/east,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
 "Dg" = (
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
@@ -470,6 +866,20 @@
 	dir = 4
 	},
 /turf/open/floor/stone,
+/area/awaymission/avangarde17/outside)
+"Dw" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
+"Dz" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
 "DL" = (
 /turf/open/floor/iron/solarpanel/airless,
@@ -481,8 +891,18 @@
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "Eh" = (
-/obj/structure/shelves/style2,
-/turf/open/floor/wood/cherry,
+/obj/structure/railing/wooden_fence{
+	dir = 8
+	},
+/turf/open/misc/dirt/dark/station,
+/area/awaymission/avangarde17/outside)
+"El" = (
+/obj/machinery/shower/directional/west,
+/obj/effect/turf_decal/siding/thinplating/end{
+	dir = 8
+	},
+/obj/structure/fluff/shower_drain,
+/turf/open/floor/iron/small,
 /area/awaymission/avangarde17/outside)
 "Em" = (
 /obj/effect/turf_decal/road/trim/corner{
@@ -494,6 +914,15 @@
 /obj/structure/flora/grass/green/style_random,
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside)
+"Ep" = (
+/obj/effect/turf_decal/tile/brown/diagonal_centre,
+/obj/effect/turf_decal/tile/bar/diagonal_edge,
+/obj/structure/sink/directional/south,
+/obj/structure/mirror/directional/north{
+	pixel_y = 36
+	},
+/turf/open/floor/iron/diagonal,
+/area/awaymission/avangarde17/outside)
 "Ez" = (
 /obj/structure/flora/tree/dead/style_random,
 /turf/open/misc/dirt/dark/station,
@@ -502,9 +931,36 @@
 /obj/structure/flora/grass/both/style_random,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
+"Fb" = (
+/obj/item/stack/tile/wood/cherry{
+	pixel_x = 14;
+	pixel_y = -4
+	},
+/obj/item/stack/sheet/mineral/wood{
+	pixel_x = -17;
+	pixel_y = 11
+	},
+/obj/machinery/power/apc/auto_name/directional/north,
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
+"FL" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 1
+	},
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "FZ" = (
 /obj/effect/turf_decal/siding/thinplating,
 /turf/open/floor/stone,
+/area/awaymission/avangarde17/outside)
+"Ga" = (
+/obj/item/stack/tile/wood/cherry{
+	pixel_x = -8;
+	pixel_y = -6
+	},
+/obj/structure/spider/stickyweb,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
 "Ge" = (
 /obj/effect/turf_decal/road/trim{
@@ -540,6 +996,15 @@
 "GE" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/outside/mountains)
+"GT" = (
+/obj/machinery/power/port_gen/pacman/pre_loaded{
+	sheets = 50;
+	time_per_sheet = 300
+	},
+/obj/item/stack/sheet/mineral/plasma/fifty,
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "Hn" = (
 /obj/structure/fence/corner{
 	dir = 8
@@ -559,6 +1024,13 @@
 "HI" = (
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside)
+"HS" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "HT" = (
 /obj/structure/mineral_door/wood,
 /turf/open/floor/wood/cherry,
@@ -568,6 +1040,20 @@
 	dir = 4
 	},
 /turf/open/misc/asteroid/moon,
+/area/awaymission/avangarde17/outside)
+"Id" = (
+/obj/structure/barricade/wooden,
+/obj/structure/spider/stickyweb,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 10
+	},
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
+"Ir" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 8
+	},
+/turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside)
 "Iz" = (
 /obj/effect/turf_decal/road/trim{
@@ -588,11 +1074,27 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
+"Js" = (
+/obj/structure/railing{
+	dir = 4;
+	color = "#A1662F"
+	},
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "Jx" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
 	},
 /turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
+"JF" = (
+/obj/effect/decal/fakelattice{
+	density = 0
+	},
+/obj/machinery/light_switch/directional/north,
+/obj/structure/cable,
+/turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
 "JH" = (
 /obj/effect/turf_decal/road/crosswalk{
@@ -609,11 +1111,13 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside)
 "Kd" = (
-/obj/structure/platform/wood{
-	color = "#A1662F"
+/obj/effect/turf_decal/tile/brown/diagonal_centre,
+/obj/effect/turf_decal/tile/bar/diagonal_edge,
+/obj/structure/toilet{
+	dir = 4
 	},
-/obj/structure/window/spawner/directional/east,
-/turf/open/floor/wood/cherry,
+/obj/structure/light_fake/small/directional/north,
+/turf/open/floor/iron/diagonal,
 /area/awaymission/avangarde17/outside)
 "Ke" = (
 /obj/machinery/light/small/directional/north,
@@ -621,11 +1125,13 @@
 /obj/item/multitool,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
+"Kq" = (
+/obj/effect/turf_decal/siding/wood/cherry,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
 "Kt" = (
-/obj/structure/platform/wood{
-	color = "#A1662F"
-	},
-/obj/structure/window/spawner/directional/north,
+/obj/effect/turf_decal/siding/wood/cherry,
+/obj/machinery/door/airlock/wood,
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside)
 "Ku" = (
@@ -635,26 +1141,77 @@
 "Ky" = (
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside)
+"KG" = (
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 1
+	},
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "KJ" = (
 /obj/effect/turf_decal/road/dotted_line{
 	dir = 9
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside)
-"KR" = (
-/obj/structure/chair/sofa/left/brown{
-	dir = 8
+"KM" = (
+/obj/structure/window/spawner/directional/north,
+/obj/structure/platform/wood{
+	color = "#A1662F"
 	},
 /turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
+"KR" = (
+/turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside)
 "Lk" = (
 /obj/structure/cable,
 /obj/machinery/light_switch/directional/north,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/awaymission/avangarde17/outside)
+"Lw" = (
+/obj/structure/closet/crate/trashcart/soviet,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
+"Ly" = (
+/obj/structure/closet/crate/large,
+/obj/item/stack/rods/ten,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/pod/dark,
+/area/awaymission/avangarde17/outside)
+"LQ" = (
+/obj/item/stack/sheet/mineral/wood{
+	pixel_x = -15;
+	pixel_y = -11
+	},
+/obj/effect/decal/cleanable/generic,
+/obj/structure/cable,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
+"LX" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "LY" = (
 /obj/structure/table/wood/fancy/royalblack,
 /turf/open/floor/stone,
+/area/awaymission/avangarde17/outside)
+"Mv" = (
+/obj/structure/closet/crate/large,
+/obj/item/storage/medkit/brute,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/pod/dark,
+/area/awaymission/avangarde17/outside)
+"MD" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/structure/spider/stickyweb,
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 8
+	},
+/turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside)
 "MN" = (
 /obj/effect/turf_decal/road/dotted_line{
@@ -667,10 +1224,24 @@
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
 "MX" = (
-/obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
+/obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/machinery/door/airlock/wood,
 /turf/open/floor/iron/diagonal,
+/area/awaymission/avangarde17/outside)
+"NE" = (
+/obj/structure/closet/crate/cardboard,
+/obj/item/reagent_containers/cup/glass/bottle/vodka{
+	desc = "Разлит на Лазаре.";
+	name = "Столичная"
+	},
+/obj/item/reagent_containers/cup/glass/bottle/vodka{
+	desc = "Разлит на Лазаре.";
+	name = "Столичная"
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/pod/dark,
 /area/awaymission/avangarde17/outside)
 "NM" = (
 /turf/open/floor/plating,
@@ -704,6 +1275,33 @@
 	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
+"PJ" = (
+/obj/structure/table/wood,
+/obj/item/plate/oven_tray{
+	pixel_x = 1;
+	pixel_y = 5
+	},
+/obj/item/kitchen/rollingpin{
+	pixel_x = 5;
+	pixel_y = 3
+	},
+/obj/item/knife/kitchen{
+	pixel_x = -7;
+	pixel_y = 5
+	},
+/obj/item/rag{
+	pixel_x = 3;
+	pixel_y = -1
+	},
+/turf/open/floor/wood/cherry,
+/area/awaymission/avangarde17/outside)
+"PS" = (
+/obj/structure/table/wood,
+/obj/structure/sink/shell_only/directional/west{
+	pixel_x = 8
+	},
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "Qb" = (
 /obj/structure/fence{
 	pixel_x = 0;
@@ -728,11 +1326,21 @@
 /obj/structure/flora/rock/pile/icy/style_random,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
+"Rx" = (
+/obj/structure/cable/multilayer/multiz,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
 "RJ" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 1
 	},
 /turf/open/floor/stone,
+/area/awaymission/avangarde17/outside)
+"RR" = (
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 4
+	},
+/turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside)
 "Si" = (
 /obj/structure/altar,
@@ -761,6 +1369,17 @@
 	},
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside)
+"SQ" = (
+/obj/structure/cable,
+/obj/structure/mineral_door/wood,
+/turf/open/floor/plating,
+/area/awaymission/avangarde17/outside)
+"Te" = (
+/obj/structure/stairs/wood{
+	dir = 1
+	},
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "Tg" = (
 /obj/effect/turf_decal/road/dotted_line/continuous,
 /turf/open/floor/asphalt/avangarde,
@@ -774,6 +1393,28 @@
 "Tv" = (
 /obj/structure/flora/rock/pile/icy/style_random,
 /turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
+"Tw" = (
+/obj/effect/decal/cleanable/glass,
+/obj/structure/cable,
+/turf/open/floor/wood/large/cherry,
+/area/awaymission/avangarde17/outside)
+"Tx" = (
+/obj/structure/closet/crate/cardboard,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	name = "Бояринъ";
+	desc = "Пить только с тазиком."
+	},
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/pod/dark,
 /area/awaymission/avangarde17/outside)
 "TV" = (
 /obj/structure/flora/bush/snow/style_random,
@@ -798,6 +1439,16 @@
 /obj/structure/flora/rock/icy/style_random,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
+"UT" = (
+/obj/effect/turf_decal/siding/wood/cherry/corner{
+	dir = 8
+	},
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
+"Vf" = (
+/obj/structure/railing/wooden_fence,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
 "Vk" = (
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
@@ -807,6 +1458,17 @@
 	},
 /obj/structure/cable,
 /turf/open/misc/dirt/dark/station,
+/area/awaymission/avangarde17/outside)
+"VG" = (
+/obj/machinery/door/airlock/hatch{
+	name = "Советская 2- Подъезд 2"
+	},
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
+"VV" = (
+/obj/structure/mineral_door/wood,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/outside)
 "Wi" = (
 /obj/effect/turf_decal/road/trim/corner{
@@ -837,16 +1499,14 @@
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside)
 "WC" = (
-/obj/structure/bed/double{
-	dir = 1
-	},
-/obj/item/bedsheet/brown/double{
-	dir = 1
-	},
-/turf/open/floor/wood/large/cherry,
+/obj/structure/barricade/wooden/snowed,
+/obj/structure/barricade/wooden/crude/snow,
+/turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "WG" = (
-/obj/structure/railing/platform,
+/obj/structure/railing/wooden_fence{
+	dir = 8
+	},
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "WX" = (
@@ -858,38 +1518,87 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside)
+"XC" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/pod/dark,
+/area/awaymission/avangarde17/outside)
 "XF" = (
 /obj/effect/turf_decal/road/dotted_line{
 	dir = 4
 	},
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
+"XG" = (
+/obj/structure/closet/crate/cardboard,
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское"
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское"
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское"
+	},
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	desc = "То самое.";
+	name = "Жигулевское"
+	},
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/pod/dark,
+/area/awaymission/avangarde17/outside)
+"XP" = (
+/obj/structure/shelves/style2,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
+"XV" = (
+/obj/structure/shelves,
+/obj/item/plate/small{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/obj/item/plate/small{
+	pixel_x = 5;
+	pixel_y = -6
+	},
+/obj/item/plate/small{
+	pixel_x = 5;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_x = 9;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_x = 4;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_x = -1;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/condiment/saltshaker{
+	pixel_x = -9;
+	pixel_y = -5
+	},
+/obj/item/reagent_containers/condiment/peppermill{
+	pixel_x = -6;
+	pixel_y = -5
+	},
+/obj/effect/turf_decal/siding/wood/cherry{
+	dir = 5
+	},
+/obj/machinery/light/small/directional/south,
+/turf/open/floor/wood/parquet/cherry,
+/area/awaymission/avangarde17/outside)
 "Yc" = (
-/obj/structure/closet/secure_closet/freezer/empty,
-/obj/item/reagent_containers/condiment/enzyme,
-/obj/item/reagent_containers/condiment/rice,
-/obj/item/food/grown/potato,
-/obj/item/food/grown/potato,
-/obj/item/food/grown/potato,
-/obj/item/food/grown/potato,
-/obj/item/food/grown/redbeet,
-/obj/item/food/grown/redbeet,
-/obj/item/food/grown/redbeet,
-/obj/item/food/grown/redbeet,
-/obj/item/food/grown/whitebeet,
-/obj/item/food/grown/whitebeet,
-/obj/item/food/grown/tomato,
-/obj/item/food/grown/tomato,
-/obj/item/food/grown/tomato,
-/obj/item/food/grown/tomato,
-/obj/item/food/meat/slab/pig,
-/obj/item/food/meat/slab/pig,
-/obj/item/food/meat/slab/pig,
-/obj/item/food/meat/slab/pig,
-/obj/item/food/grown/cabbage,
-/obj/item/food/grown/carrot,
-/obj/item/food/grown/carrot,
-/turf/open/floor/wood/cherry,
+/obj/structure/railing/wooden_fence{
+	dir = 9
+	},
+/turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
 "Yg" = (
 /obj/structure/flora/tree/dead/style_random,
@@ -899,9 +1608,19 @@
 /obj/effect/turf_decal/road/trim,
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
+"Yz" = (
+/obj/structure/flora/grass/both/style_random,
+/obj/structure/fence,
+/turf/open/misc/snow/avangarde,
+/area/awaymission/avangarde17/outside)
 "YA" = (
-/obj/structure/table/wood,
-/turf/open/floor/wood/large/cherry,
+/obj/structure/bed/double{
+	dir = 1
+	},
+/obj/item/bedsheet/brown/double{
+	dir = 1
+	},
+/turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside)
 "YL" = (
 /obj/machinery/door/airlock/hatch,
@@ -31395,22 +32114,22 @@ Dg
 Ag
 Ag
 Dg
-Sl
-Yg
-Tv
-Dg
-hq
-hq
-Dg
-Dg
-Sl
-Dg
-Yg
-Dg
-Ag
-Ag
-Dg
-Dg
+Ea
+tn
+nz
+nz
+nz
+tn
+tn
+tn
+tn
+tn
+tn
+tn
+tn
+tn
+Yz
+xt
 Sl
 Dg
 Dg
@@ -31652,22 +32371,22 @@ Dg
 Sl
 Dg
 Dg
+AM
+Yg
+Dg
+Dg
+CH
+Dg
+CH
 Dg
 Dg
 Dg
+Py
+Py
 hq
-hq
-Dg
-Sl
-Sl
-Tv
-Dg
-gU
-hq
-gU
 Dg
 Dg
-Dg
+AM
 Dg
 Dg
 Dg
@@ -31909,22 +32628,22 @@ Sl
 Dg
 qA
 qA
+Ic
 Dg
-Sl
+Ag
+sd
+pU
+bv
+pU
+xM
 Dg
-Sl
 gU
 Dg
 Dg
-gU
 Dg
-Py
 Dg
 hq
-Dg
-Dg
-Dg
-Dg
+AS
 Tv
 Dg
 Yg
@@ -32166,22 +32885,22 @@ Dg
 gU
 bT
 qA
+AM
 Dg
+Ag
+oI
+pU
+pU
+pU
+pU
+pU
+pU
+pU
+pU
+pU
+yc
 Dg
-Dg
-Dg
-Rh
-Vk
-Vk
-Vk
-Vk
-UI
-hq
-Dg
-Dg
-Sl
-Dg
-Sl
+Ic
 Ag
 Ag
 Dg
@@ -32423,22 +33142,22 @@ Dg
 qA
 bT
 qA
-qA
+Ic
+Ag
 Dg
-Sl
-Yg
-Vk
-Vk
-Vk
-Rh
-Vk
-Vk
+pU
+dW
+pU
+sO
+Ga
+mO
+xa
+pk
+Id
+pU
+WC
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Ic
 Ag
 Ag
 Dg
@@ -32680,22 +33399,22 @@ gU
 qA
 qA
 qA
-qA
+oU
 Dg
 Dg
+pU
+mN
+SQ
+sv
+Js
+LQ
+kl
+ar
+ug
+Bj
+WC
 Dg
-Dg
-Rh
-Vk
-Vk
-Vk
-Rh
-Vk
-Dg
-Dg
-Yg
-Dg
-Dg
+Ic
 Sl
 Dg
 Dg
@@ -32937,22 +33656,22 @@ qA
 qA
 Ez
 bT
-qA
+AM
 Dg
-Sl
-Py
 Dg
-Sl
-Ag
-Py
-Vk
-Vk
-Vk
-Sl
+pU
+GT
+pU
+Te
+Te
+ic
+gr
+HS
+jC
+pU
+WC
 Dg
-Sl
-Dg
-hq
+AM
 Dg
 qA
 qA
@@ -33194,22 +33913,22 @@ qA
 bT
 bT
 qA
-qA
-Sl
-Py
-Py
+AM
 Dg
-Ag
-Ag
-Sl
-gU
-Vk
-Vk
+pZ
+oI
+pU
+pU
+pU
+pU
+pU
+VV
+pU
+JF
+pU
+hq
 Dg
-Dg
-Dg
-Dg
-Sl
+AM
 gU
 qA
 qA
@@ -33451,22 +34170,22 @@ kV
 qA
 qA
 qA
+AM
+hq
 Dg
+pU
+Tx
+Ly
+Mv
+Bw
+pU
+hR
+pU
+bA
+pU
+Lw
 Dg
-Yg
-Dg
-Dg
-Sl
-Ag
-Dg
-Dg
-Sl
-Vk
-Dg
-Dg
-Sl
-Dg
-Dg
+cF
 qA
 bT
 qA
@@ -33708,22 +34427,22 @@ qA
 Ez
 qA
 qA
-Dg
-Sl
-Dg
-gU
-Dg
-Dg
-Dg
-Sl
-Dg
-Yg
-UI
-Sl
-Dg
-Sl
-Dg
+AM
 hq
+Dg
+pU
+Cq
+jv
+jv
+xu
+pU
+pU
+pU
+Fb
+pU
+Lw
+Dg
+oU
 qA
 qA
 qA
@@ -33965,22 +34684,22 @@ ti
 ti
 qA
 qA
+AM
+hq
 Dg
-Dg
-Dg
-Sl
-Tv
-Dg
-Dg
-Sl
-Dg
-Dg
-Vk
-Dg
-Dg
-Dg
-Dg
-Sl
+pU
+nT
+to
+sa
+bS
+pU
+rY
+MD
+wI
+pU
+pU
+yc
+oU
 qA
 Ez
 bT
@@ -34222,22 +34941,22 @@ Dg
 Sl
 Dg
 Dg
-gU
-bT
-qA
-qA
-Ez
+AM
 Dg
 Dg
+pU
+XC
+LX
+zS
+ey
+VG
+mC
+nq
+uT
+pU
+WC
 Dg
-Dg
-Sl
-Dg
-Dg
-Dg
-Sl
-Dg
-Dg
+AM
 bT
 bT
 qA
@@ -34479,22 +35198,22 @@ Sl
 Dg
 Yg
 Dg
-Ag
-Ag
+AM
 Dg
+pZ
+pU
+NE
+Dz
+zS
+cx
+pU
+Rx
+BH
+Tw
+Bj
+WC
 Dg
-Sl
-Dg
-Dg
-Dg
-Dg
-gU
-Dg
-Sl
-Py
-Dg
-Dg
-Sl
+di
 qA
 qA
 qA
@@ -34736,22 +35455,22 @@ Tv
 Dg
 gU
 hq
-gU
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Sl
-Dg
+AM
 Dg
 Py
-Py
+pU
+XG
+Dw
+iN
+rF
+pU
+rz
+lb
+oc
+pU
+WC
 Dg
-Dg
+AM
 hq
 qA
 qA
@@ -34993,22 +35712,22 @@ Dg
 Py
 Dg
 hq
+AM
 Dg
 Dg
-Dg
-Dg
-Tv
-Dg
-Yg
-gU
-Dg
-Dg
-Sl
-Py
-Dg
-Dg
-Sl
-Dg
+pU
+pU
+fC
+fC
+pU
+pU
+pU
+VG
+pU
+pU
+pU
+yc
+cF
 Sl
 Dg
 hq
@@ -35250,22 +35969,22 @@ Vk
 UI
 hq
 Dg
-Dg
-Sl
-Dg
-Sl
-Ag
+AM
 Ag
 Dg
 Dg
-Py
-Py
+ah
+Vk
+Vk
+ah
 Dg
+qA
+qA
+vb
 Dg
+hq
 Dg
-Dg
-Dg
-Dg
+AM
 Dg
 Dg
 Sl
@@ -35507,22 +36226,22 @@ Vk
 Vk
 Dg
 Dg
+AM
 Dg
 Dg
-Dg
-Dg
-Ag
-Ag
-Dg
-Sl
+fi
+Ic
 Vk
-Rh
-Dg
-Yg
-Sl
-Py
+Vk
+Ic
+gM
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+di
 Sl
 Dg
 Dg
@@ -35764,22 +36483,22 @@ Vk
 Rh
 Vk
 Dg
-Dg
-Yg
-Dg
-Dg
-Yg
-Tv
-Dg
-hq
-hq
-Dg
-Dg
-Sl
-Dg
-Py
-Sl
-Py
+Ss
+au
+tn
+tn
+pU
+Vk
+Vk
+pU
+au
+au
+au
+au
+au
+au
+Qb
+PH
 Dg
 Dg
 Sl
@@ -36026,12 +36745,12 @@ Dg
 Dg
 Dg
 Dg
+Vk
+Vk
+Vk
 Dg
-hq
-hq
 Dg
-Sl
-Sl
+Ag
 Tv
 Dg
 gU
@@ -36283,11 +37002,11 @@ Dg
 Sl
 Dg
 Sl
+Vk
+Vk
+Vk
 Dg
 Sl
-gU
-Dg
-Dg
 gU
 Dg
 Py
@@ -36540,11 +37259,11 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Rh
 Vk
 Vk
+Vk
+Sl
+Dg
 Vk
 Vk
 UI
@@ -36676,19 +37395,19 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -36797,11 +37516,11 @@ Dg
 Sl
 Tv
 Dg
-Sl
-Yg
 Vk
 Vk
 Vk
+Vk
+Dg
 Rh
 Vk
 Vk
@@ -36933,26 +37652,26 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -37053,13 +37772,13 @@ Sl
 Dg
 Dg
 Sl
-Dg
-Dg
-Dg
-Dg
-Rh
+Ag
 Vk
 Vk
+Vk
+Vk
+Dg
+Dg
 Vk
 Rh
 Vk
@@ -37190,29 +37909,29 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -37310,11 +38029,11 @@ Dg
 Dg
 Ez
 Dg
-Dg
-Sl
-Py
-Dg
-Sl
+Ag
+Vk
+Vk
+Vk
+Vk
 Ag
 Py
 Vk
@@ -37447,29 +38166,29 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -37568,10 +38287,10 @@ Dg
 Yg
 Dg
 Sl
-Py
-Py
-Dg
-Ag
+Vk
+Vk
+Vk
+Vk
 Ag
 Sl
 gU
@@ -37713,20 +38432,20 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-ud
-ud
-ud
-ud
-ud
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -37825,11 +38544,11 @@ Dg
 gU
 Dg
 Dg
-Yg
-Dg
-Dg
-Sl
-Ag
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Sl
@@ -37974,18 +38693,18 @@ Dg
 Dg
 Dg
 Dg
-ud
-mC
-ma
-rF
-ud
 Dg
 Dg
 Dg
 Dg
 Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -38083,11 +38802,11 @@ Dg
 Dg
 Sl
 Dg
-gU
+Vk
+Vk
+Vk
+Vk
 Dg
-Dg
-Dg
-Yg
 Tv
 Dg
 hq
@@ -38231,18 +38950,18 @@ Dg
 Dg
 Dg
 Dg
-ud
-ud
-MX
-ud
-ud
-ud
-Ht
-ud
-ud
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -38341,10 +39060,10 @@ Dg
 Dg
 Dg
 Sl
-Tv
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
 Dg
 hq
 hq
@@ -38488,21 +39207,21 @@ Dg
 Dg
 Dg
 Dg
-ud
-WC
-HI
-oU
-ud
-Yc
-zb
-di
-ud
 Dg
 Dg
 Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -38599,9 +39318,9 @@ bT
 qA
 qA
 Ez
-Dg
-Dg
-Sl
+Vk
+Vk
+Vk
 Dg
 Sl
 gU
@@ -38745,21 +39464,21 @@ Dg
 Dg
 Dg
 Dg
-Kt
-nz
-HI
-HI
-au
-eQ
-eQ
-xu
-ud
 Dg
 Dg
 Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -38856,9 +39575,9 @@ bT
 qA
 kV
 qA
-En
-Dg
-Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Rh
@@ -39002,21 +39721,21 @@ Dg
 Dg
 Dg
 Dg
-Kt
-HI
-HI
-HI
-ud
-qf
-eQ
-zb
-kr
 Dg
 Dg
 Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -39113,10 +39832,10 @@ Ez
 qA
 ti
 Ez
-En
-Tv
+Vk
+Vk
+Vk
 Dg
-Sl
 Yg
 Vk
 Vk
@@ -39259,21 +39978,21 @@ Dg
 Dg
 Dg
 Dg
-Kt
-HI
-HI
-HI
-ud
-zb
-eQ
-Eh
-kr
 Dg
 Dg
 Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -39370,9 +40089,9 @@ qA
 Dg
 Sl
 Dg
-Dg
-Sl
-Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -39516,21 +40235,21 @@ Dg
 Dg
 Dg
 Dg
-ud
-YA
-YA
-YA
-ud
-rY
-eQ
-Eh
-ud
 Dg
 Dg
 Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -39628,9 +40347,9 @@ Dg
 Yg
 Dg
 Dg
+Vk
+Vk
 Dg
-Dg
-Sl
 Py
 Dg
 Sl
@@ -39773,15 +40492,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-ud
-ud
-ud
-ud
-ud
-ey
-ud
-ud
 Dg
 Dg
 Dg
@@ -39790,6 +40500,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -39885,9 +40604,9 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Sl
-Py
+Vk
+Vk
+Vk
 Py
 Dg
 Ag
@@ -40011,11 +40730,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-ud
-ud
-ud
-ud
 Dg
 Dg
 Dg
@@ -40030,15 +40744,6 @@ Dg
 Dg
 Dg
 Dg
-WG
-HI
-vE
-ud
-qf
-zb
-eQ
-xq
-ud
 Dg
 Dg
 Dg
@@ -40048,6 +40753,20 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -40142,9 +40861,9 @@ mP
 Ag
 Sl
 Dg
-Dg
-Dg
-Yg
+Vk
+Vk
+Vk
 Dg
 Dg
 Sl
@@ -40268,11 +40987,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-mC
-ma
-rF
-ud
 Dg
 Dg
 Dg
@@ -40287,15 +41001,6 @@ Dg
 Dg
 Dg
 Dg
-WG
-HI
-HI
-ey
-eQ
-eQ
-eQ
-eQ
-ud
 Dg
 Dg
 Dg
@@ -40305,6 +41010,20 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -40399,9 +41118,9 @@ hq
 Ag
 Ag
 Vk
-Dg
-Sl
-Dg
+Vk
+Vk
+Vk
 gU
 Dg
 Dg
@@ -40525,15 +41244,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-ud
-MX
-ud
-ud
-ud
-Ht
-ud
-ud
 Dg
 Dg
 Dg
@@ -40544,15 +41254,6 @@ Dg
 Dg
 Dg
 Dg
-WG
-HI
-HI
-ud
-Ku
-eQ
-zS
-KR
-ud
 Dg
 Dg
 Dg
@@ -40562,6 +41263,24 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -40656,10 +41375,10 @@ Dg
 Vk
 Vk
 Vk
+Vk
+Vk
+Vk
 Dg
-Dg
-Dg
-Sl
 Tv
 Dg
 Dg
@@ -40782,15 +41501,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-WC
-HI
-oU
-ud
-Yc
-zb
-di
-ud
 Dg
 Dg
 Dg
@@ -40801,15 +41511,6 @@ Dg
 Dg
 Dg
 Dg
-bS
-pZ
-pZ
-ud
-ud
-Kd
-Kd
-ud
-ud
 Dg
 Dg
 Dg
@@ -40819,6 +41520,24 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -40913,9 +41632,9 @@ gU
 Vk
 Rh
 Vk
-Ez
-bT
-qA
+Vk
+Vk
+Vk
 qA
 Ez
 Dg
@@ -41039,15 +41758,6 @@ Dg
 Dg
 Dg
 Dg
-Kt
-nz
-HI
-HI
-au
-eQ
-eQ
-xu
-ud
 Dg
 Dg
 Dg
@@ -41076,6 +41786,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -41170,9 +41889,9 @@ Dg
 Dg
 Dg
 Sl
-bT
-bT
-qA
+Vk
+Vk
+Vk
 kV
 qA
 En
@@ -41296,15 +42015,6 @@ Dg
 Dg
 Dg
 Dg
-Kt
-HI
-HI
-HI
-ud
-qf
-eQ
-zb
-kr
 Dg
 Dg
 Dg
@@ -41333,6 +42043,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -41427,10 +42146,10 @@ Dg
 Dg
 Dg
 Dg
-qA
-Ez
-qA
-ti
+Vk
+Vk
+Vk
+EQ
 Ez
 En
 Dg
@@ -41553,15 +42272,6 @@ Dg
 Dg
 Dg
 Dg
-Kt
-HI
-HI
-HI
-ud
-zb
-eQ
-Eh
-kr
 Dg
 Dg
 Dg
@@ -41590,6 +42300,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -41684,10 +42403,10 @@ Dg
 Sl
 Dg
 Sl
-qA
-qA
-Dg
-Sl
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -41810,15 +42529,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-YA
-YA
-YA
-ud
-rY
-eQ
-Eh
-ud
 Dg
 Dg
 Dg
@@ -41847,6 +42557,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -41942,10 +42661,10 @@ Sl
 Dg
 Sl
 Dg
-gU
-Dg
-Yg
-Dg
+Vk
+Vk
+Vk
+Ag
 Dg
 Sl
 Dg
@@ -42067,15 +42786,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-ud
-ud
-ud
-ud
-ud
-ey
-ud
-ud
 Dg
 Dg
 Dg
@@ -42105,6 +42815,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -42199,9 +42918,9 @@ Dg
 Dg
 Dg
 Sl
-hq
-Dg
-Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -42324,15 +43043,6 @@ Dg
 Dg
 Dg
 Dg
-WG
-HI
-vE
-ud
-qf
-zb
-eQ
-xq
-ud
 Dg
 Dg
 Dg
@@ -42362,6 +43072,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -42456,10 +43175,10 @@ Dg
 Dg
 Sl
 Dg
-hq
-mP
-Ag
-Sl
+Vk
+Vk
+Vk
+Dg
 Dg
 Yg
 Rh
@@ -42581,15 +43300,6 @@ Dg
 Dg
 Dg
 Dg
-WG
-HI
-HI
-ey
-eQ
-eQ
-eQ
-eQ
-ud
 Dg
 Dg
 Dg
@@ -42619,6 +43329,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -42713,9 +43432,9 @@ Sl
 Py
 Dg
 Dg
-Sl
-hq
-Ag
+Vk
+Vk
+Vk
 Ag
 Vk
 Vk
@@ -42838,15 +43557,6 @@ Dg
 Dg
 Dg
 Dg
-WG
-HI
-HI
-ud
-Ku
-eQ
-zS
-KR
-ud
 Dg
 Dg
 Dg
@@ -42876,6 +43586,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -42969,12 +43688,12 @@ hq
 Dg
 Py
 Py
-Dg
-Dg
-Dg
+Sl
 Vk
 Vk
 Vk
+Dg
+Dg
 UI
 Vk
 Vk
@@ -43095,15 +43814,6 @@ Dg
 Dg
 Dg
 Dg
-bS
-pZ
-pZ
-ud
-ud
-Kd
-Kd
-ud
-ud
 Dg
 Dg
 Dg
@@ -43133,6 +43843,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -43227,11 +43946,11 @@ Sl
 Dg
 Yg
 Dg
-Dg
-gU
 Vk
-Rh
 Vk
+Vk
+Ag
+Ag
 Vk
 Vk
 Rh
@@ -43387,9 +44106,9 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -43484,9 +44203,9 @@ Dg
 Dg
 Dg
 Sl
-Yg
-Dg
-Dg
+Vk
+Vk
+Vk
 Dg
 Sl
 Dg
@@ -43741,9 +44460,9 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
 Dg
 Dg
 Yg
@@ -43998,9 +44717,9 @@ Vk
 Vk
 Vk
 Dg
-Dg
-Dg
-Sl
+Vk
+Vk
+Vk
 Dg
 Sl
 hq
@@ -45666,7 +46385,7 @@ Dg
 Dg
 Dg
 Dg
-Dg
+Sl
 Dg
 Dg
 Dg
@@ -46183,7 +46902,7 @@ Dg
 Dg
 Dg
 Dg
-Dg
+Sl
 Dg
 Dg
 Dg
@@ -46451,8 +47170,8 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -46481,13 +47200,13 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
 Vk
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Vk
 Vk
 Vk
@@ -46701,6 +47420,21 @@ Dg
 Dg
 Dg
 Dg
+Yc
+WG
+WG
+Eh
+Eh
+Ax
+Dg
+Vk
+Vk
+Yc
+WG
+WG
+WG
+WG
+Ax
 Dg
 Dg
 Dg
@@ -46723,27 +47457,12 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -46955,6 +47674,24 @@ Dg
 Dg
 Dg
 Dg
+Sl
+Dg
+Dg
+oH
+Dg
+qA
+qA
+qA
+Dg
+Vk
+Vk
+Vk
+Dg
+Dg
+ms
+Dg
+Dg
+Vf
 Dg
 Dg
 Dg
@@ -46976,31 +47713,13 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -47215,6 +47934,34 @@ Dg
 Dg
 Dg
 Dg
+oH
+Dg
+qA
+AO
+qA
+Dg
+Vk
+Vk
+Vk
+Dg
+Dg
+Dg
+Dg
+Dg
+Vf
+Dg
+Dg
+Sl
+Dg
+Dg
+Dg
+Dg
+ud
+ud
+ud
+ud
+ud
+ud
 Dg
 Dg
 Dg
@@ -47223,40 +47970,12 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -47472,20 +48191,34 @@ Dg
 Dg
 Dg
 Dg
+oH
+Dg
+qA
+qA
+Dg
+Dg
+Vk
+Vk
 Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+mw
+qA
+qA
 Dg
 Dg
 Dg
 Dg
 Dg
 ud
+eQ
+eQ
+eQ
+eQ
 ud
-ud
-ud
-ud
 Dg
 Dg
 Dg
@@ -47494,25 +48227,11 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -47729,47 +48448,47 @@ Dg
 Dg
 Dg
 Dg
+oH
+qA
+qA
+qA
+Dg
+Dg
+Vk
+Vk
 Dg
 Dg
 Dg
 Dg
+Sl
+Dg
+mw
+qA
+qA
 Dg
 Dg
 Dg
 Dg
 Dg
 ud
-mC
-ma
-rF
+eQ
+eQ
+eQ
+eQ
 ud
 ud
-HI
+eQ
 ud
 ud
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -47984,11 +48703,24 @@ Dg
 Dg
 Dg
 Dg
+Sl
+Dg
+oH
+Dg
+qA
+Dg
+Dg
+ud
+ud
+eb
+ud
+ud
 Dg
 Dg
 Dg
-Dg
-Dg
+qA
+mw
+qA
 Dg
 Dg
 Dg
@@ -47996,37 +48728,24 @@ Dg
 Dg
 Dg
 ud
+eQ
+eQ
+eQ
+eQ
 ud
-MX
-ud
-ud
-HI
-HI
-HI
-ud
-HI
-ud
+eQ
+eQ
+eQ
 ud
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -48243,26 +48962,20 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
 ud
-YA
-YA
-HI
 ud
+Ht
+Ht
+ud
+ud
+oE
 HI
-HI
-HI
-HI
-HI
-HI
+vE
+ud
+ud
+Ht
+Ht
+ud
 ud
 Dg
 Dg
@@ -48271,18 +48984,24 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+ud
+eQ
+eQ
+eQ
+eQ
+ud
+eQ
+eQ
+eQ
+eQ
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -48486,59 +49205,59 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
 ud
+eQ
+eQ
+eQ
+eQ
 ud
+HI
+HI
+HI
 ud
-ud
-ud
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Kt
 YA
-HI
-HI
-au
-HI
-HI
-HI
-HI
-HI
-HI
-HI
+vR
+eQ
+Ku
+ud
 Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+ud
+ud
+ud
+ud
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+ud
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -48743,59 +49462,59 @@ Dg
 Dg
 Dg
 Dg
-ud
-mC
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+KM
+eQ
+eQ
+eQ
+eQ
 ma
-rF
-ud
-ud
 HI
-ud
-ud
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+HI
+HI
 Kt
-HI
-HI
-HI
+eQ
+eQ
+eQ
+eQ
+kr
+Dg
+Dg
+Dg
+Dg
 ud
-HI
-HI
-HI
-HI
-HI
-HI
-HI
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+ud
+eQ
+eQ
+eQ
+ud
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -49000,59 +49719,59 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Sl
+Dg
+Dg
 ud
-ud
-MX
-ud
-ud
-HI
-HI
-HI
-ud
-HI
-ud
-ud
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Kt
-HI
-HI
-HI
+eQ
+eQ
+eQ
+eQ
 ud
 HI
 HI
 HI
-HI
-HI
-HI
-HI
+ud
+zb
+eQ
+eQ
+zb
+ud
 Dg
 Dg
 Dg
 Dg
+ud
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+ud
+eQ
+eQ
+eQ
+ud
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -49257,18 +49976,9 @@ Dg
 Dg
 Dg
 Dg
-ud
-YA
-YA
-HI
-ud
-HI
-HI
-HI
-HI
-HI
-HI
-ud
+Dg
+Dg
+Dg
 Dg
 Dg
 Dg
@@ -49281,34 +49991,43 @@ Dg
 Dg
 Dg
 ud
-WC
-nz
-oU
 ud
-HI
-HI
-HI
-HI
-HI
-HI
+ud
+ud
+ud
+ud
+RR
+RR
+RR
+ud
+ud
+ud
+ud
+ud
 ud
 Dg
 Dg
 Dg
 Dg
+ud
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+ud
+ud
+eQ
+ud
+ud
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -49514,18 +50233,9 @@ Dg
 Dg
 Dg
 Dg
-Kt
-YA
-HI
-HI
-au
-HI
-HI
-HI
-HI
-HI
-HI
-HI
+Dg
+Dg
+Dg
 Dg
 Dg
 Dg
@@ -49538,34 +50248,43 @@ Dg
 Dg
 Dg
 ud
-ud
-ud
-ud
-ud
+Kd
 ud
 HI
 HI
-HI
+Kq
+KR
+KR
+al
+dy
+qf
+FL
+XP
 ud
+Dg
+Dg
+Dg
+Dg
+Dg
 ud
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
 ud
 Dg
 Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -49771,58 +50490,58 @@ Dg
 Dg
 Dg
 Dg
-Kt
-HI
-HI
-HI
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
 ud
+Ep
+MX
 HI
 HI
-HI
-HI
-HI
-HI
-HI
+Kq
+KR
+KR
+al
+xq
+yh
+FL
+vf
+kr
 Dg
 Dg
 Dg
 Dg
 Dg
+ud
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+eQ
+ud
 Dg
 Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -50028,58 +50747,58 @@ Dg
 Dg
 Dg
 Dg
-Kt
-HI
-HI
-HI
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+ud
+El
 ud
 HI
 HI
-HI
-HI
-HI
-HI
-HI
+Kq
+KR
+KR
+UT
+Ir
+Ir
+KG
+bR
+ud
 Dg
 Dg
 Dg
 Dg
 Dg
+ud
+ud
+eQ
+ud
+eQ
+eQ
+eQ
+eQ
+ud
 Dg
 Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -50285,47 +51004,32 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
 ud
-WC
-nz
-oU
+ud
+ud
 ud
 HI
-HI
-HI
-HI
-HI
-HI
-ud
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-ud
-ud
-ud
+Kq
+KR
+kQ
+XV
+PS
+PJ
+pK
 ud
 ud
 Dg
@@ -50333,10 +51037,25 @@ Dg
 Dg
 Dg
 Dg
+ud
+eQ
+eQ
+ud
+eQ
+eQ
+eQ
+eQ
+ud
 Dg
 Dg
 Dg
 Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -50542,27 +51261,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-ud
-ud
-ud
-ud
-ud
-HI
-HI
-HI
-ud
-ud
-ud
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
-Dg
 Dg
 Dg
 Dg
@@ -50581,19 +51279,40 @@ Dg
 Dg
 Dg
 ud
-mC
-ma
-rF
+ud
+iU
+iU
 ud
 ud
-HI
+iU
+iU
 ud
 ud
+ud
 Dg
 Dg
 Dg
 Dg
 Dg
+ud
+eQ
+eQ
+ud
+eQ
+eQ
+eQ
+eQ
+ud
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -50832,24 +51551,24 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
 ud
 ud
-MX
 ud
 ud
-HI
-HI
-HI
 ud
-HI
+ud
+ud
 ud
 ud
 Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -51094,19 +51813,19 @@ Dg
 Dg
 Dg
 Dg
-ud
-YA
-YA
-HI
-ud
-HI
-HI
-HI
-HI
-HI
-HI
-ud
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -51351,19 +52070,19 @@ Dg
 Dg
 Dg
 Dg
-Kt
-YA
-HI
-HI
-au
-HI
-HI
-HI
-HI
-HI
-HI
-HI
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -51608,18 +52327,18 @@ Dg
 Dg
 Dg
 Dg
-Kt
-HI
-HI
-HI
-ud
-HI
-HI
-HI
-HI
-HI
-HI
-HI
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -51865,18 +52584,18 @@ Dg
 Dg
 Dg
 Dg
-Kt
-HI
-HI
-HI
-ud
-HI
-HI
-HI
-HI
-HI
-HI
-HI
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Dg
 Dg
 Dg
 Dg
@@ -52122,18 +52841,18 @@ Dg
 Dg
 Dg
 Dg
-ud
-WC
-nz
-oU
-ud
-HI
-HI
-HI
-HI
-HI
-HI
-ud
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Dg
 Dg
 Dg
 Dg
@@ -52379,18 +53098,18 @@ Dg
 Dg
 Dg
 Dg
-ud
-ud
-ud
-ud
-ud
-ud
-HI
-HI
-HI
-ud
-ud
-ud
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
+Dg
 Dg
 Dg
 Dg
@@ -52641,11 +53360,11 @@ Dg
 Dg
 Dg
 Dg
-Dg
-Dg
-Dg
-Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -52869,11 +53588,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-ud
-ud
-ud
-ud
 Dg
 Dg
 Dg
@@ -52902,7 +53616,12 @@ Dg
 Dg
 Dg
 Dg
-Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -53126,15 +53845,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-mC
-ma
-rF
-ud
-ud
-HI
-ud
-ud
 Dg
 Dg
 Dg
@@ -53159,6 +53869,15 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -53383,18 +54102,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-ud
-MX
-ud
-ud
-HI
-HI
-HI
-ud
-HI
-ud
-ud
 Dg
 Dg
 Dg
@@ -53416,6 +54123,18 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -53640,18 +54359,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-YA
-YA
-HI
-ud
-HI
-HI
-HI
-HI
-HI
-HI
-ud
 Dg
 Dg
 Dg
@@ -53672,6 +54379,18 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -53897,18 +54616,6 @@ Dg
 Dg
 Dg
 Dg
-Kt
-YA
-HI
-HI
-au
-HI
-HI
-HI
-HI
-HI
-HI
-HI
 Dg
 Dg
 Dg
@@ -53929,6 +54636,18 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -54154,18 +54873,6 @@ Dg
 Dg
 Dg
 Dg
-Kt
-HI
-HI
-HI
-ud
-HI
-HI
-HI
-HI
-HI
-HI
-HI
 Dg
 Dg
 Dg
@@ -54190,7 +54897,19 @@ Dg
 Dg
 Dg
 Dg
-WX
+Dg
+Vk
+Vk
+Vk
+Vk
+Vk
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
 WX
 WX
 WX
@@ -54411,18 +55130,6 @@ Dg
 Dg
 Dg
 Dg
-Kt
-HI
-HI
-HI
-ud
-HI
-HI
-HI
-HI
-HI
-HI
-HI
 Dg
 Dg
 Dg
@@ -54447,7 +55154,19 @@ Dg
 Dg
 Dg
 Dg
-WX
+Dg
+Vk
+Vk
+Vk
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
 WX
 WX
 WX
@@ -54668,18 +55387,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-WC
-nz
-oU
-ud
-HI
-HI
-HI
-HI
-HI
-HI
-ud
 Dg
 Dg
 Dg
@@ -54695,6 +55402,18 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -54925,18 +55644,6 @@ Dg
 Dg
 Dg
 Dg
-ud
-ud
-ud
-ud
-ud
-ud
-HI
-HI
-HI
-ud
-ud
-ud
 Dg
 Dg
 Dg
@@ -54952,6 +55659,18 @@ Dg
 Dg
 Dg
 Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Dg
+Vk
+Vk
 Dg
 Dg
 Dg
@@ -55207,7 +55926,7 @@ Dg
 Dg
 Dg
 Dg
-Dg
+Vk
 Dg
 Dg
 Dg
