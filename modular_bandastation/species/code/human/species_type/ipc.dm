@@ -255,34 +255,27 @@
 	if(!H.hud_used)
 		return
 	var/datum/hud/hud = H.hud_used
-	if(locate(/atom/movable/screen/ipc_battery_hud) in hud.infodisplay)
+	if(hud.screen_objects[HUD_MOB_IPC_BATTERY])
 		return
 	// Убираем иконку голода — IPC не едят
-	if(hud.hunger)
-		hud.infodisplay -= hud.hunger
-		H.client?.screen -= hud.hunger
-		QDEL_NULL(hud.hunger)
-	var/atom/movable/screen/ipc_battery_hud/indicator = new(null, hud)
-	hud.infodisplay += indicator
-	H.client?.screen += indicator
+	hud.remove_screen_object(HUD_MOB_HUNGER, update = FALSE)
+	hud.add_screen_object(/atom/movable/screen/ipc_battery_hud, HUD_MOB_IPC_BATTERY, HUD_GROUP_INFO, update_screen = TRUE)
 	update_ipc_battery_hud(H)
 
 /datum/species/ipc/proc/remove_ipc_battery_hud(mob/living/carbon/human/H)
 	if(!H?.hud_used)
 		return
 	var/datum/hud/hud = H.hud_used
-	for(var/atom/movable/screen/ipc_battery_hud/indicator in hud.infodisplay)
-		hud.infodisplay -= indicator
-		H.client?.screen -= indicator
-		qdel(indicator)
-	// Возвращаем голод, если новый вид его использует
-	if(!hud.hunger)
-		hud.hunger = new /atom/movable/screen/hunger(null, hud)
-		hud.infodisplay += hud.hunger
-		H.client?.screen += hud.hunger
+	hud.remove_screen_object(HUD_MOB_IPC_BATTERY, update = FALSE)
+	// Возвращаем голод, если его ещё нет (например, смена вида)
+	if(!hud.screen_objects[HUD_MOB_HUNGER])
+		hud.add_screen_object(/atom/movable/screen/hunger, HUD_MOB_HUNGER, HUD_GROUP_INFO, update_screen = TRUE)
 
 /datum/species/ipc/proc/update_ipc_battery_hud(mob/living/carbon/human/H)
 	if(!H.hud_used)
+		return
+	var/atom/movable/screen/ipc_battery_hud/indicator = H.hud_used.screen_objects[HUD_MOB_IPC_BATTERY]
+	if(!indicator)
 		return
 	var/obj/item/organ/heart/ipc_battery/bat = H.get_organ_slot(ORGAN_SLOT_HEART)
 	var/pct = bat ? round((bat.charge / bat.maxcharge) * 100) : 0
@@ -300,8 +293,7 @@
 			new_state = "low_cell1"
 		else
 			new_state = "cell_full"
-	for(var/atom/movable/screen/ipc_battery_hud/indicator in H.hud_used.infodisplay)
-		indicator.icon_state = new_state
+	indicator.icon_state = new_state
 
 //Квирки
 /datum/quirk/is_species_appropriate(datum/species/mob_species)
