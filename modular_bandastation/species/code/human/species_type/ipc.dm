@@ -115,30 +115,6 @@
 		return
 	charge_cell.Invoke(bat.proxy_cell, seconds_per_tick)
 
-// ВЗАИМОДЕЙСТВИЕ ИНСТРУМЕНТОВ С IPC
-
-/mob/living/carbon/human/screwdriver_act(mob/living/user, obj/item/tool)
-	if(!is_ipc())
-		return ..()
-	var/obj/item/bodypart/BP = get_bodypart(user.zone_selected)
-	if(!BP || !(BP.bodytype & BODYTYPE_IPC))
-		return ..()
-	var/datum/component/ipc_panel/panel = BP.GetComponent(/datum/component/ipc_panel)
-	if(!panel)
-		return ..()
-	return panel.try_toggle_panel(BP, user)
-
-/mob/living/carbon/human/wirecutter_act(mob/living/user, obj/item/tool)
-	if(!is_ipc())
-		return ..()
-	var/obj/item/bodypart/BP = get_bodypart(user.zone_selected)
-	if(!BP || !(BP.bodytype & BODYTYPE_IPC))
-		return ..()
-	var/datum/component/ipc_panel/panel = BP.GetComponent(/datum/component/ipc_panel)
-	if(!panel)
-		return ..()
-	return panel.try_prepare_electronics(BP, user)
-
 /datum/species/ipc/proc/handle_emp(mob/living/carbon/human/H, severity)
 	var/emp_damage = 0
 	switch(severity)
@@ -183,110 +159,6 @@
 			to_chat(cultist, span_warning("Масло КПБ не является жертвенной субстанцией — руна не может быть начертана."))
 			return FALSE
 	return ..()
-
-// КОМПОНЕНТ ПАНЕЛИ IPC
-
-/datum/component/ipc_panel
-	dupe_mode = COMPONENT_DUPE_UNIQUE
-
-	var/panel_state = IPC_PANEL_CLOSED
-
-/datum/component/ipc_panel/Initialize(mapload)
-	. = ..()
-	var/obj/item/bodypart/BP = parent
-	if(!istype(BP))
-		return COMPONENT_INCOMPATIBLE
-	if(!(BP.bodytype & BODYTYPE_IPC))
-		return COMPONENT_INCOMPATIBLE
-
-/datum/component/ipc_panel/RegisterWithParent()
-	RegisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(on_item_interact))
-
-/datum/component/ipc_panel/UnregisterFromParent()
-	UnregisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION)
-
-/datum/component/ipc_panel/proc/is_panel_open()
-	return panel_state == IPC_PANEL_OPEN
-
-/datum/component/ipc_panel/proc/is_electronics_prepared()
-	return panel_state == IPC_ELECTRONICS_PREPARED
-
-/datum/component/ipc_panel/proc/on_item_interact(obj/item/bodypart/source, mob/living/user, obj/item/tool, list/modifiers)
-	SIGNAL_HANDLER
-	if(!user || !tool)
-		return
-	if(tool.tool_behaviour == TOOL_SCREWDRIVER)
-		return try_toggle_panel(source, user)
-	if(tool.tool_behaviour == TOOL_WIRECUTTER)
-		return try_prepare_electronics(source, user)
-	if(istype(tool, /obj/item/weldingtool))
-		INVOKE_ASYNC(src, PROC_REF(try_repair_brute), source, user, tool)
-		return ITEM_INTERACT_BLOCKING
-	if(istype(tool, /obj/item/stack/cable_coil))
-		INVOKE_ASYNC(src, PROC_REF(try_repair_burn), source, user, tool)
-		return ITEM_INTERACT_BLOCKING
-
-/// Ремонт повреждений (brute) сваркой.
-/datum/component/ipc_panel/proc/try_repair_brute(obj/item/bodypart/BP, mob/living/user, obj/item/weldingtool/welder)
-	if(!welder.welding)
-		BP.balloon_alert(user, "сварка не включена")
-		return
-	if(BP.brute_dam <= 0)
-		BP.balloon_alert(user, "нет механических повреждений")
-		return
-	var/heal_amount = rand(15, 25)
-	BP.heal_damage(heal_amount, 0)
-	BP.balloon_alert(user, "механические повреждения восстановлены")
-	playsound(BP, 'sound/items/tools/welder2.ogg', 50, TRUE)
-	if(BP.owner)
-		to_chat(BP.owner, span_notice("Системная диагностика: Механические повреждения [BP.plaintext_zone] частично восстановлены."))
-	do_sparks(3, TRUE, BP)
-
-/// Ремонт  повреждений (burn) кабелем.
-/datum/component/ipc_panel/proc/try_repair_burn(obj/item/bodypart/BP, mob/living/user, obj/item/stack/cable_coil/cable)
-	if(cable.get_amount() < 1)
-		BP.balloon_alert(user, "недостаточно кабеля")
-		return
-	if(BP.burn_dam <= 0)
-		BP.balloon_alert(user, "нет burn повреждений")
-		return
-	cable.use(1)
-	var/heal_amount = rand(10, 20)
-	BP.heal_damage(0, heal_amount)
-	BP.balloon_alert(user, "проводка восстановлена")
-	playsound(BP, 'sound/items/deconstruct.ogg', 50, TRUE)
-	if(BP.owner)
-		to_chat(BP.owner, span_notice("Системная диагностика: Электрические системы [BP.plaintext_zone] частично восстановлены."))
-	do_sparks(3, TRUE, BP)
-
-/datum/component/ipc_panel/proc/try_toggle_panel(obj/item/bodypart/BP, mob/living/user)
-	if(!is_panel_open())
-		panel_state = IPC_PANEL_OPEN
-		BP.balloon_alert(user, "панель открыта")
-		playsound(BP, 'sound/items/tools/screwdriver2.ogg', 50, TRUE)
-		if(BP.owner)
-			to_chat(BP.owner, span_notice("Системная диагностика: Панель [BP.plaintext_zone] открыта."))
-		do_sparks(2, TRUE, BP)
-		return ITEM_INTERACT_BLOCKING
-	panel_state = IPC_PANEL_CLOSED
-	BP.balloon_alert(user, "панель закрыта")
-	playsound(BP, 'sound/items/tools/screwdriver.ogg', 50, TRUE)
-	if(BP.owner)
-		to_chat(BP.owner, span_notice("Системная диагностика: Панель [BP.plaintext_zone] закрыта."))
-	return ITEM_INTERACT_BLOCKING
-
-/datum/component/ipc_panel/proc/try_prepare_electronics(obj/item/bodypart/BP, mob/living/user)
-	if(BP.body_zone != BODY_ZONE_CHEST && BP.body_zone != BODY_ZONE_HEAD)
-		return
-	if(!is_panel_open() || is_electronics_prepared())
-		return
-	panel_state = IPC_ELECTRONICS_PREPARED
-	BP.balloon_alert(user, "электроника готова")
-	playsound(BP, 'sound/items/taperecorder/taperecorder_close.ogg', 50, TRUE)
-	if(BP.owner)
-		to_chat(BP.owner, span_notice("Системная диагностика: Электроника готова к манипуляциям."))
-	do_sparks(2, TRUE, BP)
-	return ITEM_INTERACT_BLOCKING
 
 // НАСТРОЕНИЕ IPC — нейтральное (без эмоций)
 
@@ -353,7 +225,7 @@
 /// Проверяет, не был ли вскрыт корпус, и немедленно снимает защиту от давления.
 /datum/species/ipc/proc/on_limb_damaged(mob/living/carbon/human/H, obj/item/bodypart/limb, brute, burn)
 	SIGNAL_HANDLER
-	if(!(limb.bodytype & BODYTYPE_IPC))
+	if(limb.limb_id != SPECIES_IPC)
 		return
 	check_chassis_integrity(H)
 
@@ -363,7 +235,7 @@
 /datum/species/ipc/proc/check_chassis_integrity(mob/living/carbon/human/H)
 	var/any_breached = FALSE
 	for(var/obj/item/bodypart/BP in H.bodyparts)
-		if(!(BP.bodytype & BODYTYPE_IPC))
+		if(BP.limb_id != SPECIES_IPC)
 			continue
 		if(BP.brute_dam >= BP.max_damage * IPC_CHASSIS_BREACH_THRESHOLD)
 			any_breached = TRUE
