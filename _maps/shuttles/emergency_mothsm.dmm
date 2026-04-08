@@ -143,14 +143,11 @@
 /area/shuttle/escape)
 "aB" = (
 /obj/structure/window/reinforced/plasma/spawner/directional/north,
-/obj/machinery/atmospherics/components/unary/thermomachine/freezer{
-	icon = 'tmp/gags/icons/gags-thermomachine-#B900F7.dmi';
-	icon_state = "thermo_1"
-	},
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
 /obj/structure/sign/warning/radiation/directional/east,
+/obj/machinery/atmospherics/components/unary/thermomachine/freezer,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "aC" = (
@@ -673,11 +670,8 @@
 "cn" = (
 /obj/structure/window/reinforced/plasma/spawner/directional/north,
 /obj/structure/window/reinforced/plasma/spawner/directional/west,
-/obj/machinery/atmospherics/components/unary/thermomachine/freezer{
-	icon = 'tmp/gags/icons/gags-thermomachine-#B900F7.dmi';
-	icon_state = "thermo_1"
-	},
 /obj/effect/turf_decal/stripes/line,
+/obj/machinery/atmospherics/components/unary/thermomachine/freezer,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "cr" = (
@@ -998,11 +992,8 @@
 /area/shuttle/escape)
 "dx" = (
 /obj/structure/window/reinforced/plasma/spawner/directional/north,
-/obj/machinery/atmospherics/components/unary/thermomachine/freezer{
-	icon = 'tmp/gags/icons/gags-thermomachine-#B900F7.dmi';
-	icon_state = "thermo_1"
-	},
 /obj/effect/turf_decal/stripes/line,
+/obj/machinery/atmospherics/components/unary/thermomachine/freezer,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "dy" = (
@@ -1601,44 +1592,7 @@
 /obj/effect/spawner/structure/window/reinforced/shuttle,
 /turf/open/floor/plating,
 /area/shuttle/escape)
-"lS" = (
-/obj/effect/turf_decal/siding/white{
-	dir = 8
-	},
-/mob/living/basic/mothroach{
-	dir = 4
-	},
-/turf/open/floor/iron/half{
-	dir = 8
-	},
-/area/shuttle/escape)
-"na" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/structure/chair/comfy/shuttle,
-/obj/structure/sign/poster/official/moth_hardhat/directional/north,
-/turf/open/floor/iron/dark/herringbone,
-/area/shuttle/escape)
-"nU" = (
-/obj/structure/window/reinforced{
-	color = "#99bbff";
-	dir = 4
-	},
-/obj/structure/chair/comfy/shuttle{
-	dir = 8
-	},
-/obj/structure/sign/poster/official/moth_delam/directional/north,
-/turf/open/floor/iron/herringbone,
-/area/shuttle/escape)
-"qT" = (
-/obj/structure/chair/comfy/shuttle{
-	dir = 4
-	},
-/obj/structure/sign/poster/official/moth_meth/directional/west,
-/turf/open/floor/iron/herringbone,
-/area/shuttle/escape)
-"uC" = (
+"hb" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
 	},
@@ -1650,45 +1604,60 @@
 	initial_gas_mix = "o2=21.65;n2=82.05;co2=0.37;TEMP=293.3"
 	},
 /area/shuttle/escape)
-"xc" = (
-/obj/effect/turf_decal/siding/dark{
+"lO" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 8
+	},
+/mob/living/basic/mothroach{
 	dir = 4
 	},
-/obj/structure/closet/radiation,
-/obj/structure/extinguisher_cabinet/directional/west,
-/turf/open/floor/iron/dark/herringbone,
-/area/shuttle/escape)
-"Hl" = (
-/obj/structure/chair/comfy/shuttle{
-	dir = 4
+/turf/open/floor/iron/half{
+	dir = 8
 	},
-/obj/structure/extinguisher_cabinet/directional/west,
-/turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
-"Iy" = (
+"mH" = (
 /obj/effect/turf_decal/siding/white,
 /obj/structure/sign/poster/official/moth_delam/directional/north,
 /turf/open/floor/iron/half,
 /area/shuttle/escape)
-"Jw" = (
-/obj/effect/turf_decal/siding/white,
-/obj/structure/sign/warning/radiation/directional/north,
-/turf/open/floor/iron/half,
-/area/shuttle/escape)
-"Nr" = (
-/mob/living/basic/mothroach{
-	dir = 4
+"mO" = (
+/obj/machinery/light{
+	dir = 1
 	},
-/turf/open/floor/mineral/gold,
+/obj/structure/chair/comfy/shuttle,
+/obj/structure/sign/poster/official/moth_hardhat/directional/north,
+/turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
-"Pm" = (
+"ni" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 4
 	},
-/obj/structure/sign/poster/official/moth_hardhat/directional/west,
+/obj/structure/sign/poster/official/moth_meth/directional/west,
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
-"Py" = (
+"nG" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/machinery/power/smes{
+	charge = 25e+006;
+	output_level = 0
+	},
+/turf/open/floor/iron/dark/herringbone,
+/area/shuttle/escape)
+"nX" = (
+/obj/structure/window/reinforced{
+	color = "#99bbff";
+	dir = 4
+	},
+/obj/structure/chair/comfy/shuttle{
+	dir = 8
+	},
+/obj/structure/sign/poster/official/moth_delam/directional/north,
+/turf/open/floor/iron/herringbone,
+/area/shuttle/escape)
+"rM" = (
 /obj/structure/window/reinforced{
 	color = "#99bbff";
 	dir = 8
@@ -1701,15 +1670,37 @@
 	},
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
-"Sz" = (
-/obj/structure/cable,
+"Da" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/obj/structure/sign/poster/official/moth_hardhat/directional/west,
+/turf/open/floor/iron/herringbone,
+/area/shuttle/escape)
+"MY" = (
+/obj/effect/turf_decal/siding/white,
+/obj/structure/sign/warning/radiation/directional/north,
+/turf/open/floor/iron/half,
+/area/shuttle/escape)
+"Xt" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/obj/structure/extinguisher_cabinet/directional/west,
+/turf/open/floor/iron/herringbone,
+/area/shuttle/escape)
+"XZ" = (
+/mob/living/basic/mothroach{
+	dir = 4
+	},
+/turf/open/floor/mineral/gold,
+/area/shuttle/escape)
+"Zi" = (
 /obj/effect/turf_decal/siding/dark{
-	dir = 8
+	dir = 4
 	},
-/obj/machinery/power/smes{
-	charge = 25e+006;
-	output_level = 0
-	},
+/obj/structure/closet/radiation,
+/obj/structure/extinguisher_cabinet/directional/west,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 
@@ -1745,17 +1736,17 @@ aa
 eI
 bl
 al
-xc
+Zi
 an
 ao
 ai
 aq
 ar
 as
-Pm
-Hl
+Da
+Xt
 dF
-qT
+ni
 aw
 ax
 ai
@@ -1805,7 +1796,7 @@ aV
 aW
 aV
 ai
-nU
+nX
 aN
 bs
 aN
@@ -1861,7 +1852,7 @@ bI
 bJ
 bK
 dZ
-uC
+hb
 bM
 bO
 bT
@@ -1920,7 +1911,7 @@ cH
 cM
 cM
 aL
-Py
+rM
 cM
 cM
 cM
@@ -1951,7 +1942,7 @@ dh
 dm
 dj
 dj
-lS
+lO
 dm
 dn
 ai
@@ -1973,7 +1964,7 @@ dA
 dB
 bK
 ai
-Jw
+MY
 dF
 ai
 ai
@@ -2029,7 +2020,7 @@ es
 et
 eu
 ai
-Iy
+mH
 ex
 ey
 ez
@@ -2067,8 +2058,8 @@ eT
 eV
 eW
 ai
-na
-Nr
+mO
+XZ
 fa
 ac
 aa
@@ -2082,7 +2073,7 @@ eI
 bl
 fc
 fd
-Sz
+nG
 ff
 ai
 fh
