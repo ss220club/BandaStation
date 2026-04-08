@@ -508,7 +508,7 @@ SUBSYSTEM_DEF(tts220)
 	for(var/level in tts_seeds_names_by_donator_levels)
 		if(text2num(level) <= donator_level)
 			_tts_seeds_names |= tts_seeds_names_by_donator_levels[level]
-	
+
 	return sortTim(_tts_seeds_names, GLOBAL_PROC_REF(cmp_text_asc))
 
 /datum/controller/subsystem/tts220/proc/get_random_seed(owner)
