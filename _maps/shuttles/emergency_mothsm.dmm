@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/open/space/openspace,
-/area/space)
+/turf/template_noop,
+/area/template_noop)
 "ac" = (
 /turf/closed/wall/mineral/titanium/nodiagonal,
 /area/shuttle/escape)
@@ -1515,6 +1515,7 @@
 	charge = 25e+006;
 	output_level = 0
 	},
+/obj/structure/extinguisher_cabinet/directional/east,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "ff" = (
@@ -1600,7 +1601,7 @@
 /obj/effect/spawner/structure/window/reinforced/shuttle,
 /turf/open/floor/plating,
 /area/shuttle/escape)
-"iI" = (
+"lS" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8
 	},
@@ -1611,7 +1612,7 @@
 	dir = 8
 	},
 /area/shuttle/escape)
-"iJ" = (
+"na" = (
 /obj/machinery/light{
 	dir = 1
 	},
@@ -1619,14 +1620,25 @@
 /obj/structure/sign/poster/official/moth_hardhat/directional/north,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
-"ji" = (
+"nU" = (
+/obj/structure/window/reinforced{
+	color = "#99bbff";
+	dir = 4
+	},
+/obj/structure/chair/comfy/shuttle{
+	dir = 8
+	},
+/obj/structure/sign/poster/official/moth_delam/directional/north,
+/turf/open/floor/iron/herringbone,
+/area/shuttle/escape)
+"qT" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 4
 	},
-/obj/structure/extinguisher_cabinet/directional/west,
+/obj/structure/sign/poster/official/moth_meth/directional/west,
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
-"kf" = (
+"uC" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
 	},
@@ -1638,19 +1650,58 @@
 	initial_gas_mix = "o2=21.65;n2=82.05;co2=0.37;TEMP=293.3"
 	},
 /area/shuttle/escape)
-"mW" = (
+"xc" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/structure/closet/radiation,
+/obj/structure/extinguisher_cabinet/directional/west,
+/turf/open/floor/iron/dark/herringbone,
+/area/shuttle/escape)
+"Hl" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/obj/structure/extinguisher_cabinet/directional/west,
+/turf/open/floor/iron/herringbone,
+/area/shuttle/escape)
+"Iy" = (
+/obj/effect/turf_decal/siding/white,
+/obj/structure/sign/poster/official/moth_delam/directional/north,
+/turf/open/floor/iron/half,
+/area/shuttle/escape)
+"Jw" = (
+/obj/effect/turf_decal/siding/white,
+/obj/structure/sign/warning/radiation/directional/north,
+/turf/open/floor/iron/half,
+/area/shuttle/escape)
+"Nr" = (
+/mob/living/basic/mothroach{
+	dir = 4
+	},
+/turf/open/floor/mineral/gold,
+/area/shuttle/escape)
+"Pm" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 4
 	},
 /obj/structure/sign/poster/official/moth_hardhat/directional/west,
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
-"rC" = (
-/obj/effect/turf_decal/siding/white,
-/obj/structure/sign/warning/radiation/directional/north,
-/turf/open/floor/iron/half,
+"Py" = (
+/obj/structure/window/reinforced{
+	color = "#99bbff";
+	dir = 8
+	},
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/mob/living/basic/mothroach{
+	dir = 4
+	},
+/turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
-"ud" = (
+"Sz" = (
 /obj/structure/cable,
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
@@ -1659,58 +1710,7 @@
 	charge = 25e+006;
 	output_level = 0
 	},
-/obj/structure/extinguisher_cabinet/directional/east,
 /turf/open/floor/iron/dark/herringbone,
-/area/shuttle/escape)
-"Br" = (
-/mob/living/basic/mothroach{
-	dir = 4
-	},
-/turf/open/floor/mineral/gold,
-/area/shuttle/escape)
-"GM" = (
-/obj/structure/window/reinforced{
-	color = "#99bbff";
-	dir = 8
-	},
-/obj/structure/chair/comfy/shuttle{
-	dir = 4
-	},
-/mob/living/basic/mothroach{
-	dir = 4
-	},
-/turf/open/floor/iron/herringbone,
-/area/shuttle/escape)
-"IC" = (
-/obj/effect/turf_decal/siding/dark{
-	dir = 4
-	},
-/obj/structure/closet/radiation,
-/obj/structure/extinguisher_cabinet/directional/west,
-/turf/open/floor/iron/dark/herringbone,
-/area/shuttle/escape)
-"Mf" = (
-/obj/effect/turf_decal/siding/white,
-/obj/structure/sign/poster/official/moth_delam/directional/north,
-/turf/open/floor/iron/half,
-/area/shuttle/escape)
-"Of" = (
-/obj/structure/window/reinforced{
-	color = "#99bbff";
-	dir = 4
-	},
-/obj/structure/chair/comfy/shuttle{
-	dir = 8
-	},
-/obj/structure/sign/poster/official/moth_delam/directional/north,
-/turf/open/floor/iron/herringbone,
-/area/shuttle/escape)
-"Po" = (
-/obj/structure/chair/comfy/shuttle{
-	dir = 4
-	},
-/obj/structure/sign/poster/official/moth_meth/directional/west,
-/turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
 
 (1,1,1) = {"
@@ -1745,17 +1745,17 @@ aa
 eI
 bl
 al
-IC
+xc
 an
 ao
 ai
 aq
 ar
 as
-mW
-ji
+Pm
+Hl
 dF
-Po
+qT
 aw
 ax
 ai
@@ -1805,7 +1805,7 @@ aV
 aW
 aV
 ai
-Of
+nU
 aN
 bs
 aN
@@ -1861,7 +1861,7 @@ bI
 bJ
 bK
 dZ
-kf
+uC
 bM
 bO
 bT
@@ -1920,7 +1920,7 @@ cH
 cM
 cM
 aL
-GM
+Py
 cM
 cM
 cM
@@ -1951,7 +1951,7 @@ dh
 dm
 dj
 dj
-iI
+lS
 dm
 dn
 ai
@@ -1973,7 +1973,7 @@ dA
 dB
 bK
 ai
-rC
+Jw
 dF
 ai
 ai
@@ -2029,7 +2029,7 @@ es
 et
 eu
 ai
-Mf
+Iy
 ex
 ey
 ez
@@ -2067,8 +2067,8 @@ eT
 eV
 eW
 ai
-iJ
-Br
+na
+Nr
 fa
 ac
 aa
@@ -2081,8 +2081,8 @@ aa
 eI
 bl
 fc
-ud
 fd
+Sz
 ff
 ai
 fh
