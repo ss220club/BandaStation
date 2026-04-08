@@ -28,10 +28,7 @@
 	max_integrity = 400
 	},
 /obj/docking_port/mobile/emergency/shuttle_build{
-	name = "Mothroach Supermatter Shuttle";
-	dwidth = 9;
-	height = 15;
-	width = 26
+	name = "Mothroach Supermatter Shuttle"
 	},
 /turf/open/floor/iron{
 	initial_gas_mix = "o2=21.81;n2=82;co2=0.21;TEMP=293.26"
@@ -51,9 +48,7 @@
 	name = "Emergency Shuttle Airlock";
 	max_integrity = 400
 	},
-/turf/open/floor/iron{
-	initial_gas_mix = "o2=21.65;n2=82.05;co2=0.37;TEMP=293.3"
-	},
+/turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "ai" = (
 /turf/closed/wall/mineral/titanium,
@@ -129,11 +124,10 @@
 /turf/open/floor/iron/half,
 /area/shuttle/escape)
 "az" = (
-/obj/structure/table,
-/obj/machinery/recharger{
-	dir = 4
+/obj/effect/turf_decal/trimline/dark_red/filled/line{
+	dir = 10
 	},
-/turf/open/floor/iron/dark/herringbone,
+/turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "aA" = (
 /obj/structure/closet{
@@ -235,13 +229,10 @@
 /turf/open/floor/iron/half,
 /area/shuttle/escape)
 "aN" = (
-/obj/structure/window/reinforced{
-	color = "#99bbff";
-	dir = 4
-	},
 /obj/structure/chair/comfy/shuttle{
 	dir = 8
 	},
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
 "aP" = (
@@ -258,19 +249,14 @@
 	initial_gas_mix = "o2=21.65;n2=82.05;co2=0.37;TEMP=293.3"
 	},
 /area/shuttle/escape)
-"aQ" = (
-/obj/structure/sign/poster/contraband/random{
-	icon_state = "atmosia_independence";
-	name = "poster - Atmosia Declaration of Independence"
-	},
-/turf/closed/wall/mineral/titanium,
-/area/shuttle/escape)
 "aR" = (
-/obj/machinery/light{
+/obj/effect/turf_decal/trimline/dark_red/filled/line{
 	dir = 1
 	},
-/obj/structure/chair/comfy/shuttle,
-/turf/open/floor/iron/dark/herringbone,
+/obj/effect/turf_decal/trimline/dark_red/filled/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "aS" = (
 /obj/effect/turf_decal/trimline/dark_red/filled/end{
@@ -282,8 +268,9 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/chair/comfy/shuttle{
-	dir = 1
+/obj/structure/table,
+/obj/machinery/recharger{
+	dir = 4
 	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
@@ -319,16 +306,13 @@
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "be" = (
-/obj/structure/window/reinforced{
-	color = "#99bbff";
-	dir = 4
-	},
 /mob/living/basic/mothroach{
 	dir = 8
 	},
 /obj/structure/chair/comfy/shuttle{
 	dir = 8
 	},
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
 "bg" = (
@@ -361,11 +345,11 @@
 /obj/effect/turf_decal/trimline/dark_red/filled/line{
 	dir = 4
 	},
-/obj/effect/turf_decal/trimline/dark_red/filled/line{
-	dir = 8
-	},
 /mob/living/basic/mothroach{
 	dir = 4
+	},
+/obj/effect/turf_decal/trimline/dark_red/filled/corner{
+	dir = 1
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
@@ -376,9 +360,6 @@
 /obj/effect/turf_decal/trimline/dark_red/filled/line,
 /obj/effect/turf_decal/trimline/dark_red/filled/corner{
 	dir = 4
-	},
-/obj/effect/turf_decal/trimline/dark_red/filled/corner{
-	dir = 1
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
@@ -423,16 +404,13 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "br" = (
-/obj/structure/window/reinforced{
-	color = "#99bbff";
-	dir = 8
-	},
 /mob/living/basic/mothroach{
 	dir = 4
 	},
 /obj/structure/chair/comfy/shuttle{
 	dir = 4
 	},
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
 "bs" = (
@@ -459,20 +437,12 @@
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "bE" = (
-/obj/structure/window/reinforced{
-	color = "#99bbff";
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	color = "#99bbff"
-	},
-/obj/machinery/door/window/brigdoor{
-	dir = 4;
-	req_access = list()
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
+/obj/machinery/door/window/brigdoor/left/directional/east,
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "bF" = (
@@ -768,13 +738,10 @@
 	},
 /area/shuttle/escape)
 "cM" = (
-/obj/structure/window/reinforced{
-	color = "#99bbff";
-	dir = 8
-	},
 /obj/structure/chair/comfy/shuttle{
 	dir = 4
 	},
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
 "cP" = (
@@ -1610,16 +1577,13 @@
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "nI" = (
-/obj/structure/window/reinforced{
-	color = "#99bbff";
-	dir = 8
-	},
 /obj/structure/chair/comfy/shuttle{
 	dir = 4
 	},
 /mob/living/basic/mothroach{
 	dir = 4
 	},
+/obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
 "nS" = (
@@ -1683,14 +1647,11 @@
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "OA" = (
-/obj/structure/window/reinforced{
-	color = "#99bbff";
-	dir = 4
-	},
 /obj/structure/chair/comfy/shuttle{
 	dir = 8
 	},
 /obj/structure/sign/poster/official/moth_delam/directional/north,
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
 "Wo" = (
@@ -1747,8 +1708,8 @@ dF
 DD
 aw
 ax
-ai
-az
+ac
+aS
 aA
 ac
 ai
@@ -1775,9 +1736,9 @@ bT
 bT
 bT
 aP
-aQ
+fq
 aR
-aS
+az
 aT
 ac
 aa
@@ -1831,7 +1792,7 @@ cM
 cM
 cM
 cr
-ai
+fq
 bW
 bX
 bk
@@ -1859,7 +1820,7 @@ bR
 bT
 bT
 bU
-ai
+ac
 bW
 bX
 bk
@@ -1887,8 +1848,8 @@ aN
 aN
 aN
 cr
-ai
-ai
+ac
+ac
 cu
 ai
 ai
