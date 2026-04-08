@@ -1,7 +1,6 @@
 #define TTS_REPLACEMENTS_FILE_PATH "config/bandastation/tts_replacements.json"
 #define TTS_ACRONYM_REPLACEMENTS "tts_acronym_replacements"
 #define TTS_JOB_REPLACEMENTS "tts_job_replacements"
-//#define TTS_MOCK // uncomment for TTS local testing
 
 #define FILE_CLEANUP_DELAY 30 SECONDS
 
@@ -491,19 +490,11 @@ SUBSYSTEM_DEF(tts220)
 
 	var/donator_level = 0
 
-#ifdef TTS_MOCK
-	donator_level = 1 // change this locally to test different tiers
-#else
 	if(!C)
-		_tts_seeds_names |= tts_seeds_names_by_donator_levels["0"]
+		_tts_seeds_names |= tts_seeds_names
 		return sortTim(_tts_seeds_names, GLOBAL_PROC_REF(cmp_text_asc))
 
-	if(C.holder)
-		_tts_seeds_names |= tts_seeds_names
-		return _tts_seeds_names
-
 	donator_level = C.get_donator_level()
-#endif
 
 	for(var/level in tts_seeds_names_by_donator_levels)
 		if(text2num(level) <= donator_level)

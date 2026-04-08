@@ -69,7 +69,7 @@
 		tts_seeds |= SStts220.get_tts_by_gender(being_changed.gender)
 		tts_seeds |= SStts220.get_tts_by_gender(NEUTER)
 	// Check donation restrictions
-	if(!check_rights(R_ADMIN, FALSE, chooser) && !(overrides & TTS_OVERRIDE_TIER))
+	if(!(overrides & TTS_OVERRIDE_TIER))
 		tts_seeds = tts_seeds && SStts220.get_available_seeds(being_changed) // && for lists means intersection
 	if(!length(tts_seeds))
 		to_chat(chooser, span_warning("Не удалось найти голоса для пола! Текущий голос - [tts_seed.name]"))
