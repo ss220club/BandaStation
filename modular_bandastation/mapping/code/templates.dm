@@ -77,6 +77,15 @@
 	name = "assault pod (Nanotrasen)"
 	prefix = "_maps/shuttles/ss220/"
 
+/datum/map_template/shuttle/emergency/mothsm
+	suffix = "mothsm"
+	name = "Mothroach Supermatter Shuttle"
+	credit_cost = CARGO_CRATE_VALUE * 8
+	description = "Настандартные шаттл, оснащённый реактором на суперматтерии. Радиационная безопасность не гарантируется! Построен инженерами расы Ниан, потому возможно присутствие молетараканов."
+	admin_notes = "Шаттл с СМом. Смешное, но облучает радейкой пассажиров. А ещё там куча молей."
+	movement_force = list("KNOCKDOWN" = 3, "THROW" = 2)
+	occupancy_limit = "30"
+
 // MARK: Shuttles Overrides
 /datum/map_template/shuttle/infiltrator/basic
 	prefix = "_maps/shuttles/ss220/"
