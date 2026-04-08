@@ -561,6 +561,11 @@
 	icon_state = "bedhead_floor"
 	hair_appendages_inner = list("bedhead_floor_rear" = HAIR_APPENDAGE_REAR)
 
+/datum/sprite_accessory/hair/bedheadfloorlength2
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "bedhead_floor2"
+	hair_appendages_inner = list("bedhead_floor_rear2" = HAIR_APPENDAGE_REAR)
+
 /datum/sprite_accessory/hair/emofrine
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "emo_fringe"
@@ -575,6 +580,11 @@
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "bedhead_long"
 	hair_appendages_inner = list("bedhead_long_rear" = HAIR_APPENDAGE_REAR)
+
+/datum/sprite_accessory/hair/bedheadlong2
+	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "bedhead_long2"
+	hair_appendages_inner = list("bedhead_long_rear2" = HAIR_APPENDAGE_REAR)
 
 /datum/sprite_accessory/hair/veryshortovereye
 	icon = 'modular_bandastation/customization/icons/sprite_accessories/hair.dmi'

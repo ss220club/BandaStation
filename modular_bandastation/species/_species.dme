@@ -10,7 +10,10 @@
 #include "code/human/species_type/tajaran.dm"
 #include "code/human/species_type/vulpkanin.dm"
 
+#include "code/human/sprite_accessories/skrell/skrell_cloth_wrap.dm"
+#include "code/human/sprite_accessories/skrell/skrell_cloth_wrap_toggle.dm"
 #include "code/human/sprite_accessories/skrell/skrell_head_tentacles.dm"
+#include "code/human/sprite_accessories/skrell/skrell_ornament.dm"
 
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_chest_markings.dm"
 #include "code/human/sprite_accessories/vulpkanin/vulpkanin_limb_markings.dm"
@@ -36,6 +39,10 @@
 #include "code/language/spinwarder.dm"
 
 #include "code/preferences/species_features/skrell/skrell_head_tentacle.dm"
+#include "code/preferences/species_features/skrell/skrell_tentacle_ornament.dm"
+#include "code/preferences/species_features/skrell/skrell_cloth_wrap.dm"
+#include "code/preferences/species_features/skrell/skrell_cloth_wrap_toggle.dm"
+#include "code/preferences/species_features/skrell/skrell_cloth_wrap_color.dm"
 
 #include "code/preferences/species_features/tajaran/body_markings/tajaran_chest_markings.dm"
 #include "code/preferences/species_features/tajaran/body_markings/tajaran_limb_markings.dm"

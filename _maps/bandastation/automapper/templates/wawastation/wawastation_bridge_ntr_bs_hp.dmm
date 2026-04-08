@@ -25,6 +25,7 @@
 /obj/effect/turf_decal/tile/dark_blue/anticorner/contrasted,
 /obj/machinery/light/directional/south,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
 "bE" = (
@@ -465,7 +466,6 @@
 "pN" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hop)
 "qc" = (
@@ -582,6 +582,7 @@
 "rX" = (
 /obj/effect/turf_decal/tile/dark_blue/half/contrasted,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
 "sA" = (
@@ -718,6 +719,7 @@
 "wo" = (
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
 /turf/open/floor/iron/dark/small,
 /area/station/hallway/secondary/command)
 "wI" = (
@@ -839,6 +841,13 @@
 /obj/machinery/light_switch/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/blueshield)
+"zD" = (
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/spawner/random/engineering/tracking_beacon,
+/turf/open/floor/iron,
+/area/station/command/bridge)
 "Az" = (
 /obj/machinery/airalarm/directional/west,
 /obj/effect/turf_decal/tile/dark_blue/half/contrasted{
@@ -929,6 +938,7 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
 "Dd" = (
@@ -1427,12 +1437,14 @@
 "Sa" = (
 /turf/closed/wall/r_wall,
 /area/station/hallway/secondary/command)
+"Sb" = (
+/turf/open/floor/iron,
+/area/station/command/bridge)
 "Sq" = (
 /obj/effect/turf_decal/tile/dark_blue/half/contrasted,
 /obj/effect/landmark/event_spawn,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hop)
 "SA" = (
@@ -1642,6 +1654,7 @@
 "Xo" = (
 /obj/machinery/power/apc/auto_name/directional/east,
 /obj/effect/turf_decal/tile/dark_blue/half/contrasted,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hop)
 "Xq" = (
@@ -1747,11 +1760,13 @@ FS
 FS
 FS
 FS
+FS
 Zl
 eL
 Uu
 "}
 (2,1,1) = {"
+FS
 FS
 FS
 FS
@@ -1781,11 +1796,13 @@ FS
 FS
 FS
 FS
+FS
 Wm
 Uu
 Wm
 "}
 (4,1,1) = {"
+FS
 FS
 FS
 FS
@@ -1815,11 +1832,13 @@ FS
 FS
 FS
 FS
+FS
 ct
 Vw
 Wm
 "}
 (6,1,1) = {"
+FS
 FS
 FS
 FS
@@ -1840,6 +1859,7 @@ vE
 FS
 FS
 FS
+FS
 ZU
 ZU
 ZU
@@ -1854,6 +1874,7 @@ TD
 vE
 "}
 (8,1,1) = {"
+FS
 ZU
 ZU
 ZU
@@ -1871,6 +1892,7 @@ jq
 vE
 "}
 (9,1,1) = {"
+FS
 ZU
 UO
 Uv
@@ -1888,6 +1910,7 @@ wL
 vE
 "}
 (10,1,1) = {"
+FS
 ZU
 zB
 FR
@@ -1905,6 +1928,7 @@ tR
 vE
 "}
 (11,1,1) = {"
+FS
 ZU
 hB
 Rq
@@ -1922,6 +1946,7 @@ jK
 vE
 "}
 (12,1,1) = {"
+FS
 ZU
 rd
 am
@@ -1939,6 +1964,7 @@ vz
 vE
 "}
 (13,1,1) = {"
+FS
 ZU
 UL
 hc
@@ -1956,6 +1982,7 @@ Bc
 Sa
 "}
 (14,1,1) = {"
+FS
 EP
 Vu
 Te
@@ -1973,6 +2000,7 @@ fR
 eo
 "}
 (15,1,1) = {"
+zD
 Un
 PF
 IS
@@ -1990,6 +2018,7 @@ NK
 oP
 "}
 (16,1,1) = {"
+Sb
 Zi
 ow
 Vv
@@ -2007,6 +2036,7 @@ rX
 yY
 "}
 (17,1,1) = {"
+FS
 EP
 lL
 qw
@@ -2024,6 +2054,7 @@ Cg
 DN
 "}
 (18,1,1) = {"
+FS
 EP
 Je
 jW
@@ -2041,6 +2072,7 @@ bm
 Sa
 "}
 (19,1,1) = {"
+FS
 EP
 VC
 fv
@@ -2058,6 +2090,7 @@ wo
 Sa
 "}
 (20,1,1) = {"
+FS
 SV
 OK
 OK
@@ -2075,6 +2108,7 @@ Ih
 sW
 "}
 (21,1,1) = {"
+FS
 EP
 jM
 Mm
@@ -2092,6 +2126,7 @@ RR
 SJ
 "}
 (22,1,1) = {"
+FS
 Zu
 jL
 jL
@@ -2109,6 +2144,7 @@ bK
 SJ
 "}
 (23,1,1) = {"
+FS
 GN
 IC
 IC
@@ -2126,6 +2162,7 @@ FS
 FS
 "}
 (24,1,1) = {"
+FS
 to
 qm
 qm
@@ -2143,6 +2180,7 @@ FS
 FS
 "}
 (25,1,1) = {"
+FS
 Je
 Je
 Je
@@ -2166,6 +2204,7 @@ FS
 FS
 FS
 FS
+FS
 KO
 JC
 rC
@@ -2177,6 +2216,7 @@ FS
 FS
 "}
 (27,1,1) = {"
+FS
 FS
 FS
 FS
@@ -2209,8 +2249,10 @@ FS
 FS
 FS
 FS
+FS
 "}
 (29,1,1) = {"
+FS
 FS
 FS
 FS
