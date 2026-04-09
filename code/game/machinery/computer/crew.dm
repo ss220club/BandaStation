@@ -67,7 +67,10 @@
 		entry["toxin"] = player_record["toxdam"]
 		entry["burn"] = player_record["burndam"]
 		entry["brute"] = player_record["brutedam"]
-		entry["location"] = player_record["area"]
+		// BANDASTATION EDIT - START
+		var/location_data = player_record["position"]
+		entry["location"] = islist(location_data) ? location_data["area"] : player_record["area"]
+		// BANDASTATION EDIT - END
 		entry["health"] = player_record["health"]
 		new_table += list(entry)
 
