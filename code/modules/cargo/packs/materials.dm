@@ -40,7 +40,7 @@
 
 /datum/supply_pack/materials/foamtank
 	name = "ящик с канистрой пены для пожаротушения"
-	desc = "Содержит канистру пены для пожаротушения. Также известной как \"бич плазмаменов.\""
+	desc = "Содержит канистру пены для пожаротушения. Также известной как \"бич плазмаменов\"."
 	cost = CARGO_CRATE_VALUE * 3
 	contains = list(/obj/structure/reagent_dispensers/foamtank)
 	crate_name = "Ящик с канистрой пены для пожаротушения"

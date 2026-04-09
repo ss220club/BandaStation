@@ -205,7 +205,7 @@
 
 /datum/supply_pack/engineering/shield_sat_control
 	name = "плата управления системой защиты"
-	desc = "Система управления системой спутников противометеорной защиты"
+	desc = "Система управления системой спутников противометеорной защиты."
 	cost = CARGO_CRATE_VALUE * 10
 	access_view = ACCESS_COMMAND
 	contains = list(/obj/item/circuitboard/computer/sat_control)
@@ -230,7 +230,7 @@
 /datum/supply_pack/engine/emitter
 	name = "ящик эмиттеров"
 	desc = "Одинаково полезны для активации генераторов силового поля, уничтожения ящиков и злоумышленников. \
-		Содержит два высокомощных эмиттера"
+		Содержит два высокомощных эмиттера."
 	cost = CARGO_CRATE_VALUE * 7
 	access = ACCESS_CE
 	contains = list(/obj/machinery/power/emitter = 2)
@@ -306,7 +306,7 @@
 
 /datum/supply_pack/engineering/rad_protection_modules
 	name = "модули радиационной защиты"
-	desc = "Contains multiple radiation protections modules for MODsuits."
+	desc = "Содержит несколько модулей противорадиационной защиты для МОДов."
 	order_flags = ORDER_INVISIBLE
 	contains = list(/obj/item/mod/module/rad_protection = 3)
 	crate_name = "модули радиационной защиты МОДов"
@@ -314,7 +314,7 @@
 
 /datum/supply_pack/engineering/rad_nebula_shielding_kit
 	name = "радиоактивный щит Небула"
-	desc = "Содержит печатные платы и радиационные модули для создания радиоактивной защиты Небула"
+	desc = "Содержит печатные платы и радиационные модули для создания радиоактивной защиты Небула."
 	cost = CARGO_CRATE_VALUE * 2
 
 	order_flags = ORDER_SPECIAL
