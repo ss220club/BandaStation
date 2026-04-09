@@ -1622,38 +1622,45 @@
 
 /obj/item/card/id/advanced/prisoner/one
 	name = "Prisoner #13-001"
-	registered_name = "Prisoner #13-001"
+	registered_name = "Заключённый #13-001"
 	trim = /datum/id_trim/job/prisoner/one
 
 /obj/item/card/id/advanced/prisoner/two
 	name = "Prisoner #13-002"
-	registered_name = "Prisoner #13-002"
+	registered_name = "Заключённый #13-002"
 	trim = /datum/id_trim/job/prisoner/two
 
 /obj/item/card/id/advanced/prisoner/three
 	name = "Prisoner #13-003"
-	registered_name = "Prisoner #13-003"
+	registered_name = "Заключённый #13-003"
 	trim = /datum/id_trim/job/prisoner/three
 
 /obj/item/card/id/advanced/prisoner/four
 	name = "Prisoner #13-004"
-	registered_name = "Prisoner #13-004"
+	registered_name = "Заключённый #13-004"
 	trim = /datum/id_trim/job/prisoner/four
 
 /obj/item/card/id/advanced/prisoner/five
 	name = "Prisoner #13-005"
-	registered_name = "Prisoner #13-005"
+	registered_name = "Заключённый #13-005"
 	trim = /datum/id_trim/job/prisoner/five
 
 /obj/item/card/id/advanced/prisoner/six
 	name = "Prisoner #13-006"
-	registered_name = "Prisoner #13-006"
+	registered_name = "Заключённый #13-006"
 	trim = /datum/id_trim/job/prisoner/six
 
 /obj/item/card/id/advanced/prisoner/seven
 	name = "Prisoner #13-007"
-	registered_name = "Prisoner #13-007"
+	registered_name = "Заключённый #13-007"
 	trim = /datum/id_trim/job/prisoner/seven
+
+// BANDASTATION MOD START: Brig closet extra items
+/obj/item/card/id/advanced/prisoner/temp
+	name = "Prisoner #13-T"
+	registered_name = "Заключённый #13-T"
+	desc = "ID карта, выдаваемая на срок временного заключения. Ты - число, ты не свободный человек."
+// BANDASTATION MOD END: Brig closet extra items
 
 /obj/item/card/id/advanced/mining
 	name = "mining ID"
