@@ -109,8 +109,8 @@
 
 /datum/supply_pack/engineering/tools
 	name = "ящик с ящиками для инструментов"
-	desc = "Любой робастный космочеловек всегда имеет под рукой надёжный ящик с инструментами. Содержит три ящика для электроинструментов \
-		и три ящика для механических инструментов."
+	desc = "Любой робастный космочеловек всегда имеет под рукой надёжный ящик с инструментами. Содержит три ящика электрика \
+		и три ящика механика."
 	access_view = ACCESS_ENGINE_EQUIP
 	contains = list(/obj/item/storage/toolbox/electrical = 3,
 					/obj/item/storage/toolbox/mechanical = 3,
@@ -270,7 +270,7 @@
 
 /datum/supply_pack/engine/supermatter_shard
 	name = "ящик с осколком суперматерии"
-	desc = "Сила небес сконцентрированная в одном кристалле."
+	desc = "Сила небес, сконцентрированная в одном кристалле."
 	cost = CARGO_CRATE_VALUE * 20
 	access = ACCESS_CE
 	contains = list(/obj/machinery/power/supermatter_crystal/shard)

@@ -6,7 +6,7 @@
 	desc = "Создайте кучу коробок."
 	cost = CARGO_CRATE_VALUE * 2
 	contains = list(/obj/item/stack/sheet/cardboard/fifty)
-	crate_name = "ящик листов картона"
+	crate_name = "Ящик листов картона"
 
 /datum/supply_pack/materials/license50
 	name = "50 пустых номерных знака"
@@ -14,36 +14,36 @@
 	cost = CARGO_CRATE_VALUE * 2  // 50 * 25 + 700 - 1000 = 950 credits profit
 	access_view = ACCESS_BRIG_ENTRANCE
 	contains = list(/obj/item/stack/license_plates/empty/fifty)
-	crate_name = "ящик пустых номерных знаков"
+	crate_name = "Ящик пустых номерных знаков"
 
 /datum/supply_pack/materials/plastic50
 	name = "50 листов пластика"
-	desc = "Собери множество игрушек из пятьдесят листов пластика!"
+	desc = "Соберите множество игрушек из пятьдесят листов пластика!"
 	cost = CARGO_CRATE_VALUE * 2
 	contains = list(/obj/item/stack/sheet/plastic/fifty)
-	crate_name = "ящик листов пластика"
+	crate_name = "Ящик листов пластика"
 
 /datum/supply_pack/materials/sandstone30
 	name = "30 песчаных блоков"
-	desc = "Ни песок, но и не камень, эти тридцать блоков всё равно справятся с поставленной задачей."
+	desc = "Не песок, но и не камень, эти тридцать блоков всё равно справятся с поставленной задачей."
 	cost = CARGO_CRATE_VALUE * 2
 	contains = list(/obj/item/stack/sheet/mineral/sandstone/thirty)
-	crate_name = "ящик песчаных блоков"
+	crate_name = "Ящик песчаных блоков"
 
 /datum/supply_pack/materials/wood50
 	name = "50 досок"
-	desc = "Преврати скучный металличесский пол отдела в красивый\
+	desc = "Превратите скучный металлический пол отдела в красивый\
 		деревянный паркет и многое другое при помощи этих пятидесяти досок!"
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/obj/item/stack/sheet/mineral/wood/fifty)
-	crate_name = "ящик досок"
+	crate_name = "Ящик досок"
 
 /datum/supply_pack/materials/foamtank
 	name = "ящик с канистрой пены для пожаротушения"
 	desc = "Содержит канистру пены для пожаротушения. Также известной как \"бич плазмаменов.\""
 	cost = CARGO_CRATE_VALUE * 3
 	contains = list(/obj/structure/reagent_dispensers/foamtank)
-	crate_name = "ящик с канистрой пены для пожаротушения"
+	crate_name = "Ящик с канистрой пены для пожаротушения"
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/fueltank
@@ -51,7 +51,7 @@
 	desc = "Содержит топливный бак для сварки. Осторожно, легко воспламеняется."
 	cost = CARGO_CRATE_VALUE * 1.6
 	contains = list(/obj/structure/reagent_dispensers/fueltank)
-	crate_name = "ящик с канистрой топлива"
+	crate_name = "Ящик с канистрой топлива"
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/hightankfuel
@@ -60,7 +60,7 @@
 	cost = CARGO_CRATE_VALUE * 4
 	access_view = ACCESS_ENGINEERING
 	contains = list(/obj/structure/reagent_dispensers/fueltank/large)
-	crate_name = "ящик с крупным канистрой топлива"
+	crate_name = "Ящик с крупным канистрой топлива"
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/watertank
@@ -68,7 +68,7 @@
 	desc = "Содержит канистру с дигидромонооксидом... звучит крайне опасно."
 	cost = CARGO_CRATE_VALUE * 1.2
 	contains = list(/obj/structure/reagent_dispensers/watertank)
-	crate_name = "ящик с канистрой воды"
+	crate_name = "Ящик с канистрой воды"
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/gas_canisters
@@ -95,7 +95,7 @@
 		if(initial(gas.dangerous))
 			pack.access = ACCESS_ATMOSPHERICS
 			pack.access_view = ACCESS_ATMOSPHERICS
-		pack.crate_name = "ящик с канистрой [name]"
+		pack.crate_name = "Ящик с канистрой [name]"
 		pack.id = "[type]([name])"
 
 		pack.cost = cost + moleCount * initial(gas.base_value) * 1.6
