@@ -2851,6 +2851,10 @@
 /obj/item/food/candy{
 	pixel_x = -5
 	},
+/obj/item/multitool{
+	pixel_x = 12;
+	pixel_y = -2
+	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "anb" = (
@@ -3140,6 +3144,8 @@
 	name = "Robotics Operating Table"
 	},
 /obj/structure/light_fake/spot/directional/north,
+/obj/item/tank/internals/anesthetic,
+/obj/item/clothing/mask/breath/muzzle,
 /turf/open/floor/iron/freezer,
 /area/centcom/central_command_areas/rnd)
 "aoA" = (
@@ -3637,6 +3643,7 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/structure/plasticflaps/kitchen,
 /turf/open/floor/iron/dark{
 	initial_gas_mix = "o2=22;n2=82;TEMP=170.15"
 	},
@@ -4442,9 +4449,6 @@
 	},
 /obj/item/stack/sheet/iron/fifty,
 /obj/item/stack/sheet/iron/fifty,
-/obj/item/multitool{
-	pixel_x = 3
-	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "auU" = (
@@ -5079,8 +5083,8 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/engine)
 "ayq" = (
-/obj/structure/table,
 /obj/effect/turf_decal/tile/dark_blue/full,
+/obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/pen,
 /turf/open/floor/iron/dark/smooth_large,
@@ -6058,8 +6062,6 @@
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/tank/internals/anesthetic,
-/obj/item/clothing/mask/breath/medical,
 /turf/open/floor/iron/freezer,
 /area/centcom/central_command_areas/rnd)
 "aCD" = (
@@ -6613,19 +6615,19 @@
 	dir = 5
 	},
 /obj/structure/table/reinforced/rglass,
-/obj/item/reagent_containers/cup/beaker/large{
-	pixel_y = 6
-	},
-/obj/item/reagent_containers/cup/beaker/large{
-	pixel_y = 6
-	},
 /obj/machinery/reagentgrinder{
-	pixel_y = 6
+	pixel_y = 4;
+	pixel_x = 6
 	},
-/obj/item/stack/sheet/mineral/plasma,
-/obj/item/reagent_containers/cup/glass/coffee/no_lid{
-	pixel_x = -7;
-	pixel_y = -2
+/obj/item/stack/sheet/mineral/plasma{
+	pixel_x = -9;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/cup/beaker/large{
+	pixel_x = -4
+	},
+/obj/item/reagent_containers/cup/beaker/large{
+	pixel_x = -4
 	},
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/rnd)
@@ -19374,6 +19376,10 @@
 /obj/item/reagent_containers/cup/glass/coffee/no_lid{
 	pixel_x = -7;
 	pixel_y = 10
+	},
+/obj/item/reagent_containers/cup/bottle/morphine{
+	pixel_x = 10;
+	pixel_y = 14
 	},
 /turf/open/floor/iron/freezer,
 /area/centcom/central_command_areas/rnd)
@@ -76376,11 +76382,11 @@ aiF
 aiF
 aiF
 xJo
-ayq
+rWC
 aNX
 aKe
 ali
-rWC
+ayq
 xJo
 aYw
 aPA
