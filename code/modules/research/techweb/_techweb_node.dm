@@ -124,6 +124,6 @@
 		if(board.silence_announcements)
 			return
 		if(board.obj_flags & EMAGGED)
-			channels_to_use = list(RADIO_CHANNEL_COMMON)
+			channels_to_use = list(RADIO_CHANNEL_INTERCOM)
 	if(length(channels_to_use) && !starting_node)
 		aas_config_announce(/datum/aas_config_entry/researched_node, list("NODE" = display_name), null, channels_to_use)

@@ -1,6 +1,7 @@
 // Used for translating channels to tokens on examination
 GLOBAL_LIST_INIT(channel_tokens, list(
-	RADIO_CHANNEL_COMMON = RADIO_KEY_COMMON,
+	RADIO_CHANNEL_DEFAULT = RADIO_KEY_DEFAULT,
+	RADIO_CHANNEL_COMMON = RADIO_TOKEN_COMMON,
 	RADIO_CHANNEL_SCIENCE = RADIO_TOKEN_SCIENCE,
 	RADIO_CHANNEL_COMMAND = RADIO_TOKEN_COMMAND,
 	RADIO_CHANNEL_MEDICAL = RADIO_TOKEN_MEDICAL,
@@ -56,7 +57,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 
 	// construction of frequency description
 	var/list/available_channels = list()
-	available_channels += "<li><b>[span_radio(RADIO_KEY_COMMON)]</b> для текущей настроенной частоты</li>"
+	available_channels += "<li><b>[span_radio(RADIO_KEY_DEFAULT)]</b> для текущей настроенной частоты</li>"
 	if(special_channels & RADIO_SPECIAL_BINARY)
 		available_channels += "<li><b>[span_binarysay(MODE_TOKEN_BINARY)] для [span_binarysay(capitalize(MODE_BINARY))]</b></li>"
 

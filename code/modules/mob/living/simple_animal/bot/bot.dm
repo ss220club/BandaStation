@@ -77,7 +77,7 @@
 	///which channels can the bot listen to
 	var/radio_key = null
 	///The bot's default radio channel
-	var/radio_channel = RADIO_CHANNEL_COMMON
+	var/radio_channel = RADIO_CHANNEL_INTERCOM
 	///Turf a bot is summoned to navitage towards.
 	var/turf/patrol_target
 	///Turf of a user summoning a bot towards their location.

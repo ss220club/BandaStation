@@ -86,6 +86,8 @@
 	virt = speaker
 	var/datum/language/lang_instance = GLOB.language_datum_instances[language]
 	data = list(
+		"speaker" = speaker.source,
+		"radio" = speaker.radio,
 		"name" = speaker.name,
 		"job" = speaker.job,
 		"message" = message,

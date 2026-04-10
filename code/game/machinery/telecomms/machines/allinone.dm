@@ -52,6 +52,10 @@
 		"[FREQ_SECURITY]" = list(
 			"name" = RADIO_CHANNEL_SECURITY,
 			"color" = RADIO_COLOR_SECURITY
+		),
+		"[FREQ_INTERCOM]" = list(
+			"name" = RADIO_CHANNEL_INTERCOM,
+			"color" = RADIO_COLOR_INTERCOM
 		)
 	)
 

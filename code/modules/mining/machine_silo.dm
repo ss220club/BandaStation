@@ -47,7 +47,7 @@
 	var/obj/item/radio/radio
 	///The channels we announce over
 	var/list/radio_channels = list(
-		RADIO_CHANNEL_COMMON = NONE,
+		RADIO_CHANNEL_INTERCOM = NONE,
 		RADIO_CHANNEL_COMMAND = NONE,
 		RADIO_CHANNEL_SUPPLY = NONE,
 		RADIO_CHANNEL_SECURITY = NONE,
@@ -116,7 +116,7 @@
 	radio.canhear_range = 0
 	radio.set_listening(FALSE)
 	radio.keyslot = new
-	radio.keyslot.channels[RADIO_CHANNEL_COMMON] = TRUE
+	radio.keyslot.channels[RADIO_CHANNEL_INTERCOM] = TRUE
 	radio.keyslot.channels[RADIO_CHANNEL_COMMAND] = TRUE
 	radio.keyslot.channels[RADIO_CHANNEL_SUPPLY] = TRUE
 	radio.keyslot.channels[RADIO_CHANNEL_SECURITY] = TRUE
@@ -468,17 +468,17 @@
 // I must sacrifice the line diff to the gods of readable code
 /// Set up the default announcement policy for actions
 /// radio_channels[channel_name_key] = policy_bitmask
-/// where channel_name_key is one of RADIO_CHANNEL_(COMMON|COMMAND|SECURITY|SUPPLY)
+/// where channel_name_key is one of RADIO_CHANNEL_(INTERCOM|COMMAND|SECURITY|SUPPLY)
 /// and policy_bitmask is a bitmask of actions that will be announced on that channel
 /// by default
 /obj/machinery/ore_silo/proc/configure_default_announcements_policy()
 
-	radio_channels[RADIO_CHANNEL_COMMON] = BAN_ATTEMPT_FAILURE_CHALLENGING_DA_CHIEF
-	radio_channels[RADIO_CHANNEL_COMMON] |= RESTRICT_CONFIRMATION
-	radio_channels[RADIO_CHANNEL_COMMON] |= UNRESTRICT_CONFIRMATION
+	radio_channels[RADIO_CHANNEL_INTERCOM] = BAN_ATTEMPT_FAILURE_CHALLENGING_DA_CHIEF
+	radio_channels[RADIO_CHANNEL_INTERCOM] |= RESTRICT_CONFIRMATION
+	radio_channels[RADIO_CHANNEL_INTERCOM] |= UNRESTRICT_CONFIRMATION
 
-	// start off with the common channel bitmask policy as a base
-	radio_channels[RADIO_CHANNEL_COMMAND] = radio_channels[RADIO_CHANNEL_COMMON]
+	// start off with the intercom channel bitmask policy as a base
+	radio_channels[RADIO_CHANNEL_COMMAND] = radio_channels[RADIO_CHANNEL_INTERCOM]
 	radio_channels[RADIO_CHANNEL_COMMAND] |= BAN_ATTEMPT_FAILURE_NO_ACCESS
 	radio_channels[RADIO_CHANNEL_COMMAND] |= BAN_ATTEMPT_FAILURE_SOULLESS_MACHINE
 	radio_channels[RADIO_CHANNEL_COMMAND] |= UNRESTRICT_FAILURE_NO_ACCESS
@@ -490,7 +490,7 @@
 	// Security channel is used for security-related announcements
 	// but gets less information than command to avoid over-informing them without
 	// QM involvement
-	radio_channels[RADIO_CHANNEL_SECURITY] = radio_channels[RADIO_CHANNEL_COMMON]
+	radio_channels[RADIO_CHANNEL_SECURITY] = radio_channels[RADIO_CHANNEL_INTERCOM]
 	radio_channels[RADIO_CHANNEL_SECURITY] |= BAN_ATTEMPT_FAILURE_NO_ACCESS
 	radio_channels[RADIO_CHANNEL_SECURITY] |= UNRESTRICT_FAILURE_NO_ACCESS
 	radio_channels[RADIO_CHANNEL_SECURITY] |= BAN_CONFIRMATION

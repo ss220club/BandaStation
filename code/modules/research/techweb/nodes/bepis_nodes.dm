@@ -12,7 +12,7 @@
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
 	hidden = TRUE
 	experimental = TRUE
-	announce_channels = list(RADIO_CHANNEL_COMMON)
+	announce_channels = list(RADIO_CHANNEL_INTERCOM)
 
 /datum/techweb_node/extreme_office
 	id = TECHWEB_NODE_EXTREME_OFFICE
@@ -26,7 +26,7 @@
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
 	hidden = TRUE
 	experimental = TRUE
-	announce_channels = list(RADIO_CHANNEL_COMMON)
+	announce_channels = list(RADIO_CHANNEL_INTERCOM)
 
 /datum/techweb_node/spec_eng
 	id = TECHWEB_NODE_SPEC_ENG
@@ -78,7 +78,7 @@
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
 	hidden = TRUE
 	experimental = TRUE
-	announce_channels = list(RADIO_CHANNEL_COMMON)
+	announce_channels = list(RADIO_CHANNEL_INTERCOM)
 
 /datum/techweb_node/tackle_advanced
 	id = TECHWEB_NODE_TACKLE_ADVANCED
@@ -106,7 +106,7 @@
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
 	hidden = TRUE
 	experimental = TRUE
-	announce_channels = list(RADIO_CHANNEL_COMMON)
+	announce_channels = list(RADIO_CHANNEL_INTERCOM)
 
 /datum/techweb_node/posisphere
 	id = TECHWEB_NODE_POSITRONIC_SPHERE
