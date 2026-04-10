@@ -1,5 +1,5 @@
 /obj/item/clothing/accessory/ammo_vest
-	name = "разгрузка для магазинов"
+	name = "ammo webbing"
 	desc = "Тактическая разгрузка для хранения магазинов."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/webbings.dmi'
 	icon_state = "webbing"
@@ -23,7 +23,7 @@
 	return TRUE
 
 /obj/item/clothing/accessory/ammo_vest/black
-	name = "тёмная разгрузка для магазинов"
+	name = "black ammo webbing"
 	desc = "Тактическая тёмная разгрузка для хранения магазинов."
 	icon_state = "webbing_black"
 	worn_icon_state = "webbing_black"
