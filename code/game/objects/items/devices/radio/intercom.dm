@@ -23,6 +23,10 @@
 	///The icon of intercom while its turned off
 	var/icon_off = "intercom-p"
 
+/obj/item/radio/intercom/Initialize(mapload)
+	. = ..()
+	frequency = FREQ_INTERCOM
+
 /obj/item/radio/intercom/unscrewed
 	unscrewed = TRUE
 
