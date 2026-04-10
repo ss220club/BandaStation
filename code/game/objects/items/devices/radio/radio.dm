@@ -112,7 +112,7 @@
 	perform_update_icon = FALSE
 	set_listening(listening)
 	set_broadcasting(broadcasting)
-	set_frequency(sanitize_frequency(frequency, freerange, (special_channels & RADIO_SPECIAL_SYNDIE)))
+	set_frequency(sanitize_frequency(return_unused_frequency(freerange), freerange, (special_channels & RADIO_SPECIAL_SYNDIE)))
 	set_on(on)
 	perform_update_icon = TRUE
 
