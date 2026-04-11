@@ -43,7 +43,7 @@
 	desc = "Содержит канистру пены для пожаротушения. Также известной как \"бич плазмаменов\"."
 	cost = CARGO_CRATE_VALUE * 3
 	contains = list(/obj/structure/reagent_dispensers/foamtank)
-	crate_name = "Ящик с канистрой пены для пожаротушения"
+	crate_name = ""
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/fueltank
@@ -51,7 +51,7 @@
 	desc = "Содержит топливный бак для сварки. Осторожно, легко воспламеняется."
 	cost = CARGO_CRATE_VALUE * 1.6
 	contains = list(/obj/structure/reagent_dispensers/fueltank)
-	crate_name = "Ящик с канистрой топлива"
+	crate_name = ""
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/hightankfuel
@@ -60,7 +60,7 @@
 	cost = CARGO_CRATE_VALUE * 4
 	access_view = ACCESS_ENGINEERING
 	contains = list(/obj/structure/reagent_dispensers/fueltank/large)
-	crate_name = "Ящик с крупным канистрой топлива"
+	crate_name = ""
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/watertank
@@ -68,7 +68,7 @@
 	desc = "Содержит канистру с дигидромонооксидом... звучит крайне опасно."
 	cost = CARGO_CRATE_VALUE * 1.2
 	contains = list(/obj/structure/reagent_dispensers/watertank)
-	crate_name = "Ящик с канистрой воды"
+	crate_name = ""
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/gas_canisters

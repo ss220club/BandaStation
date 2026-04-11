@@ -35,7 +35,9 @@
 	var/highlight_in_console = FALSE
 
 /datum/supply_pack/New()
+	..()
 	id = type
+	if(!crate_name) crate_name = name
 
 /// Returns data used for cargo purchasing UI
 /datum/supply_pack/proc/get_contents_ui_data()
