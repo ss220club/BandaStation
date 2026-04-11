@@ -7942,10 +7942,6 @@
 /obj/structure/light_fake/spot/directional/east,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
-"aJj" = (
-/obj/effect/turf_decal/tile/brown/fourcorners,
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/rnd)
 "aJk" = (
 /obj/structure/table,
 /obj/machinery/microwave{
@@ -73040,7 +73036,7 @@ akD
 arP
 acG
 aoN
-aJj
+xJo
 ahk
 oUp
 fJe
