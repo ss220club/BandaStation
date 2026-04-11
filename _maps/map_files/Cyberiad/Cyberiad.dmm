@@ -11870,6 +11870,12 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/aft)
+"cQT" = (
+/obj/structure/table,
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/open/floor/iron,
+/area/station/security/office)
 "cRd" = (
 /obj/effect/spawner/structure/window,
 /obj/structure/sign/warning/no_smoking/circle,
@@ -20422,12 +20428,10 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "eWL" = (
-/obj/item/clothing/mask/balaclava,
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/effect/turf_decal/delivery/red,
-/obj/structure/closet/secure_closet/security/sec,
-/turf/open/floor/iron/dark,
-/area/station/security/lockers)
+/obj/structure/table,
+/obj/item/storage/fancy/donut_box,
+/turf/open/floor/iron,
+/area/station/security/office)
 "eWR" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -22331,7 +22335,7 @@
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
 	dir = 1
 	},
-/obj/structure/closet/secure_closet/security/sec,
+/obj/structure/closet/secure_closet/security,
 /turf/open/floor/iron,
 /area/station/security/checkpoint/arrivals)
 "fvw" = (
@@ -25565,14 +25569,13 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/starboard)
 "ghG" = (
-/obj/structure/closet/secure_closet/security/sec,
-/obj/item/clothing/mask/balaclava,
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/structure/window/reinforced/spawner/directional/west,
-/obj/effect/turf_decal/delivery/red,
 /obj/machinery/camera/directional/west{
 	c_tag = "Brig Security Equipment Lockers"
 	},
+/obj/effect/landmark/secequipment,
+/obj/effect/turf_decal/bot_red,
 /turf/open/floor/iron/dark,
 /area/station/security/lockers)
 "ghH" = (
@@ -37569,8 +37572,8 @@
 /turf/open/floor/plating/reinforced,
 /area/station/cargo/storage)
 "jdw" = (
+/obj/effect/turf_decal/bot_red,
 /obj/effect/landmark/secequipment,
-/obj/effect/turf_decal/bot,
 /turf/open/floor/iron,
 /area/station/security/office)
 "jdA" = (
@@ -54555,10 +54558,9 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "nkz" = (
-/obj/structure/closet/secure_closet/security/sec,
-/obj/item/clothing/mask/balaclava,
 /obj/structure/window/reinforced/spawner/directional/west,
-/obj/effect/turf_decal/delivery/red,
+/obj/effect/landmark/secequipment,
+/obj/effect/turf_decal/bot_red,
 /turf/open/floor/iron/dark,
 /area/station/security/lockers)
 "nkA" = (
@@ -57339,11 +57341,10 @@
 /turf/open/floor/wood,
 /area/station/service/library)
 "nTy" = (
-/obj/structure/closet/secure_closet/security/sec,
-/obj/item/clothing/mask/balaclava,
 /obj/structure/window/reinforced/spawner/directional/west,
 /obj/machinery/light/directional/west,
-/obj/effect/turf_decal/delivery/red,
+/obj/effect/landmark/secequipment,
+/obj/effect/turf_decal/bot_red,
 /turf/open/floor/iron/dark,
 /area/station/security/lockers)
 "nTF" = (
@@ -64727,6 +64728,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/maintenance/port/greater)
+"pGp" = (
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/effect/turf_decal/delivery/red,
+/obj/structure/closet/secure_closet/security/sec,
+/obj/item/clothing/mask/balaclava,
+/turf/open/floor/iron/dark,
+/area/station/security/lockers)
 "pGr" = (
 /obj/structure/railing{
 	dir = 8
@@ -96199,8 +96207,7 @@
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
 	dir = 8
 	},
-/obj/structure/closet,
-/obj/item/crowbar,
+/obj/structure/filingcabinet/chestdrawer,
 /turf/open/floor/iron,
 /area/station/security/checkpoint/arrivals)
 "xwC" = (
@@ -195604,7 +195611,7 @@ tqR
 wiz
 uYv
 ufm
-eWL
+pGp
 nkz
 nTy
 ghG
@@ -197410,7 +197417,7 @@ gvV
 gvV
 gvV
 sHn
-jdw
+eWL
 cOi
 lAJ
 aVF
@@ -197667,7 +197674,7 @@ gvV
 klX
 gvV
 sHn
-jdw
+cQT
 cOi
 lAJ
 aVF

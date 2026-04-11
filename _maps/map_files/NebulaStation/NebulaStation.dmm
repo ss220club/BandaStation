@@ -90828,7 +90828,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
 	},
@@ -137223,7 +137223,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
 	},
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 8
 	},
@@ -139659,7 +139659,7 @@
 /turf/open/floor/wood,
 /area/station/security/courtroom)
 "uFM" = (
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
@@ -150211,7 +150211,7 @@
 /turf/open/floor/wood/large,
 /area/station/service/library/upper)
 "wiG" = (
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
 	},
