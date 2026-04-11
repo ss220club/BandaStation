@@ -30,6 +30,7 @@ type Pack = {
   desc: string;
   cost: number;
   id: typePath;
+  highlight?: boolean;
 };
 
 type Category = {
@@ -192,7 +193,10 @@ const DepartmentCatalog = () => {
         <Section fill scrollable>
           <Stack vertical>
             {tabCategory.packs.map((pack) => (
-              <Stack.Item className="candystripe" key={pack.name}>
+              <Stack.Item className="candystripe" key={pack.name}
+              style={{
+    backgroundColor: pack.highlight ? 'rgba(255, 255, 0, 0.15)' : undefined,
+  }}>
                 <Stack fill>
                   <Stack.Item grow>
                     <Tooltip content={pack.desc}>

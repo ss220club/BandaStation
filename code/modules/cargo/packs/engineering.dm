@@ -3,16 +3,16 @@
 	crate_type = /obj/structure/closet/crate/engineering
 
 /datum/supply_pack/engineering/shieldgen
-	name = "контейнер с противо-пробойным генератором щита"
+	name = "Ящик с противо-пробойным генератором щита"
 	desc = "Опять пробит корпус? Ни слова больше при использовании противопробойного генератора поля Нанотрейзен! \
 		Использует технологию силового поля, чтобы удерживать воздух внутри и космос снаружи. Содержит 2 генератора силового поля внутри."
 	cost = CARGO_CRATE_VALUE * 3
 	access_view = ACCESS_ENGINE_EQUIP
 	contains = list(/obj/machinery/shieldgen = 2)
-	crate_name = "anti-breach shield projector crate"
+	crate_name = "Ящик с противо-пробойным генератором щита"
 
 /datum/supply_pack/engineering/ripley
-	name = "ящик с АПЛУ МОД-I"
+	name = "Ящик с АПЛУ МОД-I"
 	desc = "Набор «сделай сам» с АПЛУ МОД-! \"Рипли\", разработанный для пoдёма и \
 		переноса тяжёлого снаряжения, а также других задач на станции. Без батареек."
 	cost = CARGO_CRATE_VALUE * 10
@@ -35,7 +35,7 @@
 	crate_type = /obj/structure/closet/crate/science/robo
 
 /datum/supply_pack/engineering/conveyor
-	name = "ящик установочных компонентов конвейера"
+	name = "Ящик установочных компонентов конвейера"
 	desc = "Наладьте непрерывное производство с помощью тридцати конвейерных лент. В состав входит переключатель. \
 		А так-же инструкция для тех, у кого остались вопросы."
 	cost = CARGO_CRATE_VALUE * 3.5
@@ -46,7 +46,7 @@
 	crate_name = "Ящик установочных компонентов конвейера"
 
 /datum/supply_pack/engineering/engiequipment
-	name = "ящик инженерного снаряжения"
+	name = "Ящик инженерного снаряжения"
 	desc = "Снарядитесь тремя поясами для инструментов, жилетами со светоотражателями, маской для сварки, касками, \
 		и двумя парами мезонных очков!"
 	cost = CARGO_CRATE_VALUE * 4
@@ -60,7 +60,7 @@
 	crate_name = "Ящик инженерного снаряжения"
 
 /datum/supply_pack/engineering/powergamermitts
-	name = "ящик изолирующих перчаток"
+	name = "Ящик изолирующих перчаток"
 	desc = "Кость в горле современного общества. Практически не используются для инженерных работ. \
 		Содержит три пары изолирующих перчаток."
 	cost = CARGO_CRATE_VALUE * 8 //Made of pure-grade bullshittinium
@@ -70,7 +70,7 @@
 	crate_type = /obj/structure/closet/crate/engineering/electrical
 
 /datum/supply_pack/engineering/inducers
-	name = "ящик НТ-75 электромагнитных силовых индукторов"
+	name = "Ящик НТ-75 электромагнитных силовых индукторов"
 	desc = "Нет зарядников - нет проблем! С помощью НТ-75 ЭСИ, вы можете зарядить \
 		аккумуляторное снаряжение в любое время, в любом месте. Содержит два индуктора."
 	cost = CARGO_CRATE_VALUE * 4
@@ -79,7 +79,7 @@
 	crate_type = /obj/structure/closet/crate/nakamura
 
 /datum/supply_pack/engineering/pacman
-	name = "ящик с генератором P.A.C.M.A.N"
+	name = "Ящик с генератором P.A.C.M.A.N"
 	desc = "Инженеры не могут запустить двигатель? Это перестанет быть вашей проблемой, после того, как вы получите ваш личный генератор P.A.C.M.A.N.! \
 		Поглощает плазму, выдавая сладкую энергию."
 	cost = CARGO_CRATE_VALUE * 5
@@ -89,7 +89,7 @@
 	crate_type = /obj/structure/closet/crate/nakamura
 
 /datum/supply_pack/engineering/power
-	name = "ящик батареек"
+	name = "Ящик батареек"
 	desc = "Вы ищете больше СИЛЫ (тока)? Вы её нашли. Контейнер содержит три высоковольтные батареи питания."
 	cost = CARGO_CRATE_VALUE * 3
 	contains = list(/obj/item/stock_parts/power_store/cell/high = 3)
@@ -97,7 +97,7 @@
 	crate_type = /obj/structure/closet/crate/engineering/electrical
 
 /datum/supply_pack/engineering/shuttle_engine
-	name = "ящик с двигателем шаттла"
+	name = "Ящик с двигателем шаттла"
 	desc = "Благодаря передовым блюспейс-технологиям, наши инженеры придумали, как запихать целый двигатель шаттла \
 		в маленюсенький ящичек."
 	cost = CARGO_CRATE_VALUE * 6
@@ -108,7 +108,7 @@
 	crate_type = /obj/structure/closet/crate/secure/engineering
 
 /datum/supply_pack/engineering/tools
-	name = "ящик с ящиками для инструментов"
+	name = "Ящик с ящиками для инструментов"
 	desc = "Любой робастный космочеловек всегда имеет под рукой надёжный ящик с инструментами. Содержит три ящика электрика \
 		и три ящика механика."
 	access_view = ACCESS_ENGINE_EQUIP
@@ -119,7 +119,7 @@
 	crate_name = "Ящик с ящиками для инструментов"
 
 /datum/supply_pack/engineering/portapump
-	name = "ящик с портативными воздушными насосами"
+	name = "Ящик с портативными воздушными насосами"
 	desc = "Кто-то опять решил проветрить шаттл? Мы вас прикроем. \
 		Содержит два портативных насоса для воздуха."
 	cost = CARGO_CRATE_VALUE * 4.5
@@ -129,7 +129,7 @@
 	crate_type = /obj/structure/closet/crate/secure/engineering/atmos
 
 /datum/supply_pack/engineering/portascrubber
-	name = "ящик с портативными очистителями воздуха"
+	name = "Ящик с портативными очистителями воздуха"
 	desc = "Устраните досадную утечку плазмы с помощью вашего собственного набора из двух портативных скрубберов."
 	cost = CARGO_CRATE_VALUE * 4.5
 	access_view = ACCESS_ATMOSPHERICS
@@ -138,7 +138,7 @@
 	crate_type = /obj/structure/closet/crate/secure/engineering/atmos
 
 /datum/supply_pack/engineering/hugescrubber
-	name = "ящик с крупным портативным очистителем воздуха"
+	name = "Ящик с крупным портативным очистителем воздуха"
 	desc = "Большой переносной очиститель, для больших атмосферных проблем."
 	cost = CARGO_CRATE_VALUE * 7.5
 	access_view = ACCESS_ATMOSPHERICS
@@ -147,7 +147,7 @@
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/engineering/space_heater
-	name = "ящик нагревателей"
+	name = "Ящик нагревателей"
 	desc = "Обогреватель/охладитель двойного назначения, для прохладных ситуаций или когда вы превращаетесь в тост."
 	cost = CARGO_CRATE_VALUE * 2
 	contains = list(/obj/machinery/space_heater)
@@ -155,11 +155,12 @@
 	crate_type = /obj/structure/closet/crate/secure/engineering/atmos
 
 /datum/supply_pack/engineering/bsa
-	name = "компоненты блюспейс артиллерии" ///есть у меня мысль, нужно арту, днк, щиты и тп через тгуи выделить в консоли (условно всю строку желтую). у меня лично каждый раз проблемы с поиском и заказом целей
+	name = "Компоненты блюспейс артиллерии"
 	desc = "Гордость военно-космического командования Нанотрейзен. Легендарное орудие блюспейс артилерии является \
 		разрушительным подвигом человеческой инженерии и свидетельством решимости военного времени. \
 		Наиболее передовые исследования необходимы для постройки."
 	cost = CARGO_CRATE_VALUE * 30
+	highlight_in_console = TRUE
 	order_flags = ORDER_SPECIAL
 	access_view = ACCESS_COMMAND
 	contains = list(/obj/item/paper/guides/jobs/engineering/bsa,
@@ -168,14 +169,15 @@
 					/obj/item/circuitboard/machine/bsa/back,
 					/obj/item/circuitboard/computer/bsa_control,
 				)
-	crate_name= "ящик с деталями блюспейс артилерии"
+	crate_name= "Ящик с деталями блюспейс артилерии"
 
 /datum/supply_pack/engineering/dna_vault
-	name = "компоненты ДНК хранилища" ///тут тоже заметку воткну чтоб не забыть (если не забью)
+	name = "Компоненты ДНК хранилища"
 	desc = "Обеспечьте долговечность текущего состояния человечества в этой огромной \
 		библиотеке научных знаний, способной даровать сверхчеловеческие силы и способности. \
 		Наиболее передовые исследования необходимы для постройки.Также содержит пять ДНК сэмплера."
 	cost = CARGO_CRATE_VALUE * 24
+	highlight_in_console = TRUE
 	order_flags = ORDER_SPECIAL
 	access_view = ACCESS_COMMAND
 	contains = list(/obj/item/circuitboard/machine/dna_vault,
@@ -184,35 +186,37 @@
 	crate_name= "Ящик с деталями ДНК хранилища"
 
 /datum/supply_pack/engineering/dna_probes
-	name = "сэмплеры ДНК хранилища"
+	name = "Сэмплеры ДНК хранилища"
 	desc = "Содержит 5 ДНК сэмплеров, используемых для заполнения хранилища ДНК."
 	cost = CARGO_CRATE_VALUE * 6
 	order_flags = ORDER_SPECIAL
 	access_view = ACCESS_COMMAND
 	contains = list(/obj/item/dna_probe = 5)
-	crate_name= "ящик ДНК сэмплеров"
+	crate_name= "Ящик ДНК сэмплеров"
 
 
 /datum/supply_pack/engineering/shield_sat
-	name = "Спутник метеоритного щита" ///у нас везде метеоритный, тут для понятности тоже пусть будет, а то попутать можно генератор барьера, генератор поля, генератор не смешных шуток итп
+	name = "Спутники метеоритного щита"
 	desc = "Защитите существование этой станции с помощью системы противометеорной защиты. \
 		Содержит три спутника метеоритного щита."
 	cost = CARGO_CRATE_VALUE * 6
+	highlight_in_console = TRUE
 	access_view = ACCESS_COMMAND
 	contains = list(/obj/machinery/satellite/meteor_shield = 3)
 	crate_name= "Ящик спутников метеоритного щита"
 
 
 /datum/supply_pack/engineering/shield_sat_control
-	name = "плата управления системой защиты"
+	name = "Плата управления системой защиты"
 	desc = "Система управления системой спутников противометеорной защиты."
 	cost = CARGO_CRATE_VALUE * 10
+	highlight_in_console = TRUE
 	access_view = ACCESS_COMMAND
 	contains = list(/obj/item/circuitboard/computer/sat_control)
-	crate_name= "ящик с платой управления системы противометеорной защиты"
+	crate_name= "Ящик с платой управления системы противометеорной защиты"
 
 /datum/supply_pack/engineering/ceturtlenecks
-	name = "водолазка главного инженера"
+	name = "Водолазка главного инженера"
 	desc = "Содержит водолазку и юбку-водолазку главного инженера."
 	cost = CARGO_CRATE_VALUE * 2
 	access = ACCESS_CE
@@ -228,7 +232,7 @@
 	crate_type = /obj/structure/closet/crate/engineering
 
 /datum/supply_pack/engine/emitter
-	name = "ящик эмиттеров"
+	name = "Ящик эмиттеров"
 	desc = "Одинаково полезны для активации генераторов силового поля, уничтожения ящиков и злоумышленников. \
 		Содержит два высокомощных эмиттера."
 	cost = CARGO_CRATE_VALUE * 7
@@ -239,7 +243,7 @@
 	order_flags = ORDER_DANGEROUS
 
 /datum/supply_pack/engine/field_gen
-	name = "ящик генераторов поля"
+	name = "Ящик генераторов поля"
 	desc = "Обычно единственный барьер, стоящий между станцией и абсурдной смертью. \
 		Запитывается эммитерами. Содержит два генератора поля."
 	cost = CARGO_CRATE_VALUE * 7
@@ -247,7 +251,7 @@
 	crate_name = "Ящик генераторов поля"
 
 /datum/supply_pack/engine/grounding_rods
-	name = "ящик заземлителей"
+	name = "Ящик заземлителей"
 	desc = "Четыре заземлителя гарантированно удержат любую шальную молнию, созданную теслой, под контролем."
 	cost = CARGO_CRATE_VALUE * 8
 	contains = list(/obj/machinery/power/energy_accumulator/grounding_rod = 4)
@@ -255,7 +259,7 @@
 	crate_type = /obj/structure/closet/crate/engineering/electrical
 
 /datum/supply_pack/engine/solar
-	name = "ящик солнечных панелей"
+	name = "Ящик солнечных панелей"
 	desc = "Станьте экоактивистом с помощью самодельных усовершенствованных солнечных панелей. В комплекте содержится двадцать одна солнечная батарея, \
 		плата для управления солнечными панелями и трекер. Если у вас остались вопросы, \
 		пожалуйста, ознакомьтесь с прилагаемой инструкцией."
@@ -269,18 +273,18 @@
 	crate_type = /obj/structure/closet/crate/engineering/electrical
 
 /datum/supply_pack/engine/supermatter_shard
-	name = "ящик с осколком суперматерии"
+	name = "Ящик с осколком суперматерии"
 	desc = "Сила небес, сконцентрированная в одном кристалле."
 	cost = CARGO_CRATE_VALUE * 20
 	access = ACCESS_CE
 	contains = list(/obj/machinery/power/supermatter_crystal/shard)
-	crate_name = "ящик с осколком суперматерии"
+	crate_name = "Ящик с осколком суперматерии"
 	crate_type = /obj/structure/closet/crate/secure/radiation
 	order_flags = ORDER_DANGEROUS
 	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
 
 /datum/supply_pack/engine/tesla_coils
-	name = "ящик с катушками Теслы"
+	name = "Ящик с катушками Теслы"
 	desc = "Будь то казнь электричесвом, генерация очков исследований, или спланированная \
 		старая добрая электрификация ассистентов: этот набор из четырёх катушек Теслы может всё!"
 	cost = CARGO_CRATE_VALUE * 10
@@ -289,7 +293,7 @@
 	crate_type = /obj/structure/closet/crate/engineering/electrical
 
 /datum/supply_pack/engine/hypertorus_fusion_reactor
-	name = "ящик с ТРГ"
+	name = "Ящик с ТРГ"
 	desc = "Новый улучшенный термоядерный реактор."
 	cost = CARGO_CRATE_VALUE * 23
 	access = ACCESS_CE
@@ -305,15 +309,15 @@
 	order_flags = ORDER_DANGEROUS
 
 /datum/supply_pack/engineering/rad_protection_modules
-	name = "модули радиационной защиты"
-	desc = "Содержит несколько модулей противорадиационной защиты для МОДов."
+	name = "Модули радиационной защиты"
+	desc = "Содержит несколько модулей противорадиационной защиты для МОДовЧЧ."
 	order_flags = ORDER_INVISIBLE
 	contains = list(/obj/item/mod/module/rad_protection = 3)
 	crate_name = "модули радиационной защиты МОДов"
 	crate_type = /obj/structure/closet/crate/engineering
 
 /datum/supply_pack/engineering/rad_nebula_shielding_kit
-	name = "радиоактивный щит Небула"
+	name = "Радиоактивный щит Небула"
 	desc = "Содержит печатные платы и радиационные модули для создания радиоактивной защиты Небула."
 	cost = CARGO_CRATE_VALUE * 2
 
@@ -327,7 +331,7 @@
 	crate_type = /obj/structure/closet/crate/engineering
 
 /datum/supply_pack/engineering/portagrav
-	name = "ящик с переносным гравитационным блоком"
+	name = "Ящик с переносным гравитационным блоком"
 	desc = "Содержит переносной гравитационный блок, позволяющий клоуну свободно парить под потолком."
 	cost = CARGO_CRATE_VALUE * 4
 	access_view = ACCESS_ENGINEERING
@@ -336,7 +340,7 @@
 	crate_type = /obj/structure/closet/crate/engineering
 
 /datum/supply_pack/engineering/golfcart
-	name = "ящик с комплектом запчастей для гольф-кара"
+	name = "Ящик с комплектом запчастей для гольф-кара"
 	desc = "Содержит детали для сборки карта, предназначенного для перемещения тяжелой техники и грузов по станции. \
 		Нанотрейзен не несет ответственности за карты работающими 'станционными маршрутками'."
 	cost = CARGO_CRATE_VALUE * 11

@@ -39,7 +39,7 @@
 	crate_name = "Ящик досок"
 
 /datum/supply_pack/materials/foamtank
-	name = "ящик с канистрой пены для пожаротушения"
+	name = "Ящик с канистрой пены для пожаротушения"
 	desc = "Содержит канистру пены для пожаротушения. Также известной как \"бич плазмаменов\"."
 	cost = CARGO_CRATE_VALUE * 3
 	contains = list(/obj/structure/reagent_dispensers/foamtank)
@@ -47,7 +47,7 @@
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/fueltank
-	name = "ящик с канистрой топлива"
+	name = "Ящик с канистрой топлива"
 	desc = "Содержит топливный бак для сварки. Осторожно, легко воспламеняется."
 	cost = CARGO_CRATE_VALUE * 1.6
 	contains = list(/obj/structure/reagent_dispensers/fueltank)
@@ -55,7 +55,7 @@
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/hightankfuel
-	name = "ящик с крупным канистрой топлива"
+	name = "Ящик с крупным канистрой топлива"
 	desc = "Содержит крупный топливный бак для сварки. Держите подальше от открытого огня."
 	cost = CARGO_CRATE_VALUE * 4
 	access_view = ACCESS_ENGINEERING
@@ -64,7 +64,7 @@
 	crate_type = /obj/structure/closet/crate/large
 
 /datum/supply_pack/materials/watertank
-	name = "ящик с канистрой воды"
+	name = "Ящик с канистрой воды"
 	desc = "Содержит канистру с дигидромонооксидом... звучит крайне опасно."
 	cost = CARGO_CRATE_VALUE * 1.2
 	contains = list(/obj/structure/reagent_dispensers/watertank)

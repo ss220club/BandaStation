@@ -31,6 +31,8 @@
 	var/test_ignored = FALSE
 	/// Various properties for cargo order mostly used to determine which consoles can see it
 	var/order_flags = NONE
+	///to highlight important items in the console window
+	var/highlight_in_console = FALSE
 
 /datum/supply_pack/New()
 	id = type
