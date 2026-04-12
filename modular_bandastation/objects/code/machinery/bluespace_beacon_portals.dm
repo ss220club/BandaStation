@@ -152,7 +152,7 @@
 /obj/structure/spawner/bluespace_beacon_event/proc/collapse_portal()
 	if(QDELETED(src))
 		return
-	visible_message(span_warning("[src] destabilizes and collapses."))
+	visible_message(span_warning("[src] дестабилизируется и коллапсирует."))
 	playsound(src, 'sound/effects/magic/lightningbolt.ogg', 70, TRUE)
 	qdel(src)
 

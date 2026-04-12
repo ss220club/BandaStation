@@ -27,7 +27,7 @@
 	return {"<b>Установка маяка реальности</b><br>
 	Общими усилиями Нанотрейзен было разработано устройство маяк реальности.
 	Оно удерживает нашу реальность от поглощения опасной аномалией «Горизонт», что может поглотить всю вселенную.<br>
-	Данная станция находится досягаемости так называемой зоны сдерживания "Горизонта" и входит в кольцо содержания, поэтому Центральным Командованием принято решение об установке на активе Маяка.
+	Данная станция находится в досягаемости так называемой зоны сдерживания "Горизонта" и входит в кольцо содержания, поэтому Центральным Командованием принято решение об установке на активе Маяка.
 	Установка и запуск данного изобретения - крайне важная задача не только для Нанотрейзен, но и всех разумных существ.
 	<br><br>
 	Учтите, что устройство является экспериментальным и устанавливается из-за крайней необходимости. При его работе возможны неожиданные явления.
@@ -56,14 +56,14 @@
 #define BEACON_RANDOM_SPAWN_CHANCE 5
 #define BEACON_RANDOM_SPAWN_RADIUS 4
 #define BEACON_PORTAL_EVENT_COOLDOWN (20 SECONDS)
-#define BEACON_PORTAL_CHANCE_MIN 2
-#define BEACON_PORTAL_CHANCE_MAX 35
+#define BEACON_PORTAL_CHANCE_MIN 1
+#define BEACON_PORTAL_CHANCE_MAX 20
 #define BEACON_DEMONIC_INCURSION_CHANCE_MIN 1
 #define BEACON_DEMONIC_INCURSION_CHANCE_MAX 1
 #define BEACON_DEMONIC_INCURSION_PORTALS_MIN 1
 #define BEACON_DEMONIC_INCURSION_PORTALS_MAX 2
 #define BEACON_GLOBAL_INVASION_CHANCE_MIN 1
-#define BEACON_GLOBAL_INVASION_CHANCE_MAX 6
+#define BEACON_GLOBAL_INVASION_CHANCE_MAX 4
 #define BEACON_GLOBAL_INVASION_PORTALS_MIN 2
 #define BEACON_GLOBAL_INVASION_PORTALS_MAX 8
 
@@ -235,13 +235,13 @@
 	. = ..()
 
 	if(machine_stat & (BROKEN|NOPOWER))
-		set_light(0)
+		src.set_light(0)
 	else if(has_active_portals())
-		set_light(2, 1, "#ff4f4f")
+		src.set_light(2, 1, "#ff4f4f")
 	else if(actual_power_usage > 0)
-		set_light(2, 1, "#6fa8ff")
+		src.set_light(2, 1, "#6fa8ff")
 	else
-		set_light(1, 1, "#353535")
+		src.set_light(1, 1, "#353535")
 
 	if(has_active_portals())
 		. += "cascade"
@@ -253,11 +253,11 @@
 /obj/machinery/power/bluespace_beacon/power_change()
 	. = ..()
 	if(machine_stat & (BROKEN|NOPOWER))
-		set_light(0)
+		src.set_light(0)
 	else
-		set_light(1, 1, "#353535")
+		src.set_light(1, 1, "#353535")
 	if(.)
-		update_icon()
+		update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
 
 /obj/machinery/power/bluespace_beacon/connect_to_network()
 	if(powernet)
@@ -449,7 +449,7 @@
 	return clamp(target_count, BEACON_GLOBAL_INVASION_PORTALS_MIN, BEACON_GLOBAL_INVASION_PORTALS_MAX)
 
 /obj/machinery/power/bluespace_beacon/proc/announce_global_invasion()
-	var/announcement_text = "Обнаружен прорыв ткани реальности. Фиксация числинности сущностей иных миров невозможна. \
+	var/announcement_text = "Обнаружен прорыв ткани реальности. Фиксация численности сущностей иных миров невозможна. \
 	Протоколы блюспейс перемещений заблокированы во избежание разрыва объективной действительности и пространственно-временного континуума."
 	var/announcement_sender = "Система оповещений маяка"
 	priority_announce(
@@ -457,12 +457,6 @@
 		sound = 'modular_bandastation/objects/sounds/bsb_alarm.ogg',
 		sender_override = announcement_sender,
 		has_important_message = TRUE,
-		color_override = "red",
-	)
-	minor_announce(
-		announcement_text,
-		title = announcement_sender,
-		alert = TRUE,
 		color_override = "red",
 	)
 
@@ -528,19 +522,19 @@
 		radio_engineering_notice("Внимание: обнаружен пространственный разрыв. Локация: [get_area_name(spawn_turf)].")
 	return TRUE
 
-/obj/machinery/power/bluespace_beacon/proc/try_trigger_hostile_portal_event()
+/obj/machinery/power/bluespace_beacon/proc/try_trigger_hostile_portal_event(seconds_per_tick)
 	if(input_locked || current_charge >= maximum_charge)
 		return
 	if(world.time < next_portal_event_at)
 		return
-	if(!prob(get_portal_event_chance()))
+	if(!SPT_PROB(get_portal_event_chance(), seconds_per_tick))
 		return
 
 	next_portal_event_at = world.time + BEACON_PORTAL_EVENT_COOLDOWN
-	if(prob(get_demonic_incursion_chance()))
+	if(SPT_PROB(get_demonic_incursion_chance(), seconds_per_tick))
 		if(trigger_demonic_incursion())
 			return
-	if(prob(get_global_invasion_chance()))
+	if(SPT_PROB(get_global_invasion_chance(), seconds_per_tick))
 		if(trigger_global_invasion())
 			return
 	trigger_hostile_portal_faction()
@@ -564,10 +558,10 @@
 		return null
 	return pick(possible_turfs)
 
-/obj/machinery/power/bluespace_beacon/proc/try_spawn_random_effect()
+/obj/machinery/power/bluespace_beacon/proc/try_spawn_random_effect(seconds_per_tick)
 	if(input_locked || current_charge >= maximum_charge)
 		return
-	if(!prob(BEACON_RANDOM_SPAWN_CHANCE))
+	if(!SPT_PROB(BEACON_RANDOM_SPAWN_CHANCE, seconds_per_tick))
 		return
 	var/turf/spawn_turf = get_random_spawn_turf()
 	if(!spawn_turf)
@@ -579,7 +573,7 @@
 	var/spawned_name = spawned?.declent_ru(NOMINATIVE) || spawned?.name || "неизвестный объект"
 	radio_engineering_notice("Внимание: зафиксирован локальный аномальный выброс. Объект: [spawned_name].")
 
-	try_trigger_hostile_portal_event()
+	try_trigger_hostile_portal_event(seconds_per_tick)
 
 /obj/machinery/power/bluespace_beacon/process(seconds_per_tick)
 	if(machine_stat & (BROKEN|NOPOWER) || !anchored)
@@ -616,14 +610,14 @@
 	add_load(actual_power_usage)
 
 	if(actual_power_usage > 0)
-		mined_points = min(BEACON_BASE_POINTS * (actual_power_usage / (50 KILO WATTS)), 20) + actual_power_usage * BEACON_POINTS_PER_W
+		mined_points = (min(BEACON_BASE_POINTS * (actual_power_usage / (50 KILO WATTS)), 20) + actual_power_usage * BEACON_POINTS_PER_W) * seconds_per_tick
 		var/previous_charge = current_charge
 		current_charge = min(maximum_charge, current_charge + mined_points)
 		if(current_charge >= maximum_charge)
 			lock_to_base_consumption()
 			announce_completion()
 		else if(current_charge > previous_charge)
-			try_spawn_random_effect()
+			try_spawn_random_effect(seconds_per_tick)
 	else
 		mined_points = 0
 
@@ -650,6 +644,7 @@
 		"powerUsage" = actual_power_usage,
 		"inputLevel" = input_level,
 		"inputLocked" = input_locked,
+		"postCompletionInputLevel" = post_completion_input_level,
 	)
 
 /obj/machinery/power/bluespace_beacon/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)

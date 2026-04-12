@@ -20,6 +20,7 @@ type Data = {
   inputting: number;
   inputAvailable: number;
   inputLocked: number;
+  postCompletionInputLevel: number;
 };
 
 const POWER_MUL = 1e6;
@@ -34,6 +35,7 @@ export function BluespaceBeacon() {
     inputting,
     inputAvailable,
     inputLocked,
+    postCompletionInputLevel,
   } = data;
 
   const inputState =
@@ -66,7 +68,9 @@ export function BluespaceBeacon() {
 
           <LabeledList.Item label="Режим потребления">
             <Box color={inputLocked ? 'average' : 'label'}>
-              {inputLocked ? 'Заблокировано: 2 MW' : 'Настраиваемое'}
+              {inputLocked
+                ? `Заблокировано: ${formatPower(postCompletionInputLevel)}`
+                : 'Настраиваемое'}
             </Box>
           </LabeledList.Item>
 
