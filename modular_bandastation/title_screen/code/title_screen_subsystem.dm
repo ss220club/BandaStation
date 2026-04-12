@@ -1,6 +1,6 @@
 /datum/controller/subsystem/title
 	init_stage = INITSTAGE_FIRST
-	flags = SS_BACKGROUND
+	ss_flags = SS_BACKGROUND
 	wait = 1 SECONDS
 	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	dependencies = list(
@@ -92,7 +92,7 @@
 /datum/controller/subsystem/title/proc/count_initable_subsystems(list/subsystems)
 	subsystems_total = 0
 	for(var/datum/controller/subsystem/subsystem as anything in subsystems)
-		if ((subsystem.flags & SS_NO_INIT) || subsystem.initialized)
+		if ((subsystem.ss_flags & SS_NO_INIT) || subsystem.initialized)
 			continue
 		subsystems_total++
 

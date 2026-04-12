@@ -20,13 +20,10 @@
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	spell_requirements = NONE
 
-	/// If it's locked, and needs to be unlocked before use
-	var/locked = TRUE
 	/// How much essence it costs to unlock
 	var/unlock_amount = 100
 	/// How much essence it costs to use
 	var/cast_amount = 50
-
 	/// How long it reveals the revenant
 	var/reveal_duration = 8 SECONDS
 	// How long it stuns the revenant
@@ -34,64 +31,27 @@
 
 /datum/action/cooldown/spell/aoe/revenant/New(Target)
 	. = ..()
-	if(!isrevenant(target))
-		stack_trace("[type] was given to a non-revenant mob, please don't.")
-		qdel(src)
-		return
-
-	if(locked)
-		name = "[initial(name)] ([unlock_amount]УЭ)"
-	else
-		name = "[initial(name)] ([cast_amount]Э)"
-
-/datum/action/cooldown/spell/aoe/revenant/can_cast_spell(feedback = TRUE)
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!isrevenant(owner))
-		stack_trace("[type] was owned by a non-revenant mob, please don't.")
-		return FALSE
-
-	var/mob/living/basic/revenant/ghost = owner
-	if(ghost.dormant || HAS_TRAIT(ghost, TRAIT_REVENANT_INHIBITED))
-		return FALSE
-	if(locked && ghost.essence_excess <= unlock_amount)
-		return FALSE
-	if(ghost.essence <= cast_amount)
-		return FALSE
-
-	return TRUE
+	AddComponent(/datum/component/revenant_ability, \
+		unlock_amount = unlock_amount, \
+		cast_amount = cast_amount, \
+		reveal_duration = reveal_duration, \
+		stun_duration = stun_duration, \
+	)
 
 /datum/action/cooldown/spell/aoe/revenant/get_things_to_cast_on(atom/center)
 	return RANGE_TURFS(aoe_radius, center)
 
-/datum/action/cooldown/spell/aoe/revenant/before_cast(mob/living/basic/revenant/cast_on)
+/datum/action/cooldown/spell/aoe/revenant/vv_edit_var(var_name, var_value)
 	. = ..()
-	if(. & SPELL_CANCEL_CAST)
-		return
-
-	if(locked)
-		if(!cast_on.unlock(unlock_amount))
-			to_chat(cast_on, span_revenwarning("Вам не хватает эссенции, чтобы разблокировать «[initial(name)]»!"))
-			reset_spell_cooldown()
-			return . | SPELL_CANCEL_CAST
-
-		name = "[initial(name)] ([cast_amount]E)"
-		to_chat(cast_on, span_revennotice("Вы разблокировали «[initial(name)]»!"))
-		locked = FALSE
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
-
-	if(!cast_on.cast_check(-cast_amount))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
-
-/datum/action/cooldown/spell/aoe/revenant/after_cast(mob/living/basic/revenant/cast_on)
-	. = ..()
-	if(reveal_duration > 0 SECONDS)
-		cast_on.apply_status_effect(/datum/status_effect/revenant/revealed, reveal_duration)
-	if(stun_duration > 0 SECONDS)
-		cast_on.apply_status_effect(/datum/status_effect/incapacitating/paralyzed/revenant, stun_duration)
+	// gross getcomp, but this is solely to make life easier for badmins/debug. sue me
+	var/datum/component/revenant_ability/rev_comp = GetComponent(/datum/component/revenant_ability)
+	switch(var_name)
+		if(NAMEOF(src, unlock_amount))
+			rev_comp.set_unlock_amount(var_value)
+		if(NAMEOF(src, cast_amount))
+			rev_comp.set_cast_amount(var_value)
+		if(NAMEOF(src, reveal_duration), NAMEOF(src, stun_duration))
+			rev_comp.set_durations(reveal_duration, stun_duration)
 
 //Overload Light: Breaks a light that's online and sends out lightning bolts to all nearby people.
 /datum/action/cooldown/spell/aoe/revenant/overload
@@ -188,6 +148,11 @@
 			new /obj/effect/temp_visual/revenant/cracks(window.loc)
 	for(var/obj/machinery/light/light in victim)
 		light.flicker(rand(3, 5)) //spooky
+	for(var/obj/structure/mirror/mirror in victim)
+		if(istype(mirror, /obj/structure/mirror/magic))
+			continue
+		new /obj/effect/temp_visual/revenant(mirror.loc)
+		mirror.atom_break("magic")
 
 //Malfunction: Makes bad stuff happen to robots and machines.
 /datum/action/cooldown/spell/aoe/revenant/malfunction
@@ -333,8 +298,8 @@
 		haunt_color = "#823abb", \
 		haunt_duration = rand(1 MINUTES, 3 MINUTES), \
 		aggro_radius = aoe_radius - 1, \
-		spawn_message = span_revenwarning("[victim.declent_ru(NOMINATIVE)] начинает парить и кружиться в воздухе, светясь ужасным фиолетовым светом!"), \
-		despawn_message = span_revenwarning("[victim.declent_ru(NOMINATIVE)] падает обратно на землю и снова замирает."), \
+		spawn_message = span_revenwarning("[capitalize(victim.declent_ru(NOMINATIVE))] начинает парить и кружиться в воздухе, светясь ужасным фиолетовым светом!"), \
+		despawn_message = span_revenwarning("[capitalize(victim.declent_ru(NOMINATIVE))] падает обратно на землю и снова замирает."), \
 	)
 
 #undef REVENANT_DEFILE_MIN_DAMAGE

@@ -35,6 +35,8 @@
 				/obj/item/reagent_containers/cup/glass/bottle/coconut_rum = 5,
 				/obj/item/reagent_containers/cup/glass/bottle/yuyake = 5,
 				/obj/item/reagent_containers/cup/glass/bottle/shochu = 5,
+				/obj/item/reagent_containers/cup/glass/bottle/aperitivo = 5,
+				/obj/item/reagent_containers/cup/glass/bottle/maraschino = 5,
 				/obj/item/reagent_containers/cup/soda_cans/beer = 10,
 				/obj/item/reagent_containers/cup/soda_cans/beer/rice = 10,
 			),
@@ -76,12 +78,14 @@
 	contraband = list(
 		/obj/item/reagent_containers/cup/glass/mug/tea = 12,
 		/obj/item/reagent_containers/cup/glass/bottle/fernet = 5,
+		/obj/item/reagent_containers/cup/glass/bottle/herbal_liqueur = 2,
 	)
 	premium = list(
 		/obj/item/reagent_containers/cup/bottle/ethanol = 4,
 		/obj/item/reagent_containers/cup/glass/bottle/champagne = 5,
 		/obj/item/reagent_containers/cup/glass/bottle/trappist = 5,
 		/obj/item/reagent_containers/cup/glass/bottle/bitters = 5,
+		/obj/item/reagent_containers/cup/glass/bottle/herbal_liqueur = 2,
 	)
 
 	product_slogans = "Надеюсь, никто не попросит меня о чёртовой кружке чая...;Алкоголь - друг человека. Вы же не бросите друга?;Очень рад вас обслужить!;Никто на этой станции не хочет выпить?"

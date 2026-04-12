@@ -3008,7 +3008,7 @@
 	value = "kerrigan_h"
 	category = TTS_CATEGORY_HEROESOFTHESTORM
 	gender = TTS_GENDER_FEMALE
-	required_donator_level = 2
+	required_donator_level = 5
 
 /datum/tts_seed/silero/ladyofthorns
 	name = "Ladyofthorns"

@@ -1,0 +1,4 @@
+author: "kostya.vat"
+delete-after: True
+changes:
+  - bugfix: "Исправлена опечатка в переводе еретика пути пепла."

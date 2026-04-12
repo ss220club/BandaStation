@@ -97,7 +97,7 @@
 /atom/movable/screen/alert/status_effect/void_prison
 	name = "Пустотная Тюрьма"
 	desc = "Зияющая Пустота окутывает твою бренную оболочку." //Go straight to jail, do not pass GO, do not collect 200$
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	icon_state = "heretic_template"
 	overlay_icon = 'icons/mob/actions/actions_ecult.dmi'
 	overlay_state = "voidball_effect"

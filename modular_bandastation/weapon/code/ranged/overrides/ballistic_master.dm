@@ -61,6 +61,21 @@
 /obj/item/gun/ballistic/automatic/bow
 	recoil = 0
 
+/obj/item/gun/ballistic/automatic/pistol/toy
+	recoil = 0
+
+/obj/item/gun/ballistic/automatic/toy
+	recoil = 0
+
+/obj/item/gun/ballistic/shotgun/toy
+	recoil = 0
+
+/obj/item/gun/ballistic/automatic/c20r/toy
+	recoil = 0
+
+/obj/item/gun/ballistic/automatic/l6_saw/toy
+	recoil = 0
+
 /obj/item/gun/ballistic/shotgun/riot/lethal
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot/lethal
 
@@ -77,13 +92,6 @@
 /obj/item/gun/ballistic/clear_suppressor()
 	w_class = initial(w_class)
 	return ..()
-
-// MARK: Visual effect after firing (muzzle flash)
-/obj/effect/temp_visual/dir_setting/firing_effect
-	light_system = OVERLAY_LIGHT
-	light_range = 2
-	light_power = 1
-	light_color = LIGHT_COLOR_FIRE
 
 /obj/item/firing_pin/alert_level
 	name = "alert level firing pin"
