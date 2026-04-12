@@ -18,7 +18,7 @@
 			to_chat(master.current, span_warning("Сущность [owner], вашего слуги, исчезает из твоего сознания."))
 		if(owner.current)
 			to_chat(owner.current, span_deconversion_message("Ваш разум начинает заполняться туманом - ваш хозяин [master ? "больше не [master]":"отсутствует"], вы свободны!"))
-			owner.current.visible_message(span_deconversion_message("[capitalize(owner.current.declent_ru(NOMINATIVE))], кажется, освобождается от оков Мансура!"), ignored_mobs = owner.current)
+			owner.current.visible_message(span_deconversion_message("[capitalize(owner.current.declent_ru(NOMINATIVE))], кажется, освобождается от оков Мансуса!"), ignored_mobs = owner.current)
 
 	master = null
 	return ..()
