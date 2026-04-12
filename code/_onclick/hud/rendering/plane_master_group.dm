@@ -183,6 +183,12 @@
 
 		animate(plane, transform = offsets[visual_offset + offset_offset], 0.05 SECONDS, easing = LINEAR_EASING)
 
+	// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	sync_shadows_plane_visibility(source)
+#endif
+	// BANDASTATION MOD END: shadows
+
 /// Holds plane masters for popups, like camera windows
 /// Note: We do not scale this plane, even though we could
 /// This is because it's annoying to get turfs to position inside it correctly

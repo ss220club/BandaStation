@@ -29,6 +29,12 @@
 
 /obj/machinery/door/poddoor/Initialize(mapload)
 	. = ..()
+	// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	shadowcaster_ref = new /atom/movable/shadowcaster(loc, src)
+	sync_shadowcaster_for_door(shadowcaster_ref, src)
+#endif
+	// BANDASTATION MOD END: shadows
 	if(show_nav_computer_icon)
 		AddElement(/datum/element/nav_computer_icon, 'icons/effects/nav_computer_indicators.dmi', "airlock", TRUE)
 

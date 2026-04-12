@@ -74,6 +74,12 @@
 	/// What specific lift ID do we link with?
 	var/transport_linked_id
 
+	// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	var/atom/movable/shadowcaster/shadowcaster_ref
+#endif
+	// BANDASTATION MOD END: shadows
+
 	/// Checks to see if this airlock has an unrestricted "latch" within (will set to TRUE if present).
 	var/unres_latch = FALSE
 	/// Unrestricted sides. A bitflag for which direction (if any) can open the door with no access
@@ -179,6 +185,11 @@
 		GLOB.elevator_doors -= src
 	QDEL_NULL(spark_system)
 	QDEL_NULL(filler)
+// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	QDEL_NULL(shadowcaster_ref)
+#endif
+// BANDASTATION MOD END: shadows
 	air_update_turf(TRUE, FALSE)
 	return ..()
 
@@ -525,6 +536,12 @@
 				icon_state = "[base_icon_state]_deny"
 		else
 			icon_state = "[base_icon_state]_[density ? "closed" : "open"]"
+// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	if(shadowcaster_ref)
+		sync_shadowcaster_for_door(shadowcaster_ref, src)
+#endif
+// BANDASTATION MOD END: shadows
 
 /obj/machinery/door/update_overlays()
 	. = ..()

@@ -42,4 +42,10 @@
 			if(T)
 				T.multiz_turf_new(src, UP)
 
+// BANDASTATION MOD START: Shadows
+#ifdef DYN_SHADOWS_ENABLED
+	shadows_remove_stray_turf_attached_shadowcasters(src)
+#endif
+// BANDASTATION MOD END: Shadows
+
 	return INITIALIZE_HINT_NORMAL

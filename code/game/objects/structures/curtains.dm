@@ -18,12 +18,25 @@
 	var/open = TRUE
 	/// if it can be seen through when closed
 	var/opaque_closed = FALSE
+	// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	var/atom/movable/shadowcaster/shadowcaster_ref
+	// BANDASTATION MOD END: shadows
+#endif
 
 /obj/structure/curtain/Initialize(mapload)
 	// see-through curtains should let emissives shine through
 	if(!opaque_closed)
 		blocks_emissive = EMISSIVE_BLOCK_NONE
 	. = ..()
+	// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	shadowcaster_ref = new /atom/movable/shadowcaster(loc, src)
+	shadowcaster_ref.icon = 'icons/effects/shadows/shadow.dmi'
+	shadowcaster_ref.icon_state = "shadow"
+	shadowcaster_ref.alpha = open ? 0 : 255
+	// BANDASTATION MOD END: shadows
+#endif
 	ADD_TRAIT(src, TRAIT_INVERTED_DEMOLITION, INNATE_TRAIT)
 
 /obj/structure/curtain/proc/toggle()
@@ -40,6 +53,11 @@
 
 /obj/structure/curtain/update_icon_state()
 	icon_state = "[icon_type]-[open ? "open" : "closed"]"
+	// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	shadowcaster_ref?.alpha = open ? 0 : 255
+	// BANDASTATION MOD END: shadows
+#endif
 	return ..()
 
 /obj/structure/curtain/attackby(obj/item/W, mob/user)

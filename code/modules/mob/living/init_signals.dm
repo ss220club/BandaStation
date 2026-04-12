@@ -79,6 +79,12 @@
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_MIND_TEMPORARILY_GONE), PROC_REF(on_mind_temporarily_gone_trait_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_MIND_TEMPORARILY_GONE), PROC_REF(on_mind_temporarily_gone_trait_loss))
 
+// BANDASTATION MOD START: Shadows
+#ifdef DYN_SHADOWS_ENABLED
+	RegisterSignal(src, COMSIG_MOB_UPDATE_SIGHT, PROC_REF(on_shadows_sight_update_for_cascade))
+#endif
+// BANDASTATION MOD END: Shadows
+
 /// Called when [TRAIT_KNOCKEDOUT] is added to the mob.
 /mob/living/proc/on_knockedout_trait_gain(datum/source)
 	SIGNAL_HANDLER

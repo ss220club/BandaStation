@@ -25,6 +25,12 @@
 	var/walltype = /turf/closed/wall
 	var/girder_type = /obj/structure/girder/displaced
 	var/opening = FALSE
+	// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	plane = WALL_PLANE
+	var/atom/movable/shadowcaster/shadowcaster_ref
+#endif
+	// BANDASTATION MOD END: shadows
 
 /obj/structure/falsewall/get_save_vars()
 	. = ..()
@@ -33,11 +39,25 @@
 
 /obj/structure/falsewall/Initialize(mapload)
 	. = ..()
+	// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	shadowcaster_ref = new /atom/movable/shadowcaster(loc, src)
+	sync_shadowcaster_for_falsewall(shadowcaster_ref, src)
+#endif
+	// BANDASTATION MOD END: shadows
 	var/obj/item/stack/initialized_mineral = new mineral // Okay this kinda sucks.
 	set_custom_materials(initialized_mineral.mats_per_unit, mineral_amount)
 	qdel(initialized_mineral)
 	air_update_turf(TRUE, TRUE)
 	update_appearance()
+
+	// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+/obj/structure/falsewall/Destroy()
+	QDEL_NULL(shadowcaster_ref)
+	return ..()
+#endif
+	// BANDASTATION MOD END: shadows
 
 /obj/structure/falsewall/attack_hand(mob/user, list/modifiers)
 	if(opening)
@@ -77,6 +97,12 @@
 	if(opening)
 		icon = initial(icon)
 		icon_state = "[base_icon_state]-[density ? "opening" : "closing"]"
+		// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+		if(shadowcaster_ref)
+			sync_shadowcaster_for_falsewall(shadowcaster_ref, src)
+#endif
+	// BANDASTATION MOD END: shadows
 		return ..()
 	if(density)
 		icon = fake_icon
@@ -84,6 +110,12 @@
 	else
 		icon = initial(icon)
 		icon_state = "[base_icon_state]-open"
+		// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	if(shadowcaster_ref)
+		sync_shadowcaster_for_falsewall(shadowcaster_ref, src)
+#endif
+	// BANDASTATION MOD END: shadows
 	return ..()
 
 /obj/structure/falsewall/proc/ChangeToWall(delete = 1)

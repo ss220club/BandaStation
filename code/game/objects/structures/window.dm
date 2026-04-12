@@ -685,6 +685,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/reinforced/plasma/spawner, 0)
 	name = "tinted window"
 	icon_state = "twindow"
 
+/obj/structure/window/reinforced/tinted/Initialize(mapload, direct)
+	. = ..()
+	// BANDASTATION MOD START: shadows
+#ifdef DYN_SHADOWS_ENABLED
+	new /atom/movable/shadowcaster(src)
+#endif
+	// BANDASTATION MOD END: shadows
+
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/reinforced/tinted/spawner, 0)
 
 /obj/structure/window/reinforced/tinted/frosted
