@@ -84,16 +84,16 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 		if("setClw")
 			clown_slots = text2num(params["setClw"])
 		if("dispatchErt")
-			var/datum/ert/new_ert
+			var/datum/ert/ert_type_path
 			switch(ert_type)
 				if("Amber")
-					new_ert = new /datum/ert/amber
+					ert_type_path = /datum/ert/amber
 				if("Red")
-					new_ert = new /datum/ert/red
+					ert_type_path = /datum/ert/red
 				if("Gamma")
-					new_ert = new /datum/ert/gamma
+					ert_type_path = /datum/ert/gamma
 				if("Inquisition")
-					new_ert = new /datum/ert/inquisition
+					ert_type_path = /datum/ert/inquisition
 				else
 					to_chat(usr, "<span class='userdanger'>Invalid ERT type.</span>")
 					return
@@ -103,9 +103,6 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 				log_admin("[key_name(usr)] tried to create a [ert_type] ERT with zero slots available.")
 				to_chat(usr, span_userdanger("ERT must have at least 1 slot available!"))
 				return
-
-			new_ert.teamsize = commander_slots + security_slots + medical_slots + engineering_slots + janitor_slots + chaplain_slots + clown_slots
-			new_ert.roles = slots_to_roles(security_slots, medical_slots, engineering_slots, janitor_slots, chaplain_slots, clown_slots, ert_type)
 
 			GLOB.ert_request_answered = TRUE
 			var/slots_list = list()
@@ -129,7 +126,7 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 			log_admin("[key_name(usr)] dispatched a [ert_type] ERT. Slots: [slot_text]")
 			if(should_be_announced)
 				priority_announce("Внимание, [station_name()]. Ваш запрос ОБР санкционирован. Идёт проверка доступности ресурсов. Результат будет объявлен в течении нескольких минут.", "Активирован протокол ОБР")
-			makeERTFromSlots(new_ert, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, chaplain_slots, clown_slots)
+			makeERTFromSlots(ert_type_path, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, chaplain_slots, clown_slots)
 
 		if("view_player_panel")
 			SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/show_player_panel, locate(params["uid"]))
@@ -219,164 +216,32 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 				chaplain_slots--
 	return roles
 
-/datum/ert_manager/proc/makeERTFromSlots(datum/ert/ertemplate, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, chaplain_slots, clown_slots)
-	var/human_authority_setting = CONFIG_GET(string/human_authority)
-
-	ertemplate.enforce_human = (human_authority_setting == HUMAN_AUTHORITY_ENFORCED ? TRUE : FALSE)
+/datum/ert_manager/proc/makeERTFromSlots(datum/ert/ert_type_path, admin_slots, commander_slots, security_slots, medical_slots, engineering_slots, janitor_slots, chaplain_slots, clown_slots)
+	var/datum/ert/ertemplate = new ert_type_path()
+	ertemplate.teamsize = commander_slots + security_slots + medical_slots + engineering_slots + janitor_slots + chaplain_slots + clown_slots
+	ertemplate.roles = slots_to_roles(security_slots, medical_slots, engineering_slots, janitor_slots, chaplain_slots, clown_slots, ert_type)
 	ertemplate.spawn_admin = admin_slots
+	ertemplate.leader_role = commander_slots > 0 ? ertemplate.leader_role : null
 
-	var/list/spawnpoints = GLOB.emergencyresponseteamspawn
-	var/index = 0
+	var/datum/admins/admin_holder = GLOB.admin_datums[usr.ckey]
+	if(!admin_holder)
+		stack_trace("Cannot determine the admin executing this proc!")
+		return FALSE
 
-	var/list/slot_list = list(
-		"Commander" = commander_slots,
-		"Security" = security_slots,
-		"Medical" = medical_slots,
-		"Engineer" = engineering_slots,
-		"Janitor" = janitor_slots,
-		"Inquisitor" = chaplain_slots,
-		"Clown" = clown_slots,
-		)
+	var/spawn_success = admin_holder.make_emergency_response_team(ertemplate, skip_preference_menu = TRUE)
 
-	var/list/active_slots = list()
-	for (var/role in slot_list)
-		if(!slot_list[role])
-			continue
-		active_slots += "[role]: [slot_list[role]]"
-
-	var/slot_text = active_slots.Join(", ")
-
-	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
-	"Do you wish to be considered for [span_notice(ertemplate.polldesc)]? \n[span_smallnotice(slot_text)]",
-	check_jobban = "deathsquad",
-	alert_pic = create_leader_preview(ertemplate) || /obj/item/card/id/advanced/centcom/ert,
-	role_name_text = ertemplate.polldesc
-	)
-
-	var/teamSpawned = FALSE
-
-	// This list will take priority over spawnpoints if not empty
-	var/list/spawn_turfs = list()
-
-	// Takes precedence over spawnpoints[1] if not null
-	var/obj/effect/landmark/ert_brief_spawn/brief_spawn = locate()
-
-	if(!length(candidates))
+	if(!spawn_success)
 		if(should_be_announced)
 			minor_announce("[station_name()], уведомляем вас, что развёртывание ОБР в данный момент невозможно.", "ОБР недоступен")
 		return FALSE
 
-	if(ertemplate.spawn_admin)
-		if(isobserver(usr))
-			var/mob/living/carbon/human/admin_officer = new (brief_spawn.loc || spawnpoints[1])
-			var/chosen_outfit = usr.client?.prefs?.read_preference(/datum/preference/choiced/brief_outfit)
-			usr.client.prefs.safe_transfer_prefs_to(admin_officer, is_antag = TRUE)
-			admin_officer.equipOutfit(chosen_outfit)
-			admin_officer.PossessByPlayer(usr.key)
-		else
-			to_chat(usr, span_warning("Could not spawn you in as briefing officer as you are not a ghost!"))
+	if(should_be_announced)
+		var/list/team_adj = list("Amber" = "стандартный", "Red" = "усиленный", "Gamma" = "элитный", "Inquisition" = "инквизиторский")
+		var/list/team_code = list("Amber" = "ЭМБЕР", "Red" = "РЭД", "Gamma" = "ГАММА", "Inquisition" = "ГАММА")
+		var/announcement = "Внимание, [station_name()]. Мы направляем [team_adj[ert_type] || "специальный"] отряд быстрого реагирования кода «[team_code[ert_type] || "ХЗ"]». Ожидайте."
+		priority_announce(announcement, "ОБР в пути")
 
-	//Pick the (un)lucky players
-	var/numagents = min(ertemplate.teamsize, length(candidates))
-
-	//Create team
-	var/datum/team/ert/ert_team = new ertemplate.team()
-	if(ertemplate.rename_team)
-		ert_team.name = ertemplate.rename_team
-
-	//Assign team objective
-	var/datum/objective/missionobj = new ()
-	missionobj.team = ert_team
-	missionobj.explanation_text = ertemplate.mission
-	missionobj.completed = TRUE
-	ert_team.objectives += missionobj
-	ert_team.mission = missionobj
-
-	var/mob/dead/observer/earmarked_leader
-	var/leader_spawned = FALSE // just in case the earmarked leader disconnects or becomes unavailable, we can try giving leader to the last guy to get chosen
-
-	if(ertemplate.leader_experience)
-		var/list/candidate_living_exps = list()
-		for(var/i in candidates)
-			var/mob/dead/observer/potential_leader = i
-			candidate_living_exps[potential_leader] = potential_leader.client?.get_exp_living(TRUE)
-
-		candidate_living_exps = sort_list(candidate_living_exps, cmp=/proc/cmp_numeric_dsc)
-		if(candidate_living_exps.len > ERT_EXPERIENCED_LEADER_CHOOSE_TOP)
-			candidate_living_exps.Cut(ERT_EXPERIENCED_LEADER_CHOOSE_TOP+1) // pick from the top ERT_EXPERIENCED_LEADER_CHOOSE_TOP contenders in playtime
-		earmarked_leader = pick(candidate_living_exps)
-	else
-		earmarked_leader = pick(candidates)
-
-	while(numagents && candidates.len)
-		var/turf/spawnloc
-		if(length(spawn_turfs))
-			spawnloc = pick(spawn_turfs)
-		else
-			spawnloc = spawnpoints[index+1]
-			//loop through spawnpoints one at a time
-			index = (index + 1) % spawnpoints.len
-
-		var/mob/dead/observer/chosen_candidate = earmarked_leader || pick(candidates) // this way we make sure that our leader gets chosen
-		candidates -= chosen_candidate
-		if(!chosen_candidate?.key)
-			continue
-
-		//Spawn the body
-		var/mob/living/carbon/human/ert_operative
-		if(ertemplate.mob_type)
-			ert_operative = new ertemplate.mob_type(spawnloc)
-		else
-			ert_operative = new /mob/living/carbon/human(spawnloc)
-			chosen_candidate.client.prefs.safe_transfer_prefs_to(ert_operative, is_antag = TRUE)
-		ert_operative.PossessByPlayer(chosen_candidate.key)
-
-		if(ertemplate.enforce_human || !(ert_operative.dna.species.changesource_flags & ERT_SPAWN))
-			ert_operative.set_species(/datum/species/human)
-
-		//Give antag datum
-		var/datum/antagonist/ert/ert_antag
-
-		if((chosen_candidate == earmarked_leader) && (commander_slots > 0 && !leader_spawned))
-			ert_antag = new ertemplate.leader_role ()
-			earmarked_leader = null
-			leader_spawned = TRUE
-		else
-			ert_antag = ertemplate.roles[WRAP(numagents,1,length(ertemplate.roles) + 1)]
-			ert_antag = new ert_antag ()
-		ert_antag.random_names = ertemplate.random_names
-
-		ert_operative.mind.add_antag_datum(ert_antag,ert_team)
-		ert_operative.mind.set_assigned_role(SSjob.get_job_type(ert_antag.ert_job_path))
-
-		//Logging and cleanup
-		ert_operative.log_message("has been selected as \a [ert_antag.name].", LOG_GAME)
-		numagents--
-		teamSpawned++
-
-	if (teamSpawned)
-		message_admins("[ertemplate.polldesc] has spawned with the mission: [ertemplate.mission]")
-		if(should_be_announced)
-			switch(ert_type)
-				if("Amber")
-					priority_announce("Внимание, [station_name()]. Мы направляем стандартный отряд быстрого реагирования кода «ЭМБЕР». Ожидайте.", "ОБР в пути")
-				if("Red")
-					priority_announce("Внимание, [station_name()]. Мы направляем усиленный отряд быстрого реагирования кода «РЭД». Ожидайте.", "ОБР в пути")
-				if("Gamma")
-					priority_announce("Внимание, [station_name()]. Мы направляем элитный отряд быстрого реагирования кода «ГАММА». Ожидайте.", "ОБР в пути")
-				if("Inquisition")
-					priority_announce("Внимание, [station_name()]. Мы направляем инквизиторский отряд быстрого реагирования кода «ГАММА». Ожидайте.", "ОБР в пути")
-
-	//Open the Armory doors
-	if(ertemplate.opendoors)
-		for(var/obj/machinery/door/poddoor/ert/door as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/door/poddoor/ert))
-			door.open()
-			CHECK_TICK
 	return TRUE
-
-/datum/ert_manager/proc/create_leader_preview(datum/ert/ert_template)
-	var/datum/antagonist/ert/preview = ert_template.leader_role
-	return image(get_dynamic_human_appearance(preview.outfit, r_hand = NO_REPLACE, l_hand = NO_REPLACE))
 
 /obj/effect/landmark/ert_brief_spawn
 	name = "ertbriefspawn"
