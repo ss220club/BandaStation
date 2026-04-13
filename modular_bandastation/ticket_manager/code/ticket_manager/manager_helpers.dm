@@ -351,6 +351,15 @@
 		"time" = time_stamp(NONE),
 	))
 
+	if(log_in_blackbox)
+		SSblackbox.LogAhelp(
+			user_ticket.id,
+			"Interaction",
+			strip_html_full(message),
+			user_client.ckey,
+			usr?.ckey
+		)
+
 	SStgui.update_uis(GLOB.ticket_manager)
 
 /// Logging internal ticket actions. Requires only ticket datum and message
