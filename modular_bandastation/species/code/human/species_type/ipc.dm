@@ -7,6 +7,7 @@
 	inherent_biotypes = MOB_ROBOTIC
 	exotic_bloodtype = BLOOD_TYPE_OIL
 	species_language_holder = /datum/language_holder/synthetic
+	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN
 
 	mutantstomach = null
 	mutantliver = null
