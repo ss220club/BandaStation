@@ -1,5 +1,8 @@
 
+// ВСПОМОГАТЕЛЬНЫЕ ПРОКЕДУРЫ
 /proc/ipc_heart_check_revive(mob/living/carbon/human/M)
+	if(!M.client)
+		return FALSE
 	var/obj/item/organ/brain/positronic/brain = M.get_organ_slot(ORGAN_SLOT_BRAIN)
 	if(!brain)
 		return FALSE
@@ -16,7 +19,6 @@
 	return TRUE
 
 // ПОЗИТРОННЫЙ МОЗГ
-
 
 /obj/item/organ/brain/positronic
 	name = "positronic brain"
@@ -61,7 +63,7 @@
 			to_chat(owner, span_danger("Предупреждение: Обнаружено повреждение данных."))
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		if(H.is_ipc())
+		if(IS_IPC(H))
 			var/datum/species/ipc/S = H.dna.species
 			S.handle_emp(H, severity)
 
@@ -76,7 +78,6 @@
 	desc = "Позитронный блок с платой из киборга. Содержит ИИ-личность."
 
 //  Борг зарядка
-
 /obj/item/stock_parts/power_store/ipc_battery_proxy
 	/// Батарея-владелец
 	var/obj/item/organ/heart/ipc_battery/battery_ref
@@ -101,7 +102,7 @@
 
 /obj/item/organ/heart/ipc_battery
 	name = "ipc power cell"
-	desc = "Высокоемкая батарея, обеспечивающая питание всех систем КПБ."
+	desc = "Высокоёмкая батарея, обеспечивающая питание всех систем КПБ."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "ipc_cell"
 	zone = BODY_ZONE_CHEST
@@ -154,10 +155,10 @@
 	switch(severity)
 		if(EMP_HEAVY)
 			charge = max(0, charge - (maxcharge * 0.5))
-			to_chat(owner, span_userdanger("КРИТИЧЕСКАЯ ОШИБКА: Нестабильное поведение батареи!"))
+			to_chat(owner, span_userdanger("КРИТИЧЕСКАЯ ОШИБКА: Батарея разряжена на 50%!"))
 		if(EMP_LIGHT)
 			charge = max(0, charge - (maxcharge * 0.25))
-			to_chat(owner, span_danger("Предупреждение: Повреждение батареи."))
+			to_chat(owner, span_danger("Предупреждение: Батарея разряжена на 25%."))
 
 // ЛЕГКИЕ (СИСТЕМА ОХЛАЖДЕНИЯ)
 
@@ -170,11 +171,12 @@
 	slot = ORGAN_SLOT_LUNGS
 	organ_flags = ORGAN_ROBOTIC
 
+
 // ГЛАЗА
 
 /obj/item/organ/eyes/robotic/ipc
 	name = "ipc optical sensors"
-	desc = "Оптические сенсоры кпб. Позволяют видеть в различных спектрах."
+	desc = "Оптические сенсоры КПБ. Позволяют видеть в различных спектрах."
 	icon = 'modular_bandastation/MachAImpDe/icons/organs.dmi'
 	icon_state = "ipc_eyes"
 	organ_flags = ORGAN_ROBOTIC
@@ -184,12 +186,11 @@
 
 /obj/item/organ/ears/robot/ipc
 	name = "ipc audio sensors"
-	desc = "Аудио сенсоры КПБ."
+	desc = "Аудиосенсоры КПБ."
 	icon = 'icons/obj/medical/organs/organs.dmi'
 	icon_state = "ears-c"
 	base_icon_state = "ears-c"
 	organ_flags = ORGAN_ROBOTIC
-
 
 // ЯЗЫК
 

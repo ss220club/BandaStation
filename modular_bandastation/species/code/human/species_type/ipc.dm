@@ -1,9 +1,3 @@
-// ============================================
-// ХЕЛПЕР
-// ============================================
-/mob/living/carbon/human/proc/is_ipc()
-	return istype(dna?.species, /datum/species/ipc)
-
 /datum/species/ipc
 	name = "IPC"
 	id = SPECIES_IPC
@@ -13,7 +7,6 @@
 	inherent_biotypes = MOB_ROBOTIC
 	exotic_bloodtype = BLOOD_TYPE_OIL
 	species_language_holder = /datum/language_holder/synthetic
-	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN
 
 	mutantstomach = null
 	mutantliver = null
@@ -35,6 +28,8 @@
 
 	inherent_traits = list(
 		TRAIT_RESISTCOLD,
+		TRAIT_RESISTHIGHPRESSURE,
+		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_NOBREATH,
 		TRAIT_RADIMMUNE,
 		TRAIT_LIVERLESS_METABOLISM,
@@ -71,10 +66,6 @@
 	H.update_body()
 	H.update_body_parts()
 
-	// Защита от давления
-	ADD_TRAIT(H, TRAIT_RESISTHIGHPRESSURE, TRAIT_SOURCE_IPC_CHASSIS)
-	ADD_TRAIT(H, TRAIT_RESISTLOWPRESSURE, TRAIT_SOURCE_IPC_CHASSIS)
-
 	// Зарядка на станции боргов
 	RegisterSignal(H, COMSIG_PROCESS_BORGCHARGER_OCCUPANT, PROC_REF(on_borg_charge))
 	// HUD батареи
@@ -100,8 +91,7 @@
 		COMSIG_IPC_BATTERY_UPDATED,
 		COMSIG_CARBON_LIMB_DAMAGED,
 	))
-	REMOVE_TRAIT(H, TRAIT_RESISTHIGHPRESSURE, TRAIT_SOURCE_IPC_CHASSIS)
-	REMOVE_TRAIT(H, TRAIT_RESISTLOWPRESSURE, TRAIT_SOURCE_IPC_CHASSIS)
+	REMOVE_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED, TRAIT_SOURCE_IPC_CHASSIS)
 	remove_ipc_battery_hud(H)
 	if(istype(H.mob_mood, /datum/mood/ipc_neutral))
 		QDEL_NULL(H.mob_mood)
@@ -141,7 +131,6 @@
 		return pick(GLOB.ipc_names)
 	return ..()
 
-// СОВМЕСТИМОСТЬ С АНТАГОНИСТАМИ
 
 /datum/dynamic_ruleset/roundstart/changeling/is_valid_candidate(mob/living/candidate, client/candidate_client)
 	if(!..())
@@ -160,7 +149,11 @@
 			return FALSE
 	return ..()
 
-// НАСТРОЕНИЕ IPC — нейтральное (без эмоций)
+/datum/quirk/is_species_appropriate(datum/species/mob_species)
+	if(ispath(mob_species, /datum/species/ipc))
+		return FALSE
+	return ..()
+
 
 /datum/mood/ipc_neutral
 
@@ -182,9 +175,7 @@
 /datum/mood/ipc_neutral/unmodify_hud()
 	return
 
-// HUD ИНДИКАТОР БАТАРЕИ IPC
 
-/// Иконка заряда батареи в слоте ui_mood. Нажмите для точного процента.
 /atom/movable/screen/ipc_battery_hud
 	name = "battery charge"
 	icon = 'modular_bandastation/species/icons/hud/ipc_ui.dmi'
@@ -205,7 +196,6 @@
 	var/pct = round((bat.charge / bat.maxcharge) * 100)
 	to_chat(H, span_notice("Заряд источника питания: [pct]% ([round(bat.charge)]/[bat.maxcharge])"))
 
-// УПРАВЛЕНИЕ HUD НА ВИДЕ IPC
 
 /datum/species/ipc/proc/on_hud_created(datum/source)
 	SIGNAL_HANDLER
@@ -214,24 +204,19 @@
 		return
 	add_ipc_battery_hud(H)
 
-/// Вызывается по COMSIG_IPC_BATTERY_UPDATED — орган сообщает об изменении заряда.
-/// Вид обновляет HUD и проверяет целостность корпуса (для отслеживания восстановления).
+
 /datum/species/ipc/proc/on_battery_updated(mob/living/carbon/human/H)
 	SIGNAL_HANDLER
 	update_ipc_battery_hud(H)
 	check_chassis_integrity(H)
 
-/// Вызывается по COMSIG_CARBON_LIMB_DAMAGED — любая часть тела получила урон.
-/// Проверяет, не был ли вскрыт корпус, и немедленно снимает защиту от давления.
+
 /datum/species/ipc/proc/on_limb_damaged(mob/living/carbon/human/H, obj/item/bodypart/limb, brute, burn)
 	SIGNAL_HANDLER
 	if(limb.limb_id != SPECIES_IPC)
 		return
 	check_chassis_integrity(H)
 
-/// Проверяет целостность всех частей тела КПБ.
-/// Если любая превышает порог брут-повреждений — снимает защиту от давления.
-/// Если все ниже порога — восстанавливает защиту.
 /datum/species/ipc/proc/check_chassis_integrity(mob/living/carbon/human/H)
 	var/any_breached = FALSE
 	for(var/obj/item/bodypart/BP in H.bodyparts)
@@ -241,15 +226,41 @@
 			any_breached = TRUE
 			break
 
-	var/currently_intact = HAS_TRAIT_FROM(H, TRAIT_RESISTLOWPRESSURE, TRAIT_SOURCE_IPC_CHASSIS)
-	if(any_breached && currently_intact)
-		REMOVE_TRAIT(H, TRAIT_RESISTHIGHPRESSURE, TRAIT_SOURCE_IPC_CHASSIS)
-		REMOVE_TRAIT(H, TRAIT_RESISTLOWPRESSURE, TRAIT_SOURCE_IPC_CHASSIS)
+	var/was_breached = HAS_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED)
+	if(any_breached && !was_breached)
+		ADD_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED, TRAIT_SOURCE_IPC_CHASSIS)
 		to_chat(H, span_warning("СИСТЕМНОЕ ПРЕДУПРЕЖДЕНИЕ: Целостность корпуса нарушена. Внешняя среда может повредить внутренние компоненты."))
-	else if(!any_breached && !currently_intact)
-		ADD_TRAIT(H, TRAIT_RESISTHIGHPRESSURE, TRAIT_SOURCE_IPC_CHASSIS)
-		ADD_TRAIT(H, TRAIT_RESISTLOWPRESSURE, TRAIT_SOURCE_IPC_CHASSIS)
+	else if(!any_breached && was_breached)
+		REMOVE_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED, TRAIT_SOURCE_IPC_CHASSIS)
 		to_chat(H, span_notice("Системная диагностика: Целостность корпуса восстановлена. Защита от давления активна."))
+
+/datum/species/ipc/handle_environment_pressure(mob/living/carbon/human/H, datum/gas_mixture/environment, seconds_per_tick)
+	if(!HAS_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED))
+		H.clear_alert(ALERT_PRESSURE)
+		H.seconds_in_low_pressure = 0
+		return
+
+	var/pressure = environment.return_pressure()
+	var/adjusted_pressure = H.calculate_affecting_pressure(pressure)
+
+	switch(adjusted_pressure)
+		if(HAZARD_HIGH_PRESSURE to INFINITY)
+			var/pressure_damage = min(((adjusted_pressure / HAZARD_HIGH_PRESSURE) - 1) * PRESSURE_DAMAGE_COEFFICIENT, MAX_HIGH_PRESSURE_DAMAGE) * H.physiology.pressure_mod * H.physiology.brute_mod * seconds_per_tick
+			H.adjust_brute_loss(pressure_damage, required_bodytype = BODYTYPE_ROBOTIC)
+			H.throw_alert(ALERT_PRESSURE, /atom/movable/screen/alert/highpressure, 2)
+		if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
+			H.throw_alert(ALERT_PRESSURE, /atom/movable/screen/alert/highpressure, 1)
+		if(WARNING_LOW_PRESSURE to WARNING_HIGH_PRESSURE)
+			H.clear_alert(ALERT_PRESSURE)
+			H.seconds_in_low_pressure = 0
+		if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
+			H.throw_alert(ALERT_PRESSURE, /atom/movable/screen/alert/lowpressure, 1)
+			H.seconds_in_low_pressure = 0
+		else
+			var/pressure_damage = min(round(1 + (H.seconds_in_low_pressure / 80 SECONDS), 0.05) * BASE_LOW_PRESSURE_DAMAGE, MAX_LOW_PRESSURE_DAMAGE) * H.physiology.pressure_mod * H.physiology.brute_mod * seconds_per_tick
+			H.adjust_brute_loss(pressure_damage, required_bodytype = BODYTYPE_ROBOTIC)
+			H.throw_alert(ALERT_PRESSURE, /atom/movable/screen/alert/lowpressure, 2)
+			H.seconds_in_low_pressure += seconds_per_tick
 
 /datum/species/ipc/proc/add_ipc_battery_hud(mob/living/carbon/human/H)
 	if(!H.hud_used)
@@ -294,9 +305,3 @@
 		else
 			new_state = "cell_full"
 	indicator.icon_state = new_state
-
-//Квирки
-/datum/quirk/is_species_appropriate(datum/species/mob_species)
-	if(mob_species == /datum/species/ipc)
-		return FALSE
-	return ..()
