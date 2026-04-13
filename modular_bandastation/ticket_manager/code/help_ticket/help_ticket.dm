@@ -72,6 +72,7 @@
 		GLOB.ticket_manager.send_chat_message_to_player(admin, src, message)
 	else
 		send_creation_message(creator, message, ticket_type_id)
+		send_creation_webhook_if_needed(message)
 
 	ticket_autoclose_timer_id = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
 	SSblackbox.LogAhelp(id, "Ticket Opened", message, null, initiator_key)
@@ -118,6 +119,21 @@
 		custom_boxed_message("[boxed_message_class]", span_class(text_span_class, "[title] был создан! Ожидайте ответ. Вы можете открыть тикет нажав F1")),
 		MESSAGE_TYPE_ADMINPM
 	)
+
+// just mirrors old adminhelp webhook behavior for admin tickets
+/datum/help_ticket/proc/send_creation_webhook_if_needed(message)
+	if(ticket_type_id != TICKET_TYPE_ADMIN)
+		return
+
+	var/regular_webhook_url = CONFIG_GET(string/regular_adminhelp_webhook_url)
+	if(!regular_webhook_url)
+		return
+
+	var/list/admin_counts = get_admin_counts(R_BAN)
+	if(length(admin_counts["present"]) > 0)
+		return
+
+	send2adminchat_webhook("Тикет #[id] [initiator_key]: [message]", FALSE)
 
 /// Converts ticket to ticket type specified `type_to_convert_to`
 /datum/help_ticket/proc/convert(client/converter)
