@@ -1,7 +1,8 @@
 /datum/action/changeling/sting//parent path, not meant for users afaik
-	name = "Tiny Prick"
+	name = "Tiny Prick" //cellularemporium uses `nameToIconState` to button icon state must match this, on top of matching the hud below.
 	desc = "Stabby stabby"
 	category = "stings"
+	button_icon_state = "sting_null" //This must be equal to the icon state for `/atom/movable/screen/ling/sting`
 
 /datum/action/changeling/sting/Trigger(mob/clicker, trigger_flags)
 	var/mob/user = owner
@@ -21,16 +22,20 @@
 	var/datum/antagonist/changeling/changeling = IS_CHANGELING(user)
 	changeling.chosen_sting = src
 
-	changeling.lingstingdisplay.icon_state = button_icon_state
-	changeling.lingstingdisplay.SetInvisibility(0, id=type)
+	var/atom/movable/screen/ling/sting/sting = user.hud_used?.screen_objects[HUD_CHANGELING_STING]
+	if (sting)
+		sting.icon_state = button_icon_state
+		sting.SetInvisibility(0, id=type)
 
 /datum/action/changeling/sting/proc/unset_sting(mob/user)
 	to_chat(user, span_warning("Мы убираем свое жало, пока что мы не можем никого ужалить."))
 	var/datum/antagonist/changeling/changeling = IS_CHANGELING(user)
 	changeling.chosen_sting = null
 
-	changeling.lingstingdisplay.icon_state = null
-	changeling.lingstingdisplay.RemoveInvisibility(type)
+	var/atom/movable/screen/ling/sting/sting = user.hud_used?.screen_objects[HUD_CHANGELING_STING]
+	if (sting)
+		sting.icon_state = null
+		sting.RemoveInvisibility(type)
 
 /mob/living/carbon/proc/unset_sting()
 	if(mind)
@@ -71,7 +76,7 @@
 		Для сложных гуманоидов трансформация происходит на время, но ее таймер приостанавливается, пока жертва мертва или находится в стазисе. \
 		У более простых гуманоидов, таких как обезьяны, трансформация происходит навсегда. \
 		Не предупреждает других. Мутации не передаются."
-	button_icon_state = "sting_transform"
+	button_icon_state = "transformation_sting"
 	chemical_cost = 33 // Low enough that you can sting only two people in quick succession
 	dna_cost = 2
 	/// A reference to our active profile, which we grab DNA from

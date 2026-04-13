@@ -246,6 +246,10 @@ GLOBAL_VAR_INIT(security_closets_count, 0)
 	new /obj/item/clothing/under/rank/prisoner( src )
 	new /obj/item/clothing/under/rank/prisoner/skirt( src )
 	new /obj/item/clothing/shoes/sneakers/orange( src )
+	// BANDASTATION MOD START: Brig closet extra items
+	new /obj/item/radio/headset( src )
+	new /obj/item/card/id/advanced/prisoner/temp( src )
+	// BANDASTATION MOD END: Brig closet extra items
 
 /obj/structure/closet/secure_closet/courtroom
 	name = "courtroom locker"
