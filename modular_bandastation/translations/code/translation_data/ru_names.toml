@@ -2376,15 +2376,6 @@ instrumental = "стробоскопическим щитом"
 prepositional = "стробоскопическом щите"
 gender = "male"
 
-["spacepol mask"]
-nominative = "маска космической полиции"
-genitive = "маски космической полиции"
-dative = "маске космической полиции"
-accusative = "маску космической полиции"
-instrumental = "маской космической полиции"
-prepositional = "маске космической полиции"
-gender = "female"
-
 ["guerrilla gloves"]
 nominative = "партизанские перчатки"
 genitive = "партизанских перчаток"
@@ -27326,6 +27317,244 @@ accusative = "рвоту туманности"
 instrumental = "рвотой туманности"
 prepositional = "рвоте туманности"
 gender = "female"
+
+# MARK: Fugitive/Hunter
+
+["Spacepol Fugitive Hunters"]
+nominative = "охотники за беглецами Космопола"
+gender = "plural"
+
+["Russian Fugitive Hunters"]
+nominative = "русские охотники за беглецами"
+gender = "plural"
+
+["Bounty Fugitive Hunters"]
+nominative = "охотники за беглецами"
+gender = "plural"
+
+["Psyker Fugitive Hunters"]
+nominative = "псайкеры-охотники за беглецами"
+gender = "plural"
+
+["MI13 Fugitive Hunters"]
+nominative = "охотники за беглецами MI13"
+gender = "plural"
+
+["space police cap"]
+nominative = "фуражка космической полиции"
+genitive = "фуражки космической полиции"
+dative = "фуражке космической полиции"
+accusative = "фуражку космической полиции"
+instrumental = "фуражкой космической полиции"
+prepositional = "фуражке космической полиции"
+gender = "female"
+
+["spacepol mask"]
+nominative = "маска Космопола"
+genitive = "маски Космопола"
+dative = "маске Космопола"
+accusative = "маску Космопола"
+instrumental = "маской Космопола"
+prepositional = "маске Космопола"
+gender = "female"
+
+["police uniform"]
+nominative = "полицейская форма"
+genitive = "полицейской формы"
+dative = "полицейской форме"
+accusative = "полицейскую форму"
+instrumental = "полицейской формой"
+prepositional = "полицейской форме"
+gender = "female"
+
+["police officer's hat"]
+nominative = "шляпа полицейского"
+genitive = "шляпы полицейского"
+dative = "шляпе полицейского"
+accusative = "шляпу полицейского"
+instrumental = "шляпой полицейского"
+prepositional = "шляпе полицейского"
+gender = "female"
+
+["Ratnik 5 tracksuit"]
+nominative = "спортивный костюм «Ратник 5»"
+genitive = "спортивного костюма «Ратник 5»"
+dative = "спортивному костюму «Ратник 5»"
+accusative = "спортивный костюм «Ратник 5»"
+instrumental = "спортивным костюмом «Ратник 5»"
+prepositional = "спортивном костюме «Ратник 5»"
+gender = "male"
+
+["combat uniform"]
+nominative = "боевая униформа"
+genitive = "боевой униформы"
+dative = "боевой униформе"
+accusative = "боевую униформу"
+instrumental = "боевой униформой"
+prepositional = "боевой униформе"
+gender = "female"
+
+["advanced military tracksuit"]
+nominative = "продвинутый военный спортивный костюм"
+genitive = "продвинутого военного спортивного костюма"
+dative = "продвинутому военному спортивному костюму"
+accusative = "продвинутый военный спортивный костюм"
+instrumental = "продвинутым военным спортивным костюмом"
+prepositional = "продвинутом военном спортивном костюме"
+gender = "male"
+
+["camouflage fatigues"]
+nominative = "камуфляжная форма"
+genitive = "камуфляжной формы"
+dative = "камуфляжной форме"
+accusative = "камуфляжную форму"
+instrumental = "камуфляжной формой"
+prepositional = "камуфляжной форме"
+gender = "female"
+
+["russian vest"]
+nominative = "русский жилет"
+genitive = "русского жилета"
+dative = "русскому жилету"
+accusative = "русский жилет"
+instrumental = "русским жилетом"
+prepositional = "русском жилете"
+gender = "male"
+
+["russian battle coat"]
+nominative = "русское боевое пальто"
+genitive = "русского боевого пальто"
+dative = "русскому боевому пальто"
+accusative = "русское боевое пальто"
+instrumental = "русским боевым пальто"
+prepositional = "русском боевом пальто"
+gender = "neuter"
+
+["Bear Pelt"]
+nominative = "медвежья шкура"
+genitive = "медвежьей шкуры"
+dative = "медвежьей шкуре"
+accusative = "медвежью шкуру"
+instrumental = "медвежьей шкурой"
+prepositional = "о медвежьей шкуре"
+gender = "female"
+
+["russian helmet"]
+nominative = "русский шлем"
+genitive = "русского шлема"
+dative = "русскому шлему"
+accusative = "русский шлем"
+instrumental = "русским шлемом"
+prepositional = "русском шлеме"
+gender = "male"
+
+["bounty hunting hat"]
+nominative = "шляпа охотника за головами"
+genitive = "шляпы охотника за головами"
+dative = "шляпе охотника за головами"
+accusative = "шляпу охотника за головами"
+instrumental = "шляпой охотника за головами"
+prepositional = "шляпе охотника за головами"
+gender = "female"
+
+["bounty hunting suit"]
+nominative = "костюм охотника за головами"
+genitive = "костюма охотника за головами"
+dative = "костюму охотника за головами"
+accusative = "костюм охотника за головами"
+instrumental = "костюмом охотника за головами"
+prepositional = "костюме охотника за головами"
+gender = "male"
+
+["bounty hunting mask"]
+nominative = "маска охотника за головами"
+genitive = "маски охотника за головами"
+dative = "маске охотника за головами"
+accusative = "маску охотника за головами"
+instrumental = "маской охотника за головами"
+prepositional = "маске охотника за головами"
+gender = "female"
+
+["scarecrow hat"]
+nominative = "шляпа-пугало"
+genitive = "шляпы-пугала"
+dative = "шляпе-пугалу"
+accusative = "шляпу-пугало"
+instrumental = "шляпой-пугалом"
+prepositional = "шляпе-пугале"
+gender = "female"
+
+["sack mask"]
+nominative = "маска-мешок"
+genitive = "маски-мешка"
+dative = "маске-мешку"
+accusative = "маску-мешок"
+instrumental = "маской-мешком"
+prepositional = "маске-мешке"
+gender = "female"
+
+["psychic headset"]
+nominative = "экстрасенсорная гарнитура"
+genitive = "экстрасенсорной гарнитуры"
+dative = "экстрасенсорной гарнитуре"
+accusative = "экстрасенсорную гарнитуру"
+instrumental = "экстрасенсорной гарнитурой"
+prepositional = "экстрасенсорной гарнитуре"
+gender = "female"
+
+["psyker navigation warper"]
+nominative = "варп‑навигатор псайкеров"
+genitive = "варп‑навигатора псайкеров"
+dative = "варп‑навигатору псайкеров"
+accusative = "варп‑навигатора псайкеров"
+instrumental = "варп‑навигатором псайкеров"
+prepositional = "варп‑навигаторе псайкеров"
+gender = "male"
+
+["psyker recreation cell"]
+nominative = "камера отдыха псайкеров"
+genitive = "камеры отдыха псайкеров"
+dative = "камере отдыха псайкеров"
+accusative = "камеру отдыха псайкеров"
+instrumental = "камерой отдыха псайкеров"
+prepositional = "камере отдыха псайкеров"
+gender = "female"
+
+["gore autoinjector"]
+nominative = "автоинъектор гора"
+genitive = "автоинъектора гора"
+dative = "автоинъектору гора"
+accusative = "автоинъектор гора"
+instrumental = "автоинъектором гора"
+prepositional = "автоинъекторе гора"
+gender = "male"
+
+["bouncy castle"]
+nominative = "надувной замок"
+genitive = "надувного замка"
+dative = "надувному замку"
+accusative = "надувной замок"
+instrumental = "надувным замком"
+prepositional = "надувном замке"
+gender = "male"
+
+["Bounty Locator"]
+nominative = "локатор разыскиваемых"
+genitive = "локатора разыскиваемых"
+dative = "локатору разыскиваемых"
+accusative = "локатор разыскиваемых"
+instrumental = "локатором разыскиваемых"
+prepositional = "локаторе разыскиваемых"
+gender = "male"
+
+["invisibility autoinjector"]
+nominative = "автоинъектор невидимости"
+genitive = "автоинъектора невидимости"
+dative = "автоинъектору невидимости"
+accusative = "автоинъектор невидимости"
+instrumental = "автоинъектором невидимости"
+prepositional = "автоинъекторе невидимости"
+gender = "male"
 
 # MARK: Colonial Marines
 ["flare pouch"]
