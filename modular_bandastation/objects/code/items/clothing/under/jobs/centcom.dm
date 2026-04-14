@@ -21,3 +21,6 @@
 	icon_state = "centcom_diplomat"
 	inhand_icon_state = "centcom_diplomat"
 	can_adjust = FALSE
+
+/obj/item/clothing/under/rank/centcom/officer
+	female_version = /datum/female_uniform/turtleneck

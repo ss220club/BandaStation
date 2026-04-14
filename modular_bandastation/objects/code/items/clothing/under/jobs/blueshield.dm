@@ -46,6 +46,7 @@
 	name = "blueshield's turtleneck"
 	desc = "A tactical jumper fit for only the best of bodyguards, with plenty of tactical pockets for your tactical needs."
 	icon_state = "blueshield_turtleneck"
+	female_version = /datum/female_uniform/turtleneck
 
 /obj/item/clothing/under/rank/blueshield/turtleneck/skirt
 	name = "blueshield's skirtleneck"
@@ -61,3 +62,26 @@
 	desc = "A formal bodyguard's suit, with custom-fitted Blueshield-Blue cuffs and a Nanotrasen insignia over one of the pockets."
 	icon_state = "blueshield_formal"
 	can_adjust = FALSE
+
+/obj/item/clothing/under/blueshield/skirt/blue
+	name = "blueshield's blue skirt"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/blueshield.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/blueshield.dmi'
+	icon_state = "plain_skirt_blue"
+	inhand_icon_state = null
+	body_parts_covered = CHEST|GROIN|ARMS
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_blueshield
+
+/obj/item/clothing/under/blueshield/skirt/black
+	name = "blueshield's black skirt"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/blueshield.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/blueshield.dmi'
+	icon_state = "plain_skirt_black"
+	inhand_icon_state = null
+	body_parts_covered = CHEST|GROIN|ARMS
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+	armor_type = /datum/armor/clothing_under/rank_blueshield
