@@ -19,7 +19,9 @@
 	mutantliver = /obj/item/organ/liver/skrell
 	mutantstomach = /obj/item/organ/stomach/skrell
 	mutant_organs = list(
-		/obj/item/organ/head_tentacle = /datum/sprite_accessory/skrell_head_tentacle/short::name
+		/obj/item/organ/head_tentacle = /datum/sprite_accessory/skrell_head_tentacle/short::name,
+		/obj/item/organ/cloth_wrap = /datum/sprite_accessory/skrell_cloth_wrap/short::name,
+		/obj/item/organ/tentacle_ornament = /datum/sprite_accessory/skrell_tentacle_ornament/none::name,
 	)
 	exotic_bloodtype = BLOOD_TYPE_SKRELL
 
@@ -35,8 +37,23 @@
 
 /datum/species/skrell/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.dna.features[FEATURE_MUTANT_COLOR] = COLOR_TRUE_BLUE
-	human.dna.features[FEATURE_SKRELL_HEAD_TENTACLE] = /datum/sprite_accessory/skrell_head_tentacle/short::name
+	human.dna.features[FEATURE_SKRELL_HEAD_TENTACLE] = /datum/sprite_accessory/skrell_head_tentacle/long::name
+/// When creating a picture for the preferences UI, organs are created first, and only then dna.features are given
+	for(var/obj/item/organ/O in human.organs)
+		if(istype(O, /obj/item/organ/head_tentacle) || istype(O, /obj/item/organ/tentacle_ornament) || istype(O, /obj/item/organ/cloth_wrap))
+			qdel(O)
+	var/obj/item/organ/head_tentacle/T = new()
+	T.Insert(human, special = TRUE)
+
 	human.update_body(is_creating = TRUE)
+
+/datum/species/skrell/randomize_features()
+	var/list/features = ..()
+	features[FEATURE_SKRELL_CLOTH_WRAP_TOGGLE] = prob(50) ? pick(SSaccessories.feature_list[FEATURE_SKRELL_CLOTH_WRAP_TOGGLE]) : SPRITE_ACCESSORY_NONE
+
+	var/cloth_color = "#[random_color()]"
+	features[FEATURE_SKRELL_CLOTH_WRAP_COLOR] = cloth_color
+	return features
 
 /datum/species/skrell/create_pref_unique_perks()
 	var/list/to_add = list()

@@ -4927,9 +4927,6 @@
 /turf/open/floor/plating,
 /area/virtual_domain)
 "OX" = (
-/obj/machinery/fax{
-	pixel_y = 9
-	},
 /turf/open/floor/plating,
 /area/virtual_domain)
 "Pa" = (

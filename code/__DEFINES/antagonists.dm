@@ -88,14 +88,14 @@
 // Heretic path defines.
 #define PATH_START "Стартовый путь"
 #define PATH_SIDE "Вторичный путь"
-#define PATH_ASH "Путь пепла"
-#define PATH_RUST "Путь ржавчины"
-#define PATH_FLESH "Путь плоти"
-#define PATH_VOID "Путь пустоты"
-#define PATH_BLADE "Путь клинка"
-#define PATH_COSMIC "Путь космоса"
-#define PATH_LOCK "Путь замка"
-#define PATH_MOON "Путь луны"
+#define PATH_ASH "Путь Пепла"
+#define PATH_RUST "Путь Ржавчины"
+#define PATH_FLESH "Путь Плоти"
+#define PATH_VOID "Путь Пустоты"
+#define PATH_BLADE "Путь Клинка"
+#define PATH_COSMIC "Путь Космоса"
+#define PATH_LOCK "Путь Замка"
+#define PATH_MOON "Путь Луны"
 
 //Heretic knowledge tree defines
 #define HKT_NEXT "next"

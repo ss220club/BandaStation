@@ -4,8 +4,8 @@
 SUBSYSTEM_DEF(ticker)
 	name = "Ticker"
 	priority = FIRE_PRIORITY_TICKER
-	flags = SS_KEEP_TIMING
-	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME
+	ss_flags = SS_KEEP_TIMING
+	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 
 	/// state of current round (used by process()) Use the defines GAME_STATE_* !
 	var/current_state = GAME_STATE_STARTUP
@@ -69,6 +69,8 @@ SUBSYSTEM_DEF(ticker)
 	/// Why an emergency shuttle was called
 	var/emergency_reason
 
+	///The display of how much time is left before a reboot, given to all clients post-game.
+	var/atom/movable/screen/reboot_timer/reboot_hud
 	/// ID of round reboot timer, if it exists
 	var/reboot_timer = null
 
@@ -203,6 +205,13 @@ SUBSYSTEM_DEF(ticker)
 				toggle_dooc(TRUE)
 				declare_completion(force_ending)
 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
+
+		if(GAME_STATE_FINISHED)
+			if(ready_for_reboot)
+				if(isnull(reboot_timer))
+					reboot_hud.maptext = MAPTEXT_PIXELLARI("<center>Server reboot \n\ DELAYED</center>")
+				else
+					reboot_hud.maptext = MAPTEXT_PIXELLARI("<center>Server rebooting in:\n\ [DisplayTimeText(timeleft(SSticker.reboot_timer), 1)]</center>")
 
 /// Checks if the round should be ending, called every ticker tick
 /datum/controller/subsystem/ticker/proc/check_finished()
@@ -365,8 +374,9 @@ SUBSYSTEM_DEF(ticker)
 		else
 			to_chat(iter_human, span_notice("You will gain [round(iter_human.hardcore_survival_score)] hardcore random points if you survive this round!"))
 
+// BANDASTATION EDIT START - Roundstart logout report with blackbox
 /datum/controller/subsystem/ticker/proc/display_roundstart_logout_report()
-	var/list/msg = list("[span_boldnotice("Roundstart logout report")]\n\n")
+	var/datum/roundstart_logout_report_builder/builder = new()
 
 	for(var/i in GLOB.mob_living_list)
 		var/mob/living/L = i
@@ -375,47 +385,51 @@ SUBSYSTEM_DEF(ticker)
 			continue  // never had a client
 
 		if(L.ckey && !GLOB.directory[L.ckey])
-			msg += "<b>[L.name]</b> ([L.key]), the [L.job] (<font color='#ffcc00'><b>Disconnected</b></font>)\n"
+			builder.add_entry(L.name, L.ckey, L.job, "disconnected", L.is_antag())
 
 
 		if(L.ckey && L.client)
 			var/failed = FALSE
 			if(L.client.inactivity >= GLOB.logout_timer_set) //Connected, but inactive (alt+tabbed or something)
-				msg += "<b>[L.name]</b> ([L.key]), the [L.job] (<font color='#ffcc00'><b>Connected, Inactive</b></font>)\n"
 				failed = TRUE //AFK client
+				builder.add_entry(L.name, L.ckey, L.job, "afk", L.is_antag())
 			if(!failed && L.stat)
 				if(HAS_TRAIT(L, TRAIT_SUICIDED)) //Suicider
-					msg += "<b>[L.name]</b> ([L.key]), the [L.job] ([span_bolddanger("Suicide")])\n"
 					failed = TRUE //Disconnected client
+					builder.add_entry(L.name, L.ckey, L.job, "suicide", L.is_antag())
 				if(!failed && (L.stat == UNCONSCIOUS || L.stat == HARD_CRIT))
-					msg += "<b>[L.name]</b> ([L.key]), the [L.job] (Dying)\n"
 					failed = TRUE //Unconscious
+					builder.add_entry(L.name, L.ckey, L.job, "dying", L.is_antag())
 				if(!failed && L.stat == DEAD)
-					msg += "<b>[L.name]</b> ([L.key]), the [L.job] (Dead)\n"
 					failed = TRUE //Dead
+					builder.add_entry(L.name, L.ckey, L.job, "dead", L.is_antag())
 
 			continue //Happy connected client
 		for(var/mob/dead/observer/D in GLOB.dead_mob_list)
 			if(D.mind && D.mind.current == L)
 				if(L.stat == DEAD)
 					if(HAS_TRAIT(L, TRAIT_SUICIDED)) //Suicider
-						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] ([span_bolddanger("Suicide")])\n"
+						builder.add_entry(L.name, ckey(D.mind.key), L.job, "suicide", L.is_antag())
 						continue //Disconnected client
 					else
-						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (Dead)\n"
+						builder.add_entry(L.name, ckey(D.mind.key), L.job, "dead", L.is_antag())
 						continue //Dead mob, ghost abandoned
 				else
 					if(D.can_reenter_corpse)
 						continue //Adminghost, or cult/wizard ghost
 					else
-						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] ([span_bolddanger("Ghosted")])\n"
+						builder.add_entry(L.name, ckey(D.mind.key), L.job, "ghosted", L.is_antag())
 						continue //Ghosted while alive
 
-	msg += "[span_boldnotice("Roundstart logout reported at: [DisplayTimeText(GLOB.logout_timer_set)]")]\n"
+	var/msg = builder.to_formatted_text()
+	log_admin(msg)
+	to_chat(get_holders_with_rights(R_ADMIN), msg) /// BANDASTATION EDIT: Proper permissions
 
-	var/concatenated_message = msg.Join()
-	log_admin(concatenated_message)
-	to_chat(get_holders_with_rights(R_ADMIN), concatenated_message) /// BANDASTATION EDIT: Proper permissions
+	for(var/entry in builder.to_nested_list())
+		SSblackbox.record_feedback("associative", "roundstart_logout_report", 1, entry)
+
+	qdel(builder)
+// BANDASTATION EDIT END
 
 /datum/controller/subsystem/ticker/proc/reopen_roundstart_suicide_roles()
 	var/include_command = CONFIG_GET(flag/reopen_roundstart_suicide_roles_command_positions)
@@ -839,6 +853,8 @@ SUBSYSTEM_DEF(ticker)
 
 	var/start_wait = world.time
 	UNTIL(round_end_sound_sent || (world.time - start_wait) > (delay * 2)) //don't wait forever
+	if(!isnull(reboot_timer)) //Override existing reboot timers.
+		deltimer(reboot_timer)
 	reboot_timer = addtimer(CALLBACK(src, PROC_REF(reboot_callback), reason, end_string), delay - (world.time - start_wait), TIMER_STOPPABLE)
 
 

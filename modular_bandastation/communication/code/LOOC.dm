@@ -21,7 +21,8 @@ GLOBAL_VAR_INIT(looc_allowed, TRUE)
 
 /datum/tgui_say/delegate_speech(entry, channel)
 	if(channel == LOOC_CHANNEL)
-		client.looc(entry)
+		ASYNC
+			client.looc(entry)
 		return TRUE
 	. = ..()
 

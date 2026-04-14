@@ -62,6 +62,10 @@
 	user.visible_message(span_suicide("[user] looks overwhelmed with paperwork! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
+// Empty subtype
+/obj/item/storage/briefcase/empty/PopulateContents()
+	return
+
 /obj/item/storage/briefcase/sniper
 	desc = "Its label reads \"genuine hardened Captain leather\", but suspiciously has no other tags or branding. Smells like L'Air du Temps."
 	force = 10

@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/pointed/apetra_vulnera
-	name = "Apetra Vulnera"
-	desc = "Вызывает обильное кровотечение из каждой части тела, которое имеет более 15-и ушибов. \
+	name = "Неприкосновенные раны"
+	desc = "Вызывает обильное кровотечение из каждой части тела, которое имеет более 15-ти ушибов. \
 		Накладывает рану на случайную часть тела, если не найдены подходящие части тела."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
@@ -38,7 +38,7 @@
 		return FALSE
 
 	var/a_limb_got_damaged = FALSE
-	for(var/obj/item/bodypart/bodypart in cast_on.bodyparts)
+	for(var/obj/item/bodypart/bodypart in cast_on.get_bodyparts())
 		if(bodypart.brute_dam < 15)
 			continue
 		a_limb_got_damaged = TRUE
@@ -47,7 +47,7 @@
 
 	if(!a_limb_got_damaged)
 		var/datum/wound/slash/crit_wound = new wound_type()
-		crit_wound.apply_wound(pick(cast_on.bodyparts))
+		crit_wound.apply_wound(pick(cast_on.get_bodyparts()))
 
 	cast_on.visible_message(
 		span_danger("Раны и царапины [cast_on.declent_ru(GENITIVE)] разрываются нечистой силой!"),

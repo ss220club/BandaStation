@@ -109,7 +109,7 @@
 			msg += "слегка запачкана кровью"
 		if(4 to INFINITY)
 			msg += "чиста"
-	msg += " [current_gauze.name]!"
+	msg += "[current_gauze.name]!"
 
 	return "<B>[msg.Join()]</B>"
 
@@ -168,20 +168,20 @@
 /datum/wound/slash/flesh/check_grab_treatments(obj/item/tool, mob/user)
 	if(istype(tool, /obj/item/gun/energy/laser))
 		return TRUE
-	if(tool.get_temperature()) // if we're using something hot but not a cautery, we need to be aggro grabbing them first, so we don't try treating someone we're eswording
+	if(tool.get_temperature() >= FIRE_MINIMUM_TEMPERATURE_TO_EXIST) // if we're using something hot but not a cautery, we need to be aggro grabbing them first, so we don't try treating someone we're eswording
 		return TRUE
 	return FALSE
 
 /datum/wound/slash/flesh/treat(obj/item/tool, mob/user)
 	if(istype(tool, /obj/item/gun/energy/laser))
 		las_cauterize(tool, user)
-	else if(tool.tool_behaviour == TOOL_CAUTERY || tool.get_temperature())
+	else if(tool.tool_behaviour == TOOL_CAUTERY || tool.get_temperature() >= FIRE_MINIMUM_TEMPERATURE_TO_EXIST)
 		tool_cauterize(tool, user)
 
 /datum/wound/slash/flesh/try_handling(mob/living/user)
 	if(user.pulling != victim || !HAS_TRAIT(user, TRAIT_WOUND_LICKER) || !victim.try_inject(user, injection_flags = INJECT_TRY_SHOW_ERROR_MESSAGE))
 		return FALSE
-	if(!isnull(user.hud_used?.zone_select) && user.zone_selected != limb.body_zone)
+	if(!isnull(user.hud_used?.screen_objects[HUD_MOB_ZONE_SELECTOR]) && user.zone_selected != limb.body_zone)
 		return FALSE
 
 	if(DOING_INTERACTION_WITH_TARGET(user, victim))

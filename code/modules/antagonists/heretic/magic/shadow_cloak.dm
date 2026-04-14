@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/shadow_cloak
-	name = "Cloak of Shadow"
+	name = "Покров Тени"
 	desc = "Полностью скрывает вашу личность, но не делает вас невидимым. Используйте повторно, чтобы отключить ее. \
 		В замаскированном состоянии вы двигаетесь быстрее, но совершаете действия гораздо медленнее. \
 		Получение урона в маскировке может привести к ее внезапному снятию, что вызовет негативные эффекты. "
@@ -141,7 +141,7 @@
 	animate(cloak_image, alpha = 255, 0.2 SECONDS)
 	owner.add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/everyone, id, cloak_image)
 	// Add the relevant traits and modifiers
-	owner.add_traits(list(TRAIT_UNKNOWN_APPEARANCE, TRAIT_UNKNOWN_VOICE, TRAIT_SILENT_FOOTSTEPS), TRAIT_STATUS_EFFECT(id))
+	owner.add_traits(list(TRAIT_UNKNOWN_APPEARANCE, TRAIT_UNKNOWN_VOICE, TRAIT_SILENT_FOOTSTEPS, TRAIT_NO_SNOWPRINTS), TRAIT_STATUS_EFFECT(id))
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/shadow_cloak)
 	owner.add_actionspeed_modifier(/datum/actionspeed_modifier/shadow_cloak)
 	// Register signals to cause effects
@@ -157,7 +157,7 @@
 	owner.remove_alt_appearance(id)
 	QDEL_NULL(cloak_image)
 	// Remove traits and modifiers
-	owner.remove_traits(list(TRAIT_UNKNOWN_APPEARANCE, TRAIT_UNKNOWN_VOICE, TRAIT_SILENT_FOOTSTEPS), TRAIT_STATUS_EFFECT(id))
+	owner.remove_traits(list(TRAIT_UNKNOWN_APPEARANCE, TRAIT_UNKNOWN_VOICE, TRAIT_SILENT_FOOTSTEPS, TRAIT_NO_SNOWPRINTS), TRAIT_STATUS_EFFECT(id))
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shadow_cloak)
 	owner.remove_actionspeed_modifier(/datum/actionspeed_modifier/shadow_cloak)
 	// Clear signals
