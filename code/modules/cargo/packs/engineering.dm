@@ -31,7 +31,7 @@
 					/obj/item/mecha_parts/mecha_equipment/drill,
 					/obj/item/mecha_parts/mecha_equipment/hydraulic_clamp,
 				)
-	crate_name= "набор АПЛУ МОД-I"
+	crate_name= "Набор АПЛУ МОД-I"
 	crate_type = /obj/structure/closet/crate/science/robo
 
 /datum/supply_pack/engineering/conveyor
@@ -175,7 +175,7 @@
 	name = "Компоненты ДНК хранилища"
 	desc = "Обеспечьте долговечность текущего состояния человечества в этой огромной \
 		библиотеке научных знаний, способной даровать сверхчеловеческие силы и способности. \
-		Наиболее передовые исследования необходимы для постройки.Также содержит пять ДНК сэмплера."
+		Наиболее передовые исследования необходимы для постройки. Также содержит пять ДНК сэмплеров."
 	cost = CARGO_CRATE_VALUE * 24
 	highlight_in_console = TRUE
 	order_flags = ORDER_SPECIAL
@@ -260,7 +260,7 @@
 
 /datum/supply_pack/engine/solar
 	name = "Ящик солнечных панелей"
-	desc = "Станьте экоактивистом с помощью самодельных усовершенствованных солнечных панелей. В комплекте содержится двадцать одна солнечная батарея, \
+	desc = "Станьте экоактивистом с помощью самодельных усовершенствованных солнечных панелей. В комплекте содержится двадцать одна солнечная паннель, \
 		плата для управления солнечными панелями и трекер. Если у вас остались вопросы, \
 		пожалуйста, ознакомьтесь с прилагаемой инструкцией."
 	cost = CARGO_CRATE_VALUE * 8
@@ -310,7 +310,7 @@
 
 /datum/supply_pack/engineering/rad_protection_modules
 	name = "Модули радиационной защиты"
-	desc = "Содержит несколько модулей противорадиационной защиты для МОДовЧЧ."
+	desc = "Содержит несколько модулей противорадиационной защиты для МОДов."
 	order_flags = ORDER_INVISIBLE
 	contains = list(/obj/item/mod/module/rad_protection = 3)
 	crate_name = ""
@@ -327,7 +327,7 @@
 		/obj/item/circuitboard/machine/radioactive_nebula_shielding = 5,
 		/obj/item/paper/fluff/radiation_nebula = 1,
 	)
-	crate_name = "радиоактивный щит Небула (ВАЖНОЕ)"
+	crate_name = "ящик с радиоактивным щитом Небула (ВАЖНОЕ)"
 	crate_type = /obj/structure/closet/crate/engineering
 
 /datum/supply_pack/engineering/portagrav

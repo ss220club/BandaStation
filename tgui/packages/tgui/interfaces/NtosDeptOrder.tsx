@@ -54,13 +54,13 @@ const CooldownEstimate = (props) => {
     (cost >= COST_MODERATE_BOUND && 'yellow') ||
     'green';
   const cooldownText =
-    (cost >= COST_VERY_LONG_BOUND && 'Очень долго') ||
-    (cost >= COST_LONG_BOUND && 'Долго') ||
-    (cost >= COST_MODERATE_BOUND && 'Умеренно') ||
-    'Недолго';
+    (cost >= COST_VERY_LONG_BOUND && 'Очень долгое') ||
+    (cost >= COST_LONG_BOUND && 'Долгое') ||
+    (cost >= COST_MODERATE_BOUND && 'Умеренное') ||
+    'Недолгое';
   return (
     <Box as="span" textColor={cooldownColor}>
-      {cooldownText} ожидание.
+      {cooldownText} время ожидания.
     </Box>
   );
 };
