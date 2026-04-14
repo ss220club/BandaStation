@@ -21,7 +21,8 @@
 		"Xion Light",
 		"Zeng-Hu",
 	)
-	var/list/manufacturer_suffixes = list(
+
+	var/static/list/manufacturer_suffixes = list(
 		"General" = null,
 		"Bishop" = "bishop",
 		"Bishop MK2" = "bishop_mk2",
