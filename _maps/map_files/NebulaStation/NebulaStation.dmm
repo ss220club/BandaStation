@@ -46948,9 +46948,7 @@
 "gUW" = (
 /obj/effect/turf_decal/tile/blue/full,
 /obj/machinery/duct,
-/obj/machinery/defibrillator_mount/mobile{
-	anchored = 1
-	},
+/obj/machinery/defibrillator_mount/mobile/immobile,
 /turf/open/floor/iron/white/small,
 /area/station/medical/treatment_center)
 "gVb" = (
@@ -72120,8 +72118,8 @@
 	dir = 4
 	},
 /obj/structure/table/glass,
-/obj/item/stack/medical/gauze,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/suture,
@@ -90830,7 +90828,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
 	},
@@ -109774,9 +109772,7 @@
 /area/station/ai/satellite/chamber)
 "qih" = (
 /obj/effect/turf_decal/tile/blue/full,
-/obj/machinery/defibrillator_mount/mobile{
-	anchored = 1
-	},
+/obj/machinery/defibrillator_mount/mobile/immobile,
 /turf/open/floor/iron/white/small,
 /area/station/medical/treatment_center)
 "qik" = (
@@ -116905,7 +116901,7 @@
 	pixel_y = 12;
 	pixel_x = 8
 	},
-/obj/item/stack/medical/gauze{
+/obj/item/stack/medical/wrap/gauze{
 	pixel_x = 5
 	},
 /obj/effect/turf_decal/tile/blue/full,
@@ -137227,7 +137223,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
 	},
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 8
 	},
@@ -138208,7 +138204,7 @@
 /obj/effect/turf_decal/siding/dark,
 /obj/effect/turf_decal/trimline/dark_blue/filled/line,
 /obj/structure/rack,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/suture,
 /obj/item/reagent_containers/syringe/epinephrine{
@@ -139663,7 +139659,7 @@
 /turf/open/floor/wood,
 /area/station/security/courtroom)
 "uFM" = (
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
@@ -147443,7 +147439,7 @@
 	dir = 6
 	},
 /obj/structure/table/glass,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/suture,
 /obj/effect/turf_decal/trimline/blue/corner{
@@ -150215,7 +150211,7 @@
 /turf/open/floor/wood/large,
 /area/station/service/library/upper)
 "wiG" = (
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
 	},

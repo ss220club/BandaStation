@@ -1,7 +1,7 @@
 // The basic eldritch painting
 /obj/item/wallframe/painting/eldritch
 	name = "The Blank Canvas: A Study in Default Subtypes"
-	desc = "An impossible painting made of impossible paint. It should not exist in this reality."
+	desc = "Картина невозможного, созданная невозможной краской. Ей не место в этой реальности."
 	icon = 'icons/obj/signs.dmi'
 	resistance_flags = FLAMMABLE
 	flags_1 = NONE
@@ -11,7 +11,7 @@
 
 /obj/structure/sign/painting/eldritch
 	name = "The Blank Canvas: A Study in Default Subtypes"
-	desc = "An impossible painting made of impossible paint. It should not exist in this reality."
+	desc = "Картина невозможного, созданная невозможной краской. Ей не место в этой реальности."
 	icon = 'icons/obj/signs.dmi'
 	icon_state = "eldritch_painting_debug"
 	custom_materials = list(/datum/material/wood =SHEET_MATERIAL_AMOUNT)

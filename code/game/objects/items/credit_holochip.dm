@@ -37,7 +37,7 @@
 	return credits
 
 /obj/item/holochip/update_name()
-	name = "голочип номиналом [credits][MONEY_NAME_SINGULAR]."
+	name = "голочип номиналом [credits][MONEY_NAME_SINGULAR]"
 	return ..()
 
 /obj/item/holochip/update_icon_state()

@@ -12,6 +12,9 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	/// Are we trying to send a cross-station message that contains soft-filtered words? If so, flip to TRUE to extend the time admins have to cancel the message.
 	var/soft_filtering = FALSE
 
+	/// The main content of the roundstart report
+	/// If nothing is set, it will pick a random flavor report
+	var/command_report_main_content = ""
 	/// A list of footnote datums, to be added to the bottom of the roundstart command report.
 	var/list/command_report_footnotes = list()
 	/// A counter of conditions that are blocking the command report from printing. Counter incremements up for every blocking condition, and de-incrememnts when it is complete.
@@ -50,7 +53,7 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	user.log_talk(input, LOG_SAY, tag="priority announcement")
 	message_admins("[ADMIN_LOOKUPFLW(user)] has made a priority announcement.")
 
-/datum/communciations_controller/proc/send_message(datum/comm_message/sending,print = TRUE,unique = FALSE)
+/datum/communciations_controller/proc/send_message(datum/comm_message/sending,print = TRUE,unique = FALSE, contains_advanced_html = FALSE)
 	for(var/obj/machinery/computer/communications/C in GLOB.shuttle_caller_list)
 		if(!(C.machine_stat & (BROKEN|NOPOWER)) && is_station_level(C.z))
 			if(unique)
@@ -61,87 +64,101 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			if(print)
 				var/obj/item/paper/printed_paper = new /obj/item/paper(C.loc)
 				printed_paper.name = "paper - '[sending.title]'"
-				printed_paper.add_raw_text(sending.content)
+				printed_paper.add_raw_text("</center>[sending.content]", advanced_html = contains_advanced_html)
+				printed_paper.color = "#deebff"
 				printed_paper.update_appearance()
 
 // Called AFTER everyone is equipped with their job
 /datum/communciations_controller/proc/queue_roundstart_report()
 	addtimer(CALLBACK(src, PROC_REF(send_roundstart_report)), rand(waittime_l, waittime_h))
 
-/// BANDASTATION EDIT START - UPDATED INTERCEPT TEMPLATE
-
+// BANDASTATION EDIT START - Updated intercept template
 /datum/communciations_controller/proc/send_roundstart_report(greenshift)
 	if(block_command_report) //If we don't want the report to be printed just yet, we put it off until it's ready
 		addtimer(CALLBACK(src, PROC_REF(send_roundstart_report), greenshift), 10 SECONDS)
 		return
 
+	// Ensure NT logo asset is registered before we reference it in the report HTML
+	get_asset_datum(/datum/asset/simple/logos)
+
 	SSstation.generate_station_goals(CONFIG_GET(number/station_goal_budget))
-	if(!fexists(STATION_REPORT_TEMPLATE_PATH))
-		stack_trace("station report template doesn't exist at path: [STATION_REPORT_TEMPLATE_PATH]")
-		return
 
 	var/station_report_template = file2text(STATION_REPORT_TEMPLATE_PATH)
-	if(!station_report_template)
-		stack_trace("station report template is empty at path: [STATION_REPORT_TEMPLATE_PATH]")
-		return
 
-	var/list/datum/station_goal/goals = SSstation.get_station_goals()
 	var/station_goals_section = ""
-	if(length(goals))
-		var/list/station_goal_reports = list()
-		for(var/datum/station_goal/station_goal as anything in goals)
-			station_goal.on_report()
-			station_goal_reports += station_goal.get_report()
+	var/list/station_goal_strings = list()
+	for(var/datum/station_goal/station_goal as anything in SSstation.get_station_goals())
+		station_goal.on_report()
+		station_goal_strings += station_goal.get_report()
 
+	if(length(station_goal_strings))
 		station_goals_section = list(
-			"# === Цели на смену ===\n",
-			station_goal_reports.Join("\n\n---\n\n"),
+			"# === Цели на смену ===\n\n",
+			station_goal_strings.Join("\n\n---\n\n"),
 		).Join()
 
-	station_report_template = replacetext(station_report_template, "%STATION_GOALS", station_goals_section);
+	station_report_template = replacetext(station_report_template, "%STATION_GOALS", station_goals_section)
 
+	var/trait_reports_section = ""
 	var/list/trait_reports = list()
 	for(var/datum/station_trait/station_trait as anything in SSstation.station_traits)
 		if(!station_trait.show_in_report)
 			continue
-
 		trait_reports += "- [station_trait.get_report()]"
 
-	var/trait_reports_sections = ""
 	if(length(trait_reports))
-		trait_reports_sections = list(
+		trait_reports_section = list(
 			"\n\n---\n\n",
-			"# === Обнаруженные отклонения ===\n",
+			"# === Обнаруженные отклонения ===\n\n",
 			trait_reports.Join("\n")
 		).Join()
 
-	station_report_template = replacetext(station_report_template, "%TRAIT_REPORTS", trait_reports_sections);
+	station_report_template = replacetext(station_report_template, "%TRAIT_REPORTS", trait_reports_section)
 
 	var/footnote_section = ""
 	if(length(command_report_footnotes))
 		var/list/footnotes = list()
 		for(var/datum/command_footnote/footnote in command_report_footnotes)
-			footnotes += "[footnote.message]<BR>"
-			footnotes += "<i>[footnote.signature]</i><BR>"
-			footnotes += "<BR>"
+			footnotes += "**[footnote.message]**\n\n"
+			footnotes += "*[footnote.signature]*\n\n"
 
 		footnote_section = list(
 			"\n\n---\n\n",
-			"# === Дополнительная информация ===\n",
+			"# === Дополнительная информация ===\n\n",
 			footnotes.Join()
 		).Join()
 
-	station_report_template = replacetext(station_report_template, "%FOOTNOTES", footnote_section);
-	station_report_template = replacetext(station_report_template, "%SIGNING_OFFICER", "[pick(GLOB.first_names_male)] [pick(GLOB.last_names)]");
+	station_report_template = replacetext(station_report_template, "%FOOTNOTES", footnote_section)
 
-	station_report_template = replace_text_keys(station_report_template)
+	var/signing_officer = generate_random_name_species_based(
+		gender = pick(list(MALE, FEMALE)),
+		unique = TRUE,
+		species_type = /datum/species/human
+	)
+	station_report_template = replacetext(station_report_template, "%SIGNING_OFFICER", signing_officer)
 
 #ifndef MAP_TEST
-	print_command_report(station_report_template, "[command_name()] Status Summary", announce=FALSE)
-	priority_announce("Отчет был скопирован и распечатан на всех консолях связи.", "Отчет о безопасности", SSstation.announcer.get_rand_report_sound())
-#endif
+	station_report_template = replace_text_keys(station_report_template, null)
+	print_command_report(station_report_template, "[command_name()]. Отчет об обстановке", announce = FALSE, contains_advanced_html = FALSE)
+	if(CONFIG_GET(flag/roundstart_blue_alert))
+		if(SSsecurity_level.get_current_level_as_number() < SEC_LEVEL_BLUE)
+			SSsecurity_level.set_level(SEC_LEVEL_BLUE, announce = FALSE)
+		priority_announce(
+			"[SSsecurity_level.current_security_level.elevating_to_announcement]\n\n\
+				Отчет был скопирован и распечатан на всех консолях связи.",
+			"Уровень угрозы повышен.",
+			ANNOUNCER_INTERCEPT,
+			color_override = SSsecurity_level.current_security_level.announcement_color,
+		)
+	else
+		priority_announce(
+			"Отчет был скопирован и распечатан на всех консолях связи.",
+			"Отчет об обстановке",
+			SSstation.announcer.get_rand_report_sound(),
+		)
 
-/// BANDASTATION EDIT END - UPDATED INTERCEPT TEMPLATE
+#endif
+// BANDASTATION EDIT END
 
 #undef COMMUNICATION_COOLDOWN
 #undef COMMUNICATION_COOLDOWN_AI

@@ -262,3 +262,23 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/ussp.dmi'
 	icon_state = "ussp_flora"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/ussp.dmi'
+
+// MARK: SYNDICATE
+/obj/item/clothing/under/mb_under
+	name = "nanofiber jumpsuit"
+	desc = "Элегантный нательный костюм из высокотехнологичного материала с символом «S». Удобен и практичен."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/under.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/under.dmi'
+	icon_state = "mb_under"
+	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_left_hand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_right_hand.dmi'
+	inhand_icon_state = "mb_under"
+	armor_type = /datum/armor/clothing_under/syndicate_advanced
+
+/datum/armor/clothing_under/syndicate_advanced
+	melee = 30
+	bullet = 30
+	energy = 30
+	fire = 50
+	acid = 40
+	wound = 30

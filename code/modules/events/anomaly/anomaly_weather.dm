@@ -30,7 +30,7 @@
 /datum/round_event/anomaly/anomaly_weather/announce(fake)
 	if(isnull(impact_area))
 		impact_area = placer.findValidArea()
-	priority_announce("Барометрическая аномалия, обнаруженная на [ANOMALY_ANNOUNCE_HARMFUL_TEXT] [impact_area.declent_ru(NOMINATIVE)].", "Обнаружена аномалия")
+	priority_announce("Барометрическая аномалия обнаружена на [ANOMALY_ANNOUNCE_HARMFUL_TEXT] [impact_area.declent_ru(NOMINATIVE)].", "Обнаружена аномалия")
 
 /datum/round_event/anomaly/anomaly_weather/make_anomaly(turf/anomaly_turf)
 	return new anomaly_path(anomaly_turf, null, null, forced_weather_type, forced_thunder_chance)
@@ -54,7 +54,7 @@
 /datum/round_event/anomaly/anomaly_weather/thundering/announce(fake)
 	if(isnull(impact_area))
 		impact_area = placer.findValidArea()
-	priority_announce("Серьезная барометрическая аномалия, обнаруженная на [ANOMALY_ANNOUNCE_DANGEROUS_TEXT] [impact_area.declent_ru(NOMINATIVE)].", "Обнаружена аномалия")
+	priority_announce("Серьезная барометрическая аномалия обнаружена на [ANOMALY_ANNOUNCE_DANGEROUS_TEXT] [impact_area.declent_ru(NOMINATIVE)].", "Обнаружена аномалия")
 
 /datum/event_admin_setup/listed_options/weather_anomaly
 	input_text = "Weather type? Be very careful with the dangerous ones!"

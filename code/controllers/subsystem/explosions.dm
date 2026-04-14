@@ -9,7 +9,7 @@ SUBSYSTEM_DEF(explosions)
 	name = "Explosions"
 	priority = FIRE_PRIORITY_EXPLOSIONS
 	wait = 1
-	flags = SS_TICKER|SS_NO_INIT
+	ss_flags = SS_TICKER|SS_NO_INIT
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 
 	var/cost_lowturf = 0
@@ -383,13 +383,11 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 		shake_the_room(epicenter, orig_max_distance, far_dist, devastation_range, heavy_impact_range)
 
 	if(heavy_impact_range > 1)
-		var/datum/effect_system/explosion/E
-		if(smoke)
-			E = new /datum/effect_system/explosion/smoke
-		else
-			E = new
-		E.set_up(epicenter)
-		E.start()
+		var/effect_type = /datum/effect_system/explosion
+		if (smoke)
+			effect_type = /datum/effect_system/explosion/smoke
+		var/datum/effect_system/explosion/system = new effect_type(epicenter)
+		system.start()
 
 	//flash mobs
 	if(flash_range)
