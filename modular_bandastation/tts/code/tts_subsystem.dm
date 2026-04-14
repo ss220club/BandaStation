@@ -488,13 +488,11 @@ SUBSYSTEM_DEF(tts220)
 		_tts_seeds_names |= tts_seeds_names
 		return _tts_seeds_names
 
-	var/donator_level = 0
-
 	if(!C)
 		_tts_seeds_names |= tts_seeds_names
 		return sortTim(_tts_seeds_names, GLOBAL_PROC_REF(cmp_text_asc))
 
-	donator_level = C.get_donator_level()
+	var/donator_level = C.get_donator_level()
 
 	for(var/level in tts_seeds_names_by_donator_levels)
 		if(text2num(level) <= donator_level)
