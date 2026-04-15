@@ -51122,6 +51122,9 @@
 /obj/item/tgui_book/manual/dsm{
 	pixel_x = -2
 	},
+/obj/item/tgui_book/manual/idc{
+	pixel_y = 2
+	},
 /obj/item/wrench/medical,
 /turf/open/floor/iron/dark,
 /area/station/medical/cryo)
@@ -90519,8 +90522,12 @@
 /obj/item/book/manual/wiki/infections{
 	pixel_y = 4
 	},
-/obj/item/reagent_containers/dropper,
+/obj/item/tgui_book/manual/idc{
+	pixel_y = 3;
+	pixel_x = 3
+	},
 /obj/item/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/dropper,
 /turf/open/floor/iron/dark,
 /area/station/medical/virology)
 "nvh" = (
@@ -90828,7 +90835,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
 	},
@@ -119956,6 +119963,9 @@
 	dir = 1
 	},
 /obj/item/tgui_book/manual/dsm,
+/obj/item/tgui_book/manual/idc{
+	pixel_x = 4
+	},
 /turf/open/floor/iron/dark/smooth_edge{
 	dir = 1
 	},
@@ -130948,6 +130958,9 @@
 	pixel_x = 5;
 	pixel_y = 5
 	},
+/obj/item/tgui_book/manual/idc{
+	pixel_x = 4
+	},
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/cmo)
 "tqW" = (
@@ -137223,7 +137236,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
 	},
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 8
 	},
@@ -139659,7 +139672,7 @@
 /turf/open/floor/wood,
 /area/station/security/courtroom)
 "uFM" = (
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
@@ -150211,7 +150224,7 @@
 /turf/open/floor/wood/large,
 /area/station/service/library/upper)
 "wiG" = (
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
 	},
