@@ -73,8 +73,8 @@
 	else
 		send_creation_message(creator, message, ticket_type_id)
 		send_creation_webhook_if_needed(message)
+		ticket_autoclose_timer_id = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
 
-	ticket_autoclose_timer_id = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
 	SSblackbox.LogAhelp(id, "Ticket Opened", message, null, initiator_key)
 
 /datum/help_ticket/ui_data(mob/user)
@@ -129,11 +129,38 @@
 	if(!regular_webhook_url)
 		return
 
+	var/text_for_check = lowertext("[message]")
+	if(findtext(text_for_check, "набег"))
+		send2adminchat_webhook("@here\n[format_webhook_text(message)]", FALSE)
+		return
+
 	var/list/admin_counts = get_admin_counts(R_BAN)
 	if(length(admin_counts["present"]) > 0)
 		return
 
-	send2adminchat_webhook("Тикет #[id] [initiator_key]: [message]", FALSE)
+	send2adminchat_webhook(format_webhook_text(message), FALSE)
+
+// sends webhook notification when ticket was auto closed by timeout
+/datum/help_ticket/proc/send_autoclose_webhook()
+	if(ticket_type_id != TICKET_TYPE_ADMIN)
+		return
+
+	// if(admin_replied)
+	// 	return
+
+	var/regular_webhook_url = CONFIG_GET(string/regular_adminhelp_webhook_url)
+	if(!regular_webhook_url)
+		return
+
+	send2adminchat_webhook(format_webhook_text("Тикет был автоматически закрыт по таймауту ([TICKET_AUTOCLOSE_TIMER] мин.)"), FALSE)
+
+/datum/help_ticket/proc/format_webhook_text(message)
+	return "`\
+Раунд:[GLOB.round_id]\n\
+Тикет:[id]\n\
+От:[initiator_key]\n\
+[message]`\
+"
 
 /// Converts ticket to ticket type specified `type_to_convert_to`
 /datum/help_ticket/proc/convert(client/converter)
@@ -177,6 +204,7 @@
 		"message" = "[converter.ckey] конвертировал тикет в [ticket_type_id]",
 		"time" = time_stamp(NONE),
 	))
+	SSblackbox.LogAhelp(id, "Interaction", "[converter.ckey] converted ticket to [ticket_type_id]", initiator_key, converter.ckey)
 
 	return TRUE
 
@@ -204,7 +232,9 @@
 		return FALSE
 
 	linked_admin = admin.persistent_client
-	deltimer(ticket_autoclose_timer_id)
+	if(ticket_autoclose_timer_id)
+		deltimer(ticket_autoclose_timer_id)
+		ticket_autoclose_timer_id = null
 	message_admins("[key_name_admin(admin)] взял тикет #[id] на рассмотрение.")
 	log_admin("[key_name_admin(admin)] взял тикет #[id] на рассмотрение.")
 	return TRUE
@@ -213,6 +243,9 @@
 /// start autoclosure timer and notifies responsible admins
 /datum/help_ticket/proc/unlink_linked_admin()
 	var/autoclose_delay = TICKET_AUTOCLOSE_TIMER / 2
+	if(ticket_autoclose_timer_id)
+		deltimer(ticket_autoclose_timer_id)
+
 	ticket_autoclose_timer_id = addtimer(\
 		CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), \
 		autoclose_delay, \
@@ -236,6 +269,7 @@
 		"message" = "[linked_admin.key] отказался от тикета",
 		"time" = time_stamp(NONE),
 	))
+	SSblackbox.LogAhelp(id, "Interaction", "[linked_admin.key] refused ticket", initiator_key, linked_admin.ckey)
 
 	linked_admin = null
 

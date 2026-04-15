@@ -154,6 +154,10 @@
 	var/datum/persistent_client/initiator = needed_ticket.initiator_client
 
 	if(new_state != TICKET_OPEN)
+		if(needed_ticket.ticket_autoclose_timer_id)
+			deltimer(needed_ticket.ticket_autoclose_timer_id)
+			needed_ticket.ticket_autoclose_timer_id = null
+
 		if(initiator.current_help_ticket != needed_ticket)
 			CRASH("Ticket with id [ticket_id] is not the current help ticket for [initiator.ckey]!")
 
@@ -165,6 +169,7 @@
 			admin_message = "Тикет #[ticket_id] был автоматически закрыт!"
 			user_message = "Ваш тикет был автоматически закрыт! Вы можете создать новый если вам всё ещё нужна помощь."
 			SSblackbox.LogAhelp(ticket_id, blackbox_action, "[blackbox_action] automatically", null, "TicketManager")
+			needed_ticket.send_autoclose_webhook()
 		else
 			admin_message = "[key_name_admin(admin)] [ticket_closed ? "закрыл" : "решил"] тикет #[ticket_id]!"
 			user_message = "Ваш тикет #[ticket_id] был [ticket_closed ? "закрыт" : "решён"]!"
@@ -179,6 +184,7 @@
 
 		if(needed_ticket.ticket_autoclose_timer_id)
 			deltimer(needed_ticket.ticket_autoclose_timer_id)
+			needed_ticket.ticket_autoclose_timer_id = null
 
 		initiator.current_help_ticket = needed_ticket
 		needed_ticket.closed_at = null
@@ -200,6 +206,16 @@
 /datum/ticket_manager/proc/autoclose_ticket(datum/help_ticket/needed_ticket)
 	if(!needed_ticket)
 		CRASH("Tried to autoclose null ticket!")
+
+	// guard against stale timers
+	if(needed_ticket.state != TICKET_OPEN)
+		return
+
+	if(needed_ticket.linked_admin)
+		return
+
+	if(needed_ticket.initiator_client?.current_help_ticket != needed_ticket)
+		return
 
 	set_ticket_state(null, needed_ticket, TICKET_CLOSED)
 
@@ -372,5 +388,6 @@
 		"message" = strip_html_full(message),
 		"time" = time_stamp(NONE),
 	))
+	SSblackbox.LogAhelp(ticket.id, "Interaction", strip_html_full(message), ticket.initiator_client?.ckey, usr?.ckey)
 
 	SStgui.update_uis(GLOB.ticket_manager)
