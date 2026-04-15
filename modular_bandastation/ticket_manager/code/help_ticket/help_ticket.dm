@@ -129,7 +129,7 @@
 	if(!regular_webhook_url)
 		return
 
-	var/text_for_check = lowertext("[message]")
+	var/text_for_check = LOWER_TEXT("[message]")
 	if(findtext(text_for_check, "набег"))
 		send2adminchat_webhook("@here\n[format_webhook_text(message)]", FALSE)
 		return
