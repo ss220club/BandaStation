@@ -155,11 +155,11 @@
 	send2adminchat_webhook(format_webhook_text("Тикет был автоматически закрыт по таймауту ([TICKET_AUTOCLOSE_TIMER] мин.)"), FALSE)
 
 /datum/help_ticket/proc/format_webhook_text(message)
-	return "`\
-Раунд:[GLOB.round_id]\n\
-Тикет:[id]\n\
-От:[initiator_key]\n\
-[message]`\
+	return "\
+> Раунд: [GLOB.round_id]\n\
+> Тикет: [id]\n\
+> От: [initiator_key]\n\
+> Сообщение: [message]\
 "
 
 /// Converts ticket to ticket type specified `type_to_convert_to`
