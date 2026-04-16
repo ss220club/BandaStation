@@ -154,7 +154,7 @@
 
 	var/player_message = get_last_player_message()
 	send2adminchat_webhook(
-		format_webhook_text("[player_message]\nТикет был автоматически закрыт по таймауту ([TICKET_AUTOCLOSE_TIMER] мин.)"),
+		format_webhook_text("[player_message]\nТикет был автоматически закрыт по таймауту ([TICKET_AUTOCLOSE_TIMER / (1 MINUTES)] мин.)"),
 		FALSE
 	)
 
