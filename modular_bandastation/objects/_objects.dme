@@ -87,6 +87,7 @@
 #include "code/items/implants/pump.dm"
 #include "code/items/implants/cyberimp_arm.dm"
 #include "code/items/implants/cyberimp_eye.dm"
+#include "code/datum/storage/pockets/ammo_v.dm"
 #include "code/items/storage/backpack.dm"
 #include "code/items/storage/belt.dm"
 #include "code/items/storage/death_implant_box.dm"
