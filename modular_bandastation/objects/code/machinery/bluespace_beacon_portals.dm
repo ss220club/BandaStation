@@ -7,7 +7,7 @@
 			"max_mobs" = 6,
 			"mob_types" = list(
 				/mob/living/basic/mining/goldgrub,
-				/mob/living/basic/mining/goliath/ancient,
+				/mob/living/basic/mining/goliath,
 				/mob/living/basic/mining/hivelord,
 				/mob/living/basic/mining/basilisk,
 			),
