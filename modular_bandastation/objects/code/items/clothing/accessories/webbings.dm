@@ -7,9 +7,19 @@
 	worn_icon_state = "webbing"
 	w_class = WEIGHT_CLASS_BULKY
 
+/datum/storage/pockets/ammo_webbing
+	max_slots = 6
+	max_specific_storage = WEIGHT_CLASS_SMALL
+
+/datum/storage/pockets/ammo_webbing/New()
+	. = ..()
+	set_holdable(list(
+		/obj/item/ammo_box/magazine
+	))
+
 /obj/item/clothing/accessory/ammo_vest/Initialize(mapload)
 	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/ammo_v)
+	create_storage(storage_type = /datum/storage/pockets/ammo_webbing)
 
 /obj/item/clothing/accessory/ammo_vest/can_attach_accessory(obj/item/clothing/under/attach_to, mob/living/user)
 	var/result = ..()
