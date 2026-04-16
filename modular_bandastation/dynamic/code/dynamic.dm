@@ -6,50 +6,6 @@
  *
  * Returns a weight value (higher = more likely to be selected)
  */
-// BANDASTATION EDIT START
-/proc/calculate_candidate_weight(recent_episodes, candidate_ckey = null)
-	var/base_weight = CONFIG_GET(number/antag_base_weight)
-	var/penalty_per_episode = CONFIG_GET(number/antag_weight_penalty)
-	var/min_weight = CONFIG_GET(number/antag_min_weight)
-
-	recent_episodes = recent_episodes || 0
-	var/bonus = get_candidate_weight_bonus(candidate_ckey)
-	return max(base_weight - (recent_episodes * penalty_per_episode) + bonus, min_weight)
-
-/**
- * Calculates the candidate weight for a player based on their recent antagonist activity.
- *
- * * candidate_ckey - The ckey of the player
- *
- * Returns a weight value (higher = more likely to be selected)
- */
-/datum/dynamic_ruleset/proc/get_candidate_weight(candidate_ckey)
-	SHOULD_NOT_OVERRIDE(TRUE)
-
-	if(!candidate_ckey)
-		return CONFIG_GET(number/antag_base_weight)
-
-	var/recent_episodes = count_player_antag_episodes(candidate_ckey)
-	var/weight = calculate_candidate_weight(recent_episodes, candidate_ckey)
-
-	if(CONFIG_GET(flag/log_antag_candidate_weight))
-		log_dynamic("[config_tag]: Candidate weight for [candidate_ckey]: recent=[recent_episodes], final=[weight]")
-
-	return weight
-
-/**
- * Candidate weight bonus helper for Bandastation-specific antag selection tuning.
- */
-/proc/get_candidate_weight_bonus(candidate_ckey)
-	if(!candidate_ckey)
-		return 0
-
-	var/bonus = get_candidate_antag_hours_bonus(candidate_ckey)
-	bonus += get_candidate_rounds_without_antag_bonus(candidate_ckey)
-	bonus += get_candidate_days_absent(candidate_ckey)
-
-	return bonus
-// BANDASTATION EDIT END
 
 /proc/get_candidate_antag_hours(candidate_ckey)
 	if(!candidate_ckey)

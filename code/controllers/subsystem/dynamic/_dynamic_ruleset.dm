@@ -313,6 +313,9 @@
 		return resulting_candidates
 
 	// Build weighted list of candidates
+	GLOB.dynamic_last_antag_round_cache = alist()
+	preload_candidate_last_antag_rounds(valid_candidates)
+
 	var/list/mob/weighted_candidates = list()
 	for(var/mob/candidate as anything in valid_candidates)
 		var/client/candidate_client = GET_CLIENT(candidate)
@@ -335,6 +338,53 @@
 
 	return resulting_candidates
 	// BANDASTATION EDIT END
+
+/proc/preload_candidate_last_antag_rounds(list/mob/valid_candidates)
+	if(!length(valid_candidates))
+		return
+
+	if(!SSdbcore.Connect())
+		return
+
+	var/list/ckeys = list()
+	for(var/mob/candidate as anything in valid_candidates)
+		var/client/candidate_client = GET_CLIENT(candidate)
+		if(candidate_client && candidate_client.ckey)
+			ckeys += candidate_client.ckey
+
+	ckeys = uniq(ckeys)
+	if(!length(ckeys))
+		return
+
+	if(!GLOB.dynamic_last_antag_round_cache)
+		GLOB.dynamic_last_antag_round_cache = alist()
+
+	var/datum/db_query/query = SSdbcore.NewQuery({"
+		SELECT antagonist.ckey_field, MAX(f.round_id)
+		FROM [format_table_name(\"feedback\")] f
+		CROSS JOIN JSON_TABLE(
+			f.json,
+			'$.data.*' COLUMNS (
+				ckey_field VARCHAR(32) PATH '$.key'
+			)
+		) AS antagonist
+		WHERE f.key_name = 'antagonists'
+		AND antagonist.ckey_field IN (\"[jointext(ckeys, '\", \"')]\")
+		GROUP BY antagonist.ckey_field
+	"})
+	if(!query.Execute())
+		qdel(query)
+		return
+
+	while(query.NextRow())
+		var/ckey = query.item[1]
+		var/last_round = text2num(query.item[2]) || 0
+		GLOB.dynamic_last_antag_round_cache[ckey] = last_round
+	qdel(query)
+
+	for(var/ckey in ckeys)
+		if(!(ckey in GLOB.dynamic_last_antag_round_cache))
+			GLOB.dynamic_last_antag_round_cache[ckey] = 0
 
 // BANDASTATION EDIT START
 /**
@@ -429,8 +479,11 @@
 	if(!SSdbcore.Connect())
 		return 0
 
+	if(GLOB.dynamic_last_antag_round_cache && candidate_ckey in GLOB.dynamic_last_antag_round_cache)
+		return GLOB.dynamic_last_antag_round_cache[candidate_ckey]
+
 	var/datum/db_query/query = SSdbcore.NewQuery({"
-		SELECT MAX(f.round_id) FROM [format_table_name("feedback")] f
+		SELECT MAX(f.round_id) FROM [format_table_name(\"feedback\")] f
 		CROSS JOIN JSON_TABLE(
 			f.json,
 			'$.data.*' COLUMNS (
@@ -448,6 +501,9 @@
 	if(query.NextRow())
 		last_antag_round_id = text2num(query.item[1]) || 0
 	qdel(query)
+
+	if(GLOB.dynamic_last_antag_round_cache)
+		GLOB.dynamic_last_antag_round_cache[candidate_ckey] = last_antag_round_id
 
 	var/rounds = max(0, GLOB.round_id - last_antag_round_id - 1)
 	return min(rounds, 25)
@@ -467,7 +523,7 @@
 
 	// Get days since last played any role (from role_time table)
 	var/datum/db_query/query = SSdbcore.NewQuery(
-		"SELECT DATEDIFF(Now(), MAX(end_time)) FROM [format_table_name(\"role_time\")] WHERE ckey = :ckey",
+		"SELECT DATEDIFF(NOW(), MAX(end_time)) FROM [format_table_name(\"role_time\")] WHERE ckey = :ckey",
 		list("ckey" = candidate_ckey)
 	)
 	if(!query.Execute())
