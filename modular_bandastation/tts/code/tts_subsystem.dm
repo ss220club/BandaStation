@@ -475,29 +475,29 @@ SUBSYSTEM_DEF(tts220)
 /datum/controller/subsystem/tts220/proc/cleanup_tts_file(filename)
 	fdel(filename)
 
-/datum/controller/subsystem/tts220/proc/get_available_seeds(atom/owner)
+/datum/controller/subsystem/tts220/proc/get_available_seeds(owner)
 	var/list/_tts_seeds_names = list()
 
-	if(!ismob(owner))
+	var/client/C
+	if(istype(owner, /client))
+		C = owner
+	else if(ismob(owner))
+		var/mob/M = owner
+		C = M.client
+	else
 		_tts_seeds_names |= tts_seeds_names
 		return _tts_seeds_names
 
-	var/mob/M = owner
-
-	if(!M.client)
+	if(!C)
 		_tts_seeds_names |= tts_seeds_names
-		return _tts_seeds_names
+		return sortTim(_tts_seeds_names, GLOBAL_PROC_REF(cmp_text_asc))
 
-	if(M.client.holder)
-		_tts_seeds_names |= tts_seeds_names
-		return _tts_seeds_names
-
-	var/donator_level = M.client.get_donator_level()
+	var/donator_level = C.get_donator_level()
 
 	for(var/level in tts_seeds_names_by_donator_levels)
 		if(text2num(level) <= donator_level)
 			_tts_seeds_names |= tts_seeds_names_by_donator_levels[level]
-	
+
 	return sortTim(_tts_seeds_names, GLOBAL_PROC_REF(cmp_text_asc))
 
 /datum/controller/subsystem/tts220/proc/get_random_seed(owner)
