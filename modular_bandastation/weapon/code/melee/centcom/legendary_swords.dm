@@ -212,6 +212,7 @@
 	name = "Swordsman Rage"
 
 /datum/action/item_action/legendary_saber/rage/Trigger(trigger_flags)
+	. = ..()
 	var/log_message = "[usr.name] triggered [name]"
 	log_combat(log_message)
 	message_admins(log_message)
