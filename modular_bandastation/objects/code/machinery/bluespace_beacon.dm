@@ -50,22 +50,22 @@
 		return TRUE
 	return FALSE
 
-#define BEACON_POINTS_PER_W 4e-6
+#define BEACON_POINTS_PER_W 10e-6
 #define BEACON_BASE_POINTS 2
 #define BEACON_NEAREST_MW(power) ((power) - (power) % (1 MEGA WATTS))
 #define BEACON_RANDOM_SPAWN_CHANCE 5
 #define BEACON_RANDOM_SPAWN_RADIUS 4
 #define BEACON_PORTAL_EVENT_COOLDOWN (20 SECONDS)
-#define BEACON_PORTAL_CHANCE_MIN 1
+#define BEACON_PORTAL_CHANCE_MIN 2
 #define BEACON_PORTAL_CHANCE_MAX 20
 #define BEACON_DEMONIC_INCURSION_CHANCE_MIN 1
 #define BEACON_DEMONIC_INCURSION_CHANCE_MAX 1
 #define BEACON_DEMONIC_INCURSION_PORTALS_MIN 1
-#define BEACON_DEMONIC_INCURSION_PORTALS_MAX 2
+#define BEACON_DEMONIC_INCURSION_PORTALS_MAX 3
 #define BEACON_GLOBAL_INVASION_CHANCE_MIN 1
 #define BEACON_GLOBAL_INVASION_CHANCE_MAX 4
 #define BEACON_GLOBAL_INVASION_PORTALS_MIN 2
-#define BEACON_GLOBAL_INVASION_PORTALS_MAX 8
+#define BEACON_GLOBAL_INVASION_PORTALS_MAX 40
 
 /obj/machinery/power/bluespace_beacon
 	name = "Reality beacon"
@@ -445,10 +445,10 @@
 	return TRUE
 
 /obj/machinery/power/bluespace_beacon/proc/get_global_invasion_portal_count()
-	var/alive_crew = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
+	var/alive_crew = get_active_player_count(alive_check = FALSE, afk_check = FALSE, human_check = FALSE)
 	if(alive_crew <= 0)
 		return BEACON_GLOBAL_INVASION_PORTALS_MIN
-	var/target_count = round(alive_crew / 4)
+	var/target_count = round(alive_crew / 2)
 	return clamp(target_count, BEACON_GLOBAL_INVASION_PORTALS_MIN, BEACON_GLOBAL_INVASION_PORTALS_MAX)
 
 /obj/machinery/power/bluespace_beacon/proc/announce_global_invasion()
