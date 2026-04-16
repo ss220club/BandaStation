@@ -152,7 +152,31 @@
 	if(!regular_webhook_url)
 		return
 
-	send2adminchat_webhook(format_webhook_text("Тикет был автоматически закрыт по таймауту ([TICKET_AUTOCLOSE_TIMER] мин.)"), FALSE)
+	var/player_message = get_last_player_message()
+	send2adminchat_webhook(
+		format_webhook_text("[player_message]\nТикет был автоматически закрыт по таймауту ([TICKET_AUTOCLOSE_TIMER] мин.)"),
+		FALSE
+	)
+
+/datum/help_ticket/proc/get_last_player_message()
+	if(!length(messages))
+		return null
+
+	for(var/i = length(messages), i >= 1, i--)
+		var/list/message_data = messages[i]
+		if(!islist(message_data))
+			continue
+
+		if(message_data["sender"] != initiator_key)
+			continue
+
+		var/message_text = message_data["message"]
+		if(!message_text)
+			continue
+
+		return "[message_text]"
+
+	return null
 
 /datum/help_ticket/proc/format_webhook_text(message)
 	return "\
