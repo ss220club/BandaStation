@@ -126,6 +126,9 @@
 	/// Weighted random outcomes that may appear around the beacon while charging.
 	var/static/list/random_spawn_weights
 
+/obj/machinery/power/bluespace_beacon/add_tts_component()
+	return
+
 /obj/machinery/power/bluespace_beacon/should_have_node()
 	return TRUE
 
@@ -135,9 +138,6 @@
 		random_spawn_weights = get_bluespace_beacon_random_spawn_weights()
 
 	radio = new(src)
-	var/datum/component/tts_component/radio_tts = radio.GetComponent(/datum/component/tts_component)
-	if(radio_tts)
-		qdel(radio_tts)
 	radio.keyslot = new radio_key
 	radio.set_on(TRUE)
 	radio.set_broadcasting(TRUE)
