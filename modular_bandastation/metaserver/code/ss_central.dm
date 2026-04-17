@@ -13,7 +13,7 @@ SUBSYSTEM_DEF(central)
 	dependencies = list(
 		/datum/controller/subsystem/http
 	)
-	flags = SS_NO_FIRE
+	ss_flags = SS_NO_FIRE
 	init_stage = INITSTAGE_FIRST
 	var/list/discord_links = list()
 

@@ -52,6 +52,7 @@ GLOBAL_LIST(badge_icons_cache)
 		"Редактор Вики" = "WikiLore",
 		"Главный Администратор" = "HeadAdmin",
 		"Администратор" = "GameAdmin",
+		"Ивентмейкер" = "Eventmaker",
 		"Триал Администратор" = "TrialAdmin",
 		"Тестовый Администратор" = "TestAdmin",
 		"Ментор" = "Mentor"
