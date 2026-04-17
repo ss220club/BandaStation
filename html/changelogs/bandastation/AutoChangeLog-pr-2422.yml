@@ -1,0 +1,4 @@
+author: "HailFriend"
+delete-after: True
+changes:
+  - rscadd: "Расширен список вещей для сканнера контрабанды"

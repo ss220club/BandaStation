@@ -477,17 +477,28 @@ SUBSYSTEM_DEF(tts220)
 
 /datum/controller/subsystem/tts220/proc/get_available_seeds(owner)
 	var/list/_tts_seeds_names = list()
-	_tts_seeds_names |= tts_seeds_names
 
-	if(!ismob(owner))
+	var/client/C
+	if(istype(owner, /client))
+		C = owner
+	else if(ismob(owner))
+		var/mob/M = owner
+		C = M.client
+	else
+		_tts_seeds_names |= tts_seeds_names
 		return _tts_seeds_names
 
-	var/mob/M = owner
+	if(!C)
+		_tts_seeds_names |= tts_seeds_names
+		return sortTim(_tts_seeds_names, GLOBAL_PROC_REF(cmp_text_asc))
 
-	if(!M.client)
-		return _tts_seeds_names
+	var/donator_level = C.get_donator_level()
 
-	return _tts_seeds_names
+	for(var/level in tts_seeds_names_by_donator_levels)
+		if(text2num(level) <= donator_level)
+			_tts_seeds_names |= tts_seeds_names_by_donator_levels[level]
+
+	return sortTim(_tts_seeds_names, GLOBAL_PROC_REF(cmp_text_asc))
 
 /datum/controller/subsystem/tts220/proc/get_random_seed(owner)
 	return pick(get_available_seeds(owner))
@@ -537,10 +548,24 @@ SUBSYSTEM_DEF(tts220)
 
 	return tts_gender
 
-/datum/controller/subsystem/tts220/proc/pick_tts_seed_by_gender(gender)
+/datum/controller/subsystem/tts220/proc/pick_tts_seed_by_gender(gender, list/allowed_seeds)
 	var/tts_gender = SStts220.get_tts_gender(gender)
-	var/tts_by_gender = LAZYACCESS(SStts220.tts_seeds_by_gender, tts_gender)
+	var/list/tts_by_gender = LAZYACCESS(SStts220.tts_seeds_by_gender, tts_gender)
+
+	if(tts_by_gender)
+		tts_by_gender = tts_by_gender.Copy()
+	else
+		tts_by_gender = list()
+
 	tts_by_gender |= LAZYACCESS(SStts220.tts_seeds_by_gender, TTS_GENDER_ANY)
+
+	if(!isnull(allowed_seeds))
+		var/list/valid_seeds = list()
+		for(var/seed in tts_by_gender)
+			if(seed in allowed_seeds)
+				valid_seeds += seed
+		tts_by_gender = valid_seeds
+
 	if(!length(tts_by_gender))
 		logger.Log(LOG_CATEGORY_DEBUG, "No tts for gender `[gender]`, tts_gender: `[tts_gender]`")
 		return null

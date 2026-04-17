@@ -13,7 +13,17 @@
 	GLOB.human_to_tts["[target.real_name]"] = seed
 
 /datum/preference/text/tts_seed/create_informed_default_value(datum/preferences/preferences)
-	return SStts220.pick_tts_seed_by_gender(preferences.read_preference(/datum/preference/choiced/gender))
+	var/list/allowed_seeds = SStts220.get_available_seeds(preferences.parent)
+	return SStts220.pick_tts_seed_by_gender(preferences.read_preference(/datum/preference/choiced/gender), allowed_seeds)
+
+/datum/preference/text/tts_seed/deserialize(input, datum/preferences/preferences)
+	var/datum/tts_seed/seed = SStts220.tts_seeds[input]
+	if(!seed)
+		return create_informed_default_value(preferences)
+	var/list/allowed_seeds = SStts220.get_available_seeds(preferences.parent)
+	if(!(seed.name in allowed_seeds))
+		return create_informed_default_value(preferences)
+	return input
 
 /datum/preference/numeric/volume/sound_tts_volume_radio
 	category = PREFERENCE_CATEGORY_GAME_PREFERENCES

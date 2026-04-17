@@ -29,10 +29,10 @@
 /datum/heretic_knowledge/codex_morbus/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
 	. = ..()
 	var/mob/living/carbon/human/to_fuck_up = locate() in selected_atoms
-	for(var/_limb in to_fuck_up.bodyparts)
+	for(var/_limb in to_fuck_up.get_bodyparts())
 		var/obj/item/bodypart/limb = _limb
 		limb.force_wound_upwards(/datum/wound/slash/flesh/critical)
-	for(var/obj/item/bodypart/limb as anything in to_fuck_up.bodyparts)
+	for(var/obj/item/bodypart/limb as anything in to_fuck_up.get_bodyparts())
 		to_fuck_up.cause_wound_of_type_and_severity(WOUND_BLUNT, limb, WOUND_SEVERITY_CRITICAL)
 	return TRUE
 
@@ -107,9 +107,13 @@
 	desc = "Позволяет трансмутировать холст и дополнительный предмет, чтобы создать произведение искусства. \
 			Эти картины имеют разные эффекты в зависимости от добавленного предмета. Можно создать следующие картины: \
 			Сестра и Тот, Кто Плакал: Глаза. Очищает ваш разум, но проклинает не-еретиков галлюцинациями. \
+			\
 			Первое Желание: Любая часть тела. Предоставляет вам случайные органы, но проклинает не-еретиков жаждой плоти. \
+			\
 			Великий чапараль над холмами: Любая выращенная еда. Распространяет кудзу при установке и осмотре не-еретиками. Также дает вам маки и колокольчики. \
+			\
 			Дама за воротами: Перчатки. Очищает ваши мутации, но мутирует всех не-еретиков и проклинает их чесоткой. \
+			\
 			Подъем на ржавые горы: Мусло. Проклинает всех не-еретиков, заставляя их оставлять ржавчину на своем пути."
 	gain_text = "Ветер вдохновения дует через меня; за стенами и за вратами лежит вдохновение, которое еще предстоит изобразить \
 				Они снова жаждут взгляда смертных, и я исполню это желание."
