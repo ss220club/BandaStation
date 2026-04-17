@@ -125,7 +125,7 @@
 /proc/setup_strongarm(mob/living/carbon/owner)
 	var/limbs_count = count_strongarm_limbs(owner)
 
-	if(limbs_count >= 2)
+	if(limbs_count >= HUMAN_LIMBS_COUNT)
 		owner.AddElement(/datum/element/strongarm_throw)
 		if(!owner.GetComponent(/datum/component/strongarm_combat))
 			owner.AddComponent(/datum/component/strongarm_combat, 3, 5, 3, 3 SECONDS)
@@ -134,11 +134,11 @@
 		var/datum/component/strongarm_combat/combat_component = owner.GetComponent(/datum/component/strongarm_combat)
 		qdel(combat_component)
 
-/// Removes component and element when limbs drop below 2
+/// Removes component and element when limbs drop below required
 /proc/cleanup_strongarm(mob/living/carbon/owner)
 	var/limbs_count = count_strongarm_limbs(owner)
 
-	if(limbs_count < 2)
+	if(limbs_count < HUMAN_LIMBS_COUNT)
 		owner.RemoveElement(/datum/element/strongarm_throw)
 		var/datum/component/strongarm_combat/combat_component = owner.GetComponent(/datum/component/strongarm_combat)
 		qdel(combat_component)

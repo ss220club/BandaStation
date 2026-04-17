@@ -49,18 +49,18 @@
 /proc/setup_strongleg(mob/living/carbon/owner)
 	var/limbs_count = count_strongleg_limbs(owner)
 
-	if(limbs_count >= 2)
+	if(limbs_count >= HUMAN_LIMBS_COUNT)
 		if(!owner.GetComponent(/datum/component/strongleg_combat))
 			owner.AddComponent(/datum/component/strongleg_combat, 2)
 	else
 		var/datum/component/strongleg_combat/combat_component = owner.GetComponent(/datum/component/strongleg_combat)
 		qdel(combat_component)
 
-/// Removes component when limbs drop below 2
+/// Removes component when limbs drop below required
 /proc/cleanup_strongleg(mob/living/carbon/owner)
 	var/limbs_count = count_strongleg_limbs(owner)
 
-	if(limbs_count < 2)
+	if(limbs_count < HUMAN_LIMBS_COUNT)
 		var/datum/component/strongleg_combat/combat_component = owner.GetComponent(/datum/component/strongleg_combat)
 		qdel(combat_component)
 
