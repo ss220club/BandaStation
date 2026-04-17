@@ -359,6 +359,10 @@
 	if(!GLOB.dynamic_last_antag_round_cache)
 		GLOB.dynamic_last_antag_round_cache = alist()
 
+	var/list/escaped_ckeys = list()
+	for(var/ckey in ckeys)
+		escaped_ckeys += replacetext(ckey, "\"", "\\\"")
+
 	var/datum/db_query/query = SSdbcore.NewQuery({"
 		SELECT antagonist.ckey_field, MAX(f.round_id)
 		FROM [format_table_name(\"feedback\")] f
@@ -369,7 +373,7 @@
 			)
 		) AS antagonist
 		WHERE f.key_name = 'antagonists'
-		AND antagonist.ckey_field IN (\"[jointext(ckeys, '\", \"')]\")
+		AND antagonist.ckey_field IN (\"[jointext(escaped_ckeys, '\", \"')]\")
 		GROUP BY antagonist.ckey_field
 	"})
 	if(!query.Execute())
@@ -480,7 +484,7 @@
 		return 0
 
 	if(GLOB.dynamic_last_antag_round_cache && candidate_ckey in GLOB.dynamic_last_antag_round_cache)
-		return GLOB.dynamic_last_antag_round_cache[candidate_ckey]
+		return min(max(0, GLOB.round_id - GLOB.dynamic_last_antag_round_cache[candidate_ckey] - 1), 25)
 
 	var/datum/db_query/query = SSdbcore.NewQuery({"
 		SELECT MAX(f.round_id) FROM [format_table_name(\"feedback\")] f
