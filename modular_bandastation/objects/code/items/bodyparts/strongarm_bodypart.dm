@@ -18,7 +18,6 @@
 	var/shove_throw_distance
 	var/shove_throw_speed
 	var/shove_knockdown_time
-	var/is_active
 
 /datum/component/strongarm_combat/Initialize(
 	knockback_distance = 3,
@@ -41,17 +40,10 @@
 	. = ..()
 	UnregisterSignal(parent, list(COMSIG_HUMAN_PUNCHED, COMSIG_LIVING_UNARMED_ATTACK))
 
-/// Sets the active state of the component. Call this externally to enable/disable abilities.
-/datum/component/strongarm_combat/proc/set_active(active)
-	is_active = active
-
 /datum/component/strongarm_combat/proc/on_punch(mob/living/carbon/human/source, mob/living/carbon/human/target, damage, attack_type, obj/item/bodypart/affecting, final_armor_block, kicking, limb_sharpness)
 	SIGNAL_HANDLER
 
 	if(kicking || target.body_position == LYING_DOWN)
-		return NONE
-
-	if(!is_active)
 		return NONE
 
 	var/throw_dir = get_dir(source, target)
@@ -82,9 +74,6 @@
 
 	var/mob/living/carbon/human/human_source = source
 	if(!istype(human_source))
-		return NONE
-
-	if(!is_active)
 		return NONE
 
 
@@ -132,36 +121,27 @@
 		count++
 	return count
 
-/// Creates component if needed and updates active state
+/// Creates component and element if 2 limbs, removes if less
 /proc/setup_strongarm(mob/living/carbon/owner)
 	var/limbs_count = count_strongarm_limbs(owner)
 
-	// Only add element when both arms are installed
 	if(limbs_count >= 2)
 		owner.AddElement(/datum/element/strongarm_throw)
+		if(!owner.GetComponent(/datum/component/strongarm_combat))
+			owner.AddComponent(/datum/component/strongarm_combat, 3, 5, 3, 3 SECONDS)
+	else
+		owner.RemoveElement(/datum/element/strongarm_throw)
+		var/datum/component/strongarm_combat/combat_component = owner.GetComponent(/datum/component/strongarm_combat)
+		qdel(combat_component)
 
-	var/datum/component/strongarm_combat/combat_component = owner.GetComponent(/datum/component/strongarm_combat)
-	if(!combat_component)
-		combat_component = owner.AddComponent(/datum/component/strongarm_combat, 3, 5, 3, 3 SECONDS)
-
-	combat_component.set_active(limbs_count >= 2)
-
-/// Updates active state, removes component and element if no limbs left
+/// Removes component and element when limbs drop below 2
 /proc/cleanup_strongarm(mob/living/carbon/owner)
-	var/datum/component/strongarm_combat/combat_component = owner.GetComponent(/datum/component/strongarm_combat)
-	if(!combat_component)
-		return
-
 	var/limbs_count = count_strongarm_limbs(owner)
 
-	// Remove element when less than 2 arms
 	if(limbs_count < 2)
 		owner.RemoveElement(/datum/element/strongarm_throw)
-
-	if(limbs_count == 0)
+		var/datum/component/strongarm_combat/combat_component = owner.GetComponent(/datum/component/strongarm_combat)
 		qdel(combat_component)
-	else
-		combat_component.set_active(limbs_count >= 2)
 
 /obj/item/bodypart/arm/left/strongarm
 	name = "augmented left arm"

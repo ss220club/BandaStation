@@ -1,7 +1,6 @@
 /// Component for Strongleg prosthesis combat abilities
 /datum/component/strongleg_combat
 	var/kick_knockback_distance
-	var/is_active = FALSE
 
 /datum/component/strongleg_combat/Initialize(kick_knockback_distance = 3)
 	. = ..()
@@ -15,10 +14,6 @@
 	. = ..()
 	UnregisterSignal(parent, COMSIG_HUMAN_PUNCHED)
 
-/// Sets the active state of the component. Call this externally to enable/disable abilities.
-/datum/component/strongleg_combat/proc/set_active(active)
-	is_active = active
-
 /datum/component/strongleg_combat/proc/on_kick(mob/living/carbon/human/source, mob/living/carbon/human/target, damage, attack_type, obj/item/bodypart/affecting, final_armor_block, kicking, limb_sharpness)
 	SIGNAL_HANDLER
 
@@ -26,9 +21,6 @@
 		return NONE
 
 	if(target.body_position == LYING_DOWN)
-		return NONE
-
-	if(!is_active)
 		return NONE
 
 	var/throw_dir = get_dir(source, target)
@@ -44,7 +36,7 @@
 	)
 	to_chat(source, span_danger("Ваш пинок отбрасывает [target.declent_ru(ACCUSATIVE)]!"))
 
-/// Counts installed strongleg limbs and updates component state
+/// Counts installed strongleg limbs
 /proc/count_strongleg_limbs(mob/living/carbon/owner)
 	var/count = 0
 	if(istype(owner.get_bodypart(BODY_ZONE_L_LEG), /obj/item/bodypart/leg/left/strongleg))
@@ -53,26 +45,24 @@
 		count++
 	return count
 
-/// Creates component if needed and updates active state
+/// Creates component if 2 limbs, removes if less
 /proc/setup_strongleg(mob/living/carbon/owner)
-	var/datum/component/strongleg_combat/combat_component = owner.GetComponent(/datum/component/strongleg_combat)
-	if(!combat_component)
-		combat_component = owner.AddComponent(/datum/component/strongleg_combat, 2)
-
 	var/limbs_count = count_strongleg_limbs(owner)
-	combat_component.set_active(limbs_count >= 2)
 
-/// Updates active state, removes component if no limbs left
-/proc/cleanup_strongleg(mob/living/carbon/owner)
-	var/datum/component/strongleg_combat/combat_component = owner.GetComponent(/datum/component/strongleg_combat)
-	if(!combat_component)
-		return
-
-	var/limbs_count = count_strongleg_limbs(owner)
-	if(limbs_count == 0)
-		qdel(combat_component)
+	if(limbs_count >= 2)
+		if(!owner.GetComponent(/datum/component/strongleg_combat))
+			owner.AddComponent(/datum/component/strongleg_combat, 2)
 	else
-		combat_component.set_active(limbs_count >= 2)
+		var/datum/component/strongleg_combat/combat_component = owner.GetComponent(/datum/component/strongleg_combat)
+		qdel(combat_component)
+
+/// Removes component when limbs drop below 2
+/proc/cleanup_strongleg(mob/living/carbon/owner)
+	var/limbs_count = count_strongleg_limbs(owner)
+
+	if(limbs_count < 2)
+		var/datum/component/strongleg_combat/combat_component = owner.GetComponent(/datum/component/strongleg_combat)
+		qdel(combat_component)
 
 /obj/item/bodypart/leg/left/strongleg
 	name = "augmented left leg"
