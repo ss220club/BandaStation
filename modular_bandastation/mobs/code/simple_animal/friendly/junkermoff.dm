@@ -37,9 +37,9 @@
 
 /mob/living/basic/junkermoff/Initialize(mapload)
 	. = ..()
-	var/static/list/food_types = list(/obj/item)
+	var/static/list/food_types = typecacheof(list(/obj/item))
 	AddElement(/datum/element/basic_eating, food_types = food_types)
-	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(food_types))
+	ai_controller.set_blackboard_key(BB_BASIC_FOODS, food_types)
 	ai_controller.set_blackboard_key(BB_EAT_FOOD_COOLDOWN, 10 SECONDS)
 	AddElement(/datum/element/ai_retaliate)
 	add_verb(src, /mob/living/proc/toggle_resting)
