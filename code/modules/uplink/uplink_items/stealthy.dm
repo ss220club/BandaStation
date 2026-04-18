@@ -52,6 +52,8 @@
 	surplus = 10
 	purchasable_from = ~UPLINK_CLOWN_OPS
 
+// BANDASTATION; MADE BY GEORGIANENEMY
+
 /datum/uplink_item/stealthy_weapons/wu_silence
 	name = "Wu S. Silence Pistol"
 	desc = "A compact suppressed tranquilizer pistol designed for covert nonlethal operations. \
