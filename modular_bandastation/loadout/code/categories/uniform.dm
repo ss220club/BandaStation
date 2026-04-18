@@ -112,6 +112,78 @@
 	name = "Костюм (Бордовый)"
 	item_path = /obj/item/clothing/under/suit/burgundy
 
+/datum/loadout_item/uniforms/dress_plaid
+	name = "Клетчатая юбка"
+	item_path = /obj/item/clothing/under/dress/skirt/plaid
+
+/datum/loadout_item/uniforms/dress_turtleskirt
+	name = "Юбка-водолазка"
+	item_path = /obj/item/clothing/under/dress/skirt/turtleskirt
+
+/datum/loadout_item/uniforms/dress_tango
+	name = "Платье танго"
+	item_path = /obj/item/clothing/under/dress/tango
+
+/datum/loadout_item/uniforms/dress_striped
+	name = "Полосатое платье"
+	item_path = /obj/item/clothing/under/dress/striped
+
+/datum/loadout_item/uniforms/dress_sailor
+	name = "Платье моряка"
+	item_path = /obj/item/clothing/under/dress/sailor
+
+/datum/loadout_item/uniforms/dress_head_of_personnel
+	name = "Костюм (Бирюзовый с юбкой)"
+	item_path = /obj/item/clothing/under/costume/head_of_personnel/skirt
+
+/datum/loadout_item/uniforms/dress_captain
+	name = "Костюм (Зелёный с юбкой)"
+	item_path = /obj/item/clothing/under/costume/captain/skirt
+
+/datum/loadout_item/uniforms/dress_sundress
+	name = "Летнее платье"
+	item_path = /obj/item/clothing/under/dress/sundress
+
+/datum/loadout_item/uniforms/kimono
+	name = "Кимоно (Чёрное)"
+	item_path = /obj/item/clothing/under/costume/kimono
+
+/datum/loadout_item/uniforms/kimono_red
+	name = "Кимоно (Красное)"
+	item_path = /obj/item/clothing/under/costume/kimono/red
+
+/datum/loadout_item/uniforms/kimono_purple
+	name = "Кимоно (Пурпурное)"
+	item_path = /obj/item/clothing/under/costume/kimono/purple
+
+/datum/loadout_item/uniforms/osi
+	name = "Комбинезон O.S.I"
+	item_path = /obj/item/clothing/under/costume/osi
+
+/datum/loadout_item/uniforms/ethereal_tunic
+	name = "Эфириальная туника"
+	item_path = /obj/item/clothing/under/ethereal_tunic
+
+/datum/loadout_item/uniforms/yukata
+	name = "Юката (Чёрная)"
+	item_path = /obj/item/clothing/under/costume/yukata
+
+/datum/loadout_item/uniforms/yukata_green
+	name = "Юката (Зелёная)"
+	item_path = /obj/item/clothing/under/costume/yukata/green
+
+/datum/loadout_item/uniforms/yukata_white
+	name = "Юката (Белая)"
+	item_path = /obj/item/clothing/under/costume/yukata/white
+
+/datum/loadout_item/uniforms/overalls
+	name = "Полукомбинезон"
+	item_path = /obj/item/clothing/under/misc/overalls
+
+/datum/loadout_item/uniforms/dress_purple_bartender
+	name = "Юбка бармена"
+	item_path = /obj/item/clothing/under/rank/civilian/purple_bartender
+
 // MARK: Tier 1
 /datum/loadout_item/uniforms/etamin_suit
 	name = "Костюм Etamin Industries"
