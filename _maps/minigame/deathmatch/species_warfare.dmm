@@ -109,7 +109,6 @@
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
 /obj/machinery/atmospherics/components/binary/crystallizer{
 	dir = 4;
-	disabled = s
 	},
 /turf/open/indestructible,
 /area/deathmatch)
