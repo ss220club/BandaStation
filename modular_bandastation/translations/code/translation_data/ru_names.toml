@@ -28471,6 +28471,15 @@ instrumental = "вринтараканом"
 prepositional = "вринтаракане"
 gender = "male"
 
+["chiefroach"]
+nominative = "главный молетаракан"
+genitive = "главного молетаракана"
+dative = "главному молетаракану"
+accusative = "главный молетаракана"
+instrumental = "главным молетараканом"
+prepositional = "главном молетаракане"
+gender = "male"
+
 ["junkermoff"]
 nominative = "джанкермофф"
 genitive = "джанкермоффа"
