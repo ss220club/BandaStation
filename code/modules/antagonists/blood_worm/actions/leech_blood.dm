@@ -82,6 +82,7 @@
 	if (leech.pulling != target && !leech.grab(target))
 		target.balloon_alert(leech, "не выходит захватить!")
 		return
+
 	if (leech.grab_state < GRAB_AGGRESSIVE)
 		leech.setGrabState(GRAB_AGGRESSIVE)
 
