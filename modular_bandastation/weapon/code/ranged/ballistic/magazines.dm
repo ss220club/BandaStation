@@ -1298,7 +1298,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	ammo_type = /obj/item/ammo_casing/c22lrtranquilizer
 	caliber = CALIBER_22LR
-	max_ammo = 9
+	max_ammo = 10
 	ammo_band_icon = "+35_ammo_band"
 	ammo_band_color = null
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
