@@ -108,7 +108,8 @@
 "eE" = (
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
 /obj/machinery/atmospherics/components/binary/crystallizer{
-	dir = 4
+	dir = 4;
+	disabled = s
 	},
 /turf/open/indestructible,
 /area/deathmatch)
@@ -261,7 +262,9 @@
 /obj/effect/turf_decal/tile/purple/half/contrasted{
 	dir = 4
 	},
-/obj/machinery/rnd/production/protolathe/offstation,
+/obj/machinery/rnd/production/protolathe/offstation{
+	busy = 1
+	},
 /obj/machinery/light/directional/east,
 /turf/open/indestructible/white,
 /area/deathmatch)
@@ -430,7 +433,9 @@
 /obj/effect/turf_decal/tile/purple/anticorner/contrasted{
 	dir = 4
 	},
-/obj/machinery/rnd/production/circuit_imprinter/offstation,
+/obj/machinery/rnd/production/circuit_imprinter/offstation{
+	busy = 1
+	},
 /obj/item/mecha_parts/mecha_equipment/wormhole_generator,
 /turf/open/indestructible/white,
 /area/deathmatch)
@@ -1344,7 +1349,9 @@
 /obj/effect/turf_decal/tile/purple/half/contrasted{
 	dir = 4
 	},
-/obj/machinery/rnd/destructive_analyzer,
+/obj/machinery/autolathe{
+	busy = 1
+	},
 /turf/open/indestructible/white,
 /area/deathmatch)
 "YQ" = (
