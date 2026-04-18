@@ -1,5 +1,6 @@
 /proc/get_bluespace_beacon_random_spawn_weights()
 	var/static/list/spawn_weights = list(
+		/mob/living/basic/junkermoff = 8,
 		/obj/item/toy/crayon = 10,
 		/obj/item/toy/crayon/red = 4,
 		/obj/item/toy/crayon/blue = 4,

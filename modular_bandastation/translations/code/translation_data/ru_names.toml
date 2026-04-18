@@ -28471,6 +28471,15 @@ instrumental = "вринтараканом"
 prepositional = "вринтаракане"
 gender = "male"
 
+["junkermoff"]
+nominative = "джанкермофф"
+genitive = "джанкермоффа"
+dative = "джанкермоффу"
+accusative = "джанкермоффа"
+instrumental = "джанкермоффом"
+prepositional = "джанкермоффе"
+gender = "male"
+
 ["dead mouse"]
 nominative = "мёртвая мышь"
 genitive = "мёртвой мыши"
