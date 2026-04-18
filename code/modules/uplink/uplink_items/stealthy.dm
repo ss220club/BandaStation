@@ -52,6 +52,18 @@
 	surplus = 10
 	purchasable_from = ~UPLINK_CLOWN_OPS
 
+/datum/uplink_item/stealthy_weapons/wu_silence
+	name = "Wu S. Silence Pistol"
+	desc = "A compact suppressed tranquilizer pistol designed for covert nonlethal operations. \
+		Comes with no extra magazines, but is compatible with .22 LR tranquilizer magazines."
+	item = /obj/item/gun/ballistic/automatic/pistol/wu22lr
+	cost = 10
+	purchasable_from = UPLINK_TRAITORS
+	uplink_item_flags = SYNDIE_ILLEGAL_TECH | SYNDIE_TRIPS_CONTRABAND
+	relevant_child_items = list(
+		/datum/uplink_item/ammo/tranq22lr,
+	)
+
 /datum/uplink_item/stealthy_weapons/holster
 	name = "Syndicate Holster"
 	desc = "A useful little device that allows for inconspicuous carrying of guns using chameleon technology. It also allows for badass gun-spinning."
