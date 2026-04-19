@@ -4395,7 +4395,7 @@ instrumental = "ножнами для виброклинка гвардии Им
 prepositional = "ножнах для виброклинка гвардии Императора"
 gender = "female"
 
-["\"Luna\""]
+["Luna"]
 nominative = "\"Луна\""
 genitive = "\"Луны\""
 dative = "\"Луне\""
@@ -34462,7 +34462,7 @@ instrumental = "блюспейс разломом"
 prepositional = "блюспейс разломе"
 gender = "male"
 
-["\"Sol\" necklace"]
+["Sol necklace"]
 nominative = "ожерелье \"Сол\""
 genitive = "ожерелья \"Сол\""
 dative = "ожерелью \"Сол\""
