@@ -47,6 +47,8 @@
 	cost = 2
 	purchasable_from = ~UPLINK_ALL_SYNDIE_OPS
 
+// START OF THE BANDASTATION EXCLUSIVE CODE; MADE BY GEORGIANENEMY
+
 /datum/uplink_item/ammo/tranq22lr
 	name = ".22 LR Tranquilizer Magazine"
 	desc = "A spare magazine loaded with .22 LR tranquilizer rounds; compatible with the Wu S. Silence Pistol."
@@ -54,6 +56,8 @@
 	cost = 4
 	purchasable_from = ~UPLINK_ALL_SYNDIE_OPS
 	uplink_item_flags = SYNDIE_TRIPS_CONTRABAND
+
+// END OF THE BANDASTATION EXCLUSIVE CODE; MADE BY GEORGIANENEMY
 
 /datum/uplink_item/ammo/revolver
 	name = ".357 Speed Loader"

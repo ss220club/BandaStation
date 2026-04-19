@@ -52,7 +52,7 @@
 	surplus = 10
 	purchasable_from = ~UPLINK_CLOWN_OPS
 
-// BANDASTATION; MADE BY GEORGIANENEMY
+// START OF THE BANDASTATION EXCLUSIVE CODE; MADE BY GEORGIANENEMY
 
 /datum/uplink_item/stealthy_weapons/wu_silence
 	name = "Wu S. Silence Pistol"
@@ -66,7 +66,7 @@
 		/datum/uplink_item/ammo/tranq22lr,
 	)
 
-// END OF BANDASTATION EXCLUSIVE CODE; MADE BY GEORGIANENEMY.
+// END OF THE BANDASTATION EXCLUSIVE CODE; MADE BY GEORGIANENEMY.
 
 /datum/uplink_item/stealthy_weapons/holster
 	name = "Syndicate Holster"
