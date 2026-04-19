@@ -9,6 +9,7 @@
 #include "code/melee/centcom/baseball_bat.dm"
 #include "code/melee/centcom/legendary_swords.dm"
 #include "code/melee/centcom/rapier.dm"
+#include "code/melee/olshevskaya_rapier.dm"
 
 // MARK: Crafting
 #include "code/crafting/nt_cane.dm"
