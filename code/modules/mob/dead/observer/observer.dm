@@ -291,7 +291,7 @@ Works together with spawning an observer, noted above.
 	if(isliving(former_mob))
 		recordable_time = former_mob.timeofdeath
 
-	ghost.persistent_client?.time_of_death = recordable_time
+	ghost.update_time_of_death(recordable_time) // BANDASTATION EDIT - Context-aware time_of_death updates
 	SEND_SIGNAL(src, COMSIG_MOB_GHOSTIZED)
 	return ghost
 
@@ -410,6 +410,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		// Update med huds
 		current_mob.med_hud_set_status()
 		current_mob.log_message("had their player ([key_name(src)]) do-not-resuscitate / DNR", LOG_GAME, color = COLOR_GREEN, log_globally = FALSE)
+		SEND_SIGNAL(current_mob, COMSIG_LIVING_DNR, src)
+
 	log_message("has opted to do-not-resuscitate / DNR from their body ([current_mob])", LOG_GAME, color = COLOR_GREEN)
 
 	// Disassociates observer mind from the body mind
@@ -642,8 +644,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		remove_data_huds()
 	update_sight()
-	for(var/atom/movable/screen/ghost/hudbox/hud in hud_used?.static_inventory)
-		if(hud.relevant_flag & toggled)
+	for(var/hud_key in hud_used?.screen_objects)
+		var/atom/movable/screen/ghost/hudbox/hud = hud_used.screen_objects[hud_key]
+		if(istype(hud) && (hud.relevant_flag & toggled))
 			hud.update_appearance(UPDATE_ICON_STATE)
 
 // This is the ghost's follow verb with an argument
@@ -767,7 +770,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return FALSE
 
 	target.PossessByPlayer(key)
-	target.faction = list(FACTION_NEUTRAL)
+	target.set_faction(list(FACTION_NEUTRAL))
 	return TRUE
 
 /mob/dead/observer/_pointed(atom/pointed_at)

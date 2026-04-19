@@ -447,6 +447,11 @@
 	set category = "Эмоции"
 	emote("shiver", intentional = TRUE)
 
+/mob/living/carbon/human/verb/emote_evil_laugh()
+	set name = "▷ Смеяться злорадно"
+	set category = "Эмоции"
+	emote("laughevil", intentional = TRUE)
+
 // MARK: Tajaran emotes
 /mob/living/carbon/human/species/tajaran/verb/emote_meow()
 	set name = "▷ Мяукнуть"

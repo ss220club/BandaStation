@@ -54,6 +54,9 @@
 /// Helper to figure out if a limb is a peg limb
 #define IS_PEG_LIMB(limb) (limb.bodytype & BODYTYPE_PEG)
 
+/// Is the bodypart a stump
+#define IS_STUMP(limb) (limb.bodypart_flags & BODYPART_STUMP)
+
 // Flags for the bodypart_flags var on /obj/item/bodypart
 /// Bodypart cannot be dismembered or amputated
 #define BODYPART_UNREMOVABLE (1<<0)
@@ -65,6 +68,8 @@
 #define BODYPART_UNHUSKABLE (1<<3)
 /// Bodypart has never been added to a mob
 #define BODYPART_VIRGIN (1<<4)
+/// Not a full bodypart, but in fact is part of a missing limb
+#define BODYPART_STUMP (1<<5)
 
 // Bodypart change blocking flags
 ///Bodypart does not get replaced during set_species()
@@ -173,7 +178,7 @@ DEFINE_BITFIELD(operation_flags, list(
 #define OPERATION_BRUTE_MULTIPLIER "brute_multiplier"
 #define OPERATION_BURN_MULTIPLIER "burn_multiplier"
 
-/// Used in string formatting to print a limb as "John's right arm" or "the human right arm" 
+/// Used in string formatting to print a limb as "John's right arm" or "the human right arm"
 #define FORMAT_LIMB_OWNER(limb) (limb.owner ? "[limb.owner]'s [limb.plaintext_zone]" : limb)
 /// Used in string formatting to print an organ's location as "John" or "the human chest"
 #define FORMAT_ORGAN_OWNER(organ) (organ.owner || organ.loc)

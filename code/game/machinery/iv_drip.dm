@@ -53,7 +53,6 @@
 			reagents.add_reagent_list(internal_list_reagents)
 	interaction_flags_machine |= INTERACT_MACHINE_OFFLINE
 	register_context()
-	update_appearance(UPDATE_ICON)
 	AddElement(/datum/element/noisy_movement)
 
 /obj/machinery/iv_drip/Destroy()
@@ -325,7 +324,6 @@
 	return use_internal_storage ? reagents : reagent_container?.reagents
 
 /obj/machinery/iv_drip/verb/eject_beaker()
-	set category = "Object"
 	set name = "Remove IV Container"
 	set src in view(1)
 
@@ -345,7 +343,6 @@
 		update_appearance(UPDATE_ICON)
 
 /obj/machinery/iv_drip/verb/toggle_mode()
-	set category = "Object"
 	set name = "Toggle Mode"
 	set src in view(1)
 
@@ -455,7 +452,7 @@
 /atom/movable/screen/alert/iv_connected
 	name = "IV Connected"
 	desc = "You have an IV connected to your arm. Remember to remove it or drag the IV stand with you before moving, or else it will rip out!"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "iv_connected"
 
 #undef MIN_IV_TRANSFER_RATE

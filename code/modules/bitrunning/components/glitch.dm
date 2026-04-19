@@ -17,8 +17,7 @@
 		server.remove_threat(owner) // so the server doesn't dust us
 		health_boost = ROUND_UP(server.threat * 0.2)
 
-	owner.faction.Cut()
-	owner.faction += list(ROLE_GLITCH)
+	owner.set_faction(list(ROLE_GLITCH))
 
 	owner.maxHealth = clamp(owner.maxHealth + health_boost, 200, 500)
 	owner.fully_heal()
@@ -40,7 +39,7 @@
 		return
 
 	var/mob/living/owner = parent
-	to_chat(owner, span_userdanger("You feel a strange sensation..."))
+	to_chat(owner, span_userdanger("Вы испытываете странное ощущение..."))
 
 	var/obj/machinery/byteforge/forge = forge_ref?.resolve()
 	forge?.setup_particles()
@@ -57,14 +56,14 @@
 		/atom/movable/screen/alert/bitrunning,
 		new_master = source,
 	)
-	alert.name = "Source Broken"
-	alert.desc = "Our byteforge has been broken."
+	alert.name = "Источник сломан"
+	alert.desc = "Байтфордж был сломан."
 
 	if(!iscarbon(parent)) // Too powerful!
 		return
 
 	player.add_movespeed_modifier(/datum/movespeed_modifier/status_effect/glitch_slowdown)
-	to_chat(player, span_danger("Your body feels sluggish..."))
+	to_chat(player, span_danger("Ваше тело кажется вялым..."))
 
 /// Power restored
 /datum/component/glitch/proc/on_forge_power_restored(datum/source)

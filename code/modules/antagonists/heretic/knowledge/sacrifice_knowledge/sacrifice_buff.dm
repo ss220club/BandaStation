@@ -2,7 +2,7 @@
 
 /// Screen alert for the below status effect.
 /atom/movable/screen/alert/status_effect/unholy_determination
-	name = "Unholy Determination"
+	name = "Нечестивая решимость"
 	desc = "Вы появляетесь в незнакомой комнате. Темнота начинает смыкаться. Начинается паника. Времени нет. Сражайтесь или умрите!"
 	icon_state = "heretic_template"
 	overlay_state = "wounded"

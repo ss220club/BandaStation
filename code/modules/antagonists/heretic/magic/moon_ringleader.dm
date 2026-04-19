@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/aoe/moon_ringleader
-	name = "Ringleaders Rise"
-	desc = "Big AoE spell that summons copies of you. \
-			If any copies are attacked, they cause brain damage, sanity damage, and will briefly stun everyone nearby."
+	name = "Восшествие Артистов"
+	desc = "Заклинание по области, призывающее ваши копии. \
+			Если ваши копии будут атакованы, они нанесут урон рассудку, и ненадолго оглушат всех, кто находится поблизости."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -21,7 +21,7 @@
 
 /datum/action/cooldown/spell/aoe/moon_ringleader/cast(mob/living/caster)
 	new moon_effect(get_turf(caster))
-	caster.faction |= "ringleader([REF(caster)])"
+	caster.add_ally("ringleader([REF(caster)])")
 	return ..()
 
 /datum/action/cooldown/spell/aoe/moon_ringleader/get_things_to_cast_on(atom/center, radius_override)
@@ -46,7 +46,6 @@
 	shove_clone.full_setup(
 		caster,
 		target_mob = victim,
-		faction = caster.faction,
 		life = 30 SECONDS,
 		hp = caster.health,
 		damage = 1,

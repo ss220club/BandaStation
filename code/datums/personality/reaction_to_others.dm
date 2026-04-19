@@ -57,10 +57,3 @@
 		source.add_mood_event("bad_touch", /datum/mood_event/very_bad_touch)
 	else
 		source.add_mood_event("bad_touch", /datum/mood_event/bad_touch)
-
-/datum/personality/aromantic
-	savefile_key = "aromantic"
-	name = "Аромантик"
-	desc = "Романтике нет места на станции."
-	neg_gameplay_desc = "Не любит поцелуев и объятий"
-	personality_trait = TRAIT_BADTOUCH

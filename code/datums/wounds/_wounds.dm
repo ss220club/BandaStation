@@ -79,6 +79,7 @@
 	/// How much we're contributing to this limb's bleed_rate
 	var/blood_flow
 	/// Surgical states we're applying to our limb
+	/// Note: This var is mutated after it is applied, to only states that were successfully applied
 	var/surgery_states = NONE
 
 	/// How much having this wound will add to all future check_wounding() rolls on this limb, to allow progression to worse injuries with repeated damage
@@ -298,21 +299,12 @@
 	. = limb
 
 	if(limb) // if we're nulling limb, we're basically detaching from it, so we should remove ourselves in that case
-		UnregisterSignal(limb, list(COMSIG_QDELETING, COMSIG_BODYPART_GAUZED, COMSIG_BODYPART_UNGAUZED, COMSIG_BODYPART_UPDATING_SURGERY_STATE))
+		UnregisterSignal(limb, COMSIG_BODYPART_UPDATING_SURGERY_STATE)
 		LAZYREMOVE(limb.wounds, src)
 		if (!destroying)
 			limb.update_wounds(replaced)
 		if (disabling)
 			limb.remove_traits(list(TRAIT_PARALYSIS, TRAIT_DISABLED_BY_WOUND), REF(src))
-
-		if(surgery_states)
-			for (var/state in exclusive_surgery_states)
-				if (!(limb.surgery_state & exclusive_surgery_states[state]))
-					continue
-				var/actual_state = text2num(state)
-				if (actual_state & surgery_states)
-					surgery_states &= ~actual_state
-
 		if (surgery_states)
 			limb.remove_surgical_state(surgery_states)
 
@@ -322,12 +314,10 @@
 
 	if (limb)
 		RegisterSignal(limb, COMSIG_QDELETING, PROC_REF(source_died))
-		RegisterSignals(limb, list(COMSIG_BODYPART_GAUZED, COMSIG_BODYPART_UNGAUZED), PROC_REF(gauze_state_changed))
-		RegisterSignal(limb, COMSIG_BODYPART_UPDATING_SURGERY_STATE, PROC_REF(on_surgery_state_change))
 		if (disabling)
 			limb.add_traits(list(TRAIT_PARALYSIS, TRAIT_DISABLED_BY_WOUND), REF(src))
 
-		if(surgery_states)
+		if(surgery_states) // first check filters invalid states
 			for (var/state in exclusive_surgery_states)
 				if (!(limb.surgery_state & exclusive_surgery_states[state]))
 					continue
@@ -335,8 +325,10 @@
 				if (actual_state & surgery_states)
 					surgery_states &= ~actual_state
 
-		if (surgery_states)
+		if (surgery_states) // second check applies any remaining valid states
 			limb.add_surgical_state(surgery_states)
+			// NB: don't check state changes until AFTER we finish apply our own, or we'll just undo ourselves
+			RegisterSignal(limb, COMSIG_BODYPART_UPDATING_SURGERY_STATE, PROC_REF(on_surgery_state_change))
 
 		if (victim)
 			start_limping_if_we_should() // the status effect already handles removing itself
@@ -345,8 +337,9 @@
 		update_inefficiencies(replaced)
 
 /// Used to remove states applied or removed by operations from ourselves as to not remove them if we heal mid-surgery
-/datum/wound/proc/on_surgery_state_change(old_state, surgery_state, changed_states)
+/datum/wound/proc/on_surgery_state_change(datum/source, old_state, current_state, changed_states)
 	SIGNAL_HANDLER
+	// Any state that changes, adding or removing, should henceforth be untouched by us. Let the surgeon handle it.
 	surgery_states &= ~changed_states
 
 /datum/wound/proc/add_or_remove_actionspeed_mod()
@@ -458,31 +451,23 @@
 
 	return 0
 
-/// Signal proc for if gauze has been applied or removed from our limb.
-/datum/wound/proc/gauze_state_changed()
-	SIGNAL_HANDLER
-
-	if (wound_flags & ACCEPTS_GAUZE)
-		update_inefficiencies()
-
 /// Updates our limping and interaction penalties in accordance with our gauze.
 /datum/wound/proc/update_inefficiencies(replaced_or_replacing = FALSE)
+	SHOULD_NOT_SLEEP(TRUE)
+
 	if (wound_flags & ACCEPTS_GAUZE)
+		var/splint_factor = limb.get_splint_factor()
 		if(limb.body_zone in list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
-			if(limb.current_gauze?.splint_factor)
-				limp_slowdown = initial(limp_slowdown) * limb.current_gauze.splint_factor
-				limp_chance = initial(limp_chance) * limb.current_gauze.splint_factor
-			else
-				limp_slowdown = initial(limp_slowdown)
-				limp_chance = initial(limp_chance)
+			limp_slowdown = initial(limp_slowdown) * splint_factor
+			limp_chance = initial(limp_chance) * splint_factor
 		else if(limb.body_zone in GLOB.arm_zones)
-			if(limb.current_gauze?.splint_factor)
-				set_interaction_efficiency_penalty(1 + ((get_effective_actionspeed_modifier()) * limb.current_gauze.splint_factor))
+			if(splint_factor < 1)
+				set_interaction_efficiency_penalty(1 + (get_effective_actionspeed_modifier() * splint_factor))
 			else
 				set_interaction_efficiency_penalty(initial(interaction_efficiency_penalty))
 
 		if(initial(disabling))
-			set_disabling(isnull(limb.current_gauze))
+			set_disabling(splint_factor < 1)
 
 		limb.update_wounds(replaced_or_replacing)
 
@@ -661,9 +646,10 @@
 /datum/wound/proc/get_wound_description(mob/user)
 	var/desc
 
-	if ((wound_flags & ACCEPTS_GAUZE) && limb.current_gauze)
+	var/obj/item/stack/medical/wrap/current_gauze = LAZYACCESS(limb.applied_items, LIMB_ITEM_GAUZE)
+	if ((wound_flags & ACCEPTS_GAUZE) && current_gauze)
 		var/sling_condition = get_gauze_condition()
-		desc = "[victim.ru_p_them(TRUE)] [limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone] [sling_condition] затянута в перевязь из [limb.current_gauze.declent_ru(GENITIVE)]"
+		desc = "[victim.ru_p_them(TRUE)] [limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone] [sling_condition] затянута в перевязь из [current_gauze.declent_ru(GENITIVE)]"
 	else
 		desc = "[victim.ru_p_them(TRUE)] [limb.ru_plaintext_zone[NOMINATIVE] || limb.plaintext_zone] [examine_desc]"
 
@@ -687,13 +673,13 @@
 /datum/wound/proc/get_self_check_description(self_aware)
 	switch(severity)
 		if(WOUND_SEVERITY_TRIVIAL)
-			return span_danger("It's suffering [a_or_from] [LOWER_TEXT(undiagnosed_name || name)].")
+			return span_danger("[undiagnosed_name || name].")
 		if(WOUND_SEVERITY_MODERATE)
-			return span_warning("It's suffering [a_or_from] [LOWER_TEXT(undiagnosed_name || name)].")
+			return span_warning("[undiagnosed_name || name].")
 		if(WOUND_SEVERITY_SEVERE)
-			return span_boldwarning("It's suffering [a_or_from] [LOWER_TEXT(undiagnosed_name || name)]!")
+			return span_boldwarning("[undiagnosed_name || name]!")
 		if(WOUND_SEVERITY_CRITICAL)
-			return span_boldwarning("It's suffering [a_or_from] [LOWER_TEXT(undiagnosed_name || name)]!!")
+			return span_boldwarning("[undiagnosed_name || name]!!")
 
 /// A hook proc used to modify desc before it is spanned via [get_desc_intensity]. Useful for inserting spans yourself.
 /datum/wound/proc/modify_desc_before_span(desc, mob/user)
@@ -701,10 +687,11 @@
 
 /datum/wound/proc/get_gauze_condition()
 	SHOULD_BE_PURE(TRUE)
-	if (!limb.current_gauze)
+	var/obj/item/stack/medical/wrap/current_gauze = LAZYACCESS(limb.applied_items, LIMB_ITEM_GAUZE)
+	if (!current_gauze)
 		return null
 
-	switch(limb.current_gauze.absorption_capacity)
+	switch(current_gauze.absorption_capacity)
 		if(0 to 1.25)
 			return "едва"
 		if(1.25 to 2.75)

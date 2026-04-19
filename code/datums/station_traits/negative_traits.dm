@@ -141,6 +141,7 @@
 	var/datum/job/picked_job = pick(SSjob.get_valid_overflow_jobs())
 	chosen_job_name = LOWER_TEXT(picked_job.title) // like Chief Engineers vs like chief engineers
 	SSjob.set_overflow_role(picked_job.type)
+	UnregisterSignal(SSjob, COMSIG_SUBSYSTEM_POST_INITIALIZE)
 
 /datum/station_trait/slow_shuttle
 	name = "Медленный шаттл"
@@ -150,9 +151,14 @@
 	report_message = "Из-за удаленности нашей станции снабжения, время полета грузового шаттла до вашего отдела снабжения будет больше."
 	blacklist = list(/datum/station_trait/quick_shuttle)
 
-/datum/station_trait/slow_shuttle/on_round_start()
+/datum/station_trait/slow_shuttle/New()
 	. = ..()
+	RegisterSignal(SSshuttle, COMSIG_SUBSYSTEM_POST_INITIALIZE, PROC_REF(slow_the_shuttle))
+
+/datum/station_trait/slow_shuttle/proc/slow_the_shuttle(datum/source)
+	SIGNAL_HANDLER
 	SSshuttle.supply.callTime *= 1.5
+	UnregisterSignal(SSshuttle, COMSIG_SUBSYSTEM_POST_INITIALIZE)
 
 /datum/station_trait/bot_languages
 	name = "Неисправность языковой матрицы ботов"
@@ -753,5 +759,13 @@
 	show_in_report = TRUE
 	report_message = "Из-за аварии на мегафабрике Robust Softdrinks в некоторых напитках могут содержаться следы этанола или психоактивных химических веществ."
 	trait_to_give = STATION_TRAIT_SPIKED_DRINKS
+
+/datum/station_trait/structural_weakness
+	name = "Structural Weaknesses"
+	trait_type = STATION_TRAIT_NEGATIVE
+	weight = 5
+	show_in_report = TRUE
+	report_message = "Our station subdivision informed us that this station may have been built with a number of structural weaknesses due to defective construction materials. Be on the lookout for them and try not to let anything explode."
+	trait_to_give = STATION_TRAIT_SPAWN_WEAKPOINTS
 
 #undef GLOW_NEBULA

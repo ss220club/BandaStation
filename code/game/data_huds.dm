@@ -68,6 +68,9 @@
 /datum/atom_hud/data/malf_apc
 	hud_icons = list(MALF_APC_HUD)
 
+/datum/atom_hud/data/human/blood
+	hud_icons = list(BLOOD_HUD)
+
 /* MED/SEC/DIAG HUD HOOKS */
 
 /*
@@ -150,6 +153,21 @@ Medical HUD! Basic mode needs suit sensors on.
 		else
 			return "health-100"
 
+/// A helper for getting the appropriate icon state for the blood hud.
+/proc/round_blood_for_hud(mob/living/bloodbag)
+	var/blood_level = (bloodbag.get_blood_volume(apply_modifiers = TRUE) / BLOOD_VOLUME_NORMAL) * 100
+	switch(blood_level)
+		if(87.5 to INFINITY)
+			return "hudblood100"
+		if(62.5 to 87.5)
+			return "hudblood75"
+		if(37.5 to 62.5)
+			return "hudblood50"
+		if(12.5 to 37.5)
+			return "hudblood25"
+		if(-INFINITY to 12.5)
+			return "hudblood0"
+
 //HOOKS
 
 //called when a living mob changes health
@@ -171,8 +189,8 @@ Medical HUD! Basic mode needs suit sensors on.
 		set_hud_image_state(STATUS_HUD, "hudxeno")
 		return FALSE
 
-	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
-		if(HAS_TRAIT(src, TRAIT_MIND_TEMPORARILY_GONE) || can_defib_client())
+	if(!appears_alive())
+		if(can_defib_client())
 			set_hud_image_state(STATUS_HUD, "huddefib")
 		else if(HAS_TRAIT(src, TRAIT_GHOSTROLE_ON_REVIVE))
 			set_hud_image_state(STATUS_HUD, "hudghost")
@@ -495,6 +513,14 @@ Diagnostic HUDs!
 	holder.loc = get_turf(src)
 	SET_PLANE(holder,ABOVE_LIGHTING_PLANE,src)
 	set_hud_image_active(MALF_APC_HUD)
+
+/*~~~~~~~~~~~~
+	BLOOD FOR THE BLOOD GOD!!!
+~~~~~~~~~~~~~*/
+
+/mob/living/proc/blood_hud_set_status()
+	if (CAN_HAVE_BLOOD(src))
+		set_hud_image_state(BLOOD_HUD, round_blood_for_hud(src))
 
 #define CACHED_WIDTH_INDEX "width"
 #define CACHED_HEIGHT_INDEX "height"

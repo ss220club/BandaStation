@@ -43,7 +43,6 @@
 	results = list(/datum/reagent/consumable/salt = 2)
 	required_reagents = list(/datum/reagent/sodium = 1, /datum/reagent/chlorine = 1) // That's what I said! Sodium Chloride!
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_FOOD | REACTION_TAG_COMPONENT
-	required_other = TRUE
 
 /datum/chemical_reaction/sodiumchloride/pre_reaction_other_checks(datum/reagents/holder)
 	. = ..()
@@ -237,11 +236,23 @@
 
 /datum/chemical_reaction/mix_virus/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in holder.reagent_list
-	if(B?.data)
-		var/datum/disease/advance/D = locate(/datum/disease/advance) in B.data["viruses"]
-		if(D)
-			D.Evolve(level_min, level_max)
+	if(!B)
+		return
+	if(!B.data)
+		B.data = list()
 
+	var/datum/disease/advance/D = locate(/datum/disease/advance) in B.data["viruses"]
+	if(D)
+		D.Evolve(level_min, level_max)
+
+	// All blood duplicated via this reaction is synthetic.
+	var/added_synth_volume = created_volume
+
+	// Blood reagents handle their merger code BEFORE this code runs. So the existing synth volume is already averaged into the total volume.
+	var/existing_synth_volume = B.volume * B.data[BLOOD_DATA_SYNTH_CONTENT]
+
+	// A simple weighted average that simplifies down to "total synth volume / total blood volume" i.e. "how much of the blood is synthetic"
+	B.data[BLOOD_DATA_SYNTH_CONTENT] = (added_synth_volume + existing_synth_volume) / B.volume
 
 /datum/chemical_reaction/mix_virus/mix_virus_2
 	required_reagents = list(/datum/reagent/toxin/mutagen = 1)

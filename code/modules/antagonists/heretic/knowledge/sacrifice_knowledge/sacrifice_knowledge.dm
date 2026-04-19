@@ -9,7 +9,7 @@
  * Allows the heretic to sacrifice living heart targets.
  */
 /datum/heretic_knowledge/hunt_and_sacrifice
-	name = "Heartbeat of the Mansus"
+	name = "Сердцебиение Мансуса"
 	desc = "Позволяет приносить цели в жертву Мансусу, доставляя их к руне в критическом (или худшем) состоянии. \
 		Если у вас нет целей, встаньте на руну трансмутации и вызовите ее для получения целей."
 	required_atoms = list(/mob/living/carbon/human = 1)
@@ -257,7 +257,7 @@
 		loot.throw_at(get_step_rand(sacrifice), 2, 4, user, TRUE)
 
 	// The loser is DUSTED.
-	sacrifice.dust(TRUE, TRUE)
+	sacrifice.dust(just_ash = TRUE, drop_items = TRUE)
 
 	// Increase reward counter
 	var/datum/antagonist/heretic/antag = GET_HERETIC(user)

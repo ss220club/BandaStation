@@ -28,7 +28,7 @@
 
 /obj/item/sledgehammer/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/two_handed, force_unwielded=force_unwielded, force_wielded=force_wielded, icon_wielded="[base_icon_state]1")
+	AddComponent(/datum/component/two_handed, force_unwielded = force_unwielded, force_wielded = force_wielded, icon_wielded = "[base_icon_state]1")
 	AddComponent(/datum/component/stamina_cost_per_hit,\
 		stamina_cost = 12,\
 		stamina_cost_wielded = 10,\
@@ -55,6 +55,15 @@
 	. = ..()
 	AddComponent(/datum/component/rip_and_tear, stamina_cost = 30, tear_time = 5 SECONDS)
 
+/obj/item/sledgehammer/melee_attack_chain(mob/user, atom/target, params)
+	if(istype(target, /obj/structure/blob) || istype(target, /obj/structure/carp_rift))
+		var/old_mod = demolition_mod
+		demolition_mod = 2
+		. = ..()
+		demolition_mod = old_mod
+		return .
+	return ..()
+
 /obj/item/sledgehammer/syndie
 	name = "D-6 tactical breaching hammer"
 	desc = "Пластитаниевый композитный абордажный молот для создания брешей в корпусах кораблей или уничтожения всего и вся. Выглядит как отличное оружие для перекаченного психа в сварочной маске."
@@ -76,7 +85,7 @@
 
 /obj/item/sledgehammer/syndie/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/stamina_cost_per_hit, stamina_cost=0)
+	AddComponent(/datum/component/stamina_cost_per_hit, stamina_cost = 0)
 	AddComponent(/datum/component/rip_and_tear, stamina_cost = 20, tear_time = 3 SECONDS, reinforced_multiplier = 2)
 
 /datum/armor/item_sledgehammer

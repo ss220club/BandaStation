@@ -166,7 +166,7 @@
 	keybind_signal = COMSIG_KB_MOB_TARGETCYCLEHEAD_DOWN
 
 /datum/keybinding/mob/target/head
-	hotkey_keys = list("Unbound")
+	hotkey_keys = list(UNBOUND_KEY)
 	name = "target_head"
 	full_name = "Выбрать голову"
 	description = "Выбрать голову, как цель. Влияет на то, куда вы ударяете, или где вы проводите операции."

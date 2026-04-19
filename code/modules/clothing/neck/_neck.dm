@@ -206,7 +206,7 @@
 	name = "robe cape"
 	desc = "A comfortable cape, draped down your back and held around your neck with a brooch."
 	icon = 'icons/obj/clothing/neck.dmi'
-	icon_state = "/obj/item/clothing/neck/robe_cape"
+	icon_state = "robe_cape"
 	post_init_icon_state = "robe_cape"
 	worn_icon = 'icons/mob/clothing/neck.dmi'
 	worn_icon_state = "robe_cape"
@@ -270,7 +270,7 @@
 	switch (body_part)
 		if(BODY_ZONE_CHEST)//Listening to the chest
 			user.visible_message(span_notice("[user] places [src] against [carbon_patient]'s [body_part] and listens attentively."), ignored_mobs = user)
-			if(!user.can_hear())
+			if(HAS_TRAIT(user, TRAIT_DEAF))
 				to_chat(user, span_notice("You place [src] against [carbon_patient]'s [body_part]. Fat load of good it does you though, since you can't hear."))
 				return
 			else

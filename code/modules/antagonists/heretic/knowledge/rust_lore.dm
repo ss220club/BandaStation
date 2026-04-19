@@ -1,7 +1,7 @@
 /datum/heretic_knowledge_tree_column/rust
 	route = PATH_RUST
 	ui_bgr = "node_rust"
-	complexity = "Medium"
+	complexity = "Умеренная"
 	complexity_color = COLOR_YELLOW
 	icon = list(
 		"icon" = 'icons/obj/weapons/khopesh.dmi',
@@ -15,7 +15,7 @@
 		"Выбирайте этот путь, если вам нравится находиться на своей территории и позволять сражению прийти к вам самим.",
 	)
 	pros = list(
-		"Стоя на ржавом полу, вы становитесь очень стойким, регенерируете раны и снимаете оглушение.",
+		"Стоя на ржавом полу, вы становитесь очень стойким, заживляете раны и снимаете оглушение.",
 		"Ржавый пол наносит урон вашим врагам и замедляют их.",
 		"Вы можете с легкостью разрушать стены, предметы, мехов, сооружения и шлюзы.",
 		"Вы можете мгновенно уничтожить силиконов или синтетических членов экипажа с помощью «Хватка Мансуса».",
@@ -24,8 +24,8 @@
 	cons = list(
 		"Чрезвычайно открытый; полностью исключает возможность скрытности.",
 		"Если вы не стоите на ржавых плитках, вы становитесь гораздо более уязвимыми.",
-		"Будучи запертым в рамках своей территории, гораздо проще использовать против вас разрушительные средства (такие как бомбы).",
-		"Ваша высокая защитная способность достигается за счет снижения атакующей силы.",
+		"Будучи запертым в рамках своей территории, против вас гораздо проще использовать разрушительные средства (такие как бомбы).",
+		"Ваша высокая защита достигается за счет снижения атакующей силы.",
 	)
 	tips = list(
 		"Ваша «Хватка Мансуса» мгновенно уничтожает мехов, силиконов и андроидов. Попадание вашим клинком по помеченной цели вызывает сильное отвращение и рвоту, на короткое время сбивая её с ног.",
@@ -69,19 +69,19 @@
 /datum/heretic_knowledge/limited_amount/starting/base_rust/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
 	RegisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK_SECONDARY, PROC_REF(on_secondary_mansus_grasp))
-	user.RemoveElement(/datum/element/leeching_walk/minor)
+	user.RemoveElement(/datum/element/rust_healing, FALSE, 1.5, 5)
 
 /datum/heretic_knowledge/limited_amount/starting/base_rust/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
 	UnregisterSignal(user, COMSIG_HERETIC_MANSUS_GRASP_ATTACK_SECONDARY)
-	user.AddElement(/datum/element/leeching_walk/minor)
+	user.AddElement(/datum/element/rust_healing, FALSE, 1.5, 5)
 
 /datum/heretic_knowledge/limited_amount/starting/base_rust/on_mansus_grasp(mob/living/source, mob/living/target)
 	. = ..()
 
 	if(iscarbon(target))
 		var/mob/living/carbon/carbon_target = target
-		for(var/obj/item/bodypart/robotic_limb as anything in carbon_target.bodyparts)
+		for(var/obj/item/bodypart/robotic_limb as anything in carbon_target.get_bodyparts())
 			if(IS_ROBOTIC_LIMB(robotic_limb))
 				robotic_limb.receive_damage(500)
 
@@ -103,8 +103,8 @@
 	return COMPONENT_USE_HAND
 
 /datum/heretic_knowledge/spell/rust_charge
-	name = "Заряд Ржавчины"
-	desc = "Заряд, который необходимо начать на ржавой плитке и который уничтожит все ржавые объекты, с которыми вы соприкоснетесь, нанесет большой урон другим и разносит ржавчину вокруг вас на время действия."
+	name = "Ржавый рывок"
+	desc = "Рывок, который необходимо начать на ржавой поверхности и который уничтожит все ржавые объекты, с которыми вы соприкоснетесь, нанесет большой урон другим и разносит ржавчину вокруг вас на время действия."
 	gain_text = "Холмы сверкали, и по мере того, как я приближался к ним, мои мысли начали блуждать. Я быстро собрался с духом и двинулся вперёд. Этот последний отрезок пути будет самым опасным."
 
 	action_to_add = /datum/action/cooldown/mob_cooldown/charge/rust
@@ -112,8 +112,8 @@
 	is_final_knowledge = TRUE
 
 /datum/heretic_knowledge/spell/rust_construction
-	name = "Возведение Ржавчины"
-	desc = "Дает вам «Возведение Ржавчины» - заклинание, позволяющее возвести стену из ржавого пола. \
+	name = "Возведение ржавчины"
+	desc = "Дарует вам «Возведение ржавчины» - заклинание, позволяющее возвести стену из ржавого пола. \
 		Любой человек, находящийся над стеной, будет отброшен в сторону (или вверх) и получит урон."
 	gain_text = "В моем сознании начали плясать образы иноземных и зловещих сооружений. Покрытые с ног до головы толстым слоем ржавчины, \
 		они больше не выглядели рукотворными. А может быть, они вообще никогда и не существовали."
@@ -121,9 +121,10 @@
 	cost = 2
 
 /datum/heretic_knowledge/armor/rust
-	desc = "Позволяет трансмутировать стол (или костюм), маску и любой мусор, чтобы создать «Уцелевшие обломки». \
-			Дает дополнительную броню, сопротивление захвату и иммунитет к шприцам, когда находится на ржавчине. \
-			Позволяет сфокусироваться при надетом капюшоне."
+	name = "Уцелевшие обломки"
+	desc = "Позволяет трансмутировать стол (или костюм), маску и любой мусор, чтобы создать Уцелевшие обломки. \
+			Дает дополнительную броню, сопротивление захвату и невосприимчивость к шприцам, когда находится на ржавчине. \
+			Действует как фокусировка, пока надет капюшон."
 	gain_text = "Из-под искореженного металлолома кузнец извлекает древнюю ткань. \
 				\"Все, что она когда-то символизировала — утрачено. Поэтому сейчас мы придаем ей новое предназначение.\""
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/rust)
@@ -135,8 +136,8 @@
 	)
 
 /datum/heretic_knowledge/spell/area_conversion
-	name = "Агрессивное Распространение"
-	desc = "Дает вам заклинание «Агрессивное Распространение», которое распространяет ржавчину на близлежащие поверхности. \
+	name = "Агрессивное распространение"
+	desc = "Дарует вам заклинание «Агрессивное распространение», которое распространяет ржавчину на близлежащие поверхности. \
 		Уже заржавевшие поверхности разрушаются. \ Также улучшает способности ржавчины еретиков не Пути ржавчины."
 	gain_text = "Мудрецы знают, что не стоит посещать Ржавые холмы... Но рассказ Кузнеца был вдохновляющим."
 	action_to_add = /datum/action/cooldown/spell/aoe/rust_conversion
@@ -144,7 +145,7 @@
 	research_tree_icon_frame = 5
 
 /datum/heretic_knowledge/blade_upgrade/rust
-	name = "Токсичный Клинок"
+	name = "Токсичный клинок"
 	desc = "Ваш Ржавый клинок теперь отвращает врагов при атаке. \ Позволяет заставить ржаветь титаниум и пластитаниум."
 	gain_text = "Кузнец протягивает вам свой клинок. \"Клинок проведет тебя через плоть, если ты позволишь ему.\" \
 		Тяжелая ржавчина утяжеляет клинок. Вы пристально вглядываетесь в него. Ржавые холмы зовут тебя."
@@ -160,10 +161,10 @@
 	. = ..()
 
 /datum/heretic_knowledge/spell/entropic_plume
-	name = "Шлейф Энтропии"
-	desc = "Дарует вам «Шлейф Энтропии», заклинание, выпускающее досаждающую волну ржавчины. \
-		Ослепляет, отравляет и накладывает «Амок» на всех попавших язычников, заставляя их дико нападать \
-		на друзей или врагов. Также ржавеет и разрушает поверхности, на которые попадает. Улучшает способности ржавчины еретиков не Пути ржавчины."
+	name = "Шлейф энтропии"
+	desc = "Дарует вам «Шлейф энтропии», заклинание, выпускающее досаждающую волну ржавчины. \
+		Ослепляет, отравляет и накладывает «Амок» на любого язычника, по которому попадаёт, заставляя его в безумии атаковать \
+		и друзей, и врагов. Также ржавеет и разрушает поверхности, на которые попадает. Улучшает способности ржавчины еретиков не Пути ржавчины."
 	gain_text = "Коррозия была неостановима. Ржавчина была неприятной. \
 		Кузнец ушел, ты держишь его клинок. Чемпионы надежды, Повелитель ржавчины близок!"
 
@@ -262,7 +263,7 @@
 
 /datum/heretic_knowledge/ultimate/rust_final/proc/delay_transform_turfs(list/turfs)
 	for(var/turf/turf as anything in turfs)
-		turf.rust_heretic_act(5)
+		turf.rust_heretic_act(RUST_RESISTANCE_ORGANIC)
 		CHECK_TICK
 
 /**
@@ -273,16 +274,12 @@
 /datum/heretic_knowledge/ultimate/rust_final/proc/on_move(mob/living/source, atom/old_loc, dir, forced, list/old_locs)
 	SIGNAL_HANDLER
 
-	// If we're on a rusty turf, and haven't given out our traits, buff our guy
-	var/turf/our_turf = get_turf(source)
-	if(HAS_TRAIT(our_turf, TRAIT_RUSTY))
+	if(source.is_touching_rust())
 		if(!immunities_active)
 			source.add_traits(conditional_immunities, type)
 			source.add_movespeed_mod_immunities(type, /datum/movespeed_modifier/damage_slowdown)
 			immunities_active = TRUE
-
-	// If we're not on a rust turf, and we have given out our traits, nerf our guy
-	else
+	else // If we're not on a rust turf, and we have given out our traits, nerf our guy
 		if(immunities_active)
 			source.remove_traits(conditional_immunities, type)
 			source.remove_movespeed_mod_immunities(type, /datum/movespeed_modifier/damage_slowdown)
@@ -296,8 +293,7 @@
 /datum/heretic_knowledge/ultimate/rust_final/proc/on_life(mob/living/source, seconds_per_tick)
 	SIGNAL_HANDLER
 
-	var/turf/our_turf = get_turf(source)
-	if(!HAS_TRAIT(our_turf, TRAIT_RUSTY))
+	if(!source.is_touching_rust())
 		return
 
 	var/need_mob_update = FALSE

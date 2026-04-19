@@ -41,6 +41,10 @@
 /// Intended to be used in the manner of `TEST_FOCUS(/datum/unit_test/math)`
 #define TEST_FOCUS(test_path) ##test_path { focus = TRUE; }
 
+/// Run the test provided within the parentheses run_count times
+/// Useful for debugging flaky tests that only fail sometimes
+#define TEST_REPEAT(test_path, run_count) ##test_path { times_to_run = ##run_count; }
+
 /// Logs a noticable message on GitHub, but will not mark as an error.
 /// Use this when something shouldn't happen and is of note, but shouldn't block CI.
 /// Does not mark the test as failed.
@@ -112,6 +116,7 @@
 #include "blindness.dm"
 #include "blood_volume_procs.dm"
 #include "bloody_footprints.dm"
+#include "borg_tools.dm"
 #include "breath.dm"
 #include "buckle.dm"
 #include "burning.dm"
@@ -194,7 +199,12 @@
 #include "hydroponics_harvest.dm"
 #include "hydroponics_self_mutations.dm"
 #include "hydroponics_validate_genes.dm"
-#include "inhands.dm"
+#include "icon_state.dm"
+#include "icon_state_inhand.dm"
+#include "icon_state_worn.dm"
+#include "icons_missing.dm"
+#include "id_access.dm"
+#include "id_card.dm"
 #include "interaction_door.dm"
 #include "interaction_silicon.dm"
 #include "interaction_structures.dm"
@@ -224,7 +234,6 @@
 #include "merge_type.dm"
 #include "metabolizing.dm"
 #include "mindbound_actions.dm"
-#include "missing_icons.dm"
 #include "mob_chains.dm"
 #include "mob_damage.dm"
 #include "mob_faction.dm"
@@ -258,12 +267,12 @@
 #include "preference_species.dm"
 #include "preferences.dm"
 #include "projectiles.dm"
+#include "punpun.dm"
 #include "quirks.dm"
 #include "range_return.dm"
 #include "rcd.dm"
 #include "reachable_soup.dm"
 #include "reagent_container_defaults.dm"
-#include "reagent_id_typos.dm"
 #include "reagent_mob_expose.dm"
 #include "reagent_mod_procs.dm"
 #include "reagent_names.dm"
@@ -308,6 +317,7 @@
 #include "spraycan.dm"
 #include "spritesheets.dm"
 #include "stack_singular_name.dm"
+#include "stacked_metab.dm"
 #include "station_trait_tests.dm"
 #include "status_effect_validity.dm"
 #include "stomach.dm"
@@ -341,7 +351,6 @@
 #include "washing.dm"
 #include "weird_food.dm"
 #include "wizard_loadout.dm"
-#include "worn_icons.dm"
 // END_INCLUDE
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter
 #include "find_reference_sanity.dm"

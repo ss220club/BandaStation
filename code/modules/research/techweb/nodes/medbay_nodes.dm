@@ -97,12 +97,13 @@
 	description = "Технология криогенной консервации экипажа, разработанная на основе случайного химического воздействия и адаптированная для безопасного применения."
 	prereq_ids = list(TECHWEB_NODE_MEDBAY_EQUIP_ADV, TECHWEB_NODE_FUSION)
 	design_ids = list(
+		"cryo_grenade",
 		"cryotube",
 		"mech_sleeper",
-		"stasis",
-		"cryo_grenade",
 		"splitbeaker",
 		"stasisbodybag", // BANDASTATION ADDITION - PERMA-DEATH
+		"stasis",
+		"stasis_bodybag",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_4_POINTS)
 	discount_experiments = list(/datum/experiment/scanning/reagent/cryostylane = TECHWEB_TIER_4_POINTS)

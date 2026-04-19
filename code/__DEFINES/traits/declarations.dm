@@ -48,10 +48,13 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define STATION_TRAIT_UNNATURAL_ATMOSPHERE "station_trait_unnatural_atmosphere"
 #define STATION_TRAIT_SPIKED_DRINKS "station_trait_spiked_drinks"
 #define STATION_TRAIT_XENOBUREAUCRACY_ERROR "station_trait_xenobureaucracy_error"
+#define STATION_TRAIT_SPAWN_WEAKPOINTS "station_trait_spawn_weakpoints"
 
 // Hud traits
 /// This hud is owned by a client with an open escape menu
 #define TRAIT_ESCAPE_MENU_OPEN "escape_menu_open"
+/// This hud has parallax displayed on it
+#define TRAIT_PARALLAX_DISPLAYED "parallax_displayed"
 
 // Mob traits
 /// Forces the user to stay unconscious.
@@ -137,6 +140,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STASIS "in_stasis"
 /// Makes the owner appear as dead to most forms of medical examination
 #define TRAIT_FAKEDEATH "fakedeath"
+/// When applied to a mob's head, their face will be unrecognizable and get displayed as Unknown
 #define TRAIT_DISFIGURED "disfigured"
 /// "Magic" trait that blocks the mob from moving or interacting with anything. Used for transient stuff like mob transformations or incorporality in special cases.
 /// Will block movement, `Life()` (!!!), and other stuff based on the mob.
@@ -263,6 +267,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EASYBLEED "easybleed"
 /// Mob recovers from addictions at an accelerated rate
 #define TRAIT_ADDICTIONRESILIENT "addiction_resilient"
+/// Mob is immune to the effects of addictions
+#define TRAIT_NO_WITHDRAWALS "no_withdrawals"
 #define TRAIT_TOXINLOVER "toxinlover"
 /// Doesn't get overlays from being in critical.
 #define TRAIT_NOCRITOVERLAY "no_crit_overlay"
@@ -351,6 +357,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NO_SLIP_SLIDE "noslip_slide"
 /// Stops all slipping and sliding from occurring
 #define TRAIT_NO_SLIP_ALL "noslip_all"
+
+/// Stops the mob from leaving prints in the snow
+#define TRAIT_NO_SNOWPRINTS "no_snowprints"
 
 /// Unlinks gliding from movement speed, meaning that there will be a delay between movements rather than a single move movement between tiles
 #define TRAIT_NO_GLIDE "no_glide"
@@ -445,6 +454,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MEDICAL_HUD_SENSOR_ONLY "med_hud_lesser"
 #define TRAIT_SECURITY_HUD "sec_hud"
 #define TRAIT_SECURITY_HUD_ID_ONLY "sec_hud_lesser"
+#define TRAIT_BLOOD_HUD "blood_hud"
 #define TRAIT_ABDUCTOR_HUD "abductor_hud"
 /// Stop the user from seeing the sechud. Only works for trait handled sechuds.
 #define TRAIT_BLOCK_SECHUD "block_sechud"
@@ -730,6 +740,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // These traits are applied to /obj/item/organ/liver
 #define TRAIT_LAW_ENFORCEMENT_METABOLISM "law_enforcement_metabolism"
 #define TRAIT_CULINARY_METABOLISM "culinary_metabolism"
+#define TRAIT_BARTENDER_METABOLISM "bartender_metabolism"
 #define TRAIT_COMEDY_METABOLISM "comedy_metabolism"
 #define TRAIT_MEDICAL_METABOLISM "medical_metabolism"
 #define TRAIT_ENGINEER_METABOLISM "engineer_metabolism"
@@ -1032,6 +1043,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SETTLER "settler"
 #define TRAIT_STRONG_STOMACH "strong_stomach"
 #define TRAIT_VEGETARIAN "trait_vegetarian"
+// BANDASTATION ADDITION: Limp Quirk
+#define TRAIT_LIMP "trait_limp"
+// BANDASTATION ADDITION: END
 
 /// This mob always lands on their feet when they fall, for better or for worse.
 #define TRAIT_CATLIKE_GRACE "catlike_grace"
@@ -1127,10 +1141,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This target has recently been shot by a marksman coin and is very briefly immune to being hit by one again to prevent recursion
 #define TRAIT_RECENTLY_COINED "recently_coined"
 
-/// Receives echolocation images.
-#define TRAIT_ECHOLOCATION_RECEIVER "echolocation_receiver"
-/// Echolocation has a higher range.
-#define TRAIT_ECHOLOCATION_EXTRA_RANGE "echolocation_extra_range"
+/// Mob is an echolocator
+#define TRAIT_ECHOLOCATOR "echolocator"
 
 /// Trait given to a living mob and any observer mobs that stem from them if they suicide.
 /// For clarity, this trait should always be associated/tied to a reference to the mob that suicided- not anything else.
@@ -1214,6 +1226,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Trait given to a dreaming carbon when they are currently doing dreaming stuff
 #define TRAIT_DREAMING "currently_dreaming"
 
+/// Trait that allows non-heretics to have heretical dreams
+#define TRAIT_HERETICAL_DREAMS "heretical_dreams"
+
+/// Trait for if you've recently had a Last Word cocktail
+#define TRAIT_HAD_LAST_WORD "had_last_word"
+
 /// Whether bots will salute this mob.
 #define TRAIT_COMMISSIONED "commissioned"
 
@@ -1234,12 +1252,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_ELEVATING_OBJECT "elevating_object"
 /// From [/datum/element/elevation_core] for purpose of checking if the turf has the trait from an instance of the element
 #define TRAIT_ELEVATED_TURF "elevated_turf"
+/// From [/datum/component/defaceable] marks that something has been... marked
+#define TRAIT_DEFACED "defaced"
 
 /// This item is currently under the control of telekinesis
 #define TRAIT_TELEKINESIS_CONTROLLED "telekinesis_controlled"
 
-/// changelings with this trait can no longer talk over the hivemind
-#define TRAIT_CHANGELING_HIVEMIND_MUTE "ling_mute"
+/// mobs with this trait can talk over the hivemind
+#define TRAIT_CHANGELING_HIVEMIND "ling_hivemind"
 /// This guy is a hulk! (Bulky and green, lacks tact)
 #define TRAIT_HULK "hulk"
 /// Isn't attacked harmfully by blob structures
@@ -1295,6 +1315,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This clothing protects the user from radiation.
 /// This should not be used on clothing_traits, but should be applied to the clothing itself.
 #define TRAIT_RADIATION_PROTECTED_CLOTHING "radiation_protected_clothing"
+
+/// Immune to the effects of rust
+#define TRAIT_RUSTIMMUNE "rust_immune"
 
 /// Whether or not this item will allow the radiation SS to go through standard
 /// radiation processing as if this wasn't already irradiated.
@@ -1456,6 +1479,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BEAST_EMPATHY "beast_empathy" // you're good with animals, such as with taming them
 #define TRAIT_STURDY_FRAME "sturdy_frame" // you suffer much lesser effects from equipment that slows you down
 
+/// Has this mob been tamed?
+#define TRAIT_TAMED "tamed"
+
 /// This item cannot be selected for or used by a theft objective (Spies, Traitors, etc.)
 #define TRAIT_ITEM_OBJECTIVE_BLOCKED "item_objective_blocked"
 /// This trait lets you attach limbs to any player without surgery.
@@ -1586,9 +1612,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Trait that signals to objects on this turf that its open (has UNDERFLOOR_INTERACTIBLE) but still covers them
 #define TRAIT_UNCOVERED_TURF "uncovered_turf"
 
-/// A trait that blocks the metabolism of formaldehyde
-#define TRAIT_BLOCK_FORMALDEHYDE_METABOLISM "block_formaldehyde_metabolism"
-
 ///Attached to objects currently on tables and such, allowing them to walk on other objects without the climbing delay
 #define TRAIT_ON_CLIMBABLE "on_climbable"
 
@@ -1606,9 +1629,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Trait that allows an item to perform holy rites akin to a nullrod
 #define TRAIT_NULLROD_ITEM "nullrod_item"
 
-/// Mob gets far less severe negative moodlets from seeing death / blood
-#define TRAIT_DESENSITIZED "desensitized"
-
 /// Trait specifying that an AI has a remote connection to an integrated circuit
 #define TRAIT_CONNECTED_TO_CIRCUIT "connected_to_circuit"
 
@@ -1618,11 +1638,26 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Mob is artificially spawned rather than being created through more natural means - applied to monkey cubes and such
 #define TRAIT_SPAWNED_MOB "spawned_mob"
 
+/// Mob is the host of a living blood worm.
+#define TRAIT_BLOOD_WORM_HOST "blood_worm_host"
+
+/// Mob just doesn't fucking care. No mood and no sanity.
+#define TRAIT_APATHETIC "apathetic"
+
+/// Mob can't be inflicted with the split personality trauma.
+#define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
+
+/// Mob is shapeshifted, e.g. via a polymorph belt.
+#define TRAIT_SHAPESHIFTED "shapeshifted"
+
 /// Turf is one that ai mobs will generally avoid pathing through
 /// Doesn't need to be applied to any turfs that override can_cross_safely
 #define TRAIT_AI_AVOID_TURF "warning_turf"
 
 /// Object is dangerous to mobs buckled to it
 #define TRAIT_DANGEROUS_BUCKLE "dangerous_buckle"
+
+/// Makes the owner desensetized to death, but happy whenever someone gets blown to pieces (as a sacrifice to the necropolis) unless its another worshipper
+#define TRAIT_NECROPOLIS_WORSHIP "necropolis_worship"
 
 // END TRAIT DEFINES

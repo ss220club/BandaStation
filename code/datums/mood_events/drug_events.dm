@@ -136,6 +136,6 @@
 	timeout = 8 MINUTES
 
 /datum/mood_event/sadness_inverse
-	description = "I'M SO SAD..."
+	description = "МНЕ ОЧЕНЬ ГРУСТНО..."
 	mood_change = -150
 	special_screen_obj = "mood_happiness_bad"
