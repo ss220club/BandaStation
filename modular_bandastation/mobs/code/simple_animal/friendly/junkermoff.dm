@@ -49,20 +49,8 @@
 
 /mob/living/basic/junkermoff/proc/on_pre_eat(datum/source, obj/item/potential_food, mob/living/feeder, list/effect_mult)
 	SIGNAL_HANDLER
-	var/static/list/blacklist_food_types = list(
-		/obj/item/defibrillator/compact/loaded/cmo, /obj/item/reagent_containers/hypospray/cmo,
-		/obj/item/disk/nuclear, /obj/item/clothing/suit/hooded/ablative, /obj/item/clothing/suit/armor/reactive/teleport,
-		/obj/item/nuke_core_container, /obj/item/disk/computer/hdd_theft, /obj/item/nuke_core/supermatter_sliver,
-		/obj/item/aicard, /obj/item/blueprints, /obj/item/blackbox, /obj/item/pipe_dispenser,
-		/obj/item/mod/control/pre_equipped/advanced, /obj/item/mod/control/pre_equipped/research,
-		/obj/item/mod/control/pre_equipped/safeguard, /obj/item/storage/belt/sheath/sabre, /obj/item/melee/sabre,
-		/obj/item/clothing/shoes/magboots/advance, /obj/item/clothing/accessory/medal/gold/captain, /obj/item/tank/jetpack/captain,
-		/obj/item/hand_tele, /obj/item/gun/ballistic/shotgun/automatic/combat/compact, /obj/item/gun/energy/e_gun/hos,
-		/obj/item/gun/energy/laser/captain, /obj/item/card/id/advanced/gold/captains_spare, /obj/item/mod/control/pre_equipped/magnate,
-		/obj/item/card/id/departmental_budget/car, /obj/item/storage/belt/utility/chief, /obj/item/melee/baton/telescopic, /obj/item/melee/baton/nt_cane,
-		/obj/item/melee/baton/nt_cane/gun)
 
-	if(is_type_in_list(potential_food, blacklist_food_types))
+	if(potential_food.resistance_flags & INDESTRUCTIBLE)
 		return COMSIG_MOB_CANCEL_EAT
 
 	if(!istype(potential_food))

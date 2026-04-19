@@ -1,6 +1,7 @@
 #include "_objects.dm"
 
 #include "code/effects/decal.dm"
+#include "code/effects/highrisk_flags.dm"
 #include "code/effects/landmark.dm"
 #include "code/effects/spawners.dm"
 #include "code/effects/turf_decal.dm"
