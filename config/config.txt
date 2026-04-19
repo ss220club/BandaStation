@@ -7,6 +7,7 @@ $include logging.txt
 $include resources.txt
 $include bandastation/bandastation_config.txt
 $include bandastation/bandastation_jobs_config.txt
+$include bandastation/antag_weighting.txt
 $include interviews.txt
 $include lua.txt
 $include auxtools.txt
@@ -651,5 +652,6 @@ TGUI_MAX_CHUNK_COUNT 32
 ## It increases initialization time significantly so you'll want to disable this in live environments.
 GENERATE_ASSETS_IN_INIT
 
-## Minimum time before a heretic can ascend, in minutes
-# MINIMUM_ASCENSION_TIME 3
+## Path from the config folder to the policy json
+POLICY_JSON_PATH policy.json
+

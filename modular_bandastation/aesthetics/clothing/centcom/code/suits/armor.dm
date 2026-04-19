@@ -6,3 +6,15 @@
 	lefthand_file = 'modular_bandastation/aesthetics/clothing/centcom/icons/inhands/clothing/suits_lefthand.dmi'
 	righthand_file = 'modular_bandastation/aesthetics/clothing/centcom/icons/inhands/clothing/suits_righthand.dmi'
 	resistance_flags = INDESTRUCTIBLE | FIRE_PROOF | FREEZE_PROOF | UNACIDABLE | ACID_PROOF
+
+/obj/item/clothing/suit/armor/centcom_jacket
+	name = "fleet officer's coat jacket"
+	desc = "Укороченный пиджак в цветах НаноТрейзен."
+	icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/obj/clothing/suits/armor.dmi'
+	icon_state = "centcom_jacket"
+	inhand_icon_state = "centcom_jacket"
+	worn_icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/mob/clothing/suits/armor.dmi'
+	lefthand_file = 'modular_bandastation/aesthetics/clothing/centcom/icons/inhands/clothing/suits_lefthand.dmi'
+	righthand_file = 'modular_bandastation/aesthetics/clothing/centcom/icons/inhands/clothing/suits_righthand.dmi'
+	armor_type = /datum/armor/armor_centcom_formal
+	resistance_flags = INDESTRUCTIBLE | FIRE_PROOF | FREEZE_PROOF | UNACIDABLE | ACID_PROOF

@@ -47692,6 +47692,13 @@
 	},
 /turf/open/floor/iron/dark/corner,
 /area/station/hallway/primary/port)
+"pJD" = (
+/obj/effect/decal/cleanable/dirt,
+/mob/living/basic/mothroach/wrynroach{
+	name = "Жужука"
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/starboard/aft)
 "pJJ" = (
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
 	dir = 5
@@ -70793,6 +70800,9 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/blue/opposingcorners,
+/mob/living/basic/mothroach/ce_mothroach{
+	name = "Светоч"
+	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos/storage/gas)
 "xcJ" = (
@@ -113410,7 +113420,7 @@ ckQ
 cuV
 msS
 ckQ
-alL
+pJD
 uvO
 oki
 oCd
