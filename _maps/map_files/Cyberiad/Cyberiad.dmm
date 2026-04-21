@@ -1657,15 +1657,6 @@
 /obj/machinery/light/small/directional/west,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/upper)
-"awk" = (
-/obj/effect/turf_decal/tile/red,
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/disposalpipe/segment,
-/obj/structure/disposalpipe/segment,
-/turf/open/floor/iron/dark,
-/area/station/security/brig)
 "awn" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
@@ -33080,7 +33071,6 @@
 /obj/machinery/door/airlock/security,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/security/interrogationtwo)
 "hWR" = (
@@ -34511,7 +34501,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
-/obj/structure/disposalpipe/segment,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "iqs" = (
@@ -45264,7 +45253,6 @@
 /obj/machinery/door/airlock/security,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/security/interrogationone)
 "kXf" = (
@@ -49447,7 +49435,6 @@
 	dir = 8
 	},
 /obj/machinery/firealarm/directional/east,
-/obj/machinery/light/directional/east,
 /obj/machinery/light/directional/east,
 /turf/open/floor/eighties,
 /area/station/commons/dorms/apartment1)
@@ -195787,7 +195774,7 @@ hgE
 hgE
 hgE
 lhG
-awk
+hgE
 hgE
 hgE
 qEy
