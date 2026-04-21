@@ -29771,7 +29771,7 @@
 /obj/structure/cable,
 /obj/machinery/door/poddoor/shutters{
 	name = "Vacant Store Shutters";
-	id = "interrogation_small2"
+	id = "interrogation_smalltwo"
 	},
 /turf/open/floor/plating,
 /area/station/security/interrogationtwo)
@@ -61696,7 +61696,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
 /obj/machinery/light_switch/directional/west{
-	id = "interrogation_small2"
+	id = "interrogation_smalltwo"
 	},
 /turf/open/floor/iron/dark,
 /area/station/security/interrogationtwo)
@@ -83194,7 +83194,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
 /obj/machinery/button/door/directional/east{
-	id = "interrogation_small2"
+	id = "interrogation_smalltwo"
 	},
 /turf/open/floor/iron/dark,
 /area/station/security/interrogationtwo)
