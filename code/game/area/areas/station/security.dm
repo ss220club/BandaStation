@@ -64,9 +64,24 @@
 	icon_state = "sec_cremation"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
-/area/station/security/interrogation
-	name = "\improper Interrogation Room"
-	icon_state = "interrogation"
+/area/station/security/interrogationone
+	name = "\improper Interrogation Room one"
+	icon_state = "interrogation 1"
+	sound_environment = SOUND_AREA_SMALL_ENCLOSED
+
+/area/station/security/interrogationtwo
+	name = "\improper Interrogation Room two"
+	icon_state = "interrogation 2"
+	sound_environment = SOUND_AREA_SMALL_ENCLOSED
+
+/area/station/security/confrontation
+	name = "\improper The confrontation"
+	icon_state = "confrontation"
+	sound_environment = SOUND_AREA_SMALL_ENCLOSED
+
+/area/station/security/utilityroom
+	name = "\improper Utility room"
+	icon_state = "Utility room"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/security/warden
