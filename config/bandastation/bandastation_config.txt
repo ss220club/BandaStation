@@ -4,6 +4,9 @@
 #TTS_CACHE_ENABLED
 #TTS_API_URL_SILERO
 
+## Localhost donate tier
+LOCALHOST_DONATE_TIER 5
+
 ## AI Secretary
 AI_SECRETARY_URL https://ollama.com
 AI_SECRETARY_TOKEN my_secret_token
