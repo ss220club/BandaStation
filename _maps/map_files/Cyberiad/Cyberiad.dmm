@@ -78482,11 +78482,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/storage)
-"tif" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/general/visible/layer4,
-/turf/open/floor/iron,
-/area/station/maintenance/starboard/fore)
 "til" = (
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -205342,7 +205337,7 @@ ael
 tYy
 tYy
 hLQ
-tif
+fZd
 lAv
 cSt
 qcL
