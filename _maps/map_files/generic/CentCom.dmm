@@ -17093,8 +17093,8 @@
 /area/centcom/central_command_areas/planetary_port/plaza)
 "kNw" = (
 /obj/effect/turf_decal/tile/purple/half/contrasted,
-/obj/item/kirbyplants/organic/plant18,
 /obj/effect/decal/cleanable/dirt,
+/obj/item/kirbyplants/organic/plant18,
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "kNZ" = (
