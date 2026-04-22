@@ -3,7 +3,7 @@
 /// Доля брут-урона от max_damage, при которой корпус считается вскрытым
 #define IPC_CHASSIS_BREACH_THRESHOLD 0.25
 #define HUD_MOB_IPC_BATTERY "mob_ipc_battery"
-#define IS_IPC(H) (istype(H.dna?.species, /datum/species/ipc))
 #define TRAIT_IPC_CHASSIS_BREACHED "ipc_chassis_breached"
+#define IPC_PRESSURE_SOURCE "ipc_pressure_breach"
 /// Источник трейта защиты от давления — интактный корпус КПБ
 #define TRAIT_SOURCE_IPC_CHASSIS "ipc_chassis_intact"

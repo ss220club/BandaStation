@@ -219,21 +219,23 @@
 	check_chassis_integrity(H)
 
 /datum/species/ipc/proc/check_chassis_integrity(mob/living/carbon/human/H)
-	var/any_breached = FALSE
-	for(var/obj/item/bodypart/BP in H.bodyparts)
-		if(BP.limb_id != SPECIES_IPC)
-			continue
-		if(BP.brute_dam >= BP.max_damage * IPC_CHASSIS_BREACH_THRESHOLD)
-			any_breached = TRUE
+	if(!H || !IS_IPC(H))
+		return
+
+	var/is_breached = FALSE
+	for(var/obj/item/bodypart/B in H.bodyparts)
+		if(B.brute_dam >= (B.max_damage * IPC_CHASSIS_BREACH_THRESHOLD))
+			is_breached = TRUE
 			break
 
-	var/was_breached = HAS_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED)
-	if(any_breached && !was_breached)
-		ADD_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED, TRAIT_SOURCE_IPC_CHASSIS)
-		to_chat(H, span_warning("СИСТЕМНОЕ ПРЕДУПРЕЖДЕНИЕ: Целостность корпуса нарушена. Внешняя среда может повредить внутренние компоненты."))
-	else if(!any_breached && was_breached)
-		REMOVE_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED, TRAIT_SOURCE_IPC_CHASSIS)
-		to_chat(H, span_notice("Системная диагностика: Целостность корпуса восстановлена. Защита от давления активна."))
+	// При пробитии корпуса IPC теряет защиту от давления,
+	// при восстановлении — возвращает ее.
+	if(is_breached)
+		REMOVE_TRAIT(H, TRAIT_RESISTHIGHPRESSURE, IPC_PRESSURE_SOURCE)
+		REMOVE_TRAIT(H, TRAIT_RESISTLOWPRESSURE, IPC_PRESSURE_SOURCE)
+	else
+		ADD_TRAIT(H, TRAIT_RESISTHIGHPRESSURE, IPC_PRESSURE_SOURCE)
+		ADD_TRAIT(H, TRAIT_RESISTLOWPRESSURE, IPC_PRESSURE_SOURCE)
 
 /datum/species/ipc/handle_environment_pressure(mob/living/carbon/human/H, datum/gas_mixture/environment, seconds_per_tick)
 	if(!HAS_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED))

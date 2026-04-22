@@ -6,6 +6,10 @@
 	var/obj/item/organ/brain/positronic/brain = M.get_organ_slot(ORGAN_SLOT_BRAIN)
 	if(!brain)
 		return FALSE
+
+	if(!M.client)
+		return FALSE
+
 	if(M.stat != DEAD && M.stat != UNCONSCIOUS)
 		return FALSE
 	M.set_stat(CONSCIOUS)
