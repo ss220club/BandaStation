@@ -37,6 +37,7 @@
 #include "database220/_database220.dme"
 #include "discord/_discord.dme"
 #include "domains/_domains.dme"
+#include "dynamic/_dynamic.dme"
 #include "emote_panel/_emote_panel.dme"
 #include "ert/_ert.dme"
 #include "examine_panel/_examine_panel.dme"
