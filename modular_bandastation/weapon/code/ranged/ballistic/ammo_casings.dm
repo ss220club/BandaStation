@@ -459,7 +459,6 @@
 	projectile_type = /obj/projectile/bullet/rocket/weak
 
 // MARK: .22 LR Tranquilizer
-
 /obj/item/ammo_casing/c22lrtranquilizer
 	name = ".22 LR Tranquilizer bullet casing"
 	desc = "Специальный патрон калибра .22 LR с транквилизирующей пулей. Наносит мало урона, но может вывести цель из строя на длительное время."
