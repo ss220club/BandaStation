@@ -666,7 +666,6 @@
 	damage = 2
 	unconscious = 18 SECONDS
 	armour_penetration = 2
-	stun = 2 SECONDS
 	drowsy = 10 SECONDS
 	wound_bonus = -50
 	weak_against_armour = TRUE
