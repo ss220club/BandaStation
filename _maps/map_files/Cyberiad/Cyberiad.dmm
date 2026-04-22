@@ -3770,6 +3770,7 @@
 	name = "Cell 2";
 	pixel_y = 32
 	},
+/obj/machinery/firealarm/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/security/holding_cell)
 "aVF" = (
@@ -8039,9 +8040,14 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "bXH" = (
-/obj/structure/cable,
+/obj/machinery/button/flasher{
+	id = "permaflash1";
+	name = "Flasher button";
+	dir = 9;
+	pixel_y = 8
+	},
 /turf/closed/wall/r_wall,
-/area/station/security/holding_cell)
+/area/station/security/prison/visit)
 "bXI" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/chair/office{
@@ -16026,7 +16032,6 @@
 /obj/machinery/door/firedoor,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/door/poddoor/preopen{
 	name = "Security Blast Door";
 	id = "Secure Gate"
@@ -19500,6 +19505,7 @@
 /obj/effect/landmark/firealarm_sanity,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/security/holding_cell)
 "eKA" = (
@@ -37895,8 +37901,12 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "jhF" = (
+/obj/effect/turf_decal/tile/red{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
-/turf/closed/wall/r_wall,
+/turf/open/floor/iron/dark,
 /area/station/security/brig)
 "jhO" = (
 /obj/effect/decal/cleanable/dirt,
@@ -64175,6 +64185,7 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/security/holding_cell)
 "pBN" = (
@@ -64658,15 +64669,6 @@
 /obj/machinery/disposal/bin,
 /turf/open/floor/iron,
 /area/station/maintenance/department/electrical)
-"pGu" = (
-/obj/machinery/button/flasher{
-	id = "permaflash1";
-	name = "Flasher button";
-	pixel_x = 8;
-	dir = 9
-	},
-/turf/closed/wall/r_wall,
-/area/station/security/prison/visit)
 "pGx" = (
 /obj/structure/table,
 /obj/item/transfer_valve{
@@ -77356,8 +77358,14 @@
 /turf/open/floor/iron/white/corner,
 /area/station/service/kitchen/kitchen_backroom/ghetto)
 "sPk" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/door/airlock/security/glass,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/security/brig,
+/obj/effect/turf_decal/tile/red/fourcorners,
 /obj/structure/cable,
-/turf/closed/wall/r_wall,
+/turf/open/floor/iron,
 /area/station/security/prison)
 "sPm" = (
 /obj/effect/decal/cleanable/blood/old,
@@ -86293,6 +86301,7 @@
 	dir = 1
 	},
 /obj/effect/landmark/firealarm_sanity,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/security/holding_cell)
 "vdk" = (
@@ -186254,7 +186263,7 @@ gOj
 ddm
 dvg
 uZj
-oxI
+sPk
 gPp
 oAi
 nGb
@@ -186511,7 +186520,7 @@ gOj
 uOC
 lPt
 bdV
-sPk
+ddm
 wYI
 uBF
 wmw
@@ -186768,7 +186777,7 @@ gOj
 ddm
 iNS
 xqH
-sPk
+ddm
 mvm
 qoZ
 ddE
@@ -187286,7 +187295,7 @@ sUn
 glX
 dnE
 cIq
-pGu
+tFO
 jso
 mbZ
 jso
@@ -187543,7 +187552,7 @@ mDl
 akn
 cZx
 jdP
-tFO
+bXH
 vYL
 bOO
 ocW
@@ -193710,7 +193719,7 @@ tCv
 xeI
 uJq
 suy
-jhF
+ajE
 wLg
 wLg
 wLg
@@ -193719,7 +193728,7 @@ iji
 ioq
 ioq
 ioq
-bXH
+iji
 dPK
 iuP
 tef
@@ -194490,7 +194499,7 @@ iji
 oEz
 oEz
 oEz
-bXH
+iji
 bjv
 iji
 aka
@@ -195252,7 +195261,7 @@ cdB
 vuU
 qzf
 vis
-jhF
+ajE
 ils
 ils
 ils
@@ -195261,7 +195270,7 @@ iji
 oEz
 oEz
 oEz
-bXH
+iji
 fmo
 iji
 xwx
@@ -195517,7 +195526,7 @@ dpk
 tpn
 xqz
 xqz
-cSg
+jhF
 xqz
 dpk
 cds
