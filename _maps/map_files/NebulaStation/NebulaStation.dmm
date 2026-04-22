@@ -51122,6 +51122,9 @@
 /obj/item/tgui_book/manual/dsm{
 	pixel_x = -2
 	},
+/obj/item/tgui_book/manual/idc{
+	pixel_y = 2
+	},
 /obj/item/wrench/medical,
 /turf/open/floor/iron/dark,
 /area/station/medical/cryo)
@@ -90519,8 +90522,12 @@
 /obj/item/book/manual/wiki/infections{
 	pixel_y = 4
 	},
-/obj/item/reagent_containers/dropper,
+/obj/item/tgui_book/manual/idc{
+	pixel_y = 3;
+	pixel_x = 3
+	},
 /obj/item/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/dropper,
 /turf/open/floor/iron/dark,
 /area/station/medical/virology)
 "nvh" = (
@@ -119956,6 +119963,9 @@
 	dir = 1
 	},
 /obj/item/tgui_book/manual/dsm,
+/obj/item/tgui_book/manual/idc{
+	pixel_x = 4
+	},
 /turf/open/floor/iron/dark/smooth_edge{
 	dir = 1
 	},
@@ -130947,6 +130957,9 @@
 /obj/item/tgui_book/manual/dsm{
 	pixel_x = 5;
 	pixel_y = 5
+	},
+/obj/item/tgui_book/manual/idc{
+	pixel_x = 4
 	},
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/cmo)
