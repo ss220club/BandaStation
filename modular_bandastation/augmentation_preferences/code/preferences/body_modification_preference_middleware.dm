@@ -232,6 +232,7 @@
 	S.channel = 500
 	user.client << S
 	return FALSE
+
 /datum/preference_middleware/body_modifications/proc/refresh_body_modification_on_user(datum/body_modification/modification, mob/user, list/modification_params)
 	PRIVATE_PROC(TRUE)
 
@@ -243,3 +244,9 @@
 		return FALSE
 
 	return modification.apply_to_human(human_user, modification_params)
+
+//fix
+/obj/item/bodypart/generate_icon_key()
+	. = ..()
+	if(!should_draw_greyscale && icon_static)
+		. += "[icon_static]"
