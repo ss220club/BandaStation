@@ -9,7 +9,6 @@
 #include "code/human/species_type/skrell.dm"
 #include "code/human/species_type/tajaran.dm"
 #include "code/human/species_type/vulpkanin.dm"
-#include "code/human/species_type/ipc.dm"
 
 #include "code/human/sprite_accessories/skrell/skrell_cloth_wrap.dm"
 #include "code/human/sprite_accessories/skrell/skrell_cloth_wrap_toggle.dm"
@@ -73,7 +72,6 @@
 #include "code/surgery/bodyparts/skrell_bodyparts.dm"
 #include "code/surgery/bodyparts/tajaran_bodyparts.dm"
 #include "code/surgery/bodyparts/vulpkanin_bodyparts.dm"
-#include "code/surgery/bodyparts/ipc_bodyparts.dm"
 
 #include "code/surgery/organs/external/skrell_external.dm"
 #include "code/surgery/organs/external/vulpkanin_external.dm"
@@ -82,7 +80,6 @@
 #include "code/surgery/organs/internal/tajaran_internal.dm"
 #include "code/surgery/organs/internal/skrell_internal.dm"
 #include "code/surgery/organs/limbgrower_designs.dm"
-#include "code/surgery/organs/internal/ipc_internal.dm"
 
 
 #include "code/human/sprite_accessories/vulpkanin/hair_masks.dm"
