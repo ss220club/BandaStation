@@ -1060,7 +1060,9 @@
 	dir = 8
 	},
 /obj/structure/table/reinforced,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical{
+	pixel_y = -5
+	},
 /obj/item/clothing/glasses/welding,
 /obj/item/stock_parts/capacitor/quadratic{
 	pixel_y = 10
@@ -1082,6 +1084,10 @@
 /obj/item/stock_parts/scanning_module/triphasic{
 	pixel_y = 10;
 	pixel_x = -5
+	},
+/obj/item/storage/part_replacer/bluespace/tier4{
+	pixel_y = 8;
+	pixel_x = 3
 	},
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
