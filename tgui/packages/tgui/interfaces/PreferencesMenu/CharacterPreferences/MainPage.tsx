@@ -432,7 +432,9 @@ export function MainPage(props: MainPageProps) {
           />
         </Stack.Item>
         <Stack.Item grow style={{ alignSelf: 'center' }}>
-          <CharacterPreview height="100%" id={data.character_preview_view} />
+          {!augmentationInputOpen && (
+            <CharacterPreview height="100%" id={data.character_preview_view} />
+          )}
         </Stack.Item>
         <Stack.Item>
           <NameInput

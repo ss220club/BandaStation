@@ -6,6 +6,7 @@
 
 #include "code/body_modifications/body_part/amputations.dm"
 #include "code/body_modifications/body_part/prosthetics.dm"
+#include "code/body_modifications/body_part/bodypart_icon_cache_fix.dm"
 
 #include "code/body_modifications/body_part/robotic_limbs/bishop.dm"
 #include "code/body_modifications/body_part/robotic_limbs/bishop_nano.dm"

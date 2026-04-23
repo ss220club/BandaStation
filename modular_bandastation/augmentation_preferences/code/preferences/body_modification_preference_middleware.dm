@@ -3,6 +3,13 @@
 		"apply_body_modification" = PROC_REF(apply_body_modification),
 		"remove_body_modification" = PROC_REF(remove_body_modification),
 		"set_body_modification_manufacturer" = PROC_REF(set_body_modification_manufacturer),
+		"play_boot_sound" = PROC_REF(play_boot_sound),
+		"play_boot_complete_sound" = PROC_REF(play_boot_complete_sound),
+		"play_click_sound" = PROC_REF(play_click_sound),
+		"play_install_sound" = PROC_REF(play_install_sound),
+		"play_deselect_sound" = PROC_REF(play_deselect_sound),
+		"start_hover_loop" = PROC_REF(start_hover_loop),
+		"stop_hover_loop" = PROC_REF(stop_hover_loop),
 	)
 
 /datum/preference_middleware/body_modifications/get_ui_data(mob/user)
@@ -85,6 +92,16 @@
 
 	return current_brands
 
+/// Принудительно пересоздаёт тело в превью персонажа.
+/// При смене производителя/модификации гарантирует чистую
+/// пересборку dummy-моба с последующим apply_prefs_to.
+/datum/preference_middleware/body_modifications/proc/force_preview_rebuild()
+	var/atom/movable/screen/map_view/char_preview/preview = preferences.character_preview_view
+	if(!preview)
+		return
+	QDEL_NULL(preview.body)
+	preview.update_body()
+
 /datum/preference_middleware/body_modifications/proc/apply_body_modification(list/params, mob/user)
 	var/key = params["body_modification_key"]
 	if(!key)
@@ -103,7 +120,10 @@
 	else
 		updated_preference[key] = modification.default_preference_value(params)
 
-	return preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference)
+	var/result = preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference)
+	if(result)
+		force_preview_rebuild()
+	return result
 
 /datum/preference_middleware/body_modifications/proc/remove_body_modification(list/params, mob/user)
 	var/body_modification_key = params["body_modification_key"]
@@ -115,7 +135,10 @@
 		return FALSE
 
 	body_modifications -= body_modification_key
-	return preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], body_modifications)
+	var/result = preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], body_modifications)
+	if(result)
+		force_preview_rebuild()
+	return result
 
 /datum/preference_middleware/body_modifications/proc/set_body_modification_manufacturer(list/params, mob/user)
 	var/key = params["body_modification_key"]
@@ -132,5 +155,77 @@
 
 	updated_preference[key] = modification.handle_ui_params(params)
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference)
+	force_preview_rebuild()
 
 	return TRUE
+
+/// Проигрывает звук загрузки при открытии интерфейса RipperDoc.
+/datum/preference_middleware/body_modifications/proc/play_boot_sound(list/params, mob/user)
+	if(!user?.client)
+		return FALSE
+	var/sound/S = sound('modular_bandastation/augmentation_preferences/sound/loading.ogg')
+	S.volume = 50
+	S.wait = FALSE
+	user.client << S
+	return FALSE
+
+/// Проигрывает джингл по завершении загрузочной анимации RipperDoc.
+/datum/preference_middleware/body_modifications/proc/play_boot_complete_sound(list/params, mob/user)
+	if(!user?.client)
+		return FALSE
+	var/sound/S = sound('modular_bandastation/augmentation_preferences/sound/Launch2.ogg')
+	S.volume = 55
+	S.wait = FALSE
+	user.client << S
+	return FALSE
+
+/// Проигрывает звук нажатия кнопки в обычном меню модификаций.
+/datum/preference_middleware/body_modifications/proc/play_click_sound(list/params, mob/user)
+	if(!user?.client)
+		return FALSE
+	var/sound/S = sound('modular_bandastation/augmentation_preferences/sound/Select2.ogg')
+	S.volume = 40
+	S.wait = FALSE
+	user.client << S
+	return FALSE
+
+/// Проигрывает звук подтверждения выбора/установки модификации.
+/datum/preference_middleware/body_modifications/proc/play_install_sound(list/params, mob/user)
+	if(!user?.client)
+		return FALSE
+	var/sound/S = sound('modular_bandastation/augmentation_preferences/sound/Select1.ogg')
+	S.volume = 40
+	S.wait = FALSE
+	user.client << S
+	return FALSE
+
+/// Проигрывает звук удаления модификации (кнопка "Удалить").
+/datum/preference_middleware/body_modifications/proc/play_deselect_sound(list/params, mob/user)
+	if(!user?.client)
+		return FALSE
+	var/sound/S = sound('modular_bandastation/augmentation_preferences/sound/deselect1.ogg')
+	S.volume = 40
+	S.wait = FALSE
+	user.client << S
+	return FALSE
+
+/// Запускает зацикленный звук при наведении на кнопку "Сообщить об ошибке" в меню КПБ.
+/datum/preference_middleware/body_modifications/proc/start_hover_loop(list/params, mob/user)
+	if(!user?.client)
+		return FALSE
+	var/sound/S = sound('modular_bandastation/augmentation_preferences/sound/ui_mm_alert.ogg')
+	S.volume = 45
+	S.wait = FALSE
+	S.repeat = TRUE
+	S.channel = 500
+	user.client << S
+	return FALSE
+
+/// Останавливает зацикленный звук кнопки "Сообщить об ошибке".
+/datum/preference_middleware/body_modifications/proc/stop_hover_loop(list/params, mob/user)
+	if(!user?.client)
+		return FALSE
+	var/sound/S = sound(null)
+	S.channel = 500
+	user.client << S
+	return FALSE
