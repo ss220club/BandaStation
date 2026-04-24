@@ -49,7 +49,7 @@
 		/obj/item/reagent_containers/cup/glass/bottle/whiskey,
 		/obj/item/stamp/tsf
 	)
-	belt = /obj/item/storage/belt/holster/detective/full/ert/tsf_commander
+	accessory = /obj/item/clothing/accessory/holster/tacticool/tsf_commander
 	gloves = /obj/item/clothing/gloves/combat
 	head = /obj/item/clothing/head/beret/tsf_commander
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf

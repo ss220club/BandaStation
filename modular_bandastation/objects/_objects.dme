@@ -27,6 +27,7 @@
 #include "code/items/clothing/belt.dm"
 #include "code/items/clothing/accessories/accessories.dm"
 #include "code/items/clothing/accessories/gloves_accessories.dm"
+#include "code/items/clothing/accessories/holsters.dm"
 #include "code/items/clothing/glasses/glasses.dm"
 #include "code/items/clothing/gloves/gloves.dm"
 #include "code/items/clothing/head/hat.dm"

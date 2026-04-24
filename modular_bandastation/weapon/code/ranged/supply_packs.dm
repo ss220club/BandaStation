@@ -111,6 +111,26 @@
 		/obj/item/sledgehammer/tactical = 1,
 	)
 
+/datum/supply_pack/security/holsters
+	name = "Holsters (uniform)"
+	crate_name = "holsters crate"
+	desc = "В этом ящике находятся две обычные кобуры для пистолетов, которые надеваются поверх униформы."
+	cost = CARGO_CRATE_VALUE * 5
+	access_view = ACCESS_SECURITY
+	contains = list(
+		/obj/item/clothing/accessory/holster = 2
+	)
+
+/datum/supply_pack/security/holsters_thermal
+	name = "Thermals Holster (uniform)"
+	crate_name = "thermals holster crate"
+	desc = "В этом ящике находятся одна энергетическая кобура с двумя нано-пистолетами."
+	cost = CARGO_CRATE_VALUE * 20
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/clothing/accessory/holster/energy/thermal
+	)
+
 // MARK: GUNCASE
 /obj/item/storage/toolbox/guncase/soviet
 	desc = "Оружейный кейс. Символ СССП отпечатан на боковой стороне."

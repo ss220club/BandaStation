@@ -58,6 +58,12 @@
 	item = /obj/item/storage/belt/holster/chameleon
 	cost = 1
 
+/datum/uplink_item/stealthy_weapons/holster_uniform
+	name = "Syndiacte Holster (uniform)"
+	desc = "Эта кобура была специально разработана лучшими технологами компании Cybersun Inc. На первый взгляд - это обычная коробочка для ручек, которая вешается на униформу. На деле же - способна вмещать в себя что-то гораздо покрупнее. Только один карман, но вмещает в себя почти любой небольшой лазер или пистолет. Одурачь службу безопасности только одним её видом."
+	item = /obj/item/clothing/accessory/holster/chameleon
+	cost = 1
+
 /datum/uplink_item/stealthy_weapons/sleepy_pen
 	name = "Sleepy Pen"
 	desc = "A syringe disguised as a functional pen, filled with a potent mix of drugs, including a \
