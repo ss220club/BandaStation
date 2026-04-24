@@ -5783,6 +5783,7 @@
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
 	dir = 1
 	},
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/security/brig)
 "bui" = (
@@ -19710,8 +19711,8 @@
 /area/station/science/auxlab/firing_range)
 "eNm" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
 /area/station/security/evidence)
 "eNn" = (
@@ -26840,13 +26841,6 @@
 /obj/item/wrench,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/command/eva)
-"gzY" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/obj/machinery/camera/directional/south,
-/turf/open/floor/iron/dark,
-/area/station/security/brig)
 "gAd" = (
 /obj/effect/mapping_helpers/airlock/access/all/medical/psychology,
 /obj/machinery/door/firedoor,
@@ -28054,6 +28048,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/mail_sorting/security/hos_office,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "gOd" = (
@@ -41748,6 +41743,7 @@
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
 	dir = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/security/brig)
 "kgT" = (
@@ -42587,6 +42583,10 @@
 /area/station/maintenance/ghetto/port)
 "krr" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
+/obj/structure/cable,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark,
 /area/station/security/evidence)
 "kru" = (
@@ -45530,6 +45530,8 @@
 /obj/machinery/door/airlock/security,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark,
 /area/station/security/evidence)
 "kZZ" = (
@@ -46107,6 +46109,7 @@
 	c_tag = "Security - Gulag Prep"
 	},
 /obj/structure/disposalpipe/segment,
+/obj/machinery/firealarm/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "lhT" = (
@@ -52409,6 +52412,7 @@
 	pixel_x = 6;
 	pixel_y = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/security/courtroom/holding)
 "mJq" = (
@@ -56109,6 +56113,7 @@
 /area/station/ai/satellite/hallway)
 "nFi" = (
 /obj/effect/turf_decal/tile/red,
+/obj/machinery/firealarm/directional/east,
 /turf/open/floor/iron,
 /area/station/security/courtroom/holding)
 "nFn" = (
@@ -61705,9 +61710,7 @@
 "oVU" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/machinery/light_switch/directional/west{
-	id = "interrogation_smalltwo"
-	},
+/obj/machinery/light_switch/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/security/interrogationtwo)
 "oWf" = (
@@ -62183,10 +62186,9 @@
 /turf/open/floor/iron,
 /area/station/maintenance/department/electrical)
 "pcx" = (
-/turf/open/floor/engine{
-	name = "Holodeck Projector Floor"
-	},
-/area/station/security/interrogation)
+/obj/structure/cable,
+/turf/open/floor/iron,
+/area/station/security/courtroom/holding)
 "pcA" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
 /obj/effect/decal/cleanable/dirt,
@@ -68361,10 +68363,8 @@
 /turf/open/floor/plating,
 /area/station/maintenance/disposal)
 "qFo" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/west,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/security/evidence)
 "qFq" = (
@@ -73449,9 +73449,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
-/obj/machinery/light_switch/directional/west{
-	id = "interrogation_small"
-	},
+/obj/machinery/light_switch/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/security/interrogationone)
 "rSO" = (
@@ -79280,12 +79278,12 @@
 /turf/open/floor/iron/smooth,
 /area/station/commons/toilet/restrooms)
 "tpk" = (
-/obj/effect/turf_decal/tile/red{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/mail_sorting/security/hos_office,
+/obj/structure/cable,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark,
-/area/station/security/brig)
+/area/station/security/evidence)
 "tpn" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 8
@@ -81435,6 +81433,7 @@
 	id = "Prison Gate";
 	name = "Prison Lockdown Blast Doors"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
 /turf/open/floor/iron,
 /area/station/security/prison)
 "tPm" = (
@@ -86245,6 +86244,7 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 8
 	},
+/obj/machinery/firealarm/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/security/prison)
 "vcR" = (
@@ -86757,9 +86757,6 @@
 /turf/open/floor/iron,
 /area/station/security/courtroom/holding)
 "vjP" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
 /obj/machinery/door/airlock/security,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
@@ -94711,10 +94708,6 @@
 	},
 /obj/machinery/prisongate,
 /obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/security/general,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "permabrig"
-	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/preopen{
 	id = "Prison Gate";
@@ -192946,7 +192939,7 @@ tNr
 mYT
 yfC
 wBV
-gzY
+cEj
 xFP
 gKZ
 gob
@@ -195772,7 +195765,7 @@ cBM
 kCY
 ceO
 oPS
-tpk
+lAJ
 cOg
 gOc
 tIT
@@ -196547,7 +196540,7 @@ lAJ
 aVF
 wyw
 kJB
-fyk
+pcx
 uhc
 kxn
 noT
@@ -198348,7 +198341,7 @@ qsV
 evV
 lTu
 qFo
-eNm
+xHF
 mfL
 mZY
 uNg
@@ -198602,7 +198595,7 @@ cOi
 wBV
 aVF
 kZY
-xHF
+tpk
 krr
 eNm
 dYs
@@ -199125,7 +199118,7 @@ mZY
 gDp
 jeC
 fgy
-pcx
+ffH
 ffH
 ffH
 ffH
