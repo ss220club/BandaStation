@@ -570,7 +570,7 @@
 /turf/open/floor/pod,
 /area/centcom/central_command_areas/supply)
 "acy" = (
-/obj/structure/window/reinforced/unanchored/spawner/directional/east,
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/rnd)
 "acz" = (
@@ -627,7 +627,6 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/evacuation/ship)
 "acM" = (
-/obj/structure/window/reinforced/unanchored/spawner/directional/east,
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted,
 /obj/structure/table/reinforced,
 /obj/machinery/cell_charger,
@@ -644,6 +643,7 @@
 	pixel_x = -5;
 	pixel_y = 13
 	},
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "acN" = (
@@ -1864,7 +1864,7 @@
 /obj/item/assembly/igniter{
 	pixel_y = -1
 	},
-/obj/structure/window/reinforced/unanchored/spawner/directional/south,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/rnd)
 "ahC" = (
@@ -1913,8 +1913,8 @@
 /obj/effect/turf_decal/tile/purple/half/contrasted{
 	dir = 4
 	},
-/obj/structure/window/reinforced/unanchored/spawner/directional/north,
 /obj/machinery/vending/drugs,
+/obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/rnd)
 "ahM" = (
@@ -1947,7 +1947,7 @@
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/recharge_station,
-/obj/structure/window/reinforced/unanchored/spawner/directional/east,
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "ahS" = (
@@ -4740,11 +4740,11 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supplypod/loading/three)
 "awJ" = (
-/obj/structure/window/reinforced/unanchored/spawner/directional/south,
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
 	},
 /obj/machinery/chem_dispenser,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/rnd)
 "awM" = (
@@ -5960,7 +5960,7 @@
 	pixel_x = 5;
 	pixel_y = -2
 	},
-/obj/structure/window/reinforced/unanchored/spawner/directional/north,
+/obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/rnd)
 "aCp" = (
@@ -7883,7 +7883,6 @@
 	},
 /area/centcom/central_command_areas/hallway)
 "aIZ" = (
-/obj/structure/window/reinforced/unanchored/spawner/directional/east,
 /obj/structure/rack,
 /obj/item/storage/toolbox/mechanical{
 	pixel_y = 4
@@ -7891,6 +7890,7 @@
 /obj/item/storage/toolbox/electrical{
 	pixel_x = 5
 	},
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/rnd)
 "aJa" = (
@@ -9805,17 +9805,17 @@
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/engine)
 "aPW" = (
-/obj/structure/window/reinforced/unanchored/spawner/directional/east,
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/bot/right,
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "aPX" = (
 /obj/effect/turf_decal/tile/purple/half/contrasted{
 	dir = 4
 	},
-/obj/structure/window/reinforced/unanchored/spawner/directional/south,
 /obj/machinery/vending/wardrobe/science_wardrobe,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/rnd)
 "aPZ" = (
@@ -10613,7 +10613,6 @@
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
 "aTP" = (
-/obj/structure/window/reinforced/unanchored/spawner/directional/east,
 /obj/structure/rack,
 /obj/item/clothing/gloves/color/yellow,
 /obj/item/clothing/gloves/color/yellow{
@@ -10623,6 +10622,7 @@
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 1
 	},
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/rnd)
 "aTQ" = (
@@ -11811,7 +11811,6 @@
 	},
 /area/centcom/central_command_areas/hallway)
 "aYJ" = (
-/obj/structure/window/reinforced/unanchored/spawner/directional/south,
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
@@ -11822,7 +11821,6 @@
 /obj/item/reagent_containers/cup/beaker/large{
 	pixel_y = 6
 	},
-/obj/structure/window/reinforced/unanchored/spawner/directional/east,
 /obj/machinery/reagentgrinder{
 	pixel_y = 5
 	},
@@ -11831,6 +11829,8 @@
 	pixel_x = -8;
 	pixel_y = -2
 	},
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/rnd)
 "aYK" = (
@@ -17355,11 +17355,11 @@
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/arboretum)
 "ltu" = (
-/obj/structure/window/reinforced/unanchored/spawner/directional/east,
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
 	dir = 4
 	},
 /obj/structure/closet/crate/mod,
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "lvF" = (
@@ -18789,9 +18789,9 @@
 	},
 /area/centcom/central_command_areas/hallway)
 "oEd" = (
-/obj/structure/window/reinforced/unanchored/spawner/directional/south,
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/chem_master,
+/obj/structure/window/reinforced/spawner/directional/south,
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/rnd)
 "oEf" = (
@@ -20893,8 +20893,8 @@
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/conference_room)
 "siI" = (
-/obj/structure/window/reinforced/unanchored/spawner/directional/east,
 /obj/effect/turf_decal/bot,
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/rnd)
 "sjf" = (
