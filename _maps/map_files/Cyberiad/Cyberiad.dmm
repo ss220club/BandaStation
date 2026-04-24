@@ -42590,7 +42590,6 @@
 "krr" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
 /obj/structure/cable,
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark,
@@ -62194,8 +62193,10 @@
 /area/station/maintenance/department/electrical)
 "pcx" = (
 /obj/structure/cable,
-/turf/open/floor/iron,
-/area/station/security/courtroom/holding)
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark,
+/area/station/security/evidence)
 "pcA" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan,
 /obj/effect/decal/cleanable/dirt,
@@ -79286,10 +79287,8 @@
 /area/station/commons/toilet/restrooms)
 "tpk" = (
 /obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/iron/dark,
-/area/station/security/evidence)
+/turf/open/floor/iron,
+/area/station/security/courtroom/holding)
 "tpn" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 8
@@ -196545,7 +196544,7 @@ lAJ
 aVF
 wyw
 kJB
-pcx
+tpk
 uhc
 kxn
 noT
@@ -198600,7 +198599,7 @@ cOi
 wBV
 aVF
 kZY
-tpk
+pcx
 krr
 eNm
 dYs
