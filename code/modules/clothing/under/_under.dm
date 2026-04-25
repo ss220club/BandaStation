@@ -449,6 +449,13 @@
 /obj/item/clothing/under/proc/list_accessories_with_icon(mob/user)
 	var/list/all_accessories = list()
 	for(var/obj/item/clothing/accessory/attached as anything in attached_accessories)
+
+		if(ishuman(loc))
+			var/mob/living/carbon/human/H = loc
+
+			if(H.wear_suit && !attached.above_suit)
+				continue
+
 		all_accessories += attached.examine_title(user)
 
 	return all_accessories
