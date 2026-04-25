@@ -28719,6 +28719,15 @@ instrumental = "вринтараканом"
 prepositional = "вринтаракане"
 gender = "male"
 
+["chiefroach"]
+nominative = "главный молетаракан"
+genitive = "главного молетаракана"
+dative = "главному молетаракану"
+accusative = "главный молетаракана"
+instrumental = "главным молетараканом"
+prepositional = "главном молетаракане"
+gender = "male"
+
 ["dead mouse"]
 nominative = "мёртвая мышь"
 genitive = "мёртвой мыши"
@@ -34318,6 +34327,86 @@ dative = "редактору базового пространства вирт�
 accusative = "редактор базового пространства виртуального домена"
 instrumental = "редактором базового пространства виртуального домена"
 prepositional = "редакторе базового пространства виртуального домена"
+
+["Dodge Mode"]
+nominative = "режим уклонения"
+genitive = "режима уклонения"
+dative = "режиму уклонения"
+accusative = "режим уклонения"
+instrumental = "режимом уклонения"
+prepositional = "режиме уклонения"
+gender = "male"
+
+["Dodge Mode (Active)"]
+nominative = "режим уклонения (активен)"
+genitive = "режима уклонения (активен)"
+dative = "режиму уклонения (активен)"
+accusative = "режим уклонения (активен)"
+instrumental = "режимом уклонения (активен)"
+prepositional = "режиме уклонения (активен)"
+gender = "male"
+
+["Apex Nanotrasen Navy Field Officer"]
+nominative = "элитный полевой офицер флота Нанотрейзен"
+genitive = "элитного полевого офицера флота Нанотрейзен"
+dative = "элитному полевому офицеру флота Нанотрейзен"
+accusative = "элитного полевого офицера флота Нанотрейзен"
+instrumental = "элитным полевым офицером флота Нанотрейзен"
+prepositional = "элитном полевом офицере флота Нанотрейзен"
+gender = "male"
+
+["augmented left arm"]
+nominative = "аугментированная левая рука"
+genitive = "аугментированной левой руки"
+dative = "аугментированной левой руке"
+accusative = "аугментированную левую руку"
+instrumental = "аугментированной левой рукой"
+prepositional = "аугментированной левой руке"
+gender = "female"
+
+["augmented right arm"]
+nominative = "аугментированная правая рука"
+genitive = "аугментированной правой руки"
+dative = "аугментированной правой руке"
+accusative = "аугментированную правую руку"
+instrumental = "аугментированной правой рукой"
+prepositional = "аугментированной правой руке"
+gender = "female"
+
+["augmented left leg"]
+nominative = "аугментированная левая нога"
+genitive = "аугментированной левой ноги"
+dative = "аугментированной левой ноге"
+accusative = "аугментированную левую ногу"
+instrumental = "аугментированной левой ногой"
+prepositional = "аугментированной левой ноге"
+gender = "female"
+
+["augmented right leg"]
+nominative = "аугментированная правая нога"
+genitive = "аугментированной правой ноги"
+dative = "аугментированной правой ноге"
+accusative = "аугментированную правую ногу"
+instrumental = "аугментированной правой ногой"
+prepositional = "аугментированной правой ноге"
+gender = "female"
+
+["field officer's reinforced cape"]
+nominative = "усиленный плащ офицера флота"
+genitive = "усиленного плаща офицера флота"
+dative = "усиленному плащу офицера флота"
+accusative = "усиленный плащ офицера флота"
+instrumental = "усиленным плащом офицера флота"
+prepositional = "усиленном плаще офицера флота"
+gender = "male"
+
+["fleet officer's formal suit"]
+nominative = "официальный костюм офицера флота"
+genitive = "официального костюма офицера флота"
+dative = "официальному костюму офицера флота"
+accusative = "официальный костюм офицера флота"
+instrumental = "официальным костюмом офицера флота"
+prepositional = "официальном костюме офицера флота"
 gender = "male"
 
 ["supermatter crystal"]
