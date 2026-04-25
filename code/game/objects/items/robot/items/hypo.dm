@@ -1,4 +1,4 @@
-/// All of the default reagent lists for each hypospray (+ hacked variants) // BANDASTATION EDIT: added /datum/reagent/medicine/mine_salve for base_medical and /datum/reagent/medicine/granibitaluri for expanded
+/// All of the default reagent lists for each hypospray (+ hacked variants) // BANDASTATION EDIT: added /datum/reagent/medicine/mine_salve for base_medical and /datum/reagent/medicine/granibitaluri for expanded_medical
 #define BASE_MEDICAL_REAGENTS list(\
 		/datum/reagent/medicine/c2/aiuri,\
 		/datum/reagent/medicine/c2/convermol,\
