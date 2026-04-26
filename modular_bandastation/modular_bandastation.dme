@@ -7,6 +7,7 @@
 #include "_signals220/_signals220.dme"
 #include "_singletons/_singletons.dme"
 #include "~components/_components.dme"
+#include "skills/_skills.dme"
 #include "admin/_admin.dme"
 #include "aesthetics/_aesthetics.dme"
 #include "aesthetics_sounds/_aesthetics_sounds.dme"

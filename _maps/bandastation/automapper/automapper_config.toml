@@ -137,6 +137,13 @@ required_map = "DeltaStation2.dmm"
 coordinates = [204, 123, 1]
 trait_name = "Station"
 
+[templates.deltastation_wrynroach]
+map_files = ["deltastation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/deltastation/"
+required_map = "DeltaStation2.dmm"
+coordinates = [115, 56, 1]
+trait_name = "Station"
+
 # MetaStation
 [templates.metastation_lawyer_office]
 map_files = ["metastation_lawyer_office.dmm"]
@@ -276,6 +283,13 @@ map_files = ["metastation_sec_closet.dmm"]
 directory = "_maps/bandastation/automapper/templates/metastation/"
 required_map = "MetaStation.dmm"
 coordinates = [112, 172, 1]
+trait_name = "Station"
+
+[templates.metastation_wrynroach]
+map_files = ["metastation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/metastation/"
+required_map = "MetaStation.dmm"
+coordinates = [67, 103, 1]
 trait_name = "Station"
 
 # IceBoxStation
@@ -440,6 +454,13 @@ required_map = "IceBoxStation.dmm"
 coordinates = [102, 188, 3]
 trait_name = "Station"
 
+[templates.iceboxstation_wrynroach]
+map_files = ["iceboxstation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [179, 162, 3]
+trait_name = "Station"
+
 # TramStation
 [templates.tramstation_detective_office]
 map_files = ["tramstation_detective_office.dmm"]
@@ -602,6 +623,13 @@ required_map = "tramstation.dmm"
 coordinates = [86, 169, 2]
 trait_name = "Station"
 
+[templates.tramstation_wrynroach]
+map_files = ["tramstation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [135, 131, 1]
+trait_name = "Station"
+
 # Birdshot
 [templates.birdshot_cryo]
 map_files = ["birdshot_cryo.dmm"]
@@ -723,6 +751,13 @@ required_map = "NebulaStation.dmm"
 coordinates = [169, 114, 1]
 trait_name = "Station"
 
+[templates.nebulastation_wrynroach]
+map_files = ["nebulastation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [172, 150, 1]
+trait_name = "Station"
+
 # wawastation
 [templates.wawastation_perma_cryo]
 map_files = ["wawastation_perma_cryo.dmm"]
@@ -787,7 +822,6 @@ required_map = "wawastation.dmm"
 coordinates = [113, 110, 1]
 trait_name = "Station"
 
-
 [templates.wawastation_rat]
 map_files = ["wawastation_rat.dmm"]
 directory = "_maps/bandastation/automapper/templates/wawastation/"
@@ -821,4 +855,11 @@ map_files = ["wawastation_sec_closet.dmm"]
 directory = "_maps/bandastation/automapper/templates/wawastation/"
 required_map = "wawastation.dmm"
 coordinates = [71, 141, 1]
+trait_name = "Station"
+
+[templates.wawastation_wrynroach]
+map_files = ["wawastation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [39, 80, 1]
 trait_name = "Station"
