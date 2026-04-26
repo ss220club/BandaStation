@@ -273,7 +273,7 @@
 	id = /obj/item/card/id/advanced/tsf
 	id_trim = /datum/id_trim/tsf/marine/machinegunner
 	uniform = /obj/item/clothing/under/rank/tsf/marine
-	suit = /obj/item/clothing/suit/armor/vest/marine/security
+	suit = /obj/item/clothing/suit/armor/swat/tsf_heavy
 	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
@@ -284,6 +284,7 @@
 	belt = /obj/item/storage/belt/military/army/tsf/full_machinegun
 	ears = /obj/item/radio/headset/heads/captain/alt/tsf
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/tsf
+	head = /obj/item/clothing/head/helmet/marine/security/tsf_heavy
 
 /datum/id_trim/tsf/marine/machinegunner
 	assignment = "TSF - Marine Machinegunner"
@@ -337,7 +338,6 @@
 		/obj/item/grenade/frag = 2,
 		/obj/item/grenade/c4 = 2,
 		/obj/item/clothing/head/beret/tsf_marsoc,
-		/obj/item/gun/ballistic/rocketlauncher/oneuse,
 	)
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/combat
@@ -376,7 +376,6 @@
 	name = "TSF - MARSOC Officer"
 	id_trim = /datum/id_trim/tsf/marsoc/officer
 	uniform = /obj/item/clothing/under/rank/tsf/marsoc_officer
-	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/machinegun/top_fed
 	back = /obj/item/mod/control/pre_equipped/tsf_elite
 	backpack_contents = list(
 		/obj/item/storage/box/survival/tsf/officer,
@@ -521,5 +520,6 @@
 	if(visuals_only)
 		return
 	translator.grant_language(/datum/language/uncommon)
+	translator.grant_language(/datum/language/common)
 	translator.remove_blocked_language(/datum/language/uncommon)
 	translator.set_active_language(/datum/language/uncommon)

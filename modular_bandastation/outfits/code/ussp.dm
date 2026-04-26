@@ -526,5 +526,6 @@
 	if(visuals_only)
 		return
 	translator.grant_language(/datum/language/spinwarder)
+	translator.grant_language(/datum/language/common)
 	translator.remove_blocked_language(/datum/language/spinwarder)
 	translator.set_active_language(/datum/language/spinwarder)
