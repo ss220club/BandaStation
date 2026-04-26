@@ -185,22 +185,20 @@
 	var/datum/discord_embed/embed = new()
 	embed.title = title_prefix ? "[title_prefix]Тикет #[id]" : "Тикет #[id]"
 	embed.author = initiator_key
-	embed.description = "<byond://[world.internet_address]:[world.port]>"
+	embed.description = message
+	if(status_line)
+		embed.description += "\n\n[status_line]"
 	if(CONFIG_GET(string/adminhelp_ahelp_link))
 		var/ahelp_link = replacetext(CONFIG_GET(string/adminhelp_ahelp_link), "$RID", GLOB.round_id)
 		ahelp_link = replacetext(ahelp_link, "$TID", id)
 		embed.url = ahelp_link
 	var/list/fields = list(
 		"Раунд" = "[GLOB.round_id]",
-		"Тикет" = "#[id]",
-		"От" = "[initiator_key]",
+		"Ckey" = "[initiator_key]",
 	)
 	var/mob/initiator_mob = initiator_client?.mob
 	if(!isnull(initiator_mob?.real_name) && length(initiator_mob.real_name))
-		fields["Имя"] = initiator_mob.real_name
-	fields["Сообщение"] = message
-	if(status_line)
-		fields["Статус"] = status_line
+		fields["Игровое имя"] = initiator_mob.real_name
 	embed.fields = fields
 	return embed
 
