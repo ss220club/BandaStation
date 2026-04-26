@@ -1,5 +1,4 @@
 // NSV13
-
 import { toFixed } from 'common/math';
 import { Fragment } from 'inferno';
 import { useBackend, useLocalState } from '../backend';
@@ -15,32 +14,115 @@ import {
 } from '../components';
 import { Window } from '../layouts';
 
-export const StormdriveConsole = (props, context) => {
-  const { act, data } = useBackend(context);
-  const { gas_records } = data;
+type GasRecord = number[];
+
+type StormdriveData = {
+  gas_records: {
+    constricted_plasma: GasRecord;
+    plasma: GasRecord;
+    tritium: GasRecord;
+    o2: GasRecord;
+    n2: GasRecord;
+    co2: GasRecord;
+    water_vapour: GasRecord;
+    nob: GasRecord;
+    n2o: GasRecord;
+    no2: GasRecord;
+    bz: GasRecord;
+    stim: GasRecord;
+    pluoxium: GasRecord;
+    nucleium: GasRecord;
+  };
+  control_rod_percent: number;
+  heat: number;
+  reactor_meltdown: number;
+  reactor_hot: number;
+  reactor_critical: number;
+  rod_integrity: number;
+  last_power_produced: number;
+  theoretical_maximum_power: number;
+  reaction_rate: number;
+  fuel_mix: number;
+  total_moles: number;
+  mole_threshold_high: number;
+  mole_threshold_very_high: number;
+  constricted_plasma: number;
+  plasma: number;
+  tritium: number;
+  o2: number;
+  n2: number;
+  co2: number;
+  water_vapour: number;
+  nob: number;
+  n2o: number;
+  no2: number;
+  bz: number;
+  stim: number;
+  pluoxium: number;
+  nucleium: number;
+  reactor_maintenance: boolean;
+  pipe_open: boolean;
+};
+
+export const StormdriveConsole = (props: any, context: any) => {
+  const { act, data } = useBackend<StormdriveData>(context);
+
+  const {
+    gas_records,
+    control_rod_percent,
+    heat,
+    reactor_meltdown,
+    reactor_hot,
+    reactor_critical,
+    rod_integrity,
+    last_power_produced,
+    theoretical_maximum_power,
+    reaction_rate,
+    fuel_mix,
+    total_moles,
+    mole_threshold_high,
+    mole_threshold_very_high,
+    constricted_plasma,
+    plasma,
+    tritium,
+    o2,
+    n2,
+    co2,
+    water_vapour,
+    nob,
+    n2o,
+    no2,
+    bz,
+    stim,
+    pluoxium,
+    nucleium,
+    reactor_maintenance,
+    pipe_open,
+  } = data;
+
+  // Подготовка данных для графиков
   const constricted_plasmaData = gas_records.constricted_plasma.map(
-    (value, i) => [i, value],
+    (value, i) => [i, value] as [number, number]
   );
-  const plasmaData = gas_records.plasma.map((value, i) => [i, value]);
-  const tritiumData = gas_records.tritium.map((value, i) => [i, value]);
-  const o2Data = gas_records.o2.map((value, i) => [i, value]);
-  const n2Data = gas_records.n2.map((value, i) => [i, value]);
-  const co2Data = gas_records.co2.map((value, i) => [i, value]);
-  const water_vapourData = gas_records.water_vapour.map((value, i) => [
-    i,
-    value,
-  ]);
-  const nobData = gas_records.nob.map((value, i) => [i, value]);
-  const n2oData = gas_records.n2o.map((value, i) => [i, value]);
-  const no2Data = gas_records.no2.map((value, i) => [i, value]);
-  const bzData = gas_records.bz.map((value, i) => [i, value]);
-  const stimData = gas_records.stim.map((value, i) => [i, value]);
-  const pluoxiumData = gas_records.pluoxium.map((value, i) => [i, value]);
-  const nucleiumData = gas_records.nucleium.map((value, i) => [i, value]);
+  const plasmaData = gas_records.plasma.map((value, i) => [i, value] as [number, number]);
+  const tritiumData = gas_records.tritium.map((value, i) => [i, value] as [number, number]);
+  const o2Data = gas_records.o2.map((value, i) => [i, value] as [number, number]);
+  const n2Data = gas_records.n2.map((value, i) => [i, value] as [number, number]);
+  const co2Data = gas_records.co2.map((value, i) => [i, value] as [number, number]);
+  const water_vapourData = gas_records.water_vapour.map((value, i) => [i, value] as [number, number]);
+  const nobData = gas_records.nob.map((value, i) => [i, value] as [number, number]);
+  const n2oData = gas_records.n2o.map((value, i) => [i, value] as [number, number]);
+  const no2Data = gas_records.no2.map((value, i) => [i, value] as [number, number]);
+  const bzData = gas_records.bz.map((value, i) => [i, value] as [number, number]);
+  const stimData = gas_records.stim.map((value, i) => [i, value] as [number, number]);
+  const pluoxiumData = gas_records.pluoxium.map((value, i) => [i, value] as [number, number]);
+  const nucleiumData = gas_records.nucleium.map((value, i) => [i, value] as [number, number]);
+
   return (
     <Window resizable theme="ntos" width={560} height={600}>
       <Window.Content scrollable>
         <Section>
+          {/* Control presets */}
           <Section title="Control presets:">
             <Fragment>
               <Button
@@ -82,107 +164,107 @@ export const StormdriveConsole = (props, context) => {
                 fluid
                 content="AZ-6 - MAINTENANCE MODE"
                 icon="cog"
-                color={data.reactor_maintenance && 'white'}
+                color={reactor_maintenance ? 'white' : undefined}
                 onClick={() => act('maintenance')}
               />
               <Button
                 fluid
                 content="AZ-7 - FUEL DUMP"
                 icon="gas-pump"
-                color={data.pipe_open && 'white'}
+                color={pipe_open ? 'white' : undefined}
                 onClick={() => act('pipe')}
               />
             </Fragment>
           </Section>
+
+          {/* Control Rod Insertion */}
           <Section title="Control Rod Insertion:">
             <Slider
-              value={data.control_rod_percent}
+              value={control_rod_percent}
               minValue={0}
               maxValue={100}
               step={1}
               stepPixelSize={5}
               onDrag={(e, value) =>
-                act('control_rod_percent', {
-                  adjust: value,
-                })
+                act('control_rod_percent', { adjust: value })
               }
             />
           </Section>
+
+          {/* Statistics */}
           <Section title="Statistics:">
             Temperature:
             <ProgressBar
-              value={data.heat / data.reactor_meltdown}
+              value={heat / reactor_meltdown}
               ranges={{
                 good: [],
-                average: [
-                  data.reactor_hot / data.reactor_meltdown,
-                  data.reactor_critical / data.reactor_meltdown,
-                ],
-                bad: [data.reactor_critical / data.reactor_meltdown, Infinity],
+                average: [reactor_hot / reactor_meltdown, reactor_critical / reactor_meltdown],
+                bad: [reactor_critical / reactor_meltdown, Infinity],
               }}
             >
-              {toFixed(data.heat) + ' °C'}
+              {toFixed(heat) + ' °C'}
             </ProgressBar>
+
             Rod Integrity:
             <ProgressBar
-              value={(data.rod_integrity / 100) * 100 * 0.01}
+              value={rod_integrity}
               ranges={{
                 good: [],
-                average: [0.15, 0.5],
-                bad: [-Infinity, 0.15],
+                average: [15, 50],
+                bad: [-Infinity, 15],
               }}
             />
+
             Power Output:
             <ProgressBar
-              value={data.last_power_produced / data.theoretical_maximum_power}
+              value={last_power_produced / theoretical_maximum_power}
               ranges={{
                 good: [],
                 average: [0.08, 0.2],
                 bad: [-Infinity, 0.08],
               }}
             >
-              {data.last_power_produced / 1e6 + ' MW'}
+              {toFixed(last_power_produced / 1e6, 1) + ' MW'}
             </ProgressBar>
+
             Reaction Rate:
             <ProgressBar
-              value={data.reaction_rate * 0.05}
+              value={reaction_rate * 0.05}
               ranges={{
                 good: [],
                 average: [0.1, 0.2],
                 bad: [-Infinity, 0.1],
               }}
             >
-              {data.reaction_rate + ' mol/s'}
+              {toFixed(reaction_rate, 1) + ' mol/s'}
             </ProgressBar>
+
             Fuel Ratio:
             <ProgressBar
-              value={data.fuel_mix / data.total_moles}
+              value={fuel_mix / total_moles}
               ranges={{
                 good: [],
                 average: [0.125, 0.25],
                 bad: [-Infinity, 0.125],
               }}
             >
-              {toFixed((data.fuel_mix / data.total_moles) * 100) + ' %'}
+              {toFixed((fuel_mix / total_moles) * 100) + ' %'}
             </ProgressBar>
+
             Fuel Moles:
             <ProgressBar
-              value={data.total_moles / data.mole_threshold_very_high}
+              value={total_moles / mole_threshold_very_high}
               ranges={{
                 good: [],
-                average: [
-                  data.mole_threshold_high / data.mole_threshold_very_high,
-                  Infinity,
-                ],
-                bad: [
-                  -Infinity,
-                  data.reaction_rate / data.mole_threshold_very_high,
-                ],
+                average: [mole_threshold_high / mole_threshold_very_high, Infinity],
+                bad: [-Infinity, reaction_rate / mole_threshold_very_high],
               }}
             >
-              {data.total_moles + ' mol'}
+              {toFixed(total_moles) + ' mol'}
             </ProgressBar>
           </Section>
+
+          {/* Fuel Line Composition */}
           <Section title="Fuel Line Composition:">
             <Flex spacing={1}>
               <Flex.Item width="200px">
@@ -190,155 +272,161 @@ export const StormdriveConsole = (props, context) => {
                   <LabeledList>
                     <LabeledList.Item label="Constricted Plasma">
                       <ProgressBar
-                        value={
-                          (data.constricted_plasma / data.total_moles) * 100
-                        }
+                        value={(constricted_plasma / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="violet"
                       >
-                        {toFixed(
-                          (data.constricted_plasma / data.total_moles) * 100,
-                        ) + ' %'}
+                        {toFixed((constricted_plasma / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Plasma">
                       <ProgressBar
-                        value={(data.plasma / data.total_moles) * 100}
+                        value={(plasma / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="purple"
                       >
-                        {toFixed((data.plasma / data.total_moles) * 100) + ' %'}
+                        {toFixed((plasma / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Tritium">
                       <ProgressBar
-                        value={(data.tritium / data.total_moles) * 100}
+                        value={(tritium / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="pink"
                       >
-                        {toFixed((data.tritium / data.total_moles) * 100) +
-                          ' %'}
+                        {toFixed((tritium / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Oxygen">
                       <ProgressBar
-                        value={(data.o2 / data.total_moles) * 100}
+                        value={(o2 / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="blue"
                       >
-                        {toFixed((data.o2 / data.total_moles) * 100) + ' %'}
+                        {toFixed((o2 / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Nitrogen">
                       <ProgressBar
-                        value={(data.n2 / data.total_moles) * 100}
+                        value={(n2 / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="red"
                       >
-                        {toFixed((data.n2 / data.total_moles) * 100) + ' %'}
+                        {toFixed((n2 / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Carbon Dioxide">
                       <ProgressBar
-                        value={(data.co2 / data.total_moles) * 100}
+                        value={(co2 / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="grey"
                       >
-                        {toFixed((data.co2 / data.total_moles) * 100) + ' %'}
+                        {toFixed((co2 / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Water Vapour">
                       <ProgressBar
-                        value={(data.water_vapour / data.total_moles) * 100}
+                        value={(water_vapour / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="white"
                       >
-                        {toFixed((data.water_vapour / data.total_moles) * 100) +
-                          ' %'}
+                        {toFixed((water_vapour / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Hypernoblium">
                       <ProgressBar
-                        value={(data.nob / data.total_moles) * 100}
+                        value={(nob / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="teal"
                       >
-                        {toFixed((data.nob / data.total_moles) * 100) + ' %'}
+                        {toFixed((nob / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Nitrous Oxide">
                       <ProgressBar
-                        value={(data.n2o / data.total_moles) * 100}
+                        value={(n2o / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="label"
                       >
-                        {toFixed((data.n2o / data.total_moles) * 100) + ' %'}
+                        {toFixed((n2o / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Nitryl">
                       <ProgressBar
-                        value={(data.no2 / data.total_moles) * 100}
+                        value={(no2 / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
-                        color=""
                       >
-                        {toFixed((data.no2 / data.total_moles) * 100) + ' %'}
+                        {toFixed((no2 / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="BZ">
                       <ProgressBar
-                        value={(data.bz / data.total_moles) * 100}
+                        value={(bz / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="orange"
                       >
-                        {toFixed((data.bz / data.total_moles) * 100) + ' %'}
+                        {toFixed((bz / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Stimulum">
                       <ProgressBar
-                        value={(data.stim / data.total_moles) * 100}
+                        value={(stim / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="yellow"
                       >
-                        {toFixed((data.stim / data.total_moles) * 100) + ' %'}
+                        {toFixed((stim / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Pluoxium">
                       <ProgressBar
-                        value={(data.pluoxium / data.total_moles) * 100}
+                        value={(pluoxium / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="olive"
                       >
-                        {toFixed((data.pluoxium / data.total_moles) * 100) +
-                          ' %'}
+                        {toFixed((pluoxium / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
+
                     <LabeledList.Item label="Nucleium">
                       <ProgressBar
-                        value={(data.nucleium / data.total_moles) * 100}
+                        value={(nucleium / total_moles) * 100}
                         minValue={0}
                         maxValue={100}
                         color="brown"
                       >
-                        {toFixed((data.nucleium / data.total_moles) * 100) +
-                          ' %'}
+                        {toFixed((nucleium / total_moles) * 100) + ' %'}
                       </ProgressBar>
                     </LabeledList.Item>
                   </LabeledList>
                 </Section>
               </Flex.Item>
+
+              {/* Графики */}
               <Flex.Item grow={1}>
                 <Section fill position="relative" height="100%">
                   <Chart.Line
@@ -372,6 +460,14 @@ export const StormdriveConsole = (props, context) => {
                     rangeY={[0, 100]}
                     strokeColor="rgba(33, 133, 208, 1)"
                     fillColor="rgba(33, 133, 208, 0)"
+                  />
+                  <Chart.Line
+                    fillPositionedParent
+                    data={n2Data}
+                    rangeX={[0, n2Data.length - 1]}
+                    rangeY={[0, 100]}
+                    strokeColor="rgba(255, 0, 0, 1)"
+                    fillColor="rgba(255, 0, 0, 0)"
                   />
                   <Chart.Line
                     fillPositionedParent
@@ -419,7 +515,7 @@ export const StormdriveConsole = (props, context) => {
                     rangeX={[0, bzData.length - 1]}
                     rangeY={[0, 100]}
                     strokeColor="rgba(242, 113, 28, 1)"
-                    fillColor="rgba(242, 113, 28, 0.)"
+                    fillColor="rgba(242, 113, 28, 0)"
                   />
                   <Chart.Line
                     fillPositionedParent
@@ -427,7 +523,7 @@ export const StormdriveConsole = (props, context) => {
                     rangeX={[0, stimData.length - 1]}
                     rangeY={[0, 100]}
                     strokeColor="rgba(251, 214, 8, 1)"
-                    fillColor="rgba(251, 214, 8, 0.)"
+                    fillColor="rgba(251, 214, 8, 0)"
                   />
                   <Chart.Line
                     fillPositionedParent
@@ -435,7 +531,7 @@ export const StormdriveConsole = (props, context) => {
                     rangeX={[0, pluoxiumData.length - 1]}
                     rangeY={[0, 100]}
                     strokeColor="rgba(181, 204, 24, 1)"
-                    fillColor="rgba(181, 204, 24, 0.)"
+                    fillColor="rgba(181, 204, 24, 0)"
                   />
                   <Chart.Line
                     fillPositionedParent
@@ -444,14 +540,6 @@ export const StormdriveConsole = (props, context) => {
                     rangeY={[0, 100]}
                     strokeColor="rgba(165, 103, 63, 1)"
                     fillColor="rgba(165, 103, 63, 0)"
-                  />
-                  <Chart.Line
-                    fillPositionedParent
-                    data={n2Data}
-                    rangeX={[0, n2Data.length - 1]}
-                    rangeY={[0, 100]}
-                    strokeColor="rgba(255, 0, 0, 1)"
-                    fillColor="rgba(255, 0, 0, 0)"
                   />
                 </Section>
               </Flex.Item>
