@@ -64,7 +64,7 @@ type StormdriveData = {
   pipe_open: boolean;
 };
 
-export const StormdriveConsole = (props: any, context: any) => {
+export function StormdriveConsole(props: any, context: any) {
   const { act, data } = useBackend<StormdriveData>(context);
 
   const {
