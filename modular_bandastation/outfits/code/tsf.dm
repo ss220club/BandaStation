@@ -148,7 +148,7 @@
 	suit_store = /obj/item/gun/ballistic/automatic/carwo/auto/black
 	back = /obj/item/storage/backpack/tsf
 	backpack_contents = list(
-		/obj/item/storage/box/survival/ussp/officer,
+		/obj/item/storage/box/survival/tsf/officer,
 		/obj/item/storage/box/zipties,
 		/obj/item/storage/medkit/tactical_lite,
 		/obj/item/grenade/frag = 2,
@@ -185,7 +185,7 @@
 
 // Engineer
 /datum/outfit/tsf/marine/engineer
-	name = "TSF - Marine Combat Techician"
+	name = "TSF - Marine Combat Technician"
 	id_trim = /datum/id_trim/tsf/marine/engineer
 	suit = /obj/item/clothing/suit/armor/vest/marine/engineer
 	suit_store = /obj/item/gun/ballistic/shotgun/riot/renoster
@@ -198,7 +198,7 @@
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/engi
 
 /datum/id_trim/tsf/marine/engineer
-	assignment = "TSF - Marine Combat Techician"
+	assignment = "TSF - Marine Combat Technician"
 
 // Grenadier
 /datum/outfit/tsf/marine/grenadier
