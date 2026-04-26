@@ -25,6 +25,13 @@
 	if(drop_bitflags & DROP_BODYPARTS)
 		spread_bodyparts(drop_bitflags)
 
+	// failsafe for if we fuck up and leave our brain behind. (other organs are replaceable so we can ignore them.)
+	var/obj/item/organ/brain/brain = get_organ_slot(ORGAN_SLOT_BRAIN)
+	if((drop_bitflags & DROP_BRAIN) && !isnull(brain))
+		stack_trace("gib invoked with drop_brain() had their brain after spilling organs and bodyparts, meaning both failed!")
+		brain.Remove(src)
+		brain.forceMove(drop_location())
+
 	SEND_SIGNAL(src, COMSIG_LIVING_GIBBED, drop_bitflags)
 	qdel(src)
 
@@ -255,6 +262,18 @@
 	if (client)
 		client.move_delay = initial(client.move_delay)
 
-	persistent_client?.time_of_death = timeofdeath
+	update_time_of_death(timeofdeath) // BANDASTATION EDIT - Context-aware time_of_death updates
 
 	return TRUE
+
+// BANDASTATION EDIT START - Context-aware time_of_death updates
+/mob/proc/update_time_of_death(time)
+	var/area/current_area = get_area(src)
+	var/should_update_client = !current_area || !(current_area.area_flags & NO_DEATH_MESSAGE)
+	if(should_update_client)
+		persistent_client?.time_of_death = time
+
+/mob/living/update_time_of_death(time)
+	timeofdeath = time
+	..(time)
+// BANDASTATION EDIT END

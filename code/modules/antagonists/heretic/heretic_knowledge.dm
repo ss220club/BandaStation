@@ -292,7 +292,9 @@
 		our_heretic.heretic_shops[HERETIC_KNOWLEDGE_DRAFT],
 	)
 	SEND_SIGNAL(src, COMSIG_HERETIC_SHOP_SETUP)
-
+	if(our_heretic.give_objectives)
+		our_heretic.forge_primary_objectives()
+		our_heretic.owner.announce_objectives()
 
 /datum/heretic_knowledge/limited_amount/starting/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
 	RegisterSignals(user, list(COMSIG_HERETIC_MANSUS_GRASP_ATTACK, COMSIG_LIONHUNTER_ON_HIT), PROC_REF(on_mansus_grasp))
@@ -648,7 +650,7 @@
 	)
 
 	if(EMERGENCY_IDLE_OR_RECALLED)
-		SSshuttle.call_evac_shuttle("Critical reality rupture detected on supranatural casuality long-range scanners. Mass crew casualty and possible station destruction determined to be beyond acceptable probability. Priority evacuation shuttle dispatched.")
+		SSshuttle.call_evac_shuttle("Сканерами дальнего действия зафиксирован критический разрыв в реальности, вызванный потусторонними силами. Вероятность массовых потерь экипажа и уничтожения станции превышает допустимые рассчётные вероятности. Запущен приоритетный эвакуационный шаттл.")
 	SSshuttle.emergency_no_recall = TRUE
 
 	if(!isnull(ascension_achievement))

@@ -224,7 +224,7 @@
 	return !user.contains(src)
 
 /obj/item/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
-	balloon_alert_to_viewers("*щелк*")
+	balloon_alert_to_hearers("*щёлк*")
 	playsound(src, dry_fire_sound, dry_fire_sound_volume, TRUE)
 
 /obj/item/gun/proc/fire_sounds()
@@ -464,8 +464,9 @@
 		balloon_alert(user, "спуск не работает, нужен ударник!")
 	return FALSE
 
+/// Called to put ammo back in a gun which recharges itself, should call super if successful
 /obj/item/gun/proc/recharge_newshot()
-	return
+	SEND_SIGNAL(src, COMSIG_GUN_REPLENISHED_CHARGE)
 
 /obj/item/gun/proc/process_burst(mob/living/user, atom/target, message = TRUE, params=null, zone_override = "", random_spread = 0, burst_spread_mult = 0, iteration = 0)
 	if(!user || !firing_burst)

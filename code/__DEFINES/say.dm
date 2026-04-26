@@ -73,6 +73,8 @@
 #define MODE_CUSTOM_SAY_ERASE_INPUT "erase_input"
 /// Message is being relayed through another object
 #define MODE_RELAY "relayed"
+/// Override the mob's name
+#define MODE_SPEAKER_NAME_OVERRIDE "speaker_name_override"
 
 // BANDASTATION ADDITION START - TTS
 #define MODE_TTS_FILTERS "tts_filters"
