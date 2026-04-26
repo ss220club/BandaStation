@@ -216,7 +216,7 @@
 
 /obj/machinery/computer/slot_machine/multitool_act(mob/living/user, obj/item/tool)
 	if(balance > 0)
-		visible_message("<b>[src]</b> докладывает, 'ОШИБКА! Пожалуйста, опустошите машину перед изменением способа оплаты'") //Prevents converting coins into holocredits and vice versa
+		say("ОШИБКА! Пожалуйста, опустошите машину перед изменением способа оплаты.") //Prevents converting coins into holocredits and vice versa
 		return ITEM_INTERACT_BLOCKING
 
 	if(paymode == HOLOCHIP)
@@ -394,7 +394,7 @@
 
 /// Triggers a negative effect for a slot machine if all trap icons are lined up in the middle
 /obj/machinery/computer/slot_machine/proc/activate_trap(mob/living/user)
-	visible_message("<b>[src]</b> says, 'Big Loser! Prepare for your special prize!'")
+	say("Big Loser! Prepare for your special prize!")
 
 	switch(trap_path)
 		if(/obj/item/restraints/handcuffs)
@@ -422,9 +422,10 @@
 	else if(check_middle_row_all(jackpot_path))
 		winning = WINNING_JACKPOT
 		var/prize = money + PRIZE_JACKPOT
-		visible_message("<b>[capitalize(declent_ru(NOMINATIVE))]</b> говорит, 'ДЖЕКПОТ! Джекпоооот!!!! [prize] [MONEY_NAME] тебе в рот!'")
-		priority_announce("Джекпот! Джекпоооот!!!! Бабки [user ? user.real_name : usrname] в рот! Поздравить победителя можно в [get_area(src)]!")
-		user.add_mood_event("slots", /datum/mood_event/slots/win/jackpot)
+		say("ДЖЕКПОТ! Вы выиграли [prize] [MONEY_NAME]!")
+		priority_announce("Поздравляем [user ? user.real_name : usrname] с крупным выигрышем в [get_area(src)]!")
+		user.add_mood_event(SLOTS_MOOD_CATEGORY, /datum/mood_event/slots/win/jackpot)
+		add_memory_in_range(user, 7, /datum/memory/won_jackpot, protagonist = user, deuteragonist = src)
 		jackpots += 1
 		money = 0
 		if(paymode == HOLOCHIP)
@@ -439,19 +440,19 @@
 
 	else if(linelength == 5)
 		winning = WINNING_BIG
-		visible_message("<b>[src]</b> докладывает, 'Большой выигрыш! 1000[MONEY_NAME]!'")
+		say("Большой выигрыш! Вы выиграли 1000[MONEY_NAME]!")
 		give_money(PRIZE_BIG)
-		user.add_mood_event("slots", /datum/mood_event/slots/win/big)
+		user.add_mood_event(SLOTS_MOOD_CATEGORY, /datum/mood_event/slots/win/big)
 
 	else if(linelength == 4)
 		winning = WINNING_SMALL
-		visible_message("<b>[src]</b> докладывает, 'Выигрыш! 400[MONEY_NAME]!'")
+		say("Выигрыш! Вы выиграли 400[MONEY_NAME]!")
 		give_money(PRIZE_SMALL)
-		user.add_mood_event("slots", /datum/mood_event/slots/win)
+		user.add_mood_event(SLOTS_MOOD_CATEGORY, /datum/mood_event/slots/win)
 
 	else if(linelength == 3)
 		winning = WINNING_FREESPIN
-		to_chat(user, span_notice("Вы выиграли три фриспина!"))
+		balloon_alert(user, "получено 3 фриспина!")
 		balance += SPIN_PRICE * 4
 		money = max(money - SPIN_PRICE * 4, money)
 
@@ -459,7 +460,7 @@
 		winning = WINNING_NOTHING
 		balloon_alert(user, "неудача!")
 		did_player_win = FALSE
-		user.add_mood_event("slots", /datum/mood_event/slots/loss)
+		user.add_mood_event(SLOTS_MOOD_CATEGORY, /datum/mood_event/slots/loss)
 
 	playsound(src, 'sound/machines/lever/lever_stop.ogg', 50)
 
