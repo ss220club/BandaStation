@@ -159,3 +159,24 @@
 /area/station/maintenance/ghetto/abandoned_gambling_den
 	name = "Ghetto Abandoned Gambling Den"
 	icon_state = "abandoned_gambling_den"
+
+/area/station/security/interrogationone
+	name = "\improper Interrogation Room one"
+	icon_state = "interrogation 1"
+	sound_environment = SOUND_AREA_SMALL_ENCLOSED
+
+/area/station/security/interrogationtwo
+	name = "\improper Interrogation Room two"
+	icon_state = "interrogation 2"
+	sound_environment = SOUND_AREA_SMALL_ENCLOSED
+
+/area/station/security/confrontation
+	name = "\improper The confrontation"
+	icon_state = "confrontation"
+	sound_environment = SOUND_AREA_SMALL_ENCLOSED
+
+/area/station/security/utilityroom
+	name = "\improper Utility room"
+	icon_state = "Utility room"
+	sound_environment = SOUND_AREA_SMALL_ENCLOSED
+
