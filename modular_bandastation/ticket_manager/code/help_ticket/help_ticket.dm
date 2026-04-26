@@ -129,16 +129,18 @@
 	if(!regular_webhook_url)
 		return
 
-	var/text_for_check = LOWER_TEXT("[message]")
-	if(findtext(text_for_check, "набег"))
-		send2adminchat_webhook("@here\n[format_webhook_text(message)]", FALSE)
+	var/datum/discord_embed/embed = build_ticket_manager_embed(message)
+
+	if(ahelp_message_matches_keyword(message))
+		embed.content = "@here"
+		send2adminchat_webhook(embed, FALSE)
 		return
 
 	var/list/admin_counts = get_admin_counts(R_BAN)
 	if(length(admin_counts["present"]) > 0)
 		return
 
-	send2adminchat_webhook(format_webhook_text(message), FALSE)
+	send2adminchat_webhook(embed, FALSE)
 
 // sends webhook notification when ticket was auto closed by timeout
 /datum/help_ticket/proc/send_autoclose_webhook()
@@ -153,10 +155,11 @@
 		return
 
 	var/player_message = get_last_player_message()
-	send2adminchat_webhook(
-		format_webhook_text("[player_message]\nТикет был автоматически закрыт по таймауту ([TICKET_AUTOCLOSE_TIMER / (1 MINUTES)] мин.)"),
-		FALSE
-	)
+	if(!player_message)
+		player_message = "Сообщение игрока не найдено."
+	var/timeout_explanation = "Тикет был автоматически закрыт по таймауту ([TICKET_AUTOCLOSE_TIMER / (1 MINUTES)] мин.)"
+	var/datum/discord_embed/embed = build_ticket_manager_embed(player_message, timeout_explanation, "Автозакрытие - ")
+	send2adminchat_webhook(embed, FALSE)
 
 /datum/help_ticket/proc/get_last_player_message()
 	if(!length(messages))
@@ -178,13 +181,28 @@
 
 	return null
 
-/datum/help_ticket/proc/format_webhook_text(message)
-	return "\
-> Раунд: [GLOB.round_id]\n\
-> Тикет: [id]\n\
-> От: [initiator_key]\n\
-> Сообщение: [message]\
-"
+/datum/help_ticket/proc/build_ticket_manager_embed(message, status_line = null, title_prefix = null)
+	var/datum/discord_embed/embed = new()
+	embed.title = title_prefix ? "[title_prefix]Тикет #[id]" : "Тикет #[id]"
+	embed.author = initiator_key
+	embed.description = "<byond://[world.internet_address]:[world.port]>"
+	if(CONFIG_GET(string/adminhelp_ahelp_link))
+		var/ahelp_link = replacetext(CONFIG_GET(string/adminhelp_ahelp_link), "$RID", GLOB.round_id)
+		ahelp_link = replacetext(ahelp_link, "$TID", id)
+		embed.url = ahelp_link
+	var/list/fields = list(
+		"Раунд" = "[GLOB.round_id]",
+		"Тикет" = "#[id]",
+		"От" = "[initiator_key]",
+	)
+	var/mob/initiator_mob = initiator_client?.mob
+	if(!isnull(initiator_mob?.real_name) && length(initiator_mob.real_name))
+		fields["Имя"] = initiator_mob.real_name
+	fields["Сообщение"] = message
+	if(status_line)
+		fields["Статус"] = status_line
+	embed.fields = fields
+	return embed
 
 /// Converts ticket to ticket type specified `type_to_convert_to`
 /datum/help_ticket/proc/convert(client/converter)
