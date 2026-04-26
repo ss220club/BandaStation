@@ -1,9 +1,7 @@
 // NSV13
 import { toFixed } from 'common/math';
-import { Fragment } from 'inferno';
-import { useBackend, useLocalState } from '../backend';
+import { Fragment } from 'react';
 import {
-  Box,
   Button,
   Chart,
   Flex,
@@ -11,7 +9,8 @@ import {
   ProgressBar,
   Section,
   Slider,
-} from '../components';
+} from 'tgui-core/components';
+import { useBackend, useLocalState } from '../backend';
 import { Window } from '../layouts';
 
 type GasRecord = number[];
@@ -102,21 +101,47 @@ export function StormdriveConsole(props: any, context: any) {
 
   // Подготовка данных для графиков
   const constricted_plasmaData = gas_records.constricted_plasma.map(
-    (value, i) => [i, value] as [number, number]
+    (value, i) => [i, value] as [number, number],
   );
-  const plasmaData = gas_records.plasma.map((value, i) => [i, value] as [number, number]);
-  const tritiumData = gas_records.tritium.map((value, i) => [i, value] as [number, number]);
-  const o2Data = gas_records.o2.map((value, i) => [i, value] as [number, number]);
-  const n2Data = gas_records.n2.map((value, i) => [i, value] as [number, number]);
-  const co2Data = gas_records.co2.map((value, i) => [i, value] as [number, number]);
-  const water_vapourData = gas_records.water_vapour.map((value, i) => [i, value] as [number, number]);
-  const nobData = gas_records.nob.map((value, i) => [i, value] as [number, number]);
-  const n2oData = gas_records.n2o.map((value, i) => [i, value] as [number, number]);
-  const no2Data = gas_records.no2.map((value, i) => [i, value] as [number, number]);
-  const bzData = gas_records.bz.map((value, i) => [i, value] as [number, number]);
-  const stimData = gas_records.stim.map((value, i) => [i, value] as [number, number]);
-  const pluoxiumData = gas_records.pluoxium.map((value, i) => [i, value] as [number, number]);
-  const nucleiumData = gas_records.nucleium.map((value, i) => [i, value] as [number, number]);
+  const plasmaData = gas_records.plasma.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const tritiumData = gas_records.tritium.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const o2Data = gas_records.o2.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const n2Data = gas_records.n2.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const co2Data = gas_records.co2.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const water_vapourData = gas_records.water_vapour.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const nobData = gas_records.nob.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const n2oData = gas_records.n2o.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const no2Data = gas_records.no2.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const bzData = gas_records.bz.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const stimData = gas_records.stim.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const pluoxiumData = gas_records.pluoxium.map(
+    (value, i) => [i, value] as [number, number],
+  );
+  const nucleiumData = gas_records.nucleium.map(
+    (value, i) => [i, value] as [number, number],
+  );
 
   return (
     <Window resizable theme="ntos" width={560} height={600}>
@@ -198,13 +223,15 @@ export function StormdriveConsole(props: any, context: any) {
               value={heat / reactor_meltdown}
               ranges={{
                 good: [],
-                average: [reactor_hot / reactor_meltdown, reactor_critical / reactor_meltdown],
+                average: [
+                  reactor_hot / reactor_meltdown,
+                  reactor_critical / reactor_meltdown,
+                ],
                 bad: [reactor_critical / reactor_meltdown, Infinity],
               }}
             >
-              {toFixed(heat) + ' °C'}
+              {`${toFixed(heat)} °C`}
             </ProgressBar>
-
             Rod Integrity:
             <ProgressBar
               value={rod_integrity}
@@ -214,7 +241,6 @@ export function StormdriveConsole(props: any, context: any) {
                 bad: [-Infinity, 15],
               }}
             />
-
             Power Output:
             <ProgressBar
               value={last_power_produced / theoretical_maximum_power}
@@ -224,9 +250,8 @@ export function StormdriveConsole(props: any, context: any) {
                 bad: [-Infinity, 0.08],
               }}
             >
-              {toFixed(last_power_produced / 1e6, 1) + ' MW'}
+              {`${toFixed(last_power_produced / 1e6, 1)} MW`}
             </ProgressBar>
-
             Reaction Rate:
             <ProgressBar
               value={reaction_rate * 0.05}
@@ -236,9 +261,8 @@ export function StormdriveConsole(props: any, context: any) {
                 bad: [-Infinity, 0.1],
               }}
             >
-              {toFixed(reaction_rate, 1) + ' mol/s'}
+              {`${toFixed(reaction_rate, 1)} mol/s`}
             </ProgressBar>
-
             Fuel Ratio:
             <ProgressBar
               value={fuel_mix / total_moles}
@@ -248,19 +272,21 @@ export function StormdriveConsole(props: any, context: any) {
                 bad: [-Infinity, 0.125],
               }}
             >
-              {toFixed((fuel_mix / total_moles) * 100) + ' %'}
+              {`${toFixed((fuel_mix / total_moles) * 100)} %`}
             </ProgressBar>
-
             Fuel Moles:
             <ProgressBar
               value={total_moles / mole_threshold_very_high}
               ranges={{
                 good: [],
-                average: [mole_threshold_high / mole_threshold_very_high, Infinity],
+                average: [
+                  mole_threshold_high / mole_threshold_very_high,
+                  Infinity,
+                ],
                 bad: [-Infinity, reaction_rate / mole_threshold_very_high],
               }}
             >
-              {toFixed(total_moles) + ' mol'}
+              {`${toFixed(total_moles)} mol`}
             </ProgressBar>
           </Section>
 
@@ -277,7 +303,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="violet"
                       >
-                        {toFixed((constricted_plasma / total_moles) * 100) + ' %'}
+                        {`${toFixed((constricted_plasma / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -288,7 +314,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="purple"
                       >
-                        {toFixed((plasma / total_moles) * 100) + ' %'}
+                        {`${toFixed((plasma / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -299,7 +325,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="pink"
                       >
-                        {toFixed((tritium / total_moles) * 100) + ' %'}
+                        {`${toFixed((tritium / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -310,7 +336,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="blue"
                       >
-                        {toFixed((o2 / total_moles) * 100) + ' %'}
+                        {`${toFixed((o2 / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -321,7 +347,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="red"
                       >
-                        {toFixed((n2 / total_moles) * 100) + ' %'}
+                        {`${toFixed((n2 / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -332,7 +358,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="grey"
                       >
-                        {toFixed((co2 / total_moles) * 100) + ' %'}
+                        {`${toFixed((co2 / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -343,7 +369,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="white"
                       >
-                        {toFixed((water_vapour / total_moles) * 100) + ' %'}
+                        {`${toFixed((water_vapour / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -354,7 +380,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="teal"
                       >
-                        {toFixed((nob / total_moles) * 100) + ' %'}
+                        {`${toFixed((nob / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -365,7 +391,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="label"
                       >
-                        {toFixed((n2o / total_moles) * 100) + ' %'}
+                        {`${toFixed((n2o / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -375,7 +401,7 @@ export function StormdriveConsole(props: any, context: any) {
                         minValue={0}
                         maxValue={100}
                       >
-                        {toFixed((no2 / total_moles) * 100) + ' %'}
+                        {`${toFixed((no2 / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -386,7 +412,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="orange"
                       >
-                        {toFixed((bz / total_moles) * 100) + ' %'}
+                        {`${toFixed((bz / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -397,7 +423,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="yellow"
                       >
-                        {toFixed((stim / total_moles) * 100) + ' %'}
+                        {`${toFixed((stim / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -408,7 +434,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="olive"
                       >
-                        {toFixed((pluoxium / total_moles) * 100) + ' %'}
+                        {`${toFixed((pluoxium / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
 
@@ -419,7 +445,7 @@ export function StormdriveConsole(props: any, context: any) {
                         maxValue={100}
                         color="brown"
                       >
-                        {toFixed((nucleium / total_moles) * 100) + ' %'}
+                        {`${toFixed((nucleium / total_moles) * 100)} %`}
                       </ProgressBar>
                     </LabeledList.Item>
                   </LabeledList>
@@ -549,4 +575,4 @@ export function StormdriveConsole(props: any, context: any) {
       </Window.Content>
     </Window>
   );
-};
+}

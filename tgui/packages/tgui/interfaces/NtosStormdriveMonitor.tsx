@@ -1,7 +1,7 @@
 // NSV13
 import { toFixed } from 'common/math';
+import { Button, ProgressBar, Section } from 'tgui-core/components';
 import { useBackend } from '../backend';
-import { Button, ProgressBar, Section } from '../components';
 import { NtosWindow } from '../layouts';
 
 type NtosStormdriveMonitorData = {
@@ -68,7 +68,7 @@ export function NtosStormdriveMonitor(props: any, context: any) {
               bad: [reactor_critical / reactor_meltdown, Infinity],
             }}
           >
-            {toFixed(heat) + ' °C'}
+            {`${toFixed(heat)} °C`}
           </ProgressBar>
           Rod Integrity:
           <ProgressBar
@@ -88,7 +88,7 @@ export function NtosStormdriveMonitor(props: any, context: any) {
               bad: [-Infinity, 0.08],
             }}
           >
-            {toFixed(last_power_produced / 1e6, 1) + ' MW'}
+            {`${toFixed(last_power_produced / 1e6, 1)} MW`}
           </ProgressBar>
           Reaction Rate:
           <ProgressBar
@@ -99,7 +99,7 @@ export function NtosStormdriveMonitor(props: any, context: any) {
               bad: [-Infinity, 0.1],
             }}
           >
-            {toFixed(reaction_rate, 1) + ' mol/s'}
+            {`${toFixed(reaction_rate, 1)} mol/s`}
           </ProgressBar>
           Fuel:
           <ProgressBar
@@ -113,10 +113,10 @@ export function NtosStormdriveMonitor(props: any, context: any) {
               bad: [-Infinity, reaction_rate / mole_threshold_very_high],
             }}
           >
-            {toFixed(total_moles) + ' mol'}
+            {`${toFixed(total_moles)} mol`}
           </ProgressBar>
         </Section>
       </NtosWindow.Content>
     </NtosWindow>
   );
-};
+}
