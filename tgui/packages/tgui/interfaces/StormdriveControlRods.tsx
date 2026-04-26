@@ -15,7 +15,7 @@ type StormdriveControlRodsData = {
   mounted_control_rods?: Record<string, ControlRod>;
 };
 
-export const StormdriveControlRods = (props: any, context: any) => {
+export function StormdriveControlRods(props: any, context: any) {
   const { act, data } = useBackend<StormdriveControlRodsData>(context);
 
   const { mounted_control_rods } = data;
