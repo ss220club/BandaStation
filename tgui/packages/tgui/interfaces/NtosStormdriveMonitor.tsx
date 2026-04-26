@@ -19,7 +19,7 @@ type NtosStormdriveMonitorData = {
   mole_threshold_very_high: number;
 };
 
-export const NtosStormdriveMonitor = (props: any, context: any) => {
+export function NtosStormdriveMonitor(props: any, context: any) {
   const { act, data } = useBackend<NtosStormdriveMonitorData>(context);
 
   const {
