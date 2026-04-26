@@ -16,9 +16,9 @@ import type { BackendState } from './events/types';
  * console.log(data.username); // You'll get type safety here
  * ```
  */
-export function useBackend<
-  TData extends Record<string, any>,
->(): BackendState<TData> {
+export function useBackend<TData extends Record<string, any>>(
+  context: any,
+): BackendState<TData> {
   const state = store.get(backendStateAtom);
 
   return {

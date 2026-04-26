@@ -1,7 +1,7 @@
 // NSV13
-import { Fragment } from 'inferno';
+import { Fragment } from 'react';
+import { Box, Button, ProgressBar, Section } from 'tgui-core/components';
 import { useBackend } from '../backend';
-import { Button, ProgressBar, Section } from '../components';
 import { Window } from '../layouts';
 
 type ControlRod = {
@@ -25,7 +25,8 @@ export function StormdriveControlRods(props: any, context: any) {
       <Window.Content scrollable>
         <Section>
           <Section title="Installed Control Rods:">
-            {!!mounted_control_rods && Object.keys(mounted_control_rods).length > 0 ? (
+            {!!mounted_control_rods &&
+            Object.keys(mounted_control_rods).length > 0 ? (
               <Section>
                 {Object.keys(mounted_control_rods).map((key) => {
                   const rod = mounted_control_rods[key];
@@ -65,4 +66,4 @@ export function StormdriveControlRods(props: any, context: any) {
       </Window.Content>
     </Window>
   );
-};
+}
