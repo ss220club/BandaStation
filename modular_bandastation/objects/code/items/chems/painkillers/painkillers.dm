@@ -38,7 +38,7 @@
 
 	exposed_mob.add_surgery_speed_mod(type, 0.7, min(reac_volume * 1 MINUTES, 5 MINUTES))
 	if(show_message)
-		to_chat(exposed_mob, span_danger("Вы чуствуете, как ваши раны исчезают, превращаясь в ничто!") )
+		to_chat(exposed_mob, span_danger("Вы чувствуете, как ваши раны исчезают, превращаясь в ничто!"))
 
 /datum/reagent/medicine/tramadol/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
