@@ -351,7 +351,7 @@ GLOBAL_LIST_EMPTY(antagonists)
  */
 /datum/antagonist/proc/greet()
 	if(!silent)
-		to_chat(owner.current, span_big("Вы - [lowertext(src.name)]."))
+		to_chat(owner.current, span_big("Вы - [src.name]."))
 		play_stinger()
 
 /// Plays the antag stinger sound, if we have one
@@ -367,7 +367,7 @@ GLOBAL_LIST_EMPTY(antagonists)
  */
 /datum/antagonist/proc/farewell()
 	if(!silent && owner.current)
-		to_chat(owner.current, span_userdanger("Вы больше не [lowertext(src.name)]!"))
+		to_chat(owner.current, span_userdanger("Вы больше не [src.name]!"))
 
 /**
  * Proc that assigns this antagonist's ascribed moodlet to the player.

@@ -80,7 +80,7 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 			topiclimiter[SECOND_COUNT] = 0
 		topiclimiter[SECOND_COUNT] += 1
 		if (topiclimiter[SECOND_COUNT] > stl)
-			to_chat(src, span_danger("Ваше предыдущее действие было проигнорировано, потому что вы сделали слишком много за секунду."))
+			to_chat(src, span_danger("Превышен лимит действий в секунду, ваше предыдущее действие было проигнорировано."))
 			return
 
 	// Tgui Topic middleware

@@ -153,7 +153,7 @@ SUBSYSTEM_DEF(polling)
 		var/custom_link_style_end = "style='color:DodgerBlue;font-weight:bold;-dm-text-outline: 1px black'"
 		if(isatom(alert_pic) && isobserver(candidate_mob))
 			act_jump = "[custom_link_style_start]<a href='byond://?src=[REF(poll_alert_button)];jump=1'[custom_link_style_end]>\[Телепорт\]</a>"
-		var/act_signup = "[custom_link_style_start]<a href='byond://?src=[REF(poll_alert_button)];signup=1'[custom_link_style_end]>\[[start_signed_up ? "Описаться" : "Записаться"]\]</a>"
+		var/act_signup = "[custom_link_style_start]<a href='byond://?src=[REF(poll_alert_button)];signup=1'[custom_link_style_end]>\[[start_signed_up ? "Отписаться" : "Записаться"]\]</a>"
 		var/act_never = ""
 		if(ignore_category)
 			act_never = "[custom_link_style_start]<a href='byond://?src=[REF(poll_alert_button)];never=1'[custom_link_style_end]>\[Не в этом раунде\]</a>"
