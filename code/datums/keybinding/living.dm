@@ -167,7 +167,7 @@
 	return TRUE
 
 /datum/keybinding/living/toggle_throw_mode
-	hotkey_keys = list("R", "Southwest") // BANDASTATION EDIT
+	hotkey_keys = list("R", "Southwest") // END
 	name = "toggle_throw_mode"
 	full_name = "Режим броска (переключить)"
 	description = "Переключает будете ли вы бросать текущий предмет"
