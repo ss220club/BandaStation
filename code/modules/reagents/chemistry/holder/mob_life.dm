@@ -127,7 +127,7 @@
 
 		if(reagent.overdosed)
 			need_mob_update += reagent.overdose_process(owner, seconds_per_tick, metabolization_ratio)
-
+// BANDASTATION EDIT START: NEW CHEMS
 		if(reagent.overdose_crit_threshold && reagent.volume >= reagent.overdose_crit_threshold && !reagent.overdosed_crit)
 			reagent.overdosed_crit = TRUE
 			need_mob_update += reagent.on_overdose_crit_start(owner, metabolization_ratio)
@@ -135,7 +135,7 @@
 
 		if(reagent.volume <= reagent.overdose_crit_threshold && reagent.overdosed_crit && reagent.overdose_crit_threshold)
 			reagent.overdosed_crit = FALSE
-
+// BANDASTATION EDIT END: NEW CHEMS
 	reagent.current_cycle++
 	need_mob_update += reagent.on_mob_life(owner, seconds_per_tick, metabolization_ratio)
 
