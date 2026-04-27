@@ -1,6 +1,6 @@
 /datum/reagent/medicine/tramadol
 	name = "Tramadol"
-	description = "Простой, но эффективный обезболивающий препарат. Может вызывать зависимость. При передозировке вызывает отравление и зависимость."
+	description = "Простой, но эффективный обезболивающий препарат. При передозировке вызывает отравление и зависимость."
 	color = "#8a8686"
 	metabolization_rate = REAGENTS_METABOLISM * 0.5
 	overdose_threshold = 30
