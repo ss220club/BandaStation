@@ -11,7 +11,6 @@ type BodyModificationsProps = {
   handleClose: () => void;
 };
 
-// Цвета производителей протезов для визуальной идентификации
 const MANUFACTURER_COLORS: Record<string, string> = {
   none: '#666666',
   general: '#888888',
@@ -33,7 +32,6 @@ const MANUFACTURER_COLORS: Record<string, string> = {
   'zeng-hu': '#ff9800',
 };
 
-// Краткие описания производителей (показываются при наведении на выбор)
 const MANUFACTURER_DESCRIPTIONS: Record<string, string> = {
   none: 'Протез не установлен. Стандартная анатомия.',
   general: 'Стандартный протез без фирменной маркировки.',
@@ -66,13 +64,11 @@ const MANUFACTURER_DESCRIPTIONS: Record<string, string> = {
   'zeng-hu': 'Протезы Zeng-Hu Pharmaceuticals. Биосовместимость в приоритете.',
 };
 
-// Получить цвет производителя
 const getManufacturerColor = (name: string): string => {
   const lowerName = name.toLowerCase();
   return MANUFACTURER_COLORS[lowerName] || '#888888';
 };
 
-// Маппинг категорий на иконки и цвета
 const CATEGORY_CONFIG: Record<
   string,
   { icon: string; colorClass: string; order: number; color: string }
@@ -136,8 +132,11 @@ const DEFAULT_CATEGORY_CONFIG = {
   color: '#00f0ff',
 };
 
-// Экран ограничения доступа для КПБ (корпоративный стиль)
-const IPCAccessDeniedScreen = (props: { onClose: () => void }) => {
+type IPCAccessDeniedScreenProps = {
+  onClose: () => void;
+};
+
+function IPCAccessDeniedScreen(props: IPCAccessDeniedScreenProps) {
   const { act } = useBackend<PreferencesMenuData>();
   const [reportHovered, setReportHovered] = useState(false);
   const [glitchLabel, setGlitchLabel] = useState('Сообщить об ошибке');
@@ -185,7 +184,6 @@ const IPCAccessDeniedScreen = (props: { onClose: () => void }) => {
           'linear-gradient(160deg, rgba(8,8,16,0.9) 0%, rgba(16,8,8,0.9) 100%)',
       }}
     >
-      {/* CSS-анимации для глитч-эффектов (безопасные: < 1 вспышки/с, без steps) */}
       <style>{`
         @keyframes ipc-glitch-shake {
           0%, 75%, 100% { transform: translate(0,0) skewX(0deg); }
@@ -214,7 +212,6 @@ const IPCAccessDeniedScreen = (props: { onClose: () => void }) => {
         }
       `}</style>
 
-      {/* Фирменная шапка */}
       <Box
         style={{
           fontFamily: 'monospace',
@@ -231,7 +228,6 @@ const IPCAccessDeniedScreen = (props: { onClose: () => void }) => {
         Dark Industries™ — RipperDoc® Modification Suite v2.77
       </Box>
 
-      {/* Иконка */}
       <Icon
         name="triangle-exclamation"
         style={{
@@ -245,7 +241,6 @@ const IPCAccessDeniedScreen = (props: { onClose: () => void }) => {
         }}
       />
 
-      {/* Заголовок ошибки */}
       <Box
         bold
         style={{
@@ -260,7 +255,6 @@ const IPCAccessDeniedScreen = (props: { onClose: () => void }) => {
         Неустановленная форма жизни обнаружена
       </Box>
 
-      {/* Корпоративное письмо */}
       <Box
         style={{
           maxWidth: '420px',
@@ -303,7 +297,6 @@ const IPCAccessDeniedScreen = (props: { onClose: () => void }) => {
         </Box>
       </Box>
 
-      {/* Код ошибки */}
       <Box
         style={{
           fontFamily: 'monospace',
@@ -320,7 +313,6 @@ const IPCAccessDeniedScreen = (props: { onClose: () => void }) => {
           .padStart(4, '0')}{' '}
         · REF: DARKINDUSTRIES-RIPPERDOC
       </Box>
-      {/* Кнопки */}
       <Box style={{ display: 'flex', gap: '0.75rem' }}>
         <Box
           style={{
@@ -344,7 +336,6 @@ const IPCAccessDeniedScreen = (props: { onClose: () => void }) => {
           <Icon name="times" /> Закрыть
         </Box>
 
-        {/* Кнопка "Сообщить об ошибке" с глитч-эффектом при наведении */}
         <div
           onMouseEnter={() => {
             setReportHovered(true);
@@ -405,9 +396,8 @@ const IPCAccessDeniedScreen = (props: { onClose: () => void }) => {
       </Box>
     </Box>
   );
-};
+}
 
-// ─── Загрузочный экран RipperDoc ─────────────────────────────────────────────
 
 const BOOT_SEQUENCE = [
   'Загрузка нейроинтерфейса',
@@ -427,12 +417,14 @@ const BOOT_TS = [
   '[ 00:01.247 ]',
 ];
 
-// Задержки появления каждой фазы (мс)
 const BOOT_DELAYS = [350, 620, 890, 1140, 1390, 1640, 2050, 2500];
 
-const RipperDocBootScreen = (props: { onComplete: () => void }) => {
+type RipperDocBootScreenProps = {
+  onComplete: () => void;
+};
+
+function RipperDocBootScreen(props: RipperDocBootScreenProps) {
   const { act } = useBackend<PreferencesMenuData>();
-  // 0 = только шапка, 1-6 = строки boot-лога, 7 = "ГОТОВО", 8 = завершено
   const [phase, setPhase] = useState(0);
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
@@ -487,7 +479,6 @@ const RipperDocBootScreen = (props: { onComplete: () => void }) => {
         }
       `}</style>
 
-      {/* Строки развёртки (CRT-эффект) */}
       <Box
         style={{
           position: 'absolute',
@@ -499,7 +490,6 @@ const RipperDocBootScreen = (props: { onComplete: () => void }) => {
         }}
       />
 
-      {/* Контент */}
       <Box
         style={{
           position: 'relative',
@@ -508,7 +498,6 @@ const RipperDocBootScreen = (props: { onComplete: () => void }) => {
           maxWidth: '560px',
         }}
       >
-        {/* Логотип */}
         <Box
           style={{
             textAlign: 'center',
@@ -555,7 +544,6 @@ const RipperDocBootScreen = (props: { onComplete: () => void }) => {
           </Box>
         </Box>
 
-        {/* Заголовок лога */}
         <Box
           style={{
             fontSize: '0.65rem',
@@ -570,7 +558,6 @@ const RipperDocBootScreen = (props: { onComplete: () => void }) => {
           ─── Инициализация системы ───
         </Box>
 
-        {/* Boot-лог */}
         <Box style={{ marginBottom: '1.5rem', minHeight: '9rem' }}>
           {BOOT_SEQUENCE.map((line, i) => {
             if (phase < i + 1) return null;
@@ -624,7 +611,6 @@ const RipperDocBootScreen = (props: { onComplete: () => void }) => {
           })}
         </Box>
 
-        {/* Прогресс-бар */}
         <Box
           style={{
             background: 'rgba(0,0,0,0.5)',
@@ -661,7 +647,6 @@ const RipperDocBootScreen = (props: { onComplete: () => void }) => {
           </span>
         </Box>
 
-        {/* Финальное сообщение */}
         {phase >= 7 && (
           <Box
             style={{
@@ -679,7 +664,6 @@ const RipperDocBootScreen = (props: { onComplete: () => void }) => {
         )}
       </Box>
 
-      {/* Подсказка «кликни для пропуска» */}
       <Box
         style={{
           position: 'absolute',
@@ -696,15 +680,12 @@ const RipperDocBootScreen = (props: { onComplete: () => void }) => {
       </Box>
     </Box>
   );
-};
+}
 
-// ─── Основная страница ────────────────────────────────────────────────────────
 
-// Флаг вне компонента — переживает закрытие/открытие модала.
-// Загрузочная анимация показывается только при первом открытии за сессию.
 let ripperDocBootPlayed = false;
 
-export const BodyModificationsPage = (props: BodyModificationsProps) => {
+export function BodyModificationsPage(props: BodyModificationsProps) {
   const serverData = useServerPrefs();
   const { data } = useBackend<PreferencesMenuData>();
   const [bootComplete, setBootComplete] = useState(ripperDocBootPlayed);
@@ -725,9 +706,49 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
           flexDirection: 'column',
           overflow: 'hidden',
           color: 'white',
+          position: 'relative',
         }}
       >
-        {/* Заголовок */}
+        <style>{`
+          @keyframes rd-ambient-pulse {
+            0%, 100% { opacity: 0.35; transform: scale(1); }
+            50% { opacity: 0.65; transform: scale(1.06); }
+          }
+          @keyframes rd-scan-sweep {
+            0% { transform: translateX(-120%); opacity: 0; }
+            20% { opacity: 0.18; }
+            65% { opacity: 0.12; }
+            100% { transform: translateX(120%); opacity: 0; }
+          }
+          @keyframes rd-frame-pulse {
+            0%, 100% { box-shadow: inset 0 0 0 1px rgba(255,42,109,0.16), 0 0 0 rgba(255,42,109,0); }
+            50% { box-shadow: inset 0 0 0 1px rgba(255,42,109,0.35), 0 0 18px rgba(255,42,109,0.18); }
+          }
+        `}</style>
+        <Box
+          style={{
+            position: 'absolute',
+            inset: '-25%',
+            background:
+              'radial-gradient(circle at 10% 15%, rgba(255,42,109,0.2), transparent 40%), radial-gradient(circle at 90% 85%, rgba(0,240,255,0.13), transparent 44%)',
+            pointerEvents: 'none',
+            animation: 'rd-ambient-pulse 8s ease-in-out infinite',
+            zIndex: 0,
+          }}
+        />
+        <Box
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            width: '42%',
+            background:
+              'linear-gradient(90deg, transparent 0%, rgba(0,240,255,0.08) 48%, transparent 100%)',
+            pointerEvents: 'none',
+            animation: 'rd-scan-sweep 9s linear infinite',
+            zIndex: 0,
+          }}
+        />
         <Box
           style={{
             display: 'flex',
@@ -737,6 +758,8 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
             background:
               'linear-gradient(90deg, rgba(255,42,109,0.2), transparent)',
             borderBottom: '1px solid rgba(255,42,109,0.3)',
+            position: 'relative',
+            zIndex: 1,
           }}
         >
           <Box
@@ -768,45 +791,43 @@ export const BodyModificationsPage = (props: BodyModificationsProps) => {
           </Button>
         </Box>
 
-        {/* Основной контент: сначала загрузка, затем меню */}
-        {!bootComplete ? (
-          <RipperDocBootScreen
-            onComplete={() => {
-              ripperDocBootPlayed = true;
-              setBootComplete(true);
-            }}
-          />
-        ) : (
-          <BodyModificationsContent
-            bodyModifications={serverData.body_modifications || []}
-            handleClose={props.handleClose}
-          />
-        )}
+        <Box style={{ position: 'relative', zIndex: 1, display: 'flex', flex: 1 }}>
+          {!bootComplete ? (
+            <RipperDocBootScreen
+              onComplete={() => {
+                ripperDocBootPlayed = true;
+                setBootComplete(true);
+              }}
+            />
+          ) : (
+            <BodyModificationsContent
+              bodyModifications={serverData.body_modifications || []}
+              handleClose={props.handleClose}
+            />
+          )}
+        </Box>
       </Box>
     </Modal>
   );
-};
+}
 
 type BodyModificationsContentProps = {
   bodyModifications: BodyModification[];
   handleClose: () => void;
 };
 
-const BodyModificationsContent = (props: BodyModificationsContentProps) => {
+function BodyModificationsContent(props: BodyModificationsContentProps) {
   const { act, data } = useBackend<PreferencesMenuData>();
   const {
     applied_body_modifications = [],
     incompatible_body_modifications = [],
   } = data;
 
-  // Вычисляем до хуков — нужно для useMemo ниже
   const isIPC = data.character_preferences?.misc?.species === 'ipc';
 
-  // Все хуки вызываются безусловно (правила React)
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [selectedMod, setSelectedMod] = useState<BodyModification | null>(null);
 
-  // Категории с аугментированными конечностями — для них не показываем детальный превью предмета
   const AUGMENTED_LIMB_CATEGORIES = [
     'Роботизация',
     'Robotic',
@@ -816,7 +837,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
   const isAugmentedLimbCategory = (cat: string) =>
     AUGMENTED_LIMB_CATEGORIES.includes(cat);
 
-  // Категории и модификации, скрытые от не-IPC рас
   const IPC_ONLY_CATEGORIES = ['IPC Chassis', 'IPC Chassis (HEF)'];
   const IPC_ONLY_MODIFICATIONS = [
     'positronic',
@@ -833,7 +853,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
     );
   };
 
-  // Группируем модификации по категориям (для IPC — пустой результат, они увидят экран ограничения)
   const { categories, modificationsByCategory } = useMemo(() => {
     if (isIPC)
       return {
@@ -862,7 +881,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
     };
   }, [props.bodyModifications, isIPC]);
 
-  // Установленные модификации
   const installedMods = useMemo(() => {
     if (isIPC) return [] as BodyModification[];
     return props.bodyModifications.filter((mod) =>
@@ -870,12 +888,10 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
     );
   }, [props.bodyModifications, applied_body_modifications, isIPC]);
 
-  // Ранний выход для КПБ — после всех хуков
   if (isIPC) {
     return <IPCAccessDeniedScreen onClose={props.handleClose} />;
   }
 
-  // Общее количество отфильтрованных модификаций
   const filteredModsCount = useMemo(() => {
     return Object.values(modificationsByCategory).reduce(
       (sum, mods) => sum + mods.length,
@@ -883,7 +899,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
     );
   }, [modificationsByCategory]);
 
-  // Текущая выбранная категория или первая
   const currentCategory = activeCategory || categories[0] || null;
   const currentMods = currentCategory
     ? modificationsByCategory[currentCategory] || []
@@ -892,31 +907,36 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
   const getCategoryConfig = (category: string) =>
     CATEGORY_CONFIG[category] || DEFAULT_CATEGORY_CONFIG;
 
-  // Стили для панелей
   const panelStyles = {
     categories: {
-      width: '170px',
-      minWidth: '170px',
-      background: 'rgba(0, 0, 0, 0.3)',
-      borderRight: '1px solid rgba(255, 42, 109, 0.2)',
+      width: '190px',
+      minWidth: '190px',
+      background: 'linear-gradient(180deg, rgba(0,0,0,0.36) 0%, rgba(0,0,0,0.26) 100%)',
+      border: '1px solid rgba(255, 42, 109, 0.18)',
+      borderRadius: '6px',
       display: 'flex',
       flexDirection: 'column' as const,
       overflowY: 'auto' as const,
     },
     preview: {
-      width: '240px',
-      minWidth: '240px',
+      width: '280px',
+      minWidth: '280px',
       display: 'flex',
       flexDirection: 'column' as const,
       alignItems: 'stretch',
-      padding: '0.5rem',
-      background: 'transparent',
+      padding: '0.55rem',
+      background:
+        'linear-gradient(180deg, rgba(14,14,22,0.7) 0%, rgba(9,9,16,0.55) 100%)',
+      border: '1px solid rgba(255, 42, 109, 0.18)',
+      borderRadius: '6px',
     },
     list: {
       flex: 1,
-      minWidth: '300px',
-      background: 'rgba(0, 0, 0, 0.2)',
-      borderLeft: '1px solid rgba(255, 42, 109, 0.2)',
+      minWidth: '340px',
+      background:
+        'linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 100%)',
+      border: '1px solid rgba(255, 42, 109, 0.18)',
+      borderRadius: '6px',
       display: 'flex',
       flexDirection: 'column' as const,
       overflow: 'hidden',
@@ -924,24 +944,94 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
   };
 
   return (
-    <Box style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-      {/* Левая панель - Категории */}
-      <Box style={panelStyles.categories}>
+    <Box
+      style={{
+        display: 'flex',
+        flex: 1,
+        overflow: 'hidden',
+        flexDirection: 'column',
+        gap: '0.45rem',
+        padding: '0.45rem',
+      }}
+    >
+      <Box
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.45rem',
+          padding: '0.45rem 0.6rem',
+          background:
+            'linear-gradient(90deg, rgba(255,42,109,0.14) 0%, rgba(0,240,255,0.08) 100%)',
+          border: '1px solid rgba(255,42,109,0.2)',
+          borderRadius: '6px',
+        }}
+      >
         <Box
           style={{
-            padding: '0.6rem 0.75rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            padding: '0.22rem 0.45rem',
+            borderRadius: '4px',
+            background: 'rgba(57,255,20,0.12)',
+            border: '1px solid rgba(57,255,20,0.3)',
+            color: '#39ff14',
+            fontSize: '0.75rem',
+          }}
+        >
+          <Icon name="check-circle" />
+          <Box as="span">{installedMods.length}</Box>
+        </Box>
+        <Box
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            padding: '0.22rem 0.45rem',
+            borderRadius: '4px',
+            background: 'rgba(0,240,255,0.12)',
+            border: '1px solid rgba(0,240,255,0.3)',
+            color: '#00f0ff',
+            fontSize: '0.75rem',
+          }}
+        >
+          <Icon name="list" />
+          <Box as="span">{filteredModsCount}</Box>
+        </Box>
+        <Box
+          style={{
+            marginLeft: 'auto',
+            fontSize: '0.7rem',
+            color: '#9ea3b0',
+            letterSpacing: '0.5px',
+            textTransform: 'uppercase',
+          }}
+        >
+          {currentCategory || ''}
+        </Box>
+      </Box>
+
+      <Box style={{ display: 'flex', flex: 1, overflow: 'hidden', gap: '0.45rem' }}>
+        <Box style={panelStyles.categories}>
+        <Box
+          style={{
+            padding: '0.62rem 0.75rem',
             fontSize: '0.75rem',
             textTransform: 'uppercase',
             letterSpacing: '1px',
             color: '#8a8a9a',
-            borderBottom: '1px solid rgba(255,42,109,0.1)',
+            borderBottom: '1px solid rgba(255,42,109,0.16)',
             fontWeight: 600,
+            position: 'sticky',
+            top: 0,
+            zIndex: 2,
+            background: 'rgba(15,12,20,0.92)',
+            backdropFilter: 'blur(2px)',
           }}
         >
           КАТЕГОРИИ
         </Box>
 
-        {/* Установленные */}
         {installedMods.length > 0 && (
           <Box
             style={{
@@ -958,6 +1048,7 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
+              transition: 'background 0.18s ease, border-color 0.18s ease',
             }}
             onClick={() => {
               act('play_click_sound');
@@ -982,7 +1073,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
           </Box>
         )}
 
-        {/* Категории модификаций */}
         {categories.map((category) => {
           const config = getCategoryConfig(category);
           const count = modificationsByCategory[category]?.length || 0;
@@ -1001,6 +1091,7 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
+                transition: 'background 0.18s ease, border-color 0.18s ease',
               }}
               onClick={() => {
                 act('play_click_sound');
@@ -1038,9 +1129,7 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
         )}
       </Box>
 
-      {/* Центральная панель — кукла персонажа + предпросмотр модификации */}
       <Box style={panelStyles.preview}>
-        {/* Заголовок панели */}
         <Box
           style={{
             fontSize: '0.65rem',
@@ -1048,14 +1137,15 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
             letterSpacing: '1px',
             color: '#8a8a9a',
             textAlign: 'center',
-            marginBottom: '0.4rem',
+            marginBottom: '0.5rem',
             fontWeight: 600,
+            paddingBottom: '0.35rem',
+            borderBottom: '1px solid rgba(255,42,109,0.16)',
           }}
         >
           ПРЕДПРОСМОТР
         </Box>
 
-        {/* Кукла персонажа */}
         <Box
           style={{
             border: '1px solid rgba(255,42,109,0.35)',
@@ -1065,12 +1155,12 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
             marginBottom: '0.5rem',
             display: 'flex',
             justifyContent: 'center',
+            animation: 'rd-frame-pulse 3.6s ease-in-out infinite',
           }}
         >
           <CharacterPreview height="270px" id={data.character_preview_view} />
         </Box>
 
-        {/* Детали выбранной модификации (кроме аугментированных конечностей) */}
         {selectedMod && !isAugmentedLimbCategory(selectedMod.category) ? (
           <Box
             style={{
@@ -1083,7 +1173,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
               overflow: 'hidden',
             }}
           >
-            {/* Иконка категории */}
             <Box style={{ textAlign: 'center', marginBottom: '0.4rem' }}>
               <Icon
                 name={getCategoryConfig(selectedMod.category).icon}
@@ -1094,7 +1183,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
                 }}
               />
             </Box>
-            {/* Название */}
             <Box
               bold
               style={{
@@ -1107,7 +1195,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
             >
               {selectedMod.name}
             </Box>
-            {/* Категория */}
             <Box
               style={{
                 fontSize: '0.65rem',
@@ -1120,7 +1207,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
             >
               {selectedMod.category}
             </Box>
-            {/* Описание */}
             {selectedMod.description && (
               <Box
                 style={{
@@ -1135,7 +1221,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
                 {selectedMod.description}
               </Box>
             )}
-            {/* Стоимость */}
             {selectedMod.cost !== undefined && selectedMod.cost > 0 && (
               <Box
                 style={{
@@ -1156,7 +1241,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
             )}
           </Box>
         ) : (
-          /* Компактная статистика когда нет выбранной модификации */
           <Box
             style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}
           >
@@ -1228,7 +1312,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
         )}
       </Box>
 
-      {/* Правая панель - Список модификаций */}
       <Box style={panelStyles.list}>
         <Box
           style={{
@@ -1239,15 +1322,19 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
             letterSpacing: '1px',
             fontWeight: 600,
             color: '#ff2a6d',
+            position: 'sticky',
+            top: 0,
+            zIndex: 2,
+            background: 'rgba(14,11,20,0.94)',
+            backdropFilter: 'blur(2px)',
           }}
         >
           {activeCategory === '__installed__'
             ? 'УСТАНОВЛЕННЫЕ'
             : currentCategory?.toUpperCase() || 'МОДИФИКАЦИИ'}
         </Box>
-        <Box style={{ flex: 1, overflowY: 'auto', padding: '0.5rem' }}>
+        <Box style={{ flex: 1, overflowY: 'auto', padding: '0.55rem' }}>
           {activeCategory === '__installed__' ? (
-            // Показываем установленные
             installedMods.length > 0 ? (
               installedMods.map((mod) => (
                 <ModificationCard
@@ -1255,6 +1342,7 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
                   modification={mod}
                   isInstalled
                   isIncompatible={false}
+                  isSelected={selectedMod?.key === mod.key}
                   onAdd={() =>
                     act('apply_body_modification', {
                       body_modification_key: mod.key,
@@ -1274,7 +1362,6 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
               </Box>
             )
           ) : currentMods.length > 0 ? (
-            // Показываем модификации категории
             currentMods.map((mod) => {
               const isInstalled = applied_body_modifications.includes(mod.key);
               const isIncompatible =
@@ -1287,6 +1374,7 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
                   modification={mod}
                   isInstalled={isInstalled}
                   isIncompatible={isIncompatible}
+                  isSelected={selectedMod?.key === mod.key}
                   onAdd={() =>
                     act('apply_body_modification', {
                       body_modification_key: mod.key,
@@ -1308,31 +1396,34 @@ const BodyModificationsContent = (props: BodyModificationsContentProps) => {
           )}
         </Box>
       </Box>
+      </Box>
     </Box>
   );
-};
+}
 
-// Карточка модификации
 type ModificationCardProps = {
   modification: BodyModification;
   isInstalled: boolean;
   isIncompatible: boolean;
+  isSelected: boolean;
   onAdd: () => void;
   onRemove: () => void;
   onSelect: () => void;
 };
 
-const ModificationCard = (props: ModificationCardProps) => {
+function ModificationCard(props: ModificationCardProps) {
   const {
     modification,
     isInstalled,
     isIncompatible,
+    isSelected,
     onAdd,
     onRemove,
     onSelect,
   } = props;
   const { act, data } = useBackend<PreferencesMenuData>();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const manufacturers = data.manufacturers?.[modification.key] || null;
   const selectedManufacturer =
@@ -1342,7 +1433,6 @@ const ModificationCard = (props: ModificationCardProps) => {
   const categoryConfig =
     CATEGORY_CONFIG[modification.category] || DEFAULT_CATEGORY_CONFIG;
 
-  // Определяем цвет границы в зависимости от состояния
   let borderColor = 'rgba(255,42,109,0.3)';
   let bgGradient =
     'linear-gradient(135deg, rgba(26,26,36,0.9) 0%, rgba(10,10,18,0.95) 100%)';
@@ -1356,22 +1446,38 @@ const ModificationCard = (props: ModificationCardProps) => {
   }
 
   return (
-    <Box
-      style={{
-        background: bgGradient,
-        border: `1px solid ${borderColor}`,
-        borderRadius: '4px',
-        marginBottom: '0.5rem',
-        cursor: 'pointer',
-        position: 'relative',
-        opacity: isIncompatible ? 0.5 : 1,
-      }}
-      onClick={() => {
-        act('play_click_sound');
-        onSelect();
-      }}
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Индикатор установленной модификации */}
+      <Box
+        style={{
+          background: bgGradient,
+          border: `1px solid ${borderColor}`,
+          borderRadius: '4px',
+          marginBottom: '0.5rem',
+          cursor: 'pointer',
+          position: 'relative',
+          opacity: isIncompatible ? 0.5 : 1,
+          transform:
+            isHovered && !isIncompatible
+              ? 'translateY(-1px) scale(1.008)'
+              : 'none',
+          boxShadow: isSelected
+            ? isInstalled
+              ? '0 0 0 1px rgba(57,255,20,0.45), 0 8px 24px rgba(57,255,20,0.16)'
+              : '0 0 0 1px rgba(255,42,109,0.45), 0 8px 24px rgba(255,42,109,0.18)'
+            : isHovered && !isIncompatible
+              ? '0 6px 18px rgba(0,0,0,0.35)'
+              : 'none',
+          transition:
+            'transform 0.16s ease, box-shadow 0.22s ease, border-color 0.2s ease, opacity 0.2s ease',
+        }}
+        onClick={() => {
+          act('play_click_sound');
+          onSelect();
+        }}
+      >
       {isInstalled && (
         <Box
           style={{
@@ -1394,7 +1500,6 @@ const ModificationCard = (props: ModificationCardProps) => {
           gap: '0.6rem',
         }}
       >
-        {/* Иконка */}
         <Box
           style={{
             width: '32px',
@@ -1408,12 +1513,14 @@ const ModificationCard = (props: ModificationCardProps) => {
             borderRadius: '4px',
             fontSize: '0.95rem',
             color: isInstalled ? '#39ff14' : categoryConfig.color,
+            transform:
+              isHovered && !isIncompatible ? 'scale(1.06) rotate(-2deg)' : 'none',
+            transition: 'transform 0.16s ease, border-color 0.2s ease',
           }}
         >
           <Icon name={categoryConfig.icon} />
         </Box>
 
-        {/* Информация */}
         <Box style={{ flex: 1, minWidth: 0 }}>
           <Box
             style={{
@@ -1438,7 +1545,6 @@ const ModificationCard = (props: ModificationCardProps) => {
           </Box>
         </Box>
 
-        {/* Действия */}
         <Box
           style={{
             display: 'flex',
@@ -1448,7 +1554,6 @@ const ModificationCard = (props: ModificationCardProps) => {
           }}
           onClick={(e: React.MouseEvent) => e.stopPropagation()}
         >
-          {/* Выбор производителя для протезов - Cyberpunk стиль */}
           {Array.isArray(manufacturers) && isInstalled && (
             <Box
               style={{ position: 'relative', zIndex: dropdownOpen ? 100 : 1 }}
@@ -1479,7 +1584,6 @@ const ModificationCard = (props: ModificationCardProps) => {
                   setDropdownOpen(!dropdownOpen);
                 }}
               >
-                {/* Цветовой индикатор */}
                 <Box
                   style={{
                     width: '8px',
@@ -1576,7 +1680,6 @@ const ModificationCard = (props: ModificationCardProps) => {
                             setDropdownOpen(false);
                           }}
                         >
-                          {/* Цветовой индикатор */}
                           <Box
                             style={{
                               width: '8px',
@@ -1672,6 +1775,7 @@ const ModificationCard = (props: ModificationCardProps) => {
           )}
         </Box>
       </Box>
-    </Box>
+      </Box>
+    </div>
   );
-};
+}
