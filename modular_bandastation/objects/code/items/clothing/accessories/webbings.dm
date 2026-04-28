@@ -9,12 +9,13 @@
 
 /datum/storage/pockets/ammo_webbing
 	max_slots = 6
-	max_specific_storage = WEIGHT_CLASS_SMALL
+	max_specific_storage = WEIGHT_CLASS_NORMAL
 
 /datum/storage/pockets/ammo_webbing/New()
 	. = ..()
 	set_holdable(list(
 		/obj/item/ammo_box/magazine
+		/obj/item/ammo_box/speedloader
 	))
 
 /obj/item/clothing/accessory/ammo_vest/Initialize(mapload)
