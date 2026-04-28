@@ -6,10 +6,6 @@
 	var/obj/item/organ/brain/positronic/brain = M.get_organ_slot(ORGAN_SLOT_BRAIN)
 	if(!brain)
 		return FALSE
-
-	if(!M.client)
-		return FALSE
-
 	if(M.stat != DEAD && M.stat != UNCONSCIOUS)
 		return FALSE
 	M.set_stat(CONSCIOUS)
@@ -66,10 +62,10 @@
 			positronic_damage += rand(10, 20)
 			to_chat(owner, span_danger("Предупреждение: Обнаружено повреждение данных."))
 	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		if(IS_IPC(H))
-			var/datum/species/ipc/S = H.dna.species
-			S.handle_emp(H, severity)
+		var/mob/living/carbon/human/A = owner
+		if(isipc(A))
+			var/datum/species/ipc/S = A.dna.species
+			S.handle_emp(A, severity)
 
 // Вариант с MMI
 /obj/item/organ/brain/positronic/mmi

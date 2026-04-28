@@ -209,8 +209,6 @@
 /datum/species/ipc/proc/on_battery_updated(mob/living/carbon/human/H)
 	SIGNAL_HANDLER
 	update_ipc_battery_hud(H)
-	check_chassis_integrity(H)
-
 
 /datum/species/ipc/proc/on_limb_damaged(mob/living/carbon/human/H, obj/item/bodypart/limb, brute, burn)
 	SIGNAL_HANDLER
@@ -218,12 +216,12 @@
 		return
 	check_chassis_integrity(H)
 
-/datum/species/ipc/proc/check_chassis_integrity(mob/living/carbon/human/H)
-	if(!H || !IS_IPC(H))
+/datum/species/ipc/proc/check_chassis_integrity(mob/living/carbon/human/A)
+	if(!A || !isipc(A))
 		return
 
 	var/is_breached = FALSE
-	for(var/obj/item/bodypart/B in H.bodyparts)
+	for(var/obj/item/bodypart/B in A.bodyparts)
 		if(B.brute_dam >= (B.max_damage * IPC_CHASSIS_BREACH_THRESHOLD))
 			is_breached = TRUE
 			break
@@ -231,11 +229,13 @@
 	// При пробитии корпуса IPC теряет защиту от давления,
 	// при восстановлении — возвращает ее.
 	if(is_breached)
-		REMOVE_TRAIT(H, TRAIT_RESISTHIGHPRESSURE, IPC_PRESSURE_SOURCE)
-		REMOVE_TRAIT(H, TRAIT_RESISTLOWPRESSURE, IPC_PRESSURE_SOURCE)
+		REMOVE_TRAIT(A, TRAIT_RESISTHIGHPRESSURE, IPC_PRESSURE_SOURCE)
+		REMOVE_TRAIT(A, TRAIT_RESISTLOWPRESSURE, IPC_PRESSURE_SOURCE)
+		ADD_TRAIT(A, TRAIT_IPC_CHASSIS_BREACHED, TRAIT_SOURCE_IPC_CHASSIS)
 	else
-		ADD_TRAIT(H, TRAIT_RESISTHIGHPRESSURE, IPC_PRESSURE_SOURCE)
-		ADD_TRAIT(H, TRAIT_RESISTLOWPRESSURE, IPC_PRESSURE_SOURCE)
+		ADD_TRAIT(A, TRAIT_RESISTHIGHPRESSURE, IPC_PRESSURE_SOURCE)
+		ADD_TRAIT(A, TRAIT_RESISTLOWPRESSURE, IPC_PRESSURE_SOURCE)
+		REMOVE_TRAIT(A, TRAIT_IPC_CHASSIS_BREACHED, TRAIT_SOURCE_IPC_CHASSIS)
 
 /datum/species/ipc/handle_environment_pressure(mob/living/carbon/human/H, datum/gas_mixture/environment, seconds_per_tick)
 	if(!HAS_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED))
