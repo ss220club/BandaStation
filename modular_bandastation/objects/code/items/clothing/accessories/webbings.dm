@@ -14,7 +14,7 @@
 /datum/storage/pockets/ammo_webbing/New()
 	. = ..()
 	set_holdable(list(
-		/obj/item/ammo_box/magazine
+		/obj/item/ammo_box/magazine,
 		/obj/item/ammo_box/speedloader
 	))
 
