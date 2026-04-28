@@ -1,6 +1,6 @@
 //MARK: Обычная кобура, пустая
 /obj/item/clothing/accessory/holster
-	name = "кобура под пистолет"
+	name = "holster"
 	desc = "Обычная, ничем не примечательная кобура под одно небольшое оружие."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/holsters.dmi'
 	icon_state = "holster"
@@ -33,17 +33,6 @@
 /obj/item/clothing/accessory/holster/Initialize(mapload)
 	. = ..()
 	create_storage(storage_type = /datum/storage/pockets/holst)
-
-/obj/item/clothing/accessory/holst/can_attach_accessory(obj/item/clothing/under/attach_to, mob/living/user)
-	var/result = ..()
-	if(!result)
-		return
-
-	if(!isnull(attach_to.atom_storage))
-		if(user)
-			attach_to.balloon_alert(user, "Этот предмет не помещается!")
-		return FALSE
-	return TRUE
 
 /obj/item/clothing/accessory/holster/Entered(atom/movable/I)
 	. = ..()
@@ -102,7 +91,7 @@
 
 //MARK: Кобура детектива, пустая
 /obj/item/clothing/accessory/holster/detective
-	name = "кобура детектива"
+	name = "detective holster"
 	desc = "Улучшенная кобура, специально для проведения самых громких и выдающихся расследований. Есть дополнительные кармашки под магазины."
 
 /datum/storage/pockets/holst/dec
@@ -207,7 +196,7 @@
 
 //MARK: Разные виды тактической кобуры (2 свободных слота)
 /obj/item/clothing/accessory/holster/tacticool
-	name = "тактическая кобура"
+	name = "tacticool holster"
 	desc = "Темная, тактическая кобура с двумя карманами, предназначенная для выполнения специальных задач. Особые крепления позволяют её надеть поверх униформы"
 	icon_state = "operative_holster"
 	worn_icon = 'modular_bandastation/objects/icons/onbody/holsters.dmi'
@@ -278,7 +267,7 @@
 	new /obj/item/ammo_box/magazine/r10mm(src)
 
 /obj/item/clothing/accessory/holster/tacticool/ussp_commander
-	icon_state = "holster"
+	icon_state = "ussp commander holster"
 	desc = "Коричневая, тактическая кобура с двумя карманами, предназначенная для выполнения специальных задач. Особые крепления позволяют её надеть поверх униформы"
 
 /obj/item/clothing/accessory/holster/tacticool/ussp_commander/Initialize(mapload)
