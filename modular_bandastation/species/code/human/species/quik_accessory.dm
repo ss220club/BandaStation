@@ -1,0 +1,110 @@
+/mob/living/carbon/human/proc/quick_accessory_draw()
+
+	var/obj/item/clothing/under/U = w_uniform
+	if(!U)
+		to_chat(src, span_warning("На вас нет формы!"))
+		return
+
+	if(!LAZYLEN(U.attached_accessories))
+		to_chat(src, span_warning("Нет аксессуаров!"))
+		return
+
+	var/obj/item/clothing/accessory/target_accessory = null
+
+	// Ищем первый аксессуар со storage
+	for(var/obj/item/clothing/accessory/A in U.attached_accessories)
+		if(A.atom_storage)
+			target_accessory = A
+			break
+
+	if(!target_accessory)
+		to_chat(src, span_warning("Нет аксессуара с хранилищем!"))
+		return
+
+
+	// =====================================================
+	// СПЕЦИАЛЬНАЯ ЛОГИКА ТОЛЬКО ДЛЯ КОБУРЫ
+	// =====================================================
+
+	if(istype(target_accessory, /obj/item/clothing/accessory/holster))
+
+		//--------------------------------------------------
+		// 1. Если в руке уже есть пистолет → убрать в кобуру
+		//--------------------------------------------------
+
+		var/obj/item/gun/held_gun = null
+
+		if(istype(get_active_held_item(), /obj/item/gun))
+			held_gun = get_active_held_item()
+		else if(istype(get_inactive_held_item(), /obj/item/gun))
+			held_gun = get_inactive_held_item()
+
+		if(held_gun)
+			var/already_has_gun = FALSE
+
+			for(var/obj/item/I in target_accessory.atom_storage.real_location.contents)
+				if(istype(I, /obj/item/gun))
+					already_has_gun = TRUE
+					break
+
+			if(already_has_gun)
+				to_chat(src, span_warning("В кобуре уже есть оружие!"))
+				return
+
+			held_gun.forceMove(target_accessory)
+
+			to_chat(src, span_notice("Вы убираете [held_gun] в кобуру."))
+			return
+
+		//--------------------------------------------------
+		// 2. Если оружия в руке нет → достать оружие
+		//--------------------------------------------------
+
+		var/obj/item/gun/holstered_gun = null
+
+		for(var/obj/item/I in target_accessory.atom_storage.real_location.contents)
+			if(istype(I, /obj/item/gun))
+				holstered_gun = I
+				break
+
+		if(!holstered_gun)
+			to_chat(src, span_warning("В кобуре нет оружия!"))
+			return
+
+		holstered_gun.forceMove(src.loc)
+		put_in_hands(holstered_gun)
+
+		to_chat(src, span_notice("Вы быстро достаёте [holstered_gun]."))
+		return
+
+
+	// =====================================================
+	// ОБЫЧНАЯ ЛОГИКА ДЛЯ ЛЮБОГО ДРУГОГО АКСЕССУАРА
+	// (pocket protector, pouch и т.д.)
+	// =====================================================
+
+	var/obj/item/target_item = null
+
+	for(var/obj/item/I in target_accessory.atom_storage.real_location.contents)
+		target_item = I
+		break
+
+	if(!target_item)
+		to_chat(src, span_warning("Аксессуар пуст!"))
+		return
+
+	target_item.forceMove(src.loc)
+	put_in_hands(target_item)
+
+	to_chat(src, span_notice("Вы достаёте [target_item]."))
+
+/mob/living/carbon/human/Initialize(mapload)
+	. = ..()
+
+	RegisterSignal(src, COMSIG_KB_HUMAN_QUICK_ACCESSORY_DRAW_DOWN, PROC_REF(on_quick_accessory_draw))
+
+/mob/living/carbon/human/proc/on_quick_accessory_draw()
+
+	SIGNAL_HANDLER
+
+	quick_accessory_draw()

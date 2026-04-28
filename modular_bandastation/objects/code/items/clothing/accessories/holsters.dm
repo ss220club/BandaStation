@@ -267,7 +267,7 @@
 	new /obj/item/ammo_box/magazine/r10mm(src)
 
 /obj/item/clothing/accessory/holster/tacticool/ussp_commander
-	icon_state = "ussp commander holster"
+	icon_state = "holster"
 	desc = "Коричневая, тактическая кобура с двумя карманами, предназначенная для выполнения специальных задач. Особые крепления позволяют её надеть поверх униформы"
 
 /obj/item/clothing/accessory/holster/tacticool/ussp_commander/Initialize(mapload)
