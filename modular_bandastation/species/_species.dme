@@ -4,9 +4,9 @@
 
 #include "code/clothing/items.dm"
 
-#include "code/human/species/skills.dm"
 #include "code/human/species/quick_accessory.dm"
 #include "code/human/species/quick_accessory_keybind.dm"
+#include "code/human/species/skills.dm"
 #include "code/human/species_type/moth.dm"
 #include "code/human/species_type/skrell.dm"
 #include "code/human/species_type/tajaran.dm"
