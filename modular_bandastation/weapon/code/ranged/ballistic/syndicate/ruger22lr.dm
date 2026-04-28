@@ -1,4 +1,4 @@
-/obj/item/gun/ballistic/automatic/pistol/wu22lr
+/obj/item/gun/ballistic/automatic/pistol/ruger22lr
 	name = "Ruger .22 LR Tranquility Pistol"
 	desc = "Пистолет, использовавшийся в эпизодических шпионских операциях прошлого времени стал довольно популярным в нынешнее время из-за возможности нелетальной нейтрализации цели. Заставляет тебя ждать, да?"
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
