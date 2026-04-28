@@ -4,7 +4,7 @@
 /mob/living/basic/blood_worm/examining(atom/target, list/result)
 	add_special_examining_messages(target, result)
 
-/mob/living/basic/blood_worm/proc/on_host_examining(datum/source, atom/target, list/examine_strings)
+/mob/living/basic/blood_worm/proc/on_host_examining(datum/source, atom/target, list/examine_strings, list/examine_overrides)
 	SIGNAL_HANDLER
 	add_special_examining_messages(target, examine_strings)
 
@@ -35,7 +35,7 @@
 
 	var/potential_gain = total_blood_after - total_blood_now
 
-	var/rounded_volume = CEILING(cached_blood_volume, 1)
+	var/rounded_volume = ceil(cached_blood_volume)
 
 	var/growth_string = ""
 	if (HAS_TRAIT(bloodbag, TRAIT_BLOOD_WORM_HOST))
@@ -52,14 +52,14 @@
 		else
 			growth_string = ". Вы достигли пика роста"
 
-	var/synth_string = "[CEILING(synth_content * 100, 1)]%"
+	var/synth_string = "[ceil(synth_content * 100)]%"
 	switch(synth_content)
 		if (-INFINITY to 0)
 			synth_string = "не является"
 		if (1 to INFINITY)
 			synth_string = "является"
 		if (0 to 1)
-			synth_string = "[CEILING(synth_content * 100, 1)]%"
+			synth_string = "[ceil(synth_content * 100)]%"
 
 	result += span_notice("У [target.ru_p_theirs()] есть [rounded_volume] юнитов крови[growth_string]. [capitalize(target.ru_p_them())] кровь <b>[synth_string]</b> синтетической.")
 
@@ -83,9 +83,9 @@
 	if (total_required > 0)
 		. += "Growth: [FLOOR(total / total_required * 100, 1)]%"
 	. += "Blood Consumed"
-	. += "- Normal: [CEILING(normal, 1)]u"
-	. += "- Synthetic: [CEILING(synth, 1)]u (MAX: [maximum_synth_blood]u)"
-	. += "- Total: [CEILING(total, 1)]u (REQ: [total_required]u)"
+	. += "- Normal: [ceil(normal)]u"
+	. += "- Synthetic: [ceil(synth)]u (MAX: [maximum_synth_blood]u)"
+	. += "- Total: [ceil(total)]u (REQ: [total_required]u)"
 
 /// Sends text to the blood worm, whether they are possessing a host or not.
 /mob/living/basic/blood_worm/proc/to_chat_self(text)
