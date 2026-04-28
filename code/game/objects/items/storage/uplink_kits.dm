@@ -835,7 +835,7 @@
 	generate_items_inside(list(
 		/obj/item/clothing/shoes/cowboy/black/syndicate= 1,
 		/obj/item/clothing/head/cowboy/black/syndicate = 1,
-		/obj/item/clothing/accessory/holster/tacticool/cowboy = 1, //Custom BS
+		/obj/item/clothing/accessory/holster/tacticool/cowboy = 1,//Custom BS
 		/obj/item/clothing/under/costume/dutch/syndicate = 1,
 		/obj/item/lighter/skull = 1,
 		/obj/item/sbeacondrop/horse = 1,
