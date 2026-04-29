@@ -799,6 +799,7 @@
 	dir = 8
 	},
 /obj/structure/bed/maint,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/security/brig)
 "alh" = (
@@ -34041,6 +34042,7 @@
 /area/station/maintenance/ghetto/central)
 "ils" = (
 /obj/structure/table,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/security/brig)
 "ilw" = (
@@ -77692,7 +77694,8 @@
 "sWy" = (
 /obj/structure/toilet,
 /obj/machinery/light/small/directional/north,
-/turf/open/floor/iron,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/plating,
 /area/station/security/brig)
 "sWD" = (
 /obj/effect/turf_decal/tile/yellow/fourcorners,
@@ -81215,6 +81218,7 @@
 	id = "Prison Gate";
 	name = "Prison Lockdown Blast Doors"
 	},
+/obj/effect/mapping_helpers/airlock/autoname,
 /turf/open/floor/iron,
 /area/station/security/prison)
 "tPm" = (
@@ -94466,17 +94470,12 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/machinery/prisongate,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/access/all/security/general,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "permabrig"
-	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/preopen{
 	id = "Prison Gate";
 	name = "Prison Lockdown Blast Doors"
 	},
+/obj/machinery/prisongate,
 /turf/open/floor/iron,
 /area/station/security/prison)
 "xft" = (
