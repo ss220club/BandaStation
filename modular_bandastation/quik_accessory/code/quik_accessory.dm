@@ -11,7 +11,6 @@
 
 	var/obj/item/clothing/accessory/target_accessory = null
 
-	// Ищем первый аксессуар со storage
 	for(var/obj/item/clothing/accessory/A in U.attached_accessories)
 		if(A.atom_storage)
 			target_accessory = A
@@ -23,14 +22,10 @@
 
 
 	// =====================================================
-	// СПЕЦИАЛЬНАЯ ЛОГИКА ТОЛЬКО ДЛЯ КОБУРЫ
+	// ТАКТИЧЕСКАЯ КОБУРА
 	// =====================================================
 
-	if(istype(target_accessory, /obj/item/clothing/accessory/holster))
-
-		//--------------------------------------------------
-		// 1. Если в руке уже есть пистолет → убрать в кобуру
-		//--------------------------------------------------
+	if(istype(target_accessory, /obj/item/clothing/accessory/holster/tacticool))
 
 		var/obj/item/gun/held_gun = null
 
@@ -39,7 +34,74 @@
 		else if(istype(get_inactive_held_item(), /obj/item/gun))
 			held_gun = get_inactive_held_item()
 
+		var/obj/item/gun/first_gun = null
+		var/obj/item/gun/second_gun = null
+
+		for(var/obj/item/I in target_accessory.atom_storage.real_location.contents)
+			if(!istype(I, /obj/item/gun))
+				continue
+
+			if(!first_gun)
+				first_gun = I
+				continue
+
+			if(!second_gun)
+				second_gun = I
+				break
+
+		//--------------------------------------------------
+		// УБРАТЬ оружие
+		//--------------------------------------------------
+
 		if(held_gun)
+
+			if(!first_gun)
+				held_gun.forceMove(target_accessory)
+				to_chat(src, span_notice("Вы убираете [held_gun] в первый слот кобуры."))
+				return
+
+			if(first_gun && !second_gun)
+				held_gun.forceMove(target_accessory)
+				to_chat(src, span_notice("Вы убираете [held_gun] во второй слот кобуры."))
+				return
+
+			to_chat(src, span_warning("Тактическая кобура заполнена!"))
+			return
+
+		//--------------------------------------------------
+		// ДОСТАТЬ оружие
+		//--------------------------------------------------
+
+		if(!first_gun)
+			to_chat(src, span_warning("В кобуре нет оружия!"))
+			return
+
+		first_gun.forceMove(src.loc)
+		put_in_hands(first_gun)
+
+		to_chat(src, span_notice("Вы быстро достаёте [first_gun]."))
+		return
+
+
+	// =====================================================
+	// ОБЫЧНАЯ КОБУРА
+	// =====================================================
+
+	if(istype(target_accessory, /obj/item/clothing/accessory/holster))
+
+		var/obj/item/gun/held_gun_normal = null
+
+		if(istype(get_active_held_item(), /obj/item/gun))
+			held_gun_normal = get_active_held_item()
+		else if(istype(get_inactive_held_item(), /obj/item/gun))
+			held_gun_normal = get_inactive_held_item()
+
+		//--------------------------------------------------
+		// УБРАТЬ оружие
+		//--------------------------------------------------
+
+		if(held_gun_normal)
+
 			var/already_has_gun = FALSE
 
 			for(var/obj/item/I in target_accessory.atom_storage.real_location.contents)
@@ -51,13 +113,13 @@
 				to_chat(src, span_warning("В кобуре уже есть оружие!"))
 				return
 
-			held_gun.forceMove(target_accessory)
+			held_gun_normal.forceMove(target_accessory)
 
-			to_chat(src, span_notice("Вы убираете [held_gun] в кобуру."))
+			to_chat(src, span_notice("Вы убираете [held_gun_normal] в кобуру."))
 			return
 
 		//--------------------------------------------------
-		// 2. Если оружия в руке нет → достать оружие
+		// ДОСТАТЬ оружие
 		//--------------------------------------------------
 
 		var/obj/item/gun/holstered_gun = null
@@ -79,8 +141,7 @@
 
 
 	// =====================================================
-	// ОБЫЧНАЯ ЛОГИКА ДЛЯ ЛЮБОГО ДРУГОГО АКСЕССУАРА
-	// (pocket protector, pouch и т.д.)
+	// ОБЫЧНЫЕ АКСЕССУАРЫ
 	// =====================================================
 
 	var/obj/item/target_item = null
