@@ -6,7 +6,7 @@
 	return ishuman(user.mob)
 
 /datum/keybinding/human/quick_equip
-	hotkey_keys = list("E") // BANDASTATION EDIT
+	hotkey_keys = list("E")
 	name = "quick_equip"
 	full_name = "Экипировать вещь"
 	description = "Быстро экипирует предмет в любой подходящий слот"
@@ -21,7 +21,7 @@
 	return TRUE
 
 /datum/keybinding/human/quick_equip_belt
-	hotkey_keys = list("ShiftE") // BANDASTATION EDIT
+	hotkey_keys = list("ShiftE")
 	name = "quick_equip_belt"
 	full_name = "Быстрая экипировка пояса"
 	description = "Положить предмет из руки в пояс или вытащить последний предмет из него"
