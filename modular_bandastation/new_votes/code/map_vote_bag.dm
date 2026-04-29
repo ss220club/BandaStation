@@ -195,7 +195,8 @@
 		refill_bag()
 	set_next_map(config.maplist[map_name])
 	last_played_map = map_name
-	var/display_name = config.maplist[map_name]?.map_name || map_name
+	var/datum/map_config/display_map_datum = config.maplist[map_name]
+	var/display_name = display_map_datum?.map_name || map_name
 	for(var/client/C in GLOB.clients)
 		SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
 	send_map_vote_notice("Следующая карта — [span_bold(display_name)].")
@@ -207,7 +208,8 @@
 	if(length(options) != 1)
 		return
 	var/forced_map = options[1]
-	var/forced_name = config.maplist[forced_map].map_name
+	var/datum/map_config/forced_map_datum = config.maplist[forced_map]
+	var/forced_name = forced_map_datum.map_name
 	remove_from_bag(forced_map)
 	if(!length(remaining_bag))
 		refill_bag()
