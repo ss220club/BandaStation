@@ -226,13 +226,21 @@
 	access = access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
 
 // DeathSquad outifit
+/datum/outfit/centcom/death_commando
+	backpack_contents = list(
+		/obj/item/ammo_box/speedloader/c357 = 1,
+		/obj/item/flashlight/seclite = 1,
+		/obj/item/grenade/c4/x4 = 1,
+		/obj/item/storage/medkit/tactical_lite = 1,
+	)
+
 /datum/outfit/centcom/death_commando/officer
 	backpack_contents = list(
 		/obj/item/ammo_box/speedloader/c357 = 1,
 		/obj/item/flashlight/seclite = 1,
 		/obj/item/grenade/c4/x4 = 1,
 		/obj/item/storage/box/syndie_kit/frag_grenades = 1,
-		/obj/item/storage/medkit/tactical/premium = 1,
+		/obj/item/storage/medkit/tactical = 1,
 		/obj/item/disk/nuclear/death_commando = 1,
 	)
 
