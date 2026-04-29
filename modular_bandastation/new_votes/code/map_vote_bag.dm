@@ -26,7 +26,7 @@
 	if(!rustg_file_exists(BAG_CONFIG_FILE))
 		log_world("WARNING: [BAG_CONFIG_FILE] not found. Map bag will be empty.")
 		return
-	for(var/line in splittext(file2text(BAG_CONFIG_FILE), "\n"))
+	for(var/line in splittext(rustg_file_read(BAG_CONFIG_FILE), "\n"))
 		line = trim(line)
 		if(!line || copytext(line, 1, 3) == "##")
 			continue
@@ -45,10 +45,9 @@
 
 /datum/controller/subsystem/map_vote/proc/load_bag_state()
 	if(rustg_file_exists(BAG_STATE_FILE))
-		var/list/state = json_decode(file2text(BAG_STATE_FILE))
+		var/list/state = json_decode(rustg_file_read(BAG_STATE_FILE))
 		remaining_bag = state["remaining"] || list()
 		last_played_map = state["last_played"]
-		// Sanitize: drop entries removed from initial_bag
 		var/list/clean = list()
 		for(var/map_name in remaining_bag)
 			if(map_name in initial_bag)
@@ -109,7 +108,6 @@
 	for(var/map_name in map_vote.choices)
 		total_votes += map_vote.choices[map_name]
 
-	// Nobody voted: pick random from bag.
 	if(!winner || winner_votes == 0)
 		var/list/options = get_bag_options()
 		if(length(options))
@@ -163,6 +161,7 @@
 			return
 	var/skipped_name = config.maplist[last_played_map].map_name
 	remove_from_bag(last_played_map)
+	send_map_vote_notice("Карта [span_bold(skipped_name)] пропущена из-за повтора.")
 
 /// Automatically select next map when only one unique map remains and it's a repeat.
 /datum/controller/subsystem/map_vote/proc/auto_select_next_map_due_to_repeat()
@@ -179,7 +178,8 @@
 		refill_bag()
 	set_next_map(config.maplist[selected])
 	last_played_map = selected
-	// Announce forced next map.
+	for(var/client/C in GLOB.clients)
+		SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
 	send_map_vote_notice("Следующая карта - [span_bold(selected)].")
 	save_bag_state()
 
@@ -193,7 +193,9 @@
 	set_next_map(config.maplist[map_name])
 	last_played_map = map_name
 	var/display_name = config.maplist[map_name]?.map_name || map_name
-	send_map_vote_notice("Голосование пропущено — в пуле одна карта: [span_bold(display_name)].")
+	for(var/client/C in GLOB.clients)
+		SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
+	send_map_vote_notice("Следующая карта — [span_bold(forced_name)].")
 	save_bag_state()
 
 /// When only one unique map remains, play vote sound and announce it as the forced next round map.
@@ -203,9 +205,8 @@
 		return
 	var/forced_name = config.maplist[options[1]].map_name
 	for(var/client/C in GLOB.clients)
-		if(C.prefs.read_preference(/datum/preference/toggle/sound_announcements))
-			SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
-	send_map_vote_notice("Следующая карта — [span_bold(forced_name)]")
+		SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
+	send_map_vote_notice("Следующая карта — [span_bold(forced_name)].")
 
 /// Replaces old cache-restore revert.
 /datum/controller/subsystem/map_vote/revert_next_map(client/user)
