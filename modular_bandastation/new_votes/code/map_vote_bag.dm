@@ -190,9 +190,7 @@
 /datum/controller/subsystem/map_vote/proc/auto_select_single_map(map_name)
 	previous_remaining_bag = remaining_bag.Copy()
 	previous_last_played_map = last_played_map
-	remove_from_bag(map_name)
-	if(!length(remaining_bag))
-		refill_bag()
+	refill_bag()
 	set_next_map(config.maplist[map_name])
 	last_played_map = map_name
 	var/datum/map_config/display_map_datum = config.maplist[map_name]
