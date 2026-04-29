@@ -209,8 +209,7 @@
 	var/datum/map_config/forced_map_datum = config.maplist[forced_map]
 	var/forced_name = forced_map_datum.map_name
 	remove_from_bag(forced_map)
-	if(!length(remaining_bag))
-		refill_bag()
+	refill_bag()
 	for(var/client/C in GLOB.clients)
 		SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
 	send_map_vote_notice("Следующая карта — [span_bold(forced_name)].")
