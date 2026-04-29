@@ -30,11 +30,11 @@
 		line = trim(line)
 		if(!line || copytext(line, 1, 3) == "##")
 			continue
-		var/space_pos = findtext(line, " ")
-		if(!space_pos)
+		var/last_space = findlasttext(line, " ")
+		if(!last_space)
 			continue
-		var/map_name = copytext(line, 1, space_pos)
-		var/count = text2num(copytext(line, space_pos + 1))
+		var/map_name = trim(copytext(line, 1, last_space))
+		var/count = text2num(copytext(line, last_space + 1))
 		if(!count || count <= 0)
 			continue
 		if(!(map_name in config.maplist))
@@ -195,7 +195,7 @@
 	var/display_name = config.maplist[map_name]?.map_name || map_name
 	for(var/client/C in GLOB.clients)
 		SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
-	send_map_vote_notice("Следующая карта — [span_bold(forced_name)].")
+	send_map_vote_notice("Следующая карта — [span_bold(display_name)].")
 	save_bag_state()
 
 /// When only one unique map remains, play vote sound and announce it as the forced next round map.
