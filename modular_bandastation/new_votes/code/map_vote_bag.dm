@@ -159,7 +159,10 @@
 	for(var/map_name in remaining_bag)
 		if(map_name != last_played_map)
 			return
-	var/skipped_name = config.maplist[last_played_map].map_name
+	var/datum/map_config/mc = config.maplist[last_played_map]
+	if(!mc)
+		return
+	var/skipped_name = mc.map_name
 	remove_from_bag(last_played_map)
 	send_map_vote_notice("Карта [span_bold(skipped_name)] пропущена из-за повтора.")
 
@@ -198,12 +201,16 @@
 	send_map_vote_notice("Следующая карта — [span_bold(display_name)].")
 	save_bag_state()
 
-/// When only one unique map remains, play vote sound and announce it as the forced next round map.
+/// When only one unique map remains, consume it from the bag, refill, and announce it as the forced next map.
 /datum/controller/subsystem/map_vote/proc/check_last_card_announce()
 	var/list/options = get_bag_options()
 	if(length(options) != 1)
 		return
-	var/forced_name = config.maplist[options[1]].map_name
+	var/forced_map = options[1]
+	var/forced_name = config.maplist[forced_map].map_name
+	remove_from_bag(forced_map)
+	if(!length(remaining_bag))
+		refill_bag()
 	for(var/client/C in GLOB.clients)
 		SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
 	send_map_vote_notice("Следующая карта — [span_bold(forced_name)].")
