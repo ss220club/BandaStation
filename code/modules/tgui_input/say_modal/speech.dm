@@ -12,7 +12,7 @@
 	var/list/phrases = alter_phrases || hurt_phrases
 
 	/// No OOC leaks
-	if(!entry || payload["channel"] == OOC_CHANNEL || payload["channel"] == ME_CHANNEL)
+	if(!entry || payload["channel"] == OOC_CHANNEL || payload["channel"] == ME_CHANNEL || payload["channel"] == PRAY_CHANNEL)
 		return pick(phrases)
 	/// Random trimming for larger sentences
 	if(length(entry) > 50)
@@ -55,6 +55,9 @@
 			INVOKE_ASYNC(SSadmin_verbs, TYPE_PROC_REF(/datum/controller/subsystem/admin_verbs, dynamic_invoke_verb), client, /datum/admin_verb/cmd_mentor_say, entry)
 			return TRUE
 		// BANDASTATION ADDITION END - Mentors
+		if(PRAY_CHANNEL)
+			client.mob.pray(entry)
+			return TRUE
 	return FALSE
 
 /**
@@ -134,7 +137,7 @@
 		return TRUE
 	if(type == "force")
 		var/target_channel = payload["channel"]
-		if(target_channel == ME_CHANNEL || target_channel == OOC_CHANNEL)
+		if(target_channel == ME_CHANNEL || target_channel == OOC_CHANNEL || target_channel == PRAY_CHANNEL)
 			target_channel = SAY_CHANNEL // No ooc leaks
 		delegate_speech(alter_entry(payload), target_channel)
 		return TRUE

@@ -279,8 +279,10 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 		/obj/effect/decal/cleanable/blood/trail,
 		//Should not exist outside of ethereals
 		/obj/item/stock_parts/power_store/cell/ethereal,
-		// BANDASTATION ADD - Shouldn't exist without a parent hookah
-		/obj/item/hookah_mouthpiece,
+		/obj/item/hookah_mouthpiece, // BANDASTATION ADD - Shouldn't exist without a parent hookah
+		// Abstract type, controlled by turfs
+		// Literally errors on creation/deletion
+		/atom/movable/lighting_object,
 	)
 
 	// Everything that follows is a typesof() check.
