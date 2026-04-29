@@ -117,13 +117,36 @@
 /datum/spellbook_entry/item/wands
 	name = "Wand Assortment"
 	desc = "Коллекция палочек, позволяющих использовать их в самых разных целях. \
-		У палочек ограниченное количество зарядов, поэтому будьте осторожны при их использовании. Поставляется в удобном поясе."
+		У палочек ограниченное количество зарядов, поэтому будьте осторожны при их использовании. \
+		Поставляется в удобном поясе или модной бандольере, если пояс уже экипирован."
 	item_path = /obj/item/storage/belt/wands/full
 	category = SPELLBOOK_CATEGORY_DEFENSIVE
 
 /datum/spellbook_entry/item/wands/try_equip_item(mob/living/carbon/human/user, obj/item/to_equip)
-	var/was_equipped = user.equip_to_slot_if_possible(to_equip, ITEM_SLOT_BELT, disable_warning = TRUE)
-	to_chat(user, span_notice("[capitalize(to_equip.declent_ru(NOMINATIVE))] призывается [was_equipped ? "на ваш пояс" : "у ваших ног"]."))
+	if (!istype(user.belt, /obj/item/storage/belt/wands))
+		var/was_equipped = user.equip_to_slot_if_possible(to_equip, ITEM_SLOT_BELT, disable_warning = TRUE)
+		to_chat(user, span_notice("[capitalize(to_equip.declent_ru(NOMINATIVE))] призывается [was_equipped ? "на ваш пояс" : "у ваших ног"]."))
+		return
+
+	// If you already have a wand belt you get a cool bandolier instead for your copious amount of wands
+	var/obj/item/storage/belt/wand_bandolier/bandolier = new(user.drop_location())
+
+	for (var/obj/item/wand_presumably in to_equip.atom_storage.real_location)
+		bandolier.atom_storage.attempt_insert(wand_presumably, user, messages = FALSE)
+
+	qdel(to_equip)
+
+	var/was_equipped = user.equip_to_slot_if_possible(bandolier, ITEM_SLOT_SUITSTORE, disable_warning = TRUE)
+	to_chat(user, span_notice("[capitalize(bandolier.declent_ru(NOMINATIVE))] призывается [was_equipped ? "вам на грудь" : "у ваших ног"]."))
+
+/datum/spellbook_entry/item/wands/discount
+	name = "Wand Assortment (Bargain Bin)"
+	desc = "Случайная коллекция палочек, сотворённых учениками. \
+		Неизвестно, что вы получите. \
+		Поставляется в удобном поясе или модной бандольере, если пояс уже экипирован."
+	cost = 1
+	item_path = /obj/item/storage/belt/wands/full/discount
+	category = SPELLBOOK_CATEGORY_DEFENSIVE
 
 /datum/spellbook_entry/item/armor
 	name = "Mastercrafted Armor Set"

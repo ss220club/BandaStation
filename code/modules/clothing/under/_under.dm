@@ -576,7 +576,7 @@
 /// Helper to adjust to alt jumpsuit state
 /obj/item/clothing/under/proc/adjust_to_alt()
 	adjusted = ALT_STYLE
-	if(!(female_sprite_flags & FEMALE_UNIFORM_TOP_ONLY))
+	if(!(female_sprite_flags & FEMALE_UNIFORM_TOP_ONLY) && !(female_version::mask_flags & FEMALE_MASK_APPLY_ON_ADJUSTED)) // BANDASTATION EDIT - more masks for female clothing
 		female_sprite_flags = NO_FEMALE_UNIFORM
 	if(!alt_covers_chest) // for the special snowflake suits that expose the chest when adjusted (and also the arms, realistically)
 		body_parts_covered &= ~CHEST
