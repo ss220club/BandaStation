@@ -1,0 +1,4 @@
+#include "_quik_accessory.dm"
+
+#include "code/quik_accessory.dm"
+#include "code/quik_accessory_keybind.dm"
