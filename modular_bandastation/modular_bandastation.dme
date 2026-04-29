@@ -64,6 +64,7 @@
 #include "mobs/_mobs.dme"
 #include "nanomap/_nanomap.dme"
 #include "navigator/_navigator.dme"
+#include "new_votes/_new_votes.dme"
 #include "objects/_objects.dme"
 #include "orderables/_orderables.dme"
 #include "outfits/_outfits.dme"

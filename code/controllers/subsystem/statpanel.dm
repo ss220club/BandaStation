@@ -47,6 +47,7 @@ SUBSYSTEM_DEF(statpanels)
 			if(ETA)
 				global_data += "[ETA] [SSshuttle.emergency.getTimerStr()]"
 
+		global_data += get_extra_status_data() // BANDASTATION EDIT - modular hook
 		src.currentrun = GLOB.clients.Copy()
 		mc_data = null
 

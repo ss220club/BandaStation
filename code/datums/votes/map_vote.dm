@@ -15,13 +15,14 @@
 	. = ..()
 	if(!.)
 		return FALSE
-
+	/* BANDASTATION REMOVE START - случай с одной картой обрабатывается в модуле _new_votes
 	if(length(choices) == 1) // Only one choice, no need to vote. Let's just auto-rotate it to the only remaining map because it would just happen anyways.
 		var/datum/map_config/change_me_out = global.config.maplist[choices[1]]
 		finalize_vote(choices[1])// voted by not voting, very sad.
 		to_chat(world, span_boldannounce("The map vote has been skipped because there is only one map left to vote for. \
 			The map has been changed to [change_me_out.map_name]."))
 		return FALSE
+	BANDASTATION REMOVE END */
 	if(length(choices) == 0)
 		to_chat(world, span_boldannounce("A map vote was called, but there are no maps to vote for! \
 			Players, complain to the admins. Admins, complain to the coders."))
@@ -46,10 +47,15 @@
 	var/list/new_choices = SSmap_vote.get_valid_map_vote_choices()
 	if (new_choices)
 		default_choices = new_choices
-	var/num_choices = length(default_choices)
-	if(num_choices <= 1)
-		return "There [num_choices == 1 ? "is only one map" : "are no maps"] to choose from."
-
+	// BANDASTATION EDIT START - автоскип если карта в пуле одна
+	if (length(default_choices) == 1)
+		var/only_map = default_choices[1]
+		if (only_map == SSmap_vote.last_played_map)
+			SSmap_vote.auto_select_next_map_due_to_repeat()
+		else
+			SSmap_vote.auto_select_single_map(only_map)
+		return "Only one map available, auto-selected."
+	// BANDASTATION EDIT END
 	return VOTE_AVAILABLE
 
 /datum/vote/map_vote/get_result_text(list/all_winners, real_winner, list/non_voters)
