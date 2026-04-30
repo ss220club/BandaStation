@@ -219,6 +219,9 @@
 		var/datum/admins/deadmin_holder = GLOB.deadmins[deadmin_ckey]
 		if(!(deadmin_holder?.rank_flags() & R_ADMIN))
 			continue
+		var/client/deadmin_client = GLOB.directory[deadmin_ckey]
+		if(!deadmin_client)
+			continue
 		deadmin_ckeys += "[deadmin_ckey]"
 
 	var/deadmin_field = length(deadmin_ckeys) ? jointext(deadmin_ckeys, ", ") : null
