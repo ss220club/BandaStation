@@ -1,6 +1,6 @@
 /// Returns UTC timestamp with the specifified format, with optionally deciseconds or optional IC time (year offset), AKA Nanotrasen Standard Time (NST)
-/proc/server_timestamp(format = "hh:mm:ss", show_ds, ic_time, twelve_hour_clock)
-	var/time_string = twelve_hour_clock ? time_to_twelve_hour(format, world.timeofday, world.timezone) : time2text(world.timeofday, format, world.timezone)
+/proc/server_timestamp(format = "hh:mm:ss", show_ds, ic_time, twelve_hour_clock, timezone = TIMEZONE_UTC)
+	var/time_string = twelve_hour_clock ? time_to_twelve_hour(format, world.timeofday, timezone) : time2text(world.timeofday, format, timezone)
 	if(ic_time && findtext(format, "YYYY")) //if we have a year, replace the year
 		time_string = replacetext_char(time_string, "[GLOB.year_integer]", CURRENT_STATION_YEAR)
 	return show_ds ? "[time_string]:[world.timeofday % 10]" : time_string
