@@ -17,8 +17,7 @@
 		return list()
 
 	var/list/result = list()
-	for(var/key as anything in input)
-		var/value = input[key]
+	for(var/key, value in input)
 		var/datum/body_modification/modification = GLOB.body_modifications[key]
 		if(!istype(modification))
 			continue

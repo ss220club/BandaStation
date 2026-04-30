@@ -33,15 +33,7 @@
 	PRIVATE_PROC(TRUE)
 
 	var/list/current = preferences.read_preference(/datum/preference/body_modifications)
-	if(!islist(current))
-		return list()
-
-	var/list/copy = list()
-	for(var/key as anything in current)
-		var/value = current[key]
-		copy[key] = value
-
-	return copy
+	return islist(current) ? current.Copy() : list()
 
 /datum/preference_middleware/body_modifications/proc/commit_body_modifications(list/new_value)
 	PRIVATE_PROC(TRUE)
