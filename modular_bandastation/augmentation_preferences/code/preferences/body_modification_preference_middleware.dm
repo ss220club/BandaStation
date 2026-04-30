@@ -23,11 +23,34 @@
 				"name" = body_modification.name,
 				"description" = body_modification.get_description(),
 				"cost" = body_modification.cost,
-				"category" = body_modification.category
+				"category" = body_modification.category,
 			)
 		)
 
 	return data
+
+/datum/preference_middleware/body_modifications/proc/get_body_modifications_copy()
+	PRIVATE_PROC(TRUE)
+
+	var/list/current = preferences.read_preference(/datum/preference/body_modifications)
+	if(!islist(current))
+		return list()
+
+	var/list/copy = list()
+	for(var/key as anything in current)
+		var/value = current[key]
+		copy[key] = value
+
+	return copy
+
+/datum/preference_middleware/body_modifications/proc/commit_body_modifications(list/new_value)
+	PRIVATE_PROC(TRUE)
+
+	var/datum/preference/preference = GLOB.preference_entries[/datum/preference/body_modifications]
+	if(!istype(preference))
+		return FALSE
+
+	return preferences.update_preference(preference, new_value)
 
 /datum/preference_middleware/body_modifications/proc/get_applied_body_modifications()
 	PRIVATE_PROC(TRUE)
@@ -46,9 +69,13 @@
 	var/list/applied = preferences.read_preference(/datum/preference/body_modifications)
 
 	for(var/body_modification_key in GLOB.body_modifications)
-		var/datum/body_modification/M = GLOB.body_modifications[body_modification_key]
-		if(!LAZYLEN(M.incompatible_body_modifications & applied))
+		var/datum/body_modification/modification = GLOB.body_modifications[body_modification_key]
+		if(!istype(modification))
 			continue
+
+		if(!LAZYLEN(modification.incompatible_body_modifications & applied))
+			continue
+
 		incompatible_body_modifications += body_modification_key
 
 	return incompatible_body_modifications
@@ -89,10 +116,10 @@
 		return FALSE
 
 	var/datum/body_modification/modification = GLOB.body_modifications[key]
-	if(!istype(modification) || !modification.can_be_applied(user))
+	if(!istype(modification))
 		return FALSE
 
-	var/list/updated_preference = preferences.read_preference(/datum/preference/body_modifications)
+	var/list/updated_preference = get_body_modifications_copy()
 	if(!isnull(updated_preference[key]))
 		return FALSE
 
@@ -101,33 +128,26 @@
 	else
 		updated_preference[key] = modification.default_preference_value(params)
 
-	if(!preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference))
-		return FALSE
-
-	refresh_body_modification_on_user(modification, user, updated_preference[key])
-	return TRUE
+	return commit_body_modifications(updated_preference)
 
 /datum/preference_middleware/body_modifications/proc/remove_body_modification(list/params, mob/user)
 	var/body_modification_key = params["body_modification_key"]
 	if(!body_modification_key)
 		return FALSE
 
-	var/list/body_modifications = preferences.read_preference(/datum/preference/body_modifications)
+	var/list/body_modifications = get_body_modifications_copy()
 	if(isnull(body_modifications[body_modification_key]))
 		return FALSE
 
 	body_modifications -= body_modification_key
-	if(!preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], body_modifications))
-		return FALSE
-
-	return TRUE
+	return commit_body_modifications(body_modifications)
 
 /datum/preference_middleware/body_modifications/proc/set_body_modification_manufacturer(list/params, mob/user)
 	var/key = params["body_modification_key"]
 	if(!key)
 		return FALSE
 
-	var/list/updated_preference = preferences.read_preference(/datum/preference/body_modifications)
+	var/list/updated_preference = get_body_modifications_copy()
 	if(!islist(updated_preference[key]))
 		return FALSE
 
@@ -139,20 +159,4 @@
 		return FALSE
 
 	updated_preference[key] = modification.handle_ui_params(params)
-	if(!preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference))
-		return FALSE
-
-	refresh_body_modification_on_user(modification, user, updated_preference[key])
-	return TRUE
-
-/datum/preference_middleware/body_modifications/proc/refresh_body_modification_on_user(datum/body_modification/modification, mob/user, list/modification_params)
-	PRIVATE_PROC(TRUE)
-
-	if(!istype(user, /mob/living/carbon/human))
-		return FALSE
-
-	var/mob/living/carbon/human/human_user = user
-	if(QDELETED(human_user) || !human_user.client)
-		return FALSE
-
-	return modification.apply_to_human(human_user, modification_params)
+	return commit_body_modifications(updated_preference)
