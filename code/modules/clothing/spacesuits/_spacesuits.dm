@@ -92,7 +92,7 @@
 	allowed = list(
 		/obj/item/flashlight,
 		/obj/item/tank/internals,
-		/obj/item/tank/jetpack/captain,
+		/obj/item/tank/jetpack, // BANDASTATION EDIT - any jetpack is allowed
 		)
 	slowdown = 1
 	armor_type = /datum/armor/suit_space
