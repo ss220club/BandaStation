@@ -53,19 +53,15 @@
 #define BEACON_POINTS_PER_W 10e-6
 #define BEACON_BASE_POINTS 2
 #define BEACON_NEAREST_MW(power) ((power) - (power) % (1 MEGA WATTS))
-#define BEACON_RANDOM_SPAWN_CHANCE 5
+#define BEACON_RANDOM_SPAWN_CHANCE 15
 #define BEACON_RANDOM_SPAWN_RADIUS 4
 #define BEACON_PORTAL_EVENT_COOLDOWN (20 SECONDS)
-#define BEACON_PORTAL_CHANCE_MIN 2
-#define BEACON_PORTAL_CHANCE_MAX 20
-#define BEACON_DEMONIC_INCURSION_CHANCE_MIN 1
-#define BEACON_DEMONIC_INCURSION_CHANCE_MAX 1
-#define BEACON_DEMONIC_INCURSION_PORTALS_MIN 1
-#define BEACON_DEMONIC_INCURSION_PORTALS_MAX 3
-#define BEACON_GLOBAL_INVASION_CHANCE_MIN 1
-#define BEACON_GLOBAL_INVASION_CHANCE_MAX 4
-#define BEACON_GLOBAL_INVASION_PORTALS_MIN 2
-#define BEACON_GLOBAL_INVASION_PORTALS_MAX 40
+#define BEACON_PORTAL_CHANCE_MIN 6
+#define BEACON_PORTAL_CHANCE_MAX 15
+#define BEACON_GLOBAL_INVASION_CHANCE_MIN 6
+#define BEACON_GLOBAL_INVASION_CHANCE_MAX 15
+#define BEACON_GLOBAL_INVASION_PORTALS_MIN 10
+#define BEACON_GLOBAL_INVASION_PORTALS_MAX 20
 
 /obj/machinery/power/bluespace_beacon
 	name = "Reality beacon"
@@ -124,7 +120,7 @@
 	/// TRUE while mass invasion is active.
 	var/global_invasion_active = FALSE
 	/// Weighted random outcomes that may appear around the beacon while charging.
-	var/static/list/random_spawn_weights
+	var/static/list/random_spawn_tables
 
 /obj/machinery/power/bluespace_beacon/add_tts_component()
 	return
@@ -134,14 +130,13 @@
 
 /obj/machinery/power/bluespace_beacon/Initialize(mapload)
 	. = ..()
-	if(!length(random_spawn_weights))
-		random_spawn_weights = get_bluespace_beacon_random_spawn_weights()
+	if(!length(random_spawn_tables))
+		random_spawn_tables = get_bluespace_beacon_random_spawn_tables()
 
 	radio = new(src)
 	radio.keyslot = new radio_key
 	radio.set_on(TRUE)
-	radio.set_broadcasting(TRUE)
-	radio.set_listening(FALSE)
+	radio.set_broadcasting(FALSE)
 	radio.recalculateChannels()
 	ensure_engineering_channel()
 
@@ -394,9 +389,6 @@
 /obj/machinery/power/bluespace_beacon/proc/get_portal_event_chance()
 	return get_scaled_input_chance(BEACON_PORTAL_CHANCE_MIN, BEACON_PORTAL_CHANCE_MAX)
 
-/obj/machinery/power/bluespace_beacon/proc/get_demonic_incursion_chance()
-	return get_scaled_input_chance(BEACON_DEMONIC_INCURSION_CHANCE_MIN, BEACON_DEMONIC_INCURSION_CHANCE_MAX)
-
 /obj/machinery/power/bluespace_beacon/proc/get_global_invasion_chance()
 	return get_scaled_input_chance(BEACON_GLOBAL_INVASION_CHANCE_MIN, BEACON_GLOBAL_INVASION_CHANCE_MAX)
 
@@ -421,35 +413,8 @@
 		return null
 	return target_turf
 
-/obj/machinery/power/bluespace_beacon/proc/trigger_demonic_incursion()
-	var/list/demon_spawners = get_bluespace_beacon_demonic_incursion_spawners()
-	if(!length(demon_spawners))
-		return FALSE
-
-	var/created_portals = 0
-	var/to_spawn = rand(BEACON_DEMONIC_INCURSION_PORTALS_MIN, BEACON_DEMONIC_INCURSION_PORTALS_MAX)
-	for(var/i in 1 to to_spawn)
-		var/turf/spawn_turf = get_portal_spawn_turf()
-		if(!spawn_turf)
-			continue
-		var/spawn_type = pick_weight(demon_spawners)
-		if(!spawn_type)
-			continue
-		new spawn_type(spawn_turf, src)
-		created_portals++
-
-	if(!created_portals)
-		return FALSE
-
-	radio_engineering_notice("Внимание: зафиксирован демонический прорыв! Обнаружено порталов: [created_portals].")
-	return TRUE
-
 /obj/machinery/power/bluespace_beacon/proc/get_global_invasion_portal_count()
-	var/alive_crew = get_active_player_count(alive_check = FALSE, afk_check = FALSE, human_check = FALSE)
-	if(alive_crew <= 0)
-		return BEACON_GLOBAL_INVASION_PORTALS_MIN
-	var/target_count = round(alive_crew / 2)
-	return clamp(target_count, BEACON_GLOBAL_INVASION_PORTALS_MIN, BEACON_GLOBAL_INVASION_PORTALS_MAX)
+	return rand(BEACON_GLOBAL_INVASION_PORTALS_MIN, BEACON_GLOBAL_INVASION_PORTALS_MAX)
 
 /obj/machinery/power/bluespace_beacon/proc/announce_global_invasion()
 	var/announcement_text = "Обнаружен прорыв ткани реальности. Фиксация численности сущностей иных миров невозможна. \
@@ -526,21 +491,16 @@
 	return TRUE
 
 /obj/machinery/power/bluespace_beacon/proc/try_trigger_hostile_portal_event(seconds_per_tick)
-	if(input_locked || current_charge >= maximum_charge)
-		return
 	if(world.time < next_portal_event_at)
-		return
+		return FALSE
 	if(!SPT_PROB(get_portal_event_chance(), seconds_per_tick))
-		return
+		return FALSE
 
 	next_portal_event_at = world.time + BEACON_PORTAL_EVENT_COOLDOWN
-	if(SPT_PROB(get_demonic_incursion_chance(), seconds_per_tick))
-		if(trigger_demonic_incursion())
-			return
 	if(SPT_PROB(get_global_invasion_chance(), seconds_per_tick))
 		if(trigger_global_invasion())
-			return
-	trigger_hostile_portal_faction()
+			return TRUE
+	return trigger_hostile_portal_faction()
 
 /obj/machinery/power/bluespace_beacon/proc/get_random_spawn_turf()
 	var/list/possible_turfs = list()
@@ -561,22 +521,27 @@
 		return null
 	return pick(possible_turfs)
 
-/obj/machinery/power/bluespace_beacon/proc/try_spawn_random_effect(seconds_per_tick)
+/obj/machinery/power/bluespace_beacon/proc/try_spawn_random_loot_effect()
+	var/turf/spawn_turf = get_random_spawn_turf()
+	if(!spawn_turf)
+		return FALSE
+	var/spawn_type = pick_bluespace_beacon_random_spawn_type(random_spawn_tables)
+	if(!spawn_type)
+		return FALSE
+	var/atom/movable/spawned = new spawn_type(spawn_turf)
+	var/spawned_name = spawned?.declent_ru(NOMINATIVE) || spawned?.name || "неизвестный объект"
+	radio_engineering_notice("Внимание: зафиксирован локальный аномальный выброс. Объект: [spawned_name].")
+	return TRUE
+
+/obj/machinery/power/bluespace_beacon/proc/try_trigger_random_event(seconds_per_tick)
 	if(input_locked || current_charge >= maximum_charge)
 		return
 	if(!SPT_PROB(BEACON_RANDOM_SPAWN_CHANCE, seconds_per_tick))
 		return
-	var/turf/spawn_turf = get_random_spawn_turf()
-	if(!spawn_turf)
-		return
-	var/spawn_type = pick_weight(random_spawn_weights)
-	if(!spawn_type)
-		return
-	var/atom/movable/spawned = new spawn_type(spawn_turf)
-	var/spawned_name = spawned?.declent_ru(NOMINATIVE) || spawned?.name || "неизвестный объект"
-	radio_engineering_notice("Внимание: зафиксирован локальный аномальный выброс. Объект: [spawned_name].")
 
-	try_trigger_hostile_portal_event(seconds_per_tick)
+	if(try_trigger_hostile_portal_event(seconds_per_tick))
+		return
+	try_spawn_random_loot_effect()
 
 /obj/machinery/power/bluespace_beacon/process(seconds_per_tick)
 	if(machine_stat & (BROKEN|NOPOWER) || !anchored)
@@ -620,7 +585,7 @@
 			lock_to_base_consumption()
 			announce_completion()
 		else if(current_charge > previous_charge)
-			try_spawn_random_effect(seconds_per_tick)
+			try_trigger_random_event(seconds_per_tick)
 	else
 		mined_points = 0
 
@@ -692,11 +657,9 @@
 #undef BEACON_PORTAL_EVENT_COOLDOWN
 #undef BEACON_PORTAL_CHANCE_MIN
 #undef BEACON_PORTAL_CHANCE_MAX
-#undef BEACON_DEMONIC_INCURSION_CHANCE_MIN
-#undef BEACON_DEMONIC_INCURSION_CHANCE_MAX
-#undef BEACON_DEMONIC_INCURSION_PORTALS_MIN
-#undef BEACON_DEMONIC_INCURSION_PORTALS_MAX
 #undef BEACON_GLOBAL_INVASION_CHANCE_MIN
 #undef BEACON_GLOBAL_INVASION_CHANCE_MAX
 #undef BEACON_GLOBAL_INVASION_PORTALS_MIN
 #undef BEACON_GLOBAL_INVASION_PORTALS_MAX
+
+

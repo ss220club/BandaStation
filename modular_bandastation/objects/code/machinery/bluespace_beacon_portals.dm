@@ -51,14 +51,6 @@
 	/// Scatter radius for spawned mobs from beacon-origin portals.
 	var/bluespace_beacon_spawn_radius = 2
 
-/proc/get_bluespace_beacon_demonic_incursion_spawners()
-	var/static/list/demon_spawners = list(
-		/obj/structure/spawner/ice_moon/demonic_portal/bluespace_beacon_event = 6,
-		/obj/structure/spawner/ice_moon/demonic_portal/bluespace_beacon_event/ice_whelp = 3,
-		/obj/structure/spawner/ice_moon/demonic_portal/bluespace_beacon_event/snowlegion = 2,
-	)
-	return demon_spawners
-
 /proc/get_bluespace_beacon_portal_spawn_turf(atom/source, radius = 2)
 	var/list/possible_turfs = list()
 	for(var/turf/target_turf as anything in RANGE_TURFS(radius, source))

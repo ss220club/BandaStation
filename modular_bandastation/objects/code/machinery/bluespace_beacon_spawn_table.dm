@@ -1,106 +1,148 @@
-/proc/get_bluespace_beacon_random_spawn_weights()
-	var/static/list/spawn_weights = list(
-		/mob/living/basic/junkermoff = 8,
-		/obj/item/toy/crayon = 10,
-		/obj/item/toy/crayon/red = 4,
-		/obj/item/toy/crayon/blue = 4,
-		/obj/item/toy/crayon/orange = 4,
-		/obj/item/toy/crayon/yellow = 4,
-		/obj/item/toy/crayon/green = 4,
-		/obj/item/toy/crayon/purple = 4,
-		/obj/item/toy/crayon/black = 3,
-		/obj/item/toy/crayon/white = 3,
-		/obj/item/storage/crayons = 2,
-		/obj/item/pen = 9,
-		/obj/item/pen/blue = 4,
-		/obj/item/pen/red = 4,
-		/obj/item/pen/fourcolor = 3,
-		/obj/item/pen/charcoal = 2,
-		/obj/item/paper = 6,
-		/obj/item/paper/paperslip = 5,
-		/obj/item/paper/crumpled = 4,
-		/obj/item/flashlight/pen = 3,
-		/obj/item/toy/waterballoon = 3,
-		/obj/item/stack/sheet/cardboard = 4,
-		/obj/item/stack/ore/glass = 3,
-		/obj/item/food/grown/banana = 7,
-		/obj/item/food/chips = 7,
-		/obj/item/food/chips/shrimp = 5,
-		/obj/item/food/candy = 6,
-		/obj/item/food/candy_corn = 5,
-		/obj/item/food/cookie = 6,
-		/obj/item/food/cookie/sugar = 5,
-		/obj/item/food/cookie/oatmeal = 5,
-		/obj/item/food/cookie/raisin = 5,
-		/obj/item/food/cookie/chocolate_chip_cookie = 5,
-		/obj/item/food/cookie/snickerdoodle = 4,
-		/obj/item/food/cookie/thumbprint_cookie = 3,
-		/obj/item/food/cookie/macaron = 3,
-		/obj/item/food/donut/plain = 6,
-		/obj/item/food/donut/berry = 5,
-		/obj/item/food/donut/choco = 5,
-		/obj/item/food/donut/apple = 4,
-		/obj/item/food/donut/caramel = 4,
-		/obj/item/food/donut/matcha = 3,
-		/obj/item/food/donut/laugh = 2,
-		/obj/item/food/donut/trumpet = 2,
-		/obj/item/food/breadslice/plain = 5,
-		/obj/item/food/breadslice/banana = 4,
-		/obj/item/food/breadslice/tofu = 3,
-		/obj/item/food/breadslice/creamcheese = 3,
-		/obj/item/food/watermelonslice = 4,
-		/obj/item/food/appleslice = 4,
-		/obj/item/food/pineappleslice = 3,
-		/obj/item/food/pickle = 3,
-		/obj/item/food/pie/cream = 2,
-		/obj/item/food/pie/cream/nostun = 2,
-		/obj/item/reagent_containers/cup/glass/waterbottle = 4,
-		/obj/item/reagent_containers/cup/glass/bottle/juice/orangejuice = 3,
-		/obj/item/reagent_containers/cup/glass/bottle/juice/tomatojuice = 2,
-		/obj/item/reagent_containers/cup/glass/bottle/juice/limejuice = 2,
-		/obj/item/reagent_containers/cup/glass/bottle/juice/pineapplejuice = 2,
-		/obj/item/clothing/head/beanie = 4,
-		/obj/item/clothing/head/beanie/black = 3,
-		/obj/item/clothing/head/beanie/red = 3,
-		/obj/item/clothing/head/beanie/darkblue = 3,
-		/obj/item/clothing/head/beanie/yellow = 3,
-		/obj/item/clothing/head/beanie/orange = 3,
-		/obj/item/clothing/head/beret = 3,
-		/obj/item/clothing/head/fedora = 2,
-		/obj/item/clothing/head/fedora/white = 2,
-		/obj/item/clothing/head/fedora/beige = 2,
-		/obj/item/clothing/head/cowboy = 2,
-		/obj/item/clothing/head/cowboy/black = 1,
-		/obj/item/clothing/head/cowboy/white = 1,
-		/obj/item/clothing/head/cowboy/brown = 1,
-		/obj/item/clothing/glasses/regular = 3,
-		/obj/item/clothing/glasses/sunglasses = 2,
-		/obj/item/clothing/glasses/meson = 1,
-		/obj/item/clothing/gloves/color/black = 3,
-		/obj/item/clothing/shoes/sneakers/black = 4,
-		/obj/item/clothing/shoes/sneakers/brown = 3,
-		/obj/item/clothing/shoes/sneakers/blue = 3,
-		/obj/item/clothing/shoes/sneakers/green = 3,
-		/obj/item/clothing/shoes/sneakers/red = 3,
-		/obj/item/clothing/shoes/sneakers/white = 3,
-		/obj/item/clothing/shoes/sneakers/orange = 2,
-		/obj/item/clothing/shoes/laceup = 2,
-		/obj/item/clothing/shoes/workboots = 3,
-		/obj/item/clothing/shoes/workboots/black = 2,
-		/obj/item/clothing/suit/toggle/labcoat = 2,
-		/obj/item/clothing/suit/apron = 2,
-		/obj/item/clothing/suit/apron/chef = 1,
-		/obj/item/clothing/suit/hooded/wintercoat = 1,
-		/obj/item/clothing/suit/hooded/wintercoat/engineering = 1,
-		/obj/item/clothing/under/color/grey = 3,
-		/obj/item/clothing/under/color/blue = 3,
-		/obj/item/clothing/under/color/green = 3,
-		/obj/item/clothing/under/color/red = 3,
-		/obj/item/clothing/under/color/yellow = 3,
-		/mob/living/basic/pet/cat = 2,
-		/mob/living/basic/pet/dog/corgi = 1,
-		/mob/living/basic/possum = 1,
-		/obj/item/stack/ore/bluespace_crystal = 1,
-		/obj/item/stack/sheet/mineral/plasma = 1,
+/proc/get_bluespace_beacon_random_spawn_tables()
+	var/static/list/spawn_tables = list(
+		"trash" = list(
+			"weight" = 40,
+			"items" = list(
+				/obj/item/food/urinalcake = 10,
+				/obj/item/bikehorn/rubberducky/plasticducky = 5,
+				/obj/item/soap = 2,
+				/obj/item/bikehorn/rubberducky = 7,
+				/obj/item/coin/plastic = 7,
+				/obj/item/slime_extract/grey = 1,
+				/obj/item/storage/pill_bottle/lsd = 1,
+				/obj/item/storage/pill_bottle/zoom = 1,
+				/obj/item/storage/pill_bottle/happy = 1,
+				/obj/item/storage/pill_bottle/potassiodide = 1,
+				/obj/item/reagent_containers/hypospray/medipen/pumpup = 1,
+				/obj/item/stack/medical/suture = 1,
+				/obj/item/stack/medical/mesh = 1,
+				/obj/item/grenade/iedcasing/spawned = 1,
+				/obj/item/spear = 1,
+				/obj/item/knife/shiv = 1,
+				/obj/item/trash/candy = 1,
+				/obj/item/trash/raisins = 1,
+				/obj/item/trash/cheesie = 1,
+				/obj/item/trash/chips = 1,
+				/obj/item/trash/popcorn = 1,
+			),
+		),
+		"hostiles" = list(
+			"weight" = 8,
+			"items" = list(
+				/mob/living/basic/frog/crazy = 7,
+				/mob/living/basic/lizard/big/gator = 1,
+				/mob/living/basic/lizard/big/crocodile = 4,
+				/mob/living/basic/blob_minion/spore = 10,
+				/mob/living/carbon/human/species/monkey/angry = 2,
+				/mob/living/basic/mining/legion/monkey = 1,
+			),
+		),
+		"food" = list(
+			"weight" = 22,
+			"items" = list(
+				/obj/item/food/grown/banana = 7,
+				/obj/item/food/chips = 7,
+				/obj/item/food/chips/shrimp = 5,
+				/obj/item/food/candy = 6,
+				/obj/item/food/candy_corn = 5,
+				/obj/item/food/cookie = 6,
+				/obj/item/food/cookie/chocolate_chip_cookie = 5,
+				/obj/item/food/donut/plain = 6,
+				/obj/item/food/donut/choco = 5,
+				/obj/item/reagent_containers/cup/glass/waterbottle = 4,
+			),
+		),
+		"peaceful_animals" = list(
+			"weight" = 20,
+			"items" = list(
+				/mob/living/basic/junkermoff = 8,
+				/mob/living/basic/pet/cat = 3,
+				/mob/living/basic/pet/dog/corgi = 2,
+				/mob/living/basic/possum = 2,
+			),
+		),
+		"lego" = list(
+			"weight" = 8,
+			"items" = list(
+				/obj/item/bodypart/leg/left = 1,
+				/obj/item/bodypart/leg/right = 1,
+				/obj/item/bodypart/arm/left = 1,
+				/obj/item/bodypart/arm/right = 1,
+				/obj/item/bodypart/chest = 1,
+				/obj/item/bodypart/head = 1,
+				/obj/item/bodypart/head/skeleton = 1,
+				/obj/effect/gibspawner/generic = 1,
+			),
+		),
+		"security_equipment" = list(
+			"weight" = 3,
+			"items" = list(
+				/obj/item/shield/riot = 1,
+				/obj/item/clothing/head/helmet/sec = 2,
+				/obj/item/clothing/suit/armor/vest = 2,
+				/obj/item/clothing/mask/gas/sechailer = 1,
+				/obj/item/coin/antagtoken = 1,
+				/obj/item/clothing/glasses = 1,
+				/obj/item/restraints/handcuffs = 4,
+				/obj/item/melee/baton/security/cattleprod = 3,
+				/obj/item/restraints/handcuffs/cable/zipties = 7,
+				/obj/item/restraints/handcuffs/cable/zipties/used = 10,
+			),
+		),
+		"engineering_equipment" = list(
+			"weight" = 7,
+			"items" = list(
+				/obj/item/clothing/suit/hazardvest = 4,
+				/obj/item/clothing/glasses/meson = 3,
+				/obj/item/clothing/head/utility/hardhat/welding/up = 1,
+				/obj/item/tank/internals/emergency_oxygen/engi/empty = 3,
+				/obj/item/tank/internals/emergency_oxygen/double/empty = 1,
+				/obj/item/storage/belt/utility = 2,
+				/obj/item/storage/belt/utility/full/engi = 1,
+				/obj/item/screwdriver = 7,
+				/obj/item/wrench = 7,
+				/obj/item/weldingtool = 7,
+				/obj/item/crowbar = 7,
+				/obj/item/wirecutters = 7,
+				/obj/item/multitool = 3,
+				/obj/item/t_scanner = 7,
+				/obj/item/stack/cable_coil = 10,
+			),
+		),
+		"rare_items" = list(
+			"weight" = 1,
+			"items" = list(
+				/obj/item/melee/baton/telescopic = 1,
+				/obj/item/dice/d20 = 1,
+				/obj/item/dice/d20/fate/stealth/cursed/one_use = 1,
+				/obj/item/dice/d20/fate/stealth/one_use = 1,
+			),
+		),
 	)
-	return spawn_weights
+	return spawn_tables
+
+/proc/pick_bluespace_beacon_random_spawn_type(list/spawn_tables = null)
+	if(!length(spawn_tables))
+		spawn_tables = get_bluespace_beacon_random_spawn_tables()
+
+	var/list/subtable_weights = list()
+	for(var/subtable_name in spawn_tables)
+		var/list/subtable_data = spawn_tables[subtable_name]
+		if(!islist(subtable_data))
+			continue
+		subtable_weights[subtable_name] = max(1, subtable_data["weight"] || 1)
+
+	if(!length(subtable_weights))
+		return null
+
+	var/subtable_name = pick_weight(subtable_weights)
+	var/list/subtable_data = spawn_tables[subtable_name]
+	if(!islist(subtable_data))
+		return null
+
+	var/list/items = subtable_data["items"]
+	if(!length(items))
+		return null
+
+	return pick_weight(items)
+
