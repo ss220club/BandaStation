@@ -2,7 +2,7 @@
 
 /proc/get_ahelp_keywords()
 	var/static/initialized
-	var/static/list/keywords
+	var/static/regex/keywords
 
 	if(initialized)
 		return keywords
@@ -13,43 +13,31 @@
 	if(!fexists(AHELP_KEYWORDS_FILE))
 		return null
 
-	var/raw_json = file2text(AHELP_KEYWORDS_FILE)
-	if(!length(raw_json))
-		return null
-
-	var/list/parsed = safe_json_decode(raw_json)
-	if(isnull(parsed) || !islist(parsed))
+	var/raw_filter = file2text(AHELP_KEYWORDS_FILE)
+	var/list/parsed_filter = safe_json_decode(raw_filter)
+	if(isnull(parsed_filter))
 		log_config("JSON parsing failure for [AHELP_KEYWORDS_FILE]")
 		return null
 
-	var/list/keyword_strings = parsed["ahelp_keywords"]
-	if(!islist(keyword_strings) || !length(keyword_strings))
+	var/list/filters = parsed_filter["ahelp_keywords"]
+	if(!length(filters))
 		return null
 
-	var/list/unique = list()
-	unique |= keyword_strings
-	var/list/cleaned = list()
-	for(var/entry in unique)
-		if(!istext(entry) || !length(trim(entry)))
-			continue
-		cleaned += trim(entry)
+	var/list/unique_filters = list()
+	unique_filters |= filters
+	var/combined_regex = unique_filters.Join("|")
+	keywords = new /regex(combined_regex, "i")
+	return keywords
 
-	if(!length(cleaned))
-		return null
-
-	return keywords = cleaned
-
-// true if the message contains a keyword
+// true if ahelp message matches any configured keyword
 /proc/ahelp_message_matches_keyword(message)
-	var/list/keywords = get_ahelp_keywords()
-	if(!length(keywords))
+	if(!message)
 		return FALSE
 
-	var/ticket_text = LOWER_TEXT("[message]")
-	for(var/keyword in keywords)
-		if(findtext(ticket_text, LOWER_TEXT(keyword)))
-			return TRUE
+	var/regex/keywords = get_ahelp_keywords()
+	if(!keywords)
+		return FALSE
 
-	return FALSE
+	return !!keywords.Find("[message]")
 
 #undef AHELP_KEYWORDS_FILE
