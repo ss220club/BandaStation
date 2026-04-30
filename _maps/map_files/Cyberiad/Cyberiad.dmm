@@ -13189,12 +13189,16 @@
 "dgV" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/mapping_helpers/airlock/access/all/security/armory,
 /obj/machinery/door/airlock/security,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/security/brig,
+/obj/machinery/door/poddoor/preopen{
+	name = "Security Blast Door";
+	id = "Secure Gate"
+	},
 /turf/open/floor/iron/dark,
-/area/station/security/prison)
+/area/station/security/brig)
 "dhb" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -14162,15 +14166,6 @@
 /obj/item/kirbyplants/random,
 /turf/open/floor/iron,
 /area/station/science/genetics)
-"dsa" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/preopen{
-	name = "Security Blast Door";
-	id = "Secure Gate"
-	},
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/station/security/prison)
 "dsb" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -70044,15 +70039,6 @@
 	pixel_y = 2;
 	req_access = list("security");
 	normaldoorcontrol = 1
-	},
-/obj/machinery/button/door/directional{
-	desc = "Открывает самый правый проход в бриг.";
-	name = "Brig Foyer East Doors";
-	pixel_x = 10;
-	pixel_y = -6;
-	req_access = list("security");
-	normaldoorcontrol = 1;
-	id = "BrigEast"
 	},
 /obj/machinery/door/poddoor/preopen{
 	name = "Security Blast Door";
@@ -187788,10 +187774,10 @@ niR
 vrG
 mxh
 seo
-ddm
-dsa
+ajE
+gKZ
 dgV
-dsa
+gKZ
 tFO
 lrR
 cJx
