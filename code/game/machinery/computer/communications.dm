@@ -318,7 +318,7 @@
 				return
 			var/reason = trim(html_encode(params["reason"]), MAX_MESSAGE_LEN)
 			var/insert_this = list(list(
-				"time" = station_time_timestamp(),
+				"time" = round_timestamp(),
 				"sender_real_name" = "[user.real_name ? user.real_name : user.name]",
 				"sender_uid" = REF(user),
 				"message" = reason))
