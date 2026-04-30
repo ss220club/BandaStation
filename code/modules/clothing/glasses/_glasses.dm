@@ -491,7 +491,7 @@
 	inhand_icon_state = "welding-g"
 	actions_types = list(/datum/action/item_action/toggle)
 	flash_protect = FLASH_PROTECTION_WELDER
-	flags_cover = GLASSESCOVERSEYES
+	visor_flags_cover = GLASSESCOVERSEYES
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*2.5)
 	tint = 2
 	visor_vars_to_toggle = VISOR_FLASHPROTECT | VISOR_TINT
@@ -588,7 +588,10 @@
 /obj/item/clothing/glasses/thermal/xray
 	name = "syndicate xray goggles"
 	desc = "A pair of xray goggles manufactured by the Syndicate."
+	icon_state = "material"
+	color_cutoffs = null
 	vision_flags = SEE_TURFS|SEE_MOBS|SEE_OBJS
+	glass_colour_type = /datum/client_colour/glass_colour/lightblue
 
 /obj/item/clothing/glasses/thermal/xray/equipped(mob/living/carbon/human/user, slot)
 	. = ..()

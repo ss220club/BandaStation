@@ -39,8 +39,8 @@
 
 	/// When hit on this bodypart, we have this chance of losing some blood + the incoming damage
 	var/internal_bleeding_chance
-	/// If we let off blood when hit, the max blood lost is this * the incoming damage
-	var/internal_bleeding_coefficient
+	/// A multiplier applied to how much blood is lost from damage to the wounded limb
+	var/internal_bleeding_coefficient = 1
 	/// If TRUE we are ready to be mended in surgery
 	VAR_FINAL/mend_state = FALSE
 
@@ -51,39 +51,37 @@
 
 	return ..()
 
-/datum/wound/pierce/bleed/receive_damage(wounding_type, wounding_dmg, wound_bonus)
-	if(victim.stat == DEAD || (wounding_dmg < 5) || !limb.can_bleed() || !victim.get_blood_volume() || !prob(internal_bleeding_chance + wounding_dmg))
+/datum/wound/pierce/bleed/receive_damage(wounding_type, wounding_dmg, wound_bonus, attack_direction, damage_source)
+	if(victim.stat == DEAD || wounding_dmg < 5 || !limb.can_bleed() || !victim.get_blood_volume() || !prob(internal_bleeding_chance + wounding_dmg))
 		return
-	if(limb.current_gauze?.splint_factor)
-		wounding_dmg *= (1 - limb.current_gauze.splint_factor)
-	var/blood_bled = rand(1, wounding_dmg * internal_bleeding_coefficient) // 12 brute toolbox can cause up to 15/18/21 bloodloss on mod/sev/crit
+	// 20 force attack ~=  5-16 blood loss ~= 1%-3% of blood volume
+	// 30 force attack ~= 6-20 blood loss ~= 1%-4% of blood volume
+	var/blood_bled = sqrt(wounding_dmg) * internal_bleeding_coefficient * limb.get_splint_factor() * pick(0.75, 1, 1.25, 1.5)
 	switch(blood_bled)
-		if(1 to 6)
-			victim.bleed(blood_bled, TRUE)
-		if(7 to 13)
+		if(8 to 12)
 			victim.visible_message(
 				span_smalldanger("Капли крови вылетают из отверстия в [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]!."),
 				span_danger("Вы откашливаетесь, выплевывая немного крови из-за удара по вашей [limb.ru_plaintext_zone[DATIVE] || limb.plaintext_zone]."),
 				vision_distance = COMBAT_MESSAGE_RANGE,
+				visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 			)
-			victim.bleed(blood_bled, TRUE)
-		if(14 to 19)
+		if(12 to 18)
 			victim.visible_message(
 				span_smalldanger("Небольшая струя крови брызгает из дыры в [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]!!"),
 				span_danger("Вы выплевываете струю крови из-за удара по вашей [limb.ru_plaintext_zone[DATIVE] || limb.plaintext_zone]!"),
 				vision_distance = COMBAT_MESSAGE_RANGE,
+				visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 			)
-			victim.create_splatter(victim.dir)
-			victim.bleed(blood_bled)
-		if(20 to INFINITY)
+		if(18 to INFINITY)
 			victim.visible_message(
 				span_danger("Брызги крови струятся из прокола в [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]!"),
 				span_bolddanger("Вы задыхаетесь, выплевывая брызги крови из-за удара по вашей [limb.ru_plaintext_zone[DATIVE] || limb.plaintext_zone]!"),
 				vision_distance = COMBAT_MESSAGE_RANGE,
+				visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 			)
-			victim.bleed(blood_bled)
-			victim.create_splatter(victim.dir)
-			victim.add_splatter_floor(get_step(victim.loc, victim.dir))
+	victim.bleed(blood_bled)
+	if(blood_bled >= 18)
+		victim.spray_blood(attack_direction)
 
 /datum/wound/pierce/bleed/get_bleed_rate_of_change()
 	//basically if a species doesn't bleed, the wound is stagnant and will not heal on its own (nor get worse)
@@ -91,7 +89,7 @@
 		return BLOOD_FLOW_STEADY
 	if(HAS_TRAIT(victim, TRAIT_BLOOD_FOUNTAIN))
 		return BLOOD_FLOW_INCREASING
-	if(limb.current_gauze || clot_rate > 0)
+	if(LAZYACCESS(limb.applied_items, LIMB_ITEM_GAUZE) || clot_rate > 0)
 		return BLOOD_FLOW_DECREASING
 	if(clot_rate < 0)
 		return BLOOD_FLOW_INCREASING
@@ -114,12 +112,11 @@
 			adjust_blood_flow(0.25 * seconds_per_tick) // old heparin used to just add +2 bleed stacks per tick, this adds 0.5 bleed flow to all open cuts which is probably even stronger as long as you can cut them first
 
 	//gauze always reduces blood flow, even for non bleeders
-	if(limb.current_gauze)
-		if(clot_rate > 0)
-			adjust_blood_flow(-clot_rate * seconds_per_tick)
-		var/gauze_power = limb.current_gauze.absorption_rate
+	var/obj/item/stack/medical/wrap/current_gauze = LAZYACCESS(limb.applied_items, LIMB_ITEM_GAUZE)
+	if(current_gauze?.absorption_rate)
+		var/gauze_power = current_gauze.absorption_rate
 		limb.seep_gauze(gauze_power * seconds_per_tick)
-		adjust_blood_flow(-gauze_power * gauzed_clot_rate * seconds_per_tick)
+		adjust_blood_flow((-clot_rate * seconds_per_tick) + (-gauze_power * gauzed_clot_rate * seconds_per_tick))
 	//otherwise, only clot if it's a bleeder
 	else if(limb.can_bleed())
 		adjust_blood_flow(-clot_rate * seconds_per_tick)
@@ -135,10 +132,10 @@
 /datum/wound/pierce/bleed/check_grab_treatments(obj/item/tool, mob/user)
 	// if we're using something hot but not a cautery, we need to be aggro grabbing them first,
 	// so we don't try treating someone we're eswording
-	return tool.get_temperature()
+	return tool.get_temperature() >= FIRE_MINIMUM_TEMPERATURE_TO_EXIST
 
 /datum/wound/pierce/bleed/treat(obj/item/tool, mob/user)
-	if(tool.tool_behaviour == TOOL_CAUTERY || tool.get_temperature())
+	if(tool.tool_behaviour == TOOL_CAUTERY || tool.get_temperature() >= FIRE_MINIMUM_TEMPERATURE_TO_EXIST)
 		tool_cauterize(tool, user)
 
 /datum/wound/pierce/bleed/on_xadone(power)
@@ -209,7 +206,7 @@
 	gauzed_clot_rate = 0.75
 	clot_rate = 0.03
 	internal_bleeding_chance = 30
-	internal_bleeding_coefficient = 1.25
+	internal_bleeding_coefficient = 1.5
 	series_threshold_penalty = 20
 	status_effect_type = /datum/status_effect/wound/pierce/moderate
 	scar_keyword = "piercemoderate"
@@ -219,8 +216,8 @@
 
 /datum/wound/pierce/bleed/moderate/update_descriptions()
 	if(!limb.can_bleed())
-		examine_desc = "has a small, torn hole"
-		occur_text = "splits a small hole open"
+		examine_desc = "имеет небольшую рваную дыру"
+		occur_text = "пробивает небольшую дыру"
 
 /datum/wound_pregen_data/flesh_pierce/breakage
 	abstract = FALSE
@@ -235,15 +232,14 @@
 	return weight
 
 /datum/wound/pierce/bleed/moderate/needle_fail //for blood testamajig
-	name = "Pinprick Pierce"
-	desc = "Patient's skin has been deeply pierced, causing mild bleeding."
-	treat_text_short = "Apply bandaging or suturing."
-	examine_desc = "has a small red pinprick, gently bleeding"
+	name = "Глубокий прокол"
+	desc = "Кожа пациента была глубоко проколота, что привело к небольшому кровотечению."
+	treat_text_short = "Наложить повязку или швы."
+	examine_desc = "имеет небольшое красное отверстие, слегка кровоточит"
 	initial_flow = 0.5 //very minor, mostly there as fluff and "dont do that idiot" reminder
 	gauzed_clot_rate = 0.1
 	clot_rate = 0.03 // will close quickly on its own
 	internal_bleeding_chance = 0
-	internal_bleeding_coefficient = 1
 	threshold_penalty = 5
 
 /datum/wound_pregen_data/flesh_pierce/open_puncture/pinprick
@@ -252,12 +248,12 @@
 	abstract = FALSE
 
 /datum/wound/pierce/bleed/moderate/projectile
-	name = "Minor Skin Penetration"
-	desc = "Patient's skin has been pierced through, causing severe bruising and minor internal bleeding in affected area."
-	treat_text = "Apply bandaging or suturing to the wound, make use of blood clotting agents, \
-		cauterization, or in extreme circumstances, exposure to extreme cold or vaccuum. \
-		Follow with food and a rest period."
-	examine_desc = "has a small, circular hole, gently bleeding"
+	name = "Незначительный прокол кожи"
+	desc = "Кожа пациента была пробита, что привело к сильным ушибам и небольшому внутреннему кровотечению в поражённой области."
+	treat_text = "Наложить повязку или швы на рану, использовать кровоостанавливающие средства, \
+		прижечь рану, либо в крайних случаях подвергнуть воздействию экстремального холода или вакуума. \
+		Затем обеспечить питание и покой."
+	examine_desc = "имеет небольшое круглое отверстие, слегка кровоточит"
 	clot_rate = 0
 
 /datum/wound/pierce/bleed/moderate/projectile/update_descriptions()
@@ -280,7 +276,7 @@
 	gauzed_clot_rate = 0.5
 	clot_rate = 0.02
 	internal_bleeding_chance = 60
-	internal_bleeding_coefficient = 1.5
+	internal_bleeding_coefficient = 2
 	series_threshold_penalty = 35
 	status_effect_type = /datum/status_effect/wound/pierce/severe
 	scar_keyword = "piercesevere"
@@ -318,9 +314,9 @@
 	return weight
 
 /datum/wound/pierce/bleed/severe/eye
-	name = "Eyeball Puncture"
-	desc = "Patient's eye has sustained extreme damage, causing severe bleeding from the ocular cavity."
-	occur_text = "looses a violent spray of blood, revealing a crushed eyeball"
+	name = "Прокол глазного яблока"
+	desc = "Глаз пациента получил серьёзные повреждения, вызывающее сильное кровотечение из глазной полости."
+	occur_text = "брызжет кровь, обнажая раздавленное глазное яблоко"
 	var/right_side = FALSE
 
 /datum/wound/pierce/bleed/severe/eye/apply_wound(obj/item/bodypart/limb, silent, datum/wound/old_wound, smited, attack_direction, wound_source, replacing, right_side)
@@ -329,7 +325,7 @@
 		return FALSE
 	. = ..()
 	src.right_side = right_side
-	examine_desc = "has its [right_side ? "right" : "left"] eye pierced clean through, blood spewing from the cavity"
+	examine_desc = "имеет ранение в [right_side ? "правом" : "левом"] глазу, и из раны течёт кровь"
 	RegisterSignal(limb, COMSIG_BODYPART_UPDATE_WOUND_OVERLAY, PROC_REF(wound_overlay))
 	limb.update_part_wound_overlay()
 
@@ -361,10 +357,10 @@
 	return ..()
 
 /datum/wound/pierce/bleed/severe/magicalearpain //what happens if you try to listen to the heartbeat of a corrupt heart while not a heretic
-	name = "Bleeding Ears"
-	desc = "Patient's ears are bleeding heavily as blood seeps through the inner flesh of the ear through some unknown means."
-	examine_desc = "is covered in blood, black-purple fluid flowing from its ears"
-	occur_text = "is soaked as two spurts of black liquid spray from its ears"
+	name = "Кровоточащие уши"
+	desc = "Уши пациента сильно кровоточат, так как кровь каким-то неизвестным образом просачивается через внутреннюю поверхность уха."
+	examine_desc = "всё покрыто кровью, из ушей течёт чёрно-фиолетовая жидкость"
+	occur_text = "промокает полностью, когда из ушей вырываются две струйки чёрной жидкости"
 	internal_bleeding_chance = 0 // just your ears
 
 /datum/wound_pregen_data/flesh_pierce/open_puncture/magicalearpain
@@ -392,7 +388,7 @@
 	initial_flow = 2.5
 	gauzed_clot_rate = 0.3
 	internal_bleeding_chance = 80
-	internal_bleeding_coefficient = 1.75
+	internal_bleeding_coefficient = 2.5
 	threshold_penalty = 15
 	status_effect_type = /datum/status_effect/wound/pierce/critical
 	scar_keyword = "piercecritical"

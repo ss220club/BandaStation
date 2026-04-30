@@ -3743,7 +3743,6 @@
 /area/space/nearstation)
 "aUS" = (
 /obj/effect/turf_decal/bot,
-/obj/structure/closet/crate/secure/loot,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
@@ -3868,7 +3867,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 1
@@ -8209,10 +8208,11 @@
 /area/station/service/library)
 "bXF" = (
 /obj/effect/turf_decal/tile/brown/anticorner/contrasted,
+/obj/machinery/brm,
 /obj/machinery/conveyor{
+	dir = 8;
 	id = "mining"
 	},
-/obj/machinery/brm,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "bXG" = (
@@ -10533,10 +10533,10 @@
 /turf/open/floor/iron,
 /area/station/command/heads_quarters/rd)
 "czO" = (
-/obj/item/stack/sticky_tape/surgical,
+/obj/item/stack/medical/wrap/sticky_tape/surgical,
 /obj/structure/table/glass,
 /obj/item/radio/intercom/directional/north,
-/obj/item/stack/sticky_tape/surgical,
+/obj/item/stack/medical/wrap/sticky_tape/surgical,
 /obj/item/stack/medical/bone_gel,
 /obj/machinery/light/directional/north,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -14098,6 +14098,10 @@
 	pixel_x = -4;
 	pixel_y = 3
 	},
+/obj/item/tgui_book/manual/idc{
+	pixel_y = 3;
+	pixel_x = 3
+	},
 /obj/item/clothing/neck/stethoscope{
 	pixel_y = 4
 	},
@@ -14728,6 +14732,7 @@
 /turf/open/floor/wood,
 /area/station/service/electronic_marketing_den)
 "dEm" = (
+/obj/item/wrench/medical,
 /obj/item/reagent_containers/cup/beaker/cryoxadone{
 	pixel_x = -6;
 	pixel_y = 10
@@ -15629,7 +15634,7 @@
 /area/station/commons/fitness/recreation)
 "dOc" = (
 /obj/structure/table,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/mesh,
 /obj/item/stack/medical/suture,
 /obj/effect/turf_decal/trimline/blue/filled/line{
@@ -17206,9 +17211,7 @@
 	},
 /obj/effect/turf_decal/bot,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/closet/crate,
 /obj/effect/landmark/start/hangover,
-/obj/effect/spawner/random/maintenance,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "ekZ" = (
@@ -18041,14 +18044,11 @@
 /turf/open/floor/iron/white,
 /area/station/science/lobby)
 "ewa" = (
-/obj/effect/turf_decal/tile/brown/half/contrasted,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/conveyor_switch/oneway{
-	id = "mining";
-	dir = 1
-	},
-/obj/structure/railing{
-	dir = 6
+/obj/machinery/bouldertech/refinery,
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "mining"
 	},
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
@@ -20593,12 +20593,14 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos/project)
 "fdn" = (
-/obj/effect/landmark/start/hangover,
 /obj/structure/closet/crate,
 /obj/effect/turf_decal/bot,
 /obj/item/airlock_painter/decal,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/railing/corner/end/flip,
+/obj/item/stack/ducts,
+/obj/item/stack/ducts,
+/obj/item/stack/ducts,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "fdG" = (
@@ -20881,7 +20883,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
-/mob/living/simple_animal/bot/secbot/beepsky/officer,
+/mob/living/basic/bot/secbot/beepsky/officer,
 /turf/open/floor/iron,
 /area/station/hallway/primary/starboard)
 "fgq" = (
@@ -22671,13 +22673,13 @@
 /turf/open/floor/iron/grimy,
 /area/station/service/library/abandoned)
 "fCA" = (
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
-	dir = 1
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/brown/half/contrasted,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/railing,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "mining"
+	},
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "fCD" = (
@@ -27809,6 +27811,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood/oil,
+/obj/structure/railing,
+/obj/machinery/conveyor_switch/oneway{
+	id = "mining";
+	dir = 1
+	},
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "gKI" = (
@@ -31244,11 +31251,9 @@
 /turf/open/floor/iron/white,
 /area/station/medical/virology)
 "hGP" = (
-/obj/machinery/conveyor{
-	dir = 8;
-	id = "mining"
-	},
-/obj/machinery/bouldertech/refinery,
+/obj/effect/turf_decal/tile/brown/half/contrasted,
+/obj/structure/closet/crate/secure/loot,
+/obj/effect/landmark/start/hangover,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "hGW" = (
@@ -32196,7 +32201,7 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
 	},
-/mob/living/simple_animal/bot/secbot/beepsky/armsky,
+/mob/living/basic/bot/secbot/beepsky/armsky,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "hTv" = (
@@ -39739,7 +39744,7 @@
 /area/station/science/research)
 "jKm" = (
 /obj/structure/rack,
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/suture,
 /obj/item/stack/medical/mesh,
 /obj/item/reagent_containers/syringe/epinephrine{
@@ -41710,6 +41715,9 @@
 /obj/item/flashlight/lamp{
 	pixel_y = 4;
 	pixel_x = -6
+	},
+/obj/item/tgui_book/manual/idc{
+	pixel_x = 4
 	},
 /turf/open/floor/iron,
 /area/station/command/heads_quarters/cmo)
@@ -48399,7 +48407,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/port)
 "lQX" = (
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/suture,
 /obj/machinery/camera/directional/north{
 	c_tag = "Medbay - Treatment Center";
@@ -48773,9 +48781,12 @@
 /turf/open/floor/iron,
 /area/station/security/checkpoint/escape)
 "lWX" = (
-/obj/effect/turf_decal/tile/brown/half/contrasted,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/railing,
+/obj/machinery/bouldertech/refinery/smelter,
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "mining"
+	},
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "lXm" = (
@@ -50901,10 +50912,14 @@
 /obj/item/reagent_containers/spray/cleaner{
 	pixel_x = -6
 	},
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/tgui_book/manual/idc{
+	pixel_y = 3;
+	pixel_x = 3
+	},
 /obj/item/book/manual/wiki/infections,
+/obj/item/reagent_containers/syringe/antiviral,
 /obj/item/reagent_containers/dropper,
-/obj/item/reagent_containers/syringe/antiviral,
-/obj/item/reagent_containers/syringe/antiviral,
 /turf/open/floor/iron/white,
 /area/station/medical/virology)
 "mzu" = (
@@ -56212,7 +56227,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 10
 	},
-/obj/machinery/computer/slot_machine,
+/obj/effect/spawner/random/entertainment/slot_machine,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -64783,10 +64798,8 @@
 /area/station/maintenance/port)
 "pVR" = (
 /obj/structure/sign/poster/contraband/random/directional/south,
-/obj/machinery/conveyor{
-	dir = 10;
-	id = "mining"
-	},
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "pWb" = (
@@ -65669,7 +65682,7 @@
 /turf/open/floor/plating,
 /area/station/medical/abandoned)
 "qgs" = (
-/obj/item/stack/medical/gauze,
+/obj/item/stack/medical/wrap/gauze,
 /obj/item/stack/medical/mesh,
 /obj/structure/table/reinforced/rglass,
 /obj/effect/turf_decal/tile/blue/fourcorners,
@@ -75232,10 +75245,10 @@
 /turf/closed/wall,
 /area/station/service/bar/backroom)
 "szC" = (
-/obj/machinery/conveyor{
-	dir = 9;
-	id = "mining"
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted{
+	dir = 8
 	},
+/obj/effect/landmark/start/hangover,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "szG" = (
@@ -76965,10 +76978,6 @@
 	dir = 4
 	},
 /obj/machinery/newscaster/directional/west,
-/obj/item/wrench/medical{
-	pixel_x = 2;
-	pixel_y = 4
-	},
 /obj/effect/turf_decal/bot_red,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
@@ -82878,10 +82887,13 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "utQ" = (
-/obj/machinery/conveyor{
-	dir = 8;
-	id = "mining"
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 1
 	},
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/brown/half/contrasted,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "utS" = (
@@ -83752,7 +83764,13 @@
 	},
 /obj/machinery/light/small/directional/west,
 /obj/effect/turf_decal/delivery,
-/obj/effect/landmark/start/hangover,
+/obj/machinery/conveyor{
+	dir = 9;
+	id = "mining"
+	},
+/obj/effect/turf_decal/tile/brown/half/contrasted{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "uDQ" = (
@@ -86410,11 +86428,8 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/fore)
 "vnI" = (
-/obj/machinery/conveyor{
-	dir = 8;
-	id = "mining"
-	},
-/obj/machinery/bouldertech/refinery/smelter,
+/obj/effect/turf_decal/tile/brown/half/contrasted,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "vnP" = (
@@ -90260,6 +90275,8 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/crate,
+/obj/effect/spawner/random/maintenance,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "wlW" = (
@@ -93131,7 +93148,6 @@
 /area/station/commons/vacant_room/office)
 "wZD" = (
 /obj/structure/disposalpipe/segment,
-/obj/effect/landmark/start/hangover,
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/brown/half/contrasted{
 	dir = 1
@@ -96409,7 +96425,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable/layer3,
-/mob/living/simple_animal/bot/secbot/pingsky,
+/mob/living/basic/bot/secbot/pingsky,
 /turf/open/floor/iron/grimy,
 /area/station/ai/satellite/interior)
 "xMX" = (
@@ -97156,6 +97172,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/start/hangover,
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "xXw" = (

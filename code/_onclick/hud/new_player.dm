@@ -2,15 +2,17 @@
 // #define SHUTTER_WAIT_DURATION 0.2 SECONDS
 // /// Maximum number of station trait buttons we will display, please think hard before creating scenarios where there are more than this
 // #define MAX_STATION_TRAIT_BUTTONS_VERTICAL 3
-#define TRAIT_BUTTON_Y_ORIGIN 397
-#define TRAIT_BUTTON_X_ORIGIN 233
-#define TRAIT_BUTTON_OFFSET 27
-#define SQUARE_VIEWPORT_OFFSET 64
+/// Maximum number of station trait buttons we will display, please think hard before creating scenarios where there are more than this
+// #define MAX_STATION_TRAIT_BUTTONS_VERTICAL 3
+// #define TRAIT_BUTTON_Y_ORIGIN 397
+// #define TRAIT_BUTTON_X_ORIGIN 233
+// #define TRAIT_BUTTON_OFFSET 27
+// #define SQUARE_VIEWPORT_OFFSET 64
 
-/datum/hud/new_player
-	///Whether the menu is currently on the client's screen or not
-	var/menu_hud_status = TRUE
-	var/list/shown_station_trait_buttons
+// /datum/hud/new_player
+// 	///Whether the menu is currently on the client's screen or not
+// 	var/menu_hud_status = TRUE
+// 	var/list/shown_station_trait_buttons
 
 /* BANDASTATION REMOVAL - HTML Title Screen
 /datum/hud/new_player/New(mob/owner)
@@ -18,13 +20,11 @@
 	if (!owner?.client || owner.client.interviewee)
 		return
 
-	var/list/buttons = subtypesof(/atom/movable/screen/lobby)
-	for (var/atom/movable/screen/lobby/lobbyscreen as anything in buttons)
+	for (var/atom/movable/screen/lobby/lobbyscreen as anything in subtypesof(/atom/movable/screen/lobby))
 		if (!initial(lobbyscreen.always_available))
 			continue
-		lobbyscreen = new lobbyscreen(our_hud = src)
+		lobbyscreen = add_screen_object(lobbyscreen, HUD_KEY_NEW_PLAYER(lobbyscreen))
 		lobbyscreen.SlowInit()
-		static_inventory += lobbyscreen
 		if (!lobbyscreen.always_shown)
 			lobbyscreen.RegisterSignal(src, COMSIG_HUD_LOBBY_COLLAPSED, TYPE_PROC_REF(/atom/movable/screen/lobby, collapse_button))
 			lobbyscreen.RegisterSignal(src, COMSIG_HUD_LOBBY_EXPANDED, TYPE_PROC_REF(/atom/movable/screen/lobby, expand_button))
@@ -32,9 +32,8 @@
 	if (!owner.client.is_localhost())
 		return
 
-	var/atom/movable/screen/lobby/button/start_now/start_button = new(our_hud = src)
+	var/atom/movable/screen/lobby/button/start_now/start_button = add_screen_object(/atom/movable/screen/lobby/button/start_now, HUD_NEW_PLAYER_START_NOW)
 	start_button.SlowInit()
-	static_inventory += start_button
 	start_button.RegisterSignal(src, COMSIG_HUD_LOBBY_COLLAPSED, TYPE_PROC_REF(/atom/movable/screen/lobby, collapse_button))
 	start_button.RegisterSignal(src, COMSIG_HUD_LOBBY_EXPANDED, TYPE_PROC_REF(/atom/movable/screen/lobby, expand_button))
 
@@ -52,9 +51,8 @@
 			continue
 		if(LAZYACCESS(shown_station_trait_buttons, trait))
 			continue
-		var/atom/movable/screen/lobby/button/sign_up/sign_up_button = new(our_hud = src)
+		var/atom/movable/screen/lobby/button/sign_up/sign_up_button = add_screen_object(/atom/movable/screen/lobby/button/sign_up, HUD_NEW_PLAYER_SIGN_UP)
 		trait.setup_lobby_button(sign_up_button)
-		static_inventory |= sign_up_button
 		LAZYSET(shown_station_trait_buttons, trait, sign_up_button)
 		RegisterSignal(trait, COMSIG_QDELETING, PROC_REF(remove_station_trait_button))
 
@@ -93,7 +91,6 @@
 		return
 	LAZYREMOVE(shown_station_trait_buttons, trait)
 	UnregisterSignal(trait, COMSIG_QDELETING)
-	static_inventory -= button
 	qdel(button)
 	place_station_trait_buttons()
 
@@ -776,8 +773,10 @@
 	if(!hud || !show_static)
 		maptext = null
 		return
+
+	var/round_started = SSticker.HasRoundStarted()
 	if(!MC_RUNNING())
-		maptext = MAPTEXT("<span style='text-align: center; vertical-align: middle'>Loading...</span>")
+		maptext = MAPTEXT("<span style='text-align: center; vertical-align: middle'>[(round_started ? null : "Starting in [time_remaining_str()]<br />")]Loading...</span>")
 		return
 	if(SSticker.IsPostgame())
 		maptext = MAPTEXT("<span style='text-align: center; vertical-align: middle'>Game ended, <br /> \
@@ -785,31 +784,34 @@
 		return
 
 	var/new_maptext
-	var/round_started = SSticker.HasRoundStarted()
 	if(round_started)
 		new_maptext = "<span style='text-align: center; vertical-align: middle'>[SSmapping.current_map.map_name]<br /> \
 			[LAZYLEN(GLOB.clients)] player\s online<br /> \
 			[ROUND_TIME()] in<br />"
 		new_maptext += "</span>"
 	else
-		var/time_remaining = SSticker.GetTimeLeft()
-		if(time_remaining > 0)
-			time_remaining = "[round(time_remaining/10)]s"
-		else if(time_remaining == -10)
-			time_remaining = "DELAYED"
-		else
-			time_remaining = "SOON"
 
 		if(hud.mymob.client?.holder)
-			new_maptext = "<span style='text-align: center; vertical-align: middle'>Starting in [time_remaining]<br /> \
+			new_maptext = "<span style='text-align: center; vertical-align: middle'>Starting in [time_remaining_str()]<br /> \
 				[LAZYLEN(GLOB.clients)] player\s<br /> \
 				[SSticker.totalPlayersReady] players ready<br /> \
 				[SSticker.total_admins_ready] / [length(GLOB.admins)] admins ready</span>"
 		else
-			new_maptext = "<span style='text-align: center; vertical-align: middle; font-size: 18px'>[time_remaining]</span><br /> \
+			new_maptext = "<span style='text-align: center; vertical-align: middle; font-size: 18px'>[time_remaining_str()]</span><br /> \
 				<span style='text-align: center; vertical-align: middle'>[LAZYLEN(GLOB.clients)] player\s</span>"
 
 	maptext = MAPTEXT(new_maptext)
+
+/atom/movable/screen/lobby/new_player_info/proc/time_remaining_str()
+	var/time_remaining = SSticker.GetTimeLeft()
+	if(time_remaining > 0)
+		time_remaining = "[round(time_remaining/10)]s"
+	else if(time_remaining == -10)
+		time_remaining = "DELAYED"
+	else
+		time_remaining = "SOON"
+
+	return time_remaining
 
 #undef OVERLAY_X_DIFF
 #undef OVERLAY_Y_DIFF

@@ -124,6 +124,7 @@
 	suffix = "lavaland_surface_sloth.dmm"
 	// Generates nothing but atmos runtimes and salt
 	cost = 0
+	unpickable = TRUE //BANDASTATION EDIT
 
 /datum/map_template/ruin/lavaland/ratvar
 	name = "Lava-Ruin Dead God"
@@ -330,3 +331,12 @@
 	description = "They launched too early"
 	suffix = "lavaland_surface_crashsite.dmm"
 	allow_duplicates = FALSE
+
+/datum/map_template/ruin/lavaland/shoe_facotry
+	name = "Lava-Ruin Shoe Factory"
+	id = "shoe_factory"
+	description = "An abandoned shoe factory."
+	prefix = "_maps/RandomRuins/AnywhereRuins/"
+	suffix = "shoe_factory.dmm"
+	allow_duplicates = FALSE
+	cost = 10

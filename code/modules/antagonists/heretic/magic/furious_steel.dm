@@ -1,8 +1,8 @@
 /datum/action/cooldown/spell/pointed/projectile/furious_steel
-	name = "Furious Steel"
-	desc = "Summon three silver blades which orbit you. \
-		While orbiting you, these blades will protect you from attacks, but will be consumed on use. \
-		Additionally, you can click to fire the blades at a target, dealing damage and causing bleeding."
+	name = "Ярость клинков"
+	desc = "Вы призываете три серебрянных лезвия, которые вращаются вокруг вас. \
+		Во время вращения, клинки защищают вас от входящего урона, расходуясь при каждом блокировании. \
+		Дополнительно, вы можете с помощью ЛКМ метнуть клинки в выбранную цель, нанося урон и вызывая у неё кровотечение при попадании."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -158,17 +158,17 @@
 	outline_color = "#D7CBCA"
 
 /datum/action/cooldown/spell/pointed/projectile/furious_steel/solo
-	name = "Lesser Furious Steel"
+	name = "Меньшая ярость клинков"
 	cooldown_time = 20 SECONDS
 	projectile_amount = 1
-	active_msg = "You summon forth a blade of furious silver."
-	deactive_msg = "You conceal the blade of furious silver."
+	active_msg = "Вы вызываете яростные серебряные клинки."
+	deactive_msg = "Вы скрываете яростные серебряный клинки."
 
 /datum/action/cooldown/spell/pointed/projectile/furious_steel/haunted
-	name = "Cursed Steel"
-	desc = "Summon two cursed blades which orbit you. \
-		While orbiting you, these blades will protect you from attacks, but will be consumed on use. \
-		Additionally, you can click to fire the blades at a target, dealing damage and causing bleeding."
+	name = "Проклятая сталь"
+	desc = "Вы призываете два проклятых клинка, которые вращаются вокруг вас. \
+		Во время вращения, клинки защищают вас от входящего урона, расходуясь при каждом блокировании. \
+		Дополнительно, вы можете с помощью ЛКМ метнуть клинки в выбранную цель, нанося урон и вызывая у неё кровотечение при попадании."
 	background_icon_state = "bg_heretic" // kept intentionally
 	overlay_icon_state = "bg_cult_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -181,8 +181,8 @@
 
 	spell_requirements = NONE
 
-	active_msg = "You summon forth two cursed blades."
-	deactive_msg = "You conceal the cursed blades."
+	active_msg = "Вы призываете 2 проклятых клинка."
+	deactive_msg = "Вы скрываете проклятые клинки."
 	projectile_amount = 2
 	projectile_type = /obj/projectile/floating_blade/haunted
 	projectile_effect = /obj/effect/floating_blade/haunted

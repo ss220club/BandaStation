@@ -465,9 +465,15 @@
 		/datum/material/plasma = SMALL_MATERIAL_AMOUNT * 0.5,
 		/datum/material/plastic = SMALL_MATERIAL_AMOUNT * 0.5,
 	)
+	/// Lighting middleman, lets us do a flicker effect
+	var/datum/light_middleman/middleman
 
 /obj/item/flashlight/flare/Initialize(mapload)
 	. = ..()
+	if(IS_OVERLAY_LIGHT_SYSTEM(light_system))
+		middleman = new(src, "flashlight")
+		RegisterSignal(middleman, COMSIG_LIGHT_MIDDLEMAN_UPDATED, PROC_REF(light_updated))
+		middleman.being_overriding_light()
 	if(randomize_fuel)
 		fuel = rand(10 MINUTES, 15 MINUTES)
 	if(light_on)
@@ -486,6 +492,8 @@
 
 /obj/item/flashlight/flare/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	if(middleman)
+		QDEL_NULL(middleman)
 	return ..()
 
 /obj/item/flashlight/flare/afterattack(atom/target, mob/user, click_parameters)
@@ -518,6 +526,10 @@
 	force = initial(force)
 	damtype = initial(damtype)
 	update_brightness()
+
+/obj/item/flashlight/flare/proc/light_updated(datum/source)
+	SIGNAL_HANDLER
+	fire_flicker_middleman(middleman)
 
 /obj/item/flashlight/flare/extinguish()
 	. = ..()
@@ -1197,8 +1209,8 @@
 		return FALSE
 	var/datum/gas_mixture/environment = loc?.return_air()
 	var/affected_pressure = environment.return_pressure()
-	if(!light_on && (affected_pressure < ONE_ATMOSPHERE))
-		user.balloon_alert(user, "no pressure!")
+	if(!light_on && (affected_pressure < ONE_ATMOSPHERE - 1))
+		user.balloon_alert(user, "[affected_pressure < HAZARD_LOW_PRESSURE? "no" : "low"] pressure!")
 		return FALSE
 	. = ..()
 	if(light_on)

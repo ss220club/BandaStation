@@ -1,3 +1,7 @@
+/obj/item/clothing/under
+	/// Holder for modular overrides
+	var/datum/female_uniform/female_version
+
 /obj/item/clothing/under/costume/katarina_cybersuit
 	name = "catarine's cybersuit"
 	desc = "Кибер-костюм так называемой Катарины."
@@ -249,16 +253,5 @@
 	icon_state = "shirt_white"
 	armor_type = /datum/armor/clothing_under/security_head_of_security
 
-/obj/item/clothing/under/syndicate/rus_army/berezka
-	name = "Camouflaged summer camouflage jumpsuit Berezka"
-	desc = "Камуфлированный летний маскировочный костюм, или же КЛМК, выполнен в камуфляже «Берёзка»"
-	icon = 'modular_bandastation/objects/icons/obj/clothing/under/ussp.dmi'
-	icon_state = "ussp_berezka"
-	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/ussp.dmi'
-
-/obj/item/clothing/under/syndicate/rus_army/flora
-	name = "Camouflaged summer camouflage jumpsuit Flora"
-	desc = "Камуфлированный летний маскировочный костюм, или же КЛМК, выполнен в камуфляже «Флора»"
-	icon = 'modular_bandastation/objects/icons/obj/clothing/under/ussp.dmi'
-	icon_state = "ussp_flora"
-	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/ussp.dmi'
+/obj/item/clothing/under/dress/skirt/turtleskirt
+	female_version = /datum/female_uniform/turtleneck

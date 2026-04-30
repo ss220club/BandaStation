@@ -65,5 +65,9 @@ GLOBAL_LIST_EMPTY(human_to_tts)
 	if(!seed_name || !SStts220.tts_seeds[seed_name])
 		return FALSE
 
+	var/list/available_seeds = SStts220.get_available_seeds(user)
+	if(!(seed_name in available_seeds))
+		return FALSE
+
 	preferences.update_preference(GLOB.preference_entries[/datum/preference/text/tts_seed], seed_name)
 	return TRUE

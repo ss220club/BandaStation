@@ -1,6 +1,6 @@
 // Given to heretic monsters.
 /datum/action/cooldown/spell/shapeshift/eldritch
-	name = "Shapechange"
+	name = "Смена формы"
 	desc = "Заклинание, позволяющее вам принять облик другого существа, получив его способности. \
 		После того как вы сделаете свой выбор, вы не сможете поменять его."
 	background_icon_state = "bg_heretic"
@@ -17,5 +17,5 @@
 		/mob/living/basic/pet/cat,
 		/mob/living/basic/pet/dog/corgi,
 		/mob/living/basic/pet/fox,
-		/mob/living/simple_animal/bot/secbot,
+		/mob/living/basic/bot/secbot,
 	)

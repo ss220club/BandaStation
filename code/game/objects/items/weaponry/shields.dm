@@ -43,7 +43,6 @@
 /obj/item/shield/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/disarm_attack)
-	AddElement(/datum/element/cuffable_item) //I mean, it has a closed handle, right?
 
 /obj/item/shield/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK, damage_type = BRUTE)
 	var/effective_block_chance = final_block_chance
@@ -80,7 +79,7 @@
 	if(!COOLDOWN_FINISHED(src, weapon_bash))
 		return ITEM_INTERACT_BLOCKING
 	playsound(src, shield_bash_sound, 50, TRUE)
-	user.manual_emote("bashes [src] with [tool]!")
+	user.manual_emote("стучит [tool.declent_ru(INSTRUMENTAL)] по [declent_ru(DATIVE)]!")
 	COOLDOWN_START(src, weapon_bash, WEAPON_BASH_COOLDOWN)
 	user.Shake(3, 3, 0.5 SECONDS)
 	return ITEM_INTERACT_SUCCESS
@@ -109,7 +108,7 @@
 	playsound(src, shield_break_sound, 50)
 	new shield_break_leftover(get_turf(src))
 	if(isliving(loc))
-		loc.balloon_alert(loc, "shield broken!")
+		loc.balloon_alert(loc, "щит сломан!")
 	return ..()
 
 /obj/item/shield/buckler
@@ -189,12 +188,12 @@
 /obj/item/shield/riot/attackby(obj/item/attackby_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attackby_item, /obj/item/stack/sheet/mineral/titanium))
 		if (atom_integrity >= max_integrity)
-			to_chat(user, span_warning("[src] is already in perfect condition."))
+			to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] уже в хорошем состоянии."))
 			return
 		var/obj/item/stack/sheet/mineral/titanium/titanium_sheet = attackby_item
 		titanium_sheet.use(1)
 		atom_integrity = max_integrity
-		to_chat(user, span_notice("You repair [src] with [titanium_sheet]."))
+		to_chat(user, span_notice("Вы чините [declent_ru(ACCUSATIVE)] с помощью [titanium_sheet.declent_ru(DATIVE)]."))
 		return
 	return ..()
 
@@ -266,10 +265,10 @@
 	if(istype(attackby_item, /obj/item/assembly/flash/handheld))
 		var/obj/item/assembly/flash/handheld/flash = attackby_item
 		if(flash.burnt_out)
-			to_chat(user, span_warning("No sense replacing it with a broken bulb!"))
+			to_chat(user, span_warning("Нет смысла заменять его сломанной лампочкой!"))
 			return
 		else
-			to_chat(user, span_notice("You begin to replace the bulb..."))
+			to_chat(user, span_notice("Вы начинаете заменять лампочку..."))
 			if(do_after(user, 2 SECONDS, target = user))
 				if(QDELETED(flash) || flash.burnt_out)
 					return
@@ -367,7 +366,7 @@
 	SIGNAL_HANDLER
 
 	if(user)
-		balloon_alert(user, active ? "activated" : "deactivated")
+		balloon_alert(user, active ? "активирован" : "деактивирован")
 	playsound(src, active ? 'sound/items/weapons/saberon.ogg' : 'sound/items/weapons/saberoff.ogg', 35, TRUE)
 	is_bashable = !is_bashable
 	return COMPONENT_NO_DEFAULT_MESSAGE
@@ -376,7 +375,7 @@
 	SIGNAL_HANDLER
 	if(!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
 		if(send_message)
-			balloon_alert(user, "activate it first!")
+			balloon_alert(user, "сначала активируйте!")
 		return COMPONENT_BLOCK_ITEM_DISARM_ATTACK
 
 /obj/item/shield/energy/advanced
@@ -432,7 +431,7 @@
 
 	slot_flags = active ? ITEM_SLOT_BACK : null
 	if(user)
-		balloon_alert(user, active ? "extended" : "collapsed")
+		balloon_alert(user, active ? "развёрнут" : "сложен")
 	playsound(src, 'sound/items/weapons/batonextend.ogg', 50, TRUE)
 	return COMPONENT_NO_DEFAULT_MESSAGE
 
@@ -440,7 +439,7 @@
 	SIGNAL_HANDLER
 	if(!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
 		if(send_message)
-			balloon_alert(user, "extend it first!")
+			balloon_alert(user, "сначала разверните!")
 		return COMPONENT_BLOCK_ITEM_DISARM_ATTACK
 
 /datum/armor/item_shield/ballistic
@@ -462,12 +461,12 @@
 /obj/item/shield/ballistic/attackby(obj/item/attackby_item, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(attackby_item, /obj/item/stack/sheet/mineral/titanium))
 		if (atom_integrity >= max_integrity)
-			to_chat(user, span_warning("[src] is already in perfect condition."))
+			to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] уже в хорошем состоянии."))
 			return
 		var/obj/item/stack/sheet/mineral/titanium/titanium_sheet = attackby_item
 		titanium_sheet.use(1)
 		atom_integrity = max_integrity
-		to_chat(user, span_notice("You repair [src] with [titanium_sheet]."))
+		to_chat(user, span_notice("Вы чините [declent_ru(ACCUSATIVE)] с помощью [titanium_sheet.declent_ru(DATIVE)]."))
 		return
 	return ..()
 

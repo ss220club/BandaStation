@@ -133,6 +133,7 @@
 		if(!(organ_owner.living_flags & STOP_OVERLAY_UPDATE_BODY_PARTS))
 			organ_owner.update_body_parts()
 		organ_owner.clear_mood_event("brain_damage")
+		organ_owner.med_hud_set_status()
 
 /obj/item/organ/brain/update_icon_state()
 	icon_state = "[initial(icon_state)][smooth_brain ? "-smooth" : ""]"
@@ -356,8 +357,8 @@
 	var/delta_dam = . //for the sake of clarity
 	if(isnull(bodypart_owner)) // no need to color it if it's in someone's noggin
 		update_brain_color()
-	if(delta_dam > 0 && damage > BRAIN_DAMAGE_MILD)
-		roll_for_brain_trauma(delta_dam)
+	if(delta_dam < 0 && damage > BRAIN_DAMAGE_MILD)
+		roll_for_brain_trauma(-delta_dam) // parent call returns negative numbers if take damage and positive if we heal
 
 /// Rolls a random chance to gain a brain trauma based on damage taken and current damage level
 /obj/item/organ/brain/proc/roll_for_brain_trauma(delta_dam)

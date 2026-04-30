@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/pointed/cleave
-	name = "Cleave"
-	desc = "Вызывает сильное кровотечение у цели и близежащих к ней."
+	name = "Разрезание"
+	desc = "Вызывает сильное кровотечение у цели, и находящихся рядом с ней."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -44,7 +44,7 @@
 			span_danger("Ваши вены лопаются изнутри, и нечестивое пламя вырывается из крови!")
 		)
 
-		var/obj/item/bodypart/bodypart = pick(victim.bodyparts)
+		var/obj/item/bodypart/bodypart = pick(victim.get_bodyparts())
 		var/datum/wound/slash/flesh/crit_wound = new wound_type()
 		crit_wound.apply_wound(bodypart)
 		victim.apply_damage(20, BURN, wound_bonus = CANT_WOUND)

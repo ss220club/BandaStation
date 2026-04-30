@@ -10,6 +10,9 @@
 #include "code/melee/centcom/legendary_swords.dm"
 #include "code/melee/centcom/rapier.dm"
 
+// MARK: Crafting
+#include "code/crafting/nt_cane.dm"
+
 // MARK: Ranged - General
 #include "code/ranged/supply_packs.dm"
 #include "code/ranged/weapon_designs.dm"

@@ -52,8 +52,9 @@ GLOBAL_LIST_INIT(hailer_phrases, list(
 	flags_inv = HIDEFACIALHAIR | HIDEFACE | HIDESNOUT
 	w_class = WEIGHT_CLASS_SMALL
 	visor_flags = BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
+	visor_vars_to_toggle = VISOR_TINT
 	visor_flags_inv = HIDEFACIALHAIR | HIDEFACE | HIDESNOUT
-	flags_cover = MASKCOVERSMOUTH
+	flags_cover = MASKCOVERSMOUTH | PEPPERPROOF
 	visor_flags_cover = MASKCOVERSMOUTH | PEPPERPROOF
 	tint = 0
 	fishing_modifier = 0
@@ -71,6 +72,7 @@ GLOBAL_LIST_INIT(hailer_phrases, list(
 	var/safety = TRUE
 	voice_filter = @{"[0:a] asetrate=%SAMPLE_RATE%*0.7,aresample=16000,atempo=1/0.7,lowshelf=g=-20:f=500,highpass=f=500,aphaser=in_gain=1:out_gain=1:delay=3.0:decay=0.4:speed=0.5:type=t [out]; [out]atempo=1.2,volume=15dB [final]; anoisesrc=a=0.01:d=60 [noise]; [final][noise] amix=duration=shortest"}
 	use_radio_beeps_tts = TRUE
+	pepper_tint = FALSE // BANDASTATION EDIT
 
 /obj/item/clothing/mask/gas/sechailer/plasmaman
 	starting_filter_type = /obj/item/gas_filter/plasmaman
@@ -134,7 +136,6 @@ GLOBAL_LIST_INIT(hailer_phrases, list(
 	return FALSE
 
 /obj/item/clothing/mask/gas/sechailer/verb/halt()
-	set category = "Object"
 	set name = "HALT"
 	set src in usr
 	if(!isliving(usr) || !can_use(usr) || !COOLDOWN_FINISHED(src, hailer_cooldown))

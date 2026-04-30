@@ -33,6 +33,10 @@
 	var/window_open
 	/// What text was present in the say box the last time save_text was called
 	var/saved_text = ""
+	/// What channel was in use in the say box the last time save_text was called
+	var/saved_channel
+	/// Speech suffuxes used for force_say after "-". Defaults to hurt_phrases
+	var/list/alter_phrases
 
 /** Creates the new input window to exist in the background. */
 /datum/tgui_say/New(client/client, id)
@@ -92,10 +96,11 @@
 	var/static/list/no_thinking_bubble_channels = list(
 		OOC_CHANNEL,
 		ADMIN_CHANNEL,
-		MENTOR_CHANNEL
+		MENTOR_CHANNEL,
+		PRAY_CHANNEL,
 	)
 	// BANDASTATION ADDITION END - Mentors
-	if(!(payload["channel"] in no_thinking_bubble_channels)) // BANDASTATION EDIT - Mentors: (payload["channel"] in no_thinking_bubble_channels)
+	if(!(payload["channel"] in no_thinking_bubble_channels)) // BANDASTATION EDIT - Mentors: (payload["channel"] in no_thinking_bubble_channels && payload["channel"] != PRAY_CHANNEL)
 		start_thinking()
 	if(!client.typing_indicators)
 		log_speech_indicators("[key_name(client)] started typing at [loc_name(client.mob)], indicators DISABLED.")

@@ -9,7 +9,7 @@
 	outfit = /datum/outfit/job/explorer
 	faction = FACTION_STATION
 	total_positions = 4
-	spawn_positions = 0
+	spawn_positions = 3
 	minimal_player_age = 18
 	exp_requirements = 180
 	exp_required_type = EXP_TYPE_CREW

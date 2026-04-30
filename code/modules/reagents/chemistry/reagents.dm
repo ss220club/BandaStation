@@ -1,5 +1,7 @@
 /// A single reagent
 /datum/reagent
+	abstract_type = /datum/reagent
+
 	/// datums don't have names by default
 	var/name = ""
 	/// nor do they have descriptions
@@ -32,8 +34,12 @@
 	var/metabolization_rate = REAGENTS_METABOLISM
 	/// above this overdoses happen
 	var/overdose_threshold = 0
+	/// above this the big bad overdoses happen
+	var/overdose_crit_threshold = 0 // BANDASTATION ADDITION: NEW CHEMS
 	/// You fucked up and this is now triggering its overdose effects, purge that shit quick.
 	var/overdosed = FALSE
+	/// You really fucked up and now getting the worst of the worse.
+	var/overdosed_crit = FALSE // BANDASTATION ADDITION: NEW CHEMS
 	///if false stops metab in liverless mobs
 	var/self_consuming = FALSE
 	///affects how far it travels when sprayed
@@ -56,7 +62,13 @@
 	var/burning_temperature = null
 	///How much is consumed when it is burnt per second
 	var/burning_volume = 0.5
-	///Assoc list with key type of addiction this reagent feeds, and value amount of addiction points added per unit of reagent metabolzied (which means * REAGENTS_METABOLISM every life())
+	/**
+	 * Lazyassoc list of [addiction typepath] to [threshold value].
+	 *
+	 * [threshold value] can be interpreted as the number of units that must be consumed before an addiction is formed.
+	 *
+	 * Ex: list(/datum/addiction/stimulants = 50) -> "become addicted to stimulants after metabolizing 50 units of this reagent".
+	 */
 	var/list/addiction_types = null
 	/// The affected organ_flags, if the reagent damages/heals organ damage of an affected mob.
 	/// See "Organ defines for carbon mobs" in /code/_DEFINES/surgery.dm
@@ -89,13 +101,15 @@
 	var/fallback_icon_state
 	/// When ordered in a restaurant, what custom order do we create?
 	var/restaurant_order = /datum/custom_order/reagent/drink
+	/// How we interact with random generators
+	var/randomized_spawns = REAGENT_SPAWN_NO_RANDOM
 
 /datum/reagent/New()
 	SHOULD_CALL_PARENT(TRUE)
 	. = ..()
 
 	if(material)
-		material = GET_MATERIAL_REF(material)
+		material = SSmaterials.get_material(material)
 	if(glass_price)
 		AddElement(/datum/element/venue_price, glass_price)
 	if(!mass)
@@ -272,7 +286,17 @@
 	to_chat(affected_mob, span_userdanger("You feel like you took too much of [name]!"))
 	affected_mob.add_mood_event("[type]_overdose", /datum/mood_event/overdose, name)
 	return
+// BANDASTATION ADDITION START: NEW CHEMS
+/// Called when a CRITICAL overdose threshold and is trigger effects.
+/datum/reagent/proc/overdose_crit_process(mob/living/affected_mob, metabolism)
+	return
 
+/// Called when a CRITICAL overdose starts.
+/datum/reagent/proc/on_overdose_crit_start(mob/living/affected_mob, metabolism)
+	log_combat(affected_mob, affected_mob, "has been critically overdosed on [name].")
+	to_chat(affected_mob, span_danger("You feel like you took too much of [name]!"))
+	affected_mob.add_mood_event("[type]_overdose", /datum/mood_event/overdose, name)
+// BANDASTATION ADDITION END: NEW CHEMS
 /**
  * Called when this chemical is processed in a hydroponics tray.
  *

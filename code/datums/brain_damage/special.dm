@@ -481,15 +481,15 @@
 /datum/brain_trauma/special/ptsd/on_gain()
 	owner.add_mood_event("combat_ptsd", /datum/mood_event/desentized)
 	owner.mob_mood?.mood_modifier -= 1 //Basically nothing can change your mood
-	owner.mob_mood?.sanity_level = SANITY_DISTURBED //Makes sanity on a unstable level unless cured
-	ADD_TRAIT(owner, TRAIT_DESENSITIZED, REF(src))
+	owner.mob_mood?.set_sanity(SANITY_DISTURBED, override = TRUE) //Makes sanity on a unstable level unless cured
+	owner.apply_status_effect(/datum/status_effect/desensitized, REF(src), DESENSITIZED_THRESHOLD)
 	. = ..()
 
 /datum/brain_trauma/special/ptsd/on_lose()
 	owner.clear_mood_event("combat_ptsd")
 	owner.mob_mood?.mood_modifier += 1
-	owner.mob_mood?.sanity_level = SANITY_GREAT
-	REMOVE_TRAIT(owner, TRAIT_DESENSITIZED, REF(src))
+	owner.mob_mood?.set_sanity(SANITY_GREAT, override = TRUE)
+	owner.remove_status_effect(/datum/status_effect/desensitized, REF(src))
 	return ..()
 
 /datum/brain_trauma/special/primal_instincts
@@ -699,7 +699,7 @@
 	to_chat(owner, span_warning("Мне действительно стоит оставить его здесь?"))
 	owner.add_mood_event("fireaxe", /datum/mood_event/axe_neutral)
 
-/datum/brain_trauma/special/axedoration/proc/on_examine(mob/source, atom/target, list/examine_strings)
+/datum/brain_trauma/special/axedoration/proc/on_examine(mob/source, atom/target, list/examine_strings, list/examine_overrides)
 	SIGNAL_HANDLER
 	if(!istype(target, /obj/item/fireaxe))
 		return

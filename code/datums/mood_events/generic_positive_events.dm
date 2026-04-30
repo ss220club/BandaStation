@@ -4,10 +4,6 @@
 	timeout = 2 MINUTES
 
 /datum/mood_event/hug/add_effects()
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
-		mood_change = -1
-		description = "Объятия? Зовите отдел кадров!"
-		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = -1
 		description = "Я бы хотел, чтобы меня не трогали."
@@ -23,8 +19,7 @@
 	timeout = 2 MINUTES
 
 /datum/mood_event/bear_hug/add_effects()
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic) \
-		|| HAS_PERSONALITY(owner, /datum/personality/aloof) \
+	if(HAS_PERSONALITY(owner, /datum/personality/aloof) \
 		|| HAS_PERSONALITY(owner, /datum/personality/callous) \
 	)
 		mood_change = -2
@@ -37,10 +32,6 @@
 	timeout = 4 MINUTES
 
 /datum/mood_event/betterhug/add_effects(mob/friend)
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
-		mood_change = 1
-		description = "[friend.name] приятный человек, но на этом всё."
-		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = 1
 		description = "[friend.name] приятный человек, но мне хотелось бы, чтобы он перестал меня трогать"
@@ -58,10 +49,6 @@
 	timeout = 4 MINUTES
 
 /datum/mood_event/besthug/add_effects(mob/friend)
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
-		mood_change = 2
-		description = "Приятно находиться с [friend.name], но на этом всё."
-		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = 2
 		description = "Приятно находиться с [friend.name], но хочу, чтобы меня перестали трогать."
@@ -79,10 +66,6 @@
 	timeout = 2 MINUTES
 
 /datum/mood_event/warmhug/add_effects()
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
-		mood_change = 0
-		description = "Я не люблю объятия, но тепло - это приятно...."
-		return
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof))
 		mood_change = 0
 		description = "Я бы предпочел, чтобы ко мне не прикасались, но тепло - это приятно...."
@@ -99,7 +82,6 @@
 
 /datum/mood_event/tailpulled/add_effects()
 	if(HAS_PERSONALITY(owner, /datum/personality/aloof) \
-		|| HAS_PERSONALITY(owner, /datum/personality/aromantic) \
 		|| HAS_PERSONALITY(owner, /datum/personality/callous) \
 	)
 		mood_change = -2
@@ -269,7 +251,7 @@
 	timeout = 5 MINUTES
 
 /datum/mood_event/blood_worm
-	description = "УБИВАЙ, ПОГЛОЩАЙ, РАЗНМНОЖАЙСЯ, ЗАВОЁВЫВАЙ."
+	description = "УБИВАЙ, ПОГЛОЩАЙ, РАЗМНОЖАЙСЯ, ЗАВОЁВЫВАЙ."
 	mood_change = 999 // Makes it bold green and gives the special obj a higher priority. Blood worm hosts are apathetic, so this is otherwise meaningless.
 	hidden = TRUE
 
@@ -425,10 +407,6 @@
 	timeout = 2 MINUTES
 
 /datum/mood_event/kiss/add_effects(mob/beau, direct)
-	if(HAS_PERSONALITY(owner, /datum/personality/aromantic))
-		mood_change = -2
-		description = "Поцелуй? Зовите отдел кадров!"
-		return
 	if(!beau)
 		return
 	if(direct)
@@ -629,6 +607,8 @@
 	event_flags = MOOD_EVENT_GAMING
 
 /datum/mood_event/slots/win/be_replaced(datum/mood/home, datum/mood_event/new_event, ...)
+	if(istype(new_event, /datum/mood_event/slots/all_gone))
+		return ALLOW_NEW_MOOD
 	if(new_event.mood_change < mood_change)
 		return BLOCK_NEW_MOOD
 	return ..()
@@ -639,8 +619,18 @@
 
 /datum/mood_event/slots/win/jackpot
 	description = "ДЖЕКПОТ! ООО, ДА!"
-	mood_change = 6
-	timeout = 30 MINUTES
+	mood_change = 4
+
+/datum/mood_event/slots/all_gone
+	description = "НЕЕЕЕТ! ВСЁ ПРОПАЛО!!!"
+	mood_change = -2
+	timeout = 20 MINUTES
+
+/datum/mood_event/slots/all_gone/be_replaced(datum/mood/home, datum/mood_event/new_event, ...)
+	if(istype(new_event, /datum/mood_event/slots/win/jackpot))
+		return ALLOW_NEW_MOOD
+	description = "Я никогда финансово не восстановлюсь после этого..."
+	return BLOCK_NEW_MOOD
 
 /datum/mood_event/empathetic_happy
 	description = "Мне радостно видеть счастливых людей."

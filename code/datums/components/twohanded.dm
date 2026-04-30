@@ -147,6 +147,10 @@
 	RegisterSignal(parent, COMSIG_ITEM_SHARPEN_ACT, PROC_REF(on_sharpen))
 	RegisterSignal(parent, COMSIG_ITEM_APPLY_FANTASY_BONUSES, PROC_REF(apply_fantasy_bonuses))
 	RegisterSignal(parent, COMSIG_ITEM_REMOVE_FANTASY_BONUSES, PROC_REF(remove_fantasy_bonuses))
+	RegisterSignal(parent, COMSIG_ATOM_FINALIZE_MATERIAL_EFFECTS, PROC_REF(on_materials_updated))
+	RegisterSignal(parent, COMSIG_ATOM_FINALIZE_REMOVE_MATERIAL_EFFECTS, PROC_REF(on_materials_updated))
+	RegisterSignal(parent, COMSIG_ATOM_SINGLE_MATERIAL_EFFECT_APPLY, PROC_REF(on_material_apply))
+	RegisterSignal(parent, COMSIG_ATOM_SINGLE_MATERIAL_EFFECT_REMOVE, PROC_REF(on_material_remove))
 
 // Remove all siginals registered to the parent item
 /datum/component/two_handed/UnregisterFromParent()
@@ -160,6 +164,8 @@
 		COMSIG_ITEM_SHARPEN_ACT,
 		COMSIG_ITEM_APPLY_FANTASY_BONUSES,
 		COMSIG_ITEM_REMOVE_FANTASY_BONUSES,
+		COMSIG_ATOM_FINALIZE_MATERIAL_EFFECTS,
+		COMSIG_ATOM_FINALIZE_REMOVE_MATERIAL_EFFECTS,
 	))
 
 /// Triggered on equip of the item containing the component
@@ -211,22 +217,22 @@
 	var/atom/atom_parent = parent
 	if(HAS_TRAIT(user, TRAIT_NO_TWOHANDING))
 		if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
-			atom_parent.balloon_alert(user, "can't wield!")
+			atom_parent.balloon_alert(user, "невозможно взять в хват!")
 			user.dropItemToGround(parent, force = TRUE)
 		else
-			atom_parent.balloon_alert(user, "can't wield with both hands!")
+			atom_parent.balloon_alert(user, "невозможно взять в хват двумя руками!")
 		return COMPONENT_EQUIPPED_FAILED
 	if(user.get_inactive_held_item())
 		if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
-			atom_parent.balloon_alert(user, "can't carry in one hand!")
+			atom_parent.balloon_alert(user, "нельзя взять в одну руку!")
 			user.dropItemToGround(parent, force = TRUE)
 		else
-			atom_parent.balloon_alert(user, "holding something in other hand!")
+			atom_parent.balloon_alert(user, "что-то держим в другой руке!")
 		return COMPONENT_EQUIPPED_FAILED
 	if(user.usable_hands < 2)
 		if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
 			user.dropItemToGround(parent, force = TRUE)
-		atom_parent.balloon_alert(user, "not enough hands!")
+		atom_parent.balloon_alert(user, "не хватает рук!")
 		return COMPONENT_EQUIPPED_FAILED
 
 	// wield update status
@@ -251,9 +257,9 @@
 	parent_item.update_appearance()
 
 	if(iscyborg(user))
-		to_chat(user, span_notice("You dedicate your module to [parent]."))
+		to_chat(user, span_notice("Вы подключаете ваш модуль к [parent.declent_ru(DATIVE)]."))
 	else
-		to_chat(user, span_notice("You grab [parent] with both hands."))
+		to_chat(user, span_notice("Вы хватаете [parent.declent_ru(ACCUSATIVE)] двумя руками."))
 
 	// Play sound if one is set
 	if(wieldsound)
@@ -262,7 +268,7 @@
 	// Let's reserve the other hand
 	offhand_item = new(user)
 	offhand_item.name = "[parent_item.name] - offhand"
-	offhand_item.desc = "Your second grip on [parent_item]."
+	offhand_item.desc = "Ваша вторая рука держит [parent_item.declent_ru(ACCUSATIVE)]."
 	offhand_item.wielded = TRUE
 	RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
 	RegisterSignal(offhand_item, COMSIG_QDELETING, PROC_REF(on_destroy))
@@ -319,11 +325,11 @@
 		// Show message if requested
 		if(show_message)
 			if(iscyborg(user))
-				to_chat(user, span_notice("You free up your module."))
+				to_chat(user, span_notice("Вы убираете свой модуль."))
 			else if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
-				to_chat(user, span_notice("You drop [parent]."))
+				to_chat(user, span_notice("Вы роняете [parent.declent_ru(ACCUSATIVE)]."))
 			else
-				to_chat(user, span_notice("You are now carrying [parent] with one hand."))
+				to_chat(user, span_notice("Вы теперь держите [parent.declent_ru(ACCUSATIVE)] одной рукой."))
 
 	// Play sound if set
 	if(unwieldsound)
@@ -418,6 +424,30 @@
 	if(wielded && ismob(source.loc))
 		unwield(source.loc)
 	force_multiplier = source.reset_fantasy_variable("force_multiplier", force_multiplier)
+
+/datum/component/two_handed/proc/on_materials_updated(obj/item/source, list/materials, datum/material/main_material)
+	SIGNAL_HANDLER
+	// With materials assigned we need to update our forces.
+	if (wielded)
+		force_wielded = source.force
+	else
+		force_unwielded = source.force
+
+/datum/component/two_handed/proc/on_material_apply(obj/item/source, datum/material/material, amount, multiplier)
+	SIGNAL_HANDLER
+	// Opposite state's force needs to be calculated for each material's effect
+	if (wielded)
+		force_unwielded *= GET_MATERIAL_MODIFIER(source.get_material_force_modifier(material, source.sharpness), multiplier)
+	else
+		force_wielded *= GET_MATERIAL_MODIFIER(source.get_material_force_modifier(material, source.sharpness), multiplier)
+
+/datum/component/two_handed/proc/on_material_remove(obj/item/source, datum/material/material, amount, multiplier)
+	SIGNAL_HANDLER
+	// Same as appliation but inversed
+	if (wielded)
+		force_unwielded /= GET_MATERIAL_MODIFIER(source.get_material_force_modifier(material, source.sharpness), multiplier)
+	else
+		force_wielded /= GET_MATERIAL_MODIFIER(source.get_material_force_modifier(material, source.sharpness), multiplier)
 
 /**
  * The offhand dummy item for two handed items
