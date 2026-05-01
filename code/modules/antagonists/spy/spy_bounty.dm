@@ -716,23 +716,23 @@
 
 /datum/spy_bounty/some_bot/beepsky
 	difficulty = SPY_DIFFICULTY_MEDIUM // gotta get him to stand still
-	bot_type = /mob/living/simple_animal/bot/secbot/beepsky/officer
+	bot_type = /mob/living/basic/bot/secbot/beepsky/officer
 	help = "Похитьте офицера Бипски - обычно встречается при патрулировании станции. \
 		Будьте осторожны, им может не понравиться сканирование."
 
 /datum/spy_bounty/some_bot/ofitser
 	difficulty = SPY_DIFFICULTY_EASY
-	bot_type = /mob/living/simple_animal/bot/secbot/beepsky/ofitser
+	bot_type = /mob/living/basic/bot/secbot/beepsky/ofitser
 	help = "Похитьте тюремного Офитсера - обычно охраняет ГУЛАГ."
 
 /datum/spy_bounty/some_bot/armsky
 	difficulty = SPY_DIFFICULTY_HARD
-	bot_type = /mob/living/simple_animal/bot/secbot/beepsky/armsky
+	bot_type = /mob/living/basic/bot/secbot/beepsky/armsky
 	help = "Похитьте Сержанта Армски - обычно охраняет оружейную станции."
 
 /datum/spy_bounty/some_bot/pingsky
 	difficulty = SPY_DIFFICULTY_HARD
-	bot_type = /mob/living/simple_animal/bot/secbot/pingsky
+	bot_type = /mob/living/basic/bot/secbot/pingsky
 	help = "Похитьте офицера Пингски - обычно защищает ИИ станции."
 
 /datum/spy_bounty/some_bot/scrubs
