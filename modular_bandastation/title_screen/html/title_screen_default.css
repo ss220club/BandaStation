@@ -720,6 +720,10 @@ html.loading {
   content: "\f03e";
 }
 
+.lobby-map .lobby-text:before {
+  content: "\f279";
+}
+
 .lobby-wiki .lobby-text:before {
   content: "\f266";
   font-family: "Font Awesome 6 Brands";

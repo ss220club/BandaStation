@@ -109,9 +109,7 @@
 		total_votes += map_vote.choices[map_name]
 
 	if(!winner || winner_votes == 0)
-		var/list/options = get_bag_options()
-		if(length(options))
-			winner = pick(options)
+		winner = pick(remaining_bag)
 
 	if(!winner)
 		message_admins("Map vote: пул пустой! Наполните пул для голосования.")
@@ -122,9 +120,6 @@
 	last_played_map = winner
 
 	apply_repeat_rule()
-
-	if(!length(remaining_bag))
-		refill_bag()
 
 	check_last_card_announce()
 	save_bag_state()
@@ -151,26 +146,24 @@
 	if(idx)
 		remaining_bag.Cut(idx, idx + 1)
 
-/// If all remaining cards match last_played_map, consume one copy as the skip penalty.
-/// The caller is responsible for refilling if the bag becomes empty afterward.
+/// If all remaining cards match last_played_map, refill the bag to avoid duplicates.
 /datum/controller/subsystem/map_vote/proc/apply_repeat_rule()
 	if(!last_played_map || !length(remaining_bag))
-		return
+		return null
 	for(var/map_name in remaining_bag)
 		if(map_name != last_played_map)
-			return
+			return null
 	var/datum/map_config/mc = config.maplist[last_played_map]
 	if(!mc)
-		return
+		return null
 	var/skipped_name = mc.map_name
-	remove_from_bag(last_played_map)
-	send_map_vote_notice("Карта [span_bold(skipped_name)] пропущена из-за повтора.")
+	refill_bag()
+	return "Карта [span_bold(skipped_name)] пропущена из-за повтора"
 
 /// Automatically select next map when only one unique map remains and it's a repeat.
 /datum/controller/subsystem/map_vote/proc/auto_select_next_map_due_to_repeat()
-	apply_repeat_rule()
-	if(!length(remaining_bag))
-		refill_bag()
+	var/repeat_result = apply_repeat_rule()
+
 	var/list/options = get_bag_options()
 	if(!length(options))
 		message_admins("auto_select_next_map_due_to_repeat: пул пуст после рефила, выбрать карту невозможно.")
@@ -181,19 +174,21 @@
 		refill_bag()
 	set_next_map(config.maplist[selected])
 	last_played_map = selected
+	var/datum/map_config/display_map_datum = config.maplist[selected]
+	var/display_name = display_map_datum?.map_name || selected
+	send_map_vote_notice("[repeat_result && "[repeat_result]. "]Следующая карта - [span_bold(display_name)].")
 	for(var/client/C in GLOB.clients)
 		SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
-	send_map_vote_notice("Следующая карта - [span_bold(selected)].")
 	save_bag_state()
 
 /// Automatically select next map when only one unique map is available and it is not a repeat.
 /datum/controller/subsystem/map_vote/proc/auto_select_single_map(map_name)
 	previous_remaining_bag = remaining_bag.Copy()
 	previous_last_played_map = last_played_map
-	refill_bag()
-	set_next_map(config.maplist[map_name])
-	last_played_map = map_name
 	var/datum/map_config/display_map_datum = config.maplist[map_name]
+	set_next_map(display_map_datum)
+	refill_bag()
+	last_played_map = map_name
 	var/display_name = display_map_datum?.map_name || map_name
 	for(var/client/C in GLOB.clients)
 		SEND_SOUND(C, sound('sound/misc/bloop.ogg'))
@@ -209,6 +204,7 @@
 	var/datum/map_config/forced_map_datum = config.maplist[forced_map]
 	var/forced_name = forced_map_datum.map_name
 	remove_from_bag(forced_map)
+	set_next_map(forced_map)
 	refill_bag()
 	for(var/client/C in GLOB.clients)
 		SEND_SOUND(C, sound('sound/misc/bloop.ogg'))

@@ -53,6 +53,7 @@
 								[create_button(player, "delay", "Отложить начало раунда", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
 								[create_button(player, "notice", "Оставить уведомление")]
 								[create_button(player, "picture", "Сменить фон")]
+								[create_button(player, "map", "Настроить карты")]
 							</div>
 						</div>
 					</div>

@@ -80,12 +80,6 @@ export function BagEditor() {
                       <Button
                         icon="minus"
                         disabled={entry.initial_count === 0}
-                        color={entry.initial_count === 1 ? 'red' : 'default'}
-                        tooltip={
-                          entry.initial_count === 1
-                            ? 'Убрать карту из пула'
-                            : 'Уменьшить количество копий'
-                        }
                         onClick={() =>
                           entry.initial_count === 1
                             ? act('remove_map', { map_name: entry.map_name })
@@ -100,12 +94,6 @@ export function BagEditor() {
                       <Button
                         icon="plus"
                         disabled={entry.initial_count >= 10}
-                        color={entry.initial_count === 0 ? 'green' : 'default'}
-                        tooltip={
-                          entry.initial_count === 0
-                            ? 'Добавить карту в пул'
-                            : 'Увеличить количество копий'
-                        }
                         onClick={() =>
                           entry.initial_count === 0
                             ? act('add_map', { map_name: entry.map_name })

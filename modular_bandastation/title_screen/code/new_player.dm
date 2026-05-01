@@ -122,6 +122,9 @@
 	else if(href_list["start_now"])
 		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/start_now)
 
+	else if(href_list["map"])
+		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/admin_bag_editor)
+
 	else if(href_list["delay"])
 		if(SSticker.current_state > GAME_STATE_PREGAME)
 			return tgui_alert(usr, "Слишком поздно... Игра уже началась!", "О нет...", timeout = 10 SECONDS)
