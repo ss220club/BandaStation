@@ -1,5 +1,5 @@
 // NSV13
-import { toFixed } from 'common/math';
+
 import { Fragment } from 'react';
 import {
   Button,
@@ -10,6 +10,7 @@ import {
   Section,
   Slider,
 } from 'tgui-core/components';
+import { toFixed } from 'tgui-core/math';
 import { useBackend, useLocalState } from '../backend';
 import { Window } from '../layouts';
 
@@ -17,7 +18,6 @@ type GasRecord = number[];
 
 type StormdriveData = {
   gas_records: {
-    constricted_plasma: GasRecord;
     plasma: GasRecord;
     tritium: GasRecord;
     o2: GasRecord;
@@ -45,7 +45,6 @@ type StormdriveData = {
   total_moles: number;
   mole_threshold_high: number;
   mole_threshold_very_high: number;
-  constricted_plasma: number;
   plasma: number;
   tritium: number;
   o2: number;
@@ -81,7 +80,6 @@ export function StormdriveConsole(props: any, context: any) {
     total_moles,
     mole_threshold_high,
     mole_threshold_very_high,
-    constricted_plasma,
     plasma,
     tritium,
     o2,
@@ -99,10 +97,6 @@ export function StormdriveConsole(props: any, context: any) {
     pipe_open,
   } = data;
 
-  // Подготовка данных для графиков
-  const constricted_plasmaData = gas_records.constricted_plasma.map(
-    (value, i) => [i, value] as [number, number],
-  );
   const plasmaData = gas_records.plasma.map(
     (value, i) => [i, value] as [number, number],
   );
@@ -296,17 +290,6 @@ export function StormdriveConsole(props: any, context: any) {
               <Flex.Item width="200px">
                 <Section>
                   <LabeledList>
-                    <LabeledList.Item label="Constricted Plasma">
-                      <ProgressBar
-                        value={(constricted_plasma / total_moles) * 100}
-                        minValue={0}
-                        maxValue={100}
-                        color="violet"
-                      >
-                        {`${toFixed((constricted_plasma / total_moles) * 100)} %`}
-                      </ProgressBar>
-                    </LabeledList.Item>
-
                     <LabeledList.Item label="Plasma">
                       <ProgressBar
                         value={(plasma / total_moles) * 100}
@@ -455,14 +438,6 @@ export function StormdriveConsole(props: any, context: any) {
               {/* Графики */}
               <Flex.Item grow={1}>
                 <Section fill position="relative" height="100%">
-                  <Chart.Line
-                    fillPositionedParent
-                    data={constricted_plasmaData}
-                    rangeX={[0, constricted_plasmaData.length - 1]}
-                    rangeY={[0, 100]}
-                    strokeColor="rgba(100, 53, 201, 1)"
-                    fillColor="rgba(100, 53, 201, 0.1)"
-                  />
                   <Chart.Line
                     fillPositionedParent
                     data={plasmaData}

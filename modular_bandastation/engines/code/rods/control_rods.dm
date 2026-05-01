@@ -37,10 +37,6 @@
 	rod_integrity = 0
 	rod_effectiveness = 0
 
-/obj/item/control_rod/irradiated/Initialize(mapload)
-	.=..()
-	AddElement(/datum/element/radioactive, 500, src)
-
 /datum/techweb_node/reactor_control_rods
 	id = "reactor_control_rods"
 	display_name = "Stormdrive Reactor Control Rod Fabrication"

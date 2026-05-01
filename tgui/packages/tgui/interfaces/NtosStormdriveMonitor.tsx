@@ -1,6 +1,7 @@
 // NSV13
-import { toFixed } from 'common/math';
+
 import { Button, ProgressBar, Section } from 'tgui-core/components';
+import { toFixed } from 'tgui-core/math';
 import { useBackend } from '../backend';
 import { NtosWindow } from '../layouts';
 

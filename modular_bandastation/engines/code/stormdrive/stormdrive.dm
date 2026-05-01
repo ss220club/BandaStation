@@ -7,7 +7,6 @@ General Checklist:
  - Input pipe
  - Output pipe
  - 10x standard control rods (/obj/item/control_rod)
- - Magnetic constrictors x2 minimum (/obj/machinery/atmospherics/components/binary/magnetic_constrictor)
  - Reactor Control Computer (/obj/machinery/computer/ship/reactor_control_computer)
  - Particle Accelerator
 
@@ -156,7 +155,6 @@ Control Rods
 
 	//Gas Variables Here
 	var/gas_modifier = 5 //Initially % modifier
-	var/constricted_plasma_modifier = 1
 	var/plasma_modifier = 1
 	var/tritium_modifier = 1
 	var/o2_modifier = 1
@@ -247,10 +245,6 @@ Control Rods
 		if(!do_after(user, 5 SECONDS, target=src))
 			repairing = FALSE
 			return
-		to_chat(user, "<span class='warning'>Some of the sludge spills on the floor!</span>")
-		var/obj/effect/landmark/nuclear_waste_spawner/weak/sludge_spawner = new (get_turf(src))
-		if (sludge_spawner)
-			sludge_spawner.fire()
 		state = REACTOR_STATE_REPAIR
 		repairing = FALSE
 		update_icon()
@@ -466,7 +460,6 @@ Control Rods
 	radio.recalculateChannels()
 	stability = new(src)
 	stability.start()
-	gas_records["constricted_plasma"] = list()
 	gas_records["plasma"] = list()
 	gas_records["tritium"] = list()
 	gas_records["o2"] = list()
@@ -485,7 +478,7 @@ Control Rods
 /////// REACTOR START PROCS ////////
 
 /obj/machinery/atmospherics/components/binary/stormdrive_reactor/bullet_act(/obj/projectile/beam/emitter/hitscan/P, def_zone, piercing_hit = FALSE)
-	var/obj/projectile/beam/emitter/hitscan/P = /obj/projectile/beam/emitter/hitscan
+	var/obj/projectile/beam/emitter/hitscan/P
 	if(istype(P))
 		heat += P.energy
 		try_start()
@@ -498,8 +491,7 @@ Control Rods
 		return FALSE
 	icon_state = "reactor_starting"
 	var/datum/gas_mixture/air1 = airs[1]
-	var/fuel_check = air1.gases[GAS_PLASMA] * LOW_ROR + \
-					air1.gases[GAS_CONSTRICTED_PLASMA] * NORMAL_ROR + \
+	var/fuel_check = air1.gases[GAS_PLASMA] * NORMAL_ROR + \
 					air1.gases[GAS_CO2] * HINDER_ROR + \
 					air1.gases[GAS_WATER_VAPOR] * HINDER_ROR + \
 					air1.gases[GAS_TRITIUM][MOLES] * HIGH_ROR + \
@@ -532,7 +524,7 @@ Control Rods
 
 	heat = start_threshold+10
 	var/datum/gas_mixture/air1 = airs[1]
-	air1.assert_gases(GAS_CONSTRICTED_PLASMA, 1000)
+	air1.assert_gases(GAS_PLASMA, 1000)
 	air1.assert_gases(GAS_O2, 500)
 	air1.assert_gases(GAS_N2, 500)
 	try_start()
@@ -542,7 +534,6 @@ Control Rods
 	air1.assert_gases(juice.id, quantity)
 
 /obj/machinery/atmospherics/components/binary/stormdrive_reactor/proc/handle_gas_modifiers() //Sets up the minor differences in each instance of Stormdrive
-	constricted_plasma_modifier = (rand((100 - gas_modifier), (100 + gas_modifier))) / 100
 	plasma_modifier = (rand((100 - gas_modifier), (100 + gas_modifier))) / 100
 	tritium_modifier = (rand((100 - gas_modifier), (100 + gas_modifier))) / 100
 	o2_modifier = (rand((100 - gas_modifier), (100 + gas_modifier))) / 100
@@ -599,13 +590,12 @@ Control Rods
 	var/datum/gas_mixture/air1 = airs[1]
 	var/nucleium_power_reduction = 0
 
-	var/fuel_check = air1.total_moles() <= 0 ? 0 : ((air1.gases[GAS_PLASMA] + air1.gases[GAS_CONSTRICTED_PLASMA] + air1.gases[GAS_TRITIUM]) / air1.total_moles()) * 100
+	var/fuel_check = air1.total_moles() <= 0 ? 0 : ((air1.gases[GAS_PLASMA] + air1.gases[GAS_TRITIUM]) / air1.total_moles()) * 100
 	if(air1.total_moles() >= reaction_rate && fuel_check >= 12.5) //1:8 ratio
 		var/datum/gas_mixture/reaction_chamber_gases = air1.remove(reaction_rate)
 
 		//calculate the actual fuel mix
-		var/chamber_ror_total = reaction_chamber_gases.gases[GAS_PLASMA] * (LOW_ROR * plasma_modifier) + \
-								reaction_chamber_gases.gases[GAS_CONSTRICTED_PLASMA] * (NORMAL_ROR * constricted_plasma_modifier) + \
+		var/chamber_ror_total = reaction_chamber_gases.gases[GAS_PLASMA] * (NORMAL_ROR * plasma_modifier) + \
 								reaction_chamber_gases.gases[GAS_TRITIUM] * (HIGH_ROR * tritium_modifier) + \
 								reaction_chamber_gases.gases[GAS_N2] * (HINDER_ROR * n2_modifier) + \
 								reaction_chamber_gases.gases[GAS_WATER_VAPOR] * (HINDER_ROR * h2o_modifier) + \
@@ -770,7 +760,7 @@ Control Rods
 		var/datum/gas_mixture/air2 = airs[2]
 		var/output_starting_pressure = air2.return_pressure()
 		var/heat_kelvin = heat + 273.15
-		var/fuel_amount = air1.gases[GAS_PLASMA] + air1.gases[GAS_CONSTRICTED_PLASMA] + air1.gases[GAS_TRITIUM]
+		var/fuel_amount = air1.gases[GAS_PLASMA] + air1.gases[GAS_TRITIUM]
 		if(output_starting_pressure >= max_output_pressure) //if pressured capped, nucleium backs up into the drive
 			air1.assert_gases(GAS_NUCLEIUM, ((fuel_amount / reaction_rate) / 10) * input_power_modifier)
 			air1.temperature = heat_kelvin
@@ -802,10 +792,6 @@ Control Rods
 				record_list.Cut(1, 2)
 			return
 
-		var/list/constricted_plasma = gas_records["constricted_plasma"]
-		constricted_plasma += (air1.gases[GAS_CONSTRICTED_PLASMA] / air1.total_moles()) * 100
-		if(constricted_plasma.len > gas_records_length)
-			constricted_plasma.Cut(1, 2)
 		var/list/plasma = gas_records["plasma"]
 		plasma += (air1.gases[GAS_PLASMA] / air1.total_moles()) * 100
 		if(plasma.len > gas_records_length)
@@ -1214,33 +1200,28 @@ Control Rods
 			M.Knockdown(50)
 			to_chat(M, "<span class='danger'You feel a wave of energy wash over you!</span>")
 
-	for(var/X in GLOB.landmarks_list)
-		if(istype(X, /obj/effect/landmark/nuclear_waste_spawner))
-			var/obj/effect/landmark/nuclear_waste_spawner/WS = X
-			var/epi = get_turf(WS)
-			if(WS.range < 10) //small spawner
-				empulse(epi, 5, 15)
-				radiation_pulse(epi, 100)
-				if(prob(50))
-					var/anom = rand(1,10)
-					switch(anom)
-						if(1 to 4)
-							new /obj/effect/anomaly/stormdrive/surge(epi, rand(2000, 5000))
-						if(5 to 8)
-							new /obj/effect/anomaly/stormdrive/sheer(epi, rand(2000, 5000))
-						if(9 to 10)
-							new /obj/effect/anomaly/stormdrive/squall(epi, rand(2000, 5000))
-			else //larger spawner
-				empulse(epi, 10, 25)
-				radiation_pulse(epi, 500)
-				var/anom = rand(1,10)
-				switch(anom) //spawn SD anom
-					if(1 to 4)
-						new /obj/effect/anomaly/stormdrive/surge(epi, rand(2000, 5000))
-					if(5 to 8)
-						new /obj/effect/anomaly/stormdrive/sheer(epi, rand(2000, 5000))
-					if(9 to 10)
-						new /obj/effect/anomaly/stormdrive/squall(epi, rand(2000, 5000))
+	var/anomalies = 10
+	var/list/anomaly_types = list(GRAVITATIONAL_ANOMALY = 55, HALLUCINATION_ANOMALY = 45, DIMENSIONAL_ANOMALY = 35, BIOSCRAMBLER_ANOMALY = 35, FLUX_ANOMALY = 25, PYRO_ANOMALY = 5, VORTEX_ANOMALY = 1)
+	var/list/anomaly_places = GLOB.generic_event_spawns
+
+	// Spawns this many anomalies instantly. Spawns the rest with callbacks.
+	var/cutoff_point = round(anomalies * 0.5, 1)
+
+	for(var/i in 1 to anomalies)
+		var/anomaly_to_spawn = pick_weight(anomaly_types)
+		var/anomaly_location = pick_n_take(anomaly_places)
+
+		if(i < cutoff_point)
+			supermatter_anomaly_gen(anomaly_location, anomaly_to_spawn, has_changed_lifespan = FALSE)
+			continue
+
+		var/current_spawn = rand(5 SECONDS, 10 SECONDS)
+		var/next_spawn = rand(5 SECONDS, 10 SECONDS)
+		var/extended_spawn = 0
+		if(SPT_PROB(1, next_spawn))
+			extended_spawn = rand(5 MINUTES, 15 MINUTES)
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(supermatter_anomaly_gen), anomaly_location, anomaly_to_spawn, TRUE), current_spawn + extended_spawn)
+	return TRUE
 
 //////// Reactor Computer////////
 
@@ -1384,7 +1365,7 @@ Control Rods
 
 	var/datum/gas_mixture/air1 = reactor ? reactor.airs[1] : 0
 
-	data["fuel_mix"] = air1 ? air1.gases[GAS_PLASMA] + air1.gases[GAS_CONSTRICTED_PLASMA] + air1.gases[GAS_TRITIUM] : 0
+	data["fuel_mix"] = air1 ? air1.gases[GAS_PLASMA] + air1.gases[GAS_TRITIUM] : 0
 	if(reactor?.state == REACTOR_STATE_RUNNING)
 		data["mole_threshold_very_high"] = reactor ? (reactor.reaction_rate * 18) + 20 : 0
 		data["mole_threshold_high"] = reactor ? (reactor.reaction_rate * 12) + 20 : 0
@@ -1404,7 +1385,6 @@ Control Rods
 	data["bz"] = air1 ? air1.gases[GAS_BZ] : 0
 	data["stim"] = air1 ? air1.gases[GAS_NITRIUM] : 0
 	data["pluoxium"] = air1 ? air1.gases[GAS_PLUOXIUM] : 0
-	data["constricted_plasma"] = air1 ? air1.gases[GAS_CONSTRICTED_PLASMA] : 0
 	data["nucleium"] = air1 ? air1.gases[GAS_NUCLEIUM] : 0
 	data["total_moles"] = air1 ? air1.total_moles() : 0
 
@@ -1432,26 +1412,7 @@ Control Rods
 	design_ids = list("sd_r_c_c", "mag_cons")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 
-/////// Constricted Plasma///////
-
-/obj/machinery/atmospherics/components/trinary/filter/atmos/constricted_plasma
-	name = "constricted plasma filter"
-	filter_type = "constricted_plasma"
-
-/obj/machinery/atmospherics/components/trinary/filter/atmos/constricted_plasma/flipped
-	icon_state = "filter_on_f"
-	flipped = TRUE
-
-/obj/machinery/atmospherics/components/trinary/filter/atmos/plasma/flipped
-	icon_state = "filter_on_f"
-	flipped = TRUE
-
-/obj/machinery/portable_atmospherics/canister/constricted_plasma
-	name = "constricted plasma canister"
-	desc = "Highly volatile plasma which has been magnetically constricted. The fuel which nuclear storm drives run off of."
-	gas_type = GAS_CONSTRICTED_PLASMA
-	greyscale_config = /datum/greyscale_config/canister/hazard
-	greyscale_colors = "#aa18c7#000000"
+/////// stuff for reactor///////
 
 /obj/machinery/portable_atmospherics/canister/nucleium
 	name = "nucleium canister"
@@ -1605,7 +1566,8 @@ Control Rods
 
 /obj/effect/anomaly/stormdrive/surge //EMP + Flux
 	name = "storm surge anomaly"
-	icon_state = "electricity2"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "electricity3"
 	var/canshock = FALSE
 	var/shockdamage = 20
 
@@ -1655,6 +1617,7 @@ Control Rods
 
 /obj/effect/anomaly/stormdrive/squall //Gravity + Brute
 	name = "storm squall anomaly"
+	icon = 'icons/effects/effects.dmi'
 	icon_state = "dragnetfield"
 	alpha = 65 //Not exactly easy to see
 
