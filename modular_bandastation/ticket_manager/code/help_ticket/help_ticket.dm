@@ -132,7 +132,7 @@
 	var/datum/discord_embed/embed = build_ticket_manager_embed(message)
 
 	if(ahelp_message_matches_keyword(message))
-		embed.color = 0x800000 // red
+		embed.color = TICKET_EMBED_COLOR_URGENT
 		embed.content = "@here"
 		send2adminchat_webhook(embed, FALSE)
 		return
@@ -141,7 +141,7 @@
 	if(length(admin_counts["present"]) > 0)
 		return
 
-	embed.color = 0x0055A4 // blue
+	embed.color = TICKET_EMBED_COLOR_ZEROADMINS
 	send2adminchat_webhook(embed, FALSE)
 
 // sends webhook notification when ticket was auto closed by timeout
@@ -157,7 +157,7 @@
 	if(!player_message)
 		player_message = "Сообщение игрока не найдено."
 	var/datum/discord_embed/embed = build_ticket_manager_embed(player_message, null, "Автозакрытие - ")
-	embed.color = 0xFF9900 // orange
+	embed.color = TICKET_EMBED_COLOR_STALE
 	send2adminchat_webhook(embed, FALSE)
 
 /datum/help_ticket/proc/get_last_player_message()
