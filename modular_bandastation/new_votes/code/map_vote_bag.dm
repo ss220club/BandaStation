@@ -46,6 +46,9 @@
 /datum/controller/subsystem/map_vote/proc/load_bag_state()
 	if(rustg_file_exists(BAG_STATE_FILE))
 		var/list/state = json_decode(rustg_file_read(BAG_STATE_FILE))
+		if(!state)
+			refill_bag()
+			return
 		remaining_bag = state["remaining"] || list()
 		last_played_map = state["last_played"]
 		var/list/clean = list()
