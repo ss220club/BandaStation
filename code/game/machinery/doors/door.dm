@@ -164,7 +164,7 @@
 
 	if(isnull(held_item) && Adjacent(user))
 		context[SCREENTIP_CONTEXT_LMB] = "Open"
-		context[SCREENTIP_CONTEXT_RMB] = "Knock" // BANDASTATION ADDITION: KNOCK
+		context[SCREENTIP_CONTEXT_RMB] = "Постучать" // BANDASTATION ADDITION: KNOCK
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/door/check_access_list(list/access_list)
@@ -318,8 +318,8 @@
 	// BANDASTATION ADDITION START: KNOCK
 	if(modifiers[RIGHT_CLICK])
 		knock_on(user)
-		user.visible_message(span_notice("[user] knocks on [src]."), \
-			span_notice("You knock on [src]."))
+		user.visible_message(span_notice("[user] стучит в [src]."), \
+			span_notice("Вы стучите в [src]."))
 		return TRUE
 	// BANDASTATION ADDITION END: KNOCK
 	if(try_remove_seal(user))
