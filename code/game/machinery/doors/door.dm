@@ -316,7 +316,7 @@
 		if(!(living_user.mobility_flags & MOBILITY_USE))
 			return
 	// BANDASTATION ADDITION START: KNOCK
-	if(modifiers[RIGHT_CLICK])
+	if(islist(modifiers) && modifiers[RIGHT_CLICK])
 		knock_on(user)
 		user.visible_message(span_notice("[user] стучит в [src]."), \
 			span_notice("Вы стучите в [src]."))
