@@ -240,7 +240,7 @@
 		/obj/item/flashlight/seclite = 1,
 		/obj/item/grenade/c4/x4 = 1,
 		/obj/item/storage/box/syndie_kit/frag_grenades = 1,
-		/obj/item/storage/medkit/tactical = 1,
+		/obj/item/storage/medkit/tactical_lite = 1,
 		/obj/item/disk/nuclear/death_commando = 1,
 	)
 
