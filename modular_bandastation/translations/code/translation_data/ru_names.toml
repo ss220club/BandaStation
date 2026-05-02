@@ -32948,12 +32948,12 @@ prepositional = "потусторонном демоне"
 gender = "male"
 
 ["Ash Spirit"]
-nominative = "дух Пепла"
-genitive = "духа Пепла"
-dative = "духу Пепла"
-accusative = "духа Пепла"
-instrumental = "духом Пепла"
-prepositional = "духе Пепла"
+nominative = "дух пепла"
+genitive = "духа пепла"
+dative = "духу пепла"
+accusative = "духа пепла"
+instrumental = "духом пепла"
+prepositional = "духе пепла"
 gender = "male"
 
 ["transmutation rune"]
@@ -33238,7 +33238,7 @@ prepositional = "чистом холсте: Учение о стандартны
 gender = "male"
 
 ["The sister and He Who Wept"]
-nominative = "Сестра и Тот, Кто плакал"
+nominative = "Сестра и тот, кто плакал"
 gender = "male"
 
 ["The First Desire"]
@@ -33299,7 +33299,7 @@ genitive = "отвара заката и рассвета"
 dative = "отвару заката и рассвета"
 accusative = "отвар заката и рассвета"
 instrumental = "отваром заката и рассвета"
-prepositional = "отваре заката и рассветая"
+prepositional = "отваре заката и рассвета   "
 gender = "male"
 
 ["brew of the wounded soldier"]

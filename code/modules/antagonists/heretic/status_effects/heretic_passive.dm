@@ -103,9 +103,9 @@
 	name = "Танец Клейма"
 	id = "blade_passive"
 	passive_descriptions = list(
-		"Держа в руке еретический клинок, вы автоматически нанесёте ответный удар, напавшему на вас. Данный эффект может сработать раз в 20 секунд.",
+		"Держа в руке еретический клинок, вы автоматически парируете удар, контратакуя напавшего на вас. Данный эффект может сработать раз в 20 секунд.",
 		"Невосприимчивость к урону от падений.",
-		"Время перезарядки ответного удара уменьшено до 10 секунд."
+		"Время перезарядки парирования уменьшено до 10 секунд."
 	)
 	/// The cooldown before we can riposte again
 	var/base_cooldown = 20 SECONDS
@@ -207,7 +207,7 @@
 /// Gives feedback to the user
 /datum/status_effect/heretic_passive/blade/proc/reset_riposte(mob/living/carbon/human/source)
 	riposte_ready = TRUE
-	source.balloon_alert(source, "Ответный удар готов")
+	source.balloon_alert(source, "Парирование готово")
 
 //---- Cosmic Passive
 // Level 1 Cosmic fields will speed up the caster and provide stamina regen

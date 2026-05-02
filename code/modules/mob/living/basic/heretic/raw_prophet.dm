@@ -34,7 +34,7 @@
 	var/on_unlink_message = "Ваш разум разлетается вдребезги, когда связь Мансуса с [src.declent_ru(INSTRUMENTAL)] покидает ваш разум."
 	AddComponent( \
 		/datum/component/mind_linker/active_linking, \
-		network_name = "Mansus Link", \
+		network_name = "Связь Мансуса", \
 		chat_color = "#568b00", \
 		post_unlink_callback = CALLBACK(src, PROC_REF(after_unlink)), \
 		speech_action_background_icon_state = "bg_heretic", \

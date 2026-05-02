@@ -25,7 +25,7 @@
 	else
 		to_chat(owner, span_ghostalert("Вы - пойманная в ловушку душа еретика, которым вы когда-то были. Вы можете попытаться убедить своих хозяев освободить вас, предоставив вам некоторую степень свободы и доступ к некоторым из ваших способностей. \
 		Вы были порабощены культом, но не являетесь его членом и сохраняете то, что осталось от вашей свободной воли. Помимо этого, вам мало что можно сделать, кроме как комментировать ситуацию. Постарайтесь не быть запертым в шкафчике."))
-	owner.current.log_message("был принесен в жертву Нар'си будучи еретиком, и запечатан внутри клинка.", LOG_GAME)
+	owner.current.log_message("was sacrificed to Nar'sie as a Heretic, and sealed inside a longsword.", LOG_GAME)
 	var/datum/objective/epic_fail = new /datum/objective/heretic_trapped()
 	epic_fail.completed = FALSE
 	objectives += epic_fail

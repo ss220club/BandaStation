@@ -319,7 +319,7 @@
 	owner.add_mood_event("eldritch_weeping", /datum/mood_event/eldritch_painting/weeping)
 
 /atom/movable/screen/alert/status_effect/eldritch_painting/weeping
-	name = "Сестра и Тот, Кто плакал"
+	name = "Сестра и тот, кто плакал"
 	desc = "Плач эхом отдаётся в вашем сознании, разрушая вашу психику! Быть может, если ещё раз взглянуть на картину, вам станет легче..."
 	icon_state = "eldritch_painting_weeping"
 

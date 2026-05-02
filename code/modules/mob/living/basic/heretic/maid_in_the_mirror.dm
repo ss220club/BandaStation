@@ -53,7 +53,7 @@
 	// If we have health, we take some damage
 	if(health > (maxHealth * 0.02))
 		visible_message(
-				span_warning("Кажется что [src.declent_ru(NOMINATIVE)] то появляется, то исчезает."),
+				span_warning("Кажется, что [src.declent_ru(NOMINATIVE)] то появляется, то исчезает."),
 				span_userdanger("Взгляд [user.declent_ru(GENITIVE)] пронизывает само ваше существование!"),
 		)
 
