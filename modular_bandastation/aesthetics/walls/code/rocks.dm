@@ -72,9 +72,9 @@
 	base_icon_state = "smoothrocks"
 	color = rock_color(COLOR_WHITE)
 
-/turf/closed/mineral/random/snow/Change_Ore(ore_type, random = 0)
+/turf/closed/mineral/random/snow/change_ore(ore_type, random = TRUE)
 	. = ..()
-	if(mineralType)
+	if(mineral_type)
 		color = ROCK_COLOR_ICE
 
 /turf/closed/mineral/random/labormineral/ice
