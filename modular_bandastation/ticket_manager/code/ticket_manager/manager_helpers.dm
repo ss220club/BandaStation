@@ -138,7 +138,7 @@
 	needed_ticket.messages += list(list(
 		"sender" = sender.key,
 		"message" = emoji_parse(message),
-		"time" = time_stamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 	SStgui.update_uis(src)
 
@@ -157,7 +157,7 @@
 		if(initiator.current_help_ticket != needed_ticket)
 			CRASH("Ticket with id [ticket_id] is not the current help ticket for [initiator.ckey]!")
 
-		needed_ticket.closed_at = time_stamp(NONE)
+		needed_ticket.closed_at = TIMESTAMP()
 		initiator.current_help_ticket = null
 
 		var/blackbox_action = ticket_closed ? "Closed" : "Resolved"
@@ -221,7 +221,7 @@
 	needed_ticket.messages += list(list(
 		"sender" = TICKET_LOG_SENDER_CLIENT_DISCONNECTED,
 		"message" = "[user.key] отключился",
-		"time" = time_stamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 	SStgui.update_uis(src)
 	// Gotta async this cause clients only logout on destroy, and sleeping in destroy is disgusting
@@ -240,7 +240,7 @@
 	needed_ticket.messages += list(list(
 		"sender" = TICKET_LOG_SENDER_CLIENT_CONNECTED,
 		"message" = "[user.key] подключился",
-		"time" = time_stamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 	SStgui.update_uis(src)
 	SSblackbox.LogAhelp(needed_ticket.id, "Reconnected", "Client reconnected", user.key)
@@ -348,7 +348,7 @@
 	user_ticket.messages += list(list(
 		"sender" = TICKET_LOG_SENDER_ADMIN_TICKET_LOG,
 		"message" = strip_html_full(message),
-		"time" = time_stamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 
 	SStgui.update_uis(GLOB.ticket_manager)
@@ -361,7 +361,7 @@
 	ticket.messages += list(list(
 		"sender" = TICKET_LOG_SENDER_ADMIN_TICKET_LOG,
 		"message" = strip_html_full(message),
-		"time" = time_stamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 
 	SStgui.update_uis(GLOB.ticket_manager)
