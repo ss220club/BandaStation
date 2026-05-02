@@ -209,13 +209,7 @@
 		CRASH("Tried to autoclose null ticket!")
 
 	// guard against stale timers
-	if(needed_ticket.state != TICKET_OPEN)
-		return
-
-	if(needed_ticket.linked_admin)
-		return
-
-	if(needed_ticket.initiator_client?.current_help_ticket != needed_ticket)
+	if(needed_ticket.state != TICKET_OPEN || needed_ticket.linked_admin || needed_ticket.initiator_client?.current_help_ticket != needed_ticket)
 		return
 
 	set_ticket_state(null, needed_ticket, TICKET_CLOSED)

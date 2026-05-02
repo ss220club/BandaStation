@@ -91,7 +91,7 @@
 	data["writers"] = writers
 	data["messages"] = messages
 	data["userHasStaffAccess"] = has_staff_access(user.client)
-	data["isLinkedToCurrentAdmin"] = !isnull(linked_admin) && (linked_admin.client == user.client)
+	data["isLinkedToCurrentAdmin"] = linked_admin ? linked_admin.client == user.client : FALSE
 	return data
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
@@ -124,11 +124,7 @@
 
 // just mirrors old adminhelp webhook behavior for admin tickets
 /datum/help_ticket/proc/send_creation_webhook_if_needed(message)
-	if(ticket_type_id != TICKET_TYPE_ADMIN)
-		return
-
-	var/regular_webhook_url = CONFIG_GET(string/regular_adminhelp_webhook_url)
-	if(!regular_webhook_url)
+	if(ticket_type_id != TICKET_TYPE_ADMIN || !CONFIG_GET(string/regular_adminhelp_webhook_url))
 		return
 
 	var/datum/discord_embed/embed = build_ticket_manager_embed(message)
@@ -136,34 +132,20 @@
 	if(ahelp_message_matches_keyword(message))
 		embed.color = TICKET_EMBED_COLOR_URGENT
 		embed.content = "@here"
-		send2adminchat_webhook(embed, FALSE)
-		webhook_sent = TRUE
+	else if(length(get_admin_counts(R_BAN)["present"]) > 0)
 		return
+	else
+		embed.color = TICKET_EMBED_COLOR_ZEROADMINS
 
-	var/list/admin_counts = get_admin_counts(R_BAN)
-	if(length(admin_counts["present"]) > 0)
-		return
-
-	embed.color = TICKET_EMBED_COLOR_ZEROADMINS
 	send2adminchat_webhook(embed, FALSE)
 	webhook_sent = TRUE
 
 // sends webhook notification when ticket was auto closed by timeout
 /datum/help_ticket/proc/send_autoclose_webhook()
-	if(ticket_type_id != TICKET_TYPE_ADMIN)
+	if(ticket_type_id != TICKET_TYPE_ADMIN || webhook_sent || !CONFIG_GET(string/regular_adminhelp_webhook_url))
 		return
 
-	var/regular_webhook_url = CONFIG_GET(string/regular_adminhelp_webhook_url)
-	if(!regular_webhook_url)
-		return
-
-	if(webhook_sent)
-		return
-
-	var/player_message = get_last_player_message()
-	if(!player_message)
-		player_message = "Сообщение игрока не найдено."
-	var/datum/discord_embed/embed = build_ticket_manager_embed(player_message, null, "Автозакрытие - ")
+	var/datum/discord_embed/embed = build_ticket_manager_embed(get_last_player_message() || "Сообщение игрока не найдено.", null, "Автозакрытие - ")
 	embed.color = TICKET_EMBED_COLOR_STALE
 	send2adminchat_webhook(embed, FALSE)
 	webhook_sent = TRUE
@@ -196,19 +178,16 @@
 	if(status_line)
 		embed.description += "\n\n[status_line]"
 	if(CONFIG_GET(string/adminhelp_ahelp_link))
-		var/ahelp_link = replacetext(CONFIG_GET(string/adminhelp_ahelp_link), "$RID", GLOB.round_id)
-		ahelp_link = replacetext(ahelp_link, "$TID", id)
-		embed.url = ahelp_link
+		embed.url = replacetext(replacetext(CONFIG_GET(string/adminhelp_ahelp_link), "$RID", GLOB.round_id), "$TID", "[id]")
 	var/list/fields = list(
 		"Раунд" = "[GLOB.round_id]",
 		"Ckey" = "[initiator_key]",
 	)
-	var/mob/initiator_mob = initiator_client?.mob
-	if(!isnull(initiator_mob?.real_name) && length(initiator_mob.real_name))
-		fields["Игровое имя"] = initiator_mob.real_name
+	if(length(initiator_client?.mob?.real_name))
+		fields["Игровое имя"] = initiator_client.mob.real_name
 	var/list/admin_fields = get_admin_webhook_fields()
 	fields["Админы онлайн"] = admin_fields["online"]
-	if(!isnull(admin_fields["deadmin"]))
+	if(admin_fields["deadmin"])
 		fields["Deadmin"] = admin_fields["deadmin"]
 	embed.fields = fields
 	return embed
@@ -220,22 +199,18 @@
 			continue
 		active_admin_lines += "• [admin] - [admin.holder.rank_names()]"
 
-	var/online_field = length(active_admin_lines) ? jointext(active_admin_lines, "\n") : "Отсутствуют"
-
 	var/list/deadmin_ckeys = list()
 	for(var/deadmin_ckey in GLOB.deadmins)
 		var/datum/admins/deadmin_holder = GLOB.deadmins[deadmin_ckey]
 		if(!(deadmin_holder?.rank_flags() & R_ADMIN))
 			continue
-		var/client/deadmin_client = GLOB.directory[deadmin_ckey]
-		if(!deadmin_client)
+		if(!GLOB.directory[deadmin_ckey])
 			continue
 		deadmin_ckeys += "[deadmin_ckey]"
 
-	var/deadmin_field = length(deadmin_ckeys) ? jointext(deadmin_ckeys, ", ") : null
 	return list(
-		"online" = online_field,
-		"deadmin" = deadmin_field,
+		"online" = length(active_admin_lines) ? jointext(active_admin_lines, "\n") : "Отсутствуют",
+		"deadmin" = length(deadmin_ckeys) ? jointext(deadmin_ckeys, ", ") : null,
 	)
 
 /// Converts ticket to ticket type specified `type_to_convert_to`
