@@ -75,7 +75,8 @@
 	// override = TRUE защищает от дублирования если on_species_gain вызван повторно
 	RegisterSignal(H, COMSIG_IPC_BATTERY_UPDATED, PROC_REF(on_battery_updated), override = TRUE)
 	// Отслеживание повреждений корпуса для снятия/восстановления защиты от давления
-	RegisterSignal(H, COMSIG_CARBON_LIMB_DAMAGED, PROC_REF(on_limb_damaged), override = TRUE)
+	RegisterSignal(H, COMSIG_LIVING_HEALTH_UPDATE, PROC_REF(on_health_updated), override = TRUE)
+	check_chassis_integrity(H)
 	if(H.hud_used)
 		add_ipc_battery_hud(H)
 
@@ -90,7 +91,7 @@
 		COMSIG_PROCESS_BORGCHARGER_OCCUPANT,
 		COMSIG_MOB_HUD_CREATED,
 		COMSIG_IPC_BATTERY_UPDATED,
-		COMSIG_CARBON_LIMB_DAMAGED,
+		COMSIG_LIVING_HEALTH_UPDATE,
 	))
 	REMOVE_TRAIT(H, TRAIT_IPC_CHASSIS_BREACHED, TRAIT_SOURCE_IPC_CHASSIS)
 	remove_ipc_battery_hud(H)
@@ -210,10 +211,8 @@
 	SIGNAL_HANDLER
 	update_ipc_battery_hud(H)
 
-/datum/species/ipc/proc/on_limb_damaged(mob/living/carbon/human/H, obj/item/bodypart/limb, brute, burn)
+/datum/species/ipc/proc/on_health_updated(mob/living/carbon/human/H)
 	SIGNAL_HANDLER
-	if(limb.limb_id != SPECIES_IPC)
-		return
 	check_chassis_integrity(H)
 
 /datum/species/ipc/proc/check_chassis_integrity(mob/living/carbon/human/A)
