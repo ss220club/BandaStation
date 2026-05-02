@@ -188,6 +188,7 @@
 
 		initiator.current_help_ticket = needed_ticket
 		needed_ticket.closed_at = null
+		needed_ticket.webhook_sent = FALSE
 		user_message = "Ваш тикет #[ticket_id] был снова открыт! Проверьте Тикет Менеджер нажав F1!"
 
 		if(admin)

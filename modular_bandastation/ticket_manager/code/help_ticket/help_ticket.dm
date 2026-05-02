@@ -35,6 +35,8 @@
 	var/static/ticket_counter = 0
 	/// Prevents convert spam
 	COOLDOWN_DECLARE(convert_cooldown)
+	/// is message already sent for this ticket
+	var/webhook_sent = FALSE
 
 /datum/help_ticket/New(client/creator, client/admin, message, ticket_type_id)
 	if(!message || !creator || !creator.mob)
@@ -135,6 +137,7 @@
 		embed.color = TICKET_EMBED_COLOR_URGENT
 		embed.content = "@here"
 		send2adminchat_webhook(embed, FALSE)
+		webhook_sent = TRUE
 		return
 
 	var/list/admin_counts = get_admin_counts(R_BAN)
@@ -143,6 +146,7 @@
 
 	embed.color = TICKET_EMBED_COLOR_ZEROADMINS
 	send2adminchat_webhook(embed, FALSE)
+	webhook_sent = TRUE
 
 // sends webhook notification when ticket was auto closed by timeout
 /datum/help_ticket/proc/send_autoclose_webhook()
@@ -153,12 +157,16 @@
 	if(!regular_webhook_url)
 		return
 
+	if(webhook_sent)
+		return
+
 	var/player_message = get_last_player_message()
 	if(!player_message)
 		player_message = "Сообщение игрока не найдено."
 	var/datum/discord_embed/embed = build_ticket_manager_embed(player_message, null, "Автозакрытие - ")
 	embed.color = TICKET_EMBED_COLOR_STALE
 	send2adminchat_webhook(embed, FALSE)
+	webhook_sent = TRUE
 
 /datum/help_ticket/proc/get_last_player_message()
 	if(!length(messages))
