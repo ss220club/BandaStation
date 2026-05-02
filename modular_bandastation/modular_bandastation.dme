@@ -57,6 +57,7 @@
 #include "mapping/_mapping.dme"
 #include "martial_arts/_martial_arts.dme"
 #include "medical/_medical.dme"
+#include "datums/_datums.dme"
 #include "metaserver/_metaserver.dme"
 #include "minesweeper/_minesweeper.dme"
 #include "music/_music.dme"

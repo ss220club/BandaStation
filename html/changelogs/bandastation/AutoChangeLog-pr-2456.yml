@@ -1,0 +1,5 @@
+author: "Maxiemar"
+delete-after: True
+changes:
+  - bugfix: "Время снова отображается корректно в админ и ментор-тикетах."
+  - bugfix: "Server Time/NST теперь использует UTC, как и задумывалось."

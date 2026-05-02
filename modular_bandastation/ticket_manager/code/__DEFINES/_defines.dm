@@ -2,3 +2,5 @@
 
 #define TICKET_REPLY_COOLDOWN 5 SECONDS
 #define TICKET_AUTOCLOSE_TIMER 20 MINUTES
+
+#define TIMESTAMP(...) (time2text(world.timeofday, "DDD MMM DD hh:mm:ss YYYY", TIMEZONE_UTC))

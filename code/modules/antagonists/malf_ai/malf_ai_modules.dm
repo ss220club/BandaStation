@@ -754,7 +754,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	power_type = /datum/action/innate/ai/break_fire_alarms
 	unlock_text = span_notice("Вы изменяете управление всех пожарных тревог на ручное, \
 		что позволяет вам переключать их по собственному желанию.")
-	unlock_sound = 'sound/machines/fire_alarm/FireAlarm1.ogg'
+	unlock_sound = 'sound/machines/fire_alarm/fire_alarm1.ogg'
 
 /datum/action/innate/ai/break_fire_alarms
 	name = "Override Thermal Sensors"

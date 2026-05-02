@@ -96,10 +96,11 @@
 	var/static/list/no_thinking_bubble_channels = list(
 		OOC_CHANNEL,
 		ADMIN_CHANNEL,
-		MENTOR_CHANNEL
+		MENTOR_CHANNEL,
+		PRAY_CHANNEL,
 	)
 	// BANDASTATION ADDITION END - Mentors
-	if(!(payload["channel"] in no_thinking_bubble_channels)) // BANDASTATION EDIT - Mentors: (payload["channel"] in no_thinking_bubble_channels)
+	if(!(payload["channel"] in no_thinking_bubble_channels)) // BANDASTATION EDIT - Mentors: (payload["channel"] in no_thinking_bubble_channels && payload["channel"] != PRAY_CHANNEL)
 		start_thinking()
 	if(!client.typing_indicators)
 		log_speech_indicators("[key_name(client)] started typing at [loc_name(client.mob)], indicators DISABLED.")
