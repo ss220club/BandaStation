@@ -31,7 +31,7 @@ ADMIN_VERB(admin_bag_editor, R_SERVER, "Map Pool Editor", "Edit the map rotation
 			"remaining_count" = remaining_counts[map_name] || 0,
 		))
 
-	var/datum/map_config/last_played_ma_datump = config.maplist[last_played_map]
+	var/datum/map_config/last_played_map_datum = config.maplist[last_played_map]
 	var/last_played_display = last_played_map ? (last_played_map_datum.map_name || last_played_map) : null
 
 	return list(
