@@ -424,7 +424,7 @@
 	can_attack_dense_objects = TRUE
 
 /datum/pet_command/attack/star_gazer
-	speech_commands = list("атакуй", "фас", "убей", "разорви их")
+	speech_commands = list("атакуй", "фас", "убей", "разорви их", "attack", "sic", "kill", "slash them")
 	command_feedback = "смотрит!"
 	pointed_reaction = "пристально смотрит!"
 	refuse_reaction = "..."
