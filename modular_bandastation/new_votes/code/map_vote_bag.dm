@@ -76,11 +76,7 @@
 
 /// Returns deduplicated list of unique map names currently in remaining_bag.
 /datum/controller/subsystem/map_vote/proc/get_bag_options()
-	var/list/seen = list()
-	for(var/map_name in remaining_bag)
-		if(!(map_name in seen))
-			seen += map_name
-	return seen
+	return unique_list(remaining_bag)
 
 /// Replaces old tally/pop-filter logic.
 /datum/controller/subsystem/map_vote/get_valid_map_vote_choices()
