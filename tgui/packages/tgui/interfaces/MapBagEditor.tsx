@@ -13,7 +13,6 @@ import { Window } from '../layouts';
 type MapEntry = {
   map_name: string;
   display_name: string;
-  initial_count: number;
   config_count: number;
   remaining_count: number;
 };
@@ -65,7 +64,7 @@ export function MapBagEditor() {
                   >
                     <Stack.Item style={{ fontSize: '20px', display: 'flex', gap: '10px' }}>
                       <Box
-                        color={entry.initial_count === 0 ? 'bad' : 'good'}
+                        color={entry.remaining_count === 0 ? 'bad' : 'good'}
                         inline
                       >
                         {entry.remaining_count}
@@ -79,29 +78,14 @@ export function MapBagEditor() {
                     <Stack.Item>
                       <Button
                         icon="minus"
-                        disabled={entry.initial_count === 0}
-                        onClick={() =>
-                          entry.initial_count === 1
-                            ? act('remove_map', { map_name: entry.map_name })
-                            : act('set_copies', {
-                                map_name: entry.map_name,
-                                count: entry.initial_count - 1,
-                              })
-                        }
+                        disabled={entry.remaining_count === 0}
+                        onClick={() => act('remove_one', { map_name: entry.map_name })}
                       />
                     </Stack.Item>
                     <Stack.Item>
                       <Button
                         icon="plus"
-                        disabled={entry.initial_count >= 10}
-                        onClick={() =>
-                          entry.initial_count === 0
-                            ? act('add_map', { map_name: entry.map_name })
-                            : act('set_copies', {
-                                map_name: entry.map_name,
-                                count: entry.initial_count + 1,
-                              })
-                        }
+                        onClick={() => act('add_one', { map_name: entry.map_name })}
                       />
                     </Stack.Item>
                   </Stack>

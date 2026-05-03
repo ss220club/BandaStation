@@ -1,11 +1,28 @@
-/// Always accessible: bag may be empty at SSvote init time but we handle that in can_be_initiated.
 /datum/vote/map_vote/is_accessible_vote()
 	return TRUE
 
-/// Replaces old create_vote: always uses fresh bag options, no old pop-filter null check.
-/// Calling ..() here goes to /datum/vote/create_vote (base), skipping old map_vote core override.
 /datum/vote/map_vote/create_vote()
+	var/bag_check = SSmap_vote.check_bag_before_vote()
+	var/safety = 0
+	while(bag_check == "REFILL" && safety++ < 2)
+		SSmap_vote.refill_bag()
+		SSmap_vote.save_bag_state()
+		bag_check = SSmap_vote.check_bag_before_vote()
+
+	if(istext(bag_check) && bag_check != "REFILL")
+		SSmap_vote.auto_select_single_map(bag_check)
+		return FALSE
+
+	if(bag_check == "REFILL")
+		if(length(SSmap_vote.remaining_bag))
+			SSmap_vote.auto_select_single_map(SSmap_vote.remaining_bag[1])
+		return FALSE
+
 	default_choices = SSmap_vote.get_valid_map_vote_choices()
+	if(!length(default_choices) && length(SSmap_vote.remaining_bag))
+		SSmap_vote.auto_select_single_map(SSmap_vote.remaining_bag[1])
+		return FALSE
+
 	. = ..()
 	if(!.)
 		return FALSE
@@ -18,18 +35,20 @@
 		return FALSE
 	return TRUE
 
-/// Skip non-voter preferred-map autovote. ..() goes to /datum/vote/get_vote_result (base).
 /datum/vote/map_vote/get_vote_result(list/non_voters)
 	return ..()
 
-/// Allow vote initiation even with 1 choice (auto-finalizes). Block only on 0 choices.
-/// Calling ..() goes to /datum/vote/can_be_initiated (base), skipping old map_vote core override.
 /datum/vote/map_vote/can_be_initiated(forced)
 	. = ..()
 	if(. != VOTE_AVAILABLE)
 		return .
 	if(SSmap_vote.next_map_config)
 		return "The next map has already been selected."
+
+	var/bag_check = SSmap_vote.check_bag_before_vote()
+	if(bag_check == "REFILL" || istext(bag_check))
+		return VOTE_AVAILABLE
+
 	var/num_choices = length(SSmap_vote.get_valid_map_vote_choices())
 	if(num_choices == 0)
 		return "There are no maps to choose from."

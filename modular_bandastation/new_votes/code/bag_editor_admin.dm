@@ -27,7 +27,6 @@ ADMIN_VERB(admin_bag_editor, R_SERVER, "Map Pool Editor", "Edit the map rotation
 		maps += list(list(
 			"map_name" = map_name,
 			"display_name" = mc.map_name,
-			"initial_count" = initial_bag[map_name] || 0,
 			"config_count" = config_bag[map_name] || 0,
 			"remaining_count" = remaining_counts[map_name] || 0,
 		))
@@ -46,49 +45,33 @@ ADMIN_VERB(admin_bag_editor, R_SERVER, "Map Pool Editor", "Edit the map rotation
 		return
 	var/mob/user = ui.user
 	switch(action)
-		if("set_copies")
+		if("remove_one")
 			var/map_name = params["map_name"]
-			var/count = text2num(params["count"])
-			if(!(map_name in config.maplist) || !count || count < 1 || count > MAP_BAG_MAX_COPIES)
+			var/idx = remaining_bag.Find(map_name)
+			if(!idx)
 				return
-			var/old_count = initial_bag[map_name] || 0
-			initial_bag[map_name] = count
-			var/diff = count - old_count
-			if(diff > 0)
-				for(var/i in 1 to diff)
-					remaining_bag += map_name
-			else if(diff < 0)
-				for(var/i in 1 to abs(diff))
-					var/idx = remaining_bag.Find(map_name)
-					if(idx)
-						remaining_bag.Cut(idx, idx + 1)
+			remaining_bag.Cut(idx, idx + 1)
 			save_bag_state()
-			log_admin("[key_name_admin(user.client)] set [map_name] copies to [count] in map bag.")
-			message_admins("[key_name_admin(user.client)] set [map_name] copies to [count] in map bag.")
+			log_admin("[key_name_admin(user.client)] removed 1x [map_name] from remaining map bag.")
+			message_admins("[key_name_admin(user.client)] removed 1x [map_name] from remaining map bag.")
 			return TRUE
-		if("add_map")
+		if("add_one")
 			var/map_name = params["map_name"]
-			if(!(map_name in config.maplist) || (map_name in initial_bag))
+			if(!(map_name in config.maplist))
 				return
-			initial_bag[map_name] = 1
+			var/max_copies = config_bag[map_name] || 0
+			if(max_copies <= 0)
+				return
+			var/current = 0
+			for(var/rem in remaining_bag)
+				if(rem == map_name)
+					current++
+			if(current >= max_copies)
+				return
 			remaining_bag += map_name
 			save_bag_state()
-			log_admin("[key_name_admin(user.client)] added [map_name] to map bag.")
-			message_admins("[key_name_admin(user.client)] added [map_name] to map bag.")
-			return TRUE
-		if("remove_map")
-			var/map_name = params["map_name"]
-			if(!(map_name in initial_bag))
-				return
-			initial_bag -= map_name
-			var/list/cleaned = list()
-			for(var/rem in remaining_bag)
-				if(rem != map_name)
-					cleaned += rem
-			remaining_bag = cleaned
-			save_bag_state()
-			log_admin("[key_name_admin(user.client)] removed [map_name] from map bag.")
-			message_admins("[key_name_admin(user.client)] removed [map_name] from map bag.")
+			log_admin("[key_name_admin(user.client)] added 1x [map_name] to remaining map bag.")
+			message_admins("[key_name_admin(user.client)] added 1x [map_name] to remaining map bag.")
 			return TRUE
 		if("reset_remaining")
 			load_bag_config()
