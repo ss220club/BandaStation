@@ -24,7 +24,7 @@ type Data = {
   remaining_total: number;
 };
 
-export function BagEditor() {
+export function MapBagEditor() {
   const { act, data } = useBackend<Data>();
   const { maps, last_played, remaining_total } = data;
 

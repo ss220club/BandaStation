@@ -6,7 +6,7 @@ ADMIN_VERB(admin_bag_editor, R_SERVER, "Map Pool Editor", "Edit the map rotation
 /datum/controller/subsystem/map_vote/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new /datum/tgui(user, src, "BagEditor", "Map Pool Editor")
+		ui = new /datum/tgui(user, src, "MapBagEditor", "Map Pool Editor")
 		ui.open()
 
 /datum/controller/subsystem/map_vote/ui_status(mob/user)
