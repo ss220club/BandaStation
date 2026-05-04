@@ -401,9 +401,7 @@
 	return clamp(round(min_chance + (max_chance - min_chance) * progress_ratio), min_chance, max_chance)
 
 /obj/machinery/power/bluespace_beacon/proc/get_input_ratio()
-	if(input_level_max <= 0)
-		return 0
-	return clamp(input_level / input_level_max, 0, 1)
+	return input_level_max <= 0 ? 0 : clamp(actual_power_usage / input_level_max, 0, 1)
 
 /obj/machinery/power/bluespace_beacon/proc/get_portal_spawn_turf()
 	var/turf/target_turf = get_safe_random_station_turf_equal_weight()
