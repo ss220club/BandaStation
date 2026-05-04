@@ -47,7 +47,6 @@
 	cost = 2
 	purchasable_from = ~UPLINK_ALL_SYNDIE_OPS
 
-
 /datum/uplink_item/ammo/revolver
 	name = ".357 Speed Loader"
 	desc = "A speed loader that contains seven additional .357 Magnum rounds; usable with the Syndicate revolver. \
