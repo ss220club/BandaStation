@@ -60,6 +60,7 @@
 #include "code/ranged/ballistic/ussp/special/pmk.dm"
 #include "code/ranged/ballistic/ussp/special/dshk.dm"
 #include "code/ranged/ballistic/ussp/special/volna.dm"
+#include "code/ranged/ballistic/syndicate/ruger22lr.dm"
 
 // MARK: Ranged - Energy
 #include "code/ranged/energy/awaymission_gun.dm"
