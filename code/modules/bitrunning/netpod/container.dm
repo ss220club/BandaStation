@@ -36,32 +36,32 @@
 	enter_matrix()
 
 
-/obj/machinery/netpod/default_pry_open(obj/item/crowbar, mob/living/pryer)
-	if(isnull(occupant) || !iscarbon(occupant))
+/obj/machinery/netpod/default_pry_open(mob/living/user, obj/item/crowbar, close_after_pry = FALSE, open_density = FALSE, closed_density = TRUE, deconstruct_on_fail = FALSE)
+	if(!iscarbon(occupant))
 		if(!state_open)
 			if(panel_open)
-				return FALSE
+				return deconstruct_on_fail ? default_deconstruction_crowbar(user, crowbar) : NONE
 			open_machine()
 		else
 			shut_pod()
 
-		return TRUE
+		return ITEM_INTERACT_SUCCESS
 
-	pryer.visible_message(
-		span_danger("[pryer.declent_ru(NOMINATIVE)] начинает вскрывать [src.declent_ru(ACCUSATIVE)]!"),
+	user.visible_message(
+		span_danger("[user.declent_ru(NOMINATIVE)] начинает вскрывать [src.declent_ru(ACCUSATIVE)]!"),
 		span_notice("Вы начинаете вскрывать [src.declent_ru(ACCUSATIVE)]."),
 		span_notice("Вы слышите громкий скрежет металла.")
 	)
 	playsound(src, 'sound/machines/airlock/airlock_alien_prying.ogg', 100, TRUE)
 
-	SEND_SIGNAL(src, COMSIG_BITRUNNER_CROWBAR_ALERT, pryer)
+	SEND_SIGNAL(src, COMSIG_BITRUNNER_CROWBAR_ALERT, user)
 
-	if(do_after(pryer, 15 SECONDS, src))
+	if(crowbar.use_tool(src, user, 15 SECONDS, volume = 50))
 		if(!state_open)
 			sever_connection()
 			open_machine()
 
-	return TRUE
+	return ITEM_INTERACT_SUCCESS
 
 
 /// Closes the machine without shoving in an occupant

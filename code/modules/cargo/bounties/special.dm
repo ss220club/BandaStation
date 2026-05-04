@@ -1,4 +1,7 @@
-/datum/bounty/item/alien_organs
+/datum/bounty/item/special
+	unique = TRUE
+
+/datum/bounty/item/special/alien_organs
 	name = "Инопланетные органы"
 	description = "Нанотрейзен заинтересовано в изучении биологии ксеноморфов. Отправьте набор органов для хорошей компенсации."
 	reward = CARGO_CRATE_VALUE * 50
@@ -12,7 +15,7 @@
 		/obj/item/organ/eyes/alien = TRUE,
 	)
 
-/datum/bounty/item/syndicate_documents
+/datum/bounty/item/special/syndicate_documents
 	name = "Документы синдиката"
 	description = "Информация о синдикате высоко ценится на ЦК. Если вы найдёте документы синдиката, отправьте их. Вы, может, спасёте жизни."
 	reward = CARGO_CRATE_VALUE * 30
@@ -21,7 +24,7 @@
 		/obj/item/documents/photocopy = TRUE,
 	)
 
-/datum/bounty/item/syndicate_documents/applies_to(obj/O)
+/datum/bounty/item/special/syndicate_documents/applies_to(obj/O)
 	if(!..())
 		return FALSE
 	if(istype(O, /obj/item/documents/photocopy))
@@ -29,16 +32,9 @@
 		return (Copy.copy_type && ispath(Copy.copy_type, /obj/item/documents/syndicate))
 	return TRUE
 
-/datum/bounty/item/adamantine
+/datum/bounty/item/special/adamantine
 	name = "Адамантит"
 	description = "Отдел аномальных материалов Нанотрейзен отчаянно нуждается в адамантите. Отправьте большую партию, и мы вас щедро вознаградим."
 	reward = CARGO_CRATE_VALUE * 70
 	required_count = 10
 	wanted_types = list(/obj/item/stack/sheet/mineral/adamantine = TRUE)
-
-/datum/bounty/item/trash
-	name = "Мусор"
-	description = "Недавно, у группы уборщиков кончился мусор для уборки и ЦК решило уволить их для уменьшения расходов. Отправьте мусора, чтобы оставить их на должности, и они дадут вам маленькую компенсацию."
-	reward = CARGO_CRATE_VALUE * 2
-	required_count = 10
-	wanted_types = list(/obj/item/trash = TRUE)

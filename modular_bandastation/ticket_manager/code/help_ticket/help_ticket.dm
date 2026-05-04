@@ -46,7 +46,7 @@
 		stat_name += "..."
 
 	id = ++ticket_counter
-	opened_at = time_stamp(NONE) // Reset format to Byond default
+	opened_at = TIMESTAMP()
 	initiator_client = creator.persistent_client
 	initiator = key_name(creator)
 	initiator_key = creator.key
@@ -159,7 +159,7 @@
 	messages += list(list(
 		"sender" = TICKET_LOG_SENDER_ADMIN_TICKET_LOG,
 		"message" = "[converter.ckey] конвертировал тикет в [ticket_type_id]",
-		"time" = time_stamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 
 	return TRUE
@@ -218,7 +218,7 @@
 	messages += list(list(
 		"sender" = TICKET_LOG_SENDER_ADMIN_TICKET_LOG,
 		"message" = "[linked_admin.key] отказался от тикета",
-		"time" = time_stamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 
 	linked_admin = null

@@ -109,6 +109,11 @@
 	acid = 0
 	wound = 0
 
+/obj/item/clothing/suit/armor/swat/tsf_heavy
+	name = "'Juggernaut' armor"
+	desc = "Тяжелая броня ТСФ, состоящая из множества слоев разных усиленных бронеплит и нано-кевлара. Отлично защищает от любых повреждений, особенно от пуль. Броня для самых серьезных защитников Федерации."
+	armor_type = /datum/armor/armor_heavy
+
 // MARK: USSP
 /obj/item/clothing/suit/armor/centcom_formal/ussp_commander
 	name = "soviet general greatcoat"
