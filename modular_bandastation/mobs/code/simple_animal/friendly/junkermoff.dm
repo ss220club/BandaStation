@@ -96,7 +96,7 @@
 
 /mob/living/basic/junkermoff/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	. = ..()
-	if(src.stat == DEAD)
+	if(stat == DEAD)
 		return
 	else
 		playsound(loc, 'sound/mobs/humanoids/moth/scream_moth.ogg', 50, TRUE)
