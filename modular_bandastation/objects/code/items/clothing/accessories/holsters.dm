@@ -72,6 +72,16 @@
 	. = ..()
 	create_storage(storage_type = /datum/storage/pockets/holst/energy)
 
+/obj/item/clothing/accessory/holster/energy/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
+	..()
+	if(user)
+		ADD_CLOTHING_TRAIT(user, TRAIT_GUNFLIP)
+
+/obj/item/clothing/accessory/holster/energy/accessory_dropped(obj/item/clothing/under/clothes, mob/living/user)
+	..()
+	if(user)
+		REMOVE_CLOTHING_TRAIT(user, TRAIT_GUNFLIP)
+
 //MARK: Заполненная энергетическая кобура с одним дизейблером
 /obj/item/clothing/accessory/holster/energy/disabler
 
