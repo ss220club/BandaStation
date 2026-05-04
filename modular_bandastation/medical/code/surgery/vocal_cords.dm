@@ -1,51 +1,69 @@
-/datum/surgery/vocal_cords
-	name = "Операция на голосовых связках"
-	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
-	steps = list(
-		/datum/surgery_step/incise,
-		/datum/surgery_step/retract_skin,
-		/datum/surgery_step/tune_vocal_cords,
-		/datum/surgery_step/close,
-	)
-
-/datum/surgery_step/tune_vocal_cords
-	name = "настройка голосовых связок (гемостат)"
+/datum/surgery_operation/limb/tune_vocal_cords
+	name = "Настройка голосовых связок"
+	desc = "Проведите операцию на связках пациента для изменения голоса."
 	implements = list(
-		TOOL_HEMOSTAT = 100,
-		TOOL_WIRECUTTER = 50,
-		/obj/item/kitchen/fork = 35
+		TOOL_SCALPEL = 1,
+		/obj/item/knife = 2,
+		TOOL_WIRECUTTER = 2.85,
+		/obj/item/pen = 5,
 	)
-	preop_sound = 'sound/items/handling/surgery/hemostat1.ogg'
 	time = 6.4 SECONDS
+	operation_flags = OPERATION_MORBID | OPERATION_AFFECTS_MOOD | OPERATION_NOTABLE
+	preop_sound = 'sound/items/handling/surgery/scalpel1.ogg'
+	success_sound = 'sound/items/handling/surgery/scalpel2.ogg'
+	all_surgery_states_required = SURGERY_SKIN_OPEN
 
-/datum/surgery_step/tune_vocal_cords/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_operation/limb/tune_vocal_cords/all_required_strings()
+	return list("оперируйте голову") + ..()
+
+/datum/surgery_operation/limb/tune_vocal_cords/state_check(obj/item/bodypart/limb)
+	return limb.body_zone == BODY_ZONE_HEAD
+
+/datum/surgery_operation/limb/tune_vocal_cords/get_default_radial_image()
+	return image(/obj/item/scalpel)
+
+/datum/surgery_operation/limb/tune_vocal_cords/on_preop(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args)
+	var/mob/living/patient = get_patient(operating_on)
+	if(!patient)
+		return ..()
+
 	display_results(
-		user,
-		target,
-		span_notice("Вы начинаете настраивать голосовые связки [target.declent_ru(GENITIVE)]..."),
-		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает настраивать голосовые связки [target.declent_ru(GENITIVE)]."),
-		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает выполнять операцию на голосовых связках [target.declent_ru(GENITIVE)].")
+		surgeon,
+		patient,
+		span_notice("Вы начинаете настраивать голосовые связки [patient.declent_ru(GENITIVE)]..."),
+		span_notice("[capitalize(surgeon.declent_ru(NOMINATIVE))] начинает настраивать голосовые связки [patient.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(surgeon.declent_ru(NOMINATIVE))] начинает выполнять операцию на голосовых связках [patient.declent_ru(GENITIVE)].")
 	)
 
-/datum/surgery_step/tune_vocal_cords/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_operation/limb/tune_vocal_cords/on_success(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args)
+	var/mob/living/patient = get_patient(operating_on)
+	if(!patient)
+		return ..()
+
 	display_results(
-		user,
-		target,
-		span_notice("Вам удалось настроить голосовые связки [target.declent_ru(GENITIVE)]."),
-		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] успешно настраивает голосовые связки [target.declent_ru(GENITIVE)]!"),
-		span_notice("[capitalize(user.declent_ru(NOMINATIVE))] завершает операцию на голосовых связках [target.declent_ru(GENITIVE)]."),
+		surgeon,
+		patient,
+		span_notice("Вам удалось настроить голосовые связки [patient.declent_ru(GENITIVE)]."),
+		span_notice("[capitalize(surgeon.declent_ru(NOMINATIVE))] успешно настраивает голосовые связки [patient.declent_ru(GENITIVE)]!"),
+		span_notice("[capitalize(surgeon.declent_ru(NOMINATIVE))] завершает операцию на голосовых связках [patient.declent_ru(GENITIVE)]."),
 	)
-	target.change_tts_seed(user, TTS_OVERRIDE_GENDER)
+
+	patient.change_tts_seed(surgeon, TTS_OVERRIDE_GENDER)
 	return ..()
 
-/datum/surgery_step/tune_vocal_cords/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_operation/limb/tune_vocal_cords/on_failure(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args)
+	var/mob/living/patient = get_patient(operating_on)
+	if(!patient)
+		return ..()
+
+	var/obj/item/real_tool = tool
 	display_results(
-		user,
-		target,
-		span_warning("Вы случайно вонзаете [tool.declent_ru(ACCUSATIVE)] в горло [target.declent_ru(GENITIVE)]!"),
-		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] случайно вонзает [tool.declent_ru(ACCUSATIVE)] в горло [target.declent_ru(GENITIVE)]!"),
-		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] случайно вонзает [tool.declent_ru(ACCUSATIVE)] в горло [target.declent_ru(GENITIVE)]!"),
+		surgeon,
+		patient,
+		span_warning("Вы случайно вонзаете [real_tool.declent_ru(ACCUSATIVE)] в горло [patient.declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(surgeon.declent_ru(NOMINATIVE))] случайно вонзает [real_tool.declent_ru(ACCUSATIVE)] в горло [patient.declent_ru(GENITIVE)]!"),
+		span_warning("[capitalize(surgeon.declent_ru(NOMINATIVE))] случайно вонзает [real_tool.declent_ru(ACCUSATIVE)] в горло [patient.declent_ru(GENITIVE)]!"),
 	)
-	display_pain(target, "Вы чувствуете острую колющую боль в горле!")
-	target.apply_damage(20, BRUTE, BODY_ZONE_HEAD, sharpness=TRUE)
-	return FALSE
+
+	display_pain(patient, "Вы чувствуете острую колющую боль в горле!")
+	patient.apply_damage(20, BRUTE, BODY_ZONE_HEAD, sharpness = TRUE)
