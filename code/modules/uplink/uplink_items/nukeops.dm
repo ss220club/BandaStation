@@ -885,13 +885,6 @@
 	cost = 4
 	purchasable_from = UPLINK_SERIOUS_OPS | UPLINK_SPY
 
-/datum/uplink_item/device_tools/holster_tacticool
-	name = "tacticool holster"
-	desc = "Специальная, тактическая кобура на два кармана под разного рода вооружение и прочую экипировку. То что нужно, чтобы явится на горячую вечеринку."
-	item = /obj/item/clothing/accessory/holster/tacticool
-	cost = 2
-	purchasable_from = UPLINK_SERIOUS_OPS | UPLINK_SPY
-
 /datum/uplink_item/device_tools/medkit
 	name = "Syndicate Combat Medic Kit"
 	desc = "This first aid kit is a suspicious black and red. Included is a number of atropine medipens \
