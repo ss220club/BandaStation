@@ -450,7 +450,8 @@
 		for(var/f_name in factions)
 			var/list/faction_data = factions[f_name]
 			if(islist(faction_data))
-		faction_weights[f_name] = max(1, faction_data["weight"] || 1)
+				continue
+			faction_weights[f_name] = max(1, faction_data["weight"] || 1)
 
 	var/faction_name = pick_weight(faction_weights)
 	var/list/faction_data = factions[faction_name]
