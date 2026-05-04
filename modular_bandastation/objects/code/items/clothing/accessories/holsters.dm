@@ -1,6 +1,6 @@
 //MARK: Обычная кобура, пустая
 /obj/item/clothing/accessory/holster
-	name = "holster"
+	name = "shoulder holster"
 	desc = "Обычная, ничем не примечательная кобура под одно небольшое оружие."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/holsters.dmi'
 	icon_state = "holster"
@@ -48,7 +48,7 @@
 
 //MARK: Пустая энергетическая кобура
 /obj/item/clothing/accessory/holster/energy
-	name = "кобура под энергетические пистолеты"
+	name = "energy shoulder holsters"
 	desc = "Обычная, ничем не примечательная кобура под несколько энергетических пистолетов."
 
 /datum/storage/pockets/holst/energy
@@ -101,7 +101,7 @@
 
 //MARK: Кобура детектива, пустая
 /obj/item/clothing/accessory/holster/detective
-	name = "detective holster"
+	name = "detective's holster"
 	desc = "Улучшенная кобура, специально для проведения самых громких и выдающихся расследований. Есть дополнительные кармашки под магазины."
 
 /datum/storage/pockets/holst/dec
