@@ -42,12 +42,5 @@
 #include "code/simple_animal/pets/sloth.dm"
 #include "code/supplypacks/livestock_pack_animals.dm"
 #include "code/simple_animal/named_animals.dm"
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
+
 #define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
-// END_INCLUDE
