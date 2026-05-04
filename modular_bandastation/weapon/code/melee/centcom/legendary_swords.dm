@@ -254,7 +254,10 @@
 	name = "Swordsman Rage"
 
 /datum/action/item_action/legendary_saber/rage/Trigger(trigger_flags)
-	if(!(trigger_flags & TRIGGER_FORCE_AVAILABLE) && !IsAvailable(feedback = TRUE))
+	. = ..()
+
+/datum/action/item_action/legendary_saber/rage/do_effect(trigger_flags)
+	if(!target)
 		return FALSE
 	var/mob/living/user = usr
 	var/obj/item/dualsaber/legendary_saber/S = src.target
