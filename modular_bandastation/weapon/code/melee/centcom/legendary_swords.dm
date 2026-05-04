@@ -122,6 +122,32 @@
 	unwieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberoff.ogg'
 	hit_wield = 'modular_bandastation/weapon/sound/melee/kir_saberhit.ogg'
 
+/obj/item/dualsaber/legendary_saber/dark_star
+	name = "Dark Star"
+	desc = "\"Тёмная Звезда\" - один из легендарных энергетических мечей Галактики."
+	icon_state = "ds_dualsaber0"
+	inhand_icon_state = "ds_dualsaber0"
+	saber_color = "darkstar"
+	refusal_text = "Тёмная Звезда не признаёт тебя своим хозяином."
+	light_color = COLOR_AMMO_RUBBER
+	saber_name = "ds"
+	wieldsound = 'modular_bandastation/weapon/sound/melee/ds_saber_on.ogg'
+	unwieldsound = 'modular_bandastation/weapon/sound/melee/ds_saber_off.ogg'
+	hit_wield = 'modular_bandastation/weapon/sound/melee/ds_saber_hit.ogg'
+
+/obj/item/dualsaber/legendary_saber/liar
+	name = "Liar"
+	desc = "\"Лжец \" - один из легендарных энергетических мечей Галактики. Его природа так же обманчива, как и имя: титановая рукоять с багровыми прожилками и особой формой делает удары непредсказуемыми. Жёлтый мерцающий клинок создан был для защиты - отсюда и название. Ведь, как сказано, искусство существует, чтобы люди не умерли от правды. И в этом случае правда буквальна - единственная неизбежная истина мира это смерть. \n Создатель: Кристофер Филби. Текущий Владелец: Мисти Уайт."
+	icon_state = "lz_dualsaber0"
+	inhand_icon_state = "lz_dualsaber0"
+	saber_color = "liar"
+	refusal_text = "Лжец не подчинится лжецу."
+	light_color = LIGHT_COLOR_DIM_YELLOW
+	saber_name = "lz"
+	wieldsound = 'modular_bandastation/weapon/sound/melee/lz_saber_on.ogg'
+	unwieldsound = 'modular_bandastation/weapon/sound/melee/lz_saber_off.ogg'
+	hit_wield = 'modular_bandastation/weapon/sound/melee/lz_saber_hit.ogg'
+
 /obj/item/dualsaber/legendary_saber/orphan
 	name = "Orphan"
 	desc = "\"Сирота\" -  один из легендарных энергетических мечей Галактики. \
