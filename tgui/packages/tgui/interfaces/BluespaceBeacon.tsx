@@ -138,7 +138,7 @@ export function BluespaceBeacon() {
             </Stack>
           </LabeledList.Item>
 
-          <LabeledList.Item label="Текущее энергоснабжение">
+          <LabeledList.Item label="Текущее энергопотребление">
             {formatPower(powerUsage)}
           </LabeledList.Item>
 
