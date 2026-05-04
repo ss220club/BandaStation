@@ -254,12 +254,14 @@
 	name = "Swordsman Rage"
 
 /datum/action/item_action/legendary_saber/rage/Trigger(trigger_flags)
-	. = ..()
-	var/log_message = "[usr.name] triggered [name]"
-	log_combat(log_message)
-	message_admins(log_message)
+	if(!(trigger_flags & TRIGGER_FORCE_AVAILABLE) && !IsAvailable(feedback = TRUE))
+		return FALSE
 	var/mob/living/user = usr
 	var/obj/item/dualsaber/legendary_saber/S = src.target
+	if(!HAS_TRAIT(S, TRAIT_WIELDED))
+		S.attack_self(user)
+	log_combat(user, user, "triggered [name]")
+	message_admins("[key_name(user)] triggered [name]")
 	var/list/mob/living/charged_targets = list(user)
 	var/datum/enchantment/dash/dash = S.enchant
 	var/mob/range_center = user
