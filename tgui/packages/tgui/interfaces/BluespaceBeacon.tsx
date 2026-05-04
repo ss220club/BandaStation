@@ -47,6 +47,8 @@ export function BluespaceBeacon() {
         <Section title="Статус зарядки">
           <ProgressBar
             value={charge}
+            minValue={0}
+            maxValue={100}
             ranges={{
               good: [50, Infinity],
               average: [15, 50],
