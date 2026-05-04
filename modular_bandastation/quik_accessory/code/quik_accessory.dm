@@ -168,4 +168,5 @@
 
 	SIGNAL_HANDLER
 
-	quick_accessory_draw()
+	spawn()
+		quick_accessory_draw()
