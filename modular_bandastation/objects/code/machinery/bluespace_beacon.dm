@@ -605,7 +605,7 @@
 
 /obj/machinery/power/bluespace_beacon/ui_data()
 	var/charge_percent = (maximum_charge > 0) ? (current_charge / maximum_charge) * 100 : 0
-	. = list(
+	return list(
 		"inputting" = inputting,
 		"inputAvailable" = get_available_power(),
 		"charge" = charge_percent,
