@@ -46,9 +46,7 @@
 	for(var/obj/machinery/power/bluespace_beacon/beacon as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/power/bluespace_beacon))
 		cached_points = max(cached_points, beacon.current_charge)
 
-	if(cached_points >= goal)
-		return TRUE
-	return FALSE
+	return cached_points >= goal
 
 #define BEACON_POINTS_PER_W 10e-6
 #define BEACON_BASE_POINTS 2
