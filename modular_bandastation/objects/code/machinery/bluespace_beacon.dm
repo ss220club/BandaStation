@@ -444,12 +444,13 @@
 	if(!length(factions))
 		return FALSE
 
-	var/list/faction_weights = list()
-	for(var/faction_name in factions)
-		var/list/faction_data = factions[faction_name]
-		if(!islist(faction_data))
-			continue
-		faction_weights[faction_name] = max(1, faction_data["weight"] || 1)
+	var/static/list/faction_weights
+	if(!faction_weights)
+		faction_weights = list()
+		for(var/f_name in factions)
+			var/list/faction_data = factions[f_name]
+			if(islist(faction_data))
+		faction_weights[f_name] = max(1, faction_data["weight"] || 1)
 
 	var/faction_name = pick_weight(faction_weights)
 	var/list/faction_data = factions[faction_name]
