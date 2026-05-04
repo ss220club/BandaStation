@@ -1,3 +1,5 @@
 #include "_antagonists.dm"
 
 #include "code/ert.dm"
+#include "code/ammunition.dm"
+#include "code/stealthy.dm"

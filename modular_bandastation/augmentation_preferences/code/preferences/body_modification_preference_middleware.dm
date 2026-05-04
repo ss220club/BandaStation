@@ -57,13 +57,12 @@
 	PRIVATE_PROC(TRUE)
 
 	var/list/manufacturers_map = list()
-	for (var/key in GLOB.body_modifications)
+	for(var/key in GLOB.body_modifications)
 		var/datum/body_modification/modification = GLOB.body_modifications[key]
 		if(!istype(modification, /datum/body_modification/bodypart_prosthesis))
 			continue
 
 		var/datum/body_modification/bodypart_prosthesis/prosthesis = modification
-
 		manufacturers_map[key] = prosthesis.manufacturers || list()
 
 	return manufacturers_map
@@ -74,9 +73,8 @@
 	var/list/current_brands = list()
 	var/list/player_modifications = preferences.read_preference(/datum/preference/body_modifications)
 
-	for (var/key in GLOB.body_modifications)
+	for(var/key in GLOB.body_modifications)
 		var/datum/body_modification/modification = GLOB.body_modifications[key]
-
 		if(!istype(modification, /datum/body_modification/bodypart_prosthesis))
 			continue
 
@@ -103,7 +101,11 @@
 	else
 		updated_preference[key] = modification.default_preference_value(params)
 
-	return preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference)
+	if(!preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference))
+		return FALSE
+
+	refresh_body_modification_on_user(modification, user, updated_preference[key])
+	return TRUE
 
 /datum/preference_middleware/body_modifications/proc/remove_body_modification(list/params, mob/user)
 	var/body_modification_key = params["body_modification_key"]
@@ -115,7 +117,10 @@
 		return FALSE
 
 	body_modifications -= body_modification_key
-	return preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], body_modifications)
+	if(!preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], body_modifications))
+		return FALSE
+
+	return TRUE
 
 /datum/preference_middleware/body_modifications/proc/set_body_modification_manufacturer(list/params, mob/user)
 	var/key = params["body_modification_key"]
@@ -127,10 +132,27 @@
 		return FALSE
 
 	var/datum/body_modification/modification = GLOB.body_modifications[key]
+	if(!istype(modification, /datum/body_modification/bodypart_prosthesis))
+		return FALSE
+
 	if(!modification.ui_params_valid(params))
 		return FALSE
 
 	updated_preference[key] = modification.handle_ui_params(params)
-	preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference)
+	if(!preferences.update_preference(GLOB.preference_entries[/datum/preference/body_modifications], updated_preference))
+		return FALSE
 
+	refresh_body_modification_on_user(modification, user, updated_preference[key])
 	return TRUE
+
+/datum/preference_middleware/body_modifications/proc/refresh_body_modification_on_user(datum/body_modification/modification, mob/user, list/modification_params)
+	PRIVATE_PROC(TRUE)
+
+	if(!istype(user, /mob/living/carbon/human))
+		return FALSE
+
+	var/mob/living/carbon/human/human_user = user
+	if(QDELETED(human_user) || !human_user.client)
+		return FALSE
+
+	return modification.apply_to_human(human_user, modification_params)

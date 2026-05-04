@@ -659,3 +659,15 @@
 	armour_penetration = 10
 	paralyze = 5
 	damage_type = BRUTE
+
+// MARK: .22 LR Tranquilizer
+/obj/projectile/bullet/c22lrtranquilizer
+	name = ".22 LR Tranquilizer bullet"
+	damage = 2
+	unconscious = 18 SECONDS
+	armour_penetration = 2
+	drowsy = 10 SECONDS
+	wound_bonus = -50
+	weak_against_armour = TRUE
+	embed_type = null
+	shrapnel_type = null
