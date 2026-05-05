@@ -80,7 +80,7 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 			topiclimiter[SECOND_COUNT] = 0
 		topiclimiter[SECOND_COUNT] += 1
 		if (topiclimiter[SECOND_COUNT] > stl)
-			to_chat(src, span_danger("Your previous action was ignored because you've done too many in a second"))
+			to_chat(src, span_danger("Превышен лимит действий в секунду, ваше предыдущее действие было проигнорировано."))
 			return
 
 	// Tgui Topic middleware
@@ -560,7 +560,7 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 	apply_clickcatcher()
 
 	if(prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
-		to_chat(src, span_info("You have unread updates in the changelog."))
+		to_chat(src, span_info("У вас есть непрочитанные обновления в чейнджлоге."))
 		if(CONFIG_GET(flag/aggressive_changelog))
 			changelog()
 		else
