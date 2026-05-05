@@ -141,9 +141,11 @@
 		total_votes += map_vote.choices[map_name]
 
 	if(!winner || winner_votes == 0)
-		var/list/options = get_valid_map_vote_choices()
+		var/list/options = SSmap_vote.remaining_bag?.Copy() || list()
+		if(last_played_map)
+			options -= last_played_map
 		if(!length(options))
-			options = get_bag_options()
+			options = SSmap_vote.remaining_bag?.Copy() || list()
 		winner = length(options) ? pick(options) : null
 
 	if(!winner)
