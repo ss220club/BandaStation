@@ -1,0 +1,4 @@
+author: "NatWak"
+delete-after: True
+changes:
+  - rscadd: "Добавлены некоторые слова в замену TTS, чтобы они воспроизводились корректно"
