@@ -34462,130 +34462,130 @@ instrumental = "транквилизирующем пистолетом Рюге
 prepositional = "транквилизирующем пистолете Рюгер"
 gender = "male"
 
-# MARK IPC organs
-[MMI-based positronic core]
-nominative = позитронное ядро с MMI
-genitive = позитронного ядра с MMI
-dative = позитронному ядру с MMI
-accusative = позитронное ядро с MMI
-instrumental = позитронным ядром с MMI
-prepositional = позитронном ядре с MMI
-gender = neuter
+# MARK: IPC organs
+["MMI-based positronic core"]
+nominative = "позитронное ядро с MMI"
+genitive = "позитронного ядра с MMI"
+dative = "позитронному ядру с MMI"
+accusative = "позитронное ядро с MMI"
+instrumental = "позитронным ядром с MMI"
+prepositional = "позитронном ядре с MMI"
+gender = "neuter"
 
-[borg module positronic core]
-nominative = позитронное ядро с модулем борга
-genitive = позитронного ядра с модулем борга
-dative = позитронному ядру с модулем борга
-accusative = позитронное ядро с модулем борга
-instrumental = позитронным ядром с модулем борга
-prepositional = позитронном ядре с модулем борга
-gender = neuter
+["borg module positronic core"]
+nominative = "позитронное ядро с модулем борга"
+genitive = "позитронного ядра с модулем борга"
+dative = "позитронному ядру с модулем борга"
+accusative = "позитронное ядро с модулем борга"
+instrumental = "позитронным ядром с модулем борга"
+prepositional = "позитронном ядре с модулем борга"
+gender = "neuter"
 
-[ipc power cell]
-nominative = батарея КПБ
-genitive = батареи КПБ
-dative = батарее КПБ
-accusative = батарею КПБ
-instrumental = батареей КПБ
-prepositional = батарее КПБ
-gender = female
+["ipc power cell"]
+nominative = "батарея КПБ"
+genitive = "батареи КПБ"
+dative = "батарее КПБ"
+accusative = "батарею КПБ"
+instrumental = "батареей КПБ"
+prepositional = "батарее КПБ"
+gender = "female"
 
-[cooling system]
-nominative = система охлаждения КПБ
-genitive = системы охлаждения КПБ
-dative = системе охлаждения КПБ
-accusative = систему охлаждения КПБ
-instrumental = системой охлаждения КПБ
-prepositional = системе охлаждения КПБ
-gender = female
+["cooling system"]
+nominative = "система охлаждения КПБ"
+genitive = "системы охлаждения КПБ"
+dative = "системе охлаждения КПБ"
+accusative = "систему охлаждения КПБ"
+instrumental = "системой охлаждения КПБ"
+prepositional = "системе охлаждения КПБ"
+gender = "female"
 
-[ipc optical sensors]
-nominative = оптические сенсоры КПБ
-genitive = оптических сенсоров КПБ
-dative = оптическим сенсорам КПБ
-accusative = оптические сенсоры КПБ
-instrumental = оптическими сенсорами КПБ
-prepositional = оптических сенсорах КПБ
-gender = male
+["ipc optical sensors"]
+nominative = "оптические сенсоры КПБ"
+genitive = "оптических сенсоров КПБ"
+dative = "оптическим сенсорам КПБ"
+accusative = "оптические сенсоры КПБ"
+instrumental = "оптическими сенсорами КПБ"
+prepositional = "оптических сенсорах КПБ"
+gender = "male"
 
-[ipc audio sensors]
-nominative = аудиосенсоры КПБ
-genitive = аудиосенсоров КПБ
-dative = аудиосенсорам КПБ
-accusative = аудиосенсоры КПБ
-instrumental = аудиосенсорами КПБ
-prepositional = аудиосенсорах КПБ
-gender = male
+["ipc audio sensors"]
+nominative = "аудиосенсоры КПБ"
+genitive = "аудиосенсоров КПБ"
+dative = "аудиосенсорам КПБ"
+accusative = "аудиосенсоры КПБ"
+instrumental = "аудиосенсорами КПБ"
+prepositional = "аудиосенсорах КПБ"
+gender = "male"
 
-[ipc vocal synthesizer]
-nominative = голосовой синтезатор КПБ
-genitive = голосового синтезатора КПБ
-dative = голосовому синтезатору КПБ
-accusative = голосовой синтезатор КПБ
-instrumental = голосовым синтезатором КПБ
-prepositional = голосовом синтезаторе КПБ
-gender = male
+["ipc vocal synthesizer"]
+nominative = "голосовой синтезатор КПБ"
+genitive = "голосового синтезатора КПБ"
+dative = "голосовому синтезатору КПБ"
+accusative = "голосовой синтезатор КПБ"
+instrumental = "голосовым синтезатором КПБ"
+prepositional = "голосовом синтезаторе КПБ"
+gender = "male"
 
-# MARK IPC bodyparts
-[ipc monitor head]
-nominative = голова-монитор КПБ
-genitive = головы-монитора КПБ
-dative = голове-монитору КПБ
-accusative = голову-монитор КПБ
-instrumental = головой-монитором КПБ
-prepositional = голове-мониторе КПБ
-gender = female
+# MARK: IPC bodyparts
+["ipc monitor head"]
+nominative = "голова-монитор КПБ"
+genitive = "головы-монитора КПБ"
+dative = "голове-монитору КПБ"
+accusative = "голову-монитор КПБ"
+instrumental = "головой-монитором КПБ"
+prepositional = "голове-мониторе КПБ"
+gender = "female"
 
-[ipc chassis]
-nominative = корпус КПБ
-genitive = корпуса КПБ
-dative = корпусу КПБ
-accusative = корпус КПБ
-instrumental = корпусом КПБ
-prepositional = корпусе КПБ
-gender = male
+["ipc chassis"]
+nominative = "корпус КПБ"
+genitive = "корпуса КПБ"
+dative = "корпусу КПБ"
+accusative = "корпус КПБ"
+instrumental = "корпусом КПБ"
+prepositional = "корпусе КПБ"
+gender = "male"
 
-[ipc head]
-nominative = голова КПБ
-genitive = головы КПБ
-dative = голове КПБ
-accusative = голову КПБ
-instrumental = головой КПБ
-prepositional = голове КПБ
-gender = female
+["ipc head"]
+nominative = "голова КПБ"
+genitive = "головы КПБ"
+dative = "голове КПБ"
+accusative = "голову КПБ"
+instrumental = "головой КПБ"
+prepositional = "голове КПБ"
+gender = "female"
 
-[ipc left arm]
-nominative = левая рука КПБ
-genitive = левой руки КПБ
-dative = левой руке КПБ
-accusative = левую руку КПБ
-instrumental = левой рукой КПБ
-prepositional = левой руке КПБ
-gender = female
+["ipc left arm"]
+nominative = "левая рука КПБ"
+genitive = "левой руки КПБ"
+dative = "левой руке КПБ"
+accusative = "левую руку КПБ"
+instrumental = "левой рукой КПБ"
+prepositional = "левой руке КПБ"
+gender = "female"
 
-[ipc right arm]
-nominative = правая рука КПБ
-genitive = правой руки КПБ
-dative = правой руке КПБ
-accusative = правую руку КПБ
-instrumental = правой рукой КПБ
-prepositional = правой руке КПБ
-gender = female
+["ipc right arm"]
+nominative = "правая рука КПБ"
+genitive = "правой руки КПБ"
+dative = "правой руке КПБ"
+accusative = "правую руку КПБ"
+instrumental = "правой рукой КПБ"
+prepositional = "правой руке КПБ"
+gender = "female"
 
-[ipc left leg]
-nominative = левая нога КПБ
-genitive = левой ноги КПБ
-dative = левой ноге КПБ
-accusative = левую ногу КПБ
-instrumental = левой ногой КПБ
-prepositional = левой ноге КПБ
-gender = female
+["ipc left leg"]
+nominative = "левая нога КПБ"
+genitive = "левой ноги КПБ"
+dative = "левой ноге КПБ"
+accusative = "левую ногу КПБ"
+instrumental = "левой ногой КПБ"
+prepositional = "левой ноге КПБ"
+gender = "female"
 
-[ipc right leg]
-nominative = правая нога КПБ
-genitive = правой ноги КПБ
-dative = правой ноге КПБ
-accusative = правую ногу КПБ
-instrumental = правой ногой КПБ
-prepositional = правой ноге КПБ
-gender = female
+["ipc right leg"]
+nominative = "правая нога КПБ"
+genitive = "правой ноги КПБ"
+dative = "правой ноге КПБ"
+accusative = "правую ногу КПБ"
+instrumental = "правой ногой КПБ"
+prepositional = "правой ноге КПБ"
+gender = "female"
