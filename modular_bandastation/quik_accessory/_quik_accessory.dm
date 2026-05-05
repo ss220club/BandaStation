@@ -3,11 +3,11 @@
 	desc = "Добавление хоткея на слот аксессуаров."
 	author = "Voyaker"
 
-/datum/modpack/quick_accessory/pre_initialize()
+/datum/modpack/quik_accessory/pre_initialize()
 	. = ..()
 
-/datum/modpack/quick_accessory/initialize()
+/datum/modpack/quik_accessory/initialize()
 	. = ..()
 
-/datum/modpack/quick_accessory/post_initialize()
+/datum/modpack/quik_accessory/post_initialize()
 	. = ..()
