@@ -24,10 +24,10 @@
 		binded = TRUE
 		return
 	user.Knockdown(10 SECONDS)
-	user.dropItemToGround(I, force = TRUE)
 	to_chat(user, span_userdanger(refusal_text))
 	if(ishuman(user))
 		user.apply_damage(rand(pickup_damage, pickup_damage * 2), BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+	addtimer(CALLBACK(user, TYPE_PROC_REF(/mob, dropItemToGround), I, TRUE), 0)
 
 /datum/component/ckey_and_role_locked_pickup/proc/check_role_and_ckey(mob/user)
 	if(user.client.ckey in ckeys)
