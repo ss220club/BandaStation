@@ -119,8 +119,8 @@
 			to_chat(H, span_danger("ПРЕДУПРЕЖДЕНИЕ: Электромагнитный импульс!"))
 			H.Paralyze(3 SECONDS)
 
-	H.apply_damage(emp_damage * 0.5, BRUTE, forced = TRUE)
-	H.apply_damage(emp_damage * 0.5, BURN, forced = TRUE)
+	H.adjust_brute_loss(emp_damage * 0.5, forced = TRUE, required_bodytype = BODYTYPE_ROBOTIC)
+	H.adjust_fire_loss(emp_damage * 0.5, forced = TRUE, required_bodytype = BODYTYPE_ROBOTIC)
 
 // Разрешаем цифры в именах для IPC (типа ARC-908), не затрагивая остальные расы
 /datum/preference/name/real_name/deserialize(input, datum/preferences/preferences)
