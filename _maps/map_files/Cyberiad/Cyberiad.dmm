@@ -73125,7 +73125,7 @@
 /area/station/engineering/hallway)
 "rPO" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/holster,
+/obj/item/storage/belt/holster,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "rPQ" = (
