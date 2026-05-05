@@ -145,7 +145,7 @@
 	. = ..()
 	if(!owner)
 		return
-	charge = max(0, charge - 2.78 * seconds_per_tick)
+	charge = max(0, charge - IPC_BATTERY_DRAIN_PER_SECOND * seconds_per_tick)
 	SEND_SIGNAL(owner, COMSIG_IPC_BATTERY_UPDATED)
 
 /obj/item/organ/heart/ipc_battery/emp_act(severity)
