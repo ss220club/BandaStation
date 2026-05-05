@@ -7,3 +7,4 @@
 #define IPC_PRESSURE_SOURCE "ipc_pressure_breach"
 /// Источник трейта защиты от давления — интактный корпус КПБ
 #define TRAIT_SOURCE_IPC_CHASSIS "ipc_chassis_intact"
+#define IPC_BATTERY_DRAIN_PER_SECOND 2.78
