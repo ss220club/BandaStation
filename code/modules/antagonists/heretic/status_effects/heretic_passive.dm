@@ -207,7 +207,7 @@
 /// Gives feedback to the user
 /datum/status_effect/heretic_passive/blade/proc/reset_riposte(mob/living/carbon/human/source)
 	riposte_ready = TRUE
-	source.balloon_alert(source, "Парирование готово")
+	source.balloon_alert(source, "ответый удар готов")
 
 //---- Cosmic Passive
 // Level 1 Cosmic fields will speed up the caster and provide stamina regen

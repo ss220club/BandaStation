@@ -31,7 +31,7 @@
 	return span_notice("Кажется не совсем собой.")
 
 /datum/action/cancel_crucible_soul
-	name = "Recall"
+	name = "Отзыв"
 	desc = "Используйте для досрочного завершения благословения."
 	button_icon = 'icons/obj/antags/eldritch.dmi'
 	button_icon_state = "crucible_soul"
