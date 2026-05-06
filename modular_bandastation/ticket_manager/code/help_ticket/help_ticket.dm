@@ -146,7 +146,7 @@
 	if(ticket_type_id != TICKET_TYPE_ADMIN || webhook_sent || !CONFIG_GET(string/regular_adminhelp_webhook_url))
 		return
 
-	var/datum/discord_embed/embed = build_ticket_manager_embed(get_last_player_message() || "Сообщение игрока не найдено.", null, "Автозакрытие - ")
+	var/datum/discord_embed/embed = build_ticket_manager_embed(get_last_player_message() || "Сообщение игрока не найдено.", title_prefix = "Автозакрытие - ")
 	embed.color = TICKET_EMBED_COLOR_STALE
 	send2adminchat_webhook(embed, FALSE)
 	webhook_sent = TRUE
@@ -294,8 +294,7 @@
 /// start autoclosure timer and notifies responsible admins
 /datum/help_ticket/proc/unlink_linked_admin()
 	var/autoclose_delay = TICKET_AUTOCLOSE_TIMER / 2
-	if(ticket_autoclose_timer_id)
-		deltimer(ticket_autoclose_timer_id)
+	deltimer(ticket_autoclose_timer_id)
 
 	ticket_autoclose_timer_id = addtimer(\
 		CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), \

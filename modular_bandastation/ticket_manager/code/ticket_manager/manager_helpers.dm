@@ -154,9 +154,8 @@
 	var/datum/persistent_client/initiator = needed_ticket.initiator_client
 
 	if(new_state != TICKET_OPEN)
-		if(needed_ticket.ticket_autoclose_timer_id)
-			deltimer(needed_ticket.ticket_autoclose_timer_id)
-			needed_ticket.ticket_autoclose_timer_id = null
+		deltimer(needed_ticket.ticket_autoclose_timer_id)
+		needed_ticket.ticket_autoclose_timer_id = null
 
 		if(initiator.current_help_ticket != needed_ticket)
 			CRASH("Ticket with id [ticket_id] is not the current help ticket for [initiator.ckey]!")
@@ -182,9 +181,8 @@
 				to_chat(admin, span_danger("[key_name(initiator.ckey)] уже имеет открытый тикет!"), MESSAGE_TYPE_ADMINPM)
 			return
 
-		if(needed_ticket.ticket_autoclose_timer_id)
-			deltimer(needed_ticket.ticket_autoclose_timer_id)
-			needed_ticket.ticket_autoclose_timer_id = null
+		deltimer(needed_ticket.ticket_autoclose_timer_id)
+		needed_ticket.ticket_autoclose_timer_id = null
 
 		initiator.current_help_ticket = needed_ticket
 		needed_ticket.closed_at = null
