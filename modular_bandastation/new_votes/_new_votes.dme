@@ -1,6 +1,6 @@
 #include "_new_votes.dm"
 
-#include "code/map_vote_bag.dm"
+#include "code/map_vote_pool.dm"
 #include "code/vote_map_datum.dm"
 #include "code/bag_editor_admin.dm"
-#include "code/statpanel_bag.dm"
+#include "code/statpanel_pool.dm"

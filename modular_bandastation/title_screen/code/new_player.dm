@@ -123,7 +123,7 @@
 		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/start_now)
 
 	else if(href_list["map"])
-		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/admin_bag_editor)
+		SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/admin_pool_editor)
 
 	else if(href_list["delay"])
 		if(SSticker.current_state > GAME_STATE_PREGAME)
