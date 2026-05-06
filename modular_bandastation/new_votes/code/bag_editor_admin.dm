@@ -24,11 +24,13 @@ ADMIN_VERB(admin_pool_editor, R_SERVER, "Map Pool Editor", "Edit the map rotatio
 		var/datum/map_config/mc = config.maplist[map_name]
 		if(!mc?.votable)
 			continue
+		var/config_count = config_pool[map_name] || 0
 		maps += list(list(
 			"map_name" = map_name,
 			"display_name" = mc.map_name,
-			"config_count" = config_pool[map_name] || 0,
+			"config_count" = config_count,
 			"remaining_count" = remaining_counts[map_name] || 0,
+			"max_count" = config_count > 0 ? config_count : MAP_POOL_MAX_COPIES,
 		))
 
 	var/datum/map_config/last_played_map_datum = config.maplist[last_played_map]
@@ -60,9 +62,10 @@ ADMIN_VERB(admin_pool_editor, R_SERVER, "Map Pool Editor", "Edit the map rotatio
 			var/map_name = params["map_name"]
 			if(!(map_name in config.maplist))
 				return
-			var/max_copies = config_pool[map_name] || 0
-			if(max_copies <= 0)
-				return
+			// If the map isn't in the pool config, allow temporarily adding it to the *remaining* pool.
+			// This does not persist into config; reset_remaining will revert to the configured pool.
+			var/config_max = config_pool[map_name] || 0
+			var/max_copies = config_max > 0 ? config_max : MAP_POOL_MAX_COPIES
 			var/current = 0
 			for(var/rem in remaining_pool)
 				if(rem == map_name)

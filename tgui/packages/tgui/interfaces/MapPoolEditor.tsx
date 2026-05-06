@@ -15,6 +15,7 @@ type MapEntry = {
   display_name: string;
   config_count: number;
   remaining_count: number;
+  max_count: number;
 };
 
 type Data = {
@@ -85,6 +86,7 @@ export function MapPoolEditor() {
                     <Stack.Item>
                       <Button
                         icon="plus"
+                        disabled={entry.remaining_count >= entry.max_count}
                         onClick={() => act('add_one', { map_name: entry.map_name })}
                       />
                     </Stack.Item>
