@@ -290,7 +290,7 @@
 	var/log_message = "[message]"
 	to_chat(GLOB.admins, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
 	log_admin_private("[log_prefix] [log_message]")
-	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_REPLY, message, player_key, admin_key)
+	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_REPLY, message, needed_ticket.initiator_client.ckey, admin.ckey)
 
 
 /// Send player ticket reply to admin, if he's online. And make some logs for other admins
@@ -332,7 +332,7 @@
 
 	log_admin_private("[log_prefix] [log_message]")
 	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_REPLIED)
-	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_REPLY, message, admin_key, player_key)
+	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_REPLY, message, needed_ticket.linked_admin.ckey, player.ckey)
 
 /// Checking existing user ticket, and send message to it IF staff has written something
 /datum/ticket_manager/proc/open_ticket(client/staff, datum/help_ticket/target_ticket, message)
