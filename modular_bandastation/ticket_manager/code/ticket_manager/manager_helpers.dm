@@ -168,7 +168,7 @@
 		needed_ticket.closed_at = TIMESTAMP()
 		initiator.current_help_ticket = null
 
-		var/blackbox_action = ticket_closed ? "Closed" : "Resolved"
+		var/blackbox_action = ticket_closed ? TICKET_AHELP_ACTION_CLOSED : TICKET_AHELP_ACTION_RESOLVED
 		if(!admin)
 			admin_message = "Тикет #[ticket_id] был автоматически закрыт!"
 			user_message = "Ваш тикет был автоматически закрыт! Вы можете создать новый если вам всё ещё нужна помощь."
@@ -196,7 +196,7 @@
 
 		if(admin)
 			admin_message = span_admin("[key_name_admin(admin)] открыл тикет #[ticket_id]!")
-			SSblackbox.LogAhelp(ticket_id, "Reopened", "Reopened by [admin.key]", admin.key)
+			SSblackbox.LogAhelp(ticket_id, TICKET_AHELP_ACTION_REOPENED, "Reopened by [admin.key]", admin.key)
 
 	needed_ticket.state = new_state
 	SStgui.update_uis(src)
@@ -239,7 +239,7 @@
 	))
 	SStgui.update_uis(src)
 	// Gotta async this cause clients only logout on destroy, and sleeping in destroy is disgusting
-	INVOKE_ASYNC(SSblackbox, TYPE_PROC_REF(/datum/controller/subsystem/blackbox, LogAhelp), needed_ticket.id, "Disconnected", "Client disconnected", user.key)
+	INVOKE_ASYNC(SSblackbox, TYPE_PROC_REF(/datum/controller/subsystem/blackbox, LogAhelp), needed_ticket.id, TICKET_AHELP_ACTION_DISCONNECTED, "Client disconnected", user.key)
 
 /// Adds little notification to ticket chat about player reconnect
 /datum/ticket_manager/proc/client_login(datum/persistent_client/p_client)
@@ -257,7 +257,7 @@
 		"time" = TIMESTAMP(),
 	))
 	SStgui.update_uis(src)
-	SSblackbox.LogAhelp(needed_ticket.id, "Reconnected", "Client reconnected", user.key)
+	SSblackbox.LogAhelp(needed_ticket.id, TICKET_AHELP_ACTION_RECONNECTED, "Client reconnected", user.key)
 
 /// Send admin ticket reply to player, if he's online. And make some logs for other admins
 /datum/ticket_manager/proc/send_chat_message_to_player(client/admin, datum/help_ticket/needed_ticket, raw_message)
@@ -291,7 +291,7 @@
 	var/log_message = "[message]"
 	to_chat(GLOB.admins, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
 	log_admin_private("[log_prefix] [log_message]")
-	SSblackbox.LogAhelp(id, "Reply", message, player_key, admin_key)
+	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_REPLY, message, player_key, admin_key)
 
 
 /// Send player ticket reply to admin, if he's online. And make some logs for other admins
@@ -333,7 +333,7 @@
 
 	log_admin_private("[log_prefix] [log_message]")
 	SEND_SIGNAL(needed_ticket, COMSIG_ADMIN_HELP_REPLIED)
-	SSblackbox.LogAhelp(id, "Reply", message, admin_key, player_key)
+	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_REPLY, message, admin_key, player_key)
 
 /// Checking existing user ticket, and send message to it IF staff has written something
 /datum/ticket_manager/proc/open_ticket(client/staff, datum/help_ticket/target_ticket, message)
@@ -368,7 +368,7 @@
 	if(log_in_blackbox)
 		SSblackbox.LogAhelp(
 			user_ticket.id,
-			"Interaction",
+			TICKET_AHELP_ACTION_ASSIGNED,
 			strip_html_full(message),
 			user_client.ckey,
 			usr?.ckey
@@ -386,6 +386,5 @@
 		"message" = strip_html_full(message),
 		"time" = TIMESTAMP(),
 	))
-	SSblackbox.LogAhelp(ticket.id, "Interaction", strip_html_full(message), ticket.initiator_client?.ckey, usr?.ckey)
 
 	SStgui.update_uis(GLOB.ticket_manager)

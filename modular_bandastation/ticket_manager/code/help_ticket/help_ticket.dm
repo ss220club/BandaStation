@@ -77,7 +77,7 @@
 		send_creation_webhook_if_needed(message)
 		ticket_autoclose_timer_id = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
 
-	SSblackbox.LogAhelp(id, "Ticket Opened", message, null, initiator_key)
+	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_OPENED, message, null, initiator_key)
 
 /datum/help_ticket/ui_data(mob/user)
 	var/list/data = list()
@@ -256,7 +256,7 @@
 		"message" = "[converter.ckey] конвертировал тикет в [ticket_type_id]",
 		"time" = TIMESTAMP(),
 	))
-	SSblackbox.LogAhelp(id, "Interaction", "[converter.ckey] converted ticket to [ticket_type_id]", initiator_key, converter.ckey)
+	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_CONVERT, "[converter.ckey] converted ticket to [ticket_type_id]", initiator_key, converter.ckey)
 
 	return TRUE
 
@@ -319,7 +319,7 @@
 		"message" = "[linked_admin.key] отказался от тикета",
 		"time" = TIMESTAMP(),
 	))
-	SSblackbox.LogAhelp(id, "Interaction", "[linked_admin.key] refused ticket", initiator_key, linked_admin.ckey)
+	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_UNASSIGNED, "[linked_admin.key] refused ticket", initiator_key, linked_admin.ckey)
 
 	linked_admin = null
 
