@@ -42,7 +42,7 @@
 	name = "Nanotrasen Navy Junior Officer Chief"
 
 	suit = /obj/item/clothing/suit/armor/vest
-	suit_store = /obj/item/gun/ballistic/rifle/boltaction
+	suit_store = /obj/item/gun/ballistic/automatic/pistol/cm23
 	belt = /obj/item/melee/baton/security/loaded
 	head = /obj/item/clothing/head/beret/cent_intern
 	l_hand = /obj/item/megaphone
@@ -226,13 +226,21 @@
 	access = access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
 
 // DeathSquad outifit
+/datum/outfit/centcom/death_commando
+	backpack_contents = list(
+		/obj/item/ammo_box/speedloader/c357 = 1,
+		/obj/item/flashlight/seclite = 1,
+		/obj/item/grenade/c4/x4 = 1,
+		/obj/item/storage/medkit/tactical_lite = 1,
+	)
+
 /datum/outfit/centcom/death_commando/officer
 	backpack_contents = list(
 		/obj/item/ammo_box/speedloader/c357 = 1,
-		/obj/item/flashlight = 1,
+		/obj/item/flashlight/seclite = 1,
 		/obj/item/grenade/c4/x4 = 1,
-		/obj/item/storage/box/flashbangs = 1,
-		/obj/item/storage/medkit/regular = 1,
+		/obj/item/storage/box/syndie_kit/frag_grenades = 1,
+		/obj/item/storage/medkit/tactical_lite = 1,
 		/obj/item/disk/nuclear/death_commando = 1,
 	)
 
@@ -246,3 +254,7 @@
 	// So, this disk is just good for making bomb go boom
 	fake = FALSE
 	SSpoints_of_interest.make_point_of_interest(src)
+
+/obj/item/storage/box/survival/centcom
+	mask_type = /obj/item/clothing/mask/gas/sechailer
+	medipen_type =  /obj/item/reagent_containers/hypospray/medipen/atropine

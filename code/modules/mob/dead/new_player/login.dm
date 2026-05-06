@@ -58,7 +58,7 @@
 
 	if(SSticker.current_state < GAME_STATE_SETTING_UP)
 		var/tl = SSticker.GetTimeLeft()
-		to_chat(src, "Please set up your character and select \"Ready\". The game will start [tl > 0 ? "in about [DisplayTimeText(tl)]" : "soon"].")
+		to_chat(src, "Пожалуйста, настройте своего персонажа и нажмите \"Готов\". Игра будет запущена [tl > 0 ? "через [DisplayTimeText(tl)]" : "скоро"].")
 
 	if(GLOB.unrecommended_builds[num2text(client.byond_build)])
 		INVOKE_ASYNC(src, PROC_REF(unrcommended_build_alert))
