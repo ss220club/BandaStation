@@ -140,6 +140,11 @@
 		"message" = emoji_parse(message),
 		"time" = TIMESTAMP(),
 	))
+
+	deltimer(needed_ticket.ticket_autoclose_timer_id)
+	if(needed_ticket.ticket_type_hidden != TICKET_TYPE_HIDDEN_PM)
+		needed_ticket.ticket_autoclose_timer_id = addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), needed_ticket), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
+
 	SStgui.update_uis(src)
 
 /// Changes ticket state. Allowed new states: TICKET_OPEN, TICKET_CLOSED, TICKET_RESOLVED
@@ -207,7 +212,7 @@
 		CRASH("Tried to autoclose null ticket!")
 
 	// guard against stale timers
-	if(needed_ticket.state != TICKET_OPEN || needed_ticket.linked_admin || needed_ticket.initiator_client?.current_help_ticket != needed_ticket)
+	if(needed_ticket.state != TICKET_OPEN || needed_ticket.initiator_client?.current_help_ticket != needed_ticket)
 		return
 
 	set_ticket_state(null, needed_ticket, TICKET_CLOSED)

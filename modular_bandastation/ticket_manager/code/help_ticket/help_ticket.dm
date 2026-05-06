@@ -285,7 +285,7 @@
 
 	linked_admin = admin.persistent_client
 	deltimer(ticket_autoclose_timer_id)
-	ticket_autoclose_timer_id = null
+	ticket_autoclose_timer_id = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
 	message_admins("[key_name_admin(admin)] взял тикет #[id] на рассмотрение.")
 	log_admin("[key_name_admin(admin)] взял тикет #[id] на рассмотрение.")
 	return TRUE
