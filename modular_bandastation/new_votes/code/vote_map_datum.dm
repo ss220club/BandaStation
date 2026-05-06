@@ -4,7 +4,11 @@
 /datum/vote/map_vote/create_vote()
 	var/bag_check = SSmap_vote.check_bag_before_vote()
 	var/safety = 0
-	while(bag_check == "REFILL" && safety++ < 2)
+	while(bag_check == "REFILL" && safety++ < 3)
+		var/reason = SSmap_vote.get_bag_refill_reason()
+		if(reason)
+			log_admin("Map Pool: [reason]")
+			message_admins("Map Pool: [reason]")
 		SSmap_vote.refill_bag()
 		SSmap_vote.save_bag_state()
 		bag_check = SSmap_vote.check_bag_before_vote()
@@ -14,13 +18,19 @@
 		return FALSE
 
 	if(bag_check == "REFILL")
-		if(length(SSmap_vote.remaining_bag))
-			SSmap_vote.auto_select_single_map(SSmap_vote.remaining_bag[1])
+		var/list/pop_options = SSmap_vote.get_pop_valid_bag_options()
+		if(length(pop_options) == 1)
+			SSmap_vote.auto_select_single_map(pop_options[1])
+			return FALSE
 		return FALSE
 
 	default_choices = SSmap_vote.get_valid_map_vote_choices()
-	if(!length(default_choices) && length(SSmap_vote.remaining_bag))
-		SSmap_vote.auto_select_single_map(SSmap_vote.remaining_bag[1])
+	if(!length(default_choices))
+		var/list/pop_options = SSmap_vote.get_pop_valid_bag_options()
+		if(length(pop_options) == 1)
+			SSmap_vote.auto_select_single_map(pop_options[1])
+		else if(length(pop_options))
+			SSmap_vote.auto_select_single_map(pick(pop_options))
 		return FALSE
 
 	. = ..()

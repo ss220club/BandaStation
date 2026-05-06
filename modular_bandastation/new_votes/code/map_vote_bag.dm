@@ -78,30 +78,68 @@
 /datum/controller/subsystem/map_vote/proc/get_bag_options()
 	return unique_list(remaining_bag)
 
+/datum/controller/subsystem/map_vote/proc/get_population_threshold()
+	if(SSticker.HasRoundStarted())
+		return get_active_player_count(alive_check = FALSE, afk_check = TRUE, human_check = FALSE)
+	return length(GLOB.clients)
+
+/// Returns unique map names currently in remaining_bag that match current population limits.
+/datum/controller/subsystem/map_vote/proc/get_pop_valid_bag_options()
+	var/filter_threshold = get_population_threshold()
+	var/list/options = get_bag_options()
+	var/list/out = list()
+	for(var/map_name in options)
+		var/datum/map_config/mc = config.maplist[map_name]
+		if(!mc?.votable || (mc.map_name in SSpersistence.blocked_maps))
+			continue
+		if(mc.config_min_users > 0 && filter_threshold < mc.config_min_users)
+			continue
+		if(mc.config_max_users > 0 && filter_threshold > mc.config_max_users)
+			continue
+		out += map_name
+	return out
+
+/datum/controller/subsystem/map_vote/proc/get_bag_refill_reason()
+	var/list/pop_options = get_pop_valid_bag_options()
+
+	if(!length(pop_options))
+		return "no maps match the current pop. Refilling now."
+
+	if(length(pop_options) == 1 && pop_options[1] == last_played_map)
+		return "the only map left doesn't match the pop. Refilling now."
+
+	var/list/no_repeat = pop_options.Copy()
+	if(last_played_map && (last_played_map in no_repeat))
+		no_repeat -= last_played_map
+	if(!length(no_repeat))
+		return "no variants left. Refilling now."
+
+	return null
+
 /// Replaces old tally/pop-filter logic.
 /datum/controller/subsystem/map_vote/get_valid_map_vote_choices()
-	var/list/options = get_bag_options()
+	var/list/options = get_pop_valid_bag_options()
 	if(last_played_map && (last_played_map in options))
 		options -= last_played_map
 	return options
 
 /datum/controller/subsystem/map_vote/proc/check_bag_before_vote()
-	var/list/options = get_valid_map_vote_choices()
+	var/list/pop_options = get_pop_valid_bag_options()
+
+	if(!length(pop_options))
+		return "REFILL"
+
+	if(length(pop_options) == 1)
+		if(pop_options[1] == last_played_map)
+			return "REFILL"
+		return pop_options[1]
+
+	var/list/options = pop_options.Copy()
+	if(last_played_map && (last_played_map in options))
+		options -= last_played_map
 
 	if(!length(options))
-		if(!last_played_map || !length(remaining_bag))
-			return null
-		var/all_repeats = TRUE
-		for(var/map_name in remaining_bag)
-			if(map_name != last_played_map)
-				all_repeats = FALSE
-				break
-		if(all_repeats)
-			return "REFILL"
-		return null
-
-	if(length(options) == 1)
-		return options[1]
+		return "REFILL"
 
 	if(length(options) <= 3 && last_played_map)
 		var/repeat_count = 0
