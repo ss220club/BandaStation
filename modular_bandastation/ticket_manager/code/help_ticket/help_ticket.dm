@@ -35,8 +35,6 @@
 	var/static/ticket_counter = 0
 	/// Prevents convert spam
 	COOLDOWN_DECLARE(convert_cooldown)
-	/// is message already sent for this ticket
-	var/webhook_sent = FALSE
 
 /datum/help_ticket/New(client/creator, client/admin, message, ticket_type_id)
 	if(!message || !creator || !creator.mob)
@@ -127,29 +125,24 @@
 	if(ticket_type_id != TICKET_TYPE_ADMIN || !CONFIG_GET(string/regular_adminhelp_webhook_url))
 		return
 
-	if(!ahelp_message_matches_keyword(message) && length(get_admin_counts(R_BAN)["present"]) > 0)
+	var/is_urgent = ahelp_message_matches_keyword(message) && !is_banned_from(ckey(initiator_key), "Urgent Adminhelp")
+	if(!is_urgent)
 		return
 
 	var/datum/discord_embed/embed = build_ticket_manager_embed(message)
-
-	if(ahelp_message_matches_keyword(message))
-		embed.color = TICKET_EMBED_COLOR_URGENT
-		embed.content = "@here"
-	else
-		embed.color = TICKET_EMBED_COLOR_ZEROADMINS
+	embed.color = TICKET_EMBED_COLOR_URGENT
+	embed.content = "@here"
 
 	send2adminchat_webhook(embed, FALSE)
-	webhook_sent = TRUE
 
 /// Sends webhook notification when ticket was auto closed by timeout.
 /datum/help_ticket/proc/send_autoclose_webhook()
-	if(ticket_type_id != TICKET_TYPE_ADMIN || webhook_sent || !CONFIG_GET(string/regular_adminhelp_webhook_url))
+	if(ticket_type_id != TICKET_TYPE_ADMIN || !CONFIG_GET(string/regular_adminhelp_webhook_url))
 		return
 
 	var/datum/discord_embed/embed = build_ticket_manager_embed(message = get_last_player_message() || "Сообщение игрока не найдено.", title_prefix = "Автозакрытие - ")
 	embed.color = TICKET_EMBED_COLOR_STALE
 	send2adminchat_webhook(embed, FALSE)
-	webhook_sent = TRUE
 
 /datum/help_ticket/proc/get_last_player_message()
 	if(!length(messages))
