@@ -29,7 +29,7 @@
 	keywords = new /regex(combined_regex, "i")
 	return keywords
 
-// true if ahelp message matches any configured keyword
+/// TRUE if ahelp message matches any configured keyword.
 /proc/ahelp_message_matches_keyword(message)
 	if(!message)
 		return FALSE

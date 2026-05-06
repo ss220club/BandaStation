@@ -91,7 +91,7 @@
 	data["writers"] = writers
 	data["messages"] = messages
 	data["userHasStaffAccess"] = has_staff_access(user.client)
-	data["isLinkedToCurrentAdmin"] = linked_admin ? linked_admin.client == user.client : FALSE
+	data["isLinkedToCurrentAdmin"] = linked_admin?.client == user.client
 	return data
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
@@ -140,7 +140,7 @@
 	send2adminchat_webhook(embed, FALSE)
 	webhook_sent = TRUE
 
-// sends webhook notification when ticket was auto closed by timeout
+/// Sends webhook notification when ticket was auto closed by timeout.
 /datum/help_ticket/proc/send_autoclose_webhook()
 	if(ticket_type_id != TICKET_TYPE_ADMIN || webhook_sent || !CONFIG_GET(string/regular_adminhelp_webhook_url))
 		return
@@ -283,9 +283,8 @@
 		return FALSE
 
 	linked_admin = admin.persistent_client
-	if(ticket_autoclose_timer_id)
-		deltimer(ticket_autoclose_timer_id)
-		ticket_autoclose_timer_id = null
+	deltimer(ticket_autoclose_timer_id)
+	ticket_autoclose_timer_id = null
 	message_admins("[key_name_admin(admin)] взял тикет #[id] на рассмотрение.")
 	log_admin("[key_name_admin(admin)] взял тикет #[id] на рассмотрение.")
 	return TRUE
