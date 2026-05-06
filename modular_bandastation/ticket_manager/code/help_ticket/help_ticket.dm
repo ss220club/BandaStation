@@ -127,13 +127,14 @@
 	if(ticket_type_id != TICKET_TYPE_ADMIN || !CONFIG_GET(string/regular_adminhelp_webhook_url))
 		return
 
+	if(!ahelp_message_matches_keyword(message) && length(get_admin_counts(R_BAN)["present"]) > 0)
+		return
+
 	var/datum/discord_embed/embed = build_ticket_manager_embed(message)
 
 	if(ahelp_message_matches_keyword(message))
 		embed.color = TICKET_EMBED_COLOR_URGENT
 		embed.content = "@here"
-	else if(length(get_admin_counts(R_BAN)["present"]) > 0)
-		return
 	else
 		embed.color = TICKET_EMBED_COLOR_ZEROADMINS
 
