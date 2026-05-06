@@ -146,7 +146,7 @@
 	if(ticket_type_id != TICKET_TYPE_ADMIN || webhook_sent || !CONFIG_GET(string/regular_adminhelp_webhook_url))
 		return
 
-	var/datum/discord_embed/embed = build_ticket_manager_embed(get_last_player_message() || "Сообщение игрока не найдено.", title_prefix = "Автозакрытие - ")
+	var/datum/discord_embed/embed = build_ticket_manager_embed(message = get_last_player_message() || "Сообщение игрока не найдено.", title_prefix = "Автозакрытие - ")
 	embed.color = TICKET_EMBED_COLOR_STALE
 	send2adminchat_webhook(embed, FALSE)
 	webhook_sent = TRUE
