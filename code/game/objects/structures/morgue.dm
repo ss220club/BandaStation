@@ -438,9 +438,14 @@ GLOBAL_LIST_EMPTY(crematoriums)
 		return INITIALIZE_HINT_QDEL
 	GLOB.crematoriums += src
 
-/obj/structure/bodycontainer/crematorium/Destroy()
-	GLOB.crematoriums -= src
-	return ..()
+/obj/structure/bodycontainer/crematorium/atom_deconstruct(disassembled = TRUE)
+
+	var/obj/structure/bodycontainer/crematorium/broken/B = new(loc)
+
+	B.dir = dir
+	B.id = id
+
+	qdel(src)
 
 /obj/structure/bodycontainer/crematorium/attack_robot(mob/user) //Borgs can't use crematoriums without help
 	to_chat(user, span_warning("[src] is locked against you."))
@@ -518,6 +523,69 @@ GLOBAL_LIST_EMPTY(crematoriums)
 	. = ..()
 	for(var/obj/ice_cream as anything in icecreams)
 		ice_cream.forceMove(src)
+
+/obj/structure/bodycontainer/crematorium/broken
+	name = "broken crematorium"
+	desc = "A heavily damaged crematorium. It appears repairable. Requires 5 igniters and welding."
+
+	icon_state = "crema_broken"
+	base_icon_state = "crema_broken"
+	dir = SOUTH
+
+	resistance_flags = INDESTRUCTIBLE
+
+	density = TRUE
+	anchored = TRUE
+
+	var/repair_stage = 0
+	var/igniters_installed = 0
+
+/obj/structure/bodycontainer/crematorium/broken/open()
+	return FALSE
+
+/obj/structure/bodycontainer/crematorium/broken/cremate()
+	return
+
+/obj/structure/bodycontainer/crematorium/broken/attack_hand(mob/user)
+	to_chat(user, span_warning("The crematorium is broken."))
+
+/obj/structure/bodycontainer/crematorium/broken/attackby(obj/item/W, mob/user, params)
+
+	if(istype(W, /obj/item/assembly/igniter) && repair_stage == 0)
+
+		qdel(W)
+
+		igniters_installed++
+
+		to_chat(user, span_notice("You install an igniter into the crematorium. ([igniters_installed]/5)"))
+
+		if(igniters_installed >= 5)
+			repair_stage = 1
+			to_chat(user, span_notice("The igniter system is repaired. Welding is now required."))
+
+		return
+
+	if(W.tool_behaviour == TOOL_WELDER && repair_stage == 1)
+
+		if(!W.tool_start_check(user, amount=0))
+			return
+
+		to_chat(user, span_notice("You begin repairing the crematorium..."))
+
+		if(!W.use_tool(src, user, 5 SECONDS))
+			return
+
+		var/obj/structure/bodycontainer/crematorium/C = new(loc)
+
+		C.dir = dir
+		C.id = id
+
+		to_chat(user, span_notice("You repair the crematorium."))
+
+		qdel(src)
+		return
+
+	return ..()
 
 /*
  * Generic Tray
