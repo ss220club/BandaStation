@@ -1869,7 +1869,6 @@ GLOBAL_LIST_EMPTY(intento_players)
 	if(dist < min_reach)
 		to_chat(user, span_warning("[M] is too close to use [src] on."))
 		return
-	// Pacifism check: if user is pacifist and target is living, block the attack
 	if(isliving(M) && HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, span_warning("Вы не хотите причинять вред другим живым существам!"))
 		return
