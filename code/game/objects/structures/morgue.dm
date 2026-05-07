@@ -567,7 +567,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 
 	if(W.tool_behaviour == TOOL_SCREWDRIVER && repair_stage == 1)
 
-		playsound(src, 'sound/items/screwdriver.ogg', 50, TRUE)
+		playsound(src, 'sound/items/tools/screwdriver.ogg', 50, TRUE)
 
 		to_chat(user, span_notice("Вы начинаете закреплять воспламенители крематория..."))
 
@@ -601,7 +601,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 		if(!W.tool_start_check(user, amount=0))
 			return
 
-		playsound(src, 'sound/items/welder.ogg', 50, TRUE)
+		playsound(src, 'sound/items/tools/welder.ogg', 50, TRUE)
 
 		to_chat(user, span_notice("Вы начинаете восстанавливать крематорий..."))
 
