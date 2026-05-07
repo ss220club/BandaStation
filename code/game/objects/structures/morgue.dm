@@ -538,6 +538,9 @@ GLOBAL_LIST_EMPTY(crematoriums)
 	var/repair_stage = 0
 	var/igniters_installed = 0
 
+/obj/structure/bodycontainer/crematorium/broken/Destroy()
+	return ..()
+
 /obj/structure/bodycontainer/crematorium/broken/open()
 	return FALSE
 
