@@ -1869,7 +1869,8 @@ GLOBAL_LIST_EMPTY(intento_players)
 	if(dist < min_reach)
 		to_chat(user, span_warning("[M] is too close to use [src] on."))
 		return
-	M.attack_hand(user, modifiers)
+	var/proximity = dist <= 1
+	return user.UnarmedAttack(M, proximity, modifiers)
 
 /obj/item/banhammer
 	desc = "A banhammer."
