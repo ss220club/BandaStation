@@ -438,6 +438,10 @@ GLOBAL_LIST_EMPTY(crematoriums)
 		return INITIALIZE_HINT_QDEL
 	GLOB.crematoriums += src
 
+/obj/structure/bodycontainer/crematorium/Destroy()
+	GLOB.crematoriums -= src
+	return ..()
+
 /obj/structure/bodycontainer/crematorium/atom_deconstruct(disassembled = TRUE)
 
 	var/obj/structure/bodycontainer/crematorium/broken/B = new(loc)
