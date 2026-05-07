@@ -1869,7 +1869,7 @@ GLOBAL_LIST_EMPTY(intento_players)
 	if(dist < min_reach)
 		to_chat(user, span_warning("[M] is too close to use [src] on."))
 		return
-	if(isliving(M) && HAS_TRAIT(user, TRAIT_PACIFISM))
+	if(isliving(M) && HAS_TRAIT(user, TRAIT_PACIFISM) && user.combat_mode)
 		to_chat(user, span_warning("Вы не хотите причинять вред другим живым существам!"))
 		return
 	M.attack_hand(user, modifiers)
