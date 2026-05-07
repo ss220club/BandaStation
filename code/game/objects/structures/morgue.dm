@@ -445,8 +445,6 @@ GLOBAL_LIST_EMPTY(crematoriums)
 	B.dir = dir
 	B.id = id
 
-	qdel(src)
-
 /obj/structure/bodycontainer/crematorium/attack_robot(mob/user) //Borgs can't use crematoriums without help
 	to_chat(user, span_warning("[src] is locked against you."))
 	return
@@ -620,6 +618,23 @@ GLOBAL_LIST_EMPTY(crematoriums)
 		return
 
 	return ..()
+
+/obj/structure/bodycontainer/crematorium/broken/examine(mob/user)
+	. = ..()
+
+	switch(repair_stage)
+
+		if(0)
+			. += span_notice("Требуется установить воспламенители. ([igniters_installed]/5)")
+
+		if(1)
+			. += span_notice("Компоненты не закреплены. Нужна отвертка.")
+
+		if(2)
+			. += span_notice("Корпус поврежден. Требуется пласталь.")
+
+		if(3)
+			. += span_notice("Осталось заварить корпус сваркой.")
 
 /*
  * Generic Tray
