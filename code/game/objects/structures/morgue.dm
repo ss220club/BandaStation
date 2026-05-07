@@ -526,7 +526,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 
 /obj/structure/bodycontainer/crematorium/broken
 	name = "broken crematorium"
-	desc = "A heavily damaged crematorium. It appears repairable. Requires 5 igniters and welding."
+	desc = "Сломанный крематорий, но выглядит так, будто его можно починить."
 
 	icon_state = "crema_broken"
 	base_icon_state = "crema_broken"
@@ -547,7 +547,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 	return
 
 /obj/structure/bodycontainer/crematorium/broken/attack_hand(mob/user)
-	to_chat(user, span_warning("The crematorium is broken."))
+	to_chat(user, span_warning("Крематорий сломан."))
 
 /obj/structure/bodycontainer/crematorium/broken/attackby(obj/item/W, mob/user, params)
 
@@ -557,20 +557,53 @@ GLOBAL_LIST_EMPTY(crematoriums)
 
 		igniters_installed++
 
-		to_chat(user, span_notice("You install an igniter into the crematorium. ([igniters_installed]/5)"))
+		to_chat(user, span_notice("Вы устанавливаете воспламенитель в крематорий. ([igniters_installed]/5)"))
 
 		if(igniters_installed >= 5)
 			repair_stage = 1
-			to_chat(user, span_notice("The igniter system is repaired. Welding is now required."))
+			to_chat(user, span_notice("Система поджига восстановлена. Теперь необходимо закрепить воспламенители отверткой."))
 
 		return
 
-	if(W.tool_behaviour == TOOL_WELDER && repair_stage == 1)
+	if(W.tool_behaviour == TOOL_SCREWDRIVER && repair_stage == 1)
+
+		playsound(src, 'sound/items/screwdriver.ogg', 50, TRUE)
+
+		to_chat(user, span_notice("Вы начинаете закреплять воспламенители крематория..."))
+
+		if(!W.use_tool(src, user, 3 SECONDS))
+			return
+
+		repair_stage = 2
+
+		to_chat(user, span_notice("Воспламенители закреплены. Теперь требуется пласталь."))
+
+		return
+
+	if(istype(W, /obj/item/stack/sheet/plasteel) && repair_stage == 2)
+
+		var/obj/item/stack/sheet/plasteel/P = W
+
+		if(P.amount < 2)
+			to_chat(user, span_warning("Необходимо 2 листа пластали!"))
+			return
+
+		P.use(2)
+
+		repair_stage = 3
+
+		to_chat(user, span_notice("Вы заменяете поврежденные панели пласталью. Осталось заварить корпус."))
+
+		return
+
+	if(W.tool_behaviour == TOOL_WELDER && repair_stage == 3)
 
 		if(!W.tool_start_check(user, amount=0))
 			return
 
-		to_chat(user, span_notice("You begin repairing the crematorium..."))
+		playsound(src, 'sound/items/welder.ogg', 50, TRUE)
+
+		to_chat(user, span_notice("Вы начинаете восстанавливать крематорий..."))
 
 		if(!W.use_tool(src, user, 5 SECONDS))
 			return
@@ -580,9 +613,10 @@ GLOBAL_LIST_EMPTY(crematoriums)
 		C.dir = dir
 		C.id = id
 
-		to_chat(user, span_notice("You repair the crematorium."))
+		to_chat(user, span_notice("Вы полностью починили крематорий."))
 
 		qdel(src)
+
 		return
 
 	return ..()
