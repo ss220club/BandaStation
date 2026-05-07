@@ -625,16 +625,16 @@ GLOBAL_LIST_EMPTY(crematoriums)
 	switch(repair_stage)
 
 		if(0)
-			. += span_notice("Требуется установить воспламенители. ([igniters_installed]/5)")
+			. += span_notice("Крематорий поврежден. Требуется установить [span_bold("воспламенители")] ([igniters_installed]/5)")
 
 		if(1)
-			. += span_notice("Компоненты не закреплены. Нужна отвертка.")
+			. += span_notice("Компоненты не закреплены. Нужна [span_bold("отвертка")]")
 
 		if(2)
-			. += span_notice("Корпус поврежден. Требуется пласталь.")
+			. += span_notice("Корпус поврежден. Требуется несколько листов [span_bold("пластали")]")
 
 		if(3)
-			. += span_notice("Осталось заварить корпус сваркой.")
+			. += span_notice("Осталось заварить корпус [span_bold("сваркой")]")
 
 /*
  * Generic Tray
