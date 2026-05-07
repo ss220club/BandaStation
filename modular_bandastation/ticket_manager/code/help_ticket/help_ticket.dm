@@ -33,6 +33,8 @@
 	var/list/messages
 	/// Static counter used for generating each ticket ID
 	var/static/ticket_counter = 0
+	/// Is this ticket marked as urgent and should be reported
+	var/is_urgent = FALSE
 	/// Prevents convert spam
 	COOLDOWN_DECLARE(convert_cooldown)
 
@@ -125,7 +127,7 @@
 	if(ticket_type_id != TICKET_TYPE_ADMIN || !CONFIG_GET(string/regular_adminhelp_webhook_url))
 		return
 
-	var/is_urgent = ahelp_message_matches_keyword(message) && !is_banned_from(ckey(initiator_key), "Urgent Adminhelp")
+	is_urgent = ahelp_message_matches_keyword(message) && !is_banned_from(ckey(initiator_key), "Urgent Adminhelp")
 	if(!is_urgent)
 		return
 
@@ -182,6 +184,8 @@
 	if(admin_fields["deadmin"])
 		fields["Deadmin"] = admin_fields["deadmin"]
 	embed.fields = fields
+	if(!is_urgent)
+		embed.footer = "Количество ответов: [length(messages)]"
 	return embed
 
 /datum/help_ticket/proc/get_admin_webhook_fields()
