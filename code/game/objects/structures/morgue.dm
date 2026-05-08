@@ -526,6 +526,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 	for(var/obj/ice_cream as anything in icecreams)
 		ice_cream.forceMove(src)
 
+//MARK: SS220BS introduction
 /obj/structure/bodycontainer/crematorium/broken
 	name = "broken crematorium"
 	desc = "Сломанный крематорий, но выглядит так, будто его можно починить."
@@ -541,8 +542,15 @@ GLOBAL_LIST_EMPTY(crematoriums)
 
 	var/repair_stage = 0
 	var/igniters_installed = 0
+	var/sparking = TRUE
+
+/obj/structure/bodycontainer/crematorium/broken/Initialize(mapload)
+	. = ..()
+
+	START_PROCESSING(SSobj, src)
 
 /obj/structure/bodycontainer/crematorium/broken/Destroy()
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/structure/bodycontainer/crematorium/broken/open()
@@ -553,6 +561,17 @@ GLOBAL_LIST_EMPTY(crematoriums)
 
 /obj/structure/bodycontainer/crematorium/broken/attack_hand(mob/user)
 	to_chat(user, span_warning("Крематорий сломан."))
+
+/obj/structure/bodycontainer/crematorium/broken/process(seconds_per_tick)
+
+	if(!sparking)
+		return
+
+	if(prob(20))
+		do_sparks(3, FALSE, src)
+
+		if(prob(30))
+			playsound(src, 'sound/items/tools/welder.ogg', 25, TRUE)
 
 /obj/structure/bodycontainer/crematorium/broken/attackby(obj/item/W, mob/user, params)
 
@@ -566,6 +585,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 
 		if(igniters_installed >= 5)
 			repair_stage = 1
+			sparking = FALSE
 			to_chat(user, span_notice("Система поджига восстановлена. Теперь необходимо закрепить воспламенители отверткой."))
 
 		return
@@ -596,6 +616,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 		P.use(2)
 
 		repair_stage = 3
+		update_appearance()
 
 		to_chat(user, span_notice("Вы заменяете поврежденные панели пласталью. Осталось заварить корпус."))
 
@@ -642,6 +663,18 @@ GLOBAL_LIST_EMPTY(crematoriums)
 
 		if(3)
 			. += span_notice("Осталось заварить корпус [span_bold("сваркой")]")
+
+/obj/structure/bodycontainer/crematorium/broken/update_icon_state()
+
+	switch(repair_stage)
+
+		if(0, 1)
+			icon_state = "crema_broken"
+
+		if(2, 3)
+			icon_state = "crema_broken1"
+
+	return ..()
 
 /*
  * Generic Tray
