@@ -36,7 +36,7 @@
 				/mob/living/basic/carp,
 				/mob/living/basic/carp,
 				/mob/living/basic/carp,
-				/mob/living/basic/carp/magic,
+				/mob/living/basic/carp/magic/xenobiology,
 				/mob/living/basic/carp/mega,
 			),
 			"faction" = list(FACTION_CARP),

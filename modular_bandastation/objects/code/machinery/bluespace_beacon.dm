@@ -46,9 +46,7 @@
 	for(var/obj/machinery/power/bluespace_beacon/beacon as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/power/bluespace_beacon))
 		cached_points = max(cached_points, beacon.current_charge)
 
-	if(cached_points >= goal)
-		return TRUE
-	return FALSE
+	return cached_points >= goal
 
 #define BEACON_POINTS_PER_W 10e-6
 #define BEACON_BASE_POINTS 2
@@ -403,9 +401,7 @@
 	return clamp(round(min_chance + (max_chance - min_chance) * progress_ratio), min_chance, max_chance)
 
 /obj/machinery/power/bluespace_beacon/proc/get_input_ratio()
-	if(input_level_max <= 0)
-		return 0
-	return clamp(input_level / input_level_max, 0, 1)
+	return input_level_max <= 0 ? 0 : clamp(actual_power_usage / input_level_max, 0, 1)
 
 /obj/machinery/power/bluespace_beacon/proc/get_portal_spawn_turf()
 	var/turf/target_turf = get_safe_random_station_turf_equal_weight()
@@ -448,12 +444,14 @@
 	if(!length(factions))
 		return FALSE
 
-	var/list/faction_weights = list()
-	for(var/faction_name in factions)
-		var/list/faction_data = factions[faction_name]
-		if(!islist(faction_data))
-			continue
-		faction_weights[faction_name] = max(1, faction_data["weight"] || 1)
+	var/static/list/faction_weights
+	if(!faction_weights)
+		faction_weights = list()
+		for(var/f_name in factions)
+			var/list/faction_data = factions[f_name]
+			if(islist(faction_data))
+				continue
+			faction_weights[f_name] = max(1, faction_data["weight"] || 1)
 
 	var/faction_name = pick_weight(faction_weights)
 	var/list/faction_data = factions[faction_name]
@@ -605,7 +603,7 @@
 
 /obj/machinery/power/bluespace_beacon/ui_data()
 	var/charge_percent = (maximum_charge > 0) ? (current_charge / maximum_charge) * 100 : 0
-	. = list(
+	return list(
 		"inputting" = inputting,
 		"inputAvailable" = get_available_power(),
 		"charge" = charge_percent,
