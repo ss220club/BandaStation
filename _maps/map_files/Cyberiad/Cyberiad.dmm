@@ -16284,6 +16284,15 @@
 /obj/structure/table,
 /obj/item/electronics/apc,
 /obj/item/electronics/airlock,
+/obj/item/assembly/control/crematorium{
+	id = "crematoriumChapel";
+	pixel_y = 10;
+	pixel_x = -5
+	},
+/obj/item/assembly/control/crematorium{
+	id = "crematoriumChapel";
+	pixel_y = 10
+	},
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "dUv" = (
