@@ -246,3 +246,95 @@
 	max_integrity = 1000
 	impressiveness = 0
 	abstract_type = /obj/structure/statue/dummy
+
+/obj/structure/statue/eater_bust
+	name = "бюст пожирателя"
+	desc = "Бюст из неизвестного камня, на верхушке можно разглядеть нечто, напоминающее голову."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statue.dmi'
+	icon_state = "eater_bust"
+	anchored = TRUE
+	abstract_type = /obj/structure/statue/eater_bust
+
+/obj/structure/statue/eater_knight
+	name = "рыцарь пожирателей"
+	desc = "Всматриваясь в статую, можно разглядеть детали, которые присущи морским организмам."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "eater_knight"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/eater_knight
+
+/obj/structure/statue/ritual_statue
+	name = "ритуальная статуя"
+	desc = "Огромная статуя, создающая впечатление, что следит за тобой. Можно разглядеть массивные щупальца, которые будто бы тянутся в твою сторону."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statue_64x64.dmi'
+	icon_state = "ritual_statue"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/ritual_statue
+
+/obj/structure/statue/Statue_Oll_1
+	name = "Изысканная статуя"
+	desc = "Данная скульптура выполнена в античном стиле, явно подчёркивает состоятельность и чувство вкуса своих владельцев."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "Statue_Oll_1"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/Statue_Oll_1
+
+/obj/structure/statue/marble_column
+	name = "Мраморная колонна"
+	desc = "Самая обычная мраморная колонна."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "marble_column"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/marble_column
+
+/obj/structure/statue/ark_left
+	name = "Свадебная арка"
+	desc = "Свадебная арка украшенная лианами и цветами. Навивает атмосферу грядущего торжества."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "ark_left"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/ark_left
+
+/obj/structure/statue/ark_right
+	name = "Свадебная арка"
+	desc = "Свадебная арка украшенная лианами и цветами. Навивает атмосферу грядущего торжества."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "ark_right"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/ark_right
+
+/obj/structure/statue/ark_middle
+	name = "Свадебная арка"
+	desc = "Свадебная арка украшенная лианами и цветами. Навивает атмосферу грядущего торжества."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "ark_middle"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/ark_middle
