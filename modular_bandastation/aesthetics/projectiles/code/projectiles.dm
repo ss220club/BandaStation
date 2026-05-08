@@ -119,3 +119,6 @@
 
 /obj/projectile/bullet/ballista_spear/prod
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/mm40
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'

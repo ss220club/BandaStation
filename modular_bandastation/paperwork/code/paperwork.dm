@@ -60,7 +60,7 @@ GLOBAL_LIST_INIT_TYPED(paper_replacements, /datum/paper_replacement, init_paper_
 	name = "Текущее время"
 
 /datum/paper_replacement/time/get_replacement(mob/user)
-	return station_time_timestamp()
+	return server_timestamp()
 
 /datum/paper_replacement/date
 	key = "date"
@@ -74,7 +74,7 @@ GLOBAL_LIST_INIT_TYPED(paper_replacements, /datum/paper_replacement, init_paper_
 	name = "Текущая дата и время"
 
 /datum/paper_replacement/datetime/get_replacement(mob/user)
-	return "[time2text(world.timeofday, "DD/MM")]/[CURRENT_STATION_YEAR] [station_time_timestamp()]"
+	return "[time2text(world.timeofday, "DD/MM")]/[CURRENT_STATION_YEAR] [server_timestamp()]"
 
 /datum/paper_replacement/station_name
 	key = "station_name"

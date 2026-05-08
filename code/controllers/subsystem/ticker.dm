@@ -38,9 +38,6 @@ SUBSYSTEM_DEF(ticker)
 	var/timeLeft //pregame timer
 	var/start_at
 
-	var/gametime_offset = 432000 //Deciseconds to add to world.time for station time.
-	var/station_time_rate_multiplier = 12 //factor of station time progressal vs real time.
-
 	/// Num of players, used for pregame stats on statpanel
 	var/totalPlayers = 0
 	/// Num of ready players, used for pregame stats on statpanel (only viewable by admins)
@@ -131,21 +128,14 @@ SUBSYSTEM_DEF(ticker)
 		GLOB.syndicate_code_response_regex = codeword_match
 
 	start_at = world.time + (CONFIG_GET(number/lobby_countdown) * (1 SECONDS))
-	round_start_time = start_at // May be changed later, but prevents the time from jumping back when the round actually starts
-	if(CONFIG_GET(flag/randomize_shift_time))
-		gametime_offset = rand(0, 23) * (1 HOURS)
-	else if(CONFIG_GET(flag/shift_time_realtime))
-		gametime_offset = world.timeofday + GLOB.timezoneOffset
-		station_time_rate_multiplier = 1
-	else
-		gametime_offset = (CONFIG_GET(number/shift_time_start_hour) * (1 HOURS))
+
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/ticker/fire()
 	switch(current_state)
 		if(GAME_STATE_STARTUP)
 			if(Master.initializations_finished_with_no_players_logged_in)
-				start_at = world.time + (CONFIG_GET(number/lobby_countdown) * 10)
+				start_at = world.time + (CONFIG_GET(number/lobby_countdown) * (1 SECONDS))
 			for(var/client/C in GLOB.clients)
 				window_flash(C, ignorepref = TRUE) //let them know lobby has opened up.
 			to_chat(world, span_notice("<b>Welcome to [station_name()]!</b>"))
@@ -156,9 +146,9 @@ SUBSYSTEM_DEF(ticker)
 
 			fire()
 		if(GAME_STATE_PREGAME)
-				//lobby stats for statpanels
+			//lobby stats for statpanels
 			if(isnull(timeLeft))
-				timeLeft = max(0,start_at - world.time)
+				timeLeft = max(0, start_at - world.time)
 			totalPlayers = LAZYLEN(GLOB.new_player_list)
 			totalPlayersReady = 0
 			total_admins_ready = 0
@@ -191,7 +181,7 @@ SUBSYSTEM_DEF(ticker)
 			if(!setup())
 				//setup failed
 				current_state = GAME_STATE_STARTUP
-				start_at = world.time + (CONFIG_GET(number/lobby_countdown) * 10)
+				start_at = world.time + (CONFIG_GET(number/lobby_countdown) * (1 SECONDS))
 				timeLeft = null
 				Master.SetRunLevel(RUNLEVEL_LOBBY)
 				SEND_SIGNAL(src, COMSIG_TICKER_ERROR_SETTING_UP)
@@ -233,7 +223,7 @@ SUBSYSTEM_DEF(ticker)
 	return player_states
 
 /datum/controller/subsystem/ticker/proc/setup()
-	to_chat(world, span_boldannounce("Starting game..."))
+	to_chat(world, span_boldannounce("Игра начинается..."))
 	var/init_start = world.timeofday
 
 	var/list/players_and_readiness = get_player_ready_states()
@@ -290,14 +280,14 @@ SUBSYSTEM_DEF(ticker)
 	log_world("Game start took [(world.timeofday - init_start)/10]s")
 	INVOKE_ASYNC(SSdbcore, TYPE_PROC_REF(/datum/controller/subsystem/dbcore,SetRoundStart))
 
-	to_chat(world, span_notice(span_bold("Welcome to [station_name()], enjoy your stay!")))
+	to_chat(world, span_notice(span_bold("Приветствуем вас на [station_name()]. Приятного вам пребывания!")))
 	SEND_SOUND(world, sound(SSmapping.current_map?.welcome_sound_override || SSstation.announcer.get_rand_welcome_sound()))
 
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
 
 	if(length(GLOB.holidays))
-		to_chat(world, span_notice("and..."))
+		to_chat(world, span_notice("и..."))
 		for(var/holidayname in GLOB.holidays)
 			var/datum/holiday/holiday = GLOB.holidays[holidayname]
 			to_chat(world, span_info(holiday.greet()))
@@ -574,7 +564,7 @@ SUBSYSTEM_DEF(ticker)
 		for(var/mob/dead/new_player/new_player_mob as anything in GLOB.new_player_list)
 			var/mob/living/carbon/human/new_player_human = new_player_mob.new_character
 			if(new_player_human)
-				to_chat(new_player_mob, span_notice("Captainship not forced on anyone."))
+				to_chat(new_player_mob, span_notice("Капитанство никому не назначено."))
 			CHECK_TICK
 
 
@@ -839,10 +829,10 @@ SUBSYSTEM_DEF(ticker)
 
 	var/skip_delay = check_rights()
 	if(delay_end && !skip_delay)
-		to_chat(world, span_boldannounce("An admin has delayed the round end."))
+		to_chat(world, span_boldannounce("Администратор задержал окончание раунда."))
 		return
 
-	to_chat(world, span_boldannounce("Rebooting World in [DisplayTimeText(delay)]. [reason]"))
+	to_chat(world, span_boldannounce("Перезагрузка мира через [DisplayTimeText(delay)]. [reason]"))
 
 	var/statspage = CONFIG_GET(string/roundstatsurl)
 	var/gamelogloc = CONFIG_GET(string/gamelogurl)
@@ -862,7 +852,7 @@ SUBSYSTEM_DEF(ticker)
 	if(end_string)
 		end_state = end_string
 
-	log_game(span_boldannounce("Rebooting World. [reason]"))
+	log_game(span_boldannounce("Перезагрузка мира. [reason]"))
 
 	world.Reboot()
 
@@ -874,9 +864,9 @@ SUBSYSTEM_DEF(ticker)
  */
 /datum/controller/subsystem/ticker/proc/cancel_reboot(mob/user)
 	if(!reboot_timer)
-		to_chat(user, span_warning("There is no pending reboot!"))
+		to_chat(user, span_warning("Ожидающей перезагрузки нет!"))
 		return FALSE
-	to_chat(world, span_boldannounce("An admin has delayed the round end."))
+	to_chat(world, span_boldannounce("Администратор задержал окончание раунда."))
 	deltimer(reboot_timer)
 	reboot_timer = null
 	return TRUE
