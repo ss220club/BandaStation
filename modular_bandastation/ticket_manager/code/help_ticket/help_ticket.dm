@@ -168,9 +168,10 @@
 
 /datum/help_ticket/proc/build_ticket_manager_embed(message, title_prefix = null)
 	var/datum/discord_embed/embed = new()
+	var/sanitized_message = strip_html_full(message)
 	embed.title = title_prefix ? "[title_prefix]Тикет #[id]" : "Тикет #[id]"
 	embed.author = initiator_key
-	embed.description = message
+	embed.description = sanitized_message
 	if(CONFIG_GET(string/adminhelp_ahelp_link))
 		embed.url = replacetext(replacetext(CONFIG_GET(string/adminhelp_ahelp_link), "$RID", GLOB.round_id), "$TID", "[id]")
 	var/list/fields = list(
