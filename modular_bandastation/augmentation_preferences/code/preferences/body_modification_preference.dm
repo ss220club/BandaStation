@@ -45,7 +45,7 @@
 	if(!islist(value))
 		return FALSE
 
-	for(var/datum/preference/body_modifications/key in value)
+	for(var/key in value)
 		var/datum/body_modification/modification = GLOB.body_modifications[key]
 		if(!istype(modification))
 			return FALSE

@@ -39,10 +39,7 @@
 	PRIVATE_PROC(TRUE)
 
 	var/datum/preference/preference = GLOB.preference_entries[/datum/preference/body_modifications]
-	if(!istype(preference))
-		return FALSE
-
-	return preferences.update_preference(preference, new_value)
+	return istype(preference) ? preferences.update_preference(preference, new_value) : FALSE
 
 /datum/preference_middleware/body_modifications/proc/get_applied_body_modifications()
 	PRIVATE_PROC(TRUE)
@@ -108,7 +105,7 @@
 		return FALSE
 
 	var/datum/body_modification/modification = GLOB.body_modifications[key]
-	if(!istype(modification))
+	if(!istype(modification) || !modification.can_be_applied(user))
 		return FALSE
 
 	var/list/updated_preference = get_body_modifications_copy()
