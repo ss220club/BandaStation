@@ -37074,12 +37074,3 @@ accusative = "блюспейс разлом"
 instrumental = "блюспейс разломом"
 prepositional = "блюспейс разломе"
 gender = "male"
-
-["Ruger .22 LR Tranquility Pistol"]
-nominative = "транквилизирующий пистолет Рюгер"
-genitive = "транквилизирующего пистолета Рюгер"
-dative = "транквилизирующему пистолету Рюгер"
-accusative = "транквилирующий пистолет Рюгер"
-instrumental = "транквилизирующем пистолетом Рюгер"
-prepositional = "транквилизирующем пистолете Рюгер"
-gender = "male"
