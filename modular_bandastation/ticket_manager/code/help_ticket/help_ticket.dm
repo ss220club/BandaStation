@@ -143,7 +143,8 @@
 		return
 
 	var/datum/discord_embed/embed = build_ticket_manager_embed(message = get_last_player_message() || "Сообщение игрока не найдено.", title_prefix = "Автозакрытие - ")
-	embed.color = TICKET_EMBED_COLOR_STALE
+	if(length(messages) >= 2)
+		embed.color = TICKET_EMBED_COLOR_STALE
 	send2adminchat_webhook(embed, FALSE)
 
 /datum/help_ticket/proc/get_last_player_message()
@@ -187,6 +188,8 @@
 	embed.fields = fields
 	if(!is_urgent)
 		embed.footer = "Количество ответов: [length(messages)]"
+	if(!is_urgent && length(messages) < 2)
+		embed.color = TICKET_EMBED_COLOR_NOANSWER
 	return embed
 
 /datum/help_ticket/proc/get_admin_webhook_fields()
