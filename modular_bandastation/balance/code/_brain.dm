@@ -42,7 +42,7 @@
 
 /obj/structure/closet/body_bag/stasis
 	name = "stasis body bag"
-	desc = "A plastic bag designed for the storage and transportation of cadavers with portable stasis module and little space."
+	desc = "Пластиковый мешок для хранения и транспортировки трупов с встроенным модулем стазиса. Сопротивляющийся человек может попытаться выбраться."
 	icon = 'modular_bandastation/balance/icons/bodybag.dmi' //на замену
 	icon_state = "stasisbag"
 	mob_storage_capacity = 1
@@ -50,6 +50,47 @@
 	open_sound = 'sound/effects/spray.ogg'
 	close_sound = 'sound/effects/spray.ogg'
 	foldedbag_path = /obj/item/bodybag/stasis
+	/// Time required for a contained mob to break free through resistance
+	breakout_time = 30 SECONDS
+
+/// Handles breakout attempts when a contained mob uses the resist action
+/// Players can escape the stasis bag through a timed escape sequence that persists
+/// even if the bag is moved, preventing permanent entrapment
+/obj/structure/closet/body_bag/stasis/container_resist_act(mob/living/user)
+	// Early exit if bag is already open or interaction is already in progress
+	if(opened || DOING_INTERACTION_WITH_TARGET(user, src))
+		return
+
+	// Set action cooldowns to prevent spam
+	user.changeNext_move(CLICK_CD_BREAKOUT)
+	user.last_special = world.time + CLICK_CD_BREAKOUT
+
+	// Notify nearby observers and the escaping mob of breakout attempt
+	user.visible_message(
+		span_warning("[src] начинает сильно трясти!"),
+		span_notice("Вы прислоняетесь к [src] и начинаете рвать молнию... (это займёт около [DisplayTimeText(breakout_time)].)"),
+		span_hear("Вы слышите сильный грохот из [src].")
+	)
+
+	// Queue visual shake effect check for animation
+	addtimer(CALLBACK(src, PROC_REF(check_if_shake)), 1 SECONDS)
+
+	// Attempt timed escape - IGNORE_TARGET_LOC_CHANGE allows success even if bag is moved
+	if(do_after(user, breakout_time, target = src, timed_action_flags = IGNORE_TARGET_LOC_CHANGE))
+		// Validate escape conditions after time delay completes
+		if(!user || user.stat != CONSCIOUS || user.loc != src || opened)
+			return
+
+		// Announce successful breakout to the area
+		user.visible_message(
+			span_danger("[user] успешно выбрался из [src]!"),
+			span_notice("Вы успешно выбираетесь из [src]!")
+		)
+		bust_open()
+	else
+		// Inform user of failed escape attempt only if still inside
+		if(user.loc == src)
+			to_chat(user, span_warning("Вам не удалось выбраться из [src]!"))
 
 /obj/structure/closet/body_bag/stasis/closet_update_overlays(list/new_overlays)
 	. = ..()
