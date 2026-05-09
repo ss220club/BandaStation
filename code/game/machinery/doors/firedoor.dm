@@ -23,6 +23,7 @@
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
 	can_open_with_hands = FALSE
 	COOLDOWN_DECLARE(activation_cooldown)
+	knock_sound = 'sound/effects/glass/glassknock.ogg'
 
 	///X offset for the overlay lights, so that they line up with the thin border firelocks
 	var/light_xoffset = 0
@@ -59,7 +60,7 @@
 	///Keeps track of if we're playing the alarm sound loop (as only one firelock per group should be). Used during power changes.
 	var/is_playing_alarm = FALSE
 
-	var/knock_sound = 'sound/effects/glass/glassknock.ogg'
+	// BANDASTATION REMOVAL: KNOCK var/knock_sound = 'sound/effects/glass/glassknock.ogg'
 	var/bash_sound = 'sound/effects/glass/glassbash.ogg'
 
 

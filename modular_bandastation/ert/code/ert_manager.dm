@@ -135,7 +135,7 @@ ADMIN_VERB(ert_manager, R_ADMIN, "ERT Manager", "Manage ERT reqests.", ADMIN_CAT
 			GLOB.ert_request_answered = TRUE
 			var/message = "[station_name()], уведомляем вас, что развёртывание ОБР в данный момент невозможно."
 			if(params["reason"])
-				message += " Your ERT request has been denied for the following reasons:\n\n[params["reason"]]"
+				message += " Ваш запрос ОБР был отклонён по данной причине:\n\n[params["reason"]]"
 			priority_announce(message, "ОБР недоступен")
 		else
 			return FALSE
