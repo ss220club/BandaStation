@@ -167,6 +167,7 @@
 /obj/machinery/door/airlock/Initialize(mapload)
 	if(glass)
 		airlock_material = "glass"
+		knock_sound = 'sound/effects/glass/glassknock.ogg' // BANDASTATION ADDITION: KNOCK
 	. = ..()
 	set_wires(get_wires())
 	if(security_level > AIRLOCK_SECURITY_IRON)
