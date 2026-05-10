@@ -48,14 +48,14 @@
 	// СЧИТЫВАНИЕ ID С УСТРОЙСТВА
 	//--------------------------------------------------
 
-	if(isnull(target:id))
+	if(isnull(interacting_with:id))
 		to_chat(user, span_warning("У объекта отсутствует ID."))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ITEM_INTERACT_BLOCKING
 
-	stored_button_id = target:id
+	stored_button_id = interacting_with:id
 
 	to_chat(user, span_notice("Мультитул сохраняет ID: '[stored_button_id]'."))
 
 	playsound(src, 'sound/items/taperecorder/tape_flip.ogg', 30, TRUE)
 
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	return ITEM_INTERACT_BLOCKING
