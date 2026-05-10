@@ -207,15 +207,22 @@
 		{
 			"label": "ru_names: new fragment from selection",
 			"type": "process",
-			"command": "python",
+			"command": "bash",
 			"args": [
-				"${workspaceFolder}/tools/ru_translations/new_ru_name_fragment.py",
+				"${workspaceFolder}/tools/ru_translations/new_ru_name_fragment.sh",
 				"${selectedText}"
 			],
+			"windows": {
+				"command": "${workspaceFolder}/tools/ru_translations/new_ru_name_fragment.cmd",
+				"args": ["${selectedText}"]
+			},
 			"presentation": {
-				"reveal": "silent",
-				"panel": "shared",
-				"close": true
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": false,
+				"showReuseMessage": false,
+				"clear": false,
+				"close": false
 			},
 			"problemMatcher": []
 		}
