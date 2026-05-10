@@ -2,7 +2,7 @@
 	"private": true,
 	"type": "module",
 	"dependencies": {
-		"@iarna/toml": "^2.2.5" // BANDASTATION MOD: ru_names merge
+		"@iarna/toml": "^2.2.5"
 	},
 	"devDependencies": {
 		"@types/bun": "^1.3.5",
