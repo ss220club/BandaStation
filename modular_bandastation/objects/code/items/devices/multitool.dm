@@ -48,7 +48,7 @@
 	// СЧИТЫВАНИЕ ID С УСТРОЙСТВА
 	//--------------------------------------------------
 
-	if(isnull(interacting_with:id))
+	if(!has_var(interacting_with, "id") || isnull(interacting_with:id))
 		to_chat(user, span_warning("У объекта отсутствует ID."))
 		return ITEM_INTERACT_BLOCKING
 
