@@ -37,7 +37,6 @@
 	var/datum/buffer // simple machine buffer for device linkage
 	var/mode = 0
 	var/apc_scanner = TRUE
-	var/stored_button_id = null
 	COOLDOWN_DECLARE(next_apc_scan)
 
 /obj/item/multitool/Destroy()

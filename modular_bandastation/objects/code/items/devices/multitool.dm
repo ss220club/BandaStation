@@ -1,3 +1,5 @@
+var/stored_button_id = null
+
 //MARK: Save ID buffer for button from SS220BS
 /obj/item/multitool/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
 
