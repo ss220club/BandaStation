@@ -27752,7 +27752,6 @@ instrumental = "одеждой Lost M.C."
 prepositional = "одежде Lost M.C."
 gender = "female"
 
-
 ["decker hoodie"]
 nominative = "худи Декер"
 genitive = "худи Декер"
@@ -36158,12 +36157,12 @@ gender = "male"
 # MARK: Cosmic heretic items
 
 ["Cosmic Field"]
-nominative = "космическое поле"
-genitive = "космического поля"
-dative = "космическому полю"
-accusative = "космическое поле"
-instrumental = "космическим полем"
-prepositional = "космическом поле"
+nominative = "Космическое поле"
+genitive = "Космического поля"
+dative = "Космическому полю"
+accusative = "Космическое поле"
+instrumental = "Космическим полем"
+prepositional = "Космическом поле"
 gender = "neuter"
 
 ["Star Gazer"]
@@ -36176,12 +36175,12 @@ prepositional = "Звездочёте"
 gender = "male"
 
 ["cosmic rune"]
-nominative = "космическая руна"
-genitive = "космической руны"
-dative = "космической руне"
-accusative = "космическую руну"
-instrumental = "космической руной"
-prepositional = "космической руне"
+nominative = "Космическая руна"
+genitive = "Космической руны"
+dative = "Космической руне"
+accusative = "Космическую руну"
+instrumental = "Космической руной"
+prepositional = "Космической руне"
 gender = "female"
 
 ["Cosmic Diamond"]
@@ -36221,12 +36220,12 @@ prepositional = "области Космоса"
 gender = "female"
 
 ["cosmic gem"]
-nominative = "космический самоцвет"
-genitive = "космического самоцвета"
-dative = "космическому самоцвету"
-accusative = "космический самоцвет"
-instrumental = "космическим самоцветом"
-prepositional = "космическом самоцвете"
+nominative = "Космический самоцвет"
+genitive = "Космического самоцвета"
+dative = "Космическому самоцвету"
+accusative = "Космический самоцвет"
+instrumental = "Космическим самоцветом"
+prepositional = "Космическом самоцвете"
 gender = "male"
 
 
