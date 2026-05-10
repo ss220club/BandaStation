@@ -530,7 +530,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 /obj/structure/bodycontainer/crematorium/broken
 	name = "broken crematorium"
 	desc = "Сломанный крематорий, но выглядит так, будто его можно починить."
-
+	icon = 'modular_bandastation/objects/icons/obj/structures/crematorium.dmi'
 	icon_state = "crema_broken"
 	base_icon_state = "crema_broken"
 	dir = SOUTH
