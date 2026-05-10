@@ -81,7 +81,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/structures/flora/fruit.dmi'
 	icon_state = "apple1"
 
-/obj/structure/flora/fruit/get_seethrough_map()
+/obj/structure/flora/fruit/proc/get_seethrough_map()
 	return SEE_THROUGH_MAP_DEFAULT_TWO_TALL
 
 /obj/structure/flora/fruit/apple1
