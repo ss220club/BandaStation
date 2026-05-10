@@ -16,7 +16,7 @@
 	if(dumped)
 		to_chat(user, span_warning("Вы уже активировали протокол CRAB-17."))
 		return FALSE
-	if(tgui_alert(user, "Вы уверены, что хотите обрушить этот рынок, не оставив выживших?", "Протокол CRAB-17", list("Да", "Нет")) == "Yes")
+	if(tgui_alert(user, "Вы уверены, что хотите обрушить этот рынок, не оставив выживших?", "Протокол CRAB-17", list("Да", "Нет")) == "Да")
 		if(dumped || QDELETED(src)) //Prevents fuckers from cheesing alert
 			return FALSE
 		var/turf/targetturf = get_safe_random_station_turf_equal_weight()
@@ -27,9 +27,8 @@
 		if(isliving(user))
 			L = user
 			accounts_to_rob -= L.get_bank_account()
-		for(var/i in accounts_to_rob)
-			var/datum/bank_account/B = i
-			B.being_dumped = TRUE
+		for(var/datum/bank_account/B as anything in accounts_to_rob)
+			B.dumpeet()
 		new /obj/effect/dumpeet_target(targetturf, L)
 
 		to_chat(user, span_notice("Вы активировали протокол CRAB-17."))
@@ -40,7 +39,7 @@
 
 /obj/structure/checkoutmachine
 	name = "\improper Nanotrasen Space-Coin Market"
-	desc = "Это хорошо для Спейскоин, потому что."
+	desc = "Это хорошо для Космокоин, потому что."
 	icon = 'icons/obj/machines/money_machine.dmi'
 	icon_state = "bogdanoff"
 	layer = ABOVE_ALL_MOB_LAYER
@@ -67,8 +66,7 @@
  * Returns TRUE if no accounts are being drained, FALSE otherwise
  */
 /obj/structure/checkoutmachine/proc/check_if_finished()
-	for(var/i in accounts_to_rob)
-		var/datum/bank_account/B = i
+	for(var/datum/bank_account/B as anything in accounts_to_rob)
 		if (B.being_dumped)
 			return FALSE
 	return TRUE
@@ -101,7 +99,8 @@
 		return
 
 	to_chat(user, span_warning("Вы быстро обналичиваете свои средства в более надёждной банковской среде. Средства в безопасности.")) // This is a reference and not a typo
-	card.registered_account.being_dumped = FALSE
+	accounts_to_rob -= card.registered_account
+	card.registered_account.stop_dump()
 
 	if(check_if_finished())
 		qdel(src)
@@ -189,7 +188,7 @@
 /obj/structure/checkoutmachine/Destroy()
 	stop_dumping()
 	STOP_PROCESSING(SSfastprocess, src)
-	priority_announce("Машина для депозитов была уничтожена в [get_area(src)]. Средства станции больше не пропадают!", sender_override = "Протокол CRAB-17")
+	priority_announce("Машина для депозитов была уничтожена в [get_area_name(src)]. Средства станции больше не пропадают!", sender_override = "Протокол CRAB-17")
 	if(internal_account.account_balance)
 		expel_cash()
 	QDEL_NULL(internal_account)
@@ -203,9 +202,6 @@
 /obj/structure/checkoutmachine/proc/start_dumping()
 	accounts_to_rob = assoc_to_values(SSeconomy.bank_accounts_by_id)
 	accounts_to_rob -= bogdanoff?.get_bank_account()
-	for(var/i in accounts_to_rob)
-		var/datum/bank_account/B = i
-		B.dumpeet()
 	dump()
 
 /**
@@ -215,15 +211,15 @@
  */
 /obj/structure/checkoutmachine/proc/dump()
 	var/percentage_lost = (rand(5, 15) / 100)
-	for(var/i in accounts_to_rob)
-		var/datum/bank_account/B = i
+	for(var/datum/bank_account/B as anything in accounts_to_rob)
 		if(!(B?.being_dumped))
 			accounts_to_rob -= B
 			continue
 		var/amount = round(B.account_balance * percentage_lost) // We don't want fractions of a credit stolen. That's just agony for everyone.
 		var/datum/bank_account/account = bogdanoff?.get_bank_account() || internal_account
 		account.transfer_money(B, amount, "?VIVA¿: !LA CRABBE¡")
-		B.bank_card_talk("Вы потеряли [percentage_lost * 100]% из ваших средств! Машина для депозитов Спейскоин находится в: [get_area(src)].")
+		B.money_crabbed += amount
+		B.bank_card_talk("Вы потеряли [percentage_lost * 100]% из ваших средств! Машина для депозитов Космокоин находится в: [get_area_name(src)].")
 	addtimer(CALLBACK(src, PROC_REF(dump)), 15 SECONDS) //Drain every 15 seconds
 
 /obj/structure/checkoutmachine/process()
@@ -235,10 +231,8 @@
  * Goes through accounts_to_rob and tells every account that the drain has stopped.
  */
 /obj/structure/checkoutmachine/proc/stop_dumping()
-	for(var/i in accounts_to_rob)
-		var/datum/bank_account/B = i
-		if(B)
-			B.being_dumped = FALSE
+	for(var/datum/bank_account/B as anything in accounts_to_rob)
+		B.stop_dump()
 
 /**
  * Splits the balance of the internal_account into several smaller piles of cash and scatters them around the area.
@@ -282,7 +276,7 @@
 	bogdanoff = user
 	addtimer(CALLBACK(src, PROC_REF(startLaunch)), 10 SECONDS)
 	sound_to_playing_players('sound/items/dump_it.ogg', 20)
-	deadchat_broadcast("Протокол CRAB-17 был активирован. Машина для депозитов Спейскоин была запущена на станцию!", turf_target = get_turf(src), message_type=DEADCHAT_ANNOUNCEMENT)
+	deadchat_broadcast("Протокол CRAB-17 был активирован. Машина для депозитов Космокоин была запущена на станцию!", turf_target = get_turf(src), message_type=DEADCHAT_ANNOUNCEMENT)
 
 /**
  * Sets up the falling animation for the checkout machine.
@@ -290,7 +284,7 @@
 /obj/effect/dumpeet_target/proc/startLaunch()
 	DF = new /obj/effect/dumpeet_fall(drop_location())
 	dump = new /obj/structure/checkoutmachine(null, bogdanoff)
-	priority_announce("Пузырь космофинансовой пирамиды лопнул! Доберитесь до машины для депозитов в [get_area(src)] и получите деньги до того как они будут безвозвратно утеряны!", sender_override = "Протокол CRAB-17")
+	priority_announce("Пузырь космофинансовой пирамиды лопнул! Доберитесь до машины для депозитов в [get_area_name(src)] и получите деньги до того, как они будут безвозвратно утеряны!", sender_override = "Протокол CRAB-17")
 	animate(DF, pixel_z = -8, time = 5, , easing = LINEAR_EASING)
 	playsound(src,  'sound/items/weapons/mortar_whistle.ogg', 70, TRUE, 6)
 	addtimer(CALLBACK(src, PROC_REF(end_launch)), 5, TIMER_CLIENT_TIME) //Go onto the last step after a very short falling animation

@@ -114,14 +114,17 @@
 // 	quirk_holder.clear_mood_event(MOOD_CATEGORY_TRANSHUMANIST_BODYPART)
 // 	quirk_holder.clear_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE)
 
-// 	var/bodypart_score = score[BODYPART_SCORE_OVERALL]
-// 	switch(bodypart_score)
-// 		if(3 to INFINITY)
-// 			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_BODYPART, /datum/mood_event/very_robotic)
-// 		if(0 to 3)
-// 			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_BODYPART, /datum/mood_event/balanced_robotic)
-// 		if(-INFINITY to 0)
-// 			quirk_holder.add_mood_event(MOOD_CATEGORY_TRANSHUMANIST_BODYPART, /datum/mood_event/very_organic)
+// /datum/quirk/transhumanist/proc/get_bodypart_score(mob/living/carbon/target, limbs_only = FALSE)
+// 	var/organic_bodytypes = 0
+// 	var/silicon_bodytypes = 0
+// 	var/other_bodytypes = FALSE
+// 	for(var/obj/item/bodypart/part as anything in target.get_bodyparts())
+// 		if(part.bodytype & BODYTYPE_ROBOTIC)
+// 			silicon_bodytypes += 1
+// 		else if(part.bodytype & BODYTYPE_ORGANIC)
+// 			organic_bodytypes += 0.1
+// 		else
+// 			other_bodytypes = TRUE
 
 // /datum/quirk_constant_data/transhumanist
 // 	associated_typepath = /datum/quirk/transhumanist

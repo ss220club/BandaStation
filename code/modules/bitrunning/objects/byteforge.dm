@@ -26,20 +26,20 @@
 		return
 
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] Panel"
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(held_item.tool_behaviour == TOOL_CROWBAR && panel_open)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/byteforge/examine(mob/user)
 	. = ..()
 
-	. += span_notice("Must be within 4 tiles of the quantum server.")
+	. += span_notice("Должны находиться в пределах 4 плиток от квантового сервера.")
 
-	. += span_notice("Its maintenance panel can be [EXAMINE_HINT("screwed")] [panel_open ? "close" : "open"].")
+	. += span_notice("Эта панель технического обслуживания может быть [panel_open ? "закрыта" : "открыта"] [EXAMINE_HINT("с помощью отвёртки")].")
 	if(panel_open)
-		. += span_notice("It can be [EXAMINE_HINT("pried")] apart.")
+		. += span_notice("Это может быть [EXAMINE_HINT("снято")] отдельно.")
 
 /obj/machinery/byteforge/update_appearance(updates)
 	. = ..()
@@ -47,14 +47,14 @@
 	setup_particles()
 
 /obj/machinery/byteforge/screwdriver_act(mob/living/user, obj/item/screwdriver)
-	. = ITEM_INTERACT_FAILURE
-	if(default_deconstruction_screwdriver(user, "[base_icon_state]_panel", base_icon_state, screwdriver))
-		return ITEM_INTERACT_SUCCESS
+	return default_deconstruction_screwdriver(user, screwdriver)
 
 /obj/machinery/byteforge/crowbar_act(mob/living/user, obj/item/crowbar)
-	. = ITEM_INTERACT_FAILURE
-	if(default_deconstruction_crowbar(crowbar))
-		return ITEM_INTERACT_SUCCESS
+	return default_deconstruction_crowbar(user, crowbar)
+
+/obj/machinery/byteforge/update_icon_state()
+	. = ..()
+	icon_state = panel_open ? "[base_icon_state]_panel" : base_icon_state
 
 /// Does some sparks after it's done
 /obj/machinery/byteforge/proc/flash(atom/movable/thing)
@@ -93,4 +93,3 @@
 	flicker()
 
 	addtimer(CALLBACK(src, PROC_REF(spawn_cache), cache), 1 SECONDS)
-

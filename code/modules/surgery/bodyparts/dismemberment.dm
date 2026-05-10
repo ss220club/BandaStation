@@ -17,7 +17,7 @@
 	if(!silent)
 		limb_owner.visible_message(span_danger("<B>[limb_owner]'s [name] is violently dismembered!</B>"))
 	INVOKE_ASYNC(limb_owner, TYPE_PROC_REF(/mob, emote), "scream")
-	playsound(get_turf(limb_owner), 'sound/effects/dismember.ogg', 80, TRUE)
+	playsound(limb_owner, 'sound/effects/dismember.ogg', 80, TRUE)
 	limb_owner.add_mood_event("dismembered_[body_zone]", /datum/mood_event/dismembered, src)
 	limb_owner.add_mob_memory(/datum/memory/was_dismembered, lost_limb = src)
 
@@ -123,7 +123,7 @@
 	if(!special)
 		phantom_owner.hud_used?.update_locked_slots()
 
-	if(bodypart_flags & BODYPART_PSEUDOPART)
+	if(bodypart_flags & (BODYPART_PSEUDOPART|BODYPART_STUMP))
 		drop_organs(phantom_owner) //Psuedoparts shouldn't have organs, but just in case
 		if(!QDELING(src)) // we might be removed as a part of something qdeling us
 			qdel(src)
@@ -204,7 +204,7 @@
 		arm_owner.set_handcuffed(null)
 		arm_owner.dropItemToGround(lost_cuffs, force = TRUE)
 	if(arm_owner.hud_used)
-		var/atom/movable/screen/inventory/hand/associated_hand = arm_owner.hud_used.hand_slots["[held_index]"]
+		var/atom/movable/screen/inventory/hand/associated_hand = arm_owner.hud_used.hand_slots[held_index]
 		associated_hand?.update_appearance()
 	if(arm_owner.num_hands == 0)
 		arm_owner.dropItemToGround(arm_owner.gloves, force = TRUE)
@@ -282,6 +282,13 @@
 	if(!can_attach_limb(new_limb_owner, special))
 		return FALSE
 
+	var/obj/item/bodypart/existing_limb = new_limb_owner.get_bodypart(body_zone, include_stumps = TRUE)
+	if(existing_limb)
+		if(existing_limb.type != stump_typepath)
+			stack_trace("Attempted to attach a limb to [new_limb_owner] in zone [body_zone] where they already have a non-stump limb")
+		existing_limb.drop_limb(special = TRUE)
+		qdel(existing_limb)
+
 	SEND_SIGNAL(new_limb_owner, COMSIG_CARBON_ATTACH_LIMB, src, special, lazy)
 	SEND_SIGNAL(src, COMSIG_BODYPART_ATTACHED, new_limb_owner, special, lazy)
 	new_limb_owner.add_bodypart(src)
@@ -322,7 +329,7 @@
 		// behavior within said bodyparts list. We sort it here, as it's the only place we make changes to bodyparts.
 		new_limb_owner.bodyparts = sort_list(new_limb_owner.bodyparts, GLOBAL_PROC_REF(cmp_bodypart_by_body_part_asc))
 		new_limb_owner.updatehealth()
-		new_limb_owner.update_body()
+		new_limb_owner.update_body() // updates lips + hair + eyes
 		new_limb_owner.update_damage_overlays()
 		if(!special)
 			new_limb_owner.hud_used?.update_locked_slots()
@@ -366,7 +373,7 @@
 		sexy_chad.lip_color = lip_color
 
 	new_head_owner.updatehealth()
-	new_head_owner.update_body()
+	new_head_owner.update_body() // updates lips + hair + eyes
 	new_head_owner.update_damage_overlays()
 
 /obj/item/bodypart/arm/try_attach_limb(mob/living/carbon/new_arm_owner, special, lazy)

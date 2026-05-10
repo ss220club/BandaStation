@@ -37,12 +37,14 @@
 	)
 
 	page_holder.give_screen_object(
-		new /atom/movable/screen/escape_menu/text/clickable/admin_help(
+		new /atom/movable/screen/escape_menu/text/clickable/admin_ticket_notification(
 			null,
 			/* hud_owner = */ null,
 			/* escape_menu = */ src,
 			/* button_text = */ "Админхелп",
 			/* offset = */ list(-241, 30),
+			/* font_size = */ 24,
+			/* on_click_callback = */ CALLBACK(src, PROC_REF(open_admin_page)),
 		)
 	)
 
@@ -66,7 +68,7 @@
 			/* button_text = */ "Quit",
 			/* offset = */ list(-311, 30),
 			/* font_size = */ 24,
-			/* on_click_callback = */ CALLBACK(src, PROC_REF(home_quit)),
+			/* on_click_callback = */ CALLBACK(src, PROC_REF(quit_game_prompt)),
 		)
 	)
 
@@ -196,12 +198,6 @@
 
 /datum/escape_menu/proc/home_resume()
 	qdel(src)
-
-/datum/escape_menu/proc/home_quit()
-	var/confirmquit = tgui_alert(usr, "Are you sure you want to quit?", "Quit", list("Yes", "No"))
-	if(confirmquit != "Yes")
-		return
-	winset(usr, null, list("command"=".quit"))
 
 /datum/escape_menu/proc/home_open_character_settings()
 	client?.prefs.current_window = PREFERENCE_TAB_CHARACTER_PREFERENCES

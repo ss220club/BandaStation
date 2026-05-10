@@ -1,7 +1,7 @@
 /// The subsystem for controlling drastic performance enhancements aimed at reducing server load for a smoother albeit slightly duller gaming experience
 SUBSYSTEM_DEF(lag_switch)
 	name = "Lag Switch"
-	flags = SS_NO_FIRE
+	ss_flags = SS_NO_FIRE
 
 	/// If the lag switch measures should attempt to trigger automatically, TRUE if a config value exists
 	var/auto_switch = FALSE
@@ -10,7 +10,7 @@ SUBSYSTEM_DEF(lag_switch)
 	/// List of bools corresponding to code/__DEFINES/lag_switch.dm
 	var/static/list/measures[MEASURES_AMOUNT]
 	/// List of measures that toggle automatically
-	var/list/auto_measures = list(DISABLE_GHOST_ZOOM_TRAY, DISABLE_RUNECHAT, DISABLE_USR_ICON2HTML, DISABLE_PARALLAX, DISABLE_FOOTSTEPS)
+	var/list/auto_measures = list(DISABLE_GHOST_ZOOM_TRAY, DISABLE_RUNECHAT, DISABLE_USR_ICON2HTML, DISABLE_PARALLAX, DISABLE_FOOTSTEPS, DISABLE_DEAD_RUNECHAT)
 	/// Timer ID for the automatic veto period
 	var/veto_timer_id
 	/// Cooldown between say verb uses when slowmode is enabled

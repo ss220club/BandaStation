@@ -467,6 +467,7 @@
 	midround_type = LIGHT_MIDROUND
 	false_alarm_able = TRUE
 	pref_flag = ROLE_BLOOD_WORM_INFESTATION
+	jobban_flag = ROLE_BLOOD_WORM
 	candidate_role = "Blood Worm"
 	ruleset_flags = RULESET_INVADER
 	weight = 2 // For reference, Nightmare has a weight of 5.
@@ -494,7 +495,7 @@
 	candidate.current.move_into_vent(vent)
 
 /datum/dynamic_ruleset/midround/from_ghosts/blood_worms/proc/announce_worms()
-	priority_announce("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", ANNOUNCER_ALIENS)
+	priority_announce("На борту [station_name()] обнаружены неопознанные формы жизни. Перекройте все внешние шлюзы, включая трубы и вентиляции.", "Неопознанные формы жизни", ANNOUNCER_ALIENS)
 
 /datum/dynamic_ruleset/midround/from_ghosts/blood_worms/false_alarm()
 	announce_worms()

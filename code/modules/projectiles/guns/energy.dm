@@ -200,6 +200,7 @@
 /obj/item/gun/energy/recharge_newshot(no_cyborg_drain)
 	if (!ammo_type || !cell)
 		return
+
 	if(use_cyborg_cell && !no_cyborg_drain)
 		if(iscyborg(loc))
 			var/mob/living/silicon/robot/robot = loc
@@ -207,12 +208,15 @@
 				var/obj/item/ammo_casing/energy/shot = ammo_type[select] //Necessary to find cost of shot
 				if(robot.cell.use(shot.e_cost)) //Take power from the borg...
 					cell.give(shot.e_cost) //... to recharge the shot
+					return ..()
+
 	if(!chambered)
 		var/obj/item/ammo_casing/energy/AC = ammo_type[select]
 		if(cell.charge >= AC.e_cost) //if there's enough power in the cell cell...
 			chambered = AC //...prepare a new shot based on the current ammo type selected
 			if(!chambered.loaded_projectile)
 				chambered.newshot()
+				return ..()
 
 /obj/item/gun/energy/handle_chamber()
 	if(chambered && !chambered.loaded_projectile) //if loaded_projectile is null, i.e the shot has been fired...
@@ -231,6 +235,18 @@
 		process_chamber() // Ditto.
 	return ..()
 
+//BANDASTATION ADDITION: START
+GLOBAL_LIST_INIT(ammo_mode_translations, list(
+	"stun" = "оглушение",
+	"disable" = "обезвреживание",
+	"kill" = "летальный",
+	"scatter" = "разброс",
+	"snare" = "силки",
+	"DESTROY" = "УНИЧТОЖЕНИЕ",
+	"ion" = "ионный"
+))
+//BANDASTATION ADDITION: END
+
 /obj/item/gun/energy/proc/select_fire(mob/living/user)
 	select++
 	if (select > ammo_type.len)
@@ -241,7 +257,8 @@
 	if (shot.muzzle_flash_color)
 		set_light_color(shot.muzzle_flash_color)
 	if (shot.select_name && user)
-		balloon_alert(user, "set to [shot.select_name]")
+		var/display_name = GLOB.ammo_mode_translations[shot.select_name] || shot.select_name // BANDASTATION ADDITION
+		balloon_alert(user, "выбран режим: [display_name]")
 	chambered = null
 	recharge_newshot(TRUE)
 	update_appearance()
@@ -344,13 +361,13 @@
 		if(!loaded_projectile)
 			. = ""
 		else if(loaded_projectile.damage <= 0 || loaded_projectile.damage_type == STAMINA)
-			user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается зажечь [A.declent_ru(ACCUSATIVE)][A.loc == user ? " у себя" : ""] с помощью [declent_ru(GENITIVE)], но ничего не происходит. Тупица."))
+			user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается зажечь [A.loc == user ? "свою " : " "][A.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)], но ничего не происходит. Тупица."))
 			playsound(user, E.fire_sound, 50, TRUE)
 			playsound(user, loaded_projectile.hitsound, 50, TRUE)
 			cell.use(E.e_cost)
 			. = ""
 		else if(loaded_projectile.damage_type != BURN)
-			user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается зажечь [A.declent_ru(ACCUSATIVE)][A.loc == user ? " у себя" : ""] с помощью [declent_ru(GENITIVE)], но создает лишь разрушение. Тупица."))
+			user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается зажечь [A.declent_ru(ACCUSATIVE)][A.loc == user ? "свою " : " "][A.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)], но создает лишь разрушение. Тупица."))
 			playsound(user, E.fire_sound, 50, TRUE)
 			playsound(user, loaded_projectile.hitsound, 50, TRUE)
 			cell.use(E.e_cost)
@@ -360,7 +377,7 @@
 			playsound(user, E.fire_sound, 50, TRUE)
 			playsound(user, loaded_projectile.hitsound, 50, TRUE)
 			cell.use(E.e_cost)
-			. = span_rose("[capitalize(user.declent_ru(NOMINATIVE))] непринужденно зажигает [A.declent_ru(ACCUSATIVE)][A.loc == user ? " у себя" : ""] с помощью [declent_ru(GENITIVE)]. Емае.")
+			. = span_rose("[capitalize(user.declent_ru(NOMINATIVE))] непринужденно зажигает [A.declent_ru(ACCUSATIVE)][A.loc == user ? "свою " : " "][A.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]. Ёмаё.")
 
 /obj/item/gun/energy/proc/instant_recharge()
 	SIGNAL_HANDLER

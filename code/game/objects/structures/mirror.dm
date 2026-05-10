@@ -61,10 +61,10 @@
 	register_context()
 
 /obj/structure/mirror/proc/can_reflect(atom/movable/target)
-	///I'm doing it this way too, because the signal is sent before the broken variable is set to TRUE.
-	if(atom_integrity <= integrity_failure * max_integrity)
+	// I'm doing it this way too, because the signal is sent before the broken variable is set to TRUE.
+	if(atom_integrity <= integrity_failure * max_integrity || broken)
 		return FALSE
-	if(broken || !isliving(target) || HAS_TRAIT(target, TRAIT_NO_MIRROR_REFLECTION))
+	if(!isliving(target) || HAS_TRAIT(target, TRAIT_NO_MIRROR_REFLECTION))
 		return FALSE
 	return TRUE
 
@@ -262,7 +262,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror/broken, 28)
 		return
 	user.set_eye_color(sanitize_hexcolor(new_eye_color))
 	user.dna.update_ui_block(/datum/dna_block/identity/eye_colors)
-	user.update_body()
+	user.update_eyes()
 	to_chat(user, span_notice("You gaze at your new eyes with your new eyes. Perfect!"))
 
 /obj/structure/mirror/examine(mob/user)

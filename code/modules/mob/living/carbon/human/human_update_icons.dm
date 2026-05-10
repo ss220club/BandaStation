@@ -48,27 +48,27 @@ There are several things that need to be remembered:
 /* --------------------------------------- */
 //For legacy support.
 /mob/living/carbon/human/regenerate_icons()
-
-	if(!..())
-		update_worn_undersuit()
-		update_worn_id()
-		update_worn_glasses()
-		update_worn_gloves()
-		update_worn_ears()
-		update_worn_shoes()
-		update_suit_storage()
-		update_worn_mask()
-		update_worn_head()
-		update_worn_belt()
-		update_worn_back()
-		update_worn_oversuit()
-		update_pockets()
-		update_worn_neck()
-		update_transform()
-		//mutations
-		update_mutations_overlay()
-		//damage overlays
-		update_damage_overlays()
+	. = ..()
+	update_worn_undersuit()
+	update_worn_id()
+	update_worn_glasses()
+	update_worn_gloves()
+	update_worn_ears()
+	update_worn_shoes()
+	update_suit_storage()
+	update_worn_mask()
+	update_worn_head()
+	update_worn_belt()
+	update_worn_back()
+	update_worn_oversuit()
+	update_pockets()
+	update_worn_neck()
+	update_transform()
+	update_mutations_overlay()
+	update_damage_overlays()
+	// These are done via parent call update_body(), keeping them here for clarity
+	// update_hair()
+	// update_eyes()
 
 /* --------------------------------------- */
 //vvvvvv UPDATE_INV PROCS vvvvvv
@@ -120,6 +120,7 @@ There are several things that need to be remembered:
 			female_uniform = woman ? uniform.female_sprite_flags : null,
 			override_state = target_overlay,
 			override_file = handled_by_bodyshape ? icon_file : null,
+			female_version = uniform.female_version, // BANDASTATION EDIT - more masks for female clothing
 		)
 
 		var/obj/item/bodypart/chest/my_chest = get_bodypart(BODY_ZONE_CHEST)
@@ -587,13 +588,17 @@ There are several things that need to be remembered:
 	return hands
 
 /// Modifies a sprite slightly to conform to female body shapes
-/proc/wear_female_version(icon_state, icon, type, greyscale_colors)
+/proc/wear_female_version(icon_state, icon, type, greyscale_colors, datum/female_uniform/female_version) // BANDASTATION EDIT - more masks for female clothing
 	var/index = "[icon_state]-[greyscale_colors]"
 	var/static/list/female_clothing_icons = list()
 	var/icon/female_clothing_icon = female_clothing_icons[index]
 	if(!female_clothing_icon) //Create standing/laying icons if they don't exist
-		var/female_icon_state = "female[type == FEMALE_UNIFORM_FULL ? "_full" : ((!type || type & FEMALE_UNIFORM_TOP_ONLY) ? "_top" : "")][type & FEMALE_UNIFORM_NO_BREASTS ? "_no_breasts" : ""]"
-		var/icon/female_cropping_mask = icon('icons/mob/clothing/under/masking_helpers.dmi', female_icon_state)
+		// BANDASTATION EDIT START - more masks for female clothing
+		var/female_icon_state = female_version::mask_icon_state || \
+			"female[type == FEMALE_UNIFORM_FULL ? "_full" : ((!type || type & FEMALE_UNIFORM_TOP_ONLY) ? "_top" : "")][type & FEMALE_UNIFORM_NO_BREASTS ? "_no_breasts" : ""]"
+		var/mask_icon = female_version::mask_icon || FEMALE_MASK_ICON_DEFAULT
+		var/icon/female_cropping_mask = icon(mask_icon, female_icon_state)
+		// BANDASTATION EDIT END
 		female_clothing_icon = icon(icon, icon_state)
 		female_clothing_icon.Blend(female_cropping_mask, ICON_MULTIPLY)
 		female_clothing_icon = fcopy_rsc(female_clothing_icon)
@@ -817,6 +822,7 @@ generate/load female uniform sprites matching all previously decided variables
 	female_uniform = NO_FEMALE_UNIFORM,
 	override_state = null,
 	override_file = null,
+	datum/female_uniform/female_version, // BANDASTATION EDIT - more masks for female clothing
 )
 
 	//Find a valid icon_state from variables+arguments
@@ -837,6 +843,7 @@ generate/load female uniform sprites matching all previously decided variables
 			icon = file2use,
 			type = female_uniform,
 			greyscale_colors = greyscale_colors,
+			female_version = female_version, // BANDASTATION EDIT - more masks for female clothing
 		)
 	if(!isinhands && is_digi && (supports_variations_flags & CLOTHING_DIGITIGRADE_MASK))
 		building_icon = wear_digi_version(
@@ -919,61 +926,78 @@ generate/load female uniform sprites matching all previously decided variables
 					break
 
 /mob/living/carbon/human/update_body(is_creating = FALSE)
-	update_eyes()
-	update_underwear()
+	remove_overlay(BODY_LAYER)
+
+	var/list/body_overlays = list()
+	body_overlays += get_underwear_overlays()
+
+	if(length(body_overlays))
+		overlays_standing[BODY_LAYER] = body_overlays
+		apply_overlay(BODY_LAYER)
+
+	// parent call will update the actual bodyparts
 	return ..()
 
-/mob/living/carbon/human/proc/update_underwear()
-	remove_overlay(BODY_LAYER)
+/// Returns a list of all underclothing overlays to be applied to the mob
+/mob/living/carbon/human/proc/get_underwear_overlays()
+	. = list()
 	if(HAS_TRAIT(src, TRAIT_HUSK) || HAS_TRAIT(src, TRAIT_INVISIBLE_MAN) || HAS_TRAIT(src, TRAIT_NO_UNDERWEAR))
-		return
+		return .
+
 	// Underwear, Undershirts & Socks
-	var/list/standing = list()
+	var/active_bodyshapes = get_active_bodyshapes()
 	if(underwear)
-		var/datum/sprite_accessory/underwear/undie_accessory = SSaccessories.underwear_list[underwear]
-		var/mutable_appearance/underwear_overlay
-		if(undie_accessory)
-			if(dna.species.sexes && physique == FEMALE && (undie_accessory.gender == MALE))
-				underwear_overlay = mutable_appearance(wear_female_version(undie_accessory.icon_state, undie_accessory.icon, FEMALE_UNIFORM_FULL), layer = -BODY_LAYER)
-			else
-				underwear_overlay = mutable_appearance(undie_accessory.icon, undie_accessory.icon_state, -BODY_LAYER)
-			if(!undie_accessory.use_static)
-				underwear_overlay.color = underwear_color
-			standing += underwear_overlay
+		var/datum/sprite_accessory/clothing/underwear/undie_accessory = SSaccessories.underwear_list[underwear]
+		var/mutable_appearance/underwear_overlay = undie_accessory?.make_appearance(underwear_color, physique, active_bodyshapes)
+		if(underwear_overlay)
+			. += underwear_overlay
 
 	if(undershirt)
-		var/datum/sprite_accessory/undershirt/undie_accessory = SSaccessories.undershirt_list[undershirt]
-		if(undie_accessory)
-			var/mutable_appearance/working_shirt
-			if(dna.species.sexes && physique == FEMALE)
-				working_shirt = mutable_appearance(wear_female_version(undie_accessory.icon_state, undie_accessory.icon), layer = -BODY_LAYER)
-			else
-				working_shirt = mutable_appearance(undie_accessory.icon, undie_accessory.icon_state, layer = -BODY_LAYER)
-			standing += working_shirt
+		var/datum/sprite_accessory/clothing/undershirt/shirt_accessory = SSaccessories.undershirt_list[undershirt]
+		var/mutable_appearance/shirt_overlay = shirt_accessory?.make_appearance(null, physique, active_bodyshapes)
+		if(shirt_overlay)
+			. += shirt_overlay
 
 	if(socks && num_legs >= 2 && !(bodyshape & BODYSHAPE_DIGITIGRADE))
-		var/datum/sprite_accessory/socks/undie_accessory = SSaccessories.socks_list[socks]
-		if(undie_accessory)
-			standing += mutable_appearance(undie_accessory.icon, undie_accessory.icon_state, -BODY_LAYER)
+		var/datum/sprite_accessory/clothing/socks/sock_accessory = SSaccessories.socks_list[socks]
+		var/mutable_appearance/socks_overlay = sock_accessory?.make_appearance(null, physique, active_bodyshapes)
+		if(socks_overlay)
+			. += socks_overlay
 
-	if(standing.len)
-		overlays_standing[BODY_LAYER] = standing
+	return .
 
-	apply_overlay(BODY_LAYER)
+/// Updates eye sprites if relevant
+/mob/living/proc/update_eyes(refresh = TRUE)
+	return
 
-/mob/living/carbon/human/proc/update_eyes()
+/mob/living/carbon/human/update_eyes(refresh = TRUE)
 	remove_overlay(EYES_LAYER)
-	if(HAS_TRAIT(src, TRAIT_HUSK) || HAS_TRAIT(src, TRAIT_INVISIBLE_MAN))
-		return
+
 	var/obj/item/bodypart/head/noggin = get_bodypart(BODY_ZONE_HEAD)
-	if(!(noggin?.head_flags & HEAD_EYESPRITES))
+	if(isnull(noggin) || noggin.is_husked || noggin.is_invisible)
 		return
-	// eyes (missing eye sprites get handled by the head itself, but sadly we have to do this stupid shit here, for now)
-	var/obj/item/organ/eyes/eye_organ = get_organ_slot(ORGAN_SLOT_EYES)
-	if(eye_organ)
-		eye_organ.refresh(call_update = FALSE)
-		overlays_standing[EYES_LAYER] = eye_organ.generate_body_overlay(src)
+
+	if(refresh)
+		var/obj/item/organ/eyes/eyes = locate() in noggin
+		eyes?.refresh(src, call_update = FALSE)
+
+	var/list/eye_overlays = noggin.get_eye_overlays()
+	if(length(eye_overlays))
+		overlays_standing[EYES_LAYER] = eye_overlays
 		apply_overlay(EYES_LAYER)
+
+/// Updates hair sprites if relevant
+/mob/living/proc/update_hair()
+	return
+
+/mob/living/carbon/human/update_hair()
+	remove_overlay(HAIR_LAYER)
+
+	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
+	var/list/head_overlays = head?.get_hair_overlays()
+	if(length(head_overlays))
+		overlays_standing[HAIR_LAYER] = head_overlays
+		apply_overlay(HAIR_LAYER)
 
 /// Updates face (as of now, only eye) offsets
 /mob/living/carbon/human/update_face_offset()
@@ -994,8 +1018,8 @@ generate/load female uniform sprites matching all previously decided variables
 	apply_overlay(EYES_LAYER)
 
 
-// Only renders the head of the human
-/mob/living/carbon/human/proc/update_body_parts_head_only(update_limb_data)
+/// Makes all aspects of the mob invisibile but the head and its associated sprites
+/mob/living/carbon/human/proc/render_only_head()
 	if(!dna?.species)
 		return
 
@@ -1004,11 +1028,13 @@ generate/load female uniform sprites matching all previously decided variables
 	if(!istype(my_head))
 		return
 
-	my_head.update_limb(is_creating = update_limb_data)
-
-	add_overlay(my_head.get_limb_icon(dropped = FALSE, update_on = src))
+	cut_overlays()
+	my_head.update_limb()
+	add_overlay(my_head.get_limb_icon())
 	update_worn_head()
 	update_worn_mask()
+	update_eyes()
+	update_hair()
 
 /**
  * Used to perform regular updates to the limbs of humans with special bodyshapes
@@ -1026,7 +1052,7 @@ generate/load female uniform sprites matching all previously decided variables
 		// optimization - none of our limbs or organs have the desired shape
 		return .
 
-	for(var/obj/item/bodypart/limb as anything in bodyparts)
+	for(var/obj/item/bodypart/limb as anything in get_bodyparts())
 		var/checked_bodyshape = limb.bodyshape
 		// accounts for stuff like snouts
 		for(var/obj/item/organ/organ in limb)

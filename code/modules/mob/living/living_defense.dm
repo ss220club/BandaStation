@@ -133,7 +133,7 @@
 		if (SUPPRESSED_QUIET)
 			to_chat(src, span_userdanger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по вам[organ_hit_text]!"))
 		if (SUPPRESSED_NONE)
-			visible_message(span_danger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по [declent_ru(DATIVE)][organ_hit_text]!"), \
+			visible_message(span_danger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает [declent_ru(DATIVE)][organ_hit_text]!"), \
 					span_userdanger("[capitalize(proj.declent_ru(NOMINATIVE))] попадает по вам[organ_hit_text]!"), null, COMBAT_MESSAGE_RANGE)
 			if(is_blind())
 				to_chat(src, span_userdanger("Вы чувствуете, как что-то попадает по вам[organ_hit_text]!"))
@@ -225,8 +225,7 @@
 	. = combat_mode
 	combat_mode = new_mode
 	SEND_SIGNAL(src, COMSIG_COMBAT_MODE_TOGGLED)
-	if(hud_used?.action_intent)
-		hud_used.action_intent.update_appearance()
+	hud_used?.screen_objects[HUD_MOB_INTENTS]?.update_appearance()
 	if(silent || !client?.prefs.read_preference(/datum/preference/toggle/sound_combatmode))
 		return
 	if(combat_mode)
@@ -331,13 +330,13 @@
  */
 /mob/living/proc/grab(mob/living/target)
 	if(!istype(target))
-		return FALSE
+		return GRAB_SKIP
 	if(SEND_SIGNAL(src, COMSIG_LIVING_GRAB, target) & (COMPONENT_CANCEL_ATTACK_CHAIN|COMPONENT_SKIP_ATTACK))
 		return FALSE
 	if(target.check_block(src, 0, "захват [declent_ru(GENITIVE)]", UNARMED_ATTACK))
 		return FALSE
 	target.grabbedby(src)
-	return TRUE
+	return GRAB_SUCCESS
 
 /**
  * Called when this mob is grabbed by another mob.
@@ -707,12 +706,12 @@
 		SEND_SOUND(src, sound('sound/items/weapons/flash_ring.ogg',0, 1, 0, 250))
 
 	if(ears.damage >= 15 && prob(ears.damage - 5))
-		to_chat(src, span_userdanger("You can't hear anything!"))
+		to_chat(src, span_userdanger("Вы ничего не слышите!"))
 		// Makes you deaf, enough that you need a proper source of healing, it won't self heal
 		// you need earmuffs, inacusiate, or replacement
 		ears.set_organ_damage(ears.maxHealth)
 	else if(ears.damage >= 5)
-		to_chat(src, span_warning("Your ears start to ring[ears.damage >= 15 ? " badly!":"!"]"))
+		to_chat(src, span_warning("У вас начинает[ears.damage >= 15 ? " очень сильно":""] звенеть в ушах!"))
 
 
 //to damage the clothes worn by a mob
