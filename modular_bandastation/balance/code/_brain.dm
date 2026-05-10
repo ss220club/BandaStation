@@ -56,7 +56,7 @@
 /// Handles breakout attempts when a contained mob uses the resist action
 /// Players can escape the stasis bag through a timed escape sequence that persists
 /// even if the bag is moved, preventing permanent entrapment
-/obj/structure/closet/body_bag/stasis/container_resist_act(mob/living/user)
+/obj/structure/closet/body_bag/stasis/container_resist_act(mob/living/user, loc_required = TRUE)
 	// Early exit if bag is already open or interaction is already in progress
 	if(opened || DOING_INTERACTION_WITH_TARGET(user, src))
 		return
