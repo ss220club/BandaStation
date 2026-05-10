@@ -57,8 +57,10 @@
 		if(prob(30))
 			playsound(src, 'sound/items/tools/welder.ogg', 25, TRUE)
 
+//MARK: Процесс ремонта
 /obj/structure/bodycontainer/crematorium/broken/attackby(obj/item/W, mob/user, params)
 
+//MARK: Первая стадия ремонта - использование 5 игнайтеров
 	if(istype(W, /obj/item/assembly/igniter) && repair_stage == 0)
 
 		qdel(W)
@@ -76,6 +78,7 @@
 
 		return
 
+//MARK: Вторая стадия ремонта - использование отвертки
 	if(W.tool_behaviour == TOOL_SCREWDRIVER && repair_stage == 1)
 
 		playsound(src, 'sound/items/tools/screwdriver.ogg', 50, TRUE)
@@ -91,6 +94,7 @@
 
 		return
 
+//MARK: Третья стадия ремонта - применение 2 листов пластали, смена спрайта
 	if(istype(W, /obj/item/stack/sheet/plasteel) && repair_stage == 2)
 
 		var/obj/item/stack/sheet/plasteel/P = W
@@ -108,6 +112,7 @@
 
 		return
 
+//MARK: Четвертая стадия ремонта - использование сварки, превращение обратно в функционирующий крематорий
 	if(W.tool_behaviour == TOOL_WELDER && repair_stage == 3)
 
 		if(!W.tool_start_check(user, amount=0))
