@@ -541,7 +541,6 @@ GLOBAL_LIST_EMPTY(crematoriums)
 	anchored = TRUE
 
 	var/repair_stage = 0
-	var/igniters_installed = 0
 	var/sparking = TRUE
 
 /obj/structure/bodycontainer/crematorium/broken/Initialize(mapload)
@@ -582,11 +581,13 @@ GLOBAL_LIST_EMPTY(crematoriums)
 
 		igniters_installed++
 
-		to_chat(user, span_notice("Вы устанавливаете воспламенитель в крематорий. ([igniters_installed]/5)"))
+		to_chat(user, span_notice("Вы устанавливаете воспламенитель в крематорий. ([igniters_installed]/[CREMATORIUM_REPAIR_IGNITERS])"))
 
-		if(igniters_installed >= 5)
+		if(igniters_installed >= CREMATORIUM_REPAIR_IGNITERS)
+
 			repair_stage = 1
 			sparking = FALSE
+
 			to_chat(user, span_notice("Система поджига восстановлена. Теперь необходимо закрепить воспламенители отверткой."))
 
 		return
