@@ -75,19 +75,17 @@
 // 	icon = 'modular_bandastation/objects/icons/obj/structures/flora/tree.dmi'
 // 	icon_state = "large_tree_stump"
 
-/obj/structure/flora/fruit/apple
+/obj/structure/flora/tree/fruit
+	name = "fruit tree"
+	icon = 'modular_bandastation/objects/icons/obj/structures/flora/fruit.dmi'
+	pixel_x = 0
+
+/obj/structure/flora/tree/fruit/get_seethrough_map()
+	return SEE_THROUGH_MAP_DEFAULT
+
+/obj/structure/flora/tree/fruit/apple
 	name = "apple tree"
 	desc = "A coniferous apple tree."
-	icon = 'modular_bandastation/objects/icons/obj/structures/flora/fruit.dmi'
-	icon_state = "apple1"
-
-/obj/structure/flora/fruit/proc/get_seethrough_map()
-	return SEE_THROUGH_MAP_DEFAULT_TWO_TALL
-
-/obj/structure/flora/fruit/apple1
-	name = "apple tree"
-	desc = "A coniferous apple tree."
-	icon = 'modular_bandastation/objects/icons/obj/structures/flora/fruit.dmi'
 	icon_state = "apple0"
 	var/list/icon_states = list("apple0", "apple1", "apple2", "apple3")
 
@@ -100,7 +98,7 @@
 /obj/structure/flora/tree/fruit/apple/style_4
 	icon_state = "apple3"
 
-/obj/structure/flora/fruit/apple/style_random/Initialize(mapload)
+/obj/structure/flora/tree/fruit/apple/style_random/Initialize(mapload)
 	. = ..()
 	icon_state = "apple[rand(0,3)]"
 	update_appearance()
@@ -108,7 +106,6 @@
 /obj/structure/flora/tree/fruit/pear
 	name = "pear tree"
 	desc = "A coniferous pear tree."
-	icon = 'modular_bandastation/objects/icons/obj/structures/flora/fruit.dmi'
 	icon_state = "pear0"
 	var/list/icon_states = list("pear0", "pear1", "pear2", "pear3")
 
@@ -129,7 +126,6 @@
 /obj/structure/flora/tree/fruit/lemon
 	name = "lemon tree"
 	desc = "A coniferous lemon tree."
-	icon = 'modular_bandastation/objects/icons/obj/structures/flora/fruit.dmi'
 	icon_state = "lemon0"
 	var/list/icon_states = list("lemon0", "lemon1", "lemon2", "lemon3")
 
@@ -150,7 +146,6 @@
 /obj/structure/flora/tree/fruit/lime
 	name = "lime tree"
 	desc = "A coniferous lime tree."
-	icon = 'modular_bandastation/objects/icons/obj/structures/flora/fruit.dmi'
 	icon_state = "lime0"
 	var/list/icon_states = list("lime0", "lime1", "lime2", "lime3")
 
@@ -171,7 +166,6 @@
 /obj/structure/flora/tree/fruit/plum
 	name = "plum tree"
 	desc = "A coniferous plum tree."
-	icon = 'modular_bandastation/objects/icons/obj/structures/flora/fruit.dmi'
 	icon_state = "plum0"
 	var/list/icon_states = list("plum0", "plum1", "plum2", "plum3")
 
@@ -192,7 +186,6 @@
 /obj/structure/flora/tree/fruit/tangerine
 	name = "tangerine tree"
 	desc = "A coniferous tangerine tree."
-	icon = 'modular_bandastation/objects/icons/obj/structures/flora/fruit.dmi'
 	icon_state = "tangerine0"
 	var/list/icon_states = list("tangerine0", "tangerine1", "tangerine2", "tangerine3")
 
