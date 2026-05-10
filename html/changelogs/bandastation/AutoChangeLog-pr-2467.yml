@@ -1,0 +1,4 @@
+author: "SuperNova9000"
+delete-after: True
+changes:
+  - bugfix: "Исправлена недоработка, позволявшая наносить вред при помощи extendo-hand и наличии трейта пацифизм."
