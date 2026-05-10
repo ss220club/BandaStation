@@ -24,6 +24,7 @@
 	anchored = TRUE
 
 	var/repair_stage = 0
+	var/igniters_installed = 0
 	var/sparking = TRUE
 
 /obj/structure/bodycontainer/crematorium/broken/Initialize(mapload)
