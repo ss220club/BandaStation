@@ -30,6 +30,16 @@ const DEFAULT_OUTPUT = join(
 const KNOWN_GENDER_VALUES = new Set(['male', 'female', 'neuter', 'plural']);
 const VALID_ASSIGNMENT_KEY = /^[A-Za-z_][A-Za-z0-9_]*$/;
 
+const PREFERRED_ASSIGNMENT_KEYS: readonly string[] = [
+  'nominative',
+  'genitive',
+  'dative',
+  'accusative',
+  'instrumental',
+  'prepositional',
+  'gender',
+];
+
 interface FragmentRecord {
   relativePath: string;
   englishKey: string;
@@ -192,18 +202,9 @@ function tomlDoubleQuotedString(value: string): string {
 }
 
 function formatAssignmentLines(assignments: Record<string, string>): string[] {
-  const preferred = [
-    'nominative',
-    'genitive',
-    'dative',
-    'accusative',
-    'instrumental',
-    'prepositional',
-    'gender',
-  ];
   const lines: string[] = [];
   const seen = new Set<string>();
-  for (const name of preferred) {
+  for (const name of PREFERRED_ASSIGNMENT_KEYS) {
     if (Object.hasOwn(assignments, name)) {
       lines.push(`${name} = ${tomlDoubleQuotedString(assignments[name]!)}`);
       seen.add(name);
@@ -226,6 +227,29 @@ function buildFragmentBody(
     ...formatAssignmentLines(assignments),
     '',
   ].join('\n');
+}
+
+/** First wins; later duplicates become warnings with stable sort by path. */
+function dedupeByEnglishKey(
+  sortedByKeyAndPath: FragmentRecord[],
+  fragmentsRoot: string,
+): { unique: FragmentRecord[]; warns: string[]; duplicates: number } {
+  const warns: string[] = [];
+  const seenKeys = new Set<string>();
+  const unique: FragmentRecord[] = [];
+  let duplicates = 0;
+  for (const entry of sortedByKeyAndPath) {
+    if (seenKeys.has(entry.englishKey)) {
+      warns.push(
+        `${join(fragmentsRoot, ...entry.relativePath.split(/[/\\]/))}: duplicate english key \`${entry.englishKey}\` (skipped)`,
+      );
+      duplicates++;
+      continue;
+    }
+    seenKeys.add(entry.englishKey);
+    unique.push(entry);
+  }
+  return { unique, warns, duplicates };
 }
 
 function sortRecords(records: FragmentRecord[]): FragmentRecord[] {
@@ -284,20 +308,12 @@ function runMerge(
     else warns.push(...errs);
   }
 
-  let duplicates = 0;
-  const seenKeys = new Set<string>();
-  const unique: FragmentRecord[] = [];
-  for (const entry of sortRecords(good)) {
-    if (seenKeys.has(entry.englishKey)) {
-      warns.push(
-        `${join(fragmentsRoot, ...entry.relativePath.split(/[/\\]/))}: duplicate  english key \`${entry.englishKey}\` (skipped)`,
-      );
-      duplicates++;
-      continue;
-    }
-    seenKeys.add(entry.englishKey);
-    unique.push(entry);
-  }
+  const {
+    unique,
+    warns: dupWarns,
+    duplicates,
+  } = dedupeByEnglishKey(sortRecords(good), fragmentsRoot);
+  warns.push(...dupWarns);
 
   for (const w of warns) console.error(w);
 

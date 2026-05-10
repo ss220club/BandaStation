@@ -5,6 +5,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 OUT_DIR="${ROOT}/modular_bandastation/translations/code/translation_data/ru_names"
+CASE_KEYS=(nominative genitive dative accusative instrumental prepositional)
 
 normalize() {
   local t=$1
@@ -31,34 +32,11 @@ phrase_to_stem() {
   printf '%s' "$s"
 }
 
-toml_double_quote() {
-  local s="$1" out='"'
-  local c i len o
-  len=${#s}
-  for ((i = 0; i < len; i++)); do
-    c=${s:i:1}
-    case "$c" in
-      \\) out+='\\' ;;
-      \") out+='\"' ;;
-      $'\n') out+='\n' ;;
-      $'\r') out+='\r' ;;
-      $'\t') out+='\t' ;;
-      *)
-        if [[ ${#c} -eq 1 ]]; then
-          printf -v o %d "'$c"
-          if ((o < 32)); then
-            out+=$(printf '\\u%04x' "$o")
-          else
-            out+="$c"
-          fi
-        else
-          out+="$c"
-        fi
-        ;;
-    esac
-  done
-  out+='"'
-  printf '%s' "$out"
+toml_double_quoted_string() {
+  local s="$1"
+  s=${s//\\/\\\\}
+  s=${s//\"/\\\"}
+  printf '"%s"' "$s"
 }
 
 table_header_line() {
@@ -101,6 +79,8 @@ else
 fi
 
 phrase=$(normalize "$phrase")
+# Drop ASCII control chars (merge step rejects malformed strings); keeps Cyrillic/other UTF-8 intact.
+phrase=$(LC_ALL=C printf '%s' "$phrase" | tr -d '\000-\037\177')
 if [[ -z "$phrase" ]]; then
   echo "$0: empty phrase — select text in the editor or pass a phrase" >&2
   exit 1
@@ -108,18 +88,14 @@ fi
 
 GENDER=$(printf '%s' "$GENDER" | tr '[:upper:]' '[:lower:]')
 key=$phrase
-val=$(toml_double_quote "$key")
-g=$(toml_double_quote "$GENDER")
+val=$(toml_double_quoted_string "$key")
+g=$(toml_double_quoted_string "$GENDER")
 
-body=$(table_header_line "$key")
-body+=$'\n'
-body+=$'nominative = '"$val"$'\n'
-body+=$'genitive = '"$val"$'\n'
-body+=$'dative = '"$val"$'\n'
-body+=$'accusative = '"$val"$'\n'
-body+=$'instrumental = '"$val"$'\n'
-body+=$'prepositional = '"$val"$'\n'
-body+=$'gender = '"$g"$'\n'
+body=$(table_header_line "$key")$'\n'
+for fk in "${CASE_KEYS[@]}"; do
+  body+="${fk} = ${val}"$'\n'
+done
+body+='gender = '"$g"$'\n'
 body+=$'\n'
 
 if [[ -n "$OUTPUT" ]]; then
@@ -139,7 +115,7 @@ mkdir -p "$parent"
 printf '%s' "$body" >"$out_path"
 
 if [[ -t 2 ]]; then
-  printf '\n \033[1;32m\033[0m \033[1mru_names\033[0m - фрагмент записан:\n   \033[36m%s\033[0m\n' "$out_path" >&2
+  printf '\n \033[1;32mok\033[0m \033[1mru_names\033[0m — фрагмент записан:\n   \033[36m%s\033[0m\n' "$out_path" >&2
 else
   printf '\n [ru_names] fragment saved:\n   %s\n' "$out_path" >&2
 fi
