@@ -129,3 +129,5 @@
 #include "code/structures/crates_lockers/closets/secure/nanotrasen_representative.dm"
 
 #include "code/mecha/mecha.dm"
+#include "code/flora.dm"
+#include "code/structures/painting.dm"
