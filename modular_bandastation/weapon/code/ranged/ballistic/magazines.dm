@@ -1287,19 +1287,3 @@
 	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c46x30mm/rubber
-
-// MARK: 22LR Tranquilizer
-/obj/item/ammo_box/magazine/tranq22lr
-	name = "tranq magazine (.22LR)"
-	desc = "Магазин для пистолетов калибра .22LR, вмещающий 10 патронов. Подходит для транквилизаторов."
-	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
-	icon_state = "pistol_35_standard"
-	base_icon_state = "pistol_35_standard"
-	w_class = WEIGHT_CLASS_TINY
-	ammo_type = /obj/item/ammo_casing/c22lrtranquilizer
-	caliber = CALIBER_22LR
-	max_ammo = 10
-	ammo_band_icon = "+35_ammo_band"
-	ammo_band_color = null
-	multiple_sprites = AMMO_BOX_FULL_EMPTY
-	multiple_sprite_use_base = TRUE
