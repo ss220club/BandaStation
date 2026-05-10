@@ -125,7 +125,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 					cachedIcon = icon(icon, icon_state)
 					// mask the base icon
 					for(var/datum/hair_mask/mask as anything in hair_masks)
-						var/icon/mask_icon = icon('icons/mob/human/hair_masks.dmi', mask.icon_state)
+						var/icon/mask_icon = icon(mask.icon, mask.icon_state) // BANDASTATION MOD: Ears overlay mask
 						mask_icon.Shift(SOUTH, y_offset)
 						cachedIcon.Blend(mask_icon, ICON_ADD)
 
@@ -135,7 +135,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 						var/zone = hair_appendages_inner[appendage_icon_state]
 						for(var/datum/hair_mask/mask as anything in hair_masks)
 							if(zone & mask.strict_coverage_zones)
-								var/icon/mask_icon = icon('icons/mob/human/hair_masks.dmi', mask.icon_state)
+								var/icon/mask_icon = icon(mask.icon, mask.icon_state) // BANDASTATION MOD: Ears overlay mask
 								mask_icon.Shift(SOUTH, y_offset)
 								appendage_icon.Blend(mask_icon, ICON_ADD)
 						cachedIcon.Blend(appendage_icon, ICON_OVERLAY)
@@ -143,14 +143,14 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 					// No mask dodgers, so we can just mask the full (hopefully cached) icon
 					cachedIcon = icon(getCachedIcon())
 					for(var/datum/hair_mask/mask as anything in hair_masks)
-						var/icon/mask_icon = icon('icons/mob/human/hair_masks.dmi', mask.icon_state)
+						var/icon/mask_icon = icon(mask.icon, mask.icon_state) // BANDASTATION MOD: Ears overlay mask
 						mask_icon.Shift(SOUTH, y_offset)
 						cachedIcon.Blend(mask_icon, ICON_ADD)
 			else
 				// No hair appendages, so just apply all hair masks to the base icon
 				cachedIcon = icon(icon, icon_state)
 				for(var/datum/hair_mask/mask as anything in hair_masks)
-					var/icon/mask_icon = icon('icons/mob/human/hair_masks.dmi', mask.icon_state)
+					var/icon/mask_icon = icon(mask.icon, mask.icon_state) // BANDASTATION MOD: Ears overlay mask
 					mask_icon.Shift(SOUTH, y_offset)
 					cachedIcon.Blend(mask_icon, ICON_ADD)
 		else
@@ -1007,7 +1007,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 
 /datum/sprite_accessory/gradient/none
 	name = SPRITE_ACCESSORY_NONE
-	icon_state = "none"
+	icon_state = SPRITE_ACCESSORY_NONE
 
 /datum/sprite_accessory/gradient/full
 	name = "Full"
@@ -1254,10 +1254,11 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 
 /datum/sprite_accessory/facial_hair/shaved
 	name = "Shaved"
-	icon_state = null
+	icon_state = SPRITE_ACCESSORY_NONE
 	gender = NEUTER
 
 /datum/sprite_accessory/clothing
+	abstract_type = /datum/sprite_accessory/clothing
 	/// Allows you to specify a greyscale config
 	var/greyscale_config
 	/// Icon state in the digitigrade template file to use if the wearer is digitigrade.
@@ -1297,7 +1298,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 		result = mutable_appearance(icon(cached_icons[key]))
 
 	else if(greyscale_config || use_female || use_digi) // icon ops ahead
-		var/icon/created = icon(greyscale_config ? SSgreyscale.GetColoredIconByType(greyscale_config, greyscale_colors) : icon, icon_state)
+		var/icon/created = icon(greyscale_config ? SSgreyscale.GetColoredIconByType(greyscale_config, greyscale_colors) : icon, icon_state_to_use)
 		if(use_female)
 			created = wear_female_version(icon_state_to_use, icon, female_sprite_flags_to_use)
 		if(use_digi)
@@ -1324,6 +1325,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 	icon = 'icons/mob/clothing/underwear.dmi'
 	use_static = FALSE
 	em_block = TRUE
+	abstract_type = /datum/sprite_accessory/clothing/underwear
 
 //MALE UNDERWEAR
 /datum/sprite_accessory/clothing/underwear/nude
@@ -1518,6 +1520,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/clothing/undershirt
 	icon = 'icons/mob/clothing/underwear.dmi'
 	em_block = TRUE
+	abstract_type = /datum/sprite_accessory/clothing/undershirt
 
 /datum/sprite_accessory/clothing/undershirt/nude
 	name = "Nude"
@@ -1806,6 +1809,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 /datum/sprite_accessory/clothing/socks
 	icon = 'icons/mob/clothing/underwear.dmi'
 	em_block = TRUE
+	abstract_type = /datum/sprite_accessory/clothing/socks
 
 /datum/sprite_accessory/clothing/socks/nude
 	name = "Nude"

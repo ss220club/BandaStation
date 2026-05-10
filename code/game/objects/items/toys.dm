@@ -1139,7 +1139,9 @@
 
 /obj/item/toy/clockwork_watch/examine(mob/user)
 	. = ..()
-	. += span_info("Station Time: [station_time_timestamp()]")
+	. += span_info("Station Time: [server_timestamp(ic_time = TRUE, twelve_hour_clock = user.client?.prefs.read_preference(/datum/preference/toggle/twelve_hour))]")
+	if(user.is_literate())
+		. += span_info("That means it is currently [round_timestamp()] into the shift.")
 
 /*
  * Toy Dagger
@@ -1867,6 +1869,11 @@ GLOBAL_LIST_EMPTY(intento_players)
 	if(dist < min_reach)
 		to_chat(user, span_warning("[M] is too close to use [src] on."))
 		return
+// BANDASTATION MOD START: Pacifism fix
+	if(isliving(M) && HAS_TRAIT(user, TRAIT_PACIFISM) && user.combat_mode)
+		to_chat(user, span_warning("Вы не хотите причинять вред другим живым существам!"))
+		return
+// BANDASTATION MOD END
 	M.attack_hand(user, modifiers)
 
 /obj/item/banhammer
