@@ -203,6 +203,31 @@
 			"problemMatcher": ["$tsc", "$eslint-stylish"],
 			"group": "build",
 			"label": "tgui: rebuild tgfont"
+			// BANDASTATION MOD: New translation file macro
+		},
+		{
+			"label": "ru_names: new fragment from selection",
+			"type": "process",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/tools/ru_translations/new_ru_name_fragment.py",
+				"${selectedText}"
+			],
+			"windows": {
+				"command": "py",
+				"args": [
+					"-3",
+					"${workspaceFolder}/tools/ru_translations/new_ru_name_fragment.py",
+					"${selectedText}"
+				]
+			},
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared",
+				"close": true
+			},
+			"problemMatcher": []
+			// BANDASTATION MOD: End
 		}
 	]
 }
