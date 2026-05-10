@@ -115,11 +115,7 @@ export const RuNamesMergeTarget = new Juke.Target({
   ],
   executes: async () => {
     const mergeScript = 'tools/ru_translations/merge_ru_names.py';
-    if (process.platform === 'win32') {
-      await Juke.exec('py', ['-3', mergeScript, '--strict']);
-    } else {
-      await Juke.exec('python3', [mergeScript, '--strict']);
-    }
+    await Juke.exec('python', [mergeScript, '--strict']);
   },
 });
 // BANDASTATION MOD END
