@@ -121,3 +121,4 @@
 
 #include "code/mecha/mecha.dm"
 #include "code/flora.dm"
+#include "code/structures/painting.dm"
