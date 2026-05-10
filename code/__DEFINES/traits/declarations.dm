@@ -1003,6 +1003,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Lock heretic grasp no longer goes on cooldown when opening things
 #define TRAIT_LOCK_GRASP_UPGRADED "lock_grasp_upgraded"
 
+// BANDASTATION EDIT - START
+/// Shows that this item will trigger an alarm when passed through scanner in the store
+#define TRAIT_STORE_TAGGED "store_tagged"
+// BANDASTATION EDIT - END
+
 //quirk traits
 #define TRAIT_ALCOHOL_TOLERANCE "alcohol_tolerance"
 #define TRAIT_ANOSMIA "anosmia"

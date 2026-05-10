@@ -17,6 +17,7 @@
 #include "avangarde17/code/obj/shelfs.dm"
 #include "avangarde17/code/obj/windowsills.dm"
 #include "avangarde17/code/obj/ramps.dm"
+#include "avangarde17/code/obj/store_scanner.dm"
 
 #include "avangarde17/code/turf/turf.dm"
 
