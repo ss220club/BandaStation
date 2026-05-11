@@ -32,7 +32,7 @@
 	icon_state = "ipc_head"
 	icon_greyscale = 'icons/bandastation/mob/species/ipc/bodyparts.dmi'
 	limb_id = SPECIES_IPC
-	head_flags = HEAD_LIPS|HEAD_DEBRAIN
+	head_flags = NONE
 	is_dimorphic = FALSE
 	biological_state = BIO_ROBOTIC
 	bodytype = BODYTYPE_ROBOTIC
