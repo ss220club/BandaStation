@@ -22,23 +22,23 @@
 
 /obj/item/wallframe/painting/event/father
 	name = "Oll father paint"
-	icon_state = "father"
+	icon_state = "Father"
 	result_path = /obj/structure/sign/painting/event/father
 
 /obj/structure/sign/painting/event/father
 	name = "Oll father paint"
 	desc = "eugene photo"
-	icon_state = "father"
+	icon_state = "Father"
 
 /obj/item/wallframe/painting/event/eugene
 	name = "Oll eugene paint"
-	icon_state = "eugene"
+	icon_state = "Eugene"
 	result_path = /obj/structure/sign/painting/event/eugene
 
 /obj/structure/sign/painting/event/eugene
 	name = "Oll eugene paint"
 	desc = "eugene photo"
-	icon_state = "eugene"
+	icon_state = "Eugene"
 
 /obj/item/wallframe/painting/event/wedding
 	name = "Oll wedding paint"
@@ -52,23 +52,23 @@
 
 /obj/item/wallframe/painting/event/mother
 	name = "Oll mother paint"
-	icon_state = "mother"
+	icon_state = "Mother"
 	result_path = /obj/structure/sign/painting/event/mother
 
 /obj/structure/sign/painting/event/mother
 	name = "Oll mother paint"
 	desc = "mother photo"
-	icon_state = "mother"
+	icon_state = "Mother"
 
 /obj/item/wallframe/painting/event/family
 	name = "Oll family paint"
-	icon_state = "family"
+	icon_state = "Family"
 	result_path = /obj/structure/sign/painting/event/family
 
 /obj/structure/sign/painting/event/family
 	name = "Oll family paint"
 	desc = "family photo"
-	icon_state = "family"
+	icon_state = "Family"
 
 /obj/item/wallframe/painting/event/wine
 	name = "Oll wine paint"
@@ -82,10 +82,10 @@
 
 /obj/item/wallframe/painting/event/fruit_art
 	name = "Oll fruit art paint"
-	icon_state = "fruit_art"
+	icon_state = "fruit"
 	result_path = /obj/structure/sign/painting/event/fruit_art
 
 /obj/structure/sign/painting/event/fruit_art
 	name = "Oll wine paint"
 	desc = "fruit art photo"
-	icon_state = "fruit_art"
+	icon_state = "fruit"
