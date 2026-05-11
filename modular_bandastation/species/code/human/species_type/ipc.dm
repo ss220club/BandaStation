@@ -11,6 +11,7 @@
 
 	mutantstomach = null
 	mutantliver = null
+	mutantappendix = null
 	mutantlungs = /obj/item/organ/lungs/ipc
 	mutantbrain = /obj/item/organ/brain/positronic
 	mutantheart = /obj/item/organ/heart/ipc_battery

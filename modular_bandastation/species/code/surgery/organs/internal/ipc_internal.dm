@@ -25,7 +25,9 @@
 	desc = "Комплексный позитронный блок, содержащий искусственное сознание. Основа любого КПБ."
 	icon = 'icons/obj/devices/assemblies.dmi'
 	icon_state = "posibrain"
-	zone = BODY_ZONE_CHEST
+	//Временное решение... Пока не найдено как исрпавить со спрайтом.
+	// ВЕРНУТЬ ПОТОМ В ТУРС ИЗ-ЗА ОШИБКИ С КРАВОВЫМ СРАЙТЫ
+	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_BRAIN
 	organ_flags = ORGAN_ROBOTIC
 	var/positronic_damage = 0
