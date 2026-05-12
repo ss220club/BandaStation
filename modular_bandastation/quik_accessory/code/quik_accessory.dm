@@ -139,6 +139,75 @@
 		to_chat(src, span_notice("Вы быстро достаёте [holstered_gun]."))
 		return
 
+	// =====================================================
+	// ЭНЕРГЕТИЧЕСКАЯ КОБУРА
+	// =====================================================
+
+	if(istype(target_accessory, /obj/item/clothing/accessory/holster/energy))
+
+		var/list/guns = target_accessory:get_holstered_guns()
+
+		var/obj/item/gun/energy/first_gun = null
+		var/obj/item/gun/energy/second_gun = null
+
+		if(guns.len >= 1)
+			first_gun = guns[1]
+
+		if(guns.len >= 2)
+			second_gun = guns[2]
+
+		var/obj/item/gun/energy/laser/thermal/held_energy = null
+
+		if(istype(get_active_held_item(), /obj/item/gun/energy))
+			held_energy = get_active_held_item()
+
+		else if(istype(get_inactive_held_item(), /obj/item/gun/energy))
+			held_energy = get_inactive_held_item()
+
+		if(held_thermal)
+
+			if(!first_gun)
+				held_thermal.forceMove(target_accessory)
+
+				to_chat(src, span_notice("Вы убираете [held_energy] в первый слот кобуры."))
+
+				return
+
+			if(!second_gun)
+				held_thermal.forceMove(target_accessory)
+
+				to_chat(src, span_notice("Вы убираете [held_energy] во второй слот кобуры."))
+
+				return
+
+			to_chat(src, span_warning("Кобура заполнена!"))
+
+			return
+
+		var/active_item = get_active_held_item()
+		var/inactive_item = get_inactive_held_item()
+
+		var/use_inactive_hand = FALSE
+
+		if(active_item && !inactive_item)
+			use_inactive_hand = TRUE
+
+		var/obj/item/gun/energy/target_gun = first_gun
+
+		if(!target_gun)
+			to_chat(src, span_warning("Кобура пуста!"))
+			return
+
+		target_gun.forceMove(src.loc)
+
+		if(use_inactive_hand)
+			put_in_inactive_hand(target_gun)
+		else
+			put_in_hands(target_gun)
+
+		to_chat(src, span_notice("Вы быстро достаёте [target_gun]."))
+
+		return
 
 	// =====================================================
 	// ОБЫЧНЫЕ АКСЕССУАРЫ

@@ -72,6 +72,15 @@
 	. = ..()
 	create_storage(storage_type = /datum/storage/pockets/holst/energy)
 
+/obj/item/clothing/accessory/holster/energy/proc/get_holstered_guns()
+
+	var/list/guns = list()
+
+	for(var/obj/item/gun/energy/G in contents)
+		guns += G
+
+	return guns
+
 /obj/item/clothing/accessory/holster/energy/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
 	..()
 	if(user)
