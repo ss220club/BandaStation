@@ -125,7 +125,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 					cachedIcon = icon(icon, icon_state)
 					// mask the base icon
 					for(var/datum/hair_mask/mask as anything in hair_masks)
-						var/icon/mask_icon = icon('icons/mob/human/hair_masks.dmi', mask.icon_state)
+						var/icon/mask_icon = icon(mask.icon, mask.icon_state) // BANDASTATION MOD: Ears overlay mask
 						mask_icon.Shift(SOUTH, y_offset)
 						cachedIcon.Blend(mask_icon, ICON_ADD)
 
@@ -135,7 +135,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 						var/zone = hair_appendages_inner[appendage_icon_state]
 						for(var/datum/hair_mask/mask as anything in hair_masks)
 							if(zone & mask.strict_coverage_zones)
-								var/icon/mask_icon = icon('icons/mob/human/hair_masks.dmi', mask.icon_state)
+								var/icon/mask_icon = icon(mask.icon, mask.icon_state) // BANDASTATION MOD: Ears overlay mask
 								mask_icon.Shift(SOUTH, y_offset)
 								appendage_icon.Blend(mask_icon, ICON_ADD)
 						cachedIcon.Blend(appendage_icon, ICON_OVERLAY)
@@ -143,14 +143,14 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 					// No mask dodgers, so we can just mask the full (hopefully cached) icon
 					cachedIcon = icon(getCachedIcon())
 					for(var/datum/hair_mask/mask as anything in hair_masks)
-						var/icon/mask_icon = icon('icons/mob/human/hair_masks.dmi', mask.icon_state)
+						var/icon/mask_icon = icon(mask.icon, mask.icon_state) // BANDASTATION MOD: Ears overlay mask
 						mask_icon.Shift(SOUTH, y_offset)
 						cachedIcon.Blend(mask_icon, ICON_ADD)
 			else
 				// No hair appendages, so just apply all hair masks to the base icon
 				cachedIcon = icon(icon, icon_state)
 				for(var/datum/hair_mask/mask as anything in hair_masks)
-					var/icon/mask_icon = icon('icons/mob/human/hair_masks.dmi', mask.icon_state)
+					var/icon/mask_icon = icon(mask.icon, mask.icon_state) // BANDASTATION MOD: Ears overlay mask
 					mask_icon.Shift(SOUTH, y_offset)
 					cachedIcon.Blend(mask_icon, ICON_ADD)
 		else
@@ -1007,7 +1007,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 
 /datum/sprite_accessory/gradient/none
 	name = SPRITE_ACCESSORY_NONE
-	icon_state = "none"
+	icon_state = SPRITE_ACCESSORY_NONE
 
 /datum/sprite_accessory/gradient/full
 	name = "Full"
@@ -1254,7 +1254,7 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 
 /datum/sprite_accessory/facial_hair/shaved
 	name = "Shaved"
-	icon_state = null
+	icon_state = SPRITE_ACCESSORY_NONE
 	gender = NEUTER
 
 /datum/sprite_accessory/clothing
