@@ -164,7 +164,7 @@
 		else if(istype(get_inactive_held_item(), /obj/item/gun/energy))
 			held_energy = get_inactive_held_item()
 
-		if(held_thermal)
+		if(held_energy)
 
 			if(!first_gun)
 				held_thermal.forceMove(target_accessory)
