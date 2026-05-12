@@ -1,7 +1,0 @@
-author: "GeorgianEnemy"
-delete-after: True
-changes:
-  - rscadd: "Добавлен пистолет Ruger, стреляющий транквилизаторами"
-  - rscadd: "Добавлен патрон 22LR и магазин для Ruger"
-  - rscadd: "Добавлен пистолет Ruger в аплинк Синдиката за 10 ТК"
-  - rscadd: "Добавлен магазин 22LR за 4 ТК в аплинк Синдиката"
