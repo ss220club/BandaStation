@@ -167,14 +167,14 @@
 		if(held_energy)
 
 			if(!first_gun)
-				held_thermal.forceMove(target_accessory)
+				held_energy.forceMove(target_accessory)
 
 				to_chat(src, span_notice("Вы убираете [held_energy] в первый слот кобуры."))
 
 				return
 
 			if(!second_gun)
-				held_thermal.forceMove(target_accessory)
+				held_energy.forceMove(target_accessory)
 
 				to_chat(src, span_notice("Вы убираете [held_energy] во второй слот кобуры."))
 
