@@ -338,3 +338,39 @@
 	max_integrity = 1000
 	impressiveness = 50
 	abstract_type = /obj/structure/statue/ark_middle
+
+/obj/structure/statue/lamp_post
+	name = "Уличная лампа"
+	desc = "Уличная лампа которая тускло светиться."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "lamp_post"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/lamp_post
+
+/obj/structure/statue/yellow_flowers_vas
+	name = "Большая ваза жёлтых цветов"
+	desc = "Большая ваза из который исходит приятный аромат цветов что стоят в ней."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "yellow_flowers_vas"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/yellow_flowers_vas
+
+obj/structure/statue/violet_flowers_vas
+	name = "Большая ваза фиолетовых цветов"
+	desc = "Большая ваза из который исходит приятный аромат цветов что стоят в ней."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "violet_flowers_vas"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	impressiveness = 50
+	abstract_type = /obj/structure/statue/violet_flowers_vas

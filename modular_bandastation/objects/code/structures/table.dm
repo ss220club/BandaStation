@@ -9,11 +9,11 @@
  * Normal Frames
  */
 
-/obj/structure/fancy_table_black-0
-	name = "table frame"
-	desc = "Четыре металлические ножки с четырьмя каркасными стержнями для стола. Вы легко сможете пройти через это."
+/obj/structure/table/fancy_table_black_0
+	name = "fancy table"
+	desc = "Обычный деревянный стол покрытый белой скатертью."
 	icon = 'modular_bandastation/objects/icons/obj/structures/table.dmi'
-	icon_state = "table_frame"
+	icon_state = "fancy_table_black_0"
 	density = FALSE
 	anchored = FALSE
 	layer = PROJECTILE_HIT_THRESHHOLD_LAYER
@@ -22,11 +22,11 @@
 	var/framestack = /obj/item/stack/rods
 	var/framestackamount = 2
 
-/obj/structure/table_frame/Initialize(mapload)
+/obj/structure/fancy_table_black_0/Initialize(mapload)
 	. = ..()
 	register_context()
 
-/obj/structure/table_frame/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
+/obj/structure/fancy_table_black_0/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
 	if(isnull(held_item))
 		return NONE
 
@@ -39,7 +39,7 @@
 		context[SCREENTIP_CONTEXT_LMB] = "Собрать стол"
 		return CONTEXTUAL_SCREENTIP_SET
 
-/obj/structure/table_frame/wrench_act(mob/living/user, obj/item/tool)
+/obj/structure/fancy_table_black_0/wrench_act(mob/living/user, obj/item/tool)
 	balloon_alert(user, "разборка...")
 	tool.play_tool_sound(src)
 	if(!tool.use_tool(src, user, 3 SECONDS))
@@ -48,10 +48,10 @@
 	deconstruct(TRUE)
 	return ITEM_INTERACT_SUCCESS
 
-/obj/structure/table_frame/wrench_act_secondary(mob/living/user, obj/item/tool)
+/obj/structure/fancy_table_black_0/wrench_act_secondary(mob/living/user, obj/item/tool)
 	return wrench_act(user, tool)
 
-/obj/structure/table_frame/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+/obj/structure/fancy_table_black_0/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!isstack(tool))
 		return NONE
 	var/obj/item/stack/our_stack = tool
@@ -91,21 +91,20 @@
 	return ITEM_INTERACT_SUCCESS
 
 /// Gets the table type we make with our given stack.
-/obj/structure/table_frame/proc/get_table_type(obj/item/stack/our_stack)
+/obj/structure/fancy_table_black_0/proc/get_table_type(obj/item/stack/our_stack)
 	return our_stack.get_table_type()
 
-/obj/structure/table_frame/atom_deconstruct(disassembled = TRUE)
+/obj/structure/fancy_table_black_0/atom_deconstruct(disassembled = TRUE)
 	new framestack(get_turf(src), framestackamount)
 
-/obj/structure/table_frame/narsie_act()
-	new /obj/structure/table_frame/wood(src.loc)
+/obj/structure/fancy_table_black_0/narsie_act()
+	new /obj/structure/fancy_table_black_0/wood(src.loc)
 	qdel(src)
-
 /*
  * Wooden Frames
  */
 
-/obj/structure/fancy_table_black-0
+/obj/structure/table_frame/wood
 	name = "wooden table frame"
 	desc = "Четыре деревянные ножки с четырьмя деревянными каркасными стержнями для деревянного стола. Вы легко сможете пройти через это."
 	icon_state = "wood_frame"
