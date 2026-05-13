@@ -59,3 +59,19 @@
 	playsound(src, 'sound/items/taperecorder/tape_flip.ogg', 30, TRUE)
 
 	return ITEM_INTERACT_BLOCKING
+
+	//--------------------------------------------------
+	// ОЧИСТКА БУФЕРА ID
+	//--------------------------------------------------
+
+/obj/item/multitool/proc/unique_action(mob/living/user)
+
+	if(!stored_button_id)
+		to_chat(user, span_warning("Буфер мультитула уже пуст."))
+		return
+
+	stored_button_id = null
+
+	to_chat(user, span_notice("Вы очищаете буфер ID мультитула."))
+
+	playsound(src, 'sound/machines/click.ogg', 30, TRUE)
