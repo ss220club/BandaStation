@@ -1,0 +1,3 @@
+#include "_tooltypes.dm"
+
+#include "code/tooltypes.dm"

@@ -64,14 +64,22 @@
 	// ОЧИСТКА БУФЕРА ID
 	//--------------------------------------------------
 
-/obj/item/multitool/proc/unique_action(mob/living/user)
+/obj/item/multitool/attack_self_secondary(mob/user)
 
 	if(!stored_button_id)
 		to_chat(user, span_warning("Буфер мультитула уже пуст."))
-		return
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	stored_button_id = null
 
 	to_chat(user, span_notice("Вы очищаете буфер ID мультитула."))
 
 	playsound(src, 'sound/machines/click.ogg', 30, TRUE)
+
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/multitool/examine(mob/user)
+	. = ..()
+
+	if(stored_button_id)
+		. += span_notice("ПКМ по мультитулу — очистить сохранённый ID.")
