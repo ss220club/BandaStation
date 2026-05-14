@@ -10,10 +10,11 @@
 #define BEACON_GLOBAL_INVASION_CHANCE_MAX 15
 #define BEACON_GLOBAL_INVASION_PORTALS_MIN 10
 #define BEACON_GLOBAL_INVASION_PORTALS_MAX 20
+#define GOAL_POINTS 45000
 
 /datum/station_goal/bluespace_beacon
 	name = "Маяк реальности"
-	var/goal = 45000
+	var/goal = GOAL_POINTS
 	VAR_PRIVATE/cached_points
 
 /obj/item/circuitboard/machine/bluespace_beacon
@@ -58,19 +59,6 @@
 		cached_points = max(cached_points, beacon.current_charge)
 
 	return cached_points >= goal
-
-#define BEACON_POINTS_PER_W 10e-6
-#define BEACON_BASE_POINTS 2
-#define BEACON_NEAREST_MW(power) ((power) - (power) % (1 MEGA WATTS))
-#define BEACON_RANDOM_SPAWN_CHANCE 15
-#define BEACON_RANDOM_SPAWN_RADIUS 4
-#define BEACON_PORTAL_EVENT_COOLDOWN (20 SECONDS)
-#define BEACON_PORTAL_CHANCE_MIN 5
-#define BEACON_PORTAL_CHANCE_MAX 7
-#define BEACON_GLOBAL_INVASION_CHANCE_MIN 6
-#define BEACON_GLOBAL_INVASION_CHANCE_MAX 15
-#define BEACON_GLOBAL_INVASION_PORTALS_MIN 10
-#define BEACON_GLOBAL_INVASION_PORTALS_MAX 20
 
 /obj/machinery/power/bluespace_beacon
 	name = "Reality beacon"
@@ -460,7 +448,7 @@
 		faction_weights = list()
 		for(var/f_name in factions)
 			var/list/faction_data = factions[f_name]
-			if(islist(faction_data))
+			if(!islist(faction_data))
 				continue
 			faction_weights[f_name] = max(1, faction_data["weight"] || 1)
 
@@ -670,5 +658,4 @@
 #undef BEACON_GLOBAL_INVASION_CHANCE_MAX
 #undef BEACON_GLOBAL_INVASION_PORTALS_MIN
 #undef BEACON_GLOBAL_INVASION_PORTALS_MAX
-
-
+#undef GOAL_POINTS
