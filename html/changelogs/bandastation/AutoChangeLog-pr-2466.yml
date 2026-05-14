@@ -1,0 +1,4 @@
+author: "m-dzianishchyts"
+delete-after: True
+changes:
+  - rscdel: "Удален пистолет Ruger, стреляющий транквилизаторами, в связи со рядом недоработок."
