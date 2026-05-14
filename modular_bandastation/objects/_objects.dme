@@ -135,6 +135,7 @@
 #include "code/mecha/mecha.dm"
 #include "code/flora.dm"
 #include "code/structures/painting.dm"
+#include "code/items/white_candles.dm"
 // BEGIN_INTERNALS
 // END_INTERNALS
 // BEGIN_FILE_DIR
