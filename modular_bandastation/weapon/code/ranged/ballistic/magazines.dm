@@ -1281,9 +1281,26 @@
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/c456magnum
 
-// MARK: 4.6x30mm
+// MARK: WT - 4.6x30mm
 /obj/item/ammo_box/magazine/wt550m9/wtrubber
 	name = "WT-550 magazine (4.6x30mm rubber)"
 	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c46x30mm/rubber
+
+// MARK: NT Sabre - 9mm
+/obj/item/ammo_box/magazine/smgm9mm
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	ammo_band_icon = "+smg9mm_ammo_band"
+	ammo_band_color = null
+
+/obj/item/ammo_box/magazine/smgm9mm/rubber
+	name = "SMG magazine (9mm rubber)"
+	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
+	ammo_band_color = COLOR_AMMO_RUBBER
+	ammo_type = /obj/item/ammo_casing/c9mm/rubber
+
+/obj/item/ammo_box/magazine/smgm9mm/hp
+	name = "SMG magazine (9mm HP)"
+	MAGAZINE_TYPE_HOLLOWPOINT
+	ammo_type = /obj/item/ammo_casing/c9mm/hp
