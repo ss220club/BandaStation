@@ -1288,7 +1288,7 @@
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c46x30mm/rubber
 
-// MARK: NT Sabre - 9mm
+// MARK: NT Saber - 9mm
 /obj/item/ammo_box/magazine/smgm9mm
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	ammo_band_icon = "+smg9mm_ammo_band"
