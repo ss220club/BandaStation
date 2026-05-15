@@ -799,7 +799,6 @@
 	dir = 8
 	},
 /obj/structure/bed/maint,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/security/brig)
 "alh" = (
@@ -23366,7 +23365,6 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/ghetto/aft)
 "fIa" = (
-/obj/machinery/holopad,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
 /area/station/security/interrogation)
@@ -34039,7 +34037,6 @@
 /area/station/maintenance/ghetto/central)
 "ils" = (
 /obj/structure/table,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/security/brig)
 "ilw" = (
@@ -44344,13 +44341,10 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/electrical)
 "kLP" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
-/obj/machinery/holopad,
-/turf/open/floor/iron,
-/area/station/security/prison)
+/turf/open/floor/iron/dark,
+/area/station/security/interrogation)
 "kLX" = (
 /obj/structure/chair/stool{
 	dir = 1
@@ -63706,10 +63700,13 @@
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/lab)
 "pwZ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/disposalpipe/segment,
+/obj/structure/cable,
 /obj/machinery/door/firedoor,
-/obj/effect/turf_decal/tile/red,
 /turf/open/floor/iron,
-/area/station/security/brig/entrance)
+/area/station/hallway/primary/fore)
 "pxa" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
@@ -77693,7 +77690,9 @@
 /area/station/service/kitchen/coldroom/ghetto)
 "sWy" = (
 /obj/structure/toilet,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
+	dir = 8
+	},
 /turf/open/floor/plating,
 /area/station/security/brig)
 "sWD" = (
@@ -82747,13 +82746,6 @@
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
 /turf/open/floor/iron,
 /area/station/commons/storage/primary)
-"uiw" = (
-/obj/machinery/door/firedoor,
-/obj/effect/turf_decal/tile/red{
-	dir = 1
-	},
-/turf/open/floor/iron,
-/area/station/security/brig/entrance)
 "uix" = (
 /obj/structure/bed{
 	dir = 4
@@ -87508,7 +87500,6 @@
 /area/station/maintenance/ghetto/port/aft)
 "vtz" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/holopad,
 /turf/open/floor/iron/dark,
 /area/station/security/interrogation)
 "vtC" = (
@@ -90328,6 +90319,7 @@
 /area/station/command/heads_quarters/hos)
 "wfQ" = (
 /obj/effect/turf_decal/tile/red/fourcorners,
+/obj/machinery/holopad/secure,
 /turf/open/floor/iron,
 /area/station/security/courtroom/holding)
 "wfV" = (
@@ -93680,13 +93672,12 @@
 /turf/open/floor/carpet,
 /area/station/maintenance/ghetto/fore/starboard)
 "wVV" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/disposalpipe/segment,
-/obj/structure/cable,
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
-/area/station/security/brig/entrance)
+/area/station/hallway/primary/fore)
 "wWf" = (
 /obj/effect/turf_decal/tile/neutral/half{
 	dir = 8
@@ -94831,6 +94822,7 @@
 "xjx" = (
 /obj/effect/turf_decal/tile/red,
 /obj/machinery/status_display/evac/directional/east,
+/obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/hallway/primary/fore)
 "xjD" = (
@@ -186262,7 +186254,7 @@ lPt
 bdV
 ddm
 wYI
-kLP
+oAi
 wmw
 gsB
 gsB
@@ -192698,8 +192690,8 @@ nMb
 fuI
 izL
 fIs
-uiw
-vod
+izL
+wVV
 nnO
 wFS
 wIy
@@ -192955,8 +192947,8 @@ lfP
 kfn
 mLY
 mLY
-wVV
-aLu
+mLY
+pwZ
 aLu
 aLu
 aLu
@@ -193212,7 +193204,7 @@ xFP
 iZO
 gkK
 gkK
-pwZ
+gkK
 xjx
 tyW
 hRz
@@ -197324,7 +197316,7 @@ wBt
 rJx
 vtz
 aVl
-fDS
+kLP
 fgy
 fqI
 brR
