@@ -60,6 +60,10 @@ map wawastation
 	votable
 endmap
 
+map shtukadryka
+    minplayers 10
+endmap
+
 # Debug-only maps.
 
 map gateway_test

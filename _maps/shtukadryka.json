@@ -1,0 +1,17 @@
+{
+	"version": 1,
+	"map_name": "Shtukadryka",
+	"map_path": "bandastation",
+	"map_file": "Shtukadryka.dmm",
+	"space_ruin_levels": 0,
+	"space_empty_levels": 0,
+	"shuttles": {},
+	"traits": [
+		{
+			"Linkage": null,
+			"Gravity": true,
+			"Baseturf": "/turf/open/indestructible/rockyground",
+			"No Parallax": true
+		}
+	]
+}
