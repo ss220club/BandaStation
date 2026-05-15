@@ -29,7 +29,7 @@
 	)
 
 /datum/supply_pack/engineering/bluespace_beacon
-	name = "Reality beacon parts"
+	name = "Reality Beacon Parts"
 	desc = "Ящик с платой маяка реальности"
 	cost = CARGO_CRATE_VALUE * 24
 	order_flags = ORDER_SPECIAL
@@ -230,13 +230,13 @@
 	. = ..()
 
 	if(machine_stat & (BROKEN|NOPOWER))
-		src.set_light(0)
+		set_light(0)
 	else if(has_active_portals())
-		src.set_light(2, 1, "#ff4f4f")
+		set_light(2, 1, "#ff4f4f")
 	else if(actual_power_usage > 0)
-		src.set_light(2, 1, "#6fa8ff")
+		set_light(2, 1, "#6fa8ff")
 	else
-		src.set_light(1, 1, "#353535")
+		set_light(1, 1, "#353535")
 
 	if(has_active_portals())
 		. += "cascade"
@@ -248,9 +248,9 @@
 /obj/machinery/power/bluespace_beacon/power_change()
 	. = ..()
 	if(machine_stat & (BROKEN|NOPOWER))
-		src.set_light(0)
+		set_light(0)
 	else
-		src.set_light(1, 1, "#353535")
+		set_light(1, 1, "#353535")
 	if(.)
 		update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
 
