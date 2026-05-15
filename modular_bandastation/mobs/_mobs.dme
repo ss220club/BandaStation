@@ -42,5 +42,3 @@
 #include "code/simple_animal/pets/sloth.dm"
 #include "code/supplypacks/livestock_pack_animals.dm"
 #include "code/simple_animal/named_animals.dm"
-
-#define FILE_DIR .
