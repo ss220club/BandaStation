@@ -39109,6 +39109,13 @@
 	dir = 4
 	},
 /area/station/hallway/secondary/entry)
+"jAz" = (
+/obj/machinery/button/door/directional/west{
+	id = "Prison Gate";
+	name = "Prison Lockdown"
+	},
+/turf/closed/wall/r_wall,
+/area/station/security/prison/visit)
 "jAF" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/spawner/random/structure/furniture_parts,
@@ -81721,7 +81728,7 @@
 /obj/machinery/button/door/directional/west{
 	id = "Prison Gate";
 	name = "Prison Lockdown";
-	req_access = s
+	req_access = list("brig")
 	},
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
@@ -187803,7 +187810,7 @@ ajE
 aVL
 dgV
 aVL
-tFO
+jAz
 lrR
 cJx
 mbZ
