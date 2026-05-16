@@ -37,7 +37,7 @@
 			to_chat(user, span_alert("Порты ключей шифрования не настроены."))
 			return
 		pai.radio.attackby(used, user, modifiers)
-		to_chat(user, span_notice("Вы вставляете [used.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]."))
+		to_chat(user, span_notice("Вы вставляете [declent_ru(used, ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]."))
 		return
 	return ..()
 
@@ -79,7 +79,7 @@
 		return pai.on_saboteur(source, disrupt_duration)
 
 /obj/item/pai_card/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[capitalize(user)] печально смотрит на [declent_ru(ACCUSATIVE)]! [capitalize(user.ru_p_they())] не может продолжать жить без настоящей человеческой близости!"))
+	user.visible_message(span_suicide("[user] печально смотрит на [declent_ru(ACCUSATIVE)]! [capitalize(user.ru_p_they())] не может продолжать жить без настоящей человеческой близости!"))
 	return OXYLOSS
 
 /obj/item/pai_card/update_overlays()
@@ -248,7 +248,7 @@
 	notify_ghosts(
 		"[user.real_name] запрашивает ПИИ-компаньона! Воспользуйтесь кнопкой ПИИ, чтобы представить себя в качестве компаньона.",
 		source = user,
-		header = "pAI Request!",
+		header = "Запрос ПИИ!",
 		alert_overlay = alert_overlay,
 		notify_flags = NOTIFY_CATEGORY_NOFLASH,
 		ignore_key = POLL_IGNORE_PAI,
