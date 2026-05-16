@@ -11060,7 +11060,9 @@
 	dir = 4
 	},
 /obj/machinery/button/door/directional/south{
-	id = "Prison Gate"
+	id = "Prison Gate";
+	req_access = list("brig_entrance");
+	name = "Prison Lockdown"
 	},
 /turf/open/floor/iron/dark,
 /area/station/security/prison)
@@ -17094,7 +17096,8 @@
 	id = "permaflash1";
 	name = "Flasher button";
 	dir = 9;
-	pixel_y = 8
+	pixel_y = 8;
+	req_access = list("brig_entrance")
 	},
 /turf/closed/wall/r_wall,
 /area/station/security/prison/visit)
@@ -32296,6 +32299,10 @@
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/ghetto/fore/starboard)
+"hOl" = (
+/obj/machinery/holopad/secure,
+/turf/open/floor/iron,
+/area/station/security/courtroom/holding)
 "hOm" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -81714,7 +81721,7 @@
 /obj/machinery/button/door/directional/west{
 	id = "Prison Gate";
 	name = "Prison Lockdown";
-	req_access = list("brig_entrance")
+	req_access = s
 	},
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
@@ -90318,7 +90325,6 @@
 /area/station/command/heads_quarters/hos)
 "wfQ" = (
 /obj/effect/turf_decal/tile/red/fourcorners,
-/obj/machinery/holopad/secure,
 /turf/open/floor/iron,
 /area/station/security/courtroom/holding)
 "wfV" = (
@@ -196792,7 +196798,7 @@ riU
 aVF
 isz
 kJB
-fyk
+hOl
 lnn
 wfQ
 mri
