@@ -45,7 +45,7 @@ export const PaiCard = (props) => {
   const { pai } = data;
 
   return (
-    <Window width={400} height={400} title="pAI Options Menu">
+    <Window width={400} height={400} title="Меню опций ПИИ">
       <Window.Content scrollable>
         {!pai ? <PaiDownload /> : <PaiOptions />}
       </Window.Content>
@@ -64,16 +64,16 @@ const PaiDownload = (props) => {
         <NoticeBox info>
           <Stack fill>
             <Stack.Item grow fontSize="16px">
-              pAI Candidates
+              Кандидаты в ПИИ
             </Stack.Item>
             <Stack.Item>
               <Button
                 color="good"
                 icon="bell"
                 onClick={() => act('request')}
-                tooltip="Request more candidates from beyond."
+                tooltip="Запросить дополнительных кандидатов извне."
               >
-                Request
+                Запрос
               </Button>
             </Stack.Item>
           </Stack>
@@ -104,7 +104,7 @@ const CandidateDisplay = (props: { candidate: Candidate; index: number }) => {
     <Section
       buttons={
         <Button icon="save" onClick={() => act('download', { ckey })}>
-          Download
+          Скачать
         </Button>
       }
       overflow="hidden"
@@ -113,12 +113,12 @@ const CandidateDisplay = (props: { candidate: Candidate; index: number }) => {
       <Stack vertical>
         <Stack.Item>
           <Box color="label" mb={1}>
-            Name:
+            Имя:
           </Box>
           {name ? (
             <Box color="green">{name}</Box>
           ) : (
-            'None provided - name will be randomized.'
+            'Имя не указано — оно будет выбрано случайным образом.'
           )}
         </Stack.Item>
         {!!description && (
@@ -126,7 +126,7 @@ const CandidateDisplay = (props: { candidate: Candidate; index: number }) => {
             <Stack.Divider />
             <Stack.Item>
               <Box color="label" mb={1}>
-                IC Description:
+                IC описание:
               </Box>
               {description}
             </Stack.Item>
@@ -137,7 +137,7 @@ const CandidateDisplay = (props: { candidate: Candidate; index: number }) => {
             <Stack.Divider />
             <Stack.Item>
               <Box color="label" mb={1}>
-                OOC Notes:
+                OOC заметки:
               </Box>
               {comments}
             </Stack.Item>
@@ -170,33 +170,33 @@ const PaiOptions = (props) => {
   const suppliedLaws = laws[0] ? decodeHtmlEntities(laws[0]) : 'None';
 
   return (
-    <Section fill scrollable title={`Settings: ${name.toUpperCase()}`}>
+    <Section fill scrollable title={`Настройки: ${name.toUpperCase()}`}>
       <LabeledList>
-        <LabeledList.Item label="Master">
+        <LabeledList.Item label="Мастер">
           {master || (
             <Button icon="dna" onClick={() => act('set_dna')}>
-              Imprint
+              Отпечаток
             </Button>
           )}
         </LabeledList.Item>
         {!!master && (
-          <LabeledList.Item color="red" label="DNA">
+          <LabeledList.Item color="red" label="ДНК">
             {dna}
           </LabeledList.Item>
         )}
-        <LabeledList.Item label="Laws">
+        <LabeledList.Item label="Законы">
           <BlockQuote>{suppliedLaws}</BlockQuote>
         </LabeledList.Item>
-        <LabeledList.Item label="Holoform">
+        <LabeledList.Item label="Голограмма">
           <Button
             icon={can_holo ? 'toggle-on' : 'toggle-off'}
             onClick={() => act('toggle_holo')}
             selected={can_holo}
           >
-            Toggle
+            Переключить
           </Button>
         </LabeledList.Item>
-        <LabeledList.Item label="Leash">
+        <LabeledList.Item label="Поводок">
           <Button
             icon={leashed ? 'toggle-on' : 'toggle-off'}
             onClick={() => act('toggle_leash')}
@@ -205,7 +205,7 @@ const PaiOptions = (props) => {
             {leashed ? 'Unleash' : 'Leash'}
           </Button>
         </LabeledList.Item>
-        <LabeledList.Item label="Holoform Range">
+        <LabeledList.Item label="Диапазон голограммы">
           <Stack>
             <Stack.Item>
               <Button
@@ -224,35 +224,35 @@ const PaiOptions = (props) => {
             </Stack.Item>
           </Stack>
         </LabeledList.Item>
-        <LabeledList.Item label="Transmit">
+        <LabeledList.Item label="Передать">
           <Button
             icon={transmit ? 'toggle-on' : 'toggle-off'}
             onClick={() => act('toggle_radio', { option: 'transmit' })}
             selected={transmit}
           >
-            Toggle
+            Переключить
           </Button>
         </LabeledList.Item>
-        <LabeledList.Item label="Receive">
+        <LabeledList.Item label="Получить">
           <Button
             icon={receive ? 'toggle-on' : 'toggle-off'}
             onClick={() => act('toggle_radio', { option: 'receive' })}
             selected={receive}
           >
-            Toggle
+            Переключить
           </Button>
         </LabeledList.Item>
-        <LabeledList.Item label="Troubleshoot">
+        <LabeledList.Item label="Устранение неполадок">
           <Button icon="comment" onClick={() => act('fix_speech')}>
-            Fix Speech
+            Настроить речь
           </Button>
           <Button icon="edit" onClick={() => act('set_laws')}>
-            Set Laws
+            Установить законы
           </Button>
         </LabeledList.Item>
-        <LabeledList.Item label="Personality">
+        <LabeledList.Item label="Личность">
           <Button icon="trash" onClick={() => act('wipe_pai')}>
-            Erase
+            Стереть
           </Button>
         </LabeledList.Item>
       </LabeledList>
@@ -263,7 +263,7 @@ const PaiOptions = (props) => {
           mt={1}
           onClick={() => act('reset_software')}
         >
-          Reset Software
+          Сброс ПО
         </Button>
       )}
     </Section>
