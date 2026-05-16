@@ -10,14 +10,15 @@ type Data = {
   name: string;
 };
 
-const PAI_DESCRIPTION = `Personal AIs are advanced models capable of nuanced
-interaction. They are designed to assist their masters in their work. They
-do not possess hands, thus they cannot interact with equipment or items. While
-in hologram form, you cannot be directly killed, but you may be incapacitated.`;
+const PAI_DESCRIPTION = `Персональные ИИ - это продвинутые модели, способные к
+тонко настроенному взаимодействию. Они созданы, чтобы помогать своим хозяевам в
+работе. У них нет рук, поэтому они не могут взаимодействовать с оборудованием
+или предметами. Находясь в форме голограммы, вы не можете быть убиты напрямую,
+но можете быть выведены из строя.`;
 
-const PAI_RULES = `You are expected to role play to some degree. Keep in mind:
-Not entering information may lead to you not being selected. Press submit to
-alert pAI cards of your candidacy.`;
+const PAI_RULES = `От вас ожидается в определённой степени участие в ролевой
+игре. Имейте в виду: если вы не укажете свои данные, вас могут не выбрать.
+Нажмите «Отправить», чтобы уведомить ПИИ‑карты о вашей кандидатуре.`;
 
 export const PaiSubmit = (props) => {
   const { data } = useBackend<Data>();
@@ -29,7 +30,7 @@ export const PaiSubmit = (props) => {
   });
 
   return (
-    <Window width={400} height={460} title="pAI Candidacy Menu">
+    <Window width={400} height={460} title="Меню кандидатов ПИИ">
       <Window.Content>
         <Stack fill vertical>
           <Stack.Item grow>
@@ -50,7 +51,7 @@ export const PaiSubmit = (props) => {
 /** Displays basic info about playing pAI */
 const DetailsDisplay = (props) => {
   return (
-    <Section fill scrollable title="Details">
+    <Section fill scrollable title="Подробности">
       <Box color="label">
         {PAI_DESCRIPTION}
         <br />
@@ -67,11 +68,11 @@ const InputDisplay = (props) => {
   const { name, description, comments } = input;
 
   return (
-    <Section fill title="Input">
+    <Section fill title="Ввод">
       <Stack fill vertical>
         <Stack.Item>
           <Box bold color="label">
-            Name
+            Имя
           </Box>
           <Input
             fluid
@@ -82,7 +83,7 @@ const InputDisplay = (props) => {
         </Stack.Item>
         <Stack.Item>
           <Box bold color="label">
-            Description
+            Описание
           </Box>
           <Input
             fluid
@@ -93,7 +94,7 @@ const InputDisplay = (props) => {
         </Stack.Item>
         <Stack.Item>
           <Box bold color="label">
-            OOC Comments
+            OOC комментарии
           </Box>
           <Input
             fluid
@@ -121,7 +122,7 @@ const ButtonsDisplay = (props) => {
             onClick={() => act('save', { comments, description, name })}
             tooltip="Saves your candidate data locally."
           >
-            SAVE
+            СОХРАНИТЬ
           </Button>
         </Stack.Item>
         <Stack.Item>
@@ -129,7 +130,7 @@ const ButtonsDisplay = (props) => {
             onClick={() => act('load')}
             tooltip="Loads saved candidate data, if any."
           >
-            LOAD
+            ЗАГРУЗИТЬ
           </Button>
         </Stack.Item>
         <Stack.Item>
@@ -142,15 +143,15 @@ const ButtonsDisplay = (props) => {
               })
             }
           >
-            SUBMIT
+            ОТПРАВИТЬ
           </Button>
         </Stack.Item>
         <Stack.Item>
           <Button
             onClick={() => act('withdraw')}
-            tooltip="Withdraws your pAI candidacy, if any."
+            tooltip="Отзывает вашу кандидатуру ПИИ, при наличии."
           >
-            WITHDRAW
+            ОТОЗВАТЬ
           </Button>
         </Stack.Item>
       </Stack>
