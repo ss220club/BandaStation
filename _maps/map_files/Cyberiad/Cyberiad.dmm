@@ -759,6 +759,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/maintenance/fore)
 "akD" = (
@@ -3722,6 +3723,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 6
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "aVh" = (
@@ -10378,12 +10380,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/security/processing)
-"czV" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/station/maintenance/fore)
 "czW" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/kirbyplants{
@@ -38749,6 +38745,7 @@
 "jvU" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/maintenance/fore)
 "jwl" = (
@@ -44212,12 +44209,6 @@
 /obj/machinery/firealarm/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
-"kKz" = (
-/obj/structure/disposalpipe/segment{
-	dir = 9
-	},
-/turf/open/floor/plating,
-/area/station/maintenance/fore)
 "kKA" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -51415,6 +51406,7 @@
 "mzl" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/spawner/random/trash/garbage,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "mzy" = (
@@ -72519,13 +72511,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cult,
 /area/station/maintenance/starboard/fore)
-"rJt" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/iron,
-/area/station/maintenance/fore)
 "rJv" = (
 /obj/machinery/rnd/production/circuit_imprinter,
 /obj/effect/turf_decal/bot,
@@ -81249,6 +81234,7 @@
 /obj/structure/grille/broken,
 /obj/item/stack/rods,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "tPZ" = (
@@ -197837,7 +197823,7 @@ fgy
 fgy
 fgy
 fgy
-czV
+fqI
 fgy
 fgy
 fgy
@@ -198091,10 +198077,10 @@ mZY
 uNg
 aVf
 jvU
-keI
+wRx
 tPU
 mzl
-kKz
+bGz
 fgy
 vNb
 afU
@@ -198603,7 +198589,7 @@ hOK
 wtn
 mZY
 pab
-rJt
+qXZ
 fgy
 fgy
 fgy
