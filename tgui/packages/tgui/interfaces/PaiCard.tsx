@@ -118,7 +118,7 @@ const CandidateDisplay = (props: { candidate: Candidate; index: number }) => {
           {name ? (
             <Box color="green">{name}</Box>
           ) : (
-            'Имя не указано — оно будет выбрано случайным образом.'
+            'Имя не указано - оно будет выбрано случайным образом.'
           )}
         </Stack.Item>
         {!!description && (
