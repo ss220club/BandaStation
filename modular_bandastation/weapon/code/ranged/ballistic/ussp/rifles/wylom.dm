@@ -28,6 +28,8 @@
 	fire_delay = 2 SECONDS
 	actions_types = list()
 	force = 15 // I mean if you're gonna beat someone with the thing you might as well get damage appropriate for how big the fukken thing is
+	slowdown = 1
+	item_flags = NEEDS_PERMIT | SLOWS_WHILE_IN_HAND
 
 /obj/item/gun/ballistic/automatic/wylom/examine(mob/user)
 	. = ..()
@@ -49,6 +51,7 @@
 /obj/item/gun/ballistic/automatic/wylom/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 2)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/wylom/bulpup
 	name = "AMV/B-92 'Wyłom'"
@@ -56,6 +59,7 @@
 	inhand_icon_state = "wylom_bulpup"
 	worn_icon_state = "wylom_bulpup"
 	recoil = 1.5
+	slowdown = 0.5
 
 /obj/item/gun/ballistic/automatic/wylom/bulpup/examine_more(mob/user)
 	. = ..()
