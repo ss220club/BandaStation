@@ -238,7 +238,7 @@
 		balloon_alert(user, "недоступно: занесен в чёрный список НТ")
 		return FALSE
 	if(request_spam)
-		balloon_alert(user, "запрос отправлен слишком недавно")
+		balloon_alert(user, "запрос отправлен слишком часто")
 		return FALSE
 	request_spam = TRUE
 	playsound(src, 'sound/machines/ping.ogg', 20, TRUE)
