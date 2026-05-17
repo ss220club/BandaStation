@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/cm40
 	name = "CM-40"
-	desc = "Пулемет под калибр 7.62x51мм, способный вести интенсивный подавляющий огонь, используемый тяжелого вооруженными боевыми отрядами Нанотрейзен."
+	desc = "Пулемет под калибр 7.62x51мм, способный вести интенсивный подавляющий огонь, используемый тяжеловооруженными боевыми отрядами Нанотрейзен."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "cm40"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
