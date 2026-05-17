@@ -293,5 +293,5 @@
 	screen_image = /datum/pai_screen_image/neutral
 	update_appearance()
 	playsound(src, 'sound/effects/pai_boot.ogg', 50, TRUE, -1)
-	audible_message("[capitalize(declent_ru(NOMINATIVE))] издает радостный шум запуска!")
+	audible_message("[capitalize(declent_ru(NOMINATIVE))] издаёт радостный шум запуска!")
 	return TRUE
