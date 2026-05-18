@@ -60,6 +60,14 @@
 	suffix = "basic"
 	name = "Standard Gamma Armory Shuttle"
 
+/datum/map_template/shuttle/gamma/bio
+	suffix = "bio"
+	name = "Biohazard Gamma Armory Shuttle"
+
+/datum/map_template/shuttle/gamma/holy
+	suffix = "holy"
+	name = "Holy Gamma Armory Shuttle"
+
 /datum/map_template/shuttle/gamma/clown
 	suffix = "clown"
 	name = "Clown Gamma Armory Shuttle"
