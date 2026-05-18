@@ -9,7 +9,6 @@
 	B.dir = dir
 	B.id = id
 
-//MARK: SS220BS introduction
 /obj/structure/bodycontainer/crematorium/broken
 	name = "broken crematorium"
 	desc = "Сломанный крематорий, но выглядит так, будто его можно починить."
@@ -28,9 +27,8 @@
 	var/sparking = TRUE
 
 /obj/structure/bodycontainer/crematorium/broken/Initialize(mapload)
-	GLOB.crematoriums -= src
 	. = ..()
-
+	GLOB.crematoriums -= src
 	START_PROCESSING(SSobj, src)
 
 /obj/structure/bodycontainer/crematorium/broken/Destroy()
@@ -61,7 +59,7 @@
 /obj/structure/bodycontainer/crematorium/broken/attackby(obj/item/W, mob/user, params)
 
 //MARK: Первая стадия ремонта - использование 5 игнайтеров
-	if(istype(W, /obj/item/assembly/igniter) && repair_stage == 0)
+	if(isigniter(W) && repair_stage == CREMATORIUM_STAGE_IGNITERS)
 
 		qdel(W)
 
@@ -71,7 +69,7 @@
 
 		if(igniters_installed >= CREMATORIUM_REPAIR_IGNITERS)
 
-			repair_stage = 1
+			repair_stage = CREMATORIUM_STAGE_SCREWDRIVER
 			sparking = FALSE
 
 			to_chat(user, span_notice("Система поджига восстановлена. Теперь необходимо закрепить воспламенители отверткой."))
@@ -79,23 +77,21 @@
 		return
 
 //MARK: Вторая стадия ремонта - использование отвертки
-	if(W.tool_behaviour == TOOL_SCREWDRIVER && repair_stage == 1)
-
-		playsound(src, 'sound/items/tools/screwdriver.ogg', 50, TRUE)
+	if(W.tool_behaviour == TOOL_SCREWDRIVER && repair_stage ==  CREMATORIUM_STAGE_SCREWDRIVER)
 
 		to_chat(user, span_notice("Вы начинаете закреплять воспламенители крематория..."))
 
 		if(!W.use_tool(src, user, 3 SECONDS))
 			return
 
-		repair_stage = 2
+		repair_stage = CREMATORIUM_STAGE_PLASTEEL
 
 		to_chat(user, span_notice("Воспламенители закреплены. Теперь требуется пласталь."))
 
 		return
 
 //MARK: Третья стадия ремонта - применение 2 листов пластали, смена спрайта
-	if(istype(W, /obj/item/stack/sheet/plasteel) && repair_stage == 2)
+	if(istype(W, /obj/item/stack/sheet/plasteel) && repair_stage ==  CREMATORIUM_STAGE_PLASTEEL)
 
 		var/obj/item/stack/sheet/plasteel/P = W
 
@@ -105,7 +101,9 @@
 
 		P.use(2)
 
-		repair_stage = 3
+		icon_state = (repair_stage >= CREMATORIUM_STAGE_PLASTEEL) ? "crema_broken1" : "crema_broken"
+
+		repair_stage = CREMATORIUM_STAGE_WELDING
 		update_appearance()
 
 		to_chat(user, span_notice("Вы заменяете поврежденные панели пласталью. Осталось заварить корпус."))
@@ -113,17 +111,18 @@
 		return
 
 //MARK: Четвертая стадия ремонта - использование сварки, превращение обратно в функционирующий крематорий
-	if(W.tool_behaviour == TOOL_WELDER && repair_stage == 3)
+	if(W.tool_behaviour == TOOL_WELDER && repair_stage == CREMATORIUM_STAGE_WELDING)
 
-		if(!W.tool_start_check(user, amount=0))
+		if(!W.tool_start_check(user, amount=1))
 			return
-
-		playsound(src, 'sound/items/tools/welder.ogg', 50, TRUE)
 
 		to_chat(user, span_notice("Вы начинаете восстанавливать крематорий..."))
 
-		if(!W.use_tool(src, user, 5 SECONDS))
+		if(!W.use_tool(src, user, 5 SECONDS, amount=1))
 			return
+
+	for(var/atom/movable/movable as anything in src)
+  		movable.forceMove(get_step(src, dir))
 
 		var/obj/structure/bodycontainer/crematorium/C = new(loc)
 
@@ -154,15 +153,3 @@
 
 		if(3)
 			. += span_notice("Осталось заварить корпус [span_bold("сваркой")]")
-
-/obj/structure/bodycontainer/crematorium/broken/update_icon_state()
-
-	switch(repair_stage)
-
-		if(0, 1)
-			icon_state = "crema_broken"
-
-		if(2, 3)
-			icon_state = "crema_broken1"
-
-	return ..()

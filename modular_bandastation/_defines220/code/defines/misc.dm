@@ -6,3 +6,9 @@
 #define LAZYCUT(L, START, END) ( L ? L.Cut(START, END) : NOOP )
 /// The number of Igniters needed to repair the crematorium
 #define CREMATORIUM_REPAIR_IGNITERS 5
+/// Repair stages
+#define CREMATORIUM_STAGE_IGNITERS 0
+#define CREMATORIUM_STAGE_SCREWDRIVER 1
+#define CREMATORIUM_STAGE_PLASTEEL 2
+#define CREMATORIUM_STAGE_WELDING 3
+
