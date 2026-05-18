@@ -121,7 +121,12 @@
 		if(!W.use_tool(src, user, 5 SECONDS, amount = 1))
 			return
 
-		move_contents_to(get_step(src, dir))
+		for(var/atom/movable/movable in contents)
+
+			if(movable == connected)
+				continue
+
+			movable.forceMove(get_step(src, dir))
 
 		var/obj/structure/bodycontainer/crematorium/C = new(loc)
 
