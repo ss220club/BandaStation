@@ -407,3 +407,9 @@
 
 /obj/structure/blood_worm_cocoon/adult/examine(mob/user)
 	return ..() + span_warning("Его можно сломать, чтобы предотвратить размножение кровяного червя, но на вид он чрезвычайно прочный.")
+
+/datum/action/cooldown/mob_cooldown/blood_worm/cocoon/hatchling/polymorph
+	new_worm_type = /mob/living/basic/blood_worm/juvenile/polymorph
+
+/datum/action/cooldown/mob_cooldown/blood_worm/cocoon/juvenile/polymorph
+	new_worm_type = /mob/living/basic/blood_worm/adult/polymorph
