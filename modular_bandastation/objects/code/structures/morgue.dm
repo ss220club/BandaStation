@@ -121,8 +121,8 @@
 		if(!W.use_tool(src, user, 5 SECONDS, amount=1))
 			return
 
-	for(var/atom/movable/movable as anything in src)
-  		movable.forceMove(get_step(src, dir))
+		for(var/atom/movable/movable as anything in src)
+  			movable.forceMove(get_step(src, dir))
 
 		var/obj/structure/bodycontainer/crematorium/C = new(loc)
 
