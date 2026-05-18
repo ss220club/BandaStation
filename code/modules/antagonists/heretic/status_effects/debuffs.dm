@@ -260,7 +260,7 @@
 /datum/status_effect/moon_slept/on_apply()
 	. = owner.SetUnconscious(duration * 0.5, ignore_canstun = FALSE)
 	if(!.)
-		owner.balloon_alert(owner, "Вы перебороли сонливость!")
+		owner.balloon_alert(owner, "сонливость переборена!")
 	to_chat(owner, span_hypnophrase(("ЛУНА ПОКАЗЫВАЕТ ВАМ ПРАВДУ, А ЛЖЕЦЫ ХОТЯТ СКРЫТЬ ЕЁ, так.. стоп, нет, это неправильно.</span>")))
 	owner.balloon_alert(owner, "они лгут..подождите-ка, а о чём они лгут?")
 
