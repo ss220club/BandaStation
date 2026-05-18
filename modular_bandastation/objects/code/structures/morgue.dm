@@ -113,16 +113,15 @@
 //MARK: Четвертая стадия ремонта - использование сварки, превращение обратно в функционирующий крематорий
 	if(W.tool_behaviour == TOOL_WELDER && repair_stage == CREMATORIUM_STAGE_WELDING)
 
-		if(!W.tool_start_check(user, amount=1))
+		if(!W.tool_start_check(user, amount = 1))
 			return
 
 		to_chat(user, span_notice("Вы начинаете восстанавливать крематорий..."))
 
-		if(!W.use_tool(src, user, 5 SECONDS, amount=1))
+		if(!W.use_tool(src, user, 5 SECONDS, amount = 1))
 			return
 
-		for(var/atom/movable/movable as anything in src)
-  			movable.forceMove(get_step(src, dir))
+		move_contents_to(get_step(src, dir))
 
 		var/obj/structure/bodycontainer/crematorium/C = new(loc)
 
