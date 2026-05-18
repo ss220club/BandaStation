@@ -1,7 +1,6 @@
 /obj/item/multitool
-	var/stored_button_id = null
+	var/stored_id = null
 
-//MARK: Save ID buffer for button from SS220BS
 /obj/item/multitool/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
 
 	//--------------------------------------------------
@@ -16,9 +15,9 @@
 			to_chat(user, span_warning("В мультитуле нет сохранённого ID!"))
 			return ITEM_INTERACT_BLOCKING
 
-		B.id = stored_button_id
+		B.id = stored_id
 
-		to_chat(user, span_notice("Вы устанавливаете ID кнопки на '[stored_button_id]'."))
+		to_chat(user, span_notice("Вы устанавливаете ID кнопки на '[stored_id]'."))
 
 		playsound(src, 'sound/machines/click.ogg', 30, TRUE)
 
@@ -32,13 +31,13 @@
 
 		var/obj/item/assembly/control/C = interacting_with
 
-		if(!stored_button_id)
+		if(!stored_id)
 			to_chat(user, span_warning("В мультитуле нет сохранённого ID!"))
 			return ITEM_INTERACT_BLOCKING
 
-		C.id = stored_button_id
+		C.id = stored_id
 
-		to_chat(user, span_notice("Вы устанавливаете ID контроллера на '[stored_button_id]'."))
+		to_chat(user, span_notice("Вы устанавливаете ID контроллера на '[stored_id]'."))
 
 		playsound(src, 'sound/machines/click.ogg', 30, TRUE)
 
@@ -52,9 +51,9 @@
 		to_chat(user, span_warning("У объекта отсутствует ID."))
 		return ITEM_INTERACT_BLOCKING
 
-	stored_button_id = interacting_with:id
+	stored_id = interacting_with:id
 
-	to_chat(user, span_notice("Мультитул сохраняет ID: '[stored_button_id]'."))
+	to_chat(user, span_notice("Мультитул сохраняет ID: '[stored_id]'."))
 
 	playsound(src, 'sound/items/taperecorder/tape_flip.ogg', 30, TRUE)
 
@@ -66,11 +65,11 @@
 
 /obj/item/multitool/attack_self_secondary(mob/user)
 
-	if(!stored_button_id)
+	if(!stored_id)
 		to_chat(user, span_warning("Буфер мультитула уже пуст."))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	stored_button_id = null
+	stored_id = null
 
 	to_chat(user, span_notice("Вы очищаете буфер ID мультитула."))
 
@@ -81,5 +80,5 @@
 /obj/item/multitool/examine(mob/user)
 	. = ..()
 
-	if(stored_button_id)
+	if(stored_id)
 		. += span_notice("ПКМ по мультитулу — очистить сохранённый ID.")
