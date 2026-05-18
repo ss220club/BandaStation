@@ -9,6 +9,15 @@
 	B.dir = dir
 	B.id = id
 
+	for(var/atom/movable/movable in contents)
+
+		if(movable == connected)
+			continue
+
+		movable.forceMove(get_step(src, dir))
+
+	qdel(src)
+
 /obj/structure/bodycontainer/crematorium/broken
 	name = "broken crematorium"
 	desc = "Сломанный крематорий, но выглядит так, будто его можно починить."
@@ -120,13 +129,6 @@
 
 		if(!W.use_tool(src, user, 5 SECONDS, amount = 1))
 			return
-
-		for(var/atom/movable/movable in contents)
-
-			if(movable == connected)
-				continue
-
-			movable.forceMove(get_step(src, dir))
 
 		var/obj/structure/bodycontainer/crematorium/C = new(loc)
 
