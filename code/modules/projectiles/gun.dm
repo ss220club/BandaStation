@@ -314,8 +314,8 @@
 		var/y_component = cos(get_angle(user, pbtarget)) * 40
 		var/obj/effect/abstract/particle_holder/gun_smoke = new(get_turf(src), /particles/firing_smoke)
 		gun_smoke.particles.velocity = list(x_component, y_component)
-		addtimer(VARSET_CALLBACK(gun_smoke.particles, count, 0), 5)
-		addtimer(VARSET_CALLBACK(gun_smoke.particles, drift, 0), 3)
+		addtimer(VARSET_CALLBACK(gun_smoke.particles, count, 0), 0.5 SECONDS)
+		addtimer(VARSET_CALLBACK(gun_smoke.particles, drift, 0), 0.3 SECONDS)
 		QDEL_IN(gun_smoke, 0.6 SECONDS)
 // BANDASTATION ADDITION END
 	if(chambered?.integrity_damage)
