@@ -47,9 +47,12 @@
 /obj/item/gun/ballistic/shotgun/riot/renoster/update_icon_state()
 	. = ..()
 	if(sawn_off)
+		lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+		righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 		inhand_icon_state = "[base_icon_state]_sawoff"
 		worn_icon_state = "[base_icon_state]_sawoff"
 		suppressor_x_offset = 0
+		recoil = 3
 	else
 		inhand_icon_state = "[base_icon_state]"
 		worn_icon_state = "[base_icon_state]"
