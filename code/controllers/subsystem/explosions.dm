@@ -382,12 +382,12 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 	if(!silent)
 		shake_the_room(epicenter, orig_max_distance, far_dist, devastation_range, heavy_impact_range)
 
-	if(heavy_impact_range > 1)
-		var/effect_type = /datum/effect_system/explosion
-		if (smoke)
-			effect_type = /datum/effect_system/explosion/smoke
-		var/datum/effect_system/explosion/system = new effect_type(epicenter)
-		system.start()
+	if(devastation_range > 0)
+		new /obj/effect/temp_visual/explosion(epicenter, max_range, LIGHT_COLOR_LAVA, FALSE, TRUE)
+	else if(heavy_impact_range > 0)
+		new /obj/effect/temp_visual/explosion(epicenter, max_range, LIGHT_COLOR_LAVA, FALSE, FALSE)
+	else if(light_impact_range > 0)
+		new /obj/effect/temp_visual/explosion(epicenter, max_range, LIGHT_COLOR_LAVA, TRUE, FALSE)
 
 	//flash mobs
 	if(flash_range)

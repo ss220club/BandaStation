@@ -994,3 +994,7 @@
 /// Logic for adding reskin components goes here. Override for atom-specific reskin setups.
 /atom/proc/setup_reskins()
 	return
+// BANDASTATION ADDITION START: PARTICLES
+/atom/proc/add_debris_element()
+	AddElement(/datum/element/debris, null, -15, 8, 0.7)
+// BANDASTATION ADDITION END

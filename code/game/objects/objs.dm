@@ -61,6 +61,7 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 	. = ..()
 
 	check_on_table()
+	add_debris_element() // BANDASTATION ADDITION: PARTICLES
 
 	if (id_tag)
 		GLOB.objects_by_id_tag[id_tag] = src

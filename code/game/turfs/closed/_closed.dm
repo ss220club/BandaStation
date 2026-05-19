@@ -9,7 +9,11 @@
 	init_air = FALSE
 	rad_insulation = RAD_MEDIUM_INSULATION
 	pass_flags_self = PASSCLOSEDTURF
-
+// BANDASTATION ADDITION START: PARTICLES
+/turf/closed/Initialize(mapload)
+	. = ..()
+	add_debris_element()
+// BANDASTATION ADDITION END
 /turf/closed/AfterChange()
 	. = ..()
 	SSair.high_pressure_delta -= src

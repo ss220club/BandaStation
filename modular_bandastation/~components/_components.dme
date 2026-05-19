@@ -2,5 +2,6 @@
 
 #include "code/backstab.dm"
 #include "code/ckey_and_role_locked_pickup.dm"
+#include "code/debris.dm"
 #include "code/stamina_cost_per_hit.dm"
 #include "code/rip_and_tear_item.dm"

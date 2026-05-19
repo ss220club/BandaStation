@@ -347,15 +347,15 @@
 	layer = ABOVE_ALL_MOB_LAYER
 	plane = ABOVE_GAME_PLANE
 	duration = 4
-
-/obj/effect/temp_visual/explosion
+// BANDASTATION REMOVAL START: PARTICLES
+/*///obj/effect/temp_visual/explosion
 	name = "explosion"
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "explosion"
 	pixel_x = -32
 	pixel_y = -32
 	duration = 8
-
+*/// BANDASTATION REMOVAL END
 /obj/effect/temp_visual/explosion/fast
 	icon_state = "explosionfast"
 	duration = 4

@@ -80,6 +80,8 @@ GLOBAL_LIST_INIT(turfs_openspace, typecacheof(list(
 
 #define islava(A) (istype(A, /turf/open/lava))
 
+#define iswater(A) (istype(A, /turf/open/water)) // BANDASTATION ADDITION: PARTICLES
+
 #define ischasm(A) (istype(A, /turf/open/chasm))
 
 #define isplatingturf(A) (istype(A, /turf/open/floor/plating))
