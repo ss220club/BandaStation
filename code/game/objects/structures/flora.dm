@@ -1025,9 +1025,6 @@
 	can_uproot = FALSE
 	delete_on_harvest = TRUE
 
-/obj/structure/flora/rock/add_debris_element()
-	AddElement(/datum/element/debris, DEBRIS_ROCK, -20, 10)
-
 /obj/structure/flora/rock/get_potential_products()
 	return list(/obj/item/stack/ore/glass/basalt = 1)
 
