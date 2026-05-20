@@ -49,8 +49,8 @@
 	if(sawn_off)
 		lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
 		righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
-		inhand_icon_state = "[base_icon_state]_sawoff"
-		worn_icon_state = "[base_icon_state]_sawoff"
+		inhand_icon_state = "[base_icon_state]_sawn"
+		worn_icon_state = "[base_icon_state]_sawn"
 		suppressor_x_offset = 0
 		recoil = 3
 	else
