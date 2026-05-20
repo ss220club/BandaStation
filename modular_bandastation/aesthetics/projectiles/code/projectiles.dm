@@ -1,6 +1,16 @@
+// Things for animations
+/obj/projectile
+	animate_movement = NO_STEPS //Use SLIDE_STEPS in conjunction with legacy
+
 // Actual icon replace
 /obj/projectile/bullet
 	icon = 'modular_bandastation/aesthetics/projectiles/icons/projectiles.dmi'
+	// Light for bullets
+	light_system = OVERLAY_LIGHT
+	light_range = 1.25
+	light_power = 1
+	light_color = COLOR_VERY_SOFT_YELLOW
+	light_on = TRUE
 
 // Override to default
 /obj/projectile/bullet/lollipop
