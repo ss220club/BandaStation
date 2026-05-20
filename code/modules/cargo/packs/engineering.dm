@@ -223,7 +223,7 @@
 	contains = list(/obj/item/clothing/under/rank/engineering/chief_engineer/turtleneck,
 					/obj/item/clothing/under/rank/engineering/chief_engineer/turtleneck/skirt,
 				)
-	crate_name= "водолазка главного инженера"
+	crate_name= "ящик с водолазкой главного инженера"
 
 /// Engine Construction
 
