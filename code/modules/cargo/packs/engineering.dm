@@ -347,5 +347,5 @@
 	cost = CARGO_CRATE_VALUE * 11
 	access_view = ACCESS_ENGINEERING
 	contains = list(/obj/item/golfcart_kit = 1, /obj/item/key/golfcart = 2, /obj/item/stock_parts/power_store/cell/lead = 1)
-	crate_name = "ящик с комплектом запчастей для гольф-кара"
+	crate_name = "ящик с комплектом запчастей для гольф кара"
 	crate_type = /obj/structure/closet/crate/engineering
