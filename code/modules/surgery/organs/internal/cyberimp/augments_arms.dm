@@ -450,13 +450,13 @@
 	/// The amount of damage the implant adds to the upper punching force of our arm.
 	var/upper_punch_damage = 2
 	/// The amount of punch effectiveness (AKA accuracy and crit potential) the implant adds to our arm
-	var/punch_effectiveness_added = 10
+	var/punch_effectiveness_added = 4
 	/// How much extra damage does our implant allow the implanted while grabbing someone and they are unable to break the grapple?
 	var/bonus_grab_damage = 20
 	/// Biotypes we apply an additional amount of damage too
-	var/biotype_bonus_targets = MOB_SPECIAL | MOB_MINING
+	//var/biotype_bonus_targets = MOB_SPECIAL | MOB_MINING // BANDASTATION REMOVAL - remove strong-arm lavaland fauna bane
 	/// Extra damage dealt to our targeted mobs
-	var/biotype_bonus_damage = 20
+	//var/biotype_bonus_damage = 20 // BANDASTATION REMOVAL - remove strong-arm lavaland fauna bane
 	/// IF true, the throw attack will not smash people into walls
 	var/non_harmful_throw = TRUE
 	/// How far away your attack will throw your oponent
@@ -569,9 +569,9 @@
 		if(living_target.body_position == LYING_DOWN)
 			ground_bounce = TRUE
 
-	var/is_correct_biotype = living_target.mob_biotypes & biotype_bonus_targets
-	if(biotype_bonus_targets && is_correct_biotype) //If we are punching one of our special biotype targets, increase the damage floor by a factor of two.
-		potential_damage += biotype_bonus_damage
+	//var/is_correct_biotype = living_target.mob_biotypes & biotype_bonus_targets // BANDASTATION REMOVAL - remove strong-arm lavaland fauna bane
+	//if(biotype_bonus_targets && is_correct_biotype) //If we are punching one of our special biotype targets, increase the damage floor by a factor of two. // BANDASTATION REMOVAL - remove strong-arm lavaland fauna bane
+	//	potential_damage += biotype_bonus_damage // BANDASTATION REMOVAL - remove strong-arm lavaland fauna bane
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
