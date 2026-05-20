@@ -223,7 +223,7 @@
 	contains = list(/obj/item/clothing/under/rank/engineering/chief_engineer/turtleneck,
 					/obj/item/clothing/under/rank/engineering/chief_engineer/turtleneck/skirt,
 				)
-	crate_name= "водолазка главного инженера"
+	crate_name= "ящик с водолазкой главного инженера"
 
 /// Engine Construction
 
@@ -341,11 +341,11 @@
 	crate_type = /obj/structure/closet/crate/engineering
 
 /datum/supply_pack/engineering/golfcart
-	name = "Ящик с комплектом запчастей для гольф-кара"
+	name = "Ящик с комплектом запчастей для гольф кара"
 	desc = "Содержит детали для сборки карта, предназначенного для перемещения тяжелой техники и грузов по станции. \
 		Нанотрейзен не несет ответственности за карты работающие 'станционными маршрутками'."
 	cost = CARGO_CRATE_VALUE * 11
 	access_view = ACCESS_ENGINEERING
 	contains = list(/obj/item/golfcart_kit = 1, /obj/item/key/golfcart = 2, /obj/item/stock_parts/power_store/cell/lead = 1)
-	crate_name = "ящик с комплектом запчастей для гольф-кара"
+	crate_name = "ящик с комплектом запчастей для гольф кара"
 	crate_type = /obj/structure/closet/crate/engineering
