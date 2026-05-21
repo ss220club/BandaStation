@@ -571,7 +571,7 @@
 
 	var/is_correct_biotype = living_target.mob_biotypes & biotype_bonus_targets
 	if(biotype_bonus_targets && is_correct_biotype) //If we are punching one of our special biotype targets, increase the damage floor by a factor of two.
-		potential_damage += biotype_bonus_damage // BANDASTATION MOD: Remove strong-arm lavaland fauna bane
+		potential_damage += biotype_bonus_damage
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
