@@ -17,8 +17,8 @@
 	desc = "Тяжелый дробовик двенадцатого калибра, вмещающий шесть патронов. Производится для различных военных подразделений ТСФ и используется ими."
 	sawn_desc = "Обрез тяжелого дробовика двенадцатого калибра, вмещающий шесть патронов. Главное не сломать себе руки."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
-	base_icon_state = "renoster"
 	icon_state = "renoster"
+	base_icon_state = "renoster"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	worn_icon_state = "renoster"
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
@@ -47,9 +47,12 @@
 /obj/item/gun/ballistic/shotgun/riot/renoster/update_icon_state()
 	. = ..()
 	if(sawn_off)
-		inhand_icon_state = "[base_icon_state]_sawoff"
-		worn_icon_state = "[base_icon_state]_sawoff"
+		lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+		righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
+		inhand_icon_state = "[base_icon_state]_sawn"
+		worn_icon_state = "[base_icon_state]_sawn"
 		suppressor_x_offset = 0
+		recoil = 3
 	else
 		inhand_icon_state = "[base_icon_state]"
 		worn_icon_state = "[base_icon_state]"
@@ -85,12 +88,13 @@
 	inhand_icon_state = "renoster_black"
 	recoil = 1
 	projectile_damage_multiplier = 1.3
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot/lethal
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/black/examine_more(mob/user)
 	. = ..()
 	. += "На этот вариант установлен более удобный и усовершенственный приклад, что \
 		позволяет серьезно уменьшить отдачу. Внутренний механизм также был усилен, \
-		что позволяет выстреливать еще более мощные боеприпасы. Этот экземлпяр покрашен в черные \
+		что позволяет выстреливать более мощные боеприпасы. Этот экземлпяр покрашен в черные \
 		и красные цвета для повышения тактикульности и серьезности намерений владельца."
 
 /obj/item/gun/ballistic/shotgun/riot/renoster/sawoff
@@ -100,3 +104,6 @@
 /obj/item/gun/ballistic/shotgun/riot/renoster/black/sawoff
 	sawn_off = TRUE
 	w_class = WEIGHT_CLASS_NORMAL
+
+/obj/item/ammo_box/magazine/internal/shot/riot/lethal
+	ammo_type = /obj/item/ammo_casing/shotgun/buckshot/milspec
