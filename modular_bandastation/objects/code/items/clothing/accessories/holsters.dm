@@ -1,4 +1,4 @@
-//MARK: Обычная кобура, пустая
+//MARK: Standart holster, empty
 /obj/item/clothing/accessory/holster
 	name = "shoulder holster"
 	desc = "Обычная, ничем не примечательная кобура под одно небольшое оружие."
@@ -46,7 +46,7 @@
 	if(istype(I, /obj/item/gun))
 		playsound(src, 'modular_bandastation/weapon/sound/ranged/holster_putting.ogg', 50, TRUE)
 
-//MARK: Пустая энергетическая кобура
+//MARK: Empty energy holster
 /obj/item/clothing/accessory/holster/energy
 	name = "energy shoulder holsters"
 	desc = "Обычная, ничем не примечательная кобура под несколько энергетических пистолетов."
@@ -78,7 +78,6 @@
 
 	for(var/obj/item/gun/energy/G in contents)
 		guns += G
-
 	return guns
 
 /obj/item/clothing/accessory/holster/energy/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
@@ -91,7 +90,7 @@
 	if(user)
 		REMOVE_CLOTHING_TRAIT(user, TRAIT_GUNFLIP)
 
-//MARK: Заполненная энергетическая кобура с одним дизейблером
+//MARK: Energy holster with one disabler
 /obj/item/clothing/accessory/holster/energy/disabler
 
 /obj/item/clothing/accessory/holster/energy/disabler/Initialize(mapload)
@@ -99,7 +98,7 @@
 	create_storage(storage_type = /datum/storage/pockets/holst/energy)
 	new /obj/item/gun/energy/disabler(src)
 
-//MARK: Заполненная энергетическая кобура с двумя нано-пистолетами
+//MARK: Energy holster with two nano-pistols
 /obj/item/clothing/accessory/holster/energy/thermal
 
 /obj/item/clothing/accessory/holster/energy/thermal/Initialize(mapload)
@@ -108,7 +107,7 @@
 	new /obj/item/gun/energy/laser/thermal/cryo(src)
 	new /obj/item/gun/energy/laser/thermal/inferno(src)
 
-//MARK: Кобура детектива, пустая
+//MARK: Detective holster
 /obj/item/clothing/accessory/holster/detective
 	name = "detective's holster"
 	desc = "Улучшенная кобура, специально для проведения самых громких и выдающихся расследований. Есть дополнительные кармашки под магазины."
@@ -139,7 +138,7 @@
 	. = ..()
 	create_storage(storage_type = /datum/storage/pockets/holst/dec)
 
-//MARK: Проверка на то, чтобы была возможность помещать только один вид оружия
+//MARK: One gun logic
 /obj/item/clothing/accessory/holster/detective/Entered(atom/movable/I)
 	. = ..()
 
@@ -161,14 +160,13 @@
 			user = src.loc
 		else if(ismob(src.loc?.loc))
 			user = src.loc.loc
-
 		new_gun.forceMove(user ? user : get_turf(src))
 
 		if(user)
 			user.put_in_hands(new_gun)
 			to_chat(user, span_warning("В кобуре уже есть оружие!"))
 
-//MARK: Полная кобура детектива
+//MARK: Full detective holster
 /obj/item/clothing/accessory/holster/detective/full
 
 /obj/item/clothing/accessory/holster/detective/full/Initialize(mapload)
@@ -178,7 +176,7 @@
 	new /obj/item/ammo_box/speedloader/c38(src)
 	new /obj/item/ammo_box/speedloader/c38(src)
 
-//MARK: Трейторская хамелеон-кобура, пустая
+//MARK: Traitor holster
 /obj/item/clothing/accessory/holster/chameleon
 	name = "pocket protector"
 	desc = "Can protect your clothing from ink stains, but you'll look like a nerd if you're using one."
