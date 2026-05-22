@@ -27,7 +27,7 @@
 
 		var/obj/item/multitool/M = held_item
 
-		if(M.stored_button_id)
+		if(M.stored_id)
 			context[SCREENTIP_CONTEXT_RMB] = "Установить ID"
 		else
 			context[SCREENTIP_CONTEXT_RMB] = "Считать ID"
