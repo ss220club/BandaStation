@@ -59,7 +59,3 @@
 
 /obj/item/gun/ballistic/automatic/cm82/no_mag
 	spawnwithmagazine = FALSE
-
-/obj/item/gun/ballistic/automatic/ar
-	accepted_magazine_type = /obj/item/ammo_box/magazine/c223
-	spawn_magazine_type = /obj/item/ammo_box/magazine/c223
