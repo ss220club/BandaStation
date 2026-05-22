@@ -1,0 +1,5 @@
+author: "NatWak"
+delete-after: True
+changes:
+  - balance: "Strong-arm implant больше не наносит дополнительный урон по шахтёрской фауне."
+  - balance: "Уменьшен дополнительный урон критического урона strong-arm implant."
