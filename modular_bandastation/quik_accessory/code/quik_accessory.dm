@@ -110,7 +110,7 @@
 		return
 
 // Energy holster
-		if(istype(target_accessory, /obj/item/clothing/accessory/holster/energy))
+	if(istype(target_accessory, /obj/item/clothing/accessory/holster/energy))
 
 		var/list/guns = target_accessory:get_holstered_guns()
 		var/obj/item/gun/energy/first_gun = null
