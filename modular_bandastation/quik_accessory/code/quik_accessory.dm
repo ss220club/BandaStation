@@ -69,7 +69,6 @@
 
 // Standart holster
 	if(istype(target_accessory, /obj/item/clothing/accessory/holster))
-
 		var/obj/item/gun/held_gun_normal = null
 
 		if(istype(get_active_held_item(), /obj/item/gun))
@@ -78,9 +77,7 @@
 			held_gun_normal = get_inactive_held_item()
 
 		if(held_gun_normal)
-
 			var/already_has_gun = FALSE
-
 			for(var/obj/item/I in target_accessory.atom_storage.real_location.contents)
 				if(istype(I, /obj/item/gun))
 					already_has_gun = TRUE
@@ -89,12 +86,15 @@
 			if(already_has_gun)
 				to_chat(src, span_warning("В кобуре уже есть оружие!"))
 				return
-			held_gun_normal.forceMove(target_accessory)
+
+			if(!target_accessory.atom_storage?.attempt_insert(held_gun_normal, src))
+				to_chat(src, span_warning("[held_gun_normal] не помещается в кобуру!"))
+				return
 			to_chat(src, span_notice("Вы убираете [held_gun_normal] в кобуру."))
+
 			return
 
 		var/obj/item/gun/holstered_gun = null
-
 		for(var/obj/item/I in target_accessory.atom_storage.real_location.contents)
 			if(istype(I, /obj/item/gun))
 				holstered_gun = I
@@ -106,10 +106,11 @@
 		holstered_gun.forceMove(src.loc)
 		put_in_hands(holstered_gun)
 		to_chat(src, span_notice("Вы быстро достаёте [holstered_gun]."))
+
 		return
 
 // Energy holster
-	if(istype(target_accessory, /obj/item/clothing/accessory/holster/energy))
+		if(istype(target_accessory, /obj/item/clothing/accessory/holster/energy))
 
 		var/list/guns = target_accessory:get_holstered_guns()
 		var/obj/item/gun/energy/first_gun = null
@@ -121,22 +122,25 @@
 		if(guns.len >= 2)
 			second_gun = guns[2]
 
-		var/obj/item/gun/energy/laser/thermal/held_energy = null
-
+		var/obj/item/gun/energy/held_energy = null
 		if(istype(get_active_held_item(), /obj/item/gun/energy))
 			held_energy = get_active_held_item()
 		else if(istype(get_inactive_held_item(), /obj/item/gun/energy))
 			held_energy = get_inactive_held_item()
 
 		if(held_energy)
-
 			if(!first_gun)
-				held_energy.forceMove(target_accessory)
+				if(!target_accessory.atom_storage?.attempt_insert(held_energy, src))
+					to_chat(src, span_warning("[held_energy] не помещается в кобуру!"))
+					return
 				to_chat(src, span_notice("Вы убираете [held_energy] в первый слот кобуры."))
+
 				return
 
 			if(!second_gun)
-				held_energy.forceMove(target_accessory)
+				if(!target_accessory.atom_storage?.attempt_insert(held_energy, src))
+					to_chat(src, span_warning("[held_energy] не помещается в кобуру!"))
+					return
 				to_chat(src, span_notice("Вы убираете [held_energy] во второй слот кобуры."))
 				return
 			to_chat(src, span_warning("Кобура заполнена!"))
@@ -166,7 +170,6 @@
 		return
 
 // Standard accessories
-
 	var/obj/item/held_item = get_active_held_item()
 
 	if(held_item)
