@@ -44,15 +44,11 @@
 				if(!target_accessory.atom_storage?.attempt_insert(held_gun, src))
 					to_chat(src, span_warning("[held_gun] не помещается в кобуру!"))
 					return
-				to_chat(src, span_notice("Вы убираете [held_gun] в первый слот кобуры."))
-				return
 
 			if(!second_gun)
 				if(!target_accessory.atom_storage?.attempt_insert(held_gun, src))
 					to_chat(src, span_warning("[held_gun] не помещается в кобуру!"))
 					return
-				to_chat(src, span_notice("Вы убираете [held_gun] во второй слот кобуры."))
-				return
 			to_chat(src, span_warning("Тактическая кобура заполнена!"))
 
 			return
@@ -94,9 +90,6 @@
 			if(!target_accessory.atom_storage?.attempt_insert(held_gun_normal, src))
 				to_chat(src, span_warning("[held_gun_normal] не помещается в кобуру!"))
 				return
-			to_chat(src, span_notice("Вы убираете [held_gun_normal] в кобуру."))
-
-			return
 
 		var/obj/item/gun/holstered_gun = null
 		for(var/obj/item/I in target_accessory.atom_storage.real_location.contents)
@@ -137,8 +130,6 @@
 				if(!target_accessory.atom_storage?.attempt_insert(held_energy, src))
 					to_chat(src, span_warning("[held_energy] не помещается в кобуру!"))
 					return
-				to_chat(src, span_notice("Вы убираете [held_energy] в первый слот кобуры."))
-				return
 
 			if(!second_gun)
 				if(!target_accessory.atom_storage?.attempt_insert(held_energy, src))
@@ -171,8 +162,6 @@
 			put_in_inactive_hand(target_gun)
 		else
 			put_in_hands(target_gun)
-
-		to_chat(src, span_notice("Вы быстро достаёте [target_gun]."))
 
 		return
 
