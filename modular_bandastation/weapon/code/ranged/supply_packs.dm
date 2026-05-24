@@ -124,7 +124,7 @@
 /datum/supply_pack/security/holsters_thermal
 	name = "Thermals Holster (uniform)"
 	crate_name = "thermals holster crate"
-	desc = "В этом ящике находятся одна энергетическая кобура с двумя нано-пистолетами."
+	desc = "В этом ящике находятся одна энергетическая кобура с двумя термальными пистолетами."
 	cost = CARGO_CRATE_VALUE * 20
 	access_view = ACCESS_WEAPONS
 	contains = list(
