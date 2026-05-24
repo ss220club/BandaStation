@@ -453,7 +453,7 @@
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
 
-			if(H.wear_suit && !attached.above_suit)
+			if(H.wear_suit?.flags_inv & HIDEBELT && !attached.above_suit)
 				continue
 
 		all_accessories += attached.examine_title(user)

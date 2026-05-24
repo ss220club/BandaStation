@@ -46,7 +46,19 @@
 	if(istype(I, /obj/item/gun))
 		playsound(src, 'modular_bandastation/weapon/sound/ranged/holster_putting.ogg', 50, TRUE)
 
-//MARK: Empty energy holster
+/obj/item/clothing/accessory/holster/attack_hand(mob/user)
+
+	if(user != loc)
+		var/mob/living/carbon/human/H = loc
+		if(istype(H))
+			H.visible_message(
+				span_userdanger("[user] пытается сорвать кобуру с [H]!"),
+				span_userdanger("[user] пытается сорвать вашу кобуру!")
+			)
+
+	return ..()
+
+// Empty energy holster
 /obj/item/clothing/accessory/holster/energy
 	name = "energy shoulder holsters"
 	desc = "Обычная, ничем не примечательная кобура под несколько энергетических пистолетов."
@@ -90,7 +102,7 @@
 	if(user)
 		REMOVE_CLOTHING_TRAIT(user, TRAIT_GUNFLIP)
 
-//MARK: Energy holster with one disabler
+// Energy holster with one disabler
 /obj/item/clothing/accessory/holster/energy/disabler
 
 /obj/item/clothing/accessory/holster/energy/disabler/Initialize(mapload)
@@ -107,7 +119,7 @@
 	new /obj/item/gun/energy/laser/thermal/cryo(src)
 	new /obj/item/gun/energy/laser/thermal/inferno(src)
 
-//MARK: Detective holster
+// Detective holster
 /obj/item/clothing/accessory/holster/detective
 	name = "detective's holster"
 	desc = "Улучшенная кобура, специально для проведения самых громких и выдающихся расследований. Есть дополнительные кармашки под магазины."
@@ -138,7 +150,7 @@
 	. = ..()
 	create_storage(storage_type = /datum/storage/pockets/holst/dec)
 
-//MARK: One gun logic
+// One gun logic
 /obj/item/clothing/accessory/holster/detective/Entered(atom/movable/I)
 	. = ..()
 
@@ -166,7 +178,7 @@
 			user.put_in_hands(new_gun)
 			to_chat(user, span_warning("В кобуре уже есть оружие!"))
 
-//MARK: Full detective holster
+// Full detective holster
 /obj/item/clothing/accessory/holster/detective/full
 
 /obj/item/clothing/accessory/holster/detective/full/Initialize(mapload)
@@ -176,7 +188,7 @@
 	new /obj/item/ammo_box/speedloader/c38(src)
 	new /obj/item/ammo_box/speedloader/c38(src)
 
-//MARK: Traitor holster
+// Traitor holster
 /obj/item/clothing/accessory/holster/chameleon
 	name = "pocket protector"
 	desc = "Can protect your clothing from ink stains, but you'll look like a nerd if you're using one."
@@ -211,7 +223,7 @@
 	. = ..()
 	create_storage(storage_type = /datum/storage/pockets/holst/trait)
 
-//MARK: Разные виды тактической кобуры (2 свободных слота)
+// Tacticool holster
 /obj/item/clothing/accessory/holster/tacticool
 	name = "tacticool holster"
 	desc = "Темная, тактическая кобура с двумя карманами, предназначенная для выполнения специальных задач. Особые крепления позволяют её надеть поверх униформы"
