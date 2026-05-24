@@ -8,45 +8,30 @@ OUT_DIR="${ROOT}/modular_bandastation/translations/code/translation_data/ru_name
 CASE_KEYS=(nominative genitive dative accusative instrumental prepositional)
 
 normalize() {
-  local t=$1
-  if [[ -z "$t" ]]; then
-    printf ''
-    return
-  fi
-  t=$(printf '%s' "$t" | tr -s '[:space:]' ' ')
+  local t
+  t=$(printf '%s' "$1" | tr -s '[:space:]' ' ')
   t="${t#"${t%%[![:space:]]*}"}"
-  t="${t%"${t##*[![:space:]]}"}"
-  printf '%s' "$t"
+  printf '%s' "${t%"${t##*[![:space:]]}"}"
 }
 
 phrase_to_stem() {
-  local p="$1" s
-  s=${p// /_}
-  s=${s//\\/}
-  s=${s////_}
-  if [[ -n "${s}" ]]; then
-    s=$(printf '%s' "$s" | LC_ALL=C sed 's/[[:cntrl:]<>:"|?*]/_/g')
-    s=$(printf '%s' "$s" | sed 's/[. ]*$//')
-  fi
-  [[ -z "${s}" ]] && s="_"
-  printf '%s' "$s"
+  local s="${1// /_}"
+  s="${s//\\/}"
+  s="${s////_}"
+  [[ -n "$s" ]] && s=$(printf '%s' "$s" | LC_ALL=C sed 's/[[:cntrl:]<>:"|?*]/_/g; s/[. ]*$//')
+  printf '%s' "${s:-_}"
 }
 
 toml_double_quoted_string() {
-  local s="$1"
-  s=${s//\\/\\\\}
-  s=${s//\"/\\\"}
-  printf '"%s"' "$s"
+  local s="${1//\\/\\\\}"
+  printf '"%s"' "${s//\"/\\\"}"
 }
 
 table_header_line() {
-  local k="$1"
-  if [[ -z "$k" ]] || [[ ! "$k" =~ ^[A-Za-z0-9_-]+$ ]]; then
-    local e="${k//\\/\\\\}"
-    e="${e//\"/\\\"}"
-    printf '[\"%s\"]' "$e"
+  if [[ "$1" =~ ^[A-Za-z0-9_-]+$ ]]; then
+    printf '[%s]' "$1"
   else
-    printf '[%s]' "$k"
+    printf '[%s]' "$(toml_double_quoted_string "$1")"
   fi
 }
 
@@ -55,16 +40,16 @@ GENDER="plural"
 while [[ $# -gt 0 ]]; do
   case $1 in
     -o)
-      OUTPUT=${2:-}
-      shift 2
+      [[ -n "${2:-}" ]] || { echo "$0: -o requires an argument" >&2; exit 1; }
+      OUTPUT=$2; shift 2
       ;;
     -g)
-      GENDER=${2:-plural}
-      shift 2
+      [[ -n "${2:-}" ]] || { echo "$0: -g requires an argument" >&2; exit 1; }
+      GENDER=$2; shift 2
       ;;
     -h | --help)
       echo "usage: $0 [-o outfile] [-g gender] [phrase ...]" >&2
-      exit 1
+      exit 0
       ;;
     *)
       break
@@ -79,7 +64,6 @@ else
 fi
 
 phrase=$(normalize "$phrase")
-# Drop ASCII control chars (merge step rejects malformed strings); keeps Cyrillic/other UTF-8 intact.
 phrase=$(LC_ALL=C printf '%s' "$phrase" | tr -d '\000-\037\177')
 if [[ -z "$phrase" ]]; then
   echo "$0: empty phrase — select text in the editor or pass a phrase" >&2
@@ -87,16 +71,14 @@ if [[ -z "$phrase" ]]; then
 fi
 
 GENDER=$(printf '%s' "$GENDER" | tr '[:upper:]' '[:lower:]')
-key=$phrase
-val=$(toml_double_quoted_string "$key")
+val=$(toml_double_quoted_string "$phrase")
 g=$(toml_double_quoted_string "$GENDER")
 
-body=$(table_header_line "$key")$'\n'
+body=$(table_header_line "$phrase")$'\n'
 for fk in "${CASE_KEYS[@]}"; do
   body+="${fk} = ${val}"$'\n'
 done
-body+='gender = '"$g"$'\n'
-body+=$'\n'
+body+="gender = ${g}"$'\n'
 
 if [[ -n "$OUTPUT" ]]; then
   out_path=$OUTPUT
@@ -106,13 +88,11 @@ if [[ -n "$OUTPUT" ]]; then
   esac
 else
   mkdir -p "$OUT_DIR"
-  stem="$(phrase_to_stem "$phrase").toml"
-  out_path="${OUT_DIR}/${stem}"
+  out_path="${OUT_DIR}/$(phrase_to_stem "$phrase").toml"
 fi
 
-parent=$(dirname -- "$out_path")
-mkdir -p "$parent"
-printf '%s' "$body" >"$out_path"
+mkdir -p "$(dirname -- "$out_path")"
+printf '%s\n' "$body" >"$out_path"
 
 if [[ -t 2 ]]; then
   printf '\n \033[1;32mok\033[0m \033[1mru_names\033[0m — фрагмент записан:\n   \033[36m%s\033[0m\n' "$out_path" >&2

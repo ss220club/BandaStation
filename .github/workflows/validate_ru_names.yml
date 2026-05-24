@@ -1,4 +1,4 @@
-name: Validate ru_names
+name: Translations
 
 on:
   workflow_dispatch:
@@ -29,7 +29,7 @@ concurrency:
 
 jobs:
   validate:
-    name: Validate translation files
+    name: Validate ru_names
     runs-on: ubuntu-24.04
     timeout-minutes: 5
 
