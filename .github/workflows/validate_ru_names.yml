@@ -1,0 +1,56 @@
+name: Validate ru_names
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "modular_bandastation/translations/code/translation_data/ru_names/**"
+      - "tools/build/validate_ru_names.ts"
+      - "tools/build/lib/ru_names.ts"
+      - ".github/workflows/validate_ru_names.yml"
+  pull_request:
+    branches:
+      - master
+      - "project/**"
+    paths:
+      - "modular_bandastation/translations/code/translation_data/ru_names/**"
+      - "tools/build/validate_ru_names.ts"
+      - "tools/build/lib/ru_names.ts"
+      - ".github/workflows/validate_ru_names.yml"
+  merge_group:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate translation files
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Bun
+        uses: ./.github/actions/setup_bun
+
+      - name: Cache build tool dependencies
+        uses: actions/cache@v5
+        with:
+          path: tools/build/node_modules
+          key: ${{ runner.os }}-build-tools-${{ hashFiles('tools/build/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-tools-
+
+      - name: Install build tool dependencies
+        run: bun install --frozen-lockfile
+        working-directory: tools/build
+
+      - name: Validate ru_names
+        run: bun tools/build/validate_ru_names.ts

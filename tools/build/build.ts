@@ -105,6 +105,7 @@ export const CutterTarget = new Juke.Target({
 export const RuNamesMergeTarget = new Juke.Target({
   inputs: () => [
     'tools/build/merge_ru_names.ts',
+    'tools/build/lib/ru_names.ts',
     'tools/build/package.json',
     ...Juke.glob(
       'modular_bandastation/translations/code/translation_data/ru_names/**/*.toml',
@@ -114,7 +115,7 @@ export const RuNamesMergeTarget = new Juke.Target({
     'modular_bandastation/translations/code/translation_data/ru_names.toml',
   ],
   executes: async () => {
-    await Juke.exec('bun', ['tools/build/merge_ru_names.ts', '--strict']);
+    await Juke.exec('bun', ['tools/build/merge_ru_names.ts']);
   },
 });
 // BANDASTATION MOD END
