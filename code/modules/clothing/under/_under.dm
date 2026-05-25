@@ -35,6 +35,8 @@
 	var/random_sensor = TRUE
 	/// What is the active sensor mode of this udnersuit
 	var/sensor_mode = SENSOR_OFF
+	/// BANDASTATION: Weight change when accessories are worn
+	var/base_w_class = null
 
 	// Accessory handling (Can be componentized eventually)
 	/// The max number of accessories we can have on this suit.
@@ -51,6 +53,7 @@
 
 /obj/item/clothing/under/Initialize(mapload)
 	. = ..()
+	base_w_class = w_class
 	if(random_sensor)
 		//make the sensor mode favor higher levels, except coords.
 		set_sensor_mode(pick(SENSOR_VITALS, SENSOR_VITALS, SENSOR_VITALS, SENSOR_LIVING, SENSOR_LIVING, SENSOR_COORDS, SENSOR_COORDS, SENSOR_OFF))
@@ -360,6 +363,8 @@
 	// Allow for accessories to react to the acccessory list now
 	accessory.successful_attach(src)
 
+	update_accessory_weight()
+
 	if(user && attach_message)
 		balloon_alert(user, "accessory attached")
 
@@ -386,6 +391,8 @@
 	LAZYREMOVE(attached_accessories, removed)
 
 	removed.detach(src)
+
+	update_accessory_weight()
 
 	if(update)
 		update_accessory_overlay()
@@ -459,6 +466,20 @@
 		all_accessories += attached.examine_title(user)
 
 	return all_accessories
+
+///BANDASTATION EDIT: Change in uniform weight with certain accessories
+/obj/item/clothing/under/proc/update_accessory_weight()
+	w_class = base_w_class
+
+	if(!LAZYLEN(attached_accessories))
+		return
+	for(var/obj/item/clothing/accessory/A in attached_accessories)
+		if(istype(A, /obj/item/clothing/accessory/ammo_vest))
+			w_class = WEIGHT_CLASS_BULKY
+			return
+		if(istype(A, /obj/item/clothing/accessory/holster))
+			w_class = WEIGHT_CLASS_BULKY
+			return
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Adjust Suit Sensors"
