@@ -470,16 +470,12 @@
 ///BANDASTATION EDIT: Change in uniform weight with certain accessories
 /obj/item/clothing/under/proc/update_accessory_weight()
 	w_class = base_w_class
-
 	if(!LAZYLEN(attached_accessories))
 		return
+
 	for(var/obj/item/clothing/accessory/A in attached_accessories)
-		if(A.atom_storage)
-			w_class = WEIGHT_CLASS_BULKY
-			return
-		if(istype(A, /obj/item/clothing/accessory/holster))
-			w_class = WEIGHT_CLASS_BULKY
-			return
+		if(A.w_class >= WEIGHT_CLASS_NORMAL)
+			w_class = max(w_class, A.w_class)
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Adjust Suit Sensors"
