@@ -18,7 +18,7 @@
 
 /obj/item/clothing/suit/magistrate_jacket
 	name = "magistrate's jacket"
-	desc = "A fancy black jacket with golden buttons. Issued only to licensed magistrates."
+	desc = "Элегантный черный пиджак с золотыми пуговицами. Выдается исключительно лицензированным магистратам."
 	icon_state = "magistrate_jak"
 	worn_icon_state = "magistrate_jak"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/magistrate.dmi'
