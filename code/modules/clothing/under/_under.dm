@@ -474,7 +474,7 @@
 	if(!LAZYLEN(attached_accessories))
 		return
 	for(var/obj/item/clothing/accessory/A in attached_accessories)
-		if(istype(A, /obj/item/clothing/accessory/ammo_vest))
+		if(A.atom_storage)
 			w_class = WEIGHT_CLASS_BULKY
 			return
 		if(istype(A, /obj/item/clothing/accessory/holster))
