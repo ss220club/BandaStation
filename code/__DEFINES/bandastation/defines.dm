@@ -31,5 +31,8 @@
 #define ADMIN_DONATOR_LEVEL DONATOR_TIER_3
 #define MAX_DONATOR_LEVEL DONATOR_TIER_5
 
+// TODO: Disables cuff-to-wrist on items, remove when upstream cuffable_item bugs are fixed
+#define CUFFABLE_ITEMS_DISABLED
+
 #define SQUASH_WITH_HANDS_DELAY 1.5 SECONDS
 #define RCD_NO_SKILLCHIP_DELAY_MULTIPLIER 1.5
