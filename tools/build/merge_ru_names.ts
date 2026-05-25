@@ -21,18 +21,12 @@ import {
 const DEFAULT_OUTPUT = `${REPO_ROOT}/modular_bandastation/translations/code/translation_data/ru_names.toml`;
 
 function runMerge(fragmentsRoot: string, outputPath: string): number {
-  if (!existsSync(fragmentsRoot) || !statSync(fragmentsRoot).isDirectory()) {
-    console.log(
-      `No fragments directory at ${fragmentsRoot}; skipping merge (existing ${outputPath} unchanged).`,
-    );
-    return 0;
-  }
-
-  const discovered = discoverFragments(fragmentsRoot);
+  const discovered =
+    existsSync(fragmentsRoot) && statSync(fragmentsRoot).isDirectory()
+      ? discoverFragments(fragmentsRoot)
+      : [];
   if (discovered.length === 0) {
-    console.log(
-      `No *.toml under ${fragmentsRoot}; skipping merge (existing ${outputPath} unchanged).`,
-    );
+    console.warn(`No fragments at ${fragmentsRoot}; skipping merge.`);
     return 0;
   }
 

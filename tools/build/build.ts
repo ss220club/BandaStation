@@ -103,17 +103,7 @@ export const CutterTarget = new Juke.Target({
 
 // BANDASTATION MOD START: merge split ru_names.toml fragments before compiling DM
 export const RuNamesMergeTarget = new Juke.Target({
-  inputs: () => [
-    'tools/build/merge_ru_names.ts',
-    'tools/build/lib/ru_names.ts',
-    'tools/build/package.json',
-    ...Juke.glob(
-      'modular_bandastation/translations/code/translation_data/ru_names/**/*.toml',
-    ),
-  ],
-  outputs: [
-    'modular_bandastation/translations/code/translation_data/ru_names.toml',
-  ],
+  inputs: ['tools/build/merge_ru_names.ts', 'tools/build/lib/ru_names.ts'],
   executes: async () => {
     await Juke.exec('bun', ['tools/build/merge_ru_names.ts']);
   },

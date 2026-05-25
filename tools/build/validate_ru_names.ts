@@ -32,7 +32,6 @@ const CASE_FIELDS = [
 const OPTIONAL_CASE_FIELDS = CASE_FIELDS.slice(1);
 const VALID_GENDER_VALUES = new Set(['male', 'female', 'neuter', 'plural']);
 const ALL_KNOWN_FIELDS = new Set<string>([...CASE_FIELDS, 'gender']);
-const ALLOWED_FIELDS_MSG = [...ALL_KNOWN_FIELDS].sort().join(', ');
 
 interface FragmentResult {
   relativePath: string;
