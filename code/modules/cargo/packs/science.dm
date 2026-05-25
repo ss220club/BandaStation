@@ -21,7 +21,7 @@
 
 // Dummy type used in generating anomaly core supply packs, not actually orderable
 /datum/supply_pack/science/raw_anomaly
-	cost = CARGO_CRATE_VALUE * 10
+	cost = CARGO_CRATE_VALUE * 25 // Original price: 2000 New price: 5000
 	access = ACCESS_ORDNANCE
 	access_view = ACCESS_ORDNANCE
 	crate_type = /obj/structure/closet/crate/secure/science
@@ -126,7 +126,7 @@
 /datum/supply_pack/science/mechcore
 	name = "Mech Power Core Crate"
 	desc = "Набор силовых ядер для создания мехов"
-	cost = CARGO_CRATE_VALUE * 12
+	cost = CARGO_CRATE_VALUE * 30 // Original price: 2400 New price: 6000
 	access = ACCESS_ROBOTICS
 	access_view = ACCESS_ROBOTICS
 	contains = list(/obj/item/mecha_parts/core = 1)

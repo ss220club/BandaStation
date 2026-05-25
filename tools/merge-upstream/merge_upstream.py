@@ -272,7 +272,7 @@ def translate_changelog(changelog: typing.Dict[int, list[Change]]):
         context = "\n".join(f.readlines()).strip()
 
     client = OpenAI(
-        base_url="https://models.inference.ai.azure.com",
+        base_url="https://models.github.ai/inference",
         api_key=OPENAI_API_KEY,
     )
     response: ChatCompletion = client.chat.completions.create(
@@ -280,9 +280,7 @@ def translate_changelog(changelog: typing.Dict[int, list[Change]]):
             {"role": "system", "content": context},
             {"role": "user", "content": text}
         ],
-        temperature=1.0,
-        top_p=1.0,
-        model="gpt-4o",
+        model="openai/gpt-4.1-mini",
     )
     translated_text: str | None = response.choices[0].message.content
 
