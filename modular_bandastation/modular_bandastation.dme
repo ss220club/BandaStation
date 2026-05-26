@@ -72,7 +72,6 @@
 #include "paperwork/_paperwork.dme"
 #include "pixel_shift/_pixel_shift.dme"
 #include "preferences/_preferences.dme"
-#include "quik_accessory/_quik_accessory.dme"
 #include "quirks/_quirks.dme"
 #include "revolution_overhaul/_revolution_overhaul.dme"
 #include "ru_jobs/_ru_jobs.dme"
@@ -108,7 +107,3 @@
 // BEGIN_FILE_DIR
 #define FILE_DIR .
 // END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
-// END_INCLUDE
