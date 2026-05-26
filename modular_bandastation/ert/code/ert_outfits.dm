@@ -96,7 +96,7 @@
 	organs = list(
 		/obj/item/organ/cyberimp/arm/toolkit/flash
 	)
-	suit_store = /obj/item/storage/belt/holster/ert/full_gp9r
+	accessory = /obj/item/clothing/accessory/holster/tacticool/ert_gp93r
 	l_pocket = /obj/item/melee/baton/telescopic/bronze
 	r_pocket = /obj/item/switchblade
 

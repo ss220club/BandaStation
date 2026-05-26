@@ -118,7 +118,24 @@
 	create_storage(storage_type = /datum/storage/pockets/holster/energy)
 	new /obj/item/gun/energy/disabler(src)
 
-//MARK: Energy holster with two nano-pistols
+// Energy holster with one laser pistol
+/obj/item/clothing/accessory/holster/energy/laser_pistol
+
+/obj/item/clothing/accessory/holster/energy/laser_pistol/Initialize(mapload)
+	. = ..()
+	create_storage(storage_type = /datum/storage/pockets/holster/energy)
+	new /obj/item/gun/energy/laser/pistol(src)
+
+// Energy holster with two smoothborne disablers
+/obj/item/clothing/accessory/holster/energy/smoothborne
+
+/obj/item/clothing/accessory/holster/energy/smoothborne/Initialize(mapload)
+	. = ..()
+	create_storage(storage_type = /datum/storage/pockets/holster/energy)
+	new /obj/item/gun/energy/disabler/smoothbore(src)
+	new /obj/item/gun/energy/disabler/smoothbore(src)
+
+// Energy holster with two nano-pistols
 /obj/item/clothing/accessory/holster/energy/thermal
 
 /obj/item/clothing/accessory/holster/energy/thermal/Initialize(mapload)
