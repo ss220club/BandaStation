@@ -46,6 +46,11 @@
 	if(istype(I, /obj/item/gun))
 		playsound(src, 'modular_bandastation/weapon/sound/ranged/holster_putting.ogg', 50, TRUE)
 
+/obj/item/clothing/accessory/holster/proc/get_holstered_gun()
+	for(var/obj/item/gun/G in atom_storage.real_location.contents)
+		return G
+	return null
+
 /obj/item/clothing/accessory/holster/attack_hand(mob/user)
 	if(user != loc)
 		var/mob/living/carbon/human/H = null
