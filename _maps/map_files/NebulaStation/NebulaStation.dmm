@@ -45113,7 +45113,6 @@
 /turf/open/floor/grass,
 /area/station/security/checkpoint/customs)
 "gFS" = (
-/obj/structure/hedge,
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 1
 	},
@@ -45122,6 +45121,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/sign/poster/random/directional/north,
+/obj/machinery/gizmo/toggle/tucker_tubes,
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
 "gFU" = (
@@ -142209,9 +142209,7 @@
 /obj/machinery/conveyor{
 	id = "mining"
 	},
-/obj/machinery/bouldertech/refinery/smelter{
-	dir = 4
-	},
+/obj/machinery/bouldertech/refinery/smelter,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/cargo/miningfoundry)
 "uYZ" = (
@@ -160108,6 +160106,7 @@
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/spawner/random/gizmo,
 /turf/open/floor/engine,
 /area/station/science/explab)
 "xIE" = (

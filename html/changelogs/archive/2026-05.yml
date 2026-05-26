@@ -372,3 +372,93 @@
   mcbalaam:
   - rscadd: Big Manipulators now use a single task loop instead of two separate point
       loops.
+2026-05-22:
+  SmArtKar:
+  - bugfix: Crematorium can no longer destroy indestructible objects
+  - code_imp: Cleaned up crematorium code
+  - bugfix: Bubblegun suicide no longer makes the user yell out HTML
+  - bugfix: Beepsky Smash beepskys now use proper text formatting
+  - code_imp: Cleaned up say span code in a few places
+  Y0SH1M4S73R:
+  - rscadd: Committing suicide with an empty soul shard seals your soul within it.
+  - balance: Taking damage from an attack while dosed with synthpax negates the pacification
+      from the synthpax for an amount of time equal to the damage taken, up to a maximum
+      of 5 seconds.
+  lelandkemble:
+  - bugfix: about a billion runtimes per round have been fixed, & you'll no longer
+      repeat what you said last when you're forced to speak
+  - bugfix: The dead can't drive
+2026-05-23:
+  Higgin:
+  - bugfix: A single space twinkie no longer cures a virus or makes it harder to get
+      rid of one.
+  Melbert:
+  - refactor: Refactored how digitigrade and snouts render, report any oddities with
+      that
+  SmArtKar:
+  - bugfix: Having only midround clown ops (but not normal clown ops) enabled in antag
+      prefs now displays operative alias/species toggles
+  - admin: Added clown ops to the ban panel
+  - bugfix: Fixed materials runtiming whenever thrown by something other than a mob
+  - bugfix: Fixed custom pizzas having broken sprites and not preserving their ingredients
+      when sliced
+  - bugfix: Fixed plumbing ducts having weird shadows
+  - bugfix: Fixed certain reaction overheats being always treated as impure
+  - bugfix: Being shapeshifted while rolling midround traitor no longer robs you of
+      your uplink
+  SmArtKar, ArcaneMusic:
+  - balance: Bileworms now fire arcing shots instead of cross patterns, and can be
+      stunned by hitting them during the burrow animation. Their health has been slightly
+      buffed to compensate.
+  SyncIt21:
+  - bugfix: opening panel of boulder refinery with screwdriver or un-wrenching it
+      turns of its light
+  - bugfix: boulder refinery only takes in booster reagents and excludes others and
+      only outputs waste chemicals as intended
+  - bugfix: boulder refinery machines outputs waste reagents without rounding errors
+      in them
+  - qol: removed conveyer sprite from boulder smelter & pixel shifts the refiner so
+      you can see it's plumbing pipes properly
+  Time-Green:
+  - rscadd: Adds Interface Science! There's these strange contraptions in science,
+      who knows what they do? Figure it out, and make them usable!
+  lelandkemble:
+  - bugfix: Several ways you could become permanently immobile, primarily based around
+      lube & other methods of slipping, have been fixed
+  timothymtorres:
+  - map: Added a "Prison Block" holodeck simulation, accessible via the disabled safety/emagged
+      menu.
+  - code_imp: Fixed electric chairs to work, and they now bypass insulation from gloves
+      when executing a mob.
+  - code_imp: Added holodeck versions of brig lockers and windoors that allow anyone
+      with a station ID card to access them.
+  tontyGH:
+  - bugfix: Blunt/sharp weapons no longer slice through your coagulants when you are
+      dismembered
+  - bugfix: Burn weapons now remember that they cauterize instead of slice when dismembering
+2026-05-24:
+  Holoo-1:
+  - bugfix: fixed camera static not being removed for console users when it was observed
+      by AI and console user
+  SyncIt21:
+  - qol: merged large welding tool tank with engi omnitool for engiborg
+  - bugfix: examining the omnitool will reveal details about its internal tool such
+      as multitool buffer, welding fuel left etc
+  TealSeer:
+  - image: lights on security cameras glow in the dark now
+  Wisemonster:
+  - bugfix: Fixed cyborg's recharging guns not recharging
+  levels0:
+  - rscadd: you can now trap dormant revenants in mirrors
+  - rscadd: haunted mirrors may very rarely appear roundstart
+  soulware1:
+  - rscadd: New reactions for water variants that make foam
+  - code_imp: New foam types that either slip or last longer or shorter
+2026-05-25:
+  ElGitificador:
+  - sound: added sound feedback to supplexing a rod
+  Melbert:
+  - balance: 'Spacer: Bonus to drift speed no longer stacks with jetpack speed - only
+      the greater of the two effects is applied.'
+  SmArtKar:
+  - admin: Added conversion and deconversion logging to Lunatics
