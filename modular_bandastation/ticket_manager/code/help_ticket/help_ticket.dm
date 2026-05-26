@@ -33,6 +33,8 @@
 	var/list/messages
 	/// Static counter used for generating each ticket ID
 	var/static/ticket_counter = 0
+	/// Is this ticket marked as urgent and should be reported
+	var/is_urgent = FALSE
 	/// Prevents convert spam
 	COOLDOWN_DECLARE(convert_cooldown)
 
@@ -72,9 +74,10 @@
 		GLOB.ticket_manager.send_chat_message_to_player(admin, src, message)
 	else
 		send_creation_message(creator, message, ticket_type_id)
+		send_creation_webhook_if_needed(message)
+		ticket_autoclose_timer_id = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
 
-	ticket_autoclose_timer_id = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
-	SSblackbox.LogAhelp(id, "Ticket Opened", message, null, initiator_key)
+	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_OPENED, message, null, initiator_key)
 
 /datum/help_ticket/ui_data(mob/user)
 	var/list/data = list()
@@ -88,7 +91,7 @@
 	data["writers"] = writers
 	data["messages"] = messages
 	data["userHasStaffAccess"] = has_staff_access(user.client)
-	data["isLinkedToCurrentAdmin"] = !isnull(linked_admin) && (linked_admin.client == user.client)
+	data["isLinkedToCurrentAdmin"] = linked_admin?.client == user.client
 	return data
 
 /// Notifies the staff about the new ticket, and sends a creation confirmation to the creator
@@ -117,6 +120,97 @@
 		creator,
 		custom_boxed_message("[boxed_message_class]", span_class(text_span_class, "[title] был создан! Ожидайте ответ. Вы можете открыть тикет нажав F1")),
 		MESSAGE_TYPE_ADMINPM
+	)
+
+// just mirrors old adminhelp webhook behavior for admin tickets
+/datum/help_ticket/proc/send_creation_webhook_if_needed(message)
+	if(ticket_type_id != TICKET_TYPE_ADMIN || !CONFIG_GET(string/regular_adminhelp_webhook_url))
+		return
+
+	is_urgent = ahelp_message_matches_keyword(message) && !is_banned_from(ckey(initiator_key), "Urgent Adminhelp")
+	if(!is_urgent)
+		return
+
+	var/datum/discord_embed/embed = build_ticket_manager_embed(message)
+	embed.color = TICKET_EMBED_COLOR_URGENT
+	embed.content = "@here"
+
+	send2adminchat_webhook(embed, FALSE)
+
+/// Sends webhook notification when ticket was auto closed by timeout.
+/datum/help_ticket/proc/send_autoclose_webhook()
+	if(ticket_type_id != TICKET_TYPE_ADMIN || !CONFIG_GET(string/regular_adminhelp_webhook_url))
+		return
+
+	var/datum/discord_embed/embed = build_ticket_manager_embed(message = get_last_player_message() || "Сообщение игрока не найдено.", title_prefix = "Автозакрытие - ")
+	if(length(messages) >= 2)
+		embed.color = TICKET_EMBED_COLOR_STALE
+	send2adminchat_webhook(embed, FALSE)
+
+/datum/help_ticket/proc/get_last_player_message()
+	if(!length(messages))
+		return null
+
+	for(var/i = length(messages), i >= 1, i--)
+		var/list/message_data = messages[i]
+		if(!islist(message_data))
+			continue
+
+		if(message_data["sender"] != initiator_key)
+			continue
+
+		var/message_text = message_data["message"]
+		if(!message_text)
+			continue
+
+		return "[message_text]"
+
+	return null
+
+/datum/help_ticket/proc/build_ticket_manager_embed(message, title_prefix = null)
+	var/datum/discord_embed/embed = new()
+	var/sanitized_message = strip_html_full(message)
+	embed.title = title_prefix ? "[title_prefix]Тикет #[id]" : "Тикет #[id]"
+	embed.author = initiator_key
+	embed.description = sanitized_message
+	if(CONFIG_GET(string/adminhelp_ahelp_link))
+		embed.url = replacetext(replacetext(CONFIG_GET(string/adminhelp_ahelp_link), "$RID", GLOB.round_id), "$TID", "[id]")
+	var/list/fields = list(
+		"Раунд" = "[GLOB.round_id]",
+		"Ckey" = "[initiator_key]",
+	)
+	if(length(initiator_client?.mob?.real_name))
+		fields["Игровое имя"] = initiator_client.mob.real_name
+	var/list/admin_fields = get_admin_webhook_fields()
+	fields["Админы онлайн"] = admin_fields["online"]
+	if(admin_fields["deadmin"])
+		fields["Deadmin"] = admin_fields["deadmin"]
+	embed.fields = fields
+	if(!is_urgent)
+		embed.footer = "Количество ответов: [length(messages)]"
+	if(!is_urgent && length(messages) < 2)
+		embed.color = TICKET_EMBED_COLOR_NOANSWER
+	return embed
+
+/datum/help_ticket/proc/get_admin_webhook_fields()
+	var/list/active_admin_lines = list()
+	for(var/client/admin as anything in GLOB.admins)
+		if(!check_rights_for(admin, R_ADMIN)) // stop right there filthy mentor
+			continue
+		active_admin_lines += "• [admin] - [admin.holder.rank_names()]"
+
+	var/list/deadmin_ckeys = list()
+	for(var/deadmin_ckey in GLOB.deadmins)
+		var/datum/admins/deadmin_holder = GLOB.deadmins[deadmin_ckey]
+		if(!(deadmin_holder?.rank_flags() & R_ADMIN))
+			continue
+		if(!GLOB.directory[deadmin_ckey])
+			continue
+		deadmin_ckeys += "[deadmin_ckey]"
+
+	return list(
+		"online" = length(active_admin_lines) ? jointext(active_admin_lines, "\n") : "Отсутствуют",
+		"deadmin" = length(deadmin_ckeys) ? jointext(deadmin_ckeys, ", ") : null,
 	)
 
 /// Converts ticket to ticket type specified `type_to_convert_to`
@@ -161,6 +255,7 @@
 		"message" = "[converter.ckey] конвертировал тикет в [ticket_type_id]",
 		"time" = TIMESTAMP(),
 	))
+	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_CONVERT, "[converter.ckey] converted ticket to [ticket_type_id]", initiator_key, converter.ckey)
 
 	return TRUE
 
@@ -189,6 +284,7 @@
 
 	linked_admin = admin.persistent_client
 	deltimer(ticket_autoclose_timer_id)
+	ticket_autoclose_timer_id = addtimer(CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), TICKET_AUTOCLOSE_TIMER, TIMER_STOPPABLE)
 	message_admins("[key_name_admin(admin)] взял тикет #[id] на рассмотрение.")
 	log_admin("[key_name_admin(admin)] взял тикет #[id] на рассмотрение.")
 	return TRUE
@@ -197,6 +293,8 @@
 /// start autoclosure timer and notifies responsible admins
 /datum/help_ticket/proc/unlink_linked_admin()
 	var/autoclose_delay = TICKET_AUTOCLOSE_TIMER / 2
+	deltimer(ticket_autoclose_timer_id)
+
 	ticket_autoclose_timer_id = addtimer(\
 		CALLBACK(GLOB.ticket_manager, TYPE_PROC_REF(/datum/ticket_manager, autoclose_ticket), src), \
 		autoclose_delay, \
@@ -220,6 +318,7 @@
 		"message" = "[linked_admin.key] отказался от тикета",
 		"time" = TIMESTAMP(),
 	))
+	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_UNASSIGNED, "[linked_admin.key] refused ticket", initiator_key, linked_admin.ckey)
 
 	linked_admin = null
 
