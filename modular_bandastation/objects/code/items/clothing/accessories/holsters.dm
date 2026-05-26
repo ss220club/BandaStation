@@ -194,7 +194,7 @@
 // Traitor holster
 /obj/item/clothing/accessory/holster/chameleon
 	name = "pocket protector"
-	desc = "Can protect your clothing from ink stains, but you'll look like a nerd if you're using one."
+	desc = "Может защитить вашу одежду от чернильных пятен, но вы будете выглядеть как зануда, если будете им пользоваться."
 	icon = 'icons/obj/clothing/accessories.dmi'
 	icon_state = "pocketprotector"
 	worn_icon = 'icons/mob/clothing/accessories.dmi'
