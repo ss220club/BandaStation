@@ -115,7 +115,7 @@
 	name = "Holsters (uniform)"
 	crate_name = "holsters crate"
 	desc = "В этом ящике находятся две обычные кобуры для пистолетов, которые надеваются поверх униформы."
-	cost = CARGO_CRATE_VALUE * 5
+	cost = CARGO_CRATE_VALUE * 10
 	access_view = ACCESS_SECURITY
 	contains = list(
 		/obj/item/clothing/accessory/holster = 2

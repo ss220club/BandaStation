@@ -74,3 +74,11 @@
 	slot_type = ITEM_SLOT_RPOCKET
 	slot_item_name = "правого кармана"
 	keybind_signal = COMSIG_KB_HUMAN_RPOCKETEQUIP_DOWN
+
+/datum/keybinding/human/quick_accessory_draw
+	hotkey_keys = list("ShiftF")
+	name = "quick_accessory_draw"
+	full_name = "Быстро достать предмет из аксессуара"
+	description = "Достает предмет из слота хранилища аксессуара"
+	description = "Достаёт первый предмет из аксессуара"
+	keybind_signal = COMSIG_KB_HUMAN_QUICK_ACCESSORY_DRAW_DOWN
