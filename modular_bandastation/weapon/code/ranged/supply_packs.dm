@@ -121,16 +121,6 @@
 		/obj/item/clothing/accessory/holster = 2
 	)
 
-/datum/supply_pack/security/holsters_thermal
-	name = "Thermals Holster (uniform)"
-	crate_name = "thermals holster crate"
-	desc = "В этом ящике находятся одна энергетическая кобура с двумя термальными пистолетами."
-	cost = CARGO_CRATE_VALUE * 20
-	access_view = ACCESS_WEAPONS
-	contains = list(
-		/obj/item/clothing/accessory/holster/energy/thermal
-	)
-
 // MARK: GUNCASE
 /obj/item/storage/toolbox/guncase/soviet
 	desc = "Оружейный кейс. Символ СССП отпечатан на боковой стороне."
