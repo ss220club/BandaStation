@@ -136,6 +136,16 @@
 /datum/component/stove/proc/on_attackby(obj/machinery/source, obj/item/attacking_item, mob/user, params)
 	SIGNAL_HANDLER
 
+	// BANDASTATION ADDITION: allow lighting cigarettes/cigars directly from an active stove burner.
+	if(istype(attacking_item, /obj/item/cigarette))
+		var/obj/item/cigarette/cigarette = attacking_item
+		if(cigarette.lit)
+			to_chat(user, span_warning("[cigarette.declent_ru(NOMINATIVE)] уже зажжена!"))
+			return COMPONENT_NO_AFTERATTACK
+		if(on)
+			cigarette.light(span_notice("[user] прикуривает [cigarette.declent_ru(ACCUSATIVE)] от [source.declent_ru(GENITIVE)]."))
+			return COMPONENT_NO_AFTERATTACK
+
 	if(istype(source, /obj/machinery/oven/range) && istype(attacking_item, /obj/item/storage/bag/tray) && container)
 		var/obj/machinery/oven/range/range = source
 		var/obj/item/reagent_containers/cup/soup_pot/soup_pot = container
