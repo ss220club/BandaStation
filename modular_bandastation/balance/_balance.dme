@@ -4,11 +4,6 @@
 
 #include "code/_brain.dm"
 #include "code/bodyparts/head.dm"
-#include "code/cargo/packs/goodies.dm"
-#include "code/cargo/packs/livestock.dm"
-#include "code/cargo/packs/science.dm"
-#include "code/cargo/packs/security.dm"
-#include "code/cargo/packs/vending_restock.dm"
 #include "code/containers/reagent_containers.dm"
 #include "code/blob.dm"
 #include "code/crew_manifest.dm"
