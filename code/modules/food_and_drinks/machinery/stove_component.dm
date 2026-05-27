@@ -136,16 +136,6 @@
 /datum/component/stove/proc/on_attackby(obj/machinery/source, obj/item/attacking_item, mob/user, params)
 	SIGNAL_HANDLER
 
-	// BANDASTATION ADDITION: allow lighting cigarettes/cigars directly from an active stove burner.
-	if(istype(attacking_item, /obj/item/cigarette))
-		var/obj/item/cigarette/cigarette = attacking_item
-		if(cigarette.lit)
-			to_chat(user, span_warning("[cigarette.declent_ru(NOMINATIVE)] уже зажжена!"))
-			return COMPONENT_NO_AFTERATTACK
-		if(on)
-			cigarette.light(span_notice("[user] прикуривает [cigarette.declent_ru(ACCUSATIVE)] от [source.declent_ru(GENITIVE)]."))
-			return COMPONENT_NO_AFTERATTACK
-
 	if(istype(source, /obj/machinery/oven/range) && istype(attacking_item, /obj/item/storage/bag/tray) && container)
 		var/obj/machinery/oven/range/range = source
 		var/obj/item/reagent_containers/cup/soup_pot/soup_pot = container
@@ -164,6 +154,16 @@
 	if(user.transferItemToLoc(attacking_item, parent))
 		add_container(attacking_item, user)
 		to_chat(user, span_notice("Вы перемещаете [attacking_item.declent_ru(ACCUSATIVE)] на [parent.declent_ru(ACCUSATIVE)]."))
+
+	// BANDASTATION ADDITION: expose any item to the active stove burner.
+	if(on)
+		user.visible_message(
+			span_warning("[user] подносит [attacking_item.declent_ru(ACCUSATIVE)] к включенной конфорке [source.declent_ru(GENITIVE)]."),
+			span_warning("Вы подносите [attacking_item.declent_ru(ACCUSATIVE)] к включенной конфорке [source.declent_ru(GENITIVE)]."),
+		)
+		attacking_item.fire_act(SOUP_BURN_TEMP + 80, 100)
+		return COMPONENT_NO_AFTERATTACK
+
 	return COMPONENT_NO_AFTERATTACK
 
 /datum/component/stove/proc/on_exited(obj/machinery/source, atom/movable/gone, direction)
