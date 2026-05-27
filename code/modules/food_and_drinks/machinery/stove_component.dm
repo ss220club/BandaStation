@@ -145,7 +145,16 @@
 			return COMPONENT_NO_AFTERATTACK
 
 	if(!attacking_item.is_open_container())
+		// BANDASTATION ADDITION: expose non-container items to the active stove burner.
+		if(on)
+			user.visible_message(
+				span_warning("[user] подносит [attacking_item.declent_ru(ACCUSATIVE)] к включенной конфорке [source.declent_ru(GENITIVE)]."),
+				span_warning("Вы подносите [attacking_item.declent_ru(ACCUSATIVE)] к включенной конфорке [source.declent_ru(GENITIVE)]."),
+			)
+			attacking_item.fire_act(SOUP_BURN_TEMP + 80, 100)
+			return COMPONENT_NO_AFTERATTACK
 		return
+
 	if(!isnull(container))
 		to_chat(user, span_warning("Вы не посмеете приготовить два разных блюда в одной печи. \
 			Что если их содержимое пересечется?"))
@@ -154,15 +163,6 @@
 	if(user.transferItemToLoc(attacking_item, parent))
 		add_container(attacking_item, user)
 		to_chat(user, span_notice("Вы перемещаете [attacking_item.declent_ru(ACCUSATIVE)] на [parent.declent_ru(ACCUSATIVE)]."))
-
-	// BANDASTATION ADDITION: expose any item to the active stove burner.
-	if(on)
-		user.visible_message(
-			span_warning("[user] подносит [attacking_item.declent_ru(ACCUSATIVE)] к включенной конфорке [source.declent_ru(GENITIVE)]."),
-			span_warning("Вы подносите [attacking_item.declent_ru(ACCUSATIVE)] к включенной конфорке [source.declent_ru(GENITIVE)]."),
-		)
-		attacking_item.fire_act(SOUP_BURN_TEMP + 80, 100)
-		return COMPONENT_NO_AFTERATTACK
 
 	return COMPONENT_NO_AFTERATTACK
 
