@@ -151,7 +151,7 @@
 				span_warning("[user] подносит [attacking_item.declent_ru(ACCUSATIVE)] к включенной конфорке [source.declent_ru(GENITIVE)]."),
 				span_warning("Вы подносите [attacking_item.declent_ru(ACCUSATIVE)] к включенной конфорке [source.declent_ru(GENITIVE)]."),
 			)
-			attacking_item.fire_act(SOUP_BURN_TEMP + 80, heat_coefficient)
+			attacking_item.fire_act()
 			return COMPONENT_NO_AFTERATTACK
 		return
 
