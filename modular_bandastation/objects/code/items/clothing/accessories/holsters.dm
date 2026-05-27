@@ -13,6 +13,7 @@
 /datum/storage/pockets/holster
 	max_slots = 1
 	max_specific_storage = WEIGHT_CLASS_NORMAL
+	allow_quick_empty = FALSE
 
 /datum/storage/pockets/holster/New()
 	. = ..()
@@ -46,6 +47,11 @@
 	if(istype(I, /obj/item/gun))
 		playsound(src, 'modular_bandastation/weapon/sound/ranged/holster_putting.ogg', 50, TRUE)
 
+/obj/item/clothing/accessory/holster/attach(obj/item/clothing/under/attach_to, mob/living/attacher)
+	. = ..()
+	if(atom_storage)
+		atom_storage.set_real_location(src)
+
 /obj/item/clothing/accessory/holster/proc/get_holstered_gun()
 	for(var/obj/item/gun/G in atom_storage.real_location.contents)
 		return G
@@ -63,6 +69,7 @@
 				span_userdanger("[user] пытается сорвать кобуру с [H]!"),
 				span_userdanger("[user] пытается сорвать вашу кобуру!")
 			)
+			return
 
 	return ..()
 
