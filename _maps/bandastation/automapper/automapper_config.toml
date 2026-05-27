@@ -353,7 +353,7 @@ trait_name = "Station"
 map_files = ["iceboxstation_gamma_port.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
-coordinates = [91, 181, 3]
+coordinates = [90, 180, 3]
 trait_name = "Station"
 
 [templates.iceboxstation_library_galactic_map]
@@ -451,7 +451,7 @@ trait_name = "Station"
 map_files = ["iceboxstation_sec_closet.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
-coordinates = [102, 188, 3]
+coordinates = [110, 183, 3]
 trait_name = "Station"
 
 [templates.iceboxstation_wrynroach]
