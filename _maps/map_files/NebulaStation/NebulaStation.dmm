@@ -77587,7 +77587,7 @@
 	},
 /obj/structure/safe,
 /obj/item/stack/spacecash/c1000,
-/obj/item/clothing/accessory/holster,
+/obj/item/storage/belt/holster,
 /turf/open/floor/wood/large,
 /area/station/maintenance/department/bridge)
 "ltw" = (
