@@ -14,6 +14,7 @@
 		if(!H.atom_storage.attempt_remove(I, src.loc))
 			return TRUE
 		put_in_hands(I)
+		to_chat(src, span_notice("Вы быстро достаёте [target_gun.declent_ru(ACCUSATIVE)]."))
 		return TRUE
 
 	return FALSE
@@ -38,7 +39,7 @@
 		if(!A.atom_storage.attempt_remove(I, src.loc))
 			return TRUE
 		put_in_hands(I)
-		to_chat(src, span_notice("Вы достаёте [I]."))
+		to_chat(src, span_notice("Вы достаёте [I.declent_ru(ACCUSATIVE)]."))
 		return TRUE
 
 	return FALSE
@@ -102,7 +103,7 @@
 		if(!target_accessory.atom_storage.attempt_remove(target_gun, src.loc))
 			return
 		put_in_hands(target_gun)
-		to_chat(src, span_notice("Вы быстро достаёте [target_gun]."))
+		to_chat(src, span_notice("Вы быстро достаёте [target_gun.declent_ru(ACCUSATIVE)]."))
 		return
 
 	// Energy holster
