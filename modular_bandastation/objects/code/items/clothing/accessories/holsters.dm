@@ -223,6 +223,7 @@
 	worn_icon_state = "pocketprotector"
 	w_class = WEIGHT_CLASS_SMALL
 	above_suit = TRUE
+	silent = TRUE
 
 /datum/storage/pockets/holster/traitor
 	max_slots = 1
