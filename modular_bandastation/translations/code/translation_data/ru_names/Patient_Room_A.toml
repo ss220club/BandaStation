@@ -1,8 +1,0 @@
-["Patient Room A"]
-nominative = "первая палата пациента"
-genitive = "первой палаты пациента"
-dative = "первой палате пациента"
-accusative = "первую палату пациента"
-instrumental = "первой палатой пациента"
-prepositional = "первой палате пациента"
-gender = "female"

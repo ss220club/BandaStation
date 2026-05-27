@@ -1,8 +1,0 @@
-[Library]
-nominative = "библиотека"
-genitive = "библиотеки"
-dative = "библиотеке"
-accusative = "библиотеку"
-instrumental = "библиотекой"
-prepositional = "библиотеке"
-gender = "female"
