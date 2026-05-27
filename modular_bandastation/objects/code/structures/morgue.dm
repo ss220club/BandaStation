@@ -22,7 +22,6 @@
 	resistance_flags = INDESTRUCTIBLE
 	density = TRUE
 	anchored = TRUE
-
 	var/repair_stage = 0
 	var/igniters_installed = 0
 	var/sparking = TRUE
@@ -49,7 +48,6 @@
 
 	if(!sparking)
 		return
-
 	if(prob(20))
 		do_sparks(3, FALSE, src)
 	if(prob(30))
@@ -58,7 +56,7 @@
 //MARK: Процесс ремонта
 /obj/structure/bodycontainer/crematorium/broken/attackby(obj/item/W, mob/user, params)
 
-//MARK: Первая стадия ремонта - использование 5 игнайтеров
+// The first stage of repair is the use of 5 igniters
 	if(isigniter(W) && repair_stage == CREMATORIUM_STAGE_IGNITERS)
 		qdel(W)
 		igniters_installed++
@@ -69,7 +67,7 @@
 			to_chat(user, span_notice("Система поджига восстановлена. Теперь необходимо закрепить воспламенители отверткой."))
 		return
 
-//MARK: Вторая стадия ремонта - использование отвертки
+// The second stage of repair is using a screwdriver
 	if(W.tool_behaviour == TOOL_SCREWDRIVER && repair_stage ==  CREMATORIUM_STAGE_SCREWDRIVER)
 		to_chat(user, span_notice("Вы начинаете закреплять воспламенители крематория..."))
 		if(!W.use_tool(src, user, 3 SECONDS))
@@ -78,7 +76,7 @@
 		to_chat(user, span_notice("Воспламенители закреплены. Теперь требуется пласталь."))
 		return
 
-//MARK: Третья стадия ремонта - применение 2 листов пластали, смена спрайта
+// The third stage of repair is the use of 2 sheets of plasteel, changing the sprite
 	if(istype(W, /obj/item/stack/sheet/plasteel) && repair_stage ==  CREMATORIUM_STAGE_PLASTEEL)
 		var/obj/item/stack/sheet/plasteel/P = W
 		if(P.amount < 2)
@@ -91,7 +89,7 @@
 		to_chat(user, span_notice("Вы заменяете поврежденные панели пласталью. Осталось заварить корпус."))
 		return
 
-//MARK: Четвертая стадия ремонта - использование сварки, превращение обратно в функционирующий крематорий
+// The fourth stage of the renovation is the use of welding to turn the building back into a functioning crematorium.
 	if(W.tool_behaviour == TOOL_WELDER && repair_stage == CREMATORIUM_STAGE_WELDING)
 		if(!W.tool_start_check(user, amount = 1))
 			return
@@ -102,11 +100,9 @@
 			if(movable == connected)
 				continue
 			movable.forceMove(get_step(src, dir))
-
 		var/obj/structure/bodycontainer/crematorium/C = new(loc)
 		C.dir = dir
 		C.id = id
-
 		to_chat(user, span_notice("Вы полностью починили крематорий."))
 		qdel(src)
 		return
