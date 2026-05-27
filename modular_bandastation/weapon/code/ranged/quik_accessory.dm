@@ -14,7 +14,7 @@
 		if(!H.atom_storage.attempt_remove(I, src.loc))
 			return TRUE
 		put_in_hands(I)
-		to_chat(src, span_notice("Вы быстро достаёте [held_item.declent_ru(ACCUSATIVE)]."))
+		to_chat(src, span_notice("Вы быстро достаёте [I.declent_ru(ACCUSATIVE)]."))
 		return TRUE
 
 	return FALSE
