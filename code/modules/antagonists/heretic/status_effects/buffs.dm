@@ -378,7 +378,7 @@
 	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/heretic_lastresort
-	name = "Последнее средство"
+	name = "Последняя надежда"
 	desc = "Ваша голова кружится, а сердце бьётся так быстро, как только может!"
 	icon_state = "lastresort"
 
