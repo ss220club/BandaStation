@@ -1611,6 +1611,15 @@ instrumental = "энергетической наплечной кобурой"
 prepositional = "энергетической наплечной кобуре"
 gender = "female"
 
+["psyker holster"]
+nominative = "кобура псайкера"
+genitive = "кобуры псайкера"
+dative = "кобуре псайкера"
+accusative = "кобуру псайкера"
+instrumental = "кобурой псайкера"
+prepositional = "кобуре псайкера"
+gender = "female"
+
 ["tacticool holster"]
 nominative = "тактическая наплечная кобура"
 genitive = "тактической наплечной кобуры"

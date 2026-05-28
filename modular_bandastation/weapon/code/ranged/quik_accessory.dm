@@ -5,7 +5,7 @@
 	var/obj/item/held_item = get_held_item_of_type(typepath)
 	if(held_item)
 		if(!H.atom_storage.attempt_insert(held_item, src))
-			to_chat(src, span_warning("[held_item.declent_ru(NOMINATIVE)] не помещается в кобуру!"))
+			to_chat(src, span_warning("[capitalize(held_item.declent_ru(NOMINATIVE))] не помещается в кобуру!"))
 		return TRUE
 
 	for(var/obj/item/I in H.atom_storage.real_location.contents)
@@ -32,7 +32,7 @@
 	var/obj/item/held_item = get_active_held_item()
 	if(held_item)
 		if(!A.atom_storage.attempt_insert(held_item, src))
-			to_chat(src, span_warning("Не удалось убрать [held_item]!"))
+			to_chat(src, span_warning("Не удалось убрать [held_item.declent_ru(NOMINATIVE)]!"))
 		return TRUE
 
 	for(var/obj/item/I in A.atom_storage.real_location.contents)
@@ -80,12 +80,12 @@
 		if(held_gun)
 			if(!first_gun)
 				if(!target_accessory.atom_storage.attempt_insert(held_gun, src))
-					to_chat(src, span_warning("[held_gun.declent_ru(NOMINATIVE)] не помещается в кобуру!"))
+					to_chat(src, span_warning("[capitalize(held_gun.declent_ru(NOMINATIVE))] не помещается в кобуру!"))
 					return
 				return
 			if(!second_gun)
 				if(!target_accessory.atom_storage.attempt_insert(held_gun, src))
-					to_chat(src, span_warning("[held_gun.declent_ru(NOMINATIVE)] не помещается в кобуру!"))
+					to_chat(src, span_warning("[capitalize(held_gun.declent_ru(NOMINATIVE))] не помещается в кобуру!"))
 					return
 				return
 			to_chat(src, span_warning("Тактическая кобура заполнена!"))

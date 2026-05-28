@@ -224,6 +224,53 @@
 	new /obj/item/ammo_box/speedloader/c38(src)
 	new /obj/item/ammo_box/speedloader/c38(src)
 
+// Veteran advisor version
+/obj/item/clothing/accessory/holster/detective/veteran_advisor
+
+/obj/item/clothing/accessory/holster/detective/veteran_advisor/Initialize(mapload)
+	. = ..()
+	create_storage(storage_type = /datum/storage/pockets/holster/dec)
+	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
+	new /obj/item/ammo_box/magazine/m45(src)
+	new /obj/item/ammo_box/magazine/m45(src)
+
+// Psyker holster
+/obj/item/clothing/accessory/holster/psyker
+	name = "psyker holster"
+	desc = "Кобура, специально дополненная различными карманами для осуществления священной миссии псайкер-оперативников."
+
+/datum/storage/pockets/holster/psyker
+	max_slots = 4
+	max_specific_storage = WEIGHT_CLASS_NORMAL
+
+/datum/storage/pockets/holster/psyker/New()
+	. = ..()
+	set_holdable(list(
+		/obj/item/gun/ballistic/automatic/pistol,
+		/obj/item/gun/ballistic/revolver,
+		/obj/item/food/grown/banana,
+		/obj/item/gun/energy/disabler,
+		/obj/item/gun/energy/laser/pistol,
+		/obj/item/gun/energy/laser/thermal,
+		/obj/item/gun/energy/laser/captain,
+		/obj/item/gun/energy/disabler/smoothbore,
+		/obj/item/gun/energy/pulse/pistol,
+		/obj/item/gun/energy/e_gun/hos,
+		/obj/item/gun/energy/eg_14,
+		/obj/item/gun/energy/dueling,
+		/obj/item/gun/energy/e_gun/mini,
+		/obj/item/ammo_box/magazine,
+		/obj/item/ammo_box/speedloader
+	))
+
+/obj/item/clothing/accessory/holster/psyker/Initialize(mapload)
+	. = ..()
+	create_storage(storage_type = /datum/storage/pockets/holster/psyker)
+	new /obj/item/gun/ballistic/revolver/c38(src)
+	new /obj/item/ammo_box/speedloader/c38(src)
+	new /obj/item/ammo_box/speedloader/c38(src)
+	new /obj/item/ammo_box/speedloader/c38(src)
+
 // Traitor holster
 /obj/item/clothing/accessory/holster/chameleon
 	name = "pocket protector"

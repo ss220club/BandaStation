@@ -383,7 +383,7 @@
 	l_hand = /obj/item/melee/curator_whip
 	l_pocket = /obj/item/lighter
 	accessory = /obj/item/clothing/accessory/vest_sheriff
-	accessory = /obj/item/clothing/accessory/holster/detective/full
+	accessory = /obj/item/clothing/accessory/holster/detective/full //BANDASTATION EDIT: Accessory holsters
 	uniform = /obj/item/clothing/under/rank/security/detective
 	shoes = /obj/item/clothing/shoes/cowboy
 	head = /obj/item/clothing/head/cowboy/brown
@@ -1153,7 +1153,7 @@
 	desc = "A syndicate operative suited up for some space reconnaissance."
 
 	uniform = /obj/item/clothing/under/syndicate
-	accessory = /obj/item/clothing/accessory/holster
+	accessory = /obj/item/clothing/accessory/holster //BANDASTATION EDIT: Accessory holsters
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	l_pocket = /obj/item/knife/combat/survival
 	internals_slot = ITEM_SLOT_RPOCKET
