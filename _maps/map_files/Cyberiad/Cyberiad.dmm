@@ -98618,11 +98618,6 @@
 /obj/item/watertank,
 /turf/open/floor/iron/dark,
 /area/station/service/hydroponics)
-"ygZ" = (
-/obj/effect/turf_decal/tile/purple,
-/obj/structure/table,
-/turf/open/floor/iron,
-/area/station/hallway/primary/starboard/west)
 "yha" = (
 /obj/structure/railing,
 /turf/open/floor/glass/reinforced,
@@ -209183,7 +209178,7 @@ gwo
 wfV
 qpn
 kkl
-ygZ
+niF
 xov
 lbS
 sHs
