@@ -40,6 +40,8 @@ GLOBAL_LIST_EMPTY(dead_players_during_shift)
 				<b>Reagents</b>:<br>[reagents_readout()]", INVESTIGATE_DEATHS)
 	to_chat(src, span_warning("Вы погибли. Если ваше тело не было уничтожено, вас могут вернуть к жизни другие игроки. \
 		Если вы не хотите возвращаться в тело, используйте кнопку \"Do Not Resuscitate\" (DNR) внизу экрана."))
+	if(SSlag_switch.measures[DISABLE_DEAD_KEYLOOP] && !client?.holder)
+		to_chat(src, span_warning("Движение будучи призраком в данный момент отключено. Чтобы покинуть тело используйте Ghost вёрб во вкладке OOC."))
 
 /mob/living/carbon/human/proc/reagents_readout()
 	var/readout = "[get_bloodtype()?.get_blood_name() || "Blood"]stream:"
