@@ -232,7 +232,7 @@
 	candidate.transfer_to(body, force_key_move = TRUE) // yoinks the candidate's client
 	if(ishuman(body))
 		var/mob/living/carbon/human/human_body = body
-		body.client?.prefs.safe_transfer_prefs_to(body)
+		body.client?.prefs.safe_transfer_prefs_to(body, do_not_apply = list(/datum/preference/body_modifications)) // Bandastation edit - do not apply body mods on roles
 		human_body.dna.remove_all_mutations()
 		human_body.dna.update_dna_identity()
 
