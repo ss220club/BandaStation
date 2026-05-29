@@ -23540,6 +23540,15 @@ instrumental = "робой магистрата"
 prepositional = "робе магистрата"
 gender = "female"
 
+["magistrate's jacket"]
+nominative = "куртка магистрата"
+genitive = "куртки магистрата"
+dative = "куртке магистрата"
+accusative = "куртку магистрата"
+instrumental = "курткой магистрата"
+prepositional = "куртке магистрата"
+gender = "female"
+
 ["magistrate's bowman headset"]
 nominative = "гарнитура боуман магистрата"
 genitive = "гарнитуры боуман магистрата"
