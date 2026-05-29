@@ -151,7 +151,11 @@
 				span_warning("[user] подносит [attacking_item.declent_ru(ACCUSATIVE)] к включённой конфорке [source.declent_ru(GENITIVE)]."),
 				span_warning("Вы подносите [attacking_item.declent_ru(ACCUSATIVE)] к включённой конфорке [source.declent_ru(GENITIVE)]."),
 			)
-			attacking_item.fire_act()
+			var/static/list/delay_by_w_class = list( WEIGHT_CLASS_TINY = 0.5, WEIGHT_CLASS_SMALL = 1, WEIGHT_CLASS_NORMAL = 1.5, WEIGHT_CLASS_BULKY = 2, WEIGHT_CLASS_HUGE = 2.5, WEIGHT_CLASS_GIGANTIC = 3)
+			var/fire_act_delay = delay_by_w_class[attacking_item.w_class] || 2.5
+			if(!do_after(user, fire_act_delay SECONDS, target = attacking_item))
+				return COMPONENT_NO_AFTERATTACK
+			attacking_item.fire_act(SOUP_BURN_TEMP + 80, 100)
 			return COMPONENT_NO_AFTERATTACK
 		// BANDASTATION EDIT END
 		return
