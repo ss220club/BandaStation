@@ -1,6 +1,6 @@
 /mob/living/basic/carp
 	density = FALSE
-	pass_flags = PASSMOB | PASSTABLE | PASSSTRUCTURE | PASSMACHINE
+	pass_flags = PASSMOB | PASSTABLE
 
 /mob/living/basic/carp/Initialize(mapload)
 	. = ..()
