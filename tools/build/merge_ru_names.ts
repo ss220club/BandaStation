@@ -11,14 +11,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { dirname, relative } from 'node:path';
-import {
-  DEFAULT_FRAGMENTS_DIR,
-  discoverFragments,
-  REPO_ROOT,
-  resolveCliPath,
-} from './lib/ru_names';
-
-const DEFAULT_OUTPUT = `${REPO_ROOT}/modular_bandastation/translations/code/translation_data/ru_names.toml`;
+import { discoverFragments, resolveCliPath } from './lib/ru_names';
 
 function runMerge(fragmentsRoot: string, outputPath: string): number {
   const discovered =
@@ -78,9 +71,18 @@ function parseArgs(argv: string[]): { fragmentsDir: string; output: string } {
     }
   }
 
+  if (!rawFragmentsDir) {
+    console.error('Error: --fragments-dir is required');
+    process.exit(2);
+  }
+  if (!rawOutput) {
+    console.error('Error: --output is required');
+    process.exit(2);
+  }
+
   return {
-    fragmentsDir: resolveCliPath(rawFragmentsDir, DEFAULT_FRAGMENTS_DIR),
-    output: resolveCliPath(rawOutput, DEFAULT_OUTPUT),
+    fragmentsDir: resolveCliPath(rawFragmentsDir),
+    output: resolveCliPath(rawOutput),
   };
 }
 

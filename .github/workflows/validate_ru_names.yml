@@ -1,27 +1,22 @@
 name: Translations
 
+# TODO: uncomment push, pull_request, merge_group after merge in follow up commit
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-    paths:
-      - "modular_bandastation/translations/code/translation_data/ru_names/**"
-      - "tools/build/validate_ru_names.ts"
-      - "tools/build/lib/ru_names.ts"
-      - ".github/workflows/validate_ru_names.yml"
-  pull_request:
-    branches:
-      - master
-      - "project/**"
-    paths:
-      - "modular_bandastation/translations/code/translation_data/ru_names/**"
-      - "tools/build/validate_ru_names.ts"
-      - "tools/build/lib/ru_names.ts"
-      - ".github/workflows/validate_ru_names.yml"
-  merge_group:
-    branches:
-      - master
+  # push:
+  #   branches:
+  #     - master
+  #   paths:
+  #     - "modular_bandastation/translations/code/translation_data/ru_names/**"
+  # pull_request:
+  #   branches:
+  #     - master
+  #     - "project/**"
+  #   paths:
+  #     - "modular_bandastation/translations/code/translation_data/ru_names/**"
+  # merge_group:
+  #   branches:
+  #     - master
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -36,6 +31,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Download the scripts
+        run: |
+          wget -O tools/build/validate_ru_names.ts https://raw.githubusercontent.com/${{ github.repository }}/master/tools/build/validate_ru_names.ts
+          wget -O tools/build/validate_ru_names.sh https://raw.githubusercontent.com/${{ github.repository }}/master/tools/build/validate_ru_names.sh
+          wget -O tools/build/lib/ru_names.ts https://raw.githubusercontent.com/${{ github.repository }}/master/tools/build/lib/ru_names.ts
+          wget -O tools/build/package.json https://raw.githubusercontent.com/${{ github.repository }}/master/tools/build/package.json
+          wget -O tools/build/bun.lock https://raw.githubusercontent.com/${{ github.repository }}/master/tools/build/bun.lock
 
       - name: Setup Bun
         uses: ./.github/actions/setup_bun
@@ -53,4 +56,4 @@ jobs:
         working-directory: tools/build
 
       - name: Validate ru_names
-        run: bun tools/build/validate_ru_names.ts
+        run: bash tools/build/validate_ru_names.sh

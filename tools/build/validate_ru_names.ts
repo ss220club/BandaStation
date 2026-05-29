@@ -13,25 +13,23 @@
 
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { relative } from 'node:path';
-import {
-  DEFAULT_FRAGMENTS_DIR,
-  discoverFragments,
-  parseTomlFragment,
-  resolveCliPath,
-} from './lib/ru_names';
+import * as TOML from 'toml';
+import { z } from 'zod';
+import { discoverFragments, resolveCliPath } from './lib/ru_names';
 
-const CASE_FIELDS = [
-  'nominative',
-  'genitive',
-  'dative',
-  'accusative',
-  'instrumental',
-  'prepositional',
-] as const;
+const VALID_GENDER_VALUES = ['male', 'female', 'neuter', 'plural'] as const;
 
-const OPTIONAL_CASE_FIELDS = CASE_FIELDS.slice(1);
-const VALID_GENDER_VALUES = new Set(['male', 'female', 'neuter', 'plural']);
-const ALL_KNOWN_FIELDS = new Set<string>([...CASE_FIELDS, 'gender']);
+const FieldsSchema = z
+  .object({
+    nominative: z.string().min(1),
+    genitive: z.string().min(1).optional(),
+    dative: z.string().min(1).optional(),
+    accusative: z.string().min(1).optional(),
+    instrumental: z.string().min(1).optional(),
+    prepositional: z.string().min(1).optional(),
+    gender: z.enum(VALID_GENDER_VALUES).optional(),
+  })
+  .strict();
 
 interface FragmentResult {
   relativePath: string;
@@ -46,55 +44,43 @@ function validateFragment(
   const relativePath = relative(fragmentsRoot, fragmentPath)
     .split(/[/\\]/)
     .join('/');
-  const parsed = parseTomlFragment(readFileSync(fragmentPath, 'utf-8'));
 
-  if (!parsed.ok) {
+  let parsed: Record<string, unknown>;
+  try {
+    parsed = TOML.parse(readFileSync(fragmentPath, 'utf-8')) as Record<
+      string,
+      unknown
+    >;
+  } catch (err) {
     return {
       relativePath,
       englishKey: null,
-      errors: [`parse error: ${parsed.error}`],
+      errors: [`parse error: ${err}`],
     };
   }
 
-  const { rootKey: englishKey, fields } = parsed.data;
-  const errors: string[] = [];
+  const keys = Object.keys(parsed);
+  if (keys.length !== 1) {
+    return {
+      relativePath,
+      englishKey: keys[0] ?? null,
+      errors: [`expected exactly one root table, got ${keys.length}`],
+    };
+  }
 
+  const englishKey = keys[0]!;
   if (!englishKey.trim()) {
-    errors.push('empty root key');
-    return { relativePath, englishKey, errors };
+    return { relativePath, englishKey, errors: ['empty root key'] };
   }
 
-  if (Object.keys(fields).length === 0) {
-    errors.push('empty document - expected exactly one root table with fields');
-    return { relativePath, englishKey, errors };
-  }
-
-  for (const key of Object.keys(fields)) {
-    if (!ALL_KNOWN_FIELDS.has(key)) {
-      errors.push(`unknown field "${key}"`);
+  const errors: string[] = [];
+  const result = FieldsSchema.safeParse(parsed[englishKey]);
+  if (!result.success) {
+    for (const issue of result.error.issues) {
+      const field =
+        issue.path.length > 0 ? `field "${issue.path.join('.')}"` : 'root';
+      errors.push(`${field}: ${issue.message}`);
     }
-  }
-
-  const nominative = fields['nominative'];
-  if (!nominative?.trim()) {
-    errors.push(
-      nominative === undefined
-        ? 'missing required field "nominative"'
-        : 'field "nominative" must not be empty',
-    );
-  }
-
-  for (const field of OPTIONAL_CASE_FIELDS) {
-    if (fields[field]?.trim() === '') {
-      errors.push(`field "${field}" must not be empty`);
-    }
-  }
-
-  const gender = fields['gender'];
-  if (gender !== undefined && !VALID_GENDER_VALUES.has(gender)) {
-    errors.push(
-      `invalid gender "${gender}" - allowed: ${[...VALID_GENDER_VALUES].join(', ')}`,
-    );
   }
 
   return { relativePath, englishKey, errors };
@@ -117,9 +103,12 @@ function parseArgs(argv: string[]): { fragmentsDir: string } {
     }
   }
 
-  return {
-    fragmentsDir: resolveCliPath(rawFragmentsDir, DEFAULT_FRAGMENTS_DIR),
-  };
+  if (!rawFragmentsDir) {
+    console.error('Error: --fragments-dir is required');
+    process.exit(2);
+  }
+
+  return { fragmentsDir: resolveCliPath(rawFragmentsDir) };
 }
 
 function main(): number {
@@ -136,9 +125,7 @@ function main(): number {
     return 1;
   }
 
-  const results = discovered.map((fragmentPath) =>
-    validateFragment(fragmentPath, fragmentsDir),
-  );
+  const results = discovered.map((p) => validateFragment(p, fragmentsDir));
 
   const seenKeys = new Map<string, string>();
   for (const result of results) {
@@ -153,14 +140,14 @@ function main(): number {
     seenKeys.set(result.englishKey, result.relativePath);
   }
 
-  const filesWithErrors = results.filter((result) => result.errors.length > 0);
+  const filesWithErrors = results.filter((r) => r.errors.length > 0);
   if (filesWithErrors.length === 0) {
     console.log(`Success: All ${discovered.length} fragments are valid.`);
     return 0;
   }
 
   const totalErrors = filesWithErrors.reduce(
-    (sum, result) => sum + result.errors.length,
+    (sum, r) => sum + r.errors.length,
     0,
   );
   console.error(
