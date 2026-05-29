@@ -11,6 +11,7 @@
 #include "code/headslug.dm"
 #include "code/heretic_knife.dm"
 #include "code/human_stripping.dm"
+#include "code/mobs/carp.dm"
 #include "code/mobs/shade.dm"
 #include "code/regenerative_core.dm"
 #include "code/religion.dm"
