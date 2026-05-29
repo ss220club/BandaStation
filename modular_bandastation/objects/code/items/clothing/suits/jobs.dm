@@ -16,6 +16,18 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/magistrate.dmi'
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
 
+/obj/item/clothing/suit/magistrate_jacket
+	name = "magistrate's jacket"
+	desc = "Элегантный черный пиджак с золотыми пуговицами. Выдается исключительно лицензированным магистратам."
+	icon_state = "magistrate_jak"
+	worn_icon_state = "magistrate_jak"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/magistrate.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/magistrate.dmi'
+	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_left_hand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_right_hand.dmi'
+	inhand_icon_state = "magistrate_jak"
+	body_parts_covered = CHEST|GROIN|ARMS
+
 // Roboticist
 /obj/item/clothing/suit/toggle/jacket/roboticist
 	name = "roboticist's jacket"
