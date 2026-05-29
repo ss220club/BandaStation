@@ -2,7 +2,7 @@
 //Generic BB keys
 
 #define BB_CURRENT_MIN_MOVE_DISTANCE "min_move_distance"
-///time until we should next eat, set by the generic hunger subtree
+///time until we should next eat, set by the generic hunger subtre e
 #define BB_NEXT_HUNGRY "BB_NEXT_HUNGRY"
 ///When looking for food, ignore drinks
 #define BB_IGNORE_DRINKS "bb_ignore_drinks"
