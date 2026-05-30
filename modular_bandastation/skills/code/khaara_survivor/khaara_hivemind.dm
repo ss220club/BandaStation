@@ -70,7 +70,6 @@
 
 	to_chat(target, span_userdanger("Чужеродная воля пронзает ваш разум! Вы чувствуете непреодолимую связь с источником улья Кхара..."))
 	to_chat(infector, span_notice("Вы успешно внедрили вирус Кхара в сознание [target.declent_ru(GENITIVE)]."))
-	playsound(target, 'sound/machines/chime.ogg', 30, FALSE, -5)
 	target.do_alert_animation()
 
 	return TRUE
