@@ -179,6 +179,8 @@
 	H.apply_status_effect(/datum/status_effect/khaara_survivor)
 	var/datum/action/cooldown/spell/khaara_adrenaline_surge/surge = new()
 	surge.Grant(H)
+	var/datum/action/cooldown/spell/pointed/khaara_infect/infect = new()
+	infect.Grant(H)
 
 // CentCom Diplomat
 /datum/outfit/centcom/diplomat

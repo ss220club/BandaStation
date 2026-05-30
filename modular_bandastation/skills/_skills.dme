@@ -5,3 +5,5 @@
 #include "code/khaara_survivor/ghost_disease.dm"
 #include "code/khaara_survivor/status_effect.dm"
 #include "code/khaara_survivor/viral_surge.dm"
+#include "code/khaara_survivor/khaara_hivemind.dm"
+#include "code/khaara_survivor/khaara_abilities.dm"

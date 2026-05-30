@@ -1,8 +1,8 @@
 /datum/action/cooldown/spell/khaara_adrenaline_surge
 	name = "Viral Surge"
 	desc = "Временно активирует остатки вируса Кхара в организме, давая взрывной прирост стамины, ускорение и сопротивляемость урону. После завершения наступает короткий период истощения."
-	button_icon = 'icons/mob/actions/actions_changeling.dmi'
-	button_icon_state = "adrenaline"
+	button_icon = 'modular_bandastation/skills/icons/khaara.dmi'
+	button_icon_state = "viral_surge"
 	cooldown_time = 120 SECONDS
 	spell_requirements = SPELL_CASTABLE_WITHOUT_INVOCATION
 

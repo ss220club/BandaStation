@@ -12,6 +12,8 @@
 	var/wound_regen_rate = 0.15
 	var/wound_regen_accumulation = 0
 
+	var/datum/khaara_hivemind/hivemind
+
 /datum/status_effect/khaara_survivor/on_apply()
 	if(!ishuman(owner))
 		return FALSE
@@ -39,6 +41,9 @@
 
 	RegisterSignal(H, COMSIG_LIVING_HEALTHSCAN, PROC_REF(on_health_scan))
 
+	if(H.mind)
+		hivemind = new(H.mind)
+
 	return TRUE
 
 /datum/status_effect/khaara_survivor/on_remove()
@@ -55,6 +60,8 @@
 		remnant.cure(FALSE)
 
 	UnregisterSignal(H, COMSIG_LIVING_HEALTHSCAN)
+
+	QDEL_NULL(hivemind)
 
 /datum/status_effect/khaara_survivor/tick(seconds_between_ticks)
 	var/mob/living/carbon/human/H = owner
