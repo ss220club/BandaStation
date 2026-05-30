@@ -2,3 +2,6 @@
 
 #include "code/dodge_shift/dodge_shift_element.dm"
 #include "code/dodge_shift/dodge_shift_spell.dm"
+#include "code/khaara_survivor/ghost_disease.dm"
+#include "code/khaara_survivor/status_effect.dm"
+#include "code/khaara_survivor/viral_surge.dm"

@@ -175,6 +175,11 @@
 		var/obj/item/organ/cyberimp/imp = new imp_type()
 		imp.Insert(H, special = TRUE)
 
+	// khaara survivor
+	H.apply_status_effect(/datum/status_effect/khaara_survivor)
+	var/datum/action/cooldown/spell/khaara_adrenaline_surge/surge = new()
+	surge.Grant(H)
+
 // CentCom Diplomat
 /datum/outfit/centcom/diplomat
 	name = "Nanotrasen Diplomat"
