@@ -1,5 +1,9 @@
 #define REQUIRED_ACCUMULATION(wound) (1 + (wound.severity - 1) * 0.3)
 
+/datum/singleton/sound_effect/khaara_mutation
+	suffix = "_khaara"
+	ffmpeg_arguments = "asetrate=37485,acrusher=0.4:1:15:0:log,aecho=0.2:0.5:30:0.2"
+
 /datum/status_effect/khaara_survivor
 	id = "khaara_survivor"
 	duration = STATUS_EFFECT_PERMANENT
@@ -33,13 +37,12 @@
 	new_eyes.Insert(H, special = TRUE)
 	new_eyes.activate()
 
-	H.override_voice = H.generate_random_mob_name()
-
 	var/datum/disease/khaara_remnant/remnant = new()
 	remnant.try_infect(H)
 	remnant.carrier = TRUE
 
 	RegisterSignal(H, COMSIG_LIVING_HEALTHSCAN, PROC_REF(on_health_scan))
+	RegisterSignal(H, COMSIG_TTS_COMPONENT_PRE_CAST_TTS, PROC_REF(on_tts_pre_cast))
 
 	if(H.mind)
 		hivemind = new(H.mind)
@@ -53,15 +56,21 @@
 
 	H.remove_traits(list(TRAIT_VIRUSIMMUNE, TRAIT_ANALGESIA, TRAIT_HARDLY_WOUNDED, TRAIT_FEARLESS), TRAIT_STATUS_EFFECT(id))
 
-	H.override_voice = ""
-
 	var/datum/disease/khaara_remnant/remnant = locate() in H.diseases
 	if(remnant)
 		remnant.cure(FALSE)
 
 	UnregisterSignal(H, COMSIG_LIVING_HEALTHSCAN)
+	UnregisterSignal(H, COMSIG_TTS_COMPONENT_PRE_CAST_TTS)
 
 	QDEL_NULL(hivemind)
+
+/datum/status_effect/khaara_survivor/proc/on_tts_pre_cast(mob/living/user, list/tts_args)
+	SIGNAL_HANDLER
+	if(tts_args[TTS_CHANNEL_OVERRIDE] == CHANNEL_TTS_TELEPATHY)
+		return
+	var/list/effects = tts_args[TTS_CAST_EFFECTS]
+	effects.Insert(1, /datum/singleton/sound_effect/khaara_mutation)
 
 /datum/status_effect/khaara_survivor/tick(seconds_between_ticks)
 	var/mob/living/carbon/human/H = owner
