@@ -171,12 +171,14 @@
 		span_warning("Вы подносите [attacking_item.declent_ru(ACCUSATIVE)] к включённой конфорке [source.declent_ru(GENITIVE)]."),
 	)
 
-	var/static/list/delay_by_w_class = list(WEIGHT_CLASS_TINY = 0.5 SECONDS, WEIGHT_CLASS_SMALL = 1 SECONDS, WEIGHT_CLASS_NORMAL = 1.5 SECONDS, WEIGHT_CLASS_BULKY = 2 SECONDS, WEIGHT_CLASS_HUGE = 2.5 SECONDS, WEIGHT_CLASS_GIGANTIC = 3 SECONDS)
-	var/fire_act_delay = delay_by_w_class[attacking_item.w_class] || 2.5 SECONDS
+	var/fire_act_delay = choose_delay(attacking_item) || 1.5 SECONDS
 	if(!do_after(user, fire_act_delay, target = attacking_item) || QDELETED(attacking_item) || !on)
 		return
+	attacking_item.fire_act()
 
-	attacking_item.fire_act(SOUP_BURN_TEMP + 80, 100)
+/datum/component/stove/proc/choose_delay(obj/item/attacking_item)
+	var/static/list/delay_by_w_class = list( WEIGHT_CLASS_TINY = 0.5 SECONDS, WEIGHT_CLASS_SMALL = 1 SECONDS, WEIGHT_CLASS_NORMAL = 1.5 SECONDS, WEIGHT_CLASS_BULKY = 2 SECONDS, WEIGHT_CLASS_HUGE = 2.5 SECONDS, WEIGHT_CLASS_GIGANTIC = 3 SECONDS)
+	return delay_by_w_class[attacking_item.w_class]
 // BANDASTATION EDIT END
 
 /datum/component/stove/proc/on_exited(obj/machinery/source, atom/movable/gone, direction)
