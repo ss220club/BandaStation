@@ -16,6 +16,7 @@
 	siemens_coefficient = 0
 	complexity_max = DEFAULT_MAX_COMPLEXITY + 10
 	hearing_protection = EAR_PROTECTION_NORMAL
+	slowdown_deployed = 0
 	allowed_suit_storage = list(
 		/obj/item/restraints/handcuffs,
 		/obj/item/assembly/flash,
