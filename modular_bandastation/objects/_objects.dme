@@ -1,6 +1,7 @@
 #include "_objects.dm"
 
 #include "code/effects/decal.dm"
+#include "code/effects/highrisk_flags.dm"
 #include "code/effects/landmark.dm"
 #include "code/effects/spawners.dm"
 #include "code/effects/turf_decal.dm"
@@ -116,6 +117,9 @@
 #include "code/machinery/suit_storage_unit.dm"
 #include "code/machinery/vending/vending.dm"
 #include "code/machinery/teapot.dm"
+#include "code/machinery/bluespace_beacon_portals.dm"
+#include "code/machinery/bluespace_beacon_spawn_table.dm"
+#include "code/machinery/bluespace_beacon.dm"
 
 #include "code/structures/chairs.dm"
 #include "code/structures/displaycase.dm"
