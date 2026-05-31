@@ -19968,6 +19968,25 @@ gender = "female"
 
 # MARK: Engineering
 
+["field generator"]
+nominative = "генератор поля"
+genitive = "генератора поля"
+dative = "генератору поля"
+accusative = "генератор поля"
+instrumental = "генератором поля"
+prepositional = "генераторе поля"
+gender = "male"
+
+["anti-breach shielding projector"]
+nominative = "противопробойный генератор поля"
+genitive = "противопробойного генератора поля"
+dative = "противопробойному генератору поля"
+accusative = "противопробойный генератор поля"
+instrumental = "противопробойным генератором поля"
+prepositional = "противопробойном генераторе поля"
+gender = "male"
+
+
 ["insulated gloves"]
 nominative = "изоляционные перчатки"
 genitive = "изоляционных перчаток"
@@ -23519,6 +23538,15 @@ dative = "робе магистрата"
 accusative = "робу магистрата"
 instrumental = "робой магистрата"
 prepositional = "робе магистрата"
+gender = "female"
+
+["magistrate's jacket"]
+nominative = "куртка магистрата"
+genitive = "куртки магистрата"
+dative = "куртке магистрата"
+accusative = "куртку магистрата"
+instrumental = "курткой магистрата"
+prepositional = "куртке магистрата"
 gender = "female"
 
 ["magistrate's bowman headset"]
@@ -35985,7 +36013,7 @@ gender = "male"
 nominative = "Выжженная мантия"
 genitive = "Выжженной мантии"
 dative = "Выжженной мантии"
-accusative = "Выжженную мантю"
+accusative = "Выжженную мантию"
 instrumental = "Выжженной мантией"
 prepositional = "Выжженной мантии"
 gender = "female"
