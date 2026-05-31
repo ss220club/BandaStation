@@ -655,3 +655,8 @@
 	description = "Блин, получить удар этой штукой - настоящий отстой."
 	mood_change = -4
 	timeout = 5 MINUTES
+
+/datum/mood_event/gizmo_negative
+	description = "I hear a voice whispering, and I don't like what it says."
+	mood_change = -3
+	timeout = 30 SECONDS
