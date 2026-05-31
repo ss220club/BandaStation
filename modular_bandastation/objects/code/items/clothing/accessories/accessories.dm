@@ -6,7 +6,7 @@
 	worn_icon_state = "apron_red"
 
 /obj/item/clothing/accessory/ammo_vest
-	name = "ammo webbing"
+	name = "ammo vest"
 	desc = "Тактическая разгрузка для хранения магазинов."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/webbings.dmi'
 	icon_state = "webbing"
@@ -30,8 +30,8 @@
 	create_storage(storage_type = /datum/storage/pockets/ammo_webbing)
 
 /obj/item/clothing/accessory/ammo_vest/can_attach_accessory(obj/item/clothing/under/attach_to, mob/living/user)
-	var/result = ..()
-	if(!result)
+	. = ..()
+	if(!.)
 		return
 
 	if(!isnull(attach_to.atom_storage))
@@ -41,7 +41,7 @@
 	return TRUE
 
 /obj/item/clothing/accessory/ammo_vest/black
-	name = "black ammo webbing"
+	name = "black ammo vest"
 	desc = "Тактическая тёмная разгрузка для хранения магазинов."
 	icon_state = "webbing_black"
 	worn_icon_state = "webbing_black"
