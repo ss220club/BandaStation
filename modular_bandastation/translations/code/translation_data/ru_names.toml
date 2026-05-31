@@ -1701,6 +1701,24 @@ instrumental = "пуленепробиваемым шлемом"
 prepositional = "пуленепробиваемом шлеме"
 gender = "male"
 
+["ammo vest"]
+nominative = "разгрузка под магазины"
+genitive = "разгрузки под магазины"
+dative = "разгрузке под магазины"
+accusative = "разгрузку под магазины"
+instrumental = "разгрузкой под магазины"
+prepositional = "разгрузке под магазины"
+gender = "female"
+
+["black ammo vest"]
+nominative = "тёмная разгрузка под магазины"
+genitive = "тёмной разгрузки под магазины"
+dative = "тёмной разгрузке под магазины"
+accusative = "тёмную разгрузку под магазины"
+instrumental = "тёмной разгрузкой под магазины"
+prepositional = "тёмной разгрузке под магазины"
+gender = "female"
+
 ["riot suit"]
 nominative = "броня для подавления беспорядков"
 genitive = "брони для подавления беспорядков"
