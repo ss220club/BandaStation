@@ -5,7 +5,7 @@
 /// Ability for the infector to infect a nearby human with the Khaara virus.
 /// Requires a 5-second channeled aggressive grab on the target.
 /datum/action/cooldown/spell/pointed/khaara_infect
-	name = "Заражение Кхара"
+	name = "Khaara Infection"
 	desc = "Внедрить остатки вируса Кхара в разум цели, подчиняя её воле улья. Цель должна находиться рядом и не иметь ментальной защиты."
 	button_icon = 'modular_bandastation/skills/icons/khaara.dmi'
 	button_icon_state = "infect"
@@ -176,7 +176,7 @@
 
 /// Innate action for hivemind communication — available to both infector and thralls.
 /datum/action/cooldown/khaara_hivemind_comm
-	name = "Речь Улья Кхара"
+	name = "Khaara Hivemind Speech"
 	desc = "Отправить мысленное сообщение всем участникам улья Кхара."
 	button_icon = 'modular_bandastation/skills/icons/khaara.dmi'
 	button_icon_state = "hivemind_com"
@@ -225,7 +225,7 @@
 
 /// Innate action for the infector to open the hivemind control panel.
 /datum/action/cooldown/khaara_hivemind_panel
-	name = "Панель Улья Кхара"
+	name = "Khaara Hivemind Panel"
 	desc = "Открыть панель управления ульем Кхара для управления заражёнными."
 	button_icon = 'modular_bandastation/skills/icons/khaara.dmi'
 	button_icon_state = "hivemind_panel"

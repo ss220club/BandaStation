@@ -104,6 +104,6 @@
 		return
 
 	render_list += "<span class='alert ml-1'><b>⚠ ОБНАРУЖЕНА БИОЛОГИЧЕСКАЯ АНОМАЛИЯ КЛАССА БИООПАСНОСТЬ.</b> Требуется изоляция.</span><br>"
-	render_list += "<span class='notice ml-1'>Анализ антител... \[ДАННЫЕ УДАЛЕНЫ — КОМАНДНЫЙ ДОСТУП\]</span><br>"
+	render_list += "<span class='notice ml-1'>Анализ антител... \[ДАННЫЕ УДАЛЕНЫ — УРОВЕНЬ ДОПУСКА: L3+ • ПОПЫТКА ОБХОДА БУДЕТ ЗАФИКСИРОВАНА И ПЕРЕДАНА В ОТДЕЛ КОНТРРАЗВЕДКИ\\]</span><br>"
 
 #undef REQUIRED_ACCUMULATION

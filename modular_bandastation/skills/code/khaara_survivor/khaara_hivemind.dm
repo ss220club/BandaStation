@@ -306,10 +306,10 @@
 /// Hidden antagonist datum for the infector — provides HUD icon, team membership, and hivemind communication.
 /// Does NOT appear in round-end reports or regular antagonist lists.
 /datum/antagonist/khaara_source
-	name = "\improper Источник Улья Кхара"
-	roundend_category = "Улей Кхара"
+	name = "Khaara Hivemind Source"
+	roundend_category = "Khaara Hivemind"
 	show_in_roundend = FALSE
-	antagpanel_category = "Улей Кхара"
+	antagpanel_category = "Khaara Hivemind"
 	show_in_antagpanel = FALSE
 	show_to_ghosts = FALSE
 	antag_hud_name = "khaara_source"
@@ -348,10 +348,10 @@
 
 /// Antagonist datum for Khaara-infected thralls — provides HUD icon, team membership, hivemind communication, and configurable objective.
 /datum/antagonist/khaara_thrall
-	name = "\improper Заражённый Ульем Кхара"
-	roundend_category = "Улей Кхара"
+	name = "Khaara Hivemind Thrall"
+	roundend_category = "Khaara Hivemind"
 	show_in_roundend = FALSE
-	antagpanel_category = "Улей Кхара"
+	antagpanel_category = "Khaara Hivemind"
 	show_in_antagpanel = FALSE
 	show_to_ghosts = FALSE
 	antag_hud_name = "khaara_thrall"
@@ -403,8 +403,8 @@
 
 /// Team datum for Khaara hivemind — enables shared HUD icons between infector and thralls.
 /datum/team/khaara_hivemind
-	name = "\improper Улей Кхара"
-	member_name = "член улья"
+	name = "\improper Khaara Hivemind"
+	member_name = "hivemind member"
 	show_roundend_report = FALSE
 
 	/// Weakref back to the hivemind controller

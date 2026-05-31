@@ -42,8 +42,7 @@
 	H.add_movespeed_modifier(/datum/movespeed_modifier/khaara_surge_speed, update = TRUE)
 	H.physiology.brute_mod *= 0.6
 	H.physiology.burn_mod *= 0.6
-	H.do_alert_animation()
-	playsound(H, 'sound/machines/chime.ogg', 50, FALSE, -5)
+	playsound(H, 'sound/effects/singlebeat.ogg', 50, FALSE, -5)
 
 	ADD_TRAIT(H, TRAIT_SLEEPIMMUNE, REF(src))
 	ADD_TRAIT(H, TRAIT_BATON_RESISTANCE, REF(src))
@@ -111,11 +110,11 @@
 	multiplicative_slowdown = 0.3
 
 /atom/movable/screen/alert/status_effect/khaara_surge_active
-	name = "Вирусный Всплеск"
+	name = "Khaara Viral Surge"
 	desc = "Остатки вируса Кхара активны! Вы движетесь быстрее, восстанавливаете стамину и получаете меньше урона."
 	icon_state = "high"
 
 /atom/movable/screen/alert/status_effect/khaara_surge_crash
-	name = "Истощение"
+	name = "Khaara Exhaustion"
 	desc = "Вирусные остатки исчерпаны. Вы истощены и двигаетесь значительно медленнее."
 	icon_state = "stun"
