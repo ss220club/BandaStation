@@ -205,17 +205,9 @@
 			"label": "tgui: rebuild tgfont"
 		},
 		{
-			"label": "ru_names: new fragment from selection",
-			"type": "process",
-			"command": "bash",
-			"args": [
-				"${workspaceFolder}/tools/ru_translations/new_ru_name_fragment.sh",
-				"${selectedText}"
-			],
-			"windows": {
-				"command": "${workspaceFolder}/tools/ru_translations/new_ru_name_fragment.cmd",
-				"args": ["${selectedText}"]
-			},
+			"type": "shell",
+			"command": ".\\tools\\translations\\new_ru_name_fragment.cmd",
+			"args": ["${selectedText}"],
 			"presentation": {
 				"reveal": "always",
 				"panel": "dedicated",
@@ -224,7 +216,8 @@
 				"clear": false,
 				"close": false
 			},
-			"problemMatcher": []
+			"problemMatcher": [],
+			"label": "ru_names: new fragment from selection"
 		}
 	]
 }
