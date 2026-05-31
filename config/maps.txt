@@ -60,6 +60,11 @@ map wawastation
 	votable
 endmap
 
+map ollhouse
+	default
+	votable
+endmap
+
 # Debug-only maps.
 
 map gateway_test
