@@ -1,5 +1,3 @@
-#define LEGENDARY_SWORDS_CKEY_WHITELIST list("mooniverse")
-
 /obj/item/dualsaber/legendary_saber
 	name = "Malice"
 	desc = "\"Злоба\" - один из легендарных энергетических мечей Галактики. Словно источая мистическую энергию, \"Злоба\" является олицетворением самой Тьмы, вызывающей трепет и ужас врагов её владельца. Гладкая и простая рукоять меча не может похвастаться орнаментами, узорами или древними рунами, но способна выплескивать рванный энергетический клинок кроваво-красного света, словно кричащий о непокорности и ярости своего владельца.  Некоторые истории гласят, что в этом клинке прибывает сама темная сущность могущества и бесконечного гнева, готовая исполнить волю своего хозяина даже за пределами пространства и времени. \n Создатель: Согда К'Трим. Текущий владелец: Миднайт Блэк."
@@ -18,6 +16,7 @@
 	var/power = 1
 	var/refusal_text = "Злоба неподвластна твоей воле, усмрить её сможет лишь сильнейший."
 	var/datum/enchantment/enchant
+	var/list/ckey_whitelist
 	possible_colors = null
 	block_chance = 88
 	two_hand_force = 35
@@ -26,7 +25,7 @@
 
 /obj/item/dualsaber/legendary_saber/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/ckey_and_role_locked_pickup, TRUE, LEGENDARY_SWORDS_CKEY_WHITELIST, pickup_damage = 10, refusal_text = refusal_text)
+	AddComponent(/datum/component/ckey_and_role_locked_pickup, TRUE, ckey_whitelist, pickup_damage = 10, refusal_text = refusal_text)
 	var/datum/component/two_handed/th = src.GetComponent(/datum/component/two_handed)
 	th.wieldsound = wieldsound
 	th.unwieldsound = unwieldsound
@@ -40,6 +39,7 @@
 	name = "Sorrow Catcher"
 	desc = "\"Ловец  Скорби\" -  один из легендарных энергетических мечей Галактики. \
 	Согласно легенде, предсмертные крики тех, кого сразило это оружие вырываются при каждой его активации, создавая специфических \"плачущий\" звук. "
+	ckey_whitelist = list("grombila")
 	icon_state = "gr_dualsaber0"
 	inhand_icon_state  = "gr_dualsaber0"
 	saber_color = "gromov"
@@ -121,6 +121,34 @@
 	wieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberon.ogg'
 	unwieldsound = 'modular_bandastation/weapon/sound/melee/kir_saberoff.ogg'
 	hit_wield = 'modular_bandastation/weapon/sound/melee/kir_saberhit.ogg'
+
+/obj/item/dualsaber/legendary_saber/dark_star
+	name = "Dark Star"
+	desc = "\"Тёмная Звезда\" - Тёмная звезда - легендарный энергетический меч, цвета ночного неба,  по легенде он был создан из осколков упавшей звезды. Тот кто его носит, обречен на странствия, одиночество и скорбь, ибо звёзды светят лишь в ночи."
+	ckey_whitelist = list("mooniverse")
+	icon_state = "ds_dualsaber0"
+	inhand_icon_state = "ds_dualsaber0"
+	saber_color = "darkstar"
+	refusal_text = "Тёмная Звезда не признаёт тебя своим хозяином."
+	light_color = COLOR_AMMO_RUBBER
+	saber_name = "ds"
+	wieldsound = 'modular_bandastation/weapon/sound/melee/ds_saber_on.ogg'
+	unwieldsound = 'modular_bandastation/weapon/sound/melee/ds_saber_off.ogg'
+	hit_wield = 'modular_bandastation/weapon/sound/melee/ds_saber_hit.ogg'
+
+/obj/item/dualsaber/legendary_saber/liar
+	name = "Liar"
+	desc = "\"Лжец \" - один из легендарных энергетических мечей Галактики. Его природа так же обманчива, как и имя: титановая рукоять с багровыми прожилками и особой формой делает удары непредсказуемыми. Жёлтый мерцающий клинок создан был для защиты - отсюда и название. Ведь, как сказано, искусство существует, чтобы люди не умерли от правды. И в этом случае правда буквальна - единственная неизбежная истина мира это смерть."
+	ckey_whitelist = list("MiracleSpirit")
+	icon_state = "lz_dualsaber0"
+	inhand_icon_state = "lz_dualsaber0"
+	saber_color = "liar"
+	refusal_text = "Лжец не подчинится лжецу."
+	light_color = LIGHT_COLOR_DIM_YELLOW
+	saber_name = "lz"
+	wieldsound = 'modular_bandastation/weapon/sound/melee/lz_saber_on.ogg'
+	unwieldsound = 'modular_bandastation/weapon/sound/melee/lz_saber_off.ogg'
+	hit_wield = 'modular_bandastation/weapon/sound/melee/lz_saber_hit.ogg'
 
 /obj/item/dualsaber/legendary_saber/orphan
 	name = "Orphan"
@@ -229,13 +257,22 @@
 
 /datum/action/item_action/legendary_saber/rage/Trigger(trigger_flags)
 	. = ..()
-	var/log_message = "[usr.name] triggered [name]"
-	log_combat(log_message)
-	message_admins(log_message)
+
+/datum/action/item_action/legendary_saber/rage/do_effect(trigger_flags)
+	if(!target || QDELETED(target))
+		return FALSE
 	var/mob/living/user = usr
-	var/obj/item/dualsaber/legendary_saber/S = src.target
+	var/obj/item/dualsaber/legendary_saber/S = target
+	if(!S)
+		return FALSE
+	if(!HAS_TRAIT(S, TRAIT_WIELDED))
+		S.attack_self(user)
+	log_combat(user, user, "triggered [name]")
+	message_admins("[key_name(user)] triggered [name]")
 	var/list/mob/living/charged_targets = list(user)
 	var/datum/enchantment/dash/dash = S.enchant
+	if(!dash)
+		return FALSE
 	var/mob/range_center = user
 	for(var/count in 1 to dash.rage_dashes)
 		var/mob/living/target

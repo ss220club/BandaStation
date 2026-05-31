@@ -1,7 +1,7 @@
 // MARK: Nanotrasen CentCom //
 
-/datum/outfit/centcom/post_equip(mob/living/carbon/human/centcom_member, visuals_only = FALSE)
-	. = ..() // Now centcom staff have mindshield implants
+/datum/outfit/centcom/pre_equip(mob/living/carbon/human/centcom_member, visuals_only = FALSE)
+	. = ..()
 	if(centcom_member.mind)
 		centcom_member.mind.centcom_role = CENTCOM_ROLE_OFFICER
 

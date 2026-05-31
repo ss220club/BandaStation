@@ -36162,6 +36162,24 @@ instrumental = "Сиротой"
 prepositional = "Сироте"
 gender = "male"
 
+["Dark Star"]
+nominative = "Тёмная Звезда"
+genitive = "Тёмной Звезды"
+dative = "Тёмной Звезде"
+accusative = "Тёмную Звезду"
+instrumental = "Тёмной Звездой"
+prepositional = "Тёмной Звезде"
+gender = "female"
+
+["Liar"]
+nominative = "Лжец"
+genitive = "Лжеца"
+dative = "Лжецу"
+accusative = "Лжеца"
+instrumental = "Лжецом"
+prepositional = "Лжеце"
+gender = "male"
+
 # MARK: Blood Worm
 
 ["small blood cocoon"]
