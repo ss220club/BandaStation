@@ -293,12 +293,13 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	var/message = ""
 	// if someone is whispering we make an extra type of message that is obfuscated for people out of range
-	// Less than or equal to 0 means normal hearing. More than 0 and less than or equal to EAVESDROP_EXTRA_RANGE means
-	// partial hearing. More than EAVESDROP_EXTRA_RANGE means no hearing. Exception for GOOD_HEARING trait
+	// Less than or equal to 0 means normal hearing. More than 0 and less than or equal to eavesdrop_range means
+	// partial hearing. More than eavesdrop_range means no hearing. Exception for GOOD_HEARING trait
 	var/dist = get_dist(speaker, src) - message_range
-	if(dist > 0 && dist <= EAVESDROP_EXTRA_RANGE && !HAS_TRAIT(src, TRAIT_GOOD_HEARING))
+	if(dist > 0 && dist <= eavesdrop_range && !HAS_TRAIT(src, TRAIT_GOOD_HEARING))
 		raw_message = stars(raw_message)
-	if(message_range != INFINITY && dist > EAVESDROP_EXTRA_RANGE && !HAS_TRAIT(src, TRAIT_GOOD_HEARING))
+	var/speaker_name = span_name("[message_mods[MODE_SPEAKER_NAME_OVERRIDE] || speaker]")
+	if(message_range != INFINITY && dist > eavesdrop_range && !HAS_TRAIT(src, TRAIT_GOOD_HEARING))
 		// Too far away and don't have good hearing, you can't hear anything
 		if(is_blind() || HAS_TRAIT(speaker, TRAIT_INVISIBLE_MAN)) // Can't see them speak either
 			return FALSE
@@ -307,7 +308,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 		// But we can still see them speak
 		if(speaker_is_signing)
-			deaf_message = "[span_name("[capitalize(speaker.declent_ru(NOMINATIVE))]")] [speaker.get_default_say_verb()] что-то, но движения едва заметны, чтобы разобрать их."
+			deaf_message = "[speaker_name] [speaker.get_default_say_verb()] что-то, но движения едва заметны, чтобы разобрать их."
 		else if(!HAS_TRAIT(src, TRAIT_DEAF)) // If we can't hear we want to continue to the default deaf message
 			if(isliving(speaker))
 				var/mob/living/living_speaker = speaker
@@ -315,7 +316,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 				if(mouth_hidden && !HAS_TRAIT(src, TRAIT_SEE_MASK_WHISPER)) // Can't see them speak if their mouth is covered or hidden, unless we're an empath
 					return FALSE
 
-			deaf_message = "[span_name("[capitalize(speaker.declent_ru(NOMINATIVE))]")] [ru_say_verb(speaker.verb_whisper)] что-то, но вы слишком далеко, чтобы услышать [speaker.ru_p_them()]."
+			deaf_message = "[speaker_name] [ru_say_verb(speaker.verb_whisper)] что-то, но вы слишком далеко, чтобы услышать [speaker.ru_p_them()]."
 
 		if(deaf_message)
 			deaf_type = MSG_VISUAL
@@ -355,7 +356,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	if(speaker != src)
 		if(!radio_freq) //These checks have to be separate, else people talking on the radio will make "You can't hear yourself!" appear when hearing people over the radio while deaf.
-			deaf_message = "[span_name("[capitalize(speaker.declent_ru(NOMINATIVE))]")] [speaker.get_default_say_verb()] что-то, но вы не слышите [speaker.ru_p_them()]."
+			deaf_message = "[speaker_name] [speaker.get_default_say_verb()] что-то, но вы не слышите [speaker.ru_p_them()]."
 			deaf_type = MSG_VISUAL
 	else
 		deaf_message = span_notice("Вы не слышите себя!")

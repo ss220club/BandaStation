@@ -42,7 +42,7 @@
 /datum/tgui_say/New(client/client, id)
 	src.client = client
 	window = new(client, id)
-	winset(client, "tgui_say", "size=1,1;is-visible=0;")
+	winset(client, SKIN_TGUISAY, "size=1,1;is-visible=0;")
 	window.subscribe(src, PROC_REF(on_message))
 	window.is_browser = TRUE
 
@@ -69,7 +69,7 @@
 /datum/tgui_say/proc/load()
 	window_open = FALSE
 
-	winset(client, "tgui_say", "pos=848,500;is-visible=0;")
+	winset(client, SKIN_TGUISAY, "pos=848,500;is-visible=0;")
 
 	window.send_message("props", list(
 		"lightMode" = client.prefs?.read_preference(/datum/preference/toggle/tgui_say_light_mode),
@@ -96,10 +96,11 @@
 	var/static/list/no_thinking_bubble_channels = list(
 		OOC_CHANNEL,
 		ADMIN_CHANNEL,
-		MENTOR_CHANNEL
+		MENTOR_CHANNEL,
+		PRAY_CHANNEL,
 	)
 	// BANDASTATION ADDITION END - Mentors
-	if(!(payload["channel"] in no_thinking_bubble_channels)) // BANDASTATION EDIT - Mentors: (payload["channel"] in no_thinking_bubble_channels)
+	if(!(payload["channel"] in no_thinking_bubble_channels)) // BANDASTATION EDIT - Mentors: (payload["channel"] in no_thinking_bubble_channels && payload["channel"] != PRAY_CHANNEL)
 		start_thinking()
 	if(!client.typing_indicators)
 		log_speech_indicators("[key_name(client)] started typing at [loc_name(client.mob)], indicators DISABLED.")

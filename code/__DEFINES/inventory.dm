@@ -157,6 +157,22 @@ DEFINE_BITFIELD(no_equip_flags, list(
 /// For when you don't want the "breast" effect to be applied (the one that cuts two pixels in the middle of the front of the uniform when facing east or west).
 #define FEMALE_UNIFORM_NO_BREASTS (1<<2)
 
+// BANDASTATION EDIT START - more masks for female clothing
+/// Tgstation stores its masks there
+#define FEMALE_MASK_ICON_DEFAULT 'icons/mob/clothing/under/masking_helpers.dmi'
+/// Bandastation stores its masks there
+#define FEMALE_MASK_ICON_MODULAR 'modular_bandastation/mobs/icons/clothing/masking_helpers.dmi'
+
+// Icon states stored in FEMALE_MASK_ICON_MODULAR
+#define FEMALE_MASK_TURTLENECK "female_turtleneck"
+#define FEMALE_MASK_RUS_ARMY "female_rus_army"
+
+// Flags for /datum/female_uniform::mask_flags
+
+/// This mask is always applied when suit is adjusted
+#define FEMALE_MASK_APPLY_ON_ADJUSTED (1<<0)
+// BANDASTATION EDIT END
+
 //flags for alternate styles: These are hard sprited so don't set this if you didn't put the effort in
 #define NORMAL_STYLE 0
 #define ALT_STYLE 1
@@ -181,6 +197,7 @@ DEFINE_BITFIELD(no_equip_flags, list(
 #define HEADCOVERSMOUTH (1<<4)
 #define PEPPERPROOF (1<<5) //protects against pepperspray
 #define EARS_COVERED (1<<6)
+#define ALLOW_SURGERY_THROUGH (1<<7) //item will not obstruct body part access, such as for surgery, despite covering the body part
 
 #define TINT_MILD 1.5 //Threshold of tint level to apply mild tint overlay
 #define TINT_DARKENED 2 //Threshold of tint level to apply weld mask overlay
@@ -211,7 +228,7 @@ GLOBAL_LIST_INIT(any_suit_storage, typecacheof(list(
 	/obj/item/lighter,
 	/obj/item/pen,
 	/obj/item/modular_computer/pda,
-	/obj/item/toy,
+	/obj/item/toy/plush,
 	/obj/item/radio,
 	/obj/item/storage/bag/books,
 	/obj/item/storage/fancy/cigarettes,

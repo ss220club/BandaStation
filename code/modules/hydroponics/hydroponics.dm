@@ -244,16 +244,11 @@
 		))
 	QDEL_NULL(our_snail)
 
+/obj/machinery/hydroponics/constructable/screwdriver_act(mob/living/user, obj/item/tool)
+	return default_deconstruction_screwdriver(user, tool)
 
-/obj/machinery/hydroponics/constructable/attackby(obj/item/I, mob/living/user, list/modifiers, list/attack_modifiers)
-	if (!user.combat_mode)
-		// handle opening the panel
-		if(default_deconstruction_screwdriver(user, icon_state, icon_state, I))
-			return
-		if(default_deconstruction_crowbar(I))
-			return
-
-	return ..()
+/obj/machinery/hydroponics/constructable/crowbar_act(mob/living/user, obj/item/tool)
+	return default_deconstruction_crowbar(user, tool)
 
 /obj/machinery/hydroponics/bullet_act(obj/projectile/proj) //Works with the Somatoray to modify plant variables.
 	if(!myseed)
@@ -801,6 +796,7 @@
 	set_pestlevel(0, update_icon = FALSE) // Pests die
 	lastproduce = 0
 	SEND_SIGNAL(src, COMSIG_HYDROTRAY_PLANT_DEATH)
+	remove_shared_particles(/particles/pollen) //We shouldn't look like we're pollenating if we're dead.
 	if(update_icon)
 		update_appearance()
 
@@ -1173,6 +1169,9 @@
 		return
 	if(myseed)
 		to_chat(user, span_warning("[src] already has a plant growing in it!"))
+		return
+	if(young_plant.seed_flags & NO_PLANTING)
+		to_chat(user, span_warning("[young_plant] cannot be planted in [src]!"))
 		return
 	if(istype(young_plant, /obj/item/seeds/kudzu))
 		investigate_log("had Kudzu planted in it by [key_name(user)] at [AREACOORD(src)].", INVESTIGATE_BOTANY)
