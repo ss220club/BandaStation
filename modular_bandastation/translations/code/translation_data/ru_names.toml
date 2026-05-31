@@ -4401,7 +4401,7 @@ genitive = "\"Луны\""
 dative = "\"Луне\""
 accusative = "\"Луна\""
 instrumental = "\"Луной\""
-prepositional = \"Луне\"
+prepositional = "\"Луне\""
 gender = "female"
 
 # MARK: Projectiles

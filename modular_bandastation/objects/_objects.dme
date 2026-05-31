@@ -44,6 +44,8 @@
 #include "code/items/clothing/mod/types/ussp/mod_types.dm"
 #include "code/items/clothing/mod/types/skrell/mod_theme.dm"
 #include "code/items/clothing/mod/types/skrell/mod_types.dm"
+#include "code/items/clothing/mod/types/syndi/mod_theme.dm"
+#include "code/items/clothing/mod/types/syndi/mod_types.dm"
 #include "code/items/clothing/neck/fancy.dm"
 #include "code/items/clothing/neck/oll_necklace.dm"
 #include "code/items/clothing/neck/holiday.dm"
