@@ -1,4 +1,4 @@
-/obj/item/mod/control/pre_equipped/apocryphal_syndi
+/obj/item/mod/control/pre_equipped/apocryphal/syndicate
 	theme = /datum/mod_theme/apocryphal_syndi
 	starting_frequency = MODLINK_FREQ_SYNDICATE
 	applied_cell = /obj/item/stock_parts/power_store/cell/bluespace
