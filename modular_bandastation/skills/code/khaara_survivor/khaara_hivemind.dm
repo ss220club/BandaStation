@@ -236,14 +236,15 @@
 
 /datum/khaara_hivemind/ui_static_data(mob/user)
 	var/list/data = list()
-	data["infector_name"] = "[get_infector()?.name || "Неизвестно"]"
+	var/datum/mind/infector = get_infector()
+	data["infector_name"] = infector ? infector.name : "Неизвестно"
 	return data
 
 /datum/khaara_hivemind/ui_data(mob/user)
 	var/list/data = list()
 	var/datum/mind/infector = get_infector()
 
-	data["infector_name"] = infector?.name || "Неизвестно"
+	data["infector_name"] = infector ? infector.name : "Неизвестно"
 	data["infector_status"] = infector?.current ? (infector.current.stat == DEAD ? "Мёртв" : "Активен") : "Нет тела"
 	data["thralls"] = get_thralls_data()
 	data["thrall_count"] = length(thralls)
