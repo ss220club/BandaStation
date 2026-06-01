@@ -20,6 +20,7 @@
 	icon_gib = "carp_gib"
 	gold_core_spawnable = HOSTILE_SPAWN
 	mob_biotypes = MOB_ORGANIC | MOB_BEAST | MOB_AQUATIC
+	pass_flags = PASSMOB | PASSTABLE // BANDASTATION ADDITION: Carps can swarm and pass tables
 	health = 25
 	maxHealth = 25
 	max_stamina = 120
@@ -45,6 +46,11 @@
 	habitable_atmos = null
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = 1500
+
+	/mob/living/basic/carp/Initialize(mapload) // BANDASTATION ADDITION: Carps can swarm and pass tables
+		. = ..()
+		ADD_TRAIT(src, TRAIT_UNDENSE, INNATE_TRAIT)
+		AddComponent(/datum/component/swarming, 20, 20)
 
 	/// If true we will run away from attackers even at full health
 	var/cowardly = FALSE
