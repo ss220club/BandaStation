@@ -2,7 +2,7 @@
 
 /datum/singleton/sound_effect/khaara_mutation
 	suffix = "_khaara"
-	ffmpeg_arguments = "asetrate=37485,acrusher=0.4:1:15:0:log,aecho=0.2:0.5:30:0.2"
+	ffmpeg_arguments = "atempo=0.90,tremolo=f=0.15:d=0.4,lowpass=f=10000,volume=volume=0.5"
 
 /datum/status_effect/khaara_survivor
 	id = "khaara_survivor"
