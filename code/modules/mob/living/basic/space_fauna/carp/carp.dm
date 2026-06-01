@@ -47,7 +47,6 @@
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = 1500
 
-
 	/// If true we will run away from attackers even at full health
 	var/cowardly = FALSE
 	/// Cytology cells you can swab from this creature
