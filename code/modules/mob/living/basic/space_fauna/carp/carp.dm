@@ -47,10 +47,6 @@
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = 1500
 
-/mob/living/basic/carp/Initialize(mapload) // BANDASTATION ADDITION: Carps can swarm and pass tables
-	. = ..()
-	ADD_TRAIT(src, TRAIT_UNDENSE, INNATE_TRAIT)
-	AddComponent(/datum/component/swarming, 20, 20)
 
 	/// If true we will run away from attackers even at full health
 	var/cowardly = FALSE
@@ -105,6 +101,8 @@
 	. = ..()
 	apply_colour()
 	add_traits(list(TRAIT_HEALS_FROM_CARP_RIFTS, TRAIT_SPACEWALK), INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_UNDENSE, INNATE_TRAIT)
+	AddComponent(/datum/component/swarming, 20, 20)
 
 	if (cell_line)
 		AddElement(/datum/element/swabable, cell_line, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
