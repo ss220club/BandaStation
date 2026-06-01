@@ -101,8 +101,8 @@
 	. = ..()
 	apply_colour()
 	add_traits(list(TRAIT_HEALS_FROM_CARP_RIFTS, TRAIT_SPACEWALK), INNATE_TRAIT)
-	ADD_TRAIT(src, TRAIT_UNDENSE, INNATE_TRAIT)
-	AddComponent(/datum/component/swarming, 20, 20)
+	ADD_TRAIT(src, TRAIT_UNDENSE, INNATE_TRAIT) // BANDASTATION ADDITION: Carps can swarm and pass tables
+	AddComponent(/datum/component/swarming, 20, 20) // BANDASTATION ADDITION: Carps can swarm and pass tables
 
 	if (cell_line)
 		AddElement(/datum/element/swabable, cell_line, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
