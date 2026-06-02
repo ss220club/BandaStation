@@ -32,8 +32,7 @@
 
 /obj/item/clothing/accessory/holster/attach(obj/item/clothing/under/attach_to, mob/living/attacher)
 	. = ..()
-	if(atom_storage)
-		atom_storage.set_real_location(src)
+	flags_1 &= ~HAS_DISASSOCIATED_STORAGE_1
 
 /obj/item/clothing/accessory/holster/attack_hand(mob/user)
 	if(user != loc)
