@@ -254,7 +254,7 @@
 /obj/item/clothing/accessory/holster/tacticool/ert_gp93r/PopulateContents()
 	generate_items_inside(list(
 		/obj/item/gun/ballistic/automatic/pistol/gp9/spec = 1,
-    	/obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap = 1,
+		/obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap = 1,
 	), src)
 
 /obj/item/clothing/accessory/holster/tacticool/ert_gammacom
