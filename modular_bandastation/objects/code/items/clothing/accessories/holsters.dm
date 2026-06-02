@@ -10,9 +10,13 @@
 	w_class = WEIGHT_CLASS_BULKY
 	above_suit = FALSE
 
+/obj/item/clothing/accessory/holster/proc/PopulateContents()
+	return
+
 /obj/item/clothing/accessory/holster/Initialize(mapload)
 	. = ..()
 	create_storage(storage_type = /datum/storage/holster)
+	PopulateContents()
 
 /obj/item/clothing/accessory/holster/Entered(atom/movable/I)
 	. = ..()
