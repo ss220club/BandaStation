@@ -383,7 +383,7 @@
 	l_hand = /obj/item/melee/curator_whip
 	l_pocket = /obj/item/lighter
 	accessory = /obj/item/clothing/accessory/vest_sheriff
-	accessory = /obj/item/clothing/accessory/holster/detective/full //BANDASTATION EDIT: Accessory holsters
+	belt = /obj/item/storage/belt/holster/detective/full
 	uniform = /obj/item/clothing/under/rank/security/detective
 	shoes = /obj/item/clothing/shoes/cowboy
 	head = /obj/item/clothing/head/cowboy/brown
