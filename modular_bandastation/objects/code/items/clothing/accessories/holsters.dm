@@ -234,8 +234,8 @@
 	name = "tacticool holster"
 	desc = "Тёмная тактическая кобура с двумя карманами, предназначенная для выполнения специальных задач. Особые крепления позволяют надеть её поверх униформы."
 	icon_state = "operative_holster"
-	worn_icon = 'modular_bandastation/objects/icons/onbody/holsters.dmi'
-	worn_icon_state = "holster"
+	worn_icon = 'icons/mob/clothing/belt.dmi'
+	worn_icon_state = "syndicate_holster"
 
 /obj/item/clothing/accessory/holster/tacticool/Initialize(mapload)
 	. = ..()
@@ -275,6 +275,7 @@
 
 /obj/item/clothing/accessory/holster/tacticool/ussp_commander
 	icon_state = "holster"
+	worn_icon_state = "holster"
 	desc = "Коричневая тактическая кобура с двумя карманами, предназначенная для выполнения специальных задач. Особые крепления позволяют надеть её поверх униформы."
 
 /obj/item/clothing/accessory/holster/tacticool/ussp_commander/PopulateContents()
