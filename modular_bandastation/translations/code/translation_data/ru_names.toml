@@ -36977,7 +36977,7 @@ instrumental = "режимом уклонения (активен)"
 prepositional = "режиме уклонения (активен)"
 gender = "male"
 
-# MARK: Khaara Survivor
+# MARK: Khaaroot Survivor
 
 ["Viral Surge"]
 nominative = "вирусный всплеск"
@@ -36988,58 +36988,58 @@ instrumental = "вирусным всплеском"
 prepositional = "вирусном всплеске"
 gender = "male"
 
-["Khaara Viral Surge"]
-nominative = "вирусный всплеск Кхара"
-genitive = "вирусного всплеска Кхара"
-dative = "вирусному всплеску Кхара"
-accusative = "вирусный всплеск Кхара"
-instrumental = "вирусным всплеском Кхара"
-prepositional = "вирусном всплеске Кхара"
+["Khaaroot Viral Surge"]
+nominative = "вирусный всплеск Кхаарут"
+genitive = "вирусного всплеска Кхаарут"
+dative = "вирусному всплеску Кхаарут"
+accusative = "вирусный всплеск Кхаарут"
+instrumental = "вирусным всплеском Кхаарут"
+prepositional = "вирусном всплеске Кхаарут"
 gender = "male"
 
-["Khaara Exhaustion"]
-nominative = "истощение Кхара"
-genitive = "истощения Кхара"
-dative = "истощению Кхара"
-accusative = "истощение Кхара"
-instrumental = "истощением Кхара"
-prepositional = "истощении Кхара"
+["Khaaroot Exhaustion"]
+nominative = "истощение Кхаарут"
+genitive = "истощения Кхаарут"
+dative = "истощению Кхаарут"
+accusative = "истощение Кхаарут"
+instrumental = "истощением Кхаарут"
+prepositional = "истощении Кхаарут"
 gender = "neuter"
 
-["Khaara Infection"]
-nominative = "заражение Кхара"
-genitive = "заражения Кхара"
-dative = "заражению Кхара"
-accusative = "заражение Кхара"
-instrumental = "заражением Кхара"
-prepositional = "заражении Кхара"
+["Khaaroot Infection"]
+nominative = "заражение Кхаарут"
+genitive = "заражения Кхаарут"
+dative = "заражению Кхаарут"
+accusative = "заражение Кхаарут"
+instrumental = "заражением Кхаарут"
+prepositional = "заражении Кхаарут"
 gender = "neuter"
 
-["Khaara Hivemind Speech"]
-nominative = "речь Улья Кхара"
-genitive = "речи Улья Кхара"
-dative = "речи Улья Кхара"
-accusative = "речь Улья Кхара"
-instrumental = "речью Улья Кхара"
-prepositional = "речи Улья Кхара"
+["Khaaroot Hivemind Speech"]
+nominative = "речь Улья Кхаарут"
+genitive = "речи Улья Кхаарут"
+dative = "речи Улья Кхаарут"
+accusative = "речь Улья Кхаарут"
+instrumental = "речью Улья Кхаарут"
+prepositional = "речи Улья Кхаарут"
 gender = "female"
 
-["Khaara Hivemind Panel"]
-nominative = "панель Улья Кхара"
-genitive = "панели Улья Кхара"
-dative = "панели Улья Кхара"
-accusative = "панель Улья Кхара"
-instrumental = "панелью Улья Кхара"
-prepositional = "панели Улья Кхара"
+["Khaaroot Hivemind Panel"]
+nominative = "панель Улья Кхаарут"
+genitive = "панели Улья Кхаарут"
+dative = "панели Улья Кхаарут"
+accusative = "панель Улья Кхаарут"
+instrumental = "панелью Улья Кхаарут"
+prepositional = "панели Улья Кхаарут"
 gender = "female"
 
-["Khaara Hivemind"]
-nominative = "улей Кхара"
-genitive = "улья Кхара"
-dative = "улью Кхара"
-accusative = "улей Кхара"
-instrumental = "ульем Кхара"
-prepositional = "улье Кхара"
+["Khaaroot Hivemind"]
+nominative = "улей Кхаарут"
+genitive = "улья Кхаарут"
+dative = "улью Кхаарут"
+accusative = "улей Кхаарут"
+instrumental = "ульем Кхаарут"
+prepositional = "улье Кхаарут"
 gender = "male"
 
 ["hivemind member"]
@@ -37051,7 +37051,7 @@ instrumental = "членом улья"
 prepositional = "члене улья"
 gender = "male"
 
-["Khaara Remnant Antigen"]
+["Khaaroot Remnant Antigen"]
 nominative = "остаточный антиген Аномалии-15a"
 genitive = "остаточного антигена Аномалии-15a"
 dative = "остаточному антигену Аномалии-15a"
@@ -37060,22 +37060,22 @@ instrumental = "остаточным антигеном Аномалии-15a"
 prepositional = "остаточном антигене Аномалии-15a"
 gender = "male"
 
-["Khaara Hivemind Source"]
-nominative = "источник Улья Кхара"
-genitive = "источника Улья Кхара"
-dative = "источнику Улья Кхара"
-accusative = "источник Улья Кхара"
-instrumental = "источником Улья Кхара"
-prepositional = "источнике Улья Кхара"
+["Khaaroot Hivemind Source"]
+nominative = "источник Улья Кхаарут"
+genitive = "источника Улья Кхаарут"
+dative = "источнику Улья Кхаарут"
+accusative = "источник Улья Кхаарут"
+instrumental = "источником Улья Кхаарут"
+prepositional = "источнике Улья Кхаарут"
 gender = "male"
 
-["Khaara Hivemind Thrall"]
-nominative = "заражённый Ульем Кхара"
-genitive = "заражённого Ульем Кхара"
-dative = "заражённому Ульем Кхара"
-accusative = "заражённого Ульем Кхара"
-instrumental = "заражённым Ульем Кхара"
-prepositional = "заражённом Ульем Кхара"
+["Khaaroot Hivemind Thrall"]
+nominative = "заражённый Ульем Кхаарут"
+genitive = "заражённого Ульем Кхаарут"
+dative = "заражённому Ульем Кхаарут"
+accusative = "заражённого Ульем Кхаарут"
+instrumental = "заражённым Ульем Кхаарут"
+prepositional = "заражённом Ульем Кхаарут"
 gender = "male"
 
 ["Apex Nanotrasen Navy Field Officer"]

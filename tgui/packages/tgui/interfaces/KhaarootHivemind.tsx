@@ -26,17 +26,17 @@ const STATUS_COLORS: Record<string, string> = {
   'Мёртв': 'red',
 };
 
-export const KhaaraHivemind = (props) => {
+export const KhaarootHivemind = (props) => {
   const { act, data } = useBackend<HivemindData>();
   const { infector_name, infector_status, thralls = [], thrall_count } = data;
 
   return (
-    <Window width={620} height={500} title="Улей Кхара">
+    <Window width={620} height={500} title="Улей Кхаарут">
       <Window.Content>
         <Section scrollable fill>
           <Stack vertical>
             <Stack.Item textAlign="center" fontSize="18px" bold color="#ff5500">
-              Улей Кхара
+              Улей Кхаарут
             </Stack.Item>
             <Stack.Item>
               <LabeledList>

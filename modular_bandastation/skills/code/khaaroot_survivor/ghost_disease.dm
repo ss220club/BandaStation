@@ -1,5 +1,5 @@
-/datum/disease/khaara_remnant
-	name = "Khaara Remnant Antigen"
+/datum/disease/khaaroot_remnant
+	name = "Khaaroot Remnant Antigen"
 	desc = "Остаточный антиген крайне опасного вирусного штамма, полностью интегрированный в генетический код носителя. Уникальный задокументированный случай выживания. Требует дальнейшего изучения."
 	form = "Аномалия"
 	agent = "\[ДАННЫЕ УДАЛЕНЫ — УРОВЕНЬ ДОПУСКА: L3+ • ПОПЫТКА ОБХОДА БУДЕТ ЗАФИКСИРОВАНА И ПЕРЕДАНА В ОТДЕЛ КОНТРРАЗВЕДКИ\]"
@@ -16,5 +16,5 @@
 	viable_mobtypes = list(/mob/living/carbon/human)
 	cure_chance = 0
 
-/datum/disease/khaara_remnant/stage_act(seconds_per_tick)
+/datum/disease/khaaroot_remnant/stage_act(seconds_per_tick)
 	. = ..()

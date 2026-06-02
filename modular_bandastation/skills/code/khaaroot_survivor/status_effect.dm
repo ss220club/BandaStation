@@ -1,11 +1,11 @@
 #define REQUIRED_ACCUMULATION(wound) (1 + (wound.severity - 1) * 0.3)
 
-/datum/singleton/sound_effect/khaara_mutation
-	suffix = "_khaara"
-	ffmpeg_arguments = "atempo=0.90,tremolo=f=0.15:d=0.4,lowpass=f=10000,volume=volume=0.5"
+/datum/singleton/sound_effect/khaaroot_mutation
+	suffix = "_khaaroot"
+	ffmpeg_arguments = "asetrate=19485,acrusher=0.4:1:15:0:log,aecho=0.2:0.5:30:0.2,volume=volume=9"
 
-/datum/status_effect/khaara_survivor
-	id = "khaara_survivor"
+/datum/status_effect/khaaroot_survivor
+	id = "khaaroot_survivor"
 	duration = STATUS_EFFECT_PERMANENT
 	tick_interval = 3 SECONDS
 	status_type = STATUS_EFFECT_UNIQUE
@@ -16,9 +16,9 @@
 	var/wound_regen_rate = 0.15
 	var/wound_regen_accumulation = 0
 
-	var/datum/khaara_hivemind/hivemind
+	var/datum/khaaroot_hivemind/hivemind
 
-/datum/status_effect/khaara_survivor/on_apply()
+/datum/status_effect/khaaroot_survivor/on_apply()
 	if(!ishuman(owner))
 		return FALSE
 
@@ -37,7 +37,7 @@
 	new_eyes.Insert(H, special = TRUE)
 	new_eyes.activate()
 
-	var/datum/disease/khaara_remnant/remnant = new()
+	var/datum/disease/khaaroot_remnant/remnant = new()
 	remnant.try_infect(H)
 	remnant.carrier = TRUE
 
@@ -49,14 +49,14 @@
 
 	return TRUE
 
-/datum/status_effect/khaara_survivor/on_remove()
+/datum/status_effect/khaaroot_survivor/on_remove()
 	var/mob/living/carbon/human/H = owner
 	if(!H)
 		return
 
 	H.remove_traits(list(TRAIT_VIRUSIMMUNE, TRAIT_ANALGESIA, TRAIT_HARDLY_WOUNDED, TRAIT_FEARLESS), TRAIT_STATUS_EFFECT(id))
 
-	var/datum/disease/khaara_remnant/remnant = locate() in H.diseases
+	var/datum/disease/khaaroot_remnant/remnant = locate() in H.diseases
 	if(remnant)
 		remnant.cure(FALSE)
 
@@ -65,14 +65,14 @@
 
 	QDEL_NULL(hivemind)
 
-/datum/status_effect/khaara_survivor/proc/on_tts_pre_cast(mob/living/user, list/tts_args)
+/datum/status_effect/khaaroot_survivor/proc/on_tts_pre_cast(mob/living/user, list/tts_args)
 	SIGNAL_HANDLER
 	if(tts_args[TTS_CHANNEL_OVERRIDE] == CHANNEL_TTS_TELEPATHY)
 		return
 	var/list/effects = tts_args[TTS_CAST_EFFECTS]
-	effects.Insert(1, /datum/singleton/sound_effect/khaara_mutation)
+	effects.Insert(1, /datum/singleton/sound_effect/khaaroot_mutation)
 
-/datum/status_effect/khaara_survivor/tick(seconds_between_ticks)
+/datum/status_effect/khaaroot_survivor/tick(seconds_between_ticks)
 	var/mob/living/carbon/human/H = owner
 	if(!H)
 		return
@@ -97,7 +97,7 @@
 		wound_to_heal.remove_wound()
 		H.visible_message(span_warning("Раны [H.declent_ru(GENITIVE)] исчезают неестественно быстро..."), blind_message = span_hear("Вы слышите тихое шипение."), vision_distance = 2)
 
-/datum/status_effect/khaara_survivor/proc/on_health_scan(datum/source, list/render_list, advanced, mob/user, mode, tochat)
+/datum/status_effect/khaaroot_survivor/proc/on_health_scan(datum/source, list/render_list, advanced, mob/user, mode, tochat)
 	SIGNAL_HANDLER
 
 	if(!advanced)

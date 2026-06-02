@@ -2,8 +2,8 @@
 
 #include "code/dodge_shift/dodge_shift_element.dm"
 #include "code/dodge_shift/dodge_shift_spell.dm"
-#include "code/khaara_survivor/ghost_disease.dm"
-#include "code/khaara_survivor/status_effect.dm"
-#include "code/khaara_survivor/viral_surge.dm"
-#include "code/khaara_survivor/khaara_hivemind.dm"
-#include "code/khaara_survivor/khaara_abilities.dm"
+#include "code/khaaroot_survivor/ghost_disease.dm"
+#include "code/khaaroot_survivor/status_effect.dm"
+#include "code/khaaroot_survivor/viral_surge.dm"
+#include "code/khaaroot_survivor/khaaroot_hivemind.dm"
+#include "code/khaaroot_survivor/khaaroot_abilities.dm"

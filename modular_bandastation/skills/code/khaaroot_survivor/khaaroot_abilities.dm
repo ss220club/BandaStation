@@ -2,12 +2,12 @@
 //  INFECTION ABILITY
 // ============================================================
 
-/// Ability for the infector to infect a nearby human with the Khaara virus.
+/// Ability for the infector to infect a nearby human with the Khaaroot virus.
 /// Requires a 5-second channeled aggressive grab on the target.
-/datum/action/cooldown/spell/pointed/khaara_infect
-	name = "Khaara Infection"
-	desc = "Внедрить остатки вируса Кхара в разум цели, подчиняя её воле улья. Цель должна находиться рядом и не иметь ментальной защиты."
-	button_icon = 'modular_bandastation/skills/icons/khaara.dmi'
+/datum/action/cooldown/spell/pointed/khaaroot_infect
+	name = "Khaaroot Infection"
+	desc = "Внедрить остатки вируса Кхаарут в разум цели, подчиняя её воле улья. Цель должна находиться рядом и не иметь ментальной защиты."
+	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
 	button_icon_state = "infect"
 	cooldown_time = 30 SECONDS
 	spell_requirements = SPELL_CASTABLE_WITHOUT_INVOCATION
@@ -19,7 +19,7 @@
 	/// Whether we're currently channeling the infection
 	var/channeling = FALSE
 
-/datum/action/cooldown/spell/pointed/khaara_infect/is_valid_target(atom/cast_on)
+/datum/action/cooldown/spell/pointed/khaaroot_infect/is_valid_target(atom/cast_on)
 	if(!ishuman(cast_on))
 		return FALSE
 	var/mob/living/carbon/human/H = cast_on
@@ -27,10 +27,10 @@
 		return FALSE
 	return TRUE
 
-/datum/action/cooldown/spell/pointed/khaara_infect/is_action_active(atom/movable/screen/movable/action_button/current_button)
+/datum/action/cooldown/spell/pointed/khaaroot_infect/is_action_active(atom/movable/screen/movable/action_button/current_button)
 	return channeling
 
-/datum/action/cooldown/spell/pointed/khaara_infect/can_cast_spell(feedback = TRUE)
+/datum/action/cooldown/spell/pointed/khaaroot_infect/can_cast_spell(feedback = TRUE)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -41,10 +41,10 @@
 	return TRUE
 
 /// Validate all infection preconditions and hivemind status before the channel begins
-/datum/action/cooldown/spell/pointed/khaara_infect/proc/validate_infection_target(mob/living/carbon/human/target)
-	var/datum/status_effect/khaara_survivor/effect = owner.has_status_effect(/datum/status_effect/khaara_survivor)
+/datum/action/cooldown/spell/pointed/khaaroot_infect/proc/validate_infection_target(mob/living/carbon/human/target)
+	var/datum/status_effect/khaaroot_survivor/effect = owner.has_status_effect(/datum/status_effect/khaaroot_survivor)
 	if(!effect || !effect.hivemind)
-		to_chat(owner, span_warning("Ваш вирус Кхара недостаточно активен для заражения других."))
+		to_chat(owner, span_warning("Ваш вирус Кхаарут недостаточно активен для заражения других."))
 		owner.balloon_alert(owner, "вирус неактивен")
 		return FALSE
 	if(!target.mind)
@@ -52,24 +52,24 @@
 		owner.balloon_alert(owner, "нет разума")
 		return FALSE
 	if(HAS_MIND_TRAIT(target, TRAIT_UNCONVERTABLE))
-		to_chat(owner, span_warning("Разум цели защищён от воздействия Кхара."))
+		to_chat(owner, span_warning("Разум цели защищён от воздействия Кхаарут."))
 		owner.balloon_alert(owner, "разум защищён")
 		return FALSE
 	if(HAS_TRAIT(target, TRAIT_MINDSHIELD))
 		to_chat(owner, span_warning("Ментальный щит цели блокирует проникновение вируса."))
 		owner.balloon_alert(owner, "ментальный щит")
 		return FALSE
-	if(target.mind.has_antag_datum(/datum/antagonist/khaara_thrall))
-		to_chat(owner, span_warning("Цель уже является частью улья Кхара."))
+	if(target.mind.has_antag_datum(/datum/antagonist/khaaroot_thrall))
+		to_chat(owner, span_warning("Цель уже является частью улья Кхаарут."))
 		owner.balloon_alert(owner, "уже в улье")
 		return FALSE
-	if(target.mind.has_antag_datum(/datum/antagonist/khaara_source))
+	if(target.mind.has_antag_datum(/datum/antagonist/khaaroot_source))
 		to_chat(owner, span_warning("Невозможно заразить источник улья."))
 		owner.balloon_alert(owner, "это источник")
 		return FALSE
 	return TRUE
 
-/datum/action/cooldown/spell/pointed/khaara_infect/before_cast(atom/cast_on)
+/datum/action/cooldown/spell/pointed/khaaroot_infect/before_cast(atom/cast_on)
 	. = ..()
 	if(. & SPELL_CANCEL_CAST)
 		return
@@ -101,7 +101,7 @@
 
 	caster.visible_message(
 		span_danger("[caster.declent_ru(NOMINATIVE)] хватает [target.declent_ru(ACCUSATIVE)] за горло! В воздухе чувствуется запах разложения..."),
-		span_userdanger("Вы хватаете [target.declent_ru(ACCUSATIVE)] и начинаете впрыскивать вирус Кхара!"),
+		span_userdanger("Вы хватаете [target.declent_ru(ACCUSATIVE)] и начинаете впрыскивать вирус Кхаарут!"),
 	)
 	to_chat(target, span_userdanger("[caster.declent_ru(NOMINATIVE)] хватает вас! Вы чувствуете, как что-то чужеродное проникает в ваше тело!"))
 
@@ -121,7 +121,7 @@
 		cleanup_channel(target, caster, interrupted = TRUE)
 		return . | SPELL_CANCEL_CAST
 
-/datum/action/cooldown/spell/pointed/khaara_infect/proc/check_channel_valid(datum/weakref/target_ref, datum/weakref/caster_ref)
+/datum/action/cooldown/spell/pointed/khaaroot_infect/proc/check_channel_valid(datum/weakref/target_ref, datum/weakref/caster_ref)
 	var/mob/living/target = target_ref?.resolve()
 	var/mob/living/caster = caster_ref?.resolve()
 	if(!target || !caster)
@@ -134,22 +134,22 @@
 		return FALSE
 	return TRUE
 
-/datum/action/cooldown/spell/pointed/khaara_infect/cast(mob/living/cast_on)
+/datum/action/cooldown/spell/pointed/khaaroot_infect/cast(mob/living/cast_on)
 	. = ..()
 	var/mob/living/carbon/human/target = cast_on
 	var/mob/living/caster = owner
 
 	cleanup_channel(target, caster, interrupted = FALSE)
 
-	var/datum/status_effect/khaara_survivor/effect = caster.has_status_effect(/datum/status_effect/khaara_survivor)
+	var/datum/status_effect/khaaroot_survivor/effect = caster.has_status_effect(/datum/status_effect/khaaroot_survivor)
 	if(!effect || !effect.hivemind)
-		to_chat(caster, span_warning("Ваш вирус Кхара внезапно ослаб! Заражение не удалось."))
+		to_chat(caster, span_warning("Ваш вирус Кхаарут внезапно ослаб! Заражение не удалось."))
 		caster.balloon_alert(caster, "вирус ослаб")
 		return
 
 	effect.hivemind.infect(target, caster)
 
-/datum/action/cooldown/spell/pointed/khaara_infect/proc/cleanup_channel(mob/living/target, mob/living/caster, interrupted)
+/datum/action/cooldown/spell/pointed/khaaroot_infect/proc/cleanup_channel(mob/living/target, mob/living/caster, interrupted)
 	for(var/timer_id in gasp_timers)
 		deltimer(timer_id)
 	gasp_timers.Cut()
@@ -175,10 +175,10 @@
 // ============================================================
 
 /// Innate action for hivemind communication — available to both infector and thralls.
-/datum/action/cooldown/khaara_hivemind_comm
-	name = "Khaara Hivemind Speech"
-	desc = "Отправить мысленное сообщение всем участникам улья Кхара."
-	button_icon = 'modular_bandastation/skills/icons/khaara.dmi'
+/datum/action/cooldown/khaaroot_hivemind_comm
+	name = "Khaaroot Hivemind Speech"
+	desc = "Отправить мысленное сообщение всем участникам улья Кхаарут."
+	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
 	button_icon_state = "hivemind_com"
 	background_icon_state = "bg_alien"
 	check_flags = AB_CHECK_CONSCIOUS
@@ -190,31 +190,31 @@
 	/// Weakref to the hivemind controller
 	var/datum/weakref/hivemind_ref
 
-/datum/action/cooldown/khaara_hivemind_comm/New(datum/khaara_hivemind/hivemind)
+/datum/action/cooldown/khaaroot_hivemind_comm/New(datum/khaaroot_hivemind/hivemind)
 	. = ..()
 	if(hivemind)
 		hivemind_ref = WEAKREF(hivemind)
 
-/datum/action/cooldown/khaara_hivemind_comm/IsAvailable(feedback = FALSE)
+/datum/action/cooldown/khaaroot_hivemind_comm/IsAvailable(feedback = FALSE)
 	return ..() && (owner.stat != DEAD)
 
-/datum/action/cooldown/khaara_hivemind_comm/Activate(atom/target)
-	var/datum/khaara_hivemind/hivemind = hivemind_ref?.resolve()
+/datum/action/cooldown/khaaroot_hivemind_comm/Activate(atom/target)
+	var/datum/khaaroot_hivemind/hivemind = hivemind_ref?.resolve()
 	if(!hivemind)
 		to_chat(owner, span_warning("Связь с ульем потеряна."))
 		return
 
 	var/prompt = "Введите сообщение для улья:"
 	if(owner.mind)
-		var/datum/antagonist/khaara_thrall/antag = owner.mind.has_antag_datum(/datum/antagonist/khaara_thrall)
+		var/datum/antagonist/khaaroot_thrall/antag = owner.mind.has_antag_datum(/datum/antagonist/khaaroot_thrall)
 		if(antag?.thrall_objective)
 			prompt += "\nВаша текущая цель: \"[antag.thrall_objective]\""
 
-	var/message = tgui_input_text(owner, prompt, "Улей Кхара", max_length = MAX_MESSAGE_LEN)
+	var/message = tgui_input_text(owner, prompt, "Улей Кхаарут", max_length = MAX_MESSAGE_LEN)
 	if(!message || QDELETED(src) || QDELETED(owner) || !IsAvailable(feedback = TRUE))
 		return
 
-	log_directed_talk(owner, hivemind.get_infector_mob(), message, LOG_SAY, "khaara hivemind")
+	log_directed_talk(owner, hivemind.get_infector_mob(), message, LOG_SAY, "khaaroot hivemind")
 	hivemind.broadcast_message(message, owner)
 	StartCooldown()
 
@@ -224,10 +224,10 @@
 // ============================================================
 
 /// Innate action for the infector to open the hivemind control panel.
-/datum/action/cooldown/khaara_hivemind_panel
-	name = "Khaara Hivemind Panel"
-	desc = "Открыть панель управления ульем Кхара для управления заражёнными."
-	button_icon = 'modular_bandastation/skills/icons/khaara.dmi'
+/datum/action/cooldown/khaaroot_hivemind_panel
+	name = "Khaaroot Hivemind Panel"
+	desc = "Открыть панель управления ульем Кхаарут для управления заражёнными."
+	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
 	button_icon_state = "hivemind_panel"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 0
@@ -238,16 +238,16 @@
 	/// Weakref to the hivemind controller
 	var/datum/weakref/hivemind_ref
 
-/datum/action/cooldown/khaara_hivemind_panel/New(datum/khaara_hivemind/hivemind)
+/datum/action/cooldown/khaaroot_hivemind_panel/New(datum/khaaroot_hivemind/hivemind)
 	. = ..()
 	if(hivemind)
 		hivemind_ref = WEAKREF(hivemind)
 
-/datum/action/cooldown/khaara_hivemind_panel/IsAvailable(feedback = FALSE)
+/datum/action/cooldown/khaaroot_hivemind_panel/IsAvailable(feedback = FALSE)
 	return ..() && (owner.stat != DEAD)
 
-/datum/action/cooldown/khaara_hivemind_panel/Activate(atom/target)
-	var/datum/khaara_hivemind/hivemind = hivemind_ref?.resolve()
+/datum/action/cooldown/khaaroot_hivemind_panel/Activate(atom/target)
+	var/datum/khaaroot_hivemind/hivemind = hivemind_ref?.resolve()
 	if(!hivemind)
 		to_chat(owner, span_warning("Связь с ульем потеряна."))
 		return
