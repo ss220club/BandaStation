@@ -105,12 +105,13 @@ export const CutterTarget = new Juke.Target({
 export const RuNamesMergeTarget = new Juke.Target({
   inputs: ['tools/translations/ru_names_header.toml', `$modular_bandastation/translations/code/translation_data/ru_names/**/*.toml`],
   executes: async () => {
-    const args = ['tools/translations/ru_names_header.toml', 'modular_bandastation/translations/code/translation_data/ru_names', 'modular_bandastation/translations/code/translation_data/ru_names.toml'];
-    if (process.platform === 'win32') {
-      await Juke.exec('tools/translations/merge_ru_names.cmd', args);
-    } else {
-      await Juke.exec('bash', ['tools/translations/merge_ru_names.sh', ...args]);
-    }
+    const python = process.platform === 'win32' ? 'tools/bootstrap/python.bat' : 'tools/bootstrap/python';
+    await Juke.exec(python, [
+      'tools/translations/merge_ru_names.py',
+      'tools/translations/ru_names_header.toml',
+      'modular_bandastation/translations/code/translation_data/ru_names',
+      'modular_bandastation/translations/code/translation_data/ru_names.toml',
+    ]);
   },
 });
 // BANDASTATION MOD END
