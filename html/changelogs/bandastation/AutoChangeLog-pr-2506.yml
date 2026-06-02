@@ -1,4 +1,0 @@
-author: "Voyaker-coder"
-delete-after: True
-changes:
-  - bugfix: "Исправлена ошибка, при которой ремонтный бот и дроны не могли использовать РЦД."
