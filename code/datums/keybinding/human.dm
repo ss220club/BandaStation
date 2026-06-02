@@ -79,6 +79,5 @@
 	hotkey_keys = list("ShiftF")
 	name = "quick_accessory_draw"
 	full_name = "Быстро достать предмет из аксессуара"
-	description = "Достает предмет из слота хранилища аксессуара"
-	description = "Достаёт первый предмет из аксессуара"
+	description = "Достать предмет из первого слота хранилища аксессуара"
 	keybind_signal = COMSIG_KB_HUMAN_QUICK_ACCESSORY_DRAW_DOWN

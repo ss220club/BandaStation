@@ -56,6 +56,12 @@
 	item = /obj/item/language_manual/codespeak_manual/unlimited
 	cost = 3
 
+//datum/uplink_item/stealthy_weapons/holster
+	//name = "Syndicate Holster"
+	//desc = "A useful little device that allows for inconspicuous carrying of guns using chameleon technology. It also allows for badass gun-spinning."
+	//item = /obj/item/storage/belt/holster/chameleon
+	//cost = 1
+
 /datum/uplink_item/stealthy_tools/emplight
 	name = "EMP Flashlight"
 	desc = "A small, self-recharging, short-ranged EMP device disguised as a working flashlight. \

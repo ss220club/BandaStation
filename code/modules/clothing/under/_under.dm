@@ -469,7 +469,7 @@
 
 ///BANDASTATION EDIT: Change in uniform weight with certain accessories
 /obj/item/clothing/under/proc/update_accessory_weight()
-	w_class = base_w_class
+	w_class = initial(w_class)
 	if(!LAZYLEN(attached_accessories))
 		return
 

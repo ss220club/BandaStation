@@ -870,11 +870,3 @@ directory = "_maps/bandastation/automapper/templates/wawastation/"
 required_map = "wawastation.dmm"
 coordinates = [39, 80, 1]
 trait_name = "Station"
-
-#CentCom
-[templates.centcom_soo_office]
-map_files = ["centcom_soo_office.dmm"]
-directory = "_maps/bandastation/automapper/templates/centcom/"
-required_map = "CentCom.dmm"
-coordinates = [219, 63, 1]
-trait_name = "CentCom"

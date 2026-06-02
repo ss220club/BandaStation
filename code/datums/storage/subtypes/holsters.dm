@@ -42,6 +42,8 @@
 		/obj/item/gun/energy/laser/pistol,
 		/obj/item/gun/energy/e_gun/hos,
 		/obj/item/gun/energy/eg_14, /// BANDASTATION ADDITION - Blueshield
+		/obj/item/gun/energy/disabler/smoothbore,
+		/obj/item/gun/energy/pulse/pistol,
 	)
 
 	return ..()

@@ -10,30 +10,9 @@
 	w_class = WEIGHT_CLASS_BULKY
 	above_suit = FALSE
 
-/datum/storage/pockets/holster
-	max_slots = 1
-	max_specific_storage = WEIGHT_CLASS_NORMAL
-	allow_quick_empty = FALSE
-
-/datum/storage/pockets/holster/New()
-	. = ..()
-	set_holdable(list(
-		/obj/item/gun/ballistic/automatic/pistol,
-		/obj/item/gun/ballistic/revolver,
-		/obj/item/food/grown/banana,
-		/obj/item/gun/energy/disabler,
-		/obj/item/gun/energy/laser/pistol,
-		/obj/item/gun/energy/laser/thermal,
-		/obj/item/gun/energy/e_gun/mini,
-		/obj/item/gun/energy/dueling,
-		/obj/item/gun/energy/laser/captain,
-		/obj/item/gun/energy/e_gun/hos,
-		/obj/item/gun/energy/eg_14
-	))
-
 /obj/item/clothing/accessory/holster/Initialize(mapload)
 	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster)
+	create_storage(storage_type = /datum/storage/holster)
 
 /obj/item/clothing/accessory/holster/Entered(atom/movable/I)
 	. = ..()
@@ -51,11 +30,6 @@
 	. = ..()
 	if(atom_storage)
 		atom_storage.set_real_location(src)
-
-/obj/item/clothing/accessory/holster/proc/get_holstered_gun()
-	for(var/obj/item/gun/G in atom_storage.real_location.contents)
-		return G
-	return null
 
 /obj/item/clothing/accessory/holster/attack_hand(mob/user)
 	if(user != loc)
@@ -88,103 +62,47 @@
 	name = "energy shoulder holsters"
 	desc = "Обычная, ничем не примечательная кобура под несколько энергетических пистолетов."
 
-/datum/storage/pockets/holster/energy
-	max_slots = 2
-	max_specific_storage = WEIGHT_CLASS_NORMAL
-
-/datum/storage/pockets/holster/energy/New()
-	. = ..()
-	set_holdable(list(
-		/obj/item/gun/energy/disabler,
-		/obj/item/gun/energy/laser/pistol,
-		/obj/item/gun/energy/laser/thermal,
-		/obj/item/gun/energy/e_gun/mini,
-		/obj/item/gun/energy/dueling,
-		/obj/item/gun/energy/laser/captain,
-		/obj/item/gun/energy/e_gun/hos,
-		/obj/item/gun/energy/eg_14,
-		/obj/item/gun/energy/disabler/smoothbore,
-		/obj/item/gun/energy/pulse/pistol
-	))
-
 /obj/item/clothing/accessory/holster/energy/Initialize(mapload)
 	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/energy)
-
-/obj/item/clothing/accessory/holster/energy/proc/get_holstered_guns()
-
-	var/list/guns = list()
-
-	for(var/obj/item/gun/energy/G in contents)
-		guns += G
-	return guns
+	create_storage(storage_type = /datum/storage/holster/energy)
 
 // Energy holster with one disabler
 /obj/item/clothing/accessory/holster/energy/disabler
 
-/obj/item/clothing/accessory/holster/energy/disabler/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/energy)
+/obj/item/clothing/accessory/holster/energy/disabler/PopulateContents()
 	new /obj/item/gun/energy/disabler(src)
 
 // Energy holster with one laser pistol
 /obj/item/clothing/accessory/holster/energy/laser_pistol
 
-/obj/item/clothing/accessory/holster/energy/laser_pistol/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/energy)
+/obj/item/clothing/accessory/holster/energy/laser_pistol/PopulateContents()
 	new /obj/item/gun/energy/laser/pistol(src)
 
 // Energy holster with two smoothborne disablers
 /obj/item/clothing/accessory/holster/energy/smoothborne
 
-/obj/item/clothing/accessory/holster/energy/smoothborne/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/energy)
-	new /obj/item/gun/energy/disabler/smoothbore(src)
-	new /obj/item/gun/energy/disabler/smoothbore(src)
+/obj/item/clothing/accessory/holster/energy/smoothborne/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/gun/energy/disabler/smoothbore = 2,
+	), src)
 
 // Energy holster with two nano-pistols
 /obj/item/clothing/accessory/holster/energy/thermal
 
-/obj/item/clothing/accessory/holster/energy/thermal/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/energy)
-	new /obj/item/gun/energy/laser/thermal/cryo(src)
-	new /obj/item/gun/energy/laser/thermal/inferno(src)
+/obj/item/clothing/accessory/holster/energy/thermal/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/gun/energy/laser/thermal/inferno = 1,
+		/obj/item/gun/energy/laser/thermal/cryo = 1,
+	), src)
 
 // Detective holster
 /obj/item/clothing/accessory/holster/detective
 	name = "detective's holster"
 	desc = "Улучшенная кобура, специально созданная для проведения самых громких и выдающихся расследований. Имеет дополнительные кармашки для магазинов."
 
-/datum/storage/pockets/holster/dec
-	max_slots = 3
-	max_specific_storage = WEIGHT_CLASS_NORMAL
-
-/datum/storage/pockets/holster/dec/New()
-	. = ..()
-	set_holdable(list(
-		/obj/item/gun/ballistic/automatic/pistol,
-		/obj/item/gun/ballistic/revolver,
-		/obj/item/food/grown/banana,
-		/obj/item/gun/energy/disabler,
-		/obj/item/gun/energy/laser/pistol,
-		/obj/item/gun/energy/laser/thermal,
-		/obj/item/gun/energy/laser/captain,
-		/obj/item/gun/energy/disabler/smoothbore,
-		/obj/item/gun/energy/pulse/pistol,
-		/obj/item/gun/energy/e_gun/hos,
-		/obj/item/gun/energy/eg_14,
-		/obj/item/gun/energy/dueling,
-		/obj/item/gun/energy/e_gun/mini,
-		/obj/item/ammo_box/magazine,
-		/obj/item/ammo_box/speedloader
-	))
-
 /obj/item/clothing/accessory/holster/detective/Initialize(mapload)
 	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/dec)
+	create_storage(storage_type = /datum/storage/holster/detective)
 
 // One gun logic
 /obj/item/clothing/accessory/holster/detective/Entered(atom/movable/I)
@@ -217,22 +135,20 @@
 // Full detective holster
 /obj/item/clothing/accessory/holster/detective/full
 
-/obj/item/clothing/accessory/holster/detective/full/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/dec)
-	new /obj/item/gun/ballistic/revolver/c38/detective(src)
-	new /obj/item/ammo_box/speedloader/c38(src)
-	new /obj/item/ammo_box/speedloader/c38(src)
+/obj/item/clothing/accessory/holster/detective/full/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/gun/ballistic/revolver/c38/detective = 1,
+		/obj/item/ammo_box/speedloader/c38 = 2,
+	), src)
 
 // Veteran advisor version
 /obj/item/clothing/accessory/holster/detective/veteran_advisor
 
-/obj/item/clothing/accessory/holster/detective/veteran_advisor/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/dec)
-	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/m45(src)
+/obj/item/clothing/accessory/holster/detective/veteran_advisor/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/gun/ballistic/automatic/pistol/m1911 = 1,
+		/obj/item/ammo_box/magazine/m45 = 2,
+	), src)
 
 // Psyker holster
 /obj/item/clothing/accessory/holster/psyker
@@ -317,78 +233,48 @@
 	worn_icon = 'modular_bandastation/objects/icons/onbody/holsters.dmi'
 	worn_icon_state = "holster"
 
-/datum/storage/pockets/holster/tac
-	max_slots = 2
-	max_specific_storage = WEIGHT_CLASS_BULKY
-
-/datum/storage/pockets/holster/tac/New()
-	. = ..()
-	set_holdable(list(
-		/obj/item/gun/ballistic/automatic/pistol,
-		/obj/item/gun/ballistic/revolver,
-		/obj/item/gun/ballistic/shotgun/automatic/combat/compact,
-		/obj/item/gun/ballistic/automatic/cm5/compact,
-		/obj/item/gun/ballistic/automatic/proto/unrestricted,
-		/obj/item/gun/ballistic/automatic/mini_uzi,
-		/obj/item/food/grown/banana,
-		/obj/item/gun/energy/disabler,
-		/obj/item/gun/energy/laser/pistol,
-		/obj/item/gun/energy/laser/thermal,
-		/obj/item/gun/energy/laser/captain,
-		/obj/item/gun/energy/e_gun/hos,
-		/obj/item/gun/energy/disabler/smoothbore,
-		/obj/item/gun/energy/pulse/pistol,
-		/obj/item/gun/energy/eg_14,
-		/obj/item/gun/energy/dueling,
-		/obj/item/gun/energy/e_gun/mini,
-		/obj/item/ammo_box/magazine,
-		/obj/item/ammo_box/speedloader,
-		/obj/item/knife/combat,
-		/obj/item/grenade
-	))
-
 /obj/item/clothing/accessory/holster/tacticool/Initialize(mapload)
 	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/tac)
+	create_storage(storage_type = /datum/storage/holster/nukie)
 
 /obj/item/clothing/accessory/holster/tacticool/cowboy
 
-/obj/item/clothing/accessory/holster/tacticool/cowboy/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/tac)
-	new /obj/item/gun/ballistic/revolver/cowboy/nuclear(src)
-	new /obj/item/ammo_box/speedloader/c357(src)
+/obj/item/clothing/accessory/holster/tacticool/cowboy/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/gun/ballistic/revolver/cowboy/nuclear = 1,
+		/obj/item/ammo_box/speedloader/c357 = 1,
+	), src)
 
 /obj/item/clothing/accessory/holster/tacticool/ert_gp93r
 
-/obj/item/clothing/accessory/holster/tacticool/ert_gp93r/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/tac)
-	new /obj/item/gun/ballistic/automatic/pistol/gp9/spec(src)
-	new /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap(src)
+/obj/item/clothing/accessory/holster/tacticool/ert_gp93r/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/gun/ballistic/automatic/pistol/gp9/spec = 1,
+    	/obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap = 1,
+	), src)
 
 /obj/item/clothing/accessory/holster/tacticool/ert_gammacom
 
-/obj/item/clothing/accessory/holster/tacticool/ert_gammacom/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/tac)
-	new /obj/item/gun/ballistic/automatic/cm5/compact(src)
-	new /obj/item/gun/ballistic/automatic/pistol/cm357(src)
+/obj/item/clothing/accessory/holster/tacticool/ert_gp93r/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/gun/ballistic/automatic/cm5/compact = 1,
+		/obj/item/gun/ballistic/automatic/pistol/cm357 = 1,
+	), src)
 
 /obj/item/clothing/accessory/holster/tacticool/tsf_commander
 
-/obj/item/clothing/accessory/holster/tacticool/tsf_commander/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/tac)
-	new /obj/item/gun/ballistic/automatic/pistol/deagle/regal(src)
-	new /obj/item/ammo_box/magazine/r10mm(src)
+/obj/item/clothing/accessory/holster/tacticool/tsf_commander/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/gun/ballistic/automatic/pistol/deagle/regal = 1,
+		/obj/item/ammo_box/magazine/r10mm = 1,
+	), src)
 
 /obj/item/clothing/accessory/holster/tacticool/ussp_commander
 	icon_state = "holster"
 	desc = "Коричневая тактическая кобура с двумя карманами, предназначенная для выполнения специальных задач. Особые крепления позволяют надеть её поверх униформы."
 
-/obj/item/clothing/accessory/holster/tacticool/ussp_commander/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/pockets/holster/tac)
-	new /obj/item/gun/ballistic/revolver/nagant(src)
-	new /obj/item/ammo_box/speedloader/n762_cylinder(src)
+/obj/item/clothing/accessory/holster/tacticool/ussp_commander/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/gun/ballistic/revolver/nagant = 1,
+		/obj/item/ammo_box/speedloader/n762_cylinder = 1,
+	), src)
