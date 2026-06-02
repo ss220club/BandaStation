@@ -259,7 +259,7 @@
 
 /obj/item/clothing/accessory/holster/tacticool/ert_gammacom
 
-/obj/item/clothing/accessory/holster/tacticool/ert_gp93r/PopulateContents()
+/obj/item/clothing/accessory/holster/tacticool/ert_gammacom/PopulateContents()
 	generate_items_inside(list(
 		/obj/item/gun/ballistic/automatic/cm5/compact = 1,
 		/obj/item/gun/ballistic/automatic/pistol/cm357 = 1,
