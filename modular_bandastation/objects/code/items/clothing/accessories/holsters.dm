@@ -2,7 +2,7 @@
 	if(!wear_suit)
 		return FALSE
 
-	return !!(wear_suit.clothing_flags & THICKMATERIAL)
+	return !!(wear_suit.flags_inv & HIDEJUMPSUIT)
 
 //MARK: Standart holster, empty
 /obj/item/clothing/accessory/holster
