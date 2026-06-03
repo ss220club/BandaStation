@@ -513,9 +513,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	return preferences.chat_toggles
 
 /// Sanitizes the preferences, applies the randomization prefs, and then applies the preference to the human mob.
-/datum/preferences/proc/safe_transfer_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE, is_antag = FALSE, list/do_not_apply) // Bandastation edit - do not apply body mods on roles
+/datum/preferences/proc/safe_transfer_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE, is_antag = FALSE, list/do_not_apply) // BANDASTATION MOD - Do not apply body mods on roles
 	apply_character_randomization_prefs(is_antag)
-	apply_prefs_to(character, icon_updates, do_not_apply) // Bandastation edit - do not apply body mods on roles
+	apply_prefs_to(character, icon_updates, do_not_apply) // BANDASTATION MOD - Do not apply body mods on roles
 
 /**
  * Applies the given preferences to a human mob.

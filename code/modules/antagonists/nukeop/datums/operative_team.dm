@@ -195,7 +195,7 @@
 		spawn_loc = pick(GLOB.nukeop_start)
 
 	var/mob/living/carbon/human/nukie = new(spawn_loc)
-	chosen_one.client.prefs.safe_transfer_prefs_to(nukie, is_antag = TRUE)
+	chosen_one.client.prefs.safe_transfer_prefs_to(nukie, is_antag = TRUE, do_not_apply = list(/datum/preference/body_modifications)) // BANDASTATION MOD - Do not apply body mods on roles
 	nukie.PossessByPlayer(chosen_one.key)
 
 	var/datum/antagonist/nukeop/antag_datum = new()
