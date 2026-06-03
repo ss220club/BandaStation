@@ -49,9 +49,6 @@
 	if(!U)
 		to_chat(src, span_warning("На вас нет формы!"))
 		return
-	if(src.is_accessory_covered())
-		to_chat(src, span_warning("Кобура перекрыта!"))
-		return
 	if(!LAZYLEN(U.attached_accessories))
 		to_chat(src, span_warning("Нет аксессуаров!"))
 		return
@@ -112,7 +109,9 @@
 	// Energy holster
 	if(istype(target_accessory, /obj/item/clothing/accessory/holster/energy))
 		var/obj/item/clothing/accessory/holster/H = target_accessory
-
+		if(!H.can_access_holster(src))
+			to_chat(src, span_warning("Кобура скрыта под плотной одеждой!"))
+			return
 		if(toggle_holster(H, /obj/item/gun/energy))
 			return
 		to_chat(src, span_warning("Кобура пуста!"))
@@ -121,7 +120,9 @@
 	// Standart holster
 	if(istype(target_accessory, /obj/item/clothing/accessory/holster))
 		var/obj/item/clothing/accessory/holster/H = target_accessory
-
+		if(!H.can_access_holster(src))
+			to_chat(src, span_warning("Кобура скрыта под плотной одеждой!"))
+			return
 		if(toggle_holster(H, /obj/item/gun))
 			return
 		to_chat(src, span_warning("В кобуре нет оружия!"))
