@@ -49,7 +49,7 @@
 	if(!U)
 		to_chat(src, span_warning("На вас нет формы!"))
 		return
-	if(istype(wear_suit, /obj/item/clothing/suit/mod))
+	if(src.is_accessory_covered())
 		to_chat(src, span_warning("Кобура перекрыта!"))
 		return
 	if(!LAZYLEN(U.attached_accessories))

@@ -1,3 +1,9 @@
+/mob/living/carbon/human/proc/is_accessory_covered()
+	if(!wear_suit)
+		return FALSE
+
+	return !!(wear_suit.clothing_flags & THICKMATERIAL)
+
 //MARK: Standart holster, empty
 /obj/item/clothing/accessory/holster
 	name = "shoulder holster"
@@ -9,6 +15,7 @@
 	alternate_worn_layer = UNDER_SUIT_LAYER
 	w_class = WEIGHT_CLASS_BULKY
 	above_suit = FALSE
+	var/check_covering = TRUE
 
 /obj/item/clothing/accessory/holster/proc/PopulateContents()
 	return
@@ -33,6 +40,17 @@
 /obj/item/clothing/accessory/holster/attach(obj/item/clothing/under/attach_to, mob/living/attacher)
 	. = ..()
 	flags_1 &= ~HAS_DISASSOCIATED_STORAGE_1
+
+/obj/item/clothing/accessory/holster/proc/can_access_holster(mob/user)
+	if(!check_covering)
+		return TRUE
+	if(!ishuman(user))
+		return TRUE
+
+	var/mob/living/carbon/human/H = user
+	if(H.is_accessory_covered())
+		return FALSE
+	return TRUE
 
 /obj/item/clothing/accessory/holster/attack_hand(mob/user)
 	if(user != loc)
@@ -64,6 +82,7 @@
 /obj/item/clothing/accessory/holster/energy
 	name = "energy shoulder holsters"
 	desc = "Обычная, ничем не примечательная кобура под несколько энергетических пистолетов."
+	check_covering = TRUE
 
 /obj/item/clothing/accessory/holster/energy/Initialize(mapload)
 	. = ..()
@@ -102,6 +121,7 @@
 /obj/item/clothing/accessory/holster/detective
 	name = "detective's holster"
 	desc = "Улучшенная кобура, специально созданная для проведения самых громких и выдающихся расследований. Имеет дополнительные кармашки для магазинов."
+	check_covering = TRUE
 
 /obj/item/clothing/accessory/holster/detective/Initialize(mapload)
 	. = ..()
@@ -157,6 +177,7 @@
 /obj/item/clothing/accessory/holster/psyker
 	name = "psyker holster"
 	desc = "Кобура, специально дополненная различными карманами для осуществления священной миссии псайкер-оперативников."
+	check_covering = FALSE
 
 /datum/storage/pockets/holster/psyker
 	max_slots = 4
@@ -200,6 +221,7 @@
 	worn_icon_state = "pocketprotector"
 	w_class = WEIGHT_CLASS_SMALL
 	above_suit = TRUE
+	check_covering = FALSE
 
 /datum/storage/pockets/holster/traitor
 	max_slots = 1
@@ -235,6 +257,7 @@
 	icon_state = "operative_holster"
 	worn_icon = 'icons/mob/clothing/belt.dmi'
 	worn_icon_state = "syndicate_holster"
+	check_covering = FALSE
 
 /obj/item/clothing/accessory/holster/tacticool/Initialize(mapload)
 	. = ..()
