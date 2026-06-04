@@ -56,6 +56,7 @@
 	item = /obj/item/language_manual/codespeak_manual/unlimited
 	cost = 3
 
+// BANDASTATION EDIT: Accessory holsters
 //datum/uplink_item/stealthy_weapons/holster
 	//name = "Syndicate Holster"
 	//desc = "A useful little device that allows for inconspicuous carrying of guns using chameleon technology. It also allows for badass gun-spinning."
