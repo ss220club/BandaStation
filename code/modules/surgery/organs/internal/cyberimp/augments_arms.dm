@@ -22,12 +22,16 @@
 
 /obj/item/organ/cyberimp/arm/on_mob_remove(mob/living/carbon/arm_owner)
 	. = ..()
+	UnregisterSignal(arm_owner, COMSIG_CARBON_POST_ATTACH_LIMB)
 	on_limb_detached(hand)
 
 /obj/item/organ/cyberimp/arm/proc/on_limb_attached(mob/living/carbon/source, obj/item/bodypart/limb)
 	SIGNAL_HANDLER
 	if(!limb || QDELETED(limb) || limb.body_zone != zone)
 		return
+	handle_attachment(limb)
+
+/obj/item/organ/cyberimp/arm/proc/handle_attachment(obj/item/bodypart/limb)
 	if(hand)
 		on_limb_detached(hand)
 	RegisterSignal(limb, COMSIG_BODYPART_REMOVED, PROC_REF(on_limb_detached))
@@ -88,9 +92,10 @@
 
 /obj/item/organ/cyberimp/arm/toolkit/on_mob_remove(mob/living/carbon/arm_owner)
 	. = ..()
+	UnregisterSignal(arm_owner, COMSIG_KB_MOB_DROPITEM_DOWN)
 	Retract()
 
-/obj/item/organ/cyberimp/arm/toolkit/on_limb_attached(mob/living/carbon/source, obj/item/bodypart/limb)
+/obj/item/organ/cyberimp/arm/toolkit/handle_attachment(obj/item/bodypart/limb)
 	. = ..()
 	RegisterSignal(limb, COMSIG_ITEM_ATTACK_SELF, PROC_REF(on_item_attack_self))
 
@@ -445,13 +450,13 @@
 	/// The amount of damage the implant adds to the upper punching force of our arm.
 	var/upper_punch_damage = 2
 	/// The amount of punch effectiveness (AKA accuracy and crit potential) the implant adds to our arm
-	var/punch_effectiveness_added = 10
+	var/punch_effectiveness_added = 4 // BANDASTATION MOD: Remove strong-arm lavaland fauna bane
 	/// How much extra damage does our implant allow the implanted while grabbing someone and they are unable to break the grapple?
 	var/bonus_grab_damage = 20
 	/// Biotypes we apply an additional amount of damage too
 	var/biotype_bonus_targets = MOB_SPECIAL | MOB_MINING
 	/// Extra damage dealt to our targeted mobs
-	var/biotype_bonus_damage = 20
+	var/biotype_bonus_damage = 0 // BANDASTATION MOD: Remove strong-arm lavaland fauna bane
 	/// IF true, the throw attack will not smash people into walls
 	var/non_harmful_throw = TRUE
 	/// How far away your attack will throw your oponent

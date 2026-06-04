@@ -2,6 +2,7 @@
 /obj/item/clothing/under/rank/ussp
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/ussp.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/ussp.dmi'
+	armor_type = /datum/armor/clothing_under/centcom_military
 
 /obj/item/clothing/under/rank/ussp/commander
 	name = "soviet general uniform"

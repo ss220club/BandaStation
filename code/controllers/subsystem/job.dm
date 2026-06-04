@@ -627,18 +627,22 @@ SUBSYSTEM_DEF(job)
 		CRASH("setup_officer_positions(): Security officer job is missing")
 
 	var/ssc = CONFIG_GET(number/security_scaling_coeff)
+	// BANDASTATION EDIT START - Configurable officer positions
+	var/min_positions = CONFIG_GET(number/security_min_positions)
+	var/max_positions = CONFIG_GET(number/security_max_positions)
 	if(ssc > 0)
 		if(J.spawn_positions > 0)
-			var/officer_positions = min(12, max(J.spawn_positions, round(unassigned.len / ssc))) //Scale between configured minimum and 12 officers
+			var/officer_positions = clamp(round(unassigned.len / ssc), min_positions, max_positions) //Scale between configured minimum and maximum officers
 			job_debug("SOP: Setting open security officer positions to [officer_positions]")
 			J.total_positions = officer_positions
 			J.spawn_positions = officer_positions
 
-	//Spawn some extra eqipment lockers if we have more than 5 officers
+	//Spawn some extra eqipment lockers if needed
 	var/equip_needed = J.total_positions
 	if(equip_needed < 0) // -1: infinite available slots
-		equip_needed = 12
-	for(var/i=equip_needed-5, i>0, i--)
+		equip_needed = max_positions
+	for(var/i = equip_needed - GLOB.security_closets_count, i > 0, i--)
+	// BANDASTATION EDIT END
 		if(GLOB.secequipment.len)
 			var/spawnloc = GLOB.secequipment[1]
 			new /obj/structure/closet/secure_closet/security/sec(spawnloc)

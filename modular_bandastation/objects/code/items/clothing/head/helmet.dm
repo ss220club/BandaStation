@@ -108,6 +108,7 @@
 	base_icon_state = "ussp_altyn"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	armor_type = /datum/armor/armor_heavy
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/head/helmet/space/ussp_expedition
 	name = "'Voskhod' EVA suit helmet"
@@ -117,3 +118,13 @@
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "voskhod_helmet"
 	armor_type = /datum/armor/head_helmet
+
+// MARK: TSF
+/obj/item/clothing/head/helmet/marine/security/tsf_heavy
+	name = "'Juggernaut' helmet"
+	desc = "Тяжелый бронированный шлем ТСФ, состоит из усиленных сплавов титана и пластали. \
+		Отлично защищает от любых повреждений, особенно от пуль. Для самых серьезных защитников Федерации."
+	heat_protection = HEAD
+	max_heat_protection_temperature = SPACE_HELM_MAX_TEMP_PROTECT
+	armor_type = /datum/armor/armor_heavy
+	clothing_traits = list(TRAIT_HEAD_INJURY_BLOCKED)

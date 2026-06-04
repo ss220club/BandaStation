@@ -11,6 +11,23 @@
 		LAZYADD(outfit.backpack_contents, outfit.mask)
 	outfit.mask = item_path
 
+// MARK: Tier 0
+/datum/loadout_item/masks/bandana
+	name = "Бандана"
+	item_path = /obj/item/clothing/mask/bandana
+
+/datum/loadout_item/masks/bandana_striped
+	name = "Полосатая бандана"
+	item_path = /obj/item/clothing/mask/bandana/striped
+
+/datum/loadout_item/masks/bandana_skull
+	name = "Бандана с черепом"
+	item_path = /obj/item/clothing/mask/bandana/skull
+
+/datum/loadout_item/masks/facescarf
+	name = "Лицевой шарф"
+	item_path = /obj/item/clothing/mask/facescarf
+
 // MARK: Tier 1
 /datum/loadout_item/masks/breathscarf
 	name = "Шарф с системой дыхания"

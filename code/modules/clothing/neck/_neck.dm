@@ -206,7 +206,7 @@
 	name = "robe cape"
 	desc = "A comfortable cape, draped down your back and held around your neck with a brooch."
 	icon = 'icons/obj/clothing/neck.dmi'
-	icon_state = "/obj/item/clothing/neck/robe_cape"
+	icon_state = "robe_cape"
 	post_init_icon_state = "robe_cape"
 	worn_icon = 'icons/mob/clothing/neck.dmi'
 	worn_icon_state = "robe_cape"
@@ -517,6 +517,10 @@
 		tagname = null
 		return
 	name = "[initial(name)] - [tagname]"
+
+/obj/item/clothing/neck/petcollar/wearable/cyber
+	desc = "You wear the tie, or you wear this. Your choice."
+	icon_state = "petcollar_cyber"
 
 //////////////
 //DOPE BLING//

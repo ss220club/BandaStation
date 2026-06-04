@@ -9,7 +9,7 @@
 	contains = list(/mob/living/basic/parrot)
 	crate_name = "parrot crate"
 
-/datum/supply_pack/critter/parrot/generate()
+/datum/supply_pack/critter/parrot/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	for(var/i in 1 to 4)
 		new /mob/living/basic/parrot(.)
@@ -22,7 +22,7 @@
 	contains = list(/mob/living/basic/butterfly)
 	crate_name = "entomology samples crate"
 
-/datum/supply_pack/critter/butterfly/generate()
+/datum/supply_pack/critter/butterfly/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	for(var/i in 1 to 49)
 		new /mob/living/basic/butterfly(.)
@@ -38,7 +38,7 @@
 	)
 	crate_name = "cat crate"
 
-/datum/supply_pack/critter/cat/generate()
+/datum/supply_pack/critter/cat/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	if(!prob(50))
 		return
@@ -65,7 +65,7 @@
 				)
 	crate_name = "corgi crate"
 
-/datum/supply_pack/critter/corgi/generate()
+/datum/supply_pack/critter/corgi/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	if(prob(50))
 		var/mob/living/basic/pet/dog/corgi/D = locate() in .
@@ -97,7 +97,7 @@
 /datum/supply_pack/critter/pony
 	name = "Pony Crate"
 	desc = "Ponies, yay! (Just the one.)"
-	cost = CARGO_CRATE_VALUE * 5
+	cost = CARGO_CRATE_VALUE * 45 // Original price: 1000 New price: 9000
 	contains = list(/mob/living/basic/pony)
 	crate_name = "pony crate"
 
@@ -115,7 +115,7 @@
 	crate_name = "look sir free crabs"
 	order_flags = ORDER_POD_ONLY
 
-/datum/supply_pack/critter/crab/generate()
+/datum/supply_pack/critter/crab/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	for(var/i in 1 to 49)
 		new /mob/living/basic/crab(.)
@@ -224,7 +224,7 @@
 	crate_name = "garden gnome crate"
 	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
 
-/datum/supply_pack/critter/garden_gnome/generate()
+/datum/supply_pack/critter/garden_gnome/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	for(var/i in 1 to 2)
 		new /mob/living/basic/garden_gnome(.)

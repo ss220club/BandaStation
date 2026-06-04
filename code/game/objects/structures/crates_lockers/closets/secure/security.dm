@@ -121,7 +121,17 @@
 	..()
 	new /obj/item/storage/belt/security/full(src)
 
-/obj/structure/closet/secure_closet/security/cargo
+// BANDASTATION EDIT START - Track amount of security closets
+GLOBAL_VAR_INIT(security_closets_count, 0)
+
+/obj/structure/closet/secure_closet/security/sec/Initialize(mapload)
+	. = ..()
+	GLOB.security_closets_count++
+
+/obj/structure/closet/secure_closet/security/sec/Destroy()
+	GLOB.security_closets_count--
+	. = ..()
+// BANDASTATION EDIT END
 
 /obj/structure/closet/secure_closet/security/cargo/PopulateContents()
 	..()
@@ -189,6 +199,9 @@
 	req_one_access = list(ACCESS_BRIG)
 	var/id = null
 
+/obj/structure/closet/secure_closet/brig/holodeck
+	req_one_access = COMMON_ACCESS
+
 /obj/structure/closet/secure_closet/brig/genpop
 	name = "genpop storage locker"
 	desc = "Used for storing the belongings of genpop's tourists visiting the locals."
@@ -236,6 +249,10 @@
 	new /obj/item/clothing/under/rank/prisoner( src )
 	new /obj/item/clothing/under/rank/prisoner/skirt( src )
 	new /obj/item/clothing/shoes/sneakers/orange( src )
+	// BANDASTATION MOD START: Brig closet extra items
+	new /obj/item/radio/headset( src )
+	new /obj/item/card/id/advanced/prisoner/temp( src )
+	// BANDASTATION MOD END: Brig closet extra items
 
 /obj/structure/closet/secure_closet/courtroom
 	name = "courtroom locker"

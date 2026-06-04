@@ -232,7 +232,7 @@
 
 	set_stat(DEAD)
 	timeofdeath = world.time
-	station_timestamp_timeofdeath = station_time_timestamp()
+	station_timestamp_timeofdeath = round_timestamp()
 	var/turf/death_turf = get_turf(src)
 	var/area/death_area = get_area(src)
 	// Display a death message if the mob is a player mob (has an active mind)
@@ -262,6 +262,18 @@
 	if (client)
 		client.move_delay = initial(client.move_delay)
 
-	persistent_client?.time_of_death = timeofdeath
+	update_time_of_death(timeofdeath) // BANDASTATION EDIT - Context-aware time_of_death updates
 
 	return TRUE
+
+// BANDASTATION EDIT START - Context-aware time_of_death updates
+/mob/proc/update_time_of_death(time)
+	var/area/current_area = get_area(src)
+	var/should_update_client = !current_area || !(current_area.area_flags & NO_DEATH_MESSAGE)
+	if(should_update_client)
+		persistent_client?.time_of_death = time
+
+/mob/living/update_time_of_death(time)
+	timeofdeath = time
+	..(time)
+// BANDASTATION EDIT END

@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/fn18
 	name = "FN-18 SMG"
-	desc = "Стандартный пистолет-пулемёт армии Республики Элизиум в калибре 9мм."
+	desc = "Стандартный пистолет-пулемёт вооруженных сил Республики Элизиум в калибре 9мм."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "fn18"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
@@ -35,6 +35,7 @@
 /obj/item/gun/ballistic/automatic/fn18/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/fn18/no_mag
 	spawnwithmagazine = FALSE
