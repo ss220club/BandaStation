@@ -142209,7 +142209,9 @@
 /obj/machinery/conveyor{
 	id = "mining"
 	},
-/obj/machinery/bouldertech/refinery/smelter,
+/obj/machinery/bouldertech/refinery/smelter{
+	dir = 1
+	},
 /turf/open/floor/iron/dark/textured_large,
 /area/station/cargo/miningfoundry)
 "uYZ" = (
@@ -153957,7 +153959,7 @@
 /area/station/maintenance/starboard/aft)
 "wLi" = (
 /obj/machinery/bouldertech/refinery{
-	dir = 4
+	dir = 1
 	},
 /obj/machinery/conveyor{
 	id = "mining"

@@ -436,7 +436,7 @@
 /area/station/engineering/supermatter/room)
 "agz" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/fore/starboard)
 "agB" = (
@@ -15697,7 +15697,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
 "dLf" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/ghetto/fore)
 "dLg" = (
@@ -16270,7 +16270,7 @@
 /turf/open/floor/iron/dark,
 /area/station/medical/surgery/theatre)
 "dUR" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/aft)
 "dUT" = (
@@ -34948,7 +34948,7 @@
 /area/station/command/heads_quarters/qm)
 "ivT" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/port)
 "ivV" = (
@@ -37363,10 +37363,10 @@
 /turf/open/floor/plating,
 /area/station/engineering/supermatter)
 "jbE" = (
-/obj/machinery/power/port_gen/pacman,
 /obj/structure/railing{
 	dir = 4
 	},
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/station/tcommsat/server)
 "jbG" = (
@@ -42920,7 +42920,7 @@
 /turf/open/floor/plating,
 /area/station/ai/satellite/hallway)
 "kvG" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/greater)
 "kvH" = (
@@ -47569,11 +47569,11 @@
 /turf/open/floor/iron/freezer,
 /area/station/maintenance/port/aft)
 "lzZ" = (
-/obj/machinery/power/port_gen/pacman,
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron,
 /area/station/maintenance/aft)
 "lAb" = (
@@ -47810,6 +47810,13 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/office)
+"lDn" = (
+/obj/effect/turf_decal/tile/purple/half{
+	dir = 1
+	},
+/obj/machinery/gizmo/toggle/tucker_tubes,
+/turf/open/floor/iron/white,
+/area/station/science/lower)
 "lDx" = (
 /obj/effect/landmark/start/ai,
 /obj/item/radio/intercom/directional/west{
@@ -47994,7 +48001,7 @@
 /turf/open/openspace,
 /area/station/security/prison)
 "lFQ" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "lFT" = (
@@ -48225,9 +48232,9 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
 "lIV" = (
-/obj/machinery/power/port_gen/pacman,
 /obj/effect/turf_decal/bot,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/maintenance/department/security/ghetto)
 "lJc" = (
@@ -51136,7 +51143,7 @@
 /area/station/security/courtroom/holding)
 "muS" = (
 /obj/machinery/airalarm/directional/north,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/ghetto/aft)
 "muX" = (
@@ -51757,7 +51764,6 @@
 /area/station/maintenance/starboard/upper)
 "mCX" = (
 /obj/structure/cable,
-/obj/machinery/power/port_gen/pacman,
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 8
 	},
@@ -51766,7 +51772,7 @@
 	c_tag = "Engineering - Equipment Storage Hardsuits";
 	network = list("ss13","engineering")
 	},
-/obj/item/stack/sheet/mineral/plasma/five,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron/dark,
 /area/station/engineering/main)
 "mDd" = (
@@ -54855,11 +54861,11 @@
 /turf/open/floor/engine,
 /area/station/science/lower)
 "npi" = (
-/obj/structure/reagent_dispensers/plumbed{
-	dir = 8
-	},
 /obj/effect/turf_decal/delivery/white{
 	color = "#52B4E9"
+	},
+/obj/structure/reagent_dispensers/plumbed{
+	dir = 8
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
@@ -56499,12 +56505,12 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "nLU" = (
-/obj/machinery/power/port_gen/pacman,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
 /obj/machinery/power/apc/auto_name/directional/east,
 /obj/structure/cable,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/ai/satellite/service)
 "nLY" = (
@@ -58955,7 +58961,7 @@
 /turf/open/floor/iron,
 /area/station/cargo/storage/ghetto)
 "opb" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/central)
 "oph" = (
@@ -64584,7 +64590,7 @@
 /area/station/maintenance/ghetto/aft)
 "pHl" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/port)
 "pHq" = (
@@ -66190,7 +66196,7 @@
 "qbg" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/firealarm/directional/east,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "qbn" = (
@@ -66738,7 +66744,7 @@
 /area/station/maintenance/department/electrical/ghetto)
 "qjL" = (
 /obj/effect/turf_decal/bot,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/engineering/storage)
 "qjN" = (
@@ -67824,7 +67830,7 @@
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/prison/ghetto)
 "qzA" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron/dark/textured,
 /area/station/engineering/gravity_generator)
 "qzE" = (
@@ -74861,7 +74867,7 @@
 "skW" = (
 /obj/effect/turf_decal/bot,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/storage)
 "sla" = (
@@ -75370,7 +75376,7 @@
 /turf/open/floor/iron/white,
 /area/station/medical/medbay)
 "sqI" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "sqO" = (
@@ -78725,7 +78731,7 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "tlD" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/fore/starboard)
 "tlF" = (
@@ -79475,7 +79481,7 @@
 /area/station/engineering/main)
 "ttw" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/iron,
 /area/station/engineering/storage_shared)
 "ttx" = (
@@ -80026,7 +80032,7 @@
 /turf/open/floor/iron,
 /area/station/maintenance/department/electrical)
 "tAF" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "tAH" = (
@@ -82719,7 +82725,7 @@
 /area/station/maintenance/aft)
 "uhj" = (
 /obj/machinery/firealarm/directional/north,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/starboard)
 "uhw" = (
@@ -84909,7 +84915,7 @@
 "uMv" = (
 /obj/effect/turf_decal/bot,
 /obj/item/radio/intercom/directional/east,
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/engineering/storage)
 "uMw" = (
@@ -85157,7 +85163,7 @@
 /turf/closed/wall,
 /area/station/hallway/primary/central/aft)
 "uPa" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/aft)
 "uPy" = (
@@ -87330,8 +87336,8 @@
 /area/station/medical/medbay/lobby)
 "vrO" = (
 /obj/effect/decal/cleanable/cobweb/cobweb2,
-/obj/machinery/power/port_gen/pacman,
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/department/electrical)
 "vrQ" = (
@@ -90924,7 +90930,7 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/mix/ghetto)
 "wmG" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
 "wmI" = (
@@ -95006,7 +95012,7 @@
 /turf/open/floor/iron/cafeteria,
 /area/station/maintenance/ghetto/fore/starboard)
 "xlx" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/port/greater)
 "xlH" = (
@@ -97051,7 +97057,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "xMi" = (
-/obj/machinery/power/port_gen/pacman,
+/obj/machinery/power/port_gen/pacman/pre_loaded,
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "xMu" = (
@@ -98628,11 +98634,6 @@
 /obj/item/watertank,
 /turf/open/floor/iron/dark,
 /area/station/service/hydroponics)
-"ygZ" = (
-/obj/effect/turf_decal/tile/purple,
-/obj/structure/table,
-/turf/open/floor/iron,
-/area/station/hallway/primary/starboard/west)
 "yha" = (
 /obj/structure/railing,
 /turf/open/floor/glass/reinforced,
@@ -209193,7 +209194,7 @@ gwo
 wfV
 qpn
 kkl
-ygZ
+niF
 xov
 lbS
 sHs
@@ -213080,7 +213081,7 @@ uHZ
 bkE
 nMx
 uzL
-pxu
+lDn
 byv
 qMU
 byv
