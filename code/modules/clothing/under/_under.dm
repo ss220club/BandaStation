@@ -51,7 +51,6 @@
 
 /obj/item/clothing/under/Initialize(mapload)
 	. = ..()
-
 	if(random_sensor)
 		//make the sensor mode favor higher levels, except coords.
 		set_sensor_mode(pick(SENSOR_VITALS, SENSOR_VITALS, SENSOR_VITALS, SENSOR_LIVING, SENSOR_LIVING, SENSOR_COORDS, SENSOR_COORDS, SENSOR_OFF))
@@ -361,7 +360,7 @@
 	// Allow for accessories to react to the acccessory list now
 	accessory.successful_attach(src)
 
-	update_accessory_weight()
+	update_accessory_weight() // BANDASTATION ADD: Accessory holsters
 
 	if(user && attach_message)
 		balloon_alert(user, "accessory attached")
@@ -390,7 +389,7 @@
 
 	removed.detach(src)
 
-	update_accessory_weight()
+	update_accessory_weight() // BANDASTATION ADD: Accessory holsters
 
 	if(update)
 		update_accessory_overlay()
