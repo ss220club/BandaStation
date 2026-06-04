@@ -47801,6 +47801,13 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/office)
+"lDn" = (
+/obj/effect/turf_decal/tile/purple/half{
+	dir = 1
+	},
+/obj/machinery/gizmo/toggle/tucker_tubes,
+/turf/open/floor/iron/white,
+/area/station/science/lower)
 "lDx" = (
 /obj/effect/landmark/start/ai,
 /obj/item/radio/intercom/directional/west{
@@ -213065,7 +213072,7 @@ uHZ
 bkE
 nMx
 uzL
-pxu
+lDn
 byv
 qMU
 byv
