@@ -559,12 +559,10 @@
 				require_human = TRUE
 
 	src.job = job.title
-	var/is_antag = (player_client.mob.mind in GLOB.pre_setup_antags)
-	var/list/do_not_apply = is_antag ? list(/datum/preference/body_modifications) : null // BANDASTATION MOD - Do not apply body mods on roles
 
 	var/randomise_job_slot = player_client.prefs.set_assigned_slot(job.title, player_client.mob?.mind?.late_joiner) // BANDASTATION ADDITION - Pref Job Slots
 	if(fully_randomize || randomise_job_slot)  // BANDASTATION EDIT - Pref Job Slots - OLD: if(fully_randomize)
-		player_client.prefs.apply_prefs_to(src, do_not_apply = do_not_apply) // BANDASTATION MOD - Do not apply body mods on roles
+		player_client.prefs.apply_prefs_to(src)
 
 		if(require_human)
 			randomize_human_appearance(~RANDOMIZE_SPECIES)
@@ -578,9 +576,10 @@
 		if(GLOB.current_anonymous_theme)
 			fully_replace_character_name(null, GLOB.current_anonymous_theme.anonymous_name(src))
 	else
+		var/is_antag = (player_client.mob.mind in GLOB.pre_setup_antags)
 		if(require_human)
 			player_client.prefs.randomise["species"] = FALSE
-		player_client.prefs.safe_transfer_prefs_to(src, TRUE, is_antag) // BANDASTATION MOD - Do not apply body mods on roles
+		player_client.prefs.safe_transfer_prefs_to(src, TRUE, is_antag)
 		if(require_human && !ishumanbasic(src))
 			set_species(/datum/species/human)
 			dna.species.roundstart_changed = TRUE
