@@ -109,7 +109,7 @@
 			continue
 
 		var/area/apc_area = current_apc.area
-		if(is_type_in_typecache(apc_area, GLOB.typecache_powerfailure_safe_areas))
+		if(HAS_TRAIT(apc_area, TRAIT_AREA_BLOCK_POWER_FAIL))
 			continue
 
 		current_apc.reboot()

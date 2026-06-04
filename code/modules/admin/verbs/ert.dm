@@ -181,7 +181,7 @@
 			// BANDASTATION EDIT END
 			var/mob/living/carbon/human/admin_officer = new (brief_spawn || spawn_points[1])
 			var/chosen_outfit = usr.client?.prefs?.read_preference(/datum/preference/choiced/brief_outfit)
-			usr.client.prefs.safe_transfer_prefs_to(admin_officer, is_antag = TRUE)
+			usr.client.prefs.safe_transfer_prefs_to(admin_officer, is_antag = TRUE) // BANDASTATION MOD - Do not apply body mods on roles
 			admin_officer.equipOutfit(chosen_outfit)
 			admin_officer.PossessByPlayer(usr.key)
 
@@ -238,7 +238,7 @@
 			ert_operative = new ertemplate.mob_type(spawnloc)
 		else
 			ert_operative = new /mob/living/carbon/human(spawnloc)
-			chosen_candidate.client.prefs.safe_transfer_prefs_to(ert_operative, is_antag = TRUE)
+			chosen_candidate.client.prefs.safe_transfer_prefs_to(ert_operative, is_antag = TRUE) // BANDASTATION MOD - Do not apply body mods on roles
 		ert_operative.PossessByPlayer(chosen_candidate.key)
 
 		if(ertemplate.enforce_human || !(ert_operative.dna.species.changesource_flags & ERT_SPAWN))
