@@ -8123,6 +8123,13 @@
 /obj/machinery/status_display/evac/directional/north,
 /turf/open/floor/iron,
 /area/station/command/bridge)
+"bYf" = (
+/obj/effect/turf_decal/trimline/red/filled/line{
+	dir = 8
+	},
+/obj/machinery/firealarm/directional/west,
+/turf/open/floor/iron/dark,
+/area/station/security/prison/visit)
 "bYm" = (
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
 	dir = 6
@@ -64418,6 +64425,7 @@
 /obj/structure/displaycase{
 	start_showpiece_type = /obj/item/melee/chainofcommand
 	},
+/obj/machinery/firealarm/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hos)
 "pEG" = (
@@ -79695,6 +79703,7 @@
 /area/station/maintenance/port/fore)
 "tuM" = (
 /obj/machinery/suit_storage_unit/hos,
+/obj/machinery/status_display/ai/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hos)
 "tuO" = (
@@ -98428,7 +98437,6 @@
 	name = "spider bed"
 	},
 /mob/living/basic/spider/giant/sgt_araneus,
-/obj/machinery/status_display/ai/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/hos)
 "ycY" = (
@@ -186594,7 +186602,7 @@ mvm
 lUF
 kXa
 kSa
-kkU
+bYf
 kkU
 dWf
 pKp
