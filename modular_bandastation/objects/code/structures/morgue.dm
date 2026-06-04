@@ -1,6 +1,9 @@
-/obj/structure/bodycontainer/crematorium/Destroy()
-	GLOB.crematoriums -= src
-	return ..()
+#define CREMATORIUM_REPAIR_IGNITERS 5
+/// Repair stages
+#define CREMATORIUM_STAGE_IGNITERS 0
+#define CREMATORIUM_STAGE_SCREWDRIVER 1
+#define CREMATORIUM_STAGE_PLASTEEL 2
+#define CREMATORIUM_STAGE_WELDING 3
 
 /obj/structure/bodycontainer/crematorium/atom_deconstruct(disassembled = TRUE)
 	var/obj/structure/bodycontainer/crematorium/broken/B = new(loc)
@@ -83,7 +86,7 @@
 			to_chat(user, span_warning("Необходимо 2 листа пластали!"))
 			return
 		P.use(2)
-		icon_state = (repair_stage >= CREMATORIUM_STAGE_PLASTEEL) ? "crema_broken1" : "crema_broken"
+		icon_state = "crema_broken1"
 		repair_stage = CREMATORIUM_STAGE_WELDING
 		update_appearance()
 		to_chat(user, span_notice("Вы заменяете поврежденные панели пласталью. Осталось заварить корпус."))
@@ -112,11 +115,18 @@
 /obj/structure/bodycontainer/crematorium/broken/examine(mob/user)
 	. = ..()
 	switch(repair_stage)
-		if(0)
+		if(CREMATORIUM_STAGE_IGNITERS)
 			. += span_notice("Крематорий поврежден. Требуется установить [span_bold("воспламенители")] ([igniters_installed]/5)")
-		if(1)
+		if(CREMATORIUM_STAGE_SCREWDRIVER)
 			. += span_notice("Компоненты не закреплены. Нужна [span_bold("отвертка")]")
-		if(2)
+		if(CREMATORIUM_STAGE_PLASTEEL)
 			. += span_notice("Корпус поврежден. Требуется несколько листов [span_bold("пластали")]")
-		if(3)
+		if(CREMATORIUM_STAGE_WELDING)
 			. += span_notice("Осталось заварить корпус [span_bold("сваркой")]")
+
+#undef CREMATORIUM_REPAIR_IGNITERS
+
+#undef CREMATORIUM_STAGE_IGNITERS
+#undef CREMATORIUM_STAGE_SCREWDRIVER
+#undef CREMATORIUM_STAGE_PLASTEEL
+#undef CREMATORIUM_STAGE_WELDING
