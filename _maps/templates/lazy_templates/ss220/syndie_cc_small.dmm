@@ -35,7 +35,7 @@
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
 	},
-/obj/effect/landmark/start/nukeop_overwatch,
+/obj/effect/landmark/start/nukeop_base/overwatch,
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
 "aT" = (
@@ -383,8 +383,7 @@
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/control)
 "jG" = (
-/obj/machinery/washing_machine,
-/turf/open/floor/wood,
+/turf/open/floor/mineral/plastitanium,
 /area/centcom/syndicate_base)
 "jO" = (
 /obj/effect/decal/cleanable/dirt,
@@ -407,7 +406,7 @@
 /area/centcom/syndicate_base)
 "kl" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/nukeop,
+/obj/effect/landmark/start/nukeop_base,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
 "ko" = (
@@ -436,6 +435,7 @@
 /obj/structure/railing/corner/end{
 	dir = 4
 	},
+/obj/structure/sign/poster/contraband/random/directional/north,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "kL" = (
@@ -826,9 +826,10 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "tx" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/item/kirbyplants/random,
-/turf/open/floor/wood,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 6
+	},
+/turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base)
 "tF" = (
 /obj/effect/turf_decal/stripes/line,
@@ -879,11 +880,11 @@
 /turf/open/floor/iron,
 /area/centcom/syndicate_base)
 "us" = (
-/obj/item/kirbyplants/random,
+/obj/effect/landmark/nukeop_elevator/exterior,
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/open/floor/wood,
+/turf/closed/indestructible/syndicate,
 /area/centcom/syndicate_base)
 "uw" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -948,8 +949,8 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "vR" = (
-/obj/machinery/light/directional/south,
-/obj/effect/decal/cleanable/dirt,
+/obj/machinery/washing_machine,
+/obj/machinery/light/directional/west,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "wf" = (
@@ -1105,6 +1106,12 @@
 /obj/effect/turf_decal/siding/dark,
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
+"At" = (
+/obj/machinery/light/small/red/directional/north{
+	allow_break_on_init = 0
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/centcom/syndicate_base)
 "AJ" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -1323,11 +1330,10 @@
 	},
 /area/centcom/syndicate_base)
 "Fz" = (
-/obj/structure/sign/poster/contraband/random/directional/south,
 /obj/structure/railing/corner/end/flip{
 	dir = 4
 	},
-/turf/open/floor/wood,
+/turf/closed/indestructible/syndicate,
 /area/centcom/syndicate_base)
 "FH" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark,
@@ -1370,6 +1376,7 @@
 	pixel_x = 4;
 	pixel_y = 5
 	},
+/obj/item/storage/crayons,
 /turf/open/floor/wood,
 /area/centcom/syndicate_base)
 "Gu" = (
@@ -1425,6 +1432,12 @@
 	},
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base/control)
+"HV" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 5
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/centcom/syndicate_base)
 "HX" = (
 /obj/machinery/computer/crew{
 	pixel_x = -6;
@@ -1575,7 +1588,7 @@
 /obj/structure/chair/comfy/red{
 	dir = 8
 	},
-/obj/effect/landmark/start/nukeop_leader,
+/obj/effect/landmark/start/nukeop_base/leader,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
 "Kz" = (
@@ -1679,6 +1692,12 @@
 	dir = 1
 	},
 /turf/open/floor/plating,
+/area/centcom/syndicate_base)
+"MA" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 9
+	},
+/turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base)
 "MD" = (
 /obj/effect/turf_decal/stripes/line{
@@ -1979,7 +1998,7 @@
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start/nukeop_overwatch,
+/obj/effect/landmark/start/nukeop_base/overwatch,
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
 "SA" = (
@@ -2064,10 +2083,17 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "Ux" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/sign/poster/contraband/random/directional/south,
-/turf/open/floor/wood,
+/obj/effect/turf_decal/siding/wideplating{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wideplating,
+/obj/machinery/door/poddoor/shutters/syndicate/indestructible{
+	name = "Base Lift";
+	dir = 1;
+	id_tag = "nukiespawnlift";
+	id = "nukiespawnlift"
+	},
+/turf/open/floor/iron/dark/textured_half,
 /area/centcom/syndicate_base)
 "Uy" = (
 /obj/effect/decal/syndie_logo{
@@ -2208,7 +2234,7 @@
 /obj/structure/chair/stool{
 	dir = 1
 	},
-/obj/effect/landmark/start/nukeop,
+/obj/effect/landmark/start/nukeop_base,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
 "Xc" = (
@@ -2310,9 +2336,10 @@
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base)
 "Zo" = (
-/obj/structure/table,
-/obj/item/storage/crayons,
-/turf/open/floor/wood,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 10
+	},
+/turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base)
 "Zp" = (
 /obj/effect/turf_decal/arrows{
@@ -2590,8 +2617,8 @@ sm
 sm
 sm
 sm
-vh
-vh
+sm
+sm
 sm
 pb
 TC
@@ -2654,13 +2681,13 @@ RN
 xJ
 fn
 sm
-jG
 hA
-Zo
-tx
+vR
+at
 sm
-vh
-vh
+At
+jG
+sm
 sm
 TC
 HC
@@ -2723,13 +2750,13 @@ UE
 mC
 UE
 sm
-at
+iw
 Su
 Su
 Ux
-sm
-vh
-vh
+MA
+Zo
+jG
 sm
 TC
 aJ
@@ -2795,10 +2822,10 @@ lL
 Su
 Su
 Su
-vR
-sm
-vh
-vh
+Ux
+HV
+tx
+jG
 sm
 TC
 aJ
@@ -2865,9 +2892,9 @@ kK
 Su
 Su
 Fz
+At
+jG
 sm
-vh
-vh
 sm
 TC
 aJ

@@ -29,9 +29,12 @@
 
 	if(iscarbon(source))
 		examine_list += get_carbon_flavor_text(source)
-		return
-	if(issilicon(source))
+	else if(issilicon(source))
 		examine_list += get_silicon_flavor_text(source)
+
+	if(user == source && !source.build_incapacitated())
+		var/edit_link = "byond://?src=[REF(src)];lookup_info=edit_flavor_text"
+		examine_list += span_notice("<a href='[edit_link]'>Изменить описание</a>")
 
 /datum/component/examine_panel/proc/get_carbon_flavor_text(mob/living/carbon/source)
 	var/flavor_text_link
@@ -64,6 +67,19 @@
 		switch(href_list["lookup_info"])
 			if("open_examine_panel")
 				ui_interact(usr)
+			if("edit_flavor_text")
+				attempt_edit_flavor_text(usr)
+
+/datum/component/examine_panel/proc/attempt_edit_flavor_text(mob/user)
+	var/mob/living/L = parent
+	if(QDELETED(user) || user != L)
+		return
+	var/new_text = tgui_input_text(user, "Введите новое описание", "Изменение описания", flavor_text, MAX_FLAVOR_LEN, TRUE)
+	if(length(new_text) >= MAX_FLAVOR_LEN)
+		return
+	new_text = STRIP_HTML_SIMPLE(new_text, MAX_FLAVOR_LEN)
+	L.save_new_flavor_text(new_text)
+	flavor_text = new_text
 
 /datum/component/examine_panel/ui_state(mob/user)
 	return GLOB.always_state
