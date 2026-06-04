@@ -292,7 +292,7 @@
 /obj/item/clothing/accessory/holster/tacticool/tsf_commander/PopulateContents()
 	generate_items_inside(list(
 		/obj/item/gun/ballistic/automatic/pistol/deagle/regal = 1,
-		/obj/item/ammo_box/magazine/r10mm = 1,
+		/obj/item/ammo_box/magazine/r45 = 1,
 	), src)
 
 /obj/item/clothing/accessory/holster/tacticool/ussp_commander
