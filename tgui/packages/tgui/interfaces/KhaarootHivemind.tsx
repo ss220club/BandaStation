@@ -13,8 +13,6 @@ type ThrallData = {
 };
 
 type HivemindData = {
-  infector_name: string;
-  infector_status: string;
   thralls: ThrallData[];
   thrall_count: number;
 };
@@ -28,7 +26,7 @@ const STATUS_COLORS: Record<string, string> = {
 
 export const KhaarootHivemind = (props) => {
   const { act, data } = useBackend<HivemindData>();
-  const { infector_name, infector_status, thralls = [], thrall_count } = data;
+  const { thralls = [], thrall_count } = data;
 
   return (
     <Window width={620} height={500} title="Улей Кхаарут">
@@ -40,9 +38,6 @@ export const KhaarootHivemind = (props) => {
             </Stack.Item>
             <Stack.Item>
               <LabeledList>
-                <LabeledList.Item label="Источник">
-                  {infector_name} ({infector_status})
-                </LabeledList.Item>
                 <LabeledList.Item label="Заражённых">
                   {thrall_count}
                 </LabeledList.Item>
