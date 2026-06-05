@@ -13,6 +13,8 @@
 	var/datum/atom_hud/data/diagnostic/diag_hud = GLOB.huds[DATA_HUD_DIAGNOSTIC]
 	diag_hud.add_atom_to_hud(src)
 	add_ally(src)
+	if(!pull_force)
+		remove_verb(src, /mob/living/verb/pulled)
 	GLOB.mob_living_list += src
 	SSpoints_of_interest.make_point_of_interest(src)
 	update_fov()
@@ -512,14 +514,11 @@
 
 //mob verbs are a lot faster than object verbs
 //for more info on why this is not atom/pull, see examinate() in mob.dm
-/mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
+/mob/living/verb/pulled(atom/movable/thing_pulled as mob|obj in oview(1))
 	set name = "Pull"
-	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
 
-	if(istype(AM) && Adjacent(AM))
-		start_pulling(AM)
-	else if(!combat_mode) //Don;'t cancel pulls if misclicking in combat mode.
-		stop_pulling()
+	if(istype(thing_pulled) && Adjacent(thing_pulled))
+		start_pulling(thing_pulled)
 
 /mob/living/stop_pulling()
 	if(ismob(pulling))
@@ -527,11 +526,6 @@
 	..()
 	update_pull_movespeed()
 	update_pull_hud_icon()
-
-/mob/living/verb/stop_pulling1()
-	set name = "Stop Pulling"
-	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
-	stop_pulling()
 
 //same as above
 /mob/living/pointed(atom/A)
@@ -607,7 +601,7 @@
 
 /mob/living/proc/mob_sleep()
 	set name = "Sleep"
-	set category = "IC"
+	set hidden = TRUE
 
 	if(IsSleeping())
 		to_chat(src, span_warning("Вы уже спите!"))
@@ -662,9 +656,6 @@
 		return account
 
 /mob/living/proc/toggle_resting()
-	set name = "Rest"
-	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
-
 	set_resting(!resting, FALSE)
 
 
@@ -1134,10 +1125,7 @@
 		return FALSE
 	return TRUE
 
-/mob/living/verb/resist()
-	set name = "Resist"
-	set category = null // BANDASTATION REPLACEMENT: Original: "IC"
-
+/mob/living/proc/resist()
 	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(execute_resist)))
 
 ///proc extender of [/mob/living/verb/resist] meant to make the process queable if the server is overloaded when the verb is called
@@ -2105,6 +2093,13 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 				return FALSE
 			update_transform(var_value/current_size)
 			. = TRUE
+		if(NAMEOF(src, pull_force))
+			if(var_value == 0) //no more pulling
+				remove_verb(src, /mob/living/verb/pulled)
+			else
+				add_verb(src, /mob/living/verb/pulled)
+			. = TRUE
+
 
 	if(!isnull(.))
 		datum_flags |= DF_VAR_EDITED
@@ -2944,10 +2939,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	log_admin("[key_name(admin)] gave a guardian spirit controlled by [guardian_client] to [src].")
 	BLACKBOX_LOG_ADMIN_VERB("Give Guardian Spirit")
 
-/mob/living/verb/lookup()
-	set name = "Look Up"
-	set category = "IC"
-
+/mob/living/proc/lookup()
 	if(looking_vertically)
 		to_chat(src, "Вы снова смотрите вперед.")
 		end_look()
@@ -2964,10 +2956,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	to_chat(src, "Вы наклоняете голову вверх.")
 	look_up()
 
-/mob/living/verb/lookdown()
-	set name = "Look Down"
-	set category = "IC"
-
+/mob/living/proc/lookdown()
 	if(looking_vertically)
 		to_chat(src, "Вы снова смотрите вперёд.")
 		end_look()
