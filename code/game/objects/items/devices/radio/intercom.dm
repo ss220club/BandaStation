@@ -5,7 +5,8 @@
 	icon_state = "intercom"
 	anchored = TRUE
 	w_class = WEIGHT_CLASS_BULKY
-	canhear_range = 2
+	canhear_range = 5
+	tunable_volume = TRUE
 	dog_fashion = null
 	unscrewed = FALSE
 	item_flags = NO_BLOOD_ON_ITEM
@@ -16,8 +17,15 @@
 	overlay_mic_idle = "intercom_m"
 	overlay_mic_active = null
 
+	keyslot = /obj/item/encryptionkey/intercom
+	chat_color = RADIO_COLOR_INTERCOM
+
 	///The icon of intercom while its turned off
 	var/icon_off = "intercom-p"
+
+/obj/item/radio/intercom/Initialize(mapload)
+	. = ..()
+	frequency = FREQ_INTERCOM
 
 /obj/item/radio/intercom/unscrewed
 	unscrewed = TRUE
@@ -34,6 +42,7 @@
 
 /obj/item/radio/intercom/Initialize(mapload)
 	. = ..()
+	chat_color_name = get_voice()
 	var/area/current_area = get_area(src)
 	if(!current_area)
 		return
@@ -142,22 +151,47 @@
 /obj/item/radio/intercom/ui_state(mob/user)
 	return GLOB.default_state
 
-/obj/item/radio/intercom/can_receive(freq, list/levels)
-	if(levels != RADIO_NO_Z_LEVEL_RESTRICTION)
-		var/turf/position = get_turf(src)
-		if(isnull(position) || !(position.z in levels))
-			return FALSE
+// /obj/item/radio/intercom/can_receive(freq, list/levels)
+// 	if(levels != RADIO_NO_Z_LEVEL_RESTRICTION)
+// 		var/turf/position = get_turf(src)
+// 		if(isnull(position) || !(position.z in levels))
+// 			return FALSE
 
-	if(freq == FREQ_SYNDICATE)
-		if(!(special_channels &= RADIO_SPECIAL_SYNDIE))
-			return FALSE//Prevents broadcast of messages over devices lacking the encryption
+// 	if(freq == FREQ_SYNDICATE)
+// 		if(!(special_channels &= RADIO_SPECIAL_SYNDIE))
+// 			return FALSE//Prevents broadcast of messages over devices lacking the encryption
 
-	return TRUE
+// 	return TRUE
 
 /obj/item/radio/intercom/Hear(atom/movable/speaker, message_langs, raw_message, radio_freq, radio_freq_name, radio_freq_color, list/spans, list/message_mods = list(), message_range)
 	if(message_mods[RADIO_EXTENSION] == MODE_INTERCOM)
 		return  // Avoid hearing the same thing twice
 	return ..()
+
+/obj/item/radio/intercom/on_receive_message(list/data)
+	. = ..()
+	var/list/hearers = get_hearers_in_radio_ranges(list(src))
+	var/atom/movable/sender = data["speaker"]
+	var/obj/item/radio/radio = data["radio"]
+	var/list/message_mods = data["mods"]
+	var/is_custom_emote = message_mods?[MODE_CUSTOM_SAY_ERASE_INPUT]
+
+	if(src == radio)
+		return
+
+	for(var/mob/hearer in hearers)
+		if(hearer == sender)
+			continue // Don't show your own message
+		var/use_runechat = hearer.client?.prefs.read_preference(/datum/preference/toggle/enable_runechat) \
+			&& hearer.client?.prefs.read_preference(/datum/preference/toggle/enable_runechat_non_mobs) \
+			&& hearer.stat != UNCONSCIOUS \
+			&& hearer.stat != HARD_CRIT \
+			&& !HAS_TRAIT(hearer, TRAIT_DEAF)
+		if(use_runechat)
+			if (is_custom_emote)
+				hearer.create_chat_message(src, null, message_mods[MODE_CUSTOM_SAY_EMOTE], data["spans"], EMOTE_MESSAGE)
+			else
+				hearer.create_chat_message(src, data["language"], data["message"], data["spans"])
 
 /obj/item/radio/intercom/emp_act(severity)
 	. = ..() // Parent call here will set `on` to FALSE.
@@ -251,10 +285,12 @@
 /obj/item/radio/intercom/command
 	name = "command intercom"
 	desc = "The command's special free-frequency intercom. It's a versatile tool that can be tuned to any frequency, granting you access to channels you're not supposed to be on. Plus, it comes equipped with a built-in voice amplifier for crystal-clear communication."
+	keyslot = /obj/item/encryptionkey/intercom_com
 	icon_state = "intercom_command"
 	freerange = TRUE
 	command = TRUE
 	icon_off = "intercom_command-p"
+	chat_color = RADIO_COLOR_COMMAND
 
 // Set of intercoms for use in interrogation. Interior one starts broadcasting, exterior one hides voices.
 /obj/item/radio/intercom/interrogation
@@ -298,6 +334,7 @@
 	desc = "Talk smack through this."
 	command = TRUE
 	special_channels = RADIO_SPECIAL_SYNDIE
+	chat_color = RADIO_COLOR_SYNDICATE
 
 // Syndicate intercom that also has freefrange on top of syndicate channel
 /obj/item/radio/intercom/syndicate/freerange
@@ -313,6 +350,7 @@
 /obj/item/radio/intercom/ai_private
 	name = "\improper AI private intercom"
 	desc = "An intercom primarily used for a private line directly to the station's AI."
+	chat_color = RADIO_COLOR_AI_PRIVATE
 
 /obj/item/radio/intercom/ai_private/Initialize(mapload)
 	. = ..()
@@ -354,31 +392,38 @@
 
 /obj/item/radio/intercom/departmental/cargo
 	name = "cargo intercom"
-	keyslot = /obj/item/encryptionkey/headset_cargo
+	keyslot = /obj/item/encryptionkey/intercom_cargo
+	chat_color = RADIO_COLOR_SUPPLY
 
 /obj/item/radio/intercom/departmental/command
 	name = "command intercom"
-	keyslot = /obj/item/encryptionkey/headset_com
+	keyslot = /obj/item/encryptionkey/intercom_com
+	chat_color = RADIO_COLOR_COMMAND
 
 /obj/item/radio/intercom/departmental/engineering
 	name = "engineering intercom"
-	keyslot = /obj/item/encryptionkey/headset_eng
+	keyslot = /obj/item/encryptionkey/intercom_eng
+	chat_color = RADIO_COLOR_ENGINEERING
 
 /obj/item/radio/intercom/departmental/medical
 	name = "medical intercom"
-	keyslot = /obj/item/encryptionkey/headset_med
+	keyslot = /obj/item/encryptionkey/intercom_med
+	chat_color = RADIO_COLOR_MEDICAL
 
 /obj/item/radio/intercom/departmental/science
 	name = "science intercom"
-	keyslot = /obj/item/encryptionkey/headset_sci
+	keyslot = /obj/item/encryptionkey/intercom_sci
+	chat_color = RADIO_COLOR_SCIENCE
 
 /obj/item/radio/intercom/departmental/security
 	name = "security intercom"
-	keyslot = /obj/item/encryptionkey/headset_sec
+	keyslot = /obj/item/encryptionkey/intercom_sec
+	chat_color = RADIO_COLOR_SECURITY
 
 /obj/item/radio/intercom/departmental/service
 	name = "service intercom"
-	keyslot = /obj/item/encryptionkey/headset_service
+	keyslot = /obj/item/encryptionkey/intercom_service
+	chat_color = RADIO_COLOR_SERVICE
 
 #define INTERCOM_OFFSET 27
 

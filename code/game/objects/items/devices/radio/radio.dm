@@ -25,7 +25,7 @@
 	///if FALSE, broadcasting and listening don't matter and this radio shouldn't do anything
 	VAR_PRIVATE/on = TRUE
 	///the "default" radio frequency this radio is set to, listens and transmits to this frequency by default. wont work if the channel is encrypted
-	VAR_PRIVATE/frequency = FREQ_COMMON
+	VAR_PRIVATE/frequency = MIN_FREQ
 
 	/// Whether the radio will transmit dialogue it hears nearby into its radio channel.
 	VAR_PRIVATE/broadcasting = FALSE
@@ -43,6 +43,8 @@
 
 	/// Both the range around the radio in which mobs can hear what it receives and the range the radio can hear
 	var/canhear_range = 3
+	/// Whether the radio's volume can be tuned.
+	var/tunable_volume = FALSE
 	/// Tracks the number of EMPs currently stacked.
 	var/emped = 0
 
@@ -110,7 +112,7 @@
 	perform_update_icon = FALSE
 	set_listening(listening)
 	set_broadcasting(broadcasting)
-	set_frequency(sanitize_frequency(frequency, freerange, (special_channels & RADIO_SPECIAL_SYNDIE)))
+	set_frequency(sanitize_frequency(return_unused_frequency(freerange), freerange, (special_channels & RADIO_SPECIAL_SYNDIE)))
 	set_on(on)
 	perform_update_icon = TRUE
 
@@ -182,7 +184,7 @@
 	special_channels = NONE
 
 	if(!freerange && (frequency > MAX_FREQ || frequency < MIN_FREQ))
-		frequency = FREQ_COMMON
+		frequency = MIN_FREQ
 
 ///goes through all radio channels we should be listening for and readds them to the global list
 /obj/item/radio/proc/readd_listening_radio_channels()
@@ -499,6 +501,8 @@
 	data["subspaceSwitchable"] = subspace_switchable
 	data["headset"] = FALSE
 	data["radio_noises"] = (user.client?.prefs.read_preference(/datum/preference/numeric/volume/sound_radio_noise))
+	data["tunable_volume"] = tunable_volume
+	data["volume"] = canhear_range
 
 	return data
 
@@ -567,6 +571,12 @@
 			//there's no href exploits.
 			var/volume_modifier = (user.client.prefs.read_preference(/datum/preference/numeric/volume/sound_radio_noise))
 			SEND_SOUND(user, sound('sound/items/radio/radio_receive.ogg', volume = volume_modifier))
+		if("set_volume")
+			if(!tunable_volume)
+				return
+			var/volume = clamp(text2num(params["volume"]), 1, 9)
+			canhear_range = volume
+			. = TRUE
 
 /obj/item/radio/examine(mob/user)
 	. = ..() // translate

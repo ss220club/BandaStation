@@ -163,11 +163,13 @@ export const RADIO_CHANNELS = [
     freq: 1447,
     color: '#d65d95',
   },
+  // BANDASTATION EDIT START - Common channel removal
   {
-    name: 'Common',
-    freq: 1459,
-    color: '#1ecc43',
+    name: 'Intercom',
+    freq: 1439,
+    color: '#c0c0c0',
   },
+  // BANDASTATION EDIT END
 ] as const;
 
 const GASES = [

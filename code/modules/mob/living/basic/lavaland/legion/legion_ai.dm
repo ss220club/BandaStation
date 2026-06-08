@@ -83,4 +83,4 @@
 	var/obj/item/radio/mob_radio = locate() in victim.contents
 	if (QDELETED(mob_radio))
 		return ..() // No radio, just talk funny
-	controller.queue_behavior(/datum/ai_behavior/perform_speech_radio, pick(radio_speech + remembered_speech), mob_radio, list(RADIO_CHANNEL_SUPPLY, RADIO_CHANNEL_COMMON))
+	controller.queue_behavior(/datum/ai_behavior/perform_speech_radio, pick(radio_speech + remembered_speech), mob_radio, list(RADIO_CHANNEL_SUPPLY, RADIO_CHANNEL_INTERCOM))

@@ -70,7 +70,7 @@ GLOBAL_LIST_INIT(command_strings, list(
 	///which channels can the bot listen to
 	var/radio_key = null
 	///The bot's default radio channel
-	var/radio_channel = RADIO_CHANNEL_COMMON
+	var/radio_channel = RADIO_CHANNEL_INTERCOM
 	///our access card
 	var/obj/item/card/id/access_card
 	///The trim type that will grant additional acces

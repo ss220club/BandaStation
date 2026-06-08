@@ -273,6 +273,7 @@
 		RADIO_CHANNEL_SERVICE = 1,
 		RADIO_CHANNEL_AI_PRIVATE = 1,
 		RADIO_CHANNEL_ENTERTAINMENT = 1,
+		RADIO_CHANNEL_INTERCOM = 1,
 	)
 
 /obj/item/encryptionkey/ai_with_binary
@@ -289,11 +290,94 @@
 		RADIO_CHANNEL_SERVICE = 1,
 		RADIO_CHANNEL_AI_PRIVATE = 1,
 		RADIO_CHANNEL_ENTERTAINMENT = 1,
+		RADIO_CHANNEL_INTERCOM = 1,
 	)
 	special_channels = RADIO_SPECIAL_BINARY
 	language_data = list(
 		/datum/language/machine = 100,
 	)
+
+/obj/item/encryptionkey/intercom
+	name = "intercom encryption key"
+	icon = 'icons/map_icons/items/encryptionkey.dmi'
+	icon_state = "/obj/item/encryptionkey/basic"
+	post_init_icon_state = "cypherkey_basic"
+	channels = list(RADIO_CHANNEL_INTERCOM = 1)
+	greyscale_config = /datum/greyscale_config/encryptionkey_basic
+	greyscale_colors = "#1ecc43#3758c4"
+
+/obj/item/encryptionkey/intercom_com
+	name = "command intercom encryption key"
+	icon = 'icons/map_icons/items/encryptionkey.dmi'
+	icon_state = "/obj/item/encryptionkey/headset_com"
+	post_init_icon_state = "cypherkey_cube"
+	channels = list(
+		RADIO_CHANNEL_INTERCOM = 1,
+		RADIO_CHANNEL_COMMAND = 0,
+		RADIO_CHANNEL_SECURITY = 0,
+		RADIO_CHANNEL_ENGINEERING = 0,
+		RADIO_CHANNEL_SCIENCE = 0,
+		RADIO_CHANNEL_MEDICAL = 0,
+		RADIO_CHANNEL_SUPPLY = 0,
+		RADIO_CHANNEL_SERVICE = 0,
+		RADIO_CHANNEL_ENTERTAINMENT = 0,
+		)
+	greyscale_config = /datum/greyscale_config/encryptionkey_cube
+	greyscale_colors = "#2b2793#67a552"
+
+/obj/item/encryptionkey/intercom_sec
+	name = "security intercom encryption key"
+	icon = 'icons/map_icons/items/encryptionkey.dmi'
+	icon_state = "/obj/item/encryptionkey/headset_sec"
+	post_init_icon_state = "cypherkey_security"
+	channels = list(RADIO_CHANNEL_INTERCOM = 1, RADIO_CHANNEL_SECURITY = 0)
+	greyscale_config = /datum/greyscale_config/encryptionkey_security
+	greyscale_colors = "#820a16#280b1a"
+
+/obj/item/encryptionkey/intercom_eng
+	name = "engineering intercom encryption key"
+	icon = 'icons/map_icons/items/encryptionkey.dmi'
+	icon_state = "/obj/item/encryptionkey/headset_eng"
+	post_init_icon_state = "cypherkey_engineering"
+	channels = list(RADIO_CHANNEL_INTERCOM = 1, RADIO_CHANNEL_ENGINEERING = 0)
+	greyscale_config = /datum/greyscale_config/encryptionkey_engineering
+	greyscale_colors = "#f8d860#dca01b"
+
+/obj/item/encryptionkey/intercom_med
+	name = "medical intercom encryption key"
+	icon = 'icons/map_icons/items/encryptionkey.dmi'
+	icon_state = "/obj/item/encryptionkey/headset_med"
+	post_init_icon_state = "cypherkey_medical"
+	channels = list(RADIO_CHANNEL_INTERCOM = 1, RADIO_CHANNEL_MEDICAL = 0)
+	greyscale_config = /datum/greyscale_config/encryptionkey_medical
+	greyscale_colors = "#ebebeb#69abd1"
+
+/obj/item/encryptionkey/intercom_sci
+	name = "science intercom encryption key"
+	icon = 'icons/map_icons/items/encryptionkey.dmi'
+	icon_state = "/obj/item/encryptionkey/headset_sci"
+	post_init_icon_state = "cypherkey_research"
+	channels = list(RADIO_CHANNEL_INTERCOM = 1, RADIO_CHANNEL_SCIENCE = 0)
+	greyscale_config = /datum/greyscale_config/encryptionkey_research
+	greyscale_colors = "#793a80#bc4a9b"
+
+/obj/item/encryptionkey/intercom_cargo
+	name = "supply intercom encryption key"
+	icon = 'icons/map_icons/items/encryptionkey.dmi'
+	icon_state = "/obj/item/encryptionkey/headset_cargo"
+	post_init_icon_state = "cypherkey_cargo"
+	channels = list(RADIO_CHANNEL_INTERCOM = 1, RADIO_CHANNEL_SUPPLY = 0)
+	greyscale_config = /datum/greyscale_config/encryptionkey_cargo
+	greyscale_colors = "#49241a#7b3f2e"
+
+/obj/item/encryptionkey/intercom_service
+	name = "service intercom encryption key"
+	icon = 'icons/map_icons/items/encryptionkey.dmi'
+	icon_state = "/obj/item/encryptionkey/headset_service"
+	post_init_icon_state = "cypherkey_service"
+	channels = list(RADIO_CHANNEL_INTERCOM = 1, RADIO_CHANNEL_SERVICE = 0, RADIO_CHANNEL_ENTERTAINMENT = 0)
+	greyscale_config = /datum/greyscale_config/encryptionkey_service
+	greyscale_colors = "#3758c4#3bca5a"
 
 /obj/item/encryptionkey/ai/evil //ported from NT, this goes 'inside' the AI.
 	name = "syndicate binary encryption key"

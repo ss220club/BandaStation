@@ -2,9 +2,16 @@
 
 //say based modes like binary are in living/say.dm
 
+#define RADIO_CHANNEL_DEFAULT "Текущий"
+#define RADIO_KEY_DEFAULT ";"
+
 #define RADIO_CHANNEL_COMMON "Общий"
-#define RADIO_KEY_COMMON ";"
+#define RADIO_KEY_COMMON "o"
+#define RADIO_TOKEN_COMMON ":o"
 #define RADIO_COLOR_COMMON "#1ecc43"
+
+#define RADIO_CHANNEL_INTERCOM "Интерком"
+#define RADIO_COLOR_INTERCOM "#c0c0c0"
 
 #define RADIO_CHANNEL_SECURITY "Безопасность"
 #define RADIO_KEY_SECURITY "s"
@@ -108,6 +115,7 @@
 #define FREQ_INTERROGATION 1423
 #define FREQ_HOLOGRID_SOLUTION 1433
 #define FREQ_STATUS_DISPLAYS 1435
+#define FREQ_INTERCOM 1439
 
 #define MIN_FREQ 1441 // ------------------------------------------------------
 // Only the 1441 to 1489 range is freely available for general conversation.
@@ -120,12 +128,13 @@
 #define FREQ_LOCATOR_IMPLANT 1451
 #define FREQ_RADIO_NAV_BEACON 1455
 #define FREQ_SIGNALER 1457 // the default for new signalers
-#define FREQ_COMMON 1459 // Common comms frequency, dark green
 
 #define MIN_UNUSED_FREQ 1461 // Prevents rolling AI Private or Common
 #define FREQ_CONFESSIONAL 1481
 
 #define MAX_FREQ 1489 // ------------------------------------------------------
+
+#define FREQ_COMMON 1493 // Common comms frequency, dark green
 
 #define MAX_FREE_FREQ 1599 // -------------------------------------------------
 
