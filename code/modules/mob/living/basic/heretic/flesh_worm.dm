@@ -121,7 +121,7 @@
 	if(current_stacks < stacks_to_grow)
 		return
 
-	visible_message(span_boldwarning("[src.declent_ru(NOMINATIVE)] сгибается и увеличивается!"))
+	visible_message(span_boldwarning("[capitalize(src.declent_ru(NOMINATIVE))] сгибается и увеличивается!"))
 	current_stacks = 0
 	new_segment(behind = src)
 

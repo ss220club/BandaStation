@@ -242,7 +242,7 @@
 			LAZYREMOVE(created_items, ref)
 
 	if(LAZYLEN(created_items) >= limit)
-		loc.balloon_alert(user, "ритуал провалился в самом конце!")
+		loc.balloon_alert(user, "ритуал провален - превышен лимит!")
 		return FALSE
 
 	return TRUE
