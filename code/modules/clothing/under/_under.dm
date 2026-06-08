@@ -360,6 +360,8 @@
 	// Allow for accessories to react to the acccessory list now
 	accessory.successful_attach(src)
 
+	update_accessory_weight() // BANDASTATION ADD: Accessory holsters
+
 	if(user && attach_message)
 		balloon_alert(user, "accessory attached")
 
@@ -386,6 +388,8 @@
 	LAZYREMOVE(attached_accessories, removed)
 
 	removed.detach(src)
+
+	update_accessory_weight() // BANDASTATION ADD: Accessory holsters
 
 	if(update)
 		update_accessory_overlay()
@@ -448,10 +452,28 @@
 /// Helper to list out all accessories with an icon besides it, for use in examine
 /obj/item/clothing/under/proc/list_accessories_with_icon(mob/user)
 	var/list/all_accessories = list()
+	// BANDASTATION EDIT: Hiding accessories under outerwear
 	for(var/obj/item/clothing/accessory/attached as anything in attached_accessories)
+		if(ishuman(loc))
+			var/mob/living/carbon/human/H = loc
+			if(H.wear_suit?.flags_inv & HIDEBELT && !attached.above_suit)
+				continue
 		all_accessories += attached.examine_title(user)
 
 	return all_accessories
+
+///BANDASTATION EDIT: Change in uniform weight with certain accessories
+/obj/item/clothing/under/proc/update_accessory_weight()
+	var/new_w_class = initial(w_class)
+	if(!LAZYLEN(attached_accessories))
+		update_weight_class(new_w_class)
+		return
+
+	for(var/obj/item/clothing/accessory/A in attached_accessories)
+		if(A.w_class >= WEIGHT_CLASS_NORMAL)
+			new_w_class = max(new_w_class, A.w_class)
+
+	update_weight_class(new_w_class)
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Adjust Suit Sensors"

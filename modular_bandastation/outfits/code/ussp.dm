@@ -55,7 +55,7 @@
 	mask = /obj/item/cigarette/pipe
 	ears = /obj/item/radio/headset/heads/captain/alt/ussp
 	glasses = /obj/item/clothing/glasses/thermal/eyepatch/tsf_commander
-	belt = /obj/item/storage/belt/holster/detective/full/ert/ussp_commander
+	accessory = /obj/item/clothing/accessory/holster/tacticool/ussp_commander
 	r_pocket = /obj/item/storage/box/matches
 
 /datum/id_trim/ussp/commander
