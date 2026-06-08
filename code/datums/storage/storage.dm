@@ -607,6 +607,11 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		var/mob/mob_parent = parent.loc
 		thing.dropped(mob_parent, /*silent = */TRUE)
 
+	// BANDASTATION ADD BEGIN: Weapon fired spontaneously when trying to get it out of the backpack
+	if(istype(parent, /obj/item/storage/backpack))
+		handle_backpack_draw(thing, remove_to_loc)
+		// BANDASTATION ADD END
+
 	if(remove_to_loc)
 		reset_item(thing)
 		thing.forceMove(remove_to_loc)
@@ -1215,3 +1220,23 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(new_locked > STORAGE_NOT_LOCKED)
 		close_all_recursive()
 	parent.update_appearance()
+
+// BANDASTATION ADD: Weapon fired spontaneously when trying to get it out of the backpack
+/proc/handle_backpack_draw(obj/item/thing, atom/remove_to_loc)
+	if(!istype(remove_to_loc, /mob/living/carbon/human))
+		return
+	var/mob/living/carbon/human/H = remove_to_loc
+	if(!istype(thing, /obj/item/gun))
+		return
+	if(H.get_active_held_item())
+		return
+	if(prob(50))
+		backpack_accidental_shot(H, thing)
+
+/proc/backpack_accidental_shot(mob/living/carbon/human/H, obj/item/gun/G)
+	if(QDELETED(H) || QDELETED(G))
+		return
+	if(!G.can_shoot())
+		return
+	to_chat(H, span_warning("Вы неосторожно достаёте оружие из рюкзака и случайно нажимаете на спусковой крючок!"))
+	G.process_fire(H, H, TRUE, null)
