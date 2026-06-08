@@ -610,6 +610,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	// BANDASTATION ADD BEGIN: Weapon fired spontaneously when trying to get it out of the backpack
 	if(istype(parent, /obj/item/storage/backpack))
 		handle_backpack_draw(thing, remove_to_loc)
+		if(QDELETED(thing))
+			return FALSE
 		// BANDASTATION ADD END
 
 	if(remove_to_loc)
