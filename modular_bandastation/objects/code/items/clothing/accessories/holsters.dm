@@ -257,6 +257,7 @@
 	icon_state = "operative_holster"
 	worn_icon = 'icons/mob/clothing/belt.dmi'
 	worn_icon_state = "syndicate_holster"
+	icon_state_is_worn = FALSE
 	check_covering = FALSE
 
 /obj/item/clothing/accessory/holster/tacticool/Initialize(mapload)
