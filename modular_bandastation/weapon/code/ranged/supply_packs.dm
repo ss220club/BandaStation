@@ -1,3 +1,14 @@
+/datum/supply_pack/security/webbings
+	name = "Ammo Webbings"
+	crate_name = "ammo webbings crate"
+	desc = "В этом ящике находятся две тактические разгрузки под магазины - обычная и темная, которые практично и удобно надеваются поверх униформы."
+	cost = CARGO_CRATE_VALUE * 5
+	access_view = ACCESS_SECURITY
+	contains = list(
+		/obj/item/clothing/accessory/ammo_vest = 1,
+		/obj/item/clothing/accessory/ammo_vest/black = 1,
+	)
+
 /datum/supply_pack/security/gp9_pistols
 	name = "GP-9 Pistols Crate"
 	desc = "В этом ящике находятся два пистолета GP-9 калибра 9x25мм, а также четыре нелетальных магазина калибра 9x25мм НТ."
@@ -109,6 +120,16 @@
 	access_view = ACCESS_ARMORY
 	contains = list(
 		/obj/item/sledgehammer/tactical = 1,
+	)
+
+/datum/supply_pack/security/holsters
+	name = "Holsters (uniform)"
+	crate_name = "holsters crate"
+	desc = "В этом ящике находятся две обычные кобуры для пистолетов, которые надеваются поверх униформы."
+	cost = CARGO_CRATE_VALUE * 10
+	access_view = ACCESS_SECURITY
+	contains = list(
+		/obj/item/clothing/accessory/holster = 2
 	)
 
 // MARK: GUNCASE

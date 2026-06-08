@@ -81,7 +81,7 @@
 			new /obj/item/gun/ballistic/revolver(src) // 13 tc
 			new /obj/item/ammo_box/speedloader/c357(src) // 4tc
 			new /obj/item/ammo_box/speedloader/c357(src)
-			new /obj/item/storage/belt/holster/chameleon(src) // 1 tc
+			new /obj/item/clothing/accessory/holster/chameleon(src) // 1 tc BANDASTATION EDIT: Accessory holsters
 			new /obj/item/card/emag/doorjack(src) // 3 tc replaced the emag with the doorjack
 			new /obj/item/grenade/c4(src) // 1 tc
 			new /obj/item/clothing/gloves/latex/nitrile(src) // ~1 tc for whole outfit
@@ -841,7 +841,7 @@
 	generate_items_inside(list(
 		/obj/item/clothing/shoes/cowboy/black/syndicate= 1,
 		/obj/item/clothing/head/cowboy/black/syndicate = 1,
-		/obj/item/storage/belt/holster/nukie/cowboy/full = 1,
+		/obj/item/clothing/accessory/holster/tacticool/cowboy = 1, // BANDASTATION EDIT: Accessory holsters
 		/obj/item/clothing/under/costume/dutch/syndicate = 1,
 		/obj/item/lighter/skull = 1,
 		/obj/item/sbeacondrop/horse = 1,
