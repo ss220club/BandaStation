@@ -15,6 +15,7 @@
 	alternate_worn_layer = UNDER_SUIT_LAYER
 	w_class = WEIGHT_CLASS_BULKY
 	above_suit = FALSE
+	icon_state_is_worn = FALSE
 	var/check_covering = TRUE
 
 /obj/item/clothing/accessory/holster/proc/PopulateContents()
@@ -257,7 +258,6 @@
 	icon_state = "operative_holster"
 	worn_icon = 'icons/mob/clothing/belt.dmi'
 	worn_icon_state = "syndicate_holster"
-	icon_state_is_worn = FALSE
 	check_covering = FALSE
 
 /obj/item/clothing/accessory/holster/tacticool/Initialize(mapload)
