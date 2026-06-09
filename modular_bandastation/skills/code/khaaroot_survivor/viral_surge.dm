@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/khaaroot_adrenaline_surge
-	name = "Viral Surge"
-	desc = "Временно активирует остатки вируса Кхаарут в организме, давая взрывной прирост стамины, ускорение и сопротивляемость урону. После завершения наступает короткий период истощения."
+	name = "Вирусный всплеск"
+	desc = "Временно активирует остатки вируса Кхаарут в организме, давая взрывной прирост выносливости, ускорение и сопротивляемость урону. После завершения наступает короткий период истощения."
 	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
 	button_icon_state = "viral_surge"
 	cooldown_time = 120 SECONDS
@@ -110,11 +110,11 @@
 	multiplicative_slowdown = 0.3
 
 /atom/movable/screen/alert/status_effect/khaaroot_surge_active
-	name = "Khaaroot Viral Surge"
+	name = "Вирусный всплеск Кхаарут"
 	desc = "Остатки вируса Кхаарут активны! Вы движетесь быстрее, восстанавливаете стамину и получаете меньше урона."
 	icon_state = "high"
 
 /atom/movable/screen/alert/status_effect/khaaroot_surge_crash
-	name = "Khaaroot Exhaustion"
+	name = "истощение Кхаарут"
 	desc = "Вирусные остатки исчерпаны. Вы истощены и двигаетесь значительно медленнее."
 	icon_state = "stun"

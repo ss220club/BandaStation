@@ -301,10 +301,10 @@
 /// Hidden antagonist datum for the infector — provides HUD icon, team membership, and hivemind communication.
 /// Does NOT appear in round-end reports or regular antagonist lists.
 /datum/antagonist/khaaroot_source
-	name = "Khaaroot Hivemind Source"
-	roundend_category = "Khaaroot Hivemind"
+	name = "источник Улья Кхаарут"
+	roundend_category = "Улей Кхаарут"
 	show_in_roundend = FALSE
-	antagpanel_category = "Khaaroot Hivemind"
+	antagpanel_category = "Улей Кхаарут"
 	show_in_antagpanel = FALSE
 	show_to_ghosts = FALSE
 	hud_icon = 'modular_bandastation/antagonists/icons/antag_hud.dmi'
@@ -344,10 +344,10 @@
 
 /// Antagonist datum for Khaaroot-infected thralls — provides HUD icon, team membership, hivemind communication, and configurable objective.
 /datum/antagonist/khaaroot_thrall
-	name = "Khaaroot Hivemind Thrall"
-	roundend_category = "Khaaroot Hivemind"
+	name = "заражённый Ульем Кхаарут"
+	roundend_category = "Улей Кхаарут"
 	show_in_roundend = FALSE
-	antagpanel_category = "Khaaroot Hivemind"
+	antagpanel_category = "Улей Кхаарут"
 	show_in_antagpanel = FALSE
 	show_to_ghosts = FALSE
 	hud_icon = 'modular_bandastation/antagonists/icons/antag_hud.dmi'
@@ -387,7 +387,7 @@
 	if(hivemind)
 		var/datum/action/cooldown/khaaroot_hivemind_comm/comm = new(hivemind)
 		comm.Grant(owner.current)
-		hivemind.broadcast_message("[owner.name] принят в улей Кхаарут.")
+		hivemind.broadcast_message("[owner.name] принят в Улей Кхаарут.")
 
 /datum/antagonist/khaaroot_thrall/on_removal()
 	. = ..()
@@ -401,7 +401,7 @@
 /// Team datum for Khaaroot hivemind — enables shared HUD icons between infector and thralls.
 /datum/team/khaaroot_hivemind
 	name = "\improper Khaaroot Hivemind"
-	member_name = "hivemind member"
+	member_name = "участник улья"
 	show_roundend_report = FALSE
 
 	/// Weakref back to the hivemind controller

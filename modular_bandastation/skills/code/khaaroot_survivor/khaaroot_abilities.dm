@@ -5,7 +5,7 @@
 /// Ability for the infector to infect a nearby human with the Khaaroot virus.
 /// Requires a 5-second channeled aggressive grab on the target.
 /datum/action/cooldown/spell/pointed/khaaroot_infect
-	name = "Khaaroot Infection"
+	name = "заражение Кхаарут"
 	desc = "Внедрить остатки вируса Кхаарут в разум цели, подчиняя её воле улья. Цель должна находиться рядом и не иметь ментальной защиты."
 	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
 	button_icon_state = "infect"
@@ -176,7 +176,7 @@
 
 /// Innate action for hivemind communication — available to both infector and thralls.
 /datum/action/cooldown/khaaroot_hivemind_comm
-	name = "Khaaroot Hivemind Speech"
+	name = "речь Улья Кхаарут"
 	desc = "Отправить мысленное сообщение всем участникам улья Кхаарут."
 	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
 	button_icon_state = "hivemind_com"
@@ -225,7 +225,7 @@
 
 /// Innate action for the infector to open the hivemind control panel.
 /datum/action/cooldown/khaaroot_hivemind_panel
-	name = "Khaaroot Hivemind Panel"
+	name = "панель Улья Кхаарут"
 	desc = "Открыть панель управления ульем Кхаарут для управления заражёнными."
 	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
 	button_icon_state = "hivemind_panel"
