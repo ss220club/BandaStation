@@ -246,10 +246,3 @@
 	if(.)
 		return
 	user.movement_locked = FALSE
-
-/datum/keybinding/living/view_pet_data
-	hotkey_keys = list("Shift")
-	name = "view_pet_commands"
-	full_name = "Просмотр команд питомцев"
-	description = "Удерживайте, чтобы увидеть все команды, которые вы можете дать своим питомцам!"
-	keybind_signal = COMSIG_KB_LIVING_VIEW_PET_COMMANDS
