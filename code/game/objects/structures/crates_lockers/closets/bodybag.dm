@@ -458,7 +458,8 @@
 /obj/structure/closet/body_bag/environmental/stasis
 	name = "stasis body bag"
 	desc = "Мешок для тел, предназначенный для удержания содержимого в стазисе, предотвращая разложение \
-		и дальнейшие повреждения. Сам мешок не может поддерживать стазис долго и в конечном итоге развалится."	max_integrity = 300
+		и дальнейшие повреждения. Сам мешок не может поддерживать стазис долго и в конечном итоге развалится."
+	max_integrity = 300
 	icon = 'modular_bandastation/balance/icons/bodybag.dmi' // BANDASTATION EDIT: Replace stasis bag sprites and remove modular stasis bag
 	icon_state = "stasisbag" // BANDASTATION EDIT: Replace stasis bag sprites and remove modular stasis bag
 	breakout_time = 5 SECONDS
