@@ -101,7 +101,7 @@
  * * the_folder - aka user
  */
 /obj/structure/closet/body_bag/proc/perform_fold(mob/living/carbon/human/the_folder)
-	visible_message(span_notice("[the_folder] folds up [src]."))
+	visible_message(span_notice("[the_folder] сворачивает [src.declent_ru(ACCUSATIVE)]."))
 	the_folder.put_in_hands(undeploy_bodybag(the_folder.loc))
 
 /// Makes the bag into an item, returns that item
@@ -151,7 +151,7 @@
 	return TRUE
 
 /obj/structure/closet/body_bag/bluespace/perform_fold(mob/living/carbon/human/the_folder)
-	visible_message(span_notice("[the_folder] folds up [src]."))
+	visible_message(span_notice("[the_folder] сворачивает [src.declent_ru(ACCUSATIVE)]."))
 	var/obj/item/bodybag/folding_bodybag = undeploy_bodybag(the_folder.loc)
 	var/max_weight_of_contents = initial(folding_bodybag.w_class)
 	for(var/am in contents)
