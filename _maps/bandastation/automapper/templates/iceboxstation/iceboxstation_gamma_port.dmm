@@ -93,7 +93,7 @@
 /turf/open/floor/iron/smooth,
 /area/station/security/lockers)
 "E" = (
-/mob/living/simple_animal/hostile/asteroid/polarbear{
+/mob/living/basic/mining/polarbear{
 	move_force = 999;
 	name = "Louie"
 	},
@@ -107,7 +107,7 @@
 /turf/open/floor/plating/snowed/icemoon,
 /area/icemoon/surface/outdoors/nospawn)
 "H" = (
-/mob/living/simple_animal/hostile/asteroid/polarbear{
+/mob/living/basic/mining/polarbear{
 	move_force = 999;
 	name = "Dewey"
 	},
