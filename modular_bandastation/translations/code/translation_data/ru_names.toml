@@ -14476,7 +14476,7 @@ instrumental = "мешками для трупов"
 prepositional = "мешках для трупов"
 gender = "plural"
 
-["stasis bodybag"]
+["stasis body bag"]
 nominative = "стазис-мешок для трупов"
 genitive = "стазис-мешка для трупов"
 dative = "стазис-мешку для трупов"

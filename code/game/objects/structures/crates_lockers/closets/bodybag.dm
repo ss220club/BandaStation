@@ -597,7 +597,7 @@
 /obj/structure/closet/body_bag/environmental/stasis/proc/remove_stasis(mob/living/target)
 	target.remove_status_effect(/datum/status_effect/grouped/stasis, REF(src))
 	if(!INCAPACITATED_IGNORING(target, INCAPABLE_STASIS))
-		to_chat(target, span_notice("Вы снова чувствуете свои пальцы рук и ног."))
+		to_chat(target, span_notice("Вы снова чувствуете пальцы рук и ног."))
 	UnregisterSignal(target, COMSIG_LIVING_EARLY_UNARMED_ATTACK)
 
 /obj/structure/closet/body_bag/environmental/stasis/undeploy_bodybag(atom/fold_loc)
@@ -625,12 +625,12 @@
 	user.last_special = world.time + 6 SECONDS
 	user.visible_message(
 		span_warning("Что-то внутри [src.declent_ru(GENITIVE)] начинает шевелиться!"),
-		span_notice("Вы начинаете извиваться, пытаясь выбраться из [src.declent_ru(GENITIVE)]... (Это займёт около [DisplayTimeText(breakout_time)].)"),
+		span_notice("Вы начинаете извиваться, пытаясь выбраться из [src.declent_ru(GENITIVE)]... (Это займёт около [DisplayTimeText(breakout_time)])."),
 		span_hear("Вы слышите, как трещит ткань внутри [src.declent_ru(GENITIVE)]."),
 	)
 	if(do_after(user, breakout_time, src, timed_action_flags = IGNORE_TARGET_LOC_CHANGE, extra_checks = CALLBACK(src, PROC_REF(breakout_checks), user)))
 		user.visible_message(
-			span_danger("[user] выбирается из [src.declent_ru(GENITIVE)]!"),
+			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] выбирается из [src.declent_ru(GENITIVE)]!"),
 			span_notice("Вы успешно выбрались из [src.declent_ru(GENITIVE)]!"),
 		)
 		open(user, force = TRUE, special_effects = FALSE)
