@@ -292,10 +292,10 @@ GLOBAL_LIST_EMPTY(objectives)
 
 		control_computer.store_item(mob_occupant, item_to_store)
 
-	var/obj/item/disk/nuclear/disk = locate(/obj/item/disk/nuclear) in control_computer.get_all_contents()
-	if(disk)
-		var/datum/component/stationloving/loving = disk.GetComponent(/datum/component/stationloving)
-		if(loving)
+	if(control_computer)
+		var/obj/item/disk/nuclear/disk = locate(/obj/item/disk/nuclear) in control_computer.get_all_contents()
+		if(disk?.GetComponent(/datum/component/stationloving))
+			var/datum/component/stationloving/loving = disk.GetComponent(/datum/component/stationloving)
 			loving.relocate()
 
 /// Handles putting mob inside the cryopod by user
