@@ -53,7 +53,7 @@
 		to_chat(infector, span_warning("Разум цели защищён от воздействия Кхаарут."))
 		return FALSE
 	if(HAS_TRAIT(target, TRAIT_MINDSHIELD))
-		to_chat(infector, span_warning("Ментальный щит цели блокирует проникновение вируса."))
+		to_chat(infector, span_warning("Щит разума цели блокирует проникновение вируса."))
 		return FALSE
 	if(target.mind.has_antag_datum(/datum/antagonist/khaaroot_thrall))
 		to_chat(infector, span_warning("Цель уже является частью улья Кхаарут."))
@@ -307,6 +307,7 @@
 	antagpanel_category = "Khaaroot Hivemind"
 	show_in_antagpanel = FALSE
 	show_to_ghosts = FALSE
+	hud_icon = 'modular_bandastation/antagonists/icons/antag_hud.dmi'
 	antag_hud_name = "khaaroot_source"
 	ui_name = null
 	pref_flag = NONE
@@ -349,6 +350,7 @@
 	antagpanel_category = "Khaaroot Hivemind"
 	show_in_antagpanel = FALSE
 	show_to_ghosts = FALSE
+	hud_icon = 'modular_bandastation/antagonists/icons/antag_hud.dmi'
 	antag_hud_name = "khaaroot_thrall"
 	ui_name = null
 	pref_flag = NONE

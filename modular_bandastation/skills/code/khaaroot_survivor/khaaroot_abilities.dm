@@ -56,8 +56,8 @@
 		owner.balloon_alert(owner, "разум защищён")
 		return FALSE
 	if(HAS_TRAIT(target, TRAIT_MINDSHIELD))
-		to_chat(owner, span_warning("Ментальный щит цели блокирует проникновение вируса."))
-		owner.balloon_alert(owner, "ментальный щит")
+		to_chat(owner, span_warning("Щит разума цели блокирует проникновение вируса."))
+		owner.balloon_alert(owner, "Щит разума")
 		return FALSE
 	if(target.mind.has_antag_datum(/datum/antagonist/khaaroot_thrall))
 		to_chat(owner, span_warning("Цель уже является частью улья Кхаарут."))
