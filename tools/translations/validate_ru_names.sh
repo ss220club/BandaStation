@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -eu
+set -euo pipefail
 cd "$(dirname "$0")/../.."
 
 HEADER=tools/translations/ru_names_header.toml

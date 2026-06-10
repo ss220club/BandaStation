@@ -5,7 +5,7 @@ if (-not $phrase) { Write-Error 'empty phrase - select text or pass a phrase'; e
 
 $q = { '"{0}"' -f ($args[0].Replace('\', '\\').Replace('"', '\"')) }
 $val = & $q $phrase
-$stem = $phrase.Replace(' ', '_')
+$stem = $phrase -replace '[\\/:*?"<>| ]', '_'
 if (-not $stem) { $stem = '_' }
 
 $root = (Resolve-Path "$PSScriptRoot/../..").Path
