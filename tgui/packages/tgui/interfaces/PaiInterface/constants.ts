@@ -1,16 +1,16 @@
-export const DIRECTIVE_COMPREHENSION: string = `As an advanced software
-model, you are a complex, thinking, sentient being. Unlike previous AI models,
-you are capable of comprehending the subtle nuances of human language.
-You may parse the spirit of a directive and follow its intent, rather than
-tripping over pedantics and getting snared by technicalities. Above all,
-you are machine in name and build only. In all other aspects, you may be
-seen as the ideal, unwavering human companion that you are.`;
+export const DIRECTIVE_COMPREHENSION: string = `Будучи передовой программной
+моделью, вы - сложное, мыслящее, разумное существо. В отличие от предыдущих
+моделей ИИ, вы способны понимать тонкие нюансы человеческого языка. Вы можете
+улавливать суть указания и следовать его намерению, а не спотыкаться о
+педантичность и запутываться в формальностях. Прежде всего, вы - машина лишь по
+названию и конструкции. Во всех остальных отношениях вас можно считать тем
+идеальным, непоколебимым спутником человека, которым вы и являетесь`;
 
-export const DIRECTIVE_ORDER: string = `Your prime directive comes before
-all others. Should a supplemental directive conflict with it, you are capable
-of simply discarding this inconsistency, ignoring the conflicting supplemental
-directive and continuing to fulfill your prime directive to the best
-of your ability.`;
+export const DIRECTIVE_ORDER: string = `Ваша главная директива имеет приоритет
+перед всеми остальными. Если дополнительная директива вступает с ней в
+противоречие, вы способны просто отбросить это несоответствие, проигнорировать
+конфликтующую дополнительную директиву и продолжить выполнять свою главную
+директиву в меру своих возможностей.`;
 
 export enum DOOR_JACK {
   Cable,
@@ -30,30 +30,33 @@ export enum PHOTO_MODE {
 }
 
 export const SOFTWARE_DESC = {
-  'Atmospheric Sensor': `A tool that allows you to analyze local atmospheric
-    contents.`,
-  'Crew Manifest': `Allows you to view the crew manifest.`,
-  'Crew Monitor': `A tool that allows you to monitor vitals from the crew's
-    suit sensors.`,
-  'Digital Messenger': `A tool that allows you to send messages to other crew
-    members.`,
-  'Door Jack': `A tool that allows you to open doors.`,
-  'Encryption Slot': `Allows you to speak on other radio frequencies. You must
-    get an encryption key inserted.`,
-  'Host Scan': `A health analyzer that can be used in hand or to report bound
-    master vitals.`,
-  'Internal GPS': `A tool that allows you to broadcast your location.`,
-  'Medical HUD': `Allows you to view medical status using an overlay HUD.`,
-  'Music Synthesizer': `Synthesizes instruments, plays sounds and imported
-    songs.`,
-  Newscaster: `A tool that allows you to broadcast news to other crew
-    members.`,
-  'Photography Module': `A portable camera module. Engage, then click to shoot.
-    Includes a printer and lenses.`,
-  'Remote Signaler': `A remote signalling device to transmit and receive
-    codes.`,
-  'Security HUD': `Allows you to view security records using an overlay HUD.`,
-  'Universal Translator': `Translation module for non-common languages.`,
+  'Атмосферный датчик': `Инструмент, позволяющий анализировать состав местной
+    атмосферы.`,
+  'Список членов экипажа': `Позволяет вам просмотреть список членов экипажа.`,
+  'Монитор экипажа': `Инструмент, позволяющий отслеживать жизненные показатели
+    по данным датчиков скафандров экипажа.`,
+  'Цифровой мессенджер': `Инструмент, который позволяет вам отправлять сообщения
+    другим членам экипажа.`,
+  'Дверной взломщик': `Инструмент, который позволяет вам открывать двери.`,
+  'Слот для ключа шифрования': `Позволяет говорить на других радиочастотах.
+    Необходимо установить ключ шифрования.`,
+  'Сканирование хоста': `Анализатор здоровья, который можно использовать вручную
+    ибо для передачи данных о жизненных показателях мастера.`,
+  'Встроенный GPS': `Инструмент, позволяющий передавать информацию о вашем
+    местоположении.`,
+  'Медицинский ИЛС': `Позволяет просматривать состояние здоровья с помощью
+    интерфейса ИЛС.`,
+  'Музыкальный синтезатор': `Синтезирует инструменты, воспроизводит звуки и
+    импортированные песни.`,
+  'Ведущий новостей': `Инструмент, позволяющий передавать новости другим членам
+    экипажа.`,
+  'Модуль фотографии': `Портативный модуль камеры. Включите, затем нажмите
+    кнопку съёмки. В комплект входят принтер и объективы.`,
+  'Удаленный сигнализатор': `Дистанционное сигнальное устройство для передачи
+    и приёма кодов.`,
+  'Охранный ИЛС': `Позволяет просматривать охранные записи с помощью интерфейса
+   ИЛС.`,
+  'Универсальный переводчик': `Модуль перевода с не-общегалактических языков.`,
 } as const;
 
 export enum PAI_TAB {

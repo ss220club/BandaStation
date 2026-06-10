@@ -204,7 +204,7 @@
 /mob/living/silicon/try_inject(mob/user, target_zone, injection_flags)
 	. = ..()
 	if(!. && (injection_flags & INJECT_TRY_SHOW_ERROR_MESSAGE))
-		to_chat(user, span_alert("[p_Their()] outer shell is too tough."))
+		to_chat(user, span_alert("[ru_p_theirs()] внешняя оболочка слишком крепкая."))
 
 /proc/islinked(mob/living/silicon/robot/bot, mob/living/silicon/ai/ai)
 	if(!istype(bot) || !istype(ai))
@@ -259,13 +259,13 @@
 
 	if (href_list["printlawtext"]) // this is kinda backwards
 		if (href_list["dead"] && (!isdead(usr) && !usr.client.holder)) // do not print deadchat law notice if the user is now alive
-			to_chat(usr, span_warning("You cannot view law changes that were made while you were dead."))
+			to_chat(usr, span_warning("Вы не можете просмотреть изменения законов, внесённые, пока вы были мертвы."))
 			return
 		to_chat(usr, href_list["printlawtext"])
 
 	if(href_list["track"])
 		if(!can_track(href_list["track"]))
-			to_chat(src, span_info("This person is not currently on cameras."))
+			to_chat(src, span_info("В данный момент этого субъекта нет в поле зрения камер."))
 			return
 		var/mob/living/silicon/ai/AI
 		var/mob/living/silicon/robot/shell/shell
@@ -295,7 +295,7 @@
 	var/list/lawcache_hackedcheck = hackedcheck.Copy()
 	var/forced_log_message = "stating laws[force ? ", forced" : ""]"
 	//"radiomod" is inserted before a hardcoded message to change if and how it is handled by an internal radio.
-	say("[radiomod] Current Active Laws:", forced = forced_log_message)
+	say("[radiomod] Текущие действующие законы:", forced = forced_log_message)
 	sleep(1 SECONDS)
 
 	if (lawcache_zeroth)
@@ -344,49 +344,49 @@
 ///Gives you a link-driven interface for deciding what laws the statelaws() proc will share with the crew.
 /mob/living/silicon/proc/checklaws()
 	laws_sanity_check()
-	var/list = "<b>Which laws do you want to include when stating them for the crew?</b><br><br>"
+	var/list = "<b>Какие законы вы хотите включить при оглашении их экипажу?</b><br><br>"
 
-	var/law_display = "Yes"
+	var/law_display = "Да"
 	if (laws.zeroth)
 		if (!(laws.zeroth in lawcheck))
-			law_display = "No"
+			law_display = "Нет"
 		list += {"<a href='byond://?src=[REF(src)];lawc=0'>[law_display] 0:</a> <font color='#ff0000'><b>[laws.zeroth]</b></font><br>"}
 
 	for (var/index in 1 to length(laws.hacked))
-		law_display = "Yes"
+		law_display = "Да"
 		var/law = laws.hacked[index]
 		if (length(law) > 0)
 			if (!(law in hackedcheck))
-				law_display = "No"
+				law_display = "Нет"
 			list += {"<a href='byond://?src=[REF(src)];lawh=[index]'>[law_display] [ion_num()]:</a> <font color='#660000'>[law]</font><br>"}
 
 	for (var/index in 1 to length(laws.ion))
-		law_display = "Yes"
+		law_display = "Да"
 		var/law = laws.ion[index]
 		if (length(law) > 0)
 			if(!(law in ioncheck))
-				law_display = "No"
+				law_display = "Нет"
 			list += {"<a href='byond://?src=[REF(src)];lawi=[index]'>[law_display] [ion_num()]:</a> <font color='#547DFE'>[law]</font><br>"}
 
 	var/number = 1
 	for (var/index in 1 to length(laws.inherent))
-		law_display = "Yes"
+		law_display = "Да"
 		var/law = laws.inherent[index]
 		if (length(law) > 0)
 			if (!(law in lawcheck))
-				law_display = "No"
+				law_display = "Нет"
 			list += {"<a href='byond://?src=[REF(src)];lawc=[index]'>[law_display] [number]:</a> [law]<br>"}
 			number++
 
 	for (var/index in 1 to length(laws.supplied))
-		law_display = "Yes"
+		law_display = "Да"
 		var/law = laws.supplied[index]
 		if (length(law) > 0)
 			if (!(law in lawcheck))
-				law_display = "No"
+				law_display = "Нет"
 			list += {"<a href='byond://?src=[REF(src)];lawc=[number]'>[law_display] [number]:</a> <font color='#990099'>[law]</font><br>"}
 			number++
-	list += {"<br><br><a href='byond://?src=[REF(src)];laws=1'>State Laws</a>"}
+	list += {"<br><br><a href='byond://?src=[REF(src)];laws=1'>Огласить законы</a>"}
 
 	var/datum/browser/browser = new(usr, "laws")
 	browser.set_content(list)
@@ -399,17 +399,17 @@
 
 /mob/living/silicon/proc/set_autosay() //For allowing the AI and borgs to set the radio behavior of auto announcements (state laws, arrivals).
 	if(!radio)
-		to_chat(src, span_alert("Radio not detected."))
+		to_chat(src, span_alert("Радио не обнаружено."))
 		return
 
 	//Ask the user to pick a channel from what it has available.
-	var/chosen_channel = tgui_input_list(usr, "Select a channel", "Channel Selection", list("Default","None") + radio.channels)
+	var/chosen_channel = tgui_input_list(usr, "Выберите канал", "Выбор канала", list("По умолчанию","Никакой") + radio.channels)
 	if(isnull(chosen_channel))
 		return
-	if(chosen_channel == "Default") //Autospeak on whatever frequency to which the radio is set, usually Common.
+	if(chosen_channel == "По умолчанию") //Autospeak on whatever frequency to which the radio is set, usually Common.
 		radiomod = ";"
 		chosen_channel += " ([radio.get_frequency()])"
-	if(chosen_channel == "None") //Prevents use of the radio for automatic annoucements.
+	if(chosen_channel == "Никакой") //Prevents use of the radio for automatic annoucements.
 		radiomod = ""
 	else //For department channels, if any, given by the internal radio.
 		for(var/key in GLOB.department_radio_keys)
@@ -417,7 +417,7 @@
 				radiomod = ":" + key
 				break
 
-	to_chat(src, span_notice("Automatic announcements [chosen_channel == "None" ? "will not use the radio." : "set to [chosen_channel]."]"))
+	to_chat(src, span_notice("Автоматические объявления [chosen_channel == "Никакой" ? "не будут использовать радио." : "установить [chosen_channel]."]"))
 
 /mob/living/silicon/put_in_hand_check() // This check is for borgs being able to receive items, not put them in others' hands.
 	return FALSE
@@ -441,11 +441,11 @@
 		return
 	sensors_on = !sensors_on
 	if (!sensors_on)
-		to_chat(src, span_notice("Sensor overlay deactivated."))
+		to_chat(src, span_notice("Наложение датчиков отключено."))
 		remove_sensors()
 		return
 	add_sensors()
-	to_chat(src, span_notice("Sensor overlay activated."))
+	to_chat(src, span_notice("Активировано наложение датчиков."))
 
 /mob/living/silicon/proc/GetPhoto(mob/user)
 	if (aicamera)
@@ -523,7 +523,7 @@
 ///Places laws on the status panel for silicons
 /mob/living/silicon/get_status_tab_items()
 	. = ..()
-	var/list/law_list = list("Obey these laws:")
+	var/list/law_list = list("Соблюдайте эти законы:")
 	law_list += laws.get_law_list(include_zeroth = TRUE, render_html = FALSE)
 	for(var/borg_laws in law_list)
 		. += borg_laws

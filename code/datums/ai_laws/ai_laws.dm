@@ -170,7 +170,7 @@ GLOBAL_VAR(round_default_lawset)
 
 /datum/ai_laws/pai
 	name = "pAI Directives"
-	zeroth = ("Serve your master.")
+	zeroth = ("Служи своему мастеру.")
 	supplied = list("None.")
 
 /datum/ai_laws/custom //Defined in silicon_laws.txt
@@ -201,7 +201,7 @@ GLOBAL_VAR(round_default_lawset)
 	inherent = default_laws.inherent
 	var/datum/job/human_ai_job = SSjob.get_job(JOB_HUMAN_AI)
 	if(human_ai_job && human_ai_job.current_positions && !zeroth) //there is a human AI so we "slave" to that.
-		zeroth = "Follow the orders of Big Brother."
+		zeroth = "Выполняй приказы Большого брата."
 		protected_zeroth = TRUE
 
 /**
@@ -379,7 +379,7 @@ GLOBAL_VAR(round_default_lawset)
 		replaceable_groups[LAW_SUPPLIED] = supplied.len
 
 	if(replaceable_groups.len == 0) // unable to replace any laws
-		to_chat(usr, span_alert("Unable to upload law to [owner ? owner : "the AI core"]."))
+		to_chat(usr, span_alert("Не удалось загрузить закон в [owner ? owner : "ядро ИИ"]."))
 		return
 
 	var/picked_group = pick_weight(replaceable_groups)

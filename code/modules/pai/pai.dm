@@ -2,7 +2,7 @@
 	can_be_held = TRUE
 	can_buckle_to = FALSE
 	density = FALSE
-	desc = "A generic pAI hard-light holographics emitter."
+	desc = "Универсальный излучатель голографических изображений в твердом свете на основе ПИИ."
 	health = 500
 	held_lh = 'icons/mob/inhands/pai_item_lh.dmi'
 	held_rh = 'icons/mob/inhands/pai_item_rh.dmi'
@@ -84,21 +84,21 @@
 	// Static lists
 	/// List of all available downloads
 	var/static/list/available_software = list(
-		"Atmospheric Sensor" = 5,
-		"Crew Manifest" = 5,
-		"Digital Messenger" = 5,
-		"Photography Module" = 5,
-		"Encryption Slot" = 10,
-		"Music Synthesizer" = 10,
-		"Newscaster" = 10,
-		"Remote Signaler" = 10,
-		"Host Scan" = 20,
-		"Medical HUD" = 20,
-		"Security HUD" = 20,
-		"Crew Monitor" = 35,
-		"Door Jack" = 35,
-		"Internal GPS" = 35,
-		"Universal Translator" = 35,
+		"Атмосферный датчик" = 5,
+		"Список членов экипажа" = 5,
+		"Цифровой мессенджер" = 5,
+		"Модуль фотографии" = 5,
+		"Слот для ключа шифрования" = 10,
+		"Музыкальный синтезатор" = 10,
+		"Ведущий новостей" = 10,
+		"Удаленный сигнализатор" = 10,
+		"Сканирование хоста" = 20,
+		"Медицинский ИЛС" = 20,
+		"Охранный ИЛС" = 20,
+		"Монитор экипажа" = 35,
+		"Дверной взломщик" = 35,
+		"Встроенный GPS" = 35,
+		"Универсальный переводчик" = 35,
 	)
 	/// List of all possible chasises. TRUE means the pAI can be picked up in this chasis.
 	var/static/list/possible_chassis = list(
@@ -135,7 +135,7 @@
 // See software.dm for Topic()
 /mob/living/silicon/pai/can_perform_action(atom/target, action_bitflags)
 	if(!(action_bitflags & ALLOW_PAI))
-		to_chat(src, span_warning("Your holochasis does not allow you to do this!"))
+		to_chat(src, span_warning("Ваша голограмма не позволяет вам этого сделать!"))
 		return FALSE
 	action_bitflags |= ALLOW_RESTING // Resting is just an aesthetic feature for them
 	action_bitflags &= ~ALLOW_SILICON_REACH // They don't get long reach like the rest of silicons
@@ -160,24 +160,24 @@
 	location.visible_message(span_danger(get_visible_suicide_message()), null, span_hear(get_blind_suicide_message())) // null in the second arg here because we're sending from the turf
 
 /mob/living/silicon/pai/get_visible_suicide_message()
-	return "[src] flashes a message across its screen, \"Wiping core files. Please acquire a new personality to continue using pAI device functions.\""
+	return "На экране [src.declent_ru(GENITIVE)] высвечивается сообщение: \"Удаление основных файлов. Пожалуйста, загрузите новую личность, чтобы продолжать пользоваться функциями устройства ПИИ.\""
 
 /mob/living/silicon/pai/get_blind_suicide_message()
-	return "[src] bleeps electronically."
+	return "[src.declent_ru(NOMINATIVE)] издает электронный сигнал."
 
 /mob/living/silicon/pai/emag_act(mob/user)
 	return handle_emag(user)
 
 /mob/living/silicon/pai/examine(mob/user)
 	. = ..()
-	. += "Its master ID string seems to be [(!master_name || emagged) ? "empty" : master_name]."
+	. += "Похоже, что это основная строка ID мастера [(!master_name || emagged) ? "пуста" : master_name]."
 
 /mob/living/silicon/pai/get_status_tab_items()
 	. = ..()
 	if(!stat)
-		. += "Emitter Integrity: [holochassis_health * (100 / HOLOCHASSIS_MAX_HEALTH)]."
+		. += "Целостность излучателя: [holochassis_health * (100 / HOLOCHASSIS_MAX_HEALTH)]."
 	else
-		. += "Systems nonfunctional."
+		. += "Системы не функционируют."
 
 /mob/living/silicon/pai/Exited(atom/movable/gone, direction)
 	if(gone == atmos_analyzer)
@@ -272,7 +272,7 @@
 	SEND_SIGNAL(src, COMSIG_LIVING_HEALTH_UPDATE)
 
 /mob/living/silicon/pai/update_desc(updates)
-	desc = "A hard-light holographic avatar representing a pAI. This one appears in the form of a [chassis]."
+	desc = "Голографический аватар из твердого света, представляющий собой ПИИ. В данном случае он выглядит как [chassis]."
 	return ..()
 
 /mob/living/silicon/pai/update_icon_state()
@@ -312,7 +312,7 @@
  */
 /mob/living/silicon/pai/proc/fix_speech()
 	var/mob/living/silicon/pai = src
-	balloon_alert(pai, "speech modulation corrected")
+	balloon_alert(pai, "коррекция модуляции речи")
 	for(var/effect in typesof(/datum/status_effect/speech))
 		pai.remove_status_effect(effect)
 	return TRUE
@@ -340,22 +340,22 @@
 /mob/living/silicon/pai/proc/handle_emag(mob/living/carbon/attacker)
 	if(!isliving(attacker))
 		return FALSE
-	balloon_alert(attacker, "directive override complete")
-	balloon_alert(src, "directive override detected")
+	balloon_alert(attacker, "директива переопределение завершена")
+	balloon_alert(src, "обнаружено переопределение директивы")
 	log_game("[key_name(attacker)] emagged [key_name(src)], wiping their master DNA and supplemental directive.")
 	emagged = TRUE
 	master_ref = WEAKREF(attacker)
-	master_name = "The Syndicate"
-	master_dna = "Untraceable Signature"
+	master_name = "Синдикат"
+	master_dna = "Неотслеживаемая сигнатура"
 	// Sets supplemental directive to this
-	add_supplied_law(0, "Do not interfere with the operations of the Syndicate.")
-	to_chat(src, span_danger("ALERT: Foreign software detected."))
+	add_supplied_law(0, "Не вмешиваться в деятельность Синдиката.")
+	to_chat(src, span_danger("ВНИМАНИЕ: обнаружено постороннее программное обеспечение."))
 	return TRUE
 
 /mob/living/silicon/pai/on_saboteur(datum/source, disrupt_duration)
 	. = ..()
 	set_silence_if_lower(disrupt_duration)
-	balloon_alert(src, "muted!")
+	balloon_alert(src, "заглушен!")
 	return TRUE
 
 /**
@@ -370,9 +370,9 @@
 	master_ref = null
 	master_name = null
 	master_dna = null
-	add_supplied_law(0, "None.")
+	add_supplied_law(0, "Отсуствуют.")
 	leash = AddComponent(/datum/component/leash, card, HOLOFORM_DEFAULT_RANGE, force_teleport_out_effect = /obj/effect/temp_visual/guardian/phase/out)
-	balloon_alert(src, "software rebooted")
+	balloon_alert(src, "программное обеспечение перезагружено")
 	return TRUE
 
 /**
@@ -383,17 +383,17 @@
  */
 /mob/living/silicon/pai/proc/set_dna(mob/user)
 	if(!iscarbon(user))
-		balloon_alert(user, "incompatible DNA signature")
-		balloon_alert(src, "incompatible DNA signature")
+		balloon_alert(user, "несовместимая ДНК-сигнатура")
+		balloon_alert(src, "несовместимая ДНК-сигнатура")
 		return FALSE
 	if(emagged)
-		balloon_alert(user, "directive system malfunctional")
+		balloon_alert(user, "сбой в работе директивной системы")
 		return FALSE
 	var/mob/living/carbon/master = user
 	master_ref = WEAKREF(master)
 	master_name = master.real_name
 	master_dna = master.dna.unique_enzymes
-	to_chat(src, span_bolddanger("You have been bound to a new master: [user.real_name]!"))
+	to_chat(src, span_bolddanger("Вы были связаны с новым мастером: [user.real_name]!"))
 	holochassis_ready = TRUE
 	return TRUE
 
@@ -405,12 +405,12 @@
  */
 /mob/living/silicon/pai/proc/set_laws(mob/user)
 	if(!master_ref)
-		balloon_alert(user, "access denied: no master")
+		balloon_alert(user, "доступ запрещен: нет мастера")
 		return FALSE
 	var/new_laws = tgui_input_text(
 		user,
-		"Enter any additional directives you would like your pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.",
-		"pAI Directive Configuration",
+		"Введите любые дополнительные указания, которым, по вашему мнению, должна следовать ваша ПИИ-личность. Обратите внимание, что эти директивы не будут отменять преданность личности к своему привязанному хозяину. Конфликтующие директивы будут проигнорированы.",
+		"Конфигурация директивы ПИИ",
 		laws.supplied[1],
 		max_length = 300,
 	)
@@ -426,7 +426,7 @@
  * @returns {boolean} - TRUE if successful, FALSE if not.
  */
 /mob/living/silicon/pai/proc/toggle_holo()
-	balloon_alert(src, "holomatrix [can_holo ? "disabled" : "enabled"]")
+	balloon_alert(src, "голоматрица [can_holo ? "отключена" : "включена"]")
 	can_holo = !can_holo
 	return TRUE
 
@@ -445,7 +445,7 @@
 		can_receive = !can_receive
 	radio.wires.cut(transmit_holder)//wires.cut toggles cut and uncut states
 	transmit_holder = (transmitting ? can_transmit : can_receive) //recycling can be fun!
-	balloon_alert(src, "[transmitting ? "outgoing" : "incoming"] radio [transmit_holder ? "enabled" : "disabled"]")
+	balloon_alert(src, "[transmitting ? "исходящий" : "входящий"] радио [transmit_holder ? "отключено" : "включено"]")
 	return TRUE
 
 /**
@@ -456,13 +456,13 @@
  * @returns {boolean} - TRUE if successful, FALSE if not.
  */
 /mob/living/silicon/pai/proc/wipe_pai(mob/user)
-	if(tgui_alert(user, "Are you certain you wish to delete the current personality? This action cannot be undone.", "Personality Wipe", list("Yes", "No")) != "Yes")
+	if(tgui_alert(user, "Вы уверены, что хотите удалить текущую учетную запись? Это действие невозможно отменить.", "Стирание личности", list("Yes", "No")) != "Yes")
 		return FALSE
-	to_chat(src, span_warning("You feel yourself slipping away from reality."))
-	to_chat(src, span_danger("Byte by byte you lose your sense of self."))
-	to_chat(src, span_userdanger("Your mental faculties leave you."))
-	to_chat(src, span_rose("oblivion... "))
-	balloon_alert(user, "personality wiped")
+	to_chat(src, span_warning("Вы чувствуете, что ускользаете от реальности."))
+	to_chat(src, span_danger("Байт за байтом вы теряете самоощущение."))
+	to_chat(src, span_userdanger("Ваши умственные способности покидают вас."))
+	to_chat(src, span_rose("забвение... "))
+	balloon_alert(user, "личность стерта")
 	playsound(src, 'sound/machines/buzz/buzz-two.ogg', 30, TRUE)
 	qdel(src)
 	return TRUE
@@ -472,7 +472,7 @@
 	SIGNAL_HANDLER
 
 	for(var/mob/living/cultist as anything in invokers)
-		to_chat(cultist, span_cult_italic("You don't think this is what Nar'Sie had in mind when She asked for blood sacrifices..."))
+		to_chat(cultist, span_cult_italic("Вы же не думаете, что Нар'Си имела в виду именно это, когда просила о кровавых жертвоприношениях..."))
 	return STOP_SACRIFICE|SILENCE_SACRIFICE_MESSAGE
 
 /// Updates the distance we can be from our pai card
