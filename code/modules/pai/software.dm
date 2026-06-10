@@ -38,7 +38,7 @@
 		return TRUE
 	// Software related ui actions
 	if(available_software[action] && !installed_software.Find(action))
-		balloon_alert(ui.user, "software unavailable!")
+		balloon_alert(ui.user, "программное обеспечение недоступно!")
 		return FALSE
 	switch(action)
 		if("Atmospheric Sensor")
