@@ -1293,3 +1293,56 @@ $border-width-px: $border-width * 1px;
 .looc {
   color: #6699cc;
 }
+
+// CLOCK CULT ADDITION
+.brass {
+  color: hsl(42.6, 100%, 37.3%);
+}
+
+.big_brass {
+  color: hsl(42.6, 100%, 37.3%);
+  font-weight: bold;
+  font-style: italic;
+  font-size: 185%;
+}
+
+.clockyellow {
+  color: hsl(45.2, 80.2%, 47.5%);
+  font-weight: bold;
+  font-style: italic;
+}
+
+.clockgray {
+  color: hsl(214, 8.3%, 28%);
+  font-weight: bold;
+  font-style: italic;
+}
+
+.clockred {
+  color: hsl(345, 100%, 21.6%);
+  font-weight: bold;
+  font-style: italic;
+}
+
+.ratvar {
+  color: hsl(42.6, 100%, 37.3%);
+  font-size: 48px;
+  font-weight: bold;
+  font-style: italic;
+  animation: ratvarcolor 5000ms infinite;
+}
+
+@keyframes ratvarcolor {
+  0% { color: hsl(0, 0%, 5.1%); }
+  9% { color: hsl(42.6, 100%, 37.3%); }
+  18% { color: hsl(0, 0%, 5.1%); }
+  27% { color: hsl(214, 8.3%, 28%); }
+  36% { color: hsl(0, 0%, 5.1%); }
+  45% { color: hsl(300, 100%, 34.1%); }
+  54% { color: hsl(0, 0%, 5.1%); }
+  63% { color: hsl(208.5, 72.8%, 50%); }
+  72% { color: hsl(0, 0%, 5.1%); }
+  81% { color: hsl(45.2, 80.2%, 47.5%); }
+  90% { color: hsl(0, 0%, 5.1%); }
+  100% { color: hsl(345, 100%, 21.6%); }
+}

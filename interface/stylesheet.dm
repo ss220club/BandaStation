@@ -158,4 +158,11 @@ h1.alert, h2.alert		{color: #000000;}
 .upside_down			{display: inline; -moz-transform: scale(-1, -1); -webkit-transform: scale(-1, -1); -o-transform: scale(-1, -1); -ms-transform: scale(-1, -1); transform: scale(-1, -1);}
 
 .cyan					{color: #bde0dc;}
+
+.brass					{color: #BE8700;}
+.big_brass				{color: #BE8700; font-size: 3; font-weight: bold; font-style: italic;}
+.clockyellow			{color: #DAAA18; font-weight: bold; font-style: italic;}
+.clockgray				{color: #42474D; font-weight: bold; font-style: italic;}
+.clockred				{color: #6E001A; font-weight: bold; font-style: italic;}
+.ratvar					{color: #BE8700; font-size: 6; font-weight: bold; font-style: italic;}
 </style>"}
