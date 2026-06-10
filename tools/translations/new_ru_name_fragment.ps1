@@ -9,7 +9,7 @@ $stem = $phrase.Replace(' ', '_')
 if (-not $stem) { $stem = '_' }
 
 $root = (Resolve-Path "$PSScriptRoot/../..").Path
-$dir = "$root/modular_bandastation/translations/code/translation_data/ru_names"
+$dir = "$root/modular_bandastation/translations/public/ru_names"
 $path = Join-Path $dir "$stem.toml"
 New-Item -ItemType Directory -Force -Path $dir | Out-Null
 
