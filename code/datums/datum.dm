@@ -123,7 +123,6 @@
  * Returns [QDEL_HINT_QUEUE]
  */
 /datum/proc/Destroy(force = FALSE)
-	PROTECTED_PROC(TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	tag = null
