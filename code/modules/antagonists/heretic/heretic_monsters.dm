@@ -1,6 +1,6 @@
 ///Tracking reasons
 /datum/antagonist/heretic_monster
-	name = "\improper Потусторонний ужас"
+	name = "Потусторонний ужас"
 	roundend_category = "Еретики"
 	antagpanel_category = ANTAG_GROUP_HORRORS
 	antag_moodlet = /datum/mood_event/heretics
@@ -47,5 +47,5 @@
 
 	objectives += master_obj
 	owner.announce_objectives()
-	to_chat(owner, span_boldnotice("Вы - [ishuman(owner.current) ? "возвращённый труп":"ужасное создание, принесённое"] в этот мир через врата Мансуса"))
-	to_chat(owner, span_notice("Твой хозяин - [master.declent_ru(NOMINATIVE)]. Помогай ему во всех деяниях."))
+	to_chat(owner, span_boldnotice("Вы - [ishuman(owner.current) ? "возвращённый труп":"ужасное создание, принесённое"] в этот мир через врата Мансуса."))
+	to_chat(owner, span_notice("Твой хозяин - [master]. Помогай ему во всех деяниях."))
