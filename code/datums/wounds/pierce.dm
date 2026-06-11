@@ -169,7 +169,7 @@
 
 	playsound(user, 'sound/items/handling/surgery/cautery2.ogg', 75, TRUE)
 
-	var/bleeding_wording = (!limb.can_bleed() ? "дыр" : "кровотечений")
+	var/bleeding_wording = (limb.can_bleed() ? "кровотечений" : "дыр")
 	user.visible_message(span_green("[capitalize(user.declent_ru(NOMINATIVE))] прижигает часть [bleeding_wording] на [victim.declent_ru(PREPOSITIONAL)]."), span_green("Вы прижигаете часть [bleeding_wording] на [victim.declent_ru(PREPOSITIONAL)]."))
 	victim.apply_damage(2 + severity, BURN, limb, wound_bonus = CANT_WOUND)
 	if(prob(30))

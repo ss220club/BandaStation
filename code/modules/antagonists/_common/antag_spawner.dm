@@ -63,7 +63,7 @@
 /obj/item/antag_spawner/contract/proc/poll_for_student(mob/living/carbon/human/teacher, apprentice_school)
 	balloon_alert(teacher, "contacting apprentice...")
 	polling = TRUE
-	var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Do you want to play as [span_danger("[teacher]'s")] [span_notice("[apprentice_school] apprentice")]?", check_jobban = ROLE_WIZARD, role = ROLE_WIZARD, poll_time = 15 SECONDS, checked_target = src, alert_pic = /obj/item/clothing/head/wizard/red, jump_target = src, role_name_text = "wizard apprentice", chat_text_border_icon = /obj/item/clothing/head/wizard/red)
+	var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Do you want to play as [span_danger("[teacher]'s")] [span_notice("[apprentice_school] apprentice")]?", check_jobban = ROLE_WIZARD_MIDROUND, role = ROLE_WIZARD_MIDROUND, poll_time = 15 SECONDS, checked_target = src, alert_pic = /obj/item/clothing/head/wizard/red, jump_target = src, role_name_text = "wizard apprentice", chat_text_border_icon = /obj/item/clothing/head/wizard/red)
 	polling = FALSE
 	if(isnull(chosen_one))
 		to_chat(teacher, span_warning("Unable to reach your apprentice! You can either attack the spellbook with the contract to refund your points, or wait and try again later."))
@@ -76,7 +76,7 @@
 /obj/item/antag_spawner/contract/spawn_antag(client/C, turf/T, kind, datum/mind/user)
 	new /obj/effect/particle_effect/fluid/smoke(T)
 	var/mob/living/carbon/human/M = new/mob/living/carbon/human(T)
-	C.prefs.safe_transfer_prefs_to(M, is_antag = TRUE)
+	C.prefs.safe_transfer_prefs_to(M, is_antag = TRUE) // BANDASTATION MOD - Do not apply body mods on roles
 	M.PossessByPlayer(C.key)
 	var/datum/mind/app_mind = M.mind
 
@@ -152,7 +152,7 @@
 
 /obj/item/antag_spawner/nuke_ops/spawn_antag(client/our_client, turf/T, kind, datum/mind/user)
 	var/mob/living/carbon/human/nukie = new()
-	our_client.prefs.safe_transfer_prefs_to(nukie, is_antag = TRUE)
+	our_client.prefs.safe_transfer_prefs_to(nukie, is_antag = TRUE) // BANDASTATION MOD - Do not apply body mods on roles
 	nukie.ckey = our_client.key
 	var/datum/mind/op_mind = nukie.mind
 	if(length(GLOB.newplayer_start)) // needed as hud code doesn't render huds if the atom (in this case the nukie) is in nullspace, so just move the nukie somewhere safe
@@ -185,8 +185,8 @@
 
 /obj/item/antag_spawner/nuke_ops/overwatch/Initialize(mapload)
 	. = ..()
-	if(length(GLOB.nukeop_overwatch_start)) //Otherwise, it will default to the datum's spawn point anyways
-		spawn_location = pick(GLOB.nukeop_overwatch_start)
+	if(length(GLOB.nukeop_base_overwatch_start)) //Otherwise, it will default to the datum's spawn point anyways
+		spawn_location = pick(GLOB.nukeop_base_overwatch_start)
 
 //////CLOWN OP
 /obj/item/antag_spawner/nuke_ops/clown
@@ -272,7 +272,7 @@
 		return
 	if(used)
 		return
-	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(check_jobban = ROLE_ALIEN, role = ROLE_ALIEN, poll_time = 5 SECONDS, checked_target = src, alert_pic = demon_type, jump_target = src, role_name_text = initial(demon_type.name))
+	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(check_jobban = ROLE_SENTIENCE, role = ROLE_SENTIENCE, poll_time = 5 SECONDS, checked_target = src, alert_pic = demon_type, jump_target = src, role_name_text = initial(demon_type.name))
 	if(chosen_one)
 		if(used || QDELETED(src))
 			return
@@ -373,7 +373,7 @@
 /obj/item/antag_spawner/loadout/spawn_antag(client/our_client, turf/T, mob/user)
 	var/mob/living/spawned_mob = new spawn_type()
 	var/obj/structure/closet/supplypod/pod = setup_pod()
-	our_client.prefs.safe_transfer_prefs_to(spawned_mob, is_antag = TRUE)
+	our_client.prefs.safe_transfer_prefs_to(spawned_mob, is_antag = TRUE) // BANDASTATION MOD - Do not apply body mods on roles
 	spawned_mob.ckey = our_client.key
 	var/datum/mind/op_mind = spawned_mob.mind
 	if(length(GLOB.newplayer_start)) // needed as hud code doesn't render huds if the atom (in this case the spawned_mob) is in nullspace, so just move the spawned_mob somewhere safe

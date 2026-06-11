@@ -1611,6 +1611,24 @@ instrumental = "энергетической наплечной кобурой"
 prepositional = "энергетической наплечной кобуре"
 gender = "female"
 
+["psyker holster"]
+nominative = "кобура псайкера"
+genitive = "кобуры псайкера"
+dative = "кобуре псайкера"
+accusative = "кобуру псайкера"
+instrumental = "кобурой псайкера"
+prepositional = "кобуре псайкера"
+gender = "female"
+
+["tacticool holster"]
+nominative = "тактическая наплечная кобура"
+genitive = "тактической наплечной кобуры"
+dative = "тактической наплечной кобуре"
+accusative = "тактическую наплечную кобуру"
+instrumental = "тактической наплечной кобурой"
+prepositional = "тактической наплечной кобуре"
+gender = "female"
+
 ["security officer's locker"]
 nominative = "шкафчик офицера охраны"
 genitive = "шкафчика офицера охраны"
@@ -1700,6 +1718,24 @@ accusative = "пуленепробиваемый шлем"
 instrumental = "пуленепробиваемым шлемом"
 prepositional = "пуленепробиваемом шлеме"
 gender = "male"
+
+["ammo vest"]
+nominative = "разгрузка под магазины"
+genitive = "разгрузки под магазины"
+dative = "разгрузке под магазины"
+accusative = "разгрузку под магазины"
+instrumental = "разгрузкой под магазины"
+prepositional = "разгрузке под магазины"
+gender = "female"
+
+["black ammo vest"]
+nominative = "тёмная разгрузка под магазины"
+genitive = "тёмной разгрузки под магазины"
+dative = "тёмной разгрузке под магазины"
+accusative = "тёмную разгрузку под магазины"
+instrumental = "тёмной разгрузкой под магазины"
+prepositional = "тёмной разгрузке под магазины"
+gender = "female"
 
 ["riot suit"]
 nominative = "броня для подавления беспорядков"

@@ -128,6 +128,10 @@
 	var/delay_residual = 0.0
 	// BANDASTATION ADDITION - END
 
+
+	///Rate at which volume goes down to 0. Not controlled in menu.
+	var/exponential_falloff = 4
+
 /datum/song/New(atom/parent, list/instrument_ids, new_range)
 	SSinstruments.on_song_new(src)
 	lines = list()

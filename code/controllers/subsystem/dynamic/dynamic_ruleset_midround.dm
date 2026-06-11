@@ -232,7 +232,7 @@
 	candidate.transfer_to(body, force_key_move = TRUE) // yoinks the candidate's client
 	if(ishuman(body))
 		var/mob/living/carbon/human/human_body = body
-		body.client?.prefs.safe_transfer_prefs_to(body)
+		body.client?.prefs.safe_transfer_prefs_to(body, is_antag = TRUE) // BANDASTATION MOD - Do not apply body mods on roles
 		human_body.dna.remove_all_mutations()
 		human_body.dna.update_dna_identity()
 
@@ -1058,7 +1058,7 @@
 	candidate_role = "Slaughter Demon"
 	// preview_antag_datum = /datum/antagonist/slaughter // Doesn't actually have its own pref
 	midround_type = HEAVY_MIDROUND
-	jobban_flag = ROLE_ALIEN
+	jobban_flag = ROLE_SENTIENCE
 	ruleset_flags = RULESET_INVADER
 	weight = 0
 	min_pop = 20
