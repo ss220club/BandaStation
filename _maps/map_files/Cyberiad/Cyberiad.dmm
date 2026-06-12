@@ -16252,6 +16252,15 @@
 /obj/structure/table,
 /obj/item/electronics/apc,
 /obj/item/electronics/airlock,
+/obj/item/assembly/control/crematorium{
+	id = "crematoriumChapel";
+	pixel_y = 10;
+	pixel_x = -5
+	},
+/obj/item/assembly/control/crematorium{
+	id = "crematoriumChapel";
+	pixel_y = 10
+	},
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
 "dUv" = (
@@ -92456,7 +92465,9 @@
 	},
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/light/directional/south,
-/obj/machinery/bouldertech/refinery/smelter,
+/obj/machinery/bouldertech/refinery/smelter{
+	dir = 4
+	},
 /turf/open/floor/iron/small,
 /area/station/cargo/storage/ghetto)
 "wEY" = (

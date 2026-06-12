@@ -439,7 +439,7 @@
 		return ..()
 	var/mob/living/carbon/C = target
 	if(C.stat)
-		to_chat(user, span_warning("Было бы бесчестно нападать на врага, пока он не может нанести ответный удар."))
+		to_chat(user, span_warning("Было бы бесчестно нападать на врага, пока он не может отбиться."))
 		return
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(!HAS_TRAIT(src, TRAIT_WIELDED))
