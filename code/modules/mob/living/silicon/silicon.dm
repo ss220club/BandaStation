@@ -204,7 +204,7 @@
 /mob/living/silicon/try_inject(mob/user, target_zone, injection_flags)
 	. = ..()
 	if(!. && (injection_flags & INJECT_TRY_SHOW_ERROR_MESSAGE))
-		to_chat(user, span_alert("[ru_p_theirs()] внешняя оболочка слишком крепкая."))
+		to_chat(user, span_alert("[capitalize(ru_p_theirs())] внешняя оболочка слишком крепкая."))
 
 /proc/islinked(mob/living/silicon/robot/bot, mob/living/silicon/ai/ai)
 	if(!istype(bot) || !istype(ai))
