@@ -445,7 +445,7 @@
 		can_receive = !can_receive
 	radio.wires.cut(transmit_holder)//wires.cut toggles cut and uncut states
 	transmit_holder = (transmitting ? can_transmit : can_receive) //recycling can be fun!
-	balloon_alert(src, "[transmitting ? "исходящий" : "входящий"] радио [transmit_holder ? "отключено" : "включено"]")
+	balloon_alert(src, "[transmitting ? "исходящее" : "входящее"] радио [transmit_holder ? "отключено" : "включено"]")
 	return TRUE
 
 /**
