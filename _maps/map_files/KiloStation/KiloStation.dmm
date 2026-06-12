@@ -47983,7 +47983,9 @@
 	dir = 8;
 	id = "mining"
 	},
-/obj/machinery/bouldertech/refinery/smelter,
+/obj/machinery/bouldertech/refinery/smelter{
+	dir = 4
+	},
 /turf/open/floor/iron/dark,
 /area/station/cargo/miningoffice)
 "pNZ" = (
