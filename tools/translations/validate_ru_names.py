@@ -25,7 +25,10 @@ if __name__ == "__main__":
         sys.exit(f"usage: {sys.argv[0]} <bundle.toml>")
     try:
         with open(sys.argv[1], "rb") as f:
-            validate(tomllib.load(f), {"type": "object", "additionalProperties": ENTRY})
+            bundle = tomllib.load(f)
+            validate(bundle, {"type": "object", "additionalProperties": ENTRY})
     except (tomllib.TOMLDecodeError, ValidationError) as err:
         print(err, file=sys.stderr)
         sys.exit(1)
+
+    print(f"No translation issues found: {len(bundle)} entries in {sys.argv[1]}")

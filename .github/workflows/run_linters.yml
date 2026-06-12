@@ -122,7 +122,7 @@ jobs:
         with:
           filters: |
             run_ru_names:
-              - 'modular_bandastation/translations/code/translation_data/ru_names/**'
+              - 'modular_bandastation/translations/public/ru_names/**'
               - 'tools/translations/**'
       - name: Validate Translations
         if: steps.linter-setup.conclusion == 'success' && !cancelled() && steps.ru-names-filter.outputs.run_ru_names == 'true'
