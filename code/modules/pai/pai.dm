@@ -405,7 +405,7 @@
  */
 /mob/living/silicon/pai/proc/set_laws(mob/user)
 	if(!master_ref)
-		balloon_alert(user, "доступ запрещен: нет мастера")
+		balloon_alert(user, "доступ запрещён: нет мастера")
 		return FALSE
 	var/new_laws = tgui_input_text(
 		user,
