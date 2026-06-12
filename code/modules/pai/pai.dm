@@ -163,7 +163,7 @@
 	return "На экране [src.declent_ru(GENITIVE)] высвечивается сообщение: \"Удаление основных файлов. Пожалуйста, загрузите новую личность, чтобы продолжать пользоваться функциями устройства ПИИ.\""
 
 /mob/living/silicon/pai/get_blind_suicide_message()
-	return "[src.declent_ru(NOMINATIVE)] издает электронный сигнал."
+	return "[capitalize(src.declent_ru(NOMINATIVE))] издает электронный сигнал."
 
 /mob/living/silicon/pai/emag_act(mob/user)
 	return handle_emag(user)
