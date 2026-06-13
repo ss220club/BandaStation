@@ -19,8 +19,7 @@
 
 /obj/machinery/stove/Initialize(mapload)
 	. = ..()
-	var/datum/component/stove/stove_component = AddComponent(/datum/component/stove, container_x = -6, container_y = 16)
-	AddComponent(/datum/component/item_igniter, stove_component)
+	AddComponent(/datum/component/stove, container_x = -6, container_y = 16)
 
 // Soup pot for cooking soup
 // Future addention ideas:

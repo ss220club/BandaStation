@@ -145,6 +145,11 @@
 			return COMPONENT_NO_AFTERATTACK
 
 	if(!attacking_item.is_open_container())
+		// BANDASTATION EDIT START: expose non-container items to the active stove burner.
+		if(on)
+			INVOKE_ASYNC(src, PROC_REF(try_fire_act_item), source, attacking_item, user)
+			return COMPONENT_NO_AFTERATTACK
+		// BANDASTATION EDIT END
 		return
 	if(!isnull(container))
 		to_chat(user, span_warning("Вы не посмеете приготовить два разных блюда в одной печи. \
@@ -155,6 +160,26 @@
 		add_container(attacking_item, user)
 		to_chat(user, span_notice("Вы перемещаете [attacking_item.declent_ru(ACCUSATIVE)] на [parent.declent_ru(ACCUSATIVE)]."))
 	return COMPONENT_NO_AFTERATTACK
+
+// BANDASTATION EDIT START: signal handlers cannot sleep, so delayed burner exposure lives here.
+/datum/component/stove/proc/try_fire_act_item(obj/machinery/source, obj/item/attacking_item, mob/user)
+	if(QDELETED(source) || QDELETED(attacking_item) || QDELETED(user) || !on)
+		return
+
+	user.visible_message(
+		span_warning("[user] подносит [attacking_item.declent_ru(ACCUSATIVE)] к включённой конфорке [source.declent_ru(GENITIVE)]."),
+		span_warning("Вы подносите [attacking_item.declent_ru(ACCUSATIVE)] к включённой конфорке [source.declent_ru(GENITIVE)]."),
+	)
+
+	var/fire_act_delay = choose_delay(attacking_item) || 1.5 SECONDS
+	if(!do_after(user, fire_act_delay, target = attacking_item) || QDELETED(attacking_item) || !on)
+		return
+	attacking_item.fire_act()
+
+/datum/component/stove/proc/choose_delay(obj/item/attacking_item)
+	var/static/list/delay_by_w_class = list( WEIGHT_CLASS_TINY = 0.5 SECONDS, WEIGHT_CLASS_SMALL = 1 SECONDS, WEIGHT_CLASS_NORMAL = 1.5 SECONDS, WEIGHT_CLASS_BULKY = 2 SECONDS, WEIGHT_CLASS_HUGE = 2.5 SECONDS, WEIGHT_CLASS_GIGANTIC = 3 SECONDS)
+	return delay_by_w_class[attacking_item.w_class]
+// BANDASTATION EDIT END
 
 /datum/component/stove/proc/on_exited(obj/machinery/source, atom/movable/gone, direction)
 	SIGNAL_HANDLER

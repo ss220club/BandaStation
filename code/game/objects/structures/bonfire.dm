@@ -33,7 +33,6 @@
 		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
-	AddComponent(/datum/component/item_igniter)
 	burning_loop = new(src)
 
 /obj/structure/bonfire/Destroy()
