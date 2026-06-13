@@ -2,7 +2,7 @@
 
 /datum/singleton/sound_effect/khaaroot_mutation
 	suffix = "_khaaroot"
-	ffmpeg_arguments = "asetrate=19485,acrusher=0.4:1:15:0:log,aecho=0.2:0.5:30:0.2,volume=volume=9"
+	ffmpeg_arguments = "asetrate=21000,acrusher=0.4:1:15:0:log,volume=volume=5"
 
 /datum/status_effect/khaaroot_survivor
 	id = "khaaroot_survivor"
