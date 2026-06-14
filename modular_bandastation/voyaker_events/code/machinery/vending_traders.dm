@@ -247,21 +247,21 @@
 
 /obj/machinery/vending/trader/proc/give_quest(mob/living/carbon/human/H)
     if(H.trader_quests[src.trader_id])
-        to_chat(H, span_warning("У вас уже есть активное задание."))
-        return
-    var/datum/trader_quest/Q
-    for(var/path in quest_chain)
-        var/datum/trader_quest/temp = new path
-        if(!(temp.id in H.completed_trader_quests))
-            Q = temp
-            break
-    if(!Q)
-        to_chat(H, span_notice("Сейчас для вас нет новых заданий."))
-        return
-    H.trader_quests[src.trader_id] = Q
-    user_messages[REF(H)] = Q.description
-    playsound(H, 'sound/machines/ping.ogg', 50, TRUE)
-    to_chat(H, span_notice("Задание принято к выполнению."))
+    	to_chat(H, span_warning("У вас уже есть активное задание."))
+		return
+	var/datum/trader_quest/Q
+	for(var/path in quest_chain)
+		var/datum/trader_quest/temp = new path
+		if(!(temp.id in H.completed_trader_quests))
+			Q = temp
+			break
+	if(!Q)
+		to_chat(H, span_notice("Сейчас для вас нет новых заданий."))
+		return
+	H.trader_quests[src.trader_id] = Q
+	user_messages[REF(H)] = Q.description
+	playsound(H, 'sound/machines/ping.ogg', 50, TRUE)
+	to_chat(H, span_notice("Задание принято к выполнению."))
 
 /obj/machinery/vending/trader/Initialize(mapload)
 	. = ..()
@@ -327,7 +327,7 @@
 			"products" = list(
 				/obj/item/gun/ballistic/automatic/pistol = list(100, 1, INFINITY),
 				/obj/item/gun/ballistic/rifle/sks = list(250, 1, INFINITY),
-    			/obj/item/gun/ballistic/rifle/boltaction/mosin = list(200, 1, INFINITY),
+				/obj/item/gun/ballistic/rifle/boltaction/mosin = list(200, 1, INFINITY),
 				/obj/item/gun/ballistic/automatic/pistol/zashch = list(150, 2, INFINITY),
 				/obj/item/gun/ballistic/automatic/sabel/auto = list(350, 2, INFINITY),
 				/obj/item/gun/ballistic/rifle/sks/c762x54mmr = list(300, 2, INFINITY),
