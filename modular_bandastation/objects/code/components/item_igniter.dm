@@ -10,11 +10,11 @@
 
 /datum/component/item_igniter/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
-	RegisterSignal(parent, COMSIG_ITEM_IGNITION_STATE_CHANGED, PROC_REF(on_ignition_state_changed))
+	RegisterSignal(parent, IGNITION_STATE_CHANGED, PROC_REF(on_ignition_state_changed))
 
 /datum/component/item_igniter/UnregisterFromParent()
 	UnregisterSignal(parent, COMSIG_ATOM_ATTACKBY)
-	UnregisterSignal(parent, COMSIG_ITEM_IGNITION_STATE_CHANGED)
+	UnregisterSignal(parent, IGNITION_STATE_CHANGED)
 
 /// Signal handler to change ignition ability state
 /datum/component/item_igniter/proc/on_ignition_state_changed(atom/source, state)
@@ -53,7 +53,7 @@
 	attacking_item.fire_act()
 
 	// Signal that ignition was successful
-	SEND_SIGNAL(parent, COMSIG_ITEM_IGNITION_SUCCESS, attacking_item, user)
+	SEND_SIGNAL(parent, IGNITION_SUCCESS, attacking_item, user)
 
 /datum/component/item_igniter/proc/choose_delay(obj/item/attacking_item)
 	var/static/list/delay_by_w_class = list(

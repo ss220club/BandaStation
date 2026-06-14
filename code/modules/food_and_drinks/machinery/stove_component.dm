@@ -96,14 +96,16 @@
 	START_PROCESSING(SSmachines, src)
 	on = TRUE
 	real_parent.update_appearance(UPDATE_OVERLAYS)
-	SEND_SIGNAL(parent, COMSIG_ITEM_IGNITION_STATE_CHANGED, TRUE)
+	/// BANDASTSTION EDIT: IGNITION COMPONENT INTEGRATION
+	SEND_SIGNAL(parent, IGNITION_STATE_CHANGED, TRUE)
 
 /datum/component/stove/proc/turn_off()
 	var/obj/machinery/real_parent = parent
 	STOP_PROCESSING(SSmachines, src)
 	on = FALSE
 	real_parent.update_appearance(UPDATE_OVERLAYS)
-	SEND_SIGNAL(parent, COMSIG_ITEM_IGNITION_STATE_CHANGED, FALSE)
+	/// BANDASTSTION EDIT: IGNITION COMPONENT INTEGRATION
+	SEND_SIGNAL(parent, IGNITION_STATE_CHANGED, FALSE)
 
 /datum/component/stove/proc/on_attack_hand_secondary(obj/machinery/source)
 	SIGNAL_HANDLER
