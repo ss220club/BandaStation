@@ -13,13 +13,6 @@
 
 /mob/living/carbon/human/species/monkey/punpun/death(gibbed)
 
-	world.log << "PUNPUN DIED"
-
-	if(quest_killer)
-		world.log << "QUEST KILLER = [quest_killer]"
-	else
-		world.log << "QUEST KILLER IS NULL"
-
 	if(quest_killer && ishuman(quest_killer))
 		check_trader_kill_quests(quest_killer, src)
 
