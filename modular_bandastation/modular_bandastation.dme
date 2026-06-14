@@ -1,5 +1,6 @@
 #include "_modpack.dm"
 #include "_modpacks.dm"
+#include "voyaker_events/_voyaker_events.dm"
 
 // --- MODULES START --- //
 #include "_defines220/_defines220.dme"

@@ -1,0 +1,26 @@
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+#include "_voyaker_events.dm"
+#include "code\auto_cleanup\cleanup_casings.dm"
+#include "code\auto_cleanup\cleanup_controller.dm"
+#include "code\barricades\barricades.dm"
+#include "code\droppods\droppod_containers.dm"
+#include "code\droppods\droppod_controller.dm"
+#include "code\droppods\droppod_spawners.dm"
+#include "code\loot\loot_controller.dm"
+#include "code\loot\loot_spawners.dm"
+#include "code\machinery\vending_traders.dm"
+#include "code\mob\raid_death.dm"
+#include "code\shelfs\shelfs.dm"
+#include "code\traders\trader_loyality.dm"
+#include "code\traders\trader_quests.dm"
+#include "code\traders\trader_targets.dm"
+#include "code\traders\trader_vars.dm"
+#include "code\wooden_fence\wooden_fence.dm"
+// END_INCLUDE
