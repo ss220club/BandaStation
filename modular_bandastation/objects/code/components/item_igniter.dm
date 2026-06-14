@@ -25,12 +25,11 @@
 	SIGNAL_HANDLER
 
 	if(!can_ignite_items)
-		return
+		return COMPONENT_NO_AFTERATTACK
 
-	if(attacking_item.is_open_container())
-		return
-
-	INVOKE_ASYNC(src, PROC_REF(try_fire_act_item), source, attacking_item, user)
+	if(!attacking_item.is_open_container())
+		INVOKE_ASYNC(src, PROC_REF(try_fire_act_item), source, attacking_item, user)
+		return COMPONENT_NO_AFTERATTACK
 
 	return COMPONENT_NO_AFTERATTACK
 
