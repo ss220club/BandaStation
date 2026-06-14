@@ -20,6 +20,7 @@
 	icon_gib = "carp_gib"
 	gold_core_spawnable = HOSTILE_SPAWN
 	mob_biotypes = MOB_ORGANIC | MOB_BEAST | MOB_AQUATIC
+	pass_flags = PASSMOB | PASSTABLE // BANDASTATION ADDITION: Carps can swarm and pass tables
 	health = 25
 	maxHealth = 25
 	max_stamina = 120
@@ -99,6 +100,8 @@
 	. = ..()
 	apply_colour()
 	add_traits(list(TRAIT_HEALS_FROM_CARP_RIFTS, TRAIT_SPACEWALK), INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_UNDENSE, INNATE_TRAIT) // BANDASTATION ADDITION: Carps can swarm and pass tables
+	AddComponent(/datum/component/swarming, 20, 20) // BANDASTATION ADDITION: Carps can swarm and pass tables
 
 	if (cell_line)
 		AddElement(/datum/element/swabable, cell_line, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
@@ -252,6 +255,8 @@
 	var/datum/callback/got_disk = CALLBACK(src, PROC_REF(got_disk))
 	var/datum/callback/display_disk = CALLBACK(src, PROC_REF(display_disk))
 	AddComponent(/datum/component/nuclear_bomb_operator, got_disk, display_disk)
+	var/obj/item/implant/implanter = SSwardrobe.provide_type(/obj/item/implant/tacmap/nuclear/cayenne, src)
+	implanter.implant(src, null, TRUE)
 
 /mob/living/basic/carp/pet/cayenne/apply_colour()
 	if (prob(RARE_CAYENNE_CHANCE))

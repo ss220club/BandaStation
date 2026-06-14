@@ -1,6 +1,6 @@
 /datum/action/cooldown/open_mob_commands
-	name = "Приказ звездочету"
-	desc = "Открывает меню приказов для вашего звездочета."
+	name = "Приказ Звездочёту"
+	desc = "Открывает меню приказов для вашего Звездочёта."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
