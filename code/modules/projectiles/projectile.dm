@@ -400,7 +400,7 @@
 		if(isliving(living_target))
 			var/mob/living/L = living_target
 			if(isliving(firer))
-				L.quest_killer = firer
+				L.vars["quest_killer"] = firer
 
 		log_combat(firer, living_target, "shot", src, reagent_note)
 		return BULLET_ACT_HIT

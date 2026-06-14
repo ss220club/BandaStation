@@ -12,8 +12,8 @@
 			Q.complete(killer, trader_id, null)
 
 /mob/living/carbon/human/species/monkey/punpun/death(gibbed)
-
-	if(quest_killer && ishuman(quest_killer))
+	var/mob/living/killer = vars["quest_killer"]
+	if(killer && ishuman(killer))
 		check_trader_kill_quests(quest_killer, src)
 
 	. = ..()
