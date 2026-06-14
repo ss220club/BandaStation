@@ -13873,7 +13873,7 @@
 /obj/effect/decal/cleanable/blood/oil,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/sign/poster/contraband/the_griffin/directional/north,
-/mob/living/simple_animal/bot/mulebot,
+/mob/living/basic/bot/mulebot,
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
 /turf/open/floor/iron/dark,
 /area/station/cargo/warehouse)
@@ -44566,7 +44566,7 @@
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/machinery/airalarm/directional/north,
 /obj/machinery/light/small/directional/north,
-/mob/living/simple_animal/bot/mulebot,
+/mob/living/basic/bot/mulebot,
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
 /turf/open/floor/iron/dark,
 /area/station/cargo/warehouse)
@@ -47983,7 +47983,9 @@
 	dir = 8;
 	id = "mining"
 	},
-/obj/machinery/bouldertech/refinery/smelter,
+/obj/machinery/bouldertech/refinery/smelter{
+	dir = 4
+	},
 /turf/open/floor/iron/dark,
 /area/station/cargo/miningoffice)
 "pNZ" = (
