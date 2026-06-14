@@ -120,7 +120,7 @@
 	user.visible_message(span_notice("[user] begins to remove the barbed wire on [src]."),
 	span_notice("You start removing the barbed wire on [src]."))
 
-	if(!do_after(user, 2 SECONDS, src))
+	if(!do_after(user, 20, src))
 		return TRUE
 
 	playsound(src, 'sound/items/tools/wirecutter.ogg', 25, TRUE)
@@ -379,7 +379,7 @@
 			to_chat(user, span_warning("[src] нельзя сложить пока она повреждена!"))
 			return CLICK_ACTION_BLOCKING
 		user.visible_message(span_notice("[user] начинает складывать [src]!"), span_notice("Вы начинаете складывать [src]!"))
-		if(do_after(user, 5 SECONDS, src))
+		if(do_after(user, 50, src))
 			if(QDELETED(src)) //Скопировано на случай изменения состояний.
 				return
 			if(anchored)
@@ -436,7 +436,7 @@
 
 		visible_message(span_notice("[user] начинает чинить [src]."))
 
-		if(!do_after(user, 2 SECONDS, src) || get_integrity() >= max_integrity)
+		if(!do_after(user, 20, src) || get_integrity() >= max_integrity)
 			return FALSE
 
 		if(!metal_sheets.use(repair_amount))
@@ -463,7 +463,7 @@
 
 	user.visible_message(span_notice("[user] начинает прикреплять [choice] к [src]."),
 		span_notice("Вы начинаете прикреплять [choice] к [src]."))
-	if(!do_after(user, 2 SECONDS, src))
+	if(!do_after(user, 20, src))
 		return FALSE
 
 	if(!metal_sheets.use(BARRICADE_UPGRADE_REQUIRED_SHEETS))
@@ -519,7 +519,7 @@
 	span_notice("Вы начинаете сваривать повреждения на [src]."))
 	playsound(src, 'sound/items/tools/welder2.ogg', 25, TRUE)
 
-	if(!do_after(user, 5 SECONDS, src))
+	if(!do_after(user, 50, src))
 		return TRUE
 
 	if(get_integrity() <= max_integrity * 0.3 || get_integrity() >= max_integrity)
@@ -541,7 +541,7 @@
 	switch(build_state)
 		if(BARRICADE_METAL_ANCHORED) //Панель защиты снята. Отвёртка для установки панели обратно, гаечный ключ для откручивания болтов
 			playsound(src, 'sound/items/tools/screwdriver.ogg', 25, TRUE)
-			if(!do_after(user, 1 SECONDS, src))
+			if(!do_after(user, 10, src))
 				return TRUE
 			user.visible_message (span_notice ("[user] закрепляет панель на [src]."),
 			span_notice ("Вы закрепляете панель на [src]."))
@@ -551,7 +551,7 @@
 		if(BARRICADE_METAL_FIRM) //Полностью собранный этап. Используйте отвёртку для снятия защитных панелей, чтобы открыть болты
 			playsound(src, 'sound/items/tools/screwdriver.ogg', 25, TRUE)
 
-			if(!do_after(user, 1 SECONDS, src))
+			if(!do_after(user, 10, src))
 				return TRUE
 
 			user.visible_message (span_notice ("[user] снимает панель с [src]."),
@@ -564,7 +564,7 @@
 	switch(build_state)
 		if(BARRICADE_METAL_ANCHORED) //Панель защиты снята. Отвёртка для установки панели обратно, гаечный ключ для откручивания болтов
 			playsound(src, 'sound/items/tools/ratchet.ogg', 25, TRUE)
-			if(!do_after(user, 1 SECONDS, src))
+			if(!do_after(user, 10, src))
 				return TRUE
 			user.visible_message (span_notice ("[user] ослабляет анкерные болты на [src]."),
 			span_notice ("Вы ослабляете анкерные болты на [src]."))
@@ -586,7 +586,7 @@
 					return TRUE
 
 			playsound(src, 'sound/items/tools/ratchet.ogg', 25, TRUE)
-			if(!do_after(user, 1 SECONDS, src))
+			if(!do_after(user, 10, src))
 				return TRUE
 
 			user.visible_message(span_notice("[user] затягивает анкерные болты на [src]."),
@@ -605,7 +605,7 @@
 			span_notice("Вы начинаете разбирать [src]."))
 
 			playsound(src, 'sound/items/tools/crowbar.ogg', 25, 1)
-			if(!do_after(user, 5 SECONDS, src))
+			if(!do_after(user, 50, src))
 				return TRUE
 
 			user.visible_message(span_notice("[user] разбирает [src]."),
@@ -623,7 +623,7 @@
 			span_notice("Вы начинаете отсоединять броню от [src]"))
 
 			playsound(src, 'sound/items/tools/crowbar.ogg', 25, 1)
-			if(!do_after(user, 5 SECONDS, src))
+			if(!do_after(user, 50, src))
 				return TRUE
 
 			user.visible_message(span_notice("[user] отсоединяет броню от [src]."),
@@ -679,7 +679,7 @@
 	///Either we react with other cades next to us ie when opening or so
 	var/linked = FALSE
 	///Open/close delay, for customisation. And because I was asked to - won't customise anything myself.
-	var/toggle_delay = 0 SECONDS
+	var/toggle_delay = 0
 
 /obj/structure/deployable_barricade/metal/plasteel/crowbar_act(mob/living/user, obj/item/I)
 	switch(build_state)
@@ -688,7 +688,7 @@
 			span_notice("You start to disassemble [src]."))
 
 			playsound(src, 'sound/items/tools/crowbar.ogg', 25, 1)
-			if(!do_after(user, 5 SECONDS, src))
+			if(!do_after(user, 50, src))
 				return TRUE
 
 			user.visible_message(span_notice("[user] disassembles [src]."),
@@ -791,7 +791,7 @@
 /obj/item/quickdeploy/barricade
 	thing_to_deploy = /obj/structure/deployable_barricade/metal
 	icon_state = "metal"
-	delay = 3 SECONDS
+	delay = 30
 
 /obj/item/quickdeploy/barricade/can_place(mob/user)
 	. = ..()
