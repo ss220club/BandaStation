@@ -246,8 +246,8 @@
 		recordlist += new_record
 
 /obj/machinery/vending/trader/proc/give_quest(mob/living/carbon/human/H)
-    if(H.trader_quests[src.trader_id])
-    	to_chat(H, span_warning("У вас уже есть активное задание."))
+	if(H.trader_quests[src.trader_id])
+		to_chat(H, span_warning("У вас уже есть активное задание."))
 		return
 	var/datum/trader_quest/Q
 	for(var/path in quest_chain)
