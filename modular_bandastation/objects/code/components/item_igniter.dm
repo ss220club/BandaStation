@@ -27,10 +27,7 @@
 	if(!can_ignite_items)
 		return COMPONENT_NO_AFTERATTACK
 
-	if(!attacking_item.is_open_container())
-		INVOKE_ASYNC(src, PROC_REF(try_fire_act_item), source, attacking_item, user)
-		return COMPONENT_NO_AFTERATTACK
-
+	INVOKE_ASYNC(src, PROC_REF(try_fire_act_item), source, attacking_item, user)
 	return COMPONENT_NO_AFTERATTACK
 
 /datum/component/item_igniter/proc/try_fire_act_item(atom/source, obj/item/attacking_item, mob/user)
