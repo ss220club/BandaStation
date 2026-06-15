@@ -258,4 +258,4 @@ tgstation.json
 rust_g64.dll
 
 # BANDASTATION MOD: ru_names.toml generated at compile time
-/modular_bandastation/translations/code/translation_data/ru_names.toml
+/modular_bandastation/translations/public/ru_names.toml
