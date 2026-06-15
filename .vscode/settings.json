@@ -19,6 +19,12 @@
 		"editor.formatOnSave": true,
 		"editor.rulers": [80]
 	},
+	// BANDASTATION EDIT START - Tombi formatter
+	"[toml]": {
+		"editor.defaultFormatter": "tombi-toml.tombi",
+		"editor.formatOnSave": true
+	},
+	// BANDASTATION EDIT END
 	"workbench.editorAssociations": {
 		"*.dmi": "dmiEditor.dmiEditor"
 	},
@@ -26,6 +32,7 @@
 		"**/node_modules": true
 	},
 	"Lua.diagnostics.enable": false,
+	// BANDASTATION EDIT START - Server log highlight
 	"logFileHighlighter.customPatterns": [
 		{
 			"pattern": "(GAME: )?(RUNTIME|DYNAMIC: FAIL|SUSPICIOUS_LOGINS|ADMINPRIVATE): .+?(?=\n(\\[|$))",
@@ -84,4 +91,5 @@
 			"foreground": "#666666"
 		}
 	]
+	// BANDASTATION EDIT END
 }

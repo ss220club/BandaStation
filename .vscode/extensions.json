@@ -8,7 +8,10 @@
 		"anturk.dmi-editor",
 		"esbenp.prettier-vscode",
 		"biomejs.biome",
+		// BANDASTATION EDIT START - Useful extensions
 		"emilast.LogFileHighlighter",
-		"earshinov.filter-lines"
+		"earshinov.filter-lines",
+		"tombi-toml.tombi"
+		// BANDASTATION EDIT END
 	]
 }
