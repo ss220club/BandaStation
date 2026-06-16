@@ -111,7 +111,7 @@
 	name = "Apex Nanotrasen Navy Field Officer"
 	suit = null
 	mask = null
-	belt = /obj/item/storage/belt/holster/ert/full_gp9r
+	accessory = /obj/item/clothing/accessory/holster/tacticool/ert_gp93r
 	l_pocket = null
 	head = /obj/item/clothing/head/helmet/space/beret/soo
 	neck = /obj/item/clothing/neck/cloak/centcom/gr_cape

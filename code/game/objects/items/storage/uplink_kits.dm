@@ -81,7 +81,7 @@
 			new /obj/item/gun/ballistic/revolver(src) // 13 tc
 			new /obj/item/ammo_box/speedloader/c357(src) // 4tc
 			new /obj/item/ammo_box/speedloader/c357(src)
-			new /obj/item/storage/belt/holster/chameleon(src) // 1 tc
+			new /obj/item/clothing/accessory/holster/chameleon(src) // 1 tc BANDASTATION EDIT: Accessory holsters
 			new /obj/item/card/emag/doorjack(src) // 3 tc replaced the emag with the doorjack
 			new /obj/item/grenade/c4(src) // 1 tc
 			new /obj/item/clothing/gloves/latex/nitrile(src) // ~1 tc for whole outfit
@@ -764,6 +764,8 @@
 	new /obj/item/book/manual/nuclear(src) // Very important
 	// The most important part of the kit, the implant that gives them the syndicate faction.
 	new /obj/item/implanter/induction_implant(src)
+	// Tactical map implant so they can see the minimap with the rest of the team.
+	new /obj/item/implanter/tacmap/nuclear(src)
 	// All in all, 6+3+3+2+5+2+4 = ~25 TC of 'miscellaneous' items.
 	// This is a lot of value for 10 TC, but you have to keep in mind that you NEED someone to get this stuff station-side.
 	// Pretty much all of it is a bad deal for reinforcements or yourself as they already have similar or good-enough alternatives.
@@ -803,6 +805,7 @@
 
 	var/datum/antagonist/nukeop/nuke_datum = new()
 	nuke_datum.send_to_spawnpoint = FALSE
+	nuke_datum.give_bonus_tc = FALSE
 	nuke_datum.nukeop_outfit = null
 	human_target.mind?.add_antag_datum(nuke_datum)
 	human_target.add_faction(ROLE_SYNDICATE)
@@ -840,7 +843,7 @@
 	generate_items_inside(list(
 		/obj/item/clothing/shoes/cowboy/black/syndicate= 1,
 		/obj/item/clothing/head/cowboy/black/syndicate = 1,
-		/obj/item/storage/belt/holster/nukie/cowboy/full = 1,
+		/obj/item/clothing/accessory/holster/tacticool/cowboy = 1, // BANDASTATION EDIT: Accessory holsters
 		/obj/item/clothing/under/costume/dutch/syndicate = 1,
 		/obj/item/lighter/skull = 1,
 		/obj/item/sbeacondrop/horse = 1,

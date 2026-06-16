@@ -89,7 +89,7 @@
 	desc = "Contains one disabler, the non-lethal workhorse of Nanotrasen security everywhere. Comes in an energy holster, just in case you happen to have an extra disabler."
 	cost = PAYCHECK_COMMAND * 3
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/storage/belt/holster/energy/disabler)
+	contains = list(/obj/item/clothing/accessory/holster/energy/disabler) //BANDASTATION EDIT: Accessory holsters
 
 /datum/supply_pack/goody/energy_single
 	name = "Energy Gun Single-Pack"
@@ -117,7 +117,7 @@
 	desc = "Contains one Type 5C laser pistol in an energy shoulder holster. Groovy."
 	cost = PAYCHECK_COMMAND * 2
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/storage/belt/holster/energy/laser_pistol)
+	contains = list(/obj/item/clothing/accessory/holster/energy/laser_pistol) //BANDASTATION EDIT: Accessory holsters
 
 /datum/supply_pack/goody/laser_single_soul
 	name = "Type 3 Laser Gun Single-Pack"
@@ -147,7 +147,7 @@
 	desc = "Contains twinned thermal pistols in a holster, ready for use in the field."
 	cost = PAYCHECK_COMMAND * 15
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/storage/belt/holster/energy/thermal)
+	contains = list(/obj/item/clothing/accessory/holster/energy/thermal) //BANDASTATION EDIT: Accessory holsters
 
 /datum/supply_pack/goody/sologamermitts
 	name = "Insulated Gloves Single-Pack"
@@ -202,6 +202,12 @@
 	desc = "A fully stocked mechanical toolbox, for when you're too lazy to just print them out."
 	cost = PAYCHECK_CREW * 3
 	contains = list(/obj/item/storage/toolbox/mechanical)
+
+/datum/supply_pack/goody/autolatheboard
+	name = "Autolathe Circuit Board"
+	desc = "A single autolathe circuit board for your construction needs."
+	cost = PAYCHECK_CREW * 2
+	contains = list(/obj/item/circuitboard/machine/autolathe)
 
 /datum/supply_pack/goody/valentine
 	name = "Valentine Card"
