@@ -27,7 +27,9 @@
 					"type": "string"
 				},
 				"gender": {
-					"type": "string"
+					"type": "string",
+					"enum": ["male", "female", "neuter", "plural"],
+					"default": "male"
 				}
 			},
 			"required": ["nominative"],
