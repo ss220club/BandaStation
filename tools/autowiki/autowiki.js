@@ -1,5 +1,5 @@
-const fs = require('fs').promises;
-const MWBot = require('mwbot');
+import { promises as fs } from 'node:fs';
+import MWBot from 'mwbot';
 
 const { USERNAME, PASSWORD } = process.env;
 

@@ -10,11 +10,12 @@
 	desc = "Обычная, ничем не примечательная кобура под одно небольшое оружие."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/holsters.dmi'
 	icon_state = "holster"
-	worn_icon = 'modular_bandastation/objects/icons/onbody/holsters.dmi'
+	worn_icon = 'icons/mob/clothing/belt.dmi'
 	worn_icon_state = "holster"
 	alternate_worn_layer = UNDER_SUIT_LAYER
 	w_class = WEIGHT_CLASS_BULKY
 	above_suit = FALSE
+	icon_state_is_worn = FALSE
 	var/check_covering = TRUE
 
 /obj/item/clothing/accessory/holster/proc/PopulateContents()

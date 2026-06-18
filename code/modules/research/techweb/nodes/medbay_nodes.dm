@@ -101,7 +101,6 @@
 		"cryotube",
 		"mech_sleeper",
 		"splitbeaker",
-		"stasisbodybag", // BANDASTATION ADDITION - PERMA-DEATH
 		"stasis",
 		"stasis_bodybag",
 	)
