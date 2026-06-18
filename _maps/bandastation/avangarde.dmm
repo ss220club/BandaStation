@@ -754,8 +754,8 @@
 /turf/open/floor/carpet/orange,
 /area/awaymission/avangarde17/inside/cargo/staff)
 "aqM" = (
-/obj/structure/flora/rock/style_random,
-/turf/open/misc/dirt/dark/station,
+/obj/structure/railing,
+/turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/mountains)
 "aqR" = (
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -1717,6 +1717,7 @@
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 1
 	},
+/obj/structure/holosign/barrier,
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/mountains)
 "aMl" = (
@@ -2186,12 +2187,11 @@
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/mountains)
 "aVp" = (
-/obj/structure/flora/rock/style_random,
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 1
+/obj/structure/railing{
+	dir = 5
 	},
-/turf/open/misc/asteroid/moon,
-/area/awaymission/avangarde17/outside/city)
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/mountains)
 "aVt" = (
 /obj/structure/mineral_door/wood,
 /turf/open/floor/carpet,
@@ -2213,61 +2213,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside/roofs)
-"aVF" = (
-/obj/structure/closet/crate/wooden,
-/obj/item/staff{
-	desc = "Посох, используемый для связи с Дождьбогом.";
-	name = "посох старца"
-	},
-/obj/item/staff{
-	desc = "Посох, используемый для связи с Дождьбогом.";
-	name = "посох старца"
-	},
-/obj/item/staff{
-	desc = "Посох, используемый для связи с Дождьбогом.";
-	name = "посох старца"
-	},
-/obj/item/clothing/head/costume/garland/lily,
-/obj/item/clothing/head/costume/garland,
-/obj/item/clothing/head/costume/garland/poppy,
-/obj/item/clothing/head/costume/tmc{
-	name = "повязка старца";
-	desc = "Повязка, дающая силу Ярило."
-	},
-/obj/item/clothing/head/costume/tmc{
-	name = "повязка старца";
-	desc = "Повязка, дающая силу Ярило."
-	},
-/obj/item/clothing/head/costume/tmc{
-	name = "повязка старца";
-	desc = "Повязка, дающая силу Ярило."
-	},
-/obj/item/clothing/suit/hooded/chaplainsuit/monkhabit{
-	name = "ведические одеяния";
-	desc = "Одеяния, укрываемые от Чернобога."
-	},
-/obj/item/clothing/suit/hooded/chaplainsuit/monkhabit{
-	name = "ведические одеяния";
-	desc = "Одеяния, укрываемые от Чернобога."
-	},
-/obj/item/clothing/suit/hooded/chaplainsuit/monkhabit{
-	name = "ведические одеяния";
-	desc = "Одеяния, укрываемые от Чернобога."
-	},
-/obj/item/clothing/shoes/sandal{
-	desc = "Не дадут сойти с пути Перуна.";
-	name = "сандали старца"
-	},
-/obj/item/clothing/shoes/sandal{
-	desc = "Не дадут сойти с пути Перуна.";
-	name = "сандали старца"
-	},
-/obj/item/clothing/shoes/sandal{
-	desc = "Не дадут сойти с пути Перуна.";
-	name = "сандали старца"
-	},
-/turf/open/floor/stone,
-/area/awaymission/avangarde17/inside/vedi)
 "aVG" = (
 /obj/structure/mineral_door/wood,
 /turf/open/floor/wood/large/cherry,
@@ -2468,6 +2413,13 @@
 "aZY" = (
 /turf/open/floor/fakeice/slippery,
 /area/awaymission/avangarde17/outside)
+"bau" = (
+/obj/effect/turf_decal/road/dotted_line{
+	dir = 4
+	},
+/obj/structure/holosign/barrier/engineering,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside/city)
 "baG" = (
 /obj/structure/cable,
 /turf/open/floor/iron/smooth_edge,
@@ -2685,6 +2637,12 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/wood/oak,
 /area/awaymission/avangarde17/inside/base)
+"bfd" = (
+/obj/effect/turf_decal/road/dotted_line{
+	dir = 4
+	},
+/turf/closed/indestructible/binary,
+/area/awaymission/avangarde17/outside/mountains)
 "bfy" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
@@ -3066,6 +3024,22 @@
 /obj/machinery/computer/atmos_control/oxygen_tank,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/reactor/atmos)
+"bnL" = (
+/obj/structure/railing/platform{
+	dir = 4
+	},
+/obj/structure/cable,
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 8
+	},
+/obj/structure/walk_sign{
+	density = 0
+	},
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "bnP" = (
 /obj/structure/table/reinforced,
 /obj/structure/sink/shell_only/directional/west{
@@ -5702,24 +5676,8 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/living/sovetskaya_1_1/apartment_2)
 "cwX" = (
-/obj/item/storage/toolbox/guncase/akm{
-	pixel_x = 1;
-	pixel_y = -2
-	},
-/obj/item/storage/toolbox/guncase/akm{
-	pixel_x = -1;
-	pixel_y = 3
-	},
-/obj/item/ammo_box/c762x39{
-	pixel_x = -5;
-	pixel_y = 11
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/siding/wood/oak,
-/obj/item/ammo_box/c762x39{
-	pixel_x = 10;
-	pixel_y = 9
-	},
 /obj/structure/closet/crate/secure/weapon,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/wood/large/oak,
@@ -6096,9 +6054,6 @@
 	},
 /turf/open/floor/iron/dark/small,
 /area/awaymission/avangarde17/outside/mountains)
-"cCW" = (
-/turf/open/water/hot_spring,
-/area/awaymission/avangarde17/inside/vedi)
 "cDn" = (
 /obj/structure/flora/grass/jungle/a/style_random,
 /obj/structure/flora/bush/flowers_yw/style_random,
@@ -6910,6 +6865,12 @@
 /obj/structure/flora/grass/both/style_random,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/city)
+"cWI" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 1
+	},
+/turf/closed/indestructible/binary,
+/area/awaymission/avangarde17/outside/mountains)
 "cXb" = (
 /turf/open/floor/wood/large/oak,
 /area/awaymission/avangarde17/outside/city)
@@ -7245,10 +7206,6 @@
 "dfG" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/cargo/bitrun)
-"dfN" = (
-/obj/structure/flora/ash/seraka,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
 "dfZ" = (
 /obj/machinery/light/small/directional/south,
 /obj/structure/cable,
@@ -7265,10 +7222,6 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/living/lenina_2_1/apartment_4)
 "dgE" = (
-/obj/item/storage/toolbox/guncase/akm{
-	pixel_x = 1;
-	pixel_y = -2
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/siding/wood/oak,
 /obj/structure/sign/flag/ussp/directional/north,
@@ -8199,10 +8152,6 @@
 /area/awaymission/avangarde17/inside/living/lazarya_2_1/second_floor/apartment_4)
 "duI" = (
 /obj/structure/table/wood,
-/obj/item/ammo_box/c10mm{
-	pixel_x = -4;
-	pixel_y = 12
-	},
 /obj/item/ammo_casing/c10mm{
 	pixel_x = 10;
 	pixel_y = -2
@@ -8221,10 +8170,6 @@
 	pixel_x = 12;
 	pixel_y = 10;
 	dir = 9
-	},
-/obj/item/ammo_box/c10mm{
-	pixel_x = -6;
-	pixel_y = 20
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 10
@@ -8312,9 +8257,6 @@
 /obj/machinery/light/small/burned/directional/south,
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/base_briefroom)
-"dvZ" = (
-/turf/open/misc/dirt/dark/station,
-/area/awaymission/avangarde17/inside/vedi)
 "dwx" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/wood,
@@ -9321,18 +9263,6 @@
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 1
 	},
-/obj/item/ammo_box/c762x39{
-	pixel_x = -7;
-	pixel_y = 1
-	},
-/obj/item/ammo_box/c762x39/ap{
-	pixel_x = 7;
-	pixel_y = -4
-	},
-/obj/item/ammo_box/c762x39/ap{
-	pixel_x = -1;
-	pixel_y = 8
-	},
 /obj/structure/closet/crate/secure/weapon,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/wood/oak,
@@ -9643,10 +9573,10 @@
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
 "dYK" = (
-/obj/structure/stairs/stone{
-	dir = 4
+/obj/structure/railing{
+	dir = 10
 	},
-/turf/open/misc/dirt/dark/station,
+/turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/mountains)
 "dYQ" = (
 /obj/effect/turf_decal/stripes/line{
@@ -10876,10 +10806,6 @@
 	},
 /turf/open/floor/pod/light,
 /area/awaymission/avangarde17/inside/cargo/hangar)
-"eAs" = (
-/obj/structure/flora/tree/jungle/wise,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
 "eAC" = (
 /obj/structure/flora/rock/icy/style_random,
 /turf/open/misc/snow/avangarde,
@@ -12036,11 +11962,12 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/clinic/coroner)
 "eZq" = (
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 9
+/obj/effect/turf_decal/road/dotted_line{
+	dir = 4
 	},
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/obj/structure/holosign/barrier,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside/mountains)
 "eZs" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
@@ -12817,9 +12744,6 @@
 	},
 /turf/open/floor/wood/tile/oak,
 /area/awaymission/avangarde17/inside/base_controlroom)
-"fqs" = (
-/turf/open/floor/stone,
-/area/awaymission/avangarde17/inside/vedi)
 "fqu" = (
 /turf/closed/mineral/asteroid/porous,
 /area/awaymission/avangarde17/inside)
@@ -13073,10 +12997,6 @@
 /obj/structure/table/windowsill,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/militia/locker)
-"fwD" = (
-/obj/structure/flora/bush/lavendergrass/style_random,
-/turf/open/misc/dirt/dark/station,
-/area/awaymission/avangarde17/outside/mountains)
 "fwJ" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Этаж 2 - Квартира 1"
@@ -13724,7 +13644,6 @@
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
 "fKi" = (
-/obj/structure/guncase/akm,
 /obj/item/clothing/head/helmet/marine/security/ussp_kaska{
 	pixel_x = -7;
 	pixel_y = 20
@@ -13892,7 +13811,6 @@
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 4
 	},
-/obj/structure/closet/secure_closet/army,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/wood/large/oak,
 /area/awaymission/avangarde17/inside/base_prapor)
@@ -15224,11 +15142,6 @@
 	},
 /turf/open/floor/iron/small,
 /area/awaymission/avangarde17/inside/living/lazarya_2_1/second_floor/apartment_2)
-"gqF" = (
-/obj/structure/flora/bush/flowers_pp/style_random,
-/obj/structure/flora/ash/seraka,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
 "gqO" = (
 /obj/effect/turf_decal/tile/bar/diagonal_edge,
 /obj/effect/turf_decal/tile/brown/diagonal_centre,
@@ -15279,10 +15192,6 @@
 "grZ" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/clinic/coroner)
-"gsa" = (
-/obj/structure/glowshroom/single,
-/turf/open/misc/dirt/dark/station,
-/area/awaymission/avangarde17/inside/vedi)
 "gse" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
@@ -15849,6 +15758,12 @@
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/pod/dark,
 /area/awaymission/avangarde17/inside/old_hangar)
+"gCe" = (
+/obj/effect/turf_decal/siding/thinplating/corner{
+	dir = 4
+	},
+/turf/closed/indestructible/binary,
+/area/awaymission/avangarde17/outside/mountains)
 "gCg" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
@@ -16602,6 +16517,10 @@
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/cargo/miners)
+"gUL" = (
+/obj/effect/turf_decal/road/trim,
+/turf/closed/indestructible/binary,
+/area/awaymission/avangarde17/outside/mountains)
 "gUO" = (
 /turf/closed/wall,
 /area/awaymission/avangarde17/inside/base_briefroom)
@@ -18070,6 +17989,18 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/awaymission/avangarde17/inside/cargo/miners)
+"hAi" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 8
+	},
+/obj/structure/walk_sign{
+	density = 0
+	},
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "hAs" = (
 /obj/structure/hedge,
 /obj/effect/turf_decal/siding/white/corner{
@@ -18222,8 +18153,11 @@
 /turf/open/floor/iron/diagonal,
 /area/awaymission/avangarde17/inside/living/lazarya_1_1/apartment_2)
 "hDc" = (
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/mountains)
 "hDf" = (
 /obj/structure/mineral_door/wood,
 /obj/effect/turf_decal/siding/wood/cherry{
@@ -18432,12 +18366,6 @@
 /obj/effect/turf_decal/tile/brown/fourcorners,
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/living/lazarya_2_1)
-"hHX" = (
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 4
-	},
-/turf/open/misc/asteroid/moon,
-/area/awaymission/avangarde17/outside/city)
 "hIb" = (
 /obj/effect/turf_decal/road/dotted_line/continuous,
 /turf/open/floor/asphalt/avangarde,
@@ -18865,21 +18793,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron/diagonal,
 /area/awaymission/avangarde17/inside/living/lenina_1_1/apartment_4)
-"hQv" = (
-/obj/structure/table/bronze,
-/obj/item/dark_book/vedi{
-	pixel_x = 7;
-	pixel_y = -1
-	},
-/obj/item/reagent_containers/cup/mortar{
-	pixel_x = -6;
-	pixel_y = 9;
-	list_reagents = list(/datum/reagent/medicine/adminordrazine = 5);
-	name = "гиперборейский напиток";
-	desc = "Лишь пару капель... Используй с умом."
-	},
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
 "hQx" = (
 /obj/effect/turf_decal/siding/wood/guaiacum/end,
 /obj/item/shovel/spade{
@@ -21962,6 +21875,11 @@
 /obj/item/storage/briefcase,
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/gov/party_worker)
+"jdj" = (
+/obj/effect/turf_decal/siding/thinplating,
+/obj/structure/holosign/barrier/engineering,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "jdt" = (
 /obj/structure/railing/platform{
 	dir = 4
@@ -25555,7 +25473,7 @@
 /obj/structure/fence/door{
 	dir = 4
 	},
-/turf/open/floor/stone,
+/turf/closed/indestructible/binary,
 /area/awaymission/avangarde17/outside/mountains)
 "kwm" = (
 /obj/structure/cable,
@@ -25928,7 +25846,10 @@
 /obj/effect/turf_decal/siding/thinplating/corner{
 	dir = 1
 	},
-/turf/open/misc/snow/avangarde,
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 6
+	},
+/turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
 "kHT" = (
 /obj/effect/turf_decal/tile/bar/opposingcorners{
@@ -26407,7 +26328,6 @@
 /area/awaymission/avangarde17/inside/living/cabin/communism_1)
 "kSa" = (
 /obj/structure/sign/flag/ussp/directional/north,
-/obj/item/storage/toolbox/guncase/akm,
 /turf/open/floor/wood/large/oak,
 /area/awaymission/avangarde17/inside/base_prapor)
 "kSl" = (
@@ -33994,9 +33914,11 @@
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/awaymission/avangarde17/inside/reactor/sm_zone)
 "nRz" = (
-/obj/structure/flora/bush/flowers_pp/style_random,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/mountains)
 "nSi" = (
 /obj/structure/flora/bush/pointy/style_random,
 /obj/structure/flora/bush/flowers_br/style_random,
@@ -34349,11 +34271,6 @@
 	},
 /turf/open/floor/engine/xenobio,
 /area/awaymission/avangarde17/outside/mountains)
-"nYe" = (
-/obj/structure/flora/bush/lavendergrass/style_random,
-/obj/structure/flora/bush/sunny/style_random,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
 "nYh" = (
 /obj/machinery/computer/dna_console,
 /turf/open/floor/iron/dark/small,
@@ -36639,11 +36556,11 @@
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/outside)
 "oVS" = (
-/obj/effect/turf_decal/siding/thinplating/corner{
-	dir = 4
+/obj/structure/railing{
+	dir = 6
 	},
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/mountains)
 "oVU" = (
 /obj/structure/table/wood,
 /obj/machinery/fax{
@@ -37221,10 +37138,9 @@
 /turf/open/floor/iron/dark/herringbone,
 /area/awaymission/avangarde17/outside/mountains)
 "phM" = (
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 8
-	},
-/turf/open/misc/snow/avangarde,
+/obj/effect/turf_decal/siding/thinplating,
+/obj/item/clothing/head/cone,
+/turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
 "phN" = (
 /obj/machinery/light/small/burned/directional/north,
@@ -37836,12 +37752,6 @@
 /obj/structure/sign/clock/directional/south,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/living/lenina_2_1/apartment_4)
-"puV" = (
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 5
-	},
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/city)
 "puW" = (
 /obj/item/stack/rods,
 /obj/structure/railing{
@@ -37974,9 +37884,11 @@
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/living/lenina_2_1/second_floor)
 "pym" = (
-/obj/structure/flora/bush/sunny/style_random,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/mountains)
 "pyn" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 1
@@ -38083,10 +37995,6 @@
 /obj/structure/flora/rock/pile/icy/style_random,
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside/mountains)
-"pzt" = (
-/obj/structure/flora/rock/pile/style_random,
-/turf/open/floor/stone,
-/area/awaymission/avangarde17/inside/vedi)
 "pzB" = (
 /obj/structure/chair/wood,
 /obj/structure/railing{
@@ -38394,12 +38302,6 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
-"pEP" = (
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 4
-	},
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/city)
 "pEQ" = (
 /obj/structure/railing/wooden_fence{
 	dir = 6
@@ -38634,6 +38536,13 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/green/visible,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/awaymission/avangarde17/inside/reactor/sm_zone)
+"pJu" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 1
+	},
+/obj/item/clothing/head/cone,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "pJL" = (
 /obj/structure/fake_stairs/stone{
 	dir = 8
@@ -38980,26 +38889,6 @@
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/living/lazarya_2_1/second_floor/apartment_3)
 "pPs" = (
-/obj/item/storage/toolbox/guncase/akm{
-	pixel_x = 1;
-	pixel_y = -2
-	},
-/obj/item/storage/toolbox/guncase/akm{
-	pixel_x = 4;
-	pixel_y = 3
-	},
-/obj/item/storage/toolbox/guncase/akm{
-	pixel_x = 6;
-	pixel_y = 8
-	},
-/obj/item/ammo_box/c762x39{
-	pixel_x = -1;
-	pixel_y = 16
-	},
-/obj/item/ammo_box/c10mm{
-	pixel_x = 12;
-	pixel_y = 15
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/siding/wood/oak,
 /obj/structure/closet/crate/secure/weapon,
@@ -39876,7 +39765,6 @@
 	dir = 4
 	},
 /obj/machinery/light/small/burned/directional/west,
-/obj/item/storage/toolbox/guncase/akm,
 /turf/open/floor/wood/oak,
 /area/awaymission/avangarde17/inside/base_prapor)
 "qeS" = (
@@ -42056,12 +41944,6 @@
 /obj/structure/flora/grass/brown/style_random,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside)
-"rae" = (
-/obj/structure/mineral_door/gold{
-	name = "гиперборейские врата"
-	},
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
 "rag" = (
 /obj/effect/baseturf_helper{
 	baseturf = /turf/open/openspace
@@ -42221,6 +42103,12 @@
 /obj/effect/spawner/random/structure/grille,
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/cargo/storage/minerals)
+"rdB" = (
+/obj/effect/turf_decal/road/trim{
+	dir = 1
+	},
+/turf/closed/indestructible/binary,
+/area/awaymission/avangarde17/outside/mountains)
 "rdG" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 10
@@ -42290,10 +42178,6 @@
 "ret" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/living/lazarya_1_1/second_floor/apartment_4)
-"reu" = (
-/obj/structure/flora/bush/flowers_yw/style_random,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
 "rex" = (
 /obj/structure/bed,
 /obj/item/bedsheet/black,
@@ -42603,6 +42487,11 @@
 /obj/structure/wheels,
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside)
+"rmy" = (
+/obj/effect/turf_decal/road/trim,
+/obj/structure/holosign/barrier,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside/mountains)
 "rmz" = (
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 1
@@ -43221,6 +43110,13 @@
 	},
 /turf/open/floor/iron/white/herringbone,
 /area/awaymission/avangarde17/outside/mountains)
+"rAd" = (
+/obj/effect/turf_decal/road/dotted_line{
+	dir = 4
+	},
+/obj/item/clothing/head/cone,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside/city)
 "rAg" = (
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 8
@@ -43567,6 +43463,10 @@
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/wood/tile/cherry,
 /area/awaymission/avangarde17/inside/living/lenina_1_1/second_floor/apartment_3)
+"rFc" = (
+/obj/structure/holosign/barrier,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside/mountains)
 "rFt" = (
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
@@ -43756,6 +43656,10 @@
 "rIt" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/living/lazarya_1_1/apartment_2)
+"rIw" = (
+/obj/effect/turf_decal/siding/thinplating,
+/turf/closed/indestructible/binary,
+/area/awaymission/avangarde17/outside/mountains)
 "rIy" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -44576,9 +44480,11 @@
 /turf/open/misc/asteroid/moon,
 /area/awaymission/avangarde17/outside/city)
 "rXd" = (
-/obj/structure/flora/rock/style_random,
-/turf/open/water/hot_spring,
-/area/awaymission/avangarde17/inside/vedi)
+/obj/structure/railing{
+	dir = 9
+	},
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/mountains)
 "rXj" = (
 /obj/effect/baseturf_helper{
 	baseturf = /turf/open/openspace
@@ -45081,6 +44987,13 @@
 	},
 /turf/open/floor/iron/dark/herringbone,
 /area/awaymission/avangarde17/outside/mountains)
+"sgB" = (
+/obj/effect/turf_decal/road/trim{
+	dir = 1
+	},
+/obj/structure/holosign/barrier,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside/mountains)
 "sgC" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 4
@@ -45106,14 +45019,11 @@
 /turf/open/floor/iron,
 /area/awaymission/avangarde17/inside/reactor/atmos)
 "sgV" = (
-/obj/structure/closet/secure_closet/army,
-/obj/effect/turf_decal/siding/wood/oak{
-	dir = 8
+/obj/effect/turf_decal/siding/thinplating/corner{
+	dir = 1
 	},
-/obj/effect/mapping_helpers/broken_floor,
-/obj/structure/spider/stickyweb,
-/turf/open/floor/wood/large/oak,
-/area/awaymission/avangarde17/inside/base_prapor)
+/turf/closed/indestructible/binary,
+/area/awaymission/avangarde17/outside/mountains)
 "sgZ" = (
 /obj/structure/filingcabinet/employment{
 	pixel_x = -11;
@@ -45546,7 +45456,6 @@
 	dir = 8
 	},
 /obj/machinery/light/small/burned/directional/east,
-/obj/structure/closet/secure_closet/army,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/wood/large/oak,
 /area/awaymission/avangarde17/inside/base_prapor)
@@ -45782,8 +45691,11 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/militia)
 "svv" = (
-/turf/closed/indestructible/rock,
-/area/awaymission/avangarde17/inside/vedi)
+/obj/structure/railing/corner{
+	dir = 1
+	},
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/mountains)
 "svD" = (
 /obj/effect/turf_decal/tile/brown/anticorner{
 	dir = 8
@@ -47766,8 +47678,13 @@
 /turf/open/floor/wood/large/cherry,
 /area/awaymission/avangarde17/inside/living/lazarya_2_1/apartment_3)
 "tmb" = (
-/obj/structure/flora/bush/flowers_pp/style_random,
-/turf/open/misc/dirt/dark/station,
+/obj/item/fish/dolphish{
+	color = "#888888";
+	name = "Чёрный дельфиноморж";
+	force = 1;
+	desc = "Символ данного исправительного учреждения."
+	},
+/turf/open/water/alternative,
 /area/awaymission/avangarde17/outside/mountains)
 "tmq" = (
 /obj/structure/sibirskiy/lenin{
@@ -48624,8 +48541,7 @@
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/living/sovetskaya_1_2/apartment_1)
 "tAD" = (
-/obj/structure/flora/rock/style_random,
-/turf/open/misc/asteroid/moon,
+/turf/open/water/alternative,
 /area/awaymission/avangarde17/outside/mountains)
 "tAJ" = (
 /obj/machinery/door/poddoor/preopen{
@@ -48896,10 +48812,6 @@
 	},
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/living/lenina_1_1/second_floor/apartment_1)
-"tEp" = (
-/obj/structure/flora/bush/sparsegrass/style_random,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
 "tEs" = (
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/pod/dark,
@@ -49543,13 +49455,6 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
-"tQP" = (
-/obj/item/flashlight/lantern/on{
-	pixel_x = 9;
-	pixel_y = -2
-	},
-/turf/open/floor/stone,
-/area/awaymission/avangarde17/inside/vedi)
 "tRn" = (
 /turf/open/floor/wood/parquet,
 /area/awaymission/avangarde17/outside/city)
@@ -49693,6 +49598,7 @@
 "tUM" = (
 /obj/effect/turf_decal/siding/thinplating,
 /obj/structure/fence/end,
+/obj/structure/holosign/barrier,
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/mountains)
 "tUR" = (
@@ -50830,6 +50736,11 @@
 	},
 /turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
+"uuB" = (
+/obj/effect/turf_decal/road/trim,
+/obj/item/clothing/head/cone,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside/city)
 "uuI" = (
 /obj/structure/fake_stairs/stone,
 /obj/effect/mapping_helpers/broken_floor,
@@ -51011,12 +50922,6 @@
 /obj/structure/cable/layer1,
 /turf/open/floor/engine,
 /area/awaymission/avangarde17/inside/reactor/sm_inside)
-"uyk" = (
-/obj/structure/flora/bush/lavendergrass/style_random,
-/obj/structure/flora/bush/flowers_br/style_random,
-/obj/structure/flora/ash/seraka,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
 "uym" = (
 /turf/open/openspace,
 /area/awaymission/avangarde17/outside/ruin/second)
@@ -51483,9 +51388,8 @@
 /turf/open/floor/plating,
 /area/awaymission/avangarde17/inside/clinic)
 "uHG" = (
-/obj/structure/flora/bush/lavendergrass/style_random,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
+/turf/open/openspace,
+/area/space)
 "uHK" = (
 /obj/structure/fans/tiny,
 /obj/structure/cable,
@@ -52616,10 +52520,6 @@
 /obj/structure/cable,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/inside/living/lazarya_1_1/second_floor/apartment_4)
-"vbr" = (
-/obj/structure/flora/bush/fullgrass/style_random,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
 "vbt" = (
 /obj/effect/turf_decal/tile/brown/opposingcorners{
 	dir = 8
@@ -52847,7 +52747,10 @@
 /obj/effect/turf_decal/siding/thinplating/corner{
 	dir = 8
 	},
-/turf/open/misc/snow/avangarde,
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 5
+	},
+/turf/open/floor/stone,
 /area/awaymission/avangarde17/outside/city)
 "vgn" = (
 /obj/structure/sign/clock/directional/east,
@@ -53027,12 +52930,9 @@
 /turf/open/floor/carpet/green,
 /area/awaymission/avangarde17/inside/living/sovetskaya_1_1/second_floor/apartment_3)
 "vjJ" = (
-/obj/structure/flora/rock/pile/icy/style_random,
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 1
-	},
-/turf/open/misc/asteroid/moon,
-/area/awaymission/avangarde17/outside/city)
+/obj/structure/railing/corner,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/mountains)
 "vjR" = (
 /obj/machinery/computer/piratepad_control/civilian,
 /turf/open/floor/iron,
@@ -53377,10 +53277,11 @@
 /turf/open/floor/asphalt/avangarde,
 /area/awaymission/avangarde17/outside/city)
 "vsq" = (
-/obj/structure/flora/bush/flowers_pp/style_random,
-/obj/structure/flora/rock/style_random,
-/turf/open/floor/grass/fairy,
-/area/awaymission/avangarde17/inside/vedi)
+/obj/structure/railing/corner{
+	dir = 4
+	},
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/mountains)
 "vsw" = (
 /turf/closed/wall/mineral/iron,
 /area/awaymission/avangarde17/inside/gov/engi)
@@ -55189,6 +55090,13 @@
 	},
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/inside/cargo/staff)
+"whJ" = (
+/obj/effect/turf_decal/road/trim{
+	dir = 1
+	},
+/obj/item/clothing/head/cone,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside/city)
 "whP" = (
 /obj/effect/turf_decal/siding/wood/cherry/corner{
 	dir = 4
@@ -55608,9 +55516,6 @@
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/wood/parquet/cherry,
 /area/awaymission/avangarde17/outside/mountains)
-"wrg" = (
-/turf/open/openspace,
-/area/awaymission/avangarde17/inside/vedi)
 "wrj" = (
 /obj/machinery/air_sensor/carbon_tank,
 /turf/open/floor/engine/co2,
@@ -57057,6 +56962,10 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/awaymission/avangarde17/outside/roofs)
+"wRU" = (
+/obj/structure/holosign/barrier/engineering,
+/turf/open/floor/asphalt/avangarde,
+/area/awaymission/avangarde17/outside/city)
 "wSj" = (
 /obj/item/stack/tile/wood/cherry{
 	pixel_x = 7;
@@ -58868,13 +58777,6 @@
 /obj/structure/sign/warning/explosives/alt/directional/west,
 /turf/open/misc/snow/avangarde,
 /area/awaymission/avangarde17/outside/mountains)
-"xzS" = (
-/obj/item/flashlight/lantern/on{
-	pixel_x = -7;
-	pixel_y = 10
-	},
-/turf/open/floor/stone,
-/area/awaymission/avangarde17/inside/vedi)
 "xAd" = (
 /obj/structure/window/spawner/directional/south,
 /obj/structure/table/windowsill,
@@ -59514,10 +59416,6 @@
 	},
 /turf/open/floor/carpet,
 /area/awaymission/avangarde17/inside/living/lenina_1_1/second_floor/apartment_3)
-"xMk" = (
-/obj/structure/flora/bush/sparsegrass/style_random,
-/turf/open/misc/dirt/dark/station,
-/area/awaymission/avangarde17/outside/mountains)
 "xMm" = (
 /obj/effect/turf_decal/siding/wood/cherry{
 	dir = 1
@@ -59645,11 +59543,11 @@
 /turf/open/misc/dirt/dark/station,
 /area/awaymission/avangarde17/outside/city)
 "xOq" = (
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 1
+/obj/structure/railing/corner{
+	dir = 8
 	},
-/turf/open/misc/snow/avangarde,
-/area/awaymission/avangarde17/outside/city)
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/mountains)
 "xOK" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1
@@ -60640,6 +60538,13 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/dark/smooth_large,
 /area/awaymission/avangarde17/inside/base_barracs)
+"yjJ" = (
+/obj/effect/turf_decal/siding/thinplating{
+	dir = 1
+	},
+/obj/structure/holosign/barrier/engineering,
+/turf/open/floor/stone,
+/area/awaymission/avangarde17/outside/city)
 "yjW" = (
 /obj/machinery/light/small/directional/north,
 /obj/structure/cable,
@@ -60687,8 +60592,7 @@
 /turf/open/floor/wood/cherry,
 /area/awaymission/avangarde17/outside/ruin)
 "ykS" = (
-/obj/structure/flora/rock/pile/style_random,
-/turf/open/misc/dirt/dark/station,
+/turf/open/space/basic,
 /area/awaymission/avangarde17/outside/mountains)
 "ykV" = (
 /obj/structure/window/spawner/directional/east,
@@ -74274,7 +74178,7 @@ tCQ
 sAn
 soP
 gmY
-sgV
+nti
 nti
 sAn
 sAn
@@ -105060,7 +104964,7 @@ pyR
 pyR
 pyR
 pyR
-pyR
+hAi
 pyR
 pyR
 pyR
@@ -105318,8 +105222,8 @@ nqV
 nqV
 nqV
 nqV
-nqV
-nqV
+iFc
+iFc
 nqV
 llY
 nqV
@@ -105575,8 +105479,8 @@ oIg
 oIg
 oIg
 oIg
-oIg
-oIg
+iFc
+iFc
 oIg
 fwj
 oIg
@@ -105832,8 +105736,8 @@ enB
 enB
 enB
 enB
-enB
-enB
+iFc
+iFc
 enB
 wyn
 enB
@@ -106089,8 +105993,8 @@ oIg
 oIg
 oIg
 oIg
-oIg
-oIg
+iFc
+iFc
 oIg
 fwj
 oIg
@@ -106346,8 +106250,8 @@ wRK
 wRK
 wRK
 wRK
-wRK
-wRK
+iFc
+iFc
 wRK
 aXt
 wRK
@@ -106605,7 +106509,7 @@ fwZ
 fwZ
 fwZ
 fwZ
-fwZ
+bnL
 fwZ
 fwZ
 fwZ
@@ -114424,8 +114328,8 @@ xHx
 xHx
 tPM
 xHx
-xHx
-loM
+xGd
+dgG
 loM
 loM
 loM
@@ -114681,9 +114585,9 @@ phl
 tPM
 xGd
 xHx
-loM
-loM
-loM
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -114849,7 +114753,7 @@ ppH
 ppH
 ewN
 ewN
-qgH
+pFc
 ppH
 ppH
 ewN
@@ -114939,8 +114843,8 @@ xHx
 xHx
 xGd
 xHx
-loM
-loM
+dgG
+dgG
 loM
 loM
 loM
@@ -115170,34 +115074,34 @@ gVl
 jyH
 jyH
 xHx
-xHx
-loM
-loM
-loM
-xHx
-xHx
-xGd
-xHx
-xHx
-xHx
-xHx
-xGd
-xHx
-xGd
-xHx
-xHx
-xHx
-xHx
-xHx
-xGd
-xHx
-xHx
-xHx
-xHx
-xHx
-loM
-loM
-loM
+dgG
+dgG
+ykS
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+dgG
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -115427,34 +115331,34 @@ gVl
 jyH
 xHx
 xGd
+dgG
+dgG
+fvt
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+fvt
 loM
-loM
-loM
-loM
-xHx
-loM
-xHx
-loM
-loM
-xHx
-xHx
-xHx
-loM
-xHx
-xGd
-loM
-loM
-loM
-loM
-xHx
-xHx
-xGd
-xHx
-xHx
-xHx
-loM
-loM
-loM
+dgG
+dgG
 loM
 loM
 loM
@@ -115679,40 +115583,40 @@ oXc
 oXc
 oXc
 gVl
-gVl
-gVl
+oIg
+oIg
 oXc
-xHx
+dgG
+dgG
+dgG
+dgG
+fvt
+ykS
+ykS
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+ykS
+ykS
+fvt
 loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-xHx
-xHx
-xHx
-xHx
-xHx
-loM
-loM
-loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -115935,41 +115839,41 @@ vyY
 oXc
 cHn
 gVl
-gVl
-gVl
+oIg
+oIg
+oIg
 oXc
-oXc
+dgG
+dgG
+dgG
+dgG
+fvt
+ykS
+fvt
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+fvt
+ykS
+fvt
 loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-xHx
-xGd
-xHx
-xHx
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -116191,42 +116095,42 @@ lNs
 vyY
 oXc
 oXc
-gVl
-gVl
-gVl
+oIg
+oIg
+oIg
 oXc
 oXc
+dgG
+dgG
+dgG
+dgG
+fvt
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -116448,43 +116352,43 @@ tzW
 oBZ
 spF
 uMU
-gVl
-gVl
-gVl
-oXc
-oXc
+dya
+dya
+dya
+fVQ
+spF
+dkm
+dgG
+dgG
+dgG
+fvt
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -116705,43 +116609,43 @@ stO
 stO
 stO
 xoI
-hHX
-hHX
-hHX
-pEP
-oVS
+dya
+dya
+dya
+eqn
+brv
+cic
+dkm
+dgG
+dgG
+fvt
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -116962,43 +116866,43 @@ nqV
 nqV
 nqV
 nqV
-nqV
-nqV
-nqV
+oIg
+oIg
+oIg
 mux
-puV
+eqn
+fIg
+bxf
+dgG
+dgG
+fvt
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
 loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -117224,38 +117128,38 @@ oIg
 oIg
 oIg
 mux
+fIg
+cic
+aRz
+dkm
+fvt
+fvt
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
 loM
 loM
-loM
-loM
-loM
-vWT
-vWT
-vWT
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+dgG
+dgG
 loM
 loM
 loM
@@ -117481,38 +117385,38 @@ enB
 oIg
 oIg
 drg
+fIg
+fIg
+fIg
+cic
+dkm
+fvt
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
 loM
 loM
-loM
-loM
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-loM
-loM
-loM
-loM
-loM
+dgG
+dgG
 loM
 loM
 loM
@@ -117738,38 +117642,38 @@ oIg
 oIg
 oIg
 drg
-aVp
-loM
-ueP
-bOY
-ueP
-fwD
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-loM
-loM
+fIg
+vjJ
+hDc
+fIg
+cic
+dkm
+fvt
+fvt
+fvt
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
 loM
 loM
+dgG
+dgG
 loM
 loM
 loM
@@ -117996,37 +117900,37 @@ oIg
 oIg
 drg
 vjJ
-ueP
+oVS
 tAD
-loM
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-fwD
-mYP
-mYP
+aVp
+vsq
+fIg
+fIg
 ykS
-mYP
-tmb
-mYP
-xMk
-vWT
-vWT
-vWT
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
 loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -118252,38 +118156,38 @@ aSr
 oIg
 oIg
 drg
-vjJ
-ueP
-loM
-loM
-loM
-loM
+aqM
+tAD
+tmb
+tAD
+nRz
+bxf
+fvt
 ykS
-mYP
-ueP
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-mYP
-vWT
-mYP
-fwD
-vWT
-vWT
-vWT
-mYP
-vWT
-vWT
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
 loM
-loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -118510,36 +118414,36 @@ oIg
 oIg
 drg
 xOq
+dYK
 tAD
-loM
-loM
-loM
-loM
-vWT
-vWT
-ueP
-vWT
-vWT
-vWT
-mYP
-mYP
-mYP
+rXd
+svv
+fIg
+fIg
 ykS
-mYP
-mYP
-tmb
-vWT
-vWT
-vWT
-vWT
-mYP
-vWT
-vWT
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
-loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -118766,37 +118670,37 @@ aSr
 oIg
 oIg
 drg
-loM
-loM
-loM
-loM
-loM
-loM
-ueP
-ueP
-ueP
-mYP
-mYP
-mYP
+fIg
+xOq
+pym
+svv
+vnn
+qsl
+fvt
+fvt
+fvt
+fvt
 ykS
-mYP
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-tmb
-fwD
-vWT
-vWT
-vWT
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
 loM
 loM
 loM
@@ -119023,36 +118927,36 @@ oIg
 oIg
 oIg
 drg
-xOq
+fIg
+fIg
+fIg
+vnn
+qsl
+fvt
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
-loM
-loM
-loM
-vWT
-vWT
-vWT
-mYP
-mYP
-aqM
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-dYK
-vWT
-vWT
-vWT
-loM
-loM
-loM
+dgG
+dgG
 loM
 loM
 loM
@@ -119280,36 +119184,36 @@ aSr
 oIg
 oIg
 drg
-loM
-loM
-loM
-loM
-loM
-vWT
-vWT
-vWT
+fIg
+vnn
+bpX
+qsl
+fvt
+fvt
+fvt
 ykS
-mYP
-aqM
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-dYK
-vWT
-vWT
-vWT
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
-loM
-loM
+dgG
+dgG
 loM
 loM
 loM
@@ -119537,36 +119441,36 @@ oIg
 oIg
 oIg
 drg
-xOq
+fIg
+bxf
+dgG
+dgG
+fvt
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
 loM
-loM
-loM
-loM
-loM
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-loM
-loM
-loM
-loM
-loM
-loM
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-loM
-loM
-loM
+dgG
+dgG
 loM
 loM
 loM
@@ -119794,35 +119698,35 @@ aSr
 oIg
 oIg
 drg
-xOq
-loM
-loM
-loM
-loM
-loM
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-loM
-loM
-loM
-loM
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-loM
-loM
+fIg
+bxf
+dgG
+dgG
+fvt
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
+dgG
+dgG
 loM
 loM
 loM
@@ -120041,7 +119945,7 @@ nHS
 nHS
 tmF
 rqq
-gzt
+oXc
 lNs
 vyY
 agY
@@ -120051,35 +119955,35 @@ oIg
 oIg
 oIg
 drg
-xOq
-loM
-loM
-loM
-loM
-loM
-vWT
-vWT
-vWT
-vWT
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-vWT
-loM
-loM
+fIg
+bxf
+dgG
+dgG
+fvt
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
+dgG
+dgG
 loM
 loM
 loM
@@ -120192,11 +120096,11 @@ oXc
 oXc
 lNs
 vyY
-rVU
+whJ
 oIg
-pKA
+rAd
 oIg
-drg
+uuB
 lNs
 vyY
 oXc
@@ -120298,7 +120202,7 @@ wrZ
 wrZ
 wrZ
 rqq
-gzt
+oXc
 lNs
 vyY
 qHg
@@ -120308,35 +120212,35 @@ aSr
 oIg
 oIg
 drg
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+fIg
+bxf
+dgG
+dgG
+fvt
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
+dgG
+dgG
 loM
 loM
 loM
@@ -120447,7 +120351,7 @@ oXc
 oXc
 oXc
 oXc
-lNs
+pJu
 vyY
 rVU
 oIg
@@ -120455,7 +120359,7 @@ pKA
 oIg
 drg
 lNs
-vyY
+phM
 oXc
 oXc
 oXc
@@ -120554,7 +120458,7 @@ dex
 oXc
 oXc
 oXc
-oXc
+rqq
 oXc
 lNs
 vyY
@@ -120565,35 +120469,35 @@ oIg
 oIg
 oIg
 drg
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+fIg
+bxf
+dgG
+dgG
+fvt
+ykS
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+ykS
+fvt
+dgG
+dgG
 loM
 loM
 loM
@@ -120810,8 +120714,8 @@ ciI
 dex
 oXc
 oXc
-gzt
 oXc
+rqq
 dex
 lNs
 vyY
@@ -120822,34 +120726,34 @@ aSr
 oIg
 oIg
 nTj
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+fIg
+bxf
+dgG
+dgG
+fvt
+ykS
+fvt
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+fvt
+ykS
+fvt
+dgG
 loM
 loM
 loM
@@ -120961,15 +120865,15 @@ oXc
 oXc
 gVl
 gVl
-lNs
-vyY
+yjJ
+jdj
 rVU
-oIg
-pKA
-oIg
+wRU
+bau
+wRU
 drg
-lNs
-vyY
+yjJ
+jdj
 oXc
 oXc
 oXc
@@ -121066,47 +120970,47 @@ vzR
 oXc
 oXc
 oXc
-gzt
 oXc
-dex
+oXc
+rqq
 dex
 eqn
-xoI
+vyY
 wRK
 wRK
 wRK
 wRK
 wRK
 nTj
-eZq
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+mgx
+bpX
+qsl
+dgG
+dgG
+fvt
+ykS
+ykS
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+ykS
+ykS
+fvt
+dgG
 loM
 loM
 loM
@@ -121325,44 +121229,44 @@ ocX
 oXc
 dex
 dex
-oXc
+rqq
 oXc
 oXc
 vge
-phM
-phM
-phM
-phM
-phM
-phM
+lzw
+lzw
+lzw
+lzw
+lzw
+lzw
 kHS
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+dgG
+dgG
+dgG
+fvt
+fvt
+fvt
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+ykS
+fvt
+fvt
 loM
 loM
 loM
@@ -121477,11 +121381,11 @@ loM
 fvt
 kwl
 tUM
-oYs
-rot
-fSc
-rot
-nVm
+sgB
+rFc
+eZq
+rFc
+rmy
 aMb
 oQW
 fvt
@@ -121579,46 +121483,46 @@ iyh
 vzR
 oXc
 oXc
-gzt
 oXc
 oXc
-gzt
+oXc
+rqq
 dex
 oXc
 oXc
-gzt
 oXc
+oXc
+dgG
+dgG
+dgG
+dgG
+dgG
+dgG
+dgG
+fvt
+fvt
 loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
 loM
 loM
 loM
@@ -121732,15 +121636,15 @@ loM
 loM
 fvt
 fvt
-vuj
-bxf
+cWI
+rIw
 oYs
 rot
 fSc
 rot
 nVm
 vuj
-fIg
+plT
 fvt
 fvt
 loM
@@ -121839,20 +121743,20 @@ oXc
 oXc
 oXc
 loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
+fvt
 loM
 loM
 loM
@@ -121989,15 +121893,15 @@ loM
 loM
 fvt
 fvt
-vuj
+cWI
 bxf
 oYs
 rot
 fSc
-rot
+plT
 nVm
 vuj
-fIg
+plT
 fvt
 fvt
 loM
@@ -122096,7 +122000,7 @@ loM
 loM
 loM
 loM
-loM
+fvt
 loM
 loM
 loM
@@ -122246,16 +122150,16 @@ loM
 loM
 fvt
 qxL
-gpe
-bxf
+sgV
+rIw
 oYs
 rot
 fSc
-rot
-nVm
+plT
+gUL
 vuj
-fIg
-fIg
+plT
+plT
 fvt
 loM
 loM
@@ -122503,15 +122407,15 @@ loM
 loM
 fvt
 vuj
-fIg
-bxf
+plT
+rIw
 oYs
-rot
+plT
 fSc
-rot
+plT
 nVm
 vuj
-fIg
+plT
 fIg
 fvt
 loM
@@ -122761,14 +122665,14 @@ loM
 fvt
 vuj
 fIg
-bxf
+rIw
 oYs
-rot
-fSc
-rot
+plT
+bfd
+plT
 nVm
-vuj
-fIg
+cWI
+plT
 fIg
 fvt
 loM
@@ -123018,15 +122922,15 @@ loM
 fvt
 vuj
 fIg
-bxf
-oYs
-rot
+rIw
+rdB
+plT
 fSc
 rot
-nVm
-vuj
-fIg
-fIg
+gUL
+cWI
+plT
+plT
 fvt
 loM
 loM
@@ -123274,13 +123178,13 @@ loM
 loM
 fvt
 gEL
-gXH
+gCe
 bxf
 oYs
-rot
+plT
 fSc
 rot
-nVm
+gUL
 vuj
 fIg
 fIg
@@ -123531,15 +123435,15 @@ loM
 loM
 fvt
 fvt
-goc
-oAB
-hXS
-ank
-akm
-gAz
-dmK
-pIw
-olC
+cWI
+bxf
+oYs
+plT
+fSc
+rot
+gUL
+vuj
+fIg
 fvt
 fvt
 loM
@@ -125844,15 +125748,15 @@ loM
 loM
 loM
 loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+goc
+oAB
+hXS
+ank
+akm
+gAz
+dmK
+pIw
+olC
 loM
 loM
 loM
@@ -180703,34 +180607,34 @@ bkv
 bkv
 bQx
 bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -180960,34 +180864,34 @@ bkv
 bkv
 bQx
 bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 bQx
 loM
 loM
@@ -181217,34 +181121,34 @@ bkv
 bkv
 bQx
 bQx
-bQx
-bQx
-bQx
-loM
-loM
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bQx
-bSX
-bSX
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -181474,34 +181378,34 @@ bkv
 bkv
 bQx
 bQx
-bQx
-bQx
-loM
-loM
-loM
-loM
-loM
-bQx
-loM
-bQx
-loM
-loM
-bQx
-bQx
-bQx
-loM
-bQx
-bQx
-loM
-loM
-loM
-loM
-bQx
-bQx
-bQx
-bQx
-bSX
-bSX
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -181731,34 +181635,34 @@ bkv
 bkv
 bQx
 bQx
-bQx
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-bQx
-bQx
-bQx
-bQx
-bSX
-loM
-loM
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -181988,34 +181892,34 @@ bQx
 bQx
 bQx
 bQx
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-bSX
-bSX
-bSX
-bSX
-loM
-loM
-loM
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -182245,34 +182149,34 @@ bQx
 bQx
 bQx
 bQx
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-bSX
-bSX
-bSX
-loM
-loM
-loM
-loM
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -182502,34 +182406,34 @@ bQx
 bQx
 bQx
 bQx
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -182759,34 +182663,34 @@ bQx
 bQx
 bQx
 bQx
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -183016,34 +182920,34 @@ bQx
 bQx
 bQx
 bQx
-loM
-loM
-loM
-loM
-loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-loM
-svv
-svv
-svv
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -183273,34 +183177,34 @@ bQx
 bQx
 bQx
 bQx
-loM
-loM
-loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -183530,34 +183434,34 @@ bQx
 bQx
 bQx
 bQx
-loM
-loM
-loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
@@ -183787,37 +183691,37 @@ bQx
 bQx
 bQx
 bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-cCW
-gsa
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
 loM
 loM
 loM
@@ -184044,37 +183948,37 @@ bQx
 bQx
 bQx
 bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-cCW
-gsa
-gsa
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
 loM
 loM
 loM
@@ -184301,37 +184205,37 @@ bQx
 bQx
 bQx
 bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-reu
-dvZ
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
 loM
 loM
 loM
@@ -184558,38 +184462,38 @@ bQx
 bQx
 bQx
 bQx
-bQx
-loM
-loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-rXd
-dfN
 uHG
-xzS
-svv
-svv
-svv
-svv
-nYe
-svv
-wrg
-svv
-svv
-svv
-svv
-svv
-svv
-svv
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+loM
+loM
+loM
+loM
 loM
 loM
 loM
@@ -184815,38 +184719,38 @@ bQx
 bQx
 bQx
 bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
 loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-rXd
-cCW
-tEp
-pym
-pzt
-svv
-svv
-svv
-svv
-tEp
-svv
-wrg
-svv
-uyk
-svv
-svv
-svv
-svv
-svv
 loM
 loM
 loM
@@ -185072,38 +184976,38 @@ bQx
 bQx
 bQx
 bQx
-bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-vbr
-vbr
-hDc
-tEp
-hDc
-tEp
-fqs
-svv
-svv
-nRz
-dfN
-svv
-pzt
-fqs
-nYe
-svv
-svv
-svv
-svv
-svv
+loM
 loM
 loM
 loM
@@ -185329,38 +185233,38 @@ bQx
 bQx
 bQx
 bQx
-bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
 loM
-svv
-svv
-svv
-svv
-svv
-svv
-reu
-hDc
-vbr
-eAs
-hDc
-hQv
-tEp
-tEp
-tEp
-rae
-reu
-fqs
-fqs
-fqs
-svv
-vsq
-svv
-svv
-svv
-svv
-svv
 loM
 loM
 loM
@@ -185586,38 +185490,38 @@ bQx
 bQx
 bQx
 bQx
-bQx
-loM
-loM
-loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-vbr
-vbr
-dfN
-hDc
 uHG
-fqs
-pzt
-svv
-svv
-svv
-svv
-pym
-svv
-gqF
-svv
-svv
-svv
-svv
-svv
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+loM
+loM
+loM
+loM
 loM
 loM
 loM
@@ -185843,38 +185747,38 @@ bQx
 bQx
 bQx
 bQx
-loM
-loM
-loM
-loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-rXd
 uHG
 uHG
-tEp
 uHG
-aVF
-svv
-svv
-svv
-svv
-tEp
 uHG
-svv
-svv
-svv
-svv
-svv
-svv
-svv
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+loM
+loM
+loM
+loM
 loM
 loM
 loM
@@ -186100,38 +186004,38 @@ bQx
 bQx
 bQx
 bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
 loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-rXd
-dvZ
-fqs
-tQP
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
 loM
 loM
 loM
@@ -186357,38 +186261,38 @@ bQx
 bQx
 bQx
 bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
 loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-dvZ
-dvZ
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
 loM
 loM
 loM
@@ -186614,38 +186518,38 @@ bQx
 bQx
 bQx
 bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
 loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-gsa
-cCW
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
 loM
 loM
 loM
@@ -186871,37 +186775,37 @@ bQx
 bQx
 bQx
 bQx
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
-loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-cCW
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
 loM
 loM
 loM
@@ -187128,37 +187032,37 @@ loM
 loM
 loM
 loM
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
+uHG
 loM
 loM
 loM
-loM
-loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
 loM
 loM
 loM
@@ -187390,32 +187294,32 @@ loM
 loM
 loM
 loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
 loM
 loM
-svv
-svv
-svv
-svv
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
 loM
 loM
 loM
@@ -187647,25 +187551,25 @@ loM
 loM
 loM
 loM
-svv
-svv
-svv
-svv
-svv
-svv
-svv
-svv
 loM
-svv
-svv
-svv
-svv
 loM
-svv
-svv
-svv
-svv
-svv
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
+loM
 loM
 loM
 loM
