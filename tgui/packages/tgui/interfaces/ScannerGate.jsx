@@ -123,6 +123,10 @@ const ScannerGateOff = (props) => {
           content="Nutrition"
           onClick={() => act('set_mode', { new_mode: 'Nutrition' })}
         />
+        <Button
+          content="Store"
+          onClick={() => act('set_mode', { new_mode: 'Store' })}
+        />
       </Box>
     </>
   );

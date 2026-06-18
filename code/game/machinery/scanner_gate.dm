@@ -5,6 +5,7 @@
 #define SCANGATE_WANTED "Wanted"
 #define SCANGATE_SPECIES "Species"
 #define SCANGATE_NUTRITION "Nutrition"
+#define SCANGATE_STORE "Store"
 
 /obj/machinery/scanner_gate
 	name = "scanner gate"
@@ -61,6 +62,7 @@
 		SCANGATE_WANTED,
 		SCANGATE_SPECIES,
 		SCANGATE_NUTRITION,
+		SCANGATE_STORE,
 	)
 	/// All disease severity thresholds available to the scanner
 	var/static/list/all_disease_thresholds = list(
@@ -259,6 +261,20 @@
 				if(scanned_human.nutrition >= detect_nutrition && detect_nutrition == NUTRITION_LEVEL_FAT)
 					beep = TRUE
 					detected_thing = "ожирение"
+		if(SCANGATE_STORE)
+			if(HAS_TRAIT(thing, TRAIT_STORE_TAGGED))
+				beep = TRUE
+			else if(ishuman(thing))
+				var/mob/living/carbon/human/scanned_human = thing
+				for(var/obj/item/scanned_item in scanned_human.get_all_contents_skipping_traits(TRAIT_CONTRABAND_BLOCKER))
+					if(HAS_TRAIT(scanned_item, TRAIT_STORE_TAGGED))
+						beep = TRUE
+						break
+			else
+				for(var/obj/item/scanned_item in thing.get_all_contents_skipping_traits(TRAIT_CONTRABAND_BLOCKER))
+					if(HAS_TRAIT(scanned_item, TRAIT_STORE_TAGGED))
+						beep = TRUE
+						break
 
 	if(reverse)
 		beep = !beep
@@ -381,3 +397,4 @@
 #undef SCANGATE_WANTED
 #undef SCANGATE_SPECIES
 #undef SCANGATE_NUTRITION
+#undef SCANGATE_STORE

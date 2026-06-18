@@ -1,4 +1,4 @@
-#define SMOOTH_GROUP_WINDOWSILLS S_OBJ(56)
+#define SMOOTH_GROUP_WINDOWSILLS S_OBJ(57)
 
 /obj/structure/table/windowsill
 	name = "windowsill"
