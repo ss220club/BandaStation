@@ -611,29 +611,36 @@
 	name = "Тёмный Гараж"
 	icon_state = "awaycontent1"
 
+
 /area/awaymission/avangarde17/inside/toilet
 	name = "Сельский Туалет"
 	icon_state = "awaycontent1"
+	base_lighting_alpha = 50
 
 /area/awaymission/avangarde17/inside/old_hangar
 	name = "Старый Ангар"
 	icon_state = "awaycontent1"
+	base_lighting_alpha = 50
 
 /area/awaymission/avangarde17/inside/old_hangar/first_floor
 	name = "Старый Ангар - Первый Этаж"
 	icon_state = "awaycontent2"
+	base_lighting_alpha = 50
 
 /area/awaymission/avangarde17/inside/old_hangar/eng
 	name = "Старый Ангар - Генераторная"
 	icon_state = "awaycontent3"
+	base_lighting_alpha = 50
 
 /area/awaymission/avangarde17/inside/old_hangar/second_floor
 	name = "Старый Ангар - Второй Этаж"
 	icon_state = "awaycontent4"
+	base_lighting_alpha = 50
 
 /area/awaymission/avangarde17/inside/old_hangar/bedroom
 	name = "Старый Ангар - Общага"
 	icon_state = "awaycontent5"
+	base_lighting_alpha = 50
 
 // MARK: Военная база
 /area/awaymission/avangarde17/inside/base
@@ -945,14 +952,17 @@
 /area/awaymission/avangarde17/inside/living/cabin/communism_1
 	name = "Ул. Коммунизма - 1"
 	icon_state = "awaycontent1"
+	base_lighting_alpha = 65
 
 /area/awaymission/avangarde17/inside/living/cabin/communism_2
 	name = "Ул. Коммунизма - 2"
 	icon_state = "awaycontent2"
+	base_lighting_alpha = 65
 
 /area/awaymission/avangarde17/inside/living/cabin/communism_3
 	name = "Ул. Коммунизма - 3"
 	icon_state = "awaycontent3"
+	base_lighting_alpha = 65
 
 // MARK: Прочие зоны
 
