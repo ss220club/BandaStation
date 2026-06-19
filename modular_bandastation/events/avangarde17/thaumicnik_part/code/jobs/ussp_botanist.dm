@@ -18,6 +18,7 @@
 	gloves = null
 	l_pocket = null
 	l_hand = null
+	pda_slot = null
 
 	backpack = /obj/item/storage/backpack
 	satchel = /obj/item/storage/backpack/satchel

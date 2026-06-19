@@ -18,6 +18,7 @@
 	gloves = null
 	l_pocket = /obj/item/laser_pointer/purple
 	l_hand = /obj/item/clipboard
+	pda_slot = null
 
 	backpack = /obj/item/storage/backpack
 	satchel = /obj/item/storage/backpack/satchel
