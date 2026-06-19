@@ -1,13 +1,12 @@
-/datum/outfit/job/ussp_paramedic
-	name = "Фельдшер"
+/datum/outfit/job/ussp_coroner
+	name = "Патологоанатом"
 	id = /obj/item/card/id/advanced
-	id_trim = /datum/id_trim/job/ussp_paramedic
+	id_trim = /datum/id_trim/job/ussp_coroner
 	uniform = /obj/item/clothing/under/costume/buttondown/slacks
 	suit = /obj/item/clothing/suit/toggle/labcoat
 	ears = /obj/item/radio/headset
 	shoes = /obj/item/clothing/shoes/laceup
 	gloves = /obj/item/clothing/gloves/latex
-	head = /obj/item/clothing/mask/bandana/white
 	belt = null
 	pda_slot = null
 	ears = null
@@ -17,14 +16,14 @@
 	duffelbag = /obj/item/storage/backpack/duffelbag
 	messenger = /obj/item/storage/backpack/messenger
 
-/datum/job/ussp_paramedic
-	title = "Фельдшер"
+/datum/job/ussp_coroner
+	title = "Патологоанатом"
 	supervisors = "правительством СССП"
-	description = "Выезжайте на вызовы, приторговывайте опиатами и промышляйте мелкими кражами."
+	description = "Вскрывайте и утилизируйте трупы. Опционально приторговывайте органами."
 	departments_list = list(
 		/datum/job_department/medical,
 	)
-	outfit = /datum/outfit/job/ussp_paramedic
+	outfit = /datum/outfit/job/ussp_coroner
 	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2
@@ -35,12 +34,12 @@
 	job_flags = STATION_JOB_FLAGS
 	liver_traits = list(TRAIT_MEDICAL_METABOLISM)
 
-/datum/id_trim/job/ussp_paramedic
-	assignment = "Фельдшер"
-	trim_state = "trim_paramedic"
+/datum/id_trim/job/ussp_coroner
+	assignment = "Патологоанатом"
+	trim_state = "trim_medicaldoctor"
 	department_color = COLOR_MEDICAL_BLUE
 	subdepartment_color = COLOR_MEDICAL_BLUE
-	sechud_icon_state = SECHUD_USSP
+	sechud_icon_state = SECHUD_CORONER
 	minimal_access = list(
 		ACCESS_MECH_MEDICAL,
 		ACCESS_MEDICAL,
@@ -52,4 +51,4 @@
 		ACCESS_PARAMEDIC,
 		ACCESS_PLUMBING,
 		)
-	job = /datum/job/ussp_paramedic
+	job = /datum/job/ussp_coroner

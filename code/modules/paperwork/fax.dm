@@ -1,4 +1,4 @@
-GLOBAL_VAR_INIT(nt_fax_department, pick("NT HR Department", "NT Legal Department", "NT Complaint Department", "NT Customer Relations", "Nanotrasen Tech Support", "NT Internal Affairs Dept"))
+GLOBAL_VAR_INIT(nt_fax_department, "ЦК КССП") /// BANDASTATION EDIT
 GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 
 #define FAX_ID_CENTRAL_COMMAND "central_command"

@@ -758,6 +758,9 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #undef SINGLE_CALL_PRICE
 #undef RING_TIMEOUT
 
+#undef PHONE_NET_CENTCOM
+#undef HISTORY_LENGTH
+
 #undef STATUS_INBOUND
 #undef STATUS_ONGOING
 #undef STATUS_OUTGOING

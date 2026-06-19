@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_miner
 	name = "Шахтёр"
-	id = /obj/item/card/id/advanced/ussp/passport
+	id = /obj/item/card/id/advanced
 	id_trim = /datum/id_trim/job/ussp_miner
 	uniform = /obj/item/clothing/under/misc/overalls
 	ears = /obj/item/radio/headset
@@ -28,12 +28,11 @@
 	faction = FACTION_STATION
 	total_positions = 3
 	spawn_positions = 3
-	paycheck = PAYCHECK_ZERO
+	paycheck = PAYCHECK_CREW
 	bounty_types = CIV_JOB_BASIC
 	department_for_prefs = /datum/job_department/cargo
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
-	event_description = "Ваше предприятие переживает не лучшие деньки и, скорее всего, скоро закроется. Вы обязаны выполнить все планы в рекордные сроки, чтобы не допустить этого и не потерять эту поистине престижную работу! В вашем распоряжении рабочий дом, сельский туалет и шахтерское оборудование. Будьте осторожны в шахтах! Все необходимые товары вы можете получить в гастрономе или промтоварах по талонам, которые выдаются специальным автоматом на втором этаже райкома по курсу один талон - один товар.Обязательно посетите собрание в местном райкоме на площади Революции."
 
 /datum/id_trim/job/ussp_miner
 	assignment = "Шахтёр"

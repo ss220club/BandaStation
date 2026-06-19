@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_quartermaster
 	name = "Заведующий складом"
-	id = /obj/item/card/id/advanced/ussp/passport
+	id = /obj/item/card/id/advanced
 	id_trim = /datum/id_trim/job/ussp_quartermaster
 	uniform = /obj/item/clothing/under/suit/navy
 	ears = /obj/item/radio/headset
@@ -25,12 +25,11 @@
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
-	paycheck = PAYCHECK_ZERO
+	paycheck = PAYCHECK_CREW
 	bounty_types = CIV_JOB_BASIC
 	department_for_prefs = /datum/job_department/cargo
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
-	event_description = "Несмотря на непыльную и порой скучную работу, вы - второй человек в поселке! В ваши обязанности входит инвентаризация складских товаров и своевременный заказ новых материалов на военной базе. К вашему складу есть доступ у продавцов гастронома и промтоваров - помогайте им с транспортировкой и фасовкой товаров! Будьте бдительны - не допускайте расхищения общественной собственности! Все необходимые товары вы можете получить в гастрономе или промтоварах по талонам, которые выдаются специальным автоматом на втором этаже райкома по курсу один талон - один товар. Обязательно посетите собрание в местном райкоме на площади Революции."
 
 /datum/id_trim/job/ussp_quartermaster
 	assignment = "Заведующий складом"

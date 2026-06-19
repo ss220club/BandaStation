@@ -41,3 +41,20 @@
 	name = "temple floor"
 	icon_state = "cult"
 	color = "#4b4b4b"
+
+/turf/closed/mineral/random/snow/avangarde
+	turf_type = /turf/open/misc/asteroid/moon
+	baseturfs = /turf/open/misc/asteroid/moon
+	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+
+/turf/closed/mineral/random/snow/avangarde/mineral_chances()
+	return list(
+		/obj/item/stack/ore/bluespace_crystal = 1.5,
+		/obj/item/stack/ore/diamond = 3,
+		/obj/item/stack/ore/gold = 12,
+		/obj/item/stack/ore/iron = 28,
+		/obj/item/stack/ore/plasma = 28,
+		/obj/item/stack/ore/silver = 4,
+		/obj/item/stack/ore/titanium = 8,
+		/obj/item/stack/ore/uranium = 14,
+	)

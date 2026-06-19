@@ -1,7 +1,7 @@
 /datum/outfit/job/ussp_janitor
 	name = "Дворник"
-	id = /obj/item/card/id/advanced/ussp/passport
-	id_trim = /datum/id_trim/job/ussp_trader_manu
+	id = /obj/item/card/id/advanced
+	id_trim = /datum/id_trim/job/ussp_janitor
 	uniform = /obj/item/clothing/under/costume/buttondown/slacks
 	ears = /obj/item/radio/headset
 	suit = /obj/item/clothing/suit/apron/overalls
@@ -32,7 +32,7 @@
 	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2
-	paycheck = PAYCHECK_ZERO
+	paycheck = PAYCHECK_CREW
 	bounty_types = CIV_JOB_BASIC
 	department_for_prefs = /datum/job_department/service
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)

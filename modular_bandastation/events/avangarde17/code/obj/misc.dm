@@ -145,7 +145,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sink/shell_only, (-16))
 	anchored = TRUE
 	density = TRUE
 	bound_width = 192
-	bound_height = 96
+	bound_height = 64
 
 /obj/structure/bus/wrench_act(mob/living/user, obj/item/tool)
 	return TRUE

@@ -65,16 +65,16 @@ export function ReverseJobsRu(value: string) {
 }
 
 export const DEPARTMENTS_RU = {
-  Command: 'Милиция',
-  'NT Representation': 'Представительство НТ',
-  Justice: 'Администрация',
-  Security: 'Военная база',
-  Service: 'Услуги',
-  Cargo: 'Индустрия',
-  Science: 'Исследование',
-  Medical: 'Медицина',
-  Silicon: 'Синтетики',
-  Engineering: 'Инженерия',
+  Command: 'Администрация',
+  'NT Representation': 'Партия',
+  Justice: 'Юриспруденция',
+  Security: 'Милиция',
+  Service: 'Муниципалитет',
+  Cargo: 'Логистика',
+  Science: 'Наука',
+  Medical: 'Здравоохранение',
+  Silicon: 'Кибернетики',
+  Engineering: 'Техобслуживание',
   'No Department': 'Без отдела',
   Assistant: 'Гражданские',
 };

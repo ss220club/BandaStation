@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_detective
 	name = "Следователь"
-	id = /obj/item/card/id/advanced/ussp/passport
+	id = /obj/item/card/id/advanced
 	id_trim = /datum/id_trim/job/ussp_detective
 	uniform = /obj/item/clothing/under/rank/ussp/militsioner
 	suit = /obj/item/clothing/suit/toggle/jacket/det_trench/noir
@@ -28,15 +28,15 @@
 	supervisors = "оперуполномоченным"
 	description = "Берите след, теряйтесь в амнезии, обнаруживайте в себе 24 альтернативные личности. Танцуйте диско."
 	departments_list = list(
-		/datum/job_department/justice,
+		/datum/job_department/security,
 	)
 	outfit = /datum/outfit/job/ussp_detective
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
-	paycheck = PAYCHECK_ZERO
+	paycheck = PAYCHECK_CREW
 	bounty_types = CIV_JOB_BASIC
-	department_for_prefs = /datum/job_department/justice
+	department_for_prefs = /datum/job_department/security
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
 

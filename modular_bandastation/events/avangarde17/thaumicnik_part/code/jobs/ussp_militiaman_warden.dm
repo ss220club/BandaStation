@@ -1,7 +1,7 @@
-/datum/outfit/job/ussp_militiaman
-	name = "Милиционер"
+/datum/outfit/job/ussp_militiaman_warden
+	name = "Постовой"
 	id = /obj/item/card/id/advanced
-	id_trim = /datum/id_trim/job/ussp_militiaman
+	id_trim = /datum/id_trim/job/ussp_militiaman_warden
 	uniform = /obj/item/clothing/under/rank/ussp/militsioner
 	suit = /obj/item/clothing/suit/armor/vest/ussp/militsia
 	ears = null
@@ -16,14 +16,14 @@
 	duffelbag = /obj/item/storage/backpack/duffelbag
 	messenger = /obj/item/storage/backpack/messenger
 
-/datum/job/ussp_militiaman
-	title = "Милиционер"
-	supervisors = "главой участка"
-	description = "Боритесь с преступностью, берите взятки, являйтесь героем 90% отечественных сериалов."
+/datum/job/ussp_militiaman_warden
+	title = "Постовой"
+	supervisors = "начальником участка"
+	description = "Сидите и играйте в шашки сами с собой. У вас даже камер нет!"
 	departments_list = list(
 		/datum/job_department/security,
 	)
-	outfit = /datum/outfit/job/ussp_militiaman
+	outfit = /datum/outfit/job/ussp_militiaman_warden
 	faction = FACTION_STATION
 	total_positions = 5
 	spawn_positions = 5
@@ -33,12 +33,12 @@
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
 
-/datum/id_trim/job/ussp_militiaman
-	assignment = "Милиционер"
-	trim_state = "trim_mime"
+/datum/id_trim/job/ussp_militiaman_warden
+	assignment = "Постовой"
+	trim_state = "trim_warden"
 	department_color = COLOR_COMMAND_BLUE
 	subdepartment_color = COLOR_COMMAND_BLUE
-	sechud_icon_state = SECHUD_USSP
+	sechud_icon_state = SECHUD_WARDEN
 	minimal_access = list(
 		ACCESS_BRIG,
 		ACCESS_BRIG_ENTRANCE,
@@ -48,4 +48,4 @@
 		ACCESS_SECURITY,
 		ACCESS_WEAPONS,
 		)
-	job = /datum/job/ussp_militiaman
+	job = /datum/job/ussp_militiaman_warden

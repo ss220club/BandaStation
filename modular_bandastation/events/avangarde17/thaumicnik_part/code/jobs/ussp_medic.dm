@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_medic
 	name = "Врач посёлка"
-	id = /obj/item/card/id/advanced/ussp/passport
+	id = /obj/item/card/id/advanced
 	id_trim = /datum/id_trim/job/ussp_medic
 	uniform = /obj/item/clothing/under/costume/buttondown/slacks
 	suit = /obj/item/clothing/suit/toggle/labcoat
@@ -27,12 +27,11 @@
 	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2
-	paycheck = PAYCHECK_ZERO
+	paycheck = PAYCHECK_CREW
 	bounty_types = CIV_JOB_BASIC
 	department_for_prefs = /datum/job_department/medical
 	family_heirlooms = list(/obj/item/storage/medkit/ancient/heirloom, /obj/item/scalpel, /obj/item/hemostat, /obj/item/circular_saw, /obj/item/retractor, /obj/item/cautery, /obj/item/statuebust/hippocratic)
 	job_flags = STATION_JOB_FLAGS
-	event_description = "Будучи квалифицированным специалистом, вы, скорее всего, попали под распределение после окончания медицинского училища! В ваши обязанности входит помощь гражданам ПГТ, профилактика болезней и пропагандирование ЗОЖ! В вашем распоряжении небольшой фельдшерско-акушерский пункт с палатами, перевязочным кабинетом, складом и моргом. Все необходимые препараты, расходники и оборудование можно запрашивать в промтоварах - вам выдадут их без талонов. Все необходимые товары личного пользования вы можете получить в гастрономе или промтоварах по талонам, которые выдаются специальным автоматом на втором этаже райкома по курсу один талон - один товар. Обязательно посетите собрание в местном райкоме на площади Революции."
 	liver_traits = list(TRAIT_MEDICAL_METABOLISM)
 
 /datum/id_trim/job/ussp_medic

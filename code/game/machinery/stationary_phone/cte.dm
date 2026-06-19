@@ -131,4 +131,9 @@ GLOBAL_VAR_INIT(central_telephone_exchange, null)
 #undef COMMSIG_HANGUP
 #undef COMMSIG_TIMEOUT
 
+#undef STATUS_INBOUND
+#undef STATUS_ONGOING
+#undef STATUS_OUTGOING
+#undef STATUS_IDLE
+
 #undef TIMEOUT_DURATION

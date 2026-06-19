@@ -1,6 +1,6 @@
 {
 	"version": 1,
-	"map_name": "Avangarde17",
+	"map_name": "avangarde",
 	"map_path": "bandastation",
 	"map_file": "avangarde.dmm",
 	"fluff_name": "Зорька",
@@ -9,6 +9,16 @@
 	"shuttles": {
 		"cargo": "cargo_box"
 	},
+	"traits": [
+		{
+			"Baseturf": "/turf/open/misc/asteroid/moon",
+			"Linkage": null
+		},
+		{
+			"Baseturf": "/turf/open/openspace",
+			"Linkage": null
+		}
+	],
 	"main_floor": 1,
 	"planetary": 1,
 	"ignored_unit_tests": [

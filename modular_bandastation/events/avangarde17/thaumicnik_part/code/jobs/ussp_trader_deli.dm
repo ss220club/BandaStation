@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_trader_deli
 	name = "Продавец гастронома"
-	id = /obj/item/card/id/advanced/ussp/passport
+	id = /obj/item/card/id/advanced
 	id_trim = /datum/id_trim/job/ussp_trader_deli
 	uniform = /obj/item/clothing/under/costume/buttondown/slacks
 	ears = /obj/item/radio/headset
@@ -25,14 +25,13 @@
 	)
 	outfit = /datum/outfit/job/ussp_trader_deli
 	faction = FACTION_STATION
-	total_positions = 1
-	spawn_positions = 1
-	paycheck = PAYCHECK_ZERO
+	total_positions = 2
+	spawn_positions = 2
+	paycheck = PAYCHECK_CREW
 	bounty_types = CIV_JOB_BASIC
 	department_for_prefs = /datum/job_department/service
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
-	event_description = "В вашем распоряжении все доступные товары гастронома и склада на заднем дворе. У вас и ваших товарищей из промтоваров есть туда доступ. При необходимости, вы можете запросить заказ товаров у военной базы по телефону, но только в случае крайнего дефицита или острой нужды. Товары общего пользования для жителей идут по талоному тарифу - один товар за один талон. Работникам рюмочной полагается выдача товаров без талонов, по запросу заведения! Скорее всего, вам стоит предложить работу помощника кому-нибудь из жителей ПГТ, исключительно на добровольческой основе. Будьте бдительны - не допускайте расхищения общественной собственности! Обязательно посетите собрание в местном райкоме на площади Революции."
 
 /datum/id_trim/job/ussp_trader_deli
 	assignment = "Продавец гастронома"

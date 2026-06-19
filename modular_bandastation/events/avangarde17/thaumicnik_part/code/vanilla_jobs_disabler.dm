@@ -6,14 +6,6 @@
 	faction = FACTION_NONE
 	job_flags = NONE
 
-/datum/job/head_of_personnel
-	departments_list = list()
-	department_for_prefs = list()
-	total_positions = 0
-	spawn_positions = 0
-	faction = FACTION_NONE
-	job_flags = NONE
-
 /datum/job/ai
 	departments_list = list()
 	department_for_prefs = list()
@@ -31,14 +23,6 @@
 	job_flags = NONE
 
 /datum/job/bartender
-	departments_list = list()
-	department_for_prefs = list()
-	total_positions = 0
-	spawn_positions = 0
-	faction = FACTION_NONE
-	job_flags = NONE
-
-/datum/job/botanist
 	departments_list = list()
 	department_for_prefs = list()
 	total_positions = 0
@@ -206,23 +190,7 @@
 	faction = FACTION_NONE
 	job_flags = NONE
 
-/datum/job/research_director
-	departments_list = list()
-	department_for_prefs = list()
-	total_positions = 0
-	spawn_positions = 0
-	faction = FACTION_NONE
-	job_flags = NONE
-
 /datum/job/roboticist
-	departments_list = list()
-	department_for_prefs = list()
-	total_positions = 0
-	spawn_positions = 0
-	faction = FACTION_NONE
-	job_flags = NONE
-
-/datum/job/scientist
 	departments_list = list()
 	department_for_prefs = list()
 	total_positions = 0

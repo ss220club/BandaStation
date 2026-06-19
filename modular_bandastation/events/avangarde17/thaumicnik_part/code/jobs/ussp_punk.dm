@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_punk
 	name = "Шпана"
-	id = /obj/item/card/id/advanced/ussp/passport
+	id = /obj/item/card/id/advanced
 	id_trim = /datum/id_trim/job/ussp_punk
 	uniform = /obj/item/clothing/under/rank/ussp/gopnik
 	mask = /obj/item/clothing/mask/bandana/skull
@@ -30,12 +30,11 @@
 	faction = FACTION_STATION
 	total_positions = 4
 	spawn_positions = 4
-	paycheck = PAYCHECK_ZERO
+	paycheck = PAYCHECK_CREW
 	bounty_types = CIV_JOB_BASIC
 	department_for_prefs = /datum/job_department/assistant
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
-	event_description = "Ваш удел - разводить лохов на талоны, мобилы и все, что можно сдать в ломбард или толкнуть в магазине. Реальные пацаны всегда слушаются своего пахана, который в свою очередь выбирается на особом пацанском совете. Помните, что мусорнуться - значит предать саму идею свободной пацанской житухи. Бойтесь ментов, уважайте четких ребят и щелкайте семки."
 
 /datum/id_trim/job/ussp_punk
 	assignment = "Житель ПГТ \"Зорька\""

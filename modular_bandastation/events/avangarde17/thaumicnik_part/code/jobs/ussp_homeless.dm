@@ -26,12 +26,11 @@
 	faction = FACTION_STATION
 	total_positions = 3
 	spawn_positions = 3
-	paycheck = PAYCHECK_ZERO
+	paycheck = PAYCHECK_CREW
 	bounty_types = CIV_JOB_BASIC
 	department_for_prefs = /datum/job_department/assistant
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 	job_flags = STATION_JOB_FLAGS
-	event_description = "Несмотря на тяжелую житуху, вы не отчаиваетесь! Ваш дом повсюду - подвалы, заброшки, теплотрассы. Перебивайтесь случайными подработками, находками и помощью сограждан. Вы не можете получить талоны на товары, поэтому выменяйте их, выпросите или украдите! Хороший повод начать заниматься этим - у райкома на площади Революции! Если дела пойдут совсем туго, попробуйте договориться о работе у шахтёров, в промтоварах или на складе. Милиция относится к вам очень настороженно, поэтому не лезьте в конфликты и не привлекайте внимание. Ваша цель - выжить, вкусно бахнуть водочки и не загреметь в участок."
 
 /datum/id_trim/job/ussp_homeless
 	assignment = "Житель ПГТ \"Зорька\""

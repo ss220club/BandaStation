@@ -1,6 +1,6 @@
 /datum/outfit/job/ussp_cargonian
 	name = "Работник склада"
-	id = /obj/item/card/id/advanced/ussp/passport
+	id = /obj/item/card/id/advanced
 	id_trim = /datum/id_trim/job/ussp_cargonian
 	uniform = /obj/item/clothing/under/misc/overalls
 	ears = /obj/item/radio/headset
@@ -28,7 +28,7 @@
 	faction = FACTION_STATION
 	total_positions = 3
 	spawn_positions = 3
-	paycheck = PAYCHECK_ZERO
+	paycheck = PAYCHECK_CREW
 	bounty_types = CIV_JOB_BASIC
 	department_for_prefs = /datum/job_department/cargo
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
