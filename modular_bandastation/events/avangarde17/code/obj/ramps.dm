@@ -10,8 +10,6 @@
 	icon_state = "shadow_ramp_inverted"
 
 /obj/structure/stairs/ramp/on_exit_stairs(datum/source, atom/movable/leaving, direction)
-	SIGNAL_HANDLER
-
 	if(leaving == src)
 		return
 

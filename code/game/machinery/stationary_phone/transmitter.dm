@@ -14,6 +14,11 @@ GLOBAL_LIST_EMPTY_TYPED(transmitters, /obj/structure/transmitter)
 #define RING_TIMEOUT                4 SECONDS
 #define HISTORY_LENGTH 							5
 
+#define STATUS_INBOUND              "Inbound call"
+#define STATUS_ONGOING              "Ongoing call"
+#define STATUS_OUTGOING             "Outgoing call"
+#define STATUS_IDLE                 "Idle"
+
 #define COMMSIG_OFFHOOK             "Communication Signal - Offhook"           // The telephone is removed from the hook
 #define COMMSIG_DIALTONE            "Communication Signal - Dialtone"          // The phone should play the dialtone sound, indicating it's ready for dialing
 #define COMMSIG_DIAL                "Communication Signal - Dial"	             // The phone sends a request to the CTE, attempting to call a `phone_id`

@@ -179,6 +179,10 @@
 	name = "Институт - Испытательный полигон"
 	icon_state = "awaycontent13"
 
+/area/awaymission/avangarde17/inside/institute/storage
+	name = "Институт - Склад"
+	icon_state = "awaycontent16"
+
 /area/awaymission/avangarde17/outside/instiute
 	name = "Институт - Улица"
 	icon_state = "awaycontent14"
@@ -197,8 +201,8 @@
 	name = "Райком - Дом Культуры"
 	icon_state = "awaycontent11"
 
-/area/awaymission/avangarde17/inside/gov/janitor
-	name = "Райком - Подсобка Дворников"
+/area/awaymission/avangarde17/inside/gov/cryo
+	name = "Райком - Криогеника"
 	icon_state = "awaycontent12"
 
 /area/awaymission/avangarde17/inside/gov/toilet
@@ -314,6 +318,10 @@
 /area/awaymission/avangarde17/inside/clinic/maints
 	name = "Поликлиника - Подсобка"
 	icon_state = "awaycontent18"
+
+/area/awaymission/avangarde17/inside/clinic/pharmacy/factory
+	name = "Поликлиника - Фармакологическая фабрика"
+	icon_state = "awaycontent19"
 
 // MARK: Склад
 
@@ -442,6 +450,84 @@
 /area/awaymission/avangarde17/inside/reactor/cooling
 	name = "Электростанция - Внутри реактора"
 	icon_state = "awaycontent17"
+
+// MARK: Общественный центр
+
+/area/awaymission/avangarde17/inside/service
+	name = "Общественный центр"
+	icon_state = "awaycontent1"
+
+/area/awaymission/avangarde17/inside/service/grocery
+	name = "Общественный центр - Продуктовый"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/service/photocopy
+	name = "Общественный центр - Фотокопирка"
+	icon_state = "awaycontent3"
+
+/area/awaymission/avangarde17/inside/service/industrial
+	name = "Общественный центр - Промтовары"
+	icon_state = "awaycontent4"
+
+/area/awaymission/avangarde17/inside/service/industrial/storage
+	name = "Общественный центр - Подсобка промтоваров"
+	icon_state = "awaycontent16"
+
+/area/awaymission/avangarde17/inside/service/gym
+	name = "Общественный центр - Спортзал"
+	icon_state = "awaycontent5"
+
+/area/awaymission/avangarde17/inside/service/recreation
+	name = "Общественный центр - Зона отдыха"
+	icon_state = "awaycontent7"
+
+/area/awaymission/avangarde17/inside/service/recreation/restroom
+	name = "Общественный центр - Уборная зоны отдыха"
+	icon_state = "awaycontent6"
+
+/area/awaymission/avangarde17/inside/service/recreation/theater
+	name = "Общественный центр - Театр"
+	icon_state = "awaycontent6"
+
+/area/awaymission/avangarde17/inside/service/canteen
+	name = "Общественный центр - Столовая"
+	icon_state = "awaycontent8"
+
+/area/awaymission/avangarde17/inside/service/canteen/restroom
+	name = "Общественный центр - Уборная столовой"
+	icon_state = "awaycontent17"
+
+/area/awaymission/avangarde17/inside/service/kitchen
+	name = "Общественный центр - Кухня"
+	icon_state = "awaycontent9"
+
+/area/awaymission/avangarde17/inside/service/kitchen/storage
+	name = "Общественный центр - Подсобка кухни"
+	icon_state = "awaycontent10"
+
+/area/awaymission/avangarde17/inside/service/kitchen/freezer
+	name = "Общественный центр - Морозильная камера"
+	icon_state = "awaycontent11"
+
+/area/awaymission/avangarde17/inside/service/greenhouse
+	name = "Общественный центр - Теплица"
+	icon_state = "awaycontent12"
+
+/area/awaymission/avangarde17/inside/service/greenhouse/storage
+	name = "Общественный центр - Подсобка теплицы"
+	icon_state = "awaycontent13"
+
+/area/awaymission/avangarde17/inside/service/hall
+	name = "Общественный центр - Сервисный дворик"
+	icon_state = "awaycontent14"
+
+/area/awaymission/avangarde17/inside/service/garage
+	name = "Общественный центр - Гараж"
+	icon_state = "awaycontent15"
+
+/area/awaymission/avangarde17/inside/service/janitor
+	name = "Общественный центр - Подсобка дворников"
+	icon_state = "awaycontent18"
 
 // MARK: Милиция
 
@@ -868,6 +954,15 @@
 	name = "Ул. Коммунизма - 3"
 	icon_state = "awaycontent3"
 
+// MARK: Прочие зоны
+
+/area/awaymission/avangarde17/inside/misc/bar
+	name = "Кабак"
+	icon_state = "awaycontent15"
+
+/area/awaymission/avangarde17/inside/misc/garage_cooperative
+	name = "Гаражный кооператив"
+	icon_state = "awaycontent16"
 /*
 // Скорее всего удалить луп музыки, трансляция будет по радио
 /area/awaymission/avangarde17/outside/base

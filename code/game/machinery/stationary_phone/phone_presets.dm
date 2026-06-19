@@ -8,11 +8,6 @@
 #define PHONE_DND_OFF               "Off"
 #define PHONE_DND_FORBIDDEN         "Forbidden"
 
-#define STATUS_INBOUND              "Inbound call"
-#define STATUS_ONGOING              "Ongoing call"
-#define STATUS_OUTGOING             "Outgoing call"
-#define STATUS_IDLE                 "Idle"
-
 /obj/structure/transmitter/mounted
 	name = "wallmount telephone"
 	desc = "Настенный таксофон. Кажется, платный!"
