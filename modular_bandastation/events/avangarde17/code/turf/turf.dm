@@ -46,6 +46,8 @@
 	turf_type = /turf/open/misc/asteroid/moon
 	baseturfs = /turf/open/misc/asteroid/moon
 	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+	exposure_based = FALSE
+	mineral_chance = 15
 
 /turf/closed/mineral/random/snow/avangarde/mineral_chances()
 	return list(
