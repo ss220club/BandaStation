@@ -121,6 +121,72 @@
 	name = "Шаурмечная"
 	icon_state = "awaycontent20"
 
+// MARK: Институт
+
+/area/awaymission/avangarde17/inside/institute
+	name = "Институт"
+	icon_state = "awaycontent1"
+
+/area/awaymission/avangarde17/inside/institute/xenobio
+	name = "Институт - Ксенобиология"
+	icon_state = "awaycontent2"
+
+/area/awaymission/avangarde17/inside/institute/cytology
+	name = "Институт - Цитология"
+	icon_state = "awaycontent3"
+
+/area/awaymission/avangarde17/inside/institute/experimenter
+	name = "Институт - Эксперементатор"
+	icon_state = "awaycontent4"
+
+/area/awaymission/avangarde17/inside/institute/genetics
+	name = "Институт - Генетика"
+	icon_state = "awaycontent5"
+
+/area/awaymission/avangarde17/inside/institute/security
+	name = "Институт - Пропускной пункт"
+	icon_state = "awaycontent6"
+
+/area/awaymission/avangarde17/inside/institute/ordnance
+	name = "Институт - Оружейная лаборатория"
+	icon_state = "awaycontent7"
+
+/area/awaymission/avangarde17/inside/institute/robotics
+	name = "Институт - Робототехника"
+	icon_state = "awaycontent8"
+
+/area/awaymission/avangarde17/inside/institute/rnd
+	name = "Институт - Лаборатория промдизайна"
+	icon_state = "awaycontent9"
+
+/area/awaymission/avangarde17/inside/institute/rd
+	name = "Институт - Кабинет Научрука"
+	icon_state = "awaycontent10"
+
+/area/awaymission/avangarde17/inside/institute/servers
+	name = "Институт - Серверная"
+	icon_state = "awaycontent11"
+
+/area/awaymission/avangarde17/inside/institute/staff
+	name = "Институт - Комната отдыха"
+	icon_state = "awaycontent12"
+
+/area/awaymission/avangarde17/inside/institute/restroom
+	name = "Институт - Уборная"
+	icon_state = "awaycontent13"
+
+/area/awaymission/avangarde17/inside/institute/polygon
+	name = "Институт - Испытательный полигон"
+	icon_state = "awaycontent13"
+
+/area/awaymission/avangarde17/outside/instiute
+	name = "Институт - Улица"
+	icon_state = "awaycontent14"
+
+/area/awaymission/avangarde17/outside/polygon
+	name = "Институт - Окружение полигона"
+	icon_state = "awaycontent15"
+
 // MARK: Администрация
 
 /area/awaymission/avangarde17/inside/gov

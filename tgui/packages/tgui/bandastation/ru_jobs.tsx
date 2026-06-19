@@ -67,7 +67,7 @@ export function ReverseJobsRu(value: string) {
 export const DEPARTMENTS_RU = {
   Command: 'Милиция',
   'NT Representation': 'Представительство НТ',
-  Justice: 'Милиция',
+  Justice: 'Администрация',
   Security: 'Военная база',
   Service: 'Услуги',
   Cargo: 'Индустрия',

@@ -1,11 +1,13 @@
 /datum/job_department/security
 	department_name = "Военная база"
 
+
 /datum/job_department/service
 	department_name = "Услуги"
 
 /datum/job_department/command
-	department_name = "Милиция"
+	department_name = "Администрация"
+	ui_color = "#FF0000"
 
 /datum/job_department/medical
 	department_name = "Здравоохранение"

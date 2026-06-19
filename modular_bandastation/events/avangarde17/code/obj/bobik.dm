@@ -207,6 +207,7 @@
 	button_icon_state = "car_headlights"
 
 /datum/action/vehicle/sealed/bobik_headlights/Trigger(mob/clicker, trigger_flags)
+	. = ..()
 	var/obj/vehicle/sealed/car/bobik/B = vehicle_entered_target
 	if(!istype(B))
 		return
@@ -224,6 +225,7 @@
 	button_icon_state = "justice"
 
 /datum/action/vehicle/sealed/bobik_siren/Trigger(mob/clicker, trigger_flags)
+	. = ..()
 	var/obj/vehicle/sealed/car/bobik/B = vehicle_entered_target
 	if(!istype(B))
 		return
@@ -248,6 +250,7 @@
 	COOLDOWN_DECLARE(lets_ride_cooldown)
 
 /datum/action/vehicle/sealed/lets_ride/Trigger(mob/clicker, trigger_flags)
+	. = ..()
 	if(!COOLDOWN_FINISHED(src, lets_ride_cooldown))
 		return
 	COOLDOWN_START(src, lets_ride_cooldown, 6 SECONDS)
