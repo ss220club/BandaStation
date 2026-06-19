@@ -396,7 +396,7 @@ SUBSYSTEM_DEF(tts220)
 	channel_override = null,
 )
 	var/static/alist/channel_to_preference = alist(
-		CHANNEL_TTS_RADIO = /datum/preference/numeric/volume/sound_tts_volume_radio,
+		CHANNEL_TTS_RADIO = /datum/preference/numeric/volume/sound_tts_radio_volume,
 		CHANNEL_TTS_ANNOUNCEMENT = /datum/preference/numeric/volume/sound_tts_volume_announcement,
 		CHANNEL_TTS_TELEPATHY = /datum/preference/numeric/volume/sound_tts_volume_telepathy
 	)
@@ -422,6 +422,9 @@ SUBSYSTEM_DEF(tts220)
 
 		return
 
+	if(!turf_source) // 3D sounds need a turf source to calculate position
+		return
+
 	play_sfx_if_exists(listener, preSFX, output)
 
 	// Reserve channel only for players
@@ -430,18 +433,39 @@ SUBSYSTEM_DEF(tts220)
 		if(speaking_mob.client)
 			output.channel = get_local_channel_by_owner(speaker)
 			output.wait = TRUE
-	listener.playsound_local(
-		turf_source,
-		vol = output.volume,
-		falloff_exponent = SOUND_FALLOFF_EXPONENT,
+	output.channel ||= SSsounds.random_available_channel()
+
+	if(speaker == listener)
+		listener.playsound_local(
+			turf_source,
+			vol = 100,
+			falloff_exponent = SOUND_FALLOFF_EXPONENT,
+			channel = output.channel,
+			pressure_affected = TRUE,
+			sound_to_use = output,
+			max_distance = SOUND_RANGE,
+			falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE,
+			distance_multiplier = 1,
+			use_reverb = TRUE,
+			wait = output.wait,
+			volume_preference = channel_volume_preference_path
+		)
+		play_sfx_if_exists(listener, postSFX, output)
+		return
+
+	new /datum/threed_sound(
+		speaker,
+		output,
+		list(listener),
+		volume = 100,
+		sound_range = SOUND_RANGE,
+		sound_length = SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY,
 		channel = output.channel,
-		pressure_affected = TRUE,
-		sound_to_use = output,
-		max_distance = SOUND_RANGE,
+		preference_volume = channel_volume_preference_path,
+		preference_signal = channel_override == CHANNEL_TTS_RADIO ? COMSIG_MOB_TTS_RADIO_VOLUME_PREFERENCE_APPLIED : COMSIG_MOB_TTS_VOLUME_PREFERENCE_APPLIED,
+		falloff_exponent = SOUND_FALLOFF_EXPONENT,
 		falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE,
-		distance_multiplier = 1,
-		use_reverb = TRUE,
-		wait = output.wait
+		pressure_affected = TRUE
 	)
 
 	play_sfx_if_exists(listener, postSFX, output)
@@ -470,6 +494,7 @@ SUBSYSTEM_DEF(tts220)
 /datum/controller/subsystem/tts220/proc/clear_channel(owner)
 	SIGNAL_HANDLER
 
+	SSsounds.free_sound_channel(tts_local_channels_by_owner[owner])
 	tts_local_channels_by_owner -= owner
 
 /datum/controller/subsystem/tts220/proc/cleanup_tts_file(filename)

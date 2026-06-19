@@ -147,7 +147,8 @@
 	postSFX,
 	tts_seed_override,
 	tts_channel_override,
-	check_deafness = TRUE
+	check_deafness = TRUE,
+	radio_freq
 )
 
 	SIGNAL_HANDLER
@@ -155,19 +156,29 @@
 	if(!message)
 		return
 	var/datum/preferences/prefs = listener?.client?.prefs
-	if(prefs?.read_preference(/datum/preference/choiced/sound_tts) != TTS_SOUND_ENABLED || prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume) == 0)
+	var/volume_preference = is_radio ? /datum/preference/numeric/volume/sound_tts_radio_volume : /datum/preference/numeric/volume/sound_tts_volume
+	if(prefs?.read_preference(/datum/preference/choiced/sound_tts) != TTS_SOUND_ENABLED || prefs?.read_preference(volume_preference) == 0)
 		return
 	if(check_deafness && HAS_TRAIT(listener, TRAIT_DEAF))
 		return
 	if(!speaker)
 		speaker = parent
+	if(isnull(additional_effects))
+		additional_effects = list()
+	if(is_radio)
+		var/radio_tts_pref = prefs?.read_preference(/datum/preference/choiced/sound_tts_radio)
+		if(radio_tts_pref == TTS_SOUND_NO_RADIO)
+			return
+		if(radio_tts_pref == TTS_SOUND_DEPARTMENTAL_RADIO && radio_freq == FREQ_COMMON)
+			return
+		additional_effects |= /datum/singleton/sound_effect/radio
+		// Global to listener, not positioned at the speaker
+		if(!location)
+			is_local = FALSE
+		if(listener == speaker && !prefs?.read_preference(/datum/preference/toggle/sound_tts_hear_self_radio))
+			return
 	if(!location)
 		location = parent
-	if(is_radio)
-		additional_effects |= /datum/singleton/sound_effect/radio
-		is_local = FALSE
-		if(listener == speaker) // don't hear both radio and whisper from yourself
-			return
 
 	var/list/tts_args = list()
 	tts_args[TTS_CAST_SPEAKER] = speaker

@@ -174,17 +174,46 @@
 		if(get_chat_toggles(ghost.client) & CHAT_GHOSTRADIO)
 			receive |= ghost
 			if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER))
-				receive_radios[TTS_GHOST_RADIO] |= ghost
+				receive_radios[TTS_GHOST_RADIO] |= WEAKREF(ghost) // BANDASTATION EDIT: TTS listener lists store weakrefs
 
 	// Render the message and have everybody hear it.
 	// Always call this on the virtualspeaker to avoid issues.
 	var/spans = data["spans"]
 
-	if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER))
-		receive_radios[TTS_GHOST_RADIO] = filter_tts_listeners(receive_radios[TTS_GHOST_RADIO], frequency)
-		for(var/radio in receive_radios)
-			LAZYSET(SStts.queued_radio_messages[message_mods[MODE_TTS_IDENTIFIER]], radio, receive_radios[radio])
-		LAZYSET(SStts.queued_radio_messages_compression, message_mods[MODE_TTS_IDENTIFIER], compression)
+	// BANDASTATION EDIT START: TTS radio playback
+
+	// if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER))
+	// 	receive_radios[TTS_GHOST_RADIO] = filter_tts_listeners(receive_radios[TTS_GHOST_RADIO], frequency)
+	// 	for(var/radio in receive_radios)
+	// 		LAZYSET(SStts.queued_radio_messages[message_mods[MODE_TTS_IDENTIFIER]], radio, receive_radios[radio])
+	// 	LAZYSET(SStts.queued_radio_messages_compression, message_mods[MODE_TTS_IDENTIFIER], compression)
+
+	// Play radio TTS from the receiving radio, not from the speaker
+	if(SStts220.is_enabled && LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER) && frequency != FREQ_ENTERTAINMENT)
+		for(var/radio_ref in receive_radios)
+			var/atom/radio_source
+			if(radio_ref != TTS_GHOST_RADIO)
+				var/datum/weakref/radio_weakref = radio_ref
+				radio_source = radio_weakref.resolve()
+				if(QDELETED(radio_source))
+					continue
+			for(var/hearer_ref in receive_radios[radio_ref])
+				var/datum/weakref/hearer_weakref = hearer_ref
+				var/mob/radio_listener = hearer_weakref.resolve()
+				if(!radio_listener)
+					continue
+				virt.cast_tts(
+					radio_listener,
+					message,
+					location = radio_source,
+					is_local = !isnull(radio_source),
+					is_radio = TRUE,
+					effects = LAZYACCESS(message_mods, MODE_TTS_FILTERS),
+					tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE),
+					channel_override = CHANNEL_TTS_RADIO,
+					radio_freq = frequency,
+				)
+	// BANDASTATION EDIT END: TTS radio playback
 
 	for(var/atom/movable/hearer as anything in receive)
 		if(!hearer)
