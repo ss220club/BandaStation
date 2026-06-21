@@ -1,5 +1,0 @@
-author: "anstapi"
-delete-after: True
-changes:
-  - bugfix: "Исправлена ошибка, из-за которой ресурсы застревали на конвейерной ленте."
-  - map: "Поправлена boulder smelter на Кибериаде.."
