@@ -494,7 +494,9 @@ SUBSYSTEM_DEF(tts220)
 /datum/controller/subsystem/tts220/proc/clear_channel(owner)
 	SIGNAL_HANDLER
 
-	SSsounds.free_sound_channel(tts_local_channels_by_owner[owner])
+	var/channel = tts_local_channels_by_owner[owner]
+	if(channel)
+		SSsounds.free_sound_channel(tts_local_channels_by_owner[channel])
 	tts_local_channels_by_owner -= owner
 
 /datum/controller/subsystem/tts220/proc/cleanup_tts_file(filename)

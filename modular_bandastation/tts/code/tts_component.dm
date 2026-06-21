@@ -165,6 +165,8 @@
 		speaker = parent
 	if(isnull(additional_effects))
 		additional_effects = list()
+	else
+		additional_effects = additional_effects.Copy()
 	if(is_radio)
 		var/radio_tts_pref = prefs?.read_preference(/datum/preference/choiced/sound_tts_radio)
 		if(radio_tts_pref == TTS_SOUND_NO_RADIO)
