@@ -18,6 +18,7 @@
 	max_slots = 4
 	max_total_storage = 9
 	max_specific_storage = WEIGHT_CLASS_NORMAL
+	attachment_slot = NONE
 
 /datum/storage/pockets/ammo_webbing/New()
 	. = ..()
