@@ -496,7 +496,7 @@ SUBSYSTEM_DEF(tts220)
 
 	var/channel = tts_local_channels_by_owner[owner]
 	if(channel)
-		SSsounds.free_sound_channel(tts_local_channels_by_owner[channel])
+		SSsounds.free_sound_channel(channel)
 	tts_local_channels_by_owner -= owner
 
 /datum/controller/subsystem/tts220/proc/cleanup_tts_file(filename)
