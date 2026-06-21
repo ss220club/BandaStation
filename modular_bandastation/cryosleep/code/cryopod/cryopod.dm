@@ -294,9 +294,15 @@ GLOBAL_LIST_EMPTY(objectives)
 
 	if(control_computer)
 		var/obj/item/disk/nuclear/disk = locate(/obj/item/disk/nuclear) in control_computer.get_all_contents()
-		if(disk?.GetComponent(/datum/component/stationloving))
-			var/datum/component/stationloving/loving = disk.GetComponent(/datum/component/stationloving)
-			loving.relocate()
+		if(disk)
+			var/list/possible_turfs = list()
+			for(var/turf/T in orange(1, src))
+				if(!T.density)
+					possible_turfs += T
+			if(length(possible_turfs))
+				disk.forceMove(pick(possible_turfs))
+			else
+				disk.forceMove(get_turf(src))
 
 /// Handles putting mob inside the cryopod by user
 /obj/machinery/cryopod/proc/put_mob_inside(mob/target, mob/user)
