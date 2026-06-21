@@ -119,6 +119,7 @@
 #include "code/structures/displaycase.dm"
 #include "code/structures/fake_light.dm"
 #include "code/structures/flags.dm"
+#include "code/structures/morgue.dm"
 #include "code/structures/platform.dm"
 #include "code/structures/posters.dm"
 #include "code/structures/signs.dm"
