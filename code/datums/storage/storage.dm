@@ -870,7 +870,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	// Storage to storage transfer is instant
 	if(dest_object.atom_storage)
-		to_chat(user, span_notice("Вы вытряхиваете содержимое [name_source.declent_rudeclent_ru(GENITIVE)] в [dest_object.declent_ru(ACCUSATIVE)]."))
+		to_chat(user, span_notice("Вы вытряхиваете содержимое [name_source.declent_ru(GENITIVE)] в [dest_object.declent_ru(ACCUSATIVE)]."))
 
 		if(do_rustle && rustle_sound)
 			playsound(parent, rustle_sound, 50, TRUE, -5)
