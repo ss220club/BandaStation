@@ -1,5 +1,5 @@
 SUBSYSTEM_DEF(casing_cleanup)
-	name = "Casing Cleanup"
+	name = "EFTK Casing Cleanup System"
 	wait = 2 MINUTES
 	runlevels = RUNLEVEL_GAME
 

@@ -2,7 +2,8 @@ GLOBAL_LIST_EMPTY(drop_pod_spawns)
 
 /obj/effect/landmark/drop_pod_spawn
 	name = "drop pod spawn"
-	icon_state = "generic_event"
+	icon = 'icons/effects/mouse_pointers/supplypod_target.dmi'
+	icon_state = "all"
 	var/location_name = "неизвестный район"
 
 	var/list/crate_pool = list(

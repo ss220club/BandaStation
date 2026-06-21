@@ -20,6 +20,9 @@
 	var/trader_portrait = null
 	var/trader_message = "Приветствую."
 
+/obj/machinery/vending/trader/atom_destruction(damage_flag)
+	return
+
 /obj/machinery/vending/trader/proc/get_random_message()
 	var/list/messages = splittext(trader_message, ";")
 	return pick(messages)
@@ -246,22 +249,22 @@
 		recordlist += new_record
 
 /obj/machinery/vending/trader/proc/give_quest(mob/living/carbon/human/H)
-	if(H.trader_quests[src.trader_id])
-		to_chat(H, span_warning("У вас уже есть активное задание."))
-		return
-	var/datum/trader_quest/Q
-	for(var/path in quest_chain)
-		var/datum/trader_quest/temp = new path
-		if(!(temp.id in H.completed_trader_quests))
-			Q = temp
-			break
-	if(!Q)
-		to_chat(H, span_notice("Сейчас для вас нет новых заданий."))
-		return
-	H.trader_quests[src.trader_id] = Q
-	user_messages[REF(H)] = Q.description
-	playsound(H, 'sound/machines/ping.ogg', 50, TRUE)
-	to_chat(H, span_notice("Задание принято к выполнению."))
+    if(H.trader_quests[src.trader_id])
+        to_chat(H, span_warning("У вас уже есть активное задание."))
+        return
+    var/datum/trader_quest/Q
+    for(var/path in quest_chain)
+        var/datum/trader_quest/temp = new path
+        if(!(temp.id in H.completed_trader_quests))
+            Q = temp
+            break
+    if(!Q)
+        to_chat(H, span_notice("Сейчас для вас нет новых заданий."))
+        return
+    H.trader_quests[src.trader_id] = Q
+    user_messages[REF(H)] = Q.description
+    playsound(H, 'sound/machines/ping.ogg', 50, TRUE)
+    to_chat(H, span_notice("Задание принято к выполнению. [Q.context]"))
 
 /obj/machinery/vending/trader/Initialize(mapload)
 	. = ..()
@@ -327,7 +330,7 @@
 			"products" = list(
 				/obj/item/gun/ballistic/automatic/pistol = list(100, 1, INFINITY),
 				/obj/item/gun/ballistic/rifle/sks = list(250, 1, INFINITY),
-				/obj/item/gun/ballistic/rifle/boltaction/mosin = list(200, 1, INFINITY),
+    			/obj/item/gun/ballistic/rifle/boltaction/mosin = list(200, 1, INFINITY),
 				/obj/item/gun/ballistic/automatic/pistol/zashch = list(150, 2, INFINITY),
 				/obj/item/gun/ballistic/automatic/sabel/auto = list(350, 2, INFINITY),
 				/obj/item/gun/ballistic/rifle/sks/c762x54mmr = list(300, 2, INFINITY),
@@ -699,8 +702,10 @@
 	trader_message = "Подходи, гость дорогой. Чаем угостить не смогу, извиняй, но вот работу подкинуть, или полезности для выживания предложить - всегда рад.;Долбанные братки виноваты в том, что случилось - зуб даю. Пока мы всех их не вытравим из Сиднея - не будет нам покоя.;Вижу, что до сих пор стоишь на ногах. Это хорошо. Значит не сгинешь раньше времени.;Запомни, настоящий охотник - не только тот, кто силён - но и тот, кто вовремя хитёр.;Бери у меня товары на все случаи жизни. Кто знает, когда они тебе пригодятся в ходке.;Не могу понять - на что Фейшн и эта рыжая дура расчитывают? Облопошить всех во время ядерного апокалипсиса? Ну ничего... Я им устрою сладкую жизнь. Ядерный пепел им солярием покажется, уродам."
 
 	buy_prices = list(
-		/obj/item/clothing/mask/bandana/gold = 100,
-		/obj/item/clothing/gloves/boxing/golden = 100,
+		/obj/item/loot_mobs/bigot_claw = 400,
+		/obj/item/loot_mobs/fleshspider_tongue = 150,
+		/obj/item/loot_mobs/hunterspider_claw = 100,
+		/obj/item/loot_mobs/faithless_heart = 175
 	)
 
 	product_categories = list(
