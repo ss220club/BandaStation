@@ -8,6 +8,9 @@
 	if(!.)
 		return
 
+	if(HAS_TRAIT(target, TRAIT_NODISMEMBER))
+		return FALSE
+
 	var/obj/item/bodypart/limb_to_remove = target.get_bodypart(limb_body_zone)
 	if(!limb_to_remove)
 		return FALSE

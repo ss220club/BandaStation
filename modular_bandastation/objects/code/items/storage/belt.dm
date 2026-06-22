@@ -110,9 +110,9 @@
 
 /obj/item/storage/belt/holster/detective/full/ert/tsf_commander/PopulateContents()
 	generate_items_inside(list(
-		/obj/item/ammo_box/magazine/r10mm = 2,
+		/obj/item/ammo_box/magazine/r45 = 2,
 		/obj/item/gun/ballistic/automatic/pistol/deagle/regal = 1,
-	),src)
+	), src)
 
 // MARK: USSP
 /obj/item/storage/belt/military/army/ussp

@@ -1,10 +1,10 @@
 // A type of antagonist created by the moon ascension
 /datum/antagonist/lunatic
-	name = "\improper Lunatic"
+	name = "\improper Лунатик"
 	hijack_speed = 0
 	antagpanel_category = ANTAG_GROUP_HORRORS
 	show_in_antagpanel = FALSE
-	suicide_cry = "СЛАВЬСЯ ШПРЕХШТАЛМЕЙСТЕР!!"
+	suicide_cry = "СЛАВЬСЯ ПОСТАНОВЩИК!!"
 	antag_moodlet = /datum/mood_event/heretics/lunatic
 	antag_hud_name = "lunatic"
 	can_assign_self_objectives = FALSE
@@ -15,10 +15,14 @@
 	var/mob/living/carbon/human/ascended_body
 	// Our objective
 	var/datum/objective/lunatic/lunatic_obj
+	// Actions granted by this datum, tracked for proper cleanup on body transfer
+	var/datum/action/cooldown/lunatic_track/moon_track
+	var/datum/action/cooldown/spell/touch/mansus_grasp/mad_touch
 
 /datum/antagonist/lunatic/on_gain()
 	owner.current.log_message("has become a Lunatic!", LOG_ATTACK, color="red")
 	// Masters gain an objective before so we dont want duplicates
+	. = ..()
 	for(var/objective in objectives)
 		if(!istype(objective, /datum/objective/lunatic))
 			continue
@@ -26,6 +30,14 @@
 	var/datum/objective/lunatic/loony = new()
 	objectives += loony
 	lunatic_obj = loony
+	moon_track = new(owner)
+	mad_touch = new(owner)
+	mad_touch.Grant(owner.current)
+	moon_track.Grant(owner.current)
+
+/datum/antagonist/lunatic/on_removal()
+	QDEL_NULL(moon_track)
+	QDEL_NULL(mad_touch)
 	return ..()
 
 /datum/antagonist/lunatic/on_removal()
@@ -40,7 +52,7 @@
 	lunatic_obj.master = heretic_master
 	lunatic_obj.update_explanation_text()
 
-	to_chat(owner, span_boldnotice("Разрушьте ложь, спасите правду, повинуясь вашему Шпрехшталмейстеру - [heretic_master]!"))
+	to_chat(owner, span_boldnotice("Разрушьте ложь, спасите правду, повинуясь вашему Постановщику - [heretic_master]!"))
 
 /datum/antagonist/lunatic/apply_innate_effects(mob/living/mob_override)
 	var/mob/living/our_mob = mob_override || owner.current
@@ -49,15 +61,11 @@
 	add_team_hud(our_mob, /datum/antagonist/lunatic)
 	ADD_TRAIT(our_mob, TRAIT_MADNESS_IMMUNE, REF(src))
 
-	var/datum/action/cooldown/lunatic_track/moon_track = new /datum/action/cooldown/lunatic_track()
-	var/datum/action/cooldown/spell/touch/mansus_grasp/mad_touch = new /datum/action/cooldown/spell/touch/mansus_grasp()
-	mad_touch.Grant(our_mob)
-	moon_track.Grant(our_mob)
-
 /datum/antagonist/lunatic/remove_innate_effects(mob/living/mob_override)
 	var/mob/living/our_mob = mob_override || owner.current
 	handle_clown_mutation(our_mob, removing = FALSE)
 	our_mob.remove_faction(FACTION_HERETIC)
+	REMOVE_TRAIT(our_mob, TRAIT_MADNESS_IMMUNE, REF(src))
 
 // Mood event given to moon acolytes
 /datum/mood_event/heretics/lunatic
@@ -65,7 +73,7 @@
 	mood_change = 10
 
 /datum/objective/lunatic
-	explanation_text = "Assist your ringleader. If you are seeing this, scroll up in chat for who that is and report this"
+	explanation_text = "Помогите вашему Постановщику. Если вы видите это сообщение, найдите в чате, кто это, и сообщите об этом"
 	var/datum/mind/master
 	// If the person with this objective is a lunatic master
 	var/is_master = FALSE
@@ -75,11 +83,11 @@
 	if(is_master)
 		explanation_text = "Lead your lunatics to further your own goals!"
 		return
-	explanation_text = "Помогите вашему Шпрехшталмейстеру - [master], не навредите вашим товарищам-лунатикам"
+	explanation_text = "Помогите вашему Постановщику - [master], не навредите вашим товарищам-лунатикам"
 
 // Lunatic master
 /datum/antagonist/lunatic/master
-	name = "\improper Ringleader"
+	name = "\improper Постановщик"
 	antag_hud_name = "lunatic_master"
 
 /datum/antagonist/lunatic/master/on_gain()
@@ -92,3 +100,6 @@
 /datum/antagonist/lunatic/master/apply_innate_effects(mob/living/mob_override)
 	var/mob/living/our_mob = mob_override || owner.current
 	add_team_hud(our_mob, /datum/antagonist/lunatic)
+
+/datum/antagonist/lunatic/master/remove_innate_effects(mob/living/mob_override)
+	return

@@ -178,7 +178,7 @@ GLOBAL_VAR_INIT(security_closets_count, 0)
 	new /obj/item/holosign_creator/security(src)
 	new /obj/item/reagent_containers/spray/pepper(src)
 	new /obj/item/clothing/suit/armor/vest/det_suit(src)
-	new /obj/item/storage/belt/holster/detective/full(src)
+	new /obj/item/clothing/accessory/holster/detective/full(src) //BANDASTATION EDIT: Accessory holsters
 	new /obj/item/pinpointer/crew(src)
 	new /obj/item/binoculars(src)
 	new /obj/item/storage/box/rxglasses/spyglasskit(src)

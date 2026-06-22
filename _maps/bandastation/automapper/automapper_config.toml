@@ -758,6 +758,13 @@ required_map = "NebulaStation.dmm"
 coordinates = [172, 150, 1]
 trait_name = "Station"
 
+[templates.nebulastation_safe]
+map_files = ["nebulastation_safe.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [175, 149, 1]
+trait_name = "Station"
+
 # wawastation
 [templates.wawastation_perma_cryo]
 map_files = ["wawastation_perma_cryo.dmm"]

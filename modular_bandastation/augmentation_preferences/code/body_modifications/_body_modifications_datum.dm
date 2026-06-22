@@ -38,6 +38,9 @@ GLOBAL_LIST_INIT_TYPED(body_modifications, /datum/body_modification, init_body_m
 	if(isnull(target))
 		return FALSE
 
+	if(HAS_TRAIT(target, TRAIT_NO_AUGMENTS))
+		return FALSE
+
 	var/list/applied_body_modifications = target.client?.prefs?.read_preference(/datum/preference/body_modifications)
 	if(length(applied_body_modifications) == 0)
 		return TRUE

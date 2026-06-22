@@ -541,3 +541,9 @@
 	originalname = "mayonnaise"
 	volume = 5
 	list_reagents = list(/datum/reagent/consumable/mayonnaise = 5)
+
+/obj/item/reagent_containers/condiment/pack/beef_flavour
+	name = "beef space ramen flavouring"
+	originalname = "beef flavour"
+	volume = 5
+	list_reagents = list(/datum/reagent/consumable/beef_flavour = 5)
