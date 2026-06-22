@@ -174,7 +174,11 @@
 		if(get_chat_toggles(ghost.client) & CHAT_GHOSTRADIO)
 			receive |= ghost
 			if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER))
-				receive_radios[TTS_GHOST_RADIO] |= WEAKREF(ghost) // BANDASTATION EDIT: TTS listener lists store weakrefs
+	// BANDASTATION EDIT START: TTS listener lists store weakrefs
+				receive_radios[TTS_GHOST_RADIO] |= WEAKREF(ghost)
+	if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER))
+		receive_radios[TTS_GHOST_RADIO] = filter_tts_listeners(receive_radios[TTS_GHOST_RADIO], frequency)
+	// BANDASTATION EDIT END: TTS listener lists store weakrefs
 
 	// Render the message and have everybody hear it.
 	// Always call this on the virtualspeaker to avoid issues.
@@ -197,14 +201,20 @@
 				radio_source = radio_weakref.resolve()
 				if(QDELETED(radio_source))
 					continue
+			var/list/radio_listeners = list()
 			for(var/hearer_ref in receive_radios[radio_ref])
 				var/datum/weakref/hearer_weakref = hearer_ref
 				var/mob/radio_listener = hearer_weakref.resolve()
 				if(!radio_listener)
 					continue
+				var/message_to_tts = isobserver(radio_listener) ? message : radio_listener.translate_language(virt, language, message, spans, message_mods)
+				if(message_to_tts == message)
+					message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || message_to_tts
+				LAZYADD(radio_listeners[message_to_tts], radio_listener)
+			for(var/message_to_tts in radio_listeners)
 				virt.cast_tts(
-					radio_listener,
-					message,
+					radio_listeners[message_to_tts],
+					message_to_tts,
 					location = radio_source,
 					is_local = !isnull(radio_source),
 					is_radio = TRUE,

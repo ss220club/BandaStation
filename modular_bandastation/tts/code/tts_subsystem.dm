@@ -228,7 +228,7 @@ SUBSYSTEM_DEF(tts220)
 
 /datum/controller/subsystem/tts220/proc/get_tts(
 	atom/speaker,
-	mob/listener,
+	listener,
 	message,
 	datum/tts_seed/tts_seed,
 	is_local = TRUE,
@@ -238,14 +238,18 @@ SUBSYSTEM_DEF(tts220)
 	postSFX = null,
 	channel_override,
 )
-
 	set waitfor = FALSE
 
 	if(!is_enabled)
 		return
 	if(!message)
 		return
-	if(isnull(listener) || !listener.client)
+	var/list/listeners = islist(listener) ? listener : list(listener)
+	var/list/valid_listeners = list()
+	for(var/mob/current_listener as anything in listeners)
+		if(current_listener?.client)
+			valid_listeners += current_listener
+	if(!length(valid_listeners))
 		return
 	if(ispath(tts_seed) && SStts220.tts_seeds[initial(tts_seed.name)])
 		tts_seed = SStts220.tts_seeds[initial(tts_seed.name)]
@@ -288,11 +292,11 @@ SUBSYSTEM_DEF(tts220)
 	if(fexists("[filename].ogg"))
 		tts_reused++
 		tts_rrps_counter++
-		play_tts(speaker, listener, filename, is_local, effect_singletons, preSFX, postSFX, channel_override)
+		play_tts(speaker, valid_listeners, filename, is_local, effect_singletons, preSFX, postSFX, channel_override)
 		return
 
 	var/datum/callback/play_tts_cb = CALLBACK(\
-		src, PROC_REF(play_tts), speaker, listener, filename, is_local, effect_singletons, preSFX, postSFX, channel_override
+		src, PROC_REF(play_tts), speaker, valid_listeners, filename, is_local, effect_singletons, preSFX, postSFX, channel_override
 	)
 
 	if(LAZYLEN(tts_queue[filename]))
@@ -355,7 +359,7 @@ SUBSYSTEM_DEF(tts220)
 
 /datum/controller/subsystem/tts220/proc/play_tts(
 	atom/speaker,
-	mob/listener,
+	list/listeners,
 	pure_filename,
 	is_local = TRUE,
 	list/effects,
@@ -363,8 +367,7 @@ SUBSYSTEM_DEF(tts220)
 	postSFX = null,
 	channel_override = null,
 )
-
-	if(!listener?.client)
+	if(!length(listeners))
 		return
 
 	var/list/filename_suffixes = list()
@@ -380,63 +383,79 @@ SUBSYSTEM_DEF(tts220)
 	var/filename2play = "[pure_filename][filename_suffixes.Join()].ogg"
 
 	if(!length(effects) || fexists(filename2play))
-		output_tts(speaker, listener, filename2play, is_local, preSFX, postSFX, channel_override)
+		output_tts(speaker, listeners, filename2play, is_local, preSFX, postSFX, channel_override)
 		return
 
-	var/datum/callback/output_tts_cb = CALLBACK(src, PROC_REF(output_tts), speaker, listener, filename2play, is_local, preSFX, postSFX, channel_override)
+	var/datum/callback/output_tts_cb = CALLBACK(src, PROC_REF(output_tts), speaker, listeners, filename2play, is_local, preSFX, postSFX, channel_override)
 	queue_sound_effect_processing(pure_filename, effects, filename2play, output_tts_cb)
+
+/datum/controller/subsystem/tts220/proc/get_volume_preference_for_channel(channel_override)
+	var/static/alist/channel_to_preference = alist(
+		CHANNEL_TTS_RADIO = /datum/preference/numeric/volume/sound_tts_radio_volume,
+		CHANNEL_TTS_ANNOUNCEMENT = /datum/preference/numeric/volume/sound_tts_volume_announcement,
+		CHANNEL_TTS_TELEPATHY = /datum/preference/numeric/volume/sound_tts_volume_telepathy
+	)
+	return channel_to_preference[channel_override] || /datum/preference/numeric/volume/sound_tts_volume
 
 /datum/controller/subsystem/tts220/proc/output_tts(
 	atom/speaker,
-	mob/listener,
+	list/listeners,
 	filename2play,
 	is_local = TRUE,
 	preSFX = null,
 	postSFX = null,
 	channel_override = null,
 )
-	var/static/alist/channel_to_preference = alist(
-		CHANNEL_TTS_RADIO = /datum/preference/numeric/volume/sound_tts_radio_volume,
-		CHANNEL_TTS_ANNOUNCEMENT = /datum/preference/numeric/volume/sound_tts_volume_announcement,
-		CHANNEL_TTS_TELEPATHY = /datum/preference/numeric/volume/sound_tts_volume_telepathy
-	)
-
-	var/channel_volume_preference_path = channel_to_preference[channel_override] || /datum/preference/numeric/volume/sound_tts_volume
-	var/volume = listener?.client?.prefs?.read_preference(channel_volume_preference_path)
-	if(!volume)
+	var/channel_volume_preference_path = get_volume_preference_for_channel(channel_override)
+	var/list/valid_listeners = list()
+	for(var/mob/listener as anything in listeners)
+		if(listener?.client?.prefs?.read_preference(channel_volume_preference_path))
+			valid_listeners += listener
+	if(!length(valid_listeners))
 		return
 
 	var/turf/turf_source = get_turf(speaker)
 
 	var/sound/output = sound(filename2play)
 	output.status = SOUND_STREAM
-	output.volume = volume
 	if(!is_local || isnull(speaker))
 		output.wait = TRUE
 		output.environment = SOUND_ENVIRONMENT_NONE
 		output.channel = channel_override
-
-		play_sfx_if_exists(listener, preSFX, output)
-		SEND_SOUND(listener, output)
-		play_sfx_if_exists(listener, postSFX, output)
-
+		for(var/mob/listener as anything in valid_listeners)
+			output.volume = listener.client.prefs.read_preference(channel_volume_preference_path)
+			play_sfx_if_exists(listener, preSFX, output)
+			SEND_SOUND(listener, output)
+			play_sfx_if_exists(listener, postSFX, output)
 		return
 
 	if(!turf_source) // 3D sounds need a turf source to calculate position
 		return
 
-	play_sfx_if_exists(listener, preSFX, output)
+	for(var/mob/listener as anything in valid_listeners)
+		output.volume = listener.client.prefs.read_preference(channel_volume_preference_path)
+		play_sfx_if_exists(listener, preSFX, output)
 
-	// Reserve channel only for players
+	output.volume = 100
+	var/list/threed_listeners = valid_listeners
+	var/mob/self_listener
 	if(ismob(speaker))
 		var/mob/speaking_mob = speaker
+		if(speaking_mob in valid_listeners)
+			self_listener = speaking_mob
+			threed_listeners = valid_listeners.Copy()
+			threed_listeners -= self_listener
 		if(speaking_mob.client)
 			output.channel = get_local_channel_by_owner(speaker)
 			output.wait = TRUE
-	output.channel ||= SSsounds.random_available_channel()
+	var/reserved_channel
+	if(!output.channel)
+		reserved_channel = SSsounds.reserve_sound_channel()
+		output.channel = reserved_channel || SSsounds.random_available_channel()
+	var/sound_length = SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY
 
-	if(speaker == listener)
-		listener.playsound_local(
+	if(self_listener)
+		self_listener.playsound_local(
 			turf_source,
 			vol = 100,
 			falloff_exponent = SOUND_FALLOFF_EXPONENT,
@@ -450,25 +469,28 @@ SUBSYSTEM_DEF(tts220)
 			wait = output.wait,
 			volume_preference = channel_volume_preference_path
 		)
-		play_sfx_if_exists(listener, postSFX, output)
-		return
 
-	new /datum/threed_sound(
-		speaker,
-		output,
-		list(listener),
-		volume = 100,
-		sound_range = SOUND_RANGE,
-		sound_length = SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY,
-		channel = output.channel,
-		preference_volume = channel_volume_preference_path,
-		preference_signal = channel_override == CHANNEL_TTS_RADIO ? COMSIG_MOB_TTS_RADIO_VOLUME_PREFERENCE_APPLIED : COMSIG_MOB_TTS_VOLUME_PREFERENCE_APPLIED,
-		falloff_exponent = SOUND_FALLOFF_EXPONENT,
-		falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE,
-		pressure_affected = TRUE
-	)
+	if(length(threed_listeners)) // Empty 3d sounds do not pick up listeners anyways
+		new /datum/threed_sound(
+			speaker,
+			output,
+			threed_listeners,
+			volume = 100,
+			sound_range = SOUND_RANGE,
+			sound_length = sound_length,
+			channel = output.channel,
+			preference_volume = channel_volume_preference_path,
+			preference_signal = channel_override == CHANNEL_TTS_RADIO ? COMSIG_MOB_TTS_RADIO_VOLUME_PREFERENCE_APPLIED : COMSIG_MOB_TTS_VOLUME_PREFERENCE_APPLIED,
+			falloff_exponent = SOUND_FALLOFF_EXPONENT,
+			falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE,
+			pressure_affected = TRUE
+		)
+	if(reserved_channel)
+		addtimer(CALLBACK(SSsounds, TYPE_PROC_REF(/datum/controller/subsystem/sounds, free_sound_channel), reserved_channel), sound_length + 1, TIMER_DELETE_ME) // FIXME: This is sucks and sound length shouldn't be modified, get_sound_length() is unreliable
 
-	play_sfx_if_exists(listener, postSFX, output)
+	if(postSFX)
+		for(var/mob/listener as anything in valid_listeners)
+			play_sfx(listener, postSFX, listener.client.prefs.read_preference(channel_volume_preference_path), output.environment, output.channel)
 
 /datum/controller/subsystem/tts220/proc/play_sfx_if_exists(mob/listener, sfx, sound/output)
 	if(sfx)
