@@ -176,9 +176,62 @@
 	recoil = 0.1
 
 /obj/item/gun/ballistic/automatic/ar
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
 	recoil = 0.3
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c223
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c223
+	burst_size = 3
+	SET_BASE_PIXEL(-8, 0)
+	weapon_weight = WEAPON_HEAVY
+	var/extended = TRUE
+
+/obj/item/gun/ballistic/automatic/ar/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
+
+/obj/item/gun/ballistic/automatic/ar/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
+	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
+	if(extended)
+		icon_state = "[icon_state]_extended"
+		inhand_icon_state = "[icon_state]_extended"
+	else
+		inhand_icon_state = "[icon_state]"
+
+/obj/item/gun/ballistic/automatic/ar/examine(mob/user)
+	. = ..()
+	. += "<b>АЛЬТ + ЛКМ</b> чтобы [extended ? "сложить" : "разложить"] приклад."
+
+/obj/item/gun/ballistic/automatic/ar/click_alt(mob/user)
+	if(!do_after(user, 5, src))
+		return
+	extended = !extended
+	if(!extended)
+		w_class = WEIGHT_CLASS_NORMAL
+		slot_flags = ITEM_SLOT_BELT
+		recoil = 1
+	else
+		w_class = WEIGHT_CLASS_BULKY
+		slot_flags = ITEM_SLOT_BACK
+		weapon_weight = WEAPON_HEAVY
+		recoil = 0.3
+
+	balloon_alert(user, "[extended ? "разложен" : "сложен"]")
+	update_appearance()
+	return CLICK_ACTION_SUCCESS
+
+/obj/item/gun/ballistic/automatic/mini_uzi
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	recoil = 0.4
+	burst_size = 1
+
+/obj/item/gun/ballistic/automatic/mini_uzi/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/automatic_fire, 0.2 SECONDS)
 
 /obj/item/gun/ballistic/automatic/proto
 	recoil = 0.2
@@ -231,6 +284,10 @@
 /obj/item/ammo_box/magazine/internal/shot/riot/lethal
 	ammo_type = /obj/item/ammo_casing/shotgun/buckshot/milspec
 	max_ammo = 6
+
+/obj/item/gun/grenadelauncher
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	SET_BASE_PIXEL(-8, 0)
 
 // Prevents gun sizes from changing due to suppressors
 /obj/item/gun/ballistic/install_suppressor(obj/item/suppressor/new_suppressor)
