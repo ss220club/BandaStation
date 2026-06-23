@@ -30,7 +30,7 @@
 /obj/item/gun/ballistic/shotgun/riot/update_icon_state()
 	. = ..()
 	if(sawn_off)
-		inhand_icon_state = "[base_icon_state]_sawoff"
+		inhand_icon_state = "[base_icon_state]_sawn"
 		SET_BASE_PIXEL(0, 0)
 	else
 		inhand_icon_state = "[base_icon_state]"
@@ -183,8 +183,8 @@
 	recoil = 0.3
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c223
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c223
-	burst_size = 3
 	SET_BASE_PIXEL(-8, 0)
+	can_suppress = TRUE
 	weapon_weight = WEAPON_HEAVY
 	var/extended = TRUE
 
@@ -194,13 +194,9 @@
 
 /obj/item/gun/ballistic/automatic/ar/update_icon_state()
 	. = ..()
+	icon_state = "[initial(icon_state)][extended ? "_extended" : ""]"
 	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
-	if(extended)
-		icon_state = "[icon_state]_extended"
-		inhand_icon_state = "[icon_state]_extended"
-	else
-		inhand_icon_state = "[icon_state]"
 
 /obj/item/gun/ballistic/automatic/ar/examine(mob/user)
 	. = ..()
