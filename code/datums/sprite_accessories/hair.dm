@@ -167,8 +167,8 @@ GLOBAL_LIST_EMPTY(blended_hair_icons_cache)
 
 // BANDASTATION EDIT: fix missing icon_state
 /datum/sprite_accessory/hair/bedheadlong2
-    name = "Long Bedhead 2"
-    icon_state = "hair_long_bedheadv2"
+	name = "Long Bedhead 2"
+	icon_state = "hair_long_bedheadv2"
 
 /datum/sprite_accessory/hair/bedheadfloorlength
 	name = "Floorlength Bedhead"
