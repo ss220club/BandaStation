@@ -142,8 +142,9 @@
 	name = /obj/structure/closet/body_bag/environmental/stasis::name
 	desc = /obj/structure/closet/body_bag/environmental/stasis::desc
 	max_integrity = /obj/structure/closet/body_bag/environmental/stasis::max_integrity
-	icon = 'icons/obj/medical/bodybag.dmi'
-	icon_state = "stasis_bag_folded"
+	icon = 'modular_bandastation/balance/icons/bodybag.dmi' // BANDASTATION EDIT: Replace stasis bag sprites and remove modular stasis bag
+	icon_state = "stasisbag_folded" // BANDASTATION EDIT: Replace stasis bag sprites and remove modular stasis bag
+	color = "#A5A2F7" // BANDASTATION EDIT: Replace stasis bag sprites and remove modular stasis bag
 	unfoldedbag_path = /obj/structure/closet/body_bag/environmental/stasis
 
 /obj/item/bodybag/stasis/deploy_bodybag(mob/user, atom/location)
