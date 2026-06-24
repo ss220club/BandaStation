@@ -374,8 +374,9 @@
 	now_pushing = FALSE
 
 /mob/living/start_pulling(atom/movable/AM, state, force = pull_force, supress_message = FALSE)
-	if(!AM || !src)
+	if(!src)
 		return FALSE
+	ASSERT(ismovable(AM), "[src] attempted to pull [AM ? "[AM], a nonmovable atom" : "a null object"]")
 	if(!(AM.can_be_pulled(src, force)))
 		return FALSE
 	if(throwing || !(mobility_flags & MOBILITY_PULL))
@@ -972,10 +973,11 @@
 	if(heal_flags & HEAL_STAM)
 		set_stamina_loss(0, updating_stamina = FALSE, forced = TRUE)
 
-	// I don't really care to keep this under a flag
-	set_nutrition(NUTRITION_LEVEL_FED + 50)
-	overeatduration = 0
-	satiety = 0
+	// Only aheals really do this right now, so this flag should be fine for the time being
+	if(heal_flags & HEAL_ADMIN)
+		set_nutrition(NUTRITION_LEVEL_FED + 50)
+		overeatduration = 0
+		satiety = 0
 
 	// These should be tracked by status effects
 	losebreath = 0
