@@ -185,6 +185,7 @@
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c223
 	SET_BASE_PIXEL(-8, 0)
 	can_suppress = TRUE
+	suppressor_x_offset = 7
 	weapon_weight = WEAPON_HEAVY
 	var/extended = TRUE
 
@@ -224,6 +225,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	recoil = 0.4
 	burst_size = 1
+	suppressor_x_offset = 7
 
 /obj/item/gun/ballistic/automatic/mini_uzi/Initialize(mapload)
 	. = ..()
