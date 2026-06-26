@@ -3,6 +3,8 @@
 #define TTS_JOB_REPLACEMENTS "tts_job_replacements"
 
 #define FILE_CLEANUP_DELAY 30 SECONDS
+#define TTS_CLIENT_PLAYBACK_BASE_OFFSET 0.5 SECONDS
+#define TTS_CLIENT_PLAYBACK_MAX_PING_OFFSET 3 SECONDS
 
 SUBSYSTEM_DEF(tts220)
 	name = "Text-to-Speech 220"
@@ -408,9 +410,13 @@ SUBSYSTEM_DEF(tts220)
 )
 	var/channel_volume_preference_path = get_volume_preference_for_channel(channel_override)
 	var/list/valid_listeners = list()
+	var/highest_ping = 0
 	for(var/mob/listener as anything in listeners)
-		if(listener?.client?.prefs?.read_preference(channel_volume_preference_path))
-			valid_listeners += listener
+		var/client/listener_client = listener?.client
+		if(!listener_client?.prefs?.read_preference(channel_volume_preference_path))
+			continue
+		valid_listeners += listener
+		highest_ping = max(highest_ping, listener_client.avgping || listener_client.lastping)
 	if(!length(valid_listeners))
 		return
 
@@ -453,6 +459,8 @@ SUBSYSTEM_DEF(tts220)
 		reserved_channel = SSsounds.reserve_sound_channel()
 		output.channel = reserved_channel || SSsounds.random_available_channel()
 	var/sound_length = SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY
+	// Calculate threed_sound cleanup delay based on listeners avg ping
+	var/client_playback_offset = TTS_CLIENT_PLAYBACK_BASE_OFFSET + min(ceil(highest_ping / 100), TTS_CLIENT_PLAYBACK_MAX_PING_OFFSET)
 
 	if(self_listener)
 		self_listener.playsound_local(
@@ -477,7 +485,7 @@ SUBSYSTEM_DEF(tts220)
 			threed_listeners,
 			volume = 100,
 			sound_range = SOUND_RANGE,
-			sound_length = sound_length,
+			sound_length = sound_length + client_playback_offset,
 			channel = output.channel,
 			preference_volume = channel_volume_preference_path,
 			preference_signal = channel_override == CHANNEL_TTS_RADIO ? COMSIG_MOB_TTS_RADIO_VOLUME_PREFERENCE_APPLIED : COMSIG_MOB_TTS_VOLUME_PREFERENCE_APPLIED,
@@ -486,7 +494,7 @@ SUBSYSTEM_DEF(tts220)
 			pressure_affected = TRUE
 		)
 	if(reserved_channel)
-		addtimer(CALLBACK(SSsounds, TYPE_PROC_REF(/datum/controller/subsystem/sounds, free_sound_channel), reserved_channel), sound_length + 1, TIMER_DELETE_ME) // FIXME: This is sucks and sound length shouldn't be modified, get_sound_length() is unreliable
+		addtimer(CALLBACK(SSsounds, TYPE_PROC_REF(/datum/controller/subsystem/sounds, free_sound_channel), reserved_channel), sound_length + client_playback_offset, TIMER_DELETE_ME)
 
 	if(postSFX)
 		for(var/mob/listener as anything in valid_listeners)
@@ -647,3 +655,5 @@ SUBSYSTEM_DEF(tts220)
 #undef TTS_JOB_REPLACEMENTS
 
 #undef FILE_CLEANUP_DELAY
+#undef TTS_CLIENT_PLAYBACK_BASE_OFFSET
+#undef TTS_CLIENT_PLAYBACK_MAX_PING_OFFSET
