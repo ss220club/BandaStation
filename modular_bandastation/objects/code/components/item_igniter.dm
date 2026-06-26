@@ -9,19 +9,19 @@
 		return COMPONENT_INCOMPATIBLE
 
 /datum/component/item_igniter/RegisterWithParent()
-	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
-	RegisterSignal(parent, IGNITION_STATE_CHANGED, PROC_REF(on_ignition_state_changed))
+	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(attackby))
+	RegisterSignal(parent, CHANGE_IGNITION_STATE, PROC_REF(change_ignition_state))
 
 /datum/component/item_igniter/UnregisterFromParent()
 	UnregisterSignal(parent, COMSIG_ATOM_ATTACKBY)
-	UnregisterSignal(parent, IGNITION_STATE_CHANGED)
+	UnregisterSignal(parent, CHANGE_IGNITION_STATE)
 
 /// Signal handler to change ignition ability state
-/datum/component/item_igniter/proc/on_ignition_state_changed(atom/source, state)
+/datum/component/item_igniter/proc/change_ignition_state(atom/source, state)
 	SIGNAL_HANDLER
 	can_ignite_items = state
 
-/datum/component/item_igniter/proc/on_attackby(atom/source, obj/item/attacking_item, mob/user,params)
+/datum/component/item_igniter/proc/attackby(atom/source, obj/item/attacking_item, mob/user,params)
 	SIGNAL_HANDLER
 
 	if(!can_ignite_items)
@@ -47,13 +47,10 @@
 	if(!do_after(user, fire_act_delay, target = attacking_item))
 		return
 
-	if(QDELETED(source) || QDELETED(attacking_item) || !can_ignite_items)
+	if(QDELETED(source) || !can_ignite_items)
 		return
 
 	attacking_item.fire_act()
-
-	// Signal that ignition was successful
-	SEND_SIGNAL(parent, IGNITION_SUCCESS, attacking_item, user)
 
 /datum/component/item_igniter/proc/choose_delay(obj/item/attacking_item)
 	var/static/list/delay_by_w_class = list(

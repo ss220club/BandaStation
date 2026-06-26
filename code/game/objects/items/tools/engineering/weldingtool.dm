@@ -64,6 +64,8 @@
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddElement(/datum/element/tool_flash, light_range)
 	AddElement(/datum/element/falling_hazard, damage = force, wound_bonus = wound_bonus, hardhat_safety = TRUE, crushes = FALSE, impact_sound = hitsound)
+	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
+	AddComponent(/datum/component/item_igniter)
 
 	create_reagents(max_fuel)
 	if(starting_fuel)
@@ -259,6 +261,8 @@
 			hitsound = 'sound/items/tools/welder.ogg'
 			update_appearance()
 			START_PROCESSING(SSobj, src)
+			/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
+			SEND_SIGNAL(src, CHANGE_IGNITION_STATE, TRUE)
 		else
 			balloon_alert(user, "no fuel!")
 			switched_off()
@@ -274,6 +278,8 @@
 	damtype = BRUTE
 	hitsound = SFX_SWING_HIT
 	update_appearance()
+	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
+	SEND_SIGNAL(src, CHANGE_IGNITION_STATE, TRUE)
 
 
 /obj/item/weldingtool/examine(mob/user)

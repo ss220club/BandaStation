@@ -37,6 +37,6 @@
 #define SQUASH_WITH_HANDS_DELAY 1.5 SECONDS
 #define RCD_NO_SKILLCHIP_DELAY_MULTIPLIER 1.5
 
-/// Defines for item ignition component
-#define IGNITION_STATE_CHANGED "item_ignition_state_changed"
-#define IGNITION_SUCCESS "item_ignition_success"
+/// Signal from change_ignition_state(atom/source, state)
+/// State is boolean value
+#define CHANGE_IGNITION_STATE "change_ignition_state"

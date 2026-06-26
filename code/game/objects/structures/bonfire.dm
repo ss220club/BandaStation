@@ -33,6 +33,8 @@
 		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
+	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
+	AddComponent(/datum/component/item_igniter)
 	burning_loop = new(src)
 
 /obj/structure/bonfire/Destroy()
@@ -41,6 +43,8 @@
 	. = ..()
 
 /obj/structure/bonfire/attackby(obj/item/used_item, mob/living/user, list/modifiers, list/attack_modifiers)
+	/// BANDASTATION EDIT: CALL PARENT FOR IGNITION
+	. = ..()
 	if(istype(used_item, /obj/item/stack/rods) && !can_buckle && !grill)
 		var/obj/item/stack/rods/rods = used_item
 		var/choice = tgui_alert(user, "What would you like to construct?", "Bonfire", list("Stake","Grill"))
@@ -115,6 +119,8 @@
 	bonfire_burn()
 	particles = new /particles/bonfire()
 	START_PROCESSING(SSobj, src)
+	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
+	SEND_SIGNAL(src, CHANGE_IGNITION_STATE, TRUE)
 
 /obj/structure/bonfire/fire_act(exposed_temperature, exposed_volume)
 	start_burning()
@@ -173,6 +179,8 @@
 	set_light(0)
 	QDEL_NULL(particles)
 	STOP_PROCESSING(SSobj, src)
+	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
+	SEND_SIGNAL(src, CHANGE_IGNITION_STATE, FALSE)
 
 /obj/structure/bonfire/buckle_mob(mob/living/buckled_mob, force = FALSE, check_loc = TRUE)
 	if(..())
