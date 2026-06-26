@@ -15,6 +15,6 @@
 		/obj/item/sensor_device = 1,
 		/obj/item/pinpointer/crew = 1,
 		/obj/item/flashlight/seclite = 1,
-		/obj/item/clothing/accessory/holster,
+		/obj/item/clothing/accessory/holster = 1,
 	)
 	generate_items_inside(items_inside, src)
