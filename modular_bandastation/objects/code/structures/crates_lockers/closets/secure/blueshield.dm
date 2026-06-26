@@ -14,5 +14,7 @@
 		/obj/item/radio/headset/blueshield/alt = 1,
 		/obj/item/sensor_device = 1,
 		/obj/item/pinpointer/crew = 1,
+		/obj/item/flashlight/seclite = 1,
+		/obj/item/clothing/accessory/holster,
 	)
 	generate_items_inside(items_inside, src)
