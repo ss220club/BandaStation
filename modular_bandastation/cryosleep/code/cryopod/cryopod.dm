@@ -295,14 +295,8 @@ GLOBAL_LIST_EMPTY(objectives)
 	if(control_computer)
 		var/obj/item/disk/nuclear/disk = locate(/obj/item/disk/nuclear) in control_computer.get_all_contents()
 		if(disk)
-			var/list/possible_turfs = list()
-			for(var/turf/T in orange(1, src))
-				if(!T.density)
-					possible_turfs += T
-			if(length(possible_turfs))
-				disk.forceMove(pick(possible_turfs))
-			else
-				disk.forceMove(get_turf(src))
+			var/list/possible_turfs = get_adjacent_open_turfs(control_computer)
+			disk.forceMove(length(possible_turfs) ? pick(possible_turfs) : drop_location())
 
 /// Handles putting mob inside the cryopod by user
 /obj/machinery/cryopod/proc/put_mob_inside(mob/target, mob/user)
