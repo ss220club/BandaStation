@@ -1207,10 +1207,10 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 /// Signal proc for [COMSIG_ATOM_CONTENTS_WEIGHT_CLASS_CHANGED] to drop items out of our storage if they're suddenly too heavy.
 /datum/storage/proc/contents_changed_w_class(datum/source, obj/item/changed, old_w_class, new_w_class)
+	SIGNAL_HANDLER
 	var/atom/name_source = parent
 	if(storage_source)
 		name_source = storage_source
-	SIGNAL_HANDLER
 
 	// If old weight already overloaded the storage, don't drop the item out just in case we're inside of a premade box
 	if(new_w_class <= max_specific_storage && (get_total_weight() <= max_total_storage || get_total_weight() - new_w_class + old_w_class > max_total_storage))
