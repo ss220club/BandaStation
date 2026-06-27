@@ -1196,16 +1196,7 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 /// they are exempt from it.
 /// Returns the number of days left, or 0.
 /client/proc/get_remaining_days(days_needed)
-	if(!CONFIG_GET(flag/use_age_restriction_for_jobs))
-		return 0
-
-	if(!isnum(player_age) || player_age < 0)
-		return 0
-
-	if(!isnum(days_needed))
-		return 0
-
-	return max(0, days_needed - player_age)
+	return 0
 
 /// Attempts to make the client orbit the given object, for administrative purposes.
 /// If they are not an observer, will try to aghost them.
