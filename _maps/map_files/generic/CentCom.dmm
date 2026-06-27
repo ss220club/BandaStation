@@ -10205,7 +10205,7 @@
 /obj/machinery/door/airlock/centcom,
 /obj/effect/mapping_helpers/airlock/access/all/admin/captain,
 /obj/machinery/door/poddoor/ert{
-	name = "Fitst Port";
+	name = "First Port";
 	id = "CC_Argos_1"
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
