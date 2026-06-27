@@ -60,8 +60,18 @@
 		var/tl = SSticker.GetTimeLeft()
 		to_chat(src, "Пожалуйста, настройте своего персонажа и нажмите \"Готов\". Игра будет запущена [tl > 0 ? "через [DisplayTimeText(tl)]" : "скоро"].")
 
+	INVOKE_ASYNC(src, PROC_REF(show_lobby_test_alert))
+
 	if(GLOB.unrecommended_builds[num2text(client.byond_build)])
 		INVOKE_ASYNC(src, PROC_REF(unrcommended_build_alert))
+
+/mob/dead/new_player/proc/show_lobby_test_alert()
+	var/warning = "Внимание - проводится тестирование сервера в РФ в течение нескольких раундов.\n\n\
+		Во время тестов действуют актуальные правила BandaStation, при этом администрация оставляет за собой право ограничить доступ к тестам без объяснения причин.\n\n\
+		Ваши настройки и персонажи недоступны, а новые изменения не будут сохранены - рекомендуется использовать случайного персонажа для игры.\n\n\
+		Ведите себя как в любом другом раунде. Это не стресс-тест - ожидается стандартная активность.\n\n\
+		Пожалуйста, обращайте внимание на сообщения и опросы от администрации в игре."
+	alert(src, warning, "Уведомление", "OK")
 
 /mob/dead/new_player/proc/unrcommended_build_alert()
 	var/warning = "Hey! The build of byond you are running ([client.byond_build]) has one or more potential issues that may cause major gameplay disruptions.\n\n\
