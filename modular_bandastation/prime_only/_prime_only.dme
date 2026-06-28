@@ -1,6 +1,5 @@
 #include "_prime_only.dm"
 
-#include "code/bodycam_vending.dm"
 #include "code/centcom_tacvisor.dm"
 #include "code/fishing_portal_generator.dm"
 
@@ -8,3 +7,4 @@
 #include "../~components/code/bodycam_camera.dm"
 #include "../~components/code/pausable_bodycam.dm"
 #include "../objects/code/items/clothing/accessories/bodycam.dm"
+#include "code/bodycam_vending.dm"
