@@ -10,7 +10,7 @@
 #define ROCK_COLOR_ICE "#cde2e4"
 #define ROCK_COLOR_ASH "#ccddff"
 #define ROCK_COLOR_SHALE "#353743"
-#define ROCK_COLOR_RED2 "#A60100"
+#define ROCK_COLOR_VOLCANIC_RED "#A60100"
 
 // MARK: Minerals
 /turf/closed/mineral
@@ -73,7 +73,7 @@
 	icon = MAP_SWITCH(CONTRAST_ROCKS, MAPPING_ROCKS)
 	icon_state = rock_icon_state("redrock")
 	base_icon_state = "smoothrocks"
-	color = rock_color(ROCK_COLOR_RED2)
+	color = rock_color(ROCK_COLOR_VOLCANIC_RED)
 	transform = null
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
 	wall_icon_state = null
