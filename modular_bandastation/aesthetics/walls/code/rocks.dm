@@ -9,6 +9,8 @@
 #define ROCK_COLOR_RED "#861313"
 #define ROCK_COLOR_ICE "#cde2e4"
 #define ROCK_COLOR_ASH "#ccddff"
+#define ROCK_COLOR_SHALE "#353743"
+#define ROCK_COLOR_RED2 "#A60100"
 
 // MARK: Minerals
 /turf/closed/mineral
@@ -17,6 +19,7 @@
 	base_icon_state = "smoothrocks"
 	color = rock_color(ROCK_COLOR)
 	transform = null
+	wall_icon_state = null
 
 /turf/closed/mineral/minimap
 	name = "DO NOT USE!!!"
@@ -42,16 +45,38 @@
 	color = rock_color(ROCK_COLOR_ASH)
 
 /turf/closed/mineral/random/stationside/asteroid
-	icon = MAP_SWITCH(CONTRASTLESS_ROCKS, MAPPING_ROCKS)
+	icon = MAP_SWITCH(CONTRAST_ROCKS, MAPPING_ROCKS)
 	icon_state = rock_icon_state("rock_nochance")
 	base_icon_state = "smoothrocks"
 	color = rock_color(ROCK_COLOR_RED)
+	transform = null
+	wall_icon_state = null
 
 /turf/closed/mineral/asteroid
-	icon = MAP_SWITCH(CONTRASTLESS_ROCKS, MAPPING_ROCKS)
+	icon = MAP_SWITCH(CONTRAST_ROCKS, MAPPING_ROCKS)
 	icon_state = rock_icon_state("redrock")
 	base_icon_state = "smoothrocks"
 	color = rock_color(ROCK_COLOR_RED)
+	transform = null
+	wall_icon_state = null
+
+/turf/closed/mineral/random/volcanic/shale
+	icon = MAP_SWITCH(CONTRAST_ROCKS, MAPPING_ROCKS)
+	icon_state = rock_icon_state("shale")
+	base_icon_state = "smoothrocks"
+	color = rock_color(ROCK_COLOR_SHALE)
+	transform = null
+	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
+	wall_icon_state = null
+
+/turf/closed/mineral/random/volcanic/red_rock
+	icon = MAP_SWITCH(CONTRAST_ROCKS, MAPPING_ROCKS)
+	icon_state = rock_icon_state("redrock")
+	base_icon_state = "smoothrocks"
+	color = rock_color(ROCK_COLOR_RED2)
+	transform = null
+	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
+	wall_icon_state = null
 
 // Cold rocks
 /turf/closed/mineral/snowmountain
