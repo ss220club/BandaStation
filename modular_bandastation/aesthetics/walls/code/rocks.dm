@@ -50,7 +50,6 @@
 	base_icon_state = "smoothrocks"
 	color = rock_color(ROCK_COLOR_RED)
 	transform = null
-	wall_icon_state = null
 
 /turf/closed/mineral/asteroid
 	icon = MAP_SWITCH(CONTRAST_ROCKS, MAPPING_ROCKS)
@@ -58,7 +57,6 @@
 	base_icon_state = "smoothrocks"
 	color = rock_color(ROCK_COLOR_RED)
 	transform = null
-	wall_icon_state = null
 
 /turf/closed/mineral/random/volcanic/shale
 	icon = MAP_SWITCH(CONTRAST_ROCKS, MAPPING_ROCKS)
@@ -67,7 +65,6 @@
 	color = rock_color(ROCK_COLOR_SHALE)
 	transform = null
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
-	wall_icon_state = null
 
 /turf/closed/mineral/random/volcanic/red_rock
 	icon = MAP_SWITCH(CONTRAST_ROCKS, MAPPING_ROCKS)
@@ -76,7 +73,6 @@
 	color = rock_color(ROCK_COLOR_VOLCANIC_RED)
 	transform = null
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
-	wall_icon_state = null
 
 // Cold rocks
 /turf/closed/mineral/snowmountain
