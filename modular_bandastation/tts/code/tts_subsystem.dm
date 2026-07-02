@@ -186,6 +186,8 @@ SUBSYSTEM_DEF(tts220)
 
 	if(!apply_sound_effects(request.effects, request.original_filename, request.output_filename))
 		return
+	if(!CONFIG_GET(flag/tts_cache_enabled))
+		addtimer(CALLBACK(src, PROC_REF(cleanup_tts_file), request.output_filename), FILE_CLEANUP_DELAY)
 
 	for(var/datum/sound_effects_request/adjacent_request as anything in filename_requests)
 		adjacent_request.cb.InvokeAsync()
@@ -380,7 +382,7 @@ SUBSYSTEM_DEF(tts220)
 
 		filename_suffixes |= effect.suffix
 
-	sortTim(filename_suffixes, GLOBAL_PROC_REF(cmp_text_asc))
+	//sortTim(filename_suffixes, GLOBAL_PROC_REF(cmp_text_asc))
 
 	var/filename2play = "[pure_filename][filename_suffixes.Join()].ogg"
 
