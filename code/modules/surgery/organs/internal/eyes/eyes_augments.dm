@@ -704,7 +704,7 @@
 	appearance_copy.overlays += static_effect
 	appearance_copy.override = TRUE
 	// BANDASTATION EDIT START: Fix image pos after grab & fall
-	appearance_copy.transform = matrix()
+	appearance_copy.transform = null
 	appearance_copy.pixel_x = 0
 	appearance_copy.pixel_y = 0
 	// BANDASTATION EDIT END: Fix image pos after grab & fall

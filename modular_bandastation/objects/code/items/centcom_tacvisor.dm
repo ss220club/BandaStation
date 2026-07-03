@@ -21,6 +21,9 @@
 	UnregisterSignal(receiver, COMSIG_MOVABLE_PRE_HEAR)
 
 /obj/item/organ/eyes/robotic/tacvisor/centcom/make_overlay(mob/living/target)
+	if (!target)
+		return
+
 	if (obj_flags & EMAGGED)
 		var/image/overlay_image = image(mutable_appearance('icons/effects/effects.dmi', "nothing"), target)
 		overlay_image.override = TRUE
@@ -38,7 +41,7 @@
 			outline_color = "#FF0022CC"
 	appearance_copy.add_filter("target_lock_outline", 2, outline_filter(1, outline_color))
 	appearance_copy.override = TRUE
-	appearance_copy.transform = matrix()
+	appearance_copy.transform = null
 	appearance_copy.pixel_x = 0
 	appearance_copy.pixel_y = 0
 	var/image/overlay_image = image(appearance_copy, target)
