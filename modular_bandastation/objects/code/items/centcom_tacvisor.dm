@@ -12,6 +12,7 @@
 /obj/item/organ/eyes/robotic/tacvisor/centcom
 	no_glasses = FALSE
 	friendly_faction = IFF_FACTION_CENTCOM
+	hostile_faction = IFF_FACTION_SYNDICATE
 
 /obj/item/organ/eyes/robotic/tacvisor/centcom/on_mob_insert(mob/living/carbon/receiver, special, movement_flags)
 	. = ..()
