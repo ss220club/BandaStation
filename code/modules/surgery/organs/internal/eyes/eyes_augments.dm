@@ -615,6 +615,11 @@
 			COMSIG_MOB_EQUIPPED_ITEM,
 			COMSIG_MOB_UNEQUIPPED_ITEM,
 			COMSIG_LIVING_UPDATE_OFFSETS,
+			COMSIG_LIVING_UPDATE_OFFSETS,
+			// BANDASTATION EDIT START: Fix image pos after grab & fall
+			COMSIG_ATOM_NO_LONGER_PULLED,
+			COMSIG_LIVING_GET_PULLED,
+			// BANDASTATION EDIT END: Fix image pos after grab & fall
 		))
 	mob_overlays.Cut()
 	direct_view_tracking.Cut()
