@@ -4,7 +4,8 @@ GLOBAL_LIST_INIT(raid_areas, list(
 	/area/new_sydney/dark_forest,
 	/area/new_sydney/dark_forest/radiation_lake,
 	/area/new_sydney/dark_forest/building,
-	/area/new_sydney/military_base
+	/area/new_sydney/military_base,
+	/area/new_sydney/mine
 ))
 
 /mob/living/carbon/human/proc/in_raid()

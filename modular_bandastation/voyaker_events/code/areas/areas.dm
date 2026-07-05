@@ -16,6 +16,12 @@
 	light_power = 0.1
 	base_lighting_alpha = 90
 
+/area/new_sydney/mine
+	name = "Шахта"
+	icon_state = "building"
+	light_power = 0.1
+	base_lighting_alpha = 0
+
 /area/new_sydney/dark_forest
 	name = "Тёмный лес"
 	icon_state = "dark-forest"

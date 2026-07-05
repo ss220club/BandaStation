@@ -126,8 +126,38 @@
 	to_chat(H, span_green("Банкомат неожиданно выдал вам [amount] кредитов."))
 
 /obj/structure/city_prop/gas_station
-	name = "пустая бензоколонка"
+	name = "бензоколонка"
 	icon_state = "buildingventbig12"
+	desc = "Обычная бензоколонка. Возможно, в ней ещё осталось топливо..."
+	/// player.ckey -> world.time окончания кулдауна
+	var/list/refuel_cooldowns = list()
+
+#define GAS_REFUEL_COOLDOWN (20 MINUTES)
+
+/obj/structure/city_prop/gas_station/attackby(obj/item/I, mob/living/user, params)
+	if(!istype(I, /obj/item/reagent_containers/cup/fuel_can))
+		return ..()
+	var/obj/item/reagent_containers/cup/fuel_can/can = I
+	var/ckey = user.ckey
+	if(!ckey)
+		return
+	if(refuel_cooldowns[ckey] && refuel_cooldowns[ckey] > world.time)
+		var/time_left = round((refuel_cooldowns[ckey] - world.time) / 10)
+		balloon_alert(user, "ещё [time_left] сек.")
+		return TRUE
+	if(can.reagents.total_volume >= can.reagents.maximum_volume)
+		balloon_alert(user, "канистра уже полная!")
+		return TRUE
+	balloon_alert(user, "заправка...")
+	playsound(src, 'sound/effects/liquid_pour/liquid_pour1.ogg', 50, TRUE)
+	if(!do_after(user, 3 SECONDS, target = src))
+		return TRUE
+	can.reagents.add_reagent(/datum/reagent/fuel,
+		can.reagents.maximum_volume - can.reagents.total_volume)
+	refuel_cooldowns[ckey] = world.time + GAS_REFUEL_COOLDOWN
+	playsound(src, 'sound/effects/compressed_air/tank_insert_clunky.ogg', 50, TRUE)
+	to_chat(user, span_notice("Вы полностью заполняете канистру топливом."))
+	return TRUE
 
 /obj/structure/city_prop/telebox
 	name = "телефонная будка"

@@ -74,3 +74,10 @@
 
 /obj/structure/vehicle_light/meridian/shell
 	icon_state = "MeridianCar_shell"
+
+/obj/structure/vehicle_light/cargo
+	icon = 'modular_bandastation/voyaker_events/icons/cargo.dmi'
+	icon_state = "cargo_engine"
+
+/obj/structure/vehicle_light/cargo/trailer
+	icon_state = "cargo_trailer"

@@ -57,6 +57,9 @@
 	* Can be set to ALWAYS_BLACKLIST_RESULT or NEVER_BLACKLIST_RESULT to override the default behavior.
 	*/
 	var/blacklist_result = BLACKLIST_RESULT_IF_NOT_IN_REQS
+	//BANDASTATION EFTK EDIT BEGIN
+	var/requires_workbench = FALSE
+	//BANDASTATION EFTK EDIT END
 	/// Global crafting blacklist. These should be excluded from all crafting recipes no matter what.
 	var/static/list/global_blacklist = typecacheof(list(
 		/obj/item/cautery/augment,
@@ -121,7 +124,7 @@
  * collected_requirements: A list of lists of /obj/item instances that satisfy reqs. Top level list is keyed by requirement path.
  */
 /datum/crafting_recipe/proc/check_requirements(mob/user, list/collected_requirements)
-	return TRUE
+    return TRUE
 
 ///Run custom pre-craft checks for this recipe for tools, rather than consumed requirements.
 /datum/crafting_recipe/proc/check_tools(atom/source, list/collected_tools, final_check = FALSE)

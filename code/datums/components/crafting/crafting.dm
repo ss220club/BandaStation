@@ -130,8 +130,16 @@
 			return FALSE
 
 	//Skip extra requirements when unit testing, like, underwater basket weaving? Get the hell out of here
-	return PERFORM_ALL_TESTS(crafting) || recipe.check_requirements(a, requirements_list)
+	if(recipe.requires_workbench)
+		var/workbench_found = FALSE
+		for(var/obj/structure/workbench/W in range(1, a))
+			if(W.has_power())
+				workbench_found = TRUE
+				break
+		if(!workbench_found)
+			return FALSE
 
+	return PERFORM_ALL_TESTS(crafting) || recipe.check_requirements(a, requirements_list)
 /datum/component/personal_crafting/proc/get_environment(atom/a, list/blacklist = null, radius_range = 1)
 	. = list()
 

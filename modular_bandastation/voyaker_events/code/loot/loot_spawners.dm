@@ -86,9 +86,7 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	loot_table = list(
 		/obj/item/gun/ballistic/automatic/pistol = 90,
 		/obj/item/gun/ballistic/automatic/pistol/zashch = 70,
-		/obj/item/gun/ballistic/revolver/dvoystvol/low_caliber = 50,
 		/obj/item/gun/ballistic/automatic/pistol/clandestine/fisher = 50,
-		/obj/item/gun/ballistic/revolver/dvoystvol = 40,
 		/obj/item/gun/ballistic/automatic/pistol/wespe = 90,
 		/obj/item/gun/ballistic/automatic/pistol/m1911 = 60,
 		/obj/item/gun/ballistic/automatic/pistol/clandestine = 50,
@@ -288,7 +286,12 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 		/obj/item/instrument/piano_synth/headphones/spacepods = 10,
 		/obj/item/clothing/under/suit/checkered = 10,
 		/obj/item/clothing/suit/jacket/letterman_nanotrasen = 15,
-		/obj/item/clothing/suit/jacket/leather/biker = 10
+		/obj/item/clothing/suit/jacket/leather/biker = 10,
+		/obj/item/clothing/glasses/meson = 50,
+		/obj/item/clothing/suit/utility/radiation = 30,
+		/obj/item/clothing/head/utility/radiation = 30,
+		/obj/item/clothing/suit/armor/vest = 40,
+		/obj/item/bikehorn/rubberducky = 60,
 	)
 	max_items = 1
 	spawn_chance = 70
@@ -312,7 +315,59 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 		/obj/item/disk/computer/hdd_theft = 60,
 		/obj/item/disk/computer/syndie_ai_upgrade = 30,
 		/obj/item/disk/computer/black_market = 20,
-		/obj/item/disk/computer/virus = 20
+		/obj/item/disk/computer/virus = 20,
+		/obj/item/book/granter/crafting_recipe/equipment_manual_light = 60,
+		/obj/item/book/granter/crafting_recipe/equipment_manual_medium = 30,
+		/obj/item/book/granter/crafting_recipe/equipment_manual_elite = 10,
+		/obj/item/book/granter/crafting_recipe/ammo_manual_light = 70,
+		/obj/item/book/granter/crafting_recipe/ammo_manual_medium = 40,
+		/obj/item/book/granter/crafting_recipe/ammo_manual_elite = 20,
+		/obj/item/book/granter/crafting_recipe/medical_manual_light = 70,
+		/obj/item/book/granter/crafting_recipe/medical_manual_medium = 40,
+		/obj/item/book/granter/crafting_recipe/medical_manual_elite = 20
 	)
 	max_items = 1
 	spawn_chance = 50
+
+/obj/effect/landmark/loot_spawn/technical
+	name = "technical loot spawn"
+	icon_state = "clockwork_orange"
+	loot_table = list(
+		/obj/item/stack/cable_coil = 80,
+		/obj/item/stack/medical/wrap/sticky_tape = 80,
+		/obj/item/stack/cable_coil/five = 60,
+		/obj/item/assembly/igniter = 60,
+		/obj/item/stack/sheet/iron = 70,
+		/obj/item/stack/sheet/glass = 70,
+		/obj/item/stock_parts/capacitor = 70,
+		/obj/item/stock_parts/scanning_module = 60,
+		/obj/item/stock_parts/servo = 60,
+		/obj/item/stock_parts/subspace/ansible = 50,
+		/obj/item/stock_parts/subspace/filter = 40,
+		/obj/item/stock_parts/subspace/amplifier = 40,
+		/obj/item/stock_parts/subspace/analyzer = 40,
+		/obj/item/stock_parts/subspace/crystal = 30,
+		/obj/item/stock_parts/card_reader = 50,
+		/obj/item/stock_parts/water_recycler = 50,
+		/obj/item/weaponcrafting/receiver = 40,
+		/obj/item/assembly/signaler = 60,
+		/obj/item/analyzer = 60,
+		/obj/item/stack/sheet/leather = 70,
+		/obj/item/stack/sheet/leather/five = 60,
+		/obj/item/stack/sheet/plasteel = 40,
+		/obj/item/stack/sheet/rglass = 40,
+		/obj/item/stack/sheet/plastitaniumglass = 30,
+		/obj/item/crafting_items/gunpowder = 70,
+		/obj/item/crafting_items/gunpowder/medium = 50,
+		/obj/item/crafting_items/gunpowder/high = 30,
+		/obj/item/reagent_containers/cup/fuel_can = 60,
+		/obj/item/stack/sheet/plastic = 80,
+		/obj/item/stack/sheet/plastic/fifty = 60,
+		/obj/item/screwdriver = 70,
+		/obj/item/weldingtool = 60,
+		/obj/item/wirecutters = 60,
+		/obj/item/fuel_pellet = 60,
+		/obj/item/circuitboard/machine/thermomachine = 40
+	)
+	max_items = 2
+	spawn_chance = 80

@@ -295,6 +295,7 @@
 	buy_prices = list(
 		/obj/item/clothing/mask/bandana/gold = 50,
 		/obj/item/stack/sheet/mineral/gold = 100,
+		/obj/item/clothing/accessory/medal = 150,
 		/obj/item/bikehorn/golden = 50,
 		/obj/item/instrument/violin/golden = 300,
 		/obj/item/clothing/accessory/anti_sec_pin = 75,
@@ -357,6 +358,7 @@
 				/obj/item/ammo_box/magazine/zashch = list(15, 1, INFINITY),
 				/obj/item/ammo_box/c762x39/ricochet = list(30, 1, INFINITY),
 				/obj/item/ammo_box/c762x54mmr = list(20, 1, INFINITY),
+				/obj/item/ammo_box/magazine/c762x39mm/small/civ = list(30, 1, INFINITY),
 				/obj/item/storage/toolbox/ammobox/c762x54mmr_bullets = list(80, 2, INFINITY),
 				/obj/item/grenade/frag = list(150, 2, INFINITY),
 				/obj/item/ammo_box/c762x39/hunting = list(35, 2, INFINITY),
@@ -420,6 +422,7 @@
 	buy_prices = list(
 		/obj/item/clothing/mask/bandana/gold = 70,
 		/obj/item/stack/sheet/mineral/gold = 125,
+		/obj/item/clothing/accessory/medal = 175,
 		/obj/item/bikehorn/golden = 75,
 		/obj/item/instrument/violin/golden = 350,
 		/obj/item/clothing/accessory/anti_sec_pin = 100,
@@ -470,6 +473,7 @@
 				/obj/item/food/sosjerky = list(15, 1, INFINITY),
 				/obj/item/food/peanuts/random = list(20, 1, INFINITY),
 				/obj/item/food/peanuts = list(20, 1, INFINITY),
+				/obj/item/food/donkpocket = list(50, 1, INFINITY),
 				/obj/item/reagent_containers/cup/glass/coffee = list(15, 1, INFINITY),
 				/obj/item/reagent_containers/cup/soda_cans/space_mountain_wind = list(10, 1, INFINITY),
 				/obj/item/reagent_containers/cup/soda_cans/cola = list(10, 1, INFINITY),
@@ -486,6 +490,7 @@
 			"icon" = "hand-fist",
 			"products" = list(
 				/obj/item/storage/box = list(10, 1, INFINITY),
+				/obj/item/storage/bag/trash/bluespace = list(20, 1, INFINITY),
 				/obj/item/healthanalyzer = list(50, 1, INFINITY),
 				/obj/item/healthanalyzer/simple = list(40, 1, INFINITY),
 				/obj/item/healthanalyzer/advanced = list(100, 2, INFINITY),
@@ -647,6 +652,7 @@
 				/obj/item/storage/belt/military/army/ussp = list(40, 1, INFINITY),
 				/obj/item/storage/belt/military/army/tsf = list(40, 1, INFINITY),
 				/obj/item/storage/belt/military/army = list(40, 1, INFINITY),
+				/obj/item/storage/bag/ore = list(50, 1, INFINITY),
 				/obj/item/clothing/glasses/sunglasses = list(150, 2, INFINITY),
 				/obj/item/clothing/gloves/combat = list(100, 2, INFINITY),
 				/obj/item/clothing/gloves/tackler/combat = list(150, 2, INFINITY),
@@ -686,7 +692,7 @@
 	)
 
 /obj/machinery/vending/trader/survivor
-	name = "\improper Trade Point - Survivor"
+	name = "\improper Trade Point - Выживайло"
 	desc = "Торговая точка блюспейс-передачи, принадлежащая бывшему охраннику заповедника - Выживайло."
 	icon = 'modular_bandastation/objects/icons/obj/machines/vending.dmi'
 	icon_state = "nta"
@@ -705,7 +711,28 @@
 		/obj/item/loot_mobs/bigot_claw = 400,
 		/obj/item/loot_mobs/fleshspider_tongue = 150,
 		/obj/item/loot_mobs/hunterspider_claw = 100,
-		/obj/item/loot_mobs/faithless_heart = 175
+		/obj/item/loot_mobs/faithless_heart = 175,
+		/obj/item/stack/cable_coil = 5,
+		/obj/item/assembly/igniter = 10,
+		/obj/item/stock_parts/capacitor = 10,
+		/obj/item/stock_parts/scanning_module = 10,
+		/obj/item/stock_parts/servo = 10,
+		/obj/item/stock_parts/subspace/ansible = 50,
+		/obj/item/stock_parts/subspace/filter = 50,
+		/obj/item/stock_parts/subspace/amplifier = 50,
+		/obj/item/stock_parts/subspace/analyzer = 50,
+		/obj/item/stock_parts/subspace/crystal = 100,
+		/obj/item/stock_parts/card_reader = 100,
+		/obj/item/stock_parts/water_recycler = 100,
+		/obj/item/weaponcrafting/receiver = 50,
+		/obj/item/assembly/signaler = 50,
+		/obj/item/analyzer = 25,
+		/obj/item/crafting_items/gunpowder = 10,
+		/obj/item/crafting_items/gunpowder/medium = 30,
+		/obj/item/crafting_items/gunpowder/high = 50,
+		/obj/item/screwdriver = 15,
+		/obj/item/weldingtool = 15,
+		/obj/item/wirecutters = 15
 	)
 
 	product_categories = list(
@@ -752,14 +779,14 @@
 				/obj/item/radio/off = list(75, 1, INFINITY),
 				/obj/item/clothing/gloves/bracer = list(50, 1, INFINITY),
 				/obj/item/hatchet = list(50, 1, INFINITY),
-				/obj/item/stack/medical/wrap/sticky_tape = list(25, 1, INFINITY),
+				/obj/item/stack/medical/wrap/sticky_tape = list(15, 1, INFINITY),
 				/obj/item/stack/sheet/iron = list(10, 2, INFINITY),
 				/obj/item/stack/sheet/mineral/wood = list(5, 2, INFINITY),
 				/obj/item/stack/sheet/glass = list(10, 2, INFINITY),
 				/obj/item/flashlight/seclite = list(50, 2, INFINITY),
+				/obj/item/geiger_counter = list(175, 2, INFINITY),
 				/obj/item/reagent_containers/hypospray/medipen/survival = list(100, 2, INFINITY),
 				/obj/item/storage/toolbox/emergency = list(150, 2, INFINITY),
-				/obj/item/storage/toolbox = list(200, 2, INFINITY),
 				/obj/item/stack/medical/wrap/sticky_tape/super = list(75, 2, INFINITY),
 				/obj/item/extinguisher/mini = list(80, 2, INFINITY),
 				/obj/item/binoculars = list(200, 2, INFINITY),
@@ -855,6 +882,7 @@
 				/obj/item/ammo_box/magazine/c40sol_rifle = list(15, 1, INFINITY),
 				/obj/item/grenade/smokebomb = list(75, 2, INFINITY),
 				/obj/item/storage/box/lethalshot = list(20, 2, INFINITY),
+				/obj/item/ammo_box/magazine/m45 = list(25, 2, INFINITY),
 				/obj/item/ammo_box/magazine/c40sol_rifle/standard = list(20, 2, INFINITY),
 				/obj/item/ammo_box/magazine/c35sol_pistol/stendo = list(15, 2, INFINITY),
 				/obj/item/ammo_box/magazine/c35sol_pistol/hp = list(15, 2, INFINITY),
