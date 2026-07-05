@@ -52,12 +52,7 @@
 
 /turf/closed/mineral/Initialize(mapload)
 	. = ..()
-// BANDASTATION EDIT START: Rock smoothing
-//	add_large_wall_overlay('icons/turf/mining.dmi', wall_icon_state)
-	var/static/mutable_appearance/wall_overlay = mutable_appearance('icons/turf/mining.dmi', "rock", appearance_flags = RESET_TRANSFORM)
-	wall_overlay.plane = MUTATE_PLANE(WALL_PLANE, src)
-	overlays += wall_overlay
-// BANDASTATION EDIT END: Rock smoothing
+	add_large_wall_overlay('icons/turf/mining.dmi', wall_icon_state)
 
 // Inlined version of the bump click element. way faster this way, the element's nice but it's too much overhead
 /turf/closed/mineral/Bumped(atom/movable/bumped_atom)
