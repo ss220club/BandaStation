@@ -106,6 +106,15 @@
 	copy.levels = levels
 	return copy
 
+// BANDASTATION EDIT START: tts_component gate
+/datum/signal/subspace/vocal/proc/should_queue_radio()
+	if(!SStts220.is_enabled || frequency == FREQ_ENTERTAINMENT)
+		return FALSE
+
+	var/atom/movable/signal_source = virt?.GetSource()
+	return !isnull(signal_source?.get_tts_seed())
+// BANDASTATION EDIT END: tts_component gate
+
 /// Past this amount of compression, the resulting gibberish will actually
 /// replace characters, making it even harder to understand.
 #define COMPRESSION_REPLACE_CHARACTER_THRESHOLD 30
@@ -162,21 +171,22 @@
 	for(var/obj/item/radio/called_radio as anything in radios)
 		called_radio.on_receive_message(data)
 	var/list/message_mods = data["mods"]
+	var/should_do_modular_radio_tts = should_queue_radio() // BANDASTATION EDIT: Modular radio TTS does not rely on MODE_TTS_IDENTIFIER
 	// From the list of radios, find all mobs who can hear those.
 	var/list/receive = get_hearers_in_radio_ranges(radios)
 	var/list/receive_radios = null
 
-	if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER)) // only do this if we have a TTS identifier to save on perf
+	if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER) || should_do_modular_radio_tts) // BANDASTATION EDIT: Modular radio TTS keys off tts_component, not legacy voice identifiers
 		receive_radios = get_hearers_in_radio_ranges_track_radios(radios, frequency)
 
+	// BANDASTATION EDIT START: TTS listener lists store weakrefs
 	// Add observers who have ghost radio enabled.
 	for(var/mob/dead/observer/ghost in GLOB.player_list)
 		if(get_chat_toggles(ghost.client) & CHAT_GHOSTRADIO)
 			receive |= ghost
-			if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER))
-	// BANDASTATION EDIT START: TTS listener lists store weakrefs
+			if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER) || should_do_modular_radio_tts)
 				receive_radios[TTS_GHOST_RADIO] |= WEAKREF(ghost)
-	if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER))
+	if(LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER) || should_do_modular_radio_tts)
 		receive_radios[TTS_GHOST_RADIO] = filter_tts_listeners(receive_radios[TTS_GHOST_RADIO], frequency)
 	// BANDASTATION EDIT END: TTS listener lists store weakrefs
 
@@ -193,7 +203,7 @@
 	// 	LAZYSET(SStts.queued_radio_messages_compression, message_mods[MODE_TTS_IDENTIFIER], compression)
 
 	// Play radio TTS from the receiving radio, not from the speaker
-	if(SStts220.is_enabled && LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER) && frequency != FREQ_ENTERTAINMENT)
+	if(should_do_modular_radio_tts)
 		for(var/radio_ref in receive_radios)
 			var/atom/radio_source
 			if(radio_ref != TTS_GHOST_RADIO)
