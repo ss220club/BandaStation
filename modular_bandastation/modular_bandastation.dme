@@ -1,6 +1,5 @@
 #include "_modpack.dm"
 #include "_modpacks.dm"
-#include "voyaker_events/_voyaker_events.dm"
 
 // --- MODULES START --- //
 #include "_defines220/_defines220.dme"
@@ -94,6 +93,7 @@
 #include "uplink_items/_uplink_items.dme"
 #include "weapon/_weapon.dme"
 #include "world_topics/_world_topics.dme"
+#include "voyaker_events/_voyaker_events.dme"
 // --- MODULES END --- //
 
 // --- PRIME --- //
