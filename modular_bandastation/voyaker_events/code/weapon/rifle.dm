@@ -342,3 +342,6 @@
 	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
+/obj/item/gun/ballistic/rifle/boltaction/mosin/strilka310
+
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka
