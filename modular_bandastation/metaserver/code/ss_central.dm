@@ -113,10 +113,14 @@ SUBSYSTEM_DEF(central)
 
 /// WARNING: only semi async - UNTIL based
 /datum/controller/subsystem/central/proc/is_player_whitelisted(ckey)
+	var/server_type = CONFIG_GET(string/server_type)
+	if(!server_type || server_type == /datum/config_entry/string/server_type::default)
+		return TRUE
+
 	if(ckey in GLOB.whitelist)
 		return TRUE
 
-	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/whitelists?server_type=[CONFIG_GET(string/server_type)]&ckey=[ckey]&page=1&page_size=1"
+	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/whitelists?server_type=[server_type]&ckey=[ckey]&page=1&page_size=1"
 	var/datum/http_response/response = SShttp.make_sync_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list())
 	if(response.errored || response.status_code != 200 && response.status_code != 404)
 		stack_trace("Failed to check whitelist: HTTP error - [response.error]")
