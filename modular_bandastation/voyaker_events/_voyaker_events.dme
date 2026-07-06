@@ -57,3 +57,4 @@
 #include "code\weapon\smg.dm"
 #include "code\weapon\special.dm"
 #include "code\weapon\magazines.dm"
+#include "code\weapon\ballistic_master.dm"
