@@ -17,12 +17,12 @@ export function DirectiveDisplay(props) {
   const { directives = [], master_name } = data;
   const displayedLaw = directives?.length
     ? decodeHtmlEntities(directives[0])
-    : 'None.';
+    : 'Отсуствуют.';
 
   return (
     <Stack fill vertical>
       <Stack.Item grow={2}>
-        <Section fill scrollable title="Logic Core">
+        <Section fill scrollable title="Логическое ядро">
           <Box color="label">
             {DIRECTIVE_COMPREHENSION}
             <br />
@@ -32,15 +32,15 @@ export function DirectiveDisplay(props) {
         </Section>
       </Stack.Item>
       <Stack.Item grow>
-        <Section fill scrollable title="Directives">
+        <Section fill scrollable title="Директивы">
           {!master_name ? (
-            'None.'
+            'Отсуствуют.'
           ) : (
             <LabeledList>
-              <LabeledList.Item label="Prime">
-                Serve your master.
+              <LabeledList.Item label="Основная">
+                Служи своему мастеру.
               </LabeledList.Item>
-              <LabeledList.Item label="Supplemental">
+              <LabeledList.Item label="Дополнительные">
                 <BlockQuote>{displayedLaw}</BlockQuote>
               </LabeledList.Item>
             </LabeledList>

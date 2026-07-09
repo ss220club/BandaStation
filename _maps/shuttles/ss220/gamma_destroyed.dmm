@@ -90,9 +90,9 @@
 /turf/open/floor/mineral/titanium/airless,
 /area/shuttle/gamma)
 "Nm" = (
-/obj/structure/closet/secure_closet/gamma,
 /obj/effect/turf_decal/stripes/red/end,
 /obj/effect/mapping_helpers/broken_floor,
+/obj/structure/closet/secure_closet/gamma_armor,
 /turf/open/floor/mineral/titanium/airless,
 /area/shuttle/gamma)
 "Nx" = (

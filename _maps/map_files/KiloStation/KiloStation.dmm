@@ -637,24 +637,27 @@
 /area/station/construction/mining/aux_base)
 "ajt" = (
 /obj/structure/rack,
+/obj/machinery/airalarm/directional/north,
+/obj/effect/turf_decal/tile/purple/half/contrasted{
+	dir = 1
+	},
+/obj/item/storage/toolbox/electrical{
+	pixel_y = 5
+	},
 /obj/item/controller{
 	pixel_x = -7
 	},
-/obj/item/compact_remote{
-	pixel_x = -7
-	},
-/obj/item/compact_remote{
-	pixel_x = -7
-	},
-/obj/machinery/airalarm/directional/north,
 /obj/item/integrated_circuit/loaded/speech_relay{
 	pixel_x = 7
 	},
 /obj/item/integrated_circuit/loaded/hello_world{
 	pixel_x = 7
 	},
-/obj/effect/turf_decal/tile/purple/half/contrasted{
-	dir = 1
+/obj/item/compact_remote{
+	pixel_x = -7
+	},
+/obj/item/compact_remote{
+	pixel_x = -7
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/science/ordnance/office)
@@ -23079,23 +23082,7 @@
 /turf/open/floor/iron/dark,
 /area/station/maintenance/port/fore)
 "hCY" = (
-/obj/item/disk/computer{
-	pixel_x = -5;
-	pixel_y = 8
-	},
-/obj/item/disk/computer{
-	pixel_x = 7;
-	pixel_y = 2
-	},
-/obj/item/disk/computer{
-	pixel_x = -8;
-	pixel_y = -3
-	},
-/obj/structure/table,
-/obj/item/disk/computer/ordnance{
-	pixel_x = 2;
-	pixel_y = 1
-	},
+/obj/machinery/gizmo/toggle/tucker_tubes,
 /turf/open/floor/iron/dark,
 /area/station/science/ordnance/office)
 "hDa" = (
@@ -31411,8 +31398,21 @@
 /area/space/nearstation)
 "kkg" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/electrical{
-	pixel_y = 5
+/obj/item/disk/computer{
+	pixel_x = -8;
+	pixel_y = -3
+	},
+/obj/item/disk/computer{
+	pixel_x = -5;
+	pixel_y = 8
+	},
+/obj/item/disk/computer{
+	pixel_x = 7;
+	pixel_y = 2
+	},
+/obj/item/disk/computer/ordnance{
+	pixel_x = 2;
+	pixel_y = 1
 	},
 /turf/open/floor/iron/dark,
 /area/station/science/ordnance/office)

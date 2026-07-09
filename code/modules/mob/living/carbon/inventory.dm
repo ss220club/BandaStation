@@ -112,8 +112,7 @@
 	if(equipping.pulledby)
 		equipping.pulledby.stop_pulling()
 
-	equipping.screen_loc = null
-	client?.screen -= equipping
+	hud_used?.update_inventory_slot(slot)
 
 	for(var/mob/dead/observe as anything in observers)
 		observe.client?.screen -= equipping
@@ -174,6 +173,7 @@
 	if(item.hair_mask)
 		LAZYADD(hair_masks, item.hair_mask)
 		update_hair()
+		update_body() // this is solely for lizard frills
 	add_item_coverage(item)
 
 /mob/living/carbon/has_unequipped(obj/item/item)
@@ -185,6 +185,7 @@
 	if(item.hair_mask)
 		LAZYREMOVE(hair_masks, item.hair_mask)
 		update_hair()
+		update_body() // this is solely for lizard frills
 	remove_item_coverage(item)
 
 /mob/living/carbon/doUnEquip(obj/item/item_dropping, force, newloc, no_move, invdrop = TRUE, silent = FALSE)
@@ -258,7 +259,10 @@
  * * removed_slots - slots that were removed from obscured_slots
  */
 /mob/living/carbon/proc/item_coverage_changed(added_slots, removed_slots)
+	SEND_SIGNAL(src, COMSIG_CARBON_ITEM_COVERAGE_CHANGED, added_slots, removed_slots)
 	update_clothing(hidden_slots_to_inventory_slots(added_slots|removed_slots))
+	if((added_slots|removed_slots) & HIDESNOUT)
+		synchronize_bodyshapes()
 	if((added_slots|removed_slots) & (HIDEHAIR|HIDEFACIALHAIR))
 		update_hair()
 	if((added_slots|removed_slots) & HIDEEYES)

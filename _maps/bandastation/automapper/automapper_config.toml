@@ -353,7 +353,7 @@ trait_name = "Station"
 map_files = ["iceboxstation_gamma_port.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
-coordinates = [91, 181, 3]
+coordinates = [90, 180, 3]
 trait_name = "Station"
 
 [templates.iceboxstation_library_galactic_map]
@@ -451,7 +451,7 @@ trait_name = "Station"
 map_files = ["iceboxstation_sec_closet.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
-coordinates = [102, 188, 3]
+coordinates = [110, 183, 3]
 trait_name = "Station"
 
 [templates.iceboxstation_wrynroach]
@@ -756,6 +756,13 @@ map_files = ["nebulastation_wrynroach.dmm"]
 directory = "_maps/bandastation/automapper/templates/nebulastation/"
 required_map = "NebulaStation.dmm"
 coordinates = [172, 150, 1]
+trait_name = "Station"
+
+[templates.nebulastation_safe]
+map_files = ["nebulastation_safe.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [175, 149, 1]
 trait_name = "Station"
 
 # wawastation

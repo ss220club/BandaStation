@@ -455,7 +455,7 @@
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
 	},
-/obj/effect/landmark/start/nukeop_overwatch,
+/obj/effect/landmark/start/nukeop_base/overwatch,
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
 "bbH" = (
@@ -1661,7 +1661,7 @@
 /obj/structure/chair/comfy/red{
 	dir = 8
 	},
-/obj/effect/landmark/start/nukeop_leader,
+/obj/effect/landmark/start/nukeop_base/leader,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
 "dDW" = (
@@ -3033,7 +3033,7 @@
 /obj/structure/chair/stool{
 	dir = 1
 	},
-/obj/effect/landmark/start/nukeop,
+/obj/effect/landmark/start/nukeop_base,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
 "gZH" = (
@@ -3678,7 +3678,7 @@
 	dir = 1
 	},
 /obj/structure/sign/poster/contraband/random/directional/west,
-/obj/effect/landmark/start/nukeop,
+/obj/effect/landmark/start/nukeop_base,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
 "iBV" = (
@@ -6062,7 +6062,7 @@
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
-/obj/effect/landmark/start/nukeop_overwatch,
+/obj/effect/landmark/start/nukeop_base/overwatch,
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/syndicate_base/control)
 "nSN" = (
@@ -6633,7 +6633,7 @@
 /area/centcom/syndicate_base/control)
 "plv" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/nukeop,
+/obj/effect/landmark/start/nukeop_base,
 /turf/open/floor/carpet/black,
 /area/centcom/syndicate_base)
 "pmu" = (

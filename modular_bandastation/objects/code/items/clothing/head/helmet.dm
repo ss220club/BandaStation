@@ -108,6 +108,7 @@
 	base_icon_state = "ussp_altyn"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	armor_type = /datum/armor/armor_heavy
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/head/helmet/space/ussp_expedition
 	name = "'Voskhod' EVA suit helmet"

@@ -96,7 +96,7 @@
 	organs = list(
 		/obj/item/organ/cyberimp/arm/toolkit/flash
 	)
-	suit_store = /obj/item/storage/belt/holster/ert/full_gp9r
+	accessory = /obj/item/clothing/accessory/holster/tacticool/ert_gp93r
 	l_pocket = /obj/item/melee/baton/telescopic/bronze
 	r_pocket = /obj/item/switchblade
 
@@ -119,7 +119,7 @@
 /datum/outfit/centcom/ert/commander/gamma
 	name = "ERT Commander - Gamma"
 	back = /obj/item/mod/control/pre_equipped/responsory/commander
-	suit_store = /obj/item/storage/belt/holster/ert/full_gamma_commander
+	accessory = /obj/item/clothing/accessory/holster/tacticool/ert_gammacom
 	belt = /obj/item/storage/belt/military/ert/full_gamma_commander
 	l_pocket = /obj/item/melee/baton/telescopic/gold
 	organs = list(
@@ -141,7 +141,7 @@
 /datum/outfit/centcom/ert/commander/inquisitor
 	name = "ERT Commander - Inquisition"
 	back = /obj/item/mod/control/pre_equipped/responsory/inquisitory/commander
-	suit_store = /obj/item/storage/belt/holster/ert/full_gamma_commander
+	accessory = /obj/item/clothing/accessory/holster/tacticool/ert_gammacom
 	belt = /obj/item/nullrod/claymore/talking/chainsword
 	l_pocket = /obj/item/melee/baton/telescopic/gold
 	backpack_contents = list(
@@ -185,7 +185,7 @@
 /datum/outfit/centcom/ert/medic/red
 	name = "ERT Medic - Red"
 	suit = /obj/item/clothing/suit/armor/vest/marine/medic
-	suit_store = /obj/item/storage/belt/holster/ert/full_gp9r
+	accessory = /obj/item/clothing/accessory/holster/tacticool/ert_gp93r
 	back = /obj/item/storage/backpack/ert/medical
 	head = /obj/item/clothing/head/helmet/marine/medic
 	backpack_contents = list(

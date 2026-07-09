@@ -81,7 +81,7 @@
 			new /obj/item/gun/ballistic/revolver(src) // 13 tc
 			new /obj/item/ammo_box/speedloader/c357(src) // 4tc
 			new /obj/item/ammo_box/speedloader/c357(src)
-			new /obj/item/storage/belt/holster/chameleon(src) // 1 tc
+			new /obj/item/clothing/accessory/holster/chameleon(src) // 1 tc BANDASTATION EDIT: Accessory holsters
 			new /obj/item/card/emag/doorjack(src) // 3 tc replaced the emag with the doorjack
 			new /obj/item/grenade/c4(src) // 1 tc
 			new /obj/item/clothing/gloves/latex/nitrile(src) // ~1 tc for whole outfit
@@ -491,6 +491,11 @@
 	new /obj/item/reagent_containers/cup/bottle/amanitin(src)
 	new /obj/item/reagent_containers/syringe(src)
 
+/obj/item/storage/box/syndie_kit/carnivorous_blood/PopulateContents()
+	new /obj/item/reagent_containers/cup/bottle/carnivorous_blood(src)
+	new /obj/item/reagent_containers/syringe(src)
+	new /obj/item/food/meat/slab/human(src)
+
 /obj/item/storage/box/syndie_kit/nuke
 	name = "nuke core extraction kit"
 	desc = "A box containing the equipment and instructions for extracting the plutonium cores of most Nanotrasen nuclear explosives."
@@ -798,6 +803,7 @@
 
 	var/datum/antagonist/nukeop/nuke_datum = new()
 	nuke_datum.send_to_spawnpoint = FALSE
+	nuke_datum.give_bonus_tc = FALSE
 	nuke_datum.nukeop_outfit = null
 	human_target.mind?.add_antag_datum(nuke_datum)
 	human_target.add_faction(ROLE_SYNDICATE)
@@ -835,7 +841,7 @@
 	generate_items_inside(list(
 		/obj/item/clothing/shoes/cowboy/black/syndicate= 1,
 		/obj/item/clothing/head/cowboy/black/syndicate = 1,
-		/obj/item/storage/belt/holster/nukie/cowboy/full = 1,
+		/obj/item/clothing/accessory/holster/tacticool/cowboy = 1, // BANDASTATION EDIT: Accessory holsters
 		/obj/item/clothing/under/costume/dutch/syndicate = 1,
 		/obj/item/lighter/skull = 1,
 		/obj/item/sbeacondrop/horse = 1,
