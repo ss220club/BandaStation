@@ -17,7 +17,7 @@
 		// Positive is true if more of the amount is a good thing.
 		var/list/numeric_data = list()
 		if(sm_gas.power_transmission)
-			var/list/si_derived_data = siunit_isolated(sm_gas.power_transmission * BASE_POWER_TRANSMISSION_RATE, "Вт/МэВ", 2)
+			var/list/si_derived_data = siunit_isolated(sm_gas.power_transmission * BASE_POWER_TRANSMISSION_RATE, "W/MeV", 2)
 			numeric_data += list(list(
 				"name" = "Бонус передачи мощности",
 				"amount" = si_derived_data["coefficient"],
@@ -39,7 +39,7 @@
 				"positive" = TRUE,
 			))
 		if(sm_gas.heat_power_generation)
-			var/list/si_derived_data = siunit_isolated(sm_gas.heat_power_generation * GAS_HEAT_POWER_SCALING_COEFFICIENT MEGA SECONDS / SSair.wait, "эВ/К/с", 2)
+			var/list/si_derived_data = siunit_isolated(sm_gas.heat_power_generation * GAS_HEAT_POWER_SCALING_COEFFICIENT MEGA SECONDS / SSair.wait, "eV/K/s", 2)
 			numeric_data += list(list(
 				"name" = "Прирост тепловой мощности",
 				"amount" = si_derived_data["coefficient"],
