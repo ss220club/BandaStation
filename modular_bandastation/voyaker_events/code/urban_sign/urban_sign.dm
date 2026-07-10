@@ -37,9 +37,9 @@
 
 /obj/structure/neon_sign/nightgold
 	name = "Night Gold Casino"
+	icon_state = "nightgoldcasinoopen_on"
 	lit_icon_state = "nightgoldcasinoopen_on"
 	base_icon_state = "nightgoldcasinoopen"
-	lit_icon_state = "nightgoldcasinoopen_on"
 	light_color = "#FFCC55"
 
 /obj/structure/neon_sign/open
@@ -84,5 +84,140 @@
 	lit_icon_state = "cuppajoes"
 	light_color = "#922320"
 
+/obj/structure/neon_sign/billboard
+	name = "Billboard"
+	icon = 'modular_bandastation/voyaker_events/icons/32x64_urbanbillboards.dmi'
+	icon_state = "billboard_bigger"
+	base_icon_state = "billboard_bigger"
+	lit_icon_state = "billboard_bigger"
+	light_color = "#44ffff"
 
+/obj/structure/neon_sign/billboard/north
+	dir = NORTH
 
+/obj/structure/neon_sign/billboard/east
+	dir = EAST
+
+/obj/structure/neon_sign/billboard/west
+	dir = WEST
+
+/obj/structure/neon_sign/billboard/south
+	dir = SOUTH
+
+/obj/structure/neon_sign/billboard1
+	name = "Billboard"
+	icon = 'modular_bandastation/voyaker_events/icons/32x64_urbanbillboards.dmi'
+	icon_state = "billboard1"
+	base_icon_state = "billboard1"
+	lit_icon_state = "billboard1"
+	light_color = "#44ffff"
+
+/obj/structure/neon_sign/billboard1/north
+	dir = NORTH
+	pixel_y = 35
+
+/obj/structure/neon_sign/billboard1/east
+	dir = EAST
+
+/obj/structure/neon_sign/billboard1/west
+	dir = WEST
+
+/obj/structure/neon_sign/billboard1/south
+	dir = SOUTH
+	pixel_y = -28
+
+/obj/structure/neon_sign/billboard2
+	name = "Billboard"
+	icon = 'modular_bandastation/voyaker_events/icons/32x64_urbanbillboards.dmi'
+	icon_state = "billboard2"
+	base_icon_state = "billboard2"
+	lit_icon_state = "billboard2"
+	light_color = "#44ffff"
+
+/obj/structure/neon_sign/billboard2/north
+	dir = NORTH
+	pixel_y = 35
+
+/obj/structure/neon_sign/billboard2/east
+	dir = EAST
+
+/obj/structure/neon_sign/billboard2/west
+	dir = WEST
+
+/obj/structure/neon_sign/billboard2/south
+	dir = SOUTH
+	pixel_y = -28
+
+/obj/structure/neon_sign/billboard3
+	name = "Billboard"
+	icon = 'modular_bandastation/voyaker_events/icons/32x64_urbanbillboards.dmi'
+	icon_state = "billboard3"
+	base_icon_state = "billboard3"
+	lit_icon_state = "billboard3"
+	light_color = "#44ffff"
+
+/obj/structure/neon_sign/billboard3/north
+	dir = NORTH
+	pixel_y = 35
+
+/obj/structure/neon_sign/billboard3/east
+	dir = EAST
+
+/obj/structure/neon_sign/billboard3/west
+	dir = WEST
+
+/obj/structure/neon_sign/billboard3/south
+	dir = SOUTH
+	pixel_y = -28
+
+/obj/structure/neon_sign/billboard4
+	name = "Billboard"
+	icon = 'modular_bandastation/voyaker_events/icons/32x64_urbanbillboards.dmi'
+	icon_state = "billboard4"
+	base_icon_state = "billboard4"
+	lit_icon_state = "billboard4"
+	light_color = "#44ffff"
+
+/obj/structure/neon_sign/billboard4/north
+	dir = NORTH
+	pixel_y = 35
+
+/obj/structure/neon_sign/billboard4/east
+	dir = EAST
+
+/obj/structure/neon_sign/billboard4/west
+	dir = WEST
+
+/obj/structure/neon_sign/billboard4/south
+	dir = SOUTH
+	pixel_y = -28
+
+/obj/structure/neon_sign/billboard5
+	name = "Billboard"
+	icon = 'modular_bandastation/voyaker_events/icons/32x64_urbanbillboards.dmi'
+	icon_state = "billboard5"
+	base_icon_state = "billboard5"
+	lit_icon_state = "billboard5"
+	light_color = "#44ffff"
+
+/obj/structure/neon_sign/billboard5/north
+	dir = NORTH
+	pixel_y = 35
+
+/obj/structure/neon_sign/billboard5/east
+	dir = EAST
+
+/obj/structure/neon_sign/billboard5/west
+	dir = WEST
+
+/obj/structure/neon_sign/billboard5/south
+	dir = SOUTH
+	pixel_y = -28
+
+/obj/structure/neon_sign/billboard6
+	name = "Digital Vacation"
+	icon = 'modular_bandastation/voyaker_events/icons/urban64x64_signs.dmi'
+	icon_state = "billboard6"
+	base_icon_state = "billboard6"
+	lit_icon_state = "billboard6"
+	light_color = "#44ffff"

@@ -6,8 +6,8 @@ GLOBAL_LIST_EMPTY(area_ambients)
 	icon_state = "hitsplat_heal"
 	var/sound_file
 	var/sound_range = 15
-	var/min_delay = 30 SECONDS
-	var/max_delay = 90 SECONDS
+	var/min_delay = 2 SECONDS
+	var/max_delay = 5 SECONDS
 
 /obj/effect/landmark/ambient_sound/Initialize(mapload)
 	. = ..()
@@ -25,14 +25,14 @@ GLOBAL_LIST_EMPTY(area_ambients)
 /obj/effect/landmark/ambient_sound/proc/play_ambient()
 	if(QDELETED(src))
 		return
-	for(var/mob/M in viewers(sound_range, src))
-		playsound(get_turf(src), sound_file, 50, FALSE)
+	if(length(viewers(sound_range, src)))
+		playsound(get_turf(src), sound_file, 80, FALSE)
 	start_ambient()
 
 /obj/effect/landmark/ambient_sound/dark_forest
 	name = "Dark Forest Ambient"
 	sound_file = 'modular_bandastation/voyaker_events/sounds/forest_wind.ogg'
-	min_delay = 20 SECONDS
+	min_delay = 2 SECONDS
 	max_delay = 60 SECONDS
 	sound_range = 25
 
@@ -40,19 +40,26 @@ GLOBAL_LIST_EMPTY(area_ambients)
 	name = "Radiation Lake Ambient"
 	sound_file = 'modular_bandastation/voyaker_events/sounds/radiation_hum.ogg'
 	min_delay = 10 SECONDS
-	max_delay = 30 SECONDS
-	sound_range = 20
+	max_delay = 20 SECONDS
+	sound_range = 40
 
 /obj/effect/landmark/ambient_sound/hub
 	name = "Hub Ambient"
 	sound_file = 'modular_bandastation/voyaker_events/sounds/hub.ogg'
 	min_delay = 10 SECONDS
-	max_delay = 30 SECONDS
+	max_delay = 20 SECONDS
 	sound_range = 15
 
 /obj/effect/landmark/ambient_sound/bunker
 	name = "Bunker Work Ambient"
 	sound_file = 'modular_bandastation/voyaker_events/sounds/bunker.ogg'
 	min_delay = 10 SECONDS
-	max_delay = 50 SECONDS
+	max_delay = 20 SECONDS
+	sound_range = 20
+
+/obj/effect/landmark/ambient_sound/desert
+	name = "Desert Ambient"
+	sound_file = 'modular_bandastation/voyaker_events/sounds/desert.ogg'
+	min_delay = 10 SECONDS
+	max_delay = 20 SECONDS
 	sound_range = 20

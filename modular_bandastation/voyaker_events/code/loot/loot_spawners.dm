@@ -324,7 +324,11 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 		/obj/item/book/granter/crafting_recipe/ammo_manual_elite = 20,
 		/obj/item/book/granter/crafting_recipe/medical_manual_light = 70,
 		/obj/item/book/granter/crafting_recipe/medical_manual_medium = 40,
-		/obj/item/book/granter/crafting_recipe/medical_manual_elite = 20
+		/obj/item/book/granter/crafting_recipe/medical_manual_elite = 20,
+		/obj/item/keycard/forest_bunker = 60,
+		/obj/item/keycard/nt_labs = 40,
+		/obj/item/keycard/nt_commsbuoy/village_base = 40,
+		/obj/item/keycard/blue/mine_exit = 50
 	)
 	max_items = 1
 	spawn_chance = 50
@@ -371,3 +375,24 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	)
 	max_items = 2
 	spawn_chance = 80
+
+/obj/effect/landmark/loot_spawn/magma_artifact
+	name = "magma wing spawn"
+	icon_state = "clockwork_orange"
+	loot_table = list(/obj/item/artifact/fire_wing = 100)
+	max_items = 1
+	spawn_chance = 50
+
+/obj/effect/landmark/loot_spawn/ice_artifact
+	name = "ice crystal spawn"
+	icon_state = "clockwork_orange"
+	loot_table = list(/obj/item/artifact/ice_crystal = 100)
+	max_items = 1
+	spawn_chance = 50
+
+/obj/effect/landmark/loot_spawn/stone_artifact
+	name = "stone eye spawn"
+	icon_state = "clockwork_orange"
+	loot_table = list(/obj/item/artifact/stone_eye = 100)
+	max_items = 1
+	spawn_chance = 50

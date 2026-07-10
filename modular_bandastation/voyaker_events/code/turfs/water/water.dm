@@ -7,8 +7,6 @@
 /turf/open/water/alternative/muddy/no_fishing/radiation_lake/Entered(atom/movable/AM)
 	. = ..()
 	if(isliving(AM))
-		var/mob/living/carbon/human = AM
-		SSradiation.irradiate(AM)
-
+		radiation_pulse(AM, max_range = 1, threshold = 0.1, chance = 60)
 
 

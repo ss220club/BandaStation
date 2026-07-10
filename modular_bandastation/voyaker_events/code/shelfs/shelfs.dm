@@ -3,7 +3,7 @@
 	desc = "A sturdy wooden shelf to store a variety of items on."
 	icon = 'modular_bandastation/voyaker_events/icons/furniture.dmi'
 	icon_state = "empty_shelf_1"
-	density = 0
+	density = TRUE
 
 /obj/structure/decorative/shelf/crates
 	desc = "A sturdy wooden shelf with a bunch of crates on it."

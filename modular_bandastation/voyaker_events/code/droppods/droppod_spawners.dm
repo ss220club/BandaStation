@@ -7,7 +7,9 @@ GLOBAL_LIST_EMPTY(drop_pod_spawns)
 	var/location_name = "неизвестный район"
 
 	var/list/crate_pool = list(
-		/obj/structure/closet/crate/loot/common
+		/obj/structure/closet/crate/secure/weapon/air/common,
+		/obj/structure/closet/crate/secure/weapon/air/medical,
+		/obj/structure/closet/crate/secure/weapon/air/ammunition,
 	)
 
 	Initialize()

@@ -2,6 +2,16 @@ SUBSYSTEM_DEF(casing_cleanup)
 	name = "EFTK Casing Cleanup System"
 	wait = 2 MINUTES
 	runlevels = RUNLEVEL_GAME
+	var/static/list/casing_cleanup_blacklist = list(
+		/obj/item/ammo_box,
+		/obj/item/ammo_box/magazine,
+		/obj/item/storage/box,
+		/obj/item/storage/box/lethalshot,
+		/obj/item/storage/bag/trash/bluespace,
+		/obj/item/storage/toolbox/ammobox/c762x54mmr_bullets,
+		/obj/item/storage/backpack,
+		/obj/item/storage/belt,
+	)
 
 /datum/controller/subsystem/casing_cleanup/fire()
 	var/removed = 0
@@ -9,6 +19,15 @@ SUBSYSTEM_DEF(casing_cleanup)
 		if(QDELETED(C))
 			continue
 		if(world.time - C.spawn_time < 15 MINUTES)
+			continue
+		if(!isturf(C.loc))
+			continue
+		var/skip = FALSE
+		for(var/type in casing_cleanup_blacklist)
+			if(istype(C.loc, type))
+				skip = TRUE
+				break
+		if(skip)
 			continue
 		removed++
 		qdel(C)

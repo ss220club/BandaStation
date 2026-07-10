@@ -5,7 +5,6 @@
 	anchored = TRUE
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE
-	layer = ABOVE_MOB_LAYER
 
 /obj/structure/city_prop/streetlamp
 	name = "фонарный столб"
@@ -116,6 +115,7 @@
 		to_chat(H, span_warning("Банкомат временно недоступен. Повторите попытку через [time_left] сек."))
 		return
 	to_chat(H, span_notice("Вы пытаетесь произвести манипуляцию на клавиатуре автомата..."))
+	playsound(src, 'sound/machines/computer/keyboard_clicks_1.ogg', 50, TRUE)
 	if(!do_after(H, 5 SECONDS))
 		return
 	var/amount = rand(10, 250)
@@ -180,3 +180,132 @@
 	name = "терминал подстанции"
 	icon = 'modular_bandastation/voyaker_events/icons/64x64_urbanrandomprops.dmi'
 	icon_state = "buildingventbig7_off"
+
+/obj/structure/city_prop/mail_box
+	name = "почтовый ящик"
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "mailbox"
+
+/obj/structure/city_prop/mail_box/open
+	name = "открытый почтовый ящик"
+	icon_state = "mailbox-open"
+
+/obj/structure/city_prop/mail_box/old
+	name = "старый почтовый ящик"
+	icon_state = "mailbox_old"
+
+/obj/structure/city_prop/mail_box/old/open
+	name = "открытый старый почтовый ящик"
+	icon_state = "mailbox_old-open"
+
+/obj/structure/city_prop/concrete_barrier
+	name = "бетонный барьер"
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "concrete_barrier_5"
+
+/obj/structure/city_prop/concrete_barrier/alt
+	icon_state = "concrete_barrier_alt"
+
+/obj/structure/city_prop/concrete_barrier/corner
+	icon_state = "concrete_barrier_alt_2"
+
+/obj/structure/city_prop/cone
+	name = "конувага"
+	desc = "Обычный, ничем не примечательный конус. Возможно, когда-то давно - он был человеком, возможно даже талантливым. Но стал окончательно конусом..."
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "cone"
+	density = FALSE
+
+/obj/structure/city_prop/mine_sign
+	name = "табличка минной опасности"
+	desc = "Табличка красного цвета с нарисованным черепом и надписью Мины! белым цветом. Интересно, что же это может значить?..."
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "mine_sign"
+	density = FALSE
+
+/obj/structure/city_prop/pallet
+	name = "деревянная палета"
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "pallet"
+	density = FALSE
+
+/obj/structure/city_prop/camp_fire
+	name = "потухший костёр"
+	icon = 'modular_bandastation/voyaker_events/icons/fires.dmi'
+	icon_state = "campfire"
+	density = FALSE
+
+/obj/structure/city_prop/camp_fire/lit
+	name = "горящий костёр"
+	icon_state = "campfire_lit"
+
+/obj/structure/city_prop/fire_barrel
+	name = "потухший костёр в бочке"
+	icon = 'modular_bandastation/voyaker_events/icons/fires.dmi'
+	icon_state = "fire_barrel"
+
+/obj/structure/city_prop/fire_barrel/lit
+	name = "потухший костёр в бочке"
+	icon = 'modular_bandastation/voyaker_events/icons/fires.dmi'
+	icon_state = "fire_barrel_lit"
+
+/obj/structure/city_prop/pallet/stack
+	name = "деревянные палеты"
+	icon_state = "pallet_stack"
+	density = TRUE
+
+/obj/effect/decal/papers
+	name = "разбросанные бумаги"
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "papers_1"
+
+/obj/effect/decal/papers/two
+	icon_state = "papers_2"
+
+/obj/effect/decal/papers/tree
+	icon_state = "papers_3"
+
+/obj/effect/decal/books
+	name = "разбросанные книги"
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "bookstack_2"
+
+/obj/effect/decal/books/two
+	icon_state = "bookstack_3"
+
+/obj/effect/decal/books/pile_1
+	icon_state = "bookpile_1"
+
+/obj/effect/decal/books/pile_2
+	icon_state = "bookpile_2"
+
+/obj/effect/decal/food_stuff
+	name = "разбросанная посуда"
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "foodstuff_1"
+
+/obj/effect/decal/food_stuff/two
+	icon_state = "foodstuff_2"
+
+/obj/effect/decal/food_stuff/tree
+	icon_state = "foodstuff_3"
+
+/obj/effect/decal/food_stuff/four
+	icon_state = "foodstuff_4"
+
+/obj/effect/decal/trashbags
+	name = "разбросанные мусорные мешки"
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "trashbags_1"
+
+/obj/effect/decal/trashbags/two
+	icon_state = "trashbags_2"
+
+/obj/effect/decal/trashbags/tree
+	icon_state = "trashbags_3"
+
+/obj/effect/decal/trashbags/four
+	icon_state = "trashbags_4"
+
+/obj/effect/decal/trashbags/five
+	icon_state = "trashbags_5"

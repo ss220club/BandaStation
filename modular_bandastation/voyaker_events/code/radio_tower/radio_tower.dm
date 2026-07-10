@@ -19,6 +19,7 @@
 		to_chat(user, span_warning("Система перезаряжается. Осталось [time_left] секунд."))
 		return
 	to_chat(user, span_notice("Вы начинаете отправлять запрос на снабжение..."))
+	playsound(src, 'sound/machines/computer/keyboard_clicks_1.ogg', 50, TRUE)
 	if(!do_after(user, 10 SECONDS, src))
 		return
 	if(world.time < next_use)
@@ -56,7 +57,13 @@
 	if(!possible_turfs.len)
 		return
 	var/turf/target = pick(possible_turfs)
-	var/obj/structure/closet/crate/loot/common/crate = new
+	var/list/crate_pool = list(
+		/obj/structure/closet/crate/secure/weapon/air/common,
+		/obj/structure/closet/crate/secure/weapon/air/medical,
+		/obj/structure/closet/crate/secure/weapon/air/ammunition,
+	)
+	var/chosen_type = pick(crate_pool)
+	var/obj/crate = new chosen_type
 	podspawn(list(
 		"target" = target,
 		"path" = /obj/structure/closet/supplypod,

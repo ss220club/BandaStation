@@ -7,7 +7,8 @@ GLOBAL_LIST_EMPTY(forest_mutant_spawners)
 	var/list/mob_pool = list(
 		/mob/living/basic/spider/giant/hunter = 50,
 		/mob/living/basic/flesh_spider = 55,
-		/mob/living/basic/faithless = 45
+		/mob/living/basic/faithless = 45,
+		/mob/living/basic/faithless/old = 10,
 	)
 
 /obj/effect/landmark/forest_mutant_spawn/Initialize(mapload)
@@ -28,7 +29,10 @@ GLOBAL_LIST_EMPTY(forest_mutant_spawners)
 
 /obj/effect/landmark/forest_mutant_spawn/faithless
 	name = "Faithless Spawn"
-	mob_pool = list(/mob/living/basic/faithless = 50)
+	mob_pool = list(
+		/mob/living/basic/faithless = 50,
+		/mob/living/basic/faithless/old = 15,
+	)
 
 /obj/effect/landmark/forest_mutant_spawn/flesh_spider
 	name = "Flesh Spider Spawn"

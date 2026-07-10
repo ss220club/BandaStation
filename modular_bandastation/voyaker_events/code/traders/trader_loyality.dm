@@ -6,7 +6,7 @@
 #define TRADER_SURVIVOR "survivor"
 #define TRADER_VISITOR "visitor"
 #define TRADER_ROBINSON "robinson"
-#define TRADER_KEKSUHA "keksuha"
+#define TRADER_KAMILLA "kamilla"
 
 /mob/living/carbon/human
 	var/list/trader_rep = list()

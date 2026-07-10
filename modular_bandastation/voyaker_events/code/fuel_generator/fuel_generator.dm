@@ -31,7 +31,7 @@
 	/// Сколько тепла создаётся за тик
 	var/heat_per_tick = 3.5
 	/// Насколько охлаждает вода
-	var/cooling_power = 0.6
+	var/cooling_power = 0.8
 	/// Сломан ли генератор
 	var/broken = FALSE
 	/// Включено ли жидкостное охлаждение
@@ -93,17 +93,12 @@
 	if(active)
 		if(!process_fuel())
 			return
-		process_heating()
 		add_avail(power_gen)
 	process_cooling()
-	current_heat = clamp(current_heat, get_ambient_temperature(), max_heat)
 	if(current_heat >= max_heat)
 		overheat()
 		return
-	var/old_icon = icon_state
 	update_appearance()
-	if(icon_state != old_icon)
-		SStgui.update_uis(src)
 
 /obj/machinery/power/fuel_generator/proc/process_fuel()
 	if(reagents.get_reagent_amount(/datum/reagent/fuel) <= 0)
@@ -118,34 +113,61 @@
 
 	return TRUE
 
-/obj/machinery/power/fuel_generator/proc/process_heating()
-	var/heat_gain = heat_per_tick
-	if(cooling_enabled && reagents.get_reagent_amount(/datum/reagent/water) > 0)
-		heat_gain *= 0.45
-	current_heat += heat_gain
-
 /obj/machinery/power/fuel_generator/proc/process_cooling()
 	var/ambient = get_ambient_temperature()
+	var/heat_delta = 0
+	if(active)
+		heat_delta += heat_per_tick
 	if(current_heat > ambient)
-		current_heat = max(current_heat - 0.8, ambient)
+		heat_delta -= 0.8
 	else if(current_heat < ambient)
-		current_heat = min(current_heat + 0.2, ambient)
-	current_heat -= get_pipe_cooling()
+		heat_delta += 0.2
+	heat_delta -= get_pipe_cooling()
+	if(cooling_enabled)
+		var/water = reagents.get_reagent_amount(/datum/reagent/water)
+		if(water > 0)
+			var/use
+			if(active)
+				use = has_water_recycler ? 0.3 : 0.6
+			else
+				use = has_water_recycler ? 0.15 : 0.3
+			use = min(use, water)
+			reagents.remove_reagent(/datum/reagent/water, use)
+			heat_delta -= use * cooling_power
+	current_heat += heat_delta
 	if(cooling_enabled && current_heat <= T20C)
 		cooling_enabled = FALSE
 		SStgui.update_uis(src)
-	if(!cooling_enabled)
-		return
-	var/water = reagents.get_reagent_amount(/datum/reagent/water)
-	if(water <= 0)
-		return
-	var/use
-	if(active)
-		use = has_water_recycler ? 0.3 : 0.6
-	else
-		use = has_water_recycler ? 0.15 : 0.3
-	use = min(use, water)
-	reagents.remove_reagent(/datum/reagent/water, use)
+
+/obj/machinery/power/fuel_generator/proc/get_ambient_temperature()
+	var/turf/open/T = get_turf(src)
+	if(!istype(T))
+		return T20C
+	var/datum/gas_mixture/air = T.return_air()
+	if(!air)
+		return T20C
+	return air.temperature
+
+/obj/machinery/power/fuel_generator/proc/get_pipe_cooling()
+
+	var/pipe_cooling = 0
+	var/list/checked = list()
+	for(var/obj/machinery/atmospherics/pipe/heat_exchanging/simple/P in range(1, src))
+		if(!P.parent)
+			continue
+		if(P.parent in checked)
+			continue
+		checked += P.parent
+		var/datum/gas_mixture/air = P.parent.air
+		if(!air)
+			continue
+		if(air.temperature >= current_heat)
+			continue
+		var/delta = current_heat - air.temperature
+		var/moles = clamp(air.total_moles()/20,0,1)
+		pipe_cooling += (delta / 20) * moles
+
+	return min(pipe_cooling, 6)
 
 /obj/machinery/power/fuel_generator/update_icon_state()
 	if(broken)
@@ -246,9 +268,9 @@
 
 /obj/machinery/power/fuel_generator/ui_data()
 	var/list/data = list()
-	var/ambient = get_ambient_temperature()
 	var/fuel = reagents.get_reagent_amount(/datum/reagent/fuel)
 	var/water = reagents.get_reagent_amount(/datum/reagent/water)
+	var/base_temp = T20C
 	data["active"] = active
 	data["fuel"] = round(fuel)
 	data["water"] = round(water)
@@ -256,7 +278,7 @@
 	data["fuel_percent"] = fuel / max_fuel
 	data["power_output"] = display_power(power_gen, convert = FALSE)
 	data["heat"] = round(current_heat)
-	data["heat_percent"] = clamp((current_heat - ambient) / (max_heat - ambient), 0, 1)
+	data["heat_percent"] = clamp((current_heat - base_temp) / (max_heat - base_temp), 0, 1)
 	data["broken"] = broken
 	data["max_heat"] = max_heat
 	data["max_fuel"] = max_fuel
@@ -279,33 +301,6 @@
 			cooling_enabled = !cooling_enabled
 			SStgui.update_uis(src)
 			return TRUE
-
-/obj/machinery/power/fuel_generator/proc/get_ambient_temperature()
-	var/turf/open/T = get_turf(src)
-	if(!istype(T))
-		return T20C
-	var/datum/gas_mixture/air = T.return_air()
-	if(!air)
-		return T20C
-	return air.temperature
-
-/obj/machinery/power/fuel_generator/proc/get_pipe_cooling()
-	var/list/checked_parents = list()
-	var/pipe_cooling = 0
-	for(var/obj/machinery/atmospherics/pipe/heat_exchanging/simple/P in range(1, src))
-		if(!P.parent)
-			continue
-		if(P.parent in checked_parents)
-			continue
-		checked_parents += P.parent
-		var/datum/gas_mixture/air = P.parent.air
-		if(!air)
-			continue
-		if(air.temperature < 270)
-			var/delta = 270 - air.temperature
-			var/moles_factor = min(air.total_moles() / 50, 1)
-			var/cooling = (delta / 160) * moles_factor
-			pipe_cooling += min(cooling, 0.6)
 
 /obj/machinery/power/fuel_generator/proc/play_loop()
 	if(sound_loop)
