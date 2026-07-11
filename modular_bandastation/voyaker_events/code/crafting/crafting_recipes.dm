@@ -94,7 +94,7 @@
 
 /datum/crafting_recipe/helmet
 	name = "Шлем"
-	result = /obj/item/clothing/suit/armor/vest
+	result = /obj/item/clothing/head/helmet
 	reqs = list(
 		/obj/item/stack/sheet/iron = 1,
 		/obj/item/stack/sheet/glass = 1,
@@ -712,7 +712,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_310strilka_refill
-	name = "Обойма 310 Strilka"
+	name = "Обойма .310 Strilka"
 	result = /obj/item/ammo_box/speedloader/strilka310
 	reqs = list(
 		/obj/item/ammo_box/speedloader/strilka310 = 1,
@@ -733,7 +733,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_310strilka
-	name = "Обойма 310 Strilka"
+	name = "Обойма .310 Strilka"
 	result = /obj/item/ammo_box/speedloader/strilka310
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -796,7 +796,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_762x54r_box
-	name = "Коробка патронов 7.62x54R"
+	name = "Коробка патронов 7.62x54ммР"
 	result = /obj/item/ammo_box/c762x54mmr
 	reqs = list(
 		/obj/item/stack/sheet/cardboard = 1,
@@ -817,7 +817,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_762x39_ricochet_box
-	name = "Коробка спортивных патронов 7.62x39"
+	name = "Коробка спортивных патронов 7.62x39мм"
 	result = /obj/item/ammo_box/c762x39/ricochet
 	reqs = list(
 		/obj/item/stack/sheet/cardboard = 1,
@@ -838,7 +838,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_762x39magshort_civ_refill
-	name = "Укороченный магазин 7.62x39 с гражданскими патронами"
+	name = "Укороченный магазин 7.62x39мм с гражданскими патронами"
 	result = /obj/item/ammo_box/magazine/c762x39mm/small/civ
 	reqs = list(
 		/obj/item/ammo_box/magazine/c762x39mm/small/civ = 1,
@@ -859,7 +859,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_762x39magshort_civ
-	name = "Укороченный магазин 7.62x39 с гражданскими патронами"
+	name = "Укороченный магазин 7.62x39мм с гражданскими патронами"
 	result = /obj/item/ammo_box/magazine/c762x39mm/small/civ
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -881,7 +881,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_762x39mag_refill
-	name = "Магазин 7.62x39"
+	name = "Магазин 7.62x39мм"
 	result = /obj/item/ammo_box/magazine/c762x39mm/ricochet
 	reqs = list(
 		/obj/item/ammo_box/magazine/c762x39mm = 1,
@@ -902,7 +902,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_762x39mag
-	name = "Магазин 7.62x39"
+	name = "Магазин 7.62x39мм"
 	result = /obj/item/ammo_box/magazine/c762x39mm/ricochet
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -923,7 +923,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_35sol_refill
-	name = "Мавгазин 35. Sol"
+	name = "Магазин .35 Sol"
 	result = /obj/item/ammo_box/magazine/c35sol_pistol
 	reqs = list(
 		/obj/item/ammo_box/magazine/c35sol_pistol = 1,
@@ -944,7 +944,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_35sol
-	name = "Мавгазин 35. Sol"
+	name = "Магазин .35 Sol"
 	result = /obj/item/ammo_box/magazine/c35sol_pistol
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -965,7 +965,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_40solshort_refill
-	name = "Мавгазин 40. Sol укороченный"
+	name = "Укороченный магазин .40 Sol "
 	result = /obj/item/ammo_box/magazine/c40sol_rifle
 	reqs = list(
 		/obj/item/ammo_box/magazine/c40sol_rifle = 1,
@@ -986,7 +986,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_40solshort
-	name = "Мавгазин 40. Sol укороченный"
+	name = "Укороченный магазин .40 Sol"
 	result = /obj/item/ammo_box/magazine/c40sol_rifle
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1008,7 +1008,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_40solstandard_refill
-	name = "Стандартный магазин 40. Sol"
+	name = "Стандартный магазин .40 Sol"
 	result = /obj/item/ammo_box/magazine/c40sol_rifle/standard
 	reqs = list(
 		/obj/item/ammo_box/magazine/c40sol_rifle/standard = 1,
@@ -1029,7 +1029,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_40solstandart
-	name = "Стандартный магазин 40. Sol"
+	name = "Стандартный магазин .40 Sol"
 	result = /obj/item/ammo_box/magazine/c40sol_rifle/standard
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1176,7 +1176,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmhp_refill
-	name = "Магазин 9мм экспансивные"
+	name = "Магазин 9мм для пистолета Макарова (экспансивные)"
 	result = /obj/item/ammo_box/magazine/m9mm/hp
 	reqs = list(
 		/obj/item/ammo_box/magazine/m9mm = 1,
@@ -1197,7 +1197,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmhp
-	name = "Магазин 9мм экспансивные"
+	name = "Магазин 9мм для пистолета Макарова (экспансивные)"
 	result = /obj/item/ammo_box/magazine/m9mm/hp
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1218,7 +1218,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmap_refill
-	name = "Магазин 9мм бронебойные"
+	name = "Магазин 9мм для пистолета Макарова (бронебойные)"
 	result = /obj/item/ammo_box/magazine/m9mm/ap
 	reqs = list(
 		/obj/item/ammo_box/magazine/m9mm = 1,
@@ -1239,7 +1239,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmap
-	name = "Магазин 9мм бронебойные"
+	name = "Магазин 9мм для пистолета Макарова (бронебойные)"
 	result = /obj/item/ammo_box/magazine/m9mm/ap
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1260,7 +1260,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_10mmhp_refill
-	name = "Магазин 10мм экспансивные"
+	name = "Магазин 10мм для пистолета Ансем (экспансивные)"
 	result = /obj/item/ammo_box/magazine/m10mm/hp
 	reqs = list(
 		/obj/item/ammo_box/magazine/m10mm = 1,
@@ -1281,7 +1281,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_10mmhp
-	name = "Магазин 10мм экспансивные"
+	name = "Магазин 10мм для пистолета Ансем (экспансивные)"
 	result = /obj/item/ammo_box/magazine/m10mm/hp
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1302,7 +1302,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_10mmap_refill
-	name = "Магазин 10мм бронебойные"
+	name = "Магазин 10мм для пистолета Ансем (бронебойные)"
 	result = /obj/item/ammo_box/magazine/m10mm/ap
 	reqs = list(
 		/obj/item/ammo_box/magazine/m10mm = 1,
@@ -1323,7 +1323,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_10mmap
-	name = "Магазин 10мм бронебойные"
+	name = "Магазин 10мм для пистолета Ансем (бронебойные)"
 	result = /obj/item/ammo_box/magazine/m10mm/ap
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1344,7 +1344,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo762x39ion_refill
-	name = "Магазин 7.62x39 ионные"
+	name = "Магазин для АМК 7.62x39мм (ионные)"
 	result = /obj/item/ammo_box/magazine/c762x39mm/emp
 	reqs = list(
 		/obj/item/ammo_box/magazine/c762x39mm = 1,
@@ -1367,7 +1367,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo762x39ion
-	name = "Магазин 7.62x39 ионные"
+	name = "Магазин для АМК 7.62x39мм (ионные)"
 	result = /obj/item/ammo_box/magazine/c762x39mm/emp
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1390,7 +1390,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmshnek_refill
-	name = "Шнек 9мм для ПП Бизон"
+	name = "Шнековый магазин 9мм для ПП Бизон"
 	result = /obj/item/ammo_box/magazine/bison
 	reqs = list(
 		/obj/item/ammo_box/magazine/bison = 1,
@@ -1411,7 +1411,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmshnek
-	name = "Шнек 9мм для ПП Бизон"
+	name = "Шнековый магазин 9мм для ПП Бизон"
 	result = /obj/item/ammo_box/magazine/bison
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1432,7 +1432,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmshnekhp_refill
-	name = "Шнек 9мм для ПП Бизон экспансивные"
+	name = "Шнековый магазин 9мм для ПП Бизон (экспансивные)"
 	result = /obj/item/ammo_box/magazine/bison/hp
 	reqs = list(
 		/obj/item/ammo_box/magazine/bison = 1,
@@ -1453,7 +1453,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmshnekhp
-	name = "Шнек 9мм для ПП Бизон экспансивные"
+	name = "Шнековый магазин 9мм для ПП Бизон (экспансивные)"
 	result = /obj/item/ammo_box/magazine/bison/hp
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1474,7 +1474,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmshnekap_refill
-	name = "Шнек 9мм для ПП Бизон бронебойные"
+	name = "Шнековый магазин 9мм для ПП Бизон (бронебойные)"
 	result = /obj/item/ammo_box/magazine/bison/ap
 	reqs = list(
 		/obj/item/ammo_box/magazine/bison = 1,
@@ -1495,7 +1495,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmshnekap
-	name = "Шнек 9мм для ПП Бизон бронебойные"
+	name = "Шнековый магазин 9мм для ПП Бизон (бронебойные)"
 	result = /obj/item/ammo_box/magazine/bison/ap
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1516,7 +1516,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_35soldrum_refill
-	name = "Барабанный магазин 35. Sol"
+	name = "Барабанный магазин .35 Sol"
 	result = /obj/item/ammo_box/magazine/c35sol_pistol/drum
 	reqs = list(
 		/obj/item/ammo_box/magazine/c35sol_pistol/drum = 1,
@@ -1537,7 +1537,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_35soldrum
-	name = "Барабанный магазин 35. Sol"
+	name = "Барабанный магазин .35 Sol"
 	result = /obj/item/ammo_box/magazine/c35sol_pistol/drum
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1558,7 +1558,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_35soldrumhp_refill
-	name = "Барабанный магазин 35. Sol экспансивные"
+	name = "Барабанный магазин .35 Sol (экспансивные)"
 	result = /obj/item/ammo_box/magazine/c35sol_pistol/drum/hp
 	reqs = list(
 		/obj/item/ammo_box/magazine/c35sol_pistol/drum = 1,
@@ -1579,7 +1579,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_35soldrumhp
-	name = "Барабанный магазин 35. Sol экспансивные"
+	name = "Барабанный магазин .35 Sol (экспансивные)"
 	result = /obj/item/ammo_box/magazine/c35sol_pistol/drum/hp
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1600,7 +1600,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_35soldrumap_refill
-	name = "Барабанный магазин 35. Sol бронебойные"
+	name = "Барабанный магазин .35 Sol (бронебойные)"
 	result = /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
 	reqs = list(
 		/obj/item/ammo_box/magazine/c35sol_pistol/drum = 1,
@@ -1621,7 +1621,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_35soldrumap
-	name = "Барабанный магазин 35. Sol бронебойные"
+	name = "Барабанный магазин .35 Sol (бронебойные)"
 	result = /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1642,7 +1642,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_40sollong_refill
-	name = "Удлинённый магазин 40. Sol"
+	name = "Удлинённый магазин .40 Sol"
 	result = /obj/item/ammo_box/magazine/c40sol_rifle/long
 	reqs = list(
 		/obj/item/ammo_box/magazine/c40sol_rifle/long = 1,
@@ -1663,7 +1663,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_40sollong
-	name = "Удлинённый магазин 40. Sol"
+	name = "Удлинённый магазин .40 Sol"
 	result = /obj/item/ammo_box/magazine/c40sol_rifle/long
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1684,7 +1684,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_310strilkalong_refill
-	name = "Боевой магазин 310. Strilka"
+	name = "Боевой магазин .310 Strilka"
 	result = /obj/item/ammo_box/magazine/strilka310
 	reqs = list(
 		/obj/item/ammo_box/magazine/strilka310 = 1,
@@ -1705,7 +1705,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_310strilkalong
-	name = "Боевой магазин 310. Strilka"
+	name = "Боевой магазин .310 Strilka"
 	result = /obj/item/ammo_box/magazine/strilka310
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1726,7 +1726,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_45acp_refill
-	name = "Магазин 45. ACP стандартный"
+	name = "Магазин .45 для 1911"
 	result = /obj/item/ammo_box/magazine/m45
 	reqs = list(
 		/obj/item/ammo_box/magazine/m45 = 1,
@@ -1747,7 +1747,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_45acp
-	name = "Магазин 45. ACP стандартный"
+	name = "Магазин .45 для 1911"
 	result = /obj/item/ammo_box/magazine/m45
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1768,7 +1768,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_c45_refill
-	name = "Магазин С45"
+	name = "Магазин .45 для пистолетов"
 	result = /obj/item/ammo_box/magazine/c45
 	reqs = list(
 		/obj/item/ammo_box/magazine/c45 = 1,
@@ -1789,7 +1789,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_c45
-	name = "Магазин С45"
+	name = "Магазин .45 для пистолетов"
 	result = /obj/item/ammo_box/magazine/c45
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1810,7 +1810,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_smg45_refill
-	name = "Магазин 45. ACP для ПП"
+	name = "Магазин .45 для ПП CR-20"
 	result = /obj/item/ammo_box/magazine/smgm45
 	reqs = list(
 		/obj/item/ammo_box/magazine/smgm45 = 1,
@@ -1831,7 +1831,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_smg45
-	name = "Магазин 45. ACP для ПП"
+	name = "Магазин .45 для ПП CR-20"
 	result = /obj/item/ammo_box/magazine/smgm45
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1894,7 +1894,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmsteckin_refill
-	name = "Магазин 9мм Стечкин"
+	name = "Магазин 9мм для пистолета Стечкина"
 	result = /obj/item/ammo_box/magazine/m9mm_aps
 	reqs = list(
 		/obj/item/ammo_box/magazine/m9mm_aps = 1,
@@ -1915,7 +1915,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_9mmsteckin
-	name = "Магазин 9мм Стечкин"
+	name = "Магазин 9мм для пистолета Стечкина"
 	result = /obj/item/ammo_box/magazine/m9mm_aps
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1936,7 +1936,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_762x51fn4_refill
-	name = "Магазин 7.62x51 винтовки FN4"
+	name = "Магазин 7.62x51мм для винтовки FN4"
 	result = /obj/item/ammo_box/magazine/c762x51mm
 	reqs = list(
 		/obj/item/ammo_box/magazine/c762x51mm = 1,
@@ -1957,7 +1957,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_762x51fn4
-	name = "Магазин 7.62x51 винтовки FN4"
+	name = "Магазин 7.62x51мм для винтовки FN4"
 	result = /obj/item/ammo_box/magazine/c762x51mm
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -1978,7 +1978,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_as32_refill
-	name = "Магазин 12G дробовика AS32"
+	name = "Магазин 12G для дробовика AS32"
 	result = /obj/item/ammo_box/magazine/as32
 	reqs = list(
 		/obj/item/ammo_box/magazine/as32 = 1,
@@ -1999,7 +1999,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_as32
-	name = "Магазин 12G дробовика AS32"
+	name = "Магазин 12G для дробовика AS32"
 	result = /obj/item/ammo_box/magazine/as32
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -2087,7 +2087,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_smg10mmap_refill
-	name = "Магазин 10мм для ПП Витязь бронебойные"
+	name = "Магазин 10мм для ПП Витязь (бронебойные)"
 	result = /obj/item/ammo_box/magazine/smg10mm/ap
 	reqs = list(
 		/obj/item/ammo_box/magazine/smg10mm = 1,
@@ -2108,7 +2108,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_smg10mmap
-	name = "Магазин 10мм для ПП Витязь бронебойные"
+	name = "Магазин 10мм для ПП Витязь (бронебойные)"
 	result = /obj/item/ammo_box/magazine/smg10mm/ap
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -2129,7 +2129,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_762x39ap_refill
-	name = "Стадартный магазин 7.62x39 бронебойные"
+	name = "Магазин для АМК 7.62x39мм (бронебойные)"
 	result = /obj/item/ammo_box/magazine/c762x39mm/ap
 	reqs = list(
 		/obj/item/ammo_box/magazine/c762x39mm = 1,
@@ -2150,7 +2150,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_762x39ap
-	name = "Стадартный магазин 7.62x39 бронебойные"
+	name = "Магазин для АМК 7.62x39мм (бронебойные)"
 	result = /obj/item/ammo_box/magazine/c762x39mm/ap
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -2171,7 +2171,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_40soldrum_refill
-	name = "Барабанный магазин 40 Sol."
+	name = "Барабанный магазин .40 Sol"
 	result = /obj/item/ammo_box/magazine/c40sol_rifle/drum
 	reqs = list(
 		/obj/item/ammo_box/magazine/c40sol_rifle/drum = 1,
@@ -2192,7 +2192,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_40soldrum
-	name = "Барабанный магазин 40 Sol."
+	name = "Барабанный магазин .40 Sol"
 	result = /obj/item/ammo_box/magazine/c40sol_rifle/drum
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -2213,7 +2213,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_40sollongap_refill
-	name = "Удлинённый магазин 40 Sol. бронебойные"
+	name = "Удлинённый магазин .40 Sol (бронебойные)"
 	result = /obj/item/ammo_box/magazine/c40sol_rifle/long/ap
 	reqs = list(
 		/obj/item/ammo_box/magazine/c40sol_rifle/long/ap = 1,
@@ -2234,7 +2234,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_40sollongap
-	name = "Удлинённый магазин 40 Sol. бронебойные"
+	name = "Удлинённый магазин .40 Sol (бронебойные)"
 	result = /obj/item/ammo_box/magazine/c40sol_rifle/long/ap
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -2255,7 +2255,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_c338_refill
-	name = "Магазин 338."
+	name = "Магазин .338"
 	result = /obj/item/ammo_box/magazine/c338
 	reqs = list(
 		/obj/item/ammo_box/magazine/c338 = 1,
@@ -2276,7 +2276,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_c338
-	name = "Магазин 338."
+	name = "Магазин .338"
 	result = /obj/item/ammo_box/magazine/c338
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -2297,7 +2297,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_50ae_refill
-	name = "Магазин 50. AE"
+	name = "Магазин .50 AE"
 	result = /obj/item/ammo_box/magazine/m50
 	reqs = list(
 		/obj/item/ammo_box/magazine/m50 = 1,
@@ -2318,7 +2318,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_50ae
-	name = "Магазин 50. AE"
+	name = "Магазин .50 AE"
 	result = /obj/item/ammo_box/magazine/m50
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -2339,7 +2339,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_12gslug
-	name = "Коробка 12G пулевые"
+	name = "Коробка 12G (пулевые)"
 	result = /obj/item/ammo_box/c12ga/slug
 	reqs = list(
 		/obj/item/stack/sheet/cardboard = 1,
@@ -2360,7 +2360,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_357match
-	name = "Барабан 357. высокоточных"
+	name = "Барабан .357 (высокоточные)"
 	result = /obj/item/ammo_box/speedloader/c357/match
 	reqs = list(
 		/obj/item/stack/sheet/iron = 1,
@@ -2381,7 +2381,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_m233_refill
-	name = "Магазин 5.56x45"
+	name = "Магазин 5.56x45мм"
 	result = /obj/item/ammo_box/magazine/m223
 	reqs = list(
 		/obj/item/ammo_box/magazine/m223 = 1,
@@ -2402,7 +2402,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_m233
-	name = "Магазин 5.56x45"
+	name = "Магазин 5.56x45мм"
 	result = /obj/item/ammo_box/magazine/m223
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
@@ -2423,7 +2423,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_abiel50_refill
-	name = "Магазин Абиэль 160."
+	name = "Магазин .160 Абиэль"
 	result = /obj/item/ammo_box/magazine/smartgun
 	reqs = list(
 		/obj/item/ammo_box/magazine/smartgun = 1,
@@ -2444,7 +2444,7 @@
 	requires_workbench = TRUE
 
 /datum/crafting_recipe/ammo_abiel50
-	name = "Магазин Абиэль 160."
+	name = "Магазин .160 Абиэль"
 	result = /obj/item/ammo_box/magazine/smartgun
 	reqs = list(
 		/obj/item/stack/sheet/plastic = 1,
