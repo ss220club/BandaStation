@@ -9,6 +9,7 @@
 		"esbenp.prettier-vscode",
 		"biomejs.biome",
 		"emilast.LogFileHighlighter",
-		"earshinov.filter-lines"
+		"earshinov.filter-lines",
+		"tombi-toml.tombi"
 	]
 }

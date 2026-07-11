@@ -113,7 +113,7 @@
 		untrick_mob()
 
 /datum/action/cooldown/toggle_seethrough
-	name = "Toggle Seethrough"
+	name = "Переключить видимость"
 	desc = "Позволяет видеть сквозь ваше огромное тело и кликать за ним."
 	button_icon = 'icons/mob/actions/actions_xeno.dmi'
 	button_icon_state = "alien_sneak"

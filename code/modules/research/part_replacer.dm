@@ -9,6 +9,7 @@
 	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
 	w_class = WEIGHT_CLASS_HUGE
 	storage_type = /datum/storage/rped
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 2.5)
 
 /obj/item/storage/part_replacer/interact_with_atom(obj/attacked_object, mob/living/user, list/modifiers)
 	if(user.combat_mode)
@@ -58,6 +59,7 @@
 	inhand_icon_state = "BS_RPED"
 	w_class = WEIGHT_CLASS_NORMAL
 	storage_type = /datum/storage/rped/bluespace
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 7.5, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 1.25)
 
 /obj/item/storage/part_replacer/bluespace/Initialize(mapload)
 	. = ..()
@@ -154,6 +156,16 @@
 		new /obj/item/stock_parts/matter_bin/bluespace(src)
 		new /obj/item/stock_parts/power_store/cell/bluespace(src)
 		new /obj/item/stock_parts/power_store/battery/bluespace(src)
+		new /obj/item/stack/cable_coil/thirty(src)
+
+/obj/item/storage/part_replacer/bluespace/AdminDebug/PopulateContents()
+	for(var/i in 1 to 40)
+		new /obj/item/stock_parts/capacitor/quadratic(src)
+		new /obj/item/stock_parts/scanning_module/triphasic(src)
+		new /obj/item/stock_parts/servo/femto(src)
+		new /obj/item/stock_parts/micro_laser/quadultra(src)
+		new /obj/item/stock_parts/matter_bin/bluespace(src)
+		new /obj/item/stock_parts/power_store/cell/bluespace(src)
 		new /obj/item/stack/cable_coil/thirty(src)
 
 //used in a cargo crate
