@@ -115,7 +115,8 @@ SUBSYSTEM_DEF(central)
 /datum/controller/subsystem/central/proc/is_player_whitelisted(ckey)
 	var/server_type = CONFIG_GET(string/server_type)
 	if(!server_type || server_type == /datum/config_entry/string/server_type::default)
-		return TRUE
+		// Whitelist is not configured properly, assume player is not whitelisted
+		return FALSE
 
 	if(ckey in GLOB.whitelist)
 		return TRUE
