@@ -202,7 +202,7 @@ const PaiOptions = (props) => {
             onClick={() => act('toggle_leash')}
             selected={leashed}
           >
-            {leashed ? 'Unleash' : 'Leash'}
+            {leashed ? 'Отвязать' : 'Привязать'}
           </Button>
         </LabeledList.Item>
         <LabeledList.Item label="Диапазон голограммы">
