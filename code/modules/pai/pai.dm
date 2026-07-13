@@ -169,7 +169,7 @@
 
 /mob/living/silicon/pai/examine(mob/user)
 	. = ..()
-	. += "Похоже, что это основная строка ID мастера [(!master_name || emagged) ? "пуста" : master_name]."
+	. += "Это строка мастера ID [(!master_name || emagged) ? "пуста" : master_name]."
 
 /mob/living/silicon/pai/Exited(atom/movable/gone, direction)
 	if(gone == atmos_analyzer)
