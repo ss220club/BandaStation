@@ -121,6 +121,8 @@
 #define COMSIG_CARBON_REMOVE_OVERLAY "carbon_remove_overlay"
 ///Called when a carbon checks their mood
 #define COMSIG_CARBON_MOOD_CHECK "carbon_mod_check"
+///Called when a carbon is adding a fire overlay
+#define COMSIG_CARBON_GET_FIRE_OVERLAY "carbon_get_fire_overlay"
 
 // /mob/living/carbon/human signals
 
@@ -153,7 +155,7 @@
 #define COMSIG_MONKEY_HUMANIZE "monkey_humanize"
 
 ///From mob/living/carbon/human/suicide()
-#define COMSIG_HUMAN_SUICIDE_ACT "human_suicide_act"
+#define COMSIG_LIVING_SUICIDE_ACT "human_suicide_act"
 
 ///from base of /mob/living/carbon/regenerate_limbs(): (excluded_limbs)
 #define COMSIG_CARBON_REGENERATE_LIMBS "living_regen_limbs"

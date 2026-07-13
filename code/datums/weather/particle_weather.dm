@@ -16,6 +16,8 @@
 	/// How often can we change our severity?
 	/// Don't set this too low or it'll look jank
 	var/severity_cooldown = 5 SECONDS
+	/// Alpha of the area overlay when the particle weather pref is enabled
+	var/particle_weather_alpha = 255
 
 	/// Current weather severity
 	var/severity = 0
@@ -26,7 +28,7 @@
 	/// Direction of our wind
 	var/wind_sign = 0
 
-/datum/weather/particle/New(z_levels, list/weather_data)
+/datum/weather/particle/New(list/z_levels, list/weather_data)
 	. = ..()
 	if (isnull(particle_type) && isnull(emissive_type))
 		CRASH("[src] ([type]) attempted to initialize without normal or emissive particle types!")
@@ -37,13 +39,13 @@
 			var/obj/effect/abstract/weather_holder/holder = new()
 			SET_PLANE_W_SCALAR(holder, RENDER_PLANE_PARTICLE_WEATHER, offset)
 			holder.particles = new particle_type()
-			object_list += holder
+			object_list[holder] = impacted_z_levels
 
 		if (emissive_type)
 			var/obj/effect/abstract/weather_holder/holder = new()
 			holder.particles = new emissive_type()
 			SET_PLANE_W_SCALAR(holder, RENDER_PLANE_EMISSIVE_PARTICLE_WEATHER, offset)
-			object_list += holder
+			object_list[holder] = impacted_z_levels
 
 		weather_objects += list(object_list)
 
@@ -101,8 +103,14 @@
 
 /datum/weather/particle/generate_overlay_cache()
 	. = ..()
+
 	if (stage == END_STAGE)
 		return
+
+	// Change alpha of overlays on the particle weather plane
+	for(var/mutable_appearance/overlay as anything in .)
+		if (PLANE_TO_TRUE(overlay.plane) == PARTICLE_WEATHER_PLANE)
+			overlay.alpha = particle_weather_alpha
 
 	for (var/offset in 0 to SSmapping.max_plane_offset)
 		. += mutable_appearance('icons/effects/weather_overlay.dmi', "weather_overlay", overlay_layer, null, WEATHER_MASK_PLANE, offset_const = offset)

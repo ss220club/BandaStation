@@ -70,14 +70,15 @@
 	/// Areas that are protected and excluded from the affected areas.
 	var/list/protected_areas = list()
 	/// The list of z-levels that this weather is actively affecting
-	VAR_FINAL/impacted_z_levels
+	VAR_FINAL/list/impacted_z_levels
 	/// A weighted list of z-levels impacted by weather, where weights reflect the total turf count on each level
 	VAR_FINAL/list/impacted_z_levels_weighted = list()
 
 	/// Since it's above everything else, this is the layer used by default.
 	var/overlay_layer = AREA_LAYER
-	/// Plane for the overlay
-	var/overlay_plane = WEATHER_PLANE
+	/// Planes for the overlay
+	/// Base visuals should always render to both particle and non-particle planes as to work regardless of the toggle
+	var/list/overlay_planes = list(WEATHER_PLANE, PARTICLE_WEATHER_PLANE)
 	/// Used by mobs (or movables containing mobs, such as enviro bags) to prevent them from being affected by the weather.
 	var/immunity_type
 	/// If this bit of weather should also draw an overlay that's uneffected by lighting onto the area
@@ -136,10 +137,9 @@
 	/// The actual atom that holds our reagents that is held in nullspace
 	var/obj/effect/abstract/weather_reagent_holder
 
-/datum/weather/New(z_levels, list/weather_data)
+/datum/weather/New(list/z_levels, list/weather_data)
 	..()
-
-	impacted_z_levels = z_levels
+	impacted_z_levels = z_levels.Copy()
 	weather_flags = isnull(weather_data?[WEATHER_FORCED_FLAGS]) ? weather_flags : weather_data?[WEATHER_FORCED_FLAGS]
 	turf_thunder_chance = isnull(weather_data?[WEATHER_FORCED_THUNDER]) ? turf_thunder_chance : weather_data?[WEATHER_FORCED_THUNDER]
 	telegraph_duration = isnull(weather_data?[WEATHER_FORCED_TELEGRAPH]) ? telegraph_duration : weather_data?[WEATHER_FORCED_TELEGRAPH]
@@ -586,9 +586,12 @@
 			glow_overlay.color = weather_color
 			gen_overlay_cache += glow_overlay
 
-		var/mutable_appearance/new_weather_overlay = mutable_appearance('icons/effects/weather_effects.dmi', weather_state, overlay_layer, plane = overlay_plane, alpha = weather_alpha, offset_const = offset)
-		new_weather_overlay.color = weather_color
-		gen_overlay_cache += new_weather_overlay
+		// By default we render ourselves to both particle and non-particle weather, as those are mutually exclusive
+		// So that particle weather can have full alpha overlays when the pref is disabled, but partially transparent overlays when its enabled
+		for (var/overlay_plane in overlay_planes)
+			var/mutable_appearance/new_weather_overlay = mutable_appearance('icons/effects/weather_effects.dmi', weather_state, overlay_layer, plane = overlay_plane, alpha = weather_alpha, offset_const = offset)
+			new_weather_overlay.color = weather_color
+			gen_overlay_cache += new_weather_overlay
 
 	return gen_overlay_cache
 
