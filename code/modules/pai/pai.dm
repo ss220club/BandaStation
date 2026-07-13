@@ -462,7 +462,7 @@
 	to_chat(src, span_danger("Байт за байтом вы теряете самоощущение."))
 	to_chat(src, span_userdanger("Ваши умственные способности покидают вас."))
 	to_chat(src, span_rose("забвение... "))
-	balloon_alert(user, "личность стерта")
+	balloon_alert(user, "личность стёрта")
 	playsound(src, 'sound/machines/buzz/buzz-two.ogg', 30, TRUE)
 	qdel(src)
 	return TRUE
