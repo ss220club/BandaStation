@@ -120,7 +120,7 @@ const ButtonsDisplay = (props) => {
         <Stack.Item>
           <Button
             onClick={() => act('save', { comments, description, name })}
-            tooltip="Saves your candidate data locally."
+            tooltip="Локально сохраняет данные о ваших кандидатах."
           >
             СОХРАНИТЬ
           </Button>
@@ -128,7 +128,8 @@ const ButtonsDisplay = (props) => {
         <Stack.Item>
           <Button
             onClick={() => act('load')}
-            tooltip="Loads saved candidate data, if any."
+            tooltip="Загружает сохраненные данные о кандидатах, если таковые
+            имеются."
           >
             ЗАГРУЗИТЬ
           </Button>
