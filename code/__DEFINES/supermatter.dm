@@ -167,7 +167,7 @@
 /// How much waste multiplier we get because of the gases around us.
 #define SM_WASTE_GAS "Множитель газовых отходов"
 /// How much waste multiplier we (don't) get because there is a psychologist.
-#define SM_WASTE_SOOTHED "Множитель психологических отходов"
+#define SM_WASTE_SOOTHED "Множитель отходов (психолог)"
 
 /// How many kelvins we get before taking damage, Given by god.
 #define SM_TEMP_LIMIT_BASE "Базовая термостойкость"
