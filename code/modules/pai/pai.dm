@@ -170,7 +170,7 @@
 
 /mob/living/silicon/pai/examine(mob/user)
 	. = ..()
-	. += "Похоже, что это основная строка ID мастера [(!master_name || emagged) ? "пуста" : master_name]."
+	. += "Это строка мастера ID [(!master_name || emagged) ? "пуста" : master_name]."
 
 /mob/living/silicon/pai/get_status_tab_items()
 	. = ..()
