@@ -19,7 +19,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 3
 	throw_range = 7
-	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT *2)
+	custom_materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 0.5)
 	interaction_flags_click = NEED_LITERACY|NEED_LIGHT|ALLOW_RESTING
 	custom_price = PAYCHECK_COMMAND
 	sound_vary = TRUE
@@ -47,7 +47,7 @@
 	if(src.mode != SCANNER_NO_MODE)
 		. += span_notice("Alt+ЛКМ по [declent_ru(DATIVE)], чтобы переключить отображение повреждений конечностей. Ctrl+shift+ЛКМ чтобы распечатать отчёт.")
 
-/obj/item/healthanalyzer/suicide_act(mob/living/carbon/user)
+/obj/item/healthanalyzer/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user.declent_ru(NOMINATIVE)] начинает анализировать себя при помощи [declent_ru(GENITIVE)]! Дисплей показывает, что [user.ru_p_they()] мёртв!"))
 	return BRUTELOSS
 
@@ -604,6 +604,7 @@
 	icon_state = "health_adv"
 	desc = "Ручной сканер тела, способный с высокой точностью определять жизненно важные показатели субъекта."
 	advanced = TRUE
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.25, /datum/material/silver = SHEET_MATERIAL_AMOUNT, /datum/material/gold = SHEET_MATERIAL_AMOUNT * 0.75)
 
 #define AID_EMOTION_NEUTRAL "neutral"
 #define AID_EMOTION_HAPPY "happy"
