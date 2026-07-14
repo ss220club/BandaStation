@@ -323,6 +323,7 @@
 		/obj/item/disk/computer/command = 300,
 		/obj/item/disk/computer/hdd_theft = 300,
 		/obj/item/disk/computer/syndie_ai_upgrade = 450,
+		/obj/item/keycard/nt_labs = 350,
 	)
 
 	product_categories = list(
@@ -399,6 +400,9 @@
 			),
 		),
 	)
+
+/obj/machinery/vending/trader/samopal/add_tts_component()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/brann)
 
 /obj/machinery/vending/trader/teresa
 	name = "\improper Trade Point - Teresa"
@@ -547,12 +551,15 @@
 		),
 	)
 
+/obj/machinery/vending/trader/teresa/add_tts_component()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/diana)
+
 /obj/machinery/vending/trader/fashion
 	name = "\improper Trade Point - Fashion"
 	desc = "Торговая точка блюспейс-передачи, принадлежащая бывшему предпринимателю - Фэйшену."
 	icon = 'modular_bandastation/objects/icons/obj/machines/vending.dmi'
 	icon_state = "nta"
-	product_ads = "Братуха, не зевай - скорее крутой шмот покупай!;У меня бренды - высший класс!;Бжж-Бзз-з!;В таких шмотках - на тебя даже смотреть будет страшно! Но не потому, что они херовые - потому что клёвые!;Будь стильным наёмником - затаривайся только у меня!"
+	product_ads = "Братуха, не зевай - скорее крутой дрип покупай!;У меня бренды - высший класс!;Бжж-Бзз-з!;В таких шмотках - на тебя даже смотреть будет страшно! Но не потому, что они херовые - потому что клёвые!;Будь стильным наёмником - затаривайся только у меня!"
 	vend_reply = "Дороги бархатом, братишка!"
 	onstation = FALSE
 	all_products_free = FALSE
@@ -667,6 +674,9 @@
 				/obj/item/storage/backpack/bannerpack/red = list(40, 2, INFINITY),
 				/obj/item/storage/backpack/industrial = list(80, 2, INFINITY),
 				/obj/item/storage/belt/military = list(60, 2, INFINITY),
+				/obj/item/clothing/accessory/holster = list(100, 2, INFINITY),
+				/obj/item/clothing/accessory/ammo_vest = list(80, 2, INFINITY),
+				/obj/item/clothing/accessory/ammo_vest/black = list(100, 2, INFINITY),
 				/obj/item/clothing/under/syndicate/soviet = list(50, 3, INFINITY),
 				/obj/item/clothing/mask/gas = list(200, 3, INFINITY),
 				/obj/item/clothing/glasses/night = list(250, 3, INFINITY),
@@ -684,6 +694,7 @@
 				/obj/item/clothing/mask/gas/syndicate = list(250, 4, INFINITY),
 				/obj/item/clothing/mask/gas/sechailer/swat = list(250, 4, INFINITY),
 				/obj/item/clothing/mask/gas/hunter = list(250, 4, INFINITY),
+				/obj/item/clothing/accessory/holster/tacticool = list(300, 4, INFINITY),
 				/obj/item/clothing/glasses/hud/security/sunglasses = list(200, 4, INFINITY),
 				/obj/item/clothing/glasses/thermal/eyepatch = list(1000, 4, INFINITY),
 				/obj/item/storage/backpack/holding = list(750, 4, INFINITY),
@@ -694,6 +705,9 @@
 			),
 		),
 	)
+
+/obj/machinery/vending/trader/fashion/add_tts_component()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/bandit3)
 
 /obj/machinery/vending/trader/survivor
 	name = "\improper Trade Point - Выживайло"
@@ -715,7 +729,8 @@
 		/obj/item/loot_mobs/bigot_claw = 400,
 		/obj/item/loot_mobs/fleshspider_tongue = 150,
 		/obj/item/loot_mobs/hunterspider_claw = 100,
-		/obj/item/loot_mobs/faithless_heart = 175,
+		/obj/item/loot_mobs/faithless_heart = 150,
+		/obj/item/loot_mobs/hyperzombie_gland = 225,
 		/obj/item/stack/cable_coil = 5,
 		/obj/item/assembly/igniter = 10,
 		/obj/item/stock_parts/capacitor = 10,
@@ -816,6 +831,9 @@
 		),
 	)
 
+/obj/machinery/vending/trader/survivor/add_tts_component()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/brimstone)
+
 /obj/machinery/vending/trader/robinson
 	name = "\improper Trade Point - Полковник Робинсон"
 	desc = "Торговая точка блюспейс-передачи, принадлежащая кадровому военному ТСФ - Полковнику Робинсону."
@@ -861,6 +879,7 @@
 		/obj/item/disk/computer/command = 300,
 		/obj/item/disk/computer/hdd_theft = 300,
 		/obj/item/disk/computer/syndie_ai_upgrade = 450,
+		/obj/item/keycard/nt_labs = 350,
 	)
 
 	product_categories = list(
@@ -924,6 +943,9 @@
 			),
 		),
 	)
+
+/obj/machinery/vending/trader/robinson/add_tts_component()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/cyberpunk_victor)
 
 /obj/machinery/vending/trader/keksuha
 	name = "\improper Trade Point - Камилла"
@@ -1045,6 +1067,9 @@
 		),
 	)
 
+/obj/machinery/vending/trader/keksuha/add_tts_component()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/xenia)
+
 /obj/machinery/vending/trader/visitor
 	name = "\improper Trade Point - Визитёр"
 	desc = "Торговая точка блюспейс-передачи, принадлежащая дипломатическому представителю от НТ - Визитёру."
@@ -1078,6 +1103,7 @@
 		/obj/item/artifact/fire_wing = 700,
 		/obj/item/artifact/ice_crystal = 960,
 		/obj/item/artifact/stone_eye = 840,
+		/obj/item/keycard/nt_labs = 500,
 	)
 
 	product_categories = list(
@@ -1155,3 +1181,6 @@
 			),
 		),
 	)
+
+/obj/machinery/vending/trader/visitor/add_tts_component()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/lucian)

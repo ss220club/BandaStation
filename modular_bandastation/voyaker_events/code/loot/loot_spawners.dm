@@ -328,7 +328,8 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 		/obj/item/keycard/forest_bunker = 60,
 		/obj/item/keycard/nt_labs = 40,
 		/obj/item/keycard/nt_commsbuoy/village_base = 40,
-		/obj/item/keycard/blue/mine_exit = 50
+		/obj/item/keycard/blue/mine_exit = 50,
+		/obj/item/keycard/cafeteria/administration = 30
 	)
 	max_items = 1
 	spawn_chance = 50
@@ -366,7 +367,7 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 		/obj/item/crafting_items/gunpowder/high = 30,
 		/obj/item/reagent_containers/cup/fuel_can = 60,
 		/obj/item/stack/sheet/plastic = 80,
-		/obj/item/stack/sheet/plastic/fifty = 60,
+		/obj/item/stack/sheet/plastic/five = 60,
 		/obj/item/screwdriver = 70,
 		/obj/item/weldingtool = 60,
 		/obj/item/wirecutters = 60,

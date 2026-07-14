@@ -9,6 +9,7 @@
 /obj/structure/city_prop/streetlamp
 	name = "фонарный столб"
 	icon_state = "street_off"
+	layer = ABOVE_MOB_LAYER
 
 /obj/structure/city_prop/streetlamp/dmg
 	name = "сломанный фонарный столб"
@@ -43,6 +44,7 @@
 /obj/structure/city_prop/trafficlight
 	name = "светофор"
 	icon_state = "trafficlight"
+	layer = ABOVE_MOB_LAYER
 
 /obj/structure/city_prop/trafficlight/dmg
 	name = "сломанный светофор"

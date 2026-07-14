@@ -19,7 +19,7 @@
 	pull_force = MOVE_FORCE_WEAK
 	melee_damage_lower = 20
 	melee_damage_upper = 40
-	melee_attack_cooldown = 3 SECONDS
+	melee_attack_cooldown = 4 SECONDS
 	obj_damage = 20
 	attack_verb_continuous = "разрывает"
 	attack_verb_simple = "разрывает"
@@ -43,7 +43,7 @@
 
 /datum/ai_controller/basic_controller/bigot
 	blackboard = list(
-		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
+		targeting_strategy = /datum/targeting_strategy/basic,
 		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/mining/get_target_priority,
 		BB_VISION_RANGE = 10,
 		BB_TARGET_MINIMUM_STAT = CONSCIOUS,

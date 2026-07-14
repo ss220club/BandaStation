@@ -33,3 +33,12 @@
 	w_class = WEIGHT_CLASS_SMALL
 	throwforce = 5
 	force = 0
+
+/obj/item/loot_mobs/hyperzombie_gland
+	name = "железа гиперзомби"
+	desc = "Железа гиперзомби, в которой, по видимому, формируется радиоактивная желчь, которую он извергал. Она тёплая на ощупь и противно пахнет..."
+	icon = 'modular_bandastation/voyaker_events/icons/loot_mobs/hyperzombie_gland.dmi'
+	icon_state = "gland"
+	w_class = WEIGHT_CLASS_SMALL
+	throwforce = 5
+	force = 0

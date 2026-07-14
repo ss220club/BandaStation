@@ -70,23 +70,23 @@
 	H.leave_to_hub()
 
 /obj/structure/gate/dark_forest
-	name = "Переход в Тёмный Лес"
+	name = "Блюспейс-переход."
 	desc = "Ведёт в зону Тёмного Леса"
 	location_id = "dark_forest"
 
 /obj/structure/gate/village
-	name = "Переход в Посёлок"
-	desc = "Ведёт в зону Посёлка"
+	name = "Блюспейс-переход."
+	desc = "Ведёт в определённую зону."
 	location_id = "village"
 
 /obj/structure/gate/mine
-	name = "Переход на Шахту"
-	desc = "Ведёт в зону Шахты"
+	name = "Блюспейс-переход."
+	desc = "Ведёт в определённую зону."
 	location_id = "mine"
 
 /obj/structure/gate/coast
-	name = "Переход на Побережье"
-	desc = "Ведёт в зону Побережья"
+	name = "Блюспейс-переход."
+	desc = "Ведёт в определённую зону."
 	location_id = "coast"
 
 /obj/structure/extract/dark_forest

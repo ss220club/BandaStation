@@ -1,10 +1,16 @@
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
 #include "_voyaker_events.dm"
-
 #include "code\traders\trader_loyality.dm"
 #include "code\traders\trader_quests.dm"
 #include "code\traders\trader_targets.dm"
 #include "code\traders\trader_vars.dm"
-#include "code\map\map_newsydney.dm"
 #include "code\ambience\ambience_landmarks.dm"
 #include "code\anomalies\anomalies_controller.dm"
 #include "code\anomalies\bluespace.dm"
@@ -27,8 +33,8 @@
 #include "code\droppods\droppod_containers.dm"
 #include "code\droppods\droppod_controller.dm"
 #include "code\droppods\droppod_spawners.dm"
-#include "code\emotes\ussp.dm"
 #include "code\emotes\tsf.dm"
+#include "code\emotes\ussp.dm"
 #include "code\extraction\extraction_controller.dm"
 #include "code\extraction\extraction_logic.dm"
 #include "code\flora\pines.dm"
@@ -39,6 +45,7 @@
 #include "code\loot\loot_spawners.dm"
 #include "code\loot_mobs\loot.dm"
 #include "code\machinery\vending_traders.dm"
+#include "code\map\map_newsydney.dm"
 #include "code\mob\corpses.dm"
 #include "code\mob\raid_death.dm"
 #include "code\mob\raid_death_landmarks.dm"
@@ -46,8 +53,11 @@
 #include "code\mobs\bigot_controller.dm"
 #include "code\mobs\faithlessold.dm"
 #include "code\mobs\forest_controller.dm"
+#include "code\mobs\hyperzombie.dm"
 #include "code\mobs\main_controller.dm"
 #include "code\mobs\mutants_loot.dm"
+#include "code\mobs\sand_spider.dm"
+#include "code\mobs\killer.dm"
 #include "code\radio_tower\power_tower.dm"
 #include "code\radio_tower\radio_tower.dm"
 #include "code\shelfs\shelfs.dm"
@@ -60,11 +70,4 @@
 #include "code\weather\weather_controller.dm"
 #include "code\weather\weather_datum.dm"
 #include "code\wooden_fence\wooden_fence.dm"
-#include "code\weapon\ammo.dm"
-#include "code\weapon\pistol.dm"
-#include "code\weapon\rifle.dm"
-#include "code\weapon\shotgun.dm"
-#include "code\weapon\smg.dm"
-#include "code\weapon\special.dm"
-#include "code\weapon\magazines.dm"
-#include "code\weapon\ballistic_master.dm"
+// END_INCLUDE

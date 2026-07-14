@@ -43,3 +43,7 @@
 /obj/machinery/door/password/keycard/mine_exit
 	name = "главные ворота шахты"
 	required_key = /obj/item/keycard/blue/mine_exit
+
+/obj/machinery/door/password/keycard/administration
+	name = "гермодверь административной комнаты"
+	required_key = /obj/item/keycard/cafeteria/administration

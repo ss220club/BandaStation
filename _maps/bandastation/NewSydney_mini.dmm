@@ -7,7 +7,9 @@
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "aaK" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/line/yellow/line/stripes{
 	dir = 1
 	},
@@ -385,7 +387,9 @@
 /turf/open/floor/carpet/red,
 /area/new_sydney)
 "aog" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 1
 	},
@@ -560,7 +564,8 @@
 /area/new_sydney)
 "awv" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/item/cultivator/rake,
 /obj/effect/turf_decal/siding/wood/oak{
@@ -815,7 +820,8 @@
 /area/new_sydney/mine)
 "aDR" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 6
@@ -1052,9 +1058,12 @@
 /turf/open/water/alternative/muddy/no_fishing/radiation_lake,
 /area/new_sydney/dark_forest/radiation_lake)
 "aNV" = (
-/obj/structure/fence,
+/obj/structure/fence{
+	max_integrity = 50000
+	},
 /obj/structure/fence/corner{
-	dir = 9
+	dir = 9;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
@@ -1105,7 +1114,9 @@
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
 "aPh" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new,
 /turf/open/floor/stone,
 /area/new_sydney)
@@ -1221,7 +1232,9 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
 "aSl" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
@@ -1415,7 +1428,8 @@
 /area/new_sydney/building)
 "aYH" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/item/reagent_containers/cup/bucket,
 /turf/open/floor/grass,
@@ -1544,10 +1558,15 @@
 /area/new_sydney)
 "bel" = (
 /obj/structure/fence/corner{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
+"bet" = (
+/obj/effect/landmark/forest_mutant_spawn/hyperzombie,
+/turf/open/floor/iron/white/textured_large,
+/area/new_sydney/building)
 "beA" = (
 /obj/structure/table/glass,
 /obj/machinery/computer/libraryconsole/bookmanagement{
@@ -1718,8 +1737,14 @@
 /obj/item/pen,
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
+"bkF" = (
+/obj/effect/landmark/forest_mutant_spawn/sand_spider,
+/turf/open/misc/asteroid,
+/area/new_sydney)
 "bkK" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/line/yellow/line/stripes,
 /turf/open/floor/asphalt,
 /area/new_sydney)
@@ -1785,7 +1810,9 @@
 /area/new_sydney)
 "bnM" = (
 /obj/structure/railing/platform,
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/trimline/yellow/line,
 /turf/open/floor/asphalt,
 /area/new_sydney)
@@ -1858,7 +1885,9 @@
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/mine)
 "bpR" = (
-/obj/structure/fence,
+/obj/structure/fence{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/vault,
 /area/new_sydney/dark_forest)
 "bqn" = (
@@ -1945,7 +1974,8 @@
 /area/new_sydney/dark_forest/radiation_lake2)
 "bsg" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 1
@@ -2031,6 +2061,12 @@
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest/building)
+"bup" = (
+/obj/effect/landmark/forest_mutant_spawn/sand_spider,
+/turf/open/floor/grass/lavaland{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
+/area/new_sydney)
 "buB" = (
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
@@ -2190,7 +2226,8 @@
 /area/new_sydney/dark_forest/building)
 "bAG" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 4
@@ -2199,7 +2236,8 @@
 /area/new_sydney)
 "bBi" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 1
@@ -2214,7 +2252,9 @@
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "bBn" = (
-/obj/structure/fence,
+/obj/structure/fence{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/vault,
 /area/new_sydney/military_base)
 "bBr" = (
@@ -2364,7 +2404,8 @@
 /area/new_sydney/mine)
 "bFR" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney)
@@ -2380,7 +2421,8 @@
 	dir = 8
 	},
 /obj/structure/railing/wooden_fencing/gate{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -2433,11 +2475,15 @@
 /turf/open/floor/pod/dark,
 /area/new_sydney/mine)
 "bJg" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/misc/beach/sand,
 /area/new_sydney)
 "bJk" = (
-/obj/structure/deployable_barricade/wooden,
+/obj/structure/deployable_barricade/wooden{
+	max_integrity = 500
+	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
@@ -2526,7 +2572,8 @@
 "bMD" = (
 /obj/structure/barricade/wooden,
 /obj/machinery/door/poddoor/shutters{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest/building)
@@ -2571,7 +2618,9 @@
 /turf/open/floor/carpet/blue,
 /area/new_sydney/building)
 "bOj" = (
-/obj/structure/flora/tree/pine/dead5,
+/obj/structure/flora/tree/pine/dead5{
+	max_integrity = 50000
+	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
@@ -2582,7 +2631,8 @@
 /area/new_sydney/dark_forest)
 "bOK" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/flora/bush/fullgrass/style_random,
 /turf/open/floor/grass,
@@ -2734,7 +2784,8 @@
 /area/new_sydney/mine)
 "bSJ" = (
 /obj/structure/fence/corner{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
@@ -2748,7 +2799,9 @@
 /turf/open/floor/carpet/green,
 /area/new_sydney/bunker)
 "bTe" = (
-/obj/machinery/door/poddoor/shutters,
+/obj/machinery/door/poddoor/shutters{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
 "bTh" = (
@@ -2821,7 +2874,9 @@
 	},
 /area/new_sydney)
 "bWe" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/trimline/yellow/line,
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
@@ -2869,7 +2924,9 @@
 /turf/open/floor/wood,
 /area/new_sydney/building)
 "bZA" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 4
 	},
@@ -3047,7 +3104,9 @@
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest/building)
 "chq" = (
-/obj/structure/fence,
+/obj/structure/fence{
+	max_integrity = 50000
+	},
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
 	},
@@ -3317,6 +3376,7 @@
 	dir = 8
 	},
 /obj/machinery/light/floor/broken,
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "ctl" = (
@@ -3459,7 +3519,8 @@
 /area/new_sydney/bunker)
 "czq" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/item/cultivator/rake,
 /obj/effect/turf_decal/siding/wood/oak{
@@ -3670,10 +3731,12 @@
 /area/new_sydney/dark_forest)
 "cGt" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney)
@@ -3760,6 +3823,10 @@
 	},
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
+"cIM" = (
+/obj/machinery/food_cart,
+/turf/open/floor/iron/small,
+/area/new_sydney)
 "cIQ" = (
 /obj/effect/turf_decal/board_number,
 /obj/structure/sign/nanotrasen/directional/north,
@@ -3847,7 +3914,7 @@
 /area/new_sydney/bunker)
 "cLl" = (
 /obj/structure/flora/rock/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/closed/mineral/asteroid{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -3915,7 +3982,9 @@
 	},
 /area/new_sydney)
 "cMP" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 1
 	},
@@ -4017,7 +4086,7 @@
 /area/new_sydney)
 "cPK" = (
 /obj/structure/flora/rock/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -4032,7 +4101,8 @@
 /area/new_sydney)
 "cQc" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/line/yellow/anticorner/stripes{
 	dir = 4
@@ -4075,7 +4145,9 @@
 	},
 /area/new_sydney/bunker)
 "cSG" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
 	},
@@ -4298,7 +4370,9 @@
 	},
 /area/new_sydney)
 "daG" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
 	},
@@ -4455,7 +4529,7 @@
 /area/new_sydney)
 "dfK" = (
 /obj/structure/flora/tree/pine/pine3{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -4726,7 +4800,8 @@
 /area/new_sydney/dark_forest)
 "dnl" = (
 /obj/structure/railing/wooden_fencing/gate{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -4934,6 +5009,21 @@
 	},
 /turf/open/floor/pod/dark,
 /area/new_sydney/mine)
+"dux" = (
+/obj/structure/railing/platform{
+	dir = 1
+	},
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/obj/structure/barbed_wire{
+	pixel_y = 10
+	},
+/obj/structure/closet/crate/freezer/food{
+	pixel_y = -5
+	},
+/turf/open/misc/beach/sand,
+/area/new_sydney)
 "duK" = (
 /obj/structure/table,
 /obj/structure/railing{
@@ -5031,13 +5121,16 @@
 /area/new_sydney/mine)
 "dyY" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/structure/flora/bush/fullgrass/style_random,
 /turf/open/floor/grass,
@@ -5185,7 +5278,9 @@
 	},
 /area/new_sydney/bunker)
 "dEK" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
 	},
@@ -5197,7 +5292,8 @@
 /area/new_sydney)
 "dFd" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -5252,7 +5348,8 @@
 /area/new_sydney)
 "dHD" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /turf/open/floor/hay,
 /area/new_sydney/building)
@@ -5367,6 +5464,11 @@
 	},
 /turf/open/floor/pod,
 /area/new_sydney/mine)
+"dJB" = (
+/obj/structure/table/wood/fancy/cyan,
+/obj/effect/landmark/loot_spawn/treasure,
+/turf/open/floor/carpet/cyan,
+/area/new_sydney/building)
 "dJL" = (
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 4
@@ -5416,7 +5518,8 @@
 "dLk" = (
 /obj/structure/flora/tree/jungle/small/style_random,
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 8
@@ -5479,7 +5582,8 @@
 /area/new_sydney/bunker)
 "dOX" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/machinery/grill,
 /turf/open/floor/grass,
@@ -5746,7 +5850,8 @@
 /area/new_sydney/mine)
 "dYk" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/structure/flora/bush/fullgrass/style_random,
 /obj/effect/turf_decal/siding/wood/oak{
@@ -6217,6 +6322,13 @@
 	},
 /turf/open/floor/carpet,
 /area/new_sydney/building)
+"eoG" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 1
+	},
+/obj/effect/landmark/loot_spawn/information,
+/turf/open/indestructible/vault,
+/area/new_sydney)
 "epc" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 8
@@ -6229,7 +6341,8 @@
 /area/new_sydney/mine)
 "epY" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new,
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -6433,6 +6546,16 @@
 	},
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
+"eyp" = (
+/obj/effect/turf_decal/line/yellow/line/contrasted{
+	dir = 8
+	},
+/obj/effect/mob_spawn/corpse/human/tsf/marine,
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor5"
+	},
+/turf/open/floor/asphalt,
+/area/new_sydney)
 "eyq" = (
 /obj/item/reagent_containers/cup/watering_can,
 /turf/open/floor/stone,
@@ -6483,7 +6606,8 @@
 /area/new_sydney)
 "eAi" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -6519,10 +6643,12 @@
 /area/new_sydney/mine)
 "eBq" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -6615,6 +6741,10 @@
 /obj/item/bedsheet/orange/double,
 /turf/open/floor/wood,
 /area/new_sydney/building)
+"eEQ" = (
+/obj/item/trash/boritos,
+/turf/open/misc/beach/sand,
+/area/new_sydney)
 "eEV" = (
 /obj/structure/table,
 /obj/effect/turf_decal/siding/dark,
@@ -6634,7 +6764,8 @@
 /area/new_sydney/building)
 "eFq" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 8
@@ -6651,7 +6782,8 @@
 /area/new_sydney/dark_forest/building)
 "eFI" = (
 /obj/structure/fence/corner{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
@@ -6755,8 +6887,8 @@
 	},
 /area/new_sydney/bunker)
 "eHQ" = (
-/obj/item/storage/test_tube_rack,
 /obj/effect/landmark/loot_spawn/clothing,
+/obj/structure/rack,
 /turf/open/floor/wood,
 /area/new_sydney/building)
 "eIs" = (
@@ -6842,7 +6974,9 @@
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/dark_forest/building)
 "eNo" = (
-/obj/structure/deployable_barricade/wooden,
+/obj/structure/deployable_barricade/wooden{
+	max_integrity = 500
+	},
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
 	},
@@ -6880,6 +7014,7 @@
 /area/new_sydney/building)
 "eRb" = (
 /obj/effect/turf_decal/siding/wood,
+/obj/effect/landmark/loot_spawn/clothing,
 /turf/open/floor/carpet/cyan,
 /area/new_sydney/building)
 "eRf" = (
@@ -7186,7 +7321,8 @@
 /area/new_sydney/building)
 "fbB" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 9
@@ -7437,6 +7573,7 @@
 /area/new_sydney)
 "flc" = (
 /obj/structure/table_frame,
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "flo" = (
@@ -7516,7 +7653,8 @@
 /area/new_sydney)
 "fow" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
@@ -7713,10 +7851,12 @@
 /area/new_sydney/mine)
 "fuL" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -7730,7 +7870,7 @@
 /area/new_sydney)
 "fvf" = (
 /obj/structure/flora/tree/pine/pine4{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -7753,10 +7893,12 @@
 /area/new_sydney/bunker)
 "fvI" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -8247,7 +8389,8 @@
 /area/new_sydney/mine)
 "fRv" = (
 /obj/structure/city_prop/concrete_barrier/alt{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -8287,7 +8430,8 @@
 /area/new_sydney/building)
 "fSk" = (
 /obj/machinery/door/poddoor/shutters{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney/mine)
@@ -8305,7 +8449,8 @@
 /area/new_sydney)
 "fTa" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new,
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -8354,7 +8499,8 @@
 /area/new_sydney/dark_forest)
 "fTq" = (
 /obj/structure/fence/cut/large{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
@@ -8416,8 +8562,8 @@
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "fVc" = (
-/obj/item/storage/test_tube_rack,
 /obj/effect/landmark/loot_spawn/treasure,
+/obj/structure/rack,
 /turf/open/floor/wood,
 /area/new_sydney/building)
 "fVi" = (
@@ -8486,7 +8632,7 @@
 	dir = 1
 	},
 /obj/structure/flora/rock/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -8635,13 +8781,15 @@
 /area/new_sydney)
 "gcg" = (
 /obj/structure/deployable_barricade/metal/plasteel{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
 "gdx" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 8
@@ -8767,7 +8915,8 @@
 	light_color = "#5B7A42"
 	},
 /obj/structure/fence/cut/large{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
@@ -8813,7 +8962,8 @@
 /area/new_sydney)
 "gld" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
@@ -8896,7 +9046,8 @@
 /area/new_sydney/bunker)
 "gpQ" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -8970,7 +9121,9 @@
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/dark_forest/building)
 "grJ" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -8981,18 +9134,25 @@
 /area/new_sydney/dark_forest/building)
 "grR" = (
 /obj/structure/fence{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 1
 	},
 /turf/open/indestructible/vault,
 /area/new_sydney/military_base)
+"gsL" = (
+/obj/effect/landmark/forest_mutant_spawn/sand_spider,
+/turf/open/floor/wood/birch,
+/area/new_sydney)
 "gsQ" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 8
 	},
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/floor/asphalt,
 /area/new_sydney)
 "gtk" = (
@@ -9113,7 +9273,8 @@
 /area/new_sydney/mine)
 "gxr" = (
 /obj/machinery/door/poddoor/shutters{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/floor/pod/dark,
 /area/new_sydney/mine)
@@ -9206,7 +9367,9 @@
 /turf/open/floor/iron/checker,
 /area/new_sydney/mine)
 "gAO" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/floor/stone,
 /area/new_sydney)
 "gBc" = (
@@ -9238,7 +9401,9 @@
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 4
 	},
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/floor/asphalt,
 /area/new_sydney)
 "gCL" = (
@@ -9261,7 +9426,8 @@
 /area/new_sydney)
 "gEh" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/table/rolling,
 /obj/effect/landmark/loot_spawn/food,
@@ -9495,7 +9661,8 @@
 /area/new_sydney/building)
 "gJz" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -9603,7 +9770,9 @@
 /turf/open/misc/asteroid,
 /area/new_sydney)
 "gMa" = (
-/obj/machinery/door/poddoor/shutters,
+/obj/machinery/door/poddoor/shutters{
+	max_integrity = 50000
+	},
 /turf/open/floor/asphalt,
 /area/new_sydney)
 "gMq" = (
@@ -9639,7 +9808,8 @@
 /area/new_sydney)
 "gNr" = (
 /obj/machinery/door/poddoor/shutters{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney)
@@ -9676,7 +9846,9 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
 "gOD" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/floor/asphalt,
 /area/new_sydney)
 "gPa" = (
@@ -9886,12 +10058,15 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/siding/thinplating_new,
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
 "gXG" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -9914,7 +10089,9 @@
 /turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "gYu" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
 "gYE" = (
@@ -9954,7 +10131,7 @@
 /turf/open/floor/asphalt,
 /area/new_sydney)
 "gZE" = (
-/obj/machinery/door/password/keycard,
+/obj/machinery/door/password/keycard/administration,
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "gZR" = (
@@ -10023,7 +10200,8 @@
 /area/new_sydney)
 "hbT" = (
 /obj/structure/fence/corner{
-	dir = 9
+	dir = 9;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
@@ -10373,9 +10551,14 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
 /area/new_sydney/dark_forest)
+"hpX" = (
+/obj/structure/rack,
+/turf/open/floor/wood,
+/area/new_sydney/building)
 "hqt" = (
 /obj/structure/fence{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
@@ -10429,10 +10612,12 @@
 /area/new_sydney)
 "hrV" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -10533,6 +10718,7 @@
 /obj/effect/turf_decal/siding/dark_blue{
 	dir = 8
 	},
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "hvv" = (
@@ -10687,11 +10873,11 @@
 	},
 /area/new_sydney)
 "hCV" = (
-/obj/item/storage/test_tube_rack,
 /obj/effect/landmark/loot_spawn/clothing,
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
 	},
+/obj/structure/rack,
 /turf/open/floor/wood,
 /area/new_sydney/building)
 "hDE" = (
@@ -10782,7 +10968,9 @@
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
 	},
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
 "hGC" = (
@@ -10847,7 +11035,8 @@
 /area/new_sydney/dark_forest)
 "hIa" = (
 /obj/structure/fence/corner{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/vault,
 /area/new_sydney/dark_forest)
@@ -10909,7 +11098,8 @@
 /area/new_sydney)
 "hKY" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 10
@@ -10980,7 +11170,8 @@
 /area/new_sydney/dark_forest)
 "hOF" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -11425,7 +11616,8 @@
 "igw" = (
 /obj/item/emptysandbag,
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -11537,7 +11729,8 @@
 /area/new_sydney)
 "ikY" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 5
@@ -11637,6 +11830,10 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
 /area/new_sydney)
+"inE" = (
+/obj/effect/landmark/forest_mutant_spawn/hyperzombie,
+/turf/open/indestructible/vault,
+/area/new_sydney/building)
 "inH" = (
 /obj/structure/table,
 /obj/item/kitchen/rollingpin{
@@ -11683,7 +11880,8 @@
 /area/new_sydney/bunker)
 "ior" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 4
@@ -11762,7 +11960,9 @@
 /turf/open/floor/iron/small,
 /area/new_sydney)
 "irV" = (
-/obj/structure/fence,
+/obj/structure/fence{
+	max_integrity = 50000
+	},
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
 	},
@@ -12070,7 +12270,8 @@
 /area/new_sydney/dark_forest)
 "iHG" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new,
 /obj/structure/railing/unbreakable,
@@ -12247,8 +12448,8 @@
 /turf/open/misc/asteroid,
 /area/new_sydney)
 "iOZ" = (
-/obj/item/storage/test_tube_rack,
 /obj/effect/turf_decal/siding/wood,
+/obj/structure/rack,
 /turf/open/floor/wood,
 /area/new_sydney/building)
 "iPb" = (
@@ -12353,7 +12554,9 @@
 	},
 /area/new_sydney/bunker)
 "iUN" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
@@ -12426,6 +12629,7 @@
 /obj/effect/decal/trashbags/five{
 	pixel_y = -10
 	},
+/obj/effect/landmark/loot_spawn/treasure,
 /turf/open/floor/stone,
 /area/new_sydney)
 "iWT" = (
@@ -12455,7 +12659,8 @@
 /area/new_sydney/bunker)
 "iXF" = (
 /obj/structure/railing/wooden_fencing/gate{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /turf/open/floor/hay,
 /area/new_sydney/building)
@@ -12463,6 +12668,7 @@
 /obj/structure/neon_sign/nightgold{
 	pixel_y = 40
 	},
+/obj/machinery/vending/cigarette/beach,
 /turf/open/floor/iron/small,
 /area/new_sydney)
 "iZd" = (
@@ -12506,7 +12712,7 @@
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "iZZ" = (
-/obj/item/storage/test_tube_rack,
+/obj/item/rack_parts,
 /turf/open/floor/wood,
 /area/new_sydney/building)
 "jaC" = (
@@ -12566,7 +12772,8 @@
 /area/new_sydney)
 "jcL" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -12628,7 +12835,7 @@
 /area/new_sydney/bunker)
 "jdV" = (
 /obj/structure/flora/tree/jungle/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -12668,7 +12875,8 @@
 /area/new_sydney/building)
 "jgb" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing,
 /obj/effect/turf_decal/weather/dirt{
@@ -12692,7 +12900,8 @@
 /area/new_sydney/building)
 "jgG" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
@@ -12873,6 +13082,10 @@
 	dir = 8
 	},
 /area/new_sydney/bunker)
+"jnI" = (
+/obj/effect/landmark/forest_mutant_spawn/killer,
+/turf/open/indestructible/vault,
+/area/new_sydney)
 "jnO" = (
 /obj/structure/table/glass,
 /obj/effect/turf_decal/siding/wood,
@@ -12999,7 +13212,8 @@
 /area/new_sydney/building)
 "jrF" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/chair/plastic{
 	dir = 8
@@ -13076,7 +13290,8 @@
 /area/new_sydney)
 "jvm" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -13277,7 +13492,9 @@
 /area/new_sydney/bunker)
 "jEP" = (
 /obj/structure/railing/platform,
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
 "jFp" = (
@@ -13319,6 +13536,10 @@
 /obj/structure/decorative/shelf/crates,
 /turf/open/floor/pod,
 /area/new_sydney/mine)
+"jGP" = (
+/obj/structure/table/wood,
+/turf/open/floor/wood/birch,
+/area/new_sydney)
 "jGY" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted,
 /obj/structure/table_frame,
@@ -13353,7 +13574,9 @@
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
 	},
-/obj/structure/deployable_barricade/wooden,
+/obj/structure/deployable_barricade/wooden{
+	max_integrity = 500
+	},
 /turf/open/floor/plating,
 /area/new_sydney/dark_forest)
 "jIM" = (
@@ -13400,7 +13623,7 @@
 /area/new_sydney/building)
 "jMd" = (
 /obj/structure/flora/rock/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest/building)
@@ -13500,10 +13723,12 @@
 /area/new_sydney)
 "jQF" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/item/cigarette,
 /turf/open/indestructible/rockyground,
@@ -13567,7 +13792,8 @@
 /area/new_sydney)
 "jSz" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing,
 /obj/effect/turf_decal/weather/dirt{
@@ -13649,6 +13875,10 @@
 /obj/machinery/hydroponics/constructable,
 /turf/open/floor/pod,
 /area/new_sydney)
+"jWn" = (
+/obj/effect/landmark/forest_mutant_spawn/sand_spider,
+/turf/open/misc/beach/sand,
+/area/new_sydney)
 "jWS" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 6
@@ -13670,10 +13900,12 @@
 /area/new_sydney/dark_forest)
 "jYO" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -13937,7 +14169,8 @@
 /area/new_sydney/building)
 "khp" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 4
@@ -14044,6 +14277,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor3"
 	},
+/obj/effect/landmark/loot_spawn/treasure,
 /turf/open/floor/plating,
 /area/new_sydney/building)
 "kkW" = (
@@ -14100,13 +14334,18 @@
 /area/new_sydney/dark_forest)
 "koI" = (
 /obj/structure/deployable_barricade/metal/plasteel{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 4
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
+"kpz" = (
+/obj/item/toy/beach_ball,
+/turf/open/misc/beach/sand,
+/area/new_sydney)
 "kpA" = (
 /obj/effect/turf_decal/board_number{
 	dir = 4
@@ -14227,9 +14466,8 @@
 	},
 /obj/effect/turf_decal/board_number/three{
 	pixel_y = 11;
-	pixel_x = -1;
 	alpha = 150;
-	color = "#439C1E"
+	color = "#A46106"
 	},
 /turf/open/floor/iron/dark,
 /area/new_sydney/bunker)
@@ -14257,7 +14495,8 @@
 /area/new_sydney)
 "ktR" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -14531,7 +14770,8 @@
 /area/new_sydney/building)
 "kBq" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
@@ -14555,7 +14795,8 @@
 /area/new_sydney/dark_forest/building)
 "kCi" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/mob_spawn/corpse/human/ussp/spetsnaz,
 /obj/effect/decal/cleanable/blood/old{
@@ -14625,7 +14866,8 @@
 /area/new_sydney)
 "kEi" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 9
@@ -14636,7 +14878,8 @@
 /area/new_sydney)
 "kEq" = (
 /obj/structure/fence{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 10
@@ -14764,6 +15007,19 @@
 /obj/effect/spawner/random/trash/box,
 /turf/open/floor/pod,
 /area/new_sydney/dark_forest/building)
+"kHV" = (
+/obj/structure/railing/platform{
+	dir = 1
+	},
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/obj/structure/barbed_wire{
+	pixel_y = 10
+	},
+/obj/machinery/vending/boozeomat,
+/turf/open/floor/wood/birch,
+/area/new_sydney)
 "kHY" = (
 /obj/effect/turf_decal/arrows{
 	dir = 4
@@ -14883,7 +15139,8 @@
 /area/new_sydney)
 "kLY" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/flora/bush/fullgrass/style_random,
 /obj/effect/turf_decal/siding/wood/oak{
@@ -14945,7 +15202,8 @@
 	dir = 10
 	},
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/structure/railing/unbreakable{
 	dir = 10
@@ -15197,7 +15455,7 @@
 /area/new_sydney)
 "kWE" = (
 /obj/structure/flora/rock/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
@@ -15250,7 +15508,8 @@
 /area/new_sydney)
 "kYM" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -15258,7 +15517,9 @@
 /turf/open/floor/grass,
 /area/new_sydney)
 "lab" = (
-/obj/structure/fence,
+/obj/structure/fence{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new,
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
@@ -15327,7 +15588,9 @@
 /turf/open/floor/carpet/green,
 /area/new_sydney/bunker)
 "lcw" = (
-/obj/structure/fence,
+/obj/structure/fence{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
 "lcA" = (
@@ -15336,7 +15599,9 @@
 	},
 /area/new_sydney/dark_forest)
 "lcE" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 1
 	},
@@ -15486,7 +15751,8 @@
 /area/new_sydney/military_base)
 "ljT" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 1
@@ -15622,7 +15888,9 @@
 /turf/open/floor/grass,
 /area/new_sydney/bunker)
 "loB" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 9
 	},
@@ -15725,11 +15993,12 @@
 /turf/open/indestructible/vault,
 /area/new_sydney/military_base)
 "ltc" = (
-/obj/structure/table,
-/obj/effect/turf_decal/tile/dark_red/half/contrasted{
+/obj/structure/minecart_rail,
+/obj/effect/turf_decal/board_number{
 	dir = 4
 	},
-/turf/open/floor/iron/white/textured_large,
+/obj/effect/landmark/loot_spawn/clothing,
+/turf/open/floor/plating,
 /area/new_sydney/building)
 "lts" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted{
@@ -15801,7 +16070,8 @@
 /area/new_sydney)
 "lvB" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -15946,7 +16216,9 @@
 /turf/open/floor/wood/large/oak,
 /area/new_sydney/bunker)
 "lAs" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 10
 	},
@@ -16086,7 +16358,7 @@
 /area/new_sydney/bunker)
 "lFI" = (
 /obj/structure/flora/tree/jungle/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -16158,7 +16430,9 @@
 /area/new_sydney/bunker)
 "lIS" = (
 /obj/effect/turf_decal/siding/wood,
-/obj/structure/deployable_barricade/wooden,
+/obj/structure/deployable_barricade/wooden{
+	max_integrity = 500
+	},
 /turf/open/floor/grass,
 /area/new_sydney)
 "lIT" = (
@@ -16166,7 +16440,8 @@
 	dir = 4
 	},
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
@@ -16200,6 +16475,10 @@
 	dir = 9
 	},
 /turf/open/indestructible/vault,
+/area/new_sydney)
+"lLN" = (
+/obj/effect/landmark/forest_mutant_spawn/sand_spider,
+/turf/open/indestructible/rockyground,
 /area/new_sydney)
 "lLS" = (
 /obj/structure/closet/crate/trashcart,
@@ -16515,7 +16794,8 @@
 /area/new_sydney/building)
 "lYa" = (
 /obj/structure/fence{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
@@ -17045,7 +17325,9 @@
 /turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "mrz" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 1
 	},
@@ -17087,7 +17369,9 @@
 /turf/closed/indestructible/reinforced,
 /area/new_sydney/dark_forest)
 "mtk" = (
-/obj/machinery/door/poddoor/shutters,
+/obj/machinery/door/poddoor/shutters{
+	max_integrity = 50000
+	},
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "mtB" = (
@@ -17261,6 +17545,13 @@
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney)
+"mAf" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/obj/effect/decal/papers/two,
+/turf/open/floor/carpet/blue,
+/area/new_sydney/building)
 "mAS" = (
 /obj/structure/chair/comfy/corp{
 	dir = 1
@@ -17268,13 +17559,12 @@
 /turf/open/floor/carpet/black,
 /area/new_sydney/bunker)
 "mAU" = (
+/obj/effect/turf_decal/line/dark_green/line/contrasted,
 /obj/effect/turf_decal/board_number/three{
 	pixel_y = 11;
-	pixel_x = -1;
 	alpha = 150;
-	color = "#439C1E"
+	color = "#A46106"
 	},
-/obj/effect/turf_decal/line/dark_green/line/contrasted,
 /turf/open/floor/iron/dark,
 /area/new_sydney/bunker)
 "mBb" = (
@@ -17401,7 +17691,8 @@
 /area/new_sydney/bunker)
 "mFs" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
@@ -17574,7 +17865,8 @@
 /area/new_sydney/bunker)
 "mMM" = (
 /obj/structure/fence{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/vault,
 /area/new_sydney)
@@ -17640,7 +17932,8 @@
 /area/new_sydney/dark_forest)
 "mOl" = (
 /obj/structure/deployable_barricade/metal/plasteel{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 8
@@ -17721,6 +18014,10 @@
 /obj/structure/minecart_rail/railbreak,
 /turf/open/floor/plating,
 /area/new_sydney)
+"mRn" = (
+/obj/effect/landmark/forest_mutant_spawn/killer,
+/turf/open/floor/iron/small,
+/area/new_sydney)
 "mRs" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 8
@@ -17782,7 +18079,8 @@
 /area/new_sydney/mine)
 "mTG" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -17835,13 +18133,16 @@
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "mWp" = (
-/obj/machinery/door/poddoor/shutters,
+/obj/machinery/door/poddoor/shutters{
+	max_integrity = 50000
+	},
 /turf/open/floor/pod,
 /area/new_sydney/dark_forest)
 "mWX" = (
 /obj/structure/railing/wooden_fencing,
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 6
@@ -17905,6 +18206,10 @@
 	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
+"mYj" = (
+/obj/effect/landmark/loot_spawn/treasure,
+/turf/open/misc/beach/sand,
+/area/new_sydney)
 "mYI" = (
 /obj/structure/vehicle_light/meridian/var3,
 /turf/open/floor/asphalt,
@@ -17934,6 +18239,16 @@
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/pod,
 /area/new_sydney/mine)
+"mZD" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/forest_mutant_spawn/hyperzombie,
+/turf/open/floor/wood,
+/area/new_sydney/building)
+"mZJ" = (
+/obj/structure/table,
+/obj/effect/landmark/loot_spawn/information,
+/turf/open/floor/iron/white/textured_large,
+/area/new_sydney/building)
 "mZK" = (
 /obj/item/paper,
 /turf/open/floor/iron/dark/smooth_half{
@@ -17962,7 +18277,8 @@
 "naN" = (
 /obj/structure/railing/wooden_fencing,
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 10
@@ -18278,7 +18594,8 @@
 /area/new_sydney)
 "npg" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/line/yellow/line{
 	dir = 4
@@ -18290,7 +18607,9 @@
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "npA" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 4
 	},
@@ -18481,6 +18800,13 @@
 /obj/effect/decal/trashbags/five,
 /turf/open/indestructible/vault,
 /area/new_sydney/dark_forest)
+"nzW" = (
+/obj/structure/table/wood,
+/obj/machinery/reagentgrinder{
+	pixel_y = 10
+	},
+/turf/open/floor/wood/birch,
+/area/new_sydney)
 "nAk" = (
 /obj/effect/turf_decal/line/dark_green/anticorner/contrasted{
 	dir = 1
@@ -18615,10 +18941,12 @@
 /area/new_sydney/mine)
 "nDE" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -18798,6 +19126,13 @@
 	},
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
+"nKT" = (
+/obj/effect/mob_spawn/corpse/human/irs_agent,
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor3"
+	},
+/turf/open/floor/iron/dark,
+/area/new_sydney/mine)
 "nKX" = (
 /turf/open/misc/beach/coast/corner,
 /area/new_sydney)
@@ -18876,7 +19211,8 @@
 /area/new_sydney/dark_forest)
 "nQS" = (
 /obj/structure/fence{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
@@ -18957,7 +19293,8 @@
 /area/new_sydney/bunker)
 "nUm" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 10
@@ -19045,7 +19382,8 @@
 /area/new_sydney/building)
 "nYm" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney)
@@ -19085,7 +19423,8 @@
 /area/new_sydney)
 "nZd" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/structure/flora/bush/fullgrass/style_random,
 /obj/effect/turf_decal/siding/wood/oak{
@@ -19139,7 +19478,8 @@
 /area/new_sydney/building)
 "oae" = (
 /obj/machinery/door/poddoor/shutters{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
@@ -19247,7 +19587,8 @@
 /area/new_sydney/mine)
 "ofu" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 1
@@ -19298,7 +19639,8 @@
 /area/new_sydney)
 "ogN" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/machinery/hydroponics/soil/rich,
 /turf/open/floor/grass,
@@ -19340,7 +19682,9 @@
 /turf/open/floor/carpet/blue,
 /area/new_sydney/building)
 "oiO" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 4
 	},
@@ -19438,7 +19782,8 @@
 /area/new_sydney/mine)
 "oox" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /turf/open/floor/hay,
 /area/new_sydney/building)
@@ -19519,7 +19864,8 @@
 /area/new_sydney/bunker)
 "oqj" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/line/yellow/line{
 	dir = 8
@@ -19543,7 +19889,8 @@
 /area/new_sydney/building)
 "oso" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/chair/plastic,
 /turf/open/floor/grass,
@@ -19607,7 +19954,9 @@
 /turf/open/floor/iron/dark/smooth_corner,
 /area/new_sydney/bunker)
 "ovz" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/vault,
 /area/new_sydney)
 "ovE" = (
@@ -19738,7 +20087,8 @@
 /area/new_sydney/mine)
 "oBc" = (
 /obj/machinery/door/poddoor/shutters{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney/military_base)
@@ -20009,7 +20359,9 @@
 /turf/open/floor/pod,
 /area/new_sydney/dark_forest/building)
 "oLm" = (
-/obj/machinery/door/poddoor/shutters,
+/obj/machinery/door/poddoor/shutters{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/building)
 "oLr" = (
@@ -20190,9 +20542,9 @@
 /turf/open/indestructible/vault,
 /area/new_sydney)
 "oTz" = (
-/obj/item/storage/test_tube_rack,
 /obj/effect/landmark/loot_spawn/treasure,
 /obj/effect/turf_decal/siding/wood,
+/obj/structure/rack,
 /turf/open/floor/wood,
 /area/new_sydney/building)
 "oTA" = (
@@ -20215,7 +20567,9 @@
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "oTR" = (
-/obj/machinery/door/poddoor/shutters,
+/obj/machinery/door/poddoor/shutters{
+	max_integrity = 50000
+	},
 /turf/open/floor/plating,
 /area/new_sydney)
 "oTV" = (
@@ -20224,10 +20578,18 @@
 /area/new_sydney/military_base)
 "oUb" = (
 /obj/structure/fence{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
+"oUg" = (
+/obj/effect/mob_spawn/corpse/human/irs_agent,
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor4"
+	},
+/turf/open/floor/iron/dark/herringbone,
+/area/new_sydney/mine)
 "oUw" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/siding/wood{
@@ -20245,7 +20607,9 @@
 /turf/open/indestructible/vault,
 /area/new_sydney/building)
 "oVh" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 8
 	},
@@ -20361,7 +20725,8 @@
 	dir = 8
 	},
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
@@ -20373,6 +20738,10 @@
 /obj/item/kirbyplants/organic/plant12,
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
+"pav" = (
+/obj/item/broken_bottle,
+/turf/open/misc/beach/sand,
+/area/new_sydney)
 "pax" = (
 /obj/effect/decal/papers/two,
 /turf/open/indestructible/rockyground,
@@ -20510,7 +20879,8 @@
 /area/new_sydney)
 "peH" = (
 /obj/machinery/door/poddoor/shutters{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
@@ -20563,7 +20933,9 @@
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 5
 	},
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
 "pgw" = (
@@ -20580,6 +20952,15 @@
 	dir = 1
 	},
 /area/new_sydney/bunker)
+"phN" = (
+/obj/effect/turf_decal/line/dark_blue/line/contrasted{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "gib6-overlay"
+	},
+/turf/open/floor/iron/dark,
+/area/new_sydney/mine)
 "pid" = (
 /obj/effect/landmark/loot_spawn/treasure,
 /turf/open/floor/stone,
@@ -20710,7 +21091,8 @@
 /area/new_sydney/bunker)
 "pmY" = (
 /obj/structure/fence/corner{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
@@ -20798,7 +21180,8 @@
 /area/new_sydney/dark_forest/building)
 "ppx" = (
 /obj/structure/fence{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/vault,
 /area/new_sydney/dark_forest)
@@ -20882,7 +21265,8 @@
 /area/new_sydney/building)
 "psb" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
@@ -20922,7 +21306,9 @@
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 1
 	},
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/floor/stone,
 /area/new_sydney)
 "pui" = (
@@ -20954,7 +21340,8 @@
 /area/new_sydney/dark_forest/building)
 "pve" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 4
@@ -20977,7 +21364,9 @@
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 1
 	},
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/floor/asphalt,
 /area/new_sydney)
 "pwK" = (
@@ -20991,7 +21380,8 @@
 	dir = 4
 	},
 /obj/structure/railing/wooden_fencing/gate{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -21269,12 +21659,17 @@
 /area/new_sydney/mine)
 "pIV" = (
 /obj/structure/city_prop/concrete_barrier/alt{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
 /area/new_sydney/dark_forest)
+"pIW" = (
+/obj/effect/spawner/random/trash/crushed_can,
+/turf/open/floor/carpet/donk,
+/area/new_sydney)
 "pIZ" = (
 /obj/effect/decal/papers/two,
 /turf/open/floor/iron/dark/herringbone,
@@ -21301,7 +21696,8 @@
 	light_color = "#5B7A42"
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
@@ -21393,7 +21789,8 @@
 /area/new_sydney)
 "pNk" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -21422,7 +21819,9 @@
 /turf/open/floor/grass,
 /area/new_sydney)
 "pOi" = (
-/obj/structure/fence,
+/obj/structure/fence{
+	max_integrity = 50000
+	},
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
 	},
@@ -21562,7 +21961,8 @@
 /area/new_sydney)
 "pTt" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 1
@@ -21586,7 +21986,8 @@
 /area/new_sydney)
 "pUx" = (
 /obj/structure/railing/wooden_fencing/gate{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -21722,7 +22123,8 @@
 /area/new_sydney/building)
 "pYX" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
@@ -21800,7 +22202,9 @@
 	},
 /area/new_sydney)
 "qcA" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 6
 	},
@@ -22049,7 +22453,8 @@
 	light_color = "#5B7A42"
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
@@ -22149,7 +22554,8 @@
 /area/new_sydney/mine)
 "qkb" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/flora/bush/fullgrass/style_3,
 /turf/open/floor/grass,
@@ -22226,7 +22632,8 @@
 /area/new_sydney/dark_forest/building)
 "qmh" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/structure/flora/bush/fullgrass/style_random,
 /turf/open/floor/grass,
@@ -22706,7 +23113,9 @@
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 4
 	},
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
 "qDC" = (
@@ -22921,7 +23330,8 @@
 "qKW" = (
 /obj/structure/flora/bush/fullgrass/style_random,
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 1
@@ -22944,7 +23354,9 @@
 /turf/open/floor/pod/dark,
 /area/new_sydney/mine)
 "qNc" = (
-/obj/structure/fence,
+/obj/structure/fence{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
 "qOw" = (
@@ -22968,7 +23380,8 @@
 /area/new_sydney/building)
 "qPH" = (
 /obj/machinery/door/poddoor/shutters{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney)
@@ -23171,6 +23584,7 @@
 "rba" = (
 /obj/effect/turf_decal/siding/dark_blue,
 /obj/machinery/light/floor/broken,
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "rbg" = (
@@ -23181,7 +23595,8 @@
 /area/new_sydney/building)
 "rbL" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -23259,6 +23674,15 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
 /area/new_sydney/dark_forest)
+"rfw" = (
+/obj/effect/food_cart_stand,
+/obj/structure/table/wood,
+/obj/item/plate{
+	pixel_y = 2
+	},
+/obj/effect/landmark/loot_spawn/food,
+/turf/open/misc/beach/sand,
+/area/new_sydney)
 "rfC" = (
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 9
@@ -23296,7 +23720,7 @@
 /area/new_sydney)
 "rgp" = (
 /obj/structure/flora/rock/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/mine)
@@ -23388,6 +23812,10 @@
 	},
 /turf/open/floor/pod,
 /area/new_sydney/mine)
+"rji" = (
+/obj/effect/landmark/forest_mutant_spawn/sand_spider,
+/turf/open/floor/asphalt,
+/area/new_sydney)
 "rjn" = (
 /obj/effect/turf_decal/board_number,
 /obj/effect/turf_decal/trimline/brown,
@@ -23428,12 +23856,11 @@
 /obj/effect/turf_decal/board_number{
 	dir = 10
 	},
-/obj/effect/turf_decal/trimline/dark_green,
+/obj/effect/turf_decal/trimline/brown,
 /obj/effect/turf_decal/board_number/three{
 	pixel_y = 11;
-	pixel_x = -1;
 	alpha = 150;
-	color = "#439C1E"
+	color = "#A46106"
 	},
 /turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
@@ -23592,7 +24019,8 @@
 /area/new_sydney/dark_forest/building)
 "rqt" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 4
@@ -23649,7 +24077,9 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/military_base)
 "rrv" = (
-/obj/machinery/door/poddoor/shutters,
+/obj/machinery/door/poddoor/shutters{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/stone,
 /area/new_sydney)
 "rrW" = (
@@ -23728,17 +24158,13 @@
 /obj/effect/turf_decal/tile/dark_blue/anticorner/contrasted{
 	dir = 4
 	},
-/obj/item/stack/sheet/mineral/gold/fifty,
-/obj/item/stack/sheet/mineral/gold/fifty,
-/obj/item/stack/sheet/mineral/gold/fifty,
-/obj/item/stack/sheet/mineral/gold/fifty,
-/obj/item/stack/sheet/mineral/gold/fifty,
-/obj/item/stack/sheet/mineral/gold/fifty,
-/obj/item/stack/sheet/mineral/gold/fifty,
-/obj/item/stack/sheet/mineral/gold/fifty,
-/obj/item/stack/sheet/mineral/gold/fifty,
-/obj/item/documents/nanotrasen,
 /obj/structure/safe,
+/obj/item/documents/nanotrasen,
+/obj/item/stack/sheet/mineral/gold/fifty,
+/obj/item/stack/sheet/mineral/gold/fifty,
+/obj/item/stack/sheet/mineral/gold/fifty,
+/obj/item/stack/sheet/mineral/gold/fifty,
+/obj/item/stack/sheet/mineral/gold/fifty,
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "ruG" = (
@@ -23770,6 +24196,14 @@
 	dir = 4
 	},
 /area/new_sydney/bunker)
+"rwa" = (
+/obj/structure/table/wood,
+/obj/item/plate{
+	pixel_y = 2
+	},
+/obj/effect/landmark/loot_spawn/food,
+/turf/open/misc/beach/sand,
+/area/new_sydney)
 "rwn" = (
 /obj/structure/chair/office/tactical{
 	dir = 4
@@ -23978,7 +24412,9 @@
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
 	},
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/vault,
 /area/new_sydney)
 "rFF" = (
@@ -24094,7 +24530,8 @@
 /area/new_sydney)
 "rJm" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/structure/flora/bush/fullgrass,
 /turf/open/floor/grass,
@@ -24107,12 +24544,17 @@
 /area/new_sydney)
 "rJu" = (
 /obj/structure/flora/tree/pine/pine4{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
 /area/new_sydney/dark_forest)
+"rJD" = (
+/obj/structure/minecart_rail,
+/obj/effect/landmark/forest_mutant_spawn/sand_spider,
+/turf/open/misc/asteroid,
+/area/new_sydney)
 "rKo" = (
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 6
@@ -24294,7 +24736,9 @@
 /area/new_sydney)
 "rPd" = (
 /obj/structure/minecart_rail,
-/obj/machinery/door/poddoor/shutters,
+/obj/machinery/door/poddoor/shutters{
+	max_integrity = 50000
+	},
 /turf/open/floor/plating,
 /area/new_sydney)
 "rPF" = (
@@ -24317,7 +24761,8 @@
 	light_color = "#5B7A42"
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
@@ -24395,7 +24840,9 @@
 /turf/open/floor/iron/stairs/right,
 /area/new_sydney)
 "rTF" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 4
 	},
@@ -24453,6 +24900,15 @@
 	},
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
+"rXl" = (
+/obj/effect/turf_decal/line/yellow/line/contrasted{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "gib6-overlay"
+	},
+/turf/open/floor/asphalt,
+/area/new_sydney)
 "rXo" = (
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "gib6-overlay";
@@ -24515,6 +24971,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor7"
 	},
+/obj/effect/landmark/loot_spawn/treasure,
 /turf/open/floor/pod,
 /area/new_sydney)
 "rZH" = (
@@ -24629,7 +25086,9 @@
 /turf/open/indestructible/vault,
 /area/new_sydney/building)
 "scN" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
 	},
@@ -25348,7 +25807,9 @@
 /turf/open/floor/iron/dark,
 /area/new_sydney/bunker)
 "sIq" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 8
 	},
@@ -25418,7 +25879,9 @@
 	},
 /area/new_sydney)
 "sLQ" = (
-/obj/machinery/door/poddoor/shutters,
+/obj/machinery/door/poddoor/shutters{
+	max_integrity = 50000
+	},
 /turf/open/floor/pod/dark,
 /area/new_sydney/mine)
 "sLX" = (
@@ -25463,6 +25926,12 @@
 "sMR" = (
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
+"sNP" = (
+/obj/effect/landmark/forest_mutant_spawn/sand_spider,
+/turf/open/misc/asteroid/lowpressure{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
+/area/new_sydney)
 "sOg" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating,
@@ -25495,7 +25964,8 @@
 /area/new_sydney)
 "sPF" = (
 /obj/structure/fence{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/vault,
 /area/new_sydney/military_base)
@@ -25580,7 +26050,8 @@
 	dir = 6
 	},
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/structure/railing/unbreakable{
 	dir = 6
@@ -25750,7 +26221,9 @@
 /turf/open/floor/pod/dark,
 /area/new_sydney/mine)
 "sZJ" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/structure/apc{
 	pixel_x = 0
 	},
@@ -25797,6 +26270,10 @@
 	},
 /turf/open/floor/carpet/green,
 /area/new_sydney/bunker)
+"taw" = (
+/obj/effect/spawner/random/trash/crushed_can,
+/turf/open/misc/beach/sand,
+/area/new_sydney)
 "taU" = (
 /obj/effect/decal/cleanable/glass,
 /obj/item/shard{
@@ -25875,6 +26352,14 @@
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney/military_base)
+"tfP" = (
+/obj/structure/table/wood,
+/obj/effect/food_cart_stand,
+/obj/item/cigarette{
+	pixel_y = 4
+	},
+/turf/open/floor/wood/birch,
+/area/new_sydney)
 "tge" = (
 /obj/effect/turf_decal/line/yellow/anticorner{
 	dir = 8
@@ -25914,6 +26399,10 @@
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
 /area/new_sydney)
+"thC" = (
+/obj/effect/landmark/forest_mutant_spawn/hyperzombie,
+/turf/open/floor/carpet/green,
+/area/new_sydney/building)
 "thE" = (
 /obj/item/shard{
 	icon_state = "medium"
@@ -26225,7 +26714,9 @@
 /turf/open/floor/grass,
 /area/new_sydney)
 "tri" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new,
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
@@ -26325,7 +26816,9 @@
 /turf/open/floor/pod,
 /area/new_sydney)
 "tuT" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 8
 	},
@@ -26389,7 +26882,9 @@
 /turf/open/floor/iron/checker,
 /area/new_sydney/building)
 "tyn" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 4
 	},
@@ -26516,7 +27011,8 @@
 "tCd" = (
 /obj/structure/railing/wooden_fencing,
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
@@ -26584,7 +27080,8 @@
 /area/new_sydney/building)
 "tEm" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/decal/papers,
 /turf/open/indestructible/rockyground,
@@ -26673,7 +27170,8 @@
 /area/new_sydney/dark_forest/building)
 "tHL" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 4
@@ -26711,7 +27209,9 @@
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "tJz" = (
-/obj/structure/barricade/security,
+/obj/structure/barricade/security{
+	max_integrity = 50000
+	},
 /turf/open/water/beach,
 /area/new_sydney)
 "tJA" = (
@@ -26940,7 +27440,8 @@
 /area/new_sydney)
 "tQr" = (
 /obj/structure/railing/wooden_fencing/gate{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/floor/grass/lavaland{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -27104,7 +27605,8 @@
 /area/new_sydney)
 "tXd" = (
 /obj/structure/statue/gold/new_sydney_map{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/landmark/ambient_sound/hub,
 /turf/open/floor/iron/dark/small,
@@ -27243,7 +27745,9 @@
 	},
 /area/new_sydney)
 "tZB" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/line/yellow/line/contrasted,
 /turf/open/floor/asphalt,
 /area/new_sydney)
@@ -27332,7 +27836,8 @@
 /area/new_sydney)
 "ubY" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 5
@@ -27448,7 +27953,9 @@
 	},
 /area/new_sydney)
 "ueJ" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
 	},
@@ -27588,10 +28095,12 @@
 /area/new_sydney/building)
 "ukf" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 1
+	dir = 1;
+	max_integrity = 5000
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /turf/open/floor/hay,
 /area/new_sydney/building)
@@ -27650,7 +28159,8 @@
 /area/new_sydney/bunker)
 "umP" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 8
@@ -27664,6 +28174,7 @@
 	dir = 4
 	},
 /obj/machinery/light/floor/broken,
+/obj/effect/decal/cleanable/glass,
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "une" = (
@@ -27825,7 +28336,8 @@
 /area/new_sydney)
 "usX" = (
 /obj/structure/deployable_barricade/metal/plasteel{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 8
@@ -27922,7 +28434,8 @@
 /area/new_sydney/building)
 "uuU" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new,
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -27950,6 +28463,10 @@
 /obj/effect/landmark/loot_spawn/food,
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
+"uwv" = (
+/obj/effect/landmark/forest_mutant_spawn/hyperzombie,
+/turf/open/misc/asteroid,
+/area/new_sydney)
 "uwy" = (
 /obj/effect/landmark/loot_spawn/treasure,
 /obj/effect/decal/cleanable/garbage{
@@ -28112,7 +28629,9 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
 "uDf" = (
-/obj/structure/barricade/security,
+/obj/structure/barricade/security{
+	max_integrity = 50000
+	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
@@ -28308,7 +28827,8 @@
 /area/new_sydney/dark_forest/building)
 "uIe" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -28359,7 +28879,8 @@
 /area/new_sydney/mine)
 "uIJ" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/structure/flora/bush/fullgrass/style_random,
 /turf/open/floor/grass,
@@ -28372,7 +28893,8 @@
 /area/new_sydney/building)
 "uJj" = (
 /obj/structure/fence/cut/large{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
@@ -28398,6 +28920,24 @@
 	},
 /obj/effect/decal/papers/two,
 /turf/open/indestructible/vault,
+/area/new_sydney)
+"uJV" = (
+/obj/structure/railing/platform{
+	dir = 1
+	},
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/obj/structure/barbed_wire{
+	pixel_y = 10
+	},
+/obj/structure/table/wood{
+	pixel_y = -15
+	},
+/obj/machinery/chem_dispenser/drinks{
+	pixel_y = -5
+	},
+/turf/open/floor/wood/birch,
 /area/new_sydney)
 "uJW" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -28799,7 +29339,8 @@
 /area/new_sydney/military_base)
 "vef" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/effect/turf_decal/siding/wood/oak{
 	dir = 5
@@ -29207,7 +29748,9 @@
 /turf/open/floor/grass,
 /area/new_sydney)
 "vrK" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
 	},
@@ -29456,7 +29999,9 @@
 	},
 /area/new_sydney)
 "vxI" = (
-/obj/structure/barricade/security,
+/obj/structure/barricade/security{
+	max_integrity = 50000
+	},
 /turf/open/misc/beach/sand,
 /area/new_sydney)
 "vxK" = (
@@ -29528,7 +30073,7 @@
 /area/new_sydney/mine)
 "vAj" = (
 /obj/machinery/door/airlock/multi_tile/public/glass,
-/turf/open/floor/plating,
+/turf/open/floor/iron/checker,
 /area/new_sydney)
 "vAn" = (
 /obj/structure/flora/tree/pine/dead1{
@@ -29674,7 +30219,9 @@
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "vGg" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest)
 "vGi" = (
@@ -29707,7 +30254,8 @@
 /area/new_sydney/dark_forest)
 "vGD" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 8
+	dir = 8;
+	max_integrity = 5000
 	},
 /obj/structure/chair/plastic{
 	dir = 4
@@ -29788,7 +30336,9 @@
 	},
 /area/new_sydney/dark_forest)
 "vJt" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/trimline/yellow/line,
 /turf/open/floor/asphalt,
 /area/new_sydney)
@@ -29822,6 +30372,9 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/wood/large/oak,
 /area/new_sydney/bunker)
+"vLx" = (
+/turf/open/floor/iron/checker,
+/area/new_sydney)
 "vLB" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
@@ -29859,7 +30412,7 @@
 /area/new_sydney)
 "vNI" = (
 /obj/structure/flora/tree/jungle/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -29877,7 +30430,8 @@
 /area/new_sydney/dark_forest)
 "vOR" = (
 /obj/structure/fence{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 8
@@ -30180,7 +30734,9 @@
 /turf/open/floor/asphalt,
 /area/new_sydney)
 "vYU" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
 	},
@@ -30246,7 +30802,8 @@
 /area/new_sydney/bunker)
 "wbR" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -30358,7 +30915,8 @@
 /area/new_sydney/building)
 "wgv" = (
 /obj/structure/deployable_barricade/metal{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
@@ -30514,7 +31072,9 @@
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 1
 	},
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
 "wmL" = (
@@ -30581,6 +31141,13 @@
 /obj/effect/landmark/loot_spawn/ammo,
 /turf/open/floor/pod,
 /area/new_sydney/mine)
+"wpf" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/forest_mutant_spawn/sand_spider,
+/turf/open/misc/asteroid/lowpressure{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
+/area/new_sydney)
 "wpl" = (
 /obj/effect/landmark/loot_spawn/medical,
 /turf/open/misc/asteroid/lowpressure{
@@ -30650,6 +31217,13 @@
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney)
+"wrQ" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 5
+	},
+/obj/effect/landmark/forest_mutant_spawn/hyperzombie,
+/turf/open/indestructible/vault,
+/area/new_sydney)
 "wsd" = (
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 10
@@ -30692,7 +31266,8 @@
 	dir = 4
 	},
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /turf/open/floor/grass,
 /area/new_sydney)
@@ -30735,7 +31310,7 @@
 	dir = 5
 	},
 /obj/structure/flora/rock/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
@@ -30747,7 +31322,7 @@
 /area/new_sydney/mine)
 "wvu" = (
 /obj/structure/flora/rock/style_random{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /turf/open/misc/asteroid/lowpressure{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
@@ -30762,11 +31337,11 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
 "wvV" = (
-/obj/item/storage/test_tube_rack,
 /obj/effect/landmark/loot_spawn/clothing,
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
+/obj/structure/rack,
 /turf/open/floor/wood,
 /area/new_sydney/building)
 "wwD" = (
@@ -30791,6 +31366,10 @@
 	dir = 1
 	},
 /area/new_sydney/bunker)
+"wxv" = (
+/obj/effect/landmark/forest_mutant_spawn/hyperzombie,
+/turf/open/floor/wood,
+/area/new_sydney/building)
 "wxB" = (
 /obj/structure/city_prop/streetlamp{
 	pixel_y = 15
@@ -31016,6 +31595,13 @@
 	icon_state = "floor4"
 	},
 /turf/open/floor/pod,
+/area/new_sydney)
+"wDR" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 8
+	},
+/obj/effect/landmark/forest_mutant_spawn/sand_spider,
+/turf/open/misc/asteroid,
 /area/new_sydney)
 "wEa" = (
 /obj/effect/turf_decal/siding/dark_blue/corner{
@@ -31458,7 +32044,9 @@
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "wVp" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 6
 	},
@@ -31569,7 +32157,8 @@
 /area/new_sydney/dark_forest)
 "wZP" = (
 /obj/machinery/door/poddoor/shutters{
-	dir = 4
+	dir = 4;
+	max_integrity = 50000
 	},
 /turf/open/floor/plating,
 /area/new_sydney/mine)
@@ -31902,6 +32491,24 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
 /area/new_sydney/dark_forest)
+"xlU" = (
+/obj/structure/railing/platform{
+	dir = 1
+	},
+/obj/structure/railing/unbreakable{
+	dir = 1
+	},
+/obj/structure/barbed_wire{
+	pixel_y = 10
+	},
+/obj/structure/table/wood{
+	pixel_y = -15
+	},
+/obj/machinery/chem_dispenser/drinks/beer{
+	pixel_y = -5
+	},
+/turf/open/floor/wood/birch,
+/area/new_sydney)
 "xlX" = (
 /obj/effect/turf_decal/board_number{
 	dir = 1
@@ -31955,7 +32562,9 @@
 /turf/open/floor/iron/dark/smooth_half,
 /area/new_sydney/bunker)
 "xnx" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 4
 	},
@@ -31998,7 +32607,9 @@
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest/building)
 "xop" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/floor/iron/small,
 /area/new_sydney)
 "xou" = (
@@ -32348,7 +32959,8 @@
 /area/new_sydney/dark_forest)
 "xBE" = (
 /obj/machinery/door/poddoor/shutters{
-	dir = 8
+	dir = 8;
+	max_integrity = 50000
 	},
 /turf/closed/indestructible/reinforced,
 /area/new_sydney)
@@ -32395,7 +33007,8 @@
 /area/new_sydney/bunker)
 "xCE" = (
 /obj/structure/deployable_barricade/metal/plasteel{
-	dir = 1
+	dir = 1;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 4
@@ -32542,7 +33155,7 @@
 /area/new_sydney)
 "xJt" = (
 /obj/structure/flora/tree/pine/pine3{
-	max_integrity = 1000
+	max_integrity = 50000
 	},
 /obj/effect/landmark/forest_mutant_spawn/hunter_spider,
 /turf/open/floor/grass/lavaland{
@@ -32571,7 +33184,8 @@
 /area/new_sydney/dark_forest/building)
 "xJN" = (
 /obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10
+	pixel_y = 10;
+	max_integrity = 50000
 	},
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 6
@@ -32859,7 +33473,9 @@
 /area/new_sydney/dark_forest)
 "xTu" = (
 /obj/effect/turf_decal/siding/thinplating_new,
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /turf/open/misc/asteroid,
 /area/new_sydney)
 "xTI" = (
@@ -33057,6 +33673,10 @@
 	},
 /turf/open/floor/pod,
 /area/new_sydney/mine)
+"xZN" = (
+/obj/structure/table_frame/wood,
+/turf/open/misc/beach/sand,
+/area/new_sydney)
 "yaE" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 10
@@ -33092,7 +33712,8 @@
 /area/new_sydney/dark_forest)
 "ycU" = (
 /obj/structure/railing/wooden_fencing{
-	dir = 4
+	dir = 4;
+	max_integrity = 5000
 	},
 /obj/structure/flora/bush/fullgrass/style_random,
 /obj/effect/turf_decal/siding/wood/oak{
@@ -33250,7 +33871,9 @@
 /turf/open/indestructible/rockyground,
 /area/new_sydney)
 "ykw" = (
-/obj/structure/barricade/sandbags,
+/obj/structure/barricade/sandbags{
+	max_integrity = 50000
+	},
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 4
 	},
@@ -37789,7 +38412,7 @@ bWc
 bWc
 llX
 jEj
-llX
+wpf
 bWc
 kcA
 bWc
@@ -38699,7 +39322,7 @@ llX
 bWc
 bWc
 bWc
-bWc
+sNP
 bWc
 bWc
 bWc
@@ -40205,7 +40828,7 @@ bWc
 bWc
 bWc
 bWc
-bWc
+sNP
 bWc
 llX
 wvu
@@ -40513,7 +41136,7 @@ llX
 bWc
 bWc
 bWc
-bWc
+sNP
 bWc
 bWc
 bWc
@@ -45666,7 +46289,7 @@ bWc
 bWc
 bWc
 kcA
-bWc
+sNP
 bWc
 bWc
 bWc
@@ -46568,6 +47191,7 @@ jEj
 llX
 bWc
 bWc
+sNP
 bWc
 bWc
 bWc
@@ -46575,8 +47199,7 @@ bWc
 bWc
 bWc
 bWc
-bWc
-bWc
+sNP
 bWc
 bWc
 bWc
@@ -47176,7 +47799,7 @@ bWc
 bWc
 bWc
 bWc
-bWc
+sNP
 bWc
 bWc
 kcA
@@ -51639,7 +52262,7 @@ bWc
 bWc
 idM
 bWc
-bWc
+sNP
 bWc
 bWc
 hqt
@@ -51939,7 +52562,7 @@ ktY
 bWc
 bWc
 idM
-idM
+bup
 idM
 bWc
 bWc
@@ -52546,7 +53169,7 @@ bWc
 idM
 idM
 idM
-bWc
+sNP
 bWc
 hqt
 rbL
@@ -53146,7 +53769,7 @@ ktY
 bWc
 bWc
 bWc
-bWc
+sNP
 bWc
 idM
 bWc
@@ -57705,7 +58328,7 @@ bWc
 bWc
 bWc
 bWc
-bWc
+sNP
 bWc
 bWc
 bWc
@@ -58004,7 +58627,7 @@ ktY
 ktY
 ktY
 ktY
-bWc
+sNP
 bWc
 bWc
 bWc
@@ -58907,7 +59530,7 @@ lFI
 bWc
 bWc
 idM
-bWc
+sNP
 bWc
 bWc
 bWc
@@ -59213,7 +59836,7 @@ idM
 idM
 bWc
 bWc
-bWc
+sNP
 bWc
 bWc
 bWc
@@ -65596,8 +66219,8 @@ qhH
 qhH
 qhH
 rcH
-aKP
-aKP
+mYj
+taw
 kQk
 nhh
 kQk
@@ -67683,8 +68306,8 @@ krx
 qGI
 qGI
 wHj
-wHj
-wHj
+rXl
+eyp
 wHj
 wHj
 wHj
@@ -69789,7 +70412,7 @@ kmZ
 kmZ
 cJo
 lui
-vdS
+boC
 vWN
 kmZ
 lRy
@@ -70379,7 +71002,7 @@ rbL
 vyx
 vEi
 tDS
-bUO
+mAf
 ihD
 vEi
 vyx
@@ -70417,7 +71040,7 @@ pMJ
 mgZ
 vQy
 vQy
-vQy
+bet
 vQy
 mgZ
 vQy
@@ -70984,7 +71607,7 @@ vyx
 vEi
 fRM
 cJo
-cJo
+hNE
 tVt
 saM
 idM
@@ -71337,7 +71960,7 @@ hOT
 aKP
 aKP
 jNM
-jNM
+pIW
 aKP
 aKP
 aKP
@@ -71596,7 +72219,7 @@ ivD
 mOM
 alx
 dFa
-rJt
+eoG
 bVX
 kmZ
 cJo
@@ -71610,7 +72233,7 @@ mgE
 mgE
 kmZ
 stv
-iZZ
+hpX
 oTz
 bIy
 lwl
@@ -71902,7 +72525,7 @@ rJt
 slT
 uWr
 cJo
-cJo
+wxv
 iVH
 iVH
 kmZ
@@ -72795,7 +73418,7 @@ rbL
 vyx
 vEi
 xqk
-uto
+inE
 mlv
 uto
 rrv
@@ -74954,16 +75577,16 @@ rcZ
 bIy
 dwe
 qhH
-qhH
+mRn
 rva
 qhH
-hOT
+uJV
+kIp
+tfP
 aKP
 aKP
 aKP
-aKP
-aKP
-aKP
+kpz
 kQk
 kQk
 kQk
@@ -75244,7 +75867,7 @@ dFa
 mOM
 dFa
 rJt
-lwl
+jnI
 lwl
 vAj
 rcZ
@@ -75259,10 +75882,10 @@ qhH
 qhH
 ofu
 qhH
-hOT
-aKP
-aKP
-aKP
+xlU
+kIp
+jGP
+pav
 mXY
 mXY
 aKP
@@ -75548,7 +76171,7 @@ dFa
 rJt
 lwl
 lwl
-qyS
+vLx
 rcZ
 rcZ
 rcZ
@@ -75561,9 +76184,9 @@ lcW
 qhH
 ewE
 qhH
-hOT
-aKP
-aKP
+kHV
+kIp
+nzW
 aKP
 wlC
 aKP
@@ -77022,7 +77645,7 @@ bxs
 eAi
 vyx
 vEi
-qSV
+dJB
 sjo
 cJo
 vqY
@@ -77628,7 +78251,7 @@ vyx
 vEi
 fRM
 eWh
-cJo
+asf
 vEi
 ygB
 vyx
@@ -77929,7 +78552,7 @@ rbL
 wem
 vEi
 fRM
-cJo
+wxv
 ihD
 tVt
 wem
@@ -78160,8 +78783,8 @@ dHI
 ykK
 onY
 ykK
-rqA
-cTX
+phN
+nKT
 wdL
 fHq
 ttD
@@ -78231,7 +78854,7 @@ rbL
 vyx
 vEi
 cJo
-cJo
+hNE
 oZl
 tVt
 vyx
@@ -78244,7 +78867,7 @@ rJt
 gVz
 kmZ
 cJo
-ihD
+mZD
 ntL
 tAk
 kmZ
@@ -78555,7 +79178,7 @@ edW
 mpc
 lLS
 ovP
-vQy
+bet
 lse
 vQy
 ovP
@@ -79189,7 +79812,7 @@ rcH
 aKP
 aKP
 aKP
-aKP
+eEQ
 aKP
 aKP
 aKP
@@ -80273,7 +80896,7 @@ hlm
 vIB
 ykK
 pbK
-ykK
+oUg
 ykK
 onY
 ykK
@@ -80384,7 +81007,7 @@ kmZ
 ihD
 cJo
 rtt
-opA
+thC
 vKb
 cJo
 ihD
@@ -80399,7 +81022,7 @@ wlx
 kIp
 kIp
 kIp
-kIp
+gsL
 jra
 aKP
 aKP
@@ -81301,7 +81924,7 @@ qhH
 mjN
 hOT
 aKP
-aKP
+jWn
 aKP
 ufd
 vxI
@@ -81906,7 +82529,7 @@ qhH
 rcH
 aKP
 aKP
-aKP
+taw
 ufd
 vxI
 wnI
@@ -82203,7 +82826,7 @@ cJo
 tVt
 pxM
 qhH
-qhH
+cIM
 qhH
 rcH
 aKP
@@ -82511,10 +83134,10 @@ rcH
 aKP
 eyL
 aKP
+mYj
 aKP
 aKP
-aKP
-aKP
+jWn
 aKP
 obV
 jcZ
@@ -82783,7 +83406,7 @@ vQy
 vQy
 wBj
 wAK
-bpC
+mZJ
 iDd
 bIy
 cPG
@@ -84624,7 +85247,7 @@ qhH
 hOT
 aKP
 aKP
-aKP
+nhv
 aKP
 aKP
 aKP
@@ -85193,7 +85816,7 @@ rhx
 uoC
 nui
 dFe
-ltc
+dFe
 aax
 sOg
 sOg
@@ -85225,9 +85848,9 @@ dkY
 qhH
 kHx
 qhH
-hOT
+dux
 aKP
-nhv
+rfw
 aKP
 ufd
 vxI
@@ -85514,7 +86137,7 @@ rfC
 mgE
 uem
 uQF
-dFa
+vbP
 mOM
 alx
 dFa
@@ -85529,8 +86152,8 @@ qhH
 qhH
 rcH
 aKP
-aKP
-aKP
+xZN
+xBT
 ufd
 vxI
 gbd
@@ -85831,7 +86454,7 @@ apZ
 qhH
 rcH
 aKP
-aKP
+rwa
 aKP
 ufd
 vxI
@@ -87602,7 +88225,7 @@ lrV
 mZU
 alx
 hxn
-jXe
+wrQ
 njo
 bni
 bni
@@ -87925,7 +88548,7 @@ xvM
 kUu
 mgE
 wFW
-mgE
+pid
 wFW
 mgE
 xRx
@@ -89451,7 +90074,7 @@ cJo
 cJo
 dkY
 qhH
-qhH
+cIM
 qhH
 rcH
 aKP
@@ -90364,7 +90987,7 @@ aKP
 aKP
 jra
 aKP
-aKP
+kpz
 aKP
 aKP
 aKP
@@ -94589,7 +95212,7 @@ wUc
 gme
 hOT
 aKP
-aKP
+nhv
 aKP
 kQk
 aKP
@@ -95797,7 +96420,7 @@ bxs
 qhH
 rcH
 aKP
-nhv
+aKP
 aKP
 aKP
 aKP
@@ -96663,7 +97286,7 @@ bxs
 uJB
 bxs
 bxs
-bxs
+uwv
 bxs
 bxs
 bxs
@@ -101821,7 +102444,7 @@ mAa
 alx
 dFa
 hLf
-bxs
+bkF
 bxs
 bxs
 bxs
@@ -103032,7 +103655,7 @@ alx
 alx
 alx
 alx
-alx
+rji
 alx
 alx
 alx
@@ -103935,7 +104558,7 @@ lzS
 alx
 dFa
 hLf
-bxs
+bkF
 bxs
 bxs
 bxs
@@ -107538,7 +108161,7 @@ ltC
 nlN
 nlN
 nlN
-nlN
+wDR
 nlN
 nlN
 nlN
@@ -108145,7 +108768,7 @@ pAn
 pAn
 pAn
 pAn
-pAn
+rJD
 pAn
 pAn
 pAn
@@ -108175,7 +108798,7 @@ utw
 utw
 rPd
 gGk
-kOg
+ltc
 ldY
 kOg
 kOg
@@ -108441,7 +109064,7 @@ bxs
 gvq
 bxs
 bxs
-bxs
+bkF
 bxs
 bxs
 bxs
@@ -109048,7 +109671,7 @@ bxs
 bxs
 bxs
 bxs
-ktY
+lLN
 ktY
 ktY
 ktY

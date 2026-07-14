@@ -57,6 +57,7 @@ GLOBAL_LIST_INIT(raid_areas, list(
 	var/obj/effect/landmark/raid_extract/L = pick(GLOB.raid_extract_landmarks)
 	if(L)
 		forceMove(get_turf(L))
+	do_sparks(1, FALSE, death_turf)
 	fully_heal()
 	regenerate_icons()
 	playsound_local(src, 'sound/effects/magic/blink.ogg', 25, TRUE)
