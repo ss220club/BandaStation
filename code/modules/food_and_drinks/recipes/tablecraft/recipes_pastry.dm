@@ -691,7 +691,7 @@
 		/obj/item/food/butterslice = 1
 	)
 	result = /obj/item/food/raw_brownie_batter
-	added_foodtypes = GRAIN|JUNKFOOD|BREAKFAST|SUGAR
+	added_foodtypes = GRAIN|JUNKFOOD|SUGAR
 	removed_foodtypes = MEAT|RAW|EGG
 	meal_category = MEAL_COMPONENT
 
@@ -706,7 +706,7 @@
 		/obj/item/food/butterslice = 1
 	)
 	result = /obj/item/food/peanut_butter_brownie_batter
-	added_foodtypes = GRAIN|JUNKFOOD|BREAKFAST|SUGAR|NUTS
+	added_foodtypes = GRAIN|JUNKFOOD|SUGAR|NUTS
 	removed_foodtypes = MEAT|RAW|EGG
 	meal_category = MEAL_COMPONENT
 
@@ -761,3 +761,14 @@
 	)
 	result = /obj/item/food/cookie/macaron
 	dish_category = DISH_COOKIE
+
+/datum/crafting_recipe/food/apple_fritter
+	name = "Apple fritter"
+	reqs = list(
+		/obj/item/food/pastrybase = 1,
+		/obj/item/food/appleslice = 1,
+	)
+	result = /obj/item/food/apple_fritter
+	added_foodtypes = GRAIN|FRUIT|FRIED|BREAKFAST
+	dish_category = DISH_PASTRY
+	meal_category = MEAL_BREAKFAST

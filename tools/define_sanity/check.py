@@ -4,7 +4,7 @@ import os
 import re
 import sys
 
-parent_directory = "code/**/*.dm"
+parent_directory = "*/**/*.dm"
 
 output_file_name = "define_sanity_output.txt"
 how_to_fix_message = "Please #undef the above defines or remake them as global defines in the code/__DEFINES directory."
@@ -34,8 +34,13 @@ excluded_files = [
     "code/__DEFINES/*.dm",
     "code/__HELPERS/*.dm",
     "code/_globalvars/*.dm",
+    # BANDASTATION EDIT: modular code include tree
+    "modular_bandastation/*.dm",
+    "modular_bandastation/**/*.dm",
     # TGS files come from another repository so lets not worry about them.
     "code/modules/tgs/**/*.dm",
+    # Doesn't come with the repo, but is in CI.
+    "DMCompiler_linux-x64/*.dm",
 ]
 
 define_regex = re.compile(r"(\s+)?#define\s?([A-Z0-9_]+)\(?(.+)\)?")

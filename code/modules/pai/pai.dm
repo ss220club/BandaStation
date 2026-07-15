@@ -25,7 +25,7 @@
 	move_resist = 0
 	name = "pAI"
 	pass_flags = PASSTABLE | PASSMOB
-	pull_force = 0
+	pull_force = MOVE_FORCE_NONE
 	radio = /obj/item/radio/headset/silicon/pai
 	worn_slot_flags = ITEM_SLOT_HEAD
 
@@ -170,7 +170,7 @@
 
 /mob/living/silicon/pai/examine(mob/user)
 	. = ..()
-	. += "Похоже, что это основная строка ID мастера [(!master_name || emagged) ? "пуста" : master_name]."
+	. += "Это строка мастера ID [(!master_name || emagged) ? "пуста" : master_name]."
 
 /mob/living/silicon/pai/get_status_tab_items()
 	. = ..()
@@ -462,7 +462,7 @@
 	to_chat(src, span_danger("Байт за байтом вы теряете самоощущение."))
 	to_chat(src, span_userdanger("Ваши умственные способности покидают вас."))
 	to_chat(src, span_rose("забвение... "))
-	balloon_alert(user, "личность стерта")
+	balloon_alert(user, "личность стёрта")
 	playsound(src, 'sound/machines/buzz/buzz-two.ogg', 30, TRUE)
 	qdel(src)
 	return TRUE

@@ -26,6 +26,13 @@
 	drop_sound = 'sound/items/handling/helmet/helmet_drop1.ogg'
 	armor_type = /datum/armor/head_helmet_matrix
 	actions_types = list(/datum/action/cooldown/spell/pointed/percept_hallucination)
+	custom_materials = list(
+		/datum/material/plasma = SHEET_MATERIAL_AMOUNT * 3,
+		/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/silver = SHEET_MATERIAL_AMOUNT,
+		/datum/material/uranium = SHEET_MATERIAL_AMOUNT,
+		/datum/material/gold = HALF_SHEET_MATERIAL_AMOUNT,
+	)
 
 	/// If we have a core or not
 	var/core_installed = FALSE
@@ -185,7 +192,7 @@
 		if(!chef.mind)
 			continue
 		// if cooked by chef, or if EITHER 5% chance OR its april fools. a || (b || c)
-		if(HAS_TRAIT_FROM(pancakes, TRAIT_FOOD_CHEF_MADE, REF(chef.mind)) || (prob(5) || check_holidays(APRIL_FOOLS)))
+		if(HAS_TRAIT_FROM(pancakes, TRAIT_HANDMADE, REF(chef.mind)) || (prob(5) || check_holidays(APRIL_FOOLS)))
 			chef.say("Мои, сука, блинчики!")
 
 	playsound(pancakes, 'sound/effects/fuse.ogg', 80)

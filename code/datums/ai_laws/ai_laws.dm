@@ -171,7 +171,7 @@ GLOBAL_VAR(round_default_lawset)
 /datum/ai_laws/pai
 	name = "pAI Directives"
 	zeroth = ("Служи своему мастеру.")
-	supplied = list("None.")
+	supplied = list("Отсутствуют.")
 
 /datum/ai_laws/custom //Defined in silicon_laws.txt
 	name = "Default Silicon Laws"
