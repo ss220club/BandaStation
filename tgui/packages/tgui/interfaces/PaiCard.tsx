@@ -224,7 +224,7 @@ const PaiOptions = (props) => {
             </Stack.Item>
           </Stack>
         </LabeledList.Item>
-        <LabeledList.Item label="Передать">
+        <LabeledList.Item label="Передача">
           <Button
             icon={transmit ? 'toggle-on' : 'toggle-off'}
             onClick={() => act('toggle_radio', { option: 'transmit' })}
@@ -233,7 +233,7 @@ const PaiOptions = (props) => {
             Переключить
           </Button>
         </LabeledList.Item>
-        <LabeledList.Item label="Получить">
+        <LabeledList.Item label="Получение">
           <Button
             icon={receive ? 'toggle-on' : 'toggle-off'}
             onClick={() => act('toggle_radio', { option: 'receive' })}
