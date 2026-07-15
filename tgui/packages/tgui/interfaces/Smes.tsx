@@ -232,7 +232,7 @@ export const Smes = () => {
                 </Stack.Item>
               </Stack>
             </LabeledList.Item>
-            <LabeledList.Item label="Выработка">
+            <LabeledList.Item label="Текущий вывод">
               {formatPower(outputUsed)}
             </LabeledList.Item>
           </LabeledList>
