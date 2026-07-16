@@ -397,3 +397,168 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	loot_table = list(/obj/item/artifact/stone_eye = 100)
 	max_items = 1
 	spawn_chance = 50
+
+/obj/structure/loot
+	name = "trash bags"
+	desc = "A collection of trash. Incomplete without you."
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "trashbags_1"
+	var/searched = FALSE
+	var/random_appearence = TRUE
+	var/loot_chance = 35
+	var/loot_amount = 1
+	var/unsanitary = TRUE
+	var/loot_type = /obj/effect/spawner/random/trash/garbage
+	var/good_loot_type = /obj/effect/spawner/random/trash/garbage
+	var/good_loot_chance = 25
+	var/reset_cooldown_period = 15 MINUTES
+
+/obj/structure/loot/proc/reset_loot()
+	searched = FALSE
+
+/obj/structure/loot/trash/garbage
+	name = "trash bags"
+	desc = "A collection of trash. Incomplete without you."
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "trashbags_1"
+
+/obj/structure/loot/trash/garbage/Initialize(mapload)
+	. = ..()
+	if(random_appearence)
+		icon_state = pick("trashbags_1","trashbags_2","trashbags_3","trashbags_4","trashbags_5","trashbags_6")
+
+/obj/structure/loot/attack_hand_secondary(mob/living/user, list/modifiers)
+	. = ..()
+	if(!user.can_perform_action(src, NEED_DEXTERITY))
+		return
+	if(searched)
+		user.visible_message(span_notice("[user] examines [src], before turning away."), \
+			span_notice("The [src] have already been searched."))
+		return
+	user.visible_message(span_notice("[user] begins to sift through the [src] for anything useful."), \
+		span_notice("You begin to dig through the [src] for something interesting."))
+	if(do_after(user, 7 SECONDS, src))
+		if(prob(loot_chance))
+			user.visible_message(span_notice("[user] finds something inside the [src]."), \
+				span_notice("You find something interesting inside the [src]."))
+			if(prob(good_loot_chance))
+				new good_loot_type(loc, loot_amount)
+			else
+				new loot_type(loc, loot_amount)
+		else
+			if(prob(40))
+				new /obj/effect/spawner/random/trash/garbage(loc, rand(1,2))
+				user.visible_message(span_notice("[user] finds something inside the [src]."), \
+				span_notice("Just some scrap, garbage, and other bits."))
+			else
+				user.visible_message(span_notice("[user] finds nothing inside the [src]."), \
+					span_notice("Nothing good..."))
+		searched = TRUE;
+		addtimer(CALLBACK(src, PROC_REF(reset_loot)), reset_cooldown_period)
+
+/obj/structure/loot/trash/garbage/dumpster
+	name = "dumpster"
+	desc = "A large green dumpster, full of goodies."
+	icon_state = "dumpster"
+	density = TRUE
+	anchored = TRUE
+	random_appearence = FALSE
+	loot_chance = 80
+
+/obj/structure/loot/technical_crate
+	name = "large wooden crate"
+	icon = 'modular_bandastation/voyaker_events/icons/crates.dmi'
+	desc = "Большой деревянный складской ящик. Возможно в нем хранится что-то полезное."
+	icon_state = "wood_crate"
+	loot_type = /obj/effect/landmark/loot_spawn/technical
+	good_loot_type = /obj/effect/landmark/loot_spawn/information
+	random_appearence = FALSE
+
+/obj/structure/loot/technical_crate/small
+	name = "wooden crate"
+	desc = "Деревянный складской ящик. Возможно в нем хранится что-то полезное."
+	icon_state = "plain_crate"
+
+/obj/structure/loot/technical_crate/metal
+	name = "metal crate"
+	desc = "Металический складской ящик. Возможно в нем хранится что-то полезное."
+	icon_state = "aluminum"
+
+/obj/structure/loot/technical_crate/metal/red
+	icon_state = "red"
+
+/obj/structure/loot/army_crate
+	name = "military crate"
+	icon = 'modular_bandastation/voyaker_events/icons/crates.dmi'
+	desc = "Военный ящик для хранения. Возможно в нем хранится что-то полезное."
+	icon_state = "army"
+	loot_type = /obj/effect/landmark/loot_spawn/ammo
+	good_loot_type = /obj/effect/landmark/loot_spawn/weapon
+	random_appearence = FALSE
+
+/obj/structure/loot/army_crate/gray
+	name = "unmarked military crate"
+	desc = "Военный ящик для хранения. Возможно в нем хранится что-то полезное."
+	icon_state = "aluminum"
+
+/obj/structure/loot/army_crate/red
+	name = "red military crate"
+	desc = "Военный ящик для хранения. Возможно в нем хранится что-то полезное."
+	icon_state = "red"
+
+/obj/structure/loot/army_crate/alt
+	name = "military crate"
+	icon = 'icons/obj/storage/crates.dmi'
+	icon_state = "weaponcrate"
+
+/obj/structure/loot/army_crate/alt/brown
+	icon_state = "plasmacrate"
+
+/obj/structure/loot/footlocker
+	name = "footlocker"
+	icon = 'modular_bandastation/voyaker_events/icons/crates.dmi'
+	desc = "Ящик для хранения личных вещей. Возможно в нем хранится что-то полезное."
+	icon_state = "footlocker"
+	loot_type = /obj/effect/landmark/loot_spawn/clothing
+	good_loot_type = /obj/effect/landmark/loot_spawn/treasure
+	random_appearence = FALSE
+
+/obj/structure/loot/shelf
+	name = "shelf"
+	desc = "A sturdy wooden shelf to store a variety of items on."
+	icon = 'modular_bandastation/voyaker_events/icons/furniture.dmi'
+	icon_state = "shelf_1"
+	loot_type = /obj/effect/landmark/loot_spawn/food
+	good_loot_type = /obj/effect/landmark/loot_spawn/treasure
+
+/obj/structure/loot/shelf/Initialize(mapload)
+	. = ..()
+	if(random_appearence)
+		icon_state = pick("shelf_1","shelf_2","shelf_3","shelf_4","shelf_5","shelf_6","shelf_7","shelf_8","shelf_9","shelf_10","shelf_11")
+
+/obj/structure/loot/long_shelf_metal
+	name = "long metal shelf"
+	desc = "A sturdy metal shelf to store a variety of items on."
+	icon = 'modular_bandastation/voyaker_events/icons/supermart.dmi'
+	icon_state = "longrack_1"
+	loot_type = /obj/effect/landmark/loot_spawn/food
+	good_loot_type = /obj/effect/landmark/loot_spawn/treasure
+
+/obj/structure/loot/long_shelf_metal/Initialize(mapload)
+	. = ..()
+	if(random_appearence)
+		icon_state = pick("longrack1","longrack2","longrack3","longrack4","longrack5","longrack6","longrack7")
+
+/obj/structure/loot/file_cabinet
+	name = "file cabinet"
+	desc = "A sturdy metal cabinet to store a variety of documents."
+	icon = 'modular_bandastation/voyaker_events/icons/cabinets.dmi'
+	icon_state = "filing_cabinet"
+	loot_type = /obj/effect/landmark/loot_spawn/information
+	good_loot_type = /obj/effect/landmark/loot_spawn/treasure
+	random_appearence = FALSE
+
+/obj/structure/loot/file_cabinet/small
+	name = "small file cabinet"
+	desc = "A sturdy small metal cabinet to store a variety of documents."
+	icon_state = "filing_cabinet_small"
