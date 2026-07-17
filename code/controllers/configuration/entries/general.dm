@@ -103,6 +103,9 @@
 /// log game events
 /datum/config_entry/flag/log_game
 
+/// log minimap drawing events
+/datum/config_entry/flag/log_minimap_drawing
+
 /// log mech data
 /datum/config_entry/flag/log_mecha
 
@@ -808,3 +811,6 @@
 
 /datum/config_entry/string/policy_json_path
 	default = "policy.json"
+
+/datum/config_entry/number_list/ignored_cids
+	default = list()

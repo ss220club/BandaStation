@@ -189,7 +189,7 @@
 			return
 
 	if(last_shopper != REF(user) || purchase_message_cooldown < world.time)
-		var/vend_response = vend_reply || "Thank you for shopping with [src]!"
+		var/vend_response = vend_reply || "Благодарим за использование [replacetext(src.name, "\improper ", "")]!"
 		speak(vend_response)
 		purchase_message_cooldown = world.time + 5 SECONDS
 		//This is not the best practice, but it's safe enough here since the chances of two people using a machine with the same ref in 5 seconds is fuck low
@@ -204,11 +204,14 @@
 
 	if(greyscale_colors)
 		vended_item.set_greyscale(colors=greyscale_colors)
-	if(IsReachableBy(user) && user.put_in_hands(vended_item))
+
+	var/sigreturn = SEND_SIGNAL(user, COMSIG_MOB_VENDING_PURCHASE, src, vended_item)
+	if(!(sigreturn & VENDING_NO_PICKUP) && IsReachableBy(user) && user.put_in_hands(vended_item))
 		to_chat(user, span_notice("You take [item_record.name] out of the slot."))
 		vended_item.do_pickup_animation(user, src)
 	else
 		to_chat(user, span_warning("[capitalize(format_text(item_record.name))] falls onto the floor!"))
+
 	SSblackbox.record_feedback("nested tally", "vending_machine_usage", 1, list("[type]", "[item_record.product_path]"))
 
 /**

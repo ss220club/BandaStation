@@ -30,16 +30,20 @@
 /datum/mind/proc/remove_antag_datum(datum_type)
 	if(!datum_type)
 		return
-	var/datum/antagonist/A = has_antag_datum(datum_type)
-	if(A)
-		A.on_removal()
-		current?.log_message("has lost antag datum [A.name]([A.type]).", LOG_GAME)
-		return TRUE
+	var/datum/antagonist/antag = has_antag_datum(datum_type)
+	if(isnull(antag))
+		return
+
+	antag.on_removal()
+	qdel(antag)
+	current?.log_message("has lost antag datum [antag] ([antag.type]).", LOG_GAME)
+	return TRUE
 
 /datum/mind/proc/remove_all_antag_datums() //For the Lazy amongst us.
-	for(var/a in antag_datums)
-		var/datum/antagonist/A = a
-		A.on_removal()
+	for(var/datum/antagonist/antag as anything in antag_datums)
+		antag.on_removal()
+		qdel(antag)
+
 	current?.log_message("has lost all antag datums.", LOG_GAME)
 
 /datum/mind/proc/has_antag_datum(datum_type, check_subtypes = TRUE)
@@ -201,7 +205,7 @@
 
 	if(creator.is_antag())
 		message_admins("[ADMIN_LOOKUPFLW(current)] has been created by [ADMIN_LOOKUPFLW(creator)], an antagonist.")
-		to_chat(current, span_userdanger("Despite your creator's current allegiances, your true master remains [creator.real_name]. If their loyalties change, so do yours. This will never change unless your creator's body is destroyed."))
+		to_chat(current, span_userdanger("Несмотря на текущие убеждения вашего создателя, вашим истинным хозяином остаётся [creator.real_name]. Если его верность сменит сторону, ваша сменится вслед за ней. Это правило останется неизменным до тех пор, пока тело вашего создателя не будет уничтожено."))
 
 /datum/mind/proc/get_all_objectives()
 	var/list/all_objectives = list()

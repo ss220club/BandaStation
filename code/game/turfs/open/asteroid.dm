@@ -182,6 +182,7 @@ GLOBAL_LIST_EMPTY(dug_up_basalt)
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	planetary_atmos = TRUE
 	baseturfs = /turf/open/lava/smooth/lava_land_surface
+	skip_minimap_rendering = TRUE
 
 /// Used for the lavaland icemoon ruin.
 /turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins
@@ -232,6 +233,8 @@ GLOBAL_LIST_EMPTY(dug_up_basalt)
 	layer = MID_TURF_LAYER
 	floor_variance = 0
 	transform = MAP_SWITCH(TRANSLATE_MATRIX(-8, -8), matrix())
+	smooth_broken = TRUE
+	has_floor_variance = FALSE
 	/// DMI used by unsmoothed turfs for variance
 	var/variant_dmi = null
 	/// Amount of variants this turf has
@@ -257,6 +260,12 @@ GLOBAL_LIST_EMPTY(dug_up_basalt)
 	if(!smoothing_flags)
 		return
 	underlay_appearance.transform = transform
+
+/turf/open/misc/asteroid/basalt/smooth/refill_dug()
+	dug = FALSE
+	broken = FALSE
+	set_smoothed_icon_state(smoothing_junction)
+	update_appearance()
 
 /turf/open/misc/asteroid/basalt/smooth/siderite
 	name = "siderite floor"
@@ -393,6 +402,7 @@ GLOBAL_LIST_EMPTY(dug_up_basalt)
 	baseturfs = /turf/open/openspace/icemoon
 	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
 	slowdown = 0
+	skip_minimap_rendering = TRUE
 
 /// Exact subtype as parent, just used in ruins to prevent other ruins/chasms from spawning on top of it.
 /turf/open/misc/asteroid/snow/icemoon/do_not_chasm
@@ -469,6 +479,7 @@ GLOBAL_LIST_EMPTY(dug_up_basalt)
 	base_icon_state = "moon"
 	floor_variance = 40
 	dig_result = /obj/item/stack/ore/glass/basalt
+	initial_gas_mix = MOONBASE19_ATMOS
 
 /turf/open/misc/asteroid/moon/dug //When you want one of these to be already dug.
 	dug = TRUE
