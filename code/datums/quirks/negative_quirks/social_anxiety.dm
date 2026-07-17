@@ -75,7 +75,7 @@
 		else
 			to_chat(quirk_holder, span_warning("Вы думаете, что это не добавит ничего нового к разговору, и решаете не говорить об этом."))
 			if(prob(min(20, (0.20 * moodmod)))) //Max 20% chance of silence stacks after successful not talking roll
-				to_chat(quirk_holder, span_danger("Вы уходите в себя. Вы <i>действительно<i> не настроены на разговор."))
+				to_chat(quirk_holder, span_danger("Вы уходите в себя. Вы <i>действительно</i> не настроены на разговор."))
 				quirk_holder.set_silence_if_lower(6 SECONDS)
 
 		speech_args[SPEECH_MESSAGE] = pick("Э-э-эм.","Эмм.","Ам.", "Ммм.", "Х-э-эм.", "Ну.", "Ой.", "Простите.", "Извините.")
