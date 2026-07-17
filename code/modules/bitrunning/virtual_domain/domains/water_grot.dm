@@ -23,10 +23,7 @@
 	desc = "Воронка на поверхности воды, затягивающая в пучину всё, что приближается."
 	icon = 'modular_bandastation/turfs/icons/water.dmi'
 	icon_state = "whirlpool"
-	anchored = TRUE
-	density = FALSE
 	layer = ABOVE_OPEN_TURF_LAYER
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/effect/abstract/whirlpool/Initialize(mapload)
 	. = ..()
@@ -41,5 +38,3 @@
 	icon_state = "mist"
 	layer = FLY_LAYER
 	plane = ABOVE_GAME_PLANE
-	anchored = TRUE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
