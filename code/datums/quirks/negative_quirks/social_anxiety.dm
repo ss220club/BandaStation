@@ -53,11 +53,12 @@
 		var/list/message_split = splittext(message, " ")
 		var/list/new_message = list()
 		for(var/word in message_split)
-			if(prob(max(33, moodmod)) && word != message_split[1]) //Minimum 1/3 chance of filler
+			if(word && prob(max(33, moodmod)) && word != message_split[1]) //Minimum 1/3 chance of filler
 				var/stuttering = ""
-				var/stutter_len = max(1, rand(1, round(length(word) / 3)))
+				var/first_char = copytext_char(word, 1, 2)
+				var/stutter_len = max(1, rand(1, max(1, round(length_char(word) / 3))))
 				for(var/i in 1 to stutter_len)
-					stuttering += word[1] + "-"
+					stuttering += first_char + "-"
 				new_message += (stuttering + word)
 			else
 				new_message += word
