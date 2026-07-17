@@ -81,6 +81,13 @@ GLOBAL_LIST_INIT(stacked_metabolization_effect, init_chemical_side_effects())
 
 	return reagent_list
 
+/proc/check_recipe_for_conflicts(datum/chemical_reaction/reaction, list/reaction_lookup)
+	for(var/x in reaction.required_reagents)
+		for(var/datum/chemical_reaction/competitor in reaction_lookup[x])
+			if(chem_recipes_do_conflict(competitor, reaction))
+				return TRUE
+	return FALSE
+
 /**
  * Chemical Reactions - Initialises all /datum/chemical_reaction into a list
  * It is filtered into multiple lists within a list.
@@ -108,54 +115,44 @@ GLOBAL_LIST_INIT(stacked_metabolization_effect, init_chemical_side_effects())
 
 	var/list/datum/chemical_reaction/reactions = list()
 	for(var/datum/chemical_reaction/reaction as anything in paths)
-		if(!ispath(reaction, /datum/chemical_reaction/randomized))
+		if(ispath(reaction, /datum/chemical_reaction/randomized))
+			reaction = new reaction(LAZYACCESS(json, "[reaction]"))
+		else
 			reaction = new reaction
-		reactions += reaction
-
+		if(!QDELETED(reaction)) // in case random recipe generation fail
+			reactions += reaction
 	// Ok so we're gonna do a thingTM here
 	// I want to distribute all our reactions such that each reagent id links to as few as possible
 	// I get the feeling there's a canonical way of doing this, but I don't know it
 	// So instead, we're gonna wing it
 	var/list/reagent_to_react_count = list()
 	for(var/datum/chemical_reaction/reaction as anything in reactions)
-		if(!ispath(reaction, /datum/chemical_reaction/randomized))
+		if(!istype(reaction, /datum/chemical_reaction/randomized))
 			for(var/reagent_id in reaction.required_reagents)
 				reagent_to_react_count[reagent_id] += 1
 
-	var/randomized_reaction_retry_attempts = 0
 	var/list/reaction_lookup = GLOB.chemical_reactions_list_reactant_index
 	// Create filters based on a random reagent id in the required reagents list - this is used to speed up handle_reactions()
 	// Basically, we only really need to care about ONE reagent, at least when initially filtering, since any others are ignorable
 	// Doing this separately because it relies on the loop above, and this is easier to parse
 	for(var/datum/chemical_reaction/reaction as anything in reactions)
 		//check for collisions
-		if(ispath(reaction, /datum/chemical_reaction/randomized))
-			var/target_path = reaction
-			var/index = reactions.Find(reaction)
-			reaction = new target_path(json)
+		if(istype(reaction, /datum/chemical_reaction/randomized))
+			var/datum/chemical_reaction/randomized/random_reaction = reaction
+			var/retry_attempts = 0
+			while(check_recipe_for_conflicts(random_reaction, reaction_lookup))
+				if(retry_attempts >= MAX_RANDOMIZED_REACTION_RETRY_ATTEMPTS || !random_reaction.generate_recipe())
+					reactions -= reaction
+					qdel(reaction)
+					break
+				retry_attempts++
 
-			//failed to init
+			// log results
 			if(QDELETED(reaction))
-				reactions -= target_path
+				log_game("Couldn't regenerate [reaction] due to conflicts in [retry_attempts] attempts.")
 				continue
-
-			//failed to resolve so retry
-			outer:
-				for(var/x in reaction.required_reagents)
-					for(var/datum/chemical_reaction/R in reaction_lookup[x])
-						if(chem_recipes_do_conflict(R, reaction))
-							reactions -= target_path
-							QDEL_NULL(reaction)
-							if(randomized_reaction_retry_attempts < MAX_RANDOMIZED_REACTION_RETRY_ATTEMPTS)
-								reactions += target_path
-								randomized_reaction_retry_attempts += 1
-							break outer
-
-			//add to list
-			if(!reaction)
-				continue
-			else
-				reactions[index] = reaction
+			else if(retry_attempts > 0)
+				log_game("Regenerated [reaction] due to conflicts in [retry_attempts] attempts.")
 
 		var/preferred_id = null
 		for(var/reagent_id in reaction.required_reagents)

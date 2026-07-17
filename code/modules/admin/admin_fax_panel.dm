@@ -20,9 +20,9 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 	var/prefill_text = ""
 	var/prefill_paper_name = ""
 	var/prefill_sender = ""
-	
+
 	var/generated_signer_name = "John Doe"
-	var/generated_signer_job = "Centcom Intern" 
+	var/generated_signer_job = "Centcom Intern"
 
 /datum/fax_panel_interface/New()
 	//Get all faxes, and save them to our list.
@@ -40,7 +40,7 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 
 	//Give our paper special status, to read everywhere.
 	fax_paper.request_state = TRUE
-	
+
 	generated_signer_name = generate_spinwarder_name()
 
 /datum/fax_panel_interface/proc/generate_spinwarder_name()
@@ -53,7 +53,7 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 
 	if(length(GLOB.last_names_male_spinwarder))
 		l_name = pick(GLOB.last_names_male_spinwarder)
-			
+
 	return "[f_name] [l_name]"
 
 /**
@@ -104,7 +104,7 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 
 	data["generatedName"] = generated_signer_name
 	data["generatedJob"] = generated_signer_job
-	
+
 	return data
 
 /datum/fax_panel_interface/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -131,7 +131,7 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 			if(!fax_paper)
 				return
 			fax_paper.ui_interact(ui.user)
-		
+
 		if("use_current_user")
 			if(ui.user)
 				generated_signer_name = ui.user.real_name
@@ -155,18 +155,18 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 					break
 
 			fax_paper.name = "paper — [default_paper_name]"
-			
+
 			var/final_text = params["rawText"]
-			
+
 			if(params["signerName"])
 				var/s_name = params["signerName"]
 				var/s_html = "<font face='[SIGNATURE_FONT]'><i>[s_name]</i></font>"
 				final_text = replacetext(final_text, "\[input_field autofill_type=sign]", s_html)
-			
+
 			if(params["signerJob"])
 				final_text = replacetext(final_text, "\[input_field autofill_type=job]", params["signerJob"])
-				
-			var/formatted_time = "[time2text(world.timeofday, "DD/MM")]/[CURRENT_STATION_YEAR] [station_time_timestamp()]"
+
+			var/formatted_time = "[time2text(world.timeofday, "DD/MM")]/[CURRENT_STATION_YEAR] [server_timestamp()]"
 			final_text = replacetext(final_text, "\[input_field autofill_type=time]", formatted_time)
 
 			fax_paper.add_raw_text(replace_text_keys(final_text, ui.user), advanced_html = TRUE)
@@ -176,7 +176,7 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 
 			fax_paper.update_static_data(ui.user)
 
-		if("send")	
+		if("send")
 			//copy
 			var/obj/item/paper/our_fax = fax_paper.copy(/obj/item/paper)
 			our_fax.name = fax_paper.name
@@ -188,4 +188,4 @@ ADMIN_VERB(fax_panel, R_ADMIN, "Fax Panel", "View and respond to faxes sent to C
 		if("createPaper")
 			var/obj/item/paper/our_paper = fax_paper.copy(/obj/item/paper, ui.user.loc)
 			our_paper.name = fax_paper.name
-			
+

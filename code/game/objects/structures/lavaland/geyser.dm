@@ -72,6 +72,7 @@
 		return
 
 	to_chat(user, span_notice("You discovered the geyser and mark it on the GPS system!"))
+	playsound(src, 'sound/machines/beep/twobeep_high.ogg', 30)
 	SEND_SIGNAL(user, COMSIG_LIVING_DISCOVERED_GEYSER, src)
 	if(discovery_message)
 		to_chat(user, discovery_message)
@@ -134,6 +135,7 @@
 	icon_state = "plunger"
 	worn_icon_state = "plunger"
 	icon_angle = 90
+	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 1.5)
 
 	slot_flags = ITEM_SLOT_MASK
 	flags_inv = HIDESNOUT

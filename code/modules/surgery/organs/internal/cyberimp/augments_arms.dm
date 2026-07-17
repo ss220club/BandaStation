@@ -66,10 +66,12 @@
 	. = ..()
 	if(ispath(active_item))
 		active_item = new active_item(src)
+		active_item.set_custom_materials(null)
 		items_list += WEAKREF(active_item)
 
 	for(var/typepath in items_to_create)
 		var/atom/new_item = new typepath(src)
+		new_item.set_custom_materials(null)
 		items_list += WEAKREF(new_item)
 
 /obj/item/organ/cyberimp/arm/toolkit/Destroy()
@@ -278,6 +280,7 @@
 		/obj/item/wirecutters/cyborg,
 		/obj/item/multitool/cyborg,
 	)
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.25, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.75)
 
 //The order of the item list for this implant is not alphabetized due to it actually affecting how it shows up playerside when opening the implant
 /obj/item/organ/cyberimp/arm/toolkit/paperwork
@@ -396,6 +399,7 @@
 		/obj/item/circular_saw/augment,
 		/obj/item/surgical_drapes,
 	)
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.25, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.75)
 
 /obj/item/organ/cyberimp/arm/toolkit/surgery/emagged
 	name = "hacked surgical toolset implant"
@@ -450,13 +454,13 @@
 	/// The amount of damage the implant adds to the upper punching force of our arm.
 	var/upper_punch_damage = 2
 	/// The amount of punch effectiveness (AKA accuracy and crit potential) the implant adds to our arm
-	var/punch_effectiveness_added = 10
+	var/punch_effectiveness_added = 4 // BANDASTATION MOD: Remove strong-arm lavaland fauna bane
 	/// How much extra damage does our implant allow the implanted while grabbing someone and they are unable to break the grapple?
 	var/bonus_grab_damage = 20
 	/// Biotypes we apply an additional amount of damage too
 	var/biotype_bonus_targets = MOB_SPECIAL | MOB_MINING
 	/// Extra damage dealt to our targeted mobs
-	var/biotype_bonus_damage = 20
+	var/biotype_bonus_damage = 0 // BANDASTATION MOD: Remove strong-arm lavaland fauna bane
 	/// IF true, the throw attack will not smash people into walls
 	var/non_harmful_throw = TRUE
 	/// How far away your attack will throw your oponent
@@ -494,10 +498,10 @@
 
 /obj/item/organ/cyberimp/arm/strongarm/on_bodypart_remove(obj/item/bodypart/arm)
 	. = ..()
-	arm.unarmed_damage_low += lower_punch_damage
-	arm.unarmed_damage_high += upper_punch_damage
-	arm.unarmed_effectiveness += punch_effectiveness_added
-	arm.unarmed_grab_damage_bonus += bonus_grab_damage
+	arm.unarmed_damage_low -= lower_punch_damage
+	arm.unarmed_damage_high -= upper_punch_damage
+	arm.unarmed_effectiveness -= punch_effectiveness_added
+	arm.unarmed_grab_damage_bonus -= bonus_grab_damage
 
 /obj/item/organ/cyberimp/arm/strongarm/emp_act(severity)
 	. = ..()

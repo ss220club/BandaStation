@@ -294,8 +294,8 @@
 	return ..()
 
 /datum/crafting_recipe/deagle_prime_mag
-	name = "Regal Condor Magazine (10mm Reaper)"
-	result = /obj/item/ammo_box/magazine/r10mm
+	name = "Regal Condor Magazine (.45 Reaper)"
+	result = /obj/item/ammo_box/magazine/r45
 	reqs = list(
 		/obj/item/stack/sheet/iron = 10,
 		/obj/item/stack/sheet/mineral/gold = 10,
@@ -356,7 +356,7 @@
 	)
 	time = 10 SECONDS
 	category = CAT_WEAPON_RANGED
-	crafting_flags = CRAFT_CHECK_DENSITY
+	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_MUST_BE_LEARNED
 
 /datum/crafting_recipe/large_ballista
 	name = "Improvised Ballista"

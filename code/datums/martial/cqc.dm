@@ -7,7 +7,7 @@
 /datum/martial_art/cqc
 	name = "CQC"
 	id = MARTIALART_CQC
-	help_verb = /mob/living/proc/CQC_help
+	help_verb = "Remember The Basics"
 	smashes_tables = TRUE
 	display_combos = TRUE
 	/// Weakref to a mob we're currently restraining (with grab-grab combo)
@@ -353,7 +353,11 @@
 	if(prob(65) && (defender.stat == CONSCIOUS || !defender.IsParalyzed() || !restraining_mob?.resolve()))
 		var/obj/item/disarmed_item = defender.get_active_held_item()
 		if(disarmed_item && defender.temporarilyRemoveItemFromInventory(disarmed_item))
-			attacker.put_in_hands(disarmed_item)
+			defender.dropItemToGround(disarmed_item)
+			if(isturf(disarmed_item.loc)) //If it fell on the ground we can take it, otherwise assume it's attached to something.
+				attacker.put_in_hands(disarmed_item)
+			else
+				disarmed_item = null
 		else
 			disarmed_item = null
 
@@ -384,19 +388,19 @@
 	return MARTIAL_ATTACK_FAIL
 
 
-/mob/living/proc/CQC_help()
-	set name = "Вспомнить основы"
-	set desc = "Вы пытаетесь вспомнить некоторые основы CQC."
-	set category = "CQC"
-	to_chat(usr, "<b><i>Вы пытаетесь вспомнить некоторые основы CQC.</i></b>")
+/datum/martial_art/cqc/get_style_help()
+	. = list()
 
-	to_chat(usr, "[span_notice("Бросок")]: Захват, Удар. Впечатайте оппонента в землю, опрокидывая его.")
-	to_chat(usr, "[span_notice("CQC пинок")]: Удар, Удар. Отбросьте оппонента от себя. Отбрасывание оглушённого противника наносит урон выносливости.")
-	to_chat(usr, "[span_notice("Сдерживание")]: Захват, Захват. Удерживает в захвате и обезоруживает оппонента, чтобы вырубить его удушающим приёмом.")
-	to_chat(usr, "[span_notice("Давление")]: Толчок, Захват. Значительный урон по выносливости.")
-	to_chat(usr, "[span_notice("Последовательный CQC")]: Толчок, Толчок, Удар. Основной атакующий приём, наносящий огромный урон и значительный урон выносливости.")
+	. += "<b><i>Вы пытаетесь вспомнить некоторые основы CQC.</i></b>"
 
-	to_chat(usr, "<b><i>В дополнении, включив режим броска при нападении, вы переходите в режим активной защиты, где у вас есть шанс заблокировать удары противника, а иногда даже провести контратаку.</i></b>")
+	. += "[span_notice("Бросок")]: Захват, Удар. Впечатайте оппонента в землю, опрокидывая его."
+	. += "[span_notice("CQC пинок")]: Удар, Удар. Отбросьте оппонента от себя. Отбрасывание оглушённого противника наносит урон выносливости."
+	. += "[span_notice("Сдерживание")]: Захват, Захват. Удерживает в захвате и обезоруживает оппонента, чтобы вырубить его удушающим приёмом."
+	. += "[span_notice("Давление")]: Толчок, Захват. Значительный урон по выносливости."
+	. += "[span_notice("Последовательный CQC")]: Толчок, Толчок, Удар. Основной атакующий приём, наносящий огромный урон и значительный урон выносливости."
+
+	. += "<b><i>В дополнение, включив режим броска при нападении, вы переходите в режим активной защиты, где у вас есть шанс заблокировать удары противника, а иногда даже провести контратаку.</i></b>"
+	return .
 
 ///Subtype of CQC. Only used for the chef.
 /datum/martial_art/cqc/under_siege

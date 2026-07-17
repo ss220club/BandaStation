@@ -239,6 +239,8 @@
 	icon_state = "firing_pin_ayy"
 	desc = "This firing pin is slimy and warm; you can swear you feel it constantly trying to mentally probe you."
 	fail_message = span_abductor("выстрел не удался, обратитесь к Командованию.")
+	// BANDASTATION: pin must be non-removable
+	pin_removable = FALSE
 
 /obj/item/firing_pin/abductor/pin_auth(mob/living/user)
 	. = isabductor(user)
@@ -292,13 +294,12 @@
 4.Apply scalpel to specimen's torso.<br>
 5.Retract skin of specimen's torso with a retractor.<br>
 6.Clamp bleeders on specimen's torso with a hemostat.<br>
-7.Apply scalpel again to specimen's torso.<br>
-8.Search through the specimen's torso with your hands to remove any superfluous organs.<br>
-9.Insert replacement gland (Retrieve one from gland storage).<br>
-10.Consider dressing the specimen back to not disturb the habitat. <br>
-11.Put the specimen in the experiment machinery.<br>
-12.Choose one of the machine options. The target will be analyzed and teleported to the selected drop-off point.<br>
-13.You will receive one supply credit, and the subject will be counted towards your quota.<br>
+7.Remove the subject's heart with a hemostat.<br>
+8.Insert replacement gland (Retrieve one from gland storage).<br>
+9.Consider dressing the specimen back to not disturb the habitat. <br>
+10.Put the specimen in the experiment machinery.<br>
+11.Choose one of the machine options. The target will be analyzed and teleported to the selected drop-off point.<br>
+12.You will receive one supply credit, and the subject will be counted towards your quota.<br>
 <br>
 Congratulations! You are now trained for invasive xenobiology research!<br>
 <br>
@@ -572,6 +573,7 @@ Return to step 11 of normal process."}
 	icon_angle = 180
 	surgical_tray_overlay = "scalpel_alien"
 	toolspeed = 0.25
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/titanium = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/plasma = HALF_SHEET_MATERIAL_AMOUNT)
 
 /obj/item/hemostat/alien
 	name = "alien hemostat"
@@ -580,6 +582,7 @@ Return to step 11 of normal process."}
 	surgical_tray_overlay = "hemostat_alien"
 	icon_angle = 180
 	toolspeed = 0.25
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/titanium = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/plasma = HALF_SHEET_MATERIAL_AMOUNT)
 
 /obj/item/retractor/alien
 	name = "alien retractor"
@@ -588,6 +591,7 @@ Return to step 11 of normal process."}
 	surgical_tray_overlay = "retractor_alien"
 	icon_angle = 180
 	toolspeed = 0.25
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/titanium = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/plasma = HALF_SHEET_MATERIAL_AMOUNT)
 
 /obj/item/circular_saw/alien
 	name = "alien saw"
@@ -596,6 +600,7 @@ Return to step 11 of normal process."}
 	surgical_tray_overlay = "saw_alien"
 	icon_angle = 180
 	toolspeed = 0.25
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 1.25, /datum/material/titanium = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/plasma = HALF_SHEET_MATERIAL_AMOUNT)
 
 /obj/item/surgicaldrill/alien
 	name = "alien drill"
@@ -604,6 +609,7 @@ Return to step 11 of normal process."}
 	surgical_tray_overlay = "drill_alien"
 	icon_angle = 180
 	toolspeed = 0.25
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 1.25, /datum/material/titanium = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/plasma = HALF_SHEET_MATERIAL_AMOUNT)
 
 /obj/item/cautery/alien
 	name = "alien cautery"
@@ -613,6 +619,7 @@ Return to step 11 of normal process."}
 	surgical_tray_overlay = "cautery_alien"
 	icon_angle = 180
 	toolspeed = 0.25
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/titanium = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/plasma = HALF_SHEET_MATERIAL_AMOUNT)
 
 /obj/item/clothing/head/helmet/abductor
 	name = "agent headgear"

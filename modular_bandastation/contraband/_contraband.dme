@@ -8,4 +8,7 @@
 #include "code/ninja_explosive.dm"
 #include "code/defib.dm"
 #include "code/collar_bomb.dm"
-#include "code/legcuffs.dm"
+#include "code/implant_misc.dm"
+#include "code/empgrenade.dm"
+#include "code/pistol.dm"
+#include "code/smg.dm"

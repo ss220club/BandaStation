@@ -30,16 +30,20 @@
 /datum/mind/proc/remove_antag_datum(datum_type)
 	if(!datum_type)
 		return
-	var/datum/antagonist/A = has_antag_datum(datum_type)
-	if(A)
-		A.on_removal()
-		current?.log_message("has lost antag datum [A.name]([A.type]).", LOG_GAME)
-		return TRUE
+	var/datum/antagonist/antag = has_antag_datum(datum_type)
+	if(isnull(antag))
+		return
+
+	antag.on_removal()
+	qdel(antag)
+	current?.log_message("has lost antag datum [antag] ([antag.type]).", LOG_GAME)
+	return TRUE
 
 /datum/mind/proc/remove_all_antag_datums() //For the Lazy amongst us.
-	for(var/a in antag_datums)
-		var/datum/antagonist/A = a
-		A.on_removal()
+	for(var/datum/antagonist/antag as anything in antag_datums)
+		antag.on_removal()
+		qdel(antag)
+
 	current?.log_message("has lost all antag datums.", LOG_GAME)
 
 /datum/mind/proc/has_antag_datum(datum_type, check_subtypes = TRUE)
@@ -111,18 +115,21 @@
  * * antag_datum: the antag datum of the uplink owner, for storing it in antag memory. optional!
  */
 /datum/mind/proc/give_uplink(silent = FALSE, datum/antagonist/antag_datum)
-	if(isnull(current))
+	if(!isliving(current))
 		return
 	var/mob/living/carbon/human/traitor_mob = current
 	if (!istype(traitor_mob))
-		return
+		var/datum/status_effect/shapechange_mob/shapeshift = current.has_status_effect(/datum/status_effect/shapechange_mob)
+		if (!ishuman(shapeshift?.caster_mob))
+			return
+		traitor_mob = shapeshift.caster_mob
 
 	var/obj/item/uplink_loc
-	var/uplink_spawn_location = traitor_mob.client?.prefs?.read_preference(/datum/preference/choiced/uplink_location)
+	var/uplink_spawn_location = current.client?.prefs?.read_preference(/datum/preference/choiced/uplink_location)
 	var/cant_speak = (HAS_TRAIT(traitor_mob, TRAIT_MUTE) || is_mime_job(assigned_role))
 	if(uplink_spawn_location == UPLINK_RADIO && cant_speak)
 		if(!silent)
-			to_chat(traitor_mob, span_warning("Вы были признаны неподходящими для радио аплинка. Вместо этого предоставляется стандартный."))
+			to_chat(current, span_warning("Вы были признаны неподходящими для радио аплинка. Вместо этого предоставляется стандартный."))
 		uplink_spawn_location = UPLINK_PDA
 
 	if(uplink_spawn_location != UPLINK_IMPLANT)
@@ -134,7 +141,7 @@
 		var/obj/item/implant/uplink/starting/new_implant = new(traitor_mob)
 		new_implant.implant(traitor_mob, null, silent = TRUE)
 		if(!silent)
-			to_chat(traitor_mob, span_boldnotice("Ваш аплинк cиндиката был хитроумно вживлен в вас за небольшую плату в ТК. Просто включите аплинк, чтобы получить к нему доступ."))
+			to_chat(current, span_boldnotice("Ваш аплинк cиндиката был хитроумно вживлен в вас за небольшую плату в ТК. Просто включите аплинк, чтобы получить к нему доступ."))
 		add_memory(/datum/memory/key/traitor_uplink/implant, uplink_loc = "implant")
 		return new_implant
 
@@ -144,7 +151,7 @@
 	if(!new_uplink)
 		CRASH("Uplink creation failed.")
 	new_uplink.setup_unlock_code()
-	new_uplink.uplink_handler.owner = traitor_mob.mind
+	new_uplink.uplink_handler.owner = src
 	new_uplink.uplink_handler.assigned_role = traitor_mob.mind.assigned_role.title
 	new_uplink.uplink_handler.assigned_species = traitor_mob.dna.species.id
 
@@ -164,7 +171,7 @@
 
 	new_uplink.unlock_text = unlock_text
 	if(!silent)
-		to_chat(traitor_mob, span_boldnotice(unlock_text))
+		to_chat(current, span_boldnotice(unlock_text))
 	if(antag_datum)
 		antag_datum.antag_memory += new_uplink.unlock_note + "<br>"
 	return .
@@ -182,6 +189,7 @@
 		var/datum/antagonist/nukeop/converter = creator.mind.has_antag_datum(/datum/antagonist/nukeop,TRUE)
 		var/datum/antagonist/nukeop/N = new()
 		N.send_to_spawnpoint = FALSE
+		N.give_bonus_tc = FALSE
 		N.nukeop_outfit = null
 		add_antag_datum(N,converter.nuke_team)
 
@@ -197,7 +205,7 @@
 
 	if(creator.is_antag())
 		message_admins("[ADMIN_LOOKUPFLW(current)] has been created by [ADMIN_LOOKUPFLW(creator)], an antagonist.")
-		to_chat(current, span_userdanger("Despite your creator's current allegiances, your true master remains [creator.real_name]. If their loyalties change, so do yours. This will never change unless your creator's body is destroyed."))
+		to_chat(current, span_userdanger("Несмотря на текущие убеждения вашего создателя, вашим истинным хозяином остаётся [creator.real_name]. Если его верность сменит сторону, ваша сменится вслед за ней. Это правило останется неизменным до тех пор, пока тело вашего создателя не будет уничтожено."))
 
 /datum/mind/proc/get_all_objectives()
 	var/list/all_objectives = list()

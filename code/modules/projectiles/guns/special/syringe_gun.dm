@@ -52,6 +52,7 @@
 	if(!syringes.len)
 		return
 	chambered.newshot()
+	return ..()
 
 /obj/item/gun/syringe/can_shoot()
 	return syringes.len
@@ -146,6 +147,7 @@
 	pixel_x = 0
 	max_syringes = 6
 	force = 4
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT)
 
 /obj/item/gun/syringe/syndicate
 	name = "dart pistol"

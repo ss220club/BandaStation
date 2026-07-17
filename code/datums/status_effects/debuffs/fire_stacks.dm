@@ -19,7 +19,7 @@
 	/// For how much firestacks does one our stack count
 	var/stack_modifier = 1
 
-/datum/status_effect/fire_handler/refresh(mob/living/new_owner, new_stacks, forced = FALSE)
+/datum/status_effect/fire_handler/refresh(effect, new_stacks, forced = FALSE)
 	if(forced)
 		set_stacks(new_stacks)
 	else
@@ -345,6 +345,14 @@
 	var/decay = HAS_TRAIT(owner, TRAIT_WET_FOR_LONGER) ? -0.035 : -0.5
 	adjust_stacks(decay * seconds_between_ticks)
 	if(stacks <= 0)
+		qdel(src)
+		return
+
+	if(HAS_TRAIT(owner, TRAIT_RESISTCOLD))
+		return
+
+	if(owner.bodytemperature <= WATER_VAPOR_DEPOSITION_POINT)
+		owner.apply_status_effect(/datum/status_effect/freon, stacks SECONDS)
 		qdel(src)
 
 /datum/status_effect/fire_handler/wet_stacks/check_basic_mob_immunity(mob/living/basic/basic_owner)

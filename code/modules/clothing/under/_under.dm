@@ -10,6 +10,7 @@
 	interaction_flags_click = NEED_DEXTERITY|ALLOW_RESTING
 	armor_type = /datum/armor/clothing_under
 	supports_variations_flags = CLOTHING_DIGITIGRADE_MASK
+	bodyshapes_with_variations = BODYSHAPE_DIGITIGRADE
 	equip_sound = 'sound/items/equip/jumpsuit_equip.ogg'
 	drop_sound = 'sound/items/handling/cloth/cloth_drop1.ogg'
 	pickup_sound = 'sound/items/handling/cloth/cloth_pickup1.ogg'
@@ -110,7 +111,7 @@
 	return changed ? CONTEXTUAL_SCREENTIP_SET : .
 
 
-/obj/item/clothing/under/worn_overlays(mutable_appearance/standing, isinhands = FALSE)
+/obj/item/clothing/under/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file, bodyshape = NONE)
 	. = ..()
 	if(isinhands)
 		return
@@ -120,11 +121,11 @@
 	if(accessory_overlay)
 		. += accessory_overlay
 
-/obj/item/clothing/under/separate_worn_overlays(mutable_appearance/standing, mutable_appearance/draw_target, isinhands = FALSE, icon_file)
+/obj/item/clothing/under/separate_worn_overlays(mutable_appearance/standing, mutable_appearance/draw_target, isinhands = FALSE, icon_file, bodyshape = NONE)
 	. = ..()
 	if (isinhands)
 		return
-	var/blood_overlay = get_blood_overlay("uniform")
+	var/blood_overlay = get_blood_overlay("uniform", bodyshape)
 	if (blood_overlay)
 		. += blood_overlay
 
@@ -215,6 +216,17 @@
 /obj/item/clothing/under/generate_digitigrade_icons(icon/base_icon, greyscale_colors)
 	var/icon/legs = icon(SSgreyscale.GetColoredIconByType(/datum/greyscale_config/digitigrade, greyscale_colors), "jumpsuit_worn")
 	return replace_icon_legs(base_icon, legs)
+
+/obj/item/clothing/under/machine_wash()
+	. = ..()
+	if(stubborn_stains)
+		return
+
+	var/fresh_mood = AddComponent( \
+		/datum/component/onwear_mood, \
+		saved_event_type = /datum/mood_event/fresh_laundry, \
+	)
+	QDEL_IN(fresh_mood, 2 MINUTES)
 
 /obj/item/clothing/under/equipped(mob/living/user, slot)
 	..()
@@ -351,14 +363,13 @@
 		return
 	if(user && !user.temporarilyRemoveItemFromInventory(accessory))
 		return
-	if(!accessory.attach(src, user))
+	if(!accessory.try_attach(src, user))
 		return
 
-	LAZYADD(attached_accessories, accessory)
-	accessory.forceMove(src)
-
 	// Allow for accessories to react to the acccessory list now
-	accessory.successful_attach(src)
+	accessory.attach(src)
+
+	update_accessory_weight() // BANDASTATION ADD: Accessory holsters
 
 	if(user && attach_message)
 		balloon_alert(user, "accessory attached")
@@ -386,6 +397,8 @@
 	LAZYREMOVE(attached_accessories, removed)
 
 	removed.detach(src)
+
+	update_accessory_weight() // BANDASTATION ADD: Accessory holsters
 
 	if(update)
 		update_accessory_overlay()
@@ -448,15 +461,31 @@
 /// Helper to list out all accessories with an icon besides it, for use in examine
 /obj/item/clothing/under/proc/list_accessories_with_icon(mob/user)
 	var/list/all_accessories = list()
+	// BANDASTATION EDIT: Hiding accessories under outerwear
 	for(var/obj/item/clothing/accessory/attached as anything in attached_accessories)
+		if(ishuman(loc))
+			var/mob/living/carbon/human/H = loc
+			if(H.wear_suit?.flags_inv & HIDEBELT && !attached.above_suit)
+				continue
 		all_accessories += attached.examine_title(user)
 
 	return all_accessories
 
-/obj/item/clothing/under/verb/toggle()
-	set name = "Adjust Suit Sensors"
-	set category = null // BANDASTATION REPLACEMENT: Original: "Object"
-	set src in usr
+///BANDASTATION EDIT START: Change in uniform weight with certain accessories
+/obj/item/clothing/under/proc/update_accessory_weight()
+	var/new_w_class = initial(w_class)
+	if(!LAZYLEN(attached_accessories))
+		update_weight_class(new_w_class)
+		return
+
+	for(var/obj/item/clothing/accessory/A in attached_accessories)
+		if(A.w_class >= WEIGHT_CLASS_NORMAL)
+			new_w_class = max(new_w_class, A.w_class)
+
+	update_weight_class(new_w_class)
+// BANDASTATION EDIT END: Change in uniform weight with certain accessories
+
+GAME_VERB_SRC(/obj/item/clothing/under, toggle, usr, "Adjust Suit Sensors", null)
 	var/mob/user_mob = usr
 	if(!can_toggle_sensors(user_mob))
 		return
@@ -524,10 +553,7 @@
 		return
 	pop_accessory(user)
 
-/obj/item/clothing/under/verb/jumpsuit_adjust()
-	set name = "Adjust Jumpsuit Style"
-	set category = null
-	set src in usr
+GAME_VERB_SRC(/obj/item/clothing/under, jumpsuit_adjust, usr, "Adjust Jumpsuit Style", null)
 
 	if(!can_adjust)
 		balloon_alert(usr, "нельзя сменить стиль!")
@@ -576,7 +602,7 @@
 /// Helper to adjust to alt jumpsuit state
 /obj/item/clothing/under/proc/adjust_to_alt()
 	adjusted = ALT_STYLE
-	if(!(female_sprite_flags & FEMALE_UNIFORM_TOP_ONLY))
+	if(!(female_sprite_flags & FEMALE_UNIFORM_TOP_ONLY) && !(female_version::mask_flags & FEMALE_MASK_APPLY_ON_ADJUSTED)) // BANDASTATION EDIT - more masks for female clothing
 		female_sprite_flags = NO_FEMALE_UNIFORM
 	if(!alt_covers_chest) // for the special snowflake suits that expose the chest when adjusted (and also the arms, realistically)
 		body_parts_covered &= ~CHEST

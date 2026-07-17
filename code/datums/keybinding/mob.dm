@@ -21,7 +21,7 @@
 	return TRUE
 
 /datum/keybinding/mob/swap_hands
-	hotkey_keys = list("X") // BANDASTATION EDIT
+	hotkey_keys = list("X")
 	name = "swap_hands"
 	full_name = "Поменять руки"
 	description = ""
@@ -39,14 +39,14 @@
 	var/hand_index = NONE
 
 /datum/keybinding/mob/select_hand/right
-	hotkey_keys = list("Unbound") // BANDASTATION EDIT
+	hotkey_keys = list(UNBOUND_KEY)
 	name = "select_right_hand"
 	full_name = "Поменять на правую руку"
 	keybind_signal = COMSIG_KB_MOB_SELECTRIGHTHAND_DOWN
 	hand_index = RIGHT_HANDS
 
 /datum/keybinding/mob/select_hand/left
-	hotkey_keys = list("Unbound") // BANDASTATION EDIT
+	hotkey_keys = list(UNBOUND_KEY)
 	name = "select_left_hand"
 	full_name = "Поменять на левую руку"
 	keybind_signal = COMSIG_KB_MOB_SELECTLEFTHAND_DOWN
@@ -81,7 +81,7 @@
 	return TRUE
 
 /datum/keybinding/mob/drop_item
-	hotkey_keys = list("Q") // BANDASTATION EDIT
+	hotkey_keys = list("Q")
 	name = "drop_item"
 	full_name = "Выложить предмет в руке"
 	description = "Drops the item in your active hand to the ground."
@@ -246,10 +246,3 @@
 	if(.)
 		return
 	user.movement_locked = FALSE
-
-/datum/keybinding/living/view_pet_data
-	hotkey_keys = list("Shift")
-	name = "view_pet_commands"
-	full_name = "Просмотр команд питомцев"
-	description = "Удерживайте, чтобы увидеть все команды, которые вы можете дать своим питомцам!"
-	keybind_signal = COMSIG_KB_LIVING_VIEW_PET_COMMANDS

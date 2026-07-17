@@ -99,7 +99,7 @@
 		ее высасывания из вас с течением времени. Вы можете пополнять ее запасы из своих жертв, в частности из их шей."
 	spell_type =  /datum/action/cooldown/spell/splattercasting
 	category = SPELLBOOK_CATEGORY_OFFENSIVE
-	no_coexistence_typecache = list(/datum/action/cooldown/spell/lichdom)
+	no_coexistence_typecache = list(/datum/action/cooldown/spell/lichdom, /datum/spellbook_entry/ghostliness)
 
 /datum/spellbook_entry/sanguine_strike
 	name = "Exsanguinating Strike"

@@ -41,7 +41,7 @@
 	chamber_round()
 
 /obj/item/gun/ballistic/revolver/click_alt(mob/user)
-	spin()
+	spin_chamber(user)
 	return CLICK_ACTION_SUCCESS
 
 /obj/item/gun/ballistic/revolver/fire_sounds()
@@ -57,18 +57,16 @@
 		if(play_click)
 			playsound(src, 'sound/items/weapons/gun/general/ballistic_click.ogg', fire_sound_volume, vary_fire_sound, frequency = click_frequency_to_use)
 
-/obj/item/gun/ballistic/revolver/verb/spin()
-	set name = "Spin Chamber"
-	set category = "Object"
-	set desc = "Click to spin your revolver's chamber."
+GAME_VERB(/obj/item/gun/ballistic/revolver, spin, "Spin Chamber", null)
+	spin_chamber(usr)
 
-	var/mob/user = usr
-
-	if(user.stat || !in_range(user, src))
+/obj/item/gun/ballistic/revolver/verb/spin_chamber(mob/living/user)
+	if(!istype(user) || user.stat || !in_range(user, src))
 		return
 
 	if (recent_spin > world.time)
 		return
+
 	recent_spin = world.time + spin_delay
 
 	if(do_spin())
@@ -265,7 +263,7 @@
 
 /obj/item/gun/ballistic/revolver/russian/attack_self(mob/user)
 	if(!spun)
-		spin()
+		spin_chamber(user)
 		return TRUE
 	return ..()
 

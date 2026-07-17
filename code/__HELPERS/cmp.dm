@@ -124,8 +124,8 @@
 	return A.totalResistance() - B.totalResistance()
 
 /proc/cmp_quirk_asc(datum/quirk/A, datum/quirk/B)
-	var/a_sign = SIGN(initial(A.value) * -1)
-	var/b_sign = SIGN(initial(B.value) * -1)
+	var/a_sign = sign(initial(A.value) * -1)
+	var/b_sign = sign(initial(B.value) * -1)
 
 	// Neutral traits go last.
 	if(a_sign == 0)
@@ -141,8 +141,8 @@
 	else
 		return sorttext(b_name, a_name)
 
-/proc/cmp_job_display_asc(datum/job/A, datum/job/B)
-	return A.display_order - B.display_order
+/proc/cmp_job_display_with_departments_asc(datum/job/A, datum/job/B)
+	return A.display_order_with_department() - B.display_order_with_department()
 
 /proc/cmp_department_display_asc(datum/job_department/A, datum/job_department/B)
 	return A.display_order - B.display_order

@@ -18,6 +18,7 @@
 	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/heavy_shot_suppressed.ogg'
 	burst_size = 1
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c762x39mm
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c762x39mm/small/civ
 	special_mags = TRUE
 	can_suppress = TRUE
 	suppressor_x_offset = 3
@@ -37,6 +38,7 @@
 /obj/item/gun/ballistic/automatic/sabel/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/sabel/add_seclight_point()
 	AddComponent(\

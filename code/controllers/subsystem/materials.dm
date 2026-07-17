@@ -23,10 +23,11 @@ SUBSYSTEM_DEF(materials)
 		new /datum/stack_recipe("Material floor tile", /obj/item/stack/tile/material, 1, 4, 20, crafting_flags = CRAFT_SKIP_MATERIALS_PARITY, category = CAT_TILES),
 		new /datum/stack_recipe("Material airlock assembly", /obj/structure/door_assembly/door_assembly_material, 4, time = 5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND | CRAFT_SKIP_MATERIALS_PARITY, category = CAT_DOORS),
 		new /datum/stack_recipe("Material platform", /obj/structure/platform/material, 2, time = 3 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND | CRAFT_SKIP_MATERIALS_PARITY, trait_booster = TRAIT_QUICK_BUILD, trait_modifier = 0.75, category = CAT_STRUCTURE), \
-	)
-	/// List of stackcrafting recipes for materials using rigid recipes
-	var/list/rigid_stack_recipes = list(
 		new /datum/stack_recipe("Carving block", /obj/structure/carving_block, 5, time = 3 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND | CRAFT_SKIP_MATERIALS_PARITY, category = CAT_STRUCTURE),
+	)
+	/// List of stackcrafting recipes for materials using rigid recipes (none yet)
+	var/list/rigid_stack_recipes = list(
+
 	)
 
 	/// A list of dimensional themes used by the dimensional anomaly and other things, most of which require materials to function.
@@ -35,6 +36,8 @@ SUBSYSTEM_DEF(materials)
 	var/list/datum/material_property/properties
 	/// A typepath -> instance list of material requirements
 	var/list/datum/material_requirement/requirements
+	/// A typepath -> instance list of material slots
+	var/list/datum/material_slot/material_slots
 
 ///Ran on initialize, populated the materials and material dictionaries with their appropriate vars (See these variables for more info)
 /datum/controller/subsystem/materials/proc/initialize_materials()
@@ -50,6 +53,10 @@ SUBSYSTEM_DEF(materials)
 	requirements = list()
 	for(var/datum/material_requirement/requirement_type as anything in valid_subtypesof(/datum/material_requirement))
 		requirements[requirement_type] = new requirement_type()
+
+	material_slots = list()
+	for(var/datum/material_slot/slot_type as anything in valid_subtypesof(/datum/material_slot))
+		material_slots[slot_type] = new slot_type()
 
 	for(var/datum/material/mat_type as anything in valid_subtypesof(/datum/material))
 		if(initial(mat_type.init_flags) & MATERIAL_INIT_MAPLOAD)
@@ -188,7 +195,7 @@ SUBSYSTEM_DEF(materials)
 	if(!combo)
 		combo = list()
 		for(var/mat in materials_declaration)
-			combo[SSmaterials.get_material(mat)] = OPTIMAL_COST(materials_declaration[mat] * multiplier)
+			combo[get_material(mat)] = OPTIMAL_COST(materials_declaration[mat] * multiplier)
 		material_combos[combo_index] = combo
 	return combo
 

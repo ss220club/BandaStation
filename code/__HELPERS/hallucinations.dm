@@ -293,9 +293,9 @@ ADMIN_VERB(debug_hallucination_weighted_list_per_type, R_DEBUG, "Show Hallucinat
 
 /// Lines the bubblegum hallucinatoin uses when it pops up
 #define BUBBLEGUM_HALLUCINATION_LINES list( \
-		span_colossus("Я БЕССМЕРТЕН."), \
-		span_colossus("Я ЗАБЕРУ ТВОЙ МИР."), \
-		span_colossus("Я ТЕБЯ ВИЖУ."), \
-		span_colossus("ТЫ НЕ МОЖЕШЬ БЕЖАТЬ ОТ МЕНЯ ВЕЧНО."), \
-		span_colossus("НИЧТО МЕНЯ НЕ ОСТАНОВИТ."), \
+		"Я БЕССМЕРТЕН.", \
+		"Я ЗАБЕРУ ТВОЙ МИР.", \
+		"Я ТЕБЯ ВИЖУ", \
+		"ТЫ НЕ МОЖЕШЬ БЕЖАТЬ ОТ МЕНЯ ВЕЧНО.", \
+		"НИЧТО МЕНЯ НЕ ОСТАНОВИТ.", \
 	)

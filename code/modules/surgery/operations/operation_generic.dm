@@ -388,7 +388,7 @@
 	)
 	time = 4 SECONDS
 	all_surgery_states_required = SURGERY_SKIN_OPEN
-	any_surgery_states_required = SURGERY_BONE_SAWED|SURGERY_BONE_DRILLED
+	any_surgery_states_required = ALL_SURGERY_BONE_STATES
 	allow_stumps = TRUE
 
 /datum/surgery_operation/limb/fix_bones/get_default_radial_image()
@@ -398,7 +398,15 @@
 	return ..() + list("конечность должна иметь кости")
 
 /datum/surgery_operation/limb/fix_bones/state_check(obj/item/bodypart/limb)
-	return LIMB_HAS_BONES(limb)
+	if(!LIMB_HAS_BONES(limb))
+		return FALSE
+
+	// if a wound has given us the broken bone state, don't show this surgery as an option, to prevent confusion
+	for(var/datum/wound/wound as anything in limb.wounds)
+		if(wound.surgery_states & any_surgery_states_required)
+			return FALSE
+
+	return TRUE
 
 /datum/surgery_operation/limb/fix_bones/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(
@@ -412,7 +420,10 @@
 
 /datum/surgery_operation/limb/fix_bones/on_success(obj/item/bodypart/limb)
 	. = ..()
-	limb.remove_surgical_state(SURGERY_BONE_SAWED|SURGERY_BONE_DRILLED)
+	// if the limb lacks skin, fix bones needs to act as an analog to mend incision (clearing most surgical states)
+	if(!LIMB_HAS_SKIN(limb))
+		limb.remove_surgical_state(ALL_SURGERY_STATES_UNSET_ON_CLOSE)
+	limb.remove_surgical_state(ALL_SURGERY_BONE_STATES)
 	limb.heal_damage(40)
 
 /datum/surgery_operation/limb/drill_bones

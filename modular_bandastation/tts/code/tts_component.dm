@@ -22,11 +22,6 @@
 	if(istype(new_tts_seed))
 		tts_seed = new_tts_seed
 
-	if(tts_seed)
-		var/list/available_seeds = SStts220.get_available_seeds(parent)
-		if(!(tts_seed.name in available_seeds))
-			tts_seed = null
-
 	if(!tts_seed)
 		tts_seed = get_random_tts_seed_by_gender()
 	if(!tts_seed) // Something went terribly wrong
@@ -74,7 +69,7 @@
 		tts_seeds |= SStts220.get_tts_by_gender(being_changed.gender)
 		tts_seeds |= SStts220.get_tts_by_gender(NEUTER)
 	// Check donation restrictions
-	if(!check_rights(R_ADMIN, FALSE, chooser) && !(overrides & TTS_OVERRIDE_TIER))
+	if(!(overrides & TTS_OVERRIDE_TIER))
 		tts_seeds = tts_seeds && SStts220.get_available_seeds(being_changed) // && for lists means intersection
 	if(!length(tts_seeds))
 		to_chat(chooser, span_warning("Не удалось найти голоса для пола! Текущий голос - [tts_seed.name]"))

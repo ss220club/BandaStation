@@ -19,7 +19,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 3
 	throw_range = 7
-	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT *2)
+	custom_materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 0.5)
 	interaction_flags_click = NEED_LITERACY|NEED_LIGHT|ALLOW_RESTING
 	custom_price = PAYCHECK_COMMAND
 	sound_vary = TRUE
@@ -47,7 +47,7 @@
 	if(src.mode != SCANNER_NO_MODE)
 		. += span_notice("Alt+ЛКМ по [declent_ru(DATIVE)], чтобы переключить отображение повреждений конечностей. Ctrl+shift+ЛКМ чтобы распечатать отчёт.")
 
-/obj/item/healthanalyzer/suicide_act(mob/living/carbon/user)
+/obj/item/healthanalyzer/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user.declent_ru(NOMINATIVE)] начинает анализировать себя при помощи [declent_ru(GENITIVE)]! Дисплей показывает, что [user.ru_p_they()] мёртв!"))
 	return BRUTELOSS
 
@@ -80,7 +80,7 @@
 			span_notice("Вы глупо пытаетесь проанализировать жизненные показатели [scan_turf.declent_ru(GENITIVE)]!"),
 		)
 
-		var/floor_text = "<span class='info'>Анализ результатов для <b>[scan_turf.declent_ru(GENITIVE)]</b> ([station_time_timestamp()]):</span><br>"
+		var/floor_text = "<span class='info'>Анализ результатов для <b>[scan_turf.declent_ru(GENITIVE)]</b> ([round_timestamp()]):</span><br>"
 		floor_text += "<span class='info ml-1'>Общее состояние: <i>Неизвестно</i></span><br>"
 		floor_text += "<span class='alert ml-1'>У субъекта отсутствует мозг.</span><br>"
 		floor_text += "<span class='info ml-1'>Температура тела: [scan_turf?.return_air()?.return_temperature() || "???"]</span><br>"
@@ -168,7 +168,7 @@
 			oxy_loss += 200 - (oxy_loss + tox_loss + fire_loss + brute_loss)
 			oxy_loss = clamp(oxy_loss, 0, 200)
 
-	render_list += "[span_info("Анализ результатов для <b>[target.declent_ru(GENITIVE)]</b> ([station_time_timestamp()]):")]<br><span class='info ml-1'>Общее состояние: [mob_status]</span><br>"
+	render_list += "[span_info("Анализ результатов для <b>[target.declent_ru(GENITIVE)]</b> ([round_timestamp()]):")]<br><span class='info ml-1'>Общее состояние: [mob_status]</span><br>"
 
 	if(!advanced && target.has_reagent(/datum/reagent/inverse/technetium))
 		advanced = TRUE
@@ -474,11 +474,12 @@
 	var/obj/item/paper/medical_report/report_paper = new(get_turf(src))
 
 	report_paper.color = "#99ccff"
-	report_paper.name = "Отчет сканирования здоровья - [station_time_timestamp()]"
-	var/report_text = "<center><B>Отчет сканирования здоровья. Время сканирования: [station_time_timestamp()]</B></center><HR>"
+	report_paper.name = "Отчет сканирования здоровья - [server_timestamp(format = "hh:mm", ic_time = TRUE)]"
+	var/report_text = "<center><B>Отчет сканирования здоровья</br>\
+		Время сканирования: [UNDERLINED_HTML_TEXT("[server_timestamp(format = "hh:mm", ic_time = TRUE)]", "Время смены: [round_timestamp(format = "hh:mm")]")]</B></center><HR>"
 	report_text += last_scan_text
 
-	report_paper.add_raw_text(report_text)
+	report_paper.add_raw_text(report_text, advanced_html = TRUE)
 	report_paper.update_appearance()
 
 	user.put_in_hands(report_paper)
@@ -603,6 +604,7 @@
 	icon_state = "health_adv"
 	desc = "Ручной сканер тела, способный с высокой точностью определять жизненно важные показатели субъекта."
 	advanced = TRUE
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.25, /datum/material/silver = SHEET_MATERIAL_AMOUNT, /datum/material/gold = SHEET_MATERIAL_AMOUNT * 0.75)
 
 #define AID_EMOTION_NEUTRAL "neutral"
 #define AID_EMOTION_HAPPY "happy"
