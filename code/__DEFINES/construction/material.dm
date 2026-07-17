@@ -26,7 +26,7 @@
 #define MATERIAL_SILO_STORED (1 << 0)
 /// This material can be used in basic recipes, such as chairs/toilets/tiles
 #define MATERIAL_BASIC_RECIPES (1 << 1)
-/// This material counts as a rigid enough solid to be used to craft tough objects like carving blocks or air tanks
+/// This material counts as a rigid enough solid to be used to craft tough objects like air tanks
 #define MATERIAL_CLASS_RIGID (1 << 2)
 /// The opposite of rigid, this means that the material cannot hold a solid form (like sand) and cannot be used in item crafting
 #define MATERIAL_CLASS_AMORPHOUS (1 << 3)
@@ -74,10 +74,21 @@ GLOBAL_LIST_INIT(material_flags_to_string, alist(
 // Optional material property IDs
 #define MATERIAL_FLAMMABILITY "flammability"
 #define MATERIAL_RADIOACTIVITY "radioactivity"
+#define MATERIAL_FIRESTACKER "firestacker"
+#define MATERIAL_VAMPIRES_BANE "vampires_bane"
+#define MATERIAL_TELEPORTING "teleporting"
+#define MATERIAL_PENETRATING "penetrating"
 
 // Derived material property IDs
 #define MATERIAL_INTEGRITY "integrity"
 #define MATERIAL_BEAUTY "beauty"
+#define MATERIAL_INSULATION "insulation"
+
+// Flags for signal tracking on materials
+/// Send COMSIG_MATERIAL_EFFECT_X whenever a mob steps onto a material atom/is shoved into this material wall
+#define MATERIAL_TRACK_CONTACT (1 << 0)
+/// Send COMSIG_MATERIAL_EFFECT_X whenever a mob is hit by/hits/catches the material atom
+#define MATERIAL_TRACK_IMPACT (1 << 1)
 
 /// Maximum value for a core material property
 #define MATERIAL_PROPERTY_MAX 10
@@ -130,6 +141,9 @@ GLOBAL_LIST_INIT(material_flags_to_string, alist(
 /// Prevents material items from displaying their descriptors in examine_more with sci glasses
 #define MATERIAL_NO_DESCRIPTORS (1 << 8)
 
+/// Flags for metalgen imprinting
+#define MATERIAL_METALGEN MATERIAL_EFFECTS | MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
+
 //Special return values of [/datum/material_container/insert_item]
 /// No material was found inside them item
 #define MATERIAL_INSERT_ITEM_NO_MATS -1
@@ -170,5 +184,7 @@ GLOBAL_LIST_INIT(material_flags_to_string, alist(
 #define MATERIAL_LIST_OPTIMAL_AMOUNT "optimal_amount"
 /// The key to access the multiplier used to selectively control effects and modifiers of a material.
 #define MATERIAL_LIST_MULTIPLIER "multiplier"
+/// Key controlling which material slots a material is assigned to
+#define MATERIAL_LIST_SLOTS "slot"
 /// A macro that ensures some multiplicative modifiers higher than 1 don't become lower than 1 and vice-versa because of the multiplier.
 #define GET_MATERIAL_MODIFIER(modifier, multiplier) (modifier >= 1 ? 1 + ((modifier) - 1) * (multiplier) : (modifier)**(multiplier))

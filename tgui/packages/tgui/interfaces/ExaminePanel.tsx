@@ -1,4 +1,4 @@
-import { Section, Stack } from 'tgui-core/components';
+import { Box, Section, Stack } from 'tgui-core/components';
 import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
@@ -33,9 +33,16 @@ export const ExaminePanel = (props) => {
                   scrollable
                   fill
                   title={`${character_name}, описание:`}
-                  preserveWhitespace
                 >
-                  {flavor_text}
+                  <Box
+                    style={{
+                      whiteSpace: 'pre-wrap',
+                      wordBreak: 'break-word',
+                      overflowWrap: 'break-word',
+                    }}
+                  >
+                    {flavor_text}
+                  </Box>
                 </Section>
               </Stack.Item>
             </Stack>

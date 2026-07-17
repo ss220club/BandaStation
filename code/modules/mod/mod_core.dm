@@ -302,7 +302,7 @@
 		liquid electricity, this core makes it much more efficient, running all soft, hard, and wetware with several \
 		times less energy usage."
 	/// A modifier to all charge we use, ethereals don't need to spend as much energy as normal suits.
-	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.15, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.05)
+	custom_materials = list(/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.05, /datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.05)
 	var/charge_modifier = 0.1
 
 /obj/item/mod/core/ethereal/charge_source()
@@ -457,18 +457,11 @@
 	// Not super sure if this should just be the same, but will see.
 	maxcharge = 15 * STANDARD_CELL_CHARGE
 	charge = 15 * STANDARD_CELL_CHARGE
-	/// The mob to be spawned by the core
-	var/mob/living/spawned_mob_type = /mob/living/basic/butterfly/lavaland/temporary
-	/// Max number of mobs it can spawn
-	var/max_spawns = 3
-	/// Mob spawner for the core
-	var/datum/component/spawner/mob_spawner
 	/// Particle holder for pollen particles
 	var/obj/effect/abstract/particle_holder/particle_effect
 
 /obj/item/mod/core/plasma/lavaland/Destroy()
 	QDEL_NULL(particle_effect)
-	QDEL_NULL(mob_spawner)
 	return ..()
 
 /obj/item/mod/core/plasma/lavaland/install(obj/item/mod/control/mod_unit)
@@ -482,28 +475,12 @@
 /obj/item/mod/core/plasma/lavaland/proc/on_toggle()
 	SIGNAL_HANDLER
 	if(mod.active)
-		particle_effect = new(mod.wearer, /particles/pollen, PARTICLE_ATTACH_MOB)
-		mob_spawner = mod.wearer.AddComponent(/datum/component/spawner, \
-			spawn_types = list(spawned_mob_type), \
-			spawn_time = 5 SECONDS, \
-			max_spawned = 3, \
-			faction = mod.wearer.get_faction(), \
-		)
-		RegisterSignal(mob_spawner, COMSIG_SPAWNER_SPAWNED, PROC_REF(new_mob))
+		particle_effect = new(mod.wearer, /particles/pollen/modsuit, PARTICLE_ATTACH_MOB)
 		RegisterSignal(mod.wearer, COMSIG_MOVABLE_MOVED, PROC_REF(spread_flowers))
 		return
 
 	QDEL_NULL(particle_effect)
-	UnregisterSignal(mob_spawner, COMSIG_SPAWNER_SPAWNED)
 	UnregisterSignal(mod.wearer, COMSIG_MOVABLE_MOVED)
-	for(var/datum/mob in mob_spawner.spawned_things)
-		qdel(mob)
-	QDEL_NULL(mob_spawner)
-
-/obj/item/mod/core/plasma/lavaland/proc/new_mob(spawner, mob/living/basic/butterfly/lavaland/temporary/spawned)
-	SIGNAL_HANDLER
-	if(spawned)
-		spawned.source = src
 
 /obj/item/mod/core/plasma/lavaland/proc/spread_flowers(atom/source, atom/oldloc, dir, forced)
 	SIGNAL_HANDLER

@@ -27,6 +27,8 @@
 
 /obj/item/gun/ballistic/automatic/ar
 	recoil = 0.3
+	accepted_magazine_type = /obj/item/ammo_box/magazine/c223
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c223
 
 /obj/item/gun/ballistic/automatic/proto
 	recoil = 0.2

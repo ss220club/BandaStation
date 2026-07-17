@@ -35,7 +35,7 @@
 /datum/market_item/misc/shoulder_holster
 	name = "Shoulder holster"
 	desc = "Yeehaw, hardboiled friends! This holster is the first step in your dream of becoming a detective and being allowed to shoot real guns!"
-	item = /obj/item/storage/belt/holster
+	item = /obj/item/clothing/accessory/holster //BANDASTATION EDIT: Accessory holsters
 
 	price_min = CARGO_CRATE_VALUE * 2
 	price_max = CARGO_CRATE_VALUE * 4
@@ -230,3 +230,12 @@
 	price_max = PAYCHECK_CREW * 3
 	stock_max = 3
 	availability_prob = 25
+
+/datum/market_item/misc/nutrient_pump
+	name = "Nutriment Pump Implant Plus Plus Plus"
+	desc = "We turned this thing up as far as it'll go, and then some. Guaranteed to keep you well fed at all times."
+	price_min = CARGO_CRATE_VALUE * 2
+	price_max = CARGO_CRATE_VALUE * 3
+	item = /obj/item/organ/cyberimp/chest/nutriment/black_market
+	stock_max = 2
+	availability_prob = 60

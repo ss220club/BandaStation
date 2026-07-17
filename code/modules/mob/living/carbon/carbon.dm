@@ -195,14 +195,15 @@
  * @param {number} breakouttime - The time it takes to break the cuffs. Use SECONDS/MINUTES defines
  * @param {number} cuff_break - Speed multiplier, 0 is default, see _DEFINES\combat.dm
  */
-/mob/living/carbon/proc/cuff_resist(obj/item/cuffs, breakouttime = 1 MINUTES, cuff_break = 0)
+/mob/living/carbon/proc/cuff_resist(obj/item/cuffs, breakouttime = null, cuff_break = 0)
 	if((cuff_break != INSTANT_CUFFBREAK) && (SEND_SIGNAL(src, COMSIG_MOB_REMOVING_CUFFS, cuffs) & COMSIG_MOB_BLOCK_CUFF_REMOVAL))
 		return //The blocking object should sent a fluff-appropriate to_chat about cuff removal being blocked
 	if(cuffs.item_flags & BEING_REMOVED)
 		to_chat(src, span_warning("Вы уже пытаетесь снять [cuffs.declent_ru(ACCUSATIVE)]!"))
 		return
 	cuffs.item_flags |= BEING_REMOVED
-	breakouttime = cuffs.breakouttime
+	if (isnull(breakouttime))
+		breakouttime = cuffs.breakouttime
 	if(!cuff_break)
 		visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] пытается снять [cuffs.declent_ru(ACCUSATIVE)]!"))
 		to_chat(src, span_notice("Вы пытаетесь снять [cuffs.declent_ru(ACCUSATIVE)]... (Это займет примерно [DisplayTimeText(breakouttime)], и вы не должны двигаться.)"))
@@ -535,6 +536,10 @@
 		cure_blind(EYES_COVERED)
 		overlay_fullscreen("tint", /atom/movable/screen/fullscreen/impaired, 2)
 
+	else if(tint >= TINT_MILD)
+		cure_blind(EYES_COVERED)
+		overlay_fullscreen("tint", /atom/movable/screen/fullscreen/impaired, 1)
+
 	else
 		cure_blind(EYES_COVERED)
 		clear_fullscreen("tint", 0 SECONDS)
@@ -710,7 +715,6 @@
 		clear_mood_event("handcuffed")
 	update_mob_action_buttons() //some of our action buttons might be unusable when we're handcuffed.
 	update_worn_handcuffs()
-	update_hud_handcuffed()
 
 /mob/living/carbon/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	if(excess_healing)
@@ -944,6 +948,7 @@
 			var/obj/item/bodypart/stump = new old_bodypart.stump_typepath()
 			stump.bodyshape = old_bodypart.bodyshape
 			stump.bodytype = old_bodypart.bodytype
+			stump.add_biostate(old_bodypart.biological_state & ~BIO_JOINTED)
 			if(!stump.try_attach_limb(src, special = TRUE))
 				// the only way this can happen is if the stump is rejected via signal
 				// not much we can do about that besides hope they know what they're doing
@@ -1344,7 +1349,8 @@
 	if(!can_bleed())
 		to_chat(src, span_notice("У вас болит голова."))
 		return
-	head.adjustBleedStacks(5)
+	var/add_stacks = HAS_TRAIT(src, TRAIT_BLOOD_FOUNTAIN) ? 7 : 5
+	head.adjustBleedStacks(add_stacks)
 	visible_message(span_notice("У [declent_ru(GENITIVE)] пошла кровь из носа."), span_warning("У вас пошла кровь из носа."))
 
 /mob/living/carbon/check_hit_limb_zone_name(hit_zone)
@@ -1363,13 +1369,13 @@
 	. = ..()
 	// Force a weight update in case we're stasis'd and don't tick
 	if (HAS_TRAIT_FROM(src, TRAIT_FAT, OBESITY))
-		if (overeatduration >= 200 SECONDS)
+		if (overeatduration >= OVEREAT_TIME_LIMIT)
 			return
 
 		to_chat(src, span_notice("You feel fit again!"))
 		remove_traits(list(TRAIT_FAT, TRAIT_OFF_BALANCE_TACKLER), OBESITY)
 		return
 
-	if (overeatduration >= 200 SECONDS)
+	if (overeatduration >= OVEREAT_TIME_LIMIT)
 		to_chat(src, span_danger("You suddenly feel blubbery!"))
 		add_traits(list(TRAIT_FAT, TRAIT_OFF_BALANCE_TACKLER), OBESITY)

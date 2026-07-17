@@ -56,6 +56,7 @@
 		/obj/item/clothing/under/rank/magistrate/skirt = 1,
 		/obj/item/clothing/under/rank/magistrate/formal = 1,
 		/obj/item/clothing/suit/magirobe = 1,
+		/obj/item/clothing/suit/magistrate_jacket = 1,
 		/obj/item/clothing/shoes/laceup = 1,
 		/obj/item/clothing/glasses/sunglasses = 1,
 		/obj/item/clothing/gloves/color/white = 1,

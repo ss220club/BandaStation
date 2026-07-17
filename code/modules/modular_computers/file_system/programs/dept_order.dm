@@ -92,6 +92,7 @@ GLOBAL_VAR(department_cd_override)
 			"cost" = pack.get_cost(),
 			"id" = pack.id,
 			"desc" = pack.desc || pack.name, // If there is a description, use it. Otherwise use the pack's name.
+			"highlight" = pack.highlight_in_console,
 		))
 
 	var/list/supply_data_flattened = list()

@@ -118,14 +118,10 @@
 	. = ..()
 
 /obj/machinery/transport/crossing_signal/screwdriver_act(mob/living/user, obj/item/tool)
-	if(default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
-		return ITEM_INTERACT_SUCCESS
-	return NONE
+	return default_deconstruction_screwdriver(user, tool)
 
 /obj/machinery/transport/crossing_signal/crowbar_act(mob/living/user, obj/item/tool)
-	if(default_deconstruction_crowbar(tool))
-		return ITEM_INTERACT_SUCCESS
-	return NONE
+	return default_deconstruction_crowbar(user, tool)
 
 /obj/machinery/transport/crossing_signal/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
@@ -179,20 +175,19 @@
 	find_uplink()
 	return CLICK_ACTION_SUCCESS
 
-/obj/machinery/transport/crossing_signal/attackby_secondary(obj/item/weapon, mob/user, list/modifiers, list/attack_modifiers)
-	. = ..()
+/obj/machinery/transport/crossing_signal/wrench_act_secondary(mob/living/user, obj/item/tool)
+	if(!panel_open)
+		return NONE
+	switch(sign_dir)
+		if(INBOUND)
+			sign_dir = OUTBOUND
+		if(OUTBOUND)
+			sign_dir = INBOUND
 
-	if(weapon.tool_behaviour == TOOL_WRENCH && panel_open)
-		switch(sign_dir)
-			if(INBOUND)
-				sign_dir = OUTBOUND
-			if(OUTBOUND)
-				sign_dir = INBOUND
+	to_chat(user, span_notice("You flip directions on [src]."))
+	update_appearance()
+	return ITEM_INTERACT_SUCCESS
 
-		to_chat(user, span_notice("You flip directions on [src]."))
-		update_appearance()
-
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/machinery/transport/crossing_signal/proc/link_sensor()
 	sensor_ref = WEAKREF(find_closest_valid_sensor())
@@ -517,14 +512,10 @@
 			. += span_notice("The status display reads: Repair required.")
 
 /obj/machinery/transport/guideway_sensor/screwdriver_act(mob/living/user, obj/item/tool)
-	if(default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
-		return ITEM_INTERACT_SUCCESS
-	return NONE
+	return default_deconstruction_screwdriver(user, tool)
 
 /obj/machinery/transport/guideway_sensor/crowbar_act(mob/living/user, obj/item/tool)
-	if(default_deconstruction_crowbar(tool))
-		return ITEM_INTERACT_SUCCESS
-	return NONE
+	return default_deconstruction_crowbar(user, tool)
 
 /obj/machinery/transport/guideway_sensor/proc/pair_sensor()
 	set_machine_stat(machine_stat | MAINT)

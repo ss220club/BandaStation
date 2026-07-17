@@ -148,6 +148,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
+		tainted_character_profiles = TRUE
 		character_preview_view = create_character_preview_view(user)
 		ui = new(user, src, "PreferencesMenu")
 		ui.set_autoupdate(FALSE)
@@ -180,8 +181,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 /datum/preferences/ui_static_data(mob/user)
 	var/list/data = list()
-
-	data["character_profiles"] = create_character_profiles()
 
 	data["character_preview_view"] = character_preview_view.assigned_map
 	data["overflow_role"] = SSjob.get_job_type(SSjob.overflow_role).title
@@ -431,7 +430,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	return TRUE
 
 /datum/preferences/proc/GetQuirkBalance()
-	var/bal = CONFIG_GET(number/default_quirk_points)
+	var/bal = SSquirks.default_quirk_points
 	for(var/V in all_quirks)
 		var/datum/quirk/T = SSquirks.quirks[V]
 		bal -= initial(T.value)
@@ -456,7 +455,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	if(LAZYLEN(quirks_removed))
 		LAZYADD(feedback, "The following quirks are incompatible with your species:")
 		LAZYADD(feedback, quirks_removed)
-	if(!CONFIG_GET(flag/disable_quirk_points) && GetQuirkBalance() < 0)
+	if(SSquirks.points_enabled && GetQuirkBalance() < 0)
 		LAZYADD(feedback, "Your quirks have been reset.")
 		all_quirks = list()
 	if(LAZYLEN(feedback))
@@ -513,9 +512,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	return preferences.chat_toggles
 
 /// Sanitizes the preferences, applies the randomization prefs, and then applies the preference to the human mob.
-/datum/preferences/proc/safe_transfer_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE, is_antag = FALSE)
+/datum/preferences/proc/safe_transfer_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE, is_antag = FALSE, list/do_not_apply) // BANDASTATION MOD - Do not apply body mods on roles
 	apply_character_randomization_prefs(is_antag)
-	apply_prefs_to(character, icon_updates)
+	if(is_antag) // BANDASTATION MOD - Do not apply body mods on roles
+		do_not_apply = do_not_apply ? (do_not_apply | list(/datum/preference/body_modifications)) : list(/datum/preference/body_modifications)
+	apply_prefs_to(character, icon_updates, do_not_apply) // BANDASTATION MOD - Do not apply body mods on roles
 
 /**
  * Applies the given preferences to a human mob.

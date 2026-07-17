@@ -85,6 +85,8 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 
 /datum/action/innate/ai/Trigger(mob/clicker, trigger_flags)
 	. = ..()
+	if(!.)
+		return
 	if(auto_use_uses)
 		adjust_uses(-1)
 	if(cooldown_period)
@@ -120,6 +122,9 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	var/name = "generic module"
 	var/category = "generic category"
 	var/description = "generic description"
+	/// Icons for the module picker interface. If icon_state is not set, the interface will attempt to use the active ability's icon.
+	var/icon = 'icons/mob/actions/actions_AI.dmi'
+	var/icon_state = ""
 	var/cost = 5
 	/// Minimum amount of APCs that has to be under the AI's control to purchase this module.
 	var/minimum_apcs = 0
@@ -647,7 +652,6 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	name = "Robotic Factory (Removes Shunting)"
 	description = "Строит машину где угодно из дорогих наномашин, превращающую живое существо в лояльного раба-киборга."
 	cost = 100
-	minimum_apcs = 10 // So you can't speedrun this
 	power_type = /datum/action/innate/ai/place_transformer
 	unlock_text = span_notice("Вы связались с космическим Амазоном и заказали фабрику роботов доставкой.")
 	unlock_sound = 'sound/machines/ping.ogg'
@@ -753,7 +757,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	power_type = /datum/action/innate/ai/break_fire_alarms
 	unlock_text = span_notice("Вы изменяете управление всех пожарных тревог на ручное, \
 		что позволяет вам переключать их по собственному желанию.")
-	unlock_sound = 'sound/machines/fire_alarm/FireAlarm1.ogg'
+	unlock_sound = 'sound/machines/fire_alarm/fire_alarm1.ogg'
 
 /datum/action/innate/ai/break_fire_alarms
 	name = "Override Thermal Sensors"
@@ -846,6 +850,8 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 /datum/ai_module/malf/upgrade/upgrade_cameras
 	name = "Upgrade Camera Network"
 	description = "Установите программу широкополосного сканирования и электрического резервирования в сеть камер, что позволяет активировать ЭМИ-защиту и улучшенное рентгеновское зрение. Обновление происходит сразу после покупки." //I <3 pointless technobabble
+	icon = 'modular_bandastation/aesthetics/cameras/icons/cameras.dmi' // BANDASTATION EDIT: Custom camera icons
+	icon_state = "xraycamera"
 	//This used to have motion sensing as well, but testing quickly revealed that giving it to the whole cameranet is PURE HORROR.
 	cost = 35 //Decent price for omniscience!
 	upgrade = TRUE
@@ -883,6 +889,8 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 /datum/ai_module/malf/upgrade/upgrade_turrets
 	name = "AI Turret Upgrade"
 	description = "Улучшает мощность и здоровье турелей ИИ. Данный эффект постоянен. Улучшение происходит сразу после покупки."
+	icon = 'icons/obj/weapons/turrets.dmi'
+	icon_state = "standard_off"
 	cost = 30
 	upgrade = TRUE
 	unlock_text = span_notice("Вы перенаправляете часть энергии на турели, усиливая их живучесть и урон.")
@@ -901,6 +909,8 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	name = "Enhanced Surveillance"
 	description = "Через комбинацию скрытых микрофонов и программного обеспечения для чтения по губам, \
 		вы можете использовать камеры для прослушивания разговоров. Улучшение происходит сразу после покупки."
+	icon = 'icons/obj/service/broadcast.dmi'
+	icon_state = "microphone"
 	cost = 30
 	upgrade = TRUE
 	unlock_text = span_notice("Распространения прошивки через OTA завершено! Камеры улучшены: Система улучшенного наблюдения активна.")
@@ -916,6 +926,8 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	description = "Позволяет вам взломать бортовой компьютер меха, загружая в него свои процессы, а также выкидывая любых пассажиров. \
 		Улучшение происходит сразу после покупки. Не позволяйте меху покинуть станцию или быть уничтоженным. \
 		Если ваше ядро уничтожено, вы потеряете соединение с устройством Судного дня и отчёт остановится."
+	icon = 'icons/mob/rideables/mecha.dmi'
+	icon_state = "durand"
 	cost = 30
 	upgrade = TRUE
 	unlock_text = span_notice("Вирусный пакет скомпилирован. Выберите цель в любой момент. <b>Вы должны постоянно оставаться на станции. \
@@ -1097,7 +1109,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 		/obj/structure,
 		/obj/item/radio/intercom,
 		/obj/item/modular_computer,
-		/mob/living/simple_animal/bot,
+		/mob/living/basic/bot,
 		/mob/living/silicon,
 	)
 

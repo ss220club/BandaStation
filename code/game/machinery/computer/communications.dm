@@ -110,11 +110,11 @@
 		return TRUE
 	return authenticated
 
-/obj/machinery/computer/communications/attackby(obj/I, mob/user, list/modifiers, list/attack_modifiers)
-	if(isidcard(I))
-		attack_hand(user)
-	else
-		return ..()
+/obj/machinery/computer/communications/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!isidcard(tool))
+		return NONE
+	attack_hand(user)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/computer/communications/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(istype(emag_card, /obj/item/card/emag/battlecruiser))
@@ -318,7 +318,7 @@
 				return
 			var/reason = trim(html_encode(params["reason"]), MAX_MESSAGE_LEN)
 			var/insert_this = list(list(
-				"time" = station_time_timestamp(),
+				"time" = round_timestamp(),
 				"sender_real_name" = "[user.real_name ? user.real_name : user.name]",
 				"sender_uid" = REF(user),
 				"message" = reason))

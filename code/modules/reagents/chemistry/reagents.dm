@@ -34,8 +34,12 @@
 	var/metabolization_rate = REAGENTS_METABOLISM
 	/// above this overdoses happen
 	var/overdose_threshold = 0
+	/// above this the big bad overdoses happen
+	var/overdose_crit_threshold = 0 // BANDASTATION ADDITION: NEW CHEMS
 	/// You fucked up and this is now triggering its overdose effects, purge that shit quick.
 	var/overdosed = FALSE
+	/// You really fucked up and now getting the worst of the worse.
+	var/overdosed_crit = FALSE // BANDASTATION ADDITION: NEW CHEMS
 	///if false stops metab in liverless mobs
 	var/self_consuming = FALSE
 	///affects how far it travels when sprayed
@@ -75,9 +79,6 @@
 	/// The affected biotype, if the reagent damages/heals toxin damage of an affected mob.
 	/// See "Mob bio-types flags" in /code/_DEFINES/mobs.dm
 	var/affected_biotype = MOB_ORGANIC
-	/// The affected respiration type, if the reagent damages/heals oxygen damage of an affected mob.
-	/// See "Mob bio-types flags" in /code/_DEFINES/mobs.dm
-	var/affected_respiration_type = ALL
 	/// A list of traits to apply while the reagent is being metabolized.
 	var/list/metabolized_traits
 	/// A list of traits to apply while the reagent is in a mob.
@@ -232,12 +233,12 @@
 /datum/reagent/proc/on_mob_metabolize(mob/living/affected_mob)
 	SHOULD_CALL_PARENT(TRUE)
 	if(metabolized_traits)
-		affected_mob.add_traits(metabolized_traits, "metabolize:[type]")
+		affected_mob.add_traits(metabolized_traits, METABOLIZATION_TRAIT(type))
 
 /// Called when this reagent stops being metabolized by a liver
 /datum/reagent/proc/on_mob_end_metabolize(mob/living/affected_mob, metabolization_ratio)
 	SHOULD_CALL_PARENT(TRUE)
-	REMOVE_TRAITS_IN(affected_mob, "metabolize:[type]")
+	REMOVE_TRAITS_IN(affected_mob, METABOLIZATION_TRAIT(type))
 
 /**
  * Called when a reagent is inside of a mob when they are dead if the reagent has the REAGENT_DEAD_PROCESS flag
@@ -282,7 +283,17 @@
 	to_chat(affected_mob, span_userdanger("You feel like you took too much of [name]!"))
 	affected_mob.add_mood_event("[type]_overdose", /datum/mood_event/overdose, name)
 	return
+// BANDASTATION ADDITION START: NEW CHEMS
+/// Called when a CRITICAL overdose threshold and is trigger effects.
+/datum/reagent/proc/overdose_crit_process(mob/living/affected_mob, metabolism)
+	return
 
+/// Called when a CRITICAL overdose starts.
+/datum/reagent/proc/on_overdose_crit_start(mob/living/affected_mob, metabolism)
+	log_combat(affected_mob, affected_mob, "has been critically overdosed on [name].")
+	to_chat(affected_mob, span_danger("You feel like you took too much of [name]!"))
+	affected_mob.add_mood_event("[type]_overdose", /datum/mood_event/overdose, name)
+// BANDASTATION ADDITION END: NEW CHEMS
 /**
  * Called when this chemical is processed in a hydroponics tray.
  *

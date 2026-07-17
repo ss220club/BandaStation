@@ -61,6 +61,9 @@
 	// such that you never actually cared about checking if something is *edible*.
 	var/obj/item/food/clothing/moth_snack
 
+	// Is it freshly laundered
+	var/is_laundered = FALSE
+
 /obj/item/clothing/Initialize(mapload)
 	if(clothing_flags & VOICEBOX_TOGGLABLE)
 		actions_types += list(/datum/action/item_action/toggle_voice_box)
@@ -356,6 +359,9 @@
 	if(get_armor().has_any_armor() || (flags_cover & (HEADCOVERSMOUTH|PEPPERPROOF)) || (clothing_flags & STOPSPRESSUREDAMAGE) || (visor_flags & STOPSPRESSUREDAMAGE))
 		. += span_notice("Имеется <a href='byond://?src=[REF(src)];list_armor=1'>бирка</a>, указывающая классы защиты.")
 
+	if(is_laundered)
+		. += "[src] выглядит свежим и нетронутым."
+
 /obj/item/clothing/examine_tags(mob/user)
 	. = ..()
 	if (clothing_flags & THICKMATERIAL)
@@ -496,13 +502,8 @@
 	if(stubborn_stains) //Just can't make it feel right
 		return
 
-	var/fresh_mood = AddComponent( \
-		/datum/component/onwear_mood, \
-		saved_event_type = /datum/mood_event/fresh_laundry, \
-		examine_string = "[capitalize(declent_ru(NOMINATIVE))] выглядит [genderize_ru(gender, "свежим и нетронутым", "свежей и нетронутой", "свежим и нетронутым", "свежими и нетронутыми")].", \
-	)
-
-	QDEL_IN(fresh_mood, 2 MINUTES)
+	is_laundered = TRUE
+	addtimer(VARSET_CALLBACK(src, is_laundered, FALSE), 2 MINUTES)
 
 //This mostly exists so subtypes can call appriopriate update icon calls on the wearer.
 /obj/item/clothing/proc/update_clothes_damaged_state(damaged_state = CLOTHING_DAMAGED)
@@ -572,7 +573,7 @@ BLIND     // can't see anything
 	if(!iscarbon(user))
 		return TRUE
 	var/mob/living/carbon/carbon_user = user
-	if(up)
+	if(visor_flags_inv)
 		carbon_user.refresh_obscured()
 	if(visor_vars_to_toggle & VISOR_TINT)
 		carbon_user.update_tint()
@@ -582,7 +583,6 @@ BLIND     // can't see anything
 
 /obj/item/clothing/proc/visor_toggling() //handles all the actual toggling of flags
 	up = !up
-	SEND_SIGNAL(src, COMSIG_CLOTHING_VISOR_TOGGLE, up)
 	clothing_flags ^= visor_flags
 	flags_inv ^= visor_flags_inv
 	flags_cover ^= visor_flags_cover
@@ -590,6 +590,7 @@ BLIND     // can't see anything
 		flash_protect ^= initial(flash_protect)
 	if(visor_vars_to_toggle & VISOR_TINT)
 		tint ^= initial(tint)
+	SEND_SIGNAL(src, COMSIG_CLOTHING_VISOR_TOGGLE, up)
 	update_appearance() //most of the time the sprite changes
 
 /obj/item/clothing/proc/can_use(mob/user)
@@ -645,7 +646,7 @@ BLIND     // can't see anything
 	return ..()
 
 /// Returns a list of overlays with our blood, if we're bloodied
-/obj/item/clothing/proc/get_blood_overlay(blood_state)
+/obj/item/clothing/proc/get_blood_overlay(blood_state, bodyshape = NONE)
 	if (!GET_ATOM_BLOOD_DECAL_LENGTH(src))
 		return
 

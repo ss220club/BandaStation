@@ -19,6 +19,10 @@
 		"editor.formatOnSave": true,
 		"editor.rulers": [80]
 	},
+	"[toml]": {
+		"editor.defaultFormatter": "tombi-toml.tombi",
+		"editor.formatOnSave": true
+	},
 	"workbench.editorAssociations": {
 		"*.dmi": "dmiEditor.dmiEditor"
 	},

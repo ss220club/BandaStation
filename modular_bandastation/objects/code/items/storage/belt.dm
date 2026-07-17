@@ -9,63 +9,100 @@
 	max_total_storage = WEIGHT_CLASS_SMALL * 8
 	max_slots = 10
 
-/obj/item/storage/belt/military/army/tsf/full/PopulateContents()
+/obj/item/storage/belt/military/army/tsf/full_pistol/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+
+/obj/item/storage/belt/military/army/tsf/full_marsok_breacher/PopulateContents()
+	new /obj/item/gun/ballistic/revolver/mateba(src)
+	new /obj/item/ammo_box/speedloader/c357(src)
+	new /obj/item/ammo_box/speedloader/c357(src)
+	new /obj/item/ammo_box/c12ga/milspec(src)
+	new /obj/item/ammo_box/c12ga/slug(src)
+	new /obj/item/ammo_box/c12ga/breacher(src)
 	new /obj/item/knife/combat(src)
 
-/obj/item/storage/belt/military/army/tsf/full_submachine/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
+/obj/item/storage/belt/military/army/tsf/full_smg_sindano/PopulateContents()
+	new /obj/item/gun/ballistic/revolver/c38(src)
+	new /obj/item/ammo_box/speedloader/c38/true(src)
+	new /obj/item/ammo_box/speedloader/c38/dumdum(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/drum(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/drum(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/drum(src)
-	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap(src)
-	new /obj/item/knife/combat(src)
 
-/obj/item/storage/belt/military/army/tsf/full_rifle_short/PopulateContents()
+/obj/item/storage/belt/military/army/tsf/full_autorifle_carwo/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/ap(src)
-	new /obj/item/knife/combat(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/long(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/long(src)
 
-/obj/item/storage/belt/military/army/tsf/full_rifle_standart/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
-	new /obj/item/ammo_box/magazine/m45(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/ap(src)
-	new /obj/item/knife/combat(src)
+/obj/item/storage/belt/military/army/tsf/full_autorifle_carwo_officer/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/long(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/long(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/long/ap(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/long/ap(src)
+
+/obj/item/storage/belt/military/army/tsf/full_autorifle_carwo_marsok/PopulateContents()
+	new /obj/item/gun/ballistic/revolver/mateba(src)
+	new /obj/item/ammo_box/speedloader/c357(src)
+	new /obj/item/ammo_box/speedloader/c357(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/drum(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/drum(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/long/ap(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/long/incendiary(src)
 
 /obj/item/storage/belt/military/army/tsf/full_engineer/PopulateContents()
+	new /obj/item/ammo_box/c12ga/milspec(src)
+	new /obj/item/ammo_box/c12ga/milspec(src)
+	new /obj/item/ammo_box/c12ga/slug(src)
+	new /obj/item/ammo_box/c12ga/breacher(src)
+	new /obj/item/knife/combat(src)
+	new /obj/item/construction/rcd/loaded(src)
+	new /obj/item/stack/sheet/mineral/sandbags/thirty(src)
+
+/obj/item/storage/belt/military/army/tsf/full_rpg/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
-	new /obj/item/construction/rcd/loaded(src)
-	new /obj/item/grenade/barrier(src)
-	new /obj/item/grenade/barrier(src)
-	new /obj/item/grenade/barrier(src)
-	new /obj/item/knife/combat(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol/stendo(src)
+	new /obj/item/ammo_casing/rocket(src)
+	new /obj/item/ammo_casing/rocket(src)
+	new /obj/item/ammo_casing/rocket/heap(src)
+	new /obj/item/ammo_casing/rocket/heap(src)
+
+/obj/item/storage/belt/military/army/tsf/full_sniper_carwo/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/ap(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/ap(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle(src)
 
 /obj/item/storage/belt/military/army/tsf/full_machinegun/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
-	new /obj/item/ammo_box/magazine/m45(src)
+	new /obj/item/gun/ballistic/automatic/pistol/wespe(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol(src)
+	new /obj/item/ammo_box/magazine/c35sol_pistol(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/box(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/box(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/box/ap(src)
-	new /obj/item/knife/combat(src)
 
 /obj/item/storage/belt/military/army/tsf/full_infiltrator/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/sindano/compact/suppressed(src)
+	new /obj/item/gun/ballistic/automatic/sindano/black/suppressed(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap(src)
 	new /obj/item/ammo_box/magazine/c35sol_pistol/drum/ap(src)
-	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard(src)
 	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/ap(src)
+	new /obj/item/ammo_box/magazine/c40sol_rifle/standard/fragmentation(src)
 
 /obj/item/storage/belt/holster/detective/full/ert/tsf_commander
 	name = "TSF commander's holster"
@@ -73,9 +110,9 @@
 
 /obj/item/storage/belt/holster/detective/full/ert/tsf_commander/PopulateContents()
 	generate_items_inside(list(
-		/obj/item/ammo_box/magazine/r10mm = 2,
+		/obj/item/ammo_box/magazine/r45 = 2,
 		/obj/item/gun/ballistic/automatic/pistol/deagle/regal = 1,
-	),src)
+	), src)
 
 // MARK: USSP
 /obj/item/storage/belt/military/army/ussp
@@ -376,7 +413,6 @@
 	inhand_icon_state = "mb_belt"
 	worn_icon_state = "mb_belt"
 	storage_type = /datum/storage/military_belt/syndicate
-
 
 /datum/storage/military_belt/syndicate
 	max_specific_storage = WEIGHT_CLASS_NORMAL

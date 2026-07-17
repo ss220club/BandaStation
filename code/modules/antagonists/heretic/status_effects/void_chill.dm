@@ -24,6 +24,8 @@
 	owner.update_icon(UPDATE_OVERLAYS)
 
 /datum/status_effect/void_chill/on_apply()
+	if(owner.can_block_magic())
+		return FALSE
 	if(issilicon(owner))
 		return FALSE
 	if(IS_HERETIC_OR_MONSTER(owner))
@@ -94,8 +96,8 @@
 
 //---- Screen alert
 /atom/movable/screen/alert/status_effect/void_chill
-	name = "Void Chill"
-	desc = "There's something freezing you from within and without. You've never felt cold this oppressive before..."
+	name = "Холод Пустоты"
+	desc = "Леденящий холод сковывает вас изнутри и снаружи. Никогда прежде вы не чувствовали такой гнетущей стужи..."
 	icon_state = "heretic_template"
 	overlay_state = "void_chill_minor"
 
@@ -113,4 +115,4 @@
 		return
 	var/datum/status_effect/void_chill/chill_effect = attached_effect
 	if(chill_effect.stacks >= 5)
-		desc = "You had your chance to run, now it's too late. You may never feel warmth again..."
+		desc = "У вас был шанс убежать, но теперь уже слишком поздно. Возможно, вы никогда больше не почувствуете тепла..."

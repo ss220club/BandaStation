@@ -22,7 +22,7 @@
 	/// text string used to find typepaths used in door and wall (false and tram too) construction for door assemblies and girders respectively
 	var/construction_path_type = null
 	///If true, this is worth points in the gulag labour stacker
-	var/gulag_valid = FALSE
+	var/gulag_value = 0
 	///Set to true if this is vended from a material storage
 	var/manufactured = FALSE
 	/// whether this sheet can be sniffed by the material sniffer
@@ -42,7 +42,7 @@
 
 /obj/item/stack/sheet/examine(mob/user)
 	. = ..()
-	if (manufactured && gulag_valid)
+	if (manufactured && gulag_value)
 		. += span_notice("It has been embossed with a manufacturer's mark of guaranteed quality.")
 
 	var/datum/material/material = get_master_material()
@@ -56,8 +56,9 @@
 		if (isnull(prop_value)) // Error?
 			continue
 		var/descriptor = property?.get_descriptor(prop_value)
+		var/tooltip_hint = property?.get_tooltip(prop_value)
 		if (descriptor) // Overriden derivative property?
-			material_string += span_tooltip("[property]: [prop_value < 0 ? "-" : ""]\Roman[round(abs(prop_value), 1)]", descriptor)
+			material_string += span_tooltip("[property]: [tooltip_hint]", descriptor)
 
 	if (length(material_string))
 		. += span_info("[capitalize(material.name)] is [english_list(material_string)].")

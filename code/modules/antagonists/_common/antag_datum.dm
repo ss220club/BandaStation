@@ -155,7 +155,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 /datum/action/antag_info/New(Target)
 	. = ..()
-	name = "Open [target] Information"
+	name = "Открыть информацию о «[target]»"
 
 /datum/action/antag_info/Trigger(mob/clicker, trigger_flags)
 	. = ..()
@@ -257,8 +257,8 @@ GLOBAL_LIST_EMPTY(antagonists)
 	if(!silent)
 		greet()
 		if(ui_name)
-			to_chat(owner.current, span_boldnotice("For more info, read the panel. \
-				You can always come back to it using the button in the top left."))
+			to_chat(owner.current, span_boldnotice("Для большей информации - прочтите панель. \
+				Вы можете вернуться снова, нажав кнопку сверху слева."))
 			info_button.Trigger()
 		var/type_policy = get_policy("[type]") // path to text
 		if(type_policy)
@@ -343,7 +343,6 @@ GLOBAL_LIST_EMPTY(antagonists)
 	SEND_SIGNAL(owner, COMSIG_ANTAGONIST_REMOVED, src)
 	if(owner.current)
 		SEND_SIGNAL(owner.current, COMSIG_MOB_ANTAGONIST_REMOVED, src)
-	qdel(src)
 
 /**
  * Proc that sends fluff or instructional messages to the player when they are given this antag datum.
@@ -351,7 +350,7 @@ GLOBAL_LIST_EMPTY(antagonists)
  */
 /datum/antagonist/proc/greet()
 	if(!silent)
-		to_chat(owner.current, span_big("Ты [src.name]."))
+		to_chat(owner.current, span_big("Вы - [src.name]."))
 		play_stinger()
 
 /// Plays the antag stinger sound, if we have one
@@ -628,3 +627,34 @@ GLOBAL_LIST_EMPTY(antagonists)
 /// Return TRUE to prevent the antag's job from handling the respawn
 /datum/antagonist/proc/on_respawn(mob/new_character)
 	return FALSE
+
+/// Dissassociates the antag datum from its owner, without deleting it - allowing one datum and its objectives to be reused for another mind
+/datum/antagonist/proc/store_datum()
+	if(isnull(owner))
+		stack_trace("Tried to store an antagonist datum that already has no owner.")
+		return FALSE
+
+	on_removal()
+	var/datum/team/antag_team = get_team()
+	antag_team?.remove_member(owner)
+	LAZYREMOVE(owner.antag_datums, src)
+	owner = null
+	log_game("[key_name(owner)] has lost antag datum [src] ([type]).")
+	QDEL_NULL(team_hud_ref)
+	return TRUE
+
+/// Reassociates the antag datum with a new mind - allowing one datum and its objectives to be reused for another mind
+/datum/antagonist/proc/restore_datum(datum/mind/new_owner)
+	if(!isnull(owner))
+		stack_trace("Tried to restore an antagonist datum that already has an owner.")
+		return FALSE
+	if(!can_be_owned(new_owner))
+		return FALSE
+
+	owner = new_owner
+	LAZYADD(owner.antag_datums, src)
+	var/datum/team/antag_team = get_team()
+	antag_team?.add_member(new_owner)
+	on_gain()
+	log_game("[key_name(new_owner)] has gained antag datum [src] ([type]).")
+	return TRUE

@@ -223,6 +223,11 @@
 	desc = "A small bottle. Contains Histamine."
 	list_reagents = list(/datum/reagent/toxin/histamine = 30)
 
+/obj/item/reagent_containers/cup/bottle/carnivorous_blood
+	name = "carnivorous blood bottle"
+	desc = "A small bottle. Contains carnivorous blood."
+	list_reagents = list(/datum/reagent/toxin/carnivorousblood = 30)
+
 /obj/item/reagent_containers/cup/bottle/diphenhydramine
 	name = "antihistamine bottle"
 	desc = "A small bottle of diphenhydramine."
@@ -513,10 +518,10 @@
 	possible_transfer_amounts = list(5, 10)
 	amount_per_transfer_from_this = 5
 	can_lid = FALSE
+	custom_materials = list(/datum/material/plastic = HALF_SHEET_MATERIAL_AMOUNT)
 
 /obj/item/reagent_containers/cup/bottle/syrup_bottle/Initialize(mapload)
 	. = ..()
-	register_context()
 	// this is not done via initial_reagent_flags because it represents state
 	update_container_flags(SEALED_CONTAINER | TRANSPARENT)
 

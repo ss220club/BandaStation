@@ -9,6 +9,7 @@
 	icon_state = "bobr"
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire.ogg'
 	spread = 15
+	pb_knockback = 1
 
 /obj/item/gun/ballistic/revolver/bobr/examine(mob/user)
 	. = ..()

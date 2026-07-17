@@ -19,6 +19,7 @@
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
 	set_dir_on_move = FALSE
 	opens_with_door_remote = TRUE
+	knock_sound = 'sound/effects/glass/glassknock.ogg' // BANDASTATION ADDITION: KNOCK
 	/// Reference to the airlock electronics inside for determining window access.
 	var/obj/item/electronics/airlock/electronics = null
 	/// If the door is considered reinforced. If TRUE, the door will resist twice as much heat (1600 deg C vs 800 deg C).
@@ -532,6 +533,18 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/door/window/brigdoor/security/holding
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/door/window/brigdoor/security/holding/right, 0)
 
 /obj/machinery/door/window/brigdoor/security/holding/right
+	icon_state = "rightsecure"
+	base_state = "rightsecure"
+
+/obj/machinery/door/window/brigdoor/security/holodeck
+	name = "cell door"
+	desc = "For keeping in criminal scum."
+	req_one_access = COMMON_ACCESS
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/door/window/brigdoor/security/holodeck/left, 0)
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/door/window/brigdoor/security/holodeck/right, 0)
+
+/obj/machinery/door/window/brigdoor/security/holodeck/right
 	icon_state = "rightsecure"
 	base_state = "rightsecure"
 

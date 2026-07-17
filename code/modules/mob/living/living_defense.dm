@@ -330,13 +330,13 @@
  */
 /mob/living/proc/grab(mob/living/target)
 	if(!istype(target))
-		return FALSE
+		return GRAB_SKIP
 	if(SEND_SIGNAL(src, COMSIG_LIVING_GRAB, target) & (COMPONENT_CANCEL_ATTACK_CHAIN|COMPONENT_SKIP_ATTACK))
 		return FALSE
 	if(target.check_block(src, 0, "захват [declent_ru(GENITIVE)]", UNARMED_ATTACK))
 		return FALSE
 	target.grabbedby(src)
-	return TRUE
+	return GRAB_SUCCESS
 
 /**
  * Called when this mob is grabbed by another mob.
@@ -592,7 +592,7 @@
 	shock_damage *= siemens_coeff
 	if((flags & SHOCK_TESLA) && HAS_TRAIT(src, TRAIT_TESLA_SHOCKIMMUNE))
 		return FALSE
-	if(HAS_TRAIT(src, TRAIT_SHOCKIMMUNE))
+	if(!(flags & SHOCK_IGNORE_IMMUNITY) && HAS_TRAIT(src, TRAIT_SHOCKIMMUNE))
 		return FALSE
 	if(shock_damage < 1)
 		return FALSE
@@ -829,6 +829,9 @@
 				span_userdanger("Вы сбиты с ног от толчка [declent_ru(GENITIVE)]!"), span_hear("Вы слышите агрессивное шарканье с последующим громким стуком!"), COMBAT_MESSAGE_RANGE, src)
 			to_chat(src, span_danger("Вы толкаете [target.declent_ru(ACCUSATIVE)], сбивая [target.ru_p_them()] с ног!"))
 			log_combat(src, target, "shoved", "[knocked_down ? "knocking them down[weapon ? " with [weapon]" : ""]" : ""]")
+			if(ishuman(target))
+				var/mob/living/carbon/human/human_target = target
+				human_target.force_say()
 			return
 
 	if(shove_flags & SHOVE_CAN_KICK_SIDE) //KICK HIM IN THE NUTS

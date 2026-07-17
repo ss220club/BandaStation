@@ -8,7 +8,7 @@
 	mat_properties = list(
 		MATERIAL_DENSITY = 5,
 		MATERIAL_HARDNESS = 0,
-		MATERIAL_FLEXIBILITY = 6,
+		MATERIAL_FLEXIBILITY = 5,
 		MATERIAL_REFLECTIVITY = 4,
 		MATERIAL_ELECTRICAL = 8,
 		MATERIAL_THERMAL = 4,
@@ -34,7 +34,7 @@
 		if(!(organ::organ_flags & ORGAN_ORGANIC))
 			organ.organ_flags |= ORGAN_ORGANIC
 
-/datum/material/meat/on_applied(atom/source, mat_amount, multiplier)
+/datum/material/meat/on_applied(atom/source, mat_amount, multiplier, from_slot)
 	. = ..()
 	if(IS_EDIBLE(source))
 		make_edible(source, mat_amount, multiplier)
@@ -72,7 +72,8 @@
 		initial_reagents = list(/datum/reagent/consumable/nutriment/protein = protein_count, /datum/reagent/consumable/nutriment/fat = fat_count), \
 		foodtypes = RAW | MEAT, \
 		eat_time = 3 SECONDS, \
-		tastes = list("meat" = 1))
+		tastes = list("meat" = 1),\
+		handmade_complexity = /obj/item/food/meat/steak::crafting_complexity)
 
 	source.AddComponent(
 		/datum/component/bloody_spreader,\
@@ -92,7 +93,7 @@
 		blood_dna_info = blood_dna,\
 	)
 
-/datum/material/meat/on_removed(atom/source, mat_amount, multiplier)
+/datum/material/meat/on_removed(atom/source, mat_amount, multiplier, from_slot)
 	. = ..()
 	source.RemoveComponentSource(SOURCE_EDIBLE_MEAT_MAT, /datum/component/edible)
 	qdel(source.GetComponent(/datum/component/blood_walk))

@@ -6,7 +6,7 @@
 	return ishuman(user.mob)
 
 /datum/keybinding/human/quick_equip
-	hotkey_keys = list("E") // BANDASTATION EDIT
+	hotkey_keys = list("E")
 	name = "quick_equip"
 	full_name = "Экипировать вещь"
 	description = "Быстро экипирует предмет в любой подходящий слот"
@@ -21,7 +21,7 @@
 	return TRUE
 
 /datum/keybinding/human/quick_equip_belt
-	hotkey_keys = list("ShiftE") // BANDASTATION EDIT
+	hotkey_keys = list("ShiftE")
 	name = "quick_equip_belt"
 	full_name = "Быстрая экипировка пояса"
 	description = "Положить предмет из руки в пояс или вытащить последний предмет из него"
@@ -74,3 +74,10 @@
 	slot_type = ITEM_SLOT_RPOCKET
 	slot_item_name = "правого кармана"
 	keybind_signal = COMSIG_KB_HUMAN_RPOCKETEQUIP_DOWN
+
+/datum/keybinding/human/quick_accessory_draw
+	hotkey_keys = list("ShiftF")
+	name = "quick_accessory_draw"
+	full_name = "Быстро достать предмет из аксессуара"
+	description = "Достать предмет из первого слота хранилища аксессуара"
+	keybind_signal = COMSIG_KB_HUMAN_QUICK_ACCESSORY_DRAW_DOWN

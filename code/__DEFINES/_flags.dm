@@ -13,6 +13,8 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define DF_ISPROCESSING (1<<2)
 /// Placed on datums that have a static, constant reference. Primarily only used for turfs.
 #define DF_STATIC_OBJECT (1<<3)
+/// Set on datums that should be tracked by the event logger.
+#define DF_EVLOGGING (1<<4)
 
 //FLAGS BITMASK
 // scroll down before changing the numbers on these
@@ -237,6 +239,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 // BANDASTATION ADDITION: Tesla Rework
 #define ZAP_TESLA_FLAGS ZAP_MOB_STUN | ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE | ZAP_GENERATES_POWER
 // BANDASTATION ADDITION: END
+#define ZAP_GIZMO_FLAGS ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE
 
 ///Object will protect itself.
 #define EMP_PROTECT_SELF (1<<0)

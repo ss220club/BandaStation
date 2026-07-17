@@ -10,6 +10,8 @@
 	return donator_level
 
 /client/proc/get_donator_level()
+	if(CONFIG_GET(flag/enable_localhost_rank) && is_localhost())
+		return CONFIG_GET(number/localhost_donate_tier)
 	return max(donator_level, get_donator_level_from_admin())
 
 /client/proc/get_donator_level_from_admin()
