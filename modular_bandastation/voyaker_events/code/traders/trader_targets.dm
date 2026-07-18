@@ -25,3 +25,11 @@
 			player.add_trader_rep(TRADER_TERESA, -50)
 			to_chat(player, span_warning("Вы убили сотрудника Милосердия! Репутация с Терезой понизилась на -50."))
 
+/proc/check_trader_bunker_events(mob/living/carbon/human/player)
+	if(!player)
+		return
+	if(!player.trader_quests)
+		return
+	for(var/trader_id in player.trader_quests)
+		var/datum/trader_quest/Q = player.trader_quests[trader_id]
+		Q.on_forest_bunker_open(player)

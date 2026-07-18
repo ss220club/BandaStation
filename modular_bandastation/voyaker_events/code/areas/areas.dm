@@ -86,6 +86,10 @@
 	name = "Побережье"
 	icon_state = "new-sydney"
 
+/area/new_sydney/coast/port
+	name = "Морской грузовой порт \"Нова-Бейзин\""
+	icon_state = "new-sydney"
+
 /area/new_sydney/pyro_zone
 	name = "Выжженая земля"
 

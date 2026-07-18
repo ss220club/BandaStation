@@ -12,25 +12,26 @@
     return ..()
 
 /obj/machinery/door/password/keycard/attackby(obj/item/I, mob/living/user, params)
-    if(!required_key)
-        return ..()
-    if(!istype(I, required_key))
-        balloon_alert(user, "не подходит")
-        return TRUE
-    if(!density)
-        return TRUE
-    var/obj/item/keycard/K = I
-    if(K.uses_left <= 0)
-        balloon_alert(user, "ключ разряжен")
-        return TRUE
-    K.uses_left--
-    to_chat(user, span_notice("Дверь открыта. Закрытие двери произойдёт через 10 секунд..."))
-    if(K.uses_left <= 0)
-        to_chat(user, span_warning("Ключ-карта исчерпала свой ресурс и рассыпалась."))
-        qdel(K)
-    open()
-    addtimer(CALLBACK(src, PROC_REF(close)), open_time)
-    return TRUE
+	if(!required_key)
+		return ..()
+	if(!istype(I, required_key))
+		balloon_alert(user, "не подходит")
+		return TRUE
+	if(!density)
+		return TRUE
+	var/obj/item/keycard/K = I
+	if(K.uses_left <= 0)
+		balloon_alert(user, "ключ разряжен")
+		return TRUE
+	K.uses_left--
+	to_chat(user, span_notice("Дверь открыта. Закрытие двери произойдёт через 10 секунд..."))
+	check_trader_bunker_events(user)
+	if(K.uses_left <= 0)
+		to_chat(user, span_warning("Ключ-карта исчерпала свой ресурс и рассыпалась."))
+		qdel(K)
+	open()
+	addtimer(CALLBACK(src, PROC_REF(close)), open_time)
+	return TRUE
 
 /obj/machinery/door/password/keycard/forest_bunker
 	name = "гермоворота бункера"

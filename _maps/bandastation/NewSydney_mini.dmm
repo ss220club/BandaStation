@@ -940,6 +940,10 @@
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney/coast)
+"aHM" = (
+/obj/effect/landmark/loot_spawn/walter_letter,
+/turf/open/indestructible/rockyground,
+/area/new_sydney/village)
 "aIa" = (
 /obj/effect/turf_decal/tile/brown,
 /turf/open/floor/iron/white/textured_large,
@@ -18810,6 +18814,11 @@
 /obj/structure/bed,
 /turf/open/misc/asteroid,
 /area/new_sydney/coast)
+"mVr" = (
+/obj/structure/table/wood/fancy,
+/obj/item/clothing/mask/breath/red_gas,
+/turf/open/floor/carpet,
+/area/new_sydney/building)
 "mVu" = (
 /obj/structure/mineral_door/wood{
 	max_integrity = 50000
@@ -30048,6 +30057,11 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
 	},
+/turf/open/floor/carpet,
+/area/new_sydney/building)
+"uMY" = (
+/obj/structure/table/wood/fancy,
+/obj/item/paper/fluff/eftk/courier,
 /turf/open/floor/carpet,
 /area/new_sydney/building)
 "uNA" = (
@@ -60462,7 +60476,7 @@ kcA
 ktY
 ktY
 pQq
-ktY
+aHM
 ktY
 ktY
 ktY
@@ -92802,10 +92816,10 @@ bEY
 rbL
 lRy
 kmZ
-qjF
-bCh
+uMY
+mVr
 wbX
-cJo
+vsR
 vBn
 tVt
 ivD
