@@ -253,6 +253,10 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	var/good_loot_chance = 25
 	var/reset_cooldown_period = 15 MINUTES
 
+/obj/structure/loot/examine(mob/user)
+	. = ..()
+	. += "Нажмите <b>ПКМ</b> чтобы обыскать контейнер."
+
 /obj/structure/loot/proc/reset_loot()
 	searched = FALSE
 
@@ -313,6 +317,8 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	desc = "Большой деревянный складской ящик. Возможно в нем хранится что-то полезное."
 	icon_state = "wood_crate"
 	random_appearence = FALSE
+	density = TRUE
+	anchored = TRUE
 
 /obj/structure/loot/technical_crate
 	Initialize(mapload)
@@ -339,6 +345,8 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	desc = "Военный ящик для хранения. Возможно в нем хранится что-то полезное."
 	icon_state = "army"
 	random_appearence = FALSE
+	density = TRUE
+	anchored = TRUE
 
 /obj/structure/loot/army_crate
 	Initialize(mapload)
@@ -370,6 +378,8 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	desc = "Ящик для хранения личных вещей. Возможно в нем хранится что-то полезное."
 	icon_state = "footlocker"
 	random_appearence = FALSE
+	density = TRUE
+	anchored = TRUE
 
 /obj/structure/loot/footlocker
 	Initialize(mapload)
@@ -382,6 +392,8 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	desc = "A sturdy wooden shelf to store a variety of items on."
 	icon = 'modular_bandastation/voyaker_events/icons/furniture.dmi'
 	icon_state = "shelf_1"
+	density = TRUE
+	anchored = TRUE
 
 /obj/structure/loot/shelf/Initialize(mapload)
 	. = ..()
@@ -395,6 +407,8 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	desc = "A sturdy metal shelf to store a variety of items on."
 	icon = 'modular_bandastation/voyaker_events/icons/supermart.dmi'
 	icon_state = "longrack_1"
+	density = TRUE
+	anchored = TRUE
 
 /obj/structure/loot/long_shelf_metal/Initialize(mapload)
 	. = ..()
@@ -409,6 +423,8 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	icon = 'modular_bandastation/voyaker_events/icons/cabinets.dmi'
 	icon_state = "filing_cabinet"
 	random_appearence = FALSE
+	density = TRUE
+	anchored = TRUE
 
 /obj/structure/loot/file_cabinet/Initialize(mapload)
 	. = ..()
