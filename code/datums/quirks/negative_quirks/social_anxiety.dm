@@ -48,24 +48,6 @@
 		return
 
 	var/moodmod = calculate_mood_mod()
-	var/message = speech_args[SPEECH_MESSAGE]
-	if(message)
-		var/list/message_split = splittext(message, " ")
-		var/list/new_message = list()
-		for(var/word in message_split)
-			if(word && prob(max(33, moodmod)) && word != message_split[1]) //Minimum 1/3 chance of filler
-				var/stuttering = ""
-				var/first_char = copytext_char(word, 1, 2)
-				var/stutter_len = max(1, rand(1, max(1, round(length_char(word) / 3))))
-				for(var/i in 1 to stutter_len)
-					stuttering += first_char + "-"
-				new_message += (stuttering + word)
-			else
-				new_message += word
-		message = jointext(new_message, " ")
-
-	speech_args[SPEECH_MESSAGE] = message
-
 	if(prob(min(20, (0.20 * moodmod)))) //Max 20% chance of not talking
 		if(dumb_thing)
 			to_chat(quirk_holder, span_userdanger("Вы вспоминаете глупость, которую сказали давным-давно, и внутренне кричите."))
