@@ -61,8 +61,6 @@
 				quirk_holder.set_silence_if_lower(6 SECONDS)
 
 		speech_args[SPEECH_MESSAGE] = pick("Э-э-эм.","Эмм.","Ам.", "Ммм.", "Х-э-эм.", "Ну.", "Ой.", "Простите.", "Извините.")
-	else
-		speech_args[SPEECH_MESSAGE] = message
 
 // small chance to make eye contact with inanimate objects/mindless mobs because of nerves
 /datum/quirk/social_anxiety/proc/looks_at_floor(datum/source, atom/A)
