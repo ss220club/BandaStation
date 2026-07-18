@@ -73,6 +73,7 @@
 #include "code\weapon\shotgun.dm"
 #include "code\weapon\smg.dm"
 #include "code\weapon\special.dm"
+#include "code\weapon\ballistic_master.dm"
 #include "code\weather\weather_controller.dm"
 #include "code\weather\weather_datum.dm"
 #include "code\wooden_fence\wooden_fence.dm"
