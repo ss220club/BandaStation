@@ -40,13 +40,6 @@
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c9mm/hp
 
-// MARK: 4.6x30mm
-/obj/item/ammo_box/magazine/wt550m9/wtrubber
-	name = "WT-550 magazine (4.6x30mm rubber)"
-	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
-	ammo_band_color = COLOR_AMMO_RUBBER
-	ammo_type = /obj/item/ammo_casing/c46x30mm/rubber
-
 // MARK: Eland / Takbok - TSF revolvers
 /obj/item/ammo_box/magazine/internal/cylinder/eland
 	ammo_type = /obj/item/ammo_casing/c35sol
