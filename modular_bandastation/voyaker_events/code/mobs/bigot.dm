@@ -7,9 +7,21 @@
 	.=..()
 	QDEL_IN(src, 0.5 SECONDS)
 
+/datum/targeting_strategy/basic/not_zombies
+
+/datum/targeting_strategy/basic/not_zombies/can_attack(mob/living/source, atom/target)
+	if(!..())
+		return FALSE
+	if(isliving(target))
+		var/mob/living/L = target
+		if(source.faction && L.faction)
+			if(source.faction[1] in L.faction)
+				return FALSE
+	return TRUE
+
 /mob/living/basic/bigot
 	name = "изувер"
-	desc = "Некогда человек. Теперь лишь воплощение боли."
+	desc = "Некогда человек. Теперь лишь воплощение боли. Вместо правой руки - когти-лезвия. Вместо левой - окровавленная тентакля с шипами. У него ноги такой накаченной мускулатуры, словно он может прыгнуть даже на десятый этаж."
 	icon = 'modular_bandastation/voyaker_events/icons/bigot.dmi'
 	icon_state = "bigot"
 	maxHealth = 400
@@ -35,7 +47,11 @@
 	ai_controller = /datum/ai_controller/basic_controller/bigot
 
 /mob/living/basic/bigot/death(gibbed)
+	if(quest_killer && ishuman(quest_killer))
+		check_trader_kill_quests(quest_killer, src)
+
 	. = ..()
+
 	if(prob(65))
 		new /obj/item/loot_mobs/bigot_claw(get_turf(src))
 	new /obj/effect/gibspawner/generic(get_turf(src))
@@ -43,9 +59,9 @@
 
 /datum/ai_controller/basic_controller/bigot
 	blackboard = list(
-		targeting_strategy = /datum/targeting_strategy/basic,
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies,
 		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/mining/get_target_priority,
-		BB_VISION_RANGE = 10,
+		BB_VISION_RANGE = 15,
 		BB_TARGET_MINIMUM_STAT = CONSCIOUS,
 	)
 
@@ -62,6 +78,7 @@
 
 /mob/living/basic/bigot/Initialize(mapload)
 	. = ..()
+	faction = list("cult")
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/ai_retaliate)
 	start_roaring()
@@ -84,8 +101,6 @@
 	. = ..()
 	if(!isliving(target))
 		return
-	//if(iscarbon(target))
-		//target.adjustBleedStacks(2)
 	if(prob(20))
 		new /obj/effect/decal/cleanable/blood(get_turf(src))
 
@@ -108,8 +123,6 @@
 		step_towards(target, src)
 		sleep(2)
 	target.apply_damage(35, BRUTE)
-	//if(iscarbon(target))
-		//target.adjustBleedStacks(8)
 	return TRUE
 
 /mob/living/basic/bigot/proc/charge_attack(mob/living/target)
@@ -153,7 +166,14 @@
 
 /mob/living/basic/bigot/Life(seconds_per_tick = SSMOBS_DT, times_fired)
 	. = ..()
+	if(stat != CONSCIOUS)
+		return
 	var/mob/living/carbon/human/H = locate() in view(7, src)
-	if(H)
-		tongue_tentacle(H)
-		charge_attack(H)
+	if(!H)
+		return
+	if(H.stat == DEAD)
+		return
+	if(H.health <= HEALTH_THRESHOLD_DEAD)
+		return
+	tongue_tentacle(H)
+	charge_attack(H)

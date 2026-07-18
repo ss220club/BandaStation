@@ -401,6 +401,10 @@
 			var/mob/living/L = living_target
 			if(isliving(firer))
 				L.vars["quest_killer"] = firer
+				var/dist = get_dist(firer, L)
+				L.quest_kill_distance = dist
+				if(dist > L.quest_max_kill_distance)
+					L.quest_max_kill_distance = dist
 
 		log_combat(firer, living_target, "shot", src, reagent_note)
 		return BULLET_ACT_HIT

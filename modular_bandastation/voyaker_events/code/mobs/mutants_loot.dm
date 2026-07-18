@@ -15,7 +15,11 @@
 	qdel(src)
 
 /mob/living/basic/faithless/death(gibbed)
+	if(quest_killer && ishuman(quest_killer))
+		check_trader_kill_quests(quest_killer, src)
+
 	. = ..()
+
 	if(prob(35))
 		new /obj/item/loot_mobs/faithless_heart(get_turf(src))
 	var/obj/effect/gibspawner/generic/gibs = new(get_turf(src))
@@ -23,7 +27,11 @@
 	qdel(src)
 
 /mob/living/basic/spider/sand/death(gibbed)
+	if(quest_killer && ishuman(quest_killer))
+		check_trader_kill_quests(quest_killer, src)
+
 	. = ..()
+
 	if(prob(60))
 		new /obj/item/loot_mobs/hunterspider_claw(get_turf(src))
 	var/obj/effect/gibspawner/generic/gibs = new(get_turf(src))
@@ -31,7 +39,11 @@
 	qdel(src)
 
 /mob/living/basic/hyperzombie/death(gibbed)
+	if(quest_killer && ishuman(quest_killer))
+		check_trader_kill_quests(quest_killer, src)
+
 	. = ..()
+
 	if(prob(50))
 		new /obj/item/loot_mobs/hyperzombie_gland(get_turf(src))
 	var/obj/effect/decal/cleanable/greenglow/radioactive/puddle = new(get_turf(src))
@@ -48,3 +60,9 @@
 	var/obj/effect/gibspawner/generic/gibs = new(get_turf(src))
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(qdel), gibs), 60 SECONDS)
 	qdel(src)
+	if(quest_killer && ishuman(quest_killer))
+		var/mob/living/carbon/human/H = quest_killer
+		check_trader_reputation_events(H, src)
+		check_trader_kill_quests(H, src)
+
+	. = ..()

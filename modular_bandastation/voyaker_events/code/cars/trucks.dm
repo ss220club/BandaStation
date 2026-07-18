@@ -40,7 +40,7 @@
 /obj/structure/vehicle_wreck/ambulance
 	name = "брошенная скорая помощь"
 	icon_state = "ambulance"
-	collision_offsets = list(list(1, 0))
+	collision_offsets = list(list(-1, 0))
 
 /obj/structure/vehicle_wreck/longtruck_kelland
 	name = "грузовик Kelland Mining"
@@ -79,24 +79,24 @@
 /obj/structure/vehicle_wreck/armoredtruck_nt1
 	name = "броневик НТ"
 	icon_state = "armoredtruck_nt_security_1"
-	collision_offsets = list(list(1, 0))
+	collision_offsets = list(list(-1, 0))
 
 /obj/structure/vehicle_wreck/armoredtruck_nt2
 	name = "броневик НТ"
 	icon_state = "armoredtruck_nt_security_2"
-	collision_offsets = list(list(1, 0))
+	collision_offsets = list(list(-1, 0))
 
 /obj/structure/vehicle_wreck/armoredtruck_white
 	name = "броневик"
 	icon_state = "armoredtruck_white_white"
-	collision_offsets = list(list(1, 0))
+	collision_offsets = list(list(-1, 0))
 
 /obj/structure/vehicle_wreck/armoredtruck_teal
 	name = "броневик"
 	icon_state = "armoredtruck_white_teal"
-	collision_offsets = list(list(1, 0))
+	collision_offsets = list(list(-1, 0))
 
 /obj/structure/vehicle_wreck/armoredtruck_blue
 	name = "броневик"
 	icon_state = "armoredtruck_blue_white"
-	collision_offsets = list(list(1, 0))
+	collision_offsets = list(list(-1, 0))

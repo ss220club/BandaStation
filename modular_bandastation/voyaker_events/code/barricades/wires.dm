@@ -3,24 +3,29 @@
 	desc = "Металлическая проволока, мешающая свободному передвижению."
 	icon = 'modular_bandastation/voyaker_events/icons/barricade.dmi'
 	icon_state = "metal_wire"
-	layer = ABOVE_MOB_LAYER
 	density = FALSE
 	anchored = TRUE
 	var/list/recent_mobs = list()
 
-/obj/structure/barbed_wire/Crossed(atom/movable/AM)
-	. = ..()
-	if(!isliving(AM))
-		return
-	var/mob/living/L = AM
-	if(recent_mobs[L])
-		return
-	recent_mobs[L] = world.time
-	var/obj/item/bodypart/leg = L.get_bodypart(BODY_ZONE_L_LEG)
-	if(leg)
-		leg.receive_damage(10, 15)
-	to_chat(L, span_warning("Вы наступили на колючую проволоку!"))
-	addtimer(CALLBACK(src, PROC_REF(clear_cd), L), 2 SECONDS)
+/obj/structure/barbed_wire/Initialize(mapload)
+    . = ..()
+    START_PROCESSING(SSobj, src)
 
-/obj/structure/barbed_wire/proc/clear_cd(mob/living/L)
-	recent_mobs -= L
+/obj/structure/barbed_wire/process(seconds_per_tick)
+    for(var/mob/living/L in loc)
+        if(recent_mobs[L])
+            continue
+        recent_mobs[L] = TRUE
+        L.apply_damage(10, BRUTE, BODY_ZONE_L_LEG)
+        playsound(src, 'sound/effects/wounds/blood3.ogg', 50, TRUE)
+        to_chat(L, span_warning("Вы наступили на колючую проволоку!"))
+
+/obj/structure/barbed_wire/attackby(obj/item/I, mob/user, params)
+    if(istype(I, /obj/item/wirecutters))
+        balloon_alert(user, "срезает...")
+        if(!do_after(user, 3 SECONDS, target = src))
+            return
+        playsound(src, 'sound/items/tools/wirecutter.ogg', 50, TRUE)
+        qdel(src)
+        return
+    return ..()

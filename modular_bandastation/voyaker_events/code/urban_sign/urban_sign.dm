@@ -4,7 +4,7 @@
 	icon_state = "open"
 	anchored = TRUE
 	density = FALSE
-	layer = ABOVE_WINDOW_LAYER
+	layer = ABOVE_MOB_LAYER
 	var/lit_icon_state
 	var/enabled = TRUE
 	light_range = 2

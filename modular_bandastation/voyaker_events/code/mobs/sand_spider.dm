@@ -1,6 +1,6 @@
 /mob/living/basic/spider/sand
 	name = "sand spider"
-	desc = "A spider adapted to life beneath the desert sands."
+	desc = "A spider adapted to life beneath the desert sands. You notice that its chelicerae and front legs have a slightly rounded, scoop-like shape. It is possible that it can use them to dig quite rapidly."
 	icon = 'modular_bandastation/voyaker_events/icons/arachnoid.dmi'
 	icon_state = "desert"
 	maxHealth = 150

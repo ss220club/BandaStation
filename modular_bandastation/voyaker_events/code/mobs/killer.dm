@@ -1,6 +1,17 @@
+/datum/targeting_strategy/basic/not_kamilla_friends
+
+/datum/targeting_strategy/basic/not_kamilla_friends/can_attack(mob/living/living_mob, atom/target, vision_range)
+	if(!..())
+		return FALSE
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		if((H.trader_rep[TRADER_KAMILLA] || 0) >= 50)
+			return FALSE
+	return TRUE
+
 /mob/living/basic/killer
 	name = "убийца"
-	desc = "Выглядит как профессиональный наёмник. На кого работает - неизвестно."
+	desc = "Выглядит как профессиональный наёмник. Одёт в тёмный прорезиненный комбинезон с кевларовыми подкладками. Его глаза ужасающе светятся красным сквозь баллистическую маску - видимо, это очки термального зрения. На поясе находятся дымовые и осколочные гранаты, в руке - сжимает УЗИ с глушителем, за спиной - верная катана. На кого работает - неизвестно."
 	icon = 'modular_bandastation/voyaker_events/icons/assasin.dmi'
 	icon_state = "s-ninja"
 	maxHealth = 200
@@ -28,9 +39,9 @@
 
 /datum/ai_controller/basic_controller/killer
 	blackboard = list(
-		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_kamilla_friends,
 		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/mining/get_target_priority,
-		BB_VISION_RANGE = 10,
+		BB_VISION_RANGE = 15,
 		BB_TARGET_MINIMUM_STAT = CONSCIOUS,
 	)
 
@@ -74,6 +85,7 @@
 
 /mob/living/basic/killer/Initialize(mapload)
 	. = ..()
+	faction = list("Syndicate")
 	add_movespeed_modifier(/datum/movespeed_modifier/killer_fast)
 
 /mob/living/basic/killer/proc/shoot_single(atom/target)

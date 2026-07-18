@@ -1,11 +1,14 @@
 GLOBAL_LIST_INIT(raid_areas, list(
-	/area/new_sydney,
 	/area/new_sydney/building,
+	/area/new_sydney/building/administration,
 	/area/new_sydney/dark_forest,
 	/area/new_sydney/dark_forest/radiation_lake,
 	/area/new_sydney/dark_forest/building,
+	/area/new_sydney/pyro_zone,
 	/area/new_sydney/military_base,
-	/area/new_sydney/mine
+	/area/new_sydney/mine,
+	/area/new_sydney/village,
+	/area/new_sydney/coast
 ))
 
 /mob/living/carbon/human/proc/in_raid()
@@ -18,11 +21,25 @@ GLOBAL_LIST_INIT(raid_areas, list(
 /mob/living/carbon/human/death(gibbed)
 	if(in_raid() && !ignore_raid_death)
 		extract_from_raid()
-		return TRUE
+		return FALSE
 
 	return ..()
 
+/mob/living/carbon/human/proc/finish_extract()
+	if(QDELETED(src))
+		return
+	fully_heal()
+	revive()
+	set_stat(CONSCIOUS)
+	regenerate_icons()
+	set_static_vision(2 SECONDS)
+	set_temp_blindness(1 SECONDS)
+	Paralyze(2 SECONDS)
+
 /mob/living/carbon/human/proc/extract_from_raid()
+	if(quest_killer && ishuman(quest_killer))
+		check_trader_kill_quests(quest_killer, src)
+	quest_killer = null
 	var/turf/death_turf = get_turf(src)
 	var/list/items_to_drop = list(
 		head,
@@ -59,6 +76,8 @@ GLOBAL_LIST_INIT(raid_areas, list(
 		forceMove(get_turf(L))
 	do_sparks(1, FALSE, death_turf)
 	fully_heal()
+	revive()
+	addtimer(CALLBACK(src, PROC_REF(finish_extract)), 1)
 	regenerate_icons()
 	playsound_local(src, 'sound/effects/magic/blink.ogg', 25, TRUE)
 	set_static_vision(2 SECONDS)

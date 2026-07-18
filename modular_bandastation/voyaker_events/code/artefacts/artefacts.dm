@@ -48,7 +48,7 @@
 	for(var/turf/T in RANGE_TURFS(3, center))
 		if(get_dist(center, T) != 3)
 			continue
-		var/obj/effect/temp_visual/fire_ring/F = new(T)
+		var/obj/effect/fire_ring/F = new(T)
 		F.owner = owner
 		flames += F
 
@@ -62,18 +62,22 @@
 			continue
 		if(i > flames.len)
 			break
-		var/obj/effect/temp_visual/fire_ring/F = flames[i]
+		var/obj/effect/fire_ring/F = flames[i]
+		if(QDELETED(F))
+			i++
+			continue
 		F.forceMove(T)
 		F.damage_nearby()
 		i++
+
 	addtimer(CALLBACK(src, PROC_REF(update_ring)), 0.5 SECONDS)
 
 /datum/fire_ring/proc/remove_ring()
-	for(var/obj/effect/temp_visual/fire_ring/F in flames)
+	for(var/obj/effect/fire_ring/F in flames)
 		qdel(F)
 	qdel(src)
 
-/obj/effect/temp_visual/fire_ring
+/obj/effect/fire_ring
 	name = "огонь"
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "medium"
@@ -82,7 +86,7 @@
 	layer = ABOVE_MOB_LAYER
 	var/mob/living/owner
 
-/obj/effect/temp_visual/fire_ring/proc/damage_nearby()
+/obj/effect/fire_ring/proc/damage_nearby()
 	var/turf/T = get_turf(src)
 	for(var/mob/living/L in T)
 		if(L == owner)

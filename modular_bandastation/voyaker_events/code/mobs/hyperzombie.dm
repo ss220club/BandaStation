@@ -1,6 +1,6 @@
 /mob/living/basic/hyperzombie
 	name = "гиперзомби"
-	desc = "Его плоть светится ядовито-зелёным светом."
+	desc = "Его плоть светится ядовито-зелёным светом - видимо, это последствия радиоактивного излучнеия. Постоянно дёргающийся, с прижатыми к груди руками и истощающий резкий запах. Пасть постоянно открыта так, словно готова что-то извергнуть из себя."
 	icon = 'modular_bandastation/voyaker_events/icons/hyperzombie.dmi'
 	icon_state = "hyperzombie"
 	maxHealth = 270
@@ -19,9 +19,9 @@
 
 /datum/ai_controller/basic_controller/hyperzombie
 	blackboard = list(
-		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies,
 		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/mining/get_target_priority,
-		BB_VISION_RANGE = 10,
+		BB_VISION_RANGE = 15,
 		BB_TARGET_MINIMUM_STAT = CONSCIOUS,
 	)
 
@@ -50,6 +50,8 @@
 		return
 	if(dist > 5)
 		return
+	if(!los_check(zombie, target))
+		return
 	zombie.next_spit = world.time + zombie.spit_cooldown
 	zombie.visible_message(span_warning("[zombie] извергает поток радиоактивной желчи!"))
 	addtimer(CALLBACK(zombie, TYPE_PROC_REF(/mob/living/basic/hyperzombie, do_spit)), 5)
@@ -57,6 +59,7 @@
 
 /mob/living/basic/hyperzombie/Initialize(mapload)
 	. = ..()
+	faction = list("cult")
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_SHOE)
 	addtimer(CALLBACK(src, PROC_REF(radiation_aura)), 1 SECONDS)
@@ -72,13 +75,15 @@
 	if(!target)
 		return
 	var/dir = get_dir(src, target)
-	spit_step(get_turf(src), dir, 8)
+	spit_step(get_turf(src), dir, 5)
 
 /mob/living/basic/hyperzombie/proc/spit_step(turf/current, dir, remaining)
 	if(remaining <= 0)
 		return
 	current = get_step(current, dir)
 	if(!current)
+		return
+	if(isclosedturf(current))
 		return
 	for(var/obj/O in current)
 		if(O.density)
@@ -91,4 +96,4 @@
 		L.apply_damage(20, BURN)
 		radiation_pulse(L, max_range = 1, threshold = 0.1, chance = 60)
 		break
-	addtimer(CALLBACK(src, PROC_REF(spit_step), current, dir, remaining - 1), 1 DECISECONDS)
+	addtimer(CALLBACK(src, PROC_REF(spit_step), current, dir, remaining - 1), 2 DECISECONDS)

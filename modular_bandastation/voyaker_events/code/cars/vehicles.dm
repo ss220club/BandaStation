@@ -6,6 +6,31 @@
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE
 	layer = ABOVE_MOB_LAYER
+	var/has_hitbox = TRUE
+
+/obj/structure/vehicle_hitbox
+	name = ""
+	icon = null
+	invisibility = INVISIBILITY_MAXIMUM
+	anchored = TRUE
+	density = TRUE
+	resistance_flags = INDESTRUCTIBLE
+	var/obj/structure/vehicle_light/master
+
+/obj/structure/vehicle_hitbox/attackby(obj/item/C, mob/user, params)
+    if(master)
+        return master.attackby(C, user, params)
+    return ..()
+
+/obj/structure/vehicle_light/Initialize(mapload)
+	. = ..()
+	if(!has_hitbox)
+		return
+	var/turf/T = get_step(src, EAST)
+	if(!T)
+		return
+	var/obj/structure/vehicle_hitbox/H = new(T)
+	H.master = src
 
 /obj/structure/vehicle_light/suv1
 	name = "SUV Минивэн"
@@ -78,6 +103,8 @@
 /obj/structure/vehicle_light/cargo
 	icon = 'modular_bandastation/voyaker_events/icons/cargo.dmi'
 	icon_state = "cargo_engine"
+	has_hitbox = FALSE
 
 /obj/structure/vehicle_light/cargo/trailer
 	icon_state = "cargo_trailer"
+	has_hitbox = FALSE

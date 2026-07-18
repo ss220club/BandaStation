@@ -17,6 +17,10 @@
 
 /mob/living/carbon/human/proc/get_trader_level(trader_id)
 	var/rep = trader_rep[trader_id] || 0
+	if(trader_id == TRADER_TERESA)
+		var/obj/item/card/id/I = get_idcard(TRUE)
+		if(istype(I, /obj/item/card/id/advanced/blessed))
+			rep = max(rep, 100)
 	if(rep >= 100)
 		return 4
 	if(rep >= 50)

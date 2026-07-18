@@ -141,11 +141,14 @@
 
 	if(!ishuman(user))
 		return
-
 	var/mob/living/carbon/human/H = user
 	var/obj/item/I = user.get_active_held_item()
 	var/datum/trader_quest/Q = H.trader_quests[src.trader_id]
 	if(Q && I)
+		if(istype(Q, /datum/trader_quest/teresa_cyberimp))
+			var/datum/trader_quest/teresa_cyberimp/C = Q
+			if(C.try_turn_in(H, I, src.trader_id))
+				return
 		if(Q.can_complete(H, I))
 			Q.complete(H, src.trader_id, I)
 			return
@@ -250,22 +253,31 @@
 		recordlist += new_record
 
 /obj/machinery/vending/trader/proc/give_quest(mob/living/carbon/human/H)
-    if(H.trader_quests[src.trader_id])
-        to_chat(H, span_warning("У вас уже есть активное задание."))
-        return
-    var/datum/trader_quest/Q
-    for(var/path in quest_chain)
-        var/datum/trader_quest/temp = new path
-        if(!(temp.id in H.completed_trader_quests))
-            Q = temp
-            break
-    if(!Q)
-        to_chat(H, span_notice("Сейчас для вас нет новых заданий."))
-        return
-    H.trader_quests[src.trader_id] = Q
-    user_messages[REF(H)] = Q.description
-    playsound(H, 'sound/machines/ping.ogg', 50, TRUE)
-    to_chat(H, span_notice("Задание принято к выполнению. [Q.context]"))
+	if(H.trader_quests[src.trader_id])
+		to_chat(H, span_warning("У вас уже есть активное задание."))
+		return
+	var/datum/trader_quest/Q
+	for(var/path in quest_chain)
+		var/datum/trader_quest/temp = new path
+		if(!(temp.id in H.completed_trader_quests))
+			Q = temp
+			break
+	if(!Q)
+		to_chat(H, span_notice("Сейчас для вас нет новых заданий."))
+		return
+	for(var/id in H.trader_quests)
+		if(id == src.trader_id)
+			continue
+		var/datum/trader_quest/Active = H.trader_quests[id]
+		if(Active?.blocks_other_quests)
+			Active.on_other_quest_taken(H, src.trader_id)
+		if(!H.trader_quests[id])
+			continue
+	H.trader_quests[src.trader_id] = Q
+	Q.start(H)
+	user_messages[REF(H)] = Q.description
+	playsound(H, 'sound/machines/ping.ogg', 50, TRUE)
+	to_chat(H, span_notice("Задание [Q.name] принято к выполнению. [Q.context]"))
 
 /obj/machinery/vending/trader/Initialize(mapload)
 	. = ..()
@@ -290,7 +302,10 @@
 
 	quest_chain = list(
 		/datum/trader_quest/samopal_medal,
-		/datum/trader_quest/samopal_kill_punpun
+		/datum/trader_quest/samopal_vtol,
+		/datum/trader_quest/samopal_spiders,
+		/datum/trader_quest/samopal_letter,
+		/datum/trader_quest/samopal_bigots,
 	)
 
 	buy_prices = list(
@@ -421,7 +436,11 @@
 	trader_message = "Да пребудет с тобой Господь, дитя моё.;Даже в самоё тяжелое и грешное бремя - мы можем оставаться верны Господу.;Не позволяй никому осквернить злыми помыслами твою душу.;Приветствую вас. Хорошо, что Господь оберегает вас от погибели.;Вы точно хорошо себя чувствуете? Мой ассортимент лекарств от любых недугов - всегда открыт для вас.;Сохраняйте душу в чистоте, голову - в ясности, и тогда Господь приведёт вас на верный путь."
 
 	quest_chain = list(
-		/datum/trader_quest/teresa_defibrillator
+		/datum/trader_quest/teresa_defibrillator,
+		/datum/trader_quest/teresa_mailboxes,
+		/datum/trader_quest/teresa_charter,
+		/datum/trader_quest/teresa_zombies,
+		/datum/trader_quest/teresa_cyberimp,
 	)
 
 	buy_prices = list(
@@ -445,7 +464,7 @@
 		/obj/item/clothing/suit/chaplainsuit/habit = 150,
 		/obj/item/book/bible = 100,
 		/obj/item/autosurgeon = 500,
-		/obj/item/organ/cyberimp/chest/pump = 150,
+		/obj/item/organ/cyberimp/chest/nutriment = 150,
 		/obj/item/organ/cyberimp/brain/anti_drop = 450,
 		/obj/item/pinpointer/crew = 500,
 		/obj/item/reagent_containers/hypospray/combat = 300,
@@ -571,7 +590,11 @@
 	trader_message = "Чего ты мнёшься? Подходи, братуха, я не кусаюсь.;Заценил шмотки, да? Скажи ведь клёвые. Что смог выпер из сити-молла, когда весь шабаш начался - всё самое лучшее для тебя, братишка!;Ты ведь не из местных, да? Ничего, привыкнешь к нашей тусовке.;Аллоха! Ты как, приодеться зашёл, или так - за жизнь нелёгкую потрещать?;В моих шмотках - и сдыхать не страшно. Так что присматривай себе что угодно, братишка.;Ты ведь не водишься с этой рыжеволосой бестией? А, проехали, не бери в голову... Так что будешь тарить, братишка?"
 
 	quest_chain = list(
-		/datum/trader_quest/fashion_jacket
+		/datum/trader_quest/fashion_jacket,
+		/datum/trader_quest/fashion_casino,
+		/datum/trader_quest/fashion_armor,
+		/datum/trader_quest/fashion_beacon,
+		/datum/trader_quest/fashion_targets,
 	)
 
 	buy_prices = list(
@@ -664,10 +687,12 @@
 				/obj/item/storage/belt/military/army/tsf = list(40, 1, INFINITY),
 				/obj/item/storage/belt/military/army = list(40, 1, INFINITY),
 				/obj/item/storage/bag/ore = list(50, 1, INFINITY),
+				/obj/item/beacon = list(100, 2, INFINITY),
 				/obj/item/clothing/glasses/sunglasses = list(150, 2, INFINITY),
 				/obj/item/clothing/gloves/combat = list(100, 2, INFINITY),
 				/obj/item/clothing/gloves/tackler/combat = list(150, 2, INFINITY),
 				/obj/item/clothing/under/hoodie_black = list(40, 2, INFINITY),
+				/obj/item/clothing/suit/costume/hawaiian = list(100, 2, INFINITY),
 				/obj/item/storage/backpack/ert/security = list(30, 2, INFINITY),
 				/obj/item/storage/backpack/satchel/leather = list(35, 2, INFINITY),
 				/obj/item/storage/backpack/bannerpack/blue = list(40, 2, INFINITY),
@@ -724,6 +749,14 @@
 	trader_desc = "Бывший шеф полиции Нового-Сиднея, после громкого скандала с местным криминалитетом - ставший смотрителем окружного заповедника. Ходят слухи, что бывшие мафиози до сих пор точат на него зуб, поскольку Выживайло даже на новом месте работы - не прекращал на них свою неформальную охоту. Но кто знает - может в этом он преследует не только благие цели. Обосновался в особняке в горах заповедника и превратил его в настоящую крепость, оборудовав небольшой склад различных припасов для выживания. ПОКУПАЕТ: Части мутантов, артефакты, инструменты и детали."
 	trader_portrait = 'modular_bandastation/voyaker_events/icons/traders/survivor.png'
 	trader_message = "Подходи, гость дорогой. Чаем угостить не смогу, извиняй, но вот работу подкинуть, или полезности для выживания предложить - всегда рад.;Долбанные братки виноваты в том, что случилось - зуб даю. Пока мы всех их не вытравим из Сиднея - не будет нам покоя.;Вижу, что до сих пор стоишь на ногах. Это хорошо. Значит не сгинешь раньше времени.;Запомни, настоящий охотник - не только тот, кто силён - но и тот, кто вовремя хитёр.;Бери у меня товары на все случаи жизни. Кто знает, когда они тебе пригодятся в ходке.;Не могу понять - на что Фейшн и эта рыжая дура расчитывают? Облопошить всех во время ядерного апокалипсиса? Ну ничего... Я им устрою сладкую жизнь. Ядерный пепел им солярием покажется, уродам."
+
+	quest_chain = list(
+		/datum/trader_quest/survivor_can,
+		/datum/trader_quest/survivor_trust,
+		/datum/trader_quest/survivor_shooter,
+		/datum/trader_quest/survivor_mine,
+		/datum/trader_quest/survivor_contact,
+	)
 
 	buy_prices = list(
 		/obj/item/loot_mobs/bigot_claw = 400,
@@ -850,6 +883,14 @@
 	trader_portrait = 'modular_bandastation/voyaker_events/icons/traders/robinson.png'
 	trader_message = "Ищешь нормальное оружие и экипировку, боец? Можешь посмотреть мой ассортимент. Он тебя точно не обидит.;Коммунисты применили против нас свои самые грязные методы. Что же - мы не оставим их в долгу.;Много моих бойцов отдало жизни за Прометею. Многие меня заклеймили трусом за то, что я их бросил.... Но ничего. Битва ещё не проиграна.;Мне не важно, на кого ты работал до этого, наёмник. Сейчас у нас с тобой общие цели и задачи - помочь выбраться отсюда тебе и всем моим бойцам.;Я договорился об орбитальных поставках из штаба нашего новейшего вооружения. Присматривай себе всё, что будет необходимо.;Красные думали, что смогли одолеть нас ядерным взрывом на планете? Это только начало конца их преступной и утопичной идеи. И мы с тобой сможем это доказать."
 
+	quest_chain = list(
+		/datum/trader_quest/robinson_scout,
+		/datum/trader_quest/robinson_trucks,
+		/datum/trader_quest/robinson_guns,
+		/datum/trader_quest/robinson_documents,
+		/datum/trader_quest/robinson_provocation,
+	)
+
 	buy_prices = list(
 		/obj/item/clothing/mask/bandana/gold = 50,
 		/obj/item/stack/sheet/mineral/gold = 100,
@@ -895,8 +936,10 @@
 				/obj/item/gun/ballistic/automatic/sindano = list(200, 2, INFINITY),
 				/obj/item/gun/ballistic/automatic/carwo/marksman = list(400, 3, INFINITY),
 				/obj/item/gun/ballistic/automatic/sindano/compact/suppressed = list(300, 3, INFINITY),
+				/obj/item/gun/ballistic/automatic/vektor = list(275, 3, INFINITY),
 				/obj/item/gun/ballistic/shotgun/riot/renoster = list(350, 3, INFINITY),
 				/obj/item/gun/ballistic/automatic/carwo/auto/machinegun = list(650, 4, INFINITY),
+				/obj/item/gun/ballistic/automatic/bogseo/suppressed = list(600, 4, INFINITY),
 			),
 	  	),
 
@@ -914,14 +957,17 @@
 				/obj/item/ammo_box/magazine/c35sol_pistol/hp = list(15, 2, INFINITY),
 				/obj/item/ammo_box/magazine/c35sol_pistol/drum = list(25, 3, INFINITY),
 				/obj/item/ammo_box/magazine/c35sol_pistol/drum/hp = list(30, 3, INFINITY),
+				/obj/item/ammo_box/magazine/smgm9mm = list(20, 3, INFINITY),
 				/obj/item/ammo_box/magazine/c35sol_pistol/stendo/hp = list(20, 3, INFINITY),
 				/obj/item/ammo_box/magazine/c40sol_rifle/long = list(40, 3, INFINITY),
 				/obj/item/ammo_box/magazine/c35sol_pistol/drum/ap = list(75, 4, INFINITY),
 				/obj/item/ammo_box/magazine/c40sol_rifle/drum = list(80, 4, INFINITY),
 				/obj/item/ammo_box/magazine/c35sol_pistol/ap = list(40, 4, INFINITY),
 				/obj/item/ammo_box/magazine/c35sol_pistol/stendo/ap = list(50, 4, INFINITY),
+				/obj/item/ammo_box/magazine/smgm9mm/ap = list(60, 4, INFINITY),
 				/obj/item/ammo_box/magazine/c40sol_rifle/box = list(150, 4, INFINITY),
 				/obj/item/ammo_box/magazine/c40sol_rifle/long/incendiary = list(150, 4, INFINITY),
+				/obj/item/ammo_box/magazine/c585sol/extended = list(60, 4, INFINITY),
 			),
 		),
 
@@ -934,6 +980,7 @@
 				/obj/item/clothing/head/beret/tsf_marine = list(15, 1, INFINITY),
 				/obj/item/radio/headset/heads/captain/alt/tsf = list(25, 1, INFINITY),
 				/obj/item/clothing/shoes/jackboots = list(20, 1, INFINITY),
+				/obj/item/beacon = list(75, 1, INFINITY),
 				/obj/item/clothing/mask/gas/sechailer = list(100, 2, INFINITY),
 				/obj/item/clothing/glasses/hud/security/sunglasses/tsf = list(250, 2, INFINITY),
 				/obj/item/clothing/suit/armor/vest/marine/security = list(350, 3, INFINITY),
@@ -959,9 +1006,17 @@
 
 	trader_id = TRADER_KAMILLA
 	trader_name = "Камилла"
-	trader_desc = "Молодая девушка бунтарского поведения, дочь главы мафиозного клана Ренотти, любительница цитат из кинофильмов - именно так можно охарактеризовать Кексуху - одну из самых коварных и влиятельных контрабандисток в Галактике. По иронии судьбы, свою дурную репутацию она смогла приобрести после кончины горячо любимого отца, который незадолго до катастрофы на Прометее - был убит киллерами при выезде из своего ресторана. Кексуха считает, что заказчиком является Фейшн - её давний заклятый враг по старому бизнесу. Теперь же, возглавив небольшую группу своих теневых посредников, она осталась на Тау-Кита с одной единственной целью - отомстить предполагаемому убийце и ненадолго, но вернуть влияние семьи Ренотти на уже умирающую планету. ПОКУПАЕТ: Оружие качественного и армейского образца и патроны, запрещённый информационный софт."
+	trader_desc = "Молодая девушка бунтарского поведения, дочь главы мафиозного клана Ренотти, любительница цитат из кинофильмов - именно так можно охарактеризовать Камиллу - одну из самых коварных и влиятельных контрабандисток в Галактике. По иронии судьбы, свою дурную репутацию она смогла приобрести после кончины горячо любимого отца, который незадолго до катастрофы на Прометее - был убит киллерами при выезде из своего ресторана. Камилла считает, что заказчиком является Фейшн - её давний заклятый враг по старому бизнесу. Теперь же, возглавив небольшую группу своих теневых посредников, она осталась на Тау-Кита с одной единственной целью - отомстить предполагаемому убийце и ненадолго, но вернуть влияние семьи Ренотти на уже умирающую планету. ПОКУПАЕТ: Оружие качественного и армейского образца и патроны, запрещённый информационный софт."
 	trader_portrait = 'modular_bandastation/voyaker_events/icons/traders/kamilla.gif'
 	trader_message = "Ну привет, мерк. Ты так и будешь глазеть на меня, или уже что-то купишь? А можешь продать мне свои стволы, если они конечно у тебя не рассыпятся в руках.;У меня, как у Виктора Бута из Оружейного барона - ты найдёшь любой ствол по душе и стилю. Впрочем, чужие пушки тоже покупаю, если они не фуфло. Но ты же не фуфлыжник, прадва?;Добрался сюда, да ещё живой? Ты прям как Форест Гамп - бежишь без оглядки, не зная куда. Но раз ты здесь - можем поговорить о делах.;Ты как Роберт Невилл из Я - Легенда - пытаешься цепляться за возможность выжить тут и найти пути к тому, чтобы отсюда выбраться. Но запомни - только я тебе дам билет отсюда.;Этот Фейшн - такой слащавый мудачок. Думает, что если смог выкинуть мои терминалы на пустоши - значит смог урыть меня. Как жаль, что он не знает про мои тузы в рукавах.;Не спрашивай, откуда я достала все эти пушки. Я как Волк с Уолл-стрит - надёжно храню свои предпринимательские секреты."
+
+	quest_chain = list(
+		/datum/trader_quest/keksuha_faithless,
+		/datum/trader_quest/keksuha_donate,
+		/datum/trader_quest/keksuha_massacre,
+		/datum/trader_quest/keksuha_explosive,
+		/datum/trader_quest/keksuha_western,
+	)
 
 	buy_prices = list(
 		/obj/item/gun/ballistic/automatic/pistol/zashch = 75,
@@ -1021,6 +1076,7 @@
 				/obj/item/gun/ballistic/automatic/as32 = list(400, 3, INFINITY),
 				/obj/item/gun/ballistic/shotgun/riot/renoster/black = list(375, 3, INFINITY),
 				/obj/item/gun/ballistic/automatic/sindano/black/suppressed = list(375, 3, INFINITY),
+				/obj/item/gun/ballistic/automatic/vektor/black = list(300, 3, INFINITY),
 				/obj/item/gun/ballistic/automatic/sabel/auto/upgraded = list(425, 3, INFINITY),
 				/obj/item/gun/ballistic/rifle/hlrm = list(550, 3, INFINITY),
 				/obj/item/gun/ballistic/revolver/badass = list(400, 4, INFINITY),
@@ -1046,6 +1102,7 @@
 				/obj/item/ammo_box/magazine/m9mm_aps = list(15, 2, INFINITY),
 				/obj/item/ammo_box/magazine/c762x39mm = list(25, 3, INFINITY),
 				/obj/item/ammo_box/magazine/c762x51mm = list(35, 3, INFINITY),
+				/obj/item/ammo_box/magazine/smgm9mm = list(15, 3, INFINITY),
 				/obj/item/ammo_box/magazine/as32 = list(30, 3, INFINITY),
 				/obj/item/ammo_box/magazine/c35sol_pistol/drum = list(20, 3, INFINITY),
 				/obj/item/ammo_box/magazine/c35sol_pistol/drum/hp = list(25, 3, INFINITY),
@@ -1063,6 +1120,7 @@
 				/obj/item/ammo_box/magazine/m12g/flechette = list(75, 4, INFINITY),
 				/obj/item/ammo_box/magazine/m12g/slug = list(125, 4, INFINITY),
 				/obj/item/ammo_box/magazine/sniper_rounds = list(200, 4, INFINITY),
+				/obj/item/ammo_box/magazine/smgm9mm/ap = list(60, 4, INFINITY),
 			),
 		),
 	)

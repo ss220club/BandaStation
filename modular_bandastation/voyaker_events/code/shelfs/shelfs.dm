@@ -4,6 +4,40 @@
 	icon = 'modular_bandastation/voyaker_events/icons/furniture.dmi'
 	icon_state = "empty_shelf_1"
 	density = TRUE
+	var/list/drop_cooldowns = list()
+
+/obj/structure/decorative/shelf/proc/place_beacon(mob/living/carbon/human/user, obj/item/B)
+	if(!user)
+		return
+	var/datum/trader_quest/Q = user.trader_quests?[TRADER_FASHION]
+	if(!istype(Q, /datum/trader_quest/fashion_beacon))
+		return
+	var/area/A = get_area(src)
+	if(!istype(A, /area/new_sydney/mine))
+		balloon_alert(user, "здесь нельзя установить маяк")
+		return
+	if(!istype(B, /obj/item/beacon))
+		balloon_alert(user, "нужен маячок")
+		return
+	var/key = REF(user)
+	if(drop_cooldowns[key] && world.time < drop_cooldowns[key])
+		balloon_alert(user, "сюда уже положили")
+		return
+	balloon_alert(user, "закладывает...")
+	if(!do_after(user, 5 SECONDS, target = src))
+		return
+	drop_cooldowns[key] = world.time + 10 MINUTES
+	Q.add_progress(user, TRADER_FASHION)
+	qdel(B)
+	balloon_alert(user, "заложено")
+
+/obj/structure/decorative/shelf/attackby(obj/item/B, mob/user, params)
+	. = ..()
+	if(!ishuman(user))
+		return
+	if(!istype(B, /obj/item/beacon))
+		return
+	place_beacon(user, B)
 
 /obj/structure/decorative/shelf/crates
 	desc = "A sturdy wooden shelf with a bunch of crates on it."

@@ -5,6 +5,22 @@
 	anchored = TRUE
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE
+	var/list/parts = list()
+
+/obj/structure/city_part
+	name = ""
+	icon = null
+	invisibility = INVISIBILITY_MAXIMUM
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	density = TRUE
+	anchored = TRUE
+	resistance_flags = INDESTRUCTIBLE
+	var/obj/structure/city_prop/master
+
+/obj/structure/city_part/attackby(obj/item/I, mob/user, params)
+	if(master)
+		return master.attackby(I, user, params)
+	return ..()
 
 /obj/structure/city_prop/streetlamp
 	name = "фонарный столб"
@@ -161,18 +177,51 @@
 	to_chat(user, span_notice("Вы полностью заполняете канистру топливом."))
 	return TRUE
 
+/obj/structure/city_prop/gas_station/Initialize(mapload)
+	. = ..()
+	var/turf/T = get_turf(src)
+	new /obj/structure/city_part(locate(T.x, T.y + 1, T.z))
+
 /obj/structure/city_prop/telebox
 	name = "телефонная будка"
 	icon_state = "phonebox_closed_light"
+	var/list/search_cooldowns = list()
+
+/obj/structure/city_prop/telebox/interact(mob/living/carbon/human/user)
+	. = ..()
+	if(!user)
+		return
+	var/datum/trader_quest/Q = user.trader_quests?[TRADER_SAMOPAL]
+	if(!istype(Q, /datum/trader_quest/samopal_letter))
+		return
+	var/key = REF(user)
+	if(search_cooldowns[key] && world.time < search_cooldowns[key])
+		var/time_left = round((search_cooldowns[key] - world.time) / 10)
+		balloon_alert(user, "будка уже осмотрена. Возможно, другая запись появится здесь через ([time_left] сек.)")
+		return
+	balloon_alert(user, "ищет записи...")
+	if(!do_after(user, 10 SECONDS, target = src))
+		return
+	new /obj/item/paper/fluff/eftk/telegraph(get_turf(src))
+	search_cooldowns[key] = world.time + 10 MINUTES
+	balloon_alert(user, "найдены записи")
 
 /obj/structure/city_prop/telebox/broken
 	name = "сломанная телефонная будка"
 	icon_state = "phonebox_closed_broken"
 
+/obj/structure/city_prop/telebox/broken/interact(mob/living/carbon/human/user)
+    balloon_alert(user, "будка сломана")
+
 /obj/structure/city_prop/electrical_substation
 	name = "преобразователь подстанции"
 	icon = 'modular_bandastation/voyaker_events/icons/64x64.dmi'
 	icon_state = "alteviangen"
+
+/obj/structure/city_prop/electrical_substation/Initialize(mapload)
+	. = ..()
+	var/turf/T = get_turf(src)
+	new /obj/structure/city_part(locate(T.x + 1, T.y, T.z))
 
 /obj/structure/city_prop/electrical_substation/wreck
 	name = "сломанный преобразователь подстанции"
@@ -187,10 +236,40 @@
 	name = "почтовый ящик"
 	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
 	icon_state = "mailbox"
+	var/list/drop_cooldowns = list()
+
+/obj/structure/city_prop/mail_box/proc/place_suture(mob/living/carbon/human/user, obj/item/stack/medical/suture/S)
+	if(!user)
+		return
+	var/datum/trader_quest/Q = user.trader_quests?[TRADER_TERESA]
+	if(!istype(Q, /datum/trader_quest/teresa_mailboxes))
+		return
+	if(!S)
+		balloon_alert(user, "нужен медицинский шов")
+		return
+	var/key = REF(user)
+	if(drop_cooldowns[key] && world.time < drop_cooldowns[key])
+		balloon_alert(user, "сюда уже положили")
+		return
+	balloon_alert(user, "закладывает...")
+	if(!do_after(user, 5 SECONDS, target = src))
+		return
+	drop_cooldowns[key] = world.time + 10 MINUTES
+	Q.add_progress(user, TRADER_TERESA)
+	S.use(S.amount)
+	balloon_alert(user, "заложено")
 
 /obj/structure/city_prop/mail_box/open
 	name = "открытый почтовый ящик"
 	icon_state = "mailbox-open"
+
+/obj/structure/city_prop/mail_box/open/attackby(obj/item/I, mob/user, params)
+	. = ..()
+	if(!ishuman(user))
+		return
+	if(!istype(I, /obj/item/stack/medical/suture))
+		return
+	place_suture(user, I)
 
 /obj/structure/city_prop/mail_box/old
 	name = "старый почтовый ящик"
@@ -199,6 +278,47 @@
 /obj/structure/city_prop/mail_box/old/open
 	name = "открытый старый почтовый ящик"
 	icon_state = "mailbox_old-open"
+
+/obj/structure/city_prop/mail_box/old/open/attackby(obj/item/I, mob/user, params)
+	. = ..()
+	if(!ishuman(user))
+		return
+	if(!istype(I, /obj/item/stack/medical/suture))
+		return
+	place_suture(user, I)
+
+/obj/structure/city_prop/filing_cabinet
+	name = "закрытая картотека"
+	icon = 'modular_bandastation/voyaker_events/icons/cabinets.dmi'
+	icon_state = "filing_cabinet"
+	var/list/search_cooldowns = list()
+
+/obj/structure/city_prop/filing_cabinet/interact(mob/living/carbon/human/user)
+	. = ..()
+	if(!user)
+		return
+	var/datum/trader_quest/Q = user.trader_quests?[TRADER_ROBINSON]
+	if(!istype(Q, /datum/trader_quest/robinson_documents))
+		return
+	var/area/A = get_area(src)
+	if(!istype(A, /area/new_sydney/building/administration))
+		balloon_alert(user, "не подходящие картотеки")
+		return
+	var/key = REF(user)
+	if(search_cooldowns[key] && world.time < search_cooldowns[key])
+		var/time_left = round((search_cooldowns[key] - world.time) / 10)
+		balloon_alert(user, "Картотеки уже осмотрены. Возможно, другие документы появятся здесь через ([time_left] сек.)")
+		return
+	balloon_alert(user, "ищет записи...")
+	if(!do_after(user, 10 SECONDS, target = src))
+		return
+	new /obj/item/folder/documents(get_turf(src))
+	search_cooldowns[key] = world.time + 10 MINUTES
+	balloon_alert(user, "найдены записи")
+
+/obj/structure/city_prop/filing_cabinet/open
+	name = "открытая картотека"
+	icon_state = "filing_cabinet_busted-open"
 
 /obj/structure/city_prop/concrete_barrier
 	name = "бетонный барьер"

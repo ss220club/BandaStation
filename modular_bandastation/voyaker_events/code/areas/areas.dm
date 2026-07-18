@@ -16,8 +16,26 @@
 	light_power = 0.1
 	base_lighting_alpha = 90
 
+/area/new_sydney/building/night_gold_casino
+	name = "Помещение казино Night Gold"
+	icon_state = "building"
+	light_power = 0.1
+	base_lighting_alpha = 90
+
+/area/new_sydney/building/administration
+	name = "Администрация посёлка"
+	icon_state = "building"
+	light_power = 0.1
+	base_lighting_alpha = 90
+
 /area/new_sydney/mine
 	name = "Шахта"
+	icon_state = "building"
+	light_power = 0.1
+	base_lighting_alpha = 0
+
+/area/new_sydney/mine/office
+	name = "Офисы шахты"
 	icon_state = "building"
 	light_power = 0.1
 	base_lighting_alpha = 0
@@ -59,6 +77,14 @@
 /area/new_sydney/military_base
 	name = "Военная база Ориентир-15"
 	icon_state = "military-base"
+
+/area/new_sydney/village
+	name = "Посёлок"
+	icon_state = "new-sydney"
+
+/area/new_sydney/coast
+	name = "Побережье"
+	icon_state = "new-sydney"
 
 /area/new_sydney/pyro_zone
 	name = "Выжженая земля"
