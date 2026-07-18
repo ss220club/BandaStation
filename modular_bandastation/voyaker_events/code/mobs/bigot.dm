@@ -60,7 +60,7 @@
 /datum/ai_controller/basic_controller/bigot
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies,
-		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/mining/get_target_priority,
+		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/mining,
 		BB_VISION_RANGE = 15,
 		BB_TARGET_MINIMUM_STAT = CONSCIOUS,
 	)

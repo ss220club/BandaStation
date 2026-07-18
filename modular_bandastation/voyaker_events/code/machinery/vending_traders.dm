@@ -196,7 +196,7 @@
 				if(length(product_data) >= 2)
 					product_loyalty[path] = product_data[2]
 
-/obj/machinery/vending/build_inventory(list/productlist, list/recordlist, list/categories, start_empty = FALSE, premium = FALSE)
+/obj/machinery/vending/trader/build_inventory(list/productlist, list/recordlist, list/categories, start_empty = FALSE, premium = FALSE)
 	PRIVATE_PROC(TRUE)
 
 	var/inflation_value = HAS_TRAIT(SSeconomy, TRAIT_MARKET_CRASHING) ? SSeconomy.inflation_value() : 1
