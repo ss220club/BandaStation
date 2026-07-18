@@ -1,12 +1,5 @@
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
 #include "_voyaker_events.dm"
+
 #include "code\traders\trader_vars.dm"
 #include "code\traders\trader_loyality.dm"
 #include "code\traders\trader_quests.dm"
@@ -80,6 +73,7 @@
 #include "code\weapon\shotgun.dm"
 #include "code\weapon\smg.dm"
 #include "code\weapon\special.dm"
+#include "code\weapon\ballistic_master.dm"
 #include "code\weather\weather_controller.dm"
 #include "code\weather\weather_datum.dm"
 #include "code\wooden_fence\wooden_fence.dm"
@@ -87,4 +81,3 @@
 #include "code\roles\datums.dm"
 #include "code\roles\landmarks.dm"
 #include "code\roles\vanilla_jobs_disabler.dm"
-// END_INCLUDE

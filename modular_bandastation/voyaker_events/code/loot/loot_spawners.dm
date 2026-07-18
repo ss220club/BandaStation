@@ -284,7 +284,7 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 		return
 	user.visible_message(span_notice("[user] begins to sift through the [src] for anything useful."), \
 		span_notice("You begin to dig through the [src] for something interesting."))
-	if(do_after(user, 5 SECONDS, src))
+	if(do_after(user, 3 SECONDS, src))
 		if(prob(loot_chance))
 			user.visible_message(span_notice("[user] finds something inside the [src]."), \
 				span_notice("You find something interesting inside the [src]."))
@@ -320,6 +320,10 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	desc = "Большой деревянный складской ящик. Возможно в нем хранится что-то полезное."
 	icon_state = "wood_crate"
 	random_appearence = FALSE
+	density = TRUE
+	anchored = TRUE
+	loot_chance = 60
+	good_loot_chance = 30
 
 /obj/structure/loot/technical_crate
 	Initialize(mapload)
@@ -346,6 +350,10 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	desc = "Военный ящик для хранения. Возможно в нем хранится что-то полезное."
 	icon_state = "army"
 	random_appearence = FALSE
+	density = TRUE
+	anchored = TRUE
+	loot_chance = 50
+	good_loot_chance = 30
 
 /obj/structure/loot/army_crate
 	Initialize(mapload)
@@ -375,8 +383,12 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	name = "footlocker"
 	icon = 'modular_bandastation/voyaker_events/icons/crates.dmi'
 	desc = "Ящик для хранения личных вещей. Возможно в нем хранится что-то полезное."
-	icon_state = "footlocker"
+	icon_state = "footlocker_wood"
 	random_appearence = FALSE
+	density = TRUE
+	anchored = TRUE
+	loot_chance = 80
+	good_loot_chance = 30
 
 /obj/structure/loot/footlocker
 	Initialize(mapload)
@@ -389,6 +401,10 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	desc = "A sturdy wooden shelf to store a variety of items on."
 	icon = 'modular_bandastation/voyaker_events/icons/furniture.dmi'
 	icon_state = "shelf_1"
+	density = TRUE
+	anchored = TRUE
+	loot_chance = 60
+	good_loot_chance = 30
 
 /obj/structure/loot/shelf/Initialize(mapload)
 	. = ..()
@@ -402,6 +418,10 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	desc = "A sturdy metal shelf to store a variety of items on."
 	icon = 'modular_bandastation/voyaker_events/icons/supermart.dmi'
 	icon_state = "longrack_1"
+	density = TRUE
+	anchored = TRUE
+	loot_chance = 60
+	good_loot_chance = 30
 
 /obj/structure/loot/long_shelf_metal/Initialize(mapload)
 	. = ..()
@@ -416,6 +436,9 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	icon = 'modular_bandastation/voyaker_events/icons/cabinets.dmi'
 	icon_state = "filing_cabinet"
 	random_appearence = FALSE
+	density = TRUE
+	anchored = TRUE
+	loot_chance = 40
 
 /obj/structure/loot/file_cabinet/Initialize(mapload)
 	. = ..()
