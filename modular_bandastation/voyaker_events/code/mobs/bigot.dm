@@ -95,9 +95,9 @@
 	if(B.stat != CONSCIOUS)
 		return
 	if(world.time >= B.next_tongue_attack)
-		INVOKE_ASYNC(B, PROC_REF(tongue_tentacle), target)
+		INVOKE_ASYNC(B, TYPE_PROC_REF(/mob/living/basic/bigot, tongue_tentacle), target)
 	if(world.time >= B.next_charge_attack)
-		INVOKE_ASYNC(B, PROC_REF(charge_attack), target)
+		INVOKE_ASYNC(B, TYPE_PROC_REF(/mob/living/basic/bigot, charge_attack), target)
 
 /mob/living/basic/bigot/melee_attack(atom/target)
 	. = ..()
