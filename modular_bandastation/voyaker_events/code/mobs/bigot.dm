@@ -94,8 +94,10 @@
 		return
 	if(B.stat != CONSCIOUS)
 		return
-	if(world.time >= B.next_tongue_attack || world.time >= B.next_charge_attack)
-		B.use_specials(target)
+	if(world.time >= B.next_tongue_attack)
+		INVOKE_ASYNC(B, PROC_REF(tongue_tentacle), target)
+	if(world.time >= B.next_charge_attack)
+		INVOKE_ASYNC(B, PROC_REF(charge_attack), target)
 
 /mob/living/basic/bigot/melee_attack(atom/target)
 	. = ..()
@@ -163,17 +165,3 @@
 		visible_message(span_warning("[src] издаёт жуткий рык!"))
 	playsound(get_turf(src), roar_sound, 75, TRUE)
 	start_roaring()
-
-/mob/living/basic/bigot/Life(seconds_per_tick = SSMOBS_DT, times_fired)
-	. = ..()
-	if(stat != CONSCIOUS)
-		return
-	var/mob/living/carbon/human/H = locate() in view(7, src)
-	if(!H)
-		return
-	if(H.stat == DEAD)
-		return
-	if(H.health <= HEALTH_THRESHOLD_DEAD)
-		return
-	tongue_tentacle(H)
-	charge_attack(H)
