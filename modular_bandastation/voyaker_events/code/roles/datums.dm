@@ -47,6 +47,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/latex/nitrile
 	belt = /obj/item/storage/belt/medical/ert
+	neck = /obj/item/clothing/neck/cloak/colorable_cloak
 	pda_slot = /obj/item/modular_computer/pda/medical
 	head = /obj/item/clothing/head/fedora/det_hat/noir
 	mask = /obj/item/clothing/mask/gas/plaguedoctor
@@ -161,13 +162,13 @@
 	id = /obj/item/card/id/advanced
 	id_trim = /datum/id_trim/job/technican
 	uniform = /obj/item/clothing/under/misc/overalls
-	ears = /obj/item/radio/headset
+	ears = /obj/item/radio/headset/heads/ce
+	head = /obj/item/clothing/head/flatcap
 	shoes = /obj/item/clothing/shoes/workboots
 	suit = /obj/item/clothing/suit/apron/overalls
 	gloves = /obj/item/clothing/gloves/color/yellow
 	belt = /obj/item/storage/belt/utility/full/powertools
-	pda_slot = null
-	ears = null
+	pda_slot = /obj/item/modular_computer/pda/engineering
 	backpack = /obj/item/storage/backpack
 	satchel = /obj/item/storage/backpack/satchel
 	duffelbag = /obj/item/storage/backpack/duffelbag
