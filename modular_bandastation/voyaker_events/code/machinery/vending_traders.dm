@@ -196,63 +196,6 @@
 				if(length(product_data) >= 2)
 					product_loyalty[path] = product_data[2]
 
-/obj/machinery/vending/trader/build_inventory(list/productlist, list/recordlist, list/categories, start_empty = FALSE, premium = FALSE)
-	PRIVATE_PROC(TRUE)
-
-	var/inflation_value = HAS_TRAIT(SSeconomy, TRAIT_MARKET_CRASHING) ? SSeconomy.inflation_value() : 1
-	default_price = round(initial(default_price) * inflation_value)
-	extra_price = round(initial(extra_price) * inflation_value)
-
-	QDEL_LIST(recordlist)
-
-	var/list/product_to_category = list()
-	for (var/list/category as anything in categories)
-		for (var/product_key in category["products"])
-			product_to_category[product_key] = category
-
-	for(var/typepath in productlist)
-		var/amount
-		var/custom_price_override
-
-		var/value = productlist[typepath]
-
-		if(islist(value))
-			var/list/data = value
-
-			custom_price_override = data[1]
-			amount = data[3]
-		else
-			amount = value
-
-		var/obj/item/temp = typepath
-		var/datum/data/vending_product/new_record = new
-		new_record.name = capitalize(declent_ru_initial(temp::name, NOMINATIVE, temp::name))
-		new_record.product_path = typepath
-		if(!start_empty)
-			new_record.amount = amount
-		new_record.max_amount = amount
-
-		///Prices of vending machines are all increased uniformly.
-		var/custom_price = round(initial(temp.custom_price) * inflation_value)
-
-		if(!premium)
-			if(custom_price_override)
-				new_record.price = custom_price_override
-			else
-				new_record.price = custom_price || default_price
-		else
-			var/premium_custom_price = round(initial(temp.custom_premium_price) * inflation_value)
-
-			if(!premium_custom_price && custom_price)
-				new_record.price = extra_price + custom_price
-			else
-				new_record.price = premium_custom_price || extra_price
-
-		new_record.age_restricted = initial(temp.age_restricted)
-		new_record.colorable = !!(initial(temp.greyscale_config) && initial(temp.greyscale_colors) && (initial(temp.flags_1) & IS_PLAYER_COLORABLE_1))
-		new_record.category = product_to_category[typepath]
-		recordlist += new_record
-
 /obj/machinery/vending/trader/proc/give_quest(mob/living/carbon/human/H)
 	if(H.trader_quests[src.trader_id])
 		to_chat(H, span_warning("У вас уже есть активное задание."))
