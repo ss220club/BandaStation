@@ -259,6 +259,7 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	var/good_loot_type = /obj/effect/spawner/random/trash/garbage
 	var/good_loot_chance = 25
 	var/reset_cooldown_period = 15 MINUTES
+	always_anchored = TRUE
 
 /obj/structure/loot/proc/reset_loot()
 	searched = FALSE
