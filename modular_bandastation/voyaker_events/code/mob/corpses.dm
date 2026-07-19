@@ -120,3 +120,109 @@
 /datum/outfit/ussp/ussp_officer/dead
 	name = "USSP - Dead Red Army Officer (Unarmed)"
 	belt = /obj/item/storage/belt/military/army/ussp
+
+/datum/outfit/ussp/vishibala
+	name = "Boss - Vishibala (AMK)"
+	id = /obj/item/card/id/advanced/bountyhunter
+	id_trim = /datum/id_trim/bounty_hunter
+	uniform = /obj/item/clothing/under/syndicate/rus_army
+	suit = /obj/item/clothing/suit/jacket/blazer
+	shoes = /obj/item/clothing/shoes/sneakers/black
+	head = /obj/item/clothing/head/soft/black
+	ears = /obj/item/radio/headset/headset_cargo
+	belt = /obj/item/storage/belt/military/army/ussp/full_autorifle
+	l_pocket = /obj/item/knife/combat
+	r_pocket = /obj/item/grenade/frag
+	r_hand = /obj/item/gun/ballistic/automatic/sabel/auto/upgraded
+
+/datum/outfit/ussp/vishibala/baseball_bat
+	name = "Boss - Vishibala (Baseball Bat)"
+	r_hand = /obj/item/melee/baseball_bat/ablative
+	belt = /obj/item/gun/ballistic/automatic/mini_uzi
+	back = /obj/item/storage/backpack/satchel/leather
+	backpack_contents = list(
+		/obj/item/ammo_box/magazine/uzim9mm = 5,
+		/obj/item/reagent_containers/cup/glass/bottle/vodka,
+	)
+
+/datum/outfit/ussp/vishibala/shotgun
+	name = "Boss - Vishibala (Shotgun)"
+	r_hand = /obj/item/gun/ballistic/shotgun/automatic/combat
+	belt = 	/obj/item/storage/belt/bandolier
+	back = /obj/item/storage/backpack/satchel/leather
+	backpack_contents = list(
+		/obj/item/ammo_box/c12ga/dragonsbreath,
+		/obj/item/ammo_box/c12ga/milspec,
+		/obj/item/ammo_box/c12ga/slug/milspec,
+	)
+	l_pocket = /obj/item/knife/combat
+	r_pocket = /obj/item/grenade/frag
+
+/datum/outfit/ussp/geck
+	name = "Boss - Geck (Shotgun)"
+	id = /obj/item/card/id/advanced/bountyhunter
+	id_trim = /datum/id_trim/bounty_hunter
+	uniform = /obj/item/clothing/under/syndicate/combat
+	suit = /obj/item/clothing/suit/armor/swat/ussp_heavy
+	back = /obj/item/storage/backpack/satchel/explorer
+	backpack_contents = list(
+		/obj/item/storage/medkit/tactical_lite,
+		/obj/item/ammo_box/magazine/m12g/slug = 2,
+		/obj/item/ammo_box/magazine/m12g/dragon,
+		/obj/item/ammo_box/magazine/m12g = 2,
+		/obj/item/ammo_box/magazine/m12g/flechette,
+	)
+	shoes = /obj/item/clothing/shoes/russian
+	head = /obj/item/clothing/head/helmet/toggleable/riot/ussp_heavy
+	ears = /obj/item/radio/headset/heads/captain/alt/ussp
+	belt = /obj/item/storage/belt/military/army/ussp/full
+	mask = /obj/item/clothing/mask/gas
+	gloves = /obj/item/clothing/gloves/tackler/combat/insulated
+	l_pocket = /obj/item/grenade/frag
+	r_pocket = /obj/item/grenade/frag
+	r_hand = /obj/item/gun/ballistic/shotgun/bulldog/unrestricted
+
+/datum/outfit/ussp/geck/machinegun
+	name = "Boss - Geck (Machinegun)"
+	backpack_contents = list(
+		/obj/item/storage/medkit/tactical_lite,
+		/obj/item/knife/combat,
+	)
+	belt = /obj/item/storage/belt/military/army/ussp/full_machinegun_pmk
+	r_hand = /obj/item/gun/ballistic/automatic/pmk
+
+/datum/outfit/ussp/chuck
+	name = "Boss - Chuck (GL China Lake)"
+	id = /obj/item/card/id/advanced/bountyhunter
+	id_trim = /datum/id_trim/bounty_hunter
+	uniform = /obj/item/clothing/under/pants/camo
+	suit = /obj/item/clothing/suit/armor/vest/marine/pmc
+	back = /obj/item/storage/backpack/satchel/explorer
+	backpack_contents = list(
+		/obj/item/storage/medkit/tactical_lite,
+		/obj/item/storage/fancy/a40mm_box/frag,
+		/obj/item/storage/fancy/a40mm_box/hedp,
+		/obj/item/storage/fancy/a40mm_box/weak,
+		/obj/item/storage/fancy/a40mm_box/incendiary,
+	)
+	shoes = /obj/item/clothing/shoes/russian
+	head = /obj/item/clothing/head/helmet/toggleable/riot/ussp_riot
+	ears = /obj/item/radio/headset/heads/captain/alt/ussp
+	belt = 	/obj/item/storage/belt/bandolier
+	mask = /obj/item/clothing/mask/gas
+	gloves = /obj/item/clothing/gloves/tackler/combat/insulated
+	l_pocket = /obj/item/grenade/frag
+	r_pocket = /obj/item/grenade/frag
+	r_hand = /obj/item/gun/ballistic/shotgun/china_lake
+
+/datum/outfit/ussp/chuck/shotgun
+	name = "Boss - Chuck (Shotgun)"
+	backpack_contents = list(
+		/obj/item/storage/medkit/tactical_lite,
+		/obj/item/ammo_box/c12ga/dragonsbreath,
+		/obj/item/ammo_box/c12ga/milspec,
+		/obj/item/ammo_box/c12ga/slug/milspec,
+		/obj/item/ammo_box/c12ga/flechette,
+		/obj/item/ammo_box/c12ga/incendiary,
+	)
+	r_hand = /obj/item/gun/ballistic/shotgun/riot/renoster/black
