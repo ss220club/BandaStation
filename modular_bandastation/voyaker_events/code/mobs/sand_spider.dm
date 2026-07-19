@@ -56,6 +56,7 @@
 	if(get_dist(spider,target) <= 3)
 		return
 	spider.current_target = target
+	spider.Shake(3, 1 SECONDS)
 	spider.visible_message(span_warning("[spider] резко начинает уходить под песок!"))
 	addtimer(CALLBACK(spider, TYPE_PROC_REF(/mob/living/basic/spider/sand, enter_burrow)), 1 SECONDS)
 

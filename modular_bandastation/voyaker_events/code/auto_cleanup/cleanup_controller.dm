@@ -36,3 +36,18 @@ SUBSYSTEM_DEF(casing_cleanup)
 			"Мы прибрали гильзы на всех локациях, чтобы они не мешались вам под ногами.",
 			"Сообщение группы Чистильщиков"
 		)
+
+SUBSYSTEM_DEF(gibs_cleanup)
+	name = "EFTK Gibs Cleanup System"
+	wait = 5 MINUTES
+	runlevels = RUNLEVEL_GAME
+
+/datum/controller/subsystem/gibs_cleanup/fire()
+	for(var/obj/effect/decal/cleanable/blood/gibs/G in GLOB.world_gibs)
+		if(QDELETED(G))
+			continue
+		if(world.time - G.spawn_time < 10 MINUTES)
+			continue
+		if(!isturf(G.loc))
+			continue
+		qdel(G)

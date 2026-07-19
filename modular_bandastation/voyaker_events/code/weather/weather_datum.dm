@@ -44,10 +44,10 @@
 	if(SSradiation.wearing_rad_protected_clothing(H))
 		return
 	radiation_pulse(H, max_range = 1, threshold = 0.1, chance = 70)
-	if(prob(mutate_chance))
+	if(prob(10))
 		H.random_mutate_unique_identity()
 		H.random_mutate_unique_features()
-		if(prob(20))
+		if(prob(10))
 			do_mutate(H)
 
 	return ..()

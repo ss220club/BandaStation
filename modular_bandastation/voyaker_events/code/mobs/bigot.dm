@@ -43,6 +43,7 @@
 	var/roar_sound = 'modular_bandastation/voyaker_events/sounds/bigot_roar.ogg'
 	var/min_roar_delay = 20 SECONDS
 	var/max_roar_delay = 60 SECONDS
+	var/max_steps = 12
 
 	ai_controller = /datum/ai_controller/basic_controller/bigot
 
@@ -69,11 +70,11 @@
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 
 	planning_subtrees = list(
-		/datum/ai_planning_subtree/simple_find_target,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/bigot_specials,
-		/datum/ai_planning_subtree/attack_obstacle_in_path,
-		/datum/ai_planning_subtree/target_retaliate
+    	/datum/ai_planning_subtree/simple_find_target,
+    	/datum/ai_planning_subtree/bigot_specials,
+    	/datum/ai_planning_subtree/basic_melee_attack_subtree,
+    	/datum/ai_planning_subtree/attack_obstacle_in_path,
+    	/datum/ai_planning_subtree/target_retaliate
 	)
 
 /mob/living/basic/bigot/Initialize(mapload)
@@ -120,12 +121,27 @@
 		return FALSE
 	Beam(target, icon_state = "blood", time = 10)
 	target.Immobilize(3 SECONDS)
-	while(get_dist(src, target) > 1)
+	for(var/i in 1 to 12)
+		if(QDELETED(src) || stat == DEAD)
+			return FALSE
+		if(QDELETED(target))
+			return FALSE
+		if(!can_see(src, target, 10))
+			return FALSE
+		var/turf/next = get_step_towards(target, src)
+		if(!next)
+			break
+		if(isclosedturf(next))
+			break
+		for(var/obj/O in next)
+			if(O.density)
+				return FALSE
 		new /obj/effect/decal/cleanable/blood(get_turf(target))
-		step_towards(target, src)
+		target.forceMove(next)
+		if(get_dist(src, target) <= 1)
+			break
 		sleep(2)
-	target.apply_damage(35, BRUTE)
-	return TRUE
+		target.apply_damage(10, BRUTE)
 
 /mob/living/basic/bigot/proc/charge_attack(mob/living/target)
 	if(world.time < next_charge_attack)
@@ -133,6 +149,7 @@
 	if(!target)
 		return FALSE
 	next_charge_attack = world.time + charge_cooldown
+	Shake(3, 2 SECONDS)
 	visible_message(span_warning("[src] напрягается перед броском!"))
 	sleep(2 SECONDS)
 	var/dir_to_target = get_dir(src, target)
