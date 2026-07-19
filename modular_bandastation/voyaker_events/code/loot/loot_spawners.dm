@@ -259,7 +259,7 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	var/good_loot_type = /obj/effect/spawner/random/trash/garbage
 	var/good_loot_chance = 25
 	var/reset_cooldown_period = 15 MINUTES
-	always_anchored = TRUE
+	resistance_flags = INDESTRUCTIBLE
 
 /obj/structure/loot/proc/reset_loot()
 	searched = FALSE
@@ -450,3 +450,23 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	name = "small file cabinet"
 	desc = "A sturdy small metal cabinet to store a variety of documents."
 	icon_state = "filing_cabinet_small"
+
+/obj/structure/loot/skeleton
+	name = "skeleton"
+	desc = "An old human skeleton, perhaps there is still something on this bones."
+	icon = 'modular_bandastation/voyaker_events/icons/miscellaneous.dmi'
+	icon_state = "skeleton"
+	random_appearence = FALSE
+	density = TRUE
+	anchored = TRUE
+	loot_chance = 60
+
+/obj/structure/loot/skeleton/Initialize(mapload)
+	. = ..()
+	loot_type = GLOB.clothing_loot_table.Copy()
+	good_loot_type = GLOB.treasure_loot_table.Copy()
+
+/obj/structure/loot/skeleton/army/Initialize(mapload)
+	. = ..()
+	loot_type =  GLOB.clothing_loot_table.Copy()
+	good_loot_type = GLOB.weapon_loot_table.Copy()
