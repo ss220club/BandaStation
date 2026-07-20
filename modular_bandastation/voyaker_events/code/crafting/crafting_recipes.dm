@@ -322,17 +322,97 @@
 
 /datum/crafting_recipe/marine_vest
 	name = "Броня морской пехоты"
-	result = /obj/item/clothing/suit/armor/vest/marine/security
+	result = /obj/item/clothing/suit/armor/vest/marine
 	reqs = list(
 		/obj/item/stack/sheet/plasteel = 1,
 		/obj/item/stack/sheet/leather = 2,
-		/obj/item/stack/sheet/cloth = 5,
+		/obj/item/stack/sheet/cloth = 1,
 	)
 	tool_behaviors = list(
 		TOOL_SCREWDRIVER,
+		TOOL_WELDER
+	)
+	time = 6 SECONDS
+	category = CAT_EFTK_EQUIP
+	crafting_flags = CRAFT_MUST_BE_LEARNED
+	requires_workbench = TRUE
+
+/datum/crafting_recipe/marine_armor_repaired
+	name = "Починенная броня морской пехоты"
+	result = /obj/item/clothing/suit/armor/vest/marine
+	reqs = list(
+		/obj/item/stack/sheet/iron = 1,
+		/obj/item/stack/sheet/leather = 1,
+		/obj/item/clothing/suit/armor/vest/marine/sulaco = 1,
+	)
+	parts = list(
+		/obj/item/clothing/suit/armor/vest/marine/sulaco = 1,
+	)
+	tool_behaviors = list(
+		TOOL_WELDER,
 		TOOL_WIRECUTTER
 	)
-	time = 7 SECONDS
+	time = 5 SECONDS
+	category = CAT_EFTK_EQUIP
+	crafting_flags = CRAFT_MUST_BE_LEARNED
+	requires_workbench = TRUE
+
+/datum/crafting_recipe/marine_helmet_repaired
+	name = "Починенный шлем морской пехоты"
+	result = /obj/item/clothing/head/helmet/marine/security
+	reqs = list(
+		/obj/item/stack/sheet/iron = 1,
+		/obj/item/stack/sheet/cloth = 1,
+		/obj/item/clothing/head/helmet/marine/sulaco = 1,
+	)
+	parts = list(
+		/obj/item/clothing/head/helmet/marine/sulaco = 1,
+	)
+	tool_behaviors = list(
+		TOOL_WELDER,
+		TOOL_WIRECUTTER
+	)
+	time = 5 SECONDS
+	category = CAT_EFTK_EQUIP
+	crafting_flags = CRAFT_MUST_BE_LEARNED
+	requires_workbench = TRUE
+
+/datum/crafting_recipe/soviet_armor_repaired
+	name = "Починенная советская броня"
+	result = /obj/item/clothing/suit/armor/vest/marine/security/ussp_security
+	reqs = list(
+		/obj/item/stack/sheet/iron = 1,
+		/obj/item/stack/sheet/leather = 1,
+		/obj/item/clothing/suit/armor/vest/marine/security/ussp_security/broken = 1,
+	)
+	parts = list(
+		/obj/item/clothing/suit/armor/vest/marine/security/ussp_security/broken = 1,
+	)
+	tool_behaviors = list(
+		TOOL_WELDER,
+		TOOL_WIRECUTTER
+	)
+	time = 5 SECONDS
+	category = CAT_EFTK_EQUIP
+	crafting_flags = CRAFT_MUST_BE_LEARNED
+	requires_workbench = TRUE
+
+/datum/crafting_recipe/soviet_helmet_repaired
+	name = "Починенная советская бронированная каска"
+	result = /obj/item/clothing/head/helmet/marine/security/ussp_kaska
+	reqs = list(
+		/obj/item/stack/sheet/iron = 1,
+		/obj/item/stack/sheet/cloth = 1,
+		/obj/item/clothing/head/helmet/marine/security/ussp_kaska/broken = 1,
+	)
+	parts = list(
+		/obj/item/clothing/suit/armor/vest/marine/security/ussp_security/broken = 1,
+	)
+	tool_behaviors = list(
+		TOOL_WELDER,
+		TOOL_WIRECUTTER
+	)
+	time = 5 SECONDS
 	category = CAT_EFTK_EQUIP
 	crafting_flags = CRAFT_MUST_BE_LEARNED
 	requires_workbench = TRUE

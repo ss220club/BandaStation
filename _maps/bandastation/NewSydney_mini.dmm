@@ -16570,8 +16570,8 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
 "lkJ" = (
-/obj/machinery/telecomms/message_server/preset,
 /obj/effect/turf_decal/line/dark_green/line/contrasted,
+/obj/machinery/telecomms/bus/preset_one,
 /turf/open/floor/iron/dark/smooth_half,
 /area/new_sydney/bunker)
 "llB" = (
@@ -26211,7 +26211,7 @@
 /obj/effect/turf_decal/line/dark_green/line/contrasted{
 	dir = 1
 	},
-/obj/machinery/telecomms/relay,
+/obj/machinery/telecomms/relay/preset/auto,
 /turf/open/floor/iron/dark/smooth_half,
 /area/new_sydney/bunker)
 "sgz" = (
@@ -26877,8 +26877,8 @@
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "sHJ" = (
-/obj/machinery/telecomms/hub,
 /obj/effect/turf_decal/line/dark_green/line/contrasted,
+/obj/machinery/telecomms/hub/preset,
 /turf/open/floor/iron/dark/smooth_half,
 /area/new_sydney/bunker)
 "sHK" = (
@@ -31163,10 +31163,10 @@
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "vwL" = (
-/obj/machinery/telecomms/server,
 /obj/effect/turf_decal/line/dark_green/line/contrasted{
 	dir = 1
 	},
+/obj/machinery/telecomms/server/presets/common,
 /turf/open/floor/iron/dark/smooth_half,
 /area/new_sydney/bunker)
 "vwV" = (

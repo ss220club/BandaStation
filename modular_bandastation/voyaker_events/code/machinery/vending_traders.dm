@@ -30,9 +30,17 @@
 	return pick(messages)
 
 /obj/machinery/vending/trader/proc/speak_message(message, mob/listener)
-    if(!message || !listener)
+	if(!listener || !message)
+		return
+	stop_trader_tts(listener)
+	SEND_SIGNAL(src, COMSIG_ATOM_TTS_CAST, listener, message, src, FALSE, FALSE, null, null, null, null, CHANNEL_TTS_TRADER)
+
+/obj/machinery/vending/trader/proc/stop_trader_tts(mob/user)
+    if(!user?.client)
         return
-    SEND_SIGNAL(src, COMSIG_ATOM_TTS_CAST, listener, message, src, FALSE, FALSE, null, NONE, null, null, null, CHANNEL_TTS_TRADER)
+    var/sound/S = sound(null)
+    S.channel = CHANNEL_TTS_TRADER
+    SEND_SOUND(user, S)
 
 /obj/machinery/vending/trader/vend(list/params, mob/user, list/greyscale_colors)
 	var/datum/data/vending_product/item_record = locate(params["ref"])
@@ -132,11 +140,9 @@
 			return TRUE
 
 /obj/machinery/vending/trader/ui_close(mob/user)
-    . = ..()
-    user_messages -= REF(user)
-    var/sound/S = sound(null)
-    S.channel = CHANNEL_TTS_TRADER
-    SEND_SOUND(user, S)
+	. = ..()
+	user_messages -= REF(user)
+	stop_trader_tts(user)
 
 /obj/machinery/vending/trader/proc/sell_item(mob/living/carbon/human/H, obj/item/I)
 	if(!I)
@@ -278,7 +284,8 @@
 	H.trader_quests[src.trader_id] = Q
 	Q.start(H)
 	user_messages[REF(H)] = Q.description
-	speak_message(Q.description, H)
+	if(H.client)
+		speak_message(Q.description, H)
 	playsound(H, 'sound/machines/ping.ogg', 50, TRUE)
 	to_chat(H, span_notice("Задание [Q.name] принято к выполнению. [Q.context]"))
 
