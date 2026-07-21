@@ -704,7 +704,7 @@
 		to_chat(H, span_warning("Вы покинули территорию порта слишком рано."))
 		return
 	completed_by_area = TRUE
-	complete(H, TRADER_FASHION, null)
+	complete(H, TRADER_VISITOR, null)
 
 /datum/trader_quest/visitor_breeze/on_any_human_killed(mob/living/carbon/human/killer, mob/living/victim)
 	if(!killer || !victim)
@@ -772,5 +772,5 @@
 	to_chat(H, span_notice("Документ принят ([length(received_items)]/[length(required_items)])."))
 	qdel(I)
 	if(length(received_items) >= length(required_items))
-		complete(H, trader_id, null)
+		complete(H, TRADER_VISITOR, null)
 	return TRUE

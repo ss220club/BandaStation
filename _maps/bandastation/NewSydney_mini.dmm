@@ -129,7 +129,9 @@
 /turf/open/floor/iron/dark/smooth_corner,
 /area/new_sydney/bunker)
 "afh" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "afn" = (
@@ -254,9 +256,7 @@
 "akM" = (
 /obj/structure/table,
 /obj/effect/spawner/random/maintenance,
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "akT" = (
 /obj/structure/city_prop/streetlamp,
@@ -354,7 +354,9 @@
 	},
 /area/new_sydney/dark_forest)
 "amK" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/asphalt,
 /area/new_sydney/building)
 "amY" = (
@@ -385,7 +387,9 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/wood/parquet/oak,
 /area/new_sydney/bunker)
 "anN" = (
@@ -1716,9 +1720,7 @@
 /obj/structure/railing/platform{
 	dir = 9
 	},
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "bis" = (
 /obj/effect/decal/cleanable/blood/old{
@@ -2146,7 +2148,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 4
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark/smooth_half{
 	dir = 4
 	},
@@ -2717,7 +2721,9 @@
 /area/new_sydney/mine)
 "bNi" = (
 /obj/effect/turf_decal/line/dark_green/line/stripes/contrasted,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "bNz" = (
@@ -2953,9 +2959,7 @@
 /area/new_sydney/dark_forest)
 "bTI" = (
 /obj/structure/railing/platform/corner,
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "bTL" = (
 /obj/structure/signboard,
@@ -4155,7 +4159,9 @@
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "cMs" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /obj/structure/sink/directional/south,
 /turf/open/floor/iron/cafeteria,
 /area/new_sydney/bunker)
@@ -4368,7 +4374,9 @@
 /obj/effect/turf_decal/line/brown/line/contrasted{
 	dir = 8
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_corner{
 	dir = 4
 	},
@@ -4694,9 +4702,7 @@
 /area/new_sydney/dark_forest/building)
 "det" = (
 /obj/machinery/door/window/right/directional/west,
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "dex" = (
 /obj/effect/decal/cleanable/dirt,
@@ -4713,7 +4719,9 @@
 /obj/effect/turf_decal/line/brown/line/contrasted{
 	dir = 8
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -4940,6 +4948,15 @@
 /obj/item/stack/sheet/mineral/wood,
 /turf/open/floor/grass,
 /area/new_sydney/village)
+"dkl" = (
+/obj/effect/turf_decal/line/dark_green/anticorner/contrasted,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
+/turf/open/floor/iron/dark/smooth_corner{
+	dir = 1
+	},
+/area/new_sydney/bunker)
 "dkF" = (
 /obj/effect/turf_decal/line/yellow/anticorner/stripes,
 /turf/open/floor/asphalt,
@@ -5699,6 +5716,9 @@
 /obj/effect/turf_decal/line/dark_green/anticorner/contrasted{
 	dir = 4
 	},
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark,
 /area/new_sydney/bunker)
 "dIw" = (
@@ -5879,7 +5899,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 8
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark/smooth_half{
 	dir = 4
 	},
@@ -5902,7 +5924,9 @@
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 8
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/wood/parquet/oak,
 /area/new_sydney/bunker)
 "dPk" = (
@@ -5941,7 +5965,9 @@
 /turf/open/floor/pod,
 /area/new_sydney/coast/port)
 "dQt" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
@@ -6102,7 +6128,9 @@
 /obj/effect/turf_decal/line/bar/line/contrasted{
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 4
 	},
@@ -6370,7 +6398,9 @@
 /area/new_sydney/coast)
 "eek" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "eer" = (
@@ -6467,6 +6497,13 @@
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/carpet,
 /area/new_sydney/building)
+"eic" = (
+/obj/effect/turf_decal/line/dark_green/line/contrasted,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
+/turf/open/floor/iron/dark/smooth_half,
+/area/new_sydney/bunker)
 "eim" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted,
 /obj/effect/decal/papers/two,
@@ -7045,7 +7082,9 @@
 /area/new_sydney/coast)
 "eCn" = (
 /obj/effect/turf_decal/line/bar/line/contrasted,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "eCt" = (
@@ -7237,7 +7276,9 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/wood/parquet/oak,
 /area/new_sydney/bunker)
 "eHJ" = (
@@ -7291,7 +7332,9 @@
 	},
 /area/new_sydney/bunker)
 "eJS" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/cafeteria,
 /area/new_sydney/bunker)
 "eJT" = (
@@ -7801,7 +7844,9 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
 "feC" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/indestructible/vault,
 /area/new_sydney/building)
 "feY" = (
@@ -7987,6 +8032,9 @@
 /area/new_sydney/building)
 "fma" = (
 /obj/effect/turf_decal/line/dark_green/anticorner/contrasted,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark,
 /area/new_sydney/bunker)
 "fmz" = (
@@ -9477,7 +9525,9 @@
 /area/new_sydney/dark_forest)
 "gnp" = (
 /obj/effect/turf_decal/line/dark_green/line/contrasted,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "gog" = (
@@ -9757,9 +9807,7 @@
 /area/new_sydney/dark_forest/building)
 "gyr" = (
 /obj/machinery/door/window/right/directional/east,
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "gyu" = (
 /obj/effect/turf_decal/siding/yellow{
@@ -10160,9 +10208,7 @@
 /area/new_sydney/dark_forest/building)
 "gJS" = (
 /obj/structure/window/reinforced/spawner/directional/east,
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "gKb" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -10255,6 +10301,17 @@
 	},
 /turf/open/misc/asteroid,
 /area/new_sydney/coast)
+"gLX" = (
+/obj/effect/turf_decal/line/dark_green/anticorner/contrasted{
+	dir = 4
+	},
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
+/turf/open/floor/iron/dark/smooth_corner{
+	dir = 8
+	},
+/area/new_sydney/bunker)
 "gMa" = (
 /obj/machinery/door/poddoor/shutters{
 	max_integrity = 50000
@@ -10348,7 +10405,9 @@
 /area/new_sydney/dark_forest)
 "gPz" = (
 /obj/effect/turf_decal/board_number,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "gPF" = (
@@ -11208,9 +11267,7 @@
 /obj/structure/railing/platform/corner{
 	dir = 8
 	},
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "huq" = (
 /obj/effect/light_emitter{
@@ -11353,7 +11410,9 @@
 	},
 /area/new_sydney/building)
 "hAr" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 8
 	},
@@ -11586,7 +11645,9 @@
 /turf/open/indestructible/vault,
 /area/new_sydney/dark_forest)
 "hIo" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "hIr" = (
@@ -11883,6 +11944,15 @@
 	},
 /turf/open/indestructible/rockyground,
 /area/new_sydney/village)
+"hVk" = (
+/obj/effect/turf_decal/line/dark_green/anticorner/contrasted{
+	dir = 1
+	},
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
+/turf/open/floor/iron/dark/smooth_corner,
+/area/new_sydney/bunker)
 "hVl" = (
 /obj/effect/turf_decal/line/blue/line/contrasted,
 /turf/open/floor/iron/dark,
@@ -12334,9 +12404,7 @@
 /obj/structure/railing/platform/corner{
 	dir = 4
 	},
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "ilO" = (
 /obj/structure/table,
@@ -13352,7 +13420,9 @@
 	dir = 1
 	},
 /obj/effect/landmark/location_entry/dark_forest,
-/obj/structure/gate/dark_forest,
+/obj/structure/gate/dark_forest{
+	name = "Блюспейс-переход в Тёмный Лес"
+	},
 /turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "jbE" = (
@@ -13382,6 +13452,9 @@
 "jcD" = (
 /obj/effect/turf_decal/line/dark_green/anticorner/contrasted{
 	dir = 8
+	},
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
 	},
 /turf/open/floor/iron/dark,
 /area/new_sydney/bunker)
@@ -13634,7 +13707,9 @@
 /area/new_sydney/dark_forest)
 "jjT" = (
 /obj/effect/turf_decal/line/dark_green/line/contrasted,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_corner{
 	dir = 4
 	},
@@ -14134,11 +14209,21 @@
 /obj/structure/billboard/starway,
 /turf/open/misc/asteroid,
 /area/new_sydney/coast)
+"jEw" = (
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/new_sydney/bunker)
 "jEy" = (
 /obj/effect/turf_decal/board_number{
 	dir = 4
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark/smooth_half,
 /area/new_sydney/bunker)
 "jEP" = (
@@ -14172,7 +14257,9 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
 "jFH" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/pod/dark,
 /area/new_sydney/mine)
 "jFL" = (
@@ -14254,7 +14341,9 @@
 /obj/effect/turf_decal/line/brown/anticorner/contrasted{
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_corner,
 /area/new_sydney/bunker)
 "jJX" = (
@@ -14630,7 +14719,9 @@
 /turf/open/indestructible/vault,
 /area/new_sydney/military_base)
 "jZM" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /obj/effect/landmark/loot_spawn/technical,
 /turf/open/floor/pod/dark,
 /area/new_sydney/mine)
@@ -15266,9 +15357,7 @@
 /obj/structure/railing/platform{
 	dir = 1
 	},
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "kvn" = (
 /obj/effect/turf_decal/siding/dark_blue{
@@ -15583,6 +15672,9 @@
 /obj/effect/turf_decal/line/dark_green/anticorner/contrasted{
 	dir = 1
 	},
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark,
 /area/new_sydney/bunker)
 "kEd" = (
@@ -15799,7 +15891,9 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "bloodyhands_right"
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "kJp" = (
@@ -16123,7 +16217,9 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "bloodyhands_left"
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -16330,9 +16426,7 @@
 /obj/structure/railing/platform/corner{
 	dir = 1
 	},
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "lbR" = (
 /obj/effect/turf_decal/siding/dark{
@@ -16438,7 +16532,9 @@
 /turf/open/floor/wood,
 /area/new_sydney/building)
 "lgl" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark/herringbone,
 /area/new_sydney/mine)
 "lgV" = (
@@ -16491,7 +16587,9 @@
 	},
 /area/new_sydney/mine)
 "lis" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "liH" = (
@@ -17139,7 +17237,9 @@
 /area/new_sydney/mine)
 "lGd" = (
 /obj/effect/turf_decal/board_number,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/forest_mutant_spawn/faithless,
 /turf/open/floor/pod,
@@ -17536,7 +17636,9 @@
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "lWT" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/checker,
 /area/new_sydney/mine)
 "lXk" = (
@@ -17937,7 +18039,9 @@
 /obj/effect/turf_decal/line/brown/anticorner/contrasted{
 	dir = 4
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_corner{
 	dir = 8
 	},
@@ -18106,7 +18210,9 @@
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/effect/turf_decal/board_number,
 /obj/effect/landmark/location_entry/mine,
-/obj/structure/gate/mine,
+/obj/structure/gate/mine{
+	name = "Блюспейс-переход в Шахту"
+	},
 /turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "mrz" = (
@@ -18139,7 +18245,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 4
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "msX" = (
@@ -18471,7 +18579,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/cobweb,
-/obj/machinery/portable_atmospherics/canister/freon,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/open/floor/iron/smooth_corner,
 /area/new_sydney/bunker)
 "mFs" = (
@@ -18593,7 +18701,9 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/wood/parquet/oak,
 /area/new_sydney/bunker)
 "mKg" = (
@@ -19122,7 +19232,9 @@
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "nbE" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
 "nbN" = (
@@ -19142,15 +19254,15 @@
 /area/new_sydney/bunker)
 "nbS" = (
 /obj/structure/railing/platform,
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "ncv" = (
 /obj/effect/turf_decal/line/dark_red/line/stripes/contrasted{
 	dir = 8
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark/smooth_half{
 	dir = 1
 	},
@@ -19167,6 +19279,17 @@
 /obj/structure/rack/shelf,
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
+"ncP" = (
+/obj/effect/turf_decal/line/dark_green/anticorner/contrasted{
+	dir = 8
+	},
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
+/turf/open/floor/iron/dark/smooth_corner{
+	dir = 4
+	},
+/area/new_sydney/bunker)
 "ndg" = (
 /obj/structure/deployable_barricade/metal/plasteel,
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -19996,9 +20119,7 @@
 /obj/structure/railing/platform{
 	dir = 10
 	},
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "nMC" = (
 /obj/effect/landmark/drop_pod_spawn/dark_forest,
@@ -20635,9 +20756,7 @@
 /obj/structure/railing/platform{
 	dir = 6
 	},
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "onA" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -20654,7 +20773,9 @@
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/effect/turf_decal/board_number,
 /obj/effect/landmark/location_entry/village,
-/obj/structure/gate/village,
+/obj/structure/gate/village{
+	name = "Блюспейс-переход в Посёлок"
+	},
 /turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "onY" = (
@@ -20892,7 +21013,7 @@
 /obj/effect/turf_decal/line/dark_green/anticorner/contrasted{
 	dir = 1
 	},
-/turf/open/floor/iron/dark/smooth_corner,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "owG" = (
 /obj/item/emptysandbag,
@@ -21922,7 +22043,9 @@
 	pixel_y = 4;
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "pjk" = (
@@ -23248,7 +23371,9 @@
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "qed" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /obj/effect/landmark/start/warden,
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
@@ -23605,7 +23730,9 @@
 /turf/open/floor/pod,
 /area/new_sydney/mine)
 "qlW" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/dark,
 /area/new_sydney/bunker)
 "qmb" = (
@@ -24261,7 +24388,9 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -24423,7 +24552,9 @@
 /obj/effect/turf_decal/line/dark_green/line/contrasted{
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "qQJ" = (
@@ -24462,6 +24593,17 @@
 	},
 /turf/open/floor/stone,
 /area/new_sydney/coast)
+"qTY" = (
+/obj/effect/turf_decal/line/dark_green/line/contrasted{
+	dir = 4
+	},
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/new_sydney/bunker)
 "qUq" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 8
@@ -24780,7 +24922,9 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "rhE" = (
@@ -25057,7 +25201,9 @@
 /obj/effect/turf_decal/tile/dark_red/half/contrasted{
 	dir = 8
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
 "rqf" = (
@@ -25109,7 +25255,9 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "rrd" = (
@@ -25325,7 +25473,9 @@
 /area/new_sydney/mine)
 "ryn" = (
 /obj/effect/turf_decal/line/brown/line/contrasted,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "ryD" = (
@@ -25622,7 +25772,9 @@
 /obj/effect/turf_decal/line/dark_green/line/contrasted{
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_corner{
 	dir = 8
 	},
@@ -26097,7 +26249,9 @@
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
 "sbx" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /obj/effect/landmark/ambient_sound/bunker,
 /obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth,
@@ -26128,7 +26282,9 @@
 /turf/open/floor/pod,
 /area/new_sydney/dark_forest/building)
 "sci" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -26155,7 +26311,9 @@
 /obj/effect/turf_decal/line/dark_green/line/stripes/contrasted{
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "sdn" = (
@@ -26314,7 +26472,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 8
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/pod,
 /area/new_sydney/dark_forest/building)
 "slg" = (
@@ -28518,7 +28678,9 @@
 /obj/effect/turf_decal/line/brown/line/contrasted{
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "tOY" = (
@@ -28849,7 +29011,9 @@
 /turf/open/misc/asteroid,
 /area/new_sydney/coast)
 "tYv" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/engine/hull/reinforced{
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
@@ -29770,9 +29934,7 @@
 /area/new_sydney/dark_forest)
 "uCd" = (
 /obj/structure/window/reinforced/spawner/directional/west,
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "uCj" = (
 /obj/effect/turf_decal/line/blue/line/contrasted,
@@ -29829,6 +29991,9 @@
 "uEa" = (
 /obj/effect/turf_decal/arrows{
 	dir = 8
+	},
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
 	},
 /turf/open/floor/iron/dark/smooth_half{
 	dir = 1
@@ -30150,7 +30315,9 @@
 /obj/effect/turf_decal/line/dark_green/line/contrasted{
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_corner,
 /area/new_sydney/bunker)
 "uLG" = (
@@ -30321,6 +30488,17 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
 /area/new_sydney/dark_forest)
+"uWl" = (
+/obj/effect/turf_decal/line/dark_green/line/contrasted{
+	dir = 8
+	},
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
+/turf/open/floor/iron/dark/smooth_half{
+	dir = 1
+	},
+/area/new_sydney/bunker)
 "uWr" = (
 /obj/structure/mineral_door/iron{
 	max_integrity = 50000
@@ -30640,9 +30818,11 @@
 /turf/open/floor/carpet/red,
 /area/new_sydney/building/night_gold_casino)
 "vhy" = (
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+/obj/effect/turf_decal/line/dark_green/line/contrasted,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
 	},
+/turf/open/floor/iron/dark,
 /area/new_sydney/bunker)
 "vhQ" = (
 /obj/effect/turf_decal/line/bar/line/contrasted{
@@ -30738,7 +30918,9 @@
 /area/new_sydney/bunker)
 "vlT" = (
 /obj/effect/turf_decal/siding/wood,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/wood/parquet/oak,
 /area/new_sydney/bunker)
 "vlU" = (
@@ -30902,7 +31084,9 @@
 /obj/effect/turf_decal/line/brown/line/contrasted{
 	dir = 4
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 8
 	},
@@ -31294,9 +31478,7 @@
 /area/new_sydney/bunker)
 "vyX" = (
 /obj/structure/table,
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "vzy" = (
 /obj/structure/table,
@@ -33008,9 +33190,7 @@
 /obj/structure/railing/platform{
 	dir = 5
 	},
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "wFW" = (
 /obj/structure/chair/sofa/bench/solo{
@@ -33227,9 +33407,7 @@
 "wQu" = (
 /obj/structure/table,
 /obj/item/camera,
-/turf/open/floor/circuit/green/telecomms/mainframe{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "wQJ" = (
 /obj/effect/turf_decal/line/dark_red/anticorner/contrasted{
@@ -34210,7 +34388,9 @@
 /obj/effect/turf_decal/line/brown/line/contrasted{
 	dir = 4
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_corner{
 	dir = 1
 	},
@@ -34265,7 +34445,9 @@
 /area/new_sydney/mine)
 "xyf" = (
 /obj/effect/turf_decal/line/dark_green/line/contrasted,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor{
+	nightshift_light_color = "#87CEFA"
+	},
 /turf/open/floor/iron/smooth_corner{
 	dir = 1
 	},
@@ -35222,7 +35404,9 @@
 	dir = 1
 	},
 /obj/effect/landmark/location_entry/coast,
-/obj/structure/gate/coast,
+/obj/structure/gate/coast{
+	name = "Блюспейс-переход на Побережье"
+	},
 /turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "yii" = (
@@ -48341,23 +48525,23 @@ qTu
 qTu
 qTu
 uCd
-vhy
-vhy
+afh
+nCA
 uCd
 kvk
-vhy
-vhy
-vhy
+nCA
+nCA
+nCA
 nbS
 uCd
-vhy
-vhy
-vhy
+nCA
+afh
+nCA
 uCd
 kvk
-vhy
-vhy
-vhy
+nCA
+nCA
+nCA
 nbS
 uCd
 det
@@ -48657,13 +48841,13 @@ enT
 gIB
 giD
 kvk
-nAk
+hVk
 enT
-rvr
+ncP
 nbS
 xwW
 qZu
-enT
+uWl
 rvr
 vyX
 pjY
@@ -48943,7 +49127,7 @@ sLL
 qTu
 ume
 pQT
-vhy
+nCA
 pzq
 piA
 rsT
@@ -48955,7 +49139,7 @@ kaf
 nbS
 sgy
 xLd
-nmE
+qlW
 ipo
 sHJ
 kvk
@@ -48967,7 +49151,7 @@ tuB
 gBc
 nmE
 pxs
-vhy
+nCA
 bBF
 ume
 qTu
@@ -49245,7 +49429,7 @@ sLL
 qTu
 vGV
 pQT
-vhy
+afh
 imp
 uEa
 kAz
@@ -49267,9 +49451,9 @@ oDM
 nbS
 ksM
 qxE
-cue
+jEw
 aPv
-vhy
+afh
 bBF
 bbg
 qTu
@@ -49547,7 +49731,7 @@ sLL
 qTu
 ume
 pQT
-vhy
+nCA
 ovx
 cue
 dYQ
@@ -49555,7 +49739,7 @@ bio
 ilM
 xOv
 jdT
-vhy
+nCA
 nbS
 lVY
 pBq
@@ -49563,7 +49747,7 @@ pBq
 pBq
 bXd
 kvk
-vhy
+nCA
 pSI
 pxs
 lbL
@@ -49571,7 +49755,7 @@ nMb
 ovx
 cue
 dYQ
-vhy
+nCA
 bBF
 ume
 qTu
@@ -49849,31 +50033,31 @@ sLL
 qTu
 gYp
 kDK
-vhy
+nCA
 pzq
 nmE
 cLd
 xfi
-vhy
+nCA
 dhT
 wEc
-vhy
+nCA
 lHQ
-vhy
-vhy
-vhy
-vhy
-vhy
+nCA
+nCA
+afh
+nCA
+nCA
 xfi
-vhy
+nCA
 rOd
 pxs
-vhy
+nCA
 lHQ
 xnn
 nmE
 pxs
-vhy
+nCA
 mkB
 gYp
 qTu
@@ -50151,31 +50335,31 @@ sLL
 ecQ
 ume
 pQT
-vhy
+nCA
 pzq
 nmE
 cLd
 xfi
-vhy
+nCA
 nRv
 kaf
-vhy
+nCA
 lHQ
-vhy
+nCA
 svV
 eVW
 wsl
-vhy
+nCA
 xfi
-vhy
+nCA
 nRv
 pxs
-vhy
+nCA
 lHQ
 xnn
 nmE
 pxs
-vhy
+nCA
 bBF
 ume
 ecQ
@@ -50453,31 +50637,31 @@ sLL
 qTu
 nTV
 pQT
-vhy
+afh
 pzq
-nmE
+qlW
 cLd
 xfi
-vhy
+nCA
 nRv
-kaf
 vhy
+nCA
 lHQ
-vhy
+afh
 mkB
 tXd
 kDK
-vhy
+afh
 xfi
-vhy
+nCA
 nRv
-pxs
-vhy
+eic
+nCA
 lHQ
 xnn
-nmE
+qlW
 pxs
-vhy
+afh
 bBF
 wmN
 qTu
@@ -50755,31 +50939,31 @@ sLL
 ecQ
 ume
 pQT
-vhy
+nCA
 pzq
 nmE
 cLd
 xfi
-vhy
+nCA
 nRv
 mAU
-vhy
+nCA
 lHQ
-vhy
+nCA
 odv
 tzJ
 ugS
-vhy
+nCA
 xfi
-vhy
+nCA
 nRv
 pxs
-vhy
+nCA
 lHQ
 xnn
 nmE
 pxs
-vhy
+nCA
 bBF
 ume
 ecQ
@@ -51057,7 +51241,7 @@ sLL
 qTu
 gYp
 kDK
-vhy
+nCA
 imp
 cue
 aPv
@@ -51065,23 +51249,23 @@ wFE
 htI
 mTp
 dUR
-vhy
+nCA
 lHQ
-vhy
-vhy
-vhy
-vhy
-vhy
+nCA
+nCA
+afh
+nCA
+nCA
 xfi
-vhy
+nCA
 cLm
 pxs
-vhy
+nCA
 lHQ
 xnn
 nmE
 pxs
-vhy
+nCA
 mkB
 gYp
 qTu
@@ -51359,7 +51543,7 @@ sLL
 qTu
 ume
 pQT
-vhy
+nCA
 ovx
 cue
 egG
@@ -51367,7 +51551,7 @@ rvr
 kvk
 qVs
 qpD
-vhy
+nCA
 nbS
 aeQ
 enT
@@ -51375,7 +51559,7 @@ enT
 enT
 gfk
 kvk
-vhy
+nCA
 pWG
 pxs
 bTI
@@ -51383,7 +51567,7 @@ ont
 imp
 cue
 aPv
-vhy
+nCA
 bBF
 ume
 qTu
@@ -51661,9 +51845,9 @@ sLL
 qTu
 iuM
 pQT
-vhy
+afh
 pzq
-nmE
+qlW
 nmE
 aZw
 kvk
@@ -51683,9 +51867,9 @@ rYv
 nbS
 ovU
 fvA
-cue
+jEw
 dYQ
-vhy
+afh
 bBF
 lEX
 qTu
@@ -51963,7 +52147,7 @@ sLL
 qTu
 ume
 pQT
-vhy
+nCA
 pzq
 nmE
 nmE
@@ -51975,7 +52159,7 @@ kaf
 nbS
 vwL
 ksZ
-nmE
+qlW
 lHR
 lkJ
 kvk
@@ -51987,7 +52171,7 @@ tuB
 gBc
 nmE
 pxs
-vhy
+nCA
 bBF
 ume
 qTu
@@ -52281,13 +52465,13 @@ pBq
 dkP
 njF
 kvk
-yiQ
+gLX
 pBq
-wAX
+dkl
 nbS
 dtH
 jcp
-pBq
+qTY
 wAX
 akM
 dno
@@ -52569,23 +52753,23 @@ qTu
 qTu
 qTu
 gJS
-vhy
-vhy
+afh
+nCA
 gJS
 kvk
-vhy
-vhy
-vhy
+nCA
+nCA
+nCA
 nbS
 gJS
-vhy
-vhy
-vhy
+nCA
+afh
+nCA
 gJS
 kvk
-vhy
-vhy
-vhy
+nCA
+nCA
+nCA
 nbS
 gJS
 gyr

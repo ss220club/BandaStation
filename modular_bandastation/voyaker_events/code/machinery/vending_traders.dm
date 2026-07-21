@@ -30,10 +30,12 @@
 	return pick(messages)
 
 /obj/machinery/vending/trader/proc/speak_message(message, mob/listener)
+ world.log << "SPEAK_MESSAGE: [message]"
 	if(!listener || !message)
 		return
 	stop_trader_tts(listener)
-	SEND_SIGNAL(src, COMSIG_ATOM_TTS_CAST, listener, message, src, FALSE, FALSE, null, null, null, null, CHANNEL_TTS_TRADER)
+	src.do_tts_message(message, null, list(), list(/datum/singleton/sound_effect/robot, /datum/singleton/sound_effect/radio), list(listener))
+	src.cast_tts(listener, message)
 
 /obj/machinery/vending/trader/proc/stop_trader_tts(mob/user)
     if(!user?.client)
@@ -61,10 +63,6 @@
 	return ..()
 
 /obj/machinery/vending/trader/ui_interact(mob/user, datum/tgui/ui)
-	var/key = REF(user)
-	if(!user_messages[key])
-		user_messages[key] = get_random_message()
-	speak_message(user_messages[key], user)
 	if(SEND_SIGNAL(src, COMSIG_VENDING_UI_INTERACT, user, ui) & VENDING_DENIED)
 		if(icon_deny)
 			flick(icon_deny, src)
@@ -74,6 +72,11 @@
 	if(!ui)
 		ui = new(user, src, tgui_interface, name)
 		ui.open()
+		var/key = REF(user)
+		if(!user_messages[key])
+			user_messages[key] = get_random_message()
+		speak_message(user_messages[key], user)
+		cast_tts(user, "Проверка", src)
 
 /obj/machinery/vending/trader/ui_data(mob/user)
 	. = ..()
@@ -289,10 +292,14 @@
 	playsound(H, 'sound/machines/ping.ogg', 50, TRUE)
 	to_chat(H, span_notice("Задание [Q.name] принято к выполнению. [Q.context]"))
 
+/obj/machinery/vending/trader/proc/test_tts()
+    for(var/mob/M in GLOB.player_list)
+        cast_tts(M, "Проверка", src)
+
 /obj/machinery/vending/trader/Initialize(mapload)
 	. = ..()
-
 	build_loyalty_from_products()
+	addtimer(CALLBACK(src, PROC_REF(test_tts)), 100)
 
 /obj/machinery/vending/trader/examine(mob/user)
 	. = ..()
@@ -436,6 +443,10 @@
 
 /obj/machinery/vending/trader/samopal/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/brann)
+
+/obj/machinery/vending/trader/samopal/Initialize(mapload)
+    . = ..()
+    AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/brann)
 
 /obj/machinery/vending/trader/teresa
 	name = "\improper Trade Point - Teresa"
@@ -590,6 +601,10 @@
 
 /obj/machinery/vending/trader/teresa/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/diana)
+
+/obj/machinery/vending/trader/teresa/Initialize(mapload)
+    . = ..()
+    AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/diana)
 
 /obj/machinery/vending/trader/teresa/examine(mob/user)
 	. = ..()
@@ -756,6 +771,10 @@
 /obj/machinery/vending/trader/fashion/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/bandit3)
 
+/obj/machinery/vending/trader/fashion/Initialize(mapload)
+    . = ..()
+    AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/bandit3)
+
 /obj/machinery/vending/trader/fashion/examine(mob/user)
 	. = ..()
 	. += "<b>ПОКУПАЕТ:</b> Различную одежду и аксессуары."
@@ -893,6 +912,10 @@
 /obj/machinery/vending/trader/survivor/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/brimstone)
 
+/obj/machinery/vending/trader/survivor/Initialize(mapload)
+    . = ..()
+    AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/brimstone)
+
 /obj/machinery/vending/trader/survivor/examine(mob/user)
 	. = ..()
 	. += "<b>ПОКУПАЕТ:</b> Части мутантов, артефакты, инструменты и детали."
@@ -1023,6 +1046,10 @@
 
 /obj/machinery/vending/trader/robinson/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/cyberpunk_victor)
+
+/obj/machinery/vending/trader/robinson/Initialize(mapload)
+    . = ..()
+    AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/cyberpunk_victor)
 
 /obj/machinery/vending/trader/robinson/examine(mob/user)
 	. = ..()
@@ -1162,6 +1189,10 @@
 /obj/machinery/vending/trader/keksuha/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/xenia)
 
+/obj/machinery/vending/trader/keksuha/Initialize(mapload)
+    . = ..()
+    AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/xenia)
+
 /obj/machinery/vending/trader/keksuha/examine(mob/user)
 	. = ..()
 	. += "<b>ПОКУПАЕТ:</b> Оружие качественного и армейского образца и патроны, запрещённый информационный софт."
@@ -1288,6 +1319,10 @@
 
 /obj/machinery/vending/trader/visitor/add_tts_component()
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/lucian)
+
+/obj/machinery/vending/trader/visitor/Initialize(mapload)
+    . = ..()
+    AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/lucian)
 
 /obj/machinery/vending/trader/visitor/examine(mob/user)
 	. = ..()
