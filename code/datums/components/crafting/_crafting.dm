@@ -132,10 +132,10 @@
 	//Skip extra requirements when unit testing, like, underwater basket weaving? Get the hell out of here
 	if(recipe.requires_workbench)
 		var/workbench_found = FALSE
-		for(var/obj/structure/workbench/W in range(1, a))
+		for(var/obj/structure/workbench/W in orange(1, get_turf(a)))
 			if(W.has_power())
 				workbench_found = TRUE
-				break
+				return TRUE
 		if(!workbench_found)
 			return FALSE
 

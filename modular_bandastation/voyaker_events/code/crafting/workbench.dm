@@ -19,7 +19,7 @@
 	density = TRUE
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE
-	var/obj/structure/apc/master
+	var/obj/structure/workbench/master
 
 /obj/structure/workbench_part/attackby(obj/item/I, mob/user, params)
 	if(master)

@@ -369,9 +369,8 @@ const Product = (props: ProductProps) => {
   const { act, data } = useBackend<VendingData>();
   const { product, productStock, fluid } = props;
   const { department, jobDiscount, all_products_free, user } = data;
-  const loyaltyInfo = data.loyalty?.[product.ref];
-  const loyaltyLocked = loyaltyInfo?.locked ?? false;
-  const requiredLoyalty = loyaltyInfo?.required;
+  const requiredLoyalty = data.required_loyalty?.[product.ref] ?? 1;
+  const loyaltyLocked = data.player_loyalty < requiredLoyalty;
 
   const colorable = !!product.colorable;
   const free = all_products_free || productStock.free || product.price === 0;
@@ -391,7 +390,7 @@ const Product = (props: ProductProps) => {
     asset: ['vending32x32', product.path],
     disabled: disabled,
     loyaltyLocked: loyaltyLocked,
-    requiredLoyalty: loyaltyInfo?.required,
+    requiredLoyalty: requiredLoyalty,
     tooltipPosition: 'bottom',
     buttons: colorable && (
       <ProductColorSelect disabled={disabled} product={product} fluid={fluid} />

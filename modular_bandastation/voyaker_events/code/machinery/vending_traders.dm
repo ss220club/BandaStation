@@ -20,6 +20,7 @@
 	var/trader_desc = "Описание"
 	var/trader_portrait = null
 	var/trader_message = "Приветствую."
+	var/trader_portrait_base64
 
 /obj/machinery/vending/trader/atom_destruction(damage_flag)
 	. = ..()
@@ -80,31 +81,14 @@
 
 /obj/machinery/vending/trader/ui_data(mob/user)
 	. = ..()
-
 	if(!ishuman(user))
 		return .
-
 	var/mob/living/carbon/human/H = user
 	var/player_loyalty = H.get_trader_level(src.trader_id)
-	var/list/loyalty = list()
-	for(var/datum/data/vending_product/product_record as anything in product_records + coin_records + hidden_records)
-		var/required_loyalty = src.product_loyalty[product_record.product_path] || 1
-
-		loyalty[REF(product_record)] = list(
-			"locked" = player_loyalty < required_loyalty,
-			"required" = required_loyalty,
-		)
-
-	.["loyalty"] = loyalty
-	.["vendor_name"] = src.trader_name
-	.["vendor_desc"] = src.trader_desc
-	if(src.trader_portrait)
-		.["vendor_portrait"] = icon2base64(icon(src.trader_portrait))
-
+	.["player_loyalty"] = player_loyalty
 	var/key = REF(user)
 	if(!user_messages[key])
 		user_messages[key] = get_random_message()
-
 	.["vendor_message"] = user_messages[key]
 
 	var/rep = H.trader_rep[src.trader_id] || 0
@@ -124,6 +108,21 @@
 	.["trader_rep"] = rep
 	.["trader_next_rep"] = next_rep
 	.["trader_sales_progress"] = H.trader_rep_progress[src.trader_id] || 0
+
+/obj/machinery/vending/trader/ui_static_data(mob/user)
+	. = ..()
+
+	.["vendor_name"] = trader_name
+	.["vendor_desc"] = trader_desc
+	.["vendor_portrait"] = trader_portrait_base64
+	var/list/required = list()
+	for(var/datum/data/vending_product/P in product_records)
+		required[REF(P)] = product_loyalty[P.product_path] || 1
+	for(var/datum/data/vending_product/P in coin_records)
+		required[REF(P)] = product_loyalty[P.product_path] || 1
+	for(var/datum/data/vending_product/P in hidden_records)
+		required[REF(P)] = product_loyalty[P.product_path] || 1
+	.["required_loyalty"] = required
 
 /obj/machinery/vending/trader/ui_act(action, params, datum/tgui/ui)
 	. = ..()
@@ -299,7 +298,8 @@
 /obj/machinery/vending/trader/Initialize(mapload)
 	. = ..()
 	build_loyalty_from_products()
-	addtimer(CALLBACK(src, PROC_REF(test_tts)), 100)
+	if(trader_portrait)
+		trader_portrait_base64 = icon2base64(icon(trader_portrait))
 
 /obj/machinery/vending/trader/examine(mob/user)
 	. = ..()
@@ -367,23 +367,23 @@
 			"name" = "Weapon",
 			"icon" = "gun",
 			"products" = list(
-				/obj/item/gun/ballistic/automatic/pistol = list(100, 1, INFINITY),
-				/obj/item/gun/ballistic/rifle/sks = list(250, 1, INFINITY),
-    			/obj/item/gun/ballistic/rifle/boltaction/mosin = list(200, 1, INFINITY),
-				/obj/item/gun/ballistic/automatic/pistol/zashch = list(150, 2, INFINITY),
-				/obj/item/gun/ballistic/automatic/sabel/auto = list(350, 2, INFINITY),
-				/obj/item/gun/ballistic/rifle/sks/c762x54mmr = list(300, 2, INFINITY),
-				/obj/item/gun/ballistic/rifle/boltaction/mosin/strilka310 = list(300, 2, INFINITY),
-				/obj/item/gun/ballistic/automatic/bison = list(250, 2, INFINITY),
-				/obj/item/gun/ballistic/automatic/sabel/auto/army/alt = list(400, 3, INFINITY),
-				/obj/item/gun/ballistic/automatic/sabel/auto/modern = list(450, 3, INFINITY),
-				/obj/item/gun/ballistic/automatic/lanca = list(500, 3, INFINITY),
-				/obj/item/gun/ballistic/revolver/dvoystvol/low_caliber = list(450, 3, INFINITY),
-				/obj/item/gun/ballistic/automatic/pistol/clandestine/fisher = list(300, 4, INFINITY),
-				/obj/item/gun/ballistic/automatic/lanca/army/suppressed = list(700, 4, INFINITY),
-				/obj/item/gun/ballistic/automatic/sabel/auto/modern/bullpup/army = list(500, 4, INFINITY),
-				/obj/item/gun/ballistic/automatic/vityaz = list(450, 4, INFINITY),
-				/obj/item/gun/ballistic/revolver/dvoystvol = list(450, 4, INFINITY),
+				/obj/item/gun/ballistic/automatic/pistol = list(100, 1, 10000),
+				/obj/item/gun/ballistic/rifle/sks = list(250, 1, 10000),
+    			/obj/item/gun/ballistic/rifle/boltaction/mosin = list(200, 1, 10000),
+				/obj/item/gun/ballistic/automatic/pistol/zashch = list(150, 2, 10000),
+				/obj/item/gun/ballistic/automatic/sabel/auto = list(350, 2, 10000),
+				/obj/item/gun/ballistic/rifle/sks/c762x54mmr = list(300, 2, 10000),
+				/obj/item/gun/ballistic/rifle/boltaction/mosin/strilka310 = list(300, 2, 10000),
+				/obj/item/gun/ballistic/automatic/bison = list(250, 2, 10000),
+				/obj/item/gun/ballistic/automatic/sabel/auto/army/alt = list(400, 3, 10000),
+				/obj/item/gun/ballistic/automatic/sabel/auto/modern = list(450, 3, 10000),
+				/obj/item/gun/ballistic/automatic/lanca = list(500, 3, 10000),
+				/obj/item/gun/ballistic/revolver/dvoystvol/low_caliber = list(450, 3, 10000),
+				/obj/item/gun/ballistic/automatic/pistol/clandestine/fisher = list(300, 4, 10000),
+				/obj/item/gun/ballistic/automatic/lanca/army/suppressed = list(700, 4, 10000),
+				/obj/item/gun/ballistic/automatic/sabel/auto/modern/bullpup/army = list(500, 4, 10000),
+				/obj/item/gun/ballistic/automatic/vityaz = list(450, 4, 10000),
+				/obj/item/gun/ballistic/revolver/dvoystvol = list(450, 4, 10000),
 			),
 	  	),
 
@@ -391,29 +391,29 @@
 			"name" = "Ammo & Grenades",
 			"icon" = "box",
 			"products" = list(
-				/obj/item/ammo_box/magazine/m9mm = list(10, 1, INFINITY),
-				/obj/item/ammo_box/speedloader/strilka310 = list(15, 1, INFINITY),
-				/obj/item/ammo_box/magazine/zashch = list(15, 1, INFINITY),
-				/obj/item/ammo_box/c762x39/ricochet = list(30, 1, INFINITY),
-				/obj/item/ammo_box/c762x54mmr = list(20, 1, INFINITY),
-				/obj/item/ammo_box/magazine/c762x39mm/small/civ = list(30, 1, INFINITY),
-				/obj/item/storage/toolbox/ammobox/c762x54mmr_bullets = list(80, 2, INFINITY),
-				/obj/item/grenade/frag = list(150, 2, INFINITY),
-				/obj/item/ammo_box/c762x39/hunting = list(35, 2, INFINITY),
-				/obj/item/ammo_box/magazine/strilka310 = list(20, 2, INFINITY),
-				/obj/item/ammo_box/magazine/c762x39mm = list(35, 2, INFINITY),
-				/obj/item/ammo_box/magazine/m9mm/hp = list(15, 2, INFINITY),
-				/obj/item/ammo_box/magazine/bison = list(25, 2, INFINITY),
-				/obj/item/ammo_box/magazine/bison/hp = list(30, 2, INFINITY),
-				/obj/item/storage/toolbox/ammobox/amk_mags = list(150, 3, INFINITY),
-				/obj/item/ammo_box/c762x39/emp = list(80, 3, INFINITY),
-				/obj/item/ammo_box/magazine/c762x39mm/emp = list(100, 3, INFINITY),
-				/obj/item/ammo_box/magazine/m9mm/ap = list(40, 3, INFINITY),
-				/obj/item/ammo_box/magazine/m10mm/hp = list(30, 4, INFINITY),
-				/obj/item/ammo_box/magazine/m10mm/ap = list(60, 4, INFINITY),
-				/obj/item/grenade/c4 = list(300, 4, INFINITY),
-				/obj/item/ammo_box/magazine/bison/ap = list(150, 4, INFINITY),
-				/obj/item/ammo_box/magazine/smg10mm = list(90, 4, INFINITY),
+				/obj/item/ammo_box/magazine/m9mm = list(10, 1, 10000),
+				/obj/item/ammo_box/speedloader/strilka310 = list(15, 1, 10000),
+				/obj/item/ammo_box/magazine/zashch = list(15, 1, 10000),
+				/obj/item/ammo_box/c762x39/ricochet = list(30, 1, 10000),
+				/obj/item/ammo_box/c762x54mmr = list(20, 1, 10000),
+				/obj/item/ammo_box/magazine/c762x39mm/small/civ = list(30, 1, 10000),
+				/obj/item/storage/toolbox/ammobox/c762x54mmr_bullets = list(80, 2, 10000),
+				/obj/item/grenade/frag = list(150, 2, 10000),
+				/obj/item/ammo_box/c762x39/hunting = list(35, 2, 10000),
+				/obj/item/ammo_box/magazine/strilka310 = list(20, 2, 10000),
+				/obj/item/ammo_box/magazine/c762x39mm = list(35, 2, 10000),
+				/obj/item/ammo_box/magazine/m9mm/hp = list(15, 2, 10000),
+				/obj/item/ammo_box/magazine/bison = list(25, 2, 10000),
+				/obj/item/ammo_box/magazine/bison/hp = list(30, 2, 10000),
+				/obj/item/storage/toolbox/ammobox/amk_mags = list(150, 3, 10000),
+				/obj/item/ammo_box/c762x39/emp = list(80, 3, 10000),
+				/obj/item/ammo_box/magazine/c762x39mm/emp = list(100, 3, 10000),
+				/obj/item/ammo_box/magazine/m9mm/ap = list(40, 3, 10000),
+				/obj/item/ammo_box/magazine/m10mm/hp = list(30, 4, 10000),
+				/obj/item/ammo_box/magazine/m10mm/ap = list(60, 4, 10000),
+				/obj/item/grenade/c4 = list(300, 4, 10000),
+				/obj/item/ammo_box/magazine/bison/ap = list(150, 4, 10000),
+				/obj/item/ammo_box/magazine/smg10mm = list(90, 4, 10000),
 			),
 		),
 
@@ -421,18 +421,18 @@
 			"name" = "Equipment",
 			"icon" = "hand-fist",
 			"products" = list(
-				/obj/item/clothing/shoes/jackboots = list(20, 1, INFINITY),
-				/obj/item/clothing/head/hats/ussp = list(10, 1, INFINITY),
-				/obj/item/radio/headset/heads/captain/alt/ussp = list(30, 1, INFINITY),
-				/obj/item/storage/backpack/ussp = list(30, 1, INFINITY),
-				/obj/item/clothing/suit/armor/vest/russian = list(50, 1, INFINITY),
-				/obj/item/clothing/shoes/russian = list(20, 1, INFINITY),
-				/obj/item/clothing/head/helmet/rus_helmet = list(40, 2, INFINITY),
-				/obj/item/clothing/suit/armor/vest/ussp = list(70, 2, INFINITY),
-				/obj/item/clothing/head/helmet/marine/security/ussp_kaska = list(150, 3, INFINITY),
-				/obj/item/clothing/suit/armor/vest/marine/security/ussp_security = list(325, 3, INFINITY),
-				/obj/item/clothing/mask/breath/red_gas = list(150, 4, INFINITY),
-				/obj/item/clothing/glasses/hud/security/night = list(300, 4, INFINITY),
+				/obj/item/clothing/shoes/jackboots = list(20, 1, 10000),
+				/obj/item/clothing/head/hats/ussp = list(10, 1, 10000),
+				/obj/item/radio/headset/heads/captain/alt/ussp = list(30, 1, 10000),
+				/obj/item/storage/backpack/ussp = list(30, 1, 10000),
+				/obj/item/clothing/suit/armor/vest/russian = list(50, 1, 10000),
+				/obj/item/clothing/shoes/russian = list(20, 1, 10000),
+				/obj/item/clothing/head/helmet/rus_helmet = list(40, 2, 10000),
+				/obj/item/clothing/suit/armor/vest/ussp = list(70, 2, 10000),
+				/obj/item/clothing/head/helmet/marine/security/ussp_kaska = list(150, 3, 10000),
+				/obj/item/clothing/suit/armor/vest/marine/security/ussp_security = list(325, 3, 10000),
+				/obj/item/clothing/mask/breath/red_gas = list(150, 4, 10000),
+				/obj/item/clothing/glasses/hud/security/night = list(300, 4, 10000),
 			),
 		),
 	)
