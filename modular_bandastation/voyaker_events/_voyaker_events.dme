@@ -78,3 +78,10 @@
 #include "code\roles\datums.dm"
 #include "code\roles\landmarks.dm"
 #include "code\roles\vanilla_jobs_disabler.dm"
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
