@@ -13,7 +13,6 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	id = /obj/item/card/id/advanced/black
 	id_trim = /datum/id_trim/job/executor
-	pda_slot = /obj/item/modular_computer/pda
 	belt = /obj/item/storage/belt/military/army/tsf/full_pistol
 	ears = /obj/item/radio/headset/headset_sec
 	suit = /obj/item/clothing/suit/armor/vest
