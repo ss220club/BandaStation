@@ -77,7 +77,6 @@
 		if(!user_messages[key])
 			user_messages[key] = get_random_message()
 		speak_message(user_messages[key], user)
-		cast_tts(user, "Проверка", src)
 
 /obj/machinery/vending/trader/ui_data(mob/user)
 	. = ..()
@@ -203,64 +202,34 @@
 		return
 	to_chat(H, span_notice("Продано предметов: [sold_count]. Получено: [total_price] кредитов."))
 
-/obj/machinery/vending/trader/proc/build_loyalty_from_products()
+/obj/machinery/vending/trader/proc/build_trader_inventory()
+	product_records = list()
+	coin_records = list()
+	hidden_records = list()
 	product_loyalty = list()
-	for(var/category in product_categories)
-		var/list/category_data = category
-		var/list/products = category_data["products"]
-		for(var/path in products)
-			var/value = products[path]
-			if(islist(value))
-				var/list/product_data = value
-				if(length(product_data) >= 2)
-					product_loyalty[path] = product_data[2]
-
-/obj/machinery/vending/trader/build_inventory(list/productlist, list/recordlist, list/categories, start_empty = FALSE, premium = FALSE)
-	PRIVATE_PROC(TRUE)
-	var/inflation_value = HAS_TRAIT(SSeconomy, TRAIT_MARKET_CRASHING) ? SSeconomy.inflation_value() : 1
-	default_price = round(initial(default_price) * inflation_value)
-	extra_price = round(initial(extra_price) * inflation_value)
-	QDEL_LIST(recordlist)
 	var/list/product_to_category = list()
-	for (var/list/category as anything in categories)
-		for (var/product_key in category["products"])
-			product_to_category[product_key] = category
-	for(var/typepath in productlist)
-		var/amount
-		var/custom_price_override
-		var/value = productlist[typepath]
-		if(islist(value))
-			var/list/data = value
-			custom_price_override = data[1]
-			amount = data[3]
-		else
-			amount = value
-		var/obj/item/temp = typepath
-		var/datum/data/vending_product/new_record = new
-		new_record.name = capitalize(declent_ru_initial(temp::name, NOMINATIVE, temp::name))
-		new_record.product_path = typepath
-		if(!start_empty)
-			new_record.amount = amount
-		new_record.max_amount = amount
-
-		///Prices of vending machines are all increased uniformly.
-		var/custom_price = round(initial(temp.custom_price) * inflation_value)
-		if(!premium)
-			if(custom_price_override)
-				new_record.price = custom_price_override
-			else
-				new_record.price = custom_price || default_price
-		else
-			var/premium_custom_price = round(initial(temp.custom_premium_price) * inflation_value)
-
-			if(!premium_custom_price && custom_price)
-				new_record.price = extra_price + custom_price
-			else
-				new_record.price = premium_custom_price || extra_price
-		new_record.age_restricted = initial(temp.age_restricted)
-		new_record.colorable = !!(initial(temp.greyscale_config) && initial(temp.greyscale_colors) && (initial(temp.flags_1) & IS_PLAYER_COLORABLE_1))
-		new_record.category = product_to_category[typepath]
-		recordlist += new_record
+	for(var/list/category as anything in product_categories)
+		for(var/typepath in category["products"])
+			product_to_category[typepath] = category
+	for(var/list/category as anything in product_categories)
+		var/list/products = category["products"]
+		for(var/typepath in products)
+			var/list/info = products[typepath]
+			var/price = info[1]
+			var/loyalty = info[2]
+			var/amount = info[3]
+			var/obj/item/temp = typepath
+			var/datum/data/vending_product/P = new
+			P.name = capitalize(declent_ru_initial(temp::name, NOMINATIVE, temp::name))
+			P.product_path = typepath
+			P.amount = amount
+			P.max_amount = amount
+			P.price = price
+			P.age_restricted = initial(temp.age_restricted)
+			P.colorable = !!(initial(temp.greyscale_config) && initial(temp.greyscale_colors) && (initial(temp.flags_1) & IS_PLAYER_COLORABLE_1))
+			P.category = product_to_category[typepath]
+			product_records += P
+			product_loyalty[typepath] = loyalty
 
 /obj/machinery/vending/trader/proc/give_quest(mob/living/carbon/human/H)
 	if(H.trader_quests[src.trader_id])
@@ -291,13 +260,9 @@
 	playsound(H, 'sound/machines/ping.ogg', 50, TRUE)
 	to_chat(H, span_notice("Задание [Q.name] принято к выполнению. [Q.context]"))
 
-/obj/machinery/vending/trader/proc/test_tts()
-    for(var/mob/M in GLOB.player_list)
-        cast_tts(M, "Проверка", src)
-
 /obj/machinery/vending/trader/Initialize(mapload)
 	. = ..()
-	build_loyalty_from_products()
+	build_trader_inventory()
 	if(trader_portrait)
 		trader_portrait_base64 = icon2base64(icon(trader_portrait))
 
