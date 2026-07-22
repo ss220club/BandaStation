@@ -1,6 +1,6 @@
 /obj/effect/landmark/start/eftk/executor
-    name = JOB_EXECUTOR
-    icon_state = "Assistant"
+	name = JOB_EXECUTOR
+	icon_state = "Assistant"
 
 /obj/effect/landmark/start/eftk/blessed/medic
 	name = JOB_BLESSED_MEDIC

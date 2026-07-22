@@ -203,8 +203,7 @@
 			. += image('modular_bandastation/voyaker_events/icons/barricade.dmi', icon_state = "[barricade_type]_closed_wire")
 
 /obj/structure/deployable_barricade/verb/rotate()
-	set name = "Повернуть баррикаду против часовой стрелки <"
-	set category = "Object"
+	GAME_VERB("Повернуть баррикаду против часовой стрелки <", "Object")
 	set src in oview(1)
 
 	if(anchored)
@@ -214,8 +213,7 @@
 	setDir(turn(dir, 90))
 
 /obj/structure/deployable_barricade/verb/revrotate()
-	set name = "Повернуть баррикаду по часовой стрелке >"
-	set category = "Object"
+	GAME_VERB("Повернуть баррикаду по часовой стрелке >", "Object")
 	set src in oview(1)
 
 	if(anchored)
@@ -223,7 +221,6 @@
 		return FALSE
 
 	setDir(turn(dir, 270))
-
 
 /obj/structure/deployable_barricade/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()

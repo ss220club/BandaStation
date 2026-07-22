@@ -576,10 +576,10 @@
 	reward_rep = 15
 
 /datum/trader_quest/keksuha_donate/can_complete(mob/living/carbon/human/H, obj/item/I)
-    if(!istype(I, /obj/item/holochip))
-        return FALSE
-    var/obj/item/holochip/C = I
-    return C.credits >= 1500
+	if(!istype(I, /obj/item/holochip))
+		return FALSE
+	var/obj/item/holochip/C = I
+	return C.credits >= 1500
 
 /datum/trader_quest/keksuha_donate/complete(mob/living/carbon/human/H, trader_id, obj/item/I)
 	var/obj/item/holochip/C = I
@@ -599,8 +599,8 @@
 	var/timer_expired = FALSE
 
 /datum/trader_quest/keksuha_massacre/start(mob/living/carbon/human/H)
-    . = ..()
-    addtimer(CALLBACK(src, PROC_REF(check_massacre), H), 7 MINUTES)
+	. = ..()
+	addtimer(CALLBACK(src, PROC_REF(check_massacre), H), 7 MINUTES)
 
 /datum/trader_quest/keksuha_massacre/proc/check_massacre(mob/living/carbon/human/H)
 	if(progress >= goal)
@@ -609,11 +609,11 @@
 	fail(H, TRADER_KAMILLA, "Задание провалено. Вы не успели устранить трёх Исполнителей за отведённое время. Репутация снижена на -3.")
 
 /datum/trader_quest/keksuha_massacre/on_target_killed(mob/living/carbon/human/H, mob/living/victim)
-    if(timer_expired)
-        return FALSE
-    if(!ishuman(victim))
-        return FALSE
-    return TRUE
+	if(timer_expired)
+		return FALSE
+	if(!ishuman(victim))
+		return FALSE
+	return TRUE
 
 /datum/trader_quest/keksuha_explosive
 	name = "Пироманьяк"

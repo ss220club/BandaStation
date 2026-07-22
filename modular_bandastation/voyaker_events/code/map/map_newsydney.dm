@@ -6,12 +6,8 @@
 	anchored = TRUE
 
 /obj/structure/statue/gold/new_sydney_map/ui_interact(mob/user, datum/tgui/ui)
-    user << browse_rsc(
-        'modular_bandastation/voyaker_events/icons/other/worldmap.png',
-        "worldmap.png"
-    )
-
-    ui = SStgui.try_update_ui(user, src, ui)
-    if(!ui)
-        ui = new(user, src, "NewSydneyMap")
-        ui.open()
+	user << browse_rsc('modular_bandastation/voyaker_events/icons/other/worldmap.png', "worldmap.png")
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "NewSydneyMap")
+		ui.open()

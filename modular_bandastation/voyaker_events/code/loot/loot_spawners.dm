@@ -211,8 +211,8 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	name = "Advice Letters Spawn"
 	icon_state = "random_loot"
 	loot_table = list(
-    	/obj/item/paper/fluff/eftk/advice/blessed = 100,
-    	/obj/item/paper/fluff/eftk/advice/keksuha = 100
+		/obj/item/paper/fluff/eftk/advice/blessed = 100,
+		/obj/item/paper/fluff/eftk/advice/keksuha = 100
 	)
 	max_items = 1
 	spawn_chance = 100

@@ -6,10 +6,10 @@
 	var/open_time = 10 SECONDS
 
 /obj/machinery/door/password/keycard/attack_hand(mob/user)
-    if(locked)
-        balloon_alert(user, "дверь заперта")
-        return TRUE
-    return ..()
+	if(locked)
+		balloon_alert(user, "дверь заперта")
+		return TRUE
+	return ..()
 
 /obj/machinery/door/password/keycard/attackby(obj/item/I, mob/living/user, params)
 	if(!required_key)

@@ -1,12 +1,12 @@
 /obj/item/keycard
-    /// Максимальное количество использований
-    var/max_uses = 5
-    /// Осталось использований
-    var/uses_left = 5
+	/// Максимальное количество использований
+	var/max_uses = 5
+	/// Осталось использований
+	var/uses_left = 5
 
 /obj/item/keycard/examine(mob/user)
-    . = ..()
-    . += span_notice("Оставшиеся открытия: [uses_left]/[max_uses]")
+	. = ..()
+	. += span_notice("Оставшиеся открытия: [uses_left]/[max_uses]")
 
 /obj/item/keycard/forest_bunker
 	name = "Ключ-карта NB-063"

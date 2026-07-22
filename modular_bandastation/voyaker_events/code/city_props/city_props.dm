@@ -211,7 +211,7 @@
 	icon_state = "phonebox_closed_broken"
 
 /obj/structure/city_prop/telebox/broken/interact(mob/living/carbon/human/user)
-    balloon_alert(user, "будка сломана")
+	balloon_alert(user, "будка сломана")
 
 /obj/structure/city_prop/electrical_substation
 	name = "преобразователь подстанции"

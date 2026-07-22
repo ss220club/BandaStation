@@ -22,15 +22,15 @@ GLOBAL_LIST_EMPTY(forest_mutant_spawners)
 	return ..()
 
 /obj/effect/landmark/forest_mutant_spawn/proc/spawn_mob()
-    if(current_mob && !QDELETED(current_mob) && current_mob.stat != DEAD)
-        return
-    var/turf/T = get_turf(src)
-    if(!T)
-        return
-    var/path = pick_weight(mob_pool)
-    if(!path)
-        return
-    current_mob = new path(T)
+	if(current_mob && !QDELETED(current_mob) && current_mob.stat != DEAD)
+		return
+	var/turf/T = get_turf(src)
+	if(!T)
+		return
+	var/path = pick_weight(mob_pool)
+	if(!path)
+		return
+	current_mob = new path(T)
 
 /obj/effect/landmark/forest_mutant_spawn/faithless
 	name = "Faithless Spawn"

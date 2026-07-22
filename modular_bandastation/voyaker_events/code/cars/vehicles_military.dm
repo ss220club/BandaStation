@@ -14,10 +14,9 @@
 	var/obj/structure/vehicle_prop/master
 
 /obj/structure/vehicle_prop/hitbox/attackby(obj/item/C, mob/user, params)
-    if(master)
-        return master.attackby(C, user, params)
-
-    return ..()
+	if(master)
+		return master.attackby(C, user, params)
+	return ..()
 
 /obj/structure/vehicle_prop/humvee
 	name = "брошенный Humvee"

@@ -81,7 +81,7 @@
 			killer.release_smoke()
 
 /datum/movespeed_modifier/killer_fast
-    multiplicative_slowdown = -0.5
+	multiplicative_slowdown = -0.5
 
 /mob/living/basic/killer/Initialize(mapload)
 	. = ..()

@@ -31,7 +31,6 @@
 	return pick(messages)
 
 /obj/machinery/vending/trader/proc/speak_message(message, mob/listener)
- world.log << "SPEAK_MESSAGE: [message]"
 	if(!listener || !message)
 		return
 	stop_trader_tts(listener)
@@ -39,11 +38,11 @@
 	src.cast_tts(listener, message)
 
 /obj/machinery/vending/trader/proc/stop_trader_tts(mob/user)
-    if(!user?.client)
-        return
-    var/sound/S = sound(null)
-    S.channel = CHANNEL_TTS_TRADER
-    SEND_SOUND(user, S)
+	if(!user?.client)
+		return
+	var/sound/S = sound(null)
+	S.channel = CHANNEL_TTS_TRADER
+	SEND_SOUND(user, S)
 
 /obj/machinery/vending/trader/vend(list/params, mob/user, list/greyscale_colors)
 	var/datum/data/vending_product/item_record = locate(params["ref"])
@@ -334,7 +333,7 @@
 			"products" = list(
 				/obj/item/gun/ballistic/automatic/pistol = list(100, 1, 10000),
 				/obj/item/gun/ballistic/rifle/sks = list(250, 1, 10000),
-    			/obj/item/gun/ballistic/rifle/boltaction/mosin = list(200, 1, 10000),
+				/obj/item/gun/ballistic/rifle/boltaction/mosin = list(200, 1, 10000),
 				/obj/item/gun/ballistic/automatic/pistol/zashch = list(150, 2, 10000),
 				/obj/item/gun/ballistic/automatic/sabel/auto = list(350, 2, 10000),
 				/obj/item/gun/ballistic/rifle/sks/c762x54mmr = list(300, 2, 10000),
@@ -350,7 +349,7 @@
 				/obj/item/gun/ballistic/automatic/vityaz = list(450, 4, 10000),
 				/obj/item/gun/ballistic/revolver/dvoystvol = list(450, 4, 10000),
 			),
-	  	),
+		),
 
 		list(
 			"name" = "Ammo & Grenades",
@@ -410,8 +409,8 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/brann)
 
 /obj/machinery/vending/trader/samopal/Initialize(mapload)
-    . = ..()
-    AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/brann)
+	. = ..()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/brann)
 
 /obj/machinery/vending/trader/teresa
 	name = "\improper Trade Point - Teresa"
@@ -568,8 +567,8 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/diana)
 
 /obj/machinery/vending/trader/teresa/Initialize(mapload)
-    . = ..()
-    AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/diana)
+	. = ..()
+	AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/diana)
 
 /obj/machinery/vending/trader/teresa/examine(mob/user)
 	. = ..()
@@ -737,8 +736,8 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/bandit3)
 
 /obj/machinery/vending/trader/fashion/Initialize(mapload)
-    . = ..()
-    AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/bandit3)
+	. = ..()
+	AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/bandit3)
 
 /obj/machinery/vending/trader/fashion/examine(mob/user)
 	. = ..()
@@ -878,8 +877,8 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/brimstone)
 
 /obj/machinery/vending/trader/survivor/Initialize(mapload)
-    . = ..()
-    AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/brimstone)
+	. = ..()
+	AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/brimstone)
 
 /obj/machinery/vending/trader/survivor/examine(mob/user)
 	. = ..()
@@ -1013,8 +1012,8 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/cyberpunk_victor)
 
 /obj/machinery/vending/trader/robinson/Initialize(mapload)
-    . = ..()
-    AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/cyberpunk_victor)
+	. = ..()
+	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/cyberpunk_victor)
 
 /obj/machinery/vending/trader/robinson/examine(mob/user)
 	. = ..()
@@ -1155,8 +1154,8 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/xenia)
 
 /obj/machinery/vending/trader/keksuha/Initialize(mapload)
-    . = ..()
-    AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/xenia)
+	. = ..()
+	AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/xenia)
 
 /obj/machinery/vending/trader/keksuha/examine(mob/user)
 	. = ..()
@@ -1286,8 +1285,8 @@
 	AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/lucian)
 
 /obj/machinery/vending/trader/visitor/Initialize(mapload)
-    . = ..()
-    AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/lucian)
+	. = ..()
+	AddComponent(/datum/component/tts_component,  /datum/tts_seed/silero/lucian)
 
 /obj/machinery/vending/trader/visitor/examine(mob/user)
 	. = ..()
