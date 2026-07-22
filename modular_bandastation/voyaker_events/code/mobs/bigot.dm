@@ -9,14 +9,13 @@
 
 /datum/targeting_strategy/basic/not_zombies
 
-/datum/targeting_strategy/basic/not_zombies/can_attack(mob/living/source, atom/target)
+/datum/targeting_strategy/basic/not_zombies/can_attack(mob/living/source, atom/target, vision_range)
 	if(!..())
 		return FALSE
 	if(isliving(target))
 		var/mob/living/L = target
-		if(source.faction && L.faction)
-			if(source.faction[1] in L.faction)
-				return FALSE
+		if(source.has_faction(FACTION_CULT) && L.has_faction(FACTION_CULT))
+			return FALSE
 	return TRUE
 
 /mob/living/basic/bigot
@@ -100,7 +99,7 @@
 	if(world.time >= B.next_charge_attack)
 		INVOKE_ASYNC(B, TYPE_PROC_REF(/mob/living/basic/bigot, charge_attack), target)
 
-/mob/living/basic/bigot/melee_attack(atom/target)
+/mob/living/basic/bigot/melee_attack(atom/target, ignore_cooldown)
 	. = ..()
 	if(!isliving(target))
 		return

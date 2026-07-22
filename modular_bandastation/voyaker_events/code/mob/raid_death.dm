@@ -19,11 +19,11 @@ GLOBAL_LIST_INIT(raid_areas, list(
 	return FALSE
 
 /mob/living/carbon/human/death(gibbed)
-	if(in_raid() && !ignore_raid_death)
-		extract_from_raid()
-		return FALSE
+    if(in_raid() && !ignore_raid_death)
+        addtimer(CALLBACK(src, PROC_REF(extract_from_raid)), 0)
+        return FALSE
 
-	return ..()
+    return ..()
 
 /mob/living/carbon/human/proc/finish_extract()
 	if(QDELETED(src))
@@ -37,6 +37,8 @@ GLOBAL_LIST_INIT(raid_areas, list(
 	Paralyze(2 SECONDS)
 
 /mob/living/carbon/human/proc/extract_from_raid()
+	if(QDELETED(src))
+    	return
 	if(quest_killer && ishuman(quest_killer))
 		check_trader_kill_quests(quest_killer, src)
 	quest_killer = null
@@ -75,13 +77,6 @@ GLOBAL_LIST_INIT(raid_areas, list(
 	if(L)
 		forceMove(get_turf(L))
 	do_sparks(1, FALSE, death_turf)
-	fully_heal()
-	revive()
 	addtimer(CALLBACK(src, PROC_REF(finish_extract)), 1)
-	regenerate_icons()
 	playsound_local(src, 'sound/effects/magic/blink.ogg', 25, TRUE)
-	set_static_vision(2 SECONDS)
-	set_temp_blindness(1 SECONDS)
-	Paralyze(2 SECONDS)
 	to_chat(src, span_notice("Система блюспейс-сброса активирована в результате получения серьёзных повреждений. Вы дезориентированы."))
-

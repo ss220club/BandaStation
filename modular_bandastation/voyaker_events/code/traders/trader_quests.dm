@@ -14,54 +14,51 @@
 	proc/start(mob/living/carbon/human/H)
 		return
 
-	proc/can_complete(mob/living/carbon/human/H, obj/item/I)
-		return FALSE
+/datum/trader_quest/proc/can_complete(mob/living/carbon/human/H, obj/item/I)
+	return FALSE
 
-	proc/on_target_killed(mob/living/carbon/human/H, mob/living/victim)
-		return FALSE
+/datum/trader_quest/proc/on_target_killed(mob/living/carbon/human/H, mob/living/victim)
+	return FALSE
 
-	proc/add_progress(mob/living/carbon/human/H, trader_id, amount = 1)
-		progress += amount
-		if(progress >= goal)
-			complete(H, trader_id, null)
+/datum/trader_quest/proc/add_progress(mob/living/carbon/human/H, trader_id, amount = 1)
+	progress += amount
+	if(progress >= goal)
+		complete(H, trader_id, null)
 
-	proc/complete(mob/living/carbon/human/H, trader_id, obj/item/I)
-		if(I)
-			qdel(I)
-		var/obj/item/card/id/id_card = H.get_idcard(TRUE)
-		if(id_card?.registered_account)
-			id_card.registered_account.adjust_money(reward_money)
-		if(trader_id)
-			H.add_trader_rep(trader_id, reward_rep)
-			H.trader_quests -= trader_id
-		H.completed_trader_quests += id
-		to_chat(H, span_nicegreen("Задание выполнено. Получена награда: [reward_money] кредитов и [reward_rep] очков репутации."))
-		playsound(H, 'sound/machines/synth/synth_yes.ogg', 60, TRUE)
-
-	proc/fail(mob/living/carbon/human/H, trader_id, reason = "")
+/datum/trader_quest/proc/complete(mob/living/carbon/human/H, trader_id, obj/item/I)
+	if(I)
+		qdel(I)
+	var/obj/item/card/id/id_card = H.get_idcard(TRUE)
+	if(id_card?.registered_account)
+		id_card.registered_account.adjust_money(reward_money)
+	if(trader_id)
+		H.add_trader_rep(trader_id, reward_rep)
 		H.trader_quests -= trader_id
-		if(trader_id)
-			H.add_trader_rep(trader_id, -3)
-		if(length(reason))
-			to_chat(H, span_warning(reason))
-		else
-			to_chat(H, span_warning("Задание провалено."))
-		playsound(H, 'sound/machines/synth/synth_no.ogg', 60, TRUE)
+	H.completed_trader_quests += id
+	to_chat(H, span_nicegreen("Задание выполнено. Получена награда: [reward_money] кредитов и [reward_rep] очков репутации."))
+	playsound(H, 'sound/machines/synth/synth_yes.ogg', 60, TRUE)
 
-	proc/on_enter_area(mob/living/carbon/human/H, area/A)
-		return
+/datum/trader_quest/proc/fail(mob/living/carbon/human/H, trader_id, reason = "")
+	H.trader_quests -= trader_id
+	if(trader_id)
+		H.add_trader_rep(trader_id, -3)
+	if(length(reason))
+		to_chat(H, span_warning(reason))
+	else
+		to_chat(H, span_warning("Задание провалено."))
+	playsound(H, 'sound/machines/synth/synth_no.ogg', 60, TRUE)
 
-	proc/on_other_quest_taken(mob/living/carbon/human/H, trader_id)
-		return
+/datum/trader_quest/proc/on_enter_area(mob/living/carbon/human/H, area/A)
+	return
 
-	proc/on_any_human_killed(
-		mob/living/carbon/human/killer,
-		mob/living/carbon/human/victim
-	)
-		return
+/datum/trader_quest/proc/on_other_quest_taken(mob/living/carbon/human/H, trader_id)
+	return
 
-	proc/on_forest_bunker_open(mob/living/carbon/human/H)
-		return
+/datum/trader_quest/proc/on_any_human_killed(mob/living/carbon/human/killer, mob/living/carbon/human/victim)
+	return
+
+/datum/trader_quest/proc/on_forest_bunker_open(mob/living/carbon/human/H)
+	return
 
 /datum/trader_quest/samopal_medal
 	name = "Старая медаль"
@@ -70,8 +67,9 @@
 	context = "Цель: Найти или сделать любую медаль и принести Самопалу."
 	reward_money = 250
 	reward_rep = 2
-	can_complete(mob/living/carbon/human/H, obj/item/I)
-		return istype(I, /obj/item/clothing/accessory/medal)
+
+/datum/trader_quest/samopal_medal/can_complete(mob/living/carbon/human/H, obj/item/I)
+	return istype(I, /obj/item/clothing/accessory/medal)
 
 /datum/trader_quest/samopal_vtol
 	name = "Падение Федеративного ястреба"
@@ -80,8 +78,9 @@
 	context = "Цель: Достать чёрный ящик из упавшего истребителя. Его видели на восточном краю Побережья."
 	reward_money = 300
 	reward_rep = 3
-	can_complete(mob/living/carbon/human/H, obj/item/I)
-		return istype(I, /obj/item/blackbox)
+
+/datum/trader_quest/samopal_vtol/can_complete(mob/living/carbon/human/H, obj/item/I)
+	return istype(I, /obj/item/blackbox)
 
 /datum/trader_quest/samopal_spiders
 	name = "Беда - не приходит одна"
@@ -111,15 +110,16 @@
 	goal = 2
 	reward_money = 200
 	reward_rep = 5
-	can_complete(H, I)
-		if(!istype(I, /obj/item/paper/fluff/eftk/telegraph))
-			return FALSE
-		qdel(I)
-		progress++
-		if(progress >= goal)
-			return TRUE
-		to_chat(H, span_notice("Передано записок: [progress]/[goal]."))
+
+/datum/trader_quest/samopal_letter/can_complete(mob/living/carbon/human/H, obj/item/I)
+	if(!istype(I, /obj/item/paper/fluff/eftk/telegraph))
 		return FALSE
+	qdel(I)
+	progress++
+	if(progress >= goal)
+		return TRUE
+	to_chat(H, span_notice("Передано записок: [progress]/[goal]."))
+	return FALSE
 
 /datum/trader_quest/samopal_bigots
 	name = "В пасти зверя"
@@ -153,8 +153,9 @@
 	context = "Цель: Найти или сделать кожанную куртку Фейшна и передать ему. Она была потеряна на одной из северных дорог Побережья."
 	reward_money = 250
 	reward_rep = 5
-	can_complete(mob/living/carbon/human/H, obj/item/I)
-		return istype(I, /obj/item/clothing/suit/jacket/leather_trenchcoat)
+
+/datum/trader_quest/fashion_jacket/can_complete(mob/living/carbon/human/H, obj/item/I)
+	return istype(I, /obj/item/clothing/suit/jacket/leather_trenchcoat)
 
 /datum/trader_quest/fashion_casino
 	name = "Нюхач"
@@ -195,15 +196,16 @@
 	goal = 2
 	reward_money = 450
 	reward_rep = 6
-	can_complete(H, I)
-		if(!istype(I, /obj/item/clothing/suit/armor/vest/marine))
-			return FALSE
-		qdel(I)
-		progress++
-		if(progress >= goal)
-			return TRUE
-		to_chat(H, span_notice("Передано бронежилетов: [progress]/[goal]."))
+
+/datum/trader_quest/fashion_armor/can_complete(mob/living/carbon/human/H, obj/item/I)
+	if(!istype(I, /obj/item/clothing/suit/armor/vest/marine))
 		return FALSE
+	qdel(I)
+	progress++
+	if(progress >= goal)
+		return TRUE
+	to_chat(H, span_notice("Передано бронежилетов: [progress]/[goal]."))
+	return FALSE
 
 /datum/trader_quest/fashion_beacon
 	name = "Накал страстей"
@@ -265,8 +267,9 @@
 	context = "Цель: Найти или сделать компактный дефибриллятор и принести Терезе. Они могут быть рядом с машинами скорой помощи."
 	reward_money = 300
 	reward_rep = 5
-	can_complete(mob/living/carbon/human/H, obj/item/I)
-		return istype(I, /obj/item/defibrillator/compact)
+
+/datum/trader_quest/teresa_defibrillator/can_complete(mob/living/carbon/human/H, obj/item/I)
+	return istype(I, /obj/item/defibrillator/compact)
 
 /datum/trader_quest/teresa_mailboxes
 	name = "Швы во спасение"
@@ -285,8 +288,9 @@
 	goal = 1
 	reward_money = 100
 	reward_rep = 7
-	can_complete(mob/living/carbon/human/H, obj/item/I)
-		return istype(I, /obj/item/stack/documents/blessing)
+
+/datum/trader_quest/teresa_charter/can_complete(mob/living/carbon/human/H, obj/item/I)
+	return istype(I, /obj/item/stack/documents/blessing)
 
 /datum/trader_quest/teresa_zombies
 	name = "Карающий меч"
@@ -347,8 +351,9 @@
 	context = " Цель: Передать Выживайло металлическую топливную канистру."
 	reward_money = 250
 	reward_rep = 5
-	can_complete(mob/living/carbon/human/H, obj/item/I)
-		return istype(I, /obj/item/reagent_containers/cup/fuel_can)
+
+/datum/trader_quest/survivor_can/can_complete(mob/living/carbon/human/H, obj/item/I)
+	return istype(I, /obj/item/reagent_containers/cup/fuel_can)
 
 /datum/trader_quest/survivor_trust
 	name = "Доверие"
@@ -357,8 +362,9 @@
 	context = " Цель: Передать Выживайло Доверительное письмо. Такое обычно выдают Техники бункера за особые заслуги."
 	reward_money = 500
 	reward_rep = 5
-	can_complete(mob/living/carbon/human/H, obj/item/I)
-		return istype(I, /obj/item/stack/documents/trust_letter)
+
+/datum/trader_quest/survivor_trust/can_complete(mob/living/carbon/human/H, obj/item/I)
+	return istype(I, /obj/item/stack/documents/trust_letter)
 
 /datum/trader_quest/survivor_shooter
 	name = "Тау-Китовский стрелок"
@@ -494,15 +500,16 @@
 	reward_money = 400
 	goal = 2
 	reward_rep = 5
-	can_complete(H, I)
-		if(!istype(I, /obj/item/gun/ballistic/automatic/sabel))
-			return FALSE
-		qdel(I)
-		progress++
-		if(progress >= goal)
-			return TRUE
-		to_chat(H, span_notice("Передано винтовок: [progress]/[goal]."))
+
+/datum/trader_quest/robinson_guns/can_complete(mob/living/carbon/human/H, obj/item/I)
+	if(!istype(I, /obj/item/gun/ballistic/automatic/sabel))
 		return FALSE
+	qdel(I)
+	progress++
+	if(progress >= goal)
+		return TRUE
+	to_chat(H, span_notice("Передано винтовок: [progress]/[goal]."))
+	return FALSE
 
 /datum/trader_quest/robinson_documents
 	name = "Хватай и беги"
@@ -512,8 +519,9 @@
 	reward_money = 750
 	goal = 1
 	reward_rep = 8
-	can_complete(mob/living/carbon/human/H, obj/item/I)
-		return istype(I, /obj/item/folder/documents)
+
+/datum/trader_quest/robinson_documents/can_complete(mob/living/carbon/human/H, obj/item/I)
+	return istype(I, /obj/item/folder/documents)
 
 /datum/trader_quest/robinson_documents/on_any_human_killed(mob/living/carbon/human/killer, mob/living/carbon/human/victim)
 	if(!killer || !victim)
@@ -623,15 +631,16 @@
 	reward_money = 600
 	goal = 3
 	reward_rep = 7
-	can_complete(H, I)
-		if(!istype(I, /obj/item/grenade/c4))
-			return FALSE
-		qdel(I)
-		progress++
-		if(progress >= goal)
-			return TRUE
-		to_chat(H, span_notice("Передано взрывчатки: [progress]/[goal]."))
+
+/datum/trader_quest/keksuha_explosive/can_complete(H, I)
+	if(!istype(I, /obj/item/grenade/c4))
 		return FALSE
+	qdel(I)
+	progress++
+	if(progress >= goal)
+		return TRUE
+	to_chat(H, span_notice("Передано взрывчатки: [progress]/[goal]."))
+	return FALSE
 
 /datum/trader_quest/keksuha_western
 	name = "Спагетти-вестерн"
@@ -671,8 +680,9 @@
 	reward_money = 400
 	goal = 1
 	reward_rep = 5
-	can_complete(mob/living/carbon/human/H, obj/item/I)
-		return istype(I, /obj/item/paper/fluff/eftk)
+
+/datum/trader_quest/visitor_detective/can_complete(mob/living/carbon/human/H, obj/item/I)
+	return istype(I, /obj/item/paper/fluff/eftk)
 
 /datum/trader_quest/visitor_breeze
 	name = "Морской бриз"

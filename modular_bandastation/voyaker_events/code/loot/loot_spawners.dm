@@ -87,10 +87,9 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	max_items = 1
 	spawn_chance = 70
 
-/obj/effect/landmark/loot_spawn/weapon
-	Initialize(mapload)
-		. = ..()
-		loot_table = GLOB.weapon_loot_table.Copy()
+/obj/effect/landmark/loot_spawn/weapon/Initialize(mapload)
+	. = ..()
+	loot_table = GLOB.weapon_loot_table.Copy()
 
 /obj/effect/landmark/loot_spawn/ammo
 	name = "ammo loot spawn"
@@ -98,10 +97,9 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	max_items = 2
 	spawn_chance = 90
 
-/obj/effect/landmark/loot_spawn/ammo
-	Initialize(mapload)
-		. = ..()
-		loot_table = GLOB.ammo_loot_table.Copy()
+/obj/effect/landmark/loot_spawn/ammo/Initialize(mapload)
+	. = ..()
+	loot_table = GLOB.ammo_loot_table.Copy()
 
 /obj/effect/landmark/loot_spawn/food
 	name = "food loot spawn"
@@ -109,10 +107,9 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	max_items = 3
 	spawn_chance = 90
 
-/obj/effect/landmark/loot_spawn/food
-	Initialize(mapload)
-		. = ..()
-		loot_table = GLOB.food_loot_table.Copy()
+/obj/effect/landmark/loot_spawn/food/Initialize(mapload)
+	. = ..()
+	loot_table = GLOB.food_loot_table.Copy()
 
 /obj/effect/landmark/loot_spawn/treasure
 	name = "treasure loot spawn"
@@ -120,10 +117,9 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	max_items = 1
 	spawn_chance = 90
 
-/obj/effect/landmark/loot_spawn/treasure
-	Initialize(mapload)
-		. = ..()
-		loot_table = GLOB.treasure_loot_table.Copy()
+/obj/effect/landmark/loot_spawn/treasure/Initialize(mapload)
+	. = ..()
+	loot_table = GLOB.treasure_loot_table.Copy()
 
 /obj/effect/landmark/loot_spawn/clothing
 	name = "clothing loot spawn"
@@ -131,10 +127,9 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	max_items = 1
 	spawn_chance = 70
 
-/obj/effect/landmark/loot_spawn/clothing
-	Initialize(mapload)
-		. = ..()
-		loot_table = GLOB.clothing_loot_table.Copy()
+/obj/effect/landmark/loot_spawn/clothing/Initialize(mapload)
+	. = ..()
+	loot_table = GLOB.clothing_loot_table.Copy()
 
 /obj/effect/landmark/loot_spawn/fashion_jacket
 	name = "Fashion Jacket Spawn"
@@ -149,10 +144,9 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	max_items = 1
 	spawn_chance = 50
 
-/obj/effect/landmark/loot_spawn/information
-	Initialize(mapload)
-		. = ..()
-		loot_table = GLOB.info_loot_table.Copy()
+/obj/effect/landmark/loot_spawn/information/Initialize(mapload)
+	. = ..()
+	loot_table = GLOB.info_loot_table.Copy()
 
 /obj/effect/landmark/loot_spawn/technical
 	name = "technical loot spawn"
@@ -160,10 +154,9 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	max_items = 2
 	spawn_chance = 80
 
-/obj/effect/landmark/loot_spawn/technical
-	Initialize(mapload)
-		. = ..()
-		loot_table = GLOB.technical_loot_table.Copy()
+/obj/effect/landmark/loot_spawn/technical/Initialize(mapload)
+	. = ..()
+	loot_table = GLOB.technical_loot_table.Copy()
 
 /obj/effect/landmark/loot_spawn/magma_artifact
 	name = "magma wing spawn"
@@ -326,11 +319,10 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	loot_chance = 60
 	good_loot_chance = 30
 
-/obj/structure/loot/technical_crate
-	Initialize(mapload)
-		. = ..()
-		loot_type = GLOB.technical_loot_table.Copy()
-		good_loot_type = GLOB.info_loot_table.Copy()
+/obj/structure/loot/technical_crate/Initialize(mapload)
+	. = ..()
+	loot_type = GLOB.technical_loot_table.Copy()
+	good_loot_type = GLOB.info_loot_table.Copy()
 
 /obj/structure/loot/technical_crate/small
 	name = "wooden crate"
@@ -356,11 +348,10 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	loot_chance = 50
 	good_loot_chance = 30
 
-/obj/structure/loot/army_crate
-	Initialize(mapload)
-		. = ..()
-		loot_type = GLOB.ammo_loot_table.Copy()
-		good_loot_type = GLOB.weapon_loot_table.Copy()
+/obj/structure/loot/army_crate/Initialize(mapload)
+	. = ..()
+	loot_type = GLOB.ammo_loot_table.Copy()
+	good_loot_type = GLOB.weapon_loot_table.Copy()
 
 /obj/structure/loot/army_crate/gray
 	name = "unmarked military crate"
@@ -391,11 +382,10 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	loot_chance = 80
 	good_loot_chance = 30
 
-/obj/structure/loot/footlocker
-	Initialize(mapload)
-		. = ..()
-		loot_type = GLOB.clothing_loot_table.Copy()
-		good_loot_type = GLOB.treasure_loot_table.Copy()
+/obj/structure/loot/footlocker/Initialize(mapload)
+	. = ..()
+	loot_type = GLOB.clothing_loot_table.Copy()
+	good_loot_type = GLOB.treasure_loot_table.Copy()
 
 /obj/structure/loot/shelf
 	name = "shelf"

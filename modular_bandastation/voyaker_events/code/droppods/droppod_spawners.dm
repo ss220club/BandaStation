@@ -12,12 +12,11 @@ GLOBAL_LIST_EMPTY(drop_pod_spawns)
 		/obj/structure/closet/crate/secure/weapon/air/ammunition,
 	)
 
-	Initialize()
-		. = ..()
-
-		if(!GLOB.drop_pod_spawns)
-			GLOB.drop_pod_spawns = list()
-		GLOB.drop_pod_spawns += src
+/obj/effect/landmark/drop_pod_spawn/Initialize()
+	. = ..()
+	if(!GLOB.drop_pod_spawns)
+		GLOB.drop_pod_spawns = list()
+	GLOB.drop_pod_spawns += src
 
 /obj/effect/landmark/drop_pod_spawn/proc/spawn_supply_pod()
 	var/chosen_type = pick(crate_pool)

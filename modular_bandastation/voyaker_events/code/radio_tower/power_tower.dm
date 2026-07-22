@@ -9,9 +9,9 @@
 	pixel_y = 32
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
-	CanAllowThrough(atom/movable/mover, border_dir)
-		. = ..()
-		return TRUE
+/obj/structure/power_pole/CanAllowThrough(atom/movable/mover, border_dir)
+	. = ..()
+	return TRUE
 
 /obj/effect/power_pole_blocker
 	name = "power pole collision"

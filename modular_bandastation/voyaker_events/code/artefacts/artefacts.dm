@@ -37,11 +37,12 @@
 	var/mob/living/owner
 	var/list/flames = list()
 	var/lifetime = 5 SECONDS
-	New(mob/living/L)
-		owner = L
-		create_ring()
-		addtimer(CALLBACK(src, PROC_REF(update_ring)), 0.5 SECONDS)
-		addtimer(CALLBACK(src, PROC_REF(remove_ring)), lifetime)
+
+/datum/fire_ring/New(mob/living/L)
+	owner = L
+	create_ring()
+	addtimer(CALLBACK(src, PROC_REF(update_ring)), 0.5 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(remove_ring)), lifetime)
 
 /datum/fire_ring/proc/create_ring()
 	var/turf/center = get_turf(owner)
