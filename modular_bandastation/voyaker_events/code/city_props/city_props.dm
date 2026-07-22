@@ -431,3 +431,8 @@
 
 /obj/effect/decal/trashbags/five
 	icon_state = "trashbags_5"
+
+/obj/structure/barricade/sandbags
+	icon = 'modular_bandastation/voyaker_events/icons/sandbags.dmi'
+	icon_state = "sandbags-0"
+	base_icon_state = "sandbags"
