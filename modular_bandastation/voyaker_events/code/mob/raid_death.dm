@@ -38,7 +38,7 @@ GLOBAL_LIST_INIT(raid_areas, list(
 
 /mob/living/carbon/human/proc/extract_from_raid()
 	if(QDELETED(src))
-    	return
+		return
 	if(quest_killer && ishuman(quest_killer))
 		check_trader_kill_quests(quest_killer, src)
 	quest_killer = null
