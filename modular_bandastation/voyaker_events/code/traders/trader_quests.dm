@@ -12,7 +12,7 @@
 	var/id = "quest"
 	var/blocks_other_quests = FALSE
 
-/datum/trader_questproc/start(mob/living/carbon/human/H)
+/datum/trader_quest/proc/start(mob/living/carbon/human/H)
 	return
 
 /datum/trader_quest/proc/can_complete(mob/living/carbon/human/H, obj/item/I)
