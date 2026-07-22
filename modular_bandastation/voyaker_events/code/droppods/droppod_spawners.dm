@@ -12,7 +12,7 @@ GLOBAL_LIST_EMPTY(drop_pod_spawns)
 		/obj/structure/closet/crate/secure/weapon/air/ammunition,
 	)
 
-/obj/effect/landmark/drop_pod_spawn/Initialize()
+/obj/effect/landmark/drop_pod_spawn/Initialize(mapload)
 	. = ..()
 	if(!GLOB.drop_pod_spawns)
 		GLOB.drop_pod_spawns = list()

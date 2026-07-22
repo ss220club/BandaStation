@@ -19,11 +19,11 @@ GLOBAL_LIST_INIT(raid_areas, list(
 	return FALSE
 
 /mob/living/carbon/human/death(gibbed)
-    if(in_raid() && !ignore_raid_death)
-        addtimer(CALLBACK(src, PROC_REF(extract_from_raid)), 0)
-        return FALSE
+	if(in_raid() && !ignore_raid_death)
+		addtimer(CALLBACK(src, PROC_REF(extract_from_raid)), 0)
+		return FALSE
 
-    return ..()
+	return ..()
 
 /mob/living/carbon/human/proc/finish_extract()
 	if(QDELETED(src))
