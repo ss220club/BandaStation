@@ -57,8 +57,7 @@
 		if(prob(60) && ishuman(owner) && owner.client && !our_slime.ai_controller.blackboard[BB_SLIME_RABID])
 			our_slime.ai_controller?.set_blackboard_key(BB_SLIME_RABID, TRUE) //we might go rabid after finishing to feed on a human with a client.
 
-		if(our_slime)
-			our_slime.stop_feeding()
+		our_slime.stop_feeding()
 		return
 
 	var/totaldamage = 0 //total damage done to this unfortunate soul

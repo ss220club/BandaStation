@@ -36,7 +36,6 @@
 	toolspeed = 0.3
 
 /obj/machinery/computer/shuttle/caravan
-	icon_state = MAP_SWITCH("computer", "/obj/machinery/computer/camera_advanced/shuttle_docker/syndicate")
 
 /obj/item/circuitboard/computer/caravan
 	build_path = /obj/machinery/computer/shuttle/caravan

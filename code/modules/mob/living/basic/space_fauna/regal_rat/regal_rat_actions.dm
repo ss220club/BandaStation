@@ -125,6 +125,7 @@
  * * Convert nearby mice into aggressive rats.
  * * Convert nearby roaches into aggressive roaches.
  * * Convert nearby frogs into aggressive frogs.
+ * * Spawn a single mouse if below the mouse cap.
  */
 /datum/action/cooldown/mob_cooldown/riot/proc/riot()
 	playsound(owner, 'sound/mobs/non-humanoids/mouse/mousesqueek.ogg', vol = 150, frequency = 10000)
@@ -143,14 +144,15 @@
 	command_feedback = "squeak!" // Frogs and roaches can squeak too it's fine
 	pointed_reaction = "and squeaks aggressively"
 	refuse_reaction = "quivers"
+	attack_behaviour = /datum/ai_behavior/basic_melee_attack
 
-// Command you can give to a glockroach to make it shoot someone
+// Command you can give to a mouse to make it kill someone
 /datum/pet_command/attack/glockroach
 	speech_commands = list("attack", "sic", "kill", "cheese em")
 	command_feedback = "squeak!"
 	pointed_reaction = "and cocks its gun"
 	refuse_reaction = "quivers"
-	attack_subtree = /datum/bt_node/subtree/pet_command/attack/ranged/glockroach
+	attack_behaviour = /datum/ai_behavior/basic_ranged_attack/glockroach
 
 /**
  *Spittle; harmless reagent that is added by rat king, and makes you disgusted.
@@ -191,4 +193,4 @@
 		affected_mob.vomit(VOMIT_CATEGORY_DEFAULT)
 
 /datum/pet_command/protect_owner/glockroach
-	protect_owner_subtree = /datum/bt_node/subtree/pet_command/protect_owner/ranged/glockroach
+	protect_behavior = /datum/ai_behavior/basic_ranged_attack/glockroach

@@ -3842,7 +3842,7 @@
 	density = 1
 	},
 /obj/effect/decal/fakelattice,
-/turf/open/floor/mineral/plastitanium/pod/light{
+/turf/open/floor/pod/light{
 	density = 1
 	},
 /area/awaymission/beach)

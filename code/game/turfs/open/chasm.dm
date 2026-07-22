@@ -55,18 +55,26 @@
 	underlay_appearance.icon_state = /turf/open/misc/asteroid/basalt::icon_state
 	return TRUE
 
-/turf/open/chasm/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+/turf/open/chasm/attackby(obj/item/C, mob/user, params, area/area_restriction)
 	. = ..()
-	if(ITEM_INTERACT_ANY_BLOCKER & .)
-		return .
+	if(ismetaltile(C))
+		build_with_floor_tiles(C, user)
+		return
 
-	if(istype(tool, /obj/item/stack/rods))
-		build_with_rods(tool, user)
-		return ITEM_INTERACT_SUCCESS
+	if(!istype(C, /obj/item/stack/rods))
+		return
 
-	if(ismetaltile(tool))
-		build_with_floor_tiles(tool, user)
-		return ITEM_INTERACT_SUCCESS
+	var/obj/item/stack/rods/R = C
+	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
+	if(L)
+		return
+	if(!R.use(1))
+		to_chat(user, span_warning("You need one rod to build a lattice."))
+		return
+	to_chat(user, span_notice("You construct a lattice."))
+	playsound(src, 'sound/items/weapons/genhit.ogg', 50, TRUE)
+	// Create a lattice, without reverting to our baseturf
+	new /obj/structure/lattice(src)
 
 
 /// Handles adding the chasm component to the turf (So stuff falls into it!)
@@ -132,11 +140,9 @@
 /turf/open/chasm/true/no_smooth/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
 	return FALSE
 
-/turf/open/chasm/true/no_smooth/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(istype(tool, /obj/item/stack/rods))
-		return ITEM_INTERACT_BLOCKING
-
-	if(ismetaltile(tool))
-		return ITEM_INTERACT_BLOCKING
-
+/turf/open/chasm/true/no_smooth/attackby(obj/item/item, mob/user, params, area/area_restriction)
+	if(istype(item, /obj/item/stack/rods))
+		return
+	else if(ismetaltile(item))
+		return
 	return ..()

@@ -370,12 +370,13 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 		message = deaf_message
 
-		var/hearflags = NONE
-		if(show_message(message, MSG_VISUAL, deaf_message, deaf_type, avoid_highlight))
-			hearflags |= HEAR_HEARD
-		if(understood)
-			hearflags |= HEAR_UNDERSTOOD
-		return hearflags
+		var/show_message_success = show_message(message, MSG_VISUAL, deaf_message, deaf_type, avoid_highlight)
+		if(show_message_success && understood)
+			return HEAR_HEARD | HEAR_UNDERSTOOD
+		else if (show_message_success && !understood)
+			return HEAR_HEARD
+		else
+			return FALSE
 
 	if(speaker != src)
 		if(!radio_freq) //These checks have to be separate, else people talking on the radio will make "You can't hear yourself!" appear when hearing people over the radio while deaf.
@@ -394,13 +395,10 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, spans, message_mods)
-
-	var/hearflags = NONE
-	if(show_message(message, MSG_AUDIBLE, deaf_message, deaf_type, avoid_highlight))
-		hearflags |= HEAR_HEARD
+	var/show_message_success = show_message(message, MSG_AUDIBLE, deaf_message, deaf_type, avoid_highlight)
 
 	// BANDASTATION ADDITION START - TTS
-	if((hearflags & HEAR_HEARD) && !radio_freq)
+	if(show_message_success && !radio_freq)
 		var/message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || raw_message
 		speaker.cast_tts(
 			src,
@@ -413,9 +411,12 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		)
 	// BANDASTATION ADDITION END - TTS
 
-	if(understood)
-		hearflags |= HEAR_UNDERSTOOD
-	return hearflags
+	if(show_message_success && understood)
+		return HEAR_HEARD | HEAR_UNDERSTOOD
+	else if (show_message_success && !understood)
+		return HEAR_HEARD
+	else
+		return FALSE
 
 /mob/living/send_speech(message_raw, message_range = 6, obj/source = src, bubble_type = bubble_icon, list/spans, datum/language/message_language = null, list/message_mods = list(), forced = null, tts_message, list/tts_filter)
 	var/whisper_range = 0

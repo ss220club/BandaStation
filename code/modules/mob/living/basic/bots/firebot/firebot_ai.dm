@@ -5,9 +5,17 @@
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/allow_turfs,
 		BB_UNREACHABLE_LIST_COOLDOWN =  3 MINUTES,
 	)
-	behavior_tree_json = "code/modules/mob/living/basic/bots/firebot/firebot.bt.json"
+	planning_subtrees = list(
+		/datum/ai_planning_subtree/escape_captivity/pacifist,
+		/datum/ai_planning_subtree/respond_to_summon,
+		/datum/ai_planning_subtree/extinguishing_people,
+		/datum/ai_planning_subtree/extinguishing_turfs,
+		/datum/ai_planning_subtree/salute_authority,
+		/datum/ai_planning_subtree/firebot_speech,
+		/datum/ai_planning_subtree/find_patrol_beacon,
+	)
 	reset_keys = list(
-		BB_CURRENT_TARGET,
+		BB_FIREBOT_EXTINGUISH_TARGET,
 		BB_BEACON_TARGET,
 		BB_PREVIOUS_BEACON_TARGET,
 		BB_BOT_SUMMON_TARGET,
@@ -19,106 +27,106 @@
 	. = ..()
 	if(. & AI_CONTROLLER_INCOMPATIBLE)
 		return
+	RegisterSignal(new_pawn, COMSIG_AI_BLACKBOARD_KEY_SET(BB_FIREBOT_EXTINGUISH_TARGET), PROC_REF(on_target_found))
 
-
-
-/datum/bt_node/ai_behavior/announce_fire_detected
-
-/datum/bt_node/ai_behavior/announce_fire_detected/perform(seconds_per_tick, datum/ai_controller/basic_controller/bot/firebot/controller)
-	if(!COOLDOWN_FINISHED(controller, announcement_cooldown))
-		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
-	var/datum/action/cooldown/bot_announcement/announcement = controller.blackboard[BB_ANNOUNCE_ABILITY]
-	if(isnull(announcement))
-		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
-	var/list/lines = controller.blackboard[BB_FIREBOT_FIRE_DETECTED_LINES]
-	if(!length(lines))
-		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
-	INVOKE_ASYNC(announcement, TYPE_PROC_REF(/datum/action/cooldown/bot_announcement, announce), pick(lines))
-	COOLDOWN_START(controller, announcement_cooldown, ANNOUNCEMENT_TIMER)
-	return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
-
-
-/// Firebot skips blacklisting unreachable targets while stationary, matching the old set_if_can_reach bypass.
-/datum/ai_controller/basic_controller/bot/firebot/note_unreachable_target(atom/target)
-	var/mob/living/basic/bot/firebot/bot_pawn = pawn
-	if(bot_pawn.firebot_mode_flags & FIREBOT_STATIONARY_MODE)
+///say a silly line whenever we find someone on fire
+/datum/ai_controller/basic_controller/bot/firebot/proc/on_target_found()
+	SIGNAL_HANDLER
+	if(!COOLDOWN_FINISHED(src, announcement_cooldown))
 		return
-	return ..()
 
-/// Gathers nearby living mobs to extinguish; empty unless people-extinguishing is on, range clamped to adjacent tiles when stationary.
-/datum/target_source/firebot_targets
+	var/datum/action/cooldown/bot_announcement/announcement = blackboard[BB_ANNOUNCE_ABILITY]
+	if(isnull(announcement))
+		return
 
-/datum/target_source/firebot_targets/collect_candidates(mob/living/pawn, datum/ai_controller/controller, range)
-	var/mob/living/basic/bot/firebot/bot_pawn = pawn
-	if(!(bot_pawn.firebot_mode_flags & FIREBOT_EXTINGUISH_PEOPLE))
-		return list()
-	if(bot_pawn.firebot_mode_flags & FIREBOT_STATIONARY_MODE)
-		range = 1
-	var/list/candidates = list()
-	for(var/mob/living/candidate in oview(range, pawn))
-		candidates += candidate
-	return candidates
-
-/// Valid if the mob is on fire (or anyone, while emagged) and is a type this firebot is allowed to extinguish.
-/datum/targeting_strategy/extinguishable_person/is_valid_target(mob/living/living_mob, atom/target, vision_range, datum/ai_controller/controller = null)
-	. = ..()
-	if(!.)
-		return FALSE
-	var/mob/living/target_mob = target
-	if(!isliving(target_mob))
-		return FALSE
-	var/mob/living/basic/bot/firebot/bot_pawn = living_mob
-	if(!target_mob.on_fire && !(bot_pawn.bot_access_flags & BOT_COVER_EMAGGED))
-		return FALSE
-	return is_type_in_list(target_mob, controller.blackboard[BB_FIREBOT_CAN_EXTINGUISH])
+	var/list/lines = blackboard[BB_FIREBOT_FIRE_DETECTED_LINES]
+	if(!length(lines))
+		return
+	INVOKE_ASYNC(announcement, TYPE_PROC_REF(/datum/action/cooldown/bot_announcement, announce), pick(lines))
+	COOLDOWN_START(src, announcement_cooldown, ANNOUNCEMENT_TIMER)
 
 
-/// Gathers turfs in range; empty unless flame-extinguishing is enabled.
-/datum/target_source/range_turfs/firebot_hotspots
+///subtree for extinguishing people
+/datum/ai_planning_subtree/extinguishing_people
 
-/datum/target_source/range_turfs/firebot_hotspots/collect_candidates(mob/living/pawn, datum/ai_controller/controller, range)
-	var/mob/living/basic/bot/firebot/bot_pawn = pawn
-	if(!(bot_pawn.firebot_mode_flags & FIREBOT_EXTINGUISH_FLAMES))
-		return list()
-	return ..(pawn, controller, range)
+/datum/ai_planning_subtree/extinguishing_people/SelectBehaviors(datum/ai_controller/basic_controller/bot/controller, seconds_per_tick)
+	if(controller.blackboard_key_exists(BB_FIREBOT_EXTINGUISH_TARGET))
+		controller.queue_behavior(/datum/ai_behavior/basic_melee_attack/interact_once/extinguish, BB_FIREBOT_EXTINGUISH_TARGET, BB_TARGETING_STRATEGY)
+		return SUBTREE_RETURN_FINISH_PLANNING
 
-/// Valid if the turf is an open turf with an active fire.
-/datum/targeting_strategy/burning_hotspot/is_valid_target(mob/living/living_mob, atom/target, vision_range, datum/ai_controller/controller = null)
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!isopenturf(target))
-		return FALSE
-	var/turf/open/open_turf = target
-	return !!open_turf.active_hotspot
+	var/mob/living/basic/bot/firebot/living_bot = controller.pawn
+	var/range = living_bot.firebot_mode_flags & FIREBOT_STATIONARY_MODE ? 1 : 5
 
+	if(living_bot.firebot_mode_flags & FIREBOT_EXTINGUISH_PEOPLE)
+		controller.queue_behavior(/datum/ai_behavior/bot_search/people_on_fire, BB_FIREBOT_EXTINGUISH_TARGET, controller.blackboard[BB_FIREBOT_CAN_EXTINGUISH], range)
 
+///behavior for finding people on fire
+/datum/ai_behavior/bot_search/people_on_fire
 
-/datum/bt_node/ai_behavior/bot_interact/extinguish
-
-/datum/bt_node/ai_behavior/bot_interact/extinguish/finish_action(datum/ai_controller/basic_controller/bot/controller, succeeded)
-	. = ..()
-	// if we couldn't reach OR we emagged a living target, blacklist them
-	var/atom/target = controller.blackboard[target_key]
+/datum/ai_behavior/bot_search/people_on_fire/valid_target(datum/ai_controller/basic_controller/bot/controller, mob/living/my_target)
 	var/mob/living/basic/bot/living_bot = controller.pawn
+	return (my_target.on_fire || (living_bot.bot_access_flags & BOT_COVER_EMAGGED))
+
+///subtree for finding turfs to extinguish
+/datum/ai_planning_subtree/extinguishing_turfs
+
+/datum/ai_planning_subtree/extinguishing_turfs/SelectBehaviors(datum/ai_controller/basic_controller/bot/controller, seconds_per_tick)
+	if(controller.blackboard_key_exists(BB_FIREBOT_EXTINGUISH_TARGET))
+		return
+
+	var/mob/living/basic/bot/firebot/living_bot = controller.pawn
+	var/should_bypass_blacklist = living_bot.firebot_mode_flags & FIREBOT_STATIONARY_MODE
+
+	if(living_bot.firebot_mode_flags & FIREBOT_EXTINGUISH_FLAMES)
+		controller.queue_behavior(/datum/ai_behavior/search_burning_turfs, BB_FIREBOT_EXTINGUISH_TARGET, should_bypass_blacklist)
+
+///behavior to find burning turfs
+/datum/ai_behavior/search_burning_turfs
+	action_cooldown = 2 SECONDS
+	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
+
+/datum/ai_behavior/search_burning_turfs/perform(seconds_per_tick, datum/ai_controller/basic_controller/bot/controller, target_key, bypass_add_blacklist = FALSE)
+	var/mob/living/living_pawn = controller.pawn
+	var/list/ignore_list = controller.blackboard[BB_TEMPORARY_IGNORE_LIST]
+
+	for(var/turf/possible_turf as anything in RANGE_TURFS(5, living_pawn))
+		if(QDELETED(living_pawn))
+			return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+		if(!isopenturf(possible_turf))
+			continue
+		var/turf/open/open_turf = possible_turf
+		if(!open_turf.active_hotspot)
+			continue
+		if(LAZYACCESS(ignore_list, possible_turf))
+			continue
+		if(controller.set_if_can_reach(key = target_key, target = possible_turf, bypass_add_to_blacklist = bypass_add_blacklist))
+			return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+
+	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+
+///behavior to extinguish mobs or turfs
+/datum/ai_behavior/basic_melee_attack/interact_once/extinguish
+
+/datum/ai_behavior/basic_melee_attack/interact_once/extinguish/finish_action(datum/ai_controller/basic_controller/bot/controller, succeeded, target_key, targeting_strategy_key, hiding_location_key)
+	var/atom/target = controller.blackboard[BB_FIREBOT_EXTINGUISH_TARGET]
+	var/mob/living/basic/bot/living_bot = controller.pawn
+
+	//if we couldnt path, or we successfully burnt someone, ignore them for a bit!
 	if(!succeeded || (isliving(target) && (living_bot.bot_access_flags & BOT_COVER_EMAGGED)))
 		controller.add_to_blacklist(target)
 
+	return ..()
 
-
-/datum/bt_node/ai_behavior/handle_firebot_speech
-	time_between_perform = 20 SECONDS
+///subtree to make us say funny idle lines
+/datum/ai_planning_subtree/firebot_speech
+	///chance we spout lines
 	var/speech_prob = 3
 
-/datum/bt_node/ai_behavior/handle_firebot_speech/perform(seconds_per_tick, datum/ai_controller/controller)
-	if(!SPT_PROB(speech_prob, seconds_per_tick))
-		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+/datum/ai_planning_subtree/firebot_speech/SelectBehaviors(datum/ai_controller/basic_controller/bot/controller, seconds_per_tick)
+	if(controller.blackboard[BB_FIREBOT_EXTINGUISH_TARGET] || !SPT_PROB(speech_prob, seconds_per_tick))
+		return
 	var/mob/living/basic/bot/living_bot = controller.pawn
 	var/list/idle_lines = (living_bot.bot_access_flags & BOT_COVER_EMAGGED) ? controller.blackboard[BB_FIREBOT_EMAGGED_LINES] : controller.blackboard[BB_FIREBOT_IDLE_LINES]
-	if(!length(idle_lines))
-		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
-	var/datum/action/cooldown/bot_announcement/announcement = controller.blackboard[BB_ANNOUNCE_ABILITY]
-	announcement?.announce(pick(idle_lines))
-	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+	controller.queue_behavior(/datum/ai_behavior/bot_speech, idle_lines, BB_ANNOUNCE_ABILITY)
 
 #undef ANNOUNCEMENT_TIMER

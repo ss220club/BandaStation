@@ -6435,7 +6435,6 @@
 	pixel_x = -3;
 	pixel_y = -4
 	},
-/obj/item/storage/pill_bottle/sepsisillin,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/medical/virology)
 "bGm" = (
@@ -11026,7 +11025,7 @@
 /turf/open/floor/iron/dark,
 /area/station/commons/vacant_room/office)
 "cQi" = (
-/obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/engineering/atmos/office)
 "cQu" = (
@@ -18485,6 +18484,10 @@
 	},
 /turf/open/floor/plating/elevatorshaft,
 /area/station/security/prison/rec)
+"eTi" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/station/engineering/atmos/hfr_room)
 "eTm" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
@@ -22027,7 +22030,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/purple/visible{
 	dir = 1
 	},
-/obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/engineering/atmos/upper)
 "fPy" = (
@@ -37867,6 +37870,7 @@
 /turf/open/floor/iron/dark,
 /area/station/science/lobby)
 "kbu" = (
+/obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/engineering/atmos/upper)
 "kbA" = (
@@ -42053,7 +42057,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/storage_shared)
 "lhw" = (
-/turf/open/floor/glass/reinforced/plasma,
+/turf/open/floor/glass/reinforced,
 /area/station/science/ordnance)
 "lhy" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -46235,9 +46239,12 @@
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
 "mnf" = (
-/obj/machinery/atmospherics/components/unary/thermomachine,
-/turf/open/floor/engine,
-/area/station/engineering/atmos/hfr_room)
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/upper)
 "mnn" = (
 /obj/effect/mapping_helpers/airlock/locked,
 /obj/effect/mapping_helpers/airlock/welded,
@@ -66142,11 +66149,11 @@
 /turf/open/floor/grass,
 /area/station/science/cytology)
 "rFj" = (
+/obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "rdordnance";
 	name = "Ordnance Lab Shutters"
 	},
-/obj/effect/spawner/structure/window/reinforced/plasma,
 /turf/open/floor/plating,
 /area/station/science/ordnance)
 "rFk" = (
@@ -72502,10 +72509,6 @@
 /obj/structure/cable,
 /turf/open/openspace,
 /area/station/security/checkpoint/supply)
-"tpL" = (
-/obj/machinery/portable_atmospherics/canister/plasma,
-/turf/open/floor/engine,
-/area/station/engineering/atmos/hfr_room)
 "tpR" = (
 /obj/effect/landmark/blobstart,
 /obj/effect/landmark/generic_maintenance_landmark,
@@ -74138,8 +74141,8 @@
 /turf/open/floor/iron,
 /area/station/engineering/storage_shared)
 "tMN" = (
+/obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/dark/visible,
-/obj/effect/spawner/structure/window/reinforced/plasma,
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
 "tMY" = (
@@ -79321,8 +79324,8 @@
 /turf/open/floor/iron/dark,
 /area/station/commons/vacant_room/commissary)
 "vcX" = (
+/obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/smart/simple/green/visible,
-/obj/effect/spawner/structure/window/reinforced/plasma,
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
 "vcY" = (
@@ -80504,7 +80507,7 @@
 /area/station/commons/lounge)
 "vsT" = (
 /obj/machinery/holopad,
-/turf/open/floor/glass/reinforced/plasma,
+/turf/open/floor/glass/reinforced,
 /area/station/science/ordnance)
 "vsW" = (
 /obj/machinery/flasher/directional/west,
@@ -85870,7 +85873,7 @@
 /turf/open/floor/carpet,
 /area/station/commons/storage/tools)
 "wNN" = (
-/obj/effect/spawner/structure/window/reinforced/plasma,
+/obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
 "wNO" = (
@@ -88372,7 +88375,7 @@
 /area/station/science/robotics)
 "xwF" = (
 /obj/effect/landmark/event_spawn,
-/turf/open/floor/glass/reinforced/plasma,
+/turf/open/floor/glass/reinforced,
 /area/station/science/ordnance)
 "xwJ" = (
 /obj/effect/spawner/structure/window/reinforced/tinted,
@@ -197028,7 +197031,7 @@ nlm
 nlm
 nlm
 xrx
-yau
+kbu
 txF
 jya
 eSI
@@ -197285,7 +197288,7 @@ nlm
 nlm
 nlm
 xrx
-yau
+kbu
 psU
 dyM
 rVb
@@ -197542,7 +197545,7 @@ slL
 dDL
 xtW
 xrx
-yau
+kbu
 orR
 dyM
 edC
@@ -198054,7 +198057,7 @@ nlm
 dDL
 nlm
 nlm
-yau
+kbu
 pcM
 uMG
 jOm
@@ -198311,7 +198314,7 @@ aDw
 aDw
 aDw
 aDw
-yau
+kbu
 aNP
 bLx
 rvv
@@ -198568,7 +198571,7 @@ mDG
 mDG
 mDG
 mDG
-yau
+kbu
 rSP
 uMG
 czx
@@ -200121,8 +200124,8 @@ tiN
 nWX
 xMJ
 unl
-yau
-yau
+kbu
+kbu
 gmD
 raE
 kPC
@@ -200625,7 +200628,7 @@ nKW
 mDG
 mDG
 mDG
-yau
+kbu
 qWr
 rPR
 lnX
@@ -201388,15 +201391,15 @@ bNX
 bNX
 bNX
 dKM
-mnf
-mnf
-mnf
+bNX
+bNX
+bNX
 sey
 bxd
 mDG
 mDG
 mDG
-yau
+kbu
 qWr
 gfi
 lrZ
@@ -201653,7 +201656,7 @@ bxd
 mDG
 mDG
 mDG
-yau
+kbu
 qWr
 iOi
 jfl
@@ -201907,9 +201910,9 @@ cZP
 bNX
 hTs
 bxd
-ydS
+eTi
 bxd
-ydS
+eTi
 unl
 tDq
 gfi
@@ -202935,9 +202938,9 @@ tVS
 bNX
 syi
 bxd
-ydS
+eTi
 bxd
-ydS
+eTi
 unl
 fGn
 wyz
@@ -203195,7 +203198,7 @@ bxd
 mDG
 mDG
 mDG
-yau
+kbu
 gfi
 gfi
 gfi
@@ -203444,7 +203447,7 @@ bNX
 bNX
 bNX
 lGE
-tpL
+bNX
 lmH
 lmH
 sUR
@@ -203452,7 +203455,7 @@ bxd
 mDG
 mDG
 mDG
-yau
+kbu
 gfi
 gfi
 lrZ
@@ -203973,7 +203976,7 @@ asE
 jkM
 dsZ
 wXQ
-yau
+kbu
 pqc
 gtC
 gtC
@@ -204223,14 +204226,14 @@ nKW
 mDG
 mDG
 mDG
-yau
+kbu
 gfi
 gfi
 gfi
 iUz
 ucy
 hSg
-yau
+kbu
 rqs
 nlm
 nlm
@@ -204480,7 +204483,7 @@ pGP
 pGP
 gjd
 fPv
-fPv
+mnf
 fHb
 wIi
 wkX
@@ -204736,7 +204739,7 @@ xst
 iqF
 lhP
 swS
-yau
+kbu
 ugA
 voO
 gfi
@@ -204744,7 +204747,7 @@ gfi
 klh
 yfx
 hSg
-yau
+kbu
 rqs
 nlm
 dDL
@@ -204993,7 +204996,7 @@ asM
 tBB
 kCh
 mDG
-yau
+kbu
 gMn
 gfi
 eDZ
@@ -205001,7 +205004,7 @@ ouD
 jkM
 gfi
 kHD
-yau
+kbu
 rqs
 nlm
 dDL
@@ -205250,7 +205253,7 @@ xst
 liE
 lhP
 qSj
-yau
+kbu
 qHW
 kbH
 gfi
@@ -205507,15 +205510,15 @@ pGP
 pGP
 pGP
 xKo
-fPv
-fPv
+mnf
+mnf
 tbE
 wIi
 kbA
 xGS
 gfi
 gfi
-yau
+kbu
 rqs
 nlm
 dDL
@@ -205772,7 +205775,7 @@ eaU
 oTi
 owk
 owk
-yau
+kbu
 rqs
 nlm
 dDL
@@ -206023,12 +206026,12 @@ dDL
 nlm
 msd
 unl
-yau
-yau
+kbu
+kbu
 unl
 unl
-yau
-yau
+kbu
+kbu
 unl
 roM
 nlm

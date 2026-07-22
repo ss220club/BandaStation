@@ -30,6 +30,8 @@
 	gold_core_spawnable = HOSTILE_SPAWN
 	/// Do we actually destroy food we eat?
 	var/conserve_food = FALSE
+	/// Unfortunately, geese want to eat every item
+	var/static/list/item_typecache = typecacheof(/obj/item)
 
 /mob/living/basic/goose/Initialize(mapload)
 	. = ..()
@@ -39,6 +41,8 @@
 
 	RegisterSignal(src, COMSIG_MOB_PRE_EAT, PROC_REF(on_tried_gobbling))
 	RegisterSignal(src, COMSIG_MOB_ATE, PROC_REF(on_gobbled))
+
+	ai_controller.set_blackboard_key(BB_BASIC_FOODS, item_typecache)
 
 /mob/living/basic/goose/death(gibbed)
 	if (!gibbed && length(contents))
@@ -153,7 +157,8 @@
 	remove_status_effect(/datum/status_effect/goose_choking) // We're going to cough it out
 
 /mob/living/basic/goose/vomit/proc/stop_deadchat_plays()
-	ai_controller?.clear_blackboard_key(BB_DISABLE_IDLE)
+	var/initial_behaviour = initial(ai_controller?.idle_behavior)
+	ai_controller?.idle_behavior = SSidle_ai_behaviors.idle_behaviors[initial_behaviour]
 
 /mob/living/basic/goose/vomit/deadchat_plays(mode = ANARCHY_MODE, cooldown = 12 SECONDS)
 	var/list/goose_inputs = list(
@@ -167,6 +172,6 @@
 		return
 
 	// Stop automated movement, retain the other behaviour so you can lead the horse to plastic and have it drink.
-	ai_controller?.set_blackboard_key(BB_DISABLE_IDLE, TRUE)
+	ai_controller?.idle_behavior = null
 
 #undef GOOSE_SATIATED

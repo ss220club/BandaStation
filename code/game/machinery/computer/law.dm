@@ -2,7 +2,6 @@
 
 /obj/machinery/computer/upload
 	var/mob/living/silicon/current = null //The target of future law uploads
-	icon_state = MAP_SWITCH("computer", "/obj/machinery/computer/upload")
 	icon_screen = "command"
 	time_to_unscrew = 6 SECONDS
 	var/locked = FALSE
@@ -100,7 +99,6 @@
 	return TRUE
 
 /obj/machinery/computer/upload/ai
-	icon_state = MAP_SWITCH("computer", "/obj/machinery/computer/upload/ai") // i mean it starts locked by default
 	name = "\improper AI upload console"
 	desc = "Used to upload laws to the AI."
 	circuit = /obj/item/circuitboard/computer/aiupload

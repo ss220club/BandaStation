@@ -64,7 +64,7 @@
 	human_owner.SetAllImmobility(0)
 	var/mob/living/carbon/carbon_owner = owner
 	carbon_owner.uncuff()
-	var/obj/item/clothing/shoes/shoes = carbon_owner.get_item_by_slot(ITEM_SLOT_FEET)
+	var/obj/item/clothing/shoes/shoes = carbon_owner.shoes
 	if(istype(shoes) && shoes.tied == SHOES_KNOTTED)
 		shoes.adjust_laces(SHOES_TIED, carbon_owner)
 

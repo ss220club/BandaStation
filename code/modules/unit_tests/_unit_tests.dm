@@ -179,6 +179,7 @@
 #include "embedding.dm"
 #include "emoting.dm"
 #include "emp_flashlight.dm"
+#include "ensure_subtree_operational_datum.dm"
 #include "ethereal_revival.dm"
 #include "explosion_action.dm"
 #include "firedoor_regions.dm"

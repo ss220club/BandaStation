@@ -10,7 +10,6 @@
 		"biomejs.biome",
 		"emilast.LogFileHighlighter",
 		"earshinov.filter-lines",
-		"tombi-toml.tombi",
-		"BehaviorTreeG.behaviortreeg"
+		"tombi-toml.tombi"
 	]
 }

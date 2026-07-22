@@ -25,10 +25,13 @@
 	first_mix.volume = 200
 	second_mix.volume = 200
 
-	first_mix.moles[/datum/gas/hypernoblium] = nob_moles
+	ASSERT_GAS(/datum/gas/hypernoblium, first_mix)
+	ASSERT_GAS(/datum/gas/tritium, second_mix)
+
+	first_mix.gases[/datum/gas/hypernoblium][MOLES] = nob_moles
 	first_mix.temperature = nob_temp
 
-	second_mix.moles[/datum/gas/tritium] = trit_moles
+	second_mix.gases[/datum/gas/tritium][MOLES] = trit_moles
 	second_mix.temperature = trit_temp
 
 	var/initial_pressure = second_mix.return_pressure()

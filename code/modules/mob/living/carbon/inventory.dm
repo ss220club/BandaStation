@@ -25,6 +25,14 @@
 
 /mob/living/carbon/get_item_by_slot(slot_id)
 	switch(slot_id)
+		if(ITEM_SLOT_BACK)
+			return back
+		if(ITEM_SLOT_MASK)
+			return wear_mask
+		if(ITEM_SLOT_NECK)
+			return wear_neck
+		if(ITEM_SLOT_HEAD)
+			return head
 		if(ITEM_SLOT_HANDCUFFED)
 			return handcuffed
 		if(ITEM_SLOT_LEGCUFFED)
@@ -33,6 +41,18 @@
 	return ..()
 
 /mob/living/carbon/get_slot_by_item(obj/item/looking_for)
+	if(looking_for == back)
+		return ITEM_SLOT_BACK
+
+	if(looking_for == wear_mask)
+		return ITEM_SLOT_MASK
+
+	if(looking_for == wear_neck)
+		return ITEM_SLOT_NECK
+
+	if(looking_for == head)
+		return ITEM_SLOT_HEAD
+
 	if(looking_for == handcuffed)
 		return ITEM_SLOT_HANDCUFFED
 
@@ -103,6 +123,26 @@
 	var/not_handled = FALSE
 
 	switch(slot)
+		if(ITEM_SLOT_BACK)
+			if(back)
+				return
+			back = equipping
+			update_worn_back()
+		if(ITEM_SLOT_MASK)
+			if(wear_mask)
+				return
+			wear_mask = equipping
+			update_worn_mask()
+		if(ITEM_SLOT_HEAD)
+			if(head)
+				return
+			head = equipping
+			update_worn_head()
+		if(ITEM_SLOT_NECK)
+			if(wear_neck)
+				return
+			wear_neck = equipping
+			update_worn_neck(equipping)
 		if(ITEM_SLOT_HANDCUFFED)
 			set_handcuffed(equipping)
 		if(ITEM_SLOT_LEGCUFFED)
@@ -153,7 +193,23 @@
 	if(!. || !item_dropping) //We don't want to set anything to null if the parent returned 0.
 		return
 
-	if(item_dropping == handcuffed)
+	if(item_dropping == head)
+		head = null
+		if(!QDELETED(src))
+			update_worn_head()
+	else if(item_dropping == back)
+		back = null
+		if(!QDELETED(src))
+			update_worn_back()
+	else if(item_dropping == wear_mask)
+		wear_mask = null
+		if(!QDELETED(src))
+			update_worn_mask()
+	else if(item_dropping == wear_neck)
+		wear_neck = null
+		if(!QDELETED(src))
+			update_worn_neck(item_dropping)
+	else if(item_dropping == handcuffed)
 		set_handcuffed(null)
 		if(buckled?.buckle_requires_restraints)
 			buckled.unbuckle_mob(src)
@@ -216,13 +272,23 @@
 	if((added_slots|removed_slots) & (HIDEJUMPSUIT|HIDEEARS|HIDEHAIR|HIDESNOUT|HIDEMUTWINGS|HIDEANTENNAE))
 		update_body()
 
+/// Returns the helmet if an air tank compatible helmet is equipped.
+/mob/living/carbon/proc/can_breathe_helmet()
+	if (astype(head, /obj/item/clothing)?.clothing_flags & HEADINTERNALS)
+		return head
+
+/// Returns the mask if an air tank compatible mask is equipped.
+/mob/living/carbon/proc/can_breathe_mask()
+	if (astype(wear_mask, /obj/item/clothing)?.clothing_flags & MASKINTERNALS)
+		return wear_mask
+
 /// Returns the tube if a breathing tube is equipped.
 /mob/living/carbon/proc/can_breathe_tube()
 	return get_organ_slot(ORGAN_SLOT_BREATHING_TUBE)
 
 /// Returns the object that allows us to breathe internals - tube implant, mask or helmet
 /mob/living/carbon/proc/can_breathe_internals()
-	return can_breathe_tube()
+	return can_breathe_tube() || can_breathe_mask() || can_breathe_helmet()
 
 /// Returns truthy if air tank is open and mob lacks apparatus, or if the tank moved away from the mob.
 /mob/living/carbon/proc/invalid_internals()

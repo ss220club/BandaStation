@@ -8,10 +8,15 @@
 #define LIVING_FLESH_COMBAT_TOUCH_CHANCE 70
 
 /datum/ai_controller/basic_controller/living_limb_flesh
-	behavior_tree_json = "code/datums/ai/basic_mobs/simple_hostile.bt.json"
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
 		BB_TARGET_MINIMUM_STAT = HARD_CRIT,
+	)
+
+	planning_subtrees = list(
+		/datum/ai_planning_subtree/escape_captivity,
+		/datum/ai_planning_subtree/simple_find_target,
+		/datum/ai_planning_subtree/basic_melee_attack_subtree
 	)
 
 /mob/living/basic/living_limb_flesh
@@ -180,7 +185,7 @@
 
 /mob/living/basic/living_limb_flesh/proc/register_to_limb(obj/item/bodypart/part)
 	current_bodypart = part
-	ai_controller.force_ai_off()
+	ai_controller.set_ai_status(AI_STATUS_OFF)
 	RegisterSignal(current_bodypart, COMSIG_BODYPART_REMOVED, PROC_REF(on_limb_lost))
 	if(current_bodypart.owner)
 		RegisterSignal(current_bodypart.owner, COMSIG_LIVING_DEATH, PROC_REF(owner_died))
@@ -198,7 +203,7 @@
 		return
 	visible_message(span_warning("[src] begins flailing around!"))
 	Shake(6, 6, 0.5 SECONDS)
-	ai_controller.clear_forced_off()
+	ai_controller.set_ai_status(AI_STATUS_ON)
 	forceMove(limb.drop_location())
 	qdel(limb)
 

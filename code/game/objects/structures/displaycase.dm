@@ -125,80 +125,54 @@
 		. += "[initial(icon_state)]_closed"
 		return
 
-/obj/structure/displaycase/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(tool.GetID() && !broken)
-		if(!allowed(user))
+/obj/structure/displaycase/attackby(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
+	if(attacking_item.GetID() && !broken)
+		if(allowed(user))
+			to_chat(user, span_notice("You [open ? "close":"open"] [src]."))
+			toggle_lock(user)
+		else
 			to_chat(user, span_alert("Access denied."))
-			return ITEM_INTERACT_BLOCKING
+	else if(attacking_item.tool_behaviour == TOOL_WELDER && !user.combat_mode && !broken)
+		if(atom_integrity < max_integrity)
+			if(!attacking_item.tool_start_check(user, amount=1))
+				return
 
-		to_chat(user, span_notice("You [open ? "close":"open"] [src]."))
-		toggle_lock(user)
-		return ITEM_INTERACT_SUCCESS
-
-
-	if(open && !showpiece)
-		insert_showpiece(tool, user)
-		return ITEM_INTERACT_SUCCESS //cancel the attack chain, whether we successfully placed an item or not
-
-	if(glass_fix && broken && istype(tool, /obj/item/stack/sheet/glass))
-		var/obj/item/stack/sheet/glass/glass_sheet = tool
+			to_chat(user, span_notice("You begin repairing [src]..."))
+			if(attacking_item.use_tool(src, user, 40, volume=50))
+				atom_integrity = max_integrity
+				update_appearance()
+				to_chat(user, span_notice("You repair [src]."))
+		else
+			to_chat(user, span_warning("[src] is already in good condition!"))
+		return
+	else if(!alert && attacking_item.tool_behaviour == TOOL_CROWBAR) //Only applies to the lab cage and player made display cases
+		if(broken)
+			if(showpiece)
+				to_chat(user, span_warning("Remove the displayed object first!"))
+			else
+				to_chat(user, span_notice("You remove the destroyed case."))
+				qdel(src)
+		else
+			to_chat(user, span_notice("You start to [open ? "close":"open"] [src]..."))
+			if(attacking_item.use_tool(src, user, 20))
+				to_chat(user, span_notice("You [open ? "close":"open"] [src]."))
+				toggle_lock(user)
+	else if(open && !showpiece)
+		insert_showpiece(attacking_item, user)
+		return TRUE //cancel the attack chain, whether we successfully placed an item or not
+	else if(glass_fix && broken && istype(attacking_item, /obj/item/stack/sheet/glass))
+		var/obj/item/stack/sheet/glass/glass_sheet = attacking_item
 		if(glass_sheet.get_amount() < 2)
 			to_chat(user, span_warning("You need two glass sheets to fix the case!"))
-			return ITEM_INTERACT_BLOCKING
-
+			return
 		to_chat(user, span_notice("You start fixing [src]..."))
-		if(!do_after(user, 2 SECONDS, target = src))
-			return ITEM_INTERACT_BLOCKING
-
-		glass_sheet.use(2)
-		broken = FALSE
-		atom_integrity = max_integrity
-		update_appearance()
-		return ITEM_INTERACT_SUCCESS
-
-	return NONE
-
-/obj/structure/displaycase/welder_act(mob/living/user, obj/item/tool)
-	if(user.combat_mode || broken)
-		return ITEM_INTERACT_SKIP_TO_ATTACK
-
-	if(atom_integrity == max_integrity)
-		to_chat(user, span_warning("[src] is already in good condition!"))
-		return ITEM_INTERACT_BLOCKING
-
-	if(!tool.tool_start_check(user, amount=1))
-		return ITEM_INTERACT_BLOCKING
-
-	to_chat(user, span_notice("You begin repairing [src]..."))
-	if(!tool.use_tool(src, user, 40, volume=50))
-		return ITEM_INTERACT_BLOCKING
-
-	atom_integrity = max_integrity
-	update_appearance()
-	to_chat(user, span_notice("You repair [src]."))
-	return ITEM_INTERACT_SUCCESS
-
-/obj/structure/displaycase/crowbar_act(mob/living/user, obj/item/tool)
-	if(alert) //Only applies to the lab cage and player made display cases
-		return ITEM_INTERACT_SKIP_TO_ATTACK
-
-	if(broken)
-		if(showpiece)
-			to_chat(user, span_warning("Remove the displayed object first!"))
-			return ITEM_INTERACT_BLOCKING
-
-		to_chat(user, span_notice("You remove the destroyed case."))
-		qdel(src)
-		return ITEM_INTERACT_SUCCESS
-
-	to_chat(user, span_notice("You start to [open ? "close":"open"] [src]..."))
-	if(!tool.use_tool(src, user, 20))
-		return ITEM_INTERACT_BLOCKING
-
-	to_chat(user, span_notice("You [open ? "close":"open"] [src]."))
-	toggle_lock(user)
-	return ITEM_INTERACT_SUCCESS
-
+		if(do_after(user, 2 SECONDS, target = src))
+			glass_sheet.use(2)
+			broken = FALSE
+			atom_integrity = max_integrity
+			update_appearance()
+	else
+		return ..()
 
 ///Handles placing an item into the display case. Returns TRUE if the item failed to be placed inside the container, useful for descendants
 /obj/structure/displaycase/proc/insert_showpiece(obj/item/new_showpiece, mob/user)
@@ -299,40 +273,33 @@
 		qdel(src)
 	return ITEM_INTERACT_SUCCESS
 
-/obj/structure/displaycase_chassis/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(istype(tool, /obj/item/electronics/airlock))
+/obj/structure/displaycase_chassis/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
+	if(istype(attacking_item, /obj/item/electronics/airlock))
 		balloon_alert(user, "installing electronics...")
-		if(!do_after(user, 3 SECONDS, target = src) || !user.transferItemToLoc(tool, src))
-			return ITEM_INTERACT_BLOCKING
+		if(do_after(user, 3 SECONDS, target = src) && user.transferItemToLoc(attacking_item, src))
+			electronics = attacking_item
+			balloon_alert(user, "electronics installed")
+		return
 
-		electronics = tool
-		balloon_alert(user, "electronics installed")
-		return ITEM_INTERACT_SUCCESS
+	if(istype(attacking_item, /obj/item/stock_parts/card_reader))
+		var/obj/item/stock_parts/card_reader/card_reader = attacking_item
+		balloon_alert(user, "adding [card_reader]...")
+		if(do_after(user, 2 SECONDS, target = src))
+			qdel(card_reader)
+			make_final_result(display_type = /obj/structure/displaycase/forsale)
+		return
 
-	if(istype(tool, /obj/item/stock_parts/card_reader))
-		balloon_alert(user, "adding [tool]...")
-		if(!do_after(user, 2 SECONDS, target = src))
-			return ITEM_INTERACT_BLOCKING
-
-		qdel(tool)
-		make_final_result(display_type = /obj/structure/displaycase/forsale)
-		return ITEM_INTERACT_SUCCESS
-
-	if(istype(tool, /obj/item/stack/sheet/glass))
-		var/obj/item/stack/sheet/glass/glass_sheets = tool
+	if(istype(attacking_item, /obj/item/stack/sheet/glass))
+		var/obj/item/stack/sheet/glass/glass_sheets = attacking_item
 		if(glass_sheets.get_amount() < 10)
 			balloon_alert(user, "need 10 sheets!")
-			return ITEM_INTERACT_BLOCKING
-
+			return
 		balloon_alert(user, "adding glass...")
-		if(!do_after(user, 2 SECONDS, target = src))
-			return ITEM_INTERACT_BLOCKING
-
-		glass_sheets.use(10)
-		make_final_result(display_type = /obj/structure/displaycase/noalert)
-		return ITEM_INTERACT_SUCCESS
-
-	return NONE
+		if(do_after(user, 2 SECONDS, target = src))
+			glass_sheets.use(10)
+			make_final_result(display_type = /obj/structure/displaycase/noalert)
+		return
+	return ..()
 
 ///Makes the final result of the chassis, then deletes itself.
 /obj/structure/displaycase_chassis/proc/make_final_result(obj/structure/displaycase/display_type)
@@ -393,11 +360,11 @@
 	holographic_showpiece = TRUE
 	update_appearance()
 
-/obj/structure/displaycase/trophy/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(!istype(tool, /obj/item/key/displaycase))
-		return ..()
-	toggle_historian_mode(user)
-	return ITEM_INTERACT_SUCCESS
+/obj/structure/displaycase/trophy/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
+	if(istype(attacking_item, /obj/item/key/displaycase))
+		toggle_historian_mode(user)
+		return
+	return ..()
 
 /obj/structure/displaycase/trophy/dump()
 	if (showpiece)
@@ -643,25 +610,20 @@
 			return TRUE
 	. = TRUE
 
-/obj/structure/displaycase/forsale/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(isidcard(tool))
+/obj/structure/displaycase/forsale/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)
+	if(isidcard(attacking_item))
 		//Card Registration
-		var/obj/item/card/id/potential_acc = tool
+		var/obj/item/card/id/potential_acc = attacking_item
 		if(!potential_acc.registered_account)
 			to_chat(user, span_warning("This ID card has no account registered!"))
-			return ITEM_INTERACT_BLOCKING
-
-		if(payments_acc != potential_acc.registered_account)
-			return ITEM_INTERACT_BLOCKING
-
-		toggle_lock()
-		return ITEM_INTERACT_SUCCESS
-
-	if(istype(tool, /obj/item/modular_computer))
-		return ITEM_INTERACT_BLOCKING
-
+			return
+		if(payments_acc == potential_acc.registered_account)
+			toggle_lock()
+			return
+	if(istype(attacking_item, /obj/item/modular_computer))
+		return TRUE
 	SStgui.update_uis(src)
-	return ITEM_INTERACT_SUCCESS
+	return ..()
 
 /obj/structure/displaycase/forsale/multitool_act(mob/living/user, obj/item/I)
 	. = ..()

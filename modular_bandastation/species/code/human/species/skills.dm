@@ -61,14 +61,13 @@
 
 /obj/item/cigarette/handle_reagents(seconds_per_tick)
 	..()
-	if(ishuman(loc))
-		var/mob/living/carbon/human/smoker = loc
+	var/mob/living/carbon/smoker = loc
+	if(istype(smoker))
 		if(src == smoker.wear_mask)
 			SEND_SIGNAL(smoker, "testsig")
-	else if(istype(loc, /obj/item/clothing/mask/gas))
-		var/obj/item/clothing/mask/gas/mask = loc
-		var/mob/living/carbon/human/smoker = mask.loc
-		if(istype(smoker) && smoker.get_item_by_slot(ITEM_SLOT_MASK) == mask)
+	else if(istype(smoker, /obj/item/clothing/mask/gas))
+		smoker = smoker.loc
+		if(istype(smoker) && smoker.get_item_by_slot(ITEM_SLOT_MASK) == loc)
 			SEND_SIGNAL(smoker, "testsig")
 
 /datum/action/cooldown/sniff/Activate(atom/target)

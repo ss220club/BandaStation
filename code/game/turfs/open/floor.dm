@@ -125,21 +125,19 @@
 	W.update_appearance()
 	return W
 
-/turf/open/floor/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+/turf/open/floor/attackby(obj/item/object, mob/living/user, list/modifiers)
+	if(!object || !user)
+		return TRUE
 	. = ..()
-	if(ITEM_INTERACT_ANY_BLOCKER & .)
+	if(.)
 		return .
-
-	if(overfloor_placed && istype(tool, /obj/item/stack/tile))
-		try_replace_tile(tool, user, modifiers)
-		return ITEM_INTERACT_SUCCESS
-
-	if(user.combat_mode && istype(tool, /obj/item/stack/sheet))
-		var/obj/item/stack/sheet/sheets = tool
-		if(!sheets.on_attack_floor(src, user, modifiers))
-			return ITEM_INTERACT_BLOCKING
-
-		return ITEM_INTERACT_SUCCESS
+	if(overfloor_placed && istype(object, /obj/item/stack/tile))
+		try_replace_tile(object, user, modifiers)
+		return TRUE
+	if(user.combat_mode && istype(object, /obj/item/stack/sheet))
+		var/obj/item/stack/sheet/sheets = object
+		return sheets.on_attack_floor(src, user, modifiers)
+	return FALSE
 
 /turf/open/floor/crowbar_act(mob/living/user, obj/item/I)
 	if(overfloor_placed && pry_tile(I, user))

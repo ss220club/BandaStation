@@ -205,41 +205,35 @@
 
 /turf/open/lava/TakeTemperature(temp)
 
-/turf/open/lava/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	. = ..()
-	if(ITEM_INTERACT_ANY_BLOCKER & .)
-		return .
-
-	if(istype(tool, /obj/item/stack/rods/lava))
-		if(locate(/obj/structure/lattice/catwalk/lava, src))
+/turf/open/lava/attackby(obj/item/C, mob/user, list/modifiers)
+	..()
+	if(istype(C, /obj/item/stack/rods/lava))
+		var/obj/item/stack/rods/lava/R = C
+		var/obj/structure/lattice/catwalk/lava/H = locate(/obj/structure/lattice/catwalk/lava, src)
+		if(H)
 			to_chat(user, span_warning("There is already a lattice here!"))
-			return ITEM_INTERACT_BLOCKING
-
-		if(!astype(tool, /obj/item/stack/rods/lava).use(1))
+			return
+		if(R.use(1))
+			to_chat(user, span_notice("You construct a lattice."))
+			playsound(src, 'sound/items/weapons/genhit.ogg', 50, TRUE)
+			new /obj/structure/lattice/catwalk/lava(locate(x, y, z))
+		else
 			to_chat(user, span_warning("You need one rod to build a heatproof lattice."))
-			return ITEM_INTERACT_BLOCKING
-
-		to_chat(user, span_notice("You construct a lattice."))
-		playsound(src, 'sound/items/weapons/genhit.ogg', 50, TRUE)
-		new /obj/structure/lattice/catwalk/lava(locate(x, y, z))
-		return ITEM_INTERACT_SUCCESS
-
+		return
 	// Light a cigarette in the lava
-	if(istype(tool, /obj/item/cigarette))
-		var/obj/item/cigarette/ciggie = tool
+	if(istype(C, /obj/item/cigarette))
+		var/obj/item/cigarette/ciggie = C
 		if(ciggie.lit)
 			to_chat(user, span_warning("\The [ciggie] is already lit!"))
-			return ITEM_INTERACT_BLOCKING
-
+			return TRUE
 		var/clumsy_modifier = HAS_TRAIT(user, TRAIT_CLUMSY) ? 2 : 1
-		if(prob(25 * clumsy_modifier))
+		if(prob(25 * clumsy_modifier) && isliving(user))
 			ciggie.light(span_warning("[user] expertly dips \the [ciggie.name] into [src], along with the rest of [user.p_their()] arm. What a dumbass."))
 			var/mob/living/burned_guy = user
 			burned_guy.apply_damage(90, BURN, user.get_active_hand())
-			return ITEM_INTERACT_SUCCESS
-
-		ciggie.light(span_rose("[user] expertly dips \the [ciggie.name] into [src], lighting it with the scorching heat of the planet. Witnessing such a feat is almost enough to make you cry."))
-		return ITEM_INTERACT_SUCCESS
+		else
+			ciggie.light(span_rose("[user] expertly dips \the [ciggie.name] into [src], lighting it with the scorching heat of the planet. Witnessing such a feat is almost enough to make you cry."))
+		return TRUE
 
 /turf/open/lava/proc/is_safe()
 	return HAS_TRAIT(src, TRAIT_LAVA_STOPPED)

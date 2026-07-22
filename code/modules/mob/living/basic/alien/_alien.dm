@@ -67,25 +67,23 @@
 /mob/living/basic/alien/get_butt_sprite()
 	return icon('icons/mob/butts.dmi', BUTT_SPRITE_XENOMORPH)
 
-///Places alien weeds on the turf the mob is currently standing on. Returns TRUE if weeds were placed.
+///Places alien weeds on the turf the mob is currently standing on.
 /mob/living/basic/alien/proc/place_weeds()
 	if(!isturf(loc) || isspaceturf(loc))
-		return FALSE
+		return
 	if(locate(/obj/structure/alien/weeds/node) in get_turf(src))
-		return FALSE
+		return
 	visible_message(span_alertalien("[src] plants some alien weeds!"))
 	new /obj/structure/alien/weeds/node(loc)
-	return TRUE
 
-///Lays an egg on the turf the mob is currently standing on. Returns TRUE if an egg was laid.
+///Lays an egg on the turf the mob is currently standing on.
 /mob/living/basic/alien/proc/lay_alien_egg()
 	if(!isturf(loc) || isspaceturf(loc))
-		return FALSE
+		return
 	if(locate(/obj/structure/alien/egg) in get_turf(src))
-		return FALSE
+		return
 	visible_message(span_alertalien("[src] lays an egg!"))
 	new /obj/structure/alien/egg(loc)
-	return TRUE
 
 /mob/living/basic/alien/get_bloodtype()
 	return get_blood_type(BLOOD_TYPE_XENO)

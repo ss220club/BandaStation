@@ -3,7 +3,7 @@
 /obj/machinery/computer/arcade/orion_trail
 	name = "The Orion Trail"
 	desc = "Learn how our ancestors got to Orion, and have fun in the process!"
-	icon_state = MAP_SWITCH("arcade", "/obj/machinery/computer/arcade")
+	icon_state = "arcade"
 	circuit = /obj/item/circuitboard/computer/arcade/orion_trail
 
 	///List of all orion events, created on Initialize.
@@ -51,10 +51,10 @@
 /obj/machinery/computer/arcade/orion_trail/kobayashi
 	name = "Kobayashi Maru control computer"
 	desc = "A test for cadets."
-	icon = MAP_SWITCH('icons/obj/machines/particle_accelerator.dmi', 'icons/obj/fluff/map_previews.dmi')
-	icon_state = MAP_SWITCH("control_boxp", "/obj/machinery/computer/arcade/orion_trail/kobayashi")
+	icon = 'icons/obj/machines/particle_accelerator.dmi'
 	icon_keyboard = null
 	icon_screen = null
+	icon_state = "control_boxp"
 	//kobatashi has a smaller list of events, so we copy from the global list and cut whatever isn't here
 	var/list/event_whitelist = list(
 		/datum/orion_event/raiders,

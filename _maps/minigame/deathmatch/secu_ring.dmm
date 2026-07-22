@@ -13,41 +13,41 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/deathmatch)
 "n" = (
-/turf/open/floor/mineral/plastitanium/pod/light,
+/turf/open/floor/pod/light,
 /area/deathmatch)
 "o" = (
 /obj/machinery/recharger,
-/turf/open/floor/mineral/plastitanium/pod/light,
+/turf/open/floor/pod/light,
 /area/deathmatch)
 "t" = (
 /obj/structure/barricade/security/ctf,
-/turf/open/floor/mineral/plastitanium/pod/light,
+/turf/open/floor/pod/light,
 /area/deathmatch)
 "u" = (
-/turf/open/floor/mineral/plastitanium/pod,
+/turf/open/floor/pod,
 /area/deathmatch)
 "G" = (
 /obj/structure/barricade/security/ctf,
-/turf/open/floor/mineral/plastitanium/pod/dark,
+/turf/open/floor/pod/dark,
 /area/deathmatch)
 "H" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/open/floor/mineral/plastitanium/pod,
+/turf/open/floor/pod,
 /area/deathmatch)
 "I" = (
 /turf/closed/indestructible/reinforced,
 /area/deathmatch)
 "M" = (
 /obj/machinery/light,
-/turf/open/floor/mineral/plastitanium/pod,
+/turf/open/floor/pod,
 /area/deathmatch)
 "N" = (
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/open/floor/mineral/plastitanium/pod,
+/turf/open/floor/pod,
 /area/deathmatch)
 "O" = (
 /obj/machinery/light{
@@ -59,7 +59,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/open/floor/mineral/plastitanium/pod,
+/turf/open/floor/pod,
 /area/deathmatch)
 "S" = (
 /obj/machinery/light{
@@ -72,7 +72,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/deathmatch)
 "W" = (
-/turf/open/floor/mineral/plastitanium/pod/dark,
+/turf/open/floor/pod/dark,
 /area/deathmatch)
 "X" = (
 /turf/open/floor/mineral/plastitanium/red,

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Input, Section } from 'tgui-core/components';
+import { Button, Image, Input, Section, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 import { createSearch } from 'tgui-core/string';
 
@@ -23,11 +23,11 @@ export const NtosEmojipedia = (props) => {
   const filteredEmojis = emoji_list.filter(search);
 
   return (
-    <NtosWindow width={600} height={640}>
+    <NtosWindow width={600} height={800}>
       <NtosWindow.Content scrollable>
         <Section
           // required: follow semantic versioning every time you touch this file
-          title={`Эмодзипедия V3.7.10${filter ? ` - ${filter}` : ''}`}
+          title={`Эмодзипедия V2.7.10${filter ? ` - ${filter}` : ''}`}
           buttons={
             <>
               <Input
@@ -44,23 +44,15 @@ export const NtosEmojipedia = (props) => {
           }
         >
           {filteredEmojis.map((emoji) => (
-            <Button
-              verticalAlign
-              key={emoji.name}
-              tooltip={emoji.name}
-              width="16px"
-              height="16px"
-              className={classes(['emojipedia16x16', emoji.name])}
-              m={1.5}
-              onClick={() => {
-                copyText(`:${emoji.name}:`);
-              }}
-              style={{
-                imageRendering: 'pixelated',
-                transform: 'scale(2)',
-                verticalAlign: 'middle',
-              }}
-            />
+            <Tooltip key={emoji.name} content={emoji.name}>
+              <Image
+                m={0}
+                className={classes(['emojipedia16x16', emoji.name])}
+                onClick={() => {
+                  copyText(emoji.name);
+                }}
+              />
+            </Tooltip>
           ))}
         </Section>
       </NtosWindow.Content>
