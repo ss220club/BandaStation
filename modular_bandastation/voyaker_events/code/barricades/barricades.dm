@@ -202,26 +202,6 @@
 		else
 			. += image('modular_bandastation/voyaker_events/icons/barricade.dmi', icon_state = "[barricade_type]_closed_wire")
 
-/obj/structure/deployable_barricade/verb/rotate()
-	GAME_VERB("Повернуть баррикаду против часовой стрелки <", "Object")
-	set src in oview(1)
-
-	if(anchored)
-		to_chat(usr, span_warning("Она закреплена к полу, вы не можете её повернуть!"))
-		return FALSE
-
-	setDir(turn(dir, 90))
-
-/obj/structure/deployable_barricade/verb/revrotate()
-	GAME_VERB("Повернуть баррикаду по часовой стрелке >", "Object")
-	set src in oview(1)
-
-	if(anchored)
-		to_chat(usr, span_warning("Она закреплена к полу, вы не можете её повернуть!"))
-		return FALSE
-
-	setDir(turn(dir, 270))
-
 /obj/structure/deployable_barricade/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
