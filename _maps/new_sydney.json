@@ -9,6 +9,8 @@
 	"main_floor": 1,
 	"planetary": 1,
 	"give_players_hooks": 1,
+	"minetype": "none",
+	"disable_random_events": true,
 	"shuttles": {
 		"ferry": "ferry_fancy",
 		"whiteship": "whiteship_delta"
