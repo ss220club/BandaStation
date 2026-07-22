@@ -2689,11 +2689,11 @@
 	},
 /area/new_sydney/dark_forest)
 "bMD" = (
-/obj/structure/barricade/wooden,
 /obj/machinery/door/poddoor/shutters{
 	dir = 8;
 	max_integrity = 50000
 	},
+/obj/structure/barricade/wooden/crude,
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest/building)
 "bMM" = (
@@ -4199,10 +4199,10 @@
 /area/new_sydney/village)
 "cNl" = (
 /obj/machinery/door/airlock/mining,
-/obj/structure/barricade/wooden,
 /obj/effect/light_emitter{
 	light_color = "#5B7A42"
 	},
+/obj/structure/barricade/wooden/crude,
 /turf/open/indestructible/rockyground,
 /area/new_sydney/dark_forest/building)
 "cNn" = (
@@ -7339,15 +7339,11 @@
 /area/new_sydney/bunker)
 "eJT" = (
 /obj/structure/table,
-/obj/machinery/door/window/right/directional/east{
-	name = "Kitchen";
-	req_access = list("kitchen");
-	dir = 8
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
 /obj/effect/landmark/loot_spawn/food,
+/obj/machinery/door/window/right/directional/west,
 /turf/open/floor/iron/checker,
 /area/new_sydney/mine)
 "eKs" = (
@@ -7709,14 +7705,10 @@
 /area/new_sydney/dark_forest/building)
 "faH" = (
 /obj/structure/table,
-/obj/machinery/door/window/right/directional/east{
-	name = "Kitchen";
-	req_access = list("kitchen");
-	dir = 8
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 4
 	},
+/obj/machinery/door/window/right/directional/west,
 /turf/open/floor/iron/checker,
 /area/new_sydney/mine)
 "faQ" = (
@@ -8061,14 +8053,10 @@
 /area/new_sydney/dark_forest/building)
 "fnc" = (
 /obj/structure/table,
-/obj/machinery/door/window/right/directional/east{
-	name = "Kitchen";
-	req_access = list("kitchen");
-	dir = 8
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 5
 	},
+/obj/machinery/door/window/right/directional/west,
 /turf/open/floor/iron/checker,
 /area/new_sydney/mine)
 "fnq" = (
@@ -13681,10 +13669,10 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/coast)
 "jiQ" = (
-/obj/structure/barricade/wooden,
 /obj/effect/spawner/structure/window/reinforced/tinted{
 	max_integrity = 10000
 	},
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating,
 /area/new_sydney/coast)
 "jiR" = (
@@ -25538,14 +25526,10 @@
 /area/new_sydney/village)
 "rBz" = (
 /obj/structure/table,
-/obj/machinery/door/window/right/directional/east{
-	name = "Kitchen";
-	req_access = list("kitchen");
-	dir = 8
-	},
 /obj/effect/turf_decal/siding/dark{
 	dir = 6
 	},
+/obj/machinery/door/window/right/directional/west,
 /turf/open/floor/iron/checker,
 /area/new_sydney/mine)
 "rBR" = (
@@ -27665,15 +27649,6 @@
 	},
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
-"thu" = (
-/obj/effect/spawner/structure/window{
-	max_integrity = 50000
-	},
-/obj/effect/spawner/structure/window{
-	max_integrity = 50000
-	},
-/turf/open/floor/plating,
-/area/new_sydney/village)
 "thC" = (
 /obj/effect/landmark/forest_mutant_spawn/hyperzombie,
 /turf/open/floor/carpet/green,
@@ -31395,11 +31370,6 @@
 /obj/effect/landmark/loot_spawn/treasure,
 /turf/open/floor/iron/white/textured_large,
 /area/new_sydney/building)
-"vxw" = (
-/obj/machinery/hydroponics/constructable,
-/obj/machinery/hydroponics/constructable,
-/turf/open/floor/pod,
-/area/new_sydney/village)
 "vxx" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -31969,15 +31939,6 @@
 	dir = 8
 	},
 /area/new_sydney/bunker)
-"vQY" = (
-/obj/effect/spawner/structure/window{
-	max_integrity = 50000
-	},
-/obj/effect/spawner/structure/window{
-	max_integrity = 50000
-	},
-/turf/open/floor/plating,
-/area/new_sydney/mine)
 "vRn" = (
 /obj/structure/railing/wooden_fencing{
 	dir = 1;
@@ -37862,7 +37823,7 @@ bIy
 mgE
 jVT
 jVT
-vxw
+jVT
 jVT
 jVT
 mgE
@@ -48730,7 +48691,7 @@ eBD
 mVa
 xvM
 bWc
-thu
+bIy
 vQy
 tds
 vQy
@@ -89427,7 +89388,7 @@ uLG
 xui
 hlm
 hlm
-vQY
+alv
 alv
 hlm
 hlm
