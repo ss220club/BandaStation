@@ -11,8 +11,9 @@
 	var/goal = 1
 	var/id = "quest"
 	var/blocks_other_quests = FALSE
-	proc/start(mob/living/carbon/human/H)
-		return
+
+/datum/trader_questproc/start(mob/living/carbon/human/H)
+	return
 
 /datum/trader_quest/proc/can_complete(mob/living/carbon/human/H, obj/item/I)
 	return FALSE
