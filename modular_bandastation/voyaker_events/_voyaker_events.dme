@@ -78,6 +78,7 @@
 #include "code\roles\datums.dm"
 #include "code\roles\landmarks.dm"
 #include "code\roles\vanilla_jobs_disabler.dm"
+#include "code\map\map_newsydney.dm"
 // BEGIN_INTERNALS
 // END_INTERNALS
 // BEGIN_FILE_DIR
