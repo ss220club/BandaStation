@@ -38,7 +38,7 @@
 			to_chat(user, span_alert("Порты ключей шифрования не настроены."))
 			return
 		pai.radio.attackby(used, user, modifiers)
-		to_chat(user, span_notice("Вы вставляете [declent_ru(used, ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]."))
+		to_chat(user, span_notice("Вы вставляете [used.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]."))
 		return
 	return ..()
 
