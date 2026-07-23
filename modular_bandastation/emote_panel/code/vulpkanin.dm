@@ -77,8 +77,6 @@
 	return 'modular_bandastation/emote_panel/audio/tajaran/tajaran_sneeze_male.ogg'
 
 /datum/species/vulpkanin/get_sniff_sound(mob/living/carbon/human/human)
-	if(!human)
-		return
 	if(human.physique == FEMALE)
 		return 'sound/mobs/humanoids/human/sniff/female_sniff.ogg'
 	return 'sound/mobs/humanoids/human/sniff/male_sniff.ogg'
