@@ -36,8 +36,11 @@
 
 /datum/species/vulpkanin/get_sneeze_sound(mob/living/carbon/human/human)
 	if(human.physique == FEMALE)
-		return 'sound/mobs/humanoids/human/sneeze/female_sneeze1.ogg'
-	return 'sound/mobs/humanoids/human/sneeze/male_sneeze1.ogg'
+		return pick(
+			'modular_bandastation/emote_panel/audio/tajaran/tajaran_sneeze_female1.ogg',
+			'modular_bandastation/emote_panel/audio/tajaran/tajaran_sneeze_female2.ogg',
+		)
+	return 'modular_bandastation/emote_panel/audio/tajaran/tajaran_sneeze_male.ogg'
 
 /datum/species/vulpkanin/get_laugh_sound(mob/living/carbon/human/human)
 	if(!ishuman(human))
@@ -65,14 +68,6 @@
 	if(human.physique == FEMALE)
 		return SFX_SNORE_FEMALE
 	return SFX_SNORE_MALE
-
-/datum/species/vulpkanin/get_sneeze_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return pick(
-			'modular_bandastation/emote_panel/audio/tajaran/tajaran_sneeze_female1.ogg',
-			'modular_bandastation/emote_panel/audio/tajaran/tajaran_sneeze_female2.ogg',
-		)
-	return 'modular_bandastation/emote_panel/audio/tajaran/tajaran_sneeze_male.ogg'
 
 /datum/species/vulpkanin/get_sniff_sound(mob/living/carbon/human/human)
 	if(human.physique == FEMALE)
