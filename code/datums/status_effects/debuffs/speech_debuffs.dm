@@ -78,7 +78,7 @@
 	/// * 3rd capture group is the rest of the word (can be empty)
 	VAR_FINAL/static/regex/stutter_regex
 	/// Cyrillic version of the stutter regex for UTF-8 speech.
-	VAR_FINAL/static/regex/stutter_regex_cyrillic
+	VAR_FINAL/static/regex/stutter_regex_cyrillic // BANDASTATION EDIT: Enhance social anxiety quirk
 
 /datum/status_effect/speech/stutter/on_creation(mob/living/new_owner, ...)
 	stutter_regex ||= regex(@@^([\s"'()[\]{}.!?,:;_`~-]*\b)([^aeoiuh\d]h|qu|[^\d])(.*)@, "i")
