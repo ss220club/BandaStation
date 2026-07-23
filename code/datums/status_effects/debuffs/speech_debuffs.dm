@@ -82,7 +82,7 @@
 
 /datum/status_effect/speech/stutter/on_creation(mob/living/new_owner, ...)
 	stutter_regex ||= regex(@@^([\s"'()[\]{}.!?,:;_`~-]*\b)([^aeoiuh\d]h|qu|[^\d])(.*)@, "i")
-	stutter_regex_cyrillic ||= regex(@@^([\s"'()[\]{}.!?,:;_`~-]*)([бвгджзйклмнпрстфхцчшщБВГДЖЗЙКЛМНПРСТФХЦЧШЩ])(.*)@)
+	stutter_regex_cyrillic ||= regex(@@^([\s"'()[\]{}.!?,:;_`~-]*)([бвгджзйклмнпрстфхцчшщБВГДЖЗЙКЛМНПРСТФХЦЧШЩ])(.*)@) // BANDASTATION EDIT: Enhance social anxiety quirk
 	return ..()
 
 /datum/status_effect/speech/stutter/apply_speech(original_word, index)
