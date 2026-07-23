@@ -62,8 +62,6 @@
 	return SFX_MALE_SIGH
 
 /datum/species/vulpkanin/get_snore_sound(mob/living/carbon/human/human)
-	if(!human)
-		return
 	if(human.physique == FEMALE)
 		return SFX_SNORE_FEMALE
 	return SFX_SNORE_MALE
