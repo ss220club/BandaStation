@@ -21,7 +21,7 @@
 	. = ..()
 	AddComponent(/datum/component/stove, container_x = -6, container_y = 16)
 	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
-	AddComponent(/datum/component/item_igniter)
+	AddComponent(/datum/component/item_igniter, FALSE)
 
 // Soup pot for cooking soup
 // Future addention ideas:
