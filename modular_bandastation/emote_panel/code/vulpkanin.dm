@@ -57,8 +57,6 @@
 	)
 
 /datum/species/vulpkanin/get_sigh_sound(mob/living/carbon/human/human)
-	if(!human)
-		return
 	if(human.physique == FEMALE)
 		return SFX_FEMALE_SIGH
 	return SFX_MALE_SIGH
