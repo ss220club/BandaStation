@@ -67,8 +67,6 @@
 	return SFX_SNORE_MALE
 
 /datum/species/vulpkanin/get_sneeze_sound(mob/living/carbon/human/human)
-	if(!human)
-		return
 	if(human.physique == FEMALE)
 		return pick(
 			'modular_bandastation/emote_panel/audio/tajaran/tajaran_sneeze_female1.ogg',
