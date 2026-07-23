@@ -47,6 +47,7 @@
 	if(HAS_TRAIT(source, TRAIT_SIGN_LANG)) // No modifiers for signers, so you're less anxious when you go non-verbal
 		return
 
+	// BANDASTATION EDIT START: Enhance social anxiety quirk
 	var/moodmod = calculate_mood_mod()
 	if(prob(min(20, (0.20 * moodmod)))) //Max 20% chance of not talking
 		if(dumb_thing)
@@ -61,6 +62,7 @@
 				quirk_holder.set_silence_if_lower(6 SECONDS)
 
 		speech_args[SPEECH_MESSAGE] = pick("Э-э-эм.","Эмм.","Ам.", "Ммм.", "Х-э-эм.", "Ну.", "Ой.", "Простите.", "Извините.")
+	// BANDASTATION EDIT END: Enhance social anxiety quirk
 
 // small chance to make eye contact with inanimate objects/mindless mobs because of nerves
 /datum/quirk/social_anxiety/proc/looks_at_floor(datum/source, atom/A)
