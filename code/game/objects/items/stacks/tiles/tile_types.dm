@@ -421,7 +421,7 @@
 	. += neon_overlay
 	. += emissive_appearance(neon_icon || icon, neon_icon_state || icon_state, src, alpha = emissive_alpha)
 
-/obj/item/stack/tile/carpet/neon/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
+/obj/item/stack/tile/carpet/neon/worn_overlays(mutable_appearance/standing, isinhands, icon_file, bodyshape = NONE)
 	. = ..()
 	if(!isinhands || !neon_inhand_icon_state)
 		return
@@ -1110,37 +1110,6 @@
 	turf_type = /turf/open/floor/circuit/red/anim
 	merge_type = /obj/item/stack/tile/circuit/red/anim
 
-//Pod floor
-/obj/item/stack/tile/pod
-	name = "pod floor tile"
-	singular_name = "pod floor tile"
-	desc = "A grooved floor tile."
-	icon_state = "tile_pod"
-	inhand_icon_state = "tile-pod"
-	turf_type = /turf/open/floor/pod
-	merge_type = /obj/item/stack/tile/pod
-	tile_reskin_types = list(
-		/obj/item/stack/tile/pod,
-		/obj/item/stack/tile/pod/light,
-		/obj/item/stack/tile/pod/dark,
-		)
-
-/obj/item/stack/tile/pod/light
-	name = "light pod floor tile"
-	singular_name = "light pod floor tile"
-	desc = "A lightly colored grooved floor tile."
-	icon_state = "tile_podlight"
-	turf_type = /turf/open/floor/pod/light
-	merge_type = /obj/item/stack/tile/pod/light
-
-/obj/item/stack/tile/pod/dark
-	name = "dark pod floor tile"
-	singular_name = "dark pod floor tile"
-	desc = "A darkly colored grooved floor tile."
-	icon_state = "tile_poddark"
-	turf_type = /turf/open/floor/pod/dark
-	merge_type = /obj/item/stack/tile/pod/dark
-
 /obj/item/stack/tile/plastic
 	name = "plastic tile"
 	singular_name = "plastic floor tile"
@@ -1240,7 +1209,7 @@
 	. = ..()
 	. += emissive_appearance(icon, icon_state, src, alpha = alpha)
 
-/obj/item/stack/tile/emissive_test/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
+/obj/item/stack/tile/emissive_test/worn_overlays(mutable_appearance/standing, isinhands, icon_file, bodyshape = NONE)
 	. = ..()
 	. += emissive_appearance(standing.icon, standing.icon_state, src, alpha = standing.alpha)
 

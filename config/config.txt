@@ -457,7 +457,7 @@ MINUTE_CLICK_LIMIT 400
 #CHAT_NEW_GAME_NOTIFICATIONS
 
 ## Uncomment this flag to validate admin commands from discord by requiring they come from linked discord accounts and that those discord accounts link to a ckey with the right admin permissions.
-# SECURE_CHAT_COMMANDS
+SECURE_CHAT_COMMANDS
 
 ## Allow admin hrefs that don't use the new token system, will eventually be removed
 #DEBUG_ADMIN_HREFS
@@ -658,3 +658,8 @@ GENERATE_ASSETS_IN_INIT
 ## Path from the config folder to the policy json
 POLICY_JSON_PATH policy.json
 
+# Which CIDs will not be considered for stickybans. This is the default CID that Wine spits out,
+# and for the purpose of not default banning all Linux players, we'll just ignore it.
+# People can spoof this CID and ignore that element of stickybans forever, but they can equally
+# just keep generating new ones. Kind of doesn't matter.
+IGNORED_CIDS 4055623708
