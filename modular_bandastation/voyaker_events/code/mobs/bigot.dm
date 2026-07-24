@@ -8,15 +8,10 @@
 	QDEL_IN(src, 0.5 SECONDS)
 
 /datum/targeting_strategy/basic/not_zombies
+	custom_faction_check = TRUE
 
-/datum/targeting_strategy/basic/not_zombies/can_attack(mob/living/source, atom/target, vision_range)
-	if(!..())
-		return FALSE
-	if(isliving(target))
-		var/mob/living/L = target
-		if(source.has_faction(FACTION_CULT) && L.has_faction(FACTION_CULT))
-			return FALSE
-	return TRUE
+/datum/targeting_strategy/basic/not_zombies/faction_check(datum/ai_controller/controller, mob/living/living_mob, mob/living/the_target)
+	return !(living_mob.has_faction(FACTION_CULT) && the_target.has_faction(FACTION_CULT))
 
 /mob/living/basic/bigot
 	name = "изувер"

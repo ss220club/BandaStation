@@ -1,10 +1,9 @@
 /datum/targeting_strategy/basic/not_kamilla_friends
+	custom_faction_check = TRUE
 
-/datum/targeting_strategy/basic/not_kamilla_friends/can_attack(mob/living/living_mob, atom/target, vision_range)
-	if(!..())
-		return FALSE
-	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+/datum/targeting_strategy/basic/not_kamilla_friends/faction_check(datum/ai_controller/controller, mob/living/living_mob, mob/living/the_target)
+	if(ishuman(the_target))
+		var/mob/living/carbon/human/H = the_target
 		if((H.trader_rep[TRADER_KAMILLA] || 0) >= 50)
 			return FALSE
 	return TRUE
