@@ -37,51 +37,97 @@
 	var/heal_duration = 10
 	var/healing = FALSE
 
+/datum/movespeed_modifier/killer_fast
+	multiplicative_slowdown = -0.5
+
 /datum/ai_controller/basic_controller/killer
 	blackboard = list(
-		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_kamilla_friends,
-		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/mining,
-		BB_VISION_RANGE = 15,
-		BB_TARGET_MINIMUM_STAT = CONSCIOUS,
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_kamilla_friends
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
-	idle_behavior = /datum/idle_behavior/idle_random_walk
+	behavior_tree_json = "modular_bandastation/voyaker_events/code/mobs/killer.bt.json"
 
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/simple_find_target,
-		/datum/ai_planning_subtree/killer_logic,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/attack_obstacle_in_path,
-		/datum/ai_planning_subtree/target_retaliate
-	)
+/datum/bt_node/ai_behavior/killer_smoke
 
-/datum/ai_planning_subtree/killer_logic
-
-/datum/ai_planning_subtree/killer_logic/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+/datum/bt_node/ai_behavior/killer_smoke/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/mob/living/basic/killer/killer = controller.pawn
-	var/mob/living/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
+	if(!killer)
+		return AI_BEHAVIOR_FAILED
+	if(killer.retreating || killer.healing)
+		return AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
 	if(!target)
-		return
+		return AI_BEHAVIOR_FAILED
+	if(killer.stat != CONSCIOUS)
+		return AI_BEHAVIOR_FAILED
 	var/dist = get_dist(killer, target)
-	if(killer.health <= 75)
-		if(world.time >= killer.next_grenade)
-			killer.next_grenade = world.time + killer.grenade_cooldown
-			killer.release_grenade(target)
-			killer.begin_retreat(target)
-			return
-	if(dist > 3 && dist <= 10)
-		if(world.time >= killer.next_uzi)
-			killer.next_uzi = world.time + killer.uzi_cooldown
-			killer.fire_uzi(target)
-			return
-	if(dist <= 3)
-		if(world.time >= killer.next_smoke)
-			killer.next_smoke = world.time + killer.smoke_cooldown
-			killer.release_smoke()
+	if(dist > 3)
+		return AI_BEHAVIOR_FAILED
+	if(world.time < killer.next_smoke)
+		return AI_BEHAVIOR_FAILED
+	killer.next_smoke = world.time + killer.smoke_cooldown
+	INVOKE_ASYNC(killer, TYPE_PROC_REF(/mob/living/basic/killer, release_smoke))
+	return AI_BEHAVIOR_SUCCEEDED
 
-/datum/movespeed_modifier/killer_fast
-	multiplicative_slowdown = -0.5
+/datum/bt_node/ai_behavior/killer_uzi
+
+/datum/bt_node/ai_behavior/killer_uzi/perform(seconds_per_tick, datum/ai_controller/controller)
+	var/mob/living/basic/killer/killer = controller.pawn
+	if(!killer)
+		return AI_BEHAVIOR_FAILED
+	if(killer.retreating || killer.healing)
+		return AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
+	if(!target)
+		return AI_BEHAVIOR_FAILED
+	if(killer.stat != CONSCIOUS)
+		return AI_BEHAVIOR_FAILED
+	var/dist = get_dist(killer, target)
+	if(dist <= 3)
+		return AI_BEHAVIOR_FAILED
+	if(dist > 10)
+		return AI_BEHAVIOR_FAILED
+	if(world.time < killer.next_uzi)
+		return AI_BEHAVIOR_FAILED
+	killer.next_uzi = world.time + killer.uzi_cooldown
+	INVOKE_ASYNC(killer, TYPE_PROC_REF(/mob/living/basic/killer, fire_uzi), target)
+	return AI_BEHAVIOR_SUCCEEDED
+
+/datum/bt_node/ai_behavior/killer_grenade
+
+/datum/bt_node/ai_behavior/killer_grenade/perform(seconds_per_tick, datum/ai_controller/controller)
+	var/mob/living/basic/killer/killer = controller.pawn
+	if(!killer)
+		return AI_BEHAVIOR_FAILED
+	if(killer.retreating || killer.healing)
+		return AI_BEHAVIOR_FAILED
+	if(killer.health > 75)
+		return AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
+	if(!target)
+		return AI_BEHAVIOR_FAILED
+	if(world.time < killer.next_grenade)
+		return AI_BEHAVIOR_FAILED
+	killer.next_grenade = world.time + killer.grenade_cooldown
+	INVOKE_ASYNC(killer, TYPE_PROC_REF(/mob/living/basic/killer, release_grenade), target)
+	INVOKE_ASYNC(killer, TYPE_PROC_REF(/mob/living/basic/killer, begin_retreat), target)
+	return AI_BEHAVIOR_SUCCEEDED
+
+/datum/bt_node/ai_behavior/killer_heal
+
+/datum/bt_node/ai_behavior/killer_heal/perform(seconds_per_tick, datum/ai_controller/controller)
+	var/mob/living/basic/killer/killer = controller.pawn
+	if(!killer)
+		return AI_BEHAVIOR_FAILED
+	if(!killer.retreating)
+		return AI_BEHAVIOR_FAILED
+	if(killer.health >= killer.maxHealth)
+		return AI_BEHAVIOR_FAILED
+	if(killer.healing)
+		return AI_BEHAVIOR_FAILED
+	INVOKE_ASYNC(killer, TYPE_PROC_REF(/mob/living/basic/killer, begin_healing))
+	return AI_BEHAVIOR_SUCCEEDED
 
 /mob/living/basic/killer/Initialize(mapload)
 	. = ..()
@@ -130,7 +176,7 @@
 	retreating = TRUE
 	playsound(src, 'sound/effects/smoke.ogg', 50, TRUE, -3)
 	do_smoke(4, src, get_turf(src), smoke_type = /datum/effect_system/fluid_spread/smoke/bad)
-	ai_controller.clear_blackboard_key(BB_BASIC_MOB_CURRENT_TARGET)
+	ai_controller.clear_blackboard_key(BB_CURRENT_TARGET)
 	retreat_step(target, 30)
 	addtimer(CALLBACK(src, PROC_REF(begin_healing)), 5 SECONDS)
 

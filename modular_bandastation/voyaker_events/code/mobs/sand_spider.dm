@@ -30,35 +30,33 @@
 	add_movespeed_modifier(/datum/movespeed_modifier/sand_walk)
 
 /datum/ai_controller/basic_controller/spider/sand
-	ai_movement = /datum/ai_movement/basic_avoidance
 	blackboard = list(
-		targeting_strategy = /datum/targeting_strategy/basic,
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic
 	)
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/simple_find_target,
-		/datum/ai_planning_subtree/sand_spider_logic,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/target_retaliate,
-		/datum/ai_planning_subtree/attack_obstacle_in_path,
-	)
+	ai_movement = /datum/ai_movement/basic_avoidance
+	behavior_tree_json = "modular_bandastation/voyaker_events/code/mobs/sand_spider.bt.json"
 
-/datum/ai_planning_subtree/sand_spider_logic
+/datum/bt_node/ai_behavior/sand_spider_logic
 
-/datum/ai_planning_subtree/sand_spider_logic/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+/datum/bt_node/ai_behavior/sand_spider_logic/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/mob/living/basic/spider/sand/spider = controller.pawn
-	var/mob/living/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
+	if(!spider)
+		return AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
 	if(!target)
-		return
+		return AI_BEHAVIOR_FAILED
 	if(spider.burrowed)
-		return
+		return AI_BEHAVIOR_FAILED
 	if(world.time < spider.next_burrow)
-		return
-	if(get_dist(spider,target) <= 3)
-		return
+		return AI_BEHAVIOR_FAILED
+	var/dist = get_dist(spider, target)
+	if(dist <= 3)
+		return AI_BEHAVIOR_FAILED
 	spider.current_target = target
-	spider.Shake(3, 1 SECONDS)
+	spider.Shake(2, 1 SECONDS)
 	spider.visible_message(span_warning("[spider] резко начинает уходить под песок!"))
 	addtimer(CALLBACK(spider, TYPE_PROC_REF(/mob/living/basic/spider/sand, enter_burrow)), 1 SECONDS)
+	return AI_BEHAVIOR_SUCCEEDED
 
 /mob/living/basic/spider/sand/proc/enter_burrow()
 	if(burrowed)

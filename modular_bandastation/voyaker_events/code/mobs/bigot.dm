@@ -160,7 +160,7 @@
 
 /mob/living/basic/bigot/proc/charge_attack(mob/living/target)
 	next_charge_attack = world.time + charge_cooldown
-	Shake(3, 2 SECONDS)
+	Shake(2, 2 SECONDS)
 	visible_message(span_warning("[src] напрягается перед броском!"))
 	sleep(2 SECONDS)
 	var/dir_to_target = get_dir(src, target)

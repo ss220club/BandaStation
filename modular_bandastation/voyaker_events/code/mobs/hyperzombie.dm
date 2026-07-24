@@ -48,7 +48,7 @@
 	zombie.next_spit = world.time + zombie.spit_cooldown
 	zombie.visible_message(span_warning("[zombie] извергает поток радиоактивной желчи!"))
 	addtimer(CALLBACK(zombie, TYPE_PROC_REF(/mob/living/basic/hyperzombie, do_spit)), 5)
-		return AI_BEHAVIOR_SUCCEEDED
+	return AI_BEHAVIOR_SUCCEEDED
 
 /mob/living/basic/hyperzombie/Initialize(mapload)
 	. = ..()
