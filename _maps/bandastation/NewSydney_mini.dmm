@@ -765,6 +765,7 @@
 /area/new_sydney/mine)
 "aAC" = (
 /obj/machinery/door/airlock/grunge,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "aAM" = (
 /obj/item/chair/wood,
@@ -10615,6 +10616,9 @@
 /area/new_sydney/building)
 "gQe" = (
 /obj/machinery/door/airlock/mining/glass,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "gQi" = (
 /obj/effect/turf_decal/siding/dark_blue{
@@ -14349,6 +14353,7 @@
 /area/new_sydney/dark_forest)
 "jyL" = (
 /obj/machinery/door/airlock/grunge,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest)
 "jyN" = (
 /obj/effect/turf_decal/siding/wood{
@@ -14574,6 +14579,7 @@
 /area/new_sydney/coast)
 "jHz" = (
 /obj/machinery/door/password/keycard/forest_bunker,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "jIq" = (
 /obj/effect/light_emitter{
@@ -16990,6 +16996,7 @@
 /area/new_sydney/building)
 "lmb" = (
 /obj/machinery/door/password/keycard/mine_exit,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "lmK" = (
 /obj/effect/turf_decal/line/blue/line/stripes/contrasted{
@@ -17914,6 +17921,7 @@
 /area/new_sydney/mine)
 "lVc" = (
 /obj/machinery/door/airlock/grunge,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "lVj" = (
 /obj/structure/city_prop/streetlamp/dmg,
@@ -18585,11 +18593,6 @@
 	},
 /turf/closed/indestructible/reinforced,
 /area/new_sydney/dark_forest)
-"mtk" = (
-/obj/machinery/door/poddoor/shutters{
-	max_integrity = 50000
-	},
-/area/new_sydney/mine)
 "mtB" = (
 /obj/effect/mob_spawn/corpse/human/factory/qm,
 /obj/effect/decal/cleanable/blood/old{
@@ -19393,6 +19396,7 @@
 /obj/machinery/door/poddoor/shutters{
 	max_integrity = 50000
 	},
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest)
 "mWX" = (
 /obj/structure/railing/wooden_fencing{
@@ -26679,6 +26683,7 @@
 /area/new_sydney/mine)
 "saL" = (
 /obj/machinery/door/airlock/highsecurity,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/military_base)
 "saM" = (
 /obj/effect/decal/cleanable/glass,
@@ -30510,6 +30515,7 @@
 	light_color = "#5B7A42"
 	},
 /obj/machinery/door/airlock/grunge,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest)
 "uEh" = (
 /obj/item/emptysandbag,
@@ -30874,6 +30880,7 @@
 /area/new_sydney/coast)
 "uOk" = (
 /obj/item/stack/sheet/iron/ten,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest)
 "uOL" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -78253,7 +78260,7 @@ dDk
 mxZ
 mxZ
 lUZ
-lVc
+hfr
 lUZ
 lUZ
 lUZ
@@ -78555,7 +78562,7 @@ xKS
 xKS
 ejE
 tjp
-lVc
+hfr
 xSK
 lUZ
 dgO
@@ -90591,7 +90598,7 @@ sLD
 sLD
 sLD
 hlm
-mtk
+sLQ
 ehu
 lUZ
 lUZ
@@ -90635,7 +90642,7 @@ ejE
 jFH
 ejE
 xlX
-lVc
+hfr
 lUZ
 lUZ
 xSK
@@ -90893,7 +90900,7 @@ sLD
 sLD
 sLD
 hlm
-mtk
+sLQ
 ehu
 lUZ
 xSK
@@ -90937,7 +90944,7 @@ ejE
 ejE
 ejE
 xlX
-lVc
+hfr
 lUZ
 lUZ
 dgO
