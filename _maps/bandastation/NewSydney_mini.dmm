@@ -8997,6 +8997,7 @@
 /area/new_sydney/coast)
 "fQd" = (
 /obj/machinery/door/password,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "fQk" = (
 /obj/effect/turf_decal/line/yellow/anticorner{
@@ -12545,6 +12546,9 @@
 /area/new_sydney/dark_forest)
 "ihB" = (
 /obj/machinery/door/airlock/service,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/dark_forest)
 "ihD" = (
 /obj/effect/decal/cleanable/dirt,
