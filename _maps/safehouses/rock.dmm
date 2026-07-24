@@ -92,6 +92,7 @@
 /obj/item/flashlight/lantern,
 /obj/structure/table/bronze,
 /obj/effect/turf_decal/stripes/asteroid/full,
+/obj/item/flashlight/lantern,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/safehouse)
 "Q" = (
@@ -99,8 +100,11 @@
 /obj/item/grenade/firecracker,
 /obj/item/grenade/firecracker,
 /obj/item/grenade/firecracker,
-/obj/item/lighter/greyscale,
 /obj/effect/turf_decal/stripes/asteroid/full,
+/obj/item/grenade/firecracker,
+/obj/item/grenade/firecracker,
+/obj/item/grenade/firecracker,
+/obj/item/lighter/greyscale,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/safehouse)
 "U" = (
