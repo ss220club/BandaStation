@@ -80,12 +80,14 @@
 	dir = 8
 	},
 /obj/structure/loot/file_cabinet,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "aeb" = (
 /obj/effect/turf_decal/box,
 /obj/structure/loot/technical_crate/metal,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "aec" = (
 /obj/effect/turf_decal/line/yellow/line/stripes{
@@ -111,7 +113,7 @@
 "aev" = (
 /obj/effect/turf_decal/trimline/dark_blue/line,
 /obj/structure/aquarium,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "aeC" = (
 /obj/structure/vehicle_prop/humvee/wreck{
@@ -226,7 +228,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor7"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "aiG" = (
 /obj/effect/turf_decal/line/yellow/line/stripes{
@@ -286,7 +290,9 @@
 	},
 /obj/structure/rack,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "alo" = (
 /obj/effect/turf_decal/line/brown/line/contrasted{
@@ -428,7 +434,9 @@
 "aoJ" = (
 /obj/effect/landmark/bigot_spawn,
 /mob/living/basic/bigot,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "apg" = (
 /obj/effect/turf_decal/board_number,
@@ -436,7 +444,9 @@
 	dir = 8;
 	pixel_x = 15
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "apo" = (
 /obj/structure/table,
@@ -608,7 +618,7 @@
 	dir = 4
 	},
 /obj/effect/landmark/loot_spawn/treasure,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "axa" = (
 /obj/effect/turf_decal/line/yellow/line{
@@ -749,11 +759,12 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "aAC" = (
 /obj/machinery/door/airlock/grunge,
-/turf/open/floor/pod,
 /area/new_sydney/dark_forest/building)
 "aAM" = (
 /obj/item/chair/wood,
@@ -765,8 +776,8 @@
 /turf/open/floor/wood,
 /area/new_sydney/building/administration)
 "aAU" = (
-/obj/effect/turf_decal/board_number,
-/turf/open/floor/pod,
+/obj/effect/decal/cleanable/glass,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "aBc" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -842,7 +853,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "aDy" = (
 /obj/effect/light_emitter{
@@ -856,7 +869,7 @@
 	dir = 8
 	},
 /obj/structure/tent/medical,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "aDR" = (
 /obj/structure/railing/wooden_fencing{
@@ -895,7 +908,9 @@
 /area/new_sydney/bunker)
 "aEQ" = (
 /obj/structure/ore_box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "aES" = (
 /obj/effect/mob_spawn/corpse/human/ussp/spetsnaz,
@@ -922,7 +937,9 @@
 	id = "mining_internal"
 	},
 /obj/structure/plasticflaps,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "aGu" = (
 /obj/effect/turf_decal/siding/wood{
@@ -1067,7 +1084,9 @@
 	dir = 8
 	},
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "aLQ" = (
 /obj/effect/turf_decal/line/yellow/line{
@@ -1099,7 +1118,7 @@
 "aMJ" = (
 /obj/machinery/light/burned/directional/south,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "aMM" = (
 /obj/effect/turf_decal/line/brown/line/contrasted{
@@ -1136,12 +1155,16 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "aOL" = (
 /obj/effect/turf_decal/box,
 /obj/effect/decal/trashbags/two,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "aOM" = (
 /obj/structure/railing{
@@ -1201,7 +1224,7 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/board_number,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "aPM" = (
 /obj/effect/landmark/loot_spawn/medical,
@@ -1250,7 +1273,7 @@
 /area/new_sydney/village)
 "aQL" = (
 /obj/effect/turf_decal/caution/stand_clear,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "aQM" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -1451,7 +1474,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "aWW" = (
 /turf/open/floor/carpet/orange,
@@ -1560,7 +1585,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor3"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bcj" = (
 /obj/effect/turf_decal/trimline/yellow/corner{
@@ -1708,7 +1735,9 @@
 	},
 /obj/effect/turf_decal/delivery,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "big" = (
 /obj/effect/decal/trashbags/four{
@@ -1745,7 +1774,9 @@
 	dir = 10
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bjo" = (
 /turf/open/floor/circuit,
@@ -1756,7 +1787,7 @@
 /area/new_sydney/bunker)
 "bjD" = (
 /obj/structure/loot/technical_crate,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "bjP" = (
 /obj/effect/turf_decal/board_number{
@@ -1898,7 +1929,9 @@
 	},
 /obj/effect/turf_decal/box,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bol" = (
 /obj/structure/table,
@@ -2071,7 +2104,9 @@
 	},
 /obj/structure/table,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bsB" = (
 /obj/effect/turf_decal/siding/wood{
@@ -2097,7 +2132,9 @@
 /obj/effect/turf_decal/siding/yellow,
 /obj/effect/turf_decal/delivery,
 /obj/structure/flatpack_cart,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "buc" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -2215,13 +2252,15 @@
 	icon_state = "floor3"
 	},
 /obj/structure/loot/technical_crate,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "bxh" = (
 /obj/structure/chair/office{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "bxs" = (
 /turf/closed/indestructible/reinforced,
@@ -2233,7 +2272,7 @@
 /obj/structure/bed/medical/emergency{
 	dir = 1
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "bxv" = (
 /obj/structure/platform/iron,
@@ -2246,7 +2285,9 @@
 /area/new_sydney/bunker)
 "bxE" = (
 /obj/structure/shipping_container/interdyne,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "bxJ" = (
 /obj/item/kirbyplants/organic/plant8,
@@ -2346,7 +2387,9 @@
 "bBl" = (
 /obj/effect/turf_decal/board_number,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bBn" = (
 /obj/structure/fence{
@@ -2365,7 +2408,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor7"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bBw" = (
 /obj/effect/turf_decal/siding/brown/inner_corner{
@@ -2411,7 +2456,9 @@
 	id = "mining_internal"
 	},
 /obj/machinery/bouldertech/refinery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bDn" = (
 /obj/effect/turf_decal/line/dark_green{
@@ -2439,7 +2486,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bEd" = (
 /obj/effect/turf_decal/line/yellow/line/stripes,
@@ -2474,7 +2523,7 @@
 /turf/open/misc/asteroid,
 /area/new_sydney/coast)
 "bFi" = (
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "bFj" = (
 /obj/effect/turf_decal/line/yellow{
@@ -2560,7 +2609,7 @@
 "bHq" = (
 /obj/effect/turf_decal/box,
 /obj/structure/loot/technical_crate/metal,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "bHy" = (
 /obj/effect/landmark/loot_spawn/information,
@@ -2591,7 +2640,7 @@
 /obj/effect/turf_decal/board_number{
 	dir = 1
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "bJg" = (
 /obj/structure/barricade/sandbags{
@@ -2717,7 +2766,9 @@
 	},
 /obj/structure/rack,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bNi" = (
 /obj/effect/turf_decal/line/dark_green/line/stripes/contrasted,
@@ -2787,7 +2838,9 @@
 /obj/structure/vehicle_light/miningcrawler{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bQs" = (
 /obj/effect/turf_decal/line/yellow{
@@ -2802,7 +2855,7 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "bQF" = (
 /obj/structure/flora/tree/pine/dead3{
@@ -2830,7 +2883,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bRk" = (
 /obj/effect/turf_decal/trimline/dark_red/warning,
@@ -3041,7 +3096,9 @@
 "bYt" = (
 /obj/effect/turf_decal/box,
 /obj/structure/loot/technical_crate,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "bYy" = (
 /turf/closed/indestructible/reinforced,
@@ -3067,7 +3124,9 @@
 /area/new_sydney/village)
 "bZJ" = (
 /obj/structure/sign/warning/engine_safety/directional/south,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "cas" = (
 /obj/effect/turf_decal/siding/wood{
@@ -3231,7 +3290,7 @@
 /area/new_sydney/coast)
 "cft" = (
 /obj/item/pickaxe/drill,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "cfu" = (
 /obj/effect/turf_decal/trimline/yellow/line{
@@ -3289,7 +3348,9 @@
 "ciM" = (
 /obj/effect/turf_decal/box,
 /obj/structure/closet/crate/miningcar,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ciN" = (
 /obj/effect/turf_decal/trimline/yellow/line{
@@ -3329,7 +3390,9 @@
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ckr" = (
 /obj/effect/mob_spawn/corpse/human/tsf/marine,
@@ -3394,7 +3457,9 @@
 	dir = 10
 	},
 /obj/structure/ore_box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "cmS" = (
 /obj/structure/city_prop/streetlamp,
@@ -3441,7 +3506,9 @@
 "com" = (
 /obj/structure/table,
 /obj/item/storage/toolbox/emergency,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "cov" = (
 /obj/item/seeds/apple,
@@ -3454,7 +3521,9 @@
 	dir = 6
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "coE" = (
 /obj/effect/turf_decal/board_number,
@@ -3462,7 +3531,9 @@
 /obj/effect/turf_decal/trimline/brown/line{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "coP" = (
 /obj/effect/decal/cleanable/dirt,
@@ -3498,7 +3569,7 @@
 /area/new_sydney/dark_forest)
 "cqf" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "cqw" = (
 /obj/structure/city_prop/mail_box/open,
@@ -3515,7 +3586,7 @@
 	},
 /obj/structure/vehicle_light/truck_mining,
 /obj/structure/vehicle_light/truck_mining,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "cqZ" = (
 /obj/structure/window/reinforced/spawner/directional/east,
@@ -3607,7 +3678,7 @@
 	dir = 1
 	},
 /obj/item/kirbyplants/organic/plant16,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "cuX" = (
 /obj/effect/turf_decal/line/yellow/line/stripes{
@@ -3655,7 +3726,9 @@
 	dir = 8
 	},
 /obj/effect/decal/trashbags/tree,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "cxv" = (
 /obj/effect/turf_decal/siding/wood,
@@ -3667,7 +3740,9 @@
 "cyd" = (
 /obj/effect/turf_decal/box,
 /obj/structure/loot/technical_crate/small,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "cyf" = (
 /obj/structure/city_prop/streetlamp,
@@ -3720,7 +3795,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "czV" = (
 /obj/effect/turf_decal/box,
@@ -3728,7 +3805,9 @@
 	dir = 1
 	},
 /obj/structure/closet/crate/trashcart/laundry,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "cAk" = (
 /obj/structure/neon_sign/billboard2/south,
@@ -3788,7 +3867,7 @@
 /area/new_sydney/coast)
 "cBF" = (
 /obj/effect/mob_spawn/corpse/human/factory/qm,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "cCd" = (
 /obj/effect/mob_spawn/corpse/human/ussp/ryadovoy,
@@ -3834,7 +3913,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "cCu" = (
 /obj/structure/vehicle_wreck/armoredtruck_blue{
@@ -3863,7 +3942,7 @@
 /obj/structure/chair/sofa/corp/right{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "cCQ" = (
 /obj/structure/bed/medical/anchored,
@@ -3910,7 +3989,7 @@
 /obj/effect/turf_decal/line/blue/line,
 /obj/effect/spawner/random/trash/box,
 /obj/effect/landmark/loot_spawn/ammo,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "cGj" = (
 /obj/effect/turf_decal/line/yellow/anticorner{
@@ -3961,7 +4040,9 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "cHq" = (
 /obj/structure/table,
@@ -4156,7 +4237,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "cMs" = (
 /obj/machinery/light/floor{
@@ -4169,7 +4252,7 @@
 /obj/effect/turf_decal/siding/dark_blue/inner_corner{
 	dir = 8
 	},
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "cMF" = (
 /obj/effect/decal/cleanable/glass,
@@ -4278,7 +4361,9 @@
 	amount = 15;
 	pixel_y = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "cPG" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -4428,7 +4513,7 @@
 /area/new_sydney/coast)
 "cUO" = (
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "cUZ" = (
 /obj/effect/decal/cleanable/blood/old{
@@ -4472,7 +4557,9 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "cWH" = (
 /obj/item/kirbyplants/organic/plant21,
@@ -4486,7 +4573,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "cXf" = (
 /obj/effect/turf_decal/line/yellow/anticorner/contrasted{
@@ -4537,7 +4624,7 @@
 /obj/structure/chair/sofa/corp/left{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "cYx" = (
 /obj/effect/turf_decal/line/yellow/line{
@@ -4550,7 +4637,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "cYN" = (
 /obj/effect/turf_decal/siding/wood{
@@ -4658,7 +4747,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "ddq" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -4821,11 +4912,11 @@
 /turf/open/indestructible/vault,
 /area/new_sydney/coast)
 "dhE" = (
-/obj/effect/turf_decal/siding/dark_blue{
-	dir = 1
+/obj/structure/loot/technical_crate,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
-/turf/open/floor/carpet/executive,
-/area/new_sydney/mine)
+/area/new_sydney/dark_forest/building)
 "dhJ" = (
 /obj/effect/turf_decal/board_number{
 	dir = 8
@@ -4840,7 +4931,9 @@
 	pixel_y = 4;
 	dir = 9
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dhT" = (
 /obj/effect/turf_decal/board_number/six{
@@ -4879,7 +4972,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "diz" = (
 /obj/structure/railing/platform{
@@ -4900,7 +4995,9 @@
 /area/new_sydney/mine)
 "diW" = (
 /obj/structure/city_prop/streetlamp,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "djh" = (
 /obj/effect/turf_decal/board_number,
@@ -4932,7 +5029,9 @@
 /area/new_sydney/building)
 "djB" = (
 /obj/structure/loot/technical_crate/metal/red,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "djO" = (
 /obj/effect/turf_decal/line/yellow/anticorner/contrasted{
@@ -4974,9 +5073,11 @@
 	},
 /area/new_sydney/bunker)
 "dkQ" = (
-/obj/effect/turf_decal/siding/dark_blue,
-/turf/open/floor/pod,
-/area/new_sydney/mine)
+/obj/machinery/light/floor/broken,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
+/area/new_sydney/dark_forest/building)
 "dkY" = (
 /obj/structure/railing/platform,
 /turf/closed/indestructible/wood,
@@ -5003,7 +5104,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 9
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "dmg" = (
 /obj/effect/turf_decal/line/yellow/anticorner/stripes,
@@ -5049,7 +5152,7 @@
 /area/new_sydney/coast/port)
 "dmP" = (
 /obj/structure/aquarium/bioelec_gen,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/village)
 "dmW" = (
 /obj/item/stack/rods,
@@ -5217,7 +5320,9 @@
 /obj/effect/turf_decal/trimline/yellow/corner{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dsl" = (
 /obj/effect/decal/cleanable/dirt,
@@ -5255,7 +5360,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 9
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dte" = (
 /obj/effect/turf_decal/tile/dark_blue/anticorner/contrasted{
@@ -5306,7 +5413,7 @@
 /obj/effect/turf_decal/line/yellow/line/stripes/contrasted{
 	dir = 1
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "dux" = (
 /obj/structure/railing/platform{
@@ -5336,7 +5443,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 6
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dvn" = (
 /obj/effect/decal/cleanable/dirt,
@@ -5413,14 +5522,18 @@
 	dir = 8
 	},
 /obj/structure/decorative/shelf/crates1,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dyK" = (
 /obj/effect/turf_decal/box,
 /obj/effect/turf_decal/siding/yellow/inner_corner{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dyY" = (
 /obj/structure/railing/wooden_fencing{
@@ -5440,7 +5553,9 @@
 /area/new_sydney/village)
 "dzp" = (
 /obj/structure/closet/firecloset,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/dark_forest/building)
 "dzD" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -5643,7 +5758,9 @@
 /area/new_sydney/mine)
 "dHd" = (
 /obj/structure/railing,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dHr" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -5781,7 +5898,9 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dJB" = (
 /obj/structure/table/wood/fancy/cyan,
@@ -5852,7 +5971,7 @@
 "dMI" = (
 /obj/item/stack/sheet/iron,
 /obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "dMJ" = (
 /turf/open/floor/asphalt,
@@ -5884,7 +6003,9 @@
 	dir = 8;
 	id = "mining_internal"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dNL" = (
 /obj/item/trash/chips,
@@ -5962,7 +6083,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 9
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "dQt" = (
 /obj/machinery/light/floor{
@@ -6000,14 +6123,16 @@
 /obj/structure/chair/office{
 	dir = 2
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "dRt" = (
 /obj/effect/turf_decal/board_number{
 	dir = 1
 	},
 /obj/machinery/light/floor/broken,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dRR" = (
 /obj/effect/landmark/loot_spawn/weapon,
@@ -6036,7 +6161,9 @@
 	dir = 10
 	},
 /obj/effect/turf_decal/box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dSO" = (
 /obj/structure/deployable_barricade/metal{
@@ -6047,7 +6174,7 @@
 "dSR" = (
 /obj/effect/turf_decal/board_number,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "dSZ" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -6103,7 +6230,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor4"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "dWe" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -6169,7 +6296,9 @@
 "dXs" = (
 /obj/effect/turf_decal/box,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dXz" = (
 /obj/structure/flora/bush/fullgrass/style_random,
@@ -6190,7 +6319,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "dYk" = (
 /obj/structure/railing/wooden_fencing{
@@ -6281,7 +6412,9 @@
 	},
 /obj/structure/city_prop/pallet,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "dZe" = (
 /obj/machinery/door/firedoor,
@@ -6353,7 +6486,7 @@
 	dir = 1
 	},
 /obj/structure/reagent_dispensers/water_cooler,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "eci" = (
 /obj/effect/turf_decal/box,
@@ -6361,7 +6494,9 @@
 	dir = 8
 	},
 /obj/structure/loot/technical_crate/metal,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ecE" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -6507,7 +6642,7 @@
 "eim" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted,
 /obj/effect/decal/papers/two,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "ein" = (
 /obj/structure/chair/sofa/corp/right{
@@ -6567,7 +6702,7 @@
 	},
 /area/new_sydney/dark_forest)
 "ejE" = (
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "ejF" = (
 /obj/structure/chair/office,
@@ -6719,7 +6854,7 @@
 	dir = 4
 	},
 /obj/machinery/light/floor/broken,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "epF" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -6806,7 +6941,7 @@
 /obj/structure/chair/greyscale{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "esu" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -6840,7 +6975,7 @@
 	},
 /obj/structure/table_frame,
 /obj/item/stack/sheet/iron,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "ets" = (
 /obj/item/stack/sheet/iron,
@@ -6848,7 +6983,7 @@
 /area/new_sydney/dark_forest/radiation_lake2)
 "etG" = (
 /obj/effect/turf_decal/board_number,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "euA" = (
 /obj/effect/decal/cleanable/dirt,
@@ -6878,10 +7013,12 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/coast)
 "ewj" = (
-/obj/effect/turf_decal/trimline/brown/line{
-	dir = 4
+/obj/effect/spawner/structure/window{
+	max_integrity = 50000
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ewu" = (
 /obj/structure/window/reinforced/spawner/directional/south,
@@ -6919,7 +7056,7 @@
 /obj/effect/turf_decal/board_letter{
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "exC" = (
 /obj/effect/decal/cleanable/blood/old{
@@ -6989,7 +7126,7 @@
 "ezH" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "ezK" = (
 /obj/item/kirbyplants/organic/plant12,
@@ -7115,7 +7252,9 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor2"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "eDJ" = (
 /obj/effect/spawner/structure/window/hollow/end{
@@ -7183,7 +7322,7 @@
 /area/new_sydney/military_base)
 "eFD" = (
 /obj/structure/decorative/shelf/crates1,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "eFI" = (
 /obj/structure/fence/corner{
@@ -7230,7 +7369,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "eGv" = (
 /obj/effect/turf_decal/caution/stand_clear{
@@ -7267,7 +7406,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "eHG" = (
 /obj/effect/turf_decal/siding/wood{
@@ -7373,7 +7514,7 @@
 "eLG" = (
 /obj/effect/turf_decal/box,
 /obj/structure/loot/technical_crate/metal,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "eMf" = (
 /obj/effect/turf_decal/trimline/dark_red/line{
@@ -7459,7 +7600,7 @@
 "eRO" = (
 /obj/structure/decorative/shelf,
 /obj/effect/landmark/loot_spawn/food,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "eSO" = (
 /obj/structure/fence{
@@ -7485,7 +7626,9 @@
 /obj/structure/workbench{
 	pixel_y = -10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "eTL" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -7538,7 +7681,7 @@
 "eWD" = (
 /obj/effect/turf_decal/line/yellow/line/stripes/contrasted,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "eWI" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -7554,7 +7697,9 @@
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "eWT" = (
 /obj/effect/mob_spawn/corpse/human/ussp/ryadovoy,
@@ -7586,7 +7731,9 @@
 /area/new_sydney/village)
 "eXQ" = (
 /obj/effect/decal/cleanable/glass/plasma,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "eXV" = (
 /obj/structure/chair/wood{
@@ -7605,7 +7752,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor4"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "eYc" = (
 /obj/effect/light_emitter{
@@ -7719,7 +7868,9 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fbs" = (
 /obj/effect/turf_decal/line/bar/line/contrasted{
@@ -7761,7 +7912,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "fca" = (
 /obj/effect/turf_decal/siding/wood,
@@ -7789,7 +7940,9 @@
 "fcK" = (
 /obj/effect/turf_decal/board_number,
 /obj/effect/turf_decal/trimline/yellow/line,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fcM" = (
 /obj/effect/turf_decal/line/yellow/anticorner{
@@ -7877,14 +8030,18 @@
 	pixel_y = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ffv" = (
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ffD" = (
 /obj/machinery/door/airlock/silver,
@@ -7905,7 +8062,9 @@
 "fgp" = (
 /obj/effect/turf_decal/box,
 /obj/effect/turf_decal/siding/yellow/inner_corner,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fgN" = (
 /turf/open/floor/iron/stairs{
@@ -7944,7 +8103,9 @@
 	dir = 1
 	},
 /obj/machinery/mineral/ore_redemption,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fil" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -8154,7 +8315,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor4"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "fqG" = (
 /obj/effect/turf_decal/caution/stand_clear{
@@ -8184,14 +8345,14 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor7"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "frl" = (
 /obj/structure/statue/heinrich_treisen{
 	pixel_y = 10
 	},
 /obj/structure/platform/titanium,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "frK" = (
 /obj/structure/table/reinforced,
@@ -8259,7 +8420,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "bloodyhands_left"
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "fuc" = (
 /obj/structure/rack/shelf,
@@ -8291,7 +8452,9 @@
 /obj/structure/railing{
 	dir = 10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fuL" = (
 /obj/structure/railing/wooden_fencing{
@@ -8370,7 +8533,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor3"
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "fye" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -8417,7 +8580,9 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fAB" = (
 /obj/effect/decal/cleanable/crayon/x{
@@ -8433,7 +8598,7 @@
 /area/new_sydney/coast)
 "fAF" = (
 /obj/item/pickaxe,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "fAN" = (
 /obj/structure/railing/unbreakable{
@@ -8482,7 +8647,9 @@
 /obj/structure/railing,
 /obj/effect/turf_decal/box,
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fCp" = (
 /obj/effect/turf_decal/board_number{
@@ -8491,7 +8658,9 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fCq" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -8504,7 +8673,7 @@
 /obj/item/disk/computer/command,
 /obj/item/clothing/accessory/medal/gold,
 /obj/structure/sign/clock/directional/west,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "fCY" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -8558,7 +8727,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "fEQ" = (
 /obj/effect/turf_decal/siding/wood,
@@ -8669,7 +8838,9 @@
 	dir = 4
 	},
 /mob/living/basic/bot/mulebot,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fKw" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted,
@@ -8681,7 +8852,7 @@
 "fKC" = (
 /obj/effect/decal/cleanable/glass,
 /obj/effect/mob_spawn/corpse/human/ussp/ryadovoy,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "fKG" = (
 /obj/effect/turf_decal/arrows{
@@ -8825,7 +8996,6 @@
 /area/new_sydney/coast)
 "fQd" = (
 /obj/machinery/door/password,
-/turf/open/floor/pod,
 /area/new_sydney/dark_forest/building)
 "fQk" = (
 /obj/effect/turf_decal/line/yellow/anticorner{
@@ -8925,7 +9095,9 @@
 /area/new_sydney/mine)
 "fSO" = (
 /obj/structure/flatpack_cart,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fSU" = (
 /obj/effect/decal/cleanable/dirt,
@@ -8970,7 +9142,9 @@
 	pixel_y = 4;
 	dir = 6
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fTp" = (
 /obj/effect/light_emitter{
@@ -9025,7 +9199,9 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fUo" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted,
@@ -9043,7 +9219,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "fVc" = (
 /obj/effect/landmark/loot_spawn/treasure,
@@ -9063,7 +9239,7 @@
 "fVm" = (
 /obj/structure/table,
 /obj/effect/landmark/loot_spawn/ammo,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "fVv" = (
 /obj/structure/sink{
@@ -9088,14 +9264,18 @@
 	dir = 8
 	},
 /obj/structure/shipping_container/ntfid/defaced,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fWq" = (
 /obj/structure/city_prop/pallet,
 /obj/effect/turf_decal/board_number{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "fWX" = (
 /obj/item/bodypart/arm/right,
@@ -9132,7 +9312,7 @@
 /area/new_sydney/building)
 "fYL" = (
 /obj/item/kirbyplants/organic/plant19,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "fYU" = (
 /obj/effect/turf_decal/board_number{
@@ -9152,7 +9332,9 @@
 "fYZ" = (
 /obj/effect/turf_decal/board_number,
 /obj/effect/landmark/loot_spawn/treasure,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "fZe" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -9170,7 +9352,9 @@
 /area/new_sydney/coast)
 "fZn" = (
 /obj/structure/vehicle_light/cargo,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "fZx" = (
 /obj/structure/flora/rock/pile/style_random,
@@ -9301,7 +9485,7 @@
 /area/new_sydney/mine)
 "gdT" = (
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/village)
 "gep" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -9360,7 +9544,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor4"
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "ggH" = (
 /obj/effect/mob_spawn/corpse/human/ussp/spetsnaz,
@@ -9458,7 +9642,7 @@
 /area/new_sydney/coast)
 "gkv" = (
 /obj/machinery/seed_extractor,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/village)
 "gld" = (
 /obj/structure/deployable_barricade/metal{
@@ -9526,7 +9710,9 @@
 /obj/effect/turf_decal/box,
 /obj/effect/turf_decal/siding/yellow,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "gov" = (
 /obj/effect/turf_decal/line/yellow/anticorner{
@@ -9616,7 +9802,7 @@
 	dir = 1
 	},
 /obj/effect/landmark/loot_spawn/weapon,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "grI" = (
 /obj/structure/decorative/shelf/soda,
@@ -9659,7 +9845,7 @@
 /area/new_sydney/coast)
 "gtk" = (
 /obj/structure/vehicle_light/cargo/trailer,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "gts" = (
 /obj/structure/deployable_barricade/metal{
@@ -9753,7 +9939,9 @@
 /obj/machinery/power/fuel_generator{
 	pixel_x = -2
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "gwP" = (
 /obj/effect/turf_decal/siding/wood{
@@ -9781,7 +9969,7 @@
 	dir = 4;
 	max_integrity = 50000
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "gxM" = (
 /obj/effect/turf_decal/line/yellow/line{
@@ -9803,7 +9991,9 @@
 	},
 /obj/effect/turf_decal/delivery,
 /obj/effect/decal/cleanable/generic,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "gyB" = (
 /obj/structure/loot/trash/garbage/dumpster,
@@ -9834,7 +10024,9 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 4
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "gzT" = (
 /obj/structure/vehicle_light/suv2,
@@ -9849,7 +10041,7 @@
 	dir = 8
 	},
 /obj/effect/landmark/loot_spawn/weapon,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "gAk" = (
 /obj/effect/turf_decal/siding/wood{
@@ -9888,7 +10080,7 @@
 "gBt" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "gBF" = (
 /obj/effect/turf_decal/line/blue/anticorner/contrasted,
@@ -9971,7 +10163,7 @@
 "gEJ" = (
 /obj/effect/turf_decal/board_letter,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/building)
 "gET" = (
 /obj/effect/light_emitter{
@@ -10044,7 +10236,9 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "gGk" = (
 /obj/structure/minecart_rail,
@@ -10361,7 +10555,7 @@
 /area/new_sydney/military_base)
 "gNT" = (
 /obj/item/reagent_containers/spray/pestspray,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/village)
 "gOa" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -10396,7 +10590,9 @@
 /obj/machinery/light/floor{
 	nightshift_light_color = "#87CEFA"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "gPF" = (
 /obj/structure/chair/comfy,
@@ -10410,7 +10606,7 @@
 /turf/open/misc/asteroid,
 /area/new_sydney/coast)
 "gPO" = (
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/building)
 "gQd" = (
 /obj/structure/table_frame,
@@ -10419,14 +10615,13 @@
 /area/new_sydney/building)
 "gQe" = (
 /obj/machinery/door/airlock/mining/glass,
-/turf/open/floor/pod,
 /area/new_sydney/mine)
 "gQi" = (
 /obj/effect/turf_decal/siding/dark_blue{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "gQs" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -10442,7 +10637,9 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "gQV" = (
 /obj/item/cultivator/rake,
@@ -10472,7 +10669,7 @@
 /area/new_sydney/bunker)
 "gSd" = (
 /obj/structure/mecha_wreckage/ripley,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "gSC" = (
 /obj/structure/loot/file_cabinet/small,
@@ -10527,7 +10724,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "gUu" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -10563,7 +10762,9 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor7"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "gVz" = (
 /obj/structure/flora/bush/flowers_pp,
@@ -10697,12 +10898,14 @@
 	dir = 8;
 	pixel_x = -15
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "gZW" = (
 /obj/effect/mapping_helpers/broken_floor,
 /obj/effect/landmark/loot_spawn/weapon,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "haz" = (
 /obj/effect/turf_decal/siding/brown{
@@ -10831,7 +11034,9 @@
 /obj/structure/rack,
 /obj/effect/turf_decal/box,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "hgl" = (
 /obj/effect/turf_decal/trimline/yellow/line,
@@ -10898,7 +11103,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "hhT" = (
 /obj/effect/landmark/radiation_lake2_grav,
@@ -10914,7 +11121,7 @@
 /obj/structure/vehicle_light/truck_mining{
 	dir = 1
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "hiK" = (
 /obj/effect/turf_decal/trimline/yellow/corner,
@@ -10968,14 +11175,14 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/trimline/dark_blue/line,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "hkY" = (
 /obj/effect/turf_decal/trimline/dark_blue/tram{
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "hlm" = (
 /turf/closed/indestructible/reinforced,
@@ -11033,12 +11240,16 @@
 	dir = 8
 	},
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "hns" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/mecha_wreckage/clarke,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "hnG" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -11065,7 +11276,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "hoc" = (
 /obj/structure/chair/sofa/bench/right{
@@ -11273,7 +11486,9 @@
 	},
 /obj/effect/turf_decal/box,
 /obj/effect/decal/trashbags/five,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "huJ" = (
 /obj/effect/spawner/structure/window{
@@ -11319,7 +11534,9 @@
 /obj/effect/turf_decal/delivery,
 /obj/effect/turf_decal/siding/yellow,
 /obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "hwO" = (
 /obj/effect/turf_decal/trimline/dark_blue,
@@ -11435,7 +11652,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "hBN" = (
 /obj/effect/landmark/loot_spawn/magma_artifact,
@@ -11485,7 +11704,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor7"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "hEK" = (
 /obj/item/rack_parts,
@@ -11617,7 +11838,7 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/village)
 "hHE" = (
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/village)
 "hHL" = (
 /obj/item/storage/cans/sixbeer,
@@ -11654,14 +11875,16 @@
 /area/new_sydney/dark_forest/building)
 "hIJ" = (
 /obj/effect/turf_decal/box,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "hJe" = (
 /obj/effect/turf_decal/board_number{
 	dir = 5
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "hJZ" = (
 /obj/effect/turf_decal/trimline/yellow/line{
@@ -11718,7 +11941,7 @@
 /obj/effect/turf_decal/box,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "hLK" = (
 /obj/structure/barricade/sandbags{
@@ -11891,7 +12114,9 @@
 	dir = 8
 	},
 /obj/structure/loot/technical_crate,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "hSK" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -11924,7 +12149,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "hUR" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -11988,7 +12215,7 @@
 /area/new_sydney/building)
 "hXJ" = (
 /obj/structure/loot/technical_crate/metal,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "hXT" = (
 /obj/effect/turf_decal/siding/wood{
@@ -12007,7 +12234,7 @@
 	dir = 1
 	},
 /obj/effect/landmark/loot_spawn/medical,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "hYk" = (
 /obj/structure/flora/bush/fullgrass/style_random,
@@ -12026,7 +12253,7 @@
 /obj/structure/vehicle_light/cargo{
 	dir = 1
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "hYG" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -12043,7 +12270,9 @@
 	dir = 6
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "hYJ" = (
 /obj/item/trash/shrimp_chips,
@@ -12051,7 +12280,7 @@
 /area/new_sydney/dark_forest/radiation_lake)
 "hYN" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "hYO" = (
 /obj/machinery/door/poddoor/shutters{
@@ -12062,7 +12291,9 @@
 "hYS" = (
 /obj/structure/decorative/shelf,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/dark_forest/building)
 "hYU" = (
 /obj/effect/turf_decal/line/brown/anticorner/contrasted,
@@ -12105,7 +12336,9 @@
 	dir = 5
 	},
 /obj/structure/closet/crate/miningcar,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "hZl" = (
 /obj/structure/minecart_rail{
@@ -12131,7 +12364,9 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ibq" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -12176,7 +12411,9 @@
 	dir = 6
 	},
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "idE" = (
 /obj/effect/turf_decal/board_number,
@@ -12184,7 +12421,9 @@
 	pixel_y = 4
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "idM" = (
 /turf/open/floor/grass/lavaland{
@@ -12302,7 +12541,6 @@
 /area/new_sydney/dark_forest)
 "ihB" = (
 /obj/machinery/door/airlock/service,
-/turf/open/floor/pod,
 /area/new_sydney/dark_forest)
 "ihD" = (
 /obj/effect/decal/cleanable/dirt,
@@ -12316,7 +12554,9 @@
 "iin" = (
 /obj/structure/city_prop/pallet,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "iiI" = (
 /obj/structure/chair/comfy/corp,
@@ -12580,7 +12820,7 @@
 "iqq" = (
 /obj/machinery/light/floor/broken,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "iqt" = (
 /obj/machinery/shower/directional/west,
@@ -12625,7 +12865,7 @@
 /obj/effect/turf_decal/board_letter{
 	dir = 6
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "isX" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -12675,7 +12915,9 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/blood/oil,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "iul" = (
 /turf/open/floor/iron/dark/small,
@@ -12683,12 +12925,14 @@
 "iuB" = (
 /obj/effect/turf_decal/box,
 /obj/structure/ore_box,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "iuK" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "iuM" = (
 /obj/machinery/vending/trader/visitor,
@@ -12701,7 +12945,7 @@
 /obj/structure/vehicle_prop/humvee/med{
 	dir = 8
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "ivc" = (
 /mob/living/basic/bigot,
@@ -12773,7 +13017,7 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "iyO" = (
 /obj/structure/decorative/shelf,
@@ -12802,7 +13046,9 @@
 /obj/effect/turf_decal/siding/yellow/inner_corner{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "iAP" = (
 /obj/effect/turf_decal/line/blue/anticorner/contrasted{
@@ -12875,7 +13121,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "iFa" = (
 /obj/effect/turf_decal/siding/brown{
@@ -12974,7 +13222,7 @@
 "iJt" = (
 /obj/structure/table/glass,
 /obj/effect/landmark/loot_spawn/treasure,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "iJw" = (
 /obj/effect/turf_decal/board_number{
@@ -12986,7 +13234,9 @@
 /obj/structure/workbench{
 	pixel_y = -10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "iJG" = (
 /obj/structure/table,
@@ -13022,7 +13272,9 @@
 /area/new_sydney/bunker)
 "iKX" = (
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "iLn" = (
 /turf/open/floor/iron/dark/textured_corner,
@@ -13046,14 +13298,16 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor7"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "iLS" = (
 /obj/effect/turf_decal/siding/yellow{
 	dir = 4
 	},
 /obj/item/stack/sheet/mineral/wood,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "iLU" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted{
@@ -13124,7 +13378,7 @@
 /obj/structure/vehicle_light/miningcrawler{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "iPH" = (
 /obj/structure/table/reinforced/rglass,
@@ -13307,7 +13561,9 @@
 	dir = 9
 	},
 /obj/structure/loot/trash/garbage/dumpster,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "iWX" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -13476,7 +13732,9 @@
 	},
 /obj/effect/turf_decal/box,
 /obj/structure/closet/crate/secure/cargo,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "jcX" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -13527,7 +13785,7 @@
 "jeC" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted,
 /obj/effect/mob_spawn/corpse/human/factory/guard,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "jeF" = (
 /obj/structure/flora/rock/pile/style_random,
@@ -13578,7 +13836,7 @@
 /obj/effect/turf_decal/board_number{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "jgB" = (
 /obj/structure/table,
@@ -13687,7 +13945,7 @@
 /obj/effect/decal/cleanable/cobweb/cobweb2{
 	icon_state = "cobweb1"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "jjA" = (
 /obj/effect/landmark/loot_spawn/treasure,
@@ -13705,7 +13963,9 @@
 "jjV" = (
 /obj/effect/turf_decal/board_number,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "jkw" = (
 /obj/effect/turf_decal/siding/wood{
@@ -13749,7 +14009,9 @@
 /area/new_sydney/dark_forest/building)
 "jmz" = (
 /obj/effect/turf_decal/siding/yellow,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "jmG" = (
 /obj/structure/chair/comfy/brown,
@@ -13801,7 +14063,7 @@
 "jnV" = (
 /obj/structure/railing,
 /obj/machinery/scanner_gate/preset_guns,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "jnZ" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -13831,7 +14093,9 @@
 	dir = 6
 	},
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "joS" = (
 /obj/structure/chair/sofa/right/brown,
@@ -13922,7 +14186,9 @@
 /obj/structure/rack,
 /obj/machinery/light/broken/directional/north,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "jsl" = (
 /obj/effect/turf_decal/line/yellow/line{
@@ -13953,7 +14219,7 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 8
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "jtt" = (
 /obj/item/stack/sheet/mineral/wood,
@@ -14045,7 +14311,7 @@
 /area/new_sydney/bunker)
 "jwG" = (
 /obj/machinery/light/floor/broken,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "jxI" = (
 /obj/structure/railing/platform/corner{
@@ -14063,7 +14329,7 @@
 /area/new_sydney/building)
 "jyb" = (
 /obj/effect/mob_spawn/corpse/human/ussp/officer,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "jye" = (
 /obj/structure/billboard/fortune_telling,
@@ -14083,7 +14349,6 @@
 /area/new_sydney/dark_forest)
 "jyL" = (
 /obj/machinery/door/airlock/grunge,
-/turf/open/floor/pod,
 /area/new_sydney/dark_forest)
 "jyN" = (
 /obj/effect/turf_decal/siding/wood{
@@ -14146,7 +14411,9 @@
 "jCB" = (
 /obj/structure/decorative/shelf,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "jCG" = (
 /obj/structure/window/reinforced/spawner/directional/west,
@@ -14248,7 +14515,7 @@
 /obj/machinery/light/floor{
 	nightshift_light_color = "#87CEFA"
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "jFL" = (
 /obj/effect/decal/cleanable/dirt,
@@ -14261,7 +14528,9 @@
 	dir = 9
 	},
 /obj/structure/decorative/shelf/crates,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "jGv" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -14281,7 +14550,7 @@
 /obj/item/shard{
 	icon_state = "medium"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "jHs" = (
 /obj/effect/turf_decal/line/yellow/anticorner{
@@ -14290,7 +14559,9 @@
 /obj/effect/turf_decal/line/yellow/anticorner{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "jHu" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted,
@@ -14303,7 +14574,6 @@
 /area/new_sydney/coast)
 "jHz" = (
 /obj/machinery/door/password/keycard/forest_bunker,
-/turf/open/floor/pod,
 /area/new_sydney/dark_forest/building)
 "jIq" = (
 /obj/effect/light_emitter{
@@ -14355,7 +14625,7 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 4
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "jLb" = (
 /obj/structure/platform/iron,
@@ -14399,7 +14669,9 @@
 /area/new_sydney/coast)
 "jOj" = (
 /obj/effect/landmark/loot_spawn/weapon,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "jOv" = (
 /obj/effect/turf_decal/board_number{
@@ -14410,7 +14682,9 @@
 	},
 /obj/effect/turf_decal/box,
 /obj/structure/closet/crate/secure/owned,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "jOy" = (
 /obj/effect/turf_decal/trimline/brown,
@@ -14514,7 +14788,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "gib6-overlay"
 	},
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "jSw" = (
 /obj/effect/anomaly/pyro/pyro_zone,
@@ -14624,7 +14898,9 @@
 /area/new_sydney/coast)
 "jVC" = (
 /obj/structure/sign/warning/directional/north,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "jVQ" = (
 /obj/effect/turf_decal/trimline/yellow/line{
@@ -14634,7 +14910,7 @@
 /area/new_sydney/coast/port)
 "jVT" = (
 /obj/machinery/hydroponics/constructable,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/village)
 "jWn" = (
 /obj/effect/landmark/forest_mutant_spawn/sand_spider,
@@ -14711,7 +14987,7 @@
 	nightshift_light_color = "#87CEFA"
 	},
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "kaf" = (
 /obj/effect/turf_decal/line/dark_green/line/contrasted,
@@ -14778,7 +15054,7 @@
 	dir = 1
 	},
 /obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "kcF" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -14861,7 +15137,7 @@
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 4
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "kfH" = (
 /obj/effect/turf_decal/line/bar/line/contrasted{
@@ -14886,7 +15162,7 @@
 /obj/effect/turf_decal/board_number{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "kgz" = (
 /obj/item/kirbyplants/organic/plant6,
@@ -14955,7 +15231,9 @@
 	id = "mining_internal"
 	},
 /obj/machinery/brm,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "khA" = (
 /obj/effect/spawner/random/trash/crushed_can,
@@ -14970,12 +15248,14 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "bubblegumfoot"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "kip" = (
 /obj/effect/decal/cleanable/glass,
 /obj/machinery/light/floor/broken,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "kiE" = (
 /obj/item/paper/crumpled/bloody,
@@ -15111,7 +15391,9 @@
 "kpv" = (
 /obj/effect/turf_decal/box,
 /obj/structure/loot/technical_crate/metal/red,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "kpz" = (
 /obj/item/toy/beach_ball,
@@ -15130,7 +15412,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "kpJ" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -15175,7 +15459,9 @@
 /area/new_sydney/bunker)
 "krz" = (
 /obj/structure/closet/body_bag,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "krD" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -15253,7 +15539,9 @@
 /obj/structure/vehicle_light/cargo{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "ktx" = (
 /obj/effect/turf_decal/trimline/yellow/line,
@@ -15319,7 +15607,7 @@
 /area/new_sydney/dark_forest)
 "kuH" = (
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "kuI" = (
 /obj/effect/turf_decal/siding/wood{
@@ -15373,7 +15661,7 @@
 /obj/structure/table,
 /obj/effect/turf_decal/board_number,
 /obj/effect/landmark/loot_spawn/treasure,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "kwt" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -15411,7 +15699,7 @@
 	dir = 8
 	},
 /obj/machinery/light/floor/broken,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "kwP" = (
 /obj/structure/vehicle_prop/humvee/wreck,
@@ -15468,7 +15756,9 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "kyl" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted{
@@ -15553,7 +15843,7 @@
 /obj/effect/spawner/structure/flipped_table{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "kAX" = (
 /obj/structure/fence{
@@ -15640,7 +15930,7 @@
 /area/new_sydney/coast)
 "kDg" = (
 /obj/machinery/light/floor/broken,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "kDj" = (
 /obj/effect/decal/trashbags/four,
@@ -15753,7 +16043,9 @@
 /obj/machinery/power/fuel_generator{
 	pixel_y = -3
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "kGo" = (
 /obj/effect/decal/cleanable/crayon/x{
@@ -15821,7 +16113,7 @@
 "kHU" = (
 /obj/effect/turf_decal/box,
 /obj/effect/spawner/random/trash/box,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "kHV" = (
 /obj/structure/railing/platform{
@@ -15978,7 +16270,9 @@
 	dir = 4
 	},
 /obj/structure/loot/technical_crate/metal/red,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "kMF" = (
 /obj/structure/hedge,
@@ -15996,7 +16290,7 @@
 /area/new_sydney/coast/port)
 "kNF" = (
 /obj/effect/mob_spawn/corpse/human/factory/guard,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "kNI" = (
 /obj/machinery/oven/range,
@@ -16057,7 +16351,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "kOM" = (
 /obj/item/stack/sheet/mineral/wood,
@@ -16098,7 +16394,9 @@
 	dir = 6
 	},
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "kQb" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -16139,7 +16437,9 @@
 	pixel_y = 8;
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "kRk" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -16153,7 +16453,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "kRH" = (
 /obj/effect/landmark/loot_spawn/weapon,
@@ -16177,7 +16479,7 @@
 /obj/effect/spawner/structure/flipped_table{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "kSt" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted,
@@ -16229,7 +16531,9 @@
 /area/new_sydney/dark_forest/building)
 "kUj" = (
 /obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "kUn" = (
 /obj/structure/window/fulltile,
@@ -16375,7 +16679,9 @@
 /obj/effect/turf_decal/box,
 /obj/effect/decal/cleanable/glass,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "lah" = (
 /obj/structure/vehicle_wreck/armoredtruck_teal{
@@ -16401,7 +16707,9 @@
 	dir = 8
 	},
 /obj/structure/loot/technical_crate/metal,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "laV" = (
 /obj/machinery/door/airlock/service,
@@ -16451,7 +16759,7 @@
 /area/new_sydney/village)
 "lcJ" = (
 /obj/effect/turf_decal/board_letter,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/building)
 "lcW" = (
 /obj/structure/closet/body_bag,
@@ -16563,7 +16871,9 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "liq" = (
 /obj/effect/turf_decal/trimline/brown/line{
@@ -16578,7 +16888,7 @@
 /obj/machinery/light/floor{
 	nightshift_light_color = "#87CEFA"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "liH" = (
 /turf/closed/mineral/iron{
@@ -16589,7 +16899,7 @@
 /obj/effect/turf_decal/board_number{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "ljp" = (
 /obj/effect/decal/cleanable/dirt,
@@ -16680,7 +16990,6 @@
 /area/new_sydney/building)
 "lmb" = (
 /obj/machinery/door/password/keycard/mine_exit,
-/turf/open/floor/pod,
 /area/new_sydney/mine)
 "lmK" = (
 /obj/effect/turf_decal/line/blue/line/stripes/contrasted{
@@ -16767,7 +17076,9 @@
 "lpV" = (
 /obj/structure/sign/poster/official/here_for_your_safety/directional/north,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "lqh" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -16830,7 +17141,7 @@
 /obj/effect/turf_decal/line/blue/line{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "lsA" = (
 /obj/structure/musician/piano,
@@ -16895,7 +17206,9 @@
 /obj/structure/railing{
 	pixel_y = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "luO" = (
 /obj/effect/turf_decal/line/brown/line/contrasted{
@@ -16987,7 +17300,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "lyx" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -17061,7 +17376,9 @@
 /area/new_sydney/bunker)
 "lAl" = (
 /obj/effect/decal/cleanable/generic,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "lAr" = (
 /obj/effect/turf_decal/siding/wood{
@@ -17200,7 +17517,9 @@
 /area/new_sydney/bunker)
 "lFj" = (
 /obj/machinery/power/port_gen/pacman,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/dark_forest/building)
 "lFt" = (
 /obj/structure/table,
@@ -17221,7 +17540,7 @@
 "lFZ" = (
 /obj/effect/turf_decal/siding/dark_blue,
 /obj/effect/decal/papers/two,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "lGd" = (
 /obj/effect/turf_decal/board_number,
@@ -17230,7 +17549,9 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/forest_mutant_spawn/faithless,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "lGf" = (
 /obj/effect/turf_decal/line/yellow/line,
@@ -17324,7 +17645,9 @@
 	dir = 4
 	},
 /obj/structure/rack,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "lKY" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -17389,7 +17712,9 @@
 	},
 /obj/effect/turf_decal/delivery,
 /obj/effect/decal/trashbags,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "lOo" = (
 /obj/effect/turf_decal/siding/brown{
@@ -17563,7 +17888,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor5"
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "lUv" = (
 /obj/effect/turf_decal/siding/dark{
@@ -17589,7 +17914,6 @@
 /area/new_sydney/mine)
 "lVc" = (
 /obj/machinery/door/airlock/grunge,
-/turf/open/floor/pod,
 /area/new_sydney/mine)
 "lVj" = (
 /obj/structure/city_prop/streetlamp/dmg,
@@ -17704,7 +18028,9 @@
 /area/new_sydney/coast)
 "mbz" = (
 /obj/effect/decal/remains/human,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "mbC" = (
 /obj/effect/turf_decal/board_number{
@@ -17852,7 +18178,9 @@
 /obj/structure/bed/medical/emergency{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mgZ" = (
 /obj/structure/broken_flooring/pile/directional/north,
@@ -17915,7 +18243,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "miJ" = (
 /obj/effect/turf_decal/delivery,
@@ -17923,7 +18251,9 @@
 	dir = 6
 	},
 /obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "miX" = (
 /obj/effect/light_emitter{
@@ -17984,7 +18314,7 @@
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 8
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "mks" = (
 /obj/effect/turf_decal/siding/brown{
@@ -18055,11 +18385,13 @@
 	dir = 8
 	},
 /obj/machinery/light/floor/broken,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "mmx" = (
 /obj/machinery/mineral/processing_unit,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mmM" = (
 /obj/structure/table/glass,
@@ -18075,7 +18407,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "mni" = (
 /obj/structure/vehicle_light/suv1,
@@ -18119,7 +18451,7 @@
 /area/new_sydney/dark_forest)
 "moL" = (
 /obj/structure/vehicle_light/truck_mining,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "mpc" = (
 /obj/effect/decal/cleanable/dirt,
@@ -18136,13 +18468,15 @@
 	pixel_y = 4;
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mpq" = (
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 1
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "mpr" = (
 /obj/structure/flora/bush/fullgrass/style_random,
@@ -18227,7 +18561,7 @@
 	dir = 1
 	},
 /obj/machinery/recharger,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "msJ" = (
 /obj/effect/turf_decal/board_number{
@@ -18236,7 +18570,9 @@
 /obj/machinery/light/floor{
 	nightshift_light_color = "#87CEFA"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "msX" = (
 /obj/structure/table_frame,
@@ -18253,20 +18589,21 @@
 /obj/machinery/door/poddoor/shutters{
 	max_integrity = 50000
 	},
-/turf/open/floor/pod,
 /area/new_sydney/mine)
 "mtB" = (
 /obj/effect/mob_spawn/corpse/human/factory/qm,
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor3"
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "mtI" = (
 /obj/structure/railing,
 /obj/machinery/light/floor/broken,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mtT" = (
 /obj/structure/flora/rock/pile/style_random,
@@ -18316,7 +18653,7 @@
 "mvL" = (
 /obj/item/chair,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "mvO" = (
 /obj/structure/vehicle_wreck/ambulance{
@@ -18400,7 +18737,9 @@
 	pixel_y = 4
 	},
 /obj/structure/plasticflaps,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mzx" = (
 /obj/effect/turf_decal/line/bar/line/stripes/contrasted,
@@ -18482,7 +18821,9 @@
 /area/new_sydney/building)
 "mCP" = (
 /obj/structure/ore_box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "mDj" = (
 /obj/vehicle/ridden/janicart,
@@ -18560,7 +18901,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "drip5"
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "mFp" = (
 /obj/effect/turf_decal/line/brown/anticorner/contrasted{
@@ -18613,7 +18954,6 @@
 /area/new_sydney/dark_forest)
 "mGG" = (
 /obj/machinery/door/airlock/security/glass,
-/turf/open/floor/pod,
 /area/new_sydney/mine)
 "mGO" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -18637,7 +18977,9 @@
 /area/new_sydney/coast)
 "mHI" = (
 /obj/structure/decorative/shelf/crates,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mHL" = (
 /obj/effect/turf_decal/line/yellow{
@@ -18706,7 +19048,9 @@
 	id = "mining_internal"
 	},
 /obj/structure/plasticflaps,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mKn" = (
 /obj/effect/spawner/random/trash/box,
@@ -18758,7 +19102,7 @@
 	dir = 8;
 	pixel_y = -45
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "mNA" = (
 /obj/structure/railing/platform{
@@ -18778,7 +19122,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mNP" = (
 /obj/effect/landmark/loot_spawn/clothing,
@@ -18791,7 +19137,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "mNS" = (
 /obj/effect/turf_decal/siding/wood{
@@ -18846,7 +19194,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 6
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mPz" = (
 /obj/structure/railing/wooden_fencing/gate{
@@ -18902,7 +19252,9 @@
 /area/new_sydney/dark_forest)
 "mQX" = (
 /obj/structure/minecart_rail/railbreak,
-/turf/open/floor/plating,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "mRn" = (
 /obj/effect/landmark/forest_mutant_spawn/killer,
@@ -18921,7 +19273,7 @@
 /obj/structure/vehicle_light/cargo{
 	dir = 4
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "mRI" = (
 /obj/structure/table/reinforced,
@@ -19041,7 +19393,6 @@
 /obj/machinery/door/poddoor/shutters{
 	max_integrity = 50000
 	},
-/turf/open/floor/pod,
 /area/new_sydney/dark_forest)
 "mWX" = (
 /obj/structure/railing/wooden_fencing{
@@ -19070,7 +19421,9 @@
 /obj/structure/chair/sofa/bench/solo{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mXt" = (
 /obj/structure/chair/plastic{
@@ -19128,7 +19481,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor4"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mZi" = (
 /obj/effect/turf_decal/line/brown/line/contrasted{
@@ -19144,7 +19499,9 @@
 /area/new_sydney/bunker)
 "mZC" = (
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "mZD" = (
 /obj/effect/decal/cleanable/dirt,
@@ -19346,7 +19703,7 @@
 "ngd" = (
 /obj/effect/mapping_helpers/broken_floor,
 /obj/machinery/light/floor/broken,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "ngm" = (
 /obj/effect/turf_decal/siding/wood{
@@ -19366,7 +19723,9 @@
 /obj/structure/railing,
 /obj/structure/tank_dispenser/oxygen,
 /obj/effect/turf_decal/box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ngC" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -19391,7 +19750,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "nhe" = (
 /obj/structure/window/fulltile,
@@ -19532,7 +19893,7 @@
 /area/new_sydney/village)
 "noB" = (
 /obj/item/reagent_containers/cup/watering_can,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/village)
 "noJ" = (
 /obj/structure/deployable_barricade/metal/plasteel,
@@ -19601,7 +19962,7 @@
 /area/new_sydney/dark_forest/building)
 "nrN" = (
 /obj/effect/turf_decal/line/dark_blue/line/stripes,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "nsX" = (
 /obj/structure/decorative/shelf,
@@ -19609,7 +19970,9 @@
 	dir = 9
 	},
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ntb" = (
 /obj/effect/decal/cleanable/blood/old{
@@ -19675,7 +20038,9 @@
 /area/new_sydney/coast)
 "nxj" = (
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "nxv" = (
 /obj/structure/city_prop/camp_fire,
@@ -19712,7 +20077,9 @@
 	dir = 4;
 	pixel_x = 15
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "nyR" = (
 /obj/effect/turf_decal/board_number{
@@ -19824,7 +20191,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "nCc" = (
 /turf/open/floor/iron/dark/smooth_corner,
@@ -19888,7 +20257,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor2"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "nDE" = (
 /obj/structure/railing/wooden_fencing{
@@ -19949,7 +20320,7 @@
 /area/new_sydney/bunker)
 "nGd" = (
 /obj/effect/turf_decal/trimline/dark_blue/line,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "nGl" = (
 /obj/structure/chair/office/light{
@@ -20050,7 +20421,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "nJL" = (
 /obj/effect/turf_decal/trimline/yellow/line{
@@ -20097,7 +20470,7 @@
 "nLc" = (
 /obj/machinery/light/floor/broken,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "nLh" = (
 /obj/machinery/light/floor/broken,
@@ -20209,7 +20582,9 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "nSc" = (
 /obj/effect/decal/cleanable/dirt,
@@ -20509,7 +20884,7 @@
 "ocX" = (
 /obj/effect/turf_decal/trimline/dark_blue/line,
 /obj/structure/hedge,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "odd" = (
 /obj/item/statuebust{
@@ -20530,7 +20905,9 @@
 	},
 /obj/structure/sign/poster/official/mining/directional/east,
 /obj/structure/tank_dispenser/oxygen,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "oes" = (
 /obj/structure/decorative/shelf/milk,
@@ -20707,7 +21084,9 @@
 /area/new_sydney/dark_forest)
 "okN" = (
 /obj/effect/landmark/loot_spawn/medical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "olq" = (
 /obj/structure/chair/office{
@@ -20834,11 +21213,13 @@
 "opB" = (
 /obj/effect/turf_decal/siding/yellow,
 /obj/structure/ore_box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "opE" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "opR" = (
 /obj/effect/decal/cleanable/cobweb/cobweb2,
@@ -21080,7 +21461,9 @@
 /obj/effect/turf_decal/siding/yellow/inner_corner{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "oAc" = (
 /obj/structure/chair/wood/wings{
@@ -21091,10 +21474,6 @@
 	},
 /turf/open/floor/carpet,
 /area/new_sydney/building)
-"oAL" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/carpet/executive,
-/area/new_sydney/mine)
 "oBc" = (
 /obj/machinery/door/poddoor/shutters{
 	dir = 8;
@@ -21139,7 +21518,7 @@
 /area/new_sydney/village)
 "oDc" = (
 /obj/structure/vehicle_light/miningcrawler,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "oDo" = (
 /obj/effect/turf_decal/trimline/dark_green/warning{
@@ -21270,7 +21649,9 @@
 	},
 /obj/structure/decorative/shelf,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "oHx" = (
 /turf/open/floor/iron/stairs,
@@ -21280,7 +21661,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/trimline/dark_blue/line,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "oHW" = (
 /obj/effect/decal/cleanable/crayon/x{
@@ -21330,7 +21711,7 @@
 	dir = 8
 	},
 /obj/structure/city_prop/filing_cabinet/open,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "oKi" = (
 /obj/structure/table/wood/fancy/cyan,
@@ -21346,7 +21727,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "oKq" = (
 /obj/effect/turf_decal/line/brown/line/contrasted{
@@ -21371,7 +21752,7 @@
 /area/new_sydney/village)
 "oLg" = (
 /obj/structure/decorative/shelf/crates,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "oLm" = (
 /obj/machinery/door/poddoor/shutters{
@@ -21442,7 +21823,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "oMX" = (
 /obj/machinery/shower/directional/west,
@@ -21468,7 +21849,9 @@
 /area/new_sydney/coast)
 "oNQ" = (
 /obj/structure/vehicle_light/cargo/trailer,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "oOw" = (
 /obj/structure/table/glass,
@@ -21479,7 +21862,9 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor4"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "oPj" = (
 /obj/effect/turf_decal/board_number,
@@ -21498,7 +21883,7 @@
 /area/new_sydney/coast)
 "oQk" = (
 /obj/effect/spawner/random/trash/box,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/building)
 "oQO" = (
 /obj/effect/landmark/loot_spawn/ice_artifact,
@@ -21569,7 +21954,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "oTB" = (
 /obj/effect/turf_decal/line/yellow/anticorner{
@@ -21654,7 +22041,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "oWn" = (
 /obj/structure/deployable_barricade/metal,
@@ -21676,7 +22063,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 6
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "oXw" = (
 /obj/structure/flora/bush/ferny/style_3,
@@ -21689,12 +22078,14 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 9
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "oXG" = (
 /obj/structure/table/reinforced,
 /obj/effect/landmark/loot_spawn/treasure,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "oYA" = (
 /obj/effect/landmark/ambient_sound/radiation_lake,
@@ -21865,7 +22256,9 @@
 	dir = 8;
 	pixel_y = -7
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "pei" = (
 /obj/effect/turf_decal/line/dark_green/line/contrasted{
@@ -21961,7 +22354,7 @@
 /obj/effect/turf_decal/line/yellow/line/stripes/contrasted{
 	dir = 4
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "pgj" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -22016,7 +22409,9 @@
 	id = "mining_internal"
 	},
 /obj/machinery/bouldertech/refinery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "piA" = (
 /obj/effect/turf_decal/board_number/six{
@@ -22034,7 +22429,9 @@
 /obj/machinery/light/floor{
 	nightshift_light_color = "#87CEFA"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "pjk" = (
 /obj/effect/decal/cleanable/glass,
@@ -22073,7 +22470,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "pjY" = (
 /obj/effect/turf_decal/siding/dark_green{
@@ -22086,7 +22485,7 @@
 "pkv" = (
 /obj/effect/spawner/random/trash/box,
 /obj/effect/turf_decal/board_number,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "pkL" = (
 /obj/machinery/door/poddoor/shutters{
@@ -22183,7 +22582,9 @@
 /area/new_sydney/bunker)
 "pnM" = (
 /obj/structure/city_prop/pallet/stack,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "pnX" = (
 /obj/structure/chair/sofa/corp/left,
@@ -22227,7 +22628,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "ppx" = (
 /obj/structure/fence{
@@ -22335,7 +22736,9 @@
 /area/new_sydney/dark_forest)
 "pss" = (
 /obj/structure/sign/nanotrasen/directional/east,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "psL" = (
 /obj/structure/vehicle_wreck/armoredtruck_blue{
@@ -22421,7 +22824,9 @@
 /obj/structure/railing{
 	dir = 6
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "pvF" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -22508,7 +22913,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 6
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "pza" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -22549,7 +22954,7 @@
 /obj/structure/vehicle_light/cargo{
 	dir = 8
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "pBb" = (
 /obj/effect/turf_decal/line/yellow/line/stripes{
@@ -22742,7 +23147,9 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "pIV" = (
 /obj/structure/city_prop/concrete_barrier/alt{
@@ -22865,7 +23272,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "pMR" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -22889,7 +23298,9 @@
 /area/new_sydney/coast)
 "pNB" = (
 /obj/effect/turf_decal/trimline/yellow/line,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "pNT" = (
 /obj/effect/decal/cleanable/blood/oil{
@@ -22956,7 +23367,7 @@
 	dir = 1
 	},
 /obj/structure/sign/poster/official/tactical_game_cards/directional/west,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "pPl" = (
 /obj/effect/turf_decal/trimline/dark_blue/line,
@@ -23097,7 +23508,7 @@
 /area/new_sydney/building)
 "pVl" = (
 /obj/effect/landmark/loot_spawn/ammo,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "pVu" = (
 /obj/structure/loot/army_crate,
@@ -23177,7 +23588,9 @@
 	},
 /obj/effect/turf_decal/box,
 /obj/machinery/portable_atmospherics/canister/air,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "pXH" = (
 /obj/effect/decal/cleanable/dirt,
@@ -23272,7 +23685,9 @@
 	dir = 8
 	},
 /obj/structure/loot/technical_crate/metal/red,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qbB" = (
 /obj/effect/decal/cleanable/glass,
@@ -23319,7 +23734,7 @@
 	dir = 1
 	},
 /obj/effect/landmark/loot_spawn/medical,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "qdh" = (
 /obj/effect/turf_decal/line/yellow/line{
@@ -23352,7 +23767,7 @@
 /area/new_sydney/coast)
 "qdT" = (
 /obj/effect/turf_decal/line/yellow/line/stripes/contrasted,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "qec" = (
 /obj/structure/decorative/shelf/soda_multipacks,
@@ -23400,7 +23815,9 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor5"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "qeY" = (
 /obj/effect/turf_decal/caution/stand_clear{
@@ -23512,7 +23929,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor7"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qiu" = (
 /turf/open/floor/iron/dark,
@@ -23571,7 +23990,9 @@
 	pixel_y = 4;
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qiZ" = (
 /obj/effect/decal/cleanable/crayon/x{
@@ -23617,7 +24038,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qjj" = (
 /obj/effect/turf_decal/line/yellow/anticorner,
@@ -23703,7 +24126,9 @@
 	dir = 4
 	},
 /obj/structure/loot/technical_crate,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qlF" = (
 /obj/item/stack/sheet/mineral/wood,
@@ -23715,7 +24140,9 @@
 "qlG" = (
 /obj/machinery/light/floor/broken,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qlW" = (
 /obj/machinery/light/floor{
@@ -23822,7 +24249,7 @@
 	dir = 1
 	},
 /obj/machinery/light/broken/directional/west,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "qpD" = (
 /obj/effect/turf_decal/arrows,
@@ -23836,7 +24263,9 @@
 	dir = 8
 	},
 /obj/effect/landmark/forest_mutant_spawn/faithless,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qpZ" = (
 /obj/structure/railing/platform{
@@ -23849,7 +24278,7 @@
 	dir = 1
 	},
 /obj/structure/hedge,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "qqh" = (
 /obj/structure/neon_sign/billboard1/north{
@@ -23942,7 +24371,7 @@
 "qut" = (
 /obj/machinery/light/floor/broken,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "quy" = (
 /obj/structure/fluff/minepost,
@@ -24024,7 +24453,7 @@
 /obj/structure/vehicle_wreck/longtruck_kelland{
 	dir = 1
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "qws" = (
 /obj/effect/mob_spawn/corpse/human/syndicatesoldier,
@@ -24052,7 +24481,7 @@
 "qxC" = (
 /obj/structure/table/reinforced,
 /obj/effect/landmark/loot_spawn/information,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "qxE" = (
 /obj/effect/turf_decal/line/dark_green{
@@ -24073,7 +24502,7 @@
 /obj/machinery/computer/old{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "qya" = (
 /obj/effect/decal/cleanable/blood/old{
@@ -24105,7 +24534,9 @@
 	},
 /area/new_sydney/bunker)
 "qyS" = (
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "qyW" = (
 /obj/effect/turf_decal/line/dark_green/line/stripes/contrasted{
@@ -24325,7 +24756,9 @@
 	pixel_y = 4
 	},
 /obj/machinery/brm,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qFs" = (
 /obj/effect/turf_decal/siding/blue{
@@ -24359,7 +24792,7 @@
 /obj/structure/table/glass,
 /obj/effect/turf_decal/trimline/dark_blue/line,
 /obj/item/folder/blue,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "qGB" = (
 /obj/structure/loot/technical_crate/metal/red,
@@ -24391,7 +24824,9 @@
 	id = "mining_internal"
 	},
 /obj/machinery/bouldertech/refinery/smelter,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qIj" = (
 /obj/effect/turf_decal/siding/wood{
@@ -24402,7 +24837,9 @@
 /area/new_sydney/building/night_gold_casino)
 "qIz" = (
 /obj/structure/city_prop/streetlamp/dmg,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "qIS" = (
 /obj/effect/turf_decal/line/bar/anticorner/contrasted{
@@ -24428,7 +24865,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor7"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "qKg" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -24441,7 +24880,9 @@
 /obj/effect/decal/trashbags/four{
 	pixel_y = 10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "qKT" = (
 /obj/effect/landmark/forest_mutant_spawn/faithless,
@@ -24462,7 +24903,7 @@
 /area/new_sydney/village)
 "qLz" = (
 /obj/effect/landmark/forest_mutant_spawn/faithless,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "qMr" = (
 /obj/effect/spawner/random/trash/box,
@@ -24473,7 +24914,7 @@
 	dir = 1
 	},
 /obj/structure/closet/body_bag,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "qNc" = (
 /obj/structure/fence{
@@ -24627,7 +25068,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor3"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qXm" = (
 /obj/item/reagent_containers/cup/beaker/large,
@@ -24649,7 +25092,7 @@
 	dir = 4;
 	pixel_x = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "qXU" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -24668,7 +25111,9 @@
 /obj/effect/turf_decal/trimline/brown/line{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "qZe" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -24694,7 +25139,7 @@
 /obj/machinery/computer/old{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "qZu" = (
 /obj/effect/turf_decal/line/dark_green/line/contrasted{
@@ -24761,7 +25206,9 @@
 	dir = 8
 	},
 /obj/structure/shipping_container/red,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "rcv" = (
 /obj/structure/chair/plastic,
@@ -24787,7 +25234,9 @@
 	id = "mining_internal"
 	},
 /obj/machinery/brm,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "rcZ" = (
 /turf/open/floor/iron/checker,
@@ -24946,7 +25395,7 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/dark_forest)
 "riE" = (
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "riK" = (
 /obj/effect/turf_decal/line/yellow/line/stripes{
@@ -24975,7 +25424,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 6
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "rji" = (
 /obj/effect/landmark/forest_mutant_spawn/sand_spider,
@@ -25048,7 +25499,9 @@
 /area/new_sydney/village)
 "rlL" = (
 /obj/effect/turf_decal/box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "rmp" = (
 /turf/open/indestructible/rockyground,
@@ -25109,7 +25562,9 @@
 /obj/effect/turf_decal/board_number,
 /obj/structure/railing,
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "roi" = (
 /obj/effect/turf_decal/siding/wood/oak,
@@ -25233,7 +25688,9 @@
 	dir = 4
 	},
 /obj/machinery/light/floor/broken,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "rqT" = (
 /turf/open/floor/wood/large,
@@ -25251,7 +25708,7 @@
 "rrd" = (
 /obj/structure/table,
 /obj/effect/landmark/loot_spawn/weapon,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "rrr" = (
 /obj/effect/turf_decal/line/dark_blue/line/stripes{
@@ -25303,7 +25760,7 @@
 /area/new_sydney/bunker)
 "rti" = (
 /obj/effect/decal/cleanable/blood/oil,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "rtl" = (
 /obj/item/book,
@@ -25449,7 +25906,9 @@
 /obj/structure/railing{
 	pixel_y = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "rxT" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -25579,14 +26038,16 @@
 	dir = 4
 	},
 /obj/structure/tank_dispenser/oxygen,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "rEM" = (
 /obj/effect/mob_spawn/corpse/human/ussp/ryadovoy,
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor6"
 	},
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "rFa" = (
 /obj/effect/turf_decal/line/dark_blue/line/contrasted{
@@ -25610,7 +26071,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "rFN" = (
 /obj/structure/vehicle_light/meridian/marshalls{
@@ -25782,7 +26245,9 @@
 	dir = 4;
 	pixel_x = -15
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "rLf" = (
 /obj/effect/turf_decal/bot_red,
@@ -25982,7 +26447,7 @@
 "rQP" = (
 /obj/effect/landmark/location_exit/mine,
 /obj/structure/extract/mine,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "rRu" = (
 /obj/item/stack/sheet/mineral/wood,
@@ -26015,7 +26480,7 @@
 /area/new_sydney/building)
 "rRZ" = (
 /obj/structure/closet/crate/miningcar,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "rSa" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted,
@@ -26025,7 +26490,7 @@
 /obj/effect/turf_decal/siding/dark_blue{
 	dir = 8
 	},
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "rSN" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -26051,10 +26516,11 @@
 	},
 /area/new_sydney/village)
 "rUk" = (
-/obj/effect/turf_decal/board_number{
-	dir = 8
+/obj/machinery/light/floor/broken,
+/obj/effect/decal/cleanable/glass,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
-/turf/open/floor/pod,
 /area/new_sydney/mine)
 "rUL" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -26119,7 +26585,7 @@
 	icon_state = "gib6-overlay";
 	dir = 4
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "rXO" = (
 /obj/effect/decal/cleanable/dirt,
@@ -26170,7 +26636,9 @@
 	icon_state = "floor7"
 	},
 /obj/effect/landmark/loot_spawn/treasure,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "rZH" = (
 /obj/effect/turf_decal/siding/dark{
@@ -26198,7 +26666,9 @@
 	dir = 5
 	},
 /obj/structure/decorative/shelf/crates,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "saJ" = (
 /obj/effect/turf_decal/trimline/dark_blue/line{
@@ -26209,7 +26679,6 @@
 /area/new_sydney/mine)
 "saL" = (
 /obj/machinery/door/airlock/highsecurity,
-/turf/open/floor/pod,
 /area/new_sydney/military_base)
 "saM" = (
 /obj/effect/decal/cleanable/glass,
@@ -26263,7 +26732,7 @@
 /area/new_sydney/coast)
 "scg" = (
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "sci" = (
 /obj/machinery/light/floor{
@@ -26459,7 +26928,7 @@
 /obj/machinery/light/floor{
 	nightshift_light_color = "#87CEFA"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "slg" = (
 /obj/structure/flora/rock/pile/style_random,
@@ -26541,7 +27010,7 @@
 /area/new_sydney/coast)
 "srY" = (
 /obj/effect/turf_decal/board_number,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "ssc" = (
 /obj/effect/turf_decal/line/blue/line/stripes,
@@ -26557,7 +27026,9 @@
 "ssz" = (
 /obj/effect/turf_decal/box,
 /obj/effect/spawner/random/trash/box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ssN" = (
 /obj/structure/chair/sofa/corp/right{
@@ -26618,12 +27089,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
-"stS" = (
-/obj/effect/turf_decal/board_number{
-	dir = 1
-	},
-/turf/open/floor/pod,
-/area/new_sydney/mine)
 "suq" = (
 /obj/effect/turf_decal/line/dark_green/line/stripes/contrasted{
 	dir = 4
@@ -26644,7 +27109,7 @@
 	},
 /obj/structure/table/reinforced,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/building)
 "suF" = (
 /obj/structure/table,
@@ -26654,7 +27119,7 @@
 "suQ" = (
 /obj/structure/ore_box,
 /obj/effect/turf_decal/box,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "svV" = (
 /obj/effect/turf_decal/siding/dark_green/inner_corner{
@@ -26759,7 +27224,9 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/glass/plasma,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "szK" = (
 /obj/effect/turf_decal/trimline/yellow/line{
@@ -26828,7 +27295,9 @@
 	dir = 8
 	},
 /obj/structure/city_prop/pallet/stack,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "sBC" = (
 /obj/structure/fence/corner,
@@ -26888,7 +27357,9 @@
 /obj/effect/turf_decal/board_number,
 /obj/structure/railing,
 /obj/effect/turf_decal/trimline/yellow/line,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "sDb" = (
 /obj/effect/turf_decal/box,
@@ -26916,7 +27387,7 @@
 /obj/effect/turf_decal/board_letter{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/building)
 "sEH" = (
 /obj/effect/turf_decal/line/blue/anticorner/contrasted,
@@ -26946,7 +27417,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 9
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "sFp" = (
 /obj/effect/mob_spawn/corpse/human/ussp/officer,
@@ -26970,7 +27443,7 @@
 "sFU" = (
 /obj/effect/turf_decal/box,
 /obj/effect/spawner/random/trash/box,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "sGs" = (
 /turf/closed/indestructible/wood,
@@ -26980,7 +27453,7 @@
 	dir = 8
 	},
 /obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "sGS" = (
 /obj/effect/turf_decal/siding/brown{
@@ -27018,7 +27491,9 @@
 	},
 /obj/effect/turf_decal/delivery,
 /obj/effect/landmark/loot_spawn/treasure,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "sHJ" = (
 /obj/effect/turf_decal/line/dark_green/line/contrasted,
@@ -27079,12 +27554,16 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 9
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "sKH" = (
 /obj/effect/turf_decal/box,
 /obj/structure/ore_box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "sKR" = (
 /obj/structure/table/glass,
@@ -27118,7 +27597,7 @@
 /obj/machinery/door/poddoor/shutters{
 	max_integrity = 50000
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "sLX" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -27176,7 +27655,7 @@
 /area/new_sydney/building)
 "sOi" = (
 /obj/effect/landmark/loot_spawn/seer_letter1,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "sOo" = (
 /obj/structure/window/reinforced/spawner/directional/north,
@@ -27229,7 +27708,7 @@
 	icon_state = "gib6-overlay";
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "sQk" = (
 /obj/item/shard,
@@ -27241,7 +27720,9 @@
 /obj/effect/turf_decal/trimline/yellow/tram{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "sRp" = (
 /obj/item/trash/boritos,
@@ -27436,7 +27917,9 @@
 	pixel_y = 4
 	},
 /obj/machinery/bouldertech/refinery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "sYb" = (
 /obj/structure/table/wood,
@@ -27460,14 +27943,14 @@
 	dir = 1
 	},
 /obj/effect/landmark/location_spawn/mine,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "sZh" = (
 /obj/effect/mob_spawn/corpse/human/tsf/marine,
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor7"
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "sZJ" = (
 /obj/structure/barricade/sandbags{
@@ -27565,7 +28048,9 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tdf" = (
 /obj/structure/bookcase/manuals,
@@ -27678,7 +28163,7 @@
 /area/new_sydney/village)
 "tiu" = (
 /obj/item/stack/sheet/iron,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "tiz" = (
 /obj/effect/turf_decal/siding/dark_green{
@@ -27781,7 +28266,7 @@
 "tkD" = (
 /obj/structure/decorative/shelf,
 /obj/effect/landmark/loot_spawn/medical,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "tld" = (
 /obj/item/trash/sosjerky,
@@ -27806,7 +28291,9 @@
 	},
 /obj/structure/rack,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tlz" = (
 /obj/structure/fence{
@@ -27822,7 +28309,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tlF" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -27862,7 +28351,7 @@
 	dir = 4
 	},
 /obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "tnW" = (
 /obj/effect/landmark/loot_spawn/treasure,
@@ -27914,7 +28403,9 @@
 	dir = 4
 	},
 /obj/structure/decorative/shelf/crates,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tpz" = (
 /obj/effect/landmark/start/eftk/blessed/medic,
@@ -27945,11 +28436,11 @@
 /turf/open/floor/iron/diagonal,
 /area/new_sydney/bunker)
 "tqT" = (
-/obj/effect/turf_decal/board_number{
-	dir = 9
+/obj/structure/minecart_rail,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
-/turf/open/floor/pod,
-/area/new_sydney/mine)
+/area/new_sydney/coast/port)
 "tqV" = (
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 8
@@ -28023,7 +28514,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ttg" = (
 /turf/closed/indestructible/iron{
@@ -28046,7 +28539,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ttS" = (
 /obj/effect/turf_decal/siding/dark_blue{
@@ -28073,13 +28568,17 @@
 /obj/effect/turf_decal/board_number,
 /obj/structure/railing,
 /obj/machinery/mineral/ore_redemption,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tuP" = (
 /obj/effect/turf_decal/siding/yellow{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "tuT" = (
 /obj/structure/barricade/sandbags{
@@ -28099,7 +28598,9 @@
 /area/new_sydney/building)
 "tvC" = (
 /obj/effect/mob_spawn/corpse/human/factory,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tvQ" = (
 /obj/item/chair/greyscale,
@@ -28112,7 +28613,9 @@
 /obj/structure/chair/sofa/bench/solo{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tvV" = (
 /obj/effect/turf_decal/board_number,
@@ -28136,7 +28639,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor4"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "txf" = (
 /obj/effect/turf_decal/line/yellow/anticorner/contrasted,
@@ -28179,7 +28684,9 @@
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/effect/landmark/location_exit/mine,
 /obj/structure/extract/mine,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tza" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -28238,7 +28745,9 @@
 /area/new_sydney/building)
 "tAu" = (
 /obj/structure/city_prop/pallet,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "tBb" = (
 /obj/item/stack/rods,
@@ -28273,7 +28782,9 @@
 "tBL" = (
 /obj/effect/turf_decal/board_number,
 /obj/structure/railing,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tBU" = (
 /obj/effect/turf_decal/siding/wood{
@@ -28300,7 +28811,7 @@
 "tDe" = (
 /obj/effect/mob_spawn/corpse/human/factory,
 /obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "tDp" = (
 /obj/effect/turf_decal/siding/yellow{
@@ -28308,7 +28819,9 @@
 	},
 /obj/effect/turf_decal/box,
 /obj/structure/closet/crate/trashcart/laundry,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tDw" = (
 /obj/structure/closet/crate/trashcart,
@@ -28647,7 +29160,7 @@
 "tOv" = (
 /obj/effect/turf_decal/box,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "tOO" = (
 /obj/effect/turf_decal/line/brown/line/contrasted{
@@ -28666,7 +29179,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor4"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "tPp" = (
 /obj/machinery/computer/old,
@@ -28794,7 +29307,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/building)
 "tSP" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -28805,7 +29318,7 @@
 /area/new_sydney/dark_forest)
 "tST" = (
 /obj/structure/vehicle_light/zengarbagetruck,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "tTf" = (
 /obj/effect/turf_decal/board_number{
@@ -28842,7 +29355,7 @@
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 8
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "tVt" = (
 /obj/effect/spawner/structure/window{
@@ -28863,7 +29376,7 @@
 /obj/effect/turf_decal/line/blue/anticorner,
 /obj/effect/spawner/random/trash/box,
 /obj/effect/landmark/loot_spawn/ammo,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "tVN" = (
 /obj/effect/mob_spawn/corpse/human/ussp/ryadovoy,
@@ -28903,7 +29416,9 @@
 	dir = 4
 	},
 /obj/structure/sign/poster/official/plasma_effects/directional/east,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "tXL" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -28928,7 +29443,7 @@
 "tXR" = (
 /obj/effect/spawner/random/trash/box,
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "tXS" = (
 /obj/machinery/scanner_gate/preset_guns,
@@ -29007,7 +29522,7 @@
 	dir = 4
 	},
 /obj/effect/landmark/loot_spawn/medical,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "tZd" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -29048,7 +29563,7 @@
 /area/new_sydney/building)
 "tZQ" = (
 /obj/machinery/biogenerator,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/village)
 "tZY" = (
 /obj/structure/table/glass,
@@ -29277,7 +29792,9 @@
 	dir = 8;
 	id = "mining_internal"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "ugb" = (
 /obj/effect/mob_spawn/corpse/human/ussp/ryadovoy,
@@ -29332,7 +29849,9 @@
 	pixel_y = 4
 	},
 /obj/machinery/bouldertech/refinery/smelter,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uhV" = (
 /obj/effect/turf_decal/line/dark_green/line/contrasted{
@@ -29371,7 +29890,9 @@
 	dir = 1
 	},
 /obj/effect/landmark/loot_spawn/medical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uiM" = (
 /obj/item/stack/sheet/iron/ten,
@@ -29480,12 +30001,6 @@
 /obj/effect/decal/cleanable/glass,
 /turf/open/floor/iron/dark,
 /area/new_sydney/building)
-"une" = (
-/obj/effect/turf_decal/board_number{
-	dir = 4
-	},
-/turf/open/floor/pod,
-/area/new_sydney/mine)
 "unk" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -29506,7 +30021,9 @@
 	dir = 4;
 	pixel_x = -15
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "unS" = (
 /obj/machinery/door/airlock/public,
@@ -29551,7 +30068,7 @@
 /area/new_sydney/dark_forest)
 "upa" = (
 /obj/machinery/light/floor/broken,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "upj" = (
 /obj/structure/chair/plastic,
@@ -29569,7 +30086,9 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uqb" = (
 /obj/effect/decal/papers,
@@ -29596,7 +30115,7 @@
 /area/new_sydney/building)
 "ury" = (
 /obj/effect/turf_decal/line/blue/line,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "urC" = (
 /obj/structure/chair/plastic{
@@ -29613,12 +30132,14 @@
 	icon_state = "gib6-overlay";
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "urT" = (
 /obj/machinery/light/floor/broken,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "urZ" = (
 /obj/structure/rack/shelf,
@@ -29692,7 +30213,9 @@
 	dir = 6
 	},
 /obj/effect/turf_decal/box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "utW" = (
 /obj/effect/turf_decal/siding/brown{
@@ -29715,7 +30238,9 @@
 "utX" = (
 /obj/structure/sign/poster/official/obey/directional/north,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uuv" = (
 /obj/structure/neon_sign/billboard4/north,
@@ -29729,7 +30254,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "uuC" = (
 /obj/machinery/photocopier,
@@ -29759,7 +30284,7 @@
 /obj/effect/turf_decal/line/blue/line{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "uwa" = (
 /obj/structure/chair/plastic{
@@ -29832,7 +30357,9 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "drip5"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "uye" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -29888,7 +30415,9 @@
 /obj/structure/railing,
 /obj/effect/turf_decal/trimline/yellow/line,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uBa" = (
 /obj/machinery/door/airlock/multi_tile/public/glass,
@@ -29930,7 +30459,7 @@
 /area/new_sydney/building/administration)
 "uCT" = (
 /obj/item/kirbyplants/organic/plant21,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "uCZ" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -29961,7 +30490,9 @@
 /obj/structure/railing,
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/effect/turf_decal/box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uEa" = (
 /obj/effect/turf_decal/arrows{
@@ -29979,7 +30510,6 @@
 	light_color = "#5B7A42"
 	},
 /obj/machinery/door/airlock/grunge,
-/turf/open/floor/pod,
 /area/new_sydney/dark_forest)
 "uEh" = (
 /obj/item/emptysandbag,
@@ -30019,7 +30549,7 @@
 /obj/effect/turf_decal/line/yellow/anticorner{
 	dir = 1
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "uFg" = (
 /obj/effect/turf_decal/board_number{
@@ -30161,7 +30691,9 @@
 /area/new_sydney/mine)
 "uIt" = (
 /mob/living/basic/bot/mulebot,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uIy" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -30227,7 +30759,9 @@
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/effect/turf_decal/box,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uJT" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -30259,7 +30793,7 @@
 	dir = 1
 	},
 /obj/structure/aquarium,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "uKd" = (
 /obj/effect/turf_decal/line/yellow/anticorner/contrasted,
@@ -30296,8 +30830,10 @@
 /turf/open/floor/iron/smooth_corner,
 /area/new_sydney/bunker)
 "uLG" = (
-/turf/open/floor/pod/dark,
-/area/new_sydney/mine)
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
+/area/new_sydney/dark_forest/building)
 "uLK" = (
 /obj/structure/railing{
 	dir = 8
@@ -30338,7 +30874,6 @@
 /area/new_sydney/coast)
 "uOk" = (
 /obj/item/stack/sheet/iron/ten,
-/turf/open/floor/pod,
 /area/new_sydney/dark_forest)
 "uOL" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -30350,7 +30885,9 @@
 "uOX" = (
 /obj/structure/sign/warning/directional/north,
 /obj/effect/decal/cleanable/generic,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uPt" = (
 /obj/effect/turf_decal/line/yellow/line{
@@ -30361,7 +30898,9 @@
 /area/new_sydney/dark_forest)
 "uPx" = (
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uPC" = (
 /turf/closed/indestructible/reinforced,
@@ -30426,7 +30965,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/tram{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "uSV" = (
 /obj/structure/flora/rock/pile/style_random,
@@ -30521,7 +31060,9 @@
 "uYb" = (
 /obj/effect/turf_decal/box,
 /obj/effect/decal/trashbags/five,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "uYg" = (
 /obj/effect/decal/cleanable/dirt,
@@ -30535,7 +31076,7 @@
 	dir = 10
 	},
 /obj/structure/hedge,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "uYv" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -30595,7 +31136,7 @@
 /obj/effect/turf_decal/box,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/loot/technical_crate/metal/red,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "vbP" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted,
@@ -30672,7 +31213,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "vdx" = (
 /obj/effect/decal/cleanable/blood/old{
@@ -30835,7 +31376,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor3"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "vjA" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -30932,7 +31475,9 @@
 	dir = 4
 	},
 /obj/effect/landmark/forest_mutant_spawn/faithless,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "vmX" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -31119,7 +31664,7 @@
 	pixel_y = 15;
 	pixel_x = -5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "vrF" = (
 /obj/effect/turf_decal/siding/wood{
@@ -31280,7 +31825,9 @@
 /area/new_sydney/bunker)
 "vvF" = (
 /obj/effect/decal/trashbags/tree,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "vvS" = (
 /obj/effect/turf_decal/line/brown/line/contrasted{
@@ -31315,7 +31862,9 @@
 	dir = 1
 	},
 /obj/structure/sign/warning/directional/south,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "vwK" = (
 /obj/structure/decorative/shelf/alcohol,
@@ -31352,7 +31901,9 @@
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "vxb" = (
 /obj/effect/turf_decal/siding/wood{
@@ -31398,7 +31949,9 @@
 	},
 /obj/effect/turf_decal/box,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "vxZ" = (
 /obj/structure/vehicle_prop/humvee,
@@ -31452,7 +32005,9 @@
 /area/new_sydney/bunker)
 "vzy" = (
 /obj/structure/table,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "vAj" = (
 /obj/machinery/door/airlock/multi_tile/public/glass,
@@ -31479,7 +32034,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/mob_spawn/corpse/human/tsf/marine,
 /obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "vBn" = (
 /obj/item/kirbyplants/organic/plant22,
@@ -31616,7 +32171,7 @@
 	dir = 4
 	},
 /obj/structure/sign/nanotrasen/directional/east,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "vGg" = (
 /obj/structure/barricade/sandbags{
@@ -31673,7 +32228,7 @@
 "vGQ" = (
 /obj/effect/turf_decal/box,
 /obj/structure/loot/technical_crate,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "vGV" = (
 /obj/machinery/vending/trader/samopal,
@@ -31809,7 +32364,9 @@
 "vMN" = (
 /obj/structure/mecha_wreckage/ripley/mk2,
 /obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "vMY" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -31892,7 +32449,7 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 2
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "vQy" = (
 /turf/open/floor/iron/white/textured_large,
@@ -31922,7 +32479,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor3"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "vQW" = (
 /obj/effect/turf_decal/siding/brown{
@@ -32033,7 +32590,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "vUW" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -32065,7 +32624,7 @@
 "vVX" = (
 /obj/effect/turf_decal/box,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "vWs" = (
 /obj/effect/decal/papers,
@@ -32105,7 +32664,9 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/trimline/yellow/line,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "vXT" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -32132,7 +32693,7 @@
 	dir = 1
 	},
 /obj/machinery/scanner_gate/preset_guns,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "vYF" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -32182,7 +32743,7 @@
 /obj/effect/turf_decal/siding/dark_blue{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "wav" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -32347,7 +32908,9 @@
 "wgg" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/location_spawn/mine,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wgi" = (
 /turf/open/floor/carpet/blue,
@@ -32421,7 +32984,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/line{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "wiI" = (
 /obj/structure/bookcase{
@@ -32501,11 +33064,13 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 10
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "wmk" = (
 /obj/effect/turf_decal/siding/dark_blue,
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "wmx" = (
 /obj/item/stack/sheet/iron/fifty,
@@ -32582,7 +33147,7 @@
 /area/new_sydney/coast)
 "wpd" = (
 /obj/effect/landmark/loot_spawn/ammo,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "wpf" = (
 /obj/effect/decal/cleanable/dirt,
@@ -32610,7 +33175,7 @@
 /obj/structure/table,
 /obj/effect/turf_decal/siding/dark_blue/inner_corner,
 /obj/effect/landmark/loot_spawn/treasure,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "wpL" = (
 /obj/structure/deployable_barricade/metal/plasteel{
@@ -32632,7 +33197,7 @@
 /area/new_sydney/building/night_gold_casino)
 "wqN" = (
 /obj/effect/landmark/forest_mutant_spawn/hunter_spider,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "wqT" = (
 /turf/open/floor/iron/stairs,
@@ -32642,7 +33207,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "wrh" = (
 /obj/effect/turf_decal/tile/brown/diagonal_edge,
@@ -32694,7 +33259,7 @@
 /obj/effect/turf_decal/line/yellow/line/stripes/contrasted{
 	dir = 8
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "wsr" = (
 /obj/machinery/papershredder,
@@ -32773,7 +33338,7 @@
 /obj/effect/turf_decal/siding/dark_blue/inner_corner{
 	dir = 4
 	},
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "wvu" = (
 /obj/structure/flora/rock/style_random{
@@ -32872,7 +33437,9 @@
 	},
 /obj/structure/decorative/shelf,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wyZ" = (
 /obj/effect/turf_decal/board_number{
@@ -32883,7 +33450,9 @@
 	},
 /obj/effect/turf_decal/box,
 /obj/structure/closet/crate/secure/cargo,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wzd" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -32957,7 +33526,9 @@
 	dir = 4
 	},
 /obj/structure/sign/warning/doors/directional/north,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wAX" = (
 /obj/effect/turf_decal/line/dark_green/anticorner/contrasted,
@@ -32998,7 +33569,9 @@
 /obj/effect/decal/cleanable/cobweb/cobweb2{
 	icon_state = "cobweb1"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wCs" = (
 /obj/structure/railing{
@@ -33052,7 +33625,9 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor4"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "wDR" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -33145,7 +33720,7 @@
 /obj/structure/vehicle_light/greyvan{
 	dir = 8
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "wFE" = (
 /obj/structure/railing/platform{
@@ -33175,14 +33750,16 @@
 	pixel_y = 4;
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wGS" = (
 /obj/effect/landmark/loot_spawn/clothing,
 /obj/effect/turf_decal/loading_area{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "wHj" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -33192,7 +33769,9 @@
 /area/new_sydney/village)
 "wHl" = (
 /obj/structure/city_prop/streetlamp/on,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "wHz" = (
 /obj/effect/turf_decal/tile/brown/half/contrasted{
@@ -33238,7 +33817,7 @@
 /obj/effect/turf_decal/siding/dark_blue{
 	dir = 4
 	},
-/turf/open/floor/carpet/executive,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "wKx" = (
 /obj/effect/turf_decal/trimline/yellow/line,
@@ -33267,7 +33846,9 @@
 	dir = 4
 	},
 /obj/machinery/suit_storage_unit/industrial,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wMu" = (
 /obj/structure/vehicle_light/suv2{
@@ -33332,7 +33913,9 @@
 /obj/structure/vehicle_light/miningcrawler{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wOF" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -33429,7 +34012,9 @@
 	pixel_y = 8;
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wTf" = (
 /obj/effect/turf_decal/caution/stand_clear{
@@ -33437,11 +34022,13 @@
 	pixel_y = 7
 	},
 /obj/effect/turf_decal/board_number,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "wTj" = (
 /obj/effect/turf_decal/trimline/yellow/corner,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wTq" = (
 /obj/structure/neon_sign/billboard1/east{
@@ -33457,7 +34044,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor3"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "wTH" = (
 /obj/effect/turf_decal/line/dark_blue/anticorner/contrasted{
@@ -33495,7 +34082,9 @@
 	id = "mining_internal"
 	},
 /obj/machinery/bouldertech/refinery/smelter,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wUT" = (
 /obj/structure/vehicle_light/zengarbagetruck,
@@ -33506,7 +34095,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/trimline/dark_blue/line,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "wVp" = (
 /obj/structure/barricade/sandbags{
@@ -33528,7 +34117,9 @@
 /area/new_sydney/mine)
 "wVE" = (
 /obj/structure/city_prop/electrical_substation/terminal,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/dark_forest/building)
 "wWz" = (
 /obj/item/stack/sheet/iron,
@@ -33550,7 +34141,9 @@
 /obj/effect/decal/cleanable/cobweb/cobweb2{
 	icon_state = "cobweb1"
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "wXS" = (
 /obj/structure/reagent_dispensers/water_cooler,
@@ -33587,7 +34180,9 @@
 /area/new_sydney/village)
 "wYR" = (
 /obj/effect/turf_decal/siding/yellow,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "wZm" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
@@ -33918,7 +34513,9 @@
 "xjz" = (
 /obj/effect/turf_decal/box,
 /obj/effect/turf_decal/siding/yellow,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "xjV" = (
 /obj/effect/turf_decal/trimline/yellow/line{
@@ -34022,7 +34619,7 @@
 /area/new_sydney/mine)
 "xmj" = (
 /obj/structure/ore_box,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "xml" = (
 /obj/item/broken_bottle,
@@ -34049,7 +34646,9 @@
 "xmT" = (
 /obj/structure/rack,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "xmX" = (
 /obj/structure/chair/wood{
@@ -34134,7 +34733,9 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "xph" = (
 /obj/effect/turf_decal/siding/wood,
@@ -34142,7 +34743,7 @@
 /area/new_sydney/building)
 "xpw" = (
 /obj/effect/decal/papers/tree,
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "xpG" = (
 /obj/structure/railing{
@@ -34270,7 +34871,9 @@
 	dir = 10
 	},
 /obj/structure/shipping_container/nanotrasen,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "xsV" = (
 /obj/effect/decal/cleanable/glass,
@@ -34336,7 +34939,9 @@
 	dir = 1
 	},
 /obj/structure/sign/warning/directional/south,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "xve" = (
 /obj/structure/table/glass,
@@ -34402,7 +35007,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "xyf" = (
 /obj/effect/turf_decal/line/dark_green/line/contrasted,
@@ -34439,7 +35046,7 @@
 	},
 /obj/structure/table/reinforced,
 /obj/item/storage/toolbox/emergency,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/building)
 "xAl" = (
 /obj/effect/turf_decal/line/yellow/anticorner/contrasted{
@@ -34465,7 +35072,7 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "xAW" = (
 /obj/item/rack_parts,
@@ -34547,7 +35154,9 @@
 /obj/structure/railing,
 /obj/effect/turf_decal/box,
 /obj/structure/closet/crate/secure/cargo,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "xDe" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -34628,7 +35237,9 @@
 	dir = 4
 	},
 /obj/effect/landmark/forest_mutant_spawn/faithless,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "xGK" = (
 /turf/open/indestructible/rockyground,
@@ -34648,7 +35259,7 @@
 "xIp" = (
 /obj/effect/turf_decal/delivery,
 /obj/effect/landmark/loot_spawn/technical,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "xIH" = (
 /obj/structure/closet/l3closet/janitor,
@@ -34742,7 +35353,7 @@
 /area/new_sydney/village)
 "xKS" = (
 /obj/effect/mapping_helpers/broken_floor,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "xKT" = (
 /obj/effect/turf_decal/trimline/yellow/line{
@@ -34826,7 +35437,7 @@
 /obj/effect/turf_decal/trimline/dark_blue/tram{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/iron/dark/small,
 /area/new_sydney/mine)
 "xNs" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -34955,7 +35566,9 @@
 	dir = 8
 	},
 /obj/structure/loot/technical_crate,
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "xRx" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -34991,7 +35604,7 @@
 /obj/effect/decal/cleanable/blood/oil{
 	icon_state = "floor7"
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/mine)
 "xSK" = (
 /obj/effect/decal/cleanable/dirt,
@@ -35186,7 +35799,7 @@
 /area/new_sydney/building)
 "xZv" = (
 /obj/structure/flora/rock/pile/style_random,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
 "xZz" = (
 /obj/effect/turf_decal/siding/dark{
@@ -35211,7 +35824,9 @@
 /obj/effect/turf_decal/line/yellow/anticorner{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "xZN" = (
 /obj/structure/table_frame/wood,
@@ -35236,7 +35851,9 @@
 /obj/effect/turf_decal/board_number{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/coast/port)
 "ybI" = (
 /obj/structure/minecart_rail{
@@ -35329,7 +35946,9 @@
 /obj/effect/turf_decal/siding/yellow{
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/engine/hull/reinforced{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
 /area/new_sydney/mine)
 "yhb" = (
 /obj/structure/rack/shelf,
@@ -63035,7 +63654,7 @@ xom
 bFi
 qme
 xZv
-kUi
+rsA
 rsA
 rsA
 xlo
@@ -63720,7 +64339,7 @@ nNW
 lYa
 lcA
 wVE
-bFi
+uLG
 hYS
 lcA
 joH
@@ -64021,9 +64640,9 @@ hyV
 nNW
 lYa
 lcA
-bFi
-jwG
-bjD
+uLG
+dkQ
+dhE
 lcA
 nNW
 hja
@@ -64323,9 +64942,9 @@ hyV
 nNW
 lYa
 lcA
-bFi
-bFi
-bFi
+uLG
+uLG
+uLG
 ihB
 nNW
 lkI
@@ -77902,39 +78521,39 @@ slg
 hjr
 uNA
 xKS
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 pAR
-uLG
-uLG
+ejE
+ejE
 mpq
 tiu
 vQc
-uLG
+ejE
 hYN
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 xKS
 gZW
 xKS
 xKS
 xKS
-uLG
+ejE
 tjp
 lVc
 xSK
@@ -78205,36 +78824,36 @@ eZM
 oPj
 xKS
 jFH
-uLG
-uLG
+ejE
+ejE
 hYN
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
 kDg
-uLG
+ejE
 mpq
 sLQ
 vQc
-uLG
+ejE
 kDg
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 kDg
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 kDg
 rXo
 cOg
@@ -78506,10 +79125,10 @@ eZM
 dmW
 hxm
 gtk
-uLG
+ejE
 feZ
-uLG
-uLG
+ejE
+ejE
 nDp
 kGb
 wsB
@@ -78520,8 +79139,8 @@ btJ
 hlm
 tje
 hYN
-uLG
-uLG
+ejE
+ejE
 jOv
 vxK
 iEW
@@ -78533,10 +79152,10 @@ wOs
 jHs
 wsm
 wsm
-tqT
+nDp
 pXy
 wyZ
-uLG
+ejE
 sZh
 pVl
 pus
@@ -78808,10 +79427,10 @@ eZM
 wWz
 uNA
 mRu
-uLG
+ejE
 pUE
 hYN
-uLG
+ejE
 poF
 aJC
 sDf
@@ -78821,26 +79440,26 @@ hFD
 nAR
 hlm
 ijk
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 uJG
 dXs
-aAU
-uLG
-uLG
-stS
+ulW
 ejE
 ejE
-aAU
+tjp
+lUZ
+lUZ
+ulW
 xSF
-uLG
-stS
+ejE
+tjp
 uYb
 lac
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 pus
 hlm
 sLD
@@ -79109,10 +79728,10 @@ otk
 otk
 slg
 tvV
-uLG
-uLG
+ejE
+ejE
 aCa
-uLG
+ejE
 oDc
 hlm
 hlm
@@ -79123,25 +79742,25 @@ hlm
 hlm
 hlm
 gKt
-uLG
+ejE
 hYN
-uLG
+ejE
 jcQ
 sKH
-aAU
-uLG
-uLG
+ulW
+ejE
+ejE
 mYU
-ejE
-ejE
-aAU
+lUZ
+lUZ
+ulW
 hYN
-uLG
-stS
+ejE
+tjp
 rlL
 xCM
-uLG
-uLG
+ejE
+ejE
 hYN
 pus
 hlm
@@ -79411,11 +80030,11 @@ sLD
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 aCa
-uLG
-uLG
+ejE
+ejE
 hlm
 nbN
 lKo
@@ -79425,26 +80044,26 @@ mSq
 djl
 hlm
 ijk
-uLG
+ejE
 hYN
-uLG
+ejE
 huC
 kpv
-aAU
-uLG
-uLG
-stS
-cqf
+ulW
+ejE
+ejE
+tjp
+xSK
 uPx
 jjV
 hYN
-uLG
-stS
+ejE
+tjp
 aOL
 fCi
 hYN
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 liH
@@ -79713,7 +80332,7 @@ sLD
 sLD
 hlm
 ijk
-uLG
+ejE
 hYN
 pus
 hlm
@@ -79727,26 +80346,26 @@ gMF
 fHq
 hlm
 ijk
-uLG
+ejE
 kDg
-uLG
+ejE
 nBK
 rqL
 joN
-uLG
-uLG
+ejE
+ejE
 nBK
 rqL
-une
+hOP
 duW
-uLG
-uLG
+ejE
+ejE
 eDt
 msJ
 duW
-uLG
+ejE
 hYN
-uLG
+ejE
 pus
 hlm
 hpk
@@ -80015,8 +80634,8 @@ sLD
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 cWH
@@ -80029,26 +80648,26 @@ cLW
 kXE
 alv
 ijk
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 fbY
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 hYN
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 qdT
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 lCJ
 hjr
 eZM
@@ -80317,7 +80936,7 @@ sLD
 sLD
 hlm
 ijk
-uLG
+ejE
 kDg
 pus
 hlm
@@ -80331,25 +80950,25 @@ wdL
 fHq
 ttD
 ijk
-uLG
-uLG
+ejE
+ejE
 hYN
 dus
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 hYN
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 qdT
-uLG
-uLG
+ejE
+ejE
 xKS
 kCW
 eZM
@@ -80619,8 +81238,8 @@ sLD
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 saJ
@@ -80634,24 +81253,24 @@ fHq
 alv
 ijk
 qLz
-uLG
-uLG
+ejE
+ejE
 lic
-rUk
+wsB
 cWn
-uLG
-uLG
-tqT
-rUk
-rUk
+ejE
+ejE
+nDp
+wsB
+wsB
 iEW
-uLG
-uLG
+ejE
+ejE
 lic
-rUk
+wsB
 cWn
-uLG
-uLG
+ejE
+ejE
 xKS
 lCJ
 eZM
@@ -80936,25 +81555,25 @@ fHq
 alv
 ijk
 hYN
-uLG
-uLG
+ejE
+ejE
 fCp
 qWn
 szI
-uLG
-uLG
-stS
+ejE
+ejE
+tjp
 sKH
 aeb
-aAU
-uLG
-uLG
-fCp
+ulW
 ejE
+ejE
+fCp
+lUZ
 itT
 hYN
-uLG
-uLG
+ejE
+ejE
 mqJ
 wWz
 eZM
@@ -81223,8 +81842,8 @@ sLD
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 uhp
@@ -81237,26 +81856,26 @@ uFv
 fHq
 hlm
 lEI
-uLG
+ejE
 qLz
-uLG
+ejE
 twQ
 hns
 idE
-uLG
-uLG
-stS
+ejE
+ejE
+tjp
 sKH
 ciM
 jjV
-uLG
-uLG
+ejE
+ejE
 bBr
 nDu
 roh
-uLG
+ejE
 hYN
-uLG
+ejE
 pus
 hlm
 hpk
@@ -81525,7 +82144,7 @@ sLD
 sLD
 hlm
 ijk
-uLG
+ejE
 pAR
 pus
 hlm
@@ -81540,25 +82159,25 @@ fHq
 hlm
 cIQ
 hYN
-uLG
-uLG
+ejE
+ejE
 fic
 mmx
 rxJ
-uLG
+ejE
 rXo
-stS
+tjp
 dXs
 ssz
-aAU
+ulW
 qLz
-uLG
+ejE
 iaq
 mmx
 tuO
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 pus
 hlm
 otk
@@ -81827,8 +82446,8 @@ sLD
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 tmM
@@ -81841,26 +82460,26 @@ adb
 rdk
 hlm
 ijk
-uLG
-uLG
-uLG
-mKg
 ejE
+ejE
+ejE
+mKg
+lUZ
 mzp
-uLG
+ejE
 gfD
-stS
+tjp
 bYt
 ssz
-aAU
+ulW
 hYN
-uLG
+ejE
 mKg
 eXQ
 aFF
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 pus
 hlm
 otk
@@ -82130,7 +82749,7 @@ sLD
 hlm
 ijk
 hXJ
-uLG
+ejE
 mbC
 hlm
 rxT
@@ -82147,22 +82766,22 @@ qLz
 kDg
 qLz
 wUG
-upa
+dgO
 uhA
-uLG
+ejE
 lUg
 dRt
 rlL
 dXs
 lGd
-uLG
+ejE
 qLz
 wUG
-upa
+dgO
 qHQ
-uLG
+ejE
 kDg
-uLG
+ejE
 pus
 hlm
 sLD
@@ -82445,24 +83064,24 @@ ykK
 xdI
 vXA
 djh
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 piy
 eXQ
 sXx
-uLG
-uLG
-stS
+ejE
+ejE
+tjp
 ssz
 rlL
-aAU
-uLG
-uLG
-piy
+ulW
 ejE
+ejE
+piy
+lUZ
 bCF
-uLG
+ejE
 hYN
 hYN
 pus
@@ -82733,8 +83352,8 @@ sLD
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 lal
@@ -82747,25 +83366,25 @@ adb
 pPl
 hlm
 ijk
-uLG
-uLG
-uLG
-ufL
 ejE
+ejE
+ejE
+ufL
+lUZ
 luq
-uLG
+ejE
 hYN
-stS
+tjp
 ciM
 sKH
-aAU
+ulW
 qLz
-uLG
-ufL
 ejE
+ufL
+lUZ
 dNF
-uLG
-uLG
+ejE
+ejE
 hYN
 pus
 hlm
@@ -83035,8 +83654,8 @@ sLD
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 uIk
@@ -83050,25 +83669,25 @@ fHq
 hlm
 cIQ
 mNs
-uLG
-uLG
-khw
 ejE
+ejE
+khw
+lUZ
 qFq
 hYN
-uLG
-stS
+ejE
+tjp
 rlL
 cyd
-aAU
-uLG
-uLG
-khw
+ulW
 ejE
+ejE
+khw
+lUZ
 rcU
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 pus
 hlm
 sLD
@@ -83337,8 +83956,8 @@ sLD
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 uhp
@@ -83351,26 +83970,26 @@ lMv
 fHq
 hlm
 ijk
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 wSV
 eXQ
 kQY
-uLG
+ejE
 hYN
-stS
+tjp
 sKH
 dXs
 jjV
 hYN
-uLG
+ejE
 wSV
 eXQ
 kQY
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 pus
 hlm
 sLD
@@ -83654,25 +84273,25 @@ lMG
 alv
 lEI
 hYN
-uLG
-uLG
+ejE
+ejE
 hJe
-une
+hOP
 coB
-uLG
-uLG
+ejE
+ejE
 nBK
-une
-une
+hOP
+hOP
 duW
-uLG
+ejE
 mtB
 hJe
-une
+hOP
 coB
-uLG
+ejE
 hYN
-uLG
+ejE
 pus
 hlm
 sLD
@@ -83942,7 +84561,7 @@ sLD
 hlm
 ijk
 hiv
-uLG
+ejE
 pus
 hlm
 lwZ
@@ -83956,25 +84575,25 @@ fHq
 fFm
 glz
 hYN
-uLG
-uLG
+ejE
+ejE
 dus
-uLG
+ejE
 hYN
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
 hYN
-uLG
-uLG
+ejE
+ejE
 hYN
 hYN
 hYN
 qdT
-uLG
+ejE
 moL
-uLG
+ejE
 pus
 hlm
 sLD
@@ -84243,8 +84862,8 @@ otk
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 lwZ
@@ -84257,26 +84876,26 @@ ewu
 fHq
 alv
 uNA
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 dus
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 ezH
-uLG
+ejE
 qdT
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 pus
 hlm
 sLD
@@ -84545,7 +85164,7 @@ otk
 sLD
 hlm
 ijk
-uLG
+ejE
 kDg
 pus
 hlm
@@ -84560,25 +85179,25 @@ sQk
 fFm
 uNA
 xKS
-uLG
-uLG
-tqT
-rUk
+ejE
+ejE
+nDp
+wsB
 iEW
-uLG
-uLG
+ejE
+ejE
 cPz
 bsp
 tlq
 ali
-uLG
-uLG
-tqT
-rUk
+ejE
+ejE
+nDp
+wsB
 iEW
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 pus
 hlm
 sLD
@@ -84847,8 +85466,8 @@ otk
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 mbC
 hlm
 fRG
@@ -84861,25 +85480,25 @@ ewu
 fHq
 alv
 uNA
-uLG
-uLG
+ejE
+ejE
 hYN
-stS
-cqf
+tjp
+xSK
 bBl
-uLG
-uLG
-stS
-cqf
+ejE
+ejE
+tjp
+xSK
 iuK
 urJ
-uLG
+ejE
 hYN
-stS
+tjp
 uIt
-aAU
-uLG
-uLG
+ulW
+ejE
+ejE
 hYN
 pus
 hlm
@@ -85164,23 +85783,23 @@ kXE
 alv
 ijk
 hYN
-uLG
-uLG
+ejE
+ejE
 gwK
+lUZ
+ulW
 ejE
-aAU
-uLG
-uLG
-stS
-cqf
+ejE
+tjp
+xSK
 gVx
-aAU
+ulW
 hYN
 hYN
-stS
-ejE
+tjp
+lUZ
 tBL
-uLG
+ejE
 hYN
 hYN
 pus
@@ -85451,8 +86070,8 @@ otk
 sLD
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 wyu
@@ -85466,25 +86085,25 @@ fHq
 hlm
 lEI
 hYN
-uLG
-uLG
-iJw
-upa
 ejE
+ejE
+iJw
+dgO
+lUZ
 tcU
 tcU
 kip
-ejE
-cqf
-upa
+lUZ
+xSK
+dgO
 tcU
 tcU
-ejE
-lis
+lUZ
+tYv
 tBL
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 pus
 hlm
 sLD
@@ -85753,8 +86372,8 @@ otk
 otk
 hlm
 ijk
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 tOc
@@ -85771,18 +86390,18 @@ jsZ
 ngd
 jsZ
 qYA
-ewj
+diM
 fKo
 wMk
 wMk
 odz
-ewj
-ewj
+diM
+diM
 rEu
 wMk
 wMk
 tXG
-ewj
+diM
 coE
 jsZ
 kDg
@@ -86055,8 +86674,8 @@ eZM
 slg
 wWz
 uNA
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 hlm
@@ -86358,7 +86977,7 @@ eZM
 eZM
 tvV
 xKS
-uLG
+ejE
 buk
 bdG
 hlm
@@ -86659,38 +87278,38 @@ eZM
 eZM
 slg
 oPj
-uLG
+ejE
 kDg
-uLG
+ejE
 mpq
 sLQ
 aQL
-uLG
+ejE
 jFH
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
 hYN
-uLG
+ejE
 ngd
-uLG
-uLG
+ejE
+ejE
 hYN
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
 kDg
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 hYN
 ezH
-uLG
-uLG
+ejE
+ejE
 urT
 hYN
 pus
@@ -86961,40 +87580,40 @@ liH
 otk
 hlm
 uNA
-uLG
+ejE
 hYF
-uLG
+ejE
 mpq
 tiu
 aQL
-uLG
-uLG
+ejE
+ejE
 hYN
 hYN
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
 hYN
 hYN
 hYN
-uLG
-uLG
+ejE
+ejE
 hYN
-uLG
+ejE
 hYN
 hYN
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
 qLz
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 lCJ
 hlm
 hpk
@@ -87270,7 +87889,7 @@ btJ
 hlm
 vuK
 hYN
-uLG
+ejE
 dtd
 vwX
 tlA
@@ -87295,8 +87914,8 @@ tlA
 tlA
 vwX
 aOk
-uLG
-uLG
+ejE
+ejE
 eBi
 wWz
 eZM
@@ -87571,34 +88190,34 @@ diM
 qhN
 hlm
 ulW
-uLG
-uLG
+ejE
+ejE
 vwJ
-hlm
-hlm
-alv
-alv
-hlm
-hlm
+lUZ
+lUZ
+ewj
+ewj
+lUZ
+lUZ
 uOX
 iWT
 sHq
 bNg
 bjj
-ejE
-ejE
-une
+lUZ
+lUZ
+hOP
 eYb
-uLG
-uLG
-uLG
-nBK
-une
-vmA
 ejE
+ejE
+ejE
+nBK
+hOP
+vmA
+lUZ
 uAK
 hYN
-uLG
+ejE
 lCJ
 hjr
 eZM
@@ -87873,8 +88492,8 @@ hlm
 hlm
 hlm
 ulW
-uLG
-uLG
+ejE
+ejE
 oTA
 hlm
 cfF
@@ -87887,19 +88506,19 @@ hZf
 lNZ
 lKz
 hYI
-ejE
-aAU
+lUZ
+ulW
 tST
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-stS
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+tjp
 fcK
-uLG
+ejE
 xKS
 lCJ
 wWz
@@ -88175,8 +88794,8 @@ cqV
 uFd
 wFm
 xxJ
-uLG
-uLG
+ejE
+ejE
 oTA
 taU
 qCb
@@ -88187,22 +88806,22 @@ hlm
 lAl
 wgg
 fSO
-ejE
-ejE
+lUZ
+lUZ
 tvC
-aAU
-uLG
-uLG
-uLG
-uLG
+ulW
+ejE
+ejE
+ejE
+ejE
 qLz
-uLG
-uLG
-uLG
-stS
+ejE
+ejE
+ejE
+tjp
 fcK
 hYN
-uLG
+ejE
 kCW
 dmW
 eZM
@@ -88471,13 +89090,13 @@ sLD
 sLD
 hlm
 xmT
-aAU
-uLG
-uLG
-uLG
-uLG
+ulW
+ejE
+ejE
+ejE
+ejE
 nJB
-uLG
+ejE
 urT
 oTA
 alv
@@ -88486,12 +89105,12 @@ wka
 qeN
 bRk
 mGG
-upa
-cqf
-ejE
-ejE
-ejE
-ejE
+dgO
+xSK
+lUZ
+lUZ
+lUZ
+lUZ
 gPz
 gzI
 gzI
@@ -88501,10 +89120,10 @@ gzI
 gzI
 gzI
 gzI
-stS
+tjp
 fcK
 kDg
-uLG
+ejE
 pus
 hlm
 hpk
@@ -88774,12 +89393,12 @@ sLD
 hlm
 jrI
 bce
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 rti
 eWD
-uLG
+ejE
 hYN
 oTA
 alv
@@ -88788,13 +89407,13 @@ ykK
 ykK
 ahf
 hlm
-ejE
+lUZ
 nsX
 bDK
 ttR
 vUR
 kUj
-ejE
+lUZ
 bnZ
 mNC
 rcf
@@ -88803,10 +89422,10 @@ xRo
 mNC
 fVX
 dSK
-ejE
+lUZ
 fcK
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 otk
@@ -89075,14 +89694,14 @@ sLD
 sLD
 hlm
 com
-aAU
+ulW
 hYN
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 qdT
-uLG
-uLG
+ejE
+ejE
 oTA
 hlm
 bSF
@@ -89105,10 +89724,10 @@ rlL
 rlL
 rlL
 xjz
-ejE
+lUZ
 fcK
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 gat
@@ -89377,14 +89996,14 @@ hlm
 hlm
 hlm
 vzy
-aAU
-uLG
-uLG
-uLG
+ulW
+ejE
+ejE
+ejE
 hYN
 qdT
-uLG
-uLG
+ejE
+ejE
 xui
 hlm
 hlm
@@ -89398,7 +90017,7 @@ lyf
 iLS
 miJ
 kUj
-ejE
+lUZ
 tDp
 aWT
 aWT
@@ -89407,9 +90026,9 @@ aWT
 aWT
 aWT
 utR
-ejE
+lUZ
 fft
-uLG
+ejE
 kuH
 pus
 hlm
@@ -89685,8 +90304,8 @@ wqZ
 wqZ
 sFi
 qjf
-uLG
-uLG
+ejE
+ejE
 bRh
 tsH
 rFF
@@ -89711,7 +90330,7 @@ rFF
 rFF
 qiV
 fTo
-uLG
+ejE
 hiv
 cOg
 hlm
@@ -89980,41 +90599,41 @@ lUZ
 lUZ
 xSK
 lVc
-uLG
+ejE
 hYN
 jFH
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
 qut
 hYN
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 hYN
-uLG
-uLG
+ejE
+ejE
 qLz
 cCo
 cCo
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
 hYN
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
 jFH
-uLG
+ejE
 xlX
 lVc
 lUZ
@@ -90282,41 +90901,41 @@ lUZ
 lUZ
 lUZ
 lVc
-uLG
+ejE
 hYN
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 qLz
-uLG
-uLG
+ejE
+ejE
 hYN
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 tUB
 keU
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 hYN
 hYN
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 xlX
 lVc
 lUZ
@@ -90591,8 +91210,8 @@ wsm
 aPC
 kyg
 fuK
-uLG
-uLG
+ejE
+ejE
 dtd
 upB
 tlA
@@ -90617,8 +91236,8 @@ dYe
 tlA
 vwX
 aOk
-uLG
-uLG
+ejE
+ejE
 fzq
 hlm
 xSK
@@ -90888,28 +91507,28 @@ hlm
 hlm
 uiB
 bJa
-uLG
-uLG
-fxa
 ejE
+ejE
+fxa
+lUZ
 tBL
-uLG
-uLG
+ejE
+ejE
 gUm
 pIP
 eci
 hng
 xsU
-ejE
+lUZ
 jFY
 ffv
 qby
 ffv
 dyr
 bjj
-cqf
-ejE
-ejE
+xSK
+lUZ
+lUZ
 hlm
 hlm
 alv
@@ -90919,8 +91538,8 @@ alv
 hlm
 hlm
 sCS
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 hlm
@@ -91193,24 +91812,24 @@ qMv
 hYN
 mFe
 dSR
+lUZ
+ulW
 ejE
-aAU
-uLG
-uLG
+ejE
 oTA
 rlL
 rlL
 dXs
 jmz
-ejE
+lUZ
 wyN
 mZC
 xmT
 mZC
 jCB
 btM
-ejE
-ejE
+lUZ
+lUZ
 bZJ
 hlm
 nuO
@@ -91221,7 +91840,7 @@ pXx
 nBr
 hlm
 fcK
-uLG
+ejE
 hYN
 pus
 hlm
@@ -91495,25 +92114,25 @@ bJa
 ftR
 hYN
 etG
+lUZ
+ulW
 ejE
-aAU
-uLG
-uLG
+ejE
 oTA
 qlt
 gQP
 aWT
 mON
-ejE
+lUZ
 saz
 gyu
 oGR
 cHg
 tpg
 bhX
-ejE
-ejE
-ejE
+lUZ
+lUZ
+lUZ
 hlm
 fTv
 ykK
@@ -91524,7 +92143,7 @@ sAw
 hlm
 fcK
 hYN
-uLG
+ejE
 pus
 hlm
 sLD
@@ -91795,27 +92414,27 @@ hlm
 krz
 qMv
 urT
-uLG
-etG
 ejE
-aAU
+etG
+lUZ
+ulW
 hYN
 jFH
 gGj
-ejE
-ejE
+lUZ
+lUZ
 uPx
 qlG
 oOW
-ejE
-ejE
-lis
-cqf
-ejE
-ejE
-ejE
-iqq
-cqf
+lUZ
+lUZ
+tYv
+xSK
+lUZ
+lUZ
+lUZ
+rUk
+xSK
 gQe
 uii
 xwY
@@ -91826,7 +92445,7 @@ ije
 hlm
 fcK
 kDg
-uLG
+ejE
 pus
 hlm
 sLD
@@ -92094,30 +92713,30 @@ sLD
 sLD
 sLD
 hlm
-ejE
+lUZ
 bxt
-uLG
+ejE
 vBk
 etG
+lUZ
+ulW
 ejE
-aAU
-uLG
-uLG
+ejE
 oTA
 ozS
 iAe
-ejE
-ejE
-ejE
+lUZ
+lUZ
+lUZ
 tvC
-ejE
+lUZ
 aEQ
-ejE
-ejE
-ejE
-ejE
-ejE
-ejE
+lUZ
+lUZ
+lUZ
+lUZ
+lUZ
+lUZ
 hlm
 fTv
 ceV
@@ -92127,8 +92746,8 @@ ykK
 eLm
 hlm
 fcK
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 sLD
@@ -92396,30 +93015,30 @@ sLD
 sLD
 sLD
 hlm
-ejE
+lUZ
 bJa
-uLG
-uLG
+ejE
+ejE
 etG
-cqf
-aAU
-uLG
-uLG
+xSK
+ulW
+ejE
+ejE
 oTA
 azU
 goq
-cqf
+xSK
 aEQ
-ejE
+lUZ
 wTj
 sQx
 sQx
 sQx
 sQx
 drx
-cqf
-ejE
-ejE
+xSK
+lUZ
+lUZ
 hlm
 fRp
 exT
@@ -92429,7 +93048,7 @@ dYB
 xVb
 hlm
 fcK
-uLG
+ejE
 hYN
 pus
 hlm
@@ -92698,30 +93317,30 @@ sLD
 sLD
 sLD
 hlm
-ejE
+lUZ
 iuU
-uLG
-uLG
-etG
 ejE
-aAU
-uLG
-uLG
+ejE
+etG
+lUZ
+ulW
+ejE
+ejE
 gUm
 dyK
 fgp
-ejE
+lUZ
 lAl
-ejE
+lUZ
 pNB
 mXj
 uPx
-ejE
+lUZ
 tvU
 cMn
-ejE
-ejE
-ejE
+lUZ
+lUZ
+lUZ
 hlm
 hlm
 alv
@@ -92731,8 +93350,8 @@ alv
 hlm
 hlm
 sCS
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 sLD
@@ -93000,15 +93619,15 @@ sLD
 sLD
 sLD
 hlm
-cqf
+xSK
 bJa
-uLG
-uLG
-dSR
 ejE
-aAU
+ejE
+dSR
+lUZ
+ulW
 hYN
-uLG
+ejE
 bRh
 tsH
 fUn
@@ -93033,8 +93652,8 @@ rFF
 rFF
 tsH
 rje
-uLG
-uLG
+ejE
+ejE
 pus
 hlm
 sLD
@@ -93302,39 +93921,39 @@ sLD
 sLD
 sLD
 hlm
-ejE
+lUZ
 bJa
-uLG
-uLG
-etG
 ejE
+ejE
+etG
+lUZ
 hgh
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
 keU
 keU
-uLG
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
+ejE
 hYN
 tUB
 tUB
-uLG
-uLG
+ejE
+ejE
 hYN
-uLG
+ejE
 hYN
-uLG
+ejE
 hYN
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
 hYN
 hYN
 pus
@@ -93604,41 +94223,41 @@ sLD
 sLD
 sLD
 hlm
-cqf
+xSK
 bJa
 ngd
-uLG
-etG
 ejE
+etG
+lUZ
 ngr
-uLG
+ejE
 kDg
-uLG
+ejE
 hYN
-uLG
+ejE
 keU
 epc
-uLG
-uLG
-uLG
-uLG
-uLG
+ejE
+ejE
+ejE
+ejE
+ejE
 hYN
-uLG
+ejE
 tUB
 kwD
-uLG
-uLG
+ejE
+ejE
 hYN
-uLG
-uLG
+ejE
+ejE
 hYN
-uLG
-uLG
+ejE
+ejE
 hYN
-uLG
+ejE
 kDg
-uLG
+ejE
 pus
 hlm
 sLD
@@ -93906,12 +94525,12 @@ sLD
 sLD
 sLD
 hlm
-ejE
+lUZ
 kcC
 xKS
-uLG
-wTf
 ejE
+wTf
+lUZ
 uDD
 xWq
 eer
@@ -94515,7 +95134,7 @@ cFi
 ewD
 ewD
 fqG
-ejE
+lUZ
 hlm
 sLD
 sLD
@@ -94812,12 +95431,12 @@ sLD
 sLD
 sLD
 hlm
-ejE
+lUZ
 oaH
 vUx
 vUx
 drd
-ejE
+lUZ
 hlm
 sLD
 sLD
@@ -94825,13 +95444,13 @@ sLD
 hlm
 uJW
 lis
-ejE
+riE
 wad
-ejE
-ejE
+riE
+riE
 upa
 cqf
-uPx
+aAU
 lFZ
 kNF
 upa
@@ -95126,17 +95745,17 @@ sLD
 sLD
 hlm
 uJW
-ejE
+riE
 wpd
 wTw
 dRn
 cqf
 xpw
 bxh
-ejE
-dkQ
+riE
+wmk
 cqf
-ejE
+riE
 aev
 hlm
 sLD
@@ -95429,7 +96048,7 @@ sLD
 hlm
 qqb
 cqf
-ejE
+riE
 kSr
 kAS
 awC
@@ -95437,8 +96056,8 @@ eto
 awC
 eto
 wpK
-ejE
-ejE
+riE
+riE
 ocX
 hlm
 sLD
@@ -95730,16 +96349,16 @@ sLD
 sLD
 hlm
 sZa
-ejE
-ejE
-ejE
-ejE
-ejE
-ejE
-ejE
-ejE
-ejE
-ejE
+riE
+riE
+riE
+riE
+riE
+riE
+riE
+riE
+riE
+riE
 cqf
 nGd
 hlm
@@ -96032,8 +96651,8 @@ sLD
 sLD
 hlm
 fUU
-ejE
-ejE
+riE
+riE
 uuz
 rSt
 rSt
@@ -96041,8 +96660,8 @@ rSt
 rSt
 cXe
 cMz
-ejE
-ejE
+riE
+riE
 wVi
 hlm
 sLD
@@ -96335,15 +96954,15 @@ sLD
 hlm
 miE
 iqq
-ejE
-dhE
 riE
-oAL
+wad
+riE
+cqf
 frl
 riE
 rEM
 wmk
-ejE
+riE
 lis
 hku
 hlm
@@ -96636,8 +97255,8 @@ sLD
 sLD
 hlm
 oKo
-ejE
-ejE
+riE
+riE
 wvf
 gQi
 wKj
@@ -96645,8 +97264,8 @@ wKj
 wKj
 wKj
 jSg
-ejE
-ejE
+riE
+riE
 oHE
 hlm
 sLD
@@ -96926,28 +97545,28 @@ sLD
 sLD
 sLD
 hlm
-ejE
+lUZ
 oaH
 vUx
 vUx
 qvr
-ejE
+lUZ
 hlm
 sLD
 sLD
 sLD
 hlm
 fEO
-ejE
-ejE
-ejE
+riE
+riE
+riE
 jyb
-uPx
+aAU
 upa
-ejE
+riE
 cqf
-ejE
-ejE
+riE
+riE
 cqf
 qGn
 hlm
@@ -110043,20 +110662,20 @@ tRX
 hXu
 gWu
 ftx
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
 mQX
 qyS
 qJM
@@ -110345,20 +110964,20 @@ ldY
 kOg
 kOg
 rPd
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
-dqq
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
+tqT
 mQX
 qyS
 apg
