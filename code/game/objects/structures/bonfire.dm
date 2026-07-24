@@ -34,7 +34,7 @@
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
 	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
-	AddComponent(/datum/component/item_igniter)
+	AddComponent(/datum/component/item_igniter, FALSE)
 	burning_loop = new(src)
 
 /obj/structure/bonfire/Destroy()
