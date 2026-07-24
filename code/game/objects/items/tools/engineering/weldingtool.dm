@@ -65,7 +65,7 @@
 	AddElement(/datum/element/tool_flash, light_range)
 	AddElement(/datum/element/falling_hazard, damage = force, wound_bonus = wound_bonus, hardhat_safety = TRUE, crushes = FALSE, impact_sound = hitsound)
 	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
-	AddComponent(/datum/component/item_igniter)
+	AddComponent(/datum/component/item_igniter, FALSE)
 
 	create_reagents(max_fuel)
 	if(starting_fuel)
@@ -279,7 +279,7 @@
 	hitsound = SFX_SWING_HIT
 	update_appearance()
 	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
-	SEND_SIGNAL(src, CHANGE_IGNITION_STATE, TRUE)
+	SEND_SIGNAL(src, CHANGE_IGNITION_STATE, FALSE)
 
 
 /obj/item/weldingtool/examine(mob/user)

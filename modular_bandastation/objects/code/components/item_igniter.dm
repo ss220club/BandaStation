@@ -1,6 +1,6 @@
 /datum/component/item_igniter
 	/// Whether this component can ignite items
-	var/can_ignite_items = TRUE
+	var/can_ignite_items = FALSE
 
 /datum/component/item_igniter/Initialize()
 	. = ..()
@@ -21,6 +21,16 @@
 	SIGNAL_HANDLER
 	can_ignite_items = state
 
+/datum/component/item_igniter/proc/check_oxygen()
+	var/obj/parent_obj = parent
+	if(iscarbon(parent_obj.loc))
+		parent_obj = parent_obj.loc
+	if(isopenturf(parent_obj.loc))
+		var/turf/open/parent_turf = parent_obj.loc
+		if(parent_turf.air?.moles[/datum/gas/oxygen] >= 5)
+			return TRUE
+	return FALSE
+
 /datum/component/item_igniter/proc/attackby(atom/source, obj/item/attacking_item, mob/user,params)
 	SIGNAL_HANDLER
 
@@ -34,7 +44,10 @@
 	if(QDELETED(source) || QDELETED(attacking_item) || QDELETED(user))
 		return
 
-	if(!can_ignite_items)
+	if(!can_ignite_items || !check_oxygen())
+		return
+
+	if(!(attacking_item.resistance_flags & FLAMMABLE) || (attacking_item.resistance_flags & FIRE_PROOF))
 		return
 
 	user.visible_message(
@@ -53,13 +66,18 @@
 	attacking_item.fire_act()
 
 /datum/component/item_igniter/proc/choose_delay(obj/item/attacking_item)
-	var/static/list/delay_by_w_class = list(
-		WEIGHT_CLASS_TINY = 0.5 SECONDS,
-		WEIGHT_CLASS_SMALL = 1 SECONDS,
-		WEIGHT_CLASS_NORMAL = 1.5 SECONDS,
-		WEIGHT_CLASS_BULKY = 2 SECONDS,
-		WEIGHT_CLASS_HUGE = 2.5 SECONDS,
-		WEIGHT_CLASS_GIGANTIC = 3 SECONDS,
-	)
+	switch(attacking_item.w_class)
+		if(WEIGHT_CLASS_TINY)
+			return 0.5 SECONDS
+		if(WEIGHT_CLASS_SMALL)
+			return 1 SECONDS
+		if(WEIGHT_CLASS_NORMAL)
+			return 1.5 SECONDS
+		if(WEIGHT_CLASS_BULKY)
+			return 2 SECONDS
+		if(WEIGHT_CLASS_HUGE)
+			return 2.5 SECONDS
+		if(WEIGHT_CLASS_GIGANTIC)
+			return 3 SECONDS
 
-	return delay_by_w_class[attacking_item.w_class] || 1.5 SECONDS
+	return 1.5 SECONDS
