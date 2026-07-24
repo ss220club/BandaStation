@@ -19,43 +19,36 @@
 
 /datum/ai_controller/basic_controller/hyperzombie
 	blackboard = list(
-		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies,
-		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/mining,
-		BB_VISION_RANGE = 15,
-		BB_TARGET_MINIMUM_STAT = CONSCIOUS,
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
-	idle_behavior = /datum/idle_behavior/idle_random_walk
+	behavior_tree_json = "modular_bandastation/voyaker_events/code/mobs/hyperzombie.bt.json"
 
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/simple_find_target,
-		/datum/ai_planning_subtree/hyper_spit,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/attack_obstacle_in_path,
-		/datum/ai_planning_subtree/target_retaliate
-	)
+/datum/bt_node/ai_behavior/hyper_spit
 
-/datum/ai_planning_subtree/hyper_spit
-
-/datum/ai_planning_subtree/hyper_spit/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+/datum/bt_node/ai_behavior/hyper_spit/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/mob/living/basic/hyperzombie/zombie = controller.pawn
-	var/mob/living/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
+	if(!zombie)
+		return AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
 	if(!target)
-		return
-	if(world.time < zombie.next_spit)
-		return
+		return AI_BEHAVIOR_FAILED
+	if(zombie.stat != CONSCIOUS)
+		return AI_BEHAVIOR_FAILED
 	var/dist = get_dist(zombie, target)
 	if(dist <= 1)
-		return
+		return AI_BEHAVIOR_FAILED
 	if(dist > 5)
-		return
+		return AI_BEHAVIOR_FAILED
 	if(!los_check(zombie, target))
-		return
+		return AI_BEHAVIOR_FAILED
+	if(world.time < zombie.next_spit)
+		return AI_BEHAVIOR_FAILED
 	zombie.next_spit = world.time + zombie.spit_cooldown
 	zombie.visible_message(span_warning("[zombie] извергает поток радиоактивной желчи!"))
 	addtimer(CALLBACK(zombie, TYPE_PROC_REF(/mob/living/basic/hyperzombie, do_spit)), 5)
-
+		return AI_BEHAVIOR_SUCCEEDED
 
 /mob/living/basic/hyperzombie/Initialize(mapload)
 	. = ..()
@@ -71,7 +64,7 @@
 	addtimer(CALLBACK(src, PROC_REF(radiation_aura)), 1 SECONDS)
 
 /mob/living/basic/hyperzombie/proc/do_spit()
-	var/atom/target = ai_controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
+	var/atom/target = ai_controller.blackboard[BB_CURRENT_TARGET]
 	if(!target)
 		return
 	var/dir = get_dir(src, target)

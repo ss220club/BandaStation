@@ -59,45 +59,65 @@
 
 /datum/ai_controller/basic_controller/bigot
 	blackboard = list(
-		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies,
-		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/mining,
-		BB_VISION_RANGE = 15,
-		BB_TARGET_MINIMUM_STAT = CONSCIOUS,
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
-	idle_behavior = /datum/idle_behavior/idle_random_walk
+	behavior_tree_json = "modular_bandastation/voyaker_events/code/mobs/bigot.bt.json"
 
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/simple_find_target,
-		/datum/ai_planning_subtree/bigot_specials,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/attack_obstacle_in_path,
-		/datum/ai_planning_subtree/target_retaliate
-	)
+/datum/bt_node/ai_behavior/bigot_tongue
+
+/datum/bt_node/ai_behavior/bigot_tongue/perform(seconds_per_tick, datum/ai_controller/controller)
+	var/mob/living/basic/bigot/bigot = controller.pawn
+	if(!bigot)
+		return AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
+	if(!target)
+		return AI_BEHAVIOR_FAILED
+	if(bigot.stat != CONSCIOUS)
+		return AI_BEHAVIOR_FAILED
+	var/dist = get_dist(bigot, target)
+	if(dist < 4 || dist > 8)
+		return AI_BEHAVIOR_FAILED
+	if(world.time < bigot.next_tongue_attack)
+		return AI_BEHAVIOR_FAILED
+	INVOKE_ASYNC(bigot, TYPE_PROC_REF(/mob/living/basic/bigot, tongue_tentacle), target)
+	return AI_BEHAVIOR_SUCCEEDED
+
+/datum/bt_node/ai_behavior/bigot_charge
+
+/datum/bt_node/ai_behavior/bigot_charge/perform(seconds_per_tick, datum/ai_controller/controller)
+	var/mob/living/basic/bigot/bigot = controller.pawn
+	if(!bigot)
+		return AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
+	if(!target)
+		return AI_BEHAVIOR_FAILED
+	if(bigot.stat != CONSCIOUS)
+		return AI_BEHAVIOR_FAILED
+	var/dist = get_dist(bigot, target)
+	if(dist < 5 || dist > 10)
+		return AI_BEHAVIOR_FAILED
+	if(world.time < bigot.next_charge_attack)
+		return AI_BEHAVIOR_FAILED
+	INVOKE_ASYNC(bigot, TYPE_PROC_REF(/mob/living/basic/bigot, charge_attack), target)
+	return AI_BEHAVIOR_SUCCEEDED
+
+/datum/bt_node/ai_behavior/bigot_roar
+
+/datum/bt_node/ai_behavior/bigot_roar/perform(seconds_per_tick, datum/ai_controller/controller)
+	var/mob/living/basic/bigot/bigot = controller.pawn
+	if(!bigot)
+		return AI_BEHAVIOR_FAILED
+	if(prob(1))
+		INVOKE_ASYNC(bigot, TYPE_PROC_REF(/mob/living/basic/bigot, play_roar))
+	return AI_BEHAVIOR_FAILED
 
 /mob/living/basic/bigot/Initialize(mapload)
 	. = ..()
 	faction = list("cult")
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/ai_retaliate)
-	start_roaring()
-
-/datum/ai_planning_subtree/bigot_specials
-
-/datum/ai_planning_subtree/bigot_specials/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
-	var/mob/living/basic/bigot/B = controller.pawn
-	if(!B)
-		return
-	var/mob/living/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
-	if(!target)
-		return
-	if(B.stat != CONSCIOUS)
-		return
-	if(world.time >= B.next_tongue_attack)
-		INVOKE_ASYNC(B, TYPE_PROC_REF(/mob/living/basic/bigot, tongue_tentacle), target)
-	if(world.time >= B.next_charge_attack)
-		INVOKE_ASYNC(B, TYPE_PROC_REF(/mob/living/basic/bigot, charge_attack), target)
 
 /mob/living/basic/bigot/melee_attack(atom/target, ignore_cooldown)
 	. = ..()
@@ -107,10 +127,6 @@
 		new /obj/effect/decal/cleanable/blood(get_turf(src))
 
 /mob/living/basic/bigot/proc/tongue_tentacle(mob/living/target)
-	if(world.time < next_tongue_attack)
-		return FALSE
-	if(!target)
-		return FALSE
 	if(!can_see(src, target, 10))
 		return FALSE
 	next_tongue_attack = world.time + tongue_cooldown
@@ -143,10 +159,6 @@
 		target.apply_damage(10, BRUTE)
 
 /mob/living/basic/bigot/proc/charge_attack(mob/living/target)
-	if(world.time < next_charge_attack)
-		return FALSE
-	if(!target)
-		return FALSE
 	next_charge_attack = world.time + charge_cooldown
 	Shake(3, 2 SECONDS)
 	visible_message(span_warning("[src] напрягается перед броском!"))
@@ -162,22 +174,9 @@
 		sleep(world.tick_lag)
 	return TRUE
 
-/mob/living/basic/bigot/proc/use_specials(mob/living/target)
-	var/dist = get_dist(src, target)
-	if(dist >= 4 && dist <= 8)
-		tongue_tentacle(target)
-		return
-	if(dist >= 5 && dist <= 10)
-		charge_attack(target)
-		return
-
-/mob/living/basic/bigot/proc/start_roaring()
-	addtimer(CALLBACK(src, PROC_REF(play_roar)), rand(min_roar_delay, max_roar_delay))
-
 /mob/living/basic/bigot/proc/play_roar()
 	if(QDELETED(src) || stat == DEAD)
 		return
 	if(prob(40))
 		visible_message(span_warning("[src] издаёт жуткий рык!"))
 	playsound(get_turf(src), roar_sound, 75, TRUE)
-	start_roaring()
