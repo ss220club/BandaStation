@@ -257,7 +257,16 @@ def main() -> int:
     defines = parse_defines(repo_root)
     print(f'  Resolved {len(defines)} defines.')
 
-    bt_files = sorted(repo_root.glob('code/**/*.bt.json'))
+    bt_files = []
+
+    # Обычные деревья TG
+    bt_files.extend(repo_root.glob('code/**/*.bt.json'))
+
+    #BANDASTATION ADD BEGIN: Деревья модулей
+    bt_files.extend(repo_root.glob('modular_bandastation/**/code/**/*.bt.json'))
+    #BANDASTATION ADD ENDED
+
+    bt_files = sorted(bt_files)
     print(f'Found {len(bt_files)} .bt.json source files.')
 
     errors = 0
@@ -269,7 +278,10 @@ def main() -> int:
 
     for src_path in bt_files:
         # The compiled file mirrors the source path relative to code/, so trees that share a basename dont fucking break.
-        rel = src_path.relative_to(code_dir).as_posix()  # "datums/ai/dog/dog.bt.json"
+        if src_path.is_relative_to(code_dir):
+            rel = src_path.relative_to(code_dir).as_posix()
+        else:
+            rel = src_path.as_posix().split("/code/", 1)[1]
         tree_name = rel[:-len('.json')]                   # "datums/ai/dog/dog.bt"
         compiled_path = generated_dir / f'{tree_name}.compiled.json'
 
