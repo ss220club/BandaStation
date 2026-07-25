@@ -27,7 +27,7 @@
 /datum/reagent/mutationtoxin/skrell
 	name = "Skrell Mutation Toxin"
 	description = "Мутационный токсин для превращения в скрелла."
-	color = "#949494"
+	color = "#00bfff"
 	race = /datum/species/skrell
 	taste_description = "соли"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
