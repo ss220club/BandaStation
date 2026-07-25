@@ -281,7 +281,7 @@ def main() -> int:
         if src_path.is_relative_to(code_dir):
             rel = src_path.relative_to(code_dir).as_posix()
         else:
-            rel = src_path.as_posix().split("/code/", 1)[1]
+            rel = src_path.relative_to(repo_root).as_posix().split("/code/", 1)[1]
         tree_name = rel[:-len('.json')]                   # "datums/ai/dog/dog.bt"
         compiled_path = generated_dir / f'{tree_name}.compiled.json'
 
