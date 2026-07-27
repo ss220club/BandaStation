@@ -4081,7 +4081,6 @@
 #include "code\modules\bitrunning\virtual_domain\domains\syndicate_assault.dm"
 #include "code\modules\bitrunning\virtual_domain\domains\test_only.dm"
 #include "code\modules\bitrunning\virtual_domain\domains\vaporwave.dm"
-#include "code\modules\bitrunning\virtual_domain\domains\water_grot.dm"
 #include "code\modules\bitrunning\virtual_domain\domains\wendigo.dm"
 #include "code\modules\bitrunning\virtual_domain\domains\xeno_nest.dm"
 #include "code\modules\buildmode\bm_mode.dm"
