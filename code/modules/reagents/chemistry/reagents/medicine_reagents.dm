@@ -1437,7 +1437,7 @@
 	var/heal = -0.75 * metabolization_ratio * seconds_per_tick
 	// BANDASTATION EDIT: START - jelly for jelly
 	if(!isjellyperson(affected_mob))
-		heal *= -1
+		heal *= -0.5
 	// BANDASTATION EDIT: END
 	var/need_mob_update
 	need_mob_update = affected_mob.adjust_brute_loss(heal, updating_health = FALSE, required_bodytype = affected_bodytype)
