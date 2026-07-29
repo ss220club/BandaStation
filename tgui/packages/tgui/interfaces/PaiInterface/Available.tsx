@@ -25,12 +25,7 @@ export function AvailableDisplay(props) {
   }
 
   return (
-    <Section
-      buttons={<MemoryDisplay />}
-      fill
-      scrollable
-      title="Available Software"
-    >
+    <Section buttons={<MemoryDisplay />} fill scrollable title="Доступное ПО">
       <Table>
         {entries?.map(([name, cost]) => {
           return <ListItem cost={cost} key={name} name={name} />;
@@ -46,7 +41,7 @@ function MemoryDisplay(props) {
   const { ram } = data;
 
   return (
-    <Tooltip content={`Available System Memory: ${ram}`}>
+    <Tooltip content={`Доступная системная память: ${ram}`}>
       <Table>
         <Table.Row>
           <Table.Cell>
