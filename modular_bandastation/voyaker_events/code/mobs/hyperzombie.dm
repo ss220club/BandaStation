@@ -19,36 +19,38 @@
 
 /datum/ai_controller/basic_controller/hyperzombie
 	blackboard = list(
-		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies,
+		BB_TARGET_MINIMUM_STAT = UNCONSCIOUS
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
-	behavior_tree_json = "modular_bandastation/voyaker_events/code/mobs/hyperzombie.bt.json"
+	behavior_tree_json = "code/modules/mob/living/basic/hyperzombie.bt.json"
 
 /datum/bt_node/ai_behavior/hyper_spit
+	var/target_key
+	var/targeting_strategy = BB_TARGETING_STRATEGY
+	var/hiding_location_key
 
 /datum/bt_node/ai_behavior/hyper_spit/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/mob/living/basic/hyperzombie/zombie = controller.pawn
 	if(!zombie)
-		return AI_BEHAVIOR_FAILED
-	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[hiding_location_key]
 	if(!target)
-		return AI_BEHAVIOR_FAILED
+		target = controller.blackboard[target_key]
+	if(!target)
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(zombie.stat != CONSCIOUS)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	var/dist = get_dist(zombie, target)
-	if(dist <= 1)
-		return AI_BEHAVIOR_FAILED
-	if(dist > 5)
-		return AI_BEHAVIOR_FAILED
+	if(dist <= 1 || dist > 5)
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(!los_check(zombie, target))
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(world.time < zombie.next_spit)
-		return AI_BEHAVIOR_FAILED
-	zombie.next_spit = world.time + zombie.spit_cooldown
-	zombie.visible_message(span_warning("[zombie] извергает поток радиоактивной желчи!"))
-	addtimer(CALLBACK(zombie, TYPE_PROC_REF(/mob/living/basic/hyperzombie, do_spit)), 5)
-	return AI_BEHAVIOR_SUCCEEDED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+	INVOKE_ASYNC(zombie, TYPE_PROC_REF(/mob/living/basic/hyperzombie, radioactive_spit), target)
+	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 
 /mob/living/basic/hyperzombie/Initialize(mapload)
 	. = ..()
@@ -63,30 +65,36 @@
 	radiation_pulse(src, max_range = 1, threshold = 0.1, chance = 80)
 	addtimer(CALLBACK(src, PROC_REF(radiation_aura)), 1 SECONDS)
 
-/mob/living/basic/hyperzombie/proc/do_spit()
-	var/atom/target = ai_controller.blackboard[BB_CURRENT_TARGET]
-	if(!target)
-		return
+/mob/living/basic/hyperzombie/proc/radioactive_spit(mob/living/target)
+	if(QDELETED(src) || stat == DEAD)
+		return FALSE
+	if(QDELETED(target))
+		return FALSE
+	next_spit = world.time + spit_cooldown
+	visible_message(span_warning("[src] извергает поток радиоактивной желчи!"))
+	sleep(0.5 SECONDS)
 	var/dir = get_dir(src, target)
-	spit_step(get_turf(src), dir, 5)
-
-/mob/living/basic/hyperzombie/proc/spit_step(turf/current, dir, remaining)
-	if(remaining <= 0)
-		return
-	current = get_step(current, dir)
-	if(!current)
-		return
-	if(isclosedturf(current))
-		return
-	for(var/obj/O in current)
-		if(O.density)
-			return
-	var/obj/effect/decal/cleanable/greenglow/radioactive/puddle = new(current)
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(qdel), puddle), 3 SECONDS)
-	playsound(current, 'sound/effects/splat.ogg', 50)
-	for(var/mob/living/L in current)
-		L.Knockdown(2 SECONDS)
-		L.apply_damage(20, BURN)
-		radiation_pulse(L, max_range = 1, threshold = 0.1, chance = 60)
-		break
-	addtimer(CALLBACK(src, PROC_REF(spit_step), current, dir, remaining - 1), 2 DECISECONDS)
+	var/turf/current = get_turf(src)
+	for(var/i in 1 to 5)
+		current = get_step(current, dir)
+		if(!current)
+			break
+		if(isclosedturf(current))
+			break
+		var/blocked = FALSE
+		for(var/obj/O in current)
+			if(O.density)
+				blocked = TRUE
+				break
+		if(blocked)
+			break
+		var/obj/effect/decal/cleanable/greenglow/radioactive/puddle = new(current)
+		QDEL_IN(puddle, 3 SECONDS)
+		playsound(current, 'sound/effects/splat.ogg', 50)
+		for(var/mob/living/L in current)
+			L.Knockdown(2 SECONDS)
+			L.apply_damage(20, BURN)
+			radiation_pulse(L, max_range = 1, threshold = 0.1, chance = 60)
+			break
+		sleep(0.2 SECONDS)
+	return TRUE

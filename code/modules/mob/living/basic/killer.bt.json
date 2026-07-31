@@ -26,7 +26,7 @@
                             },
                             "child": {
                                 "type": "parallel",
-                                "failure_policy": "BT_PARALLEL_FAILURE_ANY",
+                                "failure_policy": "BT_PARALLEL_FAILURE_CHILD_ONE",
                                 "success_policy": "BT_PARALLEL_SUCCESS_CHILD_ONE",
                                 "repeat_secondary": true,
                                 "finish_on_primary": true,
@@ -41,19 +41,39 @@
                                                 "children": [
                                                     {
                                                         "type": "leaf",
-                                                        "behavior": "/datum/bt_node/ai_behavior/killer_heal"
+                                                        "behavior": "/datum/bt_node/ai_behavior/killer_heal",
+														"vars": {
+															"target_key": "BB_CURRENT_TARGET",
+															"targeting_strategy": "BB_TARGETING_STRATEGY",
+                                                            "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
+														}
                                                     },
                                                     {
                                                         "type": "leaf",
-                                                        "behavior": "/datum/bt_node/ai_behavior/killer_grenade"
+                                                        "behavior": "/datum/bt_node/ai_behavior/killer_grenade",
+														"vars": {
+															"target_key": "BB_CURRENT_TARGET",
+															"targeting_strategy": "BB_TARGETING_STRATEGY",
+                                                            "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
+														}
                                                     },
                                                     {
                                                         "type": "leaf",
-                                                        "behavior": "/datum/bt_node/ai_behavior/killer_uzi"
+                                                        "behavior": "/datum/bt_node/ai_behavior/killer_uzi",
+														"vars": {
+															"target_key": "BB_CURRENT_TARGET",
+															"targeting_strategy": "BB_TARGETING_STRATEGY",
+                                                            "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
+														}
                                                     },
                                                     {
                                                         "type": "leaf",
-                                                        "behavior": "/datum/bt_node/ai_behavior/killer_smoke"
+                                                        "behavior": "/datum/bt_node/ai_behavior/killer_smoke",
+														"vars": {
+															"target_key": "BB_CURRENT_TARGET",
+															"targeting_strategy": "BB_TARGETING_STRATEGY",
+                                                            "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
+														}
                                                     },
                                                     {
                                                         "type": "leaf",
@@ -89,15 +109,6 @@
                 {
                     "type": "leaf",
                     "behavior": "/datum/bt_node/ai_behavior/acquire_target/update_combat_targets",
-                    "vars": {
-                        "target_key": "BB_CURRENT_TARGET",
-                        "targeting_strategy": "BB_TARGETING_STRATEGY",
-                        "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
-                    }
-                },
-                {
-                    "type": "leaf",
-                    "behavior": "/datum/bt_node/ai_behavior/acquire_target/target_from_retaliate_list",
                     "vars": {
                         "target_key": "BB_CURRENT_TARGET",
                         "targeting_strategy": "BB_TARGETING_STRATEGY",

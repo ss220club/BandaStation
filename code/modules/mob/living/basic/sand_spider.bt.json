@@ -1,5 +1,5 @@
 {
-    "dm_type": "/datum/ai_controller/basic_controller/bigot",
+    "dm_type": "/datum/ai_controller/basic_controller/spider/sand",
     "type": "selector",
     "children": [
         {
@@ -36,30 +36,31 @@
                                         "success_policy": "BT_SUBPLAN_LOOP_ON_SUCCESS",
                                         "failure_policy": "BT_SUBPLAN_LOOP_ON_FAILURE",
                                         "children": [
-											{
-            									"type": "selector",
-            									"children": [
-                                           			{
-                                                		"type": "leaf",
-                                                		"behavior": "/datum/bt_node/ai_behavior/bigot_tongue"
-                                            		},
-                                            		{
-                                                		"type": "leaf",
-                                                		"behavior": "/datum/bt_node/ai_behavior/bigot_charge"
-                                            		},
-                                            		{
-                                                		"type": "leaf",
-                                             			"behavior": "/datum/bt_node/ai_behavior/basic_melee_attack",
-                                                		"vars": {
-                                                    		"target_key": "BB_CURRENT_TARGET",
-                                                    		"targeting_strategy": "BB_TARGETING_STRATEGY",
-                                                    		"hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
-                                                		}
-													}
-												]
-											}
-										]
-									},
+                                            {
+                                                "type": "selector",
+                                                "children": [
+                                                    {
+                                                        "type": "leaf",
+                                                        "behavior": "/datum/bt_node/ai_behavior/sand_spider_logic",
+                                                        "vars": {
+                                                            "target_key": "BB_CURRENT_TARGET",
+															"targeting_strategy": "BB_TARGETING_STRATEGY",
+                                                            "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "leaf",
+                                                        "behavior": "/datum/bt_node/ai_behavior/basic_melee_attack",
+                                                        "vars": {
+                                                            "target_key": "BB_CURRENT_TARGET",
+                                                            "targeting_strategy": "BB_TARGETING_STRATEGY",
+                                                            "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "leaf",
                                         "behavior": "/datum/bt_node/ai_behavior/move_to_target",
@@ -86,19 +87,6 @@
                         "targeting_strategy": "BB_TARGETING_STRATEGY",
                         "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
                     }
-                },
-                {
-                    "type": "leaf",
-                    "behavior": "/datum/bt_node/ai_behavior/acquire_target/target_from_retaliate_list",
-                    "vars": {
-                        "target_key": "BB_CURRENT_TARGET",
-                        "targeting_strategy": "BB_TARGETING_STRATEGY",
-                        "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
-                    }
-                },
-                {
-                    "type": "leaf",
-                    "behavior": "/datum/bt_node/ai_behavior/bigot_roar"
                 }
             ]
         }

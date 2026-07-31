@@ -1,5 +1,5 @@
 {
-    "dm_type": "/datum/ai_controller/basic_controller/spider/sand",
+    "dm_type": "/datum/ai_controller/basic_controller/hyperzombie",
     "type": "selector",
     "children": [
         {
@@ -41,7 +41,12 @@
             									"children": [
                                            			{
                                                 		"type": "leaf",
-                                                		"behavior": "/datum/bt_node/ai_behavior/sand_spider_logic"
+                                                		"behavior": "/datum/bt_node/ai_behavior/hyper_spit",
+														"vars": {
+															"target_key": "BB_CURRENT_TARGET",
+															"targeting_strategy": "BB_TARGETING_STRATEGY",
+                                                            "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
+														}
                                             		},
                                             		{
                                                 		"type": "leaf",
@@ -77,15 +82,6 @@
                 {
                     "type": "leaf",
                     "behavior": "/datum/bt_node/ai_behavior/acquire_target/update_combat_targets",
-                    "vars": {
-                        "target_key": "BB_CURRENT_TARGET",
-                        "targeting_strategy": "BB_TARGETING_STRATEGY",
-                        "hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
-                    }
-                },
-                {
-                    "type": "leaf",
-                    "behavior": "/datum/bt_node/ai_behavior/acquire_target/target_from_retaliate_list",
                     "vars": {
                         "target_key": "BB_CURRENT_TARGET",
                         "targeting_strategy": "BB_TARGETING_STRATEGY",

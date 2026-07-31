@@ -1,9 +1,10 @@
 /datum/targeting_strategy/basic/not_kamilla_friends
-	custom_faction_check = TRUE
 
-/datum/targeting_strategy/basic/not_kamilla_friends/faction_check(datum/ai_controller/controller, mob/living/living_mob, mob/living/the_target)
-	if(ishuman(the_target))
-		var/mob/living/carbon/human/H = the_target
+/datum/targeting_strategy/basic/not_kamilla_friends/is_valid_target(mob/living/source, mob/living/target, datum/ai_controller/controller)
+	if(!..())
+		return FALSE
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
 		if((H.trader_rep[TRADER_KAMILLA] || 0) >= 50)
 			return FALSE
 	return TRUE
@@ -41,92 +42,111 @@
 
 /datum/ai_controller/basic_controller/killer
 	blackboard = list(
-		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_kamilla_friends
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_kamilla_friends,
+		BB_TARGET_MINIMUM_STAT = UNCONSCIOUS
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
-	behavior_tree_json = "modular_bandastation/voyaker_events/code/mobs/killer.bt.json"
+	behavior_tree_json = "code/modules/mob/living/basic/killer.bt.json"
 
 /datum/bt_node/ai_behavior/killer_smoke
+	var/target_key
+	var/targeting_strategy = BB_TARGETING_STRATEGY
+	var/hiding_location_key
 
 /datum/bt_node/ai_behavior/killer_smoke/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/mob/living/basic/killer/killer = controller.pawn
 	if(!killer)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(killer.retreating || killer.healing)
-		return AI_BEHAVIOR_FAILED
-	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[hiding_location_key]
 	if(!target)
-		return AI_BEHAVIOR_FAILED
+		target = controller.blackboard[target_key]
+	if(!target)
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(killer.stat != CONSCIOUS)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	var/dist = get_dist(killer, target)
 	if(dist > 3)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(world.time < killer.next_smoke)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	killer.next_smoke = world.time + killer.smoke_cooldown
 	INVOKE_ASYNC(killer, TYPE_PROC_REF(/mob/living/basic/killer, release_smoke))
-	return AI_BEHAVIOR_SUCCEEDED
+	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 
 /datum/bt_node/ai_behavior/killer_uzi
+	var/target_key
+	var/targeting_strategy = BB_TARGETING_STRATEGY
+	var/hiding_location_key
 
 /datum/bt_node/ai_behavior/killer_uzi/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/mob/living/basic/killer/killer = controller.pawn
 	if(!killer)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(killer.retreating || killer.healing)
-		return AI_BEHAVIOR_FAILED
-	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[hiding_location_key]
 	if(!target)
-		return AI_BEHAVIOR_FAILED
+		target = controller.blackboard[target_key]
+	if(!target)
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(killer.stat != CONSCIOUS)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	var/dist = get_dist(killer, target)
 	if(dist <= 3)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(dist > 10)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(world.time < killer.next_uzi)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	killer.next_uzi = world.time + killer.uzi_cooldown
 	INVOKE_ASYNC(killer, TYPE_PROC_REF(/mob/living/basic/killer, fire_uzi), target)
-	return AI_BEHAVIOR_SUCCEEDED
+	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 
 /datum/bt_node/ai_behavior/killer_grenade
+	var/target_key
+	var/targeting_strategy = BB_TARGETING_STRATEGY
+	var/hiding_location_key
 
 /datum/bt_node/ai_behavior/killer_grenade/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/mob/living/basic/killer/killer = controller.pawn
 	if(!killer)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(killer.retreating || killer.healing)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(killer.health > 75)
-		return AI_BEHAVIOR_FAILED
-	var/mob/living/target = controller.blackboard[BB_CURRENT_TARGET]
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+	var/mob/living/target = controller.blackboard[hiding_location_key]
 	if(!target)
-		return AI_BEHAVIOR_FAILED
+		target = controller.blackboard[target_key]
+	if(!target)
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(world.time < killer.next_grenade)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	killer.next_grenade = world.time + killer.grenade_cooldown
 	INVOKE_ASYNC(killer, TYPE_PROC_REF(/mob/living/basic/killer, release_grenade), target)
 	INVOKE_ASYNC(killer, TYPE_PROC_REF(/mob/living/basic/killer, begin_retreat), target)
-	return AI_BEHAVIOR_SUCCEEDED
+	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 
 /datum/bt_node/ai_behavior/killer_heal
+	var/target_key
+	var/targeting_strategy = BB_TARGETING_STRATEGY
+	var/hiding_location_key
 
 /datum/bt_node/ai_behavior/killer_heal/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/mob/living/basic/killer/killer = controller.pawn
 	if(!killer)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(!killer.retreating)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(killer.health >= killer.maxHealth)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if(killer.healing)
-		return AI_BEHAVIOR_FAILED
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	INVOKE_ASYNC(killer, TYPE_PROC_REF(/mob/living/basic/killer, begin_healing))
-	return AI_BEHAVIOR_SUCCEEDED
+	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 
 /mob/living/basic/killer/Initialize(mapload)
 	. = ..()
