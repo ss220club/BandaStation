@@ -53,7 +53,7 @@
 /datum/ai_controller/basic_controller/bigot
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies,
-		BB_TARGET_MINIMUM_STAT = IS_UNCONSCIOUS_OR_CRIT
+		BB_TARGET_MINIMUM_STAT = HARD_CRIT
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
