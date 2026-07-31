@@ -30,7 +30,7 @@ GLOBAL_LIST_INIT(raid_areas, list(
 		return
 	fully_heal()
 	revive()
-	set_stat(IS_UNCONSCIOUS_OR_CRIT)
+	set_stat(HARD_CRIT)
 	regenerate_icons()
 	set_static_vision(2 SECONDS)
 	set_temp_blindness(1 SECONDS)
