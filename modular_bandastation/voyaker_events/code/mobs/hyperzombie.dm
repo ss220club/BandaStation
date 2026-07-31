@@ -20,7 +20,7 @@
 /datum/ai_controller/basic_controller/hyperzombie
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies,
-		BB_TARGET_MINIMUM_STAT = UNCONSCIOUS
+		BB_TARGET_MINIMUM_STAT = IS_UNCONSCIOUS_OR_CRIT
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
@@ -40,7 +40,7 @@
 		target = controller.blackboard[target_key]
 	if(!target)
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
-	if(zombie.stat != CONSCIOUS)
+	if(IS_UNCONSCIOUS_OR_CRIT(zombie))
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	var/dist = get_dist(zombie, target)
 	if(dist <= 1 || dist > 5)

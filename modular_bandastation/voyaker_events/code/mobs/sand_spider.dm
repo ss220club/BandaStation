@@ -32,7 +32,7 @@
 /datum/ai_controller/basic_controller/spider/sand
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
-		BB_TARGET_MINIMUM_STAT = UNCONSCIOUS
+		BB_TARGET_MINIMUM_STAT = IS_UNCONSCIOUS_OR_CRIT
 	)
 	ai_movement = /datum/ai_movement/basic_avoidance
 	behavior_tree_json = "code/modules/mob/living/basic/sand_spider.bt.json"

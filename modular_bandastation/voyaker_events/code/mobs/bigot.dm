@@ -53,7 +53,7 @@
 /datum/ai_controller/basic_controller/bigot
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_zombies,
-		BB_TARGET_MINIMUM_STAT = UNCONSCIOUS
+		BB_TARGET_MINIMUM_STAT = IS_UNCONSCIOUS_OR_CRIT
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
@@ -85,7 +85,7 @@
 	var/datum/targeting_strategy/strategy = GET_TARGETING_STRATEGY(targeting_strategy)
 	if(!strategy.is_valid_target(controller.pawn, target, controller = controller))
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
-	if(bigot.stat != CONSCIOUS)
+	if(IS_UNCONSCIOUS_OR_CRIT(bigot))
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	var/dist = get_dist(bigot, target)
 	if(dist < 4 || dist > 8)
@@ -121,7 +121,7 @@
 	var/datum/targeting_strategy/strategy = GET_TARGETING_STRATEGY(targeting_strategy)
 	if(!strategy.is_valid_target(controller.pawn, target, controller = controller))
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
-	if(bigot.stat != CONSCIOUS)
+	if(IS_UNCONSCIOUS_OR_CRIT(bigot))
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	var/dist = get_dist(bigot, target)
 	if(dist < 5 || dist > 10)
