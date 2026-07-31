@@ -1,6 +1,6 @@
 /datum/targeting_strategy/basic/not_kamilla_friends
 
-/datum/targeting_strategy/basic/not_kamilla_friends/is_valid_target(mob/living/source, mob/living/target, datum/ai_controller/controller)
+/datum/targeting_strategy/basic/not_kamilla_friends/is_valid_target(mob/living/living_mob, atom/target, vision_range, datum/ai_controller/controller = null)
 	if(!..())
 		return FALSE
 	if(ishuman(target))
