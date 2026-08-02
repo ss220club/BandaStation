@@ -2,4 +2,4 @@
 	damage = 15
 
 /obj/projectile/beam/disabler/scatter
-	damage = 5
+	damage = 4.5
