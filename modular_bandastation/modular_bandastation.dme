@@ -72,7 +72,6 @@
 #include "paperwork/_paperwork.dme"
 #include "pixel_shift/_pixel_shift.dme"
 #include "preferences/_preferences.dme"
-#include "quirks/_quirks.dme"
 #include "revolution_overhaul/_revolution_overhaul.dme"
 #include "ru_jobs/_ru_jobs.dme"
 #include "security_levels/_security_levels.dme"
