@@ -6,9 +6,7 @@
 
 /datum/emote_wheel/New()
 	. = ..()
-	slots = list()
-	for(var/i in 1 to EMOTE_WHEEL_SLOTS)
-		slots += null
+	slots = new/list(EMOTE_WHEEL_SLOTS)
 
 /datum/emote_wheel/ui_state(mob/user)
 	return GLOB.always_state
@@ -56,11 +54,6 @@
 	emote_wheel = new
 	emote_wheel.slots[1] = get_emote_entry("laugh")
 
-/client/verb/test_emote()
-	set name = "Test Emote Wheel"
-	set category = "Debug"
-	play_emote_slot(1)
-
 /client/proc/play_emote_slot(slot)
 	if(!mob)
 		return
@@ -79,7 +72,6 @@
 
 /mob/living/carbon/human/proc/on_emote_wheel()
 	SIGNAL_HANDLER
-	to_chat(src, "Signal received")
 	INVOKE_ASYNC(src, PROC_REF(open_emote_wheel))
 
 /mob/living/carbon/human/proc/open_emote_wheel()
@@ -89,7 +81,6 @@
 	for(var/i in 1 to EMOTE_WHEEL_SLOTS)
 		var/datum/emote_entry/E = client.emote_wheel.slots[i]
 		var/image/I = image('icons/hud/radial.dmi', "radial_slice")
-		I.maptext = MAPTEXT_TINY_UNICODE(i)
 		I.maptext_width = 32
 		I.maptext_height = 0
 		I.maptext_x = 0
@@ -99,10 +90,12 @@
 		else
 			I.maptext = "<div align='center'><font size=1>SLOT [i]</font></div>"
 		radial["slot_[i]"] = I
-	var/result = show_radial_menu(src, src, radial, radius = 48, require_near = FALSE,)
-	if(!result)
+	var/result = show_radial_menu(src, src, radial, radius = 48, require_near = FALSE)
+	if(!result || !client?.emote_wheel)
 		return
 	var/slot = text2num(copytext(result, 6))
+	if(!slot || slot < 1 || slot > EMOTE_WHEEL_SLOTS)
+		return
 	var/datum/emote_entry/E = client.emote_wheel.slots[slot]
 	if(E)
 		client.play_emote_slot(slot)

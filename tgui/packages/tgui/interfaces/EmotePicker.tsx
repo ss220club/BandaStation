@@ -14,7 +14,7 @@ type Data = {
   emotes: Emote[];
 };
 
-export const EmotePicker = (_props, context) => {
+export function EmotePicker(props: {}, context) {
   const { act, data } = useBackend<Data>(context);
 
   const [search, setSearch] = useState('');
