@@ -284,7 +284,10 @@ def main() -> int:
         print(f'Found {len(bt_files)} .bt.json source files in {code_dir}')
         for src_path in bt_files:
             # The compiled file mirrors the source path relative to the repo root, so trees that share a basename dont fucking break.
-            rel = src_path.relative_to(repo_root).as_posix()  # "code/datums/ai/dog/dog.bt.json"
+            if src_path.is_relative_to(code_dir):
+                rel = src_path.relative_to(code_dir).as_posix()
+            else:
+                rel = src_path.relative_to(repo_root).as_posix().split("/code/", 1)[1]
             tree_name = rel[:-len('.json')]                   # "code/datums/ai/dog/dog.bt"
             compiled_path = generated_dir / f'{tree_name}.compiled.json'
 
