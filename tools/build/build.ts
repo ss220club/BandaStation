@@ -194,10 +194,12 @@ export const BehaviorTreeCompilerTarget = new Juke.Target({
   outputs: () => {
   const files = [
     ...Juke.glob('code/**/*.bt.json'),
-    ...Juke.glob('modular_bandastation/**/code/**/*.bt.json'),
+    ...Juke.glob('modular_bandastation/**/*.bt.json'),
   ];
   return files.map((file) => {
-    const rel = file.replace(/\.bt\.json$/, '');
+    const rel = file
+      .replace(/^modular_bandastation\/[^/]+\//, '')
+      .replace(/\.bt\.json$/, '');
     return `build/behavior_trees/${rel}.bt.compiled.json`;
     });
   },
