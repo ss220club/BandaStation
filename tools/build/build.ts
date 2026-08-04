@@ -190,18 +190,15 @@ export const DmMapsIncludeTarget = new Juke.Target({
 });
 
 export const BehaviorTreeCompilerTarget = new Juke.Target({
-  inputs: ['code/**/*.bt.json', 'modular_bandastation/**/*.bt.json', 'code/__DEFINES/**/*.dm'],
+  inputs: ['code/**/*.bt.json', 'modular_bandastation/**/*.bt.json', 'code/__DEFINES/**/*.dm', "tools/build_bt.py"],
   outputs: () => {
-    const files = [
-      ...Juke.glob('code/**/*.bt.json'),
-      ...Juke.glob('modular_bandastation/**/*.bt.json'),
-    ];
-    return files.map((file) => {
-      const rel = file
-        .replace(/^code\//, '')
-        .replace(/^modular_bandastation\/[^/]+\/code\//, '')
-        .replace(/\.bt\.json$/, '');
-      return `build/behavior_trees/${rel}.bt.compiled.json`;
+  const files = [
+    ...Juke.glob('code/**/*.bt.json'),
+    ...Juke.glob('modular_bandastation/**/code/**/*.bt.json'),
+  ];
+  return files.map((file) => {
+    const rel = file.replace(/\.bt\.json$/, '');
+    return `build/behavior_trees/${rel}.bt.compiled.json`;
     });
   },
   executes: async () => {

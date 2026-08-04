@@ -276,7 +276,8 @@ def main() -> int:
     generated_paths: set[Path] = set()
 
     code_dirs = [
-        repo_root / 'code',
+        repo_root / "code",
+        *repo_root.glob("modular_bandastation/**/code"),
     ]
 
     for code_dir in code_dirs:
