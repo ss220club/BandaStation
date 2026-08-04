@@ -15,7 +15,7 @@ type Data = {
 };
 
 export function EmotePicker(_props: Record<string, never>, context) {
-  const { act, data } = useBackend<Data>(context);
+  const { act, data } = useBackend<Data>();
 
   const [search, setSearch] = useState('');
 
@@ -36,7 +36,7 @@ export function EmotePicker(_props: Record<string, never>, context) {
               fluid
               placeholder="Поиск..."
               value={search}
-              onInput={(e, value) => setSearch(value)}
+              onChange={(value) => setSearch(String(value))}
             />
           </Stack.Item>
 
