@@ -47,7 +47,7 @@
 	ui_interact(C.mob)
 
 /client
-    var/datum/emote_wheel/emote_wheel
+	var/datum/emote_wheel/emote_wheel
 
 /client/New()
 	. = ..()
