@@ -4,14 +4,14 @@ SUBSYSTEM_DEF(casing_cleanup)
 	runlevels = RUNLEVEL_GAME
 
 /datum/controller/subsystem/casing_cleanup/fire()
-    for(var/obj/item/ammo_casing/C in GLOB.shell_casings)
-        if(QDELETED(C))
-            continue
-        if(world.time - C.spawn_time < 15 MINUTES)
-            continue
-        if(!isturf(C.loc))
-            continue
-        qdel(C)
+	for(var/obj/item/ammo_casing/C in GLOB.shell_casings)
+		if(QDELETED(C))
+			continue
+		if(world.time - C.spawn_time < 15 MINUTES)
+			continue
+		if(!isturf(C.loc))
+			continue
+		qdel(C)
 
 SUBSYSTEM_DEF(gibs_cleanup)
 	name = "EFTK Gibs Cleanup System"
