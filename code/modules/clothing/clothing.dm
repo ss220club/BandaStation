@@ -23,6 +23,8 @@
 	var/toggle_message
 	///chat message when the visor is toggled up.
 	var/alt_toggle_message
+	/// What level of emp protection item has
+	var/emp_protection = EMP_PROTECTION_NONE
 
 	var/clothing_flags = NONE
 	///List of items that can be equipped in the suit storage slot while we're worn.
@@ -369,7 +371,7 @@
 	. = ..()
 	if (clothing_flags & THICKMATERIAL)
 		.["плотный"] = "Защищает от большинства инъекций и спреев."
-	if (clothing_flags & CASTING_CLOTHES)
+	if (HAS_TRAIT(src, TRAIT_CASTING_CLOTHING))
 		.["магический"] = "Позволяет магическим существам произносить заклинания, пока надет [declent_ru(NOMINATIVE)]."
 	if((clothing_flags & STOPSPRESSUREDAMAGE) || (visor_flags & STOPSPRESSUREDAMAGE))
 		.["герметичный"] = "Защищает носителя от чрезвычайно низкого и высокого давления, например как вакуум космоса."
@@ -399,6 +401,8 @@
 		.["стерильный"] = "Увеличивает скорость введения реагентов на [round((1/NITRILE_GLOVES_MULTIPLIER-1)*100, 1)]%."
 	if(TRAIT_FAST_CUFFING in clothing_traits)
 		.["сдерживающий"] = "Увеличивает скорость, с которой вы применяете стяжки или наручники."
+	if(emp_protection >= EMP_PROTECTION_NONE)
+		.["ЭМИ-устойчивый"] = "Снижает воздействие электромагнитных импульсов на носителя."
 
 /obj/item/clothing/examine_descriptor(mob/user)
 	return "надеваемый предмет"
@@ -440,21 +444,33 @@
 				readout += "<b><u>ПОКРЫТИЕ</u></b>"
 				readout += "Блокирует [english_list(things_blocked)]."
 
+		var/list/parts_covered = list()
+		if(body_parts_covered & HEAD)
+			parts_covered += "голову"
+		if(body_parts_covered & CHEST)
+			parts_covered += "торс"
+		if(body_parts_covered & (ARMS|HANDS))
+			parts_covered += "руки"
+		if(body_parts_covered & (LEGS|FEET))
+			parts_covered += "ноги"
+		if(length(parts_covered))
+			readout += "Покрывает [english_list(parts_covered)] носителя."
+
 		if((clothing_flags & STOPSPRESSUREDAMAGE) || (visor_flags & STOPSPRESSUREDAMAGE))
-			var/list/parts_covered = list()
+			var/list/pressure_parts_covered = list()
 			var/output_string = "Защищает"
 			if(!(clothing_flags & STOPSPRESSUREDAMAGE))
 				output_string = "Если активирован, защищает"
 			if(body_parts_covered & HEAD)
-				parts_covered += "голову"
+				pressure_parts_covered += "голову"
 			if(body_parts_covered & CHEST)
-				parts_covered += "торс"
+				pressure_parts_covered += "торс"
 			if(body_parts_covered & (ARMS|HANDS))
-				parts_covered += "руки"
+				pressure_parts_covered += "руки"
 			if(body_parts_covered & (LEGS|FEET))
-				parts_covered += "ноги"
-			if(length(parts_covered))
-				readout += "[output_string] [english_list(parts_covered)] владельца от [span_tooltip("Крайне низкое давление представляет наибольшую опасность в вакууме космоса.", "низкого давления")]."
+				pressure_parts_covered += "ноги"
+			if(length(pressure_parts_covered))
+				readout += "[output_string] [english_list(pressure_parts_covered)] носителя от [span_tooltip("Крайне низкое давление представляет наибольшую опасность в вакууме космоса.", "низкого давления")]."
 
 		var/heat_prot
 		switch (max_heat_protection_temperature)
