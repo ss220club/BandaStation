@@ -396,7 +396,6 @@
 		reagent_note = "REAGENTS: [pretty_string_from_reagent_list(reagents.reagent_list)]"
 
 	if(ismob(firer) && !do_not_log)
-		world.log << "PROJECTILE HIT: [firer] -> [living_target]"
 		if(isliving(living_target))
 			var/mob/living/L = living_target
 			if(isliving(firer))

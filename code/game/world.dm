@@ -127,9 +127,8 @@ GLOBAL_VAR(restart_counter)
  */
 /world/New()
 	log_world("World loaded at [server_timestamp()]!")
-	world.increase_max_x(256)
-	world.increase_max_y(300)
-	world.log << "MAXX=[world.maxx] MAXY=[world.maxy] MAXZ=[world.maxz]"
+	//world.increase_max_x(256)
+	//world.increase_max_y(300)
 
 	// First possible sleep()
 	InitTgs()

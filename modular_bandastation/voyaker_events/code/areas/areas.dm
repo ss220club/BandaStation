@@ -9,6 +9,7 @@
 	light_power = 0.5
 	requires_power = FALSE
 	default_gravity = STANDARD_GRAVITY
+	ambience_index = null
 
 /area/new_sydney/building
 	name = "Помещения"

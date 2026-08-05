@@ -29419,6 +29419,7 @@
 	max_integrity = 50000
 	},
 /obj/effect/landmark/ambient_sound/hub,
+/obj/effect/landmark/observer_start,
 /turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
 "tXG" = (

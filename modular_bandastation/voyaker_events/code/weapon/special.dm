@@ -129,6 +129,11 @@
 		ammo_pack.attach_gun(user)
 	else
 		QDEL_NULL(src)
+	if(ammo_pack && isatom(ammo_pack) && ammo_pack.loc == user)
+		// put it back into the pack owned by this user
+		ammo_pack.attach_gun(user)
+	else
+		QDEL_NULL(src)
 
 /obj/item/gun/ballistic/minigun/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	if(ammo_pack)
@@ -162,14 +167,6 @@
 		ammo_pack.gun = null
 		ammo_pack = null
 	return ..()
-
-/obj/item/gun/ballistic/minigun/dropped(mob/user)
-	. = ..()
-	if(ammo_pack && isatom(ammo_pack) && ammo_pack.loc == user)
-		// put it back into the pack owned by this user
-		ammo_pack.attach_gun(user)
-	else
-		QDEL_NULL(src)
 
 /obj/item/ammo_box/magazine/internal/minigun
 	name = "Minigun back stash box"

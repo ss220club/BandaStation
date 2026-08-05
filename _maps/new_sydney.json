@@ -1,7 +1,7 @@
 {
 	"version": 1,
 	"map_name": "New Sydney",
-	"map_path": "bandastation",
+	"map_path": "map_files/NewSydney",
 	"map_file": "NewSydney_mini.dmm",
 	"fluff_name": "Новый Сидней",
 	"space_ruin_levels": 0,

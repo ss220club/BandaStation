@@ -60,6 +60,11 @@ map wawastation
 	votable
 endmap
 
+map newsydney
+    minplayers 20
+    votable
+endmap
+
 # Debug-only maps.
 
 map gateway_test
