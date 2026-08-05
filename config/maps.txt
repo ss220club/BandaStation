@@ -60,7 +60,7 @@ map wawastation
 	votable
 endmap
 
-map newsydney
+map new_sydney
     minplayers 20
     votable
 endmap
