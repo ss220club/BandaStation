@@ -43,7 +43,6 @@
 	var/hiding_location_key
 
 /datum/bt_node/ai_behavior/sand_spider_logic/perform(seconds_per_tick, datum/ai_controller/controller)
-	world.log << "SPIDER LOGIC"
 	var/mob/living/basic/spider/sand/spider = controller.pawn
 	if(!spider)
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
