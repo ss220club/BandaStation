@@ -90,7 +90,7 @@
 		last_scan_text = floor_text
 		return
 
-	if(ispodperson(M) && !scanpower <= SCANPOWER_ADVANCED)
+	if(ispodperson(M) && scanpower < SCANPOWER_ADVANCED)
 		to_chat(user, span_info("Биологическая структура [M.declent_ru(GENITIVE)] слишком сложна для анализатора здоровья."))
 		return
 
@@ -160,7 +160,7 @@
 	var/tox_loss = target.get_tox_loss()
 	var/fire_loss = target.get_fire_loss()
 	var/brute_loss = target.get_brute_loss()
-	var/mob_status = (!target.appears_alive() ? span_alert("<b>Мёртв</b>") : "<b>[round(target.health / target.maxHealth, 0.01) * 100]% здоровья</b>")
+	var/mob_status = (IS_DEAD_OR_FAKING(target) ? span_alert("<b>Мёртв</b>") : "<b>[round(target.health / target.maxHealth, 0.01) * 100]% здоровья</b>")
 
 	if(HAS_TRAIT(target, TRAIT_FAKEDEATH) && target.stat != DEAD)
 		// if we don't appear to actually be in a "dead state", add fake oxyloss
@@ -456,16 +456,16 @@
 		else
 			cure_text = disease.cure_text
 		render_list += "<span class='alert ml-1'>\
-			<b>Внимание: [disease.form]</b><br>\
+			[conditional_tooltip("<b>Внимание: [disease.form] обнаружена</b>", "Примените указанное лекарство или [/datum/reagent/medicine/spaceacillin::name], обеспечьте больного едой и отдыхом.", tochat)]<br>\
 			<div class='ml-2'>\
 			Название: [disease.name].<br>\
 			Распространение: [disease.spread_text].<br>\
-			Стадия: [disease.stage]/[disease.max_stages].<br>\
+			Stage: [disease.stage]/[disease.max_stages].<br>\
 			Возможное лекарство: [cure_text]</div>\
 			</span>"
 
 	// Time of death
-	if(target.station_timestamp_timeofdeath && !target.appears_alive())
+	if(target.station_timestamp_timeofdeath && IS_DEAD_OR_FAKING(target))
 		render_list += "<hr>"
 		render_list += "<span class='info ml-1'>Время смерти: [target.station_timestamp_timeofdeath]</span><br>"
 		render_list += "<span class='alert ml-1'><b>Субъект умер [DisplayTimeText(round(world.time - target.timeofdeath))] назад.</b></span><br>"
