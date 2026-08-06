@@ -37,6 +37,9 @@
 
 /datum/station_goal/Topic(href, href_list)
 	..()
+	if(!usr.client?.holder)
+		return
+
 	if(!check_rights(R_ADMIN) || !usr.client.holder.CheckAdminHref(href, href_list))
 		return
 
