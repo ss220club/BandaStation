@@ -256,6 +256,18 @@ def main() -> int:
     defines = parse_defines(repo_root)
     print(f'  Resolved {len(defines)} defines.')
 
+    bt_files = []
+
+    # Обычные деревья TG
+    bt_files.extend(repo_root.glob('code/**/*.bt.json'))
+
+    #BANDASTATION ADD BEGIN: Деревья модулей
+    bt_files.extend(repo_root.glob('modular_bandastation/**/code/**/*.bt.json'))
+    #BANDASTATION ADD ENDED
+
+    bt_files = sorted(bt_files)
+    print(f'Found {len(bt_files)} .bt.json source files.')
+
     errors = 0
     dirty = 0
     # Maps each target compiled path back to the source that produced it, so we can
@@ -264,7 +276,8 @@ def main() -> int:
     generated_paths: set[Path] = set()
 
     code_dirs = [
-        repo_root / 'code',
+        repo_root / "code",
+        *repo_root.glob("modular_bandastation/**/code"),
     ]
 
     for code_dir in code_dirs:
@@ -272,8 +285,11 @@ def main() -> int:
         print(f'Found {len(bt_files)} .bt.json source files in {code_dir}')
         for src_path in bt_files:
             # The compiled file mirrors the source path relative to the repo root, so trees that share a basename dont fucking break.
-            rel = src_path.relative_to(repo_root).as_posix()  # "code/datums/ai/dog/dog.bt.json"
-            tree_name = rel[:-len('.json')]                   # "code/datums/ai/dog/dog.bt"
+            if src_path.is_relative_to(code_dir):
+                rel = src_path.relative_to(code_dir).as_posix()
+            else:
+                rel = src_path.relative_to(repo_root).as_posix().split("/code/", 1)[1]
+            tree_name = f"code/{rel[:-len('.json')]}"                   # "code/datums/ai/dog/dog.bt"
             compiled_path = generated_dir / f'{tree_name}.compiled.json'
 
             prior = produced.get(compiled_path)
