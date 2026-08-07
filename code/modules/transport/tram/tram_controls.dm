@@ -27,6 +27,7 @@
 	var/specific_transport_id = TRAMSTATION_LINE_1
 	/// If the sign is adjusted for split type tram windows
 	var/split_mode = FALSE
+	generate_map_preview = FALSE
 
 /obj/machinery/computer/tram_controls/split
 	circuit = /obj/item/circuitboard/computer/tram_controls/split
@@ -158,6 +159,9 @@
 		update_appearance()
 		return
 
+	if(controller && (controller?.specific_transport_id != specific_transport_id))
+		return
+
 	if(isnull(controller) || !controller.controller_operational)
 		icon_screen = "[base_icon_state]_broken"
 		update_appearance()
@@ -237,22 +241,19 @@
 	if(tram)
 		if(SStts.tts_enabled)
 			tram.nav_beacon.voice = SStts.tram_voice
-		switch(response_code)
-			if(REQUEST_SUCCESS)
-				tram.nav_beacon.say("Следующая станция: [response_info]")
 
-			if(REQUEST_FAIL)
-				if(!LAZYFIND(relevant, src))
+		if(response_code == REQUEST_FAIL)
+			if(!LAZYFIND(relevant, src))
+				return
+
+			switch(response_info)
+				if(NOT_IN_SERVICE)
+					tram.nav_beacon.say("Трамвай в данный момент недоступен. Пожалуйста, свяжитесь с техническим специалистом.")
+				if(INVALID_PLATFORM)
+					tram.nav_beacon.say("Ошибка конфигурации. Пожалуйста, свяжитесь с техническим специалистом.")
+				if(INTERNAL_ERROR)
+					tram.nav_beacon.say("Ошибка контроллера трамвая. Пожалуйста, обратитесь к техническому специалисту или члену экипажа, имеющему доступ к телекоммуникационным системам трамвая, для сброса контроллера.")
+				else
 					return
-
-				switch(response_info)
-					if(NOT_IN_SERVICE)
-						tram.nav_beacon.say("Трамвай в данный момент недоступен. Пожалуйста, свяжитесь с техническим специалистом.")
-					if(INVALID_PLATFORM)
-						tram.nav_beacon.say("Ошибка конфигурации. Пожалуйста, свяжитесь с техническим специалистом.")
-					if(INTERNAL_ERROR)
-						tram.nav_beacon.say("Ошибка контроллера трамвая. Пожалуйста, обратитесь к техническому специалисту или члену экипажа, имеющему доступ к телекоммуникационным системам трамвая, для сброса контроллера.")
-					else
-						return
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/computer/tram_controls, 32)

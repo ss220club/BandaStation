@@ -4,6 +4,7 @@
 /obj/machinery/computer/operating
 	name = "operating computer"
 	desc = "Monitors patient vitals and displays surgery steps. Can be loaded with surgery disks to perform experimental procedures. Automatically syncs to operating tables within its line of sight for surgical tech advancement."
+	icon_state = MAP_SWITCH("computer", "/obj/machinery/computer/crew")
 	icon_screen = "crew"
 	icon_keyboard = "med_key"
 	circuit = /obj/item/circuitboard/computer/operating
@@ -113,7 +114,7 @@
 	if(!is_operational)
 		return UI_CLOSE
 	// if you're knocked out, ie anesthetic... definitely a no-go
-	if(user.stat >= UNCONSCIOUS || HAS_TRAIT(user, TRAIT_KNOCKEDOUT))
+	if(IS_UNCONSCIOUS(user))
 		return UI_CLOSE
 	// the patient itself should be blocked from viewing the computer
 	if(user.body_position == LYING_DOWN)
@@ -169,19 +170,19 @@
 	data["patient"] = list()
 	var/mob/living/patient = table.patient
 
-	switch(patient.stat)
-		if(CONSCIOUS)
-			data["patient"]["stat"] = "В сознании"
-			data["patient"]["statstate"] = "good"
-		if(SOFT_CRIT)
-			data["patient"]["stat"] = "Крит. состояние"
-			data["patient"]["statstate"] = "average"
-		if(UNCONSCIOUS, HARD_CRIT)
-			data["patient"]["stat"] = "Без сознания"
-			data["patient"]["statstate"] = "average"
-		if(DEAD)
-			data["patient"]["stat"] = "Мёртв"
-			data["patient"]["statstate"] = "bad"
+	if(patient.stat == DEAD)
+		data["patient"]["stat"] = "Мёртв"
+		data["patient"]["statstate"] = "bad"
+	else if (patient.stat == HARD_CRIT || patient.stat == SOFT_CRIT)
+		data["patient"]["stat"] = "Крит. состояние"
+		data["patient"]["statstate"] = patient.stat == HARD_CRIT ? "bad" : "average"
+	else if (IS_UNCONSCIOUS(patient))
+		data["patient"]["stat"] = "Без сознания"
+		data["patient"]["statstate"] = "average"
+	else
+		data["patient"]["stat"] = "Стабилен"
+		data["patient"]["statstate"] = "good"
+
 	data["patient"]["health"] = patient.health
 	data["patient"]["blood_type"] = patient.get_bloodtype()?.name || "НЕИЗВЕСТНО"
 	data["patient"]["maxHealth"] = patient.maxHealth

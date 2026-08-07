@@ -4230,7 +4230,7 @@
 /area/station/engineering/supermatter/room)
 "baR" = (
 /obj/structure/rack,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "baV" = (
 /obj/machinery/portable_atmospherics/canister/air,
@@ -6097,10 +6097,7 @@
 /area/station/hallway/secondary/exit/departure_lounge)
 "bxL" = (
 /obj/structure/table/wood,
-/obj/machinery/fax{
-	fax_name = "Captain's Office";
-	name = "Captain's Fax Machine"
-	},
+/obj/machinery/fax/heads/captain,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/captain)
 "bxM" = (
@@ -7749,7 +7746,7 @@
 /obj/effect/turf_decal/delivery,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "bSC" = (
 /obj/item/kirbyplants/random,
@@ -15864,7 +15861,7 @@
 /obj/effect/turf_decal/caution/stand_clear,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "dNx" = (
 /obj/effect/turf_decal/stripes/corner{
@@ -17340,7 +17337,7 @@
 "ehE" = (
 /obj/effect/turf_decal/caution/stand_clear,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "ehR" = (
 /obj/structure/rack,
@@ -17352,7 +17349,7 @@
 /turf/open/floor/iron,
 /area/station/construction/mining/aux_base)
 "eia" = (
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "eio" = (
 /obj/structure/disposalpipe/segment,
@@ -17695,10 +17692,7 @@
 /area/station/maintenance/department/electrical)
 "emv" = (
 /obj/structure/table/glass,
-/obj/machinery/fax{
-	fax_name = "Chief Medical Officer's Office";
-	name = "Chief Medical Officer's Fax Machine"
-	},
+/obj/machinery/fax/heads/cmo,
 /obj/machinery/requests_console/directional/east{
 	name = "Chief Medical Officer's Requests Console";
 	department = "Chief Medical Officer's Desk"
@@ -22154,7 +22148,7 @@
 "fsE" = (
 /obj/structure/rack,
 /obj/effect/spawner/random/maintenance,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "fsH" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -24411,10 +24405,7 @@
 	dir = 4
 	},
 /obj/structure/table/reinforced,
-/obj/machinery/fax{
-	fax_name = "Chief Engineer's Office";
-	name = "Chief Engineer's Fax Machine"
-	},
+/obj/machinery/fax/heads/ce,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/ce)
 "fTH" = (
@@ -25689,7 +25680,7 @@
 /area/station/engineering/atmos)
 "gjF" = (
 /obj/structure/table/wood,
-/obj/structure/reagent_dispensers/beerkeg,
+/obj/effect/spawner/random/food_or_drink/keg,
 /turf/open/floor/wood,
 /area/station/maintenance/aft)
 "gjK" = (
@@ -25868,7 +25859,7 @@
 /obj/effect/turf_decal/caution/stand_clear,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "gmt" = (
 /obj/effect/decal/cleanable/dirt,
@@ -27553,7 +27544,7 @@
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "gIr" = (
-/obj/structure/reagent_dispensers/beerkeg,
+/obj/effect/spawner/random/food_or_drink/keg,
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/aft)
@@ -30373,7 +30364,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/port)
 "hqp" = (
-/obj/machinery/computer/upload/ai{
+/obj/machinery/ai_law_rack/base/core{
 	dir = 1
 	},
 /obj/machinery/flasher/directional/south{
@@ -33569,7 +33560,7 @@
 /area/station/maintenance/fore)
 "idy" = (
 /obj/effect/spawner/random/structure/shipping_container/station_appropriate,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "idC" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -34275,7 +34266,7 @@
 	},
 /obj/effect/turf_decal/delivery,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "imT" = (
 /obj/machinery/door/firedoor,
@@ -35109,6 +35100,7 @@
 "ixF" = (
 /obj/structure/table/wood,
 /obj/machinery/light/small/directional/south,
+/obj/item/storage/photo_album/bar,
 /turf/open/floor/iron,
 /area/station/commons/dorms)
 "ixJ" = (
@@ -36379,7 +36371,7 @@
 "iOT" = (
 /obj/effect/turf_decal/loading_area,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "iOX" = (
 /obj/structure/cable,
@@ -36466,7 +36458,7 @@
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "iQE" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -37182,7 +37174,7 @@
 /obj/effect/turf_decal/trimline/tram/mid_joiner{
 	dir = 1
 	},
-/obj/structure/reagent_dispensers/beerkeg,
+/obj/effect/spawner/random/food_or_drink/keg,
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/north,
 /turf/open/floor/iron/dark/smooth_corner{
@@ -41328,7 +41320,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "kbc" = (
 /turf/open/floor/iron/stairs{
@@ -43746,7 +43738,7 @@
 /area/station/maintenance/ghetto/fore/starboard)
 "kEI" = (
 /obj/structure/table/wood,
-/obj/item/food/grown/harebell,
+/obj/item/food/grown/flower/harebell,
 /turf/open/floor/iron/dark,
 /area/station/security/prison/mess)
 "kEM" = (
@@ -44519,9 +44511,9 @@
 "kNm" = (
 /obj/structure/table/glass,
 /obj/item/food/grown/wheat,
-/obj/item/food/grown/watermelon,
-/obj/item/food/grown/watermelon,
-/obj/item/food/grown/watermelon,
+/obj/item/food/grown/melonlike/watermelon,
+/obj/item/food/grown/melonlike/watermelon,
+/obj/item/food/grown/melonlike/watermelon,
 /obj/item/food/grown/citrus/orange,
 /obj/item/food/grown/grapes,
 /obj/item/food/grown/cocoapod,
@@ -47213,7 +47205,7 @@
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "luq" = (
 /obj/structure/sign/poster/random/directional/east,
@@ -48329,12 +48321,12 @@
 /area/station/maintenance/ghetto/port/greater)
 "lJL" = (
 /obj/structure/table/wood,
-/obj/item/food/grown/poppy{
+/obj/item/food/grown/flower/poppy{
 	pixel_x = 2;
 	pixel_y = 3
 	},
-/obj/item/food/grown/poppy,
-/obj/item/food/grown/poppy{
+/obj/item/food/grown/flower/poppy,
+/obj/item/food/grown/flower/poppy{
 	pixel_x = 5;
 	pixel_y = -2
 	},
@@ -51464,10 +51456,7 @@
 /area/station/engineering/supermatter/engine)
 "myR" = (
 /obj/structure/table/glass,
-/obj/machinery/fax{
-	fax_name = "Research Director's Office";
-	name = "Research Director's Fax Machine"
-	},
+/obj/machinery/fax/heads/rd,
 /obj/effect/turf_decal/tile/purple/half{
 	dir = 4
 	},
@@ -51881,7 +51870,7 @@
 "mDM" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "mDR" = (
 /obj/effect/decal/cleanable/dirt,
@@ -54557,12 +54546,12 @@
 /area/station/maintenance/ghetto/starboard)
 "nlt" = (
 /obj/structure/table/wood,
-/obj/item/food/grown/harebell{
+/obj/item/food/grown/flower/harebell{
 	pixel_x = 2;
 	pixel_y = 4
 	},
-/obj/item/food/grown/harebell,
-/obj/item/food/grown/harebell{
+/obj/item/food/grown/flower/harebell,
+/obj/item/food/grown/flower/harebell{
 	pixel_x = -3;
 	pixel_y = 3
 	},
@@ -57116,7 +57105,7 @@
 /area/station/maintenance/starboard/upper)
 "nRP" = (
 /obj/effect/turf_decal/bot_white/right,
-/obj/structure/closet/crate/goldcrate,
+/obj/structure/closet/crate/goldcrate/stocked,
 /obj/machinery/newscaster/directional/west,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
@@ -57259,7 +57248,7 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "nTq" = (
 /obj/structure/bookcase,
@@ -66184,7 +66173,7 @@
 /area/station/science/robotics/lab)
 "qad" = (
 /obj/machinery/light/cold/directional/north,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "qah" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
@@ -66241,7 +66230,7 @@
 /area/station/security/prison)
 "qaB" = (
 /obj/machinery/portable_atmospherics/canister/air,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "qaD" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -66682,7 +66671,7 @@
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/ghetto/starboard)
 "qia" = (
-/obj/structure/reagent_dispensers/beerkeg,
+/obj/effect/spawner/random/food_or_drink/keg,
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/aft)
 "qim" = (
@@ -66863,10 +66852,7 @@
 /area/station/medical/surgery/fore)
 "qke" = (
 /obj/structure/table,
-/obj/machinery/fax{
-	fax_name = "Quartermaster's Office";
-	name = "Quartermaster's Fax Machine"
-	},
+/obj/machinery/fax/heads/qm,
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/qm)
@@ -67840,7 +67826,7 @@
 /obj/effect/turf_decal/delivery,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "qyl" = (
 /obj/machinery/photocopier/prebuilt,
@@ -68737,9 +68723,6 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/ghetto)
 "qKH" = (
-/obj/machinery/computer/upload/borg{
-	dir = 1
-	},
 /obj/item/radio/intercom/directional/south{
 	broadcasting = 1;
 	frequency = 1447;
@@ -70432,7 +70415,7 @@
 /obj/effect/turf_decal/stripes/corner,
 /obj/machinery/light/cold/directional/south,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "rgo" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
@@ -70786,7 +70769,7 @@
 /obj/structure/table/wood,
 /obj/item/radio/intercom/directional/east,
 /obj/item/storage/fancy/donut_box,
-/obj/item/food/grown/poppy,
+/obj/item/food/grown/flower/poppy,
 /obj/machinery/newscaster/directional/north,
 /turf/open/floor/wood,
 /area/station/commons/dorms)
@@ -70805,7 +70788,7 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "rkA" = (
 /obj/structure/closet/crate/bin,
@@ -73178,7 +73161,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/aft)
 "rPv" = (
-/obj/structure/reagent_dispensers/beerkeg,
+/obj/effect/spawner/random/food_or_drink/keg,
 /turf/open/floor/glass,
 /area/station/maintenance/starboard/upper)
 "rPA" = (
@@ -74423,7 +74406,7 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "sew" = (
 /obj/structure/chair{
@@ -76941,7 +76924,7 @@
 "sJc" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/wood,
-/obj/structure/reagent_dispensers/beerkeg,
+/obj/effect/spawner/random/food_or_drink/keg,
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/stone,
 /area/station/maintenance/ghetto/starboard)
@@ -80322,6 +80305,7 @@
 /obj/machinery/light/directional/east,
 /obj/structure/table/wood,
 /obj/item/flashlight/flare/candle,
+/obj/item/storage/photo_album/chapel,
 /turf/open/floor/iron/dark,
 /area/station/service/chapel)
 "tDb" = (
@@ -80632,7 +80616,7 @@
 /obj/machinery/light/cold/directional/south,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "tHc" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -82772,7 +82756,7 @@
 /area/station/service/bar/atrium/ghetto)
 "ugz" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "ugE" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -83398,7 +83382,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/ghetto)
 "upL" = (
-/obj/structure/reagent_dispensers/beerkeg,
+/obj/effect/spawner/random/food_or_drink/keg,
 /turf/open/floor/wood,
 /area/station/maintenance/ghetto/port/aft)
 "upO" = (
@@ -90838,7 +90822,7 @@
 /obj/effect/turf_decal/loading_area{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "wji" = (
 /obj/structure/disposalpipe/segment{
@@ -91926,10 +91910,7 @@
 "wzG" = (
 /obj/machinery/airalarm/directional/east,
 /obj/structure/table/wood,
-/obj/machinery/fax{
-	fax_name = "Head of Personnel's Office";
-	name = "Head of Personnel's Fax Machine"
-	},
+/obj/machinery/fax/heads/hop,
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
@@ -94022,13 +94003,9 @@
 /area/station/maintenance/ghetto/port/aft)
 "wYY" = (
 /obj/structure/table/wood/fancy/blue,
-/obj/item/ai_module/supplied/freeform,
-/obj/item/ai_module/reset,
+/obj/item/ai_module/law/supplied/freeform,
 /obj/machinery/light/directional/west,
 /obj/machinery/status_display/ai/directional/west,
-/obj/item/ai_module/reset/purge{
-	pixel_y = 11
-	},
 /turf/open/floor/iron/dark,
 /area/station/ai/upload/chamber)
 "wZf" = (
@@ -94716,7 +94693,7 @@
 /area/station/commons/fitness)
 "xgo" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/station/maintenance/ghetto/storage)
 "xgp" = (
 /obj/effect/decal/cleanable/dirt,
@@ -97345,10 +97322,7 @@
 /area/station/science/xenobiology)
 "xNC" = (
 /obj/structure/table/wood,
-/obj/machinery/fax{
-	fax_name = "Head of Security's Office";
-	name = "Head of Security's Fax Machine"
-	},
+/obj/machinery/fax/heads/hos,
 /obj/structure/extinguisher_cabinet/directional/west,
 /obj/machinery/light_switch/directional/north,
 /obj/machinery/button/door/directional/north{

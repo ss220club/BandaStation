@@ -70,7 +70,11 @@
 	if (flashed.stat == DEAD || issilicon(flashed) || isdrone(flashed))
 		return
 
-	if (flashed.stat != CONSCIOUS)
+	if (flashed.stat != STABLE)
+		flashed.balloon_alert(source, "в критическом состоянии!")
+		return
+
+	if (IS_UNCONSCIOUS(flashed))
 		flashed.balloon_alert(source, "без сознания!")
 		return
 
@@ -218,6 +222,7 @@
 	if (!new_member.has_antag_datum(/datum/antagonist/brother))
 		add_brother(new_member.current)
 	else
+		// the only place a joining member spends a conversion slot; converts get here via add_brother()
 		set_brothers_left(brothers_left - 1)
 
 /datum/team/brother_team/remove_member(datum/mind/member)
@@ -244,7 +249,9 @@
 		return FALSE
 #endif
 
-	set_brothers_left(brothers_left - 1)
+	// this spends a conversion slot via add_member()
+	new_brother.mind.add_antag_datum(/datum/antagonist/brother, src)
+
 	for (var/datum/mind/brother_mind as anything in members)
 		if (brother_mind == new_brother.mind)
 			continue
@@ -252,8 +259,6 @@
 		to_chat(brother_mind, span_notice("[span_bold("[new_brother.real_name]")] пробужден[genderize_ru(new_brother.gender, "", "а", "о", "ы")], чтобы помогать вам как ваш кровный брат!"))
 		if (brothers_left == 0)
 			to_chat(brother_mind, span_notice("Вы больше не можете пробуждать кровных братьев."))
-
-	new_brother.mind.add_antag_datum(/datum/antagonist/brother, src)
 
 	return TRUE
 

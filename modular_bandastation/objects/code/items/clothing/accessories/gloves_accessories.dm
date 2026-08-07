@@ -47,18 +47,18 @@
 
 	attached_to.update_accessory_overlay()
 
-/obj/item/clothing/accessory/gloves_accessory/attach(obj/item/clothing/gloves/attach_to, mob/living/attacher)
+/obj/item/clothing/accessory/gloves_accessory/try_attach(obj/item/clothing/gloves/attach_to, mob/living/attacher)
 	. = ..()
 	if(!minimize_when_attached)
 		return
 	pixel_z = -pixel_z
 	return .
 
-/obj/item/clothing/accessory/gloves_accessory/on_uniform_equipped(obj/item/clothing/gloves/source, mob/living/user, slot)
+/obj/item/clothing/accessory/gloves_accessory/on_uniform_equipped(obj/item/clothing/gloves/source, mob/living/user, slot, update = FALSE)
 	if(slot & source.slot_flags)
 		accessory_equipped(source, user)
 
-/obj/item/clothing/accessory/gloves_accessory/on_uniform_dropped(obj/item/clothing/gloves/source, mob/living/user)
+/obj/item/clothing/accessory/gloves_accessory/on_uniform_dropped(obj/item/clothing/gloves/source, mob/living/user, update = FALSE)
 	accessory_dropped(source, user)
 
 /obj/item/clothing/accessory/gloves_accessory/accessory_equipped(obj/item/clothing/gloves/clothes, mob/living/user)
