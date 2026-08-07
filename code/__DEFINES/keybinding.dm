@@ -50,6 +50,7 @@
 #define COMSIG_KB_HUMAN_LPOCKETEQUIP_DOWN "keybinding_human_lpocketequip_down"
 #define COMSIG_KB_HUMAN_RPOCKETEQUIP_DOWN "keybinding_human_rpocketequip_down"
 #define COMSIG_KB_HUMAN_QUICK_ACCESSORY_DRAW_DOWN "keybinding_human_quick_accessory_draw_down" //BANDASTATION EDIT: Accessory holsters
+#define COMSIG_KB_HUMAN_EMOTE_WHEEL_DOWN "keybinding_human_emote_wheel_down" //BANDASTATION EDIT: Emote Wheel
 
 //Living
 #define COMSIG_KB_LIVING_RESIST_DOWN "keybinding_living_resist_down"

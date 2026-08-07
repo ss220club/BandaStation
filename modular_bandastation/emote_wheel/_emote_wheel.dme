@@ -1,0 +1,4 @@
+#include "_emote_wheel.dm"
+
+#include "code/emote_wheel.dm"
+#include "code/emote_registry.dm"

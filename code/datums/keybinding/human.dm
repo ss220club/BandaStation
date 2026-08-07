@@ -81,3 +81,10 @@
 	full_name = "Быстро достать предмет из аксессуара"
 	description = "Достать предмет из первого слота хранилища аксессуара"
 	keybind_signal = COMSIG_KB_HUMAN_QUICK_ACCESSORY_DRAW_DOWN
+
+/datum/keybinding/human/emote_wheel
+	hotkey_keys = list("U") // BANDASTATION EDIT
+	name = "emote_wheel"
+	full_name = "Колесо эмоций"
+	description = "Открыть колесо эмоций"
+	keybind_signal = COMSIG_KB_HUMAN_EMOTE_WHEEL_DOWN

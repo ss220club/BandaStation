@@ -39,6 +39,7 @@
 #include "domains/_domains.dme"
 #include "dynamic/_dynamic.dme"
 #include "emote_panel/_emote_panel.dme"
+#include "emote_wheel/_emote_wheel.dme"
 #include "ert/_ert.dme"
 #include "examine_panel/_examine_panel.dme"
 #include "food_and_drinks/_food_and_drinks.dme"
