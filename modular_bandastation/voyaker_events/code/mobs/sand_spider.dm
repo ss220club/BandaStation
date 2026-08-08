@@ -1,3 +1,14 @@
+/obj/effect/sand_spider_burrow
+	name = "disturbed sand"
+	icon = 'icons/turf/damaged.dmi'
+	icon_state = "damaged1"
+	layer = ABOVE_OPEN_TURF_LAYER
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+
+/obj/effect/sand_spider_burrow/proc/cleanup()
+	if(!QDELETED(src))
+		qdel(src)
+
 /mob/living/basic/spider/sand
 	name = "sand spider"
 	desc = "A spider adapted to life beneath the desert sands. You notice that its chelicerae and front legs have a slightly rounded, scoop-like shape. It is possible that it can use them to dig quite rapidly."
@@ -94,7 +105,8 @@
 	if(burrow_steps >= max_burrow_steps)
 		return finish_burrow()
 	step_towards(src, current_target)
-	playsound(src,'sound/effects/bush/crunchybushwhack1.ogg',35,TRUE)
+	create_burrow_effect()
+	playsound(src, 'sound/effects/bush/crunchybushwhack1.ogg', 35, TRUE)
 	burrow_steps++
 	addtimer(CALLBACK(src, PROC_REF(burrow_step)), 2 DECISECONDS)
 
@@ -111,7 +123,13 @@
 	add_movespeed_modifier(/datum/movespeed_modifier/sand_walk)
 	playsound(src,'sound/effects/meteorimpact.ogg',70,TRUE)
 	if(current_target && get_dist(src,current_target)<=1)
-		current_target.Knockdown(2 SECONDS)
 		current_target.apply_damage(15, BRUTE)
 	current_target = null
 	burrow_steps = 0
+
+/mob/living/basic/spider/sand/proc/create_burrow_effect()
+	var/turf/T = get_turf(src)
+	if(!T)
+		return
+	var/obj/effect/sand_spider_burrow/E = new(T)
+	addtimer(CALLBACK(E, TYPE_PROC_REF(/obj/effect/sand_spider_burrow, cleanup)), 5 SECONDS)

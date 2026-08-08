@@ -61,6 +61,8 @@
 		/obj/item/book/granter/crafting_recipe/medical_manual_light = 1,
 		/obj/item/book/granter/crafting_recipe/medical_manual_medium = 1,
 		/obj/item/stack/documents/blessing = 50,
+		/obj/item/paper/fluff/eftk/blessed_artefacts = 1,
+		/obj/item/paper/fluff/eftk/blessed_mutants = 1,
 	)
 
 /datum/job/doctor
@@ -118,6 +120,8 @@
 		/obj/item/book/granter/crafting_recipe/medical_manual_light = 1,
 		/obj/item/book/granter/crafting_recipe/medical_manual_medium = 1,
 		/obj/item/stack/documents/blessing = 50,
+		/obj/item/paper/fluff/eftk/blessed_artefacts = 1,
+		/obj/item/paper/fluff/eftk/blessed_mutants = 1,
 	)
 
 /datum/job/geneticist
@@ -126,7 +130,7 @@
 	departments_list = list(
 		/datum/job_department/science,
 	)
-	outfit = /datum/outfit/job/medic_blessed
+	outfit = /datum/outfit/job/geneticist_blessed
 	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2

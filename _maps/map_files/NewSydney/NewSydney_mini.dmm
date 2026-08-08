@@ -1002,9 +1002,7 @@
 /obj/effect/decal/cleanable/crayon/x{
 	icon_state = "Donk"
 	},
-/turf/closed/indestructible/iron{
-	opacity = 1
-	},
+/turf/closed/wall/concrete,
 /area/new_sydney/dark_forest)
 "aIF" = (
 /obj/item/shard{
@@ -2381,6 +2379,13 @@
 /obj/effect/landmark/loot_spawn/information,
 /turf/open/floor/carpet,
 /area/new_sydney/dark_forest/building)
+"bAp" = (
+/obj/machinery/door/airlock/medical/glass,
+/obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
+/obj/effect/mapping_helpers/airlock/access/all/science/general,
+/turf/open/floor/iron/smooth,
+/area/new_sydney/bunker)
 "bAG" = (
 /obj/structure/railing/wooden_fencing{
 	dir = 4;
@@ -2571,6 +2576,7 @@
 "bFz" = (
 /obj/machinery/door/airlock/security,
 /obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/access/all/security,
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
 "bFA" = (
@@ -6525,9 +6531,13 @@
 /turf/open/floor/asphalt,
 /area/new_sydney/coast)
 "eaU" = (
-/obj/machinery/door/window/right/directional/north,
 /obj/effect/turf_decal/siding/blue{
 	dir = 4
+	},
+/obj/machinery/door/window/right/directional/west{
+	name = "Medbay Reception";
+	req_access = list("medical");
+	dir = 1
 	},
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
@@ -8553,7 +8563,7 @@
 	},
 /area/new_sydney/dark_forest)
 "fvn" = (
-/turf/closed/indestructible/reinforced,
+/turf/closed/wall/concrete,
 /area/new_sydney/military_base)
 "fvw" = (
 /obj/effect/mob_spawn/corpse/human/tsf/marine,
@@ -8657,7 +8667,7 @@
 /obj/effect/decal/cleanable/crayon/x{
 	icon_state = "evac"
 	},
-/turf/closed/indestructible/reinforced,
+/turf/closed/wall/concrete,
 /area/new_sydney/military_base)
 "fAD" = (
 /obj/effect/turf_decal/siding/thinplating_new{
@@ -13579,6 +13589,10 @@
 /area/new_sydney/bunker)
 "iVj" = (
 /obj/item/stack/sheet/mineral/wood,
+/obj/effect/turf_decal/siding/thinplating_new,
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 1
+	},
 /turf/open/misc/asteroid,
 /area/new_sydney/coast)
 "iVq" = (
@@ -13938,12 +13952,8 @@
 /turf/open/floor/iron/checker,
 /area/new_sydney/building)
 "jgG" = (
-/obj/structure/flora/tree/palm/style_random{
-	pixel_y = 10;
-	max_integrity = 50000
-	},
-/turf/open/misc/asteroid,
-/area/new_sydney/coast)
+/turf/closed/wall/concrete,
+/area/new_sydney/village)
 "jgW" = (
 /turf/open/floor/iron/stairs,
 /area/new_sydney/coast)
@@ -14518,7 +14528,7 @@
 /turf/open/floor/iron/dark,
 /area/new_sydney/mine)
 "jCS" = (
-/turf/closed/indestructible/reinforced,
+/turf/closed/wall/concrete,
 /area/new_sydney/coast/port)
 "jDu" = (
 /obj/effect/turf_decal/trimline/brown/line{
@@ -16146,7 +16156,7 @@
 /obj/effect/decal/cleanable/crayon/x{
 	icon_state = "Osiron"
 	},
-/turf/closed/indestructible/reinforced,
+/turf/closed/wall/concrete,
 /area/new_sydney/military_base)
 "kGE" = (
 /obj/effect/turf_decal/trimline/dark_blue,
@@ -19286,6 +19296,11 @@
 /obj/machinery/door/window/right/directional/east,
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
+"mOC" = (
+/obj/machinery/door/airlock/hatch,
+/obj/effect/mapping_helpers/airlock/access/all/security,
+/turf/open/floor/iron/smooth,
+/area/new_sydney/bunker)
 "mOM" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 1
@@ -21391,9 +21406,13 @@
 /area/new_sydney/mine)
 "oqZ" = (
 /obj/structure/table,
-/obj/machinery/door/window/right/directional/north,
 /obj/machinery/door/window/right/directional/south,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/window/right/directional/west{
+	name = "Medbay Reception";
+	req_access = list("medical");
+	dir = 1
+	},
 /turf/open/floor/plating,
 /area/new_sydney/bunker)
 "osc" = (
@@ -22630,6 +22649,15 @@
 /obj/item/storage/briefcase/secure,
 /turf/open/floor/iron/dark/small,
 /area/new_sydney/bunker)
+"pjZ" = (
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 5
+	},
+/turf/open/misc/asteroid,
+/area/new_sydney/coast)
 "pkv" = (
 /obj/effect/spawner/random/trash/box,
 /obj/effect/turf_decal/board_number,
@@ -23527,6 +23555,11 @@
 	dir = 4
 	},
 /area/new_sydney/mine)
+"pPw" = (
+/obj/machinery/door/airlock/highsecurity,
+/obj/effect/mapping_helpers/airlock/access/all/security,
+/turf/open/floor/iron/smooth,
+/area/new_sydney/bunker)
 "pPM" = (
 /obj/effect/turf_decal/line/yellow/line/contrasted{
 	dir = 1
@@ -24839,7 +24872,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "floor4"
 	},
-/turf/closed/indestructible/reinforced,
+/turf/closed/wall/concrete,
 /area/new_sydney/military_base)
 "qEd" = (
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -30979,6 +31012,9 @@
 /obj/item/storage/bag/ore,
 /turf/open/floor/iron/smooth_edge,
 /area/new_sydney/bunker)
+"uLb" = (
+/turf/closed/wall/concrete,
+/area/new_sydney/dark_forest)
 "uLf" = (
 /obj/effect/decal/cleanable/blood/gibs/robot_debris/old,
 /turf/open/indestructible/rockyground,
@@ -31074,7 +31110,7 @@
 	},
 /area/new_sydney/mine)
 "uPC" = (
-/turf/closed/indestructible/reinforced,
+/turf/closed/wall/concrete,
 /area/new_sydney/building)
 "uPH" = (
 /obj/effect/decal/food_stuff/tree,
@@ -33986,6 +34022,7 @@
 "wIT" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security,
+/obj/effect/mapping_helpers/airlock/access/all/security,
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
 "wKj" = (
@@ -36552,10 +36589,10 @@ bxs
 bxs
 bxs
 bxs
-bxs
-bxs
-bxs
-bxs
+jgG
+jgG
+jgG
+jgG
 bxs
 bxs
 bxs
@@ -36854,10 +36891,10 @@ kHn
 kHn
 kHn
 kHn
-bxs
+jgG
 uIi
 kXU
-bxs
+jgG
 kHn
 kHn
 kHn
@@ -37156,10 +37193,10 @@ kHn
 kHn
 kHn
 kHn
-bxs
+jgG
 kXU
 kXU
-bxs
+jgG
 kHn
 kHn
 kHn
@@ -37458,10 +37495,10 @@ kHn
 kHn
 kHn
 kHn
-bxs
+jgG
 sSn
 sSn
-bxs
+jgG
 kHn
 kHn
 kHn
@@ -40474,7 +40511,7 @@ ncJ
 aWa
 syV
 hSK
-bxs
+jgG
 sJf
 nwM
 nwM
@@ -41682,7 +41719,7 @@ rdI
 sTX
 dEK
 esu
-bxs
+jgG
 iZh
 iZh
 rOu
@@ -44400,7 +44437,7 @@ tEP
 bWc
 bWc
 ewI
-bxs
+jgG
 lcw
 lcw
 lcw
@@ -44415,7 +44452,7 @@ lcw
 lcw
 lcw
 lcw
-bxs
+jgG
 nnE
 fvn
 fvn
@@ -47737,7 +47774,7 @@ bWc
 kcA
 bWc
 ewI
-bxs
+jgG
 lcw
 lcw
 lcw
@@ -56232,7 +56269,7 @@ ngF
 eaU
 pZf
 oKn
-vtK
+bAp
 kzk
 sMR
 sMR
@@ -59855,11 +59892,11 @@ sLL
 sLL
 qTu
 qTu
-gKp
+mOC
 qTu
 qTu
 qTu
-gKp
+mOC
 qTu
 qTu
 dqk
@@ -59877,11 +59914,11 @@ dZV
 wLn
 qTu
 qTu
-gKp
+mOC
 qTu
 qTu
 qTu
-gKp
+mOC
 qTu
 qTu
 sLL
@@ -60465,7 +60502,7 @@ nbE
 sMR
 sMR
 mzx
-lQq
+pPw
 keQ
 dZV
 ouF
@@ -60479,7 +60516,7 @@ qTu
 mDr
 dZV
 vsL
-lQq
+pPw
 tNT
 sMR
 sMR
@@ -64218,10 +64255,10 @@ ksk
 hyV
 ohH
 lYa
-lcA
-lcA
-lcA
-lcA
+uLb
+uLb
+uLb
+uLb
 aIu
 ohH
 ohH
@@ -64520,11 +64557,11 @@ ksk
 hyV
 ohH
 lYa
-lcA
+uLb
 wVE
 uLG
 hYS
-lcA
+uLb
 joH
 ohH
 ohH
@@ -64822,11 +64859,11 @@ ksk
 hyV
 ohH
 lYa
-lcA
+uLb
 uLG
 dkQ
 dhE
-lcA
+uLb
 ohH
 hja
 srn
@@ -65124,7 +65161,7 @@ xlo
 hyV
 ohH
 lYa
-lcA
+uLb
 uLG
 uLG
 uLG
@@ -65426,11 +65463,11 @@ xlo
 hyV
 ohH
 lYa
-lcA
+uLb
 lFj
 dzp
 dzp
-lcA
+uLb
 hja
 oDz
 lCp
@@ -65728,11 +65765,11 @@ xlo
 xlo
 ohH
 lYa
-lcA
-lcA
-lcA
-lcA
-lcA
+uLb
+uLb
+uLb
+uLb
+uLb
 lkI
 aDn
 lCp
@@ -95136,7 +95173,7 @@ upj
 iWf
 fDw
 qhH
-bEY
+apZ
 pLC
 jqU
 aKP
@@ -95740,7 +95777,7 @@ rGl
 rGl
 ovh
 qhH
-bEY
+ewE
 qhH
 jqU
 aKP
@@ -98156,7 +98193,7 @@ oNM
 qhv
 rpx
 qhH
-bEY
+rva
 qhH
 rcH
 aKP
@@ -98458,7 +98495,7 @@ wLX
 wLX
 wLX
 qhH
-jgG
+ofu
 qhH
 rcH
 jra
@@ -98760,7 +98797,7 @@ wLX
 wLX
 wLX
 qhH
-bEY
+pjZ
 qhH
 rcH
 aKP
