@@ -6546,9 +6546,8 @@
 /obj/effect/turf_decal/siding/blue{
 	dir = 4
 	},
-/obj/machinery/door/window/right/directional/east{
-	dir = 1;
-	req_access = list("geneticist")
+/obj/machinery/door/window/left/directional/north{
+	req_access = list("Geneticist")
 	},
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
@@ -21432,12 +21431,11 @@
 /area/new_sydney/mine)
 "oqZ" = (
 /obj/structure/table,
-/obj/machinery/door/window/right/directional/south,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/window/right/directional/east{
-	dir = 1;
-	req_access = list("geneticist")
+/obj/machinery/door/window/left/directional/north{
+	req_access = list("Geneticist")
 	},
+/obj/machinery/door/window/left/directional/south,
 /turf/open/floor/plating,
 /area/new_sydney/bunker)
 "osc" = (
