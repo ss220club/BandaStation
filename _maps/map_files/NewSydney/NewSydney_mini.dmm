@@ -251,6 +251,11 @@
 /obj/structure/fence/door,
 /turf/open/floor/concrete/slab_4,
 /area/new_sydney/coast)
+"ajD" = (
+/obj/effect/turf_decal/line/blue/line/contrasted,
+/obj/effect/landmark/start/eftk/executor,
+/turf/open/floor/iron/smooth_half,
+/area/new_sydney/bunker)
 "akI" = (
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 6
@@ -306,6 +311,7 @@
 /obj/structure/chair/sofa/left/brown{
 	dir = 8
 	},
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -1214,6 +1220,7 @@
 /obj/structure/chair/plastic{
 	dir = 4
 	},
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
 "aPh" = (
@@ -3518,6 +3525,11 @@
 	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
 	},
 /area/new_sydney/village)
+"cnk" = (
+/obj/effect/turf_decal/line/blue/line/stripes/contrasted,
+/obj/effect/landmark/start/eftk/executor,
+/turf/open/floor/iron/smooth_half,
+/area/new_sydney/bunker)
 "cno" = (
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 5
@@ -8274,6 +8286,7 @@
 /obj/structure/chair/sofa/right/brown{
 	dir = 4
 	},
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
 "fmO" = (
@@ -13058,6 +13071,13 @@
 	},
 /turf/open/floor/plating,
 /area/new_sydney/village)
+"ivn" = (
+/obj/effect/turf_decal/line/blue/line/stripes/contrasted{
+	dir = 1
+	},
+/obj/effect/landmark/start/eftk/executor,
+/turf/open/floor/iron/smooth_half,
+/area/new_sydney/bunker)
 "ivD" = (
 /obj/effect/turf_decal/siding/thinplating_new,
 /turf/open/floor/concrete/slab_4,
@@ -14119,6 +14139,7 @@
 /obj/effect/turf_decal/line/brown/line/contrasted{
 	dir = 1
 	},
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "jmV" = (
@@ -15177,6 +15198,7 @@
 /obj/structure/chair/sofa/right/brown{
 	dir = 8
 	},
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -16262,6 +16284,7 @@
 	dir = 1
 	},
 /obj/structure/chair/plastic,
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
 "kIM" = (
@@ -16917,6 +16940,7 @@
 /obj/structure/chair/sofa/left/brown{
 	dir = 4
 	},
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
 "lfa" = (
@@ -18277,6 +18301,7 @@
 /obj/structure/chair/greyscale{
 	dir = 4
 	},
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -20229,6 +20254,7 @@
 /obj/structure/chair/plastic{
 	dir = 1
 	},
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
 "nzC" = (
@@ -21110,6 +21136,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/line/blue/line/contrasted,
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "ofX" = (
@@ -24914,6 +24941,7 @@
 /area/new_sydney/dark_forest/building)
 "qEZ" = (
 /obj/structure/sink/directional/south,
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "qFc" = (
@@ -27898,6 +27926,13 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/new_sydney/dark_forest/building)
+"sQc" = (
+/obj/effect/turf_decal/line/blue/line/contrasted{
+	dir = 1
+	},
+/obj/effect/landmark/start/eftk/executor,
+/turf/open/floor/iron/smooth_half,
+/area/new_sydney/bunker)
 "sQk" = (
 /obj/item/shard,
 /obj/effect/turf_decal/trimline/dark_blue/line,
@@ -31151,6 +31186,7 @@
 	dir = 1
 	},
 /obj/structure/sink/directional/south,
+/obj/effect/landmark/start/eftk/executor,
 /turf/open/floor/iron/smooth_half,
 /area/new_sydney/bunker)
 "uRe" = (
@@ -32890,6 +32926,11 @@
 	},
 /turf/open/floor/stone,
 /area/new_sydney/coast)
+"vYh" = (
+/obj/effect/landmark/start/eftk/executor,
+/obj/effect/landmark/start/eftk/executor,
+/turf/open/floor/iron/smooth,
+/area/new_sydney/bunker)
 "vYm" = (
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 1
@@ -44503,7 +44544,7 @@ uQY
 nbQ
 dQt
 nbQ
-dQM
+ajD
 qTu
 qQD
 dZV
@@ -45103,11 +45144,11 @@ dIX
 dZV
 szc
 xgq
-lmK
+ivn
 skQ
 nbQ
 kHf
-pmN
+cnk
 xgq
 dIX
 dZV
@@ -45707,11 +45748,11 @@ mDr
 dZV
 wLn
 qTu
-qoU
+sQc
 skQ
 sbx
 kHf
-dQM
+ajD
 qTu
 mDr
 dZV
@@ -46311,11 +46352,11 @@ mDr
 dZV
 wLn
 qTu
-qoU
+sQc
 skQ
 nbQ
 kHf
-dQM
+ajD
 qTu
 mDr
 dZV
@@ -46915,11 +46956,11 @@ dIX
 dZV
 szc
 wXI
-lmK
+ivn
 nbQ
 nbQ
-nbQ
-pmN
+vYh
+cnk
 wXI
 dIX
 dZV
@@ -55975,11 +56016,11 @@ mDr
 dZV
 szc
 xgq
-lmK
+ivn
 nbQ
 nbQ
 nbQ
-pmN
+cnk
 xgq
 dIX
 dZV
@@ -56579,11 +56620,11 @@ mDr
 dZV
 wLn
 qTu
-qoU
+sQc
 skQ
 nbQ
 kHf
-dQM
+ajD
 qTu
 mDr
 dZV
@@ -57183,11 +57224,11 @@ mDr
 dZV
 wLn
 qTu
-qoU
+sQc
 skQ
 sbx
 kHf
-dQM
+ajD
 qTu
 mDr
 dZV
@@ -57787,11 +57828,11 @@ mDr
 dZV
 szc
 wXI
-lmK
+ivn
 skQ
 nbQ
 kHf
-pmN
+cnk
 wXI
 dIX
 dZV
@@ -58395,7 +58436,7 @@ qEZ
 nbQ
 dQt
 nbQ
-dQM
+ajD
 qTu
 mDr
 dZV
