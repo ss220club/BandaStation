@@ -1,5 +1,8 @@
 #include "_voyaker_events.dm"
 
+#include "code\roles\datums.dm"
+#include "code\roles\landmarks.dm"
+#include "code\roles\vanilla_jobs_disabler.dm"
 #include "code\traders\trader_vars.dm"
 #include "code\traders\trader_loyality.dm"
 #include "code\traders\trader_quests.dm"
@@ -75,9 +78,6 @@
 #include "code\weather\weather_datum.dm"
 #include "code\wooden_fence\wooden_fence.dm"
 #include "code\award_items\award_items.dm"
-#include "code\roles\datums.dm"
-#include "code\roles\landmarks.dm"
-#include "code\roles\vanilla_jobs_disabler.dm"
 #include "code\map\map_newsydney.dm"
 // BEGIN_INTERNALS
 // END_INTERNALS
