@@ -18,6 +18,7 @@
 	//#include "map_files\KiloStation\KiloStation.dmm" // BANDASTATION EDIT: TEMP remove #2579
 	// BANDASTATION EDIT START: Custom maps
 	#include "map_files\Cyberiad\Cyberiad.dmm"
+	#include "map_files\NewSydney\NewSydney_mini.dmm"
 	// BANDASTATION EDIT END: Custom maps
 #endif
 #ifdef ALL_TEMPLATES

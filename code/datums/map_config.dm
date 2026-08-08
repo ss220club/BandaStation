@@ -25,6 +25,7 @@
 	var/map_file = "MetaStation.dmm"
 
 	var/traits = null
+	var/disable_random_events = FALSE
 	var/space_ruin_levels = DEFAULT_SPACE_RUIN_LEVELS
 	var/space_empty_levels = DEFAULT_SPACE_EMPTY_LEVELS
 
@@ -202,6 +203,9 @@
 	else if (!isnull(traits))
 		log_world("map_config traits is not a list!")
 		return
+
+	if(json["disable_random_events"])
+		disable_random_events = json["disable_random_events"]
 
 	var/temp = json["space_ruin_levels"]
 	if (isnum(temp))

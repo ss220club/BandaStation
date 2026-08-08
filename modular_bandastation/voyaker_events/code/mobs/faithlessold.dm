@@ -1,0 +1,22 @@
+/mob/living/basic/faithless/old
+	name = "The Old Faithless"
+	desc = "The Wish Granter's faith in humanity, incarnate."
+	icon = 'modular_bandastation/voyaker_events/icons/faithlessold.dmi'
+	icon_state = "faithlessold"
+	icon_living = "faithless"
+	icon_dead = "faithless_dead"
+	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
+	gender = MALE
+	response_help_continuous = "passes through"
+	response_help_simple = "pass through"
+	speed = 0.2
+	maxHealth = 150
+	health = 150
+	obj_damage = 50
+	melee_damage_lower = 20
+	melee_damage_upper = 20
+	attack_verb_continuous = "grips"
+	attack_verb_simple = "grip"
+	attack_sound = 'sound/effects/hallucinations/growl1.ogg'
+	melee_attack_cooldown = 0.5 SECONDS
+	speak_emote = list("growls")
