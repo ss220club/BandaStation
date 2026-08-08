@@ -46,9 +46,9 @@
 	if(href_list["announce"])
 		on_report()
 		send_report()
+	// BANDASTATION EDIT START - Enhance goal management: add toggle completion functionality and update UI links
 	else if(href_list["toggle_complete"])
 		toggle_completed()
-		// BANDASTATION EDIT START - Enhance goal management: add toggle completion functionality and update UI links
 		usr.client?.holder?.modify_goals()
 		// BANDASTATION EDIT END - Enhance goal management: add toggle completion functionality and update UI links
 	else if(href_list["remove"])
