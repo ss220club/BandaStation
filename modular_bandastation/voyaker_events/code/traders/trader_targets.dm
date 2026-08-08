@@ -20,12 +20,9 @@
 		to_chat(player, span_warning("Ваша репутация с торговцем Камилла понизилась на -1."))
 	if(ishuman(victim))
 		var/mob/living/carbon/human/H = victim
-		var/obj/item/card/id/I = H.wear_id
-		if(I)
-			to_chat(player, span_notice("Найдена ID-карта: [I.type]"))
-			if(istype(I, /obj/item/card/id/advanced/blessed))
-				player.add_trader_rep(TRADER_TERESA, -50)
-				to_chat(player, span_warning("Вы убили сотрудника Милосердия! Репутация с Терезой понизилась на -50."))
+		if(H.mind && H.mind.assigned_role == JOB_BLESSED_MEDIC)
+			player.add_trader_rep(TRADER_TERESA, -50)
+			to_chat(player, span_warning("Вы убили сотрудника Милосердия! Репутация с Терезой понизилась на -50."))
 
 /proc/check_trader_bunker_events(mob/living/carbon/human/player)
 	if(!player)

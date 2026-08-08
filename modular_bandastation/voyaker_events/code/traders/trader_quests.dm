@@ -530,6 +530,8 @@
 	var/area/A = get_area(victim)
 	if(!istype(A, /area/new_sydney/village))
 		return
+	if(victim.mind?.assigned_role != JOB_EXECUTOR)
+		return
 	fail(killer, TRADER_ROBINSON, "Задание провалено. Вы привлекли внимание, убив Исполнителя в Посёлке. Репутация снизилась на -3.")
 
 /datum/trader_quest/robinson_provocation
