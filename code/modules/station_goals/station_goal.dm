@@ -37,8 +37,10 @@
 
 /datum/station_goal/Topic(href, href_list)
 	..()
+	// BANDASTATION EDIT START: Enhance goal management: add toggle completion functionality and update UI links
 	if(!usr.client?.holder)
 		return
+	// BANDASTATION EDIT END: Enhance goal management: add toggle completion functionality and update UI links
 
 	if(!check_rights(R_ADMIN) || !usr.client.holder.CheckAdminHref(href, href_list))
 		return
