@@ -251,6 +251,14 @@
 /obj/structure/fence/door,
 /turf/open/floor/concrete/slab_4,
 /area/new_sydney/coast)
+"ajD" = (
+/obj/machinery/door/window/right/directional/west{
+	name = "Medbay Reception";
+	req_access = list("medical");
+	dir = 2
+	},
+/turf/open/floor/grass,
+/area/new_sydney/bunker)
 "akI" = (
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 6
@@ -6533,11 +6541,6 @@
 "eaU" = (
 /obj/effect/turf_decal/siding/blue{
 	dir = 4
-	},
-/obj/machinery/door/window/right/directional/west{
-	name = "Medbay Reception";
-	req_access = list("medical");
-	dir = 1
 	},
 /turf/open/floor/iron/smooth,
 /area/new_sydney/bunker)
@@ -21408,11 +21411,6 @@
 /obj/structure/table,
 /obj/machinery/door/window/right/directional/south,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/window/right/directional/west{
-	name = "Medbay Reception";
-	req_access = list("medical");
-	dir = 1
-	},
 /turf/open/floor/plating,
 /area/new_sydney/bunker)
 "osc" = (
@@ -56265,7 +56263,7 @@ sLL
 sLL
 qTu
 elG
-ngF
+ajD
 eaU
 pZf
 oKn
