@@ -35,9 +35,10 @@
 	ticks += seconds_per_tick
 	if(ticks >= releasedelay)
 		ticks -= releasedelay
-		var/turf/open/T = get_turf(src)
-		if(istype(T))
-			T.atmos_spawn_air("[GAS_O2]=5;[GAS_PLASMA]=5;[TURF_TEMPERATURE(1000)]")
+		if(prob(50))
+			var/turf/open/T = get_turf(src)
+			if(istype(T))
+				T.atmos_spawn_air("[GAS_O2]=2;[GAS_PLASMA]=1;[TURF_TEMPERATURE(800)]")
 	if(!istype(get_area(src), /area/new_sydney/pyro_zone))
 		move_to_zone()
 	if(prob(10))
