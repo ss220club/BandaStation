@@ -55,6 +55,9 @@
 /datum/ai_law_change_request/Topic(href, href_list)
 	. = ..()
 
+	if(!usr.client || !check_rights_for(usr.client, R_ADMIN))
+		return
+
 	if(href_list["admin_token"] != GLOB.href_token)
 		log_admin_private("[key_name(usr)] clicked an href on a law change request with a bad authorization key! [href]")
 		message_admins("[key_name(usr)] clicked an href on a law change request with a bad authorization key! [href]")
@@ -133,7 +136,7 @@
 
 /// Checks that the proposed laws are complete and within the length limit
 /datum/ai_law_change_request/proc/law_request_valid()
-	if(length(laws) < AI_LAW_CHANGE_MIN_AMOUNT)
+	if(length(laws) < AI_LAW_CHANGE_MIN_AMOUNT || length(laws) > AI_LAW_CHANGE_MAX_AMOUNT)
 		return FALSE
 	for(var/law in laws)
 		if(!length(trim(law)))
