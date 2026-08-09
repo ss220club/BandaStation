@@ -336,6 +336,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	parts += market_report()
 	//Player Achievements
 	parts += cheevo_report()
+	//EFTK Trader event statistics
+	parts += trader_event_report()
 
 	list_clear_nulls(parts)
 
@@ -590,6 +592,69 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			parts += com
 		return "<div class='panel stationborder'>[parts.Join("<br>")]</div>"
 	return ""
+
+// BS EFTK Event Start
+/datum/controller/subsystem/ticker/proc/add_trader_event_stat(list/parts, trader_id, trader_name)
+	var/max_rep = null
+	var/list/winners = list()
+	for(var/mob/living/carbon/human/H in GLOB.human_list)
+		if(!H.mind)
+			continue
+		if(!H.trader_rep)
+			continue
+		var/rep = H.trader_rep[trader_id]
+		if(isnull(rep))
+			continue
+		if(isnull(max_rep) || rep > max_rep)
+			max_rep = rep
+			winners = list(H)
+		else if(rep == max_rep)
+			winners += H
+	if(isnull(max_rep) || !length(winners))
+		return
+	parts += "<b>[trader_name]</b> — [max_rep] репутации:<br>"
+	for(var/mob/living/carbon/human/H in winners)
+		parts += "- <b>[H.mind.key]</b> ([H.real_name])<br>"
+
+/datum/controller/subsystem/ticker/proc/trader_event_report()
+	var/list/parts = list()
+	var/list/trader_parts = list()
+	src.add_trader_event_stat(trader_parts, TRADER_SAMOPAL, "Прапорщик Самопал")
+	src.add_trader_event_stat(trader_parts, TRADER_TERESA, "Тереза")
+	src.add_trader_event_stat(trader_parts, TRADER_FASHION, "Фэйшн")
+	src.add_trader_event_stat(trader_parts, TRADER_SURVIVOR, "Выживайло")
+	src.add_trader_event_stat(trader_parts, TRADER_VISITOR, "Визитёр")
+	src.add_trader_event_stat(trader_parts, TRADER_ROBINSON, "Полковник Робинсон")
+	src.add_trader_event_stat(trader_parts, TRADER_KAMILLA, "Камилла")
+	if(length(trader_parts))
+		parts += "<div class='panel stationborder'>"
+		parts += "<span class='header'>Торговая статистика:</span><br>"
+		parts += "<b>Лучшая репутация с торговцами:</b><br>"
+		parts += trader_parts.Join()
+		parts += "</div>"
+	var/max_completed_quests = 0
+	var/list/quest_winners = list()
+	for(var/mob/living/carbon/human/H in GLOB.human_list)
+		if(!H.mind)
+			continue
+		var/quest_count = length(H.completed_trader_quests)
+		if(quest_count <= 0)
+			continue
+		if(quest_count > max_completed_quests)
+			max_completed_quests = quest_count
+			quest_winners = list(H)
+		else if(quest_count == max_completed_quests)
+			quest_winners += H
+	if(length(quest_winners))
+		parts += "<div class='panel stationborder'>"
+		parts += "<span class='header'>Квестовая статистика:</span><br>"
+		parts += "<b>Больше всего выполненных заданий:</b><br>"
+		for(var/mob/living/carbon/human/H in quest_winners)
+			parts += "- <b>[H.mind.key]</b> ([H.real_name]) — [max_completed_quests] заданий<br>"
+		parts += "</div>"
+	return parts.Join()
+
+// BS EFTK Event End
 
 ///Generate a report for all players who made it out alive with a hardcore random character and prints their final score
 /datum/controller/subsystem/ticker/proc/hardcore_random_report()

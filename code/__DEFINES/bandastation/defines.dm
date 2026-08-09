@@ -36,3 +36,13 @@
 
 #define SQUASH_WITH_HANDS_DELAY 1.5 SECONDS
 #define RCD_NO_SKILLCHIP_DELAY_MULTIPLIER 1.5
+
+#define TRADER_DEBUG "debug"
+
+#define TRADER_SAMOPAL "samopal"
+#define TRADER_TERESA "teresa"
+#define TRADER_FASHION "fashion"
+#define TRADER_SURVIVOR "survivor"
+#define TRADER_VISITOR "visitor"
+#define TRADER_ROBINSON "robinson"
+#define TRADER_KAMILLA "kamilla"
