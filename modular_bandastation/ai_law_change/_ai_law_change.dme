@@ -1,0 +1,5 @@
+#include "_ai_law_change.dm"
+
+#include "code/defines.dm"
+#include "code/ai_defines.dm"
+#include "code/ai_law_change.dm"
