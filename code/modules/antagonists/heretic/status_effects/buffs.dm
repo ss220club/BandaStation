@@ -31,8 +31,8 @@
 	return span_notice("Кажется не совсем собой.")
 
 /datum/action/cancel_crucible_soul
-	name = "Recall"
-	desc = "Use to end the blessing early"
+	name = "Отзыв"
+	desc = "Используйте для досрочного завершения благословения."
 	button_icon = 'icons/obj/antags/eldritch.dmi'
 	button_icon_state = "crucible_soul"
 
@@ -62,12 +62,10 @@
 
 /datum/status_effect/duskndawn/on_apply()
 	ADD_TRAIT(owner, TRAIT_XRAY_VISION, TRAIT_STATUS_EFFECT(id))
-	owner.update_sight()
 	return TRUE
 
 /datum/status_effect/duskndawn/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_XRAY_VISION, TRAIT_STATUS_EFFECT(id))
-	owner.update_sight()
 
 // WOUNDED SOLDIER
 /datum/status_effect/marshal
@@ -92,7 +90,7 @@
 			found_wound.remove_wound()
 	if(length(drinker.get_missing_limbs()))
 		drinker.regenerate_limbs()
-		to_chat(drinker, span_hypnophrase("The mansus has given you new limbs."))
+		to_chat(drinker, span_hypnophrase("Мансус даровал вам новые конечности."))
 	playsound(drinker, 'sound/effects/chemistry/ahaha.ogg', 50, TRUE, -1, extrarange = SILENCED_SOUND_EXTRARANGE, frequency = 0.5)
 
 /datum/status_effect/marshal/tick(seconds_between_ticks)
@@ -129,7 +127,7 @@
 	icon_state = "crucible"
 
 /atom/movable/screen/alert/status_effect/crucible_soul/cooldown
-	desc = "You have recently phased through reality. You must wait before you can do so once more."
+	desc = "Вы недавно прошли сквозь реальность. Вам нужно подождать, прежде чем сможете сделать это ещё раз."
 	icon_state = "crucible_cooldown"
 
 /atom/movable/screen/alert/status_effect/duskndawn
@@ -229,6 +227,7 @@
 		return
 
 	SEND_SIGNAL(src, COMSIG_BLADE_BARRIER_TRIGGERED)
+	SEND_SIGNAL(source, COMSIG_MOB_BLADE_BARRIER_TRIGGERED, src)
 	ADD_TRAIT(source, TRAIT_BEING_BLADE_SHIELDED, TRAIT_STATUS_EFFECT(id))
 	addtimer(TRAIT_CALLBACK_REMOVE(source, TRAIT_BEING_BLADE_SHIELDED, TRAIT_STATUS_EFFECT(id)), 0.1 SECONDS)
 
@@ -298,7 +297,6 @@
 /datum/status_effect/caretaker_refuge/on_apply()
 	animate(owner, alpha = 45, time = 0.5 SECONDS)
 	owner.set_density(FALSE)
-	RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_ALLOW_HERETIC_CASTING), PROC_REF(on_focus_lost))
 	RegisterSignal(owner, COMSIG_MOB_BEFORE_SPELL_CAST, PROC_REF(prevent_spell_usage))
 	RegisterSignal(owner, COMSIG_ATOM_HOLYATTACK, PROC_REF(nullrod_handler))
 	RegisterSignal(owner, COMSIG_CARBON_CUFF_ATTEMPTED, PROC_REF(prevent_cuff))
@@ -310,7 +308,6 @@
 	owner.remove_traits(caretaking_traits, TRAIT_STATUS_EFFECT(id))
 	owner.alpha = initial(owner.alpha)
 	owner.density = initial(owner.density)
-	UnregisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_ALLOW_HERETIC_CASTING))
 	UnregisterSignal(owner, COMSIG_MOB_BEFORE_SPELL_CAST)
 	UnregisterSignal(owner, COMSIG_ATOM_HOLYATTACK)
 	UnregisterSignal(owner, COMSIG_CARBON_CUFF_ATTEMPTED)
@@ -329,14 +326,9 @@
 	owner.visible_message(span_warning("[capitalize(weapon.declent_ru(NOMINATIVE))] рассеивает дымку вокруг [owner.declent_ru(GENITIVE)]!"))
 	owner.remove_status_effect(type)
 
-/datum/status_effect/caretaker_refuge/proc/on_focus_lost()
-	SIGNAL_HANDLER
-	to_chat(owner, span_danger("Без фокусировки, ваше убежище ослабевает и рассеивается!"))
-	qdel(src)
-
 /datum/status_effect/caretaker_refuge/proc/no_strip(atom/source, mob/user, obj/item/equipping)
 	SIGNAL_HANDLER
-	to_chat(user, span_warning("You fail to put anything on [source] as they are incorporeal!"))
+	to_chat(user, span_warning("Вам не удаётся ничего надеть на [source.declent_ru(ACCUSATIVE)], так как [source.declent_ru(NOMINATIVE)] не имеет тела!"))
 	return COMPONENT_CANT_STRIP
 
 /datum/status_effect/caretaker_refuge/proc/prevent_spell_usage(datum/source, datum/spell)
@@ -378,13 +370,13 @@
 	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/heretic_lastresort
-	name = "Last Resort"
-	desc = "Your head spins, heart pumping as fast as it can!"
+	name = "Последняя надежда"
+	desc = "Ваша голова кружится, а сердце бьётся так быстро, как только может!"
 	icon_state = "lastresort"
 
 /datum/status_effect/heretic_lastresort/on_apply()
 	ADD_TRAIT(owner, TRAIT_IGNORESLOWDOWN, TRAIT_STATUS_EFFECT(id))
-	to_chat(owner, span_userdanger("You won't give up that easily!"))
+	to_chat(owner, span_userdanger("Вы не сдадитесь так просто!"))
 	return TRUE
 
 /datum/status_effect/heretic_lastresort/on_remove()

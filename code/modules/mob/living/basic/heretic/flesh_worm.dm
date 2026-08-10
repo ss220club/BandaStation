@@ -6,7 +6,7 @@
 /mob/living/basic/heretic_summon/armsy
 	name = "Lord of the Night"
 	real_name = "Master of Decay"
-	desc = "An abomination made from dozens and dozens of severed and malformed limbs grasping onto each other."
+	desc = "Мерзость, состоящая из множества отрубленных и деформированных конечностей, цепляющихся друг за друга."
 	icon_state = "armsy_start"
 	icon_living = "armsy_start"
 	base_icon_state = "armsy"
@@ -39,7 +39,7 @@
 		/datum/component/amputating_limbs,\
 		surgery_time = 0 SECONDS,\
 		surgery_verb = "tears",\
-		minimum_stat = CONSCIOUS,\
+		minimum_stat = STABLE,\
 		snip_chance = 10,\
 		target_zones = GLOB.arm_zones,\
 	)
@@ -97,7 +97,7 @@
 /mob/living/basic/heretic_summon/armsy/melee_attack(atom/target, list/modifiers, ignore_cooldown)
 	if(!istype(target, /obj/item/bodypart/arm))
 		return ..()
-	visible_message(span_warning("[src] devours [target]!"))
+	visible_message(span_warning("[capitalize(src.declent_ru(NOMINATIVE))] поглощает [target.declent_ru(ACCUSATIVE)]!"))
 	playsound(src, 'sound/effects/magic/demon_consume.ogg', 50, TRUE)
 	qdel(target)
 	on_arm_eaten()
@@ -121,7 +121,7 @@
 	if(current_stacks < stacks_to_grow)
 		return
 
-	visible_message(span_boldwarning("[src] flexes and expands!"))
+	visible_message(span_boldwarning("[capitalize(src.declent_ru(NOMINATIVE))] сгибается и увеличивается!"))
 	current_stacks = 0
 	new_segment(behind = src)
 

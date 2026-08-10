@@ -103,7 +103,7 @@
 		qdel(src)
 
 /atom/movable/screen/alert/status_effect/ghoul
-	name = "Flesh Servant"
+	name = "Слуга из плоти"
 	desc = "Вы гуль!"
 	icon_state = "heretic_template"
 	overlay_state = "mind_control"

@@ -8,3 +8,13 @@
 #define TTS_FILTER_RADIO "radio"
 ///TTS filter to activate a silicon effect on speech.
 #define TTS_FILTER_SILICON "silicon"
+//Hear all TTS over radio.
+#define TTS_SOUND_ALL_RADIO "Включен"
+//Hear all TTS over departmental radio channels only.
+#define TTS_SOUND_DEPARTMENTAL_RADIO "Только радио отделов"
+//Hear no TTS over radio.
+#define TTS_SOUND_NO_RADIO "Выключен"
+//Flag for TTS ghost radio
+#define TTS_GHOST_RADIO "GHOST RADIO"
+#define TTS_BLIPS_MASCULINE "Masculine"
+#define TTS_BLIPS_FEMININE "Feminine"

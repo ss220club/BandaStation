@@ -54,13 +54,10 @@
 		return
 	if(user && !user.temporarilyRemoveItemFromInventory(accessory))
 		return
-	if(!accessory.attach(src, user))
+	if(!accessory.try_attach(src, user))
 		return
 
-	LAZYADD(attached_accessories, accessory)
-	accessory.forceMove(src)
-
-	accessory.successful_attach(src)
+	accessory.attach(src)
 
 	if(user && attach_message)
 		balloon_alert(user, "аксессуар прикреплён")
