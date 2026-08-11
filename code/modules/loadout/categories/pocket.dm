@@ -272,9 +272,9 @@
 	item_path = /obj/item/reagent_containers/cup/glass/mug/britcup
 
 /datum/loadout_item/pocket_items/golden_mug
-    name = "Золотая кружка"
-    item_path = /obj/item/reagent_containers/cup/golden_mug
-    donator_level = DONATOR_TIER_2
+	name = "Золотая кружка"
+	item_path = /obj/item/reagent_containers/cup/golden_mug
+	donator_level = DONATOR_TIER_2
 
 // The wallet loadout item is special, and puts the player's ID and other small items into it on initialize (fancy!)
 /datum/loadout_item/pocket_items/wallet
