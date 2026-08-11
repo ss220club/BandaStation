@@ -3,7 +3,6 @@
 	desc = "Кружка достойная лишь истинных героев! Или богатеев, что могут позволить оббить дорогую породу дерева чистым золотом."
 	icon = 'modular_bandastation/objects/icons/obj/items/reagent_containers.dmi'
 	icon_state = "golden_mug"
-	possible_transfer_amounts = list(5,10,15,20,25,30,50)
 	fill_icon_thresholds = list(25,50)
 	fill_icon_state = "golden_mug"
 	fill_icon = 'modular_bandastation/objects/icons/obj/effects/reagent_fillings.dmi'
