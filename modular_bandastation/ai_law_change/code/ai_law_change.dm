@@ -1,8 +1,4 @@
-/mob/living/silicon/ai/verb/request_law_change()
-	set category = "AI Commands"
-	set name = "Request Law Change"
-	set desc = "Запросить у Центрального командования смену ваших законов."
-
+GAME_VERB_DESC(/mob/living/silicon/ai, request_law_change, "Request Law Change", "Запросить у Центрального командования смену ваших законов.", "AI Commands")
 	if(incapacitated)
 		return
 
