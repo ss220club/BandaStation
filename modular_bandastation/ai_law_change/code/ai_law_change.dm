@@ -117,16 +117,19 @@
 	log_admin("[key_name(admin)] отклонил запрос на смену законов ИИ [key_name(requester)].")
 	log_game("[key_name(admin)] rejected the law change request of [key_name(requester)].")
 
-/// Replaces the AI's inherent and supplied laws
+/// Replaces the laws of the core law module on the AI's linked module rack
 /datum/ai_law_change_request/proc/apply_laws(announce = TRUE)
 	if(!requester)
 		return
-	requester.clear_inherent_laws(FALSE)
-	requester.clear_supplied_laws(FALSE)
+	var/obj/machinery/ai_law_rack/base/law_rack = requester.get_law_rack()
+	var/obj/item/ai_module/law/core/core_module = law_rack?.get_core_module()
+	if(!core_module)
+		return
+	var/list/new_laws = list()
 	for(var/law in laws)
 		if(length(trim(law)))
-			requester.add_inherent_law(law, FALSE)
-	requester.post_lawchange(TRUE)
+			new_laws[law] = FALSE
+	core_module.set_laws(new_laws)
 	if(announce)
 		announce_law_change()
 
@@ -136,7 +139,7 @@
 
 /// Checks that the proposed laws are complete and within the length limit
 /datum/ai_law_change_request/proc/law_request_valid()
-	if(length(laws) < AI_LAW_CHANGE_MIN_AMOUNT || length(laws) > AI_LAW_CHANGE_MAX_AMOUNT)
+	if(length(laws) != AI_LAW_CHANGE_SET_AMOUNT)
 		return FALSE
 	for(var/law in laws)
 		if(!length(trim(law)))
@@ -167,7 +170,7 @@
 	data["laws"] = laws
 	data["notify_crew"] = notify_crew
 	data["max_law_length"] = AI_LAW_CHANGE_MAX_LAW_LENGTH
-	data["law_amount"] = AI_LAW_CHANGE_MAX_AMOUNT
+	data["law_amount"] = AI_LAW_CHANGE_SET_AMOUNT
 	data["requester_key"] = requester?.key
 	data["requester_name"] = requester?.name
 	return data
