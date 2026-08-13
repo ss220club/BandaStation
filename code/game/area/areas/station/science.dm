@@ -1,5 +1,5 @@
 /area/station/science
-	name = " Science Division"
+	name = "Science Division"
 	icon_state = "science"
 	airlock_wires = /datum/wires/airlock/science
 	sound_environment = SOUND_AREA_STANDARD_STATION
