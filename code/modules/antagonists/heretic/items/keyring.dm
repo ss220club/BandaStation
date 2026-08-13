@@ -223,4 +223,3 @@
 	link = null
 	clear_portals()
 	return ..()
-
