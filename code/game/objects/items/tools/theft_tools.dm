@@ -6,7 +6,7 @@
 //the nuke core - objective item
 /obj/item/nuke_core
 	name = "plutonium core"
-	desc = "Extremely radioactive. Wear goggles."
+	desc = "Очень радиоактивен. Наденьте очки."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "plutonium_core"
 	inhand_icon_state = "plutoniumcore"
@@ -36,13 +36,13 @@
 		radiation_pulse(get_turf(src), max_range = 2, threshold = RAD_EXTREME_INSULATION)
 
 /obj/item/nuke_core/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[capitalize(user.declent_ru(NOMINATIVE))] трет [declent_ru(ACCUSATIVE)] об себя! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
+	user.visible_message(span_suicide("[capitalize(user.declent_ru(NOMINATIVE))] трёт [declent_ru(ACCUSATIVE)] об себя! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return TOXLOSS
 
 //nuke core box, for carrying the core
 /obj/item/nuke_core_container
 	name = "nuke core container"
-	desc = "Solid container for radioactive objects."
+	desc = "Прочный контейнер для радиоактивных объектов."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "core_container_empty"
 	inhand_icon_state = "tile"
@@ -87,7 +87,7 @@
 //snowflake screwdriver, works as a key to start nuke theft, traitor only
 /obj/item/screwdriver/nuke
 	name = "screwdriver"
-	desc = "A screwdriver with an ultra thin tip that's carefully designed to boost screwing speed."
+	desc = "Отвертка с ультратонким наконечником, тщательно разработанным для увеличения скорости завинчивания."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "screwdriver_nuke"
 	post_init_icon_state = null
@@ -113,9 +113,9 @@
 	</ul>"
 
 /obj/item/paper/guides/antag/hdd_extraction
-	default_raw_text = "<h1>Кража исходного кода и Вы! - руководство для идиотов по уничтожению исследований и разработок Нанотрейзен</h1><br>\
+	default_raw_text = "<h1>Кража серверного жёсткого диска и Вы! - руководство для идиотов по уничтожению исследований и разработок Нанотрейзен</h1><br>\
 	Ходят слухи, что Нанотрейзен используют свои научные сервера для создания чего-то ужасного! Они дали ему кодовое название «Проект Гуны», что бы это ни значило.<br>\
-	Этого нельзя допустить. Ниже приведены все наши данные о том, как украсть их исходный код и подорвать их исследовательские усилия:<br>\
+	Этого нельзя допустить. Ниже приведены все наши данные о том, как украсть их серверный жёсткий диск и подорвать их исследовательские усилия:<br>\
 	<ul>\
 	<li>Найдите физические серверные мэйнфреймы РнД. Разведка предполагает, что они хранятся в специально охлаждаемых помещениях в глубине их научного отдела.</li>\
 	<li>Нанотрейзен - корпорация, не отличающаяся изысканностью дизайна. Вы должны быть в состоянии определить главный сервер по каким-либо отличительным знакам.</li>\
@@ -132,7 +132,7 @@
 
 /obj/item/disk/computer/hdd_theft
 	name = "r&d server hard disk drive"
-	desc = "For some reason, people really seem to want to steal this. The source code on this drive is probably used for something awful!"
+	desc = "По какой-то причине, люди очень сильно хотят украсть это. Исходный код на этом диске, вероятно, используется для чего-то ужасного!"
 	max_capacity = 512
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
@@ -143,19 +143,19 @@
 /obj/item/paper/guides/antag/supermatter_sliver
 	default_raw_text = "Как безопасно извлечь осколок суперматерии:<br>\
 	<ul>\
-	<li>Вы должны постоянно иметь активную магнитную фиксацию вблизи активного кристалла суперматерии.</li>\
+	<li>Вы должны постоянно иметь активную магнитную фиксацию (не прилагается) вблизи активного кристалла суперматерии.</li>\
 	<li>Подойдите к активному кристаллу суперматерии, используя средства индивидуальной защиты от радиации. НЕ ВСТУПАЙТЕ В ФИЗИЧЕСКИЙ КОНТАКТ.</li>\
-	<li>С помощью суперматериального скальпеля (прилагается) отрежьте осколок кристалла.</li>\
-	<li>Используйте суперматериальные щипцы для извлечения (прилагаются), чтобы безопасно поднять отрезанный осколок.</li>\
+	<li>С помощью скальпеля для суперматерии (прилагается) отрежьте осколок кристалла.</li>\
+	<li>Используйте щипцы для для извлечения суперматерии (прилагаются), чтобы безопасно поднять отрезанный осколок.</li>\
 	<li>Физический контакт любого предмета с осколком превратит его в пыль, а также вас самих.</li>\
 	<li>С помощью щипцов поместите осколок в предусмотренный контейнер, которому потребуется некоторое время для герметизации.</li>\
-	<li>Убирайтесь к чертовой матери, пока кристалл не расслоился!</li>\
+	<li>Убирайтесь к чёртовой матери, пока кристалл не расслоился!</li>\
 	<li>???</li>\
 	</ul>"
 
 /obj/item/nuke_core/supermatter_sliver
 	name = "supermatter sliver"
-	desc = "A tiny, highly volatile sliver of a supermatter crystal. Do not handle without protection!"
+	desc = "Крошечный, обладающий высокой летучестью осколок кристалла суперматерии. Не обращайтесь с ним без средств защиты!"
 	icon_state = "supermatter_sliver"
 	inhand_icon_state = null //touching it dusts you, so no need for an inhand icon.
 	pulseicon = "supermatter_sliver_pulse"
@@ -216,8 +216,8 @@
 		message_admins("[src] has consumed [key_name_admin(victim)] [ADMIN_JMP(src)] via throw impact.")
 		investigate_log("has consumed [key_name(victim)] via throw impact.", INVESTIGATE_ENGINE)
 	victim.visible_message(span_danger("Когда [declent_ru(NOMINATIVE)] врезается в [victim.declent_ru(ACCUSATIVE)], они обращаются в пыль от прикосновения друг с другом, и тишина заполняет комнату..."),\
-		span_userdanger("[capitalize(declent_ru(NOMINATIVE))] врезается в вас, и все внезапно затихает. \n[capitalize(declent_ru(NOMINATIVE))] обращается в пыль, и как только вы замечаете это, вы тоже обращаетесь."),\
-		span_hear("Все внезапно затихает."))
+		span_userdanger("[capitalize(declent_ru(NOMINATIVE))] врезается в вас, и всё внезапно затихает. \n[capitalize(declent_ru(NOMINATIVE))] обращается в пыль, и как только вы замечаете это, вы тоже обращаетесь."),\
+		span_hear("Всё внезапно затихает."))
 	victim.investigate_log("has been dusted by [src].", INVESTIGATE_DEATHS)
 	victim.dust()
 	radiation_pulse(src, max_range = 2, threshold = RAD_EXTREME_INSULATION, chance = 40)
@@ -230,7 +230,7 @@
 		return FALSE
 	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] протягивает руку и пытается поднять [declent_ru(ACCUSATIVE)]. [capitalize(user.ru_p_them())] тело начинает светиться и вспыхивает, а затем обращается в пыль!"),\
 			span_userdanger("Вы тянетесь к [declent_ru(DATIVE)] руками. Это было глупо..."),\
-			span_hear("Все внезапно затихает."))
+			span_hear("Всё внезапно затихает."))
 	radiation_pulse(user, max_range = 2, threshold = RAD_EXTREME_INSULATION, chance = 40)
 	playsound(src, 'sound/effects/supermatter.ogg', 50, TRUE)
 	user.investigate_log("has been dusted by [src].", INVESTIGATE_DEATHS)
@@ -238,7 +238,7 @@
 
 /obj/item/nuke_core_container/supermatter
 	name = "supermatter bin"
-	desc = "A tiny receptacle that releases an inert hyper-noblium mix upon sealing, allowing a sliver of a supermatter crystal to be safely stored."
+	desc = "Крошечная ёмкость, из которой при запечатывании выделяется инертная смесь гипер-ноблиума, что позволяет безопасно хранить кусочек кристалла суперматерии."
 	var/obj/item/nuke_core/supermatter_sliver/sliver
 
 /obj/item/nuke_core_container/supermatter/Destroy()
@@ -267,7 +267,7 @@
 
 /obj/item/scalpel/supermatter
 	name = "supermatter scalpel"
-	desc = "A scalpel with a fragile tip of condensed hyper-noblium gas, searingly cold to the touch, that can safely shave a sliver off a supermatter crystal."
+	desc = "Скальпель с хрупким наконечником из сконденсированного гипер-нобилиума, обжигающе холодного на ощупь, которым можно безопасно срезать осколок с кристалла суперматерии."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "supermatter_scalpel"
 	toolspeed = 0.5
@@ -281,7 +281,7 @@
 
 /obj/item/hemostat/supermatter
 	name = "supermatter extraction tongs"
-	desc = "A pair of tongs made from condensed hyper-noblium gas, searingly cold to the touch, that can safely grip a supermatter sliver."
+	desc = "Щипцы, изготовленные из конденсированного гипер-нобилиума, обжигающе холодного на ощупь, с помощью которых можно безопасно взять осколок суперматерии."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "supermatter_tongs"
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'

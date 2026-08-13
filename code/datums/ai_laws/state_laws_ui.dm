@@ -99,7 +99,7 @@
 	var/list/to_state_cached = to_state.Copy()
 
 	//"radiomod" is inserted before a hardcoded message to change if and how it is handled by an internal radio.
-	owner.say("[owner.radiomod] Current Active Laws:", forced = forced_log_message)
+	owner.say("[owner.radiomod] Текущие активные законы:", forced = forced_log_message)
 	sleep(1 SECONDS)
 
 	if (lawcache_zeroth && (force_all_laws || (lawcache_zeroth in to_state_cached)))

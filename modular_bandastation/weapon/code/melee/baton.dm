@@ -66,8 +66,8 @@
 
 /obj/item/melee/baton/nt_cane/gun/examine(mob/user)
 	. = ..()
-	. += "предохранитель: [safety_on ? "включен" : "выключен"]."
-	. += "заряд: [diamond_loaded ? "есть" : "отсутствует"]."
+	. += "Предохранитель: [safety_on ? "включен" : "выключен"]."
+	. += "Заряд: [diamond_loaded ? "есть" : "отсутствует"]."
 
 /obj/item/melee/baton/nt_cane/gun/proc/try_load_diamond(obj/item/item, mob/user)
 	if(diamond_loaded)
@@ -118,7 +118,7 @@
 	COOLDOWN_START(src, safety_toggle_cooldown, 3 SECONDS)
 
 	safety_on = !safety_on
-	user.balloon_alert(user, "предохранитель: [safety_on ? "включен" : "выключен"].")
+	user.balloon_alert(user, "предохранитель: [safety_on ? "включён" : "выключен"].")
 	add_fingerprint(user)
 	update_item_action_buttons()
 	INVOKE_ASYNC(src, PROC_REF(play_safety_sound), user)

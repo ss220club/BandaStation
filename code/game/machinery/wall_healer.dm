@@ -2,7 +2,7 @@
 
 /// A wall mounted machine that heals chip damage for a price
 /obj/machinery/wall_healer
-	name = "\improper DeForest first aid station"
+	name = "DeForest first aid station"
 	desc = "A wall-mounted first aid station, designed to treat minor injuries - just stick your hand in and try to relax."
 	icon = 'icons/obj/machines/wall_healer.dmi'
 	icon_state = "wall_healer"
