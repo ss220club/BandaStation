@@ -91,7 +91,7 @@
 	sound_environment = SOUND_AREA_SMALL_SOFTFLOOR
 
 /area/station/service/library/artgallery
-	name = " Art Gallery"
+	name = "Art Gallery"
 	icon_state = "library_gallery"
 
 /area/station/service/library/private

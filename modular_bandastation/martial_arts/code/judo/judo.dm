@@ -233,6 +233,6 @@
 	else
 		owner.visible_message(
 			span_danger("[owner.declent_ru(NOMINATIVE)] встает в сбивающую стойку!"),
-			span_bolditalic("Ваш следующей приём - «сбить с толку».")
+			span_bolditalic("Ваш следующий приём - «сбить с толку».")
 		)
 		source.streak = DISCOMBOBULATE_COMBO

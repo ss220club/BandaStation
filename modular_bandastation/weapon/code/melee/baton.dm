@@ -66,7 +66,7 @@
 
 /obj/item/melee/baton/nt_cane/gun/examine(mob/user)
 	. = ..()
-	. += "Предохранитель: [safety_on ? "включен" : "выключен"]."
+	. += "Предохранитель: [safety_on ? "включён" : "выключен"]."
 	. += "Заряд: [diamond_loaded ? "есть" : "отсутствует"]."
 
 /obj/item/melee/baton/nt_cane/gun/proc/try_load_diamond(obj/item/item, mob/user)

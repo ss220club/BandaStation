@@ -267,7 +267,7 @@
 
 /obj/item/scalpel/supermatter
 	name = "supermatter scalpel"
-	desc = "Скальпель с хрупким наконечником из сконденсированного гипер-нобилиума, обжигающе холодного на ощупь, которым можно безопасно срезать осколок с кристалла суперматерии."
+	desc = "Скальпель с хрупким наконечником из сконденсированного гипер-ноблиума, обжигающе холодного на ощупь, которым можно безопасно срезать осколок с кристалла суперматерии."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "supermatter_scalpel"
 	toolspeed = 0.5
@@ -281,7 +281,7 @@
 
 /obj/item/hemostat/supermatter
 	name = "supermatter extraction tongs"
-	desc = "Щипцы, изготовленные из конденсированного гипер-нобилиума, обжигающе холодного на ощупь, с помощью которых можно безопасно взять осколок суперматерии."
+	desc = "Щипцы, изготовленные из конденсированного гипер-ноблиума, обжигающе холодного на ощупь, с помощью которых можно безопасно взять осколок суперматерии."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "supermatter_tongs"
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'

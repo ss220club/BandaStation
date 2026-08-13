@@ -916,7 +916,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	excludefromjob = list(JOB_CHIEF_MEDICAL_OFFICER)
 	exists_on_map = TRUE
 	difficulty = 2
-	steal_hint = "Компактный дефибриллятор, который главный врач носит при себе или лежит в его шкафчике."
+	steal_hint = "Компактный дефибриллятор, который главный врач носит при себе или который лежит в его шкафчике."
 
 /obj/item/defibrillator/compact/loaded/cmo/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/defibrillator/compact/loaded/cmo)
