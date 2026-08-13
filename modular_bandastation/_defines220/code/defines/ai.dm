@@ -2,5 +2,3 @@
 #define AI_LAW_CHANGE_TIME_LIMIT 10 MINUTES
 /// Amount of laws an AI can request to be changed
 #define AI_LAW_CHANGE_SET_AMOUNT 3
-/// Maximum length of a single proposed law
-#define AI_LAW_CHANGE_MAX_LAW_LENGTH 220

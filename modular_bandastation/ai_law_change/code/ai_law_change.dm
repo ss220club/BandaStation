@@ -165,7 +165,7 @@ GAME_VERB_DESC(/mob/living/silicon/ai, request_law_change, "Request Law Change",
 	data["reviewing"] = reviewing
 	data["laws"] = laws
 	data["notify_crew"] = notify_crew
-	data["max_law_length"] = AI_LAW_CHANGE_MAX_LAW_LENGTH
+	data["max_law_length"] = CONFIG_GET(number/max_law_len)
 	data["law_amount"] = AI_LAW_CHANGE_SET_AMOUNT
 	data["requester_key"] = requester?.key
 	data["requester_name"] = requester?.name
@@ -188,7 +188,7 @@ GAME_VERB_DESC(/mob/living/silicon/ai, request_law_change, "Request Law Change",
 				return FALSE
 			laws = list()
 			for(var/law in proposed_laws)
-				laws += copytext_char(trim(law), 1, AI_LAW_CHANGE_MAX_LAW_LENGTH + 1)
+				laws += copytext_char(trim(law), 1, CONFIG_GET(number/max_law_len) + 1)
 			if(!law_request_valid())
 				to_chat(requester, span_warning("ПЕРЕПРОВЕРЬТЕ ВАШ ЗАПРОС."))
 				return FALSE
@@ -246,7 +246,7 @@ GAME_VERB_DESC(/mob/living/silicon/ai, request_law_change, "Request Law Change",
 				return FALSE
 			laws = list()
 			for(var/law in edited_laws)
-				laws += copytext_char(trim(law), 1, AI_LAW_CHANGE_MAX_LAW_LENGTH + 1)
+				laws += copytext_char(trim(law), 1, CONFIG_GET(number/max_law_len) + 1)
 			approve(usr)
 			ui.close()
 			return TRUE

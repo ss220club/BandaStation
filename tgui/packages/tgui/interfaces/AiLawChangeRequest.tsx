@@ -45,9 +45,6 @@ export function AiLawChangeRequest() {
     setLawInputs(updated);
   };
 
-  const submitRequest = () => act('submit', { laws: lawInputs });
-  const confirmRequest = () => act('confirm', { laws: lawInputs });
-
   return (
     <Window title="Запрос на смену законов" width={480} height={480}>
       <Window.Content>
@@ -143,7 +140,7 @@ export function AiLawChangeRequest() {
                     icon="check"
                     color="good"
                     textAlign="center"
-                    onClick={confirmRequest}
+                    onClick={() => act('confirm', { laws: lawInputs })}
                   >
                     ПОДТВЕРДИТЬ
                   </Button.Confirm>
@@ -167,7 +164,7 @@ export function AiLawChangeRequest() {
                 fluid
                 icon="check"
                 textAlign="center"
-                onClick={submitRequest}
+                onClick={() => act('submit', { laws: lawInputs })}
                 style={{ fontSize: '20px' }}
                 confirmContent="ОТПРАВИТЬ?"
               >
