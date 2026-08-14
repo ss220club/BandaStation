@@ -39,4 +39,15 @@
 		return Fail("Cell updates must retain their update time")
 	qdel(cell)
 
+	var/datum/redspace_field_source/source = new(1, test_turf, 10, 4, "test")
+	if(source.get_contribution(test_turf) != 10)
+		return Fail("A source must return its full strength at its origin")
+	var/turf/nearby_turf = get_step(test_turf, EAST)
+	if(source.get_contribution(nearby_turf) <= 0)
+		return Fail("A source must affect tiles inside its radius")
+	var/turf/outside_turf = locate(test_turf.x + 5, test_turf.y, test_turf.z)
+	if(outside_turf && source.get_contribution(outside_turf) != 0)
+		return Fail("A source must not affect tiles outside its radius")
+	qdel(source)
+
 #endif

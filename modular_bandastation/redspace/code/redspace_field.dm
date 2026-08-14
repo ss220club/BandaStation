@@ -12,6 +12,21 @@
 		return REDSPACE_STATE_STORM
 	return REDSPACE_STATE_INVASION
 
+/// Returns a short human-readable label for a gameplay range.
+/proc/redspace_state_name(state)
+	switch(state)
+		if(REDSPACE_STATE_EBB)
+			return "отлив"
+		if(REDSPACE_STATE_CALM)
+			return "штиль"
+		if(REDSPACE_STATE_DISTURBANCE)
+			return "возмущение"
+		if(REDSPACE_STATE_STORM)
+			return "шторм"
+		if(REDSPACE_STATE_INVASION)
+			return "вторжение"
+	return "неизвестно"
+
 /// Returns pointy-top axial coordinates for the hex containing a turf.
 /proc/redspace_hex_coordinates(turf/target) as /list
 	if(!target)
@@ -63,8 +78,15 @@
 	var/previous_state = REDSPACE_STATE_CALM
 	/// Last world.time when the cached value changed.
 	var/last_updated = 0
+	/// Explicit value set by an event or an administrative test. Null means the cell is source-driven.
+	var/forced_value
+	/// Whether the explicit value is allowed to represent an invasion state.
+	var/forced_value_allows_invasion = FALSE
+	/// Representative tile used to refresh this sparse cell from field sources.
+	var/sample_x
+	var/sample_y
 
-/datum/redspace_field_cell/New(new_z, new_q, new_r, new_key, initial_value = REDSPACE_DEFAULT_VALUE)
+/datum/redspace_field_cell/New(new_z, new_q, new_r, new_key, initial_value = REDSPACE_DEFAULT_VALUE, turf/sample_turf = null)
 	. = ..()
 	z_level = new_z
 	q = new_q
@@ -74,6 +96,9 @@
 	previous_value = initial_value
 	state = redspace_state_from_value(initial_value)
 	previous_state = state
+	if(sample_turf)
+		sample_x = sample_turf.x
+		sample_y = sample_turf.y
 
 /// Applies a local delta and refreshes the cached value.
 /datum/redspace_field_cell/proc/set_delta(new_delta, background_value, update_time = world.time)
@@ -91,3 +116,22 @@
 	state = redspace_state_from_value(new_value)
 	last_updated = update_time
 	return TRUE
+
+/// Sets an explicit value, optionally allowing the event-only invasion range.
+/datum/redspace_field_cell/proc/set_forced_value(new_value, allow_invasion = FALSE, update_time = world.time)
+	forced_value = new_value
+	forced_value_allows_invasion = allow_invasion
+	return set_value(new_value, update_time)
+
+/// Removes an explicit value and returns whether one was present.
+/datum/redspace_field_cell/proc/clear_forced_value()
+	var/was_forced = !isnull(forced_value)
+	forced_value = null
+	forced_value_allows_invasion = FALSE
+	return was_forced
+
+/// Returns the representative tile used for source refreshes, if it is still on the map.
+/datum/redspace_field_cell/proc/get_sample_turf() as /turf
+	if(!sample_x || !sample_y || !z_level)
+		return
+	return locate(sample_x, sample_y, z_level)
