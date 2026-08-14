@@ -120,6 +120,7 @@ export const CutterTarget = new Juke.Target({
 export const RuNamesMergeTarget = new Juke.Target({
   inputs: [
     'tools/translations/ru_names_header.toml',
+    'modular_bandastation/translations/public/ru_names',
     'modular_bandastation/translations/public/ru_names/**/*.toml',
   ],
   outputs: ['modular_bandastation/translations/public/ru_names.toml'],
