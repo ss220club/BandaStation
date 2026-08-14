@@ -1,0 +1,12 @@
+/// Radius of a redspace hex in map tiles. The resulting bounding box is roughly 8x8 tiles.
+#define REDSPACE_HEX_RADIUS 4
+#define REDSPACE_HEX_SQRT3 1.7320508075688772
+
+#define REDSPACE_DEFAULT_VALUE 0
+#define REDSPACE_MAX_NORMAL_VALUE 10
+
+#define REDSPACE_STATE_EBB 1
+#define REDSPACE_STATE_CALM 2
+#define REDSPACE_STATE_DISTURBANCE 3
+#define REDSPACE_STATE_STORM 4
+#define REDSPACE_STATE_INVASION 5

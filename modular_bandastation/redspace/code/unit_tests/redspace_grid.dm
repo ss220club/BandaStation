@@ -1,0 +1,42 @@
+#if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
+
+/datum/unit_test/redspace_grid
+
+/datum/unit_test/redspace_grid/Run()
+	if(redspace_state_from_value(-0.1) != REDSPACE_STATE_EBB)
+		return Fail("Negative values must be ebb")
+	if(redspace_state_from_value(0) != REDSPACE_STATE_CALM)
+		return Fail("Zero must be calm")
+	if(redspace_state_from_value(3) != REDSPACE_STATE_CALM)
+		return Fail("Three must be calm")
+	if(redspace_state_from_value(4) != REDSPACE_STATE_DISTURBANCE)
+		return Fail("Four must be disturbance")
+	if(redspace_state_from_value(6) != REDSPACE_STATE_DISTURBANCE)
+		return Fail("Six must be disturbance")
+	if(redspace_state_from_value(7) != REDSPACE_STATE_STORM)
+		return Fail("Seven must be storm")
+	if(redspace_state_from_value(10) != REDSPACE_STATE_STORM)
+		return Fail("Ten must be storm")
+	if(redspace_state_from_value(10.1) != REDSPACE_STATE_INVASION)
+		return Fail("Values above ten must be invasion")
+
+	var/turf/test_turf = run_loc_floor_bottom_left
+	var/list/hex_coordinates = redspace_hex_coordinates(test_turf)
+	if(length(hex_coordinates) != 2)
+		return Fail("Hex conversion must return axial q and r coordinates")
+	if(!isnum(hex_coordinates[1]) || !isnum(hex_coordinates[2]))
+		return Fail("Hex coordinates must be numeric")
+	if(redspace_hex_key(test_turf.z, hex_coordinates[1], hex_coordinates[2]) != redspace_hex_key(test_turf.z, hex_coordinates[1], hex_coordinates[2]))
+		return Fail("Cell keys must be stable")
+
+	var/datum/redspace_field_cell/cell = new(test_turf.z, hex_coordinates[1], hex_coordinates[2], "test", 0)
+	cell.set_delta(5, 0, 10)
+	if(cell.value != 5)
+		return Fail("Cell delta must update the cached value")
+	if(cell.state != REDSPACE_STATE_DISTURBANCE)
+		return Fail("Cell delta must update the cached state")
+	if(cell.last_updated != 10)
+		return Fail("Cell updates must retain their update time")
+	qdel(cell)
+
+#endif

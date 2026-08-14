@@ -1,1 +1,7 @@
 #include "_redspace.dm"
+
+#include "code/_defines.dm"
+#include "code/redspace_field.dm"
+#include "code/redspace_subsystem.dm"
+
+#include "code/unit_tests/redspace_grid.dm"
