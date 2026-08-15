@@ -126,6 +126,7 @@ GAME_VERB_DESC(/mob/living/silicon/ai, request_law_change, "Request Law Change",
 		if(length(trim(law)))
 			new_laws[law] = FALSE
 	core_module.set_laws(new_laws)
+	law_rack.update_lawset()
 	if(announce)
 		announce_law_change()
 
