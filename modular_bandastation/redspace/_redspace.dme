@@ -7,8 +7,10 @@
 #include "code/redspace_source.dm"
 #include "code/redspace_events.dm"
 #include "code/redspace_subsystem.dm"
+#include "code/redspace_counter.dm"
 #include "code/redspace_debug.dm"
 
 #include "code/unit_tests/redspace_grid.dm"
 #include "code/unit_tests/redspace_context.dm"
 #include "code/unit_tests/redspace_core.dm"
+#include "code/unit_tests/redspace_counter.dm"
