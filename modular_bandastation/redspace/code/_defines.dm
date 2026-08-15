@@ -22,6 +22,11 @@
 /// MVP exception: the bridge zone is half as susceptible to the ordinary field.
 #define REDSPACE_BRIDGE_COEFFICIENT 0.5
 
+/// Sampling and history limits for stationary redspace sensors.
+#define REDSPACE_SENSOR_UPDATE_INTERVAL (2 SECONDS)
+#define REDSPACE_SENSOR_STALE_AFTER (6 SECONDS)
+#define REDSPACE_SENSOR_HISTORY_LIMIT 8
+
 #define REDSPACE_PROFILE_DEBUG "debug"
 #define REDSPACE_PROFILE_DEMONIC "demonic"
 
