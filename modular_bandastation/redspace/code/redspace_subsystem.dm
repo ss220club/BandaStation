@@ -18,6 +18,8 @@ SUBSYSTEM_DEF(redspace)
 	/// Sources that need expiry checks or cell refreshes while they exist.
 	var/list/processing_sources = list()
 	var/next_source_id = 1
+	/// Maximum combined negative contribution from overlapping stabilizers at one point.
+	var/max_stabilizer_negative_contribution = 6
 	/// Cells whose cached value changed and may need event/signal processing.
 	var/list/dirty_cells = list()
 	/// Resumable copy of dirty_cells for MC_TICK_CHECK support.
@@ -169,19 +171,25 @@ SUBSYSTEM_DEF(redspace)
 
 /// Returns the cached field value at a station turf. Empty cells use the background value.
 /datum/controller/subsystem/redspace/proc/get_value(turf/target)
+	return get_value_without_source(target)
+
+/// Calculates a point value while ignoring one source. Stabilizers use this to
+/// measure the pressure they need to counter without feeding their own output back
+/// into the requested correction.
+/datum/controller/subsystem/redspace/proc/get_value_without_source(turf/target, datum/redspace_field_source/excluded_source = null)
 	if(!target || !is_supported_z(target.z))
 		return
 
 	var/datum/redspace_field_cell/cell = get_cell(target)
-	var/value = calculate_value(target, cell)
-	if(cell && cell.sample_x == target.x && cell.sample_y == target.y)
+	var/value = calculate_value(target, cell, excluded_source)
+	if(!excluded_source && cell && cell.sample_x == target.x && cell.sample_y == target.y)
 		if(cell.set_value(value, world.time, "локальная выборка"))
 			mark_cell_dirty(cell)
 	return value
 
 /// Calculates the field at a tile from the background, local cell override, active sources
 /// and the zone susceptibility coefficient.
-/datum/controller/subsystem/redspace/proc/calculate_value(turf/target, datum/redspace_field_cell/cell)
+/datum/controller/subsystem/redspace/proc/calculate_value(turf/target, datum/redspace_field_cell/cell, datum/redspace_field_source/excluded_source = null)
 	if(!target || !is_supported_z(target.z))
 		return
 
@@ -194,11 +202,19 @@ SUBSYSTEM_DEF(redspace)
 	var/value = context.background_value
 	if(cell)
 		value += cell.local_delta
+	var/stabilizer_delta = 0
 	for(var/source_key in field_sources)
 		var/datum/redspace_field_source/source = field_sources[source_key]
-		if(!source)
+		if(!source || source == excluded_source)
 			continue
-		value += source.get_contribution(target)
+		var/contribution = source.get_contribution(target)
+		if(istype(source, /datum/redspace_field_source/stabilizer))
+			stabilizer_delta += contribution
+		else
+			value += contribution
+
+	if(stabilizer_delta)
+		value += max(stabilizer_delta, -max(0, max_stabilizer_negative_contribution))
 
 	value *= get_zone_coefficient(target, cell)
 
@@ -367,6 +383,13 @@ SUBSYSTEM_DEF(redspace)
 /// Registers a static source. Kept as the plain entry point for debug tooling.
 /datum/controller/subsystem/redspace/proc/register_source(turf/origin, source_strength, source_radius, source_profile_id = REDSPACE_PROFILE_DEBUG, lifetime = null, reason = null) as /datum/redspace_field_source
 	return add_source(new /datum/redspace_field_source(0, origin, source_strength, source_radius, source_profile_id, lifetime, reason))
+
+/// Registers a machine-owned negative source and keeps it separate from ordinary
+/// positive/debug sources for the shared stabilizer cap.
+/datum/controller/subsystem/redspace/proc/register_stabilizer_source(turf/origin, source_strength, source_radius, reason = null) as /datum/redspace_field_source/stabilizer
+	if(!isnum(source_strength))
+		return
+	return add_source(new /datum/redspace_field_source/stabilizer(0, origin, min(source_strength, 0), source_radius, REDSPACE_PROFILE_STABILIZER, null, reason))
 
 /// Registers a stable hot zone: a persistent local anomaly with its own type.
 /datum/controller/subsystem/redspace/proc/register_hotspot(turf/origin, source_strength, source_radius, source_profile_id = REDSPACE_PROFILE_DEMONIC, reason = null, description = null) as /datum/redspace_field_source/hotspot

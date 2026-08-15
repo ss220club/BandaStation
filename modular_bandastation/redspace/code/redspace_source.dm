@@ -93,6 +93,23 @@
 	var/lifetime_label = isnull(expires_at) ? "постоянный" : "осталось [round(get_remaining_lifetime() / (1 SECONDS))]с"
 	return "#[source_id] [profile_id] ([origin_x], [origin_y], [z_level]), сила [round(strength, 0.1)], радиус [radius], [lifetime_label]"
 
+/// A machine-owned negative source. The subsystem applies a shared local cap to
+/// these sources so overlapping stabilizers have diminishing effective returns.
+/datum/redspace_field_source/stabilizer
+
+/datum/redspace_field_source/stabilizer/New(new_id, turf/origin, new_strength, new_radius, new_profile_id, new_lifetime = null, new_reason = null)
+	if(!isnum(new_strength))
+		new_strength = 0
+	. = ..(new_id, origin, min(new_strength, 0), new_radius, new_profile_id, new_lifetime, new_reason)
+
+/datum/redspace_field_source/stabilizer/set_strength(new_strength, reason = null)
+	if(!isnum(new_strength))
+		return FALSE
+	return ..(min(new_strength, 0), reason)
+
+/datum/redspace_field_source/stabilizer/get_debug_label()
+	return "#[source_id] стабилизатор ([origin_x], [origin_y], [z_level]), сила [round(strength, 0.1)], радиус [radius]"
+
 /// A stable local anomaly: a rift trace, an entity footprint or a faulty bluespace object.
 /// Behaves like a static source but exists as its own type so events and the journal
 /// can reason about persistent zones separately from debug contributions.
