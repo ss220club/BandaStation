@@ -1,0 +1,36 @@
+#if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
+
+/datum/unit_test/redspace_core
+
+/datum/unit_test/redspace_core/Run()
+	if(redspace_state_with_hysteresis(3.5, REDSPACE_STATE_DISTURBANCE) != REDSPACE_STATE_DISTURBANCE)
+		return Fail("Disturbance must survive values above its exit threshold")
+	if(redspace_state_with_hysteresis(3, REDSPACE_STATE_DISTURBANCE) != REDSPACE_STATE_CALM)
+		return Fail("Disturbance must leave at its exit threshold")
+	if(redspace_state_with_hysteresis(10, REDSPACE_STATE_CALM) != REDSPACE_STATE_STORM)
+		return Fail("A large increase must skip directly to storm")
+	if(redspace_state_with_hysteresis(6.5, REDSPACE_STATE_STORM) != REDSPACE_STATE_STORM)
+		return Fail("Storm must survive values above its exit threshold")
+	if(redspace_state_with_hysteresis(6, REDSPACE_STATE_STORM) != REDSPACE_STATE_DISTURBANCE)
+		return Fail("Storm must leave at its exit threshold")
+	if(redspace_state_with_hysteresis(0, REDSPACE_STATE_STORM) != REDSPACE_STATE_CALM)
+		return Fail("A large decrease must skip directly to calm")
+	if(redspace_state_with_hysteresis(0, REDSPACE_STATE_EBB) != REDSPACE_STATE_EBB)
+		return Fail("Ebb must not end at zero")
+	if(redspace_state_with_hysteresis(1, REDSPACE_STATE_EBB) != REDSPACE_STATE_CALM)
+		return Fail("Ebb must end after returning to a stable positive value")
+
+	var/datum/redspace_field_cell/cell = new(1, 0, 0, "core_test", 0)
+	cell.set_value(4, 10, "enter disturbance")
+	cell.set_value(3.5, 20, "falling")
+	if(cell.state != REDSPACE_STATE_DISTURBANCE)
+		return Fail("Cell updates must use hysteresis")
+	if(!cell.set_event_override(10.1, 30, "start invasion") || cell.state != REDSPACE_STATE_INVASION)
+		return Fail("Event override must enter invasion")
+	cell.clear_event_override()
+	cell.set_value(3, 40, "finish invasion")
+	if(cell.state != REDSPACE_STATE_CALM)
+		return Fail("Clearing invasion must restore the ordinary range")
+	qdel(cell)
+
+#endif

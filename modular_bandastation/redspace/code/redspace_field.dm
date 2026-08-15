@@ -4,13 +4,54 @@
 		return
 	if(value < 0)
 		return REDSPACE_STATE_EBB
-	if(value <= 3)
+	if(value <= REDSPACE_DISTURBANCE_EXIT_VALUE)
 		return REDSPACE_STATE_CALM
-	if(value <= 6)
+	if(value <= REDSPACE_STORM_EXIT_VALUE)
 		return REDSPACE_STATE_DISTURBANCE
-	if(value <= 10)
+	if(value <= REDSPACE_MAX_NORMAL_VALUE)
 		return REDSPACE_STATE_STORM
 	return REDSPACE_STATE_INVASION
+
+/// Converts a field value into a range while keeping adjacent ranges stable near their thresholds.
+/proc/redspace_state_with_hysteresis(value, previous_state)
+	if(isnull(value))
+		return
+	if(value > REDSPACE_MAX_NORMAL_VALUE)
+		return REDSPACE_STATE_INVASION
+	if(isnull(previous_state) || previous_state == REDSPACE_STATE_INVASION)
+		return redspace_state_from_value(value)
+
+	switch(previous_state)
+		if(REDSPACE_STATE_EBB)
+			if(value < REDSPACE_EBB_EXIT_VALUE)
+				return REDSPACE_STATE_EBB
+			return redspace_state_from_value(value)
+		if(REDSPACE_STATE_CALM)
+			if(value < 0)
+				return REDSPACE_STATE_EBB
+			if(value >= REDSPACE_STORM_ENTER_VALUE)
+				return REDSPACE_STATE_STORM
+			if(value >= REDSPACE_DISTURBANCE_ENTER_VALUE)
+				return REDSPACE_STATE_DISTURBANCE
+			return REDSPACE_STATE_CALM
+		if(REDSPACE_STATE_DISTURBANCE)
+			if(value < 0)
+				return REDSPACE_STATE_EBB
+			if(value <= REDSPACE_DISTURBANCE_EXIT_VALUE)
+				return REDSPACE_STATE_CALM
+			if(value >= REDSPACE_STORM_ENTER_VALUE)
+				return REDSPACE_STATE_STORM
+			return REDSPACE_STATE_DISTURBANCE
+		if(REDSPACE_STATE_STORM)
+			if(value < 0)
+				return REDSPACE_STATE_EBB
+			if(value <= REDSPACE_DISTURBANCE_EXIT_VALUE)
+				return REDSPACE_STATE_CALM
+			if(value <= REDSPACE_STORM_EXIT_VALUE)
+				return REDSPACE_STATE_DISTURBANCE
+			return REDSPACE_STATE_STORM
+
+	return redspace_state_from_value(value)
 
 /// Returns a short human-readable label for a gameplay range.
 /proc/redspace_state_name(state)
@@ -91,13 +132,22 @@
 	var/previous_state = REDSPACE_STATE_CALM
 	/// Last world.time when the cached value changed.
 	var/last_updated = 0
-	/// Explicit value set by an event or an administrative test. Null means the cell is source-driven.
+	/// Ordinary explicit value set by an administrative test or low-level scenario API.
 	var/forced_value
-	/// Whether the explicit value is allowed to represent an invasion state.
-	var/forced_value_allows_invasion = FALSE
+	/// Explicit event value above the normal ceiling. It is independent from the ordinary override.
+	var/event_override_value
 	/// Representative tile used to refresh this sparse cell from field sources.
 	var/sample_x
 	var/sample_y
+	/// Registered listeners interested in this cell's cached changes.
+	var/list/listeners = list()
+	/// Last value and state delivered to registered listeners or the transition journal.
+	var/last_notified_value = REDSPACE_DEFAULT_VALUE
+	var/last_notified_state = REDSPACE_STATE_CALM
+	/// Reason attached to the most recent cache update.
+	var/last_change_reason
+	/// Optional reason waiting for dirty-cell processing.
+	var/pending_change_reason
 
 /datum/redspace_field_cell/New(new_z, new_q, new_r, new_key, initial_value = REDSPACE_DEFAULT_VALUE, turf/sample_turf = null)
 	. = ..()
@@ -109,39 +159,58 @@
 	previous_value = initial_value
 	state = redspace_state_from_value(initial_value)
 	previous_state = state
+	last_notified_value = initial_value
+	last_notified_state = state
 	if(sample_turf)
 		sample_x = sample_turf.x
 		sample_y = sample_turf.y
 
 /// Applies a local delta and refreshes the cached value.
-/datum/redspace_field_cell/proc/set_delta(new_delta, background_value, update_time = world.time)
+/datum/redspace_field_cell/proc/set_delta(new_delta, background_value, update_time = world.time, reason = null)
 	local_delta = new_delta
-	return set_value(background_value + local_delta, update_time)
+	if(!isnull(reason))
+		last_change_reason = reason
+	return set_value(background_value + local_delta, update_time, reason)
 
 /// Updates the cached value and range. Returns TRUE when anything changed.
-/datum/redspace_field_cell/proc/set_value(new_value, update_time = world.time)
+/datum/redspace_field_cell/proc/set_value(new_value, update_time = world.time, reason = null)
 	if(value == new_value)
 		return FALSE
 
 	previous_value = value
 	previous_state = state
 	value = new_value
-	state = redspace_state_from_value(new_value)
+	state = redspace_state_with_hysteresis(new_value, state)
 	last_updated = update_time
+	last_change_reason = reason
 	return TRUE
 
-/// Sets an explicit value, optionally allowing the event-only invasion range.
-/datum/redspace_field_cell/proc/set_forced_value(new_value, allow_invasion = FALSE, update_time = world.time)
-	forced_value = new_value
-	forced_value_allows_invasion = allow_invasion
-	return set_value(new_value, update_time)
+/// Sets an ordinary explicit value. The subsystem enforces the normal ceiling before calling this.
+/datum/redspace_field_cell/proc/set_forced_value(new_value, update_time = world.time, reason = null)
+	forced_value = min(new_value, REDSPACE_MAX_NORMAL_VALUE)
+	if(!isnull(event_override_value))
+		return FALSE
+	return set_value(forced_value, update_time, reason)
 
 /// Removes an explicit value and returns whether one was present.
 /datum/redspace_field_cell/proc/clear_forced_value()
 	var/was_forced = !isnull(forced_value)
 	forced_value = null
-	forced_value_allows_invasion = FALSE
 	return was_forced
+
+/// Sets a scenario-owned event value above the normal ceiling.
+/datum/redspace_field_cell/proc/set_event_override(new_value, update_time = world.time, reason = null)
+	if(!isnum(new_value) || new_value <= REDSPACE_MAX_NORMAL_VALUE)
+		return FALSE
+	var/changed = event_override_value != new_value
+	event_override_value = new_value
+	return set_value(new_value, update_time, reason) || changed
+
+/// Removes the scenario-owned event value. The subsystem recalculates the visible value afterwards.
+/datum/redspace_field_cell/proc/clear_event_override()
+	var/was_overridden = !isnull(event_override_value)
+	event_override_value = null
+	return was_overridden
 
 /// Returns the representative tile used for source refreshes, if it is still on the map.
 /datum/redspace_field_cell/proc/get_sample_turf() as /turf

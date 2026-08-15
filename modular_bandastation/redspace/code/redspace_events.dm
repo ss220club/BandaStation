@@ -44,8 +44,10 @@
 	var/turf/lightning_source = get_step(target_turf, NORTH)
 	if(!lightning_source)
 		lightning_source = target_turf
+	SSredspace.notify_event_started(src, target_turf, "отладочный удар выбран")
 	lightning_source.Beam(target, icon_state = "lightning[rand(1,12)]", time = 0.5 SECONDS)
 	playsound(target_turf, 'sound/effects/magic/lightningbolt.ogg', 50, TRUE)
+	SSredspace.notify_exposure(target, src, impact_damage, "удар редспейсной молнии")
 	target.adjust_fire_loss(impact_damage)
 	if(stun_duration)
 		target.Paralyze(stun_duration)
@@ -58,4 +60,5 @@
 	to_chat(target, span_userdanger("Вас поражает разряд редспейсной молнии!"), confidential = TRUE)
 	log_admin("[key_name(admin)] started redspace lightning strike on [key_name(target)] at ([target_turf.x], [target_turf.y], [target_turf.z]); damage [impact_damage], stun [stun_duration].")
 	message_admins("[key_name_admin(admin)] запустил удар редспейсной молнии по [key_name_admin(target)] ([ADMIN_COORDJMP(target_turf)]).")
+	SSredspace.notify_event_finished(src, target_turf, "отладочный удар завершён")
 	return TRUE

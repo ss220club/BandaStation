@@ -4,7 +4,7 @@
 		return
 
 	var/value = SSredspace.get_value(target)
-	var/state = redspace_state_from_value(value)
+	var/state = SSredspace.get_state(target)
 	var/datum/redspace_field_cell/cell = SSredspace.get_cell(target)
 	var/list/report = list(
 		"Редспейс на ([target.x], [target.y], [target.z])",
@@ -19,7 +19,9 @@
 		report += "Кеш: [round(cell.value, 0.1)], предыдущее: [round(cell.previous_value, 0.1)]"
 		report += "Последнее обновление: [cell.last_updated ? "[world.time - cell.last_updated] тиков назад" : "нет"]"
 		if(!isnull(cell.forced_value))
-			report += "Принудительное значение: [round(cell.forced_value, 0.1)] ([cell.forced_value_allows_invasion ? "event override" : "обычный override"])"
+			report += "Обычный override: [round(cell.forced_value, 0.1)]"
+		if(!isnull(cell.event_override_value))
+			report += "Event-only override: [round(cell.event_override_value, 0.1)]"
 	else
 		report += "Разреженная ячейка: не создана"
 
@@ -39,19 +41,19 @@
 	to_chat(user, span_notice(report.Join("<br>")), confidential = TRUE)
 
 /// Applies an ordinary or event-only explicit value to a turf selected by an administrator.
-/proc/redspace_debug_set_cell_value(client/user, turf/target, allow_invasion = FALSE)
+/proc/redspace_debug_set_cell_value(client/user, turf/target, event_only = FALSE)
 	if(!user || !target || !SSredspace.is_supported_z(target.z))
 		if(user)
 			to_chat(user, span_warning("Этот тайл не находится на активном станционном z-уровне редспейса."), confidential = TRUE)
 		return
 
 	var/current_value = SSredspace.get_value(target)
-	var/min_value = allow_invasion ? 10.1 : -100
-	var/max_value = allow_invasion ? 100 : REDSPACE_MAX_NORMAL_VALUE
-	var/default_value = allow_invasion ? max(11, current_value) : clamp(current_value, min_value, max_value)
+	var/min_value = event_only ? REDSPACE_EVENT_MIN_VALUE : -100
+	var/max_value = event_only ? 100 : REDSPACE_MAX_NORMAL_VALUE
+	var/default_value = event_only ? max(11, current_value) : clamp(current_value, min_value, max_value)
 	var/new_value = tgui_input_number(
 		user,
-		allow_invasion ? "Новое event-only значение для текущей ячейки" : "Новое обычное значение для текущей ячейки",
+		event_only ? "Новое event-only значение для текущей ячейки" : "Новое обычное значение для текущей ячейки",
 		"Redspace Cell",
 		default_value,
 		max_value,
@@ -60,8 +62,11 @@
 	if(isnull(new_value))
 		return
 
-	SSredspace.set_cell_value(target, new_value, allow_invasion)
-	var/override_kind = allow_invasion ? "event override" : "обычное значение"
+	if(event_only)
+		SSredspace.set_event_override(target, new_value, "установлен из debug-панели")
+	else
+		SSredspace.set_cell_value(target, new_value, "установлен из debug-панели")
+	var/override_kind = event_only ? "event override" : "обычное значение"
 	to_chat(user, span_notice("Значение ячейки установлено: [round(new_value, 0.1)] ([override_kind])."), confidential = TRUE)
 	log_admin("[key_name(user)] set redspace [override_kind] to [new_value] at ([target.x], [target.y], [target.z]).")
 	message_admins("[key_name_admin(user)] установил [override_kind] редспейса [new_value] на ([target.x], [target.y], [target.z]).")

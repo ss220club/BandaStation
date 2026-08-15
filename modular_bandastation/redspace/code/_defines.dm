@@ -4,7 +4,18 @@
 
 #define REDSPACE_DEFAULT_VALUE 0
 #define REDSPACE_MAX_NORMAL_VALUE 10
+#define REDSPACE_EVENT_MIN_VALUE 10.1
 #define REDSPACE_MAX_SOURCE_RADIUS 64
+
+/// Hysteresis thresholds for cached gameplay ranges.
+#define REDSPACE_DISTURBANCE_ENTER_VALUE 4
+#define REDSPACE_DISTURBANCE_EXIT_VALUE 3
+#define REDSPACE_STORM_ENTER_VALUE 7
+#define REDSPACE_STORM_EXIT_VALUE 6
+#define REDSPACE_EBB_EXIT_VALUE 1
+
+/// Number of range transitions retained for diagnostics.
+#define REDSPACE_TRANSITION_LOG_LIMIT 128
 
 /// Susceptibility coefficient applied to hexes with no special zone rule.
 #define REDSPACE_DEFAULT_COEFFICIENT 1

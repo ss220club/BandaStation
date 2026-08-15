@@ -1,6 +1,7 @@
 #include "_redspace.dm"
 
 #include "code/_defines.dm"
+#include "code/signals.dm"
 #include "code/redspace_field.dm"
 #include "code/redspace_context.dm"
 #include "code/redspace_source.dm"
@@ -10,3 +11,4 @@
 
 #include "code/unit_tests/redspace_grid.dm"
 #include "code/unit_tests/redspace_context.dm"
+#include "code/unit_tests/redspace_core.dm"
