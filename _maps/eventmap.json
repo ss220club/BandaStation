@@ -1,0 +1,17 @@
+{
+	"version": 1,
+	"map_name": "eventmap",
+	"map_path": "map_files/EventMap",
+	"map_file": "eventmap.dmm",
+	"space_ruin_levels": 0,
+	"space_empty_levels": 0,
+	"shuttles": {},
+	"traits": [
+		{
+			"Linkage": null,
+			"Gravity": true,
+			"Baseturf": "/turf/open/misc/beach/sand",
+			"No Parallax": true
+		}
+	]
+}
