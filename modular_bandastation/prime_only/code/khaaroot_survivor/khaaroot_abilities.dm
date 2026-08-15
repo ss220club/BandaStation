@@ -7,7 +7,7 @@
 /datum/action/cooldown/spell/pointed/khaaroot_infect
 	name = "заражение Кхаарут"
 	desc = "Внедрить остатки вируса Кхаарут в разум цели, подчиняя её воле улья. Цель должна находиться рядом и не иметь ментальной защиты."
-	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
+	button_icon = 'modular_bandastation/prime_only/icons/khaaroot.dmi'
 	button_icon_state = "infect"
 	cooldown_time = 30 SECONDS
 	spell_requirements = SPELL_CASTABLE_WITHOUT_INVOCATION
@@ -178,7 +178,7 @@
 /datum/action/cooldown/khaaroot_hivemind_comm
 	name = "речь Улья Кхаарут"
 	desc = "Отправить мысленное сообщение всем участникам улья Кхаарут."
-	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
+	button_icon = 'modular_bandastation/prime_only/icons/khaaroot.dmi'
 	button_icon_state = "hivemind_com"
 	background_icon_state = "bg_alien"
 	check_flags = AB_CHECK_CONSCIOUS
@@ -227,7 +227,7 @@
 /datum/action/cooldown/khaaroot_hivemind_panel
 	name = "панель Улья Кхаарут"
 	desc = "Открыть панель управления ульем Кхаарут для управления заражёнными."
-	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
+	button_icon = 'modular_bandastation/prime_only/icons/khaaroot.dmi'
 	button_icon_state = "hivemind_panel"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 0

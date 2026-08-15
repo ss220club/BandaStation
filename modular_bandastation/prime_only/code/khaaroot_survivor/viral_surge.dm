@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/khaaroot_adrenaline_surge
 	name = "Вирусный всплеск"
 	desc = "Временно активирует остатки вируса Кхаарут в организме, давая взрывной прирост выносливости, ускорение и сопротивляемость урону. После завершения наступает короткий период истощения."
-	button_icon = 'modular_bandastation/skills/icons/khaaroot.dmi'
+	button_icon = 'modular_bandastation/prime_only/icons/khaaroot.dmi'
 	button_icon_state = "viral_surge"
 	cooldown_time = 120 SECONDS
 	spell_requirements = SPELL_CASTABLE_WITHOUT_INVOCATION

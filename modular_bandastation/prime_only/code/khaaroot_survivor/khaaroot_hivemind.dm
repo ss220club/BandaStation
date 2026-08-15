@@ -168,7 +168,7 @@
 		data += list(list(
 			"name" = thrall.name,
 			"ref" = REF(thrall),
-			"status" = mob.stat == DEAD ? "Мёртв" : (mob.stat == UNCONSCIOUS ? "Без сознания" : (mob.health <= mob.crit_threshold ? "Критическое" : "Активен")),
+			"status" = mob.stat == DEAD ? "Мёртв" : (IS_UNCONSCIOUS(mob) ? "Без сознания" : (mob.health <= mob.crit_threshold ? "Критическое" : "Активен")),
 			"health" = round((mob.health / mob.maxHealth) * 100, 1),
 			"location" = A ? A.name : "Неизвестно",
 			"objective" = get_thrall_objective(thrall),
@@ -307,7 +307,7 @@
 	antagpanel_category = "Улей Кхаарут"
 	show_in_antagpanel = FALSE
 	show_to_ghosts = FALSE
-	hud_icon = 'modular_bandastation/antagonists/icons/antag_hud.dmi'
+	hud_icon = 'modular_bandastation/prime_only/icons/antag_hud.dmi'
 	antag_hud_name = "khaaroot_source"
 	ui_name = null
 	pref_flag = NONE
@@ -350,7 +350,7 @@
 	antagpanel_category = "Улей Кхаарут"
 	show_in_antagpanel = FALSE
 	show_to_ghosts = FALSE
-	hud_icon = 'modular_bandastation/antagonists/icons/antag_hud.dmi'
+	hud_icon = 'modular_bandastation/prime_only/icons/antag_hud.dmi'
 	antag_hud_name = "khaaroot_thrall"
 	ui_name = null
 	pref_flag = NONE
