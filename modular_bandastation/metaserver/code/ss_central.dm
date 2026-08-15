@@ -100,6 +100,18 @@ SUBSYSTEM_DEF(central)
 	if(player && interview)
 		interview.ui_interact(player)
 
+/datum/controller/subsystem/central/proc/lookup_ckey(discord_id)
+	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/players/discord/[discord_id]"
+	var/datum/http_response/response = SShttp.make_sync_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list())
+	if(response.errored || response.status_code != 200 && response.status_code != 404)
+		stack_trace("Failed to get player by discord: HTTP status code [response.status_code] - [response.error] - [response.body]")
+		return
+	if(response.status_code == 404)
+		return
+
+	var/list/data = json_decode(response.body)
+	return data["ckey"]
+
 /datum/controller/subsystem/central/proc/is_player_discord_linked(ckey)
 	var/datum/persistent_client/pclient = GLOB.persistent_clients_by_ckey[ckey]
 
@@ -113,10 +125,15 @@ SUBSYSTEM_DEF(central)
 
 /// WARNING: only semi async - UNTIL based
 /datum/controller/subsystem/central/proc/is_player_whitelisted(ckey)
+	var/server_type = CONFIG_GET(string/server_type)
+	if(!server_type || server_type == /datum/config_entry/string/server_type::default)
+		// Whitelist is not configured properly, assume player is not whitelisted
+		return FALSE
+
 	if(ckey in GLOB.whitelist)
 		return TRUE
 
-	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/whitelists?server_type=[CONFIG_GET(string/server_type)]&ckey=[ckey]&page=1&page_size=1"
+	var/endpoint = "[CONFIG_GET(string/ss_central_url)]/whitelists?server_type=[server_type]&ckey=[ckey]&page=1&page_size=1"
 	var/datum/http_response/response = SShttp.make_sync_request(RUSTG_HTTP_METHOD_GET, endpoint, "", list())
 	if(response.errored || response.status_code != 200 && response.status_code != 404)
 		stack_trace("Failed to check whitelist: HTTP error - [response.error]")

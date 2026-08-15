@@ -8489,7 +8489,7 @@
 /area/station/maintenance/department/engine)
 "daz" = (
 /obj/structure/table,
-/obj/item/ai_module/core/full/paladin_devotion,
+/obj/item/ai_module/law/core/full/paladin_devotion,
 /obj/structure/cable,
 /obj/machinery/flasher/directional/south,
 /turf/open/floor/circuit,
@@ -13564,7 +13564,7 @@
 /obj/structure/sign/picture_frame/portrait/bar{
 	pixel_y = -28
 	},
-/obj/structure/reagent_dispensers/beerkeg,
+/obj/effect/spawner/random/food_or_drink/keg,
 /obj/machinery/firealarm/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/service/bar/backroom)
@@ -17591,19 +17591,19 @@
 /area/station/maintenance/department/cargo)
 "gho" = (
 /obj/structure/table/wood,
-/obj/item/food/grown/harebell{
+/obj/item/food/grown/flower/harebell{
 	pixel_x = -4
 	},
-/obj/item/food/grown/harebell,
-/obj/item/food/grown/harebell{
+/obj/item/food/grown/flower/harebell,
+/obj/item/food/grown/flower/harebell{
 	pixel_x = 4;
 	pixel_y = 6
 	},
-/obj/item/food/grown/harebell{
+/obj/item/food/grown/flower/harebell{
 	pixel_x = 6
 	},
-/obj/item/food/grown/harebell,
-/obj/item/food/grown/harebell,
+/obj/item/food/grown/flower/harebell,
+/obj/item/food/grown/flower/harebell,
 /turf/open/floor/iron/chapel{
 	dir = 4
 	},
@@ -17956,7 +17956,7 @@
 /area/station/maintenance/disposal/incinerator)
 "gnx" = (
 /obj/effect/turf_decal/sand/plating,
-/obj/structure/reagent_dispensers/beerkeg,
+/obj/effect/spawner/random/food_or_drink/keg,
 /obj/structure/table/wood,
 /turf/open/floor/plating,
 /area/station/maintenance/central/greater)
@@ -24984,11 +24984,7 @@
 /area/station/medical/exam_room)
 "iJg" = (
 /obj/structure/table,
-/obj/item/ai_module/reset{
-	pixel_x = 2;
-	pixel_y = 8
-	},
-/obj/item/ai_module/supplied/freeform,
+/obj/item/ai_module/law/supplied/freeform,
 /turf/open/floor/circuit/red,
 /area/station/ai/upload/chamber)
 "iJm" = (
@@ -29571,10 +29567,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/cargo)
 "kki" = (
-/obj/machinery/fax{
-	fax_name = "Quartermaster's Office";
-	name = "Quartermaster's Fax Machine"
-	},
+/obj/machinery/fax/heads/qm,
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
@@ -29952,9 +29945,6 @@
 	name = "High-Risk Modules";
 	req_access = list("captain")
 	},
-/obj/item/ai_module/reset/purge{
-	pixel_y = 11
-	},
 /turf/open/floor/circuit/red,
 /area/station/ai/upload/chamber)
 "kpG" = (
@@ -30294,10 +30284,7 @@
 /area/station/science/genetics)
 "kvk" = (
 /obj/structure/table,
-/obj/machinery/fax{
-	fax_name = "Chief Medical Officer's Office";
-	name = "Chief Medical Officer's Fax Machine"
-	},
+/obj/machinery/fax/heads/cmo,
 /obj/machinery/light_switch/directional/north,
 /turf/open/floor/iron/dark/textured,
 /area/station/command/heads_quarters/cmo)
@@ -35376,7 +35363,7 @@
 "miD" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/structure/reagent_dispensers/plumbed,
-/turf/open/floor/pod/light,
+/turf/open/floor/mineral/plastitanium/pod/light,
 /area/station/maintenance/department/medical/central)
 "miI" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -42429,9 +42416,9 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical)
 "oJQ" = (
-/obj/item/food/grown/poppy,
+/obj/item/food/grown/flower/poppy,
 /obj/structure/table/wood,
-/obj/item/food/grown/poppy{
+/obj/item/food/grown/flower/poppy{
 	pixel_x = -8;
 	pixel_y = 8
 	},
@@ -43759,7 +43746,7 @@
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "pha" = (
-/obj/structure/closet/crate/goldcrate,
+/obj/structure/closet/crate/goldcrate/stocked,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/turf_decal/bot_white,
 /obj/machinery/camera/motion/directional/south{
@@ -44652,10 +44639,7 @@
 	name = "shutter control";
 	pixel_x = -8
 	},
-/obj/machinery/fax{
-	fax_name = "Captain's Office";
-	name = "Captain's Fax Machine"
-	},
+/obj/machinery/fax/heads/captain,
 /obj/structure/table/reinforced,
 /obj/machinery/keycard_auth/wall_mounted/directional/south{
 	pixel_x = 8;
@@ -46714,9 +46698,6 @@
 /turf/open/floor/iron,
 /area/station/commons/storage/primary)
 "qen" = (
-/obj/machinery/computer/upload/borg{
-	dir = 1
-	},
 /obj/machinery/power/apc/auto_name/directional/west,
 /obj/structure/cable,
 /turf/open/floor/circuit,
@@ -49545,7 +49526,6 @@
 "rdI" = (
 /obj/structure/table,
 /obj/item/aicard,
-/obj/item/ai_module/reset,
 /obj/item/assembly/flash/handheld,
 /obj/item/assembly/flash/handheld,
 /obj/machinery/airalarm/directional/north,
@@ -54205,10 +54185,7 @@
 /obj/effect/turf_decal/tile/neutral/opposingcorners{
 	dir = 1
 	},
-/obj/machinery/fax{
-	fax_name = "Research Director's Office";
-	name = "Research Director's Fax Machine"
-	},
+/obj/machinery/fax/heads/rd,
 /obj/structure/table,
 /obj/machinery/camera/autoname/directional/south{
 	network = list("ss13","rd")
@@ -58965,8 +58942,8 @@
 /area/station/science/robotics/mechbay)
 "uik" = (
 /obj/structure/table/wood,
-/obj/item/food/grown/poppy,
-/obj/item/food/grown/poppy{
+/obj/item/food/grown/flower/poppy,
+/obj/item/food/grown/flower/poppy{
 	pixel_x = 8;
 	pixel_y = 8
 	},
@@ -62013,10 +61990,7 @@
 "vlD" = (
 /obj/structure/table/wood,
 /obj/machinery/light_switch/directional/north,
-/obj/machinery/fax{
-	fax_name = "Head of Personnel's Office";
-	name = "Head of Personnel's Fax Machine"
-	},
+/obj/machinery/fax/heads/hop,
 /turf/open/floor/carpet/green,
 /area/station/command/heads_quarters/hop)
 "vlJ" = (
@@ -62090,10 +62064,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "vno" = (
-/obj/machinery/fax{
-	fax_name = "Chief Engineer's Office";
-	name = "Chief Engineer's Fax Machine"
-	},
+/obj/machinery/fax/heads/ce,
 /obj/structure/table/reinforced,
 /obj/machinery/light/directional/east,
 /obj/effect/turf_decal/trimline/yellow/filled/line{
@@ -64227,12 +64198,12 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
-/obj/item/food/grown/poppy,
-/obj/item/food/grown/poppy,
-/obj/item/food/grown/poppy,
-/obj/item/food/grown/poppy,
-/obj/item/food/grown/poppy,
-/obj/item/food/grown/poppy,
+/obj/item/food/grown/flower/poppy,
+/obj/item/food/grown/flower/poppy,
+/obj/item/food/grown/flower/poppy,
+/obj/item/food/grown/flower/poppy,
+/obj/item/food/grown/flower/poppy,
+/obj/item/food/grown/flower/poppy,
 /obj/structure/sign/plaques/kiddie/badger{
 	pixel_x = 32
 	},
@@ -65330,10 +65301,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/central/greater)
 "wum" = (
-/obj/machinery/fax{
-	fax_name = "Head of Security's Office";
-	name = "Head of Security's Fax Machine"
-	},
+/obj/machinery/fax/heads/hos,
 /obj/structure/table/wood/fancy/red,
 /obj/structure/secure_safe/hos{
 	pixel_x = 36;
@@ -67844,7 +67812,7 @@
 /area/station/hallway/secondary/entry)
 "xla" = (
 /obj/structure/table,
-/obj/item/ai_module/core/full/dungeon_master,
+/obj/item/ai_module/law/core/full/dungeon_master,
 /obj/structure/cable,
 /turf/open/floor/circuit,
 /area/station/ai/upload/chamber)
@@ -68689,7 +68657,7 @@
 /turf/open/floor/iron,
 /area/station/security/interrogation)
 "xAa" = (
-/obj/machinery/computer/upload/ai,
+/obj/machinery/ai_law_rack/base/core,
 /obj/machinery/airalarm/directional/west,
 /turf/open/floor/circuit/red,
 /area/station/ai/upload/chamber)

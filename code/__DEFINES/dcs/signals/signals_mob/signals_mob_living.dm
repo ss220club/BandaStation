@@ -16,21 +16,13 @@
 #define COMSIG_ORGAN_SURGICALLY_INSERTED "organ_surgically_inserted"
 /// Called when an organ finishes inserting into a bodypart (obj/item/bodypart/limb, movement_flags)
 #define COMSIG_ORGAN_BODYPART_INSERTED "organ_bodypart_inserted"
+/// Called when an organ finishes removing from a bodypart (obj/item/bodypart/limb, movement_flags)
+#define COMSIG_ORGAN_BODYPART_REMOVED "organ_bodypart_removed"
 /// Called when a organ's damage is adjusted apply_organ_damage (damage_amount, maximum, required_organ_flag)
 #define COMSIG_ORGAN_ADJUST_DAMAGE "organ_adjust_damage"
 
 ///Called when movement intent is toggled.
 #define COMSIG_MOVE_INTENT_TOGGLED "move_intent_toggled"
-
-// BANDASTATION ADDITION: Limp Quirk
-
-//Checks if anyone (components/elements/quirks) is listening to the specified signal on this object
-#define HAS_SIGNAL_LISTENERS(target, signal) (target.signal_procs?[signal])
-///Called BEFORE movement intent is toggled.
-#define COMSIG_MOB_PRE_TOGGLE_MOVE_INTENT "mob_pre_toggle_move_intent"
-	/// Return this flag to prevent the toggle
-	#define COMPONENT_PREVENT_TOGGLE_MOVE_INTENT (1<<0)
-// BANDASTATION ADDITION: END
 
 /// Called when combat mode is toggled.
 #define COMSIG_COMBAT_MODE_TOGGLED "combat_mode_toggled"
@@ -398,5 +390,14 @@
 /// From /mob/living/on_looking_z_level_change() : (turf/old_turf, turf/new_turf)
 #define COMSIG_LIVING_LOOK_Z_CHANGE "living_look_z_change"
 
+/// From /obj/item/stack/ore/bluespace_crystal/attack_self() : (obj/item/crushed_crystal)
+#define COMSIG_MOB_CRUSHED_BLUESPACE_CRYSTAL "living_crushed_bluespace_crystal"
+
 /// From /mob/living/proc/refresh_gravity() : (new_gravity, old_gravity)
 #define COMSIG_LIVING_GRAVITY_CHANGED "living_gravity_changed"
+
+/// From /mob/living/changeNext_move() : (next_move, delay)
+#define COMSIG_LIVING_CHANGENEXT_MOVE "living_changenext_move"
+
+/// From /mob/living/proc/cause_hallucination(): (datum/hallucination)
+#define COMSIG_LIVING_HALLUCINATING "living_hallucinating"

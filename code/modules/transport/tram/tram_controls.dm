@@ -24,13 +24,13 @@
 	/// Weakref to the tram piece we control
 	var/datum/weakref/transport_ref
 	/// The ID of the tram we're controlling
-	var/specific_transport_id = TRAMSTATION_LINE_1
-	/// If the sign is adjusted for split type tram windows
-	var/split_mode = FALSE
+	var/specific_transport_id
+	/// If we are window mounted, split window mounted, or standalone
+	var/install_type = NORMAL_WINDOW
+	generate_map_preview = FALSE
 
 /obj/machinery/computer/tram_controls/split
-	circuit = /obj/item/circuitboard/computer/tram_controls/split
-	split_mode = TRUE
+	install_type = SPLIT_WINDOW
 
 /obj/machinery/computer/tram_controls/split/directional/north
 	dir = SOUTH
@@ -50,13 +50,12 @@
 	dir = EAST
 	pixel_x = -32
 
-/obj/machinery/computer/tram_controls/Initialize(mapload)
-	. = ..()
-	var/obj/item/circuitboard/computer/tram_controls/my_circuit = circuit
-	split_mode = my_circuit.split_mode
-
 /obj/machinery/computer/tram_controls/post_machine_initialize()
 	. = ..()
+	link_circuit()
+	if(install_type == STANDALONE)
+		base_icon_state = "tram_alt"
+		icon_state = "tram_alt_controls"
 	if(!id_tag)
 		id_tag = assign_random_name()
 	SStransport.hello(src, name, id_tag)
@@ -67,8 +66,34 @@
 	if(tram)
 		RegisterSignal(SStransport, COMSIG_TRANSPORT_UPDATED, PROC_REF(update_display))
 
+/obj/machinery/computer/tram_controls/RefreshParts()
+	link_circuit(overwrite = TRUE)
+	return ..()
+
 /obj/machinery/computer/tram_controls/update_current_power_usage()
 	return // We get power from area rectifiers
+
+/**
+ * Links the specific_transport_id of the circuitboard and the tram controls machine.
+ * By default it will only link machines that don't yet have a specific_transport_id.
+ *
+ * Arguments:
+ * * overwrite - Force overwriting existing specific_transport_id with circuitboard ID
+ */
+/obj/machinery/computer/tram_controls/proc/link_circuit(overwrite = FALSE)
+	var/obj/item/circuitboard/computer/tram_controls/my_circuit = circuit
+
+	// mapped subtypes push their install_type to the circuitboard, otherwise we pull it
+	if(isnull(install_type) || overwrite)
+		install_type = my_circuit.install_type
+	else
+		my_circuit.install_type = install_type
+
+	// mapped subtypes push their specific_transport_id to the circuitboard, otherwise we pull it
+	if(isnull(specific_transport_id) || overwrite)
+		specific_transport_id = my_circuit.specific_transport_id
+	else
+		my_circuit.specific_transport_id = specific_transport_id
 
 /**
  * Finds the tram from the console
@@ -158,6 +183,9 @@
 		update_appearance()
 		return
 
+	if(controller && (controller?.specific_transport_id != specific_transport_id))
+		return
+
 	if(isnull(controller) || !controller.controller_operational)
 		icon_screen = "[base_icon_state]_broken"
 		update_appearance()
@@ -179,16 +207,18 @@
 		return
 
 	icon_screen = ""
-	icon_screen += "[controller.specific_transport_id]"
-	icon_screen += "[destination_platform.platform_code]"
+	icon_screen += "[base_icon_state]"
+	icon_screen += "_[destination_platform.platform_code]"
 
 	update_appearance()
 
 /obj/machinery/computer/tram_controls/on_construction(mob/user)
 	. = ..()
 	var/obj/item/circuitboard/computer/tram_controls/my_circuit = circuit
-	split_mode = my_circuit.split_mode
-	if(split_mode)
+	install_type = my_circuit.install_type
+	if(install_type == SPLIT_WINDOW)
+		base_icon_state = "tram"
+		icon_state = "tram_controls"
 		switch(dir)
 			if(NORTH)
 				pixel_x = 8
@@ -202,7 +232,9 @@
 			if(WEST)
 				pixel_x = 32
 				pixel_y = 8
-	else
+	else if(install_type == NORMAL_WINDOW)
+		base_icon_state = "tram"
+		icon_state = "tram_controls"
 		switch(dir)
 			if(NORTH)
 				pixel_y = -32
@@ -212,6 +244,9 @@
 				pixel_x = -32
 			if(WEST)
 				pixel_x = 32
+	else
+		base_icon_state = "tram_alt"
+		icon_state = "tram_alt_controls"
 
 /obj/machinery/computer/tram_controls/update_overlays()
 	. = ..()
@@ -237,22 +272,19 @@
 	if(tram)
 		if(SStts.tts_enabled)
 			tram.nav_beacon.voice = SStts.tram_voice
-		switch(response_code)
-			if(REQUEST_SUCCESS)
-				tram.nav_beacon.say("Следующая станция: [response_info]")
 
-			if(REQUEST_FAIL)
-				if(!LAZYFIND(relevant, src))
+		if(response_code == REQUEST_FAIL)
+			if(!LAZYFIND(relevant, src))
+				return
+
+			switch(response_info)
+				if(NOT_IN_SERVICE)
+					tram.nav_beacon.say("Трамвай в данный момент недоступен. Пожалуйста, свяжитесь с техническим специалистом.")
+				if(INVALID_PLATFORM)
+					tram.nav_beacon.say("Ошибка конфигурации. Пожалуйста, свяжитесь с техническим специалистом.")
+				if(INTERNAL_ERROR)
+					tram.nav_beacon.say("Ошибка контроллера трамвая. Пожалуйста, обратитесь к техническому специалисту или члену экипажа, имеющему доступ к телекоммуникационным системам трамвая, для сброса контроллера.")
+				else
 					return
-
-				switch(response_info)
-					if(NOT_IN_SERVICE)
-						tram.nav_beacon.say("Трамвай в данный момент недоступен. Пожалуйста, свяжитесь с техническим специалистом.")
-					if(INVALID_PLATFORM)
-						tram.nav_beacon.say("Ошибка конфигурации. Пожалуйста, свяжитесь с техническим специалистом.")
-					if(INTERNAL_ERROR)
-						tram.nav_beacon.say("Ошибка контроллера трамвая. Пожалуйста, обратитесь к техническому специалисту или члену экипажа, имеющему доступ к телекоммуникационным системам трамвая, для сброса контроллера.")
-					else
-						return
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/computer/tram_controls, 32)
