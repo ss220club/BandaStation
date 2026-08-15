@@ -177,7 +177,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 			var/wave_profile = tgui_input_list(user, "Профиль волны", "Redspace Wave", list(REDSPACE_PROFILE_DEMONIC, REDSPACE_PROFILE_DEBUG))
 			if(!wave_profile)
 				return
-			var/wave_amplitude = tgui_input_number(user, "Амплитуда волны (-100..100)", "Redspace Wave", 5, 100, -100)
+			var/wave_amplitude = tgui_input_number(user, "Амплитуда волны (-10..10)", "Redspace Wave", default = 5, max_value = 10, min_value = -10)
 			if(isnull(wave_amplitude))
 				return
 			var/wave_radius = tgui_input_number(user, "Радиус в тайлах (0..[REDSPACE_MAX_SOURCE_RADIUS])", "Redspace Wave", 4, REDSPACE_MAX_SOURCE_RADIUS, 0)
@@ -189,7 +189,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 			))
 			if(!wave_direction)
 				return
-			var/wave_speed = tgui_input_number(user, "Скорость в тайлах в секунду (0.1..10)", "Redspace Wave", 1, 10, 0.1)
+			var/wave_speed = tgui_input_number(user, "Скорость в тайлах в секунду (0.1..10)", "Redspace Wave", default = 1, max_value = 10, min_value = 0.1, round_value = FALSE)
 			if(isnull(wave_speed))
 				return
 			var/wave_lifetime = tgui_input_number(user, "Время жизни в секундах (1..600)", "Redspace Wave", 60, 600, 1)
