@@ -1,5 +1,13 @@
+import {
+  Button,
+  Divider,
+  LabeledList,
+  NoticeBox,
+  ProgressBar,
+  Section,
+  Stack,
+} from 'tgui-core/components';
 import { useBackend } from '../backend';
-import { Button, Section, Stack, LabeledList, ProgressBar, NoticeBox, Divider } from 'tgui-core/components';
 import { Window } from '../layouts';
 
 type ThrallData = {
@@ -18,13 +26,13 @@ type HivemindData = {
 };
 
 const STATUS_COLORS: Record<string, string> = {
-  'Активен': 'green',
-  'Критическое': 'orange',
+  Активен: 'green',
+  Критическое: 'orange',
   'Без сознания': 'yellow',
-  'Мёртв': 'red',
+  Мёртв: 'red',
 };
 
-export const KhaarootHivemind = (props) => {
+export function KhaarootHivemind() {
   const { act, data } = useBackend<HivemindData>();
   const { thralls = [], thrall_count } = data;
 
@@ -66,7 +74,8 @@ export const KhaarootHivemind = (props) => {
                               color="blue"
                               onClick={() =>
                                 act('send_command', { ref: thrall.ref })
-                              }>
+                              }
+                            >
                               Команда
                             </Button>
                           </Stack.Item>
@@ -76,7 +85,8 @@ export const KhaarootHivemind = (props) => {
                               color="yellow"
                               onClick={() =>
                                 act('set_objective', { ref: thrall.ref })
-                              }>
+                              }
+                            >
                               Цель
                             </Button>
                           </Stack.Item>
@@ -86,16 +96,21 @@ export const KhaarootHivemind = (props) => {
                               color="red"
                               onClick={() =>
                                 act('kill_thrall', { ref: thrall.ref })
-                              }>
+                              }
+                            >
                               Умертвить
                             </Button>
                           </Stack.Item>
                         </Stack>
-                      }>
+                      }
+                    >
                       <LabeledList>
                         <LabeledList.Item label="Статус">
                           <span
-                            style={{ color: STATUS_COLORS[thrall.status] || 'white' }}>
+                            style={{
+                              color: STATUS_COLORS[thrall.status] || 'white',
+                            }}
+                          >
                             {thrall.status}
                           </span>
                         </LabeledList.Item>
@@ -106,7 +121,8 @@ export const KhaarootHivemind = (props) => {
                               good: [0.7, 1],
                               average: [0.4, 0.7],
                               bad: [0, 0.4],
-                            }}>
+                            }}
+                          >
                             {thrall.health}%
                           </ProgressBar>
                         </LabeledList.Item>
@@ -127,4 +143,4 @@ export const KhaarootHivemind = (props) => {
       </Window.Content>
     </Window>
   );
-};
+}

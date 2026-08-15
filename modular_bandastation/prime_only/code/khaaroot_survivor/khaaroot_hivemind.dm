@@ -148,7 +148,8 @@
 				sender.cast_tts(thrall_mob, message, is_local = FALSE, effects = list(/datum/singleton/sound_effect/telepathy), channel_override = CHANNEL_TTS_TELEPATHY, check_deafness = FALSE)
 
 	for(var/mob/recipient as anything in GLOB.dead_mob_list)
-		to_chat(recipient, "[FOLLOW_LINK(recipient, sender)] [formatted]", type = MESSAGE_TYPE_RADIO)
+		var/sender_link = sender ? "[FOLLOW_LINK(recipient, sender)] " : ""
+		to_chat(recipient, "[sender_link][formatted]", type = MESSAGE_TYPE_RADIO)
 
 /// Get data for all thralls for TGUI
 /datum/khaaroot_hivemind/proc/get_thralls_data()
@@ -194,6 +195,8 @@
 
 /// Checks if the given mob is the infector
 /datum/khaaroot_hivemind/proc/is_infector(mob/user)
+	if(!user)
+		return FALSE
 	var/datum/mind/infector = get_infector()
 	return infector?.current == user
 

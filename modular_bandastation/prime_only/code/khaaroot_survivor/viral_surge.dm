@@ -28,6 +28,13 @@
 	show_duration = TRUE
 	processing_speed = STATUS_EFFECT_PRIORITY
 
+	/// Stamina restored when the surge starts.
+	var/initial_stamina_heal = -60
+	/// Stamina restored per second while the surge is active.
+	var/stamina_regen = -15
+	/// Brute and burn damage multiplier while the surge is active.
+	var/damage_multiplier = 0.6
+
 	var/original_brute_mod
 	var/original_burn_mod
 
@@ -40,14 +47,14 @@
 	original_burn_mod = H.physiology.burn_mod
 
 	H.add_movespeed_modifier(/datum/movespeed_modifier/khaaroot_surge_speed, update = TRUE)
-	H.physiology.brute_mod *= 0.6
-	H.physiology.burn_mod *= 0.6
+	H.physiology.brute_mod *= damage_multiplier
+	H.physiology.burn_mod *= damage_multiplier
 	playsound(H, 'sound/effects/singlebeat.ogg', 50, FALSE, -5)
 
 	ADD_TRAIT(H, TRAIT_SLEEPIMMUNE, REF(src))
 	ADD_TRAIT(H, TRAIT_BATON_RESISTANCE, REF(src))
 
-	H.adjust_stamina_loss(-60)
+	H.adjust_stamina_loss(initial_stamina_heal)
 
 	return TRUE
 
@@ -56,7 +63,7 @@
 	if(!H)
 		return
 
-	H.adjust_stamina_loss(-15 * seconds_between_ticks, forced = TRUE)
+	H.adjust_stamina_loss(stamina_regen * seconds_between_ticks, forced = TRUE)
 
 /datum/status_effect/khaaroot_surge_active/on_remove()
 	var/mob/living/carbon/human/H = owner
@@ -111,10 +118,10 @@
 
 /atom/movable/screen/alert/status_effect/khaaroot_surge_active
 	name = "Вирусный всплеск Кхаарут"
-	desc = "Остатки вируса Кхаарут активны! Вы движетесь быстрее, восстанавливаете стамину и получаете меньше урона."
+	desc = "Остатки вируса Кхаарут активны! Вы движетесь быстрее, восстанавливаете силы и имеете повышенное сопротивление."
 	icon_state = "high"
 
 /atom/movable/screen/alert/status_effect/khaaroot_surge_crash
-	name = "истощение Кхаарут"
+	name = "Истощение Кхаарут"
 	desc = "Вирусные остатки исчерпаны. Вы истощены и двигаетесь значительно медленнее."
 	icon_state = "stun"
