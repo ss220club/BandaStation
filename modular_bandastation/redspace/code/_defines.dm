@@ -25,7 +25,7 @@
 /// Sampling and history limits for stationary redspace sensors.
 #define REDSPACE_SENSOR_UPDATE_INTERVAL (2 SECONDS)
 #define REDSPACE_SENSOR_STALE_AFTER (6 SECONDS)
-#define REDSPACE_SENSOR_HISTORY_LIMIT 8
+#define REDSPACE_SENSOR_HISTORY_LIMIT 24
 
 #define REDSPACE_PROFILE_DEBUG "debug"
 #define REDSPACE_PROFILE_DEMONIC "demonic"

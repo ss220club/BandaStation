@@ -1,0 +1,116 @@
+.RedspaceConsole {
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+  padding: var(--space-s);
+}
+
+.RedspaceConsole__toolbar {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: var(--space-s) var(--space-m);
+  background-color: hsl(
+    from var(--color-section) h s calc(l - var(--adjust-color))
+  );
+  border: var(--border-thickness-tiny) solid var(--color-border);
+  border-radius: var(--border-radius-large);
+}
+
+.RedspaceConsole__workspace,
+.RedspaceConsole__mapSection,
+.RedspaceConsole__sensorList,
+.RedspaceConsole__history {
+  min-width: 0;
+  min-height: 0;
+}
+
+.RedspaceConsole__sidebar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  min-width: 0;
+  min-height: 0;
+}
+
+.RedspaceConsole__sidebar > .Stack__item {
+  min-height: 0;
+}
+
+.RedspaceConsole__legend {
+  flex-wrap: wrap;
+}
+
+.RedspaceConsole__legendSwatch {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex: 0 0 0.75rem;
+  border: var(--border-thickness-tiny) solid
+    hsl(from var(--color-border-dark) h s l / 0.8);
+  border-radius: var(--border-radius-small);
+}
+
+.RedspaceConsole__sensorRow {
+  cursor: var(--cursor-pointer);
+  transition: background-color var(--transition-time-medium);
+
+  &:hover {
+    background-color: hsl(
+      from var(--color-section) h s calc(l + var(--adjust-hover))
+    );
+  }
+
+  &--selected {
+    background-color: hsl(
+      from var(--color-green) h s l / 0.2
+    ) !important;
+    box-shadow: inset 3px 0 0 var(--color-green);
+  }
+}
+
+.RedspaceConsole__valueBadge {
+  min-width: 3.75em;
+  box-sizing: border-box;
+  padding: 0.15em 0.4em;
+  border: var(--border-thickness-tiny) solid
+    hsl(from var(--color-border-dark) h s l / 0.75);
+  border-radius: var(--border-radius-small);
+  font-weight: bold;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.RedspaceConsole__historyHeader {
+  padding: var(--space-s) var(--space-m);
+  border-bottom: var(--border-thickness-tiny) solid var(--color-border);
+}
+
+.RedspaceConsole__history {
+  height: 100%;
+  overflow: hidden;
+}
+
+.RedspaceConsole__history > .Section__rest,
+.RedspaceConsole__history > .Section__rest > .Section__content {
+  min-height: 0;
+  height: 100%;
+}
+
+.RedspaceConsole__historyChart {
+  position: relative;
+  height: 90px;
+  margin: var(--space-s);
+  overflow: hidden;
+  background-color: hsl(
+    from var(--color-base) h s calc(l - var(--adjust-color))
+  );
+  border: var(--border-thickness-tiny) solid var(--color-border);
+  border-radius: var(--border-radius-small);
+}
+
+.RedspaceConsole__historyTable {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+}
