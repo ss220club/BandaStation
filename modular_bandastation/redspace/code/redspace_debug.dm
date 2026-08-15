@@ -9,7 +9,9 @@
 	var/list/report = list(
 		"Редспейс на ([target.x], [target.y], [target.z])",
 		"Значение: [round(value, 0.1)] ([redspace_state_name(state)])",
-		"Фон: [round(SSredspace.background_value, 0.1)]",
+		"Фон: [round(SSredspace.context.background_value, 0.1)]",
+		"Коэффициент зоны: [SSredspace.get_zone_coefficient(target, cell)]",
+		"Профиль раунда: [SSredspace.context.active_profile_id]",
 	)
 
 	if(cell)
@@ -64,6 +66,21 @@
 	log_admin("[key_name(user)] set redspace [override_kind] to [new_value] at ([target.x], [target.y], [target.z]).")
 	message_admins("[key_name_admin(user)] установил [override_kind] редспейса [new_value] на ([target.x], [target.y], [target.z]).")
 
+/// Asks the administrator for a source to operate on. Returns the source id or null.
+/proc/redspace_debug_pick_source(client/user)
+	var/list/source_choices = list()
+	for(var/source_key in SSredspace.field_sources)
+		var/datum/redspace_field_source/source = SSredspace.field_sources[source_key]
+		if(source)
+			source_choices[source.get_debug_label()] = source.source_id
+	if(!length(source_choices))
+		to_chat(user, span_warning("Активных источников нет."), confidential = TRUE)
+		return
+	var/source_choice = tgui_input_list(user, "Какой источник?", "Redspace Source", source_choices)
+	if(!source_choice)
+		return
+	return source_choices[source_choice]
+
 /// Main in-round control surface for the first Redspace prototype.
 ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the live Redspace field and run explicit test events.", ADMIN_CATEGORY_DEBUG)
 	var/action = tgui_input_list(user, "Выберите операцию", "Redspace Debug", list(
@@ -73,7 +90,10 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 		"Установить event-only значение",
 		"Очистить значение ячейки",
 		"Добавить тестовый источник",
-		"Удалить тестовый источник",
+		"Добавить горячую зону",
+		"Добавить тестовую волну",
+		"Изменить источник",
+		"Удалить источник",
 		"Удар редспейсной молнии",
 		"Сбросить поле",
 	))
@@ -86,10 +106,10 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 			redspace_debug_report(user, current_turf)
 
 		if("Установить фон раунда")
-			var/new_background = tgui_input_number(user, "Новое значение фона (-100..10)", "Redspace Background", SSredspace.background_value, REDSPACE_MAX_NORMAL_VALUE, -100)
+			var/new_background = tgui_input_number(user, "Новое значение фона (-100..10)", "Redspace Background", SSredspace.context.background_value, REDSPACE_MAX_NORMAL_VALUE, -100)
 			if(isnull(new_background))
 				return
-			SSredspace.set_background_value(new_background)
+			SSredspace.set_background_value(new_background, "установлен из debug-панели")
 			log_admin("[key_name(user)] set redspace background to [new_background].")
 			message_admins("[key_name_admin(user)] установил фон редспейса: [new_background].")
 
@@ -110,7 +130,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
 				to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
 				return
-			var/source_profile = tgui_input_list(user, "Профиль источника", "Redspace Source", list("debug", "demonic"))
+			var/source_profile = tgui_input_list(user, "Профиль источника", "Redspace Source", list(REDSPACE_PROFILE_DEBUG, REDSPACE_PROFILE_DEMONIC))
 			if(!source_profile)
 				return
 			var/source_strength = tgui_input_number(user, "Сила источника (-100..100)", "Redspace Source", 5, 100, -100)
@@ -119,26 +139,115 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 			var/source_radius = tgui_input_number(user, "Радиус источника в тайлах (0..[REDSPACE_MAX_SOURCE_RADIUS])", "Redspace Source", 4, REDSPACE_MAX_SOURCE_RADIUS, 0)
 			if(isnull(source_radius))
 				return
-			var/datum/redspace_field_source/source = SSredspace.register_source(current_turf, source_strength, source_radius, source_profile)
+			var/datum/redspace_field_source/source = SSredspace.register_source(current_turf, source_strength, source_radius, source_profile, null, "создан из debug-панели")
 			if(source)
 				to_chat(user, span_notice("Создан источник [source.get_debug_label()]."), confidential = TRUE)
 				log_admin("[key_name(user)] registered redspace source [source.get_debug_label()].")
 				message_admins("[key_name_admin(user)] создал источник редспейса [source.get_debug_label()].")
 
-		if("Удалить тестовый источник")
-			var/list/source_choices = list()
-			for(var/source_key in SSredspace.field_sources)
-				var/datum/redspace_field_source/source = SSredspace.field_sources[source_key]
-				if(source)
-					source_choices[source.get_debug_label()] = source.source_id
-			if(!length(source_choices))
-				to_chat(user, span_warning("Активных источников нет."), confidential = TRUE)
+		if("Добавить горячую зону")
+			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
+				to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
 				return
-			var/source_choice = tgui_input_list(user, "Какой источник удалить?", "Redspace Source", source_choices)
-			if(!source_choice)
+			var/hotspot_profile = tgui_input_list(user, "Профиль горячей зоны", "Redspace Hotspot", list(REDSPACE_PROFILE_DEMONIC, REDSPACE_PROFILE_DEBUG))
+			if(!hotspot_profile)
 				return
-			var/source_id = source_choices[source_choice]
-			if(SSredspace.remove_source(source_id))
+			var/hotspot_strength = tgui_input_number(user, "Сила горячей зоны (-100..100)", "Redspace Hotspot", 6, 100, -100)
+			if(isnull(hotspot_strength))
+				return
+			var/hotspot_radius = tgui_input_number(user, "Радиус в тайлах (0..[REDSPACE_MAX_SOURCE_RADIUS])", "Redspace Hotspot", 6, REDSPACE_MAX_SOURCE_RADIUS, 0)
+			if(isnull(hotspot_radius))
+				return
+			var/hotspot_description = tgui_input_text(user, "Описание зоны для журнала (необязательно)", "Redspace Hotspot", "")
+			var/datum/redspace_field_source/hotspot/hotspot = SSredspace.register_hotspot(current_turf, hotspot_strength, hotspot_radius, hotspot_profile, "создана из debug-панели", hotspot_description || null)
+			if(hotspot)
+				to_chat(user, span_notice("Создана горячая зона [hotspot.get_debug_label()]."), confidential = TRUE)
+				log_admin("[key_name(user)] registered redspace hotspot [hotspot.get_debug_label()].")
+				message_admins("[key_name_admin(user)] создал горячую зону редспейса [hotspot.get_debug_label()].")
+
+		if("Добавить тестовую волну")
+			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
+				to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
+				return
+			var/wave_profile = tgui_input_list(user, "Профиль волны", "Redspace Wave", list(REDSPACE_PROFILE_DEMONIC, REDSPACE_PROFILE_DEBUG))
+			if(!wave_profile)
+				return
+			var/wave_amplitude = tgui_input_number(user, "Амплитуда волны (-100..100)", "Redspace Wave", 5, 100, -100)
+			if(isnull(wave_amplitude))
+				return
+			var/wave_radius = tgui_input_number(user, "Радиус в тайлах (0..[REDSPACE_MAX_SOURCE_RADIUS])", "Redspace Wave", 4, REDSPACE_MAX_SOURCE_RADIUS, 0)
+			if(isnull(wave_radius))
+				return
+			var/wave_direction = tgui_input_list(user, "Направление движения", "Redspace Wave", list(
+				"север", "юг", "восток", "запад",
+				"северо-восток", "северо-запад", "юго-восток", "юго-запад",
+			))
+			if(!wave_direction)
+				return
+			var/wave_speed = tgui_input_number(user, "Скорость в тайлах в секунду (0.1..10)", "Redspace Wave", 1, 10, 0.1)
+			if(isnull(wave_speed))
+				return
+			var/wave_lifetime = tgui_input_number(user, "Время жизни в секундах (1..600)", "Redspace Wave", 60, 600, 1)
+			if(isnull(wave_lifetime))
+				return
+			var/list/direction_vectors = list(
+				"север" = list(0, 1),
+				"юг" = list(0, -1),
+				"восток" = list(1, 0),
+				"запад" = list(-1, 0),
+				"северо-восток" = list(0.7071067811865476, 0.7071067811865476),
+				"северо-запад" = list(-0.7071067811865476, 0.7071067811865476),
+				"юго-восток" = list(0.7071067811865476, -0.7071067811865476),
+				"юго-запад" = list(-0.7071067811865476, -0.7071067811865476),
+			)
+			var/list/wave_vector = direction_vectors[wave_direction]
+			var/datum/redspace_field_source/wave/wave = SSredspace.register_wave_source(
+				current_turf,
+				wave_amplitude,
+				wave_radius,
+				wave_vector[1] * wave_speed,
+				wave_vector[2] * wave_speed,
+				wave_lifetime * (1 SECONDS),
+				wave_profile,
+				"создана из debug-панели",
+			)
+			if(wave)
+				to_chat(user, span_notice("Создана волна [wave.get_debug_label()]."), confidential = TRUE)
+				log_admin("[key_name(user)] registered redspace wave [wave.get_debug_label()].")
+				message_admins("[key_name_admin(user)] создал волну редспейса [wave.get_debug_label()].")
+
+		if("Изменить источник")
+			var/source_id = redspace_debug_pick_source(user)
+			if(isnull(source_id))
+				return
+			var/change_kind = tgui_input_list(user, "Что изменить?", "Redspace Source", list("Силу", "Позицию (текущий тайл)"))
+			if(!change_kind)
+				return
+			switch(change_kind)
+				if("Силу")
+					var/new_strength = tgui_input_number(user, "Новая сила (-100..100)", "Redspace Source", 5, 100, -100)
+					if(isnull(new_strength))
+						return
+					if(SSredspace.update_source_strength(source_id, new_strength, "сила изменена из debug-панели"))
+						log_admin("[key_name(user)] changed redspace source #[source_id] strength to [new_strength].")
+						message_admins("[key_name_admin(user)] изменил силу источника редспейса #[source_id] на [new_strength].")
+					else
+						to_chat(user, span_warning("Не удалось изменить силу источника."), confidential = TRUE)
+				if("Позицию (текущий тайл)")
+					if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
+						to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
+						return
+					if(SSredspace.update_source_position(source_id, current_turf, "перемещён из debug-панели"))
+						log_admin("[key_name(user)] moved redspace source #[source_id] to ([current_turf.x], [current_turf.y], [current_turf.z]).")
+						message_admins("[key_name_admin(user)] переместил источник редспейса #[source_id] на ([current_turf.x], [current_turf.y], [current_turf.z]).")
+					else
+						to_chat(user, span_warning("Не удалось переместить источник."), confidential = TRUE)
+
+		if("Удалить источник")
+			var/source_id = redspace_debug_pick_source(user)
+			if(isnull(source_id))
+				return
+			if(SSredspace.remove_source(source_id, "удалён из debug-панели"))
 				log_admin("[key_name(user)] removed redspace source #[source_id].")
 				message_admins("[key_name_admin(user)] удалил источник редспейса #[source_id].")
 

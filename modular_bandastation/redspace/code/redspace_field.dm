@@ -39,9 +39,11 @@
 	var/r = (0.6666666666666666 * py) / REDSPACE_HEX_RADIUS
 	var/s = -q - r
 
-	var/rounded_q = round(q)
-	var/rounded_r = round(r)
-	var/rounded_s = round(s)
+	// DM's round() rounds toward the lower multiple for these values; use an
+	// explicit nearest-integer operation for cube-coordinate rounding.
+	var/rounded_q = floor(q + 0.5)
+	var/rounded_r = floor(r + 0.5)
+	var/rounded_s = floor(s + 0.5)
 	var/q_difference = abs(rounded_q - q)
 	var/r_difference = abs(rounded_r - r)
 	var/s_difference = abs(rounded_s - s)
@@ -55,6 +57,17 @@
 
 /proc/redspace_hex_key(z_level, q, r)
 	return "[z_level]:[q]:[r]"
+
+/// Returns the representative map tile of a hex: the tile containing its center.
+/// Zone-level rules such as area-based susceptibility coefficients use this point
+/// so the controller never has to scan every tile inside the hex.
+/proc/redspace_hex_representative_turf(z_level, q, r) as /turf
+	if(!z_level || !isnum(q) || !isnum(r))
+		return
+
+	var/center_x = REDSPACE_HEX_RADIUS * (REDSPACE_HEX_SQRT3 * q + REDSPACE_HEX_SQRT3 / 2 * r)
+	var/center_y = REDSPACE_HEX_RADIUS * 1.5 * r
+	return locate(floor(center_x) + 1, floor(center_y) + 1, z_level)
 
 /datum/redspace_field_cell
 	/// Z-level containing this field cell.

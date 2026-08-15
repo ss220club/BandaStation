@@ -9,7 +9,7 @@
 /// First manual event used to verify target selection, logging, and visual exposure.
 /datum/redspace_event/lightning
 	event_id = "debug_lightning"
-	profile_id = "demonic"
+	profile_id = REDSPACE_PROFILE_DEMONIC
 	var/impact_damage = 10
 	var/stun_duration = 0
 
