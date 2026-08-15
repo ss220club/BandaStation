@@ -403,6 +403,5 @@
 	name = "\improper Khaaroot Hivemind"
 	member_name = "участник улья"
 	show_roundend_report = FALSE
-
 	/// Weakref back to the hivemind controller
 	var/datum/weakref/hivemind_ref
