@@ -644,6 +644,11 @@
 /obj/effect/light_emitter/thunderdome,
 /turf/open/floor/material,
 /area/awaymission/secret/powered)
+"kf" = (
+/obj/effect/light_emitter/thunderdome,
+/obj/effect/landmark/observer_start,
+/turf/open/indestructible/dark,
+/area/awaymission/secret/powered)
 "kt" = (
 /obj/structure/table/wood,
 /obj/item/stack/arcadeticket{
@@ -15840,7 +15845,7 @@ Sf
 Sf
 In
 In
-In
+kf
 jn
 qc
 qc
