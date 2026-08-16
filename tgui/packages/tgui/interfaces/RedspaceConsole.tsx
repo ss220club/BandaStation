@@ -70,10 +70,10 @@ const VALUE_BANDS: Array<{
   { band: 'calm', range: '0-3', color: '#2ecc71' },
   {
     band: 'disturbance',
-    range: '4-7',
+    range: '4-6',
     color: '#f1c40f',
   },
-  { band: 'storm', range: '8-10', color: '#e74c3c' },
+  { band: 'storm', range: '7-10', color: '#e74c3c' },
   { band: 'invasion', range: '10+', color: '#111111' },
 ];
 
@@ -109,7 +109,7 @@ function getValueBand(value?: number): ValueBand {
   if (value <= 3) {
     return 'calm';
   }
-  if (value <= 7) {
+  if (value <= 6) {
     return 'disturbance';
   }
   if (value <= 10) {

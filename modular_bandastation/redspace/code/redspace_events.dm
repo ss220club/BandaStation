@@ -121,9 +121,16 @@
 		return FALSE
 
 	SSredspace.notify_event_started(src, target, "локальное искажение началось")
+	// Keep the atmosphere local and event-driven: one temporary source, no station-wide light pass.
+	target.flash_lighting_fx(
+		range = 3,
+		power = 1.25,
+		color = LIGHT_COLOR_ORANGE,
+		duration = 1 SECONDS,
+	)
 	new /obj/effect/temp_visual/circle_wave/unsettle(target)
 	playsound(target, 'sound/effects/ghost.ogg', 35, TRUE)
-	target.visible_message(span_warning("Пространство в этой зоне на мгновение искажается."))
+	target.visible_message(span_warning("Пространство на мгновение искажается."))
 	if(admin)
 		log_admin("[key_name(admin)] started a redspace local distortion at ([target.x], [target.y], [target.z]).")
 		message_admins("[key_name_admin(admin)] запустил локальное искажение редспейса ([ADMIN_COORDJMP(target)]).")
@@ -150,9 +157,15 @@
 
 	target_turf = target
 	SSredspace.notify_event_started(src, target, "штормовой импульс телеграфирован")
+	target.flash_lighting_fx(
+		range = 3,
+		power = 0.8,
+		color = LIGHT_COLOR_FIRE,
+		duration = 2 SECONDS,
+	)
 	new /obj/effect/temp_visual/telegraphing/circle(target)
 	playsound(target, 'sound/effects/magic/lightning_chargeup.ogg', 45, TRUE)
-	target.visible_message(span_danger("Пространство вокруг этой точки начинает рваться!"))
+	target.visible_message(span_danger("Пространство начинает рваться!"))
 	telegraph_timer_id = addtimer(CALLBACK(src, PROC_REF(resolve)), 2 SECONDS, TIMER_DELETE_ME)
 	if(admin)
 		log_admin("[key_name(admin)] started a redspace storm pulse at ([target.x], [target.y], [target.z]).")
@@ -170,9 +183,15 @@
 			SSredspace.finish_registered_event(src, impact_turf, "штормовой импульс отменён")
 		return
 
+	impact_turf.flash_lighting_fx(
+		range = 4,
+		power = 2,
+		color = LIGHT_COLOR_ORANGE,
+		duration = 0.5 SECONDS,
+	)
 	playsound(impact_turf, 'sound/effects/magic/lightningbolt.ogg', 60, TRUE)
 	new /obj/effect/temp_visual/thunderbolt(impact_turf)
-	impact_turf.visible_message(span_danger("Редспейсный разряд обрушивается на отмеченную точку!"))
+	impact_turf.visible_message(span_danger("Редспейсный разряд обрушивается из ниоткуда!"))
 	for(var/mob/living/victim in impact_turf)
 		SSredspace.notify_exposure(victim, src, 10, "штормовой импульс редспейса")
 		victim.adjust_fire_loss(10)
