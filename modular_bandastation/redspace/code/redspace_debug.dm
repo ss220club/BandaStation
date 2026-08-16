@@ -99,6 +99,8 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 		"Добавить тестовую волну",
 		"Изменить источник",
 		"Удалить источник",
+		"Локальное искажение 4-6",
+		"Штормовой импульс 7-10",
 		"Удар редспейсной молнии",
 		"Сбросить поле",
 	))
@@ -255,6 +257,24 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 			if(SSredspace.remove_source(source_id, "удалён из debug-панели"))
 				log_admin("[key_name(user)] removed redspace source #[source_id].")
 				message_admins("[key_name_admin(user)] удалил источник редспейса #[source_id].")
+
+		if("Локальное искажение 4-6")
+			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
+				to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
+				return
+			if(SSredspace.start_registered_event("local_distortion", user, current_turf))
+				to_chat(user, span_notice("Локальное искажение запущено."), confidential = TRUE)
+			else
+				to_chat(user, span_warning("Событие недоступно: значение должно быть в диапазоне 4-6 или действует cooldown."), confidential = TRUE)
+
+		if("Штормовой импульс 7-10")
+			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
+				to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
+				return
+			if(SSredspace.start_registered_event("storm_pulse", user, current_turf))
+				to_chat(user, span_notice("Штормовой импульс телеграфирован: покиньте отмеченный тайл."), confidential = TRUE)
+			else
+				to_chat(user, span_warning("Событие недоступно: значение должно быть в диапазоне 7-10 или действует cooldown."), confidential = TRUE)
 
 		if("Удар редспейсной молнии")
 			var/lightning_damage = tgui_input_number(user, "Урон огнём", "Redspace Lightning", 10, 200, 0)

@@ -45,8 +45,6 @@
 
 	/// Normalized reading represented by the current icon_state.
 	var/displayed_reading = "?"
-	/// Most recent raw server-side sample, retained for the future trend display.
-	var/last_sample_value
 	/// Earliest world time at which another reading may be taken.
 	var/next_update = 0
 
@@ -71,7 +69,6 @@
 	var/local_value
 	if(SSredspace)
 		local_value = SSredspace.get_value(sample_turf)
-	last_sample_value = local_value
 	update_counter_display(redspace_counter_display_value(local_value))
 
 /obj/item/redspace_counter/proc/update_counter_display(new_reading)

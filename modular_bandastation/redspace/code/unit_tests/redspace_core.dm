@@ -33,4 +33,18 @@
 		return Fail("Clearing invasion must restore the ordinary range")
 	qdel(cell)
 
+	var/datum/redspace_event/local_distortion/event = new
+	if(event.event_id != "local_distortion" || event.min_value != 4 || event.max_value != 6)
+		return Fail("The safe redspace event must expose its 4-6 range")
+	if(event.event_only || event.dangerous || event.budget_cost != 1)
+		return Fail("The safe redspace event must not be event-only or dangerous")
+	qdel(event)
+
+	var/datum/redspace_event/storm_pulse/storm_event = new
+	if(storm_event.min_value != 7 || storm_event.max_value != 10 || !storm_event.continues_after_start)
+		return Fail("The storm event must expose a delayed 7-10 lifecycle")
+	if(!storm_event.dangerous || storm_event.budget_cost != 2)
+		return Fail("The storm event must be marked as dangerous and cost two budget points")
+	qdel(storm_event)
+
 #endif

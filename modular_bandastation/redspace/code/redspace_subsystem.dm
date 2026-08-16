@@ -35,6 +35,12 @@ SUBSYSTEM_DEF(redspace)
 	var/list/field_listener_states = list()
 	/// Registered scenario listeners for explicit event lifecycle signals.
 	var/list/event_listeners = list()
+	/// Event id -> event typepath. Definitions stay independent from the field cycle.
+	var/list/event_registry = list()
+	/// Event/cell cooldowns. Zone budgets will extend this table later.
+	var/list/event_cooldowns = list()
+	/// Events that remain alive between telegraph and resolution.
+	var/list/active_events = list()
 	/// Listener datums that currently have a QDELETING cleanup hook.
 	var/list/listener_cleanup = list()
 
@@ -58,8 +64,13 @@ SUBSYSTEM_DEF(redspace)
 	field_listener_values = list()
 	field_listener_states = list()
 	event_listeners = list()
+	event_registry = list()
+	event_cooldowns = list()
+	active_events = list()
 	listener_cleanup = list()
 	next_source_id = 1
+	register_event_type(/datum/redspace_event/local_distortion)
+	register_event_type(/datum/redspace_event/storm_pulse)
 
 	// There is no work until a source, listener, or test changes a cell.
 	can_fire = FALSE
@@ -67,6 +78,10 @@ SUBSYSTEM_DEF(redspace)
 
 /datum/controller/subsystem/redspace/Destroy()
 	clear_listener_registrations()
+	for(var/datum/redspace_event/event as anything in active_events.Copy())
+		if(event)
+			qdel(event)
+	active_events.Cut()
 	for(var/source_key in field_sources)
 		var/datum/redspace_field_source/source = field_sources[source_key]
 		if(!source)
@@ -84,12 +99,14 @@ SUBSYSTEM_DEF(redspace)
 	dirty_cells.Cut()
 	currentrun.Cut()
 	transition_log.Cut()
+	event_cooldowns.Cut()
+	active_events.Cut()
 	QDEL_NULL(context)
 	return ..()
 
 /datum/controller/subsystem/redspace/stat_entry(msg)
 	var/background_label = context ? round(context.background_value, 0.1) : 0
-	msg = "B:[background_label] Cells:[length(field_cells)] Sources:[length(field_sources)] Dirty:[length(dirty_cells)] Transitions:[length(transition_log)] Listeners:[length(field_listeners)]"
+	msg = "B:[background_label] Cells:[length(field_cells)] Sources:[length(field_sources)] Dirty:[length(dirty_cells)] Transitions:[length(transition_log)] Listeners:[length(field_listeners)] Events:[length(event_registry)]"
 	return ..()
 
 /datum/controller/subsystem/redspace/fire(resumed = FALSE)
@@ -247,6 +264,74 @@ SUBSYSTEM_DEF(redspace)
 	if(cell)
 		return cell.state
 	return redspace_state_from_value(value)
+
+/// Adds an event definition to the registry without coupling it to the field cycle.
+/datum/controller/subsystem/redspace/proc/register_event_type(event_type)
+	if(!ispath(event_type, /datum/redspace_event))
+		return FALSE
+	var/datum/redspace_event/prototype = new event_type
+	if(!prototype || !prototype.event_id || event_registry[prototype.event_id])
+		qdel(prototype)
+		return FALSE
+	var/event_id = prototype.event_id
+	event_registry[event_id] = event_type
+	qdel(prototype)
+	return TRUE
+
+/// Creates a fresh instance of a registered event definition.
+/datum/controller/subsystem/redspace/proc/create_registered_event(event_id, list/event_args) as /datum/redspace_event
+	var/event_type = event_registry[event_id]
+	if(!event_type)
+		return
+	if(length(event_args))
+		return new event_type(arglist(event_args))
+	return new event_type
+
+/datum/controller/subsystem/redspace/proc/get_event_cooldown_key(datum/redspace_event/event, turf/target)
+	if(!event || !target)
+		return
+	var/list/hex_coordinates = redspace_hex_coordinates(target)
+	if(!hex_coordinates)
+		return "[event.event_id]:global"
+	return "[event.event_id]:[redspace_hex_key(target.z, hex_coordinates[1], hex_coordinates[2])]"
+
+/// Runs a short registered event and applies its per-zone cooldown.
+/// Long-lived invasion scenarios will get a separate lifecycle manager later.
+/datum/controller/subsystem/redspace/proc/start_registered_event(event_id, client/admin, turf/target, list/event_args)
+	var/datum/redspace_event/event = create_registered_event(event_id, event_args)
+	if(!event)
+		return FALSE
+	if(!event.can_start(target))
+		qdel(event)
+		return FALSE
+
+	var/cooldown_key = get_event_cooldown_key(event, target)
+	if(event.cooldown && cooldown_key)
+		var/available_at = event_cooldowns[cooldown_key]
+		if(available_at && world.time < available_at)
+			qdel(event)
+			return FALSE
+
+	active_events += event
+	var/succeeded = event.start(admin, target)
+	if(!succeeded)
+		active_events -= event
+		qdel(event)
+		return FALSE
+	if(succeeded && event.cooldown && cooldown_key)
+		event_cooldowns[cooldown_key] = world.time + event.cooldown
+	if(!event.continues_after_start)
+		finish_registered_event(event, target, "событие завершено")
+	return TRUE
+
+/// Finishes a registered event that stayed alive after its start phase.
+/datum/controller/subsystem/redspace/proc/finish_registered_event(datum/redspace_event/event, turf/target, reason = null)
+	if(!event || !(event in active_events))
+		return FALSE
+	active_events -= event
+	notify_event_finished(event, target, reason || "событие завершено")
+	qdel(event)
+	return TRUE
 
 /// Changes the background value and refreshes existing sparse cells.
 /datum/controller/subsystem/redspace/proc/set_background_value(new_value, reason = null)
@@ -517,6 +602,11 @@ SUBSYSTEM_DEF(redspace)
 	dirty_cells.Cut()
 	currentrun.Cut()
 	transition_log.Cut()
+	event_cooldowns.Cut()
+	for(var/datum/redspace_event/event as anything in active_events.Copy())
+		if(event)
+			qdel(event)
+	active_events.Cut()
 
 	QDEL_NULL(context)
 	context = new /datum/redspace_context(list(new /datum/redspace_context_provider/default()))
