@@ -10,6 +10,8 @@
 	var/list/active_z_levels = list()
 	/// Identifier of the influence profile selected for the round.
 	var/active_profile_id
+	/// Profile data selected for the round. The id remains available for compact payloads.
+	var/datum/redspace_profile/active_profile
 	/// Associative list of provider id -> /datum/redspace_context_provider.
 	var/list/providers = list()
 	/// Cached susceptibility coefficients by hex key. Rebuilt on refresh().
@@ -21,6 +23,7 @@
 		add_provider(provider)
 
 /datum/redspace_context/Destroy()
+	QDEL_NULL(active_profile)
 	for(var/provider_key in providers)
 		qdel(providers[provider_key])
 	providers.Cut()
@@ -72,8 +75,11 @@
 	if(isnum(resolved_background))
 		background_value = min(resolved_background, REDSPACE_MAX_NORMAL_VALUE)
 	active_z_levels = resolved_z_levels
-	if(!isnull(resolved_profile))
-		active_profile_id = resolved_profile
+	if(!isnull(resolved_profile) && (!active_profile || active_profile.profile_id != resolved_profile))
+		QDEL_NULL(active_profile)
+		active_profile = redspace_profile_from_id(resolved_profile)
+	if(active_profile)
+		active_profile_id = active_profile.profile_id
 	zone_coefficients.Cut()
 
 /// Returns the susceptibility coefficient for a hex, asking providers on the first

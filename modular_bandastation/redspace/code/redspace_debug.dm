@@ -50,14 +50,17 @@
 	var/current_value = SSredspace.get_value(target)
 	var/min_value = event_only ? REDSPACE_EVENT_MIN_VALUE : -100
 	var/max_value = event_only ? 100 : REDSPACE_MAX_NORMAL_VALUE
-	var/default_value = event_only ? max(11, current_value) : clamp(current_value, min_value, max_value)
+	var/default_value = event_only ? REDSPACE_EVENT_MIN_VALUE : clamp(current_value, min_value, max_value)
+	if(event_only && isnum(current_value))
+		default_value = max(default_value, current_value)
 	var/new_value = tgui_input_number(
 		user,
 		event_only ? "Новое event-only значение для текущей ячейки" : "Новое обычное значение для текущей ячейки",
 		"Redspace Cell",
-		default_value,
-		max_value,
-		min_value,
+		default = default_value,
+		max_value = max_value,
+		min_value = min_value,
+		round_value = !event_only,
 	)
 	if(isnull(new_value))
 		return
@@ -277,15 +280,9 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 				to_chat(user, span_warning("Событие недоступно: значение должно быть в диапазоне 7-10, действует cooldown или исчерпан бюджет зоны."), confidential = TRUE)
 
 		if("Удар молнии редспейса")
-			var/lightning_damage = tgui_input_number(user, "Урон огнём", "Redspace Lightning", 10, 200, 0)
-			if(isnull(lightning_damage))
-				return
-			var/lightning_stun = tgui_input_number(user, "Оглушение в секундах", "Redspace Lightning", 0, 30, 0)
-			if(isnull(lightning_stun))
-				return
-			var/datum/redspace_event/lightning/event = new(lightning_damage, lightning_stun * SECONDS)
-			event.start(user)
-			qdel(event)
+			var/datum/redspace_event/lightning/event = new
+			if(!event.start(user))
+				qdel(event)
 
 		if("Сбросить поле")
 			if(tgui_alert(user, "Удалить фон, ячейки и все зарегистрированные источники Redspace?", "Redspace Debug", list("Да", "Нет")) != "Да")

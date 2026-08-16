@@ -95,7 +95,7 @@ SUBSYSTEM_DEF(redspace)
 		if(!source)
 			continue
 		UnregisterSignal(source, COMSIG_QDELETING)
-		SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_REMOVED, source, null, "подсистема уничтожена")
+		SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_REMOVED, source.profile_id, source, null, "подсистема уничтожена")
 		qdel(source)
 	field_sources.Cut()
 	processing_sources.Cut()
@@ -538,7 +538,7 @@ SUBSYSTEM_DEF(redspace)
 	get_cell(locate(source.origin_x, source.origin_y, source.z_level), TRUE)
 	var/registration_reason = source.change_reason || "источник зарегистрирован"
 	source.change_reason = registration_reason
-	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_ADDED, null, source, registration_reason)
+	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_ADDED, source.profile_id, null, source, registration_reason)
 	refresh_cells(registration_reason)
 	wake()
 	return source
@@ -577,7 +577,7 @@ SUBSYSTEM_DEF(redspace)
 	var/change_reason = reason || "изменена сила источника"
 	if(!source.set_strength(new_strength, change_reason))
 		return FALSE
-	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_STRENGTH, old_strength, source.strength, change_reason)
+	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_STRENGTH, source.profile_id, old_strength, source.strength, change_reason)
 	refresh_cells(change_reason)
 	prune_unused_cells()
 	wake()
@@ -593,7 +593,7 @@ SUBSYSTEM_DEF(redspace)
 	if(!source.set_position(new_origin, change_reason))
 		return FALSE
 	get_cell(new_origin, TRUE)
-	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_POSITION, old_position, list(source.origin_x, source.origin_y, source.z_level), change_reason)
+	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_POSITION, source.profile_id, old_position, list(source.origin_x, source.origin_y, source.z_level), change_reason)
 	refresh_cells(change_reason)
 	prune_unused_cells()
 	wake()
@@ -608,7 +608,7 @@ SUBSYSTEM_DEF(redspace)
 	var/change_reason = reason || "изменён радиус источника"
 	if(!source.set_radius(new_radius, change_reason))
 		return FALSE
-	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_RADIUS, old_radius, source.radius, change_reason)
+	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_RADIUS, source.profile_id, old_radius, source.radius, change_reason)
 	refresh_cells(change_reason)
 	prune_unused_cells()
 	wake()
@@ -625,7 +625,7 @@ SUBSYSTEM_DEF(redspace)
 		source.change_reason = reason
 	var/change_reason = reason || source.change_reason || "источник удалён"
 	UnregisterSignal(source, COMSIG_QDELETING)
-	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_REMOVED, source, null, change_reason)
+	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_REMOVED, source.profile_id, source, null, change_reason)
 	field_sources -= source_key
 	processing_sources -= source_key
 	qdel(source)
@@ -643,7 +643,7 @@ SUBSYSTEM_DEF(redspace)
 	if(field_sources[source_key] != source)
 		return
 	var/change_reason = source.change_reason || "источник уничтожен"
-	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_REMOVED, source, null, change_reason)
+	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_REMOVED, source.profile_id, source, null, change_reason)
 	field_sources -= source_key
 	processing_sources -= source_key
 	refresh_cells(change_reason)
@@ -789,7 +789,7 @@ SUBSYSTEM_DEF(redspace)
 		field_listener_states[listener] = new_listener_state
 		SEND_SIGNAL(listener, COMSIG_REDSPACE_FIELD_CHANGED, cell, old_listener_value, new_listener_value, old_listener_state, new_listener_state, reason)
 
-	if(state_changed)
+	if(state_changed && redspace_state_is_escalation(old_state, cell.state))
 		try_start_automatic_event(cell)
 
 /// Stores a bounded diagnostic entry for a gameplay-range transition.
@@ -869,6 +869,8 @@ SUBSYSTEM_DEF(redspace)
 
 /// Sends an event-start signal only to registered scenario listeners.
 /datum/controller/subsystem/redspace/proc/notify_event_started(datum/event, event_context = null, reason = null)
+	if(isturf(event_context))
+		event_context = get_event_context(event, event_context)
 	for(var/datum/listener as anything in event_listeners.Copy())
 		if(!listener || QDELETED(listener))
 			unregister_event_listener(listener)
@@ -877,17 +879,32 @@ SUBSYSTEM_DEF(redspace)
 
 /// Sends an event-finished signal only to registered scenario listeners.
 /datum/controller/subsystem/redspace/proc/notify_event_finished(datum/event, event_context = null, reason = null)
+	if(isturf(event_context))
+		event_context = get_event_context(event, event_context)
 	for(var/datum/listener as anything in event_listeners.Copy())
 		if(!listener || QDELETED(listener))
 			unregister_event_listener(listener)
 			continue
 		SEND_SIGNAL(listener, COMSIG_REDSPACE_EVENT_FINISHED, event, event_context, reason)
 
+/// Builds the stable context payload shared by event lifecycle signals.
+/datum/controller/subsystem/redspace/proc/get_event_context(datum/redspace_event/event, turf/target) as /list
+	var/list/event_context = list(
+		"target_turf" = target,
+		"zone_key" = target ? get_event_zone_key(target) : null,
+		"profile_id" = event?.profile_id,
+	)
+	if(event?.source_id)
+		event_context["source_id"] = event.source_id
+	return event_context
+
 /// Sends an exposure signal directly to the object affected by an event.
-/datum/controller/subsystem/redspace/proc/notify_exposure(datum/target, datum/redspace_event/event, amount, reason = null)
+/datum/controller/subsystem/redspace/proc/notify_exposure(datum/target, datum/redspace_event/event, amount, reason = null, source_id = null)
 	if(!target || QDELETED(target))
 		return
-	return SEND_SIGNAL(target, COMSIG_REDSPACE_EXPOSURE, event, event?.profile_id, amount, reason)
+	if(isnull(source_id))
+		source_id = event?.source_id
+	return SEND_SIGNAL(target, COMSIG_REDSPACE_EXPOSURE, event, event?.profile_id, source_id, amount, reason)
 
 /// Registers cleanup for a datum used by either listener registry.
 /datum/controller/subsystem/redspace/proc/ensure_listener_cleanup(datum/listener)

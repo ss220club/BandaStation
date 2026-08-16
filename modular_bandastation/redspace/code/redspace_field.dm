@@ -68,6 +68,13 @@
 			return "вторжение"
 	return "неизвестно"
 
+/// Returns TRUE only when a normal field transition escalates toward a storm.
+/// Ebb recovery and event-only invasion state do not start ordinary events.
+/proc/redspace_state_is_escalation(old_state, new_state)
+	if(isnull(old_state) || isnull(new_state) || old_state == new_state)
+		return FALSE
+	return new_state > old_state && new_state <= REDSPACE_STATE_STORM
+
 /// Returns pointy-top axial coordinates for the hex containing a turf.
 /proc/redspace_hex_coordinates(turf/target) as /list
 	if(!target)

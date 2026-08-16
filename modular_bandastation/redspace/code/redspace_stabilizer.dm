@@ -204,9 +204,9 @@
 		return FALSE
 	return TRUE
 
-/obj/machinery/redspace_stabilizer/proc/on_field_source_changed(datum/redspace_field_source/stabilizer/source, change_type, old_value, new_value, reason)
+/obj/machinery/redspace_stabilizer/proc/on_field_source_changed(datum/redspace_field_source/stabilizer/source, change_type, source_profile_id, old_value, new_value, reason)
 	SIGNAL_HANDLER
-	if(source != field_source || change_type != REDSPACE_SOURCE_CHANGE_REMOVED)
+	if(source != field_source || source_profile_id != source.profile_id || change_type != REDSPACE_SOURCE_CHANGE_REMOVED)
 		return
 
 	field_source = null

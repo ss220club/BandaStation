@@ -19,6 +19,21 @@
 		return Fail("Ebb must not end at zero")
 	if(redspace_state_with_hysteresis(1, REDSPACE_STATE_EBB) != REDSPACE_STATE_CALM)
 		return Fail("Ebb must end after returning to a stable positive value")
+	if(!redspace_state_is_escalation(REDSPACE_STATE_CALM, REDSPACE_STATE_DISTURBANCE))
+		return Fail("Calm to disturbance must be an automatic-event escalation")
+	if(!redspace_state_is_escalation(REDSPACE_STATE_DISTURBANCE, REDSPACE_STATE_STORM))
+		return Fail("Disturbance to storm must be an automatic-event escalation")
+	if(redspace_state_is_escalation(REDSPACE_STATE_STORM, REDSPACE_STATE_DISTURBANCE))
+		return Fail("Storm recovery must not start an automatic event")
+	if(redspace_state_is_escalation(REDSPACE_STATE_EBB, REDSPACE_STATE_CALM))
+		return Fail("Ebb recovery into calm must not start an automatic event")
+	if(redspace_state_is_escalation(REDSPACE_STATE_STORM, REDSPACE_STATE_INVASION))
+		return Fail("Event-only invasion must not start an automatic event")
+
+	var/datum/redspace_profile/demonic/profile = new
+	if(profile.profile_id != REDSPACE_PROFILE_DEMONIC || !profile.is_event_allowed("storm_pulse") || profile.is_event_allowed("unknown_event"))
+		return Fail("The demonic profile must expose only its registered event set")
+	qdel(profile)
 
 	var/datum/redspace_field_cell/cell = new(1, 0, 0, "core_test", 0)
 	cell.set_value(4, 10, "enter disturbance")

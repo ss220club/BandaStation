@@ -243,8 +243,8 @@ export const RedspaceConsole = () => {
               </Stack.Item>
 
               <Stack.Item
-                basis="44%"
-                minWidth="440px"
+                basis="46%"
+                minWidth="460px"
                 maxWidth="520px"
                 shrink={1}
                 minHeight={0}
@@ -256,7 +256,7 @@ export const RedspaceConsole = () => {
                 >
                   <Stack.Item
                     basis="48%"
-                    minWidth="240px"
+                    minWidth="260px"
                     shrink={1}
                     minHeight={0}
                   >
@@ -274,7 +274,15 @@ export const RedspaceConsole = () => {
                   </Stack.Item>
                   <Stack.Item grow basis={0} minWidth={0} minHeight={0}>
                     {selectedSensor ? (
-                      <SensorHistory sensor={selectedSensor} />
+                      <SensorHistory
+                        sensor={selectedSensor}
+                        onUnlink={() =>
+                          act('unlink_sensor', { sensor_id: selectedSensor.id })
+                        }
+                        onForget={() =>
+                          act('forget_sensor', { sensor_id: selectedSensor.id })
+                        }
+                      />
                     ) : (
                       <Section title="История показаний" fill>
                         <NoticeBox>Выберите датчик в списке.</NoticeBox>
@@ -362,7 +370,7 @@ const SensorList = (props: SensorListProps) => {
         <NoticeBox m={0.5}>Сопряжённых датчиков нет.</NoticeBox>
       )}
       {!!sensors.length && (
-        <Table>
+        <Table width="100%">
           {sensors.map((sensor) => (
             <Table.Row
               key={sensor.id}
@@ -392,10 +400,10 @@ const SensorList = (props: SensorListProps) => {
                   {sensor.id} · {STATUS_LABELS[sensor.status]}
                 </Box>
               </Table.Cell>
-              <Table.Cell collapsing textAlign="right">
+              <Table.Cell collapsing width="4.5em" textAlign="right">
                 <ValueBadge value={sensor.value} />
               </Table.Cell>
-              <Table.Cell collapsing>
+              <Table.Cell collapsing width="2.75em" textAlign="center">
                 {sensor.connected ? (
                   <Button
                     icon="unlink"
@@ -443,7 +451,11 @@ const ValueBadge = (props: { value?: number }) => {
   );
 };
 
-const SensorHistory = (props: { sensor: Sensor }) => {
+const SensorHistory = (props: {
+  sensor: Sensor;
+  onUnlink: () => void;
+  onForget: () => void;
+}) => {
   const { sensor } = props;
   const samples = getHistorySamples(sensor);
   const historyData = samples.map((sample, index) => [index, sample.value]);
@@ -474,6 +486,17 @@ const SensorHistory = (props: { sensor: Sensor }) => {
                 <Box color="label" fontSize={0.8}>
                   {sensor.id}
                 </Box>
+              </Stack.Item>
+              <Stack.Item shrink={0}>
+                {sensor.connected ? (
+                  <Button icon="unlink" onClick={props.onUnlink}>
+                    Отвязать
+                  </Button>
+                ) : (
+                  <Button icon="trash" color="bad" onClick={props.onForget}>
+                    Удалить запись
+                  </Button>
+                )}
               </Stack.Item>
               <Stack.Item shrink={0}>
                 <ValueBadge value={sensor.value} />

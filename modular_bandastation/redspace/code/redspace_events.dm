@@ -19,6 +19,8 @@
 	var/continues_after_start = FALSE
 	/// Zone key reserved by the controller for this event instance.
 	var/budget_zone_key
+	/// Optional source that caused the event, when a scenario can identify one.
+	var/source_id
 
 /datum/redspace_event/proc/can_start(turf/target)
 	if(!target || !SSredspace || !SSredspace.is_supported_z(target.z))
@@ -27,7 +29,8 @@
 	var/value = SSredspace.get_value(target)
 	if(isnull(value))
 		return FALSE
-	if(profile_id && (!SSredspace.context || SSredspace.context.active_profile_id != profile_id))
+	var/datum/redspace_profile/active_profile = SSredspace.context?.active_profile
+	if(profile_id && (!active_profile || active_profile.profile_id != profile_id || !active_profile.is_event_allowed(event_id)))
 		return FALSE
 	if(event_only)
 		return value > REDSPACE_MAX_NORMAL_VALUE
@@ -211,12 +214,9 @@
 	event_id = "debug_lightning"
 	profile_id = REDSPACE_PROFILE_DEMONIC
 	var/impact_damage = 10
-	var/stun_duration = 0
-
-/datum/redspace_event/lightning/New(new_damage = 10, new_stun_duration = 0)
-	. = ..()
-	impact_damage = max(0, new_damage)
-	stun_duration = max(0, new_stun_duration)
+	var/telegraph_timer_id
+	var/mob/living/target
+	var/turf/target_turf
 
 /datum/redspace_event/lightning/start(client/admin, turf/event_turf)
 	if(!admin)
@@ -239,26 +239,59 @@
 		return FALSE
 
 	// Pick exactly once. The event does not keep rescanning for a target on later ticks.
-	var/mob/living/target = pick(candidates)
-	var/turf/target_turf = get_turf(target)
-	var/turf/lightning_source = get_step(target_turf, NORTH)
-	if(!lightning_source)
-		lightning_source = target_turf
+	target = pick(candidates)
+	target_turf = get_turf(target)
+	if(!target_turf)
+		return FALSE
 	SSredspace.notify_event_started(src, target_turf, "отладочный удар выбран")
-	lightning_source.Beam(target, icon_state = "lightning[rand(1,12)]", time = 0.5 SECONDS)
-	playsound(target_turf, 'sound/effects/magic/lightningbolt.ogg', 50, TRUE)
-	SSredspace.notify_exposure(target, src, impact_damage, "удар молнии редспейса")
-	target.adjust_fire_loss(impact_damage)
-	if(stun_duration)
-		target.Paralyze(stun_duration)
-
-	target.visible_message(
-		span_danger("[target] поражён разрядом молнии редспейса!"),
-		span_userdanger("Вас поражает разряд молнии редспейса!"),
-		ignored_mobs = target,
+	target_turf.flash_lighting_fx(
+		range = 3,
+		power = 0.8,
+		color = LIGHT_COLOR_FIRE,
+		duration = 2 SECONDS,
 	)
-	to_chat(target, span_userdanger("Вас поражает разряд молнии редспейса!"), confidential = TRUE)
-	log_admin("[key_name(admin)] started redspace lightning strike on [key_name(target)] at ([target_turf.x], [target_turf.y], [target_turf.z]); damage [impact_damage], stun [stun_duration].")
-	message_admins("[key_name_admin(admin)] запустил удар молнии редспейса по [key_name_admin(target)] ([ADMIN_COORDJMP(target_turf)]).")
-	SSredspace.notify_event_finished(src, target_turf, "отладочный удар завершён")
+	new /obj/effect/temp_visual/telegraphing/circle(target_turf)
+	playsound(target_turf, 'sound/effects/magic/lightning_chargeup.ogg', 45, TRUE)
+	target_turf.visible_message(span_warning("В воздухе накапливается разряд молнии редспейса!"))
+	telegraph_timer_id = addtimer(CALLBACK(src, PROC_REF(resolve)), 2 SECONDS, TIMER_DELETE_ME)
+	log_admin("[key_name(admin)] telegraphed a redspace lightning strike on [key_name(target)] at ([target_turf.x], [target_turf.y], [target_turf.z]); damage [impact_damage].")
+	message_admins("[key_name_admin(admin)] телеграфировал удар молнии редспейса по [key_name_admin(target)] ([ADMIN_COORDJMP(target_turf)]).")
 	return TRUE
+
+/datum/redspace_event/lightning/proc/resolve()
+	telegraph_timer_id = null
+	if(QDELETED(src))
+		return
+
+	var/mob/living/impact_target = target
+	var/turf/impact_turf = get_turf(impact_target)
+	if(!impact_target || QDELETED(impact_target) || impact_target.stat == DEAD || !impact_turf || QDELETED(impact_turf))
+		if(SSredspace)
+			SSredspace.notify_event_finished(src, target_turf, "отладочный удар отменён: цель недоступна")
+		qdel(src)
+		return
+
+	var/turf/lightning_source = get_step(impact_turf, NORTH)
+	if(!lightning_source)
+		lightning_source = impact_turf
+	lightning_source.Beam(impact_target, icon_state = "lightning[rand(1,12)]", time = 0.5 SECONDS)
+	playsound(impact_turf, 'sound/effects/magic/lightningbolt.ogg', 50, TRUE)
+	new /obj/effect/temp_visual/thunderbolt(impact_turf)
+	SSredspace.notify_exposure(impact_target, src, impact_damage, "удар молнии редспейса")
+	impact_target.adjust_fire_loss(impact_damage)
+	impact_target.visible_message(
+		span_danger("[impact_target] поражён разрядом молнии редспейса!"),
+		span_userdanger("Вас поражает разряд молнии редспейса!"),
+		ignored_mobs = impact_target,
+	)
+	to_chat(impact_target, span_userdanger("Вас поражает разряд молнии редспейса!"), confidential = TRUE)
+	log_admin("Redspace lightning strike hit [key_name(impact_target)] at ([impact_turf.x], [impact_turf.y], [impact_turf.z]); damage [impact_damage].")
+	message_admins("Удар молнии редспейса по [key_name_admin(impact_target)] ([ADMIN_COORDJMP(impact_turf)]).")
+	SSredspace.notify_event_finished(src, impact_turf, "отладочный удар завершён")
+	qdel(src)
+
+/datum/redspace_event/lightning/Destroy()
+	if(telegraph_timer_id)
+		deltimer(telegraph_timer_id)
+	telegraph_timer_id = null
+	return ..()
