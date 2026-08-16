@@ -31,6 +31,13 @@
 #define REDSPACE_PROFILE_DEMONIC "demonic"
 #define REDSPACE_PROFILE_STABILIZER "stabilizer"
 
+/// Starting event-budget values for one active hex zone.
+#define REDSPACE_EVENT_BUDGET_WINDOW (60 SECONDS)
+#define REDSPACE_EVENT_BUDGET_COOLDOWN (10 SECONDS)
+#define REDSPACE_EVENT_BUDGET_MAX_POINTS 4
+#define REDSPACE_EVENT_BUDGET_MAX_ACTIVE 2
+#define REDSPACE_EVENT_BUDGET_MAX_DANGEROUS 1
+
 /// Stabilizers regulate the ordinary field toward the top of the calm range.
 #define REDSPACE_STABILIZER_TARGET_VALUE 3
 #define REDSPACE_STABILIZER_DEFAULT_RADIUS 8

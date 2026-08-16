@@ -36,15 +36,46 @@
 	var/datum/redspace_event/local_distortion/event = new
 	if(event.event_id != "local_distortion" || event.min_value != 4 || event.max_value != 6)
 		return Fail("The safe redspace event must expose its 4-6 range")
-	if(event.event_only || event.dangerous || event.budget_cost != 1)
-		return Fail("The safe redspace event must not be event-only or dangerous")
+	if(event.event_only || event.dangerous || !event.automatic || event.budget_cost != 1)
+		return Fail("The safe redspace event must be automatic, non-dangerous and cost one budget point")
 	qdel(event)
 
 	var/datum/redspace_event/storm_pulse/storm_event = new
-	if(storm_event.min_value != 7 || storm_event.max_value != 10 || !storm_event.continues_after_start)
+	if(storm_event.min_value != 7 || storm_event.max_value != 10 || !storm_event.continues_after_start || !storm_event.automatic)
 		return Fail("The storm event must expose a delayed 7-10 lifecycle")
 	if(!storm_event.dangerous || storm_event.budget_cost != 2)
 		return Fail("The storm event must be marked as dangerous and cost two budget points")
+
+	var/datum/redspace_event_budget/budget = new("budget_test")
+	var/datum/redspace_event/local_distortion/budget_safe = new
+	if(!budget.can_start(budget_safe) || !budget.reserve(budget_safe))
+		return Fail("An empty event budget must accept a safe event")
+	if(budget.active_event_count != 1 || budget.spent_points != 1)
+		return Fail("The event budget must track active events and spent points")
+
+	var/datum/redspace_event/storm_pulse/budget_storm = new
+	budget.last_event_time = world.time - REDSPACE_EVENT_BUDGET_COOLDOWN
+	if(!budget.can_start(budget_storm) || !budget.reserve(budget_storm))
+		return Fail("The event budget must accept a dangerous event after cooldown")
+	if(budget.active_dangerous_count != 1 || budget.spent_points != 3)
+		return Fail("The event budget must track dangerous events and their cost")
+
+	var/datum/redspace_event/storm_pulse/blocked_storm = new
+	budget.last_event_time = world.time - REDSPACE_EVENT_BUDGET_COOLDOWN
+	if(budget.can_start(blocked_storm))
+		return Fail("The event budget must block a second active dangerous event")
+	qdel(blocked_storm)
+
+	budget.release(budget_storm)
+	budget.release(budget_safe)
+	budget.window_started = world.time - REDSPACE_EVENT_BUDGET_WINDOW
+	budget.last_event_time = world.time - REDSPACE_EVENT_BUDGET_COOLDOWN
+	if(!budget.can_start(budget_safe))
+		return Fail("The event budget must reset spent points after its window")
+	budget.release(budget_safe)
+	qdel(budget_safe)
+	qdel(budget_storm)
+	qdel(budget)
 	qdel(storm_event)
 
 #endif

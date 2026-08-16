@@ -11,8 +11,14 @@
 	var/cooldown = 0
 	var/budget_cost = 1
 	var/dangerous = FALSE
+	/// Whether the controller may select this definition on a range transition.
+	var/automatic = FALSE
+	/// Relative weight when several automatic definitions are eligible.
+	var/weight = 1
 	/// When true, the event remains alive after start() until it finishes itself.
 	var/continues_after_start = FALSE
+	/// Zone key reserved by the controller for this event instance.
+	var/budget_zone_key
 
 /datum/redspace_event/proc/can_start(turf/target)
 	if(!target || !SSredspace || !SSredspace.is_supported_z(target.z))
@@ -35,7 +41,68 @@
 /datum/redspace_event/Destroy()
 	if(SSredspace && src in SSredspace.active_events)
 		SSredspace.active_events -= src
+		SSredspace.release_event_budget(src)
 	return ..()
+
+/// Per-hex event budget. It is created only for zones that actually attempt an event.
+/datum/redspace_event_budget
+	var/zone_key
+	var/window_started
+	var/spent_points = 0
+	var/last_event_time = 0
+	var/active_event_count = 0
+	var/active_dangerous_count = 0
+	var/list/reserved_events = list()
+
+/datum/redspace_event_budget/New(new_zone_key)
+	. = ..()
+	zone_key = new_zone_key
+	window_started = world.time
+
+/datum/redspace_event_budget/proc/reset_window()
+	if(world.time - window_started < REDSPACE_EVENT_BUDGET_WINDOW)
+		return
+	window_started = world.time
+	spent_points = 0
+
+/datum/redspace_event_budget/proc/can_start(datum/redspace_event/event)
+	if(!event)
+		return FALSE
+	reset_window()
+	if(active_event_count >= REDSPACE_EVENT_BUDGET_MAX_ACTIVE)
+		return FALSE
+	if(event.dangerous && active_dangerous_count >= REDSPACE_EVENT_BUDGET_MAX_DANGEROUS)
+		return FALSE
+	if(last_event_time && world.time < last_event_time + REDSPACE_EVENT_BUDGET_COOLDOWN)
+		return FALSE
+	var/event_cost = max(event.budget_cost, 0)
+	return spent_points + event_cost <= REDSPACE_EVENT_BUDGET_MAX_POINTS
+
+/datum/redspace_event_budget/proc/reserve(datum/redspace_event/event)
+	if(!event || reserved_events[event] || !can_start(event))
+		return FALSE
+	var/event_cost = max(event.budget_cost, 0)
+	reserved_events[event] = event_cost
+	spent_points += event_cost
+	active_event_count++
+	if(event.dangerous)
+		active_dangerous_count++
+	last_event_time = world.time
+	return TRUE
+
+/datum/redspace_event_budget/proc/release(datum/redspace_event/event, refund = FALSE)
+	if(!event || isnull(reserved_events[event]))
+		return FALSE
+	var/event_cost = reserved_events[event]
+	reserved_events -= event
+	active_event_count = max(active_event_count - 1, 0)
+	if(event.dangerous)
+		active_dangerous_count = max(active_dangerous_count - 1, 0)
+	if(refund)
+		spent_points = max(spent_points - event_cost, 0)
+		if(last_event_time == world.time)
+			last_event_time = 0
+	return TRUE
 
 /// First safe content event: a short local distortion with no damage or forced status effect.
 /datum/redspace_event/local_distortion
@@ -46,6 +113,8 @@
 	cooldown = 30 SECONDS
 	budget_cost = 1
 	dangerous = FALSE
+	automatic = TRUE
+	weight = 1
 
 /datum/redspace_event/local_distortion/start(client/admin, turf/target)
 	if(!can_start(target))
@@ -69,6 +138,8 @@
 	cooldown = 45 SECONDS
 	budget_cost = 2
 	dangerous = TRUE
+	automatic = TRUE
+	weight = 1
 	continues_after_start = TRUE
 	var/telegraph_timer_id
 	var/turf/target_turf
@@ -81,7 +152,7 @@
 	SSredspace.notify_event_started(src, target, "штормовой импульс телеграфирован")
 	new /obj/effect/temp_visual/telegraphing/circle(target)
 	playsound(target, 'sound/effects/magic/lightning_chargeup.ogg', 45, TRUE)
-	target.visible_message(span_danger("Пространство вокруг этой точки начинает рваться. Покиньте отмеченный тайл!"))
+	target.visible_message(span_danger("Пространство вокруг этой точки начинает рваться!"))
 	telegraph_timer_id = addtimer(CALLBACK(src, PROC_REF(resolve)), 2 SECONDS, TIMER_DELETE_ME)
 	if(admin)
 		log_admin("[key_name(admin)] started a redspace storm pulse at ([target.x], [target.y], [target.z]).")

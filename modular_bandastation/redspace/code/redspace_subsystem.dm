@@ -37,8 +37,10 @@ SUBSYSTEM_DEF(redspace)
 	var/list/event_listeners = list()
 	/// Event id -> event typepath. Definitions stay independent from the field cycle.
 	var/list/event_registry = list()
-	/// Event/cell cooldowns. Zone budgets will extend this table later.
+/// Event-specific cooldowns, keyed by event id and hex zone.
 	var/list/event_cooldowns = list()
+	/// Sparse zone key -> /datum/redspace_event_budget.
+	var/list/event_budgets = list()
 	/// Events that remain alive between telegraph and resolution.
 	var/list/active_events = list()
 	/// Listener datums that currently have a QDELETING cleanup hook.
@@ -66,6 +68,7 @@ SUBSYSTEM_DEF(redspace)
 	event_listeners = list()
 	event_registry = list()
 	event_cooldowns = list()
+	event_budgets = list()
 	active_events = list()
 	listener_cleanup = list()
 	next_source_id = 1
@@ -82,6 +85,11 @@ SUBSYSTEM_DEF(redspace)
 		if(event)
 			qdel(event)
 	active_events.Cut()
+	for(var/zone_key in event_budgets)
+		var/datum/redspace_event_budget/budget = event_budgets[zone_key]
+		if(budget)
+			qdel(budget)
+	event_budgets.Cut()
 	for(var/source_key in field_sources)
 		var/datum/redspace_field_source/source = field_sources[source_key]
 		if(!source)
@@ -100,13 +108,14 @@ SUBSYSTEM_DEF(redspace)
 	currentrun.Cut()
 	transition_log.Cut()
 	event_cooldowns.Cut()
+	event_budgets.Cut()
 	active_events.Cut()
 	QDEL_NULL(context)
 	return ..()
 
 /datum/controller/subsystem/redspace/stat_entry(msg)
 	var/background_label = context ? round(context.background_value, 0.1) : 0
-	msg = "B:[background_label] Cells:[length(field_cells)] Sources:[length(field_sources)] Dirty:[length(dirty_cells)] Transitions:[length(transition_log)] Listeners:[length(field_listeners)] Events:[length(event_registry)]"
+	msg = "B:[background_label] Cells:[length(field_cells)] Sources:[length(field_sources)] Dirty:[length(dirty_cells)] Transitions:[length(transition_log)] Listeners:[length(field_listeners)] Events:[length(event_registry)] ActiveEvents:[length(active_events)] Budgets:[length(event_budgets)]"
 	return ..()
 
 /datum/controller/subsystem/redspace/fire(resumed = FALSE)
@@ -287,13 +296,72 @@ SUBSYSTEM_DEF(redspace)
 		return new event_type(arglist(event_args))
 	return new event_type
 
-/datum/controller/subsystem/redspace/proc/get_event_cooldown_key(datum/redspace_event/event, turf/target)
-	if(!event || !target)
+/datum/controller/subsystem/redspace/proc/get_event_zone_key(turf/target)
+	if(!target || !is_supported_z(target.z))
 		return
 	var/list/hex_coordinates = redspace_hex_coordinates(target)
 	if(!hex_coordinates)
-		return "[event.event_id]:global"
-	return "[event.event_id]:[redspace_hex_key(target.z, hex_coordinates[1], hex_coordinates[2])]"
+		return
+	return redspace_hex_key(target.z, hex_coordinates[1], hex_coordinates[2])
+
+/datum/controller/subsystem/redspace/proc/get_event_budget(zone_key, create = FALSE) as /datum/redspace_event_budget
+	if(!zone_key)
+		return
+	var/datum/redspace_event_budget/budget = event_budgets[zone_key]
+	if(!budget && create)
+		budget = new(zone_key)
+		event_budgets[zone_key] = budget
+	return budget
+
+/datum/controller/subsystem/redspace/proc/get_event_cooldown_key(datum/redspace_event/event, turf/target)
+	if(!event || !target)
+		return
+	var/zone_key = get_event_zone_key(target)
+	if(!zone_key)
+		return
+	return "[event.event_id]:[zone_key]"
+
+/datum/controller/subsystem/redspace/proc/can_start_event_instance(datum/redspace_event/event, turf/target)
+	if(!event || !event.can_start(target))
+		return FALSE
+
+	var/zone_key = get_event_zone_key(target)
+	if(!zone_key)
+		return FALSE
+	event.budget_zone_key = zone_key
+
+	var/cooldown_key = get_event_cooldown_key(event, target)
+	var/available_at = event_cooldowns[cooldown_key]
+	if(available_at && world.time < available_at)
+		return FALSE
+
+	var/datum/redspace_event_budget/budget = get_event_budget(zone_key)
+	if(budget && !budget.can_start(event))
+		return FALSE
+	return TRUE
+
+/// Selects one eligible registered event when an active cell enters a new range.
+/datum/controller/subsystem/redspace/proc/try_start_automatic_event(datum/redspace_field_cell/cell)
+	if(!cell || !length(event_registry))
+		return FALSE
+
+	var/turf/target = cell.get_sample_turf() || redspace_hex_representative_turf(cell.z_level, cell.q, cell.r)
+	if(!target)
+		return FALSE
+
+	var/list/candidates = list()
+	for(var/event_id in event_registry)
+		var/datum/redspace_event/event = create_registered_event(event_id)
+		if(!event || !event.automatic || event.weight <= 0 || !can_start_event_instance(event, target))
+			qdel(event)
+			continue
+		candidates[event_id] = event.weight
+		qdel(event)
+
+	if(!length(candidates))
+		return FALSE
+	var/chosen_event_id = pick_weight(candidates)
+	return start_registered_event(chosen_event_id, null, target)
 
 /// Runs a short registered event and applies its per-zone cooldown.
 /// Long-lived invasion scenarios will get a separate lifecycle manager later.
@@ -301,34 +369,44 @@ SUBSYSTEM_DEF(redspace)
 	var/datum/redspace_event/event = create_registered_event(event_id, event_args)
 	if(!event)
 		return FALSE
-	if(!event.can_start(target))
+	if(!can_start_event_instance(event, target))
 		qdel(event)
 		return FALSE
 
-	var/cooldown_key = get_event_cooldown_key(event, target)
-	if(event.cooldown && cooldown_key)
-		var/available_at = event_cooldowns[cooldown_key]
-		if(available_at && world.time < available_at)
-			qdel(event)
-			return FALSE
+	var/datum/redspace_event_budget/budget = get_event_budget(event.budget_zone_key, TRUE)
+	if(!budget.reserve(event))
+		qdel(event)
+		return FALSE
 
 	active_events += event
 	var/succeeded = event.start(admin, target)
 	if(!succeeded)
 		active_events -= event
+		budget.release(event, TRUE)
 		qdel(event)
 		return FALSE
-	if(succeeded && event.cooldown && cooldown_key)
+
+	var/cooldown_key = get_event_cooldown_key(event, target)
+	if(event.cooldown && cooldown_key)
 		event_cooldowns[cooldown_key] = world.time + event.cooldown
 	if(!event.continues_after_start)
 		finish_registered_event(event, target, "событие завершено")
 	return TRUE
+
+/datum/controller/subsystem/redspace/proc/release_event_budget(datum/redspace_event/event, refund = FALSE)
+	if(!event || !event.budget_zone_key)
+		return FALSE
+	var/datum/redspace_event_budget/budget = get_event_budget(event.budget_zone_key)
+	if(!budget)
+		return FALSE
+	return budget.release(event, refund)
 
 /// Finishes a registered event that stayed alive after its start phase.
 /datum/controller/subsystem/redspace/proc/finish_registered_event(datum/redspace_event/event, turf/target, reason = null)
 	if(!event || !(event in active_events))
 		return FALSE
 	active_events -= event
+	release_event_budget(event)
 	notify_event_finished(event, target, reason || "событие завершено")
 	qdel(event)
 	return TRUE
@@ -607,6 +685,11 @@ SUBSYSTEM_DEF(redspace)
 		if(event)
 			qdel(event)
 	active_events.Cut()
+	for(var/zone_key in event_budgets)
+		var/datum/redspace_event_budget/budget = event_budgets[zone_key]
+		if(budget)
+			qdel(budget)
+	event_budgets.Cut()
 
 	QDEL_NULL(context)
 	context = new /datum/redspace_context(list(new /datum/redspace_context_provider/default()))
@@ -705,6 +788,9 @@ SUBSYSTEM_DEF(redspace)
 		field_listener_values[listener] = new_listener_value
 		field_listener_states[listener] = new_listener_state
 		SEND_SIGNAL(listener, COMSIG_REDSPACE_FIELD_CHANGED, cell, old_listener_value, new_listener_value, old_listener_state, new_listener_state, reason)
+
+	if(state_changed)
+		try_start_automatic_event(cell)
 
 /// Stores a bounded diagnostic entry for a gameplay-range transition.
 /datum/controller/subsystem/redspace/proc/record_state_transition(datum/redspace_field_cell/cell, old_state, new_state, old_value, new_value, reason)

@@ -265,7 +265,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 			if(SSredspace.start_registered_event("local_distortion", user, current_turf))
 				to_chat(user, span_notice("Локальное искажение запущено."), confidential = TRUE)
 			else
-				to_chat(user, span_warning("Событие недоступно: значение должно быть в диапазоне 4-6 или действует cooldown."), confidential = TRUE)
+				to_chat(user, span_warning("Событие недоступно: значение должно быть в диапазоне 4-6, действует cooldown или исчерпан бюджет зоны."), confidential = TRUE)
 
 		if("Штормовой импульс 7-10")
 			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
@@ -274,7 +274,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 			if(SSredspace.start_registered_event("storm_pulse", user, current_turf))
 				to_chat(user, span_notice("Штормовой импульс телеграфирован: покиньте отмеченный тайл."), confidential = TRUE)
 			else
-				to_chat(user, span_warning("Событие недоступно: значение должно быть в диапазоне 7-10 или действует cooldown."), confidential = TRUE)
+				to_chat(user, span_warning("Событие недоступно: значение должно быть в диапазоне 7-10, действует cooldown или исчерпан бюджет зоны."), confidential = TRUE)
 
 		if("Удар редспейсной молнии")
 			var/lightning_damage = tgui_input_number(user, "Урон огнём", "Redspace Lightning", 10, 200, 0)
