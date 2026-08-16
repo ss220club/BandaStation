@@ -1,7 +1,7 @@
 /// Server-side history owned by one redspace scientific console.
 /datum/redspace_sensor_record
 	var/sensor_id
-	var/display_name = "датчик редспейсного возмущения"
+	var/display_name = "датчик возмущения редспейса"
 	var/obj/machinery/redspace_sensor/sensor
 	var/last_value
 	var/last_sample_time

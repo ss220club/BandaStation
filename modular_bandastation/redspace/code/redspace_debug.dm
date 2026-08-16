@@ -101,7 +101,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 		"Удалить источник",
 		"Локальное искажение 4-6",
 		"Штормовой импульс 7-10",
-		"Удар редспейсной молнии",
+		"Удар молнии редспейса",
 		"Сбросить поле",
 	))
 	if(!action)
@@ -276,7 +276,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 			else
 				to_chat(user, span_warning("Событие недоступно: значение должно быть в диапазоне 7-10, действует cooldown или исчерпан бюджет зоны."), confidential = TRUE)
 
-		if("Удар редспейсной молнии")
+		if("Удар молнии редспейса")
 			var/lightning_damage = tgui_input_number(user, "Урон огнём", "Redspace Lightning", 10, 200, 0)
 			if(isnull(lightning_damage))
 				return

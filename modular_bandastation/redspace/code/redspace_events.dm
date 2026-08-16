@@ -191,13 +191,13 @@
 	)
 	playsound(impact_turf, 'sound/effects/magic/lightningbolt.ogg', 60, TRUE)
 	new /obj/effect/temp_visual/thunderbolt(impact_turf)
-	impact_turf.visible_message(span_danger("Редспейсный разряд обрушивается из ниоткуда!"))
+	impact_turf.visible_message(span_danger("Разряд редспейса обрушивается из ниоткуда!"))
 	for(var/mob/living/victim in impact_turf)
 		SSredspace.notify_exposure(victim, src, 10, "штормовой импульс редспейса")
 		victim.adjust_fire_loss(10)
 		victim.adjust_stamina_loss(35)
 		victim.Paralyze(1 SECONDS)
-		to_chat(victim, span_userdanger("Редспейсный разряд поражает вас!"), confidential = TRUE)
+		to_chat(victim, span_userdanger("Разряд редспейса поражает вас!"), confidential = TRUE)
 	SSredspace.finish_registered_event(src, impact_turf, "штормовой импульс завершён")
 
 /datum/redspace_event/storm_pulse/Destroy()
@@ -235,7 +235,7 @@
 
 	if(!length(candidates))
 		log_admin("[key_name(admin)] tried to start a redspace lightning strike, but no valid target was found.")
-		message_admins("[key_name_admin(admin)] не смог запустить удар редспейсной молнии: подходящая цель не найдена.")
+		message_admins("[key_name_admin(admin)] не смог запустить удар молнии редспейса: подходящая цель не найдена.")
 		return FALSE
 
 	// Pick exactly once. The event does not keep rescanning for a target on later ticks.
@@ -247,18 +247,18 @@
 	SSredspace.notify_event_started(src, target_turf, "отладочный удар выбран")
 	lightning_source.Beam(target, icon_state = "lightning[rand(1,12)]", time = 0.5 SECONDS)
 	playsound(target_turf, 'sound/effects/magic/lightningbolt.ogg', 50, TRUE)
-	SSredspace.notify_exposure(target, src, impact_damage, "удар редспейсной молнии")
+	SSredspace.notify_exposure(target, src, impact_damage, "удар молнии редспейса")
 	target.adjust_fire_loss(impact_damage)
 	if(stun_duration)
 		target.Paralyze(stun_duration)
 
 	target.visible_message(
-		span_danger("[target] поражён разрядом редспейсной молнии!"),
-		span_userdanger("Вас поражает разряд редспейсной молнии!"),
+		span_danger("[target] поражён разрядом молнии редспейса!"),
+		span_userdanger("Вас поражает разряд молнии редспейса!"),
 		ignored_mobs = target,
 	)
-	to_chat(target, span_userdanger("Вас поражает разряд редспейсной молнии!"), confidential = TRUE)
+	to_chat(target, span_userdanger("Вас поражает разряд молнии редспейса!"), confidential = TRUE)
 	log_admin("[key_name(admin)] started redspace lightning strike on [key_name(target)] at ([target_turf.x], [target_turf.y], [target_turf.z]); damage [impact_damage], stun [stun_duration].")
-	message_admins("[key_name_admin(admin)] запустил удар редспейсной молнии по [key_name_admin(target)] ([ADMIN_COORDJMP(target_turf)]).")
+	message_admins("[key_name_admin(admin)] запустил удар молнии редспейса по [key_name_admin(target)] ([ADMIN_COORDJMP(target_turf)]).")
 	SSredspace.notify_event_finished(src, target_turf, "отладочный удар завершён")
 	return TRUE

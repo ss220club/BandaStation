@@ -475,8 +475,8 @@
 
 /datum/techweb_node/redspace_stabilization
 	id = "redspace_stabilization"
-	display_name = "Редспейсная стабилизация"
-	description = "Практическое укрепление блюспейсной границы в локальных зонах редспейсного давления."
+	display_name = "Стабилизация редспейса"
+	description = "Практическое укрепление блюспейсной границы в локальных зонах давления редспейса."
 	prereq_ids = list(TECHWEB_NODE_APPLIED_BLUESPACE)
 	design_ids = list("redspace_stabilizer")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_3_POINTS)
