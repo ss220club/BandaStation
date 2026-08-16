@@ -33,23 +33,28 @@
 
 	/// Abstract thermal load displayed as a percentage-like value.
 	var/heat = 0
-	var/heat_gain_at_max_load_per_second = 6
-	var/passive_cooling_per_second = 1.5
+	var/heat_gain_at_max_load_per_second = 3.5
+	var/passive_cooling_per_second = 2
 	var/cooling_per_coolant_unit = 2.5
 
 	/// Resource consumption at zero and maximum field load.
-	var/standby_power_drain_per_second = 0.01 * STANDARD_CELL_RATE
-	var/max_power_drain_per_second = 0.12 * STANDARD_CELL_RATE
-	var/coolant_use_at_max_load_per_second = 1.2
+	var/standby_power_drain_per_second = 0.005 * STANDARD_CELL_RATE
+	var/max_power_drain_per_second = 0.03 * STANDARD_CELL_RATE
+	var/coolant_use_at_max_load_per_second = 0.5
 
 	/// Failure checks happen on a service interval, not every machinery tick.
-	var/service_failure_chance = 5
+	var/service_failure_chance = 1.5
 	var/next_service_check = 0
 	/// The field source fades linearly instead of disappearing when the machine stops.
 	var/source_fade_duration = 10 SECONDS
 
 	var/current_negative_contribution = 0
 	var/current_load = 0
+
+	/// Warning levels: 0 is nominal, 1 is low, and 2 is depleted or critical.
+	var/battery_warning_level = 0
+	var/coolant_warning_level = 0
+	var/heat_warning_level = 0
 
 /obj/machinery/redspace_stabilizer/Initialize(mapload)
 	. = ..()
@@ -82,6 +87,7 @@
 	if(panel_open && !active && cell)
 		user.put_in_hands(cell)
 		cell = null
+		update_stabilizer_warnings()
 		update_appearance()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	return ..()
@@ -133,6 +139,7 @@
 	active = TRUE
 	next_service_check = world.time + REDSPACE_STABILIZER_SERVICE_INTERVAL
 	begin_processing()
+	update_stabilizer_warnings()
 	update_appearance()
 	user?.visible_message(
 		span_notice("[user] activates [src]."),
@@ -224,12 +231,14 @@
 	if(!active)
 		var/source_fading = fade_field_source(seconds_per_tick)
 		cool_down(seconds_per_tick)
+		update_stabilizer_warnings()
 		if(!source_fading && !field_source && heat <= 0)
 			return PROCESS_KILL
 		update_appearance()
 		return
 
 	if(!anchored || !is_operational || !field_source || !cell || cell.charge <= 0)
+		update_stabilizer_warnings()
 		deactivate_stabilization(null, "power or anchoring lost")
 		return
 
@@ -252,6 +261,7 @@
 	var/coolant_efficiency = coolant_demand ? clamp(coolant_available / coolant_demand, 0, 1) : 1
 
 	if(requested_load && !coolant_efficiency)
+		update_stabilizer_warnings()
 		deactivate_stabilization(null, "coolant depleted")
 		return
 
@@ -271,6 +281,7 @@
 		0,
 		REDSPACE_STABILIZER_MAX_HEAT,
 	)
+	update_stabilizer_warnings()
 	current_negative_contribution = new_contribution
 	current_load = new_load
 
@@ -306,6 +317,48 @@
 
 /obj/machinery/redspace_stabilizer/proc/cool_down(seconds_per_tick)
 	heat = max(0, heat - (passive_cooling_per_second * seconds_per_tick))
+
+/obj/machinery/redspace_stabilizer/proc/update_stabilizer_warnings()
+	var/battery_level = 0
+	if(!cell || cell.charge <= 0)
+		battery_level = 2
+	else if(cell.percent() <= REDSPACE_STABILIZER_RESOURCE_WARNING_PERCENT)
+		battery_level = 1
+
+	if(battery_level != battery_warning_level)
+		if(battery_level == 1)
+			visible_message(span_warning("[src] подаёт предупреждающий сигнал: заряд батареи низкий."))
+		else if(battery_level == 2)
+			visible_message(span_danger("[src] подаёт аварийный сигнал: батарея разряжена или отсутствует."))
+		battery_warning_level = battery_level
+
+	var/coolant_amount = reagents ? reagents.get_reagent_amount(/datum/reagent/cryostylane) : 0
+	var/coolant_capacity = reagents ? reagents.maximum_volume : 0
+	var/coolant_level = 0
+	if(!coolant_amount)
+		coolant_level = 2
+	else if(coolant_capacity && coolant_amount * 100 <= coolant_capacity * REDSPACE_STABILIZER_RESOURCE_WARNING_PERCENT)
+		coolant_level = 1
+
+	if(coolant_level != coolant_warning_level)
+		if(coolant_level == 1)
+			visible_message(span_warning("[src] предупреждает: запас криостилана подходит к концу."))
+		else if(coolant_level == 2)
+			visible_message(span_danger("[src] подаёт аварийный сигнал: криостилан закончился."))
+		coolant_warning_level = coolant_level
+
+	var/heat_level = 0
+	if(heat >= REDSPACE_STABILIZER_HEAT_CRITICAL_WARNING)
+		heat_level = 2
+	else if(heat >= REDSPACE_STABILIZER_HEAT_WARNING)
+		heat_level = 1
+
+	if(heat_level != heat_warning_level)
+		if(heat_level == 1)
+			visible_message(span_warning("[src] начинает перегреваться: тепловая нагрузка повышается."))
+		else if(heat_level == 2)
+			visible_message(span_danger("[src] подаёт аварийный сигнал: тепловая нагрузка критически высока!"))
+		heat_warning_level = heat_level
 
 /obj/machinery/redspace_stabilizer/proc/perform_service_check()
 	next_service_check = world.time + REDSPACE_STABILIZER_SERVICE_INTERVAL
@@ -352,13 +405,25 @@
 	var/state_label = local_state ? redspace_state_name(local_state) : "unknown"
 	var/status_label = active ? "включён" : "выключен"
 	var/stabilization_label = active ? "Стабилизация" : (field_source ? "Остаточный вклад" : "Стабилизация")
+	var/coolant_amount = reagents ? reagents.get_reagent_amount(/datum/reagent/cryostylane) : 0
+	var/coolant_capacity = reagents ? reagents.maximum_volume : 0
 
 	. += span_notice("Статус: [status_label].")
 	. += span_notice("Локальное значение поля: [value_label] ([state_label]).")
 	. += span_notice("[stabilization_label]: [round(current_negative_contribution, 0.1)] ([round(current_load * 100)]% нагрузки).")
 	. += span_notice("Тепловая нагрузка: [round(heat)]/[REDSPACE_STABILIZER_MAX_HEAT].")
 	. += span_notice("Батарея: [cell ? "[round(cell.percent(), 1)]%" : "отсутствует"].")
-	. += span_notice("Хладагент (криостилан): [round(reagents.get_reagent_amount(/datum/reagent/cryostylane), 1)]/[reagents.maximum_volume] ед.")
+	. += span_notice("Хладагент (криостилан): [round(coolant_amount, 1)]/[coolant_capacity] ед.")
+	if(!cell)
+		. += span_warning("Батарея стабилизатора отсутствует.")
+	else if(cell.charge <= 0)
+		. += span_warning("Батарея стабилизатора разряжена. Замените энергоблок.")
+	else if(cell.percent() <= REDSPACE_STABILIZER_RESOURCE_WARNING_PERCENT)
+		. += span_warning("Заряд батареи стабилизатора низкий. Подготовьте замену энергоблока.")
+	if(!coolant_amount)
+		. += span_warning("Криостилан закончился. Заправьте охлаждающий контур.")
+	else if(coolant_capacity && coolant_amount * 100 <= coolant_capacity * REDSPACE_STABILIZER_RESOURCE_WARNING_PERCENT)
+		. += span_warning("Запас криостилана низкий. Заправьте охлаждающий контур.")
 	if(panel_open)
 		. += span_notice("На внутренней стороне панели выгравирована инструкция: извлеките отработанный энергоблок и установите новый.")
 		. += span_notice("Охлаждающий контур заправляется криостиланом из открытой химической ёмкости.")
@@ -366,6 +431,8 @@
 		. += span_notice("Сервисная панель закрыта. Обслуживание энергоблока и охлаждающего контура проводится при открытой панели.")
 	if(machine_stat & BROKEN)
 		. += span_warning("Стабилизатор сломан. Откройте панель и отремонтируйте его сварочным инструментом.")
+	else if(heat >= REDSPACE_STABILIZER_HEAT_CRITICAL_WARNING)
+		. += span_warning("Тепловая нагрузка критически высока. Немедленно отключите стабилизатор.")
 	else if(heat >= REDSPACE_STABILIZER_HEAT_WARNING)
 		. += span_warning("Тепловая нагрузка приближается к критическому уровню.")
 
@@ -404,6 +471,7 @@
 
 	repair_damage(INFINITY)
 	heat = 0
+	update_stabilizer_warnings()
 	set_machine_stat(machine_stat & ~BROKEN)
 	update_appearance()
 	to_chat(user, span_notice("You repair [src]."))
@@ -421,6 +489,7 @@
 			return ITEM_INTERACT_BLOCKING
 		cell = tool
 		tool.add_fingerprint(user)
+		update_stabilizer_warnings()
 		update_appearance()
 		return ITEM_INTERACT_SUCCESS
 
@@ -435,6 +504,7 @@
 		var/transfer_amount = min(container.amount_per_transfer_from_this, reagents.maximum_volume - reagents.total_volume)
 		var/transferred = container.reagents.trans_to(src, transfer_amount, target_id = /datum/reagent/cryostylane, transferred_by = user)
 		if(transferred)
+			update_stabilizer_warnings()
 			balloon_alert(user, "[round(transferred, 0.1)]u coolant transferred")
 			return ITEM_INTERACT_SUCCESS
 		return ITEM_INTERACT_BLOCKING

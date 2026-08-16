@@ -12,12 +12,17 @@
 		"Фон: [round(SSredspace.context.background_value, 0.1)]",
 		"Коэффициент зоны: [SSredspace.get_zone_coefficient(target, cell)]",
 		"Профиль раунда: [SSredspace.context.active_profile_id]",
+		"Метрики: источники [length(SSredspace.field_sources)], ячейки [length(SSredspace.field_cells)], dirty-ячеек [length(SSredspace.dirty_cells)]/[length(SSredspace.currentrun)], выборок [SSredspace.metric_sample_count], расчётов [SSredspace.metric_value_calculation_count], проверок источников [SSredspace.metric_source_check_count], dirty поставлено/обработано [SSredspace.metric_dirty_cells_enqueued]/[SSredspace.metric_dirty_cells_processed], событий запущено/завершено [SSredspace.metric_events_started]/[SSredspace.metric_events_finished]",
+		"Пики: ячейки [SSredspace.metric_peak_field_cells], dirty-ячеек [SSredspace.metric_peak_dirty_cells], источников в обработке [SSredspace.metric_peak_processing_sources]",
 	)
 
 	if(cell)
 		report += "Ячейка: [cell.key], q=[cell.q], r=[cell.r]"
 		report += "Кеш: [round(cell.value, 0.1)], предыдущее: [round(cell.previous_value, 0.1)]"
 		report += "Последнее обновление: [cell.last_updated ? "[world.time - cell.last_updated] тиков назад" : "нет"]"
+		report += "Причина последнего изменения: [cell.last_change_reason || "не указана"]"
+		if(cell.pending_change_reason)
+			report += "Причина ожидающего обновления: [cell.pending_change_reason]"
 		if(!isnull(cell.forced_value))
 			report += "Обычный override: [round(cell.forced_value, 0.1)]"
 		if(!isnull(cell.event_override_value))

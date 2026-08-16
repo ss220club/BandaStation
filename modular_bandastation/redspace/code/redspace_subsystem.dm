@@ -46,6 +46,18 @@ SUBSYSTEM_DEF(redspace)
 	/// Listener datums that currently have a QDELETING cleanup hook.
 	var/list/listener_cleanup = list()
 
+	/// Cumulative counters used to profile the sparse field without scanning the map.
+	var/metric_sample_count = 0
+	var/metric_value_calculation_count = 0
+	var/metric_source_check_count = 0
+	var/metric_dirty_cells_enqueued = 0
+	var/metric_dirty_cells_processed = 0
+	var/metric_events_started = 0
+	var/metric_events_finished = 0
+	var/metric_peak_field_cells = 0
+	var/metric_peak_dirty_cells = 0
+	var/metric_peak_processing_sources = 0
+
 /datum/controller/subsystem/redspace/Initialize()
 	context = new /datum/redspace_context(list(new /datum/redspace_context_provider/default()))
 	context.refresh()
@@ -72,6 +84,7 @@ SUBSYSTEM_DEF(redspace)
 	active_events = list()
 	listener_cleanup = list()
 	next_source_id = 1
+	reset_metrics()
 	register_event_type(/datum/redspace_event/local_distortion)
 	register_event_type(/datum/redspace_event/storm_pulse)
 
@@ -115,8 +128,20 @@ SUBSYSTEM_DEF(redspace)
 
 /datum/controller/subsystem/redspace/stat_entry(msg)
 	var/background_label = context ? round(context.background_value, 0.1) : 0
-	msg = "B:[background_label] Cells:[length(field_cells)] Sources:[length(field_sources)] Dirty:[length(dirty_cells)] Transitions:[length(transition_log)] Listeners:[length(field_listeners)] Events:[length(event_registry)] ActiveEvents:[length(active_events)] Budgets:[length(event_budgets)]"
+	msg = "B:[background_label] Cells:[length(field_cells)] Sources:[length(field_sources)] Dirty:[length(dirty_cells)] Samples:[metric_sample_count] Calc:[metric_value_calculation_count] SourceChecks:[metric_source_check_count] DirtyQueued:[metric_dirty_cells_enqueued] DirtyProcessed:[metric_dirty_cells_processed] EventsStarted:[metric_events_started] EventsFinished:[metric_events_finished] Transitions:[length(transition_log)] Listeners:[length(field_listeners)] EventTypes:[length(event_registry)] ActiveEvents:[length(active_events)] Budgets:[length(event_budgets)] Peaks:[metric_peak_field_cells]/[metric_peak_dirty_cells]/[metric_peak_processing_sources]"
 	return ..()
+
+/datum/controller/subsystem/redspace/proc/reset_metrics()
+	metric_sample_count = 0
+	metric_value_calculation_count = 0
+	metric_source_check_count = 0
+	metric_dirty_cells_enqueued = 0
+	metric_dirty_cells_processed = 0
+	metric_events_started = 0
+	metric_events_finished = 0
+	metric_peak_field_cells = 0
+	metric_peak_dirty_cells = 0
+	metric_peak_processing_sources = 0
 
 /datum/controller/subsystem/redspace/fire(resumed = FALSE)
 	if(!resumed)
@@ -192,6 +217,7 @@ SUBSYSTEM_DEF(redspace)
 		var/turf/representative_turf = redspace_hex_representative_turf(z_level, q, r) || sample_turf
 		cell = new(z_level, q, r, key, context.background_value, representative_turf)
 		field_cells[key] = cell
+		metric_peak_field_cells = max(metric_peak_field_cells, length(field_cells))
 
 	return cell
 
@@ -205,6 +231,7 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/get_value_without_source(turf/target, datum/redspace_field_source/excluded_source = null)
 	if(!target || !is_supported_z(target.z))
 		return
+	metric_sample_count++
 
 	var/datum/redspace_field_cell/cell = get_cell(target)
 	var/value = calculate_value(target, cell, excluded_source)
@@ -218,6 +245,7 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/calculate_value(turf/target, datum/redspace_field_cell/cell, datum/redspace_field_source/excluded_source = null)
 	if(!target || !is_supported_z(target.z))
 		return
+	metric_value_calculation_count++
 
 	// Explicit event overrides and ordinary test values ignore zone susceptibility by design.
 	if(cell && !isnull(cell.event_override_value))
@@ -233,6 +261,7 @@ SUBSYSTEM_DEF(redspace)
 		var/datum/redspace_field_source/source = field_sources[source_key]
 		if(!source || source == excluded_source)
 			continue
+		metric_source_check_count++
 		var/contribution = source.get_contribution(target)
 		if(istype(source, /datum/redspace_field_source/stabilizer))
 			stabilizer_delta += contribution
@@ -533,6 +562,7 @@ SUBSYSTEM_DEF(redspace)
 	field_sources["[source.source_id]"] = source
 	if(source.requires_processing())
 		processing_sources["[source.source_id]"] = source
+	metric_peak_processing_sources = max(metric_peak_processing_sources, length(processing_sources))
 	RegisterSignal(source, COMSIG_QDELETING, PROC_REF(on_source_deleted))
 
 	get_cell(locate(source.origin_x, source.origin_y, source.z_level), TRUE)
@@ -690,6 +720,7 @@ SUBSYSTEM_DEF(redspace)
 		if(budget)
 			qdel(budget)
 	event_budgets.Cut()
+	reset_metrics()
 
 	QDEL_NULL(context)
 	context = new /datum/redspace_context(list(new /datum/redspace_context_provider/default()))
@@ -749,12 +780,15 @@ SUBSYSTEM_DEF(redspace)
 		cell.pending_change_reason = reason
 	if(!(cell in dirty_cells))
 		dirty_cells += cell
+		metric_dirty_cells_enqueued++
+		metric_peak_dirty_cells = max(metric_peak_dirty_cells, length(dirty_cells))
 	wake()
 
 /// Processes one cached cell after its value has been refreshed.
 /datum/controller/subsystem/redspace/proc/process_dirty_cell(datum/redspace_field_cell/cell)
 	if(!cell || QDELETED(cell))
 		return
+	metric_dirty_cells_processed++
 
 	var/value_changed = cell.value != cell.last_notified_value
 	var/state_changed = cell.state != cell.last_notified_state
@@ -871,6 +905,7 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/notify_event_started(datum/event, event_context = null, reason = null)
 	if(isturf(event_context))
 		event_context = get_event_context(event, event_context)
+	metric_events_started++
 	for(var/datum/listener as anything in event_listeners.Copy())
 		if(!listener || QDELETED(listener))
 			unregister_event_listener(listener)
@@ -881,6 +916,7 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/notify_event_finished(datum/event, event_context = null, reason = null)
 	if(isturf(event_context))
 		event_context = get_event_context(event, event_context)
+	metric_events_finished++
 	for(var/datum/listener as anything in event_listeners.Copy())
 		if(!listener || QDELETED(listener))
 			unregister_event_listener(listener)
