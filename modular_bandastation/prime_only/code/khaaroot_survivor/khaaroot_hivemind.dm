@@ -118,7 +118,7 @@
 /datum/khaaroot_hivemind/proc/send_command(datum/mind/thrall_mind, message, mob/living/sender)
 	if(!thrall_mind?.current)
 		return
-	to_chat(thrall_mind.current, span_boldnotice("Источник улья приказывает: \"[message]\""))
+	to_chat(thrall_mind.current, span_hypnophrase("<b>Источник улья приказывает:</b><br>«[message]»"))
 	if(sender != thrall_mind.current)
 		log_directed_talk(sender, thrall_mind.current, message, LOG_SAY, "khaaroot hivemind command")
 
@@ -218,7 +218,7 @@
 	if(!antag)
 		return FALSE
 	antag.thrall_objective = objective_text
-	to_chat(thrall.current, span_boldnotice("Источник улья ставит новую цель: \"[objective_text]\""))
+	to_chat(thrall.current, span_hypnophrase("<b>Источник улья ставит новую цель:</b><br>«[objective_text]»"))
 	return TRUE
 
 // TGUI INTERACTION

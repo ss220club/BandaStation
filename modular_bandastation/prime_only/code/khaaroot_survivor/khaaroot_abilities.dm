@@ -13,7 +13,7 @@
 	spell_requirements = SPELL_CASTABLE_WITHOUT_INVOCATION
 	cast_range = 1
 	/// How long the infection channel lasts
-	var/channel_time = 5 SECONDS
+	var/channel_time = 9 SECONDS
 	/// Timer IDs for periodic gasp effects during channel
 	var/list/gasp_timers = list()
 	/// Whether we're currently channeling the infection
@@ -208,7 +208,7 @@
 	if(owner.mind)
 		var/datum/antagonist/khaaroot_thrall/antag = owner.mind.has_antag_datum(/datum/antagonist/khaaroot_thrall)
 		if(antag?.thrall_objective)
-			prompt += "\nВаша текущая цель: \"[antag.thrall_objective]\""
+			prompt = "◆ ВАША ТЕКУЩАЯ ЗАДАЧА\n«[antag.thrall_objective]»\n\n[prompt]"
 
 	var/message = tgui_input_text(owner, prompt, "Улей Кхаарут", max_length = MAX_MESSAGE_LEN)
 	if(!message || QDELETED(src) || QDELETED(owner) || !IsAvailable(feedback = TRUE))
