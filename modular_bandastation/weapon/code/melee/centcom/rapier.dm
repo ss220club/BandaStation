@@ -24,8 +24,8 @@
 	hitsound = 'sound/items/weapons/bladeslice.ogg'
 
 /obj/item/melee/sabre/centcom_tanto
-	name = "fleet officer's tanto's"
-	desc = "Приливы и Отливы: Парные танто. Один забирает защиту, второй — жизнь. Движения владельца подобны штормовому морю.."
+	name = "fleet officer's tantos"
+	desc = "Приливы и Отливы: Парные танто. Один забирает защиту, второй — жизнь. Движения владельца подобны штормовому морю."
 	icon = 'modular_bandastation/weapon/icons/melee/sword.dmi'
 	icon_state = "centcom_tanto"
 	inhand_icon_state = "centcom_tanto"
@@ -131,8 +131,8 @@
 	set_holdable(/obj/item/melee/sabre/centcom_tanto)
 
 /obj/item/storage/belt/centcom_tanto
-	name = "fleet officer's tanto's sheath's"
-	desc = "Матово-черные двойные ножны для танто. Сконструированы так, что оба танто можно достать одновременно за доли секунды"
+	name = "fleet officer's tanto sheath's"
+	desc = "Матово-черные двойные ножны для танто, перевязанные серебряной нитью. Сконструированы так, что оба танто можно достать одновременно за доли секунды"
 	icon = 'modular_bandastation/weapon/icons/melee/sheath.dmi'
 	worn_icon = 'modular_bandastation/weapon/icons/melee/sheath_onmob.dmi'
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
@@ -145,12 +145,12 @@
 /obj/item/storage/belt/centcom_tanto/examine(mob/user)
 	. = ..()
 	if(length(contents))
-		. += span_notice("Alt-click it to quickly draw the blade.")
+		. += span_notice("Нажмите Alt+ЛКМ, чтобы быстро достать клинок.")
 
 /obj/item/storage/belt/centcom_tanto/click_alt(mob/user)
 	if(length(contents))
 		var/obj/item/I = contents[1]
-		user.visible_message(span_notice("[user] takes [I] out of [src]."), span_notice("You take [I] out of [src]."))
+		user.visible_message(span_notice("[user] достаёт [I] из [src]."), span_notice("Вы достаёте [I] из [src]."))
 		user.put_in_hands(I)
 		update_appearance()
 	else
@@ -158,7 +158,7 @@
 	return CLICK_ACTION_SUCCESS
 
 /obj/item/storage/belt/centcom_tanto/update_icon_state()
-	icon_state = initial(inhand_icon_state)
+	icon_state = initial(icon_state)
 	inhand_icon_state = initial(inhand_icon_state)
 	worn_icon_state = initial(worn_icon_state)
 	if(contents.len)
