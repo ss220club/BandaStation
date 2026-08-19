@@ -25,7 +25,7 @@
 	if(QDELETED(explosion_particle))
 		return
 	qdel(explosion_particle)
-
+/*// BANDASTATION REMOVAL START: PARTICLES
 /obj/effect/explosion
 	name = "fire"
 	icon = 'icons/effects/96x96.dmi'
@@ -58,3 +58,4 @@
 /datum/effect_system/explosion/smoke/start()
 	..()
 	addtimer(CALLBACK(src, PROC_REF(create_smoke)), 0.5 SECONDS)
+*/// BANDASTATION REMOVAL END
