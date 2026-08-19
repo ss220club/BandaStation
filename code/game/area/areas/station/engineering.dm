@@ -6,11 +6,11 @@
 	tacmap_color = TACMAP_AREA_ENGINEERING
 
 /area/station/engineering/circuit_workshop
-	name = "\improper Circuit Workshop"
+	name = "Circuit Workshop"
 	icon_state = "cir_wor"
 
 /area/station/engineering/engine_smes
-	name = "\improper Engineering SMES"
+	name = "Engineering SMES"
 	icon_state = "engine_smes"
 
 /area/station/engineering/main
@@ -34,7 +34,7 @@
 
 /*outside atmos*/
 /area/station/engineering/atmos/space_catwalk
-	name = "\improper Atmospherics Space Catwalk"
+	name = "Atmospherics Space Catwalk"
 	area_flags = BLOBS_ALLOWED | CULT_PERMITTED
 
 	sound_environment = SOUND_AREA_SPACE
@@ -42,35 +42,35 @@
 	ambient_buzz = null //Space is deafeningly quiet
 
 /area/station/engineering/atmos/project
-	name = "\improper Atmospherics Project Room"
+	name = "Atmospherics Project Room"
 	icon_state = "atmos_projectroom"
 
 /area/station/engineering/atmos/pumproom
-	name = "\improper Atmospherics Pumping Room"
+	name = "Atmospherics Pumping Room"
 	icon_state = "atmos_pump_room"
 
 /area/station/engineering/atmos/mix
-	name = "\improper Atmospherics Mixing Room"
+	name = "Atmospherics Mixing Room"
 	icon_state = "atmos_mix"
 
 /area/station/engineering/atmos/storage
-	name = "\improper Atmospherics Storage Room"
+	name = "Atmospherics Storage Room"
 	icon_state = "atmos_storage"
 
 /area/station/engineering/atmos/storage/gas
-	name = "\improper Atmospherics Gas Storage"
+	name = "Atmospherics Gas Storage"
 	icon_state = "atmos_storage_gas"
 
 /area/station/engineering/atmos/office
-	name = "\improper Atmospherics Office"
+	name = "Atmospherics Office"
 	icon_state = "atmos_office"
 
 /area/station/engineering/atmos/hfr_room
-	name = "\improper Atmospherics HFR Room"
+	name = "Atmospherics HFR Room"
 	icon_state = "atmos_HFR"
 
 /area/station/engineering/atmospherics_engine
-	name = "\improper Atmospherics Engine"
+	name = "Atmospherics Engine"
 	icon_state = "atmos_engine"
 	area_flags = BLOBS_ALLOWED | CULT_PERMITTED
 
@@ -79,16 +79,16 @@
 	AddElement(/datum/element/block_area_power_fail)
 
 /area/station/engineering/lobby
-	name = "\improper Engineering Lobby"
+	name = "Engineering Lobby"
 	icon_state = "engi_lobby"
 
 /area/station/engineering/supermatter
-	name = "\improper Place Somewhere Around the Supermatter" // don't use this type
+	name = "Place Somewhere Around the Supermatter" // don't use this type
 	icon_state = "engine_sm"
 	area_flags = BLOBS_ALLOWED | CULT_PERMITTED
 
 /area/station/engineering/supermatter/engine
-	name = "\improper Supermatter Engine"
+	name = "Supermatter Engine"
 	icon_state = "engine_sm"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
@@ -97,26 +97,26 @@
 	AddElement(/datum/element/block_area_power_fail)
 
 /area/station/engineering/supermatter/waste
-	name = "\improper Supermatter Waste Chamber"
+	name = "Supermatter Waste Chamber"
 	icon_state = "engine_sm_waste"
 
 /area/station/engineering/supermatter/room
-	name = "\improper Supermatter Engine Room"
+	name = "Supermatter Engine Room"
 	icon_state = "engine_sm_room"
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/station/engineering/supermatter/room/upper
-	name = "\improper Upper Supermatter Engine Room"
+	name = "Upper Supermatter Engine Room"
 	icon_state = "engine_sm_room_upper"
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/station/engineering/break_room
-	name = "\improper Engineering Foyer"
+	name = "Engineering Foyer"
 	icon_state = "engine_break"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/engineering/gravity_generator
-	name = "\improper Gravity Generator Room"
+	name = "Gravity Generator Room"
 	icon_state = "grav_gen"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
@@ -130,7 +130,7 @@
 	icon_state = "engine_storage_shared"
 
 /area/station/engineering/transit_tube
-	name = "\improper Transit Tube"
+	name = "Transit Tube"
 	icon_state = "transit_tube"
 
 /area/station/engineering/storage/tech
@@ -147,7 +147,7 @@
 */
 
 /area/station/construction
-	name = "\improper Construction Area"
+	name = "Construction Area"
 	icon_state = "construction"
 	ambience_index = AMBIENCE_ENGI
 	sound_environment = SOUND_AREA_STANDARD_STATION
@@ -159,5 +159,5 @@
 	sound_environment = SOUND_AREA_MEDIUM_SOFTFLOOR
 
 /area/station/construction/storage_wing
-	name = "\improper Storage Wing"
+	name = "Storage Wing"
 	icon_state = "storage_wing"

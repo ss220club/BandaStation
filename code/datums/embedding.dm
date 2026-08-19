@@ -97,9 +97,9 @@
 	SIGNAL_HANDLER
 
 	if(is_harmless())
-		examine_list["sticky"] = "[parent] looks sticky, and could probably get stuck to someone if thrown properly!"
+		examine_list["липкий"] = "[capitalize(parent.declent_ru(NOMINATIVE))] выглядит липким, и вероятно, может прилипнуть к чему-либо, если правильно бросить!"
 	else
-		examine_list["embeddable"] = "[parent] has a fine point, and could probably embed in someone if thrown properly!"
+		examine_list["застревающий"] = "У [parent.declent_ru(GENITIVE)] тонкое остриё, и вероятно, может вонзиться в кого-нибудь, если правильно бросить!"
 
 /// Is passed victim a valid target for us to embed into?
 /datum/embedding/proc/can_embed(atom/movable/source, mob/living/carbon/victim, hit_zone, datum/thrownthing/throwingdatum)

@@ -22,26 +22,26 @@
 /* --------- */
 
 /area/station/ai/upload
-	name = "\improper AI Upload Area"
+	name = "AI Upload Area"
 	icon_state = "unknown" // this is supposed to be for sorting, but if you want to make an upload hallway you can change this
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/ai/upload/chamber
-	name = "\improper AI Upload Chamber"
+	name = "AI Upload Chamber"
 	icon_state = "ai_upload"
 
 /area/station/ai/upload/foyer
-	name = "\improper AI Upload Access"
+	name = "AI Upload Access"
 	icon_state = "ai_upload_foyer"
 
 /* SATELLITE */
 
 /area/station/ai/satellite
-	name = "\improper AI Satellite"
+	name = "AI Satellite"
 	sound_environment = SOUND_ENVIRONMENT_ROOM
 
 /area/station/ai/satellite/chamber
-	name = "\improper AI Chamber"
+	name = "AI Chamber"
 	icon_state = "ai_chamber"
 	annoying_ambience = null
 
@@ -50,48 +50,48 @@
 	AddElement(/datum/element/block_area_power_fail)
 
 /area/station/ai/satellite/exterior
-	name = "\improper AI Satellite Exterior"
+	name = "AI Satellite Exterior"
 	secure = FALSE
 
 /area/station/ai/satellite/maintenance
-	name = "\improper AI Satellite Maintenance"
+	name = "AI Satellite Maintenance"
 	icon_state = "ai_maint"
 
 /area/station/ai/satellite/maintenance/storage
-	name = "\improper AI Satellite Storage"
+	name = "AI Satellite Storage"
 	icon_state = "ai_storage"
 	ambience_index = AMBIENCE_DANGER
 
 /* Interior */
 
 /area/station/ai/satellite/interior
-	name = "\improper AI Satellite Antechamber"
+	name = "AI Satellite Antechamber"
 	icon_state = "ai_interior"
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/station/ai/satellite/foyer
-	name = "\improper AI Satellite Foyer"
+	name = "AI Satellite Foyer"
 	icon_state = "ai_foyer"
 
 /area/station/ai/satellite/hallway
-	name = "\improper AI Satellite Hallway"
+	name = "AI Satellite Hallway"
 
 /area/station/ai/satellite/uppernorth
-	name = "\improper AI Satellite Upper Fore"
+	name = "AI Satellite Upper Fore"
 
 /area/station/ai/satellite/uppersouth
-	name = "\improper AI Satellite Upper Aft"
+	name = "AI Satellite Upper Aft"
 
 /* Functions */
 
 /area/station/ai/satellite/atmos
-	name = "\improper AI Satellite Atmospherics"
+	name = "AI Satellite Atmospherics"
 
 /area/station/ai/satellite/service
-	name = "\improper AI Satellite Service"
+	name = "AI Satellite Service"
 
 /area/station/ai/satellite/teleporter
-	name ="\improper AI Satellite Teleporter"
+	name ="AI Satellite Teleporter"
 
 /area/station/ai/satellite/equipment
-	name ="\improper AI Satellite Equipment"
+	name ="AI Satellite Equipment"
