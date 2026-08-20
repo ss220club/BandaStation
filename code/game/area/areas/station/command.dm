@@ -12,6 +12,10 @@
 	name = "\improper Bridge"
 	icon_state = "bridge"
 
+/area/station/command/bsa
+	name= "Bluespace Artillery"
+	icon_state = "bsa"
+
 /area/station/command/meeting_room
 	name = "\improper Heads of Staff Meeting Room"
 	icon_state = "meeting"
