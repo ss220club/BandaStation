@@ -1,16 +1,13 @@
 {
 	"version": "2.0.0",
-	"tasks": [
+	"inputs": [
 		{
-			"type": "shell",
-			"command": "tools/bootstrap/python tools/build_bt.py",
-			"windows": {
-				"command": ".\\tools\\bootstrap\\python.bat tools/build_bt.py"
-			},
-			"group": "build",
-			"presentation": { "reveal": "silent", "panel": "shared" },
-			"label": "Compile BT Trees"
-		},
+			"id": "ruNameFragment",
+			"type": "promptString",
+			"description": "Enter original name of the object to translate"
+		}
+	],
+	"tasks": [
 		{
 			"type": "process",
 			"command": "tools/build/build.sh",
@@ -27,16 +24,24 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"dependsOn": ["dm: reparse", "Compile BT Trees"],
+			"dependsOn": "dm: reparse",
 			"label": "Build All"
 		},
 		{
 			"type": "process",
 			"command": "tools/build/build.sh",
-			"args": ["-DLOWMEMORYMODE"],
+			"args": [
+				"-DSKIP_LAVALAND",
+				"-DSKIP_SPACE_LEVELS",
+				"-DFORCE_MAP=\"runtimestation\""
+			],
 			"windows": {
 				"command": ".\\tools\\build\\build.bat",
-				"args": ["-DLOWMEMORYMODE"]
+				"args": [
+					"-DSKIP_LAVALAND",
+					"-DSKIP_SPACE_LEVELS",
+					"-DFORCE_MAP=\"runtimestation\""
+				]
 			},
 			"options": {
 				"env": {
@@ -53,10 +58,22 @@
 		{
 			"type": "process",
 			"command": "tools/build/build.sh",
-			"args": ["-DLOWMEMORYMODE", "-DABSOLUTE_MINIMUM"],
+			"args": [
+				"-DSKIP_LAVALAND",
+				"-DSKIP_SPACE_LEVELS",
+				"-DAUTOSTART_GAME",
+				"-DMINIMAL_CENTCOM",
+				"-DFORCE_MAP=\"runtimestation_minimal\""
+			],
 			"windows": {
 				"command": ".\\tools\\build\\build.bat",
-				"args": ["-DLOWMEMORYMODE", "-DABSOLUTE_MINIMUM"]
+				"args": [
+					"-DSKIP_LAVALAND",
+					"-DSKIP_SPACE_LEVELS",
+					"-DAUTOSTART_GAME",
+					"-DMINIMAL_CENTCOM",
+					"-DFORCE_MAP=\"runtimestation_minimal\""
+				]
 			},
 			"options": {
 				"env": {
@@ -104,20 +121,24 @@
 			"type": "process",
 			"command": "tools/build/build.sh",
 			"args": [
-				"-DLOWMEMORYMODE",
+				"-DSKIP_LAVALAND",
+				"-DSKIP_SPACE_LEVELS",
 				"-DTESTING",
 				"-DREAGENTS_TESTING",
 				"-DTIMER_DEBUG",
-				"-DREFERENCE_DOING_IT_LIVE"
+				"-DREFERENCE_DOING_IT_LIVE",
+				"-DFORCE_MAP=\"runtimestation\""
 			],
 			"windows": {
 				"command": ".\\tools\\build\\build.bat",
 				"args": [
-					"-DLOWMEMORYMODE",
+					"-DSKIP_LAVALAND",
+					"-DSKIP_SPACE_LEVELS",
 					"-DTESTING",
 					"-DREAGENTS_TESTING",
 					"-DTIMER_DEBUG",
-					"-DREFERENCE_DOING_IT_LIVE"
+					"-DREFERENCE_DOING_IT_LIVE",
+					"-DFORCE_MAP=\"runtimestation\""
 				]
 			},
 			"options": {
@@ -215,9 +236,16 @@
 			"label": "tgui: rebuild tgfont"
 		},
 		{
-			"type": "shell",
-			"command": ".\\tools\\translations\\new_ru_name_fragment.cmd",
-			"args": ["${selectedText}"],
+			"type": "process",
+			"command": "powershell.exe",
+			"args": [
+				"-NoLogo",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder}\\tools\\translations\\new_ru_name_fragment.ps1",
+				"${input:ruNameFragment}"
+			],
 			"presentation": {
 				"reveal": "always",
 				"panel": "dedicated",

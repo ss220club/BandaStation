@@ -1,6 +1,5 @@
 /// Adds a newline to the examine list if the above entry is not empty and it is not the first element in the list
 #define ADD_NEWLINE_IF_NECESSARY(list) if(length(list) > 0 && list[length(list)]) { list += "" }
-#define CARBON_EXAMINE_EMBEDDING_MAX_DIST 4
 
 /mob/living/carbon/human/get_examine_icon(mob/user)
 	return null
@@ -24,7 +23,7 @@
 	var/appears_dead = FALSE
 	var/just_sleeping = FALSE
 
-	if(!appears_alive())
+	if(IS_DEAD_OR_FAKING(src))
 		appears_dead = TRUE
 
 		var/obj/item/clothing/glasses/shades = get_item_by_slot(ITEM_SLOT_EYES)
@@ -42,7 +41,7 @@
 			. += generate_death_examine_text()
 
 	//Status effects
-	var/list/status_examines = get_status_effect_examinations()
+	var/list/status_examines = get_status_effect_examinations(user)
 	if (length(status_examines))
 		. += status_examines
 
@@ -226,14 +225,13 @@
 				. += "Вокруг [ru_p_theirs()] видно святую ауру."
 				living_user.add_mood_event("religious_comfort", /datum/mood_event/religiously_comforted)
 
-		switch(stat)
-			if(UNCONSCIOUS, HARD_CRIT)
-				. += span_notice("[t_He] не реагирует на [t_him] окружение и, кажется, спит.")
-			if(SOFT_CRIT)
-				. += span_notice("[t_He] едва находится в сознании.")
-			if(CONSCIOUS)
-				if(HAS_TRAIT(src, TRAIT_DUMB))
-					. += "У [ru_p_theirs()] глупое выражение лица."
+		if(IS_UNCONSCIOUS(src))
+			. += span_notice("[t_He] не реагирует на [t_him] окружение и, кажется, спит.")
+		else if(stat == SOFT_CRIT)
+			. += span_notice("[t_He] едва находится в сознании.")
+		else if(HAS_TRAIT(src, TRAIT_DUMB))
+			. += "У [ru_p_theirs()] глупое выражение лица."
+
 		var/obj/item/organ/brain/brain = get_organ_by_type(/obj/item/organ/brain)
 		if(brain && isnull(ai_controller))
 			var/npc_message = ""
@@ -267,7 +265,10 @@
 				. += span_notice("<b><i>[t_He] выглядит абсолютно ужасно; вы можете осмотреть подробнее, чтобы разглядеть шрамы...</i></b>")
 
 	if(HAS_TRAIT(src, TRAIT_HUSK))
-		. += span_warning("Это тело превратилось в гротескную шелуху.")
+		if(HAS_TRAIT_FROM(src, TRAIT_HUSK, /datum/status_effect/zombie::id))
+			. += span_warning("[t_His] skin has rotted into a sickly green color.") // future todo: lizards don't have skin, they have scales
+		else
+			. += span_warning("Это тело превратилось в гротескную шелуху.")
 	if(HAS_MIND_TRAIT(user, TRAIT_MORBID))
 		if(HAS_TRAIT(src, TRAIT_DISSECTED))
 			. += span_notice("[t_He] appear[p_s()] to have been dissected. Useless for examination... <b><i>for now.</i></b>")
@@ -301,11 +302,11 @@
 /**
  * Shows any and all examine text related to any status effects the user has.
  */
-/mob/living/proc/get_status_effect_examinations()
+/mob/living/proc/get_status_effect_examinations(mob/examiner)
 	var/list/examine_list = list()
 
 	for(var/datum/status_effect/effect as anything in status_effects)
-		var/effect_text = effect.get_examine_text()
+		var/effect_text = effect.get_examine_text(examiner)
 		if(!effect_text)
 			continue
 
@@ -480,7 +481,7 @@
 
 	var/perpname = get_face_name(get_id_name(""))
 	var/title = ""
-	if(perpname && (HAS_TRAIT(user, TRAIT_SECURITY_HUD) || HAS_TRAIT(user, TRAIT_MEDICAL_HUD)) && (user.stat == CONSCIOUS || isobserver(user)) && user != src)
+	if(perpname && (HAS_TRAIT(user, TRAIT_SECURITY_HUD) || HAS_TRAIT(user, TRAIT_MEDICAL_HUD)) && (!IS_UNCONSCIOUS_OR_CRIT(user) || isobserver(user)) && user != src)
 		var/datum/record/crew/target_record = find_record(perpname)
 		if(target_record)
 			. += "Должность: [target_record.rank]"
@@ -607,4 +608,3 @@
 	return span_notice("[ru_p_they(TRUE)] выглядит [age_text].")
 
 #undef ADD_NEWLINE_IF_NECESSARY
-#undef CARBON_EXAMINE_EMBEDDING_MAX_DIST
