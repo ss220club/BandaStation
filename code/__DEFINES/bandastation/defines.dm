@@ -36,3 +36,7 @@
 
 #define SQUASH_WITH_HANDS_DELAY 1.5 SECONDS
 #define RCD_NO_SKILLCHIP_DELAY_MULTIPLIER 1.5
+
+/// Signal from change_ignition_state(atom/source, state)
+/// State is boolean value
+#define CHANGE_IGNITION_STATE "change_ignition_state"

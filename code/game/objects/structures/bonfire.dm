@@ -33,6 +33,8 @@
 		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
+	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
+	AddComponent(/datum/component/item_igniter, FALSE)
 	burning_loop = new(src)
 
 /obj/structure/bonfire/Destroy()
@@ -121,6 +123,8 @@
 	bonfire_burn()
 	particles = new /particles/bonfire()
 	START_PROCESSING(SSobj, src)
+	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
+	SEND_SIGNAL(src, CHANGE_IGNITION_STATE, TRUE)
 
 /obj/structure/bonfire/fire_act(exposed_temperature, exposed_volume)
 	start_burning()
@@ -179,6 +183,8 @@
 	set_light(0)
 	QDEL_NULL(particles)
 	STOP_PROCESSING(SSobj, src)
+	/// BANDASTATION EDIT: IGNITION COMPONENT INTEGRATION
+	SEND_SIGNAL(src, CHANGE_IGNITION_STATE, FALSE)
 
 /obj/structure/bonfire/buckle_mob(mob/living/buckled_mob, force = FALSE, check_loc = TRUE)
 	if(..())
