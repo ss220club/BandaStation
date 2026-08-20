@@ -396,6 +396,15 @@
 		reagent_note = "REAGENTS: [pretty_string_from_reagent_list(reagents.reagent_list)]"
 
 	if(ismob(firer) && !do_not_log)
+		if(isliving(living_target))
+			var/mob/living/L = living_target
+			if(isliving(firer))
+				L.vars["quest_killer"] = firer
+				var/dist = get_dist(firer, L)
+				L.quest_kill_distance = dist
+				if(dist > L.quest_max_kill_distance)
+					L.quest_max_kill_distance = dist
+
 		log_combat(firer, living_target, "shot", src, reagent_note)
 		return BULLET_ACT_HIT
 
@@ -1251,8 +1260,8 @@
 	free_hitscan_forceMove = TRUE
 	forceMove(source_loc)
 	starting = source_loc
-	pixel_x = source.pixel_x - source.base_pixel_x
-	pixel_y = source.pixel_y - source.base_pixel_y
+	pixel_x = source.pixel_x
+	pixel_y = source.pixel_y
 	original = target
 
 	// Trim off excess pixel_x/y by converting them into turf offset

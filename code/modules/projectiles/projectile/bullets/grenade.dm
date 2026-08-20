@@ -16,8 +16,8 @@
 
 /obj/projectile/bullet/a40mm/on_hit(atom/target, blocked = 0, pierce_hit)
 	..()
-	if(ex_light_range || ex_flame_range)
-		explosion(target, devastation_range = ex_dev_range, light_impact_range = ex_light_range, flame_range = ex_flame_range, flash_range = 1, adminlog = FALSE, explosion_cause = src)
+//	if(ex_light_range || ex_flame_range)
+//		explosion(target, devastation_range = ex_dev_range, light_impact_range = ex_light_range, flame_range = ex_flame_range, flash_range = 1, adminlog = FALSE, explosion_cause = src)
 	grenade_extra_effect(target)
 	return BULLET_ACT_HIT
 

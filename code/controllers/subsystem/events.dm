@@ -106,6 +106,8 @@ SUBSYSTEM_DEF(events)
 	set waitfor = FALSE //for the admin prompt
 	if(!CONFIG_GET(flag/allow_random_events))
 		return
+	if(SSmapping.current_map?.disable_random_events)
+		return
 
 	var/players_amt = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
 	// Only alive, non-AFK human players count towards this.
