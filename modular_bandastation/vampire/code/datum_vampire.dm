@@ -1,0 +1,380 @@
+/datum/antagonist/vampire
+	name = "\proper Vampire"
+	roundend_category = "Vampires"
+	antagpanel_category = "Vampire"
+	pref_flag = ROLE_VAMPIRE
+	antag_moodlet = /datum/mood_event/focused
+	hijack_speed = 0.5
+	suicide_cry = "I DIE FOR THE NIGHT!"
+	preview_outfit = /datum/outfit/butler
+	stinger_sound = 'sound/music/antag/heretic/heretic_gain.ogg'
+	antag_flags = parent_type::antag_flags | ANTAG_OBSERVER_VISIBLE_PANEL
+
+	ui_name = "AntagInfoHeretic"
+	antag_hud_name = "traitor"
+
+	var/bloodtotal = 0
+	var/bloodusable = 0
+	/// What vampire subclass the vampire is.
+	var/datum/vampire_subclass/subclass
+	/// Handles the vampire cloak toggle
+	var/iscloaking = FALSE
+	/// List of available active spell actions and passives
+	var/list/powers = list()
+	/// Who the vampire is draining of blood
+	var/mob/living/carbon/human/draining
+	/// Null rods and holy water make abilities cost more
+	var/nullified = 0
+
+	/// Powers that all vampires unlock and at what blood total level they unlock them
+	var/list/upgrade_tiers = list(
+		/datum/action/cooldown/spell/vampire/rejuvenate = 0,
+		/datum/action/cooldown/spell/aoe/charges/vampire/glare = 0,
+		/datum/vampire_passive/vision = 100,
+		/datum/action/cooldown/spell/vampire/specialize = 150,
+		/datum/action/cooldown/spell/vampire/exfiltrate = 150,
+		/datum/action/cooldown/spell/pointed/vampire/lair = 150,
+		/datum/vampire_passive/regen = 200,
+		/datum/vampire_passive/vision/advanced = 500,
+	)
+
+	/// List of victims' REF IDs we have drained and how much blood from each
+	var/list/drained_humans = list()
+	/// Did the vampire build a lair?
+	var/has_lair = FALSE
+
+/datum/antagonist/vampire/Destroy(force, ...)
+	draining = null
+	remove_all_powers()
+	QDEL_NULL(subclass)
+	return ..()
+
+/datum/antagonist/vampire/on_removal()
+	if(owner?.current)
+		log_combat(owner.current, owner.current, "de-vampired")
+		owner.current.alpha = 255
+	return ..()
+
+/datum/antagonist/vampire/proc/adjust_nullification(base, extra)
+	nullified = clamp(nullified + extra, base, VAMPIRE_NULLIFICATION_CAP)
+
+/datum/antagonist/vampire/proc/force_add_ability(path)
+	var/datum/power = new path()
+	powers += power
+
+	if(istype(power, /datum/action/cooldown/spell))
+		var/datum/action/cooldown/spell/spell = power
+		spell.Grant(owner.current)
+	else if(istype(power, /datum/vampire_passive))
+		var/datum/vampire_passive/passive = power
+		passive.owner = owner.current
+		passive.on_apply(src)
+
+/datum/antagonist/vampire/proc/get_ability(path)
+	for(var/datum/power as anything in powers)
+		if(power.type == path)
+			return power
+	return null
+
+/datum/antagonist/vampire/proc/add_ability(path)
+	if(!get_ability(path))
+		force_add_ability(path)
+
+/datum/antagonist/vampire/proc/remove_ability(datum/ability)
+	if(ability && (ability in powers))
+		powers -= ability
+		if(istype(ability, /datum/action))
+			var/datum/action/action = ability
+			action.Remove(owner.current)
+		qdel(ability)
+		if(owner?.current)
+			owner.current.update_sight()
+
+/datum/antagonist/vampire/proc/remove_all_powers()
+	for(var/power in powers)
+		remove_ability(power)
+
+/datum/antagonist/vampire/apply_innate_effects(mob/living/mob_override)
+	mob_override = ..()
+	if(ishuman(mob_override))
+		var/mob/living/carbon/human/human_target = mob_override
+		human_target.dna?.species.hunger_icon = 'icons/mob/screen_hunger_vampire.dmi'
+
+	check_vampire_upgrade(FALSE)
+	RegisterSignal(mob_override, COMSIG_ATOM_HOLY_ATTACK, PROC_REF(holy_attack_reaction))
+
+/datum/antagonist/vampire/remove_innate_effects(mob/living/mob_override)
+	mob_override = ..()
+	remove_all_powers()
+	var/datum/hud/hud = mob_override?.hud_used
+	if(hud?.vampire_blood_display)
+		hud.remove_vampire_hud()
+
+	if(ishuman(mob_override))
+		var/mob/living/carbon/human/human_target = mob_override
+		human_target.dna?.species.hunger_icon = initial(human_target.dna.species.hunger_icon)
+		human_target.alpha = 255
+
+	REMOVE_TRAITS_IN(mob_override, "vampire")
+	UnregisterSignal(mob_override, COMSIG_ATOM_HOLY_ATTACK)
+
+/datum/antagonist/vampire/proc/holy_attack_reaction(mob/target, obj/item/source, mob/user, antimagic_flags)
+	SIGNAL_HANDLER
+	if(!HAS_TRAIT(user?.mind, TRAIT_HOLY))
+		return
+	if(!source.force)
+		return
+
+	var/bonus_force = 0
+	if(istype(source, /obj/item/nullrod))
+		var/obj/item/nullrod/nullrod = source
+		bonus_force = nullrod.sanctify_force
+
+	if(!get_ability(/datum/vampire_passive/full))
+		to_chat(owner.current, span_warning("[source]'s power interferes with your own!"))
+		adjust_nullification(30 + bonus_force, 15 + bonus_force)
+
+/datum/antagonist/vampire/exfiltrate(mob/living/carbon/human/extractor, obj/item/radio/radio)
+	remove_all_powers()
+	if(istype(subclass, SUBCLASS_DANTALION))
+		for(var/datum/antagonist/mindslave/slave in GLOB.antagonists)
+			if(slave.master == extractor.mind)
+				slave.owner?.remove_antag_datum(/datum/antagonist/mindslave/thrall)
+
+	if(isplasmaman(extractor))
+		extractor.equipOutfit(/datum/outfit/admin/ghostbar_antag/vampire/plasmaman)
+	else
+		extractor.equipOutfit(/datum/outfit/admin/ghostbar_antag/vampire)
+
+	radio.autosay("<b>--ZZZT!- Wonderfully done, [extractor.real_name]. Welcome to -^%&!-ZZT!-</b>", "Ancient Vampire", "Security")
+	SSblackbox.record_feedback("tally", "successful_extraction", 1, "Vampire")
+
+#define BLOOD_GAINED_MODIFIER 0.5
+
+/datum/antagonist/vampire/proc/handle_bloodsucking(mob/living/carbon/human/target_human, suck_rate = 5 SECONDS)
+	draining = target_human
+	var/unique_suck_id = REF(target_human)
+	var/blood = 0
+	var/blood_volume_warning = 9999
+	var/mob/living/caster = owner.current
+
+	if(caster.is_mouth_covered() || HAS_TRAIT(caster, TRAIT_MUZZLED))
+		to_chat(caster, span_warning("Your mask or muzzle prevents you from biting [target_human]!"))
+		draining = null
+		return
+
+	log_combat(caster, target_human, "bitten & drained of blood (vampire)")
+	caster.visible_message(
+		span_danger("[caster] grabs [target_human]'s neck harshly and sinks in [caster.p_their()] fangs!"),
+		span_danger("You sink your fangs into [target_human] and begin to drain [target_human.p_their()] blood."),
+		span_notice("You hear a soft puncture and a wet sucking noise."),
+	)
+
+	while(do_after(caster, suck_rate, target = target_human, hidden = TRUE))
+		caster.do_attack_animation(target_human, ATTACK_EFFECT_BITE)
+		if(unique_suck_id in drained_humans)
+			if(drained_humans[unique_suck_id] >= BLOOD_DRAIN_LIMIT)
+				to_chat(caster, span_warning("You have drained most of the life force from [target_human]'s blood, and will get no more usable blood!"))
+				target_human.blood_volume = max(target_human.blood_volume - 25, 0)
+				caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + 5))
+				continue
+
+		if((target_human.stat != DEAD || target_human.has_status_effect(STATUS_EFFECT_RECENTLY_SUCCUMBED)) && !HAS_TRAIT(target_human.mind, TRAIT_XENOBIO_SPAWNED_HUMAN))
+			if(target_human.ckey || target_human.get_ghost(FALSE))
+				blood = min(20, target_human.blood_volume)
+				adjust_blood(target_human, blood * BLOOD_GAINED_MODIFIER)
+				to_chat(caster, span_notice("<b>You have accumulated [bloodtotal] unit\s of blood, and have [bloodusable] left to use.</b>"))
+
+		target_human.blood_volume = max(target_human.blood_volume - 25, 0)
+
+		if(target_human.blood_volume)
+			if(target_human.blood_volume <= BLOOD_VOLUME_BAD && blood_volume_warning > BLOOD_VOLUME_BAD)
+				to_chat(caster, span_danger("Your victim's blood volume is dangerously low."))
+			else if(target_human.blood_volume <= BLOOD_VOLUME_STABLE && blood_volume_warning > BLOOD_VOLUME_STABLE)
+				to_chat(caster, span_warning("Your victim's blood is at an unsafe level."))
+			blood_volume_warning = target_human.blood_volume
+		else
+			to_chat(caster, span_warning("You have bled your victim dry!"))
+			break
+
+		if((!target_human.ckey && !target_human.get_ghost(FALSE)) || HAS_TRAIT(target_human.mind, TRAIT_XENOBIO_SPAWNED_HUMAN))
+			to_chat(caster, span_notice("<b>Feeding on [target_human] reduces your thirst, but you get no usable blood from them.</b>"))
+			caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + 5))
+		else
+			caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + (blood / 2)))
+
+	draining = null
+	to_chat(caster, span_notice("You stop draining [target_human.name] of blood."))
+
+#undef BLOOD_GAINED_MODIFIER
+
+/datum/antagonist/vampire/proc/change_subclass(new_subclass_type)
+	if(isnull(new_subclass_type))
+		return
+	clear_subclass(FALSE)
+	add_subclass(new_subclass_type, log_choice = FALSE)
+
+/datum/antagonist/vampire/proc/clear_subclass(give_specialize_power = TRUE)
+	if(give_specialize_power)
+		upgrade_tiers[/datum/action/cooldown/spell/vampire/specialize] = 150
+	remove_all_powers()
+	QDEL_NULL(subclass)
+	check_vampire_upgrade()
+
+/datum/antagonist/vampire/proc/check_vampire_upgrade(announce = TRUE)
+	var/list/old_powers = powers.Copy()
+
+	for(var/ptype in upgrade_tiers)
+		var/level = upgrade_tiers[ptype]
+		if(bloodtotal >= level)
+			add_ability(ptype)
+
+	if(!subclass)
+		return
+	subclass.add_subclass_ability(src)
+	check_full_power_upgrade()
+
+	if(announce)
+		announce_new_power(old_powers)
+
+/datum/antagonist/vampire/proc/check_full_power_upgrade()
+	if(subclass?.full_power_override || (length(drained_humans) >= FULLPOWER_DRAINED_REQUIREMENT && bloodtotal >= FULLPOWER_BLOODTOTAL_REQUIREMENT))
+		subclass?.add_full_power_abilities(src)
+
+/datum/antagonist/vampire/proc/announce_new_power(list/old_powers)
+	for(var/power in powers)
+		if(power in old_powers)
+			continue
+		if(istype(power, /datum/action/cooldown/spell))
+			var/datum/action/cooldown/spell/spell = power
+			to_chat(owner.current, span_boldnotice("Unlocked: [spell.name] - [spell.desc]"))
+		else if(istype(power, /datum/vampire_passive))
+			var/datum/vampire_passive/passive = power
+			to_chat(owner.current, span_boldnotice("[passive.gain_desc]"))
+
+/datum/antagonist/vampire/proc/check_sun()
+	var/ax = owner.current.x
+	var/ay = owner.current.y
+
+	for(var/i in 1 to 20)
+		ax += SSsun.dx
+		ay += SSsun.dy
+
+		var/turf/turf_loc = locate(round(ax, 0.5), round(ay, 0.5), owner.current.z)
+		if(!turf_loc)
+			return
+		if(turf_loc.x == 1 || turf_loc.x == world.maxx || turf_loc.y == 1 || turf_loc.y == world.maxy)
+			break
+		if(turf_loc.density)
+			return
+
+	if(bloodusable >= 10)
+		to_chat(owner.current, span_userdanger("The starlight saps your strength, you should get out of the starlight!"))
+		subtract_usable_blood(10)
+		vamp_burn(10)
+	else
+		to_chat(owner.current, span_userdanger("Your body is turning to ash, get out of the starlight NOW!"))
+		owner.current.adjustCloneLoss(10)
+		vamp_burn(85)
+		if(owner.current.getCloneLoss() >= 100)
+			owner.current.dust()
+
+/datum/antagonist/vampire/proc/handle_vampire()
+	if(owner.current.hud_used)
+		var/datum/hud/hud = owner.current.hud_used
+		if(!hud.vampire_blood_display)
+			hud.vampire_blood_display = new /atom/movable/screen()
+			hud.vampire_blood_display.name = "Usable Blood"
+			hud.vampire_blood_display.icon_state = "blood_display"
+			hud.vampire_blood_display.screen_loc = "WEST:6,CENTER-1:15"
+			hud.static_inventory += hud.vampire_blood_display
+			hud.show_hud(hud.hud_version)
+		hud.vampire_blood_display.maptext = "<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font face='Small Fonts' color='#ce0202'>[bloodusable]</font></div>"
+
+	handle_vampire_cloak()
+	if(isspaceturf(get_turf(owner.current)))
+		check_sun()
+	if(istype(get_area(owner.current), /area/station/service/chapel) && !get_ability(/datum/vampire_passive/full) && bloodtotal > 0)
+		vamp_burn(7)
+	nullified = max(0, nullified - 2)
+
+/datum/antagonist/vampire/proc/handle_vampire_cloak()
+	if(!ishuman(owner.current))
+		owner.current.alpha = 255
+		return
+
+	var/mob/living/carbon/human/human_owner = owner.current
+	var/turf/turf_loc = get_turf(human_owner)
+	if(!turf_loc)
+		return
+
+	var/light_available = turf_loc.get_lumcount() * 10
+
+	if(!iscloaking || human_owner.on_fire)
+		human_owner.alpha = 255
+		REMOVE_TRAIT(human_owner, TRAIT_GOTTAGONOTSOFAST, VAMPIRE_TRAIT)
+		return
+
+	if(light_available <= 2)
+		human_owner.alpha = 40
+		ADD_TRAIT(human_owner, TRAIT_GOTTAGONOTSOFAST, VAMPIRE_TRAIT)
+		return
+
+	REMOVE_TRAIT(human_owner, TRAIT_GOTTAGONOTSOFAST, VAMPIRE_TRAIT)
+	human_owner.alpha = 200
+
+/datum/antagonist/vampire/proc/adjust_blood(mob/living/carbon/victim, blood_amount = 0)
+	if(victim)
+		var/unique_suck_id = REF(victim)
+		if(!(unique_suck_id in drained_humans))
+			drained_humans[unique_suck_id] = 0
+		if(drained_humans[unique_suck_id] >= BLOOD_DRAIN_LIMIT)
+			return
+		drained_humans[unique_suck_id] += blood_amount
+
+	bloodtotal += blood_amount
+	bloodusable += blood_amount
+	check_vampire_upgrade(TRUE)
+
+	for(var/datum/action/cooldown/spell/spell in powers)
+		spell.build_all_button_icons()
+
+/datum/antagonist/vampire/proc/subtract_usable_blood(blood_amount)
+	bloodusable = clamp(bloodusable - blood_amount, 0, bloodtotal)
+	for(var/datum/action/cooldown/spell/spell in powers)
+		spell.build_all_button_icons()
+
+/datum/antagonist/vampire/proc/vamp_burn(burn_chance)
+	if(prob(burn_chance) && owner.current.health >= 50)
+		switch(owner.current.health)
+			if(75 to 100)
+				to_chat(owner.current, span_warning("Your skin flakes away..."))
+			if(50 to 75)
+				to_chat(owner.current, span_warning("Your skin sizzles!"))
+		owner.current.adjustFireLoss(3)
+	else if(owner.current.health < 50)
+		if(!owner.current.on_fire)
+			to_chat(owner.current, span_danger("Your skin catches fire!"))
+			owner.current.emote("scream")
+		else
+			to_chat(owner.current, span_danger("You continue to burn!"))
+		owner.current.adjust_fire_stacks(5)
+		owner.current.ignite_mob()
+
+/datum/antagonist/vampire/vv_edit_var(var_name, var_value)
+	. = ..()
+	check_vampire_upgrade(TRUE)
+
+/datum/antagonist/vampire/forge_objectives()
+	. = ..()
+
+/datum/antagonist/vampire/greet()
+	var/list/messages = list()
+	SEND_SOUND(owner.current, sound('sound/ambience/antag/vampalert.ogg'))
+	messages.Add("[span_danger("You are a Vampire!")]<br>")
+	messages.Add("To bite someone, target the head and use harm intent with an empty hand. Drink blood to gain new powers. \
+		You are weak to holy things, starlight, and fire. Don't go into space and avoid the Chaplain, the chapel, and especially Holy Water.")
+	return messages
+
+/datum/antagonist/vampire/antag_event_resource_cost()
+	return list(ASSIGNMENT_SECURITY = 1 + bloodtotal / 500)
