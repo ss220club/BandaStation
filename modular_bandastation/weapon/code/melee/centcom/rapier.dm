@@ -141,31 +141,7 @@
 	worn_icon_state = "tanto_sheath"
 	inhand_icon_state = "tanto_sheath"
 	storage_type = /datum/storage/centcom_tanto_belt
-
-/obj/item/storage/belt/sheath/tanto/examine(mob/user)
-	. = ..()
-	if(length(contents))
-		. += span_notice("Нажмите Alt+ЛКМ, чтобы быстро достать клинок.")
-
-/obj/item/storage/belt/sheath/tanto/click_alt(mob/user)
-	if(length(contents))
-		var/obj/item/I = contents[1]
-		user.visible_message(span_notice("[user] достаёт [I] из [src]."), span_notice("Вы достаёте [I] из [src]."))
-		user.put_in_hands(I)
-		update_appearance()
-	else
-		balloon_alert(user, "it's empty!")
-	return CLICK_ACTION_SUCCESS
-
-/obj/item/storage/belt/sheath/tanto/update_icon_state()
-	icon_state = initial(icon_state)
-	inhand_icon_state = initial(inhand_icon_state)
-	worn_icon_state = initial(worn_icon_state)
-	if(contents.len)
-		icon_state += "-sabre"
-		inhand_icon_state += "-sabre"
-		worn_icon_state += "-sabre"
-	return ..()
+	desc_controls = "Нажмите Alt+ЛКМ, чтобы быстро достать клинок."
 
 /obj/item/storage/belt/sheath/tanto/PopulateContents()
 	new /obj/item/melee/sabre/centcom_tanto(src)
