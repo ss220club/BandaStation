@@ -1,4 +1,3 @@
-
 /// Not actually hitscan but close as we get without actual hitscan.
 #define MOVES_HITSCAN -1
 /// How many pixels to move the muzzle flash up so your character doesn't look like they're shitting out lasers.
@@ -272,6 +271,11 @@
 	/// If true directly targeted turfs can be hit
 	var/can_hit_turfs = FALSE
 
+	//BANDASTATION EDIT START: transitions between Z-levels
+	var/cross_z = FALSE
+	var/cross_z_target = 0
+	//BANDASTATION EDIT END
+
 /obj/projectile/Initialize(mapload)
 	. = ..()
 	maximum_range = range
@@ -396,6 +400,15 @@
 		reagent_note = "REAGENTS: [pretty_string_from_reagent_list(reagents.reagent_list)]"
 
 	if(ismob(firer) && !do_not_log)
+		if(isliving(living_target))
+			var/mob/living/L = living_target
+			if(isliving(firer))
+				L.vars["quest_killer"] = firer
+				var/dist = get_dist(firer, L)
+				L.quest_kill_distance = dist
+				if(dist > L.quest_max_kill_distance)
+					L.quest_max_kill_distance = dist
+
 		log_combat(firer, living_target, "shot", src, reagent_note)
 		return BULLET_ACT_HIT
 
@@ -997,6 +1010,11 @@
 			// Move to the next tile
 			step_towards(src, new_turf)
 			SEND_SIGNAL(src, COMSIG_PROJECTILE_MOVE_PROCESS_STEP)
+
+			// BANDASTATION EDIT START: Transitions between Z-levels
+			if(try_cross_z_level())
+				new_turf = loc
+			// BANDASTATION EDIT END
 			// We hit something and got deleted, stop the loop
 			if (QDELETED(src))
 				return movements_done
@@ -1251,9 +1269,24 @@
 	free_hitscan_forceMove = TRUE
 	forceMove(source_loc)
 	starting = source_loc
-	pixel_x = source.pixel_x - source.base_pixel_x
-	pixel_y = source.pixel_y - source.base_pixel_y
+	pixel_x = source.pixel_x
+	pixel_y = source.pixel_y
 	original = target
+
+	// BANDASTATION EDIT START: Immediate transition from lower Z to upper Z
+	if(target_loc && target_loc.z > source_loc.z)
+		var/turf/upper_turf = locate(source_loc.x, source_loc.y, target_loc.z)
+		if(istype(upper_turf))
+			forceMove(upper_turf)
+			source_loc = upper_turf
+			starting = upper_turf
+	// Upper Z -> lower Z transition
+	if(target_loc && target_loc.z < source_loc.z)
+		var/turf/cross_check_turf = locate(target_loc.x, target_loc.y, source_loc.z)
+		if(istype(cross_check_turf) && is_valid_cross_z_target(cross_check_turf))
+			cross_z = TRUE
+			cross_z_target = target_loc.z
+	// BANDASTATION EDIT END
 
 	// Trim off excess pixel_x/y by converting them into turf offset
 	if (abs(pixel_x) > ICON_SIZE_X / 2)
@@ -1339,7 +1372,7 @@
 
 	var/ox = round(screenview[1] * 0.5) - user.client.pixel_x //"origin" x
 	var/oy = round(screenview[2] * 0.5) - user.client.pixel_y //"origin" y
-	angle = ATAN2(ty - oy, tx - ox)
+	angle = ATAN2(tx - oy, ty - ox)
 	return list(angle, p_x, p_y)
 
 /obj/projectile/experience_pressure_difference()
@@ -1428,3 +1461,64 @@
 		new_embed = new new_embed()
 
 	embed_data = new_embed
+
+//BANDASTATION EDIT START: Transitions between Z-levels
+/obj/projectile/proc/is_valid_cross_z_target(turf/T)
+	if(!T)
+		return FALSE
+	if(isopenspaceturf(T))
+		return TRUE
+	for(var/direction in list(NORTH, SOUTH, EAST, WEST))
+		var/turf/check_turf = get_step(T, direction)
+		if(isopenspaceturf(check_turf))
+			return TRUE
+	return FALSE
+
+/obj/projectile/proc/try_cross_z_level()
+	if(!cross_z || !cross_z_target)
+		return FALSE
+	if(!isturf(loc) || !isopenspaceturf(loc))
+		return FALSE
+	var/turf/target_turf = locate(loc.x, loc.y, cross_z_target)
+	if(!istype(target_turf))
+		return FALSE
+	if(target_turf == loc)
+		return FALSE
+	forceMove(target_turf)
+	cross_z = FALSE
+	cross_z_target = 0
+	return TRUE
+
+/obj/projectile/proc/is_near_z_open_space(turf/T)
+	if(!T)
+		return FALSE
+	if(isopenspaceturf(T))
+		return TRUE
+	for(var/direction in list(NORTH, SOUTH, EAST, WEST))
+		var/turf/check_turf = get_step(T, direction)
+		if(isopenspaceturf(check_turf))
+			return TRUE
+	return FALSE
+
+/obj/projectile/proc/is_valid_z_transition(turf/source_turf, turf/target_turf)
+	if(!source_turf || !target_turf)
+		return FALSE
+	if(source_turf.z == target_turf.z)
+		return TRUE
+	if(source_turf.z < target_turf.z)
+		var/turf/source_upper = locate(source_turf.x, source_turf.y, target_turf.z)
+		if(!istype(source_upper))
+			return FALSE
+		if(!is_near_z_open_space(source_upper))
+			return FALSE
+		if(!is_near_z_open_space(target_turf))
+			return FALSE
+		return TRUE
+	if(!is_near_z_open_space(source_turf))
+		return FALSE
+	var/turf/target_upper = locate(target_turf.x, target_turf.y, source_turf.z)
+	if(!istype(target_upper))
+		return FALSE
+	if(!is_near_z_open_space(target_upper))
+		return FALSE
+	return TRUE //BANDASTATION EDIT END
