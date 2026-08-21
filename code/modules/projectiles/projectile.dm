@@ -1261,8 +1261,8 @@
 	free_hitscan_forceMove = TRUE
 	forceMove(source_loc)
 	starting = source_loc
-	pixel_x = source.pixel_x
-	pixel_y = source.pixel_y
+	pixel_x = source.pixel_x - source.base_pixel_x
+	pixel_y = source.pixel_y - source.base_pixel_y
 	original = target
 
 	// BANDASTATION EDIT START: Immediate transition from lower Z to upper Z
@@ -1364,7 +1364,7 @@
 
 	var/ox = round(screenview[1] * 0.5) - user.client.pixel_x //"origin" x
 	var/oy = round(screenview[2] * 0.5) - user.client.pixel_y //"origin" y
-	angle = ATAN2(tx - oy, ty - ox)
+	angle = ATAN2(ty - oy, tx - ox)
 	return list(angle, p_x, p_y)
 
 /obj/projectile/experience_pressure_difference()
@@ -1460,7 +1460,7 @@
 		return FALSE
 	if(isopenspaceturf(T))
 		return TRUE
-	for(var/direction in list(NORTH, SOUTH, EAST, WEST))
+	for(var/direction in GLOB.cardinals)
 		var/turf/check_turf = get_step(T, direction)
 		if(isopenspaceturf(check_turf))
 			return TRUE
@@ -1486,7 +1486,7 @@
 		return FALSE
 	if(isopenspaceturf(T))
 		return TRUE
-	for(var/direction in list(NORTH, SOUTH, EAST, WEST))
+	for(var/direction in GLOB.cardinals)
 		var/turf/check_turf = get_step(T, direction)
 		if(isopenspaceturf(check_turf))
 			return TRUE
