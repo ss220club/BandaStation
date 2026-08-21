@@ -33,11 +33,11 @@
 	inhand_icon_state = "centcom_tanto"
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/righthand.dmi'
-	force = 25
+	force = 17
 	hitsound = 'sound/items/weapons/bladeslice.ogg'
 	demolition_mod = 1
-	block_chance = 80
-	armour_penetration = 100
+	block_chance = 50
+	armour_penetration = 35
 
 /obj/item/melee/sabre/centcom_tanto/Initialize(mapload)
 	. = ..()
@@ -153,7 +153,7 @@
 	. = ..()
 	set_holdable(/obj/item/melee/sabre/centcom_tanto)
 
-/obj/item/storage/belt/centcom_tanto
+/obj/item/storage/belt/sheath/tanto
 	name = "fleet officer's tanto sheath's"
 	desc = "Матово-черные двойные ножны для танто, перевязанные серебряной нитью. Сконструированы так, что оба танто можно достать одновременно за доли секунды"
 	icon = 'modular_bandastation/weapon/icons/melee/sheath.dmi'
@@ -165,12 +165,12 @@
 	inhand_icon_state = "tanto_sheath"
 	storage_type = /datum/storage/centcom_tanto_belt
 
-/obj/item/storage/belt/centcom_tanto/examine(mob/user)
+/obj/item/storage/belt/sheath/tanto/examine(mob/user)
 	. = ..()
 	if(length(contents))
 		. += span_notice("Нажмите Alt+ЛКМ, чтобы быстро достать клинок.")
 
-/obj/item/storage/belt/centcom_tanto/click_alt(mob/user)
+/obj/item/storage/belt/sheath/tanto/click_alt(mob/user)
 	if(length(contents))
 		var/obj/item/I = contents[1]
 		user.visible_message(span_notice("[user] достаёт [I] из [src]."), span_notice("Вы достаёте [I] из [src]."))
@@ -180,7 +180,7 @@
 		balloon_alert(user, "it's empty!")
 	return CLICK_ACTION_SUCCESS
 
-/obj/item/storage/belt/centcom_tanto/update_icon_state()
+/obj/item/storage/belt/sheath/tanto/update_icon_state()
 	icon_state = initial(icon_state)
 	inhand_icon_state = initial(inhand_icon_state)
 	worn_icon_state = initial(worn_icon_state)
@@ -190,5 +190,5 @@
 		worn_icon_state += "-sabre"
 	return ..()
 
-/obj/item/storage/belt/centcom_tanto/PopulateContents()
+/obj/item/storage/belt/sheath/tanto/PopulateContents()
 	new /obj/item/melee/sabre/centcom_tanto(src)
