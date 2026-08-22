@@ -1,39 +1,32 @@
 /obj/item/melee/energy/ekatana
-	name = "Тактическая катана 'Багровый порез'"
-	desc = "Энергетическая Катана, созданная при помощи новых технологий Синдиката. Она способна наносить урон, а также оглушать противника при нанесении удара."
+	name = "energy katana"
+	desc = "test"
 	icon = 'icons/bandastation/obj/weapons/transforming_energy.dmi'
 	icon_state = "ekatana"
-	base_icon_state = "ekatana_on"
-	icon_angle = 35
-	light_system = OVERLAY_LIGHT
-	light_range = 2
-	light_color = LIGHT_COLOR_LIGHT_CYAN
-	force = 0
-	armour_penetration = 70
-	block_chance = 60
-	throwforce = 0
-	w_class = WEIGHT_CLASS_NORMAL
-	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
-	hitsound = 'modular_bandastation/weapon/sound/melee/tsf_katana_hit.ogg'
-	pickup_sound = 'modular_bandastation/weapon/sound/melee/tsf_katana_unsheath.ogg'
-	drop_sound = 'modular_bandastation/weapon/sound/melee/tsf_katana_sheath.ogg'
-	block_sound = 'modular_bandastation/weapon/sound/melee/tsf_katana_block.ogg'
-	attack_verb_continuous = list("attacks", "slashes", "slices", "tears", "lacerates", "rips", "dices", "cuts")
-	attack_verb_simple = list("attack", "slash", "slice", "tear", "lacerate", "rip", "dice", "cut")
-	sharpness = NONE
-	active_force = 40
-	active_throwforce = 30
-	active_throw_speed = 4
-	active_sharpness = SHARP_EDGED
-	active_w_class = WEIGHT_CLASS_HUGE
+	inhand_icon_state = "e_sword"
+	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+	var/attack_cooldown = 2 SECONDS
+	COOLDOWN_DECLARE(next_attack)
 
-	var/next_strike = 0
+/obj/item/melee/energy/ekatana/make_transformable()
+	active_force = 35
+	return ..()
 
-/obj/item/melee/energy/ekatana/attack(mob/living/target, mob/living/user, params)
-	if(world.time < next_strike)
-		return FALSE
-
-	next_strike = world.time + 15
+/obj/item/melee/energy/ekatana/pre_attack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
-	if(. && target && HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
-		target.Stun(5)
+	if(. || !HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) || !isliving(target))
+		return .
+	if(!COOLDOWN_FINISHED(src, next_attack))
+		balloon_alert(user, "перезаряжается")
+		return TRUE
+
+/obj/item/melee/energy/ekatana/afterattack(atom/target, mob/user, list/modifiers)
+	. = ..()
+	if(!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) || !isliving(target) || !COOLDOWN_FINISHED(src, next_attack))
+		return
+
+	var/mob/living/living_target = target
+	living_target.Stun(1.5 SECONDS)
+	COOLDOWN_START(src, next_attack, attack_cooldown)
+

@@ -1,6 +1,7 @@
 #include "_weapon.dm"
 
 // MARK: Melee
+#include "code/melee/ekatana.dm"
 #include "code/melee/baton.dm"
 #include "code/melee/sledgehammer.dm"
 #include "code/melee/tsf_katana.dm"
