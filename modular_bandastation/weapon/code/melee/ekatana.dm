@@ -3,9 +3,9 @@
 	desc = "test"
 	icon = 'icons/bandastation/obj/weapons/transforming_energy.dmi'
 	icon_state = "ekatana"
-	inhand_icon_state = "e_sword"
-	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+	inhand_icon_state = "ekatana"
+	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/righthand.dmi'
 	var/attack_cooldown = 2 SECONDS
 	COOLDOWN_DECLARE(next_attack)
 
