@@ -1,9 +1,0 @@
-# MARK: Redspace
-["demon soldier"]
-nominative = "демон-солдат"
-genitive = "демона-солдата"
-dative = "демону-солдату"
-accusative = "демона-солдата"
-instrumental = "демоном-солдатом"
-prepositional = "демоне-солдате"
-gender = "male"

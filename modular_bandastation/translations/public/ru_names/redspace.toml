@@ -1,0 +1,54 @@
+# MARK: Redspace
+["redspace disturbance sensor"]
+nominative = "датчик возмущения редспейса"
+genitive = "датчика возмущения редспейса"
+dative = "датчику возмущения редспейса"
+accusative = "датчик возмущения редспейса"
+instrumental = "датчиком возмущения редспейса"
+prepositional = "датчике возмущения редспейса"
+gender = "male"
+
+["redspace disturbance counter"]
+nominative = "счётчик возмущения редспейса"
+genitive = "счётчика возмущения редспейса"
+dative = "счётчику возмущения редспейса"
+accusative = "счётчик возмущения редспейса"
+instrumental = "счётчиком возмущения редспейса"
+prepositional = "счётчике возмущения редспейса"
+gender = "male"
+
+["redspace disturbance console"]
+nominative = "консоль возмущения редспейса"
+genitive = "консоли возмущения редспейса"
+dative = "консоли возмущения редспейса"
+accusative = "консоль возмущения редспейса"
+instrumental = "консолью возмущения редспейса"
+prepositional = "консоли возмущения редспейса"
+gender = "female"
+
+["demonic redspace crystal"]
+nominative = "демонический кристалл редспейса"
+genitive = "демонического кристалла редспейса"
+dative = "демоническому кристаллу редспейса"
+accusative = "демонический кристалл редспейса"
+instrumental = "демоническим кристаллом редспейса"
+prepositional = "демоническом кристалле редспейса"
+gender = "male"
+
+["ranged demon"]
+nominative = "демон-стрелок"
+genitive = "демона-стрелка"
+dative = "демону-стрелку"
+accusative = "демона-стрелка"
+instrumental = "демоном-стрелком"
+prepositional = "демоне-стрелке"
+gender = "male"
+
+["demon soldier"]
+nominative = "демон-солдат"
+genitive = "демона-солдата"
+dative = "демону-солдату"
+accusative = "демона-солдата"
+instrumental = "демоном-солдатом"
+prepositional = "демоне-солдате"
+gender = "male"
