@@ -5,7 +5,7 @@
 	mask = null
 	accessory = /obj/item/clothing/accessory/holster/tacticool/ert_gp93r
 	l_pocket = null
-	head = /obj/item/clothing/head/helmet/space/beret/soo
+	head = /obj/item/clothing/head/beret/centcom/soo
 	neck = /obj/item/clothing/neck/cloak/centcom/gr_cape
 	uniform = /obj/item/clothing/under/rank/centcom/gr_under
 	gloves = /obj/item/clothing/gloves/combat

@@ -23,7 +23,7 @@
 	ears = /obj/item/radio/headset/headset_cent/commander
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/soo
 	gloves = /obj/item/clothing/gloves/combat
-	head = /obj/item/clothing/head/helmet/space/beret/soo
+	head = /obj/item/clothing/head/beret/centcom/soo
 	mask = /obj/item/cigarette/cigar/havana
 	shoes = /obj/item/clothing/shoes/jackboots/centcom
 	r_pocket = /obj/item/lighter
@@ -77,7 +77,7 @@
 	ears = /obj/item/radio/headset/headset_cent/commander
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/centcom_officer
 	gloves = /obj/item/clothing/gloves/combat/centcom
-	head = /obj/item/clothing/head/helmet/space/beret
+	head = /obj/item/clothing/head/beret/centcom
 	mask = /obj/item/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/laceup
 	r_pocket = /obj/item/modular_computer/pda/heads/centcom
@@ -99,7 +99,7 @@
 	ears = /obj/item/radio/headset/headset_cent/commander
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/centcom_officer
 	gloves = /obj/item/clothing/gloves/combat/centcom
-	head = /obj/item/clothing/head/helmet/space/beret
+	head = /obj/item/clothing/head/beret/centcom
 	mask = /obj/item/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/jackboots/centcom
 	r_pocket = /obj/item/modular_computer/pda/heads/centcom
