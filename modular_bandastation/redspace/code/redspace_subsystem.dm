@@ -272,7 +272,9 @@ SUBSYSTEM_DEF(redspace)
 		prune_event_cell(zone_key)
 
 /datum/controller/subsystem/redspace/proc/is_supported_z(z_level)
-	return z_level && z_level in station_z_levels
+	if(!z_level)
+		return FALSE
+	return z_level in station_z_levels
 
 /datum/controller/subsystem/redspace/proc/clear_event_wake_timer()
 	if(event_wake_timer_id != TIMER_ID_NULL)
@@ -1124,7 +1126,9 @@ SUBSYSTEM_DEF(redspace)
 		var/datum/redspace_field_cell/cell = field_cells[cell_key]
 		if(!cell || length(cell.listeners) || !isnull(cell.forced_value) || !isnull(cell.event_override_value) || cell.local_delta)
 			continue
-		if(cell in dirty_cells || cell in currentrun)
+		if(cell in dirty_cells)
+			continue
+		if(cell in currentrun)
 			continue
 		var/source_present = cell_has_active_source(cell)
 		var/datum/redspace_event_budget/budget = event_budgets[cell.key]

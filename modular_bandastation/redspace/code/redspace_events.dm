@@ -58,14 +58,15 @@
 	return FALSE
 
 /datum/redspace_event/Destroy()
-	if(SSredspace && src in SSredspace.active_events)
-		var/zone_key = budget_zone_key
-		SSredspace.active_events -= src
-		SSredspace.release_event_budget(src)
-		SSredspace.notify_event_finished(src, event_target, "событие уничтожено")
-		SSredspace.cleanup_event_budget(zone_key)
-		SSredspace.prune_event_cell(zone_key)
-		SSredspace.wake()
+	if(SSredspace)
+		if(src in SSredspace.active_events)
+			var/zone_key = budget_zone_key
+			SSredspace.active_events -= src
+			SSredspace.release_event_budget(src)
+			SSredspace.notify_event_finished(src, event_target, "событие уничтожено")
+			SSredspace.cleanup_event_budget(zone_key)
+			SSredspace.prune_event_cell(zone_key)
+			SSredspace.wake()
 	return ..()
 
 /// Abstract event family for content that leaves a turf, object or mob behind.
@@ -462,7 +463,7 @@
 			continue
 		if(istype(candidate, /mob/living/basic/demon))
 			continue
-		if(FACTION_HELL in candidate.faction)
+		if(candidate.has_faction(FACTION_HELL))
 			continue
 		candidates += candidate
 

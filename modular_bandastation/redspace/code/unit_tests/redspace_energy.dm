@@ -11,7 +11,7 @@
 		return Fail("Redspace demons must use the lesser demon sprite")
 	if(!istype(test_mob.ai_controller, /datum/ai_controller/basic_controller/simple/simple_hostile))
 		return Fail("Redspace demons must use the active hostile AI controller")
-	if(!(FACTION_HELL in test_mob.faction))
+	if(!test_mob.has_faction(FACTION_HELL))
 		return Fail("Redspace demons must retain the inherited Hell faction")
 	if(energy.max_energy != 100 || energy.current_energy != 100)
 		return Fail("Redspace demons must start with a full configurable energy reserve")

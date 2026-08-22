@@ -259,7 +259,9 @@
 	return TRUE
 
 /datum/component/redspace_energy/proc/track_action(datum/action/action)
-	if(!action || QDELETED(action) || action in tracked_actions)
+	if(!action || QDELETED(action))
+		return
+	if(action in tracked_actions)
 		return
 	tracked_actions += action
 	RegisterSignal(action, COMSIG_ACTION_TRIGGER, PROC_REF(on_action_trigger))
