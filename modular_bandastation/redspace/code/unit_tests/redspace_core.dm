@@ -44,8 +44,8 @@
 		return Fail("Calm profile must be sparse and use only the harmless echo event")
 	if(!disturbance_profile.get_event_weight("local_distortion") || disturbance_profile.get_event_weight("storm_pulse"))
 		return Fail("Disturbance profile must keep storm events out of the low range")
-	if(storm_profile.attempt_probability <= disturbance_profile.attempt_probability || storm_profile.get_event_weight("storm_pulse") <= 0)
-		return Fail("Storm profile must attempt events more often and allow the storm pulse")
+	if(storm_profile.attempt_probability <= disturbance_profile.attempt_probability || storm_profile.get_event_weight("storm_pulse") <= 0 || storm_profile.get_event_weight("demonic_crystal") <= 0 || storm_profile.get_event_weight("demonic_necropolis") <= storm_profile.get_event_weight("demonic_crystal"))
+		return Fail("Storm profile must attempt events more often and favor persistent turf spawns over crystals")
 	qdel(profile)
 
 	var/datum/redspace_field_cell/cell = new(1, 0, 0, "core_test", 0)
@@ -110,10 +110,20 @@
 	var/datum/redspace_event/spawn/turf/turf_spawn = new
 	var/datum/redspace_event/spawn/object/object_spawn = new
 	var/datum/redspace_event/spawn/mob/mob_spawn = new
+	var/datum/redspace_event/spawn/object/demonic_crystal/crystal_spawn = new
+	var/datum/redspace_event/spawn/turf/demonic_necropolis/necropolis_spawn = new
 	if(turf_spawn.event_category != REDSPACE_EVENT_CATEGORY_TURF_SPAWN || object_spawn.event_category != REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN || mob_spawn.event_category != REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
 		return Fail("Spawn event families must expose separate turf, object and mob categories")
 	if(!turf_spawn.uses_spawn_budget() || turf_spawn.get_spawn_count() != 1 || turf_spawn.get_spawn_budget_cost() != 1)
 		return Fail("Spawn event families must expose independent spawn budget metadata")
+	if(crystal_spawn.event_id != "demonic_crystal" || crystal_spawn.get_spawn_category() != REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN || crystal_spawn.get_spawn_count() != 1)
+		return Fail("The demonic crystal must be registered as a persistent object spawn")
+	if(!SSredspace || SSredspace.event_registry["demonic_crystal"] != /datum/redspace_event/spawn/object/demonic_crystal)
+		return Fail("The demonic crystal spawn must be registered in SSredspace")
+	if(necropolis_spawn.event_id != "demonic_necropolis" || necropolis_spawn.get_spawn_category() != REDSPACE_EVENT_CATEGORY_TURF_SPAWN || necropolis_spawn.get_spawn_count() != 1 || necropolis_spawn.spawn_policy_id != "demonic_necropolis")
+		return Fail("The demonic necropolis must be registered as a persistent turf spawn")
+	if(!SSredspace || SSredspace.event_registry["demonic_necropolis"] != /datum/redspace_event/spawn/turf/demonic_necropolis)
+		return Fail("The demonic necropolis spawn must be registered in SSredspace")
 
 	var/datum/redspace_event/spawn/turf/too_many_turfs = new
 	too_many_turfs.spawn_count = REDSPACE_SPAWN_BUDGET_MAX_TURFS + 1
@@ -137,6 +147,8 @@
 	qdel(turf_spawn)
 	qdel(object_spawn)
 	qdel(mob_spawn)
+	qdel(crystal_spawn)
+	qdel(necropolis_spawn)
 	qdel(budget_safe)
 	qdel(budget_storm)
 	qdel(budget)

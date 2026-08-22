@@ -104,6 +104,8 @@ SUBSYSTEM_DEF(redspace)
 	register_event_type(/datum/redspace_event/calm_echo)
 	register_event_type(/datum/redspace_event/local_distortion)
 	register_event_type(/datum/redspace_event/storm_pulse)
+	register_spawn_event_type(/datum/redspace_event/spawn/object/demonic_crystal)
+	register_spawn_event_type(/datum/redspace_event/spawn/turf/demonic_necropolis)
 
 	// There is no work until a source, listener, or test changes a cell.
 	can_fire = FALSE

@@ -59,6 +59,8 @@
 		"local_distortion",
 		"storm_pulse",
 		"debug_lightning",
+		"demonic_crystal",
+		"demonic_necropolis",
 	)
 
 /datum/redspace_profile/demonic/New()
@@ -83,7 +85,11 @@
 		20 SECONDS,
 		40 SECONDS,
 		60,
-		list("storm_pulse" = 3),
+		list(
+			"storm_pulse" = 3,
+			"demonic_crystal" = 1,
+			"demonic_necropolis" = 2,
+		),
 	)
 
 /datum/redspace_profile/demonic/Destroy()

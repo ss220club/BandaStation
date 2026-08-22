@@ -110,7 +110,11 @@
 
 /datum/redspace_event/spawn/proc/on_spawned_atom_deleted(atom/deleted_atom)
 	SIGNAL_HANDLER
+	UnregisterSignal(deleted_atom, COMSIG_QDELETING, PROC_REF(on_spawned_atom_deleted))
 	spawned_atoms -= deleted_atom
+	if(length(spawned_atoms) || !continues_after_start || !SSredspace || !(src in SSredspace.active_events))
+		return
+	SSredspace.finish_registered_event(src, event_target, "оставленное содержимое редспейса исчезло")
 
 /datum/redspace_event/spawn/Destroy()
 	for(var/atom/spawned_atom as anything in spawned_atoms)
