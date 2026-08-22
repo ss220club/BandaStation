@@ -7,5 +7,5 @@
 /datum/uplink_item/conspicous_weapons/ekatana
 	name = "Тактическая катана 'Багровый порез'"
 	desc = "Энергетическая Катана, созданная при помощи новых технологий Синдиката. Она способна наносить урон, а также оглушать противника при нанесении удара."
-	item = /obj/item/melee/ekatana
+	item = /obj/item/melee/energy/ekatana
 	cost = 15

@@ -90,8 +90,8 @@
 #include "translations/_translations.dme"
 #include "tts/_tts.dme"
 #include "turfs/_turfs.dme"
-#include "uplink_items/_uplink_items.dme"
 #include "weapon/_weapon.dme"
+#include "uplink_items/_uplink_items.dme"
 #include "world_topics/_world_topics.dme"
 // --- MODULES END --- //
 
