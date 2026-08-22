@@ -65,6 +65,7 @@
 	if(get_dist(get_turf(src), get_turf(target)) > siphon_range)
 		return FALSE
 	forceMove(target)
+	playsound(target, 'sound/effects/youarehacked.ogg', 100, FALSE)
 	COOLDOWN_START(src, attach_cooldown, 10 MINUTES)
 	for(var/obj/item/modular_computer/pda/pda in target.get_all_contents())
 		var/datum/computer_file/program/messenger/messenger_app = locate() in pda.stored_files
