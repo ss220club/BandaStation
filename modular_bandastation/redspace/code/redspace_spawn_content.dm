@@ -2,7 +2,7 @@
 /obj/projectile/magic/lesser_fireball
 	name = "bolt of fireball"
 	icon_state = "fireball"
-	damage = 14
+	damage = 20
 	damage_type = BURN
 	/// Chance to ignite a living target on hit.
 	var/ignite_chance = 30
