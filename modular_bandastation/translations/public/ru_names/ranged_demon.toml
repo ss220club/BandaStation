@@ -1,0 +1,9 @@
+# MARK: Redspace
+["ranged demon"]
+nominative = "демон-стрелок"
+genitive = "демона-стрелка"
+dative = "демону-стрелку"
+accusative = "демона-стрелка"
+instrumental = "демоном-стрелком"
+prepositional = "демоне-стрелке"
+gender = "male"

@@ -62,6 +62,8 @@
 		"demonic_crystal",
 		"demonic_necropolis",
 		"demonic_lesser_demon",
+		"demonic_ranged_demon",
+		"demonic_soldier",
 	)
 
 /datum/redspace_profile/demonic/New()
@@ -91,6 +93,8 @@
 			"demonic_crystal" = 1,
 			"demonic_necropolis" = 2,
 			"demonic_lesser_demon" = 2,
+			"demonic_ranged_demon" = 2,
+			"demonic_soldier" = 1,
 		),
 	)
 

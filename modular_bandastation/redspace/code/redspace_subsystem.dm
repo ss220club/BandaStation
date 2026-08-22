@@ -107,6 +107,8 @@ SUBSYSTEM_DEF(redspace)
 	register_spawn_event_type(/datum/redspace_event/spawn/object/demonic_crystal)
 	register_spawn_event_type(/datum/redspace_event/spawn/turf/demonic_necropolis)
 	register_spawn_event_type(/datum/redspace_event/spawn/mob/demonic_lesser_demon)
+	register_spawn_event_type(/datum/redspace_event/spawn/mob/demonic_lesser_demon/ranged)
+	register_spawn_event_type(/datum/redspace_event/spawn/mob/demonic_lesser_demon/soldier)
 
 	// There is no work until a source, listener, or test changes a cell.
 	can_fire = FALSE

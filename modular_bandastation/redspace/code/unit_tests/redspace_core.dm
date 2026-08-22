@@ -31,7 +31,7 @@
 		return Fail("Event-only invasion must not start an automatic event")
 
 	var/datum/redspace_profile/demonic/profile = new
-	if(profile.profile_id != REDSPACE_PROFILE_DEMONIC || !profile.is_event_allowed("storm_pulse") || profile.is_event_allowed("unknown_event"))
+	if(profile.profile_id != REDSPACE_PROFILE_DEMONIC || !profile.is_event_allowed("storm_pulse") || !profile.is_event_allowed("demonic_ranged_demon") || !profile.is_event_allowed("demonic_soldier") || profile.is_event_allowed("unknown_event"))
 		return Fail("The demonic profile must expose only its registered event set")
 	var/datum/redspace_event_profile/calm_profile = profile.get_event_profile(REDSPACE_STATE_CALM)
 	var/datum/redspace_event_profile/disturbance_profile = profile.get_event_profile(REDSPACE_STATE_DISTURBANCE)
@@ -44,7 +44,7 @@
 		return Fail("Calm profile must be sparse and use only the harmless echo event")
 	if(!disturbance_profile.get_event_weight("local_distortion") || disturbance_profile.get_event_weight("storm_pulse"))
 		return Fail("Disturbance profile must keep storm events out of the low range")
-	if(storm_profile.attempt_probability <= disturbance_profile.attempt_probability || storm_profile.get_event_weight("storm_pulse") <= 0 || storm_profile.get_event_weight("demonic_crystal") <= 0 || storm_profile.get_event_weight("demonic_necropolis") <= storm_profile.get_event_weight("demonic_crystal"))
+	if(storm_profile.attempt_probability <= disturbance_profile.attempt_probability || storm_profile.get_event_weight("storm_pulse") <= 0 || storm_profile.get_event_weight("demonic_crystal") <= 0 || storm_profile.get_event_weight("demonic_necropolis") <= storm_profile.get_event_weight("demonic_crystal") || !storm_profile.get_event_weight("demonic_ranged_demon") || storm_profile.get_event_weight("demonic_soldier") >= storm_profile.get_event_weight("demonic_lesser_demon"))
 		return Fail("Storm profile must attempt events more often and favor persistent turf spawns over crystals")
 	qdel(profile)
 
@@ -113,6 +113,8 @@
 	var/datum/redspace_event/spawn/object/demonic_crystal/crystal_spawn = new
 	var/datum/redspace_event/spawn/turf/demonic_necropolis/necropolis_spawn = new
 	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/demonic_mob_spawn = new
+	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/ranged/ranged_mob_spawn = new
+	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/soldier/soldier_mob_spawn = new
 	if(turf_spawn.event_category != REDSPACE_EVENT_CATEGORY_TURF_SPAWN || object_spawn.event_category != REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN || mob_spawn.event_category != REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
 		return Fail("Spawn event families must expose separate turf, object and mob categories")
 	if(!turf_spawn.uses_spawn_budget() || turf_spawn.get_spawn_count() != 1 || turf_spawn.get_spawn_budget_cost() != 1)
@@ -129,6 +131,10 @@
 		return Fail("The lesser demon must be registered as a persistent mob spawn")
 	if(!SSredspace || SSredspace.event_registry["demonic_lesser_demon"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon)
 		return Fail("The lesser demon spawn must be registered in SSredspace")
+	if(ranged_mob_spawn.spawn_type != /mob/living/basic/demon/redspace/ranged || soldier_mob_spawn.spawn_type != /mob/living/basic/demon/redspace/soldier || soldier_mob_spawn.weight >= demonic_mob_spawn.weight)
+		return Fail("Redspace demon variants must expose their mob types and a rarer soldier weight")
+	if(!SSredspace || SSredspace.event_registry["demonic_ranged_demon"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon/ranged || SSredspace.event_registry["demonic_soldier"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon/soldier)
+		return Fail("The ranged demon and soldier spawns must be registered in SSredspace")
 
 	var/datum/redspace_event/spawn/turf/too_many_turfs = new
 	too_many_turfs.spawn_count = REDSPACE_SPAWN_BUDGET_MAX_TURFS + 1
@@ -155,6 +161,8 @@
 	qdel(crystal_spawn)
 	qdel(necropolis_spawn)
 	qdel(demonic_mob_spawn)
+	qdel(ranged_mob_spawn)
+	qdel(soldier_mob_spawn)
 	qdel(budget_safe)
 	qdel(budget_storm)
 	qdel(budget)
