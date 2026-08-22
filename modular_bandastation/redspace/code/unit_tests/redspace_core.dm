@@ -112,6 +112,7 @@
 	var/datum/redspace_event/spawn/mob/mob_spawn = new
 	var/datum/redspace_event/spawn/object/demonic_crystal/crystal_spawn = new
 	var/datum/redspace_event/spawn/turf/demonic_necropolis/necropolis_spawn = new
+	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/demonic_mob_spawn = new
 	if(turf_spawn.event_category != REDSPACE_EVENT_CATEGORY_TURF_SPAWN || object_spawn.event_category != REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN || mob_spawn.event_category != REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
 		return Fail("Spawn event families must expose separate turf, object and mob categories")
 	if(!turf_spawn.uses_spawn_budget() || turf_spawn.get_spawn_count() != 1 || turf_spawn.get_spawn_budget_cost() != 1)
@@ -124,6 +125,10 @@
 		return Fail("The demonic necropolis must be registered as a persistent turf spawn")
 	if(!SSredspace || SSredspace.event_registry["demonic_necropolis"] != /datum/redspace_event/spawn/turf/demonic_necropolis)
 		return Fail("The demonic necropolis spawn must be registered in SSredspace")
+	if(demonic_mob_spawn.event_id != "demonic_lesser_demon" || demonic_mob_spawn.get_spawn_category() != REDSPACE_EVENT_CATEGORY_MOB_SPAWN || demonic_mob_spawn.get_spawn_count() != 1 || demonic_mob_spawn.spawn_policy_id != "demonic_lesser_demon")
+		return Fail("The lesser demon must be registered as a persistent mob spawn")
+	if(!SSredspace || SSredspace.event_registry["demonic_lesser_demon"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon)
+		return Fail("The lesser demon spawn must be registered in SSredspace")
 
 	var/datum/redspace_event/spawn/turf/too_many_turfs = new
 	too_many_turfs.spawn_count = REDSPACE_SPAWN_BUDGET_MAX_TURFS + 1
@@ -149,6 +154,7 @@
 	qdel(mob_spawn)
 	qdel(crystal_spawn)
 	qdel(necropolis_spawn)
+	qdel(demonic_mob_spawn)
 	qdel(budget_safe)
 	qdel(budget_storm)
 	qdel(budget)

@@ -61,6 +61,7 @@
 		"debug_lightning",
 		"demonic_crystal",
 		"demonic_necropolis",
+		"demonic_lesser_demon",
 	)
 
 /datum/redspace_profile/demonic/New()
@@ -89,6 +90,7 @@
 			"storm_pulse" = 3,
 			"demonic_crystal" = 1,
 			"demonic_necropolis" = 2,
+			"demonic_lesser_demon" = 2,
 		),
 	)
 

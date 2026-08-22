@@ -1,3 +1,19 @@
+/// A lesser demon that can survive only while its redspace energy is supplied.
+/mob/living/basic/demon/redspace
+	icon = 'modular_bandastation/redspace/icons/mob/demonic/lesser_demons.dmi'
+	icon_state = "demon_melee"
+	icon_living = "demon_melee"
+	speed = 0.5
+	maxHealth = 150
+	health = 150
+	melee_damage_lower = 12
+	melee_damage_upper = 18
+	ai_controller = /datum/ai_controller/basic_controller/simple/simple_hostile
+
+/mob/living/basic/demon/redspace/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/redspace_energy, 100, 100, 10, 10, 5, 5, 3, -0.2, 0.5, REDSPACE_DISTURBANCE_ENTER_VALUE)
+
 /// A persistent redspace manifestation used to verify object spawn events.
 /obj/structure/redspace/demonic_crystal
 	name = "demonic redspace crystal"
@@ -85,4 +101,38 @@
 		return FALSE
 
 	necropolis_turf.visible_message(span_warning("Пол покрывается камнем демонического некрополя."))
+	return TRUE
+
+/// Spawns a lesser demon and keeps the event reserved until the demon is removed.
+/datum/redspace_event/spawn/mob/demonic_lesser_demon
+	event_id = "demonic_lesser_demon"
+	profile_id = REDSPACE_PROFILE_DEMONIC
+	min_value = REDSPACE_STORM_ENTER_VALUE
+	max_value = REDSPACE_MAX_NORMAL_VALUE
+	cooldown = 60 SECONDS
+	automatic = TRUE
+	weight = 2
+	spawn_count = 1
+	spawn_budget_cost = 1
+	spawn_policy_id = "demonic_lesser_demon"
+
+/datum/redspace_event/spawn/mob/demonic_lesser_demon/can_start(turf/target)
+	if(!..())
+		return FALSE
+	for(var/mob/living/basic/demon/redspace/demon in target)
+		return FALSE
+	return TRUE
+
+/datum/redspace_event/spawn/mob/demonic_lesser_demon/start(client/admin, turf/target)
+	if(!can_start(target))
+		return FALSE
+
+	var/mob/living/basic/demon/redspace/demon = new(target)
+	if(!demon || QDELETED(demon))
+		return FALSE
+	if(!register_spawned_atom(demon))
+		qdel(demon)
+		return FALSE
+
+	target.visible_message(span_warning("В редспейсе материализуется малый демон."))
 	return TRUE
