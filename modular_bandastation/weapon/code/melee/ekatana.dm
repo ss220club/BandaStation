@@ -27,6 +27,7 @@
 		return
 
 	var/mob/living/living_target = target
+	living_target.Knockdown(1 SECONDS)
 	living_target.Stun(1.5 SECONDS)
 	COOLDOWN_START(src, next_attack, attack_cooldown)
 
