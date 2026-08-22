@@ -1,8 +1,8 @@
 /obj/item/credit_siphon
 	name = "credit siphon"
 	desc = "A clandestine device that skims credits from nearby bank accounts."
-	icon = 'icons/obj/devices.dmi'
-	icon_state = "radio"
+	icon = 'icons/obj/devices/voice.dmi'
+	icon_state = "walkietalkie"
 	w_class = WEIGHT_CLASS_SMALL
 	interaction_flags_click = NEED_DEXTERITY|FORBID_TELEKINESIS_REACH
 	/// Credits currently held by the siphon.
