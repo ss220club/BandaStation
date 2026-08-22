@@ -48,7 +48,7 @@
 	default_context.refresh()
 	if(!length(default_context.active_z_levels))
 		return Fail("Default provider must resolve station z-levels")
-	for(var/station_z as anything in default_context.active_z_levels)
+	for(var/station_z in default_context.active_z_levels)
 		if(!SSmapping.level_trait(station_z, ZTRAIT_STATION))
 			return Fail("Default provider must only return z-levels with the station trait")
 	if(default_context.active_profile_id != REDSPACE_PROFILE_DEMONIC)
