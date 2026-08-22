@@ -33,6 +33,19 @@
 	var/datum/redspace_profile/demonic/profile = new
 	if(profile.profile_id != REDSPACE_PROFILE_DEMONIC || !profile.is_event_allowed("storm_pulse") || profile.is_event_allowed("unknown_event"))
 		return Fail("The demonic profile must expose only its registered event set")
+	var/datum/redspace_event_profile/calm_profile = profile.get_event_profile(REDSPACE_STATE_CALM)
+	var/datum/redspace_event_profile/disturbance_profile = profile.get_event_profile(REDSPACE_STATE_DISTURBANCE)
+	var/datum/redspace_event_profile/storm_profile = profile.get_event_profile(REDSPACE_STATE_STORM)
+	if(!calm_profile || !disturbance_profile || !storm_profile)
+		return Fail("The demonic profile must expose state-specific event profiles")
+	if(profile.get_event_profile(REDSPACE_STATE_INVASION))
+		return Fail("Invasion must not have an ordinary automatic-event profile")
+	if(calm_profile.attempt_probability >= disturbance_profile.attempt_probability || !calm_profile.get_event_weight("calm_echo"))
+		return Fail("Calm profile must be sparse and use only the harmless echo event")
+	if(!disturbance_profile.get_event_weight("local_distortion") || disturbance_profile.get_event_weight("storm_pulse"))
+		return Fail("Disturbance profile must keep storm events out of the low range")
+	if(storm_profile.attempt_probability <= disturbance_profile.attempt_probability || storm_profile.get_event_weight("storm_pulse") <= 0)
+		return Fail("Storm profile must attempt events more often and allow the storm pulse")
 	qdel(profile)
 
 	var/datum/redspace_field_cell/cell = new(1, 0, 0, "core_test", 0)
@@ -47,6 +60,11 @@
 	if(cell.state != REDSPACE_STATE_CALM)
 		return Fail("Clearing invasion must restore the ordinary range")
 	qdel(cell)
+
+	var/datum/redspace_event/calm_echo/calm_event = new
+	if(calm_event.min_value != 0 || calm_event.max_value != 3 || !calm_event.automatic || calm_event.dangerous)
+		return Fail("The calm echo must be harmless and limited to the calm range")
+	qdel(calm_event)
 
 	var/datum/redspace_event/local_distortion/event = new
 	if(event.event_id != "local_distortion" || event.min_value != 4 || event.max_value != 6)

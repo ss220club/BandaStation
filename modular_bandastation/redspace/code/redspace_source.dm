@@ -1,5 +1,5 @@
 /// A spatial contribution to the redspace field.
-/// Sources are queried only when a registered observer or an explicit debug request samples a turf.
+/// Sources are sampled only for sparse cells created by observers or active zones.
 /datum/redspace_field_source
 	var/source_id
 	var/profile_id
@@ -13,6 +13,10 @@
 	var/expires_at
 	/// Human-readable reason for the latest registration or change. Kept for the journal.
 	var/change_reason
+	/// Resumable coverage discovery for large sources.
+	var/list/coverage_turfs
+	var/list/coverage_seen_cells
+	var/coverage_cursor = 1
 
 /datum/redspace_field_source/New(new_id, turf/origin, new_strength, new_radius, new_profile_id, new_lifetime = null, new_reason = null)
 	. = ..()
@@ -27,6 +31,11 @@
 	if(isnum(new_lifetime) && new_lifetime > 0)
 		expires_at = world.time + new_lifetime
 	change_reason = new_reason
+
+/datum/redspace_field_source/proc/reset_coverage_cache()
+	coverage_turfs = null
+	coverage_seen_cells = null
+	coverage_cursor = 1
 
 /// Whether the subsystem must track this source between registration and removal.
 /datum/redspace_field_source/proc/requires_processing()
@@ -49,6 +58,7 @@
 		return FALSE
 	origin_x = new_origin.x
 	origin_y = new_origin.y
+	reset_coverage_cache()
 	change_reason = reason
 	return TRUE
 
@@ -66,6 +76,7 @@
 	if(radius == new_radius)
 		return FALSE
 	radius = new_radius
+	reset_coverage_cache()
 	change_reason = reason
 	return TRUE
 

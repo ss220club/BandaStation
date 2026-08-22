@@ -68,10 +68,22 @@
 			return "вторжение"
 	return "неизвестно"
 
+/proc/redspace_intensity_name(intensity)
+	switch(intensity)
+		if(REDSPACE_INTENSITY_CALM)
+			return "штиль"
+		if(REDSPACE_INTENSITY_DISTURBANCE)
+			return "возмущение"
+		if(REDSPACE_INTENSITY_STORM)
+			return "шторм"
+	return "не выбрана"
+
 /// Returns TRUE only when a normal field transition escalates toward a storm.
 /// Ebb recovery and event-only invasion state do not start ordinary events.
 /proc/redspace_state_is_escalation(old_state, new_state)
 	if(isnull(old_state) || isnull(new_state) || old_state == new_state)
+		return FALSE
+	if(old_state < REDSPACE_STATE_CALM)
 		return FALSE
 	return new_state > old_state && new_state <= REDSPACE_STATE_STORM
 

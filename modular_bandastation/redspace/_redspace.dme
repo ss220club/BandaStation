@@ -7,6 +7,7 @@
 #include "code/redspace_context.dm"
 #include "code/redspace_source.dm"
 #include "code/redspace_events.dm"
+#include "code/redspace_round_feature.dm"
 #include "code/redspace_subsystem.dm"
 #include "code/redspace_counter.dm"
 #include "code/redspace_sensor.dm"

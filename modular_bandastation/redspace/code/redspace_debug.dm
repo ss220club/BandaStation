@@ -6,12 +6,16 @@
 	var/value = SSredspace.get_value(target)
 	var/state = SSredspace.get_state(target)
 	var/datum/redspace_field_cell/cell = SSredspace.get_cell(target)
+	var/datum/station_trait/redspace_activity/round_trait = SSredspace.get_round_trait()
+	var/current_intensity = round_trait?.redspace_intensity
 	var/list/report = list(
 		"Редспейс на ([target.x], [target.y], [target.z])",
 		"Значение: [round(value, 0.1)] ([redspace_state_name(state)])",
 		"Фон: [round(SSredspace.context.background_value, 0.1)]",
 		"Коэффициент зоны: [SSredspace.get_zone_coefficient(target, cell)]",
 		"Профиль раунда: [SSredspace.context.active_profile_id]",
+		"Интенсивность особенности: [isnull(current_intensity) ? "не выбрана" : "[redspace_intensity_name(current_intensity)] ([current_intensity])"]",
+		"Активный шторм: [round_trait?.storm_active ? "да" : "нет"]",
 		"Метрики: источники [length(SSredspace.field_sources)], ячейки [length(SSredspace.field_cells)], dirty-ячеек [length(SSredspace.dirty_cells)]/[length(SSredspace.currentrun)], выборок [SSredspace.metric_sample_count], расчётов [SSredspace.metric_value_calculation_count], проверок источников [SSredspace.metric_source_check_count], dirty поставлено/обработано [SSredspace.metric_dirty_cells_enqueued]/[SSredspace.metric_dirty_cells_processed], событий запущено/завершено [SSredspace.metric_events_started]/[SSredspace.metric_events_finished]",
 		"Пики: ячейки [SSredspace.metric_peak_field_cells], dirty-ячеек [SSredspace.metric_peak_dirty_cells], источников в обработке [SSredspace.metric_peak_processing_sources]",
 	)
@@ -99,6 +103,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 	var/action = tgui_input_list(user, "Выберите операцию", "Redspace Debug", list(
 		"Показать текущее состояние",
 		"Установить фон раунда",
+		"Изменить интенсивность особенности",
 		"Установить значение ячейки",
 		"Установить event-only значение",
 		"Очистить значение ячейки",
@@ -127,6 +132,26 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 			SSredspace.set_background_value(new_background, "установлен из debug-панели")
 			log_admin("[key_name(user)] set redspace background to [new_background].")
 			message_admins("[key_name_admin(user)] установил фон редспейса: [new_background].")
+
+		if("Изменить интенсивность особенности")
+			var/datum/station_trait/redspace_activity/round_trait = SSredspace.get_round_trait()
+			if(!round_trait)
+				to_chat(user, span_warning("В этом раунде нет активной особенности редспейса."), confidential = TRUE)
+				return
+			var/current_intensity = round_trait.redspace_intensity
+			var/list/intensity_choices = list(
+				"Штиль" = REDSPACE_INTENSITY_CALM,
+				"Возмущение" = REDSPACE_INTENSITY_DISTURBANCE,
+				"Шторм" = REDSPACE_INTENSITY_STORM,
+			)
+			var/intensity_label = tgui_input_list(user, "Новая интенсивность (сейчас: [redspace_intensity_name(current_intensity)])", "Redspace Round Feature", intensity_choices)
+			if(!intensity_label)
+				return
+			var/new_intensity = intensity_choices[intensity_label]
+			if(SSredspace.set_round_intensity(new_intensity, "администратор изменил интенсивность редспейса"))
+				to_chat(user, span_notice("Интенсивность редспейса изменена: [intensity_label]."), confidential = TRUE)
+				log_admin("[key_name(user)] changed redspace round intensity to [new_intensity].")
+				message_admins("[key_name_admin(user)] изменил интенсивность редспейса на [intensity_label].")
 
 		if("Установить значение ячейки")
 			redspace_debug_set_cell_value(user, current_turf)

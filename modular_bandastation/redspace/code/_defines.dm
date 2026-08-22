@@ -31,6 +31,11 @@
 #define REDSPACE_PROFILE_DEMONIC "demonic"
 #define REDSPACE_PROFILE_STABILIZER "stabilizer"
 
+/// Round-start intensity selected by the redspace station trait.
+#define REDSPACE_INTENSITY_CALM "calm"
+#define REDSPACE_INTENSITY_DISTURBANCE "disturbance"
+#define REDSPACE_INTENSITY_STORM "storm"
+
 /// Starting event-budget values for one active hex zone.
 #define REDSPACE_EVENT_BUDGET_WINDOW (60 SECONDS)
 #define REDSPACE_EVENT_BUDGET_COOLDOWN (10 SECONDS)

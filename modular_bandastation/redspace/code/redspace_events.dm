@@ -19,6 +19,8 @@
 	var/continues_after_start = FALSE
 	/// Zone key reserved by the controller for this event instance.
 	var/budget_zone_key
+	/// Stable target retained for lifecycle signals and cancellation cleanup.
+	var/turf/event_target
 	/// Optional source that caused the event, when a scenario can identify one.
 	var/source_id
 
@@ -43,8 +45,13 @@
 
 /datum/redspace_event/Destroy()
 	if(SSredspace && src in SSredspace.active_events)
+		var/zone_key = budget_zone_key
 		SSredspace.active_events -= src
 		SSredspace.release_event_budget(src)
+		SSredspace.notify_event_finished(src, event_target, "событие уничтожено")
+		SSredspace.cleanup_event_budget(zone_key)
+		SSredspace.prune_event_cell(zone_key)
+		SSredspace.wake()
 	return ..()
 
 /// Per-hex event budget. It is created only for zones that actually attempt an event.
@@ -56,6 +63,9 @@
 	var/active_event_count = 0
 	var/active_dangerous_count = 0
 	var/list/reserved_events = list()
+	/// Next state-profile attempt for this active zone. Zero means unscheduled.
+	var/next_attempt_at = 0
+	var/scheduled_state
 
 /datum/redspace_event_budget/New(new_zone_key)
 	. = ..()
@@ -108,6 +118,38 @@
 	return TRUE
 
 /// First safe content event: a short local distortion with no damage or forced status effect.
+/datum/redspace_event/calm_echo
+	event_id = "calm_echo"
+	profile_id = REDSPACE_PROFILE_DEMONIC
+	min_value = 0
+	max_value = 3
+	cooldown = 90 SECONDS
+	budget_cost = 1
+	dangerous = FALSE
+	automatic = TRUE
+	weight = 1
+
+/datum/redspace_event/calm_echo/start(client/admin, turf/target)
+	if(!can_start(target))
+		return FALSE
+
+	SSredspace.notify_event_started(src, target, "слабый отклик редспейса начался")
+	if(QDELETED(src) || !(src in SSredspace.active_events))
+		return FALSE
+	target.flash_lighting_fx(
+		range = 2,
+		power = 0.45,
+		color = LIGHT_COLOR_ORANGE,
+		duration = 0.5 SECONDS,
+	)
+	playsound(target, 'sound/effects/ghost.ogg', 20, TRUE)
+	target.visible_message(span_notice("В пространстве проходит едва заметная рябь."))
+	if(admin)
+		log_admin("[key_name(admin)] started a redspace calm echo at ([target.x], [target.y], [target.z]).")
+		message_admins("[key_name_admin(admin)] запустил слабый отклик редспейса ([ADMIN_COORDJMP(target)]).")
+	return TRUE
+
+/// First safe content event: a short local distortion with no damage or forced status effect.
 /datum/redspace_event/local_distortion
 	event_id = "local_distortion"
 	profile_id = REDSPACE_PROFILE_DEMONIC
@@ -124,6 +166,8 @@
 		return FALSE
 
 	SSredspace.notify_event_started(src, target, "локальное искажение началось")
+	if(QDELETED(src) || !(src in SSredspace.active_events))
+		return FALSE
 	// Keep the atmosphere local and event-driven: one temporary source, no station-wide light pass.
 	target.flash_lighting_fx(
 		range = 3,
@@ -160,6 +204,8 @@
 
 	target_turf = target
 	SSredspace.notify_event_started(src, target, "штормовой импульс телеграфирован")
+	if(QDELETED(src) || !(src in SSredspace.active_events))
+		return FALSE
 	target.flash_lighting_fx(
 		range = 3,
 		power = 0.8,
@@ -169,7 +215,7 @@
 	new /obj/effect/temp_visual/telegraphing/circle(target)
 	playsound(target, 'sound/effects/magic/lightning_chargeup.ogg', 45, TRUE)
 	target.visible_message(span_danger("Пространство начинает рваться!"))
-	telegraph_timer_id = addtimer(CALLBACK(src, PROC_REF(resolve)), 2 SECONDS, TIMER_DELETE_ME)
+	telegraph_timer_id = addtimer(CALLBACK(src, PROC_REF(resolve)), 2 SECONDS, TIMER_STOPPABLE | TIMER_DELETE_ME)
 	if(admin)
 		log_admin("[key_name(admin)] started a redspace storm pulse at ([target.x], [target.y], [target.z]).")
 		message_admins("[key_name_admin(admin)] запустил штормовой импульс редспейса ([ADMIN_COORDJMP(target)]).")
@@ -243,6 +289,9 @@
 	target_turf = get_turf(target)
 	if(!target_turf)
 		return FALSE
+	event_target = target_turf
+	if(!(src in SSredspace.active_events))
+		SSredspace.active_events += src
 	SSredspace.notify_event_started(src, target_turf, "отладочный удар выбран")
 	target_turf.flash_lighting_fx(
 		range = 3,
@@ -253,7 +302,7 @@
 	new /obj/effect/temp_visual/telegraphing/circle(target_turf)
 	playsound(target_turf, 'sound/effects/magic/lightning_chargeup.ogg', 45, TRUE)
 	target_turf.visible_message(span_warning("В воздухе накапливается разряд молнии редспейса!"))
-	telegraph_timer_id = addtimer(CALLBACK(src, PROC_REF(resolve)), 2 SECONDS, TIMER_DELETE_ME)
+	telegraph_timer_id = addtimer(CALLBACK(src, PROC_REF(resolve)), 2 SECONDS, TIMER_STOPPABLE | TIMER_DELETE_ME)
 	log_admin("[key_name(admin)] telegraphed a redspace lightning strike on [key_name(target)] at ([target_turf.x], [target_turf.y], [target_turf.z]); damage [impact_damage].")
 	message_admins("[key_name_admin(admin)] телеграфировал удар молнии редспейса по [key_name_admin(target)] ([ADMIN_COORDJMP(target_turf)]).")
 	return TRUE
@@ -265,8 +314,9 @@
 
 	var/mob/living/impact_target = target
 	var/turf/impact_turf = get_turf(impact_target)
-	if(!impact_target || QDELETED(impact_target) || impact_target.stat == DEAD || !impact_turf || QDELETED(impact_turf))
+	if(!impact_target || QDELETED(impact_target) || impact_target.stat == DEAD || !impact_turf || QDELETED(impact_turf) || !SSredspace || !SSredspace.is_supported_z(impact_turf.z))
 		if(SSredspace)
+			SSredspace.active_events -= src
 			SSredspace.notify_event_finished(src, target_turf, "отладочный удар отменён: цель недоступна")
 		qdel(src)
 		return
@@ -287,6 +337,7 @@
 	to_chat(impact_target, span_userdanger("Вас поражает разряд молнии редспейса!"), confidential = TRUE)
 	log_admin("Redspace lightning strike hit [key_name(impact_target)] at ([impact_turf.x], [impact_turf.y], [impact_turf.z]); damage [impact_damage].")
 	message_admins("Удар молнии редспейса по [key_name_admin(impact_target)] ([ADMIN_COORDJMP(impact_turf)]).")
+	SSredspace.active_events -= src
 	SSredspace.notify_event_finished(src, impact_turf, "отладочный удар завершён")
 	qdel(src)
 
