@@ -273,7 +273,9 @@
 
 	//BANDASTATION EDIT START: transitions between Z-levels
 	var/cross_z = FALSE
+	var/cross_z_up = FALSE
 	var/cross_z_target = 0
+	var/turf/cross_z_landing_turf
 	//BANDASTATION EDIT END
 
 /obj/projectile/Initialize(mapload)
@@ -1006,6 +1008,8 @@
 			// BANDASTATION EDIT START: Transitions between Z-levels
 			if(try_cross_z_level())
 				new_turf = loc
+			if(try_cross_z_level_up())
+				new_turf = loc
 			// BANDASTATION EDIT END
 			// We hit something and got deleted, stop the loop
 			if (QDELETED(src))
@@ -1265,19 +1269,23 @@
 	pixel_y = source.pixel_y - source.base_pixel_y
 	original = target
 
-	// BANDASTATION EDIT START: Immediate transition from lower Z to upper Z
-	if(target_loc && target_loc.z > source_loc.z)
-		var/turf/upper_turf = locate(source_loc.x, source_loc.y, target_loc.z)
-		if(istype(upper_turf))
-			forceMove(upper_turf)
-			source_loc = upper_turf
-			starting = upper_turf
-	// Upper Z -> lower Z transition
-	if(target_loc && target_loc.z < source_loc.z)
-		var/turf/cross_check_turf = locate(target_loc.x, target_loc.y, source_loc.z)
-		if(istype(cross_check_turf) && is_valid_cross_z_target(cross_check_turf))
-			cross_z = TRUE
-			cross_z_target = target_loc.z
+	// BANDASTATION EDIT START: Z-level transitions
+	if(target_loc && target_loc.z != source_loc.z)
+		cross_z_landing_turf = target_loc
+		// Lower Z -> Upper Z
+		if(target_loc.z > source_loc.z)
+			var/turf/upper_turf = locate(source_loc.x, source_loc.y, target_loc.z)
+			if(istype(upper_turf))
+				forceMove(upper_turf)
+				source_loc = upper_turf
+				starting = upper_turf
+				cross_z_up = TRUE
+		// Upper Z -> Lower Z
+		else
+			var/turf/cross_check_turf = locate(target_loc.x, target_loc.y, source_loc.z)
+			if(istype(cross_check_turf) && is_valid_cross_z_target(cross_check_turf))
+				cross_z = TRUE
+				cross_z_target = target_loc.z
 	// BANDASTATION EDIT END
 
 	// Trim off excess pixel_x/y by converting them into turf offset
@@ -1473,13 +1481,10 @@
 		return FALSE
 	if(!isopenspaceturf(loc))
 		return FALSE
-	var/turf/target_turf = get_turf(original)
+	var/turf/target_turf = cross_z_landing_turf
 	if(!target_turf)
 		return FALSE
-	// Do not descend immediately when crossing openspace.
-	// Stay on the upper Z-level until the projectile is close
-	// enough to the actual target.
-	if(get_dist(loc, target_turf) > 1)
+	if(abs(loc.x - target_turf.x) > 1 || abs(loc.y - target_turf.y) > 1)
 		return FALSE
 	var/turf/lower_turf = locate(target_turf.x, target_turf.y, cross_z_target)
 	if(!istype(lower_turf))
@@ -1489,9 +1494,30 @@
 	forceMove(lower_turf)
 	cross_z = FALSE
 	cross_z_target = 0
-	// Notify the target that the shot came from the upper level.
-	if(isliving(original))
+	if(isliving(original) && get_turf(original) == lower_turf)
 		to_chat(original, span_userdanger("По вам ведут огонь сверху!"))
+		impact(original)
+	else
+		impact(lower_turf)
+	cross_z_landing_turf = null
+	return TRUE
+
+/obj/projectile/proc/try_cross_z_level_up()
+	if(!cross_z_up)
+		return FALSE
+	if(!isturf(loc))
+		return FALSE
+	var/turf/target_turf = cross_z_landing_turf
+	if(!target_turf)
+		return FALSE
+	if(get_dist(loc, target_turf) > 1)
+		return FALSE
+	if(isliving(original) && get_turf(original) == target_turf)
+		impact(original)
+	else
+		impact(target_turf)
+	cross_z_up = FALSE
+	cross_z_landing_turf = null
 	return TRUE
 
 /obj/projectile/proc/is_near_z_open_space(turf/T)
