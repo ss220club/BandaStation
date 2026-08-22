@@ -10,6 +10,11 @@
 	var/siphon_percentage = 0.15
 	var/siphon_range = 5
 	var/siphon_interval = 15 SECONDS
+	var/tc_purchased = 0
+	var/tc_price = 950
+	var/tc_purchase_limit = 8
+	var/exchange_player_count = -1
+	var/exchange_traitor_count = -1
 	COOLDOWN_DECLARE(siphon_cooldown)
 	COOLDOWN_DECLARE(attach_cooldown)
 
@@ -55,6 +60,22 @@
 		nearby_players += list(list("name" = target.name, "ref" = REF(target)))
 	return nearby_players
 
+/obj/item/credit_siphon/proc/update_exchange_rate()
+	var/player_count = length(GLOB.clients)
+	var/traitor_count = 0
+	for(var/datum/antagonist/traitor/traitor in GLOB.antagonists)
+		traitor_count++
+
+	if(player_count == exchange_player_count && traitor_count == exchange_traitor_count)
+		return
+
+	exchange_player_count = player_count
+	exchange_traitor_count = traitor_count
+	tc_purchase_limit = player_count >= 31 ? 10 : 8
+	tc_price = player_count >= 31 ? 1000 : 950
+	for(var/traitor_number in 1 to traitor_count)
+		tc_price += rand(5, 50)
+
 /obj/item/credit_siphon/proc/attach_to_player(mob/user, target_ref)
 	if(!COOLDOWN_FINISHED(src, attach_cooldown))
 		return FALSE
@@ -92,9 +113,15 @@
 		return UI_CLOSE
 
 /obj/item/credit_siphon/ui_data(mob/user)
+	update_exchange_rate()
 	var/mob/living/carbon/human/holder = recursive_loc_check(src, /mob/living/carbon/human)
 	return list(
 		"credits_stored" = credits_stored,
+		"tc_price" = tc_price,
+		"tc_purchase_limit" = tc_purchase_limit,
+		"tc_purchased" = tc_purchased,
+		"player_count" = exchange_player_count,
+		"traitor_count" = exchange_traitor_count,
 		"active" = active,
 		"attached" = !isnull(holder),
 		"nearby_players" = get_nearby_players(),
@@ -112,6 +139,16 @@
 			return TRUE
 		if("attach")
 			return attach_to_player(usr, params["target"])
+		if("buy_tc")
+			update_exchange_rate()
+			if(tc_purchased >= tc_purchase_limit || credits_stored < tc_price)
+				return FALSE
+			credits_stored -= tc_price
+			tc_purchased++
+			var/obj/item/stack/telecrystal/telecrystals = new (usr.drop_location(), 1)
+			usr.put_in_hands(telecrystals)
+			to_chat(usr, span_notice("Вы обмениваете [tc_price] кредитов на телекристалл."))
+			return TRUE
 		if("withdraw")
 			if(!credits_stored || !in_range(usr, src))
 				return FALSE

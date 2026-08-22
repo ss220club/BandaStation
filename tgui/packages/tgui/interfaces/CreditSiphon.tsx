@@ -6,6 +6,11 @@ import { Window } from '../layouts';
 
 type Data = {
   credits_stored: number;
+  tc_price: number;
+  tc_purchase_limit: number;
+  tc_purchased: number;
+  player_count: number;
+  traitor_count: number;
   active: boolean;
   attached: boolean;
   nearby_players: { name: string; ref: string }[];
@@ -13,7 +18,17 @@ type Data = {
 
 export const CreditSiphon = () => {
   const { act, data } = useBackend<Data>();
-  const { credits_stored, active, attached, nearby_players = [] } = data;
+  const {
+    credits_stored,
+    tc_price,
+    tc_purchase_limit,
+    tc_purchased,
+    player_count,
+    traitor_count,
+    active,
+    attached,
+    nearby_players = [],
+  } = data;
   const [target, setTarget] = useState('');
   const targetOptions = nearby_players.map((player) => ({
     displayText: player.name,
@@ -21,7 +36,7 @@ export const CreditSiphon = () => {
   }));
 
   return (
-    <Window width={280} height={250} title="Credit Siphon">
+    <Window width={280} height={390} title="Credit Siphon">
       <Window.Content>
         <Section title="Stored credits">
           <Box textAlign="center" fontSize={2} mb={2}>
@@ -62,6 +77,27 @@ export const CreditSiphon = () => {
             onClick={() => act('withdraw')}
           >
             Withdraw
+          </Button>
+        </Section>
+        <Section title="Credit exchange">
+          <Box textAlign="center" mb={1}>
+            {tc_price} cr / TC <Icon color="gold" name="coins" />
+          </Box>
+          <Box textAlign="center" mb={1}>
+            {tc_purchased} / {tc_purchase_limit} TC purchased
+          </Box>
+          <Box textAlign="center" mb={1}>
+            {player_count} online, {traitor_count} traitors
+          </Box>
+          <Button
+            fluid
+            icon="gem"
+            disabled={
+              credits_stored < tc_price || tc_purchased >= tc_purchase_limit
+            }
+            onClick={() => act('buy_tc')}
+          >
+            Buy 1 TC
           </Button>
         </Section>
       </Window.Content>
