@@ -23,9 +23,9 @@
 		return FALSE
 	return locate(/datum/objective/martyr) in source.primary_objectives || locate(/datum/objective/hijack) in source.primary_objectives
 
-/datum/uplink_item/conspicious_weapons/ekatanka
+/datum/uplink_item/dangerous/ekatanka
 	name = "Тактическая катана 'Багровый порез'"
 	desc = "Энергетическая катана, созданная при помощи новых технологий Синдиката."
 	item = /obj/item/melee/energy/ekatanka
-	category = /datum/uplink_category/conspicious_weapons
+	category = /datum/uplink_category/dangerous
 	cost = 18
