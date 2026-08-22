@@ -4,9 +4,9 @@
 	item = /obj/item/clothing/accessory/holster/chameleon
 	cost = 1
 
-/datum/uplink_item/conspicous_weapons/ekatana
+/datum/uplink_item/conspicous_weapons/ekatanka
 	name = "Тактическая катана 'Багровый порез'"
 	desc = "Энергетическая Катана, созданная при помощи новых технологий Синдиката. Она способна наносить урон, а также оглушать противника при нанесении удара."
-	item = /obj/item/melee/energy/ekatana
+	item = /obj/item/melee/energy/ekatanka
 	category = /datum/uplink_category/dangerous
 	cost = 18
