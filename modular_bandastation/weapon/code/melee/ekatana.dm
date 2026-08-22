@@ -1,6 +1,6 @@
 /obj/item/melee/energy/ekatana
 	name = "energy katana"
-	desc = "test"
+	desc = "Энергетическая Катана, созданная при помощи новых технологий Синдиката. Она способна наносить громадный урон, а такаже оглушать противника при попадании. Имеет некоторую задержку при ударе."
 	icon = 'icons/bandastation/obj/weapons/transforming_energy.dmi'
 	icon_state = "ekatana"
 	inhand_icon_state = "ekatana"
