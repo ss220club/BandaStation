@@ -530,7 +530,11 @@
 /datum/design/board/redspace_stabilizer
 	name = "Плата стабилизатора блюспейс-границы"
 	desc = "Плата для создания стабилизатора блюспейс-границы."
+#ifdef TECHWEB_NODE_STARTER
+	// Design IDs were replaced with design typepaths by the techweb refactor.
+#else
 	id = "redspace_stabilizer"
+#endif
 	build_path = /obj/item/circuitboard/machine/redspace_stabilizer
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
@@ -544,10 +548,15 @@
 	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/techweb_node/redspace_stabilization
+#ifdef TECHWEB_NODE_STARTER
+	prerequisite_nodes = list(/datum/techweb_node/applied_bluespace)
+	unlocked_designs = list(/datum/design/board/redspace_stabilizer)
+#else
 	id = "redspace_stabilization"
-	display_name = "Стабилизация редспейса"
-	description = "Практическое укрепление блюспейсной границы в локальных зонах давления редспейса."
 	prereq_ids = list(TECHWEB_NODE_APPLIED_BLUESPACE)
 	design_ids = list("redspace_stabilizer")
+#endif
+	display_name = "Стабилизация редспейса"
+	description = "Практическое укрепление блюспейсной границы в локальных зонах давления редспейса."
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_3_POINTS)
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_ENGINEERING)
