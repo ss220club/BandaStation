@@ -1469,16 +1469,29 @@
 /obj/projectile/proc/try_cross_z_level()
 	if(!cross_z || !cross_z_target)
 		return FALSE
-	if(!isturf(loc) || !isopenspaceturf(loc))
+	if(!isturf(loc))
 		return FALSE
-	var/turf/target_turf = locate(loc.x, loc.y, cross_z_target)
-	if(!istype(target_turf))
+	if(!isopenspaceturf(loc))
 		return FALSE
-	if(target_turf == loc)
+	var/turf/target_turf = get_turf(original)
+	if(!target_turf)
 		return FALSE
-	forceMove(target_turf)
+	// Do not descend immediately when crossing openspace.
+	// Stay on the upper Z-level until the projectile is close
+	// enough to the actual target.
+	if(get_dist(loc, target_turf) > 1)
+		return FALSE
+	var/turf/lower_turf = locate(target_turf.x, target_turf.y, cross_z_target)
+	if(!istype(lower_turf))
+		return FALSE
+	if(lower_turf == loc)
+		return FALSE
+	forceMove(lower_turf)
 	cross_z = FALSE
 	cross_z_target = 0
+	// Notify the target that the shot came from the upper level.
+	if(isliving(original))
+		to_chat(original, span_userdanger("По вам ведут огонь сверху!"))
 	return TRUE
 
 /obj/projectile/proc/is_near_z_open_space(turf/T)
