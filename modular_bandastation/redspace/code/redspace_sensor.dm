@@ -2,6 +2,7 @@
 /obj/machinery/redspace_sensor
 	name = "redspace disturbance sensor"
 	desc = "A stationary instrument that sends precise local redspace measurements to a linked console."
+	circuit = /obj/item/circuitboard/machine/redspace_sensor
 	icon = 'icons/obj/wallmounts.dmi'
 	icon_state = "gsensor1"
 	density = FALSE
@@ -134,3 +135,36 @@
 		to_chat(user, span_notice("Привязка [src] к консоли разорвана."))
 		return ITEM_INTERACT_SUCCESS
 	return ITEM_INTERACT_BLOCKING
+
+/obj/machinery/redspace_sensor/wrench_act(mob/living/user, obj/item/tool)
+	return default_unfasten_wrench(user, tool)
+
+/obj/machinery/redspace_sensor/screwdriver_act(mob/living/user, obj/item/tool)
+	return default_deconstruction_screwdriver(user, tool)
+
+/obj/machinery/redspace_sensor/crowbar_act(mob/living/user, obj/item/tool)
+	return default_deconstruction_crowbar(user, tool)
+
+/obj/item/circuitboard/machine/redspace_sensor
+	name = "redspace disturbance sensor"
+	greyscale_colors = CIRCUIT_COLOR_SCIENCE
+	build_path = /obj/machinery/redspace_sensor
+	req_components = list(
+		/datum/stock_part/scanning_module = 1,
+		/datum/stock_part/capacitor = 1,
+		/obj/item/stack/cable_coil = 2,
+	)
+
+/datum/design/board/redspace_sensor
+	name = "Redspace Disturbance Sensor Board"
+	desc = "The circuit board for a redspace disturbance sensor."
+#ifdef TECHWEB_NODE_STARTER
+	// Design IDs were replaced with design typepaths by the techweb refactor.
+#else
+	id = "redspace_sensor"
+#endif
+	build_path = /obj/item/circuitboard/machine/redspace_sensor
+	category = list(
+		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_RESEARCH,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SCIENCE

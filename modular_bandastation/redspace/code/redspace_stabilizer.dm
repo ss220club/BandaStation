@@ -550,11 +550,21 @@
 /datum/techweb_node/redspace_stabilization
 #ifdef TECHWEB_NODE_STARTER
 	prerequisite_nodes = list(/datum/techweb_node/applied_bluespace)
-	unlocked_designs = list(/datum/design/board/redspace_stabilizer)
+	unlocked_designs = list(
+		/datum/design/redspace_counter,
+		/datum/design/board/redspace_sensor,
+		/datum/design/board/redspace_console,
+		/datum/design/board/redspace_stabilizer,
+	)
 #else
 	id = "redspace_stabilization"
 	prereq_ids = list(TECHWEB_NODE_APPLIED_BLUESPACE)
-	design_ids = list("redspace_stabilizer")
+	design_ids = list(
+		"redspace_counter",
+		"redspace_sensor",
+		"redspace_console",
+		"redspace_stabilizer",
+	)
 #endif
 	display_name = "Стабилизация редспейса"
 	description = "Практическое укрепление блюспейсной границы в локальных зонах давления редспейса."

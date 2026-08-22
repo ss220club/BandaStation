@@ -119,6 +119,7 @@
 /obj/machinery/computer/redspace_console
 	name = "redspace disturbance console"
 	desc = "A scientific console that collects local measurements from linked redspace sensors."
+	circuit = /obj/item/circuitboard/computer/redspace_console
 	icon_state = MAP_SWITCH("computer", "/obj/machinery/computer/atmos_control")
 	icon_screen = "tank"
 	icon_keyboard = "atmos_key"
@@ -293,3 +294,22 @@
 			forget_sensor_record(sensor_id)
 			return TRUE
 	return FALSE
+
+/obj/item/circuitboard/computer/redspace_console
+	name = "redspace disturbance console"
+	greyscale_colors = CIRCUIT_COLOR_SCIENCE
+	build_path = /obj/machinery/computer/redspace_console
+
+/datum/design/board/redspace_console
+	name = "Redspace Disturbance Console Board"
+	desc = "The circuit board for a redspace disturbance console."
+#ifdef TECHWEB_NODE_STARTER
+	// Design IDs were replaced with design typepaths by the techweb refactor.
+#else
+	id = "redspace_console"
+#endif
+	build_path = /obj/item/circuitboard/computer/redspace_console
+	category = list(
+		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_RESEARCH,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_ENGINEERING

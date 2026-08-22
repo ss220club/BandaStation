@@ -86,6 +86,25 @@
 /obj/item/redspace_counter/interact(mob/user)
 	return FALSE
 
+/datum/design/redspace_counter
+	name = "Redspace Disturbance Counter"
+	desc = "A portable instrument for measuring local redspace disturbance."
+#ifdef TECHWEB_NODE_STARTER
+	// Design IDs were replaced with design typepaths by the techweb refactor.
+#else
+	id = "redspace_counter"
+#endif
+	build_type = PROTOLATHE | AWAY_LATHE
+	materials = list(
+		/datum/material/iron = SMALL_MATERIAL_AMOUNT * 1.5,
+		/datum/material/glass = SMALL_MATERIAL_AMOUNT * 1.5,
+	)
+	build_path = /obj/item/redspace_counter
+	category = list(
+		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_ENGINEERING,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SCIENCE
+
 #undef REDSPACE_COUNTER_UPDATE_INTERVAL
 #undef REDSPACE_COUNTER_MIN_DISPLAY_VALUE
 #undef REDSPACE_COUNTER_MAX_DISPLAY_VALUE
