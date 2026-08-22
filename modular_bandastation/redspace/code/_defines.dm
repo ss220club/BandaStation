@@ -31,6 +31,13 @@
 #define REDSPACE_PROFILE_DEMONIC "demonic"
 #define REDSPACE_PROFILE_STABILIZER "stabilizer"
 
+/// Event categories. Spawn events use a separate budget from ordinary effects.
+#define REDSPACE_EVENT_CATEGORY_EFFECT "effect"
+#define REDSPACE_EVENT_CATEGORY_SPAWN "spawn"
+#define REDSPACE_EVENT_CATEGORY_TURF_SPAWN "turf_spawn"
+#define REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN "object_spawn"
+#define REDSPACE_EVENT_CATEGORY_MOB_SPAWN "mob_spawn"
+
 /// Round-start intensity selected by the redspace station trait.
 #define REDSPACE_INTENSITY_CALM "calm"
 #define REDSPACE_INTENSITY_DISTURBANCE "disturbance"
@@ -42,6 +49,15 @@
 #define REDSPACE_EVENT_BUDGET_MAX_POINTS 4
 #define REDSPACE_EVENT_BUDGET_MAX_ACTIVE 2
 #define REDSPACE_EVENT_BUDGET_MAX_DANGEROUS 1
+
+/// Independent limits for events that leave turfs, objects or mobs in the world.
+#define REDSPACE_SPAWN_BUDGET_WINDOW (60 SECONDS)
+#define REDSPACE_SPAWN_BUDGET_COOLDOWN (10 SECONDS)
+#define REDSPACE_SPAWN_BUDGET_MAX_POINTS 8
+#define REDSPACE_SPAWN_BUDGET_MAX_ACTIVE_EVENTS 4
+#define REDSPACE_SPAWN_BUDGET_MAX_TURFS 2
+#define REDSPACE_SPAWN_BUDGET_MAX_OBJECTS 6
+#define REDSPACE_SPAWN_BUDGET_MAX_MOBS 3
 
 /// Stabilizers regulate the ordinary field toward the top of the calm range.
 #define REDSPACE_STABILIZER_TARGET_VALUE 3

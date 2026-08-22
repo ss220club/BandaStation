@@ -12,11 +12,13 @@
 #define COMSIG_REDSPACE_SOURCE_CHANGED "redspace_source_changed"
 
 /// Sent to registered scenario listeners when an explicit event starts.
-/// Arguments: (event, event_context, reason); context has target_turf, zone_key, profile_id and optional source_id.
+/// Arguments: (event, event_context, reason); context has target_turf, zone_key, profile_id, event_category and optional source_id.
+/// Spawn events also provide spawn_count and spawn_policy_id.
 #define COMSIG_REDSPACE_EVENT_STARTED "redspace_event_started"
 
 /// Sent to registered scenario listeners when an explicit event finishes.
-/// Arguments: (event, event_context, reason); context has target_turf, zone_key, profile_id and optional source_id.
+/// Arguments: (event, event_context, reason); context has target_turf, zone_key, profile_id, event_category and optional source_id.
+/// Spawn events also provide spawn_count and spawn_policy_id.
 #define COMSIG_REDSPACE_EVENT_FINISHED "redspace_event_finished"
 
 #define REDSPACE_SOURCE_CHANGE_ADDED "added"

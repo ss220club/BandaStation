@@ -465,7 +465,7 @@ SUBSYSTEM_DEF(redspace)
 	if(!budget)
 		return
 	budget.next_attempt_at = 0
-	if(budget.active_event_count)
+	if(budget.active_event_count || budget.active_spawn_event_count)
 		return
 	event_budgets -= cell.key
 	qdel(budget)
@@ -573,6 +573,12 @@ SUBSYSTEM_DEF(redspace)
 	event_registry[event_id] = event_type
 	qdel(prototype)
 	return TRUE
+
+/// Registers a spawn event explicitly while keeping it in the common profile registry.
+/datum/controller/subsystem/redspace/proc/register_spawn_event_type(event_type)
+	if(!ispath(event_type, /datum/redspace_event/spawn))
+		return FALSE
+	return register_event_type(event_type)
 
 /// Creates a fresh instance of a registered event definition.
 /datum/controller/subsystem/redspace/proc/create_registered_event(event_id, list/event_args) as /datum/redspace_event
@@ -702,7 +708,7 @@ SUBSYSTEM_DEF(redspace)
 	if(!zone_key)
 		return
 	var/datum/redspace_event_budget/budget = event_budgets[zone_key]
-	if(!budget || budget.active_event_count || budget.next_attempt_at)
+	if(!budget || budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at)
 		return
 	event_budgets -= zone_key
 	qdel(budget)
@@ -1102,7 +1108,7 @@ SUBSYSTEM_DEF(redspace)
 	dirty_cells -= cell
 	currentrun -= cell
 	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
-	if(budget && !budget.active_event_count)
+	if(budget && !budget.active_event_count && !budget.active_spawn_event_count)
 		event_budgets -= cell.key
 		qdel(budget)
 	qdel(cell)
@@ -1117,12 +1123,12 @@ SUBSYSTEM_DEF(redspace)
 			continue
 		var/source_present = cell_has_active_source(cell)
 		var/datum/redspace_event_budget/budget = event_budgets[cell.key]
-		if(budget && !source_present && !budget.active_event_count)
+		if(budget && !source_present && !budget.active_event_count && !budget.active_spawn_event_count)
 			budget.next_attempt_at = 0
 			event_budgets -= cell.key
 			qdel(budget)
 			budget = null
-		if(budget && (budget.active_event_count || budget.next_attempt_at))
+		if(budget && (budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at))
 			continue
 		if(!source_present)
 			remove_field_cell(cell)
@@ -1137,12 +1143,12 @@ SUBSYSTEM_DEF(redspace)
 		return
 	var/source_present = cell_has_active_source(cell)
 	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
-	if(budget && !source_present && !budget.active_event_count)
+	if(budget && !source_present && !budget.active_event_count && !budget.active_spawn_event_count)
 		budget.next_attempt_at = 0
 		event_budgets -= cell.key
 		qdel(budget)
 		budget = null
-	if(budget && (budget.active_event_count || budget.next_attempt_at))
+	if(budget && (budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at))
 		return
 	if(!source_present)
 		remove_field_cell(cell)
@@ -1336,9 +1342,14 @@ SUBSYSTEM_DEF(redspace)
 		"target_turf" = target,
 		"zone_key" = target ? get_event_zone_key(target) : null,
 		"profile_id" = event?.profile_id,
+		"event_category" = event?.event_category,
 	)
 	if(event?.source_id)
 		event_context["source_id"] = event.source_id
+	if(event && event.uses_spawn_budget())
+		var/datum/redspace_event/spawn/spawn_event = event
+		event_context["spawn_count"] = event.get_spawn_count()
+		event_context["spawn_policy_id"] = spawn_event.spawn_policy_id
 	return event_context
 
 /// Sends an exposure signal directly to the object affected by an event.

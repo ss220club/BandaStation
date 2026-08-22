@@ -106,6 +106,37 @@
 	if(!budget.can_start(budget_safe))
 		return Fail("The event budget must reset spent points after its window")
 	budget.release(budget_safe)
+
+	var/datum/redspace_event/spawn/turf/turf_spawn = new
+	var/datum/redspace_event/spawn/object/object_spawn = new
+	var/datum/redspace_event/spawn/mob/mob_spawn = new
+	if(turf_spawn.event_category != REDSPACE_EVENT_CATEGORY_TURF_SPAWN || object_spawn.event_category != REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN || mob_spawn.event_category != REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
+		return Fail("Spawn event families must expose separate turf, object and mob categories")
+	if(!turf_spawn.uses_spawn_budget() || turf_spawn.get_spawn_count() != 1 || turf_spawn.get_spawn_budget_cost() != 1)
+		return Fail("Spawn event families must expose independent spawn budget metadata")
+
+	var/datum/redspace_event/spawn/turf/too_many_turfs = new
+	too_many_turfs.spawn_count = REDSPACE_SPAWN_BUDGET_MAX_TURFS + 1
+	budget.last_spawn_event_time = world.time - REDSPACE_SPAWN_BUDGET_COOLDOWN
+	if(budget.can_start(too_many_turfs))
+		return Fail("Spawn budgets must enforce category-specific turf limits")
+
+	// A mob spawn is allowed even when the ordinary dangerous-event budget is full.
+	mob_spawn.dangerous = TRUE
+	budget.active_dangerous_count = REDSPACE_EVENT_BUDGET_MAX_DANGEROUS
+	budget.spent_points = REDSPACE_EVENT_BUDGET_MAX_POINTS
+	budget.last_event_time = world.time
+	budget.last_spawn_event_time = world.time - REDSPACE_SPAWN_BUDGET_COOLDOWN
+	if(!budget.can_start(mob_spawn) || !budget.reserve(mob_spawn))
+		return Fail("Spawn events must use their own budget instead of the dangerous-event limit")
+	if(budget.active_dangerous_count != REDSPACE_EVENT_BUDGET_MAX_DANGEROUS || budget.active_spawn_event_count != 1 || budget.active_spawn_mob_count != 1)
+		return Fail("Spawn reservations must not consume ordinary dangerous-event counters")
+	budget.release(mob_spawn)
+
+	qdel(too_many_turfs)
+	qdel(turf_spawn)
+	qdel(object_spawn)
+	qdel(mob_spawn)
 	qdel(budget_safe)
 	qdel(budget_storm)
 	qdel(budget)

@@ -2,6 +2,8 @@
 /datum/redspace_event
 	var/event_id
 	var/profile_id
+	/// Ordinary effects use the event budget. Spawn subclasses opt into their own budget.
+	var/event_category = REDSPACE_EVENT_CATEGORY_EFFECT
 	/// Inclusive ordinary field range in which this event may run.
 	var/min_value = 0
 	var/max_value = REDSPACE_MAX_NORMAL_VALUE
@@ -23,6 +25,18 @@
 	var/turf/event_target
 	/// Optional source that caused the event, when a scenario can identify one.
 	var/source_id
+
+/datum/redspace_event/proc/uses_spawn_budget()
+	return FALSE
+
+/datum/redspace_event/proc/get_spawn_category()
+	return null
+
+/datum/redspace_event/proc/get_spawn_count()
+	return 0
+
+/datum/redspace_event/proc/get_spawn_budget_cost()
+	return 0
 
 /datum/redspace_event/proc/can_start(turf/target)
 	if(!target || !SSredspace || !SSredspace.is_supported_z(target.z))
@@ -54,6 +68,72 @@
 		SSredspace.wake()
 	return ..()
 
+/// Abstract event family for content that leaves a turf, object or mob behind.
+/// Concrete profile content should inherit one of the typed children below and provide event_id/start().
+/datum/redspace_event/spawn
+	abstract_type = /datum/redspace_event/spawn
+	event_category = REDSPACE_EVENT_CATEGORY_SPAWN
+	/// Spawn events normally remain registered until their created content is cleaned up.
+	continues_after_start = TRUE
+	/// Spawn budget values are intentionally independent from budget_cost/dangerous.
+	budget_cost = 0
+	var/spawn_count = 1
+	var/spawn_budget_cost = 1
+	var/spawn_policy_id
+	var/list/spawned_atoms = list()
+
+/datum/redspace_event/spawn/uses_spawn_budget()
+	return TRUE
+
+/datum/redspace_event/spawn/get_spawn_category()
+	return event_category
+
+/datum/redspace_event/spawn/get_spawn_count()
+	if(!isnum(spawn_count))
+		return 0
+	return max(round(spawn_count), 0)
+
+/datum/redspace_event/spawn/get_spawn_budget_cost()
+	if(!isnum(spawn_budget_cost))
+		return 0
+	return max(spawn_budget_cost, 0)
+
+/// Keeps the lifecycle event aware of persistent content without making SSredspace scan the map.
+/datum/redspace_event/spawn/proc/register_spawned_atom(atom/spawned_atom)
+	if(!spawned_atom || QDELETED(spawned_atom))
+		return FALSE
+	if(spawned_atom in spawned_atoms)
+		return TRUE
+	spawned_atoms |= spawned_atom
+	RegisterSignal(spawned_atom, COMSIG_QDELETING, PROC_REF(on_spawned_atom_deleted))
+	return TRUE
+
+/datum/redspace_event/spawn/proc/on_spawned_atom_deleted(atom/deleted_atom)
+	SIGNAL_HANDLER
+	spawned_atoms -= deleted_atom
+
+/datum/redspace_event/spawn/Destroy()
+	for(var/atom/spawned_atom as anything in spawned_atoms)
+		if(spawned_atom)
+			UnregisterSignal(spawned_atom, COMSIG_QDELETING)
+	spawned_atoms.Cut()
+	return ..()
+
+/// Future events that replace or create terrain.
+/datum/redspace_event/spawn/turf
+	abstract_type = /datum/redspace_event/spawn/turf
+	event_category = REDSPACE_EVENT_CATEGORY_TURF_SPAWN
+
+/// Future events that create persistent objects or scenery.
+/datum/redspace_event/spawn/object
+	abstract_type = /datum/redspace_event/spawn/object
+	event_category = REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN
+
+/// Future events that create redspace creatures.
+/datum/redspace_event/spawn/mob
+	abstract_type = /datum/redspace_event/spawn/mob
+	event_category = REDSPACE_EVENT_CATEGORY_MOB_SPAWN
+
 /// Per-hex event budget. It is created only for zones that actually attempt an event.
 /datum/redspace_event_budget
 	var/zone_key
@@ -63,6 +143,15 @@
 	var/active_event_count = 0
 	var/active_dangerous_count = 0
 	var/list/reserved_events = list()
+	/// Spawn reservations are tracked separately from ordinary effect reservations.
+	var/spawn_window_started
+	var/spawn_spent_points = 0
+	var/last_spawn_event_time = 0
+	var/active_spawn_event_count = 0
+	var/active_spawn_turf_count = 0
+	var/active_spawn_object_count = 0
+	var/active_spawn_mob_count = 0
+	var/list/reserved_spawn_events = list()
 	/// Next state-profile attempt for this active zone. Zero means unscheduled.
 	var/next_attempt_at = 0
 	var/scheduled_state
@@ -71,6 +160,7 @@
 	. = ..()
 	zone_key = new_zone_key
 	window_started = world.time
+	spawn_window_started = world.time
 
 /datum/redspace_event_budget/proc/reset_window()
 	if(world.time - window_started < REDSPACE_EVENT_BUDGET_WINDOW)
@@ -78,9 +168,17 @@
 	window_started = world.time
 	spent_points = 0
 
+/datum/redspace_event_budget/proc/reset_spawn_window()
+	if(world.time - spawn_window_started < REDSPACE_SPAWN_BUDGET_WINDOW)
+		return
+	spawn_window_started = world.time
+	spawn_spent_points = 0
+
 /datum/redspace_event_budget/proc/can_start(datum/redspace_event/event)
 	if(!event)
 		return FALSE
+	if(event.uses_spawn_budget())
+		return can_start_spawn(event)
 	reset_window()
 	if(active_event_count >= REDSPACE_EVENT_BUDGET_MAX_ACTIVE)
 		return FALSE
@@ -91,8 +189,59 @@
 	var/event_cost = max(event.budget_cost, 0)
 	return spent_points + event_cost <= REDSPACE_EVENT_BUDGET_MAX_POINTS
 
+/datum/redspace_event_budget/proc/can_start_spawn(datum/redspace_event/event)
+	if(!event || !event.uses_spawn_budget())
+		return FALSE
+	reset_spawn_window()
+	if(active_spawn_event_count >= REDSPACE_SPAWN_BUDGET_MAX_ACTIVE_EVENTS)
+		return FALSE
+	if(last_spawn_event_time && world.time < last_spawn_event_time + REDSPACE_SPAWN_BUDGET_COOLDOWN)
+		return FALSE
+
+	var/spawn_category = event.get_spawn_category()
+	var/spawn_count = event.get_spawn_count()
+	var/category_limit = get_spawn_category_limit(spawn_category)
+	if(!category_limit || spawn_count <= 0 || get_spawn_category_count(spawn_category) + spawn_count > category_limit)
+		return FALSE
+
+	var/spawn_cost = max(event.get_spawn_budget_cost(), 0)
+	return spawn_spent_points + spawn_cost <= REDSPACE_SPAWN_BUDGET_MAX_POINTS
+
+/datum/redspace_event_budget/proc/get_spawn_category_limit(spawn_category)
+	switch(spawn_category)
+		if(REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
+			return REDSPACE_SPAWN_BUDGET_MAX_TURFS
+		if(REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN)
+			return REDSPACE_SPAWN_BUDGET_MAX_OBJECTS
+		if(REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
+			return REDSPACE_SPAWN_BUDGET_MAX_MOBS
+	return 0
+
+/datum/redspace_event_budget/proc/get_spawn_category_count(spawn_category)
+	switch(spawn_category)
+		if(REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
+			return active_spawn_turf_count
+		if(REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN)
+			return active_spawn_object_count
+		if(REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
+			return active_spawn_mob_count
+	return 0
+
+/datum/redspace_event_budget/proc/adjust_spawn_category_count(spawn_category, amount)
+	switch(spawn_category)
+		if(REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
+			active_spawn_turf_count = max(active_spawn_turf_count + amount, 0)
+		if(REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN)
+			active_spawn_object_count = max(active_spawn_object_count + amount, 0)
+		if(REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
+			active_spawn_mob_count = max(active_spawn_mob_count + amount, 0)
+
 /datum/redspace_event_budget/proc/reserve(datum/redspace_event/event)
-	if(!event || reserved_events[event] || !can_start(event))
+	if(!event)
+		return FALSE
+	if(event.uses_spawn_budget())
+		return reserve_spawn(event)
+	if(!isnull(reserved_events[event]) || !can_start(event))
 		return FALSE
 	var/event_cost = max(event.budget_cost, 0)
 	reserved_events[event] = event_cost
@@ -103,8 +252,29 @@
 	last_event_time = world.time
 	return TRUE
 
+/datum/redspace_event_budget/proc/reserve_spawn(datum/redspace_event/event)
+	if(!event || !event.uses_spawn_budget() || !isnull(reserved_spawn_events[event]) || !can_start_spawn(event))
+		return FALSE
+	var/spawn_cost = max(event.get_spawn_budget_cost(), 0)
+	var/spawn_count = event.get_spawn_count()
+	var/spawn_category = event.get_spawn_category()
+	reserved_spawn_events[event] = list(
+		"cost" = spawn_cost,
+		"count" = spawn_count,
+		"category" = spawn_category,
+	)
+	spawn_spent_points += spawn_cost
+	active_spawn_event_count++
+	adjust_spawn_category_count(spawn_category, spawn_count)
+	last_spawn_event_time = world.time
+	return TRUE
+
 /datum/redspace_event_budget/proc/release(datum/redspace_event/event, refund = FALSE)
-	if(!event || isnull(reserved_events[event]))
+	if(!event)
+		return FALSE
+	if(event.uses_spawn_budget())
+		return release_spawn(event, refund)
+	if(isnull(reserved_events[event]))
 		return FALSE
 	var/event_cost = reserved_events[event]
 	reserved_events -= event
@@ -115,6 +285,19 @@
 		spent_points = max(spent_points - event_cost, 0)
 		if(last_event_time == world.time)
 			last_event_time = 0
+	return TRUE
+
+/datum/redspace_event_budget/proc/release_spawn(datum/redspace_event/event, refund = FALSE)
+	if(!event || !event.uses_spawn_budget() || isnull(reserved_spawn_events[event]))
+		return FALSE
+	var/list/reservation = reserved_spawn_events[event]
+	reserved_spawn_events -= event
+	active_spawn_event_count = max(active_spawn_event_count - 1, 0)
+	adjust_spawn_category_count(reservation["category"], -reservation["count"])
+	if(refund)
+		spawn_spent_points = max(spawn_spent_points - reservation["cost"], 0)
+		if(last_spawn_event_time == world.time)
+			last_spawn_event_time = 0
 	return TRUE
 
 /// First safe content event: a short local distortion with no damage or forced status effect.
