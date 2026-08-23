@@ -1,3 +1,237 @@
+/// Acquires only visible enemies, but keeps pursuing an already acquired enemy through cover.
+/datum/targeting_strategy/basic/redspace_demon
+
+/datum/targeting_strategy/basic/redspace_demon/can_keep_target(mob/living/living_mob, atom/target, range, datum/ai_controller/controller = null)
+	var/turf/owner_turf = get_turf(living_mob)
+	var/turf/target_turf = get_turf(target)
+	if(isnull(owner_turf) || isnull(target_turf) || owner_turf.z != target_turf.z)
+		return FALSE
+	var/datum/targeting_strategy/retention_strategy = GET_TARGETING_STRATEGY(/datum/targeting_strategy/basic/redspace_demon/retained)
+	return retention_strategy.is_valid_target(living_mob, target, range, controller)
+
+/datum/targeting_strategy/basic/redspace_demon/retained
+	ignore_sight = TRUE
+
+/// Mirrors attack_obstructions' object checks for movement behaviors that must wait for an obstacle attack.
+/proc/redspace_demon_can_smash_object(mob/living/basic/basic_mob, obj/object)
+	if(!isobj(object) || !object.density)
+		return FALSE
+	if(object.IsObscured())
+		return FALSE
+	if(basic_mob.see_invisible < object.invisibility)
+		return FALSE
+	var/list/whitelist = basic_mob.ai_controller.blackboard[BB_OBSTACLE_TARGETING_WHITELIST]
+	if(whitelist && !is_type_in_typecache(object, whitelist))
+		return FALSE
+	return TRUE
+
+/// Returns TRUE when the next tile is blocked by an object we should either attack or shoot through.
+/proc/redspace_demon_has_obstruction(mob/living/basic/basic_mob, atom/target, projectile_pass_flags = NONE)
+	var/turf/next_step = get_step_towards(basic_mob, target)
+	if(isnull(next_step))
+		return FALSE
+
+	var/list/obstruction_turfs = list()
+	var/direction_to_next_step = get_dir(basic_mob, next_step)
+	if(ISDIAGONALDIR(direction_to_next_step))
+		for(var/cardinal_direction in GLOB.cardinals)
+			if(direction_to_next_step & cardinal_direction)
+				obstruction_turfs += get_step(basic_mob, cardinal_direction)
+	else
+		obstruction_turfs += next_step
+
+	for(var/turf/obstruction_turf as anything in obstruction_turfs)
+		if(isnull(obstruction_turf) || !obstruction_turf.is_blocked_turf(exclude_mobs = TRUE, source_atom = basic_mob))
+			continue
+		for(var/obj/object as anything in obstruction_turf.contents)
+			if(!object.density)
+				continue
+			if(projectile_pass_flags && (object.pass_flags_self & projectile_pass_flags))
+				return TRUE
+			if(redspace_demon_can_smash_object(basic_mob, object))
+				return TRUE
+	return FALSE
+
+/// Waits for the obstacle attack instead of repeatedly pathing into the object being attacked.
+/datum/bt_node/ai_behavior/move_to_target/redspace_demon
+
+/datum/bt_node/ai_behavior/move_to_target/redspace_demon/setup(datum/ai_controller/controller)
+	. = ..()
+	if(!. || !redspace_demon_has_obstruction(controller.pawn, controller.blackboard[target_key]))
+		return .
+	controller.ai_movement.stop_moving_towards(controller)
+	return .
+
+/datum/bt_node/ai_behavior/move_to_target/redspace_demon/perform(seconds_per_tick, datum/ai_controller/controller)
+	var/atom/target = controller.blackboard[target_key]
+	if(movement_failed && !QDELETED(target) && redspace_demon_has_obstruction(controller.pawn, target))
+		movement_failed = FALSE
+		controller.consecutive_pathing_attempts = 0
+		return AI_BEHAVIOR_INSTANT
+	if(!QDELETED(target) && redspace_demon_has_obstruction(controller.pawn, target))
+		controller.ai_movement.stop_moving_towards(controller)
+		return AI_BEHAVIOR_INSTANT
+	return ..()
+
+/// Keeps ranged demons at a distance while visible, but closes in on a remembered target to reach cover.
+/datum/bt_node/ai_behavior/maintain_distance/redspace_demon
+	var/static/projectile_pass_flags = /obj/projectile/magic/lesser_fireball::pass_flags
+	var/static/max_attack_range = 9
+
+/datum/bt_node/ai_behavior/maintain_distance/redspace_demon/setup(datum/ai_controller/controller)
+	var/atom/target = controller.blackboard[target_key]
+	if(QDELETED(target))
+		return FALSE
+	RegisterSignal(controller.pawn, COMSIG_MOB_AI_MOVEMENT_FAILED, PROC_REF(on_movement_failed))
+	return TRUE
+
+/datum/bt_node/ai_behavior/maintain_distance/redspace_demon/perform(seconds_per_tick, datum/ai_controller/controller)
+	var/atom/target = controller.blackboard[target_key]
+	if(QDELETED(target))
+		return AI_BEHAVIOR_FAILED
+	if(movement_failed)
+		if(redspace_demon_has_obstruction(controller.pawn, target, projectile_pass_flags))
+			movement_failed = FALSE
+			controller.consecutive_pathing_attempts = 0
+			return AI_BEHAVIOR_INSTANT
+		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+
+	var/target_visible = can_see(controller.pawn, target, 10)
+	var/minimum_distance = controller.blackboard[min_dist_key] || 4
+	var/maximum_distance = controller.blackboard[max_dist_key] || 6
+	var/current_distance = get_dist(controller.pawn, target)
+	var/obstruction_pass_flags = current_distance <= max_attack_range ? projectile_pass_flags : NONE
+	if(target_visible)
+		if(current_distance > maximum_distance && redspace_demon_has_obstruction(controller.pawn, target, obstruction_pass_flags))
+			controller.ai_movement.stop_moving_towards(controller)
+			return AI_BEHAVIOR_INSTANT
+		var/desired_movement_type
+		if(current_distance < minimum_distance)
+			desired_movement_type = /datum/ai_movement/basic_avoidance/backstep
+		else if(current_distance > maximum_distance)
+			desired_movement_type = approach_movement_type || initial(controller.ai_movement)
+		var/datum/ai_movement/desired_movement = SSai_movement.movement_types[desired_movement_type]
+		if(controller.blackboard[BB_CURRENT_MIN_MOVE_DISTANCE] == 1 || (desired_movement && controller.ai_movement != desired_movement))
+			controller.ai_movement.stop_moving_towards(controller)
+		return ..()
+
+	if(redspace_demon_has_obstruction(controller.pawn, target, obstruction_pass_flags))
+		controller.ai_movement.stop_moving_towards(controller)
+		return AI_BEHAVIOR_INSTANT
+	if(controller.blackboard[BB_CURRENT_MIN_MOVE_DISTANCE] != 1)
+		controller.ai_movement.stop_moving_towards(controller)
+		controller.change_ai_movement_type(approach_movement_type || initial(controller.ai_movement))
+	controller.ai_movement.start_moving_towards(controller, target, 1)
+	return AI_BEHAVIOR_INSTANT
+
+/// Failed checks are delayed as well, avoiding a hot loop while retained targets remain behind cover.
+/datum/bt_node/ai_behavior/attack_obstructions/redspace_demon/perform(seconds_per_tick, datum/ai_controller/controller)
+	. = ..()
+	if(. & AI_BEHAVIOR_FAILED)
+		. |= AI_BEHAVIOR_DELAY
+
+/datum/bt_node/ai_behavior/attack_obstructions/redspace_demon/can_smash_object(mob/living/basic/basic_mob, obj/object)
+	return redspace_demon_can_smash_object(basic_mob, object)
+
+/datum/bt_node/ai_behavior/attack_obstructions/redspace_demon/ranged
+	var/static/projectile_pass_flags = /obj/projectile/magic/lesser_fireball::pass_flags
+	var/static/max_attack_range = 9
+
+/datum/bt_node/ai_behavior/attack_obstructions/redspace_demon/ranged/can_smash_object(mob/living/basic/basic_mob, obj/object)
+	var/atom/target = basic_mob.ai_controller.blackboard[BB_CURRENT_TARGET]
+	if(object.pass_flags_self & projectile_pass_flags && !QDELETED(target) && get_dist(basic_mob, target) <= max_attack_range && can_see(basic_mob, target, 10))
+		return FALSE
+	return ..()
+
+/datum/bt_node/ai_behavior/basic_ranged_attack/redspace_demon
+	avoid_friendly_fire = TRUE
+	var/static/projectile_pass_flags = /obj/projectile/magic/lesser_fireball::pass_flags
+
+/datum/bt_node/ai_behavior/basic_ranged_attack/redspace_demon/perform(seconds_per_tick, datum/ai_controller/controller)
+	. = ..()
+	if(. & AI_BEHAVIOR_FAILED)
+		. |= AI_BEHAVIOR_DELAY
+
+/datum/bt_node/ai_behavior/basic_ranged_attack/redspace_demon/check_friendly_in_path(mob/living/source, atom/target, datum/targeting_strategy/targeting_strategy)
+	return is_firing_path_blocked(source, source, target, targeting_strategy)
+
+/datum/bt_node/ai_behavior/basic_ranged_attack/redspace_demon/adjust_position(mob/living/living_pawn, atom/target)
+	var/turf/our_turf = get_turf(living_pawn)
+	var/current_distance = get_dist(our_turf, target)
+	var/minimum_distance = living_pawn.ai_controller.blackboard[BB_RANGED_SKIRMISH_MIN_DISTANCE] || 4
+	var/list/clear_positions = list()
+	var/list/fallback_positions = list()
+	var/datum/targeting_strategy/targeting_strategy = GET_TARGETING_STRATEGY(living_pawn.ai_controller.blackboard[BB_TARGETING_STRATEGY])
+
+	for(var/direction in GLOB.cardinals)
+		var/turf/candidate = get_step(our_turf, direction)
+		if(isnull(candidate) || candidate.is_blocked_turf(source_atom = living_pawn) || !candidate.can_cross_safely(living_pawn))
+			continue
+		var/candidate_distance = get_dist(candidate, target)
+		if(candidate_distance > current_distance || candidate_distance < min(minimum_distance, current_distance))
+			continue
+		fallback_positions += candidate
+		if(!is_firing_path_blocked(candidate, living_pawn, target, targeting_strategy))
+			clear_positions += candidate
+
+	var/list/possible_positions = length(clear_positions) ? clear_positions : fallback_positions
+	while(length(possible_positions))
+		var/turf/chosen_turf = get_closest_atom(/turf, possible_positions, target)
+		possible_positions -= chosen_turf
+		if(living_pawn.Move(chosen_turf, get_dir(our_turf, chosen_turf)))
+			return
+
+/datum/bt_node/ai_behavior/basic_ranged_attack/redspace_demon/proc/is_firing_path_blocked(atom/trajectory_start, mob/living/shooter, atom/target, datum/targeting_strategy/targeting_strategy)
+	var/list/turf_list = get_line(trajectory_start, target)
+	var/list_length = length(turf_list) - 1
+	for(var/index in 1 to list_length)
+		var/turf/current_turf = turf_list[index]
+		var/turf/next_turf = turf_list[index + 1]
+		var/direction_to_turf = get_dir(current_turf, next_turf)
+		if(!ISDIAGONALDIR(direction_to_turf))
+			continue
+		for(var/cardinal_direction in GLOB.cardinals)
+			if(!(cardinal_direction & direction_to_turf))
+				continue
+			var/turf/extra_turf = get_step(current_turf, cardinal_direction)
+			if(extra_turf)
+				turf_list += extra_turf
+
+	turf_list -= get_turf(trajectory_start)
+	turf_list -= get_turf(target)
+	for(var/turf/path_turf as anything in turf_list)
+		if(path_turf.density && !(path_turf.pass_flags_self & projectile_pass_flags))
+			return TRUE
+		for(var/atom/movable/blocker as anything in path_turf.contents)
+			if(!blocker.density || ismob(blocker))
+				continue
+			if(!(blocker.pass_flags_self & projectile_pass_flags))
+				return TRUE
+		for(var/mob/living/potential_friend in path_turf)
+			if(!targeting_strategy.is_valid_target(shooter, potential_friend, get_dist(shooter, potential_friend), controller = shooter.ai_controller))
+				return TRUE
+	return FALSE
+
+/// Ranged combat that attacks blocking objects and advances only while its target is out of sight.
+/datum/bt_node/subtree/redspace_ranged_combat
+	behavior_tree_json = "code/modules/mob/living/basic/space_fauna/demon/redspace_demon_ranged_combat.bt.json"
+
+/datum/bt_node/subtree/redspace_melee_combat
+	behavior_tree_json = "code/modules/mob/living/basic/space_fauna/demon/redspace_demon_melee_combat.bt.json"
+
+
+/datum/ai_controller/basic_controller/simple/redspace_demon
+	blackboard = list(
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/redspace_demon,
+		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/nearest,
+	)
+
+/datum/ai_controller/basic_controller/simple/redspace_demon/melee
+	behavior_tree_json = "code/modules/mob/living/basic/space_fauna/demon/redspace_demon_melee.bt.json"
+
+/datum/ai_controller/basic_controller/simple/redspace_demon/ranged
+	behavior_tree_json = "code/modules/mob/living/basic/space_fauna/demon/redspace_demon_ranged.bt.json"
+
 /// A direct fireball projectile used by the ranged demon. It has no explosion.
 /obj/projectile/magic/lesser_fireball
 	name = "bolt of fireball"
@@ -27,7 +261,7 @@
 	health = 150
 	melee_damage_lower = 12
 	melee_damage_upper = 18
-	ai_controller = /datum/ai_controller/basic_controller/simple/simple_hostile
+	ai_controller = /datum/ai_controller/basic_controller/simple/redspace_demon/melee
 
 /mob/living/basic/demon/redspace/Initialize(mapload)
 	. = ..()
@@ -44,7 +278,7 @@
 	health = 100
 	melee_damage_lower = 6
 	melee_damage_upper = 10
-	ai_controller = /datum/ai_controller/basic_controller/simple/simple_ranged
+	ai_controller = /datum/ai_controller/basic_controller/simple/redspace_demon/ranged
 
 /mob/living/basic/demon/redspace/ranged/Initialize(mapload)
 	. = ..()
