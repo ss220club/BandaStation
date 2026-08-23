@@ -114,16 +114,13 @@
 
 /obj/item/spacejacker/ui_data(mob/user)
 	update_exchange_rate()
-	var/mob/living/carbon/human/holder = recursive_loc_check(src, /mob/living/carbon/human)
 	return list(
 		"credits_stored" = credits_stored,
 		"tc_price" = tc_price,
 		"tc_purchase_limit" = tc_purchase_limit,
 		"tc_purchased" = tc_purchased,
-		"player_count" = exchange_player_count,
-		"traitor_count" = exchange_traitor_count,
 		"active" = active,
-		"attached" = !isnull(holder),
+		"attached" = istype(loc, /obj/item/modular_computer/pda),
 		"nearby_players" = get_nearby_players(),
 	)
 

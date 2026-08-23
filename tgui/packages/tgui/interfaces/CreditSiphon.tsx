@@ -9,8 +9,6 @@ type Data = {
   tc_price: number;
   tc_purchase_limit: number;
   tc_purchased: number;
-  player_count: number;
-  traitor_count: number;
   active: boolean;
   attached: boolean;
   nearby_players: { name: string; ref: string }[];
@@ -23,8 +21,6 @@ export const CreditSiphon = () => {
     tc_price,
     tc_purchase_limit,
     tc_purchased,
-    player_count,
-    traitor_count,
     active,
     attached,
     nearby_players = [],
@@ -36,9 +32,14 @@ export const CreditSiphon = () => {
   }));
 
   return (
-    <Window width={280} height={390} title="Credit Siphon">
-      <Window.Content>
-        <Section title="Stored credits">
+    <Window
+      width={280}
+      height={360}
+      title="Hacking Initialized.."
+      theme="hackerman"
+    >
+      <Window.Content style={{ fontFamily: 'Verdana, sans-serif' }}>
+        <Section title="Сохранённые кредиты">
           <Box textAlign="center" fontSize={2} mb={2}>
             {credits_stored} cr <Icon color="gold" name="coins" />
           </Box>
@@ -48,7 +49,7 @@ export const CreditSiphon = () => {
             color={active ? 'red' : 'green'}
             onClick={() => act('toggle')}
           >
-            {active ? 'Disable siphon' : 'Enable siphon'}
+            {active ? 'Выключить фишинг-бот' : 'Включить фишинг-бот'}
           </Button>
           <Button
             fluid
@@ -56,9 +57,12 @@ export const CreditSiphon = () => {
             disabled={attached || !target}
             onClick={() => act('attach', { target })}
           >
-            {attached ? 'Attached to a player' : 'Attach to nearby player'}
+            {attached
+              ? 'Прикреплён к жертве'
+              : 'Прикрепить вирус к ближайшей жертве'}
           </Button>
           <Dropdown
+            buttons
             fluid
             disabled={attached || !targetOptions.length}
             options={targetOptions}
@@ -67,8 +71,8 @@ export const CreditSiphon = () => {
               targetOptions.find((option) => option.value === target)
                 ?.displayText
             }
-            placeholder="Select nearby player"
-            onSelected={setTarget}
+            placeholder="Выберите ближайшую жертву"
+            onSelected={(value) => setTarget(String(value))}
           />
           <Button
             fluid
@@ -76,18 +80,15 @@ export const CreditSiphon = () => {
             disabled={credits_stored <= 0}
             onClick={() => act('withdraw')}
           >
-            Withdraw
+            Вывести
           </Button>
         </Section>
-        <Section title="Credit exchange">
+        <Section title="КОСМООБМЕННИК 'СИНДИБАНК'">
           <Box textAlign="center" mb={1}>
-            {tc_price} cr / TC <Icon color="gold" name="coins" />
+            {tc_price} кр. за 1 ТК <Icon color="gold" name="coins" />
           </Box>
           <Box textAlign="center" mb={1}>
-            {tc_purchased} / {tc_purchase_limit} TC purchased
-          </Box>
-          <Box textAlign="center" mb={1}>
-            {player_count} online, {traitor_count} traitors
+            {tc_purchased} / {tc_purchase_limit} ТК куплено
           </Box>
           <Button
             fluid
@@ -97,7 +98,7 @@ export const CreditSiphon = () => {
             }
             onClick={() => act('buy_tc')}
           >
-            Buy 1 TC
+            Купить 1 ТК
           </Button>
         </Section>
       </Window.Content>
