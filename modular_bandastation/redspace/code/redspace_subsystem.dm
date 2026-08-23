@@ -300,10 +300,12 @@ SUBSYSTEM_DEF(redspace)
 	var/earliest_attempt
 	for(var/zone_key in event_budgets)
 		var/datum/redspace_event_budget/budget = event_budgets[zone_key]
-		if(!budget?.next_attempt_at)
+		if(!budget)
 			continue
-		if(isnull(earliest_attempt) || budget.next_attempt_at < earliest_attempt)
+		if(budget.next_attempt_at && (isnull(earliest_attempt) || budget.next_attempt_at < earliest_attempt))
 			earliest_attempt = budget.next_attempt_at
+		if(budget.next_turf_attempt_at && (isnull(earliest_attempt) || budget.next_turf_attempt_at < earliest_attempt))
+			earliest_attempt = budget.next_turf_attempt_at
 
 	if(isnull(earliest_attempt))
 		clear_event_wake_timer()
@@ -444,7 +446,24 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/get_event_profile(state) as /datum/redspace_event_profile
 	return context?.active_profile?.get_event_profile(state)
 
-/// Ensures that a sparse active cell participates in the state-profile scheduler.
+/// Returns whether a profile has an automatic event in the requested queue.
+/datum/controller/subsystem/redspace/proc/event_profile_has_automatic_event(datum/redspace_event_profile/event_profile, target_category = null)
+	if(!event_profile)
+		return FALSE
+	for(var/event_id in event_profile.event_weights)
+		var/event_type = event_registry[event_id]
+		if(!event_type)
+			continue
+		var/datum/redspace_event/event = new event_type
+		var/event_category = event.get_spawn_category()
+		var/category_matches = isnull(target_category) ? event_category != REDSPACE_EVENT_CATEGORY_TURF_SPAWN : event_category == target_category
+		var/is_match = event.automatic && category_matches
+		qdel(event)
+		if(is_match)
+			return TRUE
+	return FALSE
+
+/// Ensures that a sparse active cell participates in both profile event queues.
 /datum/controller/subsystem/redspace/proc/schedule_event_attempt(datum/redspace_field_cell/cell, immediate = FALSE)
 	if(!cell)
 		return FALSE
@@ -458,12 +477,33 @@ SUBSYSTEM_DEF(redspace)
 		clear_event_schedule(cell)
 		return FALSE
 
-	if(immediate)
-		budget.next_attempt_at = world.time
-	else if(budget.scheduled_state != cell.state || !budget.next_attempt_at)
-		budget.next_attempt_at = world.time + event_profile.get_next_attempt_delay()
-	budget.scheduled_state = cell.state
-	schedule_event_wake_at(budget.next_attempt_at)
+	var/has_normal_events = event_profile_has_automatic_event(event_profile)
+	var/has_turf_events = event_profile_has_automatic_event(event_profile, REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
+	if(!has_normal_events && !has_turf_events)
+		clear_event_schedule(cell)
+		return FALSE
+
+	if(has_normal_events)
+		if(immediate)
+			budget.next_attempt_at = world.time
+		else if(budget.scheduled_state != cell.state || !budget.next_attempt_at)
+			budget.next_attempt_at = world.time + event_profile.get_next_attempt_delay()
+		budget.scheduled_state = cell.state
+	else
+		budget.next_attempt_at = 0
+		budget.scheduled_state = null
+
+	if(has_turf_events)
+		if(immediate)
+			budget.next_turf_attempt_at = world.time
+		else if(budget.turf_scheduled_state != cell.state || !budget.next_turf_attempt_at)
+			budget.next_turf_attempt_at = world.time + event_profile.get_next_attempt_delay()
+		budget.turf_scheduled_state = cell.state
+	else
+		budget.next_turf_attempt_at = 0
+		budget.turf_scheduled_state = null
+
+	schedule_event_wake()
 	wake()
 	return TRUE
 
@@ -474,6 +514,9 @@ SUBSYSTEM_DEF(redspace)
 	if(!budget)
 		return
 	budget.next_attempt_at = 0
+	budget.next_turf_attempt_at = 0
+	budget.scheduled_state = null
+	budget.turf_scheduled_state = null
 	if(budget.active_event_count || budget.active_spawn_event_count)
 		return
 	event_budgets -= cell.key
@@ -484,7 +527,7 @@ SUBSYSTEM_DEF(redspace)
 		return FALSE
 	return cell_has_active_source(cell) || !isnull(cell.forced_value) || !isnull(cell.event_override_value) || cell.local_delta
 
-/// Makes one bounded event attempt for each due active zone.
+/// Makes one bounded attempt for each due profile queue in every active zone.
 /datum/controller/subsystem/redspace/proc/process_scheduled_events()
 	if(!length(event_budgets) || (event_wake_at && world.time < event_wake_at))
 		return TRUE
@@ -493,12 +536,17 @@ SUBSYSTEM_DEF(redspace)
 		if(MC_TICK_CHECK)
 			return FALSE
 		var/datum/redspace_event_budget/budget = event_budgets[zone_key]
-		if(!budget || !budget.next_attempt_at || world.time < budget.next_attempt_at)
+		if(!budget)
+			continue
+		var/normal_attempt_due = budget.next_attempt_at && world.time >= budget.next_attempt_at
+		var/turf_attempt_due = budget.next_turf_attempt_at && world.time >= budget.next_turf_attempt_at
+		if(!normal_attempt_due && !turf_attempt_due)
 			continue
 
 		var/datum/redspace_field_cell/cell = field_cells[zone_key]
 		if(!cell)
 			budget.next_attempt_at = 0
+			budget.next_turf_attempt_at = 0
 			cleanup_event_budget(zone_key)
 			continue
 		if(!cell_has_event_anchor(cell))
@@ -510,19 +558,23 @@ SUBSYSTEM_DEF(redspace)
 			clear_event_schedule(cell)
 			continue
 
-		if(budget.scheduled_state != cell.state)
+		if((normal_attempt_due && budget.scheduled_state != cell.state) || (turf_attempt_due && budget.turf_scheduled_state != cell.state))
 			schedule_event_attempt(cell)
 			continue
 
 		// The next attempt is scheduled even when the profile rolls no event or
 		// the zone budget rejects the candidate. This prevents a hot zone from
 		// turning into a per-tick random-event loop.
-		budget.next_attempt_at = world.time + event_profile.get_next_attempt_delay()
-		if(!event_profile.should_attempt())
-			if(MC_TICK_CHECK)
-				return FALSE
-			continue
-		try_start_automatic_event(cell)
+		if(normal_attempt_due)
+			budget.next_attempt_at = world.time + event_profile.get_next_attempt_delay()
+			if(event_profile.should_attempt())
+				try_start_automatic_event(cell)
+				if(MC_TICK_CHECK)
+					return FALSE
+		if(turf_attempt_due)
+			budget.next_turf_attempt_at = world.time + event_profile.get_next_attempt_delay()
+			if(event_profile.should_attempt())
+				try_start_automatic_event(cell, REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
 		if(MC_TICK_CHECK)
 			return FALSE
 
@@ -671,7 +723,8 @@ SUBSYSTEM_DEF(redspace)
 	return TRUE
 
 /// Selects one eligible registered event for the cell's current state profile.
-/datum/controller/subsystem/redspace/proc/try_start_automatic_event(datum/redspace_field_cell/cell)
+/// The default queue excludes turf spawns; a category selects a dedicated queue.
+/datum/controller/subsystem/redspace/proc/try_start_automatic_event(datum/redspace_field_cell/cell, target_category = null)
 	if(!cell || !length(event_registry))
 		return FALSE
 
@@ -693,6 +746,10 @@ SUBSYSTEM_DEF(redspace)
 			continue
 		var/datum/redspace_event/event = create_registered_event(event_id)
 		if(!event || !event.automatic)
+			qdel(event)
+			continue
+		var/event_category = event.get_spawn_category()
+		if(isnull(target_category) ? event_category == REDSPACE_EVENT_CATEGORY_TURF_SPAWN : event_category != target_category)
 			qdel(event)
 			continue
 		var/turf/target = get_event_target_turf(cell, event, possible_targets)
@@ -755,7 +812,7 @@ SUBSYSTEM_DEF(redspace)
 	if(!zone_key)
 		return
 	var/datum/redspace_event_budget/budget = event_budgets[zone_key]
-	if(!budget || budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at)
+	if(!budget || budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at || budget.next_turf_attempt_at)
 		return
 	event_budgets -= zone_key
 	qdel(budget)
@@ -1066,7 +1123,10 @@ SUBSYSTEM_DEF(redspace)
 				mark_cell_dirty(cell, refresh_reason)
 			if(cell_has_event_anchor(cell))
 				var/datum/redspace_event_budget/budget = event_budgets[cell.key]
-				if(changed || !budget || !budget.next_attempt_at || budget.scheduled_state != cell.state)
+				var/datum/redspace_event_profile/event_profile = get_event_profile(cell.state)
+				var/normal_schedule_missing = event_profile_has_automatic_event(event_profile) && (!budget || !budget.next_attempt_at || budget.scheduled_state != cell.state)
+				var/turf_schedule_missing = event_profile_has_automatic_event(event_profile, REDSPACE_EVENT_CATEGORY_TURF_SPAWN) && (!budget || !budget.next_turf_attempt_at || budget.turf_scheduled_state != cell.state)
+				if(changed || normal_schedule_missing || turf_schedule_missing)
 					schedule_event_attempt(cell)
 			else
 				clear_event_schedule(cell)
@@ -1156,6 +1216,8 @@ SUBSYSTEM_DEF(redspace)
 	currentrun -= cell
 	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
 	if(budget && !budget.active_event_count && !budget.active_spawn_event_count)
+		budget.next_attempt_at = 0
+		budget.next_turf_attempt_at = 0
 		event_budgets -= cell.key
 		qdel(budget)
 	qdel(cell)
@@ -1172,12 +1234,13 @@ SUBSYSTEM_DEF(redspace)
 			continue
 		var/source_present = cell_has_active_source(cell)
 		var/datum/redspace_event_budget/budget = event_budgets[cell.key]
-		if(budget && !source_present && !budget.active_event_count && !budget.active_spawn_event_count)
+		if(budget && !source_present && !budget.active_event_count && !budget.active_spawn_event_count && !budget.next_attempt_at && !budget.next_turf_attempt_at)
 			budget.next_attempt_at = 0
+			budget.next_turf_attempt_at = 0
 			event_budgets -= cell.key
 			qdel(budget)
 			budget = null
-		if(budget && (budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at))
+		if(budget && (budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at || budget.next_turf_attempt_at))
 			continue
 		if(!source_present)
 			remove_field_cell(cell)
@@ -1196,12 +1259,13 @@ SUBSYSTEM_DEF(redspace)
 		return
 	var/source_present = cell_has_active_source(cell)
 	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
-	if(budget && !source_present && !budget.active_event_count && !budget.active_spawn_event_count)
+	if(budget && !source_present && !budget.active_event_count && !budget.active_spawn_event_count && !budget.next_attempt_at && !budget.next_turf_attempt_at)
 		budget.next_attempt_at = 0
+		budget.next_turf_attempt_at = 0
 		event_budgets -= cell.key
 		qdel(budget)
 		budget = null
-	if(budget && (budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at))
+	if(budget && (budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at || budget.next_turf_attempt_at))
 		return
 	if(!source_present)
 		remove_field_cell(cell)
@@ -1260,8 +1324,10 @@ SUBSYSTEM_DEF(redspace)
 		record_state_transition(cell, old_state, cell.state, old_value, cell.value, reason)
 		if(cell_has_event_anchor(cell) && redspace_state_is_escalation(old_state, cell.state))
 			var/datum/redspace_event_profile/event_profile = get_event_profile(cell.state)
-			if(event_profile?.should_attempt())
+			if(event_profile_has_automatic_event(event_profile) && event_profile.should_attempt())
 				try_start_automatic_event(cell)
+			if(event_profile_has_automatic_event(event_profile, REDSPACE_EVENT_CATEGORY_TURF_SPAWN) && event_profile.should_attempt())
+				try_start_automatic_event(cell, REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
 		if(cell_has_event_anchor(cell))
 			schedule_event_attempt(cell)
 		else

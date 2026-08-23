@@ -190,7 +190,7 @@
 	var/active_event_count = 0
 	var/active_dangerous_count = 0
 	var/list/reserved_events = list()
-	/// Spawn reservations are tracked separately from ordinary effect reservations.
+	/// Object spawn reservations use this shared pool; turf and mob pools are separate.
 	var/spawn_window_started
 	var/spawn_spent_points = 0
 	var/last_spawn_event_time = 0
@@ -198,16 +198,27 @@
 	var/active_spawn_turf_count = 0
 	var/active_spawn_object_count = 0
 	var/active_spawn_mob_count = 0
+	var/turf_spawn_window_started
+	var/turf_spawn_spent_points = 0
+	var/last_turf_spawn_event_time = 0
+	var/mob_spawn_window_started
+	var/mob_spawn_spent_points = 0
+	var/last_mob_spawn_event_time = 0
 	var/list/reserved_spawn_events = list()
 	/// Next state-profile attempt for this active zone. Zero means unscheduled.
 	var/next_attempt_at = 0
 	var/scheduled_state
+	/// Turf spawns have an independent profile attempt queue.
+	var/next_turf_attempt_at = 0
+	var/turf_scheduled_state
 
 /datum/redspace_event_budget/New(new_zone_key)
 	. = ..()
 	zone_key = new_zone_key
 	window_started = world.time
 	spawn_window_started = world.time
+	turf_spawn_window_started = world.time
+	mob_spawn_window_started = world.time
 
 /datum/redspace_event_budget/proc/reset_window()
 	if(world.time - window_started < REDSPACE_EVENT_BUDGET_WINDOW)
@@ -220,6 +231,18 @@
 		return
 	spawn_window_started = world.time
 	spawn_spent_points = 0
+
+/datum/redspace_event_budget/proc/reset_turf_spawn_window()
+	if(world.time - turf_spawn_window_started < REDSPACE_SPAWN_BUDGET_WINDOW)
+		return
+	turf_spawn_window_started = world.time
+	turf_spawn_spent_points = 0
+
+/datum/redspace_event_budget/proc/reset_mob_spawn_window()
+	if(world.time - mob_spawn_window_started < REDSPACE_SPAWN_BUDGET_WINDOW)
+		return
+	mob_spawn_window_started = world.time
+	mob_spawn_spent_points = 0
 
 /datum/redspace_event_budget/proc/can_start(datum/redspace_event/event)
 	if(!event)
@@ -239,12 +262,6 @@
 /datum/redspace_event_budget/proc/can_start_spawn(datum/redspace_event/event)
 	if(!event || !event.uses_spawn_budget())
 		return FALSE
-	reset_spawn_window()
-	if(active_spawn_event_count >= REDSPACE_SPAWN_BUDGET_MAX_ACTIVE_EVENTS)
-		return FALSE
-	if(last_spawn_event_time && world.time < last_spawn_event_time + REDSPACE_SPAWN_BUDGET_COOLDOWN)
-		return FALSE
-
 	var/spawn_category = event.get_spawn_category()
 	var/spawn_count = event.get_spawn_count()
 	var/category_limit = get_spawn_category_limit(spawn_category)
@@ -252,6 +269,22 @@
 		return FALSE
 
 	var/spawn_cost = max(event.get_spawn_budget_cost(), 0)
+	if(spawn_category == REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
+		reset_turf_spawn_window()
+		if(last_turf_spawn_event_time && world.time < last_turf_spawn_event_time + REDSPACE_SPAWN_BUDGET_COOLDOWN)
+			return FALSE
+		return turf_spawn_spent_points + spawn_cost <= REDSPACE_SPAWN_BUDGET_MAX_TURF_POINTS
+	if(spawn_category == REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
+		reset_mob_spawn_window()
+		if(last_mob_spawn_event_time && world.time < last_mob_spawn_event_time + REDSPACE_SPAWN_BUDGET_COOLDOWN)
+			return FALSE
+		return mob_spawn_spent_points + spawn_cost <= REDSPACE_SPAWN_BUDGET_MAX_MOB_POINTS
+
+	reset_spawn_window()
+	if(active_spawn_event_count >= REDSPACE_SPAWN_BUDGET_MAX_ACTIVE_EVENTS)
+		return FALSE
+	if(last_spawn_event_time && world.time < last_spawn_event_time + REDSPACE_SPAWN_BUDGET_COOLDOWN)
+		return FALSE
 	return spawn_spent_points + spawn_cost <= REDSPACE_SPAWN_BUDGET_MAX_POINTS
 
 /datum/redspace_event_budget/proc/get_spawn_category_limit(spawn_category)
@@ -310,10 +343,18 @@
 		"count" = spawn_count,
 		"category" = spawn_category,
 	)
-	spawn_spent_points += spawn_cost
+	switch(spawn_category)
+		if(REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
+			turf_spawn_spent_points += spawn_cost
+			last_turf_spawn_event_time = world.time
+		if(REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
+			mob_spawn_spent_points += spawn_cost
+			last_mob_spawn_event_time = world.time
+		else
+			spawn_spent_points += spawn_cost
+			last_spawn_event_time = world.time
 	active_spawn_event_count++
 	adjust_spawn_category_count(spawn_category, spawn_count)
-	last_spawn_event_time = world.time
 	return TRUE
 
 /datum/redspace_event_budget/proc/release(datum/redspace_event/event, refund = FALSE)
@@ -342,9 +383,19 @@
 	active_spawn_event_count = max(active_spawn_event_count - 1, 0)
 	adjust_spawn_category_count(reservation["category"], -reservation["count"])
 	if(refund)
-		spawn_spent_points = max(spawn_spent_points - reservation["cost"], 0)
-		if(last_spawn_event_time == world.time)
-			last_spawn_event_time = 0
+		switch(reservation["category"])
+			if(REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
+				turf_spawn_spent_points = max(turf_spawn_spent_points - reservation["cost"], 0)
+				if(last_turf_spawn_event_time == world.time)
+					last_turf_spawn_event_time = 0
+			if(REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
+				mob_spawn_spent_points = max(mob_spawn_spent_points - reservation["cost"], 0)
+				if(last_mob_spawn_event_time == world.time)
+					last_mob_spawn_event_time = 0
+			else
+				spawn_spent_points = max(spawn_spent_points - reservation["cost"], 0)
+				if(last_spawn_event_time == world.time)
+					last_spawn_event_time = 0
 	return TRUE
 
 /// First safe content event: a short local distortion with no damage or forced status effect.
@@ -419,7 +470,7 @@
 	profile_id = REDSPACE_PROFILE_DEMONIC
 	min_value = 7
 	max_value = 10
-	cooldown = 45 SECONDS
+	cooldown = 30 SECONDS
 	budget_cost = 2
 	dangerous = TRUE
 	automatic = TRUE

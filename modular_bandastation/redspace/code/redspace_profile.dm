@@ -84,9 +84,9 @@
 	)
 	event_profiles["[REDSPACE_STATE_DISTURBANCE]"] = new /datum/redspace_event_profile(
 		REDSPACE_STATE_DISTURBANCE,
-		45 SECONDS,
-		90 SECONDS,
-		25,
+		30 SECONDS,
+		60 SECONDS,
+		35,
 		list("local_distortion" = 1),
 	)
 	event_profiles["[REDSPACE_STATE_STORM]"] = new /datum/redspace_event_profile(
@@ -95,9 +95,9 @@
 		40 SECONDS,
 		60,
 		list(
-			"storm_pulse" = 3,
+			"storm_pulse" = 4,
 			"demonic_crystal" = 1,
-			"demonic_necropolis" = 2,
+			"demonic_necropolis" = 4,
 			"demonic_lesser_demon" = 2,
 			"demonic_ranged_demon" = 2,
 			"demonic_soldier" = 1,

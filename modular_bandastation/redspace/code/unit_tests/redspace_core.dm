@@ -46,6 +46,8 @@
 		return Fail("Disturbance profile must keep storm events out of the low range")
 	if(storm_profile.attempt_probability <= disturbance_profile.attempt_probability || storm_profile.get_event_weight("storm_pulse") <= 0 || storm_profile.get_event_weight("demonic_crystal") <= 0 || storm_profile.get_event_weight("demonic_necropolis") <= storm_profile.get_event_weight("demonic_crystal") || !storm_profile.get_event_weight("demonic_ranged_demon") || storm_profile.get_event_weight("demonic_soldier") >= storm_profile.get_event_weight("demonic_lesser_demon"))
 		return Fail("Storm profile must attempt events more often and favor persistent turf spawns over crystals")
+	if(!SSredspace || !SSredspace.event_profile_has_automatic_event(storm_profile) || !SSredspace.event_profile_has_automatic_event(storm_profile, REDSPACE_EVENT_CATEGORY_TURF_SPAWN))
+		return Fail("Storm profile must expose independent normal and turf event queues")
 	qdel(profile)
 
 	var/datum/redspace_field_cell/cell = new(1, 0, 0, "core_test", 0)
@@ -162,6 +164,11 @@
 		return Fail("Spawn events must use their own budget instead of the dangerous-event limit")
 	if(budget.active_dangerous_count != REDSPACE_EVENT_BUDGET_MAX_DANGEROUS || budget.active_spawn_event_count != 1 || budget.active_spawn_mob_count != 1)
 		return Fail("Spawn reservations must not consume ordinary dangerous-event counters")
+	if(!budget.can_start(turf_spawn) || !budget.reserve(turf_spawn))
+		return Fail("Turf and mob spawn budgets must not block each other")
+	if(budget.active_spawn_mob_count != 1 || budget.active_spawn_turf_count != 1)
+		return Fail("Turf and mob spawn reservations must keep separate category counts")
+	budget.release(turf_spawn)
 	budget.release(mob_spawn)
 
 	qdel(too_many_turfs)

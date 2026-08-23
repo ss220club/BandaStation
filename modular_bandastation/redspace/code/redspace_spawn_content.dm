@@ -123,7 +123,7 @@
 	profile_id = REDSPACE_PROFILE_DEMONIC
 	min_value = REDSPACE_STORM_ENTER_VALUE
 	max_value = REDSPACE_MAX_NORMAL_VALUE
-	cooldown = 60 SECONDS
+	cooldown = 20 SECONDS
 	automatic = TRUE
 	weight = 2
 	spawn_count = 1
