@@ -33,8 +33,8 @@ export const CreditSiphon = () => {
 
   return (
     <Window
-      width={280}
-      height={360}
+      width={380}
+      height={450}
       title="Hacking Initialized.."
       theme="hackerman"
     >
