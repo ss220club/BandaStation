@@ -11,7 +11,7 @@
 
 #include "code/items/banners.dm"
 #include "code/items/cards_ids.dm"
-#include "code/items/credit_siphon.dm"
+#include "code/items/spacejacker.dm"
 #include "code/items/phantom_cigar.dm"
 #include "code/items/machine_circuitboards.dm"
 #include "code/items/hampters.dm"

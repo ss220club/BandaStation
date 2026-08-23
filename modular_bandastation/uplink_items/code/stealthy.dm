@@ -33,7 +33,7 @@
 /datum/uplink_item/stealthy_weapons/spacejacker
 	name = "Хакерское устройство 'Богатый Еврей'"
 	desc = "Это устройство позволяет вам тайно снимать кредиты с банковских счетов других членов экипажа и прикреплять к их устройствам вирус, который передаёт деньги на ваш сифон. Также имеет выгодный обменник кредитов на ТК, но будьте осторожны, ТК ограничены, а также слишком частое использование может вызвать подозрения у других членов экипажа."
-	item = obj/item/spacejacker
+	item = /obj/item/spacejacker
 	category = /datum/uplink_category/role_restricted
 	restricted_roles = list(
 		JOB_QUARTERMASTER,

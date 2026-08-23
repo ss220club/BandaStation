@@ -18,18 +18,18 @@
 	COOLDOWN_DECLARE(siphon_cooldown)
 	COOLDOWN_DECLARE(attach_cooldown)
 
-/obj/item/credit_siphon/Initialize(mapload)
+/obj/item/spacejacker/Initialize(mapload)
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/item/credit_siphon/Destroy()
+/obj/item/spacejacker/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/credit_siphon/attack_self(mob/living/user)
+/obj/item/spacejacker/attack_self(mob/living/user)
 	ui_interact(user)
 
-/obj/item/credit_siphon/process(seconds_per_tick)
+/obj/item/spacejacker/process(seconds_per_tick)
 	if(!active)
 		return
 	if(!COOLDOWN_FINISHED(src, siphon_cooldown))
@@ -51,7 +51,7 @@
 		credits_stored += amount
 		account.bank_card_talk("С вашего счёта списано [amount][MONEY_NAME]. Источник не определён.")
 
-/obj/item/credit_siphon/proc/get_nearby_players()
+/obj/item/spacejacker/proc/get_nearby_players()
 	var/mob/living/carbon/human/holder = recursive_loc_check(src, /mob/living/carbon/human)
 	var/list/nearby_players = list()
 	for(var/mob/living/carbon/human/target in viewers(siphon_range, get_turf(src)))
@@ -60,7 +60,7 @@
 		nearby_players += list(list("name" = target.name, "ref" = REF(target)))
 	return nearby_players
 
-/obj/item/credit_siphon/proc/update_exchange_rate()
+/obj/item/spacejacker/proc/update_exchange_rate()
 	var/player_count = length(GLOB.clients)
 	var/traitor_count = 0
 	for(var/datum/antagonist/traitor/traitor in GLOB.antagonists)
@@ -76,7 +76,7 @@
 	for(var/traitor_number in 1 to traitor_count)
 		tc_price += rand(5, 50)
 
-/obj/item/credit_siphon/proc/attach_to_player(mob/user, target_ref)
+/obj/item/spacejacker/proc/attach_to_player(mob/user, target_ref)
 	if(!COOLDOWN_FINISHED(src, attach_cooldown))
 		return FALSE
 	var/mob/living/carbon/human/holder = recursive_loc_check(src, /mob/living/carbon/human)
@@ -98,7 +98,7 @@
 		target_pda.update_appearance(UPDATE_ICON)
 	return TRUE
 
-/obj/item/credit_siphon/ui_interact(mob/user, datum/tgui/ui)
+/obj/item/spacejacker/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()
 	if(.)
 		return FALSE
@@ -107,12 +107,12 @@
 		ui = new(user, src, "CreditSiphon", name)
 		ui.open()
 
-/obj/item/credit_siphon/ui_status(mob/user, datum/ui_state/state)
+/obj/item/spacejacker/ui_status(mob/user, datum/ui_state/state)
 	. = ..()
 	if(!in_range(user, src) && !isobserver(user))
 		return UI_CLOSE
 
-/obj/item/credit_siphon/ui_data(mob/user)
+/obj/item/spacejacker/ui_data(mob/user)
 	update_exchange_rate()
 	var/mob/living/carbon/human/holder = recursive_loc_check(src, /mob/living/carbon/human)
 	return list(
@@ -127,7 +127,7 @@
 		"nearby_players" = get_nearby_players(),
 	)
 
-/obj/item/credit_siphon/ui_act(action, list/params, datum/tgui/ui)
+/obj/item/spacejacker/ui_act(action, list/params, datum/tgui/ui)
 	. = ..()
 	if(.)
 		return FALSE
