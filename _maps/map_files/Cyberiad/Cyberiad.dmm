@@ -929,7 +929,7 @@
 	},
 /obj/machinery/quantumpad{
 	name = "Инженерный отдел";
-	id = east
+	
 	},
 /obj/structure/cable,
 /turf/open/floor/iron/textured_edge{
@@ -13981,7 +13981,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/quantumpad{
 	name = "Инженерный отдел";
-	id = west
+	
 	},
 /turf/open/floor/iron/textured,
 /area/station/command/bsa_west)
@@ -60695,7 +60695,7 @@
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted,
 /obj/machinery/quantumpad{
 	name = "Восточное БСА";
-	id = east
+	
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/break_room)
@@ -77038,7 +77038,7 @@
 	},
 /obj/machinery/quantumpad{
 	name = "Западное БСА";
-	id = west
+	
 	},
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
