@@ -552,7 +552,7 @@
 	prerequisite_nodes = list(/datum/techweb_node/applied_bluespace)
 	unlocked_designs = list(
 		/datum/design/redspace_counter,
-		/datum/design/board/redspace_sensor,
+		/datum/design/redspace_sensor,
 		/datum/design/board/redspace_console,
 		/datum/design/board/redspace_stabilizer,
 	)

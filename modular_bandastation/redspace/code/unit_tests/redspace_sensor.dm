@@ -24,4 +24,34 @@
 		return Fail("An unbound sensor record must report a disconnected status")
 	qdel(record)
 
+/datum/unit_test/redspace_sensor_linking
+
+/datum/unit_test/redspace_sensor_linking/Run()
+	var/mob/living/carbon/human/consistent/user = allocate(__IMPLIED_TYPE__)
+	var/obj/item/redspace_sensor/sensor = allocate(__IMPLIED_TYPE__)
+	var/obj/machinery/computer/redspace_console/console = allocate(__IMPLIED_TYPE__)
+	var/obj/item/multitool/tool = allocate(__IMPLIED_TYPE__)
+	var/list/examine_tags = list()
+
+	SEND_SIGNAL(sensor, COMSIG_ATOM_EXAMINE_TAGS, user, examine_tags)
+	if(!examine_tags["напольный"])
+		return Fail("Redspace sensors must expose the floor-placeable examine tag")
+
+	console.multitool_act(user, tool)
+	if(tool.buffer != console)
+		return Fail("Using a multitool on the console must store the console in its buffer")
+
+	sensor.multitool_act(user, tool)
+	if(sensor.connected_console != console || !(sensor in console.sensors))
+		return Fail("A sensor must link to the console stored in the multitool buffer")
+	if(tool.buffer != console)
+		return Fail("Linking a sensor must preserve the console in the multitool buffer")
+
+	sensor.forceMove(user)
+	if(sensor.connected_console || (sensor in console.sensors))
+		return Fail("Picking up a sensor must disconnect it from the console")
+	var/datum/redspace_sensor_record/record = console.sensor_records[sensor.sensor_id]
+	if(!record || record.get_status() != "disconnected")
+		return Fail("A picked-up sensor must retain a disconnected console record")
+
 #endif

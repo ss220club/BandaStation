@@ -2,7 +2,7 @@
 /datum/redspace_sensor_record
 	var/sensor_id
 	var/display_name = "датчик возмущения редспейса"
-	var/obj/machinery/redspace_sensor/sensor
+	var/obj/item/redspace_sensor/sensor
 	var/last_value
 	var/last_sample_time
 	var/last_sample_state
@@ -17,7 +17,7 @@
 	. = ..()
 	sensor_id = new_sensor_id
 
-/datum/redspace_sensor_record/proc/bind_sensor(obj/machinery/redspace_sensor/new_sensor)
+/datum/redspace_sensor_record/proc/bind_sensor(obj/item/redspace_sensor/new_sensor)
 	sensor = new_sensor
 	if(!new_sensor)
 		return
@@ -127,12 +127,12 @@
 	use_power = ACTIVE_POWER_USE
 
 	/// Currently linked live sensor objects.
-	var/list/obj/machinery/redspace_sensor/sensors = list()
+	var/list/obj/item/redspace_sensor/sensors = list()
 	/// Sensor records are retained after unlinking so the console can show history and loss of connection.
 	var/list/sensor_records = list()
 
 /obj/machinery/computer/redspace_console/Destroy(force)
-	for(var/obj/machinery/redspace_sensor/sensor as anything in sensors.Copy())
+	for(var/obj/item/redspace_sensor/sensor as anything in sensors.Copy())
 		if(!sensor)
 			continue
 		UnregisterSignal(sensor, COMSIG_QDELETING, PROC_REF(on_sensor_deleted))
@@ -152,10 +152,12 @@
 	. += span_notice("Датчики можно отвязать через интерфейс или вторичным нажатием мультитула.")
 
 /obj/machinery/computer/redspace_console/multitool_act(mob/living/user, obj/item/multitool/tool)
-	var/obj/machinery/redspace_sensor/sensor = tool.buffer
+	var/obj/item/redspace_sensor/sensor = tool.buffer
 	if(istype(sensor))
+		if(!do_after(user, 2 SECONDS, target = src))
+			return ITEM_INTERACT_BLOCKING
 		if(link_sensor(sensor, user))
-			tool.set_buffer(null)
+			tool.set_buffer(src)
 			to_chat(user, span_notice("[sensor] подключён к [src]."))
 			return ITEM_INTERACT_SUCCESS
 		return ITEM_INTERACT_BLOCKING
@@ -165,7 +167,7 @@
 	return ITEM_INTERACT_SUCCESS
 
 /// Links a sensor to this console, transferring it from another console if necessary.
-/obj/machinery/computer/redspace_console/proc/link_sensor(obj/machinery/redspace_sensor/sensor, mob/user)
+/obj/machinery/computer/redspace_console/proc/link_sensor(obj/item/redspace_sensor/sensor, mob/user)
 	if(!istype(sensor) || QDELETED(sensor))
 		return FALSE
 	if(sensor.connected_console && sensor.connected_console != src)
@@ -189,7 +191,7 @@
 	return TRUE
 
 /// Removes a live sensor while retaining its last samples as a disconnected record.
-/obj/machinery/computer/redspace_console/proc/unlink_sensor(obj/machinery/redspace_sensor/sensor, mob/user, notify = TRUE)
+/obj/machinery/computer/redspace_console/proc/unlink_sensor(obj/item/redspace_sensor/sensor, mob/user, notify = TRUE)
 	if(!sensor)
 		return FALSE
 	var/datum/redspace_sensor_record/record = sensor_records[sensor.sensor_id]
@@ -209,7 +211,7 @@
 
 /obj/machinery/computer/redspace_console/proc/on_sensor_deleted(datum/source)
 	SIGNAL_HANDLER
-	var/obj/machinery/redspace_sensor/sensor = source
+	var/obj/item/redspace_sensor/sensor = source
 	if(!sensor)
 		return
 	var/datum/redspace_sensor_record/record = sensor_records[sensor.sensor_id]
@@ -222,7 +224,7 @@
 	SStgui.update_uis(src)
 
 /// Receives a sample from a sensor and stores it in the console-owned ring buffer.
-/obj/machinery/computer/redspace_console/proc/record_sensor_sample(obj/machinery/redspace_sensor/sensor, new_value, sample_time = world.time, reason = null)
+/obj/machinery/computer/redspace_console/proc/record_sensor_sample(obj/item/redspace_sensor/sensor, new_value, sample_time = world.time, reason = null)
 	if(!sensor || QDELETED(sensor) || !(sensor in sensors))
 		return FALSE
 	var/datum/redspace_sensor_record/record = sensor_records[sensor.sensor_id]
