@@ -15,6 +15,7 @@
 	var/tc_purchase_limit = 8
 	var/exchange_player_count = -1
 	var/exchange_traitor_count = -1
+	var/mob/living/carbon/human/attached_target
 	COOLDOWN_DECLARE(siphon_cooldown)
 	COOLDOWN_DECLARE(attach_cooldown)
 
@@ -37,7 +38,14 @@
 	COOLDOWN_START(src, siphon_cooldown, siphon_interval)
 
 	var/mob/living/carbon/human/holder = recursive_loc_check(src, /mob/living/carbon/human)
-	for(var/mob/living/carbon/human/target in viewers(siphon_range, get_turf(src)))
+	var/turf/siphon_center = get_turf(src)
+	if(attached_target)
+		var/obj/item/modular_computer/pda/target_pda = locate() in attached_target.get_all_contents()
+		if(!target_pda)
+			return
+		siphon_center = get_turf(target_pda)
+	var/list/targets = viewers(siphon_range, siphon_center)
+	for(var/mob/living/carbon/human/target in targets)
 		if(target == holder || target.stat == DEAD)
 			continue
 		var/obj/item/card/id/id_card = target.get_idcard(TRUE)
@@ -88,7 +96,7 @@
 	var/obj/item/modular_computer/pda/target_pda = locate() in target.get_all_contents()
 	if(!target_pda)
 		return FALSE
-	forceMove(target_pda)
+	attached_target = target
 	playsound(target, 'sound/effects/youarehacked.ogg', 100, FALSE)
 	COOLDOWN_START(src, attach_cooldown, 10 MINUTES)
 	var/datum/computer_file/program/messenger/messenger_app = locate() in target_pda.stored_files
@@ -120,7 +128,7 @@
 		"tc_purchase_limit" = tc_purchase_limit,
 		"tc_purchased" = tc_purchased,
 		"active" = active,
-		"attached" = istype(loc, /obj/item/modular_computer/pda),
+		"attached" = !isnull(attached_target),
 		"nearby_players" = get_nearby_players(),
 	)
 
