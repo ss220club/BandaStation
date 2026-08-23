@@ -149,7 +149,7 @@ SUBSYSTEM_DEF(redspace)
 
 /datum/controller/subsystem/redspace/stat_entry(msg)
 	var/background_label = context ? round(context.background_value, 0.1) : 0
-	msg = "B:[background_label] Cells:[length(field_cells)] Sources:[length(field_sources)] Dirty:[length(dirty_cells)] Samples:[metric_sample_count] Calc:[metric_value_calculation_count] SourceChecks:[metric_source_check_count] DirtyQueued:[metric_dirty_cells_enqueued] DirtyProcessed:[metric_dirty_cells_processed] EventsStarted:[metric_events_started] EventsFinished:[metric_events_finished] Transitions:[length(transition_log)] Listeners:[length(field_listeners)] EventTypes:[length(event_registry)] ActiveEvents:[length(active_events)] Budgets:[length(event_budgets)] Peaks:[metric_peak_field_cells]/[metric_peak_dirty_cells]/[metric_peak_processing_sources]"
+	msg = "B:[background_label] Cells:[length(field_cells)] Sources:[length(field_sources)] Active:[length(active_events)]"
 	return ..()
 
 /datum/controller/subsystem/redspace/proc/reset_metrics()
