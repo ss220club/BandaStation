@@ -1,4 +1,4 @@
-/obj/item/credit_siphon
+/obj/item/spacejacker
 	name = "credit siphon"
 	desc = "A clandestine device that skims credits from nearby bank accounts."
 	icon = 'icons/obj/devices/voice.dmi'
@@ -85,17 +85,17 @@
 		return FALSE
 	if(get_dist(get_turf(src), get_turf(target)) > siphon_range)
 		return FALSE
-	forceMove(target)
+	var/obj/item/modular_computer/pda/target_pda = locate() in target.get_all_contents()
+	if(!target_pda)
+		return FALSE
+	forceMove(target_pda)
 	playsound(target, 'sound/effects/youarehacked.ogg', 100, FALSE)
 	COOLDOWN_START(src, attach_cooldown, 10 MINUTES)
-	for(var/obj/item/modular_computer/pda/pda in target.get_all_contents())
-		var/datum/computer_file/program/messenger/messenger_app = locate() in pda.stored_files
-		if(!messenger_app)
-			continue
-		pda.alert_call(messenger_app, "Обнаружен несанкционированный доступ к банковскому счёту.")
+	var/datum/computer_file/program/messenger/messenger_app = locate() in target_pda.stored_files
+	if(messenger_app)
+		target_pda.alert_call(messenger_app, "Обнаружен несанкционированный доступ к банковскому счёту.")
 		messenger_app.alert_pending = TRUE
-		pda.update_appearance(UPDATE_ICON)
-		break
+		target_pda.update_appearance(UPDATE_ICON)
 	return TRUE
 
 /obj/item/credit_siphon/ui_interact(mob/user, datum/tgui/ui)
