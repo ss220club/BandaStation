@@ -19,7 +19,8 @@ SUBSYSTEM_DEF(redspace)
 	var/list/processing_sources = list()
 	var/next_source_id = 1
 	/// Maximum combined negative contribution from overlapping stabilizers at one point.
-	var/max_stabilizer_negative_contribution = 6
+	/// A single stabilizer remains limited by its own -4 contribution cap.
+	var/max_stabilizer_negative_contribution = 8
 	/// Cells whose cached value changed and may need event/signal processing.
 	var/list/dirty_cells = list()
 	/// Resumable copy of dirty_cells for MC_TICK_CHECK support.

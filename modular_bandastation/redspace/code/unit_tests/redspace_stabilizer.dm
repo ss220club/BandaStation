@@ -13,6 +13,8 @@
 		return Fail("A stabilizer contribution must scale with machine efficiency")
 	if(redspace_stabilizer_calculate_contribution(10.1, 3, 4) != 0)
 		return Fail("A stabilizer must not counter an event-only invasion override")
+	if(!SSredspace || SSredspace.max_stabilizer_negative_contribution != 8)
+		return Fail("Overlapping stabilizers must allow a combined contribution of -8")
 
 	var/turf/test_turf = run_loc_floor_bottom_left
 	var/datum/redspace_field_source/stabilizer/source = new(0, test_turf, 4, 4, REDSPACE_PROFILE_STABILIZER)
