@@ -96,9 +96,9 @@
 #endif
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
-		/datum/material/iron = SMALL_MATERIAL_AMOUNT * 1.5,
-		/datum/material/glass = SMALL_MATERIAL_AMOUNT * 1.5,
-		/datum/material/bluespace = SHEET_MATERIAL_AMOUNT,
+		/datum/material/iron = SMALL_MATERIAL_AMOUNT * 3,
+		/datum/material/glass = SMALL_MATERIAL_AMOUNT * 3,
+		/datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT,
 	)
 	build_path = /obj/item/redspace_counter
 	category = list(

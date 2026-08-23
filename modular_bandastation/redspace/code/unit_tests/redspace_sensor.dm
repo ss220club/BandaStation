@@ -24,6 +24,18 @@
 		return Fail("An unbound sensor record must report a disconnected status")
 	qdel(record)
 
+/datum/unit_test/redspace_sensor_recipes
+
+/datum/unit_test/redspace_sensor_recipes/Run()
+	var/datum/design/redspace_sensor/sensor_design = new
+	var/datum/design/redspace_counter/counter_design = new
+	if(sensor_design.materials[/datum/material/iron] != SMALL_MATERIAL_AMOUNT * 4 || sensor_design.materials[/datum/material/glass] != SMALL_MATERIAL_AMOUNT * 4 || sensor_design.materials[/datum/material/bluespace] != HALF_SHEET_MATERIAL_AMOUNT)
+		return Fail("Redspace sensors must use half a bluespace sheet and increased iron and glass requirements")
+	if(counter_design.materials[/datum/material/iron] != SMALL_MATERIAL_AMOUNT * 3 || counter_design.materials[/datum/material/glass] != SMALL_MATERIAL_AMOUNT * 3 || counter_design.materials[/datum/material/bluespace] != HALF_SHEET_MATERIAL_AMOUNT)
+		return Fail("Redspace counters must use half a bluespace sheet and increased iron and glass requirements")
+	qdel(sensor_design)
+	qdel(counter_design)
+
 /datum/unit_test/redspace_sensor_linking
 
 /datum/unit_test/redspace_sensor_linking/Run()
