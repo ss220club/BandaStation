@@ -22,7 +22,7 @@
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN
 
 	/// The replaceable battery is deliberately independent from area power.
-	var/obj/item/stock_parts/power_store/cell/cell = /obj/item/stock_parts/power_store/cell/high
+	var/obj/item/stock_parts/power_store/cell/cell
 	var/active = FALSE
 	var/datum/redspace_field_source/stabilizer/field_source
 
@@ -57,23 +57,26 @@
 	var/heat_warning_level = 0
 
 /obj/machinery/redspace_stabilizer/Initialize(mapload)
+	var/obj/item/circuitboard/machine/construction_board = circuit
+	var/rebuilt_from_frame = istype(construction_board) && length(construction_board.replacement_parts)
 	. = ..()
 	create_reagents(200, NO_REACT)
-	reagents.add_reagent(/datum/reagent/cryostylane, reagents.maximum_volume)
-	if(ispath(cell))
-		cell = new cell(src)
+	if(!rebuilt_from_frame)
+		reagents.add_reagent(/datum/reagent/cryostylane, reagents.maximum_volume)
 	update_appearance()
 
 /obj/machinery/redspace_stabilizer/Destroy()
 	remove_field_source("stabilizer destroyed")
-	QDEL_NULL(cell)
+	cell = null
 	return ..()
 
 /obj/machinery/redspace_stabilizer/on_deconstruction(disassembled)
-	if(cell)
-		cell.forceMove(drop_location())
-		cell = null
+	cell = null
 	return ..()
+
+/obj/machinery/redspace_stabilizer/RefreshParts()
+	. = ..()
+	cell = locate(/obj/item/stock_parts/power_store/cell) in component_parts
 
 /obj/machinery/redspace_stabilizer/Exited(atom/movable/gone, direction)
 	. = ..()
@@ -85,8 +88,10 @@
 
 /obj/machinery/redspace_stabilizer/attack_hand_secondary(mob/user, list/modifiers)
 	if(panel_open && !active && cell)
-		user.put_in_hands(cell)
+		var/obj/item/stock_parts/power_store/cell/removed_cell = cell
+		component_parts -= removed_cell
 		cell = null
+		user.put_in_hands(removed_cell)
 		update_stabilizer_warnings()
 		update_appearance()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -487,6 +492,7 @@
 			return ITEM_INTERACT_BLOCKING
 		if(!user.transferItemToLoc(tool, src))
 			return ITEM_INTERACT_BLOCKING
+		component_parts += tool
 		cell = tool
 		tool.add_fingerprint(user)
 		update_stabilizer_warnings()
@@ -521,10 +527,14 @@
 		/datum/stock_part/micro_laser/tier3 = 2,
 		/datum/stock_part/matter_bin/tier3 = 1,
 		/datum/stock_part/servo/tier2 = 1,
+		/obj/item/stock_parts/power_store/cell = 1,
 		/obj/item/stack/cable_coil = 3,
 		/obj/item/stack/sheet/glass = 2,
 		/obj/item/stack/sheet/iron = 5,
 		/obj/item/stack/ore/bluespace_crystal = 2,
+	)
+	def_components = list(
+		/obj/item/stock_parts/power_store/cell = /obj/item/stock_parts/power_store/cell/high,
 	)
 
 /datum/design/board/redspace_stabilizer

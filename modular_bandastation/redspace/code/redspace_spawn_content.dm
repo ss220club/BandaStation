@@ -37,6 +37,7 @@
 		for(var/cardinal_direction in GLOB.cardinals)
 			if(direction_to_next_step & cardinal_direction)
 				obstruction_turfs += get_step(basic_mob, cardinal_direction)
+		obstruction_turfs += next_step
 	else
 		obstruction_turfs += next_step
 
@@ -126,6 +127,15 @@
 
 /// Failed checks are delayed as well, avoiding a hot loop while retained targets remain behind cover.
 /datum/bt_node/ai_behavior/attack_obstructions/redspace_demon/perform(seconds_per_tick, datum/ai_controller/controller)
+	var/mob/living/basic/basic_mob = controller.pawn
+	var/atom/target = controller.blackboard[target_key]
+	var/turf/next_step = !QDELETED(target) ? get_step_towards(basic_mob, target) : null
+	if(next_step?.is_blocked_turf(exclude_mobs = TRUE, source_atom = basic_mob) && ISDIAGONALDIR(get_dir(basic_mob, next_step)))
+		for(var/obj/object as anything in next_step.contents)
+			if(!can_smash_object(basic_mob, object))
+				continue
+			basic_mob.melee_attack(object)
+			return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 	. = ..()
 	if(. & AI_BEHAVIOR_FAILED)
 		. |= AI_BEHAVIOR_DELAY

@@ -16,6 +16,29 @@
 	if(!SSredspace || SSredspace.max_stabilizer_negative_contribution != 8)
 		return Fail("Overlapping stabilizers must allow a combined contribution of -8")
 
+	var/obj/machinery/redspace_stabilizer/stabilizer = allocate(/obj/machinery/redspace_stabilizer, run_loc_floor_bottom_left)
+	var/turf/stabilizer_location = get_turf(stabilizer)
+	var/obj/item/stock_parts/power_store/cell/returned_cell = stabilizer.cell
+	stabilizer.deconstruct(TRUE)
+	var/obj/item/circuitboard/machine/redspace_stabilizer/rebuild_board = locate() in stabilizer_location
+	if(!returned_cell || returned_cell.loc != stabilizer_location || !rebuild_board)
+		return Fail("Disassembling a stabilizer must return its battery and circuit board")
+
+	var/obj/structure/frame/machine/stabilizer_frame = locate() in stabilizer_location
+	qdel(stabilizer_frame)
+	rebuild_board.replacement_parts = list(
+		/obj/item/stock_parts/capacitor/tier3,
+		/obj/item/stock_parts/capacitor/tier3,
+		/obj/item/stock_parts/micro_laser/tier3,
+		/obj/item/stock_parts/micro_laser/tier3,
+		/obj/item/stock_parts/matter_bin/tier3,
+		/obj/item/stock_parts/servo/tier2,
+		returned_cell,
+	)
+	var/obj/machinery/redspace_stabilizer/rebuilt_stabilizer = allocate(/obj/machinery/redspace_stabilizer, stabilizer_location, rebuild_board)
+	if(rebuilt_stabilizer.cell != returned_cell || rebuilt_stabilizer.reagents.get_reagent_amount(/datum/reagent/cryostylane))
+		return Fail("Rebuilding a stabilizer must not duplicate its battery or coolant")
+
 	var/turf/test_turf = run_loc_floor_bottom_left
 	var/datum/redspace_field_source/stabilizer/source = new(0, test_turf, 4, 4, REDSPACE_PROFILE_STABILIZER)
 	if(source.strength != 0)
