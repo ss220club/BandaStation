@@ -1801,6 +1801,7 @@
 /area/centcom/central_command_areas/engine)
 "ahO" = (
 /obj/structure/light_fake/small/directional/east,
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_edge{
 	dir = 8
 	},
@@ -2246,6 +2247,10 @@
 /obj/effect/turf_decal/line/dark_blue/line,
 /obj/machinery/duct,
 /obj/structure/light_fake/spot/directional/south,
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "akL" = (
@@ -2601,6 +2606,11 @@
 /obj/structure/sign/departments/engineering/directional/east,
 /obj/effect/turf_decal/line/dark_blue/anticorner/contrasted{
 	dir = 4
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/hallway)
@@ -5467,6 +5477,10 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/smooth_edge,
 /area/centcom/central_command_areas/briefing)
 "aAP" = (
@@ -7620,6 +7634,11 @@
 /obj/structure/sign/warning/secure_area/directional/east,
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/south,
 /obj/effect/turf_decal/line/dark_blue/anticorner/contrasted,
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/hallway)
 "aIQ" = (
@@ -9681,6 +9700,11 @@
 /area/centcom/central_command_areas/supply)
 "aQq" = (
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/west,
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -10486,6 +10510,10 @@
 /area/centcom/central_command_areas/armory)
 "aUj" = (
 /obj/effect/turf_decal/stripes/corner,
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/smooth_edge,
 /area/centcom/central_command_areas/briefing)
 "aUk" = (
@@ -10994,6 +11022,11 @@
 	dir = 1
 	},
 /obj/structure/sign/departments/custodian/directional/west,
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "aWq" = (
@@ -11998,6 +12031,11 @@
 /area/centcom/central_command_areas/arboretum)
 "bhU" = (
 /obj/structure/light_fake/spot/directional/west,
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/courtroom)
 "bhV" = (
@@ -12022,6 +12060,13 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"bmm" = (
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/smooth_edge,
+/area/centcom/central_command_areas/hallway)
 "bpC" = (
 /obj/structure/chair/comfy/corp{
 	dir = 8
@@ -12202,6 +12247,19 @@
 	},
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/cabin/captain)
+"bGr" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 4
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/textured_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/hallway)
 "bHX" = (
 /obj/structure/table/wood,
 /obj/structure/window/reinforced/spawner/directional/south,
@@ -13526,6 +13584,11 @@
 /area/centcom/central_command_areas/srt/brief_srt)
 "esM" = (
 /obj/effect/turf_decal/line/dark_blue/anticorner,
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
 "eta" = (
@@ -13637,6 +13700,7 @@
 /obj/effect/turf_decal/line/dark_blue/line{
 	dir = 1
 	},
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "eBO" = (
@@ -14782,6 +14846,17 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/srt/brief_srt)
+"gRp" = (
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted{
+	dir = 4
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/supply)
 "gSn" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
@@ -14877,6 +14952,14 @@
 	},
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"hcq" = (
+/obj/effect/turf_decal/tile/dark_blue/full,
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/courtroom)
 "heo" = (
 /obj/structure/railing{
 	dir = 1
@@ -14961,6 +15044,12 @@
 /obj/structure/flora/bush/jungle/b/style_random,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"hql" = (
+/obj/structure/statue/dummy/srt,
+/turf/open/floor/iron/smooth_edge{
+	dir = 1
+	},
+/area/centcom/central_command_areas/armory)
 "hrk" = (
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/flashlight/lamp,
@@ -15059,6 +15148,14 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
+"hwC" = (
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/smooth,
+/area/centcom/central_command_areas/briefing)
 "hxG" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/left/directional/west{
@@ -15248,6 +15345,13 @@
 /obj/machinery/light/directional/west,
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/club)
+"hRt" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/structure/statue/dummy/srt,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/fore)
 "hRu" = (
 /obj/structure/chair/sofa/left/brown,
 /turf/open/floor/wood/tile,
@@ -15673,6 +15777,10 @@
 /obj/effect/spawner/random/food_or_drink/cake_ingredients,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"iWM" = (
+/obj/structure/statue/dummy/srt,
+/turf/open/floor/iron/dark/textured_half,
+/area/centcom/central_command_areas/hallway)
 "iZa" = (
 /obj/machinery/door/airlock/highsecurity,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -15824,6 +15932,7 @@
 /obj/effect/turf_decal/line/dark_blue/line{
 	dir = 1
 	},
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
 "jqP" = (
@@ -15981,6 +16090,14 @@
 	dir = 1
 	},
 /area/centcom/central_command_areas/cabin)
+"jLj" = (
+/obj/effect/turf_decal/tile/dark_blue/full,
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/hallway)
 "jMF" = (
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 10
@@ -16037,6 +16154,19 @@
 /obj/effect/light_emitter/podbay,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"jSA" = (
+/obj/effect/turf_decal/siding/yellow{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown/fourcorners,
+/obj/structure/light_fake/floor,
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/supply)
 "jTU" = (
 /obj/structure/table,
 /obj/effect/turf_decal/line/dark_blue{
@@ -17296,6 +17426,7 @@
 /obj/effect/turf_decal/line/dark_blue{
 	dir = 8
 	},
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "njG" = (
@@ -17308,6 +17439,19 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/hallway)
+"nlB" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 8
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/armory)
 "noS" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -18070,6 +18214,17 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"oHJ" = (
+/obj/effect/turf_decal/line/dark_blue/anticorner/contrasted{
+	dir = 4
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/hallway)
 "oIZ" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/kirbyplants/random{
@@ -18607,6 +18762,7 @@
 "pCy" = (
 /obj/effect/turf_decal/line/dark_blue,
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/north,
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "pDv" = (
@@ -18732,6 +18888,11 @@
 "pKk" = (
 /obj/effect/turf_decal/line/dark_blue/anticorner{
 	dir = 8
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
 	},
 /turf/open/floor/iron/dark/smooth_edge{
 	dir = 8
@@ -19544,6 +19705,17 @@
 /obj/structure/cable/layer3,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/hallway)
+"rxG" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 1
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/hallway)
 "ryw" = (
 /obj/effect/turf_decal/tile/dark/fourcorners{
 	alpha = 50
@@ -19953,6 +20125,13 @@
 /obj/structure/light_fake/spot/directional/east,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
+"sfi" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/statue/dummy/srt,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/fore)
 "sfI" = (
 /obj/effect/turf_decal/line/dark_blue{
 	dir = 8
@@ -20422,6 +20601,19 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
+"tmL" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 8
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/textured_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/hallway)
 "tnu" = (
 /obj/effect/baseturf_helper{
 	baseturf = /turf/open/floor/plating
@@ -20911,6 +21103,7 @@
 	dir = 8
 	},
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/north,
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "ugL" = (
@@ -21089,6 +21282,17 @@
 /obj/structure/sign/clock/directional/north,
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/courtroom)
+"urU" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 1
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/hallway)
 "usS" = (
 /obj/structure/railing{
 	dir = 4
@@ -22120,6 +22324,16 @@
 "wiA" = (
 /turf/open/floor/glass/reinforced,
 /area/centcom/central_command_areas/cabin/soo)
+"wjx" = (
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/ferry)
 "wkr" = (
 /obj/structure/closet/secure_closet/tac,
 /obj/structure/sign/poster/official/obey/directional/north,
@@ -22438,6 +22652,11 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/cabin/captain)
+"wLJ" = (
+/obj/structure/sign/poster/official/nanotrasen_logo/directional/north,
+/obj/structure/statue/dummy/srt,
+/turf/open/floor/iron/dark/textured_half,
+/area/centcom/central_command_areas/hallway)
 "wNg" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/kirbyplants/random{
@@ -22451,6 +22670,11 @@
 /area/centcom/central_command_areas/planetary_port/club)
 "wNp" = (
 /obj/structure/light_fake/spot/directional/east,
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/courtroom)
 "wOF" = (
@@ -71881,7 +72105,7 @@ alq
 acG
 amh
 auH
-aoN
+gRp
 aFt
 ajS
 aEP
@@ -72395,7 +72619,7 @@ aQn
 agP
 agP
 aGp
-aBf
+jSA
 aNc
 aqn
 aBf
@@ -73641,7 +73865,7 @@ tvo
 aoE
 aTC
 aQl
-aQl
+tmL
 aoE
 fcN
 tUQ
@@ -73654,7 +73878,7 @@ oRV
 aDx
 aoE
 fcN
-tUQ
+bmm
 tVK
 aKp
 pEb
@@ -73907,7 +74131,7 @@ oOG
 eem
 nvs
 nim
-eJw
+rxG
 aDx
 xLf
 tVK
@@ -74661,7 +74885,7 @@ vWG
 gBT
 ujE
 pSL
-kCT
+iWM
 lkw
 nJA
 aQl
@@ -75450,7 +75674,7 @@ uWU
 ivk
 ogZ
 qeW
-uCq
+hcq
 aHv
 tVK
 bbF
@@ -75759,7 +75983,7 @@ aEU
 aEU
 aEU
 aEU
-aDx
+jLj
 aQQ
 ajW
 arD
@@ -75964,7 +76188,7 @@ iBY
 uSu
 ogZ
 qeW
-uCq
+hcq
 aHv
 tVK
 jAQ
@@ -76192,7 +76416,7 @@ ydj
 ciT
 ciT
 aio
-kCT
+iWM
 aDx
 wlM
 byn
@@ -76239,7 +76463,7 @@ aXM
 aJh
 aHW
 aoc
-aSf
+oHJ
 aGA
 aIP
 aYa
@@ -76717,7 +76941,7 @@ ctF
 vxV
 rjJ
 feG
-gff
+wLJ
 lkw
 ccA
 aXX
@@ -77014,7 +77238,7 @@ apq
 atj
 aUj
 akW
-aJZ
+hql
 ahS
 aFD
 aOv
@@ -77505,7 +77729,7 @@ qqj
 eem
 dMQ
 nim
-eJw
+urU
 aDx
 jut
 tVK
@@ -77753,7 +77977,7 @@ mos
 aIY
 asX
 aXX
-aXX
+bGr
 aIY
 tTd
 tUQ
@@ -78042,7 +78266,7 @@ aUu
 aCs
 aAN
 akW
-aJZ
+hql
 aFD
 aFD
 aFD
@@ -78057,7 +78281,7 @@ aGe
 aJL
 apS
 aGe
-aGe
+nlB
 aIT
 aJz
 aZr
@@ -78286,7 +78510,7 @@ oLP
 wGt
 esM
 agO
-aQa
+hwC
 sFK
 aEp
 aJt
@@ -78767,7 +78991,7 @@ ahU
 aBq
 aVx
 aVx
-eiJ
+sfi
 eiJ
 viN
 nUD
@@ -79595,7 +79819,7 @@ afU
 avj
 aLe
 aWQ
-aMb
+wjx
 aMb
 aQq
 aMb
@@ -82108,7 +82332,7 @@ ahU
 avr
 aVx
 aVx
-kxH
+hRt
 kxH
 ede
 sQS
