@@ -52,6 +52,12 @@
 /datum/redspace_event_profile/proc/has_events()
 	return length(event_weights)
 
+/datum/redspace_profile/proc/play_mob_spawn_telegraph(turf/target)
+	return
+
+/datum/redspace_profile/proc/play_mob_spawn_arrival(turf/target)
+	return
+
 /datum/redspace_profile/demonic
 	profile_id = REDSPACE_PROFILE_DEMONIC
 	allowed_event_ids = list(
@@ -97,6 +103,32 @@
 			"demonic_soldier" = 1,
 		),
 	)
+
+/datum/redspace_profile/demonic/play_mob_spawn_telegraph(turf/target)
+	if(!target)
+		return
+	target.flash_lighting_fx(
+		range = 2,
+		power = 0.6,
+		color = LIGHT_COLOR_FIRE,
+		duration = REDSPACE_MOB_SPAWN_TELEGRAPH_DURATION,
+	)
+	var/obj/effect/temp_visual/focus_ring/ring = new(target)
+	ring.color = "#ff3b20"
+	playsound(target, 'modular_bandastation/redspace/sound/demon_warp.ogg', 70, TRUE)
+	target.visible_message(span_warning("Разрыв редспейса начинает раскрываться."))
+
+/datum/redspace_profile/demonic/play_mob_spawn_arrival(turf/target)
+	if(!target)
+		return
+	target.flash_lighting_fx(
+		range = 3,
+		power = 1.2,
+		color = LIGHT_COLOR_ORANGE,
+		duration = 0.5 SECONDS,
+	)
+	new /obj/effect/temp_visual/circle_wave(target, "#ff3b20")
+	playsound(target, 'sound/effects/magic/teleport_app.ogg', 50, TRUE)
 
 /datum/redspace_profile/demonic/Destroy()
 	for(var/state in event_profiles)

@@ -58,6 +58,7 @@
 #define REDSPACE_SPAWN_BUDGET_MAX_TURFS 2
 #define REDSPACE_SPAWN_BUDGET_MAX_OBJECTS 6
 #define REDSPACE_SPAWN_BUDGET_MAX_MOBS 3
+#define REDSPACE_MOB_SPAWN_TELEGRAPH_DURATION (2 SECONDS)
 
 /// Stabilizers regulate the ordinary field toward the top of the calm range.
 #define REDSPACE_STABILIZER_TARGET_VALUE 3

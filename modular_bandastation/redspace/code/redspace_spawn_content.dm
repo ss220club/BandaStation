@@ -168,28 +168,14 @@
 	spawn_count = 1
 	spawn_budget_cost = 1
 	spawn_policy_id = "demonic_lesser_demon"
-	var/spawn_type = /mob/living/basic/demon/redspace
-	var/spawn_message = "В редспейсе материализуется малый демон."
+	spawn_type = /mob/living/basic/demon/redspace
+	spawn_message = "В редспейсе материализуется малый демон."
 
 /datum/redspace_event/spawn/mob/demonic_lesser_demon/can_start(turf/target)
 	if(!..())
 		return FALSE
 	for(var/mob/living/basic/demon/redspace/demon in target)
 		return FALSE
-	return TRUE
-
-/datum/redspace_event/spawn/mob/demonic_lesser_demon/start(client/admin, turf/target)
-	if(!can_start(target))
-		return FALSE
-
-	var/mob/living/basic/demon/redspace/demon = new spawn_type(target)
-	if(!demon || QDELETED(demon))
-		return FALSE
-	if(!register_spawned_atom(demon))
-		qdel(demon)
-		return FALSE
-
-	target.visible_message(span_warning(spawn_message))
 	return TRUE
 
 /datum/redspace_event/spawn/mob/demonic_lesser_demon/ranged

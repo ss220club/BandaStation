@@ -141,6 +141,45 @@
 /datum/redspace_event/spawn/mob
 	abstract_type = /datum/redspace_event/spawn/mob
 	event_category = REDSPACE_EVENT_CATEGORY_MOB_SPAWN
+	var/spawn_type
+	var/spawn_message
+	var/spawn_timer_id
+
+/datum/redspace_event/spawn/mob/start(client/admin, turf/target)
+	if(!can_start(target))
+		return FALSE
+	var/datum/redspace_profile/active_profile = SSredspace.context?.active_profile
+	if(active_profile)
+		active_profile.play_mob_spawn_telegraph(target)
+	spawn_timer_id = addtimer(CALLBACK(src, PROC_REF(resolve_spawn)), REDSPACE_MOB_SPAWN_TELEGRAPH_DURATION, TIMER_STOPPABLE | TIMER_DELETE_ME)
+	return TRUE
+
+/datum/redspace_event/spawn/mob/proc/resolve_spawn()
+	spawn_timer_id = null
+	if(QDELETED(src) || !SSredspace || !(src in SSredspace.active_events))
+		return
+	var/turf/target = event_target
+	if(!can_start(target))
+		SSredspace.finish_registered_event(src, target, "спавн моба отменён")
+		return
+	var/mob/living/spawned_mob = new spawn_type(target)
+	if(!spawned_mob || QDELETED(spawned_mob))
+		SSredspace.finish_registered_event(src, target, "спавн моба не удался")
+		return
+	if(!register_spawned_atom(spawned_mob))
+		qdel(spawned_mob)
+		SSredspace.finish_registered_event(src, target, "спавн моба не удался")
+		return
+	var/datum/redspace_profile/active_profile = SSredspace.context?.active_profile
+	if(active_profile)
+		active_profile.play_mob_spawn_arrival(target)
+	target.visible_message(span_warning(spawn_message))
+
+/datum/redspace_event/spawn/mob/Destroy()
+	if(spawn_timer_id)
+		deltimer(spawn_timer_id)
+	spawn_timer_id = null
+	return ..()
 
 /// Per-hex event budget. It is created only for zones that actually attempt an event.
 /datum/redspace_event_budget
