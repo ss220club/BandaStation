@@ -248,6 +248,6 @@
 	abstract_type = /obj/structure/statue/dummy
 
 /obj/structure/statue/dummy/srt
-	name = "Боец СРТ"
+	name = "SRT Soldier"
 	desc = "Он точно не спит..."
 	icon_state = "srt"
