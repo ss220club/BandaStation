@@ -12,9 +12,53 @@
 	name = "\improper Bridge"
 	icon_state = "bridge"
 
-/area/station/command/bsa
-	name= "Bluespace Artillery"
-	icon_state = "bsa"
+/area/station/command/bsa_east
+	name = "\improper Bluespace Artillery East"
+	icon_state = "bsa east"
+
+/area/station/command/bsa_west
+	name = "\improper Bluespace Artillery West"
+	icon_state = "bsa west"
+
+/area/station/command/bsa_eone
+	name = "\improper Bluespace Artillery East 1"
+	icon_state = "bsa 1"
+
+/area/station/command/bsa_etwo
+	name = "\improper Bluespace Artillery East 2"
+	icon_state = "bsa 2"
+
+/area/station/command/bsa_ethree
+	name = "\improper Bluespace Artillery East 3"
+	icon_state = "bsa 3"
+
+/area/station/command/bsa_efour
+	name = "\improper Bluespace Artillery East 4"
+	icon_state = "bsa 4"
+
+/area/station/command/bsa_efive
+	name = "\improper Bluespace Artillery East 5"
+	icon_state = "bsa 5"
+
+/area/station/command/bsa_esix
+	name = "\improper Bluespace Artillery West 6"
+	icon_state = "bsa 6"
+
+/area/station/command/bsa_eseven
+	name = "\improper Bluespace Artillery West 7"
+	icon_state = "bsa 7"
+
+/area/station/command/bsa_eeight
+	name = "\improper Bluespace Artillery West 8"
+	icon_state = "bsa 8"
+
+/area/station/command/bsa_enine
+	name = "\improper Bluespace Artillery West 9"
+	icon_state = "bsa 9"
+
+/area/station/command/bsa_eten
+	name = "\improper Bluespace Artillery West 10"
+	icon_state = "bsa 10"
 
 /area/station/command/meeting_room
 	name = "\improper Heads of Staff Meeting Room"
