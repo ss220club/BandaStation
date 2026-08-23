@@ -45,6 +45,12 @@
 	if(!istype(test_soldier.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/melee))
 		return Fail("Redspace soldiers must inherit the obstacle-breaking hostile AI controller")
 
+	var/mob/living/basic/demon/redspace/moderate/minotaur/test_minotaur = allocate(/mob/living/basic/demon/redspace/moderate/minotaur, run_loc_floor_bottom_left)
+	var/datum/component/redspace_energy/minotaur_energy = test_minotaur.GetComponent(/datum/component/redspace_energy)
+	var/datum/action/cooldown/mob_cooldown/ground_slam/redspace/ground_slam = test_minotaur.ai_controller.blackboard[BB_TARGETED_ACTION]
+	if(!minotaur_energy || minotaur_energy.max_energy != 200 || minotaur_energy.drain_percent != 5 || minotaur_energy.zero_energy_damage_percent != 0.5 || !ground_slam || ground_slam.range != 2 || ground_slam.damage != 20 || ground_slam.knockdown_duration != 2 SECONDS)
+		return Fail("Moderate demons must have a larger, slower-draining energy reserve and a ground slam ability")
+
 	if(!energy.consume_energy(25) || energy.current_energy != 75)
 		return Fail("Redspace energy must be consumed as a percentage of maximum energy")
 	energy.listener_turf = get_turf(test_mob)

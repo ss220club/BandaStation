@@ -52,3 +52,12 @@ accusative = "демона-солдата"
 instrumental = "демоном-солдатом"
 prepositional = "демоне-солдате"
 gender = "male"
+
+["minotaur"]
+nominative = "минотавр"
+genitive = "минотавра"
+dative = "минотавру"
+accusative = "минотавра"
+instrumental = "минотавром"
+prepositional = "минотавре"
+gender = "male"

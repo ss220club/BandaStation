@@ -127,6 +127,7 @@
 	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/demonic_mob_spawn = new
 	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/ranged/ranged_mob_spawn = new
 	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/soldier/soldier_mob_spawn = new
+	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/moderate_minotaur/minotaur_mob_spawn = new
 	if(turf_spawn.event_category != REDSPACE_EVENT_CATEGORY_TURF_SPAWN || object_spawn.event_category != REDSPACE_EVENT_CATEGORY_OBJECT_SPAWN || mob_spawn.event_category != REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
 		return Fail("Spawn event families must expose separate turf, object and mob categories")
 	if(!turf_spawn.uses_spawn_budget() || turf_spawn.get_spawn_count() != 1 || turf_spawn.get_spawn_budget_cost() != 1)
@@ -143,10 +144,14 @@
 		return Fail("The lesser demon must be registered as a persistent mob spawn")
 	if(!SSredspace || SSredspace.event_registry["demonic_lesser_demon"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon)
 		return Fail("The lesser demon spawn must be registered in SSredspace")
-	if(ranged_mob_spawn.spawn_type != /mob/living/basic/demon/redspace/ranged || soldier_mob_spawn.spawn_type != /mob/living/basic/demon/redspace/soldier || soldier_mob_spawn.weight >= demonic_mob_spawn.weight)
-		return Fail("Redspace demon variants must expose their mob types and a rarer soldier weight")
+	if(ranged_mob_spawn.spawn_type != /mob/living/basic/demon/redspace/ranged || ranged_mob_spawn.weight != 5 || demonic_mob_spawn.weight != 5 || soldier_mob_spawn.spawn_type != /mob/living/basic/demon/redspace/soldier || soldier_mob_spawn.weight != 2)
+		return Fail("Redspace demon variants must expose their mob types and configured spawn weights")
 	if(!SSredspace || SSredspace.event_registry["demonic_ranged_demon"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon/ranged || SSredspace.event_registry["demonic_soldier"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon/soldier)
 		return Fail("The ranged demon and soldier spawns must be registered in SSredspace")
+	if(minotaur_mob_spawn.event_id != "demonic_minotaur" || minotaur_mob_spawn.spawn_type != /mob/living/basic/demon/redspace/moderate/minotaur || minotaur_mob_spawn.weight != 1 || minotaur_mob_spawn.get_spawn_budget_cost() != 3 || minotaur_mob_spawn.spawn_policy_id != "demonic_minotaur")
+		return Fail("The minotaur spawn must expose its moderate mob type and spawn budget metadata")
+	if(!SSredspace || SSredspace.event_registry["demonic_minotaur"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon/moderate_minotaur)
+		return Fail("The minotaur spawn must be registered in SSredspace")
 
 	var/datum/redspace_event/spawn/turf/too_many_turfs = new
 	too_many_turfs.spawn_count = REDSPACE_SPAWN_BUDGET_MAX_TURFS + 1
@@ -180,6 +185,7 @@
 	qdel(demonic_mob_spawn)
 	qdel(ranged_mob_spawn)
 	qdel(soldier_mob_spawn)
+	qdel(minotaur_mob_spawn)
 	qdel(budget_safe)
 	qdel(budget_storm)
 	qdel(budget)

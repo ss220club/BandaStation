@@ -251,6 +251,36 @@
 	living_target.adjust_fire_stacks(fire_stacks)
 	living_target.ignite_mob()
 
+/// A short-range ground slam used by larger redspace demons.
+/datum/action/cooldown/mob_cooldown/ground_slam/redspace
+	name = "Удар по земле"
+	desc = "Ударяет по земле, нанося урон и сбивая с ног ближайших врагов."
+	cooldown_time = 12 SECONDS
+	range = 2
+	delay = 0
+	var/damage = 20
+	var/knockdown_duration = 2 SECONDS
+
+/datum/action/cooldown/mob_cooldown/ground_slam/redspace/do_slam(atom/target)
+	redspace_ground_slam(owner, range, damage, knockdown_duration)
+
+/proc/redspace_ground_slam(mob/living/owner, range, damage, knockdown_duration)
+	var/turf/origin = get_turf(owner)
+	if(!origin)
+		return
+	playsound(origin, 'sound/effects/bamf.ogg', 100, TRUE, 3)
+	owner.visible_message(span_danger("[owner] ударяет по земле!"))
+	owner.do_attack_animation(owner, ATTACK_EFFECT_SMASH)
+
+	for(var/turf/stomp_turf as anything in RANGE_TURFS(range, origin))
+		new /obj/effect/temp_visual/small_smoke/halfsecond(stomp_turf)
+		for(var/mob/living/hit_mob in stomp_turf)
+			if(hit_mob == owner || hit_mob.stat == DEAD || owner.faction_check_atom(hit_mob))
+				continue
+			hit_mob.apply_damage(damage, BRUTE, wound_bonus = CANT_WOUND)
+			hit_mob.Knockdown(knockdown_duration)
+			shake_camera(hit_mob, 2, 1)
+
 /// A lesser demon that can survive only while its redspace energy is supplied.
 /mob/living/basic/demon/redspace
 	icon = 'modular_bandastation/redspace/icons/mob/demonic/lesser_demons.dmi'
@@ -262,10 +292,18 @@
 	melee_damage_lower = 12
 	melee_damage_upper = 18
 	ai_controller = /datum/ai_controller/basic_controller/simple/redspace_demon/melee
+	var/redspace_max_energy = 100
+	var/redspace_drain_percent = 10
+	var/redspace_zero_energy_damage_percent = 5
 
 /mob/living/basic/demon/redspace/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/redspace_energy, 100, 100, 10, 10, 5, 5, 3, -0.2, 0.5, REDSPACE_DISTURBANCE_ENTER_VALUE)
+	AddComponent(\
+		/datum/component/redspace_energy,\
+		max_energy = redspace_max_energy,\
+		drain_percent = redspace_drain_percent,\
+		zero_energy_damage_percent = redspace_zero_energy_damage_percent,\
+	)
 
 /mob/living/basic/demon/redspace/ranged
 	name = "ranged demon"
@@ -300,6 +338,30 @@
 	health = 240
 	melee_damage_lower = 20
 	melee_damage_upper = 28
+
+/mob/living/basic/demon/redspace/moderate
+	redspace_max_energy = 200
+	redspace_drain_percent = 5
+	redspace_zero_energy_damage_percent = 0.5
+
+/mob/living/basic/demon/redspace/moderate/minotaur
+	name = "minotaur"
+	real_name = "minotaur"
+	unique_name = FALSE
+	desc = "A massive redspace demon that shakes the ground with every blow."
+	icon = 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/32x48.dmi'
+	icon_state = "minotaur"
+	icon_living = "minotaur"
+	maxHealth = 300
+	health = 300
+	melee_damage_lower = 25
+	melee_damage_upper = 35
+
+/mob/living/basic/demon/redspace/moderate/minotaur/Initialize(mapload)
+	. = ..()
+	var/datum/action/cooldown/mob_cooldown/ground_slam/redspace/ground_slam = new(src)
+	ground_slam.Grant(src)
+	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, ground_slam)
 
 /// A persistent redspace manifestation used to verify object spawn events.
 /obj/structure/redspace/demonic_crystal
@@ -398,7 +460,7 @@
 	max_value = REDSPACE_MAX_NORMAL_VALUE
 	cooldown = 60 SECONDS
 	automatic = TRUE
-	weight = 2
+	weight = 5
 	spawn_count = 1
 	spawn_budget_cost = 1
 	spawn_policy_id = "demonic_lesser_demon"
@@ -419,7 +481,7 @@
 	max_value = REDSPACE_MAX_NORMAL_VALUE
 	cooldown = 60 SECONDS
 	automatic = TRUE
-	weight = 2
+	weight = 5
 	spawn_count = 1
 	spawn_budget_cost = 1
 	spawn_policy_id = "demonic_ranged_demon"
@@ -433,9 +495,23 @@
 	max_value = REDSPACE_MAX_NORMAL_VALUE
 	cooldown = 60 SECONDS
 	automatic = TRUE
-	weight = 1
+	weight = 2
 	spawn_count = 1
 	spawn_budget_cost = 1
 	spawn_policy_id = "demonic_soldier"
 	spawn_type = /mob/living/basic/demon/redspace/soldier
 	spawn_message = "В редспейсе материализуется демонический солдат."
+
+/datum/redspace_event/spawn/mob/demonic_lesser_demon/moderate_minotaur
+	event_id = "demonic_minotaur"
+	profile_id = REDSPACE_PROFILE_DEMONIC
+	min_value = REDSPACE_STORM_ENTER_VALUE
+	max_value = REDSPACE_MAX_NORMAL_VALUE
+	cooldown = 90 SECONDS
+	automatic = TRUE
+	weight = 1
+	spawn_count = 1
+	spawn_budget_cost = 3
+	spawn_policy_id = "demonic_minotaur"
+	spawn_type = /mob/living/basic/demon/redspace/moderate/minotaur
+	spawn_message = "В редспейсе материализуется могучий минотавр."
