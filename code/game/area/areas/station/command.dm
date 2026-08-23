@@ -40,23 +40,23 @@
 	name = "\improper Bluespace Artillery East 5"
 	icon_state = "bsa 5"
 
-/area/station/command/bsa_esix
+/area/station/command/bsa_wsix
 	name = "\improper Bluespace Artillery West 6"
 	icon_state = "bsa 6"
 
-/area/station/command/bsa_eseven
+/area/station/command/bsa_wseven
 	name = "\improper Bluespace Artillery West 7"
 	icon_state = "bsa 7"
 
-/area/station/command/bsa_eeight
+/area/station/command/bsa_weight
 	name = "\improper Bluespace Artillery West 8"
 	icon_state = "bsa 8"
 
-/area/station/command/bsa_enine
+/area/station/command/bsa_wnine
 	name = "\improper Bluespace Artillery West 9"
 	icon_state = "bsa 9"
 
-/area/station/command/bsa_eten
+/area/station/command/bsa_wten
 	name = "\improper Bluespace Artillery West 10"
 	icon_state = "bsa 10"
 
