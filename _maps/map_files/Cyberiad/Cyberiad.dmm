@@ -927,11 +927,10 @@
 /obj/effect/turf_decal/tile/dark_blue/half{
 	dir = 8
 	},
-/obj/machinery/quantumpad{
-	name = "Инженерный отдел";
-	
-	},
 /obj/structure/cable,
+/obj/machinery/quantumpad{
+	name = "Инженерный отдел"
+	},
 /turf/open/floor/iron/textured_edge{
 	dir = 8
 	},
@@ -13980,8 +13979,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/quantumpad{
-	name = "Инженерный отдел";
-	
+	name = "Инженерный отдел"
 	},
 /turf/open/floor/iron/textured,
 /area/station/command/bsa_west)
@@ -60694,8 +60692,7 @@
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted,
 /obj/machinery/quantumpad{
-	name = "Восточное БСА";
-	
+	name = "Восточное БСА"
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/break_room)
@@ -77036,11 +77033,10 @@
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
 	dir = 8
 	},
-/obj/machinery/quantumpad{
-	name = "Западное БСА";
-	
-	},
 /obj/structure/cable,
+/obj/machinery/quantumpad{
+	name = "Западное БСА"
+	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/break_room)
 "spZ" = (
