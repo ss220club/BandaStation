@@ -25,6 +25,9 @@
 	var/turf/event_target
 	/// Optional source that caused the event, when a scenario can identify one.
 	var/source_id
+	/// Lifecycle signals are emitted at most once per event instance.
+	var/event_started_notified = FALSE
+	var/event_finished_notified = FALSE
 
 /datum/redspace_event/proc/uses_spawn_budget()
 	return FALSE

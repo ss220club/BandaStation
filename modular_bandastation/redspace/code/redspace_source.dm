@@ -89,6 +89,15 @@
 	var/delta_y = target.y - origin_y
 	return contribution_for_distance(delta_x * delta_x + delta_y * delta_y)
 
+/// Cheap square-distance rejection used before the contribution calculation.
+/// Wave sources override this because their center moves independently of origin_x/origin_y.
+/datum/redspace_field_source/proc/can_affect(turf/target)
+	if(!target || target.z != z_level || !origin_x || !origin_y)
+		return FALSE
+	var/delta_x = target.x - origin_x
+	var/delta_y = target.y - origin_y
+	return delta_x * delta_x + delta_y * delta_y <= radius * radius
+
 /// Shared radial falloff. Quadratic falloff avoids a square root in the sampling path.
 /datum/redspace_field_source/proc/contribution_for_distance(distance_squared)
 	if(!radius)
@@ -161,6 +170,16 @@
 	var/delta_x = target.x - center[1]
 	var/delta_y = target.y - center[2]
 	return contribution_for_distance(delta_x * delta_x + delta_y * delta_y)
+
+/datum/redspace_field_source/wave/can_affect(turf/target)
+	if(!target || target.z != z_level || !origin_x || !origin_y)
+		return FALSE
+	var/elapsed_seconds = max(0, world.time - created_at) / (1 SECONDS)
+	var/center_x = origin_x + velocity_x * elapsed_seconds
+	var/center_y = origin_y + velocity_y * elapsed_seconds
+	var/delta_x = target.x - center_x
+	var/delta_y = target.y - center_y
+	return delta_x * delta_x + delta_y * delta_y <= radius * radius
 
 /datum/redspace_field_source/wave/get_debug_label()
 	var/lifetime_label = isnull(expires_at) ? "постоянная" : "осталось [round(get_remaining_lifetime() / (1 SECONDS))]с"

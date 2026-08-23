@@ -84,6 +84,8 @@
 	var/turf/wave_arrival_turf = locate(test_turf.x + 5, test_turf.y, test_turf.z)
 	if(test_wave.get_contribution(wave_arrival_turf) <= 0)
 		return Fail("Wave must affect tiles near its current center")
+	if(!test_wave.can_affect(wave_arrival_turf) || test_wave.can_affect(test_turf))
+		return Fail("Wave range checks must follow its moving center")
 	if(test_wave.get_contribution(test_turf) != 0)
 		return Fail("Wave must stop affecting tiles it has moved away from")
 	if(!test_wave.requires_processing())

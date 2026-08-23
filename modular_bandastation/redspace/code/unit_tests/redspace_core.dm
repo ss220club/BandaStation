@@ -78,6 +78,16 @@
 		return Fail("The storm event must expose a delayed 7-10 lifecycle")
 	if(!storm_event.dangerous || storm_event.budget_cost != 2)
 		return Fail("The storm event must be marked as dangerous and cost two budget points")
+	var/events_started_before = SSredspace.metric_events_started
+	SSredspace.notify_event_started(storm_event, run_loc_floor_bottom_left, "unit test")
+	SSredspace.notify_event_started(storm_event, run_loc_floor_bottom_left, "duplicate unit test")
+	if(SSredspace.metric_events_started != events_started_before + 1)
+		return Fail("Event start notifications must be idempotent")
+	var/events_finished_before = SSredspace.metric_events_finished
+	SSredspace.notify_event_finished(storm_event, run_loc_floor_bottom_left, "unit test")
+	SSredspace.notify_event_finished(storm_event, run_loc_floor_bottom_left, "duplicate unit test")
+	if(SSredspace.metric_events_finished != events_finished_before + 1)
+		return Fail("Event finish notifications must be idempotent")
 
 	var/datum/redspace_event_budget/budget = new("budget_test")
 	var/datum/redspace_event/local_distortion/budget_safe = new

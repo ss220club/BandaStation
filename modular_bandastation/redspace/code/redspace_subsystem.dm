@@ -379,6 +379,8 @@ SUBSYSTEM_DEF(redspace)
 		var/datum/redspace_field_source/source = field_sources[source_key]
 		if(!source || source == excluded_source)
 			continue
+		if(!source.can_affect(target))
+			continue
 		metric_source_check_count++
 		var/contribution = source.get_contribution(target)
 		if(istype(source, /datum/redspace_field_source/stabilizer))
@@ -527,10 +529,9 @@ SUBSYSTEM_DEF(redspace)
 	schedule_event_wake()
 	return TRUE
 
-/// Finds a usable local target only when an event is actually about to start.
-/// When an event is supplied, the target must also satisfy that event's value range.
-/// The field remains sparse and does not scan turfs during its normal cycle.
-/datum/controller/subsystem/redspace/proc/get_event_target_turf(datum/redspace_field_cell/cell, datum/redspace_event/target_event = null) as /turf
+/// Builds the common set of usable local targets for one sparse cell.
+/// Event-specific checks are applied after this list is shared by all candidates.
+/datum/controller/subsystem/redspace/proc/get_event_candidate_turfs(datum/redspace_field_cell/cell) as /list
 	if(!cell)
 		return
 
@@ -538,13 +539,42 @@ SUBSYSTEM_DEF(redspace)
 	if(!anchor || !is_supported_z(anchor.z))
 		return
 
-	if(is_turf_in_cell(anchor, cell) && is_event_target_turf_valid(anchor) && (!target_event || target_event.can_start(anchor)))
-		return anchor
-
 	var/list/possible_targets = list()
+	if(is_turf_in_cell(anchor, cell) && is_event_target_turf_valid(anchor))
+		possible_targets += anchor
 	for(var/turf/candidate as anything in RANGE_TURFS(REDSPACE_HEX_RADIUS, anchor))
-		if(is_turf_in_cell(candidate, cell) && is_event_target_turf_valid(candidate) && (!target_event || target_event.can_start(candidate)))
+		if(MC_TICK_CHECK)
+			return possible_targets
+		if(candidate == anchor)
+			continue
+		if(is_turf_in_cell(candidate, cell) && is_event_target_turf_valid(candidate))
 			possible_targets += candidate
+	if(!length(possible_targets))
+		return
+	return possible_targets
+
+/// Finds a target satisfying an event definition from a shared candidate list.
+/// The anchor remains preferred when it is valid, matching the old fast path.
+/datum/controller/subsystem/redspace/proc/get_event_target_turf(datum/redspace_field_cell/cell, datum/redspace_event/target_event = null, list/candidate_turfs = null) as /turf
+	if(!cell)
+		return
+	if(!candidate_turfs)
+		candidate_turfs = get_event_candidate_turfs(cell)
+	if(!length(candidate_turfs))
+		return
+	if(!target_event)
+		return pick(candidate_turfs)
+
+	var/turf/anchor = candidate_turfs[1]
+	var/list/possible_targets = list()
+	for(var/turf/candidate as anything in candidate_turfs)
+		if(MC_TICK_CHECK)
+			return
+		if(!target_event.can_start(candidate))
+			continue
+		if(candidate == anchor)
+			return candidate
+		possible_targets += candidate
 	if(!length(possible_targets))
 		return
 	return pick(possible_targets)
@@ -649,9 +679,15 @@ SUBSYSTEM_DEF(redspace)
 	if(!event_profile || !event_profile.has_events())
 		return FALSE
 
+	var/list/possible_targets = get_event_candidate_turfs(cell)
+	if(!length(possible_targets))
+		return FALSE
+
 	var/list/candidates = list()
 	var/list/candidate_targets = list()
 	for(var/event_id in event_profile.event_weights)
+		if(MC_TICK_CHECK)
+			return FALSE
 		var/profile_weight = event_profile.get_event_weight(event_id)
 		if(!isnum(profile_weight) || profile_weight <= 0)
 			continue
@@ -659,7 +695,7 @@ SUBSYSTEM_DEF(redspace)
 		if(!event || !event.automatic)
 			qdel(event)
 			continue
-		var/turf/target = get_event_target_turf(cell, event)
+		var/turf/target = get_event_target_turf(cell, event, possible_targets)
 		if(!target || !can_start_event_instance(event, target))
 			qdel(event)
 			continue
@@ -696,6 +732,10 @@ SUBSYSTEM_DEF(redspace)
 		qdel(event)
 		return FALSE
 
+	// Spawn events keep the instance alive, so emit their start signal here just
+	// like short-lived events do from their start() implementation.
+	if(!event.event_started_notified)
+		notify_event_started(event, target, "событие началось")
 	var/cooldown_key = get_event_cooldown_key(event, target)
 	if(event.cooldown && cooldown_key)
 		event_cooldowns[cooldown_key] = world.time + event.cooldown
@@ -1150,6 +1190,10 @@ SUBSYSTEM_DEF(redspace)
 	var/datum/redspace_field_cell/cell = field_cells[zone_key]
 	if(!cell || length(cell.listeners) || !isnull(cell.forced_value) || !isnull(cell.event_override_value) || cell.local_delta)
 		return
+	// A lifecycle callback can run while this cell is still waiting for its
+	// dirty pass. Let the normal prune path remove it after processing.
+	if(cell in dirty_cells || cell in currentrun)
+		return
 	var/source_present = cell_has_active_source(cell)
 	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
 	if(budget && !source_present && !budget.active_event_count && !budget.active_spawn_event_count)
@@ -1174,7 +1218,7 @@ SUBSYSTEM_DEF(redspace)
 			continue
 		if(source.z_level != cell.z_level)
 			continue
-		if(source.get_contribution(sample_turf))
+		if(source.can_affect(sample_turf))
 			return TRUE
 		var/list/source_center = list(source.origin_x, source.origin_y)
 		if(istype(source, /datum/redspace_field_source/wave))
@@ -1327,6 +1371,11 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/notify_event_started(datum/event, event_context = null, reason = null)
 	if(isturf(event_context))
 		event_context = get_event_context(event, event_context)
+	var/datum/redspace_event/redspace_event = event
+	if(redspace_event)
+		if(redspace_event.event_started_notified)
+			return
+		redspace_event.event_started_notified = TRUE
 	metric_events_started++
 	for(var/datum/listener as anything in event_listeners.Copy())
 		if(!listener || QDELETED(listener))
@@ -1338,6 +1387,11 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/notify_event_finished(datum/event, event_context = null, reason = null)
 	if(isturf(event_context))
 		event_context = get_event_context(event, event_context)
+	var/datum/redspace_event/redspace_event = event
+	if(redspace_event)
+		if(redspace_event.event_finished_notified)
+			return
+		redspace_event.event_finished_notified = TRUE
 	metric_events_finished++
 	for(var/datum/listener as anything in event_listeners.Copy())
 		if(!listener || QDELETED(listener))
