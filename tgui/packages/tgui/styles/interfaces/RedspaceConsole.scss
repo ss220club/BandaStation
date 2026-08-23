@@ -51,8 +51,23 @@
 }
 
 .RedspaceConsole__sensorRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  min-width: 0;
+  padding: 0 var(--space-s);
   cursor: var(--cursor-pointer);
   transition: background-color var(--transition-time-medium);
+
+  .RedspaceConsole__sensorInfo {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .RedspaceConsole__valueBadge {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
 
   &:hover {
     background-color: hsl(

@@ -243,9 +243,9 @@ export const RedspaceConsole = () => {
               </Stack.Item>
 
               <Stack.Item
-                basis="46%"
+                basis="52%"
                 minWidth="460px"
-                maxWidth="520px"
+                maxWidth="560px"
                 shrink={1}
                 minHeight={0}
               >
@@ -255,7 +255,7 @@ export const RedspaceConsole = () => {
                   style={{ gap: 'var(--space-s)' }}
                 >
                   <Stack.Item
-                    basis="48%"
+                    basis="52%"
                     minWidth="260px"
                     shrink={1}
                     minHeight={0}
@@ -264,12 +264,6 @@ export const RedspaceConsole = () => {
                       sensors={data.sensors}
                       selectedSensorId={selectedSensor?.id}
                       onSelect={selectSensor}
-                      onUnlink={(sensorId) =>
-                        act('unlink_sensor', { sensor_id: sensorId })
-                      }
-                      onForget={(sensorId) =>
-                        act('forget_sensor', { sensor_id: sensorId })
-                      }
                     />
                   </Stack.Item>
                   <Stack.Item grow basis={0} minWidth={0} minHeight={0}>
@@ -351,12 +345,10 @@ type SensorListProps = {
   sensors: Sensor[];
   selectedSensorId?: string;
   onSelect: (sensorId: string) => void;
-  onUnlink: (sensorId: string) => void;
-  onForget: (sensorId: string) => void;
 };
 
 const SensorList = (props: SensorListProps) => {
-  const { sensors, selectedSensorId, onSelect, onUnlink, onForget } = props;
+  const { sensors, selectedSensorId, onSelect } = props;
 
   return (
     <Section
@@ -370,9 +362,9 @@ const SensorList = (props: SensorListProps) => {
         <NoticeBox m={0.5}>Сопряжённых датчиков нет.</NoticeBox>
       )}
       {!!sensors.length && (
-        <Table width="100%">
+        <Box>
           {sensors.map((sensor) => (
-            <Table.Row
+            <Box
               key={sensor.id}
               className={`RedspaceConsole__sensorRow${
                 selectedSensorId === sensor.id
@@ -381,7 +373,7 @@ const SensorList = (props: SensorListProps) => {
               }`}
               onClick={() => onSelect(sensor.id)}
             >
-              <Table.Cell style={{ minWidth: 0 }}>
+              <Box className="RedspaceConsole__sensorInfo">
                 <Box
                   bold
                   style={{
@@ -399,35 +391,11 @@ const SensorList = (props: SensorListProps) => {
                 >
                   {sensor.id} · {STATUS_LABELS[sensor.status]}
                 </Box>
-              </Table.Cell>
-              <Table.Cell collapsing width="4.5em" textAlign="right">
-                <ValueBadge value={sensor.value} />
-              </Table.Cell>
-              <Table.Cell collapsing width="2.75em" textAlign="center">
-                {sensor.connected ? (
-                  <Button
-                    icon="unlink"
-                    tooltip="Разорвать привязку"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      onUnlink(sensor.id);
-                    }}
-                  />
-                ) : (
-                  <Button
-                    icon="trash"
-                    color="bad"
-                    tooltip="Удалить запись"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      onForget(sensor.id);
-                    }}
-                  />
-                )}
-              </Table.Cell>
-            </Table.Row>
+              </Box>
+              <ValueBadge value={sensor.value} />
+            </Box>
           ))}
-        </Table>
+        </Box>
       )}
     </Section>
   );
