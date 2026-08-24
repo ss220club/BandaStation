@@ -14,7 +14,7 @@ type Data = {
   nearby_players: { name: string; ref: string }[];
 };
 
-export const CreditSiphon = () => {
+export function CreditSiphon() {
   const { act, data } = useBackend<Data>();
   const {
     credits_stored,
