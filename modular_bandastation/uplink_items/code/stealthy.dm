@@ -16,7 +16,7 @@
 		JOB_PARAMEDIC,
 		JOB_CHEMIST,
 	)
-	cost = 18
+	cost = 16
 
 /datum/uplink_item/role_restricted/gbs/can_be_bought(datum/uplink_handler/source)
 	if(!..())
@@ -28,7 +28,7 @@
 	desc = "Энергетическая катана, созданная при помощи новых технологий Синдиката."
 	item = /obj/item/melee/energy/ekatanka
 	category = /datum/uplink_category/dangerous
-	cost = 18
+	cost = 14
 
 /datum/uplink_item/stealthy_weapons/spacejacker
 	name = "Хакерское устройство 'Богатый Еврей'"
@@ -41,4 +41,4 @@
 		JOB_BITRUNNER,
 		JOB_SHAFT_MINER,
 	)
-	cost = 8
+	cost = 5

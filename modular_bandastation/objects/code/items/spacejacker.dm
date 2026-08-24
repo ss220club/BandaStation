@@ -79,7 +79,7 @@
 
 	exchange_player_count = player_count
 	exchange_traitor_count = traitor_count
-	tc_purchase_limit = player_count >= 31 ? 10 : 8
+	tc_purchase_limit = player_count >= 31 ? 9 : 7
 	tc_price = player_count >= 31 ? 1000 : 950
 	for(var/traitor_number in 1 to traitor_count)
 		tc_price += rand(5, 50)
