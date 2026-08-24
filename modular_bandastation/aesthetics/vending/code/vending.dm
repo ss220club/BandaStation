@@ -31,6 +31,7 @@
 		/obj/item/clothing/gloves/combat/centcom/diplomat = 3,
 		/obj/item/storage/belt/sheath/centcom_rapier = 3,
 		/obj/item/storage/belt/sheath/centcom_katana = 3,
+		/obj/item/storage/belt/sheath/tanto = 3,
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/cent_wardrobe
 

@@ -31,7 +31,7 @@
 	inhand_icon_state = "centcom_tanto"
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/righthand.dmi'
-	force = 17
+	force = 20
 	hitsound = 'sound/items/weapons/bladeslice.ogg'
 	demolition_mod = 1
 	block_chance = 50
