@@ -18,7 +18,7 @@
 	)
 	cost = 18
 
-/datum/uplink_item/dangerous/gbs/can_be_bought(datum/uplink_handler/source)
+/datum/uplink_item/role_restricted/gbs/can_be_bought(datum/uplink_handler/source)
 	if(!..())
 		return FALSE
 	return locate(/datum/objective/martyr) in source.primary_objectives || locate(/datum/objective/hijack) in source.primary_objectives
