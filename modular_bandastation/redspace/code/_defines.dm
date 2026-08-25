@@ -1,5 +1,5 @@
-/// Radius of a redspace hex in map tiles. The resulting bounding box is roughly 8x8 tiles.
-#define REDSPACE_HEX_RADIUS 4
+/// Radius of a redspace hex in map tiles. The resulting bounding box is roughly 12x12 tiles.
+#define REDSPACE_HEX_RADIUS 6
 #define REDSPACE_HEX_SQRT3 1.7320508075688772
 
 #define REDSPACE_DEFAULT_VALUE 0
@@ -57,7 +57,7 @@
 #define REDSPACE_SPAWN_BUDGET_MAX_TURF_POINTS 8
 #define REDSPACE_SPAWN_BUDGET_MAX_MOB_POINTS 8
 #define REDSPACE_SPAWN_BUDGET_MAX_ACTIVE_EVENTS 4
-/// A radius-four cell exposes roughly 40-44 candidate turfs; keep about half active.
+/// A radius-six cell exposes roughly 90-100 candidate turfs; keep about half active.
 #define REDSPACE_SPAWN_BUDGET_MAX_TURFS 20
 #define REDSPACE_SPAWN_BUDGET_MAX_OBJECTS 6
 #define REDSPACE_SPAWN_BUDGET_MAX_MOBS 3

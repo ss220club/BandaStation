@@ -30,6 +30,9 @@
 	var/attempt_delay_max
 	var/attempt_probability = 100
 	var/list/event_weights = list()
+	/// Cached after the event registry has been initialized; this is queried
+	/// for every active cell during refreshes.
+	var/list/automatic_event_cache = list()
 
 /datum/redspace_event_profile/New(new_state, new_attempt_delay_min, new_attempt_delay_max, new_attempt_probability, list/new_event_weights)
 	. = ..()

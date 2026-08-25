@@ -167,6 +167,10 @@
 	var/last_change_reason
 	/// Optional reason waiting for dirty-cell processing.
 	var/pending_change_reason
+	/// Whether this cell is already present in the pending dirty queue.
+	var/dirty_queued = FALSE
+	/// Whether this cell is in the resumable dirty pass.
+	var/dirty_processing = FALSE
 
 /datum/redspace_field_cell/New(new_z, new_q, new_r, new_key, initial_value = REDSPACE_DEFAULT_VALUE, turf/sample_turf = null)
 	. = ..()

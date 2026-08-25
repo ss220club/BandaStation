@@ -29,8 +29,13 @@ SUBSYSTEM_DEF(redspace)
 	var/list/refresh_currentrun = list()
 	var/refresh_in_progress = FALSE
 	var/refresh_requested = FALSE
+	var/refresh_requested_full = FALSE
+	var/list/pending_refresh_keys = list()
 	var/refresh_reason
 	var/pending_refresh_reason
+	/// Pruning is deferred until the normal subsystem pass so source updates
+	/// cannot trigger several full sparse-table scans in one tick.
+	var/prune_requested = FALSE
 	/// Wake timer for the next profile-based event attempt.
 	var/event_wake_timer_id = TIMER_ID_NULL
 	var/event_wake_at = 0
@@ -85,8 +90,11 @@ SUBSYSTEM_DEF(redspace)
 	refresh_currentrun = list()
 	refresh_in_progress = FALSE
 	refresh_requested = FALSE
+	refresh_requested_full = FALSE
+	pending_refresh_keys = list()
 	refresh_reason = null
 	pending_refresh_reason = null
+	prune_requested = FALSE
 	event_wake_timer_id = TIMER_ID_NULL
 	event_wake_at = 0
 	transition_log = list()
@@ -141,6 +149,7 @@ SUBSYSTEM_DEF(redspace)
 	dirty_cells.Cut()
 	currentrun.Cut()
 	refresh_currentrun.Cut()
+	pending_refresh_keys.Cut()
 	transition_log.Cut()
 	event_cooldowns.Cut()
 	event_budgets.Cut()
@@ -169,6 +178,10 @@ SUBSYSTEM_DEF(redspace)
 	if(!resumed)
 		process_sources()
 		currentrun = dirty_cells.Copy()
+		for(var/datum/redspace_field_cell/dirty_cell as anything in currentrun)
+			if(dirty_cell)
+				dirty_cell.dirty_queued = FALSE
+				dirty_cell.dirty_processing = TRUE
 		dirty_cells.Cut()
 
 	if(!process_refresh_cells())
@@ -178,6 +191,8 @@ SUBSYSTEM_DEF(redspace)
 	while(length(current_run))
 		var/datum/redspace_field_cell/cell = current_run[length(current_run)]
 		current_run.len--
+		if(cell)
+			cell.dirty_processing = FALSE
 		if(QDELETED(cell))
 			continue
 
@@ -185,10 +200,12 @@ SUBSYSTEM_DEF(redspace)
 		if(MC_TICK_CHECK)
 			return
 
-	prune_unused_cells(FALSE)
+	if(prune_requested)
+		prune_requested = FALSE
+		prune_unused_cells(FALSE)
 	if(!process_scheduled_events())
 		return
-	if(!length(dirty_cells) && !length(processing_sources) && !refresh_in_progress && !refresh_requested)
+	if(!length(dirty_cells) && !length(processing_sources) && !refresh_in_progress && !refresh_requested && !prune_requested)
 		can_fire = FALSE
 		schedule_event_wake()
 
@@ -198,6 +215,7 @@ SUBSYSTEM_DEF(redspace)
 		return
 
 	var/refresh_needed = FALSE
+	var/list/refresh_cell_keys = list()
 	for(var/source_key in processing_sources.Copy())
 		var/datum/redspace_field_source/source = processing_sources[source_key]
 		if(QDELETED(source))
@@ -208,22 +226,31 @@ SUBSYSTEM_DEF(redspace)
 			remove_source(source.source_id)
 			continue
 		var/coverage_pending = length(source.coverage_turfs)
+		var/coverage_rebuild_needed = source.coverage_needs_refresh()
 		var/coverage_complete = TRUE
 		if(istype(source, /datum/redspace_field_source/wave) || coverage_pending)
 			coverage_complete = ensure_source_cells(source)
 			refresh_needed ||= coverage_pending || !coverage_complete
+			refresh_cell_keys |= source.get_coverage_refresh_keys()
+			if(coverage_rebuild_needed)
+				prune_requested = TRUE
 		if(istype(source, /datum/redspace_field_source/wave))
 			refresh_needed = TRUE
 		if(!source.requires_processing() && coverage_complete)
 			processing_sources -= source_key
 
 	if(refresh_needed)
-		refresh_cells("обновляются пространственные источники")
+		if(length(refresh_cell_keys))
+			refresh_cells("обновляются пространственные источники", refresh_cell_keys)
+		else
+			refresh_cells("обновляются пространственные источники")
 
 /datum/controller/subsystem/redspace/proc/ensure_source_cells(datum/redspace_field_source/source)
 	if(!source || !source.z_level || !is_supported_z(source.z_level))
 		return TRUE
 	if(!length(source.coverage_turfs))
+		if(!source.coverage_needs_refresh())
+			return TRUE
 		var/list/center = list(source.origin_x, source.origin_y)
 		if(istype(source, /datum/redspace_field_source/wave))
 			var/datum/redspace_field_source/wave/wave_source = source
@@ -231,9 +258,37 @@ SUBSYSTEM_DEF(redspace)
 		var/turf/center_turf = locate(round(center[1]), round(center[2]), source.z_level)
 		if(!center_turf)
 			return TRUE
-		source.coverage_turfs = RANGE_TURFS(source.radius, center_turf)
+		var/coverage_radius = source.radius
+		if(istype(source, /datum/redspace_field_source/wave))
+			// Keep a margin so a wave can move within one cell without rebuilding
+			// the coverage list while still refreshing every affected cell.
+			coverage_radius += REDSPACE_HEX_RADIUS
+		var/list/center_coordinates = redspace_hex_coordinates(center_turf)
+		var/list/coverage_candidates = list()
+		if(center_coordinates)
+			// Enumerate the sparse hex grid directly. The margin covers cells
+			// whose representative turf lies outside the source circle while
+			// one of their exact listener turfs is still inside it.
+			var/effective_radius = coverage_radius + REDSPACE_HEX_RADIUS
+			var/effective_radius_squared = effective_radius * effective_radius
+			var/coordinate_range = ceil(effective_radius * 2 / (3 * REDSPACE_HEX_RADIUS)) + 2
+			for(var/q_offset in -coordinate_range to coordinate_range)
+				for(var/r_offset in -coordinate_range to coordinate_range)
+					var/q = center_coordinates[1] + q_offset
+					var/r = center_coordinates[2] + r_offset
+					var/turf/representative_turf = redspace_hex_representative_turf(source.z_level, q, r)
+					if(!representative_turf)
+						continue
+					var/delta_x = representative_turf.x - center[1]
+					var/delta_y = representative_turf.y - center[2]
+					if(delta_x * delta_x + delta_y * delta_y <= effective_radius_squared)
+						coverage_candidates += representative_turf
+		source.coverage_turfs = coverage_candidates
 		source.coverage_seen_cells = list()
 		source.coverage_cursor = 1
+		source.coverage_center_x = center[1]
+		source.coverage_center_y = center[2]
+		source.coverage_refresh_cell_keys |= source.coverage_cell_keys
 
 	while(source.coverage_cursor <= length(source.coverage_turfs))
 		var/turf/candidate = source.coverage_turfs[source.coverage_cursor++]
@@ -244,11 +299,21 @@ SUBSYSTEM_DEF(redspace)
 		if(source.coverage_seen_cells[cell_key])
 			continue
 		source.coverage_seen_cells[cell_key] = TRUE
+		source.coverage_refresh_cell_keys |= cell_key
 		get_cell_by_coordinates(candidate.z, coordinates[1], coordinates[2], TRUE, candidate)
 		if(MC_TICK_CHECK)
 			return FALSE
 
-	source.reset_coverage_cache()
+	var/list/current_coverage_keys = list()
+	for(var/cell_key in source.coverage_seen_cells)
+		current_coverage_keys += cell_key
+	source.coverage_cell_keys = current_coverage_keys
+	source.coverage_cell_lookup = list()
+	for(var/cell_key in current_coverage_keys)
+		source.coverage_cell_lookup[cell_key] = TRUE
+	source.coverage_turfs = null
+	source.coverage_seen_cells = null
+	source.coverage_cursor = 1
 	return TRUE
 
 /// Enables the subsystem after a new cell update or registered listener needs processing.
@@ -380,12 +445,12 @@ SUBSYSTEM_DEF(redspace)
 	var/stabilizer_delta = 0
 	for(var/source_key in field_sources)
 		var/datum/redspace_field_source/source = field_sources[source_key]
-		if(!source || source == excluded_source)
+		if(!source || source == excluded_source || !source.strength)
 			continue
-		if(!source.can_affect(target))
+		var/contribution = source.get_contribution(target)
+		if(!contribution)
 			continue
 		metric_source_check_count++
-		var/contribution = source.get_contribution(target)
 		if(istype(source, /datum/redspace_field_source/stabilizer))
 			stabilizer_delta += contribution
 		else
@@ -451,6 +516,11 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/event_profile_has_automatic_event(datum/redspace_event_profile/event_profile, target_category = null)
 	if(!event_profile)
 		return FALSE
+	var/cache_key = isnull(target_category) ? "normal" : target_category
+	if(!isnull(event_profile.automatic_event_cache[cache_key]))
+		return event_profile.automatic_event_cache[cache_key]
+
+	var/has_automatic_event = FALSE
 	for(var/event_id in event_profile.event_weights)
 		var/event_type = event_registry[event_id]
 		if(!event_type)
@@ -461,8 +531,10 @@ SUBSYSTEM_DEF(redspace)
 		var/is_match = event.automatic && category_matches
 		qdel(event)
 		if(is_match)
-			return TRUE
-	return FALSE
+			has_automatic_event = TRUE
+			break
+	event_profile.automatic_event_cache[cache_key] = has_automatic_event
+	return has_automatic_event
 
 /// Ensures that a sparse active cell participates in both profile event queues.
 /datum/controller/subsystem/redspace/proc/schedule_event_attempt(datum/redspace_field_cell/cell, immediate = FALSE)
@@ -662,6 +734,10 @@ SUBSYSTEM_DEF(redspace)
 	var/event_id = prototype.event_id
 	event_registry[event_id] = event_type
 	qdel(prototype)
+	for(var/state in context?.active_profile?.event_profiles)
+		var/datum/redspace_event_profile/event_profile = context.active_profile.event_profiles[state]
+		if(event_profile)
+			event_profile.automatic_event_cache.Cut()
 	return TRUE
 
 /// Registers a spawn event explicitly while keeping it in the common profile registry.
@@ -723,6 +799,20 @@ SUBSYSTEM_DEF(redspace)
 		return FALSE
 	return TRUE
 
+/// Rejects events whose cell budget or cooldown is already exhausted before
+/// scanning every candidate turf in the cell.
+/datum/controller/subsystem/redspace/proc/can_attempt_event_in_cell(datum/redspace_event/event, datum/redspace_field_cell/cell)
+	if(!event || !cell)
+		return FALSE
+	var/cooldown_key = "[event.event_id]:[cell.key]"
+	var/available_at = event_cooldowns[cooldown_key]
+	if(available_at && world.time < available_at)
+		return FALSE
+	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
+	if(budget && !budget.can_start(event))
+		return FALSE
+	return TRUE
+
 /// Selects one eligible registered event for the cell's current state profile.
 /// The default queue excludes turf spawns; a category selects a dedicated queue.
 /datum/controller/subsystem/redspace/proc/try_start_automatic_event(datum/redspace_field_cell/cell, target_category = null)
@@ -751,6 +841,9 @@ SUBSYSTEM_DEF(redspace)
 			continue
 		var/event_category = event.get_spawn_category()
 		if(isnull(target_category) ? event_category == REDSPACE_EVENT_CATEGORY_TURF_SPAWN : event_category != target_category)
+			qdel(event)
+			continue
+		if(!can_attempt_event_in_cell(event, cell))
 			qdel(event)
 			continue
 		var/turf/target = get_event_target_turf(cell, event, possible_targets)
@@ -958,6 +1051,9 @@ SUBSYSTEM_DEF(redspace)
 	source.source_id = next_source_id++
 	field_sources["[source.source_id]"] = source
 	var/coverage_complete = ensure_source_cells(source)
+	// Registration performs a full refresh below, so do not repeat the same
+	// coverage pass on the next subsystem fire.
+	source.get_coverage_refresh_keys()
 	if(source.requires_processing() || !coverage_complete)
 		processing_sources["[source.source_id]"] = source
 	metric_peak_processing_sources = max(metric_peak_processing_sources, length(processing_sources))
@@ -1005,13 +1101,18 @@ SUBSYSTEM_DEF(redspace)
 	var/change_reason = reason || "изменена сила источника"
 	if(!source.set_strength(new_strength, change_reason))
 		return FALSE
+	var/list/refresh_cell_keys = source.get_coverage_refresh_keys()
 	if(source.strength)
 		var/coverage_complete = ensure_source_cells(source)
+		refresh_cell_keys |= source.get_coverage_refresh_keys()
 		if(!coverage_complete)
 			processing_sources["[source.source_id]"] = source
 	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_STRENGTH, source.profile_id, old_strength, source.strength, change_reason)
-	refresh_cells(change_reason)
-	prune_unused_cells()
+	if(length(refresh_cell_keys))
+		refresh_cells(change_reason, refresh_cell_keys)
+	else
+		refresh_cells(change_reason)
+	prune_requested = TRUE
 	wake()
 	return TRUE
 
@@ -1029,10 +1130,14 @@ SUBSYSTEM_DEF(redspace)
 		processing_sources["[source.source_id]"] = source
 	else
 		processing_sources -= "[source.source_id]"
+	var/list/refresh_cell_keys = source.get_coverage_refresh_keys()
 	get_cell(new_origin, TRUE)
 	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_POSITION, source.profile_id, old_position, list(source.origin_x, source.origin_y, source.z_level), change_reason)
-	refresh_cells(change_reason)
-	prune_unused_cells()
+	if(length(refresh_cell_keys))
+		refresh_cells(change_reason, refresh_cell_keys)
+	else
+		refresh_cells(change_reason)
+	prune_requested = TRUE
 	wake()
 	return TRUE
 
@@ -1050,9 +1155,13 @@ SUBSYSTEM_DEF(redspace)
 		processing_sources["[source.source_id]"] = source
 	else
 		processing_sources -= "[source.source_id]"
+	var/list/refresh_cell_keys = source.get_coverage_refresh_keys()
 	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_RADIUS, source.profile_id, old_radius, source.radius, change_reason)
-	refresh_cells(change_reason)
-	prune_unused_cells()
+	if(length(refresh_cell_keys))
+		refresh_cells(change_reason, refresh_cell_keys)
+	else
+		refresh_cells(change_reason)
+	prune_requested = TRUE
 	wake()
 	return TRUE
 
@@ -1066,13 +1175,17 @@ SUBSYSTEM_DEF(redspace)
 	if(reason)
 		source.change_reason = reason
 	var/change_reason = reason || source.change_reason || "источник удалён"
+	var/list/refresh_cell_keys = source.get_coverage_refresh_keys()
 	UnregisterSignal(source, COMSIG_QDELETING)
 	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_REMOVED, source.profile_id, source, null, change_reason)
 	field_sources -= source_key
 	processing_sources -= source_key
 	qdel(source)
-	refresh_cells(change_reason)
-	prune_unused_cells()
+	if(length(refresh_cell_keys))
+		refresh_cells(change_reason, refresh_cell_keys)
+	else
+		refresh_cells(change_reason)
+	prune_requested = TRUE
 	wake()
 	return TRUE
 
@@ -1085,26 +1198,44 @@ SUBSYSTEM_DEF(redspace)
 	if(field_sources[source_key] != source)
 		return
 	var/change_reason = source.change_reason || "источник уничтожен"
+	var/list/refresh_cell_keys = source.get_coverage_refresh_keys()
 	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_REMOVED, source.profile_id, source, null, change_reason)
 	field_sources -= source_key
 	processing_sources -= source_key
-	refresh_cells(change_reason)
-	prune_unused_cells()
+	if(length(refresh_cell_keys))
+		refresh_cells(change_reason, refresh_cell_keys)
+	else
+		refresh_cells(change_reason)
+	prune_requested = TRUE
 	wake()
 
-/// Requests a resumable refresh of all sparse cells.
-/datum/controller/subsystem/redspace/proc/refresh_cells(reason = null)
+/// Requests a resumable refresh of sparse cells. A null key list means all
+/// cells; source updates pass only the cells covered by that source.
+/datum/controller/subsystem/redspace/proc/refresh_cells(reason = null, list/cell_keys = null)
 	if(refresh_in_progress)
+		if(!isnull(cell_keys) && !length(cell_keys))
+			return
 		refresh_requested = TRUE
+		if(isnull(cell_keys))
+			refresh_requested_full = TRUE
+		else if(!refresh_requested_full)
+			pending_refresh_keys |= cell_keys
 		if(!isnull(reason))
 			pending_refresh_reason = reason
 		return
 
+	if(!isnull(cell_keys) && !length(cell_keys))
+		return
 	refresh_in_progress = TRUE
 	refresh_reason = reason
 	refresh_currentrun = list()
-	for(var/cell_key in field_cells)
-		refresh_currentrun += cell_key
+	if(isnull(cell_keys))
+		for(var/field_cell_key in field_cells)
+			refresh_currentrun += field_cell_key
+	else
+		for(var/field_cell_key in cell_keys)
+			if(field_cells[field_cell_key])
+				refresh_currentrun += field_cell_key
 	wake()
 
 /datum/controller/subsystem/redspace/proc/process_refresh_cells()
@@ -1143,8 +1274,13 @@ SUBSYSTEM_DEF(redspace)
 		refresh_reason = pending_refresh_reason
 		pending_refresh_reason = null
 		refresh_currentrun = list()
-		for(var/cell_key in field_cells)
-			refresh_currentrun += cell_key
+		if(refresh_requested_full)
+			for(var/field_cell_key in field_cells)
+				refresh_currentrun += field_cell_key
+		else
+			refresh_currentrun = pending_refresh_keys.Copy()
+		refresh_requested_full = FALSE
+		pending_refresh_keys.Cut()
 
 /// Removes all field state created during the current round.
 /datum/controller/subsystem/redspace/proc/reset_debug_state()
@@ -1171,8 +1307,11 @@ SUBSYSTEM_DEF(redspace)
 	refresh_currentrun.Cut()
 	refresh_in_progress = FALSE
 	refresh_requested = FALSE
+	refresh_requested_full = FALSE
+	pending_refresh_keys.Cut()
 	refresh_reason = null
 	pending_refresh_reason = null
+	prune_requested = FALSE
 	transition_log.Cut()
 	event_cooldowns.Cut()
 	for(var/zone_key in event_budgets)
@@ -1215,6 +1354,8 @@ SUBSYSTEM_DEF(redspace)
 	field_cells -= cell.key
 	dirty_cells -= cell
 	currentrun -= cell
+	cell.dirty_queued = FALSE
+	cell.dirty_processing = FALSE
 	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
 	if(budget && !budget.active_event_count && !budget.active_spawn_event_count)
 		budget.next_attempt_at = 0
@@ -1229,9 +1370,7 @@ SUBSYSTEM_DEF(redspace)
 		var/datum/redspace_field_cell/cell = field_cells[cell_key]
 		if(!cell || length(cell.listeners) || !isnull(cell.forced_value) || !isnull(cell.event_override_value) || cell.local_delta)
 			continue
-		if(cell in dirty_cells)
-			continue
-		if(cell in currentrun)
+		if(cell.dirty_queued || cell.dirty_processing)
 			continue
 		var/source_present = cell_has_active_source(cell)
 		var/datum/redspace_event_budget/budget = event_budgets[cell.key]
@@ -1256,7 +1395,7 @@ SUBSYSTEM_DEF(redspace)
 		return
 	// A lifecycle callback can run while this cell is still waiting for its
 	// dirty pass. Let the normal prune path remove it after processing.
-	if(cell in dirty_cells || cell in currentrun)
+	if(cell.dirty_queued || cell.dirty_processing)
 		return
 	var/source_present = cell_has_active_source(cell)
 	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
@@ -1283,17 +1422,22 @@ SUBSYSTEM_DEF(redspace)
 			continue
 		if(source.z_level != cell.z_level)
 			continue
+		if(source.coverage_cell_lookup && source.coverage_cell_lookup[cell.key])
+			return TRUE
 		if(source.can_affect(sample_turf))
 			return TRUE
-		var/list/source_center = list(source.origin_x, source.origin_y)
+		var/center_x = source.origin_x
+		var/center_y = source.origin_y
 		if(istype(source, /datum/redspace_field_source/wave))
 			var/datum/redspace_field_source/wave/wave_source = source
-			source_center = wave_source.get_current_center()
-		if(!source_center)
+			wave_source.update_current_center()
+			center_x = wave_source.current_center_x
+			center_y = wave_source.current_center_y
+		if(!center_x || !center_y)
 			continue
 		var/coverage_radius = source.radius + REDSPACE_HEX_RADIUS
-		var/delta_x = sample_turf.x - source_center[1]
-		var/delta_y = sample_turf.y - source_center[2]
+		var/delta_x = sample_turf.x - center_x
+		var/delta_y = sample_turf.y - center_y
 		if(delta_x * delta_x + delta_y * delta_y <= coverage_radius * coverage_radius)
 			return TRUE
 	return FALSE
@@ -1304,7 +1448,8 @@ SUBSYSTEM_DEF(redspace)
 		return
 	if(!isnull(reason))
 		cell.pending_change_reason = reason
-	if(!(cell in dirty_cells))
+	if(!cell.dirty_queued)
+		cell.dirty_queued = TRUE
 		dirty_cells += cell
 		metric_dirty_cells_enqueued++
 		metric_peak_dirty_cells = max(metric_peak_dirty_cells, length(dirty_cells))
