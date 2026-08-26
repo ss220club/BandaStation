@@ -12,6 +12,29 @@
 /datum/targeting_strategy/basic/redspace_demon/retained
 	ignore_sight = TRUE
 
+/// Returns TRUE when a player-controlled human is incapacitated but still alive.
+/proc/redspace_devourer_can_consume(atom/target)
+	if(!ishuman(target))
+		return FALSE
+	var/mob/living/carbon/human/human_target = target
+	if(QDELETED(human_target) || human_target.stat == DEAD || !human_target.mind)
+		return FALSE
+	return IS_UNCONSCIOUS_OR_CRIT(human_target) || HAS_TRAIT(human_target, TRAIT_INCAPACITATED)
+
+/// Devourers ignore conscious targets and retain only valid prey through cover.
+/datum/targeting_strategy/basic/redspace_demon/devourer
+
+/datum/targeting_strategy/basic/redspace_demon/devourer/is_valid_target(mob/living/living_mob, atom/target, vision_range, datum/ai_controller/controller = null)
+	. = ..()
+	if(!. || !redspace_devourer_can_consume(target))
+		return FALSE
+	return TRUE
+
+/datum/targeting_strategy/basic/redspace_demon/devourer/can_keep_target(mob/living/living_mob, atom/target, range, datum/ai_controller/controller = null)
+	if(!redspace_devourer_can_consume(target))
+		return FALSE
+	return ..()
+
 /// Mirrors attack_obstructions' object checks for movement behaviors that must wait for an obstacle attack.
 /proc/redspace_demon_can_smash_object(mob/living/basic/basic_mob, obj/object)
 	if(!isobj(object) || !object.density)
@@ -239,6 +262,12 @@
 /datum/ai_controller/basic_controller/simple/redspace_demon/melee
 	behavior_tree_json = "code/modules/mob/living/basic/space_fauna/demon/redspace_demon_melee.bt.json"
 
+/datum/ai_controller/basic_controller/simple/redspace_demon/melee/devourer
+	blackboard = list(
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/redspace_demon/devourer,
+		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/nearest,
+	)
+
 /datum/ai_controller/basic_controller/simple/redspace_demon/ranged
 	behavior_tree_json = "code/modules/mob/living/basic/space_fauna/demon/redspace_demon_ranged.bt.json"
 
@@ -372,6 +401,199 @@
 	var/datum/action/cooldown/mob_cooldown/ground_slam/redspace/ground_slam = new(src)
 	ground_slam.Grant(src)
 	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, ground_slam)
+
+#define REDSPACE_DEVOURER_STASIS "redspace_devourer_stasis"
+
+/// A slow demon that hides an incapacitated player before becoming a minotaur.
+/mob/living/basic/demon/redspace/devourer
+	name = "redspace devourer"
+	real_name = "redspace devourer"
+	unique_name = FALSE
+	desc = "A hulking redspace demon that consumes helpless people and grows into something worse."
+	icon = 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi'
+	icon_state = "Devourer"
+	icon_living = "Devourer"
+	icon_dead = "Devourer-closed"
+	speed = 2
+	maxHealth = 250
+	health = 250
+	melee_damage_lower = 20
+	melee_damage_upper = 28
+	attack_vis_effect = ATTACK_EFFECT_BITE
+	status_flags = NONE
+	move_force = MOVE_FORCE_OVERPOWERING
+	move_resist = INFINITY
+	pull_force = MOVE_FORCE_OVERPOWERING
+	mob_size = MOB_SIZE_LARGE
+	layer = LARGE_MOB_LAYER
+	ai_controller = /datum/ai_controller/basic_controller/simple/redspace_demon/melee/devourer
+
+	/// The victim currently held inside this demon.
+	var/mob/living/carbon/human/stored_victim
+	/// Prevents duplicate asynchronous devour actions.
+	var/devour_in_progress = FALSE
+	/// Time spent holding a target adjacent before consuming them.
+	var/devour_delay = 5 SECONDS
+	/// Time spent in the hot zone before transforming.
+	var/transformation_delay = 2 MINUTES
+	var/transformation_timer_id
+
+/mob/living/basic/demon/redspace/devourer/early_melee_attack(atom/target, list/modifiers, ignore_cooldown)
+	. = ..()
+	if(.)
+		return
+	if(stored_victim || devour_in_progress)
+		return BASIC_MOB_END_ATTACK_CHAIN_COOLDOWN
+	if(!Adjacent(target) || !redspace_devourer_can_consume(target))
+		return BASIC_MOB_CONTINUE_ATTACK_CHAIN
+
+	devour_in_progress = TRUE
+	INVOKE_ASYNC(src, PROC_REF(devour), target)
+	return BASIC_MOB_END_ATTACK_CHAIN_COOLDOWN
+
+/mob/living/basic/demon/redspace/devourer/proc/can_finish_devour(mob/living/carbon/human/victim)
+	return !QDELETED(src) && stat != DEAD && !stored_victim && Adjacent(victim) && redspace_devourer_can_consume(victim)
+
+/mob/living/basic/demon/redspace/devourer/proc/devour(mob/living/carbon/human/victim)
+	if(!can_finish_devour(victim))
+		devour_in_progress = FALSE
+		return
+
+	visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] начинает поглощать [victim.declent_ru(ACCUSATIVE)]."))
+	playsound(src, 'sound/effects/magic/demon_consume.ogg', 75, TRUE)
+	do_attack_animation(victim, ATTACK_EFFECT_BITE)
+
+	if(!do_after(src, devour_delay, target = victim, extra_checks = CALLBACK(src, PROC_REF(can_finish_devour), victim)))
+		devour_in_progress = FALSE
+		return
+
+	if(!capture_victim(victim))
+		devour_in_progress = FALSE
+		return
+
+	ai_controller?.clear_blackboard_key(BB_CURRENT_TARGET)
+	ai_controller?.clear_blackboard_key(BB_CURRENT_TARGET_HIDING_LOCATION)
+	ai_controller?.force_ai_off()
+
+	var/turf/hottest_turf = redspace_devourer_get_hottest_turf(get_turf(src))
+	if(hottest_turf && hottest_turf != get_turf(src))
+		forceMove(hottest_turf)
+	icon_state = "Devourer-closed"
+	visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] скрывается в горячей зоне редспейса."))
+	transformation_timer_id = addtimer(CALLBACK(src, PROC_REF(transform_with_victim)), transformation_delay, TIMER_STOPPABLE | TIMER_DELETE_ME)
+	devour_in_progress = FALSE
+
+/mob/living/basic/demon/redspace/devourer/proc/capture_victim(mob/living/carbon/human/victim)
+	if(stored_victim || !redspace_devourer_can_consume(victim))
+		return FALSE
+
+	victim.apply_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+	RegisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+	if(!victim.forceMove(src))
+		UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+		victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+		return FALSE
+
+	stored_victim = victim
+	ADD_TRAIT(src, TRAIT_IMMOBILIZED, REDSPACE_DEVOURER_STASIS)
+	return TRUE
+
+/mob/living/basic/demon/redspace/devourer/proc/on_stored_victim_deleted(mob/living/carbon/human/victim)
+	SIGNAL_HANDLER
+	if(victim != stored_victim)
+		return
+	release_victim()
+
+/mob/living/basic/demon/redspace/devourer/Exited(atom/movable/gone, direction)
+	. = ..()
+	if(gone == stored_victim)
+		release_victim()
+
+/mob/living/basic/demon/redspace/devourer/proc/release_victim()
+	var/mob/living/carbon/human/victim = stored_victim
+	stored_victim = null
+	if(victim)
+		UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+		if(!QDELETED(victim))
+			victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+			if(victim.loc == src)
+				victim.forceMove(get_turf(src))
+	REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, REDSPACE_DEVOURER_STASIS)
+	if(transformation_timer_id)
+		deltimer(transformation_timer_id)
+	transformation_timer_id = null
+	devour_in_progress = FALSE
+	ai_controller?.clear_forced_off()
+
+/mob/living/basic/demon/redspace/devourer/proc/transform_with_victim()
+	transformation_timer_id = null
+	var/mob/living/carbon/human/victim = stored_victim
+	if(QDELETED(victim) || victim.loc != src || victim.stat == DEAD || !victim.mind)
+		release_victim()
+		return
+
+	var/turf/transform_turf = get_turf(src)
+	if(!transform_turf)
+		release_victim()
+		return
+
+	var/datum/mind/victim_mind = victim.mind
+	var/mob/living/basic/demon/redspace/moderate/minotaur/transformed = new(transform_turf)
+	if(!transformed || QDELETED(transformed))
+		release_victim()
+		return
+
+	stored_victim = null
+	UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+	victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+	victim_mind.transfer_to(transformed)
+
+	if(SSredspace)
+		for(var/datum/redspace_event/spawn/event as anything in SSredspace.active_events)
+			if(src in event.spawned_atoms)
+				event.replace_spawned_atom(src, transformed)
+				break
+
+	qdel(victim)
+	qdel(src)
+	return transformed
+
+/mob/living/basic/demon/redspace/devourer/Destroy()
+	release_victim()
+	return ..()
+
+/mob/living/basic/demon/redspace/devourer/can_be_pulled(user, force)
+	return FALSE
+
+/// Returns the best valid turf in the hottest currently materialized redspace cell.
+/proc/redspace_devourer_get_hottest_turf(turf/fallback) as /turf
+	var/turf/fallback_turf = get_turf(fallback)
+	if(!SSredspace || !length(SSredspace.field_cells))
+		return fallback_turf
+
+	var/datum/redspace_field_cell/hottest_cell
+	var/hottest_value = -INFINITY
+	for(var/cell_key in SSredspace.field_cells)
+		var/datum/redspace_field_cell/cell = SSredspace.field_cells[cell_key]
+		var/turf/sample_turf = cell?.get_sample_turf()
+		if(!sample_turf || !SSredspace.is_supported_z(sample_turf.z) || !isnum(cell.value))
+			continue
+		if(cell.value > hottest_value)
+			hottest_value = cell.value
+			hottest_cell = cell
+
+	if(!hottest_cell)
+		return fallback_turf
+	var/list/candidates = SSredspace.get_event_candidate_turfs(hottest_cell)
+	return length(candidates) ? candidates[1] : hottest_cell.get_sample_turf() || fallback_turf
+
+/// Keeps a replacement mob attached to a persistent spawn event during transformation.
+/datum/redspace_event/spawn/proc/replace_spawned_atom(atom/old_atom, atom/new_atom)
+	if(!old_atom || !new_atom || QDELETED(new_atom) || !(old_atom in spawned_atoms))
+		return FALSE
+	UnregisterSignal(old_atom, COMSIG_QDELETING, PROC_REF(on_spawned_atom_deleted))
+	spawned_atoms -= old_atom
+	return register_spawned_atom(new_atom)
 
 /// A persistent redspace manifestation used to verify object spawn events.
 /obj/structure/redspace/demonic_crystal
@@ -525,3 +747,26 @@
 	spawn_policy_id = "demonic_minotaur"
 	spawn_type = /mob/living/basic/demon/redspace/moderate/minotaur
 	spawn_message = "В редспейсе материализуется могучий минотавр."
+
+/datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer
+	event_id = "demonic_devourer"
+	profile_id = REDSPACE_PROFILE_DEMONIC
+	min_value = REDSPACE_STORM_ENTER_VALUE
+	max_value = REDSPACE_MAX_NORMAL_VALUE
+	cooldown = 120 SECONDS
+	automatic = TRUE
+	weight = 1
+	spawn_count = 1
+	spawn_budget_cost = 3
+	spawn_policy_id = "demonic_devourer"
+	spawn_type = /mob/living/basic/demon/redspace/devourer
+	spawn_message = "В редспейсе материализуется пожиратель."
+
+/datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer/can_start(turf/target)
+	if(!..())
+		return FALSE
+	for(var/mob/living/basic/demon/redspace/demon in target)
+		return FALSE
+	return TRUE
+
+#undef REDSPACE_DEVOURER_STASIS

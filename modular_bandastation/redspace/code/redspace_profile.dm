@@ -73,6 +73,7 @@
 		"demonic_lesser_demon",
 		"demonic_ranged_demon",
 		"demonic_soldier",
+		"demonic_devourer",
 	)
 
 /datum/redspace_profile/demonic/New()
@@ -104,6 +105,7 @@
 			"demonic_lesser_demon" = 2,
 			"demonic_ranged_demon" = 2,
 			"demonic_soldier" = 1,
+			"demonic_devourer" = 1,
 		),
 	)
 

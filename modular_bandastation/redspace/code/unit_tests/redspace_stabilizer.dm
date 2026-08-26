@@ -27,12 +27,12 @@
 	var/obj/structure/frame/machine/stabilizer_frame = locate() in stabilizer_location
 	qdel(stabilizer_frame)
 	rebuild_board.replacement_parts = list(
-		/obj/item/stock_parts/capacitor/tier3,
-		/obj/item/stock_parts/capacitor/tier3,
-		/obj/item/stock_parts/micro_laser/tier3,
-		/obj/item/stock_parts/micro_laser/tier3,
-		/obj/item/stock_parts/matter_bin/tier3,
-		/obj/item/stock_parts/servo/tier2,
+		/obj/item/stock_parts/capacitor/super,
+		/obj/item/stock_parts/capacitor/super,
+		/obj/item/stock_parts/micro_laser/ultra,
+		/obj/item/stock_parts/micro_laser/ultra,
+		/obj/item/stock_parts/matter_bin/super,
+		/obj/item/stock_parts/servo/nano,
 		returned_cell,
 	)
 	var/obj/machinery/redspace_stabilizer/rebuilt_stabilizer = allocate(/obj/machinery/redspace_stabilizer, stabilizer_location, rebuild_board)
@@ -48,7 +48,5 @@
 	if(!source.set_strength(3, "unit test") || source.strength > 0)
 		return Fail("Stabilizer sources must never become positive sources")
 	qdel(source)
-
-TEST_FOCUS(/datum/unit_test/redspace_stabilizer)
 
 #endif

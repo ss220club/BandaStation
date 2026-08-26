@@ -61,3 +61,13 @@ accusative = "минотавра"
 instrumental = "минотавром"
 prepositional = "минотавре"
 gender = "male"
+
+# MARK: Redspace Devourer
+["redspace devourer"]
+nominative = "пожиратель редспейса"
+genitive = "пожирателя редспейса"
+dative = "пожирателю редспейса"
+accusative = "пожирателя редспейса"
+instrumental = "пожирателем редспейса"
+prepositional = "пожирателе редспейса"
+gender = "male"
