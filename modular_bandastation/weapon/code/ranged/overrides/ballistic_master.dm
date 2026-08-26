@@ -232,6 +232,10 @@
 	AddComponent(/datum/component/automatic_fire, 0.2 SECONDS)
 
 /obj/item/gun/ballistic/automatic/proto
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	suppressor_x_offset = 9
+
+/obj/item/gun/ballistic/automatic/proto
 	recoil = 0.2
 
 /obj/item/gun/ballistic/automatic/battle_rifle

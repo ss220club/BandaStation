@@ -61,6 +61,14 @@
 	preview_name = "Red"
 	new_icon_state = "gp9_red"
 
+/datum/atom_skin/gp9/carmapple
+	preview_name = "Black & Red"
+	new_icon_state = "gp9_carmapple"
+
+/datum/atom_skin/gp9/green
+	preview_name = "Green & Wood"
+	new_icon_state = "gp9_green"
+
 /obj/item/gun/ballistic/automatic/pistol/gp9/spec
 	name = "GP-93R"
 	desc = "Стандартный служебный пистолет общего назначения под малоимпульсные патроны калибра 9x25мм НТ. Специальный вариант с возможностью вести автоматический огонь."
