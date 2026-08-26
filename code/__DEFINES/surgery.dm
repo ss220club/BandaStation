@@ -3,6 +3,11 @@
 /// Helper to figure out if an organ is robotic
 #define IS_ROBOTIC_ORGAN(organ) (organ.organ_flags & ORGAN_ROBOTIC)
 
+/// List of organ flags that can not be bioscrambled
+#define ORGAN_BIOSCRAMBLE_INCOMPATIBLE (ORGAN_ROBOTIC | ORGAN_MINERAL)
+/// Check to see if an organ can be bioscrambled
+#define ORGAN_CAN_BE_BIOSCRAMBLED(organ) (!(organ.organ_flags & ORGAN_BIOSCRAMBLE_INCOMPATIBLE) && !(organ.flags_1 & HOLOGRAM_1))
+
 // Flags for the organ_flags var on /obj/item/organ
 /// Organic organs, the default. Don't get affected by EMPs.
 #define ORGAN_ORGANIC (1<<0)
@@ -38,6 +43,8 @@
 #define ORGAN_MUTANT (1<<15)
 /// The organ has been chomped or otherwise rendered unusable.
 #define ORGAN_UNUSABLE (1<<16)
+/// Used for organs that aren't really real organs, but holders for stuff and whatnot
+#define ORGAN_FAKE (1<<17)
 
 /// Organ flags that correspond to bodytypes
 #define ORGAN_TYPE_FLAGS (ORGAN_ORGANIC | ORGAN_ROBOTIC | ORGAN_MINERAL | ORGAN_GHOST)
@@ -74,6 +81,12 @@
 // Bodypart change blocking flags
 ///Bodypart does not get replaced during set_species()
 #define BP_BLOCK_CHANGE_SPECIES (1<<0)
+
+// is_husked values
+/// Husked from burns
+#define HUSKED_BURN 1
+/// Husked from zombification
+#define HUSKED_ZOMBIE 2
 
 // Flags for the head_flags var on /obj/item/bodypart/head
 /// Head can have hair
@@ -180,5 +193,7 @@ DEFINE_BITFIELD(operation_flags, list(
 
 /// Used in string formatting to print a limb as "John's right arm" or "the human right arm"
 #define FORMAT_LIMB_OWNER(limb) (limb.owner ? "[limb.owner]'s [limb.plaintext_zone]" : limb)
+/// Used in Russian string formatting to print a limb with the owner's genitive and the limb's declension
+#define FORMAT_LIMB_OWNER_RU(limb, declent) (limb.owner ? "[limb.ru_plaintext_zone[declent] || limb.plaintext_zone] [limb.owner.declent_ru(GENITIVE)]" : (limb.ru_plaintext_zone[declent] || limb))
 /// Used in string formatting to print an organ's location as "John" or "the human chest"
 #define FORMAT_ORGAN_OWNER(organ) (organ.owner || organ.loc)

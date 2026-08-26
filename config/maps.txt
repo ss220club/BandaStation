@@ -50,10 +50,10 @@ map cyberiad
 	votable
 endmap
 
-map kilostation
-	maxplayers 40
-	votable
-endmap
+#map kilostation
+#	maxplayers 40
+#	votable
+#endmap
 
 map wawastation
     minplayers 50
@@ -69,4 +69,7 @@ map multiz_debug
 endmap
 
 map runtimestation
+endmap
+
+map runtimestation_minimal
 endmap

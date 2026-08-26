@@ -76,11 +76,11 @@
 	return TRUE
 
 //Creates foam from the reagent. Metaltype is for metal foam, notification is what to show people in textbox
-/datum/reagents/proc/create_foam(foamtype, foam_volume, result_type = null, notification = null, log = FALSE)
+/datum/reagents/proc/create_foam(foamtype, foam_volume, result_type = null, notification = null, log = FALSE, lifetime, slippery)
 	var/location = get_turf(my_atom)
 
 	var/datum/effect_system/fluid_spread/foam/foam = new foamtype(location, null, foam_volume, my_atom, carry = src, result_type = result_type)
-	foam.start(log = log)
+	foam.start(log = log, lifetime = lifetime, slippery = slippery)
 
 	clear_reagents()
 	if(!notification)
@@ -162,15 +162,21 @@
 		input_reagent = get_chem_id(input_reagent)
 	return input_reagent
 
-///Returns a random reagent object, with the option to blacklist reagents.
-/proc/get_random_reagent_id(randomization_flags = REAGENT_SPAWN_RANDOM_PRODUCERS, list/blacklist, list/whitelist)
+///
+/**
+ * Returns a random reagent object, with the option to blacklist reagents.
+ *
+ * * randomization_flags - Flags to filter the reagents by. Default is REAGENT_SPAWN_RANDOM_PRODUCERS.
+ * * blacklist - Optional, a list of reagent typepaths to exclude from the random selection.
+ * Subtypes of the listed reagents are not explicitly included.
+ * If not provided, defaults to an empty list.
+ * * whitelist - Optional, a list of reagent typepaths to include in the random selection.
+ * Subtypes of the listed reagents are not explicitly included.
+ * If not provided, defaults to all reagent subtypes.
+ */
+/proc/get_random_reagent_id(randomization_flags = REAGENT_SPAWN_RANDOM_PRODUCERS, list/blacklist = list(), list/whitelist = subtypesof(/datum/reagent))
 	var/list/reagent_list_to_process = list()
-
-	whitelist ||= subtypesof(/datum/reagent)
-
-	for(var/datum/reagent/reagent_path as anything in whitelist)
-		if(is_path_in_list(reagent_path, blacklist))
-			continue
+	for(var/datum/reagent/reagent_path as anything in whitelist - blacklist)
 		if(reagent_path::randomized_spawns & randomization_flags)
 			reagent_list_to_process += reagent_path
 	return pick(reagent_list_to_process)

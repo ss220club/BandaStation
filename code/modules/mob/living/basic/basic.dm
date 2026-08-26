@@ -6,7 +6,7 @@
 	health = 20
 	maxHealth = 20
 	max_stamina = BASIC_MOB_STAMINA_MATCH_HEALTH
-	gender = PLURAL
+	gender = PLURAL // Plural means we randomize by default.
 	living_flags = MOVES_ON_ITS_OWN
 	status_flags = CANPUSH | CANSTUN
 	fire_stack_decay_rate = -5 // Reasonably fast as NPCs will not usually actively extinguish themselves
@@ -85,6 +85,9 @@
 	///We only try to show a gibbing animation if this exists.
 	var/icon_gib = null
 
+	/// If we randomize our gender when its default is set to plural
+	var/randomize_gender = TRUE
+
 	///If the mob can be spawned with a gold slime core. HOSTILE_SPAWN are spawned with plasma, FRIENDLY_SPAWN are spawned with blood.
 	var/gold_core_spawnable = NO_SPAWN
 	///Sentience type, for slime potions. SHOULD BE AN ELEMENT BUT I DONT CARE ABOUT IT FOR NOW
@@ -107,7 +110,7 @@
 /mob/living/basic/Initialize(mapload)
 	. = ..()
 
-	if(gender == PLURAL)
+	if((gender == PLURAL) && randomize_gender)
 		gender = pick(MALE,FEMALE)
 
 	if(!real_name)
@@ -307,17 +310,6 @@
 	. = ..()
 	if (.)
 		update_held_items()
-
-/mob/living/basic/update_held_items()
-	. = ..()
-	if(isnull(client) || isnull(hud_used) || hud_used.hud_version == HUD_STYLE_NOHUD)
-		return
-	var/turf/our_turf = get_turf(src)
-	for(var/obj/item/held in held_items)
-		var/index = get_held_index_of_item(held)
-		SET_PLANE(held, ABOVE_HUD_PLANE, our_turf)
-		held.screen_loc = ui_hand_position(index)
-		client.screen |= held
 
 /mob/living/basic/get_body_temp_heat_damage_limit()
 	return maximum_survivable_temperature

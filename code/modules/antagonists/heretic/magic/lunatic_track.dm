@@ -1,6 +1,6 @@
 /datum/action/cooldown/lunatic_track
 	name = "Эхо Лунного света"
-	desc = "Найдите своего Шпрехшталмейстера."
+	desc = "Найдите своего Постановщика."
 	check_flags = AB_CHECK_CONSCIOUS
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
@@ -24,7 +24,7 @@
 	owner.balloon_alert(owner, get_balloon_message(ascended_heretic))
 
 	if(ascended_heretic.stat == DEAD)
-		to_chat(owner, span_hierophant("[capitalize(ascended_heretic.declent_ru(NOMINATIVE))] мертв. Плачьте, ведь ложь вырвалась наружу."))
+		to_chat(owner, span_mansus("[capitalize(ascended_heretic.declent_ru(NOMINATIVE))] мертв. Плачьте, ведь ложь вырвалась наружу."))
 
 	StartCooldown()
 	return TRUE

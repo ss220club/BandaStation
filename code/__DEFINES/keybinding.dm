@@ -21,6 +21,7 @@
 #define COMSIG_KB_ADMIN_DEADMIN_DOWN "keybinding_admin_deadmin_down"
 #define COMSIG_KB_ADMIN_READMIN_DOWN "keybinding_admin_readmin_down"
 #define COMSIG_KB_ADMIN_VIEWTAGS_DOWN "keybinding_admin_viewtags_down"
+#define COMSIG_KB_ADMIN_VERBPANEL_DOWN "keybinding_admin_verbpanel_down"
 
 //Carbon
 #define COMSIG_KB_CARBON_HOLDRUNMOVEINTENT_DOWN "keybinding_carbon_holdrunmoveintent_down"
@@ -49,6 +50,7 @@
 #define COMSIG_KB_HUMAN_SUITEQUIP_DOWN "keybinding_human_suitequip_down"
 #define COMSIG_KB_HUMAN_LPOCKETEQUIP_DOWN "keybinding_human_lpocketequip_down"
 #define COMSIG_KB_HUMAN_RPOCKETEQUIP_DOWN "keybinding_human_rpocketequip_down"
+#define COMSIG_KB_HUMAN_QUICK_ACCESSORY_DRAW_DOWN "keybinding_human_quick_accessory_draw_down" //BANDASTATION EDIT: Accessory holsters
 
 //Living
 #define COMSIG_KB_LIVING_RESIST_DOWN "keybinding_living_resist_down"
@@ -64,6 +66,7 @@
 #define COMSIG_KB_LIVING_HOLDTHROWMODE_DOWN "keybinding_living_holdthrowmode_down"
 #define COMSIG_KB_LIVING_GIVEITEM_DOWN "keybinding_living_giveitem_down"
 #define COMSIG_KB_LIVING_VIEW_PET_COMMANDS "keybinding_living_view_pet_commands"
+#define COMSIG_KB_LIVING_STOP_INTERACTIONS_DOWN "keybinding_living_stop_interactions_down"
 
 //Mob
 #define COMSIG_KB_MOB_FACENORTH_DOWN "keybinding_mob_facenorth_down"

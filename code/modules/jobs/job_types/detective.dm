@@ -36,7 +36,7 @@
 		/obj/item/ammo_box/speedloader/c38/match = 5,
 		/obj/item/ammo_box/speedloader/c38/trac = 5,
 		/obj/item/card/id/advanced/plainclothes = 5,
-		/obj/item/storage/belt/holster/detective/full = 1,
+		/obj/item/clothing/accessory/holster/detective/full = 1, // BANDASTATION EDIT: Accessory holsters
 	)
 
 	family_heirlooms = list(/obj/item/reagent_containers/cup/glass/bottle/whiskey)
@@ -78,6 +78,8 @@
 
 	skillchips = list(/obj/item/skillchip/job/detectives_taste)
 
+	wintercoat = /obj/item/clothing/suit/hooded/wintercoat/security
+
 /datum/outfit/job/detective/pre_equip(mob/living/carbon/human/human, visuals_only = FALSE)
 	. = ..()
 	if (human.age < AGE_MINOR)
@@ -88,7 +90,7 @@
 	..()
 	var/obj/item/cigarette/cig = H.wear_mask
 	if(istype(cig)) //Some species specfic changes can mess this up (plasmamen)
-		cig.light("")
+		cig.light()
 
 	if(visuals_only)
 		return

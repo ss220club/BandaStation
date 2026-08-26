@@ -97,6 +97,9 @@
 /datum/map_template/shuttle/infiltrator/basic
 	prefix = "_maps/shuttles/ss220/"
 
+/datum/map_template/shuttle/infiltrator/clown
+	prefix = "_maps/shuttles/ss220/"
+
 // MARK: Deathmatch
 /datum/lazy_template/deathmatch/underground_thunderdome
 	name = "Underground Thunderdome"

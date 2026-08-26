@@ -29,16 +29,22 @@
 
 	if(iscarbon(source))
 		examine_list += get_carbon_flavor_text(source)
-		return
-	if(issilicon(source))
+	else if(issilicon(source))
 		examine_list += get_silicon_flavor_text(source)
+
+	if(user == source && !source.build_incapacitated())
+		var/edit_link = "byond://?src=[REF(src)];lookup_info=edit_flavor_text"
+		examine_list += span_notice("<a href='[edit_link]'>Изменить описание</a>")
 
 /datum/component/examine_panel/proc/get_carbon_flavor_text(mob/living/carbon/source)
 	var/flavor_text_link
 	/// The first 1-FLAVOR_PREVIEW_LIMIT characters in the mob's "flavor_text" DNA feature. FLAVOR_PREVIEW_LIMIT is defined in flavor_defines.dm.
 	var/preview_text = copytext_char(flavor_text, 1, FLAVOR_PREVIEW_LIMIT)
 	// What examine_tgui.dm uses to determine if flavor text appears as "Obscured".
-	var/face_obscured = (source.wear_mask && (source.wear_mask.flags_inv & HIDEFACE)) || (source.head && (source.head.flags_inv & HIDEFACE))
+	var/face_obscured = FALSE
+	if(ishuman(source))
+		var/mob/living/carbon/human/human_source = source
+		face_obscured = (human_source.wear_mask && (human_source.wear_mask.flags_inv & HIDEFACE)) || (human_source.head && (human_source.head.flags_inv & HIDEFACE))
 
 	if (!(face_obscured))
 		flavor_text_link = span_notice("[preview_text]... <a href='byond://?src=[REF(src)];lookup_info=open_examine_panel'>Раскрыть описание</a>")
@@ -64,6 +70,19 @@
 		switch(href_list["lookup_info"])
 			if("open_examine_panel")
 				ui_interact(usr)
+			if("edit_flavor_text")
+				attempt_edit_flavor_text(usr)
+
+/datum/component/examine_panel/proc/attempt_edit_flavor_text(mob/user)
+	var/mob/living/L = parent
+	if(QDELETED(user) || user != L)
+		return
+	var/new_text = tgui_input_text(user, "Введите новое описание", "Изменение описания", flavor_text, MAX_FLAVOR_LEN, TRUE)
+	if(length(new_text) >= MAX_FLAVOR_LEN)
+		return
+	new_text = STRIP_HTML_SIMPLE(new_text, MAX_FLAVOR_LEN)
+	L.save_new_flavor_text(new_text)
+	flavor_text = new_text
 
 /datum/component/examine_panel/ui_state(mob/user)
 	return GLOB.always_state

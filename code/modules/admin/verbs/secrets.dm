@@ -744,7 +744,7 @@ ADMIN_VERB(secrets, R_DEBUG|R_FUN, "Secrets", "Abuse harder than you ever have b
 		if (length(players))
 			var/mob/chosen = players[1]
 			if (chosen.client)
-				chosen.client.prefs.safe_transfer_prefs_to(spawned_mob, is_antag = TRUE)
+				chosen.client.prefs.safe_transfer_prefs_to(spawned_mob, is_antag = TRUE) // BANDASTATION MOD - Do not apply body mods on roles
 				spawned_mob.PossessByPlayer(chosen.key)
 			players -= chosen
 		if (ishuman(spawned_mob) && ispath(humanoutfit, /datum/outfit))

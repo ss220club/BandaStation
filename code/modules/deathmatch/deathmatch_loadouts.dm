@@ -383,9 +383,9 @@
 	l_hand = /obj/item/melee/curator_whip
 	l_pocket = /obj/item/lighter
 	accessory = /obj/item/clothing/accessory/vest_sheriff
+	belt = /obj/item/storage/belt/holster/detective/full
 	uniform = /obj/item/clothing/under/rank/security/detective
 	shoes = /obj/item/clothing/shoes/cowboy
-	belt = /obj/item/storage/belt/holster/detective/full
 	head = /obj/item/clothing/head/cowboy/brown
 
 /// wizards
@@ -925,7 +925,7 @@
 /datum/outfit/deathmatch_loadout/cultish/pre_equip(mob/living/carbon/human/user, visuals_only)
 	. = ..()
 	ADD_TRAIT(user, TRAIT_ACT_AS_CULTIST, REF(src))
-	user.AddElement(/datum/element/cult_halo, initial_delay = 0 SECONDS)
+	user.apply_status_effect(/datum/status_effect/cult_halo, 0 SECONDS)
 	user.AddElement(/datum/element/cult_eyes, initial_delay = 0 SECONDS)
 
 // Cultist Invoker, has all the balanced cult gear
@@ -1153,7 +1153,7 @@
 	desc = "A syndicate operative suited up for some space reconnaissance."
 
 	uniform = /obj/item/clothing/under/syndicate
-	belt = /obj/item/storage/belt/holster
+	accessory = /obj/item/clothing/accessory/holster //BANDASTATION EDIT: Accessory holsters
 	r_pocket = /obj/item/tank/internals/emergency_oxygen/double
 	l_pocket = /obj/item/knife/combat/survival
 	internals_slot = ITEM_SLOT_RPOCKET

@@ -20,6 +20,7 @@
 	icon_gib = "carp_gib"
 	gold_core_spawnable = HOSTILE_SPAWN
 	mob_biotypes = MOB_ORGANIC | MOB_BEAST | MOB_AQUATIC
+	pass_flags = PASSMOB | PASSTABLE // BANDASTATION ADDITION: Carps can swarm and pass tables
 	health = 25
 	maxHealth = 25
 	max_stamina = 120
@@ -99,6 +100,8 @@
 	. = ..()
 	apply_colour()
 	add_traits(list(TRAIT_HEALS_FROM_CARP_RIFTS, TRAIT_SPACEWALK), INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_UNDENSE, INNATE_TRAIT) // BANDASTATION ADDITION: Carps can swarm and pass tables
+	AddComponent(/datum/component/swarming, 20, 20) // BANDASTATION ADDITION: Carps can swarm and pass tables
 
 	if (cell_line)
 		AddElement(/datum/element/swabable, cell_line, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
@@ -156,8 +159,8 @@
 
 /// Gives the carp a list of weakrefs of destinations to try and travel between when it has nothing better to do
 /mob/living/basic/carp/proc/migrate_to(list/datum/weakref/migration_points)
-	ai_controller.can_idle = FALSE
-	ai_controller.set_ai_status(AI_STATUS_ON) // We need htem to actually walk to the station
+	ai_controller.ai_traits |= RUN_WHILE_UNWATCHED
+	ai_controller.reset_ai_status() // We need them to actually keep walking to the station
 	var/list/actual_points = list()
 	for(var/datum/weakref/point_ref as anything in migration_points)
 		var/turf/point_resolved = point_ref.resolve()
@@ -252,6 +255,8 @@
 	var/datum/callback/got_disk = CALLBACK(src, PROC_REF(got_disk))
 	var/datum/callback/display_disk = CALLBACK(src, PROC_REF(display_disk))
 	AddComponent(/datum/component/nuclear_bomb_operator, got_disk, display_disk)
+	var/obj/item/implant/implanter = SSwardrobe.provide_type(/obj/item/implant/tacmap/nuclear/cayenne, src)
+	implanter.implant(src, null, TRUE)
 
 /mob/living/basic/carp/pet/cayenne/apply_colour()
 	if (prob(RARE_CAYENNE_CHANCE))

@@ -212,18 +212,21 @@
 
 	if(!isliving(target))
 		source.visible_message(span_danger("[capitalize(source.declent_ru(NOMINATIVE))] врезается в [target.declent_ru(ACCUSATIVE)]!"))
-		living_source?.Stun(recoil_duration, ignore_canstun = TRUE)
+		if (recoil_duration >= 0) // Because 0 stun/knockdown is still a valid value
+			living_source?.Stun(recoil_duration, ignore_canstun = TRUE)
 		return
 
 	var/mob/living/living_target = target
 	if(ishuman(living_target))
 		var/mob/living/carbon/human/human_target = living_target
-		if(human_target.check_block(source, 0, "[source.declent_ru(ACCUSATIVE)]", attack_type = LEAP_ATTACK) && living_source)
-			living_source.Stun(recoil_duration, ignore_canstun = TRUE)
+		if(human_target.check_block(source, 0, "\the [source.declent_ru(ACCUSATIVE)]", attack_type = LEAP_ATTACK) && living_source)
+			if (recoil_duration >= 0)
+				living_source.Stun(recoil_duration, ignore_canstun = TRUE)
 			return
 
 	living_target.visible_message(span_danger("[capitalize(source.declent_ru(NOMINATIVE))] делает рывок в сторону [living_target.declent_ru(GENITIVE)]!"), span_userdanger("[capitalize(source.declent_ru(NOMINATIVE))] делает рывок в вашу сторону!"))
-	living_target.Knockdown(knockdown_duration)
+	if (knockdown_duration >= 0)
+		living_target.Knockdown(knockdown_duration)
 
 /datum/status_effect/tired_post_charge
 	id = "tired_post_charge"

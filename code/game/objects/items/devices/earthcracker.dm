@@ -46,9 +46,9 @@
 				return FALSE
 			flick("[base_icon_state]-active", src)
 			if(is_mining_level(z))
-				activation_timer = addtimer(CALLBACK(src, PROC_REF(mining_act), user), 1.2 SECONDS)
+				activation_timer = addtimer(CALLBACK(src, PROC_REF(mining_act), user), 0.8 SECONDS)
 				return TRUE
-			activation_timer = addtimer(CALLBACK(src, PROC_REF(strike_the_earth)), 1.2 SECONDS)
+			activation_timer = addtimer(CALLBACK(src, PROC_REF(strike_the_earth)), 0.8 SECONDS)
 			return TRUE
 		if(EARTHCRACKER_SPENT)
 			balloon_alert(user, "used up!")
@@ -134,7 +134,7 @@
 /// Cleanup after an earthcracker is activated either for sabotage or mining.
 /obj/item/earthcracker/proc/handle_after_activation(turf/cracked_hull)
 	do_sparks(2, FALSE, src)
-	cracked_hull.levelupdate()
+	cracked_hull?.levelupdate()
 
 	status = EARTHCRACKER_SPENT
 	update_appearance(UPDATE_ICON)
@@ -151,15 +151,15 @@
 		for(var/turf/rock in oview(i)) // This collects a list of rings of turfs (in a growing radius of i) that we'll applying logic to "drill" below.
 
 			if(istype(rock, /turf/closed/mineral))
-				if(prob(50 + (i * 8)))
+				if(prob((i * 15) - 25))
 					continue
 				var/turf/closed/mineral/drillable = rock
 				drillable.gets_drilled(user)
-				if(prob(50))
+				if(prob(15))
 					new /obj/effect/decal/cleanable/rubble(rock)
 				continue
 
-			if(istype(rock, /turf/open/misc/asteroid) && prob(35))
+			if(istype(rock, /turf/open/misc/asteroid) && prob(10))
 				new /obj/effect/decal/cleanable/rubble(rock)
 				continue
 		sleep(0.6 SECONDS)

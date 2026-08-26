@@ -110,9 +110,9 @@
 
 /obj/item/storage/belt/holster/detective/full/ert/tsf_commander/PopulateContents()
 	generate_items_inside(list(
-		/obj/item/ammo_box/magazine/r10mm = 2,
+		/obj/item/ammo_box/magazine/r45 = 2,
 		/obj/item/gun/ballistic/automatic/pistol/deagle/regal = 1,
-	),src)
+	), src)
 
 // MARK: USSP
 /obj/item/storage/belt/military/army/ussp
@@ -293,10 +293,10 @@
 	new /obj/item/grenade/frag(src)
 
 /obj/item/storage/belt/military/ert/full_gamma_commander/PopulateContents()
-	new /obj/item/ammo_box/magazine/smgm9mm/ap(src)
-	new /obj/item/ammo_box/magazine/smgm9mm/ap(src)
-	new /obj/item/ammo_box/magazine/smgm9mm(src)
-	new /obj/item/ammo_box/magazine/smgm9mm(src)
+	new /obj/item/ammo_box/magazine/cm5/ap(src)
+	new /obj/item/ammo_box/magazine/cm5/ap(src)
+	new /obj/item/ammo_box/magazine/cm5(src)
+	new /obj/item/ammo_box/magazine/c357(src)
 	new /obj/item/grenade/chem_grenade/teargas(src)
 	new /obj/item/grenade/flashbang(src)
 	new /obj/item/grenade/frag(src)
