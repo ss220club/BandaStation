@@ -49,6 +49,8 @@
 #define REDSPACE_EVENT_BUDGET_MAX_POINTS 4
 #define REDSPACE_EVENT_BUDGET_MAX_ACTIVE 2
 #define REDSPACE_EVENT_BUDGET_MAX_DANGEROUS 1
+/// Prevents a wave front from starting an event-target scan for every cell in one fire.
+#define REDSPACE_MAX_AUTOMATIC_EVENT_ATTEMPTS_PER_FIRE 8
 
 /// Independent limits for events that leave turfs, objects or mobs in the world.
 #define REDSPACE_SPAWN_BUDGET_WINDOW (60 SECONDS)

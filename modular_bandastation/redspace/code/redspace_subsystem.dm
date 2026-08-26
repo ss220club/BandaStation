@@ -58,6 +58,14 @@ SUBSYSTEM_DEF(redspace)
 	var/list/event_budgets = list()
 	/// Events that remain alive between telegraph and resolution.
 	var/list/active_events = list()
+	/// Null outside an automatic-event pass; limits wave-front bursts without
+	/// affecting manually started events.
+	var/automatic_event_attempts_remaining
+	/// Temporary values shared by all event definitions scanning one cell.
+	var/list/event_value_cache
+	/// Candidate turf lists shared by normal and turf queues during one tick.
+	var/list/event_candidate_cache = list()
+	var/event_candidate_cache_time = -1
 	/// Listener datums that currently have a QDELETING cleanup hook.
 	var/list/listener_cleanup = list()
 
@@ -107,6 +115,10 @@ SUBSYSTEM_DEF(redspace)
 	event_cooldowns = list()
 	event_budgets = list()
 	active_events = list()
+	automatic_event_attempts_remaining = null
+	event_value_cache = null
+	event_candidate_cache = list()
+	event_candidate_cache_time = -1
 	listener_cleanup = list()
 	next_source_id = 1
 	reset_metrics()
@@ -154,6 +166,9 @@ SUBSYSTEM_DEF(redspace)
 	event_cooldowns.Cut()
 	event_budgets.Cut()
 	active_events.Cut()
+	automatic_event_attempts_remaining = null
+	event_value_cache = null
+	event_candidate_cache.Cut()
 	QDEL_NULL(context)
 	return ..()
 
@@ -176,6 +191,7 @@ SUBSYSTEM_DEF(redspace)
 
 /datum/controller/subsystem/redspace/fire(resumed = FALSE)
 	if(!resumed)
+		automatic_event_attempts_remaining = REDSPACE_MAX_AUTOMATIC_EVENT_ATTEMPTS_PER_FIRE
 		process_sources()
 		currentrun = dirty_cells.Copy()
 		for(var/datum/redspace_field_cell/dirty_cell as anything in currentrun)
@@ -208,6 +224,7 @@ SUBSYSTEM_DEF(redspace)
 	if(!length(dirty_cells) && !length(processing_sources) && !refresh_in_progress && !refresh_requested && !prune_requested)
 		can_fire = FALSE
 		schedule_event_wake()
+	automatic_event_attempts_remaining = null
 
 /// Expires timed sources and refreshes cached cells while moving waves exist.
 /datum/controller/subsystem/redspace/proc/process_sources()
@@ -417,6 +434,10 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/get_value_without_source(turf/target, datum/redspace_field_source/excluded_source = null)
 	if(!target || !is_supported_z(target.z))
 		return
+	if(!excluded_source && event_value_cache)
+		var/cached_event_value = event_value_cache[target]
+		if(!isnull(cached_event_value))
+			return cached_event_value
 	metric_sample_count++
 
 	var/datum/redspace_field_cell/cell = get_cell(target)
@@ -424,6 +445,8 @@ SUBSYSTEM_DEF(redspace)
 	if(!excluded_source && cell && cell.sample_x == target.x && cell.sample_y == target.y)
 		if(cell.set_value(value, world.time, "локальная выборка"))
 			mark_cell_dirty(cell)
+	if(!excluded_source && event_value_cache)
+		event_value_cache[target] = value
 	return value
 
 /// Calculates the field at a tile from the background, local cell override, active sources
@@ -659,6 +682,12 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/get_event_candidate_turfs(datum/redspace_field_cell/cell) as /list
 	if(!cell)
 		return
+	if(event_candidate_cache_time != world.time)
+		event_candidate_cache.Cut()
+		event_candidate_cache_time = world.time
+	var/list/cached_candidates = event_candidate_cache[cell.key]
+	if(!isnull(cached_candidates))
+		return cached_candidates
 
 	var/turf/anchor = cell.get_sample_turf() || redspace_hex_representative_turf(cell.z_level, cell.q, cell.r)
 	if(!anchor || !is_supported_z(anchor.z))
@@ -675,7 +704,9 @@ SUBSYSTEM_DEF(redspace)
 		if(is_turf_in_cell(candidate, cell) && is_event_target_turf_valid(candidate))
 			possible_targets += candidate
 	if(!length(possible_targets))
+		event_candidate_cache[cell.key] = list()
 		return
+	event_candidate_cache[cell.key] = possible_targets
 	return possible_targets
 
 /// Finds a target satisfying an event definition from a shared candidate list.
@@ -813,24 +844,35 @@ SUBSYSTEM_DEF(redspace)
 		return FALSE
 	return TRUE
 
+/// Cleans temporary event definitions kept while selecting automatic targets.
+/datum/controller/subsystem/redspace/proc/clear_automatic_event_candidates(list/candidate_events)
+	if(!candidate_events)
+		return
+	for(var/event_id in candidate_events)
+		var/datum/redspace_event/event = candidate_events[event_id]
+		if(event)
+			qdel(event)
+
 /// Selects one eligible registered event for the cell's current state profile.
 /// The default queue excludes turf spawns; a category selects a dedicated queue.
 /datum/controller/subsystem/redspace/proc/try_start_automatic_event(datum/redspace_field_cell/cell, target_category = null)
 	if(!cell || !length(event_registry))
 		return FALSE
+	if(!isnull(automatic_event_attempts_remaining))
+		if(automatic_event_attempts_remaining <= 0)
+			return FALSE
+		automatic_event_attempts_remaining--
 
 	var/datum/redspace_event_profile/event_profile = get_event_profile(cell.state)
 	if(!event_profile || !event_profile.has_events())
 		return FALSE
 
-	var/list/possible_targets = get_event_candidate_turfs(cell)
-	if(!length(possible_targets))
-		return FALSE
-
 	var/list/candidates = list()
 	var/list/candidate_targets = list()
+	var/list/candidate_events = list()
 	for(var/event_id in event_profile.event_weights)
 		if(MC_TICK_CHECK)
+			clear_automatic_event_candidates(candidate_events)
 			return FALSE
 		var/profile_weight = event_profile.get_event_weight(event_id)
 		if(!isnum(profile_weight) || profile_weight <= 0)
@@ -846,17 +888,43 @@ SUBSYSTEM_DEF(redspace)
 		if(!can_attempt_event_in_cell(event, cell))
 			qdel(event)
 			continue
-		var/turf/target = get_event_target_turf(cell, event, possible_targets)
-		if(!target || !can_start_event_instance(event, target))
-			qdel(event)
-			continue
+		candidate_events[event_id] = event
 		candidates[event_id] = profile_weight
-		candidate_targets[event_id] = target
-		qdel(event)
 
 	if(!length(candidates))
 		return FALSE
+
+	// Do not build candidate turf lists when every event was already blocked by
+	// its cooldown or cell budget. This is common during a wave front.
+	var/list/possible_targets = get_event_candidate_turfs(cell)
+	if(!length(possible_targets))
+		clear_automatic_event_candidates(candidate_events)
+		return FALSE
+
+	// Several event definitions inspect the same turfs. Reuse their exact field
+	// values for this attempt, but discard the cache before starting an event.
+	event_value_cache = list()
+	for(var/event_id in candidate_events)
+		if(MC_TICK_CHECK)
+			event_value_cache = null
+			clear_automatic_event_candidates(candidate_events)
+			return FALSE
+		var/datum/redspace_event/event = candidate_events[event_id]
+		var/turf/target = get_event_target_turf(cell, event, possible_targets)
+		if(!target || !can_start_event_instance(event, target))
+			continue
+		candidate_targets[event_id] = target
+
+	event_value_cache = null
+	clear_automatic_event_candidates(candidate_events)
+	if(!length(candidate_targets))
+		return FALSE
 	var/chosen_event_id = pick_weight(candidates)
+	while(!candidate_targets[chosen_event_id])
+		candidates -= chosen_event_id
+		if(!length(candidates))
+			return FALSE
+		chosen_event_id = pick_weight(candidates)
 	return start_registered_event(chosen_event_id, null, candidate_targets[chosen_event_id])
 
 /// Runs a short registered event and applies its per-zone cooldown.
@@ -877,6 +945,9 @@ SUBSYSTEM_DEF(redspace)
 
 	active_events += event
 	var/succeeded = event.start(admin, target)
+	// Event start may create an obstacle or replace a turf, so do not reuse
+	// candidate geometry for another queue in the same tick.
+	event_candidate_cache.Cut()
 	if(!succeeded)
 		active_events -= event
 		budget.release(event, TRUE)
@@ -1314,6 +1385,10 @@ SUBSYSTEM_DEF(redspace)
 	prune_requested = FALSE
 	transition_log.Cut()
 	event_cooldowns.Cut()
+	automatic_event_attempts_remaining = null
+	event_value_cache = null
+	event_candidate_cache.Cut()
+	event_candidate_cache_time = -1
 	for(var/zone_key in event_budgets)
 		var/datum/redspace_event_budget/budget = event_budgets[zone_key]
 		if(budget)
