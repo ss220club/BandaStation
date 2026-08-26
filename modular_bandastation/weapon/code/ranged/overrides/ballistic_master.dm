@@ -15,9 +15,6 @@
 	SET_BASE_PIXEL(-8, 0)
 
 /obj/item/gun/ballistic/shotgun/riot
-	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
-	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
-	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 	base_icon_state = "riotshotgun"
 
 /obj/item/gun/ballistic/shotgun/riot/add_seclight_point()
@@ -204,6 +201,9 @@
 	. += "<b>АЛЬТ + ЛКМ</b> чтобы [extended ? "сложить" : "разложить"] приклад."
 
 /obj/item/gun/ballistic/automatic/ar/click_alt(mob/user)
+	if(!user.is_holding(src))
+		balloon_alert(user, "Оружие должно быть в руках!")
+		return CLICK_ACTION_BLOCKING
 	if(!do_after(user, 5, src))
 		return
 	extended = !extended
