@@ -63,11 +63,39 @@ prepositional = "минотавре"
 gender = "male"
 
 # MARK: Redspace Devourer
-["redspace devourer"]
-nominative = "пожиратель редспейса"
-genitive = "пожирателя редспейса"
-dative = "пожирателю редспейса"
-accusative = "пожирателя редспейса"
-instrumental = "пожирателем редспейса"
-prepositional = "пожирателе редспейса"
+["demonic devourer"]
+nominative = "демонический пожиратель"
+genitive = "демонического пожирателя"
+dative = "демоническому пожирателю"
+accusative = "демонического пожирателя"
+instrumental = "демоническим пожирателем"
+prepositional = "демоническом пожирателе"
+gender = "male"
+
+# MARK: Redspace Ravager
+["ravager"]
+nominative = "опустошитель"
+genitive = "опустошителя"
+dative = "опустошителю"
+accusative = "опустошителя"
+instrumental = "опустошителем"
+prepositional = "опустошителе"
+gender = "male"
+
+["demonic beacon"]
+nominative = "демонический маяк"
+genitive = "демонического маяка"
+dative = "демоническому маяку"
+accusative = "демонический маяк"
+instrumental = "демоническим маяком"
+prepositional = "демоническом маяке"
+gender = "male"
+
+["Demonic Beacon"]
+nominative = "демонический маяк"
+genitive = "демонического маяка"
+dative = "демоническому маяку"
+accusative = "демонический маяк"
+instrumental = "демоническим маяком"
+prepositional = "демоническом маяке"
 gender = "male"

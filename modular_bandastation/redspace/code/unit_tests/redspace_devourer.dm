@@ -4,7 +4,7 @@
 
 /datum/unit_test/redspace_devourer/Run()
 	var/mob/living/basic/demon/redspace/devourer/devourer = allocate(/mob/living/basic/demon/redspace/devourer)
-	if(devourer.name != "redspace devourer" || devourer.icon != 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi' || devourer.icon_state != "Devourer" || devourer.icon_dead != "Devourer-closed")
+	if(devourer.name != "demonic devourer" || devourer.icon != 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi' || devourer.icon_state != "Devourer" || devourer.icon_dead != "Devourer-closed")
 		return Fail("The Devourer must use its dedicated sprite and localized English name key")
 	if(devourer.speed != 2 || devourer.move_force != MOVE_FORCE_OVERPOWERING || devourer.move_resist != INFINITY || devourer.pull_force != MOVE_FORCE_OVERPOWERING || devourer.can_be_pulled(null, INFINITY))
 		return Fail("The Devourer must be slow and immune to normal pushing and pulling")
@@ -12,11 +12,28 @@
 		return Fail("The Devourer must expose the configured devour and transformation delays")
 	if(!istype(devourer.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/melee/devourer))
 		return Fail("The Devourer must use the specialized redspace melee controller")
-	if(devourer.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon/devourer || devourer.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest)
+	if(devourer.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon/devourer || devourer.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest || devourer.ai_controller.blackboard[BB_TARGET_MINIMUM_STAT] != HARD_CRIT)
 		return Fail("The Devourer AI must search for nearby targets with its restricted targeting strategy")
+
+	var/turf/ravager_turf = get_safe_random_station_turf_equal_weight()
+	if(!ravager_turf)
+		return Fail("The Ravager test requires an available station turf")
+	var/mob/living/basic/demon/redspace/moderate/ravager/ravager = allocate(/mob/living/basic/demon/redspace/moderate/ravager, ravager_turf)
+	var/datum/action/cooldown/mob_cooldown/redspace_beacon/beacon_action = locate(/datum/action/cooldown/mob_cooldown/redspace_beacon) in ravager.actions
+	if(ravager.name != "ravager" || ravager.icon != 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/32x64.dmi' || ravager.icon_state != "ravager" || ravager.base_pixel_x != -16 || ravager.base_pixel_y != -16 || !beacon_action)
+		return Fail("The Ravager must use the supplied sprite and receive the beacon ability")
+	if(!beacon_action.Activate(ravager) || !beacon_action.beacon || !beacon_action.beacon.field_source)
+		return Fail("The Ravager must be able to create a demonic beacon")
+	var/source_id = beacon_action.beacon.field_source.source_id
+	if(beacon_action.beacon.field_source.strength != 7 || beacon_action.beacon.field_source.radius != REDSPACE_HEX_RADIUS || SSredspace.field_sources["[source_id]"] != beacon_action.beacon.field_source)
+		return Fail("The demonic beacon must register a seven-point one-hex hotspot")
+	qdel(beacon_action.beacon)
+	if(beacon_action.beacon || SSredspace.field_sources["[source_id]"])
+		return Fail("Destroying the demonic beacon must remove its redspace hotspot")
 
 	var/mob/living/carbon/human/incapacitated = allocate(/mob/living/carbon/human)
 	incapacitated.mind_initialize()
+	incapacitated.stat = SOFT_CRIT
 	ADD_TRAIT(incapacitated, TRAIT_INCAPACITATED, REF(src))
 	var/datum/targeting_strategy/basic/redspace_demon/devourer/targeting = GET_TARGETING_STRATEGY(/datum/targeting_strategy/basic/redspace_demon/devourer)
 	if(!targeting.is_valid_target(devourer, incapacitated, 9) || !targeting.can_keep_target(devourer, incapacitated, 16))
@@ -24,8 +41,8 @@
 
 	var/mob/living/carbon/human/conscious = allocate(/mob/living/carbon/human)
 	conscious.mind_initialize()
-	if(targeting.is_valid_target(devourer, conscious, 9) || redspace_devourer_can_consume(conscious))
-		return Fail("The Devourer must not target conscious humans")
+	if(!targeting.is_valid_target(devourer, conscious, 9) || redspace_devourer_can_consume(conscious))
+		return Fail("The Devourer must target conscious humans but only consume incapacitated ones")
 
 	var/mob/living/carbon/human/mindless = allocate(/mob/living/carbon/human)
 	ADD_TRAIT(mindless, TRAIT_INCAPACITATED, REF(src))
@@ -53,14 +70,15 @@
 	var/mob/living/carbon/human/transform_victim = allocate(/mob/living/carbon/human)
 	transform_victim.mind_initialize()
 	ADD_TRAIT(transform_victim, TRAIT_INCAPACITATED, REF(src))
-	var/datum/mind/victim_mind = transform_victim.mind
 	if(!transform_devourer.capture_victim(transform_victim))
 		return Fail("The Devourer must be able to capture a valid transformation victim")
-	var/mob/living/basic/demon/redspace/moderate/minotaur/transformed = transform_devourer.transform_with_victim()
-	if(!transformed || QDELETED(transformed) || transformed.mind != victim_mind || victim_mind.current != transformed)
+	var/mob/living/basic/demon/redspace/moderate/ravager/transformed = transform_devourer.transform_with_victim("redspace_test")
+	if(!transformed || QDELETED(transformed) || transformed.ckey != ckey("redspace_test") || transformed.icon_state != "ravager")
 		if(transformed)
+			transformed.ckey = null
 			qdel(transformed)
-		return Fail("Transformation must create a minotaur controlled by the victim's mind")
+		return Fail("Transformation must create a Ravager controlled by the selected ghost")
+	transformed.ckey = null
 	qdel(transformed)
 
 	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer/devourer_event = new

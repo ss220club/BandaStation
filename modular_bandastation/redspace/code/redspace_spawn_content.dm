@@ -12,26 +12,33 @@
 /datum/targeting_strategy/basic/redspace_demon/retained
 	ignore_sight = TRUE
 
-/// Returns TRUE when a player-controlled human is incapacitated but still alive.
-/proc/redspace_devourer_can_consume(atom/target)
+/// Returns TRUE when a player-controlled human is alive and can be attacked.
+/proc/redspace_devourer_can_target(atom/target)
 	if(!ishuman(target))
 		return FALSE
 	var/mob/living/carbon/human/human_target = target
 	if(QDELETED(human_target) || human_target.stat == DEAD || !human_target.mind)
 		return FALSE
+	return TRUE
+
+/// Returns TRUE when a player-controlled human is incapacitated but still alive.
+/proc/redspace_devourer_can_consume(atom/target)
+	if(!redspace_devourer_can_target(target))
+		return FALSE
+	var/mob/living/carbon/human/human_target = target
 	return IS_UNCONSCIOUS_OR_CRIT(human_target) || HAS_TRAIT(human_target, TRAIT_INCAPACITATED)
 
-/// Devourers ignore conscious targets and retain only valid prey through cover.
+/// Devourers attack living humans and retain valid prey through cover.
 /datum/targeting_strategy/basic/redspace_demon/devourer
 
 /datum/targeting_strategy/basic/redspace_demon/devourer/is_valid_target(mob/living/living_mob, atom/target, vision_range, datum/ai_controller/controller = null)
 	. = ..()
-	if(!. || !redspace_devourer_can_consume(target))
+	if(!. || !redspace_devourer_can_target(target))
 		return FALSE
 	return TRUE
 
 /datum/targeting_strategy/basic/redspace_demon/devourer/can_keep_target(mob/living/living_mob, atom/target, range, datum/ai_controller/controller = null)
-	if(!redspace_devourer_can_consume(target))
+	if(!redspace_devourer_can_target(target))
 		return FALSE
 	return ..()
 
@@ -266,6 +273,7 @@
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/redspace_demon/devourer,
 		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/nearest,
+		BB_TARGET_MINIMUM_STAT = HARD_CRIT,
 	)
 
 /datum/ai_controller/basic_controller/simple/redspace_demon/ranged
@@ -319,6 +327,99 @@
 			hit_mob.apply_damage(damage, BRUTE, wound_bonus = CANT_WOUND)
 			hit_mob.Knockdown(knockdown_duration)
 			shake_camera(hit_mob, 2, 1)
+
+#define REDSPACE_RAVAGER_BEACON_STRENGTH 7
+/// Redspace source radii are measured in tiles; this is one complete redspace hex.
+#define REDSPACE_RAVAGER_BEACON_RADIUS REDSPACE_HEX_RADIUS
+#define REDSPACE_RAVAGER_BEACON_COOLDOWN (60 SECONDS)
+#define REDSPACE_RAVAGER_TRANSFORMATION_RETRY_DELAY (60 SECONDS)
+#define REDSPACE_RAVAGER_POLL_TIME (20 SECONDS)
+#define REDSPACE_RAVAGER_MOVEMENT_CHECK_DELAY (1 SECONDS)
+
+/// A destructible hotspot created by a Ravager.
+/obj/structure/redspace/demonic_beacon
+	name = "demonic beacon"
+	desc = "A crimson beacon that distorts the redspace around it."
+	icon = 'modular_bandastation/redspace/icons/obj/demon_objs.dmi'
+	icon_state = "demonic_crystal"
+	anchored = TRUE
+	density = FALSE
+	max_integrity = 100
+	uses_integrity = TRUE
+	var/datum/redspace_field_source/hotspot/field_source
+
+/obj/structure/redspace/demonic_beacon/Initialize(mapload)
+	. = ..()
+	var/turf/origin = get_turf(src)
+	if(!origin || !SSredspace || !SSredspace.is_supported_z(origin.z))
+		return INITIALIZE_HINT_QDEL
+	field_source = SSredspace.register_hotspot(
+		origin,
+		REDSPACE_RAVAGER_BEACON_STRENGTH,
+		REDSPACE_RAVAGER_BEACON_RADIUS,
+		REDSPACE_PROFILE_DEMONIC,
+		"установлен демонический маяк",
+		"маяк опустошителя",
+	)
+	if(!field_source)
+		return INITIALIZE_HINT_QDEL
+	set_light(3, 1, "#ff5500")
+	return .
+
+/obj/structure/redspace/demonic_beacon/Destroy()
+	var/datum/redspace_field_source/hotspot/source = field_source
+	field_source = null
+	if(source)
+		if(SSredspace && SSredspace.field_sources["[source.source_id]"] == source)
+			SSredspace.remove_source(source.source_id, "демонический маяк разрушен")
+		else
+			qdel(source)
+	return ..()
+
+/// Places one persistent redspace hotspot at the Ravager's feet.
+/datum/action/cooldown/mob_cooldown/redspace_beacon
+	name = "Demonic Beacon"
+	desc = "Place a beacon that creates a one-hex redspace disturbance."
+	button_icon = 'modular_bandastation/redspace/icons/obj/demon_objs.dmi'
+	button_icon_state = "demonic_crystal"
+	click_to_activate = FALSE
+	cooldown_time = REDSPACE_RAVAGER_BEACON_COOLDOWN
+	melee_cooldown_time = 0
+	cooldown_rounding = 1
+	var/obj/structure/redspace/demonic_beacon/beacon
+
+/datum/action/cooldown/mob_cooldown/redspace_beacon/Activate(atom/target)
+	var/turf/beacon_turf = get_turf(owner)
+	if(!beacon_turf || beacon_turf.density || !SSredspace?.is_supported_z(beacon_turf.z))
+		owner.balloon_alert(owner, "здесь нельзя установить маяк")
+		return FALSE
+	if(beacon && !QDELETED(beacon))
+		owner.balloon_alert(owner, "маяк уже установлен")
+		return FALSE
+
+	var/obj/structure/redspace/demonic_beacon/new_beacon = new(beacon_turf)
+	if(!new_beacon || QDELETED(new_beacon) || !new_beacon.field_source)
+		if(new_beacon && !QDELETED(new_beacon))
+			qdel(new_beacon)
+		owner.balloon_alert(owner, "не удалось установить маяк")
+		return FALSE
+
+	beacon = new_beacon
+	RegisterSignal(beacon, COMSIG_QDELETING, PROC_REF(on_beacon_deleted))
+	owner.visible_message(span_warning("[capitalize(owner.declent_ru(NOMINATIVE))] устанавливает демонический маяк."))
+	to_chat(owner, span_notice("Демонический маяк создаёт возмущение редспейса вокруг себя."))
+	StartCooldown()
+	return TRUE
+
+/datum/action/cooldown/mob_cooldown/redspace_beacon/proc/on_beacon_deleted(obj/structure/redspace/demonic_beacon/deleted_beacon)
+	SIGNAL_HANDLER
+	if(deleted_beacon == beacon)
+		beacon = null
+
+/datum/action/cooldown/mob_cooldown/redspace_beacon/Remove(mob/removed_from)
+	if(beacon)
+		UnregisterSignal(beacon, COMSIG_QDELETING)
+	return ..()
 
 /// A lesser demon that can survive only while its redspace energy is supplied.
 /mob/living/basic/demon/redspace
@@ -402,12 +503,34 @@
 	ground_slam.Grant(src)
 	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, ground_slam)
 
+/mob/living/basic/demon/redspace/moderate/ravager
+	name = "ravager"
+	real_name = "ravager"
+	unique_name = FALSE
+	desc = "A hulking redspace demon that crawls out of a consumed victim and tears through its surroundings."
+	icon = 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/32x64.dmi'
+	icon_state = "ravager"
+	icon_living = "ravager"
+	icon_dead = "ravager"
+	maxHealth = 300
+	health = 300
+	melee_damage_lower = 25
+	melee_damage_upper = 35
+
+/mob/living/basic/demon/redspace/moderate/ravager/Initialize(mapload)
+	. = ..()
+	var/datum/action/cooldown/mob_cooldown/ground_slam/redspace/ground_slam = new(src)
+	ground_slam.Grant(src)
+	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, ground_slam)
+	var/datum/action/cooldown/mob_cooldown/redspace_beacon/beacon_action = new(src)
+	beacon_action.Grant(src)
+
 #define REDSPACE_DEVOURER_STASIS "redspace_devourer_stasis"
 
-/// A slow demon that hides an incapacitated player before becoming a minotaur.
+/// A slow demon that hides an incapacitated player before a Ravager crawls out.
 /mob/living/basic/demon/redspace/devourer
-	name = "redspace devourer"
-	real_name = "redspace devourer"
+	name = "demonic devourer"
+	real_name = "demonic devourer"
 	unique_name = FALSE
 	desc = "A hulking redspace demon that consumes helpless people and grows into something worse."
 	icon = 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi'
@@ -419,6 +542,8 @@
 	health = 250
 	melee_damage_lower = 20
 	melee_damage_upper = 28
+	base_pixel_x = -16
+	base_pixel_y = -16
 	attack_vis_effect = ATTACK_EFFECT_BITE
 	status_flags = NONE
 	move_force = MOVE_FORCE_OVERPOWERING
@@ -437,6 +562,12 @@
 	/// Time spent in the hot zone before transforming.
 	var/transformation_delay = 2 MINUTES
 	var/transformation_timer_id
+	/// Prevents overlapping ghost polls while a captured victim is waiting to transform.
+	var/transformation_in_progress = FALSE
+	/// Destination the Devourer is walking toward before transformation.
+	var/turf/transformation_target
+	/// Temporary pathfinding movement used while carrying the victim.
+	var/datum/ai_movement/jps/transformation_movement
 
 /mob/living/basic/demon/redspace/devourer/early_melee_attack(atom/target, list/modifiers, ignore_cooldown)
 	. = ..()
@@ -476,11 +607,13 @@
 	ai_controller?.force_ai_off()
 
 	var/turf/hottest_turf = redspace_devourer_get_hottest_turf(get_turf(src))
-	if(hottest_turf && hottest_turf != get_turf(src))
-		forceMove(hottest_turf)
 	icon_state = "Devourer-closed"
-	visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] скрывается в горячей зоне редспейса."))
-	transformation_timer_id = addtimer(CALLBACK(src, PROC_REF(transform_with_victim)), transformation_delay, TIMER_STOPPABLE | TIMER_DELETE_ME)
+	if(hottest_turf && hottest_turf != get_turf(src))
+		visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] направляется к эпицентру редспейса."))
+		INVOKE_ASYNC(src, PROC_REF(move_to_transformation_site), hottest_turf)
+	else
+		visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] скрывается в горячей зоне редспейса."))
+		start_transformation_countdown()
 	devour_in_progress = FALSE
 
 /mob/living/basic/demon/redspace/devourer/proc/capture_victim(mob/living/carbon/human/victim)
@@ -522,13 +655,119 @@
 	if(transformation_timer_id)
 		deltimer(transformation_timer_id)
 	transformation_timer_id = null
+	stop_transformation_movement()
+	transformation_in_progress = FALSE
 	devour_in_progress = FALSE
 	ai_controller?.clear_forced_off()
 
-/mob/living/basic/demon/redspace/devourer/proc/transform_with_victim()
+/mob/living/basic/demon/redspace/devourer/proc/can_transform_with_victim()
+	var/mob/living/carbon/human/victim = stored_victim
+	return !QDELETED(src) && stat != DEAD && victim && !QDELETED(victim) && victim.loc == src && victim.stat != DEAD && victim.mind
+
+/mob/living/basic/demon/redspace/devourer/proc/begin_transformation()
+	if(QDELETED(src) || transformation_in_progress || !stored_victim)
+		return
+	transformation_timer_id = null
+	transformation_in_progress = TRUE
+	visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] начинает раскрываться изнутри."))
+	INVOKE_ASYNC(src, PROC_REF(poll_for_ravager))
+
+/mob/living/basic/demon/redspace/devourer/proc/start_transformation_countdown()
+	if(!can_transform_with_victim())
+		release_victim()
+		return
+	transformation_in_progress = FALSE
+	transformation_timer_id = addtimer(CALLBACK(src, PROC_REF(begin_transformation)), transformation_delay, TIMER_STOPPABLE | TIMER_DELETE_ME)
+
+/mob/living/basic/demon/redspace/devourer/proc/stop_transformation_movement()
+	var/datum/ai_movement/jps/movement = transformation_movement
+	transformation_movement = null
+	transformation_target = null
+	if(!movement)
+		return
+	if(ai_controller && !QDELETED(ai_controller))
+		movement.stop_moving_towards(ai_controller)
+	if(!QDELETED(movement))
+		qdel(movement)
+
+/mob/living/basic/demon/redspace/devourer/proc/move_to_transformation_site(turf/destination)
+	if(QDELETED(src) || !destination || !can_transform_with_victim())
+		release_victim()
+		return
+
+	transformation_in_progress = TRUE
+	transformation_target = destination
+	REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, REDSPACE_DEVOURER_STASIS)
+
+	var/datum/ai_controller/controller = ai_controller
+	if(!controller || QDELETED(controller))
+		stop_transformation_movement()
+		start_transformation_countdown()
+		return
+	controller.ai_movement.stop_moving_towards(controller)
+	var/datum/ai_movement/jps/movement = new
+	transformation_movement = movement
+	if(!movement.start_moving_towards(controller, destination, 0))
+		stop_transformation_movement()
+		start_transformation_countdown()
+		return
+
+	while(!QDELETED(src) && can_transform_with_victim() && get_turf(src) != destination)
+		if(!transformation_movement || !transformation_movement.moving_controllers[controller])
+			break
+		sleep(REDSPACE_RAVAGER_MOVEMENT_CHECK_DELAY)
+
+	if(QDELETED(src))
+		return
+	if(!can_transform_with_victim())
+		release_victim()
+		return
+	var/reached_destination = get_turf(src) == destination
+	stop_transformation_movement()
+	if(reached_destination)
+		visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] достигает эпицентра редспейса."))
+	else
+		visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] не может найти путь к эпицентру редспейса."))
+	start_transformation_countdown()
+
+/mob/living/basic/demon/redspace/devourer/proc/poll_for_ravager()
+	if(!can_transform_with_victim())
+		release_victim()
+		return
+
+	var/mob/dead/observer/chosen_ghost = SSpolling.poll_ghosts_for_target(
+		question = "Вы хотите сыграть за [span_notice("опустошителя")], выползающего из [span_danger(declent_ru(ACCUSATIVE))]?",
+		role = ROLE_SENTIENCE,
+		check_jobban = ROLE_SENTIENCE,
+		poll_time = REDSPACE_RAVAGER_POLL_TIME,
+		checked_target = src,
+		ignore_category = POLL_IGNORE_REDSPACE_RAVAGER,
+		alert_pic = /mob/living/basic/demon/redspace/moderate/ravager,
+		jump_target = src,
+		role_name_text = "ravager",
+		chat_text_border_icon = /mob/living/basic/demon/redspace/moderate/ravager,
+	)
+
+	if(QDELETED(src))
+		return
+	if(!chosen_ghost)
+		transformation_in_progress = FALSE
+		visible_message(span_warning("Возмущение стихает, и появление опустошителя откладывается."))
+		transformation_timer_id = addtimer(CALLBACK(src, PROC_REF(begin_transformation)), REDSPACE_RAVAGER_TRANSFORMATION_RETRY_DELAY, TIMER_STOPPABLE | TIMER_DELETE_ME)
+		return
+	if(!can_transform_with_victim())
+		release_victim()
+		return
+	transform_with_victim(chosen_ghost.key)
+
+/mob/living/basic/demon/redspace/devourer/proc/transform_with_victim(ghost_key)
+	if(!istext(ghost_key) || !can_transform_with_victim())
+		transformation_in_progress = FALSE
+		return
+
 	transformation_timer_id = null
 	var/mob/living/carbon/human/victim = stored_victim
-	if(QDELETED(victim) || victim.loc != src || victim.stat == DEAD || !victim.mind)
+	if(!can_transform_with_victim())
 		release_victim()
 		return
 
@@ -537,8 +776,7 @@
 		release_victim()
 		return
 
-	var/datum/mind/victim_mind = victim.mind
-	var/mob/living/basic/demon/redspace/moderate/minotaur/transformed = new(transform_turf)
+	var/mob/living/basic/demon/redspace/moderate/ravager/transformed = new(transform_turf)
 	if(!transformed || QDELETED(transformed))
 		release_victim()
 		return
@@ -546,7 +784,11 @@
 	stored_victim = null
 	UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
 	victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
-	victim_mind.transfer_to(transformed)
+	transformation_in_progress = FALSE
+	transformed.PossessByPlayer(ghost_key)
+	transform_turf.visible_message(span_warning("Из [declent_ru(GENITIVE)] выползает [transformed.declent_ru(NOMINATIVE)]!"))
+	new /obj/effect/temp_visual/circle_wave(transform_turf, "#ff3b20")
+	playsound(transform_turf, 'sound/effects/magic/teleport_app.ogg', 75, TRUE)
 
 	if(SSredspace)
 		for(var/datum/redspace_event/spawn/event as anything in SSredspace.active_events)
@@ -760,7 +1002,7 @@
 	spawn_budget_cost = 3
 	spawn_policy_id = "demonic_devourer"
 	spawn_type = /mob/living/basic/demon/redspace/devourer
-	spawn_message = "В редспейсе материализуется пожиратель."
+	spawn_message = "В редспейсе материализуется демонический пожиратель."
 
 /datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer/can_start(turf/target)
 	if(!..())
@@ -770,3 +1012,9 @@
 	return TRUE
 
 #undef REDSPACE_DEVOURER_STASIS
+#undef REDSPACE_RAVAGER_BEACON_STRENGTH
+#undef REDSPACE_RAVAGER_BEACON_RADIUS
+#undef REDSPACE_RAVAGER_BEACON_COOLDOWN
+#undef REDSPACE_RAVAGER_TRANSFORMATION_RETRY_DELAY
+#undef REDSPACE_RAVAGER_POLL_TIME
+#undef REDSPACE_RAVAGER_MOVEMENT_CHECK_DELAY

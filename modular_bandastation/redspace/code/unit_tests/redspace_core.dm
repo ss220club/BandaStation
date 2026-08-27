@@ -31,7 +31,7 @@
 		return Fail("Event-only invasion must not start an automatic event")
 
 	var/datum/redspace_profile/demonic/profile = new
-	if(profile.profile_id != REDSPACE_PROFILE_DEMONIC || !profile.is_event_allowed("storm_pulse") || !profile.is_event_allowed("demonic_ranged_demon") || !profile.is_event_allowed("demonic_soldier") || profile.is_event_allowed("unknown_event"))
+	if(profile.profile_id != REDSPACE_PROFILE_DEMONIC || !profile.is_event_allowed("storm_pulse") || !profile.is_event_allowed("demonic_ranged_demon") || !profile.is_event_allowed("demonic_soldier") || !profile.is_event_allowed("demonic_minotaur") || profile.is_event_allowed("unknown_event"))
 		return Fail("The demonic profile must expose only its registered event set")
 	var/datum/redspace_event_profile/calm_profile = profile.get_event_profile(REDSPACE_STATE_CALM)
 	var/datum/redspace_event_profile/disturbance_profile = profile.get_event_profile(REDSPACE_STATE_DISTURBANCE)
@@ -44,7 +44,7 @@
 		return Fail("Calm profile must be sparse and use only the harmless echo event")
 	if(!disturbance_profile.get_event_weight("local_distortion") || disturbance_profile.get_event_weight("storm_pulse"))
 		return Fail("Disturbance profile must keep storm events out of the low range")
-	if(storm_profile.attempt_probability <= disturbance_profile.attempt_probability || storm_profile.get_event_weight("storm_pulse") <= 0 || storm_profile.get_event_weight("demonic_crystal") <= 0 || storm_profile.get_event_weight("demonic_necropolis") <= storm_profile.get_event_weight("demonic_crystal") || !storm_profile.get_event_weight("demonic_ranged_demon") || storm_profile.get_event_weight("demonic_soldier") >= storm_profile.get_event_weight("demonic_lesser_demon"))
+	if(storm_profile.attempt_probability <= disturbance_profile.attempt_probability || storm_profile.get_event_weight("storm_pulse") <= 0 || storm_profile.get_event_weight("demonic_crystal") <= 0 || storm_profile.get_event_weight("demonic_necropolis") <= storm_profile.get_event_weight("demonic_crystal") || !storm_profile.get_event_weight("demonic_ranged_demon") || !storm_profile.get_event_weight("demonic_minotaur") || storm_profile.get_event_weight("demonic_soldier") >= storm_profile.get_event_weight("demonic_lesser_demon"))
 		return Fail("Storm profile must attempt events more often and favor persistent turf spawns over crystals")
 	if(!SSredspace || !SSredspace.event_profile_has_automatic_event(storm_profile) || !SSredspace.event_profile_has_automatic_event(storm_profile, REDSPACE_EVENT_CATEGORY_TURF_SPAWN))
 		return Fail("Storm profile must expose independent normal and turf event queues")
