@@ -33,11 +33,8 @@
 	. = ..()
 	if(inert)
 		return
-	var/obj/structure/mirror/nearby_mirror = check_for_mirrors(get_turf(hit_atom), 3)
-	if(!nearby_mirror)
-		visible_message(span_notice("[declent_ru(ACCUSATIVE)] при ударе распадается на частицы, которые исчезают, превращаясь в ничто."))
-	else
-		transfer_to_mirror(nearby_mirror)
+	visible_message(span_notice("[declent_ru(ACCUSATIVE)] при ударе распадается на частицы, которые исчезают, превращаясь в ничто."))
+	SEND_SIGNAL(src, COMSIG_RESIDUE_DISPERSE)
 	qdel(src)
 
 /obj/item/ectoplasm/revenant/examine(mob/user)
