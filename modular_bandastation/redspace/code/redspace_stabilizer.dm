@@ -28,7 +28,7 @@
 
 	/// Balance variables. max_negative_contribution is a positive magnitude.
 	var/target_value = REDSPACE_STABILIZER_TARGET_VALUE
-	var/max_negative_contribution = 4
+	var/max_negative_contribution = 5
 	var/source_radius = REDSPACE_STABILIZER_DEFAULT_RADIUS
 
 	/// Abstract thermal load displayed as a percentage-like value.
