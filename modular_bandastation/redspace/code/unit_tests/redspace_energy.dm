@@ -11,7 +11,9 @@
 		return Fail("Redspace demons must use the lesser demon sprite")
 	if(!istype(test_mob.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/melee))
 		return Fail("Redspace demons must use the obstacle-breaking hostile AI controller")
-	if(test_mob.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon || test_mob.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest)
+	if(!istype(test_mob.ai_controller.ai_movement, /datum/ai_movement/jps))
+		return Fail("Redspace demons must use JPS movement to route around obstacles")
+	if(test_mob.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon || test_mob.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest/redspace_demon)
 		return Fail("Redspace demons must remember acquired targets and prioritize closer enemies")
 	var/turf/cardinal_obstacle = get_step(test_mob, NORTH)
 	var/turf/cardinal_target = get_step(cardinal_obstacle, NORTH)
@@ -37,7 +39,7 @@
 
 	var/mob/living/basic/demon/redspace/ranged/test_ranged = allocate(/mob/living/basic/demon/redspace/ranged, run_loc_floor_bottom_left)
 	var/datum/component/ranged_attacks/ranged_attacks = test_ranged.GetComponent(/datum/component/ranged_attacks)
-	if(test_ranged.icon_state != "demon_ranged" || test_ranged.maxHealth >= test_mob.maxHealth || !istype(test_ranged.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/ranged) || !ranged_attacks || ranged_attacks.projectile_type != /obj/projectile/magic/lesser_fireball)
+	if(test_ranged.icon_state != "demon_ranged" || test_ranged.maxHealth >= test_mob.maxHealth || !istype(test_ranged.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/ranged) || !istype(test_ranged.ai_controller.ai_movement, /datum/ai_movement/jps) || !ranged_attacks || ranged_attacks.projectile_type != /obj/projectile/magic/lesser_fireball)
 		return Fail("Redspace ranged demons must use the ranged sprite, reduced health and fireball attack AI")
 
 	var/obj/projectile/magic/lesser_fireball/test_fireball = new

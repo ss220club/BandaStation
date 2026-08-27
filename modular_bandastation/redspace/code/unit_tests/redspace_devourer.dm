@@ -12,7 +12,7 @@
 		return Fail("The Devourer must expose the configured devour and transformation delays")
 	if(!istype(devourer.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/melee/devourer))
 		return Fail("The Devourer must use the specialized redspace melee controller")
-	if(devourer.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon/devourer || devourer.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest || devourer.ai_controller.blackboard[BB_TARGET_MINIMUM_STAT] != SOFT_CRIT)
+	if(devourer.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon/devourer || devourer.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest/redspace_demon || devourer.ai_controller.blackboard[BB_TARGET_MINIMUM_STAT] != SOFT_CRIT)
 		return Fail("The Devourer AI must search for nearby targets with its restricted targeting strategy")
 
 	var/turf/ravager_turf = get_safe_random_station_turf_equal_weight()

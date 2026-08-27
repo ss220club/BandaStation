@@ -39,6 +39,15 @@
 						"finish_on_primary": true,
 						"children": [
 							{
+								"type": "leaf",
+								"behavior": "/datum/bt_node/ai_behavior/move_to_target/redspace_demon",
+								"vars": {
+									"target_key": "BB_CURRENT_TARGET",
+									"required_dist": 1,
+									"finish_on_arrival": false
+								}
+							},
+							{
 								"type": "subplan",
 								"success_policy": "BT_SUBPLAN_SUCCEED_ON_SUCCESS",
 								"failure_policy": "BT_SUBPLAN_LOOP_ON_FAILURE",
@@ -76,15 +85,6 @@
 								]
 							},
 							{
-								"type": "leaf",
-								"behavior": "/datum/bt_node/ai_behavior/move_to_target/redspace_demon",
-								"vars": {
-									"target_key": "BB_CURRENT_TARGET",
-									"required_dist": 1,
-									"finish_on_arrival": false
-								}
-							},
-							{
 								"type": "subtree",
 								"subtype": "$b95z0f0c"
 							}
@@ -103,7 +103,7 @@
 		},
 		{
 			"type": "leaf",
-			"behavior": "/datum/bt_node/ai_behavior/acquire_target/update_combat_targets",
+			"behavior": "/datum/bt_node/ai_behavior/acquire_target/update_combat_targets/redspace_demon",
 			"vars": {
 				"target_key": "BB_CURRENT_TARGET",
 				"targeting_strategy": "BB_TARGETING_STRATEGY",

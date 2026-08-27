@@ -16,6 +16,7 @@
 #include "code/redspace_sensor.dm"
 #include "code/redspace_console.dm"
 #include "code/redspace_stabilizer.dm"
+#include "code/redspace_rift_sealer.dm"
 #include "code/redspace_debug.dm"
 
 #include "code/unit_tests/redspace_grid.dm"
@@ -27,3 +28,4 @@
 #include "code/unit_tests/redspace_stabilizer.dm"
 #include "code/unit_tests/redspace_energy.dm"
 #include "code/unit_tests/redspace_devourer.dm"
+#include "code/unit_tests/redspace_rift_sealer.dm"

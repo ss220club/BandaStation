@@ -70,7 +70,7 @@
 		},
 		{
 			"type": "leaf",
-			"behavior": "/datum/bt_node/ai_behavior/acquire_target/update_combat_targets",
+			"behavior": "/datum/bt_node/ai_behavior/acquire_target/update_combat_targets/redspace_demon",
 			"vars": {
 				"target_key": "BB_CURRENT_TARGET",
 				"targeting_strategy": "BB_TARGETING_STRATEGY",

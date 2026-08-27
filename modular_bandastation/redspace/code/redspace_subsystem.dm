@@ -243,6 +243,9 @@ SUBSYSTEM_DEF(redspace)
 			source.change_reason = "истёк срок жизни источника"
 			remove_source(source.source_id)
 			continue
+		if(istype(source, /datum/redspace_field_source/hotspot))
+			var/datum/redspace_field_source/hotspot/hotspot = source
+			hotspot.process_growth()
 		var/coverage_pending = length(source.coverage_turfs)
 		var/coverage_rebuild_needed = source.coverage_needs_refresh()
 		var/coverage_complete = TRUE
@@ -1120,6 +1123,7 @@ SUBSYSTEM_DEF(redspace)
 		next_source_id = 1
 
 	source.radius = clamp(floor(source.radius + 0.5), 0, REDSPACE_MAX_SOURCE_RADIUS)
+	source.radius_squared = source.radius * source.radius
 	source.source_id = next_source_id++
 	field_sources["[source.source_id]"] = source
 	var/coverage_complete = ensure_source_cells(source)
@@ -1156,6 +1160,29 @@ SUBSYSTEM_DEF(redspace)
 	hotspot.description = description
 	return add_source(hotspot)
 
+/// Finds the closest positive hotspot to a turf. Rift sealers use the source origin,
+/// not the source's falloff radius, for their placement restriction.
+/datum/controller/subsystem/redspace/proc/get_nearest_hotspot(turf/target, max_distance = REDSPACE_RIFT_SEALER_PLACEMENT_RADIUS) as /datum/redspace_field_source/hotspot
+	if(!target || !is_supported_z(target.z))
+		return
+
+	var/datum/redspace_field_source/hotspot/nearest_hotspot
+	var/nearest_distance = INFINITY
+	for(var/source_key in field_sources)
+		var/datum/redspace_field_source/hotspot/hotspot = field_sources[source_key]
+		if(!istype(hotspot) || hotspot.strength <= 0)
+			continue
+		var/turf/origin = locate(hotspot.origin_x, hotspot.origin_y, hotspot.z_level)
+		if(!origin || origin.z != target.z)
+			continue
+		var/distance = get_dist(target, origin)
+		if(distance > max_distance || distance >= nearest_distance)
+			continue
+		nearest_hotspot = hotspot
+		nearest_distance = distance
+
+	return nearest_hotspot
+
 /// Registers a moving wave with amplitude, radius, velocity in tiles per second and a lifetime.
 /datum/controller/subsystem/redspace/proc/register_wave_source(turf/origin, amplitude, source_radius, velocity_x, velocity_y, lifetime, source_profile_id = REDSPACE_PROFILE_DEMONIC, reason = null) as /datum/redspace_field_source/wave
 	if(!isnum(lifetime) || lifetime <= 0)
@@ -1174,11 +1201,12 @@ SUBSYSTEM_DEF(redspace)
 	if(!source.set_strength(new_strength, change_reason))
 		return FALSE
 	var/list/refresh_cell_keys = source.get_coverage_refresh_keys()
+	var/coverage_complete = TRUE
 	if(source.strength)
-		var/coverage_complete = ensure_source_cells(source)
+		coverage_complete = ensure_source_cells(source)
 		refresh_cell_keys |= source.get_coverage_refresh_keys()
-		if(!coverage_complete)
-			processing_sources["[source.source_id]"] = source
+	if(source.requires_processing() || !coverage_complete)
+		processing_sources["[source.source_id]"] = source
 	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_STRENGTH, source.profile_id, old_strength, source.strength, change_reason)
 	if(length(refresh_cell_keys))
 		refresh_cells(change_reason, refresh_cell_keys)
