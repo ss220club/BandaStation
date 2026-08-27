@@ -33,7 +33,7 @@
 	icon = initial(icon)
 	RemoveInvisibility(type)
 	set_species(/datum/species/monkey)
-	to_chat(src, span_boldnotice("You are now \a [dna.species.name]."))
+	to_chat(src, span_boldnotice("Вы теперь [dna.species.name]."))
 	name = LOWER_TEXT(dna.species.name)
 	regenerate_icons()
 	set_name()
@@ -74,7 +74,7 @@
 	icon = initial(icon)
 	RemoveInvisibility(type)
 	set_species(species)
-	to_chat(src, span_boldnotice("You are now \a [dna.species.name]."))
+	to_chat(src, span_boldnotice("Вы теперь [dna.species.name]."))
 	SEND_SIGNAL(src, COMSIG_MONKEY_HUMANIZE)
 	return src
 
@@ -99,7 +99,7 @@
 				break
 			landmark_loc += sloc.loc
 		if(!length(landmark_loc))
-			to_chat(src, "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone.")
+			to_chat(src, "Мы очень извиняемся, но мы не нашли свободное место для спавна ИИ, потому мы вас поместим на место кого-нибудь.")
 			for(var/obj/effect/landmark/start/ai/sloc in GLOB.landmarks_list)
 				landmark_loc += sloc.loc
 
@@ -159,10 +159,10 @@
 	return new_borg
 
 /mob/living/silicon/robot/proc/replace_banned_cyborg()
-	to_chat(src, "<b>You are job banned from cyborg! Appeal your job ban if you want to avoid this in the future!</b>")
+	to_chat(src, "<b>У вас имеется бан на киборгов! Обжалуйте ваш джоббан, чтобы такого не случилось в будущем!</b>")
 	ghostize(FALSE)
 
-	var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Do you want to play as [span_notice(name)]?", check_jobban = JOB_CYBORG, poll_time = 5 SECONDS, checked_target = src, alert_pic = src, role_name_text = "cyborg")
+	var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Хотите ли вы играть за - [span_notice(name)]?", check_jobban = JOB_CYBORG, poll_time = 5 SECONDS, checked_target = src, alert_pic = src, role_name_text = "киборг")
 	if(chosen_one)
 		message_admins("[key_name_admin(chosen_one)] has taken control of ([key_name_admin(src)]) to replace a jobbanned player.")
 		key = chosen_one.key
@@ -179,7 +179,7 @@
 	if(!new_xeno)
 		return
 
-	to_chat(new_xeno, span_boldnotice("You are now an alien. Hiss."))
+	to_chat(new_xeno, span_boldnotice("Вы теперь ксеноморф."))
 
 /mob/proc/slimeize(reproduce)
 	var/mob/living/basic/slime/new_slime = transform_into_mob(/mob/living/basic/slime)
@@ -193,14 +193,14 @@
 			step_away(brainless_child, new_slime)
 
 	new_slime.set_combat_mode(TRUE)
-	to_chat(new_slime, span_boldnotice("You are now a slime. Blorble."))
+	to_chat(new_slime, span_boldnotice("Вы теперь слайм. Скриии!"))
 
 /mob/proc/corgize()
 	var/mob/living/basic/pet/dog/corgi/new_corgi = transform_into_mob(/mob/living/basic/pet/dog/corgi)
 	if(!new_corgi)
 		return
 	new_corgi.set_combat_mode(TRUE)
-	to_chat(new_corgi, span_boldnotice("You are now a Corgi. Yap Yap!"))
+	to_chat(new_corgi, span_boldnotice("Вы теперь корги. Йап-йап!"))
 
 /**
  * Turns the source atom into a crab crab, the peak of evolutionary design.
@@ -209,7 +209,7 @@
 	var/mob/living/basic/crab/new_crab = transform_into_mob(/mob/living/basic/crab)
 	if(!new_crab)
 		return
-	to_chat(new_crab, span_boldnotice("You have evolved into a crab!"))
+	to_chat(new_crab, span_boldnotice("Вы эволюционировали в краба!"))
 	new_crab.set_combat_mode(TRUE)
 
 /mob/proc/gorillize(genetics_gorilla = FALSE)
@@ -217,7 +217,7 @@
 	if(!ideal_body)
 		return
 	SSblackbox.record_feedback("amount", "gorillas_created", 1)
-	to_chat(ideal_body, span_boldnotice("You are now a gorilla. Ooga ooga!"))
+	to_chat(ideal_body, span_boldnotice("Вы теперь горилла. Уга-уга!"))
 	ideal_body.set_combat_mode(TRUE)
 	return ideal_body
 
@@ -231,7 +231,7 @@
 	if(!new_mob)
 		return
 	new_mob.set_combat_mode(TRUE)
-	to_chat(new_mob, span_boldnotice("You feel more... animalistic."))
+	to_chat(new_mob, span_boldnotice("Вы чувствуете себя более... животноподобно."))
 
 ///Creates a new mob, deletes the old one, transfers old mob into new mob
 /mob/proc/transform_into_mob(mob_path, delete_items = FALSE)

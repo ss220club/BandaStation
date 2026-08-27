@@ -1,6 +1,6 @@
 /datum/techweb_node/robotics
-	display_name = "Robotics"
-	description = "Programmable machines that make our lives lazier."
+	display_name = "Робототехника"
+	description = "Программируемые машины, что делают нас ленивее."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/board/navbeacon,
@@ -9,8 +9,8 @@
 	)
 
 /datum/techweb_node/exodrone
-	display_name = "Exploration Drones"
-	description = "Adapted arcade machines to covertly harness gamers' skills in controlling real drones for practical purposes."
+	display_name = "Исследовательские дроны"
+	description = "Адаптированные аркадные автоматы для скрытого использования навыков геймеров в управлении настоящими дронами в практических целях."
 	prerequisite_nodes = list(/datum/techweb_node/robotics)
 	unlocked_designs = list(
 		/datum/design/board/exodrone_console,
@@ -22,8 +22,8 @@
 
 // AI root node
 /datum/techweb_node/ai
-	display_name = "Artificial Intelligence"
-	description = "Exploration of AI systems, more intelligent than the entire crew put together."
+	display_name = "Искусственный интеллект"
+	description = "Исследование систем искусственного интеллекта, более интеллектуальных, чем весь экипаж вместе взятый."
 	prerequisite_nodes = list(/datum/techweb_node/robotics)
 	unlocked_designs = list(
 		/datum/design/board/aicore,
@@ -64,8 +64,8 @@
 		research_costs[TECHWEB_POINT_TYPE_GENERIC] *= 3
 
 /datum/techweb_node/ai_laws
-	display_name = "Advanced AI Upgrades"
-	description = "Delving into sophisticated AI directives, with hopes that they won't lead to humanity's extinction."
+	display_name = "Улучшенные модули ИИ"
+	description = "Углубление в сложные директивы ИИ, в надежде, что они не приведут к вымиранию человечества."
 	prerequisite_nodes = list(/datum/techweb_node/ai)
 	unlocked_designs = list(
 		/datum/design/ai_power_transfer,

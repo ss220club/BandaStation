@@ -1,6 +1,6 @@
 /datum/techweb_node/augmentation
-	display_name = "Augmentation"
-	description = "For those who prefer shiny metal over squishy flesh."
+	display_name = "Аугментации"
+	description = "Для тех, кто предпочитает блестящий металл мягкой плоти."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	prerequisite_nodes = list(/datum/techweb_node/robotics)
 	unlocked_designs = list(
@@ -25,8 +25,8 @@
 	)
 
 /datum/techweb_node/cybernetics
-	display_name = "Cybernetics"
-	description = "Sapient robots with preloaded tool modules and programmable laws."
+	display_name = "Кибернетика"
+	description = "Разумные роботы с предустановленными инструментальными модулями и программируемыми законами."
 	prerequisite_nodes = list(/datum/techweb_node/augmentation)
 	unlocked_designs = list(
 		/datum/design/board/robocontrol,
@@ -45,8 +45,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/borg_service
-	display_name = "Service Cyborg Upgrades"
-	description = "Let them do the cookin' by the book."
+	display_name = "Улучшение киборгов обслуживания"
+	description = "Специализированные модули для автоматизации кулинарных процессов в соответствии с установленными регламентами."
 	prerequisite_nodes = list(/datum/techweb_node/cybernetics)
 	unlocked_designs = list(
 		/datum/design/borg_upgrade_rolling_table,
@@ -61,8 +61,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/borg_mining
-	display_name = "Mining Cyborg Upgrades"
-	description = "To mine places too dangerous for humans."
+	display_name = "Улучшение киборгов-шахтёров"
+	description = "Для работы в условиях, представляющих повышенную опасность для человека."
 	prerequisite_nodes = list(/datum/techweb_node/cybernetics)
 	unlocked_designs = list(
 		/datum/design/borg_upgrade_lavaproof,
@@ -73,8 +73,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/borg_medical
-	display_name = "Medical Cyborg Upgrades"
-	description = "Let them follow Asimov's First Law."
+	display_name = "Улучшение киборгов-медиков"
+	description = "Реализация Первого закона Азимова в рамках медицинских протоколов."
 	prerequisite_nodes = list(/datum/techweb_node/borg_service, /datum/techweb_node/surgery_adv)
 	unlocked_designs = list(
 		/datum/design/borg_upgrade_pinpointer,
@@ -90,8 +90,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/borg_utility
-	display_name = "Utility Cyborg Upgrades"
-	description = "Let them wipe our floors for us."
+	display_name = "Служебные улучшения киборгов"
+	description = "Автоматизация задач по поддержанию санитарного состояния помещений."
 	prerequisite_nodes = list(/datum/techweb_node/borg_service, /datum/techweb_node/sanitation)
 	unlocked_designs = list(
 		/datum/design/borg_upgrade_advancedmop,
@@ -113,8 +113,8 @@
 		unlocked_designs += /datum/design/borg_upgrade_disablercooler
 
 /datum/techweb_node/borg_engi
-	display_name = "Engineering Cyborg Upgrades"
-	description = "To slack even more."
+	display_name = "Улучшение киборгов-инженеров"
+	description = "Оптимизация выполнения технических задач с повышенной эффективностью."
 	prerequisite_nodes = list(/datum/techweb_node/borg_mining, /datum/techweb_node/parts_upg)
 	unlocked_designs = list(
 		/datum/design/borg_upgrade_rped,
@@ -127,8 +127,8 @@
 
 // Implants root node
 /datum/techweb_node/passive_implants
-	display_name = "Passive Implants"
-	description = "Implants designed to operate seamlessly without active user input, enhancing various physiological functions or providing continuous benefits."
+	display_name = "Пассивные импланты"
+	description = "Импланты, предназначенные для бесперебойной работы без активного участия пользователя, улучшающие различные физиологические функции или обеспечивающие постоянные преимущества."
 	prerequisite_nodes = list(/datum/techweb_node/augmentation)
 	unlocked_designs = list(
 		/datum/design/board/skill_station,
@@ -146,8 +146,8 @@
 	announce_channels = list(RADIO_CHANNEL_SECURITY, RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/cyber/cyber_implants
-	display_name = "Cybernetic Implants"
-	description = "Advanced technological enhancements integrated into the body, offering improved physical capabilities."
+	display_name = "Кибернетические импланты"
+	description = "Передовые технологические усовершенствования, интегрированные в организм, предлагающие улучшенные физические возможности."
 	prerequisite_nodes = list(/datum/techweb_node/passive_implants, /datum/techweb_node/cybernetics)
 	unlocked_designs = list(
 		/datum/design/cyberimp_breather,
@@ -165,8 +165,8 @@
 		research_costs[TECHWEB_POINT_TYPE_GENERIC] /= 2
 
 /datum/techweb_node/cyber/combat_implants
-	display_name = "Combat Implants"
-	description = "To make sure that you can wake the f*** up, samurai."
+	display_name = "Боевые импланты"
+	description = "Обеспечение оперативного восстановления боеспособности в критических ситуациях."
 	prerequisite_nodes = list(/datum/techweb_node/cyber/cyber_implants)
 	unlocked_designs = list(
 		/datum/design/cyberimp_reviver,
@@ -178,8 +178,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/cyber/integrated_toolsets
-	display_name = "Integrated Toolsets"
-	description = "Decades of contraband smuggling by assistants have led to the development of a full toolbox that fits seamlessly into your arm."
+	display_name = "Встроенный набор инструментов"
+	description = "Результат многолетнего анализа методов контрабанды, приведший к разработке компактного инструментального комплекса, интегрируемого в предплечье."
 	prerequisite_nodes = list(/datum/techweb_node/cyber/combat_implants, /datum/techweb_node/exp_tools)
 	unlocked_designs = list(
 		/datum/design/cyberimp_nutriment_plus,
@@ -191,8 +191,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/cyber/cyber_organs
-	display_name = "Cybernetic Organs"
-	description = "We have the technology to rebuild him."
+	display_name = "Кибернетические органы"
+	description = "Технологии реконструкции биологических систем с применением кибернетических компонентов."
 	prerequisite_nodes = list(/datum/techweb_node/cybernetics)
 	unlocked_designs = list(
 		/datum/design/cybernetic_eyes/improved,
@@ -208,8 +208,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/cyber/cyber_organs_upgraded
-	display_name = "Upgraded Cybernetic Organs"
-	description = "We have the technology to upgrade him."
+	display_name = "Улучшенные кибернетические органы"
+	description = "Модернизация кибернетических органов с расширенным функционалом."
 	prerequisite_nodes = list(/datum/techweb_node/cyber/cyber_organs)
 	unlocked_designs = list(
 		/datum/design/cyberimp_gloweyes,
@@ -230,8 +230,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/cyber/cyber_organs_adv
-	display_name = "Advanced Cybernetic Organs"
-	description = "Cutting-edge cybernetic organs offering enhanced sensory capabilities, making it easier than ever to detect ERP."
+	display_name = "Продвинутые кибернетические органы"
+	description = "Передовые кибернетические органы с улучшенными сенсорными возможностями для повышения эффективности обнаружения."
 	prerequisite_nodes = list(/datum/techweb_node/cyber/cyber_organs_upgraded, /datum/techweb_node/night_vision)
 	unlocked_designs = list(
 		/datum/design/cybernetic_ears_xray,

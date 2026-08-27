@@ -1,6 +1,6 @@
 /datum/techweb_node/bio_scan
-	display_name = "Biological Scan"
-	description = "Advanced technology for analyzing patient health and reagent compositions, ensuring precise diagnostics and treatment in the medical bay."
+	display_name = "Биологическое сканирование"
+	description = "Передовые технологии для анализа состояния пациентов и состава реагентов, обеспечивающие точную диагностику и лечение в медицинском отделе."
 	prerequisite_nodes = list(/datum/techweb_node/medbay_equip)
 	unlocked_designs = list(
 		/datum/design/healthanalyzer,
@@ -16,8 +16,8 @@
 	announce_channels = list(RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/cytology
-	display_name = "Cytology"
-	description = "Cellular biology research focused on cultivation of limbs and diverse organisms from cells."
+	display_name = "Цитология"
+	description = "Исследования в области клеточной биологии, сфокусированные на культивировании конечностей и разнообразных организмов из клеток."
 	prerequisite_nodes = list(/datum/techweb_node/bio_scan)
 	unlocked_designs = list(
 		/datum/design/board/limbgrower,
@@ -30,8 +30,8 @@
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_2_POINTS)
 
 /datum/techweb_node/xenobiology
-	display_name = "Xenobiology"
-	description = "Exploration of non-human biology, unlocking the secrets of extraterrestrial lifeforms and their unique biological processes."
+	display_name = "Ксенобиология"
+	description = "Изучение нечеловеческой биологии, раскрывающее секреты внеземных форм жизни и их уникальных биологических процессов."
 	prerequisite_nodes = list(/datum/techweb_node/cytology)
 	unlocked_designs = list(
 		/datum/design/board/xenobiocamera,
@@ -45,8 +45,8 @@
 	discount_experiments = list(/datum/experiment/scanning/cytology/slime = TECHWEB_TIER_3_POINTS)
 
 /datum/techweb_node/gene_engineering
-	display_name = "Gene Engineering"
-	description = "Research into sophisticated DNA manipulation techniques, enabling the modification of human genetic traits to unlock specific abilities and enhancements."
+	display_name = "Генная инженерия"
+	description = "Исследование сложных методов манипуляции с ДНК, позволяющих модифицировать человеческие генетические признаки для получения специфических способностей и улучшений."
 	prerequisite_nodes = list(/datum/techweb_node/selection, /datum/techweb_node/xenobiology)
 	unlocked_designs = list(
 		/datum/design/board/dnascanner,
@@ -63,8 +63,8 @@
 
 // Botany root node
 /datum/techweb_node/botany_equip
-	display_name = "Botany Equipment"
-	description = "Essential tools for maintaining onboard gardens, supporting plant growth in the unique environment of the space station."
+	display_name = "Ботаническое оборудование"
+	description = "Базовое оборудование для содержания бортовых садов, поддерживающее рост растений в уникальных условиях космической станции."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/board/seed_extractor,
@@ -77,8 +77,8 @@
 	)
 
 /datum/techweb_node/hydroponics
-	display_name = "Hydroponics"
-	description = "Research into advanced hydroponic systems for efficient and sustainable plant cultivation."
+	display_name = "Гидропоника"
+	description = "Исследование передовых гидропонных систем для эффективного и устойчивого культивирования растений."
 	prerequisite_nodes = list(/datum/techweb_node/botany_equip, /datum/techweb_node/chem_synthesis)
 	unlocked_designs = list(
 		/datum/design/board/biogenerator,
@@ -89,8 +89,8 @@
 	announce_channels = list(RADIO_CHANNEL_SERVICE)
 
 /datum/techweb_node/selection
-	display_name = "Artificial Selection"
-	description = "Advancement in plant cultivation techniques through artificial selection, enabling precise manipulation of plant DNA."
+	display_name = "Искусственный отбор"
+	description = "Развитие техник культивирования растений посредством искусственного отбора, позволяющее осуществлять точные манипуляции с растительной ДНК."
 	prerequisite_nodes = list(/datum/techweb_node/hydroponics)
 	unlocked_designs = list(
 		/datum/design/flora_gun,

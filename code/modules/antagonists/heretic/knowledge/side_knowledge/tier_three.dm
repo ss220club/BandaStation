@@ -1,13 +1,12 @@
 /*!
  * Tier 3 knowledge: Summons
  */
-
 /datum/heretic_knowledge/summon/rusty
-	name = "Rusted Ritual"
-	desc = "Summon a Rust Walker.<br>\
-		Rust Walkers excel at spreading rust and are moderately strong in combat."
-	transmute_text = "Transmute a pool of vomit, some cable coil, and 10 sheets of iron."
-	gain_text = "I combined my knowledge of creation with my desire for corruption. The Marshal knew my name, and the Rusted Hills echoed out."
+	name = "Ритуал Ржавчины"
+	desc = "Позволяет создать Ржавохода. \
+		Ржавоход превосходно распространяет ржавчину и умеренно силён в бою."
+	transmute_text = "Трансмутируйте лужу рвоты, 15 мотков кабеля и 10 листов железа."
+	gain_text = "Я объединил свои знания о созидании с моим стремлением к разрушению. Маршал знал моё имя, и Ржавые Холмы отозвались эхом."
 	required_atoms = list(
 		/obj/effect/decal/cleanable/vomit = 1,
 		/obj/item/stack/sheet/iron = 10,
@@ -19,13 +18,13 @@
 	drafting_tier = 3
 
 /datum/heretic_knowledge/summon/maid_in_mirror
-	name = "Maid in the Mirror"
-	desc = "Summon a Maid in the Mirror.<br>\
-		Maid in the Mirrors are decent combatants that can become incorporeal by phasing in and out of the mirror realm, \
-		serving as powerful scouts and ambushers. Their attacks also apply a stack of void chill."
-	transmute_text = "Transmute five sheets of glass, any suit, and a pair of lungs."
-	gain_text = "Within each reflection, lies a gateway into an unimaginable world of colors never seen and \
-		people never met. The ascent is glass, and the walls are knives. Each step is blood, if you do not have a guide."
+	name = "Горничная из Зазеркалья"
+	desc = "Позволяет создать горничную из Зазеркалья. \
+			Горничные из Зазеркалья сильные бойцы, способные становиться бестелесными, входя в Зазеркальное царство и выходя из него, они выполняют роль разведчиков и мастеров засад.\
+			Их атаки также накладывают Холод Пустоты."
+	transmute_text = "Трансмутируйте пять листов стекла, любой костюм и лёгкие."
+	gain_text = "В каждом отражении скрыты врата в невообразимый мир невиданных цветов и людей, что никогда не встречались.\
+			Подъём сделан из стекла, а стены - из ножей. И каждый шаг - это кровь, если у вас нет проводника."
 
 	required_atoms = list(
 		/obj/item/stack/sheet/glass = 5,
@@ -39,13 +38,13 @@
 	drafting_tier = 3
 
 /datum/heretic_knowledge/summon/ashy
-	name = "Ashen Ritual"
-	desc = "Summon an Ash Spirit.<br>\
-		Ash Spirits have a short range jaunt and the ability to cause bleeding in foes at range. \
-		They also have the ability to create a ring of fire around themselves for a length of time.<br>\
-		They have a low amount of health, but will passively recover given enough time to do so."
-	transmute_text = "Transmute a pool of ash, a book, and a bonfire."
-	gain_text = "I combined my principle of hunger with my desire for destruction. The Marshal knew my name, and the Nightwatcher gazed on."
+	name = "Пепельный ритуал"
+	desc = "Позволяет создать духа пепла. \
+		Духи пепла обладают рывком на короткую дистанцию и способны дистанционно вызывать кровотечение у врагов. \
+		Также они могут, на некоторое время, создать вокруг себя кольцо огня. \
+		И хотя их запас здоровья довольно мал, они могут пассивно восстанавливать его со временем."
+	transmute_text = "Трансмутируйте горсть пепла, книгу и костёр."
+	gain_text = "Я объединил свой голод с жаждой разрушения. Маршал знал моё имя, а Ночной Дозорный наблюдал за происходящим."
 	required_atoms = list(
 		/obj/effect/decal/cleanable/ash = 1,
 		/obj/item/book = 1,
@@ -61,14 +60,14 @@
 #define RISEN_MAX_HEALTH 125
 
 /datum/heretic_knowledge/limited_amount/risen_corpse
-	name = "Shattered Ritual"
-	desc = "Enchant a corpse into a Shattered Risen.<br>\
-		Shattered Risen are strong ghouls that have 125 health, but cannot hold items, \
-		instead having two brutal weapons for hands. You can only create one at a time."
-	transmute_text = "Transmute a corpse with a soul, a pair of latex or nitrile gloves."
-	gain_text = "I witnessed a cold, rending force drag this corpse back to near-life. \
-		When it moves, it crunches like broken glass. Its hands are no longer recognizable as human - \
-		each clenched fist contains a brutal nest of sharp bone-shards instead."
+	name = "Разбитый ритуал"
+	desc = "Позволяет создать Разбитого восставшего. \
+		Разбитые восставшие это сильные гули с 125 здоровья, но не могут держать предметы, \
+		вместо этого имеют в руках два жестоких оружия. Вы можете иметь только одного."
+	transmute_text = "Трансмутируйте труп с душой, пару латексных или нитриловых перчаток."
+	gain_text = "Я узрел как холодная, раздирающая сила вернула этот труп к полу-жизни. \
+		Движения хрустящие, как сломанное стекло. Руки больше не похожи на человеческие - \
+		в каждом сжатом кулаке жестокие гнезда острых костяных осколков."
 
 	required_atoms = list(
 		/obj/item/clothing/suit = 1,
@@ -89,33 +88,33 @@
 		if(body.stat != DEAD)
 			continue
 		if(!IS_VALID_GHOUL_MOB(body) || HAS_TRAIT(body, TRAIT_HUSK))
-			to_chat(user, span_hierophant_warning("[body] is not in a valid state to be made into a ghoul."))
+			to_chat(user, span_hierophant_warning("[capitalize(body.declent_ru(NOMINATIVE))] не в подходящем состоянии для превращения в гуля."))
 			continue
 		if(!body.mind)
-			to_chat(user, span_hierophant_warning("[body] is mindless and cannot be made into a ghoul."))
+			to_chat(user, span_hierophant_warning("[capitalize(body.declent_ru(NOMINATIVE))] не имеет разума и не может быть превращен в гуля."))
 			continue
 		if(!body.client && !body.mind.get_ghost(ghosts_with_clients = TRUE))
-			to_chat(user, span_hierophant_warning("[body] is soulless and cannot be made into a ghoul."))
+			to_chat(user, span_hierophant_warning("[capitalize(body.declent_ru(NOMINATIVE))] не имеет души и не может быть превращен в гуля."))
 			continue
 
 		// We will only accept valid bodies with a mind, or with a ghost connected that used to control the body
 		selected_atoms += body
 		return TRUE
 
-	loc.balloon_alert(user, "ritual failed, no valid body!")
+	loc.balloon_alert(user, "ритуал провален, нет подходящего тела!")
 	return FALSE
 
 /datum/heretic_knowledge/limited_amount/risen_corpse/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
 	var/mob/living/carbon/human/soon_to_be_ghoul = locate() in selected_atoms
 	if(QDELETED(soon_to_be_ghoul)) // No body? No ritual
 		stack_trace("[type] reached on_finished_recipe without a human in selected_atoms to make a ghoul out of.")
-		loc.balloon_alert(user, "ritual failed, no valid body!")
+		loc.balloon_alert(user, "ритуал провален, нет подходящего тела!")
 		return FALSE
 
 	soon_to_be_ghoul.grab_ghost()
 	if(!soon_to_be_ghoul.mind || !soon_to_be_ghoul.client)
 		stack_trace("[type] reached on_finished_recipe without a minded / cliented human in selected_atoms to make a ghoul out of.")
-		loc.balloon_alert(user, "ritual failed, no valid body!")
+		loc.balloon_alert(user, "ритуал провален, нет подходящего тела!")
 		return FALSE
 
 	selected_atoms -= soon_to_be_ghoul
@@ -151,7 +150,7 @@
 /// The "hand" "weapon" used by shattered risen
 /obj/item/mutant_hand/shattered_risen
 	name = "bone-shards"
-	desc = "What once appeared to be a normal human fist, now holds a mauled nest of sharp bone-shards."
+	desc = "То, что когда-то казалось обычным человеческим кулаком, теперь превратилось в гнездо острых костяных осколков."
 	color = "#001aff"
 	hitsound = SFX_SHATTER
 	force = 16
@@ -161,12 +160,12 @@
 	sharpness = SHARP_EDGED
 
 /datum/heretic_knowledge/summon/fire_shark
-	name = "Scorching Shark"
-	desc = "Summon a Fire Shark.<br>\
-		Fire Sharks are fast and strong in groups, but fragile to non-burning damage.<br>\
-		They also inject phlogiston on attack and spawn plasma on death."
-	transmute_text = "Transmute a pool of ash, a liver, and a sheet of plasma."
-	gain_text = "The cradle of the nebula was cold, but not dead. Light and heat flits even through the deepest darkness, and is hunted by its own predators."
+	name = "Пылающая акула"
+	desc = "Позволяет создать огненную акулу. \
+		Огненные акулы быстры и сильны в группах, но быстро погибают. Они также обладают высокой устойчивостью к огненным атакам. \
+		Огненные акулы впрыскивают флогистон в своих жертв и извергают плазму после своей смерти."
+	transmute_text = "Трансмутируйте горсть пепла, печень и лист плазмы."
+	gain_text = "Колыбель туманности была холодной, но не мертвой. Свет и тепло проникают даже в самую глубокую тьму, и за ними охотятся их собственные хищники."
 
 	required_atoms = list(
 		/obj/effect/decal/cleanable/ash = 1,
@@ -182,12 +181,12 @@
 	drafting_tier = 3
 
 /datum/heretic_knowledge/mad_mask
-	name = "Mask of Madness"
-	desc = "Create a Mask of Madness.<br>\
-		The mask instills fear into heathens who witness it, causing stamina damage, hallucinations, and insanity.<br>\
-		It can also be forced onto a heathen, to make them unable to take it off..."
-	transmute_text = "Transmute any mask, four lit candles, a stun baton, and a liver."
-	gain_text = "The Watch wore strange garb on duty. It allowed them to walk the city, seemingly unnoticed by the masses."
+	name = "Маска Безумия"
+	desc = "Создаёт Маску Безумия.<br>\
+		Маска вселяет страх в язычников, которые становятся ее свидетелями, вызывая у них потерю выносливости, галлюцинации и безумие.<br>\
+		Её также можно насильно надеть на язычника, чтобы он не смог ее снять..."
+	transmute_text = "Трансмутируйте любую маску, четыре зажжённые свечи, оглушающую дубинку и печень."
+	gain_text = "Дозор носил странные одежды на службе. Они позволяли ходить по городу, будто оставаясь незамеченными массами."
 	required_atoms = list(
 		/obj/item/organ/liver = 1,
 		/obj/item/melee/baton/security = 1,  // Technically means a cattleprod is valid
@@ -212,16 +211,16 @@
 		what.set_light_on(TRUE)
 
 /datum/heretic_knowledge/mansus_gate
-	name = "Keys to the Backdoor"
-	desc = "Open a backdoor to the Mansus.<br>\
-		Entering the container will transport you to the Mansus, granting you a safe haven to transmute or store equipment."
-	transmute_text = "Transmute a locker and a Codex Cicatrix or Codex Morbus."
-	notice = "Only willing individuals or the deceased can pass through the backdoor.\
-		<br>Attempting to perform a sacrifice so close to the gods may anger them.\
-		<br>You can only create one backdoor."
-	gain_text = "With any domain, its security is only as strong as its weakest point. \
-		The Codex speaks of backdoors to the Mansus - gates with shoddy chains, doors with brittle locks, trapdoors with rusted hinges. \
-		With the right key, I could easily exploit these."
+	name = "Ключи к чёрному ходу"
+	desc = "Открывает чёрный ход в Мансус.<br>\
+		Вход в контейнер перенесёт вас в Мансус, давая безопасное убежище для трансмутации или хранения снаряжения."
+	transmute_text = "Трансмутируйте шкаф и Кодекс Цикатрикс или Кодекс Морбус."
+	notice = "Только согласные или мёртвые могут пройти через чёрный ход.\
+		<br>Попытка провести жертвоприношение так близко к богам может разгневать их.\
+		<br>Вы можете создать только один чёрный ход."
+	gain_text = "В любой области безопасность сильна лишь настолько, насколько сильно её самое слабое место. \
+		Кодекс говорит о чёрных ходах в Мансус - вратах с дрянными цепями, дверях с хрупкими замками, люках с ржавыми петлями. \
+		С правильным ключом я легко смогу этим воспользоваться."
 	required_atoms = list(
 		/obj/structure/closet = 1,
 		list(/obj/item/codex_cicatrix, /obj/item/codex_cicatrix/morbus) = 1,
@@ -282,13 +281,13 @@
 		return CLOSET_TELEPORT_FORCED
 
 	if(isliving(sending_through) && !consents_to_entry(sending_through))
-		locker.balloon_alert(sending_through, "the door refuses you!")
+		locker.balloon_alert(sending_through, "дверь отвергает вас!")
 		return CLOSET_TELEPORT_BLOCKED
 
 	for(var/mob/living/entering in sending_through.get_all_contents())
 		if(!consents_to_entry(entering))
 			if(isliving(sending_through))
-				locker.balloon_alert(sending_through, "the door refuses you!")
+				locker.balloon_alert(sending_through, "дверь отвергает вас!")
 			return CLOSET_TELEPORT_BLOCKED
 
 	return CLOSET_TELEPORT_FORCED
@@ -342,7 +341,7 @@
 /area/centcom/heretic_backdoor/proc/greet_message(mob/living/arrived_mob)
 	if(QDELETED(arrived_mob) || get_area(arrived_mob) != src)
 		return
-	to_chat(arrived_mob, span_mansus("A hollow sun shines down from above."))
+	to_chat(arrived_mob, span_mansus("Пустое солнце сияет сверху."))
 
 /datum/movespeed_modifier/heretic_backdoor_slowdown
 	multiplicative_slowdown = 0.5

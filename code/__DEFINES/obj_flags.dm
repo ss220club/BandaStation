@@ -110,7 +110,11 @@
 /// Indicates that the piece of clothing contributes towards Sleeping Carp's style factor, which determines evasion probabilities. See /datums/martial/sleeping_carp/carp_style_check().
 #define CARP_STYLE_FACTOR (1<<16)
 /// Prevents clothing from losing bodyparts coverage when shredded
-#define NO_ZONE_DISABLING (1<<17)
+#define NO_ZONE_DISABLING (1<<18)
+// BANDASTATION ADDITION - START
+/// Does not leave fibers behind
+#define FIBERLESS_GLOVES (1<<19)
+// BANDASTATION ADDITION - END
 
 /// Integrity defines for clothing (not flags but close enough)
 #define CLOTHING_PRISTINE 0 // We have no damage on the clothing

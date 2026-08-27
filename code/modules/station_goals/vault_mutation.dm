@@ -2,8 +2,8 @@
 /datum/mutation/breathless
 	name = "Breathless"
 	desc = "The subject's skin filters and absorbs oxygen from the air, removing the need to breathe."
-	text_gain_indication = span_notice("Your lungs feel great.")
-	text_lose_indication = span_warning("Your lungs feel normal again.")
+	text_gain_indication = span_notice("Ваши лёгкие чувствуют себя прекрасно.")
+	text_lose_indication = span_warning("Ваши лёгкие чувствуют себя как обычно.")
 	locked = TRUE
 
 /datum/mutation/breathless/on_acquiring(mob/living/carbon/human/acquirer)
@@ -16,9 +16,9 @@
 
 /datum/mutation/quick
 	name = "Quick"
-	desc = "The subject's leg muscles strengthen, allowing for faster movement."
-	text_gain_indication = span_notice("Your legs feel faster and stronger.")
-	text_lose_indication = span_warning("Your legs feel weaker and slower.")
+	desc = "Мутация мышц ног, которая позволяет субъекту передвигаться быстрее, чем обычно."
+	text_gain_indication = span_notice("Ваши ноги становятся сильнее и быстрее.")
+	text_lose_indication = span_warning("Ваши ноги становятся слабее и медленнее.")
 	locked = TRUE
 
 /datum/mutation/quick/on_acquiring(mob/living/carbon/human/acquirer)
@@ -32,8 +32,8 @@
 /datum/mutation/tough
 	name = "Tough"
 	desc = "The subject gains another layer of epidermis which is more resistant to bruise, cut, or tear."
-	text_gain_indication = span_notice("Your skin feels tougher.")
-	text_lose_indication = span_warning("Your skin feels weaker.")
+	text_gain_indication = span_notice("Ваша коже крепнет.")
+	text_lose_indication = span_warning("Ваша кожа снова нормальная.")
 	locked = TRUE
 
 /datum/mutation/tough/on_acquiring(mob/living/carbon/human/acquirer)
@@ -49,8 +49,8 @@
 /datum/mutation/dextrous
 	name = "Dextrous"
 	desc = "The subject's neurons move faster, allowing for more responsive and quicker action."
-	text_gain_indication = span_notice("Your limbs feel more dextrous and responsive.")
-	text_lose_indication = span_warning("Your limbs feel less dextrous and responsive.")
+	text_gain_indication = span_notice("Ваши конечности чувствуются более ловкими и отзывчивыми.")
+	text_lose_indication = span_warning("Ваши конечности чувствуются не такими ловкими и отзывчивыми.")
 	locked = TRUE
 
 /datum/mutation/dextrous/on_acquiring(mob/living/carbon/human/acquirer)
@@ -64,8 +64,8 @@
 /datum/mutation/fire_immunity
 	name = "Fire Immunity"
 	desc = "The subject becomes completely nonflammable and can withstand higher temperatures."
-	text_gain_indication = span_notice("Your body feels like it can withstand fire.")
-	text_lose_indication = span_warning("Your body feels vulnerable to fire again.")
+	text_gain_indication = span_notice("Вы чувствуете, что ваше тело может противостоять огню.")
+	text_lose_indication = span_warning("Вы чувствуете, что ваше тело уязвимо для огня.")
 	locked = TRUE
 
 /datum/mutation/fire_immunity/on_acquiring(mob/living/carbon/human/acquirer)
@@ -81,8 +81,8 @@
 /datum/mutation/quick_recovery
 	name = "Quick Recovery"
 	desc = "The subject has fewer nerve endings, allowing them to recover from incapacitation faster."
-	text_gain_indication = span_notice("You feel like you can recover from a fall easier.")
-	text_lose_indication = span_warning("You feel like recovering from a fall is a challenge again.")
+	text_gain_indication = span_notice("Вы чувствуете, что вам легче оправиться от падения.")
+	text_lose_indication = span_warning("Вы чувствуете, что восстановление после падения снова является тяжёлой задачей.")
 	locked = TRUE
 
 /datum/mutation/quick_recovery/on_acquiring(mob/living/carbon/human/acquirer)
@@ -96,8 +96,8 @@
 /datum/mutation/plasmocile
 	name = "Plasmocile"
 	desc = "The subject's lungs mutate, gaining immunity to viral agents and the toxic nature of plasma."
-	text_gain_indication = span_notice("Your lungs feel resistant to airborne contaminant.")
-	text_lose_indication = span_warning("Your lungs feel vulnerable to airborne contaminant again.")
+	text_gain_indication = span_notice("Вы чувствуете, что ваши лёгкие более устойчивы к загрязнениям в воздухе.")
+	text_lose_indication = span_warning("Вы чувствуете, что ваши лёгкие менее устойчивы к загрязнениям в воздухе.")
 	locked = TRUE
 
 /datum/mutation/plasmocile/on_acquiring(mob/living/carbon/human/acquirer)

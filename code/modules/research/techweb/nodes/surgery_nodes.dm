@@ -1,6 +1,6 @@
 /datum/techweb_node/oldstation_surgery
-	display_name = "Experimental Dissection"
-	description = "Grants access to experimental dissections, which allows generation of research points."
+	display_name = "Экспериментальное вскрытие"
+	description = "Предоставляет доступ к экспериментальным вскрытиям, что позволяет создавать исследовательские очки."
 	prerequisite_nodes = list(/datum/techweb_node/medbay_equip)
 	unlocked_designs = list(
 		/datum/design/surgery/experimental_dissection,
@@ -9,8 +9,8 @@
 	node_flags = TECHWEB_NODE_HIDDEN
 
 /datum/techweb_node/surgery
-	display_name = "Improved Wound-Tending"
-	description = "Who would have known being more gentle with a hemostat decreases patient pain?"
+	display_name = "Улучшенный уход за ранами"
+	description = "Проведённые исследования демонстрируют, что использование щадящих манипуляций гемостатическим зажимом способствует значительному снижению боли у пациента."
 	prerequisite_nodes = list(/datum/techweb_node/medbay_equip)
 	unlocked_designs = list(
 		/datum/design/surgery/tend_wounds_upgrade,
@@ -20,8 +20,8 @@
 	announce_channels = list(RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/surgery_adv
-	display_name = "Advanced Surgery"
-	description = "When simple medicine doesn't cut it."
+	display_name = "Продвинутая хирургия"
+	description = "Применение специализированных методик в случаях, когда стандартные хирургические протоколы признаны недостаточно эффективными или неприменимыми."
 	prerequisite_nodes = list(/datum/techweb_node/surgery)
 	unlocked_designs = list(
 		/datum/design/board/harvester,
@@ -37,8 +37,8 @@
 	announce_channels = list(RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/surgery_exp
-	display_name = "Experimental Surgery"
-	description = "When evolution isn't fast enough."
+	display_name = "Экспериментальная хирургия"
+	description = "Отрасль хирургии, тестирующая радикальные и нестандартные методики оперативного вмешательства. Процедуры направлены на модификацию глубоких структур организма для достижения специфических и зачастую уникальных функциональных изменений."
 	prerequisite_nodes = list(/datum/techweb_node/surgery_adv)
 	unlocked_designs = list(
 		/datum/design/medibot_upgrade/tier_three,
@@ -68,8 +68,8 @@
 	announce_channels = list(RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/surgery_tools
-	display_name = "Advanced Surgery Tools"
-	description = "Surgical instruments of dual purpose for quick operations."
+	display_name = "Продвинутые хирургические инструменты"
+	description = "Передовые хирургические инструменты для более быстрых хирургических операций и более удобного использования."
 	prerequisite_nodes = list(/datum/techweb_node/surgery_exp)
 	unlocked_designs = list(
 		/datum/design/laserscalpel,

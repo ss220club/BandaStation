@@ -3,12 +3,12 @@
  */
 
 /datum/heretic_knowledge/void_cloak
-	name = "Void Cloak"
-	desc = "Fashion a Void Cloak.<br>While the hood is down, protects you from space. \
-		While the hood is up, the cloak is completely invisible.<br>It also provide decent armor and \
-		has pockets which can hold one of your blades, various ritual components (such as organs), and small heretical trinkets."
-	transmute_text = "Transmute a glass shard, a bedsheet, and any outer clothing item (such as armor or a suit jacket)."
-	gain_text = "The Owl is the keeper of things that are not quite in practice, but in theory are. Many things are."
+	name = "Накидка Пустоты"
+	desc = "Позволяет создать накидку Пустоты. Пока капюшон опущен, накидка защищает вас от космоса и действует как фокусировка. \
+		Когда капюшон поднят, плащ полностью невидим. Он также обеспечивает неплохую броню и \
+		имеет карманы, в которые можно поместить один из ваших клинков, различные ритуальные компоненты (например, органы) и небольшие еретические безделушки."
+	transmute_text = "Трансмутируйте осколок стекла, простыню и любую верхнюю одежду (например броню или костюм)."
+	gain_text = "Сова хранит то, что не обрело формы в действительности, но уже существует в теории. А таких сущностей немало."
 	required_atoms = list(
 		/obj/item/shard = 1,
 		/obj/item/clothing/suit = 1,
@@ -21,11 +21,11 @@
 	drafting_tier = 1
 
 /datum/heretic_knowledge/medallion
-	name = "Ashen Eyes"
-	desc = "Sculpt an Eldritch Medallion.<br>\
-		The Eldritch Medallion grants you thermal vision while worn."
-	transmute_text = "Transmute a pair of eyes, a candle, and a glass shard."
-	gain_text = "Piercing eyes guided them through the mundane. Neither darkness nor terror could stop them."
+	name = "Пепельные глаза"
+	desc = "Позволяет создать Потусторонний медальон. \
+		При ношении Потусторонний медальон дает термальное зрение, а также работает как фокусировка."
+	transmute_text = "Трансмутируйте глаза, свечу и осколок стекла."
+	gain_text = "Пронзительный взгляд вёл их сквозь обыденность. Ни темнота, ни ужас не могли их остановить."
 	required_atoms = list(
 		/obj/item/organ/eyes = 1,
 		/obj/item/shard = 1,
@@ -38,12 +38,12 @@
 	drafting_tier = 1
 
 /datum/heretic_knowledge/essence // AKA Eldritch Flask
-	name = "Priest's Ritual"
-	desc = "Fill a flask of Eldritch Essence.<br>\
-		Eldritch Essence can be consumed for potent healing, or given to heathens for deadly poisoning."
-	transmute_text = "Transmute a tank of water and a glass shard."
-	gain_text = "This is an old recipe. The Owl whispered it to me. \
-		Created by the Priest - the Liquid that both was and is not."
+	name = "Священный ритуал"
+	desc = "Позволяет создать флягу Потусторонней эссенции. \
+		Потустороннюю эссенцию можно употреблять для мощного исцеления или дать язычникам, для смертельного отравления"
+	transmute_text = "Трансмутируйте ёмкость с водой и осколок стекла."
+	gain_text = "Это наш старый рецепт. Нашептала мне Сова. \
+		Созданная Жрецом - жидкость, которая существовала и нет одновременно."
 	required_atoms = list(
 		/obj/structure/reagent_dispensers/watertank = 1,
 		/obj/item/shard = 1,
@@ -55,11 +55,12 @@
 	drafting_tier = 1
 
 /datum/heretic_knowledge/phylactery
-	name = "Phylactery of Damnation"
-	desc = "Create a Phylactery that can instantly draw blood, even from long distances."
-	transmute_text = "Transmute a sheet of glass and a poppy."
-	gain_text = "A tincture twisted into the shape of a bloodsucker vermin. \
-		Whether it chose the shape for itself, or this is the humor of the sickened mind that conjured this vile implement into being is something best not pondered."
+	name = "Филактерия проклятия"
+	desc = "Позволяет создать филактерию, способную мгновенно вытягивать кровь, даже на большой дистанции. \
+		Имейте в виду, что ваша цель все еще может почувствовать укол."
+	transmute_text = "Трансмутируйте лист стекла и мак."
+	gain_text = "Настойка, извращённая в форму кровососущего паразита. \
+		Выбрала ли она этот облик сама, или же это - шутка больного разума, породившего этот мерзкий артефакт, - вопрос, над которым лучше не задумываться."
 	required_atoms = list(
 		/obj/item/stack/sheet/glass = 1,
 		/obj/item/food/grown/flower/poppy = 1,
@@ -69,18 +70,15 @@
 	research_tree_icon_path = 'icons/obj/antags/eldritch.dmi'
 	research_tree_icon_state = "phylactery_2"
 	drafting_tier = 1
-	notice = "Target of the Phylactery may feel a prick."
+	notice = "Цель филактерии может почувствовать укол."
 
 /datum/heretic_knowledge/crucible
-	name = "Mawed Crucible"
-	desc = "Create a Mawed Crucible.<br>\
-		The Mawed Crucible can brew powerful but temporary potions for combat and utility, but must be fed bodyparts and organs between uses. \
-		<br>&bull; Brew of the Crucible Soul: Allows you to walk through walls. Returns you to the place you consumed the potion after it expires. \
-		<br>&bull; Brew of Dusk and Dawn: Allows you to see through walls. \
-		<br>&bull; Brew of the Wounded Soldier: Heals you over time. The more severe your wounds (such as fractures or cuts), the faster it heals you."
-	transmute_text = "Transmute a portable water tank and a table."
-	gain_text = "This is pure agony. I wasn't able to summon the figure of the Aristocrat, \
-		but with the Priest's attention I stumbled upon a different recipe..."
+	name = "Зубастый тигель"
+	desc = "Позволяет создать Зубастый тигель. \
+		Зубастый Тигель открывает возможность варить могущественные зелья, как для боя, так и общего назначения, однако между использованиями его нужно подкармливать органами, или частями тела."
+	transmute_text = "Трансмутируйте переносной бак с водой и стол."
+	gain_text = "Это чистейшая агония. Мне не удалось призвать образ Аристократа, \
+		но, привлёкши внимание Жреца, я наткнулся на иной рецепт…"
 	required_atoms = list(
 		/obj/structure/reagent_dispensers/watertank = 1,
 		/obj/structure/table = 1,
@@ -92,12 +90,12 @@
 	drafting_tier = 1
 
 /datum/heretic_knowledge/eldritch_coin
-	name = "Eldritch Coin"
-	desc = "Create an Eldritch Coin.<br>\
-		Flip the coin. On heads, nearby airlocks will open or close. On tails, nearby airlocks will bolt to their current state.<br>\
-		If you insert the coin into an airlock, it will be consumed to fry its electronics, keeping it open or closed permanently until repaired."
-	transmute_text = "Transmute a sheet of plasma and a diamond."
-	gain_text = "The Mansus is a place of all sorts of sins. But greed held a special role."
+	name = "Потусторонняя монета"
+	desc = "Позволяет создать Потустороннюю монету \
+		Монета откроет или закроет ближайшие двери если выпадет орёл, и заболтирует их, если выпадет решка. \
+		Если вставить монету в шлюз, она сожжет его плату, оставив шлюз открытым, если он не болтирован."
+	transmute_text = "Трансмутируйте лист плазмы и алмаз."
+	gain_text = "Мансус - место для всех видов греха. Но алчность занимает в нём особое место."
 	required_atoms = list(
 		/obj/item/stack/sheet/mineral/diamond = 1,
 		/obj/item/stack/sheet/mineral/plasma = 1,
@@ -115,13 +113,13 @@
  * Overall, it's a tradeoff between speed and stealth or power.
  */
 /datum/heretic_knowledge/codex_cicatrix
-	name = "Codex Cicatrix"
-	desc = "Author the Codex Cicatrix.<br>\
-		The Codex Cicatrix can be used when draining influences to gain additional knowledge, but comes at greater risk of being noticed.<br>\
-		It can also be used to draw and remove transmutation runes easier, and can be opened to restore charges to your Mansus Grasp."
-	transmute_text = "Transmute a book, any pen, and your pick from any carcass (animal or human), leather"
-	gain_text = "The occult leaves fragments of knowledge and power anywhere and everywhere. The Codex Cicatrix is one such example. \
-		Within the leather-bound faces and age old pages, a path into the Mansus is revealed."
+	name = "Кодекс Цикатрикс"
+	desc = "Позволяет создать кодекс Цикатрикс. \
+		Кодекс Цикатрикс можно использовать при извлечении влияний для получения дополнительных знаний, но при этом возрастает риск быть замеченным. \
+		Его также можно использовать для того, чтобы легче рисовать и удалять руны трансмутации, и использоваться в качестве фокусировки"
+	transmute_text = "Трансмутируйте книгу, любую ручку, любое тело (животного или человека) и шкуру или кожу."
+	gain_text = "Оккультизм оставляет фрагменты знаний и силы везде и всюду. Кодекс Цикатрикс - один из таких примеров. \
+		В кожаном переплете и на старых страницах открывается путь к Мансусу."
 	required_atoms = list(
 		list(/obj/item/toy/eldritch_book, /obj/item/book) = 1,
 		/obj/item/pen = 1,
@@ -188,7 +186,7 @@
 		stack_trace("Somehow, no book in codex cicatrix selected atoms! [english_list(selected_atoms)]")
 	playsound(body, 'sound/items/poster/poster_ripped.ogg', 100, TRUE)
 	body.do_jitter_animation()
-	body.visible_message(span_danger("An awful ripping sound is heard as [ripped_thing]'s [exterior_text] is ripped straight out, wrapping around [le_book || "the book"], turning into an eldritch shade of blue!"))
+	body.visible_message(span_danger("Ужасный рвущийся звук раздается, когда [ripped_thing.declent_ru(ACCUSATIVE)] [exterior_text] вырывается наружу, обволакивая всё вокруг [le_book || "книги"], приобретая жуткий, потусторонний оттенок!"))
 	return ..()
 
 /**
@@ -197,14 +195,14 @@
  * Additionally changes all nearby airlock's access's to ACCESS_HERETIC
  */
 /datum/heretic_knowledge/bookworm
-	name = "Warren King's Welcome"
-	desc = "Brand all present ID cards and nearby airlocks.<br>\
-		Branded ID cards will gain access to maintenance, external airlocks, as well to branded airlocks.<br>\
-		Branded airlocks will only be accessible by those with a branded ID card."
-	transmute_text = "Transmute 10 cable pieces, a piece of paper, and a multitool."
-	gain_text = "Gnawed into vicious-stained fingerbones, my grim invitation snaps my nauseous and clouded mind towards the heavy-set door. \
-		Slowly, the light dances between a crawling darkness, blanketing the fetid promenade with infinite machinations. \
-		But the King will soon take his pound of flesh. Even here, the taxman takes their cut. For there are a thousands mouths to feed."
+	name = "Приветствие Уоррена Кинга"
+	desc = "Позволяет заклеймить ближайшие ID-карты и шлюзы. \
+		Заклеймленные ID-карты получат доступ к техническим тоннелям и внешним шлюзам. \
+		Заклеймленные шлюзы будут доступны только для тех, кто имеет заклеймленную ID-карту."
+	transmute_text = "Трансмутируйте 10 обрезков провода, лист бумаги и мультитул."
+	gain_text = "Впившееся в осквернённые жестокостью кости пальцев, моё мрачное приглашение рывком обращает мой мутный, подташнивающий разум к массивной двери. \
+		Свет медленно пляшет в ползущей тьме, укрывая зловонный променад бесконечными кознями. \
+		Но Король скоро получит свой фунт плоти. Даже здесь налоговик требует свою долю. Ибо есть тысяча ртов, ждущих пищи."
 	required_atoms = list(
 		/obj/item/stack/cable_coil = 10,
 		/obj/item/paper = 1,
@@ -245,12 +243,12 @@
  * Allows the heretic to craft a spell focus, which passively regenerates some spell charges
  */
 /datum/heretic_knowledge/amber_focus
-	name = "Amber Focus"
-	desc = "Sculpts an Amber Focus.<br>\
-		Recharges some spell charges every few minutes while worn, barring some exceptional spells."
-	transmute_text = "Transmute a sheet of glass and a pair of eyes."
-	gain_text = "I felt lost and directionless. Everything that I tried to grasp, slipped through my fingers. \
-		I needed something to hold onto, something to focus on, to keep me from straying too far from the path."
+	name = "Янтарная фокусировка"
+	desc = "Создаёт Янтарную фокусировку.<br>\
+		Пока она надета, каждые несколько минут восстанавливает часть зарядов заклинаний, кроме некоторых особых заклинаний."
+	transmute_text = "Трансмутируйте лист стекла и пару глаз."
+	gain_text = "Я чувствовал себя потерянным и лишенным направления. Всё, за что я пытался ухватиться, ускользало сквозь пальцы. \
+		Мне нужно было что-то, за что можно держаться, на чём можно сосредоточиться, чтобы не уйти слишком далеко с пути."
 	required_atoms = list(
 		/obj/item/organ/eyes = 1,
 		/obj/item/stack/sheet/glass = 1,
@@ -262,13 +260,13 @@
 	research_tree_icon_state = "eldritch_necklace"
 
 /datum/heretic_knowledge/miraculous_mirror
-	name = "Miraculous Mirror"
-	desc = "Craft a Miraculous Mirror.<br>\
-		The Miraculous Mirror allows you to freely change any aspect of your appearance. \
-		You can also use it to change your species, but doing so will cause the mirror to shatter in the process."
-	transmute_text = "Transmute five bars of silver and a pair of organic eyes."
-	gain_text = "I was imperfect, weak. How could I achieve such great things in such a sorry state? \
-		Every window I passed by, I saw a reflection of myself, and every time I did, I felt a burning desire to change, to be better, to start anew."
+	name = "Чудесное зеркало"
+	desc = "Создаёт Чудесное зеркало.<br>\
+		Чудесное зеркало позволяет свободно менять любой аспект вашей внешности. \
+		Также его можно использовать для смены вида, но в процессе зеркало разобьётся."
+	transmute_text = "Трансмутируйте пять слитков серебра и пару органических глаз."
+	gain_text = "Я был несовершенен, слаб. Как я мог достичь столь великого в таком жалком состоянии? \
+		В каждом окне я видел своё отражение, и каждый раз во мне вспыхивало желание измениться, стать лучше, начать заново."
 	required_atoms = list(
 		/obj/item/organ/eyes = 1,
 		/obj/item/stack/sheet/mineral/silver = 5,
@@ -288,10 +286,10 @@
 			atoms -= eye
 
 /datum/heretic_knowledge/spell/cloak_of_shadows
-	name = "Cloak of Shadow"
-	desc = "Grants you the spell Cloak of Shadow.<br>\
-		This spell will completely conceal your identity in a purple smoke for three minutes, assisting you in keeping secrecy."
-	notice = "Can only be cast if you have a Living Heart."
+	name = "Покров Тени"
+	desc = "Дарует вам заклинание «Покров Тени».<br>\
+		Это заклинание полностью скрывает вашу личность в фиолетовом дыму на три минуты, помогая сохранять тайну."
+	notice = "Можно произнести только при наличии Живого сердца."
 	action_to_add = /datum/action/cooldown/spell/shadow_cloak
 	cost = 1
 	drafting_tier = 1
@@ -304,5 +302,5 @@
 		return ..()
 
 	if(feedback)
-		to_chat(the_spell.owner, span_mansus("You need a Living Heart to cast [the_spell]!"))
+		to_chat(the_spell.owner, span_mansus("Вам нужно Живое сердце, чтобы произнести [the_spell]!"))
 	return SPELL_CANCEL_CAST

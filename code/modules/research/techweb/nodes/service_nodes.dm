@@ -1,6 +1,6 @@
 /datum/techweb_node/office_equip
-	display_name = "Office Equipment"
-	description = "Nanotrasen's finest in ergonomic office tech, ensuring station admin stays productive and compliant with corporate policies — because even in space, paperwork never stops."
+	display_name = "Офисное оборудование"
+	description = "Передовые разработки Нанотрейзен в области эргономичных офисных технологий, обеспечивающие продуктивность и соответствие корпоративной политике. Даже в космосе документооборот не прекращается."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/board/fax,
@@ -42,8 +42,8 @@
 	)
 
 /datum/techweb_node/sanitation
-	display_name = "Advanced Sanitation Technology"
-	description = "Nanotrasen's latest in janitorial tech, making sure the station stays spotless and bear-free."
+	display_name = "Продвинутые санитарные технологии"
+	description = "Новейшие разработки Нанотрейзен в области клининговых технологий, обеспечивающие безупречную чистоту станции и отсутствие медведей."
 	prerequisite_nodes = list(/datum/techweb_node/office_equip)
 	unlocked_designs = list(
 		/datum/design/advmop,
@@ -60,8 +60,8 @@
 	announce_channels = list(RADIO_CHANNEL_SERVICE)
 
 /datum/techweb_node/consoles
-	display_name = "Civilian Consoles"
-	description = "User-friendly consoles for non-technical crew members, enhancing communication and access to essential station information."
+	display_name = "Гражданские консоли"
+	description = "Пользовательские консоли для нетехнического персонала, улучшающие коммуникацию и доступ к основной информации станции."
 	prerequisite_nodes = list(/datum/techweb_node/office_equip)
 	unlocked_designs = list(
 		/datum/design/board/comconsole,
@@ -100,8 +100,8 @@
 		unlocked_designs += /datum/design/telescreen_monastery
 
 /datum/techweb_node/gaming
-	display_name = "Gaming"
-	description = "For the slackers on the station."
+	display_name = "Гейминг"
+	description = "Изучение игровых автоматов для бездельников станции."
 	prerequisite_nodes = list(/datum/techweb_node/consoles)
 	unlocked_designs = list(
 		/datum/design/board/arcade_battle,
@@ -113,8 +113,8 @@
 
 // Kitchen root node
 /datum/techweb_node/cafeteria_equip
-	display_name = "Cafeteria Equipment"
-	description = "When standard-issue tubed food no longer satisfies the station crew's appetite..."
+	display_name = "Оборудование для кафетерия"
+	description = "Разработка оборудования для организации питания экипажа после отказа от тюбиковой еды."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/board/griddle,
@@ -142,8 +142,8 @@
 	)
 
 /datum/techweb_node/food_proc
-	display_name = "Food Processing"
-	description = "Top-tier kitchen appliances from Nanotrasen, designed to keep the crew well-fed and happy."
+	display_name = "Пищевая промышленность"
+	description = "Высококлассное кухонное оборудование Нанотрейзен, предназначенное для обеспечения сытости и удовлетворенности экипажа."
 	prerequisite_nodes = list(/datum/techweb_node/cafeteria_equip)
 	unlocked_designs = list(
 		/datum/design/board/deepfryer,
@@ -167,8 +167,8 @@
 
 // Fishing root node
 /datum/techweb_node/fishing_equip
-	display_name = "Fishing Equipment"
-	description = "Basic fishing gear tailored for space station environments, perfect for extraterrestrial aquatic pursuits."
+	display_name = "Рыболовные снасти"
+	description = "Базовое рыболовное снаряжение, адаптированное для условий космической станции, идеально подходящее для внеземных водных промыслов."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/board/fishing_portal_generator,
@@ -178,8 +178,8 @@
 	)
 
 /datum/techweb_node/fishing_equip_adv
-	display_name = "Advanced Fishing Tools"
-	description = "Continuing advancements in fishing technology, incorporating cutting-edge features in space fishing operations. Just don't try this on space carps..."
+	display_name = "Продвинутые рыболовные снасти"
+	description = "Дальнейшее развитие рыболовных технологий с использованием передовых решений для космического рыболовства. Использование на космических карпах строго не рекомендуется."
 	prerequisite_nodes = list(/datum/techweb_node/fishing_equip)
 	unlocked_designs = list(
 		/datum/design/fishing_rod_tech,
@@ -195,8 +195,8 @@
 	required_experiments = list(/datum/experiment/scanning/fish)
 
 /datum/techweb_node/marine_util
-	display_name = "Marine Utility"
-	description = "Fish are nice to look at and all, but they can be put to use."
+	display_name = "Польза моря"
+	description = "На рыбу приятно смотреть, но её можно и использовать с пользой."
 	prerequisite_nodes = list(/datum/techweb_node/fishing_equip_adv)
 	unlocked_designs = list(
 		/datum/design/bioelec_gen,

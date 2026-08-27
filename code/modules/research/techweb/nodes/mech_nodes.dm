@@ -1,6 +1,6 @@
 /datum/techweb_node/mech_assembly
-	display_name = "Exosuit Assembly"
-	description = "Development of mechanical exosuits designed to contend with artificial gravity while transporting cargo."
+	display_name = "Сборка экзоскелета"
+	description = "Разработка механических экзоскелетов, предназначенных для борьбы с искусственной гравитацией при транспортировке грузов."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	prerequisite_nodes = list(/datum/techweb_node/robotics)
 	unlocked_designs = list(
@@ -18,8 +18,8 @@
 	)
 
 /datum/techweb_node/mech_equipment
-	display_name = "Expedition Equipment"
-	description = "Specialized exosuit gear tailored for navigating space and celestial bodies, ensuring durability and functionality in the harshest conditions."
+	display_name = "Экспедиционное снаряжение"
+	description = "Оборудование экзоскелета, предназначенные для навигации в космосе и на небесных телах, обеспечивают долговечность и функциональность в самых суровых условиях."
 	prerequisite_nodes = list(/datum/techweb_node/mech_assembly)
 	unlocked_designs = list(
 		/datum/design/board/mechacontrol,
@@ -37,8 +37,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mech_clown
-	display_name = "Funny Robots"
-	description = "Fueled by laughter."
+	display_name = "Смешные роботы"
+	description = "Заправлено смехом."
 	prerequisite_nodes = list(/datum/techweb_node/mech_assembly)
 	unlocked_designs = list(
 		/datum/design/honk_chassis,
@@ -61,8 +61,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_SECURITY) //The dread upon security when they hear this...
 
 /datum/techweb_node/mech_medical
-	display_name = "Medical Exosuit"
-	description = "Advanced robotic unit equipped with syringe guns and healing beams, revolutionizing medical assistance in hazardous environments."
+	display_name = "Медицинский экзоскелет"
+	description = "Передовой экзоскелет, оснащенный шприцемётом и лечебным лучом. Революция в оказании медицинской помощи в опасных условиях."
 	prerequisite_nodes = list(/datum/techweb_node/mech_assembly, /datum/techweb_node/chem_synthesis)
 	unlocked_designs = list(
 		/datum/design/odysseus_chassis,
@@ -80,8 +80,8 @@
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_2_POINTS)
 
 /datum/techweb_node/mech_mining
-	display_name = "Mining Exosuit"
-	description = "Robust exosuit engineered to withstand lava and storms for continuous off-station mining operations."
+	display_name = "Шахтёрский экзоскелет"
+	description = "Прочный экзоскелет, спроектированный таким образом, чтобы выдерживать лаву и штормы при непрерывной добыче полезных ископаемых за пределами станции."
 	prerequisite_nodes = list(/datum/techweb_node/mech_equipment, /datum/techweb_node/mining)
 	unlocked_designs = list(
 		/datum/design/clarke_chassis,
@@ -97,8 +97,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_SUPPLY)
 
 /datum/techweb_node/mech_combat
-	display_name = "Combat Exosuits"
-	description = "Modular armor upgrades and specialized equipment for security exosuits."
+	display_name = "Боевые экзоскелеты"
+	description = "Модульная модернизация брони и специализированное оборудование для боевых экзоскелетов."
 	prerequisite_nodes = list(/datum/techweb_node/mech_equipment)
 	unlocked_designs = list(
 		/datum/design/mech_ccw_armor,
@@ -114,8 +114,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mech_assault
-	display_name = "Assault Exosuits"
-	description = "Heavy battle exosuits boasting robust armor but sacrificing speed for enhanced durability."
+	display_name = "Штурмовые экзоскелеты"
+	description = "Тяжелый боевой экзоскелет, обладающий прочной бронёй, но жертвующий скоростью ради повышенной прочности."
 	prerequisite_nodes = list(/datum/techweb_node/mech_combat)
 	unlocked_designs = list(
 		/datum/design/durand_armor,
@@ -134,8 +134,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mech_light
-	display_name = "Light Combat Exosuits"
-	description = "Agile combat exosuits equipped with overclocking capabilities for temporary speed boosts, prioritizing speed over durability on the battlefield."
+	display_name = "Легкие боевые экзоскелеты"
+	description = "Манёвренный боевой экзоскелет, оснащённый возможностью разгона для временного увеличения скорости, отдаёт предпочтение скорости на поле боя, а не прочности."
 	prerequisite_nodes = list(/datum/techweb_node/mech_combat)
 	unlocked_designs = list(
 		/datum/design/gygax_armor,
@@ -154,8 +154,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mech_heavy
-	display_name = "Heavy Exosuits"
-	description = "Advanced heavy mechanized unit with dual pilot capability, designed for robust battlefield performance and increased tactical versatility."
+	display_name = "Тяжёлые экзоскелеты"
+	description = "Продвинутая тяжелая механизированная единица с возможностью двойного пилотирования, разработанное для надёжной работы на поле боя и повышенной тактической универсальности."
 	prerequisite_nodes = list(/datum/techweb_node/mech_assault)
 	unlocked_designs = list(
 		/datum/design/savannah_ivanov_armor,
@@ -174,8 +174,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mech_infiltrator
-	display_name = "Infiltration Exosuits"
-	description = "Advanced exosuit with phasing capabilities, allowing it to move through walls and obstacles, ideal for covert and special operations."
+	display_name = "Инфильтрационные экзоскелеты"
+	description = "Продвинутый экзоскелет с фазирующими возможностями, позволяющий ему проходить сквозь стены и препятствия, идеально подходит для тайных и специальных операций."
 	prerequisite_nodes = list(/datum/techweb_node/mech_light, /datum/techweb_node/anomaly_research)
 	unlocked_designs = list(
 		/datum/design/phazon_armor,
@@ -194,8 +194,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mech_energy_guns
-	display_name = "Exosuit Energy Guns"
-	description = "Scaled-up versions of electric weapons optimized for exosuit deployment."
+	display_name = "Энергетическое оружие экзоскелета"
+	description = "Увеличенные версии энергетического оружия, оптимизированные для использования в экзоскелетах."
 	prerequisite_nodes = list(/datum/techweb_node/mech_combat, /datum/techweb_node/electric_weapons)
 	unlocked_designs = list(
 		/datum/design/mech_laser,
@@ -208,8 +208,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mech_firearms
-	display_name = "Exosuit Firearms"
-	description = "Mounted ballistic weaponry, enhancing combat capabilities for mechanized units."
+	display_name = "Огнестрельное оружие экзоскелета"
+	description = "Навесное баллистическое вооружение, повышающее боевые возможности экзоскелетов."
 	prerequisite_nodes = list(/datum/techweb_node/mech_energy_guns, /datum/techweb_node/exotic_ammo)
 	unlocked_designs = list(
 		/datum/design/mech_lmg,
@@ -223,8 +223,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mech_heavy_arms
-	display_name = "Heavy Exosuit Firearms"
-	description = "High-impact weaponry integrated into mechs, optimized for maximum firepower."
+	display_name = "Тяжёлое вооружение экзоскелета"
+	description = "Мощное вооружение, интегрированное в экзоскелетах и оптимизированное для достижения максимальной огневой мощи."
 	prerequisite_nodes = list(/datum/techweb_node/mech_heavy, /datum/techweb_node/exotic_ammo)
 	unlocked_designs = list(
 		/datum/design/clusterbang_launcher,
@@ -238,8 +238,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mech_equip_bluespace
-	display_name = "Bluespace Exosuit Equipment"
-	description = "An array of equipment empowered by bluespace, providing unmatched mobility and utility."
+	display_name = "Блюспейс оборудование для экзоскелета"
+	description = "Широкий спектр оборудования, оснащенное блюспейс технологиями, обеспечивает непревзойденную мобильность и практичность."
 	prerequisite_nodes = list(/datum/techweb_node/mech_infiltrator, /datum/techweb_node/bluespace_travel)
 	unlocked_designs = list(
 		/datum/design/mech_gravcatapult,

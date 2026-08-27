@@ -1,6 +1,6 @@
 /datum/techweb_node/basic_arms
-	display_name = "Basic Arms"
-	description = "Ballistics can be unpredictable in space."
+	display_name = "Базовая амуниция"
+	description = "Базовое исследование баллистических боеприпасов."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/toy_armblade,
@@ -19,8 +19,8 @@
 	)
 
 /datum/techweb_node/sec_equip
-	display_name = "Security Equipment"
-	description = "All the essentials to subdue a mime."
+	display_name = "Оборудование службы безопасности"
+	description = "Базовое снаряжение службы безопасности для того, чтобы поддерживать порядок."
 	prerequisite_nodes = list(/datum/techweb_node/basic_arms)
 	unlocked_designs = list(
 		/datum/design/board/secdata,
@@ -44,8 +44,8 @@
 
 
 /datum/techweb_node/riot_supression
-	display_name = "Riot Supression"
-	description = "When you are on the opposing side of a revolutionary movement."
+	display_name = "Подавление беспорядков"
+	description = "Разработка и внедрение специализированного оборудования для нейтрализации массовых беспорядков и противодействия особо опасным нарушителям."
 	prerequisite_nodes = list(/datum/techweb_node/sec_equip)
 	unlocked_designs = list(
 		/datum/design/clown_firing_pin,
@@ -60,8 +60,8 @@
 	announce_channels = list(RADIO_CHANNEL_SECURITY)
 
 /datum/techweb_node/explosives
-	display_name = "Explosives"
-	description = "For once, intentional explosions."
+	display_name = "Взрывчатка"
+	description = "Разработка и стандартизация корпусов для взрывных устройств контролируемого действия."
 	prerequisite_nodes = list(/datum/techweb_node/riot_supression)
 	unlocked_designs = list(
 		/datum/design/large_grenade,
@@ -73,8 +73,8 @@
 	announce_channels = list(RADIO_CHANNEL_SECURITY, RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/exotic_ammo
-	display_name = "Exotic Ammunition"
-	description = "Specialized bullets designed to ignite, freeze, and inflict various other effects on targets, expanding combat capabilities."
+	display_name = "Экзотические боеприпасы"
+	description = "Разработка и производство специализированных боеприпасов. Боеприпасы предназначены для оказания целевого воздействия на цель, значительно расширяя тактические возможности подразделений."
 	prerequisite_nodes = list(/datum/techweb_node/explosives)
 	unlocked_designs = list(
 		/datum/design/c38_hotshot,
@@ -93,8 +93,8 @@
 	announce_channels = list(RADIO_CHANNEL_SECURITY)
 
 /datum/techweb_node/electric_weapons
-	display_name = "Electric Weaponry"
-	description = "Energy-based weaponry designed for both lethal and non-lethal applications."
+	display_name = "Электрическое оружие"
+	description = "Разработка лучевого оружия двойного назначения для летального и нелетального применения."
 	prerequisite_nodes = list(/datum/techweb_node/riot_supression)
 	unlocked_designs = list(
 		/datum/design/stunrevolver,
@@ -106,8 +106,8 @@
 	announce_channels = list(RADIO_CHANNEL_SECURITY)
 
 /datum/techweb_node/beam_weapons
-	display_name = "Advanced Beam Weaponry"
-	description = "So advanced, even engineers are baffled by its operational principles."
+	display_name = "Продвинутое лучевое оружие"
+	description = "Разработка лучевого оружия, использующего принципы, выходящие за рамки стандартных инженерных протоколов"
 	prerequisite_nodes = list(/datum/techweb_node/electric_weapons)
 	unlocked_designs = list(
 		/datum/design/xray,
