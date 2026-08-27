@@ -273,7 +273,7 @@
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/redspace_demon/devourer,
 		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/nearest,
-		BB_TARGET_MINIMUM_STAT = HARD_CRIT,
+		BB_TARGET_MINIMUM_STAT = SOFT_CRIT,
 	)
 
 /datum/ai_controller/basic_controller/simple/redspace_demon/ranged

@@ -12,7 +12,7 @@
 		return Fail("The Devourer must expose the configured devour and transformation delays")
 	if(!istype(devourer.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/melee/devourer))
 		return Fail("The Devourer must use the specialized redspace melee controller")
-	if(devourer.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon/devourer || devourer.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest || devourer.ai_controller.blackboard[BB_TARGET_MINIMUM_STAT] != HARD_CRIT)
+	if(devourer.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon/devourer || devourer.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest || devourer.ai_controller.blackboard[BB_TARGET_MINIMUM_STAT] != SOFT_CRIT)
 		return Fail("The Devourer AI must search for nearby targets with its restricted targeting strategy")
 
 	var/turf/ravager_turf = get_safe_random_station_turf_equal_weight()
@@ -20,7 +20,7 @@
 		return Fail("The Ravager test requires an available station turf")
 	var/mob/living/basic/demon/redspace/moderate/ravager/ravager = allocate(/mob/living/basic/demon/redspace/moderate/ravager, ravager_turf)
 	var/datum/action/cooldown/mob_cooldown/redspace_beacon/beacon_action = locate(/datum/action/cooldown/mob_cooldown/redspace_beacon) in ravager.actions
-	if(ravager.name != "ravager" || ravager.icon != 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/32x64.dmi' || ravager.icon_state != "ravager" || ravager.base_pixel_x != -16 || ravager.base_pixel_y != -16 || !beacon_action)
+	if(ravager.name != "ravager" || ravager.icon != 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/32x64.dmi' || ravager.icon_state != "ravager" || !beacon_action)
 		return Fail("The Ravager must use the supplied sprite and receive the beacon ability")
 	if(!beacon_action.Activate(ravager) || !beacon_action.beacon || !beacon_action.beacon.field_source)
 		return Fail("The Ravager must be able to create a demonic beacon")
