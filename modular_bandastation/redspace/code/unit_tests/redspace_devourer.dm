@@ -81,6 +81,19 @@
 	transformed.ckey = null
 	qdel(transformed)
 
+	var/mob/living/basic/demon/redspace/devourer/minotaur_devourer = allocate(/mob/living/basic/demon/redspace/devourer)
+	var/mob/living/carbon/human/minotaur_victim = allocate(/mob/living/carbon/human)
+	minotaur_victim.mind_initialize()
+	ADD_TRAIT(minotaur_victim, TRAIT_INCAPACITATED, REF(src))
+	if(!minotaur_devourer.capture_victim(minotaur_victim))
+		return Fail("The Devourer must be able to capture a victim for minotaur transformation")
+	var/mob/living/basic/demon/redspace/moderate/minotaur/minotaur_transformed = minotaur_devourer.transform_with_minotaur()
+	if(!minotaur_transformed || QDELETED(minotaur_transformed) || minotaur_transformed.icon_state != "minotaur")
+		if(minotaur_transformed)
+			qdel(minotaur_transformed)
+		return Fail("Transformation must create a Minotaur with AI when no player responds")
+	qdel(minotaur_transformed)
+
 	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer/devourer_event = new
 	if(devourer_event.event_id != "demonic_devourer" || devourer_event.profile_id != REDSPACE_PROFILE_DEMONIC || devourer_event.spawn_type != /mob/living/basic/demon/redspace/devourer || !devourer_event.automatic || devourer_event.weight != 1 || devourer_event.get_spawn_budget_cost() != 3 || devourer_event.spawn_policy_id != "demonic_devourer")
 		return Fail("The Devourer must expose the configured automatic spawn event metadata")

@@ -303,6 +303,7 @@
 	name = "Удар по земле"
 	desc = "Ударяет по земле, нанося урон и сбивая с ног ближайших врагов."
 	cooldown_time = 12 SECONDS
+	shared_cooldown = NONE
 	range = 2
 	delay = 0
 	var/damage = 20
@@ -335,6 +336,7 @@
 #define REDSPACE_RAVAGER_TRANSFORMATION_RETRY_DELAY (60 SECONDS)
 #define REDSPACE_RAVAGER_POLL_TIME (20 SECONDS)
 #define REDSPACE_RAVAGER_MOVEMENT_CHECK_DELAY (1 SECONDS)
+#define REDSPACE_RAVAGER_MAX_POLL_ATTEMPTS 3
 
 /// A destructible hotspot created by a Ravager.
 /obj/structure/redspace/demonic_beacon
@@ -384,6 +386,7 @@
 	button_icon_state = "demonic_crystal"
 	click_to_activate = FALSE
 	cooldown_time = REDSPACE_RAVAGER_BEACON_COOLDOWN
+	shared_cooldown = NONE
 	melee_cooldown_time = 0
 	cooldown_rounding = 1
 	var/obj/structure/redspace/demonic_beacon/beacon
@@ -564,6 +567,8 @@
 	var/transformation_timer_id
 	/// Prevents overlapping ghost polls while a captured victim is waiting to transform.
 	var/transformation_in_progress = FALSE
+	/// Tracks how many times we've polled for a player to control the ravager.
+	var/poll_attempts = 0
 	/// Destination the Devourer is walking toward before transformation.
 	var/turf/transformation_target
 	/// Temporary pathfinding movement used while carrying the victim.
@@ -657,6 +662,7 @@
 	transformation_timer_id = null
 	stop_transformation_movement()
 	transformation_in_progress = FALSE
+	poll_attempts = 0
 	devour_in_progress = FALSE
 	ai_controller?.clear_forced_off()
 
@@ -735,6 +741,11 @@
 		release_victim()
 		return
 
+	poll_attempts++
+	if(poll_attempts > REDSPACE_RAVAGER_MAX_POLL_ATTEMPTS)
+		transform_with_minotaur()
+		return
+
 	var/mob/dead/observer/chosen_ghost = SSpolling.poll_ghosts_for_target(
 		question = "Вы хотите сыграть за [span_notice("опустошителя")], выползающего из [span_danger(declent_ru(ACCUSATIVE))]?",
 		role = ROLE_SENTIENCE,
@@ -786,6 +797,45 @@
 	victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
 	transformation_in_progress = FALSE
 	transformed.PossessByPlayer(ghost_key)
+	transform_turf.visible_message(span_warning("Из [declent_ru(GENITIVE)] выползает [transformed.declent_ru(NOMINATIVE)]!"))
+	new /obj/effect/temp_visual/circle_wave(transform_turf, "#ff3b20")
+	playsound(transform_turf, 'sound/effects/magic/teleport_app.ogg', 75, TRUE)
+
+	if(SSredspace)
+		for(var/datum/redspace_event/spawn/event as anything in SSredspace.active_events)
+			if(src in event.spawned_atoms)
+				event.replace_spawned_atom(src, transformed)
+				break
+
+	qdel(victim)
+	qdel(src)
+	return transformed
+
+/mob/living/basic/demon/redspace/devourer/proc/transform_with_minotaur()
+	if(!can_transform_with_victim())
+		release_victim()
+		return
+
+	transformation_timer_id = null
+	var/mob/living/carbon/human/victim = stored_victim
+	if(!can_transform_with_victim())
+		release_victim()
+		return
+
+	var/turf/transform_turf = get_turf(src)
+	if(!transform_turf)
+		release_victim()
+		return
+
+	var/mob/living/basic/demon/redspace/moderate/minotaur/transformed = new(transform_turf)
+	if(!transformed || QDELETED(transformed))
+		release_victim()
+		return
+
+	stored_victim = null
+	UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+	victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+	transformation_in_progress = FALSE
 	transform_turf.visible_message(span_warning("Из [declent_ru(GENITIVE)] выползает [transformed.declent_ru(NOMINATIVE)]!"))
 	new /obj/effect/temp_visual/circle_wave(transform_turf, "#ff3b20")
 	playsound(transform_turf, 'sound/effects/magic/teleport_app.ogg', 75, TRUE)
