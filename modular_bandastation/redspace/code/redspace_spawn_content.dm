@@ -543,12 +543,13 @@
 	var/summon_type = /mob/living/basic/demon/redspace
 	/// Summoned demons that are still alive, used for the per-type limits.
 	var/list/summoned_demons = list()
-	/// Typepath -> (limit, icon, icon_state) for the radial summon menu.
+	/// Typepath -> (limit, icon, icon_state, pixel_x, pixel_y) for the radial summon menu.
 	var/static/list/summon_options = list(
 		/mob/living/basic/demon/redspace = list(3, 'modular_bandastation/redspace/icons/mob/demonic/lesser_demons.dmi', "demon_melee"),
 		/mob/living/basic/demon/redspace/ranged = list(2, 'modular_bandastation/redspace/icons/mob/demonic/lesser_demons.dmi', "demon_ranged"),
 		/mob/living/basic/demon/redspace/soldier = list(1, 'modular_bandastation/redspace/icons/mob/demonic/lesser_demons.dmi', "demon_soldier"),
-		/mob/living/basic/demon/redspace/devourer = list(1, 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi', "Devourer"),
+		// Radial icons are appearances rather than mobs, so copy the Devourer's oversized-mob offsets.
+		/mob/living/basic/demon/redspace/devourer = list(1, 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi', "Devourer", -16, -10),
 	)
 
 /datum/action/cooldown/mob_cooldown/redspace_summon/Activate(atom/target)
@@ -560,7 +561,10 @@
 		if(get_summoned_count(summon_path) >= summon_options[summon_path][1])
 			continue
 		var/list/options = summon_options[summon_path]
-		choices[summon_path] = image(options[2], options[3])
+		var/image/choice_icon = image(options[2], options[3])
+		choice_icon.pixel_x = LAZYACCESS(options, 4) || 0
+		choice_icon.pixel_y = LAZYACCESS(options, 5) || 0
+		choices[summon_path] = choice_icon
 	if(!length(choices))
 		owner.balloon_alert(owner, "все демоны уже призваны")
 		return FALSE
@@ -587,6 +591,7 @@
 	if(active_profile)
 		active_profile.play_mob_spawn_telegraph(telegraph_turf)
 
+	var/poll_started_at = world.time
 	var/mob/dead/observer/chosen_ghost = SSpolling.poll_ghosts_for_target(
 		question = "Вы хотите сыграть за [span_notice("призванного демона")], явившегося на зов [span_danger(summoner.declent_ru(GENITIVE))]?",
 		role = ROLE_SENTIENCE,
@@ -599,6 +604,9 @@
 		role_name_text = "summoned demon",
 		chat_text_border_icon = summon_type,
 	)
+	var/poll_time_remaining = REDSPACE_SUMMON_POLL_TIME - (world.time - poll_started_at)
+	if(poll_time_remaining > 0)
+		sleep(poll_time_remaining)
 	if(QDELETED(src) || QDELETED(owner) || owner.stat == DEAD)
 		return
 

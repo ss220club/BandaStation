@@ -18,6 +18,9 @@
 	for(var/summon_path in expected_limits)
 		if(!summon_action.summon_options[summon_path] || summon_action.summon_options[summon_path][1] != expected_limits[summon_path])
 			return Fail("The summon menu must expose the configured demon limits")
+	var/list/devourer_option = summon_action.summon_options[/mob/living/basic/demon/redspace/devourer]
+	if(devourer_option[4] != -16 || devourer_option[5] != -10)
+		return Fail("The Devourer radial icon must mirror its oversized mob offsets")
 
 	summon_action.summon_type = /mob/living/basic/demon/redspace
 	var/mob/living/basic/demon/redspace/summoned_demon = summon_action.spawn_summoned_demon(get_turf(ravager))
