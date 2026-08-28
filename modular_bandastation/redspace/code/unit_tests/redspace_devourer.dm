@@ -12,8 +12,8 @@
 		return Fail("The Devourer must expose the configured devour and transformation delays")
 	if(!istype(devourer.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/melee/devourer))
 		return Fail("The Devourer must use the specialized redspace melee controller")
-	if(devourer.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon/devourer || devourer.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest/redspace_demon || devourer.ai_controller.blackboard[BB_TARGET_MINIMUM_STAT] != SOFT_CRIT)
-		return Fail("The Devourer AI must search for nearby targets with its restricted targeting strategy")
+	if(devourer.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon/devourer || devourer.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest/redspace_demon || devourer.ai_controller.blackboard[BB_TARGET_MINIMUM_STAT] != HARD_CRIT)
+		return Fail("The Devourer AI must search for nearby targets with its restricted targeting strategy and keep living crit victims valid so it can consume them")
 
 	var/turf/ravager_turf = get_safe_random_station_turf_equal_weight()
 	if(!ravager_turf)
@@ -43,6 +43,12 @@
 	conscious.mind_initialize()
 	if(!targeting.is_valid_target(devourer, conscious, 9) || redspace_devourer_can_consume(conscious))
 		return Fail("The Devourer must target conscious humans but only consume incapacitated ones")
+
+	var/mob/living/carbon/human/hard_crit = allocate(/mob/living/carbon/human)
+	hard_crit.mind_initialize()
+	hard_crit.stat = HARD_CRIT
+	if(!targeting.is_valid_target(devourer, hard_crit, 9) || !targeting.can_keep_target(devourer, hard_crit, 16) || !redspace_devourer_can_consume(hard_crit))
+		return Fail("The Devourer must keep and consume living hard-crit humans so a failed devour attempt can be retried")
 
 	var/mob/living/carbon/human/mindless = allocate(/mob/living/carbon/human)
 	ADD_TRAIT(mindless, TRAIT_INCAPACITATED, REF(src))
@@ -78,6 +84,15 @@
 			transformed.ckey = null
 			qdel(transformed)
 		return Fail("Transformation must create a Ravager controlled by the selected ghost")
+	if(QDELETED(transform_victim) || transform_victim.loc != transformed || transformed.stored_victim != transform_victim || !HAS_TRAIT(transform_victim, TRAIT_STASIS))
+		transformed.ckey = null
+		qdel(transformed)
+		return Fail("Transformation must carry the victim inside the new demon instead of deleting it")
+	transformed.release_stored_victim()
+	if(transformed.stored_victim || transform_victim.loc == transformed || HAS_TRAIT(transform_victim, TRAIT_STASIS))
+		transformed.ckey = null
+		qdel(transformed)
+		return Fail("Releasing the transformed demon's victim must end containment and stasis")
 	transformed.ckey = null
 	qdel(transformed)
 
@@ -92,6 +107,9 @@
 		if(minotaur_transformed)
 			qdel(minotaur_transformed)
 		return Fail("Transformation must create a Minotaur with AI when no player responds")
+	if(QDELETED(minotaur_victim) || minotaur_victim.loc != minotaur_transformed || minotaur_transformed.stored_victim != minotaur_victim)
+		qdel(minotaur_transformed)
+		return Fail("Minotaur transformation must also carry the victim inside the new demon")
 	qdel(minotaur_transformed)
 
 	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer/devourer_event = new

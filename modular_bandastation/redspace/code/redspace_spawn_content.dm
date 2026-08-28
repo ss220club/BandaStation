@@ -303,6 +303,8 @@
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/redspace_demon,
 		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/nearest/redspace_demon,
+		// Demons disengage as soon as a target enters crit, leaving the victim alive for a Devourer.
+		BB_TARGET_MINIMUM_STAT = STABLE,
 	)
 
 /datum/ai_controller/basic_controller/simple/redspace_demon/melee
@@ -312,7 +314,8 @@
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/redspace_demon/devourer,
 		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/nearest/redspace_demon,
-		BB_TARGET_MINIMUM_STAT = SOFT_CRIT,
+		// The Devourer must keep crit victims valid so it can consume them; only corpses are excluded.
+		BB_TARGET_MINIMUM_STAT = HARD_CRIT,
 	)
 
 /datum/ai_controller/basic_controller/simple/redspace_demon/ranged
@@ -521,10 +524,62 @@
 	melee_damage_lower = 20
 	melee_damage_upper = 28
 
+#define REDSPACE_DEVOURER_STASIS "redspace_devourer_stasis"
+
 /mob/living/basic/demon/redspace/moderate
 	redspace_max_energy = 200
 	redspace_drain_percent = 5
 	redspace_zero_energy_damage_percent = 0.5
+	/// The victim carried inside this demon since the Devourer transformation.
+	var/mob/living/carbon/human/stored_victim
+
+/// Moves a stasised victim inside this demon. The body is desecrated and possessed, not digested.
+/mob/living/basic/demon/redspace/moderate/proc/contain_victim(mob/living/carbon/human/victim)
+	if(stored_victim || !victim || QDELETED(victim))
+		return FALSE
+	victim.apply_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+	if(!victim.forceMove(src))
+		victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+		return FALSE
+	stored_victim = victim
+	RegisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+	return TRUE
+
+/// Drops the carried victim back into the world, ending its stasis.
+/mob/living/basic/demon/redspace/moderate/proc/release_stored_victim()
+	var/mob/living/carbon/human/victim = stored_victim
+	stored_victim = null
+	if(!victim || QDELETED(victim))
+		return
+	UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+	victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+	if(victim.loc == src)
+		victim.forceMove(get_turf(src))
+
+/mob/living/basic/demon/redspace/moderate/proc/on_stored_victim_deleted(mob/living/carbon/human/victim)
+	SIGNAL_HANDLER
+	if(victim == stored_victim)
+		stored_victim = null
+
+/mob/living/basic/demon/redspace/moderate/death(gibbed)
+	var/mob/living/carbon/human/victim = stored_victim
+	if(victim && !QDELETED(victim) && victim.loc == src)
+		visible_message(span_warning("Из [declent_ru(GENITIVE)] выпадает [victim.declent_ru(NOMINATIVE)]!"))
+	. = ..()
+	release_stored_victim()
+
+/mob/living/basic/demon/redspace/moderate/Exited(atom/movable/gone, direction)
+	. = ..()
+	if(gone != stored_victim)
+		return
+	stored_victim = null
+	UnregisterSignal(gone, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+	var/mob/living/carbon/human/victim = gone
+	victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+
+/mob/living/basic/demon/redspace/moderate/Destroy()
+	release_stored_victim()
+	return ..()
 
 /mob/living/basic/demon/redspace/moderate/minotaur
 	name = "minotaur"
@@ -567,8 +622,6 @@
 	var/datum/action/cooldown/mob_cooldown/redspace_beacon/beacon_action = new(src)
 	beacon_action.Grant(src)
 
-#define REDSPACE_DEVOURER_STASIS "redspace_devourer_stasis"
-
 /// A slow demon that hides an incapacitated player before a Ravager crawls out.
 /mob/living/basic/demon/redspace/devourer
 	name = "demonic devourer"
@@ -584,8 +637,6 @@
 	health = 250
 	melee_damage_lower = 20
 	melee_damage_upper = 28
-	base_pixel_x = -16
-	base_pixel_y = -16
 	attack_vis_effect = ATTACK_EFFECT_BITE
 	status_flags = NONE
 	move_force = MOVE_FORCE_OVERPOWERING
@@ -612,6 +663,11 @@
 	var/turf/transformation_target
 	/// Temporary pathfinding movement used while carrying the victim.
 	var/datum/ai_movement/jps/transformation_movement
+
+/mob/living/basic/demon/redspace/devourer/Initialize(mapload)
+	base_pixel_x = -16
+	base_pixel_y = -10
+	return ..()
 
 /mob/living/basic/demon/redspace/devourer/early_melee_attack(atom/target, list/modifiers, ignore_cooldown)
 	. = ..()
@@ -833,7 +889,6 @@
 
 	stored_victim = null
 	UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
-	victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
 	transformation_in_progress = FALSE
 	transformed.PossessByPlayer(ghost_key)
 	transform_turf.visible_message(span_warning("Из [declent_ru(GENITIVE)] выползает [transformed.declent_ru(NOMINATIVE)]!"))
@@ -846,7 +901,11 @@
 				event.replace_spawned_atom(src, transformed)
 				break
 
-	qdel(victim)
+	// The victim's body is desecrated and possessed, not digested: it stays inside the new demon.
+	if(!transformed.contain_victim(victim))
+		victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+		victim.forceMove(transform_turf)
+
 	qdel(src)
 	return transformed
 
@@ -873,7 +932,6 @@
 
 	stored_victim = null
 	UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
-	victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
 	transformation_in_progress = FALSE
 	transform_turf.visible_message(span_warning("Из [declent_ru(GENITIVE)] выползает [transformed.declent_ru(NOMINATIVE)]!"))
 	new /obj/effect/temp_visual/circle_wave(transform_turf, "#ff3b20")
@@ -885,7 +943,11 @@
 				event.replace_spawned_atom(src, transformed)
 				break
 
-	qdel(victim)
+	// The victim's body is desecrated and possessed, not digested: it stays inside the new demon.
+	if(!transformed.contain_victim(victim))
+		victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+		victim.forceMove(transform_turf)
+
 	qdel(src)
 	return transformed
 
