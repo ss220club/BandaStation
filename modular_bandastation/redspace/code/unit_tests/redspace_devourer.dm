@@ -22,13 +22,24 @@
 	var/datum/action/cooldown/mob_cooldown/redspace_beacon/beacon_action = locate(/datum/action/cooldown/mob_cooldown/redspace_beacon) in ravager.actions
 	if(ravager.name != "ravager" || ravager.icon != 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/32x64.dmi' || ravager.icon_state != "ravager" || !beacon_action)
 		return Fail("The Ravager must use the supplied sprite and receive the beacon ability")
-	if(!beacon_action.Activate(ravager) || !beacon_action.beacon || !beacon_action.beacon.field_source)
+	if(beacon_action.button_icon_state != "demonic_beacon" || beacon_action.cooldown_time < 60 SECONDS)
+		return Fail("The beacon ability must use the beacon sprite and a long cooldown")
+	if(!beacon_action.Activate(ravager) || length(beacon_action.beacons) != 1 || !beacon_action.beacons[1]?.field_source)
 		return Fail("The Ravager must be able to create a demonic beacon")
-	var/source_id = beacon_action.beacon.field_source.source_id
-	if(beacon_action.beacon.field_source.strength != 7 || beacon_action.beacon.field_source.radius != REDSPACE_HEX_RADIUS || SSredspace.field_sources["[source_id]"] != beacon_action.beacon.field_source)
+	var/obj/structure/redspace/demonic_beacon/first_beacon = beacon_action.beacons[1]
+	var/source_id = first_beacon.field_source.source_id
+	if(first_beacon.field_source.strength != 7 || first_beacon.field_source.radius != REDSPACE_HEX_RADIUS || SSredspace.field_sources["[source_id]"] != first_beacon.field_source)
 		return Fail("The demonic beacon must register a seven-point one-hex hotspot")
-	qdel(beacon_action.beacon)
-	if(beacon_action.beacon || SSredspace.field_sources["[source_id]"])
+	if(first_beacon.icon_state != "demonic_beacon")
+		return Fail("The demonic beacon must use the beacon sprite")
+	beacon_action.next_use_time = 0
+	if(!beacon_action.Activate(ravager) || length(beacon_action.beacons) != 2)
+		return Fail("The Ravager must be able to place multiple demonic beacons")
+	qdel(beacon_action.beacons[2])
+	if(length(beacon_action.beacons) != 1)
+		return Fail("Destroying one beacon must leave the rest tracked")
+	qdel(first_beacon)
+	if(length(beacon_action.beacons) || SSredspace.field_sources["[source_id]"])
 		return Fail("Destroying the demonic beacon must remove its redspace hotspot")
 
 	var/mob/living/carbon/human/incapacitated = allocate(/mob/living/carbon/human)
@@ -52,8 +63,8 @@
 
 	var/mob/living/carbon/human/mindless = allocate(/mob/living/carbon/human)
 	ADD_TRAIT(mindless, TRAIT_INCAPACITATED, REF(src))
-	if(redspace_devourer_can_consume(mindless))
-		return Fail("The Devourer must not target incapacitated humans without a mind")
+	if(!targeting.is_valid_target(devourer, mindless, 9) || !redspace_devourer_can_consume(mindless))
+		return Fail("The Devourer must devour every humanoid, including those without a mind")
 
 	var/mob/living/carbon/human/dead = allocate(/mob/living/carbon/human)
 	dead.mind_initialize()
@@ -111,6 +122,24 @@
 		qdel(minotaur_transformed)
 		return Fail("Minotaur transformation must also carry the victim inside the new demon")
 	qdel(minotaur_transformed)
+
+	var/mob/living/basic/demon/redspace/devourer/player_devourer = allocate(/mob/living/basic/demon/redspace/devourer)
+	var/mob/living/carbon/human/player_victim = allocate(/mob/living/carbon/human)
+	player_victim.mind_initialize()
+	ADD_TRAIT(player_victim, TRAIT_INCAPACITATED, REF(src))
+	if(!player_devourer.capture_victim(player_victim))
+		return Fail("The Devourer must be able to capture a victim before a player transformation")
+	player_devourer.ckey = "redspace_test_player"
+	var/turf/player_transform_turf = get_turf(player_devourer)
+	player_devourer.begin_transformation()
+	var/mob/living/basic/demon/redspace/moderate/ravager/player_ravager = locate(/mob/living/basic/demon/redspace/moderate/ravager) in player_transform_turf
+	if(!player_ravager || QDELETED(player_ravager) || player_ravager.ckey != ckey("redspace_test_player") || player_ravager.stored_victim != player_victim)
+		if(player_ravager && !QDELETED(player_ravager))
+			player_ravager.ckey = null
+			qdel(player_ravager)
+		return Fail("A player-controlled Devourer must become the Ravager themselves")
+	player_ravager.ckey = null
+	qdel(player_ravager)
 
 	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer/devourer_event = new
 	if(devourer_event.event_id != "demonic_devourer" || devourer_event.profile_id != REDSPACE_PROFILE_DEMONIC || devourer_event.spawn_type != /mob/living/basic/demon/redspace/devourer || !devourer_event.automatic || devourer_event.weight != 1 || devourer_event.get_spawn_budget_cost() != 3 || devourer_event.spawn_policy_id != "demonic_devourer")

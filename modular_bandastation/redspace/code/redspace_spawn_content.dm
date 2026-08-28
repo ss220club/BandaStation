@@ -24,12 +24,12 @@
 /datum/targeting_strategy/basic/redspace_demon/retained
 	ignore_sight = TRUE
 
-/// Returns TRUE when a player-controlled human is alive and can be attacked.
+/// Returns TRUE when a humanoid is alive and can be attacked, regardless of whether it has a mind.
 /proc/redspace_devourer_can_target(atom/target)
 	if(!ishuman(target))
 		return FALSE
 	var/mob/living/carbon/human/human_target = target
-	if(QDELETED(human_target) || human_target.stat == DEAD || !human_target.mind)
+	if(QDELETED(human_target) || human_target.stat == DEAD)
 		return FALSE
 	return TRUE
 
@@ -344,6 +344,8 @@
 /datum/action/cooldown/mob_cooldown/ground_slam/redspace
 	name = "Удар по земле"
 	desc = "Ударяет по земле, нанося урон и сбивая с ног ближайших врагов."
+	button_icon = 'modular_bandastation/redspace/icons/abilities/demonic_abilities.dmi'
+	button_icon_state = "stomp"
 	cooldown_time = 12 SECONDS
 	shared_cooldown = NONE
 	range = 2
@@ -374,18 +376,20 @@
 #define REDSPACE_RAVAGER_BEACON_STRENGTH 7
 /// Redspace source radii are measured in tiles; this is one complete redspace hex.
 #define REDSPACE_RAVAGER_BEACON_RADIUS REDSPACE_HEX_RADIUS
-#define REDSPACE_RAVAGER_BEACON_COOLDOWN (60 SECONDS)
+#define REDSPACE_RAVAGER_BEACON_COOLDOWN (90 SECONDS)
 #define REDSPACE_RAVAGER_TRANSFORMATION_RETRY_DELAY (60 SECONDS)
 #define REDSPACE_RAVAGER_POLL_TIME (20 SECONDS)
 #define REDSPACE_RAVAGER_MOVEMENT_CHECK_DELAY (1 SECONDS)
 #define REDSPACE_RAVAGER_MAX_POLL_ATTEMPTS 3
+#define REDSPACE_SUMMON_COOLDOWN (90 SECONDS)
+#define REDSPACE_SUMMON_POLL_TIME (10 SECONDS)
 
 /// A destructible hotspot created by a Ravager.
 /obj/structure/redspace/demonic_beacon
 	name = "demonic beacon"
 	desc = "A crimson beacon that distorts the redspace around it."
 	icon = 'modular_bandastation/redspace/icons/obj/demon_objs.dmi'
-	icon_state = "demonic_crystal"
+	icon_state = "demonic_beacon"
 	anchored = TRUE
 	density = FALSE
 	max_integrity = 100
@@ -420,26 +424,24 @@
 			qdel(source)
 	return ..()
 
-/// Places one persistent redspace hotspot at the Ravager's feet.
+/// Places persistent redspace hotspots at the Ravager's feet.
 /datum/action/cooldown/mob_cooldown/redspace_beacon
 	name = "Demonic Beacon"
-	desc = "Place a beacon that creates a one-hex redspace disturbance."
+	desc = "Воплощает демонический маяк, позволяя расширять область влияния демонической реальности."
 	button_icon = 'modular_bandastation/redspace/icons/obj/demon_objs.dmi'
-	button_icon_state = "demonic_crystal"
+	button_icon_state = "demonic_beacon"
 	click_to_activate = FALSE
 	cooldown_time = REDSPACE_RAVAGER_BEACON_COOLDOWN
 	shared_cooldown = NONE
 	melee_cooldown_time = 0
 	cooldown_rounding = 1
-	var/obj/structure/redspace/demonic_beacon/beacon
+	/// All beacons placed by this Ravager.
+	var/list/beacons = list()
 
 /datum/action/cooldown/mob_cooldown/redspace_beacon/Activate(atom/target)
 	var/turf/beacon_turf = get_turf(owner)
 	if(!beacon_turf || beacon_turf.density || !SSredspace?.is_supported_z(beacon_turf.z))
 		owner.balloon_alert(owner, "здесь нельзя установить маяк")
-		return FALSE
-	if(beacon && !QDELETED(beacon))
-		owner.balloon_alert(owner, "маяк уже установлен")
 		return FALSE
 
 	var/obj/structure/redspace/demonic_beacon/new_beacon = new(beacon_turf)
@@ -449,8 +451,8 @@
 		owner.balloon_alert(owner, "не удалось установить маяк")
 		return FALSE
 
-	beacon = new_beacon
-	RegisterSignal(beacon, COMSIG_QDELETING, PROC_REF(on_beacon_deleted))
+	beacons += new_beacon
+	RegisterSignal(new_beacon, COMSIG_QDELETING, PROC_REF(on_beacon_deleted))
 	owner.visible_message(span_warning("[capitalize(owner.declent_ru(NOMINATIVE))] устанавливает демонический маяк."))
 	to_chat(owner, span_notice("Демонический маяк создаёт возмущение редспейса вокруг себя."))
 	StartCooldown()
@@ -458,12 +460,143 @@
 
 /datum/action/cooldown/mob_cooldown/redspace_beacon/proc/on_beacon_deleted(obj/structure/redspace/demonic_beacon/deleted_beacon)
 	SIGNAL_HANDLER
-	if(deleted_beacon == beacon)
-		beacon = null
+	beacons -= deleted_beacon
 
 /datum/action/cooldown/mob_cooldown/redspace_beacon/Remove(mob/removed_from)
-	if(beacon)
-		UnregisterSignal(beacon, COMSIG_QDELETING)
+	for(var/obj/structure/redspace/demonic_beacon/beacon as anything in beacons)
+		if(!QDELETED(beacon))
+			UnregisterSignal(beacon, COMSIG_QDELETING)
+	beacons.Cut()
+	return ..()
+
+/// Picks a free adjacent turf for a summon, falling back to the summoner's own turf.
+/proc/redspace_summon_pick_turf(mob/living/summoner) as /turf
+	var/turf/summoner_turf = get_turf(summoner)
+	if(!summoner_turf)
+		return null
+	var/list/candidates = list()
+	for(var/direction in GLOB.alldirs)
+		var/turf/candidate = get_step(summoner_turf, direction)
+		if(isnull(candidate) || candidate.is_blocked_turf(source_atom = summoner) || !candidate.can_cross_safely(summoner))
+			continue
+		candidates += candidate
+	return length(candidates) ? pick(candidates) : summoner_turf
+
+/// Summons a lesser demon to fight for the Ravager. The type is chosen from a radial menu.
+/datum/action/cooldown/mob_cooldown/redspace_summon
+	name = "Призыв малого демона"
+	desc = "Призывает малого демона редспейса на помощь."
+	button_icon = 'modular_bandastation/redspace/icons/abilities/demonic_abilities.dmi'
+	button_icon_state = "lesser_demon_conjure"
+	click_to_activate = FALSE
+	cooldown_time = REDSPACE_SUMMON_COOLDOWN
+	shared_cooldown = NONE
+	melee_cooldown_time = 0
+	cooldown_rounding = 1
+	/// Demon type chosen from the radial menu.
+	var/summon_type = /mob/living/basic/demon/redspace
+	/// Summoned demons that are still alive, used for the per-type limits.
+	var/list/summoned_demons = list()
+	/// Typepath -> (limit, icon, icon_state) for the radial summon menu.
+	var/static/list/summon_options = list(
+		/mob/living/basic/demon/redspace = list(3, 'modular_bandastation/redspace/icons/mob/demonic/lesser_demons.dmi', "demon_melee"),
+		/mob/living/basic/demon/redspace/ranged = list(2, 'modular_bandastation/redspace/icons/mob/demonic/lesser_demons.dmi', "demon_ranged"),
+		/mob/living/basic/demon/redspace/soldier = list(1, 'modular_bandastation/redspace/icons/mob/demonic/lesser_demons.dmi', "demon_soldier"),
+		/mob/living/basic/demon/redspace/devourer = list(1, 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi', "Devourer"),
+	)
+
+/datum/action/cooldown/mob_cooldown/redspace_summon/Activate(atom/target)
+	if(!owner?.client || owner.stat == DEAD)
+		owner.balloon_alert(owner, "некому призывать")
+		return FALSE
+	var/list/choices = list()
+	for(var/summon_path as anything in summon_options)
+		if(get_summoned_count(summon_path) >= summon_options[summon_path][1])
+			continue
+		var/list/options = summon_options[summon_path]
+		choices[summon_path] = image(options[2], options[3])
+	if(!length(choices))
+		owner.balloon_alert(owner, "все демоны уже призваны")
+		return FALSE
+	var/chosen_type = show_radial_menu(owner, owner, choices, require_near = TRUE, tooltips = TRUE)
+	if(isnull(chosen_type))
+		return FALSE
+	summon_type = chosen_type
+	StartCooldown()
+	INVOKE_ASYNC(src, PROC_REF(perform_summon))
+	return TRUE
+
+/// Plays the summon sound, telegraphes the arrival, polls ghosts and spawns the demon.
+/datum/action/cooldown/mob_cooldown/redspace_summon/proc/perform_summon()
+	if(QDELETED(src) || QDELETED(owner) || !isliving(owner) || owner.stat == DEAD)
+		return
+	var/mob/living/summoner = owner
+	playsound(summoner, 'sound/effects/magic/summon_karp.ogg', 75, TRUE)
+	var/turf/telegraph_turf = redspace_summon_pick_turf(summoner)
+	if(isnull(telegraph_turf))
+		to_chat(summoner, span_warning("Рядом нет места для призыва."))
+		return
+
+	var/datum/redspace_profile/active_profile = SSredspace?.context?.active_profile
+	if(active_profile)
+		active_profile.play_mob_spawn_telegraph(telegraph_turf)
+
+	var/mob/dead/observer/chosen_ghost = SSpolling.poll_ghosts_for_target(
+		question = "Вы хотите сыграть за [span_notice("призванного демона")], явившегося на зов [span_danger(summoner.declent_ru(GENITIVE))]?",
+		role = ROLE_SENTIENCE,
+		check_jobban = ROLE_SENTIENCE,
+		poll_time = REDSPACE_SUMMON_POLL_TIME,
+		checked_target = summoner,
+		ignore_category = POLL_IGNORE_REDSPACE_RAVAGER,
+		alert_pic = summon_type,
+		jump_target = telegraph_turf,
+		role_name_text = "summoned demon",
+		chat_text_border_icon = summon_type,
+	)
+	if(QDELETED(src) || QDELETED(owner) || owner.stat == DEAD)
+		return
+
+	var/turf/spawn_turf = redspace_summon_pick_turf(owner)
+	if(isnull(spawn_turf))
+		to_chat(owner, span_warning("Рядом нет места для призыва."))
+		return
+	var/mob/living/basic/demon/redspace/demon = spawn_summoned_demon(spawn_turf)
+	if(!demon)
+		return
+	if(chosen_ghost?.key)
+		demon.PossessByPlayer(chosen_ghost.key)
+	if(active_profile)
+		active_profile.play_mob_spawn_arrival(spawn_turf)
+	spawn_turf.visible_message(span_warning("На зов [owner.declent_ru(GENITIVE)] материализуется [demon.declent_ru(NOMINATIVE)]!"))
+
+/// Spawns the selected demon at the given turf and tracks it for the summon limits.
+/datum/action/cooldown/mob_cooldown/redspace_summon/proc/spawn_summoned_demon(turf/spawn_turf)
+	var/mob/living/basic/demon/redspace/demon = new summon_type(spawn_turf)
+	if(QDELETED(demon))
+		return null
+	summoned_demons += demon
+	RegisterSignal(demon, COMSIG_LIVING_DEATH, PROC_REF(on_summoned_demon_removed))
+	RegisterSignal(demon, COMSIG_QDELETING, PROC_REF(on_summoned_demon_removed))
+	return demon
+
+/// Frees the summon slot once the demon dies or is removed.
+/datum/action/cooldown/mob_cooldown/redspace_summon/proc/on_summoned_demon_removed(mob/living/source)
+	SIGNAL_HANDLER
+	summoned_demons -= source
+
+/// Returns how many alive demons of the exact type are currently summoned.
+/datum/action/cooldown/mob_cooldown/redspace_summon/proc/get_summoned_count(summon_path)
+	var/count = 0
+	for(var/mob/living/demon as anything in summoned_demons)
+		if(demon.type == summon_path)
+			count++
+	return count
+
+/datum/action/cooldown/mob_cooldown/redspace_summon/Remove(mob/removed_from)
+	for(var/mob/living/demon as anything in summoned_demons)
+		if(!QDELETED(demon))
+			UnregisterSignal(demon, list(COMSIG_LIVING_DEATH, COMSIG_QDELETING))
+	summoned_demons.Cut()
 	return ..()
 
 /// A lesser demon that can survive only while its redspace energy is supplied.
@@ -626,6 +759,8 @@
 	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, ground_slam)
 	var/datum/action/cooldown/mob_cooldown/redspace_beacon/beacon_action = new(src)
 	beacon_action.Grant(src)
+	var/datum/action/cooldown/mob_cooldown/redspace_summon/summon_action = new(src)
+	summon_action.Grant(src)
 
 /// A slow demon that hides an incapacitated player before a Ravager crawls out.
 /mob/living/basic/demon/redspace/devourer
@@ -768,13 +903,17 @@
 
 /mob/living/basic/demon/redspace/devourer/proc/can_transform_with_victim()
 	var/mob/living/carbon/human/victim = stored_victim
-	return !QDELETED(src) && stat != DEAD && victim && !QDELETED(victim) && victim.loc == src && victim.stat != DEAD && victim.mind
+	return !QDELETED(src) && stat != DEAD && victim && !QDELETED(victim) && victim.loc == src && victim.stat != DEAD
 
 /mob/living/basic/demon/redspace/devourer/proc/begin_transformation()
 	if(QDELETED(src) || transformation_in_progress || !stored_victim)
 		return
 	transformation_timer_id = null
 	transformation_in_progress = TRUE
+	if(ckey)
+		// A player controlling the Devourer becomes the Ravager themselves.
+		transform_with_victim(ckey)
+		return
 	visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] начинает раскрываться изнутри."))
 	INVOKE_ASYNC(src, PROC_REF(poll_for_ravager))
 
@@ -1174,3 +1313,5 @@
 #undef REDSPACE_RAVAGER_TRANSFORMATION_RETRY_DELAY
 #undef REDSPACE_RAVAGER_POLL_TIME
 #undef REDSPACE_RAVAGER_MOVEMENT_CHECK_DELAY
+#undef REDSPACE_SUMMON_COOLDOWN
+#undef REDSPACE_SUMMON_POLL_TIME
