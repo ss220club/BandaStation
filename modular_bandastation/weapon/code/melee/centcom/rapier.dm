@@ -39,11 +39,11 @@
 
 /obj/item/melee/sabre/centcom_tanto/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/two_handed)
+	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
 
 /obj/item/melee/sabre/centcom_tanto/update_icon_state()
-	icon_state = inhand_icon_state = HAS_TRAIT(src, TRAIT_WIELDED) ? "centcom_tanto_wielded" : "centcom_tanto"
-	attack_speed = HAS_TRAIT(src, TRAIT_WIELDED) ? 4 : initial(attack_speed)
+	icon_state = inhand_icon_state = "centcom_tanto"
+	attack_speed = 4
 	return ..()
 
 /datum/storage/centcom_sabre_belt
@@ -147,6 +147,14 @@
 	inhand_icon_state = "tanto_sheath"
 	storage_type = /datum/storage/centcom_tanto_belt
 	desc_controls = "Нажмите Alt+ЛКМ, чтобы быстро достать клинок."
+
+/obj/item/storage/belt/sheath/tanto/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
+
+/obj/item/storage/belt/sheath/tanto/update_icon_state()
+	icon_state = inhand_icon_state = "tanto_sheath"
+	return ..()
 
 /obj/item/storage/belt/sheath/tanto/PopulateContents()
 	new /obj/item/melee/sabre/centcom_tanto(src)
