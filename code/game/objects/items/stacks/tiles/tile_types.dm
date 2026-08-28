@@ -169,63 +169,65 @@
 	turf_type = /turf/open/floor/wood/tile
 	merge_type = /obj/item/stack/tile/wood/tile
 
-/obj/item/stack/tile/wood/dark
-	name = "dark wood floor tile"
-	singular_name = "dark wood floor tile"
-	desc = "An easy to fit dark wood floor tile. Use while in your hand to change what pattern you want."
-	icon_state = "tile-darkwood"
-	turf_type = /turf/open/floor/wood
-	merge_type = /obj/item/stack/tile/wood/dark
+// BANDASTATION EDIT START - Remove new wood floors and replace with grayscale floors in wooden.dm
+// /obj/item/stack/tile/wood/dark
+// 	name = "dark wood floor tile"
+// 	singular_name = "dark wood floor tile"
+// 	desc = "An easy to fit dark wood floor tile. Use while in your hand to change what pattern you want."
+// 	icon_state = "tile-darkwood"
+// 	turf_type = /turf/open/floor/wood
+// 	merge_type = /obj/item/stack/tile/wood/dark
 
-/obj/item/stack/tile/wood/dark/parquet
-	name = "parquet dark wood floor tile"
-	singular_name = "parquet dark wood floor tile"
-	icon_state = "tile-darkwood_parquet"
-	turf_type = /turf/open/floor/wood/dark/parquet
-	merge_type = /obj/item/stack/tile/wood/dark/parquet
+// /obj/item/stack/tile/wood/dark/parquet
+// 	name = "parquet dark wood floor tile"
+// 	singular_name = "parquet dark wood floor tile"
+// 	icon_state = "tile-darkwood_parquet"
+// 	turf_type = /turf/open/floor/wood/dark/parquet
+// 	merge_type = /obj/item/stack/tile/wood/dark/parquet
 
-/obj/item/stack/tile/wood/dark/large
-	name = "large dark wood floor tile"
-	singular_name = "large dark wood floor tile"
-	icon_state = "tile-darkwood_large"
-	turf_type = /turf/open/floor/wood/dark/large
-	merge_type = /obj/item/stack/tile/wood/dark/large
+// /obj/item/stack/tile/wood/dark/large
+// 	name = "large dark wood floor tile"
+// 	singular_name = "large dark wood floor tile"
+// 	icon_state = "tile-darkwood_large"
+// 	turf_type = /turf/open/floor/wood/dark/large
+// 	merge_type = /obj/item/stack/tile/wood/dark/large
 
-/obj/item/stack/tile/wood/dark/tile
-	name = "tiled dark wood floor tile"
-	singular_name = "tiled dark wood floor tile"
-	icon_state = "tile-darkwood_tile"
-	turf_type = /turf/open/floor/wood/dark/tile
-	merge_type = /obj/item/stack/tile/wood/dark/tile
+// /obj/item/stack/tile/wood/dark/tile
+// 	name = "tiled dark wood floor tile"
+// 	singular_name = "tiled dark wood floor tile"
+// 	icon_state = "tile-darkwood_tile"
+// 	turf_type = /turf/open/floor/wood/dark/tile
+// 	merge_type = /obj/item/stack/tile/wood/dark/tile
 
-/obj/item/stack/tile/wood/light
-	name = "light wood floor tile"
-	singular_name = "light wood floor tile"
-	desc = "An easy to fit light wood floor tile. Use while in your hand to change what pattern you want."
-	icon_state = "tile-lightwood"
-	turf_type = /turf/open/floor/wood/light
-	merge_type = /obj/item/stack/tile/wood/light
+// /obj/item/stack/tile/wood/light
+// 	name = "light wood floor tile"
+// 	singular_name = "light wood floor tile"
+// 	desc = "An easy to fit light wood floor tile. Use while in your hand to change what pattern you want."
+// 	icon_state = "tile-lightwood"
+// 	turf_type = /turf/open/floor/wood/light
+// 	merge_type = /obj/item/stack/tile/wood/light
 
-/obj/item/stack/tile/wood/light/parquet
-	name = "parquet light wood floor tile"
-	singular_name = "parquet light wood floor tile"
-	icon_state = "tile-lightwood_parquet"
-	turf_type = /turf/open/floor/wood/light/parquet
-	merge_type = /obj/item/stack/tile/wood/light/parquet
+// /obj/item/stack/tile/wood/light/parquet
+// 	name = "parquet light wood floor tile"
+// 	singular_name = "parquet light wood floor tile"
+// 	icon_state = "tile-lightwood_parquet"
+// 	turf_type = /turf/open/floor/wood/light/parquet
+// 	merge_type = /obj/item/stack/tile/wood/light/parquet
 
-/obj/item/stack/tile/wood/light/large
-	name = "large light wood floor tile"
-	singular_name = "large light wood floor tile"
-	icon_state = "tile-lightwood_large"
-	turf_type = /turf/open/floor/wood/light/large
-	merge_type = /obj/item/stack/tile/wood/light/large
+// /obj/item/stack/tile/wood/light/large
+// 	name = "large light wood floor tile"
+// 	singular_name = "large light wood floor tile"
+// 	icon_state = "tile-lightwood_large"
+// 	turf_type = /turf/open/floor/wood/light/large
+// 	merge_type = /obj/item/stack/tile/wood/light/large
 
-/obj/item/stack/tile/wood/light/tile
-	name = "tiled light wood floor tile"
-	singular_name = "tiled light wood floor tile"
-	icon_state = "tile-lightwood_tile"
-	turf_type = /turf/open/floor/wood/light/tile
-	merge_type = /obj/item/stack/tile/wood/light/tile
+// /obj/item/stack/tile/wood/light/tile
+// 	name = "tiled light wood floor tile"
+// 	singular_name = "tiled light wood floor tile"
+// 	icon_state = "tile-lightwood_tile"
+// 	turf_type = /turf/open/floor/wood/light/tile
+// 	merge_type = /obj/item/stack/tile/wood/light/tile
+// BANDASTSTION EDIT END
 
 //Bamboo
 /obj/item/stack/tile/bamboo

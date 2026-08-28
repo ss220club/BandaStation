@@ -71,15 +71,17 @@
 /turf/open/floor/wood/freezing
 	temperature = ICEBOX_MIN_TEMPERATURE
 
-/turf/open/floor/wood/dark
-	desc = "Stylish dark wood."
-	icon_state = "darkwood"
-	floor_tile = /obj/item/stack/tile/wood/dark
+// BANDASTATION EDIT START - Remove new wood floors and replace with grayscale floors in wooden.dm
+// /turf/open/floor/wood/dark
+// 	desc = "Stylish dark wood."
+// 	icon_state = "darkwood"
+// 	floor_tile = /obj/item/stack/tile/wood/dark
 
-/turf/open/floor/wood/light
-	desc = "Stylish light wood."
-	icon_state = "lightwood"
-	floor_tile = /obj/item/stack/tile/wood/light
+// /turf/open/floor/wood/light
+// 	desc = "Stylish light wood."
+// 	icon_state = "lightwood"
+// 	floor_tile = /obj/item/stack/tile/wood/light
+// BANDASTSTION EDIT END
 
 /turf/open/floor/wood/airless
 	initial_gas_mix = AIRLESS_ATMOS
