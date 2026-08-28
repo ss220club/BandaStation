@@ -137,14 +137,16 @@
 		/obj/item/stack/tile/wood/large,
 		/obj/item/stack/tile/wood/tile,
 		/obj/item/stack/tile/wood/parquet,
-		/obj/item/stack/tile/wood/dark,
-		/obj/item/stack/tile/wood/dark/large,
-		/obj/item/stack/tile/wood/dark/tile,
-		/obj/item/stack/tile/wood/dark/parquet,
-		/obj/item/stack/tile/wood/light,
-		/obj/item/stack/tile/wood/light/large,
-		/obj/item/stack/tile/wood/light/tile,
-		/obj/item/stack/tile/wood/light/parquet,
+// BANDASTATION EDIT START - Remove new wood floors and replace with grayscale floors in wooden.dm
+		// /obj/item/stack/tile/wood/dark,
+		// /obj/item/stack/tile/wood/dark/large,
+		// /obj/item/stack/tile/wood/dark/tile,
+		// /obj/item/stack/tile/wood/dark/parquet,
+		// /obj/item/stack/tile/wood/light,
+		// /obj/item/stack/tile/wood/light/large,
+		// /obj/item/stack/tile/wood/light/tile,
+		// /obj/item/stack/tile/wood/light/parquet,
+// BANDASTSTION EDIT END
 	)
 	mats_per_unit = list(/datum/material/wood = HALF_SHEET_MATERIAL_AMOUNT / 2)
 

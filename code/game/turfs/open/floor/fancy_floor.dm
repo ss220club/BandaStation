@@ -93,14 +93,15 @@
 	icon_state = "wood_tile"
 	floor_tile = /obj/item/stack/tile/wood/tile
 
-/turf/open/floor/wood/dark/tile
-	icon_state = "darkwood_tile"
-	floor_tile = /obj/item/stack/tile/wood/dark/tile
+// BANDASTATION EDIT START - Remove new wood floors and replace with grayscale floors in wooden.dm
+// /turf/open/floor/wood/dark/tile
+// 	icon_state = "darkwood_tile"
+// 	floor_tile = /obj/item/stack/tile/wood/dark/tile
 
-/turf/open/floor/wood/light/tile
-	icon_state = "lightwood_tile"
-	floor_tile = /obj/item/stack/tile/wood/light/tile
-
+// /turf/open/floor/wood/light/tile
+// 	icon_state = "lightwood_tile"
+// 	floor_tile = /obj/item/stack/tile/wood/light/tile
+// BANDASTSTION EDIT END
 
 /turf/open/floor/wood/tile/broken_states()
 	return list("wood_tile-broken", "wood_tile-broken2", "wood_tile-broken3")
@@ -109,13 +110,15 @@
 	icon_state = "wood_parquet"
 	floor_tile = /obj/item/stack/tile/wood/parquet
 
-/turf/open/floor/wood/light/parquet
-	icon_state = "lightwood_parquet"
-	floor_tile = /obj/item/stack/tile/wood/light/parquet
 
-/turf/open/floor/wood/dark/parquet
-	icon_state = "darkwood_parquet"
-	floor_tile = /obj/item/stack/tile/wood/dark/parquet
+// /turf/open/floor/wood/light/parquet
+// 	icon_state = "lightwood_parquet"
+// 	floor_tile = /obj/item/stack/tile/wood/light/parquet
+
+// /turf/open/floor/wood/dark/parquet
+// 	icon_state = "darkwood_parquet"
+// 	floor_tile = /obj/item/stack/tile/wood/dark/parquet
+// BANDASTSTION EDIT END
 
 /turf/open/floor/wood/parquet/broken_states()
 	return list("wood_parquet-broken", "wood_parquet-broken2", "wood_parquet-broken3", "wood_parquet-broken4", "wood_parquet-broken5", "wood_parquet-broken6", "wood_parquet-broken7")
@@ -124,13 +127,15 @@
 	icon_state = "wood_large"
 	floor_tile = /obj/item/stack/tile/wood/large
 
-/turf/open/floor/wood/light/large
-	icon_state = "lightwood_large"
-	floor_tile = /obj/item/stack/tile/wood/light/large
+// BANDASTATION EDIT START - Remove new wood floors and replace with grayscale floors in wooden.dm
+// /turf/open/floor/wood/light/large
+// 	icon_state = "lightwood_large"
+// 	floor_tile = /obj/item/stack/tile/wood/light/large
 
-/turf/open/floor/wood/dark/large
-	icon_state = "darkwood_large"
-	floor_tile = /obj/item/stack/tile/wood/dark/large
+// /turf/open/floor/wood/dark/large
+// 	icon_state = "darkwood_large"
+// 	floor_tile = /obj/item/stack/tile/wood/dark/large
+// BANDASTSTION EDIT END
 
 /turf/open/floor/wood/large/broken_states()
 	return list("wood_large-broken", "wood_large-broken2", "wood_large-broken3")
