@@ -490,6 +490,11 @@
 		zero_energy_damage_percent = redspace_zero_energy_damage_percent,\
 	)
 
+/// Redspace demons burst into blood sparks when slain.
+/mob/living/basic/demon/redspace/death(gibbed)
+	. = ..()
+	new /obj/effect/temp_visual/cult/sparks(get_turf(src))
+
 /mob/living/basic/demon/redspace/ranged
 	name = "ranged demon"
 	real_name = "ranged demon"
