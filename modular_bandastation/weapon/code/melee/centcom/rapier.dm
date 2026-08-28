@@ -39,7 +39,12 @@
 
 /obj/item/melee/sabre/centcom_tanto/Initialize(mapload)
 	. = ..()
-	attack_speed = 4
+	AddComponent(/datum/component/two_handed)
+
+/obj/item/melee/sabre/centcom_tanto/update_icon_state()
+	icon_state = inhand_icon_state = HAS_TRAIT(src, TRAIT_WIELDED) ? "centcom_tanto_wielded" : "centcom_tanto"
+	attack_speed = HAS_TRAIT(src, TRAIT_WIELDED) ? 4 : initial(attack_speed)
+	return ..()
 
 /datum/storage/centcom_sabre_belt
 	max_slots = 1
