@@ -4,8 +4,8 @@
 
 /datum/unit_test/redspace_demon_ai/Run()
 	var/datum/ai_movement/basic_avoidance/redspace_demon/avoidance = SSai_movement.movement_types[/datum/ai_movement/basic_avoidance/redspace_demon]
-	if(!avoidance || avoidance.max_pathing_attempts >= 10 || !(avoidance.move_flags & MOVEMENT_LOOP_START_INSTANT))
-		return Fail("Redspace demons must have a snappy avoidance movement that starts instantly and recovers quickly")
+	if(!avoidance || avoidance.max_pathing_attempts != 10 || !(avoidance.move_flags & MOVEMENT_LOOP_START_INSTANT))
+		return Fail("Redspace demons must have an avoidance movement that starts instantly and tolerates a long parked hold")
 
 	var/mob/living/basic/demon/redspace/test_mob = allocate(/mob/living/basic/demon/redspace, run_loc_floor_bottom_left)
 	var/datum/ai_controller/basic_controller/simple/redspace_demon/melee/controller = test_mob.ai_controller
@@ -48,5 +48,24 @@
 	obstruction_turf.ChangeTurf(wall_restore_type)
 
 	qdel(approach_node)
+
+	var/mob/living/basic/demon/redspace/hook_demon = allocate(/mob/living/basic/demon/redspace, run_loc_floor_bottom_left)
+	var/mob/living/carbon/human/hook_target = allocate(/mob/living/carbon/human, get_step(get_turf(hook_demon), NORTH))
+	hook_target.mind_initialize()
+	var/datum/ai_controller/basic_controller/simple/redspace_demon/melee/hook_controller = hook_demon.ai_controller
+	if(!istype(hook_controller.ai_movement, /datum/ai_movement/jps/redspace_demon))
+		return Fail("The demon must use the JPS subtype that swings on arrival")
+	hook_controller.set_blackboard_key(BB_CURRENT_TARGET, hook_target)
+	var/datum/move_loop/fake_loop = new(null, null, null, 0, 0, hook_controller)
+	var/health_before = hook_target.health
+	redspace_demon_post_move_attack(fake_loop, MOVELOOP_SUCCESS)
+	if(hook_target.health >= health_before)
+		return Fail("A successful step into melee range must immediately swing at the target")
+	var/health_after_arrival = hook_target.health
+	hook_demon.next_move = 0
+	redspace_demon_try_immediate_attack(hook_controller, hook_target)
+	if(hook_target.health >= health_after_arrival)
+		return Fail("A demon already standing in melee range must swing without waiting for the attack behavior")
+	qdel(fake_loop)
 
 #endif

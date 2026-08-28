@@ -111,11 +111,54 @@
 				return TRUE
 	return FALSE
 
-/// Direct movement used by redspace demons during the final approach. It starts instantly and
-/// re-engages immediately after the demon is pushed away, so JPS pathing cannot stall a chase.
+/// Direct movement used by redspace demons during the final approach. It starts instantly,
+/// keeps running while parked in melee range (so there is no re-engagement stall when the target
+/// steps away) and swings the instant a step lands the demon in reach of its target.
 /datum/ai_movement/basic_avoidance/redspace_demon
-	max_pathing_attempts = 4
+	max_pathing_attempts = 10
 	move_flags = MOVEMENT_LOOP_START_INSTANT
+
+/datum/ai_movement/basic_avoidance/redspace_demon/post_move(datum/move_loop/source, succeeded)
+	. = ..()
+	redspace_demon_post_move_attack(source, succeeded)
+
+/// JPS movement used by redspace demons at range. It swings the moment a path step lands the
+/// demon in reach, so an approach through corridors ends in an immediate hit as well.
+/datum/ai_movement/jps/redspace_demon
+
+/datum/ai_movement/jps/redspace_demon/post_move(datum/move_loop/source, succeeded)
+	. = ..()
+	redspace_demon_post_move_attack(source, succeeded)
+
+/// Swings at the current target immediately after a successful step lands the demon in melee
+/// range. A kiting victim eats a hit on every approach instead of the demon waiting for the
+/// next AI planning tick while the target slips out of reach again.
+/proc/redspace_demon_post_move_attack(datum/move_loop/source, succeeded)
+	SIGNAL_HANDLER
+	if(succeeded != MOVELOOP_SUCCESS)
+		return
+	if(QDELETED(source))
+		return
+	var/datum/ai_controller/controller = source.extra_info
+	if(!controller || QDELETED(controller))
+		return
+	redspace_demon_try_immediate_attack(controller, controller.blackboard[BB_CURRENT_TARGET])
+
+/// Attempts an immediate melee swing at the target, honoring the attack cooldown and the
+/// targeting strategy. Used both on arrival moves and while parked in melee range.
+/proc/redspace_demon_try_immediate_attack(datum/ai_controller/controller, atom/target)
+	if(!controller || QDELETED(controller))
+		return
+	var/mob/living/basic/basic_pawn = controller.pawn
+	if(!basic_pawn || basic_pawn.stat == DEAD || QDELETED(target) || !basic_pawn.Adjacent(target))
+		return
+	if(world.time < basic_pawn.next_move)
+		return
+	var/datum/targeting_strategy/strategy = GET_TARGETING_STRATEGY(controller.blackboard[BB_TARGETING_STRATEGY])
+	if(strategy && !strategy.is_valid_target(basic_pawn, target, 1, controller))
+		return
+	basic_pawn.face_atom(target)
+	basic_pawn.melee_attack(target)
 
 /// Keeps the JPS loop from retrying after the demon has already reached melee range, and swaps to
 /// instant avoidance movement near a visible target so shoves and strafing cannot stall the demon.
@@ -130,7 +173,10 @@
 	if(QDELETED(target))
 		return AI_BEHAVIOR_FAILED
 	if(get_dist(controller.pawn, target) <= required_dist)
-		controller.ai_movement.stop_moving_towards(controller)
+		// The move loop keeps running: it holds the demon at melee range and there is no
+		// re-engagement stall when the target steps away, only an instant follow-up step.
+		// Also swing immediately in case the demon arrived via JPS or the target walked in.
+		redspace_demon_try_immediate_attack(controller, target)
 		return AI_BEHAVIOR_INSTANT
 	var/desired_movement = get_desired_movement(controller, target)
 	if(controller.ai_movement != SSai_movement.movement_types[desired_movement])
@@ -299,7 +345,7 @@
 
 
 /datum/ai_controller/basic_controller/simple/redspace_demon
-	ai_movement = /datum/ai_movement/jps
+	ai_movement = /datum/ai_movement/jps/redspace_demon
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/redspace_demon,
 		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/nearest/redspace_demon,
@@ -805,9 +851,9 @@
 	var/datum/ai_movement/jps/transformation_movement
 
 /mob/living/basic/demon/redspace/devourer/Initialize(mapload)
+	. = ..()
 	base_pixel_x = -16
 	base_pixel_y = -10
-	return ..()
 
 /mob/living/basic/demon/redspace/devourer/early_melee_attack(atom/target, list/modifiers, ignore_cooldown)
 	. = ..()
