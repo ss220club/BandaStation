@@ -27,5 +27,6 @@
 #include "code/unit_tests/redspace_sensor.dm"
 #include "code/unit_tests/redspace_stabilizer.dm"
 #include "code/unit_tests/redspace_energy.dm"
+#include "code/unit_tests/redspace_demon_ai.dm"
 #include "code/unit_tests/redspace_devourer.dm"
 #include "code/unit_tests/redspace_rift_sealer.dm"

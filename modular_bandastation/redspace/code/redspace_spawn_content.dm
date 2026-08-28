@@ -59,12 +59,14 @@
 	return ..()
 
 /// Returns TRUE while the demon has a route to its target or JPS is still calculating one.
+/// A direct avoidance loop that keeps failing to move counts as no route, which lets
+/// [attack_obstructions] clear the blockage instead of the demon pushing against it forever.
 /proc/redspace_demon_has_movement_route(datum/ai_controller/controller)
 	var/datum/move_loop/current_loop = GLOB.move_manager.processing_on(controller.pawn, SSai_movement)
 	if(!current_loop)
 		return FALSE
 	if(!istype(current_loop, /datum/move_loop/has_target/jps))
-		return TRUE
+		return !controller.consecutive_pathing_attempts
 	var/datum/move_loop/has_target/jps/jps_loop = current_loop
 	return jps_loop.is_pathing || isnull(jps_loop.movement_path) || length(jps_loop.movement_path)
 
@@ -109,13 +111,56 @@
 				return TRUE
 	return FALSE
 
-/// Keeps the JPS loop from retrying after the demon has already reached melee range.
+/// Direct movement used by redspace demons during the final approach. It starts instantly and
+/// re-engages immediately after the demon is pushed away, so JPS pathing cannot stall a chase.
+/datum/ai_movement/basic_avoidance/redspace_demon
+	max_pathing_attempts = 4
+	move_flags = MOVEMENT_LOOP_START_INSTANT
+
+/// Keeps the JPS loop from retrying after the demon has already reached melee range, and swaps to
+/// instant avoidance movement near a visible target so shoves and strafing cannot stall the demon.
+/datum/bt_node/ai_behavior/move_to_target/redspace_demon
+	/// Distance at which the demon drops JPS and moves directly at its target.
+	var/approach_range = 3
+	/// Movement type used while approaching a close, visible target with a clear path.
+	var/approach_movement = /datum/ai_movement/basic_avoidance/redspace_demon
+
 /datum/bt_node/ai_behavior/move_to_target/redspace_demon/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/atom/target = controller.blackboard[target_key]
-	if(!QDELETED(target) && get_dist(controller.pawn, target) <= required_dist)
+	if(QDELETED(target))
+		return AI_BEHAVIOR_FAILED
+	if(get_dist(controller.pawn, target) <= required_dist)
 		controller.ai_movement.stop_moving_towards(controller)
 		return AI_BEHAVIOR_INSTANT
+	var/desired_movement = get_desired_movement(controller, target)
+	if(controller.ai_movement != SSai_movement.movement_types[desired_movement])
+		controller.ai_movement.stop_moving_towards(controller)
+		controller.change_ai_movement_type(desired_movement)
 	return ..()
+
+/// Returns the movement type the demon should currently use to reach its target.
+/// Once in direct approach mode the demon keeps it until the target moves one tile beyond
+/// the approach range, so a target hovering at the boundary cannot flicker the movement type.
+/datum/bt_node/ai_behavior/move_to_target/redspace_demon/proc/get_desired_movement(datum/ai_controller/controller, atom/target)
+	var/already_approaching = controller.ai_movement == SSai_movement.movement_types[approach_movement]
+	if(get_dist(controller.pawn, target) > approach_range + (already_approaching ? 1 : 0))
+		return initial(controller.ai_movement)
+	if(!can_see(controller.pawn, target, approach_range))
+		return initial(controller.ai_movement)
+	var/mob/living/basic/basic_pawn = controller.pawn
+	if(!basic_pawn || redspace_demon_has_obstruction(basic_pawn, target))
+		return initial(controller.ai_movement)
+	return approach_movement
+
+/// A failed route never aborts the attack branch: the demon just keeps trying to close the distance.
+/datum/bt_node/ai_behavior/move_to_target/redspace_demon/on_movement_failed(atom/source)
+	SIGNAL_HANDLER
+	movement_failed = FALSE
+
+/datum/bt_node/ai_behavior/move_to_target/redspace_demon/finish_action(datum/ai_controller/controller, succeeded)
+	. = ..()
+	if(controller.ai_movement != SSai_movement.movement_types[initial(controller.ai_movement)])
+		controller.change_ai_movement_type(initial(controller.ai_movement))
 
 /// Keeps ranged demons at a distance while visible, but closes in on a remembered target to reach cover.
 /datum/bt_node/ai_behavior/maintain_distance/redspace_demon
