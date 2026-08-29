@@ -139,7 +139,10 @@
 		if("toggle")
 			active = !active
 			if(active)
+				START_PROCESSING(SSobj, src)
 				COOLDOWN_START(src, siphon_cooldown, siphon_interval)
+			else
+				STOP_PROCESSING(SSobj, src)
 			return TRUE
 		if("attach")
 			return attach_to_player(usr, params["target"])
