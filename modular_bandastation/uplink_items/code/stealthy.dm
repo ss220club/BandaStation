@@ -8,7 +8,6 @@
 	name = "бутылка с вирусом культуры ГБС"
 	desc = "Маленькая бутылка, содержащая кровь с вирусом Гравикинетического Бипотенциального САДС++."
 	item = /obj/item/reagent_containers/cup/bottle/gbs
-	category = /datum/uplink_category/role_restricted
 	restricted_roles = list(
 		JOB_CHIEF_MEDICAL_OFFICER,
 		JOB_CORONER,
