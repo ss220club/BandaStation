@@ -11,8 +11,8 @@
 /obj/machinery/redspace_stabilizer
 	name = "bluespace boundary stabilizer"
 	desc = "An engineering machine that locally reinforces the bluespace boundary against redspace pressure."
-	icon = 'icons/obj/machines/shield_generator.dmi'
-	icon_state = "shieldoff"
+	icon = 'modular_bandastation/redspace/icons/obj/machinery_32x32.dmi'
+	icon_state = "beacon_off"
 	density = TRUE
 	anchored = TRUE
 	max_integrity = 200
@@ -443,7 +443,7 @@
 
 /obj/machinery/redspace_stabilizer/update_icon_state()
 	. = ..()
-	icon_state = "shield[active ? "on" : "off"][machine_stat & BROKEN ? "br" : null]"
+	icon_state = "beacon_[active ? "on" : "off"]"
 
 /obj/machinery/redspace_stabilizer/wrench_act(mob/living/user, obj/item/tool)
 	if(active)

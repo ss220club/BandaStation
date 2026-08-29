@@ -164,8 +164,8 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 /obj/machinery/redspace_rift_sealer
 	name = "redspace rift sealer"
 	desc = "An engineering machine that forces a nearby redspace rift to collapse."
-	icon = 'icons/obj/machines/shield_generator.dmi'
-	icon_state = "shieldoff"
+	icon = 'modular_bandastation/redspace/icons/obj/machinery_32x32.dmi'
+	icon_state = "rift_sealer_off"
 	density = TRUE
 	anchored = FALSE
 	max_integrity = 250
@@ -379,7 +379,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 
 /obj/machinery/redspace_rift_sealer/update_icon_state()
 	. = ..()
-	icon_state = "shield[active ? "on" : "off"][machine_stat & BROKEN ? "br" : null]"
+	icon_state = "rift_sealer_[active ? "on" : "off"]"
 
 /obj/item/circuitboard/machine/redspace_rift_sealer
 	name = "Redspace Rift Sealer Board"
