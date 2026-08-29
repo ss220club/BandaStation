@@ -1,6 +1,6 @@
 /obj/item/spacejacker
 	name = "credit siphon"
-	desc = "A clandestine device that skims credits from nearby bank accounts."
+	desc = "Портативное хакерское устройство, которое позволяет вам тайно снимать кредиты с банковских счетов других членов экипажа и прикреплять к их КПК вирус, который передаёт деньги на ваш космохакер. Также имеет выгодный обменник кредитов на ТК, но будьте осторожны, ТК ограничены, а также слишком частое использование может вызвать подозрения у других членов экипажа."
 	icon = 'icons/obj/devices/voice.dmi'
 	icon_state = "walkietalkie"
 	w_class = WEIGHT_CLASS_SMALL
@@ -54,7 +54,7 @@
 			continue
 		var/amount = max(1, round(account.account_balance * siphon_percentage))
 		amount = min(amount, account.account_balance)
-		if(!account.adjust_money(-amount, "Система: Несанкционированное списание"))
+		if(!account.adjust_money(-amount, "Система: несанкционированное списание"))
 			continue
 		credits_stored += amount
 		account.bank_card_talk("С вашего счёта списано [amount][MONEY_NAME]. Источник не определён.")
@@ -152,7 +152,7 @@
 			tc_purchased++
 			var/obj/item/stack/telecrystal/telecrystals = new (usr.drop_location(), 1)
 			usr.put_in_hands(telecrystals)
-			to_chat(usr, span_notice("Вы обмениваете [tc_price] кредитов на некоторую сумму телекристаллов."))
+			to_chat(usr, span_notice("Вы обмениваете [tc_price] [money_name] на некоторую сумму телекристаллов."))
 			return TRUE
 		if("withdraw")
 			if(!credits_stored || !in_range(usr, src))
