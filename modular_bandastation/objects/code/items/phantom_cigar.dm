@@ -1,6 +1,6 @@
 /obj/item/cigarette/cigar/phantom
 	name = "phantom cigar"
-	desc = "A peculiar cigar that seems to bend the flow of time and mend the body of whoever smokes it."
+	desc = "полу-голографическая сигара, которая может быть использована для лечения некоторых повреждений. Она веет старым табаком и имеет приятный аромат. Имеет смесь лечебных трав, которые могут помочь в восстановлении здоровья. Однако, будьте осторожны, так как чрезмерное использование может вызвать привыкание."
 	icon_state = "cigaroff"
 	icon_on = "cigaron"
 	icon_off = "cigaroff"
