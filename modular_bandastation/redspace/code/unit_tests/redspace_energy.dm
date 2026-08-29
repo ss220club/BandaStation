@@ -41,6 +41,12 @@
 	var/datum/component/ranged_attacks/ranged_attacks = test_ranged.GetComponent(/datum/component/ranged_attacks)
 	if(test_ranged.icon_state != "demon_ranged" || test_ranged.maxHealth >= test_mob.maxHealth || !istype(test_ranged.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/ranged) || !istype(test_ranged.ai_controller.ai_movement, /datum/ai_movement/jps) || !ranged_attacks || ranged_attacks.projectile_type != /obj/projectile/magic/lesser_fireball)
 		return Fail("Redspace ranged demons must use the ranged sprite, reduced health and fireball attack AI")
+	var/datum/bt_node/ai_behavior/basic_ranged_attack/redspace_demon/ranged_attack = new
+	var/datum/bt_node/ai_behavior/attack_obstructions/redspace_demon/ranged/ranged_obstructions = new
+	if(ranged_attack.max_range != 9 || ranged_obstructions.max_attack_range != 9)
+		return Fail("Redspace ranged demons must preserve their nine-tile firing radius")
+	qdel(ranged_attack)
+	qdel(ranged_obstructions)
 
 	var/obj/projectile/magic/lesser_fireball/test_fireball = new
 	var/obj/projectile/magic/fireball/standard_fireball = new

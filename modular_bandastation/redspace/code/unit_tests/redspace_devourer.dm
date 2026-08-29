@@ -4,8 +4,8 @@
 
 /datum/unit_test/redspace_devourer/Run()
 	var/mob/living/basic/demon/redspace/devourer/devourer = allocate(/mob/living/basic/demon/redspace/devourer)
-	if(devourer.name != "demonic devourer" || devourer.icon != 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi' || devourer.icon_state != "Devourer" || devourer.icon_dead != "Devourer-closed")
-		return Fail("The Devourer must use its dedicated sprite and localized English name key")
+	if(devourer.name != "demonic devourer" || devourer.icon != 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi' || devourer.icon_state != "Devourer" || devourer.icon_dead != "Devourer-closed" || devourer.base_pixel_x != -16 || devourer.base_pixel_y != -10 || devourer.pixel_x != -16 || devourer.pixel_y != -10)
+		return Fail("The Devourer must use its dedicated sprite and SET_BASE_PIXEL offsets")
 	if(devourer.speed != 2 || devourer.move_force != MOVE_FORCE_OVERPOWERING || devourer.move_resist != INFINITY || devourer.pull_force != MOVE_FORCE_OVERPOWERING || devourer.can_be_pulled(null, INFINITY))
 		return Fail("The Devourer must be slow and immune to normal pushing and pulling")
 	if(devourer.devour_delay != 5 SECONDS || devourer.transformation_delay != 2 MINUTES)
@@ -49,6 +49,8 @@
 	var/datum/targeting_strategy/basic/redspace_demon/devourer/targeting = GET_TARGETING_STRATEGY(/datum/targeting_strategy/basic/redspace_demon/devourer)
 	if(!targeting.is_valid_target(devourer, incapacitated, 9) || !targeting.can_keep_target(devourer, incapacitated, 16))
 		return Fail("The Devourer must accept living minded incapacitated humans and retain them through cover")
+	if(redspace_devourer_can_consume(incapacitated))
+		return Fail("The Devourer must finish soft-crit victims before starting to consume them")
 
 	var/mob/living/carbon/human/conscious = allocate(/mob/living/carbon/human)
 	conscious.mind_initialize()
@@ -62,7 +64,7 @@
 		return Fail("The Devourer must keep and consume living hard-crit humans so a failed devour attempt can be retried")
 
 	var/mob/living/carbon/human/mindless = allocate(/mob/living/carbon/human)
-	ADD_TRAIT(mindless, TRAIT_INCAPACITATED, REF(src))
+	mindless.stat = HARD_CRIT
 	if(!targeting.is_valid_target(devourer, mindless, 9) || !redspace_devourer_can_consume(mindless))
 		return Fail("The Devourer must devour every humanoid, including those without a mind")
 

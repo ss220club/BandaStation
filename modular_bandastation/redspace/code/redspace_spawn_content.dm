@@ -1,3 +1,6 @@
+#define REDSPACE_RANGED_DEMON_MIN_DISTANCE 3
+#define REDSPACE_RANGED_DEMON_MAX_DISTANCE 6
+
 /// Acquires only visible enemies, but keeps pursuing an already acquired enemy through cover.
 /datum/targeting_strategy/basic/redspace_demon
 
@@ -33,12 +36,12 @@
 		return FALSE
 	return TRUE
 
-/// Returns TRUE when a player-controlled human is incapacitated but still alive.
+/// Returns TRUE when a living human has reached hard crit and can be consumed.
 /proc/redspace_devourer_can_consume(atom/target)
 	if(!redspace_devourer_can_target(target))
 		return FALSE
 	var/mob/living/carbon/human/human_target = target
-	return IS_UNCONSCIOUS_OR_CRIT(human_target) || HAS_TRAIT(human_target, TRAIT_INCAPACITATED)
+	return human_target.stat == HARD_CRIT
 
 /// Devourers attack living humans and retain valid prey through cover.
 /datum/targeting_strategy/basic/redspace_demon/devourer
@@ -159,6 +162,9 @@
 		return
 	basic_pawn.face_atom(target)
 	basic_pawn.melee_attack(target)
+	if(!QDELETED(basic_pawn) && basic_pawn.next_move <= world.time)
+		// Direct attacks bypass ClickOn(), which normally starts this cooldown even when the hit is blocked.
+		basic_pawn.changeNext_move(basic_pawn.melee_attack_cooldown)
 
 /// Keeps the JPS loop from retrying after the demon has already reached melee range, and swaps to
 /// instant avoidance movement near a visible target so shoves and strafing cannot stall the demon.
@@ -226,8 +232,8 @@
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 
 	var/target_visible = can_see(controller.pawn, target, 10)
-	var/minimum_distance = controller.blackboard[min_dist_key] || 4
-	var/maximum_distance = controller.blackboard[max_dist_key] || 6
+	var/minimum_distance = controller.blackboard[min_dist_key] || REDSPACE_RANGED_DEMON_MIN_DISTANCE
+	var/maximum_distance = controller.blackboard[max_dist_key] || REDSPACE_RANGED_DEMON_MAX_DISTANCE
 	var/current_distance = get_dist(controller.pawn, target)
 	if(target_visible)
 		var/desired_movement_type
@@ -269,6 +275,7 @@
 
 /datum/bt_node/ai_behavior/basic_ranged_attack/redspace_demon
 	avoid_friendly_fire = TRUE
+	max_range = 9
 	var/static/projectile_pass_flags = /obj/projectile/magic/lesser_fireball::pass_flags
 
 /datum/bt_node/ai_behavior/basic_ranged_attack/redspace_demon/perform(seconds_per_tick, datum/ai_controller/controller)
@@ -282,7 +289,7 @@
 /datum/bt_node/ai_behavior/basic_ranged_attack/redspace_demon/adjust_position(mob/living/living_pawn, atom/target)
 	var/turf/our_turf = get_turf(living_pawn)
 	var/current_distance = get_dist(our_turf, target)
-	var/minimum_distance = living_pawn.ai_controller.blackboard[BB_RANGED_SKIRMISH_MIN_DISTANCE] || 4
+	var/minimum_distance = living_pawn.ai_controller.blackboard[BB_RANGED_SKIRMISH_MIN_DISTANCE] || REDSPACE_RANGED_DEMON_MIN_DISTANCE
 	var/list/clear_positions = list()
 	var/list/fallback_positions = list()
 	var/datum/targeting_strategy/targeting_strategy = GET_TARGETING_STRATEGY(living_pawn.ai_controller.blackboard[BB_TARGETING_STRATEGY])
@@ -838,6 +845,7 @@
 	pull_force = MOVE_FORCE_OVERPOWERING
 	mob_size = MOB_SIZE_LARGE
 	layer = LARGE_MOB_LAYER
+	SET_BASE_PIXEL(-16, -10)
 	ai_controller = /datum/ai_controller/basic_controller/simple/redspace_demon/melee/devourer
 
 	/// The victim currently held inside this demon.
@@ -857,11 +865,6 @@
 	var/turf/transformation_target
 	/// Temporary pathfinding movement used while carrying the victim.
 	var/datum/ai_movement/jps/transformation_movement
-
-/mob/living/basic/demon/redspace/devourer/Initialize(mapload)
-	. = ..()
-	base_pixel_x = -16
-	base_pixel_y = -10
 
 /mob/living/basic/demon/redspace/devourer/early_melee_attack(atom/target, list/modifiers, ignore_cooldown)
 	. = ..()
@@ -1361,6 +1364,8 @@
 	return TRUE
 
 #undef REDSPACE_DEVOURER_STASIS
+#undef REDSPACE_RANGED_DEMON_MIN_DISTANCE
+#undef REDSPACE_RANGED_DEMON_MAX_DISTANCE
 #undef REDSPACE_RAVAGER_BEACON_STRENGTH
 #undef REDSPACE_RAVAGER_BEACON_RADIUS
 #undef REDSPACE_RAVAGER_BEACON_COOLDOWN

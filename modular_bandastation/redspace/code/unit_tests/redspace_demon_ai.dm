@@ -68,4 +68,19 @@
 		return Fail("A demon already standing in melee range must swing without waiting for the attack behavior")
 	qdel(fake_loop)
 
+	var/mob/living/basic/demon/redspace/block_demon = allocate(/mob/living/basic/demon/redspace, run_loc_floor_bottom_left)
+	var/mob/living/carbon/human/block_target = allocate(/mob/living/carbon/human, get_step(get_turf(block_demon), NORTH))
+	block_target.mind_initialize()
+	block_target.AddComponent(/datum/component/regenerative_shield, number_of_hits = 1, damage_threshold = 100, regeneration_time = 1 MINUTES)
+	var/datum/ai_controller/basic_controller/simple/redspace_demon/melee/block_controller = block_demon.ai_controller
+	block_controller.set_blackboard_key(BB_CURRENT_TARGET, block_target)
+	block_demon.next_move = 0
+	var/block_health = block_target.health
+	redspace_demon_try_immediate_attack(block_controller, block_target)
+	if(block_target.health != block_health || block_demon.next_move <= world.time)
+		return Fail("A blocked immediate attack must consume no health and still start the melee cooldown")
+	redspace_demon_try_immediate_attack(block_controller, block_target)
+	if(block_target.health != block_health)
+		return Fail("A blocked immediate attack must not be retried before its cooldown expires")
+
 #endif
