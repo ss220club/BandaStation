@@ -33,18 +33,15 @@
 	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/righthand.dmi'
 	force = 20
 	hitsound = 'sound/items/weapons/bladeslice.ogg'
-	demolition_mod = 1
 	block_chance = 50
 	armour_penetration = 35
+	attack_icon = 'modular_bandastation/weapon/icons/melee/sword.dmi'
+	attack_icon_state = "tanto_attack"
+	attack_speed = 4
 
 /obj/item/melee/sabre/centcom_tanto/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
-
-/obj/item/melee/sabre/centcom_tanto/update_icon_state()
-	icon_state = inhand_icon_state = "centcom_tanto"
-	attack_speed = 4
-	return ..()
 
 /datum/storage/centcom_sabre_belt
 	max_slots = 1
@@ -151,10 +148,6 @@
 /obj/item/storage/belt/sheath/tanto/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
-
-/obj/item/storage/belt/sheath/tanto/update_icon_state()
-	icon_state = inhand_icon_state = "tanto_sheath"
-	return ..()
 
 /obj/item/storage/belt/sheath/tanto/PopulateContents()
 	new /obj/item/melee/sabre/centcom_tanto(src)
