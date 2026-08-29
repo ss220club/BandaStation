@@ -433,7 +433,7 @@
 #define REDSPACE_RAVAGER_TRANSFORMATION_RETRY_DELAY (60 SECONDS)
 #define REDSPACE_RAVAGER_POLL_TIME (20 SECONDS)
 #define REDSPACE_RAVAGER_MOVEMENT_CHECK_DELAY (1 SECONDS)
-#define REDSPACE_RAVAGER_MAX_POLL_ATTEMPTS 3
+#define REDSPACE_RAVAGER_MAX_POLL_ATTEMPTS 2
 #define REDSPACE_SUMMON_COOLDOWN (90 SECONDS)
 #define REDSPACE_SUMMON_POLL_TIME (10 SECONDS)
 
@@ -718,8 +718,8 @@
 	desc = "A heavily built redspace demon bred for close combat."
 	icon_state = "demon_soldier"
 	icon_living = "demon_soldier"
-	maxHealth = 240
-	health = 240
+	maxHealth = 180
+	health = 180
 	melee_damage_lower = 20
 	melee_damage_upper = 28
 
