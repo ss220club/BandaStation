@@ -1,7 +1,7 @@
 #define REQUIRED_ACCUMULATION(wound) (1 + (wound.severity - 1) * 0.3)
 
-/datum/singleton/sound_effect/khaaroot_mutation
-	suffix = "_khaaroot"
+/datum/singleton/sound_effect/khaaroot_voice_mutation
+	suffix = "_khaaroot_voice_mutation"
 	ffmpeg_arguments = "asetrate=21000,acrusher=0.4:1:15:0:log,volume=volume=5"
 
 /datum/status_effect/khaaroot_survivor
@@ -70,7 +70,7 @@
 	if(tts_args[TTS_CHANNEL_OVERRIDE] == CHANNEL_TTS_TELEPATHY)
 		return
 	var/list/effects = tts_args[TTS_CAST_EFFECTS]
-	effects.Insert(1, /datum/singleton/sound_effect/khaaroot_mutation)
+	effects.Insert(1, /datum/singleton/sound_effect/khaaroot_voice_mutation)
 
 /datum/status_effect/khaaroot_survivor/tick(seconds_between_ticks)
 	var/mob/living/carbon/human/H = owner
