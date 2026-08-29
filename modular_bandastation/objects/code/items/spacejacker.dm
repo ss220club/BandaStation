@@ -71,8 +71,7 @@
 /obj/item/spacejacker/proc/update_exchange_rate()
 	var/player_count = length(GLOB.clients)
 	var/traitor_count = 0
-	for(var/datum/antagonist/traitor/traitor in GLOB.antagonists)
-		traitor_count++
+	var/traitor_count = length(get_antag_minds(/datum/antagonist/traitor))
 
 	if(player_count == exchange_player_count && traitor_count == exchange_traitor_count)
 		return
