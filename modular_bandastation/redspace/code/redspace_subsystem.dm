@@ -1156,9 +1156,10 @@ SUBSYSTEM_DEF(redspace)
 	return add_source(new /datum/redspace_field_source/stabilizer(0, origin, min(source_strength, 0), source_radius, REDSPACE_PROFILE_STABILIZER, null, reason))
 
 /// Registers a stable hot zone: a persistent local anomaly with its own type.
-/datum/controller/subsystem/redspace/proc/register_hotspot(turf/origin, source_strength, source_radius, source_profile_id = REDSPACE_PROFILE_DEMONIC, reason = null, description = null) as /datum/redspace_field_source/hotspot
+/datum/controller/subsystem/redspace/proc/register_hotspot(turf/origin, source_strength, source_radius, source_profile_id = REDSPACE_PROFILE_DEMONIC, reason = null, description = null, counts_as_active_hotspot = TRUE) as /datum/redspace_field_source/hotspot
 	var/datum/redspace_field_source/hotspot/hotspot = new(0, origin, source_strength, source_radius, source_profile_id, null, reason)
 	hotspot.description = description
+	hotspot.counts_as_active_hotspot = counts_as_active_hotspot
 	return add_source(hotspot)
 
 /// Finds the closest positive hotspot to a turf. Rift sealers use the source origin,

@@ -170,6 +170,8 @@
 /datum/redspace_field_source/hotspot
 	/// Optional description used in logs and debug tooling.
 	var/description
+	/// Whether this source represents a zone that the station rift scanner should count.
+	var/counts_as_active_hotspot = TRUE
 
 /datum/redspace_field_source/hotspot/get_debug_label()
 	return "#[source_id] горячая зона [profile_id] ([origin_x], [origin_y], [z_level]), сила [round(strength, 0.1)], радиус [radius][description ? ", [description]" : ""]"

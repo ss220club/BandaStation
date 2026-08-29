@@ -117,3 +117,21 @@ accusative = "плату установки закрытия разломов р
 instrumental = "платой установки закрытия разломов редспейса"
 prepositional = "плате установки закрытия разломов редспейса"
 gender = "female"
+
+["redspace rift scanner"]
+nominative = "сканер разломов редспейса"
+genitive = "сканера разломов редспейса"
+dative = "сканеру разломов редспейса"
+accusative = "сканер разломов редспейса"
+instrumental = "сканером разломов редспейса"
+prepositional = "сканере разломов редспейса"
+gender = "male"
+
+["Redspace Rift Scanner Board"]
+nominative = "плата сканера разломов редспейса"
+genitive = "платы сканера разломов редспейса"
+dative = "плате сканера разломов редспейса"
+accusative = "плату сканера разломов редспейса"
+instrumental = "платой сканера разломов редспейса"
+prepositional = "плате сканера разломов редспейса"
+gender = "female"

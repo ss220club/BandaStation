@@ -566,6 +566,7 @@
 		/datum/design/board/redspace_console,
 		/datum/design/board/redspace_stabilizer,
 		/datum/design/board/redspace_rift_sealer,
+		/datum/design/board/redspace_rift_scanner,
 	)
 #else
 	id = "redspace_stabilization"
@@ -576,6 +577,7 @@
 		"redspace_console",
 		"redspace_stabilizer",
 		"redspace_rift_sealer",
+		"redspace_rift_scanner",
 	)
 #endif
 	display_name = "Стабилизация редспейса"

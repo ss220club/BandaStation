@@ -461,6 +461,7 @@
 		REDSPACE_PROFILE_DEMONIC,
 		"установлен демонический маяк",
 		"маяк опустошителя",
+		FALSE,
 	)
 	if(!field_source)
 		return INITIALIZE_HINT_QDEL
