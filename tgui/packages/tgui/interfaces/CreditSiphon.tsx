@@ -83,7 +83,7 @@ export function CreditSiphon() {
             Вывести
           </Button>
         </Section>
-        <Section title="КОСМООБМЕННИК 'СИНДИБАНК'">
+        <Section title="КОСМООБМЕННИК «СИНДИБАНК">
           <Box textAlign="center" mb={1}>
             {tc_price} кр. за 1 ТК <Icon color="gold" name="coins" />
           </Box>
