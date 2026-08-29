@@ -1,5 +1,0 @@
-<!-- Most valid html will work in here, but you have to use URL links for images. -->
-
-<h1>Приветствуем вас на Космической станции 13!</h1>
-
-<i>На этом сервере запущен билд Bandastation (/tg/station 13).</i>
