@@ -54,7 +54,7 @@
 			continue
 		var/amount = max(1, round(account.account_balance * siphon_percentage))
 		amount = min(amount, account.account_balance)
-		if(!account.adjust_money(-amount, "Система: Несанкционированное списание"))
+		if(!account.adjust_money(-amount, "Система: несанкционированное списание"))
 			continue
 		credits_stored += amount
 		account.bank_card_talk("С вашего счёта списано [amount][MONEY_NAME]. Источник не определён.")
