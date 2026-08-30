@@ -8,6 +8,7 @@
 	name = "бутылка с вирусом культуры ГБС"
 	desc = "Маленькая бутылка, содержащая кровь с вирусом Гравикинетического Бипотенциального САДС++."
 	item = /obj/item/reagent_containers/cup/bottle/gbs
+	limited_stock = 1
 	restricted_roles = list(
 		JOB_CHIEF_MEDICAL_OFFICER,
 		JOB_CORONER,
@@ -34,6 +35,7 @@
 	desc = "Это устройство позволяет вам тайно снимать кредиты с банковских счетов других членов экипажа и прикреплять к их КПК вирус, который передаёт деньги на ваш космохакер. Также имеет выгодный обменник кредитов на ТК, но будьте осторожны, ТК ограничены, а также слишком частое использование может вызвать подозрения у других членов экипажа."
 	item = /obj/item/spacejacker
 	category = /datum/uplink_category/role_restricted
+	limited_stock = 1
 	restricted_roles = list(
 		JOB_QUARTERMASTER,
 		JOB_CARGO_TECHNICIAN,
