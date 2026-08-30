@@ -90,37 +90,8 @@
 	inhand_icon_state = "katana_sheath"
 	storage_type = /datum/storage/centcom_katana_belt
 
-<<<<<<< HEAD
 /obj/item/storage/belt/sheath/centcom_katana/PopulateContents()
 	new /obj/item/melee/sabre/centcom/katana(src)
-=======
-/obj/item/storage/belt/centcom_katana/examine(mob/user)
-	. = ..()
-	if(length(contents))
-		. += span_notice("Alt-click it to quickly draw the blade.")
-
-/obj/item/storage/belt/centcom_katana/click_alt(mob/user)
-	if(length(contents))
-		var/obj/item/I = contents[1]
-		user.visible_message(span_notice("[user] takes [I] out of [src]."), span_notice("You take [I] out of [src]."))
-		user.put_in_hands(I)
-		update_appearance()
-	else
-		balloon_alert(user, "it's empty!")
-	return CLICK_ACTION_SUCCESS
-
-/obj/item/storage/belt/centcom_katana/update_icon_state()
-	icon_state = initial(inhand_icon_state)
-	inhand_icon_state = initial(inhand_icon_state)
-	worn_icon_state = initial(worn_icon_state)
-	if(length(contents))
-		icon_state += "-sabre"
-		inhand_icon_state += "-sabre"
-		worn_icon_state += "-sabre"
-	return ..()
-
-/obj/item/storage/belt/centcom_katana/PopulateContents()
-	new /obj/item/melee/sabre/centcom_katana(src)
 
 /datum/storage/centcom_tanto_belt
 	max_slots = 1
@@ -150,4 +121,3 @@
 
 /obj/item/storage/belt/sheath/tanto/PopulateContents()
 	new /obj/item/melee/sabre/centcom_tanto(src)
->>>>>>> 35628b9c1ef (Добавил штуку-дрюку)
