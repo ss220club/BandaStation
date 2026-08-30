@@ -26,7 +26,6 @@
 	if(!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) || !isliving(target) || !COOLDOWN_FINISHED(src, next_attack))
 		return
 
-## todo: починить этот калл
 
 	var/mob/living/living_target = target
 	living_target.Knockdown(1 SECONDS)
