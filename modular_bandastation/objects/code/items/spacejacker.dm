@@ -15,7 +15,7 @@
 	var/tc_purchase_limit = 8
 	var/exchange_player_count = -1
 	var/exchange_traitor_count = -1
-	var/mob/living/carbon/human/attached_target
+	var/datum/weakref/attached_target_ref
 	COOLDOWN_DECLARE(siphon_cooldown)
 	COOLDOWN_DECLARE(attach_cooldown)
 
@@ -39,9 +39,14 @@
 
 	var/mob/living/carbon/human/holder = recursive_loc_check(src, /mob/living/carbon/human)
 	var/turf/siphon_center = get_turf(src)
-	if(attached_target)
+	if(attached_target_ref)
+		var/mob/living/carbon/human/attached_target = attached_target_ref.resolve()
+		if(!attached_target)
+			attached_target_ref = null
+			return
 		var/obj/item/modular_computer/pda/target_pda = locate() in attached_target.get_all_contents()
 		if(!target_pda)
+			attached_target_ref = null
 			return
 		siphon_center = get_turf(target_pda)
 	var/list/targets = viewers(siphon_range, siphon_center)
@@ -69,8 +74,7 @@
 	return nearby_players
 
 /obj/item/spacejacker/proc/update_exchange_rate()
-	var/player_count = length(GLOB.clients)
-	var/traitor_count = 0
+	var/player_count = length(GLOB.alive_player_list)
 	var/traitor_count = length(get_antag_minds(/datum/antagonist/traitor))
 
 	if(player_count == exchange_player_count && traitor_count == exchange_traitor_count)
@@ -78,10 +82,26 @@
 
 	exchange_player_count = player_count
 	exchange_traitor_count = traitor_count
-	tc_purchase_limit = player_count >= 31 ? 9 : 7
-	tc_price = player_count >= 31 ? 1000 : 950
+	var/threshold = CONFIG_GET(number/spacejacker_player_threshold)
+	tc_purchase_limit = player_count >= threshold ? CONFIG_GET(number/spacejacker_tc_limit_high) : CONFIG_GET(number/spacejacker_tc_limit_low)
+	tc_price = player_count >= threshold ? CONFIG_GET(number/spacejacker_tc_price_high) : CONFIG_GET(number/spacejacker_tc_price_low)
 	for(var/traitor_number in 1 to traitor_count)
 		tc_price += rand(5, 50)
+
+/datum/config_entry/number/spacejacker_player_threshold
+	default = 31
+
+/datum/config_entry/number/spacejacker_tc_limit_low
+	default = 7
+
+/datum/config_entry/number/spacejacker_tc_limit_high
+	default = 9
+
+/datum/config_entry/number/spacejacker_tc_price_low
+	default = 950
+
+/datum/config_entry/number/spacejacker_tc_price_high
+	default = 1000
 
 /obj/item/spacejacker/proc/attach_to_player(mob/user, target_ref)
 	if(!COOLDOWN_FINISHED(src, attach_cooldown))
@@ -95,7 +115,7 @@
 	var/obj/item/modular_computer/pda/target_pda = locate() in target.get_all_contents()
 	if(!target_pda)
 		return FALSE
-	attached_target = target
+	attached_target_ref = WEAKREF(target)
 	playsound(target, 'sound/effects/youarehacked.ogg', 100, FALSE)
 	COOLDOWN_START(src, attach_cooldown, 10 MINUTES)
 	var/datum/computer_file/program/messenger/messenger_app = locate() in target_pda.stored_files
@@ -127,7 +147,7 @@
 		"tc_purchase_limit" = tc_purchase_limit,
 		"tc_purchased" = tc_purchased,
 		"active" = active,
-		"attached" = !isnull(attached_target),
+		"attached" = !isnull(attached_target_ref),
 		"nearby_players" = get_nearby_players(),
 	)
 
