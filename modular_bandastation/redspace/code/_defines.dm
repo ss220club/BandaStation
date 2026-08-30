@@ -44,6 +44,12 @@
 #define REDSPACE_INTENSITY_DISTURBANCE "disturbance"
 #define REDSPACE_INTENSITY_STORM "storm"
 
+/// Automatic redspace sources wait for the station to prepare before appearing.
+#define REDSPACE_INITIAL_SOURCE_DELAY (20 MINUTES)
+#define REDSPACE_HOTSPOT_RESPAWN_DELAY_CALM (40 MINUTES)
+#define REDSPACE_HOTSPOT_RESPAWN_DELAY_DISTURBANCE (30 MINUTES)
+#define REDSPACE_HOTSPOT_RESPAWN_DELAY_STORM (15 MINUTES)
+
 /// Starting event-budget values for one active hex zone.
 #define REDSPACE_EVENT_BUDGET_WINDOW (60 SECONDS)
 #define REDSPACE_EVENT_BUDGET_COOLDOWN (10 SECONDS)

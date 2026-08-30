@@ -18,6 +18,10 @@
 	var/round_initialized = FALSE
 	var/primary_source_id
 	var/list/managed_source_ids = list()
+	/// Earliest time at which the initial or replacement hotspot may appear.
+	var/next_hotspot_at = 0
+	/// Set when the primary hotspot is removed, so an intensity change can update its cooldown.
+	var/hotspot_cooldown_started_at = 0
 	var/next_wave_at = 0
 	var/storm_active = FALSE
 	var/storm_announcement_sent = FALSE
@@ -30,8 +34,8 @@
 	round_initialized = TRUE
 	SSredspace.register_event_listener(src)
 	configure_intensity(redspace_intensity, FALSE)
-	ensure_primary_source()
-	next_wave_at = world.time + get_next_wave_delay()
+	next_hotspot_at = get_initial_source_at()
+	next_wave_at = next_hotspot_at
 
 /datum/station_trait/redspace_activity/process(seconds_per_tick)
 	if(!round_initialized || !SSredspace?.initialized)
@@ -39,10 +43,17 @@
 
 	if(primary_source_id && !SSredspace.field_sources["[primary_source_id]"])
 		primary_source_id = null
-	if(!primary_source_id)
-		ensure_primary_source()
+		hotspot_cooldown_started_at = world.time
+		next_hotspot_at = world.time + get_hotspot_respawn_delay()
+		next_wave_at = 0
 
-	if(world.time >= next_wave_at)
+	if(!primary_source_id && (!next_hotspot_at || world.time >= next_hotspot_at))
+		if(ensure_primary_source())
+			next_hotspot_at = 0
+			hotspot_cooldown_started_at = 0
+			next_wave_at = world.time + get_next_wave_delay()
+
+	if(primary_source_id && (!next_wave_at || world.time >= next_wave_at))
 		spawn_wave()
 		next_wave_at = world.time + get_next_wave_delay()
 
@@ -71,7 +82,10 @@
 	if(update_source && primary_source_id && SSredspace?.initialized)
 		SSredspace.update_source_strength(primary_source_id, get_primary_source_strength(), "изменена интенсивность особенности раунда")
 		SSredspace.update_source_radius(primary_source_id, get_primary_source_radius(), "изменён радиус особенности раунда")
-		next_wave_at = min(next_wave_at, world.time + 10 SECONDS)
+		next_wave_at = next_wave_at ? min(next_wave_at, world.time + 10 SECONDS) : world.time + 10 SECONDS
+
+	if(hotspot_cooldown_started_at)
+		next_hotspot_at = hotspot_cooldown_started_at + get_hotspot_respawn_delay()
 	return TRUE
 
 /datum/station_trait/redspace_activity/proc/ensure_primary_source()
@@ -101,8 +115,9 @@
 	storm_active = FALSE
 	round_initialized = TRUE
 	SSredspace.register_event_listener(src)
-	ensure_primary_source()
-	next_wave_at = world.time + get_next_wave_delay()
+	next_hotspot_at = get_initial_source_at()
+	hotspot_cooldown_started_at = 0
+	next_wave_at = next_hotspot_at
 
 /datum/station_trait/redspace_activity/proc/set_intensity(new_intensity)
 	if(!configure_intensity(new_intensity))
@@ -130,6 +145,22 @@
 		if(REDSPACE_INTENSITY_STORM)
 			return 12
 	return 0
+
+/datum/station_trait/redspace_activity/proc/get_initial_source_at()
+	var/round_start_at = SSticker?.round_start_time
+	if(!round_start_at)
+		return world.time + REDSPACE_INITIAL_SOURCE_DELAY
+	return max(world.time, round_start_at + REDSPACE_INITIAL_SOURCE_DELAY)
+
+/datum/station_trait/redspace_activity/proc/get_hotspot_respawn_delay()
+	switch(redspace_intensity)
+		if(REDSPACE_INTENSITY_CALM)
+			return REDSPACE_HOTSPOT_RESPAWN_DELAY_CALM
+		if(REDSPACE_INTENSITY_DISTURBANCE)
+			return REDSPACE_HOTSPOT_RESPAWN_DELAY_DISTURBANCE
+		if(REDSPACE_INTENSITY_STORM)
+			return REDSPACE_HOTSPOT_RESPAWN_DELAY_STORM
+	return REDSPACE_HOTSPOT_RESPAWN_DELAY_DISTURBANCE
 
 /datum/station_trait/redspace_activity/proc/get_next_wave_delay()
 	switch(redspace_intensity)

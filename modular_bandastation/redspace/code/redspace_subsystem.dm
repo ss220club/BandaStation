@@ -527,9 +527,24 @@ SUBSYSTEM_DEF(redspace)
 		if(istype(trait, /datum/station_trait/redspace_activity))
 			return trait
 
+/// Creates a live base trait when an administrator enables redspace in a round
+/// that did not roll one from the station-trait pool.
+/datum/controller/subsystem/redspace/proc/ensure_round_trait() as /datum/station_trait/redspace_activity
+	var/datum/station_trait/redspace_activity/round_trait = get_round_trait()
+	if(round_trait)
+		return round_trait
+	if(!SSstation)
+		return
+
+	round_trait = new /datum/station_trait/redspace_activity
+	SSstation.station_traits += round_trait
+	if(SSticker?.HasRoundStarted())
+		round_trait.on_round_start()
+	return round_trait
+
 /// Changes the declared redspace intensity through the live round feature.
 /datum/controller/subsystem/redspace/proc/set_round_intensity(new_intensity, reason = null)
-	var/datum/station_trait/redspace_activity/trait = get_round_trait()
+	var/datum/station_trait/redspace_activity/trait = ensure_round_trait()
 	if(!trait || !trait.set_intensity(new_intensity))
 		return FALSE
 	var/change_reason = reason || "изменена интенсивность особенности раунда"
