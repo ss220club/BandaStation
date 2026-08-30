@@ -6,7 +6,7 @@
 
 /datum/uplink_item/role_restricted/gbs
 	name = "бутылка с вирусом культуры ГБС"
-	desc = "Маленькая бутылка, содержащая кровь с вирусом Гравикинетического Бипотенциального САДС++."
+	desc = "Маленькая бутылка, содержащая кровь с вирусом гравикинетического бипотенциального САДС++."
 	item = /obj/item/reagent_containers/cup/bottle/gbs
 	limited_stock = 1
 	restricted_roles = list(
