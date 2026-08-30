@@ -95,7 +95,7 @@
 	uniform = /obj/item/clothing/under/rank/centcom/official
 	suit = /obj/item/clothing/suit/armor/centcom_formal/field
 	back = /obj/item/storage/backpack/satchel/leather
-	belt = /obj/item/storage/belt/centcom_sabre
+	belt = /obj/item/storage/belt/sheath/centcom_rapier
 	ears = /obj/item/radio/headset/headset_cent/commander
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/centcom_officer
 	gloves = /obj/item/clothing/gloves/combat/centcom
