@@ -35,7 +35,7 @@ export function CreditSiphon() {
     <Window
       width={380}
       height={450}
-      title="Взлом Инициализирован..."
+      title="Взлом инициализирован..."
       theme="hackerman"
     >
       <Window.Content style={{ fontFamily: 'Verdana, sans-serif' }}>
@@ -49,7 +49,7 @@ export function CreditSiphon() {
             color={active ? 'red' : 'green'}
             onClick={() => act('toggle')}
           >
-            {active ? 'Выключить фишинг-бот' : 'Включить фишинг-бот'}
+            {active ? 'Выключить фишинг-бота' : 'Включить фишинг-бота'}
           </Button>
           <Button
             fluid
