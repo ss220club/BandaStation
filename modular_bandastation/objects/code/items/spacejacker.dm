@@ -174,7 +174,7 @@
 			tc_purchased++
 			var/obj/item/stack/telecrystal/telecrystals = new (usr.drop_location(), 1)
 			usr.put_in_hands(telecrystals)
-			to_chat(usr, span_notice("Вы обмениваете [tc_price] [MONEY_NAME] на некоторую сумму телекристаллов."))
+			to_chat(usr, span_notice("Вы обмениваете [tc_price] [MONEY_NAME] на некоторое количество телекристаллов."))
 			return TRUE
 		if("withdraw")
 			if(!credits_stored || !in_range(usr, src))
