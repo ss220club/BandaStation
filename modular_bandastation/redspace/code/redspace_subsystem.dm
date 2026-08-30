@@ -1292,7 +1292,7 @@ SUBSYSTEM_DEF(redspace)
 	if(reason)
 		source.change_reason = reason
 	var/change_reason = reason || source.change_reason || "источник удалён"
-	var/list/refresh_cell_keys = source.get_coverage_refresh_keys()
+	var/list/refresh_cell_keys = source.get_coverage_refresh_keys(include_in_progress = TRUE)
 	UnregisterSignal(source, COMSIG_QDELETING)
 	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_REMOVED, source.profile_id, source, null, change_reason)
 	field_sources -= source_key
@@ -1315,7 +1315,7 @@ SUBSYSTEM_DEF(redspace)
 	if(field_sources[source_key] != source)
 		return
 	var/change_reason = source.change_reason || "источник уничтожен"
-	var/list/refresh_cell_keys = source.get_coverage_refresh_keys()
+	var/list/refresh_cell_keys = source.get_coverage_refresh_keys(include_in_progress = TRUE)
 	SEND_SIGNAL(source, COMSIG_REDSPACE_SOURCE_CHANGED, REDSPACE_SOURCE_CHANGE_REMOVED, source.profile_id, source, null, change_reason)
 	field_sources -= source_key
 	processing_sources -= source_key
@@ -1403,6 +1403,17 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/proc/reset_debug_state()
 	clear_event_wake_timer()
 	cancel_active_events("событие отменено при сбросе поля")
+	var/list/field_listeners_to_restore = list()
+	for(var/datum/listener as anything in field_listeners)
+		var/turf/listener_target = field_listener_targets[listener]
+		if(!listener || QDELETED(listener) || !listener_target || QDELETED(listener_target))
+			continue
+		field_listeners_to_restore[listener] = list(
+			"target" = listener_target,
+			"value" = field_listener_values[listener],
+			"state" = field_listener_states[listener],
+		)
+	var/list/event_listeners_to_restore = event_listeners.Copy()
 	clear_listener_registrations()
 	for(var/source_key in field_sources.Copy())
 		var/datum/redspace_field_source/source = field_sources[source_key]
@@ -1447,6 +1458,23 @@ SUBSYSTEM_DEF(redspace)
 	context = new /datum/redspace_context(list(new /datum/redspace_context_provider/default()))
 	context.refresh()
 	station_z_levels = context.active_z_levels.Copy()
+	for(var/datum/listener as anything in field_listeners_to_restore)
+		var/list/restore_data = field_listeners_to_restore[listener]
+		var/turf/listener_target = restore_data["target"]
+		if(!listener || QDELETED(listener) || !listener_target || QDELETED(listener_target))
+			continue
+		if(!register_field_listener(listener, listener_target))
+			continue
+		var/datum/redspace_field_cell/cell = field_cells[field_listeners[listener]]
+		var/new_value = field_listener_values[listener]
+		var/new_state = field_listener_states[listener]
+		var/old_value = restore_data["value"]
+		var/old_state = restore_data["state"]
+		if(old_value != new_value || old_state != new_state)
+			SEND_SIGNAL(listener, COMSIG_REDSPACE_FIELD_CHANGED, cell, old_value, new_value, old_state, new_state, "поле сброшено")
+	for(var/datum/listener as anything in event_listeners_to_restore)
+		if(listener && !QDELETED(listener))
+			register_event_listener(listener)
 	can_fire = FALSE
 	var/datum/station_trait/redspace_activity/round_trait = get_round_trait()
 	if(round_trait)

@@ -347,7 +347,7 @@
 		if(REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
 			turf_spawn_spent_points += spawn_cost
 			last_turf_spawn_event_time = world.time
-		if(REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
+		else if(REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
 			mob_spawn_spent_points += spawn_cost
 			last_mob_spawn_event_time = world.time
 		else
@@ -388,7 +388,7 @@
 				turf_spawn_spent_points = max(turf_spawn_spent_points - reservation["cost"], 0)
 				if(last_turf_spawn_event_time == world.time)
 					last_turf_spawn_event_time = 0
-			if(REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
+			else if(REDSPACE_EVENT_CATEGORY_MOB_SPAWN)
 				mob_spawn_spent_points = max(mob_spawn_spent_points - reservation["cost"], 0)
 				if(last_mob_spawn_event_time == world.time)
 					last_mob_spawn_event_time = 0

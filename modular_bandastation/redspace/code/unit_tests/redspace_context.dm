@@ -105,10 +105,14 @@
 	qdel(timed_source)
 
 	var/datum/redspace_field_source/hotspot/test_hotspot = new(0, test_turf, 5, 3, "test")
-	if(test_hotspot.requires_processing())
-		return Fail("Persistent hotspots must not require processing")
+	if(!test_hotspot.requires_processing())
+		return Fail("Growable hotspots must require processing")
 	if(test_hotspot.get_contribution(test_turf) != 5)
 		return Fail("Hotspots must contribute their strength at the origin")
+	test_hotspot.strength = REDSPACE_MAX_NORMAL_VALUE
+	test_hotspot.radius = REDSPACE_MAX_SOURCE_RADIUS
+	if(test_hotspot.requires_processing())
+		return Fail("Fully grown hotspots must not require processing")
 	qdel(test_hotspot)
 
 	var/datum/redspace_field_source/mutable_source = new(0, test_turf, 5, 3, "test")

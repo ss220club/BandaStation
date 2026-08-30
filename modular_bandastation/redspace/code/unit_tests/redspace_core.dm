@@ -169,10 +169,14 @@
 		return Fail("Spawn events must use their own budget instead of the dangerous-event limit")
 	if(budget.active_dangerous_count != REDSPACE_EVENT_BUDGET_MAX_DANGEROUS || budget.active_spawn_event_count != 1 || budget.active_spawn_mob_count != 1)
 		return Fail("Spawn reservations must not consume ordinary dangerous-event counters")
+	var/object_spawn_points_before_turf = budget.spawn_spent_points
+	var/object_spawn_time_before_turf = budget.last_spawn_event_time
 	if(!budget.can_start(turf_spawn) || !budget.reserve(turf_spawn))
 		return Fail("Turf and mob spawn budgets must not block each other")
 	if(budget.active_spawn_mob_count != 1 || budget.active_spawn_turf_count != 1)
 		return Fail("Turf and mob spawn reservations must keep separate category counts")
+	if(budget.spawn_spent_points != object_spawn_points_before_turf || budget.last_spawn_event_time != object_spawn_time_before_turf)
+		return Fail("Turf and mob spawn reservations must not consume the object spawn budget")
 	budget.release(turf_spawn)
 	budget.release(mob_spawn)
 

@@ -64,9 +64,13 @@
 	var/delta_y = center[2] - coverage_center_y
 	return delta_x * delta_x + delta_y * delta_y >= REDSPACE_HEX_RADIUS * REDSPACE_HEX_RADIUS
 
-/datum/redspace_field_source/proc/get_coverage_refresh_keys() as /list
+
+/datum/redspace_field_source/proc/get_coverage_refresh_keys(include_in_progress = FALSE) as /list
 	var/list/refresh_keys = coverage_refresh_cell_keys.Copy()
 	coverage_refresh_cell_keys.Cut()
+	if(include_in_progress && length(coverage_seen_cells))
+		for(var/cell_key in coverage_seen_cells)
+			refresh_keys |= cell_key
 	if(!length(refresh_keys))
 		return coverage_cell_keys.Copy()
 	return refresh_keys
