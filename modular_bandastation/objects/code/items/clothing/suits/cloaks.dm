@@ -69,7 +69,6 @@
 	icon_state = "gr_cape"
 	armor_type = /datum/armor/armor_centcom_cloak
 
-
 // Blueshield
 /obj/item/clothing/neck/cloak/blueshield
 	name = "blueshield's cloak"
