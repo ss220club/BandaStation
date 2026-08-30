@@ -43,6 +43,13 @@
 		overlay_y = 11 \
 	)
 
+/obj/item/gun/ballistic/shotgun/riot/lethal
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot/lethal
+
+/obj/item/ammo_box/magazine/internal/shot/riot/lethal
+	ammo_type = /obj/item/ammo_casing/shotgun/buckshot/milspec
+	max_ammo = 6
+
 /obj/item/gun/ballistic/shotgun/automatic/combat/add_seclight_point()
 	AddComponent(/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
@@ -186,6 +193,13 @@
 	weapon_weight = WEAPON_HEAVY
 	var/extended = TRUE
 
+/obj/item/gun/ballistic/shotgun/automatic/ar/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 29, \
+		overlay_y = 12)
+
 /obj/item/gun/ballistic/automatic/ar/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
@@ -231,18 +245,39 @@
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, 0.2 SECONDS)
 
+/obj/item/gun/ballistic/automatic/mini_uzi/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "mini-light", \
+		overlay_x = 21, \
+		overlay_y = 11)
+
 /obj/item/gun/ballistic/automatic/proto
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	suppressor_x_offset = 9
-
-/obj/item/gun/ballistic/automatic/proto
 	recoil = 0.2
+
+/obj/item/gun/ballistic/automatic/proto/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "mini-light", \
+		overlay_x = 21, \
+		overlay_y = 11)
 
 /obj/item/gun/ballistic/automatic/battle_rifle
 	recoil = 0.3
 
 /obj/item/gun/ballistic/automatic/wt550
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	recoil = 0.3
+	suppressor_x_offset = 11
+
+/obj/item/gun/ballistic/automatic/wt550/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "mini-light", \
+		overlay_x = 25, \
+		overlay_y = 10)
 
 /obj/item/gun/ballistic/automatic/m90
 	recoil = 0.3
@@ -251,6 +286,11 @@
 	recoil = 0.2
 
 /obj/item/gun/ballistic/automatic/proto
+	recoil = 0.2
+
+/obj/item/gun/ballistic/automatic/tommygun
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	SET_BASE_PIXEL(-8, 0)
 	recoil = 0.2
 
 /obj/item/gun/ballistic/automatic/laser
@@ -262,9 +302,26 @@
 /obj/item/gun/ballistic/automatic/gyropistol
 	recoil = 0.1
 
+/obj/item/gun/grenadelauncher
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	SET_BASE_PIXEL(-8, 0)
+
+/obj/item/gun/ballistic/rifle/sniper_rifle
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic64x32.dmi'
+	SET_BASE_PIXEL(-16, 0)
+	suppressor_x_offset = 11
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 36, \
+		overlay_y = 11)
+
 /obj/item/gun/ballistic/automatic/bow
 	recoil = 0
 
+//Toy guns
 /obj/item/gun/ballistic/automatic/pistol/toy
 	recoil = 0
 
@@ -279,17 +336,6 @@
 
 /obj/item/gun/ballistic/automatic/l6_saw/toy
 	recoil = 0
-
-/obj/item/gun/ballistic/shotgun/riot/lethal
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot/lethal
-
-/obj/item/ammo_box/magazine/internal/shot/riot/lethal
-	ammo_type = /obj/item/ammo_casing/shotgun/buckshot/milspec
-	max_ammo = 6
-
-/obj/item/gun/grenadelauncher
-	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
-	SET_BASE_PIXEL(-8, 0)
 
 // Prevents gun sizes from changing due to suppressors
 /obj/item/gun/ballistic/install_suppressor(obj/item/suppressor/new_suppressor)
