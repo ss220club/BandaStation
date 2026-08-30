@@ -193,7 +193,7 @@
 	weapon_weight = WEAPON_HEAVY
 	var/extended = TRUE
 
-/obj/item/gun/ballistic/shotgun/automatic/ar/add_seclight_point()
+/obj/item/gun/ballistic/automatic/ar/add_seclight_point()
 	AddComponent(/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "flight", \
@@ -261,7 +261,7 @@
 	AddComponent(/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "mini-light", \
-		overlay_x = 21, \
+		overlay_x = 24, \
 		overlay_y = 11)
 
 /obj/item/gun/ballistic/automatic/battle_rifle
@@ -271,6 +271,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	recoil = 0.3
 	suppressor_x_offset = 11
+	can_suppress = TRUE
 
 /obj/item/gun/ballistic/automatic/wt550/add_seclight_point()
 	AddComponent(/datum/component/seclite_attachable, \
@@ -310,6 +311,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic64x32.dmi'
 	SET_BASE_PIXEL(-16, 0)
 	suppressor_x_offset = 11
+	suppressor_y_offset = 0
 
 /obj/item/gun/ballistic/rifle/sniper_rifle/add_seclight_point()
 	AddComponent(/datum/component/seclite_attachable, \
