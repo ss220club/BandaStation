@@ -143,7 +143,6 @@
 	worn_icon_state = "tanto_sheath"
 	inhand_icon_state = "tanto_sheath"
 	storage_type = /datum/storage/centcom_tanto_belt
-	desc_controls = "Нажмите Alt+ЛКМ, чтобы быстро достать клинок."
 
 /obj/item/storage/belt/sheath/tanto/Initialize(mapload)
 	. = ..()
