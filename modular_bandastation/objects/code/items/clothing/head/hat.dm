@@ -109,7 +109,6 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
 	heat_protection = HEAD
-	armor_type = /datum/armor/space_beret
 	strip_delay = 13 SECONDS
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	flash_protect = FLASH_PROTECTION_WELDER
