@@ -35,7 +35,7 @@ export function CreditSiphon() {
     <Window
       width={380}
       height={450}
-      title="Взлом Инициализирован..."
+      title="Взлом инициализирован..."
       theme="hackerman"
     >
       <Window.Content style={{ fontFamily: 'Verdana, sans-serif' }}>
