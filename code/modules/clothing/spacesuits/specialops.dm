@@ -1,6 +1,6 @@
 /obj/item/clothing/head/beret/centcom
 	name = "\improper CentCom officer's beret"
-	desc = "An armored beret commonly used by special operations officers. Uses advanced force field technology to protect the head from space."
+	desc = "A light-armored beret commonly used by special operations officers." // BANDASTATION EDIT: CentCom balance
 	icon = 'icons/map_icons/clothing/head/beret.dmi'
 	icon_state = "/obj/item/clothing/head/beret/centcom"
 	post_init_icon_state = "beret_badge"
@@ -38,7 +38,7 @@
 
 /obj/item/clothing/suit/space/officer
 	name = "\improper CentCom officer's coat"
-	desc = "An armored, space-proof coat used in special operations."
+	desc = "A light-armored coat used in special operations." // BANDASTATION EDIT: CentCom balance
 	icon_state = "centcom_coat"
 	icon = 'icons/obj/clothing/suits/jacket.dmi'
 	worn_icon = 'icons/mob/clothing/suits/jacket.dmi'
