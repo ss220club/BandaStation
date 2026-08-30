@@ -49,7 +49,7 @@ export function CreditSiphon() {
             color={active ? 'red' : 'green'}
             onClick={() => act('toggle')}
           >
-            {active ? 'Выключить фишинг-бот' : 'Включить фишинг-бот'}
+            {active ? 'Выключить фишинг-бота' : 'Включить фишинг-бота'}
           </Button>
           <Button
             fluid
