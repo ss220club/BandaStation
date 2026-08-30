@@ -323,7 +323,7 @@
 /obj/item/gun/ballistic/automatic/bow
 	recoil = 0
 
-//Toy guns
+// Toy guns
 /obj/item/gun/ballistic/automatic/pistol/toy
 	recoil = 0
 
@@ -344,11 +344,11 @@
 	. = ..()
 	w_class -= suppressor.w_class
 
-// Prevents gun sizes from changing due to suppressors
 /obj/item/gun/ballistic/clear_suppressor()
 	w_class = initial(w_class)
 	return ..()
 
+// Firing pins
 /obj/item/firing_pin/alert_level
 	name = "alert level firing pin"
 	var/desired_minimum_alert = SEC_LEVEL_GREEN
