@@ -132,7 +132,7 @@
 
 /obj/item/disk/computer/hdd_theft
 	name = "r&d server hard disk drive"
-	desc = "По какой-то причине, люди очень сильно хотят украсть это. Исходный код на этом диске, вероятно, используется для чего-то ужасного!"
+	desc = "По какой-то причине люди очень сильно хотят украсть это. Исходный код на этом диске, вероятно, используется для чего-то ужасного!"
 	max_capacity = 512
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
