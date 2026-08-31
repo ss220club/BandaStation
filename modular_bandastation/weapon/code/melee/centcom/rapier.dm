@@ -105,7 +105,7 @@
 
 /obj/item/storage/belt/sheath/tanto
 	name = "fleet officer's tanto sheath's"
-	desc = "Матово-черные двойные ножны для танто, перевязанные серебряной нитью. Сконструированы так, что оба танто можно достать одновременно за доли секунды"
+	desc = "Матово-чёрные двойные ножны для танто, перевязанные серебряной нитью. Сконструированы так, что оба танто можно достать одновременно за доли секунды"
 	icon = 'modular_bandastation/weapon/icons/melee/sheath.dmi'
 	worn_icon = 'modular_bandastation/weapon/icons/melee/sheath_onmob.dmi'
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
