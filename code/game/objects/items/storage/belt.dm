@@ -741,6 +741,12 @@
 	enable_text = "You prepare to counterattack a target..."
 	disable_text = "You relax your stance."
 
+	// BANDASTATION EDIT: START - time as variable
+	var/immobilize_time = 1 SECONDS
+	var/counter_attack_cooldown = 45 SECONDS
+	var/time_to_counter = 1.5 SECONDS
+	// BANDASTATION EDIT: END
+
 	click_action = TRUE
 
 	var/datum/weakref/eyed_fool
@@ -769,8 +775,8 @@
 	if(owner == cast_on)
 		to_chat(owner, span_warning("You can't counterattack yourself!"))
 		return FALSE
-	var/mob/living/target = cast_on
-	if(!target.mind)
+	var/mob/living/target_mob = cast_on // BANDASTATION FIX
+	if(!target_mob.mind) // BANDASTATION FIX
 		to_chat(owner, span_warning("They are too unpredictable to counterattack!"))
 		return FALSE
 	var/obj/item/storage/belt/sheath/oursheath = target
@@ -783,11 +789,11 @@
 		return TRUE
 	var/obj/item/storage/belt/sheath/used_sheath = target
 	RegisterSignal(swordsman, COMSIG_LIVING_CHECK_BLOCK, PROC_REF(counter_attack))
-	swordsman.Immobilize(1 SECONDS)
+	swordsman.Immobilize(immobilize_time) // BANDASTATION EDIT: time as variable
 	eyed_fool = WEAKREF(cast_on)
 	swordsman.visible_message(span_danger("[swordsman] widens [swordsman.p_their()] stance, [swordsman.p_their()] hand hovering over \the [used_sheath]!"), span_notice("You prepare to counterattack [cast_on]!"))
-	addtimer(CALLBACK(src, PROC_REF(relax), swordsman, used_sheath), 1 SECONDS)
-	COOLDOWN_START(used_sheath, full_ability_cooldown, 60 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(relax), swordsman, used_sheath), time_to_counter) // BANDASTATION EDIT: time as variable
+	COOLDOWN_START(used_sheath, full_ability_cooldown, counter_attack_cooldown) // BANDASTATION EDIT: time as variable
 	unset_ranged_ability(swordsman)
 	return TRUE
 
