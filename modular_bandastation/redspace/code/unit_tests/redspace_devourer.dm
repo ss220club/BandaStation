@@ -8,6 +8,8 @@
 		return Fail("The Devourer must use its dedicated sprite and SET_BASE_PIXEL offsets")
 	if(devourer.speed != 2 || devourer.move_force != MOVE_FORCE_OVERPOWERING || devourer.move_resist != INFINITY || devourer.pull_force != MOVE_FORCE_OVERPOWERING || devourer.can_be_pulled(null, INFINITY))
 		return Fail("The Devourer must be slow and immune to normal pushing and pulling")
+	if(devourer.obj_damage < 200 || devourer.environment_smash < ENVIRONMENT_SMASH_WALLS)
+		return Fail("The Devourer must tear through doors and walls quickly during its retreat")
 	if(devourer.devour_delay != 5 SECONDS || devourer.transformation_delay != 2 MINUTES)
 		return Fail("The Devourer must expose the configured devour and transformation delays")
 	if(!istype(devourer.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/melee/devourer))
@@ -75,19 +77,199 @@
 	if(redspace_devourer_can_consume(dead))
 		return Fail("The Devourer must not target dead humans")
 
-	var/mob/living/basic/demon/redspace/devourer/capture_devourer = allocate(/mob/living/basic/demon/redspace/devourer)
-	var/mob/living/carbon/human/capture_victim = allocate(/mob/living/carbon/human)
+	var/turf/source_turf = get_safe_random_station_turf_equal_weight()
+	var/turf/outside_turf
+	for(var/attempt in 1 to 20)
+		var/turf/candidate_turf = get_safe_random_station_turf_equal_weight()
+		if(candidate_turf && candidate_turf.z == source_turf?.z && get_dist(candidate_turf, source_turf) > 5)
+			outside_turf = candidate_turf
+			break
+	if(!source_turf || !outside_turf)
+		return Fail("The Devourer epicenter fallback test requires two distant station turfs")
+	var/list/saved_field_sources = SSredspace.field_sources
+	var/list/saved_field_cells = SSredspace.field_cells
+	var/datum/redspace_field_source/hotspot/test_source = new(0, source_turf, 4.5, 2, REDSPACE_PROFILE_DEMONIC, null, "unit test")
+	SSredspace.field_sources = list("unit_test" = test_source)
+	SSredspace.field_cells = list()
+	var/turf/selected_epicenter = redspace_devourer_get_hottest_turf(outside_turf)
+	SSredspace.field_sources = saved_field_sources
+	SSredspace.field_cells = saved_field_cells
+	qdel(test_source)
+	if(selected_epicenter != source_turf)
+		return Fail("A Devourer that eats outside the disturbance must still select the source epicenter")
+
+	var/mob/living/basic/demon/redspace/devourer/capture_devourer = allocate(/mob/living/basic/demon/redspace/devourer, run_loc_floor_bottom_left)
+	var/mob/living/carbon/human/capture_victim = allocate(/mob/living/carbon/human, run_loc_floor_bottom_left)
 	capture_victim.mind_initialize()
+	capture_victim.stat = HARD_CRIT
 	ADD_TRAIT(capture_victim, TRAIT_INCAPACITATED, REF(src))
 	if(!capture_devourer.capture_victim(capture_victim) || capture_victim.loc != capture_devourer || capture_devourer.stored_victim != capture_victim || !HAS_TRAIT(capture_victim, TRAIT_STASIS))
 		return Fail("A successful capture must move the victim into stasis inside the Devourer")
+	var/turf/door_turf = get_step(run_loc_floor_bottom_left, EAST)
+	var/turf/door_target_turf = get_step(door_turf, EAST)
+	var/obj/machinery/door/airlock/instant/test_door = allocate(/obj/machinery/door/airlock/instant, door_turf)
+	test_door.close(TRUE)
+	capture_devourer.forceMove(run_loc_floor_bottom_left)
+	capture_devourer.next_move = 0
+	var/door_integrity = test_door.atom_integrity
+	if(!redspace_demon_has_obstruction(capture_devourer, door_target_turf) || !redspace_demon_attack_obstruction(capture_devourer, door_target_turf) || (!QDELETED(test_door) && test_door.atom_integrity >= door_integrity))
+		return Fail("A Devourer carrying a victim must be able to break a closed airlock blocking its path")
 	capture_devourer.release_victim()
 	if(capture_devourer.stored_victim || capture_victim.loc == capture_devourer || HAS_TRAIT(capture_victim, TRAIT_STASIS))
 		return Fail("Releasing a captured victim must clear containment and stasis")
 
-	var/mob/living/basic/demon/redspace/devourer/transform_devourer = allocate(/mob/living/basic/demon/redspace/devourer)
-	var/mob/living/carbon/human/transform_victim = allocate(/mob/living/carbon/human)
+	var/mob/living/basic/demon/redspace/devourer/retreat_devourer = allocate(/mob/living/basic/demon/redspace/devourer, get_step(run_loc_floor_bottom_left, NORTH))
+	var/mob/living/carbon/human/retreat_victim = allocate(/mob/living/carbon/human, get_step(run_loc_floor_bottom_left, NORTH))
+	retreat_victim.mind_initialize()
+	retreat_victim.stat = HARD_CRIT
+	ADD_TRAIT(retreat_victim, TRAIT_INCAPACITATED, REF(src))
+	if(!retreat_devourer.capture_victim(retreat_victim))
+		return Fail("The retreat regression test requires a captured victim")
+	var/datum/ai_controller/basic_controller/simple/redspace_demon/melee/devourer/retreat_controller = retreat_devourer.ai_controller
+	retreat_controller.force_ai_off()
+	REMOVE_TRAIT(retreat_devourer, TRAIT_IMMOBILIZED, "redspace_devourer_stasis")
+
+	// A closed airlock in the way must take damage while the controller is forced off.
+	var/turf/retreat_door_turf = get_step(get_turf(retreat_devourer), EAST)
+	var/turf/retreat_destination = get_step(get_step(retreat_door_turf, EAST), EAST)
+	var/obj/machinery/door/airlock/instant/retreat_door = allocate(/obj/machinery/door/airlock/instant, retreat_door_turf)
+	retreat_door.close(TRUE)
+	retreat_devourer.next_move = 0
+	var/retreat_door_integrity = retreat_door.atom_integrity
+	var/retreat_step_result = retreat_devourer.devourer_retreat_step(retreat_destination)
+	var/retreat_door_damaged = QDELETED(retreat_door) || retreat_door.atom_integrity < retreat_door_integrity
+	if(!retreat_step_result || !retreat_door_damaged)
+		retreat_controller.clear_forced_off()
+		retreat_devourer.release_victim()
+		return Fail("A retreating devourer with the controller forced off must smash a door blocking its route")
+
+	// A wall in the way must be dismantled, and an open path must be stepped through.
+	var/turf/retreat_wall_turf = get_step(get_turf(retreat_devourer), WEST)
+	var/retreat_wall_restore_type = retreat_wall_turf?.type
+	var/retreat_wall_x = retreat_wall_turf?.x
+	var/retreat_wall_y = retreat_wall_turf?.y
+	var/retreat_wall_z = retreat_wall_turf?.z
+	if(!retreat_wall_turf)
+		retreat_controller.clear_forced_off()
+		retreat_devourer.release_victim()
+		return Fail("The retreat wall regression test could not allocate a route")
+	retreat_wall_turf.ChangeTurf(/turf/closed/wall)
+	retreat_devourer.next_move = 0
+	var/wall_step_result = retreat_devourer.devourer_retreat_step(get_step(retreat_wall_turf, WEST))
+	var/turf/retreat_wall_result = locate(retreat_wall_x, retreat_wall_y, retreat_wall_z)
+	var/retreat_wall_remains = iswallturf(retreat_wall_result)
+	retreat_wall_result?.ChangeTurf(retreat_wall_restore_type)
+	if(!wall_step_result || retreat_wall_remains)
+		retreat_controller.clear_forced_off()
+		retreat_devourer.release_victim()
+		return Fail("A retreating devourer must dismantle a wall blocking its route")
+
+	retreat_devourer.next_move = 0
+	var/turf/open_step_turf = get_step(get_turf(retreat_devourer), NORTH)
+	if(!open_step_turf || !retreat_devourer.devourer_retreat_step(open_step_turf) || get_turf(retreat_devourer) != open_step_turf)
+		retreat_controller.clear_forced_off()
+		retreat_devourer.release_victim()
+		return Fail("A retreating devourer must step through an open path")
+	retreat_controller.clear_forced_off()
+	retreat_devourer.release_victim()
+
+	// A reinforced wall on the direct line must not stall the retreat when a breakable
+	// airlock sits next to it: the step must smash the airlock instead of pushing against
+	// the unbreakable wall. The side walls also prove the devourer refuses to cut diagonally
+	// through a corner sealed by a reinforced wall.
+	var/turf/detour_start_turf = locate(run_loc_floor_bottom_left.x + 2, run_loc_floor_bottom_left.y + 2, run_loc_floor_bottom_left.z)
+	var/mob/living/basic/demon/redspace/devourer/detour_devourer = allocate(/mob/living/basic/demon/redspace/devourer, detour_start_turf)
+	var/mob/living/carbon/human/detour_victim = allocate(/mob/living/carbon/human, detour_start_turf)
+	detour_victim.mind_initialize()
+	detour_victim.stat = HARD_CRIT
+	ADD_TRAIT(detour_victim, TRAIT_INCAPACITATED, REF(src))
+	if(!detour_devourer.capture_victim(detour_victim))
+		return Fail("The detour regression test requires a captured victim")
+	detour_devourer.ai_controller.force_ai_off()
+	REMOVE_TRAIT(detour_devourer, TRAIT_IMMOBILIZED, "redspace_devourer_stasis")
+	var/turf/detour_wall_turf = get_step(detour_start_turf, EAST)
+	var/turf/detour_south_wall_turf = get_step(detour_start_turf, SOUTH)
+	var/turf/detour_door_turf = get_step(detour_start_turf, NORTH)
+	var/detour_wall_restore_type = detour_wall_turf?.type
+	var/detour_south_wall_restore_type = detour_south_wall_turf?.type
+	if(!detour_wall_turf || !detour_south_wall_turf || !detour_door_turf)
+		detour_devourer.ai_controller.clear_forced_off()
+		detour_devourer.release_victim()
+		return Fail("The detour regression test could not allocate a route")
+	detour_wall_turf.ChangeTurf(/turf/closed/wall/r_wall)
+	detour_south_wall_turf.ChangeTurf(/turf/closed/wall/r_wall)
+	var/obj/machinery/door/airlock/instant/detour_door = allocate(/obj/machinery/door/airlock/instant, detour_door_turf)
+	detour_door.close(TRUE)
+	detour_devourer.next_move = 0
+	var/detour_door_integrity = detour_door.atom_integrity
+	var/turf/detour_destination = get_step(detour_wall_turf, EAST)
+	var/detour_step_result = detour_devourer.devourer_retreat_step(detour_destination, list(detour_start_turf), null)
+	var/detour_door_damaged = QDELETED(detour_door) || detour_door.atom_integrity < detour_door_integrity
+	detour_wall_turf.ChangeTurf(detour_wall_restore_type)
+	detour_south_wall_turf.ChangeTurf(detour_south_wall_restore_type)
+	detour_devourer.ai_controller.clear_forced_off()
+	detour_devourer.release_victim()
+	if(!detour_step_result || !detour_door_damaged)
+		return Fail("A retreating devourer must smash a breakable airlock next to an unbreakable wall instead of stalling against it")
+
+	// Sealed in by reinforced walls on every side (with the room border walls behind),
+	// a single step must be reported as blocked so the retreat gives up and transforms in
+	// place. The devourer sits in the bottom-right corner of the room: east and south are
+	// the room border, north and west are sealed off with reinforced walls.
+	var/turf/sealed_start_turf = locate(run_loc_floor_bottom_left.x + 4, run_loc_floor_bottom_left.y, run_loc_floor_bottom_left.z)
+	var/mob/living/basic/demon/redspace/devourer/sealed_devourer = allocate(/mob/living/basic/demon/redspace/devourer, sealed_start_turf)
+	var/mob/living/carbon/human/sealed_victim = allocate(/mob/living/carbon/human, sealed_start_turf)
+	sealed_victim.mind_initialize()
+	sealed_victim.stat = HARD_CRIT
+	ADD_TRAIT(sealed_victim, TRAIT_INCAPACITATED, REF(src))
+	if(!sealed_devourer.capture_victim(sealed_victim))
+		return Fail("The sealed regression test requires a captured victim")
+	sealed_devourer.ai_controller.force_ai_off()
+	REMOVE_TRAIT(sealed_devourer, TRAIT_IMMOBILIZED, "redspace_devourer_stasis")
+	var/turf/sealed_north_wall_turf = get_step(sealed_start_turf, NORTH)
+	var/turf/sealed_west_wall_turf = get_step(sealed_start_turf, WEST)
+	var/sealed_north_restore_type = sealed_north_wall_turf?.type
+	var/sealed_west_restore_type = sealed_west_wall_turf?.type
+	if(!sealed_north_wall_turf || !sealed_west_wall_turf)
+		sealed_devourer.ai_controller.clear_forced_off()
+		sealed_devourer.release_victim()
+		return Fail("The sealed regression test could not allocate a route")
+	sealed_north_wall_turf.ChangeTurf(/turf/closed/wall/r_wall)
+	sealed_west_wall_turf.ChangeTurf(/turf/closed/wall/r_wall)
+	sealed_devourer.next_move = 0
+	var/sealed_step_result = sealed_devourer.devourer_retreat_step(get_step(sealed_start_turf, EAST), list(sealed_start_turf), null)
+	sealed_north_wall_turf.ChangeTurf(sealed_north_restore_type)
+	sealed_west_wall_turf.ChangeTurf(sealed_west_restore_type)
+	sealed_devourer.ai_controller.clear_forced_off()
+	sealed_devourer.release_victim()
+	if(sealed_step_result)
+		return Fail("A retreating devourer sealed in by reinforced walls must report a blocked step")
+
+	// An epicenter sealed by an unbreakable wall is unreachable, while an open or
+	// breakable one must be stepped into.
+	var/turf/epicenter_start_turf = locate(run_loc_floor_bottom_left.x + 3, run_loc_floor_bottom_left.y + 2, run_loc_floor_bottom_left.z)
+	var/mob/living/basic/demon/redspace/devourer/epicenter_devourer = allocate(/mob/living/basic/demon/redspace/devourer, epicenter_start_turf)
+	var/turf/epicenter_turf = get_step(epicenter_start_turf, NORTH)
+	var/epicenter_restore_type = epicenter_turf?.type
+	if(!epicenter_turf)
+		return Fail("The epicenter regression test could not allocate a destination")
+	if(epicenter_devourer.devourer_epicenter_unreachable(epicenter_turf))
+		return Fail("An open epicenter must be enterable")
+	epicenter_turf.ChangeTurf(/turf/closed/wall/r_wall)
+	if(!epicenter_devourer.devourer_epicenter_unreachable(epicenter_turf))
+		epicenter_turf.ChangeTurf(epicenter_restore_type)
+		return Fail("An epicenter sealed by a reinforced wall must count as unreachable")
+	epicenter_turf.ChangeTurf(epicenter_restore_type)
+	epicenter_turf.ChangeTurf(/turf/closed/wall)
+	if(epicenter_devourer.devourer_epicenter_unreachable(epicenter_turf))
+		epicenter_turf.ChangeTurf(epicenter_restore_type)
+		return Fail("An epicenter sealed by a breakable wall must remain smashable")
+	epicenter_turf.ChangeTurf(epicenter_restore_type)
+
+	var/mob/living/basic/demon/redspace/devourer/transform_devourer = allocate(/mob/living/basic/demon/redspace/devourer, run_loc_floor_bottom_left)
+	var/mob/living/carbon/human/transform_victim = allocate(/mob/living/carbon/human, run_loc_floor_bottom_left)
 	transform_victim.mind_initialize()
+	transform_victim.stat = HARD_CRIT
 	ADD_TRAIT(transform_victim, TRAIT_INCAPACITATED, REF(src))
 	if(!transform_devourer.capture_victim(transform_victim))
 		return Fail("The Devourer must be able to capture a valid transformation victim")
@@ -109,9 +291,10 @@
 	transformed.ckey = null
 	qdel(transformed)
 
-	var/mob/living/basic/demon/redspace/devourer/minotaur_devourer = allocate(/mob/living/basic/demon/redspace/devourer)
-	var/mob/living/carbon/human/minotaur_victim = allocate(/mob/living/carbon/human)
+	var/mob/living/basic/demon/redspace/devourer/minotaur_devourer = allocate(/mob/living/basic/demon/redspace/devourer, run_loc_floor_bottom_left)
+	var/mob/living/carbon/human/minotaur_victim = allocate(/mob/living/carbon/human, run_loc_floor_bottom_left)
 	minotaur_victim.mind_initialize()
+	minotaur_victim.stat = HARD_CRIT
 	ADD_TRAIT(minotaur_victim, TRAIT_INCAPACITATED, REF(src))
 	if(!minotaur_devourer.capture_victim(minotaur_victim))
 		return Fail("The Devourer must be able to capture a victim for minotaur transformation")
@@ -125,9 +308,10 @@
 		return Fail("Minotaur transformation must also carry the victim inside the new demon")
 	qdel(minotaur_transformed)
 
-	var/mob/living/basic/demon/redspace/devourer/player_devourer = allocate(/mob/living/basic/demon/redspace/devourer)
-	var/mob/living/carbon/human/player_victim = allocate(/mob/living/carbon/human)
+	var/mob/living/basic/demon/redspace/devourer/player_devourer = allocate(/mob/living/basic/demon/redspace/devourer, run_loc_floor_bottom_left)
+	var/mob/living/carbon/human/player_victim = allocate(/mob/living/carbon/human, run_loc_floor_bottom_left)
 	player_victim.mind_initialize()
+	player_victim.stat = HARD_CRIT
 	ADD_TRAIT(player_victim, TRAIT_INCAPACITATED, REF(src))
 	if(!player_devourer.capture_victim(player_victim))
 		return Fail("The Devourer must be able to capture a victim before a player transformation")

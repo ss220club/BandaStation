@@ -85,8 +85,11 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	growth_last_update_at = world.time
 	sealing_finishes_at = world.time + rand(REDSPACE_RIFT_SEALING_MIN_DURATION, REDSPACE_RIFT_SEALING_MAX_DURATION)
 	sealing_timer_id = addtimer(CALLBACK(src, PROC_REF(complete_sealing)), sealing_finishes_at - world.time, TIMER_STOPPABLE | TIMER_DELETE_ME)
+	var/strength_changed = FALSE
 	if(strength != REDSPACE_RIFT_SEALING_TARGET_STRENGTH)
-		SSredspace.update_source_strength(source_id, REDSPACE_RIFT_SEALING_TARGET_STRENGTH, "начата процедура закрытия разлома")
+		strength_changed = SSredspace.update_source_strength(source_id, REDSPACE_RIFT_SEALING_TARGET_STRENGTH, "начата процедура закрытия разлома")
+	if(!strength_changed)
+		SSredspace.refresh_cells("начата процедура закрытия разлома", get_coverage_refresh_keys(include_in_progress = TRUE))
 	return TRUE
 
 /datum/redspace_field_source/hotspot/proc/remove_sealer(obj/machinery/redspace_rift_sealer/sealer, reason = "установка закрытия отключена")
@@ -110,8 +113,11 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 
 	var/restore_strength = sealing_original_strength
 	sealing_original_strength = null
+	var/strength_changed = FALSE
 	if(isnum(restore_strength) && SSredspace && SSredspace.field_sources["[source_id]"] == src && strength != restore_strength)
-		SSredspace.update_source_strength(source_id, restore_strength, reason)
+		strength_changed = SSredspace.update_source_strength(source_id, restore_strength, reason)
+	if(!strength_changed && SSredspace && SSredspace.field_sources["[source_id]"] == src)
+		SSredspace.refresh_cells(reason, get_coverage_refresh_keys(include_in_progress = TRUE))
 	return TRUE
 
 /datum/redspace_field_source/hotspot/proc/complete_sealing()
@@ -233,6 +239,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	var/datum/redspace_field_source/hotspot/source = target_source
 	active = FALSE
 	GLOB.redspace_active_rift_sealers -= src
+	redspace_demon_forget_sealer(src)
 	if(source)
 		UnregisterSignal(source, COMSIG_REDSPACE_SOURCE_CHANGED, PROC_REF(on_source_changed))
 	target_source = null
@@ -262,6 +269,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	var/was_active = active
 	active = FALSE
 	GLOB.redspace_active_rift_sealers -= src
+	redspace_demon_forget_sealer(src)
 	target_source = null
 	end_processing()
 	update_sealer_appearance()
@@ -275,6 +283,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	active = FALSE
 	closed = TRUE
 	GLOB.redspace_active_rift_sealers -= src
+	redspace_demon_forget_sealer(src)
 	target_source = null
 	end_processing()
 	update_sealer_appearance()
@@ -356,6 +365,11 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 
 /obj/machinery/redspace_rift_sealer/on_deconstruction(disassembled)
 	stop_sealing("установка закрытия демонтирована")
+	if(!disassembled && circuit)
+		var/obj/item/circuitboard/machine/board = circuit
+		circuit = null
+		component_parts -= board
+		qdel(board)
 	return ..()
 
 /obj/machinery/redspace_rift_sealer/handle_basic_attack(mob/living/basic/user, list/modifiers)
@@ -441,6 +455,8 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 /datum/target_priority_strategy/nearest/redspace_demon
 
 /datum/target_priority_strategy/nearest/redspace_demon/get_target_priority(datum/ai_controller/controller, atom/target)
+	if(isliving(target) && get_dist(controller.pawn, target) <= 1)
+		return 100002 - get_dist(controller.pawn, target)
 	if(istype(target, /obj/machinery/redspace_rift_sealer))
 		var/obj/machinery/redspace_rift_sealer/sealer = target
 		if(!QDELETED(sealer) && sealer.active)
@@ -448,6 +464,13 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	return ..()
 
 /datum/target_priority_strategy/nearest/redspace_demon/select_target(datum/ai_controller/controller, list/atom/targets)
+	var/list/adjacent_living_targets = list()
+	for(var/atom/target as anything in targets)
+		if(isliving(target) && get_dist(controller.pawn, target) <= 1)
+			adjacent_living_targets += target
+	if(length(adjacent_living_targets))
+		return get_closest_atom(/atom/, adjacent_living_targets, get_turf(controller.pawn))
+
 	var/atom/closest_sealer
 	var/closest_distance = INFINITY
 	for(var/atom/target as anything in targets)
@@ -468,3 +491,5 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 // The redspace controller uses a global target source so active sealers can attract demons across the station z-level.
 /datum/bt_node/ai_behavior/acquire_target/update_combat_targets/redspace_demon
 	target_source = /datum/target_source/hearers/redspace_demon
+	vision_range = REDSPACE_DEMON_AGGRO_RANGE
+	target_loss_distance = REDSPACE_DEMON_TARGET_LOSS_DISTANCE

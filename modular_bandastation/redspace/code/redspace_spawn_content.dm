@@ -86,8 +86,55 @@
 		return FALSE
 	return TRUE
 
+/// Returns TRUE when the demon can destroy the closed turf in its way.
+/proc/redspace_demon_can_smash_turf(mob/living/basic/basic_mob, turf/target)
+	if(!basic_mob || !target || basic_mob.environment_smash < ENVIRONMENT_SMASH_WALLS)
+		return FALSE
+	if(isindestructiblewall(target) || (!iswallturf(target) && !ismineralturf(target)))
+		return FALSE
+	if(istype(target, /turf/closed/wall/r_wall) && basic_mob.environment_smash < ENVIRONMENT_SMASH_RWALLS)
+		return FALSE
+	return TRUE
+
+/// Clears a sealer target as soon as the machine stops being a valid objective.
+/proc/redspace_demon_discard_invalid_sealer_target(datum/ai_controller/controller, atom/target)
+	if(!controller || QDELETED(controller) || !istype(target, /obj/machinery/redspace_rift_sealer))
+		return FALSE
+	if(controller.blackboard[BB_CURRENT_TARGET] != target)
+		return FALSE
+
+	var/obj/machinery/redspace_rift_sealer/sealer = target
+	if(!QDELETED(sealer) && sealer.active)
+		var/turf/pawn_turf = get_turf(controller.pawn)
+		var/turf/sealer_turf = get_turf(sealer)
+		if(pawn_turf && sealer_turf && pawn_turf.z == sealer_turf.z)
+			return FALSE
+
+	controller.clear_blackboard_key(BB_CURRENT_TARGET)
+	if(controller.ai_movement)
+		controller.ai_movement.stop_moving_towards(controller)
+	return TRUE
+
+/// Clears active-sealer targets from every redspace demon on the machine's z-level.
+/proc/redspace_demon_forget_sealer(obj/machinery/redspace_rift_sealer/sealer)
+	if(!sealer || !SSai_controllers)
+		return
+	var/turf/sealer_turf = get_turf(sealer)
+	if(!sealer_turf)
+		return
+	var/list/controllers = SSai_controllers.ai_controllers_by_zlevel[sealer_turf.z]
+	if(!length(controllers))
+		return
+	for(var/datum/ai_controller/basic_controller/simple/redspace_demon/controller as anything in controllers.Copy())
+		if(QDELETED(controller) || controller.blackboard[BB_CURRENT_TARGET] != sealer)
+			continue
+		if(redspace_demon_discard_invalid_sealer_target(controller, sealer))
+			controller.clear_blackboard_key(BB_CURRENT_TARGET_HIDING_LOCATION)
+
 /// Returns TRUE when the next tile is blocked by an object we should either attack or shoot through.
 /proc/redspace_demon_has_obstruction(mob/living/basic/basic_mob, atom/target, projectile_pass_flags = NONE)
+	if(!basic_mob || QDELETED(target))
+		return FALSE
 	var/turf/next_step = get_step_towards(basic_mob, target)
 	if(isnull(next_step))
 		return FALSE
@@ -112,6 +159,61 @@
 				return TRUE
 			if(redspace_demon_can_smash_object(basic_mob, object))
 				return TRUE
+		if(redspace_demon_can_smash_turf(basic_mob, obstruction_turf))
+			return TRUE
+	return FALSE
+
+/// Attacks an atom without invoking a mob-specific early attack hook.
+/// Devourers use that hook to reserve their attack for consuming a victim, but must still be
+/// able to break an obstruction while carrying one.
+/proc/redspace_demon_attack_target(mob/living/basic/basic_mob, atom/target)
+	if(!basic_mob || QDELETED(basic_mob) || QDELETED(target) || world.time < basic_mob.next_move)
+		return FALSE
+	basic_mob.face_atom(target)
+	if(SEND_SIGNAL(basic_mob, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, target, basic_mob.Adjacent(target), null) & COMPONENT_HOSTILE_NO_ATTACK)
+		return FALSE
+	basic_mob.do_attack_animation(target)
+	var/result = target.attack_basic_mob(basic_mob)
+	SEND_SIGNAL(basic_mob, COMSIG_HOSTILE_POST_ATTACKINGTARGET, target, result)
+	if(result && !QDELETED(basic_mob) && basic_mob.next_move <= world.time)
+		basic_mob.changeNext_move(basic_mob.melee_attack_cooldown)
+	return result
+
+/// Attacks a smashable object between a demon and its movement target.
+/proc/redspace_demon_attack_obstruction(mob/living/basic/basic_mob, atom/target)
+	if(!basic_mob || QDELETED(basic_mob) || QDELETED(target) || world.time < basic_mob.next_move)
+		return FALSE
+
+	var/turf/next_step = get_step_towards(basic_mob, target)
+	if(isnull(next_step))
+		return FALSE
+
+	var/list/obstruction_turfs = list()
+	var/direction_to_next_step = get_dir(basic_mob, next_step)
+	if(ISDIAGONALDIR(direction_to_next_step))
+		for(var/cardinal_direction in GLOB.cardinals)
+			if(direction_to_next_step & cardinal_direction)
+				obstruction_turfs += get_step(basic_mob, cardinal_direction)
+		obstruction_turfs += next_step
+	else
+		obstruction_turfs += next_step
+
+	for(var/turf/obstruction_turf as anything in obstruction_turfs)
+		if(isnull(obstruction_turf) || !obstruction_turf.is_blocked_turf(exclude_mobs = TRUE, source_atom = basic_mob))
+			continue
+		for(var/obj/object as anything in obstruction_turf.contents)
+			if(!redspace_demon_can_smash_object(basic_mob, object))
+				continue
+			redspace_demon_attack_target(basic_mob, object)
+			if(!QDELETED(basic_mob) && basic_mob.next_move <= world.time)
+				// Direct object attacks do not always start a cooldown when the target rejects damage.
+				basic_mob.changeNext_move(basic_mob.melee_attack_cooldown)
+			return TRUE
+		if(redspace_demon_can_smash_turf(basic_mob, obstruction_turf))
+			redspace_demon_attack_target(basic_mob, obstruction_turf)
+			if(!QDELETED(basic_mob) && basic_mob.next_move <= world.time)
+				basic_mob.changeNext_move(basic_mob.melee_attack_cooldown)
+			return TRUE
 	return FALSE
 
 /// Direct movement used by redspace demons during the final approach. It starts instantly,
@@ -124,28 +226,69 @@
 /datum/ai_movement/basic_avoidance/redspace_demon/post_move(datum/move_loop/source, succeeded)
 	. = ..()
 	redspace_demon_post_move_attack(source, succeeded)
+	if(succeeded == MOVELOOP_FAILURE)
+		redspace_demon_handle_failed_move(source)
 
 /// JPS movement used by redspace demons at range. It swings the moment a path step lands the
 /// demon in reach, so an approach through corridors ends in an immediate hit as well.
+/// Fewer tolerated failures than the default: once the smart route is exhausted the demon
+/// switches to a direct approach instead of standing still for the full retry budget.
 /datum/ai_movement/jps/redspace_demon
+	max_pathing_attempts = 6
 
 /datum/ai_movement/jps/redspace_demon/post_move(datum/move_loop/source, succeeded)
 	. = ..()
 	redspace_demon_post_move_attack(source, succeeded)
+	if(succeeded == MOVELOOP_FAILURE)
+		redspace_demon_handle_failed_move(source)
 
 /// Swings at the current target immediately after a successful step lands the demon in melee
 /// range. A kiting victim eats a hit on every approach instead of the demon waiting for the
 /// next AI planning tick while the target slips out of reach again.
 /proc/redspace_demon_post_move_attack(datum/move_loop/source, succeeded)
 	SIGNAL_HANDLER
-	if(succeeded != MOVELOOP_SUCCESS)
-		return
 	if(QDELETED(source))
 		return
 	var/datum/ai_controller/controller = source.extra_info
 	if(!controller || QDELETED(controller))
 		return
+	var/atom/movement_target = controller.blackboard[BB_CURRENT_TARGET]
+	if(istype(source, /datum/move_loop/has_target))
+		var/datum/move_loop/has_target/target_loop = source
+		movement_target = target_loop.target
+	if(redspace_demon_discard_invalid_sealer_target(controller, movement_target))
+		return
+	if(succeeded != MOVELOOP_SUCCESS)
+		return
 	redspace_demon_try_immediate_attack(controller, controller.blackboard[BB_CURRENT_TARGET])
+
+/// Attacks a directly blocking wall or object after a move loop cannot make its next step.
+/proc/redspace_demon_handle_failed_move(datum/move_loop/source)
+	if(QDELETED(source) || !istype(source, /datum/move_loop/has_target))
+		return
+	var/datum/move_loop/has_target/target_loop = source
+	var/datum/ai_controller/controller = source.extra_info
+	if(!controller || QDELETED(controller))
+		return
+	var/atom/target = target_loop.target
+	if(redspace_demon_discard_invalid_sealer_target(controller, target))
+		return
+	var/mob/living/basic/basic_pawn = controller.pawn
+	if(!basic_pawn)
+		return
+	// JPS can fail on a blocker along its chosen route even when the direct line to the
+	// target is clear. Prefer the failed path step so that the demon attacks that blocker.
+	var/atom/obstruction_target = target
+	if(istype(target_loop, /datum/move_loop/has_target/jps))
+		var/datum/move_loop/has_target/jps/jps_loop = target_loop
+		if(length(jps_loop.movement_path))
+			obstruction_target = jps_loop.movement_path[1]
+	if(!redspace_demon_has_obstruction(basic_pawn, obstruction_target))
+		return
+	// Waiting for the attack cooldown must not count as an exhausted path.
+	if(controller.ai_movement)
+		controller.ai_movement.reset_pathing_failures(controller)
+	redspace_demon_attack_obstruction(basic_pawn, obstruction_target)
 
 /// Attempts an immediate melee swing at the target, honoring the attack cooldown and the
 /// targeting strategy. Used both on arrival moves and while parked in melee range.
@@ -168,22 +311,43 @@
 
 /// Keeps the JPS loop from retrying after the demon has already reached melee range, and swaps to
 /// instant avoidance movement near a visible target so shoves and strafing cannot stall the demon.
+/// When JPS gives up on a route the demon walks straight at its target instead of standing still:
+/// the direct approach carries it to whatever blocks the way and [attack_obstructions] clears it,
+/// so a sealer walled in behind cover is eventually reached and broken through.
 /datum/bt_node/ai_behavior/move_to_target/redspace_demon
 	/// Distance at which the demon drops JPS and moves directly at its target.
 	var/approach_range = 3
 	/// Movement type used while approaching a close, visible target with a clear path.
 	var/approach_movement = /datum/ai_movement/basic_avoidance/redspace_demon
+	/// Set while the smart route is exhausted and the demon walks straight at its target.
+	var/direct_approach = FALSE
+	/// The target the direct approach was started against; a new target resets it.
+	var/atom/approach_target
 
 /datum/bt_node/ai_behavior/move_to_target/redspace_demon/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/atom/target = controller.blackboard[target_key]
 	if(QDELETED(target))
 		return AI_BEHAVIOR_FAILED
+	if(redspace_demon_discard_invalid_sealer_target(controller, target))
+		return AI_BEHAVIOR_FAILED
+	if(target != approach_target)
+		approach_target = target
+		direct_approach = FALSE
 	if(get_dist(controller.pawn, target) <= required_dist)
 		// The move loop keeps running: it holds the demon at melee range and there is no
 		// re-engagement stall when the target steps away, only an instant follow-up step.
 		// Also swing immediately in case the demon arrived via JPS or the target walked in.
+		// A parked loop reports a failure when the target is inside its minimum distance;
+		// that is not an exhausted route, so clear it before the next chase.
+		movement_failed = FALSE
+		direct_approach = FALSE
 		redspace_demon_try_immediate_attack(controller, target)
 		return AI_BEHAVIOR_INSTANT
+	if(movement_failed)
+		// The smart route is exhausted. Keep the branch alive and walk straight at the
+		// target so the demon reaches and smashes whatever blocks the way.
+		movement_failed = FALSE
+		direct_approach = TRUE
 	var/desired_movement = get_desired_movement(controller, target)
 	if(controller.ai_movement != SSai_movement.movement_types[desired_movement])
 		controller.ai_movement.stop_moving_towards(controller)
@@ -194,6 +358,8 @@
 /// Once in direct approach mode the demon keeps it until the target moves one tile beyond
 /// the approach range, so a target hovering at the boundary cannot flicker the movement type.
 /datum/bt_node/ai_behavior/move_to_target/redspace_demon/proc/get_desired_movement(datum/ai_controller/controller, atom/target)
+	if(direct_approach)
+		return approach_movement
 	var/already_approaching = controller.ai_movement == SSai_movement.movement_types[approach_movement]
 	if(get_dist(controller.pawn, target) > approach_range + (already_approaching ? 1 : 0))
 		return initial(controller.ai_movement)
@@ -204,18 +370,25 @@
 		return initial(controller.ai_movement)
 	return approach_movement
 
-/// A failed route never aborts the attack branch: the demon just keeps trying to close the distance.
+/// A failed route never aborts the attack branch: the demon switches to a direct approach
+/// and keeps trying to close the distance.
 /datum/bt_node/ai_behavior/move_to_target/redspace_demon/on_movement_failed(atom/source)
 	SIGNAL_HANDLER
-	movement_failed = FALSE
+	movement_failed = TRUE
 
 /datum/bt_node/ai_behavior/move_to_target/redspace_demon/finish_action(datum/ai_controller/controller, succeeded)
+	direct_approach = FALSE
+	approach_target = null
 	. = ..()
 	if(controller.ai_movement != SSai_movement.movement_types[initial(controller.ai_movement)])
 		controller.change_ai_movement_type(initial(controller.ai_movement))
 
-/// Keeps ranged demons at a distance while visible, but closes in on a remembered target to reach cover.
+/// Keeps ranged demons at a distance while visible, but closes in on a remembered target to reach
+/// cover. A failed smart route switches the demon to a straight-line walk, so a walled target is
+/// eventually reached and broken through by [attack_obstructions].
 /datum/bt_node/ai_behavior/maintain_distance/redspace_demon
+	/// Set while the smart route is exhausted and the demon walks straight at its target.
+	var/direct_approach = FALSE
 
 /datum/bt_node/ai_behavior/maintain_distance/redspace_demon/setup(datum/ai_controller/controller)
 	var/atom/target = controller.blackboard[target_key]
@@ -228,14 +401,20 @@
 	var/atom/target = controller.blackboard[target_key]
 	if(QDELETED(target))
 		return AI_BEHAVIOR_FAILED
+	if(redspace_demon_discard_invalid_sealer_target(controller, target))
+		return AI_BEHAVIOR_FAILED
 	if(movement_failed)
-		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+		// The smart route is exhausted: keep the branch alive and walk straight at the
+		// target so the demon reaches and smashes whatever blocks the way.
+		movement_failed = FALSE
+		direct_approach = TRUE
 
 	var/target_visible = can_see(controller.pawn, target, 10)
 	var/minimum_distance = controller.blackboard[min_dist_key] || REDSPACE_RANGED_DEMON_MIN_DISTANCE
 	var/maximum_distance = controller.blackboard[max_dist_key] || REDSPACE_RANGED_DEMON_MAX_DISTANCE
 	var/current_distance = get_dist(controller.pawn, target)
 	if(target_visible)
+		direct_approach = FALSE
 		var/desired_movement_type
 		if(current_distance < minimum_distance)
 			desired_movement_type = /datum/ai_movement/basic_avoidance/backstep
@@ -246,14 +425,33 @@
 			controller.ai_movement.stop_moving_towards(controller)
 		return ..()
 
+	if(direct_approach)
+		var/desired_movement_type = /datum/ai_movement/basic_avoidance/redspace_demon
+		if(controller.ai_movement != SSai_movement.movement_types[desired_movement_type])
+			controller.ai_movement.stop_moving_towards(controller)
+			controller.change_ai_movement_type(desired_movement_type)
+		controller.ai_movement.start_moving_towards(controller, target, 1)
+		return AI_BEHAVIOR_INSTANT
+
 	if(controller.blackboard[BB_CURRENT_MIN_MOVE_DISTANCE] != 1)
 		controller.ai_movement.stop_moving_towards(controller)
 		controller.change_ai_movement_type(approach_movement_type || initial(controller.ai_movement))
 	controller.ai_movement.start_moving_towards(controller, target, 1)
 	return AI_BEHAVIOR_INSTANT
 
+/datum/bt_node/ai_behavior/maintain_distance/redspace_demon/finish_action(datum/ai_controller/controller, succeeded)
+	direct_approach = FALSE
+	. = ..()
+
 /// Failed checks are delayed as well, avoiding a hot loop while retained targets remain behind cover.
 /datum/bt_node/ai_behavior/attack_obstructions/redspace_demon/perform(seconds_per_tick, datum/ai_controller/controller)
+	var/mob/living/basic/basic_pawn = controller.pawn
+	var/atom/target = controller.blackboard[target_key]
+	if(redspace_demon_has_obstruction(basic_pawn, target))
+		. = ..()
+		if(. & AI_BEHAVIOR_FAILED)
+			. |= AI_BEHAVIOR_DELAY
+		return
 	if(redspace_demon_has_movement_route(controller))
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	. = ..()
@@ -262,6 +460,27 @@
 
 /datum/bt_node/ai_behavior/attack_obstructions/redspace_demon/can_smash_object(mob/living/basic/basic_mob, obj/object)
 	return redspace_demon_can_smash_object(basic_mob, object)
+
+/datum/bt_node/ai_behavior/attack_obstructions/redspace_demon/attack_in_direction(datum/ai_controller/controller, mob/living/basic/basic_mob, direction)
+	if(world.time < basic_mob.next_move)
+		return FALSE
+	var/turf/next_step = get_step(basic_mob, direction)
+	if(!next_step)
+		return FALSE
+	if(!next_step.is_blocked_turf(exclude_mobs = TRUE, source_atom = controller.pawn))
+		if(get_step_to(controller.pawn, next_step))
+			return FALSE
+
+	for(var/obj/object as anything in next_step.contents)
+		if(!can_smash_object(basic_mob, object))
+			continue
+		redspace_demon_attack_target(basic_mob, object)
+		return TRUE
+
+	if(redspace_demon_can_smash_turf(basic_mob, next_step))
+		redspace_demon_attack_target(basic_mob, next_step)
+		return TRUE
+	return FALSE
 
 /datum/bt_node/ai_behavior/attack_obstructions/redspace_demon/ranged
 	var/static/projectile_pass_flags = /obj/projectile/magic/lesser_fireball::pass_flags
@@ -433,6 +652,12 @@
 #define REDSPACE_RAVAGER_TRANSFORMATION_RETRY_DELAY (60 SECONDS)
 #define REDSPACE_RAVAGER_POLL_TIME (20 SECONDS)
 #define REDSPACE_RAVAGER_MOVEMENT_CHECK_DELAY (1 SECONDS)
+/// Failed direct-walk attempts before the devourer transforms where it stands.
+#define REDSPACE_DEVOURER_RETREAT_STUCK_CHECKS 12
+/// Minimum retreat step budget; ends pathological detour loops around an unreachable epicenter.
+#define REDSPACE_DEVOURER_RETREAT_MAX_STEPS 60
+/// Extra retreat steps allowed per tile of straight-line distance to the epicenter.
+#define REDSPACE_DEVOURER_RETREAT_STEP_FACTOR 2
 #define REDSPACE_RAVAGER_MAX_POLL_ATTEMPTS 2
 #define REDSPACE_SUMMON_COOLDOWN (90 SECONDS)
 #define REDSPACE_SUMMON_POLL_TIME (10 SECONDS)
@@ -684,6 +909,8 @@
 		drain_percent = redspace_drain_percent,\
 		zero_energy_damage_percent = redspace_zero_energy_damage_percent,\
 	)
+	if(environment_smash >= ENVIRONMENT_SMASH_WALLS)
+		AddElement(/datum/element/wall_smasher, strength_flag = environment_smash)
 
 /// Redspace demons burst into blood sparks when slain.
 /mob/living/basic/demon/redspace/death(gibbed)
@@ -730,6 +957,10 @@
 	redspace_max_energy = 200
 	redspace_drain_percent = 5
 	redspace_zero_energy_damage_percent = 0.5
+	environment_smash = ENVIRONMENT_SMASH_WALLS
+	// Hulking demons tear through doors, windows and machines in a few blows instead of
+	// stalling in front of an airlock for half a minute.
+	obj_damage = 200
 	/// The victim carried inside this demon since the Devourer transformation.
 	var/mob/living/carbon/human/stored_victim
 
@@ -846,6 +1077,9 @@
 	pull_force = MOVE_FORCE_OVERPOWERING
 	mob_size = MOB_SIZE_LARGE
 	layer = LARGE_MOB_LAYER
+	environment_smash = ENVIRONMENT_SMASH_WALLS
+	// The retreat must not stall for dozens of hits in front of a door or window.
+	obj_damage = 200
 	SET_BASE_PIXEL(-16, -10)
 	ai_controller = /datum/ai_controller/basic_controller/simple/redspace_demon/melee/devourer
 
@@ -864,8 +1098,6 @@
 	var/poll_attempts = 0
 	/// Destination the Devourer is walking toward before transformation.
 	var/turf/transformation_target
-	/// Temporary pathfinding movement used while carrying the victim.
-	var/datum/ai_movement/jps/transformation_movement
 
 /mob/living/basic/demon/redspace/devourer/early_melee_attack(atom/target, list/modifiers, ignore_cooldown)
 	. = ..()
@@ -983,17 +1215,27 @@
 	transformation_timer_id = addtimer(CALLBACK(src, PROC_REF(begin_transformation)), transformation_delay, TIMER_STOPPABLE | TIMER_DELETE_ME)
 
 /mob/living/basic/demon/redspace/devourer/proc/stop_transformation_movement()
-	var/datum/ai_movement/jps/movement = transformation_movement
-	transformation_movement = null
 	transformation_target = null
-	if(!movement)
-		return
-	if(ai_controller && !QDELETED(ai_controller))
-		movement.stop_moving_towards(ai_controller)
-	if(!QDELETED(movement))
-		qdel(movement)
 
 /mob/living/basic/demon/redspace/devourer/proc/move_to_transformation_site(turf/destination)
+	if(QDELETED(src) || !destination || !can_transform_with_victim())
+		release_victim()
+		return
+
+	var/datum/ai_controller/controller = ai_controller
+	if(controller && !QDELETED(controller))
+		controller.ai_movement.stop_moving_towards(controller)
+
+	// A straight smash walk back to the epicenter: no pathfinding can stall on a closed
+	// door or an unroutable room this way.
+	walk_direct_to_transformation_site(destination)
+
+/// Retreat to the epicenter: the devourer walks at it and smashes walls, doors and other
+/// destructible obstructions in the way. The straight line is preferred, but an unbreakable
+/// blockage (a reinforced wall, the outer hull) makes it fan out to the nearest breakable
+/// or open tile instead of stalling. If nothing at all can be broken through it transforms
+/// where it stands.
+/mob/living/basic/demon/redspace/devourer/proc/walk_direct_to_transformation_site(turf/destination)
 	if(QDELETED(src) || !destination || !can_transform_with_victim())
 		release_victim()
 		return
@@ -1001,22 +1243,34 @@
 	transformation_in_progress = TRUE
 	transformation_target = destination
 	REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, REDSPACE_DEVOURER_STASIS)
+	visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] пробивается к эпицентру редспейса."))
 
-	var/datum/ai_controller/controller = ai_controller
-	if(!controller || QDELETED(controller))
-		stop_transformation_movement()
-		start_transformation_countdown()
-		return
-	controller.ai_movement.stop_moving_towards(controller)
-	var/datum/ai_movement/jps/movement = new
-	transformation_movement = movement
-	if(!movement.start_moving_towards(controller, destination, 0))
-		stop_transformation_movement()
-		start_transformation_countdown()
-		return
-
+	var/turf/start_turf = get_turf(src)
+	var/turf/previous_turf = start_turf
+	// Tiles the devourer already stood on. The first pass of every step avoids them, so the
+	// crawl cannot shuttle between two tiles forever; the second pass only re-allows them so
+	// it can back out of a dead end, but never straight back onto the tile it just left.
+	var/list/visited = list(start_turf)
+	// Detours can temporarily move the devourer away from the epicenter. The budget scales
+	// with the straight-line distance and only exists to end pathological loops: a reachable
+	// epicenter is always reached well within it.
+	var/max_steps = REDSPACE_DEVOURER_RETREAT_MAX_STEPS + (start_turf ? get_dist(start_turf, destination) * REDSPACE_DEVOURER_RETREAT_STEP_FACTOR : 0)
+	var/total_steps = 0
+	var/stuck_checks = 0
 	while(!QDELETED(src) && can_transform_with_victim() && get_turf(src) != destination)
-		if(!transformation_movement || !transformation_movement.moving_controllers[controller])
+		// The epicenter tile can be sealed off after it was picked (a closed door, a machine
+		// on top of it). Standing next to it is as close as the crawl can get; stepping in
+		// circles around it forever would never finish.
+		if(devourer_epicenter_unreachable(destination))
+			break
+		var/turf/step_from_turf = get_turf(src)
+		if(devourer_retreat_step(destination, visited, previous_turf))
+			stuck_checks = 0
+			previous_turf = step_from_turf
+		else
+			stuck_checks++
+		total_steps++
+		if(stuck_checks >= REDSPACE_DEVOURER_RETREAT_STUCK_CHECKS || total_steps >= max_steps)
 			break
 		sleep(REDSPACE_RAVAGER_MOVEMENT_CHECK_DELAY)
 
@@ -1025,13 +1279,96 @@
 	if(!can_transform_with_victim())
 		release_victim()
 		return
-	var/reached_destination = get_turf(src) == destination
-	stop_transformation_movement()
-	if(reached_destination)
+	if(get_turf(src) == destination || devourer_epicenter_unreachable(destination))
 		visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] достигает эпицентра редспейса."))
 	else
-		visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] не может найти путь к эпицентру редспейса."))
+		visible_message(span_warning("[capitalize(declent_ru(NOMINATIVE))] не может пробиться к эпицентру редспейса."))
 	start_transformation_countdown()
+
+/// Returns TRUE when the epicenter is one step away but sealed by something unbreakable,
+/// so the devourer transforms right next to it instead of orbiting the tile forever.
+/mob/living/basic/demon/redspace/devourer/proc/devourer_epicenter_unreachable(turf/destination)
+	if(isnull(destination) || get_dist(src, destination) > 1)
+		return FALSE
+	return destination.is_blocked_turf(exclude_mobs = TRUE, source_atom = src) && !redspace_devourer_turf_smashable(src, destination)
+
+/// A single retreat step toward the epicenter. Returns TRUE on progress or while a smash
+/// attack is in flight (including its cooldown), FALSE only when the step is truly blocked.
+/// Uses a straight get_step instead of get_step_to: the latter dodges around dense doors and
+/// would silently walk the devourer past the thing it is supposed to smash through.
+/// When the direct line is sealed by an unbreakable wall the candidates fan out from it in
+/// angular order, so the devourer smashes the closest breakable thing (an airlock, a window)
+/// instead of pushing against the wall forever.
+/mob/living/basic/demon/redspace/devourer/proc/devourer_retreat_step(turf/destination, list/visited, turf/previous_turf)
+	if(QDELETED(src) || !destination)
+		return FALSE
+	var/turf/current_turf = get_turf(src)
+	if(isnull(current_turf) || current_turf == destination)
+		return FALSE
+
+	// All eight directions ordered by deviation from the direct line: straight ahead first,
+	// then 45 degrees out, and so on up to a full reversal.
+	var/direct_dir = get_dir(src, destination)
+	var/list/detour_dirs = list()
+	if(direct_dir)
+		for(var/deviation in 0 to 4)
+			detour_dirs |= turn(direct_dir, deviation * 45)
+			detour_dirs |= turn(direct_dir, -deviation * 45)
+
+	// First pass: only unexplored tiles, which stops two-tile shuttling. Second pass allows
+	// revisits so a dead end can be backed out of, but never the tile just left behind.
+	for(var/attempt in 1 to 2)
+		for(var/direction as anything in detour_dirs)
+			var/turf/step_turf = get_step(current_turf, direction)
+			if(isnull(step_turf) || step_turf == current_turf)
+				continue
+			if(attempt == 1 && visited && (step_turf in visited))
+				continue
+			if(attempt == 2 && step_turf == previous_turf)
+				continue
+			if(!redspace_devourer_retreat_passable(src, current_turf, direction))
+				continue
+			if(step_turf.is_blocked_turf(exclude_mobs = TRUE, source_atom = src))
+				// Waiting out the attack cooldown is progress: a smash is already happening.
+				if(world.time < next_move)
+					return TRUE
+				if(redspace_demon_attack_obstruction(src, step_turf))
+					return TRUE
+				continue
+			if(Move(step_turf, direction))
+				if(visited)
+					visited += step_turf
+				return TRUE
+	return FALSE
+
+/// Returns TRUE when the devourer can take a retreat step in this direction: the tile is
+/// directly enterable, or the blockage (object or turf) can be smashed. Diagonal steps must
+/// not cut through a corner that is sealed by an unbreakable wall.
+/proc/redspace_devourer_retreat_passable(mob/living/basic/basic_mob, turf/from_turf, direction)
+	var/turf/step_turf = get_step(from_turf, direction)
+	if(isnull(step_turf) || step_turf == from_turf)
+		return FALSE
+	if(ISDIAGONALDIR(direction))
+		for(var/cardinal_direction in GLOB.cardinals)
+			if(!(direction & cardinal_direction))
+				continue
+			var/turf/corner_turf = get_step(from_turf, cardinal_direction)
+			if(isnull(corner_turf))
+				return FALSE
+			if(corner_turf.is_blocked_turf(exclude_mobs = TRUE, source_atom = basic_mob) && !redspace_devourer_turf_smashable(basic_mob, corner_turf))
+				return FALSE
+	if(!step_turf.is_blocked_turf(exclude_mobs = TRUE, source_atom = basic_mob))
+		return TRUE
+	return redspace_devourer_turf_smashable(basic_mob, step_turf)
+
+/// Returns TRUE when the turf itself or a dense object on it can be smashed by the demon.
+/proc/redspace_devourer_turf_smashable(mob/living/basic/basic_mob, turf/target)
+	if(!basic_mob || !target)
+		return FALSE
+	for(var/obj/object as anything in target.contents)
+		if(object.density && redspace_demon_can_smash_object(basic_mob, object))
+			return TRUE
+	return redspace_demon_can_smash_turf(basic_mob, target)
 
 /mob/living/basic/demon/redspace/devourer/proc/poll_for_ravager()
 	if(!can_transform_with_victim())
@@ -1163,24 +1500,53 @@
 /// Returns the best valid turf in the hottest currently materialized redspace cell.
 /proc/redspace_devourer_get_hottest_turf(turf/fallback) as /turf
 	var/turf/fallback_turf = get_turf(fallback)
-	if(!SSredspace || !length(SSredspace.field_cells))
+	if(!fallback_turf || !SSredspace)
 		return fallback_turf
 
 	var/datum/redspace_field_cell/hottest_cell
 	var/hottest_value = -INFINITY
+	var/hottest_distance = INFINITY
 	for(var/cell_key in SSredspace.field_cells)
 		var/datum/redspace_field_cell/cell = SSredspace.field_cells[cell_key]
 		var/turf/sample_turf = cell?.get_sample_turf()
-		if(!sample_turf || !SSredspace.is_supported_z(sample_turf.z) || !isnum(cell.value))
+		if(!sample_turf || sample_turf.z != fallback_turf.z || !SSredspace.is_supported_z(sample_turf.z) || !isnum(cell.value) || cell.value <= REDSPACE_DEFAULT_VALUE)
 			continue
-		if(cell.value > hottest_value)
+		var/distance = get_dist(fallback_turf, sample_turf)
+		if(cell.value > hottest_value || (cell.value == hottest_value && distance < hottest_distance))
 			hottest_value = cell.value
+			hottest_distance = distance
 			hottest_cell = cell
 
-	if(!hottest_cell)
-		return fallback_turf
-	var/list/candidates = SSredspace.get_event_candidate_turfs(hottest_cell)
-	return length(candidates) ? candidates[1] : hottest_cell.get_sample_turf() || fallback_turf
+	if(hottest_cell)
+		var/list/candidates = SSredspace.get_event_candidate_turfs(hottest_cell)
+		if(length(candidates))
+			return candidates[1]
+
+	// The cell cache can be empty or stale when a Devourer eats outside the disturbance.
+	// Fall back to the strongest live source instead of making it transform in place.
+	var/datum/redspace_field_source/hottest_source
+	var/turf/hottest_source_turf
+	var/hottest_source_value = -INFINITY
+	for(var/source_key in SSredspace.field_sources)
+		var/datum/redspace_field_source/source = SSredspace.field_sources[source_key]
+		if(!source || source.is_expired() || source.z_level != fallback_turf.z || source.strength <= 0 || !SSredspace.is_supported_z(source.z_level))
+			continue
+		var/turf/source_turf
+		if(istype(source, /datum/redspace_field_source/wave))
+			var/datum/redspace_field_source/wave/wave_source = source
+			var/list/center = wave_source.get_current_center()
+			source_turf = locate(round(center[1]), round(center[2]), source.z_level)
+		else
+			source_turf = locate(source.origin_x, source.origin_y, source.z_level)
+		if(!source_turf || source_turf.density || is_space_or_openspace(source_turf))
+			continue
+		if(source.strength > hottest_source_value)
+			hottest_source = source
+			hottest_source_turf = source_turf
+			hottest_source_value = source.strength
+	if(hottest_source)
+		return hottest_source_turf
+	return fallback_turf
 
 /// Keeps a replacement mob attached to a persistent spawn event during transformation.
 /datum/redspace_event/spawn/proc/replace_spawned_atom(atom/old_atom, atom/new_atom)
@@ -1365,6 +1731,9 @@
 	return TRUE
 
 #undef REDSPACE_DEVOURER_STASIS
+#undef REDSPACE_DEVOURER_RETREAT_STUCK_CHECKS
+#undef REDSPACE_DEVOURER_RETREAT_MAX_STEPS
+#undef REDSPACE_DEVOURER_RETREAT_STEP_FACTOR
 #undef REDSPACE_RANGED_DEMON_MIN_DISTANCE
 #undef REDSPACE_RANGED_DEMON_MAX_DISTANCE
 #undef REDSPACE_RAVAGER_BEACON_STRENGTH

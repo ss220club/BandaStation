@@ -461,9 +461,13 @@ SUBSYSTEM_DEF(redspace)
 		return
 	metric_value_calculation_count++
 
-	// Explicit event overrides and ordinary test values ignore zone susceptibility by design.
+	// Explicit event overrides ignore zone susceptibility by design.
 	if(cell && !isnull(cell.event_override_value))
 		return cell.event_override_value
+	// Sealing pressure is deliberately not reducible by the background or stabilizers.
+	if(is_sealing_active_at(target, excluded_source))
+		return REDSPACE_MAX_NORMAL_VALUE
+	// Ordinary test values ignore zone susceptibility by design.
 	if(cell && !isnull(cell.forced_value))
 		return cell.forced_value
 
@@ -491,6 +495,33 @@ SUBSYSTEM_DEF(redspace)
 
 	// Ordinary sources cannot create an event-only invasion state.
 	return min(value, REDSPACE_MAX_NORMAL_VALUE)
+
+/datum/controller/subsystem/redspace/proc/is_sealing_active_at(turf/target, datum/redspace_field_source/excluded_source = null)
+	if(!target)
+		return FALSE
+	for(var/source_key in field_sources)
+		var/datum/redspace_field_source/hotspot/hotspot = field_sources[source_key]
+		if(!istype(hotspot) || hotspot == excluded_source || !hotspot.sealing_active)
+			continue
+		if(hotspot.can_affect(target))
+			return TRUE
+	return FALSE
+
+/datum/controller/subsystem/redspace/proc/is_sealing_active_in_cell(datum/redspace_field_cell/cell)
+	if(!cell)
+		return FALSE
+	if(is_sealing_active_at(cell.get_sample_turf()))
+		return TRUE
+
+	// Coverage includes the neighboring cells that may contain an affected tile even
+	// when their representative tile is just outside the source radius.
+	for(var/source_key in field_sources)
+		var/datum/redspace_field_source/hotspot/hotspot = field_sources[source_key]
+		if(!istype(hotspot) || !hotspot.sealing_active)
+			continue
+		if(hotspot.coverage_cell_lookup && hotspot.coverage_cell_lookup[cell.key])
+			return TRUE
+	return FALSE
 
 /// Returns the zone susceptibility coefficient for a tile's hex.
 /datum/controller/subsystem/redspace/proc/get_zone_coefficient(turf/target, datum/redspace_field_cell/cell)
@@ -603,7 +634,7 @@ SUBSYSTEM_DEF(redspace)
 		if(immediate)
 			budget.next_attempt_at = world.time
 		else if(budget.scheduled_state != cell.state || !budget.next_attempt_at)
-			budget.next_attempt_at = world.time + event_profile.get_next_attempt_delay()
+			budget.next_attempt_at = world.time + get_event_attempt_delay(cell, event_profile)
 		budget.scheduled_state = cell.state
 	else
 		budget.next_attempt_at = 0
@@ -613,7 +644,7 @@ SUBSYSTEM_DEF(redspace)
 		if(immediate)
 			budget.next_turf_attempt_at = world.time
 		else if(budget.turf_scheduled_state != cell.state || !budget.next_turf_attempt_at)
-			budget.next_turf_attempt_at = world.time + event_profile.get_next_attempt_delay()
+			budget.next_turf_attempt_at = world.time + get_event_attempt_delay(cell, event_profile)
 		budget.turf_scheduled_state = cell.state
 	else
 		budget.next_turf_attempt_at = 0
@@ -622,6 +653,16 @@ SUBSYSTEM_DEF(redspace)
 	schedule_event_wake()
 	wake()
 	return TRUE
+
+/datum/controller/subsystem/redspace/proc/get_event_attempt_delay(datum/redspace_field_cell/cell, datum/redspace_event_profile/event_profile)
+	if(!event_profile)
+		return 0
+
+	var/attempt_delay = event_profile.get_next_attempt_delay()
+	if(!is_sealing_active_in_cell(cell))
+		return attempt_delay
+
+	return max(round(attempt_delay / max(REDSPACE_RIFT_SEALING_EVENT_FREQUENCY_MULTIPLIER, 1)), 1)
 
 /datum/controller/subsystem/redspace/proc/clear_event_schedule(datum/redspace_field_cell/cell)
 	if(!cell)
@@ -682,13 +723,13 @@ SUBSYSTEM_DEF(redspace)
 		// the zone budget rejects the candidate. This prevents a hot zone from
 		// turning into a per-tick random-event loop.
 		if(normal_attempt_due)
-			budget.next_attempt_at = world.time + event_profile.get_next_attempt_delay()
+			budget.next_attempt_at = world.time + get_event_attempt_delay(cell, event_profile)
 			if(event_profile.should_attempt())
 				try_start_automatic_event(cell)
 				if(MC_TICK_CHECK)
 					return FALSE
 		if(turf_attempt_due)
-			budget.next_turf_attempt_at = world.time + event_profile.get_next_attempt_delay()
+			budget.next_turf_attempt_at = world.time + get_event_attempt_delay(cell, event_profile)
 			if(event_profile.should_attempt())
 				try_start_automatic_event(cell, REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
 		if(MC_TICK_CHECK)
