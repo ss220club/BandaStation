@@ -1,5 +1,3 @@
-#define CHOICE_RANDOM_APPEARANCE "Random"
-#define CHOICE_PREFS_APPEARANCE "Look-a-like"
 #define CHOICE_PICK_PLAYER "Pick player"
 #define CHOICE_POLL_GHOSTS "Offer to ghosts"
 #define CHOICE_END_THEM "Do it!"
@@ -8,8 +6,8 @@
 /**
  * Custom imaginary friend.
  *
- * Allows the admin to select the ckey to put into the imaginary friend and whether the imaginary friend looks like the
- * ckey's character.
+ * Allows the admin to select the ckey to put into the imaginary friend.
+ * Appearance is chosen by the player themselves now.
  *
  * Is not tied to the brain trauma and can be used on all mobs, technically. Including cyborgs and simple/basic mobs.
  *
@@ -17,22 +15,12 @@
  **/
 /datum/smite/custom_imaginary_friend
 	name = "Imaginary Friend (Special)"
-	/// Do we randomise friend appearances or not?
-	var/random_appearance
 	/// Are we polling for ghosts
 	var/ghost_polling
 	/// How many imaginary friends should be added when polling
 	var/polled_friend_count
 
 /datum/smite/custom_imaginary_friend/configure(client/user)
-	var/appearance_choice = tgui_alert(user,
-		"Do you want the imaginary friend(s) to share name and appearance with their currently selected character preferences?",
-		"Imaginary Friend Appearance?",
-		list(CHOICE_PREFS_APPEARANCE, CHOICE_RANDOM_APPEARANCE, CHOICE_CANCEL))
-	if (isnull(appearance_choice) || appearance_choice == CHOICE_CANCEL)
-		return FALSE
-	random_appearance = appearance_choice == CHOICE_RANDOM_APPEARANCE
-
 	var/client_selection_choice = tgui_alert(user,
 		"Do you want to pick a specific player, or poll for ghosts?",
 		"Imaginary Friend Selection?",
@@ -47,6 +35,10 @@
 		if(isnull(how_many) || how_many < 1)
 			return FALSE
 		polled_friend_count = how_many
+
+		var/confirm_ghosts = tgui_alert(user, "Вы уверены, что хотите предложить это призракам?", "Подтверждение", list("Да", "Отмена"))
+		if(confirm_ghosts != "Да")
+			return FALSE
 
 	return TRUE
 
@@ -84,6 +76,10 @@
 	var/client/friend_candidate_client = picked_client
 	if(QDELETED(friend_candidate_client))
 		to_chat(user, span_warning("Selected player no longer has a client, aborting."))
+		return
+
+	var/confirm_player = tgui_alert(user, "Вы уверены, что хотите выбрать [friend_candidate_client.ckey]?", "Подтверждение", list("Да", "Отмена"))
+	if(confirm_player != "Да")
 		return
 
 	if(isliving(friend_candidate_client.mob))
@@ -144,10 +140,9 @@
 			delete_old_mob = TRUE,
 		)
 		friend_mob.attach_to_owner(target)
-		friend_mob.setup_appearance(random_appearance ? null : friend_candidate_client.prefs)
+		// Передаем настройки игрока, чтобы в новом меню у него появилась кнопка "Свой персонаж"
+		friend_mob.setup_appearance(friend_candidate_client.prefs)
 
-#undef CHOICE_RANDOM_APPEARANCE
-#undef CHOICE_PREFS_APPEARANCE
 #undef CHOICE_PICK_PLAYER
 #undef CHOICE_POLL_GHOSTS
 #undef CHOICE_END_THEM

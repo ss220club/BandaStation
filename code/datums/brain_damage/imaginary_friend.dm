@@ -139,10 +139,73 @@
 
 /// Copies appearance from passed player prefs, or randomises them if none are provided
 /mob/eye/imaginary_friend/proc/setup_appearance(datum/preferences/appearance_from_prefs = null)
+	INVOKE_ASYNC(src, PROC_REF(choose_appearance), appearance_from_prefs)
+
+/// Позволяет игроку выбрать внешний вид из списка пресетов или скопировать любого carbon'а
+/mob/eye/imaginary_friend/proc/choose_appearance(datum/preferences/appearance_from_prefs = null)
+	if(!client)
+		setup_friend()
+		return
+
+	var/list/choices = list("Случайный человек", "Выбрать из окружающих")
 	if(appearance_from_prefs)
-		INVOKE_ASYNC(src, PROC_REF(setup_friend_from_prefs), appearance_from_prefs)
-	else
-		INVOKE_ASYNC(src, PROC_REF(setup_friend))
+		choices.Insert(1, "Свой персонаж")
+
+	var/choice = tgui_alert(src, "Кем вы хотите выглядеть?", "Внешний вид", choices)
+
+	if(!client)
+		return
+
+	if(choice == "Свой персонаж" && appearance_from_prefs)
+		setup_friend_from_prefs(appearance_from_prefs)
+		return
+
+	if(choice == "Случайный человек")
+		setup_friend()
+		return
+
+	if(choice == "Выбрать из окружающих")
+		var/list/possible_targets = list()
+		for(var/mob/living/carbon/C in GLOB.carbon_list)
+			if(!C.real_name)
+				continue
+			possible_targets[C.real_name] = C
+
+		if(!length(possible_targets))
+			to_chat(src, span_warning("Не найдено подходящих существ. Выбран случайный внешний вид."))
+			setup_friend()
+			return
+
+		var/target_name = tgui_input_list(src, "Выберите существо для копирования внешности:", "Внешний вид", possible_targets)
+		if(!target_name || !client)
+			setup_friend()
+			return
+
+		var/mob/living/carbon/target = possible_targets[target_name]
+		if(!target)
+			setup_friend()
+			return
+
+		real_name = target.real_name
+		name = real_name
+
+		// Создаем пустую иконку, в которую будем вшивать стороны
+		var/icon/final_icon = icon()
+		// Запоминаем оригинальное направление моба, чтобы вернуть его обратно
+		var/old_dir = target.dir
+
+		// Поворачиваем моба в каждую из 4 сторон, делаем снимок и вшиваем в нашу иконку
+		for(var/d in list(NORTH, SOUTH, EAST, WEST))
+			target.setDir(d)
+			var/icon/temp_icon = getFlatIcon(target)
+			final_icon.Insert(temp_icon, dir = d)
+
+		// Возвращаем мобу его изначальное направление
+		target.setDir(old_dir)
+
+		human_icon = final_icon
+
+		Show()
 
 /// Randomise friend name and appearance
 /mob/eye/imaginary_friend/proc/setup_friend()
