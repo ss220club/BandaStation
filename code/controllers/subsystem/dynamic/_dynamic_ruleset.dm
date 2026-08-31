@@ -304,14 +304,6 @@
 	if(!length(valid_candidates))
 		return list()
 
-	if(!CONFIG_GET(flag/antag_weighted_selection))
-		// Fallback to old random selection
-		var/list/resulting_candidates = shuffle(valid_candidates)
-		if(length(resulting_candidates) <= num_candidates)
-			return resulting_candidates
-		resulting_candidates.Cut(num_candidates + 1)
-		return resulting_candidates
-
 	// Build weighted list of candidates
 	var/list/mob/weighted_candidates = list()
 	for(var/mob/candidate as anything in valid_candidates)
@@ -324,16 +316,33 @@
 	if(!length(weighted_candidates))
 		return list()
 
-	// Select candidates using weighted random selection
-	var/list/mob/resulting_candidates = list()
-	for(var/i in 1 to min(num_candidates, length(weighted_candidates)))
-		if(!length(weighted_candidates))
-			break
-		var/mob/picked = pick_weight(weighted_candidates)
-		resulting_candidates += picked
-		weighted_candidates -= picked
+	// Test mode preserves the old random selection before rolling the virtual weighted result
+	var/list/mob/actual_random_result = shuffle(valid_candidates)
+	if(length(actual_random_result) > num_candidates)
+		actual_random_result.Cut(num_candidates + 1)
 
-	return resulting_candidates
+	var/list/mob/hypothetical_candidates = weighted_candidates.Copy()
+	if(istype(src, /datum/dynamic_ruleset/latejoin))
+		var/datum/dynamic_ruleset/latejoin/latejoin_ruleset = src
+		for(var/mob/candidate as anything in hypothetical_candidates)
+			if(!latejoin_ruleset.passes_weight_check(candidate.ckey, hypothetical_candidates[candidate]))
+				hypothetical_candidates -= candidate
+
+	var/list/mob/hypothetical_weighted_result = list()
+	for(var/i in 1 to min(num_candidates, length(hypothetical_candidates)))
+		var/mob/picked = pick_antag_test_weight(hypothetical_candidates)
+		if(isnull(picked))
+			break
+		hypothetical_weighted_result += picked
+		hypothetical_candidates -= picked
+
+	var/selection_phase = "midround"
+	if(istype(src, /datum/dynamic_ruleset/roundstart))
+		selection_phase = "roundstart"
+	else if(istype(src, /datum/dynamic_ruleset/latejoin))
+		selection_phase = "latejoin"
+	log_antag_test_selection(config_tag, selection_phase, num_candidates, valid_candidates, weighted_candidates, actual_random_result, hypothetical_weighted_result)
+	return actual_random_result
 	// BANDASTATION EDIT END
 
 /// Handles loading map templates that this ruleset requires
