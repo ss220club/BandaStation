@@ -36,7 +36,7 @@
 	var/mob/hypothetical_weighted_result = pick_antag_test_weight(weighted_candidates)
 	log_antag_test_selection(role_name, "midround", 1, valid_candidates, weighted_candidates, list(chosen_one), hypothetical_weighted_result ? list(hypothetical_weighted_result) : list())
 	for(var/mob/dead/observer/poll_recipient as anything in GLOB.player_list)
-		to_chat(poll_recipient, span_ooc("[FOLLOW_LINK(poll_recipient, chosen_one.client.mob)][span_warning(" [full_capitalize(ROLE_LONE_OPERATIVE)] Poll: ")][key_name(chosen_one.client, include_name = FALSE)] was selected."))
+		to_chat(poll_recipient, span_ooc("[FOLLOW_LINK(poll_recipient, chosen_one)][span_warning(" [full_capitalize(ROLE_LONE_OPERATIVE)] Poll: ")][key_name(chosen_one, include_name = FALSE)] was selected."))
 	// BANDASTATION EDIT END
 	if(isnull(chosen_one))
 		return NOT_ENOUGH_PLAYERS

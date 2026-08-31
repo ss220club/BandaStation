@@ -324,8 +324,8 @@
 	var/list/mob/hypothetical_candidates = weighted_candidates.Copy()
 	if(istype(src, /datum/dynamic_ruleset/latejoin))
 		var/datum/dynamic_ruleset/latejoin/latejoin_ruleset = src
-		for(var/mob/candidate as anything in hypothetical_candidates)
-			if(!latejoin_ruleset.passes_weight_check(candidate.ckey, hypothetical_candidates[candidate]))
+		for(var/mob/candidate as anything in weighted_candidates)
+			if(!latejoin_ruleset.passes_weight_check(candidate.ckey, weighted_candidates[candidate]))
 				hypothetical_candidates -= candidate
 
 	var/list/mob/hypothetical_weighted_result = list()
