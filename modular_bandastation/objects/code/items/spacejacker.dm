@@ -19,9 +19,6 @@
 	COOLDOWN_DECLARE(siphon_cooldown)
 	COOLDOWN_DECLARE(attach_cooldown)
 
-/obj/item/spacejacker/Initialize(mapload)
-	. = ..()
-	START_PROCESSING(SSobj, src)
 
 /obj/item/spacejacker/Destroy()
 	STOP_PROCESSING(SSobj, src)
