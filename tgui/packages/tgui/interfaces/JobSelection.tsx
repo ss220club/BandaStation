@@ -12,11 +12,7 @@ import {
 import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
-import {
-  DEPARTMENTS_RU,
-  JOBS_RU,
-  ReverseJobsRu,
-} from '../bandastation/ru_jobs'; // BANDASTATION EDIT
+import { DEPARTMENTS_RU, JOBS_RU } from '../bandastation/ru_jobs'; // BANDASTATION EDIT
 import { Window } from '../layouts';
 
 type Job = {
