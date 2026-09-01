@@ -1,14 +1,15 @@
 .CrewManifest {
-    &--Section {
-      .Section {
-        &__title {
-          border-color: var(--department-color);
-        }
-        &__titleText {
-          color: var(--department-color);
-        }
+  &--Section {
+    .Section {
+      &__title {
+        border-color: var(--department-color);
+      }
+
+      &__titleText {
+        color: var(--department-color);
       }
     }
+  }
 
   &__Cell {
     padding: var(--space-s) 0;

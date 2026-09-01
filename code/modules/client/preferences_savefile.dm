@@ -245,7 +245,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	chat_toggles = savefile.get_entry("chat_toggles", chat_toggles)
 	toggles = savefile.get_entry("toggles", toggles)
 	ignoring = savefile.get_entry("ignoring", ignoring)
-	job_assigned_profiles = savefile.get_entry("job_assigned_profiles")
+	job_assigned_profiles = savefile.get_entry("job_assigned_profiles", savefile.get_entry("pref_job_slots", job_assigned_profiles))
 
 	// OOC commendations
 	hearted_until = savefile.get_entry("hearted_until", hearted_until)
@@ -282,6 +282,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	key_bindings = sanitize_keybindings(key_bindings)
 	favorite_outfits = SANITIZE_LIST(favorite_outfits)
 	job_assigned_profiles = SANITIZE_LIST(job_assigned_profiles)
+	for(var/job, slot in job_assigned_profiles)
+		if(!isnum(slot) || slot < 1 || slot > max_save_slots)
+			job_assigned_profiles -= job
 
 	key_bindings_by_key = get_key_bindings_by_key(key_bindings)
 
@@ -377,6 +380,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Load prefs
 	job_preferences = save_data?["job_preferences"]
+	if(isnull(job_preferences))
+		job_preferences = savefile.get_entry("job_preferences")
+
+	//Custom emote panel
+	custom_emote_panel = save_data?["custom_emote_panel"] // BANDASTATION ADD - Emote Panel
 
 	//Quirks
 	all_quirks = save_data?["all_quirks"]
@@ -390,6 +398,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	randomise = SANITIZE_LIST(randomise)
 	job_preferences = SANITIZE_LIST(job_preferences)
 	all_quirks = SANITIZE_LIST(all_quirks)
+
+	custom_emote_panel = SANITIZE_LIST(custom_emote_panel) // BANDASTATION ADD - Emote Panel
 
 	//Validate job prefs
 	for(var/job, priority in job_preferences)
@@ -436,6 +446,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Write prefs
 	save_data["job_preferences"] = job_preferences
 
+	// BANDASTATION ADD - Emote Panel
+	save_data["custom_emote_panel"] = custom_emote_panel // BANDASTATION ADD - Emote Panel
+
 	//Quirks
 	save_data["all_quirks"] = all_quirks
 
@@ -455,7 +468,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	for (var/datum/preference_middleware/preference_middleware as anything in middleware)
 		preference_middleware.on_new_character(usr)
 
-	character_preview_view.update_body()
+	character_preview_view?.update_body() // BANDASTATION EDIT - Pref Job Slots
 
 /datum/preferences/proc/remove_current_slot()
 	PRIVATE_PROC(TRUE)

@@ -8,8 +8,8 @@
 	required_items_to_unlock += subtypesof(/obj/item/circuitboard/machine/abductor)
 
 /datum/techweb_node/alien/base //AYYYYYYYYLMAOO tech
-	display_name = "Alien Technology"
-	description = "Things used by the greys."
+	display_name = "Инопланетная технология"
+	description = "Исследование, позволяющее получить технологии греев."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_HIDDEN
 	prerequisite_nodes = list(/datum/techweb_node/bluespace_travel)
 	required_items_to_unlock = list(
@@ -40,8 +40,8 @@
 	SSshuttle.shuttle_purchase_requirements_met[SHUTTLE_UNLOCK_ALIENTECH] = TRUE
 
 /datum/techweb_node/alien/engi
-	display_name = "Alien Engineering"
-	description = "Alien engineering tools"
+	display_name = "Инопланетная инженерия"
+	description = "Инопланетные инженерные инструменты."
 	prerequisite_nodes = list(/datum/techweb_node/alien/base, /datum/techweb_node/exp_tools)
 	unlocked_designs = list(
 		/datum/design/aliencrowbar,
@@ -65,8 +65,8 @@
 	announce_channels = list(RADIO_CHANNEL_ENGINEERING)
 
 /datum/techweb_node/alien/surgery
-	display_name = "Alien Surgery"
-	description = "Abductors did nothing wrong."
+	display_name = "Инопланетная хирургия"
+	description = "Хирургическое исследование абдукторов, позволяющее понять технологии инструментов хирургии."
 	prerequisite_nodes = list(/datum/techweb_node/alien/base, /datum/techweb_node/surgery_tools)
 	unlocked_designs = list(
 		/datum/design/aliencautery,

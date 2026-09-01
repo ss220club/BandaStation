@@ -1,12 +1,11 @@
 //Hulk turns your skin green, makes you strong, and allows you to shrug off stun effect.
 /datum/mutation/hulk
 	name = "Hulk"
-	desc = "The subject's muscles expand drastically, granting superhuman strength and resilience, but inhibit speech in the process. \
-		This heightened muscle density is more vulnerable to the cold, and cannot be maintained if critically injured."
+	desc = "Слабо изученный геном, заставляющий мышцы своего носителя увеличиваться, подавлять речь и придавать болезненное состояние коже."
 	quality = POSITIVE
 	locked = TRUE
 	difficulty = 16
-	text_gain_indication = span_notice("Your muscles hurt!")
+	text_gain_indication = span_notice("Ты чувствуешь боль в мышцах!")
 	species_allowed = list(SPECIES_HUMAN) //no skeleton/lizard hulk
 	health_req = 25
 	instability = POSITIVE_INSTABILITY_MAJOR
@@ -133,12 +132,12 @@
 	log_combat(the_hulk, yeeted_person, "has started swinging by tail")
 	yeeted_person.Stun(2 SECONDS)
 	yeeted_person.visible_message(span_danger("[the_hulk] starts grasping [yeeted_person] by the tail..."), \
-					span_userdanger("[the_hulk] begins grasping your tail!"), span_hear("You hear aggressive shuffling!"), null, the_hulk)
+					span_userdanger("[the_hulk] begins grasping your tail!"), span_hear("Вы слышите агрессивное шарканье!"), null, the_hulk)
 	to_chat(the_hulk, span_danger("You start grasping [yeeted_person] by the tail..."))
 
 	if(!do_after(the_hulk, 2 SECONDS, yeeted_person))
 		yeeted_person.visible_message(span_danger("[yeeted_person] breaks free of [the_hulk]'s grasp!"), \
-					span_userdanger("You break free from [the_hulk]'s grasp!"), span_hear("You hear aggressive shuffling!"), null, the_hulk)
+					span_userdanger("You break free from [the_hulk]'s grasp!"), span_hear("Вы слышите агрессивное шарканье!"), null, the_hulk)
 		to_chat(the_hulk, span_danger("You lose your grasp on [yeeted_person]'s tail!"))
 		return
 
@@ -284,8 +283,8 @@
 
 /datum/mutation/hulk/ork
 	name = "Ork"
-	desc = "A variant of the hulk mutation that is also known to inhibit the subject's brain functions."
-	text_gain_indication = span_notice("You feel significantly dumber!")
+	desc = "Данная мутация вызвана смешиванием генов халка. Она сильно влияет на речевые центры мозга обладателя мутации."
+	text_gain_indication = span_notice("Ты чувствуешь себя гораздно тупее!")
 	bodypart_color = COLOR_ASSISTANT_OLIVE
 	conflicts = list(/datum/mutation/hulk)
 

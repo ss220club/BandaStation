@@ -117,4 +117,3 @@
 
 /turf/closed/wall/concrete/reinforced/rust_turf(magic = FALSE)
 	return call(src, /turf/closed/wall/r_wall::rust_turf())(magic)
-

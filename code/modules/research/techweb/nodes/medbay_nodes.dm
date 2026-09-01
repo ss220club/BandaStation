@@ -1,6 +1,6 @@
 /datum/techweb_node/medbay_equip
-	display_name = "Medbay Equipment"
-	description = "Essential medical tools to patch you up while medbay is still intact."
+	display_name = "Оборудование медицинского отдела"
+	description = "Базовый комплект медицинского оборудования для оказания неотложной помощи при сохранении функциональности медотдела."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/beaker,
@@ -43,8 +43,8 @@
 	)
 
 /datum/techweb_node/chem_synthesis
-	display_name = "Chemical Synthesis"
-	description = "Synthesizing complex chemicals from electricity and thin air... Don't ask how..."
+	display_name = "Химический синтез"
+	description = "Технология синтеза сложных химических соединений с использованием электричества и газовых сред."
 	prerequisite_nodes = list(/datum/techweb_node/medbay_equip)
 	unlocked_designs = list(
 		/datum/design/medical_spray_bottle,
@@ -68,14 +68,14 @@
 	announce_channels = list(RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/medbay_equip_adv
-	display_name = "Advanced Medbay Equipment"
-	description = "State-of-the-art medical gear for keeping the crew in one piece — mostly."
+	display_name = "Продвинутое оборудование медицинского отдела"
+	description = "Современное медицинское оборудование для поддержания жизнеспособности экипажа с минимальными физическими повреждениями."
 	prerequisite_nodes = list(/datum/techweb_node/chem_synthesis)
 	unlocked_designs = list(
 		/datum/design/board/chem_mass_spec,
 		/datum/design/crewpinpointer,
 		/datum/design/defibrillator_mount_charging,
-		/datum/design/diode_disk_healing,
+		// /datum/design/diode_disk_healing, // BANDASTATION EDIT: Healing beam design removal
 		/datum/design/diode_disk_sanity,
 		/datum/design/healthanalyzer_advanced,
 		/datum/design/emergency_bed,
@@ -89,8 +89,8 @@
 	announce_channels = list(RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/cryostasis
-	display_name = "Cryostasis"
-	description = "The result of clown accidentally drinking a chemical, now repurposed for safely preserving crew members in suspended animation."
+	display_name = "Криостазис"
+	description = "Технология криогенной консервации экипажа, разработанная на основе случайного химического воздействия и адаптированная для безопасного применения."
 	prerequisite_nodes = list(/datum/techweb_node/medbay_equip_adv, /datum/techweb_node/fusion)
 	unlocked_designs = list(
 		/datum/design/cryo_grenade,

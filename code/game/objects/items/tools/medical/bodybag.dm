@@ -41,7 +41,7 @@
 
 /obj/item/bodybag/suicide_act(mob/living/user)
 	if(isopenturf(user.loc))
-		user.visible_message(span_suicide("[user] is crawling into [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+		user.visible_message(span_suicide("[user] is crawling into [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 		var/obj/structure/closet/body_bag/R = new unfoldedbag_path(user.loc)
 		R.add_fingerprint(user)
 		qdel(src)
@@ -143,8 +143,9 @@
 	name = /obj/structure/closet/body_bag/environmental/stasis::name
 	desc = /obj/structure/closet/body_bag/environmental/stasis::desc
 	max_integrity = /obj/structure/closet/body_bag/environmental/stasis::max_integrity
-	icon = 'icons/obj/medical/bodybag.dmi'
-	icon_state = "stasis_bag_folded"
+	icon = 'modular_bandastation/balance/icons/bodybag.dmi' // BANDASTATION EDIT: Replace stasis bag sprites and remove modular stasis bag
+	icon_state = "stasisbag_folded" // BANDASTATION EDIT: Replace stasis bag sprites and remove modular stasis bag
+	color = "#A5A2F7" // BANDASTATION EDIT: Replace stasis bag sprites and remove modular stasis bag
 	unfoldedbag_path = /obj/structure/closet/body_bag/environmental/stasis
 	custom_materials = list(/datum/material/plastic = SHEET_MATERIAL_AMOUNT * 10, /datum/material/silver = HALF_SHEET_MATERIAL_AMOUNT)
 

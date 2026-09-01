@@ -8,7 +8,7 @@
 	command_name = "Stay"
 	command_desc = "Command your pet to stay idle in this location."
 	radial_icon_state = "halt"
-	speech_commands = list("sit", "stay", "stop")
+	speech_commands = list("sit", "stay", "stop", "сидеть", "лежать", "место", "фу", "стоп", "стой", "стоять")
 	command_feedback = "sits"
 
 /datum/pet_command/idle/execute_action(datum/ai_controller/controller)
@@ -25,7 +25,7 @@
 	command_name = "Loose"
 	command_desc = "Allow your pet to resume its natural behaviours."
 	radial_icon_state = "free"
-	speech_commands = list("free", "loose")
+	speech_commands = list("free", "loose", "гулять", "вон", "свобод", "брысь")
 	command_feedback = "relaxes"
 
 /datum/pet_command/free/execute_action(datum/ai_controller/controller)
@@ -43,7 +43,7 @@
 	command_name = "Follow"
 	command_desc = "Command your pet to accompany you."
 	radial_icon_state = "follow"
-	speech_commands = list("heel", "follow")
+	speech_commands = list("heel", "follow", "за мной", "след", "охран", "к ноге", "ко мне")
 	callout_type = /datum/callout_option/move
 	///should we activate immediately if we're doing nothing else and gain a friend?
 	var/activate_on_befriend = FALSE
@@ -80,7 +80,7 @@
 	command_name = "Play Dead"
 	command_desc = "Play a macabre trick."
 	radial_icon_state = "play_dead"
-	speech_commands = list("play dead") // Don't get too creative here, people talk about dying pretty often
+	speech_commands = list("play dead", "притворись мертвым", "умри") // Don't get too creative here, people talk about dying pretty often
 
 /datum/pet_command/play_dead/execute_action(datum/ai_controller/controller)
 	controller.set_behavior_tree_override(SUBPLAN_ID_PET_COMMAND, /datum/bt_node/subtree/pet_command/play_dead)
@@ -99,7 +99,7 @@
 
 /datum/pet_command/good_boy/New(mob/living/parent)
 	. = ..()
-	speech_commands += "good [parent.name]"
+	speech_commands += list("good [parent.name]", "хорош")
 	switch (parent.gender)
 		if (MALE)
 			speech_commands += "good boy"
@@ -147,7 +147,7 @@
 	radial_icon_state = "attack"
 	requires_pointing = TRUE
 	callout_type = /datum/callout_option/attack
-	speech_commands = list("attack", "sic", "kill")
+	speech_commands = list("attack", "sic", "kill", "апорт", "фас", "бить", "атак")
 	command_feedback = "growl"
 	pointed_reaction = "and growls"
 	/// Balloon alert to display if providing an invalid target
@@ -189,7 +189,7 @@
 	command_desc = "Command your pet to attempt to breed with a partner."
 	requires_pointing = TRUE
 	radial_icon_state = "breed"
-	speech_commands = list("breed", "consummate")
+	speech_commands = list("breed", "consummate", "размножайся")
 
 /datum/pet_command/breed/set_command_target(mob/living/parent, atom/target)
 	if(isnull(target) || !isliving(target))
@@ -221,7 +221,7 @@
 	radial_icon = 'icons/mob/actions/actions_spells.dmi'
 	radial_icon_state = "projectile"
 	requires_pointing = TRUE
-	speech_commands = list("shoot", "blast", "cast")
+	speech_commands = list("shoot", "blast", "cast", "стреля", "выстрел", "пиу", "паф", "каст")
 	command_feedback = "growl"
 	pointed_reaction = "and growls"
 	/// Blackboard key where a reference to some kind of mob ability is stored

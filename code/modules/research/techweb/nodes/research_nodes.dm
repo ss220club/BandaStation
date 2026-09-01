@@ -1,6 +1,6 @@
 /datum/techweb_node/fundamental_sci
-	display_name = "Fundamental Science"
-	description = "Establishing the bedrock of scientific understanding, paving the way for deeper exploration and theoretical inquiry."
+	display_name = "Фундаментальная наука"
+	description = "Закладывание фундамент научного понимания, прокладывая путь к более глубоким исследованиям и теоретическим изысканиям."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/board/rdserver,
@@ -19,8 +19,8 @@
 	)
 
 /datum/techweb_node/bluespace_theory
-	display_name = "Bluespace Theory"
-	description = "Basic studies into the mysterious alternate dimension known as bluespace."
+	display_name = "Блюспейс теория"
+	description = "Закладывание фундамент научного понимания, прокладывая путь к более глубоким исследованиям и теоретическим изысканиям."
 	prerequisite_nodes = list(/datum/techweb_node/fundamental_sci)
 	unlocked_designs = list(
 		/datum/design/bluespace_crystal,
@@ -29,8 +29,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/applied_bluespace
-	display_name = "Applied Bluespace Research"
-	description = "With a heightened grasp of bluespace dynamics, sophisticated applications and technologies can be devised using data from bluespace crystal analyses."
+	display_name = "Прикладные блюспейс исследования"
+	description = "Благодаря углубленному пониманию динамики блюспейс, можно разрабатывать сложные приложения и технологии, используя данные анализа блюспейс кристаллов."
 	prerequisite_nodes = list(/datum/techweb_node/bluespace_theory)
 	unlocked_designs = list(
 		/datum/design/board/ore_silo,
@@ -50,8 +50,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_MEDICAL, RADIO_CHANNEL_SERVICE, RADIO_CHANNEL_SUPPLY)
 
 /datum/techweb_node/bluespace_travel
-	display_name = "Bluespace Travel"
-	description = "Facilitate teleportation methods based on bluespace principles to revolutionize logistical efficiency."
+	display_name = "Блюспейс путешествия"
+	description = "Внедрение методов телепортации, основанных на принципах блюспейс, для революционного повышения эффективности логистики."
 	prerequisite_nodes = list(/datum/techweb_node/applied_bluespace)
 	unlocked_designs = list(
 		/datum/design/board/teleconsole,
@@ -68,8 +68,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/anomaly_research
-	display_name = "Anomaly Research"
-	description = "Delving into the study of mysterious anomalies to investigate methods to refine and harness their unpredictable energies."
+	display_name = "Аномальные исследования"
+	description = "Углубление в изучениях таинственных аномалий, исследуйте методы совершенствования и использования их непредсказуемой энергии."
 	prerequisite_nodes = list(/datum/techweb_node/applied_bluespace)
 	unlocked_designs = list(
 		/datum/design/board/anomaly_refinery,
@@ -81,8 +81,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/anomaly_shells
-	display_name = "Advanced Anomaly Shells"
-	description = "New shells designed to utilize anomaly cores, maximizing their potential in innovative ways."
+	display_name = "Продвинутые аномальные оболочки"
+	description = "Новые оболочки, разработанные для использования аномальных ядер, максимально раскрывают их потенциал инновационными способами."
 	prerequisite_nodes = list(/datum/techweb_node/anomaly_research)
 	unlocked_designs = list(
 		/datum/design/bag_holding,
