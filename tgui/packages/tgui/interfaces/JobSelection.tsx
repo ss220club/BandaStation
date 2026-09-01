@@ -12,8 +12,13 @@ import {
 import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
-import { DEPARTMENTS_RU, JOBS_RU } from '../bandastation/ru_jobs'; // BANDASTATION EDIT
+import {
+  DEPARTMENTS_RU,
+  JOBS_RU,
+  ReverseJobsRu,
+} from '../bandastation/ru_jobs'; // BANDASTATION EDIT
 import { Window } from '../layouts';
+import { JOB2ICON } from './common/JobToIcon';
 
 type Job = {
   unavailable_reason: string | null;
@@ -50,7 +55,9 @@ type JobEntryProps = {
 };
 
 function JobEntry(props: JobEntryProps) {
-  const { jobName, job, department, jobIcon, onClick } = props;
+  const { jobName, job, department, onClick } = props;
+
+  const jobIcon = JOB2ICON[ReverseJobsRu(jobName)] || null;
 
   return (
     <Button

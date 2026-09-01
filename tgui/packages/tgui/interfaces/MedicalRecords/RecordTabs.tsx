@@ -2,6 +2,7 @@ import { sortBy } from 'es-toolkit';
 import { filter } from 'es-toolkit/compat';
 import { useState } from 'react';
 import { useBackend, useLocalState } from 'tgui/backend';
+import { ReverseJobsRu } from 'tgui/bandastation/ru_jobs';
 import {
   Box,
   Button,
@@ -12,7 +13,7 @@ import {
   Stack,
   Tabs,
 } from 'tgui-core/components';
-
+import { JOB2ICON } from '../common/JobToIcon';
 import { isRecordMatch } from '../SecurityRecords/helpers';
 import type { MedicalRecord, MedicalRecordData } from './types';
 
@@ -122,7 +123,7 @@ const CrewTab = (props: { record: MedicalRecord }) => {
       selected={selectedRecord?.crew_ref === crew_ref}
     >
       <Box>
-        <Icon name={trim || 'question'} /> {name}
+        <Icon name={JOB2ICON[ReverseJobsRu(trim)] || 'question'} /> {name}
       </Box>
     </Tabs.Tab>
   );
