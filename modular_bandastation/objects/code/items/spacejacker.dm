@@ -16,6 +16,7 @@
 	var/exchange_player_count = -1
 	var/exchange_traitor_count = -1
 	var/datum/weakref/attached_target_ref
+	var/attached_target_name = null
 	COOLDOWN_DECLARE(siphon_cooldown)
 	COOLDOWN_DECLARE(attach_cooldown)
 
@@ -43,6 +44,7 @@
 		var/mob/living/carbon/human/attached_target = attached_target_ref.resolve()
 		if(!attached_target)
 			attached_target_ref = null
+			attached_target_name = null
 			return
 		var/obj/item/modular_computer/pda/target_pda = locate() in attached_target.get_all_contents()
 		if(!target_pda)
@@ -116,6 +118,7 @@
 	if(!target_pda)
 		return FALSE
 	attached_target_ref = WEAKREF(target)
+	attached_target_name = target.name
 	playsound(target, 'sound/effects/youarehacked.ogg', 100, FALSE)
 	COOLDOWN_START(src, attach_cooldown, 10 MINUTES)
 	var/datum/computer_file/program/messenger/messenger_app = locate() in target_pda.stored_files
