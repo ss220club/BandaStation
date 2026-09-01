@@ -738,6 +738,9 @@
 		return ITEM_INTERACT_BLOCKING
 	if(!tool.blend_requirements(src, user))
 		return ITEM_INTERACT_BLOCKING
+	if(tool.w_class >= WEIGHT_CLASS_BULKY)
+		to_chat(user, balloon_alert("не помещается!"))
+		return ITEM_INTERACT_BLOCKING
 	if((length(tool.grind_results()) || tool.reagents?.total_volume) && user.transferItemToLoc(tool, src))
 		grinded = tool
 		return ITEM_INTERACT_SUCCESS
