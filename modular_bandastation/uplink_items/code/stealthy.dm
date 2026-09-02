@@ -35,6 +35,9 @@
 	desc = "Это устройство позволяет вам тайно снимать кредиты с банковских счетов других членов экипажа и прикреплять к их КПК вирус, который передаёт деньги на ваш космохакер. Также имеет выгодный обменник кредитов на ТК, но будьте осторожны, ТК ограничены, а также слишком частое использование может вызвать подозрения у других членов экипажа."
 	item = /obj/item/spacejacker
 	category = /datum/uplink_category/role_restricted
+	/datum/uplink_item/stealthy_weapons/spacejacker/get_discount_value(discount_type)
+	var/discount = ..()
+	return min(discount, 0.5)
 	limited_stock = 1
 	restricted_roles = list(
 		JOB_QUARTERMASTER,
