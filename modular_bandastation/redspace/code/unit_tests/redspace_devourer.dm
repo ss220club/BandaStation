@@ -103,8 +103,17 @@
 	capture_victim.mind_initialize()
 	capture_victim.stat = HARD_CRIT
 	ADD_TRAIT(capture_victim, TRAIT_INCAPACITATED, REF(src))
-	if(!capture_devourer.capture_victim(capture_victim) || capture_victim.loc != capture_devourer || capture_devourer.stored_victim != capture_victim || !HAS_TRAIT(capture_victim, TRAIT_STASIS))
+	if(!capture_devourer.capture_victim(capture_victim) || !capture_devourer.transformation_committed || capture_victim.loc != capture_devourer || capture_devourer.stored_victim != capture_victim || !HAS_TRAIT(capture_victim, TRAIT_STASIS))
 		return Fail("A successful capture must move the victim into stasis inside the Devourer")
+	var/datum/component/redspace_energy/capture_energy = capture_devourer.GetComponent(/datum/component/redspace_energy)
+	if(!capture_energy || capture_energy.zero_energy_damage_percent)
+		return Fail("A captured victim must prevent redspace starvation from killing the Devourer before transformation")
+	capture_energy.update_environment(REDSPACE_DISTURBANCE_EXIT_VALUE, FALSE)
+	capture_energy.current_energy = 0
+	var/capture_health = capture_devourer.health
+	capture_energy.on_life(capture_devourer, 1)
+	if(capture_devourer.stat == DEAD || capture_devourer.health != capture_health)
+		return Fail("A captured Devourer must survive an empty redspace energy reserve until transformation")
 	var/turf/door_turf = get_step(run_loc_floor_bottom_left, EAST)
 	var/turf/door_target_turf = get_step(door_turf, EAST)
 	var/obj/machinery/door/airlock/instant/test_door = allocate(/obj/machinery/door/airlock/instant, door_turf)
@@ -115,7 +124,7 @@
 	if(!redspace_demon_has_obstruction(capture_devourer, door_target_turf) || !redspace_demon_attack_obstruction(capture_devourer, door_target_turf) || (!QDELETED(test_door) && test_door.atom_integrity >= door_integrity))
 		return Fail("A Devourer carrying a victim must be able to break a closed airlock blocking its path")
 	capture_devourer.release_victim()
-	if(capture_devourer.stored_victim || capture_victim.loc == capture_devourer || HAS_TRAIT(capture_victim, TRAIT_STASIS))
+	if(capture_devourer.stored_victim || capture_devourer.transformation_committed || capture_victim.loc == capture_devourer || HAS_TRAIT(capture_victim, TRAIT_STASIS) || capture_energy.zero_energy_damage_percent != capture_devourer.redspace_zero_energy_damage_percent)
 		return Fail("Releasing a captured victim must clear containment and stasis")
 
 	var/mob/living/basic/demon/redspace/devourer/retreat_devourer = allocate(/mob/living/basic/demon/redspace/devourer, get_step(run_loc_floor_bottom_left, NORTH))
@@ -283,13 +292,11 @@
 		transformed.ckey = null
 		qdel(transformed)
 		return Fail("Transformation must carry the victim inside the new demon instead of deleting it")
-	transformed.release_stored_victim()
-	if(transformed.stored_victim || transform_victim.loc == transformed || HAS_TRAIT(transform_victim, TRAIT_STASIS))
-		transformed.ckey = null
-		qdel(transformed)
-		return Fail("Releasing the transformed demon's victim must end containment and stasis")
+	var/turf/ravager_death_turf = get_turf(transformed)
 	transformed.ckey = null
-	qdel(transformed)
+	transformed.death()
+	if(QDELETED(transform_victim) || transform_victim.loc != ravager_death_turf || HAS_TRAIT(transform_victim, TRAIT_STASIS))
+		return Fail("A Ravager's contained victim must fall out and leave stasis when the Ravager dies")
 
 	var/mob/living/basic/demon/redspace/devourer/minotaur_devourer = allocate(/mob/living/basic/demon/redspace/devourer, run_loc_floor_bottom_left)
 	var/mob/living/carbon/human/minotaur_victim = allocate(/mob/living/carbon/human, run_loc_floor_bottom_left)
@@ -306,7 +313,38 @@
 	if(QDELETED(minotaur_victim) || minotaur_victim.loc != minotaur_transformed || minotaur_transformed.stored_victim != minotaur_victim)
 		qdel(minotaur_transformed)
 		return Fail("Minotaur transformation must also carry the victim inside the new demon")
-	qdel(minotaur_transformed)
+	var/turf/minotaur_death_turf = get_turf(minotaur_transformed)
+	minotaur_transformed.death()
+	if(QDELETED(minotaur_victim) || minotaur_victim.loc != minotaur_death_turf || HAS_TRAIT(minotaur_victim, TRAIT_STASIS))
+		return Fail("A Minotaur's contained victim must fall out and leave stasis when the Minotaur dies")
+
+	var/mob/living/basic/demon/redspace/devourer/dead_victim_devourer = allocate(/mob/living/basic/demon/redspace/devourer, run_loc_floor_bottom_left)
+	var/mob/living/carbon/human/dead_after_capture_victim = allocate(/mob/living/carbon/human, run_loc_floor_bottom_left)
+	dead_after_capture_victim.mind_initialize()
+	dead_after_capture_victim.stat = HARD_CRIT
+	ADD_TRAIT(dead_after_capture_victim, TRAIT_INCAPACITATED, REF(src))
+	if(!dead_victim_devourer.capture_victim(dead_after_capture_victim))
+		return Fail("The Devourer must commit to transformation as soon as it captures a victim")
+	dead_after_capture_victim.death()
+	var/mob/living/basic/demon/redspace/moderate/minotaur/dead_victim_transformed = dead_victim_devourer.transform_with_minotaur()
+	if(!dead_victim_transformed || QDELETED(dead_victim_transformed) || dead_victim_transformed.stored_victim != dead_after_capture_victim || dead_after_capture_victim.loc != dead_victim_transformed)
+		if(dead_victim_transformed)
+			qdel(dead_victim_transformed)
+		return Fail("A victim dying after capture must not cancel the Devourer's transformation")
+	qdel(dead_victim_transformed)
+
+	var/mob/living/basic/demon/redspace/devourer/deleted_victim_devourer = allocate(/mob/living/basic/demon/redspace/devourer, run_loc_floor_bottom_left)
+	var/mob/living/carbon/human/deleted_after_capture_victim = allocate(/mob/living/carbon/human, run_loc_floor_bottom_left)
+	deleted_after_capture_victim.stat = HARD_CRIT
+	if(!deleted_victim_devourer.capture_victim(deleted_after_capture_victim))
+		return Fail("The Devourer must accept a victim before testing deletion during transformation")
+	qdel(deleted_after_capture_victim)
+	var/mob/living/basic/demon/redspace/moderate/minotaur/deleted_victim_transformed = deleted_victim_devourer.transform_with_minotaur()
+	if(!deleted_victim_transformed || QDELETED(deleted_victim_transformed))
+		if(deleted_victim_transformed)
+			qdel(deleted_victim_transformed)
+		return Fail("Deleting a captured victim must not cancel the Devourer's committed transformation")
+	qdel(deleted_victim_transformed)
 
 	var/mob/living/basic/demon/redspace/devourer/player_devourer = allocate(/mob/living/basic/demon/redspace/devourer, run_loc_floor_bottom_left)
 	var/mob/living/carbon/human/player_victim = allocate(/mob/living/carbon/human, run_loc_floor_bottom_left)

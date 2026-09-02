@@ -658,7 +658,6 @@
 #define REDSPACE_DEVOURER_RETREAT_MAX_STEPS 60
 /// Extra retreat steps allowed per tile of straight-line distance to the epicenter.
 #define REDSPACE_DEVOURER_RETREAT_STEP_FACTOR 2
-#define REDSPACE_RAVAGER_MAX_POLL_ATTEMPTS 2
 #define REDSPACE_SUMMON_COOLDOWN (90 SECONDS)
 #define REDSPACE_SUMMON_POLL_TIME (10 SECONDS)
 
@@ -1094,8 +1093,8 @@
 	var/transformation_timer_id
 	/// Prevents overlapping ghost polls while a captured victim is waiting to transform.
 	var/transformation_in_progress = FALSE
-	/// Tracks how many times we've polled for a player to control the ravager.
-	var/poll_attempts = 0
+	/// Set after a victim is successfully captured. From this point the Devourer must finish its transformation.
+	var/transformation_committed = FALSE
 	/// Destination the Devourer is walking toward before transformation.
 	var/turf/transformation_target
 
@@ -1103,7 +1102,7 @@
 	. = ..()
 	if(.)
 		return
-	if(stored_victim || devour_in_progress)
+	if(stored_victim || transformation_committed || devour_in_progress)
 		return BASIC_MOB_END_ATTACK_CHAIN_COOLDOWN
 	if(!Adjacent(target) || !redspace_devourer_can_consume(target))
 		return BASIC_MOB_CONTINUE_ATTACK_CHAIN
@@ -1147,7 +1146,7 @@
 	devour_in_progress = FALSE
 
 /mob/living/basic/demon/redspace/devourer/proc/capture_victim(mob/living/carbon/human/victim)
-	if(stored_victim || !redspace_devourer_can_consume(victim))
+	if(stored_victim || transformation_committed || !redspace_devourer_can_consume(victim))
 		return FALSE
 
 	victim.apply_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
@@ -1158,45 +1157,58 @@
 		return FALSE
 
 	stored_victim = victim
+	transformation_committed = TRUE
+	var/datum/component/redspace_energy/energy = GetComponent(/datum/component/redspace_energy)
+	if(energy)
+		// The capture is already complete; energy starvation must not kill the Devourer before it transforms.
+		energy.zero_energy_damage_percent = 0
 	ADD_TRAIT(src, TRAIT_IMMOBILIZED, REDSPACE_DEVOURER_STASIS)
 	return TRUE
+
+/mob/living/basic/demon/redspace/devourer/proc/detach_stored_victim()
+	var/mob/living/carbon/human/victim = stored_victim
+	stored_victim = null
+	if(!victim)
+		REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, REDSPACE_DEVOURER_STASIS)
+		return
+	if(!QDELETED(victim))
+		UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+		victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
+	REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, REDSPACE_DEVOURER_STASIS)
+	return victim
 
 /mob/living/basic/demon/redspace/devourer/proc/on_stored_victim_deleted(mob/living/carbon/human/victim)
 	SIGNAL_HANDLER
 	if(victim != stored_victim)
 		return
-	release_victim()
+	detach_stored_victim()
 
 /mob/living/basic/demon/redspace/devourer/Exited(atom/movable/gone, direction)
 	. = ..()
 	if(gone == stored_victim)
-		release_victim()
+		detach_stored_victim()
 
 /mob/living/basic/demon/redspace/devourer/proc/release_victim()
-	var/mob/living/carbon/human/victim = stored_victim
-	stored_victim = null
-	if(victim)
-		UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
-		if(!QDELETED(victim))
-			victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
-			if(victim.loc == src)
-				victim.forceMove(get_turf(src))
-	REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, REDSPACE_DEVOURER_STASIS)
+	var/mob/living/carbon/human/victim = detach_stored_victim()
+	if(victim && !QDELETED(victim) && victim.loc == src)
+		victim.forceMove(get_turf(src))
+	transformation_committed = FALSE
 	if(transformation_timer_id)
 		deltimer(transformation_timer_id)
 	transformation_timer_id = null
 	stop_transformation_movement()
 	transformation_in_progress = FALSE
-	poll_attempts = 0
 	devour_in_progress = FALSE
 	ai_controller?.clear_forced_off()
+	var/datum/component/redspace_energy/energy = GetComponent(/datum/component/redspace_energy)
+	if(energy)
+		energy.zero_energy_damage_percent = redspace_zero_energy_damage_percent
 
-/mob/living/basic/demon/redspace/devourer/proc/can_transform_with_victim()
-	var/mob/living/carbon/human/victim = stored_victim
-	return !QDELETED(src) && stat != DEAD && victim && !QDELETED(victim) && victim.loc == src && victim.stat != DEAD
+/mob/living/basic/demon/redspace/devourer/proc/can_transform()
+	return !QDELETED(src) && stat != DEAD && transformation_committed
 
 /mob/living/basic/demon/redspace/devourer/proc/begin_transformation()
-	if(QDELETED(src) || transformation_in_progress || !stored_victim)
+	if(!can_transform() || transformation_in_progress)
 		return
 	transformation_timer_id = null
 	transformation_in_progress = TRUE
@@ -1208,18 +1220,28 @@
 	INVOKE_ASYNC(src, PROC_REF(poll_for_ravager))
 
 /mob/living/basic/demon/redspace/devourer/proc/start_transformation_countdown()
-	if(!can_transform_with_victim())
-		release_victim()
+	if(!can_transform())
 		return
 	transformation_in_progress = FALSE
 	transformation_timer_id = addtimer(CALLBACK(src, PROC_REF(begin_transformation)), transformation_delay, TIMER_STOPPABLE | TIMER_DELETE_ME)
+
+/mob/living/basic/demon/redspace/devourer/proc/retry_transformation()
+	if(!can_transform())
+		return
+	transformation_in_progress = FALSE
+	transformation_timer_id = addtimer(CALLBACK(src, PROC_REF(begin_transformation)), REDSPACE_RAVAGER_TRANSFORMATION_RETRY_DELAY, TIMER_STOPPABLE | TIMER_DELETE_ME)
 
 /mob/living/basic/demon/redspace/devourer/proc/stop_transformation_movement()
 	transformation_target = null
 
 /mob/living/basic/demon/redspace/devourer/proc/move_to_transformation_site(turf/destination)
-	if(QDELETED(src) || !destination || !can_transform_with_victim())
+	if(QDELETED(src))
+		return
+	if(!can_transform())
 		release_victim()
+		return
+	if(!destination || QDELETED(destination))
+		start_transformation_countdown()
 		return
 
 	var/datum/ai_controller/controller = ai_controller
@@ -1236,8 +1258,13 @@
 /// or open tile instead of stalling. If nothing at all can be broken through it transforms
 /// where it stands.
 /mob/living/basic/demon/redspace/devourer/proc/walk_direct_to_transformation_site(turf/destination)
-	if(QDELETED(src) || !destination || !can_transform_with_victim())
+	if(QDELETED(src))
+		return
+	if(!can_transform())
 		release_victim()
+		return
+	if(!destination || QDELETED(destination))
+		start_transformation_countdown()
 		return
 
 	transformation_in_progress = TRUE
@@ -1257,7 +1284,7 @@
 	var/max_steps = REDSPACE_DEVOURER_RETREAT_MAX_STEPS + (start_turf ? get_dist(start_turf, destination) * REDSPACE_DEVOURER_RETREAT_STEP_FACTOR : 0)
 	var/total_steps = 0
 	var/stuck_checks = 0
-	while(!QDELETED(src) && can_transform_with_victim() && get_turf(src) != destination)
+	while(!QDELETED(src) && can_transform() && get_turf(src) != destination)
 		// The epicenter tile can be sealed off after it was picked (a closed door, a machine
 		// on top of it). Standing next to it is as close as the crawl can get; stepping in
 		// circles around it forever would never finish.
@@ -1276,7 +1303,7 @@
 
 	if(QDELETED(src))
 		return
-	if(!can_transform_with_victim())
+	if(!can_transform())
 		release_victim()
 		return
 	if(get_turf(src) == destination || devourer_epicenter_unreachable(destination))
@@ -1371,13 +1398,8 @@
 	return redspace_demon_can_smash_turf(basic_mob, target)
 
 /mob/living/basic/demon/redspace/devourer/proc/poll_for_ravager()
-	if(!can_transform_with_victim())
+	if(!can_transform())
 		release_victim()
-		return
-
-	poll_attempts++
-	if(poll_attempts > REDSPACE_RAVAGER_MAX_POLL_ATTEMPTS)
-		transform_with_minotaur()
 		return
 
 	var/mob/dead/observer/chosen_ghost = SSpolling.poll_ghosts_for_target(
@@ -1396,38 +1418,36 @@
 	if(QDELETED(src))
 		return
 	if(!chosen_ghost)
-		transformation_in_progress = FALSE
-		visible_message(span_warning("Возмущение стихает, и появление опустошителя откладывается."))
-		transformation_timer_id = addtimer(CALLBACK(src, PROC_REF(begin_transformation)), REDSPACE_RAVAGER_TRANSFORMATION_RETRY_DELAY, TIMER_STOPPABLE | TIMER_DELETE_ME)
-		return
-	if(!can_transform_with_victim())
-		release_victim()
+		// A missed poll must not cancel or indefinitely postpone a completed consumption.
+		visible_message(span_warning("Возмущение стихает, и из пожирателя выползает минотавр."))
+		transform_with_minotaur()
 		return
 	transform_with_victim(chosen_ghost.key)
 
 /mob/living/basic/demon/redspace/devourer/proc/transform_with_victim(ghost_key)
-	if(!istext(ghost_key) || !can_transform_with_victim())
+	if(!can_transform())
 		transformation_in_progress = FALSE
 		return
+	if(!istext(ghost_key))
+		return transform_with_minotaur()
 
 	transformation_timer_id = null
 	var/mob/living/carbon/human/victim = stored_victim
-	if(!can_transform_with_victim())
-		release_victim()
-		return
 
 	var/turf/transform_turf = get_turf(src)
 	if(!transform_turf)
-		release_victim()
+		retry_transformation()
 		return
 
 	var/mob/living/basic/demon/redspace/moderate/ravager/transformed = new(transform_turf)
 	if(!transformed || QDELETED(transformed))
-		release_victim()
+		retry_transformation()
 		return
 
 	stored_victim = null
-	UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+	if(victim && !QDELETED(victim))
+		UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+	transformation_committed = FALSE
 	transformation_in_progress = FALSE
 	transformed.PossessByPlayer(ghost_key)
 	transform_turf.visible_message(span_warning("Из [declent_ru(GENITIVE)] выползает [transformed.declent_ru(NOMINATIVE)]!"))
@@ -1441,7 +1461,7 @@
 				break
 
 	// The victim's body is desecrated and possessed, not digested: it stays inside the new demon.
-	if(!transformed.contain_victim(victim))
+	if(victim && !QDELETED(victim) && victim.loc == src && !transformed.contain_victim(victim))
 		victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
 		victim.forceMove(transform_turf)
 
@@ -1449,28 +1469,27 @@
 	return transformed
 
 /mob/living/basic/demon/redspace/devourer/proc/transform_with_minotaur()
-	if(!can_transform_with_victim())
+	if(!can_transform())
 		release_victim()
 		return
 
 	transformation_timer_id = null
 	var/mob/living/carbon/human/victim = stored_victim
-	if(!can_transform_with_victim())
-		release_victim()
-		return
 
 	var/turf/transform_turf = get_turf(src)
 	if(!transform_turf)
-		release_victim()
+		retry_transformation()
 		return
 
 	var/mob/living/basic/demon/redspace/moderate/minotaur/transformed = new(transform_turf)
 	if(!transformed || QDELETED(transformed))
-		release_victim()
+		retry_transformation()
 		return
 
 	stored_victim = null
-	UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+	if(victim && !QDELETED(victim))
+		UnregisterSignal(victim, COMSIG_QDELETING, PROC_REF(on_stored_victim_deleted))
+	transformation_committed = FALSE
 	transformation_in_progress = FALSE
 	transform_turf.visible_message(span_warning("Из [declent_ru(GENITIVE)] выползает [transformed.declent_ru(NOMINATIVE)]!"))
 	new /obj/effect/temp_visual/circle_wave(transform_turf, "#ff3b20")
@@ -1483,7 +1502,7 @@
 				break
 
 	// The victim's body is desecrated and possessed, not digested: it stays inside the new demon.
-	if(!transformed.contain_victim(victim))
+	if(victim && !QDELETED(victim) && victim.loc == src && !transformed.contain_victim(victim))
 		victim.remove_status_effect(/datum/status_effect/grouped/stasis, REDSPACE_DEVOURER_STASIS)
 		victim.forceMove(transform_turf)
 
@@ -1509,7 +1528,7 @@
 	for(var/cell_key in SSredspace.field_cells)
 		var/datum/redspace_field_cell/cell = SSredspace.field_cells[cell_key]
 		var/turf/sample_turf = cell?.get_sample_turf()
-		if(!sample_turf || sample_turf.z != fallback_turf.z || !SSredspace.is_supported_z(sample_turf.z) || !isnum(cell.value) || cell.value <= REDSPACE_DEFAULT_VALUE)
+		if(!sample_turf || sample_turf.z != fallback_turf.z || !SSredspace.is_supported_z(sample_turf.z) || !isnum(cell.value) || cell.value < REDSPACE_DISTURBANCE_ENTER_VALUE)
 			continue
 		var/distance = get_dist(fallback_turf, sample_turf)
 		if(cell.value > hottest_value || (cell.value == hottest_value && distance < hottest_distance))
