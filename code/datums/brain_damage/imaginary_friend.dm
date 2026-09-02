@@ -484,43 +484,43 @@
 	remove_typing_indicator()
 
 /mob/eye/imaginary_friend/Move(atom/NewLoc, Dir = 0)
-    // 1. Проверяем скорость задержки шага
-    if(world.time < move_delay)
-        return FALSE
+	// 1. Проверяем скорость задержки шага
+	if(world.time < move_delay)
+		return FALSE
 
-    // 2. СНАЧАЛА поворачиваемся (даже если впереди стена)
-    if(Dir)
-        setDir(Dir)
+	// 2. СНАЧАЛА поворачиваемся (даже если впереди стена)
+	if(Dir)
+		setDir(Dir)
 
-    // 3. Симулируем физику, если друг видимый
-    if(!hidden && NewLoc)
-        if(NewLoc.density)
-            return FALSE // Врезаемся в стену, но уже повернувшись!
+	// 3. Симулируем физику, если друг видимый
+	if(!hidden && NewLoc)
+		if(NewLoc.density)
+			return FALSE // Врезаемся в стену, но уже повернувшись!
 
-        // Проверяем объекты на клетке (например, закрытые шлюзы)
-        for(var/atom/A in NewLoc.contents)
-            if(A.density && A != src)
-                if(istype(A, /obj/machinery/door))
-                    var/obj/machinery/door/D = A
-                    if(D.density) // Если дверь закрыта
-                        return FALSE
-                else
-                    return FALSE // Упираемся в любой другой плотный объект
+		// Проверяем объекты на клетке (например, закрытые шлюзы)
+		for(var/atom/A in NewLoc.contents)
+			if(A.density && A != src)
+				if(istype(A, /obj/machinery/door))
+					var/obj/machinery/door/D = A
+					if(D.density) // Если дверь закрыта
+						return FALSE
+				else
+					return FALSE // Упираемся в любой другой плотный объект
 
-    // 4. Проверка дистанции до хозяина
-    if(get_dist(src, owner) > distance_allowance || (require_los && !can_see(owner, src, distance_allowance)))
-        recall()
-        move_delay = world.time + 10
-        return FALSE
+	// 4. Проверка дистанции до хозяина
+	if(get_dist(src, owner) > distance_allowance || (require_los && !can_see(owner, src, distance_allowance)))
+		recall()
+		move_delay = world.time + 10
+		return FALSE
 
-    // 5. Само перемещение
-    abstract_move(NewLoc)
+	// 5. Само перемещение
+	abstract_move(NewLoc)
 
-    // 6. Обновляем скорость в зависимости от режима
-    if(hidden)
-        move_delay = world.time + 1
-    else
-        move_delay = world.time + 2
+	// 6. Обновляем скорость в зависимости от режима
+	if(hidden)
+		move_delay = world.time + 1
+	else
+		move_delay = world.time + 2
 
 /mob/eye/imaginary_friend/setDir(newdir)
 	. = ..()
@@ -564,16 +564,16 @@
 	build_all_button_icons()
 
 /datum/action/innate/imaginary_hide/Activate()
-    var/mob/eye/imaginary_friend/fake_friend = owner
-    fake_friend.hidden = !fake_friend.hidden
+	var/mob/eye/imaginary_friend/fake_friend = owner
+	fake_friend.hidden = !fake_friend.hidden
 
-    if(fake_friend.hidden)
-        to_chat(fake_friend, span_notice("Вы прячетесь. Теперь вы бестелесны и можете проходить сквозь стены."))
-    else
-        to_chat(fake_friend, span_notice("Вы появляетесь на виду и теперь двигаетесь как обычный человек."))
+	if(fake_friend.hidden)
+		to_chat(fake_friend, span_notice("Вы прячетесь. Теперь вы бестелесны и можете проходить сквозь стены."))
+	else
+		to_chat(fake_friend, span_notice("Вы появляетесь на виду и теперь двигаетесь как обычный человек."))
 
-    fake_friend.Show()
-    build_all_button_icons(UPDATE_BUTTON_NAME|UPDATE_BUTTON_ICON)
+	fake_friend.Show()
+	build_all_button_icons(UPDATE_BUTTON_NAME|UPDATE_BUTTON_ICON)
 
 /datum/action/innate/imaginary_hide/update_button_name(atom/movable/screen/movable/action_button/button, force)
 	var/mob/eye/imaginary_friend/fake_friend = owner
