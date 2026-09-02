@@ -45,3 +45,4 @@
 	предметом гардероба у офицеров \"старой\" закалки."
 	icon_state = "brtrenchcoat"
 	inhand_icon_state = "brtrenchcoat"
+	armor_type = /datum/armor/space_officer

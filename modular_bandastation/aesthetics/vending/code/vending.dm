@@ -16,6 +16,8 @@
 		/obj/item/clothing/under/rank/centcom/officer = 3,
 		/obj/item/clothing/under/rank/centcom/officer_skirt = 3,
 		/obj/item/clothing/under/rank/centcom/diplomat = 3,
+		/obj/item/clothing/under/rank/centcom/diplomat_skirt = 3,
+		/obj/item/clothing/suit/armor/diplomat_jacket =3,
 		/obj/item/clothing/suit/armor/centcom_formal = 3,
 		/obj/item/clothing/suit/armor/centcom_formal/field = 3,
 		/obj/item/clothing/suit/armor/centcom_formal/officer = 3,
@@ -29,8 +31,9 @@
 		/obj/item/clothing/shoes/jackboots/centcom = 3,
 		/obj/item/clothing/gloves/combat/centcom = 3,
 		/obj/item/clothing/gloves/combat/centcom/diplomat = 3,
-		/obj/item/storage/belt/centcom_sabre = 3,
-		/obj/item/storage/belt/centcom_katana = 3,
+		/obj/item/storage/belt/sheath/centcom_rapier = 3,
+		/obj/item/storage/belt/sheath/centcom_katana = 3,
+		/obj/item/storage/belt/sheath/tanto = 3,
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/cent_wardrobe
 

@@ -106,6 +106,14 @@
 	name = "special ops officer's beret"
 	desc = "Продвинутая версия стандартного офицерского берета. Выдерживает попадание аннигиляторной пушки. Проверять не стоит."
 	greyscale_colors = "#b72b2f#acacac"
+	cold_protection = HEAD
+	min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
+	heat_protection = HEAD
+	strip_delay = 13 SECONDS
+	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
+	flash_protect = FLASH_PROTECTION_WELDER
+	equip_delay_other = 5 SECONDS
+	armor_type = /datum/armor/space_beret
 
 /obj/item/clothing/head/caphat/beret_black
 	name = "black captain beret"
