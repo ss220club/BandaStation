@@ -127,6 +127,8 @@
 
 // MARK: Unique colors
 WOODEN_FLOOR_HELPER(oak, "oak", COLOR_OAK)
+WOODEN_FLOOR_HELPER(darkwood, "darkwood", COLOR_DARKWOOD)
+WOODEN_FLOOR_HELPER(lightwood, "lightwood", COLOR_LIGHTWOOD)
 WOODEN_FLOOR_HELPER(birch, "birch", COLOR_BIRCH)
 WOODEN_FLOOR_HELPER(cherry, "cherry", COLOR_CHERRY)
 WOODEN_FLOOR_HELPER(amaranth, "amaranth", COLOR_AMARANTH)
