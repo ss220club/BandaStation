@@ -14,6 +14,9 @@
 	var/datum/ai_controller/basic_controller/simple/redspace_demon/melee/controller = test_mob.ai_controller
 	if(!istype(controller))
 		return Fail("The demon must use the redspace melee controller")
+	var/mob/living/basic/demon/redspace/ranged/ranged_demon = allocate(/mob/living/basic/demon/redspace/ranged, run_loc_floor_bottom_left)
+	if(!HAS_TRAIT_FROM(ranged_demon, TRAIT_MOVE_FLYING, ELEMENT_TRAIT(/datum/element/simple_flying)))
+		return Fail("Ranged redspace demons must be able to fly")
 	var/datum/bt_node/ai_behavior/acquire_target/update_combat_targets/redspace_demon/target_node = new
 	if(target_node.vision_range != REDSPACE_DEMON_AGGRO_RANGE || target_node.target_loss_distance != REDSPACE_DEMON_TARGET_LOSS_DISTANCE)
 		return Fail("Redspace demons must use the extended aggro and target retention ranges")
@@ -79,7 +82,7 @@
 		allocate(/mob/living/basic/demon/redspace/moderate/ravager, get_step(test_turf, SOUTHEAST)),
 	)
 	for(var/mob/living/basic/demon/redspace/wall_demon as anything in wall_demons)
-		if(wall_demon.environment_smash < ENVIRONMENT_SMASH_WALLS || wall_demon.obj_damage < 200)
+		if(wall_demon.environment_smash != ENVIRONMENT_SMASH_RWALLS || wall_demon.obj_damage < 200)
 			return Fail("Redspace demons that can reach the epicenter must smash walls quickly and tear through doors")
 		var/turf/demon_turf = get_turf(wall_demon)
 		var/turf/wall_turf = get_step(demon_turf, NORTH)
@@ -101,6 +104,29 @@
 		result_turf?.ChangeTurf(original_wall_type)
 		if(!has_obstruction || !attack_succeeded || wall_remains)
 			return Fail("Devourers, Minotaurs, and Ravagers must break a wall blocking their route")
+
+		wall_turf = locate(wall_x, wall_y, wall_z)
+		wall_turf.ChangeTurf(/turf/closed/wall/r_wall)
+		for(var/impact in 1 to 2)
+			wall_demon.next_move = 0
+			if(!redspace_demon_attack_obstruction(wall_demon, wall_target))
+				wall_turf = locate(wall_x, wall_y, wall_z)
+				wall_turf?.ChangeTurf(original_wall_type)
+				return Fail("A reinforced wall must accept repeated attacks from redspace demons")
+			wall_turf = locate(wall_x, wall_y, wall_z)
+			if(!istype(wall_turf, /turf/closed/wall/r_wall))
+				wall_turf?.ChangeTurf(original_wall_type)
+				return Fail("A reinforced wall must survive the first two redspace demon attacks")
+		wall_demon.next_move = 0
+		if(!redspace_demon_attack_obstruction(wall_demon, wall_target))
+			wall_turf = locate(wall_x, wall_y, wall_z)
+			wall_turf?.ChangeTurf(original_wall_type)
+			return Fail("A reinforced wall must be breakable after repeated redspace demon attacks")
+		wall_turf = locate(wall_x, wall_y, wall_z)
+		var/reinforced_wall_remains = istype(wall_turf, /turf/closed/wall/r_wall)
+		wall_turf?.ChangeTurf(original_wall_type)
+		if(reinforced_wall_remains)
+			return Fail("Three redspace demon attacks must break a reinforced wall")
 
 	var/mob/living/basic/demon/redspace/far_wall_demon = wall_demons[1]
 	var/turf/far_wall_demon_turf = get_turf(far_wall_demon)

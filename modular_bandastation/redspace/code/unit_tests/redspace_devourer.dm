@@ -182,10 +182,10 @@
 	retreat_controller.clear_forced_off()
 	retreat_devourer.release_victim()
 
-	// A reinforced wall on the direct line must not stall the retreat when a breakable
+	// An indestructible wall on the direct line must not stall the retreat when a breakable
 	// airlock sits next to it: the step must smash the airlock instead of pushing against
 	// the unbreakable wall. The side walls also prove the devourer refuses to cut diagonally
-	// through a corner sealed by a reinforced wall.
+	// through a corner sealed by an indestructible wall.
 	var/turf/detour_start_turf = locate(run_loc_floor_bottom_left.x + 2, run_loc_floor_bottom_left.y + 2, run_loc_floor_bottom_left.z)
 	var/mob/living/basic/demon/redspace/devourer/detour_devourer = allocate(/mob/living/basic/demon/redspace/devourer, detour_start_turf)
 	var/mob/living/carbon/human/detour_victim = allocate(/mob/living/carbon/human, detour_start_turf)
@@ -205,8 +205,8 @@
 		detour_devourer.ai_controller.clear_forced_off()
 		detour_devourer.release_victim()
 		return Fail("The detour regression test could not allocate a route")
-	detour_wall_turf.ChangeTurf(/turf/closed/wall/r_wall)
-	detour_south_wall_turf.ChangeTurf(/turf/closed/wall/r_wall)
+	detour_wall_turf.ChangeTurf(/turf/closed/indestructible)
+	detour_south_wall_turf.ChangeTurf(/turf/closed/indestructible)
 	var/obj/machinery/door/airlock/instant/detour_door = allocate(/obj/machinery/door/airlock/instant, detour_door_turf)
 	detour_door.close(TRUE)
 	detour_devourer.next_move = 0
@@ -221,10 +221,10 @@
 	if(!detour_step_result || !detour_door_damaged)
 		return Fail("A retreating devourer must smash a breakable airlock next to an unbreakable wall instead of stalling against it")
 
-	// Sealed in by reinforced walls on every side (with the room border walls behind),
+	// Sealed in by indestructible walls on every side (with the room border walls behind),
 	// a single step must be reported as blocked so the retreat gives up and transforms in
 	// place. The devourer sits in the bottom-right corner of the room: east and south are
-	// the room border, north and west are sealed off with reinforced walls.
+	// the room border, north and west are sealed off with indestructible walls.
 	var/turf/sealed_start_turf = locate(run_loc_floor_bottom_left.x + 4, run_loc_floor_bottom_left.y, run_loc_floor_bottom_left.z)
 	var/mob/living/basic/demon/redspace/devourer/sealed_devourer = allocate(/mob/living/basic/demon/redspace/devourer, sealed_start_turf)
 	var/mob/living/carbon/human/sealed_victim = allocate(/mob/living/carbon/human, sealed_start_turf)
@@ -243,8 +243,8 @@
 		sealed_devourer.ai_controller.clear_forced_off()
 		sealed_devourer.release_victim()
 		return Fail("The sealed regression test could not allocate a route")
-	sealed_north_wall_turf.ChangeTurf(/turf/closed/wall/r_wall)
-	sealed_west_wall_turf.ChangeTurf(/turf/closed/wall/r_wall)
+	sealed_north_wall_turf.ChangeTurf(/turf/closed/indestructible)
+	sealed_west_wall_turf.ChangeTurf(/turf/closed/indestructible)
 	sealed_devourer.next_move = 0
 	var/sealed_step_result = sealed_devourer.devourer_retreat_step(get_step(sealed_start_turf, EAST), list(sealed_start_turf), null)
 	sealed_north_wall_turf.ChangeTurf(sealed_north_restore_type)
@@ -252,9 +252,9 @@
 	sealed_devourer.ai_controller.clear_forced_off()
 	sealed_devourer.release_victim()
 	if(sealed_step_result)
-		return Fail("A retreating devourer sealed in by reinforced walls must report a blocked step")
+		return Fail("A retreating devourer sealed in by indestructible walls must report a blocked step")
 
-	// An epicenter sealed by an unbreakable wall is unreachable, while an open or
+	// An epicenter sealed by an indestructible wall is unreachable, while an open or
 	// breakable one must be stepped into.
 	var/turf/epicenter_start_turf = locate(run_loc_floor_bottom_left.x + 3, run_loc_floor_bottom_left.y + 2, run_loc_floor_bottom_left.z)
 	var/mob/living/basic/demon/redspace/devourer/epicenter_devourer = allocate(/mob/living/basic/demon/redspace/devourer, epicenter_start_turf)
@@ -264,10 +264,10 @@
 		return Fail("The epicenter regression test could not allocate a destination")
 	if(epicenter_devourer.devourer_epicenter_unreachable(epicenter_turf))
 		return Fail("An open epicenter must be enterable")
-	epicenter_turf.ChangeTurf(/turf/closed/wall/r_wall)
+	epicenter_turf.ChangeTurf(/turf/closed/indestructible)
 	if(!epicenter_devourer.devourer_epicenter_unreachable(epicenter_turf))
 		epicenter_turf.ChangeTurf(epicenter_restore_type)
-		return Fail("An epicenter sealed by a reinforced wall must count as unreachable")
+		return Fail("An epicenter sealed by an indestructible wall must count as unreachable")
 	epicenter_turf.ChangeTurf(epicenter_restore_type)
 	epicenter_turf.ChangeTurf(/turf/closed/wall)
 	if(epicenter_devourer.devourer_epicenter_unreachable(epicenter_turf))

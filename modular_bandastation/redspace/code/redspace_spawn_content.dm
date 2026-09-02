@@ -242,6 +242,16 @@
 	if(succeeded == MOVELOOP_FAILURE)
 		redspace_demon_handle_failed_move(source)
 
+/// Redspace demons still smash ordinary walls immediately, but need three impacts to tear down a reinforced wall.
+/datum/element/wall_smasher/redspace/try_smashing(mob/living/puncher, atom/target)
+	if(!istype(target, /turf/closed/wall/r_wall) || strength_flag != ENVIRONMENT_SMASH_RWALLS)
+		return ..()
+
+	puncher.changeNext_move(CLICK_CD_MELEE)
+	puncher.do_attack_animation(target)
+	target.AddComponent(/datum/component/torn_wall)
+	return COMPONENT_HOSTILE_NO_ATTACK
+
 /// Swings at the current target immediately after a successful step lands the demon in melee
 /// range. A kiting victim eats a hit on every approach instead of the demon waiting for the
 /// next AI planning tick while the target slips out of reach again.
@@ -909,7 +919,7 @@
 		zero_energy_damage_percent = redspace_zero_energy_damage_percent,\
 	)
 	if(environment_smash >= ENVIRONMENT_SMASH_WALLS)
-		AddElement(/datum/element/wall_smasher, strength_flag = environment_smash)
+		AddElement(/datum/element/wall_smasher/redspace, strength_flag = environment_smash)
 
 /// Redspace demons burst into blood sparks when slain.
 /mob/living/basic/demon/redspace/death(gibbed)
@@ -931,6 +941,7 @@
 
 /mob/living/basic/demon/redspace/ranged/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/simple_flying)
 	AddComponent(\
 		/datum/component/ranged_attacks,\
 		projectile_type = /obj/projectile/magic/lesser_fireball,\
@@ -956,7 +967,7 @@
 	redspace_max_energy = 200
 	redspace_drain_percent = 5
 	redspace_zero_energy_damage_percent = 0.5
-	environment_smash = ENVIRONMENT_SMASH_WALLS
+	environment_smash = ENVIRONMENT_SMASH_RWALLS
 	// Hulking demons tear through doors, windows and machines in a few blows instead of
 	// stalling in front of an airlock for half a minute.
 	obj_damage = 200
@@ -1076,7 +1087,7 @@
 	pull_force = MOVE_FORCE_OVERPOWERING
 	mob_size = MOB_SIZE_LARGE
 	layer = LARGE_MOB_LAYER
-	environment_smash = ENVIRONMENT_SMASH_WALLS
+	environment_smash = ENVIRONMENT_SMASH_RWALLS
 	// The retreat must not stall for dozens of hits in front of a door or window.
 	obj_damage = 200
 	SET_BASE_PIXEL(-16, -10)

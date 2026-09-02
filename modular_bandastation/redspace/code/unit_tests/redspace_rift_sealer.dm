@@ -58,12 +58,12 @@
 	SSredspace.remove_source(test_stabilizer.source_id, "unit test cleanup")
 
 	var/datum/redspace_event_profile/test_profile = new(REDSPACE_STATE_STORM, 100, 100, 100, list())
-	if(SSredspace.get_event_attempt_delay(SSredspace.get_cell(supported_turf), test_profile) != 50)
+	if(SSredspace.get_event_attempt_delay(SSredspace.get_cell(supported_turf), test_profile) != 83)
 		qdel(test_profile)
 		sealer.stop_sealing("unit test cleanup")
 		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
 		qdel(sealer)
-		return Fail("Automatic redspace events must run twice as often during sealing")
+		return Fail("Automatic redspace events must use the 1.2x sealing cadence multiplier")
 	qdel(test_profile)
 
 	var/mob/living/basic/demon/redspace/test_demon = allocate(/mob/living/basic/demon/redspace, supported_turf)
