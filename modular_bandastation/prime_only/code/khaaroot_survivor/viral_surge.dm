@@ -20,69 +20,63 @@
 	)
 
 /datum/status_effect/khaaroot_surge_active
-	id = "khaaroot_surge_active"
-	duration = 12 SECONDS
-	tick_interval = 1 SECONDS
-	status_type = STATUS_EFFECT_REPLACE
-	alert_type = /atom/movable/screen/alert/status_effect/khaaroot_surge_active
-	show_duration = TRUE
-	processing_speed = STATUS_EFFECT_PRIORITY
+    id = "khaaroot_surge_active"
+    duration = 12 SECONDS
+    tick_interval = 1 SECONDS
+    status_type = STATUS_EFFECT_REPLACE
+    alert_type = /atom/movable/screen/alert/status_effect/khaaroot_surge_active
+    show_duration = TRUE
+    processing_speed = STATUS_EFFECT_PRIORITY
 
-	/// Stamina restored when the surge starts.
-	var/initial_stamina_heal = -60
-	/// Stamina restored per second while the surge is active.
-	var/stamina_regen = -15
-	/// Brute and burn damage multiplier while the surge is active.
-	var/damage_multiplier = 0.6
-
-	var/original_brute_mod
-	var/original_burn_mod
+    /// Stamina restored when the surge starts.
+    var/initial_stamina_heal = -60
+    /// Stamina restored per second while the surge is active.
+    var/stamina_regen = -15
+    /// Brute and burn damage multiplier while the surge is active.
+    var/damage_multiplier = 0.6
 
 /datum/status_effect/khaaroot_surge_active/on_apply()
-	var/mob/living/carbon/human/H = owner
-	if(!ishuman(H))
-		return FALSE
+    var/mob/living/carbon/human/H = owner
+    if(!ishuman(H))
+        return FALSE
 
-	original_brute_mod = H.physiology.brute_mod
-	original_burn_mod = H.physiology.burn_mod
+    H.add_movespeed_modifier(/datum/movespeed_modifier/khaaroot_surge_speed, update = TRUE)
+    MODIFY_PHYSIOLOGY(H, BRUTE, damage_multiplier)
+    MODIFY_PHYSIOLOGY(H, BURN, damage_multiplier)
+    playsound(H, 'sound/effects/singlebeat.ogg', 50, FALSE, -5)
 
-	H.add_movespeed_modifier(/datum/movespeed_modifier/khaaroot_surge_speed, update = TRUE)
-	H.physiology.brute_mod *= damage_multiplier
-	H.physiology.burn_mod *= damage_multiplier
-	playsound(H, 'sound/effects/singlebeat.ogg', 50, FALSE, -5)
+    ADD_TRAIT(H, TRAIT_SLEEPIMMUNE, REF(src))
+    ADD_TRAIT(H, TRAIT_BATON_RESISTANCE, REF(src))
 
-	ADD_TRAIT(H, TRAIT_SLEEPIMMUNE, REF(src))
-	ADD_TRAIT(H, TRAIT_BATON_RESISTANCE, REF(src))
+    H.adjust_stamina_loss(initial_stamina_heal)
 
-	H.adjust_stamina_loss(initial_stamina_heal)
-
-	return TRUE
+    return TRUE
 
 /datum/status_effect/khaaroot_surge_active/tick(seconds_between_ticks)
-	var/mob/living/carbon/human/H = owner
-	if(!H)
-		return
+    var/mob/living/carbon/human/H = owner
+    if(!H)
+        return
 
-	H.adjust_stamina_loss(stamina_regen * seconds_between_ticks, forced = TRUE)
+    H.adjust_stamina_loss(stamina_regen * seconds_between_ticks, forced = TRUE)
 
 /datum/status_effect/khaaroot_surge_active/on_remove()
-	var/mob/living/carbon/human/H = owner
-	if(!H)
-		return
+    var/mob/living/carbon/human/H = owner
+    if(!H)
+        return
 
-	H.remove_movespeed_modifier(/datum/movespeed_modifier/khaaroot_surge_speed, update = TRUE)
-	H.physiology.brute_mod = original_brute_mod
-	H.physiology.burn_mod = original_burn_mod
+    H.remove_movespeed_modifier(/datum/movespeed_modifier/khaaroot_surge_speed, update = TRUE)
+    MODIFY_PHYSIOLOGY(H, BRUTE, 1 / damage_multiplier)
+    MODIFY_PHYSIOLOGY(H, BURN, 1 / damage_multiplier)
 
-	REMOVE_TRAIT(H, TRAIT_SLEEPIMMUNE, REF(src))
-	REMOVE_TRAIT(H, TRAIT_BATON_RESISTANCE, REF(src))
+    REMOVE_TRAIT(H, TRAIT_SLEEPIMMUNE, REF(src))
+    REMOVE_TRAIT(H, TRAIT_BATON_RESISTANCE, REF(src))
 
-	H.visible_message(
-		span_warning("Оранжевое свечение в глазах [H.declent_ru(GENITIVE)] гаснет, и [H.ru_p_they()] тяжело переводит дух."),
-		span_danger("Вирусный всплеск отступает. Волна истощения накрывает вас.")
-	)
+    H.visible_message(
+        span_warning("Оранжевое свечение в глазах [H.declent_ru(GENITIVE)] гаснет, и [H.ru_p_they()] тяжело переводит дух."),
+        span_danger("Вирусный всплеск отступает. Волна истощения накрывает вас.")
+    )
 
-	H.apply_status_effect(/datum/status_effect/khaaroot_surge_crash)
+    H.apply_status_effect(/datum/status_effect/khaaroot_surge_crash)
 
 /datum/status_effect/khaaroot_surge_crash
 	id = "khaaroot_surge_crash"
