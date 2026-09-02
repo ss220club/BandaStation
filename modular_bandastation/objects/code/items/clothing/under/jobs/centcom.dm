@@ -22,5 +22,11 @@
 	inhand_icon_state = "centcom_diplomat"
 	can_adjust = FALSE
 
+/obj/item/clothing/under/rank/centcom/diplomat_skirt
+	name = "fleet officer's white skirt"
+	desc = "Будучи лицом Компании на важных переговорах вы ОБЯЗАНЫ блистать."
+	icon_state = "diplomat_skirt"
+	can_adjust = FALSE
+
 /obj/item/clothing/under/rank/centcom/officer
 	female_version = /datum/female_uniform/turtleneck
