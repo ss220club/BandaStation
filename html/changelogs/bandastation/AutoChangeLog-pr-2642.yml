@@ -1,0 +1,4 @@
+author: "Voyaker-coder"
+delete-after: True
+changes:
+  - bugfix: "Исправлена недоработка, связанная с mortar, которая позволяла хранить в ней предмет любого размера"
