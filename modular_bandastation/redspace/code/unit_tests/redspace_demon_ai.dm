@@ -107,7 +107,7 @@
 
 		wall_turf = locate(wall_x, wall_y, wall_z)
 		wall_turf.ChangeTurf(/turf/closed/wall/r_wall)
-		for(var/impact in 1 to 2)
+		for(var/impact in 1 to 5)
 			wall_demon.next_move = 0
 			if(!redspace_demon_attack_obstruction(wall_demon, wall_target))
 				wall_turf = locate(wall_x, wall_y, wall_z)
@@ -116,7 +116,7 @@
 			wall_turf = locate(wall_x, wall_y, wall_z)
 			if(!istype(wall_turf, /turf/closed/wall/r_wall))
 				wall_turf?.ChangeTurf(original_wall_type)
-				return Fail("A reinforced wall must survive the first two redspace demon attacks")
+				return Fail("A reinforced wall must survive the first five redspace demon attacks")
 		wall_demon.next_move = 0
 		if(!redspace_demon_attack_obstruction(wall_demon, wall_target))
 			wall_turf = locate(wall_x, wall_y, wall_z)
@@ -126,7 +126,7 @@
 		var/reinforced_wall_remains = istype(wall_turf, /turf/closed/wall/r_wall)
 		wall_turf?.ChangeTurf(original_wall_type)
 		if(reinforced_wall_remains)
-			return Fail("Three redspace demon attacks must break a reinforced wall")
+			return Fail("Six redspace demon attacks must break a reinforced wall")
 
 	var/mob/living/basic/demon/redspace/far_wall_demon = wall_demons[1]
 	var/turf/far_wall_demon_turf = get_turf(far_wall_demon)

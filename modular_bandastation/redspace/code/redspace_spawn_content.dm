@@ -242,15 +242,34 @@
 	if(succeeded == MOVELOOP_FAILURE)
 		redspace_demon_handle_failed_move(source)
 
-/// Redspace demons still smash ordinary walls immediately, but need three impacts to tear down a reinforced wall.
+/// Redspace demons still smash ordinary walls immediately, but need six impacts to tear down a reinforced wall.
 /datum/element/wall_smasher/redspace/try_smashing(mob/living/puncher, atom/target)
 	if(!istype(target, /turf/closed/wall/r_wall) || strength_flag != ENVIRONMENT_SMASH_RWALLS)
 		return ..()
 
 	puncher.changeNext_move(CLICK_CD_MELEE)
 	puncher.do_attack_animation(target)
-	target.AddComponent(/datum/component/torn_wall)
+	target.AddComponent(/datum/component/torn_wall/redspace)
 	return COMPONENT_HOSTILE_NO_ATTACK
+
+/// A reinforced wall battered by redspace demons collapses after six impacts instead of the base three.
+/datum/component/torn_wall/redspace
+	/// Stage at which the wall gives way. The first impact creates the component at stage zero,
+	/// so the wall collapses on the sixth application with this threshold.
+	var/max_stage = 5
+
+/datum/component/torn_wall/redspace/increase_stage()
+	current_stage++
+	if(current_stage < max_stage)
+		apply_visuals()
+		return
+	var/turf/closed/wall/attached_wall = parent
+	playsound(attached_wall, 'sound/effects/meteorimpact.ogg', 100, vary = TRUE)
+	if(ismineralturf(attached_wall))
+		var/turf/closed/mineral/mineral_turf = attached_wall
+		mineral_turf.gets_drilled()
+		return
+	attached_wall.dismantle_wall(devastated = TRUE)
 
 /// Swings at the current target immediately after a successful step lands the demon in melee
 /// range. A kiting victim eats a hit on every approach instead of the demon waiting for the
@@ -602,6 +621,15 @@
 
 /datum/ai_controller/basic_controller/simple/redspace_demon/ranged
 	behavior_tree_json = "code/modules/mob/living/basic/space_fauna/demon/redspace_demon_ranged.bt.json"
+
+/datum/ai_controller/basic_controller/simple/redspace_demon/ranged/beholder
+	blackboard = list(
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/redspace_demon,
+		BB_TARGET_PRIORITY_STRATEGY = /datum/target_priority_strategy/nearest/redspace_demon,
+		BB_TARGET_MINIMUM_STAT = STABLE,
+		// The beholder stands its ground and only starts backing away at point-blank range.
+		BB_RANGED_SKIRMISH_MIN_DISTANCE = 2,
+	)
 
 /// A direct fireball projectile used by the ranged demon. It has no explosion.
 /obj/projectile/magic/lesser_fireball
@@ -1064,6 +1092,37 @@
 	beacon_action.Grant(src)
 	var/datum/action/cooldown/mob_cooldown/redspace_summon/summon_action = new(src)
 	summon_action.Grant(src)
+
+/// An advanced hovering demon that strafes enemies with four-fireball bursts.
+/mob/living/basic/demon/redspace/moderate/beholder
+	name = "mature beholder"
+	real_name = "mature beholder"
+	unique_name = FALSE
+	desc = "A matured redspace demon that hovers above the ground and unleashes bursts of fireballs."
+	icon = 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi'
+	icon_state = "mature_beholder"
+	icon_living = "mature_beholder"
+	icon_dead = "mature_beholder"
+	maxHealth = 200
+	health = 200
+	melee_damage_lower = 15
+	melee_damage_upper = 20
+	mob_size = MOB_SIZE_LARGE
+	layer = LARGE_MOB_LAYER
+	SET_BASE_PIXEL(-16, -10)
+	ai_controller = /datum/ai_controller/basic_controller/simple/redspace_demon/ranged/beholder
+
+/mob/living/basic/demon/redspace/moderate/beholder/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/simple_flying)
+	AddComponent(\
+		/datum/component/ranged_attacks,\
+		projectile_type = /obj/projectile/magic/lesser_fireball,\
+		projectile_sound = 'sound/effects/magic/fireball.ogg',\
+		burst_shots = 4,\
+		burst_intervals = 0.2 SECONDS,\
+		cooldown_time = 4 SECONDS,\
+	)
 
 /// A slow demon that hides an incapacitated player before a Ravager crawls out.
 /mob/living/basic/demon/redspace/devourer
@@ -1759,6 +1818,20 @@
 	for(var/mob/living/basic/demon/redspace/demon in target)
 		return FALSE
 	return TRUE
+
+/datum/redspace_event/spawn/mob/demonic_lesser_demon/mature_beholder
+	event_id = "demonic_mature_beholder"
+	profile_id = REDSPACE_PROFILE_DEMONIC
+	min_value = REDSPACE_STORM_ENTER_VALUE
+	max_value = REDSPACE_MAX_NORMAL_VALUE
+	cooldown = 90 SECONDS
+	automatic = TRUE
+	weight = 1
+	spawn_count = 1
+	spawn_budget_cost = 2
+	spawn_policy_id = "demonic_mature_beholder"
+	spawn_type = /mob/living/basic/demon/redspace/moderate/beholder
+	spawn_message = "В редспейсе материализуется зрелый демон-бехолдер."
 
 #undef REDSPACE_DEVOURER_STASIS
 #undef REDSPACE_DEVOURER_RETREAT_STUCK_CHECKS

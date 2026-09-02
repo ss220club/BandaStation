@@ -72,6 +72,16 @@ instrumental = "демоническим пожирателем"
 prepositional = "демоническом пожирателе"
 gender = "male"
 
+# MARK: Redspace Beholder
+["mature beholder"]
+nominative = "зрелый демон-бехолдер"
+genitive = "зрелого демона-бехолдера"
+dative = "зрелому демону-бехолдеру"
+accusative = "зрелого демона-бехолдера"
+instrumental = "зрелым демоном-бехолдером"
+prepositional = "зрелом демоне-бехолдере"
+gender = "male"
+
 # MARK: Redspace Ravager
 ["ravager"]
 nominative = "опустошитель"

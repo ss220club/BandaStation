@@ -75,6 +75,7 @@
 		"demonic_soldier",
 		"demonic_minotaur",
 		"demonic_devourer",
+		"demonic_mature_beholder",
 	)
 
 /datum/redspace_profile/demonic/New()
@@ -108,6 +109,7 @@
 			"demonic_soldier" = 1,
 			"demonic_minotaur" = 1,
 			"demonic_devourer" = 1,
+			"demonic_mature_beholder" = 1,
 		),
 	)
 

@@ -48,6 +48,30 @@
 	qdel(ranged_attack)
 	qdel(ranged_obstructions)
 
+	var/mob/living/basic/demon/redspace/moderate/beholder/test_beholder = allocate(/mob/living/basic/demon/redspace/moderate/beholder, run_loc_floor_bottom_left)
+	var/datum/component/ranged_attacks/beholder_attacks = test_beholder.GetComponent(/datum/component/ranged_attacks)
+	if(test_beholder.icon != 'modular_bandastation/redspace/icons/mob/demonic/moderate_demons/64x64.dmi' || test_beholder.icon_state != "mature_beholder" || test_beholder.base_pixel_x != -16 || test_beholder.base_pixel_y != -10)
+		return Fail("The mature beholder must use its dedicated 64x64 sprite and offsets")
+	if(!istype(test_beholder.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/ranged/beholder) || test_beholder.ai_controller.blackboard[BB_RANGED_SKIRMISH_MIN_DISTANCE] != 2)
+		return Fail("The mature beholder must use the ranged demon AI with point-blank retreat range")
+	if(!beholder_attacks || beholder_attacks.burst_shots != 4 || beholder_attacks.projectile_type != /obj/projectile/magic/lesser_fireball)
+		return Fail("The mature beholder must fire four-fireball bursts")
+	if(!HAS_TRAIT_FROM(test_beholder, TRAIT_MOVE_FLYING, ELEMENT_TRAIT(/datum/element/simple_flying)))
+		return Fail("The mature beholder must be able to fly")
+	if(test_beholder.maxHealth <= test_ranged.maxHealth)
+		return Fail("The mature beholder must be bulkier than a lesser ranged demon")
+
+	var/datum/redspace_event/spawn/mob/demonic_lesser_demon/mature_beholder/beholder_event = new
+	if(beholder_event.event_id != "demonic_mature_beholder" || beholder_event.profile_id != REDSPACE_PROFILE_DEMONIC || beholder_event.spawn_type != /mob/living/basic/demon/redspace/moderate/beholder || !beholder_event.automatic || beholder_event.weight != 1 || beholder_event.get_spawn_budget_cost() != 2 || beholder_event.spawn_policy_id != "demonic_mature_beholder")
+		return Fail("The mature beholder must expose the configured automatic spawn event metadata")
+	if(!SSredspace || SSredspace.event_registry["demonic_mature_beholder"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon/mature_beholder)
+		return Fail("The mature beholder spawn must be registered in SSredspace")
+	var/datum/redspace_profile/demonic/beholder_profile = new
+	if(!beholder_profile.is_event_allowed("demonic_mature_beholder") || beholder_profile.get_event_profile(REDSPACE_STATE_STORM).get_event_weight("demonic_mature_beholder") != 1)
+		return Fail("The demonic profile must expose the mature beholder in its storm event pool")
+	qdel(beholder_profile)
+	qdel(beholder_event)
+
 	var/obj/projectile/magic/lesser_fireball/test_fireball = new
 	var/obj/projectile/magic/fireball/standard_fireball = new
 	if(test_fireball.icon_state != standard_fireball.icon_state || test_fireball.damage != 20 || test_fireball.ignite_chance != 30 || test_fireball.fire_stacks != 2 || istype(test_fireball, /obj/projectile/magic/fireball))

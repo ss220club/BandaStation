@@ -132,6 +132,7 @@ SUBSYSTEM_DEF(redspace)
 	register_spawn_event_type(/datum/redspace_event/spawn/mob/demonic_lesser_demon/soldier)
 	register_spawn_event_type(/datum/redspace_event/spawn/mob/demonic_lesser_demon/moderate_minotaur)
 	register_spawn_event_type(/datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer)
+	register_spawn_event_type(/datum/redspace_event/spawn/mob/demonic_lesser_demon/mature_beholder)
 
 	// There is no work until a source, listener, or test changes a cell.
 	can_fire = FALSE
