@@ -3,6 +3,11 @@
 	desc = "A tall rack for storing guns."
 	icon = 'modular_bandastation/weapon/icons/gun_rack.dmi'
 	icon_state = "gunrack"
+	pass_flags_self = NONE
+
+/obj/structure/rack/gunrack/alt
+	icon_state = "gunrack2"
+	pass_flags_self = LETPASSTHROW
 
 /obj/structure/rack/gunrack/Initialize(mapload)
 	. = ..()
@@ -14,34 +19,48 @@
 		return
 
 /obj/structure/rack/gunrack/base_item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	// Special handling for guns
-	if(istype(tool, /obj/item/gun))
-		var/x_offset = 0
-		var/y_offset = 2 // fixed visual shelf position, locked to the Y axis to match with the sprite
+	if(!user.combat_mode && istype(tool, /obj/item/gun))
+		var/obj/item/gun/G = tool
+		var/icon/gun_icon = icon(G.icon, G.icon_state)
+		var/gun_width = gun_icon ? gun_icon.Width() : 32
 
-		// Only respect X axis, so players can manage the way the gun is hanging
+		var/scale_factor = 1.0
+		switch(gun_width)
+			if(64)
+				scale_factor = 0.65
+			if(48)
+				scale_factor = 0.75
+
+		var/width_compensation = -round(((gun_width - 32) * 0.5) * scale_factor)
+		var/player_x = 0
 		if(LAZYACCESS(modifiers, ICON_X))
-			x_offset = clamp(text2num(modifiers[ICON_X]) - 16, -(ICON_SIZE_X * 0.5), ICON_SIZE_X * 0.5)
+			var/raw_click_x = text2num(modifiers[ICON_X]) - 16
+			player_x = clamp(raw_click_x, -9, 9)
 
-		if(user.transfer_item_to_turf(tool, get_turf(src), x_offset, y_offset, silent = FALSE))
-			rotate_weapon(tool)
-			tool.pixel_x = x_offset
-			tool.pixel_y = y_offset
+		var/final_x_offset = player_x + width_compensation
+		var/final_y_offset = 2
+
+		if(user.transfer_item_to_turf(G, get_turf(src), final_x_offset, final_y_offset, silent = FALSE))
+			rotate_weapon(G, being_removed = FALSE, scale_factor = scale_factor)
+			G.pixel_x = final_x_offset
+			G.pixel_y = final_y_offset
 			return ITEM_INTERACT_SUCCESS
 
 		return ITEM_INTERACT_BLOCKING
 
-	// Default rack behavior otherwise (You can put other things on it if you want)
 	return ..()
 
-/obj/structure/rack/gunrack/proc/rotate_weapon(obj/item/incoming_weapon, being_removed = FALSE)
+/obj/structure/rack/gunrack/proc/rotate_weapon(obj/item/incoming_weapon, being_removed = FALSE, scale_factor = 1.0)
 	var/matrix/new_matrix = matrix()
 	if(!being_removed)
+		new_matrix.Scale(scale_factor, scale_factor)
 		new_matrix.Turn(-90)
+		incoming_weapon.transform = new_matrix
 		RegisterSignal(incoming_weapon, COMSIG_ITEM_EQUIPPED, PROC_REF(item_picked_up))
 	else
+		incoming_weapon.transform = new_matrix
 		incoming_weapon.pixel_x = incoming_weapon.base_pixel_x
-	incoming_weapon.transform = new_matrix
+		incoming_weapon.pixel_y = incoming_weapon.base_pixel_y
 
 /// Checks when something is leaving our turf, if it's a gun then make sure to reset its transform so it's not permanently rotated
 /obj/structure/rack/gunrack/proc/on_exit(datum/source, atom/movable/leaving, direction)
@@ -57,3 +76,44 @@
 	var/obj/item/leaving_item = source
 	rotate_weapon(leaving_item, being_removed = TRUE)
 	UnregisterSignal(leaving_item, COMSIG_ITEM_EQUIPPED)
+
+/obj/structure/rack/gunrack/Destroy()
+	for(var/obj/item/gun/G in get_turf(src))
+		UnregisterSignal(G, COMSIG_ITEM_EQUIPPED)
+		rotate_weapon(G, being_removed = TRUE)
+
+	return ..()
+
+/obj/structure/rack/gunrack/alt/CanAllowThrough(atom/movable/mover, border_dir)
+	. = ..()
+	if(.)
+		return
+	if(istype(mover) && (mover.pass_flags & PASSTABLE))
+		return TRUE
+
+/obj/structure/rack/gunrack/CanAllowThrough(atom/movable/mover, border_dir)
+	. = ..()
+	return
+
+/obj/item/rack_parts/gunrack
+	name = "gun rack parts"
+	desc = "Parts of a gun rack."
+
+/obj/item/rack_parts/gunrack/attack_self(mob/user)
+	if(building)
+		return
+	building = TRUE
+	to_chat(user, span_notice("Вы начинаете собирать оружейную стойку..."))
+	if(do_after(user, 5 SECONDS, target = user))
+		if(!user.temporarilyRemoveItemFromInventory(src))
+			return
+		var/obj/structure/rack/R = new /obj/structure/rack/gunrack(get_turf(src))
+		user.visible_message(span_notice("[user.declent_ru(NOMINATIVE)] собирает [R.declent_ru(ACCUSATIVE)]."), span_notice("Вы собираете [R.declent_ru(ACCUSATIVE)]."))
+		R.add_fingerprint(user)
+		qdel(src)
+	building = FALSE
+
+/obj/structure/rack/gunrack/atom_deconstruct(disassembled = TRUE)
+	set_density(FALSE)
+	var/obj/item/rack_parts/gunrack/newparts = new(loc)
+	transfer_fingerprints_to(newparts)

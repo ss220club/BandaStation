@@ -2,45 +2,48 @@
 	desc = "A thick gun case with foam inserts laid out to fit a weapon, magazines, and gear securely."
 	icon = 'modular_bandastation/weapon/icons/guncases.dmi'
 	icon_state = "guncase"
-//	worn_icon = 'modular_nova/modules/modular_weapons/icons/mob/worn/cases.dmi'
-//	worn_icon_state = "darkcase"
+	worn_icon = 'modular_bandastation/weapon/icons/guncases_worn.dmi'
+	worn_icon_state = "darkcase"
 	lefthand_file = 'modular_bandastation/weapon/icons/guncases_lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/guncases_righthand.dmi'
 	inhand_icon_state = "darkcase"
-//	slot_flags = ITEM_SLOT_BACK
+	slot_flags = ITEM_SLOT_BACK
 	material_flags = NONE
 	storage_type = /datum/storage/toolbox/guncase
-	var/opened = FALSE
+	var/opened = FANCY_CONTAINER_CLOSED
 
 /datum/storage/toolbox/guncase
-	max_total_storage = 14 // Technically means you could fit multiple large guns in here but it's a case you cant backpack anyways so what it do
-	max_slots = 6 // We store some extra items in these so lets make a little extra room
+	click_alt_open = FALSE
 
-/obj/item/storage/toolbox/guncase/update_icon()
+/obj/item/storage/toolbox/guncase/update_icon_state()
 	. = ..()
-	if(opened)
-		icon_state = "[initial(icon_state)]-open"
-	else
-		icon_state = initial(icon_state)
+	icon_state = opened ? "[initial(icon_state)]-open" : initial(icon_state)
+
+/obj/item/storage/toolbox/guncase/Exited(atom/movable/gone, direction)
+	. = ..()
+	if(opened == FANCY_CONTAINER_CLOSED)
+		opened = FANCY_CONTAINER_OPEN
+	update_appearance()
+
+/obj/item/storage/toolbox/guncase/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
+	if(opened == FANCY_CONTAINER_CLOSED)
+		opened = FANCY_CONTAINER_OPEN
+	update_appearance()
 
 /obj/item/storage/toolbox/guncase/click_alt(mob/user)
-	opened = !opened
-	update_icon()
-	return CLICK_ACTION_SUCCESS
+	if(opened == FANCY_CONTAINER_CLOSED)
+		opened = FANCY_CONTAINER_OPEN
+	update_appearance()
+	return atom_storage.open_storage_on_signal(storage_type, user) ? CLICK_ACTION_SUCCESS : NONE
 
 /obj/item/storage/toolbox/guncase/attack_self(mob/user)
 	. = ..()
-	opened = !opened
-	update_icon()
-
-//Quick overwrite of TG's guncase PopulateContents() to prevent runtimes
-//Now it only tries to spawn stuff if there's actually stuff to spawn
-// /obj/item/storage/toolbox/guncase/nova/PopulateContents()
-// 	if(weapon_to_spawn)
-// 		new weapon_to_spawn (src)
-// 	if(extra_to_spawn)
-// 		for(var/iterate in 1 to 3)
-// 			new extra_to_spawn (src)
+	if(opened == FANCY_CONTAINER_CLOSED)
+		opened = FANCY_CONTAINER_OPEN
+	else if(opened == FANCY_CONTAINER_OPEN)
+		opened = FANCY_CONTAINER_CLOSED
+	update_appearance()
 
 // Small case for pistols and whatnot
 /obj/item/storage/toolbox/guncase/pistol
@@ -53,10 +56,6 @@
 /datum/storage/toolbox/guncase/pistol
 	max_specific_storage = WEIGHT_CLASS_NORMAL
 
-/*
-	Pre-Colored Variants
-	(Since imports don't allow us to do reskins, and we don't want these reskinnable in-round)
-*/
 /obj/item/storage/toolbox/guncase/green
 	icon_state = "greencase"
 	worn_icon_state = "greencase"
@@ -112,11 +111,6 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	storage_type = /datum/storage/toolbox/guncase/pistol
 
-/*
-	Company Cases
-	(Subtype off these when making presets supplied by these companies!)
-*/
-
 // Nanotrasen
 /obj/item/storage/toolbox/guncase/ntcase
 	icon_state = "ntcase"
@@ -133,7 +127,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	storage_type = /datum/storage/toolbox/guncase/pistol
 
-// Nanotrasen Centcom Case (CC/Gold Varient) (used for NTC/Blueshield & Other CC related drops)
+// Nanotrasen Centcom Case
 /obj/item/storage/toolbox/guncase/ntspecial
 	icon_state = "cc_case"
 	worn_icon_state = "cc_case"
@@ -143,42 +137,41 @@
 	. = ..()
 	. += "<i>It is emblazoned with a gilded <b>[span_blue("Nanotrasen")]</b> logo.</i>"
 
-
 /obj/item/storage/toolbox/guncase/ntspecial/pistol
 	name = "small gun case"
 	icon_state = "cc_case_s"
 	w_class = WEIGHT_CLASS_NORMAL
 	storage_type = /datum/storage/toolbox/guncase/pistol
 
-// Solfed
-/obj/item/storage/toolbox/guncase/solfed
-	icon_state = "solfedcase"
-	worn_icon_state = "solfedcase"
-	inhand_icon_state = "solfedcase"
+// TSF
+/obj/item/storage/toolbox/guncase/tsf
+	icon_state = "tsfcase"
+	worn_icon_state = "tsfcase"
+	inhand_icon_state = "tsfcase"
 
-/obj/item/storage/toolbox/guncase/solfed/examine(mob/user)
+/obj/item/storage/toolbox/guncase/tsf/examine(mob/user)
 	. = ..()
-	. += "<i>It is stamped with the <b>[span_cyan("Solar Federation")]</b> emblem.</i>"
+	. += "<i>It is stamped with the <b>[span_cyan("TSF")]</b> emblem.</i>"
 
-/obj/item/storage/toolbox/guncase/solfed/pistol
+/obj/item/storage/toolbox/guncase/tsf/pistol
 	name = "small gun case"
-	icon_state = "solfedcase_s"
+	icon_state = "tsfcase_s"
 	w_class = WEIGHT_CLASS_NORMAL
 	storage_type = /datum/storage/toolbox/guncase/pistol
 
-// Solfed Special
-/obj/item/storage/toolbox/guncase/solfedspec
-	icon_state = "solfedspeccase"
-	worn_icon_state = "solfedspeccase"
-	inhand_icon_state = "solfedspeccase"
+// TSF Special
+/obj/item/storage/toolbox/guncase/tsfspec
+	icon_state = "tsfspeccase"
+	worn_icon_state = "tsfspeccase"
+	inhand_icon_state = "tsfspeccase"
 
-/obj/item/storage/toolbox/guncase/solfedspec/examine(mob/user)
+/obj/item/storage/toolbox/guncase/tsfspec/examine(mob/user)
 	. = ..()
-	. += "<i>It is stamped with the <b>[span_cyan("Solar Federation")]</b> emblem.</i>"
+	. += "<i>It is stamped with the <b>[span_cyan("TSF")]</b> emblem.</i>"
 
-/obj/item/storage/toolbox/guncase/solfedspec/pistol
+/obj/item/storage/toolbox/guncase/tsfspec/pistol
 	name = "small gun case"
-	icon_state = "solfedspeccase_s"
+	icon_state = "tsfspeccase_s"
 	w_class = WEIGHT_CLASS_NORMAL
 	storage_type = /datum/storage/toolbox/guncase/pistol
 
@@ -199,7 +192,7 @@
 	storage_type = /datum/storage/toolbox/guncase/pistol
 
 // Interdyne Pharmaceuticals
-/obj/item/storage/toolbox/guncase/nova/interdyne
+/obj/item/storage/toolbox/guncase/interdyne
 	icon_state = "dynecase"
 	worn_icon_state = "dynecase"
 	inhand_icon_state = "dynecase"
@@ -230,17 +223,16 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	storage_type = /datum/storage/toolbox/guncase/pistol
 
-// Carwo Defense Systems & Trappiste Fabriek
-/obj/item/storage/toolbox/guncase/carwo_large_case
-	icon_state = "case_carwo"
-	worn_icon_state = "carwocase"
-	inhand_icon_state = "carwocase"
-	//No logo on this case
+// Yellow cases
+/obj/item/storage/toolbox/guncase/yellowcase
+	icon_state = "yellowcase"
+	worn_icon_state = "yellowcase"
+	inhand_icon_state = "yellowcase"
 
 /obj/item/storage/toolbox/guncase/pistol/trappiste_small_case
-	icon_state = "case_trappiste"
-	worn_icon_state = "carwocase"
-	inhand_icon_state = "carwocase"
+	icon_state = "yellowcase_s"
+	worn_icon_state = "yellowcase_s"
+	inhand_icon_state = "yellowcase_s"
 
 /obj/item/storage/toolbox/guncase/pistol/trappiste_small_case/examine(mob/user)
 	. = ..()
@@ -249,9 +241,13 @@
 // Xhihao Light Arms
 /obj/item/storage/toolbox/guncase/xhihao_large_case
 	icon_state = "case_xhihao"
-	//No pistol variant (yet!)
 
 /obj/item/storage/toolbox/guncase/xhihao_large_case/examine(mob/user)
 	. = ..()
 	. += "<i>It is subtly marked with <b>[span_purple("Xhihao Light Arms")]</b> trademarking.</i>"
 
+/obj/item/storage/toolbox/guncase/soviet
+	desc = "Оружейный кейс с символикой СССП отпечатаной на верхней части."
+	icon_state = "sovietcase"
+	worn_icon_state = "sovietcase"
+	inhand_icon_state = "sovietcase"
