@@ -70,16 +70,12 @@
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 
-/obj/item/gun/ballistic/automatic/sabel/auto/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
-
-/obj/item/gun/ballistic/automatic/sabel/auto/examine_more(mob/user)
-	. = ..()
-	. += "AMK — надежная штурмовая винтовка. Обладает высокой убойной силой, \
+/obj/item/gun/ballistic/automatic/sabel/auto/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "AMK — надежная штурмовая винтовка. Обладает высокой убойной силой, \
 	хорошей пробиваемостью и стабильной эффективностью на средних дистанциях.\
 	Имеет заметную отдачу, но компенсируется уроном и доступностью боеприпасов. \
-	Подходит как для ближнего боя, так и для уверенной стрельбы на расстоянии.<br>"
+	Подходит как для ближнего боя, так и для уверенной стрельбы на расстоянии.<br>")
 
 /obj/item/gun/ballistic/automatic/sabel/auto/no_mag
 	spawnwithmagazine = FALSE

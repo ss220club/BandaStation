@@ -28,7 +28,7 @@
 	abstract_type = /datum/atom_skin/m1911gold
 	change_base_icon_state = TRUE
 
-/datum/atom_skin/m1911gold
+/datum/atom_skin/m1911gold/default
 	preview_name = "Default"
 	new_icon_state = "m1911gold"
 

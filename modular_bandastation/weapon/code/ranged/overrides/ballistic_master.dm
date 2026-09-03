@@ -29,6 +29,9 @@
 	if(sawn_off)
 		inhand_icon_state = "[base_icon_state]_sawn"
 		SET_BASE_PIXEL(0, 0)
+		var/datum/component/seclite_attachable/S = GetComponent(/datum/component/seclite_attachable)
+		if(S)
+			S.overlay_x = 20
 	else
 		inhand_icon_state = "[base_icon_state]"
 
@@ -36,12 +39,6 @@
 	. = ..()
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
-	AddComponent(/datum/component/seclite_attachable, \
-		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
-		light_overlay = "flight", \
-		overlay_x = 20, \
-		overlay_y = 11 \
-	)
 
 /obj/item/gun/ballistic/shotgun/riot/lethal
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot/lethal
@@ -212,9 +209,9 @@
 
 /obj/item/gun/ballistic/automatic/ar/examine(mob/user)
 	. = ..()
-	. += "<b>АЛЬТ + ЛКМ</b> чтобы [extended ? "сложить" : "разложить"] приклад."
+	. += "<b>АЛЬТ + ПКМ</b> чтобы [extended ? "сложить" : "разложить"] приклад."
 
-/obj/item/gun/ballistic/automatic/ar/click_alt(mob/user)
+/obj/item/gun/ballistic/automatic/ar/click_alt_secondary(mob/user)
 	if(!user.is_holding(src))
 		balloon_alert(user, "Оружие должно быть в руках!")
 		return CLICK_ACTION_BLOCKING
@@ -310,7 +307,7 @@
 /obj/item/gun/ballistic/rifle/sniper_rifle
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic64x32.dmi'
 	SET_BASE_PIXEL(-16, 0)
-	suppressor_x_offset = 11
+	suppressor_x_offset = 0
 	suppressor_y_offset = 0
 
 /obj/item/gun/ballistic/rifle/sniper_rifle/add_seclight_point()

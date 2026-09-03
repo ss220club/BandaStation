@@ -14,10 +14,6 @@
 	suppressor_y_offset = -1
 	recoil = 0.3
 
-/obj/item/gun/ballistic/automatic/pistol/gp9/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
-
 /obj/item/gun/ballistic/automatic/pistol/gp9/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/gp9)
@@ -31,13 +27,13 @@
 		overlay_y = 13 \
 	)
 
-/obj/item/gun/ballistic/automatic/pistol/gp9/examine_more(mob/user)
-	. = ..()
-	. += "GP-9 - пистолет общего назначения, разработанный оружейным отделом Нанотрейзен \
+/obj/item/gun/ballistic/automatic/pistol/gp9/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "GP-9 - пистолет общего назначения, разработанный оружейным отделом Нанотрейзен \
 	под малоимпульсные патроны калибра 9x25мм. Данный пистолет был создан для использования отделами \
 	службы безопастности на обьектах Нанотрейзен во всех возможных условиях, в которых обычно работает НТ, \
 	в частности в условиях повышенной ионической среды, где использование стандартного лазерного вооружения \
-	менее эффективно."
+	менее эффективно.")
 
 /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
 	spawnwithmagazine = FALSE

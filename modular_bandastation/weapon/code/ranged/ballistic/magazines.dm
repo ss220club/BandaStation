@@ -1123,6 +1123,7 @@
 
 /obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka
 	ammo_type = /obj/item/ammo_casing/strilka310
+	caliber = CALIBER_STRILKA310
 
 /obj/item/ammo_box/magazine/internal/boltaction/mosin/strilka/empty
 	start_empty = TRUE
