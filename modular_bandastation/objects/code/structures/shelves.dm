@@ -59,7 +59,7 @@
 
 /obj/structure/shelf/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
 	. = ..()
-	if(isnull(held_item) || (held_item.item_flags & ABSTRACT) || user.combat_mode)
+	if(isnull(user) || isnull(held_item) || (held_item.item_flags & ABSTRACT) || user.combat_mode)
 		return . || NONE
 
 	context[SCREENTIP_CONTEXT_LMB] = "Установить"
@@ -69,7 +69,7 @@
 	. = ..()
 	if(.)
 		return .
-	if((tool.item_flags & ABSTRACT) || user.combat_mode)
+	if(!tool || (tool.item_flags & ABSTRACT) || user.combat_mode)
 		return NONE
 
 	var/click_x = LAZYACCESS(modifiers, ICON_X)
@@ -93,6 +93,9 @@
 
 	if(!user.transfer_item_to_turf(tool, get_turf(src), x_offset, 0, silent = FALSE))
 		return ITEM_INTERACT_BLOCKING
+
+	if(QDELETED(tool))
+		return ITEM_INTERACT_SUCCESS
 
 	// transfer_item_to_turf() resets pixel_y to the item's base offset. Replace it
 	// with the offset that puts the lowest visible sprite pixel on the shelf.
