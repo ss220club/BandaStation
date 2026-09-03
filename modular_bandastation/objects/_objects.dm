@@ -52,6 +52,24 @@
 			)),
 		null)
 
+	GLOB.wood_recipes += list(
+		null,
+		new /datum/stack_recipe_list("Деревянные полки", list(
+			new /datum/stack_recipe("Деревянная полка 1", /obj/structure/shelf/wood/first, 2, time = 1 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND, category = CAT_FURNITURE),
+			new /datum/stack_recipe("Деревянная полка 2", /obj/structure/shelf/wood/second, 2, time = 1 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND, category = CAT_FURNITURE),
+			new /datum/stack_recipe("Деревянная полка 3", /obj/structure/shelf/wood/third, 2, time = 1 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND, category = CAT_FURNITURE),
+			)),
+		null)
+
+	GLOB.metal_recipes += list(
+		null,
+		new /datum/stack_recipe_list("Железные полки", list(
+			new /datum/stack_recipe("Железная полка 1", /obj/structure/shelf/iron/first, 2, time = 1 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND, category = CAT_FURNITURE),
+			new /datum/stack_recipe("Железная полка 2", /obj/structure/shelf/iron/second, 2, time = 1 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND, category = CAT_FURNITURE),
+			new /datum/stack_recipe("Железная полка 3", /obj/structure/shelf/iron/third, 2, time = 1 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND, category = CAT_FURNITURE),
+			)),
+		null)
+
 	GLOB.arcade_prize_pool += list(
 		/obj/item/storage/box/id_stickers = 2
 	)
