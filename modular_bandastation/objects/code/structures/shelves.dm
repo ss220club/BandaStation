@@ -3,7 +3,7 @@
 	name = "shelf"
 	desc = "A shelving unit with several shelves for placing items."
 	icon = 'modular_bandastation/objects/icons/obj/structures/shelves.dmi'
-	icon_state = "metal_shelf_2"
+	icon_state = "error"
 	density = TRUE
 	anchored = TRUE
 	pass_flags_self = LETPASSTHROW
@@ -63,7 +63,14 @@
 		return . || NONE
 
 	context[SCREENTIP_CONTEXT_LMB] = "Установить"
+	if(held_item.tool_behaviour == TOOL_WRENCH)
+		context[SCREENTIP_CONTEXT_RMB] = "Разобрать"
 	return CONTEXTUAL_SCREENTIP_SET
+
+/obj/structure/shelf/wrench_act_secondary(mob/living/user, obj/item/tool)
+	tool.play_tool_sound(src)
+	deconstruct(TRUE)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/shelf/base_item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	. = ..()
@@ -101,6 +108,13 @@
 	// with the offset that puts the lowest visible sprite pixel on the shelf.
 	tool.pixel_y = selected_level - lowest_pixel - item_pixel_z
 	return ITEM_INTERACT_SUCCESS
+
+/obj/structure/shelf/atom_deconstruct(disassembled = TRUE)
+	var/turf/target_turf = drop_location()
+	for(var/datum/material/material_datum as anything in custom_materials)
+		var/material_amount = FLOOR(custom_materials[material_datum] / SHEET_MATERIAL_AMOUNT, 1)
+		if(material_amount)
+			new material_datum.sheet_type(target_turf, material_amount)
 
 /// Returns the shelf surface closest to the vertical click coordinate.
 /obj/structure/shelf/proc/get_closest_shelf_level(click_y)
