@@ -20,6 +20,8 @@
 #include "code/ranged/quik_accessory.dm"
 #include "code/ranged/overrides/ballistic_master.dm"
 #include "code/ranged/overrides/mystery_box_additions.dm"
+#include "code/ranged/overrides/guncases.dm"
+#include "code/gun_rack.dm"
 
 // MARK: Ranged - Ballistic
 #include "code/ranged/ballistic/ammo_boxes.dm"
