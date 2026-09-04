@@ -35,10 +35,6 @@
 	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
-/obj/item/gun/ballistic/automatic/cm5/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
-
 /obj/item/gun/ballistic/automatic/cm5/add_seclight_point()
 	AddComponent(\
 		/datum/component/seclite_attachable, \
@@ -48,13 +44,13 @@
 		overlay_y = 13 \
 	)
 
-/obj/item/gun/ballistic/automatic/cm5/examine_more(mob/user)
-	. = ..()
-	. += "CM-5 - пистолет-пулемет разработанный оружейным отделом Нанотрейзен \
+/obj/item/gun/ballistic/automatic/cm5/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "CM-5 - пистолет-пулемет разработанный оружейным отделом Нанотрейзен \
 	под малоимпульсные патроны калибра 9x25мм. Данный пистолет-пулемет был создан для использования отделами \
 	службы безопасности и группами быстрого реагирования на обьектах Нанотрейзен во всех возможных условиях, в которых обычно работает НТ, \
 	в частности в условиях повышенной ионической среды, где использование стандартного лазерного вооружения \
-	менее эффективно."
+	менее эффективно.<br>")
 
 /obj/item/gun/ballistic/automatic/cm5/no_mag
 	spawnwithmagazine = FALSE

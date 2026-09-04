@@ -1,6 +1,5 @@
 /datum/atom_skin/wespe
 	abstract_type = /datum/atom_skin/wespe
-	change_inhand_icon_state = TRUE
 	change_base_icon_state = TRUE
 
 /datum/atom_skin/wespe/default
@@ -28,10 +27,6 @@
 	. = ..()
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/wespe)
 
-/obj/item/gun/ballistic/automatic/pistol/wespe/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
-
 /obj/item/gun/ballistic/automatic/pistol/wespe/add_seclight_point()
 	AddComponent(\
 		/datum/component/seclite_attachable, \
@@ -39,13 +34,13 @@
 		is_light_removable = FALSE, \
 	)
 
-/obj/item/gun/ballistic/automatic/pistol/wespe/examine_more(mob/user)
-	. = ..()
-	. += "\"Оса\" - пистолет, созданный исключительно для военных целей. \
+/obj/item/gun/ballistic/automatic/pistol/wespe/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "\"Оса\" - пистолет, созданный исключительно для военных целей. \
 		Он должен был использовать стандартные патроны, стандартные магазины и быть способным \
 		функционировать во всех условиях, в которых обычно работает ТСФ. \
 		Так получилось, что эти качества сделали это оружие популярным \
-		в пограничном пространстве, и, скорее всего, именно поэтому вы сейчас смотрите на этот пистолет."
+		в пограничном пространстве, и, скорее всего, именно поэтому вы сейчас смотрите на этот пистолет.")
 
 /obj/item/gun/ballistic/automatic/pistol/wespe/no_mag
 	spawnwithmagazine = FALSE

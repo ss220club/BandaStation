@@ -14,9 +14,9 @@
 	suppressor_y_offset = -1
 	recoil = 0.3
 
-/obj/item/gun/ballistic/automatic/pistol/gp9/examine(mob/user)
+/obj/item/gun/ballistic/automatic/pistol/gp9/Initialize(mapload)
 	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
+	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/gp9)
 
 /obj/item/gun/ballistic/automatic/pistol/gp9/add_seclight_point()
 	AddComponent(\
@@ -27,19 +27,43 @@
 		overlay_y = 13 \
 	)
 
-/obj/item/gun/ballistic/automatic/pistol/gp9/examine_more(mob/user)
-	. = ..()
-	. += "GP-9 - пистолет общего назначения, разработанный оружейным отделом Нанотрейзен \
+/obj/item/gun/ballistic/automatic/pistol/gp9/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "GP-9 - пистолет общего назначения, разработанный оружейным отделом Нанотрейзен \
 	под малоимпульсные патроны калибра 9x25мм. Данный пистолет был создан для использования отделами \
 	службы безопастности на обьектах Нанотрейзен во всех возможных условиях, в которых обычно работает НТ, \
 	в частности в условиях повышенной ионической среды, где использование стандартного лазерного вооружения \
-	менее эффективно."
+	менее эффективно.")
 
 /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/pistol/gp9/sec
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
+
+/datum/atom_skin/gp9
+	abstract_type = /datum/atom_skin/gp9
+	change_base_icon_state = TRUE
+
+/datum/atom_skin/gp9/default
+	preview_name = "Default"
+	new_icon_state = "gp9"
+
+/datum/atom_skin/gp9/black
+	preview_name = "Black"
+	new_icon_state = "gp9_black"
+
+/datum/atom_skin/gp9/red
+	preview_name = "Red"
+	new_icon_state = "gp9_red"
+
+/datum/atom_skin/gp9/carmapple
+	preview_name = "Black & Red"
+	new_icon_state = "gp9_carmapple"
+
+/datum/atom_skin/gp9/green
+	preview_name = "Green & Wood"
+	new_icon_state = "gp9_green"
 
 /obj/item/gun/ballistic/automatic/pistol/gp9/spec
 	name = "GP-93R"
