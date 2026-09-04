@@ -27,7 +27,7 @@
 	tac_reloads = FALSE
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/cm40.ogg'
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/dshk_cocked.ogg'
-	load_sound = 'modular_bandastation/weapon/sound/ranged/pmk_reload.ogg'
+	load_sound = 'modular_bandastation/weapon/sound/ranged/dshk_reload.ogg'
 	load_empty_sound = 'modular_bandastation/weapon/sound/ranged/pmk_reload.ogg'
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/pmk_unload.ogg'
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/pmk_unload.ogg'
@@ -43,21 +43,20 @@
 
 /obj/item/gun/ballistic/automatic/pmk/examine(mob/user)
 	. = ..()
-	. += "<b>АЛЬТ + ЛКМ</b> чтобы [cover_open ? "закрыть" : "открыть"] крышку ствольной коробки."
+	. += "<b>АЛЬТ + ПКМ</b> чтобы [cover_open ? "закрыть" : "открыть"] крышку ствольной коробки."
 	if(cover_open && magazine)
 		. += span_notice("Кажется, вы могли бы использовать <b>пустую руку</b>, чтобы вынуть магазин.")
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
 
-/obj/item/gun/ballistic/automatic/pmk/examine_more(mob/user)
-	. = ..()
-	. += "Легкий ручной пулемет ПМК был разработан Оборонной Коллегией СССП с целью создания компактного, \
+/obj/item/gun/ballistic/automatic/pmk/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "Легкий ручной пулемет ПМК был разработан Оборонной Коллегией СССП с целью создания компактного, \
 		но надежного оружия для поддержки пехоты, способного выдерживать различные экстремальные условия. <br>\
 		Оснащенный калибром 7.62x54мм и ленточным питанием на 100 патронов, он предоставляет высокую скорострельность и кучную стрельбу. \
 		ПМК имеет универсальные крепления для тактических аксессуаров, включая фонари и лазерные целеуказатели, \
 		а эргономичный приклад с амортизирующей накладкой ослабляет отдачу и обеспечивает комфорт при длительном использовании. \
-		Использовавшие ПМК отмечают высокую надежность пулемета, полученную благодаря использованию легких титановых сплавов и керамических покрытий при сборке."
+		Использовавшие ПМК отмечают высокую надежность пулемета, полученную благодаря использованию легких титановых сплавов и керамических покрытий при сборке.")
 
-/obj/item/gun/ballistic/automatic/pmk/click_alt(mob/user)
+/obj/item/gun/ballistic/automatic/pmk/click_alt_secondary(mob/user)
 	cover_open = !cover_open
 	balloon_alert(user, "крышка [cover_open ? "открыта" : "закрыта"]")
 	playsound(src, 'sound/items/weapons/gun/l6/l6_door.ogg', 60, TRUE)
@@ -72,7 +71,7 @@
 	. = ..()
 	. += "pmk_door_[cover_open ? "open" : "closed"]"
 
-/obj/item/gun/ballistic/automatic/pmk/try_fire_gun(atom/target, mob/living/user, params)
+/obj/item/gun/ballistic/automatic/pmk/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	if(cover_open)
 		balloon_alert(user, "закройте крышку!")
 		return FALSE
@@ -92,8 +91,8 @@
 		return
 	..()
 
-/obj/item/gun/ballistic/automatic/pmk/attackby(obj/item/A, mob/user, list/modifiers, list/attack_modifiers)
-	if(!cover_open && istype(A, accepted_magazine_type))
+/obj/item/gun/ballistic/automatic/pmk/insert_magazine(mob/user, obj/item/ammo_box/magazine/AM, display_message = TRUE)
+	if(!cover_open && istype(AM, accepted_magazine_type))
 		balloon_alert(user, "откройте крышку!")
 		return
 	..()
