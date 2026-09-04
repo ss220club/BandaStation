@@ -1,0 +1,44 @@
+#include "_redspace.dm"
+
+#include "code/_defines.dm"
+#include "code/signals.dm"
+#include "code/redspace_field.dm"
+#include "code/redspace_profile.dm"
+#include "code/redspace_context.dm"
+#include "code/redspace_source.dm"
+#include "code/redspace_events.dm"
+#include "code/redspace_round_feature.dm"
+#include "code/redspace_subsystem.dm"
+#include "code/redspace_elements.dm"
+#include "code/redspace_energy.dm"
+#include "code/redspace_spawn_content.dm"
+#include "code/redspace_counter.dm"
+#include "code/redspace_sensor.dm"
+#include "code/redspace_console.dm"
+#include "code/redspace_stabilizer.dm"
+#include "code/redspace_rift_sealer.dm"
+#include "code/redspace_rift_scanner.dm"
+#include "code/redspace_debug.dm"
+
+#include "code/unit_tests/redspace_grid.dm"
+#include "code/unit_tests/redspace_context.dm"
+#include "code/unit_tests/redspace_core.dm"
+#include "code/unit_tests/redspace_elements.dm"
+#include "code/unit_tests/redspace_counter.dm"
+#include "code/unit_tests/redspace_sensor.dm"
+#include "code/unit_tests/redspace_stabilizer.dm"
+#include "code/unit_tests/redspace_energy.dm"
+#include "code/unit_tests/redspace_demon_ai.dm"
+#include "code/unit_tests/redspace_summon.dm"
+#include "code/unit_tests/redspace_devourer.dm"
+#include "code/unit_tests/redspace_rift_sealer.dm"
+#include "code/unit_tests/redspace_rift_scanner.dm"
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+// END_INCLUDE
