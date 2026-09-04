@@ -40,6 +40,7 @@
 	human_authority = JOB_AUTHORITY_HUMANS_ONLY
 
 	voice_of_god_power = 1.4 //Command staff has authority
+	tgui_icon = FA_ICON_USER_SHIELD
 
 /datum/job/head_of_security/get_captaincy_announcement(mob/living/captain)
 	return "В связи с нехваткой персонала, недавно назначенный исполняющий обязанности капитана [captain.real_name] на борту!"

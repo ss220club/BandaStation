@@ -224,6 +224,12 @@
 	holywater_drain_amount = 0.33
 	notice = "&bull; Нельзя использовать рядом с живыми разумными существами.<br>&bull; Прерывается, если по вам ударят антимагическим предметом."
 
+/datum/heretic_knowledge/spell/caretaker_refuge/has_charges(mob/living/user)
+	return user.has_status_effect(/datum/status_effect/caretaker_refuge) || ..()
+
+/datum/heretic_knowledge/spell/caretaker_refuge/should_deduct_charge(mob/living/user)
+	return !user.has_status_effect(/datum/status_effect/caretaker_refuge)
+
 /datum/heretic_knowledge/ultimate/lock_final
 	name = "Открытие Лабиринта"
 	desc = "Ритуал вознесения Пути замка. \

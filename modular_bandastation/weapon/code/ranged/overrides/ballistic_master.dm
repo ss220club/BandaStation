@@ -35,7 +35,7 @@
 	else
 		inhand_icon_state = "[base_icon_state]"
 
-/obj/item/gun/ballistic/shotgun/riot/sawoff(mob/user, obj/item/saw, handle_modifications)
+/obj/item/gun/ballistic/shotgun/riot/do_sawoff()
 	. = ..()
 	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'

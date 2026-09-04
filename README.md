@@ -40,7 +40,11 @@
 
 Для начала работы (окружение разработчика, компиляция) смотрите документ HackMD [здесь](https://hackmd.io/@tgstation/HJ8OdjNBc#tgstation-Development-Guide).
 
+# <<<<<<< HEAD
+
 Для общей документации по дизайну смотрите [HackMD](https://hackmd.io/@tgstation).
+
+> > > > > > > upstream/master
 
 ## LICENSE
 
