@@ -246,3 +246,8 @@
 	max_integrity = 1000
 	impressiveness = 0
 	abstract_type = /obj/structure/statue/dummy
+
+/obj/structure/statue/dummy/srt
+	name = "SRT Soldier"
+	desc = "Он точно не спит..."
+	icon_state = "srt"
