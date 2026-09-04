@@ -21,7 +21,7 @@
 	if(M.stat == DEAD || !M.client)
 		return FALSE
 	. = ..()
-	make_friend()
+	// Мы больше не создаем друга здесь! Только ищем призрака.
 	get_ghost()
 
 /datum/brain_trauma/special/imaginary_friend/on_life(seconds_per_tick)
@@ -43,11 +43,11 @@
 
 //If the friend goes afk, make a brand new friend. Plenty of fish in the sea of imagination.
 /datum/brain_trauma/special/imaginary_friend/proc/reroll_friend()
-	if(friend.client) //reconnected
+	if(friend && friend.client) //reconnected
 		return
 	friend_initialized = FALSE
 	QDEL_NULL(friend)
-	make_friend()
+	// Здесь тоже больше не создаем друга заранее
 	get_ghost()
 
 /datum/brain_trauma/special/imaginary_friend/proc/make_friend()
@@ -72,9 +72,66 @@
 		qdel(src)
 		return
 
+	// Запускаем асинхронный опрос призрака
+	INVOKE_ASYNC(src, PROC_REF(ask_ghost_appearance), ghost)
+
+// НОВЫЙ ПРОК: Спрашиваем призрака, пока он еще призрак
+/datum/brain_trauma/special/imaginary_friend/proc/ask_ghost_appearance(mob/dead/observer/ghost)
+	if(!ghost || !ghost.client)
+		return
+
+	var/list/choices = list("Свой персонаж", "Случайный человек", "Выбрать из окружающих")
+	var/choice = tgui_alert(ghost, "Кем вы хотите выглядеть?", "Внешний вид", choices)
+
+	// Проверяем, не отключился ли призрак и жив ли хозяин, пока мы ждали ответа
+	if(!ghost || !ghost.client || QDELETED(src) || QDELETED(owner))
+		return
+
+	var/mob/living/carbon/copied_target = null
+
+	if(choice == "Выбрать из окружающих")
+		var/list/possible_targets = list()
+		for(var/mob/living/carbon/C in GLOB.carbon_list)
+			if(!C.real_name) continue
+			possible_targets[C.real_name] = C
+
+		if(!length(possible_targets))
+			to_chat(ghost, span_warning("Не найдено подходящих существ. Выбран случайный внешний вид."))
+			choice = "Случайный человек"
+		else
+			var/target_name = tgui_input_list(ghost, "Выберите существо для копирования:", "Внешний вид", possible_targets)
+			if(target_name)
+				copied_target = possible_targets[target_name]
+			else
+				choice = "Случайный человек"
+
+	// Ещё одна проверка после второго окна
+	if(!ghost || !ghost.client || QDELETED(src) || QDELETED(owner))
+		return
+
+	// ТОЛЬКО ТЕПЕРЬ СОЗДАЕМ МОБА ВООБРАЖАЕМОГО ДРУГА
+	make_friend()
 	friend.PossessByPlayer(ghost.ckey)
 	friend.attach_to_owner(owner)
-	friend.setup_appearance()
+
+	// Применяем выбранную внешность
+	if(choice == "Свой персонаж")
+		friend.setup_friend_from_prefs(ghost.client.prefs)
+	else if(choice == "Выбрать из окружающих" && copied_target)
+		friend.real_name = copied_target.real_name
+		friend.name = friend.real_name
+		var/icon/final_icon = icon()
+		var/old_dir = copied_target.dir
+		for(var/d in list(NORTH, SOUTH, EAST, WEST))
+			copied_target.setDir(d)
+			var/icon/temp_icon = getFlatIcon(copied_target)
+			final_icon.Insert(temp_icon, dir = d)
+		copied_target.setDir(old_dir)
+		friend.human_icon = final_icon
+		friend.Show()
+	else
+		friend.setup_friend()
+
 	friend_initialized = TRUE
 	friend.log_message("became [key_name(owner)]'s split personality.", LOG_GAME)
 	message_admins("[ADMIN_LOOKUPFLW(friend)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
@@ -136,13 +193,6 @@
 		owner.imaginary_group = list(owner)
 	owner.imaginary_group += src
 	greet()
-
-/// Copies appearance from passed player prefs, or randomises them if none are provided
-/mob/eye/imaginary_friend/proc/setup_appearance(datum/preferences/appearance_from_prefs = null)
-	if(appearance_from_prefs)
-		INVOKE_ASYNC(src, PROC_REF(setup_friend_from_prefs), appearance_from_prefs)
-	else
-		INVOKE_ASYNC(src, PROC_REF(setup_friend))
 
 /// Randomise friend name and appearance
 /mob/eye/imaginary_friend/proc/setup_friend()
@@ -433,16 +483,44 @@
 	remove_thinking_indicator()
 	remove_typing_indicator()
 
-/mob/eye/imaginary_friend/Move(NewLoc, Dir = 0)
+/mob/eye/imaginary_friend/Move(atom/NewLoc, Dir = 0)
+	// 1. Проверяем скорость задержки шага
 	if(world.time < move_delay)
 		return FALSE
-	setDir(Dir)
+
+	// 2. СНАЧАЛА поворачиваемся (даже если впереди стена)
+	if(Dir)
+		setDir(Dir)
+
+	// 3. Симулируем физику, если друг видимый
+	if(!hidden && NewLoc)
+		if(NewLoc.density)
+			return FALSE // Врезаемся в стену, но уже повернувшись!
+
+		// Проверяем объекты на клетке (например, закрытые шлюзы)
+		for(var/atom/A in NewLoc.contents)
+			if(A.density && A != src)
+				if(istype(A, /obj/machinery/door))
+					var/obj/machinery/door/D = A
+					if(D.density) // Если дверь закрыта
+						return FALSE
+				else
+					return FALSE // Упираемся в любой другой плотный объект
+
+	// 4. Проверка дистанции до хозяина
 	if(get_dist(src, owner) > distance_allowance || (require_los && !can_see(owner, src, distance_allowance)))
 		recall()
 		move_delay = world.time + 10
 		return FALSE
+
+	// 5. Само перемещение
 	abstract_move(NewLoc)
-	move_delay = world.time + 1
+
+	// 6. Обновляем скорость в зависимости от режима
+	if(hidden)
+		move_delay = world.time + 1
+	else
+		move_delay = world.time + 2
 
 /mob/eye/imaginary_friend/setDir(newdir)
 	. = ..()
@@ -488,6 +566,12 @@
 /datum/action/innate/imaginary_hide/Activate()
 	var/mob/eye/imaginary_friend/fake_friend = owner
 	fake_friend.hidden = !fake_friend.hidden
+
+	if(fake_friend.hidden)
+		to_chat(fake_friend, span_notice("Вы прячетесь. Теперь вы бестелесны и можете проходить сквозь стены."))
+	else
+		to_chat(fake_friend, span_notice("Вы появляетесь на виду и теперь двигаетесь как обычный человек."))
+
 	fake_friend.Show()
 	build_all_button_icons(UPDATE_BUTTON_NAME|UPDATE_BUTTON_ICON)
 
