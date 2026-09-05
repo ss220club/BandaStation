@@ -70,6 +70,8 @@
 
 /proc/redspace_intensity_name(intensity)
 	switch(intensity)
+		if(REDSPACE_INTENSITY_NONE)
+			return "отсутствует"
 		if(REDSPACE_INTENSITY_CALM)
 			return "штиль"
 		if(REDSPACE_INTENSITY_DISTURBANCE)

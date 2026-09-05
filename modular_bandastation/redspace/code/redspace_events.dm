@@ -15,6 +15,8 @@
 	var/dangerous = FALSE
 	/// Whether the controller may select this definition on a range transition.
 	var/automatic = FALSE
+	/// Whether this instance was selected by the automatic field scheduler.
+	var/started_automatically = FALSE
 	/// Relative weight when several automatic definitions are eligible.
 	var/weight = 1
 	/// When true, the event remains alive after start() until it finishes itself.

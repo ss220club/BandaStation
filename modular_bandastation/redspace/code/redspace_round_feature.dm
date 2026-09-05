@@ -40,6 +40,8 @@
 /datum/station_trait/redspace_activity/process(seconds_per_tick)
 	if(!round_initialized || !SSredspace?.initialized)
 		return
+	if(redspace_intensity == REDSPACE_INTENSITY_NONE)
+		return
 
 	if(primary_source_id && !SSredspace.field_sources["[primary_source_id]"])
 		primary_source_id = null
@@ -61,6 +63,7 @@
 
 /datum/station_trait/redspace_activity/proc/configure_intensity(new_intensity, update_source = TRUE)
 	if(!(new_intensity in list(
+		REDSPACE_INTENSITY_NONE,
 		REDSPACE_INTENSITY_CALM,
 		REDSPACE_INTENSITY_DISTURBANCE,
 		REDSPACE_INTENSITY_STORM,
@@ -69,6 +72,9 @@
 
 	redspace_intensity = new_intensity
 	switch(redspace_intensity)
+		if(REDSPACE_INTENSITY_NONE)
+			name = "Редспейс отсутствует"
+			report_message = "Активность редспейса на станции отсутствует."
 		if(REDSPACE_INTENSITY_CALM)
 			name = "Слабые возмущения редспейса"
 			report_message = "В окрестностях станции фиксируются слабые возмущения редспейса. Ожидаются редкие локальные отклонения без существенной угрозы для смены."
@@ -79,6 +85,17 @@
 			name = "Шторм редспейса"
 			report_message = "Станция проходит через активный шторм редспейса. Ожидаются существенные локальные воздействия, а стабилизация границы является приоритетной задачей."
 
+	if(redspace_intensity == REDSPACE_INTENSITY_NONE)
+		if(SSredspace?.initialized)
+			SSredspace.cancel_automatic_events("автоматические события отключены")
+			SSredspace.clear_scheduled_event_attempts()
+		remove_managed_sources("активность редспейса отключена")
+		next_hotspot_at = 0
+		hotspot_cooldown_started_at = 0
+		next_wave_at = 0
+		storm_active = FALSE
+		return TRUE
+
 	if(update_source && primary_source_id && SSredspace?.initialized)
 		SSredspace.update_source_strength(primary_source_id, get_primary_source_strength(), "изменена интенсивность особенности раунда")
 		SSredspace.update_source_radius(primary_source_id, get_primary_source_radius(), "изменён радиус особенности раунда")
@@ -88,7 +105,18 @@
 		next_hotspot_at = hotspot_cooldown_started_at + get_hotspot_respawn_delay()
 	return TRUE
 
+/datum/station_trait/redspace_activity/proc/remove_managed_sources(reason = null)
+	var/list/source_ids = managed_source_ids.Copy()
+	managed_source_ids.Cut()
+	primary_source_id = null
+	if(!SSredspace)
+		return
+	for(var/source_id in source_ids)
+		SSredspace.remove_source(source_id, reason)
+
 /datum/station_trait/redspace_activity/proc/ensure_primary_source()
+	if(redspace_intensity == REDSPACE_INTENSITY_NONE)
+		return FALSE
 	if(primary_source_id && SSredspace?.field_sources["[primary_source_id]"])
 		return TRUE
 
@@ -128,6 +156,8 @@
 
 /datum/station_trait/redspace_activity/proc/get_primary_source_strength()
 	switch(redspace_intensity)
+		if(REDSPACE_INTENSITY_NONE)
+			return 0
 		if(REDSPACE_INTENSITY_CALM)
 			return 1.5
 		if(REDSPACE_INTENSITY_DISTURBANCE)
@@ -138,6 +168,8 @@
 
 /datum/station_trait/redspace_activity/proc/get_primary_source_radius()
 	switch(redspace_intensity)
+		if(REDSPACE_INTENSITY_NONE)
+			return 0
 		if(REDSPACE_INTENSITY_CALM)
 			return 8
 		if(REDSPACE_INTENSITY_DISTURBANCE)
@@ -154,6 +186,8 @@
 
 /datum/station_trait/redspace_activity/proc/get_hotspot_respawn_delay()
 	switch(redspace_intensity)
+		if(REDSPACE_INTENSITY_NONE)
+			return 0
 		if(REDSPACE_INTENSITY_CALM)
 			return REDSPACE_HOTSPOT_RESPAWN_DELAY_CALM
 		if(REDSPACE_INTENSITY_DISTURBANCE)
@@ -164,6 +198,8 @@
 
 /datum/station_trait/redspace_activity/proc/get_next_wave_delay()
 	switch(redspace_intensity)
+		if(REDSPACE_INTENSITY_NONE)
+			return 0
 		if(REDSPACE_INTENSITY_CALM)
 			return rand(120 SECONDS, 240 SECONDS)
 		if(REDSPACE_INTENSITY_DISTURBANCE)
@@ -176,6 +212,9 @@
 	var/minimum
 	var/maximum
 	switch(redspace_intensity)
+		if(REDSPACE_INTENSITY_NONE)
+			minimum = 0
+			maximum = 0
 		if(REDSPACE_INTENSITY_CALM)
 			minimum = 1
 			maximum = 2
@@ -189,6 +228,8 @@
 
 /datum/station_trait/redspace_activity/proc/get_wave_radius()
 	switch(redspace_intensity)
+		if(REDSPACE_INTENSITY_NONE)
+			return 0
 		if(REDSPACE_INTENSITY_CALM)
 			return 5
 		if(REDSPACE_INTENSITY_DISTURBANCE)
@@ -199,6 +240,8 @@
 
 /datum/station_trait/redspace_activity/proc/get_wave_speed()
 	switch(redspace_intensity)
+		if(REDSPACE_INTENSITY_NONE)
+			return 0
 		if(REDSPACE_INTENSITY_CALM)
 			return rand(25, 40) / 100
 		if(REDSPACE_INTENSITY_DISTURBANCE)
@@ -209,6 +252,8 @@
 
 /datum/station_trait/redspace_activity/proc/get_wave_lifetime()
 	switch(redspace_intensity)
+		if(REDSPACE_INTENSITY_NONE)
+			return 0
 		if(REDSPACE_INTENSITY_CALM)
 			return 180 SECONDS
 		if(REDSPACE_INTENSITY_DISTURBANCE)
@@ -218,6 +263,8 @@
 	return 180 SECONDS
 
 /datum/station_trait/redspace_activity/proc/spawn_wave()
+	if(redspace_intensity == REDSPACE_INTENSITY_NONE)
+		return
 	var/turf/origin = get_safe_random_station_turf_equal_weight()
 	if(!origin || !SSredspace.is_supported_z(origin.z))
 		return

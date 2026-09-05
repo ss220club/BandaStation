@@ -360,6 +360,26 @@ SUBSYSTEM_DEF(redspace)
 		cleanup_event_budget(zone_key)
 		prune_event_cell(zone_key)
 
+/// Cancels events that were selected automatically when automatic activity is disabled.
+/datum/controller/subsystem/redspace/proc/cancel_automatic_events(reason)
+	for(var/datum/redspace_event/event as anything in active_events.Copy())
+		if(!event || !event.started_automatically)
+			continue
+		finish_registered_event(event, event.event_target, reason || "автоматическое событие отменено")
+
+/// Removes pending automatic-event attempts without touching manually started events.
+/datum/controller/subsystem/redspace/proc/clear_scheduled_event_attempts()
+	for(var/zone_key in event_budgets.Copy())
+		var/datum/redspace_event_budget/budget = event_budgets[zone_key]
+		if(!budget)
+			continue
+		budget.next_attempt_at = 0
+		budget.next_turf_attempt_at = 0
+		budget.scheduled_state = null
+		budget.turf_scheduled_state = null
+		cleanup_event_budget(zone_key)
+	clear_event_wake_timer()
+
 /datum/controller/subsystem/redspace/proc/is_supported_z(z_level)
 	if(!z_level)
 		return FALSE
@@ -559,6 +579,11 @@ SUBSYSTEM_DEF(redspace)
 		if(istype(trait, /datum/station_trait/redspace_activity))
 			return trait
 
+/// Returns whether the round configuration allows automatic redspace events.
+/datum/controller/subsystem/redspace/proc/automatic_events_enabled()
+	var/datum/station_trait/redspace_activity/round_trait = get_round_trait()
+	return !round_trait || round_trait.redspace_intensity != REDSPACE_INTENSITY_NONE
+
 /// Creates a live base trait when an administrator enables redspace in a round
 /// that did not roll one from the station-trait pool.
 /datum/controller/subsystem/redspace/proc/ensure_round_trait() as /datum/station_trait/redspace_activity
@@ -613,6 +638,10 @@ SUBSYSTEM_DEF(redspace)
 
 /// Ensures that a sparse active cell participates in both profile event queues.
 /datum/controller/subsystem/redspace/proc/schedule_event_attempt(datum/redspace_field_cell/cell, immediate = FALSE)
+	if(!automatic_events_enabled())
+		if(cell)
+			clear_event_schedule(cell)
+		return FALSE
 	if(!cell)
 		return FALSE
 	if(!cell_has_event_anchor(cell))
@@ -687,6 +716,9 @@ SUBSYSTEM_DEF(redspace)
 
 /// Makes one bounded attempt for each due profile queue in every active zone.
 /datum/controller/subsystem/redspace/proc/process_scheduled_events()
+	if(!automatic_events_enabled())
+		clear_scheduled_event_attempts()
+		return TRUE
 	if(!length(event_budgets) || (event_wake_at && world.time < event_wake_at))
 		return TRUE
 
@@ -918,6 +950,8 @@ SUBSYSTEM_DEF(redspace)
 /// Selects one eligible registered event for the cell's current state profile.
 /// The default queue excludes turf spawns; a category selects a dedicated queue.
 /datum/controller/subsystem/redspace/proc/try_start_automatic_event(datum/redspace_field_cell/cell, target_category = null)
+	if(!automatic_events_enabled())
+		return FALSE
 	if(!cell || !length(event_registry))
 		return FALSE
 	if(!isnull(automatic_event_attempts_remaining))
@@ -987,13 +1021,17 @@ SUBSYSTEM_DEF(redspace)
 		if(!length(candidates))
 			return FALSE
 		chosen_event_id = pick_weight(candidates)
-	return start_registered_event(chosen_event_id, null, candidate_targets[chosen_event_id])
+	return start_registered_event(chosen_event_id, null, candidate_targets[chosen_event_id], null, TRUE)
 
 /// Runs a short registered event and applies its per-zone cooldown.
 /// Long-lived invasion scenarios will get a separate lifecycle manager later.
-/datum/controller/subsystem/redspace/proc/start_registered_event(event_id, client/admin, turf/target, list/event_args)
+/datum/controller/subsystem/redspace/proc/start_registered_event(event_id, client/admin, turf/target, list/event_args, started_automatically = FALSE)
 	var/datum/redspace_event/event = create_registered_event(event_id, event_args)
 	if(!event)
+		return FALSE
+	event.started_automatically = started_automatically
+	if(started_automatically && !automatic_events_enabled())
+		qdel(event)
 		return FALSE
 	if(!can_start_event_instance(event, target))
 		qdel(event)

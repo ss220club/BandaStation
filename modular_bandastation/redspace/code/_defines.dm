@@ -42,6 +42,8 @@
 #define REDSPACE_EVENT_CATEGORY_MOB_SPAWN "mob_spawn"
 
 /// Round-start intensity selected by the redspace station trait.
+/// Debug-only setting that disables automatic redspace activity.
+#define REDSPACE_INTENSITY_NONE "none"
 #define REDSPACE_INTENSITY_CALM "calm"
 #define REDSPACE_INTENSITY_DISTURBANCE "disturbance"
 #define REDSPACE_INTENSITY_STORM "storm"

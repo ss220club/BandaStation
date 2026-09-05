@@ -140,6 +140,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 				"Штиль" = REDSPACE_INTENSITY_CALM,
 				"Возмущение" = REDSPACE_INTENSITY_DISTURBANCE,
 				"Шторм" = REDSPACE_INTENSITY_STORM,
+				"Отсутствует" = REDSPACE_INTENSITY_NONE,
 			)
 			var/intensity_label = tgui_input_list(user, "Новая интенсивность (сейчас: [isnull(current_intensity) ? "не выбрана" : redspace_intensity_name(current_intensity)])", "Redspace Round Feature", intensity_choices)
 			if(!intensity_label)
