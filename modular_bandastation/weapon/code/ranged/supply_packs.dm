@@ -131,7 +131,3 @@
 	contains = list(
 		/obj/item/clothing/accessory/holster = 2
 	)
-
-// MARK: GUNCASE
-/obj/item/storage/toolbox/guncase/soviet
-	desc = "Оружейный кейс. Символ СССП отпечатан на боковой стороне."

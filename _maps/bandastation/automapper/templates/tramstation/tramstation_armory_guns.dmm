@@ -1,0 +1,14 @@
+"a" = (/obj/machinery/camera/directional/north{network = list("ss13","Security"); c_tag = "Security - Armory"},/obj/structure/window/reinforced/spawner/directional/west,/obj/structure/window/reinforced/spawner/directional/east,/obj/structure/cable,/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/eguns,/turf/open/floor/iron,/area/station/security/armory)
+"c" = (/obj/structure/window/reinforced/spawner/directional/north,/obj/structure/window/reinforced/spawner/directional/south,/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/shotguns,/turf/open/floor/iron,/area/station/security/armory)
+"g" = (/obj/effect/turf_decal/stripes/corner,/obj/machinery/light/floor,/turf/open/floor/iron,/area/station/security/armory)
+"i" = (/obj/structure/window/reinforced/spawner/directional/north,/obj/structure/window/reinforced/spawner/directional/south,/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/disablers,/turf/open/floor/iron,/area/station/security/armory)
+"l" = (/obj/effect/turf_decal/stripes/line{dir = 1},/obj/structure/window/reinforced/spawner/directional/west,/obj/structure/window/reinforced/spawner/directional/east,/obj/structure/cable,/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/laser,/turf/open/floor/iron,/area/station/security/armory)
+"U" = (/obj/effect/spawner/structure/window/reinforced,/obj/structure/cable,/turf/open/floor/plating,/area/station/security/armory)
+"X" = (/obj/effect/turf_decal/stripes/line{dir = 1},/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,/obj/machinery/light/floor,/turf/open/floor/iron,/area/station/security/armory)
+"Y" = (/obj/effect/turf_decal/stripes/corner{dir = 8},/obj/machinery/light/floor,/turf/open/floor/iron,/area/station/security/armory)
+
+(1,1,1) = {"
+XlX
+cUi
+Yag
+"}

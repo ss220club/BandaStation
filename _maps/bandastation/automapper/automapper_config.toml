@@ -88,6 +88,13 @@ required_map = "DeltaStation2.dmm"
 coordinates = [208, 128, 1]
 trait_name = "Station"
 
+[templates.deltastation_armory_guns]
+map_files = ["deltastation_armory_guns.dmm"]
+directory = "_maps/bandastation/automapper/templates/deltastation/"
+required_map = "DeltaStation2.dmm"
+coordinates = [210, 130, 1]
+trait_name = "Station"
+
 [templates.deltastation_kitchen_zoo]
 map_files = ["deltastation_kitchen_zoo.dmm"]
 directory = "_maps/bandastation/automapper/templates/deltastation/"
@@ -208,8 +215,8 @@ required_map = "MetaStation.dmm"
 coordinates = [85, 129, 1]
 trait_name = "Station"
 
-[templates.metastation_armory_hammer]
-map_files = ["metastation_armory_hammer.dmm"]
+[templates.metastation_armory_guns]
+map_files = ["metastation_armory_guns.dmm"]
 directory = "_maps/bandastation/automapper/templates/metastation/"
 required_map = "MetaStation.dmm"
 coordinates = [108, 171, 1]
@@ -360,7 +367,14 @@ trait_name = "Station"
 map_files = ["iceboxstation_armory_hammer.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
-coordinates = [105, 182, 2]
+coordinates = [104, 182, 2]
+trait_name = "Station"
+
+[templates.iceboxstation_armory_guns]
+map_files = ["iceboxstation_armory_guns.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [104, 178, 2]
 trait_name = "Station"
 
 [templates.iceboxstation_kitchen_zoo]
@@ -509,6 +523,13 @@ map_files = ["tramstation_armory_hammer.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
 required_map = "tramstation.dmm"
 coordinates = [68, 165, 2]
+trait_name = "Station"
+
+[templates.tramstation_armory_guns]
+map_files = ["tramstation_armory_guns.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [71, 164, 2]
 trait_name = "Station"
 
 [templates.tramstation_kitchen_zoo]
