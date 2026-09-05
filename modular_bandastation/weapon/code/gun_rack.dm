@@ -117,3 +117,82 @@
 	set_density(FALSE)
 	var/obj/item/rack_parts/gunrack/newparts = new(loc)
 	transfer_fingerprints_to(newparts)
+
+/obj/effect/spawner/armory_spawn
+	icon_state = "loot"
+	icon = 'icons/effects/random_spawners.dmi'
+	layer = OBJ_LAYER
+	/// A list of possible guns to spawn.
+	var/list/guns
+	/// Do we fan out the items spawned for a natural effect?
+	var/fan_out_items = FALSE
+	/// How many mags per gun do we spawn, if it takes magazines.
+	var/mags_to_spawn = 3
+	/// Do we want to angle it so that it is horizontal?
+	var/vertical_guns = TRUE
+
+/obj/effect/spawner/armory_spawn/Initialize(mapload)
+	. = ..()
+
+	if(!guns)
+		return
+
+	var/obj/structure/rack/gunrack/rack_on_tile
+	for(var/obj/structure/rack/gunrack/found_rack in loc.contents)
+		rack_on_tile = found_rack
+		break
+
+	var/gun_count = 0
+	var/offset_percent = 20 / guns.len
+	for(var/gun in guns) // 11/20/21: Gun spawners now spawn 1 of each gun in it's list no matter what, so as to reduce the RNG of the armory stock.
+		var/obj/item/gun/spawned_gun = new gun(loc)
+
+		if(vertical_guns && rack_on_tile)
+			rack_on_tile.rotate_weapon(spawned_gun)
+			spawned_gun.pixel_x = -10 + (offset_percent * gun_count) + spawned_gun.base_pixel_x
+		else if (fan_out_items)
+			spawned_gun.pixel_x = spawned_gun.pixel_y = ((!(gun_count%2)*gun_count/2)*-1)+((gun_count%2)*(gun_count+1)/2*1)
+
+		gun_count++
+
+/obj/effect/spawner/armory_spawn/shotguns
+	guns = list(
+		/obj/item/gun/ballistic/shotgun/riot,
+		/obj/item/gun/ballistic/shotgun/riot,
+		/obj/item/gun/ballistic/shotgun/riot,
+	)
+
+/obj/effect/spawner/armory_spawn/eguns
+	guns = list(
+		/obj/item/gun/energy/e_gun,
+		/obj/item/gun/energy/e_gun,
+		/obj/item/gun/energy/e_gun,
+	)
+
+/obj/effect/spawner/armory_spawn/laser
+	guns = list(
+		/obj/item/gun/energy/laser,
+		/obj/item/gun/energy/laser,
+		/obj/item/gun/energy/laser,
+	)
+
+/obj/effect/spawner/armory_spawn/dragnets
+	guns = list(
+		/obj/item/gun/energy/e_gun/dragnet,
+		/obj/item/gun/energy/e_gun/dragnet,
+		/obj/item/gun/energy/e_gun/dragnet,
+	)
+
+/obj/effect/spawner/armory_spawn/disablers
+	guns = list(
+		/obj/item/gun/energy/disabler,
+		/obj/item/gun/energy/disabler,
+		/obj/item/gun/energy/disabler,
+	)
+
+/obj/effect/spawner/armory_spawn/misc
+	guns = list(
+		/obj/item/gun/ballistic/automatic/battle_rifle,
+		/obj/item/gun/energy/ionrifle,
+		/obj/item/gun/energy/temperature/security,
+	)

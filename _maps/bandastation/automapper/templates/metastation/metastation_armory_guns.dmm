@@ -1,0 +1,13 @@
+"a" = (/obj/effect/turf_decal/tile/red/half/contrasted{dir = 8},/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/laser,/turf/open/floor/iron/dark,/area/station/security/armory)
+"f" = (/obj/machinery/firealarm/directional/east,/obj/effect/turf_decal/tile/red/half/contrasted{dir = 8},/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/eguns,/turf/open/floor/iron/dark,/area/station/security/armory)
+"s" = (/obj/item/clothing/suit/hooded/ablative,/obj/effect/turf_decal/tile/red/half/contrasted{dir = 8},/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/misc,/turf/open/floor/iron/dark,/area/station/security/armory)
+"y" = (/obj/machinery/light_switch/directional/east,/obj/effect/turf_decal/tile/red/half/contrasted{dir = 8},/obj/structure/rack,/obj/item/sledgehammer/tactical{pixel_y = 3},/obj/item/sledgehammer/tactical{pixel_y = -3},/turf/open/floor/iron/dark,/area/station/security/armory)
+"W" = (/obj/effect/turf_decal/tile/red/half/contrasted{dir = 8},/obj/machinery/light/directional/east,/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/shotguns,/turf/open/floor/iron/dark,/area/station/security/armory)
+
+(1,1,1) = {"
+a
+s
+f
+W
+y
+"}

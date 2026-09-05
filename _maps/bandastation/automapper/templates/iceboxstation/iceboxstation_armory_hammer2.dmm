@@ -1,0 +1,6 @@
+"a" = (/obj/effect/turf_decal/tile/red/half/contrasted,/obj/effect/spawner/armory_spawn/disablers,/obj/structure/rack/gunrack,/turf/open/floor/iron/dark/textured,/area/station/security/armory)
+"k" = (/obj/machinery/camera/directional/north{c_tag = "Armory - Internal - Lower"},/obj/structure/rack,/obj/item/storage/toolbox/drone,/obj/effect/turf_decal/tile/red/half/contrasted,/obj/item/sledgehammer/tactical{pixel_y = 3},/obj/item/storage/toolbox/emergency,/obj/machinery/light/small/directional/north,/obj/item/sledgehammer/tactical{pixel_y = -3},/turf/open/floor/iron/dark/textured,/area/station/security/armory)
+
+(1,1,1) = {"
+ak
+"}
