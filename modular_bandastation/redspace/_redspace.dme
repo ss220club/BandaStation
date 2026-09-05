@@ -29,6 +29,7 @@
 #include "code/unit_tests/redspace_grid.dm"
 #include "code/unit_tests/redspace_context.dm"
 #include "code/unit_tests/redspace_core.dm"
+#include "code/unit_tests/redspace_event_lifecycle.dm"
 #include "code/unit_tests/redspace_elements.dm"
 #include "code/unit_tests/redspace_counter.dm"
 #include "code/unit_tests/redspace_sensor.dm"

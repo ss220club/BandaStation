@@ -7,13 +7,7 @@
 		if(!event)
 			active_events.Cut(1, 2)
 			continue
-		var/zone_key = event.budget_zone_key
-		active_events -= event
-		release_event_budget(event)
-		notify_event_finished(event, event.event_target, reason || "событие отменено")
-		qdel(event)
-		cleanup_event_budget(zone_key)
-		prune_event_cell(zone_key)
+		finish_registered_event(event, event.event_target, reason || "событие отменено")
 
 /// Cancels events that were selected automatically when automatic activity is disabled.
 /datum/controller/subsystem/redspace/proc/cancel_automatic_events(reason)
@@ -123,16 +117,19 @@
 	// Event start may create an obstacle or replace a turf, so do not reuse
 	// candidate geometry for another queue in the same tick.
 	event_candidate_cache.Cut()
+	// A start callback may synchronously cancel or delete the event.
+	if(QDELETED(event) || !(event in active_events))
+		return FALSE
 	if(!succeeded)
-		active_events -= event
-		budget.release(event, TRUE)
-		qdel(event)
+		finish_registered_event(event, target, "событие не удалось запустить", refund = TRUE, notify_finished = event.event_started_notified)
 		return FALSE
 
 	// Spawn events keep the instance alive, so emit their start signal here just
 	// like short-lived events do from their start() implementation.
 	if(!event.event_started_notified)
 		notify_event_started(event, target, "событие началось")
+	if(QDELETED(event) || !(event in active_events))
+		return FALSE
 	var/cooldown_key = get_event_cooldown_key(event, target)
 	if(event.cooldown && cooldown_key)
 		event_cooldowns[cooldown_key] = world.time + event.cooldown
@@ -157,15 +154,20 @@
 	event_budgets -= zone_key
 	qdel(budget)
 
-/// Finishes a registered event that stayed alive after its start phase.
-/datum/controller/subsystem/redspace/proc/finish_registered_event(datum/redspace_event/event, turf/target, reason = null)
+/// Finalizes an active event exactly once, including cancellation and external qdel().
+/// Failed starts refund their reservation and stay silent unless start was already notified.
+/// Remove the event before callbacks so reentrant finishes and Destroy() cannot release it twice.
+/datum/controller/subsystem/redspace/proc/finish_registered_event(datum/redspace_event/event, turf/target, reason = null, refund = FALSE, notify_finished = TRUE)
 	if(!event || !(event in active_events))
 		return FALSE
 	active_events -= event
-	release_event_budget(event)
 	var/zone_key = event.budget_zone_key
-	notify_event_finished(event, target, reason || "событие завершено")
-	qdel(event)
+	release_event_budget(event, refund)
+	if(notify_finished)
+		notify_event_finished(event, target, reason || "событие завершено")
+	// Destroy() also enters here; qdel() must never recurse on a deleting datum.
+	if(!QDELETED(event))
+		qdel(event)
 	cleanup_event_budget(zone_key)
 	prune_event_cell(zone_key)
 	wake()

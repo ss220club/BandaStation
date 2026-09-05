@@ -64,14 +64,7 @@
 
 /datum/redspace_event/Destroy()
 	if(SSredspace)
-		if(src in SSredspace.active_events)
-			var/zone_key = budget_zone_key
-			SSredspace.active_events -= src
-			SSredspace.release_event_budget(src)
-			SSredspace.notify_event_finished(src, event_target, "событие уничтожено")
-			SSredspace.cleanup_event_budget(zone_key)
-			SSredspace.prune_event_cell(zone_key)
-			SSredspace.wake()
+		SSredspace.finish_registered_event(src, event_target, "событие уничтожено")
 	return ..()
 
 /// Abstract event family for content that leaves a turf, object or mob behind.
@@ -599,9 +592,9 @@
 	var/turf/impact_turf = get_turf(impact_target)
 	if(!impact_target || QDELETED(impact_target) || impact_target.stat == DEAD || !impact_turf || QDELETED(impact_turf) || !SSredspace || !SSredspace.is_supported_z(impact_turf.z))
 		if(SSredspace)
-			SSredspace.active_events -= src
-			SSredspace.notify_event_finished(src, target_turf, "отладочный удар отменён: цель недоступна")
-		qdel(src)
+			SSredspace.finish_registered_event(src, target_turf, "отладочный удар отменён: цель недоступна")
+		else
+			qdel(src)
 		return
 
 	var/turf/lightning_source = get_step(impact_turf, NORTH)
@@ -620,9 +613,7 @@
 	to_chat(impact_target, span_userdanger("Вас поражает разряд молнии редспейса!"), confidential = TRUE)
 	log_admin("Redspace lightning strike hit [key_name(impact_target)] at ([impact_turf.x], [impact_turf.y], [impact_turf.z]); damage [impact_damage].")
 	message_admins("Удар молнии редспейса по [key_name_admin(impact_target)] ([ADMIN_COORDJMP(impact_turf)]).")
-	SSredspace.active_events -= src
-	SSredspace.notify_event_finished(src, impact_turf, "отладочный удар завершён")
-	qdel(src)
+	SSredspace.finish_registered_event(src, impact_turf, "отладочный удар завершён")
 
 /datum/redspace_event/lightning/Destroy()
 	if(telegraph_timer_id)
