@@ -3,7 +3,6 @@
 	desc = "Уникальный дизайн револьвера имеющий два ствола под винтовочный калибр .310 для элитных подразделений СССП."
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev310
 	recoil = 1
-	weapon_weight = WEAPON_LIGHT
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	icon_state = "sakhnomanni"
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire.ogg'
@@ -28,7 +27,6 @@
 	name = "Dvoystvol-60 revolver"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev60
 	recoil = 5
-	weapon_weight = WEAPON_LIGHT
 	icon_state = "sakhnomanni_big"
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire_2.ogg'
 	fire_sound_volume = 100
@@ -42,8 +40,7 @@
 	name = "Dvoystvol-8 revolver"
 	desc = "Уникальный дизайн револьвера имеющий два ствола под калибр 7.62x38мм для элитных подразделений СССП."
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/dvoystvol/rev762
-	recoil = 1
-	weapon_weight = WEAPON_LIGHT
+	recoil = 0.5
 	icon_state = "sakhnomanni_small"
 
 /obj/item/gun/ballistic/revolver/dvoystvol/low_caliber/examine_more(mob/user)
