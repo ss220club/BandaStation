@@ -37,19 +37,15 @@
 	AddComponent(/datum/component/automatic_fire, fire_delay)
 	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
-/obj/item/gun/ballistic/automatic/sindano/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
-
-/obj/item/gun/ballistic/automatic/sindano/examine_more(mob/user)
-	. = ..()
-	. += "Первоначально пистолет-пулемет \"Синдано\" производился по военному заказу для армии ТСФ. \
+/obj/item/gun/ballistic/automatic/sindano/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "Первоначально пистолет-пулемет \"Синдано\" производился по военному заказу для армии ТСФ. \
 		Эти ПП можно было увидеть в руках у всех: медиков, корабельных техников, логистов, \
 		а пилоты часто имели по несколько пушек, чтобы просто похвастаться. Из-за потребности ТСФ \
 		продлить срок службы своих офицеров по логистике и квартирмейстеров, это оружие \
 		использует тот же стандартный пистолетный патрон, что и большинство другого армейского оружия \
 		малого калибра производимого для ТСФ. Это позволяет использовать взаимозаменяемые магазины для пистолетов \
-		и пистолетов-пулеметов, круто!"
+		и пистолетов-пулеметов, круто!<br>")
 
 /obj/item/gun/ballistic/automatic/sindano/no_mag
 	spawnwithmagazine = FALSE

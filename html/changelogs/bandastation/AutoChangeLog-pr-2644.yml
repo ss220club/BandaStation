@@ -1,0 +1,4 @@
+author: "botPurple"
+delete-after: True
+changes:
+  - bugfix: "Исправлено отображение хвостов у высоких и низких скреллов."

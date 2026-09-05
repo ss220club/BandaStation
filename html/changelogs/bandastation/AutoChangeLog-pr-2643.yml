@@ -1,0 +1,4 @@
+author: "Voyaker-coder"
+delete-after: True
+changes:
+  - bugfix: "Исправлена ошибка некорректного срабатывания кнопки приобретения скидки на исследования в приложении \"NT Frontier\""
