@@ -58,6 +58,7 @@
 		incoming_weapon.transform = new_matrix
 		RegisterSignal(incoming_weapon, COMSIG_ITEM_EQUIPPED, PROC_REF(item_picked_up))
 	else
+		UnregisterSignal(incoming_weapon, COMSIG_ITEM_EQUIPPED)
 		incoming_weapon.transform = new_matrix
 		incoming_weapon.pixel_x = incoming_weapon.base_pixel_x
 		incoming_weapon.pixel_y = incoming_weapon.base_pixel_y
@@ -137,10 +138,7 @@
 	if(!guns)
 		return
 
-	var/obj/structure/rack/gunrack/rack_on_tile
-	for(var/obj/structure/rack/gunrack/found_rack in loc.contents)
-		rack_on_tile = found_rack
-		break
+	var/obj/structure/rack/gunrack/rack_on_tile = locate(/obj/structure/rack/gunrack) in loc.contents
 
 	var/gun_count = 0
 	var/offset_percent = 20 / guns.len

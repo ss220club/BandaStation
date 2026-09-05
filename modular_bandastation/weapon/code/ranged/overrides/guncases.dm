@@ -38,12 +38,14 @@
 	return atom_storage.open_storage_on_signal(storage_type, user) ? CLICK_ACTION_SUCCESS : NONE
 
 /obj/item/storage/toolbox/guncase/attack_self(mob/user)
-	. = ..()
 	if(opened == FANCY_CONTAINER_CLOSED)
 		opened = FANCY_CONTAINER_OPEN
+		update_appearance()
+		return ..()
 	else if(opened == FANCY_CONTAINER_OPEN)
 		opened = FANCY_CONTAINER_CLOSED
-	update_appearance()
+		update_appearance()
+		atom_storage.close_all()
 
 // Small case for pistols and whatnot
 /obj/item/storage/toolbox/guncase/pistol
