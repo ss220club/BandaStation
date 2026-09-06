@@ -43,7 +43,7 @@
 			attached_target_ref = null
 			attached_target_name = null
 			return
-		var/obj/item/modular_computer/pda/target_pda = locate() in attached_target.get_all_contents()
+		var/obj/item/modular_computer/pda/target_pda = locate(/obj/item/modular_computer/pda) in attached_target.get_all_contents()
 		if(!target_pda)
 			attached_target_ref = null
 			return
@@ -111,7 +111,7 @@
 		return FALSE
 	if(get_dist(get_turf(src), get_turf(target)) > siphon_range)
 		return FALSE
-	var/obj/item/modular_computer/pda/target_pda = locate() in target.get_all_contents()
+	var/obj/item/modular_computer/pda/target_pda = locate(/obj/item/modular_computer/pda) in target.get_all_contents()
 	if(!target_pda)
 		return FALSE
 	attached_target_ref = WEAKREF(target)
