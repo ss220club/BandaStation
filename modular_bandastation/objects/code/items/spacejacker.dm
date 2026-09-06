@@ -48,7 +48,7 @@
 			attached_target_ref = null
 			return
 		siphon_center = get_turf(target_pda)
-	var/list/targets = viewers(siphon_range, siphon_center)
+	var/list/targets = range(siphon_range, siphon_center)
 	for(var/mob/living/carbon/human/target in targets)
 		if(target == holder || target.stat == DEAD)
 			continue
@@ -66,7 +66,7 @@
 /obj/item/spacejacker/proc/get_nearby_players()
 	var/mob/living/carbon/human/holder = recursive_loc_check(src, /mob/living/carbon/human)
 	var/list/nearby_players = list()
-	for(var/mob/living/carbon/human/target in viewers(siphon_range, get_turf(src)))
+	for(var/mob/living/carbon/human/target in range(siphon_range, get_turf(src)))
 		if(target == holder || target.stat == DEAD || !target.client)
 			continue
 		nearby_players += list(list("name" = target.name, "ref" = REF(target)))
@@ -118,7 +118,7 @@
 	attached_target_name = target.name
 	playsound(target, 'sound/effects/youarehacked.ogg', 100, FALSE)
 	COOLDOWN_START(src, attach_cooldown, 10 MINUTES)
-	var/datum/computer_file/program/messenger/messenger_app = locate() in target_pda.stored_files
+	var/datum/computer_file/program/messenger/messenger_app = locate(/datum/computer_file/program/messenger) in target_pda.stored_files
 	if(messenger_app)
 		target_pda.alert_call(messenger_app, "Обнаружен несанкционированный доступ к банковскому счёту.")
 		messenger_app.alert_pending = TRUE

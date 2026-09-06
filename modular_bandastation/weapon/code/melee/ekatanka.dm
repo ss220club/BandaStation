@@ -21,16 +21,12 @@
 		balloon_alert(user, "перезаряжается")
 		return TRUE
 
-/obj/item/melee/energy/ekatanka/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/melee/energy/ekatanka/attack(mob/living/M, mob/living/user)
 	. = ..()
-	if(!proximity_flag || !HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) || !COOLDOWN_FINISHED(src, next_attack))
+	if(!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) || !COOLDOWN_FINISHED(src, next_attack))
 		return
 	
-	if(!isliving(target))
-		return
-
-	var/mob/living/living_target = target
-	living_target.Knockdown(1 SECONDS)
-	living_target.Stun(1.5 SECONDS)
+	M.Knockdown(1 SECONDS)
+	M.Stun(1.5 SECONDS)
 	COOLDOWN_START(src, next_attack, attack_cooldown)
 
