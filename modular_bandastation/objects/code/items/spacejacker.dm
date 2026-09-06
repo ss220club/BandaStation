@@ -31,11 +31,6 @@ var/static/list/hacking_alerts = list(
 	"Перевод за акции редких рыб и картофельных полей Космо-Литвы успешны. Примерная сумма перевода: 1,000,000 [MONEY_NAME]. Спасибо за внимание.",
 	"Вы были успешно взломаны. Все ваши деньги были отправлены нам на вкусные пончики. Спасибо за внимание."
 )
-var/static/list/hacking_alerts = list(
-	"Перевод с банковского счёта одобрен. Спасибо за внимание.",
-	"Ваш перевод на благотворительный счёт Wet-Skrell одобрен.",
-	"Транзакция на приобретение пончиков Donk Co. одобрена."
-)
 
 /obj/item/spacejacker/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -72,18 +67,13 @@ var/static/list/hacking_alerts = list(
 		var/datum/bank_account/account = id_card?.registered_account
 		if(!account || !account.account_balance)
 			continue
-		var/amount = max(1, round(account.account_balance * siphon_percentage))
-		amount = min(amount, account.account_balance)
-		if(!account.adjust_money(-amount, "Система: несанкционированное списание"))
-			continue
-		credits_stored += amount
 		var/already_siphoned = siphoned_account_amounts[account] || 0
 		var/remaining_limit = 1337 - already_siphoned
 		if(remaining_limit <= 0)
 			continue
 		var/amount = max(1, round(account.account_balance * siphon_percentage))
 		amount = min(amount, account.account_balance, remaining_limit)
-		if(!account.adjust_money(-amount))
+		if(!account.adjust_money(-amount, "Система: несанкционированное списание"))
 			continue
 		siphoned_account_amounts[account] = already_siphoned + amount
 		credits_stored += amount
