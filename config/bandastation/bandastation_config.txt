@@ -70,7 +70,7 @@ BRAIN_DECAY_RATE 2
 #round_end_webhook_avatar_url
 #round_end_webhook_ping_role_id
 
-## Spacejacker (spacejacker)
+## Spacejacker
 ## Player count threshold for scaling TC price and purchase limit
 SPACEJACKER_PLAYER_THRESHOLD 31
 ## TC purchase limit below threshold
