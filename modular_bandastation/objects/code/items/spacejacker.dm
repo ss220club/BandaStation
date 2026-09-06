@@ -6,6 +6,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	interaction_flags_click = NEED_DEXTERITY|FORBID_TELEKINESIS_REACH
 	var/credits_stored = 0
+	var/list/siphoned_account_amounts = list()
 	var/active = FALSE
 	var/siphon_percentage = 0.15
 	var/siphon_range = 5
