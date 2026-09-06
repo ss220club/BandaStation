@@ -41,7 +41,7 @@ export function CreditSiphon() {
       <Window.Content style={{ fontFamily: 'Verdana, sans-serif' }}>
         <Section title="Сохранённые кредиты">
           <Box textAlign="center" fontSize={2} mb={2}>
-            {credits_stored} cr <Icon color="gold" name="coins" />
+            {credits_stored} кр. <Icon color=\"gold\" name=\"coins\" />
           </Box>
           <Button
             fluid
