@@ -1,11 +1,60 @@
-"a" = (/obj/effect/turf_decal/tile/red/half/contrasted{dir = 4},/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/laser,/turf/open/floor/iron/dark/textured,/area/station/security/armory)
-"j" = (/obj/structure/window/reinforced/spawner/directional/north,/obj/effect/turf_decal/tile/red/anticorner/contrasted{dir = 4},/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/shotguns,/turf/open/floor/iron/dark/textured,/area/station/security/armory)
-"w" = (/obj/machinery/door/window/brigdoor/left/directional/north{name = "Secure Weapons Storage"; req_access = list("armory")},/turf/open/floor/iron/dark/textured,/area/station/security/armory)
-"x" = (/obj/item/clothing/suit/hooded/ablative,/obj/effect/turf_decal/tile/red/half/contrasted{dir = 8},/obj/structure/rack/gunrack,/obj/effect/spawner/armory_spawn/misc,/turf/open/floor/iron/dark/textured,/area/station/security/armory)
-"y" = (/obj/structure/rack,/obj/structure/window/reinforced/spawner/directional/north,/obj/effect/turf_decal/tile/red/half/contrasted{dir = 8},/obj/effect/spawner/random/armory/rubbershot,/turf/open/floor/iron/dark/textured,/area/station/security/armory)
-"H" = (/obj/machinery/light/small/directional/south,/turf/open/floor/iron/dark/textured,/area/station/security/armory)
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/effect/turf_decal/tile/red/anticorner/contrasted{
+	dir = 4
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/shotguns,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
+"j" = (
+/obj/machinery/door/window/brigdoor/left/directional/north{
+	name = "Secure Weapons Storage";
+	req_access = list("armory")
+	},
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
+"r" = (
+/obj/structure/rack,
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 8
+	},
+/obj/effect/spawner/random/armory/rubbershot,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
+"v" = (
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 4
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/laser,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
+"P" = (
+/obj/item/clothing/suit/hooded/ablative,
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 8
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/misc,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
+"Z" = (
+/obj/machinery/light/small/directional/south,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
 
 (1,1,1) = {"
-jwy
-aHx
+a
+v
+"}
+(2,1,1) = {"
+j
+Z
+"}
+(3,1,1) = {"
+r
+P
 "}
