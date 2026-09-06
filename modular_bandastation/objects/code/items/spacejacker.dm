@@ -21,6 +21,11 @@
 	COOLDOWN_DECLARE(siphon_cooldown)
 	COOLDOWN_DECLARE(attach_cooldown)
 
+var/static/list/hacking_alerts = list(
+	"Перевод с банковского счёта одобрен. Спасибо за внимание.",
+	"Ваш перевод на благотворительный счёт Wet-Skrell одобрен.",
+	"Транзакция на приобретение пончиков Donk Co. одобрена."
+)
 
 /obj/item/spacejacker/Destroy()
 	STOP_PROCESSING(SSobj, src)
