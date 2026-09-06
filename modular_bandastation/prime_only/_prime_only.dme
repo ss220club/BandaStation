@@ -13,3 +13,26 @@
 #include "../~components/code/pausable_bodycam.dm"
 #include "../objects/code/items/clothing/accessories/bodycam.dm"
 #include "code/bodycam_vending.dm"
+#include "code/weapons.dm"
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+#include "_prime_only.dm"
+#include "code\apex_outfit.dm"
+#include "code\bodycam_vending.dm"
+#include "code\fishing_portal_generator.dm"
+#include "code\weapons.dm"
+#include "code\khaaroot_survivor\ghost_disease.dm"
+#include "code\khaaroot_survivor\khaaroot_abilities.dm"
+#include "code\khaaroot_survivor\khaaroot_hivemind.dm"
+#include "code\khaaroot_survivor\status_effect.dm"
+#include "code\khaaroot_survivor\viral_surge.dm"
+#include "E:\Bandastation\modular_bandastation\_defines220\code\defines\bodycam.dm"
+#include "E:\Bandastation\modular_bandastation\~components\code\bodycam_camera.dm"
+#include "E:\Bandastation\modular_bandastation\~components\code\pausable_bodycam.dm"
+// END_INCLUDE
