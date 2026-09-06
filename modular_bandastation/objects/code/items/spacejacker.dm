@@ -26,6 +26,11 @@ var/static/list/hacking_alerts = list(
 	"Ваш перевод на благотворительный счёт Wet-Skrell одобрен.",
 	"Транзакция на приобретение пончиков Donk Co. одобрена."
 )
+var/static/list/hacking_alerts = list(
+	"Перевод с банковского счёта одобрен. Спасибо за внимание.",
+	"Ваш перевод на благотворительный счёт Wet-Skrell одобрен.",
+	"Транзакция на приобретение пончиков Donk Co. одобрена."
+)
 
 /obj/item/spacejacker/Destroy()
 	STOP_PROCESSING(SSobj, src)
