@@ -77,17 +77,17 @@ var/static/list/hacking_alerts = list(
 		if(!account.adjust_money(-amount, "Система: несанкционированное списание"))
 			continue
 		credits_stored += amount
-       var/already_siphoned = siphoned_account_amounts[account] || 0
-       var/remaining_limit = 1337 - already_siphoned
-       if(remaining_limit <= 0)
-	     continue
-       var/amount = max(1, round(account.account_balance * siphon_percentage))
-       amount = min(amount, account.account_balance, remaining_limit)
-       if(!account.adjust_money(-amount))
-	     continue
-       siphoned_account_amounts[account] = already_siphoned + amount
-       credits_stored += amount
-       account.bank_card_talk("С вашего счёта списано [amount][MONEY_NAME].")
+		var/already_siphoned = siphoned_account_amounts[account] || 0
+		var/remaining_limit = 1337 - already_siphoned
+		if(remaining_limit <= 0)
+			continue
+		var/amount = max(1, round(account.account_balance * siphon_percentage))
+		amount = min(amount, account.account_balance, remaining_limit)
+		if(!account.adjust_money(-amount))
+			continue
+		siphoned_account_amounts[account] = already_siphoned + amount
+		credits_stored += amount
+		account.bank_card_talk("С вашего счёта списано [amount][MONEY_NAME].")
 
 /obj/item/spacejacker/proc/get_nearby_players()
 	var/mob/living/carbon/human/holder = recursive_loc_check(src, /mob/living/carbon/human)
