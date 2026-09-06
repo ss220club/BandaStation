@@ -126,7 +126,7 @@ var/static/list/hacking_alerts = list(
 	COOLDOWN_START(src, attach_cooldown, 10 MINUTES)
 	var/datum/computer_file/program/messenger/messenger_app = locate(/datum/computer_file/program/messenger) in target_pda.stored_files
 	if(messenger_app)
-		target_pda.alert_call(messenger_app, "Обнаружен несанкционированный доступ к банковскому счёту.")
+		target_pda.alert_call(messenger_app, pick(hacking_alerts))
 		messenger_app.alert_pending = TRUE
 		target_pda.update_appearance(UPDATE_ICON)
 	return TRUE
