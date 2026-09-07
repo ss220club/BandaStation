@@ -272,7 +272,7 @@
 		/obj/item/clothing/head/beret/ert/specops,
 		/obj/item/storage/medkit/tactical = 2,
 		/obj/item/defibrillator/compact/combat/loaded/nanotrasen,
-		/obj/item/grenade/smokebomb =1,
+		/obj/item/grenade/smokebomb = 1,
 		/obj/item/gun/medbeam,
 		/obj/item/ammo_box/magazine/c762x39mm/ap,
 		/obj/item/ammo_box/magazine/c762x39mm/incendiary,
