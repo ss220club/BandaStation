@@ -117,7 +117,7 @@
 
 /obj/item/clothing/head/beret/ert/specops
 	name = "Special Ops Operative beret"
-	desc = "Берет оперативника НТКР."
+	desc = "Берет оперативника специальных операций."
 	icon_state = "/obj/item/clothing/head/beret/ert/ntci"
 	armor_type = /datum/armor/beret_centcom_formal
 
