@@ -255,6 +255,17 @@ GLOBAL_LIST_INIT(freqtospan, list(
 
 	return "[processed_say_mod], \"[processed_input]\""
 
+/atom/movable/proc/get_voice_description()
+	switch(gender)
+		if(MALE)
+			return VOICE_DESCRIPTION_MASCULINE
+		if(FEMALE)
+			return VOICE_DESCRIPTION_FEMININE
+		if(PLURAL)
+			return VOICE_DESCRIPTION_PLURAL
+		else
+			return VOICE_DESCRIPTION_NEUTER
+
 /// Transforms the message emphasis mods from [/atom/proc/apply_message_emphasis] into the appropriate HTML tags. Includes escaping.
 #define ENCODE_HTML_EMPHASIS(input, char, html, varname) \
 	var/static/regex/##varname = regex("(?<!\\\\)[char](.+?)(?<!\\\\)[char]", "g");\
@@ -377,6 +388,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/virtualspeaker)
 	source = M
 	if(istype(M))
 		name = radio?.anonymize ? "Unknown" : M.get_voice(add_id_name = TRUE)
+		gender = M.gender
 		verb_say = M.get_default_say_verb()
 		verb_ask = M.verb_ask
 		verb_exclaim = M.verb_exclaim
@@ -388,6 +400,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/virtualspeaker)
 		// can know their job even if they don't carry an ID.
 		var/datum/record/crew/found_record = find_record(name)
 		if(found_record)
+			gender = LOWER_TEXT(found_record.gender)
 			job = found_record.rank
 		else
 			job = "Unknown"
