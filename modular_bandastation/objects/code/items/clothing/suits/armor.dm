@@ -248,7 +248,7 @@
 
 /obj/item/clothing/suit/armor/vest/specops/parka
 	name = "silver-coated armored jacket"
-	desc = "Cтильный и теплый пуховик с серебрянными вставками надетый поверх модульного бронежилета. Скрывает наличие бронежилета от лишних глаз и обеспечивает отличную терморегуляцию."
+	desc = "Стильный и теплый пуховик с серебряными вставками, надетый поверх модульного бронежилета. Скрывает наличие бронежилета от лишних глаз и обеспечивает отличную терморегуляцию."
 	icon_state = "specops_parka"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'

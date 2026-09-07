@@ -244,8 +244,7 @@
 		/obj/item/grenade/smokebomb = 2,
 		/obj/item/grenade/c4,
 		/obj/item/grenade/c4/x4,
-		/obj/item/ammo_box/magazine/c762x39mm/ap,
-		/obj/item/ammo_box/magazine/c762x39mm/ap,
+		/obj/item/ammo_box/magazine/c762x39mm/ap = 2,
 		/obj/item/ammo_box/magazine/c762x39mm/incendiary,
 		/obj/item/ammo_box/magazine/c762x39mm/emp,
 	)
@@ -315,7 +314,7 @@
 	name = "NT SpecOps - Unknown Operative (Machinegunner)"
 	id_trim = /datum/id_trim/centcom/specops/unmarked
 	uniform = /obj/item/clothing/under/tshirt_black
-	suit = /obj/item/clothing/suit/hardsuit/specops
+	suit = /obj/item/clothing/suit/armor/swat/specops
 	head = /obj/item/clothing/head/helmet/toggleable/nvg
 
 /datum/outfit/centcom/specops/equipped/breacher

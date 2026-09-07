@@ -32,7 +32,7 @@
 
 /obj/item/clothing/mask/gas/sechailer/specops
 	name = "tactical breathscarf system"
-	desc = "Стильный и тактический шарф, в который встроена маской СБ, создан для оперативной работы в экстремальных ситуациях."
+	desc = "Стильный и тактический шарф со встроенной маской СБ, создан для оперативной работы в экстремальных ситуациях."
 	icon = 'icons/map_icons/clothing/mask.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/masks.dmi'
 	icon_state = "/obj/item/clothing/mask/breath/breathscarf"

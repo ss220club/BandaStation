@@ -67,7 +67,7 @@
 
 /obj/item/clothing/head/helmet/toggleable/nvg
 	name = "tactical NVG helmet"
-	desc = "Облегчённый военный шлем с проверенным временем дизайном. Использование современных технологий обеспечивает защиту от осколков и винтовочных калибров. Этот имеет прикрепленный прибор ночного виденья."
+	desc = "Облегчённый военный шлем с проверенным временем дизайном. Использование современных технологий обеспечивает защиту от осколков и винтовочных калибров. Этот имеет прикрепленный прибор ночного видения."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "specops_helmet_nvg"
