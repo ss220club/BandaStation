@@ -1,4 +1,4 @@
-/obj/item/gun/energy/pulse/pistol
+/obj/item/gun/energy/pulse/pistol/eg40
 	name = "pulse pistol"
 	desc = "A pulse rifle in an easily concealed handgun package with low capacity."
 	w_class = WEIGHT_CLASS_SMALL
