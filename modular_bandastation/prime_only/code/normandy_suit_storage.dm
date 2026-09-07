@@ -15,6 +15,18 @@
 #define NORMANDY_STORAGE_STATE_CLOSING "Down"
 #define NORMANDY_STORAGE_STATE_OPENING "Up"
 #define NORMANDY_STORAGE_STATE_ACTIVE "closed_active"
+#define NORMANDY_STEP_SOUND "normandy_step"
+
+/datum/sound_effect/assoc/normandy_step
+	key = NORMANDY_STEP_SOUND
+	file_paths = list(
+		'modular_bandastation/prime_only/sound/obj/armor/normandy/step1.ogg' = 1,
+		'modular_bandastation/prime_only/sound/obj/armor/normandy/step2.ogg' = 1,
+		'modular_bandastation/prime_only/sound/obj/armor/normandy/step3.ogg' = 1,
+		'modular_bandastation/prime_only/sound/obj/armor/normandy/step4.ogg' = 1,
+		'modular_bandastation/prime_only/sound/obj/armor/normandy/step5.ogg' = 1,
+		'modular_bandastation/prime_only/sound/obj/armor/normandy/step6.ogg' = 1,
+	)
 
 // Clothing uses the 32x40 DMI as the worn icon, while these regular 32x32
 // icons are only used when the item is on the floor or in an inventory slot.
@@ -31,6 +43,8 @@
 	// The tall upper section of Wolf's Doom must render over its helmet.
 	alternate_worn_layer = HEAD_LAYER - 0.1
 	armor_type = /datum/armor/mod_theme_corporate
+	clothing_traits = list(TRAIT_NODISMEMBER, TRAIT_GRABRESISTANCE)
+	user_vars_to_edit = list("move_resist" = MOVE_FORCE_OVERPOWERING)
 
 /obj/item/clothing/suit/armor/normandy/Initialize(mapload)
 	. = ..()
@@ -62,8 +76,12 @@
 	worn_x_dimension = 32
 	worn_y_dimension = 40
 	worn_y_offset = NORMANDY_WORN_Y_OFFSET
-	clothing_traits = list(TRAIT_NO_SLIP_ALL)
+	clothing_traits = list(TRAIT_NO_SLIP_ALL, TRAIT_SILENT_FOOTSTEPS)
 	armor_type = /datum/armor/mod_theme_corporate
+
+/obj/item/clothing/shoes/combat/normandy/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/item_equipped_movement_rustle, NORMANDY_STEP_SOUND, 2, 33, 0)
 
 /obj/item/clothing/head/helmet/normandy
 	name = "Wolf's Doom helmet"
@@ -75,8 +93,19 @@
 	worn_x_dimension = 32
 	worn_y_dimension = 40
 	worn_y_offset = NORMANDY_WORN_Y_OFFSET
-	armor_type = /datum/armor/mod_theme_corporate
+	armor_type = /datum/armor/normandy_helmet
 	var/tts_effect_active = FALSE
+
+/datum/armor/normandy_helmet
+	melee = 80
+	bullet = 80
+	laser = 70
+	energy = 65
+	bomb = 80
+	bio = 100
+	fire = 100
+	acid = 100
+	wound = 25
 
 /obj/item/clothing/head/helmet/normandy/equipped(mob/living/user, slot)
 	. = ..()
