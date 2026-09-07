@@ -117,7 +117,7 @@
 /// Kills the rat and changes its icon state to be splatted (bloody).
 /mob/living/basic/mouse/proc/splat()
 	icon_dead = "[body_icon_state]_[body_color]_splat"	// SS220 EDIT
-	adjust_health(maxHealth)
+	adjust_brute_loss(maxHealth)
 
 // On revival, re-add the mouse to the ratcap, or block it if we're at it
 /mob/living/basic/mouse/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
@@ -226,7 +226,7 @@
 			span_notice("[capitalize(declent_ru(NOMINATIVE))] надкусывает [cheese.declent_ru(NOMINATIVE)]."),
 			span_notice("Вы надкусываете [cheese.declent_ru(NOMINATIVE)][health < maxHealth ? ", восстанавливая своё здоровье!" : ""].")
 		)
-		adjust_health(-maxHealth)
+		adjust_brute_loss(-maxHealth)
 
 	// Or, if we're at full health, there's a 10% chance that normal cheese will spawn a new mouse
 	// ...if the rat cap allows us, that is

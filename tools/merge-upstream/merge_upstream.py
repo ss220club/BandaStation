@@ -59,7 +59,7 @@ def check_env():
         "MERGE_BRANCH"
     ]
     if TRANSLATE_CHANGES:
-        required_vars.append("G4F_API_KEY")
+        required_vars.append("LLM_API_KEY")
     missing_vars = [var for var in required_vars if not os.getenv(var)]
     if missing_vars:
         logging.error("Missing required environment variables: %s", ", ".join(missing_vars))
@@ -79,7 +79,7 @@ TARGET_BRANCH = os.getenv("TARGET_BRANCH")
 UPSTREAM_REPO = os.getenv("UPSTREAM_REPO")
 UPSTREAM_BRANCH = os.getenv("UPSTREAM_BRANCH")
 MERGE_BRANCH = os.getenv("MERGE_BRANCH")
-G4F_API_KEY = os.getenv("G4F_API_KEY")
+LLM_API_KEY = os.getenv("LLM_API_KEY")
 
 
 def run_command(command: str) -> str:
@@ -272,31 +272,49 @@ def translate_changelog(changelog: typing.Dict[int, list[Change]]):
         context = "\n".join(f.readlines()).strip()
 
     client = OpenAI(
-        api_key=G4F_API_KEY,
-        base_url="https://g4f.space/v1"
+        api_key=LLM_API_KEY,
+        base_url="https://openrouter.ai/api/v1"
     )
-    response: ChatCompletion = client.chat.completions.create(
-        messages=[
-            {"role": "system", "content": context},
-            {"role": "user", "content": text}
-        ],
-        model="auto",
-    )
-    translated_text: str | None = response.choices[0].message.content
+    translated_pairs: list[tuple[Change, str]] | None = None
+    max_attempts = 3
+    for attempt in range(max_attempts):
+        try:
+            response: ChatCompletion = client.chat.completions.create(
+                model="minimax/minimax-m3:free",
+                extra_headers={
+                    "HTTP-Referer": f"https://github.com/{TARGET_REPO}",
+                    "X-OpenRouter-Title": TARGET_REPO,
+                },
+                messages=[
+                    {"role": "system", "content": context},
+                    {"role": "user", "content": text}
+                ]
+            )
+            translated_text: str | None = response.choices[0].message.content
+            if not translated_text:
+                raise ValueError("empty translation response")
 
-    if not translated_text:
-        logging.warning("Changelog translation failed!")
-        logging.debug("Translation API response: %s", response)
+            translated_messages = sanitize_translation(translated_text).split("\n")
+            translated_pairs = list(zip(changes, translated_messages, strict=True))
+            break
+        except Exception as e:
+            if attempt == max_attempts - 1:
+                logging.error("Changelog translation failed after %d attempts: %s", max_attempts, e)
+                return
+            logging.warning(
+                "Changelog translation failed (%s); retrying (%d/%d)",
+                e, attempt + 1, max_attempts
+            )
+
+    if translated_pairs is None:
         return
 
-    translated_text = sanitize_translation(translated_text)
-
-    for change, translated_message in zip(changes, translated_text.split("\n")):
+    for change, translated_message in translated_pairs:
         change["translated_message"] = translated_message
         logging.debug("Translated: %s -> %s", change["message"], translated_message)
 
 
-def sanitize_translation(translated_text: str):
+def sanitize_translation(translated_text: str) -> str:
     """Sanitize changelog translation."""
     return re.sub(r"\\n+", "\n+", translated_text.strip())
 
