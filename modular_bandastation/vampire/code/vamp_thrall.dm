@@ -1,6 +1,7 @@
 /datum/antagonist/hypnotized/thrall
 	name = "Vampire Thrall"
 	antag_hud_name = "traitor"
+	var/datum/weak_reference/master
 //	master_hud_name = "vampire"
 // TODO: display master somehow
 
@@ -8,7 +9,7 @@
 	SSticker.mode.vampire_enthralled += owner
 
 /datum/antagonist/hypnotized/thrall/remove_owner_from_gamemode()
-	owner.current.create_log(CONVERSION_LOG, "Deconverted from thrall")
+	log_vampire("Deconverted from thrall", alist("thrall" = owner, "master" = "TODO")) // TODO: actually put master here
 	SSticker.mode.vampire_enthralled -= owner
 
 /datum/antagonist/hypnotized/thrall/apply_innate_effects(mob/living/mob_override)
