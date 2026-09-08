@@ -136,16 +136,11 @@
 		to_chat(owner.current, span_warning("[source]'s power interferes with your own!"))
 		adjust_nullification(30 + bonus_force, 15 + bonus_force)
 
-/datum/antagonist/vampire/exfiltrate(mob/living/carbon/human/extractor, obj/item/radio/radio)
+/datum/antagonist/vampire/proc/exfiltrate(mob/living/carbon/human/extractor, obj/item/radio/radio)
 	remove_all_powers()
 	deconvert_thralls()
 
-	if(isplasmaman(extractor))
-		extractor.equipOutfit(/datum/outfit/admin/ghostbar_antag/vampire/plasmaman)
-	else
-		extractor.equipOutfit(/datum/outfit/admin/ghostbar_antag/vampire)
-
-	radio.autosay("<b>--ZZZT!- Wonderfully done, [extractor.real_name]. Welcome to -^%&!-ZZT!-</b>", "Ancient Vampire", "Security")
+	to_chat(extractor, span_notice("--ZZZT!- Wonderfully done, [extractor.real_name]. Welcome to -^%&!-ZZT!-"))
 	SSblackbox.record_feedback("tally", "successful_extraction", 1, "Vampire")
 
 #define BLOOD_GAINED_MODIFIER 0.5
@@ -157,7 +152,7 @@
 	var/blood_volume_warning = 9999
 	var/mob/living/caster = owner.current
 
-	if(caster.is_mouth_covered() || HAS_TRAIT(caster, TRAIT_MUZZLED))
+	if(caster.is_mouth_covered())
 		to_chat(caster, span_warning("Your mask or muzzle prevents you from biting [target_human]!"))
 		draining = null
 		return
@@ -169,7 +164,7 @@
 		span_notice("You hear a soft puncture and a wet sucking noise."),
 	)
 
-	while(do_after(caster, suck_rate, target = target_human, hidden = TRUE))
+	while(do_after(caster, suck_rate, target_human, cog_icon = null))
 		caster.do_attack_animation(target_human, ATTACK_EFFECT_BITE)
 		if(unique_suck_id in drained_humans)
 			if(drained_humans[unique_suck_id] >= BLOOD_DRAIN_LIMIT)
@@ -178,7 +173,7 @@
 				caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + 5))
 				continue
 
-		if((target_human.stat != DEAD || target_human.has_status_effect(STATUS_EFFECT_RECENTLY_SUCCUMBED)) && !HAS_TRAIT(target_human.mind, TRAIT_XENOBIO_SPAWNED_HUMAN))
+		if(target_human.stat != DEAD)
 			if(target_human.ckey || target_human.get_ghost(FALSE))
 				blood = min(20, target_human.blood_volume)
 				adjust_blood(target_human, blood * BLOOD_GAINED_MODIFIER)
@@ -189,14 +184,14 @@
 		if(target_human.blood_volume)
 			if(target_human.blood_volume <= BLOOD_VOLUME_BAD && blood_volume_warning > BLOOD_VOLUME_BAD)
 				to_chat(caster, span_danger("Your victim's blood volume is dangerously low."))
-			else if(target_human.blood_volume <= BLOOD_VOLUME_STABLE && blood_volume_warning > BLOOD_VOLUME_STABLE)
+			else if(target_human.blood_volume <= BLOOD_VOLUME_OKAY && blood_volume_warning > BLOOD_VOLUME_OKAY)
 				to_chat(caster, span_warning("Your victim's blood is at an unsafe level."))
 			blood_volume_warning = target_human.blood_volume
 		else
 			to_chat(caster, span_warning("You have bled your victim dry!"))
 			break
 
-		if((!target_human.ckey && !target_human.get_ghost(FALSE)) || HAS_TRAIT(target_human.mind, TRAIT_XENOBIO_SPAWNED_HUMAN))
+		if(!target_human.ckey && !target_human.get_ghost(FALSE))
 			to_chat(caster, span_notice("<b>Feeding on [target_human] reduces your thirst, but you get no usable blood from them.</b>"))
 			caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + 5))
 		else
@@ -256,8 +251,8 @@
 	var/ay = owner.current.y
 
 	for(var/i in 1 to 20)
-		ax += SSsun.dx
-		ay += SSsun.dy
+		ax += round(sin(SSsun.azimuth), 0.01)
+		ay += round(cos(SSsun.azimuth), 0.01)
 
 		var/turf/turf_loc = locate(round(ax, 0.5), round(ay, 0.5), owner.current.z)
 		if(!turf_loc)
@@ -273,9 +268,9 @@
 		vamp_burn(10)
 	else
 		to_chat(owner.current, span_userdanger("Your body is turning to ash, get out of the starlight NOW!"))
-		owner.current.adjustCloneLoss(10)
+		owner.current.apply_status_effect(/datum/status_effect/genetic_damage, 100)
 		vamp_burn(85)
-		if(owner.current.getCloneLoss() >= 100)
+		if(owner.current.health <= HEALTH_THRESHOLD_DEAD)
 			owner.current.dust()
 
 /datum/antagonist/vampire/proc/handle_vampire()
@@ -302,15 +297,12 @@
 
 	if(!iscloaking || human_owner.on_fire)
 		human_owner.alpha = 255
-		REMOVE_TRAIT(human_owner, TRAIT_GOTTAGONOTSOFAST, VAMPIRE_TRAIT)
 		return
 
 	if(light_available <= 2)
 		human_owner.alpha = 40
-		ADD_TRAIT(human_owner, TRAIT_GOTTAGONOTSOFAST, VAMPIRE_TRAIT)
 		return
 
-	REMOVE_TRAIT(human_owner, TRAIT_GOTTAGONOTSOFAST, VAMPIRE_TRAIT)
 	human_owner.alpha = 200
 
 /datum/antagonist/vampire/proc/adjust_blood(mob/living/carbon/victim, blood_amount = 0)
@@ -379,7 +371,7 @@
 				to_chat(owner.current, span_warning("Your skin flakes away..."))
 			if(50 to 75)
 				to_chat(owner.current, span_warning("Your skin sizzles!"))
-		owner.current.adjustFireLoss(3)
+		owner.current.adjust_fire_loss(3)
 	else if(owner.current.health < 50)
 		if(!owner.current.on_fire)
 			to_chat(owner.current, span_danger("Your skin catches fire!"))
@@ -398,11 +390,8 @@
 
 /datum/antagonist/vampire/greet()
 	var/list/messages = list()
-	SEND_SOUND(owner.current, sound('sound/ambience/antag/vampalert.ogg'))
+	SEND_SOUND(owner.current, sound('sound/music/antag/ling_alert.ogg'))
 	messages.Add("[span_danger("You are a Vampire!")]<br>")
 	messages.Add("To bite someone, target the head and use harm intent with an empty hand. Drink blood to gain new powers. \
 		You are weak to holy things, starlight, and fire. Don't go into space and avoid the Chaplain, the chapel, and especially Holy Water.")
 	return messages
-
-/datum/antagonist/vampire/antag_event_resource_cost()
-	return list(ASSIGNMENT_SECURITY = 1 + bloodtotal / 500)

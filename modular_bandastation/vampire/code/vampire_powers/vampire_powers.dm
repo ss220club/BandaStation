@@ -48,6 +48,7 @@
 	add_vampire_ability()
 
 /datum/action/cooldown/spell/vampire_rejuvenate/cast(atom/cast_on)
+	. = ..()
 	var/mob/living/user = owner
 
 	user.SetStun(0)
@@ -89,9 +90,8 @@
 
 /datum/action/cooldown/spell/vampire_exfiltrate
 	name = "Conjure Blood Chalice"
-	desc = "Congeal blood into a chalice that will generate a portal away from the station."
+	desc = "Congeal blood into a chalice that opens a single unstable wormhole."
 	cooldown_time = 2 SECONDS
-	button_icon = 'icons/obj/items.dmi'
 	button_icon_state = "blood-chalice"
 	var/used = FALSE
 
@@ -101,12 +101,17 @@
 	add_vampire_ability()
 
 /datum/action/cooldown/spell/vampire_exfiltrate/cast(atom/cast_on)
+	. = ..()
 	var/mob/living/user = owner
 	if(used)
 		to_chat(user, span_warning("You have already attempted to create a blood chalice!"))
 		return
-	var/datum/antagonist/vampire/vamp = user.mind.has_antag_datum(/datum/antagonist/vampire)
-	vamp.prepare_exfiltration(user, /obj/item/wormhole_jaunter/extraction/vampire)
+	var/obj/item/wormhole_jaunter/blood_jaunter = new
+	blood_jaunter.name = "blood chalice"
+	blood_jaunter.desc = "A chalice of congealed blood that can open one unstable escape portal."
+	if(!user.put_in_hands(blood_jaunter))
+		blood_jaunter.forceMove(get_turf(user))
+	to_chat(user, span_notice("You congeal a blood chalice capable of opening an escape portal."))
 	used = TRUE
 
 /datum/action/cooldown/spell/vampire_specialize
@@ -120,6 +125,7 @@
 	add_vampire_ability()
 
 /datum/action/cooldown/spell/vampire_specialize/cast(atom/cast_on)
+	. = ..()
 	ui_interact(owner)
 
 /datum/action/cooldown/spell/vampire_specialize/ui_state(mob/user)
@@ -173,8 +179,6 @@
 	if(log_choice)
 		SSblackbox.record_feedback("nested tally", "vampire_subclasses", 1, list("[new_subclass.name]"))
 
-	for(var/datum/objective/specialization/objective in owner.get_all_objectives())
-		objective.update_explanation_text()
 
 /datum/action/cooldown/spell/vampire_glare
 	parent_type = /datum/action/cooldown/spell/aoe
@@ -230,9 +234,11 @@
 	add_vampire_ability()
 
 /datum/action/cooldown/spell/vampire_lair/is_valid_target(atom/cast_on)
+	. = ..()
 	return istype(cast_on, /obj/structure/closet/crate/coffin)
 
 /datum/action/cooldown/spell/vampire_lair/cast(atom/cast_on)
+	. = ..()
 	var/mob/living/user = owner
 	var/obj/structure/closet/crate/coffin/coffin = cast_on
 	if(!istype(coffin))
@@ -247,14 +253,14 @@
 			return
 	to_chat(user, span_danger("You begin marking the coffin!"))
 	coffin.Beam(user, icon_state = "drainbeam", maxdistance = 1, time = 10 SECONDS)
-	playsound(coffin, 'sound/misc/enter_blood.ogg', 20)
+	playsound(coffin, 'sound/effects/bubbles/bubbles.ogg', 20)
 	for(var/obj/machinery/light/L in range(5, user))
-		L.forced_flicker()
+		L.flicker()
 	var/obj/effect/lair_rune/rune = new /obj/effect/lair_rune(get_turf(coffin), user)
 	if(!do_after(user, 10 SECONDS, target = coffin))
 		qdel(rune)
 		return
-	playsound(user, 'sound/hallucinations/im_here1.ogg', 30)
+	playsound(user, 'sound/misc/interference.ogg', 30)
 	new /obj/structure/closet/crate/coffin/vampire(get_turf(coffin), user)
 	qdel(coffin)
 	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
@@ -278,14 +284,8 @@
 /obj/effect/lair_rune/Initialize(mapload, mob/user)
 	. = ..()
 	if(user)
-		color = user.get_bloodtype()?.get_color()
-
-/// No deviation at all. Flashed from the front or front-left/front-right. Alternatively, flashed in direct view.
-#define DEVIATION_NONE 3
-/// Partial deviation. Flashed from the side. Alternatively, flashed out the corner of your eyes.
-#define DEVIATION_PARTIAL 2
-/// Full deviation. Flashed from directly behind or behind-left/behind-rack. Not flashed at all.
-#define DEVIATION_FULL 1
+		var/mob/living/living_user = user
+		color = living_user?.get_bloodtype()?.get_color()
 
 /datum/action/cooldown/spell/vampire_glare/cast(atom/cast_on)
 	var/mob/living/user = owner
@@ -382,7 +382,7 @@
 	name = "Raise Vampires"
 	desc = "Summons deadly vampires from bluespace."
 	button_icon_state = "revive_thrall"
-	sound = 'sound/magic/wandodeath.ogg'
+	sound = 'sound/effects/empulse.ogg'
 	cooldown_time = 20 MINUTES
 	aoe_radius = 3
 
@@ -429,16 +429,15 @@
 			target.visible_message(span_warning("[target] looks to be stunned by the energy!"))
 			target.SetKnockdown(40 SECONDS)
 		return
-	for(var/obj/item/implant/implant in target.implants)
-		implant.removed(target)
+	for(var/obj/item/implant/mindshield/mindshield in target.implants)
+		mindshield.removed(target)
 	target.visible_message(span_warning("[target] gets an eerie red glow in their eyes!"))
 
+	log_combat(user, target, "sired", addition = "(Vampire)")
+	var/datum/antagonist/vampire/new_vampire = target.mind.add_antag_datum(/datum/antagonist/vampire)
 	var/datum/objective/protect/protect_objective = new
 	protect_objective.target = user.mind
 	protect_objective.explanation_text = "Protect [user.real_name]."
-	target.mind.add_mind_objective(protect_objective)
-
-	log_combat(user, target, "sired", addition = "(Vampire)")
-	target.mind.add_antag_datum(/datum/antagonist/vampire)
+	new_vampire.objectives += protect_objective
 	target.revive()
 	target.SetKnockdown(40 SECONDS)
