@@ -1,174 +1,117 @@
-/proc/isvampirethrall(mob/living/M)
-	return istype(M) && M.mind && M.mind.has_antag_datum(/datum/antagonist/mindslave/thrall)
-
-/datum/vampire_passive/increment_thrall_cap/on_apply(datum/antagonist/vampire/V)
-	V.subclass.thrall_cap++
-	gain_desc = "You can now thrall one more person, up to a maximum of [V.subclass.thrall_cap]"
+/datum/vampire_passive/increment_thrall_cap/on_apply(datum/antagonist/vampire/vampire)
+	vampire.subclass.thrall_cap++
+	gain_desc = "You can now thrall one more person, up to a maximum of [vampire.subclass.thrall_cap]."
 
 /datum/vampire_passive/increment_thrall_cap/two
-
 /datum/vampire_passive/increment_thrall_cap/three
 
-/datum/spell/vampire/enthrall
-	name = "Enthrall (150)"
-	desc = "You use a large portion of your power to sway those loyal to none to be loyal to you only."
-	gain_desc = "You have gained the ability to thrall people to your will."
-	action_background_icon_state = "bg_dant"
-	action_icon_state = "vampire_enthrall"
-	required_blood = 150
-	deduct_blood_on_cast = FALSE
+/datum/action/cooldown/spell/pointed/vampire_enthrall
+	name = "Enthrall"
+	desc = "Bite a nearby humanoid and bind them to your will."
+	button_icon_state = "vampire_enthrall"
+	cooldown_time = 30 SECONDS
+	cast_range = 1
 
-/datum/spell/vampire/enthrall/create_new_targeting()
-	var/datum/spell_targeting/click/T = new
-	T.range = 1
-	T.click_radius = 0
-	return T
+/datum/action/cooldown/spell/pointed/vampire_enthrall/New(Target)
+	. = ..()
+	add_vampire_ability(150, FALSE)
 
-/datum/spell/vampire/enthrall/cast(list/targets, mob/user = usr)
+/datum/action/cooldown/spell/pointed/vampire_enthrall/is_valid_target(atom/cast_on)
+	return ..() && ishuman(cast_on)
+
+/datum/action/cooldown/spell/pointed/vampire_enthrall/cast(mob/living/carbon/human/target)
+	. = ..()
+	var/mob/living/user = owner
+	user.visible_message(span_warning("[user] bites [target]'s neck!"), span_warning("You bite [target]'s neck and begin the flow of power."))
+	to_chat(target, span_warning("You feel tendrils of evil invade your mind."))
+	if(!do_after(user, 15 SECONDS, target = target))
+		to_chat(user, span_warning("You or your target moved."))
+		return
+	if(!can_enthrall(user, target))
+		return
 	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
-	var/mob/living/target = targets[1]
-	user.visible_message(SPAN_WARNING("[user] bites [target]'s neck!"), SPAN_WARNING("You bite [target]'s neck and begin the flow of power."))
-	to_chat(target, SPAN_WARNING("You feel the tendrils of evil invade your mind."))
-	if(do_mob(user, target, 15 SECONDS, hidden = TRUE))
-		if(can_enthrall(user, target))
-			handle_enthrall(user, target)
-			var/datum/spell_handler/vampire/V = custom_handler
-			var/blood_cost = V.calculate_blood_cost(vampire)
-			vampire.subtract_usable_blood(blood_cost) //we take the blood after enthralling, not before
-	else
-		revert_cast(user)
-		to_chat(user, SPAN_WARNING("You or your target moved."))
+	var/datum/component/vampire_ability/ability = GetComponent(/datum/component/vampire_ability)
+	ability.deduct_blood(src)
+	target.mind.add_antag_datum(/datum/antagonist/vampire_thrall, vampire)
+	target.Stun(4 SECONDS)
+	log_combat(user, target, "vampire enthralled")
 
-/datum/spell/vampire/enthrall/proc/can_enthrall(mob/living/user, mob/living/carbon/C)
-	. = FALSE
-	if(!C)
-		CRASH("target was null while trying to vampire enthrall, attacker is [user] [user.key] \ref[user]")
-	if(!user.mind.som)
-		CRASH("Dantalion Thrall datum ended up null.")
-	if(!ishuman(C))
-		to_chat(user, SPAN_WARNING("You can only enthrall sentient humanoids!"))
-		return
-	if(!C.mind)
-		to_chat(user, SPAN_WARNING("[C.name]'s mind is not there for you to enthrall."))
-		return
-
-	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
-	if(V.subclass.thrall_cap <= length(user.mind.som.serv))
-		to_chat(user, SPAN_WARNING("You don't have enough power to enthrall any more people!"))
-		return
-	if(ismindshielded(C) || C.mind.has_antag_datum(/datum/antagonist/vampire) || IS_MINDSLAVE(C))
-		C.visible_message(SPAN_WARNING("[C] seems to resist the takeover!"), SPAN_NOTICE("You feel a familiar sensation in your skull that quickly dissipates."))
-		return
-	if(HAS_MIND_TRAIT(C, TRAIT_HOLY))
-		C.visible_message(SPAN_WARNING("[C] seems to resist the takeover!"), SPAN_NOTICE("Your faith in [SSticker.Bible_deity_name] has kept your mind clear of all evil."))
-		return
+/datum/action/cooldown/spell/pointed/vampire_enthrall/proc/can_enthrall(mob/living/user, mob/living/carbon/human/target)
+	if(!target.mind)
+		to_chat(user, span_warning("[target]'s mind is not there for you to enthrall."))
+		return FALSE
+	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
+	if(vampire.subclass.thrall_cap <= length(vampire.get_thralls()))
+		to_chat(user, span_warning("You don't have enough power to enthrall anyone else."))
+		return FALSE
+	if(ismindshielded(target) || target.mind.has_antag_datum(/datum/antagonist/vampire) || target.mind.has_antag_datum(/datum/antagonist/vampire_thrall) || HAS_MIND_TRAIT(target, TRAIT_HOLY))
+		target.visible_message(span_warning("[target] seems to resist the takeover!"), span_notice("You feel a familiar sensation in your skull that quickly dissipates."))
+		return FALSE
 	return TRUE
 
-/datum/spell/vampire/enthrall/proc/handle_enthrall(mob/living/user, mob/living/carbon/human/H)
-	if(!istype(H))
-		return FALSE
-
-	var/greet_text = "<b>You have been Enthralled by [user.real_name]. Follow [user.p_their()] every command.</b>"
-	H.mind.add_antag_datum(new /datum/antagonist/mindslave/thrall(user.mind, greet_text))
-
-	H.Stun(4 SECONDS)
-	user.create_log(CONVERSION_LOG, "vampire enthralled", H)
-	H.create_log(CONVERSION_LOG, "was vampire enthralled", user)
-
-/datum/spell/vampire/thrall_commune
+/datum/action/cooldown/spell/vampire_commune
 	name = "Commune"
-	desc = "Talk to your thralls telepathically."
-	gain_desc = "You have gained the ability to commune with your thralls."
-	action_background_icon_state = "bg_dant"
-	action_icon_state = "vamp_communication"
-	base_cooldown = 2 SECONDS
+	desc = "Speak telepathically with your thralls."
+	button_icon_state = "vamp_communication"
+	cooldown_time = 2 SECONDS
 
-/datum/spell/vampire/thrall_commune/create_new_handler() //so thralls can use it
-	return
+/datum/action/cooldown/spell/vampire_commune/New(Target)
+	. = ..()
+	add_vampire_ability()
 
-/datum/spell_targeting/select_vampire_network/choose_targets(mob/user, datum/spell/spell, params, atom/clicked_atom) // Returns the vampire and their thralls. If user is a thrall then it will look up their master's network
-	var/list/mob/living/targets = list()
-	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire) // if the user is a vampire
-
-	if(!V)
-		for(var/datum/mind/M in user.mind.som.masters) // if the user is a thrall
-			V = M.has_antag_datum(/datum/antagonist/vampire)
-			if(V)
-				break
-
-	if(!V)
+/datum/action/cooldown/spell/vampire_commune/cast(atom/cast_on)
+	. = ..()
+	var/mob/living/user = owner
+	var/message = tgui_input_text(user, "Enter a message for your thralls.", "Thrall Commune")
+	if(!message)
 		return
-	if(!V.owner.som) // I hate som
-		stack_trace("Dantalion Thrall datum ended up null.")
-		return
+	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
+	for(var/datum/antagonist/vampire_thrall/thrall as anything in vampire.get_thralls())
+		if(thrall.owner?.current)
+			to_chat(thrall.owner.current, span_notice("[user.real_name] (Vampire Master): [message]"))
+	to_chat(user, span_notice("[user.real_name] (Vampire Master): [message]"))
+	log_say("(VAMPIRE) [message]", list("CONNECTION" = user))
 
-	for(var/datum/mind/thrall in V.owner.som.serv)
-		targets += thrall.current
-	targets += V.owner.current
-	return targets
+/datum/action/cooldown/spell/pointed/vampire_pacify
+	name = "Pacify"
+	desc = "Pacify a humanoid temporarily, preventing them from causing harm."
+	button_icon_state = "pacify"
+	cooldown_time = 30 SECONDS
+	cast_range = 7
 
-/datum/spell/vampire/thrall_commune/create_new_targeting()
-	var/datum/spell_targeting/select_vampire_network/T = new
-	return T
+/datum/action/cooldown/spell/pointed/vampire_pacify/New(Target)
+	. = ..()
+	add_vampire_ability(10)
 
-/datum/spell/vampire/thrall_commune/cast(list/targets, mob/user)
-	var/input = tgui_input_text(user, "Enter a message to relay to the other thralls", "Thrall Commune")
-	if(!input)
-		revert_cast(user)
-		return
-	var/title = isvampirethrall(user) ? "Thrall" : "<b>Vampire Master</b>" // if admins give this to a non vampire/thrall it is not my problem
-	var/full_title = "[user.real_name] ([title])"
-	for(var/mob/M in targets)
-		to_chat(M, SPAN_DANTALION("[full_title]: [input]"))
-	for(var/mob/M in GLOB.dead_mob_list)
-		to_chat(M, SPAN_DANTALION("[full_title] ([ghost_follow_link(user, ghost=M)]): [input]"))
-	log_say("(DANTALION) [input]", user)
-	user.create_log(SAY_LOG, "(DANTALION) [input]")
+/datum/action/cooldown/spell/pointed/vampire_pacify/is_valid_target(atom/cast_on)
+	return ..() && ishuman(cast_on)
 
-/datum/spell/vampire/pacify
-	name = "Pacify (10)"
-	desc = "Pacify a target temporarily, making them unable to cause harm."
-	gain_desc = "You have gained the ability to pacify someone's harmful tendencies, preventing them from doing any physical harm to anyone."
-	action_background_icon_state = "bg_dant"
-	action_icon_state = "pacify"
-	base_cooldown = 30 SECONDS
-	required_blood = 10
+/datum/action/cooldown/spell/pointed/vampire_pacify/cast(mob/living/carbon/human/cast_on)
+	. = ..()
+	if(cast_on.affects_vampire(owner))
+		cast_on.apply_status_effect(STATUS_EFFECT_PACIFIED)
 
-/datum/spell/vampire/pacify/create_new_targeting()
-	var/datum/spell_targeting/click/T = new
-	T.range = 7
-	T.click_radius = 1
-	T.allowed_type = /mob/living/carbon/human
-	return T
-
-/datum/spell/vampire/pacify/cast(list/targets, mob/user)
-	for(var/mob/living/carbon/human/H as anything in targets)
-		H.apply_status_effect(STATUS_EFFECT_PACIFIED)
-
-/datum/spell/vampire/switch_places
-	name = "Subspace Swap (30)"
+/datum/action/cooldown/spell/pointed/vampire_switch_places
+	name = "Subspace Swap"
 	desc = "Switch positions with a target."
-	gain_desc = "You have gained the ability to switch positions with a targeted mob."
-	centcom_cancast = FALSE
-	action_background_icon_state = "bg_dant"
-	action_icon_state = "subspace_swap"
-	base_cooldown = 30 SECONDS
-	required_blood = 30
+	button_icon_state = "subspace_swap"
+	cooldown_time = 30 SECONDS
+	cast_range = 7
 
-/datum/spell/vampire/switch_places/create_new_targeting()
-	var/datum/spell_targeting/click/T = new
-	T.range = 7
-	T.click_radius = 1
-	T.try_auto_target = FALSE
-	T.allowed_type = /mob/living
-	return T
+/datum/action/cooldown/spell/pointed/vampire_switch_places/New(Target)
+	. = ..()
+	add_vampire_ability(30)
 
-/datum/spell/vampire/switch_places/cast(list/targets, mob/user)
-	var/mob/living/target = targets[1]
-	if(target.can_block_magic(antimagic_flags))
-		to_chat(user, SPAN_WARNING("The spell had no effect!"))
-		to_chat(target, SPAN_WARNING("You feel space bending, but it rapidly dissipates."))
-		return FALSE
+/datum/action/cooldown/spell/pointed/vampire_switch_places/is_valid_target(atom/cast_on)
+	return ..() && isliving(cast_on)
+
+/datum/action/cooldown/spell/pointed/vampire_switch_places/cast(mob/living/target)
+	. = ..()
+	var/mob/living/user = owner
+	if(target.can_block_magic())
+		to_chat(user, span_warning("The spell had no effect!"))
+		to_chat(target, span_warning("You feel space bending, but it rapidly dissipates."))
+		return
 	var/turf/user_turf = get_turf(user)
 	var/turf/target_turf = get_turf(target)
 	if(!(SEND_SIGNAL(target, COMSIG_MOVABLE_TELEPORTING, user_turf) & COMPONENT_BLOCK_TELEPORT))
@@ -176,84 +119,87 @@
 	if(!(SEND_SIGNAL(user, COMSIG_MOVABLE_TELEPORTING, target_turf) & COMPONENT_BLOCK_TELEPORT))
 		user.forceMove(target_turf)
 
-/datum/spell/vampire/self/decoy
-	name = "Deploy Decoy (30)"
-	desc = "Briefly turn invisible and deploy a decoy illusion to fool your prey."
-	gain_desc = "You have gained the ability to turn invisible and create decoy illusions."
-	action_background_icon_state = "bg_dant"
-	action_icon_state = "decoy"
-	required_blood = 30
-	base_cooldown = 40 SECONDS
+/datum/action/cooldown/spell/vampire_decoy
+	name = "Deploy Decoy"
+	desc = "Briefly turn invisible and deploy a decoy illusion."
+	button_icon_state = "decoy"
+	cooldown_time = 40 SECONDS
 
-/datum/spell/vampire/self/decoy/cast(list/targets, mob/user)
-	var/mob/living/simple_animal/hostile/illusion/escape/E = new(get_turf(user))
-	E.Copy_Parent(user, 20, 20)
-	E.GiveTarget(user) //so it starts running right away
-	E.Goto(user, E.move_to_delay, E.minimum_distance)
+/datum/action/cooldown/spell/vampire_decoy/New(Target)
+	. = ..()
+	add_vampire_ability(30)
+
+/datum/action/cooldown/spell/vampire_decoy/cast(atom/cast_on)
+	. = ..()
+	var/mob/living/user = owner
+	var/mob/living/simple_animal/hostile/illusion/escape/decoy = new(get_turf(user))
+	decoy.Copy_Parent(user, 20, 20)
+	decoy.GiveTarget(user)
+	decoy.Goto(user, decoy.move_to_delay, decoy.minimum_distance)
 	user.make_invisible()
 	addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, reset_visibility)), 6 SECONDS)
 
-/datum/spell/vampire/rally_thralls
-	name = "Rally Thralls (100)"
-	desc = "Removes all incapacitating effects from your nearby thralls."
-	gain_desc = "You have gained the ability to remove all incapacitating effects from nearby thralls."
-	action_background_icon_state = "bg_dant"
-	action_icon_state = "thralls_up"
-	required_blood = 100
-	base_cooldown = 100 SECONDS
+/datum/action/cooldown/spell/aoe/vampire_rally_thralls
+	name = "Rally Thralls"
+	desc = "Remove incapacitating effects from nearby thralls."
+	button_icon_state = "thralls_up"
+	cooldown_time = 100 SECONDS
+	aoe_radius = 7
 
-/datum/spell/vampire/rally_thralls/create_new_targeting()
-	var/datum/spell_targeting/aoe/thralls/A = new
-	A.allowed_type = /mob/living/carbon/human
-	A.range = 7
-	return A
+/datum/action/cooldown/spell/aoe/vampire_rally_thralls/New(Target)
+	. = ..()
+	add_vampire_ability(100)
 
-/datum/spell_targeting/aoe/thralls/valid_target(target, user, datum/spell/spell, check_if_in_range)
-	if(!isvampirethrall(target))
-		return FALSE
-	return ..()
+/datum/action/cooldown/spell/aoe/vampire_rally_thralls/get_things_to_cast_on(atom/center)
+	. = list()
+	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
+	for(var/datum/antagonist/vampire_thrall/thrall as anything in vampire?.get_thralls())
+		if(thrall.owner?.current && get_dist(center, thrall.owner.current) <= aoe_radius)
+			. += thrall.owner.current
 
-/datum/spell/vampire/rally_thralls/cast(list/targets, mob/user)
-	for(var/mob/living/carbon/human/H as anything in targets)
-		var/image/I = image('icons/effects/vampire_effects.dmi', "rallyoverlay", layer = EFFECTS_LAYER)
-		playsound(H, 'sound/magic/staff_healing.ogg', 30)
-		H.remove_CC()
-		H.add_overlay(I)
-		addtimer(CALLBACK(H, TYPE_PROC_REF(/atom, cut_overlay), I), 6 SECONDS) // this makes it obvious who your thralls are for a while.
+/datum/action/cooldown/spell/aoe/vampire_rally_thralls/cast_on_thing_in_aoe(mob/living/carbon/human/thrall, atom/caster)
+	var/image/overlay = image('icons/effects/vampire_effects.dmi', "rallyoverlay", layer = EFFECTS_LAYER)
+	playsound(thrall, 'sound/magic/staff_healing.ogg', 30)
+	thrall.remove_CC()
+	thrall.add_overlay(overlay)
+	addtimer(CALLBACK(thrall, TYPE_PROC_REF(/atom, cut_overlay), overlay), 6 SECONDS)
 
-/datum/spell/vampire/self/share_damage
+/datum/action/cooldown/spell/vampire_blood_bond
 	name = "Blood Bond"
-	desc = "Creates a net between you and your nearby thralls that evenly shares all damage received."
-	gain_desc = "You have gained the ability to share damage between you and your thralls."
-	action_background_icon_state = "bg_dant"
-	action_icon_state = "blood_bond"
-	required_blood = 5
+	desc = "Create a net that evenly shares damage between you and nearby thralls."
+	button_icon_state = "blood_bond"
+	cooldown_time = 2 SECONDS
 
-/datum/spell/vampire/self/share_damage/cast(list/targets, mob/living/user)
-	var/datum/status_effect/thrall_net/T = user.has_status_effect(STATUS_EFFECT_THRALL_NET)
-	if(!T)
+/datum/action/cooldown/spell/vampire_blood_bond/New(Target)
+	. = ..()
+	add_vampire_ability(5)
+
+/datum/action/cooldown/spell/vampire_blood_bond/cast(atom/cast_on)
+	. = ..()
+	var/mob/living/user = owner
+	var/datum/status_effect/thrall_net/net = user.has_status_effect(STATUS_EFFECT_THRALL_NET)
+	if(net)
+		qdel(net)
+	else
 		user.apply_status_effect(STATUS_EFFECT_THRALL_NET, user.mind.has_antag_datum(/datum/antagonist/vampire))
-		return
-	qdel(T)
 
-/datum/spell/vampire/hysteria
-	name = "Mass Hysteria (70)"
-	desc = "Casts a powerful illusion to make everyone nearby perceive others to looks like random animals after briefly blinding them."
-	gain_desc = "You have gained the ability to make everyone nearby perceive others to looks like random animals after briefly blinding them."
-	action_background_icon_state = "bg_dant"
-	action_icon_state = "hysteria"
-	required_blood = 70
-	base_cooldown = 180 SECONDS
+/datum/action/cooldown/spell/aoe/vampire_hysteria
+	name = "Mass Hysteria"
+	desc = "Blind nearby humanoids before making them perceive each other as animals."
+	button_icon_state = "hysteria"
+	cooldown_time = 180 SECONDS
+	aoe_radius = 8
 
-/datum/spell/vampire/hysteria/create_new_targeting()
-	var/datum/spell_targeting/aoe/A = new
-	A.range = 8
-	A.allowed_type = /mob/living/carbon/human
-	return A
+/datum/action/cooldown/spell/aoe/vampire_hysteria/New(Target)
+	. = ..()
+	add_vampire_ability(70)
 
-/datum/spell/vampire/hysteria/cast(list/targets, mob/user)
-	for(var/mob/living/carbon/human/H as anything in targets)
-		if(!H.affects_vampire(user))
-			continue
-		H.flash_eyes(1, TRUE) // flash to give them a second to lose track of who is who
-		new /obj/effect/hallucination/delusion/long(get_turf(user), H)
+/datum/action/cooldown/spell/aoe/vampire_hysteria/get_things_to_cast_on(atom/center)
+	. = list()
+	for(var/mob/living/carbon/human/target in range(aoe_radius, center))
+		if(target != owner && target.affects_vampire(owner))
+			. += target
+
+/datum/action/cooldown/spell/aoe/vampire_hysteria/cast_on_thing_in_aoe(mob/living/carbon/human/target, atom/caster)
+	target.flash_eyes(1, TRUE)
+	new /obj/effect/hallucination/delusion/long(get_turf(owner), target)

@@ -47,7 +47,11 @@
 
 /datum/component/vampire_ability/proc/before_cast(datum/action/cooldown/spell/spell, atom/cast_on)
 	SIGNAL_HANDLER
-	if(!deduct_blood_on_cast || !required_blood)
+	if(deduct_blood_on_cast)
+		deduct_blood(spell)
+
+/datum/component/vampire_ability/proc/deduct_blood(datum/action/cooldown/spell/spell)
+	if(!required_blood)
 		return
 	var/datum/antagonist/vampire/vampire = get_vampire(spell)
 	vampire?.subtract_usable_blood(calculate_blood_cost(vampire))

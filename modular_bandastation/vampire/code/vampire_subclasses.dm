@@ -27,10 +27,10 @@
 	name = "umbrae"
 	standard_powers = list(/datum/action/cooldown/spell/vampire_cloak = 150,
 							/datum/action/cooldown/spell/pointed/vampire_shadow_snare = 250,
-							/datum/action/cooldown/spell/vampire/soul_anchor = 250,
-							/datum/action/cooldown/spell/vampire/dark_passage = 400,
-							/datum/action/cooldown/spell/vampire/vamp_extinguish = 600,
-							/datum/action/cooldown/spell/vampire/shadow_boxing = 800)
+							/datum/action/cooldown/spell/vampire_soul_anchor = 250,
+							/datum/action/cooldown/spell/pointed/vampire_dark_passage = 400,
+							/datum/action/cooldown/spell/aoe/vampire_extinguish = 600,
+							/datum/action/cooldown/spell/pointed/vampire_shadow_boxing = 800)
 	fully_powered_abilities = list(/datum/vampire_passive/full,
 								/datum/vampire_passive/vision/full,
 								/datum/action/cooldown/spell/vampire_eternal_darkness,
@@ -42,11 +42,11 @@
 /datum/vampire_subclass/hemomancer
 	name = "hemomancer"
 	standard_powers = list(/datum/action/cooldown/spell/vampire_vamp_claws = 150,
-							/datum/action/cooldown/spell/vampire/blood_tendrils = 250,
-							/datum/action/cooldown/spell/vampire/blood_barrier = 250,
-							/datum/spell/ethereal_jaunt/blood_pool = 400,
-							/datum/action/cooldown/spell/vampire/predator_senses = 600,
-							/datum/action/cooldown/spell/vampire/blood_eruption = 800)
+							/datum/action/cooldown/spell/pointed/vampire_blood_tendrils = 250,
+							/datum/action/cooldown/spell/pointed/vampire_blood_barrier = 250,
+							/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool = 400,
+							/datum/action/cooldown/spell/vampire_predator_senses = 600,
+							/datum/action/cooldown/spell/aoe/vampire_blood_eruption = 800)
 	fully_powered_abilities = list(/datum/vampire_passive/full,
 								/datum/vampire_passive/vision/full,
 							/datum/action/cooldown/spell/vampire_blood_spill)
@@ -61,11 +61,11 @@
 							/datum/action/cooldown/spell/vampire_stomp = 250,
 							/datum/vampire_passive/blood_swell_upgrade = 400,
 							/datum/action/cooldown/spell/vampire_overwhelming_force = 600,
-							/datum/action/cooldown/spell/vampire/charge = 800,
-							/datum/spell/fireball/demonic_grasp = 800)
+							/datum/action/cooldown/spell/pointed/vampire_charge = 800,
+							/datum/action/cooldown/spell/pointed/projectile/vampire_demonic_grasp = 800)
 	fully_powered_abilities = list(/datum/vampire_passive/full,
 								/datum/vampire_passive/vision/full,
-								/datum/action/cooldown/spell/vampire/arena)
+								/datum/action/cooldown/spell/pointed/vampire_arena)
 	improved_rejuv_healing = TRUE
 	unique_objectives = list("Destroy Research's servers. Technology is no substitute for strength.",
 							"Vandalize %DEPARTMENT. They've grown complacent.",
@@ -73,17 +73,17 @@
 
 /datum/vampire_subclass/dantalion
 	name = "dantalion"
-	standard_powers = list(/datum/action/cooldown/spell/vampire/enthrall = 150,
-							/datum/action/cooldown/spell/vampire/thrall_commune = 150,
-							/datum/action/cooldown/spell/vampire/pacify = 250,
-							/datum/action/cooldown/spell/vampire/switch_places = 250,
-							/datum/action/cooldown/spell/vampire/self/decoy = 400,
+	standard_powers = list(/datum/action/cooldown/spell/pointed/vampire_enthrall = 150,
+							/datum/action/cooldown/spell/vampire_commune = 150,
+							/datum/action/cooldown/spell/pointed/vampire_pacify = 250,
+							/datum/action/cooldown/spell/pointed/vampire_switch_places = 250,
+							/datum/action/cooldown/spell/vampire_decoy = 400,
 							/datum/vampire_passive/increment_thrall_cap = 400,
-							/datum/action/cooldown/spell/vampire/rally_thralls = 600,
+							/datum/action/cooldown/spell/aoe/vampire_rally_thralls = 600,
 							/datum/vampire_passive/increment_thrall_cap/two = 600,
-							/datum/action/cooldown/spell/vampire/self/share_damage = 800)
+							/datum/action/cooldown/spell/vampire_blood_bond = 800)
 	fully_powered_abilities = list(/datum/vampire_passive/full,
-								/datum/action/cooldown/spell/vampire/hysteria,
+								/datum/action/cooldown/spell/aoe/vampire_hysteria,
 								/datum/vampire_passive/vision/full,
 								/datum/vampire_passive/increment_thrall_cap/three)
 	unique_objectives = list("Enthrall a member of security. Their potential is wasted in Nanotrasen's ranks.",
@@ -95,35 +95,35 @@
 	standard_powers = list(/datum/action/cooldown/spell/vampire_vamp_claws,
 							/datum/action/cooldown/spell/vampire_blood_swell,
 							/datum/action/cooldown/spell/vampire_cloak,
-							/datum/action/cooldown/spell/vampire/enthrall,
-							/datum/action/cooldown/spell/vampire/thrall_commune,
-							/datum/action/cooldown/spell/vampire/blood_tendrils,
-							/datum/action/cooldown/spell/vampire/blood_barrier,
+							/datum/action/cooldown/spell/pointed/vampire_enthrall,
+							/datum/action/cooldown/spell/vampire_commune,
+							/datum/action/cooldown/spell/pointed/vampire_blood_tendrils,
+							/datum/action/cooldown/spell/pointed/vampire_blood_barrier,
 							/datum/action/cooldown/spell/vampire_blood_rush,
 							/datum/action/cooldown/spell/vampire_stomp,
-							/datum/action/cooldown/spell/vampire/charge,
+							/datum/action/cooldown/spell/pointed/vampire_charge,
 							/datum/action/cooldown/spell/pointed/vampire_shadow_snare,
-							/datum/action/cooldown/spell/vampire/soul_anchor,
-							/datum/action/cooldown/spell/vampire/pacify,
-							/datum/action/cooldown/spell/vampire/switch_places,
-							/datum/spell/ethereal_jaunt/blood_pool,
+							/datum/action/cooldown/spell/vampire_soul_anchor,
+							/datum/action/cooldown/spell/pointed/vampire_pacify,
+							/datum/action/cooldown/spell/pointed/vampire_switch_places,
+							/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool,
 							/datum/vampire_passive/blood_swell_upgrade,
-							/datum/action/cooldown/spell/vampire/dark_passage,
-							/datum/action/cooldown/spell/vampire/self/decoy,
-							/datum/action/cooldown/spell/vampire/blood_eruption,
-							/datum/action/cooldown/spell/vampire/predator_senses,
+							/datum/action/cooldown/spell/pointed/vampire_dark_passage,
+							/datum/action/cooldown/spell/vampire_decoy,
+							/datum/action/cooldown/spell/aoe/vampire_blood_eruption,
+							/datum/action/cooldown/spell/vampire_predator_senses,
 							/datum/action/cooldown/spell/vampire_overwhelming_force,
-							/datum/action/cooldown/spell/vampire/vamp_extinguish,
-							/datum/action/cooldown/spell/vampire/rally_thralls,
-							/datum/action/cooldown/spell/vampire/self/share_damage,
-							/datum/spell/fireball/demonic_grasp,
-							/datum/action/cooldown/spell/vampire/shadow_boxing,
+							/datum/action/cooldown/spell/aoe/vampire_extinguish,
+							/datum/action/cooldown/spell/aoe/vampire_rally_thralls,
+							/datum/action/cooldown/spell/vampire_blood_bond,
+							/datum/action/cooldown/spell/pointed/projectile/vampire_demonic_grasp,
+							/datum/action/cooldown/spell/pointed/vampire_shadow_boxing,
 							/datum/vampire_passive/full,
 							/datum/vampire_passive/vision/full,
 							/datum/action/cooldown/spell/vampire_blood_spill,
-							/datum/action/cooldown/spell/vampire/arena,
+							/datum/action/cooldown/spell/pointed/vampire_arena,
 							/datum/action/cooldown/spell/vampire_eternal_darkness,
-							/datum/action/cooldown/spell/vampire/hysteria,
+							/datum/action/cooldown/spell/aoe/vampire_hysteria,
 							/datum/action/cooldown/spell/vampire_raise_vampires,
 							/datum/vampire_passive/vision/xray)
 	improved_rejuv_healing = TRUE
