@@ -158,8 +158,8 @@
 			. += thrall.owner.current
 
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls/cast_on_thing_in_aoe(mob/living/carbon/human/thrall, atom/caster)
-	var/image/overlay = image('icons/effects/vampire_effects.dmi', "rallyoverlay", layer = EFFECTS_LAYER)
-	playsound(thrall, 'sound/magic/staff_healing.ogg', 30)
+	var/image/overlay = image('modular_bandastation/vampire/icons/effects/vampire_effects.dmi', "rallyoverlay", layer = EFFECTS_LAYER)
+	playsound(thrall, 'modular_bandastation/vampire/sound/magic/staff_healing.ogg', 30)
 	thrall.SetStun(0)
 	thrall.SetKnockdown(0)
 	thrall.SetParalyzed(0)

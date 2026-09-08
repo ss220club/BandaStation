@@ -92,6 +92,7 @@
 	name = "Conjure Blood Chalice"
 	desc = "Congeal blood into a chalice that opens a single unstable wormhole."
 	cooldown_time = 2 SECONDS
+	button_icon = 'modular_bandastation/vampire/icons/obj/items.dmi'
 	button_icon_state = "blood-chalice"
 	var/used = FALSE
 

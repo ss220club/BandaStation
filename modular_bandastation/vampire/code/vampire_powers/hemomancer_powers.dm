@@ -33,14 +33,14 @@
 /obj/item/vamp_claws
 	name = "vampiric claws"
 	desc = "A pair of eldritch claws made of living blood."
-	icon = 'icons/effects/vampire_effects.dmi'
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
 	icon_state = "vamp_claws"
 	w_class = WEIGHT_CLASS_BULKY
 	obj_flags = ABSTRACT | DROPDEL
 	force = 10
 	armour_penetration = 20
 	sharpness = SHARP_EDGED
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	hitsound = 'modular_bandastation/vampire/sound/weapons/bladeslice.ogg'
 	attack_verb_continuous = list("slashes", "stabs", "slices", "claws")
 	attack_verb_simple = list("slash", "stab", "slice", "claw")
 	var/durability = 15
@@ -119,7 +119,7 @@
 			new /obj/effect/temp_visual/blood_tendril/long(get_turf(target))
 
 /obj/effect/temp_visual/blood_tendril
-	icon = 'icons/effects/vampire_effects.dmi'
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
 	icon_state = "blood_tendril"
 /obj/effect/temp_visual/blood_tendril/long
 	duration = 2 SECONDS
@@ -161,7 +161,7 @@
 	desc = "A grotesque structure of crystallized blood. It's slowly melting away."
 	max_integrity = 100
 	icon_state = "blood_barrier"
-	icon = 'icons/effects/vampire_effects.dmi'
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
 	density = TRUE
 	anchored = TRUE
 
@@ -242,12 +242,12 @@
 /datum/action/cooldown/spell/aoe/vampire_blood_eruption/cast_on_thing_in_aoe(mob/living/target, atom/caster)
 	var/turf/turf = get_turf(target)
 	new /obj/effect/temp_visual/blood_spike(turf)
-	playsound(target, 'sound/misc/demon_attack1.ogg', 50, TRUE)
+	playsound(target, 'modular_bandastation/vampire/sound/misc/demon_attack1.ogg', 50, TRUE)
 	target.apply_damage(50, BRUTE, BODY_ZONE_CHEST)
 	target.visible_message(span_warning("[target] gets impaled by a spike of living blood!"))
 
 /obj/effect/temp_visual/blood_spike
-	icon = 'icons/effects/vampire_effects.dmi'
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
 	icon_state = "bloodspike_white"
 	duration = 0.3 SECONDS
 

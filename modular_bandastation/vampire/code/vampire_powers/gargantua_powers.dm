@@ -58,7 +58,7 @@
 		addtimer(CALLBACK(src, PROC_REF(hit_check), range + 1, origin, user, safe_targets), 0.2 SECONDS)
 
 /obj/effect/temp_visual/stomp
-	icon = 'icons/effects/seismic_stomp_effect.dmi'
+	icon = 'modular_bandastation/vampire/icons/effects/seismic_stomp_effect.dmi'
 	icon_state = "stomp_effect"
 	duration = 0.8 SECONDS
 	pixel_y = -16
@@ -163,12 +163,12 @@
 	new /obj/effect/temp_visual/demonic_snare(target.loc)
 
 /obj/effect/temp_visual/demonic_grasp
-	icon = 'icons/effects/vampire_effects.dmi'
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
 	icon_state = "demonic_grasp"
 	duration = 3.5 SECONDS
 
 /obj/effect/temp_visual/demonic_snare
-	icon = 'icons/effects/vampire_effects.dmi'
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
 	icon_state = "immobilized"
 
 /datum/action/cooldown/spell/pointed/vampire_charge
