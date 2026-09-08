@@ -1,9 +1,6 @@
 /datum/species
 	var/hunger_icon = 'icons/obj/food/burgerbread.dmi'
 
-/datum/species/vulpkanin
-	hunger_icon = 'modular_bandastation/vampire/icons/screen_hunger_vampire.dmi'
-
 /datum/species/proc/update_hunger_hud(mob/living/carbon/owner)
 	var/atom/movable/screen/hunger/hunger_bar = owner.hud_used?.screen_objects[HUD_MOB_HUNGER]
 	if(hunger_bar)
