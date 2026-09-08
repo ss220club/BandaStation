@@ -291,7 +291,7 @@
 			if(owner.is_nearsighted_from(QUIRK_TRAIT))
 				return conditional_tooltip("Субъект страдает от постоянной близорукости.", "Не поддаётся лечению в обычных условиях. Очки с диоптриями смягчат эффект.", add_tooltips)
 			if(owner.is_nearsighted_from(TRAIT_RIGHT_EYE_SCAR) || owner.is_nearsighted_from(TRAIT_LEFT_EYE_SCAR))
-				return conditional_tooltip("Субъект страдает близорукостью из-за серьёзных рубцов на глазах.", "Требуется хирургическая замена глаз, иначе состояние необратимо.", add_tooltips)
+				return conditional_tooltip("Субъект страдает близорукостью из-за серьёзных рубцов на глазе.", "Требуется хирургическая замена глаз, иначе состояние необратимо.", add_tooltips)
 			if(owner.is_nearsighted_from(GENETIC_MUTATION))
 				return conditional_tooltip("Субъект страдает генетической близорукостью.", "Используйте медикаменты, такие как [/datum/reagent/medicine/mutadone::name]. Очки с диоптриями смягчат эффект.", add_tooltips)
 			if(owner.is_nearsighted_from(EYE_DAMAGE))
