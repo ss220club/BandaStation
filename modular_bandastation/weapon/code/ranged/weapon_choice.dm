@@ -4,7 +4,7 @@
 
 /obj/item/choice_beacon/security_pistol/generate_display_names()
 	var/static/list/selectable_gun_types = list(
-		"GP-9 9x25mm Pistol" = /obj/item/storage/toolbox/guncase/ntcase/sec_gp9,
+		"GP-9 9x25mm Pistol" = /obj/item/storage/toolbox/guncase/ntcase/pistol/sec_gp9,
 		"Disabler Energy Pistol" = /obj/item/gun/energy/disabler,
 	)
 	return selectable_gun_types
