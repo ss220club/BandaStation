@@ -1,7 +1,7 @@
 //This should hold all the vampire related powers
 /mob/living/proc/affects_vampire(mob/user)
 	//Other vampires and thralls aren't affected
-	if(mind?.has_antag_datum(/datum/antagonist/vampire) || mind?.has_antag_datum(/datum/antagonist/mindslave/thrall))
+	if(mind?.has_antag_datum(/datum/antagonist/vampire) || mind?.has_antag_datum(/datum/antagonist/vampire_thrall))
 		return FALSE
 	/// Chaplains with their nullrod can block a full power vampire, but a chaplain by themselfs or a crew with a null rod can not.
 	if(can_block_magic(MAGIC_RESISTANCE_HOLY) && HAS_MIND_TRAIT(src, TRAIT_HOLY))
@@ -42,45 +42,38 @@
 	check_flags = AB_CHECK_PHASED
 	antimagic_flags = NONE // So. If you have a null rod on your person, you can't cast vampire spells. I would rather not have officers abuse this by putting a nullrod in their pocket or something to block rejuvinate.
 
+
 /datum/action/cooldown/spell/vampire_rejuvenate/New(Target)
 	. = ..()
 	add_vampire_ability()
 
 /datum/action/cooldown/spell/vampire_rejuvenate/cast(atom/cast_on)
-	var/mob/living/U = owner
+	var/mob/living/user = owner
 
-	U.SetWeakened(0)
-	U.SetStunned(0)
-	U.SetKnockDown(0)
-	U.SetParalysis(0)
-	U.SetSleeping(0)
-	U.SetConfused(0)
-	U.adjustStaminaLoss(-100)
-	U.stand_up(TRUE)
-	SEND_SIGNAL(U, COMSIG_LIVING_CLEAR_STUNS)
-	to_chat(U, span_notice("You instill your body with clean blood and remove any incapacitating effects."))
-	var/datum/antagonist/vampire/V = U.mind.has_antag_datum(/datum/antagonist/vampire)
-	for(var/datum/disease/zombie/zombie_infection in U.viruses)
-		zombie_infection.stage = min(zombie_infection.stage, round(7 - (V.bloodtotal/100))) // 700 max usable blood can cleanse any zombie infection
-		if(zombie_infection.stage <= 0)
-			zombie_infection.cure()
-			to_chat(U, span_notice("You cleanse the plague from your system."))
-		else
-			to_chat(U, span_warning("You weaken the plague in your system, but you don't have enough blood to completely remove it."))
+	user.SetStun(0)
+	user.SetKnockdown(0)
+	user.SetParalyzed(0)
+	user.SetImmobilized(0)
+	user.SetUnconscious(0)
+	user.SetSleeping(0)
+	user.adjust_confusion(-INFINITY)
+	user.adjust_stamina_loss(-100)
+	user.set_body_position(STANDING_UP)
+	to_chat(user, span_notice("You instill your body with clean blood and remove any incapacitating effects."))
+	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
 
-	var/rejuv_bonus = V.get_rejuv_bonus()
+	var/rejuv_bonus = vampire.get_rejuv_bonus()
 	if(rejuv_bonus)
-		INVOKE_ASYNC(src, PROC_REF(heal), U, rejuv_bonus)
+		INVOKE_ASYNC(src, PROC_REF(heal), user, rejuv_bonus)
 
 /datum/action/cooldown/spell/vampire_rejuvenate/proc/heal(mob/living/user, rejuv_bonus)
 	for(var/i in 1 to 5)
-		user.adjustBruteLoss(-2 * rejuv_bonus)
-		user.adjustOxyLoss(-5 * rejuv_bonus)
-		user.adjustToxLoss(-2 * rejuv_bonus)
-		user.adjustFireLoss(-2 * rejuv_bonus)
-		for(var/datum/reagent/R in user.reagents.reagent_list)
-			if(!R.harmless)
-				user.reagents.remove_reagent(R.id, 2 * rejuv_bonus)
+		user.adjust_brute_loss(-2 * rejuv_bonus)
+		user.adjust_oxy_loss(-5 * rejuv_bonus)
+		user.adjust_tox_loss(-2 * rejuv_bonus, forced = TRUE)
+		user.adjust_fire_loss(-2 * rejuv_bonus)
+		for(var/datum/reagent/toxin/toxin as anything in user.reagents.reagent_list)
+			user.reagents.remove_reagent(toxin.type, 2 * rejuv_bonus)
 		sleep(35)
 
 /datum/antagonist/vampire/proc/get_rejuv_bonus()
@@ -97,20 +90,20 @@
 /datum/action/cooldown/spell/vampire_exfiltrate
 	name = "Conjure Blood Chalice"
 	desc = "Congeal blood into a chalice that will generate a portal away from the station."
-	gain_desc = "You can now decide to leave the station."
 	cooldown_time = 2 SECONDS
 	button_icon = 'icons/obj/items.dmi'
 	button_icon_state = "blood-chalice"
 	var/used = FALSE
+
 
 /datum/action/cooldown/spell/vampire_exfiltrate/New(Target)
 	. = ..()
 	add_vampire_ability()
 
 /datum/action/cooldown/spell/vampire_exfiltrate/cast(atom/cast_on)
-	var/mob/user = owner
+	var/mob/living/user = owner
 	if(used)
-		to_chat(user, SPAN_WARNING("You have already attempted to create a blood chalice!"))
+		to_chat(user, span_warning("You have already attempted to create a blood chalice!"))
 		return
 	var/datum/antagonist/vampire/vamp = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	vamp.prepare_exfiltration(user, /obj/item/wormhole_jaunter/extraction/vampire)
@@ -119,7 +112,6 @@
 /datum/action/cooldown/spell/vampire_specialize
 	name = "Choose Specialization"
 	desc = "Choose what sub-class of vampire you want to evolve into."
-	gain_desc = "You can now choose what specialization of vampire you want to evolve into."
 	cooldown_time = 2 SECONDS
 	button_icon_state = "select_class"
 
@@ -185,75 +177,99 @@
 		objective.update_explanation_text()
 
 /datum/action/cooldown/spell/vampire_glare
+	parent_type = /datum/action/cooldown/spell/aoe
 	name = "Glare"
 	desc = "Your eyes flash, stunning and silencing anyone in front of you. It has lesser effects for those around you."
-	action_icon_state = "vampire_glare"
-	base_cooldown = 30 SECONDS
-	stat_allowed = UNCONSCIOUS
+	button_icon_state = "vampire_glare"
+	check_flags = AB_CHECK_PHASED
+	cooldown_time = 0
+	aoe_radius = 1
+	var/charges = 2
+	var/max_charges = 2
+	var/recharge_time = 30 SECONDS
 
-/datum/spell/vampire/glare/create_new_targeting()
-	var/datum/spell_targeting/aoe/T = new
-	T.allowed_type = /mob/living
-	T.range = 1
-	return T
+/datum/action/cooldown/spell/vampire_glare/New(Target)
+	. = ..()
+	add_vampire_ability()
 
-/datum/spell/vampire/glare/create_new_cooldown()
-	var/datum/spell_cooldown/charges/C = new
-	C.max_charges = 2
-	C.recharge_duration = base_cooldown
-	C.charge_duration = 2 SECONDS
-	return C
+/datum/action/cooldown/spell/vampire_glare/get_things_to_cast_on(atom/center)
+	. = list()
+	for(var/mob/living/target in range(aoe_radius, center))
+		if(target != owner)
+			. += target
+
+/datum/action/cooldown/spell/vampire_glare/can_cast_spell(feedback = TRUE)
+	if(!..())
+		return FALSE
+	if(charges)
+		return TRUE
+	if(feedback)
+		to_chat(owner, span_warning("Your glare has not recovered yet."))
+	return FALSE
+
+/datum/action/cooldown/spell/vampire_glare/after_cast(atom/cast_on)
+	. = ..()
+	charges--
+	addtimer(CALLBACK(src, PROC_REF(recharge)), recharge_time)
+
+/datum/action/cooldown/spell/vampire_glare/proc/recharge()
+	charges = min(charges + 1, max_charges)
 
 /datum/action/cooldown/spell/vampire_lair
+	parent_type = /datum/action/cooldown/spell/pointed
 	name = "Lair"
 	desc = "Pick a coffin for yourself, the centrepiece of your new lair."
-	gain_desc = "You can now start a lair."
-	action_icon = 'icons/obj/closet.dmi'
-	action_icon_state = "coffin"
-	base_cooldown = 2 SECONDS
+	button_icon = 'icons/obj/structures.dmi'
+	button_icon_state = "coffin"
+	cooldown_time = 2 SECONDS
+	cast_range = 1
+	aim_assist = FALSE
 
-/datum/spell/vampire/lair/create_new_targeting()
-	var/datum/spell_targeting/click/T = new
-	T.range = 1
-	T.allowed_type = /obj/structure/closet/coffin
-	return T
+/datum/action/cooldown/spell/vampire_lair/New(Target)
+	. = ..()
+	add_vampire_ability()
 
-/datum/spell/vampire/lair/cast(list/targets, mob/user)
-	var/obj/structure/closet/coffin/C = targets[1] // this spell will basically always target a singular coffin unless you stack multiple on the same tile
-	if(!istype(C, /obj/structure/closet/coffin))
-		to_chat(user, SPAN_WARNING("This only works on coffins!"))
+/datum/action/cooldown/spell/vampire_lair/is_valid_target(atom/cast_on)
+	return istype(cast_on, /obj/structure/closet/crate/coffin)
+
+/datum/action/cooldown/spell/vampire_lair/cast(atom/cast_on)
+	var/mob/living/user = owner
+	var/obj/structure/closet/crate/coffin/coffin = cast_on
+	if(!istype(coffin))
+		to_chat(user, span_warning("This only works on coffins!"))
 		return
-	if(istype(C, /obj/structure/closet/coffin/vampire))
-		to_chat(user, SPAN_WARNING("This coffin serves another and refuses to bend to your will!"))
+	if(istype(coffin, /obj/structure/closet/crate/coffin/vampire))
+		to_chat(user, span_warning("This coffin serves another and refuses to bend to your will!"))
 		return
-	if(istype(C, /obj/structure/closet/coffin/sarcophagus))
-		to_chat(user, SPAN_WARNING("Making such a lavish lair would likely upset an ancient. You should really use a wooden coffin for now."))
-		return
-	for(var/turf/T in range(1, C))
+	for(var/turf/T in range(1, coffin))
 		if(T.density)
-			to_chat(user, SPAN_WARNING("You need more space around the coffin for the ritual!"))
+			to_chat(user, span_warning("You need more space around the coffin for the ritual!"))
 			return
-	to_chat(user, SPAN_DANGER("You begin marking the coffin!"))
-	C.Beam(user, icon_state = "drainbeam", maxdistance = 1, time = 10 SECONDS)
-	playsound(C, 'sound/misc/enter_blood.ogg', 20)
+	to_chat(user, span_danger("You begin marking the coffin!"))
+	coffin.Beam(user, icon_state = "drainbeam", maxdistance = 1, time = 10 SECONDS)
+	playsound(coffin, 'sound/misc/enter_blood.ogg', 20)
 	for(var/obj/machinery/light/L in range(5, user))
 		L.forced_flicker()
-	var/obj/effect/lair_rune/rune = new /obj/effect/lair_rune(get_turf(C), user)
-	if(!do_after(user, 10 SECONDS, target = C))
+	var/obj/effect/lair_rune/rune = new /obj/effect/lair_rune(get_turf(coffin), user)
+	if(!do_after(user, 10 SECONDS, target = coffin))
 		qdel(rune)
 		return
 	playsound(user, 'sound/hallucinations/im_here1.ogg', 30)
-	new /obj/structure/closet/coffin/vampire(get_turf(C), user)
-	qdel(C)
+	new /obj/structure/closet/crate/coffin/vampire(get_turf(coffin), user)
+	qdel(coffin)
 	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	V.has_lair = TRUE
 	V.upgrade_tiers -= type
 	V.remove_ability(src)
 
+/obj/structure/closet/crate/coffin/vampire
+	name = "vampiric coffin"
+	desc = "A coffin marked with a sanguine rune."
+
 /obj/effect/lair_rune
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	plane = FLOOR_PLANE
-	layer = SIGIL_LAYER
+	layer = RUNE_LAYER
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "vampiric_rune"
 	pixel_x = -34
@@ -262,7 +278,7 @@
 /obj/effect/lair_rune/Initialize(mapload, mob/user)
 	. = ..()
 	if(user)
-		color = user.dna.species.blood_color
+		color = user.get_bloodtype()?.get_color()
 
 /// No deviation at all. Flashed from the front or front-left/front-right. Alternatively, flashed in direct view.
 #define DEVIATION_NONE 3
@@ -271,44 +287,46 @@
 /// Full deviation. Flashed from directly behind or behind-left/behind-rack. Not flashed at all.
 #define DEVIATION_FULL 1
 
-/datum/spell/vampire/glare/cast(list/targets, mob/living/user = usr)
+/datum/action/cooldown/spell/vampire_glare/cast(atom/cast_on)
+	var/mob/living/user = owner
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(istype(H.glasses, /obj/item/clothing/glasses/sunglasses/blindfold))
-			var/obj/item/clothing/glasses/sunglasses/blindfold/B = H.glasses
+		if(istype(H.glasses, /obj/item/clothing/glasses/blindfold))
+			var/obj/item/clothing/glasses/blindfold/B = H.glasses
 			if(B.tint)
-				to_chat(user, SPAN_WARNING("You're blindfolded!"))
+				to_chat(user, span_warning("You're blindfolded!"))
 				return
-	user.mob_light(LIGHT_COLOR_BLOOD_MAGIC, 3, _duration = 2)
-	user.visible_message(SPAN_WARNING("[user]'s eyes emit a blinding flash!"))
+	user.mob_light(range = 3, power = 1, color = LIGHT_COLOR_BLOOD_MAGIC, duration = 2 SECONDS)
+	user.visible_message(span_warning("[user]'s eyes emit a blinding flash!"))
+	return ..()
 
-	for(var/mob/living/target in targets)
-		if(!target.affects_vampire(user))
-			continue
+/datum/action/cooldown/spell/vampire_glare/cast_on_thing_in_aoe(mob/living/target, mob/living/user)
+	if(!target.affects_vampire(user))
+		return
 
-		var/deviation
-		if(IS_HORIZONTAL(user))
-			deviation = DEVIATION_PARTIAL
-		else
-			deviation = calculate_deviation(target, user)
+	var/deviation
+	if(user.dir & (EAST | WEST))
+		deviation = DEVIATION_PARTIAL
+	else
+		deviation = calculate_deviation(target, user)
 
-		if(deviation == DEVIATION_FULL)
-			target.Confused(6 SECONDS)
-			target.apply_damage(20, STAMINA)
-		else if(deviation == DEVIATION_PARTIAL)
-			target.KnockDown(5 SECONDS)
-			target.Confused(6 SECONDS)
-			target.apply_damage(40, STAMINA)
-		else
-			target.Confused(10 SECONDS)
-			target.apply_damage(70, STAMINA)
-			target.KnockDown(12 SECONDS)
-			target.AdjustSilence(8 SECONDS)
-			target.flash_eyes(1, TRUE, TRUE)
-		to_chat(target, SPAN_WARNING("You are blinded by [user]'s glare."))
-		add_attack_logs(user, target, "(Vampire) Glared at")
+	if(deviation == DEVIATION_FULL)
+		target.adjust_confusion(6 SECONDS)
+		target.apply_damage(20, STAMINA)
+	else if(deviation == DEVIATION_PARTIAL)
+		target.AdjustKnockdown(5 SECONDS)
+		target.adjust_confusion(6 SECONDS)
+		target.apply_damage(40, STAMINA)
+	else
+		target.adjust_confusion(10 SECONDS)
+		target.apply_damage(70, STAMINA)
+		target.AdjustKnockdown(12 SECONDS)
+		target.adjust_silence(8 SECONDS)
+		target.flash_act(visual = TRUE)
+	to_chat(target, span_warning("You are blinded by [user]'s glare."))
+	log_combat(user, target, "glared at", addition = "(Vampire)")
 
-/datum/spell/vampire/glare/proc/calculate_deviation(mob/victim, mob/attacker)
+/datum/action/cooldown/spell/vampire_glare/proc/calculate_deviation(mob/victim, mob/attacker)
 
 	// If the victim was looking at the attacker, this is the direction they'd have to be facing.
 	var/attacker_to_victim = get_dir(attacker, victim)
@@ -345,7 +363,6 @@
 
 /datum/vampire_passive/vision
 	gain_desc = "Your vampiric vision has improved."
-	var/lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	var/see_in_dark = 1
 	var/vision_flags = SEE_MOBS
 
@@ -355,78 +372,73 @@
 
 /datum/vampire_passive/vision/full
 	gain_desc = "Your vampiric vision has reached its full strength!"
-	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 	see_in_dark = 6
 
 /datum/vampire_passive/full
 	gain_desc = "You have reached your full potential. You are no longer weak to the effects of anything holy."
 
 /datum/action/cooldown/spell/vampire_raise_vampires
+	parent_type = /datum/action/cooldown/spell/aoe
 	name = "Raise Vampires"
 	desc = "Summons deadly vampires from bluespace."
-	invocation = "none"
-	cooldown_min = 20
-	action_icon_state = "revive_thrall"
+	button_icon_state = "revive_thrall"
 	sound = 'sound/magic/wandodeath.ogg'
-	gain_desc = "You have gained the ability to Raise Vampires. This extremely powerful AOE ability affects all humans near you. Vampires/thralls are healed. Corpses are raised as vampires. Others are stunned, then brain damaged, then killed."
+	cooldown_time = 20 MINUTES
+	aoe_radius = 3
 
-/datum/spell/vampire/raise_vampires/create_new_targeting()
-	var/datum/spell_targeting/aoe/T = new
-	T.range = 3
-	return T
+/datum/action/cooldown/spell/vampire_raise_vampires/New(Target)
+	. = ..()
+	add_vampire_ability()
 
-/datum/spell/vampire/raise_vampires/cast(list/targets, mob/user = usr)
+/datum/action/cooldown/spell/vampire_raise_vampires/get_things_to_cast_on(atom/center)
+	. = list()
+	for(var/mob/living/carbon/human/target in range(aoe_radius, center))
+		if(target != owner)
+			. += target
+
+/datum/action/cooldown/spell/vampire_raise_vampires/cast(atom/cast_on)
+	var/mob/living/user = owner
 	new /obj/effect/temp_visual/cult/sparks(user.loc)
-	var/turf/T = get_turf(user)
-	to_chat(user, SPAN_WARNING("You call out within bluespace, summoning more vampiric spirits to aid you!"))
-	for(var/mob/living/carbon/human/H in targets)
-		T.Beam(H, "sendbeam", 'icons/effects/effects.dmi', time = 30, maxdistance = 7, beam_type = /obj/effect/ebeam)
-		new /obj/effect/temp_visual/cult/sparks(H.loc)
-		raise_vampire(user, H)
+	to_chat(user, span_warning("You call out within bluespace, summoning more vampiric spirits to aid you!"))
+	return ..()
+
+/datum/action/cooldown/spell/vampire_raise_vampires/cast_on_thing_in_aoe(mob/living/carbon/human/target, mob/living/user)
+	var/turf/user_turf = get_turf(user)
+	user_turf.Beam(target, "sendbeam", 'icons/effects/effects.dmi', time = 3 SECONDS, maxdistance = 7, beam_type = /obj/effect/ebeam)
+	new /obj/effect/temp_visual/cult/sparks(target.loc)
+	raise_vampire(user, target)
 
 
-/datum/spell/vampire/raise_vampires/proc/raise_vampire(mob/M, mob/living/carbon/human/H)
-	if(!istype(M) || !istype(H))
+/datum/action/cooldown/spell/vampire_raise_vampires/proc/raise_vampire(mob/living/user, mob/living/carbon/human/target)
+	if(!user?.mind || !target?.mind)
+		if(target)
+			target.visible_message("[target] looks to be too stupid to understand what is going on.")
 		return
-	if(!H.mind)
-		H.visible_message("[H] looks to be too stupid to understand what is going on.")
+	if(!target.can_have_blood() || !target.get_blood_volume())
+		target.visible_message("[target] looks unfazed!")
 		return
-	if(H.dna && (NO_BLOOD in H.dna.species.species_traits) || H.dna.species.exotic_blood || !H.blood_volume)
-		H.visible_message("[H] looks unfazed!")
+	if(target.mind.has_antag_datum(/datum/antagonist/vampire) || target.mind.has_antag_datum(/datum/antagonist/vampire_thrall))
+		target.visible_message(span_notice("[target] looks refreshed!"))
+		target.heal_overall_damage(brute = 60, burn = 60)
 		return
-	if(H.mind.has_antag_datum(/datum/antagonist/vampire) || H.mind.special_role == SPECIAL_ROLE_VAMPIRE || H.mind.special_role == SPECIAL_ROLE_VAMPIRE_THRALL)
-		H.visible_message(SPAN_NOTICE("[H] looks refreshed!"))
-		H.adjustBruteLoss(-60)
-		H.adjustFireLoss(-60)
-		for(var/obj/item/organ/external/E in H.bodyparts)
-			if(prob(25))
-				E.mend_fracture()
-				E.fix_internal_bleeding()
-				E.fix_burn_wound()
-
-		return
-	if(H.stat != DEAD)
-		if(H.IsWeakened())
-			H.visible_message(SPAN_WARNING("[H] looks to be in pain!"))
-			H.adjustBrainLoss(60)
+	if(target.stat != DEAD)
+		if(target.IsKnockdown())
+			target.visible_message(span_warning("[target] looks to be in pain!"))
+			target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 60)
 		else
-			H.visible_message(SPAN_WARNING("[H] looks to be stunned by the energy!"))
-			H.Weaken(40 SECONDS)
+			target.visible_message(span_warning("[target] looks to be stunned by the energy!"))
+			target.SetKnockdown(40 SECONDS)
 		return
-	for(var/obj/item/bio_chip/mindshield/L in H)
-		if(L && L.implanted)
-			qdel(L)
-	for(var/obj/item/bio_chip/traitor/T in H)
-		if(T && T.implanted)
-			qdel(T)
-	H.visible_message(SPAN_WARNING("[H] gets an eerie red glow in their eyes!"))
+	for(var/obj/item/implant/implant in target.implants)
+		implant.removed(target)
+	target.visible_message(span_warning("[target] gets an eerie red glow in their eyes!"))
 
 	var/datum/objective/protect/protect_objective = new
-	protect_objective.target = M.mind
-	protect_objective.explanation_text = "Protect [M.real_name]."
-	H.mind.add_mind_objective(protect_objective)
+	protect_objective.target = user.mind
+	protect_objective.explanation_text = "Protect [user.real_name]."
+	target.mind.add_mind_objective(protect_objective)
 
-	add_attack_logs(M, H, "Vampire-sired")
-	H.mind.make_vampire()
-	H.revive()
-	H.Weaken(40 SECONDS)
+	log_combat(user, target, "sired", addition = "(Vampire)")
+	target.mind.add_antag_datum(/datum/antagonist/vampire)
+	target.revive()
+	target.SetKnockdown(40 SECONDS)

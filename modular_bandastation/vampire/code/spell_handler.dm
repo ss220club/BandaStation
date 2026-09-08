@@ -6,6 +6,8 @@
 /datum/component/vampire_ability/Initialize(required_blood = 0, deduct_blood_on_cast = TRUE)
 	if(!istype(parent, /datum/action/cooldown/spell))
 		return COMPONENT_INCOMPATIBLE
+	var/datum/action/cooldown/spell/spell = parent
+	spell.spell_requirements = NONE
 	src.required_blood = required_blood
 	src.deduct_blood_on_cast = deduct_blood_on_cast
 	RegisterSignal(parent, COMSIG_SPELL_CAN_CAST_CHECK, PROC_REF(can_cast))

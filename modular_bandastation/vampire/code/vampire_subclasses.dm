@@ -25,15 +25,15 @@
 
 /datum/vampire_subclass/umbrae
 	name = "umbrae"
-	standard_powers = list(/datum/action/cooldown/spell/vampire/self/cloak = 150,
-							/datum/action/cooldown/spell/vampire/shadow_snare = 250,
+	standard_powers = list(/datum/action/cooldown/spell/vampire_cloak = 150,
+							/datum/action/cooldown/spell/pointed/vampire_shadow_snare = 250,
 							/datum/action/cooldown/spell/vampire/soul_anchor = 250,
 							/datum/action/cooldown/spell/vampire/dark_passage = 400,
 							/datum/action/cooldown/spell/vampire/vamp_extinguish = 600,
 							/datum/action/cooldown/spell/vampire/shadow_boxing = 800)
 	fully_powered_abilities = list(/datum/vampire_passive/full,
 								/datum/vampire_passive/vision/full,
-								/datum/action/cooldown/spell/vampire/self/eternal_darkness,
+								/datum/action/cooldown/spell/vampire_eternal_darkness,
 								/datum/vampire_passive/vision/xray)
 	unique_objectives = list("Silence the station's telecommunications equipment. Their screams will fall on deaf ears.",
 							"Shroud %DEPARTMENT in darkness.",
@@ -41,7 +41,7 @@
 
 /datum/vampire_subclass/hemomancer
 	name = "hemomancer"
-	standard_powers = list(/datum/action/cooldown/spell/vampire/self/vamp_claws = 150,
+	standard_powers = list(/datum/action/cooldown/spell/vampire_vamp_claws = 150,
 							/datum/action/cooldown/spell/vampire/blood_tendrils = 250,
 							/datum/action/cooldown/spell/vampire/blood_barrier = 250,
 							/datum/spell/ethereal_jaunt/blood_pool = 400,
@@ -49,18 +49,18 @@
 							/datum/action/cooldown/spell/vampire/blood_eruption = 800)
 	fully_powered_abilities = list(/datum/vampire_passive/full,
 								/datum/vampire_passive/vision/full,
-								/datum/action/cooldown/spell/vampire/self/blood_spill)
+							/datum/action/cooldown/spell/vampire_blood_spill)
 	unique_objectives = list("Deprive the medical bay of blood. It's not theirs to use.",
 							"Paint %DEPARTMENT red with the blood of those who would oppose you.",
 							"Show the station that you stand at the peak of strength.")
 
 /datum/vampire_subclass/gargantua
 	name = "gargantua"
-	standard_powers = list(/datum/action/cooldown/spell/vampire/self/blood_swell = 150,
-							/datum/action/cooldown/spell/vampire/self/blood_rush = 250,
-							/datum/action/cooldown/spell/vampire/self/stomp = 250,
+	standard_powers = list(/datum/action/cooldown/spell/vampire_blood_swell = 150,
+							/datum/action/cooldown/spell/vampire_blood_rush = 250,
+							/datum/action/cooldown/spell/vampire_stomp = 250,
 							/datum/vampire_passive/blood_swell_upgrade = 400,
-							/datum/action/cooldown/spell/vampire/self/overwhelming_force = 600,
+							/datum/action/cooldown/spell/vampire_overwhelming_force = 600,
 							/datum/action/cooldown/spell/vampire/charge = 800,
 							/datum/spell/fireball/demonic_grasp = 800)
 	fully_powered_abilities = list(/datum/vampire_passive/full,
@@ -92,17 +92,17 @@
 
 /datum/vampire_subclass/ancient
 	name = "ancient"
-	standard_powers = list(/datum/action/cooldown/spell/vampire/self/vamp_claws,
-							/datum/action/cooldown/spell/vampire/self/blood_swell,
-							/datum/action/cooldown/spell/vampire/self/cloak,
+	standard_powers = list(/datum/action/cooldown/spell/vampire_vamp_claws,
+							/datum/action/cooldown/spell/vampire_blood_swell,
+							/datum/action/cooldown/spell/vampire_cloak,
 							/datum/action/cooldown/spell/vampire/enthrall,
 							/datum/action/cooldown/spell/vampire/thrall_commune,
 							/datum/action/cooldown/spell/vampire/blood_tendrils,
 							/datum/action/cooldown/spell/vampire/blood_barrier,
-							/datum/action/cooldown/spell/vampire/self/blood_rush,
-							/datum/action/cooldown/spell/vampire/self/stomp,
+							/datum/action/cooldown/spell/vampire_blood_rush,
+							/datum/action/cooldown/spell/vampire_stomp,
 							/datum/action/cooldown/spell/vampire/charge,
-							/datum/action/cooldown/spell/vampire/shadow_snare,
+							/datum/action/cooldown/spell/pointed/vampire_shadow_snare,
 							/datum/action/cooldown/spell/vampire/soul_anchor,
 							/datum/action/cooldown/spell/vampire/pacify,
 							/datum/action/cooldown/spell/vampire/switch_places,
@@ -112,7 +112,7 @@
 							/datum/action/cooldown/spell/vampire/self/decoy,
 							/datum/action/cooldown/spell/vampire/blood_eruption,
 							/datum/action/cooldown/spell/vampire/predator_senses,
-							/datum/action/cooldown/spell/vampire/self/overwhelming_force,
+							/datum/action/cooldown/spell/vampire_overwhelming_force,
 							/datum/action/cooldown/spell/vampire/vamp_extinguish,
 							/datum/action/cooldown/spell/vampire/rally_thralls,
 							/datum/action/cooldown/spell/vampire/self/share_damage,
@@ -120,9 +120,9 @@
 							/datum/action/cooldown/spell/vampire/shadow_boxing,
 							/datum/vampire_passive/full,
 							/datum/vampire_passive/vision/full,
-							/datum/action/cooldown/spell/vampire/self/blood_spill,
+							/datum/action/cooldown/spell/vampire_blood_spill,
 							/datum/action/cooldown/spell/vampire/arena,
-							/datum/action/cooldown/spell/vampire/self/eternal_darkness,
+							/datum/action/cooldown/spell/vampire_eternal_darkness,
 							/datum/action/cooldown/spell/vampire/hysteria,
 							/datum/action/cooldown/spell/vampire_raise_vampires,
 							/datum/vampire_passive/vision/xray)
