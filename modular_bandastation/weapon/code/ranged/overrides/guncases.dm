@@ -1,5 +1,5 @@
 /obj/item/storage/toolbox/guncase
-	desc = "A thick gun case with foam inserts laid out to fit a weapon, magazines, and gear securely."
+	desc = "Прочный чехол для оружия с вставками из пенопласта, расположение которых обеспечивает надежную фиксацию оружия, магазинов и снаряжения."
 	icon = 'modular_bandastation/weapon/icons/guncases.dmi'
 	icon_state = "guncase"
 	worn_icon = 'modular_bandastation/weapon/icons/guncases_worn.dmi'
@@ -121,7 +121,7 @@
 
 /obj/item/storage/toolbox/guncase/ntcase/examine(mob/user)
 	. = ..()
-	. += "<i>It is emblazoned with the <b>[span_blue("Nanotrasen")]</b> logo.</i>"
+	. += "<i>На нём выгравирован логотип <b>[span_blue("Нанотрейзен")]</b>.</i>"
 
 /obj/item/storage/toolbox/guncase/ntcase/pistol
 	name = "small gun case"
@@ -137,7 +137,7 @@
 
 /obj/item/storage/toolbox/guncase/ntspecial/examine(mob/user)
 	. = ..()
-	. += "<i>It is emblazoned with a gilded <b>[span_blue("Nanotrasen")]</b> logo.</i>"
+	. += "<i>На нём выгравирован позолоченный логотип <b>[span_blue("Нанотрейзен")]</b>.</i>"
 
 /obj/item/storage/toolbox/guncase/ntspecial/pistol
 	name = "small gun case"
@@ -153,7 +153,7 @@
 
 /obj/item/storage/toolbox/guncase/tsf/examine(mob/user)
 	. = ..()
-	. += "<i>It is stamped with the <b>[span_cyan("TSF")]</b> emblem.</i>"
+	. += "<i>На нём отпечатана эмблема <b>[span_cyan("ТСФ")]</b>.</i>"
 
 /obj/item/storage/toolbox/guncase/tsf/pistol
 	name = "small gun case"
@@ -169,7 +169,7 @@
 
 /obj/item/storage/toolbox/guncase/tsfspec/examine(mob/user)
 	. = ..()
-	. += "<i>It is stamped with the <b>[span_cyan("TSF")]</b> emblem.</i>"
+	. += "<i>На нём отпечатана эмблема <b>[span_cyan("ТСФ")]</b>.</i>"
 
 /obj/item/storage/toolbox/guncase/tsfspec/pistol
 	name = "small gun case"
@@ -185,7 +185,7 @@
 
 /obj/item/storage/toolbox/guncase/syndicate/examine(mob/user)
 	. = ..()
-	. += "<i>It is marked with <b>[span_red("Syndicate Conglomerate")]</b> insignia.</i>"
+	. += "<i>Он отмечен эмблемой <b>[span_red("Когломерата Синдиката")]</b>.</i>"
 
 /obj/item/storage/toolbox/guncase/syndicate/pistol
 	name = "small gun case"
@@ -201,7 +201,7 @@
 
 /obj/item/storage/toolbox/guncase/interdyne/examine(mob/user)
 	. = ..()
-	. += "<i>It is stamped with the <b>[span_green("Interdyne Pharmaceuticals")]</b> logo.</i>"
+	. += "<i>На нём отпечатана эмблема логотип <b>[span_green("Interdyne Pharmaceuticals")]</b>.</i>"
 
 /obj/item/storage/toolbox/guncase/interdyne/pistol
 	name = "small gun case"
@@ -217,7 +217,7 @@
 
 /obj/item/storage/toolbox/guncase/interdynespec/examine(mob/user)
 	. = ..()
-	. += "<i>It is stamped with the <b>[span_green("Interdyne Pharmaceuticals")]</b> logo.</i>"
+	. += "<i>На нём отпечатана эмблема логотип <b>[span_green("Interdyne Pharmaceuticals")]</b>.</i>"
 
 /obj/item/storage/toolbox/guncase/interdynespec/pistol
 	name = "small gun case"
@@ -238,7 +238,7 @@
 
 /obj/item/storage/toolbox/guncase/pistol/trappiste_small_case/examine(mob/user)
 	. = ..()
-	. += "<i>The five square grid of <b>[span_red("Trappiste Fabriek")]</b> is displayed prominently on the top.</i>"
+	. += "<i>В верхней части заметно размещена пятью квадратами сетка <b>[span_red("Trappiste Fabriek")]</b>.</i>"
 
 // Xhihao Light Arms
 /obj/item/storage/toolbox/guncase/xhihao_large_case
@@ -246,7 +246,7 @@
 
 /obj/item/storage/toolbox/guncase/xhihao_large_case/examine(mob/user)
 	. = ..()
-	. += "<i>It is subtly marked with <b>[span_purple("Xhihao Light Arms")]</b> trademarking.</i>"
+	. += "<i>На нём незаметно нанесена торговая марка <b>[span_purple("Xhihao Light Arms")]</b>.</i>"
 
 /obj/item/storage/toolbox/guncase/soviet
 	desc = "Оружейный кейс с символикой СССП отпечатаной на верхней части."

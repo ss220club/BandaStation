@@ -1,6 +1,6 @@
 /obj/structure/rack/gunrack
 	name = "gun rack"
-	desc = "A tall rack for storing guns."
+	desc = "Высокая стойка для хранения оружия."
 	icon = 'modular_bandastation/weapon/icons/gun_rack.dmi'
 	icon_state = "gunrack"
 	pass_flags_self = NONE
