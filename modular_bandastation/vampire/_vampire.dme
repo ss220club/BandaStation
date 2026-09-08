@@ -5,7 +5,6 @@
 #include "code/blood_hud.dm"
 #include "code/datum_vampire.dm"
 #include "code/spell_handler.dm"
-#include "code/vampire_spell_handler.dm"
 #include "code/nullrod.dm"
 #include "code/vamp_thrall.dm"
 #include "code/vampire_subclasses.dm"
@@ -14,4 +13,3 @@
 #include "code/vampire_powers/gargantua_powers.dm"
 #include "code/vampire_powers/hemomancer_powers.dm"
 #include "code/vampire_powers/umbrae_powers.dm"
-

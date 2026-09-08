@@ -28,12 +28,12 @@
 
 	/// Powers that all vampires unlock and at what blood total level they unlock them
 	var/list/upgrade_tiers = list(
-		/datum/action/cooldown/spell/vampire/rejuvenate = 0,
-		/datum/action/cooldown/spell/aoe/charges/vampire/glare = 0,
+		/datum/action/cooldown/spell/vampire_rejuvenate = 0,
+		/datum/action/cooldown/spell/vampire_glare = 0,
 		/datum/vampire_passive/vision = 100,
-		/datum/action/cooldown/spell/vampire/specialize = 150,
-		/datum/action/cooldown/spell/vampire/exfiltrate = 150,
-		/datum/action/cooldown/spell/pointed/vampire/lair = 150,
+		/datum/action/cooldown/spell/vampire_specialize = 150,
+		/datum/action/cooldown/spell/vampire_exfiltrate = 150,
+		/datum/action/cooldown/spell/vampire_lair = 150,
 		/datum/vampire_passive/regen = 200,
 		/datum/vampire_passive/vision/advanced = 500,
 	)
@@ -215,7 +215,7 @@
 
 /datum/antagonist/vampire/proc/clear_subclass(give_specialize_power = TRUE)
 	if(give_specialize_power)
-		upgrade_tiers[/datum/action/cooldown/spell/vampire/specialize] = 150
+		upgrade_tiers[/datum/action/cooldown/spell/vampire_specialize] = 150
 	remove_all_powers()
 	QDEL_NULL(subclass)
 	check_vampire_upgrade()

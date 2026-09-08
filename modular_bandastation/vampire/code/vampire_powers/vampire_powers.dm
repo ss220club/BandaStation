@@ -17,24 +17,6 @@
 		return FALSE
 	return TRUE
 
-/datum/spell/vampire
-	action_background_icon_state = "bg_vampire"
-	human_req = TRUE
-	clothes_req = FALSE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	/// How much blood this ability costs to use
-	var/required_blood
-	var/deduct_blood_on_cast = TRUE
-
-/datum/spell/vampire/create_new_handler()
-	var/datum/spell_handler/vampire/H = new
-	H.required_blood = required_blood
-	H.deduct_blood_on_cast = deduct_blood_on_cast
-	return H
-
-/datum/spell/vampire/self/create_new_targeting()
-	return new /datum/spell_targeting/self
-
 /datum/vampire_passive
 	var/gain_desc
 	var/mob/living/owner = null
@@ -52,16 +34,20 @@
 	owner.update_sight() // Life updates conditionally, so we need to update sight here in case the vamp gets new vision based on his powers. Maybe one day refactor to be more OOP and on the vampire's ability datum.
 	return
 
-/datum/spell/vampire/self/rejuvenate
+/datum/action/cooldown/spell/vampire_rejuvenate
 	name = "Rejuvenate"
 	desc = "Use reserve blood to enliven your body, removing any incapacitating effects."
-	action_icon_state = "vampire_rejuvinate"
-	base_cooldown = 20 SECONDS
-	stat_allowed = UNCONSCIOUS
+	button_icon_state = "vampire_rejuvinate"
+	cooldown_time = 20 SECONDS
+	check_flags = AB_CHECK_PHASED
 	antimagic_flags = NONE // So. If you have a null rod on your person, you can't cast vampire spells. I would rather not have officers abuse this by putting a nullrod in their pocket or something to block rejuvinate.
 
-/datum/spell/vampire/self/rejuvenate/cast(list/targets, mob/user = usr)
-	var/mob/living/U = user
+/datum/action/cooldown/spell/vampire_rejuvenate/New(Target)
+	. = ..()
+	add_vampire_ability()
+
+/datum/action/cooldown/spell/vampire_rejuvenate/cast(atom/cast_on)
+	var/mob/living/U = owner
 
 	U.SetWeakened(0)
 	U.SetStunned(0)
@@ -72,21 +58,21 @@
 	U.adjustStaminaLoss(-100)
 	U.stand_up(TRUE)
 	SEND_SIGNAL(U, COMSIG_LIVING_CLEAR_STUNS)
-	to_chat(user, SPAN_NOTICE("You instill your body with clean blood and remove any incapacitating effects."))
+	to_chat(U, span_notice("You instill your body with clean blood and remove any incapacitating effects."))
 	var/datum/antagonist/vampire/V = U.mind.has_antag_datum(/datum/antagonist/vampire)
 	for(var/datum/disease/zombie/zombie_infection in U.viruses)
 		zombie_infection.stage = min(zombie_infection.stage, round(7 - (V.bloodtotal/100))) // 700 max usable blood can cleanse any zombie infection
 		if(zombie_infection.stage <= 0)
 			zombie_infection.cure()
-			to_chat(user, SPAN_NOTICE("You cleanse the plague from your system."))
+			to_chat(U, span_notice("You cleanse the plague from your system."))
 		else
-			to_chat(user, SPAN_WARNING("You weaken the plague in your system, but you don't have enough blood to completely remove it."))
+			to_chat(U, span_warning("You weaken the plague in your system, but you don't have enough blood to completely remove it."))
 
 	var/rejuv_bonus = V.get_rejuv_bonus()
 	if(rejuv_bonus)
 		INVOKE_ASYNC(src, PROC_REF(heal), U, rejuv_bonus)
 
-/datum/spell/vampire/self/rejuvenate/proc/heal(mob/living/user, rejuv_bonus)
+/datum/action/cooldown/spell/vampire_rejuvenate/proc/heal(mob/living/user, rejuv_bonus)
 	for(var/i in 1 to 5)
 		user.adjustBruteLoss(-2 * rejuv_bonus)
 		user.adjustOxyLoss(-5 * rejuv_bonus)
@@ -108,16 +94,21 @@
 
 	return TRUE
 
-/datum/spell/vampire/self/exfiltrate
+/datum/action/cooldown/spell/vampire_exfiltrate
 	name = "Conjure Blood Chalice"
 	desc = "Congeal blood into a chalice that will generate a portal away from the station."
 	gain_desc = "You can now decide to leave the station."
-	base_cooldown = 2 SECONDS
-	action_icon = 'icons/obj/items.dmi'
-	action_icon_state = "blood-chalice"
+	cooldown_time = 2 SECONDS
+	button_icon = 'icons/obj/items.dmi'
+	button_icon_state = "blood-chalice"
 	var/used = FALSE
 
-/datum/spell/vampire/self/exfiltrate/cast(mob/user)
+/datum/action/cooldown/spell/vampire_exfiltrate/New(Target)
+	. = ..()
+	add_vampire_ability()
+
+/datum/action/cooldown/spell/vampire_exfiltrate/cast(atom/cast_on)
+	var/mob/user = owner
 	if(used)
 		to_chat(user, SPAN_WARNING("You have already attempted to create a blood chalice!"))
 		return
@@ -125,32 +116,36 @@
 	vamp.prepare_exfiltration(user, /obj/item/wormhole_jaunter/extraction/vampire)
 	used = TRUE
 
-/datum/spell/vampire/self/specialize
+/datum/action/cooldown/spell/vampire_specialize
 	name = "Choose Specialization"
 	desc = "Choose what sub-class of vampire you want to evolve into."
 	gain_desc = "You can now choose what specialization of vampire you want to evolve into."
-	base_cooldown = 2 SECONDS
-	action_icon_state = "select_class"
+	cooldown_time = 2 SECONDS
+	button_icon_state = "select_class"
 
-/datum/spell/vampire/self/specialize/cast(mob/user)
-	ui_interact(user)
+/datum/action/cooldown/spell/vampire_specialize/New(Target)
+	. = ..()
+	add_vampire_ability()
 
-/datum/spell/vampire/self/specialize/ui_state(mob/user)
+/datum/action/cooldown/spell/vampire_specialize/cast(atom/cast_on)
+	ui_interact(owner)
+
+/datum/action/cooldown/spell/vampire_specialize/ui_state(mob/user)
 	return GLOB.always_state
 
-/datum/spell/vampire/self/specialize/ui_interact(mob/user, datum/tgui/ui = null)
+/datum/action/cooldown/spell/vampire_specialize/ui_interact(mob/user, datum/tgui/ui = null)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "SpecMenu", "Specialisation Menu")
 		ui.set_autoupdate(FALSE)
 		ui.open()
 
-/datum/spell/vampire/self/specialize/ui_data(mob/user)
+/datum/action/cooldown/spell/vampire_specialize/ui_data(mob/user)
 	var/datum/antagonist/vampire/vamp = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	var/list/data = list("subclasses" = vamp.subclass)
 	return data
 
-/datum/spell/vampire/self/specialize/ui_act(action, list/params)
+/datum/action/cooldown/spell/vampire_specialize/ui_act(action, list/params)
 	if(..())
 		return
 	var/datum/antagonist/vampire/vamp = usr.mind.has_antag_datum(/datum/antagonist/vampire)
@@ -189,7 +184,7 @@
 	for(var/datum/objective/specialization/objective in owner.get_all_objectives())
 		objective.update_explanation_text()
 
-/datum/spell/vampire/glare
+/datum/action/cooldown/spell/vampire_glare
 	name = "Glare"
 	desc = "Your eyes flash, stunning and silencing anyone in front of you. It has lesser effects for those around you."
 	action_icon_state = "vampire_glare"
@@ -209,9 +204,9 @@
 	C.charge_duration = 2 SECONDS
 	return C
 
-/datum/spell/vampire/lair
+/datum/action/cooldown/spell/vampire_lair
 	name = "Lair"
-	desc = "Выберите себе гроб, который станет центральным элементом вашего нового логова."
+	desc = "Pick a coffin for yourself, the centrepiece of your new lair."
 	gain_desc = "You can now start a lair."
 	action_icon = 'icons/obj/closet.dmi'
 	action_icon_state = "coffin"
@@ -226,19 +221,19 @@
 /datum/spell/vampire/lair/cast(list/targets, mob/user)
 	var/obj/structure/closet/coffin/C = targets[1] // this spell will basically always target a singular coffin unless you stack multiple on the same tile
 	if(!istype(C, /obj/structure/closet/coffin))
-		to_chat(user, SPAN_WARNING("Это работает только с гробами!"))
+		to_chat(user, SPAN_WARNING("This only works on coffins!"))
 		return
 	if(istype(C, /obj/structure/closet/coffin/vampire))
-		to_chat(user, SPAN_WARNING("Этот гроб принадлежит другому и отказывается подчиняться вашему воле!"))
+		to_chat(user, SPAN_WARNING("This coffin serves another and refuses to bend to your will!"))
 		return
 	if(istype(C, /obj/structure/closet/coffin/sarcophagus))
-		to_chat(user, SPAN_WARNING("Создание такого роскошного логова, вероятно, расстроило бы древний народ. Вам лучше пока использовать деревянный гроб."))
+		to_chat(user, SPAN_WARNING("Making such a lavish lair would likely upset an ancient. You should really use a wooden coffin for now."))
 		return
 	for(var/turf/T in range(1, C))
 		if(T.density)
-			to_chat(user, SPAN_WARNING("Вам нужно больше места вокруг гроба для ритуала!"))
+			to_chat(user, SPAN_WARNING("You need more space around the coffin for the ritual!"))
 			return
-	to_chat(user, SPAN_DANGER("Вы начинаете обозначать гроб!"))
+	to_chat(user, SPAN_DANGER("You begin marking the coffin!"))
 	C.Beam(user, icon_state = "drainbeam", maxdistance = 1, time = 10 SECONDS)
 	playsound(C, 'sound/misc/enter_blood.ogg', 20)
 	for(var/obj/machinery/light/L in range(5, user))
@@ -366,7 +361,7 @@
 /datum/vampire_passive/full
 	gain_desc = "You have reached your full potential. You are no longer weak to the effects of anything holy."
 
-/datum/spell/vampire/raise_vampires
+/datum/action/cooldown/spell/vampire_raise_vampires
 	name = "Raise Vampires"
 	desc = "Summons deadly vampires from bluespace."
 	invocation = "none"
