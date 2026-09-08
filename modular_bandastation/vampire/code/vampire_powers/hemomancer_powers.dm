@@ -241,7 +241,7 @@
 
 /datum/action/cooldown/spell/aoe/vampire_blood_eruption/cast_on_thing_in_aoe(mob/living/target, atom/caster)
 	var/turf/turf = get_turf(target)
-	var/obj/effect/temp_visual/blood_spike/spike = new(turf)
+	new /obj/effect/temp_visual/blood_spike(turf)
 	playsound(target, 'sound/misc/demon_attack1.ogg', 50, TRUE)
 	target.apply_damage(50, BRUTE, BODY_ZONE_CHEST)
 	target.visible_message(span_warning("[target] gets impaled by a spike of living blood!"))

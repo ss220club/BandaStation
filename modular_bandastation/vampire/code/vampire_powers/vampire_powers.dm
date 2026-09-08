@@ -223,7 +223,7 @@
 	parent_type = /datum/action/cooldown/spell/pointed
 	name = "Lair"
 	desc = "Pick a coffin for yourself, the centrepiece of your new lair."
-	button_icon = 'icons/obj/structures.dmi'
+	button_icon = 'icons/obj/storage/crates.dmi'
 	button_icon_state = "coffin"
 	cooldown_time = 2 SECONDS
 	cast_range = 1
