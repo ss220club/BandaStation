@@ -9,6 +9,8 @@
 
 	/// The vampire whose commands this thrall must obey.
 	var/datum/weakref/master_ref
+	/// The tg action granted while this datum is active.
+	var/datum/action/cooldown/spell/thrall_commune
 
 /datum/antagonist/vampire_thrall/New(datum/antagonist/vampire/master)
 	master_ref = WEAKREF(master)
@@ -35,9 +37,13 @@
 	return ..()
 
 /datum/antagonist/vampire_thrall/apply_innate_effects(mob/living/mob_override)
-	var/datum/mind/thrall_mind = mob_override?.mind
-	thrall_mind?.AddSpell(new /datum/action/cooldown/spell/vampire/thrall_commune)
+	if(!mob_override || thrall_commune)
+		return
+	thrall_commune = new /datum/action/cooldown/spell/vampire/thrall_commune
+	thrall_commune.Grant(mob_override)
 
 /datum/antagonist/vampire_thrall/remove_innate_effects(mob/living/mob_override)
-	var/datum/mind/thrall_mind = mob_override?.mind
-	thrall_mind?.RemoveSpell(/datum/action/cooldown/spell/vampire/thrall_commune)
+	if(!thrall_commune)
+		return
+	thrall_commune.Remove(mob_override)
+	QDEL_NULL(thrall_commune)
