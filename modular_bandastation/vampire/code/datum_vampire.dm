@@ -98,17 +98,16 @@
 	mob_override = ..()
 	if(ishuman(mob_override))
 		var/mob/living/carbon/human/human_target = mob_override
-		human_target.dna.species.set_food_icon(human_target, 'icons/mob/screen_hunger_vampire.dmi')
+		human_target.dna.species.set_food_icon(human_target, 'modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
 
+	update_blood_hud()
 	check_vampire_upgrade(FALSE)
 	RegisterSignal(mob_override, COMSIG_ATOM_HOLYATTACK, PROC_REF(holy_attack_reaction))
 
 /datum/antagonist/vampire/remove_innate_effects(mob/living/mob_override)
 	mob_override = ..()
 	remove_all_powers()
-	var/datum/hud/hud = mob_override?.hud_used
-	if(hud?.vampire_blood_display)
-		hud.remove_vampire_hud()
+	mob_override?.hud_used?.remove_screen_object(HUD_MOB_VAMPIRE_BLOOD)
 
 	if(ishuman(mob_override))
 		var/mob/living/carbon/human/human_target = mob_override
@@ -280,16 +279,7 @@
 			owner.current.dust()
 
 /datum/antagonist/vampire/proc/handle_vampire()
-	if(owner.current.hud_used)
-		var/datum/hud/hud = owner.current.hud_used
-		if(!hud.vampire_blood_display)
-			hud.vampire_blood_display = new /atom/movable/screen()
-			hud.vampire_blood_display.name = "Usable Blood"
-			hud.vampire_blood_display.icon_state = "blood_display"
-			hud.vampire_blood_display.screen_loc = "WEST:6,CENTER-1:15"
-			hud.static_inventory += hud.vampire_blood_display
-			hud.show_hud(hud.hud_version)
-		hud.vampire_blood_display.maptext = "<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font face='Small Fonts' color='#ce0202'>[bloodusable]</font></div>"
+	update_blood_hud()
 
 	handle_vampire_cloak()
 	if(isspaceturf(get_turf(owner.current)))
@@ -334,6 +324,7 @@
 
 	bloodtotal += blood_amount
 	bloodusable += blood_amount
+	update_blood_hud()
 	check_vampire_upgrade(TRUE)
 
 	for(var/datum/action/cooldown/spell/spell in powers)
@@ -341,8 +332,19 @@
 
 /datum/antagonist/vampire/proc/subtract_usable_blood(blood_amount)
 	bloodusable = clamp(bloodusable - blood_amount, 0, bloodtotal)
+	update_blood_hud()
 	for(var/datum/action/cooldown/spell/spell in powers)
 		spell.build_all_button_icons()
+
+/datum/antagonist/vampire/proc/update_blood_hud()
+	var/datum/hud/hud = owner?.current?.hud_used
+	if(!hud)
+		return
+
+	var/atom/movable/screen/vampire_blood/blood_display = hud.screen_objects[HUD_MOB_VAMPIRE_BLOOD]
+	if(!blood_display)
+		blood_display = hud.add_screen_object(/atom/movable/screen/vampire_blood, HUD_MOB_VAMPIRE_BLOOD, HUD_GROUP_INFO, update_screen = TRUE)
+	blood_display.update_maptext()
 
 /datum/antagonist/vampire/proc/vamp_burn(burn_chance)
 	if(prob(burn_chance) && owner.current.health >= 50)
