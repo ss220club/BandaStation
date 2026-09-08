@@ -14,7 +14,7 @@
 	if (lighting_object)
 		qdel(lighting_object, force=TRUE) //Shitty fix for lighting objects persisting after death
 
-	new /atom/movable/lighting_object(null, src)
+	new /atom/movable/lighting_object(src)
 
 /// Used to get a scaled lumcount.
 /turf/proc/get_lumcount(minlum = 0, maxlum = 1)
@@ -84,29 +84,40 @@
 	for (var/datum/component/overlay_lighting/light as anything in collect_dynamic_lightsources())
 		. += light.lum_power
 
-// You've heard of oranges_ear, prepare for oranges_eye
+/// You've heard of oranges_ear, prepare for oranges_eye
 /// Uses the same optimization via viewers() that get_hearers_in_view does by allocating oranges ears to overlay lights
 /// And collecting viewers rather than checking view() for each one of them
 /turf/proc/collect_dynamic_lightsources()
 	. = list()
 
 	var/datum/spatial_grid_cell/grid_cell = SSspatial_grid.get_cell_of(src)
+	if(!grid_cell)
+		return
 	var/list/light_sources = list()
 	var/furthest_range = 0
-	for (var/datum/component/overlay_lighting/light as anything in grid_cell.dynamic_light_sources)
+	for(var/datum/component/overlay_lighting/light as anything in grid_cell.dynamic_light_sources)
+		if(!light || !light.current_holder)
+			continue
+
+		// BANDASTATION EDIT BEGIN:
+		// Directional lights are registered in a rough spatial-grid bounding area.
+		// Filter them again against the exact turf being checked.
+		if(light.directional && !light.is_turf_in_directional_light(src))
+			continue
+		// BANDASTATION EDIT END
+
 		furthest_range = max(furthest_range, light.lumcount_range)
-		if (isnull(light_sources[light.current_holder]))
+		if(isnull(light_sources[light.current_holder]))
 			light_sources[light.current_holder] = light
-		else if (islist(light_sources[light.current_holder]))
+		else if(islist(light_sources[light.current_holder]))
 			light_sources[light.current_holder] |= light
 		else
 			light_sources[light.current_holder] = list(light_sources[light.current_holder], light)
 
 	var/list/assigned_oranges_ears = SSspatial_grid.assign_oranges_ears(light_sources)
 	for(var/mob/oranges_ear/ear in hearers(furthest_range, src))
-		for (var/atom/glowie as anything in ear.references)
+		for(var/atom/glowie as anything in ear.references)
 			. += light_sources[glowie]
-
 	for(var/mob/oranges_ear/remaining_ear as anything in assigned_oranges_ears)
 		remaining_ear.unassign()
 
