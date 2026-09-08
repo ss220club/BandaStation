@@ -1,4 +1,4 @@
-/datum/spell/vampire/self/cloak
+/datum/action/cooldown/spell/vampire/self/cloak
 	name = "Cloak of Darkness"
 	desc = "Toggles whether you are currently cloaking yourself in darkness. When in darkness and toggled on, you move at increased speeds."
 	gain_desc = "You have gained the Cloak of Darkness ability, which when toggled makes you nearly invisible and highly agile in the shroud of darkness."
@@ -6,7 +6,7 @@
 	action_icon_state = "vampire_cloak"
 	base_cooldown = 2 SECONDS
 
-/datum/spell/vampire/self/cloak/proc/update_spell_name(mob/living/user)
+/datum/action/cooldown/spell/vampire/self/cloak/proc/update_spell_name(mob/living/user)
 	if(!ishuman(user) || !user.mind)
 		return
 	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
@@ -17,7 +17,7 @@
 	SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_NAME)
 	build_all_button_icons()
 
-/datum/spell/vampire/self/cloak/cast(list/targets, mob/user = usr)
+/datum/action/cooldown/spell/vampire/self/cloak/cast(list/targets, mob/user = usr)
 	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	V.iscloaking = !V.iscloaking
 	if(ishuman(user))
@@ -36,7 +36,7 @@
 	var/datum/antagonist/vampire/V = mind.has_antag_datum(/datum/antagonist/vampire)
 	V.handle_vampire_cloak()
 
-/datum/spell/vampire/shadow_snare
+/datum/action/cooldown/spell/vampire/shadow_snare
 	name = "Shadow Snare (20)"
 	desc = "You summon a trap on the ground. When crossed it will blind the target, extinguish any lights they may have, and ensnare them."
 	gain_desc = "You have gained the ability to summon a trap that will blind, ensnare, and turn off the lights of anyone who crosses it."
@@ -45,13 +45,13 @@
 	action_background_icon_state = "bg_umbrae"
 	action_icon_state = "shadow_snare"
 
-/datum/spell/vampire/shadow_snare/create_new_targeting()
+/datum/action/cooldown/spell/vampire/shadow_snare/create_new_targeting()
 	var/datum/spell_targeting/click/T = new
 	T.allowed_type = /turf/simulated
 	T.click_radius = -1
 	return T
 
-/datum/spell/vampire/shadow_snare/cast(list/targets, mob/user)
+/datum/action/cooldown/spell/vampire/shadow_snare/cast(list/targets, mob/user)
 	var/turf/target = targets[1]
 	new /obj/item/restraints/legcuffs/beartrap/shadow_snare(target)
 
@@ -117,7 +117,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/datum/spell/vampire/soul_anchor
+/datum/action/cooldown/spell/vampire/soul_anchor
 	name = "Soul Anchor (30)"
 	desc = "You summon a dimensional anchor after a delay. Casting again will teleport you back to the anchor. You will fake a recall after 2 minutes."
 	gain_desc = "You have gained the ability to save a point in space and teleport back to it at will. Unless you willingly teleport back to that point within 2 minutes, you will fake a recall."
@@ -134,10 +134,10 @@
 	/// Holds a reference to the timer until the caster fake recalls
 	var/timer
 
-/datum/spell/vampire/soul_anchor/create_new_targeting()
+/datum/action/cooldown/spell/vampire/soul_anchor/create_new_targeting()
 	return new /datum/spell_targeting/self
 
-/datum/spell/vampire/soul_anchor/cast(list/targets, mob/user)
+/datum/action/cooldown/spell/vampire/soul_anchor/cast(list/targets, mob/user)
 	if(making_anchor) // second cast, but we are impatient
 		to_chat(user, SPAN_NOTICE("Your anchor isn't ready yet!"))
 		return
@@ -154,11 +154,11 @@
 		recall(user)
 
 
-/datum/spell/vampire/soul_anchor/proc/make_anchor(mob/user, turf/anchor_turf)
+/datum/action/cooldown/spell/vampire/soul_anchor/proc/make_anchor(mob/user, turf/anchor_turf)
 	anchor = new(anchor_turf)
 	timer = addtimer(CALLBACK(src, PROC_REF(recall), user, TRUE), 2 MINUTES, TIMER_STOPPABLE)
 
-/datum/spell/vampire/soul_anchor/proc/recall(mob/user, fake = FALSE)
+/datum/action/cooldown/spell/vampire/soul_anchor/proc/recall(mob/user, fake = FALSE)
 	cooldown_handler.start_recharge()
 	if(timer)
 		deltimer(timer)
@@ -217,7 +217,7 @@
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE
 
-/datum/spell/vampire/dark_passage
+/datum/action/cooldown/spell/vampire/dark_passage
 	name = "Dark Passage (30)"
 	desc = "You teleport to a targeted turf."
 	gain_desc = "You have gained the ability to blink a short distance towards a targeted turf."
@@ -227,13 +227,13 @@
 	action_background_icon_state = "bg_umbrae"
 	action_icon_state = "dark_passage"
 
-/datum/spell/vampire/dark_passage/create_new_targeting()
+/datum/action/cooldown/spell/vampire/dark_passage/create_new_targeting()
 	var/datum/spell_targeting/click/T = new
 	T.click_radius = 0
 	T.allowed_type = /turf/simulated
 	return T
 
-/datum/spell/vampire/dark_passage/cast(list/targets, mob/user)
+/datum/action/cooldown/spell/vampire/dark_passage/cast(list/targets, mob/user)
 	var/turf/target = get_turf(targets[1])
 	if(SEND_SIGNAL(user, COMSIG_MOVABLE_TELEPORTING, target) & COMPONENT_BLOCK_TELEPORT)
 		return FALSE
@@ -247,7 +247,7 @@
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "mist"
 
-/datum/spell/vampire/vamp_extinguish
+/datum/action/cooldown/spell/vampire/vamp_extinguish
 	name = "Extinguish"
 	desc = "You extinguish any light source in an area around you."
 	gain_desc = "You have gained the ability to extinguish nearby light sources."
@@ -257,17 +257,17 @@
 	create_attack_logs = FALSE
 	create_custom_logs = TRUE
 
-/datum/spell/vampire/vamp_extinguish/create_new_targeting()
+/datum/action/cooldown/spell/vampire/vamp_extinguish/create_new_targeting()
 	var/datum/spell_targeting/aoe/turf/T = new
 	return T
 
-/datum/spell/vampire/vamp_extinguish/cast(list/targets, mob/user = usr)
+/datum/action/cooldown/spell/vampire/vamp_extinguish/cast(list/targets, mob/user = usr)
 	for(var/turf/T in targets)
 		T.extinguish_light()
 		for(var/atom/A in T.contents)
 			A.extinguish_light()
 
-/datum/spell/vampire/shadow_boxing
+/datum/action/cooldown/spell/vampire/shadow_boxing
 	name = "Shadow Boxing (50)"
 	desc = "Target someone to have your shadow beat them up. You must stay within 2 tiles for this to work."
 	gain_desc = "You have gained the ability to make your shadow fight for you."
@@ -277,18 +277,18 @@
 	required_blood = 50
 	var/target_UID
 
-/datum/spell/vampire/shadow_boxing/create_new_targeting()
+/datum/action/cooldown/spell/vampire/shadow_boxing/create_new_targeting()
 	var/datum/spell_targeting/click/C = new
 	C.allowed_type = /mob/living
 	C.range = 2
 	C.try_auto_target = FALSE
 	return C
 
-/datum/spell/vampire/shadow_boxing/cast(list/targets, mob/user)
+/datum/action/cooldown/spell/vampire/shadow_boxing/cast(list/targets, mob/user)
 	var/mob/living/target = targets[1]
 	target.apply_status_effect(STATUS_EFFECT_SHADOW_BOXING, user)
 
-/datum/spell/vampire/self/eternal_darkness
+/datum/action/cooldown/spell/vampire/self/eternal_darkness
 	name = "Eternal Darkness"
 	desc = "When toggled, you shroud the area around you in darkness and slowly lower the body temperature of people nearby. Energy projectiles will dim in its radius."
 	gain_desc = "You have gained the ability to shroud the area around you in darkness. Only the strongest of lights can pierce your unholy powers."
@@ -297,7 +297,7 @@
 	required_blood = 5
 	var/shroud_power = -6
 
-/datum/spell/vampire/self/eternal_darkness/cast(list/targets, mob/user)
+/datum/action/cooldown/spell/vampire/self/eternal_darkness/cast(list/targets, mob/user)
 	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	var/mob/target = targets[1]
 	if(!V.get_ability(/datum/vampire_passive/eternal_darkness))

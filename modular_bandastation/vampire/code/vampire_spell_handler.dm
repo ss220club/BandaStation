@@ -11,7 +11,7 @@
 
 	var/fullpower = vampire.get_ability(/datum/vampire_passive/full)
 
-	if(user.stat >= DEAD) // TODO check if needed
+	if(user.stat >= DEAD)
 		if(show_message)
 			to_chat(user, span_warning("Not while you're dead!"))
 		return FALSE

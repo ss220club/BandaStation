@@ -12,3 +12,4 @@
 #define VAMPIRE_COMPLETE_NULLIFICATION 100 // the point of nullification where vampires can no longer use abilities.
 
 #define ROLE_VAMPIRE "Vampire"
+#define VAMPIRE_TRAIT "vampire"

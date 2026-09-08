@@ -20,3 +20,6 @@
 
 /datum/spell_handler/proc/after_cast(list/targets, mob/user, datum/action/cooldown/spell)
 	return
+
+/datum/action/cooldown/spell/New(Target, original)
+	. = ..()

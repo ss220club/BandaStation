@@ -98,10 +98,10 @@
 	mob_override = ..()
 	if(ishuman(mob_override))
 		var/mob/living/carbon/human/human_target = mob_override
-		human_target.dna?.species.hunger_icon = 'icons/mob/screen_hunger_vampire.dmi'
+		human_target.dna.species.set_food_icon(human_target, 'icons/mob/screen_hunger_vampire.dmi')
 
 	check_vampire_upgrade(FALSE)
-	RegisterSignal(mob_override, COMSIG_ATOM_HOLY_ATTACK, PROC_REF(holy_attack_reaction))
+	RegisterSignal(mob_override, COMSIG_ATOM_HOLYATTACK, PROC_REF(holy_attack_reaction))
 
 /datum/antagonist/vampire/remove_innate_effects(mob/living/mob_override)
 	mob_override = ..()
@@ -112,11 +112,11 @@
 
 	if(ishuman(mob_override))
 		var/mob/living/carbon/human/human_target = mob_override
-		human_target.dna?.species.hunger_icon = initial(human_target.dna.species.hunger_icon)
+		human_target.dna.species.set_food_icon(human_target, initial(human_target.dna.species.hunger_icon))
 		human_target.alpha = 255
 
 	REMOVE_TRAITS_IN(mob_override, "vampire")
-	UnregisterSignal(mob_override, COMSIG_ATOM_HOLY_ATTACK)
+	UnregisterSignal(mob_override, COMSIG_ATOM_HOLYATTACK)
 
 /datum/antagonist/vampire/proc/holy_attack_reaction(mob/target, obj/item/source, mob/user, antimagic_flags)
 	SIGNAL_HANDLER

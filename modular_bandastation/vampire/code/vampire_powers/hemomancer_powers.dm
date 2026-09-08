@@ -1,4 +1,4 @@
-/datum/spell/vampire/self/vamp_claws
+/datum/action/cooldown/spell/vampire/self/vamp_claws
 	name = "Vampiric Claws (30)"
 	desc = "You channel blood magics to forge deadly vampiric claws that leech blood and strike rapidly. Cannot be used if you are holding something that cannot be dropped."
 	gain_desc = "You have gained the ability to forge your hands into vampiric claws."
@@ -7,7 +7,7 @@
 	action_background_icon_state = "bg_hemo"
 	action_icon_state = "vampire_claws"
 
-/datum/spell/vampire/self/vamp_claws/cast(mob/user)
+/datum/action/cooldown/spell/vampire/self/vamp_claws/cast(mob/user)
 	if(user.l_hand || user.r_hand)
 		to_chat(user, SPAN_NOTICE("You drop what was in your hands as large blades spring from your fingers!"))
 		user.drop_l_hand()
@@ -18,7 +18,7 @@
 	RegisterSignal(user, COMSIG_MOB_WILLINGLY_DROP, PROC_REF(dispel))
 	user.put_in_hands(claws)
 
-/datum/spell/vampire/self/vamp_claws/proc/dispel()
+/datum/action/cooldown/spell/vampire/self/vamp_claws/proc/dispel()
 	SIGNAL_HANDLER
 	var/mob/living/carbon/human/user = action.owner
 	if(user.mind.has_antag_datum(/datum/antagonist/vampire))
@@ -32,7 +32,7 @@
 		qdel(current)
 		to_chat(user, SPAN_NOTICE("You dispel your claws!"))
 
-/datum/spell/vampire/self/vamp_claws/can_cast(mob/user, charge_check, show_message)
+/datum/action/cooldown/spell/vampire/self/vamp_claws/can_cast(mob/user, charge_check, show_message)
 	var/mob/living/L = user
 	if(L.canUnEquip(L.l_hand) && L.canUnEquip(L.r_hand))
 		return ..()
@@ -58,7 +58,7 @@
 	var/blood_absorbed_amount = 5
 	var/xenomorph_acid_boosted = FALSE
 	var/heal_boost = 1
-	var/datum/spell/vampire/self/vamp_claws/parent_spell
+	var/datum/action/cooldown/spell/vampire/self/vamp_claws/parent_spell
 	new_attack_chain = TRUE
 
 /obj/item/vamp_claws/Initialize(mapload, new_parent_spell)
@@ -127,7 +127,7 @@
 	to_chat(user, SPAN_NOTICE("You dispel your claws!"))
 	qdel(src)
 
-/datum/spell/vampire/blood_tendrils
+/datum/action/cooldown/spell/vampire/blood_tendrils
 	name = "Blood Tendrils (10)"
 	desc = "You summon a small field of horrific blood tendrils after a delay to ensnare people in an area, slowing them down."
 	gain_desc = "You have gained the ability to summon blood tendrils to slow people down in an area that you target."
@@ -142,13 +142,13 @@
 	selection_activated_message = SPAN_NOTICE("You prepare to summon a set of blood tendrils. <b>Left-click to cast at a target area!</b>")
 	selection_deactivated_message = SPAN_NOTICE("Your magics subside.")
 
-/datum/spell/vampire/blood_tendrils/create_new_targeting()
+/datum/action/cooldown/spell/vampire/blood_tendrils/create_new_targeting()
 	var/datum/spell_targeting/click/T = new
 	T.allowed_type = /atom
 	T.try_auto_target = FALSE
 	return T
 
-/datum/spell/vampire/blood_tendrils/cast(list/targets, mob/user)
+/datum/action/cooldown/spell/vampire/blood_tendrils/cast(list/targets, mob/user)
 	var/turf/T = get_turf(targets[1]) // there should only ever be one entry in targets for this spell
 
 	for(var/turf/simulated/blood_turf in view(area_of_affect, T))
@@ -158,7 +158,7 @@
 
 	addtimer(CALLBACK(src, PROC_REF(apply_slowdown), T, area_of_affect, 6 SECONDS, user), 0.5 SECONDS)
 
-/datum/spell/vampire/blood_tendrils/proc/apply_slowdown(turf/T, distance, slowed_amount, mob/user)
+/datum/action/cooldown/spell/vampire/blood_tendrils/proc/apply_slowdown(turf/T, distance, slowed_amount, mob/user)
 	for(var/mob/living/L in range(distance, T))
 		if(L.affects_vampire(user))
 			L.Slowed(slowed_amount)
@@ -172,7 +172,7 @@
 /obj/effect/temp_visual/blood_tendril/long
 	duration = 2 SECONDS
 
-/datum/spell/vampire/blood_barrier
+/datum/action/cooldown/spell/vampire/blood_barrier
 	name = "Blood Barrier (40)"
 	desc = "Select two points within 3 tiles of each other and make a barrier between them."
 	gain_desc = "You have gained the ability to summon a crystalline wall of blood between two points. The barrier is easily destructible, however you can walk freely through it."
@@ -186,24 +186,24 @@
 	var/max_walls = 3
 	var/turf/start_turf = null
 
-/datum/spell/vampire/blood_barrier/create_new_targeting()
+/datum/action/cooldown/spell/vampire/blood_barrier/create_new_targeting()
 	var/datum/spell_targeting/click/T = new
 	T.allowed_type = /atom
 	T.try_auto_target = FALSE
 	return T
 
-/datum/spell/vampire/blood_barrier/remove_ranged_ability(mob/user, msg)
+/datum/action/cooldown/spell/vampire/blood_barrier/remove_ranged_ability(mob/user, msg)
 	. = ..()
 	if(msg) // this is only true if the user intentionally turned off the spell
 		start_turf = null
 		should_recharge_after_cast = FALSE
 
-/datum/spell/vampire/blood_barrier/should_remove_click_intercept()
+/datum/action/cooldown/spell/vampire/blood_barrier/should_remove_click_intercept()
 	if(start_turf)
 		return TRUE
 	return FALSE
 
-/datum/spell/vampire/blood_barrier/cast(list/targets, mob/user)
+/datum/action/cooldown/spell/vampire/blood_barrier/cast(list/targets, mob/user)
 	var/turf/target_turf = get_turf(targets[1])
 	if(target_turf == start_turf)
 		to_chat(user, SPAN_NOTICE("You deselect the targeted turf."))
@@ -287,7 +287,7 @@
 	H.required_blood = 50
 	return H
 
-/datum/spell/vampire/predator_senses
+/datum/action/cooldown/spell/vampire/predator_senses
 	name = "Predator Senses"
 	desc = "Hunt down your prey, there's nowhere to hide..."
 	gain_desc = "Your senses are heightened, nobody can hide from you now."
@@ -296,18 +296,18 @@
 	base_cooldown = 20 SECONDS
 	create_attack_logs = FALSE
 
-/datum/spell/vampire/predator_senses/create_new_targeting()
+/datum/action/cooldown/spell/vampire/predator_senses/create_new_targeting()
 	var/datum/spell_targeting/alive_mob_list/A = new()
 	A.allowed_type = /mob/living/carbon/human
 	A.max_targets = 300 // hopefully we never hit this number
 	return A
 
-/datum/spell/vampire/predator_senses/valid_target(mob/target, mob/user)
+/datum/action/cooldown/spell/vampire/predator_senses/valid_target(mob/target, mob/user)
 	var/turf/target_turf = get_turf(target)
 	var/turf/user_turf = get_turf(user)
 	return target.mind && (target_turf.z == user_turf.z)
 
-/datum/spell/vampire/predator_senses/cast(list/targets, mob/user)
+/datum/action/cooldown/spell/vampire/predator_senses/cast(list/targets, mob/user)
 	var/targets_by_name = list()
 	for(var/mob/living/carbon/human/H as anything in targets)
 		if(H == user)
@@ -325,7 +325,7 @@
 		message += "<i> They are wounded...</i>"
 	to_chat(user, SPAN_CULTLARGE("[message]"))
 
-/datum/spell/vampire/blood_eruption
+/datum/action/cooldown/spell/vampire/blood_eruption
 	name = "Blood Eruption (100)"
 	desc = "Every pool of blood in 4 tiles erupts with a spike of living blood, damaging anyone stood on it."
 	gain_desc = "You have gained the ability to weaponize pools of blood to damage those stood on them."
@@ -334,13 +334,13 @@
 	action_background_icon_state = "bg_hemo"
 	action_icon_state = "blood_spikes"
 
-/datum/spell/vampire/blood_eruption/create_new_targeting()
+/datum/action/cooldown/spell/vampire/blood_eruption/create_new_targeting()
 	var/datum/spell_targeting/aoe/T = new
 	T.range = 4
 	T.allowed_type = /mob/living
 	return T
 
-/datum/spell/vampire/blood_eruption/valid_target(mob/living/target, user)
+/datum/action/cooldown/spell/vampire/blood_eruption/valid_target(mob/living/target, user)
 	var/turf/T = get_turf(target)
 	if(locate(/obj/effect/decal/cleanable/blood) in T)
 		if(target.affects_vampire(user) && !isLivingSSD(target))
@@ -348,7 +348,7 @@
 	return FALSE
 
 
-/datum/spell/vampire/blood_eruption/cast(list/targets, mob/user)
+/datum/action/cooldown/spell/vampire/blood_eruption/cast(list/targets, mob/user)
 	for(var/mob/living/L in targets)
 		var/turf/T = get_turf(L)
 		var/obj/effect/decal/cleanable/blood/B = locate(/obj/effect/decal/cleanable/blood) in T
@@ -363,7 +363,7 @@
 	icon_state = "bloodspike_white"
 	duration = 0.3 SECONDS
 
-/datum/spell/vampire/self/blood_spill
+/datum/action/cooldown/spell/vampire/self/blood_spill
 	name = "The Blood Bringers Rite"
 	desc = "When toggled, everyone around you begins to bleed profusely. You will drain their blood and rejuvenate yourself with it."
 	gain_desc = "You have gained the ability to rip the very life force out of people and absorb it, healing you."
@@ -371,7 +371,7 @@
 	action_icon_state = "blood_bringers_rite"
 	required_blood = 10
 
-/datum/spell/vampire/self/blood_spill/cast(list/targets, mob/user)
+/datum/action/cooldown/spell/vampire/self/blood_spill/cast(list/targets, mob/user)
 	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	if(!V.get_ability(/datum/vampire_passive/blood_spill))
 		V.force_add_ability(/datum/vampire_passive/blood_spill)

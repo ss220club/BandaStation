@@ -1,9 +1,11 @@
 #include "_vampire.dm"
 
 #include "code/_defines.dm"
+#include "code/hunger_icon.dm"
 #include "code/datum_vampire.dm"
 #include "code/spell_handler.dm"
 #include "code/vampire_spell_handler.dm"
+#include "code/nullrod.dm"
 #include "code/vamp_thrall.dm"
 #include "code/vampire_subclasses.dm"
 #include "code/vampire_powers/dantalion_powers.dm"
