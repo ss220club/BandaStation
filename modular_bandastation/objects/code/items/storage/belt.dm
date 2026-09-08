@@ -401,59 +401,6 @@
 
 	))
 
-// MARK: SpecOps
-/obj/item/storage/belt/military/holster/specops
-	storage_type = /datum/storage/military_belt/holster/specops
-
-/datum/storage/military_belt/holster/specops
-	max_specific_storage = WEIGHT_CLASS_HUGE
-	max_slots = 7
-
-/obj/item/storage/belt/military/holster/specops/full/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/cm23(src)
-	new /obj/item/ammo_box/magazine/c38(src)
-	new /obj/item/ammo_box/magazine/c38(src)
-	new /obj/item/ammo_box/magazine/c38/ap(src)
-	new /obj/item/ammo_box/magazine/c38/hp(src)
-	new /obj/item/ammo_box/magazine/c38/true(src)
-	new /obj/item/ammo_box/magazine/c38/laser(src)
-
-/obj/item/storage/belt/military/holster/specops/full_rifleman/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/gp9/spec(src)
-	new /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap(src)
-	new /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/hp(src)
-	new /obj/item/ammo_box/magazine/c762x39mm(src)
-	new /obj/item/ammo_box/magazine/c762x39mm(src)
-	new /obj/item/ammo_box/magazine/c762x39mm(src)
-	new /obj/item/ammo_box/magazine/c762x39mm(src)
-
-/obj/item/storage/belt/military/holster/specops/full_machinegun/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/cm357(src)
-	new /obj/item/ammo_box/magazine/c357/ap(src)
-	new /obj/item/ammo_box/magazine/c357/heartseeker(src)
-	new /obj/item/ammo_box/magazine/c357/match(src)
-	new /obj/item/ammo_box/magazine/cm40(src)
-	new /obj/item/ammo_box/magazine/cm40(src)
-	new /obj/item/ammo_box/magazine/cm40(src)
-
-/obj/item/storage/belt/military/holster/specops/full_shotgun/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/cm23(src)
-	new /obj/item/ammo_box/magazine/c38/true(src)
-	new /obj/item/ammo_box/magazine/c38/hp(src)
-	new /obj/item/ammo_box/magazine/cm15/drum(src)
-	new /obj/item/ammo_box/magazine/cm15/drum/frag12(src)
-	new /obj/item/ammo_box/magazine/cm15/drum/dragonsbreath(src)
-	new /obj/item/ammo_box/magazine/cm15/drum/slug(src)
-
-/obj/item/storage/belt/military/holster/specops/full_sniper/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/gp9/spec(src)
-	new /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap(src)
-	new /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/hp(src)
-	new /obj/item/ammo_box/magazine/c338/extended(src)
-	new /obj/item/ammo_box/magazine/c338/extended(src)
-	new /obj/item/ammo_box/magazine/c338/extended/ap(src)
-	new /obj/item/ammo_box/magazine/c338/extended/hp(src)
-
 // MARK: SYNDICATE
 /obj/item/storage/belt/military/mb_belt
 	name = "elegant belt"
