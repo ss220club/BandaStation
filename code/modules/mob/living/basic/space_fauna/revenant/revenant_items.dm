@@ -1,7 +1,7 @@
 //reforming
 /obj/item/ectoplasm/revenant
 	name = "glimmering residue"
-	desc = "A pile of fine blue dust. Small tendrils of violet mist swirl around it."
+	desc = "Кучка мелкой голубой пыли. Вокруг неё кружатся маленькие завитки фиолетового тумана."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "revenantEctoplasm"
 	w_class = WEIGHT_CLASS_SMALL
@@ -22,8 +22,8 @@
 	if(inert)
 		return ..()
 	user.visible_message(
-		span_notice("[user] scatters [src] in all directions."),
-		span_notice("You scatter [src] across the area."),
+		span_notice("[user] разбрасывает [declent_ru(ACCUSATIVE)] во все стороны."),
+		span_notice("Вы разбрасываете [declent_ru(ACCUSATIVE)] по всей области. Частицы медленно исчезают."),
 	)
 	user.dropItemToGround(src)
 	SEND_SIGNAL(src, COMSIG_RESIDUE_DISPERSE)
@@ -33,19 +33,19 @@
 	. = ..()
 	if(inert)
 		return
-	visible_message(span_notice("[src] breaks into particles upon impact, which fade away to nothingness."))
+	visible_message(span_notice("[declent_ru(ACCUSATIVE)] при ударе распадается на частицы, которые исчезают, превращаясь в ничто."))
 	SEND_SIGNAL(src, COMSIG_RESIDUE_DISPERSE)
 	qdel(src)
 
 /obj/item/ectoplasm/revenant/examine(mob/user)
 	. = ..()
 	if(inert)
-		. += span_revennotice("It seems inert.")
+		. += span_revennotice("Он кажется инертным.")
 	else
-		. += span_revenwarning("It is shifting and distorted. It would be wise to destroy this.")
+		. += span_revenwarning("Он смещается и искажается. Было бы разумно уничтожить это.")
 
 /obj/item/ectoplasm/revenant/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is inhaling [src]! It looks like [user.p_theyre()] trying to visit the shadow realm!"))
+	user.visible_message(span_suicide("[user] вдыхает [declent_ru(ACCUSATIVE)]! Кажется, [user.ru_p_they()] пытается попасть в царство теней!"))
 	qdel(src)
 	return OXYLOSS
 
@@ -57,5 +57,5 @@
 		inert = TRUE
 		return
 	message_admins("Revenant ectoplasm was left undestroyed for 1 minute and is reforming into a new revenant.")
-	visible_message(span_revenboldnotice("[src] suddenly rises into the air before fading away."))
+	visible_message(span_revenboldnotice("[src] внезапно взмывает в воздух, прежде чем исчезнуть."))
 	qdel(src)

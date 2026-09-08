@@ -224,6 +224,7 @@
 		),
 	)
 
+/* BANDASTATION REMOVAL - START
 /datum/emote/living/gasp/shock
 	key = "gaspshock"
 	key_third_person = "gaspsshock"
@@ -231,7 +232,9 @@
 	message = "gasps in shock!"
 	message_mime = "gasps in silent shock!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
+	stat_allowed = SOFT_CRIT
 	can_use_flags = EMOTE_CANUSE_SOFTCRIT
+BANDASTATION REMOVAL - END */
 
 /datum/emote/living/giggle
 	key = "giggle"
@@ -305,7 +308,7 @@
 	message = "laughs."
 	message_mime = "laughs silently!"
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
-	manual_specific_emote_audio_cooldown = 8 SECONDS
+	// manual_specific_emote_audio_cooldown = 8 SECONDS // BANDASTATION REMOVAL #1876
 	vary = TRUE
 	sounds_by_mobtype = list(
 		/mob/living/carbon/human = list(
@@ -809,7 +812,7 @@
 	return .|WITH_EMPHASIS_MESSAGE
 
 /datum/emote/living/custom/proc/get_custom_emote_from_user()
-	return copytext(sanitize(input("Choose an emote to display.") as text|null), 1, MAX_MESSAGE_LEN)
+	return copytext(sanitize(input("Choose an emote to display.") as text|null, apply_ic_filter = TRUE), 1, MAX_MESSAGE_LEN) // BANDASTATION EDIT - Sanitize emotes
 
 /datum/emote/living/custom/proc/get_custom_emote_type_from_user()
 	var/type = input("Is this a visible or hearable emote?") as null|anything in list("Visible", "Hearable", "Both")

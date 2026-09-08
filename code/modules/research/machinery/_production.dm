@@ -249,6 +249,7 @@
 		var/icon_size = spritesheet.icon_size_id(design.asset_id)
 		designs[design.type] = list(
 			"name" = design.name,
+			"original_name" = design.original_name, // BANDASTATION EDIT - Design Translate
 			"desc" = design.get_description(),
 			"cost" = cost,
 			"path" = design.type,

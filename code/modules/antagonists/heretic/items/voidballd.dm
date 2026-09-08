@@ -1,6 +1,6 @@
 /obj/item/void_prison
-	name = "void prison"
-	desc = "A small glass orb of swirling darkness. It feels cold to the touch, and consumes all light around it."
+	name = "пустотная тюрьма"
+	desc = "Маленький стеклянный шар завивающейся тьмы. Холодный на ощупь, поглощает весь свет вокруг себя."
 	icon = 'icons/mob/actions/actions_ecult.dmi'
 	icon_state = "voidball"
 	pickup_sound = 'sound/items/handling/materials/glass_pick_up.ogg'
@@ -26,8 +26,8 @@
 				continue
 			if(nearby_mob.can_block_magic(MAGIC_RESISTANCE))
 				nearby_mob.visible_message(
-					span_danger("A swirling, cold void wraps around [nearby_mob], but they burst free in a wave of heat!"),
-					span_userdanger("A yawning void begins to open before you, but a great wave of heat bursts it apart! You are protected!!")
+					span_danger("Вихрящаяся холодная пустота окутывает [nearby_mob.declent_ru(GENITIVE)], но [nearby_mob.ru_p_they()] вырывается на свободу во вспышке жара!"),
+					span_userdanger("Перед вами начинает открываться зияющая Пустота, но огромная волна жара разрывает её на части! Вы защищены!!")
 				)
 				continue
 			nearby_mob.visible_message(
@@ -113,8 +113,8 @@
 
 //---- Screen alert
 /atom/movable/screen/alert/status_effect/void_prison
-	name = "Void Prison"
-	desc = "A Yawning void encases your mortal coil." //Go straight to jail, do not pass GO, do not collect 200$
+	name = "Пустотная Тюрьма"
+	desc = "Зияющая Пустота окутывает твою бренную оболочку." //Go straight to jail, do not pass GO, do not collect 200$
 	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	icon_state = "heretic_template"
 	overlay_icon = 'icons/mob/actions/actions_ecult.dmi'

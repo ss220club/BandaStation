@@ -31,7 +31,7 @@ Nothing else in the console has ID requirements.
 	/// The stored design disk, if present
 	var/obj/item/disk/design_disk/d_disk
 	/// Determines if the console is locked, and consequently if actions can be performed with it
-	var/locked = FALSE
+	var/locked = TRUE // BANDASTATION EDIT = var/locked = FALSE
 	/// Used for compressing data sent to the UI via static_data as payload size is of concern
 	var/id_cache = list()
 	/// Sequence var for the id cache
@@ -77,31 +77,31 @@ Nothing else in the console has ID requirements.
 
 	if(istype(tool, /obj/item/disk/tech_disk))
 		if(t_disk)
-			to_chat(user, span_warning("A technology disk is already loaded!"))
+			to_chat(user, span_warning("Диск с технологией уже загружен!"))
 			return ITEM_INTERACT_BLOCKING
 
 		if(!user.transferItemToLoc(tool, src))
-			to_chat(user, span_warning("[tool] is stuck to your hand!"))
+			to_chat(user, span_warning("[tool] застрял в вашей руке!"))
 			return ITEM_INTERACT_BLOCKING
 
 		t_disk = tool
-		to_chat(user, span_notice("You insert [tool] into \the [src]!"))
+		to_chat(user, span_notice("Вы вставляете [tool] в [src]!"))
 		return ITEM_INTERACT_SUCCESS
 
 	if (!istype(tool, /obj/item/disk/design_disk))
-		to_chat(user, span_warning("Machine cannot accept disks in that format."))
+		to_chat(user, span_warning("Консоль не принимает диски такого формата."))
 		return ITEM_INTERACT_BLOCKING
 
 	if(d_disk)
-		to_chat(user, span_warning("A design disk is already loaded!"))
+		to_chat(user, span_warning("Диск с технологией уже загружен!"))
 		return ITEM_INTERACT_BLOCKING
 
 	if(!user.transferItemToLoc(tool, src))
-		to_chat(user, span_warning("[tool] is stuck to your hand!"))
+		to_chat(user, span_warning("[tool] застрял в вашей руке!"))
 		return ITEM_INTERACT_BLOCKING
 
 	d_disk = tool
-	to_chat(user, span_notice("You insert [tool] into \the [src]!"))
+	to_chat(user, span_notice("Вы вставляете [tool] в [src]!"))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/computer/rdconsole/multitool_act(mob/living/user, obj/item/multitool/tool)
@@ -112,48 +112,48 @@ Nothing else in the console has ID requirements.
 
 /obj/machinery/computer/rdconsole/proc/enqueue_node(id, mob/user)
 	if(!stored_research || !stored_research.available_nodes[id] || stored_research.researched_nodes[id])
-		say("Node enqueue failed: Either no techweb is found, node is already researched or is not available!")
+		say("Не удалось поставить узел в очередь: технология не найдена, либо узел уже исследован или он недоступен!")
 		return FALSE
 	stored_research.enqueue_node(id, user)
 	return TRUE
 
 /obj/machinery/computer/rdconsole/proc/dequeue_node(id, mob/user)
 	if(!stored_research || !stored_research.available_nodes[id] || stored_research.researched_nodes[id])
-		say("Node dequeue failed: Either no techweb is found, node is already researched or is not available!")
+		say("Не удалось убрать узел из очереди: технология не найдена, либо узел уже исследован или он недоступен!")
 		return FALSE
 	stored_research.dequeue_node(id, user)
 	return TRUE
 
 /obj/machinery/computer/rdconsole/proc/research_node(node_path, mob/user)
 	if(!stored_research)
-		say("Node unlock failed: No techweb found!")
+		say("Не удалось разблокировать узел: технология не найдена!")
 		return FALSE
 	if(!stored_research.available_nodes[node_path])
-		say("Node unlock failed: Node is not available!")
+		say("Не удалось разблокировать узел: технология недоступна!")
 		return FALSE
 	if(stored_research.researched_nodes[node_path])
-		say("Node unlock failed: Node is already researched!")
+		say("Не удалось разблокировать узел: технология уже изучена!")
 		return FALSE
 
 	var/datum/techweb_node/unlocked_node = SSresearch.techweb_nodes[node_path]
 	if(!istype(unlocked_node))
-		say("Node unlock failed: Unknown error.")
+		say("Не удалось разблокировать узел: неизвестная ошибка.")
 		return FALSE
 
 	var/list/price = unlocked_node.get_price(stored_research)
 	if(!stored_research.can_afford(price))
-		say("Not enough research points...")
+		say("Недостаточно очков для исследования...")
 		return FALSE
 
 	if(!stored_research.research_node(unlocked_node, research_source = src))
-		say("Failed to research node: Internal database error!")
+		say("Не удалось исследовать узел: внутренняя ошибка базы данных!")
 		return FALSE
 
 	user.investigate_log("researched [unlocked_node.display_name]([json_encode(price)]) on techweb id [stored_research.id].", INVESTIGATE_RESEARCH)
 	if(istype(stored_research, /datum/techweb/science))
 		SSblackbox.record_feedback("associative", "science_techweb_unlock", 1, list("path" = "[node_path]", "name" = unlocked_node.display_name, "price" = "[json_encode(price)]", "time" = ISOtime()))
 
-	say("Successfully researched [unlocked_node.display_name].")
+	say("Успешно исследовано [unlocked_node.display_name].")
 
 	var/logname = "Unknown"
 	if(HAS_AI_ACCESS(user))
@@ -183,7 +183,7 @@ Nothing else in the console has ID requirements.
 	. = ..()
 	if (obj_flags & EMAGGED)
 		return
-	balloon_alert(user, "security protocols disabled")
+	balloon_alert(user, "протоколы безопасности отключены")
 	playsound(src, SFX_SPARKS, 75, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	obj_flags |= EMAGGED
 	var/obj/item/circuitboard/computer/rdconsole/board = circuit
@@ -373,18 +373,18 @@ Nothing else in the console has ID requirements.
 
 	// Check if the console is locked to block any actions occuring
 	if (board.locked && action != "toggleLock")
-		say("Console is locked, cannot perform further actions.")
+		say("Консоль заблокирована. Дальнейшие действия невозможны.")
 		return TRUE
 
 	switch (action)
 		if ("toggleLock")
 			if(obj_flags & EMAGGED)
-				to_chat(usr, span_boldwarning("Security protocol error: Unable to access locking protocols."))
+				to_chat(usr, span_boldwarning("Ошибка протокола безопасности: не удается получить доступ к протоколам блокировки."))
 				return TRUE
 			if(allowed(usr))
 				board.locked = !board.locked
 			else
-				to_chat(usr, span_boldwarning("Unauthorized Access."))
+				to_chat(usr, span_boldwarning("Несанкционированный доступ."))
 			return TRUE
 
 		if ("researchNode")
@@ -406,35 +406,35 @@ Nothing else in the console has ID requirements.
 		if ("uploadDisk")
 			if (params["type"] == RND_DESIGN_DISK)
 				if(QDELETED(d_disk))
-					say("No design disk inserted!")
+					say("Диск с дизайном не вставлен!")
 					return TRUE
 				for(var/design_path in d_disk.blueprints)
 					stored_research.add_design(design_path, TRUE)
-				say("Uploading blueprints from disk.")
+				say("Загрузка чертежей с диска.")
 				d_disk.on_upload(stored_research, src)
 				return TRUE
 			if (params["type"] == RND_TECH_DISK)
 				if(!COOLDOWN_FINISHED(src, cooldowncopy)) // prevents MC hang
-					say("Servers busy!")
+					say("Серверы заняты!")
 					return
 				if (QDELETED(t_disk))
-					say("No tech disk inserted!")
+					say("Технологический диск не вставлен!")
 					return TRUE
 				COOLDOWN_START(src, cooldowncopy, 5 SECONDS)
-				say("Uploading technology disk.")
+				say("Загрузка технологии на диск.")
 				stored_research.absorb_techdisk(t_disk)
 			return TRUE
 
 		//Tech disk-only action.
 		if ("loadTech")
 			if(!COOLDOWN_FINISHED(src, cooldowncopy)) // prevents MC hang
-				say("Servers busy!")
+				say("Серверы заняты!")
 				return
 			if(QDELETED(t_disk))
-				say("No tech disk inserted!")
+				say("ехнологический диск не вставлен!")
 				return
 			COOLDOWN_START(src, cooldowncopy, 5 SECONDS)
-			say("Downloading to technology disk.")
+			say("Загрузка на технологический диск.")
 			t_disk.stored_nodes |= stored_research.researched_nodes
 			return TRUE
 

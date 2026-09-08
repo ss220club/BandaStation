@@ -1,5 +1,12 @@
 {
 	"version": "2.0.0",
+	"inputs": [
+		{
+			"id": "ruNameFragment",
+			"type": "promptString",
+			"description": "Enter original name of the object to translate"
+		}
+	],
 	"tasks": [
 		{
 			"type": "process",
@@ -227,6 +234,28 @@
 			"problemMatcher": ["$tsc", "$eslint-stylish"],
 			"group": "build",
 			"label": "tgui: rebuild tgfont"
+		},
+		{
+			"type": "process",
+			"command": "powershell.exe",
+			"args": [
+				"-NoLogo",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder}\\tools\\translations\\new_ru_name_fragment.ps1",
+				"${input:ruNameFragment}"
+			],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": false,
+				"showReuseMessage": false,
+				"clear": false,
+				"close": false
+			},
+			"problemMatcher": [],
+			"label": "ru_names: new fragment from selection"
 		}
 	]
 }

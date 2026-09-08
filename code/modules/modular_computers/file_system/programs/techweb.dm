@@ -3,7 +3,7 @@
 	filedesc = "Nanotrasen Science Hub"
 	downloader_category = PROGRAM_CATEGORY_SCIENCE
 	program_open_overlay = "research"
-	extended_desc = "Connect to the internal science server in order to assist in station research efforts."
+	extended_desc = "Подключитесь к внутреннему научному серверу, чтобы помочь в исследованиях на станции."
 	program_flags = PROGRAM_ON_NTNET_STORE | PROGRAM_REQUIRES_NTNET
 	size = 10
 	tgui_id = "NtosTechweb"
@@ -34,7 +34,7 @@
 	if(QDELETED(used_multitool.buffer) || !istype(used_multitool.buffer, /datum/techweb))
 		return ITEM_INTERACT_BLOCKING
 	stored_research = used_multitool.buffer
-	computer.balloon_alert(user, "buffer linked!")
+	computer.balloon_alert(user, "буфер связан!")
 	return ITEM_INTERACT_SUCCESS
 
 /datum/computer_file/program/science/ui_assets(mob/user)
@@ -96,18 +96,18 @@
 	. = ..()
 	// Check if the console is locked to block any actions occuring
 	if (locked && action != "toggleLock")
-		computer.say("Console is locked, cannot perform further actions.")
+		computer.say("Консоль заблокирована. Дальнейшие действия невозможны.")
 		return TRUE
 
 	switch (action)
 		if ("toggleLock")
 			if(computer.obj_flags & EMAGGED)
-				to_chat(usr, span_boldwarning("Security protocol error: Unable to access locking protocols."))
+				to_chat(usr, span_boldwarning("Ошибка протокола безопасности: не удается получить доступ к протоколам блокировки."))
 				return TRUE
 			if(lock_access in computer?.stored_id?.access)
 				locked = !locked
 			else
-				to_chat(usr, span_boldwarning("Unauthorized Access. Please insert research ID card."))
+				to_chat(usr, span_boldwarning("Несанкционированный доступ. Пожалуйста, вставьте ID-карту научного отдела."))
 			return TRUE
 
 		if ("researchNode")
@@ -218,48 +218,48 @@
 
 /datum/computer_file/program/science/proc/enqueue_node(node_path, mob/user)
 	if(!stored_research || !stored_research.available_nodes[node_path] || stored_research.researched_nodes[node_path])
-		computer.say("Node enqueue failed: Either no techweb is found, node is already researched or is not available!")
+		computer.say("Не удалось поставить узел в очередь: технология не найдена, либо узел уже исследован или он недоступен!")
 		return FALSE
 	stored_research.enqueue_node(node_path, user)
 	return TRUE
 
 /datum/computer_file/program/science/proc/dequeue_node(node_path, mob/user)
 	if(!stored_research || !stored_research.available_nodes[node_path] || stored_research.researched_nodes[node_path])
-		computer.say("Node dequeue failed: Either no techweb is found, node is already researched or is not available!")
+		computer.say("Не удалось убрать узел из очереди: технология не найдена, либо узел уже исследован или он недоступен!")
 		return FALSE
 	stored_research.dequeue_node(node_path, user)
 	return TRUE
 
 /datum/computer_file/program/science/proc/research_node(node_path, mob/user)
 	if(!stored_research)
-		computer.say("Node unlock failed: No techweb found!")
+		computer.say("Не удалось разблокировать узел: технология не найдена!")
 		return FALSE
 	if(!stored_research.available_nodes[node_path])
-		computer.say("Node unlock failed: Node is not available!")
+		computer.say("Не удалось разблокировать узел: технология недоступна!")
 		return FALSE
 	if(stored_research.researched_nodes[node_path])
-		computer.say("Node unlock failed: Node is already researched!")
+		computer.say("Не удалось разблокировать узел: технология уже изучена!")
 		return FALSE
 
 	var/datum/techweb_node/unlocked_node = SSresearch.techweb_nodes[node_path]
 	if(!istype(unlocked_node))
-		computer.say("Node unlock failed: Unknown error.")
+		computer.say("Не удалось разблокировать узел: неизвестная ошибка.")
 		return FALSE
 
 	var/list/price = unlocked_node.get_price(stored_research)
 	if(!stored_research.can_afford(price))
-		computer.say("Not enough research points...")
+		computer.say("Недостаточно очков для исследования...")
 		return FALSE
 
 	if(!stored_research.research_node(unlocked_node, research_source = computer))
-		computer.say("Failed to research node: Internal database error!")
+		computer.say("Не удалось исследовать узел: внутренняя ошибка базы данных!")
 		return FALSE
 
 	user.investigate_log("researched [unlocked_node.display_name]([json_encode(price)]) on techweb id [stored_research.id].", INVESTIGATE_RESEARCH)
 	if(istype(stored_research, /datum/techweb/science))
 		SSblackbox.record_feedback("associative", "science_techweb_unlock", 1, list("path" = "[node_path]", "name" = unlocked_node.display_name, "price" = "[json_encode(price)]", "time" = ISOtime()))
 
-	computer.say("Successfully researched [unlocked_node.display_name].")
+	computer.say("Успешно изучено [unlocked_node.display_name].")
 
 	var/logname = "Unknown"
 	if(HAS_AI_ACCESS(user))

@@ -1,6 +1,6 @@
 /datum/techweb_node/syndicate_basic
-	display_name = "Illegal Technology"
-	description = "Dangerous research used to create dangerous objects."
+	display_name = "Нелегальные технологии"
+	description = "Опасные исследования, используемые для создания опасных предметов."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_HIDDEN
 	prerequisite_nodes = list(/datum/techweb_node/exp_tools, /datum/techweb_node/exotic_ammo)
 	unlocked_designs = list(
@@ -35,8 +35,8 @@
 		required_items_to_unlock |= item.item //allows deconning to unlock.
 
 /datum/techweb_node/unregulated_bluespace
-	display_name = "Unregulated Bluespace Research"
-	description = "Bluespace technology using unstable or unbalanced procedures, prone to damaging the fabric of bluespace. Outlawed by galactic conventions."
+	display_name = "Нерегулируемое блюспейс исследование"
+	description = "Блюспейс технологии, что используют нестабильные и несбалансированные процедуры, способные повредить структуру самого блюспейса. Запрещена Галактической конвенцией."
 	prerequisite_nodes = list(/datum/techweb_node/parts_bluespace, /datum/techweb_node/syndicate_basic)
 	unlocked_designs = list(
 		/datum/design/desynchronizer,

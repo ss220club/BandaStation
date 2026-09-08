@@ -1234,7 +1234,7 @@
 	else
 		tips = world.file2list("strings/chemistrytips.txt")
 	var/message = pick(tips)
-	send_tip_of_the_round(affected_mob, message, source = "Chemical-induced wisdom")
+	send_tip_of_the_round(affected_mob, message, source = "Мудрость, вызванная химическими веществами")
 
 /datum/reagent/medicine/neurine
 	name = "Neurine"
@@ -1439,7 +1439,11 @@
 
 /datum/reagent/medicine/regen_jelly/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
-	var/heal = -healing * metabolization_ratio * seconds_per_tick
+	var/heal = -0.75 * metabolization_ratio * seconds_per_tick
+	// BANDASTATION EDIT: START - jelly for jelly
+	if(!isjellyperson(affected_mob))
+		heal *= -0.5
+	// BANDASTATION EDIT: END
 	var/need_mob_update
 	need_mob_update = affected_mob.adjust_brute_loss(heal, updating_health = FALSE, required_bodytype = affected_bodytype)
 	need_mob_update += affected_mob.adjust_fire_loss(heal, updating_health = FALSE, required_bodytype = affected_bodytype)

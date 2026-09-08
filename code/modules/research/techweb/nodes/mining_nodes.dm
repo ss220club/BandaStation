@@ -1,6 +1,6 @@
 /datum/techweb_node/material_processing
-	display_name = "Material Processing"
-	description = "Refinement and processing of alloys and ores to enhance their utility and value."
+	display_name = "Обработка материалов"
+	description = "Обработка и переработка сплавов и руд с целью повышения их полезности и ценности."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/pickaxe,
@@ -49,8 +49,8 @@
 	announce_channels = list(RADIO_CHANNEL_SUPPLY)
 
 /datum/techweb_node/low_pressure_excavation
-	display_name = "Low-Pressure Excavation"
-	description = "Research of Proto-Kinetic Accelerators (PKAs), pneumatic guns renowned for their exceptional performance in low-pressure environments."
+	display_name = "Раскопки под низким давлением"
+	description = "Исследование протокинетических ускорителей (ПКУ), пневматических пушек, известных своей исключительной производительностью в условиях низкого давления."
 	prerequisite_nodes = list(/datum/techweb_node/mining, /datum/techweb_node/gas_compression)
 	unlocked_designs = list(
 		/datum/design/damage_mod,
@@ -67,8 +67,8 @@
 	announce_channels = list(RADIO_CHANNEL_SUPPLY)
 
 /datum/techweb_node/plasma_mining
-	display_name = "Plasma Beam Mining"
-	description = "Engineers' plasma welders have proven highly effective in mining operations. This led to the development of a mech-mounted variant and an enhanced handheld cutter for miners."
+	display_name = "Раскопки плазменным лучом"
+	description = "Аппараты плазменной сварки, разработанные инженерами, доказали свою высокую эффективность при добыче полезных ископаемых. Это привело к разработке механического варианта и усовершенствованного плазменного резака для шахтёров."
 	prerequisite_nodes = list(/datum/techweb_node/low_pressure_excavation, /datum/techweb_node/plasma_control)
 	unlocked_designs = list(
 		/datum/design/mech_plasma_cutter,
@@ -78,8 +78,8 @@
 	announce_channels = list(RADIO_CHANNEL_SUPPLY)
 
 /datum/techweb_node/bitrunning
-	display_name = "Bitrunning Technology"
-	description = "Bluespace technology has led to the development of quantum-scale computing, which unlocks the means to materialize atomic structures while executing advanced programs."
+	display_name = "Технологии битрана"
+	description = "Технология блюспейса привела к развитию квантовых вычислений, которые открывают возможности для материализации атомных структур при выполнении сложных программ."
 	prerequisite_nodes = list(/datum/techweb_node/gaming, /datum/techweb_node/applied_bluespace)
 	unlocked_designs = list(
 		/datum/design/board/byteforge,
@@ -90,8 +90,8 @@
 	announce_channels = list(RADIO_CHANNEL_SUPPLY)
 
 /datum/techweb_node/mining_adv
-	display_name = "Advanced Mining Technology"
-	description = "High-level mining equipment, pushing the boundaries of efficiency and effectiveness in resource extraction."
+	display_name = "Продвинутые шахтёрские технологии"
+	description = "Горнодобывающее оборудование высшего уровня, расширяющее границы эффективности при добыче ресурсов."
 	prerequisite_nodes = list(/datum/techweb_node/plasma_mining)
 	unlocked_designs = list(
 		/datum/design/jackhammer,

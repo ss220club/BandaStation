@@ -1,0 +1,8 @@
+["window"]
+nominative = "окно"
+genitive = "окна"
+dative = "окну"
+accusative = "окно"
+instrumental = "окном"
+prepositional = "окне"
+gender = "neuter"

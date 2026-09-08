@@ -46,12 +46,10 @@
 		return
 	var/obj/machinery/vending/vendor_pawn = controller.pawn
 	if(vendor_pawn.tilt(target_turf, 0) & SUCCESSFULLY_CRUSHED_MOB)
-		vendor_pawn.say(pick("Supersize this!", "Eat my shiny metal ass!", "Want to consume some of my products?", "SMASH!", "Don't you love these smashing prices!"))
+		vendor_pawn.say(pick("Как тебе размерчик?!", "Поцелуй мой блестящий металлический зад!", "Хочешь попробовать мои товары?", "В ЛЕПЕШКУ!", "Разве вам не нравятся эти сногсшибательные цены?!"))
 		controller.set_blackboard_key(BB_VENDING_LAST_HIT_SUCCESSFUL, TRUE)
 	else
-		if(vendor_pawn.icon_deny)
-			flick(vendor_pawn.icon_deny, vendor_pawn)
-		vendor_pawn.say(pick("Get back here!", "Don't you want my well priced love?"))
+		vendor_pawn.say(pick("А ну вернись!", "Разве тебе не хочется моей хорошо оцененной любви?"))
 		controller.set_blackboard_key(BB_VENDING_LAST_HIT_SUCCESSFUL, FALSE)
 	controller.set_blackboard_key(BB_VENDING_UNTILT_COOLDOWN, world.time + untilt_cooldown)
 	controller.set_blackboard_key(BB_VENDING_BUSY_TILTING, FALSE)

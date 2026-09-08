@@ -1,7 +1,7 @@
 // Parts root node
 /datum/techweb_node/parts
-	display_name = "Essential Stock Parts"
-	description = "Foundational components that form the backbone of station operations, encompassing a range of essential equipment necessary for day-to-day functionality."
+	display_name = "Важные базовые детали"
+	description = "Фундаментальные компоненты, составляющие основу деятельности станции, включающие широкий спектр необходимого оборудования для повседневного функционирования."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/micro_servo,
@@ -26,8 +26,8 @@
 	)
 
 /datum/techweb_node/parts_upg
-	display_name = "Upgraded Parts"
-	description = "Offering enhanced capabilities beyond their basic counterparts."
+	display_name = "Улучшенные детали"
+	description = "Обеспечивают расширенные возможности по сравнению с базовыми аналогами."
 	prerequisite_nodes = list(/datum/techweb_node/parts, /datum/techweb_node/energy_manipulation)
 	unlocked_designs = list(
 		/datum/design/rped,
@@ -43,8 +43,8 @@
 	announce_channels = list(RADIO_CHANNEL_ENGINEERING)
 
 /datum/techweb_node/parts_adv
-	display_name = "Advanced Parts"
-	description = "The most finely tuned and accurate stock parts."
+	display_name = "Продвинутые детали"
+	description = "Наиболее точно настроенные и прецизионные стандартные компоненты."
 	prerequisite_nodes = list(/datum/techweb_node/parts_upg)
 	unlocked_designs = list(
 		/datum/design/ultra_micro_laser,
@@ -61,8 +61,8 @@
 
 
 /datum/techweb_node/parts_bluespace
-	display_name = "Bluespace Parts"
-	description = "Integrating the latest in bluespace technology, these advanced components not only enhance functionality but also open up new possibilities for the station's technological capabilities."
+	display_name = "Блюспейс детали"
+	description = "Интеграция новейших технологий блюспейс позволяет не только улучшить функциональность, но и открывает новые возможности для технологического потенциала станции."
 	prerequisite_nodes = list(/datum/techweb_node/parts_adv, /datum/techweb_node/bluespace_travel)
 	unlocked_designs = list(
 		/datum/design/bs_rped,
@@ -79,8 +79,8 @@
 	announce_channels = list(RADIO_CHANNEL_ENGINEERING)
 
 /datum/techweb_node/telecomms
-	display_name = "Telecommunications Technology"
-	description = "A comprehensive suite of machinery for station-wide communication setups, ensuring seamless connectivity and operational coordination."
+	display_name = "Технологии телекоммуникаций"
+	description = "Комплексный набор оборудования для организации станционной связи, обеспечивающий бесперебойную коммуникацию и операционную координацию."
 	prerequisite_nodes = list(/datum/techweb_node/parts_bluespace)
 	unlocked_designs = list(
 		/datum/design/board/comm_monitor,
@@ -107,8 +107,8 @@
 
 // Engineering root node
 /datum/techweb_node/construction
-	display_name = "Construction"
-	description = "Tools and essential machinery used for station maintenance and expansion."
+	display_name = "Строительство"
+	description = "Инструменты и основное оборудование, используемое для технического обслуживания и расширения станции."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/board/circuit_imprinter/offstation,
@@ -153,8 +153,8 @@
 	)
 
 /datum/techweb_node/energy_manipulation
-	display_name = "Energy Manipulation"
-	description = "Harnessing the raw power of lightning arcs through sophisticated energy control methods."
+	display_name = "Манипулирование энергией"
+	description = "Использование энергии молниевых разрядов посредством передовых методов контроля энергии."
 	prerequisite_nodes = list(/datum/techweb_node/construction)
 	unlocked_designs = list(
 		/datum/design/board/apc_control,
@@ -177,8 +177,8 @@
 	announce_channels = list(RADIO_CHANNEL_ENGINEERING)
 
 /datum/techweb_node/shuttle_engineering
-	display_name = "Shuttle Engineering"
-	description = "Materials and equipment for constructing shuttles"
+	display_name = "Строительство шаттлов"
+	description = "Специализированные материалы и инженерное оборудование для проектирования и строительства шаттлов."
 	prerequisite_nodes = list(/datum/techweb_node/energy_manipulation, /datum/techweb_node/applied_bluespace)
 	unlocked_designs = list(
 		/datum/design/borg_upgrade_shuttle_blueprints,
@@ -193,8 +193,8 @@
 	announce_channels = list(RADIO_CHANNEL_ENGINEERING, RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_SUPPLY)
 
 /datum/techweb_node/holographics
-	display_name = "Holographics"
-	description = "Use of holographic technology for signage and barriers."
+	display_name = "Голография"
+	description = "Применение голографических технологий для создания информационных указателей и защитных барьеров."
 	prerequisite_nodes = list(/datum/techweb_node/energy_manipulation)
 	unlocked_designs = list(
 		/datum/design/board/atmosshieldgen,
@@ -222,8 +222,8 @@
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_2_POINTS)
 
 /datum/techweb_node/hud
-	display_name = "Integrated HUDs"
-	description = "Initially developed for assistants to learn the nuances of different professions through augmented reality."
+	display_name = "Встроенные ИЛС"
+	description = "Первоначально разработаны для ассистентов с целью изучения нюансов различных профессий через дополненную реальность."
 	prerequisite_nodes = list(/datum/techweb_node/holographics, /datum/techweb_node/cyber/cyber_implants)
 	unlocked_designs = list(
 		/datum/design/health_hud,
@@ -240,8 +240,8 @@
 	announce_channels = list(RADIO_CHANNEL_ENGINEERING, RADIO_CHANNEL_SECURITY, RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/night_vision
-	display_name = "Night Vision Technology"
-	description = "There are whispers that Nanotrasen pushed for this technology to extend shift durations, ensuring productivity around the clock."
+	display_name = "Технологии ночного виденья"
+	description = "Технология ночного видения была разработана в соответствии с корпоративной программой повышения операционной эффективности для обеспечения непрерывного производственного цикла и оптимизации трудовых ресурсов в условиях расширенного рабочего дня."
 	prerequisite_nodes = list(/datum/techweb_node/hud)
 	unlocked_designs = list(
 		/datum/design/diagnostic_hud_night,

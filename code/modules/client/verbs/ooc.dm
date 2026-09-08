@@ -5,7 +5,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 GAME_VERB(/client, ooc, VERB_OOC, null)
 	VERB_ARG(msg, VERB_ARG_TYPE_TEXT, VERB_ARG_SOURCE_INPUT)
 	if(GLOB.say_disabled) //This is here to try to identify lag problems
-		to_chat(usr, span_danger("Speech is currently admin-disabled."))
+		to_chat(usr, span_danger("Общение было заблокировано администрацией."))
 		return
 
 	var/client_initalized = VALIDATE_CLIENT_INITIALIZATION(src)
@@ -74,7 +74,9 @@ GAME_VERB(/client, ooc, VERB_OOC, null)
 		return
 
 	mob.log_talk(raw_msg, LOG_OOC)
-
+	// BANDASTATION EDIT START: CHAT BADGES REPLACE
+	var/keyname = get_ooc_badged_name()
+	/*
 	var/keyname = key
 	var/list/key_tags
 	var/key_prefix = ""
@@ -96,6 +98,8 @@ GAME_VERB(/client, ooc, VERB_OOC, null)
 
 	if(visible_unlock)
 		keyname = "<font color='[prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour]'>[keyname]</font>"
+	*/
+	// BANDASTATION EDIT END: CHAT BADGES REPLACE
 
 	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url
 	for(var/client/receiver as anything in GLOB.clients)
@@ -313,7 +317,7 @@ GAME_VERB_PROC_DESC(/client, show_servers_last_roundend_report, "Server's Last R
 
 	SSticker.show_roundend_report(src, report_type = SERVER_LAST_ROUND)
 
-GAME_VERB_DESC(/client, fit_viewport, "Fit Viewport", "Fit the width of the map window to match the viewport", "OOC")
+GAME_VERB_DESC(/client, fit_viewport, "Fit Viewport", "Fit the width of the map window to match the viewport", "Special") // BANDASTATION EDIT: Special category
 	// Fetch aspect ratio
 	var/view_size = getviewsize(view)
 	var/aspect_ratio = view_size[1] / view_size[2]
@@ -392,7 +396,7 @@ GAME_VERB_DESC(/client, fit_viewport, "Fit Viewport", "Fit the width of the map 
 	if(fully_created)
 		INVOKE_ASYNC(src, VERB_REF(fit_viewport))
 
-GAME_VERB_DESC(/client, policy, "Show Policy", "Show special server rules related to your current character.", "OOC")
+GAME_VERB_DESC(/client, policy, "Show Policy", "Show special server rules related to your current character.", null) // BANDASTATION EDIT: Empty category
 	//Collect keywords
 	var/list/keywords = mob.get_policy_keywords()
 	var/header = get_policy(POLICY_VERB_HEADER)
@@ -414,7 +418,7 @@ GAME_VERB_DESC(/client, policy, "Show Policy", "Show special server rules relate
 GAME_VERB_HIDDEN(/client, fix_stat_panel, "Fix Stat Panel")
 	init_verbs()
 
-GAME_VERB_PROC_DESC(/client, export_preferences, "Export Preferences", "Export your current preferences to a file.", "OOC")
+GAME_VERB_PROC_DESC(/client, export_preferences, "Export Preferences", "Export your current preferences to a file.", "Special") // BANDASTATION EDIT: Special category
 
 	ASSERT(prefs, "User attempted to export preferences while preferences were null!") // what the fuck
 
@@ -424,7 +428,7 @@ GAME_VERB_DESC(/client, map_vote_tally_count, "Show Map Vote Tallies", "View the
 	to_chat(mob, SSmap_vote.tally_printout)
 
 
-GAME_VERB_DESC(/client, linkforumaccount, "Link Forum Account", "Validates your byond account to your forum account. Required to post on the forums.", "OOC")
+GAME_VERB_DESC(/client, linkforumaccount, "Link Forum Account", "Validates your byond account to your forum account. Required to post on the forums.", null) // BANDASTATION EDIT: Empty category
 	var/uri = CONFIG_GET(string/forum_link_uri)
 	if(!uri)
 		to_chat(src, span_warning("This feature is disabled."))

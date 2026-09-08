@@ -16,11 +16,11 @@ export const NtosRecords = (props) => {
     <NtosWindow width={600} height={800}>
       <NtosWindow.Content scrollable>
         <Section textAlign="center">
-          NANOTRASEN PERSONNEL RECORDS (CLASSIFIED)
+          КАДРОВЫЕ ДОКУМЕНТЫ NANOTRASEN (СЕКРЕТНО)
         </Section>
         <Section>
           <Input
-            placeholder="Filter results..."
+            placeholder="Фильтровать результаты..."
             value={searchTerm}
             fluid
             textAlign="center"
@@ -56,18 +56,18 @@ export const NtosRecords = (props) => {
                 {record.name}
               </Box>
               <br />
-              Rank: {record.rank}
+              Должность: {record.rank}
               <br />
-              Species: {record.species}
+              Вид: {record.species}
               <br />
-              Gender: {record.gender}
+              Пол: {record.gender}
               <br />
-              Age: {record.age}
+              Возраст: {record.age}
               <br />
-              Fingerprint Hash: {record.fingerprint}
+              Хэш отпечатков пальцев: {record.fingerprint}
               <br />
               <br />
-              Criminal Status: {record.wanted || 'DELETED'}
+              Криминальный статус: {record.wanted || 'DELETED'}
             </Section>
           ))}
         {mode === 'medical' &&
@@ -94,18 +94,18 @@ export const NtosRecords = (props) => {
                 {record.name}
               </Box>
               <br />
-              Bloodtype: {record.bloodtype}
+              Тип крови: {record.bloodtype}
               <br />
-              Minor Disabilities:
+              Незначительные нарушения:
               {record.mi_dis?.split('<br>').map((entry, index) => (
                 <Box key={index}>&#8226; {entry}</Box>
               ))}
-              Major Disabilities:
+              Основные нарушения:
               {record.ma_dis?.split('<br>').map((entry, index) => (
                 <Box key={index}>&#8226; {entry}</Box>
               ))}
               <br />
-              Notes: {record.notes}
+              Заметки: {record.notes}
             </Section>
           ))}
       </NtosWindow.Content>

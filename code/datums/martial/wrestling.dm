@@ -155,7 +155,7 @@ If you make a derivative work from this code, you must include this notification
 
 	defender.Stun(8 SECONDS)
 	defender.visible_message(span_danger("[attacker] starts spinning around with [defender]!"), \
-					span_userdanger("You're spun around by [attacker]!"), span_hear("You hear aggressive shuffling!"), null, attacker)
+					span_userdanger("You're spun around by [attacker]!"), span_hear("Вы слышите агрессивное шарканье!"), null, attacker)
 	to_chat(attacker, span_danger("You start spinning around with [defender]!"))
 	attacker.emote("scream")
 
@@ -239,7 +239,7 @@ If you make a derivative work from this code, you must include this notification
 	defender.setDir(get_dir(defender, attacker))
 
 	defender.visible_message(span_danger("[attacker] lifts [defender] up!"), \
-					span_userdanger("You're lifted up by [attacker]!"), span_hear("You hear aggressive shuffling!"), null, attacker)
+					span_userdanger("You're lifted up by [attacker]!"), span_hear("Вы слышите агрессивное шарканье!"), null, attacker)
 	to_chat(attacker, span_danger("You lift [defender] up!"))
 
 	FlipAnimation()
@@ -311,7 +311,7 @@ If you make a derivative work from this code, you must include this notification
 				fluff = "atomic [fluff]"
 
 		defender.visible_message(span_danger("[attacker] [fluff] [defender]!"), \
-						span_userdanger("You're [fluff]ed by [attacker]!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), COMBAT_MESSAGE_RANGE, attacker)
+						span_userdanger("You're [fluff]ed by [attacker]!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), COMBAT_MESSAGE_RANGE, attacker)
 		to_chat(attacker, span_danger("You [fluff] [defender]!"))
 		playsound(attacker.loc, SFX_SWING_HIT, 50, TRUE)
 		if (!IS_UNCONSCIOUS_OR_CRIT(defender))
@@ -356,7 +356,7 @@ If you make a derivative work from this code, you must include this notification
 		addtimer(CALLBACK(src, PROC_REF(CheckStrikeTurf), attacker, T), 0.4 SECONDS)
 
 		defender.visible_message(span_danger("[attacker] headbutts [defender]!"), \
-						span_userdanger("You're headbutted by [attacker]!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), COMBAT_MESSAGE_RANGE, attacker)
+						span_userdanger("You're headbutted by [attacker]!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), COMBAT_MESSAGE_RANGE, attacker)
 		to_chat(attacker, span_danger("You headbutt [defender]!"))
 		defender.adjust_brute_loss(rand(10,20))
 		playsound(attacker.loc, SFX_SWING_HIT, 50, TRUE)
@@ -371,7 +371,7 @@ If you make a derivative work from this code, you must include this notification
 	attacker.setDir(turn(attacker.dir, 90))
 
 	defender.visible_message(span_danger("[attacker] roundhouse-kicks [defender]!"), \
-					span_userdanger("You're roundhouse-kicked by [attacker]!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), COMBAT_MESSAGE_RANGE, attacker)
+					span_userdanger("You're roundhouse-kicked by [attacker]!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), COMBAT_MESSAGE_RANGE, attacker)
 	to_chat(attacker, span_danger("You roundhouse-kick [defender]!"))
 	playsound(attacker.loc, SFX_SWING_HIT, 50, TRUE)
 	defender.adjust_brute_loss(rand(10,20))
@@ -437,7 +437,7 @@ If you make a derivative work from this code, you must include this notification
 		attacker.forceMove(defender.loc)
 
 		defender.visible_message(span_danger("[attacker] leg-drops [defender]!"), \
-						span_userdanger("You're leg-dropped by [attacker]!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), null, attacker)
+						span_userdanger("You're leg-dropped by [attacker]!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), null, attacker)
 		to_chat(attacker, span_danger("You leg-drop [defender]!"))
 		playsound(attacker.loc, SFX_SWING_HIT, 50, TRUE)
 		attacker.emote("scream")
@@ -474,7 +474,7 @@ If you make a derivative work from this code, you must include this notification
 	defender.visible_message(
 		span_danger("[attacker] gets [defender] in a cinch!"),
 		span_userdanger("You're put into a cinch by [attacker]!"),
-		span_hear("You hear aggressive shuffling!"),
+		span_hear("Вы слышите агрессивное шарканье!"),
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
