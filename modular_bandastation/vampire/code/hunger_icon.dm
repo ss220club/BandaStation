@@ -22,6 +22,7 @@
 	underlays -= food_image
 	food_image.icon = food_icon
 	underlays += food_image
+	// TODO: fix low nutrition outline
 
 /atom/movable/screen/hunger/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
