@@ -247,20 +247,9 @@
 			to_chat(owner.current, span_boldnotice("[passive.gain_desc]"))
 
 /datum/antagonist/vampire/proc/check_sun()
-	var/ax = owner.current.x
-	var/ay = owner.current.y
-
-	for(var/i in 1 to 20)
-		ax += round(sin(SSsun.azimuth), 0.01)
-		ay += round(cos(SSsun.azimuth), 0.01)
-
-		var/turf/turf_loc = locate(round(ax, 0.5), round(ay, 0.5), owner.current.z)
-		if(!turf_loc)
-			return
-		if(turf_loc.x == 1 || turf_loc.x == world.maxx || turf_loc.y == 1 || turf_loc.y == world.maxy)
-			break
-		if(turf_loc.density)
-			return
+	var/turf/turf_loc = get_turf(owner.current)
+	if(!turf_loc || turf_loc.is_sunlight_blocked())
+		return
 
 	if(bloodusable >= 10)
 		to_chat(owner.current, span_userdanger("The starlight saps your strength, you should get out of the starlight!"))
