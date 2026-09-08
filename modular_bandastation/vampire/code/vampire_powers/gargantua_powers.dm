@@ -10,8 +10,9 @@
 
 /datum/action/cooldown/spell/vampire_blood_swell/cast(atom/cast_on)
 	. = ..()
-	if(ishuman(owner))
-		owner.apply_status_effect(STATUS_EFFECT_BLOOD_SWELL)
+	var/mob/living/user = owner
+	if(ishuman(user))
+		user.apply_status_effect(/datum/status_effect/vampire_blood_swell)
 
 /datum/action/cooldown/spell/vampire_stomp
 	name = "Seismic Stomp"
@@ -85,13 +86,13 @@
 /datum/action/cooldown/spell/vampire_overwhelming_force/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
-	if(!HAS_TRAIT_FROM(user, TRAIT_FORCE_DOORS, VAMPIRE_TRAIT))
+	if(!HAS_TRAIT_FROM(user, TRAIT_HULK, VAMPIRE_TRAIT))
 		to_chat(user, span_warning("You feel MIGHTY!"))
-		ADD_TRAIT(user, TRAIT_FORCE_DOORS, VAMPIRE_TRAIT)
+		ADD_TRAIT(user, TRAIT_HULK, VAMPIRE_TRAIT)
 		user.status_flags &= ~CANPUSH
 		user.move_resist = MOVE_FORCE_STRONG
 	else
-		REMOVE_TRAIT(user, TRAIT_FORCE_DOORS, VAMPIRE_TRAIT)
+		REMOVE_TRAIT(user, TRAIT_HULK, VAMPIRE_TRAIT)
 		user.move_resist = MOVE_FORCE_DEFAULT
 		user.status_flags |= CANPUSH
 
@@ -121,10 +122,10 @@
 	if(!istype(user))
 		return
 	to_chat(user, span_notice("You feel a rush of energy!"))
-	user.apply_status_effect(STATUS_EFFECT_BLOOD_RUSH)
-	user.clear_legcuffs(TRUE)
+	user.apply_status_effect(/datum/status_effect/vampire_blood_rush)
+	QDEL_NULL(user.legcuffed)
 	user.SetKnockdown(0)
-	user.stand_up(TRUE)
+	user.set_body_position(STANDING_UP)
 
 /datum/action/cooldown/spell/pointed/projectile/vampire_demonic_grasp
 	name = "Demonic Grasp"
@@ -140,10 +141,10 @@
 
 /obj/projectile/magic/demonic_grasp
 	name = "demonic grasp"
-	reflectability = REFLECTABILITY_NEVER
+	reflectable = FALSE
 	icon_state = null
 
-/obj/projectile/magic/demonic_grasp/on_hit(atom/target, blocked, hit_zone)
+/obj/projectile/magic/demonic_grasp/on_hit(atom/target, blocked, pierce_hit)
 	. = ..()
 	if(!. || !isliving(target) || !firer)
 		return
@@ -153,10 +154,8 @@
 	victim.Immobilize(1 SECONDS)
 	new /obj/effect/temp_visual/demonic_grasp(loc)
 	var/turf/throw_target
-	if(firer.a_intent == INTENT_DISARM)
-		throw_target = get_edge_target_turf(victim, get_dir(firer, victim))
-	else if(firer.a_intent == INTENT_GRAB)
-		throw_target = get_step(firer, get_dir(firer, victim))
+	var/mob/living/living_firer = firer
+	throw_target = living_firer.combat_mode ? get_edge_target_turf(victim, get_dir(firer, victim)) : get_step(firer, get_dir(firer, victim))
 	if(throw_target)
 		victim.throw_at(throw_target, 2, 5, spin = FALSE, callback = CALLBACK(src, PROC_REF(create_snare), victim))
 
@@ -184,13 +183,14 @@
 	add_vampire_ability(30)
 
 /datum/action/cooldown/spell/pointed/vampire_charge/can_cast_spell(feedback = TRUE)
-	return !IS_HORIZONTAL(owner) && ..()
+	var/mob/living/user = owner
+	return user?.body_position == STANDING_UP && ..()
 
 /datum/action/cooldown/spell/pointed/vampire_charge/cast(atom/target)
 	. = ..()
 	var/mob/living/user = owner
-	user.apply_status_effect(STATUS_EFFECT_CHARGING)
-	user.throw_at(target, cast_range, 1, user, FALSE, callback = CALLBACK(user, TYPE_PROC_REF(/mob/living, remove_status_effect), STATUS_EFFECT_CHARGING))
+	user.apply_status_effect(/datum/status_effect/vampire_charging)
+	user.throw_at(target, cast_range, 1, user, FALSE, callback = CALLBACK(user, TYPE_PROC_REF(/mob/living, remove_status_effect), /datum/status_effect/vampire_charging))
 
 #define ARENA_SIZE 3
 /datum/action/cooldown/spell/pointed/vampire_arena
@@ -218,17 +218,27 @@
 	user.forceMove(get_turf(target))
 	playsound(user, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 	new /obj/effect/temp_visual/stomp(get_turf(user))
-	user.apply_status_effect(STATUS_EFFECT_VAMPIRE_GLADIATOR)
-	for(var/turf/turf as anything in circle_edge_turfs(get_turf(target), ARENA_SIZE))
-		all_temp_walls += new /obj/effect/temp_visual/elite_tumor_wall/gargantua(turf, src)
+	user.apply_status_effect(/datum/status_effect/vampire_gladiator)
+	for(var/turf/turf as anything in orange(ARENA_SIZE, get_turf(target)))
+		if(get_dist(turf, get_turf(target)) == ARENA_SIZE)
+			all_temp_walls += new /obj/structure/vampire_arena_wall(turf)
 	timer = addtimer(CALLBACK(src, PROC_REF(dispel), user), 30 SECONDS, TIMER_STOPPABLE)
 
 /datum/action/cooldown/spell/pointed/vampire_arena/proc/dispel(mob/living/user)
 	if(timer)
 		deltimer(timer)
 		timer = null
-	QDEL_LIST_CONTENTS(all_temp_walls)
-	user.remove_status_effect(STATUS_EFFECT_VAMPIRE_GLADIATOR)
+	for(var/obj/structure/vampire_arena_wall/wall as anything in all_temp_walls)
+		qdel(wall)
+	all_temp_walls.Cut()
+	user.remove_status_effect(/datum/status_effect/vampire_gladiator)
 	user.visible_message(span_warning("The arena begins to dissipate."))
 
 #undef ARENA_SIZE
+
+/obj/structure/vampire_arena_wall
+	name = "wall of coagulated blood"
+	desc = "A temporary wall of congealed blood."
+	density = TRUE
+	anchored = TRUE
+	max_integrity = 100

@@ -44,7 +44,7 @@
 	if(vampire.subclass.thrall_cap <= length(vampire.get_thralls()))
 		to_chat(user, span_warning("You don't have enough power to enthrall anyone else."))
 		return FALSE
-	if(ismindshielded(target) || target.mind.has_antag_datum(/datum/antagonist/vampire) || target.mind.has_antag_datum(/datum/antagonist/vampire_thrall) || HAS_MIND_TRAIT(target, TRAIT_HOLY))
+	if(HAS_TRAIT(target, TRAIT_MINDSHIELD) || target.mind.has_antag_datum(/datum/antagonist/vampire) || target.mind.has_antag_datum(/datum/antagonist/vampire_thrall) || HAS_MIND_TRAIT(target, TRAIT_HOLY))
 		target.visible_message(span_warning("[target] seems to resist the takeover!"), span_notice("You feel a familiar sensation in your skull that quickly dissipates."))
 		return FALSE
 	return TRUE
@@ -89,7 +89,7 @@
 /datum/action/cooldown/spell/pointed/vampire_pacify/cast(mob/living/carbon/human/cast_on)
 	. = ..()
 	if(cast_on.affects_vampire(owner))
-		cast_on.apply_status_effect(STATUS_EFFECT_PACIFIED)
+		cast_on.set_timed_status_effect(30 SECONDS, /datum/status_effect/pacify)
 
 /datum/action/cooldown/spell/pointed/vampire_switch_places
 	name = "Subspace Swap"
@@ -114,10 +114,8 @@
 		return
 	var/turf/user_turf = get_turf(user)
 	var/turf/target_turf = get_turf(target)
-	if(!(SEND_SIGNAL(target, COMSIG_MOVABLE_TELEPORTING, user_turf) & COMPONENT_BLOCK_TELEPORT))
-		target.forceMove(user_turf)
-	if(!(SEND_SIGNAL(user, COMSIG_MOVABLE_TELEPORTING, target_turf) & COMPONENT_BLOCK_TELEPORT))
-		user.forceMove(target_turf)
+	if(!do_teleport(target, user_turf, channel = TELEPORT_CHANNEL_MAGIC) || !do_teleport(user, target_turf, channel = TELEPORT_CHANNEL_MAGIC))
+		to_chat(user, span_warning("Space refuses to bend into a swap."))
 
 /datum/action/cooldown/spell/vampire_decoy
 	name = "Deploy Decoy"
@@ -132,12 +130,14 @@
 /datum/action/cooldown/spell/vampire_decoy/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
-	var/mob/living/simple_animal/hostile/illusion/escape/decoy = new(get_turf(user))
-	decoy.Copy_Parent(user, 20, 20)
-	decoy.GiveTarget(user)
-	decoy.Goto(user, decoy.move_to_delay, decoy.minimum_distance)
-	user.make_invisible()
-	addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, reset_visibility)), 6 SECONDS)
+	var/mob/living/basic/illusion/escape/decoy = new(get_turf(user))
+	decoy.full_setup(user, target_mob = user, life = 6 SECONDS, damage = 0)
+	user.alpha = 0
+	addtimer(CALLBACK(src, PROC_REF(restore_visibility), user), 6 SECONDS)
+
+/datum/action/cooldown/spell/vampire_decoy/proc/restore_visibility(mob/living/user)
+	if(!QDELETED(user))
+		user.alpha = initial(user.alpha)
 
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls
 	name = "Rally Thralls"
@@ -160,7 +160,12 @@
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls/cast_on_thing_in_aoe(mob/living/carbon/human/thrall, atom/caster)
 	var/image/overlay = image('icons/effects/vampire_effects.dmi', "rallyoverlay", layer = EFFECTS_LAYER)
 	playsound(thrall, 'sound/magic/staff_healing.ogg', 30)
-	thrall.remove_CC()
+	thrall.SetStun(0)
+	thrall.SetKnockdown(0)
+	thrall.SetParalyzed(0)
+	thrall.SetImmobilized(0)
+	thrall.SetUnconscious(0)
+	thrall.SetSleeping(0)
 	thrall.add_overlay(overlay)
 	addtimer(CALLBACK(thrall, TYPE_PROC_REF(/atom, cut_overlay), overlay), 6 SECONDS)
 
@@ -177,11 +182,11 @@
 /datum/action/cooldown/spell/vampire_blood_bond/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
-	var/datum/status_effect/thrall_net/net = user.has_status_effect(STATUS_EFFECT_THRALL_NET)
+	var/datum/status_effect/vampire_thrall_net/net = user.has_status_effect(/datum/status_effect/vampire_thrall_net)
 	if(net)
 		qdel(net)
 	else
-		user.apply_status_effect(STATUS_EFFECT_THRALL_NET, user.mind.has_antag_datum(/datum/antagonist/vampire))
+		user.apply_status_effect(/datum/status_effect/vampire_thrall_net, user.mind.has_antag_datum(/datum/antagonist/vampire))
 
 /datum/action/cooldown/spell/aoe/vampire_hysteria
 	name = "Mass Hysteria"
@@ -201,5 +206,5 @@
 			. += target
 
 /datum/action/cooldown/spell/aoe/vampire_hysteria/cast_on_thing_in_aoe(mob/living/carbon/human/target, atom/caster)
-	target.flash_eyes(1, TRUE)
-	new /obj/effect/hallucination/delusion/long(get_turf(owner), target)
+	target.flash_act(1, TRUE, TRUE)
+	target.adjust_hallucinations(10 SECONDS)

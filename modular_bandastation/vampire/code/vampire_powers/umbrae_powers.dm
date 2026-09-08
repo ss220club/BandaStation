@@ -25,7 +25,8 @@
 /datum/action/cooldown/spell/vampire_cloak/proc/update_vampire_cloak(datum/source)
 	SIGNAL_HANDLER
 	var/mob/living/user = owner
-	user.mind?.has_antag_datum(/datum/antagonist/vampire)?.handle_vampire_cloak()
+	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	vampire?.handle_vampire_cloak()
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_snare
 	name = "Shadow Snare"
@@ -43,48 +44,46 @@
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_snare/cast(atom/cast_on)
 	. = ..()
-	new /obj/item/restraints/legcuffs/beartrap/shadow_snare(get_turf(cast_on))
+	new /obj/effect/vampire_shadow_snare(get_turf(cast_on))
 
-/obj/item/restraints/legcuffs/beartrap/shadow_snare
+/obj/effect/vampire_shadow_snare
 	name = "shadow snare"
 	desc = "An almost transparent trap that melts into the shadows."
 	alpha = 60
-	armed = TRUE
 	anchored = TRUE
-	breakouttime = 5 SECONDS
-	flags = DROPDEL
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	var/remaining_integrity = 100
+	var/turf/host_turf
 
-/obj/item/restraints/legcuffs/beartrap/shadow_snare/on_atom_entered(datum/source, atom/movable/entered)
-	if(!iscarbon(entered) || !armed)
+/obj/effect/vampire_shadow_snare/proc/on_entered(datum/source, atom/movable/entered)
+	SIGNAL_HANDLER
+	if(!iscarbon(entered))
 		return
 	var/mob/living/carbon/target = entered
 	if(!target.affects_vampire())
 		return
-	target.extinguish_light()
-	target.EyeBlind(20 SECONDS)
-	STOP_PROCESSING(SSobj, src)
-	. = ..()
-	if(!iscarbon(loc))
-		qdel(src)
+	target.set_light(0)
+	target.set_temp_blindness(20 SECONDS)
+	target.Immobilize(5 SECONDS)
+	qdel(src)
 
-/obj/item/restraints/legcuffs/beartrap/shadow_snare/attack_hand(mob/user)
-	Crossed(user)
-/obj/item/restraints/legcuffs/beartrap/shadow_snare/attack_tk(mob/user)
-	if(iscarbon(user))
-		to_chat(user, span_userdanger("The snare sends a psychic backlash!"))
-		user.EyeBlind(20 SECONDS)
-/obj/item/restraints/legcuffs/beartrap/shadow_snare/process()
+/obj/effect/vampire_shadow_snare/process()
 	var/turf/snare_turf = get_turf(src)
 	if(snare_turf.get_lumcount() * 10 > 2)
-		obj_integrity -= 50
-	if(obj_integrity <= 0)
+		remaining_integrity -= 50
+	if(remaining_integrity <= 0)
 		visible_message(span_notice("[src] withers away."))
 		qdel(src)
-/obj/item/restraints/legcuffs/beartrap/shadow_snare/Initialize(mapload)
+
+/obj/effect/vampire_shadow_snare/Initialize(mapload)
 	. = ..()
+	host_turf = get_turf(src)
+	RegisterSignal(host_turf, COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
 	START_PROCESSING(SSobj, src)
-/obj/item/restraints/legcuffs/beartrap/shadow_snare/Destroy()
+
+/obj/effect/vampire_shadow_snare/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	UnregisterSignal(host_turf, COMSIG_ATOM_ENTERED)
 	return ..()
 
 /datum/action/cooldown/spell/vampire_soul_anchor
@@ -124,24 +123,26 @@
 	var/turf/start_turf = get_turf(user)
 	var/turf/end_turf = get_turf(anchor)
 	QDEL_NULL(anchor)
-	if(end_turf.z != start_turf.z || !is_teleport_allowed(end_turf.z))
+	if(end_turf.z != start_turf.z)
 		return
 	if(fake)
-		var/mob/living/simple_animal/hostile/illusion/escape/decoy = new(end_turf)
-		decoy.Copy_Parent(user, 10 SECONDS)
-		user.make_invisible()
-		addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, reset_visibility)), 4 SECONDS)
-	else if(SEND_SIGNAL(user, COMSIG_MOVABLE_TELEPORTING, end_turf) & COMPONENT_BLOCK_TELEPORT)
-		return
+		var/mob/living/basic/illusion/escape/decoy = new(end_turf)
+		decoy.full_setup(user, target_mob = user, life = 4 SECONDS, damage = 0)
+		user.alpha = 0
+		addtimer(CALLBACK(src, PROC_REF(restore_visibility), user), 4 SECONDS)
 	else
-		user.forceMove(end_turf)
+		if(!do_teleport(user, end_turf, channel = TELEPORT_CHANNEL_MAGIC))
+			return
 	shadow_to_animation(start_turf, end_turf, user)
 	GetComponent(/datum/component/vampire_ability).deduct_blood(src)
+
+/datum/action/cooldown/spell/vampire_soul_anchor/proc/restore_visibility(mob/living/user)
+	if(!QDELETED(user))
+		user.alpha = initial(user.alpha)
 
 /proc/shadow_to_animation(turf/start_turf, turf/end_turf, mob/user)
 	var/obj/effect/immortality_talisman/effect = new(start_turf)
 	effect.dir = user.dir
-	effect.can_destroy = TRUE
 	var/distance = get_dist(start_turf, end_turf)
 	animate(effect, time = distance, alpha = 0, pixel_x = (end_turf.x - start_turf.x) * 32, pixel_y = (end_turf.y - start_turf.y) * 32)
 	QDEL_IN(effect, distance)
@@ -173,10 +174,9 @@
 /datum/action/cooldown/spell/pointed/vampire_dark_passage/cast(atom/cast_on)
 	. = ..()
 	var/turf/target = get_turf(cast_on)
-	if(SEND_SIGNAL(owner, COMSIG_MOVABLE_TELEPORTING, target) & COMPONENT_BLOCK_TELEPORT)
-		return
 	new /obj/effect/temp_visual/vamp_mist_out(get_turf(owner))
-	owner.forceMove(target)
+	if(!do_teleport(owner, target, channel = TELEPORT_CHANNEL_MAGIC))
+		return
 
 /obj/effect/temp_visual/vamp_mist_out
 	duration = 2 SECONDS
@@ -197,9 +197,9 @@
 /datum/action/cooldown/spell/aoe/vampire_extinguish/get_things_to_cast_on(atom/center)
 	return range(aoe_radius, center)
 /datum/action/cooldown/spell/aoe/vampire_extinguish/cast_on_thing_in_aoe(turf/target, atom/caster)
-	target.extinguish_light()
+	target.set_light(0)
 	for(var/atom/atom in target)
-		atom.extinguish_light()
+		atom.set_light(0)
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_boxing
 	name = "Shadow Boxing"
@@ -216,7 +216,7 @@
 /datum/action/cooldown/spell/pointed/vampire_shadow_boxing/cast(mob/living/target)
 	. = ..()
 	if(target.affects_vampire(owner))
-		target.apply_status_effect(STATUS_EFFECT_SHADOW_BOXING, owner)
+		target.apply_status_effect(/datum/status_effect/vampire_shadow_boxing, owner)
 
 /datum/action/cooldown/spell/vampire_eternal_darkness
 	name = "Eternal Darkness"
@@ -244,7 +244,7 @@
 	. = ..()
 	START_PROCESSING(SSfastprocess, src)
 /datum/vampire_passive/eternal_darkness/Destroy(force, ...)
-	owner.remove_light()
+	owner.set_light(0)
 	STOP_PROCESSING(SSfastprocess, src)
 	return ..()
 /datum/vampire_passive/eternal_darkness/process()
@@ -253,14 +253,10 @@
 		if(target.affects_vampire(owner))
 			target.adjust_bodytemperature(-3 * TEMPERATURE_DAMAGE_COEFFICIENT)
 	for(var/obj/projectile/projectile in view(8, owner))
-		if(projectile.flag == ENERGY || projectile.flag == LASER)
-			projectile.damage *= 0.7
+		projectile.damage *= 0.7
 	vampire.bloodusable = max(vampire.bloodusable - 0.25, 0)
 	if(!vampire.bloodusable || owner.stat == DEAD)
 		vampire.remove_ability(src)
 
 /datum/vampire_passive/vision/xray
 	gain_desc = "You can now see through walls."
-	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
-	see_in_dark = 8
-	vision_flags = SEE_TURFS | SEE_MOBS | SEE_OBJS

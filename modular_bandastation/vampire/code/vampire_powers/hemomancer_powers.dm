@@ -12,15 +12,19 @@
 	if(!..())
 		return FALSE
 	var/mob/living/carbon/user = owner
-	return user?.canUnEquip(user.l_hand) && user.canUnEquip(user.r_hand)
+	if(!user)
+		return FALSE
+	for(var/obj/item/held_item as anything in user.held_items)
+		if(held_item && HAS_TRAIT(held_item, TRAIT_NODROP))
+			return FALSE
+	return TRUE
 
 /datum/action/cooldown/spell/vampire_vamp_claws/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/carbon/user = owner
-	if(user.l_hand || user.r_hand)
+	if(user.get_num_held_items())
 		to_chat(user, span_notice("You drop what was in your hands as large blades spring from your fingers!"))
-		user.drop_l_hand()
-		user.drop_r_hand()
+		user.drop_all_held_items()
 	else
 		to_chat(user, span_notice("Large blades of blood spring from your fingers!"))
 	var/obj/item/vamp_claws/claws = new(get_turf(user))
@@ -32,13 +36,13 @@
 	icon = 'icons/effects/vampire_effects.dmi'
 	icon_state = "vamp_claws"
 	w_class = WEIGHT_CLASS_BULKY
-	flags = ABSTRACT | NODROP | DROPDEL
+	obj_flags = ABSTRACT | DROPDEL
 	force = 10
-	armor_penetration_flat = 20
-	sharp = TRUE
-	attack_effect_override = ATTACK_EFFECT_CLAW
+	armour_penetration = 20
+	sharpness = SHARP_EDGED
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut", "savaged", "clawed")
+	attack_verb_continuous = list("slashes", "stabs", "slices", "claws")
+	attack_verb_simple = list("slash", "stab", "slice", "claw")
 	var/durability = 15
 	var/blood_drain_amount = 15
 	var/blood_absorbed_amount = 5
@@ -48,13 +52,14 @@
 /obj/item/vamp_claws/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
+	ADD_TRAIT(src, TRAIT_NODROP, REF(src))
 
 /obj/item/vamp_claws/attack(mob/living/target, mob/living/user, params)
 	if(..())
-		return FINISH_ATTACK
+		return
 	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
 	if(!vampire || !iscarbon(target))
-		return FINISH_ATTACK
+		return
 	var/mob/living/carbon/carbon_target = target
 	if(isalien(carbon_target) && !xenomorph_acid_boosted && carbon_target.ckey && carbon_target.stat != DEAD)
 		to_chat(user, span_warning("As [carbon_target] bleeds acid, you mix it into your claws!"))
@@ -65,7 +70,7 @@
 		force *= 1.5
 		heal_boost = 2
 		damtype = BURN
-	if(carbon_target.ckey && carbon_target.stat != DEAD && carbon_target.affects_vampire(user) && (isalien(carbon_target) || !(NO_BLOOD in carbon_target.dna.species.species_traits)))
+	if(carbon_target.ckey && carbon_target.stat != DEAD && carbon_target.affects_vampire(user) && (isalien(carbon_target) || carbon_target.get_blood_volume()))
 		carbon_target.bleed(blood_drain_amount)
 		vampire.adjust_blood(carbon_target, blood_absorbed_amount)
 		user.adjust_stamina_loss(-20 * heal_boost)
@@ -80,7 +85,7 @@
 	if(HAS_TRAIT(src, TRAIT_WIELDED))
 		user.changeNext_move(CLICK_CD_MELEE * 0.5)
 
-/obj/item/vamp_claws/activate_self(mob/user)
+/obj/item/vamp_claws/attack_self(mob/user)
 	. = ..()
 	if(.)
 		return
@@ -109,7 +114,7 @@
 /datum/action/cooldown/spell/pointed/vampire_blood_tendrils/proc/apply_slowdown(turf/target_turf, mob/living/user)
 	for(var/mob/living/target in range(area_of_affect, target_turf))
 		if(target.affects_vampire(user))
-			target.Slowed(6 SECONDS)
+			target.set_timed_status_effect(6 SECONDS, /datum/status_effect/staggered)
 			target.visible_message(span_warning("[target] gets ensnared in blood tendrils!"))
 			new /obj/effect/temp_visual/blood_tendril/long(get_turf(target))
 
@@ -168,11 +173,12 @@
 	return ..()
 /obj/structure/blood_barrier/process()
 	take_damage(20, sound_effect = FALSE)
-/obj/structure/blood_barrier/obj_destruction(damage_flag)
-	new /obj/effect/decal/cleanable/blood(loc)
-	return ..()
 /obj/structure/blood_barrier/CanPass(atom/movable/mover, border_dir)
-	var/datum/antagonist/vampire/vampire = isliving(mover) ? mover.mind?.has_antag_datum(/datum/antagonist/vampire) : null
+	..()
+	if(!isliving(mover))
+		return FALSE
+	var/mob/living/living_mover = mover
+	var/datum/antagonist/vampire/vampire = living_mover.mind?.has_antag_datum(/datum/antagonist/vampire)
 	return vampire && is_type_in_list(vampire.subclass, list(SUBCLASS_HEMOMANCER, SUBCLASS_ANCIENT))
 
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool
@@ -181,7 +187,7 @@
 	button_icon_state = "blood_pool"
 	cooldown_time = 30 SECONDS
 	jaunt_duration = 3 SECONDS
-	jaunt_type_path = /obj/effect/dummy/spell_jaunt/blood_pool
+	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt
 
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/New(Target)
 	. = ..()
@@ -212,7 +218,7 @@
 		return
 	var/mob/living/carbon/human/target = prey[target_name]
 	var/message = "[target_name] is in [get_area(target)], [dir2text(get_dir(user, target))] from you."
-	if(target.get_damage_amount() >= 40 || target.bleed_rate)
+	if(target.maxHealth - target.health >= 40)
 		message += " They are wounded."
 	to_chat(user, span_notice(message))
 
@@ -230,14 +236,12 @@
 /datum/action/cooldown/spell/aoe/vampire_blood_eruption/get_things_to_cast_on(atom/center)
 	. = list()
 	for(var/mob/living/target in range(aoe_radius, center))
-		if(target.affects_vampire(owner) && !isLivingSSD(target) && locate(/obj/effect/decal/cleanable/blood) in get_turf(target))
+		if(target.affects_vampire(owner) && target.client && locate(/obj/effect/decal/cleanable/blood) in get_turf(target))
 			. += target
 
 /datum/action/cooldown/spell/aoe/vampire_blood_eruption/cast_on_thing_in_aoe(mob/living/target, atom/caster)
 	var/turf/turf = get_turf(target)
-	var/obj/effect/decal/cleanable/blood/blood = locate() in turf
 	var/obj/effect/temp_visual/blood_spike/spike = new(turf)
-	spike.color = blood.basecolor
 	playsound(target, 'sound/misc/demon_attack1.ogg', 50, TRUE)
 	target.apply_damage(50, BRUTE, BODY_ZONE_CHEST)
 	target.visible_message(span_warning("[target] gets impaled by a spike of living blood!"))
@@ -280,7 +284,7 @@
 		return
 	var/beam_number = 0
 	for(var/mob/living/carbon/human/target in view(7, owner))
-		if(NO_BLOOD in target.dna.species.species_traits || !target.affects_vampire(owner) || target.stat)
+		if(!target.get_blood_volume() || !target.affects_vampire(owner) || target.stat)
 			continue
 		var/drain_amount = rand(5, 10)
 		target.bleed(drain_amount)
