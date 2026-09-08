@@ -254,6 +254,14 @@
 	worn_icon_state = "sovietcase"
 	inhand_icon_state = "sovietcase"
 
-/obj/item/storage/toolbox/guncase/ntcase/pistol/sec_gp9
+/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
+	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
+
+/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/sec
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/sec
 	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
+
+/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
+	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/starts_empty
