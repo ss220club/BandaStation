@@ -40,6 +40,8 @@
 
 	/// List of victims' REF IDs we have drained and how much blood from each
 	var/list/drained_humans = list()
+	/// Weak references to the thralls bound to this vampire.
+	var/list/thrall_refs = list()
 	/// Did the vampire build a lair?
 	var/has_lair = FALSE
 
@@ -50,6 +52,7 @@
 	return ..()
 
 /datum/antagonist/vampire/on_removal()
+	deconvert_thralls()
 	if(owner?.current)
 		log_combat(owner.current, owner.current, "de-vampired")
 		owner.current.alpha = 255
@@ -135,10 +138,7 @@
 
 /datum/antagonist/vampire/exfiltrate(mob/living/carbon/human/extractor, obj/item/radio/radio)
 	remove_all_powers()
-	if(istype(subclass, SUBCLASS_DANTALION))
-		for(var/datum/antagonist/mindslave/slave in GLOB.antagonists)
-			if(slave.master == extractor.mind)
-				slave.owner?.remove_antag_datum(/datum/antagonist/mindslave/thrall)
+	deconvert_thralls()
 
 	if(isplasmaman(extractor))
 		extractor.equipOutfit(/datum/outfit/admin/ghostbar_antag/vampire/plasmaman)
@@ -345,6 +345,32 @@
 	if(!blood_display)
 		blood_display = hud.add_screen_object(/atom/movable/screen/vampire_blood, HUD_MOB_VAMPIRE_BLOOD, HUD_GROUP_INFO, update_screen = TRUE)
 	blood_display.update_maptext()
+
+/datum/antagonist/vampire/proc/add_thrall(datum/antagonist/vampire_thrall/thrall)
+	if(!thrall)
+		return
+	LAZYADD(thrall_refs, WEAKREF(thrall))
+
+/datum/antagonist/vampire/proc/remove_thrall(datum/antagonist/vampire_thrall/thrall)
+	for(var/datum/weakref/thrall_ref as anything in thrall_refs)
+		if(thrall_ref.resolve() == thrall)
+			thrall_refs -= thrall_ref
+			return
+
+/datum/antagonist/vampire/proc/get_thralls()
+	var/list/datum/antagonist/vampire_thrall/active_thralls = list()
+	for(var/datum/weakref/thrall_ref as anything in thrall_refs)
+		var/datum/antagonist/vampire_thrall/thrall = thrall_ref.resolve()
+		if(!thrall || thrall.get_master() != src)
+			thrall_refs -= thrall_ref
+			continue
+		active_thralls += thrall
+	return active_thralls
+
+/datum/antagonist/vampire/proc/deconvert_thralls()
+	for(var/datum/antagonist/vampire_thrall/thrall as anything in get_thralls())
+		thrall.owner?.remove_antag_datum(/datum/antagonist/vampire_thrall)
+	thrall_refs.Cut()
 
 /datum/antagonist/vampire/proc/vamp_burn(burn_chance)
 	if(prob(burn_chance) && owner.current.health >= 50)
