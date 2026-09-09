@@ -12247,19 +12247,6 @@
 	},
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/cabin/captain)
-"bGr" = (
-/obj/effect/turf_decal/line/dark_blue/line{
-	dir = 4
-	},
-/obj/structure/statue/dummy/srt{
-	dir = 4;
-	pixel_x = -11;
-	pixel_y = 0
-	},
-/turf/open/floor/iron/dark/textured_half{
-	dir = 1
-	},
-/area/centcom/central_command_areas/hallway)
 "bHX" = (
 /obj/structure/table/wood,
 /obj/structure/window/reinforced/spawner/directional/south,
@@ -17948,6 +17935,17 @@
 /obj/effect/spawner/structure/window/reinforced/indestructible,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/courtroom)
+"ohp" = (
+/obj/structure/light_fake/spot/directional/east,
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/textured_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/hallway)
 "ohJ" = (
 /obj/structure/flora/bush/fullgrass/style_random,
 /obj/effect/light_emitter/podbay,
@@ -20601,19 +20599,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
-"tmL" = (
-/obj/effect/turf_decal/line/dark_blue/line{
-	dir = 8
-	},
-/obj/structure/statue/dummy/srt{
-	dir = 8;
-	pixel_x = 11;
-	pixel_y = 0
-	},
-/turf/open/floor/iron/dark/textured_half{
-	dir = 1
-	},
-/area/centcom/central_command_areas/hallway)
 "tnu" = (
 /obj/effect/baseturf_helper{
 	baseturf = /turf/open/floor/plating
@@ -20666,6 +20651,17 @@
 	dir = 1
 	},
 /turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/hallway)
+"tpR" = (
+/obj/structure/light_fake/spot/directional/west,
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/textured_half{
+	dir = 1
+	},
 /area/centcom/central_command_areas/hallway)
 "tsm" = (
 /obj/structure/chair/comfy/shuttle/tactical{
@@ -22652,11 +22648,6 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/cabin/captain)
-"wLJ" = (
-/obj/structure/sign/poster/official/nanotrasen_logo/directional/north,
-/obj/structure/statue/dummy/srt,
-/turf/open/floor/iron/dark/textured_half,
-/area/centcom/central_command_areas/hallway)
 "wNg" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/kirbyplants/random{
@@ -73865,9 +73856,9 @@ tvo
 aoE
 aTC
 aQl
-tmL
+aQl
 aoE
-fcN
+ohp
 tUQ
 tVK
 eVY
@@ -76684,7 +76675,7 @@ vpM
 uXX
 vpM
 feG
-kCT
+gff
 lkw
 snY
 aHv
@@ -76941,7 +76932,7 @@ ctF
 vxV
 rjJ
 feG
-wLJ
+iWM
 lkw
 ccA
 aXX
@@ -77977,9 +77968,9 @@ mos
 aIY
 asX
 aXX
-bGr
+aXX
 aIY
-tTd
+tpR
 tUQ
 tVK
 xzO

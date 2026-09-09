@@ -251,3 +251,5 @@
 	name = "SRT Soldier"
 	desc = "Он точно не спит..."
 	icon_state = "srt"
+	anchored = TRUE
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
