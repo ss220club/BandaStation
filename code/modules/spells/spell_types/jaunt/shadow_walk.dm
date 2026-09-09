@@ -100,22 +100,6 @@
 	light_time_remaining = 0
 	last_light_second = 0
 
-//obj/effect/dummy/phased_mob/shadow/relaymove(mob/living/user, direction)
-	//var/turf/oldloc = loc
-	//. = ..()
-	//if(loc != oldloc)
-		//if(check_light_level(loc))
-			//eject_jaunter(TRUE)
-
-//obj/effect/dummy/phased_mob/shadow/phased_check(mob/living/user, direction)
-	//. = ..()
-	//if(. && isspaceturf(.))
-		//to_chat(user, span_warning("It really would not be wise to go into space."))
-		//return FALSE
-	//if(check_light_level(.))
-		//if(!light_step_warning())
-			//return FALSE
-
 /obj/effect/dummy/phased_mob/shadow/eject_jaunter(forced_out = FALSE)
 	var/turf/reveal_turf = get_turf(src)
 
