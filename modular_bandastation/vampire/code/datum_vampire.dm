@@ -33,7 +33,6 @@
 		/datum/action/cooldown/spell/vampire_glare = 0,
 		/datum/vampire_passive/vision = 100,
 		/datum/action/cooldown/spell/vampire_specialize = 150,
-		/datum/action/cooldown/spell/vampire_exfiltrate = 150,
 		/datum/action/cooldown/spell/vampire_lair = 150,
 		/datum/vampire_passive/regen = 200,
 		/datum/vampire_passive/vision/advanced = 500,
@@ -154,13 +153,6 @@
 	if(!get_ability(/datum/vampire_passive/full))
 		to_chat(owner.current, span_warning("[source]'s power interferes with your own!"))
 		adjust_nullification(30 + bonus_force, 15 + bonus_force)
-
-/datum/antagonist/vampire/proc/exfiltrate(mob/living/carbon/human/extractor, obj/item/radio/radio)
-	remove_all_powers()
-	deconvert_thralls()
-
-	to_chat(extractor, span_notice("--ZZZT!- Wonderfully done, [extractor.real_name]. Welcome to -^%&!-ZZT!-"))
-	SSblackbox.record_feedback("tally", "successful_extraction", 1, "Vampire")
 
 #define BLOOD_GAINED_MODIFIER 0.5
 

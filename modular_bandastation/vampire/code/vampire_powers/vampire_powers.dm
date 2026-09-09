@@ -84,32 +84,7 @@
 
 	return TRUE
 
-/datum/action/cooldown/spell/vampire_exfiltrate
-	name = "Conjure Blood Chalice"
-	desc = "Congeal blood into a chalice that opens a single unstable wormhole."
-	cooldown_time = 2 SECONDS
-	button_icon = 'modular_bandastation/vampire/icons/obj/items.dmi'
-	button_icon_state = "blood-chalice"
-	var/used = FALSE
-
-
-/datum/action/cooldown/spell/vampire_exfiltrate/New(Target)
-	. = ..()
-	add_vampire_ability()
-
-/datum/action/cooldown/spell/vampire_exfiltrate/cast(atom/cast_on)
-	. = ..()
-	var/mob/living/user = owner
-	if(used)
-		to_chat(user, span_warning("You have already attempted to create a blood chalice!"))
-		return
-	var/obj/item/wormhole_jaunter/blood_jaunter = new
-	blood_jaunter.name = "blood chalice"
-	blood_jaunter.desc = "A chalice of congealed blood that can open one unstable escape portal."
-	if(!user.put_in_hands(blood_jaunter))
-		blood_jaunter.forceMove(get_turf(user))
-	to_chat(user, span_notice("You congeal a blood chalice capable of opening an escape portal."))
-	used = TRUE
+// No exfiltration feature for tg
 
 /datum/action/cooldown/spell/vampire_specialize
 	name = "Choose Specialization"
@@ -176,7 +151,7 @@
 	if(log_choice)
 		SSblackbox.record_feedback("nested tally", "vampire_subclasses", 1, list("[new_subclass.name]"))
 
-
+// TODO for someone else: convert this to an universal spell with charges thingie
 /datum/action/cooldown/spell/vampire_glare
 	parent_type = /datum/action/cooldown/spell/aoe
 	name = "Glare"
@@ -214,7 +189,7 @@
 /datum/action/cooldown/spell/vampire_glare/after_cast(atom/cast_on)
 	. = ..()
 	charges--
-	var/recharge_id = ++next_recharge_id
+	var/recharge_id = "charge_[++next_recharge_id]"
 	recharge_times[recharge_id] = world.time + recharge_time
 	addtimer(CALLBACK(src, PROC_REF(recharge), recharge_id), recharge_time)
 	if(!charges)
