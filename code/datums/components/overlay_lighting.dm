@@ -28,8 +28,6 @@
 	var/range = 1
 	///Ceiling of range, integer without decimal entries.
 	var/lumcount_range = 0
-	/// Whether lumcount_range should automatically follow light_range.
-	var/auto_lumcount_range = TRUE
 	///How much this light affects the dynamic_lumcount of turfs.
 	var/lum_power = 0.5
 	///Transparency value.
