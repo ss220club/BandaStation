@@ -1,0 +1,8 @@
+["newscaster"]
+nominative = "новостной терминал"
+genitive = "новостного терминала"
+dative = "новостному терминалу"
+accusative = "новостной терминал"
+instrumental = "новостным терминалом"
+prepositional = "новостном терминале"
+gender = "male"

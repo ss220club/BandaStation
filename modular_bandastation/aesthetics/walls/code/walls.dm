@@ -99,3 +99,21 @@
 
 /obj/structure/falsewall/material
 	icon = 'icons/turf/walls/false_walls.dmi'
+
+/obj/structure/falsewall/bone
+	icon = 'icons/turf/walls/false_walls.dmi'
+
+/obj/structure/falsewall/runite
+	icon = 'icons/turf/walls/false_walls.dmi'
+
+/obj/structure/falsewall/adamantine
+	icon = 'icons/turf/walls/false_walls.dmi'
+
+/obj/structure/falsewall/metalhydrogen
+	icon = 'icons/turf/walls/false_walls.dmi'
+
+/obj/structure/falsewall/hauntium
+	icon = 'icons/turf/walls/false_walls.dmi'
+
+/obj/structure/falsewall/mythril
+	icon = 'icons/turf/walls/false_walls.dmi'

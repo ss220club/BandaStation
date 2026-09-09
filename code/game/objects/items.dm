@@ -423,7 +423,7 @@ GAME_VERB_SRC(/obj/item, move_to_top, oview(1), "Move To Top", null)
 
 	if(item_flags & CRUEL_IMPLEMENT)
 		.[span_red("morbid")] = "It seems quite practical for particularly morbid procedures and experiments."
-	if(item_flags & BLUESPACE_INTERFERENCE)
+	if(HAS_TRAIT(src, TRAIT_BLUESPACE_INTERFERENCE))
 		.["bluespace-active"] = "It is highly active in bluespace and will cause malfunctions in teleporters."
 	if (siemens_coefficient == 0)
 		.["изолирующий"] = "Предмет изготовлен из прочного изолятора и блокирует проходящее через него электричество!"
@@ -1810,7 +1810,7 @@ GAME_VERB_SRC(/obj/item, verb_pickup, oview(1), "Pick up", null)
 /obj/item/proc/item_start_equip(atom/target, obj/item/equipping, mob/user, show_visible_message = TRUE)
 
 	if(show_visible_message)
-		if(HAS_TRAIT(equipping, TRAIT_DANGEROUS_OBJECT))
+		if(HAS_TRAIT(equipping, TRAIT_DANGEROUS_EQUIP))
 			target.visible_message(
 				span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пытается экипировать [equipping.declent_ru(ACCUSATIVE)] на [target.declent_ru(ACCUSATIVE)]."),
 				span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] пытается экипировать на вас [equipping.declent_ru(ACCUSATIVE)]."),
