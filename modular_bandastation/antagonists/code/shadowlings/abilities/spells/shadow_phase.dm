@@ -30,7 +30,7 @@
 	name = "Теневой вход"
 	desc = "Стать нематериальным и проходить сквозь стены на ограниченное время. Яркий свет до набора достаточного числа слуг разрывает фазу."
 	button_icon_state = "shadowling_crawl"
-	cooldown_time = 20 SECONDS
+	cooldown_time = 30 SECONDS
 	// Shadowling related
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
@@ -38,7 +38,7 @@
 	channel_time = 0
 	min_req = 1
 	max_req = 3
-	required_thralls = 10
+	required_thralls = 5
 	var/phase_duration = 12 SECONDS
 	var/static/sfx_enter = 'sound/effects/magic/teleport_app.ogg'
 

@@ -2,14 +2,8 @@
 /proc/shadow_spawn_smoke(turf/where, mob/living/holder, r = 4, ticks = 6, heal = 10, blind = 5 SECONDS, schance = 25, stun = 2 SECONDS)
 	if(!istype(where))
 		return
-	var/datum/effect_system/shadow_smoke/S = new
-	S.set_up(r, holder = holder, location = where)
-	S.heal_amount = heal
-	S.blind_time = blind
-	S.stun_chance = schance
-	S.stun_time = stun
-	S.total_ticks = ticks
-	S.start()
+	var/datum/effect_system/fluid_spread/smoke/shadow/shadow_smoke = new(where, r, null, holder, ticks, heal, blind, schance, stun)
+	shadow_smoke.start()
 
 // MARK: Effects
 /obj/effect/particle_effect/fluid/smoke/shadow
@@ -22,9 +16,6 @@
 	var/blind_time = 5 SECONDS
 	var/stun_chance = 25
 	var/stun_time = 2 SECONDS
-
-/obj/effect/particle_effect/fluid/smoke/shadow/spread(seconds_per_tick)
-	return
 
 /obj/effect/particle_effect/fluid/smoke/shadow/smoke_mob(mob/living/carbon/smoker, seconds_per_tick)
 	if(!..())
@@ -50,26 +41,29 @@
 			smoker.Stun(stun_time)
 	return TRUE
 
-/datum/effect_system/shadow_smoke
-	var/range = 4
-	var/amount
+/datum/effect_system/fluid_spread/smoke/shadow
+	effect_type = /obj/effect/particle_effect/fluid/smoke/shadow
+	var/smoke_range = 4
+	var/smoke_ticks = 6
 	var/heal_amount = 10
 	var/blind_time = 5 SECONDS
 	var/stun_chance = 25
 	var/stun_time = 2 SECONDS
-	var/total_ticks = 6
 
-/datum/effect_system/shadow_smoke/set_up(range = 4, amount = 0, atom/holder, atom/location)
-	src.range = range
-	src.amount = amount
-	src.holder = holder
-	src.location = location
+/datum/effect_system/fluid_spread/smoke/shadow/New(turf/location, range = 1, amount = null, atom/holder = null, ticks = 6, heal = 10, blind = 5 SECONDS, schance = 25, stun = 2 SECONDS)
+	. = ..(location, range, amount, holder)
+	smoke_range = range
+	smoke_ticks = ticks
+	heal_amount = heal
+	blind_time = blind
+	stun_chance = schance
+	stun_time = stun
 
-/datum/effect_system/shadow_smoke/start(log = FALSE)
+/datum/effect_system/fluid_spread/smoke/shadow/start(log = FALSE)
 	var/turf/center = location || get_turf(holder)
 	if(!center)
 		return
-	var/datum/fluid_group/G = new
+	var/datum/fluid_group/G = new /datum/fluid_group
 	var/list/visited = list()
 	var/list/queue = list()
 	visited[center] = 0
@@ -78,7 +72,7 @@
 		var/turf/current = queue[1]
 		queue.Cut(1, 2)
 		var/dist = visited[current]
-		var/life_secs = max(total_ticks - dist, 0)
+		var/life_secs = max(smoke_ticks - dist, 0)
 		if(life_secs > 0)
 			var/obj/effect/particle_effect/fluid/smoke/shadow/node = new /obj/effect/particle_effect/fluid/smoke/shadow(current, G)
 			node.heal_amount = heal_amount
@@ -86,7 +80,7 @@
 			node.stun_chance = stun_chance
 			node.stun_time = stun_time
 			node.lifetime = life_secs SECONDS
-		if(dist >= range)
+		if(dist >= smoke_range)
 			continue
 		for(var/turf/N in current.get_atmos_adjacent_turfs())
 			if(!visited[N])
@@ -98,7 +92,7 @@
 	name = "Теневой дым"
 	desc = "Заполняет область дымом: лечит союзных теней и их слуг, ослепляет и иногда оглушает остальных."
 	button_icon_state = "shadow_smoke"
-	cooldown_time = 60 SECONDS
+	cooldown_time = 50 SECONDS
 	// Shadowling related
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE

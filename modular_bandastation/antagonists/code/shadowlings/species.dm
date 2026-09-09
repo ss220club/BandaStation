@@ -21,6 +21,7 @@
 		TRAIT_NOBREATH,
 		TRAIT_NODISMEMBER,
 		TRAIT_NOFIRE,
+		TRAIT_RESISTCOLD,
 		TRAIT_VIRUSIMMUNE,
 		TRAIT_NO_AUGMENTS,
 		TRAIT_NO_DNA_COPY,
@@ -33,6 +34,7 @@
 		TRAIT_SILENT_FOOTSTEPS,
 		TRAIT_NOHUNGER,
 		TRAIT_NO_SLIP_ALL,
+		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_BRAWLING_KNOCKDOWN_BLOCKED
 	)
 
@@ -146,15 +148,25 @@
 	return B.bodytype == BODYTYPE_ROBOTIC
 
 /mob/living/carbon/human/proc/reset_robotic_limbs()
-	for(var/zone in GLOB.all_body_zones)
-		var/obj/item/bodypart/B = get_bodypart(zone)
-		if(!B)
-			continue
-
-		if(!is_robotic_bodypart(B))
-			continue
-
-		reset_to_original_bodypart(zone)
+    for(var/zone in GLOB.all_body_zones)
+        var/obj/item/bodypart/B = get_bodypart(zone)
+        if(!B)
+            continue
+        if(!is_robotic_bodypart(B))
+            continue
+        reset_to_original_bodypart(zone)
+    var/list/robotic_organs = list()
+    for(var/slot in organs_slot)
+        var/obj/item/organ/O = organs_slot[slot]
+        if(!O)
+            continue
+        if(!IS_ROBOTIC_ORGAN(O))
+            continue
+        robotic_organs += O
+    for(var/obj/item/organ/O in robotic_organs)
+        if(!QDELETED(O))
+            O.mob_remove(src, special = TRUE)
+            QDEL_NULL(O)
 
 // MARK: Claws
 /obj/item/knife/combat/umbral_claw
@@ -167,7 +179,9 @@
 	inhand_icon_state = "nothing"
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = INDESTRUCTIBLE
-	force = 18
+	force = 27
+	wound_bonus = 20
+	exposed_wound_bonus = 10
 	armour_penetration = 25
 	sharpness = SHARP_EDGED
 	attack_verb_continuous = list("разрывает", "режет", "раздирает")
@@ -193,7 +207,8 @@
 	biological_state = BIO_INORGANIC
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
-	burn_modifier = 1.2
+	burn_modifier = 1.5
+	brute_modifier = 0.7
 
 /obj/item/bodypart/chest/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
@@ -201,21 +216,24 @@
 	bodypart_traits = list(TRAIT_NO_JUMPSUIT)
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
-	burn_modifier = 1.2
+	burn_modifier = 1.5
+	brute_modifier = 0.7
 
 /obj/item/bodypart/leg/left/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
-	burn_modifier = 1.2
+	burn_modifier = 1.5
+	brute_modifier = 0.7
 
 /obj/item/bodypart/leg/right/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
 	biological_state = BIO_INORGANIC
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
 	bodypart_effects = list(/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling)
-	burn_modifier = 1.2
+	burn_modifier = 1.5
+	brute_modifier = 0.7
 
 /obj/item/bodypart/arm/left/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
@@ -234,7 +252,7 @@
 	unarmed_sharpness = SHARP_EDGED
 	bodypart_traits = list(TRAIT_CHUNKYFINGERS)
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
-	burn_modifier = 1.2
+	burn_modifier = 1.5
 
 /obj/item/bodypart/arm/right/shadow/shadowling
 	limb_id = SPECIES_SHADOWLING
@@ -253,7 +271,7 @@
 	unarmed_sharpness = SHARP_POINTY
 	bodypart_traits = list(TRAIT_CHUNKYFINGERS)
 	icon_static = 'modular_bandastation/antagonists/icons/shadowling/shadowling.dmi'
-	burn_modifier = 1.2
+	burn_modifier = 1.5
 
 /obj/item/bodypart/head/shadow/shadowling/ascended
 	limb_id = SPECIES_SHADOWLING_ASCENDED
@@ -304,7 +322,7 @@
 	icon_eyes_path = 'modular_bandastation/augmentation_preferences/icons/human_face.dmi'
 	pepperspray_protect = TRUE
 	color_cutoffs = null
-	flash_protect = FLASH_PROTECTION_FLASH
+	flash_protect = FLASH_PROTECTION_SENSITIVE
 	eye_color_left = "#ff0000"
 	eye_color_right = "#ff0000"
 

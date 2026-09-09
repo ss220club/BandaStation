@@ -4,12 +4,12 @@
 	preview_antag_datum = /datum/antagonist/shadowling
 
 	repeatable = FALSE
-	weight = list(
-		DYNAMIC_TIER_LOW = 0,
-		DYNAMIC_TIER_LOWMEDIUM = 0,
-		DYNAMIC_TIER_MEDIUMHIGH = 0,
-		DYNAMIC_TIER_HIGH = 0,
-	)
+	//weight = list(
+		//DYNAMIC_TIER_LOW = 0,
+		//DYNAMIC_TIER_LOWMEDIUM = 0,
+		//DYNAMIC_TIER_MEDIUMHIGH = 0,
+		//DYNAMIC_TIER_HIGH = 0,
+	//)
 	min_pop = 30
 
 	pref_flag = ROLE_SHADOWLING

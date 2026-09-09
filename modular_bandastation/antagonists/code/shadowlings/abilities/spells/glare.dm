@@ -26,9 +26,9 @@
 	name = "Взгляд"
 	desc = "Сокрующий взгляд в сторону куда вы смотрите, позволяющий оглушать и обессиливать ваших врагов."
 	button_icon_state = "shadow_glare"
-	cooldown_time = 30 SECONDS
+	cooldown_time = 20 SECONDS
 	required_thralls = 0
-	max_range = 4
+	max_range = 2
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
 	channel_time = 0
@@ -89,8 +89,11 @@
 /datum/action/cooldown/shadowling/glare/proc/apply_glare_primary(mob/living/carbon/human/T)
 	if(!istype(T))
 		return
-	T.Stun(3 SECONDS)
+	T.Stun(5 SECONDS)
 	T.adjust_stamina_loss(baton_stamina)
+	T.set_temp_blindness(2 SECONDS)
+	T.adjust_eye_blur(4 SECONDS)
+	T.adjust_silence(4 SECONDS)
 	apply_slow(T, 5 SECONDS)
 	apply_shake(T, 8, 0.6 SECONDS)
 

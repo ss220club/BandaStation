@@ -10,14 +10,14 @@
 	name = "Вуаль"
 	desc = "Ваше присутствие гасит свет и пламя поблизости; противники в тени слабеют, АПЦ обнуляют заряд, светогрибы чахнут."
 	button_icon_state = "shadow_veil"
-	cooldown_time = 15 SECONDS
+	cooldown_time = 20 SECONDS
 	// Shadowling related
 	min_req = 1
 	max_req = 10
-	required_thralls = 0
-	var/dark_square_radius = 5
+	required_thralls = 2
+	var/dark_square_radius = 3
 	var/shroom_square_radius = 2
-	var/blind_duration = 6 SECONDS
+	var/blind_duration = 3 SECONDS
 	var/static/sfx_emp = 'sound/effects/empulse.ogg'
 
 /datum/action/cooldown/shadowling/veil/DoEffect(mob/living/carbon/human/H, atom/_)
@@ -96,8 +96,7 @@
 					continue
 				if(M in hive.thralls)
 					continue
-			M.adjust_staggered(duration)
-			M.adjust_eye_blur(duration)
+			M.set_temp_blindness(3 SECONDS)
 
 /datum/action/cooldown/shadowling/veil/proc/replace_glowshrooms(list/turfs)
 	if(!islist(turfs))
