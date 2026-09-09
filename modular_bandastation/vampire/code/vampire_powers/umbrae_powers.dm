@@ -26,7 +26,7 @@
 	SIGNAL_HANDLER
 	var/mob/living/user = owner
 	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
-	vampire?.handle_vampire_cloak()
+	vampire?.handle_vampire_cloak(user)
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_snare
 	name = "Shadow Snare"

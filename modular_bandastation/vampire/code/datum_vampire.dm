@@ -111,6 +111,8 @@
 	update_blood_hud()
 	check_vampire_upgrade(FALSE)
 	RegisterSignal(vampire_mob, COMSIG_ATOM_HOLYATTACK, PROC_REF(holy_attack_reaction))
+	RegisterSignal(vampire_mob, COMSIG_LIVING_LIFE, PROC_REF(on_life))
+	RegisterSignal(vampire_mob, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
 	update_thrall_huds()
 
 /datum/antagonist/vampire/remove_innate_effects(mob/living/mob_override)
@@ -131,7 +133,11 @@
 		human_target.alpha = 255
 
 	REMOVE_TRAITS_IN(vampire_mob, "vampire")
-	UnregisterSignal(vampire_mob, COMSIG_ATOM_HOLYATTACK)
+	UnregisterSignal(vampire_mob, list(
+		COMSIG_ATOM_HOLYATTACK,
+		COMSIG_LIVING_LIFE,
+		COMSIG_MOB_HUD_CREATED,
+	))
 
 /datum/antagonist/vampire/proc/holy_attack_reaction(mob/target, obj/item/source, mob/user, antimagic_flags)
 	SIGNAL_HANDLER
@@ -275,22 +281,33 @@
 		if(owner.current.health <= HEALTH_THRESHOLD_DEAD)
 			owner.current.dust()
 
-/datum/antagonist/vampire/proc/handle_vampire()
-	update_blood_hud()
+/// Runs the vampire's persistent effects alongside tg's normal living-mob life processing.
+/datum/antagonist/vampire/proc/on_life(mob/living/vampire_mob, seconds_per_tick)
+	SIGNAL_HANDLER
+	if(vampire_mob != owner?.current)
+		return
+	handle_vampire(vampire_mob)
 
-	handle_vampire_cloak()
-	if(isspaceturf(get_turf(owner.current)))
+/// Handles effects which need to be checked every life tick.
+/datum/antagonist/vampire/proc/handle_vampire(mob/living/vampire_mob)
+	handle_vampire_cloak(vampire_mob)
+	if(isspaceturf(get_turf(vampire_mob)))
 		check_sun()
-	if(istype(get_area(owner.current), /area/station/service/chapel) && !get_ability(/datum/vampire_passive/full) && bloodtotal > 0)
+	if(istype(get_area(vampire_mob), /area/station/service/chapel) && !get_ability(/datum/vampire_passive/full) && bloodtotal > 0)
 		vamp_burn(7)
 	nullified = max(0, nullified - 2)
 
-/datum/antagonist/vampire/proc/handle_vampire_cloak()
-	if(!ishuman(owner.current))
-		owner.current.alpha = 255
+/datum/antagonist/vampire/proc/on_hud_created(mob/living/vampire_mob)
+	SIGNAL_HANDLER
+	if(vampire_mob == owner?.current)
+		update_blood_hud()
+
+/datum/antagonist/vampire/proc/handle_vampire_cloak(mob/living/vampire_mob)
+	if(!ishuman(vampire_mob))
+		vampire_mob.alpha = 255
 		return
 
-	var/mob/living/carbon/human/human_owner = owner.current
+	var/mob/living/carbon/human/human_owner = vampire_mob
 	var/turf/turf_loc = get_turf(human_owner)
 	if(!turf_loc)
 		return

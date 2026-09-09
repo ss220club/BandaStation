@@ -51,15 +51,10 @@
 	. = ..()
 	var/mob/living/user = owner
 
-	user.SetStun(0)
-	user.SetKnockdown(0)
-	user.SetParalyzed(0)
-	user.SetImmobilized(0)
-	user.SetUnconscious(0)
-	user.SetSleeping(0)
-	user.adjust_confusion(-INFINITY)
-	user.adjust_stamina_loss(-100)
-	user.get_up(TRUE)
+	user.SetAllImmobility(0)
+	user.set_stamina_loss(0)
+	user.set_resting(FALSE, instant = TRUE)
+
 	to_chat(user, span_notice("You instill your body with clean blood and remove any incapacitating effects."))
 	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
 
@@ -68,6 +63,7 @@
 		INVOKE_ASYNC(src, PROC_REF(heal), user, rejuv_bonus)
 
 /datum/action/cooldown/spell/vampire_rejuvenate/proc/heal(mob/living/user, rejuv_bonus)
+	// TODO: rewrite to something better
 	for(var/i in 1 to 5)
 		user.adjust_brute_loss(-2 * rejuv_bonus)
 		user.adjust_oxy_loss(-5 * rejuv_bonus)
@@ -184,7 +180,7 @@
 /datum/action/cooldown/spell/vampire_glare
 	parent_type = /datum/action/cooldown/spell/aoe
 	name = "Glare"
-	desc = "Your eyes flash, stunning and silencing anyone in front of you. It has lesser effects for those around you."
+	desc = "Your eyes flash, stunning and silencing anyone in front of you. It has lesser effects for those around you. Holds two charges, each of which recovers over 30 seconds."
 	button_icon_state = "vampire_glare"
 	check_flags = AB_CHECK_PHASED
 	cooldown_time = 0
@@ -192,6 +188,9 @@
 	var/charges = 2
 	var/max_charges = 2
 	var/recharge_time = 30 SECONDS
+	/// Maps each spent charge's unique ID to its recharge time.
+	var/list/recharge_times = list()
+	var/next_recharge_id = 0
 
 /datum/action/cooldown/spell/vampire_glare/New(Target)
 	. = ..()
@@ -215,10 +214,36 @@
 /datum/action/cooldown/spell/vampire_glare/after_cast(atom/cast_on)
 	. = ..()
 	charges--
-	addtimer(CALLBACK(src, PROC_REF(recharge)), recharge_time)
+	var/recharge_id = ++next_recharge_id
+	recharge_times[recharge_id] = world.time + recharge_time
+	addtimer(CALLBACK(src, PROC_REF(recharge), recharge_id), recharge_time)
+	if(!charges)
+		StartCooldown(get_next_recharge_time() - world.time)
+	else
+		build_all_button_icons(UPDATE_BUTTON_STATUS)
 
-/datum/action/cooldown/spell/vampire_glare/proc/recharge()
+
+/datum/action/cooldown/spell/vampire_glare/proc/get_next_recharge_time()
+	var/next_recharge_time = INFINITY
+	for(var/recharge_id in recharge_times)
+		next_recharge_time = min(next_recharge_time, recharge_times[recharge_id])
+	return next_recharge_time
+
+/datum/action/cooldown/spell/vampire_glare/proc/recharge(recharge_id)
+	if(isnull(recharge_times[recharge_id]))
+		return
+	recharge_times[recharge_id] = null
 	charges = min(charges + 1, max_charges)
+	if(charges)
+		ResetCooldown()
+	else
+		StartCooldown(get_next_recharge_time() - world.time)
+	build_all_button_icons(UPDATE_BUTTON_STATUS)
+
+/datum/action/cooldown/spell/vampire_glare/update_button_status(atom/movable/screen/movable/action_button/button, force = FALSE)
+	. = ..()
+	if(charges)
+		button.maptext = MAPTEXT_TINY_UNICODE(charges)
 
 /datum/action/cooldown/spell/vampire_lair
 	parent_type = /datum/action/cooldown/spell/pointed
