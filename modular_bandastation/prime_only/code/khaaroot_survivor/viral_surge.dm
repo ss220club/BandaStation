@@ -27,7 +27,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/khaaroot_surge_active
 	show_duration = TRUE
 	processing_speed = STATUS_EFFECT_PRIORITY
-
 	/// Stamina restored when the surge starts.
 	var/initial_stamina_heal = -60
 	/// Stamina restored per second while the surge is active.
@@ -35,20 +34,14 @@
 	/// Brute and burn damage multiplier while the surge is active.
 	var/damage_multiplier = 0.6
 
-	var/original_brute_mod
-	var/original_burn_mod
-
 /datum/status_effect/khaaroot_surge_active/on_apply()
 	var/mob/living/carbon/human/H = owner
 	if(!ishuman(H))
 		return FALSE
 
-	original_brute_mod = H.physiology.brute_mod
-	original_burn_mod = H.physiology.burn_mod
-
 	H.add_movespeed_modifier(/datum/movespeed_modifier/khaaroot_surge_speed, update = TRUE)
-	H.physiology.brute_mod *= damage_multiplier
-	H.physiology.burn_mod *= damage_multiplier
+	MODIFY_PHYSIOLOGY(H, BRUTE, damage_multiplier)
+	MODIFY_PHYSIOLOGY(H, BURN, damage_multiplier)
 	playsound(H, 'sound/effects/singlebeat.ogg', 50, FALSE, -5)
 
 	ADD_TRAIT(H, TRAIT_SLEEPIMMUNE, REF(src))
@@ -71,8 +64,8 @@
 		return
 
 	H.remove_movespeed_modifier(/datum/movespeed_modifier/khaaroot_surge_speed, update = TRUE)
-	H.physiology.brute_mod = original_brute_mod
-	H.physiology.burn_mod = original_burn_mod
+	MODIFY_PHYSIOLOGY(H, BRUTE, 1 / damage_multiplier)
+	MODIFY_PHYSIOLOGY(H, BURN, 1 / damage_multiplier)
 
 	REMOVE_TRAIT(H, TRAIT_SLEEPIMMUNE, REF(src))
 	REMOVE_TRAIT(H, TRAIT_BATON_RESISTANCE, REF(src))
