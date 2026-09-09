@@ -106,12 +106,14 @@
 		var/mob/living/carbon/human/human_target = vampire_mob
 		human_target.set_hunger_icon('modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
 		human_target.AddComponent(/datum/component/vampire_biter)
+		human_target.AddComponent(/datum/component/vampire_holywater)
 
 	update_blood_hud()
 	check_vampire_upgrade(FALSE)
 	RegisterSignal(vampire_mob, COMSIG_ATOM_HOLYATTACK, PROC_REF(holy_attack_reaction))
 	RegisterSignal(vampire_mob, COMSIG_LIVING_LIFE, PROC_REF(on_life))
 	RegisterSignal(vampire_mob, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
+	RegisterSignal(vampire_mob, COMSIG_FIRE_STACKS_UPDATED, PROC_REF(on_fire_stacks_updated))
 	update_thrall_huds()
 
 /datum/antagonist/vampire/remove_innate_effects(mob/living/mob_override)
@@ -129,6 +131,8 @@
 		human_target.reset_hunger_icon()
 		var/datum/component/vampire_biter/vampire_biter = human_target.GetComponent(/datum/component/vampire_biter)
 		QDEL_NULL(vampire_biter)
+		var/datum/component/vampire_holywater/vampire_holywater = human_target.GetComponent(/datum/component/vampire_holywater)
+		QDEL_NULL(vampire_holywater)
 		human_target.alpha = 255
 
 	REMOVE_TRAITS_IN(vampire_mob, "vampire")
@@ -136,6 +140,7 @@
 		COMSIG_ATOM_HOLYATTACK,
 		COMSIG_LIVING_LIFE,
 		COMSIG_MOB_HUD_CREATED,
+		COMSIG_FIRE_STACKS_UPDATED,
 	))
 
 /datum/antagonist/vampire/proc/holy_attack_reaction(mob/target, obj/item/source, mob/user, antimagic_flags)
@@ -153,6 +158,17 @@
 	if(!get_ability(/datum/vampire_passive/full))
 		to_chat(owner.current, span_warning("[source]'s power interferes with your own!"))
 		adjust_nullification(30 + bonus_force, 15 + bonus_force)
+
+/// Fire consumes blood while it can still harm the vampire, matching the fire handler's protection threshold.
+/datum/antagonist/vampire/proc/on_fire_stacks_updated(mob/living/vampire_mob, fire_stacks)
+	SIGNAL_HANDLER
+	if(vampire_mob != owner?.current || vampire_mob.stat == DEAD || !fire_stacks || get_ability(/datum/vampire_passive/full))
+		return
+	if(ishuman(vampire_mob))
+		var/mob/living/carbon/human/human_vampire = vampire_mob
+		if(human_vampire.get_thermal_protection() >= FIRE_SUIT_MAX_TEMP_PROTECT)
+			return
+	subtract_usable_blood(5)
 
 #define BLOOD_GAINED_MODIFIER 0.5
 

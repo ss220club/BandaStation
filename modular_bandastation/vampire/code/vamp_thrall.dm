@@ -39,6 +39,8 @@
 
 /datum/antagonist/vampire_thrall/apply_innate_effects(mob/living/mob_override)
 	. = ..()
+	if(ishuman(mob_override))
+		mob_override.AddComponent(/datum/component/vampire_holywater)
 	if(!mob_override || thrall_commune)
 		return
 	thrall_commune = new
@@ -47,6 +49,9 @@
 
 /datum/antagonist/vampire_thrall/remove_innate_effects(mob/living/mob_override)
 	var/datum/antagonist/vampire/master = get_master()
+	if(ishuman(mob_override))
+		var/datum/component/vampire_holywater/vampire_holywater = mob_override.GetComponent(/datum/component/vampire_holywater)
+		QDEL_NULL(vampire_holywater)
 	if(master)
 		mob_override?.remove_alt_appearance(master.get_thrall_hud_key("thrall"))
 	if(thrall_commune)
