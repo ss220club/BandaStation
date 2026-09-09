@@ -61,6 +61,38 @@
 /datum/antagonist/vampire/proc/adjust_nullification(base, extra)
 	nullified = clamp(nullified + extra, base, VAMPIRE_NULLIFICATION_CAP)
 
+/datum/antagonist/vampire/antag_panel_data()
+	return "Total Blood: [bloodtotal] | Usable Blood: [bloodusable]"
+
+/datum/antagonist/vampire/get_admin_commands()
+	. = ..()
+	.["Set Total Blood"] = CALLBACK(src, PROC_REF(admin_set_total_blood))
+	.["Set Usable Blood"] = CALLBACK(src, PROC_REF(admin_set_usable_blood))
+
+/datum/antagonist/vampire/proc/admin_set_total_blood(mob/admin)
+	var/new_total = tgui_input_number(admin, "Set the vampire's lifetime blood total.", "Set Total Blood", default = bloodtotal, min_value = 0)
+	if(isnull(new_total) || QDELETED(src))
+		return
+	var/old_total = bloodtotal
+	bloodtotal = new_total
+	bloodusable = min(bloodusable, bloodtotal)
+	subtract_usable_blood(0)
+	check_vampire_upgrade()
+	message_admins("[key_name_admin(admin)] set [key_name_admin(owner)]'s total vampire blood from [old_total] to [bloodtotal].")
+	log_admin("[key_name(admin)] set [key_name(owner)]'s total vampire blood from [old_total] to [bloodtotal].")
+
+/datum/antagonist/vampire/proc/admin_set_usable_blood(mob/admin)
+	var/new_usable = tgui_input_number(admin, "Set the vampire's currently usable blood.", "Set Usable Blood", default = bloodusable, max_value = bloodtotal, min_value = 0)
+	if(isnull(new_usable) || QDELETED(src))
+		return
+	var/old_usable = bloodusable
+	bloodusable = new_usable
+	update_blood_hud()
+	for(var/datum/action/cooldown/spell/spell in powers)
+		spell.build_all_button_icons()
+	message_admins("[key_name_admin(admin)] set [key_name_admin(owner)]'s usable vampire blood from [old_usable] to [bloodusable].")
+	log_admin("[key_name(admin)] set [key_name(owner)]'s usable vampire blood from [old_usable] to [bloodusable].")
+
 /datum/antagonist/vampire/proc/force_add_ability(path)
 	var/datum/power = new path()
 	powers += power
