@@ -137,6 +137,9 @@
 	. = ..()
 	add_vampire_ability(40, FALSE)
 
+/datum/action/cooldown/spell/pointed/vampire_blood_barrier/before_cast(atom/cast_on)
+	return ..() | SPELL_NO_IMMEDIATE_COOLDOWN
+
 /datum/action/cooldown/spell/pointed/vampire_blood_barrier/cast(atom/cast_on)
 	. = ..()
 	var/turf/target_turf = get_turf(cast_on)
@@ -155,6 +158,7 @@
 		new /obj/structure/blood_barrier(turf)
 	GetComponent(/datum/component/vampire_ability).deduct_blood(src)
 	start_turf = null
+	StartCooldown()
 
 /obj/structure/blood_barrier
 	name = "blood barrier"
