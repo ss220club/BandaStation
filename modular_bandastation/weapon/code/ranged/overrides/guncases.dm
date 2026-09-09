@@ -1,5 +1,5 @@
 /obj/item/storage/toolbox/guncase
-	desc = "Прочный чехол для оружия с вставками из пенопласта, расположение которых обеспечивает надежную фиксацию оружия, магазинов и снаряжения."
+	desc = "Прочный кейс для оружия с вставками из пенопласта, расположение которых обеспечивает надежную фиксацию оружия, магазинов и дополнительного снаряжения."
 	icon = 'modular_bandastation/weapon/icons/guncases.dmi'
 	icon_state = "guncase"
 	worn_icon = 'modular_bandastation/weapon/icons/guncases_worn.dmi'

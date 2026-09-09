@@ -74,29 +74,26 @@
 		/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo = 1,
 	)
 
-/datum/supply_pack/goody/c9x25mmrubber
+/datum/supply_pack/goody/c9x25mm/rubber
 	name = "9x25mm NT Rubber Ammo Box"
 	desc = "В этом ящике находится коробка резиновых патронов калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 2
-	access_view = ACCESS_WEAPONS
 	contains = list(
 		/obj/item/ammo_box/c9x25mm/rubber = 1,
 	)
 
-/datum/supply_pack/goody/c9x25mmhp
+/datum/supply_pack/goody/c9x25mm/hp
 	name = "9x25mm NT HP Ammo Box"
 	desc = "В этом ящике находится коробка экспансивных патронов калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 2
-	access_view = ACCESS_WEAPONS
 	contains = list(
 		/obj/item/ammo_box/c9x25mm/hp = 1,
 	)
 
-/datum/supply_pack/goody/c9x25mmap
+/datum/supply_pack/goody/c9x25mm/ap
 	name = "9x25mm NT AP Ammo Box"
 	desc = "В этом ящике находится коробка бронебойных патронов калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 2
-	access_view = ACCESS_WEAPONS
 	contains = list(
 		/obj/item/ammo_box/c9x25mm/ap = 1,
 	)
