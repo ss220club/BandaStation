@@ -277,7 +277,7 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	plane = FLOOR_PLANE
 	layer = RUNE_LAYER
-	icon = 'icons/effects/96x96.dmi'
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_rune.dmi'
 	icon_state = "vampiric_rune"
 	pixel_x = -34
 	pixel_y = -38

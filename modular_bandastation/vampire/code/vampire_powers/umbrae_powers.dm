@@ -150,7 +150,7 @@
 /obj/structure/shadow_anchor
 	name = "shadow anchor"
 	desc = "Looking at this thing makes you feel uneasy."
-	icon = 'modular_bandastation/vampire/icons/obj/cult.dmi'
+	icon = 'icons/obj/antags/cult/structures.dmi'
 	icon_state = "pylon"
 	alpha = 120
 	color = "#545454"
@@ -177,11 +177,17 @@
 	new /obj/effect/temp_visual/vamp_mist_out(get_turf(owner))
 	if(!do_teleport(owner, target, channel = TELEPORT_CHANNEL_MAGIC))
 		return
+	new /obj/effect/temp_visual/vamp_mist_reappear(get_turf(owner))
 
 /obj/effect/temp_visual/vamp_mist_out
 	duration = 2 SECONDS
 	icon = 'modular_bandastation/vampire/icons/mob/mob.dmi'
 	icon_state = "mist"
+
+/obj/effect/temp_visual/vamp_mist_reappear
+	duration = 2 SECONDS
+	icon = 'modular_bandastation/vampire/icons/mob/mob.dmi'
+	icon_state = "mist_reappear"
 
 /datum/action/cooldown/spell/aoe/vampire_extinguish
 	name = "Extinguish"

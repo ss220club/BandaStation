@@ -3,6 +3,7 @@
 #include "code/_defines.dm"
 #include "code/hunger_icon.dm"
 #include "code/blood_hud.dm"
+#include "code/vampire_hud.dm"
 #include "code/datum_vampire.dm"
 #include "code/vampire_bite.dm"
 #include "code/spell_handler.dm"

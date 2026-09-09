@@ -36,5 +36,5 @@
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	vampire.draining = victim
-	INVOKE_ASYNC(vampire, PROC_REF(handle_bloodsucking), victim)
+	INVOKE_ASYNC(vampire, TYPE_PROC_REF(/datum/antagonist/vampire, handle_bloodsucking), victim)
 	return COMPONENT_CANCEL_ATTACK_CHAIN

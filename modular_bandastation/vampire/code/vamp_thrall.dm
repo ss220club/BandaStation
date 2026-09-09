@@ -1,7 +1,8 @@
 /datum/antagonist/vampire_thrall
 	name = "Vampire Thrall"
 	roundend_category = "Vampire Thralls"
-	antag_hud_name = "traitor"
+	antag_hud_name = "vampthrall"
+	hud_icon = 'modular_bandastation/vampire/icons/mob/huds/vampire_antag.dmi'
 	ui_name = "AntagInfoBrainwashed"
 	antagpanel_category = ANTAG_GROUP_CREW
 	show_name_in_check_antagonists = TRUE
@@ -42,8 +43,12 @@
 		return
 	thrall_commune = new
 	thrall_commune.Grant(mob_override)
+	get_master()?.update_thrall_huds()
 
 /datum/antagonist/vampire_thrall/remove_innate_effects(mob/living/mob_override)
+	var/datum/antagonist/vampire/master = get_master()
+	if(master)
+		mob_override?.remove_alt_appearance(master.get_thrall_hud_key("thrall"))
 	if(thrall_commune)
 		thrall_commune.Remove(mob_override)
 		QDEL_NULL(thrall_commune)

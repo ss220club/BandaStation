@@ -11,7 +11,8 @@
 	antag_flags = parent_type::antag_flags | ANTAG_OBSERVER_VISIBLE_PANEL
 
 	ui_name = "AntagInfoGeneric"
-	antag_hud_name = "traitor"
+	antag_hud_name = "vampire"
+	hud_icon = 'modular_bandastation/vampire/icons/mob/huds/vampire_antag.dmi'
 
 	var/bloodtotal = 0
 	var/bloodusable = 0
@@ -110,6 +111,7 @@
 	update_blood_hud()
 	check_vampire_upgrade(FALSE)
 	RegisterSignal(vampire_mob, COMSIG_ATOM_HOLYATTACK, PROC_REF(holy_attack_reaction))
+	update_thrall_huds()
 
 /datum/antagonist/vampire/remove_innate_effects(mob/living/mob_override)
 	. = ..()
@@ -117,6 +119,8 @@
 	remove_all_powers()
 	if(!vampire_mob)
 		return
+	vampire_mob.remove_alt_appearance(get_thrall_hud_key("vampire"))
+	clear_thrall_huds()
 	vampire_mob?.hud_used?.remove_screen_object(HUD_MOB_VAMPIRE_BLOOD)
 
 	if(ishuman(vampire_mob))
@@ -340,12 +344,15 @@
 	if(!thrall)
 		return
 	LAZYADD(thrall_refs, WEAKREF(thrall))
+	update_thrall_huds()
 
 /datum/antagonist/vampire/proc/remove_thrall(datum/antagonist/vampire_thrall/thrall)
+	thrall?.owner?.current?.remove_alt_appearance(get_thrall_hud_key("thrall"))
 	for(var/datum/weakref/thrall_ref as anything in thrall_refs)
 		if(thrall_ref.resolve() == thrall)
 			thrall_refs -= thrall_ref
-			return
+			break
+	update_thrall_huds()
 
 /datum/antagonist/vampire/proc/get_thralls()
 	var/list/datum/antagonist/vampire_thrall/active_thralls = list()
@@ -361,6 +368,37 @@
 	for(var/datum/antagonist/vampire_thrall/thrall as anything in get_thralls())
 		thrall.owner?.remove_antag_datum(/datum/antagonist/vampire_thrall)
 	thrall_refs.Cut()
+	clear_thrall_huds()
+
+/datum/antagonist/vampire/proc/get_thrall_hud_key(role)
+	return "vampire_network_[role]_[REF(src)]"
+
+/datum/antagonist/vampire/proc/clear_thrall_huds()
+	owner?.current?.remove_alt_appearance(get_thrall_hud_key("vampire"))
+	for(var/datum/antagonist/vampire_thrall/thrall as anything in get_thralls())
+		thrall.owner?.current?.remove_alt_appearance(get_thrall_hud_key("thrall"))
+
+/datum/antagonist/vampire/proc/update_thrall_huds()
+	clear_thrall_huds()
+	var/mob/living/vampire_mob = owner?.current
+	if(!vampire_mob)
+		return
+	vampire_mob.add_alt_appearance(
+		/datum/atom_hud/alternate_appearance/basic/vampire_network,
+		get_thrall_hud_key("vampire"),
+		hud_image_on(vampire_mob),
+		src,
+	)
+	for(var/datum/antagonist/vampire_thrall/thrall as anything in get_thralls())
+		var/mob/living/thrall_mob = thrall.owner?.current
+		if(!thrall_mob)
+			continue
+		thrall_mob.add_alt_appearance(
+			/datum/atom_hud/alternate_appearance/basic/vampire_network,
+			get_thrall_hud_key("thrall"),
+			thrall.hud_image_on(thrall_mob),
+			src,
+		)
 
 /datum/antagonist/vampire/proc/vamp_burn(burn_chance)
 	if(prob(burn_chance) && owner.current.health >= 50)
