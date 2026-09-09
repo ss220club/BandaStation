@@ -1,24 +1,28 @@
+// In IPC we trust
 /datum/species
 	var/hunger_icon = 'icons/obj/food/burgerbread.dmi'
 
-/datum/species/proc/update_hunger_hud(mob/living/carbon/owner)
-	var/atom/movable/screen/hunger/hunger_bar = owner.hud_used?.screen_objects[HUD_MOB_HUNGER]
-	if(hunger_bar)
-		hunger_bar.update_food_icon(owner)
+/mob/living
+	/// Optional hunger HUD icon which overrides the species' normal food icon.
+	var/hunger_icon
 
-/datum/species/proc/set_food_icon(mob/living/carbon/owner, h_icon)
-	hunger_icon = h_icon
-	update_hunger_hud(owner)
+/mob/living/proc/set_hunger_icon(icon_file)
+	hunger_icon = icon_file
+	update_hunger_hud()
 
-/datum/species/proc/reset_food_icon(mob/living/carbon/owner)
-	hunger_icon = initial(hunger_icon)
-	update_hunger_hud(owner)
+/mob/living/proc/reset_hunger_icon()
+	hunger_icon = null
+	update_hunger_hud()
+
+/mob/living/proc/update_hunger_hud()
+	var/atom/movable/screen/hunger/hunger_bar = hud_used?.screen_objects[HUD_MOB_HUNGER]
+	hunger_bar?.update_food_icon(src)
 
 /atom/movable/screen/hunger/proc/update_food_icon(mob/living/hud_owner)
+	food_icon = hud_owner.hunger_icon
 	var/mob/living/carbon/carbon = astype(hud_owner, /mob/living/carbon)
-	if(!carbon)
-		return
-	food_icon = carbon.dna.species.hunger_icon
+	if(carbon)
+		food_icon = food_icon || carbon.dna.species.hunger_icon
 	underlays -= food_image
 	food_image.icon = food_icon
 	underlays += food_image

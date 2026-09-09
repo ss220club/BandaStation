@@ -59,7 +59,7 @@
 	user.SetSleeping(0)
 	user.adjust_confusion(-INFINITY)
 	user.adjust_stamina_loss(-100)
-	user.set_body_position(STANDING_UP)
+	user.get_up(TRUE)
 	to_chat(user, span_notice("You instill your body with clean blood and remove any incapacitating effects."))
 	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
 

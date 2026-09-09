@@ -10,7 +10,7 @@
 	stinger_sound = 'sound/music/antag/heretic/heretic_gain.ogg'
 	antag_flags = parent_type::antag_flags | ANTAG_OBSERVER_VISIBLE_PANEL
 
-	ui_name = "AntagInfoHeretic"
+	ui_name = "AntagInfoGeneric"
 	antag_hud_name = "traitor"
 
 	var/bloodtotal = 0
@@ -98,27 +98,33 @@
 		remove_ability(power)
 
 /datum/antagonist/vampire/apply_innate_effects(mob/living/mob_override)
-	mob_override = ..()
-	if(ishuman(mob_override))
-		var/mob/living/carbon/human/human_target = mob_override
-		human_target.dna.species.set_food_icon(human_target, 'modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
+	. = ..()
+	var/mob/living/vampire_mob = mob_override || owner.current
+	if(!vampire_mob)
+		return
+	if(ishuman(vampire_mob))
+		var/mob/living/carbon/human/human_target = vampire_mob
+		human_target.set_hunger_icon('modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
 
 	update_blood_hud()
 	check_vampire_upgrade(FALSE)
-	RegisterSignal(mob_override, COMSIG_ATOM_HOLYATTACK, PROC_REF(holy_attack_reaction))
+	RegisterSignal(vampire_mob, COMSIG_ATOM_HOLYATTACK, PROC_REF(holy_attack_reaction))
 
 /datum/antagonist/vampire/remove_innate_effects(mob/living/mob_override)
-	mob_override = ..()
+	. = ..()
+	var/mob/living/vampire_mob = mob_override || owner.current
 	remove_all_powers()
-	mob_override?.hud_used?.remove_screen_object(HUD_MOB_VAMPIRE_BLOOD)
+	if(!vampire_mob)
+		return
+	vampire_mob?.hud_used?.remove_screen_object(HUD_MOB_VAMPIRE_BLOOD)
 
-	if(ishuman(mob_override))
-		var/mob/living/carbon/human/human_target = mob_override
-		human_target.dna.species.set_food_icon(human_target, initial(human_target.dna.species.hunger_icon))
+	if(ishuman(vampire_mob))
+		var/mob/living/carbon/human/human_target = vampire_mob
+		human_target.reset_hunger_icon()
 		human_target.alpha = 255
 
-	REMOVE_TRAITS_IN(mob_override, "vampire")
-	UnregisterSignal(mob_override, COMSIG_ATOM_HOLYATTACK)
+	REMOVE_TRAITS_IN(vampire_mob, "vampire")
+	UnregisterSignal(vampire_mob, COMSIG_ATOM_HOLYATTACK)
 
 /datum/antagonist/vampire/proc/holy_attack_reaction(mob/target, obj/item/source, mob/user, antimagic_flags)
 	SIGNAL_HANDLER
