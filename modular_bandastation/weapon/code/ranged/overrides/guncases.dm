@@ -254,6 +254,11 @@
 	worn_icon_state = "sovietcase"
 	inhand_icon_state = "sovietcase"
 
+/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/PopulateContents()
+	new weapon_to_spawn (src)
+	for(var/i in 1 to 2)
+		new extra_to_spawn (src)
+
 /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
 	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
@@ -265,3 +270,35 @@
 /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
 	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/starts_empty
+
+/obj/item/storage/toolbox/guncase/green/pistol/revolver_c38
+	weapon_to_spawn = /obj/item/gun/ballistic/revolver/c38/detective
+
+/obj/item/storage/toolbox/guncase/blue/shotgun
+	weapon_to_spawn = /obj/item/gun/ballistic/shotgun/automatic/combat
+	extra_to_spawn = /obj/item/storage/belt/bandolier
+
+/obj/item/storage/toolbox/guncase/blue/shotgun/PopulateContents()
+	new weapon_to_spawn (src)
+	new extra_to_spawn (src)
+
+/obj/item/storage/toolbox/guncase/ntcase/laser
+	weapon_to_spawn = /obj/item/gun/energy/laser
+
+/obj/item/storage/toolbox/guncase/ntcase/laser_carbine
+	weapon_to_spawn = /obj/item/gun/energy/laser/carbine
+
+/obj/item/storage/toolbox/guncase/ntcase/pistol/laser_pistol
+	weapon_to_spawn = /obj/item/gun/energy/laser/pistol
+
+/obj/item/storage/toolbox/guncase/ntcase/pistol/laser_soul
+	weapon_to_spawn = /obj/item/gun/energy/laser/soul
+
+/obj/item/storage/toolbox/guncase/ntcase/smg
+	weapon_to_spawn = /obj/item/gun/energy/disabler/smg
+
+/obj/item/storage/toolbox/guncase/orange/doublebarrel
+	weapon_to_spawn = /obj/item/gun/ballistic/shotgun/doublebarrel
+
+/obj/item/storage/toolbox/guncase/ntcase/e_gun
+	weapon_to_spawn = /obj/item/gun/energy/e_gun

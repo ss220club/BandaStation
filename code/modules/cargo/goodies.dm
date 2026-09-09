@@ -59,7 +59,7 @@
 	desc = "The HoS took your gun and your badge? No problem! Just pay the absurd taxation fee and you too can be reunited with the lethal power of a .38!"
 	cost = PAYCHECK_CREW * 60 // Original price: 2000 New price: 3000
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/gun/ballistic/revolver/c38/detective)
+	contains = list(/obj/item/storage/toolbox/guncase/green/pistol/revolver_c38) // Original: /obj/item/gun/ballistic/revolver/c38/detective
 
 /datum/supply_pack/goody/stingbang
 	name = "Stingbang Single-Pack"
@@ -80,8 +80,7 @@
 	cost = PAYCHECK_COMMAND * 22.5 // Original price: 1500 New price: 2250
 	access_view = ACCESS_ARMORY
 	contains = list(
-		/obj/item/gun/ballistic/shotgun/automatic/combat,
-		/obj/item/storage/belt/bandolier
+		/obj/item/storage/toolbox/guncase/blue/shotgun // Original: /obj/item/gun/ballistic/shotgun/automatic/combat
 	)
 
 /datum/supply_pack/goody/disabler_single
@@ -96,42 +95,42 @@
 	desc = "Contains one energy gun, capable of firing both non-lethal and lethal blasts of light."
 	cost = PAYCHECK_COMMAND * 18 // Original price: 1200 New price: 1800
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/gun/energy/e_gun)
+	contains = list(/obj/item/storage/toolbox/guncase/ntcase/e_gun) // Original: /obj/item/gun/energy/e_gun
 
 /datum/supply_pack/goody/laser_single
 	name = "Type 5 Laser Gun Single-Pack"
 	desc = "Contains one Type 5 laser gun, the lethal workhorse of Nanotrasen security everywhere."
 	cost = PAYCHECK_COMMAND * 9 // Original price: 600 New price: 900
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/gun/energy/laser)
+	contains = list(/obj/item/storage/toolbox/guncase/ntcase/laser) // Original: /obj/item/gun/energy/laser
 
 /datum/supply_pack/goody/carbine_single
 	name = "Type 5/R Laser Carbine Single-Pack"
 	desc = "Contains one laser carbine. Fires a rapid burst of slightly weaker laser projectiles."
 	cost = PAYCHECK_COMMAND * 8
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/gun/energy/laser/carbine)
+	contains = list(/obj/item/storage/toolbox/guncase/ntcase/laser_carbine) // Original: /obj/item/gun/energy/laser/carbine
 
 /datum/supply_pack/goody/laser_pistol_single
 	name = "Type 5/C Laser Pistol Single-Pack"
 	desc = "Contains one Type 5C laser pistol in an energy shoulder holster. Groovy."
 	cost = PAYCHECK_COMMAND * 2
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/clothing/accessory/holster/energy/laser_pistol) //BANDASTATION EDIT: Accessory holsters
+	contains = list(/obj/item/storage/toolbox/guncase/ntcase/pistol/laser_pistol) // Original: /obj/item/gun/energy/laser
 
 /datum/supply_pack/goody/laser_single_soul
 	name = "Type 3 Laser Gun Single-Pack"
 	desc = "Contains one Type 3 laser gun. They don't make 'em like they used to."
 	cost = PAYCHECK_COMMAND * 6
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/gun/energy/laser/soul)
+	contains = list(/obj/item/storage/toolbox/guncase/ntcase/pistol/laser_soul) // Original: /obj/item/gun/energy/laser/soul
 
 /datum/supply_pack/goody/smg_single
 	name = "Disabler SMG Single Pack"
 	desc = "Contains one disabler SMG, capable of rapidly firing weak disabler beams."
 	cost = PAYCHECK_COMMAND * 6
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/gun/energy/disabler/smg)
+	contains = list(/obj/item/storage/toolbox/guncase/ntcase/smg) // Original: /obj/item/gun/energy/disabler/smg
 
 /datum/supply_pack/goody/hell_single
 	name = "Hellgun Kit Single-Pack"
@@ -408,7 +407,7 @@
 	desc = "Lost your beloved bunny to a demonic invasion? Clown broke in and stole your beloved gun? No worries! Get a new gun as long as you can pay the absurd fees."
 	cost = PAYCHECK_COMMAND * 27 // Original price: 1800 New price: 2700
 	access_view = ACCESS_WEAPONS
-	contains = list(/obj/item/gun/ballistic/shotgun/doublebarrel)
+	contains = list(/obj/item/storage/toolbox/guncase/orange/doublebarrel) // Original: /obj/item/gun/ballistic/shotgun/doublebarrel
 
 /datum/supply_pack/goody/experimental_medication
 	name = "Experimental Medication Single-Pack"
