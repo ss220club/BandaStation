@@ -32,7 +32,11 @@
 	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	var/datum/component/vampire_ability/ability = GetComponent(/datum/component/vampire_ability)
 	ability.deduct_blood(src)
-	target.mind.add_antag_datum(/datum/antagonist/vampire_thrall, vampire)
+	var/datum/antagonist/vampire_thrall/thrall = new(vampire)
+	if(!target.mind.add_antag_datum(thrall))
+		qdel(thrall)
+		to_chat(user, span_warning("[target]'s mind slips free of your grasp."))
+		return
 	target.Stun(4 SECONDS)
 	log_combat(user, target, "vampire enthralled")
 

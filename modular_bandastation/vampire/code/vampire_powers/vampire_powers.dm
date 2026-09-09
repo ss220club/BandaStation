@@ -31,7 +31,7 @@
 	return ..()
 
 /datum/vampire_passive/proc/on_apply(datum/antagonist/vampire/V)
-	owner.update_sight() // Life updates conditionally, so we need to update sight here in case the vamp gets new vision based on his powers. Maybe one day refactor to be more OOP and on the vampire's ability datum.
+	owner.update_sight() // Life updates conditionally, so vision passives must force an update when granted.
 	return
 
 /datum/action/cooldown/spell/vampire_rejuvenate
@@ -364,16 +364,32 @@
 
 /datum/vampire_passive/vision
 	gain_desc = "Your vampiric vision has improved."
-	var/see_in_dark = 1
-	var/vision_flags = SEE_MOBS
+	/// The brightest darkness this passive lets the vampire see through.
+	var/lighting_cutoff = LIGHTING_CUTOFF_LOW
+
+/datum/vampire_passive/vision/on_apply(datum/antagonist/vampire/vampire)
+	. = ..()
+	if(iscarbon(owner))
+		RegisterSignal(owner, COMSIG_CARBON_UPDATE_SIGHT_CUTOFFS, PROC_REF(update_vision))
+		owner.update_sight()
+
+/datum/vampire_passive/vision/Destroy(force, ...)
+	if(iscarbon(owner))
+		UnregisterSignal(owner, COMSIG_CARBON_UPDATE_SIGHT_CUTOFFS)
+		owner.update_sight()
+	return ..()
+
+/datum/vampire_passive/vision/proc/update_vision(mob/living/carbon/vampire, list/new_sight_flags)
+	SIGNAL_HANDLER
+	vampire.lighting_cutoff = max(vampire.lighting_cutoff, lighting_cutoff)
 
 /datum/vampire_passive/vision/advanced
 	gain_desc = "Your vampiric vision now allows you to see everything in the dark!"
-	see_in_dark = 3
+	lighting_cutoff = LIGHTING_CUTOFF_HIGH
 
 /datum/vampire_passive/vision/full
 	gain_desc = "Your vampiric vision has reached its full strength!"
-	see_in_dark = 6
+	lighting_cutoff = LIGHTING_CUTOFF_FULLBRIGHT
 
 /datum/vampire_passive/full
 	gain_desc = "You have reached your full potential. You are no longer weak to the effects of anything holy."
