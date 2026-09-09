@@ -178,7 +178,7 @@
 		GRID_CELL_REMOVE(grid_cell.dynamic_light_sources, src)
 
 /datum/component/overlay_lighting/proc/set_lumcount_range(new_range)
-    lumcount_range = max(0, round(new_range))
+	lumcount_range = max(0, round(new_range))
 
 // BANDASTATION EDIT: Correct determination of the lighting direction
 /datum/component/overlay_lighting/proc/is_turf_in_directional_light(turf/T)
