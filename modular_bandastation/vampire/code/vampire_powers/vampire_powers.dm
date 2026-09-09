@@ -366,16 +366,20 @@
 	gain_desc = "Your vampiric vision has improved."
 	/// The brightest darkness this passive lets the vampire see through.
 	var/lighting_cutoff = LIGHTING_CUTOFF_LOW
+	/// Native sight traits supplied by this tier.
+	var/list/vision_traits = list(TRAIT_THERMAL_VISION)
 
 /datum/vampire_passive/vision/on_apply(datum/antagonist/vampire/vampire)
 	. = ..()
 	if(iscarbon(owner))
+		owner.add_traits(vision_traits, REF(src))
 		RegisterSignal(owner, COMSIG_CARBON_UPDATE_SIGHT_CUTOFFS, PROC_REF(update_vision))
 		owner.update_sight()
 
 /datum/vampire_passive/vision/Destroy(force, ...)
 	if(iscarbon(owner))
 		UnregisterSignal(owner, COMSIG_CARBON_UPDATE_SIGHT_CUTOFFS)
+		owner.remove_traits(vision_traits, REF(src))
 		owner.update_sight()
 	return ..()
 

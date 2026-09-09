@@ -266,3 +266,5 @@
 
 /datum/vampire_passive/vision/xray
 	gain_desc = "You can now see through walls."
+	lighting_cutoff = LIGHTING_CUTOFF_FULLBRIGHT
+	vision_traits = list(TRAIT_THERMAL_VISION, TRAIT_XRAY_VISION)
