@@ -105,6 +105,7 @@
 	if(ishuman(vampire_mob))
 		var/mob/living/carbon/human/human_target = vampire_mob
 		human_target.set_hunger_icon('modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
+		human_target.AddComponent(/datum/component/vampire_biter)
 
 	update_blood_hud()
 	check_vampire_upgrade(FALSE)
@@ -121,6 +122,8 @@
 	if(ishuman(vampire_mob))
 		var/mob/living/carbon/human/human_target = vampire_mob
 		human_target.reset_hunger_icon()
+		var/datum/component/vampire_biter/vampire_biter = human_target.GetComponent(/datum/component/vampire_biter)
+		QDEL_NULL(vampire_biter)
 		human_target.alpha = 255
 
 	REMOVE_TRAITS_IN(vampire_mob, "vampire")

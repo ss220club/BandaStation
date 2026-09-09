@@ -4,6 +4,7 @@
 #include "code/hunger_icon.dm"
 #include "code/blood_hud.dm"
 #include "code/datum_vampire.dm"
+#include "code/vampire_bite.dm"
 #include "code/spell_handler.dm"
 #include "code/vampire_status_effects.dm"
 #include "code/nullrod.dm"
