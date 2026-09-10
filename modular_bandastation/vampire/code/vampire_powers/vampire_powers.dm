@@ -239,7 +239,7 @@
 	name = "Логово"
 	desc = "Выберите себе гроб, который станет центральным элементом вашего нового логова."
 	gain_desc = "Теперь вы можете создать логово."
-	button_icon = 'icons/obj/storage/crates.dmi'
+	button_icon = 'modular_bandastation/vampire/icons/obj/items.dmi' // tg coffin icon is too big
 	button_icon_state = "coffin"
 	cooldown_time = 2 SECONDS
 	cast_range = 1

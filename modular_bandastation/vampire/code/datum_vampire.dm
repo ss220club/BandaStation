@@ -228,6 +228,7 @@
 	)
 
 	while(do_after(caster, suck_rate, target_human, cog_icon = null))
+		// TODO: compact this
 		caster.do_attack_animation(target_human, ATTACK_EFFECT_BITE)
 		if(unique_suck_id in drained_humans)
 			if(drained_humans[unique_suck_id] >= BLOOD_DRAIN_LIMIT)
