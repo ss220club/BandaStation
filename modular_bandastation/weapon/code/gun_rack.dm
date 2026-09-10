@@ -32,18 +32,14 @@
 				scale_factor = 0.75
 
 		var/width_compensation = -round(((gun_width - 32) * 0.5) * scale_factor)
-		var/player_x = 0
-		if(LAZYACCESS(modifiers, ICON_X))
-			var/raw_click_x = text2num(modifiers[ICON_X]) - 16
-			player_x = clamp(raw_click_x, -9, 9)
+
+		var/player_x = LAZYACCESS(modifiers, ICON_X) ? (text2num(modifiers[ICON_X]) - 16) : 0
 
 		var/final_x_offset = player_x + width_compensation
-		var/final_y_offset = 2
 
-		if(user.transfer_item_to_turf(G, get_turf(src), final_x_offset, final_y_offset, silent = FALSE))
+		if(user.transfer_item_to_turf(G, get_turf(src), final_x_offset, 2, silent = FALSE))
 			rotate_weapon(G, being_removed = FALSE, scale_factor = scale_factor)
 			G.pixel_x = final_x_offset
-			G.pixel_y = final_y_offset
 			return ITEM_INTERACT_SUCCESS
 
 		return ITEM_INTERACT_BLOCKING
@@ -76,7 +72,6 @@
 	SIGNAL_HANDLER
 	var/obj/item/leaving_item = source
 	rotate_weapon(leaving_item, being_removed = TRUE)
-	UnregisterSignal(leaving_item, COMSIG_ITEM_EQUIPPED)
 
 /obj/structure/rack/gunrack/Destroy()
 	for(var/obj/item/gun/G in get_turf(src))
