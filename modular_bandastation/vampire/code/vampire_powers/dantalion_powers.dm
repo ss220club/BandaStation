@@ -58,7 +58,7 @@
 	return TRUE
 
 /datum/action/cooldown/spell/vampire_commune
-	name = "Общение"
+	name = "Общение с рабами"
 	desc = "Телепатически общайтесь со своими рабами."
 	gain_desc = "Вы обрели способность общаться со своими рабами телепатически."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'

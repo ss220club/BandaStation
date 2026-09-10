@@ -60,7 +60,7 @@
 	return ..()
 
 /datum/action/cooldown/spell/vampire_thrall_commune
-	name = "Общение"
+	name = "Вампирское общение"
 	desc = "Телепатически общайтесь со своим вампиром-хозяином и его рабами."
 	button_icon_state = "vamp_communication"
 	cooldown_time = 2 SECONDS
