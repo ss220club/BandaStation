@@ -12,10 +12,10 @@
 	if(!istype(human_owner))
 		return FALSE
 	ADD_TRAIT(human_owner, TRAIT_CHUNKYFINGERS, REF(src))
-	human_owner.physiology.brute_mod *= 0.4
-	human_owner.physiology.burn_mod *= 0.5
-	human_owner.physiology.stamina_mod *= 0.5
-	human_owner.physiology.stun_mod *= 0.5
+	MODIFY_PHYSIOLOGY(human_owner, BRUTE, 0.4)
+	MODIFY_PHYSIOLOGY(human_owner, BURN, 0.5)
+	MODIFY_PHYSIOLOGY(human_owner, STAMINA, 0.5)
+	MODIFY_PHYSIOLOGY(human_owner, PHYS_COEFF_STUN, 0.5)
 	var/datum/antagonist/vampire/vampire = human_owner.mind?.has_antag_datum(/datum/antagonist/vampire)
 	if(vampire?.get_ability(/datum/vampire_passive/blood_swell_upgrade))
 		bonus_damage_applied = TRUE
@@ -27,10 +27,10 @@
 	if(!istype(human_owner))
 		return
 	REMOVE_TRAIT(human_owner, TRAIT_CHUNKYFINGERS, REF(src))
-	human_owner.physiology.brute_mod /= 0.4
-	human_owner.physiology.burn_mod /= 0.5
-	human_owner.physiology.stamina_mod /= 0.5
-	human_owner.physiology.stun_mod /= 0.5
+	MODIFY_PHYSIOLOGY(human_owner, BRUTE, 1 / 0.4)
+	MODIFY_PHYSIOLOGY(human_owner, BURN, 1 / 0.5)
+	MODIFY_PHYSIOLOGY(human_owner, STAMINA, 1 / 0.5)
+	MODIFY_PHYSIOLOGY(human_owner, PHYS_COEFF_STUN, 1 / 0.5)
 	if(bonus_damage_applied)
 		human_owner.RemoveElement(/datum/element/bonus_damage, 100, 10)
 

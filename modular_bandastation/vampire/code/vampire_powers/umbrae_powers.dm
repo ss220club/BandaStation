@@ -17,7 +17,7 @@
 	if(istype(user))
 		if(!vampire.iscloaking)
 			vampire.iscloaking = TRUE
-			user.physiology.burn_mod *= 1.1
+			MODIFY_PHYSIOLOGY(user, BURN, 1.1)
 			RegisterSignal(user, COMSIG_LIVING_IGNITED, PROC_REF(update_vampire_cloak))
 		else
 			disable_cloak(user)
@@ -36,7 +36,7 @@
 		return
 	vampire.iscloaking = FALSE
 	UnregisterSignal(user, COMSIG_LIVING_IGNITED)
-	user.physiology.burn_mod /= 1.1
+	MODIFY_PHYSIOLOGY(user, BURN, 1 / 1.1)
 
 /datum/action/cooldown/spell/vampire_cloak/proc/update_vampire_cloak(datum/source)
 	SIGNAL_HANDLER
