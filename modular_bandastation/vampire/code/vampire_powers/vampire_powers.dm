@@ -259,13 +259,13 @@
 		to_chat(user, span_warning("Это работает только с гробами!"))
 		return
 	if(istype(coffin, /obj/structure/closet/crate/coffin/vampire))
-		to_chat(user, span_warning("Этот гроб служит другому и отказывается подчиняться вашей воле!"))
+		to_chat(user, span_warning("[coffin.declent_ru(NOMINATIVE)] служит другому и отказывается подчиняться вашей воле!"))
 		return
 	for(var/turf/T in range(1, coffin))
 		if(T.density)
-			to_chat(user, span_warning("Для ритуала вокруг гроба нужно больше места!"))
+			to_chat(user, span_warning("Для ритуала вокруг [coffin.declent_ru(GENITIVE)] нужно больше места!"))
 			return
-	to_chat(user, span_danger("Вы начинаете помечать гроб!"))
+	to_chat(user, span_danger("Вы начинаете помечать [coffin.declent_ru(ACCUSATIVE)]!"))
 	coffin.Beam(user, icon_state = "drainbeam", maxdistance = 1, time = 10 SECONDS)
 	playsound(coffin, 'sound/effects/bubbles/bubbles.ogg', 20)
 	for(var/obj/machinery/light/L in range(5, user))
@@ -283,7 +283,7 @@
 	V.remove_ability(src)
 
 /obj/structure/closet/crate/coffin/vampire
-	name = "вампирский гроб"
+	name = "vampire coffin"
 	desc = "Гроб, отмеченный кровавой руной."
 
 /obj/effect/lair_rune

@@ -33,7 +33,7 @@
 	user.put_in_hands(claws)
 
 /obj/item/vamp_claws
-	name = "вампирские когти"
+	name = "vampiric claws"
 	desc = "Пара потусторонних когтей из живой крови."
 	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
 	icon_state = "vamp_claws"
@@ -43,8 +43,8 @@
 	armour_penetration = 20
 	sharpness = SHARP_EDGED
 	hitsound = 'modular_bandastation/vampire/sound/weapons/bladeslice.ogg'
-	attack_verb_continuous = list("рубит", "протыкает", "рассекает", "царапает")
-	attack_verb_simple = list("рубануть", "проткнуть", "рассечь", "царапнуть")
+	attack_verb_continuous = list("slashes", "stabs", "slices", "scratches")
+	attack_verb_simple = list("slash", "stab", "slice", "scratch")
 	var/durability = 15
 	var/blood_drain_amount = 15
 	var/blood_absorbed_amount = 5
@@ -167,7 +167,7 @@
 	StartCooldown()
 
 /obj/structure/blood_barrier
-	name = "кровавый барьер"
+	name = "blood barrier"
 	desc = "Гротескное сооружение из кристаллизованной крови. Оно медленно тает."
 	max_integrity = 100
 	icon_state = "blood_barrier"

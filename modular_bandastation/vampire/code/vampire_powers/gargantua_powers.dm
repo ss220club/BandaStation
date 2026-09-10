@@ -179,7 +179,7 @@
 	add_vampire_ability(20)
 
 /obj/projectile/magic/demonic_grasp
-	name = "демоническая хватка"
+	name = "demonic grasp"
 	reflectable = FALSE
 	icon_state = null
 
@@ -291,7 +291,7 @@
 #undef ARENA_SIZE
 
 /obj/structure/vampire_arena_wall
-	name = "стена из свернувшейся крови"
+	name = "coagulated blood wall"
 	desc = "Временная стена из свернувшейся крови."
 	density = TRUE
 	anchored = TRUE

@@ -65,7 +65,7 @@
 	new /obj/effect/vampire_shadow_snare(get_turf(cast_on))
 
 /obj/effect/vampire_shadow_snare
-	name = "теневая ловушка"
+	name = "shadow snare"
 	desc = "Почти прозрачная ловушка, растворяющаяся в тенях."
 	alpha = 60
 	anchored = TRUE
@@ -93,7 +93,7 @@
 	if(snare_turf.get_lumcount() * 10 > 2)
 		remaining_integrity -= 50
 	if(remaining_integrity <= 0)
-		visible_message(span_notice("[src] увядает."))
+		visible_message(span_notice("[src.declent_ru(NOMINATIVE)] увядает."))
 		qdel(src)
 
 /obj/effect/vampire_shadow_snare/Initialize(mapload)
@@ -123,8 +123,8 @@
 	var/obj/item/assembly/flash/flash = used
 	if(!flash.try_use_flash(user))
 		return ITEM_INTERACT_SUCCESS
-	user.visible_message(span_danger("[user] направляет [used] на [src]!"), span_danger("Вы направляете [used] на [src]!"))
-	visible_message(span_notice("[src] увядает."))
+	user.visible_message(span_danger("[user] направляет [used.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]!"), span_danger("Вы направляете [used.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]!"))
+	visible_message(span_notice("[src.declent_ru(NOMINATIVE)] увядает."))
 	qdel(src)
 	return ITEM_INTERACT_SUCCESS
 
@@ -210,7 +210,7 @@
 	QDEL_IN(effect, distance)
 
 /obj/structure/shadow_anchor
-	name = "теневой якорь"
+	name = "shadow anchor"
 	desc = "Один взгляд на эту вещь вызывает тревогу."
 	icon = 'icons/obj/antags/cult/structures.dmi'
 	icon_state = "pylon"
