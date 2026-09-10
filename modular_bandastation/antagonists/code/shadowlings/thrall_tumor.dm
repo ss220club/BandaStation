@@ -53,11 +53,11 @@
 
 /obj/item/organ/brain/shadow/tumor_thrall/mob_remove(mob/living/carbon/organ_owner, special = FALSE, movement_flags)
 	. = ..()
-    organ_owner?.mind?.remove_antag_datum(/datum/antagonist/shadow_thrall)
-    UnregisterSignal(organ_owner, COMSIG_ATOM_EXAMINE)
-    if(organ_owner)
-        to_chat(organ_owner, span_notice("Сковывающий холод покидает ваше сознание. Вы снова подвластны себе!"))
-    return ..()
+	organ_owner?.mind?.remove_antag_datum(/datum/antagonist/shadow_thrall)
+	UnregisterSignal(organ_owner, COMSIG_ATOM_EXAMINE)
+	if(organ_owner)
+		to_chat(organ_owner, span_notice("Сковывающий холод покидает ваше сознание. Вы снова подвластны себе!"))
+	return ..()
 
 /obj/item/organ/brain/shadow/tumor_thrall/proc/on_holder_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
