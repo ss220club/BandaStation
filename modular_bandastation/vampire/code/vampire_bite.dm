@@ -29,10 +29,10 @@
 	if(!vampire || vampire.draining || victim == source)
 		return
 	if(!victim.get_blood_volume())
-		to_chat(source, span_warning("They have no blood!"))
+		to_chat(source, span_warning("В них нет крови!"))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 	if(victim.mind?.has_antag_datum(/datum/antagonist/vampire) || victim.mind?.has_antag_datum(/datum/antagonist/vampire_thrall))
-		to_chat(source, span_warning("Your fangs fail to pierce [victim]'s cold flesh!"))
+		to_chat(source, span_warning("Ваши клыки не могут пронзить холодную плоть [victim]!"))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	vampire.draining = victim

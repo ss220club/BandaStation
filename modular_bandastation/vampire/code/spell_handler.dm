@@ -27,21 +27,21 @@
 		return SPELL_CANCEL_CAST
 	if(spell.owner.stat >= DEAD)
 		if(feedback)
-			to_chat(spell.owner, span_warning("Not while you're dead!"))
+			to_chat(spell.owner, span_warning("Не в состоянии смерти!"))
 		return SPELL_CANCEL_CAST
 	var/fullpower = vampire.get_ability(/datum/vampire_passive/full)
 	if(vampire.nullified >= VAMPIRE_COMPLETE_NULLIFICATION && !fullpower)
 		if(feedback)
-			to_chat(spell.owner, span_warning("Something is blocking your powers!"))
+			to_chat(spell.owner, span_warning("Что-то блокирует ваши силы!"))
 		return SPELL_CANCEL_CAST
 	var/blood_cost = calculate_blood_cost(vampire)
 	if(vampire.bloodusable < blood_cost)
 		if(feedback)
-			to_chat(spell.owner, span_warning("You require at least [blood_cost] units of usable blood to do that!"))
+			to_chat(spell.owner, span_warning("Для этого требуется как минимум [blood_cost] единиц доступной крови!"))
 		return SPELL_CANCEL_CAST
 	if(istype(get_area(spell.owner), /area/station/service/chapel) && !fullpower)
 		if(feedback)
-			to_chat(spell.owner, span_warning("Your powers are useless on this holy ground."))
+			to_chat(spell.owner, span_warning("На этой святой земле ваши силы бесполезны."))
 		return SPELL_CANCEL_CAST
 	return NONE
 
@@ -63,7 +63,7 @@
 	var/datum/antagonist/vampire/vampire = get_vampire(spell)
 	if(!vampire)
 		return
-	to_chat(spell.owner, span_boldnotice("You have [vampire.bloodusable] left to use."))
+	to_chat(spell.owner, span_boldnotice("У вас осталось [vampire.bloodusable] единиц доступной крови."))
 	SSblackbox.record_feedback("tally", "vampire_powers_used", 1, "[spell.type]")
 
 /datum/action/cooldown/spell/proc/add_vampire_ability(required_blood = 0, deduct_blood_on_cast = TRUE)

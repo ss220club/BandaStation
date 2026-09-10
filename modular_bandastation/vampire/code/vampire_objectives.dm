@@ -3,7 +3,7 @@
 	abstract_type = /datum/objective/vampire
 
 /datum/objective/vampire/blood
-	name = "drink blood"
+	name = "пить кровь"
 
 /datum/objective/vampire/blood/New()
 	. = ..()
@@ -20,7 +20,7 @@
 	return FALSE
 
 /datum/objective/vampire/specialization
-	name = "vampire subclass"
+	name = "вампирская специализация"
 	var/specialization_objective
 
 /datum/objective/vampire/specialization/update_explanation_text()
@@ -29,7 +29,7 @@
 		explanation_text = "Накопите не менее 150 единиц крови и выберите специализацию, чтобы получить дальнейшие инструкции."
 		return
 	if(!specialization_objective)
-		var/static/list/departments = list("security", "service", "research", "medical", "engineering", "supply")
+		var/static/list/departments = list("службу безопасности", "сервисный отдел", "научный отдел", "медицинский отдел", "инженерный отдел", "отдел снабжения")
 		specialization_objective = replacetext(pick(vampire.subclass.unique_objectives), "%DEPARTMENT", pick(departments))
 	explanation_text = specialization_objective
 
@@ -38,7 +38,7 @@
 	return vampire?.subclass && vampire.bloodtotal >= 150
 
 /datum/objective/vampire/lair
-	name = "establish a lair"
+	name = "создать логово"
 	explanation_text = "Создайте логово, сделав гроб своим убежищем."
 
 /datum/objective/vampire/lair/check_completion()

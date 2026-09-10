@@ -1,14 +1,14 @@
 /datum/vampire_passive/increment_thrall_cap/on_apply(datum/antagonist/vampire/vampire)
 	vampire.subclass.thrall_cap++
-	gain_desc = "You can now thrall one more person, up to a maximum of [vampire.subclass.thrall_cap]."
+	gain_desc = "Теперь вы можете подчинить ещё одного человека — вплоть до [vampire.subclass.thrall_cap]."
 
 /datum/vampire_passive/increment_thrall_cap/two
 /datum/vampire_passive/increment_thrall_cap/three
 
 /datum/action/cooldown/spell/pointed/vampire_enthrall
-	name = "Enthrall"
-	desc = "You use a large portion of your power to sway those loyal to none to be loyal to you only."
-	gain_desc = "You have gained the ability to thrall people to your will."
+	name = "Подчинение"
+	desc = "Используйте большую часть своей силы, чтобы обратить верность тех, кто никому не предан, только себе."
+	gain_desc = "Вы обрели способность подчинять людей своей воле."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_enthrall"
 	cooldown_time = 1 MINUTES
@@ -24,10 +24,10 @@
 /datum/action/cooldown/spell/pointed/vampire_enthrall/cast(mob/living/carbon/human/target)
 	. = ..()
 	var/mob/living/user = owner
-	user.visible_message(span_warning("[user] bites [target]'s neck!"), span_warning("You bite [target]'s neck and begin the flow of power."))
-	to_chat(target, span_warning("You feel tendrils of evil invade your mind."))
+	user.visible_message(span_warning("[user] кусает [target] за шею!"), span_warning("Вы кусаете [target] за шею и начинаете передавать силу."))
+	to_chat(target, span_warning("Вы чувствуете, как щупальца зла проникают в ваш разум."))
 	if(!do_after(user, 15 SECONDS, target = target))
-		to_chat(user, span_warning("You or your target moved."))
+		to_chat(user, span_warning("Вы или ваша цель сдвинулись."))
 		return
 	if(!can_enthrall(user, target))
 		return
@@ -37,28 +37,28 @@
 	var/datum/antagonist/vampire_thrall/thrall = new(vampire)
 	if(!target.mind.add_antag_datum(thrall))
 		qdel(thrall)
-		to_chat(user, span_warning("[target]'s mind slips free of your grasp."))
+		to_chat(user, span_warning("Разум [target] ускользает из вашей хватки."))
 		return
 	target.Stun(4 SECONDS)
 	log_combat(user, target, "vampire enthralled")
 
 /datum/action/cooldown/spell/pointed/vampire_enthrall/proc/can_enthrall(mob/living/user, mob/living/carbon/human/target)
 	if(!target.mind)
-		to_chat(user, span_warning("[target]'s mind is not there for you to enthrall."))
+		to_chat(user, span_warning("Разум [target] недоступен для подчинения."))
 		return FALSE
 	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	if(vampire.subclass.thrall_cap <= length(vampire.get_thralls()))
-		to_chat(user, span_warning("You don't have enough power to enthrall anyone else."))
+		to_chat(user, span_warning("У вас недостаточно сил, чтобы подчинить кого-то ещё."))
 		return FALSE
 	if(HAS_TRAIT(target, TRAIT_MINDSHIELD) || target.mind.has_antag_datum(/datum/antagonist/vampire) || target.mind.has_antag_datum(/datum/antagonist/vampire_thrall) || HAS_MIND_TRAIT(target, TRAIT_HOLY))
-		target.visible_message(span_warning("[target] seems to resist the takeover!"), span_notice("You feel a familiar sensation in your skull that quickly dissipates."))
+		target.visible_message(span_warning("[target], похоже, сопротивляется подчинению!"), span_notice("Вы чувствуете знакомое ощущение в черепе, быстро исчезающее без следа."))
 		return FALSE
 	return TRUE
 
 /datum/action/cooldown/spell/vampire_commune
-	name = "Commune"
-	desc = "Speak telepathically with your thralls."
-	gain_desc = "You have gained the ability to commune with your thralls."
+	name = "Общение"
+	desc = "Телепатически общайтесь со своими рабами."
+	gain_desc = "Вы обрели способность общаться со своими рабами телепатически."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vamp_communication"
 	cooldown_time = 2 SECONDS
@@ -70,20 +70,20 @@
 /datum/action/cooldown/spell/vampire_commune/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
-	var/message = tgui_input_text(user, "Enter a message for your thralls.", "Thrall Commune")
+	var/message = tgui_input_text(user, "Введите сообщение для рабов.", "Общение рабов")
 	if(!message)
 		return
 	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	for(var/datum/antagonist/vampire_thrall/thrall as anything in vampire.get_thralls())
 		if(thrall.owner?.current)
-			to_chat(thrall.owner.current, span_notice("[user.real_name] (Vampire Master): [message]"))
-	to_chat(user, span_notice("[user.real_name] (Vampire Master): [message]"))
+			to_chat(thrall.owner.current, span_notice("[user.real_name] (Вампир-хозяин): [message]"))
+	to_chat(user, span_notice("[user.real_name] (Вампир-хозяин): [message]"))
 	log_say("(VAMPIRE) [message]", list("CONNECTION" = user))
 
 /datum/action/cooldown/spell/pointed/vampire_pacify
-	name = "Pacify"
-	desc = "Pacify a target temporarily, making them unable to cause harm."
-	gain_desc = "You have gained the ability to pacify someone's harmful tendencies, preventing them from doing any physical harm to anyone."
+	name = "Усмирение"
+	desc = "Временно усмирите цель, лишив её возможности причинять вред."
+	gain_desc = "Вы обрели способность усмирять чьи-то агрессивные наклонности, не позволяя причинять физический вред."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "pacify"
 	cooldown_time = 30 SECONDS
@@ -102,9 +102,9 @@
 		cast_on.set_timed_status_effect(30 SECONDS, /datum/status_effect/pacify)
 
 /datum/action/cooldown/spell/pointed/vampire_switch_places
-	name = "Subspace Swap"
-	desc = "Switch positions with a target."
-	gain_desc = "You have gained the ability to switch positions with a targeted mob."
+	name = "Подпространственный обмен"
+	desc = "Поменяйтесь местами с целью."
+	gain_desc = "Вы обрели способность меняться местами с выбранным мобом."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "subspace_swap"
 	cooldown_time = 30 SECONDS
@@ -121,18 +121,18 @@
 	. = ..()
 	var/mob/living/user = owner
 	if(target.can_block_magic())
-		to_chat(user, span_warning("The spell had no effect!"))
-		to_chat(target, span_warning("You feel space bending, but it rapidly dissipates."))
+		to_chat(user, span_warning("Заклинание не подействовало!"))
+		to_chat(target, span_warning("Вы чувствуете, как пространство изгибается, но эффект быстро рассеивается."))
 		return
 	var/turf/user_turf = get_turf(user)
 	var/turf/target_turf = get_turf(target)
 	if(!do_teleport(target, user_turf, channel = TELEPORT_CHANNEL_MAGIC) || !do_teleport(user, target_turf, channel = TELEPORT_CHANNEL_MAGIC))
-		to_chat(user, span_warning("Space refuses to bend into a swap."))
+		to_chat(user, span_warning("Пространство отказывается изгибаться для обмена."))
 
 /datum/action/cooldown/spell/vampire_decoy
-	name = "Deploy Decoy"
-	desc = "Briefly turn invisible and deploy a decoy illusion to fool your prey."
-	gain_desc = "You have gained the ability to turn invisible and create decoy illusions."
+	name = "Создать приманку"
+	desc = "Ненадолго станьте невидимым и создайте иллюзию-приманку, чтобы обмануть добычу."
+	gain_desc = "Вы обрели способность становиться невидимым и создавать иллюзии-приманки."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "decoy"
 	cooldown_time = 40 SECONDS
@@ -154,9 +154,9 @@
 		user.alpha = initial(user.alpha)
 
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls
-	name = "Rally Thralls"
-	desc = "Removes all incapacitating effects from your nearby thralls."
-	gain_desc = "You have gained the ability to remove all incapacitating effects from nearby thralls."
+	name = "Сбор рабов"
+	desc = "Снимает все обездвиживающие эффекты с ваших рабов поблизости."
+	gain_desc = "Вы обрели способность снимать все обездвиживающие эффекты с ближайших рабов."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "thralls_up"
 	cooldown_time = 100 SECONDS
@@ -186,9 +186,9 @@
 	addtimer(CALLBACK(thrall, TYPE_PROC_REF(/atom, cut_overlay), overlay), 6 SECONDS)
 
 /datum/action/cooldown/spell/vampire_blood_bond
-	name = "Blood Bond"
-	desc = "Creates a net between you and your nearby thralls that evenly shares all damage received."
-	gain_desc = "You have gained the ability to share damage between you and your thralls."
+	name = "Кровавая связь"
+	desc = "Создаёт между вами и ближайшими рабами сеть, поровну распределяющую весь получаемый урон."
+	gain_desc = "Вы обрели способность делить урон между собой и рабами."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_bond"
 	cooldown_time = 2 SECONDS
@@ -207,9 +207,9 @@
 		user.apply_status_effect(/datum/status_effect/vampire_thrall_net, user.mind.has_antag_datum(/datum/antagonist/vampire))
 
 /datum/action/cooldown/spell/aoe/vampire_hysteria
-	name = "Mass Hysteria"
-	desc = "Casts a powerful illusion to make everyone nearby perceive others to looks like random animals after briefly blinding them."
-	gain_desc = "You have gained the ability to make everyone nearby perceive others to looks like random animals after briefly blinding them."
+	name = "Массовая истерия"
+	desc = "Наложите мощную иллюзию: после краткого ослепления все поблизости будут видеть друг друга случайными животными."
+	gain_desc = "Вы обрели способность после краткого ослепления заставлять всех поблизости видеть друг друга случайными животными."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "hysteria"
 	cooldown_time = 180 SECONDS

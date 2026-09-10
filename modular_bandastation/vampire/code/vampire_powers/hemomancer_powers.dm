@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/vampire_vamp_claws
-	name = "Vampiric Claws"
-	desc = "You channel blood magics to forge deadly vampiric claws that leech blood and strike rapidly. Cannot be used if you are holding something that cannot be dropped."
-	gain_desc = "You have gained the ability to forge your hands into vampiric claws."
+	name = "Вампирские когти"
+	desc = "Направьте магию крови, чтобы выковать смертоносные вампирские когти, высасывающие кровь и быстро наносящие удары. Нельзя использовать, если вы держите непередаваемый предмет."
+	gain_desc = "Вы обрели способность превращать руки в вампирские когти."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_claws"
 	cooldown_time = 30 SECONDS
@@ -25,16 +25,16 @@
 	. = ..()
 	var/mob/living/carbon/user = owner
 	if(user.get_num_held_items())
-		to_chat(user, span_notice("You drop what was in your hands as large blades spring from your fingers!"))
+		to_chat(user, span_notice("Вы роняете то, что держали: из ваших пальцев вырастают большие клинки!"))
 		user.drop_all_held_items()
 	else
-		to_chat(user, span_notice("Large blades of blood spring from your fingers!"))
+		to_chat(user, span_notice("Из ваших пальцев вырастают большие кровавые клинки!"))
 	var/obj/item/vamp_claws/claws = new(get_turf(user))
 	user.put_in_hands(claws)
 
 /obj/item/vamp_claws
-	name = "vampiric claws"
-	desc = "A pair of eldritch claws made of living blood."
+	name = "вампирские когти"
+	desc = "Пара потусторонних когтей из живой крови."
 	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
 	icon_state = "vamp_claws"
 	w_class = WEIGHT_CLASS_BULKY
@@ -43,8 +43,8 @@
 	armour_penetration = 20
 	sharpness = SHARP_EDGED
 	hitsound = 'modular_bandastation/vampire/sound/weapons/bladeslice.ogg'
-	attack_verb_continuous = list("slashes", "stabs", "slices", "claws")
-	attack_verb_simple = list("slash", "stab", "slice", "claw")
+	attack_verb_continuous = list("рубит", "протыкает", "рассекает", "царапает")
+	attack_verb_simple = list("рубануть", "проткнуть", "рассечь", "царапнуть")
 	var/durability = 15
 	var/blood_drain_amount = 15
 	var/blood_absorbed_amount = 5
@@ -64,7 +64,7 @@
 		return
 	var/mob/living/carbon/carbon_target = target
 	if(isalien(carbon_target) && !xenomorph_acid_boosted && carbon_target.ckey && carbon_target.stat != DEAD)
-		to_chat(user, span_warning("As [carbon_target] bleeds acid, you mix it into your claws!"))
+		to_chat(user, span_warning("Когда [carbon_target] истекает кислотой, вы добавляете её в свои когти!"))
 		xenomorph_acid_boosted = TRUE
 		durability += 5
 		blood_drain_amount *= 1.5
@@ -79,7 +79,7 @@
 		user.heal_overall_damage(4 * heal_boost, 4 * heal_boost)
 		user.AdjustKnockdown(-1 SECONDS * heal_boost)
 	if(!vampire.get_ability(/datum/vampire_passive/blood_spill) && !--durability)
-		to_chat(user, span_warning("Your claws shatter!"))
+		to_chat(user, span_warning("Ваши когти разбиваются!"))
 		qdel(src)
 
 /obj/item/vamp_claws/melee_attack_chain(mob/user, atom/target, params)
@@ -91,13 +91,13 @@
 	. = ..()
 	if(.)
 		return
-	to_chat(user, span_notice("You dispel your claws!"))
+	to_chat(user, span_notice("Вы развеиваете свои когти!"))
 	qdel(src)
 
 /datum/action/cooldown/spell/pointed/vampire_blood_tendrils
-	name = "Blood Tendrils"
-	desc = "You summon a small field of horrific blood tendrils after a delay to ensnare people in an area, slowing them down."
-	gain_desc = "You have gained the ability to summon blood tendrils to slow people down in an area that you target."
+	name = "Кровавые щупальца"
+	desc = "После задержки призовите небольшое поле ужасных кровавых щупалец, которое опутает и замедлит людей в области."
+	gain_desc = "Вы обрели способность призывать кровавые щупальца, замедляющие людей в выбранной области."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_tendrils"
 	cooldown_time = 30 SECONDS
@@ -119,7 +119,7 @@
 	for(var/mob/living/target in range(area_of_affect, target_turf))
 		if(target.affects_vampire(user))
 			target.set_timed_status_effect(6 SECONDS, /datum/status_effect/staggered)
-			target.visible_message(span_warning("[target] gets ensnared in blood tendrils!"))
+			target.visible_message(span_warning("[target] опутан кровавыми щупальцами!"))
 			new /obj/effect/temp_visual/blood_tendril/long(get_turf(target))
 
 /obj/effect/temp_visual/blood_tendril
@@ -129,9 +129,9 @@
 	duration = 2 SECONDS
 
 /datum/action/cooldown/spell/pointed/vampire_blood_barrier
-	name = "Blood Barrier"
-	desc = "Select two points within 3 tiles of each other and make a barrier between them."
-	gain_desc = "You have gained the ability to summon a crystalline wall of blood between two points. The barrier is easily destructible, however you can walk freely through it."
+	name = "Кровавый барьер"
+	desc = "Выберите две точки на расстоянии не более трёх клеток друг от друга, чтобы создать между ними барьер."
+	gain_desc = "Вы обрели способность призывать между двумя точками кристаллическую стену из крови. Барьер легко разрушить, но вы можете свободно проходить сквозь него."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_barrier"
 	cooldown_time = 1 MINUTES
@@ -150,12 +150,12 @@
 	. = ..()
 	var/turf/target_turf = get_turf(cast_on)
 	if(target_turf == start_turf)
-		to_chat(owner, span_notice("You deselect the targeted turf."))
+		to_chat(owner, span_notice("Вы отменяете выбор целевой клетки."))
 		start_turf = null
 		return
 	if(!start_turf)
 		start_turf = target_turf
-		to_chat(owner, span_notice("Select the other end of your blood barrier."))
+		to_chat(owner, span_notice("Выберите другой конец кровавого барьера."))
 		return
 	var/wall_count = 0
 	for(var/turf/turf as anything in get_line(target_turf, start_turf))
@@ -167,8 +167,8 @@
 	StartCooldown()
 
 /obj/structure/blood_barrier
-	name = "blood barrier"
-	desc = "A grotesque structure of crystallized blood. It's slowly melting away."
+	name = "кровавый барьер"
+	desc = "Гротескное сооружение из кристаллизованной крови. Оно медленно тает."
 	max_integrity = 100
 	icon_state = "blood_barrier"
 	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
@@ -195,9 +195,9 @@
 	return vampire && is_type_in_list(vampire.subclass, list(SUBCLASS_HEMOMANCER, SUBCLASS_ANCIENT))
 
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool
-	name = "Sanguine Pool"
-	desc = "You shift your form into a pool of blood, making you invulnerable and able to move through anything that's not a wall or space. You leave a trail of blood behind you when you do this."
-	gain_desc = "You have gained the ability to shift into a pool of blood, allowing you to evade pursuers with great mobility."
+	name = "Кровавая лужа"
+	desc = "Превратитесь в лужу крови, став неуязвимым и способным проходить через всё, кроме стен и космоса. При движении вы оставляете кровавый след."
+	gain_desc = "Вы обрели способность превращаться в лужу крови, чтобы с высокой мобильностью уходить от преследователей."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_pool"
 	cooldown_time = 30 SECONDS
@@ -218,9 +218,9 @@
 		new /obj/effect/decal/cleanable/blood(old_turf)
 
 /datum/action/cooldown/spell/vampire_predator_senses
-	name = "Predator Senses"
-	desc = "Hunt down your prey, there's nowhere to hide..."
-	gain_desc = "Your senses are heightened, nobody can hide from you now."
+	name = "Чувства хищника"
+	desc = "Выследите добычу — ей негде спрятаться..."
+	gain_desc = "Ваши чувства обострились: теперь от вас никто не скроется."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "predator_sense"
 	cooldown_time = 20 SECONDS
@@ -237,21 +237,21 @@
 		if(target != user && target.mind && target.z == user.z)
 			prey[target.real_name] = target
 	if(!length(prey))
-		to_chat(user, span_warning("There is no prey to be hunted here."))
+		to_chat(user, span_warning("Здесь нет добычи для охоты."))
 		return
-	var/target_name = tgui_input_list(user, "Person to Locate", "Blood Stench", prey)
+	var/target_name = tgui_input_list(user, "Кого выследить", "Запах крови", prey)
 	if(!target_name)
 		return
 	var/mob/living/carbon/human/target = prey[target_name]
-	var/message = "[target_name] is in [get_area(target)], [dir2text(get_dir(user, target))] from you."
+	var/message = "[target_name] находится в [get_area(target)], [dir2text(get_dir(user, target))] от вас."
 	if((target.maxHealth - target.health >= 40) || target.get_bleed_rate())
-		message += " They are wounded."
+		message += " Цель ранена."
 	to_chat(user, span_notice(message))
 
 /datum/action/cooldown/spell/aoe/vampire_blood_eruption
-	name = "Blood Eruption"
-	desc = "Every pool of blood in 4 tiles erupts with a spike of living blood, damaging anyone stood on it."
-	gain_desc = "You have gained the ability to weaponize pools of blood to damage those stood on them."
+	name = "Кровавое извержение"
+	desc = "Из каждой лужи крови в радиусе четырёх клеток вырывается шип из живой крови, ранящий стоящих на ней."
+	gain_desc = "Вы обрели способность превращать лужи крови в оружие против стоящих на них."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_spikes"
 	cooldown_time = 200 SECONDS
@@ -274,7 +274,7 @@
 	spike.color = blood.color
 	playsound(target, 'modular_bandastation/vampire/sound/misc/demon_attack1.ogg', 50, TRUE)
 	target.apply_damage(50, BRUTE, BODY_ZONE_CHEST)
-	target.visible_message(span_warning("[target] gets impaled by a spike of living blood!"))
+	target.visible_message(span_warning("[target] пронзён шипом из живой крови!"))
 
 /obj/effect/temp_visual/blood_spike
 	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
@@ -282,9 +282,9 @@
 	duration = 0.3 SECONDS
 
 /datum/action/cooldown/spell/vampire_blood_spill
-	name = "The Blood Bringer's Rite"
-	desc = "When toggled, everyone around you begins to bleed profusely. You will drain their blood and rejuvenate yourself with it."
-	gain_desc = "You have gained the ability to rip the very life force out of people and absorb it, healing you."
+	name = "Ритуал несущего кровь"
+	desc = "При включении все вокруг начинают обильно истекать кровью. Вы высасываете её и омолаживаете себя."
+	gain_desc = "Вы обрели способность вырывать из людей саму жизненную силу и поглощать её, исцеляясь."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_bringers_rite"
 	cooldown_time = 2 SECONDS

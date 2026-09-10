@@ -1,11 +1,11 @@
 /datum/antagonist/vampire
-	name = "\proper Vampire"
-	roundend_category = "Vampires"
-	antagpanel_category = "Vampire"
+	name = "\proper Вампир"
+	roundend_category = "Вампиры"
+	antagpanel_category = "Вампир"
 	pref_flag = ROLE_VAMPIRE
 	antag_moodlet = /datum/mood_event/focused
 	hijack_speed = 0.5
-	suicide_cry = "I DIE FOR THE NIGHT!"
+	suicide_cry = "Я УМИРАЮ РАДИ НОЧИ!"
 	preview_outfit = /datum/outfit/butler
 	stinger_sound = 'sound/music/antag/heretic/heretic_gain.ogg'
 	antag_flags = parent_type::antag_flags | ANTAG_OBSERVER_VISIBLE_PANEL
@@ -66,15 +66,15 @@
 	nullified = clamp(nullified + extra, base, VAMPIRE_NULLIFICATION_CAP)
 
 /datum/antagonist/vampire/antag_panel_data()
-	return "Total Blood: [bloodtotal] | Usable Blood: [bloodusable]"
+	return "Всего крови: [bloodtotal] | Доступно крови: [bloodusable]"
 
 /datum/antagonist/vampire/get_admin_commands()
 	. = ..()
-	.["Set Total Blood"] = CALLBACK(src, PROC_REF(admin_set_total_blood))
-	.["Set Usable Blood"] = CALLBACK(src, PROC_REF(admin_set_usable_blood))
+	.["Установить общее количество крови"] = CALLBACK(src, PROC_REF(admin_set_total_blood))
+	.["Установить доступную кровь"] = CALLBACK(src, PROC_REF(admin_set_usable_blood))
 
 /datum/antagonist/vampire/proc/admin_set_total_blood(mob/admin)
-	var/new_total = tgui_input_number(admin, "Set the vampire's lifetime blood total.", "Set Total Blood", default = bloodtotal, min_value = 0)
+	var/new_total = tgui_input_number(admin, "Установите общее количество крови, выпитой вампиром за жизнь.", "Установить общее количество крови", default = bloodtotal, min_value = 0)
 	if(isnull(new_total) || QDELETED(src))
 		return
 	var/old_total = bloodtotal
@@ -86,7 +86,7 @@
 	log_admin("[key_name(admin)] set [key_name(owner)]'s total vampire blood from [old_total] to [bloodtotal].")
 
 /datum/antagonist/vampire/proc/admin_set_usable_blood(mob/admin)
-	var/new_usable = tgui_input_number(admin, "Set the vampire's currently usable blood.", "Set Usable Blood", default = bloodusable, max_value = bloodtotal, min_value = 0)
+	var/new_usable = tgui_input_number(admin, "Установите текущее количество доступной вампиру крови.", "Установить доступную кровь", default = bloodusable, max_value = bloodtotal, min_value = 0)
 	if(isnull(new_usable) || QDELETED(src))
 		return
 	var/old_usable = bloodusable
@@ -192,7 +192,7 @@
 		bonus_force = nullrod.sanctify_force
 
 	if(!get_ability(/datum/vampire_passive/full))
-		to_chat(owner.current, span_warning("[source]'s power interferes with your own!"))
+		to_chat(owner.current, span_warning("Сила [source] мешает вашим собственным силам!"))
 		adjust_nullification(30 + bonus_force, 15 + bonus_force)
 
 /// Fire consumes blood while it can still harm the vampire, matching the fire handler's protection threshold.
@@ -216,22 +216,22 @@
 	var/mob/living/caster = owner.current
 
 	if(caster.is_mouth_covered())
-		to_chat(caster, span_warning("Your mask or muzzle prevents you from biting [target_human]!"))
+		to_chat(caster, span_warning("Ваша маска или намордник не позволяют укусить [target_human]!"))
 		draining = null
 		return
 
 	log_combat(caster, target_human, "bitten & drained of blood (vampire)")
 	caster.visible_message(
-		span_danger("[caster] grabs [target_human]'s neck harshly and sinks in [caster.p_their()] fangs!"),
-		span_danger("You sink your fangs into [target_human] and begin to drain [target_human.p_their()] blood."),
-		span_notice("You hear a soft puncture and a wet sucking noise."),
+		span_danger("[caster] грубо хватает [target_human] за шею и вонзает [caster.p_their()] клыки!"),
+		span_danger("Вы вонзаете клыки в [target_human] и начинаете высасывать [target_human.p_their()] кровь."),
+		span_notice("Вы слышите тихий прокол и влажный чавкающий звук."),
 	)
 
 	while(do_after(caster, suck_rate, target_human, cog_icon = null))
 		caster.do_attack_animation(target_human, ATTACK_EFFECT_BITE)
 		if(unique_suck_id in drained_humans)
 			if(drained_humans[unique_suck_id] >= BLOOD_DRAIN_LIMIT)
-				to_chat(caster, span_warning("You have drained most of the life force from [target_human]'s blood, and will get no more usable blood!"))
+				to_chat(caster, span_warning("Вы выпили из крови [target_human] почти всю жизненную силу и больше не получите доступной крови!"))
 				target_human.blood_volume = max(target_human.blood_volume - 25, 0)
 				caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + 5))
 				continue
@@ -240,28 +240,28 @@
 			if(target_human.ckey || target_human.get_ghost(FALSE))
 				blood = min(20, target_human.blood_volume)
 				adjust_blood(target_human, blood * BLOOD_GAINED_MODIFIER)
-				to_chat(caster, span_notice("<b>You have accumulated [bloodtotal] unit\s of blood, and have [bloodusable] left to use.</b>"))
+				to_chat(caster, span_notice("<b>Вы накопили [bloodtotal] ед. крови; для использования осталось [bloodusable].</b>"))
 
 		target_human.blood_volume = max(target_human.blood_volume - 25, 0)
 
 		if(target_human.blood_volume)
 			if(target_human.blood_volume <= BLOOD_VOLUME_BAD && blood_volume_warning > BLOOD_VOLUME_BAD)
-				to_chat(caster, span_danger("Your victim's blood volume is dangerously low."))
+				to_chat(caster, span_danger("Объём крови вашей жертвы опасно низок."))
 			else if(target_human.blood_volume <= BLOOD_VOLUME_OKAY && blood_volume_warning > BLOOD_VOLUME_OKAY)
-				to_chat(caster, span_warning("Your victim's blood is at an unsafe level."))
+				to_chat(caster, span_warning("У вашей жертвы небезопасно мало крови."))
 			blood_volume_warning = target_human.blood_volume
 		else
-			to_chat(caster, span_warning("You have bled your victim dry!"))
+			to_chat(caster, span_warning("Вы обескровили свою жертву!"))
 			break
 
 		if(!target_human.ckey && !target_human.get_ghost(FALSE))
-			to_chat(caster, span_notice("<b>Feeding on [target_human] reduces your thirst, but you get no usable blood from them.</b>"))
+			to_chat(caster, span_notice("<b>Питание кровью [target_human] утоляет ваш голод, но не даёт доступной крови.</b>"))
 			caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + 5))
 		else
 			caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + (blood / 2)))
 
 	draining = null
-	to_chat(caster, span_notice("You stop draining [target_human.name] of blood."))
+	to_chat(caster, span_notice("Вы прекращаете высасывать кровь из [target_human.name]."))
 
 #undef BLOOD_GAINED_MODIFIER
 
@@ -312,11 +312,11 @@
 		return
 
 	if(bloodusable >= 10)
-		to_chat(owner.current, span_userdanger("The starlight saps your strength, you should get out of the starlight!"))
+		to_chat(owner.current, span_userdanger("Свет звёзд высасывает ваши силы — покиньте его!"))
 		subtract_usable_blood(10)
 		vamp_burn(10)
 	else
-		to_chat(owner.current, span_userdanger("Your body is turning to ash, get out of the starlight NOW!"))
+		to_chat(owner.current, span_userdanger("Ваше тело превращается в пепел — НЕМЕДЛЕННО уйдите от света звёзд!"))
 		owner.current.apply_status_effect(/datum/status_effect/genetic_damage, 100)
 		vamp_burn(85)
 		if(owner.current.health <= HEALTH_THRESHOLD_DEAD)
@@ -462,16 +462,16 @@
 	if(prob(burn_chance) && owner.current.health >= 50)
 		switch(owner.current.health)
 			if(75 to 100)
-				to_chat(owner.current, span_warning("Your skin flakes away..."))
+				to_chat(owner.current, span_warning("Ваша кожа отслаивается..."))
 			if(50 to 75)
-				to_chat(owner.current, span_warning("Your skin sizzles!"))
+				to_chat(owner.current, span_warning("Ваша кожа шипит!"))
 		owner.current.adjust_fire_loss(3)
 	else if(owner.current.health < 50)
 		if(!owner.current.on_fire)
-			to_chat(owner.current, span_danger("Your skin catches fire!"))
+			to_chat(owner.current, span_danger("Ваша кожа загорается!"))
 			INVOKE_ASYNC(owner.current, TYPE_PROC_REF(/mob, emote), "scream")
 		else
-			to_chat(owner.current, span_danger("You continue to burn!"))
+			to_chat(owner.current, span_danger("Вы продолжаете гореть!"))
 		owner.current.adjust_fire_stacks(5)
 		owner.current.ignite_mob()
 
@@ -529,7 +529,7 @@
 /datum/antagonist/vampire/greet()
 	. = ..()
 	SEND_SOUND(owner.current, sound('sound/music/antag/ling_alert.ogg'))
-	to_chat(owner.current, span_danger("You are a Vampire!"))
-	to_chat(owner.current, span_notice("To bite someone, target the head and use harm intent with an empty hand. Drink blood to gain new powers. \
-		You are weak to holy things, starlight, and fire. Don't go into space and avoid the Chaplain, the chapel, and especially Holy Water."))
+	to_chat(owner.current, span_danger("Вы — вампир!"))
+	to_chat(owner.current, span_notice("Чтобы укусить кого-то, выберите голову, включите намерение навредить и используйте пустую руку. Пейте кровь, чтобы получить новые силы. \
+		Вы слабы перед святыми предметами, светом звёзд и огнём. Не выходите в космос и избегайте капеллана, часовни и особенно святой воды."))
 	owner.announce_objectives()

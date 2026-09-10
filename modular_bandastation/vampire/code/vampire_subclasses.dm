@@ -1,6 +1,6 @@
 /datum/vampire_subclass
 	/// The subclass' name. Used for blackbox logging.
-	var/name = "yell at coderbus"
+	var/name = "накричать на кодербуса"
 	/// A list of powers that a vampire unlocks. The value of the list entry is equal to the blood total required for the vampire to unlock it.
 	var/list/standard_powers
 	/// A list of the powers a vampire unlocks when it reaches full power.
@@ -24,7 +24,7 @@
 		vamp.add_ability(thing)
 
 /datum/vampire_subclass/umbrae
-	name = "umbrae"
+	name = "Умбра"
 	standard_powers = list(/datum/action/cooldown/spell/vampire_cloak = 150,
 							/datum/action/cooldown/spell/pointed/vampire_shadow_snare = 250,
 							/datum/action/cooldown/spell/vampire_soul_anchor = 250,
@@ -35,12 +35,12 @@
 								/datum/vampire_passive/vision/full,
 								/datum/action/cooldown/spell/vampire_eternal_darkness,
 								/datum/vampire_passive/vision/xray)
-	unique_objectives = list("Silence the station's telecommunications equipment. Their screams will fall on deaf ears.",
-							"Shroud %DEPARTMENT in darkness.",
-							"Show the station why they fear the dark.")
+	unique_objectives = list("Выведите из строя телекоммуникационное оборудование станции. Их крики никто не услышит.",
+							"Окутайте %DEPARTMENT тьмой.",
+							"Покажите станции, почему боятся темноты.")
 
 /datum/vampire_subclass/hemomancer
-	name = "hemomancer"
+	name = "Гемомант"
 	standard_powers = list(/datum/action/cooldown/spell/vampire_vamp_claws = 150,
 							/datum/action/cooldown/spell/pointed/vampire_blood_tendrils = 250,
 							/datum/action/cooldown/spell/pointed/vampire_blood_barrier = 250,
@@ -50,12 +50,12 @@
 	fully_powered_abilities = list(/datum/vampire_passive/full,
 								/datum/vampire_passive/vision/full,
 							/datum/action/cooldown/spell/vampire_blood_spill)
-	unique_objectives = list("Deprive the medical bay of blood. It's not theirs to use.",
-							"Paint %DEPARTMENT red with the blood of those who would oppose you.",
-							"Show the station that you stand at the peak of strength.")
+	unique_objectives = list("Лишите медотсек крови. Она не для них.",
+							"Окрасьте %DEPARTMENT в красный кровью тех, кто выступит против вас.",
+							"Покажите станции, что вы на вершине силы.")
 
 /datum/vampire_subclass/gargantua
-	name = "gargantua"
+	name = "Гаргантюа"
 	standard_powers = list(/datum/action/cooldown/spell/vampire_blood_swell = 150,
 							/datum/action/cooldown/spell/vampire_blood_rush = 250,
 							/datum/action/cooldown/spell/vampire_stomp = 250,
@@ -67,12 +67,12 @@
 								/datum/vampire_passive/vision/full,
 								/datum/action/cooldown/spell/pointed/vampire_arena)
 	improved_rejuv_healing = TRUE
-	unique_objectives = list("Destroy Research's servers. Technology is no substitute for strength.",
-							"Vandalize %DEPARTMENT. They've grown complacent.",
-							"Show the station that you stand at the peak of strength.") // I think multiple vampires competing would be cool
+	unique_objectives = list("Уничтожьте серверы научного отдела. Технологии не заменят силу.",
+							"Разгромите %DEPARTMENT. Они стали слишком самоуверенными.",
+							"Покажите станции, что вы на вершине силы.") // I think multiple vampires competing would be cool
 
 /datum/vampire_subclass/dantalion
-	name = "dantalion"
+	name = "Данталион"
 	standard_powers = list(/datum/action/cooldown/spell/pointed/vampire_enthrall = 150,
 							/datum/action/cooldown/spell/vampire_commune = 150,
 							/datum/action/cooldown/spell/pointed/vampire_pacify = 250,
@@ -86,12 +86,12 @@
 								/datum/action/cooldown/spell/aoe/vampire_hysteria,
 								/datum/vampire_passive/vision/full,
 								/datum/vampire_passive/increment_thrall_cap/three)
-	unique_objectives = list("Enthrall a member of security. Their potential is wasted in Nanotrasen's ranks.",
-							"Enthrall only members of %DEPARTMENT. Their experience will assist your lord.",
-							"Control the station from the shadows.")
+	unique_objectives = list("Подчините сотрудника службы безопасности. Его потенциал растрачивается в рядах Нанотрейзен.",
+							"Подчиняйте только сотрудников %DEPARTMENT. Их опыт поможет вашему повелителю.",
+							"Управляйте станцией из теней.")
 
 /datum/vampire_subclass/ancient
-	name = "ancient"
+	name = "Древний"
 	standard_powers = list(/datum/action/cooldown/spell/vampire_vamp_claws,
 							/datum/action/cooldown/spell/vampire_blood_swell,
 							/datum/action/cooldown/spell/vampire_cloak,
@@ -128,4 +128,4 @@
 							/datum/vampire_passive/vision/xray)
 	improved_rejuv_healing = TRUE
 	thrall_cap = 150 // can thrall high pop
-	unique_objectives = list("Your ranks grow thin. Ensure your thralls remain in good health.") //idk
+	unique_objectives = list("Ваши ряды редеют. Позаботьтесь, чтобы ваши рабы оставались здоровы.") //idk

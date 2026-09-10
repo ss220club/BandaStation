@@ -2,7 +2,7 @@
 #define FORMAT_VAMPIRE_BLOOD_HUD_MAPTEXT(value) MAPTEXT_SPESSFONT("<span style='color: #ce0202; text-align: center; line-height: 1.9;'>[value]</span>")
 
 /atom/movable/screen/vampire_blood
-	name = "usable blood"
+	name = "доступная кровь"
 	icon_state = "blood_display"
 	screen_loc = ui_blood
 	maptext_x = 1

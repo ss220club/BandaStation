@@ -1,6 +1,6 @@
 /datum/antagonist/vampire_thrall
-	name = "Vampire Thrall"
-	roundend_category = "Vampire Thralls"
+	name = "Вампирский раб"
+	roundend_category = "Вампирские рабы"
 	antag_hud_name = "vampthrall"
 	hud_icon = 'modular_bandastation/vampire/icons/mob/huds/vampire_antag.dmi'
 	ui_name = "AntagInfoBrainwashed"
@@ -27,7 +27,7 @@
 		return
 
 	var/datum/objective/obey_master = new
-	obey_master.explanation_text = "Obey [master.owner.current]'s commands and protect [master.owner.current.p_them()]."
+	obey_master.explanation_text = "Подчиняйтесь приказам [master.owner.current] и защищайте [master.owner.current.p_them()]."
 	obey_master.completed = TRUE
 	objectives = list(obey_master)
 	master.add_thrall(src)
@@ -60,8 +60,8 @@
 	return ..()
 
 /datum/action/cooldown/spell/vampire_thrall_commune
-	name = "Commune"
-	desc = "Speak telepathically with your vampire master and their thralls."
+	name = "Общение"
+	desc = "Телепатически общайтесь со своим вампиром-хозяином и его рабами."
 	button_icon_state = "vamp_communication"
 	cooldown_time = 2 SECONDS
 	spell_requirements = NONE
@@ -71,10 +71,10 @@
 	var/datum/antagonist/vampire_thrall/thrall = owner.mind?.has_antag_datum(/datum/antagonist/vampire_thrall)
 	var/datum/antagonist/vampire/master = thrall?.get_master()
 	if(!master?.owner?.current)
-		to_chat(owner, span_warning("Your connection to your master has faded."))
+		to_chat(owner, span_warning("Ваша связь с хозяином угасла."))
 		return
 
-	var/message = tgui_input_text(owner, "Enter a message for your vampire's network.", "Thrall Commune")
+	var/message = tgui_input_text(owner, "Введите сообщение для сети вашего вампира.", "Общение рабов")
 	if(!message)
 		return
 	var/list/recipients = list(master.owner.current)
@@ -82,5 +82,5 @@
 		if(network_thrall.owner?.current)
 			recipients += network_thrall.owner.current
 	for(var/mob/living/recipient as anything in recipients)
-		to_chat(recipient, span_notice("[owner.real_name] (Thrall): [message]"))
+		to_chat(recipient, span_notice("[owner.real_name] (Раб): [message]"))
 	log_say("(VAMPIRE THRALL) [message]", list("CONNECTION" = owner))

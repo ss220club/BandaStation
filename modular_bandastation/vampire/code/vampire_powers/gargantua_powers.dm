@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/vampire_blood_swell
-	name = "Blood Swell"
-	desc = "You infuse your body with blood, making you highly resistant to stuns and physical damage. However, this makes you unable to fire ranged weapons while it is active."
-	gain_desc = "You have gained the ability to temporarily resist large amounts of stuns and physical damage."
+	name = "Кровавое усиление"
+	desc = "Наполните тело кровью, чтобы сильно сопротивляться оглушению и физическому урону. Пока способность активна, вы не можете стрелять из дальнобойного оружия."
+	gain_desc = "Вы обрели способность временно сопротивляться сильному оглушению и физическому урону."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_swell"
 	cooldown_time = 40 SECONDS
@@ -17,9 +17,9 @@
 		user.apply_status_effect(/datum/status_effect/vampire_blood_swell)
 
 /datum/action/cooldown/spell/vampire_stomp
-	name = "Seismic Stomp"
-	desc = "You slam your foot into the ground sending a powerful shockwave through the station's hull, sending people flying away. Cannot be cast if your legs are restrained by a bola or similar."
-	gain_desc = "You have gained the ability to knock people back using a powerful stomp."
+	name = "Сейсмический топот"
+	desc = "Ударьте ногой о пол, пустив по корпусу станции мощную ударную волну, отбрасывающую людей. Нельзя использовать со связанными болой или подобным предметом ногами."
+	gain_desc = "Вы обрели способность отбрасывать людей мощным топотом."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "seismic_stomp"
 	cooldown_time = 60 SECONDS
@@ -35,7 +35,7 @@
 	var/mob/living/carbon/user = owner
 	if(user.legcuffed)
 		if(feedback)
-			to_chat(user, span_warning("Your legs are restrained!"))
+			to_chat(user, span_warning("Ваши ноги связаны!"))
 		return FALSE
 	return TRUE
 
@@ -75,12 +75,12 @@
 	animate(src, transform = transform_matrix * 8, time = duration, alpha = 0)
 
 /datum/vampire_passive/blood_swell_upgrade
-	gain_desc = "While blood swell is active, all of your melee attacks deal increased damage."
+	gain_desc = "Пока кровавое усиление активно, все ваши атаки в ближнем бою наносят больше урона."
 
 /datum/action/cooldown/spell/vampire_overwhelming_force
-	name = "Overwhelming Force"
-	desc = "Toggle the strength to force open doors you bump into."
-	gain_desc = "You have gained the ability to force open doors at a small blood cost."
+	name = "Подавляющая сила"
+	desc = "Включите силу, чтобы выбивать двери, в которые вы врезаетесь."
+	gain_desc = "Вы обрели способность выбивать двери ценой небольшого количества крови."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "OH_YEAAAAH"
 	cooldown_time = 2 SECONDS
@@ -94,7 +94,7 @@
 	. = ..()
 	var/mob/living/user = owner
 	if(!active)
-		to_chat(user, span_warning("You feel MIGHTY!"))
+		to_chat(user, span_warning("Вы чувствуете НЕВЕРОЯТНУЮ СИЛУ!"))
 		active = TRUE
 		RegisterSignal(user, COMSIG_MOVABLE_BUMP, PROC_REF(force_open_door))
 		user.status_flags &= ~CANPUSH
@@ -115,9 +115,9 @@
 	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/machinery/door, open), BYPASS_DOOR_CHECKS)
 
 /datum/action/cooldown/spell/vampire_blood_rush
-	name = "Blood Rush"
-	desc = "Infuse yourself with blood magic to boost your movement speed and break out of leg restraints."
-	gain_desc = "You have gained the ability to temporarily move at high speeds."
+	name = "Кровавый рывок"
+	desc = "Наполните себя магией крови, чтобы ускориться и освободиться от пут на ногах."
+	gain_desc = "Вы обрели способность временно двигаться с высокой скоростью."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_rush"
 	cooldown_time = 30 SECONDS
@@ -132,7 +132,7 @@
 	var/mob/living/user = owner
 	if(user.IsKnockdown() || user.buckled)
 		if(feedback)
-			to_chat(user, span_warning("You can't use this while incapacitated!"))
+			to_chat(user, span_warning("Нельзя использовать это в беспомощном состоянии!"))
 		return FALSE
 	return TRUE
 
@@ -141,16 +141,16 @@
 	var/mob/living/carbon/human/user = owner
 	if(!istype(user))
 		return
-	to_chat(user, span_notice("You feel a rush of energy!"))
+	to_chat(user, span_notice("Вы чувствуете прилив энергии!"))
 	user.apply_status_effect(/datum/status_effect/vampire_blood_rush)
 	QDEL_NULL(user.legcuffed)
 	user.SetKnockdown(0)
 	user.set_body_position(STANDING_UP)
 
 /datum/action/cooldown/spell/pointed/projectile/vampire_demonic_grasp
-	name = "Demonic Grasp"
-	desc = "Summon a hand of demonic energy, snaring and throwing its target around, based on your intent. Disarm pushes, grab pulls."
-	gain_desc = "You have gained the ability to snare and disrupt people with demonic appendages."
+	name = "Демоническая хватка"
+	desc = "Призовите руку демонической энергии, которая опутает и швырнёт цель согласно вашему намерению: разоружение толкает, захват притягивает."
+	gain_desc = "Вы обрели способность опутывать и сбивать людей с толку демоническими отростками."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "demonic_grasp"
 	cooldown_time = 30 SECONDS
@@ -162,7 +162,7 @@
 	add_vampire_ability(20)
 
 /obj/projectile/magic/demonic_grasp
-	name = "demonic grasp"
+	name = "демоническая хватка"
 	reflectable = FALSE
 	icon_state = null
 
@@ -194,9 +194,9 @@
 	icon_state = "immobilized"
 
 /datum/action/cooldown/spell/pointed/vampire_charge
-	name = "Charge"
-	desc = "You charge at wherever you click on screen, dealing large amounts of damage, stunning targets, and destroying walls and other objects."
-	gain_desc = "You can now charge at a target on screen, dealing massive damage and destroying structures."
+	name = "Таран"
+	desc = "Рваните к точке на экране, нанося большой урон, оглушая цели и разрушая стены и другие объекты."
+	gain_desc = "Теперь вы можете нестись к цели на экране, нанося огромный урон и разрушая постройки."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_charge"
 	cooldown_time = 30 SECONDS
@@ -218,9 +218,9 @@
 
 #define ARENA_SIZE 3
 /datum/action/cooldown/spell/pointed/vampire_arena
-	name = "Desecrated Duel"
-	desc = "You leap towards someone. Upon landing, you conjure an arena, and within it you will heal brute and burn damage, recover from fatigue faster, and be strengthened against lasting damages. Can be recasted to end the spell early."
-	gain_desc = "You can now leap to a target and trap them in a conjured arena."
+	name = "Осквернённая дуэль"
+	desc = "Прыгните к кому-то. При приземлении вы создадите арену, где будете лечить физический урон и ожоги, быстрее восстанавливаться от усталости и лучше сопротивляться длительному урону. Повторное применение завершит заклинание раньше."
+	gain_desc = "Теперь вы можете прыгнуть к цели и запереть её на призванной арене."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "duel"
 	cooldown_time = 30 SECONDS
@@ -268,14 +268,14 @@
 		qdel(wall)
 	all_temp_walls.Cut()
 	user.remove_status_effect(/datum/status_effect/vampire_gladiator)
-	user.visible_message(span_warning("The arena begins to dissipate."))
+	user.visible_message(span_warning("Арена начинает рассеиваться."))
 	StartCooldown()
 
 #undef ARENA_SIZE
 
 /obj/structure/vampire_arena_wall
-	name = "wall of coagulated blood"
-	desc = "A temporary wall of congealed blood."
+	name = "стена из свернувшейся крови"
+	desc = "Временная стена из свернувшейся крови."
 	density = TRUE
 	anchored = TRUE
 	max_integrity = 100

@@ -26,7 +26,7 @@
 		if(chem.data?["deciseconds_metabolized"] + seconds_per_tick * 1 SECONDS * metabolization_ratio >= 1 MINUTES)
 			affected_mob.mind.remove_antag_datum(/datum/antagonist/vampire_thrall)
 			chem.holder?.remove_reagent(chem.type, chem.volume)
-			affected_mob.visible_message(span_userdanger("[affected_mob] recoils, their skin flushes with colour, regaining their sense of control!"))
+			affected_mob.visible_message(span_userdanger("[affected_mob] отшатывается; краски возвращаются на [affected_mob.p_their()] кожу, а вместе с ними — контроль над собой!"))
 			return COMSIG_MOB_STOP_REAGENT_TICK
 
 	var/datum/antagonist/vampire/vampire = affected_mob.mind?.has_antag_datum(/datum/antagonist/vampire)
@@ -52,10 +52,10 @@
 
 	switch(chem.current_cycle)
 		if(1 to 4)
-			to_chat(affected_mob, span_warning("Something sizzles in your veins!"))
+			to_chat(affected_mob, span_warning("Что-то шипит в ваших венах!"))
 			vampire.adjust_nullification(20, 4)
 		if(5 to 12)
-			to_chat(affected_mob, span_danger("You feel an intense burning inside of you!"))
+			to_chat(affected_mob, span_danger("Вы чувствуете сильное жжение внутри!"))
 			affected_mob.adjust_fire_loss(1)
 			affected_mob.adjust_stutter_up_to(2 SECONDS, 20 SECONDS)
 			affected_mob.adjust_jitter_up_to(40 SECONDS, 40 SECONDS)
@@ -64,9 +64,9 @@
 			vampire.adjust_nullification(20, 4)
 		if(13 to INFINITY)
 			affected_mob.visible_message(
-				span_danger("[affected_mob] suddenly bursts into flames!"),
-				span_userdanger("You suddenly ignite in a holy fire!"),
-				span_danger("You hear something suddenly bursting into flames!"),
+				span_danger("[affected_mob] внезапно вспыхивает!"),
+				span_userdanger("Вас внезапно охватывает священное пламя!"),
+				span_danger("Вы слышите, как что-то внезапно вспыхивает!"),
 			)
 			affected_mob.set_fire_stacks(min(affected_mob.fire_stacks + 3, 5))
 			affected_mob.ignite_mob()
@@ -85,10 +85,10 @@
 	if(!vampire || vampire.get_ability(/datum/vampire_passive/full))
 		return
 	if(affected_mob.wear_mask)
-		to_chat(affected_mob, span_warning("Your mask protects you from the holy water!"))
+		to_chat(affected_mob, span_warning("Ваша маска защищает вас от святой воды!"))
 		return
 	if(affected_mob.head)
-		to_chat(affected_mob, span_warning("Your helmet protects you from the holy water!"))
+		to_chat(affected_mob, span_warning("Ваш шлем защищает вас от святой воды!"))
 		return
-	to_chat(affected_mob, span_warning("Something holy interferes with your powers!"))
+	to_chat(affected_mob, span_warning("Что-то святое мешает вашим силам!"))
 	vampire.adjust_nullification(5, 2)
