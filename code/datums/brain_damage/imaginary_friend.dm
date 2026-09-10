@@ -337,22 +337,16 @@
 	log_sayverb_talk(message, message_mods, tag = "imaginary friend", forced_by = forced)
 
 	var/messagepart = generate_messagepart(message, spans, message_mods)
-
 	var/dead_rendered = "[span_name("[name] (Imaginary friend of [owner])")] [messagepart]"
 
 	var/language = message_language || owner.get_selected_language()
-
 	Hear(src, language, message, null, null, null, spans, message_mods)
-
 	var/group = owner.imaginary_group - src
 
 	var/list/actual_hearers = list(src)
 
 	for(var/mob/person in group)
-		// ПРОВЕРКА РАДИУСА: если друг находится на том же Z-уровне и в пределах range
-		if(person.z == z && get_dist(src, person) <= range)
-			person.Hear(src, language, message, null, null, null, spans, message_mods, range)
-			actual_hearers.Add(person)
+		person.Hear(src, language, message, null, null, null, spans, message_mods, range)
 
 	// Speech bubble, who was within range and had runechat turned off
 	var/list/speech_bubble_recipients = list()
@@ -516,22 +510,20 @@
 /mob/eye/imaginary_friend/Move(atom/NewLoc, Dir = 0)
 	if(world.time < move_delay)
 		return FALSE
-	if(Dir)
-		setDir(Dir)
+
+	setDir(Dir)
+
 	if(!hidden && NewLoc)
-		if(NewLoc.density)
-			if(!istype(NewLoc, /obj/structure/railing))
+		if(NewLoc.density && !NewLoc.CanPass(src, NewLoc))
+			return FALSE
+
+		for(var/atom/movable/AM in NewLoc)
+			if(AM == src)
+				continue
+
+			if(AM.density && !AM.CanPass(src, NewLoc))
 				return FALSE
-		for(var/atom/A in NewLoc.contents)
-			if(A.density && A != src)
-				if(istype(A, /obj/structure/railing))
-					continue
-				if(istype(A, /obj/machinery/door))
-					var/obj/machinery/door/D = A
-					if(D.density)
-						return FALSE
-				else
-					return FALSE
+
 	if(get_dist(src, owner) > distance_allowance || (require_los && !can_see(owner, src, distance_allowance)))
 		recall()
 		move_delay = world.time + 10
