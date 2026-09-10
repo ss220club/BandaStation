@@ -38,7 +38,7 @@
 		affected_mob.adjust_jitter_up_to(60 SECONDS, 60 SECONDS)
 		affected_mob.adjust_stamina_loss(5)
 		if(prob(20))
-			affected_mob.emote("scream")
+			INVOKE_ASYNC(affected_mob, TYPE_PROC_REF(/mob, emote), "scream")
 		vampire.adjust_nullification(20, 4)
 		vampire.subtract_usable_blood(3)
 		if(!vampire.bloodusable)
@@ -60,7 +60,7 @@
 			affected_mob.adjust_stutter_up_to(2 SECONDS, 20 SECONDS)
 			affected_mob.adjust_jitter_up_to(40 SECONDS, 40 SECONDS)
 			if(prob(20))
-				affected_mob.emote("scream")
+				INVOKE_ASYNC(affected_mob, TYPE_PROC_REF(/mob, emote), "scream")
 			vampire.adjust_nullification(20, 4)
 		if(13 to INFINITY)
 			affected_mob.visible_message(
@@ -74,7 +74,7 @@
 			affected_mob.adjust_stutter_up_to(2 SECONDS, 20 SECONDS)
 			affected_mob.adjust_jitter_up_to(60 SECONDS, 60 SECONDS)
 			if(prob(40))
-				affected_mob.emote("scream")
+				INVOKE_ASYNC(affected_mob, TYPE_PROC_REF(/mob, emote), "scream")
 			vampire.adjust_nullification(20, 4)
 
 /datum/component/vampire_holywater/proc/on_reagent_exposed(mob/living/carbon/human/affected_mob, datum/reagent/chem, _reac_volume, methods)

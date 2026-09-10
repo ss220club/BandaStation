@@ -472,7 +472,7 @@
 	else if(owner.current.health < 50)
 		if(!owner.current.on_fire)
 			to_chat(owner.current, span_danger("Your skin catches fire!"))
-			owner.current.emote("scream")
+			INVOKE_ASYNC(owner.current, TYPE_PROC_REF(/mob, emote), "scream")
 		else
 			to_chat(owner.current, span_danger("You continue to burn!"))
 		owner.current.adjust_fire_stacks(5)
