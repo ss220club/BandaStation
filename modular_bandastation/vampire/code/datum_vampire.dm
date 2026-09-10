@@ -483,6 +483,7 @@
 	check_vampire_upgrade(TRUE)
 
 /datum/antagonist/vampire/forge_objectives()
+	// TODO: make it more similar to traitor or heretic?
 	objectives = list()
 
 	var/datum/objective/vampire/blood/blood_objective = new

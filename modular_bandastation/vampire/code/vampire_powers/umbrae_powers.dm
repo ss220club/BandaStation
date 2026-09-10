@@ -88,16 +88,25 @@
 
 /datum/action/cooldown/spell/vampire_soul_anchor
 	name = "Soul Anchor"
-	desc = "Create an anchor, then cast again to return to it."
+	desc = "Create an anchor after a delay, then cast again to return to it. If you do not return within two minutes, you fake a recall."
 	button_icon_state = "shadow_anchor"
 	cooldown_time = 3 MINUTES
 	var/obj/structure/shadow_anchor/anchor
 	var/making_anchor = FALSE
-	var/timer
+	var/fake_recall_timer
 
 /datum/action/cooldown/spell/vampire_soul_anchor/New(Target)
 	. = ..()
 	add_vampire_ability(30, FALSE)
+
+/datum/action/cooldown/spell/vampire_soul_anchor/Destroy(force, ...)
+	if(fake_recall_timer)
+		deltimer(fake_recall_timer)
+	QDEL_NULL(anchor)
+	return ..()
+
+/datum/action/cooldown/spell/vampire_soul_anchor/before_cast(atom/cast_on)
+	return ..() | SPELL_NO_IMMEDIATE_COOLDOWN
 
 /datum/action/cooldown/spell/vampire_soul_anchor/cast(atom/cast_on)
 	. = ..()
@@ -106,18 +115,20 @@
 		to_chat(user, span_notice("Your anchor isn't ready yet!"))
 		return
 	if(!anchor)
+		var/turf/anchor_turf = get_turf(user)
 		making_anchor = TRUE
-		if(do_after(user, 5 SECONDS, target = user))
-			anchor = new(get_turf(user))
-			timer = addtimer(CALLBACK(src, PROC_REF(recall), user, TRUE), 2 MINUTES, TIMER_STOPPABLE)
+		if(do_after(user, 5 SECONDS, timed_action_flags = IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_INCAPACITATED|IGNORE_HELD_ITEM, show_progress = FALSE, cog_icon = null) && !QDELETED(src) && !QDELETED(user))
+			anchor = new(anchor_turf)
+			fake_recall_timer = addtimer(CALLBACK(src, PROC_REF(recall), user, TRUE), 2 MINUTES, TIMER_STOPPABLE)
 		making_anchor = FALSE
 		return
 	recall(user)
 
 /datum/action/cooldown/spell/vampire_soul_anchor/proc/recall(mob/living/user, fake = FALSE)
-	if(timer)
-		deltimer(timer)
-		timer = null
+	StartCooldown()
+	if(fake_recall_timer)
+		deltimer(fake_recall_timer)
+		fake_recall_timer = null
 	if(!anchor)
 		return
 	var/turf/start_turf = get_turf(user)
@@ -127,24 +138,31 @@
 		return
 	if(fake)
 		var/mob/living/basic/illusion/escape/decoy = new(end_turf)
-		decoy.full_setup(user, target_mob = user, life = 4 SECONDS, damage = 0)
+		decoy.full_setup(user, life = 10 SECONDS, damage = 0)
+		for(var/mob/living/target in view(7, decoy))
+			if(target != user)
+				decoy.set_target(target)
+				break
+		var/previous_alpha = user.alpha
 		user.alpha = 0
-		addtimer(CALLBACK(src, PROC_REF(restore_visibility), user), 4 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(restore_visibility), user, previous_alpha), 4 SECONDS)
 	else
 		if(!do_teleport(user, end_turf, channel = TELEPORT_CHANNEL_MAGIC))
 			return
 	shadow_to_animation(start_turf, end_turf, user)
 	GetComponent(/datum/component/vampire_ability).deduct_blood(src)
 
-/datum/action/cooldown/spell/vampire_soul_anchor/proc/restore_visibility(mob/living/user)
+/datum/action/cooldown/spell/vampire_soul_anchor/proc/restore_visibility(mob/living/user, previous_alpha)
 	if(!QDELETED(user))
-		user.alpha = initial(user.alpha)
+		user.alpha = previous_alpha
 
 /proc/shadow_to_animation(turf/start_turf, turf/end_turf, mob/user)
 	var/obj/effect/immortality_talisman/effect = new(start_turf)
 	effect.dir = user.dir
-	var/distance = get_dist(start_turf, end_turf)
-	animate(effect, time = distance, alpha = 0, pixel_x = (end_turf.x - start_turf.x) * 32, pixel_y = (end_turf.y - start_turf.y) * 32)
+	var/x_difference = end_turf.x - start_turf.x
+	var/y_difference = end_turf.y - start_turf.y
+	var/distance = sqrt(x_difference ** 2 + y_difference ** 2)
+	animate(effect, time = distance, alpha = 0, pixel_x = x_difference * 32, pixel_y = y_difference * 32)
 	QDEL_IN(effect, distance)
 
 /obj/structure/shadow_anchor
