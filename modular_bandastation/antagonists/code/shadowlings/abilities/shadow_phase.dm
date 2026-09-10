@@ -57,6 +57,13 @@
 	var/light_immunity = FALSE
 	light_max = SHADOWLING_LIGHT_THRESHOLD
 	movespeed = 3
+	density = TRUE
+
+/obj/effect/dummy/phased_mob/shadowling/projectile_hit(obj/projectile/hitting_projectile, def_zone, piercing_hit, blocked)
+    if(jaunter)
+        jaunter.bullet_act(hitting_projectile, def_zone, piercing_hit, blocked)
+        return BULLET_ACT_HIT
+    return BULLET_ACT_FORCE_PIERCE
 
 /obj/effect/dummy/phased_mob/shadowling/check_light_level(atom/location_to_check)
 	if(light_immunity)

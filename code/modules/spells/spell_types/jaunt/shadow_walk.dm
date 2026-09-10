@@ -80,13 +80,13 @@
 		if(!light_time_remaining)
 			light_time_remaining = light_grace_period
 			last_light_second = CEILING(light_time_remaining / 1 SECONDS, 1)
-			to_chat(jaunter, span_warning( "Ваша нематериальность искажается под светом и разрушится через [last_light_second] секунд."))
+			to_chat(jaunter, span_warning("Ваша нематериальность искажается под светом и разрушится через [last_light_second] секунд."))
 		var/current_second = CEILING(light_time_remaining / 1 SECONDS, 1)
 		if(current_second != last_light_second)
 			last_light_second = current_second
-			to_chat(jaunter, span_warning( "Ваша нематериальность искажается под светом и разрушится через [current_second] секунд."))
+			to_chat(jaunter, span_warning("Ваша нематериальность искажается под светом и разрушится через [current_second] секунд."))
 		new /obj/effect/temp_visual/shadow_phase_smoke(T)
-		light_time_remaining -= seconds_per_tick SECONDS
+		light_time_remaining -= seconds_per_tick
 		if(light_time_remaining <= 0)
 			eject_jaunter(TRUE)
 	else
