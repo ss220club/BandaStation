@@ -120,39 +120,39 @@
 	return TRUE
 
 /datum/action/cooldown/shadowling/shadow_phase/proc/exit_phase(mob/living/carbon/human/H, forced_out = FALSE)
-    var/turf/end_turf = get_turf(H)
-    var/obj/effect/dummy/phased_mob/shadowling/P = H.loc
+	var/turf/end_turf = get_turf(H)
+	var/obj/effect/dummy/phased_mob/shadowling/P = H.loc
 
-    if(istype(P))
-        P.eject_jaunter(forced_out)
+	if(istype(P))
+		P.eject_jaunter(forced_out)
 
-        if(end_turf)
-            new /obj/effect/temp_visual/shadow_phase_smoke(end_turf)
+		if(end_turf)
+			new /obj/effect/temp_visual/shadow_phase_smoke(end_turf)
 
-        fade_in(H, 0.3 SECONDS)
-        to_chat(H, span_notice("Вы возвращаетесь в материальность."))
+		fade_in(H, 0.3 SECONDS)
+		to_chat(H, span_notice("Вы возвращаетесь в материальность."))
 
-        for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
-            A.apply_button_overlay()
+		for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
+			A.apply_button_overlay()
 
-        for(var/datum/action/cooldown/shadowling/A in owner.actions)
-            A.build_all_button_icons(UPDATE_BUTTON_STATUS, TRUE)
+		for(var/datum/action/cooldown/shadowling/A in owner.actions)
+			A.build_all_button_icons(UPDATE_BUTTON_STATUS, TRUE)
 
-        return TRUE
+		return TRUE
 
-    if(end_turf)
-        new /obj/effect/temp_visual/shadow_phase_smoke(end_turf)
+	if(end_turf)
+		new /obj/effect/temp_visual/shadow_phase_smoke(end_turf)
 
-    fade_in(H, 0.3 SECONDS)
-    to_chat(H, span_notice("Вы возвращаетесь в материальность."))
+	fade_in(H, 0.3 SECONDS)
+	to_chat(H, span_notice("Вы возвращаетесь в материальность."))
 
-    for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
-        A.apply_button_overlay()
+	for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
+		A.apply_button_overlay()
 
-    for(var/datum/action/cooldown/shadowling/A in owner.actions)
-        A.build_all_button_icons(UPDATE_BUTTON_STATUS, TRUE)
+	for(var/datum/action/cooldown/shadowling/A in owner.actions)
+		A.build_all_button_icons(UPDATE_BUTTON_STATUS, TRUE)
 
-    return TRUE
+	return TRUE
 
 /datum/action/cooldown/shadowling/shadow_phase/proc/materialize_near(mob/living/carbon/human/H, turf/nearby, forced_out = FALSE)
 	if(!istype(H))

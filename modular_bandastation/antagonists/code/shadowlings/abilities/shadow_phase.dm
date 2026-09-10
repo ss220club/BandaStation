@@ -13,29 +13,29 @@
 	var/light_immunity = FALSE
 
 /datum/status_effect/shadow/phase/on_apply()
-    . = ..()
-    owner.add_movespeed_modifier(/datum/movespeed_modifier/shadowling/phase)
-    ADD_TRAIT(owner, TRAIT_UNDENSE, REF(src))
+	. = ..()
+	owner.add_movespeed_modifier(/datum/movespeed_modifier/shadowling/phase)
+	ADD_TRAIT(owner, TRAIT_UNDENSE, REF(src))
 
-    return TRUE
+	return TRUE
 
 /datum/status_effect/shadow/phase/on_remove()
-    . = ..()
-    if(!istype(owner))
-        return
+	. = ..()
+	if(!istype(owner))
+		return
 
-    owner.remove_movespeed_modifier(/datum/movespeed_modifier/shadowling/phase)
-    REMOVE_TRAIT(owner, TRAIT_UNDENSE, REF(src))
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shadowling/phase)
+	REMOVE_TRAIT(owner, TRAIT_UNDENSE, REF(src))
 
-    var/is_inside = FALSE
-    if(istype(owner.loc, /obj/effect/dummy/phased_mob/shadowling))
-        is_inside = TRUE
+	var/is_inside = FALSE
+	if(istype(owner.loc, /obj/effect/dummy/phased_mob/shadowling))
+		is_inside = TRUE
 
-    if(is_inside)
-        var/obj/effect/dummy/phased_mob/shadowling/P = owner.loc
-        P.eject_jaunter(FALSE)
+	if(is_inside)
+		var/obj/effect/dummy/phased_mob/shadowling/P = owner.loc
+		P.eject_jaunter(FALSE)
 
-    animate(owner, alpha = 255, time = 0.3 SECONDS)
+	animate(owner, alpha = 255, time = 0.3 SECONDS)
 
 /datum/status_effect/shadow/phase/tick(seconds_between_ticks)
 	if(!istype(owner))
@@ -60,10 +60,10 @@
 	density = TRUE
 
 /obj/effect/dummy/phased_mob/shadowling/projectile_hit(obj/projectile/hitting_projectile, def_zone, piercing_hit, blocked)
-    if(jaunter)
-        jaunter.bullet_act(hitting_projectile, def_zone, piercing_hit, blocked)
-        return BULLET_ACT_HIT
-    return BULLET_ACT_FORCE_PIERCE
+	if(jaunter)
+		jaunter.bullet_act(hitting_projectile, def_zone, piercing_hit, blocked)
+		return BULLET_ACT_HIT
+	return BULLET_ACT_FORCE_PIERCE
 
 /obj/effect/dummy/phased_mob/shadowling/check_light_level(atom/location_to_check)
 	if(light_immunity)

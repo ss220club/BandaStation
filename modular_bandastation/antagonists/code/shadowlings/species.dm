@@ -148,25 +148,25 @@
 	return B.bodytype == BODYTYPE_ROBOTIC
 
 /mob/living/carbon/human/proc/reset_robotic_limbs()
-    for(var/zone in GLOB.all_body_zones)
-        var/obj/item/bodypart/B = get_bodypart(zone)
-        if(!B)
-            continue
-        if(!is_robotic_bodypart(B))
-            continue
-        reset_to_original_bodypart(zone)
-    var/list/robotic_organs = list()
-    for(var/slot in organs_slot)
-        var/obj/item/organ/O = organs_slot[slot]
-        if(!O)
-            continue
-        if(!IS_ROBOTIC_ORGAN(O))
-            continue
-        robotic_organs += O
-    for(var/obj/item/organ/O in robotic_organs)
-        if(!QDELETED(O))
-            O.mob_remove(src, special = TRUE)
-            QDEL_NULL(O)
+	for(var/zone in GLOB.all_body_zones)
+		var/obj/item/bodypart/B = get_bodypart(zone)
+		if(!B)
+			continue
+		if(!is_robotic_bodypart(B))
+			continue
+		reset_to_original_bodypart(zone)
+	var/list/robotic_organs = list()
+	for(var/slot in organs_slot)
+		var/obj/item/organ/O = organs_slot[slot]
+		if(!O)
+			continue
+		if(!IS_ROBOTIC_ORGAN(O))
+			continue
+		robotic_organs += O
+	for(var/obj/item/organ/O in robotic_organs)
+		if(!QDELETED(O))
+			O.mob_remove(src, special = TRUE)
+			QDEL_NULL(O)
 
 // MARK: Claws
 /obj/item/knife/combat/umbral_claw

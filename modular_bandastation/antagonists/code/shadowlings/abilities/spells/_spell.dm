@@ -20,13 +20,13 @@
 	var/max_req = 100
 
 /datum/action/cooldown/shadowling/IsAvailable(feedback = FALSE)
-    if(istype(owner?.loc, /obj/effect/dummy/phased_mob/shadowling))
-        if(!istype(src, /datum/action/cooldown/shadowling/shadow_phase))
-            if(feedback)
-                owner.balloon_alert(owner, "способность недоступна")
-            return FALSE
+	if(istype(owner?.loc, /obj/effect/dummy/phased_mob/shadowling))
+		if(!istype(src, /datum/action/cooldown/shadowling/shadow_phase))
+			if(feedback)
+				owner.balloon_alert(owner, "способность недоступна")
+			return FALSE
 
-    return ..()
+	return ..()
 
 /datum/action/cooldown/shadowling/proc/can_use(mob/living/carbon/human/H)
 	var/datum/team/shadow_hive/hive = get_shadow_hive()

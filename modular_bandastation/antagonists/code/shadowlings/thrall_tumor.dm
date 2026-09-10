@@ -1,32 +1,32 @@
 //MARK: Operation datum
 /datum/surgery_operation/organ/remove/shadow_thrall_tumor
-    name = "Удаление теневой опухоли"
-    rnd_name = "Нейрохирургия (Удаление опухоли тралла)"
-    desc = "Удаление паразитического узла Роя из мозга пациента."
-    target_type = /obj/item/organ/brain/shadow/tumor_thrall
-    implements = list(/obj/item/flashlight = 0.5)
-    time = 10 SECONDS
-    all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_BONE_SAWED
-    any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
+	name = "Удаление теневой опухоли"
+	rnd_name = "Нейрохирургия (Удаление опухоли тралла)"
+	desc = "Удаление паразитического узла Роя из мозга пациента."
+	target_type = /obj/item/organ/brain/shadow/tumor_thrall
+	implements = list(/obj/item/flashlight = 0.5)
+	time = 10 SECONDS
+	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_BONE_SAWED
+	any_surgery_states_blocked = SURGERY_VESSELS_UNCLAMPED
 
 /datum/surgery_operation/organ/remove/shadow_thrall_tumor/tool_check(obj/item/tool)
-    if(!istype(tool, /obj/item/flashlight))
-        return FALSE
-    var/obj/item/flashlight/flashlight = tool
-    return flashlight.light_on
+	if(!istype(tool, /obj/item/flashlight))
+		return FALSE
+	var/obj/item/flashlight/flashlight = tool
+	return flashlight.light_on
 
 /datum/surgery_operation/organ/remove/shadow_thrall_tumor/state_check(obj/item/organ/brain/shadow/tumor_thrall/organ)
-    if(!istype(organ))
-        return FALSE
-    if(!organ.owner)
-        return FALSE
-    return organ.owner.get_organ_slot(ORGAN_SLOT_BRAIN_THRALL) == organ
+	if(!istype(organ))
+		return FALSE
+	if(!organ.owner)
+		return FALSE
+	return organ.owner.get_organ_slot(ORGAN_SLOT_BRAIN_THRALL) == organ
 
 /datum/surgery_operation/organ/remove/shadow_thrall_tumor/on_success(obj/item/organ/brain/shadow/tumor_thrall/organ, mob/living/surgeon, obj/item/tool, list/operation_args)
-    if(!organ || QDELETED(organ))
-        return
-    organ.mob_remove(organ.owner)
-    qdel(organ)
+	if(!organ || QDELETED(organ))
+		return
+	organ.mob_remove(organ.owner)
+	qdel(organ)
 
 // MARK: Shadows Thrall Organs
 /obj/item/organ/brain/shadow/shadowling
