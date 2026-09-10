@@ -4,6 +4,7 @@
 #include "code/ancient_vampire_outfit.dm"
 #include "code/hunger_icon.dm"
 #include "code/blood_hud.dm"
+#include "code/dynamic_rulesets.dm"
 #include "code/vampire_hud.dm"
 #include "code/vampire_objectives.dm"
 #include "code/datum_vampire.dm"
