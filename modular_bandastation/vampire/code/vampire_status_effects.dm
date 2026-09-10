@@ -127,7 +127,7 @@
 			member.adjust_brute_loss(-healing)
 			if(genetic_damage)
 				genetic_damage.total_damage = max(0, genetic_damage.total_damage - healing)
-	vampire.bloodusable = max(vampire.bloodusable - blood_cost_per_tick, 0)
+	vampire.subtract_usable_blood(blood_cost_per_tick)
 
 /datum/status_effect/vampire_shadow_boxing
 	id = "vampire_shadow_boxing"

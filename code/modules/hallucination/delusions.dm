@@ -70,25 +70,7 @@
 	RegisterSignal(hallucinator, COMSIG_MOB_REQUESTING_SCREENTIP_NAME_FROM_USER, PROC_REF(screentip_name_override))
 	RegisterSignal(hallucinator, COMSIG_LIVING_PERCEIVE_EXAMINE_NAME, PROC_REF(examine_name_override))
 
-	var/list/mob/living/carbon/human/funny_looking_mobs = list()
-
-	// The delusion includes others - all humans
-	if(affects_others)
-		funny_looking_mobs |= GLOB.human_list.Copy()
-
-	// The delusion includes us - we might be in it already, we might not
-	if(affects_us && ishuman(hallucinator))
-		funny_looking_mobs |= hallucinator
-	// The delusion should not inlude us
-	else
-		funny_looking_mobs -= hallucinator
-
-	// The delusion shouldn not include anyone in view of us
-	if(skip_nearby)
-		for(var/mob/living/carbon/human/nearby_human in view(hallucinator))
-			if(nearby_human == hallucinator) // Already handled by affects_us
-				continue
-			funny_looking_mobs -= nearby_human
+	var/list/mob/living/carbon/human/funny_looking_mobs = get_delusion_targets()
 
 	for(var/mob/living/carbon/human/found_human as anything in funny_looking_mobs)
 		var/image/funny_image = make_delusion_image(found_human)
@@ -108,6 +90,28 @@
 	if(duration > 0)
 		QDEL_IN(src, duration)
 	return TRUE
+
+/// Returns the humans whose appearances this delusion replaces.
+/datum/hallucination/delusion/proc/get_delusion_targets()
+	. = list()
+
+	// The delusion includes others - all humans
+	if(affects_others)
+		. |= GLOB.human_list.Copy()
+
+	// The delusion includes us - we might be in it already, we might not
+	if(affects_us && ishuman(hallucinator))
+		. |= hallucinator
+	// The delusion should not include us
+	else
+		. -= hallucinator
+
+	// The delusion shouldn't include anyone in view of us
+	if(skip_nearby)
+		for(var/mob/living/carbon/human/nearby_human in view(hallucinator))
+			if(nearby_human == hallucinator) // Already handled by affects_us
+				continue
+			. -= nearby_human
 
 /datum/hallucination/delusion/proc/make_delusion_image(mob/over_who)
 	var/image/funny_image

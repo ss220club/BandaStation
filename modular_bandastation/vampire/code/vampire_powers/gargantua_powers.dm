@@ -100,10 +100,22 @@
 		user.status_flags &= ~CANPUSH
 		user.move_resist = MOVE_FORCE_STRONG
 	else
-		active = FALSE
-		UnregisterSignal(user, COMSIG_MOVABLE_BUMP)
-		user.move_resist = MOVE_FORCE_DEFAULT
-		user.status_flags |= CANPUSH
+		deactivate()
+
+/datum/action/cooldown/spell/vampire_overwhelming_force/Destroy(force, ...)
+	deactivate()
+	return ..()
+
+/datum/action/cooldown/spell/vampire_overwhelming_force/proc/deactivate()
+	if(!active)
+		return
+	active = FALSE
+	var/mob/living/user = owner
+	if(!user)
+		return
+	UnregisterSignal(user, COMSIG_MOVABLE_BUMP)
+	user.move_resist = MOVE_FORCE_DEFAULT
+	user.status_flags |= CANPUSH
 
 /datum/action/cooldown/spell/vampire_overwhelming_force/proc/force_open_door(datum/source, atom/bumped)
 	SIGNAL_HANDLER
@@ -112,6 +124,10 @@
 	var/obj/machinery/door/door = bumped
 	if(!door.density || door.operating || door.locked || door.allowed(owner))
 		return
+	var/datum/antagonist/vampire/vampire = owner?.mind?.has_antag_datum(/datum/antagonist/vampire)
+	if(!vampire?.bloodusable)
+		return
+	vampire.subtract_usable_blood(5)
 	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/machinery/door, open), BYPASS_DOOR_CHECKS)
 
 /datum/action/cooldown/spell/vampire_blood_rush

@@ -14,15 +14,29 @@
 	. = ..()
 	var/mob/living/carbon/human/user = owner
 	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
-	vampire.iscloaking = !vampire.iscloaking
 	if(istype(user))
-		if(vampire.iscloaking)
+		if(!vampire.iscloaking)
+			vampire.iscloaking = TRUE
 			user.physiology.burn_mod *= 1.1
 			RegisterSignal(user, COMSIG_LIVING_IGNITED, PROC_REF(update_vampire_cloak))
 		else
-			UnregisterSignal(user, COMSIG_LIVING_IGNITED)
-			user.physiology.burn_mod /= 1.1
+			disable_cloak(user)
 	to_chat(user, span_notice("Теперь во тьме вас будут [vampire.iscloaking ? "не замечать" : "видеть"]."))
+
+/datum/action/cooldown/spell/vampire_cloak/Destroy(force, ...)
+	var/mob/living/carbon/human/user = owner
+	var/datum/antagonist/vampire/vampire = user?.mind?.has_antag_datum(/datum/antagonist/vampire)
+	if(vampire?.iscloaking)
+		disable_cloak(user)
+	return ..()
+
+/datum/action/cooldown/spell/vampire_cloak/proc/disable_cloak(mob/living/carbon/human/user)
+	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	if(!vampire?.iscloaking)
+		return
+	vampire.iscloaking = FALSE
+	UnregisterSignal(user, COMSIG_LIVING_IGNITED)
+	user.physiology.burn_mod /= 1.1
 
 /datum/action/cooldown/spell/vampire_cloak/proc/update_vampire_cloak(datum/source)
 	SIGNAL_HANDLER
@@ -317,7 +331,7 @@
 	for(var/obj/projectile/projectile in view(8, owner))
 		if(projectile.armor_flag == ENERGY || projectile.armor_flag == LASER)
 			projectile.damage *= 0.7
-	vampire.bloodusable = max(vampire.bloodusable - 0.25, 0)
+	vampire.subtract_usable_blood(0.25)
 	if(!vampire.bloodusable || owner.stat == DEAD)
 		vampire.remove_ability(src)
 

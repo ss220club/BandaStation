@@ -332,6 +332,6 @@
 		owner.AdjustImmobilized(-2 SECONDS)
 		if(++beam_number >= max_beams)
 			break
-	vampire.bloodusable = max(vampire.bloodusable - 10, 0)
+	vampire.subtract_usable_blood(10)
 	if(!vampire.bloodusable || owner.stat == DEAD)
 		vampire.remove_ability(src)

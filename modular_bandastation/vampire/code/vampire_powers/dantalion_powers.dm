@@ -228,7 +228,26 @@
 /datum/action/cooldown/spell/aoe/vampire_hysteria/cast_on_thing_in_aoe(mob/living/carbon/human/target, atom/caster)
 	target.flash_act(1, TRUE, TRUE)
 	var/list/animal_delusions = list(
-		/datum/hallucination/delusion/preset/monkey,
-		/datum/hallucination/delusion/preset/corgi,
+		/datum/hallucination/delusion/preset/vampire_hysteria/monkey,
+		/datum/hallucination/delusion/preset/vampire_hysteria/corgi,
 	)
-	target.cause_hallucination(pick(animal_delusions), "vampire mass hysteria", duration = 30 SECONDS, affects_us = TRUE, affects_others = TRUE)
+	target.cause_hallucination(pick(animal_delusions), "vampire mass hysteria")
+
+/// A localized delusion used by Mass Hysteria. Each victim sees only the humans around them.
+/datum/hallucination/delusion/preset/vampire_hysteria
+	random_hallucination_weight = 0
+
+/datum/hallucination/delusion/preset/vampire_hysteria/get_delusion_targets()
+	. = list()
+	for(var/mob/living/carbon/human/nearby_human in view(world.view, hallucinator))
+		. += nearby_human
+
+/datum/hallucination/delusion/preset/vampire_hysteria/monkey
+	delusion_icon_file = 'icons/mob/human/human.dmi'
+	delusion_icon_state = "monkey"
+	delusion_name = "monkey"
+
+/datum/hallucination/delusion/preset/vampire_hysteria/corgi
+	delusion_icon_file = 'icons/mob/simple/pets.dmi'
+	delusion_icon_state = "corgi"
+	delusion_name = "corgi"
