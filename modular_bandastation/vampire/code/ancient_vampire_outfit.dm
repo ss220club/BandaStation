@@ -1,5 +1,5 @@
 /// Admin loadout for testing the complete ancient-vampire progression.
-/datum/outfit/admin/ancient_vampire
+/datum/outfit/ancient_vampire
 	name = "Ancient Vampire"
 
 	uniform = /obj/item/clothing/under/suit/red

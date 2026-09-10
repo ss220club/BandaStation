@@ -234,12 +234,19 @@
 	var/list/animal_delusions = list(
 		/datum/hallucination/delusion/preset/vampire_hysteria/monkey,
 		/datum/hallucination/delusion/preset/vampire_hysteria/corgi,
+		/datum/hallucination/delusion/preset/vampire_hysteria/carp,
+		/datum/hallucination/delusion/preset/vampire_hysteria/skeleton,
+		/datum/hallucination/delusion/preset/vampire_hysteria/zombie,
+		/datum/hallucination/delusion/preset/vampire_hysteria/demon,
 	)
 	target.cause_hallucination(pick(animal_delusions), "vampire mass hysteria")
 
 /// A localized delusion used by Mass Hysteria. Each victim sees only the humans around them.
 /datum/hallucination/delusion/preset/vampire_hysteria
 	random_hallucination_weight = 0
+	delusion_icon_file = 'icons/mob/human/human.dmi'
+	delusion_icon_state = "monkey"
+	delusion_name = "monkey"
 
 /datum/hallucination/delusion/preset/vampire_hysteria/get_delusion_targets()
 	. = list()
@@ -255,3 +262,23 @@
 	delusion_icon_file = 'icons/mob/simple/pets.dmi'
 	delusion_icon_state = "corgi"
 	delusion_name = "corgi"
+
+/datum/hallucination/delusion/preset/vampire_hysteria/carp
+	delusion_icon_file = 'icons/mob/simple/carp.dmi'
+	delusion_icon_state = "carp"
+	delusion_name = "carp"
+
+/datum/hallucination/delusion/preset/vampire_hysteria/skeleton
+	delusion_icon_file = 'icons/mob/human/human.dmi'
+	delusion_icon_state = "skeleton"
+	delusion_name = "skeleton"
+
+/datum/hallucination/delusion/preset/vampire_hysteria/zombie
+	delusion_icon_file = 'icons/mob/human/human.dmi'
+	delusion_icon_state = "zombie"
+	delusion_name = "zombie"
+
+/datum/hallucination/delusion/preset/vampire_hysteria/demon
+	delusion_icon_file = 'icons/mob/simple/demon.dmi'
+	delusion_icon_state = "slaughter_demon"
+	delusion_name = "demon"
