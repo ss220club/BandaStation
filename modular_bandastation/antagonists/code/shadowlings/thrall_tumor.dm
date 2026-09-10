@@ -52,6 +52,7 @@
 	to_chat(receiver, span_danger("Леденящий шёпот пронизывает разум... Вы порабощены."))
 
 /obj/item/organ/brain/shadow/tumor_thrall/mob_remove(mob/living/carbon/organ_owner, special = FALSE, movement_flags)
+	. = ..()
     organ_owner?.mind?.remove_antag_datum(/datum/antagonist/shadow_thrall)
     UnregisterSignal(organ_owner, COMSIG_ATOM_EXAMINE)
     if(organ_owner)

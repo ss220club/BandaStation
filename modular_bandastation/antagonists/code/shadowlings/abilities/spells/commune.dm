@@ -10,6 +10,9 @@
 	requires_dark_target = FALSE
 
 /datum/action/cooldown/shadowling/commune/Trigger(mob/clicker, trigger_flags, atom/target)
+	. = ..()
+	if(!.)
+		return
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return FALSE
