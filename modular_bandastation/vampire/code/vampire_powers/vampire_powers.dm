@@ -31,6 +31,7 @@
 	return ..()
 
 /datum/vampire_passive/proc/on_apply(datum/antagonist/vampire/V)
+	to_chat(owner, gain_desc)
 	owner.update_sight() // Life updates conditionally, so vision passives must force an update when granted.
 	return
 
@@ -53,6 +54,7 @@
 	. = ..()
 	var/mob/living/user = owner
 
+	// TODO: wake up from crit?
 	user.SetAllImmobility(0)
 	user.set_stamina_loss(0)
 	user.set_resting(FALSE, instant = TRUE)
