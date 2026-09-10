@@ -191,6 +191,7 @@
 		copied_target.setDir(old_dir)
 		friend_mob.human_icon = final_icon
 		friend_mob.Show()
+		friend_mob.copy_tts_from(copied_target)
 	else
 		friend_mob.setup_friend()
 

@@ -122,6 +122,7 @@
 		copied_target.setDir(old_dir)
 		friend.human_icon = final_icon
 		friend.Show()
+		friend.copy_tts_from(copied_target)
 	else
 		friend.setup_friend()
 
@@ -239,25 +240,29 @@
 	return group_clients
 
 /mob/eye/imaginary_friend/proc/Show()
-	if(!client || !owner) //nobody home
+	if(!owner)
 		return
 
-	var/list/friend_clients = group_clients() - src.client
-	//Remove old image from group
+	var/list/friend_clients = group_clients()
+	if(src.client)
+		friend_clients -= src.client
+
+	// Remove old image from group
 	remove_image_from_clients(current_image, friend_clients)
 
-	//Generate image from the static icon and the current dir
+	// Generate image from the static icon and the current dir
 	current_image = image(human_icon, src, , MOB_LAYER, dir=src.dir)
 	current_image.override = TRUE
 	current_image.name = name
 	if(hidden)
 		current_image.alpha = 150
 
-	//Add new image to owner and friend
+	// Add new image to owner and friend
 	if(!hidden)
 		add_image_to_clients(current_image, friend_clients)
 
-	src.client.images |= current_image
+	if(src.client)
+		src.client.images |= current_image
 
 /mob/eye/imaginary_friend/Destroy()
 	owner.client?.images -= current_image
@@ -272,6 +277,28 @@
 	// BANDASTATION ADD Start - TTS
 	var/message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || raw_message
 	speaker.cast_tts(src, message_to_tts, is_radio = !!radio_freq, tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE), channel_override = radio_freq ? CHANNEL_TTS_RADIO : null, radio_freq = radio_freq)
+
+/mob/eye/imaginary_friend/proc/copy_tts_from(mob/living/copied_target)
+	if(!copied_target)
+		return
+
+	// Получаем TTS-компонент оригинального моба
+	var/datum/component/target_tts = copied_target.GetComponent(/datum/component/tts_component)
+	if(!target_tts)
+		return
+
+	var/datum/component/friend_tts = src.GetComponent(/datum/component/tts_component) || src.AddComponent(/datum/component/tts_component)
+	if(!friend_tts)
+		return
+
+	if("tts_voice" in target_tts.vars)
+		friend_tts.vars["tts_voice"] = target_tts.vars["tts_voice"]
+
+	if("tts_profile" in target_tts.vars)
+		friend_tts.vars["tts_profile"] = target_tts.vars["tts_profile"]
+
+	if("tts_seed" in target_tts.vars)
+		friend_tts.vars["tts_seed"] = target_tts.vars["tts_seed"]
 	// BANDASTATION ADD End - TTS
 
 /mob/eye/imaginary_friend/send_speech(message, range = IMAGINARY_FRIEND_SPEECH_RANGE, obj/source = src, bubble_type = bubble_icon, list/spans = list(), datum/language/message_language = null, list/message_mods = list(), forced = null)
@@ -310,19 +337,29 @@
 	log_sayverb_talk(message, message_mods, tag = "imaginary friend", forced_by = forced)
 
 	var/messagepart = generate_messagepart(message, spans, message_mods)
+
 	var/dead_rendered = "[span_name("[name] (Imaginary friend of [owner])")] [messagepart]"
 
 	var/language = message_language || owner.get_selected_language()
-	Hear(src, language, message, null, null, null, spans, message_mods) // We always hear what we say
-	var/group = owner.imaginary_group - src // The people in our group don't, so we have to exclude ourselves not to hear twice
-	for(var/mob/person in group)
-		person.Hear(src, language, message, null, null, null, spans, message_mods, range)
 
-	// Speech bubble, but only for those who have runechat off
+	Hear(src, language, message, null, null, null, spans, message_mods)
+
+	var/group = owner.imaginary_group - src
+
+	var/list/actual_hearers = list(src)
+
+	for(var/mob/person in group)
+		// ПРОВЕРКА РАДИУСА: если друг находится на том же Z-уровне и в пределах range
+		if(person.z == z && get_dist(src, person) <= range)
+			person.Hear(src, language, message, null, null, null, spans, message_mods, range)
+			actual_hearers.Add(person)
+
+	// Speech bubble, who was within range and had runechat turned off
 	var/list/speech_bubble_recipients = list()
-	for(var/mob/user as anything in (group + src)) // Add ourselves back in
+	for(var/mob/user in actual_hearers)
 		if((safe_read_pref(user.client, /datum/preference/toggle/enable_runechat) || (SSlag_switch.measures[DISABLE_RUNECHAT] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES))))
-			speech_bubble_recipients.Add(user.client)
+			if(user.client)
+				speech_bubble_recipients.Add(user.client)
 
 	var/image/bubble = image('icons/mob/effects/talk.dmi', src, "[bubble_type][say_test(message)]", FLY_LAYER)
 	SET_PLANE_EXPLICIT(bubble, ABOVE_GAME_PLANE, src)
@@ -479,23 +516,22 @@
 /mob/eye/imaginary_friend/Move(atom/NewLoc, Dir = 0)
 	if(world.time < move_delay)
 		return FALSE
-
 	if(Dir)
 		setDir(Dir)
-
 	if(!hidden && NewLoc)
 		if(NewLoc.density)
-			return FALSE
-
+			if(!istype(NewLoc, /obj/structure/railing))
+				return FALSE
 		for(var/atom/A in NewLoc.contents)
 			if(A.density && A != src)
+				if(istype(A, /obj/structure/railing))
+					continue
 				if(istype(A, /obj/machinery/door))
 					var/obj/machinery/door/D = A
 					if(D.density)
 						return FALSE
 				else
 					return FALSE
-
 	if(get_dist(src, owner) > distance_allowance || (require_los && !can_see(owner, src, distance_allowance)))
 		recall()
 		move_delay = world.time + 10
