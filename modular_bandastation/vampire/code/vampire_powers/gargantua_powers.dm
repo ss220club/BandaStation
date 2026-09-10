@@ -1,6 +1,8 @@
 /datum/action/cooldown/spell/vampire_blood_swell
 	name = "Blood Swell"
-	desc = "Infuse your body with blood, making you highly resistant to stuns and physical damage."
+	desc = "You infuse your body with blood, making you highly resistant to stuns and physical damage. However, this makes you unable to fire ranged weapons while it is active."
+	gain_desc = "You have gained the ability to temporarily resist large amounts of stuns and physical damage."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_swell"
 	cooldown_time = 40 SECONDS
 
@@ -16,7 +18,9 @@
 
 /datum/action/cooldown/spell/vampire_stomp
 	name = "Seismic Stomp"
-	desc = "Slam the ground, sending a shockwave through nearby floors and people."
+	desc = "You slam your foot into the ground sending a powerful shockwave through the station's hull, sending people flying away. Cannot be cast if your legs are restrained by a bola or similar."
+	gain_desc = "You have gained the ability to knock people back using a powerful stomp."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "seismic_stomp"
 	cooldown_time = 60 SECONDS
 	var/max_range = 4
@@ -76,6 +80,8 @@
 /datum/action/cooldown/spell/vampire_overwhelming_force
 	name = "Overwhelming Force"
 	desc = "Toggle the strength to force open doors you bump into."
+	gain_desc = "You have gained the ability to force open doors at a small blood cost."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "OH_YEAAAAH"
 	cooldown_time = 2 SECONDS
 	var/active
@@ -106,11 +112,13 @@
 	var/obj/machinery/door/door = bumped
 	if(!door.density || door.operating || door.locked || door.allowed(owner))
 		return
-	door.open(BYPASS_DOOR_CHECKS)
+	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/machinery/door, open), BYPASS_DOOR_CHECKS)
 
 /datum/action/cooldown/spell/vampire_blood_rush
 	name = "Blood Rush"
-	desc = "Boost your movement speed and break free of leg restraints."
+	desc = "Infuse yourself with blood magic to boost your movement speed and break out of leg restraints."
+	gain_desc = "You have gained the ability to temporarily move at high speeds."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_rush"
 	cooldown_time = 30 SECONDS
 
@@ -141,7 +149,9 @@
 
 /datum/action/cooldown/spell/pointed/projectile/vampire_demonic_grasp
 	name = "Demonic Grasp"
-	desc = "Fire a demonic hand which throws its victim according to your intent."
+	desc = "Summon a hand of demonic energy, snaring and throwing its target around, based on your intent. Disarm pushes, grab pulls."
+	gain_desc = "You have gained the ability to snare and disrupt people with demonic appendages."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "demonic_grasp"
 	cooldown_time = 30 SECONDS
 	cast_range = 7
@@ -185,7 +195,9 @@
 
 /datum/action/cooldown/spell/pointed/vampire_charge
 	name = "Charge"
-	desc = "Charge at a target, destroying obstacles and bowling over victims."
+	desc = "You charge at wherever you click on screen, dealing large amounts of damage, stunning targets, and destroying walls and other objects."
+	gain_desc = "You can now charge at a target on screen, dealing massive damage and destroying structures."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_charge"
 	cooldown_time = 30 SECONDS
 	cast_range = 7
@@ -207,7 +219,9 @@
 #define ARENA_SIZE 3
 /datum/action/cooldown/spell/pointed/vampire_arena
 	name = "Desecrated Duel"
-	desc = "Leap to a target and conjure an arena. Recast to end it early."
+	desc = "You leap towards someone. Upon landing, you conjure an arena, and within it you will heal brute and burn damage, recover from fatigue faster, and be strengthened against lasting damages. Can be recasted to end the spell early."
+	gain_desc = "You can now leap to a target and trap them in a conjured arena."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "duel"
 	cooldown_time = 30 SECONDS
 	cast_range = 7

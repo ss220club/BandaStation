@@ -1,6 +1,8 @@
 /datum/action/cooldown/spell/vampire_vamp_claws
 	name = "Vampiric Claws"
-	desc = "Forge deadly claws that drain blood and strike rapidly."
+	desc = "You channel blood magics to forge deadly vampiric claws that leech blood and strike rapidly. Cannot be used if you are holding something that cannot be dropped."
+	gain_desc = "You have gained the ability to forge your hands into vampiric claws."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_claws"
 	cooldown_time = 30 SECONDS
 
@@ -94,7 +96,9 @@
 
 /datum/action/cooldown/spell/pointed/vampire_blood_tendrils
 	name = "Blood Tendrils"
-	desc = "Summon blood tendrils to ensnare people around a targeted turf."
+	desc = "You summon a small field of horrific blood tendrils after a delay to ensnare people in an area, slowing them down."
+	gain_desc = "You have gained the ability to summon blood tendrils to slow people down in an area that you target."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_tendrils"
 	cooldown_time = 30 SECONDS
 	cast_range = 7
@@ -126,7 +130,9 @@
 
 /datum/action/cooldown/spell/pointed/vampire_blood_barrier
 	name = "Blood Barrier"
-	desc = "Select two points to make a short barrier between them."
+	desc = "Select two points within 3 tiles of each other and make a barrier between them."
+	gain_desc = "You have gained the ability to summon a crystalline wall of blood between two points. The barrier is easily destructible, however you can walk freely through it."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_barrier"
 	cooldown_time = 1 MINUTES
 	cast_range = 7
@@ -190,7 +196,9 @@
 
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool
 	name = "Sanguine Pool"
-	desc = "Shift into a pool of blood, becoming briefly invulnerable."
+	desc = "You shift your form into a pool of blood, making you invulnerable and able to move through anything that's not a wall or space. You leave a trail of blood behind you when you do this."
+	gain_desc = "You have gained the ability to shift into a pool of blood, allowing you to evade pursuers with great mobility."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_pool"
 	cooldown_time = 30 SECONDS
 	jaunt_duration = 3 SECONDS
@@ -211,7 +219,9 @@
 
 /datum/action/cooldown/spell/vampire_predator_senses
 	name = "Predator Senses"
-	desc = "Locate a living humanoid on your z-level."
+	desc = "Hunt down your prey, there's nowhere to hide..."
+	gain_desc = "Your senses are heightened, nobody can hide from you now."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "predator_sense"
 	cooldown_time = 20 SECONDS
 
@@ -240,7 +250,9 @@
 
 /datum/action/cooldown/spell/aoe/vampire_blood_eruption
 	name = "Blood Eruption"
-	desc = "Make nearby pools of blood impale anyone standing in them."
+	desc = "Every pool of blood in 4 tiles erupts with a spike of living blood, damaging anyone stood on it."
+	gain_desc = "You have gained the ability to weaponize pools of blood to damage those stood on them."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_spikes"
 	cooldown_time = 200 SECONDS
 	aoe_radius = 4
@@ -271,7 +283,9 @@
 
 /datum/action/cooldown/spell/vampire_blood_spill
 	name = "The Blood Bringer's Rite"
-	desc = "Toggle a rite which bleeds nearby victims to rejuvenate yourself."
+	desc = "When toggled, everyone around you begins to bleed profusely. You will drain their blood and rejuvenate yourself with it."
+	gain_desc = "You have gained the ability to rip the very life force out of people and absorb it, healing you."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_bringers_rite"
 	cooldown_time = 2 SECONDS
 

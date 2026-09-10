@@ -43,6 +43,8 @@
 /datum/action/cooldown/spell
 	name = "Spell"
 	desc = "A wizard spell."
+	/// Text shown when the spell is granted outside its normal action button.
+	var/gain_desc
 	background_icon_state = "bg_spell"
 	button_icon = 'icons/mob/actions/actions_spells.dmi'
 	button_icon_state = "spell_default"
@@ -96,6 +98,10 @@
 	. = ..()
 	if(!owner)
 		return
+
+	// SS220 ADDITION
+	if(gain_desc)
+		to_chat(owner, span_boldnotice(gain_desc))
 
 	// Register some signals so our button's icon stays up to date
 	if(spell_requirements & SPELL_REQUIRES_STATION)

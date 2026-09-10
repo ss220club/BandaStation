@@ -302,10 +302,7 @@
 	for(var/power in powers)
 		if(power in old_powers)
 			continue
-		if(istype(power, /datum/action/cooldown/spell))
-			var/datum/action/cooldown/spell/spell = power
-			to_chat(owner.current, span_boldnotice("Unlocked: [spell.name] - [spell.desc]"))
-		else if(istype(power, /datum/vampire_passive))
+		if(istype(power, /datum/vampire_passive))
 			var/datum/vampire_passive/passive = power
 			to_chat(owner.current, span_boldnotice("[passive.gain_desc]"))
 

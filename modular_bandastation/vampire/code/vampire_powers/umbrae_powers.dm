@@ -1,6 +1,8 @@
 /datum/action/cooldown/spell/vampire_cloak
 	name = "Cloak of Darkness"
-	desc = "Toggle a cloak that hides and hastens you in darkness."
+	desc = "Toggles whether you are currently cloaking yourself in darkness. When in darkness and toggled on, you move at increased speeds."
+	gain_desc = "You have gained the Cloak of Darkness ability, which when toggled makes you nearly invisible and highly agile in the shroud of darkness."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_cloak"
 	cooldown_time = 2 SECONDS
 
@@ -30,7 +32,9 @@
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_snare
 	name = "Shadow Snare"
-	desc = "Summon a trap that blinds and ensnares the first person to cross it."
+	desc = "You summon a trap on the ground. When crossed it will blind the target, extinguish any lights they may have, and ensnare them."
+	gain_desc = "You have gained the ability to summon a trap that will blind, ensnare, and turn off the lights of anyone who crosses it."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "shadow_snare"
 	cooldown_time = 20 SECONDS
 	cast_range = 7
@@ -109,7 +113,9 @@
 
 /datum/action/cooldown/spell/vampire_soul_anchor
 	name = "Soul Anchor"
-	desc = "Create an anchor after a delay, then cast again to return to it. If you do not return within two minutes, you fake a recall."
+	desc = "You summon a dimensional anchor after a delay. Casting again will teleport you back to the anchor. You will fake a recall after 2 minutes."
+	gain_desc = "You have gained the ability to save a point in space and teleport back to it at will. Unless you willingly teleport back to that point within 2 minutes, you will fake a recall."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "shadow_anchor"
 	cooldown_time = 3 MINUTES
 	var/obj/structure/shadow_anchor/anchor
@@ -199,7 +205,9 @@
 
 /datum/action/cooldown/spell/pointed/vampire_dark_passage
 	name = "Dark Passage"
-	desc = "Teleport a short distance to a targeted turf."
+	desc = "You teleport to a targeted turf."
+	gain_desc = "You have gained the ability to blink a short distance towards a targeted turf."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "dark_passage"
 	cooldown_time = 40 SECONDS
 	cast_range = 7
@@ -230,7 +238,9 @@
 
 /datum/action/cooldown/spell/aoe/vampire_extinguish
 	name = "Extinguish"
-	desc = "Extinguish light sources around you."
+	desc = "You extinguish any light source in an area around you."
+	gain_desc = "You have gained the ability to extinguish nearby light sources."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_extinguish"
 	cooldown_time = 20 SECONDS
 	aoe_radius = 7
@@ -248,7 +258,9 @@
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_boxing
 	name = "Shadow Boxing"
-	desc = "Make your shadow beat up a nearby target."
+	desc = "Target someone to have your shadow beat them up. You must stay within 2 tiles for this to work."
+	gain_desc = "You have gained the ability to make your shadow fight for you."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "shadow_boxing"
 	cooldown_time = 30 SECONDS
 	cast_range = 2
@@ -265,7 +277,9 @@
 
 /datum/action/cooldown/spell/vampire_eternal_darkness
 	name = "Eternal Darkness"
-	desc = "Toggle a shroud of darkness that freezes nearby foes."
+	desc = "When toggled, you shroud the area around you in darkness and slowly lower the body temperature of people nearby. Energy projectiles will dim in its radius."
+	gain_desc = "You have gained the ability to shroud the area around you in darkness. Only the strongest of lights can pierce your unholy powers."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "eternal_darkness"
 	cooldown_time = 2 SECONDS
 
@@ -284,7 +298,7 @@
 		vampire.force_add_ability(/datum/vampire_passive/eternal_darkness)
 
 /datum/vampire_passive/eternal_darkness
-	gain_desc = "You surround yourself in unnatural darkness, freezing those around you."
+	gain_desc = "You surround yourself in a unnatural darkness, freezing those around you and dimming energy projectiles."
 
 /datum/vampire_passive/eternal_darkness/New()
 	. = ..()
@@ -308,6 +322,6 @@
 		vampire.remove_ability(src)
 
 /datum/vampire_passive/vision/xray
-	gain_desc = "You can now see through walls."
+	gain_desc = "You can now see through walls, incase you hadn't noticed."
 	lighting_cutoff = LIGHTING_CUTOFF_FULLBRIGHT
 	vision_traits = list(TRAIT_THERMAL_VISION, TRAIT_XRAY_VISION)

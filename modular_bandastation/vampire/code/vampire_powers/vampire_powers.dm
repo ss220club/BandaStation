@@ -37,6 +37,8 @@
 /datum/action/cooldown/spell/vampire_rejuvenate
 	name = "Rejuvenate"
 	desc = "Use reserve blood to enliven your body, removing any incapacitating effects."
+	gain_desc = "You can now use Rejuvenate."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_rejuvinate"
 	cooldown_time = 20 SECONDS
 	check_flags = AB_CHECK_PHASED
@@ -89,6 +91,8 @@
 /datum/action/cooldown/spell/vampire_specialize
 	name = "Choose Specialization"
 	desc = "Choose what sub-class of vampire you want to evolve into."
+	gain_desc = "You can now choose what specialization of vampire you want to evolve into."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	cooldown_time = 2 SECONDS
 	button_icon_state = "select_class"
 
@@ -156,7 +160,9 @@
 /datum/action/cooldown/spell/vampire_glare
 	parent_type = /datum/action/cooldown/spell/aoe
 	name = "Glare"
-	desc = "Your eyes flash, stunning and silencing anyone in front of you. It has lesser effects for those around you. Holds two charges, each of which recovers over 30 seconds."
+	desc = "Your eyes flash, stunning and silencing anyone in front of you. It has lesser effects for those around you."
+	gain_desc = "You can now use Glare."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_glare"
 	check_flags = AB_CHECK_PHASED
 	cooldown_time = 0
@@ -224,7 +230,8 @@
 /datum/action/cooldown/spell/vampire_lair
 	parent_type = /datum/action/cooldown/spell/pointed
 	name = "Lair"
-	desc = "Pick a coffin for yourself, the centrepiece of your new lair."
+	desc = "Выберите себе гроб, который станет центральным элементом вашего нового логова."
+	gain_desc = "You can now start a lair."
 	button_icon = 'icons/obj/storage/crates.dmi'
 	button_icon_state = "coffin"
 	cooldown_time = 2 SECONDS
@@ -403,6 +410,8 @@
 	parent_type = /datum/action/cooldown/spell/aoe
 	name = "Raise Vampires"
 	desc = "Summons deadly vampires from bluespace."
+	gain_desc = "You have gained the ability to Raise Vampires. This extremely powerful AOE ability affects all humans near you. Vampires/thralls are healed. Corpses are raised as vampires. Others are stunned, then brain damaged, then killed."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "revive_thrall"
 	sound = 'sound/effects/empulse.ogg'
 	cooldown_time = 20 MINUTES

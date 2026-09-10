@@ -7,7 +7,9 @@
 
 /datum/action/cooldown/spell/pointed/vampire_enthrall
 	name = "Enthrall"
-	desc = "Bite a nearby humanoid and bind them to your will."
+	desc = "You use a large portion of your power to sway those loyal to none to be loyal to you only."
+	gain_desc = "You have gained the ability to thrall people to your will."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_enthrall"
 	cooldown_time = 1 MINUTES
 	cast_range = 1
@@ -56,6 +58,8 @@
 /datum/action/cooldown/spell/vampire_commune
 	name = "Commune"
 	desc = "Speak telepathically with your thralls."
+	gain_desc = "You have gained the ability to commune with your thralls."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vamp_communication"
 	cooldown_time = 2 SECONDS
 
@@ -78,7 +82,9 @@
 
 /datum/action/cooldown/spell/pointed/vampire_pacify
 	name = "Pacify"
-	desc = "Pacify a humanoid temporarily, preventing them from causing harm."
+	desc = "Pacify a target temporarily, making them unable to cause harm."
+	gain_desc = "You have gained the ability to pacify someone's harmful tendencies, preventing them from doing any physical harm to anyone."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "pacify"
 	cooldown_time = 30 SECONDS
 	cast_range = 7
@@ -98,6 +104,8 @@
 /datum/action/cooldown/spell/pointed/vampire_switch_places
 	name = "Subspace Swap"
 	desc = "Switch positions with a target."
+	gain_desc = "You have gained the ability to switch positions with a targeted mob."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "subspace_swap"
 	cooldown_time = 30 SECONDS
 	cast_range = 7
@@ -123,7 +131,9 @@
 
 /datum/action/cooldown/spell/vampire_decoy
 	name = "Deploy Decoy"
-	desc = "Briefly turn invisible and deploy a decoy illusion."
+	desc = "Briefly turn invisible and deploy a decoy illusion to fool your prey."
+	gain_desc = "You have gained the ability to turn invisible and create decoy illusions."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "decoy"
 	cooldown_time = 40 SECONDS
 
@@ -145,7 +155,9 @@
 
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls
 	name = "Rally Thralls"
-	desc = "Remove incapacitating effects from nearby thralls."
+	desc = "Removes all incapacitating effects from your nearby thralls."
+	gain_desc = "You have gained the ability to remove all incapacitating effects from nearby thralls."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "thralls_up"
 	cooldown_time = 100 SECONDS
 	aoe_radius = 7
@@ -175,7 +187,9 @@
 
 /datum/action/cooldown/spell/vampire_blood_bond
 	name = "Blood Bond"
-	desc = "Create a net that evenly shares damage between you and nearby thralls."
+	desc = "Creates a net between you and your nearby thralls that evenly shares all damage received."
+	gain_desc = "You have gained the ability to share damage between you and your thralls."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_bond"
 	cooldown_time = 2 SECONDS
 
@@ -194,7 +208,9 @@
 
 /datum/action/cooldown/spell/aoe/vampire_hysteria
 	name = "Mass Hysteria"
-	desc = "Blind nearby humanoids before making them perceive each other as animals."
+	desc = "Casts a powerful illusion to make everyone nearby perceive others to looks like random animals after briefly blinding them."
+	gain_desc = "You have gained the ability to make everyone nearby perceive others to looks like random animals after briefly blinding them."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "hysteria"
 	cooldown_time = 180 SECONDS
 	aoe_radius = 8
