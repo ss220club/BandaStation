@@ -148,6 +148,7 @@
 	var/datum/vampire_subclass/new_subclass = new subclass_to_add
 	subclass = new_subclass
 	check_vampire_upgrade(announce)
+	update_specialization_objective()
 	if(log_choice)
 		SSblackbox.record_feedback("nested tally", "vampire_subclasses", 1, list("[new_subclass.name]"))
 

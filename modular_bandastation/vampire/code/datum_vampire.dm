@@ -58,6 +58,10 @@
 		owner.current.alpha = 255
 	return ..()
 
+/datum/antagonist/vampire/on_gain()
+	forge_objectives()
+	return ..()
+
 /datum/antagonist/vampire/proc/adjust_nullification(base, extra)
 	nullified = clamp(nullified + extra, base, VAMPIRE_NULLIFICATION_CAP)
 
@@ -479,12 +483,55 @@
 	check_vampire_upgrade(TRUE)
 
 /datum/antagonist/vampire/forge_objectives()
-	. = ..()
+	objectives = list()
+
+	var/datum/objective/vampire/blood/blood_objective = new
+	blood_objective.owner = owner
+	blood_objective.update_explanation_text()
+	objectives += blood_objective
+
+	var/datum/objective/assassinate/assassinate_objective = new
+	assassinate_objective.owner = owner
+	assassinate_objective.find_target(list(src))
+	objectives += assassinate_objective
+
+	if(prob(5))
+		var/datum/objective/protect/protect_objective = new
+		protect_objective.owner = owner
+		protect_objective.find_target(list(src))
+		objectives += protect_objective
+	else if(prob(50))
+		var/datum/objective/vampire/specialization/specialization_objective = new
+		specialization_objective.owner = owner
+		specialization_objective.update_explanation_text()
+		objectives += specialization_objective
+	else
+		var/datum/objective/steal/steal_objective = new
+		steal_objective.owner = owner
+		steal_objective.find_target(list(src))
+		objectives += steal_objective
+
+	var/datum/objective/vampire/lair/lair_objective = new
+	lair_objective.owner = owner
+	objectives += lair_objective
+
+	var/datum/objective/ending_objective
+	if(prob(20))
+		ending_objective = new /datum/objective/survive
+	else
+		ending_objective = new /datum/objective/escape
+	ending_objective.owner = owner
+	objectives += ending_objective
+
+/datum/antagonist/vampire/proc/update_specialization_objective()
+	for(var/datum/objective/vampire/specialization/specialization_objective as anything in objectives)
+		specialization_objective.update_explanation_text()
+	owner?.announce_objectives()
 
 /datum/antagonist/vampire/greet()
-	var/list/messages = list()
+	. = ..()
 	SEND_SOUND(owner.current, sound('sound/music/antag/ling_alert.ogg'))
-	messages.Add("[span_danger("You are a Vampire!")]<br>")
-	messages.Add("To bite someone, target the head and use harm intent with an empty hand. Drink blood to gain new powers. \
-		You are weak to holy things, starlight, and fire. Don't go into space and avoid the Chaplain, the chapel, and especially Holy Water.")
-	return messages
+	to_chat(owner.current, span_danger("You are a Vampire!"))
+	to_chat(owner.current, span_notice("To bite someone, target the head and use harm intent with an empty hand. Drink blood to gain new powers. \
+		You are weak to holy things, starlight, and fire. Don't go into space and avoid the Chaplain, the chapel, and especially Holy Water."))
+	owner.announce_objectives()
