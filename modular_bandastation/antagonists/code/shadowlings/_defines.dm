@@ -31,7 +31,6 @@ GLOBAL_VAR_INIT(is_shadowling_roundender_started, FALSE)
 
 #define isshadowling(A) (is_species(A, /datum/species/shadow/shadowling))
 #define isshadowling_ascended(A) (is_species(A, /datum/species/shadow/shadowling/ascended))
-#define GET_BODYPART_COEFFICIENT(X) round(X.len / BODYPARTS_DEFAULT_MAXIMUM , 0.1)
 /// Percent of thralls from crew needed to ascend
 #define SHADOWLING_ASCEND_DEFAULT_PERCENT 25
 /// Base health for ascended Shadowling
