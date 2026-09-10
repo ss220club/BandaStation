@@ -1,23 +1,29 @@
-/obj/item/clothing/head/helmet/space/beret
+/obj/item/clothing/head/beret/centcom
 	name = "\improper CentCom officer's beret"
-	desc = "An armored beret commonly used by special operations officers. Uses advanced force field technology to protect the head from space."
-	icon = 'icons/map_icons/clothing/head/_head.dmi'
-	icon_state = "/obj/item/clothing/head/helmet/space/beret"
+	desc = "A light-armored beret commonly used by special operations officers." // BANDASTATION EDIT: CentCom balance
+	icon = 'icons/map_icons/clothing/head/beret.dmi'
+	icon_state = "/obj/item/clothing/head/beret/centcom"
 	post_init_icon_state = "beret_badge"
 	greyscale_config = /datum/greyscale_config/beret_badge
 	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
 	inhand_icon_state = null
 	greyscale_colors = "#397F3F#FFCE5B"
-	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | SNUG_FIT
+	// clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | SNUG_FIT // BANDASTATION EDIT: CentCom balance
 	flags_inv = /obj/item/clothing/head/beret::flags_inv
 	flags_cover = /obj/item/clothing/head/beret::flags_cover
-	armor_type = /datum/armor/space_beret
-	strip_delay = 13 SECONDS
-	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
+	interaction_flags_click = NEED_DEXTERITY
+	// BANDASTATION EDIT START: CentCom balance
+	// cold_protection = HEAD
+	// min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
+	// heat_protection = HEAD
+	armor_type = /datum/armor/armor_centcom_formal
+	// strip_delay = 13 SECONDS
+	// max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
+	// flash_protect = FLASH_PROTECTION_WELDER
+	// equip_delay_other = 5 SECONDS
+	// BANDASTATION EDIT END: CentCom balance
 	resistance_flags = FIRE_PROOF | ACID_PROOF
-	fishing_modifier = 0
 	hair_mask = /datum/hair_mask/standard_hat_middle
-	visor_dirt = null
 
 /datum/armor/space_beret
 	melee = 80
@@ -32,7 +38,7 @@
 
 /obj/item/clothing/suit/space/officer
 	name = "\improper CentCom officer's coat"
-	desc = "An armored, space-proof coat used in special operations."
+	desc = "A light-armored coat used in special operations." // BANDASTATION EDIT: CentCom balance
 	icon_state = "centcom_coat"
 	icon = 'icons/obj/clothing/suits/jacket.dmi'
 	worn_icon = 'icons/mob/clothing/suits/jacket.dmi'
@@ -42,9 +48,11 @@
 	flags_inv = 0
 	w_class = WEIGHT_CLASS_NORMAL
 	allowed = list(/obj/item/gun, /obj/item/melee/baton, /obj/item/restraints/handcuffs, /obj/item/tank/internals)
-	armor_type = /datum/armor/space_officer
-	strip_delay = 13 SECONDS
-	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
+	// BANDASTATION EDIT START: CentCom balance
+	armor_type = /datum/armor/armor_centcom_formal
+	// strip_delay = 13 SECONDS
+	// max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
+	// BANDASTATION EDIT END: CentCom balance
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	fishing_modifier = 0
 
