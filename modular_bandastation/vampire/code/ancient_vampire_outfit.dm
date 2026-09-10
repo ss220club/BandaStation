@@ -15,7 +15,7 @@
 		/obj/item/clothing/under/color/black = 1,
 	)
 
-/datum/outfit/admin/ancient_vampire/post_equip(mob/living/carbon/human/human, visuals_only = FALSE)
+/datum/outfit/ancient_vampire/post_equip(mob/living/carbon/human/human, visuals_only = FALSE)
 	. = ..()
 	if(visuals_only)
 		return

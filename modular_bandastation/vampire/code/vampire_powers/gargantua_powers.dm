@@ -249,6 +249,11 @@
 	. = ..()
 	add_vampire_ability(150, FALSE)
 
+/datum/action/cooldown/spell/pointed/vampire_arena/Remove(mob/living/removed_from)
+	if(timer)
+		dispel(removed_from)
+	return ..()
+
 /datum/action/cooldown/spell/pointed/vampire_arena/before_cast(atom/cast_on)
 	return ..() | SPELL_NO_IMMEDIATE_COOLDOWN
 
