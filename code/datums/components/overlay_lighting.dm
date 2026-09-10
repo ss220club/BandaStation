@@ -175,9 +175,6 @@
 	for (var/datum/spatial_grid_cell/grid_cell as anything in SSspatial_grid.get_cells_in_range(holder_turf, lumcount_range))
 		GRID_CELL_REMOVE(grid_cell.dynamic_light_sources, src)
 
-/datum/component/overlay_lighting/proc/set_lumcount_range(new_range)
-	lumcount_range = max(0, round(new_range))
-
 // BANDASTATION EDIT: Correct determination of the lighting direction
 /datum/component/overlay_lighting/proc/is_turf_in_directional_light(turf/T)
 	if(!directional)
@@ -217,12 +214,12 @@
 
 /// Populates the affected_turfs lazylist, adding to its contents the effects of being near the light.
 /datum/component/overlay_lighting/proc/register_new_cells()
-	if(!current_holder)
+	if (!current_holder)
 		return
 	var/turf/holder_turf = get_turf(current_holder)
 	if(isnull(holder_turf))
 		return
-	for(var/datum/spatial_grid_cell/grid_cell as anything in SSspatial_grid.get_cells_in_range(holder_turf, lumcount_range))
+	for (var/datum/spatial_grid_cell/grid_cell as anything in SSspatial_grid.get_cells_in_range(holder_turf, lumcount_range))
 		GRID_CELL_ASSOC_SET(grid_cell.dynamic_light_sources, src, lum_power)
 
 /// Clears the old affected cells and populates the new ones.

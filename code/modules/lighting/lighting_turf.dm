@@ -14,7 +14,7 @@
 	if (lighting_object)
 		qdel(lighting_object, force=TRUE) //Shitty fix for lighting objects persisting after death
 
-	new /atom/movable/lighting_object(src)
+	new /atom/movable/lighting_object(null, src)
 
 /// Used to get a scaled lumcount.
 /turf/proc/get_lumcount(minlum = 0, maxlum = 1)
@@ -107,16 +107,16 @@
 		// BANDASTATION EDIT END
 
 		furthest_range = max(furthest_range, light.lumcount_range)
-		if(isnull(light_sources[light.current_holder]))
+		if (isnull(light_sources[light.current_holder]))
 			light_sources[light.current_holder] = light
-		else if(islist(light_sources[light.current_holder]))
+		else if (islist(light_sources[light.current_holder]))
 			light_sources[light.current_holder] |= light
 		else
 			light_sources[light.current_holder] = list(light_sources[light.current_holder], light)
 
 	var/list/assigned_oranges_ears = SSspatial_grid.assign_oranges_ears(light_sources)
 	for(var/mob/oranges_ear/ear in hearers(furthest_range, src))
-		for(var/atom/glowie as anything in ear.references)
+		for (var/atom/glowie as anything in ear.references)
 			. += light_sources[glowie]
 	for(var/mob/oranges_ear/remaining_ear as anything in assigned_oranges_ears)
 		remaining_ear.unassign()
