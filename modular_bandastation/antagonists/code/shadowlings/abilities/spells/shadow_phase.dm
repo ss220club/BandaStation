@@ -1,13 +1,3 @@
-// MARK: Global procedure
-/proc/shadow_phase_start_entry_cooldown(mob/living/carbon/human/H)
-	if(!istype(H))
-		return
-	for(var/datum/action/cooldown/shadowling/shadow_phase/A in H.actions)
-		if(!A.IsAvailable())
-			return
-		A.StartCooldown()
-		return
-
 // MARK: Effects
 /obj/effect/temp_visual/shadow_phase_smoke
 	name = "umbral plume"
@@ -108,45 +98,47 @@
 	addtimer(CALLBACK(src, PROC_REF(finish_enter_phase), H, start), 0.3 SECONDS)
 
 /datum/action/cooldown/shadowling/shadow_phase/proc/finish_enter_phase(mob/living/carbon/human/H, turf/start)
+    var/obj/effect/dummy/phased_mob/shadowling/P = new(start)
+    P.dir = H.dir
 
-	var/obj/effect/dummy/phased_mob/shadowling/P = new(start)
-	P.dir = H.dir
+    P.light_immunity = isshadowling_ascended(owner)
 
-	P.light_immunity = isshadowling_ascended(owner)
+    P.jaunter = H
+    H.forceMove(P)
 
-	P.jaunter = H
-	H.forceMove(P)
+    addtimer(CALLBACK(src, PROC_REF(_auto_exit_if_still_inside), WEAKREF(P)), phase_duration)
 
-	addtimer(CALLBACK(src, PROC_REF(_auto_exit_if_still_inside), WEAKREF(P)), phase_duration)
+    to_chat(H, span_notice("Вы растворяетесь в тени."))
 
-	to_chat(H, span_notice("Вы растворяетесь во тени."))
+    for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
+        A.apply_button_overlay()
 
-	for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
-		A.apply_button_overlay()
-
-	return TRUE
+    return TRUE
 
 /datum/action/cooldown/shadowling/shadow_phase/proc/exit_phase(mob/living/carbon/human/H, forced_out = FALSE)
-	var/turf/end_turf = get_turf(H)
-	var/obj/effect/dummy/phased_mob/shadowling/P = H.loc
+    var/turf/end_turf = get_turf(H)
+    var/obj/effect/dummy/phased_mob/shadowling/P = H.loc
+    if(istype(P))
+        P.eject_jaunter(forced_out)
+        if(end_turf)
+            new /obj/effect/temp_visual/shadow_phase_smoke(end_turf)
+        fade_in(H, 0.3 SECONDS)
+        to_chat(H, span_notice("Вы возвращаетесь в материальность."))
 
-	if(istype(P))
-		P.eject_jaunter(forced_out)
-		if(end_turf)
-			new /obj/effect/temp_visual/shadow_phase_smoke(end_turf)
-		fade_in(H, 0.3 SECONDS)
-		to_chat(H, span_notice("Вы возвращаетесь в материальность."))
-		return TRUE
+        for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
+            A.apply_button_overlay()
+        return TRUE
 
-	if(end_turf)
-		new /obj/effect/temp_visual/shadow_phase_smoke(end_turf)
-	fade_in(H, 0.3 SECONDS)
-	to_chat(H, span_notice("Вы возвращаетесь в материальность."))
+    if(end_turf)
+        new /obj/effect/temp_visual/shadow_phase_smoke(end_turf)
 
-	for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
-		A.apply_button_overlay()
+    fade_in(H, 0.3 SECONDS)
+    to_chat(H, span_notice("Вы возвращаетесь в материальность."))
 
-	return TRUE
+    for(var/datum/action/cooldown/shadowling/shadow_phase/A in owner.actions)
+        A.apply_button_overlay()
+
+    return TRUE
 
 /datum/action/cooldown/shadowling/shadow_phase/proc/materialize_near(mob/living/carbon/human/H, turf/nearby, forced_out = FALSE)
 	if(!istype(H))
