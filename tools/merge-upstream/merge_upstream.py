@@ -280,7 +280,7 @@ def translate_changelog(changelog: typing.Dict[int, list[Change]]):
     for attempt in range(max_attempts):
         try:
             response: ChatCompletion = client.chat.completions.create(
-                model="minimax/minimax-m3:free",
+                model="poolside/laguna-s-2.1:free",
                 extra_headers={
                     "HTTP-Referer": f"https://github.com/{TARGET_REPO}",
                     "X-OpenRouter-Title": TARGET_REPO,
