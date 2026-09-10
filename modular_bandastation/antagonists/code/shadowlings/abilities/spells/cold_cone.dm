@@ -79,7 +79,9 @@
 /datum/action/cooldown/shadowling/cold_wave/DoEffect(mob/living/carbon/human/H, atom/_)
 	var/list/targets = collect_cone_targets(H)
 	if(!length(targets))
-		StartCooldown()
+		play_cold_fx(H)
+		H.balloon_alert(H, "промах")
+		return TRUE
 
 	play_cold_fx(H)
 

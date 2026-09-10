@@ -83,7 +83,7 @@
 		if(dist >= smoke_range)
 			continue
 		for(var/turf/N in current.get_atmos_adjacent_turfs())
-			if(!visited[N])
+			if(isnull(visited[N]))
 				visited[N] = dist + 1
 				queue += N
 

@@ -126,7 +126,7 @@
 		if(T.stat == DEAD)
 			continue
 		count++
-	return count++
+	return count
 
 /datum/team/shadow_hive/proc/count_max_thralls()
 	return max(count_alive_thralls(), last_sync_thrall_count)

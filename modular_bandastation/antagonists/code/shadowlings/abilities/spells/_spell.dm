@@ -153,6 +153,9 @@
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	var/min_d = 999
 	var/mob/living/carbon/human/best = null
+	var/turf/owner_turf = get_turf(owner)
+	if(!owner_turf)
+		return null
 	var/list/candidates = range(search_range, get_turf(owner))
 	for(var/mob/living/carbon/human/candidate in candidates)
 		if(candidate == owner || QDELETED(candidate) || candidate.stat == DEAD)

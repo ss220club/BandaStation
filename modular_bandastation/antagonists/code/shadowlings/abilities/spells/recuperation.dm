@@ -72,9 +72,9 @@
 	if(QDELETED(T) || T.loc != start_loc || get_dist(clicker, T) > 1)
 		stop_beam()
 		detach_cover(T)
-		T.alpha = prev_alpha
+		if(!QDELETED(T))
+			T.alpha = prev_alpha
 		unset_click_ability(clicker, TRUE)
-		return FALSE
 
 	T.shadowling_strip_quirks()
 	T.reset_robotic_limbs()

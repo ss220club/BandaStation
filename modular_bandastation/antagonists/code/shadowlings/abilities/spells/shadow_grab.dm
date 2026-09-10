@@ -56,7 +56,9 @@
 	if(!H.grab(T))
 		return FALSE
 
-	while(H.grab_state < target_grab_level)
+	for(var/i in 1 to 3)
+		if(H.grab_state >= target_grab_level)
+			break
 		if(!H.pulling || H.pulling != T)
 			break
 		if(!T.grippedby(H, TRUE))

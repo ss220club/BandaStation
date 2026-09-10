@@ -121,7 +121,7 @@
 	H.alpha = 0
 	H.drop_all_held_items()
 
-	for(var/i = 1, i <= steps, i++)
+	for(var/i in 1 to steps)
 		if(QDELETED(H) || H.stat == DEAD)
 			detach_cover()
 			cleanup(walls)
@@ -150,13 +150,12 @@
 		else
 			to_chat(H, span_notice("Тьма сгущается, приближая превращение..."))
 
-		if(!do_after(H, step_time, H)) {
+		if(!do_after(H, step_time, H))
 			to_chat(H, span_warning("Вы вырвались из кокона — вылупление прервано."))
 			detach_cover()
 			cleanup(walls)
 			H.alpha = prev_alpha
 			return FALSE
-		}
 
 	if(QDELETED(H))
 		detach_cover()

@@ -111,7 +111,7 @@
 	var/obj/effect/temp_visual/shadowling/ascend_circle/circle = new(start_turf)
 	circle.start_pulse()
 
-	for(var/i = 1, i <= steps, i++)
+	for(var/i in 1 to steps)
 		var/turf/current_turf = get_turf(H)
 		if(!current_turf)
 			_end_levitate(H)

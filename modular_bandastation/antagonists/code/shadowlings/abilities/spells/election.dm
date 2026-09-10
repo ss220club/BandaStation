@@ -53,7 +53,10 @@
 /datum/action/cooldown/shadowling/election/proc/remove_vote_action_from(mob/living/carbon/human/M)
 	if(!istype(M))
 		return
+	var/list/to_remove = list()
 	for(var/datum/action/cooldown/shadowling/election/A in M.actions)
+		to_remove += A
+	for(var/datum/action/cooldown/shadowling/election/A in to_remove)
 		A.Remove(M)
 		qdel(A)
 
