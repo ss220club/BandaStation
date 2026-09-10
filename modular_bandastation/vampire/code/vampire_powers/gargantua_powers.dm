@@ -78,6 +78,7 @@
 	desc = "Toggle the strength to force open doors you bump into."
 	button_icon_state = "OH_YEAAAAH"
 	cooldown_time = 2 SECONDS
+	var/active
 
 /datum/action/cooldown/spell/vampire_overwhelming_force/New(Target)
 	. = ..()
@@ -86,15 +87,26 @@
 /datum/action/cooldown/spell/vampire_overwhelming_force/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
-	if(!HAS_TRAIT_FROM(user, TRAIT_HULK, VAMPIRE_TRAIT))
+	if(!active)
 		to_chat(user, span_warning("You feel MIGHTY!"))
-		ADD_TRAIT(user, TRAIT_HULK, VAMPIRE_TRAIT)
+		active = TRUE
+		RegisterSignal(user, COMSIG_MOVABLE_BUMP, PROC_REF(force_open_door))
 		user.status_flags &= ~CANPUSH
 		user.move_resist = MOVE_FORCE_STRONG
 	else
-		REMOVE_TRAIT(user, TRAIT_HULK, VAMPIRE_TRAIT)
+		active = FALSE
+		UnregisterSignal(user, COMSIG_MOVABLE_BUMP)
 		user.move_resist = MOVE_FORCE_DEFAULT
 		user.status_flags |= CANPUSH
+
+/datum/action/cooldown/spell/vampire_overwhelming_force/proc/force_open_door(datum/source, atom/bumped)
+	SIGNAL_HANDLER
+	if(!istype(bumped, /obj/machinery/door))
+		return
+	var/obj/machinery/door/door = bumped
+	if(!door.density || door.operating || door.locked || door.allowed(owner))
+		return
+	door.open(BYPASS_DOOR_CHECKS)
 
 /datum/action/cooldown/spell/vampire_blood_rush
 	name = "Blood Rush"
@@ -204,10 +216,13 @@
 
 /datum/action/cooldown/spell/pointed/vampire_arena/New(Target)
 	. = ..()
-	add_vampire_ability(150)
+	add_vampire_ability(150, FALSE)
+
+/datum/action/cooldown/spell/pointed/vampire_arena/before_cast(atom/cast_on)
+	return ..() | SPELL_NO_IMMEDIATE_COOLDOWN
 
 /datum/action/cooldown/spell/pointed/vampire_arena/is_valid_target(atom/cast_on)
-	return ..() && isliving(cast_on)
+	return ..() && ishuman(cast_on)
 
 /datum/action/cooldown/spell/pointed/vampire_arena/cast(mob/living/target)
 	. = ..()
@@ -215,6 +230,7 @@
 	if(timer)
 		dispel(user)
 		return
+	GetComponent(/datum/component/vampire_ability).deduct_blood(src)
 	user.forceMove(get_turf(target))
 	playsound(user, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 	new /obj/effect/temp_visual/stomp(get_turf(user))
@@ -223,16 +239,23 @@
 		if(get_dist(turf, get_turf(target)) == ARENA_SIZE)
 			all_temp_walls += new /obj/structure/vampire_arena_wall(turf)
 	timer = addtimer(CALLBACK(src, PROC_REF(dispel), user), 30 SECONDS, TIMER_STOPPABLE)
+	RegisterSignal(user, COMSIG_LIVING_DEATH, PROC_REF(on_owner_death))
+
+/datum/action/cooldown/spell/pointed/vampire_arena/proc/on_owner_death(datum/source)
+	SIGNAL_HANDLER
+	dispel(owner)
 
 /datum/action/cooldown/spell/pointed/vampire_arena/proc/dispel(mob/living/user)
 	if(timer)
 		deltimer(timer)
 		timer = null
+	UnregisterSignal(user, COMSIG_LIVING_DEATH)
 	for(var/obj/structure/vampire_arena_wall/wall as anything in all_temp_walls)
 		qdel(wall)
 	all_temp_walls.Cut()
 	user.remove_status_effect(/datum/status_effect/vampire_gladiator)
 	user.visible_message(span_warning("The arena begins to dissipate."))
+	StartCooldown()
 
 #undef ARENA_SIZE
 

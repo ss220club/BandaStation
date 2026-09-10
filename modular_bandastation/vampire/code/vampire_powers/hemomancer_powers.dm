@@ -177,6 +177,9 @@
 	return ..()
 /obj/structure/blood_barrier/process()
 	take_damage(20, sound_effect = FALSE)
+/obj/structure/blood_barrier/atom_destruction(damage_flag)
+	new /obj/effect/decal/cleanable/blood(loc)
+	return ..()
 /obj/structure/blood_barrier/CanPass(atom/movable/mover, border_dir)
 	..()
 	if(!isliving(mover))
@@ -191,11 +194,20 @@
 	button_icon_state = "blood_pool"
 	cooldown_time = 30 SECONDS
 	jaunt_duration = 3 SECONDS
-	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt
+	jaunt_type = /obj/effect/dummy/phased_mob/vampire_blood_pool
 
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/New(Target)
 	. = ..()
 	add_vampire_ability(50)
+
+/obj/effect/dummy/phased_mob/vampire_blood_pool
+	parent_type = /obj/effect/dummy/phased_mob/spell_jaunt
+
+/obj/effect/dummy/phased_mob/vampire_blood_pool/relaymove(mob/living/user, direction)
+	var/turf/old_turf = get_turf(src)
+	. = ..()
+	if(get_turf(src) != old_turf)
+		new /obj/effect/decal/cleanable/blood(old_turf)
 
 /datum/action/cooldown/spell/vampire_predator_senses
 	name = "Predator Senses"
@@ -222,7 +234,7 @@
 		return
 	var/mob/living/carbon/human/target = prey[target_name]
 	var/message = "[target_name] is in [get_area(target)], [dir2text(get_dir(user, target))] from you."
-	if(target.maxHealth - target.health >= 40)
+	if((target.maxHealth - target.health >= 40) || target.get_bleed_rate())
 		message += " They are wounded."
 	to_chat(user, span_notice(message))
 
@@ -245,7 +257,9 @@
 
 /datum/action/cooldown/spell/aoe/vampire_blood_eruption/cast_on_thing_in_aoe(mob/living/target, atom/caster)
 	var/turf/turf = get_turf(target)
-	new /obj/effect/temp_visual/blood_spike(turf)
+	var/obj/effect/decal/cleanable/blood/blood = locate(/obj/effect/decal/cleanable/blood) in turf
+	var/obj/effect/temp_visual/blood_spike/spike = new(turf)
+	spike.color = blood.color
 	playsound(target, 'modular_bandastation/vampire/sound/misc/demon_attack1.ogg', 50, TRUE)
 	target.apply_damage(50, BRUTE, BODY_ZONE_CHEST)
 	target.visible_message(span_warning("[target] gets impaled by a spike of living blood!"))
@@ -276,12 +290,15 @@
 
 /datum/vampire_passive/blood_spill
 	var/max_beams = 10
+
 /datum/vampire_passive/blood_spill/New()
 	. = ..()
 	START_PROCESSING(SSobj, src)
+
 /datum/vampire_passive/blood_spill/Destroy(force, ...)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
+
 /datum/vampire_passive/blood_spill/process()
 	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
 	if(!vampire)
@@ -296,6 +313,9 @@
 		target.adjust_brute_loss(2)
 		owner.heal_overall_damage(8, 2, TRUE)
 		owner.adjust_stamina_loss(-15)
+		owner.AdjustStun(-2 SECONDS)
+		owner.AdjustKnockdown(-2 SECONDS)
+		owner.AdjustImmobilized(-2 SECONDS)
 		if(++beam_number >= max_beams)
 			break
 	vampire.bloodusable = max(vampire.bloodusable - 10, 0)

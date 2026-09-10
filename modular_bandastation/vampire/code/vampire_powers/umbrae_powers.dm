@@ -86,6 +86,27 @@
 	UnregisterSignal(host_turf, COMSIG_ATOM_ENTERED)
 	return ..()
 
+/obj/effect/vampire_shadow_snare/attack_hand(mob/user)
+	if(iscarbon(user))
+		on_entered(null, user)
+
+/obj/effect/vampire_shadow_snare/attack_tk(mob/user)
+	if(iscarbon(user))
+		to_chat(user, span_userdanger("The snare sends a psychic backlash!"))
+		var/mob/living/carbon/carbon_user = user
+		carbon_user.set_temp_blindness(20 SECONDS)
+
+/obj/effect/vampire_shadow_snare/item_interaction(mob/living/user, obj/item/used, list/modifiers)
+	if(!istype(used, /obj/item/assembly/flash))
+		return ..()
+	var/obj/item/assembly/flash/flash = used
+	if(!flash.try_use_flash(user))
+		return ITEM_INTERACT_SUCCESS
+	user.visible_message(span_danger("[user] points [used] at [src]!"), span_danger("You point [used] at [src]!"))
+	visible_message(span_notice("[src] withers away."))
+	qdel(src)
+	return ITEM_INTERACT_SUCCESS
+
 /datum/action/cooldown/spell/vampire_soul_anchor
 	name = "Soul Anchor"
 	desc = "Create an anchor after a delay, then cast again to return to it. If you do not return within two minutes, you fake a recall."
@@ -264,20 +285,24 @@
 
 /datum/vampire_passive/eternal_darkness
 	gain_desc = "You surround yourself in unnatural darkness, freezing those around you."
+
 /datum/vampire_passive/eternal_darkness/New()
 	. = ..()
 	START_PROCESSING(SSfastprocess, src)
+
 /datum/vampire_passive/eternal_darkness/Destroy(force, ...)
 	owner.set_light(0)
 	STOP_PROCESSING(SSfastprocess, src)
 	return ..()
+
 /datum/vampire_passive/eternal_darkness/process()
 	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
 	for(var/mob/living/target in view(8, owner))
 		if(target.affects_vampire(owner))
 			target.adjust_bodytemperature(-3 * TEMPERATURE_DAMAGE_COEFFICIENT)
 	for(var/obj/projectile/projectile in view(8, owner))
-		projectile.damage *= 0.7
+		if(projectile.armor_flag == ENERGY || projectile.armor_flag == LASER)
+			projectile.damage *= 0.7
 	vampire.bloodusable = max(vampire.bloodusable - 0.25, 0)
 	if(!vampire.bloodusable || owner.stat == DEAD)
 		vampire.remove_ability(src)

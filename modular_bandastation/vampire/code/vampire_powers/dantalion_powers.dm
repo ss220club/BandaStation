@@ -9,7 +9,7 @@
 	name = "Enthrall"
 	desc = "Bite a nearby humanoid and bind them to your will."
 	button_icon_state = "vampire_enthrall"
-	cooldown_time = 30 SECONDS
+	cooldown_time = 1 MINUTES
 	cast_range = 1
 
 /datum/action/cooldown/spell/pointed/vampire_enthrall/New(Target)
@@ -135,7 +135,7 @@
 	. = ..()
 	var/mob/living/user = owner
 	var/mob/living/basic/illusion/escape/decoy = new(get_turf(user))
-	decoy.full_setup(user, target_mob = user, life = 6 SECONDS, damage = 0)
+	decoy.full_setup(user, target_mob = user, life = 20 SECONDS, damage = 0)
 	user.alpha = 0
 	addtimer(CALLBACK(src, PROC_REF(restore_visibility), user), 6 SECONDS)
 
@@ -211,4 +211,8 @@
 
 /datum/action/cooldown/spell/aoe/vampire_hysteria/cast_on_thing_in_aoe(mob/living/carbon/human/target, atom/caster)
 	target.flash_act(1, TRUE, TRUE)
-	target.adjust_hallucinations(10 SECONDS)
+	var/list/animal_delusions = list(
+		/datum/hallucination/delusion/preset/monkey,
+		/datum/hallucination/delusion/preset/corgi,
+	)
+	target.cause_hallucination(pick(animal_delusions), "vampire mass hysteria", duration = 30 SECONDS, affects_us = TRUE, affects_others = TRUE)

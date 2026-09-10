@@ -442,6 +442,10 @@
 	if(target.mind.has_antag_datum(/datum/antagonist/vampire) || target.mind.has_antag_datum(/datum/antagonist/vampire_thrall))
 		target.visible_message(span_notice("[target] looks refreshed!"))
 		target.heal_overall_damage(brute = 60, burn = 60)
+		for(var/obj/item/bodypart/bodypart as anything in target.bodyparts)
+			if(prob(25))
+				for(var/datum/wound/wound as anything in bodypart.wounds)
+					wound.remove_wound()
 		return
 	if(target.stat != DEAD)
 		if(target.IsKnockdown())
@@ -453,6 +457,8 @@
 		return
 	for(var/obj/item/implant/mindshield/mindshield in target.implants)
 		mindshield.removed(target)
+	for(var/obj/item/implant/uplink/traitor_implant in target.implants)
+		traitor_implant.removed(target)
 	target.visible_message(span_warning("[target] gets an eerie red glow in their eyes!"))
 
 	log_combat(user, target, "sired", addition = "(Vampire)")
