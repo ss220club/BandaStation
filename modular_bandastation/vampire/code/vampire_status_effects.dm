@@ -111,7 +111,7 @@
 		members += member
 		total_damage += member.maxHealth - member.health
 		var/datum/status_effect/genetic_damage/genetic_damage = member.has_status_effect(/datum/status_effect/genetic_damage)
-		total_damage += genetic_damage?.total_damage
+		total_damage += genetic_damage?.total_damage || 0
 	if(length(members) <= 1 || !vampire?.bloodusable)
 		qdel(src)
 		return

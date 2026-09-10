@@ -58,7 +58,9 @@
 	user.set_resting(FALSE, instant = TRUE)
 
 	to_chat(user, span_notice("Вы наполняете тело чистой кровью и снимаете все обездвиживающие эффекты."))
-	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	if(!vampire)
+		return
 
 	var/rejuv_bonus = vampire.get_rejuv_bonus()
 	if(rejuv_bonus)
@@ -67,12 +69,15 @@
 /datum/action/cooldown/spell/vampire_rejuvenate/proc/heal(mob/living/user, rejuv_bonus)
 	// TODO: rewrite to something better
 	for(var/i in 1 to 5)
+		if(QDELETED(user) || user.stat == DEAD)
+			return
 		user.adjust_brute_loss(-2 * rejuv_bonus)
 		user.adjust_oxy_loss(-5 * rejuv_bonus)
 		user.adjust_tox_loss(-2 * rejuv_bonus, forced = TRUE)
 		user.adjust_fire_loss(-2 * rejuv_bonus)
-		for(var/datum/reagent/toxin/toxin as anything in user.reagents.reagent_list)
-			user.reagents.remove_reagent(toxin.type, 2 * rejuv_bonus)
+		if(user.reagents)
+			for(var/datum/reagent/toxin/toxin as anything in user.reagents.reagent_list)
+				user.reagents.remove_reagent(toxin.type, 2 * rejuv_bonus)
 		sleep(35)
 
 /datum/antagonist/vampire/proc/get_rejuv_bonus()

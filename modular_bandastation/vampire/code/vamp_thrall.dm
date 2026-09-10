@@ -77,6 +77,10 @@
 	var/message = tgui_input_text(owner, "Введите сообщение для сети вашего вампира.", "Общение рабов")
 	if(!message)
 		return
+	if(QDELETED(src) || QDELETED(owner) || !master?.owner?.current)
+		if(!QDELETED(owner))
+			to_chat(owner, span_warning("Ваша связь с хозяином угасла."))
+		return
 	var/list/recipients = list(master.owner.current)
 	for(var/datum/antagonist/vampire_thrall/network_thrall as anything in master.get_thralls())
 		if(network_thrall.owner?.current)

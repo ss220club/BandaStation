@@ -14,78 +14,78 @@ type Specialization = {
 const specializations: Specialization[] = [
   {
     action: 'hemomancer',
-    name: 'Hemomancer',
-    description: 'Focuses on blood magic and the manipulation of blood around you.',
+    name: 'Гемомант',
+    description: 'Специализируется на магии крови и управлении окружающей кровью.',
     powers: [
-      'Vampiric claws: Unlocked at 150 blood. Summon a robust pair of claws that attack rapidly, drain a target\'s blood, and heal you.',
-      'Blood Barrier: Unlocked at 250 blood. Select two turfs and create a wall between them.',
-      'Blood tendrils: Unlocked at 250 blood. Slow everyone in a targeted 3x3 area after a short delay.',
-      'Sanguine pool: Unlocked at 400 blood. Travel at high speeds for a short duration, leaving blood splatters behind.',
-      'Predator senses: Unlocked at 600 blood. Locate anyone within the same sector as you.',
-      'Blood eruption: Unlocked at 800 blood. Turn nearby blood splatters into spikes that impale anyone standing on them.',
+      'Вампирские когти: Открываются при 150 крови. Призывайте прочные когти, быстро атакующие, высасывающие кровь цели и исцеляющие вас.',
+      'Кровавый барьер: Открывается при 250 крови. Выберите две клетки и создайте между ними стену.',
+      'Кровавые щупальца: Открываются при 250 крови. После короткой задержки замедляют всех в выбранной области 3×3.',
+      'Кровавый бассейн: Открывается при 400 крови. Быстро перемещайтесь, оставляя за собой брызги крови.',
+      'Чувства хищника: Открываются при 600 крови. Находите людей на том же секторе, что и вы.',
+      'Кровавое извержение: Открывается при 800 крови. Превращайте ближайшие лужи крови в шипы, пронзающие стоящих на них.',
     ],
     fullPower: [
-      'The blood bringer\'s rite: Rapidly drain the blood of nearby people to heal yourself and quickly remove incapacitating effects.',
+      'Ритуал несущего кровь: Быстро высасывайте кровь ближайших людей, исцеляясь и снимая обездвиживающие эффекты.',
     ],
   },
   {
     action: 'umbrae',
-    name: 'Umbrae',
-    description: 'Focuses on darkness, stealth, ambushing, and mobility.',
+    name: 'Умбра',
+    description: 'Специализируется на тьме, скрытности, засадах и мобильности.',
     powers: [
-      'Cloak of darkness: Unlocked at 150 blood. Become nearly invisible and move rapidly in darkness, but take more burn damage.',
-      'Shadow anchor: Unlocked at 250 blood. Create an anchor, then return to it with a second cast. It cannot cross Z-levels.',
-      'Shadow snare: Unlocked at 250 blood. Summon a subtle trap that blinds and immobilizes its first victim, but withers in light.',
-      'Dark passage: Unlocked at 400 blood. Teleport to a turf on screen.',
-      'Extinguish: Unlocked at 600 blood. Snuff out nearby lights.',
-      'Shadow boxing: Unlocked at 800 blood. Send shadow clones at a target while you remain nearby.',
+      'Покров тьмы: Открывается при 150 крови. Станьте почти невидимы и быстрее двигайтесь во тьме, но получайте больше ожогов.',
+      'Теневой якорь: Открывается при 250 крови. Создайте якорь и вернитесь к нему вторым применением. Между Z-уровнями не работает.',
+      'Теневая ловушка: Открывается при 250 крови. Призывайте незаметную ловушку, ослепляющую и обездвиживающую первую жертву, но увядающую на свету.',
+      'Тёмный проход: Открывается при 400 крови. Телепортируйтесь на видимую клетку.',
+      'Погасить: Открывается при 600 крови. Гасите ближайшие источники света.',
+      'Теневой бой: Открывается при 800 крови. Посылайте теневые копии к цели, оставаясь рядом.',
     ],
     fullPower: [
-      'Eternal darkness: Envelop yourself in unholy darkness. Nearby creatures freeze and projectiles deal less damage inside it.',
-      'You also gain permanent X-ray vision.',
+      'Вечная тьма: Окутайте себя нечестивой тьмой. Ближайшие существа замерзают, а снаряды внутри наносят меньше урона.',
+      'Вы также получаете постоянное рентгеновское зрение.',
     ],
   },
   {
     action: 'gargantua',
-    name: 'Gargantua',
-    description: 'Focuses on tenacity and melee damage.',
+    name: 'Гаргантюа',
+    description: 'Специализируется на стойкости и уроне в ближнем бою.',
     powers: [
-      'Rejuvenate: Heal faster based on how much damage you have taken.',
-      'Blood swell: Unlocked at 150 blood. Gain resistance to physical damage, stuns, and stamina damage for 30 seconds. You cannot fire guns while it is active.',
-      'Seismic stomp: Unlocked at 250 blood. Stomp to send out a shockwave that knocks people back.',
-      'Blood rush: Unlocked at 250 blood. Gain a short speed boost.',
-      'Blood swell II: Unlocked at 400 blood. Your melee attacks deal 10 additional damage.',
-      'Overwhelming force: Unlocked at 600 blood. Force open doors you bump into and resist being pushed or pulled.',
-      'Demonic grasp: Unlocked at 800 blood. Send out a demonic hand to snare and throw someone.',
-      'Charge: Unlocked at 800 blood. Charge at a target, destroying obstacles and bowling over victims.',
+      'Омоложение: Исцеляйтесь быстрее в зависимости от полученного урона.',
+      'Кровавое усиление: Открывается при 150 крови. На 30 секунд получите сопротивление физическому урону, оглушению и урону выносливости. Пока активно, нельзя стрелять.',
+      'Сейсмический топот: Открывается при 250 крови. Создайте ударную волну, отбрасывающую людей.',
+      'Кровавый рывок: Открывается при 250 крови. Ненадолго ускорьтесь.',
+      'Кровавое усиление II: Открывается при 400 крови. Атаки в ближнем бою наносят на 10 урона больше.',
+      'Подавляющая сила: Открывается при 600 крови. Выбивайте двери, в которые врезаетесь, и сопротивляйтесь толчкам и притягиванию.',
+      'Демоническая хватка: Открывается при 800 крови. Пошлите демоническую руку, чтобы опутать и швырнуть кого-то.',
+      'Рывок: Открывается при 800 крови. Врежьтесь в цель, разрушая препятствия и сбивая жертв.',
     ],
     fullPower: [
-      'Desecrated Duel: Leap at a visible enemy to create an arena, greatly increasing your regeneration and resistance to internal damage.',
+      'Осквернённая дуэль: Прыгните к видимому врагу и создайте арену, сильно увеличив регенерацию и сопротивление внутренним повреждениям.',
     ],
   },
   {
     action: 'dantalion',
-    name: 'Dantalion',
-    description: 'Focuses on thralling and illusions.',
+    name: 'Данталион',
+    description: 'Специализируется на порабощении и иллюзиях.',
     powers: [
-      'Enthrall: Unlocked at 150 blood. Bind a target to your will while standing still. It does not work on mindshielded or already enthralled people.',
-      'Thrall cap: Begin with one thrall. The cap increases at 400 blood, 600 blood, and full power, to a maximum of four.',
-      'Thrall commune: Unlocked at 150 blood. Speak with your thralls; they can reply in the same channel.',
-      'Subspace swap: Unlocked at 250 blood. Swap positions with a target.',
-      'Pacify: Unlocked at 250 blood. Prevent a target from causing harm for 40 seconds.',
-      'Decoy: Unlocked at 400 blood. Briefly turn invisible and leave an illusion behind.',
-      'Rally thralls: Unlocked at 600 blood. Remove incapacitating effects from nearby thralls.',
-      'Blood bond: Unlocked at 800 blood. Nearby thralls share incoming damage with you while they remain in range.',
+      'Порабощение: Открывается при 150 крови. Подчините цель, оставаясь неподвижным. Не действует на людей с защитой разума или уже порабощённых.',
+      'Предел рабов: Начните с одного раба. Предел увеличивается при 400, 600 крови и полной силе, максимум до четырёх.',
+      'Общение с рабами: Открывается при 150 крови. Общайтесь с рабами; они могут отвечать в том же канале.',
+      'Подпространственный обмен: Открывается при 250 крови. Поменяйтесь местами с целью.',
+      'Усмирение: Открывается при 250 крови. Не позволяйте цели причинять вред 40 секунд.',
+      'Приманка: Открывается при 400 крови. Ненадолго станьте невидимы и оставьте иллюзию.',
+      'Сбор рабов: Открывается при 600 крови. Снимайте обездвиживающие эффекты с ближайших рабов.',
+      'Кровавая связь: Открывается при 800 крови. Ближайшие рабы делят с вами получаемый урон, пока остаются в радиусе.',
     ],
     fullPower: [
-      'Mass Hysteria: Blind nearby victims and make them perceive others as random animals.',
+      'Массовая истерия: Ослепите ближайших жертв и заставьте их видеть других случайными животными.',
     ],
   },
 ];
 
 export function SpecMenu() {
   return (
-    <Window title="Specialisation Menu" width={1100} height={600} theme="nologo">
+    <Window title="Меню специализации" width={1100} height={600} theme="nologo">
       <Window.Content>
         <Stack fill>
           {specializations.map((specialization) => (
@@ -110,14 +110,14 @@ function SpecializationColumn({ specialization }: { specialization: Specializati
         scrollable
         title={specialization.name}
         buttons={
-          <Button content="Choose" onClick={() => act(specialization.action)} />
+          <Button content="Выбрать" onClick={() => act(specialization.action)} />
         }
       >
         <h3>{specialization.description}</h3>
         {specialization.powers.map((power) => (
           <PowerDescription key={power} power={power} />
         ))}
-        <b>Full power</b>
+        <b>Полная сила</b>
         <Divider />
         {specialization.fullPower.map((power) => (
           <PowerDescription key={power} power={power} />

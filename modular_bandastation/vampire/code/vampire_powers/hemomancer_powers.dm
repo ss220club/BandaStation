@@ -153,7 +153,7 @@
 		to_chat(owner, span_notice("Вы отменяете выбор целевой клетки."))
 		start_turf = null
 		return
-	if(!start_turf)
+	if(!start_turf || get_dist(owner, start_turf) > cast_range)
 		start_turf = target_turf
 		to_chat(owner, span_notice("Выберите другой конец кровавого барьера."))
 		return
@@ -243,6 +243,9 @@
 	if(!target_name)
 		return
 	var/mob/living/carbon/human/target = prey[target_name]
+	if(QDELETED(user) || QDELETED(target) || target.z != user.z)
+		to_chat(user, span_warning("Запах крови этой цели угас."))
+		return
 	var/message = "[target_name] находится в [get_area(target)], [dir2text(get_dir(user, target))] от вас."
 	if((target.maxHealth - target.health >= 40) || target.get_bleed_rate())
 		message += " Цель ранена."
@@ -314,6 +317,8 @@
 	return ..()
 
 /datum/vampire_passive/blood_spill/process()
+	if(!owner)
+		return
 	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
 	if(!vampire)
 		return

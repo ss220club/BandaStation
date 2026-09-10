@@ -23,10 +23,10 @@
 			disable_cloak(user)
 	to_chat(user, span_notice("Теперь во тьме вас будут [vampire.iscloaking ? "не замечать" : "видеть"]."))
 
-/datum/action/cooldown/spell/vampire_cloak/Destroy(force, ...)
-	var/mob/living/carbon/human/user = owner
-	var/datum/antagonist/vampire/vampire = user?.mind?.has_antag_datum(/datum/antagonist/vampire)
-	if(vampire?.iscloaking)
+
+/datum/action/cooldown/spell/vampire_cloak/Remove(mob/living/removed_from)
+	if(ishuman(removed_from))
+		var/mob/living/carbon/human/user = removed_from
 		disable_cloak(user)
 	return ..()
 
@@ -87,6 +87,9 @@
 
 /obj/effect/vampire_shadow_snare/process()
 	var/turf/snare_turf = get_turf(src)
+	if(!snare_turf)
+		qdel(src)
+		return
 	if(snare_turf.get_lumcount() * 10 > 2)
 		remaining_integrity -= 50
 	if(remaining_integrity <= 0)
@@ -265,7 +268,7 @@
 
 /datum/action/cooldown/spell/aoe/vampire_extinguish/get_things_to_cast_on(atom/center)
 	return range(aoe_radius, center)
-/datum/action/cooldown/spell/aoe/vampire_extinguish/cast_on_thing_in_aoe(turf/target, atom/caster)
+/datum/action/cooldown/spell/aoe/vampire_extinguish/cast_on_thing_in_aoe(atom/target, atom/caster)
 	target.set_light(0)
 	for(var/atom/atom in target)
 		atom.set_light(0)
@@ -324,6 +327,8 @@
 	return ..()
 
 /datum/vampire_passive/eternal_darkness/process()
+	if(!owner)
+		return
 	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
 	for(var/mob/living/target in view(8, owner))
 		if(target.affects_vampire(owner))

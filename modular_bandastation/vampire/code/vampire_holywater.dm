@@ -23,7 +23,8 @@
 	var/datum/antagonist/vampire_thrall/thrall = affected_mob.mind?.has_antag_datum(/datum/antagonist/vampire_thrall)
 	if(thrall)
 		// Reagent ticks occur before on_mob_life(), where holy water reaches this threshold and purges itself.
-		if(chem.data?["deciseconds_metabolized"] + seconds_per_tick * 1 SECONDS * metabolization_ratio >= 1 MINUTES)
+		var/metabolized = chem.data?["deciseconds_metabolized"] || 0
+		if(metabolized + seconds_per_tick * 1 SECONDS * metabolization_ratio >= 1 MINUTES)
 			affected_mob.mind.remove_antag_datum(/datum/antagonist/vampire_thrall)
 			chem.holder?.remove_reagent(chem.type, chem.volume)
 			affected_mob.visible_message(span_userdanger("[affected_mob] отшатывается; краски возвращаются на [affected_mob.p_their()] кожу, а вместе с ними — контроль над собой!"))

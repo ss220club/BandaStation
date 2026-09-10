@@ -29,9 +29,11 @@
 	if(!do_after(user, 15 SECONDS, target = target))
 		to_chat(user, span_warning("Вы или ваша цель сдвинулись."))
 		return
-	if(!can_enthrall(user, target))
+	if(QDELETED(user) || QDELETED(target) || !can_enthrall(user, target))
 		return
-	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	if(!vampire)
+		return
 	var/datum/component/vampire_ability/ability = GetComponent(/datum/component/vampire_ability)
 	ability.deduct_blood(src)
 	var/datum/antagonist/vampire_thrall/thrall = new(vampire)
@@ -71,9 +73,11 @@
 	. = ..()
 	var/mob/living/user = owner
 	var/message = tgui_input_text(user, "Введите сообщение для рабов.", "Общение рабов")
-	if(!message)
+	if(!message || QDELETED(user))
 		return
-	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	if(!vampire)
+		return
 	for(var/datum/antagonist/vampire_thrall/thrall as anything in vampire.get_thralls())
 		if(thrall.owner?.current)
 			to_chat(thrall.owner.current, span_notice("[user.real_name] (Вампир-хозяин): [message]"))

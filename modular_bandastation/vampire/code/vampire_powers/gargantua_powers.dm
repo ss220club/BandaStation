@@ -47,12 +47,14 @@
 	addtimer(CALLBACK(src, PROC_REF(hit_check), 1, origin, owner), 0.2 SECONDS)
 
 /datum/action/cooldown/spell/vampire_stomp/proc/hit_check(range, turf/origin, mob/living/user, list/safe_targets = list())
+	if(!origin)
+		return
 	var/list/targets = view(range, origin) - view(range - 2, origin)
 	for(var/turf/open/floor/flooring in targets)
 		if(prob(100 - range * 20))
 			flooring.ex_act(EXPLODE_LIGHT)
 	for(var/mob/living/target in targets)
-		if(target in safe_targets || target.throwing || !target.affects_vampire(user) || target.move_resist > MOVE_FORCE_VERY_STRONG)
+		if((target in safe_targets) || target.throwing || !target.affects_vampire(user) || target.move_resist > MOVE_FORCE_VERY_STRONG)
 			continue
 		var/turf/throw_target = get_edge_target_turf(target, get_dir(origin, target))
 		INVOKE_ASYNC(target, TYPE_PROC_REF(/atom/movable, throw_at), throw_target, 3, 4)
@@ -102,15 +104,14 @@
 	else
 		deactivate()
 
-/datum/action/cooldown/spell/vampire_overwhelming_force/Destroy(force, ...)
-	deactivate()
+/datum/action/cooldown/spell/vampire_overwhelming_force/Remove(mob/living/removed_from)
+	deactivate(removed_from)
 	return ..()
 
-/datum/action/cooldown/spell/vampire_overwhelming_force/proc/deactivate()
+/datum/action/cooldown/spell/vampire_overwhelming_force/proc/deactivate(mob/living/user = owner)
 	if(!active)
 		return
 	active = FALSE
-	var/mob/living/user = owner
 	if(!user)
 		return
 	UnregisterSignal(user, COMSIG_MOVABLE_BUMP)
@@ -265,7 +266,7 @@
 	playsound(user, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 	new /obj/effect/temp_visual/stomp(get_turf(user))
 	user.apply_status_effect(/datum/status_effect/vampire_gladiator)
-	for(var/turf/turf as anything in orange(ARENA_SIZE, get_turf(target)))
+	for(var/turf/turf in orange(ARENA_SIZE, get_turf(target)))
 		if(get_dist(turf, get_turf(target)) == ARENA_SIZE)
 			all_temp_walls += new /obj/structure/vampire_arena_wall(turf)
 	timer = addtimer(CALLBACK(src, PROC_REF(dispel), user), 30 SECONDS, TIMER_STOPPABLE)
