@@ -12,7 +12,6 @@
 #define VAMPIRE_COMPLETE_NULLIFICATION 100 // the point of nullification where vampires can no longer use abilities.
 
 #define ROLE_VAMPIRE "Vampire"
-#define ROLE_VAMPIRE_LATE "VampireLate"
 #define VAMPIRE_TRAIT "vampire"
 #define HUD_MOB_VAMPIRE_BLOOD "mob_vampire_blood"
 
