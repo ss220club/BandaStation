@@ -165,7 +165,7 @@
 	guns = list(
 		/obj/item/gun/energy/e_gun/dragnet,
 		/obj/item/gun/energy/e_gun/dragnet,
-		/obj/item/gun/energy/e_gun/dragnet,
+		/obj/item/dragnet_beacon,
 	)
 
 /obj/effect/spawner/armory_spawn/disablers
