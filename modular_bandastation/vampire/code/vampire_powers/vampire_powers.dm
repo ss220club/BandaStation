@@ -162,6 +162,7 @@
 	update_specialization_objective()
 	if(log_choice)
 		SSblackbox.record_feedback("nested tally", "vampire_subclasses", 1, list("[new_subclass.name]"))
+		log_vampire()
 
 // TODO for someone else: convert this to an universal spell with charges thingie
 /datum/action/cooldown/spell/aoe/vampire_glare
@@ -442,7 +443,7 @@
 
 /datum/action/cooldown/spell/aoe/vampire_raise_vampires/cast_on_thing_in_aoe(mob/living/carbon/human/target, mob/living/user)
 	var/turf/user_turf = get_turf(user)
-	user_turf.Beam(target, "sendbeam", 'icons/effects/effects.dmi', time = 3 SECONDS, maxdistance = 7, beam_type = /obj/effect/ebeam)
+	user_turf.Beam(target, "sendbeam", 'icons/effects/beam.dmi', time = 3 SECONDS, maxdistance = 7, beam_type = /obj/effect/ebeam)
 	new /obj/effect/temp_visual/cult/sparks(target.loc)
 	raise_vampire(user, target)
 
