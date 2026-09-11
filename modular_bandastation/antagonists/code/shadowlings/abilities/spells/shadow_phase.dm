@@ -44,8 +44,6 @@
 
 /datum/action/cooldown/shadowling/shadow_phase/Trigger(mob/clicker, trigger_flags, atom/target)
 	. = ..()
-	if(!.)
-		return
 	var/mob/living/carbon/human/H = owner
 	if(!istype(H))
 		return FALSE

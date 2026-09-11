@@ -31,8 +31,6 @@
 
 /datum/action/cooldown/shadowling/labyrinth/Trigger(mob/clicker, trigger_flags, atom/target)
 	. = ..()
-	if(!.)
-		return
 	apply_button_overlay()
 	if(!istype(clicker) || !IsAvailable(TRUE) || !can_use(clicker))
 		return FALSE

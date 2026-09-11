@@ -79,9 +79,9 @@
 	if(check_light_level(T))
 		if(!light_time_remaining)
 			light_time_remaining = light_grace_period
-			last_light_second = CEILING(light_time_remaining / 1 SECONDS, 1)
+			last_light_second = CEILING(light_time_remaining / 10, 1)
 			to_chat(jaunter, span_warning("Ваша нематериальность искажается под светом и разрушится через [last_light_second] секунд."))
-		var/current_second = CEILING(light_time_remaining / 1 SECONDS, 1)
+		var/current_second = CEILING(light_time_remaining / 10, 1)
 		if(current_second != last_light_second)
 			last_light_second = current_second
 			to_chat(jaunter, span_warning("Ваша нематериальность искажается под светом и разрушится через [current_second] секунд."))
