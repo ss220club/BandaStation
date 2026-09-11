@@ -118,7 +118,7 @@
 /datum/objective/shadowling/enslave_fraction
 	name = "Subjugate the crew"
 	admin_grantable = TRUE
-	var/percent = 25
+	var/percent = 50
 	var/baseline_population = 0
 
 /datum/objective/shadowling/enslave_fraction/New(pct = null)
