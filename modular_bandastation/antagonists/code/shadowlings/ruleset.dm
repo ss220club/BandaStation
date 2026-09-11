@@ -10,7 +10,7 @@
 		//DYNAMIC_TIER_MEDIUMHIGH = 0,
 		//DYNAMIC_TIER_HIGH = 0,
 	//)
-	min_pop = 30
+	min_pop = 20 // FOR TM
 
 	pref_flag = ROLE_SHADOWLING
 	jobban_flag = ROLE_SHADOWLING

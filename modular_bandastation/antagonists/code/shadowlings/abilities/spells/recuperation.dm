@@ -13,7 +13,7 @@
 	max_range = 1
 	min_req = 1
 	max_req = 3
-	required_thralls = 70
+	required_thralls = 20
 	var/prev_alpha
 	var/static/sfx_begin = 'sound/effects/magic/teleport_diss.ogg'
 	var/static/sfx_end   = 'sound/effects/ghost.ogg'

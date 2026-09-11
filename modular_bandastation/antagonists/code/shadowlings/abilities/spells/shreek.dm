@@ -23,7 +23,7 @@
 	// Shadowling related
 	min_req = 1
 	max_req = 20
-	required_thralls = 40
+	required_thralls = 15
 	var/knock_radius = 2
 	var/disorient_radius = 10
 	var/static/sfx_activate = 'modular_bandastation/antagonists/sound/shadowlings/abilities/shreek.ogg'
