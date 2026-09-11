@@ -154,3 +154,10 @@
 	duration = 5 SECONDS
 	tick_interval = STATUS_EFFECT_NO_TICK
 	alert_type = null
+
+/datum/status_effect/vampire_charging/on_apply()
+	ADD_TRAIT(owner, TRAIT_NO_THROW_SELF_IMPACT, REF(src))
+	return TRUE
+
+/datum/status_effect/vampire_charging/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_NO_THROW_SELF_IMPACT, REF(src))
