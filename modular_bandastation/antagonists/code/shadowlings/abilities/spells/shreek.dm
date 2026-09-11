@@ -51,14 +51,16 @@
 			L.soundbang_act(2, 10 SECONDS, 10)
 			L.adjust_dizzy(4)
 			L.drop_all_held_items()
-			adjust_temporary_deafness(5 SECONDS)
+			if(ears)
+				ears.adjust_temporary_deafness(5 SECONDS)
 		else
 			L.adjust_organ_loss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_FAR)
 			L.soundbang_act(2, 5 SECONDS, 5)
 			L.adjust_confusion(6 SECONDS)
 			L.adjust_staggered(6 SECONDS)
 			L.adjust_dizzy(3)
-			adjust_temporary_deafness(2 SECONDS)
+			if(ears)
+				ears.adjust_temporary_deafness(2 SECONDS)
 
 	for(var/obj/item/I in list_knock)
 		if(!isturf(I.loc))
