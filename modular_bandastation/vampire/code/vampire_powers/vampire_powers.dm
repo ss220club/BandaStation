@@ -35,7 +35,7 @@
 	owner.update_sight() // Life updates conditionally, so vision passives must force an update when granted.
 	return
 
-/datum/action/cooldown/spell/vampire_rejuvenate
+/datum/action/cooldown/spell/aoe/vampire_rejuvenate
 	name = "Омоложение"
 	desc = "Используйте запас крови, чтобы оживить тело и снять все обездвиживающие эффекты."
 	gain_desc = "Теперь вы можете использовать омоложение."
@@ -46,11 +46,11 @@
 	antimagic_flags = NONE // So. If you have a null rod on your person, you can't cast vampire spells. I would rather not have officers abuse this by putting a nullrod in their pocket or something to block rejuvinate.
 
 
-/datum/action/cooldown/spell/vampire_rejuvenate/New(Target)
+/datum/action/cooldown/spell/aoe/vampire_rejuvenate/New(Target)
 	. = ..()
 	add_vampire_ability()
 
-/datum/action/cooldown/spell/vampire_rejuvenate/cast(atom/cast_on)
+/datum/action/cooldown/spell/aoe/vampire_rejuvenate/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
 
@@ -68,7 +68,7 @@
 	if(rejuv_bonus)
 		INVOKE_ASYNC(src, PROC_REF(heal), user, rejuv_bonus)
 
-/datum/action/cooldown/spell/vampire_rejuvenate/proc/heal(mob/living/user, rejuv_bonus)
+/datum/action/cooldown/spell/aoe/vampire_rejuvenate/proc/heal(mob/living/user, rejuv_bonus)
 	// TODO: rewrite to something better
 	for(var/i in 1 to 5)
 		if(QDELETED(user) || user.stat == DEAD)
@@ -95,7 +95,7 @@
 
 // No exfiltration feature for tg
 
-/datum/action/cooldown/spell/vampire_specialize
+/datum/action/cooldown/spell/aoe/vampire_specialize
 	name = "Выбрать специализацию"
 	desc = "Выберите подкласс вампира, в который хотите развиться."
 	gain_desc = "Теперь вы можете выбрать вампирскую специализацию для развития."
@@ -103,30 +103,30 @@
 	cooldown_time = 2 SECONDS
 	button_icon_state = "select_class"
 
-/datum/action/cooldown/spell/vampire_specialize/New(Target)
+/datum/action/cooldown/spell/aoe/vampire_specialize/New(Target)
 	. = ..()
 	add_vampire_ability()
 
-/datum/action/cooldown/spell/vampire_specialize/cast(atom/cast_on)
+/datum/action/cooldown/spell/aoe/vampire_specialize/cast(atom/cast_on)
 	. = ..()
 	ui_interact(owner)
 
-/datum/action/cooldown/spell/vampire_specialize/ui_state(mob/user)
+/datum/action/cooldown/spell/aoe/vampire_specialize/ui_state(mob/user)
 	return GLOB.always_state
 
-/datum/action/cooldown/spell/vampire_specialize/ui_interact(mob/user, datum/tgui/ui = null)
+/datum/action/cooldown/spell/aoe/vampire_specialize/ui_interact(mob/user, datum/tgui/ui = null)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "SpecMenu", "Меню специализации")
 		ui.set_autoupdate(FALSE)
 		ui.open()
 
-/datum/action/cooldown/spell/vampire_specialize/ui_data(mob/user)
+/datum/action/cooldown/spell/aoe/vampire_specialize/ui_data(mob/user)
 	var/datum/antagonist/vampire/vamp = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	var/list/data = list("subclasses" = vamp.subclass)
 	return data
 
-/datum/action/cooldown/spell/vampire_specialize/ui_act(action, list/params)
+/datum/action/cooldown/spell/aoe/vampire_specialize/ui_act(action, list/params)
 	if(..())
 		return
 	var/datum/antagonist/vampire/vamp = usr.mind.has_antag_datum(/datum/antagonist/vampire)
@@ -164,15 +164,14 @@
 		SSblackbox.record_feedback("nested tally", "vampire_subclasses", 1, list("[new_subclass.name]"))
 
 // TODO for someone else: convert this to an universal spell with charges thingie
-/datum/action/cooldown/spell/vampire_glare
-	parent_type = /datum/action/cooldown/spell/aoe
+/datum/action/cooldown/spell/aoe/vampire_glare
 	name = "Взгляд"
 	desc = "Ваши глаза вспыхивают, оглушая и лишая речи тех, кто перед вами. На окружающих эффект слабее."
 	gain_desc = "Теперь вы можете использовать взгляд."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_glare"
 	check_flags = AB_CHECK_PHASED
-	cooldown_time = 0
+	cooldown_time = 2 SECONDS
 	aoe_radius = 1
 	var/charges = 2
 	var/max_charges = 2
@@ -181,17 +180,17 @@
 	var/list/recharge_times = list()
 	var/next_recharge_id = 0
 
-/datum/action/cooldown/spell/vampire_glare/New(Target)
+/datum/action/cooldown/spell/aoe/vampire_glare/New(Target)
 	. = ..()
 	add_vampire_ability()
 
-/datum/action/cooldown/spell/vampire_glare/get_things_to_cast_on(atom/center)
+/datum/action/cooldown/spell/aoe/vampire_glare/get_things_to_cast_on(atom/center)
 	. = list()
 	for(var/mob/living/target in range(aoe_radius, center))
 		if(target != owner)
 			. += target
 
-/datum/action/cooldown/spell/vampire_glare/can_cast_spell(feedback = TRUE)
+/datum/action/cooldown/spell/aoe/vampire_glare/can_cast_spell(feedback = TRUE)
 	if(!..())
 		return FALSE
 	if(charges)
@@ -200,7 +199,7 @@
 		to_chat(owner, span_warning("Ваш взгляд ещё не восстановился."))
 	return FALSE
 
-/datum/action/cooldown/spell/vampire_glare/after_cast(atom/cast_on)
+/datum/action/cooldown/spell/aoe/vampire_glare/after_cast(atom/cast_on)
 	. = ..()
 	charges--
 	var/recharge_id = "charge_[++next_recharge_id]"
@@ -212,13 +211,13 @@
 		build_all_button_icons(UPDATE_BUTTON_STATUS)
 
 
-/datum/action/cooldown/spell/vampire_glare/proc/get_next_recharge_time()
+/datum/action/cooldown/spell/aoe/vampire_glare/proc/get_next_recharge_time()
 	var/next_recharge_time = INFINITY
 	for(var/recharge_id in recharge_times)
 		next_recharge_time = min(next_recharge_time, recharge_times[recharge_id])
 	return next_recharge_time
 
-/datum/action/cooldown/spell/vampire_glare/proc/recharge(recharge_id)
+/datum/action/cooldown/spell/aoe/vampire_glare/proc/recharge(recharge_id)
 	if(isnull(recharge_times[recharge_id]))
 		return
 	recharge_times[recharge_id] = null
@@ -229,13 +228,12 @@
 		StartCooldown(get_next_recharge_time() - world.time)
 	build_all_button_icons(UPDATE_BUTTON_STATUS)
 
-/datum/action/cooldown/spell/vampire_glare/update_button_status(atom/movable/screen/movable/action_button/button, force = FALSE)
+/datum/action/cooldown/spell/aoe/vampire_glare/update_button_status(atom/movable/screen/movable/action_button/button, force = FALSE)
 	. = ..()
 	if(charges)
 		button.maptext = MAPTEXT_TINY_UNICODE(charges)
 
-/datum/action/cooldown/spell/vampire_lair
-	parent_type = /datum/action/cooldown/spell/pointed
+/datum/action/cooldown/spell/pointed/vampire_lair
 	name = "Логово"
 	desc = "Выберите себе гроб, который станет центральным элементом вашего нового логова."
 	gain_desc = "Теперь вы можете создать логово."
@@ -245,15 +243,15 @@
 	cast_range = 1
 	aim_assist = FALSE
 
-/datum/action/cooldown/spell/vampire_lair/New(Target)
+/datum/action/cooldown/spell/pointed/vampire_lair/New(Target)
 	. = ..()
 	add_vampire_ability()
 
-/datum/action/cooldown/spell/vampire_lair/is_valid_target(atom/cast_on)
+/datum/action/cooldown/spell/pointed/vampire_lair/is_valid_target(atom/cast_on)
 	. = ..()
 	return istype(cast_on, /obj/structure/closet/crate/coffin)
 
-/datum/action/cooldown/spell/vampire_lair/cast(atom/cast_on)
+/datum/action/cooldown/spell/pointed/vampire_lair/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
 	var/obj/structure/closet/crate/coffin/coffin = cast_on
@@ -303,7 +301,7 @@
 		var/mob/living/living_user = user
 		color = living_user?.get_bloodtype()?.get_color()
 
-/datum/action/cooldown/spell/vampire_glare/cast(atom/cast_on)
+/datum/action/cooldown/spell/aoe/vampire_glare/cast(atom/cast_on)
 	var/mob/living/user = owner
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
@@ -316,7 +314,7 @@
 	user.visible_message(span_warning("Глаза [user] испускают ослепительную вспышку!"))
 	return ..()
 
-/datum/action/cooldown/spell/vampire_glare/cast_on_thing_in_aoe(mob/living/target, mob/living/user)
+/datum/action/cooldown/spell/aoe/vampire_glare/cast_on_thing_in_aoe(mob/living/target, mob/living/user)
 	if(!target.affects_vampire(user))
 		return
 
@@ -342,7 +340,7 @@
 	to_chat(target, span_warning("Вас ослепляет взгляд [user]."))
 	log_combat(user, target, "glared at", addition = "(Vampire)")
 
-/datum/action/cooldown/spell/vampire_glare/proc/calculate_deviation(mob/victim, mob/attacker)
+/datum/action/cooldown/spell/aoe/vampire_glare/proc/calculate_deviation(mob/victim, mob/attacker)
 
 	// If the victim was looking at the attacker, this is the direction they'd have to be facing.
 	var/attacker_to_victim = get_dir(attacker, victim)
@@ -413,8 +411,7 @@
 /datum/vampire_passive/full
 	gain_desc = "Вы достигли полного потенциала. Святые предметы и эффекты больше не являются вашей слабостью."
 
-/datum/action/cooldown/spell/vampire_raise_vampires
-	parent_type = /datum/action/cooldown/spell/aoe
+/datum/action/cooldown/spell/aoe/vampire_raise_vampires
 	name = "Поднять вампиров"
 	desc = "Призывает смертоносных вампиров из блюспейса."
 	gain_desc = "Вы обрели способность поднимать вампиров. Эта чрезвычайно мощная способность по области действует на всех людей рядом: вампиры и рабы исцеляются, трупы становятся вампирами, остальные оглушаются, получают повреждения мозга и погибают."
@@ -424,30 +421,30 @@
 	cooldown_time = 20 MINUTES
 	aoe_radius = 3
 
-/datum/action/cooldown/spell/vampire_raise_vampires/New(Target)
+/datum/action/cooldown/spell/aoe/vampire_raise_vampires/New(Target)
 	. = ..()
 	add_vampire_ability()
 
-/datum/action/cooldown/spell/vampire_raise_vampires/get_things_to_cast_on(atom/center)
+/datum/action/cooldown/spell/aoe/vampire_raise_vampires/get_things_to_cast_on(atom/center)
 	. = list()
 	for(var/mob/living/carbon/human/target in range(aoe_radius, center))
 		if(target != owner)
 			. += target
 
-/datum/action/cooldown/spell/vampire_raise_vampires/cast(atom/cast_on)
+/datum/action/cooldown/spell/aoe/vampire_raise_vampires/cast(atom/cast_on)
 	var/mob/living/user = owner
 	new /obj/effect/temp_visual/cult/sparks(user.loc)
 	to_chat(user, span_warning("Вы взываете в блюспейсе, призывая на помощь новых вампирских духов!"))
 	return ..()
 
-/datum/action/cooldown/spell/vampire_raise_vampires/cast_on_thing_in_aoe(mob/living/carbon/human/target, mob/living/user)
+/datum/action/cooldown/spell/aoe/vampire_raise_vampires/cast_on_thing_in_aoe(mob/living/carbon/human/target, mob/living/user)
 	var/turf/user_turf = get_turf(user)
 	user_turf.Beam(target, "sendbeam", 'icons/effects/effects.dmi', time = 3 SECONDS, maxdistance = 7, beam_type = /obj/effect/ebeam)
 	new /obj/effect/temp_visual/cult/sparks(target.loc)
 	raise_vampire(user, target)
 
 
-/datum/action/cooldown/spell/vampire_raise_vampires/proc/raise_vampire(mob/living/user, mob/living/carbon/human/target)
+/datum/action/cooldown/spell/aoe/vampire_raise_vampires/proc/raise_vampire(mob/living/user, mob/living/carbon/human/target)
 	if(!user?.mind || !target?.mind)
 		if(target)
 			target.visible_message("[target], похоже, слишком глуп, чтобы понять происходящее.")

@@ -124,7 +124,7 @@
 							/datum/action/cooldown/spell/pointed/vampire_arena,
 							/datum/action/cooldown/spell/vampire_eternal_darkness,
 							/datum/action/cooldown/spell/aoe/vampire_hysteria,
-							/datum/action/cooldown/spell/vampire_raise_vampires,
+							/datum/action/cooldown/spell/aoe/vampire_raise_vampires,
 							/datum/vampire_passive/vision/xray)
 	improved_rejuv_healing = TRUE
 	thrall_cap = 150 // can thrall high pop
