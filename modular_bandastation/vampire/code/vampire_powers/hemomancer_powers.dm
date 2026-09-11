@@ -202,16 +202,15 @@
 	button_icon_state = "blood_pool"
 	cooldown_time = 30 SECONDS
 	jaunt_duration = 3 SECONDS
-	jaunt_type = /obj/effect/dummy/phased_mob/vampire_blood_pool
+	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
 
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/New(Target)
 	. = ..()
 	add_vampire_ability(50)
 
-/obj/effect/dummy/phased_mob/vampire_blood_pool
-	parent_type = /obj/effect/dummy/phased_mob/spell_jaunt
+/obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
 
-/obj/effect/dummy/phased_mob/vampire_blood_pool/relaymove(mob/living/user, direction)
+/obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool/relaymove(mob/living/user, direction)
 	var/turf/old_turf = get_turf(src)
 	. = ..()
 	if(get_turf(src) != old_turf)
