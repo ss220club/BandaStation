@@ -67,4 +67,6 @@
 	SSblackbox.record_feedback("tally", "vampire_powers_used", 1, "[spell.type]")
 
 /datum/action/cooldown/spell/proc/add_vampire_ability(required_blood = 0, deduct_blood_on_cast = TRUE)
+	if(required_blood)
+		name += " ([required_blood])"
 	AddComponent(/datum/component/vampire_ability, required_blood, deduct_blood_on_cast)
