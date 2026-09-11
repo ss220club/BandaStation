@@ -66,12 +66,13 @@
 	nullified = clamp(nullified + extra, base, VAMPIRE_NULLIFICATION_CAP)
 
 /datum/antagonist/vampire/antag_panel_data()
-	return "Специализация: [subclass.name] | Всего крови: [bloodtotal] | Доступно крови: [bloodusable]"
+	return "Класс: [subclass.name] | Всего крови: [bloodtotal] | Доступно крови: [bloodusable]"
 
 /datum/antagonist/vampire/get_admin_commands()
 	. = ..()
 	.["Установить общее количество крови"] = CALLBACK(src, PROC_REF(admin_set_total_blood))
 	.["Установить доступную кровь"] = CALLBACK(src, PROC_REF(admin_set_usable_blood))
+	.["Сбросить класс"] = CALLBACK(src, PROC_REF(clear_subclass))
 
 /datum/antagonist/vampire/proc/admin_set_total_blood(mob/admin)
 	var/new_total = tgui_input_number(admin, "Установите общее количество крови, выпитой вампиром за жизнь.", "Установить общее количество крови", default = bloodtotal, min_value = 0)
