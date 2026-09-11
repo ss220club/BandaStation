@@ -214,7 +214,10 @@
 /datum/action/cooldown/spell/aoe/vampire_glare/proc/get_next_recharge_time()
 	var/next_recharge_time = INFINITY
 	for(var/recharge_id in recharge_times)
-		next_recharge_time = min(next_recharge_time, recharge_times[recharge_id])
+		var/recharge_time = recharge_times[recharge_id]
+		if(isnull(recharge_time))
+			continue
+		next_recharge_time = min(next_recharge_time, recharge_time)
 	return next_recharge_time
 
 /datum/action/cooldown/spell/aoe/vampire_glare/proc/recharge(recharge_id)
@@ -232,74 +235,6 @@
 	. = ..()
 	if(charges)
 		button.maptext = MAPTEXT_TINY_UNICODE(charges)
-
-/datum/action/cooldown/spell/pointed/vampire_lair
-	name = "Логово"
-	desc = "Выберите себе гроб, который станет центральным элементом вашего нового логова."
-	gain_desc = "Теперь вы можете создать логово."
-	button_icon = 'modular_bandastation/vampire/icons/obj/items.dmi' // tg coffin icon is too big
-	button_icon_state = "coffin"
-	cooldown_time = 2 SECONDS
-	cast_range = 1
-	aim_assist = FALSE
-
-/datum/action/cooldown/spell/pointed/vampire_lair/New(Target)
-	. = ..()
-	add_vampire_ability()
-
-/datum/action/cooldown/spell/pointed/vampire_lair/is_valid_target(atom/cast_on)
-	. = ..()
-	return istype(cast_on, /obj/structure/closet/crate/coffin)
-
-/datum/action/cooldown/spell/pointed/vampire_lair/cast(atom/cast_on)
-	. = ..()
-	var/mob/living/user = owner
-	var/obj/structure/closet/crate/coffin/coffin = cast_on
-	if(!istype(coffin))
-		to_chat(user, span_warning("Это работает только с гробами!"))
-		return
-	if(istype(coffin, /obj/structure/closet/crate/coffin/vampire))
-		to_chat(user, span_warning("[coffin.declent_ru(NOMINATIVE)] служит другому и отказывается подчиняться вашей воле!"))
-		return
-	for(var/turf/T in range(1, coffin))
-		if(T.density)
-			to_chat(user, span_warning("Для ритуала вокруг [coffin.declent_ru(GENITIVE)] нужно больше места!"))
-			return
-	to_chat(user, span_danger("Вы начинаете помечать [coffin.declent_ru(ACCUSATIVE)]!"))
-	coffin.Beam(user, icon_state = "drainbeam", maxdistance = 1, time = 10 SECONDS)
-	playsound(coffin, 'sound/effects/bubbles/bubbles.ogg', 20)
-	for(var/obj/machinery/light/L in range(5, user))
-		L.flicker()
-	var/obj/effect/lair_rune/rune = new /obj/effect/lair_rune(get_turf(coffin), user)
-	if(!do_after(user, 10 SECONDS, target = coffin))
-		qdel(rune)
-		return
-	playsound(user, 'sound/misc/interference.ogg', 30)
-	new /obj/structure/closet/crate/coffin/vampire(get_turf(coffin), user)
-	qdel(coffin)
-	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
-	V.has_lair = TRUE
-	V.upgrade_tiers -= type
-	V.remove_ability(src)
-
-/obj/structure/closet/crate/coffin/vampire
-	name = "vampire coffin"
-	desc = "Гроб, отмеченный кровавой руной."
-
-/obj/effect/lair_rune
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	plane = FLOOR_PLANE
-	layer = RUNE_LAYER
-	icon = 'modular_bandastation/vampire/icons/effects/vampire_rune.dmi'
-	icon_state = "vampiric_rune"
-	pixel_x = -34
-	pixel_y = -38
-
-/obj/effect/lair_rune/Initialize(mapload, mob/user)
-	. = ..()
-	if(user)
-		var/mob/living/living_user = user
-		color = living_user?.get_bloodtype()?.get_color()
 
 /datum/action/cooldown/spell/aoe/vampire_glare/cast(atom/cast_on)
 	var/mob/living/user = owner
@@ -371,6 +306,74 @@
 #undef DEVIATION_NONE
 #undef DEVIATION_PARTIAL
 #undef DEVIATION_FULL
+
+/datum/action/cooldown/spell/pointed/vampire_lair
+	name = "Логово"
+	desc = "Выберите себе гроб, который станет центральным элементом вашего нового логова."
+	gain_desc = "Теперь вы можете создать логово."
+	button_icon = 'modular_bandastation/vampire/icons/obj/items.dmi' // tg coffin icon is too big
+	button_icon_state = "coffin"
+	cooldown_time = 2 SECONDS
+	cast_range = 1
+	aim_assist = FALSE
+
+/datum/action/cooldown/spell/pointed/vampire_lair/New(Target)
+	. = ..()
+	add_vampire_ability()
+
+/datum/action/cooldown/spell/pointed/vampire_lair/is_valid_target(atom/cast_on)
+	. = ..()
+	return istype(cast_on, /obj/structure/closet/crate/coffin)
+
+/datum/action/cooldown/spell/pointed/vampire_lair/cast(atom/cast_on)
+	. = ..()
+	var/mob/living/user = owner
+	var/obj/structure/closet/crate/coffin/coffin = cast_on
+	if(!istype(coffin))
+		to_chat(user, span_warning("Это работает только с гробами!"))
+		return
+	if(istype(coffin, /obj/structure/closet/crate/coffin/vampire))
+		to_chat(user, span_warning("[coffin.declent_ru(NOMINATIVE)] служит другому и отказывается подчиняться вашей воле!"))
+		return
+	for(var/turf/T in range(1, coffin))
+		if(T.density)
+			to_chat(user, span_warning("Для ритуала вокруг [coffin.declent_ru(GENITIVE)] нужно больше места!"))
+			return
+	to_chat(user, span_danger("Вы начинаете помечать [coffin.declent_ru(ACCUSATIVE)]!"))
+	coffin.Beam(user, icon_state = "drainbeam", maxdistance = 1, time = 10 SECONDS)
+	playsound(coffin, 'sound/effects/bubbles/bubbles.ogg', 20)
+	for(var/obj/machinery/light/L in range(5, user))
+		L.flicker()
+	var/obj/effect/lair_rune/rune = new /obj/effect/lair_rune(get_turf(coffin), user)
+	if(!do_after(user, 10 SECONDS, target = coffin))
+		qdel(rune)
+		return
+	playsound(user, 'sound/misc/interference.ogg', 30)
+	new /obj/structure/closet/crate/coffin/vampire(get_turf(coffin), user)
+	qdel(coffin)
+	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
+	V.has_lair = TRUE
+	V.upgrade_tiers -= type
+	V.remove_ability(src)
+
+/obj/structure/closet/crate/coffin/vampire
+	name = "vampire coffin"
+	desc = "Гроб, отмеченный кровавой руной."
+
+/obj/effect/lair_rune
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	plane = FLOOR_PLANE
+	layer = RUNE_LAYER
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_rune.dmi'
+	icon_state = "vampiric_rune"
+	pixel_x = -34
+	pixel_y = -38
+
+/obj/effect/lair_rune/Initialize(mapload, mob/user)
+	. = ..()
+	if(user)
+		var/mob/living/living_user = user
+		color = living_user?.get_bloodtype()?.get_color()
 
 /datum/vampire_passive/regen
 	gain_desc = "Ваши способности омоложения улучшились и теперь при использовании исцеляют вас со временем."
