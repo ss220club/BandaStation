@@ -319,7 +319,7 @@
 		return
 
 	var/deviation
-	if(user.dir & (EAST | WEST))
+	if(user.body_position == LYING_DOWN)
 		deviation = DEVIATION_PARTIAL
 	else
 		deviation = calculate_deviation(target, user)
