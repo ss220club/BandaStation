@@ -1,15 +1,30 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/obj/effect/turf_decal/stripes/corner,
-/obj/machinery/light/floor,
-/turf/open/floor/iron,
+/obj/structure/reagent_dispensers/wall/peppertank/directional/north,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/misc,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"e" = (
+/obj/structure/table,
+/obj/structure/reagent_dispensers/wall/peppertank/directional/west,
+/obj/machinery/recharger{
+	pixel_x = -6
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/recharger{
+	pixel_x = 6
+	},
+/turf/open/floor/iron/dark,
 /area/station/security/armory)
 "h" = (
-/obj/effect/turf_decal/stripes/corner{
-	dir = 8
-	},
-/obj/machinery/light/floor,
-/turf/open/floor/iron,
+/obj/structure/rack,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/effect/spawner/random/armory/bulletproof_armor,
+/obj/effect/spawner/random/armory/bulletproof_helmet,
+/obj/item/clothing/suit/hooded/ablative,
+/turf/open/floor/iron/dark,
 /area/station/security/armory)
 "k" = (
 /obj/effect/turf_decal/stripes/line{
@@ -30,17 +45,19 @@
 /turf/open/floor/iron,
 /area/station/security/armory)
 "w" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/station/security/armory)
+/turf/template_noop,
+/area/template_noop)
 "M" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
+/obj/structure/table,
+/obj/machinery/status_display/evac/directional/north,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/item/sledgehammer/tactical{
+	pixel_y = 3
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/light/floor,
-/turf/open/floor/iron,
+/obj/item/sledgehammer/tactical{
+	pixel_y = -3
+	},
+/turf/open/floor/iron/dark,
 /area/station/security/armory)
 "N" = (
 /obj/structure/window/reinforced/spawner/directional/north,
@@ -48,6 +65,13 @@
 /obj/structure/rack/gunrack,
 /obj/effect/spawner/armory_spawn/disablers,
 /turf/open/floor/iron,
+/area/station/security/armory)
+"P" = (
+/obj/item/radio/intercom/directional/north,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/dragnets,
+/turf/open/floor/iron/dark,
 /area/station/security/armory)
 "W" = (
 /obj/machinery/camera/directional/north{
@@ -63,17 +87,50 @@
 /area/station/security/armory)
 
 (1,1,1) = {"
+w
 M
-v
-h
+e
+w
 "}
 (2,1,1) = {"
+w
+w
+w
+w
+"}
+(3,1,1) = {"
+h
+w
+w
+w
+"}
+(4,1,1) = {"
+w
+w
+v
+w
+"}
+(5,1,1) = {"
+w
 k
 w
 W
 "}
-(3,1,1) = {"
-M
+(6,1,1) = {"
+w
+w
 N
+w
+"}
+(7,1,1) = {"
 a
+w
+w
+w
+"}
+(8,1,1) = {"
+P
+w
+w
+w
 "}

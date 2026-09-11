@@ -451,12 +451,9 @@
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
 "zo" = (
-/obj/structure/rack,
 /obj/effect/turf_decal/bot/right,
-/obj/item/gun/energy/e_gun/dragnet{
-	pixel_y = 4
-	},
-/obj/item/gun/energy/e_gun/dragnet,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/dragnets,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "Ab" = (
@@ -481,11 +478,11 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "Fg" = (
-/obj/structure/rack,
-/obj/effect/spawner/random/armory/disablers,
 /obj/effect/turf_decal/bot/left,
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/disablers,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "Gb" = (
@@ -558,10 +555,10 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "RA" = (
-/obj/structure/rack,
 /obj/effect/turf_decal/bot/right,
 /obj/machinery/airalarm/directional/north,
-/obj/effect/spawner/random/armory/pick_laser_loadout,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/laser,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "Sa" = (

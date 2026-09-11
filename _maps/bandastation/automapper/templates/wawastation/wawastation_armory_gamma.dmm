@@ -9,10 +9,10 @@
 /turf/open/floor/engine,
 /area/station/security/armory)
 "c" = (
-/obj/structure/rack,
-/obj/effect/spawner/random/armory/pick_laser_loadout,
 /obj/effect/turf_decal/tile/red/half/contrasted,
 /obj/machinery/light/small/directional/north,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/laser,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "e" = (
@@ -56,14 +56,14 @@
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "l" = (
-/obj/structure/rack,
-/obj/effect/spawner/random/armory/disablers,
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
 /obj/machinery/requests_console/auto_name/directional/south,
 /obj/effect/mapping_helpers/requests_console/supplies,
 /obj/effect/mapping_helpers/requests_console/assistance,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/disablers,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "m" = (
@@ -73,12 +73,12 @@
 /turf/open/floor/engine,
 /area/station/security/armory)
 "n" = (
-/obj/structure/rack,
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
 /obj/item/radio/intercom/directional/south,
-/obj/effect/spawner/random/armory/dragnet,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/dragnets,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "o" = (
@@ -95,18 +95,13 @@
 /turf/open/floor/engine,
 /area/station/security/armory)
 "q" = (
-/obj/structure/rack,
-/obj/item/clothing/suit/hooded/ablative,
-/obj/item/gun/energy/temperature/security,
-/obj/item/gun/energy/ionrifle,
-/obj/item/gun/ballistic/automatic/battle_rifle{
-	pixel_y = 3
-	},
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/structure/cable,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/misc,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "r" = (
@@ -154,6 +149,7 @@
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
+/obj/item/clothing/suit/hooded/ablative,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "w" = (
@@ -248,11 +244,11 @@
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "N" = (
-/obj/effect/spawner/random/armory/shotgun,
-/obj/structure/rack,
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/shotguns,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "O" = (
@@ -261,13 +257,12 @@
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "P" = (
-/obj/structure/rack,
-/obj/effect/spawner/random/armory/e_gun,
 /obj/effect/turf_decal/tile/red/half/contrasted,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/eguns,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "R" = (
-/obj/structure/rack,
 /obj/item/storage/box/flashes{
 	pixel_x = 7;
 	pixel_y = 6
@@ -292,6 +287,7 @@
 /obj/item/sledgehammer/tactical{
 	pixel_y = -3
 	},
+/obj/structure/rack,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "S" = (

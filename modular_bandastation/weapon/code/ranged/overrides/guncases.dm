@@ -1,5 +1,4 @@
 /obj/item/storage/toolbox/guncase
-	desc = "Прочный кейс для оружия с вставками из пенопласта, расположение которых обеспечивает надежную фиксацию оружия, магазинов и дополнительного снаряжения."
 	icon = 'modular_bandastation/weapon/icons/guncases.dmi'
 	icon_state = "guncase"
 	worn_icon = 'modular_bandastation/weapon/icons/guncases_worn.dmi'
@@ -327,7 +326,6 @@
 	. += "<i>На нём незаметно нанесена торговая марка <b>[span_purple("Xhihao Light Arms")]</b>.</i>"
 
 /obj/item/storage/toolbox/guncase/soviet
-	desc = "Оружейный кейс с символикой СССП отпечатаной на верхней части."
 	icon_state = "sovietcase"
 	worn_icon_state = "sovietcase"
 	inhand_icon_state = "sovietcase"

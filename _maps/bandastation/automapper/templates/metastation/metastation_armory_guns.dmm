@@ -13,6 +13,9 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
+"b" = (
+/turf/template_noop,
+/area/template_noop)
 "f" = (
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 8
@@ -31,12 +34,21 @@
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "s" = (
-/obj/item/clothing/suit/hooded/ablative,
-/obj/effect/turf_decal/tile/red/half/contrasted{
-	dir = 8
+/obj/structure/rack,
+/obj/effect/turf_decal/tile/blue/half/contrasted{
+	dir = 4
 	},
+/obj/effect/spawner/random/armory/barrier_grenades,
+/obj/item/clothing/suit/hooded/ablative,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"x" = (
+/obj/effect/turf_decal/tile/blue/half/contrasted{
+	dir = 4
+	},
+/obj/machinery/light/small/directional/west,
 /obj/structure/rack/gunrack,
-/obj/effect/spawner/armory_spawn/misc,
+/obj/effect/spawner/armory_spawn/dragnets,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "K" = (
@@ -48,10 +60,53 @@
 /obj/effect/spawner/armory_spawn/eguns,
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
+"R" = (
+/obj/effect/turf_decal/tile/blue/half/contrasted{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/requests_console/supplies,
+/obj/effect/mapping_helpers/requests_console/assistance,
+/obj/machinery/requests_console/directional/west{
+	department = "Security";
+	name = "Security Requests Console"
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/disablers,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"S" = (
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 8
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/misc,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
 
 (1,1,1) = {"
-f
+x
 s
+R
+b
+b
+"}
+(2,1,1) = {"
+b
+b
+b
+b
+b
+"}
+(3,1,1) = {"
+b
+b
+b
+b
+b
+"}
+(4,1,1) = {"
+f
+S
 K
 i
 a

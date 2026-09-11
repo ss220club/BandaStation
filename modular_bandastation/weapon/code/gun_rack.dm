@@ -116,8 +116,6 @@
 	var/list/guns
 	/// Do we fan out the items spawned for a natural effect?
 	var/fan_out_items = FALSE
-	/// How many mags per gun do we spawn, if it takes magazines.
-	var/mags_to_spawn = 3
 	/// Do we want to angle it so that it is horizontal?
 	var/vertical_guns = TRUE
 
