@@ -48,7 +48,7 @@
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_blood_rush, update = TRUE)
 
 /datum/movespeed_modifier/vampire_blood_rush
-	multiplicative_slowdown = -1
+	multiplicative_slowdown = -0.5
 
 /datum/status_effect/vampire_gladiator
 	id = "vampire_gladiator"
