@@ -11,7 +11,7 @@
 	var/mob/living/carbon/human/human_owner = owner
 	if(!istype(human_owner))
 		return FALSE
-	ADD_TRAIT(human_owner, TRAIT_CHUNKYFINGERS, REF(src))
+	ADD_TRAIT(human_owner, TRAIT_CHUNKYFINGERS_IGNORE_BATON, REF(src))
 	MODIFY_PHYSIOLOGY(human_owner, BRUTE, 0.4)
 	MODIFY_PHYSIOLOGY(human_owner, BURN, 0.5)
 	MODIFY_PHYSIOLOGY(human_owner, STAMINA, 0.5)
@@ -26,7 +26,7 @@
 	var/mob/living/carbon/human/human_owner = owner
 	if(!istype(human_owner))
 		return
-	REMOVE_TRAIT(human_owner, TRAIT_CHUNKYFINGERS, REF(src))
+	REMOVE_TRAIT(human_owner, TRAIT_CHUNKYFINGERS_IGNORE_BATON, REF(src))
 	MODIFY_PHYSIOLOGY(human_owner, BRUTE, 1 / 0.4)
 	MODIFY_PHYSIOLOGY(human_owner, BURN, 1 / 0.5)
 	MODIFY_PHYSIOLOGY(human_owner, STAMINA, 1 / 0.5)
