@@ -115,6 +115,12 @@
 	equip_delay_other = 5 SECONDS
 	armor_type = /datum/armor/space_beret
 
+/obj/item/clothing/head/beret/ert/specops
+	name = "Special Ops Operative beret"
+	desc = "Берет оперативника специальных операций."
+	icon_state = "/obj/item/clothing/head/beret/ert/specops"
+	armor_type = /datum/armor/beret_centcom_formal
+
 /obj/item/clothing/head/caphat/beret_black
 	name = "black captain beret"
 	desc = "Хорошо быть королём."
