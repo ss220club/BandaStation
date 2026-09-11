@@ -35,7 +35,7 @@
 	owner.update_sight() // Life updates conditionally, so vision passives must force an update when granted.
 	return
 
-/datum/action/cooldown/spell/aoe/vampire_rejuvenate
+/datum/action/cooldown/spell/vampire_rejuvenate
 	name = "Омоложение"
 	desc = "Используйте запас крови, чтобы оживить тело и снять все обездвиживающие эффекты."
 	gain_desc = "Теперь вы можете использовать омоложение."
@@ -46,11 +46,11 @@
 	antimagic_flags = NONE // So. If you have a null rod on your person, you can't cast vampire spells. I would rather not have officers abuse this by putting a nullrod in their pocket or something to block rejuvinate.
 
 
-/datum/action/cooldown/spell/aoe/vampire_rejuvenate/New(Target)
+/datum/action/cooldown/spell/vampire_rejuvenate/New(Target)
 	. = ..()
 	add_vampire_ability()
 
-/datum/action/cooldown/spell/aoe/vampire_rejuvenate/cast(atom/cast_on)
+/datum/action/cooldown/spell/vampire_rejuvenate/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
 
@@ -68,7 +68,7 @@
 	if(rejuv_bonus)
 		INVOKE_ASYNC(src, PROC_REF(heal), user, rejuv_bonus)
 
-/datum/action/cooldown/spell/aoe/vampire_rejuvenate/proc/heal(mob/living/user, rejuv_bonus)
+/datum/action/cooldown/spell/vampire_rejuvenate/proc/heal(mob/living/user, rejuv_bonus)
 	// TODO: rewrite to something better
 	for(var/i in 1 to 5)
 		if(QDELETED(user) || user.stat == DEAD)
@@ -95,7 +95,7 @@
 
 // No exfiltration feature for tg
 
-/datum/action/cooldown/spell/aoe/vampire_specialize
+/datum/action/cooldown/spell/vampire_specialize
 	name = "Выбрать специализацию"
 	desc = "Выберите подкласс вампира, в который хотите развиться."
 	gain_desc = "Теперь вы можете выбрать вампирскую специализацию для развития."
@@ -103,30 +103,30 @@
 	cooldown_time = 2 SECONDS
 	button_icon_state = "select_class"
 
-/datum/action/cooldown/spell/aoe/vampire_specialize/New(Target)
+/datum/action/cooldown/spell/vampire_specialize/New(Target)
 	. = ..()
 	add_vampire_ability()
 
-/datum/action/cooldown/spell/aoe/vampire_specialize/cast(atom/cast_on)
+/datum/action/cooldown/spell/vampire_specialize/cast(atom/cast_on)
 	. = ..()
 	ui_interact(owner)
 
-/datum/action/cooldown/spell/aoe/vampire_specialize/ui_state(mob/user)
+/datum/action/cooldown/spell/vampire_specialize/ui_state(mob/user)
 	return GLOB.always_state
 
-/datum/action/cooldown/spell/aoe/vampire_specialize/ui_interact(mob/user, datum/tgui/ui = null)
+/datum/action/cooldown/spell/vampire_specialize/ui_interact(mob/user, datum/tgui/ui = null)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "SpecMenu", "Меню специализации")
 		ui.set_autoupdate(FALSE)
 		ui.open()
 
-/datum/action/cooldown/spell/aoe/vampire_specialize/ui_data(mob/user)
+/datum/action/cooldown/spell/vampire_specialize/ui_data(mob/user)
 	var/datum/antagonist/vampire/vamp = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	var/list/data = list("subclasses" = vamp.subclass)
 	return data
 
-/datum/action/cooldown/spell/aoe/vampire_specialize/ui_act(action, list/params)
+/datum/action/cooldown/spell/vampire_specialize/ui_act(action, list/params)
 	if(..())
 		return
 	var/datum/antagonist/vampire/vamp = usr.mind.has_antag_datum(/datum/antagonist/vampire)
