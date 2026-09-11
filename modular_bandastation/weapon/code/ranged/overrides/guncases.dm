@@ -11,6 +11,8 @@
 	material_flags = NONE
 	storage_type = /datum/storage/toolbox/guncase
 	var/opened = FANCY_CONTAINER_CLOSED
+	weapon_to_spawn = null
+	extra_to_spawn = null
 
 /datum/storage/toolbox/guncase
 	click_alt_open = FALSE
@@ -192,6 +194,82 @@
 	icon_state = "syndicase_s"
 	w_class = WEIGHT_CLASS_NORMAL
 	storage_type = /datum/storage/toolbox/guncase/pistol
+
+/obj/item/storage/toolbox/guncase/traitor
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol
+	extra_to_spawn = /obj/item/ammo_box/magazine/m9mm
+
+/obj/item/storage/toolbox/guncase/bulldog
+	icon_state = "syndicase"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/c20r
+	icon_state = "syndicase"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/smartgun
+	icon_state = "syndicase"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/clandestine
+	icon_state = "syndicase_s"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/m90gl
+	icon_state = "syndicase"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/rocketlauncher
+	icon_state = "syndicase"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/revolver
+	icon_state = "syndicase_s"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/sword_and_board
+	icon_state = "syndicase"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/cqc
+	icon_state = "syndicase"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/doublesword
+	icon_state = "syndicase"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/china_lake
+	icon_state = "syndicase"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/monkeycase
+	icon_state = "syndicase_s"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+
+/obj/item/storage/toolbox/guncase/syndiesledge
+	name = "syndicate sledgehammer case"
+	icon_state = "syndicase"
+	worn_icon_state = "syndicase"
+	inhand_icon_state = "syndicase"
+	weapon_to_spawn = /obj/item/sledgehammer/syndie
+	extra_to_spawn = /obj/item/clothing/head/utility/welding
+
+/obj/item/storage/toolbox/guncase/syndiesledge/PopulateContents()
+	new weapon_to_spawn(src)
+	new extra_to_spawn(src)
 
 // Interdyne Pharmaceuticals
 /obj/item/storage/toolbox/guncase/interdyne

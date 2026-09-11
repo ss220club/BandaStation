@@ -4,10 +4,11 @@
 	icon = 'modular_bandastation/weapon/icons/gun_rack.dmi'
 	icon_state = "gunrack"
 	pass_flags_self = NONE
+	max_integrity = 200
 
 /obj/structure/rack/gunrack/alt
 	icon_state = "gunrack2"
-	pass_flags_self = LETPASSTHROW
+	pass_flags_self = PASSSTRUCTURE | LETPASSTHROW
 
 /obj/structure/rack/gunrack/Initialize(mapload)
 	. = ..()
@@ -80,20 +81,13 @@
 
 	return ..()
 
-/obj/structure/rack/gunrack/alt/CanAllowThrough(atom/movable/mover, border_dir)
-	. = ..()
-	if(.)
-		return
-	if(istype(mover) && (mover.pass_flags & PASSTABLE))
-		return TRUE
-
 /obj/structure/rack/gunrack/CanAllowThrough(atom/movable/mover, border_dir)
 	. = ..()
-	return
+	return FALSE
 
 /obj/item/rack_parts/gunrack
 	name = "gun rack parts"
-	desc = "Parts of a gun rack."
+	desc = "Части для сборки оружейной стойки."
 
 /obj/item/rack_parts/gunrack/attack_self(mob/user)
 	if(building)
