@@ -51,6 +51,7 @@
 			L.soundbang_act(2, 10 SECONDS, 10)
 			L.adjust_temporary_deafness(5 SECONDS)
 			L.adjust_dizzy(4)
+			L.drop_all_held_items()
 		else
 			L.adjust_organ_loss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_FAR)
 			L.soundbang_act(2, 5 SECONDS, 5)
