@@ -32,7 +32,7 @@
 		/datum/action/cooldown/spell/aoe/vampire_rejuvenate = 0,
 		/datum/action/cooldown/spell/aoe/vampire_glare = 0,
 		/datum/vampire_passive/vision = 100,
-		/datum/action/cooldown/spell/vampire_specialize = 150,
+		/datum/action/cooldown/spell/aoe/vampire_specialize = 150,
 		/datum/action/cooldown/spell/pointed/vampire_lair = 150,
 		/datum/vampire_passive/regen = 200,
 		/datum/vampire_passive/vision/advanced = 500,
