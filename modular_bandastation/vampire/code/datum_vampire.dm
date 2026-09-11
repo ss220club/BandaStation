@@ -60,6 +60,7 @@
 
 /datum/antagonist/vampire/on_gain()
 	forge_objectives()
+	// TODO: dont get nutrition from normal food
 	return ..()
 
 /datum/antagonist/vampire/proc/adjust_nullification(base, extra)
@@ -346,6 +347,7 @@
 		update_blood_hud()
 
 /datum/antagonist/vampire/proc/handle_vampire_cloak(mob/living/vampire_mob)
+	// TODO: movespeed bonus
 	if(!ishuman(vampire_mob))
 		vampire_mob.alpha = 255
 		return
