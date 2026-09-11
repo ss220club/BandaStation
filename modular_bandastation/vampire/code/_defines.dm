@@ -14,8 +14,3 @@
 #define ROLE_VAMPIRE "Vampire"
 #define VAMPIRE_TRAIT "vampire"
 #define HUD_MOB_VAMPIRE_BLOOD "mob_vampire_blood"
-
-/// Logging for vampire learning and other related stuff
-#define LOG_CATEGORY_GAME_VAMPIRE "game-vampire"
-/proc/log_vampire(text, list/data)
-	logger.Log(LOG_CATEGORY_GAME_VAMPIRE, text, data)
