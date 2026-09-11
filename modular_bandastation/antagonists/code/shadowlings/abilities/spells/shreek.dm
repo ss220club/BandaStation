@@ -45,6 +45,7 @@
 		if(istype(L, /mob/living/carbon/human) && hive)
 			if((L in hive.lings) || (L in hive.thralls))
 				continue
+		var/obj/item/organ/ears/ears = L.get_organ_slot(ORGAN_SLOT_EARS)
 		var/dist = get_dist(H, L)
 		if(dist <= knock_radius)
 			L.adjust_organ_loss(ORGAN_SLOT_EARS, SHREEK_EAR_DAMAGE_CLOSE)
