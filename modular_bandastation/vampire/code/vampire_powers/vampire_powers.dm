@@ -162,7 +162,6 @@
 	update_specialization_objective()
 	if(log_choice)
 		SSblackbox.record_feedback("nested tally", "vampire_subclasses", 1, list("[new_subclass.name]"))
-		log_vampire()
 
 // TODO for someone else: convert this to an universal spell with charges thingie
 /datum/action/cooldown/spell/aoe/vampire_glare
