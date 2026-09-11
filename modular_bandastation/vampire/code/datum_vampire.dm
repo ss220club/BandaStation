@@ -66,7 +66,7 @@
 	nullified = clamp(nullified + extra, base, VAMPIRE_NULLIFICATION_CAP)
 
 /datum/antagonist/vampire/antag_panel_data()
-	return "Всего крови: [bloodtotal] | Доступно крови: [bloodusable]"
+	return "Специализация: [subclass.name] | Всего крови: [bloodtotal] | Доступно крови: [bloodusable]"
 
 /datum/antagonist/vampire/get_admin_commands()
 	. = ..()
@@ -529,7 +529,7 @@
 
 /datum/antagonist/vampire/greet()
 	. = ..()
-	SEND_SOUND(owner.current, sound('sound/music/antag/ling_alert.ogg'))
+	SEND_SOUND(owner.current, sound('sound/music/antag/ling_alert.ogg')) // TODO: replace sound
 	to_chat(owner.current, span_danger("Вы — вампир!"))
 	to_chat(owner.current, span_notice("Чтобы укусить кого-то, выберите голову, включите намерение навредить и используйте пустую руку. Пейте кровь, чтобы получить новые силы. \
 		Вы слабы перед святыми предметами, светом звёзд и огнём. Не выходите в космос и избегайте капеллана, часовни и особенно святой воды."))
