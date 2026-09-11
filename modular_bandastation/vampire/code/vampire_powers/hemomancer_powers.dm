@@ -203,6 +203,8 @@
 	cooldown_time = 30 SECONDS
 	jaunt_duration = 3 SECONDS
 	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
+	jaunt_in_type = /obj/effect/temp_visual/dir_setting/cult/phase
+	jaunt_out_type = /obj/effect/temp_visual/dir_setting/cult/phase/out
 
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/New(Target)
 	. = ..()
