@@ -270,7 +270,7 @@
 		if(target.affects_vampire(owner) && target.client && locate(/obj/effect/decal/cleanable/blood) in get_turf(target))
 			. += target
 
-/datum/action/cooldown/spell/aoe/vampire_blood_eruption/cast_on_thing_in_aoe(mob/living/target/target, atom/caster)
+/datum/action/cooldown/spell/aoe/vampire_blood_eruption/cast_on_thing_in_aoe(mob/living/target, atom/caster)
 	var/turf/turf = get_turf(target)
 	var/obj/effect/decal/cleanable/blood/blood = locate(/obj/effect/decal/cleanable/blood) in turf
 	var/obj/effect/temp_visual/blood_spike/spike = new(turf)

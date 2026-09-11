@@ -180,9 +180,9 @@
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls/cast_on_thing_in_aoe(mob/living/carbon/human/thrall, atom/caster)
 	var/image/overlay = image('modular_bandastation/vampire/icons/effects/vampire_effects.dmi', "rallyoverlay", layer = EFFECTS_LAYER)
 	playsound(thrall, 'modular_bandastation/vampire/sound/magic/staff_healing.ogg', 30)
-	user.SetAllImmobility(0)
-	user.set_stamina_loss(0)
-	user.set_resting(FALSE, instant = TRUE)
+	thrall.SetAllImmobility(0)
+	thrall.set_stamina_loss(0)
+	thrall.set_resting(FALSE, instant = TRUE)
 	thrall.add_overlay(overlay)
 	addtimer(CALLBACK(thrall, TYPE_PROC_REF(/atom, cut_overlay), overlay), 6 SECONDS)
 
