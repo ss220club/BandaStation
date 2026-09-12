@@ -2,6 +2,9 @@
 
 #include "code/apex_outfit.dm"
 #include "code/fishing_portal_generator.dm"
+#include "code/mod_delta_817.dm"
+#include "code/normandy_suit_storage.dm"
+#include "code/prime_vox.dm"
 #include "code/khaaroot_survivor/ghost_disease.dm"
 #include "code/khaaroot_survivor/status_effect.dm"
 #include "code/khaaroot_survivor/viral_surge.dm"
