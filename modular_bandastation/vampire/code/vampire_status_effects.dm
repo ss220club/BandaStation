@@ -106,30 +106,36 @@
 
 /datum/status_effect/vampire_thrall_net/tick(seconds_between_ticks)
 	var/list/mob/living/members = list()
-	var/total_damage = 0
+	var/total_brute_damage = 0
+	var/total_burn_damage = 0
+	var/total_tox_damage = 0
+	var/total_oxy_damage = 0
+	var/total_genetic_damage = 0
 	for(var/datum/weakref/member_ref as anything in network_members)
 		var/mob/living/member = member_ref.resolve()
 		if(!member || member.stat == DEAD || get_dist(owner, member) > 7)
 			continue
 		members += member
-		total_damage += member.maxHealth - member.health
+		total_brute_damage += member.get_brute_loss()
+		total_burn_damage += member.get_fire_loss()
+		total_tox_damage += member.get_tox_loss()
+		total_oxy_damage += member.get_oxy_loss()
 		var/datum/status_effect/genetic_damage/genetic_damage = member.has_status_effect(/datum/status_effect/genetic_damage)
-		total_damage += genetic_damage?.total_damage || 0
+		total_genetic_damage += genetic_damage?.total_damage || 0
 	if(length(members) <= 1 || !vampire?.bloodusable)
 		qdel(src)
 		return
-	var/average_damage = total_damage / length(members)
+	var/member_count = length(members)
+	var/average_brute_damage = total_brute_damage / member_count
+	var/average_burn_damage = total_burn_damage / member_count
+	var/average_tox_damage = total_tox_damage / member_count
+	var/average_oxy_damage = total_oxy_damage / member_count
 	for(var/mob/living/member as anything in members)
 		var/datum/status_effect/genetic_damage/genetic_damage = member.has_status_effect(/datum/status_effect/genetic_damage)
-		var/current_damage = member.maxHealth - member.health + (genetic_damage?.total_damage || 0)
-		var/difference = average_damage - current_damage
-		if(difference > 0)
-			member.adjust_fire_loss(difference)
-		else if(difference < 0)
-			var/healing = -difference
-			member.adjust_brute_loss(-healing)
-			if(genetic_damage)
-				genetic_damage.total_damage = max(0, genetic_damage.total_damage - healing)
+		member.adjust_brute_loss(average_brute_damage - member.get_brute_loss())
+		member.adjust_fire_loss(average_burn_damage - member.get_fire_loss())
+		member.adjust_tox_loss(average_tox_damage - member.get_tox_loss(), forced = TRUE)
+		member.adjust_oxy_loss(average_oxy_damage - member.get_oxy_loss(), forced = TRUE)
 	vampire.subtract_usable_blood(blood_cost_per_tick)
 
 /datum/status_effect/vampire_shadow_boxing
@@ -164,3 +170,10 @@
 
 /datum/status_effect/vampire_charging/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_NO_THROW_SELF_IMPACT, REF(src))
+
+/// A charging vampire demolishes solid obstructions instead of taking the normal throw impact.
+/mob/living/carbon/Bump(atom/bumped_atom)
+	if(has_status_effect(/datum/status_effect/vampire_charging) && bumped_atom?.density && !iscarbon(bumped_atom))
+		bumped_atom.atom_destruction(MELEE)
+		return TRUE
+	return ..()

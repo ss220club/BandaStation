@@ -214,6 +214,15 @@
 
 /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
 
+/obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool/phased_check(mob/living/user, direction)
+	. = ..()
+	if(!.)
+		return
+	var/turf/destination = .
+	if(destination.density || isspaceturf(destination))
+		to_chat(user, span_warning("Вы не можете пройти через стены или космос в этой форме."))
+		return null
+
 /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool/relaymove(mob/living/user, direction)
 	var/turf/old_turf = get_turf(src)
 	. = ..()

@@ -72,10 +72,10 @@
 	if(QDELETED(user) || user.stat == DEAD)
 		return
 
-	user.adjust_brute_loss(2 * rejuv_mult)
-	user.adjust_oxy_loss(5 * rejuv_mult)
-	user.adjust_tox_loss(2 * rejuv_mult, forced = TRUE)
-	user.adjust_fire_loss(2 * rejuv_mult)
+	user.adjust_brute_loss(-2 * rejuv_mult)
+	user.adjust_oxy_loss(-5 * rejuv_mult)
+	user.adjust_tox_loss(-2 * rejuv_mult, forced = TRUE)
+	user.adjust_fire_loss(-2 * rejuv_mult)
 	if(user.reagents)
 		for(var/datum/reagent/toxin/toxin in user.reagents.reagent_list)
 			user.reagents.remove_reagent(toxin.type, 2 * rejuv_mult)

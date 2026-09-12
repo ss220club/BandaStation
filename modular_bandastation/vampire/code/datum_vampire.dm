@@ -20,6 +20,8 @@
 	var/datum/vampire_subclass/subclass
 	/// Handles the vampire cloak toggle
 	var/iscloaking = FALSE
+	/// The alpha value currently imposed by the vampire cloak, if any.
+	var/cloak_alpha
 	/// List of available active spell actions and passives
 	var/list/powers = list()
 	/// Who the vampire is draining of blood
@@ -126,7 +128,7 @@
 		powers -= ability
 		if(istype(ability, /datum/action))
 			var/datum/action/action = ability
-			action.Remove(owner.current)
+			action.Remove(action.owner)
 		qdel(ability)
 		if(owner?.current)
 			owner.current.update_sight()
@@ -339,29 +341,47 @@
 
 /datum/antagonist/vampire/proc/handle_vampire_cloak(mob/living/vampire_mob)
 	if(!ishuman(vampire_mob))
-		vampire_mob.alpha = 255
+		if(!isnull(cloak_alpha) && vampire_mob.alpha == cloak_alpha)
+			vampire_mob.alpha = 255
+		cloak_alpha = null
 		vampire_mob.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 		return
 
 	var/mob/living/carbon/human/human_owner = vampire_mob
 	var/turf/turf_loc = get_turf(human_owner)
 	if(!turf_loc)
+		if(!isnull(cloak_alpha) && human_owner.alpha == cloak_alpha)
+			human_owner.alpha = 255
+		cloak_alpha = null
 		human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 		return
 
 	var/light_available = turf_loc.get_lumcount() * 10
 
 	if(!iscloaking || human_owner.on_fire)
-		human_owner.alpha = 255
+		if(!isnull(cloak_alpha) && human_owner.alpha == cloak_alpha)
+			human_owner.alpha = 255
+		cloak_alpha = null
 		human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+		return
+
+	// Another spell has changed our visibility since the cloak last did. Leave that
+	// spell in control until it restores the cloak's previously applied alpha.
+	if(!isnull(cloak_alpha) && human_owner.alpha != cloak_alpha)
+		if(light_available <= 2)
+			human_owner.add_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+		else
+			human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 		return
 
 	if(light_available <= 2)
 		human_owner.alpha = 40
+		cloak_alpha = 40
 		human_owner.add_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 		return
 
 	human_owner.alpha = 200
+	cloak_alpha = 200
 	human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 
 /datum/antagonist/vampire/proc/adjust_blood(mob/living/carbon/victim, blood_amount = 0)
