@@ -16,7 +16,7 @@
 	r_pocket = /obj/item/clothing/accessory/lawyers_badge
 	neck = /obj/item/clothing/neck/tie/black/tied
 
-	belt = /obj/item/modular_computer/pda/heads/magistrate
+	belt = /obj/item/modular_computer/pda/crew/heads/magistrate
 	backpack_contents = list(
 		/obj/item/melee/baton/telescopic = 1
 	)

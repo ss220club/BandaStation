@@ -70,6 +70,7 @@ GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 		if(length(to_del))
 			for(var/atom/to_kill in to_del)
 				qdel(to_kill, force = TRUE)
+			to_del.Cut() // BANDASTATION EDIT: Release the last iteration ref before waiting for GC
 
 	GLOB.running_create_and_destroy = FALSE
 
