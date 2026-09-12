@@ -28,8 +28,12 @@
 	var/datum/antagonist/vampire/vampire = source.mind?.has_antag_datum(/datum/antagonist/vampire)
 	if(!vampire || vampire.draining || victim == source)
 		return
+	var/datum/species/species = victim.dna.species
+	if(species.exotic_bloodtype && (species.exotic_bloodtype::reagent_type != /datum/reagent/blood))
+		to_chat(source, span_warning("В [victim] не кровь!"))
+		return COMPONENT_CANCEL_ATTACK_CHAIN
 	if(!victim.get_blood_volume())
-		to_chat(source, span_warning("В них нет крови!"))
+		to_chat(source, span_warning("В [victim] нет крови!"))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 	if(victim.mind?.has_antag_datum(/datum/antagonist/vampire) || victim.mind?.has_antag_datum(/datum/antagonist/vampire_thrall))
 		to_chat(source, span_warning("Ваши клыки не могут пронзить холодную плоть [victim]!"))
