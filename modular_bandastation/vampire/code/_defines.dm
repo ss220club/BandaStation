@@ -14,3 +14,6 @@
 #define ROLE_VAMPIRE "Vampire"
 #define VAMPIRE_TRAIT "vampire"
 #define HUD_MOB_VAMPIRE_BLOOD "mob_vampire_blood"
+
+/// Sent to a vampire spell to deduct its configured blood cost.
+#define COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD "vampire_ability_deduct_blood"

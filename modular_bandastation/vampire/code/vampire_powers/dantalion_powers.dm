@@ -34,8 +34,7 @@
 	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
 	if(!vampire)
 		return
-	var/datum/component/vampire_ability/ability = GetComponent(/datum/component/vampire_ability)
-	ability.deduct_blood(src)
+	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
 	var/datum/antagonist/vampire_thrall/thrall = new(vampire)
 	if(!target.mind.add_antag_datum(thrall))
 		qdel(thrall)

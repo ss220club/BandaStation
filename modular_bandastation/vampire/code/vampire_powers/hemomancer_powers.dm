@@ -164,7 +164,7 @@
 		if(wall_count++ >= max_walls)
 			break
 		new /obj/structure/blood_barrier(turf)
-	GetComponent(/datum/component/vampire_ability).deduct_blood(src)
+	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
 	start_turf = null
 	StartCooldown()
 

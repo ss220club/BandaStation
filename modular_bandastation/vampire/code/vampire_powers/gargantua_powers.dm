@@ -266,7 +266,7 @@
 	if(timer)
 		dispel(user)
 		return
-	GetComponent(/datum/component/vampire_ability).deduct_blood(src)
+	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
 	user.forceMove(get_turf(target))
 	playsound(user, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 	new /obj/effect/temp_visual/stomp(get_turf(user))

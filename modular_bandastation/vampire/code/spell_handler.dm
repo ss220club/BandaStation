@@ -13,6 +13,7 @@
 	RegisterSignal(parent, COMSIG_SPELL_CAN_CAST_CHECK, PROC_REF(can_cast))
 	RegisterSignal(parent, COMSIG_SPELL_BEFORE_CAST, PROC_REF(before_cast))
 	RegisterSignal(parent, COMSIG_SPELL_AFTER_CAST, PROC_REF(after_cast))
+	RegisterSignal(parent, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD, PROC_REF(deduct_blood))
 
 /datum/component/vampire_ability/proc/get_vampire(datum/action/cooldown/spell/spell)
 	return spell.owner?.mind?.has_antag_datum(/datum/antagonist/vampire)
@@ -48,9 +49,10 @@
 /datum/component/vampire_ability/proc/before_cast(datum/action/cooldown/spell/spell, atom/cast_on)
 	SIGNAL_HANDLER
 	if(deduct_blood_on_cast)
-		deduct_blood(spell)
+		SEND_SIGNAL(spell, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
 
 /datum/component/vampire_ability/proc/deduct_blood(datum/action/cooldown/spell/spell)
+	SIGNAL_HANDLER
 	if(!required_blood)
 		return
 	var/datum/antagonist/vampire/vampire = get_vampire(spell)

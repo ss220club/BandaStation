@@ -193,7 +193,7 @@
 		if(!do_teleport(user, end_turf, channel = TELEPORT_CHANNEL_MAGIC))
 			return
 	shadow_to_animation(start_turf, end_turf, user)
-	GetComponent(/datum/component/vampire_ability).deduct_blood(src)
+	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
 
 /datum/action/cooldown/spell/vampire_soul_anchor/proc/restore_visibility(mob/living/user, previous_alpha)
 	if(!QDELETED(user))
