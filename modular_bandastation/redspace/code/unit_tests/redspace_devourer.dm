@@ -371,7 +371,7 @@
 	if(!SSredspace || SSredspace.event_registry["demonic_devourer"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer)
 		return Fail("The Devourer spawn must be registered in SSredspace")
 	var/datum/redspace_profile/demonic/profile = new
-	if(!profile.is_event_allowed("demonic_devourer") || profile.get_event_profile(REDSPACE_STATE_STORM).get_event_weight("demonic_devourer") != 1)
+	if(!profile.is_event_allowed("demonic_devourer") || profile.get_event_profile(REDSPACE_STATE_STORM).get_event_weight("demonic_devourer") != 2)
 		return Fail("The demonic profile must expose the Devourer in its storm event pool")
 	qdel(profile)
 	qdel(devourer_event)

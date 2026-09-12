@@ -54,7 +54,7 @@
 		return Fail("The mature beholder must use its dedicated 64x64 sprite and offsets")
 	if(!istype(test_beholder.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/ranged/beholder) || test_beholder.ai_controller.blackboard[BB_RANGED_SKIRMISH_MIN_DISTANCE] != 2)
 		return Fail("The mature beholder must use the ranged demon AI with point-blank retreat range")
-	if(!beholder_attacks || beholder_attacks.burst_shots != 4 || beholder_attacks.projectile_type != /obj/projectile/magic/lesser_fireball)
+	if(!beholder_attacks || beholder_attacks.burst_shots != 4 || beholder_attacks.projectile_type != /obj/projectile/magic/lesser_fireball/beholder)
 		return Fail("The mature beholder must fire four-fireball bursts")
 	if(!HAS_TRAIT_FROM(test_beholder, TRAIT_MOVE_FLYING, ELEMENT_TRAIT(/datum/element/simple_flying)))
 		return Fail("The mature beholder must be able to fly")
@@ -67,20 +67,20 @@
 	if(!SSredspace || SSredspace.event_registry["demonic_mature_beholder"] != /datum/redspace_event/spawn/mob/demonic_lesser_demon/mature_beholder)
 		return Fail("The mature beholder spawn must be registered in SSredspace")
 	var/datum/redspace_profile/demonic/beholder_profile = new
-	if(!beholder_profile.is_event_allowed("demonic_mature_beholder") || beholder_profile.get_event_profile(REDSPACE_STATE_STORM).get_event_weight("demonic_mature_beholder") != 1)
+	if(!beholder_profile.is_event_allowed("demonic_mature_beholder") || beholder_profile.get_event_profile(REDSPACE_STATE_STORM).get_event_weight("demonic_lesser_demon") != 4 || beholder_profile.get_event_profile(REDSPACE_STATE_STORM).get_event_weight("demonic_ranged_demon") != 4 || beholder_profile.get_event_profile(REDSPACE_STATE_STORM).get_event_weight("demonic_soldier") != 2 || beholder_profile.get_event_profile(REDSPACE_STATE_STORM).get_event_weight("demonic_minotaur") != 2 || beholder_profile.get_event_profile(REDSPACE_STATE_STORM).get_event_weight("demonic_devourer") != 2 || beholder_profile.get_event_profile(REDSPACE_STATE_STORM).get_event_weight("demonic_mature_beholder") != 1)
 		return Fail("The demonic profile must expose the mature beholder in its storm event pool")
 	qdel(beholder_profile)
 	qdel(beholder_event)
 
-	var/obj/projectile/magic/lesser_fireball/test_fireball = new
+	var/obj/projectile/magic/lesser_fireball/beholder/test_fireball = new
 	var/obj/projectile/magic/fireball/standard_fireball = new
-	if(test_fireball.icon_state != standard_fireball.icon_state || test_fireball.damage != 20 || test_fireball.ignite_chance != 30 || test_fireball.fire_stacks != 2 || istype(test_fireball, /obj/projectile/magic/fireball))
+	if(test_fireball.icon_state != standard_fireball.icon_state || test_fireball.damage != 20 || test_fireball.armour_penetration != 20 || test_fireball.ignite_chance != 30 || test_fireball.fire_stacks != 2 || istype(test_fireball, /obj/projectile/magic/fireball))
 		return Fail("Ranged fireballs must be direct projectiles with no explosion")
 	qdel(test_fireball)
 	qdel(standard_fireball)
 
 	var/mob/living/basic/demon/redspace/soldier/test_soldier = allocate(/mob/living/basic/demon/redspace/soldier, run_loc_floor_bottom_left)
-	if(test_soldier.icon_state != "demon_soldier" || test_soldier.maxHealth <= test_mob.maxHealth || test_soldier.melee_damage_lower <= test_mob.melee_damage_lower || test_soldier.melee_damage_upper <= test_mob.melee_damage_upper)
+	if(test_mob.maxHealth != 125 || test_soldier.icon_state != "demon_soldier" || test_soldier.maxHealth != 155 || test_soldier.maxHealth <= test_mob.maxHealth || test_soldier.melee_damage_lower <= test_mob.melee_damage_lower || test_soldier.melee_damage_upper <= test_mob.melee_damage_upper)
 		return Fail("Redspace soldiers must be stronger than lesser demons")
 	if(!istype(test_soldier.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/melee))
 		return Fail("Redspace soldiers must inherit the obstacle-breaking hostile AI controller")
@@ -88,7 +88,7 @@
 	var/mob/living/basic/demon/redspace/moderate/minotaur/test_minotaur = allocate(/mob/living/basic/demon/redspace/moderate/minotaur, run_loc_floor_bottom_left)
 	var/datum/component/redspace_energy/minotaur_energy = test_minotaur.GetComponent(/datum/component/redspace_energy)
 	var/datum/action/cooldown/mob_cooldown/ground_slam/redspace/ground_slam = test_minotaur.ai_controller.blackboard[BB_TARGETED_ACTION]
-	if(!minotaur_energy || minotaur_energy.max_energy != 200 || minotaur_energy.drain_percent != 5 || minotaur_energy.zero_energy_damage_percent != 0.5 || !ground_slam || ground_slam.range != 2 || ground_slam.damage != 20 || ground_slam.knockdown_duration != 2 SECONDS)
+	if(!minotaur_energy || minotaur_energy.max_energy != 200 || minotaur_energy.drain_percent != 5 || minotaur_energy.zero_energy_damage_percent != 0.5 || !ground_slam || ground_slam.range != 2 || ground_slam.damage != 20 || ground_slam.knockdown_duration != 2 SECONDS || ground_slam.cooldown_time != 20 SECONDS)
 		return Fail("Moderate demons must have a larger, slower-draining energy reserve and a ground slam ability")
 
 	if(!energy.consume_energy(25) || energy.current_energy != 75)

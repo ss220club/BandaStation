@@ -184,10 +184,16 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	var/datum/redspace_field_source/hotspot/target_source
 	var/active = FALSE
 	var/closed = FALSE
+	var/sealing_shield_hits = 0
+	var/mutable_appearance/sealing_shield_overlay
 
 /obj/machinery/redspace_rift_sealer/Initialize(mapload)
 	. = ..()
 	RegisterSignal(src, COMSIG_MOVABLE_SET_ANCHORED, PROC_REF(on_anchor_changed))
+	sealing_shield_overlay = mutable_appearance('icons/effects/effects.dmi', "shield-old", MOB_SHIELD_LAYER)
+	sealing_shield_overlay.color = "#ff5500"
+	sealing_shield_overlay.alpha = 180
+	RegisterSignal(src, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_sealing_shield_overlay_update))
 	update_sealer_appearance()
 	return .
 
@@ -198,6 +204,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 
 /obj/machinery/redspace_rift_sealer/Destroy()
 	stop_sealing("установка закрытия уничтожена")
+	UnregisterSignal(src, COMSIG_ATOM_UPDATE_OVERLAYS)
 	if(target_source)
 		UnregisterSignal(target_source, COMSIG_REDSPACE_SOURCE_CHANGED, PROC_REF(on_source_changed))
 	GLOB.redspace_active_rift_sealers -= src
@@ -226,6 +233,8 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 		return FALSE
 
 	active = TRUE
+	sealing_shield_hits = REDSPACE_RIFT_SEALER_SHIELD_HITS
+	RegisterSignal(src, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_sealing_shield_damage))
 	GLOB.redspace_active_rift_sealers |= src
 	begin_processing()
 	update_sealer_appearance()
@@ -238,6 +247,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 
 	var/datum/redspace_field_source/hotspot/source = target_source
 	active = FALSE
+	clear_sealing_shield()
 	GLOB.redspace_active_rift_sealers -= src
 	redspace_demon_forget_sealer(src)
 	if(source)
@@ -268,6 +278,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	UnregisterSignal(source, COMSIG_REDSPACE_SOURCE_CHANGED, PROC_REF(on_source_changed))
 	var/was_active = active
 	active = FALSE
+	clear_sealing_shield()
 	GLOB.redspace_active_rift_sealers -= src
 	redspace_demon_forget_sealer(src)
 	target_source = null
@@ -280,6 +291,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	if(source != target_source)
 		return
 	UnregisterSignal(source, COMSIG_REDSPACE_SOURCE_CHANGED, PROC_REF(on_source_changed))
+	clear_sealing_shield()
 	active = FALSE
 	closed = TRUE
 	GLOB.redspace_active_rift_sealers -= src
@@ -288,6 +300,27 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	end_processing()
 	update_sealer_appearance()
 	visible_message(span_notice("[src] подтверждает закрытие разлома."))
+
+/obj/machinery/redspace_rift_sealer/proc/clear_sealing_shield()
+	UnregisterSignal(src, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_sealing_shield_damage))
+	sealing_shield_hits = 0
+
+/obj/machinery/redspace_rift_sealer/proc/on_sealing_shield_damage(datum/source, damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armour_penetration)
+	SIGNAL_HANDLER
+	if(!active || sealing_shield_hits <= 0 || damage_amount <= 0)
+		return NONE
+	sealing_shield_hits--
+	update_appearance(UPDATE_ICON)
+	playsound(src, 'sound/items/weapons/tap.ogg', 20, TRUE)
+	visible_message(span_notice("Защитное поле [src] поглощает удар."))
+	if(!sealing_shield_hits)
+		visible_message(span_warning("Защитное поле [src] истощилось."))
+	return COMPONENT_NO_TAKE_DAMAGE
+
+/obj/machinery/redspace_rift_sealer/proc/on_sealing_shield_overlay_update(atom/source, list/overlays)
+	SIGNAL_HANDLER
+	if(active && sealing_shield_hits > 0)
+		overlays += sealing_shield_overlay
 
 /obj/machinery/redspace_rift_sealer/process(seconds_per_tick)
 	if(!active)

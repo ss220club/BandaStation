@@ -104,11 +104,12 @@
 			"storm_pulse" = 4,
 			"demonic_crystal" = 1,
 			"demonic_necropolis" = 4,
-			"demonic_lesser_demon" = 2,
-			"demonic_ranged_demon" = 2,
-			"demonic_soldier" = 1,
-			"demonic_minotaur" = 1,
-			"demonic_devourer" = 1,
+			"demonic_lesser_demon" = 4,
+			"demonic_ranged_demon" = 4,
+			"demonic_soldier" = 2,
+			// Keep the mature beholder rarer than the other moderate demons.
+			"demonic_minotaur" = 2,
+			"demonic_devourer" = 2,
 			"demonic_mature_beholder" = 1,
 		),
 	)

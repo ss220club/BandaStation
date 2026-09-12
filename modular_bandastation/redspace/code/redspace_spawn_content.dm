@@ -650,6 +650,9 @@
 	living_target.adjust_fire_stacks(fire_stacks)
 	living_target.ignite_mob()
 
+/obj/projectile/magic/lesser_fireball/beholder
+	armour_penetration = 20
+
 /// A short-range ground slam used by larger redspace demons.
 /datum/action/cooldown/mob_cooldown/ground_slam/redspace
 	name = "Удар по земле"
@@ -929,8 +932,8 @@
 	icon_state = "demon_melee"
 	icon_living = "demon_melee"
 	speed = 0.5
-	maxHealth = 150
-	health = 150
+	maxHealth = 125
+	health = 125
 	melee_damage_lower = 12
 	melee_damage_upper = 18
 	ai_controller = /datum/ai_controller/basic_controller/simple/redspace_demon/melee
@@ -984,8 +987,8 @@
 	desc = "A heavily built redspace demon bred for close combat."
 	icon_state = "demon_soldier"
 	icon_living = "demon_soldier"
-	maxHealth = 180
-	health = 180
+	maxHealth = 155
+	health = 155
 	melee_damage_lower = 20
 	melee_damage_upper = 28
 
@@ -1066,6 +1069,7 @@
 /mob/living/basic/demon/redspace/moderate/minotaur/Initialize(mapload)
 	. = ..()
 	var/datum/action/cooldown/mob_cooldown/ground_slam/redspace/ground_slam = new(src)
+	ground_slam.cooldown_time = 20 SECONDS
 	ground_slam.Grant(src)
 	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, ground_slam)
 
@@ -1117,7 +1121,7 @@
 	AddElement(/datum/element/simple_flying)
 	AddComponent(\
 		/datum/component/ranged_attacks,\
-		projectile_type = /obj/projectile/magic/lesser_fireball,\
+		projectile_type = /obj/projectile/magic/lesser_fireball/beholder,\
 		projectile_sound = 'sound/effects/magic/fireball.ogg',\
 		burst_shots = 4,\
 		burst_intervals = 0.2 SECONDS,\
