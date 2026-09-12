@@ -1,4 +1,5 @@
 // Copied from traitor
+// TODO: species filter
 /datum/dynamic_ruleset/roundstart/vampire
 	name = "Vampires"
 	config_tag = "Roundstart Vampire"

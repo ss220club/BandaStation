@@ -326,6 +326,7 @@
 	return istype(cast_on, /obj/structure/closet/crate/coffin)
 
 /datum/action/cooldown/spell/pointed/vampire_lair/cast(atom/cast_on)
+	// TODO: para sounds
 	. = ..()
 	var/mob/living/user = owner
 	var/obj/structure/closet/crate/coffin/coffin = cast_on
@@ -359,6 +360,8 @@
 /obj/structure/closet/crate/coffin/vampire
 	name = "vampire coffin"
 	desc = "Гроб, отмеченный кровавой руной."
+// TODO: port coffin features
+
 
 /obj/effect/lair_rune
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
