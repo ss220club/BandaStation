@@ -213,14 +213,8 @@
 /datum/antagonist/vampire/proc/handle_bloodsucking(mob/living/carbon/human/target_human, suck_rate = 5 SECONDS)
 	draining = target_human
 	var/unique_suck_id = REF(target_human)
-	var/blood = 0
-	var/blood_volume_warning = 9999
+	var/blood_volume_warning = BLOOD_VOLUME_MAXIMUM
 	var/mob/living/caster = owner.current
-
-	if(caster.is_mouth_covered())
-		to_chat(caster, span_warning("Ваша маска или намордник не позволяют укусить [target_human]!"))
-		draining = null
-		return
 
 	log_combat(caster, target_human, "bitten & drained of blood (vampire)")
 	caster.visible_message(
@@ -230,22 +224,21 @@
 	)
 
 	while(do_after(caster, suck_rate, target_human, cog_icon = null))
-		// TODO: compact this
+		if(caster.is_mouth_covered())
+			to_chat(caster, span_warning("Ваша маска или намордник не позволяют укусить [target_human]!"))
+			break
+		var/can_give_usable_blood = target_human.ckey || target_human.get_ghost(FALSE)
+		var/at_blood_drain_limit = drained_humans[unique_suck_id] >= BLOOD_DRAIN_LIMIT
+		var/usable_blood_gain = can_give_usable_blood && !at_blood_drain_limit && target_human.stat != DEAD ? min(20, target_human.blood_volume) : 0
+		var/nutrition_gain = can_give_usable_blood && !at_blood_drain_limit ? usable_blood_gain / 2 : 5
 		caster.do_attack_animation(target_human, ATTACK_EFFECT_BITE)
-		if(unique_suck_id in drained_humans)
-			if(drained_humans[unique_suck_id] >= BLOOD_DRAIN_LIMIT)
-				to_chat(caster, span_warning("Вы выпили из крови [target_human] почти всю жизненную силу и больше не получите доступной крови!"))
-				target_human.blood_volume = max(target_human.blood_volume - 25, 0)
-				caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + 5))
-				continue
-
-		if(target_human.stat != DEAD)
-			if(target_human.ckey || target_human.get_ghost(FALSE))
-				blood = min(20, target_human.blood_volume)
-				adjust_blood(target_human, blood * BLOOD_GAINED_MODIFIER)
-				to_chat(caster, span_notice("<b>Вы накопили [bloodtotal] ед. крови; для использования осталось [bloodusable].</b>"))
 
 		target_human.blood_volume = max(target_human.blood_volume - 25, 0)
+		if(at_blood_drain_limit)
+			to_chat(caster, span_warning("Вы выпили из крови [target_human] почти всю жизненную силу и больше не получите доступной крови!"))
+		else if(usable_blood_gain)
+			adjust_blood(target_human, usable_blood_gain * BLOOD_GAINED_MODIFIER)
+			to_chat(caster, span_notice("<b>Вы накопили [bloodtotal] ед. крови; для использования осталось [bloodusable].</b>"))
 
 		if(target_human.blood_volume)
 			if(target_human.blood_volume <= BLOOD_VOLUME_BAD && blood_volume_warning > BLOOD_VOLUME_BAD)
@@ -257,11 +250,9 @@
 			to_chat(caster, span_warning("Вы обескровили свою жертву!"))
 			break
 
-		if(!target_human.ckey && !target_human.get_ghost(FALSE))
+		if(!can_give_usable_blood)
 			to_chat(caster, span_notice("<b>Питание кровью [target_human] утоляет ваш голод, но не даёт доступной крови.</b>"))
-			caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + 5))
-		else
-			caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + (blood / 2)))
+		caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + nutrition_gain))
 
 	draining = null
 	to_chat(caster, span_notice("Вы прекращаете высасывать кровь из [target_human.name]."))

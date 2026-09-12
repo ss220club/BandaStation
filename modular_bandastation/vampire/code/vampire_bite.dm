@@ -23,6 +23,9 @@
 		return
 	if(!source.can_unarmed_attack())
 		return COMPONENT_CANCEL_ATTACK_CHAIN
+	if(source.is_mouth_covered())
+		to_chat(source, span_warning("Ваша маска или намордник не позволяют укусить [target]!"))
+		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	var/mob/living/carbon/human/victim = target
 	var/datum/antagonist/vampire/vampire = source.mind?.has_antag_datum(/datum/antagonist/vampire)
@@ -50,4 +53,3 @@
 	var/mob/living/carbon/human/affected_human = exposed_mob
 	if(affected_human.mind?.has_antag_datum(/datum/antagonist/vampire))
 		affected_human.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, affected_human.nutrition + reac_volume / 5))
-
