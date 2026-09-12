@@ -1029,6 +1029,11 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 		if(NAMEOF(src, view))
 			view_size.setDefault(var_value)
 			return TRUE
+		// BANDASTATION EDIT START: Restricted donator level editing
+		if(NAMEOF(src, donator_level))
+			if(!usr?.client?.holder || (get_player_admin_flags(usr.client) & R_EVERYTHING) != R_EVERYTHING)
+				return FALSE
+		// BANDASTATION EDIT END: Restricted donator level editing
 	. = ..()
 
 /client/proc/rescale_view(change, min, max)
