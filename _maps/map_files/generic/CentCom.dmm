@@ -2247,10 +2247,6 @@
 /obj/effect/turf_decal/line/dark_blue/line,
 /obj/machinery/duct,
 /obj/structure/light_fake/spot/directional/south,
-/obj/structure/statue/dummy/srt{
-	dir = 1;
-	pixel_y = 0
-	},
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "akL" = (
@@ -13571,11 +13567,6 @@
 /area/centcom/central_command_areas/srt/brief_srt)
 "esM" = (
 /obj/effect/turf_decal/line/dark_blue/anticorner,
-/obj/structure/statue/dummy/srt{
-	dir = 8;
-	pixel_x = 11;
-	pixel_y = 0
-	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
 "eta" = (
@@ -15135,14 +15126,6 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
-"hwC" = (
-/obj/structure/statue/dummy/srt{
-	dir = 8;
-	pixel_x = 11;
-	pixel_y = 0
-	},
-/turf/open/floor/iron/smooth,
-/area/centcom/central_command_areas/briefing)
 "hxG" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/left/directional/west{
@@ -15332,13 +15315,6 @@
 /obj/machinery/light/directional/west,
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/club)
-"hRt" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/structure/statue/dummy/srt,
-/turf/open/floor/iron/dark/smooth_large,
-/area/centcom/central_command_areas/fore)
 "hRu" = (
 /obj/structure/chair/sofa/left/brown,
 /turf/open/floor/wood/tile,
@@ -18887,11 +18863,6 @@
 /obj/effect/turf_decal/line/dark_blue/anticorner{
 	dir = 8
 	},
-/obj/structure/statue/dummy/srt{
-	dir = 4;
-	pixel_x = -11;
-	pixel_y = 0
-	},
 /turf/open/floor/iron/dark/smooth_edge{
 	dir = 8
 	},
@@ -20123,13 +20094,6 @@
 /obj/structure/light_fake/spot/directional/east,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
-"sfi" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/structure/statue/dummy/srt,
-/turf/open/floor/iron/dark/smooth_large,
-/area/centcom/central_command_areas/fore)
 "sfI" = (
 /obj/effect/turf_decal/line/dark_blue{
 	dir = 8
@@ -77981,7 +77945,7 @@ vbM
 jxK
 aIY
 tTd
-tUQ
+bmm
 tVK
 eJw
 haR
@@ -78501,7 +78465,7 @@ oLP
 wGt
 esM
 agO
-hwC
+aQa
 sFK
 aEp
 aJt
@@ -78982,7 +78946,7 @@ ahU
 aBq
 aVx
 aVx
-sfi
+eiJ
 eiJ
 viN
 nUD
@@ -82323,7 +82287,7 @@ ahU
 avr
 aVx
 aVx
-hRt
+kxH
 kxH
 ede
 sQS
