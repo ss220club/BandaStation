@@ -348,7 +348,7 @@
 		qdel(rune)
 		return
 	playsound(user, 'modular_bandastation/vampire/sound/misc/im_here1.ogg', 30)
-	new /obj/structure/closet/crate/coffin/vampire(get_turf(coffin), user)
+	new /obj/structure/closet/crate/coffin/vampire(get_turf(coffin), user, rune)
 	qdel(coffin)
 	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	V.has_lair = TRUE
@@ -361,9 +361,10 @@
 	max_integrity = 500
 	anchored = TRUE
 	armor_type = /datum/armor/vampire_coffin
-	custom_fire_overlay = " "
 	/// Owner of this coffin.
 	var/mob/living/vampire
+	/// The rune created with this coffin.
+	var/obj/effect/lair_rune/lair_rune
 	/// Whether the coffin is currently being ignited with a welder.
 	var/igniting = FALSE
 	COOLDOWN_DECLARE(fire_act_cooldown)
@@ -374,14 +375,22 @@
 	laser = 80
 	energy = 200
 	bomb = 200
-	fire = 80
+	fire = -60 // Burning deals 16 damage per second, destroying the coffin in ~30 seconds
 	acid = 200
 
-/obj/structure/closet/crate/coffin/vampire/Initialize(mapload, mob/living/user)
+/obj/structure/closet/crate/coffin/vampire/Initialize(mapload, mob/living/user, obj/effect/lair_rune/rune)
 	. = ..()
 	name = "[name] [user.mind.name]"
 	desc += "<br>Владелец этого гроба, возможно, никому не был дорог или даже ещё не умер.<br>[span_warning("Кажется, он неуязвим для всего, кроме лазеров и огня! Особенно для огня!")]"
 	vampire = user
+	lair_rune = rune
+
+/obj/structure/closet/crate/coffin/vampire/Destroy()
+	QDEL_NULL(lair_rune)
+	return ..()
+
+/obj/structure/closet/crate/coffin/vampire/wrench_act(mob/living/user, obj/item/tool)
+	return ITEM_INTERACT_BLOCKING
 
 /obj/structure/closet/crate/coffin/vampire/welder_act(mob/living/user, obj/item/tool)
 	if(igniting)
@@ -392,7 +401,7 @@
 	to_chat(user, span_notice("Вы пытаетесь поджечь [src] с помощью [tool]."))
 	to_chat(vampire, span_warning("На ваше логово напали!"))
 	if(tool.use_tool(src, user, 15 SECONDS, amount = 30))
-		fire_act()
+		fire_act(tool.get_temperature())
 	igniting = FALSE
 	return ITEM_INTERACT_SUCCESS
 
@@ -425,7 +434,10 @@
 /obj/structure/closet/crate/coffin/vampire/burn()
 	playsound(src, 'sound/effects/hallucinations/wail.ogg', 20, extrarange = 5)
 	visible_message(span_danger("Огонь вырывается из [src], когда он разрушается!"))
+	var/turf/coffin_turf = get_turf(src)
 	for(var/turf/turf in range(1, src))
+		if(turf == coffin_turf)
+			continue
 		new /obj/effect/hotspot(turf)
 	return ..()
 
@@ -463,6 +475,7 @@
 
 /obj/effect/lair_rune
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	anchored = TRUE
 	plane = FLOOR_PLANE
 	layer = RUNE_LAYER
 	icon = 'modular_bandastation/vampire/icons/effects/vampire_rune.dmi'
