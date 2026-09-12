@@ -21,13 +21,6 @@
 	clothing_traits = list(TRAIT_HERETIC_AURA_HIDDEN)
 	/// Whether the hood is flipped up
 	var/hood_up = FALSE
-	/// Type of texture applied by this
-	var/texture_type = /datum/bodypart_texture/mesh/heretic
-
-/obj/item/clothing/suit/hooded/cultrobes/eldritch/Initialize(mapload)
-	. = ..()
-	if(texture_type)
-		AddElement(/datum/element/equipment_bodypart_texture, BODY_ZONE_CHEST, texture_type)
 
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/equipped(mob/user, slot, initial)
 	. = ..()
@@ -76,13 +69,6 @@
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	clothing_flags = THICKMATERIAL | PLASMAMAN_PREVENT_IGNITION | SNUG_FIT
 	armor_type = /datum/armor/eldritch_armor
-	/// Type of texture applied by this
-	var/texture_type = /datum/bodypart_texture/mesh/heretic
-
-/obj/item/clothing/head/hooded/cult_hoodie/eldritch/Initialize(mapload)
-	. = ..()
-	if(texture_type)
-		AddElement(/datum/element/equipment_bodypart_texture, BODY_ZONE_HEAD, texture_type)
 
 /datum/armor/eldritch_armor
 	melee = 50
@@ -114,7 +100,6 @@
 	min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF | LAVA_PROOF | FREEZE_PROOF
 	actions_types = list(/datum/action/item_action/toggle/flames)
-	texture_type = /datum/bodypart_texture/mesh/black
 	/// If our robes are actively generating flames
 	var/flame_generation = FALSE
 	/// Cooldown before our robes will create new flames
@@ -196,7 +181,6 @@
 		И всё же складки, пропитанные сажей, отводят клинок и пламя от того, кто скрыт внутри. Недолгая отсрочка - прежде чем её взгляд обратится вовнутрь."
 	icon_state = "ash_armor"
 	armor_type = /datum/armor/eldritch_armor/ash
-	texture_type = /datum/bodypart_texture/mesh/black
 
 /datum/armor/eldritch_armor/ash
 	melee = 40
@@ -219,7 +203,6 @@
 	hoodtype = /obj/item/clothing/head/hooded/cult_hoodie/eldritch/blade
 	armor_type = /datum/armor/eldritch_armor/blade
 	siemens_coefficient = 0
-	texture_type = /datum/bodypart_texture/mesh/bombsuit
 	var/murdering_with_blades = FALSE
 
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/blade/on_robes_gained(mob/living/user)
@@ -327,7 +310,6 @@
 	icon_state = "blade_armor"
 	armor_type = /datum/armor/eldritch_armor/blade
 	siemens_coefficient = 0
-	texture_type = /datum/bodypart_texture/mesh/bombsuit
 
 /datum/armor/eldritch_armor/blade
 	melee = 50
@@ -353,7 +335,6 @@
 	cold_protection = CHEST | GROIN | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
 	actions_types = list(/datum/action/item_action/toggle/gravity)
-	texture_type = null
 	/// If our robes are making us weightless
 	var/weightless_enabled = FALSE
 
@@ -404,7 +385,6 @@
 	clothing_flags = THICKMATERIAL | PLASMAMAN_PREVENT_IGNITION | STOPSPRESSUREDAMAGE
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
-	texture_type = null
 
 /obj/item/clothing/head/hooded/cult_hoodie/eldritch/cosmic/Initialize(mapload)
 	. = ..()
@@ -430,7 +410,6 @@
 	icon_state = "flesh_armor"
 	hoodtype = /obj/item/clothing/head/hooded/cult_hoodie/eldritch/flesh
 	armor_type = /datum/armor/eldritch_armor/flesh
-	texture_type = null
 	/// The aura healing component. Used to delete it when taken off.
 	var/datum/component/healing_aura
 
@@ -463,11 +442,9 @@
 		addtimer(CALLBACK(limb, TYPE_PROC_REF(/obj/item/bodypart, force_wound_upwards), /datum/wound/slash/flesh/critical), 1 SECONDS * iteration)
 
 /obj/item/clothing/head/hooded/cult_hoodie/eldritch/flesh
-	name = "\improper Writhing Embrace"
 	icon_state = "flesh_armor"
 	armor_type = /datum/armor/eldritch_armor/flesh
 	clothing_traits = list(TRAIT_MEDICAL_HUD)
-	texture_type = null
 
 /datum/armor/eldritch_armor/flesh
 	melee = 70
@@ -490,7 +467,6 @@
 	hoodtype = /obj/item/clothing/head/hooded/cult_hoodie/eldritch/lock
 	armor_type = /datum/armor/eldritch_armor/lock
 	flags_inv = parent_type::flags_inv | HIDEMUTWINGS
-	texture_type = /datum/bodypart_texture/mesh/firesuit
 
 /obj/item/clothing/suit/hooded/cultrobes/eldritch/lock/on_robes_gained(mob/living/user)
 	user.AddElement(/datum/element/digitalcamo)
@@ -512,10 +488,8 @@
 			to_throw.safe_throw_at(pick(nearby_turfs), 2, 1, spin = TRUE)
 
 /obj/item/clothing/head/hooded/cult_hoodie/eldritch/lock
-	name = "\improper Shifting Guise"
 	icon_state = "lock_armor"
 	armor_type = /datum/armor/eldritch_armor/lock
-	texture_type = /datum/bodypart_texture/mesh/firesuit
 
 /datum/armor/eldritch_armor/lock
 	melee = 40
@@ -547,7 +521,6 @@
 		TRAIT_PACIFISM,
 		TRAIT_NOHUNGER
 	)
-	texture_type = /datum/bodypart_texture/mesh/firesuit
 	/// Boolean if you are brain dead so the sound doesn't spam during the delay
 	var/braindead = FALSE
 	//---- Messages that get sent when someone wearing the moon robes is attacked
@@ -789,7 +762,6 @@
 	name = "\improper Resplendant Hood"
 	icon_state = "moon_armor"
 	armor_type = /datum/armor/eldritch_armor/moon
-	texture_type = /datum/bodypart_texture/mesh/firesuit
 
 /datum/armor/eldritch_armor/moon
 	melee = 0
@@ -1072,7 +1044,6 @@
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	hoodtype = /obj/item/clothing/head/hooded/cult_hoodie/eldritch/void
 	armor_type = /datum/armor/eldritch_armor/void
-	texture_type = null
 	/// Cooldown before we can go back into stealth
 	COOLDOWN_DECLARE(stealth_cooldown)
 	/// Timer before our stealth runs out
@@ -1113,7 +1084,6 @@
 			Однако, если приглядеться к формам складок, то лучшим описанием будет - ничего."
 	icon_state = "void_armor"
 	armor_type = /datum/armor/eldritch_armor/void
-	texture_type = null
 
 /datum/armor/eldritch_armor/void
 	melee = 40
