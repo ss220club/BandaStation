@@ -2,7 +2,7 @@ import { COLORS } from '../../constants';
 import type { CrewSensor } from './types';
 
 export const STAT_LIVING = 0;
-export const STAT_DEAD = 4;
+export const STAT_DEAD = 3;
 
 export const HEALTH_COLOR_BY_LEVEL = [
   '#17d568',
