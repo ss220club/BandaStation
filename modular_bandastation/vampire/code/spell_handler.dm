@@ -71,4 +71,6 @@
 		name += " ([required_blood])"
 	background_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	background_icon_state = "bg_vampire"
+	overlay_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	overlay_icon_state = "bg_vampire_border"
 	AddComponent(/datum/component/vampire_ability, required_blood, deduct_blood_on_cast)
