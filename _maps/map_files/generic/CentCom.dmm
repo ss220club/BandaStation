@@ -2242,13 +2242,6 @@
 /obj/machinery/power/shuttle_engine/large,
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
-"akK" = (
-/obj/structure/sign/poster/official/tactical_game_cards/directional/south,
-/obj/effect/turf_decal/line/dark_blue/line,
-/obj/machinery/duct,
-/obj/structure/light_fake/spot/directional/south,
-/turf/open/floor/iron/dark/textured_half,
-/area/centcom/central_command_areas/hallway)
 "akL" = (
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
@@ -13565,10 +13558,6 @@
 "erV" = (
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/srt/brief_srt)
-"esM" = (
-/obj/effect/turf_decal/line/dark_blue/anticorner,
-/turf/open/floor/iron/dark/smooth_large,
-/area/centcom/central_command_areas/hallway)
 "eta" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -16173,6 +16162,10 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/planetary_port/library)
+"jYL" = (
+/obj/effect/turf_decal/line/dark_blue/anticorner,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/hallway)
 "jYQ" = (
 /obj/effect/turf_decal/siding/wideplating/dark/corner,
 /obj/structure/flora/bush/jungle/b/style_random,
@@ -16300,6 +16293,14 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"kuk" = (
+/obj/effect/turf_decal/line/dark_blue/anticorner{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_edge{
+	dir = 8
+	},
+/area/centcom/central_command_areas/hallway)
 "kuq" = (
 /obj/machinery/computer/accounting{
 	dir = 8
@@ -17745,6 +17746,13 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
+"nRm" = (
+/obj/structure/sign/poster/official/tactical_game_cards/directional/south,
+/obj/effect/turf_decal/line/dark_blue/line,
+/obj/machinery/duct,
+/obj/structure/light_fake/spot/directional/south,
+/turf/open/floor/iron/dark/textured_half,
+/area/centcom/central_command_areas/hallway)
 "nRQ" = (
 /obj/machinery/scanner_gate/preset_guns,
 /obj/machinery/door/poddoor/shutters/indestructible/preopen,
@@ -18106,16 +18114,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
-"ozQ" = (
-/obj/structure/closet/cabinet,
-/obj/item/clothing/suit/space/officer/browntrench,
-/obj/item/clothing/suit/space/officer/browntrench,
-/obj/item/clothing/head/helmet/space/beret/soo,
-/obj/item/clothing/head/helmet/space/beret/soo,
-/obj/item/clothing/suit/space/officer,
-/obj/item/clothing/suit/space/officer,
-/turf/open/floor/iron/dark/small,
-/area/centcom/central_command_areas/cabin/soo)
 "oAB" = (
 /obj/machinery/door/airlock/centcom,
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
@@ -18859,14 +18857,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/courtroom)
-"pKk" = (
-/obj/effect/turf_decal/line/dark_blue/anticorner{
-	dir = 8
-	},
-/turf/open/floor/iron/dark/smooth_edge{
-	dir = 8
-	},
-/area/centcom/central_command_areas/hallway)
 "pKq" = (
 /obj/effect/spawner/structure/window/reinforced/indestructible,
 /obj/machinery/door/poddoor/preopen{
@@ -20492,6 +20482,16 @@
 	},
 /turf/open/water/beach,
 /area/centcom/central_command_areas/arboretum)
+"sYn" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/suit/space/officer/browntrench,
+/obj/item/clothing/suit/space/officer/browntrench,
+/obj/item/clothing/head/beret/centcom/soo,
+/obj/item/clothing/head/beret/centcom/soo,
+/obj/item/clothing/suit/space/officer,
+/obj/item/clothing/suit/space/officer,
+/turf/open/floor/iron/dark/small,
+/area/centcom/central_command_areas/cabin/soo)
 "sYG" = (
 /obj/structure/chair/sofa/corp,
 /turf/open/floor/carpet/blue,
@@ -21873,28 +21873,6 @@
 /obj/machinery/holopad/secure,
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/conference_room)
-"vrx" = (
-/obj/structure/closet/secure_closet/personal/cabinet,
-/obj/item/clothing/under/rank/civilian/curator/treasure_hunter,
-/obj/item/clothing/under/dress/skirt,
-/obj/item/clothing/under/shorts/black,
-/obj/item/clothing/under/pants/track,
-/obj/item/clothing/accessory/armband/deputy,
-/obj/item/clothing/accessory/waistcoat,
-/obj/item/clothing/shoes/jackboots,
-/obj/item/clothing/shoes/laceup,
-/obj/item/clothing/neck/large_scarf/red,
-/obj/item/clothing/neck/tie/red,
-/obj/item/clothing/head/helmet/space/beret,
-/obj/item/clothing/suit/jacket/curator,
-/obj/item/clothing/suit/space/officer,
-/obj/item/clothing/gloves/fingerless,
-/obj/item/clothing/gloves/color/black,
-/obj/item/clothing/glasses/eyepatch,
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/structure/sign/clock/directional/north,
-/turf/open/floor/carpet/green,
-/area/centcom/central_command_areas/cabin/soo)
 "vrG" = (
 /obj/structure/chair/comfy/black{
 	dir = 4
@@ -23095,6 +23073,28 @@
 /obj/effect/light_emitter/podbay,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"xTG" = (
+/obj/structure/closet/secure_closet/personal/cabinet,
+/obj/item/clothing/under/rank/civilian/curator/treasure_hunter,
+/obj/item/clothing/under/dress/skirt,
+/obj/item/clothing/under/shorts/black,
+/obj/item/clothing/under/pants/track,
+/obj/item/clothing/accessory/armband/deputy,
+/obj/item/clothing/accessory/waistcoat,
+/obj/item/clothing/shoes/jackboots,
+/obj/item/clothing/shoes/laceup,
+/obj/item/clothing/neck/large_scarf/red,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret/centcom,
+/obj/item/clothing/suit/jacket/curator,
+/obj/item/clothing/suit/space/officer,
+/obj/item/clothing/gloves/fingerless,
+/obj/item/clothing/gloves/color/black,
+/obj/item/clothing/glasses/eyepatch,
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/structure/sign/clock/directional/north,
+/turf/open/floor/carpet/green,
+/area/centcom/central_command_areas/cabin/soo)
 "xUd" = (
 /obj/structure/reagent_dispensers/water_cooler,
 /turf/open/floor/wood/large,
@@ -73323,7 +73323,7 @@ tUQ
 tVK
 irU
 hjk
-pKk
+kuk
 aVX
 qsp
 aDT
@@ -74624,7 +74624,7 @@ aZT
 aIz
 aWS
 ayJ
-akK
+nRm
 aiF
 aeb
 aiF
@@ -78463,7 +78463,7 @@ tUQ
 tVK
 oLP
 wGt
-esM
+jYL
 agO
 aQa
 sFK
@@ -79750,7 +79750,7 @@ ugL
 mRo
 jOB
 aDl
-ozQ
+sYn
 wbH
 aMa
 aDl
@@ -81035,7 +81035,7 @@ gXs
 gXs
 erV
 aDl
-vrx
+xTG
 aWz
 wvT
 aDl

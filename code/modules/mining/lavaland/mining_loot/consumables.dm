@@ -195,14 +195,14 @@
 	var/wing_type = get_wing_choice(exposed_human, chest)
 	if(!wing_type)
 		return
-	var/obj/item/organ/wings/functional/wings = new wing_type()
+	var/obj/item/organ/wings/wings = new wing_type()
 	wings.Insert(exposed_human)
 	if(had_wings)
 		to_chat(exposed_human, span_userdanger("A terrible pain travels down your back as your wings change shape!"))
 	else
 		to_chat(exposed_human, span_userdanger("A terrible pain travels down your back as wings burst out!"))
 	playsound(exposed_human.loc, 'sound/items/poster/poster_ripped.ogg', 50, TRUE, -1)
-	exposed_human.apply_damage(20, def_zone = BODY_ZONE_CHEST, forced = TRUE, wound_bonus = CANT_WOUND)
+	exposed_human.apply_damage(20, def_zone = BODY_ZONE_CHEST, wound_bonus = CANT_WOUND)
 	exposed_human.emote("scream")
 
 /datum/reagent/flightpotion/proc/get_wing_choice(mob/living/carbon/human/needs_wings, obj/item/bodypart/chest/chest)
@@ -211,7 +211,7 @@
 		return wing_types[1]
 	var/list/radial_wings = list()
 	var/list/name2type = list()
-	for(var/obj/item/organ/wings/functional/possible_type as anything in wing_types)
+	for(var/obj/item/organ/wings/possible_type as anything in wing_types)
 		var/datum/sprite_accessory/accessory = SSaccessories.feature_list[FEATURE_WINGS][possible_type::sprite_accessory_override::name] //get the singleton instance
 		var/image/img = image(icon = accessory.icon, icon_state = "m_wingsopen_[accessory.icon_state]_BEHIND") //Process the HUD elements
 		img.transform *= 0.5

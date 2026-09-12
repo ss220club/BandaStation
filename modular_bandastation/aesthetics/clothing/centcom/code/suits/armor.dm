@@ -18,3 +18,12 @@
 	righthand_file = 'modular_bandastation/aesthetics/clothing/centcom/icons/inhands/clothing/suits_righthand.dmi'
 	armor_type = /datum/armor/armor_centcom_formal
 	resistance_flags = INDESTRUCTIBLE | FIRE_PROOF | FREEZE_PROOF | UNACIDABLE | ACID_PROOF
+
+/obj/item/clothing/suit/armor/diplomat_jacket
+	name = "fleet officer's white jacket"
+	desc = "Укороченный парадный пиджак Нанотрейзен."
+	icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/obj/clothing/suits/armor.dmi'
+	icon_state = "diplomat_jacket"
+	worn_icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/mob/clothing/suits/armor.dmi'
+	armor_type = /datum/armor/armor_centcom_formal
+	resistance_flags = INDESTRUCTIBLE | FIRE_PROOF | FREEZE_PROOF | UNACIDABLE | ACID_PROOF

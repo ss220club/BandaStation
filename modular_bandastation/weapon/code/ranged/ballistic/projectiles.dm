@@ -470,6 +470,9 @@
 	sharpness = NONE
 	embed_type = null
 
+/obj/projectile/bullet/incendiary/c9mm
+	leaves_fire_trail = FALSE
+
 // MARK: 10mm
 /obj/projectile/bullet/c10mm/rubber
 	name = "10mm rubber bullet"
