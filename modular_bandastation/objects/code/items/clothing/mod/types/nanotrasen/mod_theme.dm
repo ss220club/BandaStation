@@ -65,7 +65,7 @@
 	desc = "Ограниченная модификация линейки МОДкостюмов от Apadyne Technologies. Обеспечивает более высокую мобильность и защиту по сравнению с базовой моделью, а также выделяется черно-серебристой расцветкой."
 	extended_desc = "Штучная модификация. Костюм усилен композитными бронеплитами с серебряным напылением, оснащен передовыми модулями и дополнен теплым тяжелым пальто с посеребренными элементами."
 	default_skin = "specops"
-	armor_type = /datum/armor/vest_marine_heavy
+	armor_type = /datum/armor/mod_theme_responsory
 	complexity_max = DEFAULT_MAX_COMPLEXITY + 10
 	slowdown_deployed = 0
 	resistance_flags = FIRE_PROOF | ACID_PROOF
