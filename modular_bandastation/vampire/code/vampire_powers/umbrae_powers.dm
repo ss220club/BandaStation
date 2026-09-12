@@ -62,30 +62,32 @@
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_snare/cast(atom/cast_on)
 	. = ..()
-	new /obj/effect/vampire_shadow_snare(get_turf(cast_on))
+	new /obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare(get_turf(cast_on))
 
-/obj/effect/vampire_shadow_snare
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare
 	name = "shadow snare"
 	desc = "Почти прозрачная ловушка, растворяющаяся в тенях."
 	alpha = 60
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	armed = TRUE
 	var/remaining_integrity = 100
-	var/turf/host_turf
 
-/obj/effect/vampire_shadow_snare/proc/on_entered(datum/source, atom/movable/entered)
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/trap_stepped_on(datum/source, atom/movable/entered, ...)
 	SIGNAL_HANDLER
-	if(!iscarbon(entered))
+	if(!armed || !iscarbon(entered))
 		return
 	var/mob/living/carbon/target = entered
 	if(!target.affects_vampire())
 		return
+	. = ..()
+	if(armed)
+		return
 	target.set_light(0)
 	target.set_temp_blindness(20 SECONDS)
 	target.Immobilize(5 SECONDS)
-	qdel(src)
 
-/obj/effect/vampire_shadow_snare/process()
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/process()
 	var/turf/snare_turf = get_turf(src)
 	if(!snare_turf)
 		qdel(src)
@@ -96,28 +98,25 @@
 		visible_message(span_notice("[src.declent_ru(NOMINATIVE)] увядает."))
 		qdel(src)
 
-/obj/effect/vampire_shadow_snare/Initialize(mapload)
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/Initialize(mapload)
 	. = ..()
-	host_turf = get_turf(src)
-	RegisterSignal(host_turf, COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
 	START_PROCESSING(SSobj, src)
 
-/obj/effect/vampire_shadow_snare/Destroy()
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	UnregisterSignal(host_turf, COMSIG_ATOM_ENTERED)
 	return ..()
 
-/obj/effect/vampire_shadow_snare/attack_hand(mob/user)
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/attack_hand(mob/user)
 	if(iscarbon(user))
-		on_entered(null, user)
+		trap_stepped_on(null, user)
 
-/obj/effect/vampire_shadow_snare/attack_tk(mob/user)
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/attack_tk(mob/user)
 	if(iscarbon(user))
 		to_chat(user, span_userdanger("Ловушка посылает психический откат!"))
 		var/mob/living/carbon/carbon_user = user
 		carbon_user.set_temp_blindness(20 SECONDS)
 
-/obj/effect/vampire_shadow_snare/item_interaction(mob/living/user, obj/item/used, list/modifiers)
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/item_interaction(mob/living/user, obj/item/used, list/modifiers)
 	if(!istype(used, /obj/item/assembly/flash))
 		return ..()
 	var/obj/item/assembly/flash/flash = used
