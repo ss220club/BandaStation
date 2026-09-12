@@ -5,7 +5,7 @@
 	duration = 30 SECONDS
 	tick_interval = STATUS_EFFECT_NO_TICK
 	alert_type = null
-	var/bonus_damage_applied = FALSE
+	var/bonus_unarmed_damage_applied = FALSE
 
 /datum/status_effect/vampire_blood_swell/on_apply()
 	var/mob/living/carbon/human/human_owner = owner
@@ -18,8 +18,8 @@
 	MODIFY_PHYSIOLOGY(human_owner, PHYS_COEFF_STUN, 0.5)
 	var/datum/antagonist/vampire/vampire = human_owner.mind?.has_antag_datum(/datum/antagonist/vampire)
 	if(vampire?.get_ability(/datum/vampire_passive/blood_swell_upgrade))
-		bonus_damage_applied = TRUE
-		human_owner.AddElement(/datum/element/bonus_damage, 100, 10)
+		bonus_unarmed_damage_applied = TRUE
+		human_owner.AddElement(/datum/element/bonus_unarmed_damage, 10)
 	return TRUE
 
 /datum/status_effect/vampire_blood_swell/on_remove()
@@ -31,8 +31,8 @@
 	MODIFY_PHYSIOLOGY(human_owner, BURN, 1 / 0.5)
 	MODIFY_PHYSIOLOGY(human_owner, STAMINA, 1 / 0.5)
 	MODIFY_PHYSIOLOGY(human_owner, PHYS_COEFF_STUN, 1 / 0.5)
-	if(bonus_damage_applied)
-		human_owner.RemoveElement(/datum/element/bonus_damage, 100, 10)
+	if(bonus_unarmed_damage_applied)
+		human_owner.RemoveElement(/datum/element/bonus_unarmed_damage, 10)
 
 /datum/status_effect/vampire_blood_rush
 	id = "vampire_blood_rush"
@@ -120,7 +120,6 @@
 		total_burn_damage += member.get_fire_loss()
 		total_tox_damage += member.get_tox_loss()
 		total_oxy_damage += member.get_oxy_loss()
-		var/datum/status_effect/genetic_damage/genetic_damage = member.has_status_effect(/datum/status_effect/genetic_damage)
 		total_genetic_damage += genetic_damage?.total_damage || 0
 	if(length(members) <= 1 || !vampire?.bloodusable)
 		qdel(src)
@@ -131,7 +130,6 @@
 	var/average_tox_damage = total_tox_damage / member_count
 	var/average_oxy_damage = total_oxy_damage / member_count
 	for(var/mob/living/member as anything in members)
-		var/datum/status_effect/genetic_damage/genetic_damage = member.has_status_effect(/datum/status_effect/genetic_damage)
 		member.adjust_brute_loss(average_brute_damage - member.get_brute_loss())
 		member.adjust_fire_loss(average_burn_damage - member.get_fire_loss())
 		member.adjust_tox_loss(average_tox_damage - member.get_tox_loss(), forced = TRUE)
@@ -171,9 +169,36 @@
 /datum/status_effect/vampire_charging/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_NO_THROW_SELF_IMPACT, REF(src))
 
-/// A charging vampire demolishes solid obstructions instead of taking the normal throw impact.
-/mob/living/carbon/Bump(atom/bumped_atom)
-	if(has_status_effect(/datum/status_effect/vampire_charging) && bumped_atom?.density && !iscarbon(bumped_atom))
-		bumped_atom.atom_destruction(MELEE)
-		return TRUE
+
+/**
+ * Attached to a human. Adds unarmed damage.
+ */
+/datum/element/bonus_unarmed_damage
+	/// The amount of brute damage we will deal
+	var/brute_damage_amount
+
+/datum/element/bonus_unarmed_damage/Attach(datum/target, brute_damage_amount = 15)
+	. = ..()
+	if(!ishuman(target))
+		return ELEMENT_INCOMPATIBLE
+
+	src.brute_damage_amount = brute_damage_amount
+	RegisterSignal(target, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(unarmed_attack_target))
+
+/datum/element/bonus_unarmed_damage/Detach(datum/source)
+	UnregisterSignal(source, COMSIG_LIVING_UNARMED_ATTACK)
 	return ..()
+
+/datum/element/bonus_unarmed_damage/proc/unarmed_attack_target(mob/living/attacker, atom/target, proximity, list/modifiers)
+	SIGNAL_HANDLER
+
+	if(!attacker.combat_mode || !proximity || LAZYACCESS(modifiers, RIGHT_CLICK))
+		return
+
+	if(!isliving(target))
+		return
+	var/mob/living/living_target = target
+	if(living_target.stat == DEAD)
+		return
+
+	living_target.adjust_brute_loss(brute_damage_amount)
