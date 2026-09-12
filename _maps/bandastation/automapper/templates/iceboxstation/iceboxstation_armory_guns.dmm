@@ -1,0 +1,154 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/effect/turf_decal/tile/red/anticorner/contrasted{
+	dir = 4
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/shotguns,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
+"v" = (
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 4
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/laser,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
+"C" = (
+/obj/effect/turf_decal/tile/red/half/contrasted,
+/obj/effect/spawner/armory_spawn/disablers,
+/obj/structure/rack/gunrack,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory/upper)
+"E" = (
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/eguns,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory/upper)
+"L" = (
+/obj/machinery/camera/directional/north{
+	c_tag = "Armory - Internal - Lower"
+	},
+/obj/structure/rack,
+/obj/item/storage/toolbox/drone,
+/obj/effect/turf_decal/tile/red/half/contrasted,
+/obj/item/sledgehammer/tactical{
+	pixel_y = 3
+	},
+/obj/item/storage/toolbox/emergency,
+/obj/machinery/light/small/directional/north,
+/obj/item/sledgehammer/tactical{
+	pixel_y = -3
+	},
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory/upper)
+"O" = (
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 8
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/misc,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
+"P" = (
+/turf/template_noop,
+/area/template_noop)
+"T" = (
+/obj/structure/rack,
+/obj/machinery/light/small/directional/north,
+/obj/effect/turf_decal/tile/red/half/contrasted,
+/obj/effect/spawner/random/armory/riot_armor,
+/obj/effect/spawner/random/armory/riot_helmet,
+/obj/effect/spawner/random/armory/riot_shield,
+/obj/item/clothing/suit/hooded/ablative,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
+"W" = (
+/obj/structure/railing,
+/obj/structure/cable,
+/obj/machinery/door/firedoor/border_only,
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 1
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/dragnets,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory/upper)
+
+(1,1,1) = {"
+T
+P
+P
+P
+P
+"}
+(2,1,1) = {"
+P
+P
+P
+P
+P
+"}
+(3,1,1) = {"
+C
+P
+P
+a
+v
+"}
+(4,1,1) = {"
+L
+P
+P
+P
+P
+"}
+(5,1,1) = {"
+P
+P
+P
+P
+O
+"}
+
+(1,1,2) = {"
+P
+P
+P
+W
+P
+"}
+(2,1,2) = {"
+E
+P
+P
+P
+P
+"}
+(3,1,2) = {"
+P
+P
+P
+P
+P
+"}
+(4,1,2) = {"
+P
+P
+P
+P
+P
+"}
+(5,1,2) = {"
+P
+P
+P
+P
+P
+"}

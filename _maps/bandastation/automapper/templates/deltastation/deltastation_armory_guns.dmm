@@ -1,0 +1,142 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/rack,
+/obj/effect/turf_decal/bot,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/effect/spawner/random/armory/bulletproof_armor,
+/obj/effect/spawner/random/armory/bulletproof_helmet,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"e" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/window/reinforced/spawner/directional/east{
+	pixel_x = 3
+	},
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/dragnets,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"m" = (
+/obj/machinery/button/door/directional/south{
+	id = "armouryaccess";
+	name = "Armoury Access";
+	req_access = list("armory")
+	},
+/obj/effect/turf_decal/trimline/dark_red/filled/line{
+	dir = 10
+	},
+/obj/structure/table/reinforced,
+/obj/item/sledgehammer/tactical{
+	pixel_y = 3
+	},
+/obj/item/sledgehammer/tactical{
+	pixel_y = -3
+	},
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"n" = (
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/effect/turf_decal/bot,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/misc,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"t" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/window/reinforced/spawner/directional/east{
+	pixel_x = 3
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/disablers,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"u" = (
+/turf/open/space/basic,
+/area/space)
+"J" = (
+/obj/effect/turf_decal/trimline/dark_red/filled/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/rack,
+/obj/item/clothing/suit/hooded/ablative,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"U" = (
+/obj/structure/rack,
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/effect/turf_decal/bot,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/effect/spawner/random/armory/bulletproof_armor,
+/obj/effect/spawner/random/armory/bulletproof_helmet,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"W" = (
+/obj/structure/rack,
+/obj/effect/turf_decal/bot,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/effect/spawner/random/armory/riot_armor,
+/obj/effect/spawner/random/armory/riot_helmet,
+/obj/effect/spawner/random/armory/riot_shield,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"X" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/window/reinforced/spawner/directional/east{
+	pixel_x = 3
+	},
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/laser,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+"Z" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/window/reinforced/spawner/directional/east{
+	pixel_x = 3
+	},
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/eguns,
+/turf/open/floor/iron/dark,
+/area/station/security/armory)
+
+(1,1,1) = {"
+u
+u
+J
+u
+u
+m
+"}
+(2,1,1) = {"
+u
+u
+u
+u
+u
+u
+"}
+(3,1,1) = {"
+e
+X
+t
+Z
+u
+u
+"}
+(4,1,1) = {"
+U
+a
+W
+n
+u
+u
+"}
