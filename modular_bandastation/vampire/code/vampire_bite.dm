@@ -42,3 +42,12 @@
 	vampire.draining = victim
 	INVOKE_ASYNC(vampire, TYPE_PROC_REF(/datum/antagonist/vampire, handle_bloodsucking), victim)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
+
+/datum/reagent/blood/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)
+	. = ..()
+	if(!(methods & INGEST) || !ishuman(exposed_mob))
+		return
+	var/mob/living/carbon/human/affected_human = exposed_mob
+	if(affected_human.mind?.has_antag_datum(/datum/antagonist/vampire))
+		affected_human.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, affected_human.nutrition + reac_volume / 5))
+
