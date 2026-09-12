@@ -5,12 +5,17 @@ SUBSYSTEM_DEF(sun)
 	var/azimuth = 0 ///clockwise, top-down rotation from 0 (north) to 359
 	var/azimuth_mod = 1 ///multiplier against base_rotation
 	var/base_rotation = 6 ///base rotation in degrees per fire
+	/// Cached horizontal component of the sun's current direction.
+	var/sun_x = 0
+	/// Cached vertical component of the sun's current direction.
+	var/sun_y = 1
 
 /datum/controller/subsystem/sun/Initialize()
 	azimuth = rand(0, 359)
 	azimuth_mod = round(rand(50, 200)/100, 0.01) // 50% - 200% of standard rotation
 	if(prob(50))
 		azimuth_mod *= -1
+	update_sun_direction()
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/sun/fire(resumed = FALSE)
@@ -23,7 +28,12 @@ SUBSYSTEM_DEF(sun)
 	complete_movement()
 
 /datum/controller/subsystem/sun/proc/complete_movement()
+	update_sun_direction()
 	SEND_SIGNAL(src, COMSIG_SUN_MOVED, azimuth)
+
+/datum/controller/subsystem/sun/proc/update_sun_direction()
+	sun_x = round(sin(azimuth), 0.01)
+	sun_y = round(cos(azimuth), 0.01)
 
 /datum/controller/subsystem/sun/vv_edit_var(var_name, var_value)
 	. = ..()
