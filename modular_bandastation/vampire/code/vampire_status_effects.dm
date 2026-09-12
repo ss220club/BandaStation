@@ -110,7 +110,6 @@
 	var/total_burn_damage = 0
 	var/total_tox_damage = 0
 	var/total_oxy_damage = 0
-	var/total_genetic_damage = 0
 	for(var/datum/weakref/member_ref as anything in network_members)
 		var/mob/living/member = member_ref.resolve()
 		if(!member || member.stat == DEAD || get_dist(owner, member) > 7)
