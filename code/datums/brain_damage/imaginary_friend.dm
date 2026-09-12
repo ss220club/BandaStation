@@ -352,8 +352,7 @@
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/user in actual_hearers)
 		if((safe_read_pref(user.client, /datum/preference/toggle/enable_runechat) || (SSlag_switch.measures[DISABLE_RUNECHAT] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES))))
-			if(user.client)
-				speech_bubble_recipients.Add(user.client)
+			speech_bubble_recipients.Add(user.client)
 
 	var/image/bubble = image('icons/mob/effects/talk.dmi', src, "[bubble_type][say_test(message)]", FLY_LAYER)
 	SET_PLANE_EXPLICIT(bubble, ABOVE_GAME_PLANE, src)
@@ -514,14 +513,15 @@
 	setDir(Dir)
 
 	if(!hidden && NewLoc)
-		if(NewLoc.density && !NewLoc.CanPass(src, NewLoc))
+		if(!NewLoc.CanPass(src, NewLoc))
 			return FALSE
 
 		for(var/atom/movable/AM in NewLoc)
-			if(AM == src)
-				continue
 
-			if(AM.density && !AM.CanPass(src, NewLoc))
+			if(AM.density && ismob(AM))
+				return FALSE
+
+			if(!AM.CanPass(src, NewLoc) && !istype(AM, /obj/structure/railing))
 				return FALSE
 
 	if(get_dist(src, owner) > distance_allowance || (require_los && !can_see(owner, src, distance_allowance)))
@@ -531,10 +531,12 @@
 
 	abstract_move(NewLoc)
 
-	if(hidden)
-		move_delay = world.time + 1
-	else
-		move_delay = world.time + 2
+	var/delay_modifier = hidden ? 1 : 2
+
+	if((Dir & (Dir - 1)) && !hidden)
+		delay_modifier = 3
+
+	move_delay = world.time + delay_modifier
 
 /mob/eye/imaginary_friend/setDir(newdir)
 	. = ..()
