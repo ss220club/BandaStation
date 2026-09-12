@@ -72,6 +72,7 @@
 		force *= 1.5
 		heal_boost = 2
 		damtype = BURN
+		hitsound = 'modular_bandastation/vampire/sound/weapons/sear.ogg'
 	if(carbon_target.ckey && carbon_target.stat != DEAD && carbon_target.affects_vampire(user) && (isalien(carbon_target) || carbon_target.get_blood_volume()))
 		carbon_target.bleed(blood_drain_amount)
 		vampire.adjust_blood(carbon_target, blood_absorbed_amount)
@@ -111,6 +112,7 @@
 /datum/action/cooldown/spell/pointed/vampire_blood_tendrils/cast(atom/cast_on)
 	. = ..()
 	var/turf/target_turf = get_turf(cast_on)
+	playsound(target_turf, 'modular_bandastation/vampire/sound/misc/enter_blood.ogg', 20)
 	for(var/turf/open/turf in range(area_of_affect, target_turf))
 		new /obj/effect/temp_visual/blood_tendril(turf)
 	addtimer(CALLBACK(src, PROC_REF(apply_slowdown), target_turf, owner), 0.5 SECONDS)

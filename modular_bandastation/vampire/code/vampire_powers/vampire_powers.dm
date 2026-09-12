@@ -341,14 +341,14 @@
 			return
 	to_chat(user, span_danger("Вы начинаете помечать [coffin.declent_ru(ACCUSATIVE)]!"))
 	coffin.Beam(user, icon_state = "drainbeam", maxdistance = 1, time = 10 SECONDS)
-	playsound(coffin, 'sound/effects/bubbles/bubbles.ogg', 20)
+	playsound(coffin, 'modular_bandastation/vampire/sound/misc/enter_blood.ogg', 20)
 	for(var/obj/machinery/light/L in range(5, user))
 		L.flicker()
 	var/obj/effect/lair_rune/rune = new /obj/effect/lair_rune(get_turf(coffin), user)
 	if(!do_after(user, 10 SECONDS, target = coffin))
 		qdel(rune)
 		return
-	playsound(user, 'sound/misc/interference.ogg', 30)
+	playsound(user, 'modular_bandastation/vampire/sound/misc/im_here1.ogg', 30)
 	new /obj/structure/closet/crate/coffin/vampire(get_turf(coffin), user)
 	qdel(coffin)
 	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
@@ -522,7 +522,7 @@
 	gain_desc = "Вы обрели способность поднимать вампиров. Эта чрезвычайно мощная способность по области действует на всех людей рядом: вампиры и рабы исцеляются, трупы становятся вампирами, остальные оглушаются, получают повреждения мозга и погибают."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "revive_thrall"
-	sound = 'sound/effects/empulse.ogg'
+	sound = 'modular_bandastation/vampire/sound/magic/wandodeath.ogg'
 	cooldown_time = 20 MINUTES
 	aoe_radius = 3
 

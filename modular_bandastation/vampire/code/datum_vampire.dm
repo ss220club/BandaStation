@@ -7,7 +7,7 @@
 	hijack_speed = 0.5
 	suicide_cry = "Я УМИРАЮ РАДИ НОЧИ!"
 	preview_outfit = /datum/outfit/butler
-	stinger_sound = 'sound/music/antag/heretic/heretic_gain.ogg'
+	stinger_sound = 'modular_bandastation/vampire/sound/misc/vampalert.ogg'
 	antag_flags = parent_type::antag_flags | ANTAG_OBSERVER_VISIBLE_PANEL
 
 	ui_name = "AntagInfoGeneric"
@@ -532,7 +532,6 @@
 
 /datum/antagonist/vampire/greet()
 	. = ..()
-	SEND_SOUND(owner.current, sound('sound/music/antag/ling_alert.ogg')) // TODO: replace sound
 	to_chat(owner.current, span_danger("Вы — вампир!"))
 	to_chat(owner.current, span_notice("Чтобы укусить кого-то, выберите голову, включите намерение навредить и используйте пустую руку. Пейте кровь, чтобы получить новые силы. \
 		Вы слабы перед святыми предметами, светом звёзд и огнём. Не выходите в космос и избегайте капеллана, часовни и особенно святой воды."))
