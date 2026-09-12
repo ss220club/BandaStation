@@ -425,7 +425,7 @@
 /obj/structure/closet/crate/coffin/vampire/burn()
 	playsound(src, 'sound/effects/hallucinations/wail.ogg', 20, extrarange = 5)
 	visible_message(span_danger("Огонь вырывается из [src], когда он разрушается!"))
-	for(var/turf/turf as anything in range(1, src))
+	for(var/turf/turf in range(1, src))
 		new /obj/effect/hotspot(turf)
 	return ..()
 
