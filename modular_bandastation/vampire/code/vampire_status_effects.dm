@@ -120,7 +120,6 @@
 		total_burn_damage += member.get_fire_loss()
 		total_tox_damage += member.get_tox_loss()
 		total_oxy_damage += member.get_oxy_loss()
-		total_genetic_damage += genetic_damage?.total_damage || 0
 	if(length(members) <= 1 || !vampire?.bloodusable)
 		qdel(src)
 		return
