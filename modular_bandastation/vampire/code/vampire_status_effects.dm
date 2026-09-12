@@ -50,6 +50,9 @@
 /datum/movespeed_modifier/vampire_blood_rush
 	multiplicative_slowdown = -0.5
 
+/datum/movespeed_modifier/vampire_cloak
+	multiplicative_slowdown = -0.5
+
 /datum/status_effect/vampire_gladiator
 	id = "vampire_gladiator"
 	duration = 30 SECONDS

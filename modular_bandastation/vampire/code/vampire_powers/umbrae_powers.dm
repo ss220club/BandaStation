@@ -266,11 +266,14 @@
 	add_vampire_ability()
 
 /datum/action/cooldown/spell/aoe/vampire_extinguish/get_things_to_cast_on(atom/center)
-	return range(aoe_radius, center)
-/datum/action/cooldown/spell/aoe/vampire_extinguish/cast_on_thing_in_aoe(atom/target, atom/caster)
-	target.set_light(0)
-	for(var/atom/atom in target)
-		atom.set_light(0)
+	return RANGE_TURFS(aoe_radius, center)
+
+/datum/action/cooldown/spell/aoe/vampire_extinguish/cast_on_thing_in_aoe(turf/target, atom/caster)
+	if(target.light_system == COMPLEX_LIGHT)
+		target.set_light(0)
+	for(var/atom/light_source as anything in target)
+		if(light_source.light_system == COMPLEX_LIGHT)
+			light_source.set_light(0)
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_boxing
 	name = "Теневой бой"

@@ -56,6 +56,7 @@
 	if(owner?.current)
 		log_combat(owner.current, owner.current, "de-vampired")
 		owner.current.alpha = 255
+		owner.current.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 	return ..()
 
 /datum/antagonist/vampire/on_gain()
@@ -347,27 +348,31 @@
 		update_blood_hud()
 
 /datum/antagonist/vampire/proc/handle_vampire_cloak(mob/living/vampire_mob)
-	// TODO: movespeed bonus
 	if(!ishuman(vampire_mob))
 		vampire_mob.alpha = 255
+		vampire_mob.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 		return
 
 	var/mob/living/carbon/human/human_owner = vampire_mob
 	var/turf/turf_loc = get_turf(human_owner)
 	if(!turf_loc)
+		human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 		return
 
 	var/light_available = turf_loc.get_lumcount() * 10
 
 	if(!iscloaking || human_owner.on_fire)
 		human_owner.alpha = 255
+		human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 		return
 
 	if(light_available <= 2)
 		human_owner.alpha = 40
+		human_owner.add_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 		return
 
 	human_owner.alpha = 200
+	human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
 
 /datum/antagonist/vampire/proc/adjust_blood(mob/living/carbon/victim, blood_amount = 0)
 	if(victim)
