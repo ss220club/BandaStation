@@ -71,21 +71,26 @@
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	armed = TRUE
+	breakouttime = 5 SECONDS
+	item_flags = DROPDEL
 	var/remaining_integrity = 100
 
-/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/trap_stepped_on(datum/source, atom/movable/entered, ...)
-	SIGNAL_HANDLER
-	if(!armed || !iscarbon(entered))
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/spring_trap(atom/movable/target, ignore_movetypes = FALSE, hit_prone = FALSE, def_zone = BODY_ZONE_CHEST)
+	if(!armed || !iscarbon(target))
 		return
-	var/mob/living/carbon/target = entered
-	if(!target.affects_vampire())
+	var/mob/living/carbon/carbon_target = target
+	if(!carbon_target.affects_vampire())
 		return
-	. = ..()
-	if(armed)
+	carbon_target.set_light(0)
+	carbon_target.set_temp_blindness(20 SECONDS)
+	. = ..(target, ignore_movetypes, hit_prone, def_zone)
+	addtimer(CALLBACK(src, PROC_REF(check_latched)), 0)
+
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/proc/check_latched()
+	if(iscarbon(loc))
+		STOP_PROCESSING(SSobj, src)
 		return
-	target.set_light(0)
-	target.set_temp_blindness(20 SECONDS)
-	target.Immobilize(5 SECONDS)
+	qdel(src)
 
 /obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/process()
 	var/turf/snare_turf = get_turf(src)
