@@ -9,6 +9,7 @@
 /datum/mod_theme/apocryphal/delta_817/New()
 	// Keep the Apocryphal part configuration while using Delta-817 sprites.
 	variants = deep_copy_list_alt(variants)
+	variants["apocryphal"][/obj/item/clothing/head/mod][UNSEALED_INVISIBILITY] &= ~HIDEHAIR
 	variants["apocryphal"][MOD_ICON_OVERRIDE] = 'modular_bandastation/prime_only/icons/centcom/ModDelta.dmi'
 	variants["apocryphal"][MOD_WORN_ICON_OVERRIDE] = 'modular_bandastation/prime_only/icons/centcom/ModDelta.dmi'
 	return ..()
