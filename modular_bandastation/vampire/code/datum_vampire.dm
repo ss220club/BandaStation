@@ -67,7 +67,7 @@
 	nullified = clamp(nullified + extra, base, VAMPIRE_NULLIFICATION_CAP)
 
 /datum/antagonist/vampire/antag_panel_data()
-	return "Класс: [subclass.name] | Всего крови: [bloodtotal] | Доступно крови: [bloodusable]"
+	return "Класс: [subclass ? subclass.name : "N/A"] | Всего крови: [bloodtotal] | Доступно крови: [bloodusable]"
 
 /datum/antagonist/vampire/get_admin_commands()
 	. = ..()

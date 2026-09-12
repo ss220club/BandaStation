@@ -359,7 +359,107 @@
 /obj/structure/closet/crate/coffin/vampire
 	name = "vampire coffin"
 	desc = "Гроб, отмеченный кровавой руной."
-// TODO: port coffin features
+	max_integrity = 500
+	anchored = TRUE
+	armor_type = /datum/armor/vampire_coffin
+	custom_fire_overlay = " "
+	/// Owner of this coffin.
+	var/mob/living/vampire
+	/// Whether the coffin is currently being ignited with a welder.
+	var/igniting = FALSE
+	COOLDOWN_DECLARE(fire_act_cooldown)
+
+/datum/armor/vampire_coffin
+	melee = 200
+	bullet = 200
+	laser = 80
+	energy = 200
+	bomb = 200
+	fire = 80
+	acid = 200
+
+/obj/structure/closet/crate/coffin/vampire/Initialize(mapload, mob/living/user)
+	. = ..()
+	name = "[name] [user.mind.name]"
+	desc += "<br>Владелец этого гроба, возможно, никому не был дорог или даже ещё не умер.<br>[span_warning("Кажется, он неуязвим для всего, кроме лазеров и огня! Особенно для огня!")]"
+	vampire = user
+
+/obj/structure/closet/crate/coffin/vampire/welder_act(mob/living/user, obj/item/tool)
+	if(igniting)
+		return ITEM_INTERACT_BLOCKING
+	if(!tool.tool_use_check(user, 30))
+		return ITEM_INTERACT_BLOCKING
+	igniting = TRUE
+	to_chat(user, span_notice("Вы пытаетесь поджечь [src] с помощью [tool]."))
+	to_chat(vampire, span_warning("На ваше логово напали!"))
+	if(tool.use_tool(src, user, 15 SECONDS, amount = 30))
+		fire_act()
+	igniting = FALSE
+	return ITEM_INTERACT_SUCCESS
+
+
+/obj/structure/closet/crate/coffin/vampire/bullet_act(obj/projectile/projectile, def_zone, piercing_hit = FALSE, blocked = null)
+	if(istype(projectile, /obj/projectile/bullet/incendiary))
+		fire_act()
+	return ..(projectile, def_zone, piercing_hit, blocked)
+
+/obj/structure/closet/crate/coffin/vampire/fire_act(exposed_temperature, exposed_volume)
+	. = ..()
+	if(!COOLDOWN_FINISHED(src, fire_act_cooldown))
+		return
+	to_chat(vampire, span_warning("На ваше логово напали!"))
+	switch(rand(1, 4))
+		if(1)
+			visible_message(span_danger("Древесина воет, а огонь вспыхивает, казалось бы, из ниоткуда!"))
+			playsound(src, 'modular_bandastation/vampire/sound/misc/howl.ogg', 30)
+		if(2 to 3)
+			visible_message(span_danger("Древесина шипит, и огонь вспыхивает, казалось бы, из ниоткуда!"))
+			playsound(src, pick('modular_bandastation/vampire/sound/misc/unathihiss.ogg', 'modular_bandastation/vampire/sound/misc/tajaranhiss.ogg'), 30)
+		if(4)
+			visible_message(span_danger("Древесина рычит, когда огонь вырывается из ниоткуда!"))
+			playsound(src, 'modular_bandastation/vampire/sound/misc/growl3.ogg', 30)
+	var/turf/nearby_turf = pick(RANGE_TURFS(2, src))
+	new /obj/effect/hotspot(nearby_turf)
+	new /obj/effect/hotspot(get_turf(src))
+	COOLDOWN_START(src, fire_act_cooldown, 10 SECONDS)
+
+/obj/structure/closet/crate/coffin/vampire/burn()
+	playsound(src, 'sound/effects/hallucinations/wail.ogg', 20, extrarange = 5)
+	visible_message(span_danger("Огонь вырывается из [src], когда он разрушается!"))
+	for(var/turf/turf as anything in range(1, src))
+		new /obj/effect/hotspot(turf)
+	return ..()
+
+/datum/status_effect/incapacitating/sleeping/tick(seconds_between_ticks)
+	. = ..()
+	if(!iscarbon(owner) || !owner.mind?.has_antag_datum(/datum/antagonist/vampire))
+		return
+
+	var/mob/living/carbon/vampire = owner
+	if(istype(vampire.loc, /obj/structure/closet/crate/coffin/vampire))
+		var/obj/structure/closet/crate/coffin/vampire/coffin = vampire.loc
+		if(coffin.vampire != vampire)
+			return
+		vampire.adjust_brute_loss(-3)
+		vampire.adjust_fire_loss(-3)
+		vampire.adjust_tox_loss(-3, forced = TRUE)
+		vampire.adjust_oxy_loss(-3)
+		if(prob(25))
+			for(var/datum/disease/disease as anything in vampire.diseases)
+				disease.cure()
+		for(var/obj/item/bodypart/bodypart as anything in vampire.bodyparts)
+			if(bodypart.brute_dam || bodypart.burn_dam)
+				bodypart.heal_damage(3, 3)
+				break
+		for(var/obj/item/organ/organ as anything in vampire.organs)
+			if(organ.damage)
+				organ.apply_organ_damage(-2)
+				break
+	else if(istype(vampire.loc, /obj/structure/closet/crate/coffin))
+		vampire.adjust_brute_loss(-1)
+		vampire.adjust_fire_loss(-1)
+		vampire.adjust_tox_loss(-1, forced = TRUE)
+		vampire.adjust_oxy_loss(-1)
 
 
 /obj/effect/lair_rune

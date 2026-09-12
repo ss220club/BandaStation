@@ -69,4 +69,6 @@
 /datum/action/cooldown/spell/proc/add_vampire_ability(required_blood = 0, deduct_blood_on_cast = TRUE)
 	if(required_blood)
 		name += " ([required_blood])"
+	background_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	background_icon_state = "bg_vampire"
 	AddComponent(/datum/component/vampire_ability, required_blood, deduct_blood_on_cast)
