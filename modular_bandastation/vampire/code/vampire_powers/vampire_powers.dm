@@ -325,7 +325,6 @@
 	return istype(cast_on, /obj/structure/closet/crate/coffin)
 
 /datum/action/cooldown/spell/pointed/vampire_lair/cast(atom/cast_on)
-	// TODO: para sounds
 	. = ..()
 	var/mob/living/user = owner
 	var/obj/structure/closet/crate/coffin/coffin = cast_on

@@ -61,7 +61,6 @@
 
 /datum/antagonist/vampire/on_gain()
 	forge_objectives()
-	// TODO: dont get nutrition from normal food
 	return ..()
 
 /datum/antagonist/vampire/proc/adjust_nullification(base, extra)
