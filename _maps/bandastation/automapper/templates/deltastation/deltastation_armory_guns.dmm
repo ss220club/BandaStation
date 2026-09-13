@@ -55,8 +55,8 @@
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "u" = (
-/turf/open/space/basic,
-/area/space)
+/turf/template_noop,
+/area/template_noop)
 "J" = (
 /obj/effect/turf_decal/trimline/dark_red/filled/line{
 	dir = 8

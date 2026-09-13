@@ -27,9 +27,13 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory/upper)
+"F" = (
+/obj/machinery/airalarm/directional/north,
 /obj/structure/rack/gunrack,
 /obj/effect/spawner/armory_spawn/eguns,
-/turf/open/floor/iron/dark/textured,
+/turf/open/floor/glass/reinforced,
 /area/station/security/armory/upper)
 "L" = (
 /obj/machinery/camera/directional/north{
@@ -132,7 +136,7 @@ P
 P
 "}
 (3,1,2) = {"
-P
+F
 P
 P
 P
