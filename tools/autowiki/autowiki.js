@@ -32,11 +32,20 @@ const RATE_LIMIT_RETRY_DELAY = 5000;
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-async function withRateLimitRetry(operation, description) {
+async function withRateLimitRetry(operation, description, refreshToken) {
+  let tokenRefreshes = 0;
+
   for (let attempt = 0; ; attempt++) {
     try {
       return await operation();
     } catch (error) {
+      if (error.code === 'badtoken' && refreshToken && tokenRefreshes === 0) {
+        tokenRefreshes++;
+        console.log(`${description} received an invalid token; logging in again`);
+        await withRateLimitRetry(refreshToken, 'Refreshing login');
+        continue;
+      }
+
       if (error.code !== 'ratelimited' || attempt >= MAX_RATE_LIMIT_RETRIES) {
         throw error;
       }
@@ -60,16 +69,16 @@ async function main() {
   console.log(`Logging in as ${USERNAME}`);
 
   const bot = new MWBot();
+  const login = () => {
+    bot.editToken = false;
+    return bot.loginGetEditToken({
+      apiUrl: 'https://bs.ss220.club//api.php',
+      username: USERNAME,
+      password: PASSWORD,
+    });
+  };
 
-  await withRateLimitRetry(
-    () =>
-      bot.loginGetEditToken({
-        apiUrl: 'https://bs.ss220.club//api.php',
-        username: USERNAME,
-        password: PASSWORD,
-      }),
-    'Logging in',
-  );
+  await withRateLimitRetry(login, 'Logging in');
 
   console.log('Logged in');
 
@@ -88,6 +97,7 @@ async function main() {
     await withRateLimitRetry(
       () => bot.edit(title, text, `Autowiki edit @ ${new Date().toISOString()}`),
       `Editing ${title}`,
+      login,
     );
   }
 
@@ -105,6 +115,7 @@ async function main() {
           `Autowiki upload @ ${new Date().toISOString()}`,
         ),
       `Replacing ${assetName}`,
+      login,
     ).catch((error) => {
         if (error.code === 'fileexists-no-change') {
           console.log(`${assetName} is an exact duplicate`);

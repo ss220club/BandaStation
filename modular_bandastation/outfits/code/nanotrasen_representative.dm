@@ -17,4 +17,4 @@
 	)
 
 	box = /obj/item/storage/box/survival/centcom
-	belt = /obj/item/modular_computer/pda/heads/nanotrasen_representative
+	belt = /obj/item/modular_computer/pda/crew/heads/nanotrasen_representative
