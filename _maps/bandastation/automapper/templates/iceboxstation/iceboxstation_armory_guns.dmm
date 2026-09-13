@@ -21,7 +21,7 @@
 /obj/effect/spawner/armory_spawn/disablers,
 /obj/structure/rack/gunrack,
 /turf/open/floor/iron/dark/textured,
-/area/station/security/armory/upper)
+/area/station/security/armory)
 "E" = (
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 4
@@ -47,7 +47,7 @@
 	pixel_y = -3
 	},
 /turf/open/floor/iron/dark/textured,
-/area/station/security/armory/upper)
+/area/station/security/armory)
 "O" = (
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 8
