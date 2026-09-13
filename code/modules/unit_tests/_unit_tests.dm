@@ -237,6 +237,7 @@
 #include "load_map_security.dm"
 #include "lootpanel.dm"
 #include "lungs.dm"
+#include "lighting_test.dm"
 #include "machine_disassembly.dm"
 #include "mafia.dm"
 #include "make_vegan_wellington.dm"
@@ -375,7 +376,6 @@
 #include "washing.dm"
 #include "weird_food.dm"
 #include "wizard_loadout.dm"
-#include "lighting_test.dm"
 // END_INCLUDE
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter
 #include "find_reference_sanity.dm"
