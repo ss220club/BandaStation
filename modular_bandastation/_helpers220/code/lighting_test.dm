@@ -6,12 +6,7 @@
 		return
 
 	var/obj/effect/test_light = new(center)
-	var/datum/component/overlay_lighting/light = test_light.AddComponent(
-		/datum/component/overlay_lighting,
-		4,
-		NORTH,
-		TRUE
-	)
+	var/datum/component/overlay_lighting/light = test_light.AddComponent(/datum/component/overlay_lighting, 4, NORTH, TRUE)
 
 	// Center tile is always illuminated.
 	TEST_ASSERT(
