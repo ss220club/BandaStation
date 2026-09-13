@@ -11,7 +11,7 @@
 | ---------------- | -------------------------------------------------------------------------------------- |
 | Website          | [https://ss220.club](https://ss220.club)                                               |
 | Code             | [https://github.com/ss220club/BandaStation](https://github.com/ss220club/BandaStation) |
-| Wiki             | [https://bs.ss220.club](https://tg.ss220.club)                                         |
+| Wiki             | [https://bs.ss220.club](https://bs.ss220.club)                                         |
 | Codedocs         | [https://ss220club.github.io/BandaStation/](https://ss220club.github.io/BandaStation/) |
 | SS220 Discord    | [https://discord.gg/ss220](https://discord.gg/ss220)                                   |
 | Coderbus Discord | [https://discord.gg/Vh8TJp9](https://discord.gg/Vh8TJp9)                               |
@@ -40,11 +40,7 @@
 
 Для начала работы (окружение разработчика, компиляция) смотрите документ HackMD [здесь](https://hackmd.io/@tgstation/HJ8OdjNBc#tgstation-Development-Guide).
 
-# <<<<<<< HEAD
-
 Для общей документации по дизайну смотрите [HackMD](https://hackmd.io/@tgstation).
-
-> > > > > > > upstream/master
 
 ## LICENSE
 

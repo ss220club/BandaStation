@@ -22,7 +22,7 @@
 
 	head = /obj/item/clothing/head/beret/blueshield
 	box = /obj/item/storage/box/survival/security
-	belt = /obj/item/modular_computer/pda/heads/blueshield
+	belt = /obj/item/modular_computer/pda/crew/heads/blueshield
 
 /datum/outfit/plasmaman/blueshield
 	name = "Blueshield Plasmaman"
