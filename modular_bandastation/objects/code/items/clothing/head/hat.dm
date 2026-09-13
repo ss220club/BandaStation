@@ -79,6 +79,12 @@
 	icon_state = "/obj/item/clothing/head/beret/ert/janitor"
 	greyscale_colors = "#7e1980#cc9900"
 
+/obj/item/clothing/head/beret/ert/specops
+	name = "Special Ops Operative beret"
+	desc = "Берет оперативника специальных операций."
+	icon_state = "/obj/item/clothing/head/beret/ert/speops"
+	armor_type = /datum/armor/beret_centcom_formal
+
 /obj/item/clothing/head/beret/cent_diplomat
 	name = "fleet officer's white beret"
 	desc = "Изящный белый берет. На подкладке вышита надпись: \"НЕ ПОДЛЕЖИТ СТИРКЕ!\""
@@ -114,12 +120,6 @@
 	flash_protect = FLASH_PROTECTION_WELDER
 	equip_delay_other = 5 SECONDS
 	armor_type = /datum/armor/space_beret
-
-/obj/item/clothing/head/beret/ert/specops
-	name = "Special Ops Operative beret"
-	desc = "Берет оперативника специальных операций."
-	icon_state = "/obj/item/clothing/head/beret/ert/specops"
-	armor_type = /datum/armor/beret_centcom_formal
 
 /obj/item/clothing/head/caphat/beret_black
 	name = "black captain beret"
