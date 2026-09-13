@@ -1031,7 +1031,7 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 			return TRUE
 		// BANDASTATION EDIT START: Restricted donator level editing
 		if(NAMEOF(src, donator_level))
-			if(!usr?.client?.holder || (get_player_admin_flags(usr.client) & R_EVERYTHING) != R_EVERYTHING)
+			if(!usr?.client?.holder || get_player_admin_flags(usr.client) != R_EVERYTHING)
 				return FALSE
 		// BANDASTATION EDIT END: Restricted donator level editing
 	. = ..()
