@@ -1,0 +1,4 @@
+author: "Voyaker-coder"
+delete-after: True
+changes:
+  - bugfix: "Исправлена проблема с некорректным отображением жизненного статуса на мониторах экипажа."
