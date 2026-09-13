@@ -69,12 +69,14 @@ async function main() {
   console.log(`Logging in as ${USERNAME}`);
 
   const bot = new MWBot();
-  const login = () =>
-    bot.loginGetEditToken({
+  const login = () => {
+    bot.editToken = false;
+    return bot.loginGetEditToken({
       apiUrl: 'https://bs.ss220.club//api.php',
       username: USERNAME,
       password: PASSWORD,
     });
+  };
 
   await withRateLimitRetry(login, 'Logging in');
 
