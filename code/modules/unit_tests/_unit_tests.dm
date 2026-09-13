@@ -375,6 +375,7 @@
 #include "washing.dm"
 #include "weird_food.dm"
 #include "wizard_loadout.dm"
+#include "lighting_test.dm"
 // END_INCLUDE
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter
 #include "find_reference_sanity.dm"
