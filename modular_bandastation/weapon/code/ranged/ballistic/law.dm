@@ -40,7 +40,7 @@
 	. += "<b>АЛЬТ + ЛКМ</b> чтобы [extended ? "сложить" : "разложить"] гранатомет."
 
 /obj/item/gun/ballistic/rocketlauncher/oneuse/click_alt(mob/user)
-	if(!do_after(user, 6 SECONDS, src))
+	if(!do_after(user, 20, src))
 		return
 	extended = !extended
 	if(!extended)
@@ -66,3 +66,11 @@
 		inhand_icon_state = "[base_icon_state]_extended"
 	else
 		inhand_icon_state = "[base_icon_state]"
+
+/obj/item/gun/ballistic/rocketlauncher/oneuse/heap
+	name = "RL-72/H \"Saint Comet Sion\""
+	desc = "Одноразовый гранатомет RL-72, заряженный тандемной бронебойной ракетой. На корпусе маркером серебристого цвета написано - 'СВЯЩЕННАЯ КОМЕТА СИОН', чтобы это не значило."
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/rocketlauncher/heap
+
+/obj/item/ammo_box/magazine/internal/rocketlauncher/heap
+	ammo_type = /obj/item/ammo_casing/rocket/heap

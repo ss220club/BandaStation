@@ -236,7 +236,7 @@
 
 /datum/outfit/centcom/specops/equipped
 	name = "NT SpecOps - Operative (Rifleman)"
-	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/ammo
+	back = /obj/item/mod/control/pre_equipped/specops
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom,
 		/obj/item/clothing/head/beret/ert/specops,
@@ -266,7 +266,7 @@
 /datum/outfit/centcom/specops/equipped/medic
 	name = "NT SpecOps - Operative (Medic)"
 	id_trim = /datum/id_trim/centcom/specops/medic
-	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/med
+	back = /obj/item/mod/control/pre_equipped/specops
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom/specops,
 		/obj/item/clothing/head/beret/ert/specops,
@@ -292,7 +292,7 @@
 /datum/outfit/centcom/specops/equipped/machinegunner
 	name = "NT SpecOps - Operative (Machinegunner)"
 	id_trim = /datum/id_trim/centcom/specops/machinegunner
-	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/ammo
+	back = /obj/item/mod/control/pre_equipped/specops
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom/specops,
 		/obj/item/clothing/head/beret/ert/specops,
@@ -302,6 +302,7 @@
 		/obj/item/ammo_box/magazine/cm40/ap,
 		/obj/item/ammo_box/magazine/cm40/incendiary,
 		/obj/item/ammo_box/magazine/cm40/hp,
+		/obj/item/gun/ballistic/rocketlauncher/oneuse/heap,
 	)
 	suit = /obj/item/clothing/suit/armor/swat/specops
 	suit_store = /obj/item/gun/ballistic/automatic/cm40
@@ -320,7 +321,7 @@
 /datum/outfit/centcom/specops/equipped/breacher
 	name = "NT SpecOps - Operative (Breacher)"
 	id_trim = /datum/id_trim/centcom/specops/breacher
-	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/ammo
+	back = /obj/item/mod/control/pre_equipped/specops
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom/specops,
 		/obj/item/clothing/head/beret/ert/specops,
@@ -348,6 +349,7 @@
 /datum/outfit/centcom/specops/equipped/sniper
 	name = "NT SpecOps - Operative (Sniper)"
 	id_trim = /datum/id_trim/centcom/specops/sniper
+	back = /obj/item/mod/control/pre_equipped/specops
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom/specops,
 		/obj/item/clothing/head/beret/ert/specops,

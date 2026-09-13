@@ -28,6 +28,7 @@
 #include "code/ranged/ballistic/mounted_machine_gun.dm"
 #include "code/ranged/ballistic/minigun.dm"
 #include "code/ranged/ballistic/law.dm"
+#include "code/ranged/ballistic/railgun.dm"
 #include "code/ranged/ballistic/projectiles.dm"
 
 // MARK: Ranged - Ballistic: NT
