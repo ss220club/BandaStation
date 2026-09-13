@@ -84,8 +84,9 @@
 	user.update_worn_back()
 
 /obj/item/gun/ballistic/minigun
-	name = "M-546-JU \"Osprey\""
-	desc = "Миниган от E.I. Ind. , обладающий невероятной скорострельностью и механизмом блокировки при перегреве. Требуется объемный рюкзак для хранения всех этих патронов."
+	name = "M-546-JU \"Osprey-Terminator\""
+	desc = "Миниган от Etamin Ind. обладающий невероятной скорострельностью и огневой мощью, оснащен механизмом блокировки при перегреве. \
+		Возле рукояти мелко написано - 'Оставляю вам свою игрушку! Вернуть в целости и сохранности. Только посмейте проебать! - Д.У.'"
 	icon = 'modular_bandastation/weapon/icons/ranged/heavy.dmi'
 	icon_state = "minigun_fire"
 	inhand_icon_state = "minigun"
@@ -175,7 +176,7 @@
 	name = "Minigun back stash box"
 	ammo_type = /obj/item/ammo_casing/p50/mmg
 	caliber = CALIBER_50BMG
-	max_ammo = 2500
+	max_ammo = 2000
 
 /obj/item/ammo_casing/p50/mmg
 	projectile_type = /obj/projectile/bullet/p50/mmg

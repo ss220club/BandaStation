@@ -183,13 +183,14 @@
 	caliber = CALIBER_30mmRail
 	projectile_type = /obj/projectile/bullet/railgun
 	w_class = WEIGHT_CLASS_SMALL
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10, /datum/material/titanium = SHEET_MATERIAL_AMOUNT * 10)
 
 /obj/item/ammo_casing/railgun/taser
 	name = "railgun taser-round"
 	desc = "Специальный электрошоковый снаряд для использования в ручных электромагнитных ускорителях масс калибра 30мм. Создан для подавления самых буйных ассистентов."
 	icon_state = "railgun_casing_taser"
 	projectile_type = /obj/projectile/bullet/railgun/taser
-
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10, /datum/material/gold = SHEET_MATERIAL_AMOUNT * 10)
 
 // MARK: Railgun
 /obj/item/ammo_box/magazine/railgun
